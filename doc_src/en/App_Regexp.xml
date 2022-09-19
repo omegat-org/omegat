@@ -10,7 +10,7 @@
 	  <term>Searches</term>
 	  <listitem><para>OmegaT searches include a <link
 	  linkend="windows.text.search.methods.regex" endterm="windows.text.search.methods.regex.title"/>
-	  option that allows you to make extremely powerful searches accross your
+	  option that allows you to make extremely powerful searches across your
 	  files.</para>
 	  <para>An option with the same label in the <link
 	  linkend="windows.text.replace" endterm="windows.text.replace.title"/>
@@ -27,7 +27,7 @@
 	  for details.</para></listitem>
 	  </varlistentry>
 	<varlistentry>
-	  <term>Controled strings</term>
+	  <term>Controlled strings</term>
 	  <listitem><para><link linkend="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation" endterm="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation.title"/> allow you to define strings that OmegaT will mark in red by default, and consider as an extraneous tag for validation purposes.</para></listitem>
 	  </varlistentry>
 	<varlistentry>

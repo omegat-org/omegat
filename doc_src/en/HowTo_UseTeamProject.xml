@@ -14,7 +14,7 @@
 
   <para><emphasis role="bold">Automatic saving</emphasis></para>
 
-  <para>Every 3 minutes (by default), the local project is synchronised with
+  <para>Every 3 minutes (by default), the local project is synchronized with
   the remote repository so that the project manager or other translators can
   see and use translations added during that period.</para>
 
@@ -26,11 +26,11 @@
       <guimenuitem>Saving and Output</guimenuitem>
     </menuchoice></link>.</para>
 
-  <para><emphasis role="bold">Synchronised files</emphasis></para>
+  <para><emphasis role="bold">Synchronized files</emphasis></para>
 
   <para>Whenever the project is automatically saved, but also when it is
   opened, closed and reloaded, only two files are actually
-  synchronised:</para>
+  synchronized:</para>
 
   <itemizedlist>
     <listitem>
@@ -77,7 +77,7 @@
   <para><emphasis role="bold">Working offline</emphasis></para>
 
   <para>A team project can be opened and translated offline. All the changes
-  will be synchronised the next time a connection is available.</para>
+  will be synchronized the next time a connection is available.</para>
 
   <para>To work offline:</para>
 

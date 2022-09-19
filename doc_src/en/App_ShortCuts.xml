@@ -15,7 +15,7 @@
 	the most frequent shortcuts, and you will always be able to learn new
 	shortcuts from the menus.</para>
 
-    <para>Almost all of OmegaT's shortcuts are customizable. See <link
+    <para>Almost all of OmegaT’s shortcuts are customizable. See <link
     endterm="appendix.shortcut.customization.title"
     linkend="appendix.shortcut.customization"/> for details.</para>
 
@@ -89,7 +89,7 @@
     <title id="appendix.shortcut.customization.title">Shortcuts
     customization</title>
 
-	<para>OmegaT assigns schortcuts to most functions available in the menus and
+	<para>OmegaT assigns shortcuts to most functions available in the menus and
 	to a number of functions in the Editor window. Most of these functions can
 	be assigned new shortcuts.</para>
     <para>You can change or add a shortcuts by putting a shortcut definition
@@ -97,19 +97,19 @@
     endterm="configuration.folder.title" linkend="configuration.folder"/> for
     details.</para>
 
-    <para>There are 2 shortcuts definition files.</para>
+    <para>There are 2 shortcut definition files.</para>
 	<variablelist>
 	  <varlistentry><term id="MainMenuShortcuts.properties">MainMenuShortcuts.properties</term>
 	  <listitem><para>The shortcut definition file for the menus and a few other items.</para></listitem></varlistentry>
 	  <varlistentry><term id="EditorShortcuts.properties">EditorShortcuts.properties</term>
-	  <listitem><para>The shortcut definition file for the Editor.</para></listitem></varlistentry>
+	  <listitem><para>The shortcut definition file for the editor.</para></listitem></varlistentry>
 	</variablelist>
 
     <para>Once a shortcut definition file is modified, OmegaT must be relaunched
     to take the new shortcuts into account.</para>
 
     <note>
-      <para>You can copy the default OmegaT shortcuts files from the OmegaT
+      <para>You can copy the default OmegaT shortcut files from the OmegaT
       development site on Sourceforge to your configuration folder and modify
       them to suit your needs:</para>
 

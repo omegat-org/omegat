@@ -83,7 +83,7 @@
 
     <para>There is no need to instruct OmegaT to use a particular spelling
     dictionary; OmegaT will use the correct language dictionary based upon the
-    language codes of your project. Check however that the language codes are
+    language codes of your project. Check, however, that the language codes are
     exactly the same: an FR-FR dictionary will not work with an FR target
     setting, for example. If necessary, edit the file names of the dictionary
     or change your project's language settings.</para>
@@ -109,7 +109,7 @@
     <para>Right-clicking on an underlined word (Artund in the figure above)
     opens a drop-down menu listing suggestions for the correction (Art und).
     You can also instruct the spell checker to ignore all the occurrences of
-    the mis-spelled word, or add it to the dictionary.</para>
+    the misspelled word, or add it to the dictionary.</para>
   </section>
 
   <section id="spellchecker.hints">

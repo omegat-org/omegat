@@ -44,7 +44,7 @@
     </listitem>
 
     <listitem>
-      <para>Be very cautious about making changes to the files in the <link linkend="project.folder.source" endterm="project.folder.source.title"/> folder, or to the <link linkend="segmentation.rules" endterm="segmentation.rules.title">segmentation rules</link>, partway through a project. Modifying either source files or the segmentation rules after you have started your translation could result in OmegaT becoming unable to find a segment you have already translated.</para>
+      <para>Be very cautious about making changes to the files in the <link linkend="project.folder.source" endterm="project.folder.source.title"/> folder, or to the <link linkend="segmentation.rules" endterm="segmentation.rules.title">segmentation rules</link>, partway through a project. Modifying either source files or the segmentation rules after you have started your translation could result in OmegaT becoming unable to find a segment that you have already translated.</para>
     </listitem>
   </itemizedlist>
 

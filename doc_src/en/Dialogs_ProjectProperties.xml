@@ -20,7 +20,7 @@
     <title id="dialogs.project.properties.languages.title">Languages</title>
 
     <para>You can either enter the source and target languages by hand, or use
-    the drop down menus.</para>
+    the drop-down menus.</para>
 	<para>Language codes are used for the <link linkend="panes.fuzzy.matches"
 	endterm="panes.fuzzy.matches.title"/>, the <link
 	linkend="dialogs.preferences.segmentation.setup"
@@ -195,7 +195,7 @@
 		  available to all projects. They are defined in <link
 		  linkend="dialogs.preferences.saving.and.output.external.post-processing.command"
 		  endterm="dialogs.preferences.saving.and.output.external.post-processing.command.title"/>.</para>
-		  <note><para>For security purposes, project based external commands are
+		  <note><para>For security purposes, project-based external commands are
 		  disabled by default. You can enable them by checking <link
 		  linkend="dialogs.preferences.saving.and.output.also.allow.per.project.external.commands"
 		  endterm="dialogs.preferences.saving.and.output.also.allow.per.project.external.commands.title"/>
@@ -293,7 +293,7 @@
 
 	<para>When a new project is created, OmegaT proposes to create a project
 	folder that contains all the resources used in the translation, but that
-	structure is not compulsory. Ressource subfolders can be located anywhere on
+	structure is not compulsory. Resource subfolders can be located anywhere on
 	your machine, including on shared disks.</para>
 
 	<para>You can modify the structure of your project by adding or removing
@@ -314,12 +314,12 @@
 	  <varlistentry id="dialogs.project.properties.file.locations.browse">
 		<term id="dialogs.project.properties.file.locations.browse.title"><guibutton>Browse</guibutton></term>
 		<listitem><para>The <guibutton>Browse</guibutton> button is available
-		for all the user-defined project ressources.</para>
-		<note><para>Ressources do not have to be contained in the default project
+		for all the user-defined project resources.</para>
+		<note><para>Resources do not have to be contained in the default project
 		folder that OmegaT creates. You can select any folder that you want to hold your
-		ressources, even folders located on shared disks.</para></note>
+		resources, even folders located on shared disks.</para></note>
 		<para>Click on the button to select the folder that you want to use
-		instead of the default ressource folder.</para></listitem>
+		instead of the default resource folder.</para></listitem>
 	  </varlistentry>
 	  
 	  <varlistentry id="dialogs.project.properties.file.locations.source.files">
@@ -382,7 +382,7 @@
 	  <varlistentry id="dialogs.project.properties.file.locations.writable.glossary">
 		<term id="dialogs.project.properties.file.locations.writable.glossary.title">Writeable Glossary File</term>
 		<listitem><para>The writeable glossary if the file that OmegaT will use when you want to add translated glossary terms to your project. Use <link linkend="menus.edit.create.glossary.entry" endterm="menus.edit.create.glossary.entry.title"/> to add term.</para>
-		<para>Added items are automatically recognised and displayed if they match terms in the current segment. See <link linkend="dialogs.preferences.glossary" endterm="dialogs.preferences.glossary.title"/> for details.</para></listitem>
+		<para>Added items are automatically recognized and displayed if they match terms in the current segment. See <link linkend="dialogs.preferences.glossary" endterm="dialogs.preferences.glossary.title"/> for details.</para></listitem>
 	  </varlistentry>
 	  
 	  <varlistentry id="dialogs.project.properties.file.locations.dictionaries">
@@ -393,7 +393,7 @@
 	  
 	  <varlistentry id="dialogs.project.properties.file.locations.translated.files">
 		<term id="dialogs.project.properties.file.locations.translated.files.title">Translated Files Folder</term>
-		<listitem><para>This folder is the place where OmegaT will copy the contents of the <link linkend="dialogs.project.properties.file.locations.source.files" endterm="dialogs.project.properties.file.locations.source.files.title"/> folder where all the translated segments will be replaced by their translation and the non translated segments will be kept in the original language.</para>
+		<listitem><para>This folder is the place where OmegaT will copy the contents of the <link linkend="dialogs.project.properties.file.locations.source.files" endterm="dialogs.project.properties.file.locations.source.files.title"/> folder where all the translated segments will be replaced by their translation and the non-translated segments will be kept in the original language.</para>
 		<para>The subfolder structure will reflect the copied contents and files that are not supported by OmegaT's file filters will be copied without modifications.</para>
 		<para>Use <link linkend="menus.project.create.translated.documents" endterm="menus.project.create.translated.documents.title"/> or <link linkend="menus.project.create.current.translated.document" endterm="menus.project.create.current.translated.document.title"/> to create the translated files. See <link linkend="project.folder.target" endterm="project.folder.target.title"/> for details.</para></listitem>
 	  </varlistentry>

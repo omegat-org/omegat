@@ -101,7 +101,7 @@
         <term id="dialogs.preferences.glossary.replace.glossary.hits.when.inserting.source.text.title">Replace glossary hits when inserting source text</term>
 
         <listitem>
-          <para>If both this option and the <link linkend="dialogs.preferences.editor.insert.the.source.text"> <guilabel>Insert the source text</guilabel> </link> option are selected, all words with a corresponding glossary entry will be translated automatically when the source text is inserted.</para>
+          <para>If both this option and the <link linkend="dialogs.preferences.editor.insert.the.source.text" endterm="dialogs.preferences.editor.insert.the.source.text.title"/> option are selected, all words with a corresponding glossary entry will be translated automatically when the source text is inserted.</para>
         </listitem>
       </varlistentry>
 
@@ -176,7 +176,7 @@
 
     <variablelist>
       <varlistentry id="dialogs.preferences.dictionary.automatically.search.segment">
-        <term id="dialogs.preferences.dictionary.automatically.search.segment.title">Automatically search segment text in dictionary</term>
+        <term id="dialogs.preferences.dictionary.automatically.search.segment.title">Automatically search segment text in dictionaries</term>
 
         <listitem>
           <para>Clear this option to deactivate automatic searching if, for example, the dictionaries are too big.</para>
@@ -214,8 +214,8 @@
         <listitem>
           <para>You can select a theme for the OmegaT user interface.
           Additional themes can be added as plugins. The theme also provide
-          predefined set of default colours. OmegaT allow users to select Java
-          standard themes (Look-and-feel) but OmegaT does not give any
+          predefined set of default colors. OmegaT allow users to select Java
+          standard themes (look-and-feel) but OmegaT does not give any
           warranty for OmegaT operations and views against Java LaFs.</para>
         </listitem>
       </varlistentry>
@@ -254,9 +254,9 @@
     </section>
 
     <section id="dialogs.preferences.colours">
-      <title id="dialogs.preferences.colours.title">Colours</title>
+      <title id="dialogs.preferences.colours.title">Colors</title>
 
-      <para>This option allows you to choose different colours for the various parts of the user interface.</para>
+      <para>This option allows you to choose different colors for the various parts of the user interface.</para>
 
       <para>Scripts can be used to set predefined themes. OmegaT is bundled with a script called <link linkend="windows.scripts.distribution.switch.colour.theme" endterm="windows.scripts.distribution.switch.colour.theme.title"/> that provides a default dark theme. See <link linkend="windows.scripts" endterm="windows.scripts.title"/> for details.</para>
     </section>
@@ -478,7 +478,7 @@
           segments</emphasis></para>
 
           <para>PO files should not have black source segment other than
-          header block. Sometimes it exists with contexts information. When
+          header block. Sometimes it exists with context information. When
           check this option you can add a translation for such segment.</para>
         </listitem>
 
@@ -499,7 +499,7 @@
           <para><guilabel>Allow blank translations in the target
           file</guilabel>:</para>
 
-          <para>Selecting this option will result in an empty translation in the target file when a segment in a PO file (which may be a whole paragraph) is not translated. Technically speaking, the <emphasis>msgstr</emphasis> segment in the PO target file will be left empty if it is created. This option is selected by default as it constitutes standard behaviour for PO files. Turning off this option will copy the source to the target segment.</para>
+          <para>Selecting this option will result in an empty translation in the target file when a segment in a PO file (which may be a whole paragraph) is not translated. Technically speaking, the <emphasis>msgstr</emphasis> segment in the PO target file will be left empty if it is created. This option is selected by default as it constitutes standard behavior for PO files. Turning off this option will copy the source to the target segment.</para>
         </listitem>
 
         <listitem>
@@ -537,7 +537,7 @@
         <listitem>
           <para><guilabel>Do not translate the content of tags with the following attribute key-value pairs (separate with commas)</guilabel>: The contents of any tag matching the list of key-value pairs will be ignored.</para>
 
-          <para>It is sometimes useful to be able make certain tags untranslatable based on the values of their attributes. For example, <literal>&lt;div class=&quot;hide&quot;&gt; &lt;span translate=&quot;no&quot;&gt;</literal>. You can define key-value pairs for tags that should not be translated. In the example above, the field would contain: <literal>class=hide, translate=no </literal>.</para>
+          <para>It is sometimes useful to be able to make certain tags untranslatable based on the values of their attributes. For example, <literal>&lt;div class=&quot;hide&quot;&gt; &lt;span translate=&quot;no&quot;&gt;</literal>. You can define key-value pairs for tags that should not be translated. In the example above, the field would contain: <literal>class=hide, translate=no </literal>.</para>
         </listitem>
       </itemizedlist>
 
@@ -603,7 +603,7 @@
         <listitem>
           <para><guilabel>Do not translate the content of tags with the following attribute key-value pairs (separate with commas)</guilabel>: The contents of any tag matching the list of key-value pairs will be ignored.</para>
 
-          <para>It is sometimes useful to be able make certain tags untranslatable based on the values of their attributes. For example, <literal>&lt;div class=&quot;hide&quot;&gt; &lt;span translate=&quot;no&quot;&gt;</literal>. You can define key-value pairs for tags that should not be translated. In the example above, the field would contain: <literal>class=hide, translate=no </literal>.</para>
+          <para>It is sometimes useful to be able to make certain tags untranslatable based on the values of their attributes. For example, <literal>&lt;div class=&quot;hide&quot;&gt; &lt;span translate=&quot;no&quot;&gt;</literal>. You can define key-value pairs for tags that should not be translated. In the example above, the field would contain: <literal>class=hide, translate=no </literal>.</para>
         </listitem>
 
         <listitem>
@@ -981,14 +981,14 @@
 		  endterm="configuration.folder.default.contents.script.title"/>, it has
 		  no relation to the <link linkend="windows.scripts.title"
 		  endterm="windows.scripts.title"/> feature and only shares a name for
-		  historical reasons</para></note>
+		  historical reasons.</para></note>
 		  
 			<para>The text export function exports data from within the current
 			OmegaT project to plain text files. The data is exported when the
 			segment is opened. The files appear in the <link
 			linkend="configuration.folder.default.contents.script"
 			endterm="configuration.folder.default.contents.script.title"/>
-			subfolder of the OmegaT user files folder (see <link
+			subfolder of the OmegaT user file folder (see <link
 			linkend="configuration.folder"
 			endterm="configuration.folder.title"/> for details), and
 			include:</para>
@@ -1327,7 +1327,7 @@
 		<varlistentry id="dialog.preferences.saving.and.output.interval">
 		  <term id="dialog.preferences.saving.and.output.interval.title">Saving interval</term>
 		  <listitem>
-			<para>Allows the user select the interval—in minutes and seconds—between automatic project saves.</para>
+			<para>Allows the user to select the interval—in minutes and seconds—between automatic project saves.</para>
 
 			<para>Change the default interval (3 minutes) depending on the
 			characteristics of the project:</para>
@@ -1386,7 +1386,7 @@
 	  <title id="dialogs.preferences.plugins.title">Plugins</title>
 
 	  <para>This option shows a list of available plugins. Plugins are installed either in the <filename class="directory">plugins</filename> folder under the OmegaT installation folder, or in the platform-specific OmegaT configuration folder.</para>
-	  <para>Additional plugins can be found on the <ulink url="https://sourceforge.net/p/omegat/wiki/Plugins/">OmegaT development site</ulink> site.</para>
+	  <para>Additional plugins can be found on the <ulink url="https://sourceforge.net/p/omegat/wiki/Plugins/">OmegaT development site</ulink>.</para>
 	</section>
 
 	<section id="dialogs.preferences.updates">

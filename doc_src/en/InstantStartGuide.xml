@@ -48,7 +48,7 @@
 		<listitem>
 		  <para>Translators can easily collaborate on a project.</para>
 		  <para>The team functionality synchronizes the project's translation
-		  memory and main glossary between all participants, and allows easy
+		  memory and main glossary among all participants, and allows easy
 		  resolution of conflicts between different
 		  translations.</para>
 		</listitem>
@@ -221,7 +221,7 @@
 	<example id="example.source.segment.with.decorations">
 	  <title id="example.source.segment.with.decorations.title">Sentence with
 	  decorative formatting</title>
-	  <para>OmegaT is an <emphasis role="bold">easy to use</emphasis> program
+	  <para>OmegaT is an <emphasis role="bold">easy-to-use</emphasis> program
 	  for <emphasis>eager</emphasis> translators</para>
 	</example>
 
@@ -237,7 +237,7 @@
 	  translators</para>
     </example>
 	
-    <para>The tags in OmegaT are greyed, making them easy to recognize. They are
+    <para>The tags in OmegaT are grayed, making them easy to recognize. They are
     protected to prevent you from modifying their contents, but you can delete
     them, enter them by hand or move them around in the target sentence. See
     <link linkend="menus.edit.insert.missing.source.tag"
@@ -277,7 +277,7 @@
 	linkend="project.folder.target" endterm="project.folder.target.title"/>
 	folder of your project.</para>
 
-	<note><para>You translations are always stored in the project translation
+	<note><para>Your translations are always stored in the project translation
 	memory, located in the <link linkend="project.folder.omegat"
 	endterm="project.folder.omegat.title"/> folder of your project. Deleting the
 	contents of the <link linkend="project.folder.target"
@@ -336,7 +336,7 @@
       <listitem>
         <para>Translation projects are just folders containing files. You can
         create a new project for each new job, or you can add new source files
-        to an existing project at anytime.</para>
+        to an existing project at any time.</para>
       </listitem>
 
       <listitem>

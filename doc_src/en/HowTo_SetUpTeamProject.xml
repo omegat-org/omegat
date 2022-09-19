@@ -6,7 +6,7 @@
 
   <para>Setting up a team project requires some knowledge of servers and the
   SVN or Git versioning systems. It should thus be carried out by a project
-  manager, a project leader or a localisation engineer.</para>
+  manager, a project leader or a localization engineer.</para>
 
   <para>As plenty of information about SVN and Git is easily available, we
   won't describe how they work here, but only how OmegaT works with
@@ -360,7 +360,7 @@
     project, all changes in the repository are copied to the local project,
     including the <filename>omegat.project</filename> file with project
     settings. If the file doesn't contain mappings, the existing local mappings
-    are re-applied, and only those. All other local changes to the project are
+    are reapplied, and only those. All other local changes to the project are
     reverted.  If the file does contain mappings, then local changes to mappings
     are lost.
     </para>

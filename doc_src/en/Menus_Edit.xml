@@ -36,7 +36,7 @@
 </term>
       <listitem>
         <para>Restores the status before the last editing action was
-        cancelled. This command cannot restore that status after the user
+        canceled. This command cannot restore that status after the user
         moves to a different segment.</para>
       </listitem>
     </varlistentry>
@@ -148,7 +148,7 @@
 		  </keycombo>
 </term>
       <listitem>
-        <para>Allows the user create an entry in the default glossary
+        <para>Allows the user to create an entry in the default glossary
         file.</para>
 		<para>There are two ways to use this function. There first is to call
 		the dialog and then manually fill in the various fields. The second is

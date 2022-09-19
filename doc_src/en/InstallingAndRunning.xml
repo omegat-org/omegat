@@ -12,12 +12,12 @@
 
   <para>OmegaT packages are available both in versions bundled with Java, and
   versions without it. Packages without Java rely on a &javaversionlong;
-  installed system-wide.</para>
+  installed systemwide.</para>
 
   <para>OmegaT 5.8.0 and later also support Java 11 Runtime Environment on any
   platforms.</para>
 
-  <para>Due to licencing considerations, the OmegaT team recommends the Java
+  <para>Due to licensing considerations, the OmegaT team recommends the Java
   runtime Eclipse Temurin provided by the &preferedopenjdk;, but any Java 8
   compatible runtime environment should work.</para>
 
@@ -154,7 +154,7 @@
             <programlisting>$ tar xf OmegaT_&vernb;_Linux_64.tar.bz2</programlisting>
 
             <para>This will create a new folder in the current folder. The new
-            folder will named after the package you downloaded, and contain
+            folder will be named after the package you downloaded, and contain
             all the files needed to run OmegaT.</para>
           </listitem>
 
@@ -271,7 +271,7 @@ $ ./linux-install.sh</programlisting>
             <listitem>
               <para>Click on the icon button, then hit
               <guilabel>Browse...</guilabel> and navigate to the
-              <filename>images</filename> sub-folder in the OmegaT application
+              <filename>images</filename> subfolder in the OmegaT application
               folder. Select the <filename>OmegaT.png</filename> icon. GNOME
               may fail to display the icon files in the available formats and
               initially appear to expect an SVG file, but if the folder is
@@ -440,7 +440,7 @@ $ ./linux-install.sh</programlisting>
       endterm="launch.with.command.line.title"
       linkend="launch.with.command.line"/> for details.</para>
 
-      <para>You can modify the behaviour of OmegaT.app by editing the
+      <para>You can modify the behavior of OmegaT.app by editing the
       <filename>Configuration.properties</filename> (OmegaT configuration) as
       well as the <filename>Info.plist</filename> (Java configuration) files
       located inside the OmegaT.app package.</para>
@@ -625,7 +625,7 @@ $ ./linux-install.sh</programlisting>
 
     <programlisting>./gradlew tasks</programlisting>
 
-    <para>Detailed instructions on building are in the docs_devel <ulink
-    url="https://sourceforge.net/p/omegat/svn/HEAD/tree/trunk/docs_devel/README.txt">readme</ulink>.</para>
+    <para>Detailed instructions on building OmegaT are in the docs_devel <ulink
+    url="https://sourceforge.net/p/omegat/svn/HEAD/tree/trunk/docs_devel/README.txt">README.txt</ulink> file.</para>
   </section>
 </chapter>

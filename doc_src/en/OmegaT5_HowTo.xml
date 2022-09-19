@@ -10,7 +10,7 @@
   <xi:include href="HowTo_UseTM.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
-  <xi:include href="HowTo_PreventDataLoss.xml"
+  <xi:include href="HowTo_RestoreYourData.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
   <xi:include href="HowTo_ManageRTL.xml"

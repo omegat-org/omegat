@@ -328,6 +328,15 @@
 	preferences.</para></warning>
   </section>
 
+  <section id="introduction.restore.your.data">
+	<title id="introduction.restore.your.data.title">Restore your data</title>
+	<warning><para>Whatever has happened, it is extremely unlikely that you have
+	lost more than a few minutes of work in OmegaT.</para>
+	<para>If things look broken, do not panic and follow the easy steps
+	described in <link linkend="how.to.restore.your.data"
+	endterm="how.to.restore.your.data.title"/>.</para></warning>
+  </section>
+
   <section id="introduction.one.more.thing">
     <title id="introduction.one.more.thing.title">A few more things to
     note</title>

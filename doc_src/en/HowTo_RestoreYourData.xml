@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="how.to.prevent.data.loss">
-  <title id="how.to.prevent.data.loss.title">Prevent Data Loss</title>
+<section id="how.to.restore.your.data">
+  <title id="how.to.restore.your.data.title">Restore your data</title>
 
   <para>Although OmegaT is a robust application, you should take precautions to
   guard against data loss when using it, just as with any other

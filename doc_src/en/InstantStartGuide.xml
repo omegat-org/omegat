@@ -2,7 +2,26 @@
 <!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
 <chapter id="chapter.instant.start.guide">
-  <title id="chapter.instant.start.guide.title">Learn to Use OmegaT in 15 Minutes!</title>
+  <title id="chapter.instant.start.guide.title">Learn how to Use OmegaT in 15
+  Minutes!</title>
+
+  <section id="introduction.restore.your.data">
+	<title id="introduction.restore.your.data.title">Your translation is not lost...</title>
+	<warning><para>You have not yet started to even use OmegaT, but one day,
+	because your computer misbehaved, things will look like you have lost that
+	book translation that you had been working on for the past 6 months, of that
+	report that you must deliver in one hour.</para>
+	<para>Whatever has happened, and thanks to the robustness of OmegaT, it is
+	<emphasis>extremely</emphasis> unlikely that you have lost more than a few
+	minutes of work.</para>
+	<para>Even if things look very broken, do not panic, and follow the easy
+	steps described in <link linkend="how.to.restore.your.data"
+	endterm="how.to.restore.your.data.title"/>.</para>
+	<para>In the meanwhile, OmegaT will hopefully help you become a better
+	translator.</para>
+	<para>Welcome to OmegaT!</para></warning>
+  </section>
+
 
   <section id="introduction.omegat.">
 	<title id="introduction.omegat.principles.title">OmegaT principles</title>
@@ -16,15 +35,16 @@
 	  <listitem>
 		<para>An OmegaT translation project consists of a number of resources in
 		separate folders, of an <filename>omegat.project</filename> file that
-		stores the location of all the folders and of a
-		<filename>project_save.tmx</filename> translation memory file that will
-		contain all the translations made while working on that project.</para>
-		<para>Translators can easily modify the contents of the folders at
-		any time during the translation simply by copying, moving or deleting
-		files.</para>
+		stores the location of all the resources and of a
+		<filename>project_save.tmx</filename> translation memory file that
+		stores all the translations made while working on that project.</para>
+
+		<para>Translators can easily modify the contents or location of the
+		resources at any time during the translation.</para>
+
 		<para>By default, resources include the project's translation memory,
 		which is automatically created upon project creation, and the files to
-		translate. It can also include reference translation memories,
+		translate. They can also include reference translation memories,
 		glossaries, and other reference files.</para>
 	  </listitem>
 	  </varlistentry>
@@ -36,10 +56,11 @@
 		  translation memory or <emphasis>associate</emphasis> one to a new
 		  project. OmegaT takes care of that
 		  <emphasis>automatically</emphasis>.</para>
+
 		  <para>Translators can very easily reuse an existing project's
 		  translation memory by simply adding new translation files to the old
-		  project, or by copying the old translation memory to the new project's
-		  folder.</para>
+		  project, or by copying the old translation memory to a new project.</para>
+		  
 		  <para>There is no limit to the number of translation memories that can
 		  be used as reference in a translation project, and OmegaT makes it
 		  very easy to assign different levels of priority to these additional
@@ -50,16 +71,17 @@
 	  <varlistentry>
 		<term>Working in teams</term>
 		<listitem>
-		  <para>Translators can easily collaborate on a project.</para>
-		  <para>The team functionality synchronizes the project's translation
-		  memory and main glossary among all participants, and allows easy
-		  resolution of conflicts between different
+		  <para>Translators can easily share resources and work together on a
+		  project with simple settings.</para>
+		  <para>The team functionality offers industrial grade robustness and
+		  flexibility to synchronize project's resource among team members,
+		  while allowing easy resolution of conflicts between different
 		  translations.</para>
 		</listitem>
 	  </varlistentry>
 	</variablelist>
   </section>
-
+  
   <section id="introduction.note.on.shortcuts">
 	<title id="introduction.note.on.shortcuts.title">A note on key shortcuts in this manual</title>
 
@@ -88,6 +110,10 @@
   <section id="introduction.create.and.open.new.project">
     <title id="introduction.create.and.open.new.project.title">Set up a new project</title>
 
+	<note><para>If you have not yet installed or launched OmegaT, check <link
+	linkend="installing.and.running.omegat"
+	endterm="installing.and.running.omegat.title"/>.</para></note>
+	
     <para>To start using OmegaT, first create a project to hold all your
     files, such as your source files, translation memories, glossaries, and
     eventually your translated files.</para>
@@ -120,6 +146,15 @@
     can close the <link linkend="windows.project.files"
     endterm="windows.project.files.title"/> dialog.</para>
 
+	<para>See <link linkend="how.to.create.new.project" endterm="how.to.create.new.project.title"/> for details.</para>
+  </section>
+  
+  <section id="introduction.make.it.look.good">
+	<title id="introduction.make.it.look.good.title">Make it look good!</title>
+
+	<para>Once all that is done, the source files appear in OmegaT in a layout
+	that looks like this:</para>
+
 	<figure id="default.omegat.layout">
       <title id="default.omegat.layout.title">Default OmegaT layout on
       macOS</title>
@@ -133,6 +168,11 @@
       </mediaobject>
     </figure>
 
+	<para>Use the various <link linkend="menus.view"
+	endterm="menus.view.title"/> options and move the <link linkend="panes"
+	endterm="panes.title"/> around to obtain the layout that fits your workflow
+	best:</para>
+	
 	<figure id="modified.omegat.layout">
       <title id="modified.omegat.layout.title">Modified OmegaT layout with
       auto-completion</title>
@@ -326,15 +366,6 @@
 	linkend="dialogs.preferences.file.filters"
 	endterm="dialogs.preferences.file.filters.title"/>
 	preferences.</para></warning>
-  </section>
-
-  <section id="introduction.restore.your.data">
-	<title id="introduction.restore.your.data.title">Restore your data</title>
-	<warning><para>Whatever has happened, it is extremely unlikely that you have
-	lost more than a few minutes of work in OmegaT.</para>
-	<para>If things look broken, do not panic and follow the easy steps
-	described in <link linkend="how.to.restore.your.data"
-	endterm="how.to.restore.your.data.title"/>.</para></warning>
   </section>
 
   <section id="introduction.one.more.thing">

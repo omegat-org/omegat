@@ -4,11 +4,24 @@
 <section id="how.to.prevent.data.loss">
   <title id="how.to.prevent.data.loss.title">Prevent Data Loss</title>
 
-  <para>Although OmegaT is a robust application, you should take precautions to guard against data loss when using it, just as with any other application. When you translate the documents in a project, OmegaT stores all your progress in the <link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"></link> translation memory file located in the <link linkend="project.folder.omegat" endterm="project.folder.omegat.title"/> subfolder.</para>
+  <para>Although OmegaT is a robust application, you should take precautions to
+  guard against data loss when using it, just as with any other
+  application. When you translate the documents in a project, OmegaT stores all
+  your progress in the <link linkend="project.folder.project.save.tmx"
+  endterm="project.folder.project.save.tmx.title"></link> translation memory
+  file located in the <link linkend="project.folder.omegat"
+  endterm="project.folder.omegat.title"/> subfolder.</para>
 
-  <para>OmegaT also backs up the translation memory to a file called <filename>project_save.tmx.YYYYMMDDHHNN.bak</filename> in the same subfolder every time you open or reload a project. The final part of the filename is a timestamp indicating when this backup of the memory was saved, with YYYY representing the 4-digit year, MM the month, DD the day of the month, and HH and NN indicating the hours and minutes.</para>
+  <para>OmegaT also backs up the translation memory to a file called
+  <filename>project_save.tmx.YYYYMMDDHHNN.bak</filename> in the same subfolder
+  every time you open or reload a project. The final part of the filename is a
+  timestamp indicating when this backup of the memory was saved, with YYYY
+  representing the 4-digit year, MM the month, DD the day of the month, and HH
+  and NN indicating the hours and minutes.</para>
 
-  <para>If you believe that you have lost translation data, follow the steps below to restore the project to the most recent backup memory, which is usually less than ten minutes old or so.</para>
+  <para>If you believe that you have lost translation data, follow the steps
+  below to restore the project to the most recent backup memory, which is
+  usually less than ten minutes old or so.</para>
 
   <orderedlist>
     <listitem>
@@ -16,11 +29,13 @@
     </listitem>
 
     <listitem>
-      <para>Rename the current <filename>project_save.tmx </filename>file (to <filename>project_save.tmx.tmp</filename>, for example).</para>
+      <para>Rename the current <filename>project_save.tmx </filename>file (to
+      <filename>project_save.tmx.tmp</filename>, for example).</para>
     </listitem>
 
     <listitem>
-      <para>Select the backup translation memory most likely to contain the data you are looking for.</para>
+      <para>Select the backup translation memory most likely to contain the data
+      you are looking for.</para>
     </listitem>
 
     <listitem>
@@ -36,21 +51,36 @@
 
   <itemizedlist>
     <listitem>
-      <para>Make regular copies of the file <filename>/omegat/project_save.tmx</filename> to a backup media, such as a USB key or an external hard drive, or to a cloud service.</para>
+      <para>Make regular copies of the file
+      <filename>/omegat/project_save.tmx</filename> to a backup media, such as a
+      USB key or an external hard drive, or to a cloud service.</para>
     </listitem>
 
     <listitem>
-      <para>While you are still familiarizing yourself with OmegaT, create translated files at regular intervals to make sure they contain the latest version of your translation.</para>
+      <para>While you are still familiarizing yourself with OmegaT, create
+      translated files at regular intervals to make sure they contain the latest
+      version of your translation.</para>
     </listitem>
 
     <listitem>
-      <para>Be very cautious about making changes to the files in the <link linkend="project.folder.source" endterm="project.folder.source.title"/> folder, or to the <link linkend="segmentation.rules" endterm="segmentation.rules.title">segmentation rules</link>, partway through a project. Modifying either source files or the segmentation rules after you have started your translation could result in OmegaT becoming unable to find a segment that you have already translated.</para>
+      <para>Be very cautious about making changes to the files in the <link
+      linkend="project.folder.source" endterm="project.folder.source.title"/>
+      folder, or to the <link linkend="segmentation.rules"
+      endterm="segmentation.rules.title">segmentation rules</link>, partway
+      through a project. Modifying either source files or the segmentation rules
+      after you have started your translation could result in OmegaT becoming
+      unable to find a segment that you have already translated.</para>
     </listitem>
   </itemizedlist>
 
   <itemizedlist>
     <listitem>
-      <para>Consult the <link linkend="chapter.instant.start.guide" endterm="chapter.instant.start.guide.title">Instant Start Guide</link> and other sections of this manual to get started. Should you run into problems, post a message in the <ulink url="https://omegat.org/support">OmegaT user group</ulink>. Do not hesitate to post in the language you are most comfortable using.</para>
+      <para>Consult the <link linkend="chapter.instant.start.guide"
+      endterm="chapter.instant.start.guide.title">Instant Start Guide</link> and
+      other sections of this manual to get started. Should you run into
+      problems, post a message in the <ulink
+      url="https://omegat.org/support">OmegaT user group</ulink>. Do not
+      hesitate to post in the language you are most comfortable using.</para>
     </listitem>
   </itemizedlist>
 </section>

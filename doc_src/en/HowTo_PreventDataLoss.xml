@@ -10,10 +10,10 @@
   your progress in the <link linkend="project.folder.project.save.tmx"
   endterm="project.folder.project.save.tmx.title"></link> translation memory
   file located in the <link linkend="project.folder.omegat"
-  endterm="project.folder.omegat.title"/> subfolder.</para>
+  endterm="project.folder.omegat.title"/> folder.</para>
 
   <para>OmegaT also backs up the translation memory to a file called
-  <filename>project_save.tmx.YYYYMMDDHHNN.bak</filename> in the same subfolder
+  <filename>project_save.tmx.YYYYMMDDHHNN.bak</filename> in the same folder
   every time you open or reload a project. The final part of the filename is a
   timestamp indicating when this backup of the memory was saved, with YYYY
   representing the 4-digit year, MM the month, DD the day of the month, and HH

@@ -123,7 +123,7 @@
     <para>Also check that the target language code of your project against the
     available vocabularies in the setup window. The spell checker uses the
     target language code to determine the language to be used : if the target
-    language is Brazilian Portuguese (PT_BR), the subfolder with vocabularies
+    language is Brazilian Portuguese (PT_BR), the folder with vocabularies
     must contain the two vocabulary files, called
     <filename>pt_br.aff</filename> and <filename>pt_br.dic</filename>.</para>
 

@@ -286,18 +286,18 @@
     <title id="dialogs.project.properties.file.locations.title">File locations</title>
 
 	<para>An OmegaT translation project consists of a number of resources in
-	separate subfolders, of an <filename>omegat.project</filename> file that
-	stores the location of all the subfolders and of a
+	separate folders, of an <filename>omegat.project</filename> file that
+	stores the location of all the folders and of a
 	<filename>project_save.tmx</filename> translation memory file that will
 	contain all the translations made while working on that project.</para>
 
 	<para>When a new project is created, OmegaT proposes to create a project
 	folder that contains all the resources used in the translation, but that
-	structure is not compulsory. Resource subfolders can be located anywhere on
+	structure is not compulsory. Resource folders can be located anywhere on
 	your machine, including on shared disks.</para>
 
 	<para>You can modify the structure of your project by adding or removing
-	files from the subfolders, or even by changing the subfolders the project
+	files from the folders, or even by changing the folders the project
 	will use, at will, even during the course of the translation.</para>
 
 	<para>The location of all resources is stored in the <link
@@ -443,7 +443,7 @@
 		folder where all the translated segments will be replaced by their
 		translation and the non-translated segments will be kept in the original
 		language.</para>
-		<para>The subfolder structure will reflect the copied contents and files
+		<para>The folder structure will reflect the copied contents and files
 		that are not supported by OmegaT's file filters will be copied without
 		modifications.</para>
 		<para>Use <link linkend="menus.project.create.translated.documents"

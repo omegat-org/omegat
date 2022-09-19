@@ -9,7 +9,7 @@
   <variablelist>
 	<varlistentry id="project.folder.omegat">
 	  <term id="project.folder.omegat.title">omegat/</term>
-	  <listitem><para>This is the project subfolder that always contains <link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/>, the project translation memory, and <link linkend="project.folder.project.stats" endterm="project.folder.project.stats.title"/>, the statistics data file for the project.</para>
+	  <listitem><para>This is the project folder that always contains <link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/>, the project translation memory, and <link linkend="project.folder.project.stats" endterm="project.folder.project.stats.title"/>, the statistics data file for the project.</para>
 	  <para>Other files will be added over the course of a translation project.</para>
 	  </listitem>
 	</varlistentry>
@@ -49,19 +49,19 @@
   </itemizedlist>
   and so on.</para>
 
-  <para>You can access the project folder and its subfolders with the <link linkend="menus.project.access.project.contents" endterm="menus.project.access.project.contents.title"/> command in the <link linkend="menus.project" endterm="menus.project.title"/> menu.</para>
+  <para>You can access the project folder and its folders with the <link linkend="menus.project.access.project.contents" endterm="menus.project.access.project.contents.title"/> command in the <link linkend="menus.project" endterm="menus.project.title"/> menu.</para>
 
-  <para>Creating a project gives it a core hierarchy, but its final structure is not fixed. You can always remove or add files and subfolders to the project.</para>
+  <para>Creating a project gives it a core hierarchy, but its final structure is not fixed. You can always remove or add files and folders to the project.</para>
   
   <section id="project.folder.source">
     <title id="project.folder.source.title">source</title>
-    <para>The source subfolder contains the files to translate. You can freely add or remove files from that folder at any time. You can also structure the source subfolder in any form you like.</para>
-	<para>If your translation project involves a number of subfolders and you feel like working on one subfolder at a time, change the <link linkend="dialogs.project.properties.file.locations.source.files" endterm="dialogs.project.properties.file.locations.source.files.title"/> as you wish.</para>
+    <para>The source folder contains the files to translate. You can freely add or remove files from that folder at any time. You can also structure the source folder in any form you like.</para>
+	<para>If your translation project involves a number of folders and you feel like working on one folder at a time, change the <link linkend="dialogs.project.properties.file.locations.source.files" endterm="dialogs.project.properties.file.locations.source.files.title"/> as you wish.</para>
   </section>
 
   <section id="project.folder.target">
     <title id="project.folder.target.title">target</title>
-    <para>This subfolder is initially empty. It is populated every time you use <link linkend="menus.project.create.translated.documents" endterm="menus.project.create.translated.documents.title"/> or <link linkend="menus.project.create.current.translated.document" endterm="menus.project.create.current.translated.document.title"/>. The files in the <link linkend="project.folder.source" endterm="project.folder.source.title"/> folder, whether fully translated or not, are then generated here, using the same hierarchy as in the source contents.</para>
+    <para>This folder is initially empty. It is populated every time you use <link linkend="menus.project.create.translated.documents" endterm="menus.project.create.translated.documents.title"/> or <link linkend="menus.project.create.current.translated.document" endterm="menus.project.create.current.translated.document.title"/>. The files in the <link linkend="project.folder.source" endterm="project.folder.source.title"/> folder, whether fully translated or not, are then generated here, using the same hierarchy as in the source contents.</para>
 	<para>The files created here will reflect the current state of the translation. Untranslated segments will remain in the source language.</para>
   </section>
 
@@ -79,11 +79,11 @@
 	  <para>This folder is made for reliable references files that can automatically fill exactly matching and not yet translated segments.</para>
       <para>Translations from TMX files placed in this folder are automatically inserted in matching segments without the automatic prefix, making it unnecessary to confirm these segments. Translations coming from this folder are considered to be <emphasis>as</emphasis> reliable as the current project memory.</para>
 
-	  <note><para>Only the <filename>tm/auto</filename> folder is automatically generated at project creation. You must manually create and fill any other <filename>tm</filename> subfolder that you want to use.</para></note>
+	  <note><para>Only the <filename>tm/auto</filename> folder is automatically generated at project creation. You must manually create and fill any other <filename>tm</filename> folder that you want to use.</para></note>
 
 	  <orderedlist>
         <listitem>
-          <para>Put the applicable memories in the <filename class="directory">tm/auto</filename> subfolder.</para>
+          <para>Put the applicable memories in the <filename class="directory">tm/auto</filename> folder.</para>
         </listitem>
 
         <listitem>
@@ -91,7 +91,7 @@
         </listitem>
 
         <listitem>
-          <para>Make a minor change anywhere in the project and save it. This will add the translations loaded from the tm/auto subfolder to the main <filename>project_save.tmx</filename> file.</para>
+          <para>Make a minor change anywhere in the project and save it. This will add the translations loaded from the tm/auto folder to the main <filename>project_save.tmx</filename> file.</para>
         </listitem>
       </orderedlist>
 	  
@@ -104,11 +104,11 @@
 
       <para>Translations from TMX files placed in this folder are automatically inserted in matching segments without the automatic prefix, making it unnecessary to confirm these segments. Translations coming from this folder are considered to be <emphasis>more</emphasis> reliable than the current project memory.</para>
 
-      <para>If you have no doubt that a given TMX contains more accurate translations than the current <filename>project_save.tmx</filename> file, put that TMX in the <filename class="directory">tm/enforce</filename> subfolder to overwrite the existing translations unconditionally.</para>
+      <para>If you have no doubt that a given TMX contains more accurate translations than the current <filename>project_save.tmx</filename> file, put that TMX in the <filename class="directory">tm/enforce</filename> folder to overwrite the existing translations unconditionally.</para>
 
       <orderedlist>
         <listitem>
-          <para>Put the applicable memories in the <filename class="directory">tm/enforce</filename> subfolder.</para>
+          <para>Put the applicable memories in the <filename class="directory">tm/enforce</filename> folder.</para>
         </listitem>
 
         <listitem>
@@ -138,12 +138,12 @@
 
     <section id="project.folder.tm.mt">
       <title id="project.folder.tm.mt.title">tm/mt</title>
-      <para>The background of the active segment changes to red when a match is inserted from a TMX contained in the <filename class="directory">mt</filename> subfolder. The background is restored to normal when you leave the segment or when you modify the segment.</para>
+      <para>The background of the active segment changes to red when a match is inserted from a TMX contained in the <filename class="directory">mt</filename> folder. The background is restored to normal when you leave the segment or when you modify the segment.</para>
     </section>
 
     <section id="project.folder.tm.penalty">
       <title id="project.folder.tm.penalty.title">tm/penalty-xxx</title>
-      <para>It can be useful to distinguish between high-quality translation memories and other memories that, due to the subject matter, client, revision status, or other factors,are less reliable. The score of matches from translation memories in subfolders named <filename class="directory">penalty-xxx</filename> (where xxx is a number between 0 and 100), is decreased by an amount corresponding to the value in the name of the subfolder. For example, a 100% match in a TMX, stored in a subfolder called <filename class="directory">penalty-30</filename> becomes a 70% match. The penalty applies to all three match percentages. Scores of 75, 80 and 90 for a match are lowered to 45, 50 and 60.</para>
+      <para>It can be useful to distinguish between high-quality translation memories and other memories that, due to the subject matter, client, revision status, or other factors,are less reliable. The score of matches from translation memories in folders named <filename class="directory">penalty-xxx</filename> (where xxx is a number between 0 and 100), is decreased by an amount corresponding to the value in the name of the folder. For example, a 100% match in a TMX, stored in a folder called <filename class="directory">penalty-30</filename> becomes a 70% match. The penalty applies to all three match percentages. Scores of 75, 80 and 90 for a match are lowered to 45, 50 and 60.</para>
     </section>
 
     <section id="project.folder.tm.tmx2source">
@@ -161,7 +161,7 @@
   endterm="how.to.tm.bridge.two.languages.title"/> for details.</para>
     </section>
 	
-	<note><para>You can combine subfolders to create new functions. For example, a 10% penalty folder within the machine translation folder: <filename>tm/mt/penalty-010</filename> would never generate 100% matches that could otherwise be automatically inserted by OmegaT, and would always set a red background to the match whenever it is inserted.</para></note>
+	<note><para>You can combine folders to create new functions. For example, a 10% penalty folder within the machine translation folder: <filename>tm/mt/penalty-010</filename> would never generate 100% matches that could otherwise be automatically inserted by OmegaT, and would always set a red background to the match whenever it is inserted.</para></note>
   </section>
 
   <section id="project.folder.dictionary">
@@ -192,13 +192,13 @@
 
   <section id="project.folder.omegat.folder">
     <title id="project.folder.omegat.folder.title">omegat</title>
-    <para>The <filename class="directory">omegat</filename> subfolder contains, at a minimum, the <link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/> and <link linkend="project.folder.project.stats" endterm="project.folder.project.stats.title"/> files. It may also include several other files.</para>
+    <para>The <filename class="directory">omegat</filename> folder contains, at a minimum, the <link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/> and <link linkend="project.folder.project.stats" endterm="project.folder.project.stats.title"/> files. It may also include several other files.</para>
 
     <variablelist>
       <varlistentry id="project.folder.project.save.tmx">
         <term id="project.folder.project.save.tmx.title">project_save.tmx</term>
         <listitem>
-          <para>This is the most important file in the project. An empty file is automatically generated when you create a new project, and is gradually filled with the translations of the text in files located in the <link linkend="project.folder.source" endterm="project.folder.source.title"/> subfolder.</para>
+          <para>This is the most important file in the project. An empty file is automatically generated when you create a new project, and is gradually filled with the translations of the text in files located in the <link linkend="project.folder.source" endterm="project.folder.source.title"/> folder.</para>
 		  <para>It constitutes the working translation memory of the project.</para>
 		  <para>OmegaT creates regular backups of that file (up to 10). They are named <filename>project_save.tmx.[time stamp].bak</filename> and can easily be renamed to <filename>project_save.tmx</filename> in case the project memory is broken and needs replacement.</para> 
         </listitem>
@@ -230,7 +230,7 @@
         <term id="project.folder.omegat.ignored.words.title">ignored_words.txt</term>
         <term id="project.folder.omegat.learned.words">learned_words.txt</term>
         <listitem>
-          <para>These files are created and used by the spellchecker. You can also create them by right-clicking on a word marked as incorrect and selecting Ignore All (for words to skip during spellchecking), or Add to Dictionary (for words to accept as correct), respectively,  from the context menu. If you already have a collection of words you want the spellchecker to ignore or accept, simply save them in text files with the corresponding names, and copy those files to the <link linkend="project.folder.omegat.folder" endterm="project.folder.omegat.folder.title"/> subfolder of your current project.</para>
+          <para>These files are created and used by the spellchecker. You can also create them by right-clicking on a word marked as incorrect and selecting Ignore All (for words to skip during spellchecking), or Add to Dictionary (for words to accept as correct), respectively,  from the context menu. If you already have a collection of words you want the spellchecker to ignore or accept, simply save them in text files with the corresponding names, and copy those files to the <link linkend="project.folder.omegat.folder" endterm="project.folder.omegat.folder.title"/> folder of your current project.</para>
         </listitem>
       </varlistentry>
 

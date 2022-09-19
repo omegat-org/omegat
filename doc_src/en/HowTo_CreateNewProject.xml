@@ -12,12 +12,12 @@
     name for your project.</para>
 
     <note>
-      <para>Since an OmegaT project is simply a set of folders and subfolders,
+      <para>Since an OmegaT project is simply a set of folders and folders,
       you are entering the name of the folder that will hold your
       project.</para>
 	  <para>Alternatively, you can choose an existing <emphasis>empty</emphasis>
 	  folder created beforehand. Keep in mind that OmegaT cannot create a
-	  project in a folder that already contains files or subfolders.</para>
+	  project in a folder that already contains files or folders.</para>
     </note>
 
     <para>The <guilabel>Create New Project</guilabel> dialog opens after you

@@ -233,7 +233,7 @@ $ ./linux-install.sh</programlisting>
 
             <listitem>
               <para>Other Icons - Browse, and navigate to the
-              <filename>images</filename> subfolder in the OmegaT application
+              <filename>images</filename> folder in the OmegaT application
               folder. Select the <filename>OmegaT.png</filename> icon.</para>
             </listitem>
 
@@ -271,7 +271,7 @@ $ ./linux-install.sh</programlisting>
             <listitem>
               <para>Click on the icon button, then hit
               <guilabel>Browse...</guilabel> and navigate to the
-              <filename>images</filename> subfolder in the OmegaT application
+              <filename>images</filename> folder in the OmegaT application
               folder. Select the <filename>OmegaT.png</filename> icon. GNOME
               may fail to display the icon files in the available formats and
               initially appear to expect an SVG file, but if the folder is

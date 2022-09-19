@@ -267,7 +267,7 @@
 
 	<orderedlist>
 	  <listitem>
-		<para>create a subfolder called <filename
+		<para>create a folder called <filename
 		class="directory">tmx2source</filename> in the <link linkend="project.folder.tm" endterm="project.folder.tm.title"/> folder,</para>
 	  </listitem>
 

@@ -988,7 +988,7 @@
 			segment is opened. The files appear in the <link
 			linkend="configuration.folder.default.contents.script"
 			endterm="configuration.folder.default.contents.script.title"/>
-			subfolder of the OmegaT user file folder (see <link
+			folder of the OmegaT user file folder (see <link
 			linkend="configuration.folder"
 			endterm="configuration.folder.title"/> for details), and
 			include:</para>

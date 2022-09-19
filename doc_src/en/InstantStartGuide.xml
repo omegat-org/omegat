@@ -6,18 +6,20 @@
 
   <section id="introduction.omegat.">
 	<title id="introduction.omegat.principles.title">OmegaT principles</title>
+
 	<para>OmegaT is a computer-assisted translation (CAT) tool that offers great
 	flexibility and performance, as well as features beyond those of commercial
 	offerings, even for beginning translators.</para>
+
 	<variablelist>
 	  <varlistentry><term>Translation project</term>
 	  <listitem>
 		<para>An OmegaT translation project consists of a number of resources in
-		separate subfolders, of an <filename>omegat.project</filename> file that
-		stores the location of all the subfolders and of a
+		separate folders, of an <filename>omegat.project</filename> file that
+		stores the location of all the folders and of a
 		<filename>project_save.tmx</filename> translation memory file that will
 		contain all the translations made while working on that project.</para>
-		<para>Translators can easily modify the contents of the subfolders at
+		<para>Translators can easily modify the contents of the folders at
 		any time during the translation simply by copying, moving or deleting
 		files.</para>
 		<para>By default, resources include the project's translation memory,
@@ -26,6 +28,7 @@
 		glossaries, and other reference files.</para>
 	  </listitem>
 	  </varlistentry>
+
 	  <varlistentry>
 		<term>Translation memories</term>
 		<listitem>
@@ -43,6 +46,7 @@
 		  memories.</para>
 		</listitem>
 	  </varlistentry>
+
 	  <varlistentry>
 		<term>Working in teams</term>
 		<listitem>
@@ -58,21 +62,26 @@
 
   <section id="introduction.note.on.shortcuts">
 	<title id="introduction.note.on.shortcuts.title">A note on key shortcuts in this manual</title>
+
 	<para>To avoid duplication of shortcut description, we have adopted the
 	following notation in this manual: <example
 	id="example.introduction.note.on.shortcuts"><title
 	id="example.introduction.note.on.shortcuts.title">Single letters are used
 	as a common name for modifiers.</title>
-  	<para>In this manual:
+
+	<para>In this manual:
 	<keycombo><keycap>C</keycap><keycap>E</keycap></keycombo>
 	</para>
+
 	<para>On Windows and Linux:
 	<keycombo><keycap>Control</keycap><keycap>E</keycap></keycombo>
 	</para>
+
 	<para>On macOS:
 	<keycombo><keycap>Command</keycap><keycap>E</keycap></keycombo>
 	</para>
 	</example></para>
+
 	<para>See <link linkend="menus" endterm="menus.title"/> and <link linkend="appendix.shortcut.description" endterm="appendix.shortcut.description.title"/> for details.</para>
   </section>
 
@@ -270,6 +279,7 @@
 
   <section id="introduction.generate.the.translated.file">
     <title id="introduction.generate.the.translated.file.title">Generate the translated files</title>
+
 	<para>Whenever you want to see what your translation will look like in its
 	final format, use <link linkend="menus.project.create.translated.documents"
 	endterm="menus.project.create.translated.documents.title"/> to generate the
@@ -304,7 +314,7 @@
 	entering them manually in the relevant segments, or by aligning the original
 	file and the final translated file to create a new translation memory (TMX)
 	file that will be put in the <link linkend="project.folder.tm.enforce"
-	endterm="project.folder.tm.enforce.title"/> subfolder of your project
+	endterm="project.folder.tm.enforce.title"/> folder of your project
 	folder. See <link linkend="windows.aligner"
 	endterm="windows.aligner.title"/> for details.</para>
 	

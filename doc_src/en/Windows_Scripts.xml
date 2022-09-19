@@ -6,11 +6,16 @@
 
   <para>Scripts are short programs (similar to macros in office applications)
   that can be used to automate tasks as well as to extend or customize OmegaT
-  functionality. They can be written by users in any language understood by
-  the underlying Java virtual machine. OmegaT comes with a number of scripts
-  developed by OmegaT contributors. Use the script editor to open, run, or
-  modify scripts directly, or to write new scripts for your own use.</para>
+  functionality. They can be written by users in any language understood by the
+  underlying Java virtual machine.</para>
 
+  <para>OmegaT comes with a number of scripts developed by OmegaT
+  contributors. Use the script editor to open, run, or modify scripts directly,
+  or to write new scripts for your own use.</para>
+
+  <note><para>The scripts distributed in OmegaT are here for your convenience
+  but are not supported by the OmegaT development team.</para></note>
+  
   <para>You can access the script editor from the <link
   endterm="menus.tools.scripting.title" linkend="menus.tools.scripting"/>
   command in the <link endterm="menus.tools.title" linkend="menus.tools"/>
@@ -24,8 +29,8 @@
   <section id="windows.scripts.use">
     <title id="windows.scripts.use.title">Use</title>
 
-    <para>The Scripting window allows you to load an existing script and run
-    it on the current opened project.</para>
+    <para>The Scripting window allows you to load an existing script and run it
+    on the current project.</para>
 
     <itemizedlist>
       <listitem>
@@ -34,52 +39,77 @@
       </listitem>
 
       <listitem>
-        <para>Click the <guibutton>Run</guibutton> button at the bottom of the
-        window, or press <keycombo><keycap>C</keycap><keycap>R</keycap></keycombo> to launch the script immediately.</para>
+        <para>Click <guibutton>Run</guibutton> at the bottom of the window, or
+        press <keycombo><keycap>C</keycap><keycap>R</keycap></keycombo> to
+        launch the script immediately.</para>
       </listitem>
 
       <listitem>
-        <para>If you use a script frequently, you can right-click one of the <guilabel>&lt;1&gt;</guilabel> to <guilabel>&lt;12&gt;</guilabel> buttons at the bottom of the window and select <guilabel>Add Script</guilabel> to assign the script to that number.</para>
+        <para>If you use a script frequently, you can right-click one of the
+        <guilabel>&lt;1&gt;</guilabel> to <guilabel>&lt;12&gt;</guilabel>
+        buttons at the bottom of the window and select <guilabel>Add
+        Script</guilabel> to assign the script to that number.</para>
       </listitem>
 
       <listitem>
-        <para>You can then left-click on the number to run its assigned script. You can also run an assigned script from the menu by selecting the applicable entry in the <guisubmenu>Tools</guisubmenu> menu or pressing <keycombo> <keycap>C</keycap><keycap>A</keycap><keycap>F1 to F12</keycap></keycombo>.</para>
+        <para>You can then left-click on the number to run its assigned
+        script. You can also run an assigned script from the <link
+        linkend="menus.tools.scripting" endterm="menus.tools.scripting.title"/>
+        menu by selecting the applicable or by pressing the associated shortcut (<keycombo>
+        <keycap>C</keycap><keycap>A</keycap><keycap>F1 to
+        F12</keycap></keycombo>).</para>
       </listitem>
     </itemizedlist>
 
-    <para>By default, scripts are stored in the <filename class="directory">scripts</filename> subfolder of the OmegaT installation folder (the folder that contains the <filename>OmegaT.jar</filename> file).</para>
-<!-- TODO desctiption of the "main" OmegaT folder -->
-    <para>New scripts added there will appear in the list of available scripts in the <guilabel>Scripting</guilabel> window.</para>
-
-    <important>
-      <para>Depending on the configuration of your operating system, you may not have permission to write to the default scripts folder location.</para>
-
-      <para>In such cases, you will have to copy or move the script subfolder to a location for which you have write permissions, such as the <link endterm="configuration.folder.location.title" linkend="configuration.folder.location"/>, if you want to write your own scripts, add new ones, or modify existing ones.</para>
-    </important>
+    <para>By default, scripts are stored in the <filename
+    class="directory">scripts</filename> folder of the OmegaT
+    installation.</para>
+	
+    <para>New scripts added there will appear in the list of available scripts
+    in the <guilabel>Scripting</guilabel> window.</para>
 
     <warning>
-      <para>If you do have permission to write to the default folder, make sure you change the name, or make a backup, of any scripts you modify, as they will be overwritten when OmegaT is updated.</para>
+      <para>Linux users: depending on the configuration of your operating
+      system, you may not have permission to write to the default scripts folder
+      location.</para>
+
+      <para>In such cases, you will have to copy or move the script folder to
+      a location for which you have write permissions, such as the <link
+      endterm="configuration.folder.location.title"
+      linkend="configuration.folder.location"/>, if you want to write your own
+      scripts, add new ones, or modify existing ones.</para>
+
+      <para>If you do have permission to write to the default folder, make sure
+      you change the name, or make a backup, of any scripts you modify, as they
+      will be overwritten when OmegaT is updated.</para>
     </warning>
 
-    <para>Additional scripts can be found here: <ulink url="https://sourceforge.net/projects/omegatscripts/">OmegaT Scripts.</ulink></para>
+    <para>Additional scripts can be found here: <ulink
+    url="https://sourceforge.net/projects/omegatscripts/">OmegaT
+    Scripts.</ulink></para>
   </section>
 
   <section id="windows.scripts.distribution">
-    <title id="windows.scripts.distribution.title">Scripts distributed with OmegaT</title>
+    <title id="windows.scripts.distribution.title">Scripts distributed with
+    OmegaT</title>
 
     <para>Follow the instructions provided in the script itself.</para>
 
     <variablelist>
       <varlistentry id="windows.scripts.distribution.adapt.standard.tags">
-        <term id="windows.scripts.distribution.adapt.standard.tags.title">Adapt standard tags</term>
+        <term id="windows.scripts.distribution.adapt.standard.tags.title">Adapt
+        standard tags</term>
 
         <listitem>
-          <para>Adapt standard tags when the Replace with Match command invoked.</para>
+          <para>Adapt standard tags when the Replace with Match command
+          invoked.</para>
         </listitem>
       </varlistentry>
 
       <varlistentry id="windows.scripts.distribution.auto.open.last.project">
-        <term id="windows.scripts.distribution.auto.open.last.project.title">Auto Open Last Project</term>
+        <term
+        id="windows.scripts.distribution.auto.open.last.project.title">Auto Open
+        Last Project</term>
 
         <listitem>
           <para>Automatically open the last used OmegaT project.</para>
@@ -87,7 +117,8 @@
       </varlistentry>
 
       <varlistentry id="windows.scripts.distribution.check.same.segment">
-        <term id="windows.scripts.distribution.check.same.segment.title">Check Same Segment</term>
+        <term id="windows.scripts.distribution.check.same.segment.title">Check
+        Same Segment</term>
 
         <listitem>
           <para>Check for identical segments (case sensitive)</para>
@@ -95,10 +126,13 @@
       </varlistentry>
 
       <varlistentry id="windows.scripts.distribution.currency.translator">
-        <term id="windows.scripts.distribution.currency.translator.title">Currency Translator</term>
+        <term
+        id="windows.scripts.distribution.currency.translator.title">Currency
+        Translator</term>
 
         <listitem>
-          <para>Translate currencies representation according to the source and target locales.</para>
+          <para>Translate currencies representation according to the source and
+          target locales.</para>
 
           <para>This will translate a string like “$123,399.99” to “123 399,99
           USD”, for example.</para>
@@ -106,7 +140,9 @@
       </varlistentry>
 
       <varlistentry id="windows.scripts.distribution.example.gui.scripting">
-        <term id="windows.scripts.distribution.example.gui.scripting.title">Example - GUI Scripting</term>
+        <term
+        id="windows.scripts.distribution.example.gui.scripting.title">Example -
+        GUI Scripting</term>
 
         <listitem>
           <para>Example of GUI scripting</para>
@@ -114,7 +150,9 @@
       </varlistentry>
 
       <varlistentry id="windows.scripts.distribution.example.key.binding">
-        <term id="windows.scripts.distribution.example.key.binding.title">Example - Key Binding</term>
+        <term
+        id="windows.scripts.distribution.example.key.binding.title">Example -
+        Key Binding</term>
 
         <listitem>
           <para>Example of using a keybinding event.</para>
@@ -122,7 +160,9 @@
       </varlistentry>
 
       <varlistentry id="windows.scripts.distribution.example.modify.segment">
-        <term id="windows.scripts.distribution.example.modify.segment.title">Example - Modify Segment</term>
+        <term
+        id="windows.scripts.distribution.example.modify.segment.title">Example -
+        Modify Segment</term>
 
         <listitem>
           <para>Example showing how to modify a segment.</para>
@@ -130,7 +170,9 @@
       </varlistentry>
 
       <varlistentry id="windows.scripts.distribution.example.search.and.replace">
-        <term id="windows.scripts.distribution.example.search.and.replace.title">Example - Search and Replace</term>
+        <term
+        id="windows.scripts.distribution.example.search.and.replace.title">Example
+        - Search and Replace</term>
 
         <listitem>
           <para>A simple search and replace script.</para>
@@ -138,31 +180,46 @@
       </varlistentry>
 
       <varlistentry id="windows.scripts.distribution.external.spellcheck">
-        <term id="windows.scripts.distribution.external.spellcheck.title">External spellcheck</term>
+        <term
+        id="windows.scripts.distribution.external.spellcheck.title">External
+        spellcheck</term>
 
         <listitem>
-          <para>Writes all segments to a file named <filename>[project_name].doc</filename> and opens it in the default word processor for the system. (Note that the file is a plain text file. The <filename>.doc</filename> extension simply ensures it opens in the word processor.</para>
+          <para>Writes all segments to a file named
+          <filename>[project_name].doc</filename> and opens it in the default
+          word processor for the system. (Note that the file is a plain text
+          file. The <filename>.doc</filename> extension simply ensures it opens
+          in the word processor.</para>
         </listitem>
       </varlistentry>
 
       <varlistentry id="windows.scripts.distribution.extract.text.content">
-        <term id="windows.scripts.distribution.extract.text.content.title">Extract Text Content</term>
+        <term
+        id="windows.scripts.distribution.extract.text.content.title">Extract
+        Text Content</term>
 
         <listitem>
-          <para>Extracts the content of the project to a single text file (one line per segment). See <ulink url="https://sourceforge.net/p/omegat/feature-requests/182/">RFE#182 Extracts the content of the projects to text file</ulink></para>
+          <para>Extracts the content of the project to a single text file (one
+          line per segment). See <ulink
+          url="https://sourceforge.net/p/omegat/feature-requests/182/">RFE#182
+          Extracts the content of the projects to text file</ulink></para>
         </listitem>
       </varlistentry>
 
       <varlistentry id="windows.scripts.distribution.non.breaking.space">
-        <term id="windows.scripts.distribution.non.breaking.space.title">Non-breaking space</term>
+        <term
+        id="windows.scripts.distribution.non.breaking.space.title">Non-breaking
+        space</term>
 
         <listitem>
-          <para>Replace spaces with non-breakable spaces where appropriate in French.</para>
+          <para>Replace spaces with non-breakable spaces where appropriate in
+          French.</para>
         </listitem>
       </varlistentry>
 
       <varlistentry id="windows.scripts.distribution.open.current.file">
-        <term id="windows.scripts.distribution.open.current.file.title">Open Current File</term>
+        <term id="windows.scripts.distribution.open.current.file.title">Open
+        Current File</term>
 
         <listitem>
           <para>Open the current source file.</para>
@@ -170,7 +227,8 @@
       </varlistentry>
 
       <varlistentry id="windows.scripts.distribution.open.glossary">
-        <term id="windows.scripts.distribution.open.glossary.title">Open Glossary</term>
+        <term id="windows.scripts.distribution.open.glossary.title">Open
+        Glossary</term>
 
         <listitem>
           <para>Open the writeable glossary in an editor.</para>
@@ -178,7 +236,8 @@
       </varlistentry>
 
       <varlistentry id="windows.scripts.distribution.open.project.folder">
-        <term id="windows.scripts.distribution.open.project.folder.title">Open Project Folder</term>
+        <term id="windows.scripts.distribution.open.project.folder.title">Open
+        Project Folder</term>
 
         <listitem>
           <para>Open the project folder in the operating system.</para>
@@ -186,7 +245,8 @@
       </varlistentry>
 
       <varlistentry id="windows.scripts.distribution.open.tm.folder">
-        <term id="windows.scripts.distribution.open.tm.folder.title">Open TM Folder</term>
+        <term id="windows.scripts.distribution.open.tm.folder.title">Open TM
+        Folder</term>
 
         <listitem>
           <para>Open the /tm folder.</para>
@@ -194,7 +254,8 @@
       </varlistentry>
 
       <varlistentry id="windows.scripts.distribution.open.project.save.tmx">
-        <term id="windows.scripts.distribution.open.project.save.tmx.title">Open project_save.tmx.</term>
+        <term id="windows.scripts.distribution.open.project.save.tmx.title">Open
+        project_save.tmx.</term>
 
         <listitem>
           <para>Open project_save.tmx in a text editor.</para>
@@ -202,7 +263,8 @@
       </varlistentry>
 
       <varlistentry id="windows.scripts.distribution.qa.check.rules">
-        <term id="windows.scripts.distribution.qa.check.rules.title">QA - Check Rules</term>
+        <term id="windows.scripts.distribution.qa.check.rules.title">QA - Check
+        Rules</term>
 
         <listitem>
           <para>QA script.</para>
@@ -210,7 +272,8 @@
       </varlistentry>
 
       <varlistentry id="windows.scripts.distribution.qa.identical.segments">
-        <term id="windows.scripts.distribution.qa.identical.segments.title">QA - Identical Segments</term>
+        <term id="windows.scripts.distribution.qa.identical.segments.title">QA -
+        Identical Segments</term>
 
         <listitem>
           <para>Check for identical segments (case sensitive).</para>
@@ -218,7 +281,8 @@
       </varlistentry>
 
       <varlistentry id="windows.scripts.distribution.svn.cleanup.recursive">
-        <term id="windows.scripts.distribution.svn.cleanup.recursive.title">SVN - Cleanup (recursive)</term>
+        <term id="windows.scripts.distribution.svn.cleanup.recursive.title">SVN
+        - Cleanup (recursive)</term>
 
         <listitem>
           <para>Perform SVN cleanup on current project or any folder (recursively).</para>
@@ -226,15 +290,18 @@
       </varlistentry>
 
       <varlistentry id="windows.scripts.distribution.show.same.segments">
-        <term id="windows.scripts.distribution.show.same.segments.title">Show Same Segments</term>
+        <term id="windows.scripts.distribution.show.same.segments.title">Show
+        Same Segments</term>
 
         <listitem>
-          <para>Display a list of segments where the source and target have identical content.</para>
+          <para>Display a list of segments where the source and target have
+          identical content.</para>
         </listitem>
       </varlistentry>
 
       <varlistentry id="windows.scripts.distribution.spellcheck">
-        <term id="windows.scripts.distribution.spellcheck.title">Spellcheck</term>
+        <term
+        id="windows.scripts.distribution.spellcheck.title">Spellcheck</term>
 
         <listitem>
           <para>Global spell checking.</para>
@@ -242,7 +309,8 @@
       </varlistentry>
 
       <varlistentry id="windows.scripts.distribution.strip.bidi.marks">
-        <term id="windows.scripts.distribution.strip.bidi.marks.title">Strip Bidi Marks</term>
+        <term id="windows.scripts.distribution.strip.bidi.marks.title">Strip
+        Bidi Marks</term>
 
         <listitem>
           <para>Remove bidi mark in the current target or in selection.</para>
@@ -250,7 +318,8 @@
       </varlistentry>
 
       <varlistentry id="windows.scripts.distribution.strip.tags">
-        <term id="windows.scripts.distribution.strip.tags.title">Strip tags</term>
+        <term id="windows.scripts.distribution.strip.tags.title">Strip
+        tags</term>
 
         <listitem>
           <para>Remove tags in the current target or selection.</para>
@@ -258,7 +327,8 @@
       </varlistentry>
 
       <varlistentry id="windows.scripts.distribution.switch.colour.theme">
-        <term id="windows.scripts.distribution.switch.colour.theme.title">Switch Colour Theme</term>
+        <term id="windows.scripts.distribution.switch.colour.theme.title">Switch
+        Colour Theme</term>
 
         <listitem>
           <para>Switch the colour theme used in the editor.</para>
@@ -266,7 +336,8 @@
       </varlistentry>
 
       <varlistentry id="windows.scripts.distribution.tag.free.match">
-        <term id="windows.scripts.distribution.tag.free.match.title">Tag-Free Match</term>
+        <term id="windows.scripts.distribution.tag.free.match.title">Tag-Free
+        Match</term>
 
         <listitem>
           <para>Replace current target with a tag-free match.</para>
@@ -282,7 +353,8 @@
       </varlistentry>
 
       <varlistentry id="windows.scripts.distribution.issue.provider.sample.groovy">
-        <term id="windows.scripts.distribution.issue.provider.sample.groovy.title">issue_provider_sample.groovy</term>
+        <term
+        id="windows.scripts.distribution.issue.provider.sample.groovy.title">issue_provider_sample.groovy</term>
 
         <listitem>
           <para>(no description)</para>
@@ -290,7 +362,8 @@
       </varlistentry>
 
       <varlistentry id="windows.scripts.distribution.toolbar.groovy">
-        <term id="windows.scripts.distribution.toolbar.groovy.title">toolbar.groovy</term>
+        <term
+        id="windows.scripts.distribution.toolbar.groovy.title">toolbar.groovy</term>
 
         <listitem>
           <para>(no description)</para>
@@ -307,7 +380,11 @@
         <term>Groovy</term>
 
         <listitem>
-          <para>A dynamic language for the Java Virtual machine. It builds upon the strengths of Java, and adds powerful features inspired by languages like Python, Ruby and Smalltalk. See <ulink url="https://groovy-lang.org">Apache Groovy</ulink> for details.</para>
+          <para>A dynamic language for the Java Virtual machine. It builds upon
+          the strengths of Java, and adds powerful features inspired by
+          languages like Python, Ruby and Smalltalk. See <ulink
+          url="https://groovy-lang.org">Apache Groovy</ulink> for
+          details.</para>
         </listitem>
       </varlistentry>
 
@@ -315,13 +392,21 @@
         <term>JavaScript</term>
 
         <listitem>
-          <para>A prototype-based scripting language that is dynamic, weakly typed and has first-class functions. It is a multi-paradigm language that supports the object-oriented, imperative, and functional programming styles. See <ulink
-          url="https://developer.oracle.com/databases/nashorn-javascript-part1.html">Practical Nashorn, Part 1: Introducing JavaScript, ECMAScript, and Nashorn</ulink></para>
+          <para>A prototype-based scripting language that is dynamic, weakly
+          typed and has first-class functions. It is a multi-paradigm language
+          that supports the object-oriented, imperative, and functional
+          programming styles. See <ulink
+          url="https://developer.oracle.com/databases/nashorn-javascript-part1.html">Practical
+          Nashorn, Part 1: Introducing JavaScript, ECMAScript, and
+          Nashorn</ulink></para>
         </listitem>
       </varlistentry>
     </variablelist>
 
-    <para>All languages have access to the OmegaT object model, with the project as the top object. For example, the following Groovy code snippet scans through all segments in every file in the current project and prints out the source and the target text of segments that contain a translation.</para>
+    <para>All languages have access to the OmegaT object model, with the project
+    as the top object. For example, the following Groovy code snippet scans
+    through all segments in every file in the current project and prints out the
+    source and the target text of segments that contain a translation.</para>
 
     <programlisting>
     files = project.projectFiles;

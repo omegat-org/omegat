@@ -494,7 +494,7 @@
 
     <para>Windows、Linux、FreeBSD 向けの単体ツールを探しているなら、<ulink url="http://weitz.de/regex-coach/">The Regex Coach</ulink> を確認してみてください。このツールは、上の例（Firefox アドオン）とほとんど同じように使えます。</para>
 
-    <para>正規表現の便利な構文例は、<application>OmegaT</application> 自体にも含まれています（［設定］→［分節化規則...］を参照してください）。以下は、特に翻訳メモリを検索する場合に便利な正規表現の一覧です：</para>
+    <para>正規表現の便利な構文例は、OmegaT 自体にも含まれています（［設定］→［分節化規則...］を参照してください）。以下は、特に翻訳メモリを検索する場合に便利な正規表現の一覧です：</para>
 
     <table>
       <title>正規表現 - 翻訳で使える正規表現例</title>

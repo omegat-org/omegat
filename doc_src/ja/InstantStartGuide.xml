@@ -18,15 +18,15 @@
 
     <para>プロジェクト名を入力して保存したら、<guilabel>プロジェクトの新規作成</guilabel>ダイアログが開きます。ダイアログの先頭で、原文ファイルの言語と訳文ファイルの言語を選び、［<guibutton>確定</guibutton>］ボタンをクリックします。</para>
 
-    <para>他の設定に用があれば、<keycap>Ctrl+E</keycap> キーを押して、いつでもこのダイアログに戻ることができます。</para>
+    <para>他の設定に用があれば、<keycombo><keycap>Ctrl</keycap>+<keycap>E</keycap>&lt;</keycombo> キーを押して、いつでもこのダイアログに戻ることができます。</para>
 
-    <para>続いて、<guilabel>翻訳対象ファイル一覧</guilabel>ダイアログが開きます。［<guibutton>原文ファイルを追加...</guibutton>］ボタンをクリックし、原文ファイルを選択します。OmegaT は選択されたファイルを、新しく作成されたプロジェクトの <filename>source</filename> フォルダーへコピーします。原文ファイルが<guilabel>編集</guilabel>ウィンドウに読み込まれたら、<guilabel>翻訳対象ファイル一覧</guilabel>ダイアログを閉じましょう。</para>
+    <para>続いて、<guilabel>翻訳対象ファイル一覧</guilabel>ダイアログが開きます。［<guibutton>原文ファイルを追加...</guibutton>］ボタンをクリックし、原文ファイルを選択します。OmegaT は選択されたファイルを、新しく作成されたプロジェクトの <filename class="directory">source</filename> フォルダーへコピーします。原文ファイルが<guilabel>編集</guilabel>ウィンドウに読み込まれたら、<guilabel>翻訳対象ファイル一覧</guilabel>ダイアログを閉じましょう。</para>
   </section>
 
   <section id="translate.the.segments.one.by.one">
     <title>ファイルを翻訳する</title>
 
-    <para>OmegaT は翻訳のために、原文を「分節」という単位に分割して表示します。ひとつの分節を翻訳し終えたら、<keycap>Ctrl+U</keycap> キーを押して、次の未翻訳分節へと移動します（<keycap>Ctrl+Shift+U</keycap> キーを押すと、次の翻訳済み分節へ移動します）。翻訳の成果を確認したくなったら、<keycap>Ctrl+D</keycap> キーを押して、いつでも訳文ファイルを生成できます。訳文ファイルは、プロジェクトの <filename>target</filename> フォルダー内に作成されます。翻訳作業のあいだ、［<guimenu>編集</guimenu>］メニューおよび［<guimenu>移動</guimenu>］メニューから、さまざまな役に立つ機能を利用することができます。</para>
+    <para>OmegaT は翻訳のために、原文を「分節」という単位に分割して表示します。ひとつの分節を翻訳し終えたら、<keycombo><keycap>Ctrl</keycap><keycap>U</keycap></keycombo> キーを押して、次の未翻訳分節へと移動します（<keycombo><keycap>Ctrl</keycap><keycap>Shift</keycap><keycap>U</keycap></keycombo> キーを押すと、次の翻訳済み分節へ移動します）。翻訳の成果を確認したくなったら、<keycombo><keycap>Ctrl</keycap><keycap>D</keycap></keycombo> キーを押して、いつでも訳文ファイルを生成できます。訳文ファイルは、プロジェクトの <filename class="directory">target</filename> フォルダー内に作成されます。翻訳作業のあいだ、［<guimenu>編集</guimenu>］メニューおよび［<guimenu>移動</guimenu>］メニューから、さまざまな役に立つ機能を利用することができます。</para>
   </section>
 
   <section>
@@ -52,13 +52,13 @@
     </mediaobject>
     </para>
     
-    <para>OmegaT はタグを灰色で描画するので、見分けるのは簡単です。タグは保護されます。したがってタグの中身を書き換えることはできません。しかしタグごと削除したり、手入力したり、移動したりすることはできます。ただし、もしタグを誤って編集すると、訳文ファイルを開くときに問題が起きるかもしれません。そうならないよう、訳文ファイルを生成する前に <keycap>Ctrl+Shift+V</keycap> キーを押して、タグが正しいか検証しておくとよいでしょう。</para>
+    <para>OmegaT はタグを灰色で描画するので、見分けるのは簡単です。タグは保護されます。したがってタグの中身を書き換えることはできません。しかしタグごと削除したり、手入力したり、移動したりすることはできます。ただし、もしタグを誤って編集すると、訳文ファイルを開くときに問題が起きるかもしれません。そうならないよう、訳文ファイルを生成する前に <keycombo><keycap>Ctrl</keycap><keycap>Shift</keycap><keycap>V</keycap></keycombo> キーを押して、タグが正しいか検証しておくとよいでしょう。</para>
   </section>
 
   <section>
     <title>訳文ファイルを生成する</title>
 
-    <para>翻訳にタグのエラーが無いことを確認したら、<keycap>Ctrl+D</keycap> キーを押して訳文ファイルを生成しましょう。訳文ファイルは、プロジェクトの <filename>target</filename> フォルダー内に作成されます。</para>
+    <para>翻訳にタグのエラーが無いことを確認したら、<keycombo><keycap>Ctrl</keycap><keycap>D</keycap></keycombo> キーを押して訳文ファイルを生成しましょう。訳文ファイルは、プロジェクトの <filename class="directory">target</filename> フォルダー内に作成されます。</para>
   </section>
 
   <section>
@@ -78,25 +78,25 @@
 
     <itemizedlist>
       <listitem>
-        <para>プロジェクトの初期設定を確認したければ、<keycap>Ctrl+E</keycap> キーを押してプロジェクト設定ダイアログを開いてください。プロジェクトに含まれる原文ファイルの一覧を確認したければ、<keycap>Ctrl+L</keycap> キーを押して<guilabel>翻訳対象ファイル一覧</guilabel>ダイアログを開いてください。</para>
+        <para>プロジェクトの初期設定を確認したければ、<keycombo><keycap>Ctrl</keycap><keycap>E</keycap></keycombo> キーを押してプロジェクト設定ダイアログを開いてください。プロジェクトに含まれる原文ファイルの一覧を確認したければ、<keycombo><keycap>Ctrl</keycap><keycap>L</keycap></keycombo> キーを押して<guilabel>翻訳対象ファイル一覧</guilabel>ダイアログを開いてください。</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>翻訳作業の最後に、OmegaT は <filename>level1</filename>、<filename>level2</filename>、<filename>omegat</filename> と呼ばれる３つの翻訳メモリをプロジェクトフォルダー内に出力します。<filename>level1</filename> と <filename>level2</filename> は、他の翻訳支援ツールと翻訳メモリを共有するために使います。<filename>omegat</filename> は OmegaT 専用の翻訳メモリで、将来作成する別のプロジェクトで流用することができます。翻訳メモリファイルをプロジェクトの <filename>tm</filename> フォルダー内に配置しておくと、OmegaT はそこから「参考訳文」と呼ばれる類似分節を自動的に検索するようになります。</para>
+        <para>翻訳作業の最後に、OmegaT は <filename>level1</filename>、<filename>level2</filename>、<filename>omegat</filename> と呼ばれる３つの翻訳メモリをプロジェクトフォルダー内に出力します。<filename>level1</filename> と <filename>level2</filename> は、他の翻訳支援ツールと翻訳メモリを共有するために使います。<filename>omegat</filename> は OmegaT 専用の翻訳メモリで、将来作成する別のプロジェクトで流用することができます。翻訳メモリファイルをプロジェクトの <filename class="directory">tm</filename> フォルダー内に配置しておくと、OmegaT はそこから「参考訳文」と呼ばれる類似分節を自動的に検索するようになります。</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para><keycap>Ctrl+Shift+G</keycap> キーを押すと、新しい用語を追加することができます。また既存の用語集ファイルをプロジェクトの <filename>glossary</filename> フォルダーにコピーしておくと、OmegaT はそこから用語を自動的に検索するようになります。</para>
+        <para><keycombo><keycap>Ctrl</keycap><keycap>Shift</keycap><keycap>G</keycap></keycombo> キーを押すと、新しい用語を追加することができます。また既存の用語集ファイルをプロジェクトの <filename class="directory">glossary</filename> フォルダーにコピーしておくと、OmegaT はそこから用語を自動的に検索するようになります。</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>原文や訳文から語句を検索したいときは、<keycap>Ctrl+F</keycap> キーを押せば、いつでも<guilabel>プロジェクトの検索</guilabel>ウィンドウを表示できます。</para>
+        <para>原文や訳文から語句を検索したいときは、<keycombo><keycap>Ctrl</keycap><keycap>F</keycap></keycombo> キーを押せば、いつでも<guilabel>プロジェクトの検索</guilabel>ウィンドウを表示できます。</para>
       </listitem>
     </itemizedlist>
 

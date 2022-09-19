@@ -23,18 +23,18 @@
       </listitem>
     </itemizedlist>
 
-    <para><application>OmegaT</application> で RTL モードを使用しても、<application>OmegaT</application>が生成した訳文ファイルの表示モードには何の影響も与えません。訳文ファイルの表示モードは、表示や編集に使用するプログラム（Microsoft Word のような）の中で修正する必要があります（詳細は、そのプログラムの取扱説明書を参照してください）。<keycombo><keycap>Shift</keycap> <keycap>Ctrl</keycap> <keycap>O</keycap></keycombo> を押すと、<application>OmegaT</application> 内のテキスト入力と表示の両方を、上記の３通りのいずれかに順に切り替えます。表示モードは、編集、参考訳文、用語集の３つのウィンドウそれぞれで個別に切り替えることができます。目的のウィンドウをクリックしてから、表示モードを切り替えてください。また、<application>OmegaT</application> にあるすべての入力フィールド（検索ウィンドウや分節化規則設定ダイアログなど）でも使用できます。</para>
+    <para>OmegaT で RTL モードを使用しても、OmegaTが生成した訳文ファイルの表示モードには何の影響も与えません。訳文ファイルの表示モードは、表示や編集に使用するプログラム（Microsoft Word のような）の中で修正する必要があります（詳細は、そのプログラムの取扱説明書を参照してください）。<keycombo><keycap>Shift</keycap><keycap>Ctrl</keycap><keycap>O</keycap></keycombo> を押すと、OmegaT内のテキスト入力と表示の両方を、上記の３通りのいずれかに順に切り替えます。表示モードは、編集、参考訳文、用語集の３つのウィンドウそれぞれで個別に切り替えることができます。目的のウィンドウをクリックしてから、表示モードを切り替えてください。また、OmegaT にあるすべての入力フィールド（検索ウィンドウや分節化規則設定ダイアログなど）でも使用できます。</para>
 
-    <para>Mac OS X でも、同じ <keycombo><keycap>Shift</keycap> <keycap>Ctrl</keycap> <keycap>O</keycap></keycombo> を使用します（Cmd+Shift+O <emphasis role="bold">ではありません</emphasis>）。</para>
+    <para>Mac OS X でも、同じ <keycombo><keycap>Shift</keycap> <keycap>Ctrl</keycap> <keycap>O</keycap></keycombo> を使用します（<keycombo><keycap>Cmd</keycap><keycap>Shift</keycap><keycap>O</keycap></keycombo>ではありません）。</para>
 
     <section>
       <title>分節中での LTR（左から右）と RTL（右から左）文字列の混在</title>
 
-      <para>右から左へ表記する文章だけを入力している時は、デフォルトの（左から右への）表記が使用されます。しかし多くの場合、RTL 文章中に LTR 文章を混在させる必要が出てきます。たとえば、OmegaT が使用するタグ文字列、原文ファイルで LTR 表記された製品名、翻訳ファイル中のプレースホルダー、あるいは文章中の数値などです。このような場合、RTL（実際は両方向の）文章を適切に表示するため、RTL モードに切り替える必要があります。<application>OmegaT</application> を RTL モードにすると、原文と訳文の両方が RTL モードで表示される点に留意してください。仮に原文言語が LTR で訳文言語が RTL、またはその逆の場合を考えます。このとき、原文の確認、訳文の入力をそれぞれのモードでスムーズに行えるよう、RTL と LTR モードの切り替えを繰り返しながら作業する必要があるかもしれません。</para>
+      <para>右から左へ表記する文章だけを入力している時は、デフォルトの（左から右への）表記が使用されます。しかし多くの場合、RTL 文章中に LTR 文章を混在させる必要が出てきます。たとえば、OmegaT が使用するタグ文字列、原文ファイルで LTR 表記された製品名、翻訳ファイル中のプレースホルダー、あるいは文章中の数値などです。このような場合、RTL（実際は両方向の）文章を適切に表示するため、RTL モードに切り替える必要があります。OmegaT を RTL モードにすると、原文と訳文の両方が RTL モードで表示される点に留意してください。仮に原文言語が LTR で訳文言語が RTL、またはその逆の場合を考えます。このとき、原文の確認、訳文の入力をそれぞれのモードでスムーズに行えるよう、RTL と LTR モードの切り替えを繰り返しながら作業する必要があるかもしれません。</para>
     </section>
 
     <section>
-      <title>RTL 分節における <application>OmegaT</application> タグ</title>
+      <title>RTL 分節における OmegaT タグ</title>
 
       <para>上で述べたように、OmegaT が使用するタグは LTR 文字列です。RTL ⇔ LTR 言語間で翻訳作業を行うときは、原文ファイルからタグを正しく読み込み、それをまた訳文ファイルに適切に入力するため、翻訳作業者が RTL ⇔ LTR モードの切り替えを頻繁に行う必要があるかもしれません。</para>
 

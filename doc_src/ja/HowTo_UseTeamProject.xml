@@ -13,7 +13,7 @@
 
   <para>3分ごとに(デフォルトで)、ローカルプロジェクトはリモートリポジトリと同期され、プロジェクトマネージャや他の翻訳者はその期間中に追加された翻訳を表示して使用できます。</para>
 
-  <para>3分の間隔は、<link linkend="dialogs.preferences.savingandoutput"><menuchoice><guimenuitem>[設定]</guimenuitem><guimenuitem>[環境設定]</guimenuitem><guimenuitem>[保存と訳文ファイル生成]</guimenuitem></menuchoice></link>で変更できます。</para>
+  <para>3分の間隔は、<link linkend="dialogs.preferences.savingandoutput"><menuchoice><guimenu>[設定]</guimenu><guimenuitem>[環境設定]</guimenuitem><guimenuitem>[保存と訳文ファイル生成]</guimenuitem></menuchoice></link>で変更できます。</para>
 
   <para><emphasis role="bold">同期ファイル</emphasis></para>
 
@@ -21,11 +21,11 @@
 
   <itemizedlist>
     <listitem>
-      <para><filename>omegat/project_save.tmx</filename></para>
+      <para>omegat/project_save.tmx</para>
     </listitem>
 
     <listitem>
-      <para><filename>glossary/glossary.txt</filename></para>
+      <para>glossary/glossary.txt</para>
     </listitem>
   </itemizedlist>
 
@@ -37,11 +37,11 @@
 
   <para><orderedlist>
       <listitem>
-        <para>ファイルを<filename>/source</filename>フォルダにコピーします。</para>
+        <para>ファイルを<filename class="directory">source</filename>フォルダにコピーします。</para>
       </listitem>
 
       <listitem>
-        <para> <menuchoice> <guimenuitem>プロジェクト</guimenuitem> <guimenuitem>原文ファイルをコミット</guimenuitem> </menuchoice>を使用します</para>
+        <para> <menuchoice> <guimenu>プロジェクト</guimenu> <guimenuitem>原文ファイルをコミット</guimenuitem> </menuchoice>を使用します</para>
       </listitem>
     </orderedlist>既存のソースファイルは変更できますが、コミット操作は、自動保存の前、およびプロジェクトを再ロードまたは閉じる前に実行する必要があります。</para>
 

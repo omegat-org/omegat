@@ -1,13 +1,19 @@
 ----------------------------------------------------------------------
  OmegaT 5.8.0
 ----------------------------------------------------------------------
-  15 Enhancements
-  14 Bug fixes
+  16 Enhancements
+  16 Bug fixes
   0 Localisation updates
 ----------------------------------------------------------------------
 5.8.0 vs 5.7.1
 
   Bug fixes:
+
+  - Team project piles up backup files of omegat.project
+  https://sourceforge.net/p/omegat/bugs/1110/
+
+  - doc_src/docgen docker container should handle UID/GID properly
+  https://sourceforge.net/p/omegat/bugs/1112/
 
   - OpenSSH new key format and ECDSA/ED25519 keys
   https://sourceforge.net/p/omegat/bugs/1107/
@@ -47,6 +53,9 @@
     differs from original
 
   Implemented requests:
+
+  - Git/Team project should preserve access URL when download team
+  https://sourceforge.net/p/omegat/feature-requests/1629/
 
   - Support Git branch in Team Project
   https://sourceforge.net/p/omegat/feature-requests/918/
@@ -90,7 +99,9 @@
   https://sourceforge.net/p/omegat/feature-requests/1408/
 
   - Allow jumping to the selected segment from Search using a keyboard shortcut
- https://sourceforge.net/p/omegat/feature-requests/1603/
+  https://sourceforge.net/p/omegat/feature-requests/1603/
+
+  Localisation Updates:
 
 ----------------------------------------------------------------------
 OmegaT 5.7.1 (2022-03-19)

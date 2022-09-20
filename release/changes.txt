@@ -7,51 +7,6 @@
 ----------------------------------------------------------------------
 5.8.0 vs 5.7.1
 
-  Bug fixes:
-
-  - Team project piles up backup files of omegat.project
-  https://sourceforge.net/p/omegat/bugs/1110/
-
-  - doc_src/docgen docker container should handle UID/GID properly
-  https://sourceforge.net/p/omegat/bugs/1112/
-
-  - OpenSSH new key format and ECDSA/ED25519 keys
-  https://sourceforge.net/p/omegat/bugs/1107/
-
-  - CLI commands does not expand tilde(~) to home directory
-  https://sourceforge.net/p/omegat/bugs/1106/
-
-  - PO filter: target files should not keep #| msgctxt
-  https://sourceforge.net/p/omegat/bugs/1103/
-
-  - Paragraph marks not showing when loading partial pages-
-  https://sourceforge.net/p/omegat/bugs/1102/
-
-  - Display other language translations also for alternative translations
-  https://sourceforge.net/p/omegat/bugs/1101/
-
-  - Searcher to show path in relative
-  https://sourceforge.net/p/omegat/bugs/1099/
-  https://sourceforge.net/p/omegat/bugs/1098/
-
-  - Enforced ID-bound alternative translations not recognized
-  https://sourceforge.net/p/omegat/bugs/1092/
-
-  - ArrayIndexOutOfBoundsException on loading a PO-project with multi-line plurals
-  https://sourceforge.net/p/omegat/bugs/1082/
-
-  - Team projects fail to commit with enabled signing
-  https://sourceforge.net/p/omegat/bugs/1077/
-
-  - Unable to check-out or open/save team projects
-  https://sourceforge.net/p/omegat/bugs/1075/
-
-  - Dictionary fails to jump to selected word
-  https://sourceforge.net/p/omegat/bugs/1074/
-
-  - Highlight found text even if normalized text (for feature "full/half width insensitive") 
-    differs from original
-
   Implemented requests:
 
   - Git/Team project should preserve access URL when download team
@@ -101,6 +56,51 @@
   - Allow jumping to the selected segment from Search using a keyboard shortcut
   https://sourceforge.net/p/omegat/feature-requests/1603/
 
+  Bug fixes:
+
+  - Team project piles up backup files of omegat.project
+  https://sourceforge.net/p/omegat/bugs/1110/
+
+  - doc_src/docgen docker container should handle UID/GID properly
+  https://sourceforge.net/p/omegat/bugs/1112/
+
+  - OpenSSH new key format and ECDSA/ED25519 keys
+  https://sourceforge.net/p/omegat/bugs/1107/
+
+  - CLI commands does not expand tilde(~) to home directory
+  https://sourceforge.net/p/omegat/bugs/1106/
+
+  - PO filter: target files should not keep #| msgctxt
+  https://sourceforge.net/p/omegat/bugs/1103/
+
+  - Paragraph marks not showing when loading partial pages-
+  https://sourceforge.net/p/omegat/bugs/1102/
+
+  - Display other language translations also for alternative translations
+  https://sourceforge.net/p/omegat/bugs/1101/
+
+  - Searcher to show path in relative
+  https://sourceforge.net/p/omegat/bugs/1099/
+  https://sourceforge.net/p/omegat/bugs/1098/
+
+  - Enforced ID-bound alternative translations not recognized
+  https://sourceforge.net/p/omegat/bugs/1092/
+
+  - ArrayIndexOutOfBoundsException on loading a PO-project with multi-line plurals
+  https://sourceforge.net/p/omegat/bugs/1082/
+
+  - Team projects fail to commit with enabled signing
+  https://sourceforge.net/p/omegat/bugs/1077/
+
+  - Unable to check-out or open/save team projects
+  https://sourceforge.net/p/omegat/bugs/1075/
+
+  - Dictionary fails to jump to selected word
+  https://sourceforge.net/p/omegat/bugs/1074/
+
+  - Highlight found text even if normalized text (for feature "full/half width insensitive") 
+    differs from original
+
   Localisation Updates:
 
 ----------------------------------------------------------------------
@@ -126,14 +126,6 @@ OmegaT 5.7.1 (2022-03-19)
 ----------------------------------------------------------------------
 5.7.0 vs 5.6.0
 
-  Bug fixes:
-
-  - Dictionary pane update is extremely slow for large articles
-  https://sourceforge.net/p/omegat/bugs/1068/
-
-  - Menus don't get keyboard focus after opening
-  https://sourceforge.net/p/omegat/bugs/1073/
-
   Implemented requests:
 
   - Ignore Microsoft Office temporary files
@@ -148,6 +140,14 @@ OmegaT 5.7.1 (2022-03-19)
   - Display images in Dictionary pane
   https://sourceforge.net/p/omegat/feature-requests/1595/
 
+  Bug fixes:
+
+  - Dictionary pane update is extremely slow for large articles
+  https://sourceforge.net/p/omegat/bugs/1068/
+
+  - Menus don't get keyboard focus after opening
+  https://sourceforge.net/p/omegat/bugs/1073/
+
   Localisation Updates:
 
   - Italian localisation updated to 5.6 (UI)
@@ -160,6 +160,23 @@ OmegaT 5.7.1 (2022-03-19)
   9 Localisation updates
 ----------------------------------------------------------------------
 5.6.0 vs 5.5.0
+
+  Implemented requests:
+
+  - Add extra ignore patterns for ".git", ".hg", and ".repositories"
+  https://sourceforge.net/p/omegat/feature-requests/1589/
+
+  - Support using arbitrary git branch name
+  https://sourceforge.net/p/omegat/feature-requests/1531/
+
+  - Restart application from Project menu
+  https://sourceforge.net/p/omegat/feature-requests/1564/
+
+  - Support theme plugins, choose theme in preferences
+  https://sourceforge.net/p/omegat/feature-requests/1567/
+
+  - Detect TSV glossary encoding via magic comment
+  https://sourceforge.net/p/omegat/feature-requests/1579/
 
   Bug fixes:
 
@@ -187,23 +204,6 @@ OmegaT 5.7.1 (2022-03-19)
   - Properties notification color is too bright in dark mode
   https://sourceforge.net/p/omegat/bugs/1055/
 
-  Implemented requests:
-
-  - Add extra ignore patterns for ".git", ".hg", and ".repositories"
-  https://sourceforge.net/p/omegat/feature-requests/1589/
-
-  - Support using arbitrary git branch name
-  https://sourceforge.net/p/omegat/feature-requests/1531/
-
-  - Restart application from Project menu
-  https://sourceforge.net/p/omegat/feature-requests/1564/
-
-  - Support theme plugins, choose theme in preferences
-  https://sourceforge.net/p/omegat/feature-requests/1567/
-
-  - Detect TSV glossary encoding via magic comment
-  https://sourceforge.net/p/omegat/feature-requests/1579/
-
   Localisation Updates:
 
   - Corsican localisation updated to 5.6 (UI, readme, scripts)
@@ -224,18 +224,6 @@ OmegaT 5.7.1 (2022-03-19)
   15 Localisation updates
 ----------------------------------------------------------------------
 5.5.0 vs 5.4.4
-
-  Bug fixes:
-
-  - External opening/browsing not supported on some Linux environments
-  https://sourceforge.net/p/omegat/bugs/999/
-
-  - project_stats.txt overwritten with garbage when opening Statistics window
-  https://sourceforge.net/p/omegat/bugs/1035/
-
-  - SVN team project files disappear: File deletions are now correctly handled
-  for SVN repos.
-  https://sourceforge.net/p/omegat/bugs/1036/
 
   Implemented requests:
 
@@ -271,6 +259,18 @@ OmegaT 5.7.1 (2022-03-19)
 
   - Support "mark unknown words" feature in Apertium MT
   https://sourceforge.net/p/omegat/feature-requests/1563/
+
+  Bug fixes:
+
+  - External opening/browsing not supported on some Linux environments
+  https://sourceforge.net/p/omegat/bugs/999/
+
+  - project_stats.txt overwritten with garbage when opening Statistics window
+  https://sourceforge.net/p/omegat/bugs/1035/
+
+  - SVN team project files disappear: File deletions are now correctly handled
+  for SVN repos.
+  https://sourceforge.net/p/omegat/bugs/1036/
 
   Localisation Updates:
 

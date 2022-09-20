@@ -87,11 +87,10 @@
 	</keycombo>
 	  </term>
       <listitem>
-        <para>Replaces the target segment with the translation, provided by
-        the selected Machine Translation service. No action is taken if no
-        Machine Translation service has been activated (in <link linkend="menus.options.mt"><menuchoice>
-        <guimenu>Options</guimenu>
-        <guimenuitem>Machine Translate</guimenuitem></menuchoice></link>). See
+        <para>Replaces the target segment with the translation, provided by the
+        selected Machine Translation service. No action is taken if no Machine
+        Translation service has been activated (in <link
+        linkend="menus.options.mt" endterm="menus.options.mt.title"/>). See
         <link linkend="dialogs.preferences.mt">Machine Translation</link> for
         details.</para>
       </listitem>
@@ -148,9 +147,11 @@
         text has been selected, the current source segment is written to this
         file. To remain consistent with usual clipboard behavior this file is
         not emptied when the user exits OmegaT. The exported contents are copied
-        to the file <filename>selection.txt</filename> located in the
-        <filename>script</filename> folder of the user's configuration
-        folder.</para>
+        to the file <link
+        linkend="configuration.folder.default.contents.script.selection.title"
+        endterm="configuration.folder.default.contents.script.selection.title"/>
+        located in the <link linkend="configuration.folder"
+        endterm="configuration.folder.title"/> folder.</para>
       </listitem>
     </varlistentry>
 
@@ -263,7 +264,7 @@
 		  <listitem><para><guilabel>Sentence Case</guilabel></para>
 		  <para>Only the first letter in upper case.</para>
 		  </listitem>
-		  <listitem><para>Cycle			<keycombo>
+		  <listitem><para><guilabel>Cycle</guilabel>			<keycombo>
           <keycap>S</keycap>
           <keycap>F3</keycap>
 		</keycombo>
@@ -355,7 +356,7 @@
 		</listitem>
 		<listitem><para><guilabel>Right-to-Left Embedding (RLE U+202B)</guilabel></para>
 		</listitem>
-		<listitem><para>Pop Directional Formatting (PDF U+202C)</para>
+		<listitem><para><guilabel>Pop Directional Formatting (PDF U+202C)</guilabel></para>
 		</listitem>
 	  </itemizedlist>
       </listitem>
@@ -397,7 +398,7 @@
       <listitem>
 		<para>Define the translation as empty. In the target document, nothing
 		will appear for this segment. In the Editor, the translation is
-		displayed as &lt;EMPTY&gt;</para>
+		displayed as <guilabel>&lt;EMPTY&gt;</guilabel></para>
       </listitem>
 	</varlistentry>
 

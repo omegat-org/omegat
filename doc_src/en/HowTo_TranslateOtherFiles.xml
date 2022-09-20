@@ -4,32 +4,32 @@
   <title id="how.to.translate.other.files.title">Translate files in formats not
   supported by OmegaT</title>
 
-  <para>There are four ways to support file formats that OmegaT does not natively support:
+  <para>There are four ways to support file formats that OmegaT does not support natively:
 
   <variablelist>
 	<varlistentry>
-	  <term>The conversion</term>
+	  <term>Conversion</term>
 	  <listitem>
 		<para></para>
 	  </listitem>
 	</varlistentry>
 	
 	<varlistentry>
-	  <term>The plugin</term>
+	  <term>Plugins</term>
 	  <listitem>
 		<para></para>
 	  </listitem>
 	</varlistentry>
 
 	<varlistentry>
-	  <term>The transformation</term>
+	  <term>Transformation</term>
 	  <listitem>
 		<para></para>
 	  </listitem>
 	</varlistentry>
 
 	<varlistentry>
-	  <term>The development</term>
+	  <term>Development</term>
 	  <listitem>
 		<para></para>
 	  </listitem>

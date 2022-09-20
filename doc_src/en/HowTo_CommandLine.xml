@@ -182,158 +182,162 @@
 
 		<para>		
 			<variablelist>
-			<varlistentry>
-				<term>General options:</term>
-				<listitem>
-					<variablelist>
-						<varlistentry>
-							<term>-h, --help</term>
-							<listitem>
-								<para>Show usage information.</para>
-							</listitem>
-						</varlistentry>
-						<varlistentry>
-							<term>Path to an OmegaT project</term>
-							<listitem>
-								<para>Launch the GUI and load the specified project</para>
-							</listitem>
-						</varlistentry>
-						<varlistentry>
-							<term>--remote-project &lt;path-to-omegat-project-file&gt;</term>
-							<listitem>
-								<para>Download the OmegaT project from the specified URL specified in &lt;path-to-omegat-project-file&gt;, and load it.</para>
-							</listitem>
-						</varlistentry>
-						<varlistentry>
-							<term>--no-team</term>
-							<listitem>
-								<para>Disable team project functionality. Use this option if you want to prevent OmegaT from synchronizing the project contents.</para>
-							</listitem>
-						</varlistentry>
-						<varlistentry>
-							<term>team init SL TL</term>
-							<listitem>
-								<para>Initialize a team project using SL and TL as the source and target two-letter language codes, respectively. </para>
-							</listitem>
-						</varlistentry>
-						<varlistentry>
-							<term>--disable-project-locking</term>
-							<listitem>
-								<para>Do not lock the omegat.project file.</para>
-								<para>By default, the omegat.project  is locked under Windows and attempting to open an already open project in another instance of OmegaT results in an error. This option prevents that error.</para>
-							</listitem>
-						</varlistentry>
-						<varlistentry>
-							<term>--disable-location-save</term>
-							<listitem>
-								<para>Do not remember the last directory opened in the file picker.</para>
-							</listitem>
-						</varlistentry>
-						<varlistentry>
-							<term>--ITokenizer=&lt;classname&gt;</term>
-							<term>--ITokenizerTarget=&lt;classname&gt;</term>
-							<listitem>
-								<para>Specify a source- or target-language tokenizer (using this option overrides project settings). See OmegaT.jar/META-INF/MANIFEST.MF for valid values.</para>
-							</listitem>
-						</varlistentry>
-						<varlistentry>
-							<term>--config-dir=&lt;path&gt;</term>
-							<listitem>
-								<para>The directory used to read and write OmegaT configuration files.</para>
-							</listitem>
-						</varlistentry>
-						<varlistentry>
-							<term>--config-file=&lt;path&gt;</term>
-							<listitem>
-								<para>A Java .properties file from which to load default settings.</para>
-							</listitem>
-						</varlistentry>
-						<varlistentry>
-							<term>--resource-bundle=&lt;path&gt;</term>
-							<listitem>
-								<para>A Java .properties file to use for interface text</para>
-							</listitem>
-						</varlistentry>
-						<varlistentry>
-							<term>--mode=[console-translate|console-pseudotranslatetmx|console-align]</term>
-							<listitem>
-								<para>Specify a mode other than the GUI default. See below for details.</para>
-							</listitem>
-						</varlistentry>
-					</variablelist>
-				</listitem>
-			</varlistentry>
-			<varlistentry>
-				<term>--mode=console-translate</term>
-				<listitem>
-					<para>In this mode, OmegaT will attempt to translate the files in the source folder with the available translation memories. This is useful if OmegaT is run on a server with TMX files automatically fed to a project.
+				<varlistentry>
+					<term>General options:</term>
+					<listitem>
 						<variablelist>
 							<varlistentry>
-								<term>--source-pattern=&lt;pattern&gt;</term>
+								<term>-h, --help</term>
 								<listitem>
-									<para>A whitelist of regular expressions defining the source files to process. Remember that in regular expressions, the period and backslash character must be escaped: &quot;\.&quot; and &quot;\\&quot;.</para>
-									<para>Here are some typical examples:
-										<variablelist>
-											<varlistentry>
-												<term>.*\.html</term>
-												<listitem>
-													<para>Translate all HTML files.</para>
-												</listitem>
-											</varlistentry>
-											<varlistentry>
-												<term>test\.html</term>
-												<listitem>
-													<para>Only translate <filename>test.html</filename> file in the source folder itself. Any files also named test.html in other subfolders will be ignored.</para>
-												</listitem>
-											</varlistentry>
-											<varlistentry>
-												<term>dir-10\\test\.html</term>
-												<listitem>
-													<para>Only translate the <filename>test.html</filename> file in the <filename class="directory">dir-10</filename> folder.</para>
-												</listitem>
-											</varlistentry>
-										</variablelist>
-										See <link linkend="appendix.regexp" endterm="appendix.regexp.title"/> for details.
-									</para>
-								</listitem>
-							</varlistentry>
-						</variablelist>
-					</para>
-				</listitem>
-			</varlistentry>
-
-			<varlistentry>
-				<term>--mode=console-pseudotranslatetmx</term>
-				<listitem>
-					<para>In this mode OmegaT will create a TMX for the whole project using only the source files. Specify the TMX file to be created with:
-						<variablelist>
-							<varlistentry>
-								<term>--pseudotranslatetmx=&lt;path&gt;</term>
-								<listitem>
-									<para>The output pseudotranslated TMX file.</para>
+									<para>Show usage information.</para>
 								</listitem>
 							</varlistentry>
 							<varlistentry>
-								<term>--pseudotranslatetype=[equal|empty]</term>
+								<term>Path to an OmegaT project</term>
 								<listitem>
-									<para>What to fill the pseudotranslated TMX with.</para>
+									<para>Launch the GUI and load the specified project</para>
 								</listitem>
 							</varlistentry>
+							<varlistentry>
+								<term>--remote-project <emphasis>&lt;path-to-omegat-project-file&gt;</emphasis></term>
+								<listitem>
+									<para>Download the OmegaT project from the specified URL specified in <emphasis>&lt;path-to-omegat-project-file&gt;</emphasis>, and load it.</para>
+								</listitem>
+							</varlistentry>
+							<varlistentry>
+								<term>--no-team</term>
+								<listitem>
+									<para>Disable team project functionality. Use this option if you want to prevent OmegaT from synchronizing the project contents.</para>
+								</listitem>
+							</varlistentry>
+							<varlistentry>
+								<term>team init <emphasis>SL</emphasis> <emphasis>TL</emphasis></term>
+								<listitem>
+									<para>Initialize a team project using <emphasis>SL</emphasis> and <emphasis>TL</emphasis> as the source and target two-letter language codes, respectively. </para>
+								</listitem>
+							</varlistentry>
+							<varlistentry>
+								<term>--disable-project-locking</term>
+								<listitem>
+									<para>Do not lock the omegat.project file.</para>
+									<para>On some platforms, the omegat.project file is locked by default and attempting to open an already open project in another instance of OmegaT results in an error. This option prevents that error.</para>
+								</listitem>
+							</varlistentry>
+							<varlistentry>
+								<term>--disable-location-save</term>
+								<listitem>
+									<para>Do not remember the last directory opened in the file picker.</para>
+								</listitem>
+							</varlistentry>
+							<varlistentry>
+								<term>--ITokenizer=&lt;classname&gt;</term>
+								<term>--ITokenizerTarget=&lt;classname&gt;</term>
+								<listitem>
+									<para>Specify a source- or target-language tokenizer (using this option overrides project settings). See OmegaT.jar/META-INF/MANIFEST.MF for valid values.</para>
+								</listitem>
+							</varlistentry>
+							<varlistentry>
+								<term>--config-dir=<emphasis>&lt;path&gt;</emphasis></term>
+								<listitem>
+									<para>The directory used to read and write OmegaT configuration files.</para>
+								</listitem>
+							</varlistentry>
+							<varlistentry>
+								<term>--config-file=<emphasis>&lt;path&gt;</emphasis></term>
+								<listitem>
+									<para>A Java .properties file from which to load default settings.</para>
+								</listitem>
+							</varlistentry>
+							<varlistentry>
+								<term>--resource-bundle=<emphasis>&lt;path&gt;</emphasis></term>
+								<listitem>
+									<para>A Java .properties file to use for interface text</para>
+								</listitem>
+							</varlistentry>
+							<varlistentry>
+								<term>--mode=[console-translate|console-pseudotranslatetmx|console-align]</term>
+								<listitem>
+									<para>Specify a mode other than the GUI default.The following options are available:</para>
+									<variablelist>
+										<varlistentry>
+											<term>--mode=console-translate</term>
+											<listitem>
+												<para>In this mode, OmegaT attempts to translate the files in the source folder with the available translation memories. This is useful if OmegaT is run on a server with TMX files automatically fed to a project.
+													<variablelist>
+														<varlistentry>
+															<term>--source-pattern=&lt;pattern&gt;</term>
+															<listitem>
+																<para>A whitelist of regular expressions defining the source files to process. Remember that in regular expressions, the period and backslash character must be escaped: &quot;\.&quot; and &quot;\\&quot;.</para>
+																<para>Here are some typical examples:
+																	<variablelist>
+																		<varlistentry>
+																			<term>.*\.html</term>
+																			<listitem>
+																				<para>Translate all HTML files.</para>
+																			</listitem>
+																		</varlistentry>
+																		<varlistentry>
+																			<term>test\.html</term>
+																			<listitem>
+																				<para>Only translate <filename>test.html</filename> file in the source folder itself. Any files also named test.html in other subfolders will be ignored.</para>
+																			</listitem>
+																		</varlistentry>
+																		<varlistentry>
+																			<term>dir-10\\test\.html</term>
+																			<listitem>
+																				<para>Only translate the <filename>test.html</filename> file in the <filename class="directory">dir-10</filename> folder.</para>
+																			</listitem>
+																		</varlistentry>
+																	</variablelist>
+																	See <link linkend="appendix.regexp" endterm="appendix.regexp.title"/> for details.
+																</para>
+															</listitem>
+														</varlistentry>
+													</variablelist>
+												</para>
+											</listitem>
+										</varlistentry>
+									</variablelist>
+									<variablelist>
+										<varlistentry>
+											<term>--mode=console-pseudotranslatetmx</term>
+											<listitem>
+												<para>In this mode OmegaT will create a TMX for the whole project using only the source files. Specify the TMX file to be created with:
+													<variablelist>
+														<varlistentry>
+															<term>--pseudotranslatetmx=<emphasis>&lt;path&gt;</emphasis></term>
+															<listitem>
+																<para>The output pseudotranslated TMX file.</para>
+															</listitem>
+														</varlistentry>
+														<varlistentry>
+															<term>--pseudotranslatetype=[equal|empty]</term>
+															<listitem>
+																<para>What to fill the pseudotranslated TMX with.</para>
+															</listitem>
+														</varlistentry>
+													</variablelist>
+												</para>
+											</listitem>
+										</varlistentry>
+									</variablelist>
+									<variablelist>
+										<varlistentry>
+											<term>--mode=console-align <emphasis>--alignDir=<emphasis>&lt;path&gt;</emphasis></emphasis></term>
+											<listitem>
+												<para>In this mode, OmegaT will align the files in the /source folder of the project with those at the location specified by the <emphasis>--alignDir</emphasis> parameter. The resulting TMX file is is saved in the /omegat folder as align.tmx. The file types that can be aligned depend whether alignment is supported by the file filter . Supported filters include: ILIAS Language File, Java(TM) Resource Bundles, Key=Value Text, Magento CE Locale CSV, MoodlePHP, Mozilla DTD, Mozilla FTL, PO, RC, SubRip Subtitles, and Windows Resources.</para>
+												<para>The <emphasis>--alignDir</emphasis> parameter is used to specify the location of the data in the target language, which must be a folder containing the translated files.</para>
+												<para>That folder must contain a translation in the target language of the project. For instance, if the project is EN-to-FR, the folder must contain a bundle ending with _fr. The resulting TMX file is is saved in the /omegat folder as align.tmx.</para>
+											</listitem>
+										</varlistentry>
+									</variablelist>												
+								</listitem>								
+							</varlistentry>
 						</variablelist>
-					</para>
-				</listitem>
-			</varlistentry>
-			
-			<varlistentry>
-				<term>--mode=console-align --alignDir=&lt;path&gt;</term>
-				<listitem>
-					<para>In this mode, OmegaT will align the files in the /source folder of the project with those at the location specified by the --alignDir parameter. The resulting TMX file is is saved in the /omegat folder as align.tmx. The file types that can be aligned depend whether alignment is supported by the file filter . Supported filters include: ILIAS Language File, Java(TM) Resource Bundles, Key=Value Text, Magento CE Locale CSV, MoodlePHP, Mozilla DTD, Mozilla FTL, PO, RC, SubRip Subtitles, and Windows Resources.</para>
-					<para>The --alignDir parameter is used to specify the location of the data in the target language, which must be a folder containing the translated files.</para>
-					<para>That folder must contain a translation in the target language of the project. For instance, if the project is EN-to-FR, the folder must contain a bundle ending with _fr. The resulting TMX file is is saved in the /omegat folder as align.tmx.</para>
-				</listitem>
-			</varlistentry>
-			
-				<varlistentry><term>Non-GUI mode options:</term>
+					</listitem>
+				</varlistentry>	
+				<varlistentry>
+					<term>Non-GUI mode options:</term>
 					<listitem>
 						<variablelist>
 							<varlistentry>
@@ -342,7 +346,7 @@
 								</listitem>
 							</varlistentry>
 							<varlistentry>
-								<term>--script=&lt;path&gt;</term>
+								<term>--script=<emphasis><emphasis>&lt;path&gt;</emphasis></emphasis></term>
 								<listitem>
 									<para>A script file to run when a project event is triggered.</para>
 								</listitem>
@@ -350,7 +354,19 @@
 							<varlistentry>
 								<term>--tag-validation=[abort|warn]</term>
 								<listitem>
-									<para>Validate tags. Abort: Exit with an error if tags there are invalid tags. Note: Invalid tags reports are sent to stdout.</para>
+									<para>Validate tags.
+										<itemizedlist>
+											<listitem>
+												<para>Abort: Exit with an error if there are invalid tags.</para>
+											</listitem>
+											<listitem>
+												<para>Warn: Show warnings without exiting if there are invalid tags.</para>
+											</listitem>											
+										</itemizedlist>
+										<note>
+											<para>Invalid tags reports are sent output to the terminal window.</para>
+										</note>
+									</para>
 								</listitem>
 							</varlistentry>
 						</variablelist>

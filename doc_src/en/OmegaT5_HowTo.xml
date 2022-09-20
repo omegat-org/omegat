@@ -16,7 +16,7 @@
   <xi:include href="HowTo_ManageRTL.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
-  <xi:include href="HowTo_TranslatePDF.xml"
+  <xi:include href="HowTo_TranslateOtherFiles.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
 <xi:include href="HowTo_CommandLine.xml"

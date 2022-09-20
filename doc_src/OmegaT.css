@@ -6,9 +6,11 @@
     color:#212925;
     text-align:left;
     clip-path: padding-box;
-
 }
 
+#wh-toc a {
+	font-style: normal;
+}
 
 #wh-content div.toc,
 #wh-content header,
@@ -16,7 +18,6 @@
 {
     display:none;
 }
-
 
 .chapter,
 .appendix {
@@ -311,9 +312,9 @@ dd {
 	font-size: 0.9em;
     color: black;
     background: white;
-    border: 1px solid #FFA0A0;
+    border: .1px solid #808080;
     border-radius:5px;
-    margin-bottom:1em;
+    margin:2em 0;
     padding:0 1em;
 
 }
@@ -321,7 +322,7 @@ dd {
 .warning h3 {
     display:inline-block;
     margin:.5em 0 0 0;
-    color:red;
+    color:#ff5555;
 }
 
 
@@ -410,16 +411,26 @@ pre.programlisting {
 /*    padding: 1.2em 0.5em 0 1.5em; */
 }
 
+a[href^="appendix"], a[href^="how.to"] {
+	font-style: italic;
+}
+
 /* gui items */
 
-span.guimenu, span.guimenuitem, span.guibutton, span.guilabel {
-    display:inline-block;
+span.guimenu, span.guimenuitem, span.guilabel {
+	font-style: italic;
+    font-size: 1.2 em;
+    padding: 0 .3rem;
+    margin: 0 .2rem;
+    color: black;
+}
+
+span.guibutton {
     font-family:monospace;
     border: .1px solid black;
     border-radius:4px;
-    padding-left:.3rem;
-    padding-right:.3rem;
-    margin:.2rem;
+    padding: 0 .3rem;
+    margin: 0 .2rem;
     background: whitesmoke;
     color: black;
 }
@@ -431,11 +442,14 @@ span.guimenu, span.guimenuitem, span.guibutton, span.guilabel {
     font-size: .8rem;
     border: 1px solid black;
     border-radius:4px;
-    padding-left:.3rem;
-    padding-right:.3rem;
-    margin:.2rem;
+    margin: 0 .2rem;
     background: gainsboro;
     color: black;
+}
+
+.keycap:nth-of-type(1), .keycap:nth-of-type(2) {
+	padding-left:.3rem;
+	padding-right:1.2rem; 
 }
 
 td>span.keycaps {
@@ -451,32 +465,46 @@ span.term>span.keycap {
 section.section>p>span.keycap:last-of-type {
     background: lightseagreen;
     color: white;
+    border-color: seagreen;
+    padding: 0 .3rem;
 } 
 p span.keycap:last-of-type {
     background: lightseagreen;
     color: white;
+    border-color: seagreen;
+    padding: 0 .3rem;
 }
 dd span.keycap:last-of-type {
     background: lightseagreen;
     color: white;
+    border-color: seagreen;
+    padding: 0 .3rem;
 }
 li.listitem span.keycap:last-of-type {
     background: lightseagreen;
     color: white;
+    border-color: seagreen;
+    padding: 0 .3rem;
 }
 span.term>span.keycap:last-of-type {
     background: lightseagreen;
     color: white;
+    border-color: seagreen;
+    padding: 0 .3rem;
 }
 
 div.example-contents span.keycap:last-of-type {
     background: lightseagreen;
     color: white;
+    border-color: seagreen;
+    padding: 0 .3rem;
 }
 
 p > span.keycap:last-child  {
     background: lightseagreen;
     color: white;
+    border-color: seagreen;
+    padding: 0 .3rem;
 }
 
 /* index page */

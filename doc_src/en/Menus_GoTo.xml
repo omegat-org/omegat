@@ -57,13 +57,13 @@
 </term>
 
       <listitem>
-        <para>Moves to the next segment, or to the first segment of the next
-        file if the current segment is the last one in the file.</para>
-		<para>
+		<para>Also:
 		  <keycombo>
 			<keycap>Enter</keycap>
 		  </keycombo>
 		</para>
+        <para>Moves to the next segment, or to the first segment of the next
+        file if the current segment is the last one in the file.</para>
 
         <note><para><keycap>TAB</keycap> can be used as an
         alternate shortcut if the <link
@@ -75,19 +75,19 @@
     </varlistentry>
 
     <varlistentry id="menus.goto.previous.segment">
-      <term id="menus.goto.previous.segment.title">Previous Segment</term>
-      <listitem>
-        <para>Moves to the previous segment, or to the last segment of the previous
-        file if the current segment is the first one in the file.</para>
-		<para>
-		  <keycombo>
+      <term id="menus.goto.previous.segment.title">Previous Segment		  <keycombo>
 			<keycap>C</keycap><keycap>P</keycap>
 		  </keycombo>
-		</para>
-		<para>
+</term>
+      <listitem>
+		<para>Also:
 		  <keycombo>
 			<keycap>C</keycap><keycap>Enter</keycap>
 		  </keycombo>
+		</para>
+        <para>Moves to the previous segment, or to the last segment of the previous
+        file if the current segment is the first one in the file.</para>
+		<para>
 		</para>
 
         <note><para><keycombo><keycap>C</keycap><keycap>TAB</keycap></keycombo>

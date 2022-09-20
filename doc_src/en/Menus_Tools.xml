@@ -3,8 +3,10 @@
 "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="menus.tools">
   <title id="menus.tools.title">Tools</title>
+
   <note>
-	<para>Key shortcut description reminder: <link linkend="appendix.shortcut" endterm="shortcut.description"/></para>
+	<para>Key shortcut description reminder: <link linkend="appendix.shortcut"
+	endterm="shortcut.description"/></para>
 	<example><title id="example.check.issues.title">Check Issues...</title>
 	<para>In this manual:
 	<keycombo><keycap>C</keycap><keycap>S</keycap><keycap>V</keycap></keycombo>
@@ -33,20 +35,31 @@
         <para>Four types of issues can be detected:</para>
         <itemizedlist>
           <listitem>
-            <para>missing or displaced tags, including <link
-            linkend="dialogs.preferences.tag.processing">custom tags</link>.
-            The <guilabel>Tag Issues</guilabel> option is always
-            selected.</para>
+            <para><guilabel>Tag Issues</guilabel> (always selected): detects
+            missing or displaced tags, including custom tags and controlled
+            strings. See <link linkend="dialogs.preferences.tag.processing"
+            endterm="dialogs.preferences.tag.processing.title"/> for details.
+            The option is always selected.</para>
           </listitem>
           <listitem>
-            <para><guilabel>Spelling Issues</guilabel> (optional). Only works
-            if a spelling dictionary is installed.</para>
+            <para><guilabel>Spelling Issues</guilabel> (optional): detects
+            spelling mistakes. Only works if a spelling dictionary is
+            installed. See <link linkend="dialog.preferences.spellchecker"
+            endterm="dialog.preferences.spellchecker.title"/> for
+            details.</para>
           </listitem>
           <listitem>
-            <para><guilabel>Terminology Issues</guilabel> (optional).</para>
+            <para><guilabel>Terminology Issues</guilabel> (optional): detects
+            all the glossary items that are not properly translated. See <link
+            linkend="dialogs.preferences.glossary"
+            endterm="dialogs.preferences.glossary.title"/> for details.</para>
           </listitem>
           <listitem>
-            <para><guilabel>LanguageTool Issues</guilabel> (optional).</para>
+            <para><guilabel>LanguageTool Issues</guilabel> (optional): detects
+            grammatical or typographical issues. See <link
+            linkend="dialog.preferences.languagetool.plugin"
+            endterm="dialog.preferences.languagetool.plugin.title"/> for
+            details.</para>
           </listitem>
         </itemizedlist>
         <para>The results are presented as a table in which:</para>
@@ -82,6 +95,9 @@
         <para>Opens a new window and displays project statistics such as the
         overall project word count or segment totals, and totals for every file
         in the project.</para>
+		<para>The data is also saved as a text file in <link
+		linkend="project.folder.omegat.folder"
+		endterm="project.folder.omegat.folder.title"/>.</para>
       </listitem>
     </varlistentry>
 
@@ -91,6 +107,9 @@
         <para>Displays the Match Statistics for the project: the number of
         repetitions, exact matches, fuzzy matches and no-matches for segments,
         words and characters.</para>
+		<para>The data is also saved as a text file in <link
+		linkend="project.folder.omegat.folder"
+		endterm="project.folder.omegat.folder.title"/>.</para>
       </listitem>
     </varlistentry>
 	
@@ -100,6 +119,9 @@
         <para>Displays the Match Statistics for each file of the project: the
         number of repetitions, exact matches, fuzzy matches and no-matches for
         segments, words and characters.</para>
+		<para>The data is also saved as a text file in <link
+		linkend="project.folder.omegat.folder"
+		endterm="project.folder.omegat.folder.title"/>.</para>
       </listitem>
     </varlistentry>
 
@@ -108,8 +130,7 @@
       <listitem>
         <para>Select the two files to align (the source file and its
         translation) and click OK to open the <link
-        linkend="windows.aligner"><guilabel>Align</guilabel>
-        window</link>.</para>
+        linkend="windows.aligner" endterm="windows.aligner.title"/> window.</para>
         <para>The supported file formats are the same as those listed in <link
         linkend="dialogs.preferences.file.filters"
         endterm="dialogs.preferences.file.filters.title"/>.</para>

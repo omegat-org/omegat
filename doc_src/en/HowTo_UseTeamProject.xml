@@ -4,19 +4,20 @@
 <section id="how.to.use.team.project">
   <title id="how.to.use.team.project.title">Use a Team Project</title>
 
-  <para>OmegaT team projects must first be <link linkend="how.to.setup.team.project">set up</link> on a server.</para>
+  <para>OmegaT team projects must first be <link
+  linkend="how.to.setup.team.project">set up</link> on a server.</para>
 
-  <para>To use a team project for the first time, follow the procedure
-  provided by the project manager.</para>
+  <para>To use a team project for the first time, follow the procedure provided
+  by the project manager.</para>
 
   <para>Once the project has been opened, translation proceeds in the same way
   as for a non-team project, except the following points.</para>
 
   <para><emphasis role="bold">Automatic saving</emphasis></para>
 
-  <para>Every 3 minutes (by default), the local project is synchronized with
-  the remote repository so that the project manager or other translators can
-  see and use translations added during that period.</para>
+  <para>Every 3 minutes (by default), the local project is synchronized with the
+  remote repository so that the project manager or other translators can see and
+  use translations added during that period.</para>
 
   <para>The interval of 3 minutes can be changed in <link linkend="dialogs.preferences.saving.and.output"><menuchoice>
       <guimenu>Options</guimenu>
@@ -28,9 +29,8 @@
 
   <para><emphasis role="bold">Synchronized files</emphasis></para>
 
-  <para>Whenever the project is automatically saved, but also when it is
-  opened, closed and reloaded, only two files are actually
-  synchronized:</para>
+  <para>Whenever the project is automatically saved, but also when it is opened,
+  closed and reloaded, only two files are actually synchronized:</para>
 
   <itemizedlist>
     <listitem>
@@ -42,8 +42,82 @@
     </listitem>
   </itemizedlist>
 
-  <para>All other files will be replaced by the files in the remote
-  repository.</para>
+  <para>All other files will be replaced by the files in the remote repository
+  except for team project configuration described belows.</para>
+
+  <para><emphasis role="bold">Team project configuration</emphasis></para>
+
+  <itemizedlist>
+    <listitem>
+      <para>When the project is downloaded at first, OmegaT download
+      omegat.project file from remote project.</para>
+
+      <para>The omegat.project file consist with roughly four part;</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>Basic project configurations such as source/target languages,
+          tokenizers, directory hierarchies. Basic configurations on local
+          project are always override with remote configurations team project
+          manager set.</para>
+        </listitem>
+
+        <listitem>
+          <para>Filter configurations(optional). Filter configurations are
+          customized in filters.conf. Filter configurations on local project are
+          always override with remote configurations that project manager
+          decided.</para>
+        </listitem>
+
+        <listitem>
+          <para> Segmentation rules(optional). Segmentation rules are customized
+          in segmentations.conf. Segmentation rules on local project are always
+          override with remote configurations.</para>
+        </listitem>
+
+        <listitem>
+          <para>Repository mapping.(optional). </para>
+
+          <para>When team project don't have custom repository mapping rules,
+          but local has customized, it is preserved in local and not affected in
+          team.</para>
+
+          <para>When team project have custom repository mapping rules, and user
+          don't have local mappings, remote mapping rules brings to local work
+          project.</para>
+
+          <para>If remote project defines project repository and translator
+          download with another URL with remote configured URL, local
+          configuration is preserved.</para>
+
+          <para>For example, Github and GItlab support multiple access protocols
+          to reach same repository such as ssh+git or https protocols. OmegaT
+          respects local selection of protocol to access team repository.</para>
+
+          <para>If you join team project from separately downloaded
+          omegat.project, OmegaT follows all the mapping configuration in
+          omegat.project file.</para>
+
+          <para>If remote and local omegat.project has difference and happens
+          override, OmegaT create backup file named
+          omegat.project.YYYYMMDDhhmm.bak. backup files are kept at least
+          10. Older backup files will be automatically removed.</para>
+        </listitem>
+      </itemizedlist>
+    </listitem>
+
+    <listitem>
+      <para>When customizing team project configuration like as non-team
+      project, it will be removed and override by remote project. Be
+      caution</para>
+
+      <itemizedlist>
+        <listitem>
+          <para/>
+        </listitem>
+      </itemizedlist>
+    </listitem>
+  </itemizedlist>
 
   <para><emphasis role="bold">Adding new source files</emphasis></para>
 
@@ -51,7 +125,8 @@
 
   <para><orderedlist>
       <listitem>
-        <para>copy the files to the <filename class="directory">source</filename> folder</para>
+        <para>copy the files to the <filename
+        class="directory">source</filename> folder</para>
       </listitem>
 
       <listitem>
@@ -62,17 +137,28 @@
           </menuchoice></para>
       </listitem>
     </orderedlist>Existing source files can be modified, but the commit
-  operation must be carried out before an automatic save and before the
-  project is reloaded or closed.</para>
+    operation must be carried out before an automatic save and before the
+    project is reloaded or closed.</para>
 
   <para><emphasis role="bold">Deleting source files</emphasis></para>
 
   <para>Files must be deleted by the project manager.</para>
 
-  <para><emphasis role="bold">Changing segmentation rules or file
-  filters</emphasis></para>
+  <para><emphasis role="bold">Adding resulted target files</emphasis></para>
 
-  <para>Project parameters must be changed by the project manager.</para>
+  <para>to add translation target files:</para>
+
+  <itemizedlist>
+    <listitem>
+      <para>Generate target file with C-D or Project-&gt;commit target
+      files</para>
+    </listitem>
+  </itemizedlist>
+
+  <para>All generate target files will be updated and commit onto remote
+  repository.</para>
+
+  <para> </para>
 
   <para><emphasis role="bold">Working offline</emphasis></para>
 

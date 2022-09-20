@@ -122,13 +122,12 @@ dependencies {
         implementation 'tokyo.northside:url-protocol-handler:0.1.4'
 
         // PDF Filter
-        implementation 'org.apache.pdfbox:pdfbox:2.0.24'
+        implementation 'org.apache.pdfbox:pdfbox:2.0.26'
 
         // Aligner
         implementation 'net.loomchild:maligna:3.0.1'
 
         // Dictionary
-        implementation 'io.github.dictzip:dictzip:0.12.2'
         implementation 'com.github.takawitter:trie4j:0.9.8'
         implementation 'io.github.eb4j:dsl4j:0.5.2'
         implementation 'io.github.eb4j:stardict4j:0.3.2'
@@ -193,12 +192,12 @@ dependencies {
         runtimeOnly 'org.apache.ivy:ivy:2.5.0'
 
         // Script editor
-        implementation 'com.fifesoft:rsyntaxtextarea:3.0.8'
-        implementation 'com.fifesoft:rstaui:3.0.4'
-        implementation ('com.fifesoft:languagesupport:3.0.2') {
+        implementation 'com.fifesoft:rsyntaxtextarea:3.2.0'
+        implementation 'com.fifesoft:rstaui:3.2.0'
+        implementation ('com.fifesoft:languagesupport:3.1.4') {
             exclude module: 'rhino'
         }
-        implementation 'com.fifesoft:autocomplete:3.0.5'
+        implementation 'com.fifesoft:autocomplete:3.2.0'
 
         // Moses MT connector
         implementation 'org.apache.xmlrpc:xmlrpc-client:3.1.3'

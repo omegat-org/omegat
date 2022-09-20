@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="how.to.translate.other.files">
+  <title id="how.to.translate.other.files.title">Translate files in formats not
+  supported by OmegaT</title>
+
+  <para>There are four ways to support file formats that OmegaT does not natively support:
+
+  <variablelist>
+	<varlistentry>
+	  <term>The conversion</term>
+	  <listitem>
+		<para></para>
+	  </listitem>
+	</varlistentry>
+	
+	<varlistentry>
+	  <term>The plugin</term>
+	  <listitem>
+		<para></para>
+	  </listitem>
+	</varlistentry>
+
+	<varlistentry>
+	  <term>The transformation</term>
+	  <listitem>
+		<para></para>
+	  </listitem>
+	</varlistentry>
+
+	<varlistentry>
+	  <term>The development</term>
+	  <listitem>
+		<para></para>
+	  </listitem>
+	</varlistentry>
+  </variablelist>
+  </para>
+</section>

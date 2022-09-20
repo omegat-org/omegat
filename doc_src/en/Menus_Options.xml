@@ -45,10 +45,10 @@
     <varlistentry id="menus.options.autocompletion">
       <term id="menus.options.autocompletion.title">Auto-completion</term>
       <listitem>
-        <para>If the <guimenuitem>Show Relevant Suggestions
-        Automatically</guimenuitem> option is checked, the auto-completer is
-        triggered automatically by typing the first letters of a glossary entry,
-        or &quot;&lt;&quot; for tags.</para>
+        <para>Check <guimenuitem>Show Relevant Suggestions
+        Automatically</guimenuitem> to automatically trigger the auto-completer
+        by typing the first letters of a glossary entry, or &quot;&lt;&quot; for
+        tags.</para>
         <para>Check <guimenuitem>History Completion</guimenuitem> to display
         suggested words as soon as their first letters are entered.</para>
         <para>Check <guimenuitem>History Prediction</guimenuitem> to display
@@ -60,9 +60,12 @@
     <varlistentry id="menus.options.file.filters">
       <term id="menus.options.file.filters.title">File Filters...</term>
       <listitem>
-        <para>Opens the <link linkend="dialogs.preferences.file.filters">File
-        Filters</link> options in the Preferences dialog.</para>
-        <para>These are general OmegaT settings that to all projects.</para>
+        <para>Opens the <link linkend="dialogs.preferences.file.filters"
+        endterm="dialogs.preferences.file.filters.title"/> global preference
+        dialog.</para>
+        <para>Project specific settings are accessible with <link
+        linkend="menus.project.properties"
+        endterm="menus.project.properties.title"/>.</para>
       </listitem>
     </varlistentry>
 
@@ -70,18 +73,19 @@
       <term id="menus.options.segmentation.title">Segmentation...</term>
       <listitem>
         <para>Opens the <link linkend="dialogs.preferences.segmentation.setup"
-        endterm="dialogs.preferences.segmentation.setup.title"/> options in the
-        Preferences dialog.</para>
-        <para>These are general OmegaT settings that to all projects.</para>
+        endterm="dialogs.preferences.segmentation.setup.title"/> global
+        preference dialog.</para>
+        <para>Project specific settings are accessible with <link
+        linkend="menus.project.properties"
+        endterm="menus.project.properties.title"/>.</para>
       </listitem>
     </varlistentry>
 
     <varlistentry id="menus.options.editor">
       <term id="menus.options.editor.title">Editor...</term>
       <listitem>
-        <para>Opens the <link linkend="dialogs.preferences.editor">Editor</link>
-        options in the Preferences dialog.</para>
-        <para>These are general OmegaT settings that to all projects.</para>
+        <para>Opens the <link linkend="dialogs.preferences.editor"
+        endterm="dialogs.preferences.editor.title"/> preferences dialog.</para>
       </listitem>
     </varlistentry>
 
@@ -89,7 +93,11 @@
       <term id="menus.options.access.configuration.folder.title">Access
       Configuration Folder</term>
       <listitem>
-        <para>Opens the local folder where OmegaT configuration files are stored (the location depends on the operating system and launch options).</para>
+        <para>Opens the local folder where OmegaT configuration files are
+        stored.</para>
+		<note><para>The location depends on the operating system and launch
+		options. See <link linkend="configuration.folder"
+		endterm="configuration.folder.title"/> for details.</para></note>
       </listitem>
     </varlistentry>
   </variablelist>

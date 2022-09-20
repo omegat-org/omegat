@@ -3,6 +3,15 @@
 <section id="dialogs.project.properties">
   <title id="dialogs.project.properties.title">Project Properties</title>
 
+<section id="dialogs.project.properties.create.new.project">
+  <title id="dialogs.project.properties.create.new.project.title">Create New Project</title>
+
+  <para>This dialog opens when you create a new project, after you have named
+  it. The dialog is otherwise the same as the <link
+  linkend="dialogs.project.properties"
+  endterm="dialogs.project.properties.title"/> described here.</para>
+</section>
+  
   <para>This dialog is accessible by selecting <link
   linkend="menus.project.properties" endterm="menus.project.properties.title"/>
   in the <link linkend="menus.project" endterm="menus.project.title"/>

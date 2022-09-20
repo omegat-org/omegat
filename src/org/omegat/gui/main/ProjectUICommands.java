@@ -50,6 +50,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang.builder.EqualsBuilder;
 
 import org.omegat.CLIParameters;
 import org.omegat.convert.ConvertProject;
@@ -346,10 +347,10 @@ public final class ProjectUICommands {
                 if (props.getRepositories() == null) { // We assume it's a project with no repository mapping,
                     props.setRepositories(repos);      // so we add root repository mapping
                 } else {
-                    String remoteUrl = getRootGitRepositoryMapping(props.getRepositories());
-                    if (remoteUrl != null && !remoteUrl.equals(repo.getUrl())) {
+                    RepositoryDefinition remoteRepo = getRootGitRepositoryMapping(props.getRepositories());
+                    if (isRepositoryEquals(remoteRepo, repo)) {
                         // when remote repository config is different with opening url, respect local one
-                        setRootGitRepositoryMapping(props.getRepositories(), repo.getUrl());
+                        setRootGitRepositoryMapping(props.getRepositories(), repo);
                     }
                 }
                 // We write in all cases, because we might have added default excludes, for instance
@@ -489,7 +490,7 @@ public final class ProjectUICommands {
                         */
                         if (!Core.getParams().containsKey(CLIParameters.NO_TEAM)) {
                             ProjectProperties localProps = props;
-                            List<RepositoryDefinition> repos = props.getRepositories();
+                            List<RepositoryDefinition> localRepos = props.getRepositories();
                             mainWindow.showStatusMessageRB("TEAM_OPEN");
                             try {
                                 RemoteRepositoryProvider remoteRepositoryProvider = new RemoteRepositoryProvider(
@@ -504,15 +505,18 @@ public final class ProjectUICommands {
                                 // Here, 'props' is the REMOTE project setting read from the remote omegat.project
                                 if (props.getRepositories() == null) {  // We have a project without mapping
                                     Log.logInfoRB("TF_REMOTE_PROJECT_LACKS_GIT_SETTING");
-                                    props.setRepositories(repos); // So we restore the mapping we just lost
+                                    props.setRepositories(localRepos); // So we restore the mapping we just lost
                                 } else {
                                     // use mapping from remote configuration but
                                     // override repository URL when project URL is git type
                                     // when there is difference between local and remote config.
-                                    String repoUrl = getRootGitRepositoryMapping(repos);
-                                    String newUrl = getRootGitRepositoryMapping(props.getRepositories());
-                                    if (repoUrl != null && !repoUrl.equals(newUrl)) {
-                                        setRootGitRepositoryMapping(props.getRepositories(), repoUrl);
+                                    RepositoryDefinition localRootRepository =
+                                            getRootGitRepositoryMapping(localRepos);
+                                    RepositoryDefinition newRepository =
+                                            getRootGitRepositoryMapping(props.getRepositories());
+                                    if (!isRepositoryEquals(localRootRepository, newRepository)) {
+                                        setRootGitRepositoryMapping(props.getRepositories(),
+                                                localRootRepository);
                                     }
                                 }
                                 needToSaveProperties = !props.equals(localProps);
@@ -587,25 +591,48 @@ public final class ProjectUICommands {
     }
 
 
-    private static String getRootGitRepositoryMapping(List<RepositoryDefinition> repos) {
-        String repoUrl = null;
-        for (RepositoryDefinition definition : repos) {
-            if (definition.getMapping().get(0).getLocal().equals("/") && definition.getMapping().get(0).getRepository().equals("/") && definition.getType().equals("git")) {
-                repoUrl = definition.getUrl();
-                break;
-            }
+    private static String getRootGitRepositoryMappingUrl(List<RepositoryDefinition> repos) {
+        RepositoryDefinition repositoryDefinition = getRootGitRepositoryMapping(repos);
+        if (repositoryDefinition == null) {
+            return null;
         }
-        return repoUrl;
+        return repositoryDefinition.getUrl();
     }
 
-    private static void setRootGitRepositoryMapping(List<RepositoryDefinition> repos, String repoUrl) {
+    private static RepositoryDefinition getRootGitRepositoryMapping(List<RepositoryDefinition> repos) {
+        RepositoryDefinition repositoryDefinition = null;
         for (RepositoryDefinition definition : repos) {
             if (definition.getMapping().get(0).getLocal().equals("/") && definition.getMapping().get(0).getRepository().equals("/") && definition.getType().equals("git")) {
-                definition.setUrl(repoUrl);
-                repos.set(0, definition);
+                repositoryDefinition = definition;
                 break;
             }
         }
+        return repositoryDefinition;
+    }
+
+    private static void setRootGitRepositoryMapping(List<RepositoryDefinition> repos,
+                                                    RepositoryDefinition repositoryDefinition) {
+        if (repositoryDefinition == null) {
+            return;
+        }
+        RepositoryDefinition originalRepositoryDefinition = getRootGitRepositoryMapping(repos);
+        if (originalRepositoryDefinition == null) {
+            return;
+        }
+        originalRepositoryDefinition.setType(repositoryDefinition.getType());
+        originalRepositoryDefinition.setUrl(repositoryDefinition.getUrl());
+        originalRepositoryDefinition.setBranch(repositoryDefinition.getBranch());
+    }
+
+    private static boolean isRepositoryEquals(RepositoryDefinition a, RepositoryDefinition b) {
+        if (a == null || b == null) {
+            return false;
+        }
+        return new EqualsBuilder()
+                .append(a.getType(), b.getType())
+                .append(a.getUrl(), b.getUrl())
+                .append(a.getBranch(), b.getBranch())
+                .isEquals();
     }
 
     /**

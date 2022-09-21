@@ -480,9 +480,19 @@ public final class TestTeamIntegration {
 
         public SvnTeam(File dir, String url) throws Exception {
             this.dir = dir;
+            String predefinedUser = null;
+            String predefinedPass = null;
+            String userInfo = SVNURL.parseURIEncoded(url).getUserInfo();
+            if (userInfo != null) {
+                if (userInfo.indexOf(":") > 0) {
+                    predefinedUser = userInfo.substring(0, userInfo.indexOf(":"));
+                    predefinedPass = userInfo.substring(userInfo.indexOf(":") + 1);
+                } else {
+                    predefinedUser = userInfo;
+                }
+            }
             ISVNOptions options = SVNWCUtil.createDefaultOptions(true);
-            ISVNAuthenticationManager authManager = new SVNAuthenticationManager(url,
-                    SVNURL.parseURIEncoded(url).getUserInfo(), null, null);
+            ISVNAuthenticationManager authManager = new SVNAuthenticationManager(url, predefinedUser, predefinedPass, null);
             ourClientManager = SVNClientManager.newInstance(options, authManager);
         }
 

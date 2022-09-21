@@ -128,7 +128,7 @@ public final class TestTeamIntegrationChild {
             ProjectProperties projectProperties = ProjectFileStorage.loadProjectProperties(new File(dir));
             projectProperties.autocreateDirectories();
             String remoteRepoUrl = getRootGitRepositoryMapping(projectProperties.getRepositories());
-            if (!remoteRepoUrl.equals(repo)) {
+            if (!repo.equals(remoteRepoUrl)) {
                 setRootGitRepositoryMapping(projectProperties.getRepositories(), repo);
             }
 

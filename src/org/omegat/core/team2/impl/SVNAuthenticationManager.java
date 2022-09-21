@@ -116,7 +116,11 @@ public class SVNAuthenticationManager implements ISVNAuthenticationManager {
             // auth type not supported for OmegaT
             throw new SVNException(SVNErrorMessage.create(SVNErrorCode.RA_UNKNOWN_AUTH));
         }
-
+        if (Core.getMainWindow() == null) {
+            // run on headless.
+            Log.log("called ask in headless mode. return null");
+            return null;
+        }
         SVNUserPassDialog userPassDialog = new SVNUserPassDialog(Core.getMainWindow().getApplicationFrame());
         userPassDialog.setLocationRelativeTo(Core.getMainWindow().getApplicationFrame());
         userPassDialog.descriptionTextArea.setText(message);

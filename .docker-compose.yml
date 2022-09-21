@@ -2,16 +2,19 @@ version: '3'
 services:
   server:
     build: test-integration/docker/server
-    expose:
-      - "22"
     volumes:
       - keygen:/keys
     tmpfs:
       - /tmp
+  svnserver:
+    image: omegatorg/httpd-svn
+    environment:
+      SVN_REPO_NAME: omegat-test
   client:
     build: test-integration/docker/client
     depends_on:
       - server
+      - svnserver
     volumes:
       - .:/code
       - keygen:/keys
@@ -19,8 +22,8 @@ services:
       - /tmp
     environment:
       DURATION: ${DURATION:-2400}
-      REPO: "git@server:omegat-test.git"
-      ALTREPO: "https://git:gitpass@server/omegat-test.git"
+      REPO: ${REPO:-git@server:omegat-test.git}
+      ALTREPO: ${ALTREPO:-https://git:gitpass@server/omegat-test.git}
       MAPREPO: "http://server/"
       MAPFILE: "README"
 volumes:

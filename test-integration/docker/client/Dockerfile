@@ -25,7 +25,7 @@
 #
 
 FROM debian:bullseye-slim
-RUN apt-get -y update && apt-get upgrade -y && apt-get install -y openssh-client git openjdk-11-jdk inotify-tools curl
+RUN apt-get -y update && apt-get upgrade -y && apt-get install -y openssh-client git openjdk-11-jdk inotify-tools curl subversion
 RUN adduser --disabled-password --gecos "" --home /home/omegat --shell /bin/bash omegat && mkdir -p /home/omegat/.ssh
 COPY ssh_config /home/omegat/.ssh/config
 RUN chmod 700 /home/omegat/.ssh && chown -R omegat /home/omegat
@@ -36,7 +36,7 @@ CMD ([ -f /keys/id_rsa ] || inotifywait -e attrib /keys ) \
   && cp /keys/id_rsa /home/omegat/.ssh/id_rsa \
   && chmod 600 /home/omegat/.ssh/id_rsa && chown omegat /home/omegat/.ssh/id_rsa \
   && touch /home/omegat/.ssh/known_hosts \
-  && git config --global user.name example && git config --global user.email ex@example.com \
+  && git config --global user.name example && git config --global user.email git@example.com \
   && git config --global http.sslVerify false \
   && echo "start test-integration" \
   && (cd /code \

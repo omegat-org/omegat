@@ -36,6 +36,7 @@ COPY git-http-backend-wrapper.cgi /var/www/git/
 RUN chmod 755 /var/www/git/git-http-backend-wrapper.cgi \
     && touch /home/git/.ssh/authorized_keys && chmod 600 /home/git/.ssh/authorized_keys \
     && mkdir -p /tmp/template && git init /tmp/template && echo "source content" > /tmp/template/README \
+    && echo "* -text" > /tmp/template/.gitattributes \
     && (cd /tmp/template && git config user.name git && git config user.email git@example.com \
         && git config init.defaultBranch main && git add . && git commit -m first ) \
     && git clone /tmp/template /home/git/omegat-test.git --bare \

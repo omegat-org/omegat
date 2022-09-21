@@ -31,36 +31,30 @@
   <itemizedlist>
     <listitem>
       <para><guimenu>File</guimenu> &gt; <guimenuitem>Search for
-      Selection</guimenuitem> (<keycombo> <keycap>C</keycap> <keycap>F</keycap>
-      </keycombo>): the current selection is inserted in the search
+      Selection</guimenuitem> (<keycombo><keycap>C</keycap><keycap>F</keycap></keycombo>): the current selection is inserted in the search
       field.</para>
     </listitem>
 
     <listitem>
       <para><guimenu>File</guimenu> &gt; <guimenuitem>Close</guimenuitem>
-      (<keycombo> <keycap>C</keycap> <keycap>W</keycap> </keycombo>): close the
+      (<keycombo><keycap>C</keycap><keycap>W</keycap></keycombo>): close the
       search window.</para>
     </listitem>
 
     <listitem>
       <para><guimenu>Edit</guimenu> &gt; <guimenuitem>Insert
-      Source</guimenuitem> (<keycombo> <keycap>S</keycap> <keycap>C</keycap>
-      <keycap>I</keycap> </keycombo>): insert the content of the current source
+      Source</guimenuitem> (<keycombo><keycap>C</keycap><keycap>S</keycap><keycap>I</keycap></keycombo>): insert the content of the current source
       segment.</para>
     </listitem>
 
     <listitem>
       <para><guimenu>Edit</guimenu> &gt; <guimenuitem>Replace with
-      Source</guimenuitem> (<keycombo> <keycap>S</keycap>
-      <keycap>C</keycap><keycap>R</keycap> </keycombo>): replace the contents of
+      Source</guimenuitem> (<keycombo><keycap>C</keycap><keycap>S</keycap><keycap>R</keycap></keycombo>): replace the contents of
       the search field with those of the current source segment.</para>
     </listitem>
 
     <listitem>
-      <para><guimenu>Edit </guimenu>&gt; <guimenuitem>Create Glossary Entry</guimenuitem> (<keycombo>
-          <keycap>S</keycap>
-          <keycap>C</keycap>
-          <keycap>G</keycap> </keycombo>): add a new glossary item. See <link
+      <para><guimenu>Edit </guimenu>&gt; <guimenuitem>Create Glossary Entry</guimenuitem> (<keycombo><keycap>C</keycap><keycap>S</keycap><keycap>G</keycap></keycombo>): add a new glossary item. See <link
           linkend="menus.edit.create.glossary.entry"
           endterm="menus.edit.create.glossary.entry.title"/> for details.</para>
     </listitem>

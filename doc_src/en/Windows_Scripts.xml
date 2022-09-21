@@ -55,8 +55,7 @@
         <para>You can then left-click on the number to run its assigned
         script. You can also run an assigned script from the <link
         linkend="menus.tools.scripting" endterm="menus.tools.scripting.title"/>
-        menu by selecting the applicable or by pressing the associated shortcut (<keycombo>
-        <keycap>C</keycap><keycap>A</keycap><keycap>F1 to
+        menu by selecting the applicable or by pressing the associated shortcut (<keycombo><keycap>C</keycap><keycap>A</keycap><keycap>F1 to
         F12</keycap></keycombo>).</para>
       </listitem>
     </itemizedlist>

@@ -7,27 +7,19 @@
   linkend="appendix.shortcut" endterm="shortcut.description"/></para>
       <example><title id="example.new.project.shortcut.title">New...</title>
   		<para>In this manual:
-		  <keycombo>
-			<keycap>C</keycap><keycap>S</keycap><keycap>N</keycap>
-		  </keycombo>
+		  <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>N</keycap></keycombo>
 		</para>
 		<para>On Windows and Linux:
-		  <keycombo>
-			<keycap>Shift</keycap><keycap>Control</keycap><keycap>N</keycap>
-		  </keycombo>
+		  <keycombo><keycap>Shift</keycap><keycap>Control</keycap><keycap>N</keycap></keycombo>
 		</para>
 		<para>On macOS:
-		  <keycombo>
-			<keycap>Shift</keycap><keycap>Command</keycap><keycap>N</keycap>
-		  </keycombo>
+		  <keycombo><keycap>Shift</keycap><keycap>Command</keycap><keycap>N</keycap></keycombo>
 		</para>
 		</example></note>
   
   <variablelist>
     <varlistentry id="menus.project.new">
-      <term id="menus.project.new.title">New...		  <keycombo>
-			<keycap>C</keycap><keycap>S</keycap><keycap>N</keycap>
-		  </keycombo>
+      <term id="menus.project.new.title">New...		  <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>N</keycap></keycombo>
 </term>
       <listitem>
         <para>Creates and opens a new project. See <link
@@ -45,9 +37,7 @@
     </varlistentry>
 
     <varlistentry id="menus.project.open">
-      <term id="menus.project.open.title">Open... <keycombo>
-			<keycap>C</keycap><keycap>O</keycap>
-		  </keycombo></term>
+      <term id="menus.project.open.title">Open... <keycombo><keycap>C</keycap><keycap>O</keycap></keycombo></term>
       <listitem>
         <para>Opens a previously created project.</para>
       </listitem>
@@ -102,9 +92,7 @@
     </varlistentry>
 
     <varlistentry id="menus.project.reload">
-      <term id="menus.project.reload.title">Reload		  <keycombo>
-			<keycap>F5</keycap>
-		  </keycombo>
+      <term id="menus.project.reload.title">Reload		  <keycombo><keycap>F5</keycap></keycombo>
 </term>
       <listitem>
         <para>Reloads the project to take external changes in source files and
@@ -120,9 +108,7 @@
     </varlistentry>
 
     <varlistentry id="menus.project.close">
-      <term id="menus.project.close.title">Close		  <keycombo>
-			<keycap>C</keycap><keycap>S</keycap><keycap>W</keycap>
-		  </keycombo>
+      <term id="menus.project.close.title">Close		  <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>W</keycap></keycombo>
 </term>
       <listitem>
         <para>Saves the translation and closes the project.</para>
@@ -130,9 +116,7 @@
     </varlistentry>
 
     <varlistentry id="menus.project.save">
-      <term id="menus.project.save.title">Save		  <keycombo>
-			<keycap>C</keycap><keycap>S</keycap>
-		  </keycombo>
+      <term id="menus.project.save.title">Save		  <keycombo><keycap>C</keycap><keycap>S</keycap></keycombo>
 </term>
       <listitem>
         <para>Saves the internal translation memory to the hard disk. See <link
@@ -166,9 +150,7 @@
     </varlistentry>
 
     <varlistentry id="menus.project.create.translated.documents">
-      <term id="menus.project.create.translated.documents.title">Create Translated Documents		  <keycombo>
-			<keycap>C</keycap><keycap>D</keycap>
-		  </keycombo>
+      <term id="menus.project.create.translated.documents.title">Create Translated Documents		  <keycombo><keycap>C</keycap><keycap>D</keycap></keycombo>
 </term>
       <listitem>
         <para>Creates the target documents based on your translation. The
@@ -180,9 +162,7 @@
     </varlistentry>
 
     <varlistentry id="menus.project.create.current.translated.document">
-      <term id="menus.project.create.current.translated.document.title">Create Current Translated Document		  <keycombo>
-			<keycap>C</keycap><keycap>S</keycap><keycap>D</keycap>
-		  </keycombo>
+      <term id="menus.project.create.current.translated.document.title">Create Current Translated Document		  <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>D</keycap></keycombo>
 </term>
       <listitem>
         <para>Creates the target document corresponding to source document currently being translated. The resulting document is located in the <link
@@ -211,9 +191,7 @@
     </varlistentry>
 
     <varlistentry id="menus.project.properties">
-      <term id="menus.project.properties.title">Properties...		  <keycombo>
-			<keycap>C</keycap><keycap>E</keycap>
-		  </keycombo>
+      <term id="menus.project.properties.title">Properties...		  <keycombo><keycap>C</keycap><keycap>E</keycap></keycombo>
 </term>
       <listitem>
         <para>Displays the <link linkend="dialogs.project.properties">Project
@@ -225,9 +203,7 @@
     </varlistentry>
 
     <varlistentry id="menus.project.project.files">
-      <term id="menus.project.project.files.title">Project Files...		  <keycombo>
-			<keycap>C</keycap><keycap>L</keycap>
-		  </keycombo>
+      <term id="menus.project.project.files.title">Project Files...		  <keycombo><keycap>C</keycap><keycap>L</keycap></keycombo>
 </term>
       <listitem>
         <para>Opens the <link linkend="windows.project.files">Project
@@ -298,9 +274,7 @@
     </varlistentry>
 
     <varlistentry id="menus.project.quit">
-      <term id="menus.project.quit.title">Quit		  <keycombo>
-			<keycap>C</keycap><keycap>Q</keycap>
-		  </keycombo>
+      <term id="menus.project.quit.title">Quit		  <keycombo><keycap>C</keycap><keycap>Q</keycap></keycombo>
 </term>
       <listitem>
         <para>Saves the project and quits OmegaT. You are asked to confirm that you really want to quit if you have not yet saved the project.</para>

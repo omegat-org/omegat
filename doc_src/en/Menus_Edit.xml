@@ -37,9 +37,7 @@
     </varlistentry>
 
     <varlistentry id="menus.edit.redo.last.action">
-      <term id="menus.edit.redo.last.action.title">Redo Last Action <keycombo>
-	  <keycap>C</keycap><keycap>Y</keycap>
-	</keycombo>
+      <term id="menus.edit.redo.last.action.title">Redo Last Action <keycombo><keycap>C</keycap><keycap>Y</keycap></keycombo>
 	  </term>
       <listitem>
         <para>Restores the status before the last editing action was
@@ -49,9 +47,7 @@
     </varlistentry>
 
     <varlistentry id="menus.edit.replace.with.match.or.selection">
-      <term id="menus.edit.replace.with.match.or.selection.title">Replace With Match or Selection		  <keycombo>
-	  <keycap>C</keycap><keycap>R</keycap>
-	</keycombo>
+      <term id="menus.edit.replace.with.match.or.selection.title">Replace With Match or Selection		  <keycombo><keycap>C</keycap><keycap>R</keycap></keycombo>
 	  </term>
       <listitem>
         <para>Replaces the entire target segment with the currently selected
@@ -65,9 +61,7 @@
     </varlistentry>
 
     <varlistentry id="menus.edit.insert.match.or.selection">
-      <term id="menus.edit.insert.match.or.selection.title">Insert Match or Selection		  <keycombo>
-	  <keycap>C</keycap><keycap>I</keycap>
-	</keycombo>
+      <term id="menus.edit.insert.match.or.selection.title">Insert Match or Selection		  <keycombo><keycap>C</keycap><keycap>I</keycap></keycombo>
 	  </term>
       <listitem>
         <para>Inserts the currently selected fuzzy match at the cursor
@@ -82,9 +76,7 @@
     </varlistentry>
 
     <varlistentry id="menus.edit.replace.with.mt">
-      <term id="menus.edit.replace.with.mt.title">Replace with Machine Translation		  <keycombo>
-	  <keycap>C</keycap><keycap>M</keycap>
-	</keycombo>
+      <term id="menus.edit.replace.with.mt.title">Replace with Machine Translation		  <keycombo><keycap>C</keycap><keycap>M</keycap></keycombo>
 	  </term>
       <listitem>
         <para>Replaces the target segment with the translation, provided by the
@@ -97,9 +89,7 @@
     </varlistentry>
 
     <varlistentry id="menus.edit.replace.with.source">
-      <term id="menus.edit.replace.with.source.title">Replace with Source		  <keycombo>
-	  <keycap>C</keycap><keycap>S</keycap><keycap>R</keycap>
-	</keycombo>
+      <term id="menus.edit.replace.with.source.title">Replace with Source		  <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>R</keycap></keycombo>
 	  </term>
       <listitem>
         <para>Replaces the entire target segment with the segment source.</para>
@@ -107,9 +97,7 @@
     </varlistentry>
 
     <varlistentry id="menus.edit.insert.source">
-      <term id="menus.edit.insert.source.title">Insert Source		  <keycombo>
-	  <keycap>C</keycap><keycap>S</keycap><keycap>I</keycap>
-	</keycombo>
+      <term id="menus.edit.insert.source.title">Insert Source		  <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>I</keycap></keycombo>
 	  </term>
       <listitem>
         <para>Inserts the segment source at the cursor position.</para>
@@ -117,9 +105,7 @@
     </varlistentry>
 
     <varlistentry id="menus.edit.insert.missing.source.tag">
-      <term id="menus.edit.insert.missing.source.tag.title">Insert Missing Source Tags		  <keycombo>
-	  <keycap>C</keycap><keycap>S</keycap><keycap>T</keycap>
-	</keycombo>
+      <term id="menus.edit.insert.missing.source.tag.title">Insert Missing Source Tags		  <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>T</keycap></keycombo>
 	  </term>
       <listitem>
         <para>Inserts the remaining missing source tags at the cursor
@@ -128,9 +114,7 @@
     </varlistentry>
 
     <varlistentry id="menus.edit.insert.next.missing.tag">
-      <term id="menus.edit.insert.next.missing.tag.title">Insert Next Missing Tag		  <keycombo>
-	  <keycap>C</keycap><keycap>T</keycap>
-	</keycombo>
+      <term id="menus.edit.insert.next.missing.tag.title">Insert Next Missing Tag		  <keycombo><keycap>C</keycap><keycap>T</keycap></keycombo>
 	  </term>
       <listitem>
         <para>Inserts the next missing tag at the cursor position.</para>
@@ -138,9 +122,7 @@
     </varlistentry>
 
     <varlistentry id="menus.edit.export.selection">
-      <term id="menus.edit.export.selection.title">Export Selection		  <keycombo>
-	  <keycap>C</keycap><keycap>S</keycap><keycap>C</keycap>
-	</keycombo>
+      <term id="menus.edit.export.selection.title">Export Selection		  <keycombo><keycap>C</keycap><keycap>C</keycap><keycap>S</keycap></keycombo>
 	  </term>
       <listitem>
         <para>Exports the current selection to a text file for processing. If no
@@ -156,9 +138,7 @@
     </varlistentry>
 
     <varlistentry id="menus.edit.create.glossary.entry">
-      <term id="menus.edit.create.glossary.entry.title">Create Glossary Entry		  <keycombo>
-	  <keycap>C</keycap><keycap>S</keycap><keycap>G</keycap>
-	</keycombo>
+      <term id="menus.edit.create.glossary.entry.title">Create Glossary Entry		  <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>G</keycap></keycombo>
 	  </term>
       <listitem>
         <para>Allows the user to create an entry in the default glossary
@@ -171,25 +151,19 @@
 		<orderedlist>
 		  <listitem><para>Select a text string in any pane</para>
 		  <para>Press
-		  <keycombo>
-			<keycap>C</keycap><keycap>S</keycap><keycap>G</keycap>
-		  </keycombo>
+		  <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>G</keycap></keycombo>
 		  </para>
 		  <para>The selection will be entered in the <guilabel>Source
 		  term</guilabel> field.</para></listitem>
 		  <listitem><para>Select a text string in any pane</para>
 		  <para>Press
-		  <keycombo>
-			<keycap>C</keycap><keycap>S</keycap><keycap>G</keycap>
-		  </keycombo>
+		  <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>G</keycap></keycombo>
 		  </para>
 		  <para>The selection will be entered in the <guilabel>Target
 		  term</guilabel> field.</para></listitem>
 		  <listitem><para>[Optional] Select a text string in any pane</para>
 		  <para>Press
-		  <keycombo>
-			<keycap>C</keycap><keycap>S</keycap><keycap>G</keycap>
-		  </keycombo>
+		  <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>G</keycap></keycombo>
 		  </para>
 		  <para>The selection will be entered in the
 		  <guilabel>Comment</guilabel> field. You can also enter your comment
@@ -201,9 +175,7 @@
     </varlistentry>
 
     <varlistentry id="menus.edit.search.project">
-      <term id="menus.edit.search.project.title">Search Project...		  <keycombo>
-	  <keycap>C</keycap><keycap>F</keycap>
-	</keycombo>
+      <term id="menus.edit.search.project.title">Search Project...		  <keycombo><keycap>C</keycap><keycap>F</keycap></keycombo>
 	  </term>
       <listitem>
         <para>Opens a new <link linkend="windows.text.search">Search
@@ -212,19 +184,14 @@
         function, the text will be pasted by default in the <guilabel>Search
         for:</guilabel> field.</para>
 		<para>
-		  <keycombo>
-			<keycap>C</keycap><keycap>S</keycap><keycap>F</keycap>
-		  </keycombo>
+		  <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>F</keycap></keycombo>
 		  reuses the most recent still open Search window (instead of opening a
 		new one).</para>
       </listitem>
     </varlistentry>
 
     <varlistentry id="menus.edit.search.and.replace">
-      <term id="menus.edit.search.and.replace.title">Search and Replace...		  <keycombo>
-      <keycap>C</keycap>
-      <keycap>K</keycap>
-    </keycombo>
+      <term id="menus.edit.search.and.replace.title">Search and Replace...		  <keycombo><keycap>C</keycap><keycap>K</keycap></keycombo>
 	  </term>
       <listitem>
         <para>Opens a new <link linkend="windows.text.replace">Search
@@ -264,10 +231,7 @@
 		  <listitem><para><guilabel>Sentence Case</guilabel></para>
 		  <para>Only the first letter in upper case.</para>
 		  </listitem>
-		  <listitem><para><guilabel>Cycle</guilabel>			<keycombo>
-          <keycap>S</keycap>
-          <keycap>F3</keycap>
-		</keycombo>
+		  <listitem><para><guilabel>Cycle</guilabel>			<keycombo><keycap>S</keycap><keycap>F3</keycap></keycombo>
 	  </para>
 		  </listitem>
 		</itemizedlist>
@@ -281,58 +245,37 @@
 		displayed in the fuzzy match pane to replace or insert it to the
 		segment.</para>
 		<itemizedlist>
-		  <listitem><para><guilabel>Select Previous Match</guilabel> 			<keycombo>
-          <keycap>A</keycap>
-          <keycap>↑</keycap>
-		</keycombo>
+		  <listitem><para><guilabel>Select Previous Match</guilabel> 			<keycombo><keycap>A</keycap><keycap>↑</keycap></keycombo>
 	  </para>
 	  <para>
 	  </para>
 		  </listitem>
-		  <listitem><para><guilabel>Select Next Match</guilabel>			<keycombo>
-          <keycap>A</keycap>
-          <keycap>↓</keycap>
-		</keycombo>
+		  <listitem><para><guilabel>Select Next Match</guilabel>			<keycombo><keycap>A</keycap><keycap>↓</keycap></keycombo>
 	  </para>
 	  <para>
 	  </para>
 		  </listitem>
-		  <listitem><para><guilabel>Select Match #1</guilabel>			<keycombo>
-          <keycap>C</keycap>
-          <keycap>1</keycap>
-		</keycombo>
+		  <listitem><para><guilabel>Select Match #1</guilabel>			<keycombo><keycap>C</keycap><keycap>1</keycap></keycombo>
 	  </para>
 	  <para>
 	  </para>
 		  </listitem>
-		  <listitem><para><guilabel>Select Match #2</guilabel>			<keycombo>
-          <keycap>C</keycap>
-          <keycap>2</keycap>
-		</keycombo>
+		  <listitem><para><guilabel>Select Match #2</guilabel>			<keycombo><keycap>C</keycap><keycap>2</keycap></keycombo>
 	  </para>
 	  <para>
 	  </para>
 		  </listitem>
-		  <listitem><para><guilabel>Select Match #3</guilabel>			<keycombo>
-          <keycap>C</keycap>
-          <keycap>3</keycap>
-		</keycombo>
+		  <listitem><para><guilabel>Select Match #3</guilabel>			<keycombo><keycap>C</keycap><keycap>3</keycap></keycombo>
 	  </para>
 	  <para>
 	  </para>
 		  </listitem>
-		  <listitem><para><guilabel>Select Match #4</guilabel>			<keycombo>
-          <keycap>C</keycap>
-          <keycap>4</keycap>
-		</keycombo>
+		  <listitem><para><guilabel>Select Match #4</guilabel>			<keycombo><keycap>C</keycap><keycap>4</keycap></keycombo>
 	  </para>
 	  <para>
 	  </para>
 		  </listitem>
-		  <listitem><para><guilabel>Select Match #5</guilabel>			<keycombo>
-          <keycap>C</keycap>
-          <keycap>5</keycap>
-		</keycombo>
+		  <listitem><para><guilabel>Select Match #5</guilabel>			<keycombo><keycap>C</keycap><keycap>5</keycap></keycombo>
 	  </para>
 	  <para>
 	  </para>
@@ -403,11 +346,7 @@
 	</varlistentry>
 
 	<varlistentry id="menus.edit.register.identical.translation">
-      <term id="menus.edit.register.identical.translation.title">Register Identical Translation			<keycombo>
-      <keycap>S</keycap>
-      <keycap>C</keycap>
-      <keycap>S</keycap>
-	</keycombo>
+      <term id="menus.edit.register.identical.translation.title">Register Identical Translation			<keycombo><keycap>C</keycap><keycap>S</keycap><keycap>S</keycap></keycombo>
 	  </term>
       <listitem>
 		<para>Use this command to register a translation as identical to the

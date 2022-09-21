@@ -12,22 +12,17 @@
 	<keycombo><keycap>C</keycap><keycap>S</keycap><keycap>V</keycap></keycombo>
 	</para>
 	<para>On Windows and Linux:
-	<keycombo>
-	  <keycap>Shift</keycap><keycap>Control</keycap><keycap>V</keycap>
-	</keycombo>
+	<keycombo><keycap>Shift</keycap><keycap>Control</keycap><keycap>V</keycap></keycombo>
 	</para>
 	<para>On macOS:
-	<keycombo>
-	  <keycap>Shift</keycap><keycap>Command</keycap><keycap>V</keycap>
-	</keycombo>
+	<keycombo><keycap>Shift</keycap><keycap>Command</keycap><keycap>V</keycap></keycombo>
 	</para>
 	</example>
   </note>
 
   <variablelist>
     <varlistentry id="menus.tools.check.issues">
-      <term id="menus.tools.check.issues.title">Check Issues...	<keycombo>
-			<keycap>C</keycap><keycap>S</keycap><keycap>V</keycap></keycombo>
+      <term id="menus.tools.check.issues.title">Check Issues...	<keycombo><keycap>C</keycap><keycap>S</keycap><keycap>V</keycap></keycombo>
 </term>
       <listitem>
         <para>This quality assurance tool carries out all automatic checks in

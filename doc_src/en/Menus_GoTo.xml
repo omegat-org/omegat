@@ -8,28 +8,20 @@
   <para>Key shortcut description reminder: <link linkend="appendix.shortcut" endterm="shortcut.description"/></para>
     <example><title id="example.next.untranslated.segment.title">Next Untranslated Segment</title>
   		<para>In this manual:
-		  <keycombo>
-			<keycap>C</keycap><keycap>U</keycap>
-		  </keycombo>
+		  <keycombo><keycap>C</keycap><keycap>U</keycap></keycombo>
 		</para>
 		<para>On Windows and Linux:
-		  <keycombo>
-			<keycap>Control</keycap><keycap>U</keycap>
-		  </keycombo>
+		  <keycombo><keycap>Control</keycap><keycap>U</keycap></keycombo>
 		</para>
 		<para>On macOS:
-		  <keycombo>
-			<keycap>Command</keycap><keycap>U</keycap>
-		  </keycombo>
+		  <keycombo><keycap>Command</keycap><keycap>U</keycap></keycombo>
 		</para>
 		</example>
 </note>
 
   <variablelist>
     <varlistentry id="menus.goto.next.untranslated.segment">
-      <term id="menus.goto.next.untranslated.segment.title">Next Untranslated Segment		  <keycombo>
-			<keycap>C</keycap><keycap>U</keycap>
-		  </keycombo>
+      <term id="menus.goto.next.untranslated.segment.title">Next Untranslated Segment		  <keycombo><keycap>C</keycap><keycap>U</keycap></keycombo>
 </term>
 
       <listitem>
@@ -39,9 +31,7 @@
     </varlistentry>
 
     <varlistentry id="menus.goto.next.translated.segment">
-      <term id="menus.goto.next.translated.segment.title">Next Translated Segment		  <keycombo>
-			<keycap>C</keycap><keycap>S</keycap><keycap>U</keycap>
-		  </keycombo>
+      <term id="menus.goto.next.translated.segment.title">Next Translated Segment		  <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>U</keycap></keycombo>
 </term>
 
       <listitem>
@@ -51,16 +41,12 @@
     </varlistentry>
 
     <varlistentry id="menus.goto.next.segment">
-      <term id="menus.goto.next.segment.title">Next Segment		  <keycombo>
-			<keycap>C</keycap><keycap>N</keycap>
-		  </keycombo>
+      <term id="menus.goto.next.segment.title">Next Segment		  <keycombo><keycap>C</keycap><keycap>N</keycap></keycombo>
 </term>
 
       <listitem>
 		<para>Also:
-		  <keycombo>
-			<keycap>Enter</keycap>
-		  </keycombo>
+		  <keycombo><keycap>Enter</keycap></keycombo>
 		</para>
         <para>Moves to the next segment, or to the first segment of the next
         file if the current segment is the last one in the file.</para>
@@ -75,15 +61,11 @@
     </varlistentry>
 
     <varlistentry id="menus.goto.previous.segment">
-      <term id="menus.goto.previous.segment.title">Previous Segment		  <keycombo>
-			<keycap>C</keycap><keycap>P</keycap>
-		  </keycombo>
+      <term id="menus.goto.previous.segment.title">Previous Segment		  <keycombo><keycap>C</keycap><keycap>P</keycap></keycombo>
 </term>
       <listitem>
 		<para>Also:
-		  <keycombo>
-			<keycap>C</keycap><keycap>Enter</keycap>
-		  </keycombo>
+		  <keycombo><keycap>C</keycap><keycap>Enter</keycap></keycombo>
 		</para>
         <para>Moves to the previous segment, or to the last segment of the previous
         file if the current segment is the first one in the file.</para>
@@ -100,9 +82,7 @@
     </varlistentry>
 
     <varlistentry id="menus.goto.segment.number">
-      <term id="menus.goto.segment.number.title">Segment number...		  <keycombo>
-			<keycap>C</keycap><keycap>J</keycap>
-		  </keycombo>
+      <term id="menus.goto.segment.number.title">Segment number...		  <keycombo><keycap>C</keycap><keycap>J</keycap></keycombo>
 </term>
       <listitem>
         <para>Jumps to the segment whose call-out or number is entered.</para>
@@ -122,9 +102,7 @@
     </varlistentry>
 
     <varlistentry id="menus.goto.next.unique.segment">
-      <term id="menus.goto.next.unique.segment.title">Next Unique Segment		  <keycombo>
-			<keycap>C</keycap><keycap>S</keycap><keycap>Q</keycap>
-		  </keycombo>
+      <term id="menus.goto.next.unique.segment.title">Next Unique Segment		  <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>Q</keycap></keycombo>
 </term>
       <listitem>
         <para>Moves to the next unique segment.</para>
@@ -132,9 +110,7 @@
     </varlistentry>
 
     <varlistentry id="menus.goto.source.of.selected.match">
-      <term id="menus.goto.source.of.selected.match.title">Source of Selected Match		  <keycombo>
-			<keycap>C</keycap><keycap>S</keycap><keycap>M</keycap>
-		  </keycombo>
+      <term id="menus.goto.source.of.selected.match.title">Source of Selected Match		  <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>M</keycap></keycombo>
 </term>
       <listitem>
         <para>Moves to the segment that corresponds to the currently
@@ -143,9 +119,7 @@
     </varlistentry>
 
     <varlistentry id="menus.goto.forward.in.history">
-      <term id="menus.goto.forward.in.history.title">Forward in history...		  <keycombo>
-			<keycap>C</keycap><keycap>S</keycap><keycap>N</keycap>
-		  </keycombo>
+      <term id="menus.goto.forward.in.history.title">Forward in history...		  <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>N</keycap></keycombo>
 </term>
       <listitem>
         <para>OmegaT remembers your segment navigation history.</para>
@@ -156,9 +130,7 @@
     </varlistentry>
 
     <varlistentry id="menus.goto.back.in.history">
-      <term id="menus.goto.back.in.history.title">Back in history...		  <keycombo>
-			<keycap>C</keycap><keycap>S</keycap><keycap>P</keycap>
-		  </keycombo>
+      <term id="menus.goto.back.in.history.title">Back in history...		  <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>P</keycap></keycombo>
 </term>
       <listitem>
         <para>OmegaT remembers your segment navigation history.</para>

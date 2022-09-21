@@ -199,10 +199,7 @@ $ ./linux-install.sh</programlisting>
 
           <itemizedlist>
             <listitem>
-              <para>Press <keycombo>
-                  <keycap>Alt</keycap>
-                  <keycap>F2</keycap>
-                </keycombo> to show KRunner. Type
+              <para>Press <keycombo><keycap>Alt</keycap><keycap>F2</keycap></keycombo> to show KRunner. Type
               <command>kmenuedit+enter</command> to run the command. The
               KMenuEditor appears. In KMenuEditor select <guilabel>File &gt;
               New Item.</guilabel></para>

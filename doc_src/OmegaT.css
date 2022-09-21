@@ -437,7 +437,9 @@ span.guibutton {
 
 /* keycaps */
 
-.keycap {
+.keycap,
+td>span.keycaps,
+span.term>span.keycap {
     display:inline-block;
     font-size: .8rem;
     border: 1px solid black;
@@ -445,67 +447,22 @@ span.guibutton {
     margin: 0 .2rem;
     background: gainsboro;
     color: black;
-}
-
-.keycap:nth-of-type(1), .keycap:nth-of-type(2) {
 	padding-left:.3rem;
 	padding-right:1.2rem; 
 }
 
-td>span.keycaps {
-    background: gainsboro;
-    color: black;
-}
-
-span.term>span.keycap {
-    background: gainsboro;
-    color: black;
-}
-
-section.section>p>span.keycap:last-of-type {
-    background: lightseagreen;
-    color: white;
-    border-color: seagreen;
-    padding: 0 .3rem;
-} 
-p span.keycap:last-of-type {
-    background: lightseagreen;
-    color: white;
-    border-color: seagreen;
-    padding: 0 .3rem;
-}
-dd span.keycap:last-of-type {
-    background: lightseagreen;
-    color: white;
-    border-color: seagreen;
-    padding: 0 .3rem;
-}
-li.listitem span.keycap:last-of-type {
-    background: lightseagreen;
-    color: white;
-    border-color: seagreen;
-    padding: 0 .3rem;
-}
-span.term>span.keycap:last-of-type {
-    background: lightseagreen;
-    color: white;
-    border-color: seagreen;
-    padding: 0 .3rem;
-}
-
-div.example-contents span.keycap:last-of-type {
-    background: lightseagreen;
-    color: white;
-    border-color: seagreen;
-    padding: 0 .3rem;
-}
-
+section.section>p>span.keycap:last-of-type, 
+p span.keycap:last-of-type, 
+dd span.keycap:last-of-type, 
+li.listitem span.keycap:last-of-type, 
+span.term>span.keycap:last-of-type, 
+div.example-contents span.keycap:last-of-type, 
 p > span.keycap:last-child  {
     background: lightseagreen;
     color: white;
     border-color: seagreen;
     padding: 0 .3rem;
-}
+} 
 
 /* index page */
 #wh-content .book  div.toc {

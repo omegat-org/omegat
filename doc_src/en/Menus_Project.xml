@@ -277,8 +277,9 @@
       <term id="menus.project.quit.title">Quit		  <keycombo><keycap>C</keycap><keycap>Q</keycap></keycombo>
 </term>
       <listitem>
-        <para>Saves the project and quits OmegaT. You are asked to confirm that you really want to quit if you have not yet saved the project.</para>
-		<para>In macOS, this menu item is found under the <guimenu>Application</guimenu> menu.</para>
+		<note><para>In macOS, this menu item is found under the <guimenu>OmegaT</guimenu> menu.</para></note>
+        <para>Saves the project and quits OmegaT. You are asked to confirm that
+        you really want to quit if you have not yet saved the project.</para>
 		<para>
 		</para>				
       </listitem>

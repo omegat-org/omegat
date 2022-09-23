@@ -283,7 +283,7 @@
 				  project contents.</para>
 				</listitem>
 			  </varlistentry>
-			  <varlistentry id="launch.with.command.line.team.init.">
+			  <varlistentry id="launch.with.command.line.team.init">
 				<term id="launch.with.command.line.team.init.title">team init <emphasis>SL</emphasis>
 				<emphasis>TL</emphasis></term>
 				<listitem>

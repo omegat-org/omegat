@@ -41,11 +41,21 @@ Docker and docker compose is popular to prepare a pragmatic test environment.
 You can find docker configurations `Dockerfile` in `test-integration/docker/`
 
 A test setup requires two containers.
-1. server: ssh+git and ssh+svn server container to provide team repository
+1. server: ssh+git, git https, http content, http-dav and ssh+svn server
+   container to provide team repository and mapping
 2. client: omegat test instance container to run integration test.
 
 OmegaT project provide `.docker-compose.yml` compose configuration that orchestrate
 test setup and execution in one line command.
+
+Server has FOUR individual contents.
+1. Git team: ssh+git and git https protocol provide omegat team repository
+2. SVN team 1: http-dav provide omegat team repository without authentication
+   on http://server/svn/omegat-test.svn
+3. SVN team 2: ssh+svn omegat team repository on /home/git/omegat-test.svn
+4. Plain HTTP server: http://server/README provide content for mapping
+
+Repositories are independent among each other.
 
 ### How to run
 
@@ -120,7 +130,7 @@ docker-compose -f .docker-compose.yml down
 
 This clean up container resources.
 
-### Test svn setup
+### repository type
 
 When "TYPE" environment variable is set to "GIT", it tests ssh+git configuration
 with a mapping configuration with http repository for source data. 
@@ -134,11 +144,22 @@ with a mapping configuration with http repository for source data.
 When "TYPE" is not set or other than above, it tests with "GIT" configuration as default. 
 
 ```console
-env DURATION=600 TYPE=SVN \
+env DURATION=2400 TYPE=GIT \
   docker-compose -f .docker-compose.yml up \
     --abort-on-container-exit --exit-code-from client
 ```
 
+```console
+env DURATION=2400 TYPE=SVN \
+  docker-compose -f .docker-compose.yml up \
+    --abort-on-container-exit --exit-code-from client
+```
+
+```console
+env DURATION=2400 TYPE=SSH \
+  docker-compose -f .docker-compose.yml up \
+    --abort-on-container-exit --exit-code-from client
+```
 
 ## Manual execution
 
@@ -183,7 +204,7 @@ An integration test prepare a team project with a specified mapping.
 For example, when you have a repository in GitHub user example repository omegat-test.git
 and mapping target `https://example.com/index.html` as `source/index.html`
 
-```bash
+```console
 ./gradlew testIntegration -Domegat.test.repo=git@github.com:example/omegat-test.git \
  -Domegat.test.map.repo=https://example.com/ \
  -Domegat.test.map.file=index.html

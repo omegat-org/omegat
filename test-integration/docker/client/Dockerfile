@@ -37,7 +37,8 @@ CMD ([ -f /keys/id_rsa ] || inotifywait -e attrib /keys ) \
   && cp /keys/id_rsa /home/omegat/.ssh/id_rsa && chown omegat.omegat /home/omegat/.ssh/id_rsa && chmod 600 /home/omegat/.ssh/id_rsa \
   && git config --global user.name example && git config --global user.email git@example.com && git config --global http.sslVerify false \
   && [ "${TYPE}" = "SVN" ] && export REPO=http://server/svn/omegat-test.svn REPO2=http://server/svn/omegat-test.svn \
+     || [ "${TYPE}" = "SSH" ] && export REPO=svn+ssh://git@server/home/git/omegat-test.svn REPO2=svn+ssh://git@server/home/git/omegat-test.svn \
      || [ "${TYPE}" = "GIT" ] && export REPO=git@server:omegat-test.git REPO2=https://git:gitpass@server/omegat-test.git \
-     || export REPO=svn+ssh://git@server/home/git/omegat-test.svn REPO2=svn+ssh://git@server/home/git/omegat-test.svn \
+     || export REPO=git@server:omegat-test.git REPO2=https://git:gitpass@server/omegat-test.git \
   && cd /code && ./gradlew testIntegration -Dsvnkit.ssh.client=apache -Domegat.test.duration=${DURATION} -Domegat.test.repo=${REPO} \
        -Domegat.test.repo.alt=${REPO2} -Domegat.test.map.repo=http://server/ -Domegat.test.map.file=README

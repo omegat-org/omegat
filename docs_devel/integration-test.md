@@ -122,8 +122,16 @@ This clean up container resources.
 
 ### Test svn setup
 
-When type environment is set to "GIT" then tested ssh+git configuration.
-If set it to SVN or other than "GIT", it test with ssh+svn setup.
+When "TYPE" environment variable is set to "GIT", it tests ssh+git configuration
+with a mapping configuration with http repository for source data. 
+
+When set it to "SVN", it tests with "http://svn-server/svn/trunk/repo.svn" setup
+with a mapping configuration with http repository for source data.
+
+When set it to "SSH", it tests with "svn+ssh://svn-server/svn/repo.svn" setup
+with a mapping configuration with http repository for source data.
+
+When "TYPE" is not set or other than above, it tests with "GIT" configuration as default. 
 
 ```console
 env DURATION=600 TYPE=SVN \
@@ -145,7 +153,7 @@ The way you do the integration test is:
 #### Prepare repository server
 
 You need to prepare repository server where test against.
-It can not be empty, but omegat team project will be overwrite by integration test.
+It can not be empty, but omegat team project will be overwritten by integration test.
 
 #### Simple integration test
 
@@ -172,7 +180,7 @@ An integration test prepare a team project with a specified mapping.
  -Domegat.test.map.file=<Filename of mapping target>
 ```
 
-For example, when you have a repository in Github user example repository omegat-test.git
+For example, when you have a repository in GitHub user example repository omegat-test.git
 and mapping target `https://example.com/index.html` as `source/index.html`
 
 ```bash
@@ -183,7 +191,7 @@ and mapping target `https://example.com/index.html` as `source/index.html`
 
 #### Multiple scheme test
 
-Some popular public git repository services such as Github and Gitlab support
+Some popular public git repository services such as GitHub and Gitlab support
 both ssh+git and git smart http(s) access for the repositories.
 You can test a situation that team project members access both protocols.
 

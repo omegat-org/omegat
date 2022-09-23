@@ -264,12 +264,10 @@
         Search...</term>
 
         <listitem>
-          <para>By default, external searches are global and are shared by all
-          projects. They are found in <link
+          <para>By default, external searches are global and are available by to all
+          projects. They are defined in <link
           linkend="dialogs.preferences.external.searches"
-          endterm="dialogs.preferences.external.searches.title"/> in the <link
-          linkend="dialogs.preferences"
-          endterm="dialogs.preferences.title"/>.</para>
+          endterm="dialogs.preferences.external.searches.title"/>.</para>
 
 		  <para>Use this button to create local external searches specific to your
 		  project and adjust the settings as desired.</para>
@@ -286,6 +284,15 @@
 		  <para>See <link linkend="dialogs.preferences.external.searches"
 		  endterm="dialogs.preferences.external.searches.title"/> for
 		  details.</para>
+
+		  <note><para>For security purposes, project-based external searches are
+		  disabled by default. You can enable them by checking <link
+		  linkend="dialogs.preferences.external.search.enable.project.specific.commands"
+		  endterm="dialogs.preferences.external.search.enable.project.specific.commands"/>
+		  in the <link linkend="dialogs.preferences.external.searches"
+		  endterm="dialogs.preferences.external.searches.title"/>
+		  preferences.</para></note>
+
         </listitem>
       </varlistentry>
 	</variablelist>

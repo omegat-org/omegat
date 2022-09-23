@@ -685,14 +685,23 @@ public class ProjectProperties {
                 return false;
             }
         }
-        for (int i = 0; i < projectFilters.getFilters().size(); i++) {
-            Filter thisFilter = projectFilters.getFilters().get(i);
-            Filter thatFilter = that.projectFilters.getFilters().get(i);
-            if (!new EqualsBuilder()
-                    .append(thisFilter.getClassName(), thatFilter.getClassName())
-                    .append(thisFilter.isEnabled(), thatFilter)
-                    .isEquals())
+        if (projectFilters != null && that.projectFilters != null) {
+            for (int i = 0; i < projectFilters.getFilters().size(); i++) {
+                Filter thisFilter = projectFilters.getFilters().get(i);
+                Filter thatFilter = that.projectFilters.getFilters().get(i);
+                if (!new EqualsBuilder()
+                        .append(thisFilter.getClassName(), thatFilter.getClassName())
+                        .append(thisFilter.isEnabled(), thatFilter)
+                        .isEquals())
+                    return false;
+            }
+        } else {
+            if (projectFilters != null || projectFilters != null) {
                 return false;
+            }
+        }
+        if (repositories.size() != that.repositories.size()) {
+            return false;
         }
         for (int i = 0; i < repositories.size(); i++) {
             if (!new EqualsBuilder()
@@ -702,6 +711,9 @@ public class ProjectProperties {
                     .append(repositories.get(i).getMapping().size(),
                             that.repositories.get(i).getMapping().size())
                     .isEquals()) {
+                return false;
+            }
+            if (repositories.get(i).getMapping().size() != that.repositories.get(i).getMapping().size()) {
                 return false;
             }
             for (int j = 0; j < repositories.get(i).getMapping().size(); j ++) {
@@ -715,11 +727,20 @@ public class ProjectProperties {
                 }
             }
         }
-        return new EqualsBuilder()
+        if (projectFilters != null && that.projectFilters != null) {
+           if (!new EqualsBuilder()
                 .append(projectFilters.isRemoveTags(), that.projectFilters.isRemoveTags())
                 .append(projectFilters.isRemoveSpacesNonseg(), that.projectFilters.isRemoveSpacesNonseg())
                 .append(projectFilters.isPreserveSpaces(), that.projectFilters.isPreserveSpaces())
-                .append(projectFilters.isIgnoreFileContext(), that.projectFilters.isIgnoreFileContext())
+                .append(projectFilters.isIgnoreFileContext(), that.projectFilters.isIgnoreFileContext()).isEquals()) {
+               return false;
+           }
+        } else {
+            if (projectFilters != null || that.projectFilters != null) {
+                return false;
+            }
+        }
+        return new EqualsBuilder()
                 .append(sentenceSegmentingEnabled, that.sentenceSegmentingEnabled)
                 .append(supportDefaultTranslations, that.supportDefaultTranslations)
                 .append(removeTags, that.removeTags)

@@ -316,6 +316,9 @@ public class GITCredentialsProvider extends CredentialsProvider {
      * @return true when entered, false on cancel.
      */
     private Credentials askCredentials(URIish uri, Credentials credentials) {
+        if (Core.getMainWindow() == null) {
+            return null;
+        }
         GITUserPassDialog userPassDialog = new GITUserPassDialog(Core.getMainWindow().getApplicationFrame());
         userPassDialog.setLocationRelativeTo(Core.getMainWindow().getApplicationFrame());
         userPassDialog.descriptionTextArea.setText(OStrings

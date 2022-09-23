@@ -80,7 +80,7 @@
       <term>auto フォルダー由来の分節を色付け</term>
 
       <listitem>
-        <para>チェックがある場合、（たとえば <filename>/tm/auto</filename> フォルダー内の TMX ファイルから）自動挿入された全分節の背景を色付けします。色付けは、<link linkend="dialogs.preferences.editor.saveautopopulatedstatus"><guimenuitem>［auto フォルダー由来の翻訳かどうかを記録する］</guimenuitem></link>にチェックが入っている場合に限り、有効です。auto フォルダーから挿入された通常の翻訳は、オレンジ色で表示されます。それ以外の翻訳は、TMX の種類に応じた異なる色で表示されます。技術的な詳細は、<ulink url="http://sourceforge.net/p/omegat/feature-requests/963/">機能改善リクエスト</ulink>を参照してください。</para>
+        <para>チェックがある場合、（たとえば <filename class="directory">/tm/auto</filename> フォルダー内の TMX ファイルから）自動挿入された全分節の背景を色付けします。色付けは、<link linkend="dialogs.preferences.editor.saveautopopulatedstatus"><guimenuitem>［auto フォルダー由来の翻訳かどうかを記録する］</guimenuitem></link>にチェックが入っている場合に限り、有効です。<filename class="directory">auto</filename> フォルダーから挿入された通常の翻訳は、オレンジ色で表示されます。それ以外の翻訳は、TMX の種類に応じた異なる色で表示されます。技術的な詳細は、<ulink url="http://sourceforge.net/p/omegat/feature-requests/963/">機能改善リクエスト</ulink>を参照してください。</para>
       </listitem>
     </varlistentry>
 
@@ -88,7 +88,7 @@
       <term>代替フォントを積極的に使用</term>
 
       <listitem>
-        <para><application>OmegaT</application> が一部の絵文字を正しく表示しない場合、このオプションにチェックを入れます（該当する絵文字を含む字体がコンピュータにインストールされている場合に有効）。注意：Windows では、この手動による代替フォント機能が標準の代替フォント機能と衝突し、望ましくない字体に置き換わることがあるようです。そのため、デフォルトではチェックが外されています。</para>
+        <para>OmegaT が一部の絵文字を正しく表示しない場合、このオプションにチェックを入れます（該当する絵文字を含む字体がコンピュータにインストールされている場合に有効）。注意：Windows では、この手動による代替フォント機能が標準の代替フォント機能と衝突し、望ましくない字体に置き換わることがあるようです。そのため、デフォルトではチェックが外されています。</para>
       </listitem>
     </varlistentry>
 

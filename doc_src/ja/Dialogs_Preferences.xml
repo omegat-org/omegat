@@ -100,6 +100,23 @@
           <para>このオプションを選択すると、同じ単語が複数の形式(大文字の有無など)で用語集に存在する場合でも、用語集には1つのエントリのみが表示されます。</para>
         </listitem>
       </varlistentry>
+
+	  <varlistentry>
+        <term>用語集レイアウト:</term>
+
+        <listitem>
+          <para>用語集画面のレイアウトを選択できます。選択可能なレイアウトの種類は、プラグインとして追加できます。</para>
+        </listitem>
+      </varlistentry>
+
+	  <varlistentry>
+        <term>同じ用語の代替の定義を結合する</term>
+
+        <listitem>
+          <para>用語集の用語に複数の定義があったときには、それらは同じ行に表示されます。</para>
+        </listitem>
+      </varlistentry>
+
     </variablelist>
 
     <section>
@@ -128,7 +145,7 @@
           <term>TaaS 用語集をダウンロード...</term>
 
           <listitem>
-            <para>このボタンを使用すると、プロジェクトの原文言語および訳文言語に存在するコレクションを参照およびダウンロードできます。非公開の用語集は、太字で表示されます。用語集をダウンロードすると、現在の用語集フォルダー内に TBX 形式で保存されます。</para>
+            <para>このボタンを使用すると、プロジェクトの原文言語および訳文言語に存在するコレクションを参照およびダウンロードできます。非公開の用語集は、太字で表示されます。用語集をダウンロードすると、現在の<filename class="directory">glossary</filename>フォルダー内に TBX 形式で保存されます。</para>
           </listitem>
         </varlistentry>
 
@@ -169,6 +186,14 @@
     <title>外観</title>
 
     <variablelist>
+	  <varlistentry>
+        <term>テーマ</term>
+
+        <listitem>
+          <para>OmegaTのユーザインタフェースのレテーマを選択できます。新たなテーマは、プラグインから追加できます。</para>
+        </listitem>
+      </varlistentry>
+
       <varlistentry>
         <term>ウインドウを初期位置に復元</term>
 
@@ -176,6 +201,7 @@
           <para>OmegaT で使用する各ウィンドウを、初期位置に戻します。切り離されたり、移動したり、隠れてしまったウィンドウを元の状態に戻したいときに、使用してください。また、OmegaT をバージョンアップし、いくつかのウィンドウが表示されなくなったような場合にも、使用できます。</para>
         </listitem>
       </varlistentry>
+
     </variablelist>
 
     <section>
@@ -196,17 +222,17 @@
   <section id="dialogs.preferences.filefilters">
     <title>ファイルフィルター</title>
 
-    <para>使用可能なファイルフィルターを一覧表示します。現在のプロジェクトで使用しているフィルターを太字で示します。OmegaT の中で翻訳したくないファイル形式がある場合は、ファイル形式名の横にあるチェックボックスのチェックを外すと、その形式に対してフィルター機能を使わないようにすることができます。フィルターを無効にしているファイル形式のファイルは、プロジェクトの読み込み時に無視され、訳文生成時には未変更の状態で訳文フォルダーにコピーされます。再びフィルターを使用したくなったら、対象のチェックボックスにチェックを入れてください。<emphasis role="bold">［初期値を復元］</emphasis> をクリックすると、それまでのフィルター設定をリセットし初期設定に戻します。フィルター対象とするファイルやエンコーディングを変更する場合は<emphasis role="bold">［編集...］</emphasis>をクリックします。</para>
+    <para>使用可能なファイルフィルターを一覧表示します。現在のプロジェクトで使用しているフィルターを太字で示します。OmegaT の中で翻訳したくないファイル形式がある場合は、ファイル形式名の横にあるチェックボックスのチェックを外すと、その形式に対してフィルター機能を使わないようにすることができます。フィルターを無効にしているファイル形式のファイルは、プロジェクトの読み込み時に無視され、訳文生成時には未変更の状態で<filename class="directory">target</filename>フォルダーにコピーされます。再びフィルターを使用したくなったら、対象のチェックボックスにチェックを入れてください。<guilabel>&gt;［初期値を復元］</guilabel>&gt; をクリックすると、それまでのフィルター設定をリセットし初期設定に戻します。フィルター対象とするファイルやエンコーディングを変更する場合は<guilabel>［編集...］</guilabel>をクリックします。</para>
 
     <para>ダイアログ上で、次の設定の有効/無効を切り替えることができます：</para>
 
     <itemizedlist>
       <listitem>
-        <para>先頭と末尾のタグを削除：分節の先頭と末尾のタグを含むすべてのタグを表示したい場合は、この設定のチェックを外してください。警告：Microsoft Open XML 形式のファイル（docx や xlsx など）について、すべてのタグを表示した場合は、決して先頭のタグの前にいかなるテキストも入力しないでください（そのタグは技術的な理由で、常に分節の先頭に置かなければなりません）。</para>
+        <para><guilabel>Remove leading and trailing tags</guilabel>: uncheck this option to display all the tags, including tags at the beginning and end of the segment. 警告：Microsoft Open XML 形式のファイル（docx や xlsx など）について、すべてのタグを表示した場合は、決して先頭のタグの前にいかなるテキストも入力しないでください（そのタグは技術的な理由で、常に分節の先頭に置かなければなりません）。</para>
       </listitem>
 
       <listitem>
-        <para>分節化しないプロジェクトから、先頭と末尾の空白文字を削除：OmegaT は既定で、先頭と末尾の空白文字を削除します。分節化しないプロジェクトの場合、この設定のチェックを外すことによって、それらの空白文字を保持することができます。</para>
+        <para><guilabel>分節化しないプロジェクトから、先頭と末尾の空白文字を削除</guilabel>：OmegaT は既定で、先頭と末尾の空白文字を削除します。分節化しないプロジェクトの場合、この設定のチェックを外すことによって、それらの空白文字を保持することができます。</para>
       </listitem>
 
       <listitem>
@@ -214,20 +240,20 @@
       </listitem>
 
       <listitem>
-        <para>複数訳文の識別時にファイルのフルパス情報を無視する：OmegaT は既定で、原文ファイル名を複数訳文の識別基準のひとつに利用します。このオプションにチェックを入れると、ファイル名は識別に利用されません。複数訳文の識別には、ファイル名以外の文脈情報（前後の分節や、ファイル形式によってはある種の ID）だけが使用されます。</para>
+        <para><guilabel>複数訳文の識別時にファイルのフルパス情報を無視する</guilabel>：OmegaT は既定で、原文ファイル名を複数訳文の識別基準のひとつに利用します。このオプションにチェックを入れると、ファイル名は識別に利用されません。複数訳文の識別には、ファイル名以外の文脈情報（前後の分節や、ファイル形式によってはある種の ID）だけが使用されます。</para>
       </listitem>
     </itemizedlist>
 
     <section id="filters.options">
       <title>フィルター設定</title>
 
-      <para>以下のフィルター（テキストファイル、PO ファイル、XHTML ファイル、HTML ファイル・XHTML ファイル、OpenDocument ファイル、Microsoft Open XML ファイル）では、いくつかの専用オプションを設定できます。設定を変更する場合は、フィルターを選択して<emphasis role="bold">［設定...］</emphasis> を押してください。可能な設定は以下の通りです：</para>
+      <para>以下のフィルター（テキストファイル、PO ファイル、XHTML ファイル、HTML ファイル・XHTML ファイル、OpenDocument ファイル、Microsoft Open XML ファイル）では、いくつかの専用オプションを設定できます。設定を変更する場合は、フィルターを選択して<guibutton>［設定...］</guibutton> を押してください。可能な設定は以下の通りです：</para>
 
       <para><emphasis role="bold">テキストファイル</emphasis></para>
 
       <itemizedlist>
         <listitem>
-          <para><emphasis>原文を改行で分節化するか、空行で分節化するか、分節化しないか：</emphasis></para>
+          <para><guilabel>原文を分節化する位置：</guilabel></para>
 
           <para>文単位の分節化が有効になっている場合は、ここで選択した設定によってさらに分節化されます。</para>
         </listitem>
@@ -237,7 +263,7 @@
 
       <itemizedlist>
         <listitem>
-          <para><emphasis>訳文ファイルの空分節を許可</emphasis>：</para>
+          <para><guilabel>訳文ファイルの空分節を許可</guilabel>：</para>
 
           <para>この設定を有効にすると、未翻訳の PO 分節（たいていは段落全体）を空のままにして訳文ファイルを生成します。もう少し技術的に立ち入った話をすると、PO 訳文ファイルの <code>msgstr</code> 分節が空のままになる、ということです。PO ファイルの場合はこれが一般的な状態ですので、この設定はデフォルトで有効になっています。この設定を無効にすると、原文が訳文分節にコピーされます。</para>
         </listitem>
@@ -245,7 +271,7 @@
 
       <itemizedlist>
         <listitem>
-          <para><emphasis>PO ヘッダーを無視</emphasis></para>
+          <para><guilabel>PO ヘッダーを無視</guilabel></para>
 
           <para>この設定にチェックを入れると、PO ヘッダーを翻訳対象外とみなして、原文のままにします。</para>
         </listitem>
@@ -253,7 +279,7 @@
 
       <itemizedlist>
         <listitem>
-          <para><emphasis>ヘッダーの「nplurals=整数; plural=式;」を自動で置換</emphasis></para>
+          <para><guilabel>ヘッダーの「nplurals=整数; plural=式;」を自動で置換</guilabel></para>
 
           <para><emphasis>この設定にチェックを入れると、PO ファイルのヘッダーにある複数形指定を、訳文言語に合わせて自動変更します。</emphasis></para>
         </listitem>
@@ -263,31 +289,31 @@
 
       <itemizedlist>
         <listitem>
-          <para><emphasis>以下の属性を翻訳：</emphasis>選択した属性を編集ウィンドウで分節として表示できます。</para>
+          <para><guilabel>以下の属性を翻訳：</guilabel>選択した属性を編集ウィンドウで分節として表示できます。</para>
         </listitem>
       </itemizedlist>
 
       <itemizedlist>
         <listitem>
-          <para><emphasis>以下のタグで分節化：</emphasis> HTML の &lt;br&gt; タグがある場所を段落とみなして分節化することができます。</para>
+          <para><guilabel>以下のタグで分節化</guilabel>： HTML の &lt;br&gt; タグがある場所を段落とみなして分節化することができます。</para>
         </listitem>
       </itemizedlist>
 
       <itemizedlist>
         <listitem>
-          <para><emphasis>以下の正規表現に一致する文字列を翻訳しない：</emphasis>指定した正規表現に一致するテキストは、翻訳対象とせずスキップすることができます。スキップした箇所は、タグ検証では赤く表示されます。参考訳文ウィンドウでは、スキップした箇所が原文分節にあると、そのテキストは斜体で表示されます。</para>
+          <para><guilabel>以下の正規表現に一致する文字列を翻訳しない</guilabel>：指定した正規表現に一致するテキストは、翻訳対象とせずスキップすることができます。スキップした箇所は、タグ検証では赤く表示されます。参考訳文ウィンドウでは、スキップした箇所が原文分節にあると、そのテキストは斜体で表示されます。</para>
         </listitem>
       </itemizedlist>
 
       <itemizedlist>
         <listitem>
-          <para><emphasis>&lt;meta&gt; タグ内の以下の属性と値は翻訳しない（カンマ区切りで複数指定）：</emphasis>ここで指定した &lt;meta&gt; タグは、翻訳されません。</para>
+          <para><guilabel>metaタグ内の以下の属性と値は翻訳しない（カンマ区切りで複数指定）</guilabel>：ここで指定した meta タグは翻訳されません。</para>
         </listitem>
       </itemizedlist>
 
       <itemizedlist>
         <listitem>
-          <para><emphasis>以下の属性と値を持つタグの内容は翻訳しない（カンマ区切りで複数指定）</emphasis>：ここでキー＝値の形式で指定したタグは、翻訳されません。</para>
+          <para><guilabel>以下の属性と値を持つタグの内容は翻訳しない（カンマ区切りで複数指定）</guilabel>：ここでキー＝値の形式で指定したタグは翻訳されません。</para>
 
           <para>この設定は、属性の値に応じて特定のタグを翻訳しないようにするのに、役に立つことがあります。たとえば、<literal>&lt;div class=&quot;hide&quot;&gt; &lt;span translate=&quot;no&quot;&gt;</literal> のようなタグは、キー＝値の形式で指定して翻訳対象外に設定できます。この例の場合、設定欄は次のようになります：<literal>class=hide, translate=no</literal></para>
         </listitem>
@@ -327,11 +353,11 @@
 
           <itemizedlist>
             <listitem>
-              <para><emphasis>タグを結合</emphasis>：チェックが入っていれば、翻訳対象テキストを含まない連続するタグを１つのタグに結合します。</para>
+              <para><guilabel>タグを結合</guilabel>：チェックが入っていれば、翻訳対象テキストを含まない連続するタグを１つのタグに結合します。</para>
             </listitem>
 
             <listitem>
-              <para><emphasis>すべてのタグの空白を維持</emphasis>：チェックが入っていれば、空白文字（半角スペースや改行など）を保持します。たとえそれが文書中で意味が無い場合でも残します。</para>
+              <para><guilabel>すべてのタグの空白を維持</guilabel>：チェックが入っていれば、空白文字（半角スペースや改行など）を保持します。たとえそれが文書中で意味が無い場合でも残します。</para>
             </listitem>
           </itemizedlist>
         </listitem>
@@ -341,47 +367,47 @@
 
       <itemizedlist>
         <listitem>
-          <para><emphasis>以下の場合に HTML・XHTML ファイルにエンコーディング宣言を追加または変更</emphasis>：訳文ファイルのエンコーディング文字セットを、原文ファイルのそれ（明示的に指定されたものであれ、暗黙に適用されたものであれ）とは違うものにしたいということは、よくあります。この設定を使うと、訳文ファイルにエンコーディング宣言を含めるかどうかを指定できます。たとえば、ファイルフィルターで訳文ファイルのエンコーディングが UTF-8 に指定されている場合、この設定によって、訳文ファイルに必ずその情報を含めるようにすることができます。</para>
+          <para><guilabel>以下の場合に HTML・XHTML ファイルにエンコーディング宣言を追加または変更</guilabel>：訳文ファイルのエンコーディング文字セットを、原文ファイルのそれ（明示的に指定されたものであれ、暗黙に適用されたものであれ）とは違うものにしたいということは、よくあります。この設定を使うと、訳文ファイルにエンコーディング宣言を含めるかどうかを指定できます。たとえば、ファイルフィルターで訳文ファイルのエンコーディングが UTF-8 に指定されている場合、この設定によって、訳文ファイルに必ずその情報を含めるようにすることができます。</para>
         </listitem>
       </itemizedlist>
 
       <itemizedlist>
         <listitem>
-          <para><emphasis>以下の属性を翻訳：</emphasis>選択した属性を編集ウィンドウで分節として表示できます。</para>
+          <para><guilabel>以下の属性を翻訳：</guilabel>選択した属性を編集ウィンドウで分節として表示できます。</para>
         </listitem>
       </itemizedlist>
 
       <itemizedlist>
         <listitem>
-          <para><emphasis>以下のタグで分節化：</emphasis> HTML の &lt;br&gt; タグがある場所を段落とみなして分節化することができます。</para>
+          <para><guilabel>以下のタグで分節化</guilabel>： HTML の &lt;br&gt; タグがある場所を段落とみなして分節化することができます。</para>
         </listitem>
       </itemizedlist>
 
       <itemizedlist>
         <listitem>
-          <para><emphasis>以下の正規表現に一致する文字列を翻訳しない：</emphasis>指定した正規表現に一致するテキストは、翻訳対象とせずスキップすることができます。スキップした箇所は、タグ検証では赤く表示されます。参考訳文ウィンドウでは、スキップした箇所が原文分節にあると、そのテキストは斜体で表示されます。</para>
+          <para><guilabel>以下の正規表現に一致する文字列を翻訳しない</guilabel>：指定した正規表現に一致するテキストは、翻訳対象とせずスキップすることができます。スキップした箇所は、タグ検証では赤く表示されます。参考訳文ウィンドウでは、スキップした箇所が原文分節にあると、そのテキストは斜体で表示されます。</para>
         </listitem>
       </itemizedlist>
 
       <itemizedlist>
         <listitem>
-          <para><emphasis>&lt;meta&gt; タグ内の以下の属性と値は翻訳しない（カンマ区切りで複数指定）：</emphasis>ここで指定した &lt;meta&gt; タグは、翻訳されません。</para>
+          <para><guilabel>meta タグ内の以下の属性と値は翻訳しない（カンマ区切りで複数指定）：</guilabel>ここで指定した meta タグは翻訳されません。</para>
         </listitem>
       </itemizedlist>
 
       <itemizedlist>
         <listitem>
-          <para><emphasis>以下の属性と値を持つタグの内容は翻訳しない（カンマ区切りで複数指定）</emphasis>：ここでキー＝値の形式で指定したタグは、翻訳されません。</para>
+          <para><guilabel>以下の属性と値を持つタグの内容は翻訳しない（カンマ区切りで複数指定）</guilabel>：ここでキー＝値の形式で指定したタグは翻訳されません。</para>
 
           <para>この設定は、属性の値に応じて特定のタグを翻訳しないようにするのに、役に立つことがあります。たとえば、<literal>&lt;div class=&quot;hide&quot;&gt; &lt;span translate=&quot;no&quot;&gt;</literal> のようなタグは、キー＝値の形式で指定して翻訳対象外に設定できます。この例の場合、設定欄は次のようになります：<literal>class=hide, translate=no</literal></para>
         </listitem>
 
         <listitem>
-          <para><emphasis>訳文ファイルの空白圧縮</emphasis>：連続する空白文字がある場合、訳文ファイル生成時に空白文字一つだけに変換します。</para>
+          <para><guilabel>訳文ファイルの空白圧縮</guilabel>：連続する空白文字がある場合、訳文ファイル生成時に空白文字一つだけに変換します。</para>
         </listitem>
 
         <listitem>
-          <para><emphasis>訳文ファイルの HTML コメントを削除</emphasis>：コメント部（&lt;!-- から --&gt; までのあいだ）を訳文ファイルに出力しません。</para>
+          <para><guilabel>訳文ファイルの HTML コメントを削除</guilabel>：コメント部（&lt;!-- から --&gt; までのあいだ）を訳文ファイルに出力しません。</para>
         </listitem>
       </itemizedlist>
 
@@ -399,18 +425,18 @@
     <section id="edit.filter.dialog">
       <title>フィルターの編集ダイアログ</title>
 
-      <para>このダイアログでは、フィルターで処理する原文ファイル名の構成例の指定、訳文ファイル名のカスタマイズ、読み込む原文ファイルと生成する訳文ファイルのエンコーディングを設定できます。ファイルフィルター構成例を編集するには、それぞれの欄をダブルクリックして直接修正するか、<emphasis role="bold">編集</emphasis>ボタンをクリックします。新しいファイルフィルター構成例を追加するには<emphasis role="bold">追加</emphasis>ボタンをクリックします。構成例の追加と編集には、同じダイアログを使用します。このダイアログでは、出力するファイル名のカスタマイズをするための訳文ファイル名の構成に特化したエディターがついています。</para>
+      <para>このダイアログでは、フィルターで処理する原文ファイル名の構成例の指定、訳文ファイル名のカスタマイズ、読み込む原文ファイルと生成する訳文ファイルのエンコーディングを設定できます。ファイルフィルター構成例を編集するには、それぞれの欄をダブルクリックして直接修正するか、<guibutton>編集</guibutton>ボタンをクリックします。新しいファイルフィルター構成例を追加するには<guibutton>追加</guibutton>ボタンをクリックします。構成例の追加と編集には、同じダイアログを使用します。このダイアログでは、出力するファイル名のカスタマイズをするための訳文ファイル名の構成に特化したエディターがついています。</para>
 
       <section id="source.filetype.and.filename.pattern">
         <title>原文ファイル形式、ファイル名構成例</title>
 
-        <para>OmegaT は原文フォルダーにファイルを見つけると、まず拡張子から判別してファイルフィルターを選択しようとします。もっと具体的に言うと、各フィルターの原文ファイル名構成例から、ファイル名と一致するものを探索します。たとえば、構成例 <literal>*.xhtml</literal> は、拡張子が <literal>.xhtml</literal> のあらゆるファイルに一致します。適切なフィルターが見つかった時点で探索は終了し、そのフィルターが該当するファイルの処理に割り当てられます。たとえばデフォルトでは、XHTML フィルターは拡張子 .xhtml のファイルを処理するのに使用されます。そのフィルターに扱わせたいファイルに応じて、ファイル名構成例を変更したり追加したりできます。原文ファイル名構成例には、<emphasis role="bold">検索機能と同様にワイルドカード文字を使用できます。</emphasis>ワイルドカード「*」は０個以上の任意の文字と一致します。ワイルドカード「?」は任意の１文字と一致します。他のすべての文字は、それらの文字自身をあらわします。たとえばテキストフィルターを readme ファイル（<literal>readme, read.me</literal> や <literal>readme.txt</literal>）にも対応させたい場合は、ファイル名構成例に <literal>read*</literal> を指定してください。（日本語訳注：実際にはワイルドカード文字と衝突しない範囲で、正規表現も使用できます。たとえばファイル名の末尾に数字のついた、拡張子 .foo のファイルを扱いたい場合は、<literal>*\d.foo</literal> のような指定が可能です。正規表現の詳細は、http://docs.oracle.com/javase/jp/6/api/java/util/regex/Pattern.html を参照してください）</para>
+        <para>OmegaT は原文フォルダー(<filename class="directory">source</filename>)にファイルを見つけると、まず拡張子から判別してファイルフィルターを選択しようとします。もっと具体的に言うと、各フィルターの原文ファイル名構成例から、ファイル名と一致するものを探索します。たとえば、構成例 <literal>*.xhtml</literal> は、拡張子が <literal>.xhtml</literal> のあらゆるファイルに一致します。適切なフィルターが見つかった時点で探索は終了し、そのフィルターが該当するファイルの処理に割り当てられます。たとえばデフォルトでは、XHTML フィルターは拡張子 .xhtml のファイルを処理するのに使用されます。そのフィルターに扱わせたいファイルに応じて、ファイル名構成例を変更したり追加したりできます。原文ファイル名構成例には、<emphasis role="bold">検索機能</emphasis>と同様にワイルドカード文字を使用できます。ワイルドカード「*」は０個以上の任意の文字と一致します。ワイルドカード「?」は任意の１文字と一致します。他のすべての文字は、それらの文字自身をあらわします。たとえばテキストフィルターを readme ファイル（<literal>readme, read.me</literal> や <literal>readme.txt</literal>）にも対応させたい場合は、ファイル名構成例に <literal>read*</literal>を指定してください。（日本語訳注：実際にはワイルドカード文字と衝突しない範囲で、正規表現も使用できます。たとえばファイル名の末尾に数字のついた、拡張子 .foo のファイルを扱いたい場合は、<literal>*\d.foo</literal> のような指定が可能です。正規表現の詳細は、http://docs.oracle.com/javase/jp/6/api/java/util/regex/Pattern.html を参照してください）</para>
       </section>
 
       <section id="source.and.target.files.encoding">
         <title>原文ファイルと訳文ファイルのエンコーディング</title>
 
-        <para>エンコーディングの指定が必須のファイル形式は限られています。エンコーディングを特に指定しなかった場合（&lt;自動&gt; の場合）は、拡張子に応じたエンコーディングが使用されます。たとえばデフォルトでは、<literal>.txt</literal> ファイルには OS のデフォルト エンコーディングが使用されます。原文ファイルのエンコーディングを、ファイル名構成例ごとに変更することもできます。訳文ファイルを出力する際のエンコーディングも、任意に変更できます。デフォルトでは、訳文ファイルのエンコーディングは、原文ファイルと同じになります。原文ファイルと訳文ファイルのエンコーディングを指定する項目では、対応したすべてのエンコーディングをドロップダウンメニューから選択できます。&lt;自動&gt; は、<application>OmegaT</application> に自動的に判断させます。自動の場合のエンコーディングは、次の仕組みで判定します：</para>
+        <para>エンコーディングの指定が必須のファイル形式は限られています。エンコーディングを特に指定しなかった場合（&lt;自動&gt; の場合）は、拡張子に応じたエンコーディングが使用されます。たとえばデフォルトでは、<literal>.txt</literal> ファイルには OS のデフォルト エンコーディングが使用されます。原文ファイルのエンコーディングを、ファイル名構成例ごとに変更することもできます。訳文ファイルを出力する際のエンコーディングも、任意に変更できます。デフォルトでは、訳文ファイルのエンコーディングは、原文ファイルと同じになります。原文ファイルと訳文ファイルのエンコーディングを指定する項目では、対応したすべてのエンコーディングをドロップダウンメニューから選択できます。&lt;自動&gt; は、OmegaT に自動的に判断させます。自動の場合のエンコーディングは、次の仕組みで判定します：</para>
 
         <itemizedlist>
           <listitem>
@@ -540,20 +566,20 @@
   <section id="dialogs.preferences.segmentationsetup">
     <title>分節化規則の設定</title>
 
-    <para>翻訳メモリツールは、分節と呼ばれるテキスト単位で処理を行います。<application>OmegaT</application> がテキストを分節化する方法は２つあります。段落単位の分節化と、文単位の分節化（「ルールベースの分節化」とも呼ばれます）です。分節化の方法を選択するには、メインメニューから<menuchoice><guimenu>［プロジェクト］</guimenu><guimenuitem>［プロジェクト設定...］</guimenuitem></menuchoice>を開き、表示されるチェックボックスを使用してください。段落単位の分節化は、高度に文学的または芸術的な翻訳のような、一部のケースでは有用です。これらの翻訳では、文脈に応じて翻訳者が文の順番を入れ替えることがあるためです。しかし大半のプロジェクトでは、文単位の分節化が望ましいでしょう。その方が、過去の翻訳と一致しやすい（再利用しやすい）ためです。文単位の分節化を選択した場合、分節化規則は、メインメニューの<menuchoice><guimenu>［設定］</guimenu><guimenuitem>［分節化...］</guimenuitem></menuchoice>で設定できます。</para>
+    <para>翻訳メモリツールは、分節と呼ばれるテキスト単位で処理を行います。OmegaT がテキストを分節化する方法は２つあります。段落単位の分節化と、文単位の分節化（「ルールベースの分節化」とも呼ばれます）です。分節化の方法を選択するには、メインメニューから<menuchoice><guimenu>［プロジェクト］</guimenu></guimenuitem>［プロジェクト設定...］</guimenuitem></menuchoice>を開き、表示されるチェックボックスを使用してください。段落単位の分節化は、高度に文学的または芸術的な翻訳のような、一部のケースでは有用です。これらの翻訳では、文脈に応じて翻訳者が文の順番を入れ替えることがあるためです。しかし大半のプロジェクトでは、文単位の分節化が望ましいでしょう。その方が、過去の翻訳と一致しやすい（再利用しやすい）ためです。文単位の分節化を選択した場合、分節化規則は、メインメニューの<menuchoice><guimenu>［設定］</guimenu><guimenuitem>［分節化...］</guimenuitem></menuchoice>で設定できます。</para>
 
     <para>信頼できる分節化規則が多くの言語で設定済みのため、新たな独自規則を作成する必要は、あまりないでしょう。一方で、特定の状況では、翻訳する原文に合わせて分節化規則を調整することで、大きく生産性があがります。</para>
 
     <para><emphasis role="bold">警告：</emphasis>ファイルフィルターの設定を変更すると、分節が変化することがあります。場合によっては、翻訳を一からやり直すことになるかもしれません。このとき、以前は有効だった翻訳済みの分節は、翻訳メモリ内で、現在の原文に存在しない分節になります。またプロジェクトを開いているときに分節化の設定を変更すると、変更を適用するためにプロジェクトの再読み込みが必要になります。</para>
 
-    <para><application>OmegaT</application> は下記の通りに一連の処理を実施します：</para>
+    <para>OmegaTは下記の通りに一連の処理を実施します：</para>
 
     <variablelist>
       <varlistentry>
         <term>構造単位の分節化</term>
 
         <listitem>
-          <para><application>OmegaT</application> は、まず構造単位の分節化を行うため、文書の構文を解析します。この処理のあいだ、分節作成のために参照される内容は、原文ファイルの構造のみです。</para>
+          <para>OmegaT は、まず構造単位の分節化を行うため、文書の構文を解析します。この処理のあいだ、分節作成のために参照される内容は、原文ファイルの構造のみです。</para>
 
           <para>たとえば、テキストファイルの場合は、改行で分節化するか、空行で分節化するか、または、まったく分節化しないかのいずれかです。整形情報を持ったファイル（ODF 文書、HTML 文書など）は、ブロックレベル（段落）のタグを基準に分節化されます。XHTML や HTML ファイルでは、オブジェクトの属性も翻訳の対象になることがあります。このような場合は、属性値だけを分節として取り出します。</para>
         </listitem>
@@ -563,7 +589,7 @@
         <term>文単位の分節化</term>
 
         <listitem>
-          <para>原文ファイルを論理的な区切りで分節化した後、<application>OmegaT</application> はさらにそれらを文単位で分節化します。</para>
+          <para>原文ファイルを論理的な区切りで分節化した後、OmegaTはさらにそれらを文単位で分節化します。</para>
         </listitem>
       </varlistentry>
     </variablelist>
@@ -696,7 +722,7 @@
 
     <para><guimenuitem>［文字一覧...］</guimenuitem>をクリックすると、文字一覧の設定を変更できます。</para>
 
-    <para>入力補完は訳文分節欄でショートカット <emphasis role="bold">Ctrl+Space</emphasis> を押すと呼び出せます。</para>
+    <para>入力補完は訳文分節欄でショートカット <keycombo><keycap>Ctrl</keycap><keycap>Space</keycap></keycombo> を押すと呼び出せます。</para>
 
     <para><emphasis role="bold">［関連性の強い補完候補を自動的に表示する］</emphasis>にチェックが入っていると、用語集の訳語項目の最初の文字を入力することにより、またはタグの場合は「&lt;」を入力することにより、入力補完が自動的に起動します。</para>
   </section>
@@ -739,7 +765,7 @@
         <term>プロジェクト専用コマンドを有効にする</term>
 
         <listitem>
-          <para>デフォルトでは、 OmegaT は、プロジェクト固有の設定 ( <filename>omegat</filename> フォルダー内の <filename>finder.xml</filename> ファイル ) で指定されたコマンドを実行しません。これは、マシンのセキュリティーに重大な影響を与える可能性があるからです。</para>
+          <para>デフォルトでは、 OmegaT は、プロジェクト固有の設定 ( <filename class="directory">omegat</filename> フォルダー内の <filename>finder.xml</filename> ファイル ) で指定されたコマンドを実行しません。これは、マシンのセキュリティーに重大な影響を与える可能性があるからです。</para>
 
           <para>このオプションは、自分が何をしているかを知っている場合にのみ有効にし、信頼できるソースからのプロジェクトのみを対象にしてください。</para>
         </listitem>
@@ -773,7 +799,7 @@
         <term>原文を挿入しない</term>
 
         <listitem>
-          <para>OmegaT は翻訳入力行を空欄にします。翻訳入力の前に、原文を削除するキー入力の手間が省けます（つまり <emphasis role="bold">Ctrl+A</emphasis> と <emphasis role="bold">Del）。</emphasis>この状態で、空訳文として残すこともできます。このような訳文は、未翻訳分節と区別するために、編集ウィンドウ上では &lt;空訳文&gt; と表示されます。空訳文に設定するには、分節を右クリックして「<emphasis role="bold">訳文を&lt;空訳文&gt;にする</emphasis>」を選びます。同じポップアップメニューに表示される「<emphasis role="bold">訳文を削除</emphasis>」という項目を選ぶと、現在の分節に入力済みの訳文を削除することもできます。訳文分節の選択を解除し、<guibutton>[Enter]を押しても同じ結果が得られます。</guibutton></para>
+          <para>OmegaT は翻訳入力行を空欄にします。翻訳入力の前に、原文を削除するキー入力の手間が省けます（つまり <keycombo><keycap>Ctrl</keycap><keycap>A</keycap></keycombo>と<keycap>Del</keycap>）。この状態で、空訳文として残すこともできます。このような訳文は、未翻訳分節と区別するために、編集ウィンドウ上では &lt;空訳文&gt; と表示されます。空訳文に設定するには、分節を右クリックして「<guilabel>訳文を&lt;空訳文&gt;にする</guilabel>」を選びます。同じポップアップメニューに表示される「<guilabel>訳文を削除</guilabel>」という項目を選ぶと、現在の分節に入力済みの訳文を削除することもできます。訳文分節の選択を解除し、<guibutton>[Enter]を押しても同じ結果が得られます。</guibutton></para>
         </listitem>
       </varlistentry>
 
@@ -829,7 +855,7 @@
         <term>分節をテキストファイルへ出力</term>
 
         <listitem>
-          <para>テキスト出力機能は、現在作業中の <application>OmegaT</application> プロジェクトのデータをプレーンテキストファイルに出力するものです。データは、分節に移動したタイミングで出力されます。ファイルは OmegaT の個人設定フォルダー配下の script フォルダーに作成されます。内容は、次の通りです：</para>
+          <para>テキスト出力機能は、現在作業中の OmegaT プロジェクトのデータをプレーンテキストファイルに出力するものです。データは、分節に移動したタイミングで出力されます。ファイルは OmegaT の個人設定フォルダー配下の <filename class="directory">script</filename> フォルダーに作成されます。内容は、次の通りです：</para>
 
           <itemizedlist>
             <listitem>
@@ -841,7 +867,7 @@
             </listitem>
 
             <listitem>
-              <para><keycap>Ctrl+Shift+C</keycap> キーを押すか、またはメニュー<guimenuitem>［編集］→［選択領域を出力］</guimenuitem>を選んだ時点で選択されているテキスト（<filename>selection.txt</filename>）</para>
+              <para><keycombo><keycap>Ctr</keycap><keycap>Shift</keycap><keycap>C</keycap></keycombo> キーを押すか、またはメニュー<menuchoice><guimenu>［編集］</guimenu><guimenuitem>［選択領域を出力］</guimenuitem></menuchoice>を選んだ時点で選択されているテキスト（<filename>selection.txt</filename>）</para>
             </listitem>
           </itemizedlist>
 
@@ -1096,12 +1122,12 @@
   <section>
     <title>プラグイン</title>
 
-    <para>使用可能なプラグインのリストにアクセスできます。プラグインは、 OmegaT インストール・フォルダーまたはプラットフォーム固有の OmegaT ユーザー設定フォルダーの下にある <filename>/plugins</filename> フォルダーにインストールされます。</para>
+    <para>使用可能なプラグインのリストにアクセスできます。プラグインは、 OmegaT インストール・フォルダーまたはプラットフォーム固有の OmegaT ユーザー設定フォルダーの下にある <filename class="directory">plugins</filename> フォルダーにインストールされます。</para>
   </section>
 
   <section>
     <title>更新</title>
 
-    <para><application>OmegaT</application> の更新の自動通知を有効にします。</para>
+    <para>OmegaT の更新の自動通知を有効にします。</para>
   </section>
 </section>

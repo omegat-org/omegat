@@ -6,7 +6,7 @@
   <section>
     <title>辞書のダウンロードとインストール方法</title>
 
-    <para><application>OmegaT</application> は、StarDict 形式および Lingvo DSL 形式の辞書に対応しています。StarDict 形式の辞書は、次の手順でインストールしてください：</para>
+    <para>OmegaTは、StarDict 形式および Lingvo DSL 形式の辞書に対応しています。StarDict 形式の辞書は、次の手順でインストールしてください：</para>
 
     <itemizedlist>
       <listitem>
@@ -16,13 +16,13 @@
 
     <itemizedlist>
       <listitem>
-        <para>辞書ファイルをダウンロードします。これは <filename>TAR アーカイブ</filename>（拡張子 <emphasis>tar.bz</emphasis> または <emphasis>tar.bz2</emphasis>）である必要があります。</para>
+        <para>ファイルをダウンロードします。これは tarball アーカイブ (拡張子 <filename>tar.bz</filename> または <filename>tar.bz2</filename>) をダウンロードする必要があります。</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>untar コマンド（Windows であれば、たとえば <filename>WinRAR</filename> などのユーティリティ）で、そのファイルを展開します。展開先は、プロジェクトフォルダー配下の「dictionary」フォルダーの中です。展開すると、拡張子が <emphasis>dz, idx </emphasis>、<emphasis>ifo</emphasis> の３つのファイルができるはずです。</para>
+        <para>untarユーティリティ(またはWindowsでは<filename>winrar</filename>などの同等のユーティリティ)を使用して、その内容をプロジェクトの<filename class="directory">dictionary</filename>フォルダに抽出します。拡張子は <filename>dz、 idx </filename>、および <filename>ifo</filename>の 3 つのファイルがあるはずです。</para>
       </listitem>
     </itemizedlist>
 
@@ -80,7 +80,7 @@
 
     <itemizedlist>
       <listitem>
-        <para>そのフォルダーには同じ名前のファイルが３つ（拡張子違いで）存在していますか？　もし１つしか見当たらなければ、拡張子を確認してみましょう。<emphasis>tar.bz</emphasis> だったら、圧縮ファイルを展開し忘れています。</para>
+        <para>そのフォルダーには同じ名前のファイルが３つ（拡張子違いで）存在していますか？　もし１つしか見当たらなければ、拡張子を確認してみましょう。<filename>tar.bz</filename> だったら、圧縮ファイルを展開し忘れています。</para>
       </listitem>
     </itemizedlist>
   </section>

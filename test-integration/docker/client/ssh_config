@@ -2,5 +2,4 @@ Host server
  Hostname server
  User git
  IdentityFile ~/.ssh/id_rsa
- IdentitiesOnly yes
  StrictHostKeyChecking no

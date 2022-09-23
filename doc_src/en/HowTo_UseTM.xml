@@ -237,15 +237,14 @@
   languages with a third</title>
 
   <para>OmegaT displays fuzzy matches in the <link linkend="panes.fuzzy.matches"
-  endterm="panes.fuzzy.matches.title"/> pane. But such matches are limited to
-  the source and target languages defined in <link
+  endterm="panes.fuzzy.matches.title"/> pane. Such matches are by default
+  limited to the source and target languages defined in <link
   linkend="dialogs.project.properties"
-  endterm="dialogs.project.properties.title"/>, even if the reference TMX are
-  multilingual.</para>
+  endterm="dialogs.project.properties.title"/>, but you can also add matches in languages that are not the target language. See <link linkend="dialog.preferences.tm.matches.other.languages" endterm="dialog.preferences.tm.matches.other.languages.title"/> for details.</para>
 
-  <para>With OmegaT, you can display a third language <emphasis>right
-  under</emphasis> the source segment to use as a third language
-  reference.</para>
+  <para>With OmegaT, you can also display a third language <emphasis>right
+  under</emphasis> the source segment to use as a alternative language
+  reference for the source text.</para>
 
 	<figure id="how.to.tm.bridge.two.languages.looks">
       <title id="how.to.tm.bridge.two.languages.looks.title">Bridge two languages with a third</title>
@@ -257,7 +256,7 @@
           <imagedata fileref="images/EN-JA-FR.png" width="60%"/>
         </imageobject>
 		<caption><para>English as the source language, French in translation,
-		Japanese as "bridge" third language reference.</para></caption>
+		Japanese as "bridge" alternative language reference.</para></caption>
       </mediaobject>
     </figure>
 
@@ -284,8 +283,8 @@
 	  </listitem>
 	</orderedlist>
 	
-    <note><para>Only one TMX file can be used for any given language pair. But
-    you can use as many different language pairs as "bridge" languages.</para>
+    <note><para>You can use any number of TMX files in as many different
+    language pairs as "bridge" languages as you want.</para>
 
 	<figure id="how.to.tm.bridge.two.languages.looks3">
       <title id="how.to.tm.bridge.two.languages.looks3.title">Bridge two languages with many</title>

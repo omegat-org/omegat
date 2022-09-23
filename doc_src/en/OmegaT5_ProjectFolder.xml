@@ -148,12 +148,12 @@
 
     <section id="project.folder.tm.tmx2source">
       <title id="project.folder.tm.tmx2source.title">tm/tmx2source</title>
+
   <para>OmegaT displays fuzzy matches in the <link linkend="panes.fuzzy.matches"
-  endterm="panes.fuzzy.matches.title"/> pane. But such matches are limited to
-  the source and target languages defined in <link
+  endterm="panes.fuzzy.matches.title"/> pane. Such matches are by default
+  limited to the source and target languages defined in <link
   linkend="dialogs.project.properties"
-  endterm="dialogs.project.properties.title"/>, even if the reference TMX are
-  multilingual.</para>
+  endterm="dialogs.project.properties.title"/>, but you can also add matches in languages that are not the target language. See <link linkend="dialog.preferences.tm.matches.other.languages" endterm="dialog.preferences.tm.matches.other.languages.title"/> for details.</para>
 
   <para>With OmegaT, you can display a third language <emphasis>right
   under</emphasis> the source segment to use as a third language reference. See

@@ -40,10 +40,9 @@ git config receive.autogc false
 Docker and docker compose is popular to prepare a pragmatic test environment.
 You can find docker configurations `Dockerfile` in `test-integration/docker/`
 
-A test setup requires three containers.
-1. keygen: a docker container to create ssh key pair
-2. server: ssh+git server container to provide team repository
-3. client: omegat test instance container to run integration test.
+A test setup requires two containers.
+1. server: ssh+git and ssh+svn server container to provide team repository
+2. client: omegat test instance container to run integration test.
 
 OmegaT project provide `.docker-compose.yml` compose configuration that orchestrate
 test setup and execution in one line command.
@@ -120,6 +119,18 @@ docker-compose -f .docker-compose.yml down
 ```
 
 This clean up container resources.
+
+### Test svn setup
+
+When type environment is set to "GIT" then tested ssh+git configuration.
+If set it to SVN or other than "GIT", it test with ssh+svn setup.
+
+```console
+env DURATION=600 TYPE=SVN \
+  docker-compose -f .docker-compose.yml up \
+    --abort-on-container-exit --exit-code-from client
+```
+
 
 ## Manual execution
 

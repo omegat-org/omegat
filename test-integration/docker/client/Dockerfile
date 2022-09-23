@@ -26,19 +26,18 @@
 
 FROM debian:bullseye-slim
 RUN apt-get -y update && apt-get upgrade -y && apt-get install -y openssh-client git openjdk-11-jdk inotify-tools curl subversion
-RUN adduser --disabled-password --gecos "" --home /home/omegat --shell /bin/bash omegat && mkdir -p /home/omegat/.ssh
+RUN adduser --disabled-password --gecos "" --home /home/omegat --shell /bin/bash omegat && mkdir -p /home/omegat/.ssh \
+    && touch /home/omegat/.ssh/known_hosts && chmod 600 /home/omegat/.ssh/known_hosts
 COPY ssh_config /home/omegat/.ssh/config
-RUN chmod 700 /home/omegat/.ssh && chown -R omegat /home/omegat
+RUN chown -R omegat /home/omegat
 
 USER omegat
 
 CMD ([ -f /keys/id_rsa ] || inotifywait -e attrib /keys ) \
-  && cp /keys/id_rsa /home/omegat/.ssh/id_rsa \
-  && chmod 600 /home/omegat/.ssh/id_rsa && chown omegat /home/omegat/.ssh/id_rsa \
-  && touch /home/omegat/.ssh/known_hosts \
-  && git config --global user.name example && git config --global user.email git@example.com \
-  && git config --global http.sslVerify false \
-  && echo "start test-integration" \
-  && (cd /code \
-    && ./gradlew testIntegration -Domegat.test.duration=${DURATION} -Domegat.test.repo=${REPO} \
-     -Domegat.test.repo.alt=${ALTREPO} -Domegat.test.map.repo=${MAPREPO} -Domegat.test.map.file=${MAPFILE})
+  && cp /keys/id_rsa /home/omegat/.ssh/id_rsa && chown omegat.omegat /home/omegat/.ssh/id_rsa && chmod 600 /home/omegat/.ssh/id_rsa \
+  && git config --global user.name example && git config --global user.email git@example.com && git config --global http.sslVerify false \
+  && [ "${TYPE}" = "SVN" ] && export REPO=http://server/svn/omegat-test.svn REPO2=http://server/svn/omegat-test.svn \
+     || [ "${TYPE}" = "GIT" ] && export REPO=git@server:omegat-test.git REPO2=https://git:gitpass@server/omegat-test.git \
+     || export REPO=svn+ssh://git@server/home/git/omegat-test.svn REPO2=svn+ssh://git@server/home/git/omegat-test.svn \
+  && cd /code && ./gradlew testIntegration -Dsvnkit.ssh.client=apache -Domegat.test.duration=${DURATION} -Domegat.test.repo=${REPO} \
+       -Domegat.test.repo.alt=${REPO2} -Domegat.test.map.repo=http://server/ -Domegat.test.map.file=README

@@ -24,7 +24,7 @@ to commit it, see "GIT_CONFLICT=Push failed. Will be synchronized next time."
 
 Note that when using a git repository accessed by the `file://` protocol, gc can cause concurrency issues that
 result in an error saving the project and missed sync cycles.
-When this happens near the end of the test the test will fail (seen with JGit 4.8).
+When this happens near the end of the test will fail (seen with JGit 4.8).
 
 This has not been seen when using `git+ssh` protocol. This is unlikely to be a problem in real-world
 scenarios, but a workaround for this test is to disable gc on the repo with
@@ -40,13 +40,22 @@ git config receive.autogc false
 Docker and docker compose is popular to prepare a pragmatic test environment.
 You can find docker configurations `Dockerfile` in `test-integration/docker/`
 
-A test setup requires three containers.
-1. keygen: a docker container to create ssh key pair
-2. server: ssh+git server container to provide team repository
-3. client: omegat test instance container to run integration test.
+A test setup requires two containers.
+1. server: ssh+git, git https, http content, http-dav and ssh+svn server
+   container to provide team repository and mapping
+2. client: omegat test instance container to run integration test.
 
 OmegaT project provide `.docker-compose.yml` compose configuration that orchestrate
 test setup and execution in one line command.
+
+Server has FOUR individual contents.
+1. Git team: ssh+git and git https protocol provide omegat team repository
+2. SVN team 1: http-dav provide omegat team repository without authentication
+   on http://server/svn/omegat-test.svn
+3. SVN team 2: ssh+svn omegat team repository on /home/git/omegat-test.svn
+4. Plain HTTP server: http://server/README provide content for mapping
+
+Repositories are independent among each other.
 
 ### How to run
 
@@ -121,6 +130,37 @@ docker-compose -f .docker-compose.yml down
 
 This clean up container resources.
 
+### repository type
+
+When "TYPE" environment variable is set to "GIT", it tests ssh+git configuration
+with a mapping configuration with http repository for source data. 
+
+When set it to "SVN", it tests with "http://svn-server/svn/trunk/repo.svn" setup
+with a mapping configuration with http repository for source data.
+
+When set it to "SSH", it tests with "svn+ssh://svn-server/svn/repo.svn" setup
+with a mapping configuration with http repository for source data.
+
+When "TYPE" is not set or other than above, it tests with "GIT" configuration as default. 
+
+```console
+env DURATION=2400 TYPE=GIT \
+  docker-compose -f .docker-compose.yml up \
+    --abort-on-container-exit --exit-code-from client
+```
+
+```console
+env DURATION=2400 TYPE=SVN \
+  docker-compose -f .docker-compose.yml up \
+    --abort-on-container-exit --exit-code-from client
+```
+
+```console
+env DURATION=2400 TYPE=SSH \
+  docker-compose -f .docker-compose.yml up \
+    --abort-on-container-exit --exit-code-from client
+```
+
 ## Manual execution
 
 The way you do the integration test is:
@@ -134,7 +174,7 @@ The way you do the integration test is:
 #### Prepare repository server
 
 You need to prepare repository server where test against.
-It can not be empty, but omegat team project will be overwrite by integration test.
+It can not be empty, but omegat team project will be overwritten by integration test.
 
 #### Simple integration test
 
@@ -161,10 +201,10 @@ An integration test prepare a team project with a specified mapping.
  -Domegat.test.map.file=<Filename of mapping target>
 ```
 
-For example, when you have a repository in Github user example repository omegat-test.git
+For example, when you have a repository in GitHub user example repository omegat-test.git
 and mapping target `https://example.com/index.html` as `source/index.html`
 
-```bash
+```console
 ./gradlew testIntegration -Domegat.test.repo=git@github.com:example/omegat-test.git \
  -Domegat.test.map.repo=https://example.com/ \
  -Domegat.test.map.file=index.html
@@ -172,7 +212,7 @@ and mapping target `https://example.com/index.html` as `source/index.html`
 
 #### Multiple scheme test
 
-Some popular public git repository services such as Github and Gitlab support
+Some popular public git repository services such as GitHub and Gitlab support
 both ssh+git and git smart http(s) access for the repositories.
 You can test a situation that team project members access both protocols.
 
@@ -192,13 +232,20 @@ An integration with a configuration of mapping and multiple protocol scheme will
 
 OmegaT supports git and subversion repository URL.
 
-#### Git
+#### Git URLs
 
 * git@example.com:user/trans.git
 * ssh+git://user@example.com/user/trans.git
 * https://user:pass@example.net/user/trans.git
 
-#### Subversion
+#### Git Branches
+
+Automatically detect default branch such as `main` or `master`
+It also accept arbitrary branch name.
+Integration test does not accept branch name.
+
+#### Subversion URLs
 
 * "svn+ssh://user@svn.example.net/test/"
-* "https://example.com/user/trans/trunk/"
+* "https://example.com/user/trans.svn/trunk/"
+* "http://example.com/user/trans.svn/trunk/"

@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+"../../../docbook-xml-4.5/docbookx.dtd"
+[<!ENTITY % manualvariables SYSTEM "manualvariables.mod"> %manualvariables;]>
+
 <section id="dialogs.preferences">
   <title id="dialogs.preferences.title">General Preferences</title>
 
@@ -519,7 +522,7 @@
           available.</para>
 
           <para>See the <ulink
-          url="https://docs.oracle.com/javase/8/docs/api/java/text/SimpleDateFormat.html">
+          url="&javadate;">
           Oracle documentation</ulink> for examples of the SimpleDateFormat
           patterns.</para>
         </listitem>

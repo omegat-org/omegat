@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
-"../../../docbook-xml-4.5/docbookx.dtd">
+"../../../docbook-xml-4.5/docbookx.dtd"
+[<!ENTITY % manualvariables SYSTEM "manualvariables.mod"> %manualvariables;]>
+
 <appendix id="appendix.regexp">
   <title id="appendix.regexp.title">Regular expressions</title>
 
@@ -74,7 +76,7 @@
   <para>The regular expressions (or regex for short) used in OmegaT are those
   supported by Java. Should you need more specific information, consult the
   <ulink
-  url="https://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html">Java
+  url="&javaregex;">Java
   Regex documentation</ulink>. See additional references and examples
   below.</para>
 
@@ -246,14 +248,14 @@
         <row>
           <entry>\p{InGreek}</entry>
           <entry>A character in the Greek block (simple <ulink
-          url="https://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html#ubc">
+          url="&javaregex;#ubc">
           block</ulink>)</entry>
         </row>
 
         <row>
           <entry>\p{Lu}</entry>
           <entry>An uppercase letter (simple <ulink
-          url="https://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html#ubc">
+          url="&javaregex;#ubc">
           category</ulink>)</entry>
         </row>
 

@@ -6,9 +6,27 @@
 ]>
 <chapter id="installing.and.running.omegat">
   <title id="installing.and.running.omegat.title">Installing and Running
-  OmegaT</title>
+  OmegaT &vernb;</title>
 
-  <para>OmegaT &vernb; requires a &javaversionlong; (JRE) to run.</para>
+  <para>OmegaT comes in two editions:</para>
+
+  <variablelist>
+	<varlistentry>
+	  <term>Standard: OmegaT &vernb;</term>
+	  <listitem><para>This edition is recommended for everyday use.</para></listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term>Developer: OmegaT Nightly</term>
+	  <listitem><para>This edition is automatically generated every time new
+	  code is added to OmegaT. It is used for testing
+	  purposes.</para></listitem>
+	</varlistentry>
+  </variablelist>
+
+  <para>The files are downloadable directly from <ulink
+  url="https://omegat.org/download">https://omegat.org</ulink>.</para>
+
+  <note><para>OmegaT &vernb; requires a &javaversionlong; (JRE) to run.</para>
 
   <para>OmegaT packages are available both in versions bundled with Java, and
   versions without it. Packages without Java rely on a &javaversionlong;
@@ -19,24 +37,9 @@
 
   <para>Due to licensing considerations, the OmegaT team recommends the Java
   runtime Eclipse Temurin provided by the &preferedopenjdk;, but any Java 8
-  compatible runtime environment should work.</para>
+  compatible runtime environment should work.</para></note>
 
-  <para>OmegaT comes in two editions:</para>
 
-  <variablelist>
-	<varlistentry>
-	  <term>Standard</term>
-	  <listitem><para>This edition is suitable for everyday use.</para></listitem>
-	</varlistentry>
-	<varlistentry>
-	  <term>Developer</term>
-	  <listitem><para>This edition is more suitable for testing new features.</para></listitem>
-	</varlistentry>
-  </variablelist>
-
-  <para>The files are downloadable directly from <ulink
-  url="https://omegat.org/download">omegat.org</ulink>. All the packages listed
-  below are available from that site.</para>
 
   <section id="installing.omegat">
     <title id="installing.omegat.title">Installing OmegaT</title>
@@ -44,34 +47,34 @@
     <section id="installing.omegat.windows">
       <title id="installing.omegat.windows.title">Windows</title>
 
-      <section id="installing.omegat.windows.download.the.package">
-        <title
-        id="installing.omegat.windows.download.the.package.title">Download the
-        package</title>
+  <!--     <section id="installing.omegat.windows.download.the.package"> -->
+  <!--       <title -->
+  <!--       id="installing.omegat.windows.download.the.package.title">Download the -->
+  <!--       package</title> -->
 
-        <para>Do you want OmegaT bundled with Java?</para>
+  <!--       <para>Do you want OmegaT bundled with Java?</para> -->
 
-  <variablelist>
-	<varlistentry>
-	  <term>No</term>
-	  <listitem><para>download
-	  <filename>OmegaT_&vernb;_Windows_without_JRE.exe</filename></para></listitem>
-	</varlistentry>
-	<varlistentry>
-	  <term>Yes / I'm not sure</term>
-	  <listitem><para>download
-	  <filename>OmegaT_&vernb;_Windows_64_Signed.exe</filename></para></listitem>
-	</varlistentry>
-  </variablelist>
+  <!-- <variablelist> -->
+  <!-- 	<varlistentry> -->
+  <!-- 	  <term>No</term> -->
+  <!-- 	  <listitem><para>download -->
+  <!-- 	  <filename>Windows without JRE</filename></para></listitem> -->
+  <!-- 	</varlistentry> -->
+  <!-- 	<varlistentry> -->
+  <!-- 	  <term>Yes / I'm not sure</term> -->
+  <!-- 	  <listitem><para>download -->
+  <!-- 	  <filename>Windows with 64-bit JRE</filename></para></listitem> -->
+  <!-- 	</varlistentry> -->
+  <!-- </variablelist> -->
 		
 		
-            <note>
-              <para>If you have a 32-bit system (most likely on a pre-2010
-              machine), you should download
-              <filename>OmegaT_&vernb;_Windows_Signed.exe</filename>
-              instead.</para>
-            </note>
-      </section>
+  <!--           <note> -->
+  <!--             <para>If you have a 32-bit system (most likely on a pre-2010 -->
+  <!--             machine), you should download -->
+  <!--             <filename>Windows with JRE</filename> -->
+  <!--             instead.</para> -->
+  <!--           </note> -->
+  <!--     </section> -->
 
       <section id="installing.omegat.windows.install.the.package">
         <title
@@ -87,102 +90,88 @@
     </section>
 
     <section id="installing.omegat.linux.intel">
-      <title id="installing.omegat.linux.intel.title">Linux (Intel)</title>
+      <title id="installing.omegat.linux.intel.title">Linux</title>
 
-      <section id="installing.omegat.linux.intel.download.the.package">
-        <title
-        id="installing.omegat.linux.intel.download.the.package.title">Check
-        for an available package</title>
+	  <para>Linux distributions offer OmegaT packages with semi-automated
+	  installation processes. The instructions given here apply to people who
+	  download the package from the <ulink
+	  url="https://omegat.org/download">https://omegat.org</ulink>
+	  site.</para>
 
-        <para>Check your distribution's official or, if applicable,
-        user-provided package repositories for an up-to-date OmegaT package.
-        If there is one, use your standard package manager to install
-        it.</para>
+  <!--     <section id="installing.omegat.linux.intel.download.the.package"> -->
+  <!--       <title -->
+  <!--       id="installing.omegat.linux.intel.download.the.package.title">Check -->
+  <!--       for an available package</title> -->
 
-        <para>If your distribution does not have an OmegaT package, or only an
-        outdated one, follow the instructions in the following sections to
-        install it.</para>
-      </section>
+  <!--       <para>Check your distribution's official or, if applicable, -->
+  <!--       user-provided package repositories for an up-to-date OmegaT package. -->
+  <!--       If there is one, use your standard package manager to install -->
+  <!--       it.</para> -->
 
-      <section>
-        <title>Download the package</title>
+  <!--       <para>If your distribution does not have an OmegaT package, or only an -->
+  <!--       outdated one, follow the instructions in the following sections to -->
+  <!--       install it.</para> -->
+  <!--     </section> -->
 
-        <para>Do you want OmegaT bundled with Java?</para>
+  <!--     <section> -->
+  <!--       <title>Download the package</title> -->
 
-     <variablelist>
-	<varlistentry>
-	  <term>No</term>
-	  <listitem><para>download
-	  <filename>OmegaT_&vernb;_Without_JRE.zip</filename></para></listitem>
-	</varlistentry>
-	<varlistentry>
-	  <term>Yes / I'm not sure</term>
-	  <listitem><para>download
-	  <filename>OmegaT_&vernb;_Linux_64.tar.bz2</filename></para></listitem>
-	</varlistentry>
-  </variablelist>
+  <!--       <para>Do you want OmegaT bundled with Java?</para> -->
 
-            <note>
-              <para>If you have a 32-bit system (most likely on a pre-2010
-              machine), you should download
-              <filename>OmegaT_&vernb;_Linux.tar.bz2</filename>
-              instead.</para>
-            </note>
+  <!--    <variablelist> -->
+  <!-- 	<varlistentry> -->
+  <!-- 	  <term>No</term> -->
+  <!-- 	  <listitem><para>download -->
+  <!-- 	  <filename>OmegaT_&vernb;_Without_JRE.zip</filename></para></listitem> -->
+  <!-- 	</varlistentry> -->
+  <!-- 	<varlistentry> -->
+  <!-- 	  <term>Yes / I'm not sure</term> -->
+  <!-- 	  <listitem><para>download -->
+  <!-- 	  <filename>OmegaT_&vernb;_Linux_64.tar.bz2</filename></para></listitem> -->
+  <!-- 	</varlistentry> -->
+  <!-- </variablelist> -->
 
-            <para>This package is bundled with &bundledjavaversion;. This JRE
-            will not interfere with other Java implementations that may
-            already be installed on your system.</para>
-      </section>
+  <!--           <note> -->
+  <!--             <para>If you have a 32-bit system (most likely on a pre-2010 -->
+  <!--             machine), you should download -->
+  <!--             <filename>OmegaT_&vernb;_Linux.tar.bz2</filename> -->
+  <!--             instead.</para> -->
+  <!--           </note> -->
+
+  <!--           <para>This package is bundled with &bundledjavaversion;. This JRE -->
+  <!--           will not interfere with other Java implementations that may -->
+  <!--           already be installed on your system.</para> -->
+  <!--     </section> -->
 
       <section id="installing.omegat.linux.intel.install.the.package">
         <title
         id="installing.omegat.linux.intel.install.the.package.title">Install
         OmegaT</title>
 
-        <para>Instructions for the command line are provided below.</para>
-
-        <orderedlist>
-          <listitem>
-            <para>Unpack/untar the file you downloaded using the command
-            appropriate to the file you downloaded:</para>
-
-            <programlisting>$ unzip OmegaT_&vernb;_Without_JRE.zip</programlisting>
-
-            <para>(you may need to install the <filename>unzip</filename>
-            package first) or</para>
-
-            <programlisting>$ tar xf OmegaT_&vernb;_Linux_64.tar.bz2</programlisting>
-
-            <para>This will create a new folder in the current folder. The new
-            folder will be named after the package you downloaded, and contain
+            <para>Unpack/untar the file you downloaded. This creates a new
+            folder named after the package you downloaded. That folder contains
             all the files needed to run OmegaT.</para>
-          </listitem>
 
-          <listitem>
-            <para>Navigate to the newly created folder and run the
-            <filename>linux-install.sh</filename> script found there.</para>
-
-            <programlisting>$ cd OmegaT_&vernb;_<parameter>&lt;package_you_downloaded&gt;</parameter>
-$ ./linux-install.sh</programlisting>
+            <note><para>Although you can run OmegaT directly from the available
+            files, you can also run the <filename>linux-install.sh</filename>
+            script found there to have OmegaT installed in more appropriate
+            locations.</para>
 
             <para>Running the script will require you to enter your
             <filename>sudo</filename> password.</para>
 
             <para>The script checks for an existing installation of the same
-            OmegaT version in <filename>/opt/omegat/</filename>. If there
-            isn't one, it installs the program in
+            OmegaT version in <filename>/opt/omegat/</filename>. If there isn't
+            one, it installs the program in
             <filename>/opt/omegat/OmegaT_&vernb;</filename> and sets it as the
             default version (in
             <filename>/opt/omegat/OmegaT-default</filename>). The installation
-            script is available <ulink
-            url="https://sourceforge.net/p/omegat/svn/HEAD/tree/trunk/release/linux-specific/linux-install.sh">here</ulink>,
-            for your perusal before use.</para>
+            script is available on the <ulink
+            url="https://sourceforge.net/p/omegat/svn/HEAD/tree/trunk/release/linux-specific/linux-install.sh">development
+            site</ulink>, for your perusal before use.</para></note>
 
-            <para>After the installation is complete, you can safely delete
-            the <filename>.zip</filename> or <filename>.tar.bz2</filename>
-            file.</para>
-          </listitem>
-        </orderedlist>
+            <para>After the unpacking or installation is complete, you can
+            delete the downloaded file as it is no longer needed.</para>
       </section>
 
       <section id="installing.omegat.linux.intel.add..to.your.menus.or.panels">
@@ -283,32 +272,18 @@ $ ./linux-install.sh</programlisting>
     <section id="Installing.omegat.macos">
       <title id="Installing.omegat.macos.title">macOS</title>
 
-      <section id="installing.omegat.macos.download.the.package">
-        <title
-        id="installing.omegat.macos.download.the.package.title">Download the
-        package</title>
-
-        <para>The macOS package contains &bundledjavaversion;</para>
-
-        <para>Download
-        <filename>OmegaT_&vernb;_Mac_Notarized.zip</filename>.</para>
-      </section>
-
       <section id="installing.omegat.macos.install.the.package">
         <title id="installing.omegat.macos.install.the.package.title">Install
         OmegaT</title>
 
-        <para>Double click on
-        <filename>OmegaT_&vernb;_Mac_Notarized.zip</filename> to unpack it.
-        This creates a folder called <filename>OmegaT</filename>. The folder
-        contains two files: <filename>index.html</filename> (the manual index)
-        and <filename>OmegaT.app</filename> (the application). Copy the folder
-        to a suitable location (e.g.
-        <filename>Applications</filename>).</para>
+        <para>Double click on the package you downloaded to unpack it.  This
+        creates a folder called <filename>OmegaT</filename>. The folder contains
+        two files: <filename>index.html</filename> (the manual index) and
+        <filename>OmegaT.app</filename> (the application). Copy the folder to a
+        suitable location (e.g.  <filename>Applications</filename>).</para>
 
-        <para>Once you have done this, you can delete the
-        <filename>OmegaT_&vernb;_Mac_Notarized.zip</filename> file as it is no
-        longer needed.</para>
+        <para>Once you have done this, you can delete the downloaded file as it
+        is no longer needed.</para>
       </section>
 
       <section id="installing.omegat.macos.add.to.the.dock">
@@ -323,23 +298,20 @@ $ ./linux-install.sh</programlisting>
     <section id="installing.omegat.other.systems">
       <title id="installing.omegat.other.systems.title">Other systems</title>
 
-      <para>This information applies to systems such as Solaris SPARC/x86/x64,
-      Linux x64/PowerPC, Windows x64.</para>
-
-      <para>For such systems, only the generic non-bundled OmegaT version is
-      offered. Make sure that your system has a Java version compatible with
-      &javaversionlong;.</para>
+      <para>This information applies to all systems that have a Java version
+      compatible with &javaversionlong;. That includes the platforms described
+      above, but also the platforms for which the above specific packages are not
+      provided.</para>
 
       <section id="installing.omegat.other.systems.download.the.package">
         <title
         id="installing.omegat.other.systems.download.the.package.title">The
         OmegaT generic package</title>
 
-        <para>Download <filename>OmegaT_&vernb;_Without_JRE.zip</filename>.
-        This package can be used on any system where a &javaversionlong; is
-        installed, including Windows, Linux or macOS.</para>
+        <para>Download the <emphasis>Cross-platform without JRE</emphasis>
+        version.</para>
 
-        <para>The Eclipse Foundation provides OpenJDK Runtime Environments
+        <note><para>The Eclipse Foundation provides OpenJDK Runtime Environments
         JREs for many systems at <ulink
         url="https://adoptium.net/temurin"/>.</para>
 
@@ -347,7 +319,7 @@ $ ./linux-install.sh</programlisting>
         url="https://developer.ibm.com/languages/java/semeru-runtimes/downloads/?license=IBM"/>.</para>
 
         <para>Follow the installation instructions of the package you
-        need.</para>
+        need.</para></note>
       </section>
 
       <section id="installing.omegat.other.systems.install.the.package">
@@ -355,10 +327,8 @@ $ ./linux-install.sh</programlisting>
         id="installing.omegat.other.systems.install.the.package.title">Install
         OmegaT</title>
 
-        <para>To install OmegaT, simply unpack the
-        <filename>OmegaT_&vernb;_Without_JRE.zip</filename> file. This creates
-        an <filename>OmegaT_&vernb;_Without_JRE/</filename> folder in the
-        download folder with all the files necessary to run OmegaT.</para>
+        <para>Unpack the file that you downloaded. This creates a folder with
+        all the files necessary to run OmegaT.</para>
       </section>
 
       <section id="installing.omegat.other.systems.install.convenient.shortcuts">
@@ -427,13 +397,14 @@ $ ./linux-install.sh</programlisting>
       <para>Double-click on <filename>OmegaT.app</filename> or click on its
       location in the Dock.</para>
 
-      <para>To launch multiple instances of <filename>OmegaT.app</filename>,
-      double-click the file <emphasis>OmegaT</emphasis> located in
-      <filename>OmegaT.app/Contents/MacOS/</filename>.</para>
+      <para><filename>OmegaT.app</filename> comes with an
+      <filename>OmegaT</filename> executable located in
+      <filename>OmegaT.app/Contents/MacOS/</filename> that you can also use to
+      launch multiple instances of <filename>OmegaT.app</filename>.</para>
 
-      <para>Use the <filename>OmegaT.jar</filename> file located in
-      <filename>OmegaT.app/Contents/MacOS/Java/</filename> to launch OmegaT
-      from the command line. See <link
+      <para>And it also comes with the generic <filename>OmegaT.jar</filename>
+      file located in <filename>OmegaT.app/Contents/MacOS/Java/</filename> that
+      you can use to launch OmegaT from the command line. See <link
       endterm="launch.with.command.line.title"
       linkend="launch.with.command.line"/> for details.</para>
 
@@ -442,14 +413,14 @@ $ ./linux-install.sh</programlisting>
       well as the <filename>Info.plist</filename> (Java configuration) files
       located inside the OmegaT.app package.</para>
 
-      <para>To access the configuration files, right-click on
-      <filename>OmegaT.app</filename> and select "Show Package
-      Contents".</para>
-
       <para><filename>Configuration.properties</filename> is located in
       <filename>Contents/Resources/</filename>.
       <filename>Info.plist</filename> is located in
       <filename>Contents/</filename>.</para>
+
+      <note><para>To access the files inside <filename>OmegaT.app</filename>,
+      right-click on <filename>OmegaT.app</filename> and select "Show Package
+      Contents".</para></note>
 
       <para>Right-click on the file you want to modify and select your text
       editor of choice or <command>cd</command> there directly from the
@@ -485,16 +456,20 @@ $ ./linux-install.sh</programlisting>
     <section id="running.omegat.on.other.systems">
       <title id="running.omegat.on.other.systems.title">Other systems</title>
 
-      <para>Methods vary from one system to another, but in general, once
-      OmegaT is installed, you can launch it directly from the command line.
-      See <link endterm="launch.with.command.line.title"
-      linkend="launch.with.command.line"/> for details. You can create a
-      script that includes the desired command line launch parameters. If
-      <filename>.jar</filename> files are properly associated with
-      &javaversionlong; and your PATH settings are correct, you can also
+      <para>Methods vary from one system to another, but in general, once OmegaT
+      is installed, you can launch it directly from the command line.  See <link
+      endterm="launch.with.command.line.title"
+      linkend="launch.with.command.line"/> for details.</para>
+
+	  <para>You can
+      create a script that includes the desired command line launch
+      parameters. If <filename>.jar</filename> files are properly associated
+      with &javaversionlong; and your PATH settings are correct, you can also
       simply click (or double-click) on <filename>OmegaT.jar</filename> to
-      launch it directly. Consult the documentation for your system for more
-      information.</para>
+      launch it directly.</para>
+
+	  <para>Consult the documentation for your system for more
+	  information.</para>
     </section>
   </section>
 
@@ -576,8 +551,12 @@ $ ./linux-install.sh</programlisting>
       version.</para>
 
       <para>All the parameters located in the <link
-      endterm="configuration.folder.title" linkend="configuration.folder"/>
-      will be shared unless you specify a  different configuration folder with the <literal>--config-dir=&lt;path&gt;</literal> option from the <link endterm="launch.with.command.line.omegat.parameters.title" linkend="launch.with.command.line.omegat.parameters"></link> on the command line . All the parameters located in a <link
+      endterm="configuration.folder.title" linkend="configuration.folder"/> will
+      be shared unless you specify a different configuration folder with the
+      <literal>--config-dir=&lt;path&gt;</literal> option from the <link
+      endterm="launch.with.command.line.omegat.parameters.title"
+      linkend="launch.with.command.line.omegat.parameters"></link> on the
+      command line . All the parameters located in a <link
       endterm="project.folder.title" linkend="project.folder"/> will apply to
       that project regardless of which version of OmegaT opens it.</para>
     </section>
@@ -600,12 +579,12 @@ $ ./linux-install.sh</programlisting>
     <title id="build.omegat.from.source.title">Building OmegaT from
     source</title>
 
-    <para>The sources of the current version can be retrieved with a Git
-    client from the <ulink url="https://git.code.sf.net/p/omegat/code"/>
-    repository or directly from <ulink
+    <para>The sources of the current version can be retrieved with a Git client
+    from the <ulink url="https://git.code.sf.net/p/omegat/code"/> repository or
+    directly from <ulink
     url="https://sourceforge.net/p/omegat/code/ci/master/tarball?path=">SourceForge</ulink>.</para>
-
-    <para>Once the code is downloaded, open a terminal in the source folder (<filename>/omegat/src</filename>) and type:</para>
+    <para>Once the code is downloaded, open a terminal in the source folder
+    (<filename>/omegat/src</filename>) and type:</para>
 
     <programlisting>./gradlew assembleDist</programlisting>
 
@@ -623,6 +602,7 @@ $ ./linux-install.sh</programlisting>
     <programlisting>./gradlew tasks</programlisting>
 
     <para>Detailed instructions on building OmegaT are in the docs_devel <ulink
-    url="https://sourceforge.net/p/omegat/svn/HEAD/tree/trunk/docs_devel/README.txt">README.txt</ulink> file.</para>
+    url="https://sourceforge.net/p/omegat/svn/HEAD/tree/trunk/docs_devel/README.txt">README.txt</ulink>
+    file.</para>
   </section>
 </chapter>

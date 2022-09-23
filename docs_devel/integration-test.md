@@ -24,7 +24,7 @@ to commit it, see "GIT_CONFLICT=Push failed. Will be synchronized next time."
 
 Note that when using a git repository accessed by the `file://` protocol, gc can cause concurrency issues that
 result in an error saving the project and missed sync cycles.
-When this happens near the end of the test the test will fail (seen with JGit 4.8).
+When this happens near the end of the test will fail (seen with JGit 4.8).
 
 This has not been seen when using `git+ssh` protocol. This is unlikely to be a problem in real-world
 scenarios, but a workaround for this test is to disable gc on the repo with
@@ -232,13 +232,20 @@ An integration with a configuration of mapping and multiple protocol scheme will
 
 OmegaT supports git and subversion repository URL.
 
-#### Git
+#### Git URLs
 
 * git@example.com:user/trans.git
 * ssh+git://user@example.com/user/trans.git
 * https://user:pass@example.net/user/trans.git
 
-#### Subversion
+#### Git Branches
+
+Automatically detect default branch such as `main` or `master`
+It also accept arbitrary branch name.
+Integration test does not accept branch name.
+
+#### Subversion URLs
 
 * "svn+ssh://user@svn.example.net/test/"
-* "https://example.com/user/trans/trunk/"
+* "https://example.com/user/trans.svn/trunk/"
+* "http://example.com/user/trans.svn/trunk/"

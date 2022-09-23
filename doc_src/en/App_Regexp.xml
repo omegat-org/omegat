@@ -4,6 +4,27 @@
 <appendix id="appendix.regexp">
   <title id="appendix.regexp.title">Regular expressions</title>
 
+  <para>Regular expressions are symbols or groups of symbols (expressions) that allow you to describe concepts.</para>
+  <para>For example:
+<variablelist>
+  <varlistentry>
+	<term>[0-9]</term>
+	  <listitem><para>represents all the numbers from 0 to 9</para>
+	  </listitem>
+  </varlistentry>
+  <varlistentry>
+	<term>\w+</term>
+	  <listitem><para>represents one or more characters that one can find in an alphabetical "word"</para>
+	  </listitem>
+  </varlistentry>
+  <varlistentry>
+	<term>\s?</term>
+	  <listitem><para>represents 0 or 1 white space character (which includes spaces, tabulations, line breaks, etc.)</para>
+	  </listitem>
+  </varlistentry>
+</variablelist>
+  </para>
+  
   <para>Regular expressions are used in many places in OmegaT and knowing how to
   use them can tremendously improve your productivity:
 

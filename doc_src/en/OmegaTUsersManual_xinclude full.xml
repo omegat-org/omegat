@@ -5,7 +5,7 @@
 <book lang="en" id="book.user.guide">
   <bookinfo>
     <title id="book.user.guide.title">OmegaT &vernb; - User's Guide</title>
-    <pubdate>25 September 2022</pubdate>
+    <pubdate>@timestamp@</pubdate>
 	<!-- TODO automate date insertion -->
     <abstract>
       <para>This document is the official user's guide to OmegaT, the free

@@ -37,7 +37,7 @@ import org.omegat.util.gui.StaticUIUtils;
 
 /**
  * Modal dialog to edit the Java Resource Bundles filter options.
- *
+ *<p>
  * Code modified from the file: MozillaDTDOptionsDialog.java
  *
  * @author Enrique Estevez (keko.gl@gmail.com)
@@ -65,6 +65,9 @@ public class ResourceBundleOptionsDialog extends javax.swing.JDialog {
 
         String notConvertCharacters = options.get(ResourceBundleFilter.OPTION_DONT_UNESCAPE_U_LITERALS);
         dontUnescapeULiteralsCB.setSelected("true".equalsIgnoreCase(notConvertCharacters));
+
+        String supportJava8Encoding = options.get(ResourceBundleFilter.OPTION_FORCE_JAVA8_LITERALS_ESCAPE);
+        supportJava8EncodingCB.setSelected(!"false".equals(supportJava8Encoding));
 
         StaticUIUtils.setEscapeAction(this, new AbstractAction() {
             @Override
@@ -97,6 +100,7 @@ public class ResourceBundleOptionsDialog extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         removeStringsUntranslatedCB = new javax.swing.JCheckBox();
         dontUnescapeULiteralsCB = new javax.swing.JCheckBox();
+        supportJava8EncodingCB = new javax.swing.JCheckBox();
         buttonPanel = new javax.swing.JPanel();
         okButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
@@ -113,7 +117,7 @@ public class ResourceBundleOptionsDialog extends javax.swing.JDialog {
         org.openide.awt.Mnemonics.setLocalizedText(removeStringsUntranslatedCB, OStrings.getString("RB_FILTER_REMOVE_STRINGS_UNTRANSLATED")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridy = 1;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
@@ -124,12 +128,18 @@ public class ResourceBundleOptionsDialog extends javax.swing.JDialog {
         org.openide.awt.Mnemonics.setLocalizedText(dontUnescapeULiteralsCB, bundle.getString("RB_FILTER_NOT_CONVERT_UNICODE_CHARACTERS")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
         jPanel1.add(dontUnescapeULiteralsCB, gridBagConstraints);
+
+        org.openide.awt.Mnemonics.setLocalizedText(supportJava8EncodingCB, OStrings.getString("RB_FILTER_SUPPORT_JAVA8_ENCODING")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel1.add(supportJava8EncodingCB, gridBagConstraints);
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
@@ -163,6 +173,7 @@ private void closeDialog(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_clos
 private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
         options.put(ResourceBundleFilter.OPTION_REMOVE_STRINGS_UNTRANSLATED, Boolean.toString(removeStringsUntranslatedCB.isSelected()));
         options.put(ResourceBundleFilter.OPTION_DONT_UNESCAPE_U_LITERALS, Boolean.toString(dontUnescapeULiteralsCB.isSelected()));
+        options.put(ResourceBundleFilter.OPTION_FORCE_JAVA8_LITERALS_ESCAPE, Boolean.toString(supportJava8EncodingCB.isSelected()));
         doClose(RET_OK);
 }//GEN-LAST:event_okButtonActionPerformed
 
@@ -183,6 +194,7 @@ private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton okButton;
     private javax.swing.JCheckBox removeStringsUntranslatedCB;
+    private javax.swing.JCheckBox supportJava8EncodingCB;
     // End of variables declaration//GEN-END:variables
 
     private int returnStatus = RET_CANCEL;

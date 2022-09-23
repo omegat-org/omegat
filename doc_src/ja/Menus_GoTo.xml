@@ -78,7 +78,7 @@
       <term>分節の選択履歴を進む</term>
 
       <listitem>
-        <para><application>OmegaT</application> は分節を選択した履歴を記憶しています。このコマンドを実行すると、<guimenuitem>［分節の選択履歴を戻る］</guimenuitem>コマンドによって移動した履歴をたどり、戻る前に選択していた分節へ移動できます。</para>
+        <para>OmegaT は分節を選択した履歴を記憶しています。このコマンドを実行すると、<guimenuitem>［分節の選択履歴を戻る］</guimenuitem>コマンドによって移動した履歴をたどり、戻る前に選択していた分節へ移動できます。</para>
       </listitem>
     </varlistentry>
 

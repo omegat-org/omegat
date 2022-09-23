@@ -24,11 +24,11 @@
 
     <itemizedlist>
       <listitem>
-        <para>数値ボタンを左クリックすると、そこに設定されているスクリプトを実行できます。また<guisubmenu>［ツール］</guisubmenu>メニューからスクリプトを選んだり、割り当てられたショートカットキー <keycap>Ctrl+Alt+F#</keycap>（# は 1 から 12）を使うことで、スクリプトを実行できます。</para>
+        <para>数値ボタンを左クリックすると、そこに設定されているスクリプトを実行できます。また<guisubmenu>［ツール］</guisubmenu>メニューからスクリプトを選んだり、割り当てられたショートカットキー <keycombo><keycap>Ctrl</keycap><keycap>Alt</keycap><keycap>F#</keycap></keycombo>（# は 1 から 12）を使うことで、スクリプトを実行できます。</para>
       </listitem>
     </itemizedlist>
 
-    <para>デフォルトでは、スクリプトファイルは<filename>「scripts」</filename>フォルダーに格納されています。このフォルダーは、OmegaT のインストール先フォルダー（<filename>OmegaT.jar </filename>ファイルを含む）の配下にあります。</para>
+    <para>デフォルトでは、スクリプトファイルは<filename class="directory">「scripts」</filename>フォルダーに格納されています。このフォルダーは、OmegaT のインストール先フォルダー（<filename>OmegaT.jar </filename>ファイルを含む）の配下にあります。</para>
 
     <para>このフォルダーに新しいスクリプトファイルを追加すると、<guilabel>スクリプト</guilabel> ウィンドウの一覧に表示されます。</para>
 

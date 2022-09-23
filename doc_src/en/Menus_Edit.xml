@@ -205,9 +205,11 @@
     <varlistentry id="menus.edit.search.dictionaries">
       <term id="menus.edit.search.dictionaries.title">Search Dictionaries</term>
       <listitem>
-        <para>If <link linkend="dialogs.preferences.dictionary">automatic
-        searching in dictionaries</link> is disabled, this function allows you
-        to search for the selected word in the dictionaries.</para>
+        <para>If <link
+        linkend="dialogs.preferences.dictionary.automatically.search.segment"
+        endterm="dialogs.preferences.dictionary.automatically.search.segment.title"/>
+        is disabled, this function allows you to search for the selected word in
+        the dictionaries.</para>
       </listitem>
     </varlistentry>
 

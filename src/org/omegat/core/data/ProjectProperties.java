@@ -696,7 +696,7 @@ public class ProjectProperties {
                     return false;
             }
         } else {
-            if (projectFilters != null || projectFilters != null) {
+            if (projectFilters != null || that.projectFilters != null) {
                 return false;
             }
         }

@@ -6,6 +6,8 @@
 <appendix id="appendix.regexp">
   <title id="appendix.regexp.title">Regular expressions</title>
 
+  <section id="appendix.regexp.introduction">
+	<title id="appendix.regexp.introduction.title">What are regular expressions</title>
   <para>Regular expressions are symbols or groups of symbols (expressions) that allow you to describe concepts.</para>
   <para>For example:
 <variablelist>
@@ -81,11 +83,85 @@
   below.</para>
 
   <note>
-	<para>This chapter is intended for advanced users, who need to define their
-	own variants of segmentation rules or devise more complex and powerful key
-	search items.</para>
+	<para>This chapter is intended for users who want to learn a powerful way to increase their productivity. Regular expressions are complex objects but even in their most basic form are extremely helpful.</para>
   </note>
+  </section>
 
+  <section id="appendix.regexp.concepts">
+	<title id="appendix.regexp.concepts.title">Concepts and practice</title>
+	<para></para>
+  </section>
+  
+  <section id="appendix.regexp.examples">
+	<title id="appendix.regexp.examples.title">Examples for use in OmegaT</title>
+	
+    <table id="regex.examples">
+      <title id="regex.examples.title">Regex - Examples of regular expressions
+      in translations</title>
+
+      <tgroup align="left" cols="2" rowsep="1">
+        <colspec align="left" colnum="1"/>
+
+        <thead>
+          <row>
+            <entry>Regular expression</entry>
+            <entry>Finds the following:</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry>(\b\w+\b)\s\1\b</entry>
+            <entry>double words</entry>
+          </row>
+
+          <row>
+            <entry>[\.,]\s*[\.,]+</entry>
+            <entry>comma or a period, followed by spaces and yet another comma
+            or period</entry>
+          </row>
+
+          <row>
+            <entry>\. \s+$</entry>
+            <entry>extra spaces after the period at the end of the line</entry>
+          </row>
+
+          <row>
+            <entry>\s+a\s+[aeiou]</entry>
+            <entry>English: words, beginning with vowels, should generally be
+            preceded by &quot;an&quot;, not &quot;a&quot;</entry>
+          </row>
+
+          <row>
+            <entry>\s+an\s+[^aeiou]</entry>
+            <entry>English: the same check as above, but concerning consonants
+            (&quot;a&quot;, not &quot;an&quot;)</entry>
+          </row>
+
+          <row>
+            <entry>\s{2,}</entry>
+            <entry>more than one space</entry>
+          </row>
+
+          <row>
+            <entry>\.[A-Z]</entry>
+            <entry>Period, followed by an upper-case letter - possibly a space
+            is missing between the period and the start of a new
+            sentence?</entry>
+          </row>
+
+          <row>
+            <entry>\bis\b</entry>
+            <entry>search for “is”, not “this” or “isn't” etc.</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+  
+  <section id="appendix.regexp.reference">
+	<title id="appendix.regexp.reference.title">Basic reference</title>
+	
   <table id="regex.flags">
     <title id="regex.flags.title">Regex - Flags</title>
 
@@ -539,68 +615,6 @@
     <para>A nice collection of useful regex cases can be found in OmegaT itself
     (see Options &gt; Segmentation).  The following list includes expressions
     you may find useful when searching through the translation memory:</para>
-
-    <table id="regex.examples">
-      <title id="regex.examples.title">Regex - Examples of regular expressions
-      in translations</title>
-
-      <tgroup align="left" cols="2" rowsep="1">
-        <colspec align="left" colnum="1"/>
-
-        <thead>
-          <row>
-            <entry>Regular expression</entry>
-            <entry>Finds the following:</entry>
-          </row>
-        </thead>
-
-        <tbody>
-          <row>
-            <entry>(\b\w+\b)\s\1\b</entry>
-            <entry>double words</entry>
-          </row>
-
-          <row>
-            <entry>[\.,]\s*[\.,]+</entry>
-            <entry>comma or a period, followed by spaces and yet another comma
-            or period</entry>
-          </row>
-
-          <row>
-            <entry>\. \s+$</entry>
-            <entry>extra spaces after the period at the end of the line</entry>
-          </row>
-
-          <row>
-            <entry>\s+a\s+[aeiou]</entry>
-            <entry>English: words, beginning with vowels, should generally be
-            preceded by &quot;an&quot;, not &quot;a&quot;</entry>
-          </row>
-
-          <row>
-            <entry>\s+an\s+[^aeiou]</entry>
-            <entry>English: the same check as above, but concerning consonants
-            (&quot;a&quot;, not &quot;an&quot;)</entry>
-          </row>
-
-          <row>
-            <entry>\s{2,}</entry>
-            <entry>more than one space</entry>
-          </row>
-
-          <row>
-            <entry>\.[A-Z]</entry>
-            <entry>Period, followed by an upper-case letter - possibly a space
-            is missing between the period and the start of a new
-            sentence?</entry>
-          </row>
-
-          <row>
-            <entry>\bis\b</entry>
-            <entry>search for “is”, not “this” or “isn't” etc.</entry>
-          </row>
-        </tbody>
-      </tgroup>
-    </table>
+  </section>
   </section>
 </appendix>

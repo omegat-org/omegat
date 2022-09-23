@@ -19,28 +19,22 @@
   remote repository so that the project manager or other translators can see and
   use translations added during that period.</para>
 
-  <para>The interval of 3 minutes can be changed in <link linkend="dialogs.preferences.saving.and.output"><menuchoice>
-      <guimenu>Options</guimenu>
-
-      <guimenuitem>Preferences</guimenuitem>
-
-      <guimenuitem>Saving and Output</guimenuitem>
-    </menuchoice></link>.</para>
+  <para>The interval of 3 minutes can be changed in <link linkend="dialogs.preferences.saving.and.output" endterm="dialogs.preferences.saving.and.output.title"/>.</para>
 
   <para><emphasis role="bold">Synchronized files</emphasis></para>
 
   <para>Whenever the project is automatically saved, but also when it is opened,
   closed and reloaded, only two files are actually synchronized:</para>
 
-  <itemizedlist>
-    <listitem>
-      <para>omegat/project_save.tmx</para>
-    </listitem>
+		<itemizedlist>
+		  <listitem>
+			<para><link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/></para>
+		  </listitem>
 
-    <listitem>
-      <para>glossary/glossary.txt</para>
-    </listitem>
-  </itemizedlist>
+		  <listitem>
+			<para><link linkend="project.folder.glossary.txt" endterm="project.folder.glossary.txt.title"/></para>
+		  </listitem>
+		</itemizedlist>
 
   <para>All other files will be replaced by the files in the remote repository
   except for team project configuration described belows.</para>
@@ -52,7 +46,7 @@
       <para>When the project is downloaded at first, OmegaT download
       omegat.project file from remote project.</para>
 
-      <para>The omegat.project file consist with roughly four part;</para>
+      <para>The omegat.project file consist of roughly four part;</para>
 
       <itemizedlist>
         <listitem>
@@ -63,20 +57,20 @@
         </listitem>
 
         <listitem>
-          <para>Filter configurations(optional). Filter configurations are
+          <para>Filter configurations (optional). Filter configurations are
           customized in filters.conf. Filter configurations on local project are
           always override with remote configurations that project manager
           decided.</para>
         </listitem>
 
         <listitem>
-          <para> Segmentation rules(optional). Segmentation rules are customized
+          <para> Segmentation rules (optional). Segmentation rules are customized
           in segmentations.conf. Segmentation rules on local project are always
           override with remote configurations.</para>
         </listitem>
 
         <listitem>
-          <para>Repository mapping.(optional). </para>
+          <para>Repository mapping (optional). </para>
 
           <para>When team project don't have custom repository mapping rules,
           but local has customized, it is preserved in local and not affected in
@@ -90,7 +84,7 @@
           download with another URL with remote configured URL, local
           configuration is preserved.</para>
 
-          <para>For example, Github and GItlab support multiple access protocols
+          <para>For example, Github and Gitlab support multiple access protocols
           to reach same repository such as ssh+git or https protocols. OmegaT
           respects local selection of protocol to access team repository.</para>
 
@@ -103,20 +97,13 @@
           omegat.project.YYYYMMDDhhmm.bak. backup files are kept at least
           10. Older backup files will be automatically removed.</para>
         </listitem>
-      </itemizedlist>
-    </listitem>
-
-    <listitem>
-      <para>When customizing team project configuration like as non-team
-      project, it will be removed and override by remote project. Be
-      caution</para>
-
-      <itemizedlist>
-        <listitem>
-          <para/>
-        </listitem>
-      </itemizedlist>
-    </listitem>
+		<listitem>
+		  <para>When customizing team project configuration like as non-team
+		  project, it will be removed and override by remote project. Be
+		  careful.</para>
+		</listitem>
+	  </itemizedlist>
+	</listitem>
   </itemizedlist>
 
   <para><emphasis role="bold">Adding new source files</emphasis></para>

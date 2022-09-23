@@ -181,4 +181,45 @@ public class ResourceBundleFilterTest extends TestFilterBase {
 
         translateText(filter, f);
     }
+
+    @Test
+    public void testRegressionGithub227() throws Exception {
+        String f = "test/data/filters/resourceBundle/omt-package.properties";
+        ResourceBundleFilter filter = new ResourceBundleFilter();
+        IProject.FileInfo fi = loadSourceFiles(filter, f);
+
+        checkMultiStart(fi, f);
+        checkMulti("Unpack project from OMT file...", "omt.menu.import", null, null, null,
+                "#/**************************************************************************\n" +
+                        "# OmegaT Plugin - OMT Package Manager\n" +
+                        "#\n" +
+                        "# Copyright (C) 2019 Briac Pilpr\u00E9\n" +
+                        "# Home page: http://www.omegat.org/\n" +
+                        "# Support center: http://groups.yahoo.com/group/OmegaT/\n" +
+                        "#\n" +
+                        "# This program is free software: you can redistribute it and/or modify\n" +
+                        "# it under the terms of the GNU General Public License as published by\n" +
+                        "# the Free Software Foundation, either version 3 of the License, or\n" +
+                        "# (at your option) any later version.\n" +
+                        "#\n" +
+                        "# This program is distributed in the hope that it will be useful,\n" +
+                        "# but WITHOUT ANY WARRANTY; without even the implied warranty of\n" +
+                        "# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n" +
+                        "# GNU General Public License for more details.\n" +
+                        "#\n" +
+                        "# You should have received a copy of the GNU General Public License\n" +
+                        "# along with this program. If not, see <http://www.gnu.org/licenses/>.\n" +
+                        "#\n" +
+                        "# **************************************************************************/"
+        );
+        checkMulti("Pack project as OMT file...", "omt.menu.export", null, null, null, null);
+        checkMulti("Pack and delete project...", "omt.menu.export.delete", null, null, null, null);
+        checkMulti("Select the OMT package to import", "omt.chooser.import", null, null, null, null);
+        checkMulti("Select location and name of the OMT package", "omt.chooser.export", null, null, null, null);
+        checkMulti("OMT Package file", "omt.chooser.filter", null, null, null, null);
+        checkMulti("Invalid OMT package, file \"omegat.project\" is missing.", "omt.invalid.package", null, null, null, null);
+        checkMulti("The project already has an ongoing translation.\nDo you want to overwrite it with the translation from the package ?",
+                "omt.dialog.overwrite_project_save", null, null, null, null);
+        checkMultiEnd();
+    }
 }

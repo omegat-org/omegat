@@ -594,7 +594,7 @@ public final class ProjectUICommands {
      * Detect whether local omegat.project is identical with remote one.
      * @param that remote omegat.project.
      * @param my local omegat.project.
-     * @return
+     * @return true if identical, otherwise false.
      */
     private static boolean isIdenticalOmegatProjectProperties(ProjectProperties that, ProjectProperties my) {
         if (my == that) {

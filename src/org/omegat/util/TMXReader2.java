@@ -604,7 +604,9 @@ public class TMXReader2 {
                 tuvLC = tuv;
             } else {
                 // other country
-                tuvLW = tuv;
+                if (tuvLW == null) {  // take first occurrence
+                    tuvLW = tuv;
+                }
             }
         }
         ParsedTuv bestTuv;

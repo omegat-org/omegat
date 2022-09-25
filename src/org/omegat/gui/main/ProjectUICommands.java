@@ -519,7 +519,7 @@ public final class ProjectUICommands {
                                                 localRootRepository);
                                     }
                                 }
-                                needToSaveProperties = !props.equals(localProps);
+                                needToSaveProperties = !isIdenticalOmegatProjectProperties(props,localProps);
                             } catch (IRemoteRepository2.NetworkException ignore) {
                                 // Do nothing. Network errors are handled in RealProject.
                             } catch (Exception e) {
@@ -588,6 +588,88 @@ public final class ProjectUICommands {
                 }
             }
         }.execute();
+    }
+
+    /**
+     * Detect whether local omegat.project is identical with remote one.
+     * @param that remote omegat.project.
+     * @param my local omegat.project.
+     * @return true if identical, otherwise false.
+     */
+    private static boolean isIdenticalOmegatProjectProperties(ProjectProperties that, ProjectProperties my) {
+        if (my == that) {
+            return true;
+        }
+        if (that == null || my == null) {
+            return false;
+        }
+        for (int i = 0; i < my.getSourceRootExcludes().size(); i++) {
+            if (!my.getSourceRootExcludes().get(i).equals(that.getSourceRootExcludes().get(i))) {
+                return false;
+            }
+        }
+        if (my.getRepositories().size() != that.getRepositories().size()) {
+            return false;
+        }
+        for (int i = 0; i < my.getRepositories().size(); i++) {
+            if (!new EqualsBuilder()
+                    .append(my.getRepositories().get(i).getType(), that.getRepositories().get(i).getType())
+                    .append(my.getRepositories().get(i).getUrl(), that.getRepositories().get(i).getUrl())
+                    .append(my.getRepositories().get(i).getBranch(), that.getRepositories().get(i).getBranch())
+                    .append(my.getRepositories().get(i).getMapping().size(),
+                            that.getRepositories().get(i).getMapping().size())
+                    .isEquals()) {
+                return false;
+            }
+            if (my.getRepositories().get(i).getMapping().size() != that.getRepositories().get(i).getMapping().size()) {
+                return false;
+            }
+            for (int j = 0; j < my.getRepositories().get(i).getMapping().size(); j ++) {
+                RepositoryMapping thisMap = my.getRepositories().get(i).getMapping().get(j);
+                RepositoryMapping thatMap = that.getRepositories().get(i).getMapping().get(j);
+                if (!new EqualsBuilder()
+                        .append(thisMap.getLocal(), thatMap.getLocal())
+                        .append(thisMap.getRepository(), thatMap.getRepository())
+                        .isEquals()) {
+                    return false;
+                }
+            }
+        }
+        if (my.getProjectFilters() != null && that.getProjectFilters() != null) {
+            if (!new EqualsBuilder()
+                    .append(my.getProjectFilters().isRemoveTags(), that.getProjectFilters().isRemoveTags())
+                    .append(my.getProjectFilters().isRemoveSpacesNonseg(),
+                            that.getProjectFilters().isRemoveSpacesNonseg())
+                    .append(my.getProjectFilters().isPreserveSpaces(), that.getProjectFilters().isPreserveSpaces())
+                    .append(my.getProjectFilters().isIgnoreFileContext(),
+                            that.getProjectFilters().isIgnoreFileContext()).isEquals()) {
+                return false;
+            }
+        } else {
+            if (my.getProjectFilters() != null || that.getProjectFilters() != null) {
+                return false;
+            }
+        }
+        return new EqualsBuilder()
+                .append(my.isSentenceSegmentingEnabled(), that.isSentenceSegmentingEnabled())
+                .append(my.isSupportDefaultTranslations(), that.isSupportDefaultTranslations())
+                .append(my.isRemoveTags(), that.isRemoveTags())
+                .append(my.getProjectName(), that.getProjectName())
+                .append(my.getSourceLanguage().getLocaleCode(), that.getSourceLanguage().getLocaleCode())
+                .append(my.getTargetLanguage().getLocaleCode(), that.getTargetLanguage().getLocaleCode())
+                .append(my.getSourceTokenizer().getCanonicalName(), that.getSourceTokenizer().getCanonicalName())
+                .append(my.getTargetTokenizer().getCanonicalName(), that.getTargetTokenizer().getCanonicalName())
+                .append(my.getExportTmLevels(), that.getExportTmLevels())
+                .append(my.getExternalCommand(), that.getExternalCommand())
+                .append(my.getProjectRootDir(), that.getProjectRootDir())
+                .append(my.getSourceDir().getUnderRoot(), that.getSourceDir().getUnderRoot())
+                .append(my.getTargetDir().getUnderRoot(), that.getTargetDir().getUnderRoot())
+                .append(my.getGlossaryDir().getUnderRoot(), that.getGlossaryDir().getUnderRoot())
+                .append(my.getWritableGlossaryFile().getUnderRoot(), that.getWritableGlossaryFile().getUnderRoot())
+                .append(my.getTmDir().getUnderRoot(), that.getTmDir().getUnderRoot())
+                .append(my.getExportTMRoot(), that.getExportTMRoot())
+                .append(my.getDictRoot(), that.getDictRoot())
+                .isEquals();
     }
 
 

@@ -1110,26 +1110,25 @@ public class RealProject implements IProject {
 
     /** Finds and loads project's TMX file with translations (project_save.tmx). */
     private void loadTranslations() throws Exception {
-        File file = new File(
-                config.getProjectInternalDir(), OConsts.STATUS_EXTENSION);
-
+        File file = new File(config.getProjectInternalDir(), OConsts.STATUS_EXTENSION);
         try {
             Core.getMainWindow().showStatusMessageRB("CT_LOAD_TMX");
-
             projectTMX = new ProjectTMX(config.getSourceLanguage(), config.getTargetLanguage(),
                     config.isSentenceSegmentingEnabled(), file, checkOrphanedCallback);
-            if (file.exists()) {
-                // RFE 1001918 - backing up project's TMX upon successful read
-                // TODO check for repositories
-                FileUtil.backupFile(file);
-                FileUtil.removeOldBackups(file, OConsts.MAX_BACKUPS);
-            }
         } catch (SAXParseException ex) {
             Log.logErrorRB(ex, "TMXR_FATAL_ERROR_WHILE_PARSING", ex.getLineNumber(), ex.getColumnNumber());
             throw ex;
         } catch (Exception ex) {
             Log.logErrorRB(ex, "TMXR_EXCEPTION_WHILE_PARSING", file.getAbsolutePath(), Log.getLogLocation());
             throw ex;
+        }
+        if (file.exists()) {
+            // RFE 1001918 - backing up project's TMX upon successful read
+            File backup = FileUtil.backupFile(file);
+            FileUtil.removeOldBackups(file, OConsts.MAX_BACKUPS);
+            Core.getMainWindow().showStatusMessageRB("CT_LOAD_TMX_CREATE_BACKUP", backup.getName());
+        } else {
+            Core.getMainWindow().showStatusMessageRB("CT_LOAD_TMX_START_NEW");
         }
     }
 

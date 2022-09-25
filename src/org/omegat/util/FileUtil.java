@@ -78,31 +78,20 @@ public final class FileUtil {
     }
 
     /**
-     * Removes old backups so that only 10 last are there.
+     * Removes older backups to be under specified number of files.
+     * @param originalFile target original file name.
+     * @param maxBackups maximum number of back up files.
      */
     public static void removeOldBackups(final File originalFile, int maxBackups) {
         try {
-            File[] bakFiles = originalFile.getParentFile().listFiles(new FileFilter() {
-                public boolean accept(File f) {
-                    return !f.isDirectory() && f.getName().startsWith(originalFile.getName())
-                            && f.getName().endsWith(OConsts.BACKUP_EXTENSION);
-                }
-            });
+            File[] bakFiles = originalFile.getParentFile().listFiles(
+                    f -> !f.isDirectory() && f.getName().startsWith(originalFile.getName())
+                    && f.getName().endsWith(OConsts.BACKUP_EXTENSION));
 
             if (bakFiles != null && bakFiles.length > maxBackups) {
-                Arrays.sort(bakFiles, new Comparator<File>() {
-                    public int compare(File f1, File f2) {
-                        if (f2.lastModified() < f1.lastModified()) {
-                            return -1;
-                        } else if (f2.lastModified() > f1.lastModified()) {
-                            return 1;
-                        } else {
-                            return 0;
-                        }
-                    }
-                });
+                Arrays.sort(bakFiles, (f1, f2) -> Long.compare(f2.lastModified(), f1.lastModified()));
                 for (int i = maxBackups; i < bakFiles.length; i++) {
-                    bakFiles[i].delete();
+                    boolean ignored = bakFiles[i].delete();
                 }
             }
         } catch (Exception e) {
@@ -112,8 +101,8 @@ public final class FileUtil {
 
     /**
      * Create file backup with datetime suffix.
-     *
-     * @return Backup file
+     * @param original a file to copy as backup file.
+     * @return Backup file.
      */
     public static File backupFile(File original) throws IOException {
         long fileMillis = original.lastModified();

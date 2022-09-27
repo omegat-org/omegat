@@ -67,6 +67,9 @@ are available in OmegaT sources, in the directory lib/sources.
 
 JTextPaneLinkifier uses a regex from dperini/regex-web.js
 (https://gist.github.com/dperini/729294) under the MIT License.
+and a resource regex from JetBrains/intellij-community
+(https://github.com/JetBrains/intellij-community/blob/master/platform/util/src/com/intellij/util/io/URLUtil.java)
+under Apache-2.0 License.
 
 dictzip is distributed under the GNU General Public License version
 2.0 and greater with classpath link exception.

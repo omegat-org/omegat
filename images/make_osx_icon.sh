@@ -13,7 +13,7 @@ PNGCRUSH="$(which pngcrush)"
 SVG_FILE="${SCRIPT_ROOT}/OmegaT.svg"
 [ ! -f "$SVG_FILE" ] && echo "Can't find SVG to convert." && exit 1
 
-SIZES="32 64 128 256"
+SIZES="32 64 128 256 1024"
 # 512px version is taken from website:
 # http://briac.net/omegat-logo/
 
@@ -27,9 +27,12 @@ for SIZE in $SIZES; do
     pngcrush -ow "$OUTFILE"
 done
 
-# The system likes 64x64 to be named 32x32@2x for some reason.
-mv "${SCRIPT_ROOT}/OmegaT.iconset/icon_64x64.png" \
-   "${SCRIPT_ROOT}/OmegaT.iconset/icon_32x32@2x.png"
+cp "${SCRIPT_ROOT}/OmegaT.iconset/icon_32x32.png" "${SCRIPT_ROOT}/OmegaT.iconset/icon_16x16@2x.png"
+cp "${SCRIPT_ROOT}/OmegaT.iconset/icon_64x64.png" "${SCRIPT_ROOT}/OmegaT.iconset/icon_32x32@2x.png"
+cp "${SCRIPT_ROOT}/OmegaT.iconset/icon_128x128.png" "${SCRIPT_ROOT}/OmegaT.iconset/icon_64x64@2x.png"
+cp "${SCRIPT_ROOT}/OmegaT.iconset/icon_256x256.png" "${SCRIPT_ROOT}/OmegaT.iconset/icon_128x128@2x.png"
+cp "${SCRIPT_ROOT}/OmegaT.iconset/icon_512x512.png" "${SCRIPT_ROOT}/OmegaT.iconset/icon_256x256@2x.png"
+mv "${SCRIPT_ROOT}/OmegaT.iconset/icon_1024x1024.png" "${SCRIPT_ROOT}/OmegaT.iconset/icon_512x512@2x.png"
 
 iconutil --convert icns "${SCRIPT_ROOT}/OmegaT.iconset"
 cp "${SCRIPT_ROOT}/OmegaT.icns" "${SCRIPT_ROOT}/../release/mac-specific/OmegaT.app/Contents/Resources/"

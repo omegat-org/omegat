@@ -1,13 +1,16 @@
 ----------------------------------------------------------------------
  OmegaT 5.8.0
 ----------------------------------------------------------------------
-  16 Enhancements
-  16 Bug fixes
+  17 Enhancements
+  17 Bug fixes
   0 Localisation updates
 ----------------------------------------------------------------------
 5.8.0 vs 5.7.1
 
   Implemented requests:
+
+  - BundleProperties Filter: write properties file in UTF-8 w/ escape in default
+  https://sourceforge.net/p/omegat/feature-requests/1634/
 
   - Git/Team project should preserve access URL when download team
   https://sourceforge.net/p/omegat/feature-requests/1629/
@@ -57,6 +60,9 @@
   https://sourceforge.net/p/omegat/feature-requests/1603/
 
   Bug fixes:
+
+  BundleProperties fIlter should accept UTF-8 properties file
+  https://sourceforge.net/p/omegat/bugs/1116/
 
   - Team project piles up backup files of omegat.project
   https://sourceforge.net/p/omegat/bugs/1110/

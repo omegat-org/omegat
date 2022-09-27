@@ -149,8 +149,20 @@ public final class JTextPaneLinkifier {
 
         // Regular Expression for URL validation
         // From https://gist.github.com/dperini/729294
-        // See lib/Licenses.txt
-        private static final String REGEX_URL = "(?:(?:https?|ftp):\\/\\/)(?:\\S+(?::\\S*)?@)?(?:(?!(?:10|127)(?:\\.\\d{1,3}){3})(?!(?:169\\.254|192\\.168)(?:\\.\\d{1,3}){2})(?!172\\.(?:1[6-9]|2\\d|3[0-1])(?:\\.\\d{1,3}){2})(?:[1-9]\\d?|1\\d\\d|2[01]\\d|22[0-3])(?:\\.(?:1?\\d{1,2}|2[0-4]\\d|25[0-5])){2}(?:\\.(?:[1-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-4]))|(?:(?:[a-z\\u00a1-\\uffff0-9]-*)*[a-z\\u00a1-\\uffff0-9]+)(?:\\.(?:[a-z\\u00a1-\\uffff0-9]-*)*[a-z\\u00a1-\\uffff0-9]+)*(?:\\.(?:[a-z\\u00a1-\\uffff]{2,}))\\.?)(?::\\d{2,5})?(?:[/?#]\\S*)?";
+        // and https://github.com/JetBrains/intellij-community
+        // See lib/licenses/Licenses.txt
+        private static final String REGEX_URL = "(?:https?|ftp)://"  // protocol
+                + "(?:\\S+(?::\\S*)?@)?(?:(?!"  // user:pass (optional)
+                + "(?:10|127)(?:\\.\\d{1,3}){3})(?!(?:169\\.254|192\\.168)(?:\\.\\d{1,3}){2})(?!172\\."
+                + "(?:1[6-9]|2\\d|3[0-1])(?:\\.\\d{1,3}){2})(?:[1-9]\\d?|1\\d\\d|2[01]\\d|22[0-3])(?:\\."
+                + "(?:1?\\d{1,2}|2[0-4]\\d|25[0-5])){2}(?:\\.(?:[1-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-4]))"
+                // IP addresses
+                + "|"
+                + "(?:[a-z\\u00a1-\\uffff0-9]-*)*[a-z\\u00a1-\\uffff0-9]+"
+                + "(?:\\.(?:[a-z\\u00a1-\\uffff0-9]-*)*[a-z\\u00a1-\\uffff0-9]+)*"
+                + "\\.[a-z\\u00a1-\\uffff]{2,}\\.?)"  // domain host
+                + "(?::\\d{2,5})?"  // port (optional)
+                + "(?:[-A-Za-z0-9+$&@#/%?=~_|!:,.;]*[-A-Za-z0-9+$&@#/%=~_|])?";  // resources
         private static final Pattern URL_PATTERN = Pattern.compile(REGEX_URL, Pattern.CASE_INSENSITIVE);
         private static final AttributeSet DEFAULT_ATTRIBUTES = new SimpleAttributeSet();
         private static final AttributeSet LINK_ATTRIBUTES;
@@ -239,7 +251,7 @@ public final class JTextPaneLinkifier {
                         AttributeSet atts = makeAttributes(offset, new URI(matcher.group()));
                         doc.setCharacterAttributes(offset, targetLength, atts, true);
                     } catch (URISyntaxException ex) {
-                        Log.log(ex);
+                        Log.logWarningRB("TPL_ERROR_URL", matcher.group());
                     }
                 }
 

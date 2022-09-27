@@ -206,8 +206,8 @@
             folder and open it in OmegaT. This can be useful if the project is
             set up to use different <link
             linkend="how.to.setup.team.project.mapping.parameters">mappings</link>
-            for each translator. Here is an example of a reference to a Git
-            repository:</para>
+            for each translator. Here is an example of a reference to a 
+            Git repository:</para>
 
             <programlisting>&lt;repositories&gt; &lt;repository type="git"
         url="https://repo_for_OmegaT_team_project.git"&gt; &lt;mapping
@@ -218,27 +218,24 @@
       </listitem>
 
       <listitem>
-        <para>Authentication information</para>
-
+        <para>Translator credentials</para>
+        
         <orderedlist>
-          <listitem>
-            <para>Translator ID</para>
 
-            <para>If the project is set up on a hosting service, the
-            administrator will have to ask the translators for their user name
-            (after asking them to create an account if necessary) and grant
-            access to the project to those users. If the project is on a
-            self-hosted server with no provision for the translators to
-            register an account, the administrator will have to create the IDs
-            and send them to the translators.</para>
+          <listitem>
+            <para>Projects on a hosting service</para>
+            <para>The translators will have to create an account for the service, and send their user name to the team project administrator.</para>
+            <para>The administrator will then grant write access to the repository to those accounts.</para>
           </listitem>
 
           <listitem>
-            <para>Project password</para>
-
-            <para>Send the translators the password for the project.</para>
+            <para>Projects on a self-hosted server</para>
+            <para>If the server is self-hosted that does not have a provision for translators to register an account themselves, the team project administrator must create accounts with write access for the translators.</para>
+            <para>After creating the accounts, the administrator must send the translators their individual credentials.</para> 
           </listitem>
+
         </orderedlist>
+        
       </listitem>
 
       <listitem>

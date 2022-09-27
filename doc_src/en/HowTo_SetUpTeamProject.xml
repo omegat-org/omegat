@@ -196,7 +196,7 @@
 
         <orderedlist>
           <listitem>
-            <para>Send a URL and ask the translators to use the D command to
+            <para>Send a URL and ask the translators to use the <link linkend="menus.project.download.team.project" endterm="menus.project.download.team.project.title"/> command to
             create a local copy of the project on their own system.</para>
           </listitem>
 

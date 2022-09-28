@@ -14,18 +14,16 @@ SVG_FILE="${SCRIPT_ROOT}/OmegaT.svg"
 [ ! -f "$SVG_FILE" ] && echo "Can't find SVG to convert." && exit 1
 
 SIZES="32 64 128 256 512 1024"
-# 512px version is taken from website:
-# http://briac.net/omegat-logo/
 
 for SIZE in $SIZES; do
     OUTFILE="${SCRIPT_ROOT}/OmegaT.iconset/icon_${SIZE}x${SIZE}.png"
     inkscape "$SVG_FILE" \
-    		--export-type="png" \
-    		--export-area-page \
-            --export-width=$SIZE \
-            --export-height=$SIZE \
-            --export-filename="$OUTFILE" \
-             
+		--export-type="png" \
+		--export-area-page \
+		--export-width=$SIZE \
+		--export-height=$SIZE \
+		--export-filename="$OUTFILE" \
+
     pngcrush -ow "$OUTFILE"
 done
 

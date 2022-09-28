@@ -3,7 +3,7 @@
 <section id="howto.preventdataloss">
   <title>データを失わないために</title>
 
-  <para><application>OmegaT</application> は堅牢なプログラムです。しかし、他のプログラムを使用するときと同様、<application>OmegaT</application>を使うときも、万が一データが消えてしまった場合の対策を考えておくべきでしょう。<application>OmegaT</application> は、翻訳作業のすべての内容を翻訳メモリ（<literal>omegat</literal> フォルダーの <literal>project_save.tmx</literal> ファイル）に保存します。</para>
+  <para>OmegaT は堅牢なプログラムです。しかし、他のプログラムを使用するときと同様、OmegaTを使うときも、万が一データが消えてしまった場合の対策を考えておくべきでしょう。OmegaT は、翻訳作業のすべての内容を翻訳メモリ（<filename class="directory">omegat</filename> フォルダーの <filename>project_save.tmx</filename> ファイル）に保存します。</para>
 
   <para>また、プロジェクトを開くか再読み込みするたびに、翻訳メモリのバックアップファイル（同じく omegat フォルダーの project_save.tmx.YYYYMMDDHHNN.bak ファイル）を作成します。「YYYYMMDDHHNN」の部分は、前回保存した日付を 4 桁の年（YYYY）、月（MM）、日（DD）、時（HH）、分（NN）で表します。</para>
 
@@ -23,7 +23,7 @@
     </listitem>
 
     <listitem>
-      <para>そのファイル名を <literal>project_save.tmx</literal> に変更する</para>
+      <para>そのファイル名を <filename>project_save.tmx</filename> に変更する</para>
     </listitem>
 
     <listitem>
@@ -35,21 +35,21 @@
 
   <itemizedlist>
     <listitem>
-      <para>omegat フォルダーにある project_save.tmx ファイルを、CD や DVD のような外部メディアや、クラウド ストレージに、定期的にコピーをとっておきましょう。</para>
+      <para><filename>omegat/project_save.tmx </filename>ファイルを、CD や DVD のような外部メディアや、クラウド ストレージに、定期的にコピーをとっておきましょう。</para>
     </listitem>
 
     <listitem>
-      <para><application>OmegaT</application> の使用に慣れるまでは、翻訳ファイルを定期的に作成し、翻訳後のファイルに最新の翻訳内容が反映されているかを、こまめに確認してください。</para>
+      <para>OmegaT の使用に慣れるまでは、翻訳ファイルを定期的に作成し、翻訳後のファイルに最新の翻訳内容が反映されているかを、こまめに確認してください。</para>
     </listitem>
 
     <listitem>
-      <para>翻訳作業全体の途中で <literal>source</literal> にあるファイルを変更した場合は、特に注意してください。翻訳を開始した後に原文ファイルを変更すると、<application>OmegaT</application> は既に翻訳した分節を見つけられなくなるかもしれません。</para>
+      <para>翻訳作業全体の途中で <filename class="directory">source</filename> にあるファイルを変更した場合は、特に注意してください。翻訳を開始した後に原文ファイルを変更すると、OmegaT は既に翻訳した分節を見つけられなくなるかもしれません。</para>
     </listitem>
   </itemizedlist>
 
   <itemizedlist>
     <listitem>
-      <para>まず、このヘルプに書かれた内容を参照して、解決を試みてください。それでも問題が解決しない場合は、<ulink url="https://omegat.org/support"><application>OmegaT</application> ユーザーグループ</ulink>に投稿してください。多言語に対応しているので、自分が一番書きやすい言語（日本語でも）で投稿してかまいません。</para>
+      <para>まず、このヘルプに書かれた内容を参照して、解決を試みてください。それでも問題が解決しない場合は、<ulink url="https://omegat.org/support">OmegaT ユーザーグループ</ulink>に投稿してください。多言語に対応しているので、自分が一番書きやすい言語（日本語でも）で投稿してかまいません。</para>
     </listitem>
   </itemizedlist>
 </section>

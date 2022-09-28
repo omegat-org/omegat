@@ -406,12 +406,12 @@ public abstract class AbstractFilter implements IFilter {
      * {@link #processEntry(String)} method.
      * <p>
      * If you override this method and do all the processing here, you should simply implement
-     * {@link #processFile(BufferedReader,BufferedWriter, FilterContext)} with a stub.
+     * {@link #processFile(BufferedReader, BufferedWriter, FilterContext)} with a stub.
      * <p>
      * Default implementation calls {@link #createReader(File,String)} to create a reader,
      * <code>new BufferedWriter(new StringWriter())</code> to create a writer for <code>null</code> output
      * file, or {@link #createWriter(File,String)} to create a writer if output file is not <code>null</code>;
-     * then calls {@link #processFile(BufferedReader,BufferedWriter, FilterContext)} to process source file,
+     * then calls {@link #processFile(BufferedReader, BufferedWriter, FilterContext)} to process source file,
      * and then closes reader and writer.
      *
      * @param inFile
@@ -513,16 +513,29 @@ public abstract class AbstractFilter implements IFilter {
         entryTranslateCallback = null;
         entryAlignCallback = callback;
         processOptions = config;
-
-        BufferedReader readerIn = createReader(inFile, fc.getInEncoding());
-        BufferedReader readerOut = createReader(outFile, fc.getOutEncoding());
-
-        try {
-            alignFile(readerIn, readerOut, fc);
-        } finally {
-            readerIn.close();
-            readerOut.close();
+        try (BufferedReader readerIn = createReader(inFile, fc.getInEncoding());
+             BufferedReader readerOut = createReader(outFile, fc.getOutEncoding())) {
+            alignFile(readerIn, readerOut, fc, inFile.getName());
         }
+    }
+
+    /**
+     * Align source file against translated file. If this function is not overridden, then alignment in console mode
+     * will not be available for this filter.
+     *
+     * Implementations should call entryAlignCallback.addTranslation with source and target text, and with
+     * source file path.
+     *
+     * @param sourceFile
+     *            source file
+     * @param translatedFile
+     *            translated file
+     * @param fc FilterContext
+     * @param sourcePath source file path
+     */
+    protected void alignFile(BufferedReader sourceFile, BufferedReader translatedFile, FilterContext fc,
+                             String sourcePath) throws Exception {
+        alignFile(sourceFile, translatedFile, fc);
     }
 
     /**

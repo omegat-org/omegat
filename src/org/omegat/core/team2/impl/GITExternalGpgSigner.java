@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2021 Hiroshi Miura, Thomas Wolf and others.
+ Copyright (C) 2021-2022 Hiroshi Miura, Thomas Wolf and others.
                This is ported from EGit (Apache-2.0)
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
@@ -40,6 +40,7 @@ import java.util.Map;
 import org.eclipse.jgit.api.errors.CanceledException;
 import org.eclipse.jgit.api.errors.JGitInternalException;
 import org.eclipse.jgit.lib.CommitBuilder;
+import org.eclipse.jgit.lib.Config;
 import org.eclipse.jgit.lib.GpgConfig;
 import org.eclipse.jgit.lib.GpgSignature;
 import org.eclipse.jgit.lib.GpgSignatureVerifier;
@@ -177,23 +178,30 @@ public class GITExternalGpgSigner extends GpgSigner {
      *                           passphrase)
      */
     @Override
-    public void sign(final CommitBuilder commit, final String gpgSigningKey, final PersonIdent committer,
+    public void sign(final CommitBuilder commit, final String gpgSigningKey,
+                     final PersonIdent committer,
                      final CredentialsProvider credentialsProvider) throws CanceledException {
-        signObject(commit, gpgSigningKey, committer, null, null);
+        signObject(commit, gpgSigningKey, committer, credentialsProvider);
     }
 
     private void signObject(final ObjectBuilder object, final String gpgSigningKey,
-                            final PersonIdent committer, final CredentialsProvider credentialsProvider,
-                            final GpgConfig config) throws CanceledException {
+                            final PersonIdent committer, final CredentialsProvider credentialsProvider)
+            throws CanceledException {
         // Ignore the CredentialsProvider. We let GPG handle all this.
         try {
             String keySpec = gpgSigningKey;
-            if (StringUtils.isEmptyOrNull(gpgSigningKey)) {
+            if (StringUtils.isEmptyOrNull(keySpec)) {
+                // fallback
+                if (committer == null) {
+                    throw new CanceledException("Cannot determine signature key");
+                }
                 keySpec = '<' + committer.getEmailAddress() + '>';
             }
-            String program = config != null ? config.getProgram() : null;
-            object.setGpgSignature(new GpgSignature(
-                    signWithGpg(object.build(), keySpec, program)));
+            // git config gpg.program
+            // Use this custom program instead of "gpg" found on $PATH when making or verifying a PGP signature.
+            GpgConfig config = new GpgConfig(new Config());
+            String program = config.getProgram();
+            object.setGpgSignature(new GpgSignature(signWithGpg(object.build(), keySpec, program)));
         } catch (IOException e) {
             throw new JGitInternalException(e.getMessage(), e);
         }

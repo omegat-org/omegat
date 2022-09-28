@@ -86,7 +86,7 @@
       <term>選択領域を出力</term>
 
       <listitem>
-        <para>選択した領域を別のテキストファイルに出力します。選択領域がない場合、現在開いている原文がこのファイルに書き込まれます。<application>OmegaT</application> を閉じるとき、このファイルは空の状態ではなく、通常のクリップボードと同じように機能します。出力された内容は、個人設定フォルダーの <filename>selection.txt</filename> というファイルにコピーされます。</para>
+        <para>選択した領域を別のテキストファイルに出力します。選択領域がない場合、現在開いている原文がこのファイルに書き込まれます。OmegaT を閉じるとき、このファイルは空の状態ではなく、通常のクリップボードと同じように機能します。出力された内容は、個人設定フォルダーの <filename>selection.txt</filename> というファイルにコピーされます。</para>
       </listitem>
     </varlistentry>
 
@@ -136,7 +136,7 @@
       <term>大/小文字設定</term>
 
       <listitem>
-        <para>訳文分節中の選択したテキストに対し、ケースを変更します（すべて小文字に、文章の先頭を大文字に、各単語の先頭を大文字に、またはすべて大文字に）。<keycombo><keycap>[Shift]</keycap><keycap>[F3]</keycap></keycombo>を使用して、4つの選択肢を順番に切り替えます。テキストを何も選択していない場合、<application>OmegaT</application> はカーソル右にある単語をその場で選択して実行します。</para>
+        <para>訳文分節中の選択したテキストに対し、ケースを変更します（すべて小文字に、文章の先頭を大文字に、各単語の先頭を大文字に、またはすべて大文字に）。<keycombo><keycap>[Shift]</keycap><keycap>[F3]</keycap></keycombo>を使用して、4つの選択肢を順番に切り替えます。テキストを何も選択していない場合、OmegaT はカーソル右にある単語をその場で選択して実行します。</para>
       </listitem>
     </varlistentry>
 

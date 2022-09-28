@@ -5,7 +5,7 @@
 
   <para>整合ツールでは、翻訳済みの単一言語の文書から二か国語の翻訳メモリを作成します。</para>
 
-  <para>このウィンドウにアクセスするには、<menuchoice><guimenuitem>[ツール]</guimenuitem><guimenuitem>[整合ツール...]</guimenuitem></menuchoice>を選択します。</para>
+  <para>このウィンドウにアクセスするには、<menuchoice><guimenu>[ツール]</guimenu><guimenuitem>[整合ツール...]</guimenuitem></menuchoice>を選択します。</para>
 
   <section>
     <title>手順1:整合パラメータを調整する</title>
@@ -36,7 +36,7 @@
       </listitem>
 
       <listitem>
-        <para>スペースバー(<menuchoice><guimenuitem>[編集]</guimenuitem><guimenuitem>[ピンポイント整合を開始]</guimenuitem></menuchoice>のショートカット)を押します。</para>
+        <para>スペースバー(<menuchoice><guimenu>[編集]</guimenu><guimenuitem>[ピンポイント整合を開始]</guimenuitem></menuchoice>のショートカット)を押します。</para>
       </listitem>
 
       <listitem>
@@ -44,7 +44,7 @@
       </listitem>
     </orderedlist>
 
-    <para>これらの操作をいくつか行った後、[<menuchoice><guimenuitem>編集</guimenuitem><guimenuitem>再整合保留中</guimenuitem></menuchoice>]を選択して、他のセグメントの整合を更新します。</para>
+    <para>これらの操作をいくつか行った後、[<menuchoice><guimenu>編集</guimenu><guimenuitem>再整合保留中</guimenuitem></menuchoice>]を選択して、他のセグメントの整合を更新します。</para>
 
     <para>1つまたは複数のセグメントの位置を個別に変更するには、セグメントを選択し、<userinput>U</userinput>(<guilabel>上へ移動</guilabel>)または<userinput>D</userinput>(<guilabel>下へ移動</guilabel>)を押します。</para>
 

@@ -6,11 +6,11 @@
   <section id="ch04.shortcuts.customization">
     <title>ショートカットのカスタマイズ</title>
 
-    <para>メインメニューに表示されるほとんどの項目には、新しいショートカットを割り当てることができます。ショートカット定義ファイルを<application>OmegaT</application>環境設定フォルダ(メニューから<menuchoice><guimenuitem>設定</guimenuitem><guimenuitem>設定フォルダー</guimenuitem></menuchoice>でアクセス可能)に置くと、すでに割り当てられているショートカットを変更したり、新しいショートカットを追加したりできます。</para>
+    <para>メインメニューに表示されるほとんどの項目には、新しいショートカットを割り当てることができます。ショートカット定義ファイルをOmegaT環境設定フォルダ(メニューから<menuchoice><guimenuitem>設定</guimenuitem><guimenuitem>設定フォルダー</guimenuitem></menuchoice>でアクセス可能)に置くと、すでに割り当てられているショートカットを変更したり、新しいショートカットを追加したりできます。</para>
 
     <para>ショートカット定義ファイルには必ず <filename>MainMenuShortcuts.properties</filename> という名前を付け、ショートカット定義を少なくとも一行は記述しておく必要があります。空行も含めることができます。また「//」で始まる行はコメント行として扱われます。「//」から行末までは、すべて無視されます。</para>
 
-    <para><filename>MainMenuShortcuts.properties</filename> ファイルを修正した場合は、新しいショートカット設定を反映させるために、忘れず <application>OmegaT</application> を再起動してください。</para>
+    <para><filename>MainMenuShortcuts.properties</filename> ファイルを修正した場合は、新しいショートカット設定を反映させるために、忘れず OmegaT を再起動してください。</para>
 
     <para>ショートカット定義構文は、次の通りです：<code>&lt;メニュー項目コード&gt;=&lt;ショートカット&gt;</code>。<emphasis>&lt;メニュー項目コード&gt;</emphasis> の値は、後述する表を参照してください。<emphasis>&lt;ショートカット&gt;</emphasis> には割り当てたいキーの組み合わせを指定します<footnote>
         <para>キーストローク（ショートカット）の完全な構文定義は、Oracle による次の Java 1.6 技術文書（ページの最後）を参照してください：<ulink url="http://docs.oracle.com/javase/jp/6/api/javax/swing/KeyStroke.html">Java 1.6 keystrokes shortcuts</ulink></para>
@@ -62,7 +62,7 @@
     <para><code> toolsShowStatisticsStandardMenuItem=shift meta
     S</code></para>
 
-    <para>ファイルを保存したら、<application>OmegaT</application> を再起動してください。新しいショートカットが、修正したメニュー項目の隣に表示されるはずです。システム用のショートカットと衝突しない限り、新しいショートカットは OmegaT で機能するでしょう。</para>
+    <para>ファイルを保存したら、OmegaT を再起動してください。新しいショートカットが、修正したメニュー項目の隣に表示されるはずです。システム用のショートカットと衝突しない限り、新しいショートカットは OmegaT で機能するでしょう。</para>
   </section>
 
   <section id="ch04.shortcuts.ProjectMenu">
@@ -255,6 +255,14 @@
             <entry/>
 
             <entry>projectAccessWriteableGlossaryMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>再起動</entry>
+
+            <entry/>
+
+            <entry>projectRestartMenuItem</entry>
           </row>
 
           <row>

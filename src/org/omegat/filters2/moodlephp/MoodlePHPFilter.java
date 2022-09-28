@@ -167,10 +167,10 @@ public class MoodlePHPFilter extends AbstractFilter {
     }
 
     @Override
-    protected void alignFile(BufferedReader sourceFile, BufferedReader translatedFile, FilterContext fc)
-            throws Exception {
-        Map<String, String> source = new HashMap<String, String>();
-        Map<String, String> translated = new HashMap<String, String>();
+    protected void alignFile(BufferedReader sourceFile, BufferedReader translatedFile, FilterContext fc,
+                             String sourceFilePath) throws Exception {
+        Map<String, String> source = new HashMap<>();
+        Map<String, String> translated = new HashMap<>();
 
         align = source;
         processFile(sourceFile, new NullBufferedWriter(), fc);
@@ -179,7 +179,7 @@ public class MoodlePHPFilter extends AbstractFilter {
         for (Map.Entry<String, String> en : source.entrySet()) {
             String tr = translated.get(en.getKey());
             if (!StringUtil.isEmpty(tr)) {
-                entryAlignCallback.addTranslation(en.getKey(), en.getValue(), tr, false, null, this);
+                entryAlignCallback.addTranslation(en.getKey(), en.getValue(), tr, false, sourceFilePath, this);
             }
         }
     }

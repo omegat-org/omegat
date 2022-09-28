@@ -635,21 +635,6 @@ public final class ProjectUICommands {
                 }
             }
         }
-        if (my.getProjectFilters() != null && that.getProjectFilters() != null) {
-            if (!new EqualsBuilder()
-                    .append(my.getProjectFilters().isRemoveTags(), that.getProjectFilters().isRemoveTags())
-                    .append(my.getProjectFilters().isRemoveSpacesNonseg(),
-                            that.getProjectFilters().isRemoveSpacesNonseg())
-                    .append(my.getProjectFilters().isPreserveSpaces(), that.getProjectFilters().isPreserveSpaces())
-                    .append(my.getProjectFilters().isIgnoreFileContext(),
-                            that.getProjectFilters().isIgnoreFileContext()).isEquals()) {
-                return false;
-            }
-        } else {
-            if (my.getProjectFilters() != null || that.getProjectFilters() != null) {
-                return false;
-            }
-        }
         return new EqualsBuilder()
                 .append(my.isSentenceSegmentingEnabled(), that.isSentenceSegmentingEnabled())
                 .append(my.isSupportDefaultTranslations(), that.isSupportDefaultTranslations())

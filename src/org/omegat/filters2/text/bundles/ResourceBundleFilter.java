@@ -34,13 +34,13 @@ import java.awt.Window;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetEncoder;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -94,11 +94,14 @@ public class ResourceBundleFilter extends AbstractFilter {
 
     public static final String OPTION_REMOVE_STRINGS_UNTRANSLATED = "unremoveStringsUntranslated";
     public static final String OPTION_DONT_UNESCAPE_U_LITERALS = "dontUnescapeULiterals";
-    public static final String DEFAULT_TARGET_ENCODING = StandardCharsets.US_ASCII.name();
+    public static final String OPTION_FORCE_JAVA8_LITERALS_ESCAPE = "forceJava8LiteralsEscape";
+    public static final String DEFAULT_SOURCE_ENCODING = StandardCharsets.UTF_8.name();
+    public static final String DEFAULT_TARGET_ENCODING = StandardCharsets.UTF_8.name();
 
     protected Map<String, String> align;
 
     private String targetEncoding = DEFAULT_TARGET_ENCODING;
+    private Boolean forceTargetEscape = true;
 
     /**
      * If true, will remove non-translated segments in the target files
@@ -134,13 +137,43 @@ public class ResourceBundleFilter extends AbstractFilter {
     }
 
     /**
-     * The default encoding is OConsts.ASCII
+     * The source default encoding is UTF-8.
+     * <p>
+     *     From Java 9 onward, properties are saved in UTF-8.
+     * </p>
     */
     @Override
     public Instance[] getDefaultInstances() {
-        return new Instance[] { new Instance("*.properties", StandardCharsets.US_ASCII.name(),
-                StandardCharsets.US_ASCII.name(), TFP_NAMEONLY + "_"
+        return new Instance[] { new Instance("*.properties", DEFAULT_SOURCE_ENCODING,
+                DEFAULT_TARGET_ENCODING, TFP_NAMEONLY + "_"
                 + TFP_TARGET_LOCALE + "." + TFP_EXTENSION) };
+    }
+
+    /**
+     * Creates a reader of an input file.
+     * <p>
+     *     Override because of keep buggy behavior in OmegaT 5.7.1 or before.
+     *     It set default encoding US-ASCII but Java standard InputStreamReader
+     *     class wrongly accept non-ASCII characters as-is.
+     * </p>
+     *
+     * @param inFile
+     *            The source file.
+     * @param inEncoding
+     *            Encoding of the input file, if the filter supports it. Otherwise null.
+     * @return The reader for the source file
+     * @throws IOException
+     *             If any I/O Error occurs upon reader creation
+     */
+    @Override
+    public BufferedReader createReader(File inFile, String inEncoding) throws IOException {
+        Charset charset;
+        if (inEncoding != null) {
+            charset = Charset.forName(inEncoding);
+        } else {
+            charset = Charset.defaultCharset();
+        }
+        return new BufferedReader(new InputStreamReader(Files.newInputStream(inFile.toPath()), charset));
     }
 
     /**
@@ -151,12 +184,12 @@ public class ResourceBundleFilter extends AbstractFilter {
      * "Bundle_ru.properties"
      */
     @Override
-    public BufferedWriter createWriter(File outfile, String encoding) throws UnsupportedEncodingException,
-            IOException {
+    public BufferedWriter createWriter(File outfile, String encoding) throws IOException {
         if (encoding != null) {
             targetEncoding = encoding;
         }
-        return new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outfile), targetEncoding));
+        Charset charset = Charset.forName(targetEncoding);
+        return new BufferedWriter(new OutputStreamWriter(Files.newOutputStream(outfile.toPath()), charset));
     }
 
     @Override
@@ -263,8 +296,10 @@ public class ResourceBundleFilter extends AbstractFilter {
                 result.append("\\=");
             } else if (mode == EscapeMode.KEY && cp == ':') {
                 result.append("\\:");
-            } else if ((cp >= 32 && cp < 127)
-                    || charsetEncoder.canEncode(text.substring(i, i + Character.charCount(cp)))) {
+            } else if (cp >= 32 && cp < 127) {
+                result.appendCodePoint(cp);
+            } else if (!forceTargetEscape
+                    && charsetEncoder.canEncode(text.substring(i, i + Character.charCount(cp)))) {
                 result.appendCodePoint(cp);
             } else {
                 for (char c : Character.toChars(cp)) {
@@ -341,6 +376,10 @@ public class ResourceBundleFilter extends AbstractFilter {
         // filter
         dontUnescapeULiterals = processOptions != null
                 && "true".equalsIgnoreCase(processOptions.get(OPTION_DONT_UNESCAPE_U_LITERALS));
+
+        if (processOptions != null) {
+                forceTargetEscape = !"false".equalsIgnoreCase(processOptions.get(OPTION_FORCE_JAVA8_LITERALS_ESCAPE));
+        }
 
         String raw;
         boolean noi18n = false;

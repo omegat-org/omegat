@@ -71,33 +71,34 @@ public final class JTextPaneLinkifier {
     private static final String ATTR_LINK = "linkbuilder_link";
 
     public static void linkify(JTextPane jTextPane) {
+        linkify(jTextPane, false);
+    }
+
+    public static void linkify(JTextPane jTextPane, boolean extended) {
         final MouseAdapter mouseAdapter = new AttributeInserterMouseListener(jTextPane);
 
-        // Adding mouse listner for actions
+        // Adding mouse listener for actions
         jTextPane.addMouseListener(mouseAdapter);
 
         // settings for mouseover (changing cursor)
         jTextPane.addMouseMotionListener(mouseAdapter);
 
         // Those are the main called points from user's activities.
-        setDocumentFilter(jTextPane);
+        setDocumentFilter(jTextPane, extended);
 
-        jTextPane.addPropertyChangeListener("document", new PropertyChangeListener() {
-            @Override
-            public void propertyChange(PropertyChangeEvent evt) {
-                Object source = evt.getSource();
-                if (source instanceof JTextPane) {
-                    setDocumentFilter((JTextPane) source);
-                }
+        jTextPane.addPropertyChangeListener("document", evt -> {
+            Object source = evt.getSource();
+            if (source instanceof JTextPane) {
+                setDocumentFilter((JTextPane) source, extended);
             }
         });
     }
 
-    private static void setDocumentFilter(final JTextPane textPane) {
+    private static void setDocumentFilter(JTextPane textPane, boolean extended) {
         final StyledDocument doc = textPane.getStyledDocument();
         if (doc instanceof AbstractDocument) {
             final AbstractDocument abstractDocument = (AbstractDocument) doc;
-            abstractDocument.setDocumentFilter(new AttributeInserterDocumentFilter(doc));
+            abstractDocument.setDocumentFilter(new AttributeInserterDocumentFilter(doc, extended));
         }
     }
 
@@ -164,6 +165,8 @@ public final class JTextPaneLinkifier {
                 + "(?::\\d{2,5})?"  // port (optional)
                 + "(?:[-A-Za-z0-9+$&@#/%?=~_|!:,.;]*[-A-Za-z0-9+$&@#/%=~_|])?";  // resources
         private static final Pattern URL_PATTERN = Pattern.compile(REGEX_URL, Pattern.CASE_INSENSITIVE);
+        private static final Pattern FILE_URL_PATTERN = Pattern.compile(
+                "\\bfile://[-A-Za-z0-9+$&@#/%?=~_|!:,.;]*[-A-Za-z0-9+$&@#/%=~_|]");
         private static final AttributeSet DEFAULT_ATTRIBUTES = new SimpleAttributeSet();
         private static final AttributeSet LINK_ATTRIBUTES;
 
@@ -176,16 +179,17 @@ public final class JTextPaneLinkifier {
 
         private final StyledDocument doc;
         private final Timer timer;
+        private final Pattern[] urlPatterns;
 
         // as default constructor
-        AttributeInserterDocumentFilter(StyledDocument doc) {
+        AttributeInserterDocumentFilter(StyledDocument doc, boolean extended) {
             this.doc = doc;
-            timer = new Timer(REFRESH_DELAY, new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    refreshPane();
-                }
-            });
+            if (extended) {
+                urlPatterns = new Pattern[]{URL_PATTERN, FILE_URL_PATTERN};
+            } else {
+                urlPatterns = new Pattern[]{URL_PATTERN};
+            }
+            timer = new Timer(REFRESH_DELAY, e -> refreshPane());
             timer.setRepeats(false);
         }
 
@@ -240,18 +244,20 @@ public final class JTextPaneLinkifier {
                 }
 
                 // URL detection
-                final String text = doc.getText(0, docLength);
-                final Matcher matcher = URL_PATTERN.matcher(text);
-                while (matcher.find()) {
-                    final int offset = matcher.start();
-                    final int targetLength = matcher.end() - offset;
+                for (Pattern pattern : urlPatterns) {
+                    final String text = doc.getText(0, docLength);
+                    final Matcher matcher = pattern.matcher(text);
+                    while (matcher.find()) {
+                        final int offset = matcher.start();
+                        final int targetLength = matcher.end() - offset;
 
-                    try {
-                        // Transform into clickable text
-                        AttributeSet atts = makeAttributes(offset, new URI(matcher.group()));
-                        doc.setCharacterAttributes(offset, targetLength, atts, true);
-                    } catch (URISyntaxException ex) {
-                        Log.logWarningRB("TPL_ERROR_URL", matcher.group());
+                        try {
+                            // Transform into clickable text
+                            AttributeSet atts = makeAttributes(offset, new URI(matcher.group()));
+                            doc.setCharacterAttributes(offset, targetLength, atts, true);
+                        } catch (URISyntaxException ex) {
+                            Log.logWarningRB("TPL_ERROR_URL", matcher.group());
+                        }
                     }
                 }
 

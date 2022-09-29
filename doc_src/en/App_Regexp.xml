@@ -47,10 +47,7 @@
 		<para>An option with the same label in the <link
 		linkend="windows.text.replace" endterm="windows.text.replace.title"/>
 		dialog allows you to replace text with regular expression search
-		matches.</para> <para>When you search strings for replacement, the same
-		option can be used. The replacement string supports references to groups
-		defined in the search string. Use <code>$n</code> in the replacement
-		field to refer to the <code>nth</code> group in the search field.</para></listitem>
+		matches.</para></listitem>
 	  </varlistentry>
 
 	  <varlistentry>
@@ -60,9 +57,7 @@
 		<link
 			linkend="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags"
 			endterm="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags.title"/>
-		for details.</para> <para>Custom tags are regular expressions that
-		define a string. Use <code>|</code> to separate the
-		definitions.</para></listitem>
+		for details.</para> <para>Tag definitions must be separated with a <code>|</code> (OR) character.</para></listitem>
 	  </varlistentry>
 
 	  <varlistentry>
@@ -72,9 +67,7 @@
 		endterm="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation.title"/>
 		allow you to define strings that OmegaT will mark in red by default, and
 		consider as an extraneous tag for validation purposes.</para>
-		<para>Flagged fragments are regular expressions that define a
-		string. Use <code>|</code> to separate the
-		definitions.</para></listitem>
+		<para>Fragment definitions must be separated with a <code>|</code> (OR) character.</para></listitem>
 	  </varlistentry>
 
 	  <varlistentry>
@@ -88,7 +81,9 @@
 		where the segmentation will happen or not. The location requires 2
 		regular expressions. The "before" expression defines the string that
 		comes before the location and the "after" expressions defines the string
-		that comes after the location.</para></listitem>
+		that comes after the location.</para> <para>A language pattern that
+		matches the source language of the project will apply to that
+		project.</para></listitem>
 	  </varlistentry>
 	</variablelist>
 	</para>
@@ -98,8 +93,9 @@
 	<title id="appendix.regexp.concepts.title">Concepts and first expressions</title>
 	<para>Regular expressions are used to find text. A given expression will
 	<emphasis>match</emphasis> a piece of text, or not.</para>
-	<para>Each character used in an expression has an effect on the match. Some
-	characters even have special effects.</para>
+	<para>Each character used in an expression has an effect on the match.</para>
+	<para>Some characters have special effects.</para>
+	<warning><para>Regular expressions cannot be used to match text decorations like <emphasis>bold</emphasis>, <emphasis>italics</emphasis>, etc.</para></warning>
 	<para>There are 4 rules to remember.</para>
 
 	<variablelist>
@@ -263,10 +259,10 @@
 	</tgroup>
   </table>
 
-    <table id="appendix.regex.classes">
-      <title id="appendix.regex.classes.title">Classes and case</title>
+  <table id="appendix.regex.classes">
+    <title id="appendix.regex.classes.title">Classes and case</title>
 
-	  <note><para>In OmegaT a search is by default case-insensitive: it will match upper-case characters as well as lower-case characters. You can enable case sensitivity as an option for the whole search, but if you want finer settings you can mix <emphasis role="bold">(?i)</emphasis> before case-insensitive parts and <emphasis role="bold">(?-i)</emphasis> before case sensitive parts.</para></note>
+	<note><para>In OmegaT a search is by default case-insensitive: it will match upper-case characters as well as lower-case characters. You can enable case sensitivity as an option for the whole search, but if you want finer settings you can mix <emphasis role="bold">(?i)</emphasis> before case-insensitive parts and <emphasis role="bold">(?-i)</emphasis> before case sensitive parts.</para></note>
 
     <tgroup align="left" cols="2" rowsep="1">
       <colspec align="left" colnum="1"/>
@@ -334,115 +330,115 @@
 
 
 <table id="appendix.regex.unicode.blocs">
-    <title id="appendix.regex.unicode.blocs.title">Unicode blocks, scripts and
-    categories</title>
+  <title id="appendix.regex.unicode.blocs.title">Unicode blocks, scripts and
+  categories</title>
 
-    <tgroup align="left" cols="2" rowsep="1">
-      <colspec align="left" colnum="1"/>
+  <tgroup align="left" cols="2" rowsep="1">
+    <colspec align="left" colnum="1"/>
 
-      <thead>
-        <row>
-          <entry align="left">Expression</entry>
-          <entry align="left">Match</entry>
-        </row>
-      </thead>
+    <thead>
+      <row>
+        <entry align="left">Expression</entry>
+        <entry align="left">Match</entry>
+      </row>
+    </thead>
 
-      <tbody>
-        <row>
-          <entry>\p{InGreek}</entry>
-          <entry>A character in the Greek block (simple <ulink
-          url="&javaregex;#ubc">
-          block</ulink>)</entry>
-        </row>
+    <tbody>
+      <row>
+        <entry>\p{InGreek}</entry>
+        <entry>A character in the Greek block (simple <ulink
+        url="&javaregex;#ubc">
+        block</ulink>)</entry>
+      </row>
 
-        <row>
-          <entry>\P{InGreek}</entry>
-          <entry>A character NOT in the Greek block</entry>
-        </row>
+      <row>
+        <entry>\P{InGreek}</entry>
+        <entry>A character NOT in the Greek block</entry>
+      </row>
 
-        <row>
-          <entry>\p{IsHan}</entry>
-          <entry>A Han character as found in CJK languages (simple <ulink
-          url="&javaregex;#usc">
-          script</ulink>)</entry>
-        </row>
-		
-        <row>
-          <entry>\p{Lu}</entry>
-          <entry>An uppercase letter (simple <ulink
-          url="&javaregex;#ubc">
-          category</ulink>)</entry>
-        </row>
+      <row>
+        <entry>\p{IsHan}</entry>
+        <entry>A Han character as found in CJK languages (simple <ulink
+        url="&javaregex;#usc">
+        script</ulink>)</entry>
+      </row>
+	  
+      <row>
+        <entry>\p{Lu}</entry>
+        <entry>An uppercase letter (simple <ulink
+        url="&javaregex;#ubc">
+        category</ulink>)</entry>
+      </row>
 
-        <row>
-          <entry>\p{Sc}</entry>
-          <entry>A currency symbol</entry>
-        </row>
+      <row>
+        <entry>\p{Sc}</entry>
+        <entry>A currency symbol</entry>
+      </row>
 
-      </tbody>
-    </tgroup>
-  </table>
+    </tbody>
+  </tgroup>
+</table>
 
-  <table id="appendix.regex.boundary.matchers">
-    <title id="appendix.regex.boundary.matchers.title">Locations</title>
+<table id="appendix.regex.boundary.matchers">
+  <title id="appendix.regex.boundary.matchers.title">Locations</title>
 
-	<para>Locations (boundaries) are not part of the match. They just specify
-	where the match should be.</para>
-	
-    <tgroup align="left" cols="2" rowsep="1">
-      <colspec align="left" colnum="1"/>
+  <para>Locations (boundaries) are not part of the match. They just specify
+  where the match should be.</para>
+  
+  <tgroup align="left" cols="2" rowsep="1">
+    <colspec align="left" colnum="1"/>
 
-      <thead>
-        <row>
-          <entry align="left">Expression</entry>
-          <entry align="left">Match</entry>
-        </row>
-      </thead>
+    <thead>
+      <row>
+        <entry align="left">Expression</entry>
+        <entry align="left">Match</entry>
+      </row>
+    </thead>
 
-      <tbody>
-        <row>
-          <entry>^</entry>
-          <entry>The beginning of the line</entry>
-        </row>
+    <tbody>
+      <row>
+        <entry>^</entry>
+        <entry>The beginning of the line</entry>
+      </row>
 
-        <row>
-          <entry>$</entry>
-          <entry>The end of the line</entry>
-        </row>
+      <row>
+        <entry>$</entry>
+        <entry>The end of the line</entry>
+      </row>
 
-        <row>
-          <entry>\b</entry>
-          <entry>A word boundary</entry>
-        </row>
+      <row>
+        <entry>\b</entry>
+        <entry>A word boundary</entry>
+      </row>
 
-        <row>
-          <entry>\B</entry>
-          <entry>NOT a word boundary</entry>
-        </row>
+      <row>
+        <entry>\B</entry>
+        <entry>NOT a word boundary</entry>
+      </row>
 
-        <row>
-          <entry>(?=u)</entry>
-          <entry>Before the character "u"</entry>
-        </row>
+      <row>
+        <entry>(?=u)</entry>
+        <entry>Before the character "u"</entry>
+      </row>
 
-        <row>
-          <entry>(?!u)</entry>
-          <entry>NOT before the character "u"</entry>
-        </row>
+      <row>
+        <entry>(?!u)</entry>
+        <entry>NOT before the character "u"</entry>
+      </row>
 
-        <row>
-          <entry>(?&lt;=q)</entry>
-          <entry>After the character "q"</entry>
-        </row>
+      <row>
+        <entry>(?&lt;=q)</entry>
+        <entry>After the character "q"</entry>
+      </row>
 
-        <row>
-          <entry>(?&lt;!q)</entry>
-          <entry>NOT after the character "q"</entry>
-        </row>
-		
-	  </tbody>
-    </tgroup>
-  </table>
+      <row>
+        <entry>(?&lt;!q)</entry>
+        <entry>NOT after the character "q"</entry>
+      </row>
+	  
+	</tbody>
+  </tgroup>
+</table>
 
 
 <section id="appendix.regexp.examples">
@@ -521,7 +517,18 @@
   expressions, you can get a lot of practice by using the <link linkend="windows.text.search"
   endterm="windows.text.search.title"/> window since OmegaT does color the matching results.</para>
 
-  <para>The Java technical reference is useful as a canonical reference. If you want to know more about regular expressions, the two following ressources have also proved very useful:
+  <para>The Java technical reference is useful as a canonical reference.
+
+  <variablelist>
+	<varlistentry id="appendix.regex.java">
+	  <term id="appendix.regex.java.title"><ulink url="&javaregex;">Java Regex
+	  documentation</ulink></term>
+	  <listitem><para>The official reference for regular expressions used in
+	  Java.</para></listitem>
+	</varlistentry>
+  </variablelist>
+  
+  If you want to know more about regular expressions, the two following ressources have also proved very useful:
 
   <variablelist>
 	<varlistentry id="appendix.regex.tools.regex101">
@@ -532,18 +539,9 @@
 	  <term id="appendix.regex.tools.regular.expression.info.title"><ulink url="https://www.regular-expressions.info">https://www.regular-expressions.info</ulink></term>
 	  <listitem><para>One of the most thorough regular expression reference on the web.</para></listitem>
 	</varlistentry>
-	<varlistentry id="appendix.regex.java">
-	  <term id="appendix.regex.java.title"><ulink url="&javaregex;">Java Regex
-	  documentation</ulink></term>
-	  <listitem><para>The official reference for regular expressions used in
-	  Java.</para></listitem>
-	</varlistentry>
-
   </variablelist>
 
   OmegaT does not support either site in any way and if you find interesting references in your language, we would love to hear about them.
   </para>
-
-
 </section>
 </appendix>

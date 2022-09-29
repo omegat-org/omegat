@@ -136,6 +136,11 @@ public final class ExternalTMFactory {
 
                     // Keep all the Tuvs matching at least the target language
                     for (TMXReader2.ParsedTuv tuvTarget2 : tu.tuvs) {
+                        // skip an entry that is same as tuvSource.
+                        // @see discussion on https://github.com/omegat-org/omegat/pull/132
+                        if (tuvTarget2 == tuvSource) {
+                            continue;
+                        }
                         // Skip entries from the same source language/country
                         if (sourceLang.equals(new Language(tuvTarget2.lang))) {
                             continue;

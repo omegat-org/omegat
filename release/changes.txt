@@ -1,13 +1,16 @@
 ----------------------------------------------------------------------
  OmegaT 5.8.0
 ----------------------------------------------------------------------
-  17 Enhancements
+  18 Enhancements
   17 Bug fixes
   0 Localisation updates
 ----------------------------------------------------------------------
 5.8.0 vs 5.7.1
 
   Implemented requests:
+
+  - Do not propose source text as match from other languages
+  https://sourceforge.net/p/omegat/feature-requests/1578/
 
   - BundleProperties Filter: write properties file in UTF-8 w/ escape in default
   https://sourceforge.net/p/omegat/feature-requests/1634/

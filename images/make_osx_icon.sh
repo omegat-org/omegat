@@ -13,7 +13,7 @@ PNGCRUSH="$(which pngcrush)"
 SVG_FILE="${SCRIPT_ROOT}/OmegaT.svg"
 [ ! -f "$SVG_FILE" ] && echo "Can't find SVG to convert." && exit 1
 
-SIZES="32 64 128 256 512 1024"
+SIZES="16 32 64 128 256 512 1024"
 
 for SIZE in $SIZES; do
     OUTFILE="${SCRIPT_ROOT}/OmegaT.iconset/icon_${SIZE}x${SIZE}.png"

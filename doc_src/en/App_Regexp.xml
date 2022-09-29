@@ -521,7 +521,7 @@
   expressions, you can get a lot of practice by using the <link linkend="windows.text.search"
   endterm="windows.text.search.title"/> window since OmegaT does color the matching results.</para>
 
-  <para>The Java technical reference that you can find above is only useful as a canonical reference. If you want to know more about regular expressions, the two following ressources have proved very useful:
+  <para>The Java technical reference is useful as a canonical reference. If you want to know more about regular expressions, the two following ressources have also proved very useful:
 
   <variablelist>
 	<varlistentry id="appendix.regex.tools.regex101">

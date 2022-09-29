@@ -10,7 +10,7 @@
 		  <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>N</keycap></keycombo>
 		</para>
 		<para>On Windows and Linux:
-		  <keycombo><keycap>Shift</keycap><keycap>Control</keycap><keycap>N</keycap></keycombo>
+		  <keycombo><keycap>Control</keycap><keycap>Shift</keycap><keycap>N</keycap></keycombo>
 		</para>
 		<para>On macOS:
 		  <keycombo><keycap>Shift</keycap><keycap>Command</keycap><keycap>N</keycap></keycombo>

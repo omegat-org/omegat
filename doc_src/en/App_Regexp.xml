@@ -14,75 +14,88 @@
 
   <section id="appendix.regexp.introduction">
 	<title id="appendix.regexp.introduction.title">What are regular expressions</title>
-  <para>Regular expressions are symbols or groups of symbols (expressions) that allow you to describe textual concepts.</para>
-  <para>For example:
-<variablelist>
-  <varlistentry>
-	<term>[0-9]</term>
-	  <listitem><para>represents any one number from 0 to 9</para>
-	  </listitem>
-  </varlistentry>
-  <varlistentry>
-	<term>\w+</term>
-	  <listitem><para>represents one or more characters that one can find in a "word"</para>
-	  </listitem>
-  </varlistentry>
-  <varlistentry>
-	<term>\h?</term>
-	  <listitem><para>represents 0 or 1 horizontal white space character (which includes spaces, tabulations, etc. but not line-breaks that belong to the "vertical white space" category: \v)</para>
-	  </listitem>
-  </varlistentry>
-</variablelist>
-  </para>
-  
-  <para>Regular expressions are used in many places in OmegaT:
+	<para>Regular expressions are symbols or groups of symbols (expressions) that allow you to describe textual concepts.</para>
+	<para>For example:
+	<variablelist>
+	  <varlistentry>
+		<term>[0-9]</term>
+		<listitem><para>represents any one number from 0 to 9</para>
+		</listitem>
+	  </varlistentry>
+	  <varlistentry>
+		<term>\w+</term>
+		<listitem><para>represents one or more characters that one can find in a "word"</para>
+		</listitem>
+	  </varlistentry>
+	  <varlistentry>
+		<term>\h?</term>
+		<listitem><para>represents 0 or 1 horizontal white space character (which includes spaces, tabulations, etc. but not line-breaks that belong to the "vertical white space" category: \v)</para>
+		</listitem>
+	  </varlistentry>
+	</variablelist>
+	</para>
+	
+	<para>Regular expressions are used in many places in OmegaT:
 
-  <variablelist>
-	<varlistentry>
-	  <term>Searches</term>
-	  <listitem><para>OmegaT searches include a <link
-	  linkend="windows.text.search.methods.regex"
-	  endterm="windows.text.search.methods.regex.title"/> option that allows you
-	  to make extremely powerful searches across your files.</para> <para>An
-	  option with the same label in the <link linkend="windows.text.replace"
-	  endterm="windows.text.replace.title"/> dialog allows you to replace text
-	  with regular expression search matches.</para></listitem>
-	</varlistentry>
+	<variablelist>
+	  <varlistentry>
+		<term>Searches</term>
+		<listitem><para>OmegaT searches include a <link
+		linkend="windows.text.search.methods.regex"
+		endterm="windows.text.search.methods.regex.title"/> option that allows
+		you to make extremely powerful searches across your files.</para>
+		<para>An option with the same label in the <link
+		linkend="windows.text.replace" endterm="windows.text.replace.title"/>
+		dialog allows you to replace text with regular expression search
+		matches.</para> <para>When you search strings for replacement, the same
+		option can be used. The replacement string supports references to groups
+		defined in the search string. Use <code>$n</code> in the replacement
+		field to refer to the <code>nth</code> group in the search field.</para></listitem>
+	  </varlistentry>
 
-	<varlistentry>
-	  <term>Custom tags</term>
-	  <listitem><para>Custom tags are tags that you define using regular
-	  expressions. The tags are handled exactly like OmegaT's native tags. See
-	  <link
-		  linkend="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags"
-		  endterm="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags.title"/>
-	  for details.</para></listitem>
-	</varlistentry>
+	  <varlistentry>
+		<term>Custom tags</term>
+		<listitem><para>Custom tags are tags that you define using regular
+		expressions. The tags are handled exactly like OmegaT's native tags. See
+		<link
+			linkend="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags"
+			endterm="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags.title"/>
+		for details.</para> <para>Custom tags are regular expressions that
+		define a string. Use <code>|</code> to separate the
+		definitions.</para></listitem>
+	  </varlistentry>
 
-	<varlistentry>
-	  <term>Flagged fragments</term>
-	  <listitem><para><link
-	  linkend="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation"
-	  endterm="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation.title"/>
-	  allow you to define strings that OmegaT will mark in red by default, and
-	  consider as an extraneous tag for validation purposes.</para></listitem>
-	</varlistentry>
+	  <varlistentry>
+		<term>Flagged fragments</term>
+		<listitem><para><link
+		linkend="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation"
+		endterm="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation.title"/>
+		allow you to define strings that OmegaT will mark in red by default, and
+		consider as an extraneous tag for validation purposes.</para>
+		<para>Flagged fragments are regular expressions that define a
+		string. Use <code>|</code> to separate the
+		definitions.</para></listitem>
+	  </varlistentry>
 
-	<varlistentry>
-	  <term>Segmentation</term>
-	  <listitem><para>Segmentation rules and language patterns are regular
-	  expressions. You can modify them at will to better segment a document or
-	  add general rule sets. See <link
-	  linkend="dialogs.preferences.segmentation.setup"
-	  endterm="dialogs.preferences.segmentation.setup.title"/> for
-	  details.</para></listitem>
-	</varlistentry>
-  </variablelist>
-  </para>
+	  <varlistentry>
+		<term>Segmentation</term>
+		<listitem><para>Segmentation rules and language patterns are regular
+		expressions. You can modify them at will to better segment a document or
+		add general rule sets. See <link
+		linkend="dialogs.preferences.segmentation.setup"
+		endterm="dialogs.preferences.segmentation.setup.title"/> for
+		details.</para> <para>A segmentation/exception rule defines a location
+		where the segmentation will happen or not. The location requires 2
+		regular expressions. The "before" expression defines the string that
+		comes before the location and the "after" expressions defines the string
+		that comes after the location.</para></listitem>
+	  </varlistentry>
+	</variablelist>
+	</para>
   </section>
 
   <section id="appendix.regexp.concepts">
-	<title id="appendix.regexp.concepts.title">Concepts and practice</title>
+	<title id="appendix.regexp.concepts.title">Concepts and first expressions</title>
 	<para>Regular expressions are used to find text. A given expression will
 	<emphasis>match</emphasis> a piece of text, or not.</para>
 	<para>Each character used in an expression has an effect on the match. Some
@@ -116,7 +129,8 @@
 		  break character</emphasis>).</para>
 		  <note><para>As of the versions of Java on which OmegaT is built, only
 		  <emphasis>i j l m o y</emphasis> both in lower and upper case have no
-		  hidden special effect.</para></note>
+		  hidden special effect. We will not describe all the effect of the
+		  other characters in this manual.</para></note>
 		</listitem>
 	  </varlistentry>
 	  <varlistentry>
@@ -134,14 +148,15 @@
 		  <variablelist>
 			<varlistentry>
 			  <term>\</term>
-			  <listitem><para>The BACKSLASH either triggers or disables a special effect.
-			  <example><emphasis role="bold">\.</emphasis> = a period</example></para></listitem>
+			  <listitem><para>The BACKSLASH either disables or enables  a special effect.
+			  <example><emphasis role="bold">\.</emphasis> = disables the period special effect that makes it match any character, and turns it into a plain period.</example>
+			  <example><emphasis role="bold">\b</emphasis> = not a b anymore but a "word boundary"</example></para></listitem>
 			</varlistentry>
 			<varlistentry>
 			  <term>^</term>
 			  <listitem><para>As the first character of an expression, the CARET matches the beginning of a line.
 			  <example><emphasis role="bold">^A</emphasis> = an upper case A at the beginning of a line.</example></para>
-			  <para>As the first character of a class, the CARET negates the contents of the class.
+			  <para>As the first character of a class (something that is enclosed by square brackets, see below), the CARET negates what follows it.
 			  <example><emphasis role="bold">[^abc]</emphasis> = NEITHER a, nor b, nor c.</example></para></listitem>
 			</varlistentry>
 			<varlistentry>
@@ -157,56 +172,57 @@
 			<varlistentry>
 			  <term>|</term>
 			  <listitem><para>The VERTICAL BAR allows an alternative between two possibilities (OR).
-			  <example><emphasis role="bold">^An |^The </emphasis> = the string "An " OR the string "The " at the beginning of a line.</example></para></listitem>
+			  <example><emphasis role="bold">^An&nbsp;|^The&nbsp;</emphasis> = the string "An " OR the string "The " at the beginning of a line.</example></para></listitem>
 			</varlistentry>
 			<varlistentry>
 			  <term>?</term>
-			  <listitem><para><example></example></para></listitem>
+			  <listitem><para>The QUESTION MARK quantifies the expression that preceeds it as 0 or 1 instances of that expression.<example><emphasis role="bold">&nbsp;an?&nbsp;</emphasis> = a space, followed by a, followed by 0 or 1 n, followed by a space.</example></para></listitem>
 			</varlistentry>
 			<varlistentry>
 			  <term>*</term>
-			  <listitem><para><example></example></para></listitem>
+			  <listitem><para>The ASTERISK quantifies the expressions that preceeds it as 0 or MORE instances of that expression.<example><emphasis role="bold">\w+</emphasis> = 0 or more WORD characters.</example></para></listitem>
 			</varlistentry>
 			<varlistentry>
 			  <term>+</term>
-			  <listitem><para><example></example></para></listitem>
+			  <listitem><para>The PLUS quantifies the expression that preceeds it as 1 or MORE instances of that expression.<example><emphasis role="bold">[\h\v]+</emphasis> = 1 or MORE instances of either an horizontal white space or a vertical white space.</example></para></listitem>
 			</varlistentry>
 			<varlistentry>
 			  <term>(</term>
-			  <listitem><para><example></example></para></listitem>
+			  <listitem><para>The OPENING PARENTHESIS opens a group that must be closed by a CLOSING PARENTHESIS. The group contents is memorized and can be called by a special effect number.<example><emphasis role="bold">(\b\w+\b)\h\1\b</emphasis> = a group of 1 or more WORD characters that begin at a word boundary (\b) and ends at a word boundary (the second \b). That group defines a word, that is followed by an horizontal white space, followed by the contents of the group (the word), before a word boundary, which means, a word followed by itself.</example></para></listitem>
 			</varlistentry>
 			<varlistentry>
 			  <term>)</term>
-			  <listitem><para><example></example></para></listitem>
+			  <listitem><para>The CLOSING PARENTHESIS closes a group and cannot be used on its own without triggering an error.</para></listitem>
 			</varlistentry>
 			<varlistentry>
 			  <term>[</term>
-			  <listitem><para><example></example></para></listitem>
+			  <listitem><para>The OPENING SQUARE BRACKET opens a range of characters which must be closed by a CLOSING SQUARE BRACKET.<example><emphasis role="bold">li[cs]en[cs]e</emphasis> = all the instances of a misspelled license.</example></para></listitem>
 			</varlistentry>
 			<varlistentry>
 			  <term>{</term>
-			  <listitem><para><example></example></para></listitem>
+			  <listitem><para>The OPENING CURLY BRACE opens a quantifier that must be closed by a CLOSING CURLY BRACE. The quantifier can be an exact number, a minimum, a maximum or a range.<example><emphasis role="bold">\d{4}/\d{1,}</emphasis> = 4 digits followed by a / followed by at least 1digit.</example></para></listitem>
 			</varlistentry>
 		  </variablelist>
-		  </para>
-		  
-		</listitem>
-	  </varlistentry>
-	  <varlistentry>
-		<term>The character <emphasis>\</emphasis> is a very special character</term>
-		<listitem><para>As you have seen above, the character <emphasis>\</emphasis> has a special effect by default and that special effect is to either trigger or disable special effects in other characters. When it preceeds a character that has no special effect (neither natural nor hidden), it has no effect.</para>
-		<para><emphasis>\</emphasis> can be disabled by another <emphasis>\</emphasis>, in which case it becomes <emphasis>\\</emphasis> and matches what is called a <emphasis>backslash</emphasis>.</para></listitem>
-	  </varlistentry>
-	</variablelist>
-	
-	
-  </section>
+		</para>
+		
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term>The character <emphasis>\</emphasis> is a very special character</term>
+	  <listitem><para>As you have seen above, the character <emphasis>\</emphasis> has a special effect by default and that special effect is to either trigger or disable special effects in other characters. When it preceeds a character that has no special effect (neither natural nor hidden), it has no effect.</para>
+	  <para><emphasis>\</emphasis> can be disabled by another <emphasis>\</emphasis>, in which case it becomes <emphasis>\\</emphasis> and matches what is called a <emphasis>backslash</emphasis>.</para></listitem>
+	</varlistentry>
+  </variablelist>
   
-  <section id="appendix.regexp.reference">
-	<title id="appendix.regexp.reference.title">Basic reference</title>
-	
+  
+</section>
+
+<section id="appendix.regexp.reference">
+  <title id="appendix.regexp.reference.title">Basic reference</title>
+  <para>Anything more complex than what is discussed here can be found in <link linkend="appendix.regex.tools" endterm="appendix.regex.tools.title"/>. You can also ask questions in the various support channels.</para>
+  
   <table id="appendix.regex.characters">
-    <title id="appendix.regex.characters.title">Common expressions</title>
+    <title id="appendix.regex.characters.title">Characters</title>
 
     <tgroup align="left" cols="2" rowsep="1">
       <colspec align="left" colnum="1"/>
@@ -228,23 +244,66 @@
 
         <row>
           <entry>\t</entry>
-          <entry>The tab character ('\u0009')
-		  <para>The <emphasis>\</emphasis> triggers the special effect "this is a tab, not a t"</para></entry>
+          <entry>The tab character
+		  <para>The \ triggers the special effect "this is a tab, not a t".</para></entry>
         </row>
 
         <row>
           <entry>\n</entry>
-          <entry>The newline (line feed) character ('\u000A')
-		  <para>The <emphasis>\</emphasis> triggers the special effect "this is a newline, not a n"</para></entry>
+          <entry>The newline (line feed) character
+		  <para>The \ triggers the special effect "this is a newline, not a n".</para></entry>
         </row>
 
         <row>
           <entry>\r</entry>
-          <entry>The carriage-return character ('\u000D')
-		  <para>The <emphasis>\</emphasis> triggers the special effect "this is a carriage-return, not a r"</para></entry>
+          <entry>The carriage-return character
+		  <para>\R is any linebreak character.</para></entry>
+        </row>
+	  </tbody>
+	</tgroup>
+  </table>
+
+    <table id="appendix.regex.classes">
+      <title id="appendix.regex.classes.title">Classes and case</title>
+
+	  <note><para>In OmegaT a search is by default case-insensitive: it will match upper-case characters as well as lower-case characters. You can enable case sensitivity as an option for the whole search, but if you want finer settings you can mix <emphasis role="bold">(?i)</emphasis> before case-insensitive parts and <emphasis role="bold">(?-i)</emphasis> before case sensitive parts.</para></note>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1"/>
+
+      <thead>
+        <row>
+          <entry align="left">Expression</entry>
+          <entry align="left">Match</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>\w</entry>
+          <entry>A word character, generaly defined as [A-Za-z0-9_] but in Java as [\p{Alpha}\p{gc=Mn}\p{gc=Me}\p{gc=Mc}\p{Digit}\p{gc=Pc}\p{IsJoin_Control}].
+		  <para>\W is NOT a word character ([^\w]).</para></entry>
         </row>
 
-		        <row>
+        <row>
+          <entry>\d</entry>
+          <entry>A digit, generaly defined as [0-9].
+		  <para>\D is NOT a digit.</para></entry>
+        </row>
+
+        <row>
+          <entry>\s</entry>
+          <entry>A white space that includes spaces, tabs, line breaks, etc.
+		  <para>\S is NOT a white-space character ([^\s]).</para></entry>
+        </row>
+
+        <row>
+          <entry>\h and \v</entry>
+          <entry>Horizontal and vertical white space (generally prefered to \s).
+		  <para>\H is NOT an horizontal white space and \V is NOT a vertical white space.</para></entry>
+        </row>
+
+		<row>
           <entry>[abc]</entry>
           <entry>a, b, or c
 		  <para>A simple class is described by any number characters between [ and ]</para></entry>
@@ -253,154 +312,29 @@
         <row>
           <entry>[C-X]</entry>
           <entry>A character among the "C through X" letters set
-		  <para>a range is described by a character that starts a series, followed by a hyphen, followed by a character that ends the series. Any number of ranges can be defined this way: [a-zA-Z0-9].</para></entry>
+		  <para>A range is described by a character that starts a series, followed by a hyphen, followed by a character that ends the series. Any number of ranges can be defined this way: [a-zA-Z0-9]. A hyphen that is outside a series is a hyphen: [a-z-].</para></entry>
         </row>
 
         <row>
           <entry>[^\n\r\t]</entry>
           <entry>Any character <emphasis>except</emphasis> a newline, a carriage-return, or a tabulation
-		  <para>An exclusion class is described by a class that starts with the caret character</para></entry>
+		  <para>The CARET excludes what follows it.</para></entry>
+        </row>
+
+        <row>
+          <entry>(?i)o(?-i)megat</entry>
+          <entry>A case insensitive "o" followed by a case sensitive "megat".
+		  <para>The HYPHEN cancels the "case insensitive" mode.</para></entry>
         </row>
 
       </tbody>
     </tgroup>
   </table>
-  </section>
+</section>
 
-    <section id="appendix.regexp.examples">
-	<title id="appendix.regexp.examples.title">Examples for use in OmegaT</title>
-	
-    <table id="regex.examples">
-      <title id="regex.examples.title">Examples of regular expressions
-that use the expressions above</title>
 
-      <tgroup align="left" cols="2" rowsep="1">
-        <colspec align="left" colnum="1"/>
-
-        <thead>
-          <row>
-            <entry>Regular expression</entry>
-            <entry>Finds the following:</entry>
-          </row>
-        </thead>
-
-        <tbody>
-          <row>
-            <entry>(\b\w+\b)\s\1\b</entry>
-            <entry>double words</entry>
-          </row>
-
-          <row>
-            <entry>[\.,]\s*[\.,]+</entry>
-            <entry>comma or a period, followed by spaces and yet another comma
-            or period</entry>
-          </row>
-
-          <row>
-            <entry>\. \s+$</entry>
-            <entry>extra spaces after the period at the end of the line</entry>
-          </row>
-
-          <row>
-            <entry>\s+a\s+[aeiou]</entry>
-            <entry>English: words, beginning with vowels, should generally be
-            preceded by &quot;an&quot;, not &quot;a&quot;</entry>
-          </row>
-
-          <row>
-            <entry>\s+an\s+[^aeiou]</entry>
-            <entry>English: the same check as above, but concerning consonants
-            (&quot;a&quot;, not &quot;an&quot;)</entry>
-          </row>
-
-          <row>
-            <entry>\s{2,}</entry>
-            <entry>more than one space</entry>
-          </row>
-
-          <row>
-            <entry>\.[A-Z]</entry>
-            <entry>Period, followed by an upper-case letter - possibly a space
-            is missing between the period and the start of a new
-            sentence?</entry>
-          </row>
-
-          <row>
-            <entry>\bis\b</entry>
-            <entry>search for “is”, not “this” or “isn't” etc.</entry>
-          </row>
-        </tbody>
-      </tgroup>
-    </table>
-  </section>
-  
-
-  <section>
-	
-
-  <table id="regex.flags">
-    <title id="regex.flags.title">Regex - Flags</title>
-
-    <tgroup align="left" cols="2" rowsep="1">
-      <colspec align="left" colnum="1"/>
-
-      <thead>
-        <row>
-          <entry align="left">Expression</entry>
-          <entry align="left">Match</entry>
-        </row>
-      </thead>
-
-      <tbody>
-        <row>
-          <entry>(?i)</entry>
-          <entry>Enables case-insensitive matching (by default, the pattern is
-          case-sensitive).</entry>
-        </row>
-      </tbody>
-    </tgroup>
-  </table>
-  
-  <table id="appendix.regex.quotation">
-    <title id="appendix.regex.quotation.title">Regex - Quotation</title>
-
-    <tgroup align="left" cols="2" rowsep="1">
-      <colspec align="left" colnum="1"/>
-
-      <thead>
-        <row>
-          <entry align="left">Expression</entry>
-          <entry align="left">Match</entry>
-        </row>
-      </thead>
-
-      <tbody>
-        <row>
-          <entry>\</entry> <entry>Nothing, but quotes the following
-          character. This is required if you would like to enter any of the meta
-          characters !$()*+.&lt;&gt;?[\]^{|} to match as themselves.</entry>
-        </row>
-
-        <row>
-          <entry>\\</entry>
-          <entry>For example, this is the backslash character</entry>
-        </row>
-
-        <row>
-          <entry>\Q</entry>
-          <entry>Nothing, but quotes all characters until \E</entry>
-        </row>
-
-        <row>
-          <entry>\E</entry>
-          <entry>Nothing, but ends quoting started by \Q</entry>
-        </row>
-      </tbody>
-    </tgroup>
-  </table>
-
-  <table id="appendix.regex.unicode.blocs">
-    <title id="appendix.regex.unicode.blocs.title">Regex - Classes for Unicode blocks and
+<table id="appendix.regex.unicode.blocs">
+    <title id="appendix.regex.unicode.blocs.title">Unicode blocks, scripts and
     categories</title>
 
     <tgroup align="left" cols="2" rowsep="1">
@@ -422,6 +356,18 @@ that use the expressions above</title>
         </row>
 
         <row>
+          <entry>\P{InGreek}</entry>
+          <entry>A character NOT in the Greek block</entry>
+        </row>
+
+        <row>
+          <entry>\p{IsHan}</entry>
+          <entry>A Han character as found in CJK languages (simple <ulink
+          url="&javaregex;#usc">
+          script</ulink>)</entry>
+        </row>
+		
+        <row>
           <entry>\p{Lu}</entry>
           <entry>An uppercase letter (simple <ulink
           url="&javaregex;#ubc">
@@ -433,93 +379,16 @@ that use the expressions above</title>
           <entry>A currency symbol</entry>
         </row>
 
-        <row>
-          <entry>\P{InGreek}</entry>
-          <entry>Any character except one in the Greek block
-          (negation)</entry>
-        </row>
-
-        <row>
-          <entry>[\p{L}&amp;&amp;[^\p{Lu}]]</entry>
-          <entry>Any letter except an uppercase letter (subtraction)</entry>
-        </row>
-      </tbody>
-    </tgroup>
-  </table>
-
-  <table id="appendix.regex.classes">
-    <title id="appendix.regex.classes.title">Regex - Character classes</title>
-
-    <tgroup align="left" cols="2" rowsep="1">
-      <colspec align="left" colnum="1"/>
-
-      <thead>
-        <row>
-          <entry align="left">Expression</entry>
-          <entry align="left">Match</entry>
-        </row>
-      </thead>
-
-      <tbody>
-      </tbody>
-    </tgroup>
-  </table>
-
-  <table id="appendix.regex.predefines.classes">
-    <title id="appendix.regex.predefines.classes.title">Regex - Predefined character classes</title>
-
-    <tgroup align="left" cols="2" rowsep="1">
-      <colspec align="left" colnum="1"/>
-
-      <thead>
-        <row>
-          <entry align="left">Expression</entry>
-          <entry align="left">Match</entry>
-        </row>
-      </thead>
-
-      <tbody>
-        <row>
-          <entry>.</entry>
-          <entry>Any character (except for line terminators)</entry>
-        </row>
-
-        <row>
-          <entry>\d</entry>
-          <entry>A digit: [0-9]</entry>
-        </row>
-
-        <row>
-          <entry>\D</entry>
-          <entry>A non-digit: [^0-9]</entry>
-        </row>
-
-        <row>
-          <entry>\s</entry>
-          <entry>A whitespace character: [ \t\n\x0B\f\r]</entry>
-        </row>
-
-        <row>
-          <entry>\S</entry>
-          <entry>A non-whitespace character: [^\s]</entry>
-        </row>
-
-        <row>
-          <entry>\w</entry>
-          <entry>A word character: [a-zA-Z_0-9]</entry>
-        </row>
-
-        <row>
-          <entry>\W</entry>
-          <entry>A non-word character: [^\w]</entry>
-        </row>
       </tbody>
     </tgroup>
   </table>
 
   <table id="appendix.regex.boundary.matchers">
-    <title id="appendix.regex.boundary.matchers.title">Regex - Boundary matchers</title>
+    <title id="appendix.regex.boundary.matchers.title">Locations</title>
 
+	<para>Locations (boundaries) are not part of the match. They just specify
+	where the match should be.</para>
+	
     <tgroup align="left" cols="2" rowsep="1">
       <colspec align="left" colnum="1"/>
 
@@ -533,12 +402,12 @@ that use the expressions above</title>
       <tbody>
         <row>
           <entry>^</entry>
-          <entry>The beginning of a line</entry>
+          <entry>The beginning of the line</entry>
         </row>
 
         <row>
           <entry>$</entry>
-          <entry>The end of a line</entry>
+          <entry>The end of the line</entry>
         </row>
 
         <row>
@@ -548,132 +417,113 @@ that use the expressions above</title>
 
         <row>
           <entry>\B</entry>
-          <entry>A non-word boundary</entry>
+          <entry>NOT a word boundary</entry>
         </row>
-      </tbody>
+
+        <row>
+          <entry>(?=u)</entry>
+          <entry>Before the character "u"</entry>
+        </row>
+
+        <row>
+          <entry>(?!u)</entry>
+          <entry>NOT before the character "u"</entry>
+        </row>
+
+        <row>
+          <entry>(?&lt;=q)</entry>
+          <entry>After the character "q"</entry>
+        </row>
+
+        <row>
+          <entry>(?&lt;!q)</entry>
+          <entry>NOT after the character "q"</entry>
+        </row>
+		
+	  </tbody>
     </tgroup>
   </table>
 
-  <table id="appendix.regex.greedy.quantifiers">
-    <title id="appendix.regex.greedy.quantifiers.title">Regex - Greedy quantifiers</title>
+
+<section id="appendix.regexp.examples">
+  <title id="appendix.regexp.examples.title">Examples for use in OmegaT</title>
+  
+  <table id="regex.examples">
+    <title id="regex.examples.title">Examples of regular expressions
+	that use the expressions above</title>
 
     <tgroup align="left" cols="2" rowsep="1">
       <colspec align="left" colnum="1"/>
 
       <thead>
         <row>
-          <entry align="left">Expression</entry>
-          <entry align="left">Match</entry>
+          <entry>Regular expression</entry>
+          <entry>Finds the following:</entry>
         </row>
       </thead>
 
       <tbody>
         <row>
-          <entry>X<emphasis>?</emphasis></entry>
-          <entry>X, once or not at all</entry>
+          <entry>(\b\w+\b)\s\1\b</entry>
+          <entry>double words</entry>
         </row>
 
         <row>
-          <entry>X<emphasis>*</emphasis></entry>
-          <entry>X, zero or more times</entry>
+          <entry>[\.,]\s*[\.,]+</entry>
+          <entry>comma or a period, followed by spaces and yet another comma
+          or period</entry>
         </row>
 
         <row>
-          <entry>X<emphasis>+</emphasis></entry>
-          <entry>X, one or more times</entry>
-        </row>
-      </tbody>
-    </tgroup>
-  </table>
-
-  <note>
-    <para>greedy quantifiers will match as much as they can. For example,
-    <emphasis>a+</emphasis> will match the aaa in
-    <emphasis>aaabbb</emphasis></para>
-  </note>
-
-  <table id="appendix.regex.non.greedy.quantifiers">
-    <title id="appendix.regex.non.greedy.quantifiers.title">Regex - Reluctant
-    (non-greedy) quantifiers</title>
-
-    <tgroup align="left" cols="2" rowsep="1">
-      <colspec align="left" colnum="1"/>
-
-      <thead>
-        <row>
-          <entry align="left">Expression</entry>
-          <entry align="left">Match</entry>
-        </row>
-      </thead>
-
-      <tbody>
-        <row>
-          <entry>X??</entry>
-          <entry>X, once or not at all</entry>
+          <entry>\. \s+$</entry>
+          <entry>extra spaces after the period at the end of the line</entry>
         </row>
 
         <row>
-          <entry>X*?</entry>
-          <entry>X, zero or more times</entry>
+          <entry>\s+a\s+[aeiou]</entry>
+          <entry>English: words, beginning with vowels, should generally be
+          preceded by &quot;an&quot;, not &quot;a&quot;</entry>
         </row>
 
         <row>
-          <entry>X+?</entry>
-          <entry>X, one or more times</entry>
-        </row>
-      </tbody>
-    </tgroup>
-  </table>
-
-  <note>
-    <para>non-greedy quantifiers will match as little as they can. For
-    example, <emphasis>a+?</emphasis> will match the first
-    <emphasis>a</emphasis> in <emphasis>aaabbb</emphasis></para>
-  </note>
-
-  <table id="appendix.regex.logical.operators">
-    <title id="appendix.regex.logical.operators.title">Regex - Logical operators</title>
-
-    <tgroup align="left" cols="2" rowsep="1">
-      <colspec align="left" colnum="1"/>
-
-      <thead>
-        <row>
-          <entry align="left">Expression</entry>
-          <entry align="left">Match</entry>
-        </row>
-      </thead>
-
-      <tbody>
-        <row>
-          <entry>XY</entry>
-          <entry>X followed by Y</entry>
+          <entry>\s+an\s+[^aeiou]</entry>
+          <entry>English: the same check as above, but concerning consonants
+          (&quot;a&quot;, not &quot;an&quot;)</entry>
         </row>
 
         <row>
-          <entry>X|Y</entry>
-          <entry>Either X or Y</entry>
+          <entry>\s{2,}</entry>
+          <entry>more than one space</entry>
         </row>
 
         <row>
-          <entry>(XY)</entry>
-          <entry>XY as a single group</entry>
+          <entry>\.[A-Z]</entry>
+          <entry>Period, followed by an upper-case letter - possibly a space
+          is missing between the period and the start of a new
+          sentence?</entry>
+        </row>
+
+        <row>
+          <entry>\bis\b</entry>
+          <entry>search for “is”, not “this” or “isn't” etc.</entry>
         </row>
       </tbody>
     </tgroup>
   </table>
 </section>
 
-  <section id="appendix.regex.tools">
-    <title id="appendix.regex.tools.title">Tools and references</title>
 
-    <para>Although OmegaT does not offer fancy coloring for your regular
-    expressions, you can get a lot of practice by using the <link linkend="windows.text.search"
-    endterm="windows.text.search.title"/> window since OmegaT does color the matching results.</para>
 
-	<para>The Java technical reference that you can find above is only useful as a canonical reference. If you want to know more about regular expressions, the two following ressources have proved very useful:
+<section id="appendix.regex.tools">
+  <title id="appendix.regex.tools.title">Tools and references</title>
 
-	<variablelist>
+  <para>Although OmegaT does not offer fancy coloring for your regular
+  expressions, you can get a lot of practice by using the <link linkend="windows.text.search"
+  endterm="windows.text.search.title"/> window since OmegaT does color the matching results.</para>
+
+  <para>The Java technical reference that you can find above is only useful as a canonical reference. If you want to know more about regular expressions, the two following ressources have proved very useful:
+
+  <variablelist>
 	<varlistentry id="appendix.regex.tools.regex101">
 	  <term id="appendix.regex.tools.regex101.title"><ulink url="https://regex101.com">https://regex101.com</ulink></term>
 	  <listitem><para>An online regular expression matcher where you enter the text you want to practice on and the regular expressions that you want to try.</para></listitem>
@@ -689,11 +539,11 @@ that use the expressions above</title>
 	  Java.</para></listitem>
 	</varlistentry>
 
-	</variablelist>
+  </variablelist>
 
-	OmegaT does not support either site in any way and if you find interesting references in your language, we would love to hear about them.
-	</para>
+  OmegaT does not support either site in any way and if you find interesting references in your language, we would love to hear about them.
+  </para>
 
 
-  </section>
+</section>
 </appendix>

@@ -25,8 +25,8 @@
   still in the field.</para>
 
   <note><para>The replacement string supports references to groups defined in
-  the search string. Use <code>$n</code> to refer to the <code>nth</code>
-  group.</para></note>
+  the search string. Use <code>$n</code> in the replacement field to refer to
+  the <code>nth</code> group in the search field.</para></note>
 
   <para>Search matches are displayed in bold blue characters, and the modified strings are displayed in orange to show the result of the replacement.</para>
   

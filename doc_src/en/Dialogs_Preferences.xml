@@ -90,6 +90,77 @@
           the <guilabel>Enabled</guilabel> checkbox for each provider you want
           to access. Use the <guibutton>Configure</guibutton> button to manage
           your authentication credentials for that provider.</para>
+
+<note><para>It should go without saying that you must have signed up for the
+appropriate service to use the machine translation options.</para></note>
+
+		<table id="dialogs.preferences.mt.provider.list.configuration">
+		  <title id="dialogs.preferences.mt.provider.list.configuration.title">Required credentials</title>
+
+		  <tgroup align="left" cols="3" rowsep="1">
+			<colspec align="left" colnum="1"/>
+			<thead>
+			  <row>
+				<entry>Engine</entry>
+				<entry>Required credentials</entry>
+				<entry>Link</entry>
+			  </row>
+			</thead>
+			<tbody>
+			  <row>
+				<entry>Belazar</entry>
+				<entry></entry>
+				<entry></entry>
+			  </row>
+			  <row>
+				<entry>DeepL</entry>
+				<entry>Requires a Deepl Pro Advanced plan available only in some countries</entry>
+				<entry><ulink url="https://www.deepl.com/en/pro">https://www.deepl.com/en/pro</ulink></entry>
+			  </row>
+			  <row>
+				<entry>Microsoft translator</entry>
+				<entry>API client ID</entry>
+				<entry><ulink url="https://www.microsoft.com/en-us/translator/">https://www.microsoft.com/en-us/translator/</ulink></entry>
+			  </row>
+			  <row>
+				<entry>MyMemory (machine translation)</entry>
+				<entry></entry>
+				<entry><ulink url="https://mymemory.translated.net/doc/cat.php">https://mymemory.translated.net/</ulink></entry>
+			  </row>
+			  <row>
+				<entry>Moses</entry>
+				<entry></entry>
+				<entry><ulink url="http://www2.statmt.org/moses/">http://www2.statmt.org/moses/</ulink></entry>
+			  </row>
+			  <row>
+				<entry>Apertium</entry>
+				<entry>URL, key</entry>
+				<entry><ulink url="http://www.apertium.org">http://www.apertium.org</ulink></entry>
+			  </row>
+			  <row>
+				<entry>MyMemory (human translation)</entry>
+				<entry></entry>
+				<entry></entry>
+			  </row>
+			  <row>
+				<entry>IBM Watson</entry>
+				<entry>URL, Model ID, Login ID, Password</entry>
+				<entry><ulink url="https://www.ibm.com/watson">https://www.ibm.com/watson</ulink></entry>
+			  </row>
+			  <row>
+				<entry>Google Translate v2</entry>
+				<entry>API key</entry>
+				<entry><ulink url="https://cloud.google.com/translate/docs/reference/rest/">https://cloud.google.com/translate/</ulink></entry>
+			  </row>
+			  <row>
+				<entry>Yandex</entry>
+				<entry>API key</entry>
+				<entry><ulink url="https://yandex.com/dev/dictionary/keys/get/">https://yandex.com/</ulink></entry>
+			  </row>
+			</tbody>
+		  </tgroup>
+		</table>
+		  
         </listitem>
       </varlistentry>
     </variablelist>

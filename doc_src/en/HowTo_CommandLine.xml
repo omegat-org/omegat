@@ -186,55 +186,8 @@
 		  system uses to access the proxy server.</para>
 		</listitem>
 	  </varlistentry>
-	  
-	  <varlistentry id="launch.with.command.line.google.translate.v.">
-		<term id="launch.with.command.line.google.translate.v.title">Google translate v2</term>
-		<listitem>
-		  <para><code>-Dgoogle.api.key=.</code></para>
-		  <para>Replace <code>.</code> with your private Google
-		  API key.</para>
-		</listitem>
-	  </varlistentry>
-	  
-	  <varlistentry id="launch.with.command.line.microsoft.translator">
-		<term id="launch.with.command.line.microsoft.translator.title">Microsoft translator</term>
-		<listitem>
-		  <itemizedlist>
-			<listitem>
-			  <para><code>-Dmicrosoft.api.client_id=.</code></para>
-			  <para>Replace <code>.</code> with your client ID</para>
-			</listitem>
-			<listitem>
-			  <para><code>-Dmicrosoft.api.client_secret=.</code></para>
-			  <para>Replace <code>.</code> with your client secret</para>
-			</listitem>
-			<listitem>
-			  <para>The ID and secret can be found in your
-			  account page under Primary account key and
-			  Customer-ID.</para>
-			</listitem>
-		  </itemizedlist>
-		</listitem>
-	  </varlistentry>
-
-	  <varlistentry id="launch.with.command.line.yandex.translate">
-		<term id="launch.with.command.line.yandex.translate.title">Yandex translate</term>
-		<listitem>
-		  <para><code>-Dyandex.api.key=.</code></para>
-		  <para>Replace <code>.</code> with your Yandex
-		  Translate API key.</para>
-		</listitem>
-	  </varlistentry>
 	</variablelist>
 	</para>
-
-	<note>
-	  <para>
-		It should go without saying that you must have signed up
-		for the appropriate service to use the machine
-		translation options.
-	  </para>
-	</note>
   </section>
 
   <section id="launch.with.command.line.omegat.parameters">

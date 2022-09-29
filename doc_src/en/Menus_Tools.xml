@@ -12,7 +12,7 @@
 	<keycombo><keycap>C</keycap><keycap>S</keycap><keycap>V</keycap></keycombo>
 	</para>
 	<para>On Windows and Linux:
-	<keycombo><keycap>Shift</keycap><keycap>Control</keycap><keycap>V</keycap></keycombo>
+	<keycombo><keycap>Control</keycap><keycap>Shift</keycap><keycap>V</keycap></keycombo>
 	</para>
 	<para>On macOS:
 	<keycombo><keycap>Shift</keycap><keycap>Command</keycap><keycap>V</keycap></keycombo>

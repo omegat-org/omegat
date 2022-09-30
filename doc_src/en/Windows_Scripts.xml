@@ -27,7 +27,7 @@
   <para>TODO default location?</para></warning>
   
   <section id="windows.scripts.use">
-    <title id="windows.scripts.use.title">Use</title>
+    <title id="windows.scripts.use.title">Usage</title>
 
     <para>The Scripting window allows you to load an existing script and run it
     on the current project.</para>

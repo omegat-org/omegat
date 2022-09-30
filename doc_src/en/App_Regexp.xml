@@ -8,83 +8,86 @@
 
   <para>This appendix is intended for users who want to learn a powerful way to increase their productivity. Regular expressions are complex objects but even in their most basic form are extremely helpful and are offered in most of the applications that you use on a daily basis.</para>
 
+  <para>Anything more complex than what is discussed here can be found in <link linkend="appendix.regex.tools" endterm="appendix.regex.tools.title"/>. You can also ask questions in the various support channels.</para>
+  
+
   <para>Regular expressions are usually abbreviated <emphasis>regex</emphasis>
   or <emphasis>regexp</emphasis>. When needed, we will use the former in this
   annex, along with its plural <emphasis>regexes</emphasis>.</para>
 
-	<para>Regular expressions are symbols or groups of symbols (expressions) that allow you to describe textual concepts.</para>
-	<para>For example:
-	<variablelist>
-	  <varlistentry>
-		<term>[0-9]</term>
-		<listitem><para>represents any one number from 0 to 9</para>
-		</listitem>
-	  </varlistentry>
-	  <varlistentry>
-		<term>\w+</term>
-		<listitem><para>represents one or more characters that one can find in a "word"</para>
-		</listitem>
-	  </varlistentry>
-	  <varlistentry>
-		<term>\h?</term>
-		<listitem><para>represents 0 or 1 horizontal white space character (which includes spaces, tabulations, etc. but not line-breaks that belong to the "vertical white space" category: \v)</para>
-		</listitem>
-	  </varlistentry>
-	</variablelist>
-	</para>
-	
-	<para>Regular expressions are used in many places in OmegaT:
+  <para>Regular expressions are symbols or groups of symbols (expressions) that allow you to describe textual concepts.</para>
+  <para>For example:
+  <variablelist>
+	<varlistentry>
+	  <term>[0-9]</term>
+	  <listitem><para>represents any one number from 0 to 9</para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term>\w+</term>
+	  <listitem><para>represents one or more characters that one can find in a "word"</para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term>\h?</term>
+	  <listitem><para>represents 0 or 1 horizontal white space character (which includes spaces, tabulations, etc. but not line-breaks that belong to the "vertical white space" category: \v)</para>
+	  </listitem>
+	</varlistentry>
+  </variablelist>
+  </para>
+  
+  <para>Regular expressions are used in many places in OmegaT:
 
-	<variablelist>
-	  <varlistentry>
-		<term>Searches</term>
-		<listitem><para>OmegaT searches include a <link
-		linkend="windows.text.search.methods.regex"
-		endterm="windows.text.search.methods.regex.title"/> option that allows
-		you to make extremely powerful searches across your files.</para>
-		<para>An option with the same label in the <link
-		linkend="windows.text.replace" endterm="windows.text.replace.title"/>
-		dialog allows you to replace text with regular expression search
-		matches.</para></listitem>
-	  </varlistentry>
+  <variablelist>
+	<varlistentry>
+	  <term>Searches</term>
+	  <listitem><para>OmegaT searches include a <link
+	  linkend="windows.text.search.methods.regex"
+	  endterm="windows.text.search.methods.regex.title"/> option that allows
+	  you to make extremely powerful searches across your files.</para>
+	  <para>An option with the same label in the <link
+	  linkend="windows.text.replace" endterm="windows.text.replace.title"/>
+	  dialog allows you to replace text with regular expression search
+	  matches.</para></listitem>
+	</varlistentry>
 
-	  <varlistentry>
-		<term>Custom tags</term>
-		<listitem><para>Custom tags are tags that you define using regular
-		expressions. The tags are handled exactly like OmegaT's native tags. See
-		<link
-			linkend="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags"
-			endterm="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags.title"/>
-		for details.</para> <para>Tag definitions must be separated with a <code>|</code> (OR) character.</para></listitem>
-	  </varlistentry>
+	<varlistentry>
+	  <term>Custom tags</term>
+	  <listitem><para>Custom tags are tags that you define using regular
+	  expressions. The tags are handled exactly like OmegaT's native tags. See
+	  <link
+		  linkend="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags"
+		  endterm="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags.title"/>
+	  for details.</para> <para>Tag definitions must be separated with a <code>|</code> (OR) character.</para></listitem>
+	</varlistentry>
 
-	  <varlistentry>
-		<term>Flagged fragments</term>
-		<listitem><para><link
-		linkend="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation"
-		endterm="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation.title"/>
-		allow you to define strings that OmegaT will mark in red by default, and
-		consider as an extraneous tag for validation purposes.</para>
-		<para>Fragment definitions must be separated with a <code>|</code> (OR) character.</para></listitem>
-	  </varlistentry>
+	<varlistentry>
+	  <term>Flagged fragments</term>
+	  <listitem><para><link
+	  linkend="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation"
+	  endterm="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation.title"/>
+	  allow you to define strings that OmegaT will mark in red by default, and
+	  consider as an extraneous tag for validation purposes.</para>
+	  <para>Fragment definitions must be separated with a <code>|</code> (OR) character.</para></listitem>
+	</varlistentry>
 
-	  <varlistentry>
-		<term>Segmentation</term>
-		<listitem><para>Segmentation rules and language patterns are regular
-		expressions. You can modify them at will to better segment a document or
-		add general rule sets. See <link
-		linkend="dialogs.preferences.segmentation.setup"
-		endterm="dialogs.preferences.segmentation.setup.title"/> for
-		details.</para> <para>A segmentation/exception rule defines a location
-		where the segmentation will happen or not. The location requires 2
-		regular expressions. The "before" expression defines the string that
-		comes before the location and the "after" expressions defines the string
-		that comes after the location.</para> <para>A language pattern that
-		matches the source language of the project will apply to that
-		project.</para></listitem>
-	  </varlistentry>
-	</variablelist>
-	</para>
+	<varlistentry>
+	  <term>Segmentation</term>
+	  <listitem><para>Segmentation rules and language patterns are regular
+	  expressions. You can modify them at will to better segment a document or
+	  add general rule sets. See <link
+	  linkend="dialogs.preferences.segmentation.setup"
+	  endterm="dialogs.preferences.segmentation.setup.title"/> for
+	  details.</para> <para>A segmentation/exception rule defines a location
+	  where the segmentation will happen or not. The location requires 2
+	  regular expressions. The "before" expression defines the string that
+	  comes before the location and the "after" expressions defines the string
+	  that comes after the location.</para> <para>A language pattern that
+	  matches the source language of the project will apply to that
+	  project.</para></listitem>
+	</varlistentry>
+  </variablelist>
+  </para>
 
   <section id="appendix.regexp.basic.principles">
 	<title id="appendix.regexp.basic.principles.title">Basic principles</title>
@@ -207,8 +210,6 @@
 	</varlistentry>
   </variablelist>
   
-  
-  <para>Anything more complex than what is discussed here can be found in <link linkend="appendix.regex.tools" endterm="appendix.regex.tools.title"/>. You can also ask questions in the various support channels.</para>
   
   <table id="appendix.regex.characters">
     <title id="appendix.regex.characters.title">Characters</title>

@@ -5,7 +5,7 @@
   <title id="appendix.dictionaries.title">Dictionaries</title>
 
   <section id="appendix.dictionaries.download.install">
-    <title id="appendix.dictionaries.download.install.title">How to download and install dictionaries</title>
+    <title id="appendix.dictionaries.download.install.title">Installation</title>
 
     <para>Dictionaries in OmegaT are based on the StarDict or on the Lingvo DSL
     format. To install the necessary files for the StarDict format, proceed as
@@ -66,7 +66,7 @@
   </section>
 
   <section id="appendix.dictionaries.problems">
-    <title id="appendix.dictionaries.problems.title">Problems with dictionaries</title>
+    <title id="appendix.dictionaries.problems.title">Common issues</title>
 
     <itemizedlist>
       <listitem>

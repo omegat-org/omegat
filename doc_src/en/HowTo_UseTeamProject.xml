@@ -75,14 +75,14 @@
         members to your local copy of the project, and makes your own
         translations available to the rest of the team. Only the contents of
         the two following files are synchronized: <itemizedlist>
-            <listitem>
-              <para><filename>project.save</filename></para>
-            </listitem>
+        <listitem>
+          <para><filename>project.save</filename></para>
+        </listitem>
 
-            <listitem>
-              <para><filename>glossary.txt</filename></para>
-            </listitem>
-          </itemizedlist></para>
+        <listitem>
+          <para><filename>glossary.txt</filename></para>
+        </listitem>
+        </itemizedlist></para>
 
         <para>Although the <filename>omegat.project</filename> file is subject
         to special handling, described under <emphasis>Team project
@@ -93,10 +93,10 @@
         closed or saved. This means the automatic save function also regularly
         synchronizes your local project with the version on the server at the
         interval specified in the <link
-        endterm="dialogs.preferences.saving.and.output.interval.title"
-        linkend="dialogs.preferences.saving.and.output.interval"/> section of
-        the <guimenuitem>Preferences</guimenuitem> dialog in the
-        <guimenu>Options</guimenu> menu.</para>
+        endterm="dialog.preferences.saving.and.output.interval.title"
+        linkend="dialog.preferences.saving.and.output.interval"/> section of the
+        <link linkend="dialogs.preferences"
+			  endterm="dialogs.preferences.title"/> dialog.</para>
       </listitem>
     </varlistentry>
 
@@ -208,20 +208,20 @@
         files:</para>
 
         <para><orderedlist>
-            <listitem>
-              <para>Copy the new files to the <filename
-              class="directory">source</filename> folder, or modify an
-              existing file.</para>
-            </listitem>
+          <listitem>
+            <para>Copy the new files to the <filename
+            class="directory">source</filename> folder, or modify an
+            existing file.</para>
+          </listitem>
 
-            <listitem>
-              <para>Use the <link
-              endterm="menus.project.commit.source.files.title"
-              linkend="menus.project.commit.source.files"/> command to upload
-              the files to the server.</para>
-            </listitem>
+          <listitem>
+            <para>Use the <link
+            endterm="menus.project.commit.source.files.title"
+            linkend="menus.project.commit.source.files"/> command to upload
+            the files to the server.</para>
+          </listitem>
           </orderedlist> When you modify a source file you must execute the
-        <command>Commit</command> command before the project is saved
+          <command>Commit</command> command before the project is saved
         (automatically or manually), reloaded, or closed..</para>
       </listitem>
     </varlistentry>

@@ -5,7 +5,7 @@
   <title id="appendix.shortcut.title">OmegaT shortcuts</title>
 
   <section id="appendix.shortcut.description">
-    <title id="appendix.shortcut.description.title">Shortcuts description in this manual</title>
+    <title id="appendix.shortcut.description.title">Description</title>
 
     <para>OmegaT generally does not use buttons to give you access to its
     functions. The functions are available from the menus and most of them have
@@ -80,8 +80,7 @@
   </section>
 
   <section id="appendix.shortcut.customization">
-    <title id="appendix.shortcut.customization.title">Shortcuts
-    customization</title>
+    <title id="appendix.shortcut.customization.title">Customization</title>
 
 	<para>OmegaT assigns shortcuts to most functions available in the menus and
 	to a number of functions in the Editor window. Most of these functions can
@@ -142,7 +141,7 @@
   </section>
 
   <section id="appendix.shortcut.syntax">
-    <title id="appendix.shortcut.syntax.title">Shortcuts syntax</title>
+    <title id="appendix.shortcut.syntax.title">Syntax</title>
 
     <para>Empty lines are accepted and comment lines should start with
     <code>//</code>. Anything after the <code>//</code> will be
@@ -231,8 +230,6 @@
   <section id="appendix.function.codes">
     <title id="appendix.function.codes.title">Function codes</title>
 
-    <section id="appendix.function.codes.editor">
-      <title id="appendix.function.codes.editor.title">Editor functions codes</title>
       <table id="appendix.function.codes.editor.table">
         <title id="appendix.function.codes.editor.table.title">Editor</title>
 
@@ -374,9 +371,6 @@
           </tbody>
         </tgroup>
       </table>
-    </section>
-    <section id="appendix.function.codes.autocompleter">
-      <title id="appendix.function.codes.autocompleter.title">Autocompleter functions codes</title>
       <table id="appendix.function.codes.autocompleter.table">
         <title id="appendix.function.codes.autocompleter.table.title">Autocompleter</title>
 
@@ -523,10 +517,6 @@
           </tbody>
         </tgroup>
       </table>
-    </section>	
-	
-    <section id="appendix.function.codes.search.window">
-      <title id="appendix.function.codes.search.window.title">Search Window Codes</title>
 
       <table id="appendix.function.codes.search.window.table">
         <title id="appendix.function.codes.search.window.table.title">Search Window</title>
@@ -556,10 +546,6 @@
 		  </tbody>
 		</tgroup>
 	  </table>
-	</section>
-
-	<section id="appendix.function.codes.project.menu">
-      <title id="appendix.function.codes.project.menu.title">Project Menu Codes</title>
 
       <table id="appendix.function.codes.project.menu.table">
         <title id="appendix.function.codes.project.menu.table.title">Project Menu</title>
@@ -716,10 +702,6 @@
           </tbody>
         </tgroup>
       </table>
-    </section>
-
-    <section id="appendix.function.codes.edit.menu">
-      <title id="appendix.function.codes.edit.menu.title">Edit Menu Codes</title>
 
       <table id="appendix.function.codes.edit.menu.table">
         <title id="appendix.function.codes.edit.menu.table.title">Edit Menu</title>
@@ -942,10 +924,6 @@
           </tbody>
         </tgroup>
       </table>
-    </section>
-
-    <section id="appendix.function.codes.goto.menu">
-      <title id="appendix.function.codes.goto.menu.title">GoTo Menu Codes</title>
 
       <table id="appendix.function.codes.goto.menu.table">
         <title id="appendix.function.codes.goto.menu.table.title">GoTo Menu</title>
@@ -1041,10 +1019,6 @@
           </tbody>
         </tgroup>
       </table>
-    </section>
-
-    <section id="appendix.function.codes.view.menu">
-      <title id="appendix.function.codes.view.menu.title">View Menu Codes</title>
 
       <table id="appendix.function.codes.view.menu.table">
         <title id="appendix.function.codes.view.menu.table.title">View Menu</title>
@@ -1127,13 +1101,9 @@
           </tbody>
         </tgroup>
       </table>
-    </section>
-
-    <section id="appendix.function.codes.tools.menu">
-      <title id="appendix.function.codes.tools.menu.title">Tools Menu</title>
 
       <table id="appendix.function.codes.tools.menu.table">
-        <title id="appendix.function.codes.tools.menu.table.title">Tools Menu Codes</title>
+        <title id="appendix.function.codes.tools.menu.table.title">Tools Menu</title>
 
         <tgroup cols="4" colsep="1">
           <colspec align="left" colname="1" colnum="1"/>
@@ -1180,10 +1150,6 @@
           </tbody>
         </tgroup>
       </table>
-    </section>
-
-    <section id="appendix.function.codes.option.menu">
-      <title id="appendix.function.codes.option.menu.title">Options Menu Codes</title>
 
       <table id="appendix.function.codes.option.menu.table">
         <title id="appendix.function.codes.option.menu.table.title">Options Menu</title>
@@ -1328,10 +1294,6 @@
           </tbody>
         </tgroup>
       </table>
-    </section>
-
-    <section id="appendix.function.codes.help.menu">
-      <title id="appendix.function.codes.help.menu.title">Help Menu Codes</title>
 
       <table id="appendix.function.codes.help.menu.table">
         <title id="appendix.function.codes.help.menu.table.title">Help Menu</title>
@@ -1376,5 +1338,4 @@
         </tgroup>
       </table>
     </section>
-  </section>
 </appendix>

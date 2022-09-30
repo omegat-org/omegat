@@ -54,8 +54,7 @@ details.</para>
     </itemizedlist></para>
 
   <section id="windows.aligner.adjust">
-    <title id="windows.aligner.adjust.title">Step 1: Adjust alignment
-    parameters</title>
+    <title id="windows.aligner.adjust.title">Parameters</title>
 
     <para>In this step, the bottom part of the window presents various
     parameters and options you can change if the initial alignment looks like
@@ -305,8 +304,7 @@ details.</para>
   </section>
 
   <section id="windows.aligner.manual.corrections">
-    <title id="windows.aligner.manual.corrections.title">Step 2: Make manual
-    corrections</title>
+    <title id="windows.aligner.manual.corrections.title">Corrections</title>
 
     <para>Manual adjustments are generally required after the initial automatic
     alignment process. This generally involves moving segments up or down to

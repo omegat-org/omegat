@@ -10,10 +10,7 @@
   linkend="project.folder.omegat" endterm="project.folder.omegat.title"/>
   folder. This memory is gradually filled as your translation progresses.</para>
 
-  <section id="how.to.use.tm.speedup">
-	<title id="how.to.use.tm.speedup.title">Speed up your translation</title>
-	
-	<para>You can use existing translations to speed up the translation
+	<para>Existing translations are used to speed up the translation
 	process.</para>
 
 	<itemizedlist>
@@ -39,10 +36,9 @@
 		endterm="project.folder.tm.title"/> folder of your project.</para>
 	  </listitem>
 	</itemizedlist>
-  </section>
 
   <section id="how.to.use.tm.create.your.tm">
-	<title id="how.to.use.tm.create.your.tm.title">Create your own memories</title>
+	<title id="how.to.use.tm.create.your.tm.title">Create your own TMs</title>
 	
 	<para>When you use <link linkend="menus.project.create.translated.documents"
 	endterm="menus.project.create.translated.documents.title"/> to create the
@@ -60,7 +56,7 @@
   </section>
 
   <section id="how.to.use.tm.reuse.tm">
-	<title id="how.to.use.tm.reuse.tm.title">Reuse translation memories</title>
+	<title id="how.to.use.tm.reuse.tm.title">Reuse TMs</title>
 	
 	<para>To reuse translation memories from a previous project you have 2
 	options:
@@ -97,8 +93,7 @@
   </para>
 
     <section id="how.to.tm.read.and.write">
-    <title id="how.to.tm.read.and.write.title">Reading translation
-    memories from other tools</title>
+    <title id="how.to.tm.read.and.write.title">Reading TMs  from other tools</title>
 
     <para>OmegaT can read conformant TMX memories produced by other
     tools.</para>
@@ -112,7 +107,7 @@
   </section>
 
   <section id="how.to.use.tm.store.your.tm">
-	<title id="how.to.use.tm.store.your.tm.title">Managing your memories</title>
+	<title id="how.to.use.tm.store.your.tm.title">Managing your TMs</title>
 
 	<para>You may want to store translation memories in separate folders, by
 	client or by specialty so as to be able to reuse them quickly when need
@@ -126,7 +121,7 @@
   <section id="how.to.tm.creating.a.tm.for.selected.documents">
     <title
     id="how.to.tm.creating.a.tm.for.selected.documents.title">Creating a
-    translation memory specific to selected documents</title>
+    TM specific to selected documents</title>
 
     <para>In situations where you need to share a TMX that contain only the text
     from certain specific files and excludes other content, follow the procedure
@@ -169,8 +164,7 @@
 </section>
 
 <section id="how.to.tm.share.translation.memories">
-  <title id="how.to.tm.share.translation.memories.title">Share translation
-  memories</title>
+  <title id="how.to.tm.share.translation.memories.title">Share TMs</title>
 
   <para>For large jobs involving a team of translators, it is easier for
   everyone involved to share common translation memories rather than pass local
@@ -234,7 +228,7 @@
 
 <section id="how.to.tm.bridge.two.languages">
   <title id="how.to.tm.bridge.two.languages.title">Bridge two
-  languages with a third</title>
+  languages</title>
 
   <para>OmegaT displays fuzzy matches in the <link linkend="panes.fuzzy.matches"
   endterm="panes.fuzzy.matches.title"/> pane. Such matches are by default

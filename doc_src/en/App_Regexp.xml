@@ -12,8 +12,6 @@
   or <emphasis>regexp</emphasis>. When needed, we will use the former in this
   annex, along with its plural <emphasis>regexes</emphasis>.</para>
 
-  <section id="appendix.regexp.introduction">
-	<title id="appendix.regexp.introduction.title">What are regular expressions</title>
 	<para>Regular expressions are symbols or groups of symbols (expressions) that allow you to describe textual concepts.</para>
 	<para>For example:
 	<variablelist>
@@ -87,10 +85,9 @@
 	  </varlistentry>
 	</variablelist>
 	</para>
-  </section>
 
-  <section id="appendix.regexp.concepts">
-	<title id="appendix.regexp.concepts.title">Concepts and first expressions</title>
+  <section id="appendix.regexp.basic.principles">
+	<title id="appendix.regexp.basic.principles.title">Basic principles</title>
 	<para>Regular expressions are used to find text. A given expression will
 	<emphasis>match</emphasis> a piece of text, or not.</para>
 	<para>Each character used in an expression has an effect on the match.</para>
@@ -211,10 +208,6 @@
   </variablelist>
   
   
-</section>
-
-<section id="appendix.regexp.reference">
-  <title id="appendix.regexp.reference.title">Basic reference</title>
   <para>Anything more complex than what is discussed here can be found in <link linkend="appendix.regex.tools" endterm="appendix.regex.tools.title"/>. You can also ask questions in the various support channels.</para>
   
   <table id="appendix.regex.characters">
@@ -442,7 +435,7 @@
 
 
 <section id="appendix.regexp.examples">
-  <title id="appendix.regexp.examples.title">Examples for use in OmegaT</title>
+  <title id="appendix.regexp.examples.title">Examples</title>
   
   <table id="regex.examples">
     <title id="regex.examples.title">Examples of regular expressions
@@ -511,7 +504,7 @@
 
 
 <section id="appendix.regex.tools">
-  <title id="appendix.regex.tools.title">Tools and references</title>
+  <title id="appendix.regex.tools.title">References</title>
 
   <para>Although OmegaT does not offer fancy coloring for your regular
   expressions, you can get a lot of practice by using the <link linkend="windows.text.search"

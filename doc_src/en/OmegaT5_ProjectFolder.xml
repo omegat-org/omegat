@@ -74,8 +74,10 @@
     <para>TMX files are read in the order of their names, and the segments within a file are read sequentially.</para>
     <note><para>TMX files compressed in the gzip format can also be read by OmegaT.</para></note>
 
-    <section id="project.folder.tm.auto">
-      <title id="project.folder.tm.auto.title">tm/auto</title>
+<variablelist>
+    <varlistentry id="project.folder.tm.auto">
+      <term id="project.folder.tm.auto.title">tm/auto</term>
+	  <listitem>
 	  <para>This folder is made for reliable references files that can automatically fill exactly matching and not yet translated segments.</para>
       <para>Translations from TMX files placed in this folder are automatically inserted in matching segments without the automatic prefix, making it unnecessary to confirm these segments. Translations coming from this folder are considered to be <emphasis>as</emphasis> reliable as the current project memory.</para>
 
@@ -95,11 +97,13 @@
         </listitem>
       </orderedlist>
 	  
-      <warning><para>If you remove a TMX file from <filename class="directory">tm/auto</filename> before Step 3, none of its automatically inserted translations will be kept.</para></warning>    
-    </section>
+      <warning><para>If you remove a TMX file from <filename class="directory">tm/auto</filename> before Step 3, none of its automatically inserted translations will be kept.</para></warning>
+	  </listitem>
+	</varlistentry>
 
-    <section id="project.folder.tm.enforce">
-      <title id="project.folder.tm.enforce.title">tm/enforce</title>
+    <varlistentry id="project.folder.tm.enforce">
+      <term id="project.folder.tm.enforce.title">tm/enforce</term>
+	  <listitem>
 	  <para>This folder is made for reliable references files that will automatically overwrite or fill exactly matching segments.</para>
 
       <para>Translations from TMX files placed in this folder are automatically inserted in matching segments without the automatic prefix, making it unnecessary to confirm these segments. Translations coming from this folder are considered to be <emphasis>more</emphasis> reliable than the current project memory.</para>
@@ -134,21 +138,26 @@
       </orderedlist>
 	  
       <warning><para>If  you remove a TMX file from <filename class="directory">tm/enforce</filename> before Step 3, none of the enforced translations will be kept.</para></warning>
-    </section>
+	  </listitem>
+	</varlistentry>
 
-    <section id="project.folder.tm.mt">
-      <title id="project.folder.tm.mt.title">tm/mt</title>
+    <varlistentry id="project.folder.tm.mt">
+      <term id="project.folder.tm.mt.title">tm/mt</term>
+	  <listitem>
       <para>The background of the active segment changes to red when a match is inserted from a TMX contained in the <filename class="directory">mt</filename> folder. The background is restored to normal when you leave the segment or when you modify the segment.</para>
-    </section>
+	  </listitem>
+	</varlistentry>
+	
+    <varlistentry id="project.folder.tm.penalty">
+      <term id="project.folder.tm.penalty.title">tm/penalty-xxx</term>
+	  <listitem>
+		<para>It can be useful to distinguish between high-quality translation memories and other memories that, due to the subject matter, client, revision status, or other factors,are less reliable. The score of matches from translation memories in folders named <filename class="directory">penalty-xxx</filename> (where xxx is a number between 0 and 100), is decreased by an amount corresponding to the value in the name of the folder. For example, a 100% match in a TMX, stored in a folder called <filename class="directory">penalty-30</filename> becomes a 70% match. The penalty applies to all three match percentages. Scores of 75, 80 and 90 for a match are lowered to 45, 50 and 60.</para>
+	  </listitem>
+	</varlistentry>
 
-    <section id="project.folder.tm.penalty">
-      <title id="project.folder.tm.penalty.title">tm/penalty-xxx</title>
-      <para>It can be useful to distinguish between high-quality translation memories and other memories that, due to the subject matter, client, revision status, or other factors,are less reliable. The score of matches from translation memories in folders named <filename class="directory">penalty-xxx</filename> (where xxx is a number between 0 and 100), is decreased by an amount corresponding to the value in the name of the folder. For example, a 100% match in a TMX, stored in a folder called <filename class="directory">penalty-30</filename> becomes a 70% match. The penalty applies to all three match percentages. Scores of 75, 80 and 90 for a match are lowered to 45, 50 and 60.</para>
-    </section>
-
-    <section id="project.folder.tm.tmx2source">
-      <title id="project.folder.tm.tmx2source.title">tm/tmx2source</title>
-
+    <varlistentry id="project.folder.tm.tmx2source">
+      <term id="project.folder.tm.tmx2source.title">tm/tmx2source</term>
+	  <listitem>
   <para>OmegaT displays fuzzy matches in the <link linkend="panes.fuzzy.matches"
   endterm="panes.fuzzy.matches.title"/> pane. Such matches are by default
   limited to the source and target languages defined in <link
@@ -159,7 +168,9 @@
   under</emphasis> the source segment to use as a third language reference. See
   <link linkend="how.to.tm.bridge.two.languages"
   endterm="how.to.tm.bridge.two.languages.title"/> for details.</para>
-    </section>
+      </listitem>
+	</varlistentry>
+</variablelist>
 	
 	<note><para>You can combine folders to create new functions. For example, a 10% penalty folder within the machine translation folder: <filename>tm/mt/penalty-010</filename> would never generate 100% matches that could otherwise be automatically inserted by OmegaT, and would always set a red background to the match whenever it is inserted.</para></note>
   </section>

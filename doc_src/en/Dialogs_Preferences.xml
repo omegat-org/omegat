@@ -1118,8 +1118,7 @@ appropriate service to use the machine translation options.</para></note>
 </section>
 
 <section id="dialog.preferences.languagetool.plugin">
-  <title id="dialog.preferences.languagetool.plugin.title">LanguageTool
-  plug-in</title>
+  <title id="dialog.preferences.languagetool.plugin.title">LanguageTool</title>
 
   <variablelist>
 	<varlistentry id="dialog.preferences.languagetool.plugin.servicetype">

@@ -66,7 +66,7 @@
   </itemizedlist>
 
   <section id="windows.text.search.methods">
-    <title id="windows.text.search.methods.title">Search types and options</title>
+    <title id="windows.text.search.methods.title">Search type</title>
 
     <para>Use the radio buttons to select the type of search. The following
     search types are available:</para>
@@ -207,7 +207,7 @@ above only apply to exact and keyword searches.</para></warning>
   </section>
 
   <section id="windows.text.search.result.display">
-    <title id="windows.text.search.result.display.title">Search results display</title>
+    <title id="windows.text.search.result.display.title">Results display</title>
 
     <para>Matches are displayed in their order of appearance in the project. For
     translated segments, the original text is displayed above the translated

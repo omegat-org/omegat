@@ -89,8 +89,7 @@
   </section>
 
   <section id="windows.scripts.distribution">
-    <title id="windows.scripts.distribution.title">Scripts distributed with
-    OmegaT</title>
+    <title id="windows.scripts.distribution.title">Distributed scripts</title>
 
     <para>Follow the instructions provided in the script itself.</para>
 
@@ -372,7 +371,7 @@
   </section>
 
   <section id="windows.scripts.languages">
-    <title id="windows.scripts.languages.title">Scripting languages</title>
+    <title id="windows.scripts.languages.title">Languages</title>
 
     <variablelist>
       <varlistentry>

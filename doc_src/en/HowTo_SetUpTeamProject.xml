@@ -2,7 +2,7 @@
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="how.to.setup.team.project">
-  <title id="how.to.setup.team.project.title">Set up and maintain a team
+  <title id="how.to.setup.team.project.title">Set up a team
   project</title>
 
   <para>Managing a team projects calls for some knowledge of servers, as well
@@ -18,8 +18,7 @@
   access for the translators.</para>
 
   <section id="how.to.setup.team.project.prepare.the.repository">
-    <title id="how.to.setup.team.project.prepare.the.repository.title">Prepare
-    the repository</title>
+    <title id="how.to.setup.team.project.prepare.the.repository.title">Preparations</title>
 
     <orderedlist>
       <listitem>
@@ -57,7 +56,7 @@
 
   <section id="how.to.setup.team.project.project.add.to.repository">
     <title id="how.to.setup.team.project.project.add.to.repository.title">Add
-    your project to the repository</title>
+    your project</title>
 
     <para>Make sure you are in your local repository, and either create a new
     OmegaT project, or copy an existing local project that you want to convert
@@ -71,7 +70,7 @@
         <para>Set up the project</para>
 
         <para>If you are creating a new empty project, you can follow the
-        <link linkend="how.to.create.new.project">usual GUI procedure</link>,
+        <link linkend="introduction.create.and.open.new.project">usual GUI procedure</link>,
         or create it directly from the command line: <itemizedlist>
             <listitem>
               <para><command>java -jar OmegaT.jar team init
@@ -181,7 +180,7 @@
 
   <section id="how.to.setup.team.project.setup.translator.access">
     <title id="how.to.setup.team.project.setup.translator.access.title">Set up
-    translator access</title>
+    access</title>
 
     <para>After the project is ready and has been uploaded to the server, the
     team project administrator has to set up access for the translators.
@@ -256,8 +255,7 @@
   </section>
 
   <section id="how.to.setup.team.project.selective.sharing">
-    <title id="how.to.setup.team.project.selective.sharing.title">Special
-    case: selective sharing</title>
+    <title id="how.to.setup.team.project.selective.sharing.title">Selective sharing</title>
 
     <para>The above process describes the most common scenario, in which the
     team project administrator has full control of the project and all files

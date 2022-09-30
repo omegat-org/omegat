@@ -77,7 +77,7 @@
   </itemizedlist>
 
   <section id="windows.text.replace.methods">
-    <title id="windows.text.replace.methods.title">Search types and options</title>
+    <title id="windows.text.replace.methods.title">Search type</title>
 
     <para>Use the  radio buttons to select the type of search. The following search types are available:</para>
 
@@ -135,10 +135,7 @@
   </section>
 
   <section id="windows.text.replace.result.display">
-    <title id="windows.text.replace.result.display.title">Search results display</title>
-
-  <section id="windows.text.search.result.display">
-    <title id="windows.text.search.result.display.title">Search results display</title>
+    <title id="windows.text.replace.result.display.title">Results display</title>
 
     <para>Matches are displayed in their order of appearance in the project. For translated segments, the original text is displayed above the translated text. Only the source text is displayed for untranslated segments.</para>
 
@@ -164,6 +161,5 @@
   	<para>Check the <guilabel>Auto-sync with Editor</guilabel> box at the bottom of the search window to have selected segments open in the Editor automatically.</para>
 
   	<para>Check the <guilabel>Back to the initial segment on close</guilabel> box to automatically return to the segment you were in when you started the search after you close the window.</para>
-  </section>
 </section>
 </section>

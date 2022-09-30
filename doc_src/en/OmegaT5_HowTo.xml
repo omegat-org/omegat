@@ -4,22 +4,16 @@
 <chapter id="how.to">
   <title id="how.to.title">How To...</title>
 
-  <xi:include href="HowTo_CreateNewProject.xml"
-              xmlns:xi="http://www.w3.org/2001/XInclude"/>
-  
-  <xi:include href="HowTo_UseTM.xml"
-              xmlns:xi="http://www.w3.org/2001/XInclude"/>
-
   <xi:include href="HowTo_RestoreYourData.xml"
-              xmlns:xi="http://www.w3.org/2001/XInclude"/>
-
-  <xi:include href="HowTo_ManageRTL.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
   <xi:include href="HowTo_TranslateOtherFiles.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
-<xi:include href="HowTo_CommandLine.xml"
+  <xi:include href="HowTo_UseTM.xml"
+              xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+  <xi:include href="HowTo_ManageRTL.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
 <xi:include href="HowTo_SetUpTeamProject.xml"

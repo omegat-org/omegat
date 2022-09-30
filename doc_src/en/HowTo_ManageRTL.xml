@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="how.to.manage.right.to.left">
-  <title id="how.to.manage.right.to.left.title">Manage right-to-left languages</title>
+  <title id="how.to.manage.right.to.left.title">Manage RTL languages</title>
 
    <para>The justification of source and target segments depends on the project languages. By default, left justification is used for left-to-right (LTR) languages and right justification for right-to-left (RTL) languages. You can toggle between the following three justification modes by pressing <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>O</keycap></keycombo>: </para>
 
@@ -28,13 +28,13 @@
     <para></para>
 
     <section id="how.to.manage.right.to.left.mixing.rtl.and.ltr">
-      <title id="how.to.manage.right.to.left.mixing.rtl.and.ltr.title">Mixing RTL and LTR strings in segments</title>
+      <title id="how.to.manage.right.to.left.mixing.rtl.and.ltr.title">Mixing RTL and LTR</title>
 
       <para>You can use the default (LTR) mode to write purely RTL text. However, it is often necessary to include LTR text, such as  OmegaT tags, product names that must retain their original LTR language direction, or placeholders in localization files, within an RTL document.  In such cases, you must switch to RTL mode to ensure the RTL (or, more precisely, bidirectional) text is displayed correctly. Note that OmegaT shows both the source and target in the same mode. Consequently,  if the source language is LTR and the target language is RTL, or vice versa, you will need to toggle back and forth between the two modes to read the source and enter the target easily.</para>
     </section>
 
     <section id="how.to.manage.right.to.left.omegat.tags.and.rtl">
-      <title id="how.to.manage.right.to.left.omegat.tags.and.rtl.title">OmegaT tags in RTL segments</title>
+      <title id="how.to.manage.right.to.left.omegat.tags.and.rtl.title">Tags in RTL segments</title>
 
       <para>OmegaT tags are LTR strings. When translating between RTL and LTR languages, correctly reading the tags from the source and entering them properly in the target may require the translator to toggle between LTR and RTL modes numerous times.</para>
 
@@ -42,7 +42,7 @@
     </section>
 
     <section id="how.to.manage.right.to.left.creating.translated.rtl.documents">
-      <title id="how.to.manage.right.to.left.creating.translated.rtl.documents.title">Creating translated RTL documents</title>
+      <title id="how.to.manage.right.to.left.creating.translated.rtl.documents.title">Translated documents</title>
 
       <para>The translated document will be created in the same display direction as the original. You will have to change the text direction of the target document in its own application. </para>
 

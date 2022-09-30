@@ -16,7 +16,7 @@
   persists.</para></note>
 
   <section id="configuration.folder.location">
-    <title id="configuration.folder.location.title">Configuration folder location</title>	
+    <title id="configuration.folder.location.title">Location</title>	
 	<para>The location of the configuration folder varies by system (the <emphasis>~</emphasis> character represents your home directory):<variablelist>
 	  <varlistentry><term>Linux</term><listitem><para><filename>~/.omegat</filename></para></listitem></varlistentry>
 	  <varlistentry><term>macOS</term><listitem><para><filename>~/Library/Preferences/OmegaT</filename></para></listitem></varlistentry>
@@ -26,7 +26,7 @@
   </section>
   
   <section id="configuration.folder.default.contents">
-    <title id="configuration.folder.default.contents.title">Default configuration folder contents</title>
+    <title id="configuration.folder.default.contents.title">Default  contents</title>
 	<variablelist>
 	  <varlistentry id="configuration.folder.default.contents.omegat.prefs">
 		<term id="configuration.folder.default.contents.omegat.prefs.title">omegat.prefs</term>
@@ -69,7 +69,7 @@
   </section>
   
     <section id="configuration.folder.extra.contents">
-    <title id="configuration.folder.extra.contents.title">Additional configuration folder contents</title>
+    <title id="configuration.folder.extra.contents.title">Additional contents</title>
 
 	<variablelist>
 	<varlistentry id="configuration.folder.extra.contents.editorshortcuts">
@@ -128,14 +128,11 @@
   </variablelist>
 	</section>
 	
-  <section id="configuration.folder.setting">
-	<title id="configuration.folder.setting.title">Using a different configuration folder</title>
-	<para>You can specify a configuration folder other than the default when you
+	<note><para>You can specify a configuration folder other than the default when you
 	start OmegaT from the command line. See <link
 	endterm="launch.with.command.line.title"
 	linkend="launch.with.command.line"/> for details.</para>
 
-	<note><para>Preferences are stored in the default configuration folder. If
+	<para>Preferences are stored in the default configuration folder. If
 	you specify a different configuration folder, all modifications made in the <link linkend="dialogs.preferences" endterm="dialogs.preferences.title"/> dialog will be stored in the newly specified configuration folder.</para></note>
-  </section>
 </chapter>

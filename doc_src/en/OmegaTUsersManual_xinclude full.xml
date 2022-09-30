@@ -14,10 +14,13 @@
     </abstract>
   </bookinfo>
 
-  <xi:include href="InstantStartGuide.xml"
+  <xi:include href="Introduction.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
-  <xi:include href="InstallingAndRunning.xml"
+  <xi:include href="Installing.xml"
+              xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+  <xi:include href="Running.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
   <xi:include href="OmegaT5_Menus.xml"

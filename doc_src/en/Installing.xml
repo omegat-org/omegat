@@ -76,102 +76,11 @@
     one, it installs the program in
     <filename>/opt/omegat/OmegaT_&vernb;</filename> and sets it as the
     default version (in
-    <filename>/opt/omegat/OmegaT-default</filename>). The installation
-    script is available on the <ulink
-    url="https://sourceforge.net/p/omegat/svn/HEAD/tree/trunk/release/linux-specific/linux-install.sh">development
-    site</ulink>, for your perusal before use.</para></note>
+    <filename>/opt/omegat/OmegaT-default</filename>).</para></note>
 
     <para>After the unpacking or installation is complete, you can
     delete the downloaded file as it is no longer needed.</para>
-	
-      <section id="installing.omegat.linux.intel.add..to.your.menus.or.panels.kde">
-        <title
-			id="installing.omegat.linux.intel.add.to.your.menus.or.panels.kde.title">KDE
-        4</title>
-
-        <para>You can add OmegaT to your menus as follows:</para>
-
-        <itemizedlist>
-          <listitem>
-            <para>Press <keycombo><keycap>Alt</keycap><keycap>F2</keycap></keycombo> to show KRunner. Type
-            <command>kmenuedit+enter</command> to run the command. The
-            KMenuEditor appears. In KMenuEditor select <guilabel>File &gt;
-            New Item.</guilabel></para>
-          </listitem>
-
-          <listitem>
-            <para>After selecting a suitable menu, add a submenu/item with
-            <guilabel>File &gt; New</guilabel> Submenu and <guilabel>File
-            &gt; New Item</guilabel>. Enter OmegaT as the name of the new
-            item.</para>
-          </listitem>
-
-          <listitem>
-            <para>In the <emphasis role="bold">Command</emphasis> field, use
-            the browse button to select the OmegaT launch script (copied to
-            <filename>/usr/local/bin/omegat</filename> by the installation
-            script. Alternatively can also choose the
-            <filename>omegat</filename> file in
-            <filename><literal>opt/omegat/OmegaT-default</literal></filename>
-            or in <filename>opt/omegat/OmegaT_&vernb;)</filename>. Click
-            <emphasis role="bold">OK</emphasis> to confirm.</para>
-          </listitem>
-
-          <listitem>
-            <para>Click on the icon button (to the right of the
-            Name/Description/Comment fields)</para>
-          </listitem>
-
-          <listitem>
-            <para>Other Icons - Browse, and navigate to the
-            <filename>images</filename> folder in the OmegaT application
-            folder. Select the <filename>OmegaT.png</filename> icon.</para>
-          </listitem>
-
-          <listitem>
-            <para>Finally, save the changes with <guilabel>File &gt;
-            Save.</guilabel></para>
-          </listitem>
-        </itemizedlist>
-      </section>
-
-      <section id="installing.omegat.linux.intel.add.to.your.menus.or.panels.gnome">
-        <title
-			id="installing.omegat.linux.intel.add.to.your.menus.or.panels.gnome.title">GNOME</title>
-
-        <para>You can add OmegaT to your menus as follows:</para>
-
-        <itemizedlist>
-          <listitem>
-            <para>Right-click on the panel - <guilabel>Add New
-            Launcher</guilabel>.</para>
-          </listitem>
-
-          <listitem>
-            <para>Enter "OmegaT" in the <guilabel>Name</guilabel> field; in
-            the <guilabel>Command</guilabel> field, use the browse button to
-            select the OmegaT launch script (copied to
-            <filename>/usr/local/bin/omegat</filename> by the installation
-            script. Alternatively can also choose the
-            <filename>omegat</filename> file in
-            <filename><literal>opt/omegat/OmegaT-default</literal></filename>
-            or in <filename>opt/omegat/OmegaT_&vernb;)</filename>. Click
-            <emphasis role="bold">OK</emphasis> to confirm.</para>
-          </listitem>
-
-          <listitem>
-            <para>Click on the icon button, then hit
-            <guilabel>Browse...</guilabel> and navigate to the
-            <filename>images</filename> folder in the OmegaT application
-            folder. Select the <filename>OmegaT.png</filename> icon. GNOME
-            may fail to display the icon files in the available formats and
-            initially appear to expect an SVG file, but if the folder is
-            selected, the files should appear and
-            <filename>OmegaT.png</filename> can be selected.</para>
-          </listitem>
-        </itemizedlist>
-      </section>
-    </section>
+  </section>
 
   <section id="Installing.omegat.macos">
     <title id="Installing.omegat.macos.title">On macOS</title>
@@ -274,20 +183,21 @@
 	  </itemizedlist>
 	</note>
 
-	<section id="update.and.delete.omegat.over.existing.package">
-	  <title id="update.and.delete.omegat.over.existing.package.title">Over an existing version</title>
-
+	<variablelist>
+	  <varlistentry id="update.and.delete.omegat.over.existing.package">
+		<term id="update.and.delete.omegat.over.existing.package.title">Over an existing version</term>
+		<listitem>
 	  <para>To do this, simply select the same installation folder as the
 	  existing installation when installing the new version. The "old" version
 	  of OmegaT will be overwritten, but settings made from the OmegaT
 	  interface will be retained in the various configurations folders (see
 	  above).</para>
-	</section>
-
-	<section id="update.and.delete.omegat.along.existing.package">
-	  <title
-		  id="update.and.delete.omegat.along.existing.package.title">Alongside an existing version</title>
-
+		</listitem>
+	  </varlistentry>
+	  
+	<varlistentry id="update.and.delete.omegat.along.existing.package">
+	  <term  id="update.and.delete.omegat.along.existing.package.title">Alongside an existing version</term>
+	  <listitem>
 	  <para>This will enable you to keep any number of versions side-by-side,
 	  which you may wish to do until you feel comfortable with the new
 	  version.</para>
@@ -301,7 +211,9 @@
 	  command line . All the parameters located in a <link
 	  endterm="project.folder.title" linkend="project.folder"/> will apply to
 	  that project regardless of which version of OmegaT opens it.</para>
-	</section>
+	  </listitem>
+	</varlistentry>
+	</variablelist>
   </section>
   
 	<section id="update.and.delete.omegat.delete">
@@ -318,8 +230,7 @@
 	</section>
 
   <section id="build.omegat.from.source">
-	<title id="build.omegat.from.source.title">Build OmegaT from
-	source</title>
+	<title id="build.omegat.from.source.title">Build OmegaT</title>
 
 	<para>The sources of the current version can be retrieved with a Git client
 	from the <ulink url="https://git.code.sf.net/p/omegat/code"/> repository or
@@ -328,11 +239,10 @@
 	<para>Once the code is downloaded, open a terminal in the source folder
 	(<filename>/omegat/src</filename>) and type:</para>
 
-	<programlisting>./gradlew assembleDist</programlisting>
+	<programlisting>./gradlew installDist</programlisting>
 
 	<para>This will create a full distribution of OmegaT in the
-	<filename>build/distributions/</filename> folder, where you will find a
-	zip containing everything needed to run OmegaT.</para>
+	<filename>build/install/OmegaT</filename> folder, ready to be launched.</para>
 
 	<para>You can also run the application directly with the following
 	command:</para>

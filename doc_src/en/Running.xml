@@ -253,7 +253,7 @@
 		<varlistentry id="launch.with.command.line.user.interface.language">
 		  <term id="launch.with.command.line.user.interface.language.title">User interface language</term>
 		  <listitem>
-			<para><code>-Duser.country=LL</code></para>
+			<para><code>-Duser.language=LL</code></para>
 			<para>Replace <code>LL</code> with the desired
 			two-letter language code from the <ulink
 			url="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes">ISO

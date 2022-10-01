@@ -11,7 +11,7 @@
   another in the original and translated texts. Next, the translator reviews
   the results and makes any necessary manual adjustments.</para>
 
-<para>OmegaT also offers a command line based alignement mode for <code>key =
+<para>OmegaT also offers a command line based alignment mode for <code>key =
 value</code> type formats. See <link
 linkend="launch.with.command.line.mode.console.align"
 endterm="launch.with.command.line.mode.console.align.title"/> for
@@ -39,7 +39,7 @@ details.</para>
       <listitem>
         <para><guilabel>Keep</guilabel>: The segment pairs in rows that have
         this check box ticked are saved to the translation memory file.
-        Unticked rows are discarded.</para>
+        Unchecked rows are discarded.</para>
       </listitem>
 
       <listitem>
@@ -176,7 +176,7 @@ details.</para>
         <term><guilabel>Segment</guilabel></term>
 
         <listitem>
-          <para>The aligner uses sentence segmentation by default. Untick the
+          <para>The aligner uses sentence segmentation by default. Uncheck the
           check box to use paragraph segmentation (see <link
           endterm="dialogs.preferences.segmentation.setup.title"
           linkend="dialogs.preferences.segmentation.setup"/>)</para>
@@ -187,7 +187,7 @@ details.</para>
         <term><guilabel>Remove Tags</guilabel></term>
 
         <listitem>
-          <para>The aligner includes tags in the segments by default. Untick
+          <para>The aligner includes tags in the segments by default. Uncheck
           the check box to apply the <link
           endterm="dialogs.project.properties.remove.tags.title"
           linkend="dialogs.project.properties.remove.tags"/> option.</para>
@@ -199,7 +199,7 @@ details.</para>
 
         <listitem>
           <para>By default, the aligner highlights all numbers in the source
-          and target segments. Untick the check box to turn off
+          and target segments. Uncheck the check box to turn off
           highlighting.</para>
         </listitem>
       </varlistentry>
@@ -440,7 +440,7 @@ details.</para>
       <varlistentry>
         <term><guimenuitem>Keep None</guimenuitem></term>
         <listitem>
-          <para>Use this command to untick the <guilabel>Keep</guilabel> check
+          <para>Use this command to uncheck the <guilabel>Keep</guilabel> check
           box for all rows.</para>
         </listitem>
       </varlistentry>
@@ -449,8 +449,8 @@ details.</para>
         (<keycap>K</keycap>)</term>
         <listitem>
           <para>Use this command to switch the <guilabel>Keep</guilabel> check
-          box of the selected row or block of rows from ticked to unticked, or
-          vice-versa.</para>
+          box of the selected row or block of rows from checked to unchecked, or
+          vice versa.</para>
         </listitem>
       </varlistentry>
       <varlistentry>
@@ -492,14 +492,14 @@ details.</para>
     <para>In addition to the <guibutton>Save TMX...</guibutton> button, the
     bottom part of the <guilabel>Align</guilabel> window in the manual
     correction step features the same <guilabel>Highlight</guilabel> check box
-    and <guibutton>Pattern...</guibutton> button as in Step 1. This option is
+    and <guibutton>Pattern...</guibutton> button as in the first step. This option is
     also accessible from the <guimenu>View</guimenu> menu.</para>
 
     <warning>
       <para>There is also a <guibutton>Reset</guibutton> button at the bottom of
       the window. <emphasis role="bold">Use it with caution!</emphasis> Clicking
       this button will discard all your changes and bring you back to
-      Step 1.</para>
+      the first step.</para>
     </warning>    
     
   </section>

@@ -34,7 +34,7 @@
       <note><para>Filenames (in the first column) can be sorted alphabetically by
       clicking in the header. It is also possible to change the position of a
       filename, by clicking on it and pressing the <guibutton>Move ...</guibutton>
-      buttons on the right.</para></note>
+      button on the right.</para></note>
 
       <para>Right-clicking on a filename opens a popup that allows opening the
       source file and (if it exists) the target file.</para>

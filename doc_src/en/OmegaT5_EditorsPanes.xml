@@ -354,8 +354,15 @@
   <section id="panes.machinetranslation">
     <title id="panes.machinetranslation.title">Machine Translation</title>
 
-    <para>The machine translation pane, when opened, contains the suggestions produced for the current segment by one or more enabled translation engines. When suggestions from more than one engine are available, the name of the engine will appear after the translated text, and the currently selected translation is highlighted.</para>
-    <para>Press <keycombo><keycap>C</keycap><keycap>M</keycap></keycombo> to replace the translation of the current segment with the selected translation.</para>
+    <para>The machine translation pane, when opened, contains the suggestions produced for the current segment by one or more enabled translation engines. When suggestions from more than one engine are available,
+	<itemizedlist>
+	  <listitem><para>the name of the engine will appear after the translated text,</para></listitem>
+	  <listitem><para>the results are sorted in alphabetical order of engine names,</para></listitem>
+	  <listitem><para>and the currently selected translation is highlighted.</para></listitem>
+	</itemizedlist>
+	</para>
+    <para>Press <keycombo><keycap>C</keycap><keycap>M</keycap></keycombo> to replace the translation of the current segment with the selected translation highlighted.</para>
+	<para>The "Origin" property of the current segment properties is updated with the selected engine name.</para>
     
   </section>
 

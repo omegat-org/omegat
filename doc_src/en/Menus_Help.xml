@@ -6,7 +6,7 @@
 
   <variablelist>
     <varlistentry id="menus.help.user.manual">
-      <term id="menus.help.user.manual.title">User's Manual...		  <keycombo><keycap>F1</keycap></keycombo>
+      <term id="menus.help.user.manual.title">User Manual...		  <keycombo><keycap>F1</keycap></keycombo>
 </term>
       <listitem>
         <para>Opens this manual in the default browser.</para>

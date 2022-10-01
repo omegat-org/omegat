@@ -118,7 +118,7 @@
             <para><emphasis>Basic project configuration:</emphasis> Source and
             languages, tokenizers, and the project folder hierarchy. In a team
             project, the basic configuration parameters of the local project
-            are always overriden by the configuration on the server that was
+            are always overridden by the configuration on the server that was
             set by the project administrator.</para>
           </listitem>
 
@@ -127,15 +127,15 @@
 
             <para>Details on mappings can be found in the <link
             linkend="how.to.setup.team.project.mapping.parameters">section 
-            on setting up team projects</link>. From a user standpoint, the
+            on setting up team projects</link>. From a user’s standpoint, the
             following rules apply to repository mappings.</para>
 
             <itemizedlist>
               <listitem>
                 <para>If no custom mappings have been defined for the remote
                 project, but local mappings have been customized, the local
-                settings are preserved without affeting the settings on the
-                server</para>
+                settings are preserved without affecting the settings on the
+                server.</para>
               </listitem>
 
               <listitem>
@@ -230,7 +230,7 @@
       <term>Target files</term>
 
       <listitem>
-        <para>After you generate the target files, You can use the <link
+        <para>After you generate the target files, you can use the <link
         endterm="menus.project.commit.target.files.title"
         linkend="menus.project.commit.target.files"/> command to add them to
         the server.</para>

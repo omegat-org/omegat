@@ -5,7 +5,7 @@
   <title id="how.to.setup.team.project.title">Set up a team
   project</title>
 
-  <para>Managing a team projects calls for some knowledge of servers, as well
+  <para>Managing a team project calls for some knowledge of servers, as well
   as of either the <emphasis>SVN</emphasis> or <emphasis>Git</emphasis>
   version control system.</para>
 
@@ -84,7 +84,7 @@
 
         <para>If you want to change the default project properties or use
         project-specific filters or segmentation, it is easiest to make the
-        necessary necessary changes at this stage to ensure that the
+        necessary changes at this stage to ensure that the
         <filename>omegat.project</filename> file reflects those changes and
         that the <filename class="directory">omegat/</filename> subfolder
         contains the <filename>filters.xml</filename> and
@@ -151,7 +151,7 @@
             </listitem>
           </itemizedlist>
 
-          <para>Source and target files files can be modified locally and
+          <para>Source and target files can be modified locally and
           uploaded to the server using the <link
           endterm="menus.project.commit.source.files.title"
           linkend="menus.project.commit.source.files"/> and <link
@@ -190,7 +190,7 @@
       <listitem>
         <para>Project location</para>
 
-        <para>Administrators has two options for sending the location of the
+        <para>Administrators have two options for sending the location of the
         project to the translators:</para>
 
         <orderedlist>
@@ -244,7 +244,7 @@
         has been able to open the team project, it is a good idea to make sure
         that the <link linkend="menus.tools.statistics">project
         statistics</link> are the same for both the administrator (on the
-        server) and the translatore (locally).</para>
+        server) and the translator (locally).</para>
 
         <para>If they do not match, make sure the
         <filename>filters.xml</filename> and

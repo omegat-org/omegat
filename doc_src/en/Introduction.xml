@@ -15,7 +15,7 @@
 	  <varlistentry><term>Translation project</term>
 	  <listitem>
 		<para>An OmegaT translation project consists of a number of resources in
-		separate folders, of an <link
+		separate folders, of a <link
 		linkend="project.folder.omegat.project.file"
 		endterm="project.folder.omegat.project.file.title"/> file that stores
 		the location of all the resources and of a <link
@@ -66,7 +66,7 @@
 		  project with simple settings.</para>
 
 		  <para>The team functionality offers industrial grade robustness and
-		  flexibility to synchronize project's resource among team members,
+		  flexibility to synchronize project resources among team members,
 		  while allowing easy resolution of conflicts between different
 		  translations.</para>
 
@@ -317,7 +317,7 @@
   </section>
 
   <section id="introduction.manage.your.tags">
-    <title id="introduction.manage.your.tags.title">Manage your tags</title>
+    <title id="introduction.manage.your.tags.title">Manage Your Tags</title>
 
     <para>If the documents you translate use bold, italics, or other decorative
     elements, OmegaT will convert them into tags that enclose the decorated
@@ -434,7 +434,7 @@
   </section>
 
   <section id="introduction.one.more.thing">
-    <title id="introduction.one.more.thing.title">Manage your projects</title>
+    <title id="introduction.one.more.thing.title">Manage Your Projects</title>
 
     <itemizedlist>
 

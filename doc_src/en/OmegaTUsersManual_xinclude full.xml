@@ -16,19 +16,13 @@
   <xi:include href="Introduction.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
-  <xi:include href="Installing.xml"
-              xmlns:xi="http://www.w3.org/2001/XInclude"/>
-
-  <xi:include href="Running.xml"
+  <xi:include href="OmegaT5_EditorsPanes.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
   <xi:include href="OmegaT5_Menus.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
   <xi:include href="OmegaT5_WindowsAndDialogs.xml"
-              xmlns:xi="http://www.w3.org/2001/XInclude"/>
-
-  <xi:include href="OmegaT5_EditorsPanes.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
   <xi:include href="OmegaT5_ProjectFolder.xml"

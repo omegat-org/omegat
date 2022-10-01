@@ -16,12 +16,17 @@
   <xi:include href="HowTo_ManageRTL.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
+  <xi:include href="HowTo_Install.xml"
+              xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+  <xi:include href="HowTo_Run.xml"
+              xmlns:xi="http://www.w3.org/2001/XInclude"/>
+  
 <xi:include href="HowTo_SetUpTeamProject.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
   <xi:include href="HowTo_UseTeamProject.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
-
 
   <xi:include href="HowTo_Troubleshooting.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>

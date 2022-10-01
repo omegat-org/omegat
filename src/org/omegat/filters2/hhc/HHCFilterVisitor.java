@@ -30,7 +30,7 @@ import java.io.BufferedWriter;
 
 import org.htmlparser.Tag;
 import org.omegat.filters2.html2.FilterVisitor;
-import org.omegat.filters2.html2.HTMLUtils;
+import org.omegat.util.HTMLUtils;
 
 /**
  * The part of HTML filter that actually does the job. This class is called back

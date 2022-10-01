@@ -420,7 +420,7 @@
 				  </listitem>
 				</varlistentry>
 				<varlistentry id="launch.with.command.line.mode.console.translate.console.pseudotranslatetmx.console.align.">
-				  <term id="launch.with.command.line.mode.console.translate.console.pseudotranslatetmx.console.align.title">--mode=[console-translate|console-pseudotranslatetmx|console-align]</term>
+				  <term id="launch.with.command.line.mode.console.translate.console.pseudotranslatetmx.console.align.title">--mode=[console mode name]</term>
 				  <listitem>
 					<para>Specify a mode other than the GUI default.The following
 					options are available:</para>
@@ -430,7 +430,8 @@
 						<listitem>
 						  <para>In this mode, OmegaT attempts to translate the
 						  files in the source folder with the available
-						  translation memories. This is useful if OmegaT is run on
+						  translation memories.</para>
+						  <para>This is useful if OmegaT is run on
 						  a server with TMX files automatically fed to a project.
 						  <variablelist>
 							<varlistentry id="launch.with.command.line.source.pattern.lt.pattern.gt.">
@@ -479,13 +480,13 @@
 						  </para>
 						</listitem>
 					  </varlistentry>
-					</variablelist>
-					<variablelist>
+
 					  <varlistentry id="launch.with.command.line.mode.console.pseudotranslatetmx">
 						<term id="launch.with.command.line.mode.console.pseudotranslatetmx.title">--mode=console-pseudotranslatetmx</term>
 						<listitem>
 						  <para>In this mode OmegaT will create a TMX for the
-						  whole project using only the source files. Specify the
+						  whole project using only the source files.</para>
+						  <para>Specify the
 						  TMX file to be created with:
 						  <variablelist>
 							<varlistentry id="launch.with.command.line.pseudotranslatetmx.">
@@ -505,8 +506,7 @@
 						  </para>
 						</listitem>
 					  </varlistentry>
-					</variablelist>
-					<variablelist>
+
 					  <varlistentry id="launch.with.command.line.mode.console.align">
 						<term id="launch.with.command.line.mode.console.align.title">--mode=console-align
 						<emphasis>--alignDir=<emphasis>&lt;path&gt;</emphasis></emphasis></term>
@@ -514,7 +514,8 @@
 						  <para>In this mode, OmegaT will align the files in the
 						  /source folder of the project with those at the location
 						  specified by the <emphasis>--alignDir</emphasis>
-						  parameter. The resulting TMX file is is saved in the
+						  parameter.</para>
+						  <para>The resulting TMX file is is saved in the
 						  /omegat folder as align.tmx. The file types that can be
 						  aligned depend whether alignment is supported by the
 						  file filter . Supported filters include: ILIAS Language
@@ -530,6 +531,28 @@
 						  project is EN-to-FR, the folder must contain a bundle
 						  ending with _fr. The resulting TMX file is is saved in
 						  the /omegat folder as align.tmx.</para>
+						</listitem>
+					  </varlistentry>
+
+					  <varlistentry id="launch.with.command.line.mode.console.stats">
+						<term id="launch.with.command.line.mode.console.stats.title">--mode=console-stats <emphasis>&lt;path&gt;</emphasis></term>
+						<listitem>
+						  <variablelist>
+							<varlistentry id="launch.with.command.line.console.stats.output.file">
+							  <term id="launch.with.command.line.console.stats.output.file.title">--output-file=[stats-output-file]</term>
+							  <listitem>
+								<para>Prints to that file, or to standard output if absent. Without <emphasis>--stats-type</emphasis>, detects format from file extension. The output defaults to xml.</para>
+							  </listitem>
+							</varlistentry>
+							<varlistentry id="launch.with.command.line.console.stats.output.format">
+							  <term id="launch.with.command.line.console.stats.output.format.title">--stats-type=[xml|text][txt][json]]]</term>
+							  <listitem>
+								<para>Requires <emphasis>--output-file</emphasis>. Specifies the output format.</para>
+							  </listitem>
+							</varlistentry>
+						  </variablelist>
+						<para>The data is the same as when using <link linkend="menus.tools.statistics" endterm="menus.tools.statistics.title"/>.
+						</para>
 						</listitem>
 					  </varlistentry>
 					</variablelist>												

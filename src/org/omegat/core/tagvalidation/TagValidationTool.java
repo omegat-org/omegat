@@ -40,7 +40,6 @@ import org.omegat.core.data.IProject.FileInfo;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
 import org.omegat.core.tagvalidation.ErrorReport.TagError;
-import org.omegat.filters2.po.PoFilter;
 import org.omegat.util.Preferences;
 import org.omegat.util.StreamUtil;
 import org.omegat.util.TagUtil.Tag;
@@ -146,7 +145,7 @@ public class TagValidationTool implements ITagValidation {
         }
 
         // Extra checks for PO files:
-        if (fi.filterClass.equals(PoFilter.class)) {
+        if (fi.filterClass.getCanonicalName().equals("PoFilter")) {
             TagValidation.inspectPOWhitespace(report);
         }
 

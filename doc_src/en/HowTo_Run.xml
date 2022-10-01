@@ -82,14 +82,14 @@
 	<filename>Contents/</filename>.</para>
 
 	<note><para>To access the files inside <filename>OmegaT.app</filename>,
-	right-click on <filename>OmegaT.app</filename> and select "Show Package
-	Contents".</para></note>
+	right-click on <filename>OmegaT.app</filename> and select “Show Package
+	Contents”.</para></note>
 
 	<para>Right-click on the file you want to modify and select your text
 	editor of choice or <command>cd</command> there directly from the
 	command line and open the files from the command line.</para>
 
-	<para>OmegaT's configuration is changed by modifying
+	<para>OmegaT’s configuration is changed by modifying
 	<filename>Configuration.properties</filename>.</para>
 
 	<para>For predefined options, remove the <literal>#</literal> before a
@@ -133,17 +133,17 @@
   <section id="launch.with.command.line">
 	<title id="launch.with.command.line.title">Command line launch</title>
 	<para>Using the command line allows you to set various options that control or
-	modify the behaviour of the application. You can also define and save sets of
+	modify the behavior of the application. You can also define and save sets of
 	options in scripts that you can then use to launch OmegaT for a particular
 	purpose.</para>
 
 
 	<section id="launch.with.command.line.tutorial">
 	  <title id="launch.with.command.line.tutorial.title">Simplified
-	  overview</title>
+	  Overview</title>
 
 	  <para>Before graphical interfaces became common, users interacted with
-	  computers via a command line interface (CLI), which requires typing
+	  computers via a command-line interface (CLI), which requires typing
 	  commands to give instructions to the computer. On modern systems, the
 	  CLI is accessed through an application generally called a
 	  &quot;terminal&quot; or &quot;console&quot;. For the sake of simplicity,
@@ -221,7 +221,7 @@
 			  <para>Optional parameters accepted by the
 			  <command>java</command> command. The parameters relevant
 			  to running OmegaT are described <link
-			  linkend="launch.with.command.line.java.parameters">below</link></para>
+			  linkend="launch.with.command.line.java.parameters">below.</link></para>
 			</listitem>					
 		  </varlistentry>
 		  <varlistentry id="launch.with.command.line.intro.omegat.jar">
@@ -287,8 +287,8 @@
 			<para><code>-XmxSIZE</code></para>
 			<para>Replace <code>SIZE</code> is a number of bytes in
 			multiples of 1024 and at least 2 MB, followed by
-			<code>k</code> for kilobyte, <code>m</code> for
-			megabyte, or <code>g</code> for gigabyte.</para>
+			<code>k</code> for kilobytes, <code>m</code> for
+			megabytes, or <code>g</code> for gigabytes.</para>
 		  </listitem>
 		</varlistentry>
 
@@ -515,9 +515,9 @@
 						  /source folder of the project with those at the location
 						  specified by the <emphasis>--alignDir</emphasis>
 						  parameter.</para>
-						  <para>The resulting TMX file is is saved in the
+						  <para>The resulting TMX file is saved in the
 						  /omegat folder as align.tmx. The file types that can be
-						  aligned depend whether alignment is supported by the
+						  aligned depend on whether the alignment is supported by the
 						  file filter . Supported filters include: ILIAS Language
 						  File, Java(TM) Resource Bundles, Key=Value Text, Magento
 						  CE Locale CSV, MoodlePHP, Mozilla DTD, Mozilla FTL, PO,
@@ -529,7 +529,7 @@
 						  <para>That folder must contain a translation in the
 						  target language of the project. For instance, if the
 						  project is EN-to-FR, the folder must contain a bundle
-						  ending with _fr. The resulting TMX file is is saved in
+						  ending with _fr. The resulting TMX file is saved in
 						  the /omegat folder as align.tmx.</para>
 						</listitem>
 					  </varlistentry>
@@ -593,7 +593,7 @@
 					  </listitem>											
 					</itemizedlist>
 					<note>
-					  <para>Invalid tags reports are sent output to the terminal
+					  <para>Invalid tag reports are sent output to the terminal
 					  window.</para>
 					</note>
 					</para>

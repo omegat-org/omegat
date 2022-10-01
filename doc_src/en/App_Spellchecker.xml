@@ -13,7 +13,7 @@
     <title id="spellchecker.installing.dictionaries.title">Installation</title>
 
     <para>Before the spell check function can be used, a suitable dictionary
-    or dictionaries (i.e. for your target language) must be installed. To
+    or dictionaries (i.e., for your target language) must be installed. To
     install spelling dictionaries, follow this procedure:</para>
 
     <itemizedlist>
@@ -33,8 +33,8 @@
       <listitem>
         <para>Place the dictionary files you wish to use in this folder. There
         are essentially two ways in which you can do this. You can either copy
-        files manually, i.e. from elsewhere on your system, using your file
-        manager; or you can use OmegaT's <emphasis role="bold">&quot;Install new
+        files manually, i.e., from elsewhere on your system, using your file
+        manager; or you can use OmegaT’s <emphasis role="bold">&quot;Install new
         dictionary&quot;</emphasis> function to provide a list of available
         dictionaries to select from. Note that the &quot;Install&quot; function requires
         an Internet connection. The selected languages will then be installed
@@ -75,7 +75,7 @@
     Spanish dictionary available, with file names es_es.dic and es_es.aff for
     instance, you can copy these files to es_MX.dic and es_MX.aff, and the
     spelling dictionary will work. Note that this will of course check for the
-    standard (Castillian) rather than for Mexican Spanish.</para>
+    standard (Castilian) rather than for Mexican Spanish.</para>
   </section>
 
   <section id="spellchecker.using.dictionaries">
@@ -86,7 +86,7 @@
     language codes of your project. Check, however, that the language codes are
     exactly the same: an FR-FR dictionary will not work with an FR target
     setting, for example. If necessary, edit the file names of the dictionary
-    or change your project's language settings.</para>
+    or change your project’s language settings.</para>
 
     <para>To enable the spell checker, select <guimenuitem>Options &gt; Spell
     Checking</guimenuitem> and tick the <guilabel>Automatically check the
@@ -129,9 +129,9 @@
 
     <para>If you have already translated a large body of text, and then
     realize the target language code of the project does not match the spell
-    checker's language code (you specified pt_BR as the language, but there
+    checker’s language code (you specified pt_BR as the language, but there
     are no pt_BR vocabularies, for instance) you can simply copy the two
-    corresponding files and rename them (e.g. from
+    corresponding files and rename them (e.g., from
     <filename>pt_PT.aff</filename> and <filename>pt_PT.dic</filename> to
     <filename>pt_BR.aff</filename> and <filename>pt_BR.dic</filename>). Of
     course it is much wiser, to take a short break and download the correct

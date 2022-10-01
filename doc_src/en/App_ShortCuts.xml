@@ -85,7 +85,7 @@
 	<para>OmegaT assigns shortcuts to most functions available in the menus and
 	to a number of functions in the Editor window. Most of these functions can
 	be assigned new shortcuts.</para>
-    <para>You can change or add a shortcuts by putting a shortcut definition
+    <para>You can change or add a shortcut by putting a shortcut definition
     file in your OmegaT configuration folder. See <link
     endterm="configuration.folder.title" linkend="configuration.folder"/> for
     details.</para>

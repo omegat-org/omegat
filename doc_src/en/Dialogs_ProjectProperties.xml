@@ -22,7 +22,7 @@
   endterm="menus.options.title"/> are always the global settings and never the
   project specific settings.</para>
   <para>If you have defined project specific settings here, they will supercede
-  any modifications you make to the global settings and the later will not be
+  any modifications you make to the global settings and the latter will not be
   taken into account in your project.</para></warning>
 
   <section id="dialogs.project.properties.languages">
@@ -54,7 +54,7 @@
         Sentence-level Segmenting</term>
         <listitem>
 		  
-          <para>Sentence-level segmentation splits the source files "paragraphs"
+          <para>Sentence-level segmentation splits the source file “paragraphs”
           into segments based on segmentation rules.</para>
 
 		  <para>Leave the box unchecked if you prefer not to segment the
@@ -351,7 +351,7 @@
 		found. See <link linkend="project.folder.source"
 		endterm="project.folder.source.title"/> for details.</para>
 		<para>If the folder is empty, if none of the files contain translatable
-		contents, or if there are no files supported by OmegaT's file filters,
+		contents, or if there are no files supported by OmegaT’s file filters,
 		OmegaT will tell you that the folder is empty. See <link
 		linkend="dialogs.preferences.file.filters"
 		endterm="dialogs.preferences.file.filters.title"/> for
@@ -426,7 +426,7 @@
 		<listitem><para>The writeable glossary if the file that OmegaT will use
 		when you want to add translated glossary terms to your project. Use
 		<link linkend="menus.edit.create.glossary.entry"
-		endterm="menus.edit.create.glossary.entry.title"/> to add term.</para>
+		endterm="menus.edit.create.glossary.entry.title"/> to add a term.</para>
 		<para>Added items are automatically recognized and displayed if they
 		match terms in the current segment. See <link
 		linkend="dialogs.preferences.glossary"
@@ -460,7 +460,7 @@
 		translation and the non-translated segments will be kept in the original
 		language.</para>
 		<para>The folder structure will reflect the copied contents and files
-		that are not supported by OmegaT's file filters will be copied without
+		that are not supported by OmegaT’s file filters will be copied without
 		modifications.</para>
 		<para>Use <link linkend="menus.project.create.translated.documents"
 		endterm="menus.project.create.translated.documents.title"/> or <link
@@ -495,20 +495,20 @@
 		<variablelist>
 		  <varlistentry>
 			<term>OmegaT</term>
-			<listitem><para>An "OmegaT" TMX contains the tags that OmegaT
+			<listitem><para>An “OmegaT” TMX contains the tags that OmegaT
 			created, in a form that can only be properly used by an OmegaT
 			project.</para></listitem>
 		  </varlistentry>
 		  
 		  <varlistentry>
 			<term>TMX Level 1</term>
-			<listitem><para>A "level 1" TMX contains only textual data and has
+			<listitem><para>A “level 1” TMX contains only textual data and has
 			removed all tag information.</para></listitem>
 		  </varlistentry>
 
 		  <varlistentry>
 			<term>TMX Level 2</term>
-			<listitem><para>A "level 2" TMX contains textual data along with
+			<listitem><para>A “level 2” TMX contains textual data along with
 			tags encapsulated in a way that is compatible with other CAT
 			tools.</para></listitem>
 		  </varlistentry>

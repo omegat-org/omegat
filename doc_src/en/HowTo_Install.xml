@@ -72,7 +72,7 @@
     <filename>sudo</filename> password.</para>
 
     <para>The script checks for an existing installation of the same
-    OmegaT version in <filename>/opt/omegat/</filename>. If there isn't
+    OmegaT version in <filename>/opt/omegat/</filename>. If there isn’t
     one, it installs the program in
     <filename>/opt/omegat/OmegaT_&vernb;</filename> and sets it as the
     default version (in
@@ -104,7 +104,7 @@
 
     <para>This information applies to all systems that have a Java version
     compatible with &javaversionlong;. That includes the platforms described
-    above, but also the platforms for which the above specific packages are not
+    above, but also the platforms for which specific packages are not
     provided.</para>
 
     <para>Download the <emphasis>Cross-platform without JRE</emphasis>
@@ -123,7 +123,7 @@
     <para>Unpack the file that you downloaded. This creates a folder with
     all the files necessary to run OmegaT.</para>
 
-      <para>Follow your system's instructions to install OmegaT shortcuts in
+      <para>Follow your system’s instructions to install OmegaT shortcuts in
       convenient places of your choosing.</para>
   </section>
 
@@ -137,7 +137,7 @@
 	for details.</para>
 
 	<para>The changes between your version and the current version are
-	documented in the development site's <ulink
+	documented in the development site’s <ulink
 	url="https://sourceforge.net/p/omegat/code/ci/master/tree/release/changes.txt">change.txt</ulink>
 	file.</para>
 
@@ -147,7 +147,7 @@
 
 	  <itemizedlist>
 		<listitem>
-		  <para>OmegaT's preferences are stored in the configuration folder
+		  <para>OmegaT’s preferences are stored in the configuration folder
 		  and will <emphasis>not</emphasis> be modified by the new version.
 		  See <link endterm="configuration.folder.title"
 		  linkend="configuration.folder"/> for details.</para>
@@ -171,7 +171,7 @@
 		  endterm="running.omegat.on.macos.title"
 		  linkend="running.omegat.on.macos"/> packages) might be overwritten
 		  or deleted, so you may want to create a backup before upgrading, if
-		  you have been using these files to modify OmegaT's launch
+		  you have been using these files to modify OmegaT’s launch
 		  parameters.</para>
 		</listitem>
 
@@ -188,7 +188,7 @@
 		<term id="update.and.delete.omegat.over.existing.package.title">Over an existing version</term>
 		<listitem>
 	  <para>To do this, simply select the same installation folder as the
-	  existing installation when installing the new version. The "old" version
+	  existing installation when installing the new version. The “old” version
 	  of OmegaT will be overwritten, but settings made from the OmegaT
 	  interface will be retained in the various configurations folders (see
 	  above).</para>
@@ -219,7 +219,7 @@
 	<section id="update.and.delete.omegat.delete">
 	  <title id="update.and.delete.omegat.delete.title">Delete OmegaT</title>
 
-	  <para>Use your operating system's standard procedure to remove OmegaT.
+	  <para>Use your operating system’s standard procedure to remove OmegaT.
 	  If you want to remove OmegaT completely, you will also have to delete
 	  the configuration folder.</para>
 

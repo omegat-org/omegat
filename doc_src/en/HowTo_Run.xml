@@ -4,7 +4,7 @@
 <!ENTITY % manualvariables SYSTEM "manualvariables.mod">
 %manualvariables;
 ]>
-<chapter id="installing.omegat">
+<section id="installing.omegat">
   <title id="installing.omegat.title">Install
   OmegaT</title>
 
@@ -257,4 +257,4 @@
 	url="https://sourceforge.net/p/omegat/svn/HEAD/tree/trunk/docs_devel/README.txt">README.txt</ulink>
 	file.</para>
   </section>
-</chapter>
+</section>

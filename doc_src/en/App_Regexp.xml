@@ -32,17 +32,17 @@
       </varlistentry>
       <varlistentry>
         <term>\w+</term>
-        <listitem><para>Represents one or more "word characters", namely the
+        <listitem><para>Represents one or more “word characters”, namely the
         letters of the alphabet, digits, as well as the hyphen and
-        undescore symbols.</para>
+        underscore symbols.</para>
         </listitem>
       </varlistentry>
       <varlistentry>
         <term>\h?</term>
         <listitem><para>Represents zero or one horizontal whitespace
         character (this includes regular and non-breaking spaces as well as
-        tabs, but not line break characterss, which belong to the "vertical
-        whitespace" category (\v).)</para>
+        tabs, but not line break characters, which belong to the “vertical
+        whitespace” category (\v).)</para>
         </listitem>
       </varlistentry>
     </variablelist>    
@@ -103,9 +103,9 @@
         details.</para>
         <para>Segmentation or exception rules define the position in a
         segment where a split will, or will not, be made. Two regular
-        expressions are required to define that position: a "before"
+        expressions are required to define that position: a “before”
         expression to define the text pattern ahead of where the rule should
-        apply, and an "after" expression to define the text pattern following
+        apply, and an “after” expression to define the text pattern following
         that position.</para>
         <para>A language pattern that matches the source language of the project will apply to that project.</para></listitem>
     </varlistentry>
@@ -140,7 +140,7 @@
 		  <para>That special effect must be triggered by a special effect
 		  character, otherwise, the character matches itself.</para>
 		  <para>For example, <emphasis>r</emphasis> is a normal character but
-		  also has a hidden special effect, triggered by preceeding it with
+		  also has a hidden special effect, triggered by preceding it with
 		  <emphasis>\</emphasis>, in which case it becomes
 		  <emphasis>\r</emphasis> and has the special effect of matching a
 		  <emphasis>carriage return character</emphasis> (by the way,
@@ -162,19 +162,19 @@
 		  effect with <emphasis>\</emphasis>, in which case it becomes
 		  <emphasis>\.</emphasis> and matches only a period.</para>
 		  
-		  <para>As of the versions of Java on which OmegaT is build, the 12 characters are
+		  <para>As of the versions of Java on which OmegaT is built, the 12 characters are
 		  <emphasis>the backslash \, the caret ^, the dollar sign $, the period or dot ., the vertical bar or pipe symbol |, the question mark ?, the asterisk or star *, the plus sign +, the opening parenthesis (, the closing parenthesis ), the opening square bracket [, and the opening curly brace {.</emphasis>
 		  <variablelist>
 			<varlistentry>
 			  <term>\</term>
 			  <listitem><para>The BACKSLASH either disables or enables  a special effect.
 			  <example><emphasis role="bold">\.</emphasis> = disables the period special effect that makes it match any character, and turns it into a plain period.</example>
-			  <example><emphasis role="bold">\b</emphasis> = not a b anymore but a "word boundary"</example></para></listitem>
+			  <example><emphasis role="bold">\b</emphasis> = not a b anymore but a “word boundary”</example></para></listitem>
 			</varlistentry>
 			<varlistentry>
 			  <term>^</term>
 			  <listitem><para>As the first character of an expression, the CARET matches the beginning of a line.
-			  <example><emphasis role="bold">^A</emphasis> = an upper case A at the beginning of a line.</example></para>
+			  <example><emphasis role="bold">^A</emphasis> = an upper-case A at the beginning of a line.</example></para>
 			  <para>As the first character of a class (something that is enclosed by square brackets, see below), the CARET negates what follows it.
 			  <example><emphasis role="bold">[^abc]</emphasis> = NEITHER a, nor b, nor c.</example></para></listitem>
 			</varlistentry>
@@ -186,28 +186,28 @@
 			<varlistentry>
 			  <term>.</term>
 			  <listitem><para>The PERIOD matches any one character.
-			  <example><emphasis role="bold">^...$</emphasis> = A three character "string" between the begining and the end of a line.</example></para></listitem>
+			  <example><emphasis role="bold">^...$</emphasis> = A three characters “string” between the beginning and the end of a line.</example></para></listitem>
 			</varlistentry>
 			<varlistentry>
 			  <term>|</term>
 			  <listitem><para>The VERTICAL BAR allows an alternative between two possibilities (OR).
-			  <example><emphasis role="bold">^An&nbsp;|^The&nbsp;</emphasis> = the string "An " OR the string "The " at the beginning of a line.</example></para></listitem>
+			  <example><emphasis role="bold">^An&nbsp;|^The&nbsp;</emphasis> = the string “An ” OR the string “The ” at the beginning of a line.</example></para></listitem>
 			</varlistentry>
 			<varlistentry>
 			  <term>?</term>
-			  <listitem><para>The QUESTION MARK quantifies the expression that preceeds it as 0 or 1 instances of that expression.<example><emphasis role="bold">&nbsp;an?&nbsp;</emphasis> = a space, followed by a, followed by 0 or 1 n, followed by a space.</example></para></listitem>
+			  <listitem><para>The QUESTION MARK quantifies the expression that precedes it as 0 or 1 instances of that expression.<example><emphasis role="bold">&nbsp;an?&nbsp;</emphasis> = a space, followed by a, followed by 0 or 1 n, followed by a space.</example></para></listitem>
 			</varlistentry>
 			<varlistentry>
 			  <term>*</term>
-			  <listitem><para>The ASTERISK quantifies the expressions that preceeds it as 0 or MORE instances of that expression.<example><emphasis role="bold">\w+</emphasis> = 0 or more WORD characters.</example></para></listitem>
+			  <listitem><para>The ASTERISK quantifies the expressions that precedes it as 0 or MORE instances of that expression.<example><emphasis role="bold">\w+</emphasis> = 0 or more WORD characters.</example></para></listitem>
 			</varlistentry>
 			<varlistentry>
 			  <term>+</term>
-			  <listitem><para>The PLUS quantifies the expression that preceeds it as 1 or MORE instances of that expression.<example><emphasis role="bold">[\h\v]+</emphasis> = 1 or MORE instances of either an horizontal white space or a vertical white space.</example></para></listitem>
+			  <listitem><para>The PLUS quantifies the expression that precedes it as 1 or MORE instances of that expression.<example><emphasis role="bold">[\h\v]+</emphasis> = 1 or MORE instances of either a horizontal white space or a vertical white space.</example></para></listitem>
 			</varlistentry>
 			<varlistentry>
 			  <term>(</term>
-			  <listitem><para>The OPENING PARENTHESIS opens a group that must be closed by a CLOSING PARENTHESIS. The group contents is memorized and can be called by a special effect number.<example><emphasis role="bold">(\b\w+\b)\h\1\b</emphasis> = a group of 1 or more WORD characters that begin at a word boundary (\b) and ends at a word boundary (the second \b). That group defines a word, that is followed by an horizontal white space, followed by the contents of the group (the word), before a word boundary, which means, a word followed by itself.</example></para></listitem>
+			  <listitem><para>The OPENING PARENTHESIS opens a group that must be closed by a CLOSING PARENTHESIS. The group contents is memorized and can be called by a special effect number.<example><emphasis role="bold">(\b\w+\b)\h\1\b</emphasis> = a group of 1 or more WORD characters that begin at a word boundary (\b) and ends at a word boundary (the second \b). That group defines a word, that is followed by a horizontal white space, followed by the contents of the group (the word), before a word boundary, which means, a word followed by itself.</example></para></listitem>
 			</varlistentry>
 			<varlistentry>
 			  <term>)</term>
@@ -219,7 +219,7 @@
 			</varlistentry>
 			<varlistentry>
 			  <term>{</term>
-			  <listitem><para>The OPENING CURLY BRACE opens a quantifier that must be closed by a CLOSING CURLY BRACE. The quantifier can be an exact number, a minimum, a maximum or a range.<example><emphasis role="bold">\d{4}/\d{1,}</emphasis> = 4 digits followed by a / followed by at least 1digit.</example></para></listitem>
+			  <listitem><para>The OPENING CURLY BRACE opens a quantifier that must be closed by a CLOSING CURLY BRACE. The quantifier can be an exact number, a minimum, a maximum or a range.<example><emphasis role="bold">\d{4}/\d{1,}</emphasis> = 4 digits followed by a / followed by at least 1 digit.</example></para></listitem>
 			</varlistentry>
 		  </variablelist>
 		</para>
@@ -228,7 +228,7 @@
 	</varlistentry>
 	<varlistentry>
 	  <term>The character <emphasis>\</emphasis> is a very special character</term>
-	  <listitem><para>As you have seen above, the character <emphasis>\</emphasis> has a special effect by default and that special effect is to either trigger or disable special effects in other characters. When it preceeds a character that has no special effect (neither natural nor hidden), it has no effect.</para>
+	  <listitem><para>As you have seen above, the character <emphasis>\</emphasis> has a special effect by default and that special effect is to either trigger or disable special effects in other characters. When it precedes a character that has no special effect (neither natural nor hidden), it has no effect.</para>
 	  <para><emphasis>\</emphasis> can be disabled by another <emphasis>\</emphasis>, in which case it becomes <emphasis>\\</emphasis> and matches what is called a <emphasis>backslash</emphasis>.</para></listitem>
 	</varlistentry>
   </variablelist>
@@ -258,19 +258,19 @@
         <row>
           <entry>\t</entry>
           <entry>The tab character
-		  <para>The \ triggers the special effect "this is a tab, not a t".</para></entry>
+		  <para>The \ triggers the special effect “this is a tab, not a t”.</para></entry>
         </row>
 
         <row>
           <entry>\n</entry>
           <entry>The newline (line feed) character
-		  <para>The \ triggers the special effect "this is a newline, not a n".</para></entry>
+		  <para>The \ triggers the special effect “this is a newline, not an n”.</para></entry>
         </row>
 
         <row>
           <entry>\r</entry>
           <entry>The carriage-return character
-		  <para>\R is any linebreak character.</para></entry>
+		  <para>\R is any line break character.</para></entry>
         </row>
 	  </tbody>
 	</tgroup>
@@ -294,26 +294,26 @@
       <tbody>
         <row>
           <entry>\w</entry>
-          <entry>A word character, generaly defined as [A-Za-z0-9_] but in Java as [\p{Alpha}\p{gc=Mn}\p{gc=Me}\p{gc=Mc}\p{Digit}\p{gc=Pc}\p{IsJoin_Control}].
+          <entry>A word character, generally defined as [A-Za-z0-9_] but in Java as [\p{Alpha}\p{gc=Mn}\p{gc=Me}\p{gc=Mc}\p{Digit}\p{gc=Pc}\p{IsJoin_Control}].
 		  <para>\W is NOT a word character ([^\w]).</para></entry>
         </row>
 
         <row>
           <entry>\d</entry>
-          <entry>A digit, generaly defined as [0-9].
+          <entry>A digit, generally defined as [0-9].
 		  <para>\D is NOT a digit.</para></entry>
         </row>
 
         <row>
           <entry>\s</entry>
           <entry>A white space that includes spaces, tabs, line breaks, etc.
-		  <para>\S is NOT a white-space character ([^\s]).</para></entry>
+		  <para>\S is NOT a whitespace character ([^\s]).</para></entry>
         </row>
 
         <row>
           <entry>\h and \v</entry>
-          <entry>Horizontal and vertical white space (generally prefered to \s).
-		  <para>\H is NOT an horizontal white space and \V is NOT a vertical white space.</para></entry>
+          <entry>Horizontal and vertical white space (generally preferred to \s).
+		  <para>\H is NOT a horizontal white space and \V is NOT a vertical white space.</para></entry>
         </row>
 
 		<row>
@@ -324,20 +324,20 @@
 
         <row>
           <entry>[C-X]</entry>
-          <entry>A character among the "C through X" letters set
+          <entry>A character among the “C through X” letters set
 		  <para>A range is described by a character that starts a series, followed by a hyphen, followed by a character that ends the series. Any number of ranges can be defined this way: [a-zA-Z0-9]. A hyphen that is outside a series is a hyphen: [a-z-].</para></entry>
         </row>
 
         <row>
           <entry>[^\n\r\t]</entry>
-          <entry>Any character <emphasis>except</emphasis> a newline, a carriage-return, or a tabulation
+          <entry>Any character <emphasis>except</emphasis> a newline, a carriage return, or a tabulation
 		  <para>The CARET excludes what follows it.</para></entry>
         </row>
 
         <row>
           <entry>(?i)o(?-i)megat</entry>
-          <entry>A case insensitive "o" followed by a case sensitive "megat".
-		  <para>The HYPHEN cancels the "case insensitive" mode.</para></entry>
+          <entry>A case-insensitive “o” followed by a case sensitive “megat”.
+		  <para>The HYPHEN cancels the “case-insensitive” mode.</para></entry>
         </row>
 
       </tbody>
@@ -435,22 +435,22 @@
 
       <row>
         <entry>(?=u)</entry>
-        <entry>Before the character "u"</entry>
+        <entry>Before the character “u”</entry>
       </row>
 
       <row>
         <entry>(?!u)</entry>
-        <entry>NOT before the character "u"</entry>
+        <entry>NOT before the character “u”</entry>
       </row>
 
       <row>
         <entry>(?&lt;=q)</entry>
-        <entry>After the character "q"</entry>
+        <entry>After the character “q”</entry>
       </row>
 
       <row>
         <entry>(?&lt;!q)</entry>
-        <entry>NOT after the character "q"</entry>
+        <entry>NOT after the character “q”</entry>
       </row>
 	  
 	</tbody>
@@ -518,7 +518,7 @@
 
         <row>
           <entry>\bis\b</entry>
-          <entry>search for “is”, not “this” or “isn't” etc.</entry>
+          <entry>search for “is”, not “this” or “isn’t” etc.</entry>
         </row>
       </tbody>
     </tgroup>
@@ -545,7 +545,7 @@
 	</varlistentry>
   </variablelist>
   
-  If you want to know more about regular expressions, the two following ressources have also proved very useful:
+  If you want to know more about regular expressions, the two following resources have also proved very useful:
 
   <variablelist>
 	<varlistentry id="appendix.regex.tools.regex101">
@@ -554,7 +554,7 @@
 	</varlistentry>
 	<varlistentry id="appendix.regex.tools.regular.expression.info">
 	  <term id="appendix.regex.tools.regular.expression.info.title"><ulink url="https://www.regular-expressions.info">https://www.regular-expressions.info</ulink></term>
-	  <listitem><para>One of the most thorough regular expression reference on the web.</para></listitem>
+	  <listitem><para>One of the most thorough regular expression references on the web.</para></listitem>
 	</varlistentry>
   </variablelist>
 

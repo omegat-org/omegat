@@ -61,9 +61,9 @@
 
     <para>By default, the glossary function uses stemming to find matches. You can deactivate the  <link linkend="dialogs.preferences.glossary.use.stemming.for.glossary.entries" endterm="dialogs.preferences.glossary.use.stemming.for.glossary.entries.title"></link> option in the preferences if you want to find only exact matches for terms. You can also adjust various glossary behavior and display options in the <link linkend="dialogs.preferences.glossary" endterm="dialogs.preferences.glossary.title"></link> section of the <guilabel>Preferences</guilabel> dialog.</para>
 
-    <para>In the <guilabel>Glossary</guilabel> pane, The source term is displayed before the " = " sign and the target terms after it. If the entry contains comments, they are numbered and displayed on separate lines below the terms. Terms found in the writable glossary are shown in bold, while those from other glossaries are presented as regular text.</para>
+    <para>In the <guilabel>Glossary</guilabel> pane, the source term is displayed before the “=” sign and the target terms after it. If the entry contains comments, they are numbered and displayed on separate lines below the terms. Terms found in the writable glossary are shown in bold, while those from other glossaries are presented as regular text.</para>
 
-    <para>Use the appropriate shorcut key (<keycap>Escape</keycap> for macOS,
+    <para>Use the appropriate shortcut key (<keycap>Escape</keycap> for macOS,
     <keycap>Ctrl+Space</keycap> for other platforms) to display the <guimenuitem>Autocompletion</guimenuitem> context menu for glossary
     matches.</para>
 
@@ -82,8 +82,8 @@
     target term in the second column, and an optional comment in the third
     column.</para>
 
-    <para>Plain text glossaries can be "tab-separated values" (TSV) or
-    "comma-separated values" (CSV) files. Reference glossaries can also use the TermBase eXchange *(TBX) ISO standard format.</para>
+    <para>Plain text glossaries can be “tab-separated values” (TSV) or
+    “comma-separated values” (CSV) files. Reference glossaries can also use the TermBase eXchange *(TBX) ISO standard format.</para>
 
     <para>The writable glossary for the project is always a TSV file saved in
     UTF-8 encoding.</para>

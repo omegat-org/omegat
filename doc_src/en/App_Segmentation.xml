@@ -16,8 +16,8 @@
 	<para>Select the type of segmentation by clicking <link
 	linkend="menus.project.properties"
 	endterm="menus.project.properties.title"/> in the <link
-	linkend="menus.project" endterm="menus.project.title"/> menu and ticking or
-	unticking the <link
+	linkend="menus.project" endterm="menus.project.title"/> menu and checking or
+	unchecking the <link
 	linkend="dialogs.project.properties.options.segmentation"
 	endterm="dialogs.project.properties.options.segmentation.title"/>
 	box.</para>
@@ -73,9 +73,9 @@
 		  <para>You can visualize segmentation as the process of moving the
 		  cursor along the text, on character at a time. Each time the cursor
 		  moves to the next character, rules consisting of a <emphasis
-		  role="bold">Before </emphasis>and <emphasis role="bold">After
-		  </emphasis>pattern, are checked, in order, for a match with the
-		  <emphasis role="bold"> Before</emphasis> pattern on the left and the
+		  role="bold">Before</emphasis> and <emphasis role="bold">After
+		  </emphasis> pattern, are checked, in order, for a match with the 
+		  <emphasis role="bold">Before</emphasis> pattern on the left and the
 		  corresponding <emphasis role="bold">After</emphasis> pattern on the
 		  right. The first matching rule is applied, either by creating a new
 		  segment break at the current cursor position (for a break rule), or by

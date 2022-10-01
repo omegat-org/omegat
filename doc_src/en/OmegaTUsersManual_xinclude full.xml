@@ -31,6 +31,9 @@
   <xi:include href="OmegaT5_ConfigurationFolder.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
+  <xi:include href="OmegaT5_Preferences.xml"
+              xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
   <xi:include href="OmegaT5_HowTo.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
 

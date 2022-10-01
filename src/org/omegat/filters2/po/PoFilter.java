@@ -99,6 +99,7 @@ public class PoFilter extends AbstractFilter {
         }
     }
 
+    // CHECKSTYLE:OFF
     private static final Map<String, PluralInfo> PLURAL_INFOS;
     static {
         HashMap<String, PluralInfo> info = new HashMap<String, PluralInfo>();
@@ -243,6 +244,7 @@ public class PoFilter extends AbstractFilter {
         info.put("zh", new PluralInfo(1, "0 "));
         PLURAL_INFOS = Collections.unmodifiableMap(info);
     }
+    // CHECKSTYLE:ON
 
     /**
      * If true, non-translated segments will contain the source text in ms

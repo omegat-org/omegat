@@ -143,12 +143,11 @@ OmegaT を起動するためのコマンドは次のとおりです。
 
 OmegaT のオリジナルは Keith Godfrey によるものです。
 
-Aaron Madlon-Kay（プロジェクトマネージャー）
+Jean-Christophe Helary (プロジェクトマネージャー)
 
 現在のチーム:
 (アルファベット順)
 
-- Vincent Bidaux (文書作成担当)
 - Marco Cevoli (Telegram コミュニティ担当)
 - Jean-Christophe Helary (Twitter コミュニティ担当)
 - Kos Ivantsof (ローカリゼーション担当)
@@ -166,7 +165,7 @@ Aaron Madlon-Kay（プロジェクトマネージャー）
 - Alex Buloichik (リード開発者)
 - Sabine Cretella
 - Dmitri Gabinski
-- Jean-Christophe Helary (サポートグループ担当、ローカリゼーション担当)
+- Aaron Madlon-Kay (プロジェクトマネージャー)
 - Maxym Mykhalchuk (リード開発者)
 - Samuel Murray
 - Henry Pijffers (リリース担当)

@@ -74,6 +74,7 @@ public final class OConsts {
 
     // contributors
     public static final String CONTRIBUTORS_FILE = "contributors.txt";
+    public static final String LIBRARIES_FILE = "libraries.txt";
 
     // status file consts
     public static final String FILES_ORDER_FILENAME = "files_order.txt";

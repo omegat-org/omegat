@@ -127,6 +127,10 @@ public final class TestTeamIntegrationChild {
             // load project
             ProjectProperties projectProperties = ProjectFileStorage.loadProjectProperties(new File(dir));
             projectProperties.autocreateDirectories();
+            String remoteRepoUrl = getRootGitRepositoryMapping(projectProperties.getRepositories());
+            if (!repo.equals(remoteRepoUrl)) {
+                setRootGitRepositoryMapping(projectProperties.getRepositories(), repo);
+            }
 
             Core.getAutoSave().disable();
             RealProject p = new TestRealProject(projectProperties);
@@ -189,6 +193,27 @@ public final class TestTeamIntegrationChild {
         }
         throw new RuntimeException("Wrong url in repository. expected: " + repo
                 + ": actual: " + prop.getRepositories().get(0).getUrl());
+    }
+
+    private static String getRootGitRepositoryMapping(List<RepositoryDefinition> repos) {
+        String repoUrl = null;
+        for (RepositoryDefinition definition : repos) {
+            if (definition.getMapping().get(0).getLocal().equals("/") && definition.getMapping().get(0).getRepository().equals("/") && definition.getType().equals("git")) {
+                repoUrl = definition.getUrl();
+                break;
+            }
+        }
+        return repoUrl;
+    }
+
+    private static void setRootGitRepositoryMapping(List<RepositoryDefinition> repos, String repoUrl) {
+        for (RepositoryDefinition definition : repos) {
+            if (definition.getMapping().get(0).getLocal().equals("/") && definition.getMapping().get(0).getRepository().equals("/") && definition.getType().equals("git")) {
+                definition.setUrl(repoUrl);
+                repos.set(0, definition);
+                break;
+            }
+        }
     }
 
 

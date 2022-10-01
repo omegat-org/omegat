@@ -121,23 +121,18 @@ dependencies {
         // Data: inline data URL handler
         implementation 'tokyo.northside:url-protocol-handler:0.1.4'
 
-        // JSON parser
-        implementation "com.fasterxml.jackson.core:jackson-core:2.12.3"
-        implementation "com.fasterxml.jackson.core:jackson-databind:2.12.3"
-
         // PDF Filter
-        implementation 'org.apache.pdfbox:pdfbox:2.0.24'
+        implementation 'org.apache.pdfbox:pdfbox:2.0.26'
 
         // Aligner
         implementation 'net.loomchild:maligna:3.0.1'
 
         // Dictionary
-        implementation 'io.github.dictzip:dictzip:0.12.2'
         implementation 'com.github.takawitter:trie4j:0.9.8'
         implementation 'io.github.eb4j:dsl4j:0.5.2'
         implementation 'io.github.eb4j:stardict4j:0.3.2'
 
-        // Encoding dectection
+        // Encoding detections
         implementation 'com.github.albfernandez:juniversalchardet:2.4.0'
 
         // Legacy projects re-hosted on Maven Central
@@ -165,14 +160,21 @@ dependencies {
         implementation "org.apache.lucene:lucene-analyzers-stempel:${luceneVersion}"
 
         // Team project server support
-        implementation 'org.eclipse.jgit:org.eclipse.jgit:5.11.1.202105131744-r'
-        implementation 'org.eclipse.jgit:org.eclipse.jgit.ssh.jsch:5.11.1.202105131744-r'
-        implementation 'com.jcraft:jsch.agentproxy.jsch:0.0.9'
-        // Specify the following two here just to make sure all jsch.agentproxy libs are the same version.
-        implementation 'com.jcraft:jsch.agentproxy.connector-factory:0.0.9'
-        implementation 'com.jcraft:jsch.agentproxy.svnkit-trilead-ssh2:0.0.9'
+        implementation 'org.eclipse.jgit:org.eclipse.jgit:5.13.1.202206130422-r'
+        // Original JSch is unmaintained and dead, so we use forked version, mwiede/jsch
+        // to fix BUGS#1075, and to support elliptic curve ciphers and improved ssh agent
+        implementation 'com.github.mwiede:jsch:0.2.3'
+        // https://mvnrepository.com/artifact/org.eclipse.jgit/org.eclipse.jgit.ssh.jsch
+        implementation ('org.eclipse.jgit:org.eclipse.jgit.ssh.jsch:5.13.1.202206130422-r') {
+            exclude module: 'jsch'
+        }
+        // For ed25519 and ecdsa support of jsch, java16+ or BC
+        implementation 'org.bouncycastle:bcprov-jdk15on:1.69'
+        // For ssh agent support of jsch, Java16+ or junixsocket
+        implementation 'com.kohlschutter.junixsocket:junixsocket-core:2.4.0'
         // For gpg signing
         implementation 'org.eclipse.jgit:org.eclipse.jgit.gpg.bc:5.11.1.202105131744-r'
+        // For subversion
         implementation 'org.tmatesoft.svnkit:svnkit:1.8.14'
 
         // Team project conflict resolution
@@ -190,12 +192,12 @@ dependencies {
         runtimeOnly 'org.apache.ivy:ivy:2.5.0'
 
         // Script editor
-        implementation 'com.fifesoft:rsyntaxtextarea:3.0.8'
-        implementation 'com.fifesoft:rstaui:3.0.4'
-        implementation ('com.fifesoft:languagesupport:3.0.2') {
+        implementation 'com.fifesoft:rsyntaxtextarea:3.2.0'
+        implementation 'com.fifesoft:rstaui:3.2.0'
+        implementation ('com.fifesoft:languagesupport:3.1.4') {
             exclude module: 'rhino'
         }
-        implementation 'com.fifesoft:autocomplete:3.0.5'
+        implementation 'com.fifesoft:autocomplete:3.2.0'
 
         // Moses MT connector
         implementation 'org.apache.xmlrpc:xmlrpc-client:3.1.3'
@@ -310,7 +312,7 @@ distributions {
             }
             from('release') {
                 into 'docs'
-                include 'changes.txt', 'doc-license.txt', 'OmegaT-license.txt', 'contributors.txt'
+                include 'changes.txt', 'doc-license.txt', 'OmegaT-license.txt', 'contributors.txt', 'libraries.txt'
                 filter(FixCrLfFilter, eol: FixCrLfFilter.CrLf.newInstance('crlf'))
             }
             from('scripts') {
@@ -320,6 +322,7 @@ distributions {
                 into 'images'
             }
             from('release') {
+                exclude 'contributors.txt', 'libraries.txt'
                 include '*.txt', '*.html'
                 filter(ReplaceTokens, tokens: [TRANSLATION_NOTICE: ''])
                 filter(FixCrLfFilter, eol: FixCrLfFilter.CrLf.newInstance('crlf'))

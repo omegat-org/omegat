@@ -62,7 +62,7 @@
 
     <orderedlist>
       <listitem>
-        <para>ファイルを<filename>/source</filename>フォルダにコピーします。</para>
+        <para>ファイルを<filename>source</filename>フォルダにコピーします。</para>
       </listitem>
 
       <listitem>

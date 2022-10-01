@@ -8,6 +8,7 @@
                2012 Aaron Madlon-Kay
                2013 Kyle Katarn, Aaron Madlon-Kay
                2014 Alex Buloichik
+               2018 Enrique Estevez Fernandez
                2022 Hiroshi Miura
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
@@ -571,10 +572,10 @@ public final class Main {
 
         String tmxFile = p.getProjectProperties().getProjectInternal() + "align.tmx";
         ProjectProperties config = p.getProjectProperties();
-
+        boolean alt = !config.isSupportDefaultTranslations();
         try (TMXWriter2 wr = new TMXWriter2(new File(tmxFile), config.getSourceLanguage(), config.getTargetLanguage(),
-                config.isSentenceSegmentingEnabled(), false, false)) {
-            wr.writeEntries(p.align(p.getProjectProperties(), new File(FileUtil.expandTildeHomeDir(dir))));
+                config.isSentenceSegmentingEnabled(), alt, alt)) {
+            wr.writeEntries(p.align(config, new File(FileUtil.expandTildeHomeDir(dir))), alt);
         }
         p.closeProject();
         System.out.println(OStrings.getString("CONSOLE_FINISHED"));

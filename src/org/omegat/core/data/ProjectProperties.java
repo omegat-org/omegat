@@ -39,6 +39,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
+
 import org.omegat.core.segmentation.SRX;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.master.PluginUtils;
@@ -50,8 +52,10 @@ import org.omegat.util.OStrings;
 import org.omegat.util.Platform;
 import org.omegat.util.StringUtil;
 
+import gen.core.filters.Filter;
 import gen.core.filters.Filters;
 import gen.core.project.RepositoryDefinition;
+import gen.core.project.RepositoryMapping;
 
 /**
  * Storage for project properties. May read and write project from/to disk.
@@ -664,4 +668,5 @@ public class ProjectProperties {
             return underRoot;
         }
     }
+
 }

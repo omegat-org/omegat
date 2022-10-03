@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
-<appendix id="appendix.segmentation">
-  <title id="appendix.segmentation.title">Segmentation</title>
+<section id="app.segmentation">
+  <title id="app.segmentation.title">Segmentation</title>
 
   <section id="dialog.preferences.segmentation.setup.type">
 	<title id="dialog.preferences.segmentation.setup.type.title">Paragraph or
-	sentence segmentation?</title>
+	sentence?</title>
 	
 	<para>Translation memory tools work with textual units called
 	segments. When a translation is entered, the segment containing the source
@@ -88,7 +88,7 @@
   
   <section id="dialog.preferences.segmentation.setup.scope">
 	<title id="dialog.preferences.segmentation.setup.scope.title">Global or
-	local rules?</title>
+	local?</title>
 
 	<note><para>The same mechanisms and dialogs are used to define global and
 	local segmentation rules.</para></note>
@@ -110,10 +110,10 @@
 
 
   <section id="dialog.preferences.segmentation.setup.rules.based.segmentation">
-	<title id="dialog.preferences.segmentation.setup.rules.based.segmentation.title">Rules-based segmentation</title>
+	<title id="dialog.preferences.segmentation.setup.rules.based.segmentation.title">Rules</title>
 	<para>OmegaT provides predefined segmentation rules, and the translator can
 	use regular expressions to modify them. See <link
-	linkend="appendix.regexp" endterm="appendix.regexp.title"/> for
+	linkend="app.regexp" endterm="app.regexp.title"/> for
 	details.</para>
 
 	<warning>
@@ -174,4 +174,4 @@
 		  </tgroup>
 		</table>
 	  </section>
-</appendix>
+</section>

@@ -99,7 +99,7 @@
 
 	  <varlistentry id="panes.context.menus">
 		<term id="panes.context.menus.title">Context menus</term>
-		<listitem><para>Some panes have a specific associated context menu. You can call that menu using the standard method for your OS, or with the OmegaT defined shortcuts (see <link linkend="appendix.shortcut" endterm="appendix.shortcut.title"/> for details).</para>
+		<listitem><para>Some panes have a specific associated context menu. You can call that menu using the standard method for your OS, or with the OmegaT defined shortcuts (see <link linkend="app.shortcut" endterm="app.shortcut.title"/> for details).</para>
 		</listitem>
 	  </varlistentry>
 	  <varlistentry id="panes.drag.and.drop">
@@ -348,7 +348,7 @@
   <section id="panes.dictionary">
     <title id="panes.dictionary.title">Dictionary</title>
 
-    <para>Dictionaries refer to the electronic equivalents of the printed dictionaries, such as Merriam-Webster, Duden, or Larousse, that you might have on your desk. See <link linkend="appendix.dictionaries" endterm="appendix.dictionaries.title"/> for details.</para>
+    <para>Dictionaries refer to the electronic equivalents of the printed dictionaries, such as Merriam-Webster, Duden, or Larousse, that you might have on your desk. See <link linkend="app.dictionaries" endterm="app.dictionaries.title"/> for details.</para>
   </section>
 
   <section id="panes.machinetranslation">

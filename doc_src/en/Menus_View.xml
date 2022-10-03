@@ -3,7 +3,7 @@
 <section id="menus.view">
   <title id="menus.view.title">View</title>
   <note><para>Key shortcut description reminder: <link
-  linkend="appendix.shortcut" endterm="shortcut.description"/></para></note>
+  linkend="app.shortcut" endterm="shortcut.description"/></para></note>
 
   <variablelist>
     <varlistentry id="menus.view.mark.translated.segments">

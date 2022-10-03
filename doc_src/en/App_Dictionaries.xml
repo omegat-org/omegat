@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
-<appendix id="appendix.dictionaries">
-  <title id="appendix.dictionaries.title">Dictionaries</title>
+<section id="app.dictionaries">
+  <title id="app.dictionaries.title">Dictionaries</title>
 
-  <section id="appendix.dictionaries.download.install">
-    <title id="appendix.dictionaries.download.install.title">Installation</title>
+  <section id="app.dictionaries.download.install">
+    <title id="app.dictionaries.download.install.title">Installation</title>
 
     <para>Dictionaries in OmegaT are based on the StarDict or on the Lingvo DSL
     format. To install the necessary files for the StarDict format, proceed as
@@ -65,8 +65,8 @@
     to use&quot;, and others, like the selection above, are under the GPL license.</para>
   </section>
 
-  <section id="appendix.dictionaries.problems">
-    <title id="appendix.dictionaries.problems.title">Common issues</title>
+  <section id="app.dictionaries.problems">
+    <title id="app.dictionaries.problems.title">Common issues</title>
 
     <itemizedlist>
       <listitem>
@@ -87,4 +87,4 @@
       </listitem>
     </itemizedlist>
   </section>
-</appendix>
+</section>

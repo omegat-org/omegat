@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
-<appendix id="appendix.glossaries">
-  <title id="appendix.glossaries.title">Glossaries</title>
+<section id="app.glossaries">
+  <title id="app.glossaries.title">Glossaries</title>
 
   <para>Glossaries are terminology files. You can create and update
   them manually, or import them from other projects.</para>
@@ -222,4 +222,4 @@
       </listitem>
     </itemizedlist>
   </section>
-</appendix>
+</section>

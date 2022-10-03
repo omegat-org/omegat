@@ -96,8 +96,8 @@
 		  <para>If you use local rules, you can still access the global rules, but
 		  modifying them will have no effect on your project.</para>
 		  
-		  <para>See <link linkend="appendix.segmentation"
-		  endterm="appendix.segmentation.title"/> for general explanations about
+		  <para>See <link linkend="app.segmentation"
+		  endterm="app.segmentation.title"/> for general explanations about
 		  segmentation (global or local, paragraph or sentence, setting, etc.)</para>
 		  
         </listitem>
@@ -137,8 +137,8 @@
 		  rules, but modifying them will have no effect on your
 		  project.</para></warning>
 
-		  <para>See <link linkend="appendix.segmentation"
-		  endterm="appendix.segmentation.title"/> for general explanations about
+		  <para>See <link linkend="app.segmentation"
+		  endterm="app.segmentation.title"/> for general explanations about
 		  segmentation (global or local, paragraph or sentence, setting, etc.)</para>
 		  
         </listitem>

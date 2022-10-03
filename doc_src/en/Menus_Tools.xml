@@ -5,7 +5,7 @@
   <title id="menus.tools.title">Tools</title>
 
   <note>
-	<para>Key shortcut description reminder: <link linkend="appendix.shortcut"
+	<para>Key shortcut description reminder: <link linkend="app.shortcut"
 	endterm="shortcut.description"/></para>
 	<example><title id="example.check.issues.title">Check Issues...</title>
 	<para>In this manual:

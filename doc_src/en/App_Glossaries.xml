@@ -4,19 +4,37 @@
 <section id="app.glossaries">
   <title id="app.glossaries.title">Glossaries</title>
 
-  <para>Glossaries are terminology files. You can create and update
-  them manually, or import them from other projects.</para>
+  <para>Glossaries are terminology files.</para>
 
-  <para>In an OmegaT project, only the default glossary is writable from
-  the application. However the project can also contain any number of other
-  reference glossaries.</para>
+  <para>There are 2 kinds of glossary files:
 
+  <variablelist>
+	<varlistentry>
+	  <term>The project glossary</term>
+	  <listitem>
+		<para>This is the project writeable glossary. It is created the first
+          time you use <link linkend="menus.edit.create.glossary.entry"
+          endterm="menus.edit.create.glossary.entry.title"/>.</para>
+		  <para>You can access it with <link
+		  linkend="menus.project.access.project.contents.title"
+		  endterm="menus.project.access.project.contents.title"/>, open it in a
+		  text editor, modify it with a text editor. As soon as you have saved
+		  your modifications, they will be taken into account by OmegaT.</para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term>Reference glossaries</term>
+	  <listitem><para>They are terminology files in a format that OmegaT recognises. They cannont be modified directly by OmegaT, but you can access them and modify them in a text editor and save them to have your modifications taken into account right away.</para></listitem>
+	</varlistentry>
+  </variablelist>
+  </para>
+  
   <para>All terms in a segment with a match in <emphasis>any</emphasis> of
   the glossaries attached to the project will be displayed in the <link
   linkend="panes.glossary" endterm="panes.glossary.title"></link> pane.</para>
 
   <section id="glossaries.glossary.folder">
-    <title id="glossaries.glossary.folder.title">Glossaries folder</title>
+    <title id="glossaries.glossary.folder.title">The glossaries folder</title>
 
     <para>By default, each project contains a <link linkend="project.folder.glossary" endterm="project.folder.glossary.title"></link> subfolder to store the writable glossary and any reference glossaries you want to add to the project.</para>
 

@@ -169,8 +169,8 @@
           <emphasis>y</emphasis>, in both lower- and uppercase, have no
           special meaning when preceded by a backslash. This manual does
           not describe the special meanings of all the other characters.
-          Consult the sites in the <link linkend="appendix.regex.tools"
-          endterm="appendix.regex.tools.title"/> section below for
+          Consult the sites in the <link linkend="app.regex.tools"
+          endterm="app.regex.tools.title"/> section below for
           information on combinations not covered here.</para>
         </note>
       </listitem>

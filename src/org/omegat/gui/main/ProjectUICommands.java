@@ -39,6 +39,8 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -432,8 +434,28 @@ public final class ProjectUICommands {
 
                 if (convertOldProjectIfNeed(projectRootFolder)) {
                     ProjectProperties props = checkProjectProperties(projectRootFolder);
-                    if (props != null) {
-                        projectOpenImpl(projectRootFolder, props);
+                    if (props == null) {
+                        // try with backup file
+                        try {
+                            Files.copy(Paths.get(projectRootFolder.getAbsoluteFile() + File.separator
+                                + OConsts.FILE_PROJECT + OConsts.BACKUP_EXTENSION),
+                                Paths.get(projectRootFolder.getAbsoluteFile() + File.separator + OConsts.FILE_PROJECT),
+                                StandardCopyOption.REPLACE_EXISTING);
+                            props = ProjectFileStorage.loadProjectProperties(projectRootFolder.getAbsoluteFile());
+                        } catch (Exception ex) {
+                            Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
+                            Core.getMainWindow().displayErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
+                            mainWindow.setCursor(oldCursor);
+                            return null;
+                        }
+                    }
+                    projectOpenImpl(projectRootFolder, props);
+                    try {
+                        Files.copy(Paths.get(projectRootFolder.getAbsoluteFile() + File.separator + OConsts.FILE_PROJECT),
+                            Paths.get(projectRootFolder.getAbsoluteFile() + File.separator + OConsts.FILE_PROJECT + OConsts.BACKUP_EXTENSION),
+                            StandardCopyOption.REPLACE_EXISTING);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
                     }
                 }
 
@@ -488,8 +510,8 @@ public final class ProjectUICommands {
             props = ProjectFileStorage.loadProjectProperties(projectRootFolder.getAbsoluteFile());
             // Here, 'props' is the current project setting read from local copy of omegat.project
         } catch (Exception ex) {
-            Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
-            Core.getMainWindow().displayErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
+            Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE_BACK");
+            Core.getMainWindow().displayErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE_BACK");
             return null;
         }
         return props;

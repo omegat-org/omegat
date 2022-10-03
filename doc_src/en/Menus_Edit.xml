@@ -7,7 +7,7 @@
   <note>
 	<para>This menu only displays entries when a project is open.</para>
 
-	<para>Key shortcut description reminder: <link linkend="appendix.shortcut" endterm="shortcut.description"/></para>
+	<para>Key shortcut description reminder: <link linkend="app.shortcut" endterm="shortcut.description"/></para>
 
 	<example>
 	  <title id="example.undo.last.action.title">Undo Last Action</title>

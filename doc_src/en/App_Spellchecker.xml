@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
-<appendix id="spellchecker">
-  <title id="spellchecker.title">Spell checker</title>
+<section id="app.spellchecker">
+  <title id="app.spellchecker.title">Spell checker</title>
 
   <para>OmegaT has a built-in spell checker based on the spelling checker used
   in Apache OpenOffice, LibreOffice, Firefox and Thunderbird. It is
   consequently able to use the huge range of free spelling dictionaries
   available for these applications.</para>
 
-  <section id="spellchecker.installing.dictionaries">
-    <title id="spellchecker.installing.dictionaries.title">Installation</title>
+  <section id="app.spellchecker.installing.dictionaries">
+    <title id="app.spellchecker.installing.dictionaries.title">Installation</title>
 
     <para>Before the spell check function can be used, a suitable dictionary
     or dictionaries (i.e., for your target language) must be installed. To
@@ -49,8 +49,8 @@
     dictionaries online, using the <emphasis role="bold">URL of online
     dictionaries</emphasis> field:</para>
 
-    <figure id="spellchecker.setup">
-      <title id="spellchecker.setup.title">Spellchecker setup</title>
+    <figure id="app.spellchecker.setup">
+      <title id="app.spellchecker.setup.title">Spellchecker setup</title>
 
       <mediaobject>
         <imageobject role="html">
@@ -78,8 +78,8 @@
     standard (Castilian) rather than for Mexican Spanish.</para>
   </section>
 
-  <section id="spellchecker.using.dictionaries">
-    <title id="spellchecker.using.dictionaries.title">Usage</title>
+  <section id="app.spellchecker.using.dictionaries">
+    <title id="app.spellchecker.using.dictionaries.title">Usage</title>
 
     <para>There is no need to instruct OmegaT to use a particular spelling
     dictionary; OmegaT will use the correct language dictionary based upon the
@@ -92,8 +92,8 @@
     Checking</guimenuitem> and tick the <guilabel>Automatically check the
     spelling of text</guilabel> check box (see above).</para>
 
-    <figure id="spellchecker.in.action">
-      <title id="spellchecker.in.action.title">Using the spellchecker</title>
+    <figure id="app.spellchecker.in.action">
+      <title id="app.spellchecker.in.action.title">Using the spellchecker</title>
 
       <mediaobject>
         <imageobject role="html">
@@ -112,8 +112,8 @@
     the misspelled word, or add it to the dictionary.</para>
   </section>
 
-  <section id="spellchecker.hints">
-    <title id="spellchecker.hints.title">Common issues</title>
+  <section id="app.spellchecker.hints">
+    <title id="app.spellchecker.hints.title">Common issues</title>
 
     <para>If the spell checker is not working, then make sure first that the
     check box <guilabel>&quot;Automatically check the spelling of text&quot;</guilabel>
@@ -144,4 +144,4 @@
     the files involved to a different folder, reserved just for use by
     OmegaT.</para>
   </section>
-</appendix>
+</section>

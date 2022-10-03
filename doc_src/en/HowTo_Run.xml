@@ -471,8 +471,8 @@
 									</listitem>
 								  </varlistentry>
 								</variablelist>
-								See <link linkend="appendix.regexp"
-								endterm="appendix.regexp.title"/> for details.
+								See <link linkend="app.regexp"
+								endterm="app.regexp.title"/> for details.
 								</para>
 							  </listitem>
 							</varlistentry>

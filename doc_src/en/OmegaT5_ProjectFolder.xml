@@ -177,12 +177,12 @@
 
   <section id="project.folder.dictionary">
     <title id="project.folder.dictionary.title">dictionary</title>
-    <para>This folder is initially empty, and is used to store any dictionaries you add to the project. See <link linkend="appendix.dictionaries" endterm="appendix.dictionaries.title"/> for details.</para>
+    <para>This folder is initially empty, and is used to store any dictionaries you add to the project. See <link linkend="app.dictionaries" endterm="app.dictionaries.title"/> for details.</para>
   </section>
 
   <section id="project.folder.glossary">
     <title id="project.folder.glossary.title">glossary</title>
-    <para>This folder is initially empty. It is used to store the default writable glossary and any other glossaries you use in the project. See <link linkend="appendix.glossaries" endterm="appendix.glossaries.title"/> for details.</para>
+    <para>This folder is initially empty. It is used to store the default writable glossary and any other glossaries you use in the project. See <link linkend="app.glossaries" endterm="app.glossaries.title"/> for details.</para>
 
 	<variablelist>
       <varlistentry id="project.folder.glossary.txt">

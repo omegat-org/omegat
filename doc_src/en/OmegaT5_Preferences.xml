@@ -976,8 +976,8 @@ appropriate service to use the machine translation options.</para></note>
   <title id="dialogs.preferences.segmentation.setup.title">Segmentation
   Setup</title>
 
-  <para>See <link linkend="appendix.segmentation"
-  endterm="appendix.segmentation.title"/> for general explanations about
+  <para>See <link linkend="app.segmentation"
+  endterm="app.segmentation.title"/> for general explanations about
   segmentation (global or local, paragraph or sentence, etc.)</para>
 
   <section id="dialogs.preferences.segmentation.setup.scope">
@@ -1064,7 +1064,7 @@ appropriate service to use the machine translation options.</para></note>
 
 	  <para>The <emphasis role="bold">Before</emphasis> and<emphasis
 	  role="bold"> After</emphasis> patterns are regular expressions. See
-	  <link linkend="appendix.regexp" endterm="appendix.regexp.title"/>
+	  <link linkend="app.regexp" endterm="app.regexp.title"/>
 	  for details.</para>
 	  
 	  <para>The existing rules always provide a good starting point. See also
@@ -1109,7 +1109,7 @@ appropriate service to use the machine translation options.</para></note>
   software used in Apache OpenOffice, LibreOffice, Firefox and
   Thunderbird. It is consequently able to use the huge range of free
   spelling dictionaries available for these applications. See <link
-  linkend="spellchecker" endterm="spellchecker.title"/> for details.</para>
+  linkend="app.spellchecker" endterm="app.spellchecker.title"/> for details.</para>
 </section>
 
 <section id="dialog.preferences.languagetool.plugin">

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
-<appendix id="appendix.shortcut">
-  <title id="appendix.shortcut.title">OmegaT shortcuts</title>
+<section id="app.shortcut">
+  <title id="app.shortcut.title">OmegaT shortcuts</title>
 
-  <section id="appendix.shortcut.description">
-    <title id="appendix.shortcut.description.title">Description</title>
+  <section id="app.shortcut.description">
+    <title id="app.shortcut.description.title">Description</title>
 
     <para>OmegaT generally does not use buttons to give you access to its
     functions. The functions are available from the menus and most of them have
@@ -16,8 +16,8 @@
 	shortcuts from the menus.</para>
 
     <para>Almost all of OmegaT’s shortcuts are customizable. See <link
-    endterm="appendix.shortcut.customization.title"
-    linkend="appendix.shortcut.customization"/> for details.</para>
+    endterm="app.shortcut.customization.title"
+    linkend="app.shortcut.customization"/> for details.</para>
 
     <para>OmegaT runs on any platform that runs a Java Runtime Environment
     (Windows, macOS, Linux being the most mainstream). The modifier keys that
@@ -79,8 +79,8 @@
 		</example>
   </section>
 
-  <section id="appendix.shortcut.customization">
-    <title id="appendix.shortcut.customization.title">Customization</title>
+  <section id="app.shortcut.customization">
+    <title id="app.shortcut.customization.title">Customization</title>
 
 	<para>OmegaT assigns shortcuts to most functions available in the menus and
 	to a number of functions in the Editor window. Most of these functions can
@@ -140,8 +140,8 @@
     </note>
   </section>
 
-  <section id="appendix.shortcut.syntax">
-    <title id="appendix.shortcut.syntax.title">Syntax</title>
+  <section id="app.shortcut.syntax">
+    <title id="app.shortcut.syntax.title">Syntax</title>
 
     <para>Empty lines are accepted and comment lines should start with
     <code>//</code>. Anything after the <code>//</code> will be
@@ -227,11 +227,11 @@
     associated shortcuts default definitions.</para>
   </section>
 
-  <section id="appendix.function.codes">
-    <title id="appendix.function.codes.title">Function codes</title>
+  <section id="app.function.codes">
+    <title id="app.function.codes.title">Function codes</title>
 
-      <table id="appendix.function.codes.editor.table">
-        <title id="appendix.function.codes.editor.table.title">Editor</title>
+      <table id="app.function.codes.editor.table">
+        <title id="app.function.codes.editor.table.title">Editor</title>
 
         <tgroup cols="4" colsep="1">
           <colspec align="left" colname="1" colnum="1"/>
@@ -371,8 +371,8 @@
           </tbody>
         </tgroup>
       </table>
-      <table id="appendix.function.codes.autocompleter.table">
-        <title id="appendix.function.codes.autocompleter.table.title">Autocompleter</title>
+      <table id="app.function.codes.autocompleter.table">
+        <title id="app.function.codes.autocompleter.table.title">Autocompleter</title>
 
         <tgroup cols="4" colsep="1">
           <colspec align="left" colname="1" colnum="1"/>
@@ -518,8 +518,8 @@
         </tgroup>
       </table>
 
-      <table id="appendix.function.codes.search.window.table">
-        <title id="appendix.function.codes.search.window.table.title">Search Window</title>
+      <table id="app.function.codes.search.window.table">
+        <title id="app.function.codes.search.window.table.title">Search Window</title>
 
         <tgroup cols="4" colsep="1">
           <colspec align="left" colname="1" colnum="1"/>
@@ -547,8 +547,8 @@
 		</tgroup>
 	  </table>
 
-      <table id="appendix.function.codes.project.menu.table">
-        <title id="appendix.function.codes.project.menu.table.title">Project Menu</title>
+      <table id="app.function.codes.project.menu.table">
+        <title id="app.function.codes.project.menu.table.title">Project Menu</title>
 
         <tgroup cols="4" colsep="1">
           <colspec align="left" colname="1" colnum="1"/>
@@ -703,8 +703,8 @@
         </tgroup>
       </table>
 
-      <table id="appendix.function.codes.edit.menu.table">
-        <title id="appendix.function.codes.edit.menu.table.title">Edit Menu</title>
+      <table id="app.function.codes.edit.menu.table">
+        <title id="app.function.codes.edit.menu.table.title">Edit Menu</title>
 
         <tgroup cols="4" colsep="1">
           <colspec align="left" colname="1" colnum="1"/>
@@ -925,8 +925,8 @@
         </tgroup>
       </table>
 
-      <table id="appendix.function.codes.goto.menu.table">
-        <title id="appendix.function.codes.goto.menu.table.title">GoTo Menu</title>
+      <table id="app.function.codes.goto.menu.table">
+        <title id="app.function.codes.goto.menu.table.title">GoTo Menu</title>
 
         <tgroup cols="4" colsep="1">
           <colspec align="left" colname="1" colnum="1"/>
@@ -1020,8 +1020,8 @@
         </tgroup>
       </table>
 
-      <table id="appendix.function.codes.view.menu.table">
-        <title id="appendix.function.codes.view.menu.table.title">View Menu</title>
+      <table id="app.function.codes.view.menu.table">
+        <title id="app.function.codes.view.menu.table.title">View Menu</title>
 
         <tgroup cols="4" colsep="1">
           <colspec align="left" colname="1" colnum="1"/>
@@ -1102,8 +1102,8 @@
         </tgroup>
       </table>
 
-      <table id="appendix.function.codes.tools.menu.table">
-        <title id="appendix.function.codes.tools.menu.table.title">Tools Menu</title>
+      <table id="app.function.codes.tools.menu.table">
+        <title id="app.function.codes.tools.menu.table.title">Tools Menu</title>
 
         <tgroup cols="4" colsep="1">
           <colspec align="left" colname="1" colnum="1"/>
@@ -1151,8 +1151,8 @@
         </tgroup>
       </table>
 
-      <table id="appendix.function.codes.option.menu.table">
-        <title id="appendix.function.codes.option.menu.table.title">Options Menu</title>
+      <table id="app.function.codes.option.menu.table">
+        <title id="app.function.codes.option.menu.table.title">Options Menu</title>
 
         <tgroup cols="4" colsep="1">
           <colspec align="left" colname="1" colnum="1"/>
@@ -1295,8 +1295,8 @@
         </tgroup>
       </table>
 
-      <table id="appendix.function.codes.help.menu.table">
-        <title id="appendix.function.codes.help.menu.table.title">Help Menu</title>
+      <table id="app.function.codes.help.menu.table">
+        <title id="app.function.codes.help.menu.table.title">Help Menu</title>
 
         <tgroup cols="4" colsep="1">
           <colspec align="left" colname="1" colnum="1"/>
@@ -1338,4 +1338,4 @@
         </tgroup>
       </table>
     </section>
-</appendix>
+</section>

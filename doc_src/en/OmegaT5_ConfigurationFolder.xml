@@ -74,13 +74,13 @@
 	<variablelist>
 	<varlistentry id="configuration.folder.extra.contents.editorshortcuts">
 	  <term id="configuration.folder.extra.contents.editorshortcuts.title">EditorShortcuts.properties</term>
-	  <listitem><para>This parameter file  contains customized editor shortcuts. See <link linkend="appendix.shortcut.customization" endterm="appendix.shortcut.customization.title"/> for details.</para>
+	  <listitem><para>This parameter file  contains customized editor shortcuts. See <link linkend="app.shortcut.customization" endterm="app.shortcut.customization.title"/> for details.</para>
 	  </listitem>
 	</varlistentry>
 	
 	<varlistentry id="configuration.folder.extra.contents.maninmenushortcut">
 	  <term id="configuration.folder.extra.contents.maninmenushortcut.title">MainMenuShortcuts.properties</term>
-	  <listitem><para>This parameter file  contains customized user interface shortcuts. See <link linkend="appendix.shortcut.customization" endterm="appendix.shortcut.customization.title"/> for details.</para>
+	  <listitem><para>This parameter file  contains customized user interface shortcuts. See <link linkend="app.shortcut.customization" endterm="app.shortcut.customization.title"/> for details.</para>
 	  </listitem>
 	</varlistentry>
 	
@@ -122,7 +122,7 @@
 
 	<varlistentry id="configuration.folder.extra.contents.spelling">
 	  <term id="configuration.folder.extra.contents.spelling.title">spelling/</term>
-	  <listitem><para>This folder contains your spelling dictionaries. See <link linkend="spellchecker.installing.dictionaries" endterm="spellchecker.installing.dictionaries.title"/> for details.</para>
+	  <listitem><para>This folder contains your spelling dictionaries. See <link linkend="app.spellchecker.installing.dictionaries" endterm="app.spellchecker.installing.dictionaries.title"/> for details.</para>
 	  </listitem>
 	</varlistentry>
   </variablelist>

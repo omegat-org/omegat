@@ -3,8 +3,8 @@
 "../../../docbook-xml-4.5/docbookx.dtd"
 [<!ENTITY % manualvariables SYSTEM "manualvariables.mod"> %manualvariables;]>
 
-<appendix id="appendix.regexp">
-  <title id="appendix.regexp.title">Regular expressions</title>
+<section id="app.regexp">
+  <title id="app.regexp.title">Regular expressions</title>
 
   <para>This appendix is intended for users interested in exploring a
   powerful way to boost their productivity. Although seen as daunting and
@@ -14,7 +14,7 @@
   on a day-to-day basis.</para>
 
   <para>Only the fundamentals most useful to translators are covered. The
-  <link linkend="appendix.regex.tools" endterm="appendix.regex.tools.title"/>
+  <link linkend="app.regex.tools" endterm="app.regex.tools.title"/>
   section at the end of this appendix provides a few starting points to
   explore advanced or complex uses beyond the scope of this manual. If you need help for a specific case, you can also ask questions in the various support channels.</para>
   
@@ -112,8 +112,8 @@
   </variablelist>
   </para>
 
-  <section id="appendix.regexp.basic.principles">
-	<title id="appendix.regexp.basic.principles.title">Basic principles</title>
+  <section id="app.regexp.basic.principles">
+	<title id="app.regexp.basic.principles.title">Basic principles</title>
 	<para>Regular expressions are used to find text. A given expression will
 	<emphasis>match</emphasis> a piece of text, or not.</para>
 	<para>Each character used in an expression has an effect on the match.</para>
@@ -234,8 +234,8 @@
   </variablelist>
   
   
-  <table id="appendix.regex.characters">
-    <title id="appendix.regex.characters.title">Characters</title>
+  <table id="app.regex.characters">
+    <title id="app.regex.characters.title">Characters</title>
 
     <tgroup align="left" cols="2" rowsep="1">
       <colspec align="left" colnum="1"/>
@@ -276,8 +276,8 @@
 	</tgroup>
   </table>
 
-  <table id="appendix.regex.classes">
-    <title id="appendix.regex.classes.title">Classes and case</title>
+  <table id="app.regex.classes">
+    <title id="app.regex.classes.title">Classes and case</title>
 
 	<note><para>In OmegaT a search is by default case-insensitive: it will match upper-case characters as well as lower-case characters. You can enable case sensitivity as an option for the whole search, but if you want finer settings you can mix <emphasis role="bold">(?i)</emphasis> before case-insensitive parts and <emphasis role="bold">(?-i)</emphasis> before case sensitive parts.</para></note>
 
@@ -346,8 +346,8 @@
 </section>
 
 
-<table id="appendix.regex.unicode.blocs">
-  <title id="appendix.regex.unicode.blocs.title">Unicode blocks, scripts and
+<table id="app.regex.unicode.blocs">
+  <title id="app.regex.unicode.blocs.title">Unicode blocks, scripts and
   categories</title>
 
   <tgroup align="left" cols="2" rowsep="1">
@@ -396,8 +396,8 @@
   </tgroup>
 </table>
 
-<table id="appendix.regex.boundary.matchers">
-  <title id="appendix.regex.boundary.matchers.title">Locations</title>
+<table id="app.regex.boundary.matchers">
+  <title id="app.regex.boundary.matchers.title">Locations</title>
 
   <para>Locations (boundaries) are not part of the match. They just specify
   where the match should be.</para>
@@ -458,8 +458,8 @@
 </table>
 
 
-<section id="appendix.regexp.examples">
-  <title id="appendix.regexp.examples.title">Examples</title>
+<section id="app.regexp.examples">
+  <title id="app.regexp.examples.title">Examples</title>
   
   <table id="regex.examples">
     <title id="regex.examples.title">Examples of regular expressions
@@ -527,8 +527,8 @@
 
 
 
-<section id="appendix.regex.tools">
-  <title id="appendix.regex.tools.title">References</title>
+<section id="app.regex.tools">
+  <title id="app.regex.tools.title">References</title>
 
   <para>Although OmegaT does not offer fancy coloring for your regular
   expressions, you can get a lot of practice by using the <link linkend="windows.text.search"
@@ -537,8 +537,8 @@
   <para>The Java technical reference is useful as a canonical reference.
 
   <variablelist>
-	<varlistentry id="appendix.regex.java">
-	  <term id="appendix.regex.java.title"><ulink url="&javaregex;">Java Regex
+	<varlistentry id="app.regex.java">
+	  <term id="app.regex.java.title"><ulink url="&javaregex;">Java Regex
 	  documentation</ulink></term>
 	  <listitem><para>The official reference for regular expressions used in
 	  Java.</para></listitem>
@@ -548,12 +548,12 @@
   If you want to know more about regular expressions, the two following resources have also proved very useful:
 
   <variablelist>
-	<varlistentry id="appendix.regex.tools.regex101">
-	  <term id="appendix.regex.tools.regex101.title"><ulink url="https://regex101.com">https://regex101.com</ulink></term>
+	<varlistentry id="app.regex.tools.regex101">
+	  <term id="app.regex.tools.regex101.title"><ulink url="https://regex101.com">https://regex101.com</ulink></term>
 	  <listitem><para>An online regular expression matcher where you enter the text you want to practice on and the regular expressions that you want to try.</para></listitem>
 	</varlistentry>
-	<varlistentry id="appendix.regex.tools.regular.expression.info">
-	  <term id="appendix.regex.tools.regular.expression.info.title"><ulink url="https://www.regular-expressions.info">https://www.regular-expressions.info</ulink></term>
+	<varlistentry id="app.regex.tools.regular.expression.info">
+	  <term id="app.regex.tools.regular.expression.info.title"><ulink url="https://www.regular-expressions.info">https://www.regular-expressions.info</ulink></term>
 	  <listitem><para>One of the most thorough regular expression references on the web.</para></listitem>
 	</varlistentry>
   </variablelist>
@@ -561,4 +561,4 @@
   OmegaT does not support either site in any way and if you find interesting references in your language, we would love to hear about them.
   </para>
 </section>
-</appendix>
+</section>

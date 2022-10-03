@@ -2,7 +2,7 @@
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="menus.help">
   <title id="menus.help.title">Help</title>
-  <note><para>Key shortcut description reminder: <link linkend="appendix.shortcut" endterm="shortcut.description"/></para></note>
+  <note><para>Key shortcut description reminder: <link linkend="app.shortcut" endterm="shortcut.description"/></para></note>
 
   <variablelist>
     <varlistentry id="menus.help.user.manual">

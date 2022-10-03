@@ -18,9 +18,10 @@
   section at the end of this appendix provides a few starting points to
   explore advanced or complex uses beyond the scope of this manual. If you need help for a specific case, you can also ask questions in the various support channels.</para>
   
-  <para>Regular expressions generally use a combination of letters, digits,
-  and symbols (collectively known as <emphasis>characters</emphasis>) to
-  define an <emphasis>expression</emphasis> that represents a specific text
+  <para>Regular expressions generally use a combination of letters,
+  digits, and symbols (collectively known as
+  <emphasis>characters</emphasis>) to define an
+  <emphasis>expression</emphasis> that represents a specific text
   pattern.</para>
 
   <para>Here are a few examples.
@@ -32,8 +33,8 @@
       </varlistentry>
       <varlistentry>
         <term>\w+</term>
-        <listitem><para>Represents one or more “word characters”, namely the
-        letters of the alphabet, digits, as well as the hyphen and
+        <listitem><para>Represents one or more “word characters”, namely
+        the letters of the alphabet, digits, as well as the hyphen and
         underscore symbols.</para>
         </listitem>
       </varlistentry>
@@ -69,13 +70,13 @@
     <varlistentry>
       <term>Custom tags</term>
       <listitem>
-        <para>Custom tags are tags defined with regular expressions that are
-        handled exactly like native OmegaT tags. See <link
+        <para>Custom tags are tags defined with regular expressions that 
+        are handled exactly like native OmegaT tags. See <link
         linkend="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags"
-        endterm="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags.title"/>
+        endterm="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags.title"/> 
         for details.</para>
         <para>Use the <code>|</code> (OR) character to separate individual
-          tag definitions.</para>
+        tag definitions.</para>
         </listitem>
     </varlistentry>
 
@@ -85,8 +86,9 @@
         <para><link
         linkend="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation"
         endterm="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation.title"/>
-        allow you to define strings that OmegaT will mark in red by default,
-        and treat as extraneous tags for validation purposes.</para>
+        allow you to define strings that OmegaT will mark in red by
+        default, and treat as extraneous tags for validation
+        purposes.</para>
         <para>Use the <code>|</code> (OR) character to separate individual
         fragment definitions.</para>
       </listitem>
@@ -104,9 +106,9 @@
         <para>Segmentation or exception rules define the position in a
         segment where a split will, or will not, be made. Two regular
         expressions are required to define that position: a “before”
-        expression to define the text pattern ahead of where the rule should
-        apply, and an “after” expression to define the text pattern following
-        that position.</para>
+        expression to define the text pattern ahead of where the rule
+        should apply, and an “after” expression to define the text 
+        pattern following that position.</para>
         <para>A language pattern that matches the source language of the project will apply to that project.</para></listitem>
     </varlistentry>
   </variablelist>
@@ -114,124 +116,299 @@
 
   <section id="appendix.regexp.basic.principles">
 	<title id="appendix.regexp.basic.principles.title">Basic principles</title>
-	<para>Regular expressions are used to find text. A given expression will
-	<emphasis>match</emphasis> a piece of text, or not.</para>
-	<para>Each character used in an expression has an effect on the match.</para>
-	<para>Some characters have special effects.</para>
-	<warning><para>Regular expressions cannot be used to match text decorations like <emphasis>bold</emphasis>, <emphasis>italics</emphasis>, etc.</para></warning>
-	<para>There are 4 rules to remember.</para>
+
+	<para>Regular expressions are used to find text (including characters,
+  such as spaces, tabs, or line breaks that are not visible on the screen
+  or when printed out. Any given expression either
+  <emphasis>matches</emphasis>, or <emphasis>does <emphasis
+  role="bold">not</emphasis> match</emphasis> a word, phrase, or other
+  sequence of text.</para>
+  
+	<para>Each and every character in the expression is relevant when
+  determining a match.</para>
+  <para>A number of characters or combinations of characters have a
+  special meaning in a regular expression.</para>
+  
+	<warning>
+    <para>Text decorations such as <emphasis>bold</emphasis>,
+    <emphasis>italics</emphasis>, or other <emphasis>stylistic
+    effects</emphasis> cannot be matched using regular expressions.</para>
+  </warning>
+
+	<para>There are four principles to keep in mind.</para>
 
 	<variablelist>
 	  <varlistentry>
-		<term>Most characters match
-		themselves</term>
-		<listitem>
-		  <para>Their only effect is to <emphasis>look for
-		  themselves</emphasis> in the string.</para>
-		  <para>For example, the 7 letters that compose the word
-		  <emphasis>example</emphasis> only have the effect of looking for
-		  themselves in the text, in that same order, i.e., the string
-		  <emphasis>example</emphasis>.</para>
-		</listitem>
-	  </varlistentry>
-	  <varlistentry>
-		<term>Most alphabetical characters have a hidden special effect</term>
-		<listitem>
-		  <para>That special effect must be triggered by a special effect
-		  character, otherwise, the character matches itself.</para>
-		  <para>For example, <emphasis>r</emphasis> is a normal character but
-		  also has a hidden special effect, triggered by preceding it with
-		  <emphasis>\</emphasis>, in which case it becomes
-		  <emphasis>\r</emphasis> and has the special effect of matching a
-		  <emphasis>carriage return character</emphasis> (by the way,
-		  <emphasis>\R</emphasis> has the effect of matching <emphasis>any line
-		  break character</emphasis>).</para>
-		  <note><para>As of the versions of Java on which OmegaT is built, only
-		  <emphasis>i j l m o y</emphasis> both in lower and upper case have no
-		  hidden special effect. We will not describe all the effect of the
-		  other characters in this manual.</para></note>
-		</listitem>
-	  </varlistentry>
-	  <varlistentry>
-		<term>12 characters have a special effect by default</term>
-		<listitem>
-		  <para>To match themselves, the special effect must be
-		  disabled, by a special effect character.</para>
-		  <para>For example, <emphasis>.</emphasis> has the default special effect of matching <emphasis>any one character</emphasis>.</para>
-		  <para>To find a normal period, it is necessary to disable the special
-		  effect with <emphasis>\</emphasis>, in which case it becomes
-		  <emphasis>\.</emphasis> and matches only a period.</para>
-		  
-		  <para>As of the versions of Java on which OmegaT is built, the 12 characters are
-		  <emphasis>the backslash \, the caret ^, the dollar sign $, the period or dot ., the vertical bar or pipe symbol |, the question mark ?, the asterisk or star *, the plus sign +, the opening parenthesis (, the closing parenthesis ), the opening square bracket [, and the opening curly brace {.</emphasis>
+      <term>Most characters simply match themselves</term>
+      <listitem>
+        <para>The majority of characters in a regular expression simply
+        <emphasis>look for themselves</emphasis> in the text sequence.</para>
+        <para>For example, the seven letters spelling out the word
+        “<emphasis>example</emphasis>” simply tell the search function to
+        match exactly those letters, in that order. Simply put, the search
+        just looks for the word “<emphasis>example</emphasis>”.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Letters of the alphabet preceded by a blackslash
+      (<literal>\</literal>) take on a special meaning</term>
+      <listitem>
+        <para>Unlike a letter on its own, which simply represents itself
+        as noted above, a letter preceded by a <literal>\</literal> has a
+        special function in a regular expression.</para>
+        <para>For example, <emphasis>r</emphasis> is just a normal
+        character but preceding it with <literal>\</literal> to make it
+        <literal>\r</literal> turns it into a special combination
+        that matches a  <emphasis>carriage return character</emphasis>.
+        Similarly, <literal>\R</literal> matches <emphasis>any line
+        break character</emphasis>).</para>
+        <note>
+          <para>In the version of Java used to build OmegaT, only the
+          letters <emphasis>i j l m o</emphasis>, and
+          <emphasis>y</emphasis>, in both lower- and uppercase, have no
+          special meaning when preceded by a backslash. This manual does
+          not describe the special meanings of all the other characters.
+          Consult the sites in the <link linkend="appendix.regex.tools"
+          endterm="appendix.regex.tools.title"/> section below for
+          information on combinations not covered here.</para>
+        </note>
+      </listitem>
+    </varlistentry>
+      
+    <varlistentry>
+      <term>Twelve characters have a special meaning by default</term>
+      <listitem>
+        <para>That special meaning has to be cancelled by another
+        character (usually <literal>\</literal>), to match the character itself.</para>
+        <para>For example, <literal>.</literal> on its own has the
+        special meaning of matching <emphasis>any single character</emphasis>.</para>
+        <para>To find a normal period, that meaning has to be cancelled
+        using the <literal>\</literal>, to make the expression
+        <literal>\.</literal>, which just matches a period.</para>
+        
+        <para>In the version of Java used to build OmegaT, the twelve
+        special characters are the <emphasis>backslash</emphasis>
+        <literal>\</literal>, the <emphasis>caret</emphasis>
+        <literal>^</literal>, the <emphasis>dollar sign</emphasis>
+        <literal>$</literal>, the <emphasis>period</emphasis> (or
+        <emphasis>dot</emphasis>) <literal>.</literal>, the
+        <emphasis>vertical bar</emphasis> (or <emphasis>pipe
+        symbol</emphasis>) <literal>|</literal>, the <emphasis>question
+        mark</emphasis> <literal>?</literal>, the
+        <emphasis>asterisk</emphasis> (or <emphasis>star</emphasis>)
+        <literal>*</literal>, the <emphasis>plus sign</emphasis>
+        <literal>+</literal>, <emphasis>parentheses</emphasis>
+        <literal>()</literal>, brackets <literal>[]</literal>, and
+        <emphasis>curly braces</emphasis> <literal>{}</literal>.
+          
 		  <variablelist>
-			<varlistentry>
-			  <term>\</term>
-			  <listitem><para>The BACKSLASH either disables or enables  a special effect.
-			  <example><emphasis role="bold">\.</emphasis> = disables the period special effect that makes it match any character, and turns it into a plain period.</example>
-			  <example><emphasis role="bold">\b</emphasis> = not a b anymore but a “word boundary”</example></para></listitem>
-			</varlistentry>
-			<varlistentry>
-			  <term>^</term>
-			  <listitem><para>As the first character of an expression, the CARET matches the beginning of a line.
-			  <example><emphasis role="bold">^A</emphasis> = an upper-case A at the beginning of a line.</example></para>
-			  <para>As the first character of a class (something that is enclosed by square brackets, see below), the CARET negates what follows it.
-			  <example><emphasis role="bold">[^abc]</emphasis> = NEITHER a, nor b, nor c.</example></para></listitem>
-			</varlistentry>
-			<varlistentry>
-			  <term>$</term>
-			  <listitem><para>As the last character of an expression, the DOLLAR sign matches the end of a line.
-			  <example><emphasis role="bold">^$</emphasis> = an empty line (there is nothing between the beginning and the end of the line).</example></para></listitem>
-			</varlistentry>
-			<varlistentry>
-			  <term>.</term>
-			  <listitem><para>The PERIOD matches any one character.
-			  <example><emphasis role="bold">^...$</emphasis> = A three characters “string” between the beginning and the end of a line.</example></para></listitem>
-			</varlistentry>
-			<varlistentry>
-			  <term>|</term>
-			  <listitem><para>The VERTICAL BAR allows an alternative between two possibilities (OR).
-			  <example><emphasis role="bold">^An&nbsp;|^The&nbsp;</emphasis> = the string “An ” OR the string “The ” at the beginning of a line.</example></para></listitem>
-			</varlistentry>
-			<varlistentry>
-			  <term>?</term>
-			  <listitem><para>The QUESTION MARK quantifies the expression that precedes it as 0 or 1 instances of that expression.<example><emphasis role="bold">&nbsp;an?&nbsp;</emphasis> = a space, followed by a, followed by 0 or 1 n, followed by a space.</example></para></listitem>
-			</varlistentry>
-			<varlistentry>
-			  <term>*</term>
-			  <listitem><para>The ASTERISK quantifies the expressions that precedes it as 0 or MORE instances of that expression.<example><emphasis role="bold">\w+</emphasis> = 0 or more WORD characters.</example></para></listitem>
-			</varlistentry>
-			<varlistentry>
-			  <term>+</term>
-			  <listitem><para>The PLUS quantifies the expression that precedes it as 1 or MORE instances of that expression.<example><emphasis role="bold">[\h\v]+</emphasis> = 1 or MORE instances of either a horizontal white space or a vertical white space.</example></para></listitem>
-			</varlistentry>
-			<varlistentry>
-			  <term>(</term>
-			  <listitem><para>The OPENING PARENTHESIS opens a group that must be closed by a CLOSING PARENTHESIS. The group contents is memorized and can be called by a special effect number.<example><emphasis role="bold">(\b\w+\b)\h\1\b</emphasis> = a group of 1 or more WORD characters that begin at a word boundary (\b) and ends at a word boundary (the second \b). That group defines a word, that is followed by a horizontal white space, followed by the contents of the group (the word), before a word boundary, which means, a word followed by itself.</example></para></listitem>
-			</varlistentry>
-			<varlistentry>
-			  <term>)</term>
-			  <listitem><para>The CLOSING PARENTHESIS closes a group and cannot be used on its own without triggering an error.</para></listitem>
-			</varlistentry>
-			<varlistentry>
-			  <term>[</term>
-			  <listitem><para>The OPENING SQUARE BRACKET opens a range of characters which must be closed by a CLOSING SQUARE BRACKET.<example><emphasis role="bold">li[cs]en[cs]e</emphasis> = all the instances of a misspelled license.</example></para></listitem>
-			</varlistentry>
-			<varlistentry>
-			  <term>{</term>
-			  <listitem><para>The OPENING CURLY BRACE opens a quantifier that must be closed by a CLOSING CURLY BRACE. The quantifier can be an exact number, a minimum, a maximum or a range.<example><emphasis role="bold">\d{4}/\d{1,}</emphasis> = 4 digits followed by a / followed by at least 1 digit.</example></para></listitem>
-			</varlistentry>
-		  </variablelist>
-		</para>
+        <varlistentry>
+          <term>The BACKSLASH: <literal>\</literal></term>
+          <listitem>
+            <para>This character either cancels or activates the special meaning of the following character.
+              <example>
+                <title>Canceling a special meaning</title>
+                <para><literal>\.</literal> cancels the period's special
+                meaning of matching any one character, and turns it into a
+                plain period.</para>
+              </example>
+              <example>
+                <title>Activating a special meaning</title>
+                <para><literal>\b</literal> is no longer just the letter
+                  “b”, but instead becomes a marker for word boundaries.</para>
+              </example>
+            </para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>The CARET: <literal>^</literal></term>
+          <listitem>
+            <para>When it is the first character in the expression, the
+            <emphasis>caret</emphasis> character matches the beginning of
+            a line.
+              <example>
+                <title>Matching the beginning of a line.</title>
+                <para><literal>^A</literal> matches an uppercase A at
+                the beginning of a line.</para>
+              </example>
+            </para>
+            <para>When it is the first character of an expression enclosed
+            in square brackets, the <emphasis>caret</emphasis> negates the
+            characters that follow.
+              <example>
+                <title>Negating characters</title>
+                <para><literal>[^abc]</literal> matches any characters <emphasis role="bold">other</emphasis> than "a", "b", or "c".</para>
+              </example>
+            </para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>The DOLLAR sign: <literal>$</literal></term>
+          <listitem>
+            <para>When it As the last character in an expression, the <emphasis>dollar</emphasis> sign matches the end of a line.
+              <example>
+                <title>Matching the end of the line</title>
+                <para><literal>^$</literal> Matches an empty line
+                (there is nothing between the beginning and the end of the
+                line).</para>
+              </example>
+            </para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>The PERIOD: <literal>.</literal></term>
+          <listitem>
+            <para>Matches any single character.
+              <example><title>Matching any character</title>
+                <para><emphasis role="bold">^...$</emphasis> = A line
+                consisting of a sequence of any three characters.</para>
+              </example>
+            </para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>The VERTICAL BAR: <literal>|</literal></term>
+          <listitem>
+            <para>This character functions as an “OR” and matches either
+            of the expressions that precede or follow it.
+              <example>
+                <title>Choosing between alternatives</title>
+                <para><literal>^An&nbsp;|^The&nbsp;</literal>
+                matches <emphasis>either</emphasis> the sequence “An ”
+                <emphasis>or</emphasis> the sequence “The ” (including
+                the space) at the beginning of a line.</para>
+              </example>
+            </para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>The QUESTION MARK: <literal>?</literal></term>
+          <listitem>
+            <para>This character specifies that either zero or one
+            instance of the preceding character or expression should be
+            matched.
+              <example>
+                <title>Matching either the “a" or “an" form of the
+                indefinite article</title>
+                <para><literal>&nbsp;an?&nbsp;</literal> matches a
+                space, followed by the letter “a”, followed by 0 or 1
+                instances of the letter “n”, followed by a space.</para>
+              </example>
+            </para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>The ASTERISK: <literal>*</literal></term>
+          <listitem>
+            <para>This character specifies that zero or more instances of
+            the preceding character or expressionshould be matched
+              <example>
+                <title>Matching zero or more characters than can be part
+                of a word</title>
+                <para><literal>\w+</literal> matches zero or more
+                <emphasis>word</emphasis> characters.</para>
+              </example>
+            </para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>The PLUS: sign: <literal>+</literal></term>
+          <listitem>
+            <para>This character specifies that one or more instances of
+            the preceding character or expression should be matched.
+              <example>
+                <title>Matching multiple whitespace characters</title>
+                <para><literal>[\h\v]+</literal> matches one or more
+                instances of either a horizontal white or vertical
+                whitespace.</para>
+              </example>
+            </para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>PARENTHESES: <literal>()</literal></term>
+          <listitem>
+            <para>Enclosing a set of characters in PARENTHESES identifies
+            it as a <emphasis>group</emphasis>. The contents of the group
+            are stored in memory and can be reused later. Parentheses are
+            always used in opening and closing pairs. Trying to use only
+            the opening or closing parenthesis on its own will cause an error.
+              <example>
+                <title>Doubled up words</title>
+                <para><literal>(\b\w+\b)\h\1\b</literal> matches a group
+                of characters starting after a word boundary (the first
+                <literal>\b</literal>) followed by one or more WORD
+                characters, and ending at another word boundary (the
+                second <literal>\b</literal>). The group is followed by a
+                horizontal whitespace, and then by the contents of the
+                group (the word matched earlier), which is followed by a
+                word boundary. Therefore, the entire expression matches
+                a word followed by itself.</para>
+              </example>
+            </para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>SQUARE BRACKETS: <literal>[]</literal></term>
+          <listitem>
+            <para>This pair of characters encloses a set of individual
+            characters that each constitute a valid match.
+              <example>
+                <title>How do you spell license?</title>
+                <para><literal>li[cs]en[cs]e</literal> matches the
+                valid “license” and “licence” spellings, as well as the
+                 “lisense” and “lisence” potential misspellings of that
+                 word.</para>
+              </example>
+            </para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>CURLY BRACES: <literal>{}</literal>{</term>
+          <listitem>
+            <para>This pair of characters encloses an <emphasis>exact 
+            number</emphasis>, <emphasis>minimum</emphasis>,
+            <emphasis>maximum</emphasis>, or <emphasis>range</emphasis>
+            specifying how many instances of the preceding character or group should be matched.
+              <example>
+                <title>Code following a specific pattern</title>
+                <para><literal>\d{4}/\d{1,}</literal> matches a code
+                consisting of exactly four digits followed by a / and
+                then one or more digits.</para>
+              </example>
+            </para>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+    </para>
 		
 	  </listitem>
 	</varlistentry>
 	<varlistentry>
-	  <term>The character <emphasis>\</emphasis> is a very special character</term>
-	  <listitem><para>As you have seen above, the character <emphasis>\</emphasis> has a special effect by default and that special effect is to either trigger or disable special effects in other characters. When it precedes a character that has no special effect (neither natural nor hidden), it has no effect.</para>
-	  <para><emphasis>\</emphasis> can be disabled by another <emphasis>\</emphasis>, in which case it becomes <emphasis>\\</emphasis> and matches what is called a <emphasis>backslash</emphasis>.</para></listitem>
-	</varlistentry>
-  </variablelist>
+	  <term>The <literal>\</literal> character is a very special
+    character</term>
+	  <listitem>
+      <para>As stated above, the <literal>\</literal> character has the
+      default special meaning of either cancelling or activating the
+      special meaning of other characters. It has no effect if placed
+      before a character with no special meaning (either by default or by addition).</para>
+      <para>The <literal>\</literal> can be disabled by another
+      <literal>\</literal>, as in <literal>\\</literal> to simply match
+      itself as the <emphasis>backslash</emphasis> character.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
   
   
   <table id="appendix.regex.characters">

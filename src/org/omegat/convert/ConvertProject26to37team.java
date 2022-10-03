@@ -43,6 +43,7 @@ import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.team2.ProjectTeamSettings;
 import org.omegat.core.team2.RebaseAndCommit;
 import org.omegat.core.team2.RemoteRepositoryProvider;
+import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.ProjectFileStorage;
 import org.tmatesoft.svn.core.SVNDepth;
@@ -84,14 +85,20 @@ public final class ConvertProject26to37team {
             }
 
             // convert
-            convert(projectRootFolder);
-            JOptionPane.showMessageDialog(Core.getMainWindow().getApplicationFrame(),
-                    OStrings.getString("TEAM_26_to_37_CONVERTED_MESSAGE"),
-                    OStrings.getString("TEAM_26_to_37_CONFIRM_TITLE"), JOptionPane.INFORMATION_MESSAGE);
+            if (convert(projectRootFolder)) {
+                JOptionPane.showMessageDialog(Core.getMainWindow().getApplicationFrame(),
+                        OStrings.getString("TEAM_26_to_37_CONVERTED_MESSAGE"),
+                        OStrings.getString("TEAM_26_to_37_CONFIRM_TITLE"), JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                // fails to convert
+                JOptionPane.showMessageDialog(Core.getMainWindow().getApplicationFrame(),
+                        OStrings.getString("TEAM_26_to_36_CONVERT_FAILED"),
+                        OStrings.getString("TEAM_26_to_37_CONFIRM_TITLE"), JOptionPane.INFORMATION_MESSAGE);
+            }
         }
     }
 
-    private static void convert(File projectRootFolder) throws Exception {
+    private static boolean convert(File projectRootFolder) throws Exception {
         ProjectProperties props = ProjectFileStorage.loadProjectProperties(projectRootFolder);
 
         String version;
@@ -100,16 +107,20 @@ public final class ConvertProject26to37team {
         if (isSVNDirectory(projectRootFolder)) {
             url = getSVNUrl(projectRootFolder);
             def.setType("svn");
-            version = getSVNTmxVersion(projectRootFolder);
         } else {
             url = getGITUrl(projectRootFolder);
             def.setType("git");
-            version = getGITTmxVersion(projectRootFolder);
         }
         if (url == null) {
-            throw new Exception("Repository URL not defined");
+            Log.logWarningRB("TEAM_26_to_36_CONVERT_URL_NOT_DEFINED", def.getType(), projectRootFolder.getAbsolutePath());
+            return false;
         }
         def.setUrl(url);
+        if (def.getType().equals("git")) {
+            version = getGITTmxVersion(projectRootFolder);
+        } else {
+            version = getSVNTmxVersion(projectRootFolder);
+        }
         saveVersion(projectRootFolder, "omegat/project_save.tmx", version);
 
         // map full project
@@ -125,6 +136,8 @@ public final class ConvertProject26to37team {
         // all data saved - remove old repository
         FileUtils.deleteDirectory(new File(projectRootFolder, ".svn"));
         FileUtils.deleteDirectory(new File(projectRootFolder, ".git"));
+
+        return true;
     }
 
     /**
@@ -170,9 +183,11 @@ public final class ConvertProject26to37team {
      * Get repository URL for SVN.
      */
     private static String getGITUrl(File wc) throws Exception {
-        Repository repository = Git.open(wc).getRepository();
-        StoredConfig config = repository.getConfig();
-        return config.getString("remote", "origin", "url");
+        try (Git git = Git.open(wc)) {
+            Repository repository = git.getRepository();
+            StoredConfig config = repository.getConfig();
+            return config.getString("remote", "origin", "url");
+        }
     }
 
     /**
@@ -192,11 +207,13 @@ public final class ConvertProject26to37team {
      * Get version of "omegat/project_save.tmx" in GIT.
      */
     private static String getGITTmxVersion(File wc) throws Exception {
-        Repository repository = Git.open(wc).getRepository();
-        try (RevWalk walk = new RevWalk(repository)) {
-            Ref localBranch = repository.findRef("HEAD");
-            RevCommit headCommit = walk.lookupCommit(localBranch.getObjectId());
-            return headCommit.getName();
+        try (Git git = Git.open(wc)) {
+            Repository repository = git.getRepository();
+            try (RevWalk walk = new RevWalk(repository)) {
+                Ref localBranch = repository.findRef("HEAD");
+                RevCommit headCommit = walk.lookupCommit(localBranch.getObjectId());
+                return headCommit.getName();
+            }
         }
     }
 

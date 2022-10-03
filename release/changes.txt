@@ -1,13 +1,16 @@
 ----------------------------------------------------------------------
  OmegaT 5.8.0
 ----------------------------------------------------------------------
-  18 Enhancements
-  17 Bug fixes
+  19 Enhancements
+  19 Bug fixes
   0 Localisation updates
 ----------------------------------------------------------------------
 5.8.0 vs 5.7.1
 
   Implemented requests:
+
+  - Hyperlinks to local files in the glossary
+  https://sourceforge.net/p/omegat/feature-requests/1604/
 
   - Do not propose source text as match from other languages
   https://sourceforge.net/p/omegat/feature-requests/1578/
@@ -64,14 +67,20 @@
 
   Bug fixes:
 
-  BundleProperties fIlter should accept UTF-8 properties file
-  https://sourceforge.net/p/omegat/bugs/1116/
+  - When converting git local-managed project, OmegaT raise NPE
+  https://sourceforge.net/p/omegat/bugs/1118/
 
-  - Team project piles up backup files of omegat.project
-  https://sourceforge.net/p/omegat/bugs/1110/
+  - URL likifier raise exception when opening resource property file
+  https://sourceforge.net/p/omegat/bugs/1117/
+
+  BundleProperties filter should accept UTF-8 properties file
+  https://sourceforge.net/p/omegat/bugs/1116/
 
   - doc_src/docgen docker container should handle UID/GID properly
   https://sourceforge.net/p/omegat/bugs/1112/
+
+  - Team project piles up backup files of omegat.project
+  https://sourceforge.net/p/omegat/bugs/1110/
 
   - OpenSSH new key format and ECDSA/ED25519 keys
   https://sourceforge.net/p/omegat/bugs/1107/

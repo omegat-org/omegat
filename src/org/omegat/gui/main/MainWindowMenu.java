@@ -432,7 +432,6 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         optionsMenu.add(optionsGlossaryMenu = createMenu("TF_OPTIONSMENU_GLOSSARY"));
 
         optionsGlossaryMenu.addSeparator();
-        // TaaS options come next (but are added from elsewhere)
 
         optionsMenu.add(optionsDictionaryMenu = createMenu("TF_OPTIONSMENU_DICTIONARY"));
         optionsDictionaryMenu.add(optionsDictionaryFuzzyMatchingCheckBoxMenuItem = createCheckboxMenuItem("TF_OPTIONSMENU_DICTIONARY_FUZZY"));

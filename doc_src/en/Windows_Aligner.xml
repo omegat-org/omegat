@@ -2,36 +2,41 @@
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="windows.aligner">
-  <title id="windows.aligner.title">Aligner</title>
+  <title id="windows.aligner.title">Align Files</title>
+
+  <para>Select
+  <link endterm="menus.tools.align.files.title"
+  linkend="menus.tools.align.files"/> in the <link endterm="menus.tools.title"
+  linkend="menus.tools"/> menu to access this tool.</para>
+
+    <para>OmegaT also offers a command line based alignment mode for key-based
+formats. See <link linkend="launch.with.command.line.mode.console.align"
+endterm="launch.with.command.line.mode.console.align.title"/> for
+details.</para>
 
   <para>Alignment is the process of creating a bilingual translation memory
   from a pair of already translated monolingual documents. Aligning the
-  contents of the files is a two-step process. First, the files are read by
-  the aligner, which attempts to match the segments that correspond to one
-  another in the original and translated texts. Next, the translator reviews
-  the results and makes any necessary manual adjustments.</para>
+  contents of the files is a four-step process:</para>
+  <orderedlist>
+	<listitem><para>specify the source and target languages and select the two
+	files you want to align.</para></listitem>
+	<listitem><para>the files are read by the aligner,
+	which attempts to match the segments that correspond to one another in the
+	original and translated texts,</para></listitem> <listitem><para>the
+	translator reviews the results and makes any necessary manual
+	adjustments,</para></listitem>
+	<listitem><para>save the result to TMX</para></listitem>
+  </orderedlist>
 
-<para>OmegaT also offers a command line based alignment mode for <code>key =
-value</code> type formats. See <link
-linkend="launch.with.command.line.mode.console.align"
-endterm="launch.with.command.line.mode.console.align.title"/> for
-details.</para>
+  <para>The aligner can read all the file formats supported by OmegaT.</para>
   
-  <para>The aligner can read all the file formats supported by OmegaT. Select
-  <link endterm="menus.tools.align.files.title"
-  linkend="menus.tools.align.files"/> in the <link endterm="menus.tools.title"
-  linkend="menus.tools"/> menu to access this tool. This brings up the
-  <guilabel>Align Files</guilabel> dialog, where you specify the source and
-  target languages and select the two files you want to align.</para>
-
   <note>
     <para>If you have a translation project open, the aligner will
     automatically use the languages from that project, as well the
     project-specific segmentation rules, if any.</para>
   </note>
 
-  <para>Clicking the <guibutton>OK</guibutton> button in the <guilabel>Align
-  Files</guilabel> dialog brings up the <guilabel>Align</guilabel> window,
+  <para>After selecting the language and files, click <guibutton>OK</guibutton> button to  bring up the <guilabel>Align</guilabel> window,
   which shows the results of the automatic alignment.</para>
 
   <para>The main part of the window is divided into three columns:
@@ -54,7 +59,7 @@ details.</para>
     </itemizedlist></para>
 
   <section id="windows.aligner.adjust">
-    <title id="windows.aligner.adjust.title">Parameters</title>
+    <title id="windows.aligner.adjust.title">Settings</title>
 
     <para>In this step, the bottom part of the window presents various
     parameters and options you can change if the initial alignment looks like
@@ -67,10 +72,10 @@ details.</para>
     <para>The available parameters and options are:</para>
 
     <variablelist>
-      <para><emphasis>Parameters</emphasis></para>
+	  <title>Parameters</title>
 
       <varlistentry>
-        <term><guilabel>Comparison mode</guilabel></term>
+        <term>Comparison mode</term>
 
         <listitem>
           <itemizedlist>
@@ -97,7 +102,7 @@ details.</para>
       </varlistentry>
 
       <varlistentry>
-        <term><guilabel>Algorithm:</guilabel></term>
+        <term>Algorithm:</term>
 
         <listitem>
           <itemizedlist>
@@ -119,7 +124,7 @@ details.</para>
       </varlistentry>
 
       <varlistentry>
-        <term><guilabel>Calculator:</guilabel></term>
+        <term>Calculator:</term>
 
         <listitem>
           <itemizedlist>
@@ -141,7 +146,7 @@ details.</para>
       </varlistentry>
 
       <varlistentry>
-        <term><guilabel>Counter:</guilabel></term>
+        <term>Counter:</term>
 
         <listitem>
           <itemizedlist>
@@ -170,10 +175,10 @@ details.</para>
     </variablelist>
 
     <variablelist>
-      <para><emphasis>Options</emphasis></para>
+	  <title>Options</title>
 
       <varlistentry>
-        <term><guilabel>Segment</guilabel></term>
+        <term>Segment</term>
 
         <listitem>
           <para>The aligner uses sentence segmentation by default. Uncheck the
@@ -184,7 +189,7 @@ details.</para>
       </varlistentry>
 
       <varlistentry>
-        <term><guilabel>Remove Tags</guilabel></term>
+        <term>Remove Tags</term>
 
         <listitem>
           <para>The aligner includes tags in the segments by default. Uncheck
@@ -195,7 +200,7 @@ details.</para>
       </varlistentry>
 
       <varlistentry>
-        <term><guilabel>Highlight</guilabel></term>
+        <term>Highlight</term>
 
         <listitem>
           <para>By default, the aligner highlights all numbers in the source
@@ -205,16 +210,12 @@ details.</para>
       </varlistentry>
 
       <varlistentry>
-        <term><guibutton>Rules...</guibutton></term>
+        <term>Rules...</term>
 
         <listitem>
-          <para>Clicking this button lets you edit the <link
-          linkend="segmentation.rules">segmentation rules</link>. The general
-          OmegaT rules are edited unless you launched the aligner from a project
-          containing project-specific segmentation rules. This option can be
-          useful if you defined project-specific rules to match the text of the
-          source language and need to apply similar segmentation to the target
-          language to get better matches.</para>
+          <para>Clicking this button lets you edit the segmentation rules that
+          apply to this project. See <link linkend="app.segmentation"
+          endterm="app.segmentation.title"/> for details.</para>
 
           <warning>
             <para>If you modify the segmentation rules, you will be asked if
@@ -228,14 +229,13 @@ details.</para>
       </varlistentry>
 
       <varlistentry>
-        <term><guibutton>Filters...</guibutton></term>
+        <term>Filters...</term>
 
         <listitem>
-          <para>This option lets you modify the <link          
-          linkend="dialogs.preferences.file.filters">file filters</link>. As with segmentation,
-          the general OmegaT filters will be modified unless you have launched
-          the aligner from an OmegaT project with project-specific file filter
-          options.</para>
+          <para>Clicking this button lets you edit the file filters that
+          apply to this project. See <link linkend="dialogs.preferences.file.filters"
+          endterm="dialogs.preferences.file.filters.title"/> for details.</para>
+
 
           <warning>
             <para>If you modify the file filters, you will be asked if you
@@ -247,20 +247,15 @@ details.</para>
       </varlistentry>
 
       <varlistentry>
-        <term><guibutton>Pattern...</guibutton></term>
+        <term>Pattern...</term>
 
         <listitem>
           <para>This option lets you enter a regular expression define the
           pattern used for highlighting text in the source and target
-          segments. By default, the aligner uses the <literal>\d+</literal> to
-          highlight numbers. If your texts contain other elements, such as
-          trademarks, that would be useful to highlight, you can modify the
-          regular expression in this dialog to include those elements.</para>
-          <para><emphasis role="bold">Example:</emphasis> To highlight a
-          trademark in addition to numbers, you can change the regular
-          expression in the dialog to
-          <literal>\d+|&lt;trademark&gt;</literal>. (Replace &lt;trademark&gt;
-          with the actual trademark name.)</para>
+          segments. By default, the aligner uses <literal>\d+</literal> to
+          highlight numbers. If your texts contain other elements that would be
+          useful to highlight, modify the regular expression to include those
+          elements, separated by a <literal>|</literal>.</para>
         </listitem>
       </varlistentry>      
     </variablelist>
@@ -334,7 +329,7 @@ details.</para>
 
     <variablelist>
       <varlistentry>
-        <term><guimenuitem>Move Up</guimenuitem> (<keycap>U</keycap>)</term>
+        <term>Move Up (<keycap>U</keycap>)</term>
         <listitem>
           <para>Moves the selected segment, or block of consecutive segments, up
           one row.</para>
@@ -343,7 +338,7 @@ details.</para>
         </listitem>
       </varlistentry>
       <varlistentry>
-        <term><guimenuitem>Move Down</guimenuitem> (<keycap>D</keycap>)</term>
+        <term>Move Down (<keycap>D</keycap>)</term>
         <listitem>
           <para>Moves the selected segment, or block of consecutive segments,
           down one row.</para>
@@ -352,7 +347,7 @@ details.</para>
         </listitem>
       </varlistentry>
       <varlistentry>
-        <term><guimenuitem>Split</guimenuitem> (<keycap>S</keycap>)</term>
+        <term>Split (<keycap>S</keycap>)</term>
         <listitem>
           <para>If a single segment is selected, this command opens the
           <guilabel>Split Text</guilabel> dialog. Use the mouse or arrow keys to
@@ -369,19 +364,19 @@ details.</para>
         </listitem>
       </varlistentry>
       <varlistentry>
-        <term><guimenuitem>Merge</guimenuitem> (<keycap>M</keycap>)</term>
+        <term>Merge (<keycap>M</keycap>)</term>
         <listitem>
           <para>If only one segment is selected, the aligner will merge it with
           the following segment. If two or more segments are selected, they will
           all be merged, but remain in separate cells. Calling the command on
           the same selection one more time merges the contents of all selected
           cells into a single cell.</para>
-          <para>This command is also available from the button to the right of
+		  <para>This command is also available from the button to the right of
           the main window pane.</para>
         </listitem>
       </varlistentry>
       <varlistentry>
-        <term><guimenuitem>Edit</guimenuitem> (<keycap>E</keycap>)</term>
+        <term>Edit (<keycap>E</keycap>)</term>
         <listitem>
           <para>This command can only be performed on a single segment. Calling
           this command opens the <guilabel>Edit Text</guilabel> dialog, which
@@ -397,7 +392,7 @@ details.</para>
         </listitem>
       </varlistentry>
       <varlistentry>
-        <term><guimenuitem>Mark Accepted</guimenuitem>
+        <term>Mark Accepted
         (<keycap>A</keycap>)</term>
         <listitem>
           <para>Use this command to confirm that the alignment of the segments
@@ -406,7 +401,7 @@ details.</para>
         </listitem>
       </varlistentry>
       <varlistentry>
-        <term><guimenuitem>Mark Needs Review</guimenuitem>
+        <term>Mark Needs Review
         (<keycap>R</keycap>)</term>
         <listitem>
           <para>Use this command to identify a row or block of rows for which
@@ -415,7 +410,7 @@ details.</para>
         </listitem>
       </varlistentry>
       <varlistentry>
-        <term><guimenuitem>Clear Mark</guimenuitem> (<keycap>C</keycap>)</term>
+        <term>Clear Mark (<keycap>C</keycap>)</term>
         <listitem>
           <para>Use this command to remove one or more marks set by the
           <guilabel>Mark Accepted</guilabel> or <guilabel>Mark Needs
@@ -423,7 +418,7 @@ details.</para>
         </listitem>
       </varlistentry>
       <varlistentry>
-        <term><guimenuitem>Realign Pending</guimenuitem>
+        <term>Realign Pending
         (<keycombo><keycap>C</keycap><keycap>R</keycap></keycombo>)</term>
         <listitem>
           <para>If any rows have been marked as accepted, use this command to
@@ -431,21 +426,21 @@ details.</para>
         </listitem>
       </varlistentry>
       <varlistentry>
-        <term><guimenuitem>Keep All</guimenuitem></term>
+        <term>Keep All</term>
         <listitem>
           <para>Use this command to tick the <guilabel>Keep</guilabel> check box
           for all rows.</para>
         </listitem>
       </varlistentry>
       <varlistentry>
-        <term><guimenuitem>Keep None</guimenuitem></term>
+        <term>Keep None</term>
         <listitem>
           <para>Use this command to uncheck the <guilabel>Keep</guilabel> check
           box for all rows.</para>
         </listitem>
       </varlistentry>
       <varlistentry>
-        <term><guimenuitem>Toggle Selected</guimenuitem>
+        <term>Toggle Selected
         (<keycap>K</keycap>)</term>
         <listitem>
           <para>Use this command to switch the <guilabel>Keep</guilabel> check
@@ -454,7 +449,7 @@ details.</para>
         </listitem>
       </varlistentry>
       <varlistentry>
-        <term><guimenuitem>Start Pinpoint Align</guimenuitem>
+        <term>Start Pinpoint Align
         (<keycap>Space</keycap>)</term>
         <listitem>
           <para>If the corresponding segments are several rows apart and you

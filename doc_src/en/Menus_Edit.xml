@@ -141,8 +141,9 @@
       <term id="menus.edit.create.glossary.entry.title">Create Glossary Entry		  <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>G</keycap></keycombo>
 	  </term>
       <listitem>
-        <para>Allows the user to create an entry in the default glossary
-        file.</para>
+        <para>Allows the user to create an entry in <link
+        linkend="project.folder.glossary.txt"
+        endterm="project.folder.glossary.txt.title"/>.</para>
 		<para>There are two ways to use this function. There first is to call
 		the dialog and then manually fill in the various fields. The second is
 		to select items in one of the OmegaT panes and sequentially call the

@@ -4,7 +4,13 @@
 <section id="app.glossaries">
   <title id="app.glossaries.title">Glossaries</title>
 
-  <para>Glossaries are terminology files.</para>
+  <para>Glossaries are terminology files that are stored in the <link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/> folder.</para>
+
+  <para>All terms in a segment with a match in <emphasis>any</emphasis> of
+  the glossaries  will be displayed in the <link
+  linkend="panes.glossary" endterm="panes.glossary.title"/> pane.</para>
+
+  <para>Source terms can be multi-word expressions.</para>
 
   <para>There are 2 kinds of glossary files:
 
@@ -12,83 +18,68 @@
 	<varlistentry>
 	  <term>The project glossary</term>
 	  <listitem>
-		<para>This is the project writeable glossary. It is created the first
-          time you use <link linkend="menus.edit.create.glossary.entry"
-          endterm="menus.edit.create.glossary.entry.title"/>.</para>
-		  <para>You can access it with <link
+		<para>You can use <link linkend="menus.edit.create.glossary.entry"
+          endterm="menus.edit.create.glossary.entry.title"/> to enter new terms in this glossary. It is called the <emphasis>writable</emphasis> glossary for this reason.</para>
+		  <para>You can also access it with <link
 		  linkend="menus.project.access.project.contents.title"
 		  endterm="menus.project.access.project.contents.title"/>, open it in a
-		  text editor, modify it with a text editor. As soon as you have saved
-		  your modifications, they will be taken into account by OmegaT.</para>
+		  text editor and modify it.</para>
+		  <para>You do not need to prepare the file in advance.</para>
+		  <para>It will be created the first time you add an entry to the
+		  glossary.</para>
+		  <note><para>If you choose to use an existing file as the default
+		  glossary, check its format beforehand. OmegaT will record all new
+		  entries in tab-separated format, and save the file in UTF-8 encoding
+		  without checking the original format or character set.</para></note>
 	  </listitem>
 	</varlistentry>
+	
 	<varlistentry>
-	  <term>Reference glossaries</term>
-	  <listitem><para>They are terminology files in a format that OmegaT recognises. They cannont be modified directly by OmegaT, but you can access them and modify them in a text editor and save them to have your modifications taken into account right away.</para></listitem>
+	  <term>The reference glossaries</term>
+	  <listitem><para>They are terminology files in a format that OmegaT
+	  recognises. You cannot modify them from the OmegaT interface like the
+	  project glossary, but you can access them and modify them in a text
+	  editor.</para></listitem>
 	</varlistentry>
   </variablelist>
-  </para>
-  
-  <para>All terms in a segment with a match in <emphasis>any</emphasis> of
-  the glossaries attached to the project will be displayed in the <link
-  linkend="panes.glossary" endterm="panes.glossary.title"></link> pane.</para>
+</para>
+
+<note><para>As soon as you save the modifications you have made to any glossary,
+they will be taken into account by OmegaT and term matches will be automatically displayed in the <link
+  linkend="panes.glossary" endterm="panes.glossary.title"/> pane.</para></note>
+ 
 
   <section id="glossaries.glossary.folder">
     <title id="glossaries.glossary.folder.title">The glossaries folder</title>
 
-    <para>By default, each project contains a <link linkend="project.folder.glossary" endterm="project.folder.glossary.title"></link> subfolder to store the writable glossary and any reference glossaries you want to add to the project.</para>
+    <para>By default, each project contains a <link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/> folder to store the writable glossary and any reference glossaries you want to add to the project. See <link linkend="dialogs.project.properties.file.locations.glossaries" endterm="dialogs.project.properties.file.locations.glossaries.title"/> for details.</para>
 
-    <para>You can change the name and location of this folder from the <link linkend="dialogs.project.properties.file.locations.glossaries">project properties</link> dialog. If you have several reference glossaries you use in all your projects, for example, you could create a <filename class="directory">/Documents/Terminology/</filename> folder and assign it as the glossaries folder for all your projects. You can also use subfolders to organize your glossaries by domain (<filename class="directory">/Documents/Terminology/<parameter>&lt;domain&gt;</parameter></filename>) or client (<filename class="directory">/Documents/Terminology/<parameter>&lt;client&gt;</parameter></filename>) and use the subfolder appropriate to your project as the glossaries folder.</para>
+	<para>All glossaries must be located in the <link
+	linkend="project.folder.glossary" endterm="project.folder.glossary.title"/>
+	folder. Glossaries located in nested folders are also recognized.</para>
 
-    <para>For the sake of simplicity, explanations in this manual will use
-    the default <filename class="directory">glossary/</filename> subfolder in the project folder to refer to the glossaries folder assigned to the project.</para>
+	<para>You can create multiple terminology folders based on subject or client
+	and point at them as your project requires by using the  <link
+	linkend="dialogs.project.properties"
+	endterm="dialogs.project.properties.title"/>.</para>
 
+	
   </section>
 
   <section id="glossaries.default.glossary">
-    <title id="glossaries.default.glossary.title">Default glossary</title>
+    <title id="glossaries.default.glossary.title">Project glossary</title>
 
-    <para>The default writable glossary is located in the
-    <filename class="directory">glossary/</filename> subfolder of the project
-    and called <filename>glossary.txt</filename>.</para>
+    <para>The project writable glossary is by default located in the <link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/> folder
+    and called .</para>
 
-    <para>You can change its name and location in the <link linkend="dialogs.project.properties.file.locations.writable.glossary">project properties</link> dialog, but you must give it a <filename>.txt</filename> or
-    <filename>.utf8</filename> extension, and store it in the <filename class="directory">glossary/</filename> folder or in one of its subfolders.</para>
+    <para>You can change its name and location in the <link
+    linkend="dialogs.project.properties.file.locations.writable.glossary"
+    endterm="dialogs.project.properties.file.locations.writable.glossary.title"/>
+    dialog, but you must give it a <filename>.txt</filename> or
+    <filename>.utf8</filename> extension, and store it within the <link
+    linkend="project.folder.glossary" endterm="project.folder.glossary.title"/>
+    folder or in one of its subfolders.</para>
 
-    <para>Continuing the above example, you could set a <filename>domain-specific-glossary.txt</filename> or <filename>client-specific-glossary.txt</filename> file as the writable glossary in the applicable domain or client folder, or in a subfolder thereof. This gives you significant flexibility in terms of organizing your glossary files in a way that best suits your workflow.</para>
-
-    <para>You do not need to prepare the writable glossary file in advance.
-    If it does not exist when you set up your project, it will be created the
-    first time you add an entry to the glossary. If you choose to use an
-    existing file as the default glossary, check its format beforehand. OmegaT will record all new entries in tab-separated format, and save the file in UTF-8 encoding without checking the original format or character set.</para>
-  </section>
-
-  <section id="glossaries.usage">
-    <title id="glossaries.usage.title">Usage</title>
-
-    <para>To use an existing glossary, simply place it in the
-    <filename class="directory">glossary</filename> folder after creating the project.
-    OmegaT automatically detects glossary files in
-    this folder when you open a project.</para>
-
-    <para>To add a new term to the writable glossary use <link linkend="menus.edit.create.glossary.entry" endterm="menus.edit.create.glossary.entry.title"/>. New terms are recognized as soon as they are added. If you want to add terms to other reference glossaries, you will have to edit them in an external text editor. Again, the changes will be recognized as soon as the modified file is saved.</para>
-
-    <para>Source terms can be multi-word expressions.</para>
-
-    <para>By default, the glossary function uses stemming to find matches. You can deactivate the  <link linkend="dialogs.preferences.glossary.use.stemming.for.glossary.entries" endterm="dialogs.preferences.glossary.use.stemming.for.glossary.entries.title"/> option in the preferences if you want to find only exact matches for terms. You can also adjust various glossary behavior and display options in <link linkend="dialogs.preferences.glossary" endterm="dialogs.preferences.glossary.title"/>.</para>
-
-    <para>In the <link linkend="panes.glossary" endterm="panes.glossary.title"/> pane, the source term is displayed before the “=” sign and the target terms after it. If the entry contains comments, they are numbered and displayed on separate lines below the terms. Terms found in the writable glossary are shown in bold, while those from other glossaries are presented as regular text.</para>
-
-    <para>Use the <link linkend="panes.editor.auto.completion.menu" endterm="panes.editor.auto.completion.menu.title"/> context menu for glossary
-    matches.</para>
-
-    <para>You can use the <link linkend="menus.view.mark.glossary.matches"
-    endterm="menus.view.mark.glossary.matches.title"/> option in the <link
-    linkend="menus.view" endterm="menus.view.title"/> menu to underline source
-    terms in the current segment that have a match in one of the glossaries. You
-    can then right-click on the underlined term and select the desired target
-    term to insert it at in your translation at the current cursor
-    location.</para>
   </section>
 
   <section id="glossaries.fileformat">
@@ -99,8 +90,9 @@
     target term in the second column, and an optional comment in the third
     column.</para>
 
-    <para>Plain text glossaries can be “tab-separated values” (TSV) or
-    “comma-separated values” (CSV) files. Reference glossaries can also use the TermBase eXchange *(TBX) ISO standard format.</para>
+    <para>Glossaries can be “tab-separated values” (TSV) or “comma-separated
+    values” (CSV) files or can also use the TermBase eXchange (TBX)
+    format.</para>
 
     <para>The writable glossary for the project is always a TSV file saved in
     UTF-8 encoding.</para>
@@ -183,60 +175,5 @@
         </tr>
       </tbody>
     </table>
-
-    <para>All glossaries must be located in the <filename class="directory">glossary</filename> subfolder. Glossaries located in
-    nested folders are also recognized.</para>
-  </section>
-
-  <section id="glossaries.common.issues">
-    <title id="glossaries.common.issues.title">Common issues</title>
-    
-    <para><emphasis role="bold"> Problem: No glossary terms</emphasis> are displayed.</para>
-    <para><emphasis>Probable causes:</emphasis></para>
-
-    <itemizedlist>
-      
-      <listitem>
-        <para>There is no valid glossary file in the <filename class="directory">glossary</filename> folder.</para>
-      </listitem>
-    
-      <listitem>
-        <para>The glossary file is empty.</para>
-      </listitem>
-    
-      <listitem>
-        <para>Entries in a plain text glossary file are not separated by a TAB character.</para>
-      </listitem>
-    
-      <listitem>
-        <para>The glossary file does not have a <link linkend="glossary.extensions">recognized extension</link>.</para>
-      </listitem>
-    
-      <listitem>
-        <para>The <link linkend="dialogs.preferences.glossary.use.stemming.for.glossary.entries">stemming option</link> is disabled, and there is no <emphasis role="bold">exact</emphasis> match between the source text in the document and the glossary entry.</para>
-      </listitem>
-      
-      <listitem>
-        <para>The glossary file is not in the correct encoding.</para>
-      </listitem>
-      
-      <listitem>
-        <para>The current segment does not contain any terms with a match in any of the glossaries.</para>
-      </listitem>
-      
-      <listitem>
-        <para>The project has not been reloaded after fixing the
-        probable cause.</para>
-      </listitem>
-
-    </itemizedlist>
-
-    <para><emphasis role="bold">Problem: Some characters fail to display correctly in the glossary pane, but display properly in the <link linkend="panes.editor" endterm="panes.editor.title"/> pane.</emphasis></para>
-
-    <itemizedlist>
-      <listitem>
-        <para>The extension and file encoding do not match.</para>
-      </listitem>
-    </itemizedlist>
   </section>
 </section>

@@ -53,6 +53,10 @@
 	(<link linkend="project.folder.project.save.tmx"
 	endterm="project.folder.project.save.tmx.title"/>) but is <emphasis>strictly
 	limited</emphasis> to what you have translated so far.</para>
+
+	<para>You can also use the <link linkend="menus.tools.align.files"
+	endterm="menus.tools.align.files.title"/> tool to create a TMX from two
+	files in a format that OmegaT supports.</para>
   </section>
 
   <section id="how.to.use.tm.reuse.tm">

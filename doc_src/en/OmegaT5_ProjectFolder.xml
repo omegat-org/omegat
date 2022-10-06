@@ -177,7 +177,28 @@
 
   <section id="project.folder.dictionary">
     <title id="project.folder.dictionary.title">dictionary</title>
-    <para>This folder is initially empty, and is used to store any dictionaries you add to the project. See <link linkend="app.dictionaries" endterm="app.dictionaries.title"/> for details.</para>
+    <para>This folder is initially empty, and is used to store any dictionaries you add to the project.</para>
+
+	<para>Dictionary terms that match parts of the segment are displayed in the
+	<link linkend="panes.dictionary" endterm="panes.dictionary.title"/> pane. See
+	<link linkend="dialogs.preferences.dictionary"
+	endterm="dialogs.preferences.dictionary.title"/> in the <link linkend="dialogs.preferences" endterm="dialogs.preferences.title"/> for details.</para>
+
+    <para>OmegaT supports dictionaries in the StarDict or in the Lingvo DSL
+    format. You can find some dictionaries on the <ulink url="https://sourceforge.net/p/omegat/wiki/Reference%20Material/">OmegaT
+        Wiki</ulink>. To install the dictionaries:</para>
+
+    <orderedlist>
+      <listitem>
+        <para>download the file - it should be a tarball archive (extension
+        <filename>tar.bz</filename> or <filename>tar.bz2</filename>),</para>
+      </listitem>
+      <listitem>
+        <para>extract its contents into this folder. There should be three files
+        per dictionary, with extensions <filename>dz</filename>,
+        <filename>idx</filename> and <filename>ifo</filename>.</para>
+      </listitem>
+    </orderedlist>
   </section>
 
   <section id="project.folder.glossary">

@@ -259,6 +259,7 @@ appropriate service to use the machine translation options.</para></note>
   <section id="dialogs.preferences.dictionary">
     <title id="dialogs.preferences.dictionary.title">Dictionary</title>
 
+	<para>Preferences here define how the contents of the <link linkend="project.folder.dictionary" endterm="project.folder.dictionary.title"/> folder are displayed in the <link linkend="panes.dictionary" endterm="panes.dictionary.title"/> pane.</para>
     <variablelist>
       <varlistentry id="dialogs.preferences.dictionary.automatically.search.segment">
         <term

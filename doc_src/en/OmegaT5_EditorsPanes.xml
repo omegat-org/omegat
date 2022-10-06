@@ -348,7 +348,9 @@
   <section id="panes.dictionary">
     <title id="panes.dictionary.title">Dictionary</title>
 
-    <para>Dictionaries refer to the electronic equivalents of the printed dictionaries, such as Merriam-Webster, Duden, or Larousse, that you might have on your desk. See <link linkend="app.dictionaries" endterm="app.dictionaries.title"/> for details.</para>
+	<para>This pane will display the segment terms that match terms in installed
+	dictionaries. See <link linkend="project.folder.dictionary"
+	endterm="project.folder.dictionary.title"/> for details.</para>
   </section>
 
   <section id="panes.machinetranslation">

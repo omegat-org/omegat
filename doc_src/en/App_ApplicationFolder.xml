@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="application.folder">
+  <title id="application.folder.title">Application Folder</title>
+
+  <variablelist>
+	<varlistentry id="application.folder.scripts">
+	  <term id="application.folder.scripts.title">scripts</term>
+	  <listitem><para></para></listitem>
+	</varlistentry>
+	<varlistentry id="">
+	  <term id=".title"></term>
+	  <listitem><para></para></listitem>
+	</varlistentry>
+	<varlistentry id="">
+	  <term id=".title"></term>
+	  <listitem><para></para></listitem>
+	</varlistentry>
+	<varlistentry id="">
+	  <term id=".title"></term>
+	  <listitem><para></para></listitem>
+	</varlistentry>
+	<varlistentry id="">
+	  <term id=".title"></term>
+	  <listitem><para></para></listitem>
+	</varlistentry>
+	<varlistentry id="">
+	  <term id=".title"></term>
+	  <listitem><para></para></listitem>
+	</varlistentry>
+	<varlistentry id="">
+	  <term id=".title"></term>
+	  <listitem><para></para></listitem>
+	</varlistentry>
+	<varlistentry id="">
+	  <term id=".title"></term>
+	  <listitem><para></para></listitem>
+	</varlistentry>
+	<varlistentry id="">
+	  <term id=".title"></term>
+	  <listitem><para></para></listitem>
+	</varlistentry>
+	<varlistentry id="">
+	  <term id=".title"></term>
+	  <listitem><para></para></listitem>
+	</varlistentry>
+	<varlistentry id="">
+	  <term id=".title"></term>
+	  <listitem><para></para></listitem>
+	</varlistentry>
+	<varlistentry id="">
+	  <term id=".title"></term>
+	  <listitem><para></para></listitem>
+	</varlistentry>
+  </variablelist>
+  
+  <para></para>
+</chapter>

@@ -55,7 +55,10 @@
   
   <section id="project.folder.source">
     <title id="project.folder.source.title">source</title>
-    <para>The source folder contains the files to translate. You can freely add or remove files from that folder at any time. You can also structure the source folder in any form you like.</para>
+    <para>The source folder contains the files to translate.</para>
+	<para>The contents of the files in a format that OmegaT supports will be displayed in the <link linkend="panes.editor" endterm="panes.editor.title"/> pane. See <link linkend="dialogs.preferences.file.filters" endterm="dialogs.preferences.file.filters.title"/> for details.</para>
+
+	<para>You can freely add or remove files from that folder at any time. You can also structure the source folder in any form you like.</para>
 	<para>If your translation project involves a number of folders and you feel like working on one folder at a time, change the <link linkend="dialogs.project.properties.file.locations.source.files" endterm="dialogs.project.properties.file.locations.source.files.title"/> as you wish.</para>
   </section>
 
@@ -232,7 +235,7 @@
         <listitem>
           <para>This is the most important file in the project. An empty file is automatically generated when you create a new project, and is gradually filled with the translations of the text in files located in the <link linkend="project.folder.source" endterm="project.folder.source.title"/> folder.</para>
 		  <para>It constitutes the working translation memory of the project.</para>
-		  <para>OmegaT creates regular backups of that file (up to 10). They are named <filename>project_save.tmx.[time stamp].bak</filename> and can easily be renamed to <filename>project_save.tmx</filename> in case the project memory is broken and needs replacement.</para> 
+		  <para>OmegaT creates regular backups of that file (up to 10). They are named <filename>project_save.tmx.[time stamp].bak</filename> and can easily be renamed to <filename>project_save.tmx</filename> in case the project memory is broken and needs replacement. See <link linkend="how.to.restore.your.data" endterm="how.to.restore.your.data.title"/> for details.</para> 
         </listitem>
       </varlistentry>
 
@@ -258,7 +261,8 @@
         </listitem>
       </varlistentry>
 
-      <varlistentry id="project.folder.omegat.spellcheck">
+      <varlistentry id="
+						project.folder.omegat.spellcheck">
         <term id="project.folder.omegat.ignored.words.title">ignored_words.txt</term>
         <term id="project.folder.omegat.learned.words">learned_words.txt</term>
         <listitem>

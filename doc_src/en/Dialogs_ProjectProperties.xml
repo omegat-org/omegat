@@ -3,19 +3,16 @@
 <section id="dialogs.project.properties">
   <title id="dialogs.project.properties.title">Project Properties</title>
 
-<section id="dialogs.project.properties.create.new.project">
-  <title id="dialogs.project.properties.create.new.project.title">Create New Project</title>
-
-  <para>This dialog opens when you create a new project, after you have named
-  it. The dialog is otherwise the same as the <link
-  linkend="dialogs.project.properties"
-  endterm="dialogs.project.properties.title"/> described here.</para>
-</section>
-  
   <para>This dialog is accessible by selecting <link
   linkend="menus.project.properties" endterm="menus.project.properties.title"/>
   in the <link linkend="menus.project" endterm="menus.project.title"/>
   menu.</para>
+
+  <para>The dialog that is displayed when you create a new project, after you
+  have named it, is the same as the one described here. See <link
+  linkend="introduction.create.and.open.new.project"
+  endterm="introduction.create.and.open.new.project.title"/> for details.</para>
+  
 
   <warning><para>The options displayed in <link linkend="dialogs.preferences"
   endterm="dialogs.preferences.title"/> or <link linkend="menus.options"
@@ -302,26 +299,18 @@
     <title id="dialogs.project.properties.file.locations.title">File locations</title>
 
 	<para>An OmegaT translation project consists of a number of resources in
-	separate folders, of an <filename>omegat.project</filename> file that
-	stores the location of all the folders and of a
-	<filename>project_save.tmx</filename> translation memory file that will
-	contain all the translations made while working on that project.</para>
+	separate folders.</para>
 
 	<para>When a new project is created, OmegaT proposes to create a project
 	folder that contains all the resources used in the translation, but that
 	structure is not compulsory. Resource folders can be located anywhere on
-	your machine, including on shared disks.</para>
+	your machine, including on shared disks. See <link
+	linkend="project.folder" endterm="project.folder.title"/> for
+	details.</para>
 
 	<para>You can modify the structure of your project by adding or removing
 	files from the folders, or even by changing the folders the project
 	will use, at will, even during the course of the translation.</para>
-
-	<para>The location of all resources is stored in the <link
-	linkend="project.folder.omegat.project"
-	endterm="project.folder.omegat.project.title"/> file of the <link
-	linkend="project.folder" endterm="project.folder.title"/>. See <link
-	linkend="project.folder" endterm="project.folder.title"/> for
-	details.</para>
 
 	<para>You can access all the locations with <link
 	linkend="menus.project.access.project.contents"

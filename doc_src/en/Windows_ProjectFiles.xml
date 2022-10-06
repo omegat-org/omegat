@@ -53,9 +53,7 @@
   </itemizedlist>
 
   <para>The set of <emphasis role="bold">Unique</emphasis> segments is computed
-  by taking all the segments and removing all duplicate segments (the definition
-  of “unique” is case-sensitive: &quot;Run&quot; and &quot;run&quot; are treated
-  as being different).</para>
+  by taking all the segments and removing all duplicate segments.</para>
 
   <para>The difference between &quot;Number of segments&quot; and &quot;Number
   of unique segments&quot; provides an approximate idea of the number of

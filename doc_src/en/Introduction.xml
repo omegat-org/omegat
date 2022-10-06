@@ -139,8 +139,8 @@
     <para>That project will hold all your default ressources since an OmegaT
     project is simply a set of folders and folders.</para>
 
-    <para>The <link linkend="dialogs.project.properties.create.new.project"
-    endterm="dialogs.project.properties.create.new.project.title"/> dialog opens
+    <para>The <link linkend="dialogs.project.properties"
+    endterm="dialogs.project.properties.title"/> dialog opens
     after you have named your project.</para>
 
 	<para>The dialog is identical to the <link
@@ -321,7 +321,7 @@
   </section>
   
   <section id="introduction.manage.your.segments">
-    <title id="introduction.manage.your.segments.title">Manage Your Segments</title>
+    <title id="introduction.manage.your.segments.title">Manage your segments</title>
 	<para>The default setting for a translation project is to create <emphasis>sentences</emphasis> by splitting the <emphasis>paragraph blocks</emphasis> found in the document. See <link linkend="dialogs.project.properties.options.segmentation" endterm="dialogs.project.properties.options.segmentation.title"/> for details.</para>
 	
 	<para>Segments that are within paragraph can be further segmented, or "unsegmented" (merged).</para>
@@ -346,7 +346,7 @@
   </section>
   
   <section id="introduction.manage.your.tags">
-    <title id="introduction.manage.your.tags.title">Manage Your Tags</title>
+    <title id="introduction.manage.your.tags.title">Manage your tags</title>
 
     <para>If the documents you translate use bold, italics, or other decorative
     elements, OmegaT will convert them into tags that enclose the decorated
@@ -406,7 +406,7 @@
   </section>
 
   <section id="introduction.review.the.translation">
-    <title id="introduction.review.the.translation.title">Review the translation</title>
+    <title id="introduction.review.the.translation.title">Review your translation</title>
 
 	<para>Feel free to modify the <link
 	linkend="panes" endterm="panes.title"/> layout and <link
@@ -463,7 +463,7 @@
   </section>
 
   <section id="introduction.one.more.thing">
-    <title id="introduction.one.more.thing.title">Manage Your Projects</title>
+    <title id="introduction.one.more.thing.title">Manage your projects</title>
 
     <itemizedlist>
 

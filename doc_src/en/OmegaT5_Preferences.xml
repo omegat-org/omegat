@@ -981,6 +981,11 @@ appropriate service to use the machine translation options.</para></note>
   endterm="app.segmentation.title"/> for general explanations about
   segmentation (global or local, paragraph or sentence, etc.)</para>
 
+<warning><para>This preference dialog accesses only the settings available in
+the <link linkend="configuration.folder" endterm="configuration.folder.title"/>
+folder. If you have set local rules, check <link linkend="dialogs.project.properties.segmentation" endterm="dialogs.project.properties.segmentation.title"/> in the <link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/>
+instead.</para></warning>
+  
   <section id="dialogs.preferences.segmentation.setup.scope">
 	<title id="dialogs.preferences.segmentation.setup.scope.title">Language
 	rules</title>

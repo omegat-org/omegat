@@ -954,6 +954,12 @@ public final class MainWindowMenuHandler {
         Preferences.setPreference(Preferences.MT_AUTO_FETCH, enabled);
     }
 
+    public void optionsGlossaryFuzzyMatchingCheckBoxMenuItemActionPerformed() {
+        Preferences.setPreference(Preferences.GLOSSARY_STEMMING,
+                mainWindow.menu.optionsGlossaryFuzzyMatchingCheckBoxMenuItem.isSelected());
+        Preferences.save();
+    }
+
     public void optionsDictionaryFuzzyMatchingCheckBoxMenuItemActionPerformed() {
         Preferences.setPreference(Preferences.DICTIONARY_FUZZY_MATCHING,
                 mainWindow.menu.optionsDictionaryFuzzyMatchingCheckBoxMenuItem.isSelected());

@@ -43,7 +43,7 @@ details.</para>
   <itemizedlist>
       <listitem>
         <para><guilabel>Keep</guilabel>: The segment pairs in rows that have
-        this check box ticked are saved to the translation memory file.
+        this box checked are saved to the translation memory file.
         Unchecked rows are discarded.</para>
       </listitem>
 
@@ -428,7 +428,7 @@ details.</para>
       <varlistentry>
         <term>Keep All</term>
         <listitem>
-          <para>Use this command to tick the <guilabel>Keep</guilabel> check box
+          <para>Use this command to check the <guilabel>Keep</guilabel> box
           for all rows.</para>
         </listitem>
       </varlistentry>
@@ -471,7 +471,7 @@ details.</para>
     TMX...</guibutton> button to create the translation memory.</para>
 
     <note>
-      <para>Only rows with a ticked <guilabel>Keep</guilabel> check box in the
+      <para>Only rows with a checked <guilabel>Keep</guilabel> box in the
       first column are saved to the translation memory.</para>
     </note>
 

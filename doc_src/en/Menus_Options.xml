@@ -9,54 +9,46 @@
     <varlistentry id="menus.options.preferences">
       <term id="menus.options.preferences.title">Preferences...</term>
       <listitem>
-		<note><para>In macOS, this menu item is found under the
-		<guimenu>OmegaT</guimenu> menu.</para></note>
         <para>Opens the <link linkend="dialogs.preferences">Preferences</link>
         dialog.</para>
+		<note><para>In macOS, this menu item is found under the
+		<guimenu>OmegaT</guimenu> menu.</para></note>
       </listitem>
     </varlistentry>
 
     <varlistentry id="menus.options.mt">
       <term id="menus.options.mt.title">Machine Translate</term>
       <listitem>
-        <para>Allows you to activate/deactivate the available machine
-        translation engines.</para>
+        <para>Select <link linkend="dialogs.preferences.mt.automatically.fetch.trasnlations"
+        endterm="dialogs.preferences.mt.automatically.fetch.trasnlations.title"/> to activate it.</para>
+		<para>Allows you to activate/deactivate the available machine
+		translation engines.</para>
         <para>If several translation engines are selected, you can also use
         <keycombo><keycap>C</keycap><keycap>M</keycap></keycombo> to switch
-        between them and insert the last one selected.</para>
+        between them and insert the last one selected. See  for details.</para>
       </listitem>
     </varlistentry>
 
     <varlistentry id="menus.options.glossary">
       <term id="menus.options.glossary.title">Glossary</term>
       <listitem>
-        <para>Select <guimenuitem>Taas Terminology Lookup</guimenuitem> to
-        activate it.</para>
+        <para>Select <link linkend="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries" endterm="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries.title"/> to activate it.</para>
       </listitem>
     </varlistentry>
 
     <varlistentry id="menus.options.dictionary">
       <term id="menus.options.dictionary.title">Dictionary</term>
       <listitem>
-        <para>Check the <guimenuitem>Use Fuzzy Matching for Dictionary
-        Entries</guimenuitem> option if you want dictionaries to display words
-        sharing the same root.</para>
+        <para>Select <link linkend="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries" endterm="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries.title"/> to activate it.</para>
       </listitem>
     </varlistentry>
 
     <varlistentry id="menus.options.autocompletion">
       <term id="menus.options.autocompletion.title">Auto-completion</term>
       <listitem>
-        <para>Check <guimenuitem>Show Relevant Suggestions
-        Automatically</guimenuitem> to automatically trigger the auto-completer
-        by typing the first letters of a glossary entry, or &quot;&lt;&quot; for
-        tags.</para>
-        <para>Check <guimenuitem>History Completion</guimenuitem> to display
-        suggested words as soon as their first letters are entered.</para>
-        <para>Check <guimenuitem>History Prediction</guimenuitem> to display
-        suggested words that often follow the word that has just been
-        entered.</para>
-      </listitem>
+      <para>Select the various options to activate them. See <link
+      linkend="dialog.preferences.auto.completion"
+      endterm="dialog.preferences.auto.completion.title"/> for details.</para></listitem>
     </varlistentry>
 
     <varlistentry id="menus.options.file.filters">

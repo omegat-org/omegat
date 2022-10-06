@@ -86,8 +86,8 @@
         <term id="dialogs.preferences.mt.provider.list.title">Provider list</term>
 
         <listitem>
-          <para>In the list of machine translation available in OmegaT, tick
-          the <guilabel>Enabled</guilabel> checkbox for each provider you want
+          <para>In the list of machine translation available in OmegaT, check
+          the <guilabel>Enabled</guilabel> box for each provider you want
           to access. Use the <guibutton>Configure</guibutton> button to manage
           your authentication credentials for that provider.</para>
 
@@ -348,7 +348,7 @@ appropriate service to use the machine translation options.</para></note>
         statistics, etc.)</guilabel></para>
 
         <para>By default, tabular data is presented in a monospaced font that
-        keeps columns properly aligned. Ticking this check box when a
+        keeps columns properly aligned. Checking this  box when a
         proportional font has been chosen as the main font will break the
         layout of the tables.</para>
       </listitem>
@@ -389,7 +389,7 @@ appropriate service to use the machine translation options.</para></note>
   by unchecking its check box. OmegaT will then omit the corresponding files
   when loading projects, and copy them unmodified to the <filename
   class="directory">target</filename> folder when creating target
-  documents. Just tick the check box to start using the filter again. Click
+  documents. Just check the box to start using the filter again. Click
   the <guibutton>Restore Defaults</guibutton> button to reset the file filters
   to their default settings. You can edit the file types and corresponding
   encoding covered by a filter by selecting it in the list and clicking the
@@ -1055,8 +1055,8 @@ instead.</para></warning>
             <para>Separates the source text into segments. For example,
             <emphasis>period followed by a space</emphasis> generally defines
             a sentence end in English.</para>
-			<para>To define a rule as a break rule, tick the
-			<guilabel>Break/Exception</guilabel> check box.</para>
+			<para>To define a rule as a break rule, check the
+			<guilabel>Break/Exception</guilabel>  box.</para>
 		  </listitem>
         </varlistentry>
 	  </variablelist>
@@ -1439,7 +1439,7 @@ instead.</para></warning>
 	  alternative translation</term>
 
 	  <listitem>
-		<para>Ticking this check box will cause <link
+		<para>Checking this  box will cause <link
 		linkend="menus.goto.next.untranslated.segment"
 		endterm="menus.goto.next.untranslated.segment.title"/> to stop at each
 		segment with more than one possible translation, irrespective of

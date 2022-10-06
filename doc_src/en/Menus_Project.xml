@@ -64,30 +64,8 @@
     <varlistentry id="menus.project.download.mediawiki.page">
       <term id="menus.project.download.mediawiki.page.title">Download MediaWiki Page...</term>
       <listitem>
-		<para>Opens a dialog where you can paste the URL of the <emphasis>Edit</emphasis> tab of the Mediawiki page you want to translate.</para>
-        <note><para>To translate the contents of a Wikipedia page (for
-        example):</para>
-        <orderedlist>
-          <listitem>
-            <para>Click the <guilabel>Edit</guilabel> tab on the Wikipedia
-            page.</para>
-          </listitem>
-          <listitem>
-            <para>Copy the URL of the page (ending with
-            <guilabel>action=edit</guilabel>) and paste it into OmegaT.</para>
-          </listitem>
-        </orderedlist>
-        <para>To import your translation into Wikipedia when it is finished:</para>
-        <orderedlist>
-          <listitem>
-            <para>Open the <filename>.UTF8</filename> file generated in the
-            <filename class="directory">target</filename> folder.</para>
-          </listitem>
-          <listitem>
-            <para>Copy the text and paste it into the translated version of the
-            Wikipedia page.</para>
-          </listitem>
-        </orderedlist></note>
+		<para>Opens a dialog where you can paste the URL of the Mediawiki page you want to translate. The source data of the page will be copied into the <link
+        linkend="project.folder.source" endterm="project.folder.source.title"/> folder, as a text file, with the <filename>.utf8</filename> extension.</para>
       </listitem>
     </varlistentry>
 
@@ -111,7 +89,8 @@
       <term id="menus.project.close.title">Close		  <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>W</keycap></keycombo>
 </term>
       <listitem>
-        <para>Saves the translation and closes the project.</para>
+        <para>Saves the project translation memory and closes the project. See
+        <link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/> for details.</para>
       </listitem>
     </varlistentry>
 
@@ -119,11 +98,9 @@
       <term id="menus.project.save.title">Save		  <keycombo><keycap>C</keycap><keycap>S</keycap></keycombo>
 </term>
       <listitem>
-        <para>Saves the internal translation memory to the hard disk. See <link
-        linkend="project.folder.omegat" endterm="project.folder.omegat.title"/>
-        for details.</para>
-		<para>
-		</para>		
+        <para>Saves the project translation memory. See <link
+        linkend="project.folder.project.save.tmx"
+        endterm="project.folder.project.save.tmx.title"/> for details.</para>
 		<para>OmegaT automatically saves translations every 3 minutes as well as
 		when you close the project or quit OmegaT. See <link
 		linkend="dialog.preferences.saving.and.output.interval"
@@ -277,11 +254,10 @@
       <term id="menus.project.quit.title">Quit		  <keycombo><keycap>C</keycap><keycap>Q</keycap></keycombo>
 </term>
       <listitem>
-		<note><para>In macOS, this menu item is found under the <guimenu>OmegaT</guimenu> menu.</para></note>
         <para>Saves the project and quits OmegaT. You are asked to confirm that
         you really want to quit if you have not yet saved the project.</para>
-		<para>
-		</para>				
+		<note><para>In macOS, this menu item is found under the
+		<guimenu>OmegaT</guimenu> menu.</para></note>
       </listitem>
     </varlistentry>
   </variablelist>

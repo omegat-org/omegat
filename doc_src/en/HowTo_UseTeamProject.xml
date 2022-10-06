@@ -30,7 +30,7 @@
       <guilabel>Repository URL:</guilabel> field at the top of the dialog, and
       specify a folder for the project in the <guilabel>New Local Project
       Folder:</guilabel> field. Leave the <guilabel>Default branch</guilabel>
-      option ticked unless the project administrator has provided instructions
+      option checked unless the project administrator has provided instructions
       for using a custom branch.</para>
     </listitem>
 

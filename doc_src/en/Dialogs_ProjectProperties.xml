@@ -278,8 +278,8 @@
 		  linkend="project.folder.omegat.folder"
 		  endterm="project.folder.omegat.folder.title"/> folder of the project
 		  and will supersede the general set of searches.</para>
-		  <note><para>To delete project specific external searches, click on the
-		  <guilabel>Remove</guilabel> button or remove that file.</para></note>
+		  <note><para>To delete project specific external searches, click on
+		  <guibutton>Remove</guibutton> or remove that file.</para></note>
 		  
 		  <para>See <link linkend="dialogs.preferences.external.searches"
 		  endterm="dialogs.preferences.external.searches.title"/> for

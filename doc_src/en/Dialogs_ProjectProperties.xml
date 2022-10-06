@@ -57,7 +57,7 @@
           <para>Sentence-level segmentation splits the source file “paragraphs”
           into segments based on segmentation rules.</para>
 
-		  <para>Leave the box unchecked if you prefer not to segment the
+		  <para>Uncheck the box if you prefer not to segment the
 		  paragraphs.</para>
 
 		  <para>By default, segmentation rules are global and apply to all
@@ -67,6 +67,17 @@
 		  linkend="menus.options.segmentation"
 		  endterm="menus.options.segmentation.title"/> in the <link
 		  linkend="menus.options" endterm="menus.options.title"/> menu.</para>
+		  
+		  <para>If you want this project to use project specific segmentation
+		  rules (local rules) and not global rules, click the <link
+		  linkend="dialogs.project.properties.segmentation"
+		  endterm="dialogs.project.properties.segmentation.title"/> button, on
+		  the right, or start OmegaT from the command line. See <link
+		  linkend="launch.with.command.line"
+		  endterm="launch.with.command.line.title"/> for details.</para>
+
+		  <para>If you use local rules, you can still access the global rules, but
+		  modifying them will have no effect on your project.</para>
 		  
 		  <note><para>Changing the segmentation rules settings during a translation
 		  does not modify the segments registered in the project translation
@@ -85,17 +96,6 @@
 		  no longer be considered translated. Nonetheless, their original
 		  translation will still be in the project memory.</para></note>
 
-		  <para>You can limit the segmentation rules used by the project to that
-		  project by either setting local rules with the <link
-		  linkend="dialogs.project.properties.segmentation"
-		  endterm="dialogs.project.properties.segmentation.title"/> button, on the
-		  right, or by starting OmegaT from the command line. See <link
-		  linkend="launch.with.command.line"
-		  endterm="launch.with.command.line.title"/> for details.</para>
-
-		  <para>If you use local rules, you can still access the global rules, but
-		  modifying them will have no effect on your project.</para>
-		  
 		  <para>See <link linkend="app.segmentation"
 		  endterm="app.segmentation.title"/> for general explanations about
 		  segmentation (global or local, paragraph or sentence, setting, etc.)</para>

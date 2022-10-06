@@ -132,20 +132,16 @@
     your files, such as your source files, translation memories, glossaries, and
 	eventually your translated files.</para>
 
-	<para>To create a new project, use <link
-    linkend="menus.project.new"
-    endterm="menus.project.new.title"/>, select a folder, and type a
-    name for your project.</para>
+	<para>To create a new project, use <link linkend="menus.project.new"
+	endterm="menus.project.new.title"/>, select an empty folder, or create a new
+	one with the name of your project.</para>
 
-    <para>Since an OmegaT project is simply a set of folders and folders,
-    you are entering the name of the folder that will hold your
-    project.</para>
-	<para>Alternatively, you can choose an existing <emphasis>empty</emphasis>
-	folder created beforehand. Keep in mind that OmegaT cannot create a
-	project in a folder that already contains files or folders.</para>
+    <para>That project will hold all your default ressources since an OmegaT
+    project is simply a set of folders and folders.</para>
 
-    <para>The <link linkend="dialogs.project.properties.create.new.project" endterm="dialogs.project.properties.create.new.project.title"/> dialog opens after you
-    have named your project.</para>
+    <para>The <link linkend="dialogs.project.properties.create.new.project"
+    endterm="dialogs.project.properties.create.new.project.title"/> dialog opens
+    after you have named your project.</para>
 
 	<para>The dialog is identical to the <link
 	linkend="dialogs.project.properties"
@@ -234,6 +230,14 @@
         </imageobject>
       </mediaobject>
     </figure>
+
+	<note><para>To display the paragraph marks and see where your segments have
+	been created use <link linkend="menus.view.mark.paragraph.delimitations"
+	endterm="menus.view.mark.paragraph.delimitations.title"/> and <link
+	linkend="dialogs.preferences.editor.paragraph.delimitation.format"
+	endterm="dialogs.preferences.editor.paragraph.delimitation.format.title"/>.</para></note>
+
+	
   </section>
 
   <section id="introduction.translate.the.segments.one.by.one">
@@ -315,7 +319,32 @@
 	endterm="panes.editor.auto.completion.menu.title"/> is also available in the
 	Editor pane.</para>
   </section>
+  
+  <section id="introduction.manage.your.segments">
+    <title id="introduction.manage.your.segments.title">Manage Your Segments</title>
+	<para>The default setting for a translation project is to create <emphasis>sentences</emphasis> by splitting the <emphasis>paragraph blocks</emphasis> found in the document. See <link linkend="dialogs.project.properties.options.segmentation" endterm="dialogs.project.properties.options.segmentation.title"/> for details.</para>
+	
+	<para>Segments that are within paragraph can be further segmented, or "unsegmented" (merged).</para>
 
+	<para>To further segment them, add a segmentation rule, to merge them, add an exception rule. See <link linkend="app.segmentation" endterm="app.segmentation.title"/> for details.</para>
+
+	<note><para>Since a standard space character is often used as a boundary for a segment, if you want to merge two parts that are separated by a space character,
+
+	<orderedlist>
+	  <listitem><para>go to the source file with <link
+	  linkend="menus.project.access.project.contents"
+	  endterm="menus.project.access.project.contents.title"/>,</para></listitem>
+	  <listitem><para>find the location of that space,</para></listitem>
+	  <listitem><para>replace it by anything that is not a standard space but
+	  looks like a standard space, like a "non breakable space" for
+	  example,</para></listitem>
+	  <listitem><para>save your modifications,</para></listitem>
+	  <listitem><para>go back to OmegaT and <link
+	linkend="menus.project.reload"
+	endterm="menus.project.reload.title"/>.</para></listitem>
+	</orderedlist></para></note>
+  </section>
+  
   <section id="introduction.manage.your.tags">
     <title id="introduction.manage.your.tags.title">Manage Your Tags</title>
 

@@ -2,8 +2,8 @@
  OmegaT 5.8.0
 ----------------------------------------------------------------------
   19 Enhancements
-  19 Bug fixes
-  0 Localisation updates
+  20 Bug fixes
+  1 Localisation updates
 ----------------------------------------------------------------------
 5.8.0 vs 5.7.1
 
@@ -67,6 +67,8 @@
 
   Bug fixes:
 
+  - Drop TaaS glossary service connector
+
   - When converting git local-managed project, OmegaT raise NPE
   https://sourceforge.net/p/omegat/bugs/1118/
 
@@ -120,6 +122,8 @@
     differs from original
 
   Localisation Updates:
+
+  - Japanese localisation updated to 5.8.0 (UI, documentation)
 
 ----------------------------------------------------------------------
 OmegaT 5.7.1 (2022-03-19)

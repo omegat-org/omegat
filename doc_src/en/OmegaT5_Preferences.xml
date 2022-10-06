@@ -1105,11 +1105,47 @@ appropriate service to use the machine translation options.</para></note>
 <section id="dialog.preferences.spellchecker">
   <title id="dialog.preferences.spellchecker.title">Spellchecker</title>
 
-  <para>OmegaT has a built-in spellchecker based on the spellchecking
-  software used in Apache OpenOffice, LibreOffice, Firefox and
-  Thunderbird. It is consequently able to use the huge range of free
-  spelling dictionaries available for these applications. See <link
-  linkend="app.spellchecker" endterm="app.spellchecker.title"/> for details.</para>
+  <para>OmegaT has a built-in spellchecker but requires you to install spellchecking dictionaries based on your target languages.</para>
+
+  <warning><para>OmegaT will use the language dictionary that has the same name
+  as the target language code set in <link
+  linkend="dialogs.project.properties.languages"
+  endterm="dialogs.project.properties.languages.title"/>. An
+  <emphasis>FR-FR</emphasis> dictionary will not spellcheck
+  <emphasis>FR</emphasis> target segments. If necessary, modify the name of the
+  dictionary or change your project’s language settings.</para></warning>
+
+  <variablelist>
+	<varlistentry id="dialog.preferences.spellchecker.automatic.check">
+	  <term id="dialog.preferences.spellchecker.automatic.check.title">Automatically check the spelling of text</term>
+	  <listitem><para>Enable after installing a spellchecking dictionary. OmegaT will underline spelling mistakes with red wavy-lines.</para>
+	  <para>Use the <link linkend="panes.editor.context.menu" endterm="panes.editor.context.menu.title"/> to correct the mistake, to <guimenuitem>Ignore All</guimenuitem> or to <guimenuitem>Add to Dictionary</guimenuitem>. See <link linkend="project.folder.omegat.spellcheck">spellchecker files</link> for details.</para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry id="dialog.preferences.spellchecker.dictionary.folder">
+	  <term id="dialog.preferences.spellchecker.dictionary.folder.title">Dictionary files folder</term>
+	  <listitem><para>The folder where OmegaT will install and search for spelling dictionaries. It is generally in the <link linkend="configuration.folder" endterm="configuration.folder.title"/> folder.</para></listitem>
+	</varlistentry>
+	<varlistentry id="dialog.preferences.spellchecker.already.installed">
+	  <term id="dialog.preferences.spellchecker.already.installed.title">Already installed dictionaries</term>
+	  <listitem><para>The list of dictionaries that are present in the above folder.</para>
+	  <para>If none are displayed it either means that you have not yet installed a spelling dictionary, or that your project uses a specific configuration folder that does not contain yet a spelling dictionary.</para></listitem>
+	</varlistentry>
+	<varlistentry id="dialog.preferences.spellchecker.url">
+	  <term id="dialog.preferences.spellchecker.url.title">Dictionary repository URL</term>
+	  <listitem><para>The default URL where OmegaT will look for dictionaries to install.</para>
+	  <para>You can also download dictionaries from other locations, or copy dictionaries installed locally.</para></listitem>
+	</varlistentry>
+	<varlistentry id="dialog.preferences.spellchecker.install.new">
+	  <term id="dialog.preferences.spellchecker.install.new.title">Install new dictionary...</term>
+	  <listitem><para>Displays the list of available dictionaries from the above URL.</para>
+	  <warning><para>This action requires an internet connection</para></warning>
+	  <para>Select the dictionaries that you want to install and click <guibutton>Install</guibutton>. Depending on your internet connection it may take a while before the dictionary is installed.</para>
+	  </listitem>
+	</varlistentry>
+  </variablelist>
+
+  
 </section>
 
 <section id="dialog.preferences.languagetool.plugin">

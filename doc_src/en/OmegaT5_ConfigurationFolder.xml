@@ -122,7 +122,7 @@
 
 	<varlistentry id="configuration.folder.extra.contents.spelling">
 	  <term id="configuration.folder.extra.contents.spelling.title">spelling/</term>
-	  <listitem><para>This folder contains your spelling dictionaries. See <link linkend="app.spellchecker.installing.dictionaries" endterm="app.spellchecker.installing.dictionaries.title"/> for details.</para>
+	  <listitem><para>This folder contains your spelling dictionaries. See <link linkend="dialog.preferences.spellchecker.install.new" endterm="dialog.preferences.spellchecker.install.new.title"/> for details.</para>
 	  </listitem>
 	</varlistentry>
   </variablelist>

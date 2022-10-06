@@ -85,14 +85,15 @@
         <para>If you want to change the default project properties or use
         project-specific filters or segmentation, it is easiest to make the
         necessary changes at this stage to ensure that the
-        <filename>omegat.project</filename> file reflects those changes and
-        that the <filename class="directory">omegat/</filename> subfolder
-        contains the <filename>filters.xml</filename> and
-        <filename>segmentation.conf</filename> files. Similarly add any
-        relevant lists of <link
-        linkend="project.folder.omegat.ignored.words">learned or ignored
-        words</link>, you want to make available to everyone working on the
-        project.</para>
+        <filename>omegat.project</filename> file reflects those changes and that
+        the <filename class="directory">omegat/</filename> subfolder contains
+        the <filename>filters.xml</filename> and
+        <filename>segmentation.conf</filename> files.</para>
+
+		<para>Similarly add any relevant lists of spellchecker files you want to
+		make available to everyone working on the project. See <link
+		linkend="project.folder.omegat.spellcheck">spellchecker files</link> for
+		details.</para>
 
         <para>If you are converting an existing project, make sure you delete
         any files in the project that you do not need or want to upload to the
@@ -272,15 +273,13 @@
     copied by the translators themselves, or mappings that synchronize files
     from other locations are defined.</para>
 
-    <para>Mappings can be added via the OmegaT user interface using
-    <menuchoice>
-        <guimenuitem>Project</guimenuitem>
-
-        <guimenuitem>Properties</guimenuitem>
-
-        <guimenuitem>Repository Mapping...,</guimenuitem>
-      </menuchoice> or by editing the <filename>omegat.project</filename>
-    file.</para>
+    <para>Mappings can be added via the OmegaT user interface using <link
+    linkend="dialogs.project.properties.repository.mapping.title"
+    endterm="dialogs.project.properties.repository.mapping.title"/> in the <link
+    linkend="dialogs.project.properties"
+    endterm="dialogs.project.properties.title"/> dialog, or by editing the <link
+    linkend="project.folder.omegat.project.file.title"
+    endterm="project.folder.omegat.project.file.title"/> file.</para>
   </section>
 
   <section id="how.to.setup.team.project.mapping.parameters">

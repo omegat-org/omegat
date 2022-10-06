@@ -10,9 +10,6 @@
   <xi:include href="App_Regexp.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
-  <xi:include href="App_Spellchecker.xml"
-              xmlns:xi="http://www.w3.org/2001/XInclude"/>
-
   <xi:include href="App_Glossaries.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
 

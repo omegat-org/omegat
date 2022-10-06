@@ -237,11 +237,24 @@
         </listitem>
       </varlistentry>
 
-      <varlistentry id="project.folder.omegat.ignored.words">
+      <varlistentry id="project.folder.omegat.spellcheck">
         <term id="project.folder.omegat.ignored.words.title">ignored_words.txt</term>
         <term id="project.folder.omegat.learned.words">learned_words.txt</term>
         <listitem>
-          <para>These files are created and used by the spellchecker. You can also create them by right-clicking on a word marked as incorrect and selecting Ignore All (for words to skip during spellchecking), or Add to Dictionary (for words to accept as correct), respectively,  from the context menu. If you already have a collection of words you want the spellchecker to ignore or accept, simply save them in text files with the corresponding names, and copy those files to the <link linkend="project.folder.omegat.folder" endterm="project.folder.omegat.folder.title"/> folder of your current project.</para>
+          <para>These files are created and used by the spellchecker. You can
+          add terms  by right-clicking on a word marked as incorrect and
+          selecting <guimenuitem>Ignore All</guimenuitem> (for words to skip
+          during spellchecking), or <guimenuitem>Add to Dictionary</guimenuitem>
+          (for words to accept as correct), respectively, from the <link
+          linkend="panes.editor.context.menu"
+          endterm="panes.editor.context.menu.title"/>.</para>
+
+		  <para>If you already have a collection of words you want the
+		  spellchecker to ignore or accept, simply save them in text files with
+		  the corresponding names, and copy the files to the <link
+		  linkend="project.folder.omegat.folder"
+		  endterm="project.folder.omegat.folder.title"/> folder of your current
+		  project.</para>
         </listitem>
       </varlistentry>
 

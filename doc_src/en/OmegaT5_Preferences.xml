@@ -1202,7 +1202,7 @@ instead.</para></warning>
 		linkend="project.folder.omegat.filters"
 		endterm="project.folder.omegat.filters.title"/> file in the <link
 		linkend="project.folder.omegat"
-		endterm="project.folder.omegat"/> folder), because
+		endterm="project.folder.omegat.title"/> folder), because
 		they could have a critical impact on system security.</para>
 
 		<para>Only activate this option if you know what you are doing, and

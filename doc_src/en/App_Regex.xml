@@ -3,8 +3,8 @@
 "../../../docbook-xml-4.5/docbookx.dtd"
 [<!ENTITY % manualvariables SYSTEM "manualvariables.mod"> %manualvariables;]>
 
-<section id="app.regexp">
-  <title id="app.regexp.title">Regular expressions</title>
+<section id="app.regex">
+  <title id="app.regex.title">Regular expressions</title>
 
   <para>This appendix is intended for users interested in exploring a
   powerful way to boost their productivity. Although seen as daunting and
@@ -114,8 +114,8 @@
   </variablelist>
   </para>
 
-  <section id="app.regexp.four.rules">
-	<title id="app.regexp.four.rules.title">The 4 rules</title>
+  <section id="app.regex.four.rules">
+	<title id="app.regex.four.rules.title">The 4 rules</title>
 
 	<para>Regular expressions are used to find text (including characters,
 	such as spaces, tabs, or line breaks that are not visible on the screen
@@ -205,8 +205,8 @@
 	</variablelist>
   </section>
 
-  <section id="app.regexp.twelve.characters">
-	<title id="app.regexp.twelve.characters.title">The 12 characters</title>
+  <section id="app.regex.twelve.characters">
+	<title id="app.regex.twelve.characters.title">The 12 characters</title>
 	
     <para>The twelve special characters are the
     <emphasis>backslash</emphasis> <literal>\</literal>, the
@@ -420,8 +420,8 @@
   </para>
 </section>
 
-<section id="app.regexp.many.expressions">
-  <title id="app.regexp.many.expressions.title">The many expressions</title>
+<section id="app.regex.many.expressions">
+  <title id="app.regex.many.expressions.title">The many expressions</title>
 
   <warning><para>As seen above, all the characters that come with a preceeding <literal>\</literal> are an expression that means: <emphasis>not the character itself, but the associated special effect</emphasis>.</para></warning>
   
@@ -648,8 +648,8 @@
   </table>
 </section>
 
-<section id="app.regexp.examples">
-  <title id="app.regexp.examples.title">Examples</title>
+<section id="app.regex.examples">
+  <title id="app.regex.examples.title">Examples</title>
   
   <table id="regex.examples">
     <title id="regex.examples.title">Examples of regular expressions

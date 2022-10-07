@@ -7,7 +7,7 @@
   <xi:include href="App_Segmentation.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
-  <xi:include href="App_Regexp.xml"
+  <xi:include href="App_Regex.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
   <xi:include href="App_Glossaries.xml"

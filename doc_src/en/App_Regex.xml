@@ -204,10 +204,10 @@
           the special meaning of other characters. It has no effect if
           placed before a character with no special meaning (either by
           default or by addition).</para>
-          <para>The <literal>\</literal> can be disabled by another
-          <literal>\</literal>, as in <literal>\\</literal> to simply
-          match itself as the <emphasis>backslash</emphasis>
-          character.</para>
+          <para>The <literal>\</literal> can cancel its own special
+          meaning by doubling up to form <literal>\\</literal>, which
+          simply matches the <emphasis>backslash</emphasis> character
+          itself.</para>
         </listitem>
       </varlistentry>
     </variablelist>
@@ -367,9 +367,9 @@
     <title>Examples for the twelve special characters</title>
 
     <tgroup cols="3">
-      <colspec colwidth="130*"/>
-      <colspec colwidth="160*"/>
-      <colspec colwidth="700*"/>
+      <colspec colwidth="170*"/>
+      <colspec colwidth="200*"/>
+      <colspec colwidth="600*"/>
 
       <thead>
         <row>
@@ -394,8 +394,8 @@
             <para>
               <informaltable>
                 <tgroup cols="2">
-                  <colspec colwidth="180*"/>
-                  <colspec colwidth="820*"/>
+                  <colspec colwidth="250*"/>
+                  <colspec colwidth="750*"/>
 
                   <tbody>
                     <row>
@@ -453,8 +453,8 @@
             <para>
               <informaltable>
                 <tgroup cols="2">
-                  <colspec colwidth="180*"/>
-                  <colspec colwidth="820*"/>
+                  <colspec colwidth="250*"/>
+                  <colspec colwidth="750*"/>
 
                   <tbody>
                     <row>
@@ -514,8 +514,8 @@
             <para>
               <informaltable>
                 <tgroup cols="2">
-                  <colspec colwidth="180*"/>
-                  <colspec colwidth="820*"/>
+                  <colspec colwidth="250*"/>
+                  <colspec colwidth="750*"/>
 
                   <tbody>
                     <row>
@@ -562,8 +562,8 @@
             <para>
               <informaltable>
                 <tgroup cols="2">
-                  <colspec colwidth="180*"/>
-                  <colspec colwidth="820*"/>
+                  <colspec colwidth="250*"/>
+                  <colspec colwidth="750*"/>
 
                   <tbody>
                     <row>
@@ -610,15 +610,15 @@
           </entry>
 
           <entry>
-            <literal>^An |^The </literal>
+            <literal>^An|^The</literal>
           </entry>
 
           <entry>
             <para>
               <informaltable>
                 <tgroup cols="2">
-                  <colspec colwidth="180*"/>
-                  <colspec colwidth="820*"/>
+                  <colspec colwidth="250*"/>
+                  <colspec colwidth="750*"/>
 
                   <tbody>
                     <row>
@@ -656,15 +656,15 @@
             <literal>?</literal>
           </entry>
 
-          <entry><literal>an?␣</literal>, where “␣” represents a
-          single space.</entry>
+          <entry><literal>an?␣</literal> (where “␣” represents a
+          single space).</entry>
 
           <entry>
             <para>
               <informaltable>
                 <tgroup cols="2">
-                  <colspec colwidth="180*"/>
-                  <colspec colwidth="820*"/>
+                  <colspec colwidth="250*"/>
+                  <colspec colwidth="750*"/>
 
                   <tbody>
                     <row>
@@ -713,8 +713,8 @@
             <para>
               <informaltable>
                 <tgroup cols="2">
-                  <colspec colwidth="180*"/>
-                  <colspec colwidth="820*"/>
+                  <colspec colwidth="250*"/>
+                  <colspec colwidth="750*"/>
 
                   <tbody>
                     <row>
@@ -766,8 +766,8 @@
             <para>
               <informaltable>
                 <tgroup cols="2">
-                  <colspec colwidth="180*"/>
-                  <colspec colwidth="820*"/>
+                  <colspec colwidth="250*"/>
+                  <colspec colwidth="750*"/>
 
                   <tbody>
                     <row>
@@ -810,8 +810,8 @@
             <para>
               <informaltable>
                 <tgroup cols="2">
-                  <colspec colwidth="180*"/>
-                  <colspec colwidth="820*"/>
+                  <colspec colwidth="250*"/>
+                  <colspec colwidth="750*"/>
 
                   <tbody>
                     <row>
@@ -858,8 +858,8 @@
             <para>
               <informaltable>
                 <tgroup cols="2">
-                  <colspec colwidth="180*"/>
-                  <colspec colwidth="820*"/>
+                  <colspec colwidth="250*"/>
+                  <colspec colwidth="750*"/>
 
                   <tbody>
                     <row>
@@ -915,8 +915,8 @@
             <para>
               <informaltable>
                 <tgroup cols="2">
-                  <colspec colwidth="180*"/>
-                  <colspec colwidth="820*"/>
+                  <colspec colwidth="250*"/>
+                  <colspec colwidth="750*"/>
 
                   <tbody>
                     <row>
@@ -958,8 +958,8 @@
             <para>
               <informaltable>
                 <tgroup cols="2">
-                  <colspec colwidth="180*"/>
-                  <colspec colwidth="820*"/>
+                  <colspec colwidth="250*"/>
+                  <colspec colwidth="750*"/>
 
                   <tbody>
                     <row>
@@ -1001,7 +1001,12 @@
 <section id="app.regex.many.expressions">
   <title id="app.regex.many.expressions.title">The many expressions</title>
 
-  <warning><para>As seen above, all the characters that come with a preceeding <literal>\</literal> are an expression that means: <emphasis>not the character itself, but the associated special effect</emphasis>.</para></warning>
+  <warning>
+    <para>As seen above, all alphabetic characters preceded by
+    <literal>\</literal> turn into an expression that represents
+    <emphasis>not the character itself, but its associated special
+    meaning</emphasis>.</para>
+  </warning>
   
   <table id="app.regex.characters">
     <title id="app.regex.characters.title">Characters</title>
@@ -1019,10 +1024,10 @@
       <tbody>
         <row>
           <entry>x</entry>
-          <entry>The character x itself
-		  <para>Most characters match themselves.</para></entry>
+          <entry>The character “x” itself
+            <para>Most characters match themselves.</para>
+          </entry>
         </row>
-
 
         <row>
           <entry>\t</entry>
@@ -1043,20 +1048,20 @@
 	</tgroup>
   </table>
 
-  <note><para>In OmegaT a search is by default case-insensitive: it will match upper-case characters as well as lower-case characters. You can enable case sensitivity as an option for the whole search, but if you want finer settings you can mix <emphasis role="bold">(?i)</emphasis> before case-insensitive parts and <emphasis role="bold">(?-i)</emphasis> before case sensitive parts.</para></note>
+  <note>
+    <para>In OmegaT searches are case insensitive by default: they
+    match both uppercase and lowercase characters. You can enable case
+    sensitivity as an option for the whole search, but for finer
+    settings. you can add <emphasis role="bold">(?i)</emphasis> before
+    case insensitive sections, and
+    <emphasis role="bold">(?-i)</emphasis> before case sensitive
+    sections.</para>
+    <para><emphasis role="bold">(?i)o(?-i)megat</emphasis> is a
+    case insensitive “o” followed by a case sensitive “megat”.</para>
+  </note>
 
   <table id="app.regex.classes">
     <title id="app.regex.classes.title">Case and classes</title>
-
-	<note><para>In OmegaT a search is by default case-insensitive: it will match upper-case characters as well as lower-case characters, and you can enable case sensitivity as an option for the whole search.</para>
-
-	<para>But if you want finer settings, you can mix <emphasis
-	role="bold">(?i)</emphasis> before case-insensitive parts and <emphasis
-	role="bold">(?-i)</emphasis> before case sensitive parts.</para>
-
-	<para><emphasis role="bold">(?i)o(?-i)megat</emphasis> is a case-insensitive “o” followed by a case sensitive “megat”.</para>
-
-	</note>
 
     <tgroup align="left" cols="2" rowsep="1">
       <colspec align="left" colnum="1"/>
@@ -1071,8 +1076,11 @@
       <tbody>
         <row>
           <entry>\w</entry>
-          <entry>A word character, generally defined as [A-Za-z0-9_], not "w".
-		  <para>\W is NOT a word character ([^\w]).</para></entry>
+          <entry>
+            <para>A word character, generally defined as [A-Za-z0-9_],
+            not "w".</para>
+            <para>\W is NOT a word character ([^\w]).</para>
+          </entry>
         </row>
 
         <row>
@@ -1116,14 +1124,13 @@
     </tgroup>
   </table>
 
+  <para>Regular expressions are not limited to alphabetic characters and numerals, of course. They cover the whole Unicode character set. To specify character classes outside the alphabetical range, use Unicode blocs, scripts and categories.</para>
+
+	<para>See also <ulink url="https://www.regular-expressions.info/unicode.html">Unicode Regular Expressions</ulink> for a thorough review of Unicode regular expressions</para>
 
   <table id="app.regex.unicode.blocs">
 	<title id="app.regex.unicode.blocs.title">Unicode blocks, scripts and
 	categories</title>
-
-	<para>Regular expressions are not limited to alphabetic characters and numerals, of course. They cover the whole Unicode character set. To specify character classes outside the alphabetical range, use Unicode blocs, scripts and categories.</para>
-
-	<para>See also <ulink url="https://www.regular-expressions.info/unicode.html">Unicode Regular Expressions</ulink> for a thorough review of Unicode regular expressions</para>
 	
 	<tgroup align="left" cols="2" rowsep="1">
       <colspec align="left" colnum="1"/>
@@ -1164,11 +1171,11 @@
 	</tgroup>
   </table>
 
+  <para>Locations (boundaries) are not part of the match. They just
+  specify where the match should be.</para>
+
   <table id="app.regex.boundary.matchers">
 	<title id="app.regex.boundary.matchers.title">Locations</title>
-
-	<para>Locations (boundaries) are not part of the match. They just specify
-	where the match should be.</para>
 	
 	<tgroup align="left" cols="2" rowsep="1">
       <colspec align="left" colnum="1"/>

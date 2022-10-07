@@ -202,6 +202,11 @@
         <filename>idx</filename> and <filename>ifo</filename>.</para>
       </listitem>
     </orderedlist>
+	<para>If you want to remove words from potential dictionary matches, add an
+	<filename>ignore.txt</filename> encoded in UTF-8 to the folder. The file
+	must have one word per line. All the words contained in that list will be
+	ignored by OmegaT when matching segment terms in the installed
+	dictionaries.</para>
   </section>
 
   <section id="project.folder.glossary">

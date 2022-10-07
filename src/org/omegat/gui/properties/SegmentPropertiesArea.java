@@ -86,6 +86,7 @@ public class SegmentPropertiesArea implements IPaneMenu {
     // private static final String KEY_PREV = "prev";
     private static final String KEY_PATH = "path";
     private static final String KEY_HASNOTE = "hasNote";
+    private static final String KEY_HASCOMMENT = "hasComment";
     private static final String KEY_CHANGED = "changed";
     private static final String KEY_CHANGER = "changer";
     private static final String KEY_CREATED = "created";
@@ -293,14 +294,28 @@ public class SegmentPropertiesArea implements IPaneMenu {
 
     private void setProperty(String key, Object value) {
         if (value != null) {
-            setProperty(key, value.toString());
+            if (value instanceof Boolean) {
+                setProperty(key, getBooleanValueVerb(key, (boolean)value));
+            } else {
+                setProperty(key, value.toString());
+            }
+        }
+    }
+
+    private String getBooleanValueVerb(String key, boolean value) {
+        if (value) {
+            return OStrings.getString(ISegmentPropertiesView.PROPERTY_TRANSLATION_VERB + key.toUpperCase());
+        } else {
+            return OStrings.getString(ISegmentPropertiesView.PROPERTY_TRANSLATION_NVERB + key.toUpperCase());
         }
     }
 
     private void setProperties(SourceTextEntry ste) {
         properties.clear();
         if (ste != null) {
-            Collections.addAll(properties, ste.getRawProperties());
+            if (ste.getComment() != null) {
+                setProperty(KEY_HASCOMMENT, true);
+            }
             if (ste.getDuplicate() != DUPLICATE.NONE) {
                 setProperty(KEY_ISDUP, ste.getDuplicate());
             }

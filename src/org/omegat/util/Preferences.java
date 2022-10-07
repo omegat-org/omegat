@@ -473,7 +473,7 @@ public final class Preferences {
     public static final String SEGPROPS_INITIAL_MODE = "segment_properties_initial_mode";
     public static final String SEGPROPS_SHOW_RAW_KEYS = "segment_properties_show_raw_keys";
     public static final String SEGPROPS_NOTIFY_PROPS = "segment_properties_notify_props";
-    public static final String SEGPROPS_NOTIFY_DEFAULT_PROPS = "comment, note";
+    public static final String SEGPROPS_NOTIFY_DEFAULT_PROPS = "hasComment, hasNote";
 
     /** Notification preferences */
     public static final String NOTIFY_FUZZY_MATCHES = "notify_fuzzy_matches";

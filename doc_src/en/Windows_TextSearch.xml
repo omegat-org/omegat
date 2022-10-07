@@ -21,7 +21,7 @@
   <para>Click the drop-down arrow of the <guilabel>Search for:</guilabel> field
   to access the last ten searches.</para>
 
-  <para>Click on <guilabel>Search</guilabel> or hit <keycap>Enter</keycap> when
+  <para>Click on <guibutton>Search</guibutton> or hit <keycap>Enter</keycap> when
   the search field is selected to start the search.</para>
   
   <para>Matches will be displayed in bold blue characters.</para>
@@ -193,7 +193,7 @@ above only apply to exact and keyword searches.</para></warning>
 	translation memories.</para></listitem></varlistentry>
   </variablelist>
  
-    <para>You can click on the <guibutton>Show Advanced Options</guibutton>
+    <para>You can click on <guibutton>Show Advanced Options</guibutton>
     button to select additional criteria such as the person who authored or
     changed the translation, the date and time of translation (modification), or
     whether to exclude orphan segments.</para>
@@ -245,9 +245,9 @@ above only apply to exact and keyword searches.</para></warning>
   <section id="windows.text.search.filter">
     <title id="windows.text.search.filter.title">Filter</title>
 
-	<para>Click on the Filter button to show only the matching search result
+	<para>Click on <guibutton>Filter</guibutton> to show only the matching search result
 	segments in the <link linkend="panes.editor"
-	endterm="panes.editor.title"/>. To remove the filter, click the
-	<guibutton>Remove Filter</guibutton> button or reload the project.</para>
+	endterm="panes.editor.title"/>. To remove the filter, click
+	on <guibutton>Remove Filter</guibutton> or reload the project.</para>
   </section>
 </section>

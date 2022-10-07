@@ -21,7 +21,7 @@
 
   <para>Enter the string you want to insert to replace your search term in the
   <guilabel>Replace with:</guilabel> field and click on
-  <guilabel>Search</guilabel>, or hit <keycap>Enter</keycap> if the cursor is
+  <guibutton>Search</guibutton>, or hit <keycap>Enter</keycap> if the cursor is
   still in the field.</para>
 
   <note><para>The replacement string supports references to groups defined in
@@ -34,12 +34,11 @@
 
   <para>Click one of the following options: <itemizedlist>
       <listitem>
-        <para><guilabel>Replace All</guilabel>: replace every occurrence (after displaying a confirmation window showing the number of occurrences).</para>
+        <para><guibutton>Replace All</guibutton>: replace every occurrence (after displaying a confirmation window showing the number of occurrences).</para>
       </listitem>
-    </itemizedlist><itemizedlist>
       <listitem>
-        <para><guilabel>Replace:</guilabel> replaces each entry one at a time in the Editor pane.</para>
-		<para>Click <guilabel>Replace Next</guilabel> or <guilabel>Skip</guilabel>, to move to the next entry, and click <guilabel>Finish</guilabel> to end the replacement operation.</para>
+        <para><guibutton>Replace:</guibutton> replaces each entry one at a time in the Editor pane.</para>
+		<para>Click <guibutton>Replace Next</guibutton> or <guibutton>Skip</guibutton>, to move to the next entry, and click <guibutton>Finish</guibutton> to end the replacement operation.</para>
       </listitem>
     </itemizedlist><itemizedlist>
       <listitem>
@@ -129,7 +128,7 @@
 	<varlistentry><term>Untranslated</term><listitem><para>Also  search in untranslated segments.</para></listitem></varlistentry>
   </variablelist>
  
-    <para>You can click on the <guibutton>Show Advanced Options</guibutton> button  to select additional criteria such as the person who authored or changed the translation, or the date and time of translation (modification).</para>
+    <para>You can click on <guibutton>Show Advanced Options</guibutton> button  to select additional criteria such as the person who authored or changed the translation, or the date and time of translation (modification).</para>
 
 	<para>Checking the <guilabel>Full/Half-width char insensitive</guilabel> option will return results that match both the full- and half-width forms (CJK characters) of the characters in the search terms.</para>
   </section>

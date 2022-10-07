@@ -166,10 +166,10 @@
     <para>The <link linkend="windows.project.files"
     endterm="windows.project.files.title"/> dialog opens next.</para>
 
-	<para>Click on <link linkend="windows.project.files.copy.files"
-	endterm="windows.project.files.copy.files.title"/> or <link
+	<para>Click on <guibutton><link linkend="windows.project.files.copy.files"
+	endterm="windows.project.files.copy.files.title"/></guibutton> or <guibutton><link
 	linkend="windows.project.files.download.page"
-	endterm="windows.project.files.download.page.title"/> and select your source
+	endterm="windows.project.files.download.page.title"/></guibutton> and select your source
 	files. OmegaT will then copy the selected files to the <link
 	linkend="project.folder.source" endterm="project.folder.source.title"/>
 	folder of your newly created project. You can close the <link

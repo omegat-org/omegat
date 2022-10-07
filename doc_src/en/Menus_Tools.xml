@@ -124,7 +124,7 @@
       <term id="menus.tools.align.files.title">Align Files...</term>
       <listitem>
         <para>Select the two files to align (the source file and its
-        translation) and click OK to open the <link
+        translation) and click <guibutton>OK</guibutton> to open the <link
         linkend="windows.aligner" endterm="windows.aligner.title"/> window.</para>
         <para>The supported file formats are the same as those listed in <link
         linkend="dialogs.preferences.file.filters"

@@ -61,6 +61,8 @@ import javax.swing.UIManager;
 import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
 
+import org.openide.awt.Mnemonics;
+
 import org.omegat.CLIParameters;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
@@ -75,7 +77,6 @@ import org.omegat.util.RecentProjects;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.OSXIntegration;
 import org.omegat.util.gui.Styles;
-import org.openide.awt.Mnemonics;
 
 /**
  * Class for create main menu and handle main menu events.
@@ -430,9 +431,9 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         optionsMachineTranslateMenu.addSeparator();
 
         optionsMenu.add(optionsGlossaryMenu = createMenu("TF_OPTIONSMENU_GLOSSARY"));
+        optionsGlossaryMenu.add(optionsGlossaryFuzzyMatchingCheckBoxMenuItem = createCheckboxMenuItem( "TF_OPTIONSMENU_GLOSSARY_FUZZY"));
 
         optionsGlossaryMenu.addSeparator();
-        // TaaS options come next (but are added from elsewhere)
 
         optionsMenu.add(optionsDictionaryMenu = createMenu("TF_OPTIONSMENU_DICTIONARY"));
         optionsDictionaryMenu.add(optionsDictionaryFuzzyMatchingCheckBoxMenuItem = createCheckboxMenuItem("TF_OPTIONSMENU_DICTIONARY_FUZZY"));
@@ -513,6 +514,8 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
             return optionsMTAutoFetchCheckboxMenuItem;
         case Preferences.DICTIONARY_FUZZY_MATCHING:
             return optionsDictionaryFuzzyMatchingCheckBoxMenuItem;
+        case Preferences.GLOSSARY_STEMMING:
+            return optionsGlossaryFuzzyMatchingCheckBoxMenuItem;
         default:
             return null;
         }
@@ -565,6 +568,8 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
                 Preferences.MT_AUTO_FETCH, true));
         optionsDictionaryFuzzyMatchingCheckBoxMenuItem.setSelected(Preferences.isPreferenceDefault(
                 Preferences.DICTIONARY_FUZZY_MATCHING, true));
+        optionsGlossaryFuzzyMatchingCheckBoxMenuItem.setSelected(Preferences.isPreferenceDefault(
+                Preferences.GLOSSARY_STEMMING, true));
     }
 
     /**
@@ -808,6 +813,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
     JMenuItem optionsSetupFileFiltersMenuItem;
     JMenu optionsMachineTranslateMenu;
     JMenu optionsGlossaryMenu;
+    JMenuItem optionsGlossaryFuzzyMatchingCheckBoxMenuItem;
     JMenu optionsDictionaryMenu;
     JMenuItem optionsDictionaryFuzzyMatchingCheckBoxMenuItem;
     JMenu optionsAutoCompleteMenu;

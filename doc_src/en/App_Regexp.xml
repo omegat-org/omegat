@@ -109,7 +109,7 @@
         expression to define the text pattern ahead of where the rule
         should apply, and an “after” expression to define the text 
         pattern following that position.</para>
-      <para>A language pattern that matches the source language of the project will apply to that project.</para></listitem>
+        <para>A language pattern that matches the source language of the project will apply to that project.</para></listitem>
     </varlistentry>
   </variablelist>
   </para>
@@ -464,6 +464,8 @@
 	  </tbody>
 	</tgroup>
   </table>
+
+  <note><para>In OmegaT a search is by default case-insensitive: it will match upper-case characters as well as lower-case characters. You can enable case sensitivity as an option for the whole search, but if you want finer settings you can mix <emphasis role="bold">(?i)</emphasis> before case-insensitive parts and <emphasis role="bold">(?-i)</emphasis> before case sensitive parts.</para></note>
 
   <table id="app.regex.classes">
     <title id="app.regex.classes.title">Case and classes</title>

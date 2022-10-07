@@ -115,129 +115,133 @@
   </para>
 
   <section id="app.regex.four.rules">
-	<title id="app.regex.four.rules.title">The 4 rules</title>
+    <title id="app.regex.four.rules.title">The 4 rules</title>
 
-	<para>Regular expressions are used to find text (including characters,
-	such as spaces, tabs, or line breaks that are not visible on the screen
-	or when printed out. Any given expression either
-	<emphasis>matches</emphasis>, or <emphasis>does <emphasis
-	role="bold">not</emphasis> match</emphasis> a word, phrase, or other
-	sequence of text.</para>
-	
-	<para>Each and every character in the expression is relevant when
-	determining a match.</para>
-	<para>A number of characters or combinations of characters have a
-	special meaning in a regular expression.</para>
-	
-	<warning>
+    <para>Regular expressions are used to find text (including
+    characters, such as spaces, tabs, or line breaks that are not
+    visible on the screen or when printed out. Any given expression
+    either <emphasis>matches</emphasis>, or <emphasis>does
+    <emphasis role="bold">not</emphasis> match</emphasis> a word,
+    phrase, or other sequence of text.</para>
+    
+    <para>Each and every character in the expression is relevant when
+    determining a match.</para>
+    <para>A number of characters or combinations of characters have a
+    special meaning in a regular expression.</para>
+    
+    <warning>
       <para>Text decorations such as <emphasis>bold</emphasis>,
       <emphasis>italics</emphasis>, or other <emphasis>stylistic
       effects</emphasis> cannot be matched using regular expressions.</para>
-	</warning>
+    </warning>
 
-	<para>There are four rules to keep in mind.</para>
+    <para>There are four rules to keep in mind.</para>
 
-	<variablelist>
-	  <varlistentry>
-		<term>Most characters simply match themselves</term>
-		<listitem>
+    <variablelist>
+      <varlistentry>
+        <term>Most characters simply match themselves</term>
+        <listitem>
           <para>The majority of characters in a regular expression simply
-          <emphasis>look for themselves</emphasis> in the text sequence.</para>
+          <emphasis>look for themselves</emphasis> in the text
+          sequence.</para>
           <para>For example, the seven letters spelling out the word
-          “<emphasis>example</emphasis>” simply tell the search function to
-          match exactly those letters, in that order. Simply put, the search
-          just looks for the word “<emphasis>example</emphasis>”.</para>
-		</listitem>
+          “<emphasis>example</emphasis>” simply tell the search function
+          to match exactly those letters, in that order. Simply put, the
+          search just looks for the word
+          “<emphasis>example</emphasis>”.</para>
+        </listitem>
       </varlistentry>
 
       <varlistentry>
-		<term>Letters of the alphabet preceded by a blackslash
-		(<literal>\</literal>) take on a special meaning</term>
-		<listitem>
+        <term>Letters of the alphabet preceded by a blackslash
+        (<literal>\</literal>) take on a special meaning</term>
+        <listitem>
           <para>Unlike a letter on its own, which simply represents itself
           as noted above, a letter preceded by a <literal>\</literal> has a
           special function in a regular expression.</para>
           <para>For example, <emphasis>r</emphasis> is just a normal
           character but preceding it with <literal>\</literal> to make it
-          <literal>\r</literal> turns it into a special combination
-          that matches a  <emphasis>carriage return character</emphasis>.
+          <literal>\r</literal> turns it into a special combination that
+          matches a  <emphasis>carriage return character</emphasis>.
           Similarly, <literal>\R</literal> matches <emphasis>any line
           break character</emphasis>).</para>
           <note>
-			<para>Only the letters <emphasis>i j l m o</emphasis>, and
-			<emphasis>y</emphasis>, in both lower- and uppercase, have no special
-			meaning when preceded by a backslash. This manual describes only a
-			small part of the special meanings of all the other characters.</para>
-			
-			<para>Consult the sites in the <link linkend="app.regex.tools"
-			endterm="app.regex.tools.title"/> section below for information on
-			combinations not covered here.</para>
+            <para>Only the letters <emphasis>i j l m o</emphasis>, and
+            <emphasis>y</emphasis>, in both lower- and uppercase, have no
+            special meaning when preceded by a backslash. This manual
+            describes only a small part of the special meanings of all
+            the other characters.</para>
+            <para>Consult the sites in the <link
+            linkend="app.regex.tools" endterm="app.regex.tools.title"/>
+            section below for information on combinations not covered
+            here.</para>
           </note>
-		</listitem>
+        </listitem>
       </varlistentry>
-      
+        
       <varlistentry>
-		<term>Twelve characters have a special meaning by default</term>
-		<listitem>
+      <term>Twelve characters have a special meaning by default</term>
+        <listitem>
           <para>That special meaning has to be cancelled by another
           character to match the character itself.</para>
-          <para>For example, <literal>.</literal> on its own has the
-          special meaning of matching <emphasis>any single character</emphasis>.</para>
+          <para>The full list characters is presented <link
+          linkend="app.regex.twelve.characters">below</link>. One
+          example is <literal>.</literal>: on its own, it has the
+          special meaning of matching <emphasis>any single
+          character</emphasis>.</para>
           <para>To find a normal period, that meaning has to be cancelled
           using the <literal>\</literal>, to make the expression
           <literal>\.</literal>, which just matches a period.</para>
-		</listitem>
-	  </varlistentry>
+        </listitem>
+      </varlistentry>
 
-	  <varlistentry>
-		<term>The <literal>\</literal> character is a very special
-		character</term>
-		<listitem>
-		  <para>As stated above, the <literal>\</literal> character has the
-		  default special meaning of either cancelling or activating the
-		  special meaning of other characters. It has no effect if placed
-		  before a character with no special meaning (either by default or by addition).</para>
-		  <para>The <literal>\</literal> can be disabled by another
-		  <literal>\</literal>, as in <literal>\\</literal> to simply match
-		  itself as the <emphasis>backslash</emphasis> character.</para>
-		</listitem>
-	  </varlistentry>
-	</variablelist>
+      <varlistentry>
+        <term>The <literal>\</literal> character is a very special
+        character</term>
+        <listitem>
+          <para>As stated above, the <literal>\</literal> character has
+          the default special meaning of either cancelling or activating
+          the special meaning of other characters. It has no effect if
+          placed before a character with no special meaning (either by
+          default or by addition).</para>
+          <para>The <literal>\</literal> can be disabled by another
+          <literal>\</literal>, as in <literal>\\</literal> to simply
+          match itself as the <emphasis>backslash</emphasis>
+          character.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
   </section>
 
   <section id="app.regex.twelve.characters">
-	<title id="app.regex.twelve.characters.title">The 12 characters</title>
+	  <title id="app.regex.twelve.characters.title">The 12 characters</title>
 	
     <para>The twelve special characters are the
     <emphasis>backslash</emphasis> <literal>\</literal>, the
-    <emphasis>caret</emphasis> <literal>^</literal>, the <emphasis>dollar
-    sign</emphasis> <literal>$</literal>, the <emphasis>period</emphasis>
-    (or <emphasis>dot</emphasis>) <literal>.</literal>, the
-    <emphasis>vertical bar</emphasis> (or <emphasis>pipe symbol</emphasis>)
-    <literal>|</literal>, the <emphasis>question mark</emphasis>
-    <literal>?</literal>, the <emphasis>asterisk</emphasis> (or
-    <emphasis>star</emphasis>) <literal>*</literal>, the <emphasis>plus
-    sign</emphasis> <literal>+</literal>, the opening and closing <emphasis>parentheses</emphasis>
-    <literal>( )</literal>, the opening square bracket <literal>[</literal>, and
-    <emphasis>curly brace</emphasis> <literal>{</literal>.
+    <emphasis>caret</emphasis> <literal>^</literal>, the
+    <emphasis>dollar sign</emphasis> <literal>$</literal>, the
+    <emphasis>period</emphasis> (or <emphasis>dot</emphasis>)
+    <literal>.</literal>, the
+    <emphasis>vertical bar</emphasis> (or
+    <emphasis>pipe symbol</emphasis>) <literal>|</literal>, the
+    <emphasis>question mark</emphasis> <literal>?</literal>, the
+    <emphasis>asterisk</emphasis> (or <emphasis>star</emphasis>)
+    <literal>*</literal>, the <emphasis>plus sign</emphasis>
+    <literal>+</literal>, the opening <emphasis>parenthesis</emphasis>
+    <literal>(</literal>, the closing <emphasis>parenthesis</emphasis>,
+    <literal>)</literal>, the opening square bracket
+    <literal>[</literal>, and the opening
+    <emphasis>curly brace</emphasis> <literal>{</literal>.</para>
+
+    <para>Each character is briefly described below, and the
+    descriptions are followed by a table presenting examples for
+    each character.
     
 	<variablelist>
       <varlistentry>
         <term>The BACKSLASH: <literal>\</literal></term>
         <listitem>
-          <para>This character either cancels or activates the special meaning of the following character.
-          <example>
-            <title>Canceling a special meaning</title>
-            <para><literal>\.</literal> cancels the period's special
-            meaning of matching any one character, and turns it into a
-            plain period.</para>
-          </example>
-          <example>
-            <title>Activating a special meaning</title>
-            <para><literal>\b</literal> is no longer just the letter
-            “b”, but instead becomes a marker for word boundaries.</para>
-          </example>
-          </para>
+          <para>This character either cancels or activates the special meaning of the following character.</para>
         </listitem>
       </varlistentry>
 
@@ -246,47 +250,21 @@
         <listitem>
           <para>When it is the first character in the expression, the
           <emphasis>caret</emphasis> character matches the beginning of
-          a line.
-          <example>
-            <title>Matching the beginning of a line.</title>
-            <para><literal>^A</literal> matches an uppercase A at
-            the beginning of a line.</para>
-          </example>
-          </para>
-          <para>When it is the first character of an expression enclosed
-          in square brackets, the <emphasis>caret</emphasis> negates the
-          characters that follow.
-          <example>
-            <title>Negating characters</title>
-            <para><literal>[^abc]</literal> matches any characters <emphasis role="bold">other</emphasis> than "a", "b", or "c".</para>
-          </example>
-          </para>
+          a line.</para>
         </listitem>
       </varlistentry>
 
       <varlistentry>
         <term>The DOLLAR sign: <literal>$</literal></term>
         <listitem>
-          <para>When it As the last character in an expression, the <emphasis>dollar</emphasis> sign matches the end of a line.
-          <example>
-            <title>Matching the end of the line</title>
-            <para><literal>^$</literal> Matches an empty line
-            (there is nothing between the beginning and the end of the
-            line).</para>
-          </example>
-          </para>
+          <para>When it As the last character in an expression, the <emphasis>dollar</emphasis> sign matches the end of a line.</para>
         </listitem>
       </varlistentry>
 
       <varlistentry>
         <term>The PERIOD: <literal>.</literal></term>
         <listitem>
-          <para>Matches any single character.
-          <example><title>Matching any character</title>
-          <para><emphasis role="bold">^...$</emphasis> = A line
-          consisting of a sequence of any three characters.</para>
-          </example>
-          </para>
+          <para>Matches any single character.</para>
         </listitem>
       </varlistentry>
 
@@ -294,15 +272,7 @@
         <term>The VERTICAL BAR: <literal>|</literal></term>
         <listitem>
           <para>This character functions as an “OR” and matches either
-          of the expressions that precede or follow it.
-          <example>
-            <title>Choosing between alternatives</title>
-            <para><literal>^An&nbsp;|^The&nbsp;</literal>
-            matches <emphasis>either</emphasis> the sequence “An ”
-            <emphasis>or</emphasis> the sequence “The ” (including
-            the space) at the beginning of a line.</para>
-          </example>
-          </para>
+          of the expressions that precede or follow it.</para>
         </listitem>
       </varlistentry>
 
@@ -311,15 +281,7 @@
         <listitem>
           <para>This character specifies that either zero or one
           instance of the preceding character or expression should be
-          matched.
-          <example>
-            <title>Matching either the “a" or “an" form of the
-            indefinite article</title>
-            <para><literal>&nbsp;an?&nbsp;</literal> matches a
-            space, followed by the letter “a”, followed by 0 or 1
-            instances of the letter “n”, followed by a space.</para>
-          </example>
-          </para>
+          matched.</para>
         </listitem>
       </varlistentry>
 
@@ -327,14 +289,7 @@
         <term>The ASTERISK: <literal>*</literal></term>
         <listitem>
           <para>This character specifies that zero or more instances of
-          the preceding character or expression should be matched
-          <example>
-            <title>Matching zero or more characters than can be part
-            of a word</title>
-            <para><literal>\w+</literal> matches zero or more
-            <emphasis>word</emphasis> characters.</para>
-          </example>
-          </para>
+          the preceding character or expression should be matched.</para>
         </listitem>
       </varlistentry>
 
@@ -342,82 +297,705 @@
         <term>The PLUS sign: <literal>+</literal></term>
         <listitem>
           <para>This character specifies that one or more instances of
-          the preceding character or expression should be matched.
-          <example>
-            <title>Matching multiple whitespace characters</title>
-            <para><literal>[\h\v]+</literal> matches one or more
-            instances of either a horizontal white or vertical
-            whitespace.</para>
-          </example>
-          </para>
+          the preceding character or expression should be matched.</para>
         </listitem>
       </varlistentry>
 
       <varlistentry>
-        <term>The PARENTHESES: <literal>(   )</literal></term>
+        <term>The OPENING PARENTHESIS: <literal>(</literal></term>
+
         <listitem>
-          <para>Enclosing a set of characters in PARENTHESES identifies
-          it as a <emphasis>group</emphasis>. The contents of the group
-          are stored in memory and can be reused later. Parentheses are
-          always used in opening and closing pairs. Trying to use only
-          the opening or closing parenthesis on its own will cause an error.
-          <example>
-            <title>Doubled up words</title>
-            <para><literal>(\b\w+\b)\h\1\b</literal> matches a group
-            of characters starting after a word boundary (the first
-            <literal>\b</literal>) followed by one or more WORD
-            characters, and ending at another word boundary (the
-            second <literal>\b</literal>).</para>
-			<para>The group is followed by a
-            horizontal whitespace, and then by the contents of the
-            group (the word matched earlier), which is followed by a
-            word boundary.</para>
-			<para>Therefore, the entire expression matches
-            a word followed by itself.</para>
-          </example>
-          </para>
+          <para>Enclosing a set of characters in PARENTHESES
+          identifies it as a <emphasis>group</emphasis>. The contents
+          of the group are stored in memory and can be reused later.
+          Parentheses are always used in opening and closing pairs.
+          Trying to use only the opening or closing parenthesis on its
+          own will cause an error.</para>
         </listitem>
       </varlistentry>
 
       <varlistentry>
-        <term>The opening SQUARE BRACKET: <literal>[</literal></term>
+        <term>The CLOSING PARENTHESIS: <literal>)</literal></term>
+
         <listitem>
-          <para>Usually comes with the closing square bracket <literal>]</literal>, which does not
-          trigger an error on its own.</para>
-		  <para>As a pair, they enclose a set of
-          individual characters that each constitute a valid match.
-          <example>
-            <title>How do you spell license?</title>
-            <para><literal>li[cs]en[cs]e</literal> matches the
-            valid “license” and “licence” spellings, as well as the
-            “lisense” and “lisence” potential misspellings of that
-            word.</para>
-          </example>
-          </para>
+          <para>This character closes a group and is special because
+          it can never be used on its own. It must be preceded by the
+          <literal>\</literal> if you need to match the closing
+          parenthesis character itself.</para>
         </listitem>
       </varlistentry>
 
       <varlistentry>
-        <term>The opening CURLY BRACE: <literal>{</literal></term>
+        <term>The OPENING SQUARE BRACKETS <literal>[</literal></term>
+
         <listitem>
-          <para>Usually comes with the closing curly brace <literal>}</literal>, which does not
-          trigger an error on its own.</para>
-		  <para>As a pair, they enclose an
-          <emphasis>exact number</emphasis>, <emphasis>minimum</emphasis>,
-          <emphasis>maximum</emphasis>, or <emphasis>range</emphasis> specifying
-          how many instances of the preceding character or group should be
-          matched.
-          <example>
-            <title>Repetition marker</title>
-            <para><literal>\d{4}/\d{1,}</literal> matches a string
-            consisting of exactly four digits followed by a / and
-            then one or more digits.</para>
-          </example>
-          </para>
+          <para>This character must be paired with the closing square bracket to
+          enclose a set of individual characters that each represent a
+          valid potential match.</para>
+
+          <para>Only the opening bracket is special and needs to be
+          preceded by a backslash to search for the bracket character
+          itself. If you only want to match the closing bracket as
+          itself, you do not need to precede it with a backslash. (You
+          can still add it, but it will have no effect on the
+          expression or the result.)</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>The OPENING CURLY BRACE: <literal>{</literal></term>
+
+        <listitem>
+          <para>This character must be paired with the closing curly
+          brace to encloses an <emphasis>exact number</emphasis>,
+          <emphasis>minimum</emphasis>, <emphasis>maximum</emphasis>,
+          or <emphasis>range</emphasis> specifying how many instances of
+          the preceding character or group should be matched.</para>
+
+          <para>Only the opening brace is special and needs to be
+          preceded by a backslash to search for the brace character
+          itself. If you only want to match the closing brace as
+          itself, you do not need to precede it with a backslash. (You
+          can still add it, but it will have no effect on the
+          expression or the result.)</para>
         </listitem>
       </varlistentry>
     </variablelist>
   </para>
+
+  <table>
+    <title>Examples for the twelve special characters</title>
+
+    <tgroup cols="3">
+      <colspec colwidth="130*"/>
+      <colspec colwidth="160*"/>
+      <colspec colwidth="700*"/>
+
+      <thead>
+        <row>
+          <entry>Character</entry>
+          <entry>Expression</entry>
+          <entry>Examples</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>
+            <emphasis>Backslash:</emphasis>
+            <literal>\</literal>
+          </entry>
+
+          <entry>
+            <literal>0\.\d</literal>
+          </entry>
+
+          <entry>
+            <para>
+              <informaltable>
+                <tgroup cols="2">
+                  <colspec colwidth="180*"/>
+                  <colspec colwidth="820*"/>
+
+                  <tbody>
+                    <row>
+                      <entry>Matches</entry>
+
+                      <entry>
+                        <para>A number between <emphasis>0.0</emphasis>
+                        and <emphasis/>0.9, or just the final
+                        <emphasis>1.5</emphasis> in numbers such as
+                        11.5 or 561.5.</para>
+
+                        <para>The <literal>\.</literal> cancels the “any
+                        character” meaning of the period to match the
+                        decimal point, while the <literal>\d</literal>
+                        turns the ordinarily lowercase “d” into an
+                        expression that matches any digit between 0 and 9.</para>
+                      </entry>
+                    </row>
+
+                    <row>
+                      <entry>Does not match</entry>
+
+                      <entry>Sequences such as 0,1 or 0-3, in which a
+                      period not preceded by a backslash would match any
+                      character between two digits.</entry>
+                    </row>
+                  </tbody>
+                </tgroup>
+              </informaltable>
+            </para>
+          </entry>
+        </row>
+
+        <row>
+          <entry>
+            <emphasis>Caret:</emphasis>
+            <literal>^</literal>
+          </entry>
+
+          <entry>
+            <orderedlist>
+              <listitem>
+                <para>
+                  <literal>^A</literal>
+                </para>
+              </listitem>
+
+              <listitem>
+                <para>[^abc]</para>
+              </listitem>
+            </orderedlist>
+          </entry>
+
+          <entry>
+            <para>
+              <informaltable>
+                <tgroup cols="2">
+                  <colspec colwidth="180*"/>
+                  <colspec colwidth="820*"/>
+
+                  <tbody>
+                    <row>
+                      <entry>Matches</entry>
+
+                      <entry>
+                        <orderedlist>
+                          <listitem>
+                            <para>The uppercase “A” in the following
+                            sentence: “A long, but exciting journey was
+                            about to begin”.</para>
+                          </listitem>
+
+                          <listitem>
+                            <para>The “k” in the word “back”.</para>
+                          </listitem>
+                        </orderedlist>
+                      </entry>
+                    </row>
+
+                    <row>
+                      <entry>Does not match</entry>
+
+                      <entry>
+                        <orderedlist>
+                          <listitem>
+                            <para>The uppercase “A” in the following
+                            sentence: “My friend is writing a book
+                            called <emphasis>A Long Journey</emphasis>”.</para>
+                          </listitem>
+
+                          <listitem>
+                            <para>The lowercase “a”, “b”, or “c” in the
+                            word “back”.</para>
+                          </listitem>
+                        </orderedlist>
+                      </entry>
+                    </row>
+                  </tbody>
+                </tgroup>
+              </informaltable>
+            </para>
+          </entry>
+        </row>
+
+        <row>
+          <entry>
+            <emphasis>Dollar sign:</emphasis>
+            <literal>$</literal>
+          </entry>
+
+          <entry>
+            <literal>^\w+:$</literal>
+          </entry>
+
+          <entry>
+            <para>
+              <informaltable>
+                <tgroup cols="2">
+                  <colspec colwidth="180*"/>
+                  <colspec colwidth="820*"/>
+
+                  <tbody>
+                    <row>
+                      <entry>Matches</entry>
+
+                      <entry>
+                        <para>A line that consists of a single word and
+                        ends with a colon.</para>
+                        <para>
+                          <emphasis>Example:</emphasis>
+                        </para>
+                      </entry>
+                    </row>
+
+                    <row>
+                      <entry>Does not match</entry>
+
+                      <entry>
+                        <para>A line that consists of a single word, 
+                        but does not end in a colon.</para>
+                        <para>
+                          <emphasis>Examples.</emphasis>
+                        </para>
+                      </entry>                            
+                    </row>
+                  </tbody>
+                </tgroup>
+              </informaltable>
+            </para>
+          </entry>
+        </row>
+
+        <row>
+          <entry>
+            <emphasis>Period (dot):</emphasis>
+            <literal>.</literal>
+          </entry>
+
+          <entry>
+            <literal>c.t</literal>
+          </entry>
+
+          <entry>
+            <para>
+              <informaltable>
+                <tgroup cols="2">
+                  <colspec colwidth="180*"/>
+                  <colspec colwidth="820*"/>
+
+                  <tbody>
+                    <row>
+                      <entry>Matches</entry>
+
+                      <entry>
+                        <para>Any combinations of three letters
+                        starting with “c” and ending with “t”:
+                        “<emphasis>cat</emphasis>”,
+                        “<emphasis>cut</emphasis>”,
+                        “<emphasis>cot</emphasis>”, or even nonsensical
+                        combinations such as “<emphasis>czt</emphasis>”
+                        or “<emphasis>cqt</emphasis>”.
+                       </para>
+                      </entry>
+                    </row>
+
+                    <row>
+                      <entry>Does not match</entry>
+
+                      <entry>
+                        <para>
+                          <literallayout>
+                            <literal>c.</literal>
+                            <literal>t</literal>
+                          </literallayout>
+                        </para>
+                        
+                        <para>Combinations of three letters starting
+                        with “c” and ending with “t” in:</para>
+                      </entry>
+                    </row>
+                  </tbody>
+                </tgroup>
+              </informaltable>
+            </para>
+          </entry>
+        </row>
+
+        <row>
+          <entry>
+            <emphasis>Vertical bar (pipe):</emphasis>
+            <literal>|</literal>
+          </entry>
+
+          <entry>
+            <literal>^An |^The </literal>
+          </entry>
+
+          <entry>
+            <para>
+              <informaltable>
+                <tgroup cols="2">
+                  <colspec colwidth="180*"/>
+                  <colspec colwidth="820*"/>
+
+                  <tbody>
+                    <row>
+                      <entry>Matches</entry>
+
+                      <entry>
+                        <para>The initial “An” or “The” in phrases such
+                        as:</para>
+                        <para>“An apple a day…”</para>
+                        <para>“The apple of my eye…”</para>
+                      </entry>
+                    </row>
+
+                    <row>
+                      <entry>Does not match</entry>
+
+                      <entry>
+                        <para>The initial “An” or “The” in phrases such as:</para>
+                        <para>“A story called <emphasis>An Unsung
+                        Hero</emphasis>.”</para>
+                        <para>“They work for <emphasis>The Daily
+                          Post</emphasis>.”</para>
+                      </entry>
+                    </row>
+                  </tbody>
+                </tgroup>
+              </informaltable>
+            </para>
+          </entry>
+        </row>
+
+        <row>
+          <entry>
+            <emphasis>Question mark:</emphasis>
+            <literal>?</literal>
+          </entry>
+
+          <entry><literal>an?␣</literal>, where “␣” represents a
+          single space.</entry>
+
+          <entry>
+            <para>
+              <informaltable>
+                <tgroup cols="2">
+                  <colspec colwidth="180*"/>
+                  <colspec colwidth="820*"/>
+
+                  <tbody>
+                    <row>
+                      <entry>Matches</entry>
+
+                      <entry>
+                        <para>Either the “a ” or the “an ” in:</para>
+                        <para>“I have a question.”</para>
+                        <para>“I have an idea!”</para>
+
+                        <para>It will also find the final “an ” of
+                        “Can ” in a sentence such as “Can I help you?”,
+                        or the final “a ” of “pasta” in “We had pasta
+                        for lunch.”</para>
+                      </entry>
+                    </row>
+
+                    <row>
+                      <entry>Does not match</entry>
+
+                      <entry>
+                        <para>Neither the “a” or the “an” in:</para>
+                        <para>The indefinite article: “a” (or
+                        “an”).</para>
+                        <para>Neither is followed by a space.</para>
+                      </entry>
+                    </row>
+                  </tbody>
+                </tgroup>
+              </informaltable>
+            </para>                    
+          </entry>
+        </row>
+
+        <row>
+          <entry>
+            <emphasis>Asterisk (star):</emphasis>
+            <literal>*</literal>
+          </entry>
+
+          <entry>
+            <literal>run\w*</literal>
+          </entry>
+
+          <entry>
+            <para>
+              <informaltable>
+                <tgroup cols="2">
+                  <colspec colwidth="180*"/>
+                  <colspec colwidth="820*"/>
+
+                  <tbody>
+                    <row>
+                      <entry>Matches</entry>
+
+                      <entry>
+                        <para>The word “run”, as well as “runs”,
+                        “runner”, “runway”, “runt” in “grunt” or
+                        “brunt”, and any other word or sequence of
+                        characters containing “run” followed by
+                        zero or more “<emphasis>word
+                        characters</emphasis>” (which include digits
+                        and the underscore, so the part before the
+                        “@” in an email address such as
+                        run_123@example.email.org is also a
+                        match).</para>
+                      </entry>
+                    </row>
+
+                    <row>
+                      <entry>Does not match</entry>
+
+                      <entry>
+                        <para>The complete phrase in “run-on” or
+                        “run'n'gun”, because the hyphen and apostrophe
+                        are not included in <literal>\w</literal>. Only
+                        the initial “run” in those phrases is
+                        matched.</para>
+                      </entry>
+                    </row>
+                  </tbody>
+                </tgroup>
+              </informaltable>
+            </para>                    
+          </entry>
+        </row>
+
+        <row>
+          <entry>
+            <emphasis>Plus sign:</emphasis>
+            <literal>+</literal>
+          </entry>
+
+          <entry>
+            <literal>\d+.d</literal>
+          </entry>
+
+          <entry>
+            <para>
+              <informaltable>
+                <tgroup cols="2">
+                  <colspec colwidth="180*"/>
+                  <colspec colwidth="820*"/>
+
+                  <tbody>
+                    <row>
+                      <entry>Matches</entry>
+
+                      <entry>
+                        <para>Numbers such as “1.5”, “23.2” or “5235.8”
+                        with a single decimal place and any number of
+                        digits before the decimal point.</para>
+                      </entry>
+                    </row>
+
+                    <row>
+                      <entry>Does not match</entry>
+
+                      <entry>
+                        <para>The entire value of numbers such as
+                        “5,235.8” or “21,571.9”. Only the portion of
+                        the after the thousands separator will be
+                        matched.</para></entry>
+                    </row>
+                  </tbody>
+                </tgroup>
+              </informaltable>
+            </para>
+          </entry>
+        </row>
+
+        <row>
+          <entry>
+            <emphasis>Opening parenthesis:</emphasis>
+            <literal>(</literal>
+          </entry>
+
+          <entry>
+            <literal>(\b\w+\b)\h\1\b</literal>
+          </entry>
+
+          <entry>
+            <para>
+              <informaltable>
+                <tgroup cols="2">
+                  <colspec colwidth="180*"/>
+                  <colspec colwidth="820*"/>
+
+                  <tbody>
+                    <row>
+                      <entry>Matches</entry>
+
+                      <entry>
+                        <para>Doubled up words separated by a space, 
+                        such as the consecutive “an” in the following
+                        sentence.</para>
+                        <para>“I bought an an apple.”</para>
+                      </entry>
+                    </row>
+
+                    <row>
+                      <entry>Does not match</entry>
+
+                      <entry>
+                        <para>The “that, that” in the following
+                        sentence.</para>
+                        <para>“But that, that is just unbelievable”,
+                        because the first “that” is followed by both a
+                        comma and a space rather than only a
+                        space.</para>
+                      </entry>
+                    </row>
+                  </tbody>
+                </tgroup>
+              </informaltable>
+            </para>
+          </entry>
+        </row>
+
+        <row>
+          <entry>
+            <emphasis>Closing parenthesis</emphasis>
+            <literal>)</literal>
+          </entry>
+
+          <entry>
+            <literal>^\d+\)</literal>
+          </entry>
+
+          <entry>
+            <para>
+              <informaltable>
+                <tgroup cols="2">
+                  <colspec colwidth="180*"/>
+                  <colspec colwidth="820*"/>
+
+                  <tbody>
+                    <row>
+                      <entry>Matches</entry>
+
+                      <entry>
+                        <para>The sequence number (including the
+                        parenthesis) at the beginning of each line in a
+                        list such as:</para>
+                        <para>
+                          <literallayout>
+                            1) Apples
+                            2) Oranges
+                            3) Pears
+                          </literallayout>
+                        </para>
+                      </entry>
+                    </row>
+
+                    <row>
+                      <entry>Does not match</entry>
+
+                      <entry>
+                        <para>Sequence numbers that are not at the
+                        beginning of a line</para>
+                        <para>
+                          <literallayout>
+                            Follow these steps:
+                            Step 1) Preparation
+                            Step 2) …
+                          </literallayout>
+                        </para>
+                      </entry>
+                    </row>
+                  </tbody>
+                </tgroup>
+              </informaltable>
+            </para>
+          </entry>
+        </row>
+
+        <row>
+          <entry>
+            <emphasis>Opening bracket</emphasis>
+            <literal>[</literal>
+          </entry>
+
+          <entry>
+            <literal>li[cs]en[cs]e</literal>
+          </entry>
+
+          <entry>
+            <para>
+              <informaltable>
+                <tgroup cols="2">
+                  <colspec colwidth="180*"/>
+                  <colspec colwidth="820*"/>
+
+                  <tbody>
+                    <row>
+                      <entry>Matches</entry>
+
+                      <entry>
+                        <para>The correct “licence” and “license”
+                        spellings, as well as the potential “lisence”
+                        and “lisense” mispellings</para>
+                      </entry>
+                    </row>
+
+                    <row>
+                      <entry>Does not match</entry>
+
+                      <entry>
+                        <para>More egregious mispellings such as
+                        “licensse” or “lissense”.</para>
+                      </entry>
+                    </row>
+                  </tbody>
+                </tgroup>
+              </informaltable>
+            </para>
+          </entry>
+        </row>
+
+        <row>
+          <entry>
+            <emphasis>Opening curly brace:</emphasis>
+            <literal>{</literal>
+          </entry>
+
+          <entry>
+            <literal>\d{4}/\d{1,3}</literal>
+          </entry>
+
+          <entry>
+            <para>
+              <informaltable>
+                <tgroup cols="2">
+                  <colspec colwidth="180*"/>
+                  <colspec colwidth="820*"/>
+
+                  <tbody>
+                    <row>
+                      <entry>Matches</entry>
+
+                      <entry>
+                        <para>Codes such as “1234/5”, “1472/69”, or
+                        “9513/842” consisting of four digits, a forward
+                        slash, and one to three more digits.</para>
+                      </entry>
+                    </row>
+
+                    <row>
+                      <entry>Does not match</entry>
+
+                      <entry>
+                        <para>Codes such as “123/45”, “1472/6985”, or
+                        “95133/15746”.</para>
+                        <para><emphasis role="bold">Caution:</emphasis>
+                        Although the last two codes above are not
+                        matched completely, the expression will return
+                        the “<emphasis>1472/698</emphasis>” portion of
+                        “1472/6985”, as well as the
+                        “<emphasis>5133/157</emphasis>” of
+                        “95133/15746”.</para>
+                      </entry>
+                    </row>
+                  </tbody>
+                </tgroup>
+              </informaltable>
+            </para>
+          </entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
 </section>
 
 <section id="app.regex.many.expressions">

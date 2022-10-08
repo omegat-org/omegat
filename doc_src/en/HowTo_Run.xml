@@ -581,19 +581,17 @@
 				<varlistentry id="launch.with.command.line.tag.validation.abort.warn.">
 				  <term id="launch.with.command.line.tag.validation.abort.warn.title">--tag-validation=[abort|warn]</term>
 				  <listitem>
-					<para>Validate tags.
+					<para>Check tag issues.
 					<itemizedlist>
 					  <listitem>
-						<para>Abort: Exit with an error if there are invalid
-						tags.</para>
+						<para>Abort: Exit with an error if there are tag issues.</para>
 					  </listitem>
 					  <listitem>
-						<para>Warn: Show warnings without exiting if there are
-						invalid tags.</para>
+						<para>Warn: Show warnings without exiting if there are tag issues.</para>
 					  </listitem>											
 					</itemizedlist>
 					<note>
-					  <para>Invalid tag reports are sent output to the terminal
+					  <para>Reports about tag issues are output to the terminal
 					  window.</para>
 					</note>
 					</para>

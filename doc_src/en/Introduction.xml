@@ -396,13 +396,12 @@
 	<para>If you make mistakes when you manage the tags, your translated files
 	might fail to open. Use
 	<link linkend="menus.tools.check.issues" endterm="menus.tools.check.issues.title"/>
-	to validate that your tags are correct before you generate your translated
-	files.</para>
+	to check your tags before you generate your translated files.</para>
 
 	<warning><para>If a file refuses to open in LibreOffice, Word or other
 	application, it is often due to errors in the management of OmegaT
-	tags. Return to OmegaT, validate the tags and recreate the translated
-	file.</para></warning>
+	tags. Return to OmegaT, check your document for tag issues and recreate the
+	translated file.</para></warning>
   </section>
 
   <section id="introduction.review.the.translation">

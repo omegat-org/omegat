@@ -780,8 +780,8 @@ appropriate service to use the machine translation options.</para></note>
 
       <listitem>
         <para><guilabel>Skip text matching regular expression</guilabel>: Any
-        text matching the regular expression is skipped, and shown in red in
-        the tag validator. Matching text in source segments is shown in
+        text matching the regular expression is skipped, and shown in red when
+        checking for tag issues. Matching text in source segments is shown in
         italics.</para>
       </listitem>
 
@@ -1307,7 +1307,7 @@ instead.</para></warning>
 		matches. You can also see the prefix as a <link
 		linkend="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation"
 		endterm="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation.title"/>
-		to include it in the validation process.</para>
+		to include it in the tag issues checking process.</para>
 		<para>Some scripts are very useful when it comes to matches
 		insertion. See <link linkend="windows.scripts.distribution"
 		endterm="windows.scripts.distribution.title"/> for details.</para>
@@ -1461,7 +1461,7 @@ instead.</para></warning>
 
 	<varlistentry id="dialogs.preferences.editor.validate.tags.when.leaving.a.segment">
 	  <term
-		  id="dialogs.preferences.editor.validate.tags.when.leaving.a.segment.title">Validate
+		  id="dialogs.preferences.editor.validate.tags.when.leaving.a.segment.title">Check
 	  tags when leaving a segment</term>
 
 	  <listitem>
@@ -1536,7 +1536,7 @@ instead.</para></warning>
 		  id="dialogs.preferences.tag.processing.programming.variables.title">Programming
 	  variables</term>
 	  <listitem><para>When translating software-related files, you can
-	  configure the tag validation options to also check for programming
+	  configure the tag issues options to also check for programming
 	  (<literal>%</literal>) variables or placeholders
 	  (<literal>{0}</literal>), if the file filter does not already do
 	  so. The PO filter already handles variables marked with
@@ -1598,7 +1598,7 @@ instead.</para></warning>
 		  id="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation.title">Flagged text</term>
 	  <listitem><para>When present in a segment target, they are marked in
 	  red characters by default and are also identified as extraneous tags
-	  for validation purposes. See <link linkend="menus.tools.check.issues"
+	  for issue checking purposes. See <link linkend="menus.tools.check.issues"
 	  endterm="menus.tools.check.issues.title"/> for
 	  details.</para></listitem>
 	</varlistentry>

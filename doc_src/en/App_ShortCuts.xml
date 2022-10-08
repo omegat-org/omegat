@@ -1122,14 +1122,14 @@
 
           <tbody>
             <row>
-              <entry>Validate Tags</entry>
+              <entry>Check Issues...</entry>
               <entry>toolsValidateTagsMenuItem</entry>
 			  <entry>ctrl shift V</entry>
               <entry>meta shift V</entry>
             </row>
 
             <row>
-              <entry>Validate Tags for Current Document</entry>
+              <entry>Check Issues for Current Document</entry>
               <entry>toolsSingleValidateTagsMenuItem</entry>
             </row>
 

@@ -1048,7 +1048,7 @@
         </row>
 
         <row>
-          <entry>\r</entry>
+          <entry><literal>\r</literal></entry>
           <entry>
             <para>The carriage-return character, not the letter “r”.</para>
             <para>similarly, <literal>\R</literal> is any line break character.</para></entry>

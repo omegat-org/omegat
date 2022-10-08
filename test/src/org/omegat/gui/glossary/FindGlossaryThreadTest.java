@@ -32,19 +32,34 @@ import java.util.List;
 
 import org.junit.Test;
 import org.omegat.core.TestCore;
+import org.omegat.util.Preferences;
 
 public class FindGlossaryThreadTest extends TestCore {
     @Test
     public void testEntriesSort() {
-        List<GlossaryEntry> entries = new ArrayList<GlossaryEntry>();
+        List<GlossaryEntry> entries = new ArrayList<>();
         entries.add(new GlossaryEntry("dog", "doggy", "cdog", false, null));
         entries.add(new GlossaryEntry("cat", "catty", "ccat", false, null));
+        entries.add(new GlossaryEntry("cat", "mikeneko", "ccat", false, null));
         entries.add(new GlossaryEntry("zzz", "zzz", "czzz", true, null));
         entries.add(new GlossaryEntry("horse", "catty", "chorse", false, null));
+        Preferences.setPreference(Preferences.GLOSSARY_SORT_BY_LENGTH, true);
         GlossarySearcher.sortGlossaryEntries(entries);
         assertEquals("zzz", entries.get(0).getSrcText());
-        assertEquals("horse", entries.get(1).getSrcText());
+        assertEquals("cat", entries.get(1).getSrcText());
+        assertEquals("mikeneko", entries.get(1).getLocText());
         assertEquals("cat", entries.get(2).getSrcText());
+        assertEquals("catty", entries.get(2).getLocText());
         assertEquals("dog", entries.get(3).getSrcText());
+        assertEquals("horse", entries.get(4).getSrcText());
+        Preferences.setPreference(Preferences.GLOSSARY_SORT_BY_LENGTH, false);
+        GlossarySearcher.sortGlossaryEntries(entries);
+        assertEquals("zzz", entries.get(0).getSrcText());
+        assertEquals("cat", entries.get(1).getSrcText());
+        assertEquals("catty", entries.get(1).getLocText());
+        assertEquals("cat", entries.get(2).getSrcText());
+        assertEquals("mikeneko", entries.get(2).getLocText());
+        assertEquals("dog", entries.get(3).getSrcText());
+        assertEquals("horse", entries.get(4).getSrcText());
     }
 }

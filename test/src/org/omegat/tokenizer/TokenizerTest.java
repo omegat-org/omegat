@@ -27,7 +27,7 @@ package org.omegat.tokenizer;
 
 import static org.junit.Assert.assertEquals;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.omegat.tokenizer.ITokenizer.StemmingMode;
 import org.omegat.util.Token;

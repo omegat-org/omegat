@@ -32,7 +32,7 @@ package org.omegat.core.machinetranslators;
 import java.io.IOException;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import org.apache.commons.lang.StringEscapeUtils;
+import org.apache.commons.text.StringEscapeUtils;
 
 import org.omegat.util.Language;
 import org.omegat.util.OStrings;
@@ -100,7 +100,7 @@ public final class MyMemoryMachineTranslate extends AbstractMyMemoryTranslate {
                 bestEntry = mtEntry;
             }
             assert bestEntry != null;
-            String translation = StringEscapeUtils.unescapeHtml(bestEntry.get("translation").asText());
+            String translation = StringEscapeUtils.unescapeHtml4(bestEntry.get("translation").asText());
             putToCache(sLang, tLang, text, translation);
             return translation;
         } catch (IOException e) {

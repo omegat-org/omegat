@@ -38,8 +38,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang.StringUtils;
-
+import org.apache.commons.lang3.StringUtils;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.master.PluginUtils;
@@ -310,7 +309,7 @@ public final class ProjectFileStorage {
 
     /**
      * Load a tokenizer class from its canonical name.
-     * 
+     *
      * @param className
      *            Name of tokenizer class
      * @return Class object of specified tokenizer, or of fallback tokenizer if

@@ -12,13 +12,13 @@ core contributor and the PR ticket will be closed. It will appear to have been
 <!-- Please try to limit your pull request to one type; submit multiple pull
 requests if needed. -->
 
-Please check the type of change your PR introduces:
+Please mark github LABEL of the type of change your PR introduces:
 
-- [ ] Bug fix
-- [ ] Feature
-- [ ] Documentation
-- [ ] Build and release changes
-- [ ] Other (describe below)
+- Bug fix -> [bug]
+- Feature enhancement -> [enhancement]
+- Documentation -> [documentation]
+- Build and release changes -> [build/release]
+- Other (describe below)
 
 ## Which ticket is resolved?
 
@@ -28,10 +28,20 @@ Feature requests: https://sourceforge.net/p/omegat/feature-requests/
 
 Bugs: https://sourceforge.net/p/omegat/bugs/
 
-Documentation: https://sourceforge.net/p/omegat/documentation/ -->
+Documentation: https://sourceforge.net/p/omegat/documentation/ 
 
-- Link: <!-- Paste link here -->
-- Title: <!-- Paste title here -->
+ Plesae paste a ticket title and URL  
+-->
+
+- Title ex. fix...
+  * URL ex. https://...
+ 
+- Title
+  * URL
+
+<!-- 
+ Above block is used for changelog. 
+-->
 
 ## What does this PR change?
 

@@ -283,12 +283,17 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
         clear();
 
         if (data == null) {
+            if (Preferences.isPreference(Preferences.NOTIFY_DICTIONARY_NOHIT)) {
+                scrollPane.notify(false);
+            }
             return;
-        }
-
-        if (!data.isEmpty() && Preferences.isPreference(Preferences.NOTIFY_DICTIONARY_HITS)) {
+        } else if (data.isEmpty() && Preferences.isPreference(Preferences.NOTIFY_DICTIONARY_NOHIT)) {
+            scrollPane.notify(false);
+            return;
+        } else if (!data.isEmpty() && Preferences.isPreference(Preferences.NOTIFY_DICTIONARY_HITS)) {
             scrollPane.notify(true);
         }
+        // otherwise, don't notify.
 
         StringBuilder txt = new StringBuilder("<html>");
         boolean wasPrev = false;
@@ -481,15 +486,17 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
 
     @Override
     public void populatePaneMenu(JPopupMenu menu) {
-        final JMenuItem notify = new JCheckBoxMenuItem(
+        final JMenuItem notifyHitMenuItem = new JCheckBoxMenuItem(
                 OStrings.getString("GUI_DICTIONARYWINDOW_SETTINGS_NOTIFICATIONS"));
-        notify.setSelected(Preferences.isPreference(Preferences.NOTIFY_DICTIONARY_HITS));
-        notify.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Preferences.setPreference(Preferences.NOTIFY_DICTIONARY_HITS, notify.isSelected());
-            }
-        });
-        menu.add(notify);
+        final JMenuItem notifyNoHitMenuItem = new JCheckBoxMenuItem(
+                OStrings.getString("GUI_DICTIONARYWINDOW_SETTINGS_NOTIFICATION_NOHIT"));
+        notifyHitMenuItem.setSelected(Preferences.isPreference(Preferences.NOTIFY_DICTIONARY_HITS));
+        notifyNoHitMenuItem.setSelected(Preferences.isPreference(Preferences.NOTIFY_DICTIONARY_NOHIT));
+        notifyHitMenuItem.addActionListener(e -> Preferences.setPreference(Preferences.NOTIFY_DICTIONARY_HITS,
+                notifyHitMenuItem.isSelected()));
+        notifyNoHitMenuItem.addActionListener(e -> Preferences.setPreference(Preferences.NOTIFY_DICTIONARY_NOHIT,
+                notifyNoHitMenuItem.isSelected()));
+        menu.add(notifyHitMenuItem);
+        menu.add(notifyNoHitMenuItem);
     }
 }

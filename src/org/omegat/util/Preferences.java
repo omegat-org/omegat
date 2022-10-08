@@ -471,6 +471,7 @@ public final class Preferences {
     public static final String NOTIFY_GLOSSARY_HITS = "notify_glossary_hits";
     public static final String NOTIFY_COMMENTS = "notify_comments";
     public static final String NOTIFY_DICTIONARY_HITS = "notify_dictionary_hits";
+    public static final String NOTIFY_DICTIONARY_NOHIT = "notify_dictionary_nohit";
     public static final String NOTIFY_MULTIPLE_TRANSLATIONS = "notify_multiple_translations";
     public static final String NOTIFY_NOTES = "notify_notes";
 

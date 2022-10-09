@@ -18,6 +18,9 @@
   in the <link endterm="menus.tools.title" linkend="menus.tools"/>
   menu.</para>
 
+  <section id="windows.scripts.folder">
+	<title id="windows.scripts.folder.title">The script folder</title>
+	
   <para>By default, scripts are stored in the <link
   linkend="application.folder.scripts"
   endterm="application.folder.scripts.title"/> folder of the OmegaT
@@ -27,13 +30,52 @@
   in the left-hand panel of the window.</para>
 
   <warning><para>If a list of scripts is not displayed on the left side of the
-  script editor window, it means that OmegaT does not know where to look for the
-  scripts.</para>
+  script editor window, use the Scripting window <guimenu>File</guimenu> > <guimenuitem>Set Scripts Folder...</guimenuitem> menu to locate the place where scripts are stored.</para>
   </warning>
 
   <para>Additional scripts can be found here: <ulink
   url="https://sourceforge.net/projects/omegatscripts/">OmegaT
-  Scripts.</ulink></para>
+  Scripts</ulink>. Just copy the file and put it in the <link
+  linkend="application.folder.scripts"
+  endterm="application.folder.scripts.title"/> folder.</para>
+
+  <para>Some scripts are <emphasis>event</emphasis> based and can be made to be
+  triggered automatically when a given event takes place. Each event corresponds
+  to a subfolder inside <link
+  linkend="application.folder.scripts"
+  endterm="application.folder.scripts.title"/>:
+
+  <variablelist>
+	<varlistentry id="application.folder.scripts.application.shutdown">
+	  <term id="application.folder.scripts.application.shutdown.title">application_shutdown</term>
+	  <listitem><para>Scripts in this folder will be launched before OmegaT shuts down.</para></listitem>
+	</varlistentry>
+	<varlistentry id="application.folder.scripts.application.startup">
+	  <term id="application.folder.scripts.application.startup.title">application_startup</term>
+	  <listitem><para>Scripts in this folder will be launched when the scripting engine is available, slightly after OmegaT is launched.</para></listitem>
+	</varlistentry>
+	<varlistentry id="application.folder.scripts.entry.activated">
+	  <term id="application.folder.scripts.entry.activated.title">entry_activated</term>
+	  <listitem><para>Scripts in this folder will be launched when when editing a new segment. The segment is in the "newEntry" binding.</para></listitem>
+	</varlistentry>
+	<varlistentry id="application.folder.scripts.new.file">
+	  <term id="application.folder.scripts.new.file.title">new_file</term>
+	  <listitem><para>Scripts in the folder will be launched when the editor switches to the next file in the project. The new filename is in the "activeFileName" binding.</para></listitem>
+	</varlistentry>
+	<varlistentry id="application.folder.scripts.new.word">
+	  <term id="application.folder.scripts.new.word.title">new_word</term>
+	  <listitem><para>Scripts in the folder will be launched when a a new word is edited in the Editor window. The new word is available with "newWord".</para></listitem>
+	</varlistentry>
+	<varlistentry id="application.folder.scripts.project.changed">
+	  <term id="application.folder.scripts.project.changed.title">project_changed</term>
+	  <listitem><para>Scripts in the folder will be launched when the state of the project changes. An "eventType" object is binded and can take the following values: CLOSE, COMPILE, CREATE, LOAD, SAVE.</para></listitem>
+	</varlistentry>
+  </variablelist>
+  </para>
+	<warning><para>Scripts are also launched when you are executing other scripts. That means
+that on a large project, an "entry_activated" script will be called a lot of time when using a search/replace type of script that loops through all the segments, rendering the application unresponsive. </para></warning>
+  </section>
+  
 
 <section id="windows.scripts.usage">
   <title id="windows.scripts.usage.title">Usage</title>

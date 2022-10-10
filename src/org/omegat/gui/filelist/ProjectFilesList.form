@@ -270,10 +270,10 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="m_wikiImportButton">
+        <Component class="javax.swing.JButton" name="m_webImportButton">
           <Properties>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="org/omegat/Bundle.properties" key="TF_MENU_WIKI_IMPORT" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+              <ResourceString bundle="org/omegat/Bundle.properties" key="TF_MENU_FILE_IMPORT_WEB" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
             </Property>
           </Properties>
         </Component>

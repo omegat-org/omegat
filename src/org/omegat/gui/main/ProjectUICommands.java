@@ -70,6 +70,7 @@ import org.omegat.gui.dialogs.FileCollisionDialog;
 import org.omegat.gui.dialogs.NewProjectFileChooser;
 import org.omegat.gui.dialogs.NewTeamProjectController;
 import org.omegat.gui.dialogs.ProjectPropertiesDialog;
+import org.omegat.gui.dialogs.WebDownloadDialogController;
 import org.omegat.util.FileUtil;
 import org.omegat.util.FileUtil.ICollisionCallback;
 import org.omegat.util.HttpConnectionUtils;
@@ -1173,16 +1174,19 @@ public final class ProjectUICommands {
      * Does wikiread
      */
     public static void doWikiImport() {
-        String remoteUrl = JOptionPane.showInputDialog(Core.getMainWindow().getApplicationFrame(),
-                OStrings.getString("TF_WIKI_IMPORT_PROMPT"),
-                OStrings.getString("TF_WIKI_IMPORT_TITLE"), JOptionPane.WARNING_MESSAGE);
-        String projectsource = Core.getProject().getProjectProperties().getSourceRoot();
+        WebDownloadDialogController webDownloadDialogController = new WebDownloadDialogController();
+        if (webDownloadDialogController.show(Core.getMainWindow().getApplicationFrame())
+                == WebDownloadDialogController.RET_CANCEL) {
+            return;
+        }
+        String remoteUrl = webDownloadDialogController.getWebDownloadUrl();
         if (remoteUrl == null || remoteUrl.trim().isEmpty()) {
             // [1762625] Only try to get MediaWiki page if a string has been entered
             return;
         }
+        String projectSource = Core.getProject().getProjectProperties().getSourceRoot();
         try {
-            WikiGet.doWikiGet(remoteUrl, projectsource);
+            WikiGet.doWikiGet(remoteUrl, projectSource);
             projectReload();
         } catch (Exception ex) {
             Log.log(ex);

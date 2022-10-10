@@ -194,7 +194,7 @@ public class ProjectFilesListController {
         initWindowLayout();
 
         list.m_addNewFileButton.addActionListener(e -> doImportSourceFiles());
-        list.m_wikiImportButton.addActionListener(e -> doWikiImport());
+        list.m_webImportButton.addActionListener(e -> doWikiImport());
         list.m_closeButton.addActionListener(e -> doCancel());
         list.addWindowListener(new WindowAdapter() {
             @Override
@@ -857,7 +857,7 @@ public class ProjectFilesListController {
     /** Updates the Import Files button status. */
     private void uiUpdateImportButtonStatus() {
         list.m_addNewFileButton.setEnabled(Core.getProject().isProjectLoaded());
-        list.m_wikiImportButton.setEnabled(Core.getProject().isProjectLoaded());
+        list.m_webImportButton.setEnabled(Core.getProject().isProjectLoaded());
     }
 
     private void gotoFile(int row) {

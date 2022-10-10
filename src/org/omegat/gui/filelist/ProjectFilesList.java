@@ -74,7 +74,7 @@ public class ProjectFilesList extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         filler5 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         m_addNewFileButton = new javax.swing.JButton();
-        m_wikiImportButton = new javax.swing.JButton();
+        m_webImportButton = new javax.swing.JButton();
         m_closeButton = new javax.swing.JButton();
         filler6 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
 
@@ -157,8 +157,8 @@ public class ProjectFilesList extends javax.swing.JFrame {
         org.openide.awt.Mnemonics.setLocalizedText(m_addNewFileButton, OStrings.getString("TF_MENU_FILE_IMPORT")); // NOI18N
         jPanel1.add(m_addNewFileButton);
 
-        org.openide.awt.Mnemonics.setLocalizedText(m_wikiImportButton, OStrings.getString("TF_MENU_WIKI_IMPORT")); // NOI18N
-        jPanel1.add(m_wikiImportButton);
+        org.openide.awt.Mnemonics.setLocalizedText(m_webImportButton, OStrings.getString("TF_MENU_FILE_IMPORT_WEB")); // NOI18N
+        jPanel1.add(m_webImportButton);
 
         org.openide.awt.Mnemonics.setLocalizedText(m_closeButton, OStrings.getString("BUTTON_CLOSE")); // NOI18N
         jPanel1.add(m_closeButton);
@@ -185,7 +185,7 @@ public class ProjectFilesList extends javax.swing.JFrame {
     public javax.swing.JPanel jPanel4;
     public javax.swing.JButton m_addNewFileButton;
     public javax.swing.JButton m_closeButton;
-    public javax.swing.JButton m_wikiImportButton;
+    public javax.swing.JButton m_webImportButton;
     public javax.swing.JScrollPane scrollFiles;
     public javax.swing.JTextArea statLabel;
     public javax.swing.JTable tableFiles;

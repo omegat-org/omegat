@@ -38,7 +38,7 @@
 
       <para>OmegaT tags are LTR strings. When translating between RTL and LTR languages, correctly reading the tags from the source and entering them properly in the target may require the translator to toggle between LTR and RTL modes numerous times.</para>
 
-      <para>Therefore, translators are encouraged to remove style information from the original document whenever possible to limit the number of tags displayed in the editor.  Validate tags (using the <link linkend="menus.tools.check.issues" endterm="menus.tools.check.issues.title"></link> command) and produce translated documents regularly to catch any problems quickly. Hint: it may be simpler to  translate a plain text version of the document and add any necessary styling in the relevant application at a later stage.</para>
+      <para>Therefore, translators are encouraged to remove style information from the original document whenever possible to limit the number of tags displayed in the editor.  Check tag issues with <link linkend="menus.tools.check.issues" endterm="menus.tools.check.issues.title"/> and produce translated documents regularly to catch any problems quickly. Hint: it may be simpler to  translate a plain text version of the document and add any necessary styling in the relevant application at a later stage.</para>
     </section>
 
     <section id="how.to.manage.right.to.left.creating.translated.rtl.documents">

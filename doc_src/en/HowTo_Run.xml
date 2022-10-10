@@ -149,51 +149,52 @@
 	  &quot;terminal&quot; or &quot;console&quot;. For the sake of simplicity,
 	  this manual refers to it as the terminal.</para>
 	  
-	  <note><para>On Windows, you can use either the <application>Command
+	  <para>On Windows, you can use either the <application>Command
 	  Prompt</application> or <application>Powershell</application> as a
 	  terminal. Both are available from the <guilabel>System Tools</guilabel>
-	  folder of the <guilabel>Start Menu</guilabel>. The macOS equivalent is
-	  the <application>Terminal</application> application located in the
-	  <filename>Utilities</filename> folder of the
-	  <filename>Applications</filename> main folder. On Linux, the default
-	  terminal application for your distribution should be available from the
-	  application menu or one of its submenus.</para></note>
+	  folder of the <guilabel>Start Menu</guilabel>.</para>
+
+	  <para>The macOS equivalent is the <application>Terminal</application>
+	  application located in the <filename>Utilities</filename> folder of the
+	  <filename>Applications</filename> main folder.</para>
+
+	  <para>On Linux, the default terminal application for your distribution
+	  should be available from the application menu or one of its
+	  submenus.</para>
 
 	  <para>In the terminal, you type commands and their associated parameters
 	  to perform tasks. This makes it easy to perform certain tasks that would
 	  be difficult to perform using a graphical interface.</para>
 
-	  <para>A key concept to remember when using the command line for OmegaT
-	  is that you typically have to type the full location to the OmegaT
-	  program on your system as the command, because the system does not know
-	  where to find it by default. </para>
-
 	  <note>
 		<para>The syntax used to specify the location of an application or
 		folder depends on the platform. On Windows, the (<code>\</code>
 		character is used to separate folder and file names, while macOS and
-		Linux the <code>/</code> to do so. The typical default locations for
-		each major platform are presented below.
+		Linux the <code>/</code> to do so.</para>
+
+		<para>Here are the default OmegaT.jar locations for
+		each major platform: 
 		<variablelist>
 		  <varlistentry id="launch.with.command.line.windows">
 			<term id="launch.with.command.line.windows.title">Windows</term>
 			<listitem>
-			  <para><filename>C:\Program Files\OmegaT</filename></para>
+			  <para><filename>C:\Program Files\OmegaT\OmegaT.jar</filename></para>
 			</listitem>
 		  </varlistentry>
 		  <varlistentry id="launch.with.command.line.macos">
 			<term id="launch.with.command.line.macos.title">Macos</term>
 			<listitem>
-			  <para><filename>/Applications/OmegaT</filename></para>
+			  <para><filename>/Applications/OmegaT.app/Contents/Java/OmegaT.jar</filename></para>
 			</listitem>
 		  </varlistentry>
 		  <varlistentry id="launch.with.command.line.linux">
 			<term id="launch.with.command.line.linux.title">Linux</term>
 			<listitem>
-			  <para><filename>/opt/omegat</filename></para>
+			  <para><filename>/opt/omegat/OmegaT.jar</filename></para>
 			</listitem>
 		  </varlistentry>
 		</variablelist>
+		That location is written <filename>path/to/OmegaT.jar</filename> in this chapter but you'll have to replace it with the real location according to your platform.
 		</para>
 	  </note>	
 	</section>
@@ -203,15 +204,14 @@
 		  id="launch.with.command.line.omegat.terminal.command.syntax.title">Command syntax</title>
 
 	  <para>The syntax to launch OmegaT from the terminal is:
-	  <programlisting>java -jar &lt;java parameters&gt; OmegaT.jar &lt;OmegaT parameters&gt; </programlisting></para>
+	  <programlisting>java -jar &lt;java parameters&gt; path/to/OmegaT.jar &lt;OmegaT parameters&gt; </programlisting></para>
 	  <para>
 		<variablelist>
 		  <varlistentry id="launch.with.command.line.java.jar">
 			<term id="launch.with.command.line.java.jar.title">java -jar</term>
 			<listitem>
-			  <para>This command starts the Java Virtual Machine (JVM)
-			  and runs the .jar package specified after, OmegaT in
-			  this example.</para>
+			  <para>This command tells the Java Virtual Machine to run a
+			  Jar package.</para>
 			</listitem>
 		  </varlistentry>
 
@@ -225,9 +225,9 @@
 			</listitem>					
 		  </varlistentry>
 		  <varlistentry id="launch.with.command.line.intro.omegat.jar">
-			<term id="launch.with.command.line.intro.omegat.jar.title">OmegaT.jar</term>
+			<term id="launch.with.command.line.intro.omegat.jar.title">path/to/OmegaT.jar</term>
 			<listitem>
-			  <para>The OmegaT java executable.</para>
+			  <para>The location of the OmegaT java executable.</para>
 			  
 			</listitem>
 		  </varlistentry>
@@ -411,6 +411,12 @@
 				  <listitem>
 					<para>A Java .properties file from which to
 					load default settings.</para>
+					<para>The settings are a list of items that can be written in the form
+					<parameter>key=value</parameter>. The list can include Java options as well as OmegaT options. For ex:
+					<programlisting>user.language=fr
+config-dir="path/to/new/configdir"</programlisting>
+					etc.
+					</para>
 				  </listitem>
 				</varlistentry>
 				<varlistentry id="launch.with.command.line.resource.bundle.">
@@ -581,19 +587,17 @@
 				<varlistentry id="launch.with.command.line.tag.validation.abort.warn.">
 				  <term id="launch.with.command.line.tag.validation.abort.warn.title">--tag-validation=[abort|warn]</term>
 				  <listitem>
-					<para>Validate tags.
+					<para>Check tag issues.
 					<itemizedlist>
 					  <listitem>
-						<para>Abort: Exit with an error if there are invalid
-						tags.</para>
+						<para>Abort: Exit with an error if there are tag issues.</para>
 					  </listitem>
 					  <listitem>
-						<para>Warn: Show warnings without exiting if there are
-						invalid tags.</para>
+						<para>Warn: Show warnings without exiting if there are tag issues.</para>
 					  </listitem>											
 					</itemizedlist>
 					<note>
-					  <para>Invalid tag reports are sent output to the terminal
+					  <para>Reports about tag issues are output to the terminal
 					  window.</para>
 					</note>
 					</para>

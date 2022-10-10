@@ -116,6 +116,11 @@
 	linkend="app.regex" endterm="app.regex.title"/> for
 	details.</para>
 
+	<para>As a reminder, rules work the following way: when a rule matches,
+	OmegaT puts a marker at the match location so that rules that come after
+	ignore that location. That is the reason why exception rules must come
+	before segmentation rules.</para>
+	
 	<warning>
 	  <para>If you change the segmentation while translating, you will have to
 	  reload the project for the new segmentation to take effect. This will

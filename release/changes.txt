@@ -1,13 +1,15 @@
 ----------------------------------------------------------------------
  OmegaT 5.8.0
 ----------------------------------------------------------------------
-  19 Enhancements
+  20 Enhancements
   20 Bug fixes
   1 Localisation updates
 ----------------------------------------------------------------------
 5.8.0 vs 5.7.1
 
   Implemented requests:
+
+  - Update to new pixel logos and improve macOS UI logos
 
   - Hyperlinks to local files in the glossary
   https://sourceforge.net/p/omegat/feature-requests/1604/

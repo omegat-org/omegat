@@ -256,13 +256,17 @@
             <para>When it is the first character in the expression, the
             <emphasis>caret</emphasis> character matches the beginning of
             a line.</para>
+            <para>When it is the first character in <link
+            linkend="app.regex.types.of.expressions.classes">a character class
+            enclosed in brackets</link>, it excludes the characters in that
+            class from the match.</para>
           </listitem>
         </varlistentry>
 
         <varlistentry>
           <term>The DOLLAR sign: <literal>$</literal></term>
           <listitem>
-            <para>When it As the last character in an expression, the <emphasis>dollar</emphasis> sign matches the end of a line.</para>
+            <para>When it is the last character in an expression, the <emphasis>dollar</emphasis> sign matches the end of a line.</para>
           </listitem>
         </varlistentry>
 
@@ -474,7 +478,10 @@
                             </listitem>
 
                             <listitem>
-                              <para>The “k” in the word “back”.</para>
+                              <para>Any character that is
+                              <emphasis>not</emphasis> “a”, “b”, or “c”.
+                              In the word “back”, for instance, only the “k”
+                              is matched.</para>
                             </listitem>
                           </orderedlist>
                         </entry>
@@ -575,11 +582,11 @@
                         <entry>Matches</entry>
 
                         <entry>
-                          <para>Any combinations of three letters
+                          <para>Any combinations of four letters
                           starting with “c” and ending with “t”:
-                          “<emphasis>cat</emphasis>”,
-                          “<emphasis>cut</emphasis>”,
-                          “<emphasis>cot</emphasis>”, or even nonsensical
+                          “<emphasis>cart</emphasis>”,
+                          “<emphasis>cult</emphasis>”,
+                          “<emphasis>coat</emphasis>”, or even nonsensical
                           combinations such as “<emphasis>czt</emphasis>”
                           or “<emphasis>cqt</emphasis>”.
                         </para>
@@ -590,15 +597,15 @@
                         <entry>Does not match</entry>
 
                         <entry>
-                          <para>
-                            <literallayout>
-                              <literal>c.</literal>
-                              <literal>t</literal>
-                            </literallayout>
-                          </para>
-                          
-                          <para>Combinations of three letters starting
-                          with “c” and ending with “t” in:</para>
+                          <para>Combinations containing four letters that start
+                          with “c” and ending with “t” split, but are split into two or more lines.</para>
+                          <para>What is the missing letter?</para>
+                          <simplelist>
+                            <member><literal>c</literal></member>
+                            <member><literal></literal></member>
+                            <member><literal>a</literal></member>
+                            <member><literal>t</literal></member>
+                          </simplelist>
                         </entry>
                       </row>
                     </tbody>
@@ -1007,8 +1014,8 @@
     <title id="app.regex.types.of.expressions.title">Various types of
     expressions</title>
 
-    <para>This section presents various types of regular expression, ranging from
-    the simple to the complex.</para>
+    <para>This section presents various types of regular expression, ranging
+    from the simple to the complex.</para>
       
     <note>
       <para>Remember that all alphabetic characters preceded by a

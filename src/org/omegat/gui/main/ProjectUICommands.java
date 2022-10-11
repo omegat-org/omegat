@@ -246,7 +246,7 @@ public final class ProjectUICommands {
             if (origin != null) {
                 zipName = origin.getName();
             }
-        } catch (Exception ex) {
+        } catch (Exception ignored) {
         }
         if (zipName == null) {
             zipName = Core.getProject().getProjectProperties().getProjectName() + "-MED.zip";
@@ -465,7 +465,6 @@ public final class ProjectUICommands {
                     // open LOCAL copy of "omegat.project"
                     File projectFile = new File(projectRootFolder, OConsts.FILE_PROJECT);
                     boolean needToSaveProperties = false;
-                    boolean requestBackup = false;
                     File newProjectFile = null;
                     if (props.hasRepositories()) {  /* This a remote project
                          Every time we reopen the project, we copy omegat.project from the remote project,
@@ -655,15 +654,6 @@ public final class ProjectUICommands {
                 .append(my.getExportTMRoot(), that.getExportTMRoot())
                 .append(my.getDictRoot(), that.getDictRoot())
                 .isEquals();
-    }
-
-
-    private static String getRootGitRepositoryMappingUrl(List<RepositoryDefinition> repos) {
-        RepositoryDefinition repositoryDefinition = getRootGitRepositoryMapping(repos);
-        if (repositoryDefinition == null) {
-            return null;
-        }
-        return repositoryDefinition.getUrl();
     }
 
     private static RepositoryDefinition getRootGitRepositoryMapping(List<RepositoryDefinition> repos) {

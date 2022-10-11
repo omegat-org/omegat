@@ -477,8 +477,8 @@ config-dir="path/to/new/configdir"</programlisting>
 									</listitem>
 								  </varlistentry>
 								</variablelist>
-								See <link linkend="app.regexp"
-								endterm="app.regexp.title"/> for details.
+								See <link linkend="app.regex"
+								endterm="app.regex.title"/> for details.
 								</para>
 							  </listitem>
 							</varlistentry>

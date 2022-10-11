@@ -113,7 +113,7 @@
 	<title id="dialog.preferences.segmentation.setup.rules.based.segmentation.title">Rules</title>
 	<para>OmegaT provides predefined segmentation rules, and the translator can
 	use regular expressions to modify them. See <link
-	linkend="app.regexp" endterm="app.regexp.title"/> for
+	linkend="app.regex" endterm="app.regex.title"/> for
 	details.</para>
 
 	<para>As a reminder, rules work the following way: when a rule matches,

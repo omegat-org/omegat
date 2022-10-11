@@ -93,7 +93,7 @@
         <term id="windows.text.replace.methods.regex.title">Regular expressions</term>
         <listitem>
           <para>Treat the search string as a regular expression.</para>
-		  <para>Regular expressions are a very powerful way to search for general or  complex patterns rather than exact strings. See <link linkend="app.regexp" endterm="app.regexp.title"/> for details.</para>
+		  <para>Regular expressions are a very powerful way to search for general or  complex patterns rather than exact strings. See <link linkend="app.regex" endterm="app.regex.title"/> for details.</para>
 		  <para>The replacement string supports references to groups defined in
 		  the search string. Use <code>$n</code> to refer to the
 		  <code>nth</code> group.</para>

@@ -98,7 +98,7 @@
           <para>Treat the search string as a regular expression.</para>
 		  <para>Regular expressions are a very powerful way to search for
 		  general or complex patterns rather than exact strings. See <link
-		  linkend="app.regexp" endterm="app.regexp.title"/> for
+		  linkend="app.regex" endterm="app.regex.title"/> for
 		  details.</para>
         </listitem>
       </varlistentry>

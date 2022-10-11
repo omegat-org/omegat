@@ -1070,7 +1070,7 @@ instead.</para></warning>
 
 	  <para>The <emphasis role="bold">Before</emphasis> and<emphasis
 	  role="bold"> After</emphasis> patterns are regular expressions. See
-	  <link linkend="app.regexp" endterm="app.regexp.title"/>
+	  <link linkend="app.regex" endterm="app.regex.title"/>
 	  for details.</para>
 	  
 	  <para>The existing rules always provide a good starting point. See also

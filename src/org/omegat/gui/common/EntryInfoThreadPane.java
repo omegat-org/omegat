@@ -91,10 +91,17 @@ public abstract class EntryInfoThreadPane<T> extends EntryInfoPane<T> implements
     protected abstract void setFoundResult(SourceTextEntry processedEntry, T data);
 
     /**
-     * Callback from search thread if error occured.
+     * Callback from search thread if error occurred.
      *
-     * @param ex
+     * @param ex exception
      */
     protected void setError(Exception ex) {
+        this.abortSearch(ex.getLocalizedMessage());
+    }
+
+    /**
+     * Callback from search thread if search is aborted.
+     */
+    protected void abortSearch(String reason) {
     }
 }

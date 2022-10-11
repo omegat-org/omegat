@@ -127,6 +127,12 @@ public class MultipleTransPane extends EntryInfoThreadPane<List<MultipleTransFou
     }
 
     @Override
+    protected void abortSearch(String reason) {
+        scrollPane.stopProgressIcon();
+        Core.getMainWindow().showTimedStatusMessageRB("MULT_ABORT_SEARCH", reason);
+    }
+
+    @Override
     protected void setFoundResult(SourceTextEntry processedEntry, List<MultipleTransFoundEntry> data) {
         UIThreadsUtil.mustBeSwingThread();
 
@@ -134,6 +140,7 @@ public class MultipleTransPane extends EntryInfoThreadPane<List<MultipleTransFou
 
         // Check case if current segment has default translation and there are no alternative translations.
         if (data.size() == 1 && data.get(0).key == null) {
+            scrollPane.stopProgressIcon();
             return;
         }
 
@@ -169,6 +176,7 @@ public class MultipleTransPane extends EntryInfoThreadPane<List<MultipleTransFou
         }
 
         setText(o.toString());
+        scrollPane.stopProgressIcon();
     }
 
     @Override
@@ -194,6 +202,7 @@ public class MultipleTransPane extends EntryInfoThreadPane<List<MultipleTransFou
 
     @Override
     protected void startSearchThread(SourceTextEntry newEntry) {
+        scrollPane.startProgressIcon();
         new MultipleTransFindThread(this, Core.getProject(), newEntry).start();
     }
 

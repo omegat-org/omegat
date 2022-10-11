@@ -34,6 +34,7 @@ import javax.swing.BorderFactory;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPopupMenu;
 
 import org.omegat.util.OStrings;
@@ -97,6 +98,10 @@ public class CustomContainerFactory extends DefaultDockableContainerFactory {
                     }
                 }
             });
+
+            JLabel titleBarLabel = getTitleLabel();
+            titleBarLabel.setVerticalTextPosition(JLabel.CENTER);
+            titleBarLabel.setHorizontalTextPosition(JLabel.LEFT);
         }
 
         private IPaneMenu getSettingsCallback() {

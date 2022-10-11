@@ -257,11 +257,13 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
         if (!Preferences.isPreferenceDefault(Preferences.DICTIONARY_AUTO_SEARCH, true)) {
             return;
         }
+        scrollPane.startProgressIcon();
         new DictionaryEntriesSearchThread(newEntry).start();
     }
 
     @Override
     public void searchText(String text) {
+        scrollPane.startProgressIcon();
         new DictionaryTextSearchThread(text).start();
     }
 
@@ -313,6 +315,13 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
         }
         txt.append("</html>");
         fastReplaceContent(txt.toString());
+        scrollPane.stopProgressIcon();
+    }
+
+    @Override
+    protected void abortSearch(String reason) {
+        scrollPane.stopProgressIcon();
+        Core.getMainWindow().showTimedStatusMessageRB("GUI_DICTIONARYWINDOW_ABORT_SEARCH", reason);
     }
 
     // Previously we were incrementally adding to the current document and later
@@ -405,13 +414,12 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
 
             List<DictionaryEntry> result = manager.findWords(words);
             Collections.sort(result);
-
             return result;
         }
     }
 
     /**
-     * Thread for user requested dictionary search.
+     * Thread for user-requested dictionary search.
      */
     public class DictionaryTextSearchThread extends Thread {
 
@@ -435,7 +443,6 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
 
             List<DictionaryEntry> result = manager.findWords(words);
             Collections.sort(result);
-
             return result;
         }
 

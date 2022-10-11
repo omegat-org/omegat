@@ -29,6 +29,7 @@ import javax.swing.SwingUtilities;
 
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.util.Log;
+import org.omegat.util.OStrings;
 
 /**
  * Base class for search info about current entry in the separate thread.
@@ -95,13 +96,15 @@ public abstract class EntryInfoSearchThread<T> extends Thread {
         try {
             result = search();
         } catch (EntryChangedException ex) {
-            // entry changed - there is no sence to display results
+            // entry changed - there is no sense to display results
+            pane.abortSearch(OStrings.getString("ENTRYINFOSEARCH_ENTRY_CHANGED"));
             return;
         } catch (Exception ex) {
             error = ex;
             Log.log(ex);
         }
         if (isEntryChanged()) {
+            pane.abortSearch(OStrings.getString("ENTRYINFOSEARCH_ENTRY_CHANGED"));
             return;
         }
 
@@ -110,6 +113,7 @@ public abstract class EntryInfoSearchThread<T> extends Thread {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 if (isEntryChanged()) {
+                    pane.abortSearch(OStrings.getString("ENTRYINFOSEARCH_ENTRY_CHANGED"));
                     return;
                 }
                 if (ferror != null) {

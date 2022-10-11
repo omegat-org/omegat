@@ -28,13 +28,16 @@ package org.omegat.gui.main;
 
 import java.awt.Component;
 
+import javax.swing.Icon;
 import javax.swing.JScrollPane;
+import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.JTextComponent;
 
 import org.omegat.util.gui.IPaneMenu;
+import org.omegat.util.gui.SpinIcon;
 
 import com.vlsolutions.swing.docking.DockKey;
 import com.vlsolutions.swing.docking.Dockable;
@@ -49,7 +52,8 @@ import com.vlsolutions.swing.docking.DockingConstants;
  */
 @SuppressWarnings("serial")
 public class DockableScrollPane extends JScrollPane implements Dockable {
-    DockKey dockKey;
+    final DockKey dockKey;
+    final Icon spinIcon;
 
     /** Updates the tool tip text of the docking pane. */
     @Override
@@ -82,6 +86,7 @@ public class DockableScrollPane extends JScrollPane implements Dockable {
         dockKey = new DockKey(key, name, null, null, DockingConstants.HIDE_BOTTOM);
         dockKey.setFloatEnabled(detouchable);
         dockKey.setCloseEnabled(false);
+        spinIcon = new SpinIcon(this);
 
         if (view instanceof IPaneMenu) {
             setMenuProvider((IPaneMenu) view);
@@ -111,5 +116,16 @@ public class DockableScrollPane extends JScrollPane implements Dockable {
 
     public void stopNotifying() {
         dockKey.setNotification(false);
+    }
+
+    public void startProgressIcon() {
+        if (dockKey.getLocation() == Location.HIDDEN) {
+            return;
+        }
+        dockKey.setIcon(spinIcon);
+    }
+
+    public void stopProgressIcon() {
+        SwingUtilities.invokeLater(() -> dockKey.setIcon(null));
     }
 }

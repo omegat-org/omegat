@@ -36,6 +36,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.CountDownLatch;
 import java.util.stream.Collectors;
 
 import javax.swing.JMenuItem;
@@ -196,10 +197,17 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
         UIThreadsUtil.mustBeSwingThread();
 
         clear();
-        for (IMachineTranslation mt : MachineTranslators.getMachineTranslators()) {
-            if (mt.isEnabled()) {
-                new FindThread(mt, newEntry, force).start();
+
+        List<IMachineTranslation> machineTranslations =
+                MachineTranslators.getMachineTranslators().stream().filter(IMachineTranslation::isEnabled).collect(Collectors.toList());
+        int numThread = machineTranslations.size();
+        if (numThread > 0) {
+            scrollPane.startProgressIcon();
+            final CountDownLatch countDownLatch = new CountDownLatch(numThread);
+            for (IMachineTranslation mt : machineTranslations) {
+                new FindThread(mt, newEntry, force, countDownLatch).start();
             }
+            new WaitThread(countDownLatch).start();
         }
     }
 
@@ -231,16 +239,35 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
         selectedIndex = -1;
     }
 
+    protected class WaitThread extends Thread {
+        private final CountDownLatch countDownLatch;
+        public WaitThread(CountDownLatch countDownLatch) {
+            this.countDownLatch = countDownLatch;
+        }
+
+        @Override
+        public void run() {
+            try {
+                countDownLatch.await();
+            } catch (InterruptedException ignored) {
+            }
+            scrollPane.stopProgressIcon();
+        }
+    }
+
     protected class FindThread extends EntryInfoSearchThread<MachineTranslationInfo> {
         private final IMachineTranslation translator;
         private final String src;
         private final boolean force;
+        private final CountDownLatch countDownLatch;
 
-        public FindThread(final IMachineTranslation translator, final SourceTextEntry newEntry, boolean force) {
+        public FindThread(IMachineTranslation translator, SourceTextEntry newEntry, boolean force,
+                          CountDownLatch countDownLatch) {
             super(MachineTranslateTextArea.this, newEntry);
             this.translator = translator;
             src = newEntry.getSrcText();
             this.force = force;
+            this.countDownLatch = countDownLatch;
         }
 
         @Override
@@ -253,10 +280,12 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
                  target = pp.getTargetLanguage();
              }
             if (source == null || target == null) {
+                countDownLatch.countDown();
                 return null;
             }
 
             String result = getTranslation(source, target);
+            countDownLatch.countDown();
             return result == null ? null : new MachineTranslationInfo(translator.getName(), result);
         }
 

@@ -238,35 +238,166 @@
     <literal>[</literal>, and the opening
     <emphasis>curly brace</emphasis> <literal>{</literal>.</para>
 
-    <para>Each character is briefly described below, and the
-    descriptions are followed by a table presenting examples for
-    each character.
+    <para>Each character is briefly described below with examples
+    of regular expressions that rely on the character as well as
+    of text that they do,d or do not, match.
     
       <variablelist>
         <varlistentry>
           <term>The BACKSLASH: <literal>\</literal></term>
           <listitem>
             <para>This character either cancels or activates the special meaning of the following character.</para>
+            
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry></entry>
+                    <entry><literal>0\.\d</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>Matches</entry>
+                    <entry>
+                      <para>A number between <emphasis>0.0</emphasis> and
+                      <emphasis/>0.9, or just the final
+                      <emphasis>1.5</emphasis> in numbers such as 11.5 or
+                      561.5.</para>
+                      <para>The <literal>\.</literal> cancels the “any
+                      character” meaning of the period to match the decimal
+                      point, while the <literal>\d</literal> turns the
+                      ordinarily lowercase “d” letter into an expression
+                      that matches any digit between 0 and 9.</para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>Does not match</entry>
+                    <entry>
+                      <para>Sequences such as 0,1 or 0-3, in
+                      which a period not preceded by a backslash
+                      would match any character between two digits.</para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
           </listitem>
         </varlistentry>
 
         <varlistentry>
           <term>The CARET: <literal>^</literal></term>
           <listitem>
-            <para>When it is the first character in the expression, the
-            <emphasis>caret</emphasis> character matches the beginning of
-            a line.</para>
+            <para>When it is the first character in the expression, the 
+            <emphasis>caret</emphasis> character matches the beginning of a
+            line.</para>
             <para>When it is the first character in <link
             linkend="app.regex.types.of.expressions.classes">a character class
             enclosed in brackets</link>, it excludes the characters in that
             class from the match.</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry></entry>
+                    <entry>
+                      <orderedlist>
+                        <listitem>
+                          <para><literal>^A</literal></para>
+                        </listitem>
+        
+                        <listitem>
+                          <para>[^abc]</para>
+                        </listitem>
+                      </orderedlist>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>Matches</entry>
+                    <entry>
+                      <orderedlist>
+                        <listitem>
+                          <para>The uppercase “A” in the following sentence:
+                          “A long, but exciting journey was about to
+                          begin”.</para>
+                        </listitem>
+
+                        <listitem>
+                          <para>Any character that is <emphasis>not</emphasis>
+                          “a”, “b”, or “c”. In the word “back”, for instance,
+                          only the “k” is matched.</para>
+                        </listitem>
+                      </orderedlist>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>Does not match</entry>
+                    <entry>
+                      <orderedlist>
+                        <listitem>
+                          <para>The uppercase “A” in the following sentence:
+                          “My friend is writing a book called <emphasis>A Long
+                            Journey</emphasis>”.</para>
+                        </listitem>
+                      
+                        <listitem>
+                          <para>The lowercase “a”, “b”, or “c” in the word
+                          “back”.</para>
+                        </listitem>
+                      </orderedlist>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
           </listitem>
         </varlistentry>
 
         <varlistentry>
           <term>The DOLLAR sign: <literal>$</literal></term>
           <listitem>
-            <para>When it is the last character in an expression, the <emphasis>dollar</emphasis> sign matches the end of a line.</para>
+            <para>When it is the last character in an expression, the
+            <emphasis>dollar</emphasis> sign matches the end of a line.</para>
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry></entry>
+                    <entry><literal>^\w+:$</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>Matches</entry>
+                    <entry>
+                      <para>A line that consists of a single word and ends with
+                      a colon:</para>
+                      <para><emphasis>Questions:</emphasis></para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>Does not match</entry>
+                    <entry>
+                      <para>A line that consists of a single word, but does not
+                      end in a colon:</para>
+                      <para><emphasis>Questions?</emphasis></para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
           </listitem>
         </varlistentry>
 
@@ -274,6 +405,50 @@
           <term>The PERIOD: <literal>.</literal></term>
           <listitem>
             <para>Matches any single character.</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry></entry>
+                    <entry><literal>c.t</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>Matches</entry>
+                    <entry>
+                      <para>Any combinations of four letters
+                        starting with “c” and ending with “t”:
+                        “<emphasis>cart</emphasis>”,
+                        “<emphasis>cult</emphasis>”,
+                        “<emphasis>coat</emphasis>”, or even nonsensical
+                        combinations such as “<emphasis>cbzt</emphasis>”
+                        or “<emphasis>cqlt</emphasis>”.
+                      </para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>Does not match</entry>
+                    <entry>
+                      <para>Combinations containing four letters that start
+                      with “c” and ending with “t” split, but are split across
+                      more than one line.</para>
+                      <para>What is the missing letter?</para>
+                        <simplelist>
+                          <member><literal>c</literal></member>
+                          <member><literal></literal></member>
+                          <member><literal>a</literal></member>
+                          <member><literal>t</literal></member>
+                        </simplelist>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
           </listitem>
         </varlistentry>
 
@@ -282,6 +457,46 @@
           <listitem>
             <para>This character functions as an “OR” and matches either
             of the expressions that precede or follow it.</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry></entry>
+                    <entry><literal>^An|^The</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>Matches</entry>
+                    <entry>
+                      <para>The initial “An” or “The” in phrases such as:
+                        <simplelist>
+                          <member>“An apple a day…”</member>
+                          <member>“The apple of my eye…”</member>
+                        </simplelist>
+                      </para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>Does not match</entry>
+                    <entry>
+                      <para>The initial “An” or “The” in phrases such as:
+                        <simplelist>
+                          <member>“A story called <emphasis>An Unsung
+                          Hero</emphasis>.”</member>
+                          <member>“They work for <emphasis>The Daily
+                            Post</emphasis>.”</member>
+                        </simplelist>
+                      </para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
           </listitem>
         </varlistentry>
 
@@ -291,6 +506,52 @@
             <para>This character specifies that either zero or one
             instance of the preceding character or expression should be
             matched.</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry></entry>
+                    <entry>
+                      <literal>an?␣</literal> (where “␣” represents a
+                      single space).
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>Matches</entry>
+                    <entry>
+                      <para>Either the “a ” or the “an ” in:
+                        <simplelist>
+                          <member>“I have a question.”</member>
+                          <member>“I know an excellent doctor.”</member>
+                        </simplelist>
+                      </para>
+                      
+                      <para>It will also find the final “an ” of “Can ” in a
+                      sentence such as “Can I help you?”, or the final “a ” of
+                      “pasta” in “We had pasta for lunch.”</para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>Does not match</entry>
+                    <entry>
+                      <para>Neither the “a” nor the “an” in:
+                        <simplelist>
+                          <member>The indefinite article: “a” (or
+                          “an”).</member>
+                        </simplelist>
+                      </para>
+                      <para>They are not followed by a space.</para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
           </listitem>
         </varlistentry>
 
@@ -299,6 +560,43 @@
           <listitem>
             <para>This character specifies that zero or more instances of
             the preceding character or expression should be matched.</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry></entry>
+                    <entry><literal>run\w*</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>Matches</entry>
+                    <entry>
+                      <para>The word “run”, as well as “runs”, “runner”,
+                      “runway”, “runt” in “grunt” or “brunt”, and any other
+                      word or sequence of characters containing “run” followed
+                      by zero or more “<emphasis>word characters</emphasis>”
+                      (which include digits and the underscore, so the part
+                      before the “@” in an email address such as
+                      run_123@example.email.org is also a match).</para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>Does not match</entry>
+                    <entry>
+                      <para>The complete phrase in “run-on” or
+                      “run'n'gun”, because the hyphen and apostrophe are not
+                      included in <literal>\w</literal>. Only the initial “run”
+                      in those phrases is matched.</para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
           </listitem>
         </varlistentry>
 
@@ -307,6 +605,38 @@
           <listitem>
             <para>This character specifies that one or more instances of
             the preceding character or expression should be matched.</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry></entry>
+                    <entry><literal>\d+.d</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>Matches</entry>
+                    <entry>
+                      <para>Numbers such as “1.5”, “23.2” or “5235.8” with a
+                      single decimal place and any number of digits before the
+                      decimal point.</para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>Does not match</entry>
+                    <entry>
+                      <para>The entire value of numbers such as “5,235.8” or
+                      “21,571.9”. Only the portion of the after the thousands
+                      separator will be matched.</para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
           </listitem>
         </varlistentry>
 
@@ -314,12 +644,47 @@
           <term>The OPENING PARENTHESIS: <literal>(</literal></term>
 
           <listitem>
-            <para>Enclosing a set of characters in PARENTHESES
-            identifies it as a <emphasis>group</emphasis>. The contents
-            of the group are stored in memory and can be reused later.
-            Parentheses are always used in opening and closing pairs.
-            Trying to use only the opening or closing parenthesis on its
-            own will cause an error.</para>
+            <para>This character starts a <emphasis>group</emphasis>, which is a
+            set of characters treated as a single unit. Groups are numbered,
+            and their contents group are stored in memory. They can be reused
+            later in the expression using
+            <literal>\<parameter>n</parameter></literal>, where
+            <parameter>n</parameter>. Parentheses are always used in opening
+            and closing pairs. Trying to use only the opening or closing
+            parenthesis on its own will cause an error.</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry></entry>
+                    <entry><literal>(\b\w+\b)\h\1\b</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>Matches</entry>
+                    <entry>
+                      <para>Doubled up words separated by a space, such as the
+                      consecutive “an” in the following sentence:</para>
+                      <para>“I bought an an apple.”</para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>Does not match</entry>
+                    <entry>
+                      <para>The “that, that” in the following sentence:</para>
+                      <para>“But that, that is just unbelievable”, because the
+                      first “that” is followed by both a comma and a space
+                      rather than only a space.</para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
           </listitem>
         </varlistentry>
 
@@ -327,27 +692,99 @@
           <term>The CLOSING PARENTHESIS: <literal>)</literal></term>
 
           <listitem>
-            <para>This character closes a group and is special because
-            it can never be used on its own. It must be preceded by the
-            <literal>\</literal> if you need to match the closing
-            parenthesis character itself.</para>
+            <para>This character closes a group. It is special because it can
+            never be used on its own. It must be preceded by the
+            <literal>\</literal> if you need to match the closing parenthesis
+            character itself.</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry></entry>
+                    <entry><literal>^\d+\)</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>Matches</entry>
+                    <entry>
+                      <para>The sequence number (including the parenthesis) at
+                      the beginning of each line in a list such as:
+                        <simplelist>
+                          <member>1) Apples</member>
+                          <member>2) Oranges</member>
+                          <member>3) Pears</member>
+                        </simplelist>
+                      </para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>Does not match</entry>
+                    <entry>
+                      <para>Sequence numbers that are not at the beginning of a
+                      line.</para>
+                      <para>Follow these steps:
+                        <simplelist>
+                          <member>Step 1) Preparation</member>
+                          <member>Step 2) …</member>
+                        </simplelist>
+                      </para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
           </listitem>
         </varlistentry>
 
         <varlistentry>
-          <term>The OPENING SQUARE BRACKETS <literal>[</literal></term>
+          <term>The OPENING SQUARE BRACKET: <literal>[</literal></term>
 
           <listitem>
-            <para>This character must be paired with the closing square bracket to
-            enclose a set of individual characters that each represent a
+            <para>This character must be paired with the closing square bracket
+            to enclose a set of individual characters that each represent a
             valid potential match.</para>
 
-            <para>Only the opening bracket is special and needs to be
-            preceded by a backslash to search for the bracket character
-            itself. If you only want to match the closing bracket as
-            itself, you do not need to precede it with a backslash. (You
-            can still add it, but it will have no effect on the
-            expression or the result.)</para>
+            <para>Only the opening bracket is special and needs to be preceded
+            by a backslash to search for the bracket character itself. If you
+            only want to match the closing bracket as itself, you do not need
+            to precede it with a backslash. (You can still add it, but it will
+            have no effect on the expression or the result.)</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry></entry>
+                    <entry><literal>li[cs]en[cs]e</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>Matches</entry>
+                    <entry>
+                      <para>The correct “licence” and “license” spellings, as
+                      well as the potential “lisence” and “lisense”
+                      mispellings</para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>Does not match</entry>
+                    <entry>
+                      <para>More egregious mispellings such as “licensse” or
+                      “lissense”.</para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
           </listitem>
         </varlistentry>
 
@@ -367,647 +804,47 @@
             itself, you do not need to precede it with a backslash. (You
             can still add it, but it will have no effect on the
             expression or the result.)</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry></entry>
+                    <entry><literal>\d{4}/\d{1,3}</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>Matches</entry>
+                    <entry>
+                      <para>Codes such as “1234/5”, “1472/69”, or “9513/842”
+                      consisting of four digits, a forward slash, and one to
+                      three more digits.</para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>Does not match</entry>
+                    <entry>
+                      <para>Codes such as “123/45”, “1472/6985”, or
+                      “95133/15746”.</para>
+                      <para><emphasis role="bold">Caution:</emphasis>
+                      Although the last two codes above are not matched
+                      completely, the expression will return the
+                      “<emphasis>1472/698</emphasis>” portion of “1472/6985”,
+                      as well as the “<emphasis>5133/157</emphasis>” of
+                      “95133/15746”.</para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
           </listitem>
         </varlistentry>
       </variablelist>
     </para>
-
-    <table>
-      <title>Examples for the twelve special characters</title>
-
-      <tgroup cols="3">
-        <colspec colwidth="170*"/>
-        <colspec colwidth="200*"/>
-        <colspec colwidth="600*"/>
-
-        <thead>
-          <row>
-            <entry>Character</entry>
-            <entry>Expression</entry>
-            <entry>Examples</entry>
-          </row>
-        </thead>
-
-        <tbody>
-          <row>
-            <entry>
-              <emphasis>Backslash:</emphasis>
-              <literal>\</literal>
-            </entry>
-
-            <entry>
-              <literal>0\.\d</literal>
-            </entry>
-
-            <entry>
-              <para>
-                <informaltable>
-                  <tgroup cols="2">
-                    <colspec colwidth="250*"/>
-                    <colspec colwidth="750*"/>
-
-                    <tbody>
-                      <row>
-                        <entry>Matches</entry>
-
-                        <entry>
-                          <para>A number between <emphasis>0.0</emphasis>
-                          and <emphasis/>0.9, or just the final
-                          <emphasis>1.5</emphasis> in numbers such as
-                          11.5 or 561.5.</para>
-
-                          <para>The <literal>\.</literal> cancels the “any
-                          character” meaning of the period to match the
-                          decimal point, while the <literal>\d</literal>
-                          turns the ordinarily lowercase “d” into an
-                          expression that matches any digit between 0 and 9.</para>
-                        </entry>
-                      </row>
-
-                      <row>
-                        <entry>Does not match</entry>
-
-                        <entry>Sequences such as 0,1 or 0-3, in which a
-                        period not preceded by a backslash would match any
-                        character between two digits.</entry>
-                      </row>
-                    </tbody>
-                  </tgroup>
-                </informaltable>
-              </para>
-            </entry>
-          </row>
-
-          <row>
-            <entry>
-              <emphasis>Caret:</emphasis>
-              <literal>^</literal>
-            </entry>
-
-            <entry>
-              <orderedlist>
-                <listitem>
-                  <para>
-                    <literal>^A</literal>
-                  </para>
-                </listitem>
-
-                <listitem>
-                  <para>[^abc]</para>
-                </listitem>
-              </orderedlist>
-            </entry>
-
-            <entry>
-              <para>
-                <informaltable>
-                  <tgroup cols="2">
-                    <colspec colwidth="250*"/>
-                    <colspec colwidth="750*"/>
-
-                    <tbody>
-                      <row>
-                        <entry>Matches</entry>
-
-                        <entry>
-                          <orderedlist>
-                            <listitem>
-                              <para>The uppercase “A” in the following
-                              sentence: “A long, but exciting journey was
-                              about to begin”.</para>
-                            </listitem>
-
-                            <listitem>
-                              <para>Any character that is
-                              <emphasis>not</emphasis> “a”, “b”, or “c”.
-                              In the word “back”, for instance, only the “k”
-                              is matched.</para>
-                            </listitem>
-                          </orderedlist>
-                        </entry>
-                      </row>
-
-                      <row>
-                        <entry>Does not match</entry>
-
-                        <entry>
-                          <orderedlist>
-                            <listitem>
-                              <para>The uppercase “A” in the following
-                              sentence: “My friend is writing a book
-                              called <emphasis>A Long Journey</emphasis>”.</para>
-                            </listitem>
-
-                            <listitem>
-                              <para>The lowercase “a”, “b”, or “c” in the
-                              word “back”.</para>
-                            </listitem>
-                          </orderedlist>
-                        </entry>
-                      </row>
-                    </tbody>
-                  </tgroup>
-                </informaltable>
-              </para>
-            </entry>
-          </row>
-
-          <row>
-            <entry>
-              <emphasis>Dollar sign:</emphasis>
-              <literal>$</literal>
-            </entry>
-
-            <entry>
-              <literal>^\w+:$</literal>
-            </entry>
-
-            <entry>
-              <para>
-                <informaltable>
-                  <tgroup cols="2">
-                    <colspec colwidth="250*"/>
-                    <colspec colwidth="750*"/>
-
-                    <tbody>
-                      <row>
-                        <entry>Matches</entry>
-
-                        <entry>
-                          <para>A line that consists of a single word and
-                          ends with a colon.</para>
-                          <para>
-                            <emphasis>Example:</emphasis>
-                          </para>
-                        </entry>
-                      </row>
-
-                      <row>
-                        <entry>Does not match</entry>
-
-                        <entry>
-                          <para>A line that consists of a single word, 
-                          but does not end in a colon.</para>
-                          <para>
-                            <emphasis>Examples.</emphasis>
-                          </para>
-                        </entry>                            
-                      </row>
-                    </tbody>
-                  </tgroup>
-                </informaltable>
-              </para>
-            </entry>
-          </row>
-
-          <row>
-            <entry>
-              <emphasis>Period (dot):</emphasis>
-              <literal>.</literal>
-            </entry>
-
-            <entry>
-              <literal>c.t</literal>
-            </entry>
-
-            <entry>
-              <para>
-                <informaltable>
-                  <tgroup cols="2">
-                    <colspec colwidth="250*"/>
-                    <colspec colwidth="750*"/>
-
-                    <tbody>
-                      <row>
-                        <entry>Matches</entry>
-
-                        <entry>
-                          <para>Any combinations of four letters
-                          starting with “c” and ending with “t”:
-                          “<emphasis>cart</emphasis>”,
-                          “<emphasis>cult</emphasis>”,
-                          “<emphasis>coat</emphasis>”, or even nonsensical
-                          combinations such as “<emphasis>czt</emphasis>”
-                          or “<emphasis>cqt</emphasis>”.
-                        </para>
-                        </entry>
-                      </row>
-
-                      <row>
-                        <entry>Does not match</entry>
-
-                        <entry>
-                          <para>Combinations containing four letters that start
-                          with “c” and ending with “t” split, but are split into two or more lines.</para>
-                          <para>What is the missing letter?</para>
-                          <simplelist>
-                            <member><literal>c</literal></member>
-                            <member><literal></literal></member>
-                            <member><literal>a</literal></member>
-                            <member><literal>t</literal></member>
-                          </simplelist>
-                        </entry>
-                      </row>
-                    </tbody>
-                  </tgroup>
-                </informaltable>
-              </para>
-            </entry>
-          </row>
-
-          <row>
-            <entry>
-              <emphasis>Vertical bar (pipe):</emphasis>
-              <literal>|</literal>
-            </entry>
-
-            <entry>
-              <literal>^An|^The</literal>
-            </entry>
-
-            <entry>
-              <para>
-                <informaltable>
-                  <tgroup cols="2">
-                    <colspec colwidth="250*"/>
-                    <colspec colwidth="750*"/>
-
-                    <tbody>
-                      <row>
-                        <entry>Matches</entry>
-
-                        <entry>
-                          <para>The initial “An” or “The” in phrases such
-                          as:</para>
-                          <para>“An apple a day…”</para>
-                          <para>“The apple of my eye…”</para>
-                        </entry>
-                      </row>
-
-                      <row>
-                        <entry>Does not match</entry>
-
-                        <entry>
-                          <para>The initial “An” or “The” in phrases such as:</para>
-                          <para>“A story called <emphasis>An Unsung
-                          Hero</emphasis>.”</para>
-                          <para>“They work for <emphasis>The Daily
-                            Post</emphasis>.”</para>
-                        </entry>
-                      </row>
-                    </tbody>
-                  </tgroup>
-                </informaltable>
-              </para>
-            </entry>
-          </row>
-
-          <row>
-            <entry>
-              <emphasis>Question mark:</emphasis>
-              <literal>?</literal>
-            </entry>
-
-            <entry><literal>an?␣</literal> (where “␣” represents a
-            single space).</entry>
-
-            <entry>
-              <para>
-                <informaltable>
-                  <tgroup cols="2">
-                    <colspec colwidth="250*"/>
-                    <colspec colwidth="750*"/>
-
-                    <tbody>
-                      <row>
-                        <entry>Matches</entry>
-
-                        <entry>
-                          <para>Either the “a ” or the “an ” in:</para>
-                          <para>“I have a question.”</para>
-                          <para>“I have an idea!”</para>
-
-                          <para>It will also find the final “an ” of
-                          “Can ” in a sentence such as “Can I help you?”,
-                          or the final “a ” of “pasta” in “We had pasta
-                          for lunch.”</para>
-                        </entry>
-                      </row>
-
-                      <row>
-                        <entry>Does not match</entry>
-
-                        <entry>
-                          <para>Neither the “a” or the “an” in:</para>
-                          <para>The indefinite article: “a” (or
-                          “an”).</para>
-                          <para>Neither is followed by a space.</para>
-                        </entry>
-                      </row>
-                    </tbody>
-                  </tgroup>
-                </informaltable>
-              </para>                    
-            </entry>
-          </row>
-
-          <row>
-            <entry>
-              <emphasis>Asterisk (star):</emphasis>
-              <literal>*</literal>
-            </entry>
-
-            <entry>
-              <literal>run\w*</literal>
-            </entry>
-
-            <entry>
-              <para>
-                <informaltable>
-                  <tgroup cols="2">
-                    <colspec colwidth="250*"/>
-                    <colspec colwidth="750*"/>
-
-                    <tbody>
-                      <row>
-                        <entry>Matches</entry>
-
-                        <entry>
-                          <para>The word “run”, as well as “runs”,
-                          “runner”, “runway”, “runt” in “grunt” or
-                          “brunt”, and any other word or sequence of
-                          characters containing “run” followed by
-                          zero or more “<emphasis>word
-                          characters</emphasis>” (which include digits
-                          and the underscore, so the part before the
-                          “@” in an email address such as
-                          run_123@example.email.org is also a
-                          match).</para>
-                        </entry>
-                      </row>
-
-                      <row>
-                        <entry>Does not match</entry>
-
-                        <entry>
-                          <para>The complete phrase in “run-on” or
-                          “run'n'gun”, because the hyphen and apostrophe
-                          are not included in <literal>\w</literal>. Only
-                          the initial “run” in those phrases is
-                          matched.</para>
-                        </entry>
-                      </row>
-                    </tbody>
-                  </tgroup>
-                </informaltable>
-              </para>                    
-            </entry>
-          </row>
-
-          <row>
-            <entry>
-              <emphasis>Plus sign:</emphasis>
-              <literal>+</literal>
-            </entry>
-
-            <entry>
-              <literal>\d+.d</literal>
-            </entry>
-
-            <entry>
-              <para>
-                <informaltable>
-                  <tgroup cols="2">
-                    <colspec colwidth="250*"/>
-                    <colspec colwidth="750*"/>
-
-                    <tbody>
-                      <row>
-                        <entry>Matches</entry>
-
-                        <entry>
-                          <para>Numbers such as “1.5”, “23.2” or “5235.8”
-                          with a single decimal place and any number of
-                          digits before the decimal point.</para>
-                        </entry>
-                      </row>
-
-                      <row>
-                        <entry>Does not match</entry>
-
-                        <entry>
-                          <para>The entire value of numbers such as
-                          “5,235.8” or “21,571.9”. Only the portion of
-                          the after the thousands separator will be
-                          matched.</para></entry>
-                      </row>
-                    </tbody>
-                  </tgroup>
-                </informaltable>
-              </para>
-            </entry>
-          </row>
-
-          <row>
-            <entry>
-              <emphasis>Opening parenthesis:</emphasis>
-              <literal>(</literal>
-            </entry>
-
-            <entry>
-              <literal>(\b\w+\b)\h\1\b</literal>
-            </entry>
-
-            <entry>
-              <para>
-                <informaltable>
-                  <tgroup cols="2">
-                    <colspec colwidth="250*"/>
-                    <colspec colwidth="750*"/>
-
-                    <tbody>
-                      <row>
-                        <entry>Matches</entry>
-
-                        <entry>
-                          <para>Doubled up words separated by a space, 
-                          such as the consecutive “an” in the following
-                          sentence.</para>
-                          <para>“I bought an an apple.”</para>
-                        </entry>
-                      </row>
-
-                      <row>
-                        <entry>Does not match</entry>
-
-                        <entry>
-                          <para>The “that, that” in the following
-                          sentence.</para>
-                          <para>“But that, that is just unbelievable”,
-                          because the first “that” is followed by both a
-                          comma and a space rather than only a
-                          space.</para>
-                        </entry>
-                      </row>
-                    </tbody>
-                  </tgroup>
-                </informaltable>
-              </para>
-            </entry>
-          </row>
-
-          <row>
-            <entry>
-              <emphasis>Closing parenthesis</emphasis>
-              <literal>)</literal>
-            </entry>
-
-            <entry>
-              <literal>^\d+\)</literal>
-            </entry>
-
-            <entry>
-              <para>
-                <informaltable>
-                  <tgroup cols="2">
-                    <colspec colwidth="250*"/>
-                    <colspec colwidth="750*"/>
-
-                    <tbody>
-                      <row>
-                        <entry>Matches</entry>
-
-                        <entry>
-                          <para>The sequence number (including the
-                          parenthesis) at the beginning of each line in a
-                          list such as:</para>
-                          <para>
-                            <literallayout>
-                              1) Apples
-                              2) Oranges
-                              3) Pears
-                            </literallayout>
-                          </para>
-                        </entry>
-                      </row>
-
-                      <row>
-                        <entry>Does not match</entry>
-
-                        <entry>
-                          <para>Sequence numbers that are not at the
-                          beginning of a line</para>
-                          <para>
-                            <literallayout>
-                              Follow these steps:
-                              Step 1) Preparation
-                              Step 2) …
-                            </literallayout>
-                          </para>
-                        </entry>
-                      </row>
-                    </tbody>
-                  </tgroup>
-                </informaltable>
-              </para>
-            </entry>
-          </row>
-
-          <row>
-            <entry>
-              <emphasis>Opening bracket</emphasis>
-              <literal>[</literal>
-            </entry>
-
-            <entry>
-              <literal>li[cs]en[cs]e</literal>
-            </entry>
-
-            <entry>
-              <para>
-                <informaltable>
-                  <tgroup cols="2">
-                    <colspec colwidth="250*"/>
-                    <colspec colwidth="750*"/>
-
-                    <tbody>
-                      <row>
-                        <entry>Matches</entry>
-
-                        <entry>
-                          <para>The correct “licence” and “license”
-                          spellings, as well as the potential “lisence”
-                          and “lisense” mispellings</para>
-                        </entry>
-                      </row>
-
-                      <row>
-                        <entry>Does not match</entry>
-
-                        <entry>
-                          <para>More egregious mispellings such as
-                          “licensse” or “lissense”.</para>
-                        </entry>
-                      </row>
-                    </tbody>
-                  </tgroup>
-                </informaltable>
-              </para>
-            </entry>
-          </row>
-
-          <row>
-            <entry>
-              <emphasis>Opening curly brace:</emphasis>
-              <literal>{</literal>
-            </entry>
-
-            <entry>
-              <literal>\d{4}/\d{1,3}</literal>
-            </entry>
-
-            <entry>
-              <para>
-                <informaltable>
-                  <tgroup cols="2">
-                    <colspec colwidth="250*"/>
-                    <colspec colwidth="750*"/>
-
-                    <tbody>
-                      <row>
-                        <entry>Matches</entry>
-
-                        <entry>
-                          <para>Codes such as “1234/5”, “1472/69”, or
-                          “9513/842” consisting of four digits, a forward
-                          slash, and one to three more digits.</para>
-                        </entry>
-                      </row>
-
-                      <row>
-                        <entry>Does not match</entry>
-
-                        <entry>
-                          <para>Codes such as “123/45”, “1472/6985”, or
-                          “95133/15746”.</para>
-                          <para><emphasis role="bold">Caution:</emphasis>
-                          Although the last two codes above are not
-                          matched completely, the expression will return
-                          the “<emphasis>1472/698</emphasis>” portion of
-                          “1472/6985”, as well as the
-                          “<emphasis>5133/157</emphasis>” of
-                          “95133/15746”.</para>
-                        </entry>
-                      </row>
-                    </tbody>
-                  </tgroup>
-                </informaltable>
-              </para>
-            </entry>
-          </row>
-        </tbody>
-      </tgroup>
-    </table>
   </section>
 
   <section id="app.regex.types.of.expressions">

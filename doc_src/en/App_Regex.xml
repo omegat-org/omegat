@@ -647,11 +647,19 @@
             <para>This character starts a <emphasis>group</emphasis>, which is a
             set of characters treated as a single unit. Groups are numbered,
             and their contents group are stored in memory. They can be reused
-            later in the expression using
-            <literal>\<parameter>n</parameter></literal>, where
-            <parameter>n</parameter>. Parentheses are always used in opening
-            and closing pairs. Trying to use only the opening or closing
-            parenthesis on its own will cause an error.</para>
+            later in the search expression using
+            <literal>\<option>n</option></literal>, where
+            <option>n</option> is the number of the group.</para>
+            <note>
+              <para>The content of the group can also be used in the <link
+              linkend="windows.text.replace">replacement text</link>. In Java,
+              the syntax for doing so is
+              <literal>$<option>n</option></literal> instead of
+              <literal>\<option>n</option></literal>.</para>
+            </note>
+            <para>Parentheses are always used in opening and closing pairs.
+            Trying to use only the opening or closing parenthesis on its own
+            will cause an error.</para>
 
             <informaltable>
               <tgroup cols="2">

@@ -99,7 +99,7 @@
 
 	  <varlistentry id="panes.context.menus">
 		<term id="panes.context.menus.title">Context menus</term>
-		<listitem><para>Some panes have a specific associated context menu. You can call that menu using the standard method for your OS, or with the OmegaT defined shortcuts (see <link linkend="app.shortcut" endterm="app.shortcut.title"/> for details).</para>
+		<listitem><para>Some panes have a specific associated context menu. You can call that menu using the standard method for your OS, or with the OmegaT defined shortcuts (see <link linkend="app.shortcuts" endterm="app.shortcuts.title"/> for details).</para>
 		</listitem>
 	  </varlistentry>
 	  <varlistentry id="panes.drag.and.drop">

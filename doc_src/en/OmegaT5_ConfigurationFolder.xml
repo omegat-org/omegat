@@ -74,13 +74,13 @@
 	<variablelist>
 	<varlistentry id="configuration.folder.extra.contents.editorshortcuts">
 	  <term id="configuration.folder.extra.contents.editorshortcuts.title">EditorShortcuts.properties</term>
-	  <listitem><para>This parameter file  contains customized editor shortcuts. See <link linkend="app.shortcut.customization" endterm="app.shortcut.customization.title"/> for details.</para>
+	  <listitem><para>This parameter file  contains customized editor shortcuts. See <link linkend="app.shortcuts.customization" endterm="app.shortcuts.customization.title"/> for details.</para>
 	  </listitem>
 	</varlistentry>
 	
 	<varlistentry id="configuration.folder.extra.contents.maninmenushortcut">
 	  <term id="configuration.folder.extra.contents.maninmenushortcut.title">MainMenuShortcuts.properties</term>
-	  <listitem><para>This parameter file  contains customized user interface shortcuts. See <link linkend="app.shortcut.customization" endterm="app.shortcut.customization.title"/> for details.</para>
+	  <listitem><para>This parameter file  contains customized user interface shortcuts. See <link linkend="app.shortcuts.customization" endterm="app.shortcuts.customization.title"/> for details.</para>
 	  </listitem>
 	</varlistentry>
 	

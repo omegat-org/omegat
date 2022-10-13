@@ -342,6 +342,9 @@
 	shown in bold, while those from other glossaries are presented as regular
 	text.</para>
 
+	<para>The glossary file name is shown as a tooltip when hovering over the
+	terms.</para>
+	
 	<para>Hyperlinks to local files (<filename>file:///PATH/filename</filename>
 	opening in the associated program) or web addresses
 	(<filename>http://...</filename> opening in the default browser) present in

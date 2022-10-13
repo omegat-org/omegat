@@ -9,8 +9,8 @@
     <varlistentry id="menus.options.preferences">
       <term id="menus.options.preferences.title">Preferences...</term>
       <listitem>
-        <para>Opens the <link linkend="dialogs.preferences">Preferences</link>
-        dialog.</para>
+        <para>Opens the <link linkend="dialogs.preferences"
+        endterm="dialogs.preferences.title"/> dialog.</para>
 		<note><para>In macOS, this menu item is found under the
 		<guimenu>OmegaT</guimenu> menu.</para></note>
       </listitem>

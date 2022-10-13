@@ -24,7 +24,7 @@
   <para>By default, scripts are stored in the <link
   linkend="application.folder.scripts"
   endterm="application.folder.scripts.title"/> folder of the OmegaT
-  installation.</para>
+  application folder.</para>
 
   <para>New scripts added there will appear in the list of available scripts
   in the left-hand panel of the window.</para>

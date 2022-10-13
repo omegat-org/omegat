@@ -429,7 +429,7 @@
 
     <para>The left side status bar at the bottom of the main window displays information or error messages on the left, while the right side shows status and progress information.</para>
 	<para>If you use machine translation, you will briefly see a status message on the left side if there is a connection or authentication error.</para>
-	<para>For example, a message such as <literal>IBM Watson not available. See OmegaT manual for instructions.</literal> indicates that you should <link linkend="dialogs.preferences.mt.provider.list" endterm="dialogs.preferences.mt.provider.list.title">make sure the service is enabled and your credentials are entered correctly</link>. If they are, you may need to contact the service provider for assistance. Similarly, an error such as <literal>Unable to parse translation service response</literal> suggests that there may be a communication problem between your system and the provider's server.</para>
+	<para>Make sure the service is enabled and your credentials are entered correctly. If they are, you may need to contact the service provider for assistance. Similarly, an error such as <literal>Unable to parse translation service response</literal> suggests that there may be a communication problem between your system and the provider's server.</para>
 	<para>The right side shows the <link linkend="panes.editor.cursor.lock" endterm="panes.editor.cursor.lock.title"/> status followed by progress information.</para>
 	<para>Click on it to alternate between displaying progress as numbers or percentages.</para>
 

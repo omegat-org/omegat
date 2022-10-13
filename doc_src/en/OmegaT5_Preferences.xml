@@ -1936,9 +1936,9 @@ instead.</para></warning>
   <title id="dialogs.preferences.plugins.title">Plugins</title>
 
   <para>This option shows a list of available plugins. Plugins are installed
-  either in the <filename class="directory">plugins</filename> folder under
-  the OmegaT installation folder, or in the platform-specific OmegaT
-  configuration folder.</para>
+  either in the <link linkend="application.folder.plugins" endterm="application.folder.plugins.title"/> folder under
+  the OmegaT <link linkend="application.folder" endterm="application.folder.title"/>, or in the platform-specific OmegaT
+  <link linkend="configuration.folder" endterm="configuration.folder.title"/>.</para>
   <para>Additional plugins can be found on the <ulink
   url="https://sourceforge.net/p/omegat/wiki/Plugins/">OmegaT development
   site</ulink>.</para>

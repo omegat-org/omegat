@@ -171,8 +171,7 @@
       <term id="menus.project.properties.title">Properties...		  <keycombo><keycap>C</keycap><keycap>E</keycap></keycombo>
 </term>
       <listitem>
-        <para>Displays the <link linkend="dialogs.project.properties">Project
-        properties</link> dialog to edit the project languages and folder
+        <para>Displays the <link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/> dialog to edit the project languages and folder
         locations.</para>
 		<para>
 		</para>		
@@ -183,8 +182,7 @@
       <term id="menus.project.project.files.title">Project Files...		  <keycombo><keycap>C</keycap><keycap>L</keycap></keycombo>
 </term>
       <listitem>
-        <para>Opens the <link linkend="windows.project.files">Project
-        files</link> window.</para>
+        <para>Opens the <link linkend="windows.project.files" endterm="windows.project.files.title"/> window.</para>
 		<para>
 		</para>				
       </listitem>
@@ -195,29 +193,29 @@
       Contents</term>
       <listitem>
         <para>Gives access to the various project folders. See <link
-        linkend="project.folder">Project folder</link> for more details.</para>
+        linkend="project.folder" endterm="project.folder.title"/> for more details.</para>
         <para>In addition, there are three menu entries that directly open the current
         source or target documents, or the writable glossary. The documents are
         opened in the default application set by the operating system. The options are grayed out if the documents do not exist yet.</para>
 
 		<variablelist>
 		  <varlistentry>
-			<term><link linkend="project.folder">Root</link></term>
+			<term><link linkend="project.folder" endterm="project.folder.title"/></term>
 		  </varlistentry>
 		  <varlistentry>
-			<term><link linkend="project.folder.dictionary">Dictionaries</link></term>
+			<term><link linkend="project.folder.dictionary" endterm="project.folder.dictionary.title"/></term>
 		  </varlistentry>
 		  <varlistentry>
-			<term><link linkend="project.folder.glossary">Glossaries</link></term>
+			<term><link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/></term>
 		  </varlistentry>
 		  <varlistentry>
-			<term><link linkend="project.folder.source">Source Files</link></term>
+			<term><link linkend="project.folder.source" endterm="project.folder.source.title"/></term>
 		  </varlistentry>
 		  <varlistentry>
-			<term><link linkend="project.folder.target">Target Files</link></term>
+			<term><link linkend="project.folder.target" endterm="project.folder.target"/></term>
 		  </varlistentry>
 		  <varlistentry>
-			<term><link linkend="project.folder.tm">TMs</link></term>
+			<term><link linkend="project.folder.tm" endterm="project.folder.tm.title"/></term>
 		  </varlistentry>
 		  <varlistentry>
 			<term>Current Source Document</term>

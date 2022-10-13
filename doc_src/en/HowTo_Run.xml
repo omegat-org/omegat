@@ -220,7 +220,7 @@
 			<listitem>
 			  <para>Optional parameters accepted by the
 			  <command>java</command> command. The parameters relevant
-			  to running OmegaT are described <link
+			  to running OmegaT are described below :<link
 			  linkend="launch.with.command.line.java.parameters">below.</link></para>
 			</listitem>					
 		  </varlistentry>

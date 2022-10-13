@@ -207,7 +207,7 @@
 	  be shared unless you specify a different configuration folder with the
 	  <literal>--config-dir=&lt;path&gt;</literal> option from the <link
 	  endterm="launch.with.command.line.omegat.parameters.title"
-	  linkend="launch.with.command.line.omegat.parameters"></link> on the
+	  linkend="launch.with.command.line.omegat.parameters"/> on the
 	  command line . All the parameters located in a <link
 	  endterm="project.folder.title" linkend="project.folder"/> will apply to
 	  that project regardless of which version of OmegaT opens it.</para>

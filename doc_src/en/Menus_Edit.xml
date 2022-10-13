@@ -83,7 +83,7 @@
         selected Machine Translation service. No action is taken if no Machine
         Translation service has been activated (in <link
         linkend="menus.options.mt" endterm="menus.options.mt.title"/>). See
-        <link linkend="dialogs.preferences.mt">Machine Translation</link> for
+        <link linkend="dialogs.preferences.mt" endterm="dialogs.preferences.mt.title"/> for
         details.</para>
       </listitem>
     </varlistentry>
@@ -179,8 +179,7 @@
       <term id="menus.edit.search.project.title">Search Project...		  <keycombo><keycap>C</keycap><keycap>F</keycap></keycombo>
 	  </term>
       <listitem>
-        <para>Opens a new <link linkend="windows.text.search">Search
-        window</link>.</para>
+        <para>Opens a new <link linkend="windows.text.search" endterm="windows.text.search.title"/>.</para>
         <para>If you select a text string (in any pane) before calling the
         function, the text will be pasted by default in the <guilabel>Search
         for:</guilabel> field.</para>
@@ -195,8 +194,7 @@
       <term id="menus.edit.search.and.replace.title">Search and Replace...		  <keycombo><keycap>C</keycap><keycap>K</keycap></keycombo>
 	  </term>
       <listitem>
-        <para>Opens a new <link linkend="windows.text.replace">Search
-        and replace window</link>.</para>
+        <para>Opens a new <link linkend="windows.text.replace" endterm="windows.text.replace.title"/>.</para>
         <para>If you select a text string (in any pane) before calling the
         function, the text will be pasted by default in the <guilabel>Search
         for:</guilabel> field.</para>

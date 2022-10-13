@@ -12,7 +12,7 @@
   the project, but in some cases it may be an
   <filename>omegat.project</filename> file containing the location of the
   project and, possibly <link
-  linkend="how.to.setup.team.project.mapping.parameters">mappings</link>.
+  linkend="how.to.setup.team.project.mapping.parameters" endterm="how.to.setup.team.project.mapping.parameters.title"/>.
   The first time you access the project, you will have to download it and
   create a local copy on your system.</para>
 
@@ -125,10 +125,8 @@
           <listitem>
             <para><emphasis>Repository mappings</emphasis></para>
 
-            <para>Details on mappings can be found in the <link
-            linkend="how.to.setup.team.project.mapping.parameters">section 
-            on setting up team projects</link>. From a user’s standpoint, the
-            following rules apply to repository mappings.</para>
+            <para>See <link
+            linkend="how.to.setup.team.project.mapping.parameters" endterm="how.to.setup.team.project.mapping.parameters.title"/> for details.
 
             <itemizedlist>
               <listitem>

@@ -13,9 +13,9 @@
   those skills.</para></warning>
 
   <para>When you translate the documents in a project, OmegaT stores all
-  your progress in the <link linkend="project.folder.project.save.tmx"
-  endterm="project.folder.project.save.tmx.title"></link> translation memory
-  file located in the <link linkend="project.folder.omegat"
+  your progress in <link linkend="project.folder.project.save.tmx"
+  endterm="project.folder.project.save.tmx.title"/>,
+  located in the <link linkend="project.folder.omegat"
   endterm="project.folder.omegat.title"/> folder. That file is saved at regular intervals, and you can also use <link linkend="menus.project.save" endterm="menus.project.save.title"/> to make sure important data in the meanwhile.</para>
 
   <para>In that folder, OmegaT also automatically creates backup files of that translation memory  every time you open or reload a project. OmegaT stores up to 10 backup files there with names like <filename>project_save.tmx.YYYYMMDDhhmm.bak</filename> where the final part is the time stamp indicating when the file was created: <code>YYYY</code>
@@ -68,20 +68,18 @@
     </listitem>
 
     <listitem>
-      <para>Be very cautious about making changes to the files in the <link
-      linkend="project.folder.source" endterm="project.folder.source.title"/>
-      folder, or to the <link linkend="segmentation.rules"
-      endterm="segmentation.rules.title">segmentation rules</link>, partway
-      through a project. Modifying either source files or the segmentation rules
-      after you have started your translation could result in OmegaT becoming
-      unable to find a segment that you have already translated.</para>
+      <para>Be very cautious about making changes to the files in the source
+      folder, to the segmentation rules, or to the file filters, partway through
+      a project. Modifying either after you have started your translation could
+      result in OmegaT becoming unable to find a segment that you have already
+      translated.</para>
     </listitem>
   </itemizedlist>
 
   <itemizedlist>
     <listitem>
       <para>Consult the <link linkend="chapter.instant.start.guide"
-      endterm="chapter.instant.start.guide.title">Instant Start Guide</link> and
+      endterm="chapter.instant.start.guide.title"/> and
       other sections of this manual to get started. Should you run into
       problems, post a message in the <ulink
       url="https://omegat.org/support">OmegaT user group</ulink>. Do not

@@ -334,7 +334,7 @@
 
   <section id="project.folder.omegat.project">
     <title id="project.folder.omegat.project.title">omegat.project</title>
-    <para>This file contains the project parameters defined in the <link linkend="dialogs.project.properties">Project properties</link> dialog.</para>
+    <para>This file contains the project parameters defined in the <link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/>.</para>
   </section>
 
   <section id="project.folder.repositories">

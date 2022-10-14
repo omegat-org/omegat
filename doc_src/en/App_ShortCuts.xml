@@ -15,7 +15,7 @@
     start working with OmegaT. The shortcuts are indicated next to each menu
     item, allowing them to learn new shortcuts gradually as you use the software.</para>
 
-    <para>You can customize the majority of OmegaT’s shortcuts. See <link
+    <para>You can customize the majority of the shortcuts in OmegaT. See <link
     endterm="app.shortcuts.customization.title"
     linkend="app.shortcuts.customization"/> for details.</para>
 
@@ -83,62 +83,81 @@
   <section id="app.shortcuts.customization">
     <title id="app.shortcuts.customization.title">Customization</title>
 
-	<para>OmegaT assigns shortcuts to most functions available in the menus and
-	to a number of functions in the Editor window. Most of these functions can
-	be assigned new shortcuts.</para>
-    <para>You can change or add a shortcut by putting a shortcut definition
-    file in your OmegaT configuration folder. See <link
+    <para>OmegaT assigns shortcuts to most of the functions available in the
+    <link linkend="menus.project" endterm="menus.project.title"/>,
+    <link linkend="menus.edit" endterm="menus.edit.title"/>, and
+    <link linkend="menus.goto" endterm="menus.goto.title"/> menus and	to a
+    number of functions in the Editor window. You can also add or modify the
+    shortcuts for most of the functions.</para>
+    <para>To do so, you have to put the appropriate shortcut definition file in
+    your OmegaT configuration folder. See <link
     endterm="configuration.folder.title" linkend="configuration.folder"/> for
     details.</para>
 
-    <para>There are 2 shortcut definition files.</para>
-	<variablelist>
-	  <varlistentry><term id="MainMenuShortcuts.properties">MainMenuShortcuts.properties</term>
-	  <listitem><para>The shortcut definition file for the menus and a few other items.</para></listitem></varlistentry>
-	  <varlistentry><term id="EditorShortcuts.properties">EditorShortcuts.properties</term>
-	  <listitem><para>The shortcut definition file for the editor.</para></listitem></varlistentry>
-	</variablelist>
+    <para>There are two shortcut definition files.</para>
+    <variablelist>
+      <varlistentry>
+        <term id="MainMenuShortcuts.properties">MainMenuShortcuts.properties</term>
+        <listitem>
+          <para>The shortcut definition file for the menus and a few other
+          items.</para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term id="EditorShortcuts.properties">EditorShortcuts.properties</term>
+        <listitem><para>The shortcut definition file for the editor.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
 
-    <para>Once a shortcut definition file is modified, OmegaT must be relaunched
-    to take the new shortcuts into account.</para>
+    <para>OmegaT must be restarted after a shortcut definition file has been
+    modified for the new shortcuts to take effect.</para>
 
     <note>
       <para>You can copy the default OmegaT shortcut files from the OmegaT
       development site on Sourceforge to your configuration folder and modify
       them to suit your needs:</para>
 
-	  <variablelist>
-		<varlistentry><term>Windows and Linux default shortcuts</term>
-		<listitem>
-		  <itemizedlist>
-			<listitem>
-			  <para><ulink
-						url="https://sourceforge.net/p/omegat/svn/HEAD/tree/trunk/src/org/omegat/gui/main/MainMenuShortcuts.properties">MainMenuShortcuts.properties</ulink></para>
-			</listitem>
-			<listitem>
-			  <para><ulink
-						url="https://sourceforge.net/p/omegat/svn/HEAD/tree/trunk/src/org/omegat/gui/main/EditorShortcuts.properties">EditorShortcuts.properties</ulink></para>
-			</listitem>
-		  </itemizedlist>
-		</listitem>
-		</varlistentry>
-		<varlistentry><term>macOS default shortcuts</term>
-		<listitem>
-		  <itemizedlist>
-			<listitem>
-			  <para><ulink
-						url="https://sourceforge.net/p/omegat/svn/HEAD/tree/trunk/src/org/omegat/gui/main/MainMenuShortcuts.mac.properties">MainMenuShortcuts.mac.properties</ulink></para>
-			</listitem>
-			<listitem>
-			  <para><ulink
-						url="https://sourceforge.net/p/omegat/svn/HEAD/tree/trunk/src/org/omegat/gui/main/EditorShortcuts.mac.properties">EditorShortcuts.mac.properties</ulink></para>
-			</listitem>
-		  </itemizedlist>
-		</listitem>
-		</varlistentry>
-	  </variablelist>
-	  <para>The macOS files must be renamed <link linkend="MainMenuShortcuts.properties" endterm="MainMenuShortcuts.properties"/> and <link linkend="EditorShortcuts.properties" endterm="EditorShortcuts.properties"/> to be taken into account by OmegaT.</para>
+      <variablelist>
+        <varlistentry>
+          <term>Windows and Linux default shortcuts</term>
+          <listitem>
+            <itemizedlist>
+              <listitem>
+                <para><ulink
+                url="https://sourceforge.net/p/omegat/svn/HEAD/tree/trunk/src/org/omegat/gui/main/MainMenuShortcuts.properties">MainMenuShortcuts.properties</ulink></para>
+              </listitem>
+              <listitem>
+                <para><ulink
+                url="https://sourceforge.net/p/omegat/svn/HEAD/tree/trunk/src/org/omegat/gui/main/EditorShortcuts.properties">EditorShortcuts.properties</ulink></para>
+              </listitem>
+            </itemizedlist>
+          </listitem>
+        </varlistentry>
+        <varlistentry><term>macOS default shortcuts</term>
+          <listitem>
+            <itemizedlist>
+              <listitem>
+                <para><ulink
+                url="https://sourceforge.net/p/omegat/svn/HEAD/tree/trunk/src/org/omegat/gui/main/MainMenuShortcuts.mac.properties">MainMenuShortcuts.mac.properties</ulink></para>
+              </listitem>
+              <listitem>
+                <para><ulink
+                url="https://sourceforge.net/p/omegat/svn/HEAD/tree/trunk/src/org/omegat/gui/main/EditorShortcuts.mac.properties">EditorShortcuts.mac.properties</ulink></para>
+              </listitem>
+            </itemizedlist>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+        <para>The macOS files must be renamed <link linkend="MainMenuShortcuts.properties" endterm="MainMenuShortcuts.properties"/> and
+        <link linkend="EditorShortcuts.properties"
+      endterm="EditorShortcuts.properties"/> for OmegaT to recognize
+      them.</para>
     </note>
+    <para>
+      The next section describes the syntax used in the shortcut definition
+      files, and provides an example modification.
+    </para>
   </section>
 
   <section id="app.shortcuts.syntax">

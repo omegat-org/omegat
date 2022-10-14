@@ -191,6 +191,9 @@ dependencies {
         runtimeOnly 'org.codehaus.groovy:groovy-dateutil:3.0.9'
         runtimeOnly 'org.apache.ivy:ivy:2.5.0'
 
+        // Javascript used for scripts
+        implementation 'org.openjdk.nashorn:nashorn-core:15.4'
+
         // Script editor
         implementation 'com.fifesoft:rsyntaxtextarea:3.2.0'
         implementation 'com.fifesoft:rstaui:3.2.0'

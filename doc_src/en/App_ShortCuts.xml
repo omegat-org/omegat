@@ -115,8 +115,9 @@
 
     <note>
       <para>You can copy the default OmegaT shortcut files from the OmegaT
-      development site on Sourceforge to your configuration folder and modify
-      them to suit your needs:</para>
+      development site on Sourceforge to
+      <link linkend="configuration.folder">your configuration folder</link> and
+      modify them to suit your needs:</para>
 
       <variablelist>
         <varlistentry>
@@ -163,88 +164,147 @@
   <section id="app.shortcuts.syntax">
     <title id="app.shortcuts.syntax.title">Syntax</title>
 
-    <para>Empty lines are accepted and comment lines should start with
-    <code>//</code>. Anything after the <code>//</code> will be
-    ignored.</para>
-
-    <para>The shortcut definition syntax is the following:</para>
-
+    <para>The basic syntax of the shortcut definitions files is simply:</para>
     <para><code>function code=shortcut</code></para>
-
-    <para><code>function code</code> is a code taken from the tables
-    below.</para>
-
-    <para><code>shortcut</code> is a combination of pressed keys
-    specified by the user.</para>
-
-    <para><code>shortcut</code> must be of the following form: <itemizedlist>
-    <listitem>
-      <para>0 or more <code>modifier</code></para>
-    </listitem>
-
-    <listitem>
-      <para>followed by 0 or 1 <code>event</code></para>
-    </listitem>
-
-    <listitem>
-      <para>followed by 1 <code>key</code></para>
-    </listitem>
-    </itemizedlist> where:</para>
-
+    <para>Use the tables in the <link linkend="app.function.codes"
+    endterm="app.function.codes.title"/> section below to find the values for
+    <code>function code</code>.</para>
+    
+    <para>The <code>shortcut</code> represents the key combination pressed by
+    the user. It takes the following form:
+    
+    <itemizedlist>
+      <listitem>
+        <para>0 or more <code>modifier</code></para>
+      </listitem>
+    
+      <listitem>
+        <para>followed by 0 or 1 <code>event</code></para>
+      </listitem>
+    
+      <listitem>
+        <para>followed by 1 <code>key</code></para>
+      </listitem>
+    </itemizedlist>
+    where:</para>
+    
     <itemizedlist>
       <listitem>
         <para><code>modifier</code> can be:
-        <emphasis>shift</emphasis>, <emphasis>control</emphasis>,
-        <emphasis>ctrl</emphasis>, <emphasis>meta</emphasis>,
-        <emphasis>alt</emphasis>, <emphasis>altGraph</emphasis></para>
+        <literal>shift</literal>, <literal>ctrl</literal>,
+        <literal>meta</literal>, <literal>alt</literal>,
+        <literal>altGraph</literal></para>
 
         <note>
-          <para><emphasis>meta</emphasis> is used to describe
-          <emphasis>command</emphasis> on macOS.</para>
+          <para><literal>meta</literal> refers to the key with the Windows
+          logo on most keyboards for Windows or Linux systems, and to the
+          <literal>command</literal> on macOS.</para>
+          <para><literal>altGraph</literal> refers to the
+          <emphasis>Alt</emphasis> key to the right of the spacebar on
+          keyboards with two <emphasis>Alt</emphasis> keys.</para>
         </note>
       </listitem>
 
       <listitem>
-        <para><code>event</code> can be: <emphasis>typed</emphasis>,
-        <emphasis>pressed</emphasis>, <emphasis>released</emphasis></para>
+        <para><code>event</code> can be: <option>typed</option>,
+        <option>pressed</option>, <option>released</option></para>
       </listitem>
 
       <listitem>
         <para>and <code>key</code> can be any key available on your
-        keyboard.</para>
+        keyboard. You can refer to the <link
+        linkend="app.function.codes.editor.table">table presenting the different
+        editor shortcuts</link> to find the values for keys such as
+        <literal>Home</literal>, <literal>Page Up</literal>, or the arrow keys.</para>
       </listitem>
     </itemizedlist>
 
+    <para>Empty lines and comments can be added to organize the list and make it
+    easier to read. A comment line starts with a <code>#</code>, and everything
+    after that is ignored by the applicaton.</para>
+
+    <para>The easiest way to modify the shortcuts is to download copies of the
+    default files to <link linkend="configuration.folder">your configuration
+    folder</link>, as noted above, and make the changes you want there.</para>
+    
     <example id="example.shortcut.modification">
-      <title id="example.shortcut.modification.title"><guilabel>Open Project</guilabel> shortcut modification</title>
+      <title id="example.shortcut.modification.title">Modifying a
+      shortcut</title>
 
-      <para>The default shortcut for <guilabel>Open Project</guilabel> is
-      defined this way:</para>
+      <para>The default shortcut for <link linkend="menus.project.close">closing
+      a project</link> is defined as:</para>
 
-      <para><code>projectOpenMenuItem=ctrl O</code></para>
+      <para><code>projectCloseMenuItem=ctrl shift W</code> on Windows and
+      Linux, and as</para>
+      <para><code>projectCloseMenuItem=meta shift W</code> on macOS.</para>
 
-      <para>or, on macOS</para>
+      <para>However, you may want to remove the <keycap>S</keycap> key from the
+      shortcut to make it only
+      <keycombo><keycap>C</keycap><keycap>W</keycap></keycombo> to match the
+      shortcut you use in other applications. To do so, modify the
+      <filename>MainMenuShortcuts.properties</filename> as follows:</para>
 
-      <para><code>projectOpenMenuItem=meta O</code>.</para>
-
-      <para>If you want to add <keycap>Shift</keycap> to the definition,
-      modify the <filename>MainMenuShortcuts.properties</filename> as
-      follows:</para>
-
-      <para><code>projectOpenMenuItem=shift ctrl O</code>.</para>
-
-      <para>or, on macOS:</para>
-
-      <para><code>projectOpenMenuItem=shift meta O</code>.</para>
+      <para><code>projectCloseMenuItem=ctrl W</code> in Windows or Linux,</para>
+      <para>or <code>projectCloseMenuItem=meta W</code> on macOS.</para>
     </example>
 
-    <para>After the modifications, save the file and relaunch OmegaT. Your new
-    shortcuts should now appear next to the menu items you have modified. If
-    they do not conflict with system shortcuts, they should be available from
-    within OmegaT.</para>
+    <example id="example.shortcut.addition">
+      <title id="example.shortcut.addition.title">Adding a shortcut</title>
 
-    <para>The following sections give the function codes and their
-    associated shortcuts default definitions.</para>
+      <para>If your language pair calls for the frequent use <link
+      linkend="menus.edit.create.alternative.translation">alternative
+      translations</link>, you may want to assign a shortcut to  that function
+      since it does not have one by default.</para>
+
+      <para>The steps below demonstrate how to assign the
+      <keycombo><keycap>A</keycap><keycap>X</keycap></keycombo> shortcut to the
+      <link linkend="menus.edit.create.alternative.translaetion"
+      endterm="menus.edit.create.alternative.translation.title"/> function.
+        <orderedlist>
+          <listitem>
+            <para>Open the <filename>MainMenuShortcuts.properties</filename> you
+            have copied to <link linkend="configuration.folder">your
+            configuration folder</link> in a text editor.</para>
+          </listitem>
+          <listitem>
+            <para>As shown in the <link
+            linkend="app.function.codes.edit.menu.table">Edit
+            menu table</link> below, the function code for the <guimenuitem>Create Alternative Translation</guimenuitem> function
+            is <code>editMultipleAlternate</code>.</para>
+            <para>Searching for that code in the file will bring you to the
+            following line:
+              <simplelist>
+                <member><code>#	editMultipleAlternate=</code></member>                
+              </simplelist>
+            </para>
+          </listitem>
+          <listitem>
+            <para>The line is currently a comment. Delete the <code>#</code> at
+            the beginning of the line so OmegaT will recognize the shortcut, and
+            add <option>alt X</option> after the <code>=</code> sign at the end
+            of the line:
+              <simplelist>
+                <member><code>editMultipleAlternate=alt X</code></member>
+              </simplelist>
+            </para>
+          </listitem>
+          <listitem>
+            <para>Save and close the file. The next time you start OmegaT, you
+            your new shortcut should be active and displayed next to the name of
+            the function in the menu.</para>
+          </listitem>
+        </orderedlist>
+      </para>
+    </example>
+
+    <para>Save the file after you have finished making your changes. If OmegaT
+    is open, you will have to restart it for your changes to take effect.</para>
+    <para>Your modified or added shortcuts should now be displayed next to the
+    menu items you have changed. They will now be availabe in OmegaT as long as
+    there are no conflicts with other functions or with system-wide shortcuts.</para>
+
+    <para>The next section presents tables with the function codes and 
+    corresponding default shortcut for each menu or editor function in OmegaT.</para>
   </section>
 
   <section id="app.function.codes">

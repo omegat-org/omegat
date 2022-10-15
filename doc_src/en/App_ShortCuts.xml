@@ -240,7 +240,8 @@
 
       <para>However, you may want to remove the <keycap>S</keycap> key from the
       shortcut to make it only
-      <keycombo><keycap>C</keycap><keycap>W</keycap></keycombo> to match the
+      <keycombo><keycap>Ctrl</keycap><keycap>W</keycap></keycombo> (or
+      <keycombo><keycap>Command</keycap><keycap>W</keycap></keycombo> match the
       shortcut you use in other applications. To do so, modify the
       <filename>MainMenuShortcuts.properties</filename> as follows:</para>
 
@@ -253,12 +254,12 @@
 
       <para>If your language pair calls for the frequent use <link
       linkend="menus.edit.create.alternative.translation">alternative
-      translations</link>, you may want to assign a shortcut to  that function
+      translations</link>, you may want to assign a shortcut to that function
       since it does not have one by default.</para>
 
       <para>The steps below demonstrate how to assign the
-      <keycombo><keycap>A</keycap><keycap>X</keycap></keycombo> shortcut to the
-      <link linkend="menus.edit.create.alternative.translaetion"
+      <keycombo><keycap>Alt</keycap><keycap>X</keycap></keycombo> shortcut to
+      the <link linkend="menus.edit.create.alternative.translaetion"
       endterm="menus.edit.create.alternative.translation.title"/> function.
         <orderedlist>
           <listitem>

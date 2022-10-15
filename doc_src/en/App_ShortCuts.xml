@@ -232,21 +232,35 @@
       shortcut</title>
 
       <para>The default shortcut for <link linkend="menus.project.close">closing
-      a project</link> is defined as:</para>
+      a project</link> is defined as:
+        <simplelist>
+          <member><code>projectCloseMenuItem=ctrl shift W</code></member>
+        </simplelist>
+      on Windows and Linux, and as
+        <simplelist>
+          <member><code>projectCloseMenuItem=meta shift W</code></member>
+        </simplelist>
+      on macOS.
+      </para>
 
-      <para><code>projectCloseMenuItem=ctrl shift W</code> on Windows and
-      Linux, and as</para>
-      <para><code>projectCloseMenuItem=meta shift W</code> on macOS.</para>
+      <para></para>
+      <para></para>
 
       <para>However, you may want to remove the <keycap>S</keycap> key from the
       shortcut to make it only
       <keycombo><keycap>Ctrl</keycap><keycap>W</keycap></keycombo> (or
       <keycombo><keycap>Command</keycap><keycap>W</keycap></keycombo> match the
       shortcut you use in other applications. To do so, modify the
-      <filename>MainMenuShortcuts.properties</filename> as follows:</para>
-
-      <para><code>projectCloseMenuItem=ctrl W</code> in Windows or Linux,</para>
-      <para>or <code>projectCloseMenuItem=meta W</code> on macOS.</para>
+      <filename>MainMenuShortcuts.properties</filename> as follows:
+        <simplelist>
+          <member><code>projectCloseMenuItem=ctrl W</code></member>
+        </simplelist>
+      in Windows or Linux, or</para>
+      <para>
+        <simplelist>
+          <member><code>projectCloseMenuItem=meta W</code></member>
+        </simplelist>
+      on macOS.</para>
     </example>
 
     <example id="example.shortcut.addition">

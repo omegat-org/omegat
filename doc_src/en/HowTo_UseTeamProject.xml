@@ -168,7 +168,8 @@
                 backups are automatically deleted.</para>
               </listitem>
             </itemizedlist>
-          </listitem>
+			</para>
+		  </listitem>
 
           <listitem>
             <para><emphasis>Optional project-specific settings:</emphasis> It

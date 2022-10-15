@@ -4,25 +4,20 @@
 <section id="how.to.restore.your.data">
   <title id="how.to.restore.your.data.title">Restore your data</title>
 
-  <warning><para>Although OmegaT is a robust application, you should take
-  precautions to guard against data loss when using it, just as with any other
-  application.</para>
-  <para>Make regular and automatic backups of all your projects and files and
-  regularly practice "emergency" measures, like restoring translations from a
-  project, to make sure you won't lose too much time the day you need to use
-  those skills.</para></warning>
+  <warning><para>OmegaT is a robust and trustworthy application, but even so, it is smart take precautions to guard against data loss when using it, just as with any other application.</para></warning>
 
-  <para>When you translate the documents in a project, OmegaT stores all
-  your progress in <link linkend="project.folder.project.save.tmx"
+  <para>When you translate the documents in a project, OmegaT stores all your progress in the <link linkend="project.folder.project.save.tmx"
   endterm="project.folder.project.save.tmx.title"/>,
-  located in the <link linkend="project.folder.omegat"
-  endterm="project.folder.omegat.title"/> folder. That file is saved at regular intervals, and you can also use <link linkend="menus.project.save" endterm="menus.project.save.title"/> to make sure important data in the meanwhile.</para>
+  file located in the project’s <link linkend="project.folder.omegat"
+  endterm="project.folder.omegat.title"/> folder. That file is in fact a translation memory and is automatically saved at regular intervals. You can also use <link linkend="menus.project.save" endterm="menus.project.save.title"/> discretionally to make sure that your valuable work is saved.</para>
 
-  <para>In that folder, OmegaT also automatically creates backup files of that translation memory  every time you open or reload a project. OmegaT stores up to 10 backup files there with names like <filename>project_save.tmx.YYYYMMDDhhmm.bak</filename> where the final part is the time stamp indicating when the file was created: <code>YYYY</code>
+  <para>Beside of that, OmegaT also backs-up that file, by automatically creating a sequential number of copies (up to ten), marked with a timestamp, every time you open or reload your project.</para>
+
+<para>These backup filenames’ follow the pattern <filename>project_save.tmx.YYYYMMDDhhmm.bak</filename> where the final part is the time stamp indicating when the file was created: <code>YYYY</code>
   represents the 4-digit year, <code>MM</code> the month, <code>DD</code> the day of the month, and <code>hh</code>
   and <code>mm</code> indicate the hours and minutes.</para>
 
-  <para>The first backup is <filename>project_save.tmx.bak</filename>, which is a copy of <filename>project_save.tmx</filename> created when the project was opened. Then come the incremental backup files that are created as your translation progresses. <filename>project_save.tmx</filename> is always the file with the most recent data.</para>
+  <para>The file <filename>project_save.tmx</filename> always contains the most recent data, which is a copy of <filename>project_save.tmx</filename> created when the project was opened. Then come the incremental backup files that are created as your translation progresses. <filename>project_save.tmx</filename> is always the file with the most recent data.</para>
 
   <para>If you believe that you have lost translation data, follow the steps
   below to restore the project to the most recent backup memory, which is

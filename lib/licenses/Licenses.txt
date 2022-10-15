@@ -72,7 +72,7 @@ and a resource regex from JetBrains/intellij-community
 under Apache-2.0 License.
 
 dictzip is distributed under the GNU General Public License version
-2.0 and greater with classpath link exception.
+2.0 or later with classpath link exception.
 
 StringUtil uses code from the FullWidthConversionStep in the Okapi
 Framework (http://okapi.opentag.com/) under the GNU Public License

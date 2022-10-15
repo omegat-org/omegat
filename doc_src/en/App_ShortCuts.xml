@@ -166,8 +166,8 @@
 
     <para>The basic syntax of the shortcut definitions files is simply:</para>
     <para><code>function code=shortcut</code></para>
-    <para>Use the tables in the <link linkend="app.function.codes"
-    endterm="app.function.codes.title"/> section below to find the values for
+    <para>Use the tables in the <link linkend="app.shortcuts.lists"
+    endterm="app.shortcuts.lists.title"/> section below to find the values for
     <code>function code</code>.</para>
     
     <para>The <code>shortcut</code> represents the key combination pressed by
@@ -213,7 +213,7 @@
       <listitem>
         <para>and <code>key</code> can be any key available on your
         keyboard. You can refer to the <link
-        linkend="app.function.codes.editor.table">table presenting the different
+        linkend="app.shortcuts.lists.function.codes.editor.table">table presenting the different
         editor shortcuts</link> to find the values for keys such as
         <literal>Home</literal>, <literal>Page Up</literal>, or the arrow keys.</para>
       </listitem>
@@ -243,14 +243,11 @@
       on macOS.
       </para>
 
-      <para></para>
-      <para></para>
-
       <para>However, you may want to remove the <keycap>S</keycap> key from the
       shortcut to make it only
       <keycombo><keycap>Ctrl</keycap><keycap>W</keycap></keycombo> (or
-      <keycombo><keycap>Command</keycap><keycap>W</keycap></keycombo> match the
-      shortcut you use in other applications. To do so, modify the
+      <keycombo><keycap>Command</keycap><keycap>W</keycap></keycombo> on macOS)
+      to match the shortcut you use in other applications. To do so, modify the
       <filename>MainMenuShortcuts.properties</filename> as follows:
         <simplelist>
           <member><code>projectCloseMenuItem=ctrl W</code></member>
@@ -283,7 +280,7 @@
           </listitem>
           <listitem>
             <para>As shown in the <link
-            linkend="app.function.codes.edit.menu.table">Edit
+            linkend="app.shortcuts.lists.function.codes.edit.menu.table">Edit
             menu table</link> below, the function code for the <guimenuitem>Create Alternative Translation</guimenuitem> function
             is <code>editMultipleAlternate</code>.</para>
             <para>Searching for that code in the file will bring you to the
@@ -319,14 +316,822 @@
     there are no conflicts with other functions or with system-wide shortcuts.</para>
 
     <para>The next section presents tables with the function codes and 
-    corresponding default shortcut for each menu or editor function in OmegaT.</para>
+    corresponding default shortcut for each menu or editor function in
+    OmegaT.</para>
   </section>
 
-  <section id="app.function.codes">
-    <title id="app.function.codes.title">Function codes</title>
+  <section id="app.shortcuts.lists">
+    <title id="app.shortcuts.lists.title">Lists of functions and codes</title>
+    <section id="app.shortcuts.lists.function.codes.menus">
+      <title id="app.shortcuts.lists.function.codes.menus.title">Menu
+      functions</title>
 
-      <table id="app.function.codes.editor.table">
-        <title id="app.function.codes.editor.table.title">Editor</title>
+      <para>The functions that can be modified in the
+      <filename>MainMenuShortcuts.properties</filename> file, along with their
+      default values, are presented in the tables below.</para>
+
+      <table id="app.shortcuts.lists.function.codes.project.menu.table">
+        <title id="app.shortcuts.lists.function.codes.project.menu.table.title">Project Menu</title>
+
+        <tgroup cols="4" colsep="1">
+          <colspec align="left" colname="1" colnum="1"/>
+          <colspec align="left" colname="2" colnum="2"/>
+          <colspec align="center" colname="3" colnum="3"/>
+          <colspec align="center" colname="4" colnum="4"/>
+
+          <thead>
+            <row>
+              <entry>Menu item</entry>
+              <entry>Function code</entry>
+              <entry>Windows/Linux</entry>
+              <entry>macOS</entry>
+            </row>
+          </thead>
+
+          <tbody>
+            <row>
+              <entry>New</entry>
+              <entry>projectNewMenuItem</entry>
+              <entry>ctrl shift N</entry>
+              <entry>meta shift N</entry>
+            </row>
+
+            <row>
+              <entry>Download Team Project</entry>
+              <entry>projectTeamNewMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Open</entry>
+              <entry>projectOpenMenuItem</entry>
+              <entry>ctrl O</entry>
+              <entry>meta O</entry>
+            </row>
+
+            <row>
+              <entry>Open Recent Project</entry>
+              <entry>projectOpenRecentMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Copy Files to Source Folder...</entry>
+              <entry>projectImportMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Download MediaWiki Page...</entry>
+              <entry>projectWikiImportMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Reload</entry>
+              <entry>projectReloadMenuItem</entry>
+              <entry namest="3" nameend="4">F5</entry>
+            </row>
+
+            <row>
+              <entry>Close</entry>
+              <entry>projectCloseMenuItem</entry>
+              <entry>ctrl shift W</entry>
+              <entry>meta shift W</entry>
+            </row>
+
+            <row>
+              <entry>Save</entry>
+              <entry>projectSaveMenuItem</entry>
+              <entry>ctrl S</entry>
+              <entry>meta S</entry>
+            </row>
+
+            <row>
+              <entry>Create Translated Documents</entry>
+              <entry>projectCompileMenuItem</entry>
+              <entry>ctrl D</entry>
+              <entry>meta D</entry>
+            </row>
+
+            <row>
+              <entry>Create Current Translated Documents</entry>
+              <entry>projectSingleCompileMenuItem</entry>
+              <entry>ctrl shift D</entry>
+              <entry>meta shift D</entry>
+            </row>
+
+            <row>
+              <entry>Properties...</entry>
+              <entry>projectEditMenuItem</entry>
+              <entry>ctrl E</entry>
+              <entry>meta E</entry>
+            </row>
+
+            <row>
+              <entry>Project Files...</entry>
+              <entry>viewFileListMenuItem</entry>
+              <entry>ctrl L</entry>
+              <entry>meta L</entry>
+            </row>
+
+            <row>
+              <entry>Access Project Contents/Root</entry>
+              <entry>projectAccessRootMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Access Project Contents/Dictionaries</entry>
+              <entry>projectAccessDictionaryMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Access Project Contents/Glossaries</entry>
+              <entry>projectAccessGlossaryMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Access Project Contents/Source Files</entry>
+              <entry>projectAccessSourceMenuItem </entry>
+            </row>
+
+            <row>
+              <entry>Access Project Contents/Target Files</entry>
+              <entry>projectAccessTargetMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Access Project Contents/Current Source Document</entry>
+              <entry>projectAccessCurrentSourceDocumentMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Access Project Contents/Current Target Document</entry>
+              <entry>projectAccessCurrentTargetDocumentMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Access Project Contents/Writeable Glossary</entry>
+              <entry>projectAccessWriteableGlossaryMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Restart</entry>
+              <entry>projectRestartMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Quit</entry>
+              <entry>projectExitMenuItem</entry>
+              <entry>ctrl Q</entry>
+              <entry>meta Q</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+
+      <table id="app.shortcuts.lists.function.codes.edit.menu.table">
+        <title id="app.shortcuts.lists.function.codes.edit.menu.table.title">Edit Menu</title>
+
+        <tgroup cols="4" colsep="1">
+          <colspec align="left" colname="1" colnum="1"/>
+          <colspec align="left" colname="2" colnum="2"/>
+          <colspec align="center" colname="3" colnum="3"/>
+          <colspec align="center" colname="4" colnum="4"/>
+
+          <thead>
+            <row>
+              <entry>Menu item</entry>
+              <entry>Function code</entry>
+              <entry>Windows/Linux</entry>
+              <entry>macOS</entry>
+            </row>
+          </thead>
+
+          <tbody>
+            <row>
+              <entry>Undo Last Action</entry>
+              <entry>editUndoMenuItem</entry>
+              <entry>ctrl Z</entry>
+              <entry>meta Z</entry>
+            </row>
+
+            <row>
+              <entry>Redo Last Action</entry>
+              <entry>editRedoMenuItem</entry>
+              <entry>ctrl Y</entry>
+              <entry>meta Y</entry>
+            </row>
+
+            <row>
+              <entry>Replace With Match or Selection</entry>
+              <entry>editOverwriteTranslationMenuItem</entry>
+              <entry>ctrl R</entry>
+              <entry>meta R</entry>
+            </row>
+
+            <row>
+              <entry>Insert Match or Selection</entry>
+              <entry>editInsertTranslationMenuItem</entry>
+              <entry>ctrl I</entry>
+              <entry>meta I</entry>
+            </row>
+
+            <row>
+              <entry>Replace with Machine Translation</entry>
+              <entry>editOverwriteMachineTranslationMenuItem</entry>
+              <entry>ctrl M</entry>
+              <entry>meta M</entry>
+            </row>
+
+            <row>
+              <entry>Replace With Source</entry>
+              <entry>editOverwriteSourceMenuItem</entry>
+              <entry>ctrl shift R</entry>
+              <entry>meta shift R</entry>
+            </row>
+
+            <row>
+              <entry>Insert Source</entry>
+              <entry>editInsertSourceMenuItem</entry>
+              <entry>ctrl shift I</entry>
+              <entry>meta shift I</entry>
+            </row>
+
+            <row>
+              <entry>Insert Missing Source Tags</entry>
+              <entry>editTagPainterMenuItem</entry>
+              <entry>ctrl shift T</entry>
+              <entry>meta shift T</entry>
+            </row>
+
+            <row>
+              <entry>Insert Next Missing Tag</entry>
+              <entry>editTagNextMissedMenuItem</entry>
+              <entry>ctrl T</entry>
+              <entry>meta T</entry>
+            </row>
+
+            <row>
+              <entry>Export Selection</entry>
+              <entry>editExportSelectionMenuItem</entry>
+              <entry>ctrl shift C</entry>
+              <entry>meta shift C</entry>
+            </row>
+
+            <row>
+              <entry>Create Glossary Entry</entry>
+              <entry>editCreateGlossaryEntryMenuItem</entry>
+              <entry>ctrl shift G</entry>
+              <entry>meta shift G</entry>
+            </row>
+
+            <row>
+              <entry>Search Project...</entry>
+              <entry>editFindInProjectMenuItem</entry>
+              <entry>ctrl F</entry>
+              <entry>meta F</entry>
+            </row>
+
+            <row>
+              <entry>(Call Last Search Window)</entry>
+              <entry>findInProjectReuseLastWindow</entry>
+              <entry>ctrl shift F</entry>
+              <entry>meta shift F</entry>
+            </row>
+
+            <row>
+              <entry>Search and Replace...</entry>
+              <entry>editReplaceInProjectMenuItem</entry>
+              <entry>ctrl K</entry>
+              <entry>meta K</entry>
+            </row>
+
+            <row>
+              <entry>Switch Case To/Lower Case</entry>
+              <entry>lowerCaseMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Switch Case To/Upper Case</entry>
+              <entry>upperCaseMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Switch Case To/Title Case</entry>
+              <entry>titleCaseMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Switch Case To/Sentence Case</entry>
+              <entry>sentenceCaseMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Switch Case To/Cycle</entry>
+              <entry>cycleSwitchCaseMenuItem</entry>
+              <entry namest="3" nameend="4">shift F3</entry>
+            </row>
+
+            <row>
+              <entry>Select Previous Match</entry>
+              <entry>editSelectFuzzyPrevMenuItem</entry>
+              <entry>ctrl ↑</entry>
+              <entry>meta ↑</entry>
+            </row>
+
+            <row>
+              <entry>Select Next Match</entry>
+              <entry>editSelectFuzzyNextMenuItem</entry>
+              <entry>ctrl ↓</entry>
+              <entry>meta ↓</entry>
+            </row>
+
+            <row>
+              <entry>Select Match #1</entry>
+              <entry>editSelectFuzzy1MenuItem</entry>
+              <entry>ctrl 1</entry>
+              <entry>meta 1</entry>
+            </row>
+
+            <row>
+              <entry>Select Match #2</entry>
+              <entry>editSelectFuzzy2MenuItem</entry>
+        <entry>ctrl 2</entry>
+              <entry>meta 2</entry>
+            </row>
+
+            <row>
+              <entry>Select Match #3</entry>
+              <entry>editSelectFuzzy3MenuItem</entry>
+              <entry>ctrl 3</entry>
+              <entry>meta 3</entry>
+            </row>
+
+            <row>
+              <entry>Select Match #4</entry>
+              <entry>editSelectFuzzy4MenuItem</entry>
+              <entry>ctrl 4</entry>
+              <entry>meta 4</entry>
+            </row>
+
+            <row>
+              <entry>Select Match #5</entry>
+              <entry>editSelectFuzzy5MenuItem</entry>
+              <entry>ctrl 5</entry>
+              <entry>meta 5</entry>
+            </row>
+
+            <row>
+              <entry>Use as Default Translation</entry>
+              <entry>editMultipleDefault</entry>
+            </row>
+
+            <row>
+              <entry>Create Alternative Translation</entry>
+              <entry>editMultipleAlternate</entry>
+            </row>
+
+            <row>
+              <entry>Remove translation</entry>
+              <entry>editRegisterUntranslatedMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Set empty translation</entry>
+              <entry>editRegisterEmptyMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Register Identical Translation</entry>
+              <entry>editRegisterIdenticalMenuItem</entry>
+              <entry>ctrl shift S</entry>
+              <entry>meta shift S</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+
+      <table id="app.shortcuts.lists.function.codes.goto.menu.table">
+        <title id="app.shortcuts.lists.function.codes.goto.menu.table.title">GoTo Menu</title>
+
+        <tgroup cols="4" colsep="1">
+          <colspec align="left" colname="1" colnum="1"/>
+          <colspec align="left" colname="2" colnum="2"/>
+          <colspec align="center" colname="3" colnum="3"/>
+          <colspec align="center" colname="4" colnum="4"/>
+
+          <thead>
+            <row>
+              <entry>Menu item</entry>
+              <entry>Function code</entry>
+              <entry>Windows/Linux</entry>
+              <entry>macOS</entry>
+            </row>
+          </thead>
+
+          <tbody>
+            <row>
+              <entry>Next Untranslated Segment</entry>
+              <entry>gotoNextUntranslatedMenuItem</entry>
+        <entry>ctrl U</entry>
+              <entry>meta U</entry>
+            </row>
+
+            <row>
+              <entry>Next Translated Segment</entry>
+              <entry>gotoNextTranslatedMenuItem</entry>
+              <entry>ctrl shift U</entry>
+              <entry>meta shift U</entry>
+            </row>
+
+            <row>
+              <entry>Next Segment</entry>
+              <entry>gotoNextSegmentMenuItem</entry>
+              <entry>ctrl N / Enter / Tab</entry>
+              <entry>meta N / Enter / Tab</entry>
+            </row>
+
+            <row>
+              <entry>Previous Segment</entry>
+              <entry>gotoPreviousSegmentMenuItem</entry>
+              <entry>ctrl P / ctrl Enter / ctrl Tab</entry>
+              <entry>meta P / meta Enter / shift Tab</entry>
+            </row>
+
+            <row>
+              <entry>Segment number...</entry>
+              <entry>gotoSegmentMenuItem</entry>
+              <entry>ctrl J</entry>
+              <entry>meta J</entry>
+            </row>
+
+            <row>
+              <entry>Next Note</entry>
+              <entry>gotoNextNoteMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Previous Note</entry>
+              <entry>gotoPreviousNoteMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Next Unique Segment</entry>
+              <entry>gotoNextUniqueMenuItem</entry>
+              <entry>ctrl shift Q</entry>
+              <entry>meta shift Q</entry>
+            </row>
+
+            <row>
+              <entry>Source of Selected Match</entry>
+              <entry>gotoMatchSourceSegment</entry>
+              <entry>ctrl shift M</entry>
+              <entry>meta shift M</entry>
+            </row>
+
+            <row>
+              <entry>Forward in history...</entry>
+              <entry>gotoHistoryForwardMenuItem</entry>
+              <entry>ctrl shift N</entry>
+              <entry>meta shift N</entry>
+            </row>
+
+            <row>
+              <entry>Back in history...</entry>
+              <entry>gotoHistoryBackMenuItem</entry>
+              <entry>ctrl shift P</entry>
+              <entry>meta shift P</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+
+      <table id="app.shortcuts.lists.function.codes.view.menu.table">
+        <title id="app.shortcuts.lists.function.codes.view.menu.table.title">View Menu</title>
+
+        <tgroup cols="4" colsep="1">
+          <colspec align="left" colname="1" colnum="1"/>
+          <colspec align="left" colname="2" colnum="2"/>
+          <colspec align="center" colname="3" colnum="3"/>
+          <colspec align="center" colname="4" colnum="4"/>
+
+          <thead>
+            <row>
+              <entry>Menu item</entry>
+              <entry>Function code</entry>
+              <entry>Windows/Linux</entry>
+              <entry>macOS</entry>
+            </row>
+          </thead>
+
+          <tbody>
+            <row>
+              <entry>Mark Translated Segments</entry>
+              <entry>viewMarkTranslatedSegmentsCheckBoxMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Mark Untranslated Segments</entry>
+              <entry>viewMarkUntranslatedSegmentsCheckBoxMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Display Source Segments</entry>
+              <entry>viewDisplaySegmentSourceCheckBoxMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Mark Non-Unique Segments</entry>
+              <entry>viewMarkNonUniqueSegmentsCheckBoxMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Mark Segments with Notes</entry>
+              <entry>viewMarkNotedSegmentsCheckBoxMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Mark Non-breakable Spaces</entry>
+              <entry>viewMarkNBSPCheckBoxMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Mark Whitespace</entry>
+              <entry>viewMarkWhitespaceCheckBoxMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Mark Bidirectional Algorithm Control Characters</entry>
+              <entry>viewMarkBidiCheckBoxMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Mark Auto-Populated Segments</entry>
+              <entry>viewMarkAutoPopulatedCheckBoxMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Modification Info/Display None</entry>
+              <entry>viewDisplayModificationInfoNoneRadioButtonMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Modification Info/Display Selected</entry>
+              <entry>viewDisplayModificationInfoSelectedRadioButtonMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Modification Info/Display All</entry>
+              <entry>viewDisplayModificationInfoAllRadioButtonMenuItem</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+
+      <table id="app.shortcuts.lists.function.codes.tools.menu.table">
+        <title id="app.shortcuts.lists.function.codes.tools.menu.table.title">Tools Menu</title>
+
+        <tgroup cols="4" colsep="1">
+          <colspec align="left" colname="1" colnum="1"/>
+          <colspec align="left" colname="2" colnum="2"/>
+          <colspec align="center" colname="3" colnum="3"/>
+          <colspec align="center" colname="4" colnum="4"/>
+
+          <thead>
+            <row>
+              <entry>Menu item</entry>
+              <entry>Function code</entry>
+              <entry>Windows/Linux</entry>
+              <entry>macOS</entry>
+            </row>
+          </thead>
+
+          <tbody>
+            <row>
+              <entry>Check Issues...</entry>
+              <entry>toolsValidateTagsMenuItem</entry>
+              <entry>ctrl shift V</entry>
+              <entry>meta shift V</entry>
+            </row>
+
+            <row>
+              <entry>Check Issues for Current Document</entry>
+              <entry>toolsSingleValidateTagsMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Statistics</entry>
+              <entry>toolsShowStatisticsStandardMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Match Statistics</entry>
+              <entry>toolsShowStatisticsMatchesMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Match Statistics per File</entry>
+              <entry>toolsShowStatisticsMatchesPerFileMenuItem</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+
+      <table id="app.shortcuts.lists.function.codes.option.menu.table">
+        <title id="app.shortcuts.lists.function.codes.option.menu.table.title">Options Menu</title>
+
+        <tgroup cols="4" colsep="1">
+          <colspec align="left" colname="1" colnum="1"/>
+          <colspec align="left" colname="2" colnum="2"/>
+          <colspec align="center" colname="3" colnum="3"/>
+          <colspec align="center" colname="4" colnum="4"/>
+
+          <thead>
+            <row>
+              <entry>Menu item</entry>
+              <entry>Function code</entry>
+              <entry>Windows/Linux</entry>
+              <entry>macOS</entry>
+            </row>
+          </thead>
+
+          <tbody>
+            <row>
+              <entry>Use TAB To Advance</entry>
+              <entry>optionsTabAdvanceCheckBoxMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Always Confirm Quit</entry>
+              <entry>optionsAlwaysConfirmQuitCheckBoxMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Glossary/Display Context Description for TBX
+              Glossaries</entry>
+              <entry>optionsGlossaryTBXDisplayContextCheckBoxMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Use Terms Appearing Separately in the Source Text</entry>
+              <entry>optionsGlossaryExactMatchCheckBoxMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Glossary/Use Stemming for Glossary Entries</entry>
+              <entry>optionsGlossaryStemmingCheckBoxMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>TransTips/Enable Transtips</entry>
+              <entry>optionsTransTipsEnableMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Auto-completion/Show Relevant Suggestions
+              Automatically</entry>
+              <entry>optionsAutoCompleteShowAutomaticallyItem</entry>
+            </row>
+
+            <row>
+              <entry>Auto-completion/Glossary...</entry>
+              <entry>optionsAutoCompleteGlossaryMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Auto-completion/Auto-text...</entry>
+              <entry>optionsAutoCompleteAutoTextMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Auto-completion/Character Table...</entry>
+              <entry>optionsAutoCompleteCharTableMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Font...</entry>
+              <entry>optionsFontSelectionMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Custom Colours...</entry>
+              <entry>optionsColorsSelectionMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>File Filters...</entry>
+              <entry>optionsSetupFileFiltersMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Segmentation...</entry>
+              <entry>optionsSentsegMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Spell checking...</entry>
+              <entry>optionsSpellCheckMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Editing Behavior...</entry>
+              <entry>optionsWorkflowMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Tag Processing...</entry>
+              <entry>optionsTagValidationMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Team...</entry>
+              <entry>optionsTeamMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>External TMXs...</entry>
+              <entry>optionsExtTMXMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>View...</entry>
+              <entry>optionsViewOptionsMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Saving and Output...</entry>
+              <entry>optionsSaveOptionsMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Proxy Login...</entry>
+              <entry>optionsViewOptionsMenuLoginItem</entry>
+            </row>
+
+            <row>
+              <entry>Restore Main Window</entry>
+              <entry>optionsRestoreGUIMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Access Configuration Folder</entry>
+              <entry>optionsAccessConfigDirMenuItem</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+
+      <table id="app.shortcuts.lists.function.codes.help.menu.table">
+        <title id="app.shortcuts.lists.function.codes.help.menu.table.title">Help Menu</title>
+
+        <tgroup cols="4" colsep="1">
+          <colspec align="left" colname="1" colnum="1"/>
+          <colspec align="left" colname="2" colnum="2"/>
+          <colspec align="center" colname="3" colnum="3"/>
+          <colspec align="center" colname="4" colnum="4"/>
+
+          <thead>
+            <row>
+              <entry>Menu item</entry>
+              <entry>Function code</entry>
+              <entry>Windows/Linux</entry>
+              <entry>macOS</entry>
+            </row>
+          </thead>
+
+          <tbody>
+            <row>
+              <entry>User Manual...</entry>
+              <entry>helpContentsMenuItem</entry>
+              <entry namest="3" nameend="4">F1</entry>
+            </row>
+
+            <row>
+              <entry>About...</entry>
+              <entry>helpAboutMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Last Changes...</entry>
+              <entry>helpLastChangesMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Log...</entry>
+              <entry>helpLogMenuItem</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+  
+    <section id="app.shortcuts.lists.function.codes.windows">
+      <title id="app.shortcuts.lists.function.codes.windows.title">Editor
+      functions</title>
+
+      <para>The shortcuts that can be modified in the
+      <filename>EditorShortcuts.properties</filename> file, along with their
+      default values, are presented in the table below</para>
+
+      <table id="app.shortcuts.lists.function.codes.editor.table">
+        <title id="app.shortcuts.lists.function.codes.editor.table.title">Editor</title>
 
         <tgroup cols="4" colsep="1">
           <colspec align="left" colname="1" colnum="1"/>
@@ -466,8 +1271,8 @@
           </tbody>
         </tgroup>
       </table>
-      <table id="app.function.codes.autocompleter.table">
-        <title id="app.function.codes.autocompleter.table.title">Autocompleter</title>
+      <table id="app.shortcuts.lists.function.codes.autocompleter.table">
+        <title id="app.shortcuts.lists.function.codes.autocompleter.table.title">Autocompleter</title>
 
         <tgroup cols="4" colsep="1">
           <colspec align="left" colname="1" colnum="1"/>
@@ -613,8 +1418,8 @@
         </tgroup>
       </table>
 
-      <table id="app.function.codes.search.window.table">
-        <title id="app.function.codes.search.window.table.title">Search Window</title>
+      <table id="app.shortcuts.lists.function.codes.search.window.table">
+        <title id="app.shortcuts.lists.function.codes.search.window.table.title">Search Window</title>
 
         <tgroup cols="4" colsep="1">
           <colspec align="left" colname="1" colnum="1"/>
@@ -635,802 +1440,12 @@
             <row>
               <entry>Jump to Entry in Editor</entry>
               <entry>jumpToEntryInEditor</entry>
-			  <entry>ctrl J</entry>
+              <entry>ctrl J</entry>
               <entry>meta J</entry>
-            </row>
-		  </tbody>
-		</tgroup>
-	  </table>
-
-      <table id="app.function.codes.project.menu.table">
-        <title id="app.function.codes.project.menu.table.title">Project Menu</title>
-
-        <tgroup cols="4" colsep="1">
-          <colspec align="left" colname="1" colnum="1"/>
-          <colspec align="left" colname="2" colnum="2"/>
-          <colspec align="center" colname="3" colnum="3"/>
-          <colspec align="center" colname="4" colnum="4"/>
-
-          <thead>
-            <row>
-              <entry>Menu item</entry>
-              <entry>Function code</entry>
-              <entry>Windows/Linux</entry>
-              <entry>macOS</entry>
-            </row>
-          </thead>
-
-          <tbody>
-            <row>
-              <entry>New</entry>
-              <entry>projectNewMenuItem</entry>
-			  <entry>ctrl shift N</entry>
-              <entry>meta shift N</entry>
-            </row>
-
-            <row>
-              <entry>Download Team Project</entry>
-              <entry>projectTeamNewMenuItem</entry>
-            </row>
-
-            <row>
-              <entry>Open</entry>
-              <entry>projectOpenMenuItem</entry>
-			  <entry>ctrl O</entry>
-              <entry>meta O</entry>
-            </row>
-
-            <row>
-              <entry>Open Recent Project</entry>
-              <entry>projectOpenRecentMenuItem</entry>
-            </row>
-
-            <row>
-              <entry>Copy Files to Source Folder...</entry>
-              <entry>projectImportMenuItem</entry>
-            </row>
-
-            <row>
-              <entry>Download MediaWiki Page...</entry>
-              <entry>projectWikiImportMenuItem</entry>
-            </row>
-
-            <row>
-              <entry>Reload</entry>
-              <entry>projectReloadMenuItem</entry>
-              <entry namest="3" nameend="4">F5</entry>
-            </row>
-
-            <row>
-              <entry>Close</entry>
-              <entry>projectCloseMenuItem</entry>
-			  <entry>ctrl shift W</entry>
-              <entry>meta shift W</entry>
-            </row>
-
-            <row>
-              <entry>Save</entry>
-              <entry>projectSaveMenuItem</entry>
-			  <entry>ctrl S</entry>
-              <entry>meta S</entry>
-            </row>
-
-            <row>
-              <entry>Create Translated Documents</entry>
-              <entry>projectCompileMenuItem</entry>
-			  <entry>ctrl D</entry>
-              <entry>meta D</entry>
-            </row>
-
-            <row>
-              <entry>Create Current Translated Documents</entry>
-              <entry>projectSingleCompileMenuItem</entry>
-			  <entry>ctrl shift D</entry>
-              <entry>meta shift D</entry>
-            </row>
-
-            <row>
-              <entry>Properties...</entry>
-              <entry>projectEditMenuItem</entry>
-			  <entry>ctrl E</entry>
-              <entry>meta E</entry>
-            </row>
-
-            <row>
-              <entry>Project Files...</entry>
-              <entry>viewFileListMenuItem</entry>
-			  <entry>ctrl L</entry>
-              <entry>meta L</entry>
-            </row>
-
-            <row>
-              <entry>Access Project Contents/Root</entry>
-              <entry>projectAccessRootMenuItem</entry>
-            </row>
-
-            <row>
-              <entry>Access Project Contents/Dictionaries</entry>
-              <entry>projectAccessDictionaryMenuItem</entry>
-            </row>
-
-            <row>
-              <entry>Access Project Contents/Glossaries</entry>
-              <entry>projectAccessGlossaryMenuItem</entry>
-            </row>
-
-            <row>
-              <entry>Access Project Contents/Source Files</entry>
-              <entry>projectAccessSourceMenuItem </entry>
-            </row>
-
-            <row>
-              <entry>Access Project Contents/Target Files</entry>
-              <entry>projectAccessTargetMenuItem</entry>
-            </row>
-
-            <row>
-              <entry>Access Project Contents/Current Source Document</entry>
-              <entry>projectAccessCurrentSourceDocumentMenuItem</entry>
-            </row>
-
-            <row>
-              <entry>Access Project Contents/Current Target Document</entry>
-              <entry>projectAccessCurrentTargetDocumentMenuItem</entry>
-            </row>
-
-            <row>
-              <entry>Access Project Contents/Writeable Glossary</entry>
-              <entry>projectAccessWriteableGlossaryMenuItem</entry>
-            </row>
-
-            <row>
-              <entry>Restart</entry>
-              <entry>projectRestartMenuItem</entry>
-            </row>
-
-            <row>
-              <entry>Quit</entry>
-              <entry>projectExitMenuItem</entry>
-			  <entry>ctrl Q</entry>
-              <entry>meta Q</entry>
-            </row>
-          </tbody>
-        </tgroup>
-      </table>
-
-      <table id="app.function.codes.edit.menu.table">
-        <title id="app.function.codes.edit.menu.table.title">Edit Menu</title>
-
-        <tgroup cols="4" colsep="1">
-          <colspec align="left" colname="1" colnum="1"/>
-          <colspec align="left" colname="2" colnum="2"/>
-          <colspec align="center" colname="3" colnum="3"/>
-          <colspec align="center" colname="4" colnum="4"/>
-
-          <thead>
-            <row>
-              <entry>Menu item</entry>
-              <entry>Function code</entry>
-              <entry>Windows/Linux</entry>
-              <entry>macOS</entry>
-            </row>
-          </thead>
-
-          <tbody>
-            <row>
-              <entry>Undo Last Action</entry>
-              <entry>editUndoMenuItem</entry>
-			  <entry>ctrl Z</entry>
-              <entry>meta Z</entry>
-            </row>
-
-            <row>
-              <entry>Redo Last Action</entry>
-              <entry>editRedoMenuItem</entry>
-			  <entry>ctrl Y</entry>
-              <entry>meta Y</entry>
-            </row>
-
-            <row>
-              <entry>Replace With Match or Selection</entry>
-              <entry>editOverwriteTranslationMenuItem</entry>
-			  <entry>ctrl R</entry>
-              <entry>meta R</entry>
-            </row>
-
-            <row>
-              <entry>Insert Match or Selection</entry>
-              <entry>editInsertTranslationMenuItem</entry>
-			  <entry>ctrl I</entry>
-              <entry>meta I</entry>
-            </row>
-
-            <row>
-              <entry>Replace with Machine Translation</entry>
-              <entry>editOverwriteMachineTranslationMenuItem</entry>
-			  <entry>ctrl M</entry>
-              <entry>meta M</entry>
-            </row>
-
-            <row>
-              <entry>Replace With Source</entry>
-              <entry>editOverwriteSourceMenuItem</entry>
-			  <entry>ctrl shift R</entry>
-              <entry>meta shift R</entry>
-            </row>
-
-            <row>
-              <entry>Insert Source</entry>
-              <entry>editInsertSourceMenuItem</entry>
-			  <entry>ctrl shift I</entry>
-              <entry>meta shift I</entry>
-            </row>
-
-            <row>
-              <entry>Insert Missing Source Tags</entry>
-              <entry>editTagPainterMenuItem</entry>
-			  <entry>ctrl shift T</entry>
-              <entry>meta shift T</entry>
-            </row>
-
-            <row>
-              <entry>Insert Next Missing Tag</entry>
-              <entry>editTagNextMissedMenuItem</entry>
-			  <entry>ctrl T</entry>
-              <entry>meta T</entry>
-            </row>
-
-            <row>
-              <entry>Export Selection</entry>
-              <entry>editExportSelectionMenuItem</entry>
-			  <entry>ctrl shift C</entry>
-              <entry>meta shift C</entry>
-            </row>
-
-            <row>
-              <entry>Create Glossary Entry</entry>
-              <entry>editCreateGlossaryEntryMenuItem</entry>
-			  <entry>ctrl shift G</entry>
-              <entry>meta shift G</entry>
-            </row>
-
-            <row>
-              <entry>Search Project...</entry>
-              <entry>editFindInProjectMenuItem</entry>
-			  <entry>ctrl F</entry>
-              <entry>meta F</entry>
-            </row>
-
-            <row>
-              <entry>(Call Last Search Window)</entry>
-              <entry>findInProjectReuseLastWindow</entry>
-			  <entry>ctrl shift F</entry>
-              <entry>meta shift F</entry>
-            </row>
-
-            <row>
-              <entry>Search and Replace...</entry>
-              <entry>editReplaceInProjectMenuItem</entry>
-			  <entry>ctrl K</entry>
-              <entry>meta K</entry>
-            </row>
-
-            <row>
-              <entry>Switch Case To/Lower Case</entry>
-              <entry>lowerCaseMenuItem</entry>
-            </row>
-
-            <row>
-              <entry>Switch Case To/Upper Case</entry>
-              <entry>upperCaseMenuItem</entry>
-            </row>
-
-            <row>
-              <entry>Switch Case To/Title Case</entry>
-              <entry>titleCaseMenuItem</entry>
-            </row>
-
-            <row>
-              <entry>Switch Case To/Sentence Case</entry>
-              <entry>sentenceCaseMenuItem</entry>
-            </row>
-
-            <row>
-              <entry>Switch Case To/Cycle</entry>
-              <entry>cycleSwitchCaseMenuItem</entry>
-              <entry namest="3" nameend="4">shift F3</entry>
-            </row>
-
-            <row>
-              <entry>Select Previous Match</entry>
-              <entry>editSelectFuzzyPrevMenuItem</entry>
-			  <entry>ctrl ↑</entry>
-              <entry>meta ↑</entry>
-            </row>
-
-            <row>
-              <entry>Select Next Match</entry>
-              <entry>editSelectFuzzyNextMenuItem</entry>
-			  <entry>ctrl ↓</entry>
-              <entry>meta ↓</entry>
-            </row>
-
-            <row>
-              <entry>Select Match #1</entry>
-              <entry>editSelectFuzzy1MenuItem</entry>
-			  <entry>ctrl 1</entry>
-              <entry>meta 1</entry>
-            </row>
-
-            <row>
-              <entry>Select Match #2</entry>
-              <entry>editSelectFuzzy2MenuItem</entry>
-			  <entry>ctrl 2</entry>
-              <entry>meta 2</entry>
-            </row>
-
-            <row>
-              <entry>Select Match #3</entry>
-              <entry>editSelectFuzzy3MenuItem</entry>
-			  <entry>ctrl 3</entry>
-              <entry>meta 3</entry>
-            </row>
-
-            <row>
-              <entry>Select Match #4</entry>
-              <entry>editSelectFuzzy4MenuItem</entry>
-			  <entry>ctrl 4</entry>
-              <entry>meta 4</entry>
-            </row>
-
-            <row>
-              <entry>Select Match #5</entry>
-              <entry>editSelectFuzzy5MenuItem</entry>
-			  <entry>ctrl 5</entry>
-              <entry>meta 5</entry>
-            </row>
-
-            <row>
-              <entry>Use as Default Translation</entry>
-              <entry>editMultipleDefault</entry>
-            </row>
-
-            <row>
-              <entry>Create Alternative Translation</entry>
-              <entry>editMultipleAlternate</entry>
-            </row>
-
-            <row>
-              <entry>Remove translation</entry>
-              <entry>editRegisterUntranslatedMenuItem</entry>
-            </row>
-
-            <row>
-              <entry>Set empty translation</entry>
-              <entry>editRegisterEmptyMenuItem</entry>
-            </row>
-
-            <row>
-              <entry>Register Identical Translation</entry>
-              <entry>editRegisterIdenticalMenuItem</entry>
-			  <entry>ctrl shift S</entry>
-              <entry>meta shift S</entry>
-            </row>
-          </tbody>
-        </tgroup>
-      </table>
-
-      <table id="app.function.codes.goto.menu.table">
-        <title id="app.function.codes.goto.menu.table.title">GoTo Menu</title>
-
-        <tgroup cols="4" colsep="1">
-          <colspec align="left" colname="1" colnum="1"/>
-          <colspec align="left" colname="2" colnum="2"/>
-          <colspec align="center" colname="3" colnum="3"/>
-          <colspec align="center" colname="4" colnum="4"/>
-
-          <thead>
-            <row>
-              <entry>Menu item</entry>
-              <entry>Function code</entry>
-              <entry>Windows/Linux</entry>
-              <entry>macOS</entry>
-            </row>
-          </thead>
-
-          <tbody>
-            <row>
-              <entry>Next Untranslated Segment</entry>
-              <entry>gotoNextUntranslatedMenuItem</entry>
-			  <entry>ctrl U</entry>
-              <entry>meta U</entry>
-            </row>
-
-            <row>
-              <entry>Next Translated Segment</entry>
-              <entry>gotoNextTranslatedMenuItem</entry>
-			  <entry>ctrl shift U</entry>
-              <entry>meta shift U</entry>
-            </row>
-
-            <row>
-              <entry>Next Segment</entry>
-              <entry>gotoNextSegmentMenuItem</entry>
-              <entry>ctrl N / Enter / Tab</entry>
-              <entry>meta N / Enter / Tab</entry>
-            </row>
-
-            <row>
-              <entry>Previous Segment</entry>
-              <entry>gotoPreviousSegmentMenuItem</entry>
-              <entry>ctrl P / ctrl Enter / ctrl Tab</entry>
-              <entry>meta P / meta Enter / shift Tab</entry>
-            </row>
-
-            <row>
-              <entry>Segment number...</entry>
-              <entry>gotoSegmentMenuItem</entry>
-			  <entry>ctrl J</entry>
-              <entry>meta J</entry>
-            </row>
-
-            <row>
-              <entry>Next Note</entry>
-              <entry>gotoNextNoteMenuItem</entry>
-            </row>
-
-            <row>
-              <entry>Previous Note</entry>
-              <entry>gotoPreviousNoteMenuItem</entry>
-            </row>
-
-            <row>
-              <entry>Next Unique Segment</entry>
-              <entry>gotoNextUniqueMenuItem</entry>
-			  <entry>ctrl shift Q</entry>
-              <entry>meta shift Q</entry>
-            </row>
-
-            <row>
-              <entry>Source of Selected Match</entry>
-              <entry>gotoMatchSourceSegment</entry>
-			  <entry>ctrl shift M</entry>
-              <entry>meta shift M</entry>
-            </row>
-
-            <row>
-              <entry>Forward in history...</entry>
-              <entry>gotoHistoryForwardMenuItem</entry>
-			  <entry>ctrl shift N</entry>
-              <entry>meta shift N</entry>
-            </row>
-
-            <row>
-              <entry>Back in history...</entry>
-              <entry>gotoHistoryBackMenuItem</entry>
-			  <entry>ctrl shift P</entry>
-              <entry>meta shift P</entry>
-            </row>
-          </tbody>
-        </tgroup>
-      </table>
-
-      <table id="app.function.codes.view.menu.table">
-        <title id="app.function.codes.view.menu.table.title">View Menu</title>
-
-        <tgroup cols="4" colsep="1">
-          <colspec align="left" colname="1" colnum="1"/>
-          <colspec align="left" colname="2" colnum="2"/>
-          <colspec align="center" colname="3" colnum="3"/>
-          <colspec align="center" colname="4" colnum="4"/>
-
-          <thead>
-            <row>
-              <entry>Menu item</entry>
-              <entry>Function code</entry>
-              <entry>Windows/Linux</entry>
-              <entry>macOS</entry>
-            </row>
-          </thead>
-
-          <tbody>
-            <row>
-              <entry>Mark Translated Segments</entry>
-              <entry>viewMarkTranslatedSegmentsCheckBoxMenuItem</entry>
-            </row>
-
-            <row>
-              <entry>Mark Untranslated Segments</entry>
-              <entry>viewMarkUntranslatedSegmentsCheckBoxMenuItem</entry>
-            </row>
-
-            <row>
-              <entry>Display Source Segments</entry>
-              <entry>viewDisplaySegmentSourceCheckBoxMenuItem</entry>
-            </row>
-
-            <row>
-              <entry>Mark Non-Unique Segments</entry>
-              <entry>viewMarkNonUniqueSegmentsCheckBoxMenuItem</entry>
-            </row>
-
-            <row>
-              <entry>Mark Segments with Notes</entry>
-              <entry>viewMarkNotedSegmentsCheckBoxMenuItem</entry>
-            </row>
-
-            <row>
-              <entry>Mark Non-breakable Spaces</entry>
-              <entry>viewMarkNBSPCheckBoxMenuItem</entry>
-            </row>
-
-            <row>
-              <entry>Mark Whitespace</entry>
-              <entry>viewMarkWhitespaceCheckBoxMenuItem</entry>
-            </row>
-
-            <row>
-              <entry>Mark Bidirectional Algorithm Control Characters</entry>
-              <entry>viewMarkBidiCheckBoxMenuItem</entry>
-            </row>
-
-            <row>
-              <entry>Mark Auto-Populated Segments</entry>
-              <entry>viewMarkAutoPopulatedCheckBoxMenuItem</entry>
-            </row>
-
-            <row>
-              <entry>Modification Info/Display None</entry>
-              <entry>viewDisplayModificationInfoNoneRadioButtonMenuItem</entry>
-            </row>
-
-            <row>
-              <entry>Modification Info/Display Selected</entry>
-              <entry>viewDisplayModificationInfoSelectedRadioButtonMenuItem</entry>
-            </row>
-
-            <row>
-              <entry>Modification Info/Display All</entry>
-              <entry>viewDisplayModificationInfoAllRadioButtonMenuItem</entry>
-            </row>
-          </tbody>
-        </tgroup>
-      </table>
-
-      <table id="app.function.codes.tools.menu.table">
-        <title id="app.function.codes.tools.menu.table.title">Tools Menu</title>
-
-        <tgroup cols="4" colsep="1">
-          <colspec align="left" colname="1" colnum="1"/>
-          <colspec align="left" colname="2" colnum="2"/>
-          <colspec align="center" colname="3" colnum="3"/>
-          <colspec align="center" colname="4" colnum="4"/>
-
-          <thead>
-            <row>
-              <entry>Menu item</entry>
-              <entry>Function code</entry>
-              <entry>Windows/Linux</entry>
-              <entry>macOS</entry>
-            </row>
-          </thead>
-
-          <tbody>
-            <row>
-              <entry>Check Issues...</entry>
-              <entry>toolsValidateTagsMenuItem</entry>
-			  <entry>ctrl shift V</entry>
-              <entry>meta shift V</entry>
-            </row>
-
-            <row>
-              <entry>Check Issues for Current Document</entry>
-              <entry>toolsSingleValidateTagsMenuItem</entry>
-            </row>
-
-            <row>
-              <entry>Statistics</entry>
-              <entry>toolsShowStatisticsStandardMenuItem</entry>
-            </row>
-
-            <row>
-              <entry>Match Statistics</entry>
-              <entry>toolsShowStatisticsMatchesMenuItem</entry>
-            </row>
-
-            <row>
-              <entry>Match Statistics per File</entry>
-              <entry>toolsShowStatisticsMatchesPerFileMenuItem</entry>
-            </row>
-          </tbody>
-        </tgroup>
-      </table>
-
-      <table id="app.function.codes.option.menu.table">
-        <title id="app.function.codes.option.menu.table.title">Options Menu</title>
-
-        <tgroup cols="4" colsep="1">
-          <colspec align="left" colname="1" colnum="1"/>
-          <colspec align="left" colname="2" colnum="2"/>
-          <colspec align="center" colname="3" colnum="3"/>
-          <colspec align="center" colname="4" colnum="4"/>
-
-          <thead>
-            <row>
-              <entry>Menu item</entry>
-              <entry>Function code</entry>
-              <entry>Windows/Linux</entry>
-              <entry>macOS</entry>
-            </row>
-          </thead>
-
-          <tbody>
-            <row>
-              <entry>Use TAB To Advance</entry>
-              <entry>optionsTabAdvanceCheckBoxMenuItem</entry>
-            </row>
-
-            <row>
-              <entry>Always Confirm Quit</entry>
-              <entry>optionsAlwaysConfirmQuitCheckBoxMenuItem</entry>
-            </row>
-
-            <row>
-              <entry>Glossary/Display Context Description for TBX
-              Glossaries</entry>
-              <entry>optionsGlossaryTBXDisplayContextCheckBoxMenuItem</entry>
-            </row>
-
-            <row>
-              <entry>Use Terms Appearing Separately in the Source Text</entry>
-              <entry>optionsGlossaryExactMatchCheckBoxMenuItem</entry>
-            </row>
-
-            <row>
-              <entry>Glossary/Use Stemming for Glossary Entries</entry>
-              <entry>optionsGlossaryStemmingCheckBoxMenuItem</entry>
-            </row>
-
-            <row>
-              <entry>TransTips/Enable Transtips</entry>
-              <entry>optionsTransTipsEnableMenuItem</entry>
-            </row>
-
-            <row>
-              <entry>Auto-completion/Show Relevant Suggestions
-              Automatically</entry>
-              <entry>optionsAutoCompleteShowAutomaticallyItem</entry>
-            </row>
-
-            <row>
-              <entry>Auto-completion/Glossary...</entry>
-              <entry>optionsAutoCompleteGlossaryMenuItem</entry>
-            </row>
-
-            <row>
-              <entry>Auto-completion/Auto-text...</entry>
-              <entry>optionsAutoCompleteAutoTextMenuItem</entry>
-            </row>
-
-            <row>
-              <entry>Auto-completion/Character Table...</entry>
-              <entry>optionsAutoCompleteCharTableMenuItem</entry>
-            </row>
-
-            <row>
-              <entry>Font...</entry>
-              <entry>optionsFontSelectionMenuItem</entry>
-            </row>
-
-            <row>
-              <entry>Custom Colours...</entry>
-              <entry>optionsColorsSelectionMenuItem</entry>
-            </row>
-
-            <row>
-              <entry>File Filters...</entry>
-              <entry>optionsSetupFileFiltersMenuItem</entry>
-            </row>
-
-            <row>
-              <entry>Segmentation...</entry>
-              <entry>optionsSentsegMenuItem</entry>
-            </row>
-
-            <row>
-              <entry>Spell checking...</entry>
-              <entry>optionsSpellCheckMenuItem</entry>
-            </row>
-
-            <row>
-              <entry>Editing Behavior...</entry>
-              <entry>optionsWorkflowMenuItem</entry>
-            </row>
-
-            <row>
-              <entry>Tag Processing...</entry>
-              <entry>optionsTagValidationMenuItem</entry>
-            </row>
-
-            <row>
-              <entry>Team...</entry>
-              <entry>optionsTeamMenuItem</entry>
-            </row>
-
-            <row>
-              <entry>External TMXs...</entry>
-              <entry>optionsExtTMXMenuItem</entry>
-            </row>
-
-            <row>
-              <entry>View...</entry>
-              <entry>optionsViewOptionsMenuItem</entry>
-            </row>
-
-            <row>
-              <entry>Saving and Output...</entry>
-              <entry>optionsSaveOptionsMenuItem</entry>
-            </row>
-
-            <row>
-              <entry>Proxy Login...</entry>
-              <entry>optionsViewOptionsMenuLoginItem</entry>
-            </row>
-
-            <row>
-              <entry>Restore Main Window</entry>
-              <entry>optionsRestoreGUIMenuItem</entry>
-            </row>
-
-            <row>
-              <entry>Access Configuration Folder</entry>
-              <entry>optionsAccessConfigDirMenuItem</entry>
-            </row>
-          </tbody>
-        </tgroup>
-      </table>
-
-      <table id="app.function.codes.help.menu.table">
-        <title id="app.function.codes.help.menu.table.title">Help Menu</title>
-
-        <tgroup cols="4" colsep="1">
-          <colspec align="left" colname="1" colnum="1"/>
-          <colspec align="left" colname="2" colnum="2"/>
-          <colspec align="center" colname="3" colnum="3"/>
-          <colspec align="center" colname="4" colnum="4"/>
-
-          <thead>
-            <row>
-              <entry>Menu item</entry>
-              <entry>Function code</entry>
-              <entry>Windows/Linux</entry>
-              <entry>macOS</entry>
-            </row>
-          </thead>
-
-          <tbody>
-            <row>
-              <entry>User Manual...</entry>
-              <entry>helpContentsMenuItem</entry>
-              <entry namest="3" nameend="4">F1</entry>
-            </row>
-
-            <row>
-              <entry>About...</entry>
-              <entry>helpAboutMenuItem</entry>
-            </row>
-
-            <row>
-              <entry>Last Changes...</entry>
-              <entry>helpLastChangesMenuItem</entry>
-            </row>
-
-            <row>
-              <entry>Log...</entry>
-              <entry>helpLogMenuItem</entry>
             </row>
           </tbody>
         </tgroup>
       </table>
     </section>
+  </section>
 </section>

@@ -27,9 +27,9 @@
       Delimitations</term>
       <listitem>
         <para>If checked, separations between paragraphs in the source document
-        are indicated visually. See <link
+        are indicated visually. See Preferences – <link
         linkend="dialogs.preferences.editor.paragraph.delimitation.format"
-        endterm="dialogs.preferences.editor.paragraph.delimitation.format.title"/></para>
+        endterm="dialogs.preferences.editor.paragraph.delimitation.format.title"/>.</para>
         </listitem>
     </varlistentry>
 
@@ -92,10 +92,10 @@
         placed in <link linkend="project.folder.tm.auto"
         endterm="project.folder.tm.auto.title"/> for example) are marked in
         various colors.</para>
-		<para>That color marking is shown as long as the
+		<para>That color marking is shown as long as Preferences – 
         <link linkend="dialogs.preferences.editor.save.auto-populated.status"
         endterm="dialogs.preferences.editor.save.auto-populated.status.title"/>
-        option is checked.</para>
+        is checked.</para>
 		<para>Normal translations inserted from the <filename
         class="directory">tm/auto</filename> folder are marked in orange. Other
         translations specifically identified in the TMX, can be marked in

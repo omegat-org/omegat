@@ -52,9 +52,8 @@
         file if the current segment is the last one in the file.</para>
 
         <note><para><keycap>TAB</keycap> can be used as an
-        alternate shortcut if the <link
-        linkend="dialogs.preferences.general.use.tab.to.advance">Use TAB to
-        Advance</link> option is selected.</para>
+        alternate shortcut if Preferences –  <link
+        linkend="dialogs.preferences.general.use.tab.to.advance" endterm="dialogs.preferences.general.use.tab.to.advance.title"/> is selected.</para>
 		<para>This is useful for character entry systems that use
 		<keycap>Enter</keycap> to validate input.</para></note>
       </listitem>
@@ -73,9 +72,8 @@
 		</para>
 
         <note><para><keycombo><keycap>C</keycap><keycap>TAB</keycap></keycombo>
-        can be used as an alternate shortcut if <link
-        linkend="dialogs.preferences.general.use.tab.to.advance">Use TAB to
-        Advance</link> option is selected.</para>
+        can be used as an alternate shortcut if Preferences – <link
+        linkend="dialogs.preferences.general.use.tab.to.advance" endterm="dialogs.preferences.general.use.tab.to.advance.title"/> is selected.</para>
 		<para>This is useful for character entry systems that use
 		<keycap>Enter</keycap> to validate input.</para></note>
       </listitem>

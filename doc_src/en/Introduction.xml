@@ -186,9 +186,7 @@
 	in a format that is not supported by OmegaT. Use <link
 	linkend="menus.options.file.filters"
 	endterm="menus.options.file.filters.title"/> to open the list of supported
-	file formats. If the format is not there, use third party <link
-	linkend="dialogs.preferences.plugins"
-	endterm="dialogs.preferences.plugins.title"/> or convert the file to a
+	file formats. If the format is not there, use third party plugins or convert the file to a
 	format that is supported. See <link linkend="how.to.translate.other.files"
 	endterm="how.to.translate.other.files.title"/> for details.</para>
 
@@ -233,7 +231,7 @@
 
 	<note><para>To display the paragraph marks and see where your segments have
 	been created use <link linkend="menus.view.mark.paragraph.delimitations"
-	endterm="menus.view.mark.paragraph.delimitations.title"/> and <link
+	endterm="menus.view.mark.paragraph.delimitations.title"/> and Preferences – <link
 	linkend="dialogs.preferences.editor.paragraph.delimitation.format"
 	endterm="dialogs.preferences.editor.paragraph.delimitation.format.title"/>.</para></note>
 
@@ -283,10 +281,9 @@
 	to manage translation memory matches and perform other various useful
 	functions. Use <link linkend="menus.view.mark.glossary.matches"
 	endterm="menus.view.mark.glossary.matches.title"/> in the <link
-	linkend="menus.view" endterm="menus.view.title"/> menu and <link
+	linkend="menus.view" endterm="menus.view.title"/> menu and Preferences – <link
 	linkend="dialog.preferences.auto.completion"
-	endterm="dialog.preferences.auto.completion.title"/> in the <link
-	linkend="dialogs.preferences" endterm="dialogs.preferences.title"/> to
+	endterm="dialog.preferences.auto.completion.title"/> to
 	manage glossary matches.</para>
 
 	<para>With <link linkend="menus.edit.search.project"
@@ -385,11 +382,11 @@
 		  endterm="menus.edit.insert.next.missing.tag.title"/> for details.</para>
 
 	<para>You can define custom tags that will be managed in the same
-	manner. See <link
+	manner. See Preferences – <link
 	linkend="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags"
 	endterm="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags.title"/>
 	for details. You can also define strings that OmegaT should warn you about
-	if you leave them in a translation. See <link
+	if you leave them in a translation. See Preferences – <link
 	linkend="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation"
 	endterm="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation.title"/> for details.</para>
 

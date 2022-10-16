@@ -13,19 +13,20 @@
 
   <para>Beside of that, OmegaT also backs-up that file, by automatically creating a sequential number of copies (up to ten), marked with a timestamp, every time you open or reload your project.</para>
 
-<para>These backup filenames’ follow the pattern <filename>project_save.tmx.YYYYMMDDhhmm.bak</filename> where the final part is the time stamp indicating when the file was created: <code>YYYY</code>
+  <para>These backup filenames’ follow the pattern <filename>project_save.tmx.YYYYMMDDhhmm.bak</filename> where the final part is the time stamp indicating when the file was created: <code>YYYY</code>
   represents the 4-digit year, <code>MM</code> the month, <code>DD</code> the day of the month, and <code>hh</code>
   and <code>mm</code> indicate the hours and minutes.</para>
 
-  <para>The file <filename>project_save.tmx</filename> always contains the most recent data, which is a copy of <filename>project_save.tmx</filename> created when the project was opened. Then come the incremental backup files that are created as your translation progresses. <filename>project_save.tmx</filename> is always the file with the most recent data.</para>
+  <para>The file <filename>project_save.tmx.bak</filename> is automatically created when you open the project and is a copy of <filename>project_save.tmx</filename> at that moment.</para>
+  
+  <para>The file <filename>project_save.tmx</filename> always contains the most recent data.</para>
+  
+  <para>Consequently, if you believe that you have lost translation data, it might probably be safely stored in your most recent backup memory, which is usually less than ten minutes old or so.</para>
 
-  <para>If you believe that you have lost translation data, follow the steps
-  below to restore the project to the most recent backup memory, which is
-  usually less than ten minutes old or so.</para>
-
+  <para>Proceed as follows:
   <orderedlist>
     <listitem>
-      <para>Close the project.</para>
+      <para>Close the project, preventing on any modification on the current status of the backup files.</para>
     </listitem>
 
     <listitem>
@@ -46,39 +47,34 @@
       <para>Reopen the project.</para>
     </listitem>
   </orderedlist>
+  </para>
 
-  <para>To avoid losing important data:</para>
+  <para>This action will restore the status of the translation to the moment on which the selected backup was created. You may repeat this operation as needed for locating older situations. Keep an eye on safely storing all the different files you are renaming for eventual reuse. Also remember not modifying the project configuration or adding TMX files on the meantime, as that may affect the results.</para>
+
+  <para>As a summary:</para>
 
   <itemizedlist>
     <listitem>
-      <para>Make regular copies of the file
+      <para>To avoid losing important data, make regular copies of the file
       <filename>/omegat/project_save.tmx</filename> to a backup media, such as a
       USB key or an external hard drive, or to a cloud service.</para>
     </listitem>
 
     <listitem>
-      <para>While you are still familiarizing yourself with OmegaT, create
-      translated files at regular intervals to make sure they contain the latest
-      version of your translation.</para>
+      <para>Practice regularly "emergency" measures, like restoring translations
+      from a project, to make sure you won't lose too much time the day you need
+      to use those skills.</para>
     </listitem>
 
-    <listitem>
-      <para>Be very cautious about making changes to the files in the source
-      folder, to the segmentation rules, or to the file filters, partway through
-      a project. Modifying either after you have started your translation could
-      result in OmegaT becoming unable to find a segment that you have already
-      translated.</para>
-    </listitem>
+	<listitem>
+	  <para>You can control the frequence on the file saving in the Preferences – <link linkend="dialogs.preferences.saving.and.output" endterm="dialogs.preferences.saving.and.output.title"/>.</para>
+	</listitem>
   </itemizedlist>
 
-  <itemizedlist>
-    <listitem>
-      <para>Consult the <link linkend="chapter.instant.start.guide"
-      endterm="chapter.instant.start.guide.title"/> and
-      other sections of this manual to get started. Should you run into
-      problems, post a message in the <ulink
-      url="https://omegat.org/support">OmegaT user group</ulink>. Do not
-      hesitate to post in the language you are most comfortable using.</para>
-    </listitem>
-  </itemizedlist>
+  <note><para>Be very cautious about making changes to the files in the source
+  folder, to the segmentation rules, or to the file filters, partway through
+  a project. Modifying either after you have started your translation could
+  result in OmegaT becoming unable to find a segment that you have already
+  translated.</para></note>
+  
 </section>

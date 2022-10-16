@@ -97,12 +97,12 @@
 	<title id="introduction.note.on.shortcuts.title">Shortcuts</title>
 
 	<para>To avoid duplication of shortcut description, we have adopted the
-	following notation in this manual: <example
+	following notation in this guide: <example
 	id="example.introduction.note.on.shortcuts"><title
 	id="example.introduction.note.on.shortcuts.title">Single letters are used
 	as a common name for modifiers.</title>
 
-	<para>In this manual:
+	<para>In this guide:
 	<keycombo><keycap>C</keycap><keycap>E</keycap></keycombo>
 	</para>
 

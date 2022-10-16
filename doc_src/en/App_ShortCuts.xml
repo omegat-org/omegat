@@ -74,7 +74,7 @@
 		<para>On macOS:
 		  <keycombo><keycap>Shift</keycap><keycap>Command</keycap><keycap>N</keycap></keycombo>
 		</para>
-  		<para>In this manual:
+  		<para>In this guide:
 		  <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>N</keycap></keycombo>
 		</para>
 		</example>
@@ -269,8 +269,8 @@
       since it does not have one by default.</para>
 
       <para>The steps below demonstrate how to assign the
-      <keycombo><keycap>Alt</keycap><keycap>X</keycap></keycombo> shortcut to
-      the <link linkend="menus.edit.create.alternative.translaetion"
+      <keycombo><keycap>A</keycap><keycap>X</keycap></keycombo> shortcut to the
+      <link linkend="menus.edit.create.alternative.translation"
       endterm="menus.edit.create.alternative.translation.title"/> function.
         <orderedlist>
           <listitem>

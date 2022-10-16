@@ -711,7 +711,7 @@ appropriate service to use the machine translation options.</para></note>
       </listitem>
     </itemizedlist>
 
-    <para><emphasis role="bold">PO files</emphasis></para>
+    <para id="file.filters.po"><emphasis role="bold" id="file.filters.po.title">PO files</emphasis></para>
 
     <itemizedlist>
       <listitem>
@@ -936,7 +936,7 @@ appropriate service to use the machine translation options.</para></note>
       </listitem>
     </itemizedlist>
 
-    <para><emphasis role="bold">XLIFF</emphasis></para>
+    <para id="file.filters.xliff"><emphasis role="bold" id="file.filters.xliff.title">XLIFF</emphasis></para>
 
     <itemizedlist>
       <listitem>

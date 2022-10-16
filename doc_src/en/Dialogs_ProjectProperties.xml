@@ -107,7 +107,7 @@
 		  <para>By default, segmentation rules are global and apply to all
 		  projects.</para>
 		  
-          <para>Segmentation rules found when you open <link
+          <para>Segmentation rules found when you open Preferences – <link
           linkend="dialogs.preferences.segmentation.setup"
           endterm="dialogs.preferences.segmentation.setup.title"/> (with <link
           linkend="menus.options.segmentation"
@@ -198,12 +198,12 @@
           used.</para>
 
 		  <para>By default, post-processing commands are global and are
-		  available to all projects. They are defined in <link
+		  available to all projects. They are defined in Preferences – <link
 		  linkend="dialogs.preferences.saving.and.output.external.post-processing.command"
 		  endterm="dialogs.preferences.saving.and.output.external.post-processing.command.title"/>.</para>
 		  
 		  <note><para>For security purposes, project-based external commands are
-		  disabled by default. You can enable them by checking <link
+		  disabled by default. You can enable them by checking Preferences – <link
 		  linkend="dialogs.preferences.saving.and.output.also.allow.per.project.external.commands"
 		  endterm="dialogs.preferences.saving.and.output.also.allow.per.project.external.commands.title"/>
 		  in the <link linkend="dialogs.preferences.saving.and.output"
@@ -218,11 +218,9 @@
         Filters...</term>
         <listitem>
           <para>By default, file filter settings are global and are shared by
-          all projects. They are found in <link
+          all projects. They are found in Preferences – <link
           linkend="dialogs.preferences.file.filters.title"
-          endterm="dialogs.preferences.file.filters.title"/> in the <link
-          linkend="dialogs.preferences"
-          endterm="dialogs.preferences.title"/>.</para>
+          endterm="dialogs.preferences.file.filters.title"/>.</para>
 
 		  <para>Use this button to create local file filters specific to your
 		  project. Check the <guilabel>Make the file filter settings project
@@ -237,7 +235,7 @@
 		  <note><para>To disable project specific file filters, uncheck the
 		  box or remove that file.</para></note>
 		  
-		  <para>See <link linkend="dialogs.preferences.file.filters"
+		  <para>See Preferences – <link linkend="dialogs.preferences.file.filters"
 		  endterm="dialogs.preferences.file.filters.title"/> for details.</para>
         </listitem>
       </varlistentry>
@@ -263,7 +261,7 @@
 
         <listitem>
           <para>By default, external searches are global and are available by to all
-          projects. They are defined in <link
+          projects. They are defined in Preferences – <link
           linkend="dialogs.preferences.external.searches"
           endterm="dialogs.preferences.external.searches.title"/>.</para>
 
@@ -279,12 +277,12 @@
 		  <note><para>To delete project specific external searches, click
 		  <guibutton>Remove</guibutton> or remove that file.</para></note>
 		  
-		  <para>See <link linkend="dialogs.preferences.external.searches"
+		  <para>See Preferences – <link linkend="dialogs.preferences.external.searches"
 		  endterm="dialogs.preferences.external.searches.title"/> for
 		  details.</para>
 
 		  <note><para>For security purposes, project-based external searches are
-		  disabled by default. You can enable them by checking <link
+		  disabled by default. You can enable them by checking Preferences – <link
 		  linkend="dialogs.preferences.external.search.enable.project.specific.commands"
 		  endterm="dialogs.preferences.external.search.enable.project.specific.commands"/>
 		  in the <link linkend="dialogs.preferences.external.searches"
@@ -342,7 +340,7 @@
 		endterm="project.folder.source.title"/> for details.</para>
 		<para>If the folder is empty, if none of the files contain translatable
 		contents, or if there are no files supported by OmegaT’s file filters,
-		OmegaT will tell you that the folder is empty. See <link
+		OmegaT will tell you that the folder is empty. See Preferences – <link
 		linkend="dialogs.preferences.file.filters"
 		endterm="dialogs.preferences.file.filters.title"/> for
 		details.</para></listitem>
@@ -418,7 +416,7 @@
 		<link linkend="menus.edit.create.glossary.entry"
 		endterm="menus.edit.create.glossary.entry.title"/> to add a term.</para>
 		<para>Added items are automatically recognized and displayed if they
-		match terms in the current segment. See <link
+		match terms in the current segment. See Preferences – <link
 		linkend="dialogs.preferences.glossary"
 		endterm="dialogs.preferences.glossary.title"/> for
 		details.</para></listitem>

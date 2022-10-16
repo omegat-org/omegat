@@ -56,7 +56,7 @@
   <section id="project.folder.source">
     <title id="project.folder.source.title">source</title>
     <para>The source folder contains the files to translate.</para>
-	<para>The contents of the files in a format that OmegaT supports will be displayed in the <link linkend="panes.editor" endterm="panes.editor.title"/> pane. See <link linkend="dialogs.preferences.file.filters" endterm="dialogs.preferences.file.filters.title"/> for details.</para>
+	<para>The contents of the files in a format that OmegaT supports will be displayed in the <link linkend="panes.editor" endterm="panes.editor.title"/> pane. See Preferences – <link linkend="dialogs.preferences.file.filters" endterm="dialogs.preferences.file.filters.title"/> for details.</para>
 
 	<para>You can freely add or remove files from that folder at any time. You can also structure the source folder in any form you like.</para>
 	<para>If your translation project involves a number of folders and you feel like working on one folder at a time, change the <link linkend="dialogs.project.properties.file.locations.source.files" endterm="dialogs.project.properties.file.locations.source.files.title"/> as you wish.</para>
@@ -72,7 +72,7 @@
     <title id="project.folder.tm.title">tm</title>
     <para>This folder can contain any number of bilingual reference documents (TMX files, but also any file in a bilingual format supported by OmegaT).</para>
 	
-	<para>If you have set <link linkend="dialogs.preferences.editor.insert.the.best.fuzzy.match" endterm="dialogs.preferences.editor.insert.the.best.fuzzy.match.title"/> in the Editor preferences, OmegaT will prefix the inserted text with a prefix that you can modify in the same setting, to remind you that the match was inserted by OmegaT and not by you.</para> 
+	<para>To remind you that a match was inserted by OmegaT and not by you, set a prefix in Preferences – <link linkend="dialogs.preferences.editor.insert.the.best.fuzzy.match" endterm="dialogs.preferences.editor.insert.the.best.fuzzy.match.title"/>. OmegaT will add that prefix to the inserted match.</para> 
     <para>The contents of the translation memories present suggestions for the text to translate. Any text with a translation in those files will show up in the Fuzzy Matches pane, if it is sufficiently similar to the text in the current segment.</para>
     <para>TMX files are read in the order of their names, and the segments within a file are read sequentially.</para>
     <note><para>TMX files compressed in the gzip format can also be read by OmegaT.</para></note>
@@ -184,8 +184,8 @@
 
 	<para>Dictionary terms that match parts of the segment are displayed in the
 	<link linkend="panes.dictionary" endterm="panes.dictionary.title"/> pane. See
-	<link linkend="dialogs.preferences.dictionary"
-	endterm="dialogs.preferences.dictionary.title"/> in the <link linkend="dialogs.preferences" endterm="dialogs.preferences.title"/> for details.</para>
+	Preferences – <link linkend="dialogs.preferences.dictionary"
+	endterm="dialogs.preferences.dictionary.title"/> for details.</para>
 
     <para>OmegaT supports dictionaries in the StarDict or in the Lingvo DSL
     format. You can find some dictionaries on the <ulink url="https://sourceforge.net/p/omegat/wiki/Reference%20Material/">OmegaT

@@ -163,7 +163,7 @@
 	  </listitem>
 	</itemizedlist>
 
-    <para>Depending on the <link linkend="dialogs.preferences.editor" endterm="dialogs.preferences.editor.title"/> preferences, entering a new segment will:
+    <para>Depending on Preferences – <link linkend="dialogs.preferences.editor" endterm="dialogs.preferences.editor.title"/>, entering a new segment will:
 	<itemizedlist>
 	  <listitem><para><link linkend="dialogs.preferences.editor.insert.the.source.text" endterm="dialogs.preferences.editor.insert.the.source.text.title"/> (default behavior)</para></listitem>
 	  <listitem><para><link linkend="dialogs.preferences.editor.leave.the.segment.empty" endterm="dialogs.preferences.editor.leave.the.segment.empty.title"/></para></listitem>
@@ -205,7 +205,7 @@
 	  </varlistentry>
 	  <varlistentry>
 		<term>Translations equal to the source</term>
-		<listitem><para>OmegaT can store translations that are identical to the source text. This can be useful for documents that contain trademarks, names or other proper nouns, or sections in a third language that do not require translation. See <link linkend="dialogs.preferences.editor.allow.translation.to.be.equal.to.source" endterm="dialogs.preferences.editor.allow.translation.to.be.equal.to.source.title"/> for details.</para></listitem>
+		<listitem><para>OmegaT can store translations that are identical to the source text. This can be useful for documents that contain trademarks, names or other proper nouns, or sections in a third language that do not require translation. See Preferences – <link linkend="dialogs.preferences.editor.allow.translation.to.be.equal.to.source" endterm="dialogs.preferences.editor.allow.translation.to.be.equal.to.source.title"/> for details.</para></listitem>
 	  </varlistentry>
 	  <varlistentry>
 		<term>Dragging text</term>
@@ -272,7 +272,7 @@
 			<listitem><para><guilabel>Add Glossary Entry</guilabel> (equivalent to
 			<link linkend="menus.edit.create.glossary.entry" endterm="menus.edit.create.glossary.entry.title"/>),</para></listitem>
 		  </itemizedlist>and other functions available from the <link linkend="menus.edit" endterm="menus.edit.title"/> menu.</para>
-		  <para>If you have selected text and defined entries in <link linkend="dialogs.preferences.external.searches" endterm="dialogs.preferences.external.searches.title"/>, they will also be displayed in the menu.</para>
+		  <para>If you have selected text and defined entries in Preferences – <link linkend="dialogs.preferences.external.searches" endterm="dialogs.preferences.external.searches.title"/>, they will also be displayed in the menu.</para>
 		</listitem>
 	  </varlistentry>
 
@@ -361,7 +361,7 @@
     in the segment at the current cursor position.</para>
 
 	<para>You can use the glossary preferences to fine-tune how the glossaries
-	are displayed. See <link linkend="dialogs.preferences.glossary"
+	are displayed. See Preferences – <link linkend="dialogs.preferences.glossary"
 	endterm="dialogs.preferences.glossary.title"/> for details.</para>
 
 	<para>Modifications to any glossary file in the glossary folder are

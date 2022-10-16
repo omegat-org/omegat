@@ -212,12 +212,15 @@ appropriate service to use the machine translation options.</para></note>
         glossary hits when inserting source text</term>
 
         <listitem>
-          <para>If both this option and the <link
+          <para>If OmegaT is made to insert the source contents, with <link
+          linkend="menus.edit.replace.with.source"
+          endterm="menus.edit.replace.with.source.title"/>, <link
+          linkend="menus.edit.insert.source"
+          endterm="menus.edit.insert.source.title"/> or Preferences – <link
           linkend="dialogs.preferences.editor.insert.the.source.text"
-          endterm="dialogs.preferences.editor.insert.the.source.text.title"/>
-          option are selected, all words with a corresponding glossary entry
-          will be translated automatically when the source text is
-          inserted.</para>
+          endterm="dialogs.preferences.editor.insert.the.source.text.title"/>,
+          etc. words with a corresponding glossary entry are automatically
+          replaced by their translation.</para>
         </listitem>
       </varlistentry>
 

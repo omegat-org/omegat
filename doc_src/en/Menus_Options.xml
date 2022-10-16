@@ -19,7 +19,7 @@
     <varlistentry id="menus.options.mt">
       <term id="menus.options.mt.title">Machine Translate</term>
       <listitem>
-        <para>Select <link linkend="dialogs.preferences.mt.automatically.fetch.trasnlations"
+        <para>Select Preferences – <link linkend="dialogs.preferences.mt.automatically.fetch.trasnlations"
         endterm="dialogs.preferences.mt.automatically.fetch.trasnlations.title"/> to activate it.</para>
 		<para>Allows you to activate/deactivate the available machine
 		translation engines.</para>
@@ -32,14 +32,14 @@
     <varlistentry id="menus.options.glossary">
       <term id="menus.options.glossary.title">Glossary</term>
       <listitem>
-        <para>Select <link linkend="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries" endterm="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries.title"/> to activate it.</para>
+        <para>Select Preferences – <link linkend="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries" endterm="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries.title"/> to activate it.</para>
       </listitem>
     </varlistentry>
 
     <varlistentry id="menus.options.dictionary">
       <term id="menus.options.dictionary.title">Dictionary</term>
       <listitem>
-        <para>Select <link linkend="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries" endterm="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries.title"/> to activate it.</para>
+        <para>Select Preferences – <link linkend="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries" endterm="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries.title"/> to activate it.</para>
       </listitem>
     </varlistentry>
 
@@ -79,7 +79,7 @@
       <term id="menus.options.editor.title">Editor...</term>
       <listitem>
         <para>Opens the <link linkend="dialogs.preferences.editor"
-        endterm="dialogs.preferences.editor.title"/> preferences dialog.</para>
+        endterm="dialogs.preferences.editor.title"/> global preferences dialog.</para>
       </listitem>
     </varlistentry>
 

@@ -182,7 +182,7 @@ details.</para>
 
         <listitem>
           <para>The aligner uses sentence segmentation by default. Uncheck the
-          check box to use paragraph segmentation (see <link
+          check box to use paragraph segmentation (see Preferences – <link
           endterm="dialogs.preferences.segmentation.setup.title"
           linkend="dialogs.preferences.segmentation.setup"/>)</para>
         </listitem>
@@ -233,7 +233,7 @@ details.</para>
 
         <listitem>
           <para>Clicking this button lets you edit the file filters that
-          apply to this project. See <link linkend="dialogs.preferences.file.filters"
+          apply to this project. See Preferences – <link linkend="dialogs.preferences.file.filters"
           endterm="dialogs.preferences.file.filters.title"/> for details.</para>
 
 

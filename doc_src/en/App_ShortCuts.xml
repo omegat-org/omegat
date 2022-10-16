@@ -404,6 +404,16 @@
             </row>
 
             <row>
+              <entry>Commit Source Files</entry>
+              <entry>projectCommitSourceFiles</entry>
+            </row>
+
+            <row>
+              <entry>Commit Target Files</entry>
+              <entry>projectCommitTargetFiles</entry>
+            </row>
+
+            <row>
               <entry>Create Translated Documents</entry>
               <entry>projectCompileMenuItem</entry>
               <entry>ctrl D</entry>
@@ -604,6 +614,11 @@
             </row>
 
             <row>
+              <entry>Search Dictionaries</entry>
+              <entry>editSearchDictionaryMenuItem</entry>
+            </row>
+
+            <row>
               <entry>Switch Case To/Lower Case</entry>
               <entry>lowerCaseMenuItem</entry>
             </row>
@@ -632,15 +647,15 @@
             <row>
               <entry>Select Previous Match</entry>
               <entry>editSelectFuzzyPrevMenuItem</entry>
-              <entry>ctrl ↑</entry>
-              <entry>meta ↑</entry>
+              <entry>ctrl UP</entry>
+              <entry>meta UP</entry>
             </row>
 
             <row>
               <entry>Select Next Match</entry>
               <entry>editSelectFuzzyNextMenuItem</entry>
-              <entry>ctrl ↓</entry>
-              <entry>meta ↓</entry>
+              <entry>ctrl DOWN</entry>
+              <entry>meta DOWN</entry>
             </row>
 
             <row>
@@ -653,7 +668,7 @@
             <row>
               <entry>Select Match #2</entry>
               <entry>editSelectFuzzy2MenuItem</entry>
-        <entry>ctrl 2</entry>
+              <entry>ctrl 2</entry>
               <entry>meta 2</entry>
             </row>
 
@@ -676,6 +691,36 @@
               <entry>editSelectFuzzy5MenuItem</entry>
               <entry>ctrl 5</entry>
               <entry>meta 5</entry>
+            </row>
+
+            <row>
+              <entry>Insert Unicode Control Character/Left-to-Right Mark
+              (LRM U+200E)</entry>
+              <entry>insertCharsLRM</entry>
+            </row>
+
+            <row>
+              <entry>Insert Unicode Control Character/Right-to-Left Mark
+              (RLM U+200F)</entry>
+              <entry>insertCharsRLM</entry>
+            </row>
+            
+            <row>
+              <entry>Insert Unicode Control Character/Left-to-Right Embedding
+              (LRE U+202A)</entry>
+              <entry>insertCharsLRE</entry>
+            </row>
+
+             <row>
+              <entry>Insert Unicode Control Character/Right-to-Left Embedding
+              (RLE U+202B)</entry>
+              <entry>insertCharsRLE</entry>
+            </row>
+            
+            <row>
+              <entry>Insert Unicode Control Character/Pop Directional
+              Formatting (PDF U+202C)</entry>
+              <entry>insertCharsPDF</entry>
             </row>
 
             <row>

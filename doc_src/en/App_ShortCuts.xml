@@ -1191,7 +1191,7 @@
 
           <tbody>
             <row id="shortcuts.open.contextual.menu">
-              <entry>Open Contextual Menu</entry>
+              <entry>Open Context Menu</entry>
               <entry>editorContextMenu</entry>
               <entry>CONTEXT_MENU</entry>
               <entry>shift ESCAPE</entry>
@@ -1312,6 +1312,7 @@
           </tbody>
         </tgroup>
       </table>
+      
       <table id="app.shortcuts.lists.function.codes.autocompleter.table">
         <title id="app.shortcuts.lists.function.codes.autocompleter.table.title">Autocompleter</title>
 

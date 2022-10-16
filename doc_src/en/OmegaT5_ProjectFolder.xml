@@ -52,6 +52,25 @@
   <para>You can access the project folder and its folders with the <link linkend="menus.project.access.project.contents" endterm="menus.project.access.project.contents.title"/> command in the <link linkend="menus.project" endterm="menus.project.title"/> menu.</para>
 
   <para>Creating a project gives it a core hierarchy, but its final structure is not fixed. You can always remove or add files and folders to the project.</para>
+
+  <note><para>You can also create OmegaT projects either manually or with scripts by copying a set of prewritten files to a new folder:</para>
+  <itemizedlist>
+	<listitem>
+	  <para>Any given folder that contains a valid <filename>omegat.project</filename> file will be recognized by OmegaT as being a translation project.</para>
+	</listitem>
+	<listitem>
+  <para>If the folder is an empty repository and the <filename>omegat.project</filename> file contains remote repository information, the project will be recognized by OmegaT as being a team project:
+	<programlisting>...
+    &lt;external_command&gt;&lt;/external_command&gt;
+    &lt;repositories&gt;
+        &lt;repository type="git" url="https://URL/OF/THE/REMOTE/PROJECT/REPOSITORY"&gt;
+            &lt;mapping local="/" repository="/"/&gt;
+        &lt;/repository&gt;
+    &lt;/repositories&gt;
+&lt;/project&gt;</programlisting>
+  See <link linkend="how.to.setup.team.project" endterm="how.to.setup.team.project.title"/> for details.</para>
+	</listitem>
+  </itemizedlist></note>
   
   <section id="project.folder.source">
     <title id="project.folder.source.title">source</title>
@@ -240,9 +259,19 @@
         <listitem>
           <para>This is the most important file in the project. An empty file is automatically generated when you create a new project, and is gradually filled with the translations of the text in files located in the <link linkend="project.folder.source" endterm="project.folder.source.title"/> folder.</para>
 		  <para>It constitutes the working translation memory of the project.</para>
-		  <para>OmegaT creates regular backups of that file (up to 10). They are named <filename>project_save.tmx.[time stamp].bak</filename> and can easily be renamed to <filename>project_save.tmx</filename> in case the project memory is broken and needs replacement. See <link linkend="how.to.restore.your.data" endterm="how.to.restore.your.data.title"/> for details.</para> 
-        </listitem>
+		  <para>OmegaT regularly backs-up that file. See <link linkend="how.to.restore.your.data" endterm="how.to.restore.your.data.title"/> for details.</para>
+		          </listitem>
       </varlistentry>
+	  
+	<varlistentry id="project.folder.project.save.tmx.bak">
+	  <term id="project.folder.project.save.tmx.bak.title">project_save.tmx.bak</term>
+	  <listitem><para>This file is a backup of <filename>project_save.tmx</filename> and is automatically recreated everytime <filename>project_save.tmx</filename> has been modified: either after using <link linkend="menus.project.save" endterm="menus.project.save.title"/>, or as a regular backup every 3 minutes by default. See <link linkend="dialog.preferences.saving.and.output.interval" endterm="dialog.preferences.saving.and.output.interval.title"/> for details.</para></listitem>
+	</varlistentry>
+	
+	<varlistentry id="project.folder.project.save.tmx.timestamp.bak">
+	  <term id="project.folder.project.save.tmx.timestamp.bak.title">project_save.tmx.timestamp.bak</term>
+	  <listitem><para>Every time a project is loaded, OmegaT creates a backup of <filename>project_save.tmx</filename> with the name <filename>project_save.tmx.[time stamp].bak</filename>. OmegaT keeps up to 10 of those files.</para></listitem>
+	</varlistentry>
 
       <varlistentry id="project.folder.project.stats">
         <term id="project.folder.project.stats.title">project_stats.txt</term>

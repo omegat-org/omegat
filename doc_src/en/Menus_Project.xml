@@ -6,7 +6,7 @@
   <note><para>Key shortcut description reminder: <link
   linkend="app.shortcuts" endterm="shortcut.description"/></para>
       <example><title id="example.new.project.shortcut.title">New...</title>
-  		<para>In this manual:
+  		<para>In this guide:
 		  <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>N</keycap></keycombo>
 		</para>
 		<para>On Windows and Linux:

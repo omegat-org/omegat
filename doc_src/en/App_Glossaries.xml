@@ -61,7 +61,7 @@ they will be taken into account by OmegaT and term matches will be automatically
 	<para>You can create multiple terminology folders based on subject or client
 	and point at them as your project requires by using the  <link
 	linkend="dialogs.project.properties"
-	endterm="dialogs.project.properties.title"/>.</para>
+	endterm="dialogs.project.properties.title"/> dialog.</para>
 
 	
   </section>
@@ -70,7 +70,7 @@ they will be taken into account by OmegaT and term matches will be automatically
     <title id="glossaries.default.glossary.title">Project glossary</title>
 
     <para>The project writable glossary is by default located in the <link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/> folder
-    and called .</para>
+    and called <link linkend="project.folder.glossary.txt" endterm="project.folder.glossary.txt.title"/>.</para>
 
     <para>You can change its name and location in the <link
     linkend="dialogs.project.properties.file.locations.writable.glossary"

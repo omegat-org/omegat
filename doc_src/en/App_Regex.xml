@@ -6,25 +6,19 @@
 <section id="app.regex">
   <title id="app.regex.title">Regular expressions</title>
 
-  <para>This appendix is intended for users interested in exploring a
-  powerful way to boost their productivity. Although seen as daunting and
-  complex, even the simplest regular expressions (often abbreviated
-  <emphasis>regex</emphasis> or <emphasis>regexp</emphasis>) are extremely
-  useful, not only in OmegaT, but in many other applications you might use
-  on a day-to-day basis.</para>
-
-  <note>
-    <para>Regular expressions actually come in different “flavors” or
-    “dialects”, and may differ slightly in other applications. The descriptions
-    here apply to the implementation of regular expressions in Java.</para>
-  </note>
+  <para>This appendix is intended for users interested in exploring a powerful
+  way to boost their productivity. Although seen as daunting and complex, even
+  the simplest regular expressions (often abbreviated <emphasis>regex</emphasis>
+  or <emphasis>regexp</emphasis>) are extremely useful, not only in OmegaT, but
+  in many other applications you might use on a
+  day-to-day basis, with some variations.</para>
 
   <para>Only the fundamentals most useful to translators are covered. The
   <link linkend="app.regex.tools" endterm="app.regex.tools.title"/>
   section at the end of this appendix provides a few starting points to
-  explore advanced or complex uses beyond the scope of this manual. If you need help for a specific case, you can also ask questions in the various support channels.</para>
+  explore advanced or complex uses beyond the scope of this guide. If you need help for a specific case, you can also ask questions in the various support channels.</para>
   
-  <para>Regular expressions generally use a combination of letters,
+  <para>Regular expressions use a combination of letters,
   digits, and symbols (collectively known as <emphasis>characters</emphasis>)
   to define an <emphasis>expression</emphasis> that represents a specific text
   pattern.</para>
@@ -48,7 +42,7 @@
       <listitem><para>Represents zero or one horizontal whitespace
       character (this includes regular and non-breaking spaces as well as
       tabs, but not line break characters, which belong to the “vertical
-      whitespace” category (\v).)</para>
+      whitespace” category: \v.)</para>
       </listitem>
     </varlistentry>
   </variablelist>    
@@ -173,7 +167,7 @@
           <note>
             <para>Only the letters <emphasis>i j l m o</emphasis>, and
             <emphasis>y</emphasis>, in both lower- and uppercase, have no
-            special meaning when preceded by a backslash. This manual
+            special meaning when preceded by a backslash. This guide
             only describes a small subset of letters that take on a special
             meaning.</para>
             <para>Consult the sites in the <link

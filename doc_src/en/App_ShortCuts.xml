@@ -328,7 +328,9 @@
 
       <para>The functions that can be modified in the
       <filename>MainMenuShortcuts.properties</filename> file, along with their
-      default values, are presented in the tables below.</para>
+      default values, are presented in the tables below. Shortcuts in
+      parentheses are alternatives for the same function found in the
+      <filename>EditorShortcuts.properties</filename>.</para>
 
       <table id="app.shortcuts.lists.function.codes.project.menu.table">
         <title id="app.shortcuts.lists.function.codes.project.menu.table.title">Project Menu</title>
@@ -775,7 +777,7 @@
             <row>
               <entry>Next Untranslated Segment</entry>
               <entry>gotoNextUntranslatedMenuItem</entry>
-        <entry>ctrl U</entry>
+              <entry>ctrl U</entry>
               <entry>meta U</entry>
             </row>
 
@@ -789,15 +791,15 @@
             <row>
               <entry>Next Segment</entry>
               <entry>gotoNextSegmentMenuItem</entry>
-              <entry>ctrl N / Enter / Tab</entry>
-              <entry>meta N / Enter / Tab</entry>
+              <entry>ctrl N (Enter/Tab)</entry>
+              <entry>meta N (Enter/Tab)</entry>
             </row>
 
             <row>
               <entry>Previous Segment</entry>
               <entry>gotoPreviousSegmentMenuItem</entry>
-              <entry>ctrl P / ctrl Enter / ctrl Tab</entry>
-              <entry>meta P / meta Enter / shift Tab</entry>
+              <entry>ctrl P (ctrl Enter / ctrl Tab)</entry>
+              <entry>meta P (meta Enter / shift Tab)</entry>
             </row>
 
             <row>
@@ -878,6 +880,11 @@
             </row>
 
             <row>
+              <entry>Mark Paragraph Delimitations</entry>
+              <entry>viewMarkParagraphStartCheckBoxMenuItem</entry>
+            </row>
+
+            <row>
               <entry>Display Source Segments</entry>
               <entry>viewDisplaySegmentSourceCheckBoxMenuItem</entry>
             </row>
@@ -913,12 +920,27 @@
             </row>
 
             <row>
+              <entry>Mark Glossary Matches</entry>
+              <entry>viewMarkGlossaryMatchesCheckBoxMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Language Checker</entry>
+              <entry>viewMarkLanguageCheckerCheckBoxMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Agressive Font Fallback</entry>
+              <entry>viewMarkFontFallbackCheckBoxMenuItem</entry>
+            </row>
+
+            <row>
               <entry>Modification Info/Display None</entry>
               <entry>viewDisplayModificationInfoNoneRadioButtonMenuItem</entry>
             </row>
 
             <row>
-              <entry>Modification Info/Display Selected</entry>
+              <entry>Modification Info/Display for Current Segment</entry>
               <entry>viewDisplayModificationInfoSelectedRadioButtonMenuItem</entry>
             </row>
 
@@ -951,14 +973,14 @@
           <tbody>
             <row>
               <entry>Check Issues...</entry>
-              <entry>toolsValidateTagsMenuItem</entry>
+              <entry>toolsCheckIssuesMenuItem</entry>
               <entry>ctrl shift V</entry>
               <entry>meta shift V</entry>
             </row>
 
             <row>
               <entry>Check Issues for Current Document</entry>
-              <entry>toolsSingleValidateTagsMenuItem</entry>
+              <entry>toolsCheckIssuesCurrentFileMenuItem</entry>
             </row>
 
             <row>
@@ -975,12 +997,17 @@
               <entry>Match Statistics per File</entry>
               <entry>toolsShowStatisticsMatchesPerFileMenuItem</entry>
             </row>
+
+            <row>
+              <entry>Align File...</entry>
+              <entry>toolsAlignFilesMenuItem</entry>
+            </row>            
           </tbody>
         </tgroup>
       </table>
 
-      <table id="app.shortcuts.lists.function.codes.option.menu.table">
-        <title id="app.shortcuts.lists.function.codes.option.menu.table.title">Options Menu</title>
+      <table id="app.shortcuts.lists.function.codes.options.menu.table">
+        <title id="app.shortcuts.lists.function.codes.options.menu.table.title">Options Menu</title>
 
         <tgroup cols="4" colsep="1">
           <colspec align="left" colname="1" colnum="1"/>
@@ -999,34 +1026,24 @@
 
           <tbody>
             <row>
-              <entry>Use TAB To Advance</entry>
-              <entry>optionsTabAdvanceCheckBoxMenuItem</entry>
+              <entry>Preferences</entry>
+              <entry>optionsPreferencesMenuItem</entry>
             </row>
 
             <row>
-              <entry>Always Confirm Quit</entry>
-              <entry>optionsAlwaysConfirmQuitCheckBoxMenuItem</entry>
+              <entry>Machine Translate/Automatically Fetch Translations</entry>
+              <entry>optionsMTAutoFetchCheckboxMenuItem</entry>
             </row>
 
             <row>
-              <entry>Glossary/Display Context Description for TBX
-              Glossaries</entry>
-              <entry>optionsGlossaryTBXDisplayContextCheckBoxMenuItem</entry>
+              <entry>Glossary/Use Fuzzy Matching for Glossary Entries</entry>
+              <entry>optionsGlossaryFuzzyMatchingCheckBoxMenuItem</entry>
             </row>
 
             <row>
-              <entry>Use Terms Appearing Separately in the Source Text</entry>
-              <entry>optionsGlossaryExactMatchCheckBoxMenuItem</entry>
-            </row>
-
-            <row>
-              <entry>Glossary/Use Stemming for Glossary Entries</entry>
-              <entry>optionsGlossaryStemmingCheckBoxMenuItem</entry>
-            </row>
-
-            <row>
-              <entry>TransTips/Enable Transtips</entry>
-              <entry>optionsTransTipsEnableMenuItem</entry>
+              <entry>Dictionary/Use Fuzzy Matching for Dictionary
+              Entries</entry>
+              <entry>optionsDictionaryFuzzyMatchingCheckBoxMenuItem</entry>
             </row>
 
             <row>
@@ -1036,28 +1053,13 @@
             </row>
 
             <row>
-              <entry>Auto-completion/Glossary...</entry>
-              <entry>optionsAutoCompleteGlossaryMenuItem</entry>
+              <entry>Auto-completion/History Completion</entry>
+              <entry>optionsAutoCompleteHistoryCompletionMenuItem</entry>
             </row>
 
             <row>
-              <entry>Auto-completion/Auto-text...</entry>
-              <entry>optionsAutoCompleteAutoTextMenuItem</entry>
-            </row>
-
-            <row>
-              <entry>Auto-completion/Character Table...</entry>
-              <entry>optionsAutoCompleteCharTableMenuItem</entry>
-            </row>
-
-            <row>
-              <entry>Font...</entry>
-              <entry>optionsFontSelectionMenuItem</entry>
-            </row>
-
-            <row>
-              <entry>Custom Colours...</entry>
-              <entry>optionsColorsSelectionMenuItem</entry>
+              <entry>Auto-completion/History Prediction</entry>
+              <entry>optionsAutoCompleteHistoryPredictionMenuItem</entry>
             </row>
 
             <row>
@@ -1071,48 +1073,8 @@
             </row>
 
             <row>
-              <entry>Spell checking...</entry>
-              <entry>optionsSpellCheckMenuItem</entry>
-            </row>
-
-            <row>
-              <entry>Editing Behavior...</entry>
+              <entry>Editor...</entry>
               <entry>optionsWorkflowMenuItem</entry>
-            </row>
-
-            <row>
-              <entry>Tag Processing...</entry>
-              <entry>optionsTagValidationMenuItem</entry>
-            </row>
-
-            <row>
-              <entry>Team...</entry>
-              <entry>optionsTeamMenuItem</entry>
-            </row>
-
-            <row>
-              <entry>External TMXs...</entry>
-              <entry>optionsExtTMXMenuItem</entry>
-            </row>
-
-            <row>
-              <entry>View...</entry>
-              <entry>optionsViewOptionsMenuItem</entry>
-            </row>
-
-            <row>
-              <entry>Saving and Output...</entry>
-              <entry>optionsSaveOptionsMenuItem</entry>
-            </row>
-
-            <row>
-              <entry>Proxy Login...</entry>
-              <entry>optionsViewOptionsMenuLoginItem</entry>
-            </row>
-
-            <row>
-              <entry>Restore Main Window</entry>
-              <entry>optionsRestoreGUIMenuItem</entry>
             </row>
 
             <row>
@@ -1143,7 +1105,7 @@
 
           <tbody>
             <row>
-              <entry>User Manual...</entry>
+              <entry>User's Manual...</entry>
               <entry>helpContentsMenuItem</entry>
               <entry namest="3" nameend="4">F1</entry>
             </row>
@@ -1161,6 +1123,40 @@
             <row>
               <entry>Log...</entry>
               <entry>helpLogMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Check for Updates...</entry>
+              <entry>helpUpdateCheckMenuItem</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+      
+      <table id="app.shortcuts.lists.function.codes.search.window.table">
+        <title id="app.shortcuts.lists.function.codes.search.window.table.title">Search Window</title>
+
+        <tgroup cols="4" colsep="1">
+          <colspec align="left" colname="1" colnum="1"/>
+          <colspec align="left" colname="2" colnum="2"/>
+          <colspec align="center" colname="3" colnum="3"/>
+          <colspec align="center" colname="4" colnum="4"/>
+
+          <thead>
+            <row>
+              <entry>Menu item</entry>
+              <entry>Function code</entry>
+              <entry>Windows/Linux</entry>
+              <entry>macOS</entry>
+            </row>
+          </thead>
+
+          <tbody>
+            <row>
+              <entry>Jump to Entry in Editor</entry>
+              <entry>jumpToEntryInEditor</entry>
+              <entry>ctrl J</entry>
+              <entry>meta J</entry>
             </row>
           </tbody>
         </tgroup>
@@ -1458,35 +1454,6 @@
               <entry>Go to Last Row in Table</entry>
               <entry>autocompleterTableLastInRow</entry>
               <entry namest="3" nameend="4">END</entry>
-            </row>
-          </tbody>
-        </tgroup>
-      </table>
-
-      <table id="app.shortcuts.lists.function.codes.search.window.table">
-        <title id="app.shortcuts.lists.function.codes.search.window.table.title">Search Window</title>
-
-        <tgroup cols="4" colsep="1">
-          <colspec align="left" colname="1" colnum="1"/>
-          <colspec align="left" colname="2" colnum="2"/>
-          <colspec align="center" colname="3" colnum="3"/>
-          <colspec align="center" colname="4" colnum="4"/>
-
-          <thead>
-            <row>
-              <entry>Menu item</entry>
-              <entry>Function code</entry>
-              <entry>Windows/Linux</entry>
-              <entry>macOS</entry>
-            </row>
-          </thead>
-
-          <tbody>
-            <row>
-              <entry>Jump to Entry in Editor</entry>
-              <entry>jumpToEntryInEditor</entry>
-              <entry>ctrl J</entry>
-              <entry>meta J</entry>
             </row>
           </tbody>
         </tgroup>

@@ -79,6 +79,91 @@
 		</para>
 		</example>
   </section>
+  
+  <section id="app.shorcuts.streamline.workflow">
+    <title id="app.shortcuts.streamline.workflow.title">Streamlining your
+    workflow with shortcuts</title>
+
+    <para>Remembering the main editing and navigation shortcuts (or <link
+    linkend="app.shortcuts.customization">modifying them to suit your
+    needs</link>) can help you streamline your work.</para>
+    <para>This is best illustrated with an example:</para>
+
+      <example id="example.shortcuts.streamline.workflow">
+        <title id="example.shortcuts.streamline.workflow.title">Using shortcuts
+        to streamline the translation process</title>
+
+        <para>Picture a technical translator tasked with translating an updated
+        version of a manual from a previous job.</para>
+        
+        <para>Since the first few pages have not changed, the translator is
+        greeted with a screenful of already translated segments from the
+        previous job's memory upon opening the project. Rather than tediously
+        scroll down until she finds the first segment to translate, the
+        translator quickly presses
+        <keycombo><keycap>C</keycap><keycap>U</keycap></keycombo> to
+        <link linkend="menus.goto.next.untranslated.segment">jump
+        straight into the action</link> and start translating. (And doing so
+        again each time she reaches a large unchanged section.)</para>
+        
+        <para>A few segments later, the translator comes across a term she
+        should add to the glossary. Instead of reaching for the mouse, she hits <link linkend="panes.editor.cursor.lock"><keycap>F2</keycap></link>,
+        uses the cursor keys and standard system shortcuts to navigate to the
+        term and select it, and then presses
+        <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>G</keycap>
+        </keycombo> to <link linkend="menus.edit.create.glossary.entry">call up
+        the glossary entry dialog</link> to enter the source term, and then
+        switches back to the editor and repeats the process to enter the target
+        term.</para>
+
+        <para>The translator then reaches a revised section of the text where
+        the <link linkend="panes.fuzzy.matches"
+        endterm="panes.fuzzy.matches.title"/> pane shows a number of similar
+        segments from the previous job. After quickly tapping
+        <keycombo><keycap>C</keycap><keycap>I</keycap></keycombo> to insert the
+        match, she makes the necessary changes to match the revised text. This
+        continues, with the occasional sequence of
+        <keycombo><keycap>C</keycap><keycap>2</keycap></keycombo> (or other
+        number) followed by
+        <keycombo><keycap>C</keycap><keycap>I</keycap></keycombo> when one of
+        the matches from 2 to 5 is more suitable. By the time she gets near the
+        end of the section, she has also used
+        <keycombo><keycap>C</keycap><keycap>R</keycap></keycombo> once or twice
+        to replace already automatically entered fuzzy matches from the previous
+        translation with better matches from earlier in the current
+        section.</para>
+
+        <para>Later on, the translator comes up with a better way to phrase a
+        somewhat thorny expression that came up earlier, so she selects it in
+        the source text, presses
+        <keycombo><keycap>C</keycap><keycap>F</keycap></keycombo> <link
+        linkend="windows.text.search">to find</link> it, and then uses
+        <keycombo><keycap>C</keycap><keycap>J</keycap></keycombo> to immediately
+        to that segment from the search dialog. Since she had noted the number of the segment she was in, she uses
+        <keycombo><keycap>C</keycap><keycap>J</keycap></keycombo> again in the
+        editor, enters the number in the dialog, and immediately continues from
+        where she left off.</para>
+
+        <para>Time for a break. As she savors her coffee, the translator
+        reflects on how much more smoothly she was able to use the various
+        OmegaT functions compared to when she had just gotten started and spent
+        a lot of time clicking through menus.</para>
+        
+        <para>The smoother workfow, in turn, allowed her to better focus on the
+        translation itself.</para>
+        
+        <para>At the same time, the translator realized that during her
+        session, she used the menu and cursor keys to select the
+        <link linkend="menus.edit.create.alternative.translation"
+        endterm="menus.edit.create.alternative.translation.title"/> function
+        several times, and decides to <link
+        linkend="example.shortcut.addition">add a new shortcut</link> to
+        streamline that part of the process as well.</para>
+      </example>
+    
+    <para>Taking the time to learn the shortcuts for the functions you use often
+    will be well worth your while.</para>    
+  </section>
 
   <section id="app.shortcuts.customization">
     <title id="app.shortcuts.customization.title">Customization</title>
@@ -319,6 +404,8 @@
     corresponding default shortcut for each menu or editor function in
     OmegaT.</para>
   </section>
+
+  
 
   <section id="app.shortcuts.lists">
     <title id="app.shortcuts.lists.title">Lists of functions and codes</title>

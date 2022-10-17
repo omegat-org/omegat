@@ -1006,6 +1006,15 @@
         </tgroup>
       </table>
 
+      <note>
+        <para>The <link linkend="windows.scripts"
+        endterm="windows.scripts.title"/> item in the <link
+        linkend="menus.tools" endterm="menus.tools.title"/> menu is an
+        exception.</para>
+        <para>It is not possible to add a shortcut to call the script editor, or
+        to modify the shortcuts assigned to the scripts.</para>
+      </note>
+
       <table id="app.shortcuts.lists.function.codes.options.menu.table">
         <title id="app.shortcuts.lists.function.codes.options.menu.table.title">Options Menu</title>
 
@@ -1312,7 +1321,7 @@
           </tbody>
         </tgroup>
       </table>
-      
+
       <table id="app.shortcuts.lists.function.codes.autocompleter.table">
         <title id="app.shortcuts.lists.function.codes.autocompleter.table.title">Autocompleter</title>
 

@@ -269,7 +269,7 @@
       since it does not have one by default.</para>
 
       <para>The steps below demonstrate how to assign the
-      <keycombo><keycap>A</keycap><keycap>X</keycap></keycombo> shortcut to the
+      <keycombo><keycap>Alt</keycap><keycap>X</keycap></keycombo> shortcut to the
       <link linkend="menus.edit.create.alternative.translation"
       endterm="menus.edit.create.alternative.translation.title"/> function.
         <orderedlist>

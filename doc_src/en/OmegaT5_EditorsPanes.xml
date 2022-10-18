@@ -110,7 +110,7 @@
 		  <varlistentry>
 			<term>Editor pane</term>
 			<listitem><para>Dropping an OmegaT project file (<filename>omegat.project</filename>) or a full project onto this pane will open the corresponding project after closing the currently open project, if any.</para>
-			<para>Dropping other  files will copy them to the <filename class="directory">source</filename> folder. This also applies to the <link linkend="windows.project.files" endterm="windows.project.files.title"/> window.</para></listitem>
+			<para>Dropping other files will copy them to the <filename class="directory">source</filename> folder. This also applies to the <link linkend="windows.project.files" endterm="windows.project.files.title"/> window.</para></listitem>
 		  </varlistentry>
 
 		  <varlistentry>

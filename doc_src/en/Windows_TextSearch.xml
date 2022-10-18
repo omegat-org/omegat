@@ -10,8 +10,8 @@
   <para>Alternatively, select a word or phrase in the <link
   linkend="panes.editor" endterm="panes.editor.title"/>, <link
   linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/>, or <link
-  linkend="panes.glossary" endterm="panes.glossary.title"/> pane and hit
-  <keycombo><keycap>C</keycap><keycap>F</keycap></keycombo>. The selection is
+  linkend="panes.glossary" endterm="panes.glossary.title"/> pane and use <link linkend="menus.edit.search.project"
+  endterm="menus.edit.search.project.title"/>. The selection is
   automatically entered in the search field.</para>
 
   <para>You can have several search windows opened at the same time. Use

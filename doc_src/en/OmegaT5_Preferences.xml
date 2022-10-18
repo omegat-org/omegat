@@ -64,8 +64,8 @@
         <listitem>
           <para>For confidentiality reasons, you may want to not send all
           segments to the machine translation engine. If you uncheck this
-          option, machine translations will only be fetched when you press
-          <keycombo><keycap>C</keycap><keycap>M</keycap></keycombo> in the
+          option, machine translations will only be fetched when you use
+          <link linkend="menus.edit.replace.with.mt" endterm="menus.edit.replace.with.mt.title"/> in the
           current segment. You will then have to press that combination again to
           insert the suggestion.</para>
         </listitem>

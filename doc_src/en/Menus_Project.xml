@@ -212,7 +212,7 @@
 			<term><link linkend="project.folder.source" endterm="project.folder.source.title"/></term>
 		  </varlistentry>
 		  <varlistentry>
-			<term><link linkend="project.folder.target" endterm="project.folder.target"/></term>
+			<term><link linkend="project.folder.target" endterm="project.folder.target.title"/></term>
 		  </varlistentry>
 		  <varlistentry>
 			<term><link linkend="project.folder.tm" endterm="project.folder.tm.title"/></term>

@@ -56,7 +56,6 @@ h1 {
     margin-top: 150px;
     width:100%;
     background-color:#FDFDFD;
-
     */
 
     line-height: 1.13;
@@ -329,12 +328,24 @@ dd {
 
 /* links */
 
+
 a {
-    text-decoration:none;
+	text-decoration:none;
+}
+
+a.ulink::after {
+	content: " ↗️";
 }
 
 a:link {
-    color:teal;
+	text-decoration-line: underline;
+	text-decoration-color: teal;
+	text-decoration-style: dotted;
+	color: teal;
+}
+
+.toc a:link {
+	text-decoration:none;
 }
 
 a:visited{
@@ -348,11 +359,6 @@ a.ulink:link {
 a.ulink:visited {
     color:midnightblue;
 }
-
-a:hover {
-    text-decoration:underline;
-}
-
 
 /* tables */
 
@@ -561,3 +567,13 @@ p > span.keycap:last-child  {
     color:white;
     text-decoration:none;
 }
+
+/* 
+.chapter > .titlepage {
+    position: -webkit-sticky;
+    position: sticky;
+    top: -1em;
+    padding-top: 1em;
+    background-color: white;
+}
+ */

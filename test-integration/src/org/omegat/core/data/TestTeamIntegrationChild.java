@@ -419,6 +419,10 @@ public final class TestTeamIntegrationChild {
             return null;
         }
 
+        @Override
+        public void selectSourceText() {
+        }
+
         public IEditorFilter getFilter() {
             return null;
         }

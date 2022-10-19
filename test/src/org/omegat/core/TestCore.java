@@ -469,6 +469,10 @@ public abstract class TestCore {
             }
 
             @Override
+            public void selectSourceText() {
+            }
+
+            @Override
             public IEditorFilter getFilter() {
                 return null;
             }

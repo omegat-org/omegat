@@ -234,6 +234,11 @@ public class ConsoleBindings implements IGlossaries, IEditor, IScriptLogger {
     }
 
     @Override
+    public void selectSourceText() {
+
+    }
+
+    @Override
     public void setAlternateTranslationForCurrentEntry(boolean alternate) {
 
     }

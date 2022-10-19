@@ -1863,6 +1863,10 @@ public class EditorController implements IEditor {
         markAsComesFromMT(text);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void insertTag(final String tag) {
         UIThreadsUtil.mustBeSwingThread();
 
@@ -1878,6 +1882,21 @@ public class EditorController implements IEditor {
             // just insert tag
             editor.replaceSelection(tag);
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void selectSourceText() {
+        UIThreadsUtil.mustBeSwingThread();
+
+        SourceTextEntry ste = getCurrentEntry();
+        int sourceTextSize = ste.getSrcText().length();
+        int end = editor.getOmDocument().getTranslationStart() - 1;
+        int start = end - sourceTextSize;
+        editor.setSelectionStart(start);
+        editor.setSelectionEnd(end);
     }
 
     /**

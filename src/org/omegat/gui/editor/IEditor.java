@@ -379,6 +379,11 @@ public interface IEditor {
     String getSelectedText();
 
     /**
+     * Select the source text of the current segment.
+     */
+    void selectSourceText();
+
+    /**
      * Set default/alternate translation for current entry.
      */
     void setAlternateTranslationForCurrentEntry(boolean alternate);

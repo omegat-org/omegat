@@ -1,3 +1,26 @@
+:root {
+--intro-color:#715C91;
+--panes-color:#E3D6B4;
+--menus-color:#74B7A7;
+--windows-color:#D5B089;
+--project-color:#916B8B;
+--config-color:#BB7B73;
+--prefs-color:#BA6C76;
+--howto-color:#DFB68C;
+--appendices-color:#54476B;
+--support-border:solid 10px;
+}
+
+#wh-navigation {
+	margin-right:3em;
+}
+#wh-toc a.wh-toc-selected {
+	color:black !important;
+	border-bottom-width:0px !important;
+	font-weight:bold;
+	font-size: 1.1em;
+}
+
 #wh-content {
     font-family: sans-serif;
 /*    font-size: 10pt; */
@@ -12,6 +35,7 @@
 	font-style: normal;
 }
 
+
 #wh-content div.toc,
 #wh-content header,
 #wh-content footer
@@ -22,7 +46,7 @@
 .chapter,
 .appendix {
     margin-left:3em;
-    margin-right:10em;
+    margin-right:6em;
     padding-bottom: 5em;
 
 }
@@ -63,7 +87,6 @@ h1 {
     padding-bottom: .3em;
     margin-bottom: 0;
     padding-left:3em;
-    border-bottom:1px solid teal;
     margin-left:-3em;
     margin-right:0em;
 }
@@ -577,3 +600,148 @@ p > span.keycap:last-child  {
     background-color: white;
 }
  */
+
+
+/* introduction side color */
+a[href="chapter.instant.start.guide.html"] ~ ul {
+	border-left: var(--support-border) var(--intro-color);
+}
+
+h2:has(a[href="chapter.instant.start.guide.html"]) ~ ul {
+	border-right: var(--support-border) var(--intro-color);
+	padding-right: 1em;
+}
+
+
+#chapter\.instant\.start\.guide {
+	padding-right: 2em;
+	border-right: var(--support-border) var(--intro-color);
+	border-bottom: var(--support-border) var(--intro-color);
+}
+
+/* panes side color */
+a[href="panes.html"] ~ ul {
+	border-left: var(--support-border) var(--panes-color);
+}
+
+h2:has(a[href="panes.html"]) ~ ul {
+	border-right: var(--support-border) var(--panes-color);
+	padding-right: 1em;
+}
+
+#panes {
+	padding-right: 2em;
+	border-right: var(--support-border) var(--panes-color);
+	border-bottom: var(--support-border) var(--panes-color);
+}
+
+/* menus side color */
+a[href="menus.html"] ~ ul {
+	border-left: var(--support-border) var(--menus-color);
+}
+
+h2:has(a[href="menus.html"]) ~ ul {
+	border-right: var(--support-border) var(--menus-color);
+	padding-right: 1em;
+}
+#menus {
+	padding-right: 2em;
+	border-right: var(--support-border) var(--menus-color);
+	border-bottom: var(--support-border) var(--menus-color);
+}
+
+/* href="windows.and.dialogs.html" */
+
+a[href="windows.and.dialogs.html"] ~ ul {
+	border-left: var(--support-border) var(--windows-color);
+}
+
+h2:has(a[href="windows.and.dialogs.html"]) ~ ul {
+	border-right: var(--support-border) var(--windows-color);
+	padding-right: 1em;
+}
+#windows\.and\.dialogs {
+	padding-right: 2em;
+	border-right: var(--support-border) var(--windows-color);
+	border-bottom: var(--support-border) var(--windows-color);
+}
+
+/* href="project.folder.html" */
+
+a[href="project.folder.html"] ~ ul {
+	border-left: var(--support-border) var(--project-color);
+}
+
+h2:has(a[href="project.folder.html"]) ~ ul {
+	border-right: var(--support-border) var(--project-color);
+	padding-right: 1em;
+}
+#project\.folder {
+	padding-right: 2em;
+	border-right: var(--support-border) var(--project-color);
+	border-bottom: var(--support-border) var(--project-color);
+}
+
+/* href="configuration.folder.html" */
+
+a[href="configuration.folder.html"] ~ ul {
+	border-left: var(--support-border) var(--config-color);
+}
+
+h2:has(a[href="configuration.folder.html"]) ~ ul {
+	border-right: var(--support-border) var(--config-color);
+	padding-right: 1em;
+}
+#configuration\.folder {
+	padding-right: 2em;
+	border-right: var(--support-border) var(--config-color);
+	border-bottom: var(--support-border) var(--config-color);
+}
+
+/* href="dialogs.preferences.html" */
+
+a[href="dialogs.preferences.html"] ~ ul {
+	border-left: var(--support-border) var(--prefs-color);
+}
+
+h2:has(a[href="dialogs.preferences.html"]) ~ ul {
+	border-right: var(--support-border) var(--prefs-color);
+	padding-right: 1em;
+}
+#dialogs\.preferences {
+	padding-right: 2em;
+	border-right: var(--support-border) var(--prefs-color);
+	border-bottom: var(--support-border) var(--prefs-color);
+}
+
+/* href="how.to.html" */
+
+a[href="how.to.html"] ~ ul {
+	border-left: var(--support-border) var(--howto-color);
+}
+
+h2:has(a[href="how.to.html"]) ~ ul {
+	border-right: var(--support-border) var(--howto-color);
+	padding-right: 1em;
+}
+#how\.to {
+	padding-right: 2em;
+	border-right: var(--support-border) var(--howto-color);
+	border-bottom: var(--support-border) var(--howto-color);
+}
+
+/* href="appendices.html" */
+
+a[href="appendices.html"] ~ ul {
+	border-left: var(--support-border) var(--appendices-color);
+}
+
+h2:has(a[href="appendices.html"]) ~ ul {
+	border-right: var(--support-border) var(--appendices-color);
+	padding-right: 1em;
+}
+#appendices {
+	padding-right: 2em;
+	border-right: var(--support-border) var(--appendices-color);
+	border-bottom: var(--support-border) var(--appendices-color);
+}

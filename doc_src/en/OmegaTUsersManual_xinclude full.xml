@@ -4,11 +4,11 @@
 [<!ENTITY % manualvariables SYSTEM "manualvariables.mod"> %manualvariables;]>
 <book lang="en" id="book.user.guide">
   <bookinfo>
-    <title id="book.user.guide.title">OmegaT &vernb; - User's Guide <emphasis role="bold">DRAFT</emphasis></title>
+    <title id="book.user.guide.title">OmegaT &vernb; - User Guide <emphasis role="bold">DRAFT</emphasis></title>
     <pubdate>@timestamp@</pubdate>
 	<!-- TODO automate date insertion -->
     <abstract>
-      <para>This document is the official user's guide to OmegaT, the free
+      <para>This document is the official user guide to OmegaT, the free
       Computer Aided Translation tool.</para>
     </abstract>
   </bookinfo>

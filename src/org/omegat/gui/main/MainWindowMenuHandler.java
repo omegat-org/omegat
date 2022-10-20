@@ -522,6 +522,14 @@ public final class MainWindowMenuHandler {
         Core.getEditor().insertText(toInsert);
     }
 
+    /** select the source text of the current segment */
+    public void editSelectSourceMenuItemActionPerformed() {
+        if (!Core.getProject().isProjectLoaded()) {
+            return;
+        }
+        Core.getEditor().selectSourceText();
+    }
+
     public void editExportSelectionMenuItemActionPerformed() {
         if (!Core.getProject().isProjectLoaded()) {
             return;

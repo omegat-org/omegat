@@ -1879,6 +1879,17 @@ public class EditorController implements IEditor {
         }
     }
 
+    public void selectSourceText() {
+        UIThreadsUtil.mustBeSwingThread();
+
+        SourceTextEntry ste = getCurrentEntry();
+        int sourceTextSize = ste.getSrcText().length();
+        int end = editor.getOmDocument().getTranslationStart() - 1;
+        int start = end - sourceTextSize;
+        editor.setSelectionStart(start);
+        editor.setSelectionEnd(end);
+    }
+
     /**
      * {@inheritDoc}
      */

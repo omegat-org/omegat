@@ -99,8 +99,6 @@ public class EditorTextArea3 extends JEditorPane {
             .getKeyStroke("editorInsertLineBreak");
     private static final KeyStroke KEYSTROKE_SELECT_ALL = PropertiesShortcuts.getEditorShortcuts()
             .getKeyStroke("editorSelectAll");
-    private static final KeyStroke KEYSTROKE_SELECT_SOURCE = PropertiesShortcuts.getEditorShortcuts()
-            .getKeyStroke("editorSelectSource");
     private static final KeyStroke KEYSTROKE_SWITCH_ORIENTATION = PropertiesShortcuts.getEditorShortcuts()
             .getKeyStroke("editorSwitchOrientation");
     private static final KeyStroke KEYSTROKE_DELETE_PREV_TOKEN = PropertiesShortcuts.getEditorShortcuts()
@@ -384,15 +382,6 @@ public class EditorTextArea3 extends JEditorPane {
             // Select all
             setSelectionStart(doc.getTranslationStart());
             setSelectionEnd(doc.getTranslationEnd());
-            processed = true;
-        } else if (s.equals(KEYSTROKE_SELECT_SOURCE)) {
-            // Select source
-            SourceTextEntry ste = doc.controller.getCurrentEntry();
-            int sourceTextSize = ste.getSrcText().length();
-            int sourceTextEnd = doc.getTranslationStart() - 1;
-            int sourceTextStart = sourceTextEnd - sourceTextSize;
-            setSelectionStart(sourceTextStart);
-            setSelectionEnd(sourceTextEnd);
             processed = true;
         } else if (s.equals(KEYSTROKE_SWITCH_ORIENTATION)) {
             // handle Ctrl+Shift+O - toggle orientation LTR-RTL

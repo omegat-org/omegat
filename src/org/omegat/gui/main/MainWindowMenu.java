@@ -447,8 +447,8 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         optionsAutoCompleteMenu.add(optionsAutoCompleteHistoryPredictionMenuItem = createCheckboxMenuItem(
                 "MW_OPTIONSMENU_AUTOCOMPLETE_HISTORY_PREDICTION"));
         optionsMenu.addSeparator();
-        optionsMenu.add(optionsSetupFileFiltersMenuItem = createMenuItem("TF_MENU_DISPLAY_FILTERS"));
-        optionsMenu.add(optionsSentsegMenuItem = createMenuItem("MW_OPTIONSMENU_SENTSEG"));
+        optionsMenu.add(optionsSetupFileFiltersMenuItem = createMenuItem("TF_MENU_DISPLAY_GLOBAL_FILTERS"));
+        optionsMenu.add(optionsSentsegMenuItem = createMenuItem("MW_OPTIONSMENU_GLOBAL_SENTSEG"));
         optionsMenu.add(optionsWorkflowMenuItem = createMenuItem("MW_OPTIONSMENU_WORKFLOW"));
         optionsMenu.addSeparator();
         optionsMenu.add(optionsAccessConfigDirMenuItem = createMenuItem("MW_OPTIONSMENU_ACCESS_CONFIG_DIR"));

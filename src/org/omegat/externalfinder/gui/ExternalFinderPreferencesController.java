@@ -175,8 +175,8 @@ public class ExternalFinderPreferencesController extends BasePreferencesControll
 
     @Override
     public String toString() {
-        return isProjectSpecific ? OStrings.getString("PREFS_TITLE_EXTERNALFINDER_PROJ_SPECIFIC")
-                : OStrings.getString("PREFS_TITLE_EXTERNALFINDER");
+        return isProjectSpecific ? OStrings.getString("PREFS_TITLE_LOCAL_EXTERNALFINDER")
+                : OStrings.getString("PREFS_TITLE_GLOBAL_EXTERNALFINDER");
     }
 
     enum ItemColumn {

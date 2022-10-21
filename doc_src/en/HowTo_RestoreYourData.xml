@@ -9,19 +9,27 @@
   <section id="how.to.restore.your.data.automatic.backup">
 	<title id="how.to.restore.your.data.automatic.backup.title">Automatic backups</title>
 	
-	<para>When you translate the documents in a project, OmegaT stores all your progress in the <link linkend="project.folder.project.save.tmx"
+	<para>OmegaT regularly and automatically stores all your progress in the <link linkend="project.folder.project.save.tmx"
 	endterm="project.folder.project.save.tmx.title"/>
 	file located in the project’s <link linkend="project.folder.omegat"
-	endterm="project.folder.omegat.title"/> folder. That file is in fact a translation memory and is automatically saved at regular intervals. You can also use <link linkend="menus.project.save" endterm="menus.project.save.title"/> discretionally to save your valuable work before the automatic saving.</para>
+	endterm="project.folder.omegat.title"/> folder. OmegaT also creates regular backups of that file.</para>
 
-	<para>When you load a project, OmegaT backs-up <filename>project_save.tmx</filename> into a timestamped backup file. OmegaT keeps up to 10 of those files.</para>
+	<orderedlist>
+	  <listitem><para>When you open a project, OmegaT backs-up <filename>project_save.tmx</filename> into a timestamped backup file.</para>
+	  <para>OmegaT keeps up to 10 of those files.</para>
+	  <note><para>The backup filename follows the pattern <filename>project_save.tmx.YYYYMMDDhhmm.bak</filename> where <code>YYYY</code>
+	  represents the 4-digit year, <code>MM</code> the month, <code>DD</code> the day of the month, and <code>hh</code>
+	  and <code>mm</code> indicate the hours and minutes.</para></note>
+  </listitem>
+  
+  <listitem>
+	  <para>Every time <filename>project_save.tmx</filename> has been modified: either after using <link linkend="menus.project.save" endterm="menus.project.save.title"/>, or as a regular backup every 3 minutes by default, OmegaT creates a backup with the name <filename>project_save.tmx.bak</filename>. That file is a copy of <filename>project_save.tmx</filename> <emphasis>before</emphasis> the modification.</para>
+  </listitem>
 
-    <para>These backup filenames follow the pattern <filename>project_save.tmx.YYYYMMDDhhmm.bak</filename> where the final part is the time stamp indicating when the file was created: <code>YYYY</code>
-	represents the 4-digit year, <code>MM</code> the month, <code>DD</code> the day of the month, and <code>hh</code>
-	and <code>mm</code> indicate the hours and minutes.</para>
-
-	<para>Every time <filename>project_save.tmx</filename> has been modified: either after using <link linkend="menus.project.save" endterm="menus.project.save.title"/>, or as a regular backup every 3 minutes by default, OmegaT creates a backup with the name <filename>project_save.tmx.bak</filename>.</para>
-
+  <listitem>
+	<para>Everytime you use <link linkend="menus.project.save" endterm="menus.project.save.title"/>, or as a regular backup every 3 minutes by default, OmegaT saves the current state of the translation into <filename>project_save.tmx</filename></para>
+  </listitem>
+	</orderedlist>
 
 	<para>The file <filename>project_save.tmx</filename> always contains the most recent data.</para>
   </section>

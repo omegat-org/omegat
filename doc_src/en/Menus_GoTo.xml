@@ -4,8 +4,6 @@
 <section id="menus.goto">
   <title id="menus.goto.title">Go To</title>
 
-  <note><para>This menu only displays entries when a project is open.</para>
-  <para>Key shortcut description reminder: <link linkend="app.shortcuts" endterm="shortcut.description"/></para>
     <example><title id="example.next.untranslated.segment.title">Next Untranslated Segment</title>
   		<para>In this guide:
 		  <keycombo><keycap>C</keycap><keycap>U</keycap></keycombo>
@@ -17,7 +15,6 @@
 		  <keycombo><keycap>Command</keycap><keycap>U</keycap></keycombo>
 		</para>
 		</example>
-</note>
 
   <variablelist>
     <varlistentry id="menus.goto.next.untranslated.segment">

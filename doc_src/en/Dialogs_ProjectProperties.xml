@@ -214,7 +214,7 @@
       </varlistentry>
 
       <varlistentry id="dialogs.project.properties.filters">
-        <term id="dialogs.project.properties.filters.title">File
+        <term id="dialogs.project.properties.filters.title">Local File
         Filters...</term>
         <listitem>
           <para>By default, file filter settings are global and are shared by
@@ -284,7 +284,7 @@
 		  <note><para>For security purposes, project-based external searches are
 		  disabled by default. You can enable them by checking Preferences – <link
 		  linkend="dialogs.preferences.external.search.enable.project.specific.commands"
-		  endterm="dialogs.preferences.external.search.enable.project.specific.commands"/>
+		  endterm="dialogs.preferences.external.search.enable.project.specific.commands.title"/>
 		  in the <link linkend="dialogs.preferences.external.searches"
 		  endterm="dialogs.preferences.external.searches.title"/>
 		  preferences.</para></note>
@@ -348,7 +348,7 @@
 	  
 	  <varlistentry id="dialogs.project.properties.file.locations.exclusions">
 		<term
-		id="dialogs.project.properties.file.locations.exclusions.title"><guibutton>Exclusions...</guibutton></term>
+		id="dialogs.project.properties.file.locations.exclusions.title">Exclusions...</term>
 		<listitem>
 		  <para>Click <guibutton>Exclusions...</guibutton> to define the
 		  files or folders that will be ignored by OmegaT. An ignored file or

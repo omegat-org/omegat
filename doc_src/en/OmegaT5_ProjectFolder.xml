@@ -8,7 +8,7 @@
   
   <variablelist>
 	<varlistentry id="project.folder.omegat">
-	  <term id="project.folder.omegat.title">omegat/</term>
+	  <term id="project.folder.omegat.title">omegat</term>
 	  <listitem><para>This is the project folder that always contains <link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/>, the project translation memory, and <link linkend="project.folder.project.stats" endterm="project.folder.project.stats.title"/>, the statistics data file for the project.</para>
 	  <para>Other files will be added over the course of a translation project.</para>
 	  </listitem>

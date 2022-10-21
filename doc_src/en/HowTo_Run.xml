@@ -488,7 +488,7 @@ config-dir="path/to/new/configdir"</programlisting>
 					  </varlistentry>
 
 					  <varlistentry id="launch.with.command.line.mode.console.pseudotranslatetmx">
-						<term id="launch.with.command.line.mode.console.pseudotranslatetmx.title">--mode=console-pseudotranslatetmx</term>
+						<term id="launch.with.command.line.mode.console.pseudotranslatetmx.title">--mode=console-createpseudotranslatetmx</term>
 						<listitem>
 						  <para>In this mode OmegaT will create a TMX for the
 						  whole project using only the source files.</para>

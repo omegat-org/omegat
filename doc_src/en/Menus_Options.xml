@@ -2,8 +2,6 @@
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="menus.options">
   <title id="menus.options.title">Options</title>
-  <note><para>Key shortcut description reminder: <link
-  linkend="app.shortcuts" endterm="shortcut.description"/></para></note>
 
   <variablelist>
     <varlistentry id="menus.options.preferences">

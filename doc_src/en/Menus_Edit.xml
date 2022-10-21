@@ -4,11 +4,6 @@
 <section id="menus.edit">
   <title id="menus.edit.title">Edit</title>
 
-  <note>
-	<para>This menu only displays entries when a project is open.</para>
-
-	<para>Key shortcut description reminder: <link linkend="app.shortcuts" endterm="shortcut.description"/></para>
-
 	<example>
 	  <title id="example.undo.last.action.title">Undo Last Action</title>
 	  <para>In this guide:
@@ -23,7 +18,6 @@
 	  <keycombo><keycap>Command</keycap><keycap>Z</keycap></keycombo>
 	  </para>
 	</example>
-  </note>
 
   <variablelist>
     <varlistentry id="menus.edit.undo.last.action">

@@ -410,9 +410,7 @@ that on a large project, an "entry_activated" script will be called a lot of tim
       </varlistentry>
 
       <varlistentry id="windows.scripts.distribution.toolbar.groovy">
-        <term
-			id="windows.scripts.distribution.toolbar.groovy.title">toolbar.groovy</term>
-
+        <term id="windows.scripts.distribution.toolbar.groovy.title">toolbar.groovy</term>
         <listitem>
           <para>(no description)</para>
         </listitem>

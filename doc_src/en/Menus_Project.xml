@@ -3,8 +3,6 @@
 "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="menus.project">
   <title id="menus.project.title">Project</title>
-  <note><para>Key shortcut description reminder: <link
-  linkend="app.shortcuts" endterm="shortcut.description"/></para>
       <example><title id="example.new.project.shortcut.title">New...</title>
   		<para>In this guide:
 		  <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>N</keycap></keycombo>
@@ -15,7 +13,7 @@
 		<para>On macOS:
 		  <keycombo><keycap>Shift</keycap><keycap>Command</keycap><keycap>N</keycap></keycombo>
 		</para>
-		</example></note>
+		</example>
   
   <variablelist>
     <varlistentry id="menus.project.new">

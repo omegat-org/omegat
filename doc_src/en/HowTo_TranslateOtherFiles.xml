@@ -57,7 +57,7 @@
 		  <listitem>
 			<para>The <ulink url="http://185.13.37.79:8003/index.php/p/stax-filters/downloads/">StaX</ulink> filters</para>
 			<para>License: GNU General Public License v3+</para>
-			<para>StaX provides OmegaT with an SDLXLIFF and a DOCX plugin.</para>
+			<para>StaX provides OmegaT with filters for SDLXLIFF files and packages, XLIFF 1 and 2, MqXliff and DOCX.</para>
 			<para>The filters originate from the European Union DGT version of OmegaT.</para>
 		  </listitem>
 		</itemizedlist>

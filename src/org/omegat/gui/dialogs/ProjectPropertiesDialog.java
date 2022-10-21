@@ -367,7 +367,7 @@ public class ProjectPropertiesDialog extends JDialog {
         optionsBox.add(sentenceSegmentingCheckBox, gbc);
 
         JButton sentenceSegmentingButton = new JButton();
-        Mnemonics.setLocalizedText(sentenceSegmentingButton, OStrings.getString("MW_OPTIONSMENU_SENTSEG"));
+        Mnemonics.setLocalizedText(sentenceSegmentingButton, OStrings.getString("MW_OPTIONSMENU_LOCAL_SENTSEG"));
         gbc.gridx = 1;
         gbc.gridy = 0;
         gbc.anchor = GridBagConstraints.EAST;
@@ -375,7 +375,7 @@ public class ProjectPropertiesDialog extends JDialog {
 
         // File Filters
         JButton fileFiltersButton = new JButton();
-        Mnemonics.setLocalizedText(fileFiltersButton, OStrings.getString("WM_PROJECTMENU_FILEFILTERS"));
+        Mnemonics.setLocalizedText(fileFiltersButton, OStrings.getString("WM_PROJECTMENU_LOCAL_FILEFILTERS"));
         gbc.gridx = 1;
         gbc.gridy = 1;
         gbc.anchor = GridBagConstraints.EAST;

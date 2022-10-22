@@ -3,43 +3,34 @@
 <section id="dialogs.project.properties">
   <title id="dialogs.project.properties.title">Project Properties</title>
 
-  <para>This dialog is accessible by selecting <link
+  <para>Use <link
   linkend="menus.project.properties" endterm="menus.project.properties.title"/>
   in the <link linkend="menus.project" endterm="menus.project.title"/>
-  menu.</para>
+  menu to open the dialog.</para>
 
-  <para>The dialog that is displayed when you create a new project, after you
-  have named it, is the same as the one described here. See <link
-  linkend="introduction.create.and.open.new.project"
+  <para>The dialog is used to set the initial project properties when creating a
+  new project and also to modify them later, after the project has been
+  created. See <link linkend="introduction.create.and.open.new.project"
   endterm="introduction.create.and.open.new.project.title"/> for details.</para>
   
-
-  <warning><para>The options displayed in <link linkend="dialogs.preferences"
-  endterm="dialogs.preferences.title"/> or <link linkend="menus.options"
-  endterm="menus.options.title"/> are always the global settings and never the
-  project specific settings.</para>
-  <para>If you have defined project specific settings here, they will supercede
-  any modifications you make to the global settings and the latter will not be
-  taken into account in your project.</para></warning>
 
   <section id="dialogs.project.properties.languages">
     <title id="dialogs.project.properties.languages.title">Languages</title>
 
-    <para>You can either enter the source and target languages by hand, or use
+    <para>Select the source and target languages by hand, or use
     the drop-down menus.</para>
-	<para>Language codes are used for the <link linkend="panes.fuzzy.matches"
-	endterm="panes.fuzzy.matches.title"/>, the <link
+	<para>Language codes are used in <link linkend="panes.fuzzy.matches"
+	endterm="panes.fuzzy.matches.title"/>, <link
 	linkend="dialogs.preferences.segmentation.setup"
 	endterm="dialogs.preferences.segmentation.setup.title"/>, the <link
 	linkend="dialog.preferences.spellchecker"
-	endterm="dialog.preferences.spellchecker.title"/>, the <link
+	endterm="dialog.preferences.spellchecker.title"/>, <link
 	linkend="dialog.preferences.languagetool.plugin"
 	endterm="dialog.preferences.languagetool.plugin.title"/>, etc.</para>
 	
-    <para>OmegaT automatically selects the tokenizers corresponding to the
+    <para>OmegaT automatically selects the tokenizers that correspond to the
     source and target languages but you can manually modify the
-    settings. Tokenizers are useful to provide better matches since they each
-    correspond to a specific language.</para>
+    settings. Tokenizers allow OmegaT to provide better matches.</para>
   </section>
 
   <section id="dialogs.project.properties.options">
@@ -47,14 +38,13 @@
 
     <variablelist>
       <varlistentry id="dialogs.project.properties.options.segmentation">
-        <term id="dialogs.project.properties.options.segmentation.title">Enable
-        Sentence-level Segmenting</term>
+        <term id="dialogs.project.properties.options.segmentation.title">Sentence-level Segmenting</term>
         <listitem>
 		  
           <para>Sentence-level segmentation splits the source file “paragraphs”
           into segments based on segmentation rules.</para>
 
-		  <para>Uncheck the box if you prefer not to segment the
+		  <para>Disable this option if you prefer not to further segment the
 		  paragraphs.</para>
 
 		  <para>By default, segmentation rules are global and apply to all
@@ -65,18 +55,18 @@
 		  endterm="menus.options.segmentation.title"/> in the <link
 		  linkend="menus.options" endterm="menus.options.title"/> menu.</para>
 		  
-		  <para>If you want this project to use project specific segmentation
-		  rules (local rules) and not global rules, click <guibutton><link
+		  <para>Click <guibutton><link
 		  linkend="dialogs.project.properties.segmentation"
-		  endterm="dialogs.project.properties.segmentation.title"/></guibutton>, on
-		  the right, or start OmegaT from the command line. See <link
-		  linkend="launch.with.command.line"
+		  endterm="dialogs.project.properties.segmentation.title"/></guibutton>
+		  if you want to use project specific segmentation rules (local
+		  rules) and not global rules, or start OmegaT from the command
+		  line. See <link linkend="launch.with.command.line"
 		  endterm="launch.with.command.line.title"/> for details.</para>
 
-		  <para>If you use local rules, you can still access the global rules, but
-		  modifying them will have no effect on your project.</para>
+		  <note><para>If you use local rules, you can still access the global rules, but
+		  modifying them will have no effect on your project.</para></note>
 		  
-		  <note><para>Changing the segmentation rules settings during a translation
+		  <para>Changing the segmentation rules settings during a translation
 		  does not modify the segments registered in the project translation
 		  memory.</para>
 		  
@@ -91,7 +81,7 @@
 		  reload the project for the new segmentation to take effect. This will
 		  split or merge some previously translated segments, which will therefore
 		  no longer be considered translated. Nonetheless, their original
-		  translation will still be in the project memory.</para></note>
+		  translation will still be in the project memory.</para>
 
 		  <para>See <link linkend="app.segmentation"
 		  endterm="app.segmentation.title"/> for general explanations about
@@ -102,33 +92,32 @@
 
       <varlistentry id="dialogs.project.properties.segmentation">
         <term
-			id="dialogs.project.properties.segmentation.title">Segmentation...</term>
+			id="dialogs.project.properties.segmentation.title">Local Segmentation Rules...</term>
         <listitem>
 		  <para>By default, segmentation rules are global and apply to all
 		  projects.</para>
 		  
-          <para>Segmentation rules found when you open Preferences – <link
+          <para>Segmentation rules found when you open the <link
           linkend="dialogs.preferences.segmentation.setup"
-          endterm="dialogs.preferences.segmentation.setup.title"/> (with <link
+          endterm="dialogs.preferences.segmentation.setup.title"/> preferences (with <link
           linkend="menus.options.segmentation"
           endterm="menus.options.segmentation.title"/> in the <link
           linkend="menus.options" endterm="menus.options.title"/> menu) are
           global rules.</para>
 
 		  <para>Use this button to create local rules specific to your
-		  project. Check the <guilabel>Make the segmentation rules project
-		  specific</guilabel> box, and adjust the segmentation rules as
-		  desired.</para>
+		  project. Check the <guilabel>Use local segmentation rules</guilabel>
+		  box, and adjust the segmentation rules as desired.</para>
 		  
-		  <para>The new set of rules will be stored in the <link
+		  <para>The project will store the new set of rules in the <link
 		  linkend="project.folder.omegat.segmentation"
-		  endterm="project.folder.omegat.segmentation.title"/> file of the <link
+		  endterm="project.folder.omegat.segmentation.title"/> file of its <link
 		  linkend="project.folder.omegat.folder"
-		  endterm="project.folder.omegat.folder.title"/> folder of the project
-		  and will supersede the global segmentation rules.</para>
+		  endterm="project.folder.omegat.folder.title"/> folder,
+		  and the rules will supersede the global segmentation rules.</para>
 		  
-		  <note><para>To disable local segmentation rules, uncheck the
-		  box or remove that file.</para></note>
+		  <para>To disable local segmentation rules, disable this option
+		  or remove that file.</para>
 
 		  <warning><para>If you use local rules, you can still access the global
 		  rules, but modifying them will have no effect on your
@@ -148,10 +137,10 @@
         of Translations</term>
 
         <listitem>
-          <para>If there are non-unique segments in the source documents,
-          checking this option will set the first translated segment as the
-          default translation and automatically use the same target text in the
-          remaining repeated segments.</para>
+          <para>If there are duplicated (non-unique) segments in the source
+          documents, checking this option will set the first translated segment
+          as the default translation and automatically use the same target text
+          in the remaining repeated segments.</para>
 
 		  <para>You can use <link
 		  linkend="menus.edit.create.alternative.translation"
@@ -159,8 +148,8 @@
 		  an alternative translation to segments that require a different
 		  translation.</para>
 
-		  <para>If not checked, all segments can be assigned a different
-		  translation.</para>
+		  <para>If you do not activate this option, all segments can be assigned a different
+		  translation, even if they are duplicated in the project.</para>
         </listitem>
       </varlistentry>
 
@@ -169,8 +158,12 @@
         Tags</term>
 
         <listitem>
-          <para>If checked, no formatting (inline) tags will be displayed in the
-          source segments. This is especially useful when dealing with texts
+          <para>Tags are generally useful to reproduce specific layouts or characteristics of the source text into the translated text.</para>
+
+		  <para>If you activate this function, no tag will be displayed in the
+          source segments.</para>
+		  
+		<para>This is especially useful when dealing with texts
           where inline formatting is not particularly useful (e.g., OCRed PDF,
           or poorly converted .odt or .docx files.)</para>
 
@@ -198,12 +191,12 @@
           used.</para>
 
 		  <para>By default, post-processing commands are global and are
-		  available to all projects. They are defined in Preferences – <link
+		  available to all projects. They are defined in <link
 		  linkend="dialogs.preferences.saving.and.output.external.post-processing.command"
 		  endterm="dialogs.preferences.saving.and.output.external.post-processing.command.title"/>.</para>
 		  
-		  <note><para>For security purposes, project-based external commands are
-		  disabled by default. You can enable them by checking Preferences – <link
+		  <note><para>For security purposes, project-based local external commands are
+		  disabled by default. You can enable them by checking <link
 		  linkend="dialogs.preferences.saving.and.output.also.allow.per.project.external.commands"
 		  endterm="dialogs.preferences.saving.and.output.also.allow.per.project.external.commands.title"/>
 		  in the <link linkend="dialogs.preferences.saving.and.output"
@@ -218,24 +211,22 @@
         Filters...</term>
         <listitem>
           <para>By default, file filter settings are global and are shared by
-          all projects. They are found in Preferences – <link
+          all projects. They are found in <link
           linkend="dialogs.preferences.file.filters.title"
           endterm="dialogs.preferences.file.filters.title"/>.</para>
 
 		  <para>Use this button to create local file filters specific to your
-		  project. Check the <guilabel>Make the file filter settings project
-		  specific</guilabel> box, and adjust the settings as desired.</para>
-		  
-		  <para>The new set of filters will be stored in the <link
+		  project. Check the <guilabel>Use local file filters
+		  settings</guilabel> box, and adjust the settings as desired.</para>
+
+		  <para>The project will store the new set of file filters in the <link
 		  linkend="project.folder.omegat.filters"
-		  endterm="project.folder.omegat.filters.title"/> file of the <link
-		  linkend="project.folder.omegat.folder"
-		  endterm="project.folder.omegat.folder.title"/> folder of the project
-		  and will supersede the general set of file filters.</para>
+		  endterm="project.folder.omegat.filters.title"/> file of its omegat folder, and the settings will supersede the global file filter settings.</para>
+
 		  <note><para>To disable project specific file filters, uncheck the
 		  box or remove that file.</para></note>
 		  
-		  <para>See Preferences – <link linkend="dialogs.preferences.file.filters"
+		  <para>See <link linkend="dialogs.preferences.file.filters"
 		  endterm="dialogs.preferences.file.filters.title"/> for details.</para>
         </listitem>
       </varlistentry>
@@ -256,32 +247,32 @@
       </varlistentry>
 
       <varlistentry id="dialogs.project.properties.external.searches">
-        <term id="dialogs.project.properties.external.searches.title">External
+        <term id="dialogs.project.properties.external.searches.title">Local External
         Search...</term>
 
         <listitem>
-          <para>By default, external searches are global and are available by to all
-          projects. They are defined in Preferences – <link
+          <para>By default, external searches are global and are shared by all
+          projects. They are defined in <link
           linkend="dialogs.preferences.external.searches"
           endterm="dialogs.preferences.external.searches.title"/>.</para>
 
 		  <para>Use this button to create local external searches specific to your
 		  project and adjust the settings as desired.</para>
 
-		  <para>The new set of searches will be stored in the <link
+		  <para>The project will store the new set of external searches in the <link
 		  linkend="project.folder.omegat.finder"
-		  endterm="project.folder.omegat.finder.title"/> file of the <link
+		  endterm="project.folder.omegat.finder.title"/> file of its <link
 		  linkend="project.folder.omegat.folder"
-		  endterm="project.folder.omegat.folder.title"/> folder of the project
-		  and will supersede the general set of searches.</para>
-		  <note><para>To delete project specific external searches, click
-		  <guibutton>Remove</guibutton> or remove that file.</para></note>
+		  endterm="project.folder.omegat.folder.title"/> folder, and the settings will supersede the global external searches settings.</para>
+
+		  <para>To delete project specific external searches, click
+		  <guibutton>Remove</guibutton> or remove that file.</para>
 		  
-		  <para>See Preferences – <link linkend="dialogs.preferences.external.searches"
+		  <para>See <link linkend="dialogs.preferences.external.searches"
 		  endterm="dialogs.preferences.external.searches.title"/> for
 		  details.</para>
 
-		  <note><para>For security purposes, project-based external searches are
+		  <note><para>For security purposes, local project-based external searches are
 		  disabled by default. You can enable them by checking Preferences – <link
 		  linkend="dialogs.preferences.external.search.enable.project.specific.commands"
 		  endterm="dialogs.preferences.external.search.enable.project.specific.commands.title"/>
@@ -302,7 +293,9 @@
 
 	<para>When a new project is created, OmegaT proposes to create a project
 	folder that contains all the resources used in the translation, but that
-	structure is not compulsory. Resource folders can be located anywhere on
+	structure is not compulsory.</para>
+
+	<para>Resource folders can be located anywhere on
 	your machine, including on shared disks. See <link
 	linkend="project.folder" endterm="project.folder.title"/> for
 	details.</para>
@@ -333,17 +326,14 @@
 		<term
 		id="dialogs.project.properties.file.locations.source.files.title">Source
 		Files Folder</term>
-		<listitem><para>OmegaT will consider that this folder contains the files
-		that you want to translate. It will try to read all the files at once,
+		<listitem><para>This folder contains the files
+		that you want to translate. OmegaT will try to read all the files at once,
 		and will display in the editor the translatable contents that it has
 		found. See <link linkend="project.folder.source"
 		endterm="project.folder.source.title"/> for details.</para>
 		<para>If the folder is empty, if none of the files contain translatable
 		contents, or if there are no files supported by OmegaT’s file filters,
-		OmegaT will tell you that the folder is empty. See Preferences – <link
-		linkend="dialogs.preferences.file.filters"
-		endterm="dialogs.preferences.file.filters.title"/> for
-		details.</para></listitem>
+		OmegaT will tell you that the folder is empty.</para></listitem>
 	  </varlistentry>
 	  
 	  <varlistentry id="dialogs.project.properties.file.locations.exclusions">
@@ -371,9 +361,10 @@
 			</listitem>
 		  </itemizedlist>
 
-		  <para>The Exclusion patterns dialog, allows you to add or remove a pattern,
-		  or to edit one by double-clicking it, or selecting it and pressing F2. You
-		  can use wildcards that follow the <ulink
+		  <para>The Exclusion patterns dialog allows you to add or remove a
+		  pattern or to edit one by double-clicking it, or selecting it and
+		  pressing <keycap>F2</keycap>. You can use wildcards that follow the
+		  <ulink
 		  url="https://ant.apache.org/manual/dirtasks.html#patterns">Apache ant
 		  syntax</ulink>.</para>
 		</listitem>
@@ -383,22 +374,22 @@
 		<term
 		id="dialogs.project.properties.file.locations.translation.memories.title">Translation
 		Memories Folder</term>
-		<listitem><para>OmegaT will consider that this folder contains the files
-		that you want to use as reference translation memories. It will try to
+		<listitem><para>This folder contains the files
+		that you want to use as reference translation memories. OmegaT will try to
 		read all the files at once, and will match their contents to the segment
 		you are translating. See <link linkend="project.folder.tm"
 		endterm="project.folder.tm.title"/> for details.</para>
 		<para>If matches are found, they will be displayed in the <link
 		linkend="panes.fuzzy.matches"
-		endterm="panes.fuzzy.matches.title"/>.</para></listitem>
+		endterm="panes.fuzzy.matches.title"/> pane.</para></listitem>
 	  </varlistentry>
 	  
 	  <varlistentry id="dialogs.project.properties.file.locations.glossaries">
 		<term
 		id="dialogs.project.properties.file.locations.glossaries.title">Glossaries
 		Folder</term>
-		<listitem><para>OmegaT will consider that this folder contains the files
-		that you want to use as reference glossaries. It will try to read all
+		<listitem><para>This folder contains the files
+		that you want to use as reference glossaries. OmegaT will try to read all
 		the files at once, and will match their contents to the segment you are
 		translating. See <link linkend="project.folder.glossary"
 		endterm="project.folder.glossary.title"/> for details.</para>
@@ -416,7 +407,7 @@
 		<link linkend="menus.edit.create.glossary.entry"
 		endterm="menus.edit.create.glossary.entry.title"/> to add a term.</para>
 		<para>Added items are automatically recognized and displayed if they
-		match terms in the current segment. See Preferences – <link
+		match terms in the current segment. See <link
 		linkend="dialogs.preferences.glossary"
 		endterm="dialogs.preferences.glossary.title"/> for
 		details.</para></listitem>
@@ -426,8 +417,8 @@
 		<term
 		id="dialogs.project.properties.file.locations.dictionaries.title">Dictionaries
 		Folder</term>
-		<listitem><para>OmegaT will consider that this folder contains the files
-		that you want to use as reference dictionaries. It will try to read all
+		<listitem><para>This folder contains the files
+		that you want to use as reference dictionaries. OmegaT will try to read all
 		the files at once, and will match their contents to the segment you are
 		translating. See <link linkend="project.folder.dictionary"
 		endterm="project.folder.dictionary.title"/> for details.</para>
@@ -442,8 +433,8 @@
 		Files Folder</term>
 		<listitem><para>This folder is the place where OmegaT will copy the
 		contents of the <link
-		linkend="dialogs.project.properties.file.locations.source.files"
-		endterm="dialogs.project.properties.file.locations.source.files.title"/>
+		linkend="project.folder.source"
+		endterm="project.folder.source.title"/>
 		folder where all the translated segments will be replaced by their
 		translation and the non-translated segments will be kept in the original
 		language.</para>
@@ -465,7 +456,7 @@
 		<listitem><para>This folder is the place where OmegaT will copy the
 		current state of the translation in the form of TMX files.</para>
 		<para>The TMX files will contain only the segments that have been
-		translated at the moment the translated files have been created with
+		translated with
 		<link linkend="menus.project.create.translated.documents"
 		endterm="menus.project.create.translated.documents.title"/> or <link
 		linkend="menus.project.create.current.translated.document"

@@ -4,7 +4,7 @@
 [<!ENTITY % manualvariables SYSTEM "manualvariables.mod"> %manualvariables;]>
 
 <chapter id="dialogs.preferences">
-  <title id="dialogs.preferences.title">General Preferences</title>
+  <title id="dialogs.preferences.title">Preferences</title>
 
   <para>This dialog is accessible by selecting <link
   endterm="menus.options.preferences.title"
@@ -1359,7 +1359,7 @@
 </section>
 
 <section id="dialogs.preferences.external.searches">
-  <title id="dialogs.preferences.external.searches.title">External
+  <title id="dialogs.preferences.external.searches.title">Global External
   Search</title>
   <para>External searches are either web searches or local commands that
   take the string selected in the Editor as a parameter. The web searches
@@ -1368,8 +1368,7 @@
   <variablelist>
 	<varlistentry id="dialogs.preferences.external.search.enable.project.specific.commands">
 	  <term
-		  id="dialogs.preferences.external.search.enable.project.specific.commands.title">Enable
-	  project-specific commands</term>
+		  id="dialogs.preferences.external.search.enable.project.specific.commands.title">Allow local external search commands</term>
 
 	  <listitem>
 		<para>By default, OmegaT does not execute commands specified in the
@@ -2073,8 +2072,7 @@
 
 	<varlistentry id="dialogs.preferences.saving.and.output.also.allow.per.project.external.commands">
 	  <term
-		  id="dialogs.preferences.saving.and.output.also.allow.per.project.external.commands.title">Also
-	  allow per-project external commands</term>
+		  id="dialogs.preferences.saving.and.output.also.allow.per.project.external.commands.title">Allow local post-processing commands</term>
 
 	  <listitem>
 		<para>By default, OmegaT does not execute commands specified in the

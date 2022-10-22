@@ -17,7 +17,7 @@
     <varlistentry id="menus.options.mt">
       <term id="menus.options.mt.title">Machine Translate</term>
       <listitem>
-        <para>Select Preferences – <link linkend="dialogs.preferences.mt.automatically.fetch.trasnlations"
+        <para>Select <link linkend="dialogs.preferences.mt.automatically.fetch.trasnlations"
         endterm="dialogs.preferences.mt.automatically.fetch.trasnlations.title"/> to activate it.</para>
 		<para>Allows you to activate/deactivate the available machine
 		translation engines.</para>
@@ -30,14 +30,14 @@
     <varlistentry id="menus.options.glossary">
       <term id="menus.options.glossary.title">Glossary</term>
       <listitem>
-        <para>Select Preferences – <link linkend="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries" endterm="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries.title"/> to activate it.</para>
+        <para>Select <link linkend="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries" endterm="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries.title"/> to activate it.</para>
       </listitem>
     </varlistentry>
 
     <varlistentry id="menus.options.dictionary">
       <term id="menus.options.dictionary.title">Dictionary</term>
       <listitem>
-        <para>Select Preferences – <link linkend="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries" endterm="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries.title"/> to activate it.</para>
+        <para>Select <link linkend="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries" endterm="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries.title"/> to activate it.</para>
       </listitem>
     </varlistentry>
 
@@ -50,7 +50,7 @@
     </varlistentry>
 
     <varlistentry id="menus.options.file.filters">
-      <term id="menus.options.file.filters.title">File Filters...</term>
+      <term id="menus.options.file.filters.title">Global File Filters...</term>
       <listitem>
         <para>Opens the <link linkend="dialogs.preferences.file.filters"
         endterm="dialogs.preferences.file.filters.title"/> global preference
@@ -62,7 +62,7 @@
     </varlistentry>
 
     <varlistentry id="menus.options.segmentation">
-      <term id="menus.options.segmentation.title">Segmentation...</term>
+      <term id="menus.options.segmentation.title">Global Segmentation Rules...</term>
       <listitem>
         <para>Opens the <link linkend="dialogs.preferences.segmentation.setup"
         endterm="dialogs.preferences.segmentation.setup.title"/> global

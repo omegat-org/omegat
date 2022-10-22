@@ -857,8 +857,8 @@
     from the simple to the complex.</para>
       
     <note>
-      <para>Remember that all alphabetic characters preceded by a
-      <literal>\</literal> turn into an expression that represents
+      <para>Remember that most <emphasis>alphabetic</emphasis> characters
+      preceded by a <literal>\</literal> turn into an expression that represents
       <emphasis>not the character itself, but its associated special
       meaning</emphasis>.</para>
     </note>

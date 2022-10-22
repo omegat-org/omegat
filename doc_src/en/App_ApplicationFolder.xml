@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="application.folder">
+  <title id="application.folder.title">Application Folder</title>
+
+  <para>The application folder contains the <filename>OmegaT.jar</filename> application and a number of other important files.</para>
+  <note><para>The application folder location depends on your platform and on the way you have installed OmegaT. The recommended or default locations are the following:
+
+  <variablelist>
+	<varlistentry>
+	  <term>Windows</term>
+	  <listitem><para><filename>C:\Program Files\OmegaT\</filename></para></listitem>
+	</varlistentry>
+	
+	<varlistentry>
+	  <term>Linux</term>
+	  <listitem><para><filename>/opt/omegat/</filename></para></listitem>
+	</varlistentry>
+	
+	<varlistentry>
+	  <term>macOS</term>
+	  <listitem><para><filename>/Applications/OmegaT.app/Contents/Java/</filename></para></listitem>
+	</varlistentry>
+	
+	<varlistentry>
+	  <term>other platforms</term>
+	  <listitem><para><filename>/opt/omegat/</filename></para></listitem>
+	</varlistentry>
+  </variablelist></para></note>
+  
+  <variablelist>
+	<varlistentry id="application.folder.omegat.license">
+	  <term id="application.folder.omegat.license.title">OmegaT-license.txt</term>
+	  <listitem>
+		<para>OmegaT's distribution license. The GPL version 3.</para>
+	  </listitem>
+	</varlistentry>
+
+	<varlistentry id="application.folder.omegat.jar">
+	  <term id="application.folder.omegat.jar.title">OmegaT.jar</term>
+	  <listitem>
+		<para>OmegaT's executable. Used when launching OmegaT from the command line. See <link linkend="launch.with.command.line" endterm="launch.with.command.line.title"/> for details.</para>
+	  </listitem>
+	</varlistentry>
+
+	<varlistentry id="application.folder.changes">
+	  <term id="application.folder.changes.title">changes.txt</term>
+	  <listitem>
+		<para>The list of improvements and bug fixes. Check it if you need information on OmegaT's evolution.</para>
+	  </listitem>
+	</varlistentry>
+
+	<varlistentry id="application.folder.doc.license">
+	  <term id="application.folder.doc.license.title">doc-license.txt</term>
+	  <listitem>
+		<para>The documentation distribution license. The GPL version 3.</para>
+	  </listitem>
+	</varlistentry>
+
+	<varlistentry id="application.folder.index.html">
+	  <term id="application.folder.index.html.title">index.html</term>
+	  <listitem>
+		<para>The index to the multilingual user guide.</para>
+	  </listitem>
+	</varlistentry>
+
+	<varlistentry id="application.folder.join.html">
+	  <term id="application.folder.join.html.title">join.html</term>
+	  <listitem>
+		<para>A link to the support page.</para>
+	  </listitem>
+	</varlistentry>
+
+	<varlistentry id="application.folder.readme.txt">
+	  <term id="application.folder.readme.txt.title">readme.txt</term>
+	  <listitem>
+		<para>Simple installation and running instructions.</para>
+	  </listitem>
+	</varlistentry>
+
+
+	<varlistentry id="application.folder.docs">
+	  <term id="application.folder.docs.title">docs/</term>
+	  <listitem>
+		<para>The documentation folder.
+		  <variablelist>
+
+			<varlistentry id="application.folder.docs.contributors">
+			  <term id="application.folder.docs.contributors.title">contributors.txt</term>
+			  <listitem>
+				<para>The list of individual contributors.</para>
+			  </listitem>
+			</varlistentry>
+
+			<varlistentry id="application.folder.docs.en">
+			  <term id="application.folder.docs.en.title">en/</term>
+			  <listitem>
+				<para>Each translated user guide comes in a different language
+				folder.</para>
+			  </listitem>
+			</varlistentry>
+
+			<varlistentry id="application.folder.docs.index.html">
+			  <term id="application.folder.docs.index.html.title">index.html</term>
+			  <listitem>
+				<para>The index to the multilingual user guide.</para>
+			  </listitem>
+			</varlistentry>
+
+			<varlistentry id="application.folder.docs.librairies.txt">
+			  <term id="application.folder.docs.librairies.txt.title">libraries.txt</term>
+			  <listitem>
+				<para>The list of libraries used by OmegaT.</para>
+			  </listitem>
+			</varlistentry>
+		  </variablelist>
+		</para>
+	  </listitem>
+	</varlistentry>
+
+
+	<varlistentry id="application.folder.images">
+	  <term id="application.folder.images.title">images/</term>
+	  <listitem>
+		<para>The folder where images used by OmegaT are stored.</para>
+	  </listitem>
+	</varlistentry>
+
+	<varlistentry id="application.folder.lib">
+	  <term id="application.folder.lib.title">lib/</term>
+	  <listitem>
+		<para>The folder where the libraries used by OmegaT are stored.</para>
+	  </listitem>
+	</varlistentry>
+
+	<varlistentry id="application.folder.plugins">
+	  <term id="application.folder.plugins.title">plugins/</term>
+	  <listitem>
+		<para>The folder where you can install external plugins. See Preferences – <link linkend="dialogs.preferences.plugins" endterm="dialogs.preferences.plugins.title"/> for details.</para>
+	  </listitem>
+	</varlistentry>
+
+	<varlistentry id="application.folder.scripts">
+	  <term id="application.folder.scripts.title">scripts/</term>
+	  <listitem>
+		<para>The folder where distributed scripts are located. See <link linkend="windows.scripts" endterm="windows.scripts.title"/> for details.</para>
+	  </listitem>
+	</varlistentry>
+  </variablelist>
+</section>

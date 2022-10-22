@@ -2,7 +2,12 @@
 <!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
 <chapter id="menus">
-  <title>Menus</title>
+  <title id="menus.title">Menus</title>
+  <para>Menus are where you access most of OmegaT's functions. Most of the menu items are associated with a keyboard shortcut.</para>
+  <para>Menu items that do not have a shortcut indicated next to them have no default shortcut assigned by default. See <link linkend="app.shortcuts.customization" endterm="app.shortcuts.customization.title"/> if you want to modify or add shortcuts.</para>
+
+  <note><para>Key shortcut description reminder: <link
+  linkend="app.shortcuts" endterm="shortcut.description"/></para></note>
 
   <xi:include href="Menus_Project.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>

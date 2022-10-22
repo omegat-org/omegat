@@ -1,52 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="windows.projectfiles">
-  <title>Project Files</title>
+<section id="windows.project.files">
+  <title id="windows.project.files.title">Project Files</title>
 
   <para>This window is displayed automatically when OmegaT loads a project,
-  and at any time by pressing <menuchoice>
-      <guimenuitem>Project</guimenuitem>
+  and at any time by using <link linkend="menus.project.project.files" endterm="menus.project.project.files.title"/>.</para>
 
-      <guimenuitem>Project Files...</guimenuitem>
-    </menuchoice>.</para>
-
-  <para><remark>Note:</remark> it is possible to inhibit the window displaying
+  <note><para>It is possible to inhibit the window displaying
   at opening, by setting <emphasis>project_files_show_on_load</emphasis> to
-  <emphasis>false</emphasis> in <filename>omegat.prefs</filename> file
-  (accessible by <menuchoice>
-      <guimenu>Options</guimenu>
+  <emphasis>false</emphasis> in the <link linkend="configuration.folder.default.contents.omegat.prefs" endterm="configuration.folder.default.contents.omegat.prefs.title"/> configuration file. See <link linkend="configuration.folder" endterm="configuration.folder.title"/> for detail.</para></note>
 
-      <guimenuitem>Access Configuration Folder</guimenuitem>
-    </menuchoice> menu).</para>
-
-  <para>Use <keycombo><keycap>Ctrl</keycap><keycap>L</keycap></keycombo> to open and <keycap>Esc</keycap>
-  to close it. The <guilabel>Project Files</guilabel> Window displays the
-  following information:</para>
+  <para>The window displays the following information:</para>
 
   <itemizedlist>
     <listitem>
-      <para>the total number of translatable files in the project. These are
-      the files present in the <filename class="directory">source</filename> folder in a format that OmegaT is able
-      to recognize. This number is displayed in brackets, next to the &quot;Project
-      file&quot; title</para>
+      <para>the total number of translatable files in the project. These are the
+      files present in the <link linkend="project.folder.source"
+      endterm="project.folder.source.title"/> folder in a format that OmegaT is
+      able to recognize. This number is displayed in brackets, next to the
+      window name.</para>
     </listitem>
 
     <listitem>
       <para>the list of all translatable files in the project. Clicking on any
       file will open it for translation.</para>
 
-      <para>Typing any text will open a <guilabel>Filter</guilabel> field
-      where parts of filenames can be entered. You can select a file with
-      <keycap>Up</keycap> and <keycap>Down</keycap> keys, and open it for
-      translation by pressing <keycap>Enter</keycap></para>
+      <para>Typing any text will open a <guilabel>Filter</guilabel> field at the
+      bottom of the window where parts of filenames can be entered. You can use
+      arrows to select a file, and open it for translation by pressing
+      <keycap>Enter</keycap>.</para>
 
-      <para>Note: filenames (in first column) can be sorted alphabetically by
-      clicking in the header. It also possible to change the position of a
-      filename, by clicking on it and pressing <guibutton>Move ...</guibutton>
-      buttons.</para>
+      <note><para>Filenames (in the first column) can be sorted alphabetically by
+      clicking in the header. It is also possible to change the position of a
+      filename, by clicking on it and pressing the <guibutton>Move ...</guibutton>
+      button on the right.</para></note>
 
-      <para>Right-clicking on a filename opens a popup that allows to open the
+      <para>Right-clicking on a filename opens a popup that allows opening the
       source file and (if it exists) the target file.</para>
     </listitem>
 
@@ -56,36 +46,42 @@
     </listitem>
 
     <listitem>
-      <para>the total number of segments, the number of unique segments in the
+      <para>The total number of segments, the number of unique segments in the
       whole project, and the number of unique segments already translated are
-      shown at the bottom</para>
+      shown at the bottom.</para>
     </listitem>
   </itemizedlist>
 
-  <para>The set of <emphasis role="bold">Unique</emphasis> segments is
-  computed by taking all the segments and removing all duplicate segments.
-  (The definition of “unique” is case-sensitive: &quot;Run&quot; and &quot;run&quot; are treated
-  as being different)</para>
+  <para>The set of <emphasis role="bold">Unique</emphasis> segments is computed
+  by taking all the segments and removing all duplicate segments.</para>
 
-  <para>The difference between &quot;Number of segments&quot; and &quot;Number of unique
-  segments&quot; provides an approximate idea of the number of repetitions in the
-  text. Note however that the numbers do not indicate how relevant the
-  repetitions are: they could mean relatively long sentences repeated a number
-  of times (in which case you are fortunate) or it could describe a table of
-  keywords (not so fortunate). The <filename>project_stats.txt</filename>
-  located in the <filename class="directory">omegat</filename> folder of your project contains more detailed segment
-  information, broken down by file.</para>
+  <para>The difference between &quot;Number of segments&quot; and &quot;Number
+  of unique segments&quot; provides an approximate idea of the number of
+  repetitions in the text. The <link linkend="menus.tools.statistics"
+  endterm="menus.tools.statistics.title"/> item in the <link linkend="menus.tools"
+  endterm="menus.tools.title"/> menu will give you more information.</para>
 
   <para>Modifying the segmentation rules may have the effect of modifying the
-  number of segments/unique segments. This, however, should generally be
-  avoided once you have started translating the project. See the chapter
-  <emphasis>Segmentation rules</emphasis> for more information.</para>
+  number of segments/unique segments. This, however, should generally be avoided
+  once you have started translating the project. See <link
+  linkend="app.segmentation" endterm="app.segmentation.title"/> for
+  details.</para>
 
-  <para><emphasis role="bold">Adding files to the project:</emphasis> You can
-  add source files to the project by clicking on the <guimenuitem>Import
-  Source Files...</guimenuitem> button. This copies the selected files to the
-  <filename class="directory">source</filename> folder and reloads the project to import the new
-  files. You can also add source files from Internet pages, written in
-  MediaWiki, by clicking on <guimenuitem>Import from MediaWiki</guimenuitem>
-  button and providing the corresponding URL.</para>
+  <para>The buttons at the bottom can be used to add files to your project:
+  <variablelist>
+	<varlistentry id="windows.project.files.copy.files"><term
+	id="windows.project.files.copy.files.title">Copy Files to Source
+	Folder...</term>
+	<listitem><para>Copies the selected files to the <link
+  linkend="project.folder.source.title" endterm="project.folder.source.title"/>
+  folder and reloads the project to take the new files into account.</para></listitem>
+	</varlistentry>
+	<varlistentry id="windows.project.files.download.page"><term
+	id="windows.project.files.download.page.title">Download Mediawiki
+	Page...</term>
+	<listitem><para>Asks for the page URL and downloads it into the <link
+  linkend="project.folder.source.title" endterm="project.folder.source.title"/> folder.</para></listitem>
+	</varlistentry>
+  </variablelist>
+  </para>
 </section>

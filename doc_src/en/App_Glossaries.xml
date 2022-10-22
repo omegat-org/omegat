@@ -4,10 +4,10 @@
 <section id="app.glossaries">
   <title id="app.glossaries.title">Glossaries</title>
 
-  <para>Glossaries are terminology files that are stored in the <link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/> folder.</para>
+  <para>Glossaries are terminology files stored in the <link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/> folder.</para>
 
   <para>All terms in a segment with a match in <emphasis>any</emphasis> of
-  the glossaries  will be displayed in the <link
+  the glossaries will be displayed in the <link
   linkend="panes.glossary" endterm="panes.glossary.title"/> pane.</para>
 
   <para>Source terms can be multi-word expressions.</para>
@@ -62,7 +62,7 @@
 </para>
 
 <note>
-  <para>Modifications made to any glossary, are immediately recognized by OmegaT displayed in the <link
+  <para>Modifications made to any glossary are immediately recognized by OmegaT displayed in the <link
   linkend="panes.glossary" endterm="panes.glossary.title"/> pane.</para>
 </note>
 

@@ -1,21 +1,49 @@
+/* reset some of the wh styesheet */
+
+* {
+}
+
+
+/* default color as variables */
 :root {
---intro-color:#715C91;
---panes-color:#E3D6B4;
---menus-color:#74B7A7;
---windows-color:#D5B089;
---project-color:#916B8B;
---config-color:#BB7B73;
---prefs-color:#BA6C76;
---howto-color:#DFB68C;
---appendices-color:#54476B;
---support-border:solid 10px;
+	--main-color:#77A43B;
+	--insert-background:#F5F5F5; /* note, warning */
+	--link-color:#DE5B17;
+	--hover-color:#AB5421;
+	--normal-font:#3F3F3F;
+	--normal-background:#FDFDFD;
+	--accent-line:#BCBCBC;
+	--warning-header:#ff5555;
+	--caps-border:#408000;
+	
+	--intro-color:#77A43B;
+	--panes-color:#DE5B17;
+	--menus-color:#179ADE;
+	--windows-color:#DEBF17;
+	--project-color:#DE1737;
+	--config-color:#B35A00;
+	--prefs-color:#0059B3;
+	--howto-color:#B300B3;
+	--appendices-color:#00B3B3;
+	--support-border:solid 6px;
+}
+
+/*
+#EBEBEB
+#DE5B17
+#AB5421
+#2F3A2F
+*/
+
+h1, h2, h3, h4, dt {
+    color: var(--main-color);
 }
 
 #wh-navigation {
 	margin-right:3em;
 }
 #wh-toc a.wh-toc-selected {
-	color:black !important;
+	color:var(--normal-font) !important;
 	border-bottom-width:0px !important;
 	font-weight:bold;
 	font-size: 1.1em;
@@ -23,10 +51,10 @@
 
 #wh-content {
     font-family: sans-serif;
-/*    font-size: 10pt; */
-    background-color: #FDFDFD;
+	/*    font-size: 10pt; */
+    background-color: var(--normal-background);
     line-height: 1.5;
-    color:#212925;
+    color:var(--normal-font);
     text-align:left;
     clip-path: padding-box;
 }
@@ -53,34 +81,31 @@
 
 
 @media screen and (max-width: 640px) {
-.chapter,
-.appendix {
-    margin-left:1em;
-    margin-right:2em;
-    padding-bottom: 5em;
-}
+	.chapter,
+	.appendix {
+		margin-left:1em;
+		margin-right:2em;
+		padding-bottom: 5em;
+	}
 }
 
 @media screen and (min-width: 641px) and (max-width: 1072px) {
-.chapter,
-.appendix {
-    margin-left:1em;
-    margin-right:3em;
-    padding-bottom: 5em;
-}
+	.chapter,
+	.appendix {
+		margin-left:1em;
+		margin-right:3em;
+		padding-bottom: 5em;
+	}
 }
 
-h1, h2, h3, h4, dt {
-    color: #006c6c;
-}
 
 h1 {
     /*
     position:fixed;
     margin-top: 150px;
     width:100%;
-    background-color:#FDFDFD;
-    */
+    background-color:var(--normal-background);
+   */
 
     line-height: 1.13;
     margin-top : 0;
@@ -93,12 +118,12 @@ h1 {
 
 
 @media screen and (max-width: 640px) {
-h1 {
-    padding-left:1em;
-    margin-left:-1em;
-    margin-right:-1rem;
+	h1 {
+		padding-left:1em;
+		margin-left:-1em;
+		margin-right:-1rem;
 
-}
+	}
 }
 
 
@@ -107,7 +132,7 @@ h2 {
     line-height: 1.2;
     margin: 0.8em 0;
     padding-top: 1em;
-    border-bottom: 1px solid lightgray;
+    border-bottom: 1px solid var(--accent-line);
 }
 
 h3 {
@@ -139,7 +164,7 @@ h6:first-child {
 
 /*
 code, .code {
-    color: black;;
+    color: var(--normal-font);;
     background: #ffffcc;
     border-style: solid;
     border-width: 1px;
@@ -161,7 +186,7 @@ hr {
 hr {
     height: 1px;
     border-style: none;
-    background-color: #D0D0D0;
+    background-color: var(--accent-line);
 }
 
 blockquote {
@@ -169,14 +194,13 @@ blockquote {
 }
 
 code.filename {
-    font-weight:bold;
-    font-size:1.3em;
+	color:var(--main-color);
 }
 
 .programlisting,
 .literallayout {
-    border: 1px solid teal ;
-    background: #F0F0F0;
+    border: 1px solid var(--accent-line) ;
+    background: var(--insert-background);
     padding: 1em;
     font-weight: bold;
     border-radius: 5px;
@@ -193,19 +217,18 @@ samp,
 var,
 pre {
     font-family: monospace;
-/*    font-size: 1.1em;
-    line-height: 1.63; */
+    font-size: 1.3em;
 }
 
 kbd {
     font-weight: bold;
-    border: 1px solid #808080;
+    border: 1px solid var(--hearder-bottom);
     border-radius: 3px;
     padding: 0.125em 0.25em;
 }
 
 samp {
-    background-color: #F0F0F0;
+    background-color: var(--insert-background);
     padding: 0.125em 0.25em;
 }
 
@@ -224,13 +247,13 @@ cite {
 
 dfn {
     font-style: italic;
-    border-bottom: 1px dotted #808080;
+    border-bottom: 1px dotted var(--hearder-bottom);
 }
 
 pre {
-    white-space: pre;
-    background-color: #F0F0F0;
-    border: 1px dotted #D0D0D0;
+    var(--normal-background)-space: pre;
+    background-color: var(--insert-background);
+    border: 1px dotted var(--hearder-bottom);
     padding: 0.5em;
     margin: 1.1em 0; /* 1/0.917 */
 }
@@ -314,11 +337,11 @@ dd {
 }
 
 .note {
-/*    font-size: small; */
+	/*    font-size: small; */
 	font-size: 0.9em;
-    color: black;
-    background-color: white;
-    border: 1px solid #808080;
+    color: var(--normal-font);
+    background-color:var(--insert-background);
+    border: 1px solid var(--accent-line);
     border-radius:5px;
     margin-bottom:1em;
     padding:0 1em;
@@ -330,11 +353,11 @@ dd {
 }
 
 .warning {
-/*    font-size: small; */
+	/*    font-size: small; */
 	font-size: 0.9em;
-    color: black;
-    background: white;
-    border: .1px solid #808080;
+    color: var(--normal-font);
+    background: var(--insert-background);
+    border: .1px solid var(--accent-line);
     border-radius:5px;
     margin:2em 0;
     padding:0 1em;
@@ -344,7 +367,7 @@ dd {
 .warning h3 {
     display:inline-block;
     margin:.5em 0 0 0;
-    color:#ff5555;
+    color:var(--warning-header);
 }
 
 
@@ -353,54 +376,68 @@ dd {
 
 
 a {
-	text-decoration:none;
+	color: var(--link-color);
+	text-decoration-color: var(--link-color);
+	text-decoration-line: underline;
+	text-decoration-style: dotted;
 }
 
+a:hover {
+	color:var(--hover-color);
+	text-decoration-color: var(--hover-color);
+	text-decoration-line: underline;
+	text-decoration-style: dotted;
+}
+
+a:visited {
+}
 a.ulink::after {
 	content: " ↗️";
 }
 
-a:link {
-	text-decoration-line: underline;
-	text-decoration-color: teal;
-	text-decoration-style: dotted;
-	color: teal;
-}
 
 .toc a:link {
 	text-decoration:none;
 }
 
-a:visited{
-    color:slategrey;
-}
 
 a.ulink:link {
-    color:steelblue;
+    color:var(--caps-border);
+	text-decoration-color: var(--caps-border);	
 }
 
 a.ulink:visited {
-    color:midnightblue;
+    color:var(--caps-border);
+	text-decoration-color: var(--caps-border);	
 }
 
 /* tables */
 
 .table-title {
     font-style:italic;
-    color: teal;
+    color: var(--main-color);
     font-size : .9em;
     margin-bottom: .75em;
 }
 
+
 td,th {
     padding: .5em 1em;
+}
+
+.table[id*="app.shortcuts.lists.function.codes"] .table-contents {
+	font-size:0.6em;
+}
+
+.table[id*="app.shortcuts.lists.function.codes"] table {
+	width:100%;
 }
 
 /* figures */
 
 .figure-title {
     font-style:italic;
-    color: teal;
+    color: var(--main-color);
     font-size : .9em;
     margin-bottom: .75em;
 }
@@ -415,7 +452,7 @@ td,th {
 
 .example-title {
     font-style:italic;
-    color: teal;
+    color: var(--main-color);
     font-size : .9em;
     margin-bottom: .75em;
 }
@@ -437,7 +474,7 @@ pre.programlisting em.parameter {
 pre.programlisting {
     overflow-x : auto;
     text-align:left;
-/*    padding: 1.2em 0.5em 0 1.5em; */
+	/*    padding: 1.2em 0.5em 0 1.5em; */
 }
 
 a[href^="appendix"], a[href^="how.to"] {
@@ -451,17 +488,17 @@ span.guimenu, span.guimenuitem, span.guilabel {
     font-size: 1.2 em;
     padding: 0 .3rem;
     margin: 0 .2rem;
-    color: black;
+    color: var(--normal-font);
 }
 
 span.guibutton {
     font-family:monospace;
-    border: .1px solid black;
+    border: .1px solid var(--normal-font);
     border-radius:4px;
     padding: 0 .3rem;
     margin: 0 .2rem;
-    background: whitesmoke;
-    color: black;
+    background: var(--insert-background);
+    color: var(--normal-font);
 }
 
 /* keycaps */
@@ -471,11 +508,11 @@ td>span.keycaps,
 span.term>span.keycap {
     display:inline-block;
     font-size: .8rem;
-    border: 1px solid black;
+    border: 1px solid var(--normal-font);
     border-radius:4px;
     margin: 0 .2rem;
-    background: gainsboro;
-    color: black;
+    background: var(--insert-background);
+    color: var(--normal-font);
 	padding-left:.3rem;
 	padding-right:1.2rem; 
 }
@@ -487,9 +524,9 @@ li.listitem span.keycap:last-of-type,
 span.term>span.keycap:last-of-type, 
 div.example-contents span.keycap:last-of-type, 
 p > span.keycap:last-child  {
-    background: lightseagreen;
-    color: white;
-    border-color: seagreen;
+    background: var(--main-color);
+    color: var(--normal-background);
+    border-color: var(--caps-border);
     padding: 0 .3rem;
 } 
 
@@ -526,9 +563,9 @@ p > span.keycap:last-child  {
 
     width: 45%;
 
-    border: 1px solid #D0D0D0;
+    border: 1px solid var(--accent-line);
     border-radius:3px;
-    background:white;
+    background:var(--normal-background);
     margin-right:3%;
     margin-top:30px;
     padding-bottom:20px;
@@ -537,7 +574,7 @@ p > span.keycap:last-child  {
 
 #wh-content .book  div.toc h2 {
     font-size: 1.2em;
-    color:teal;
+    color:var(--main-color);
     font-weight:bold;
     margin:.8rem 1rem 0 1rem;
 }
@@ -565,10 +602,10 @@ p > span.keycap:last-child  {
 
 #wh-header {
     border-bottom-width: 1px;
-    border-bottom-color: #DDE1E4;
+    border-bottom-color: var(--accent-line);
     border-bottom-style: solid;
-    background-color:teal;
-    color:white;
+    background-color:var(--main-color);
+    color:var(--normal-background);
 }
 
 #wh-header .logo {
@@ -578,7 +615,7 @@ p > span.keycap:last-child  {
 
 #wh-header .title {
     display:inline;
-/*    font-size:18pt; */
+	/*    font-size:18pt; */
 	font-size:1.8em;
     font-family: sans-serif;
     font-weight:bold;
@@ -587,7 +624,7 @@ p > span.keycap:last-child  {
 
 }
 #wh-header .title a {
-    color:white;
+    color:var(--normal-background);
     text-decoration:none;
 }
 
@@ -597,9 +634,9 @@ p > span.keycap:last-child  {
     position: sticky;
     top: -1em;
     padding-top: 1em;
-    background-color: white;
+    background-color: var(--normal-background);
 }
- */
+*/
 
 
 /* introduction side color */

@@ -214,11 +214,11 @@
             <itemizedlist>
               <listitem>
                 <para><ulink
-                url="https://sourceforge.net/p/omegat/svn/HEAD/tree/trunk/src/org/omegat/gui/main/MainMenuShortcuts.properties">MainMenuShortcuts.properties</ulink></para>
+                url="https://github.com/omegat-org/omegat/tree/master/src/org/omegat/gui/main/MainMenuShortcuts.properties">MainMenuShortcuts.properties</ulink></para>
               </listitem>
               <listitem>
                 <para><ulink
-                url="https://sourceforge.net/p/omegat/svn/HEAD/tree/trunk/src/org/omegat/gui/main/EditorShortcuts.properties">EditorShortcuts.properties</ulink></para>
+                url="https://github.com/omegat-org/omegat/tree/master/src/org/omegat/gui/main/EditorShortcuts.properties">EditorShortcuts.properties</ulink></para>
               </listitem>
             </itemizedlist>
           </listitem>
@@ -228,11 +228,11 @@
             <itemizedlist>
               <listitem>
                 <para><ulink
-                url="https://sourceforge.net/p/omegat/svn/HEAD/tree/trunk/src/org/omegat/gui/main/MainMenuShortcuts.mac.properties">MainMenuShortcuts.mac.properties</ulink></para>
+                url="https://github.com/omegat-org/omegat/tree/master/src/org/omegat/gui/main/MainMenuShortcuts.mac.properties">MainMenuShortcuts.mac.properties</ulink></para>
               </listitem>
               <listitem>
                 <para><ulink
-                url="https://sourceforge.net/p/omegat/svn/HEAD/tree/trunk/src/org/omegat/gui/main/EditorShortcuts.mac.properties">EditorShortcuts.mac.properties</ulink></para>
+                url="https://github.com/omegat-org/omegat/tree/master/src/org/omegat/gui/main/EditorShortcuts.mac.properties">EditorShortcuts.mac.properties</ulink></para>
               </listitem>
             </itemizedlist>
           </listitem>

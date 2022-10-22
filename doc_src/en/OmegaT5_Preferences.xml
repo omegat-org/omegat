@@ -425,8 +425,8 @@
 			properly recreate the translated segment. Removing them from the
 			translatable contents ensures that you will not erase or modify them
 			by mistake.</para>
-			  <para>If you keep the leading and trailing tags, make sure that
-			  they are leading and trailing as well in the translation.</para>
+			<para>If you keep the leading and trailing tags, make sure that
+			they are leading and trailing as well in the translation.</para>
 		  </listitem>
 		</varlistentry>
 		<varlistentry>
@@ -440,7 +440,7 @@
 		  </listitem>
 		</varlistentry>
 		<varlistentry>
-		  <term>Preserve spaces for all tags</term>
+		  <term>Preserve whitespace for all tags</term>
 		  <listitem>
 			<para>Check this option if the source documents contain whitespace
 			used to control the layout that must be retained in the
@@ -701,152 +701,91 @@
       options are:</para>
 
 	  <variablelist>
-		<varlistentry>
-		  <term>Text files</term>
+		<varlistentry  id="file.filters.xliff">
+		  <term id="file.filters.xliff.title">Monolingual XLIFF</term>
 		  <listitem>
 			<para>
 			  <variablelist>
 				<varlistentry>
-				  <term>Options to set the line length in target documents (0
-				  = no limit)</term>
+				  <term>Compatibility with OmegaT 2.6</term>
 				  <listitem>
-					<para/>
+					<para>Enable this option if you need to work with XLIFF
+					files created with OmegaT 2.6.</para>
 				  </listitem>
 				</varlistentry>
 				<varlistentry>
-				  <term>Segment source text into paragraphs on:</term>
+				  <term>Identifier used for alternative
+				  translations</term>
 				  <listitem>
-					<para>If sentence segmenting is active, the text will be segmented
-					further according to the option selected here.</para>
+					<para>User can select from three options,
+					Previous and next paragraphs, &lt;trans unit&gt;
+					ID, or, &lt;trans-unit&gt; resname attribute
+					when available, when unavailable, the ID will be
+					used as a fallback.</para>
+				  </listitem>
+				</varlistentry>
+				<varlistentry>
+				  <term>Tag shortcuts</term>
+				  <listitem>
+					<para>These option specify the way OmegaT creates tags from
+					the XLIFF contents.</para>
+				  </listitem>
+				</varlistentry>
+				<varlistentry>
+				  <term>Target segment status</term>
+				  <listitem>
+					<para>if checked, OmegaT changes the state of the XLIFF
+					target part to "needs-review-translation" instead of
+					"translated"</para>
 				  </listitem>
 				</varlistentry>
 			  </variablelist>
 			</para>
 		  </listitem>
 		</varlistentry>
-
-		<varlistentry>
-		  <term>MozillaDTD</term>
-		  <listitem><para>
-			<variablelist>
-			  <varlistentry>
-				<term>Remove untranslated strings in the target
-				files:</term>
-				<listitem>
-				  <para>If sentence segmenting is active, the text will be segmented
-				  further according to the option selected here.</para>
-				</listitem>
-			  </varlistentry>
-		  </variablelist></para></listitem>
-		</varlistentry>
-
-		<varlistentry id="file.filters.po">
-		  <term id="file.filters.po.title">PO files</term>
+		
+		<varlistentry id="file.filters.text">
+		  <term id="file.filters.text.title">Text files</term>
 		  <listitem>
-			<variablelist>
-			  <varlistentry>
-				<term>Allow translating blank source
-				segments</term>
-				<listitem>
-				  <para>PO files should not have black source segment other than
-				  header block. Sometimes it exists with context information. When
-				  check this option you can add a translation for such segment.</para>
-				</listitem>
-			  </varlistentry>
-			  <varlistentry>
-				<term>Format:</term>
-				<listitem>
-				  <para>You can specify how to treat PO file: <emphasis
-				  role="bold">Standard: </emphasis>handle as bilingual standard
-				  file<emphasis role="bold">, Monolingual: </emphasis>use only
-				  msgid as source segment </para>
-				</listitem>
-			  </varlistentry>
-			  <varlistentry>
-				<term>Allow blank translations in the target file</term>
-				<listitem>
-				  <para>Selecting this option will result in an empty translation in the
-				  target file when a segment in a PO file (which may be a whole
-				  paragraph) is not translated. Technically speaking, the
-				  <emphasis>msgstr</emphasis> segment in the PO target file will be left
-				  empty if it is created. This option is selected by default as it
-				  constitutes standard behavior for PO files. Turning off this option
-				  will copy the source to the target segment.</para>
-				</listitem>
-			  </varlistentry>
-			  <varlistentry>
-				<term>Skip PO header</term>
-				<listitem>
-				  <para>The PO header will be skipped and left unchanged if
-				  this option is checked.</para>
-				</listitem>
-			  </varlistentry>
-			  <varlistentry>
-				<term>Auto replace 'nplurals=INTEGER; plural=EXPRESSION;' in
-				header</term>
-				<listitem>
-				  <para>This option allows OmegaT to override the
-				  specification in the PO file header and use the default for
-				  the selected target language.</para>
-				</listitem>
-			  </varlistentry>
-			</variablelist>
+			<para>
+			  <variablelist>
+				<varlistentry>
+				  <term>Create paragraphs on:</term>
+				  <listitem>
+					<para>Text files do not have generic paragraph markers. You
+					can chose here the way OmegaT creates paragraphs in your
+					text files.</para>
+				  </listitem>
+				</varlistentry>
+				<varlistentry>
+				  <term>Line length in target files (0
+				  = no limit)</term>
+				  <listitem>
+					<para>
+					  <variablelist>
+						<varlistentry>
+						  <term>Line length</term>
+						  <listitem>
+							<para>specifies the maximum number of characters to before breaking a long line. A value of 0 sets no limits.</para>
+						  </listitem>
+						</varlistentry>
+						<varlistentry>
+						  <term>Maximum line length</term>
+						  <listitem>
+							<para>specifies the maximum number of characters to before cutting a line and ignoring the rest. A value of 0 sets no limits.</para>
+						  </listitem>
+						</varlistentry>
+					  </variablelist>
+					</para>
+				  </listitem>
+				</varlistentry>
+			  </variablelist>
+			</para>
 		  </listitem>
 		</varlistentry>
-		<varlistentry>
-		  <term>XHTML Files</term>
-		  <listitem><para>
-			<variablelist>
-			  <varlistentry>
-				<term>Translate the following attributes</term>
-				<listitem>
-				  <para>The selected attributes will appear as segments in the
-				  <guilabel>Editor</guilabel> pane.</para>
-				</listitem>
-			  </varlistentry>
-			  <varlistentry>
-				<term>Start a new paragraph on</term>
-				<listitem>
-				  <para>The &lt;br&gt; HTML tag will constitute a paragraph
-				  break for segmentation purposes.</para>
-				</listitem>
-			  </varlistentry>
-			  <varlistentry>
-				<term>Skip text matching regular expression</term>
-				<listitem>
-				  <para>Any text matching the regular expression is skipped, and
-				  shown in red when checking for tag issues. Matching text in
-				  source segments is shown in italics.</para>
-				</listitem>
-			  </varlistentry>
-			  <varlistentry>
-				<term>Do not translate the content attribute of meta-tags
-				...</term>
-				<listitem>
-				  <para>Meta-tags in the box will not be translated.</para>
-				</listitem>
-			  </varlistentry>
-			  <varlistentry>
-				<term>Do not translate the content of tags with the following
-				attribute key-value pairs (separate with commas)</term>
-				<listitem>
-				  <para>The contents of any tag matching the list of key-value
-				  pairs will be ignored.</para>
-				  <para>It is sometimes useful to be able to make certain tags
-				  untranslatable based on the values of their attributes. For
-				  example, <literal>&lt;div class=&quot;hide&quot;&gt; &lt;span
-				  translate=&quot;no&quot;&gt;</literal>. You can define
-				  key-value pairs for tags that should not be translated. In the
-				  example above, the field would contain: <literal>class=hide,
-				  translate=no </literal>.</para>
-				</listitem>
-			  </varlistentry>
-			</variablelist>
-		  </para>
-		  </listitem>
-		</varlistentry>
-		<varlistentry>
-		  <term>Microsoft Office Open XML files</term>
+		
+		<varlistentry id="file.filter.microsoft">
+		  <term id="file.filter.microsoft.title">Microsoft Office Open XML files</term>
 		  <listitem>
 			<para>You can choose additional document elements to
 			translate. They will appear as separate segments in the
@@ -900,6 +839,14 @@
 						is not defined in the document.</para>
 					  </listitem>
 					</varlistentry>
+					<varlistentry>
+					  <term>Start a new paragraph on Word soft-return</term>
+					  <listitem>
+						<para>Soft-returns are sometimes intended by the
+						author to be paragraph starters. Use this option
+						of that it the case.</para>
+					  </listitem>
+					</varlistentry>
 				  </variablelist>
 				</para>
 				</listitem>
@@ -907,165 +854,297 @@
 			</variablelist>
 		  </listitem>
 		</varlistentry>
-		
-		<varlistentry>
-		  <term>HTML and XHTML files</term>
-		  <listitem>
+
+		<varlistentry id="file.filters.xhtml">
+		  <term id="file.filters.xhtml.title">XHTML Files</term>
+		  <listitem><para>
 			<variablelist>
-			  <varlistentry>
-				<term>Add or rewrite encoding declaration in HTML and XHTML
-				files</term>
-				<listitem>
-				  <para>Target files often require a different
-				  character set encoding from the one in the source
-				  file (whether implied or explicitly defined). This
-				  option enables the translator to specify whether
-				  target files should include an encoding
-				  declaration. For instance, if the file filter
-				  specifies UTF8 as the encoding for the target files,
-				  selecting Always will ensure that this information
-				  is included in the translated files.</para>
-				</listitem>
-			  </varlistentry>
 			  <varlistentry>
 				<term>Translate the following attributes</term>
 				<listitem>
-				  <para>The selected attributes will appear as
-				  segments in the <guilabel>Editor</guilabel>
-				  pane.</para>
+				  <para>The selected attributes will appear as translatable segments in the
+				  <guilabel>Editor</guilabel> pane.</para>
 				</listitem>
 			  </varlistentry>
 			  <varlistentry>
 				<term>Start a new paragraph on</term>
 				<listitem>
-				  <para>The <literal>&lt;br&gt;</literal> HTML tag
-				  will be treated as a paragraph break for
-				  segmentation purposes.</para>
+				  <para>The &lt;br&gt; HTML tag will constitute a paragraph
+				  break for segmentation purposes.</para>
 				</listitem>
 			  </varlistentry>
 			  <varlistentry>
-				<term>Skip text matching regular expression</term>
+				<term>Ignored paragraphs at loading (regular expression)</term>
 				<listitem>
-				  <para>Any text matching the regular expression is
-				  skipped, and shown in red in the tag
-				  validator. Matching text in source segments is
-				  shown in italics.</para>
+				  <para>At loading, any paragraph
+				  matching the regular expression will be ignored and
+				  will not be displayed for translation.</para>
+				  <para>This option is convenient when dealing with HTML
+				  parts that only contain non translatable text.</para>
 				</listitem>
 			  </varlistentry>
 			  <varlistentry>
-				<term>Do not translate the content attribute of meta-tags
-				...</term>
+				<term>Ignored &lt;meta&gt; tags "content" attribute</term>
 				<listitem>
-				  <para>Meta-tags in the box will not be
+				  <para>Define the &lt;meta&gt; tag attribute values for which
+				  the associated "content" attribute will not be
 				  translated.</para>
+				  <para>Do not add quotation marks and separate the
+				  values with a comma.
+				  <example>
+					<title>Ignore the content part of &lt;meta name="robots"
+					content="index, follow"&gt;</title>
+					<para><code>&lt;meta name="robots" content="index,
+					follow"&gt;</code> would be described here as:
+					<literal>name=robots</literal></para>
+				  </example>
+				  </para>
 				</listitem>
 			  </varlistentry>
 			  <varlistentry>
-				<term>Do not translate the content of tags with the
-				following attribute key-value pairs (separate with
-				commas)</term>
+				<term>Ignored tags (attribute=value)</term>
 				<listitem>
-				  <para>The contents of any tag matching the list of
-				  key-value pairs will be ignored.</para>
-				  <para>It is sometimes useful to be able to make certain tags
-				  untranslatable based on the values of their attributes. For example,
-				  <literal>&lt;div class=&quot;hide&quot;&gt; &lt;span
-				  translate=&quot;no&quot;&gt;</literal>. You can define key-value pairs
-				  for tags that should not be translated. In the example above, the
-				  field would contain: <literal>class=hide, translate=no
-				  </literal>.</para>
+				  <para>Define the attribute values that make a tag
+				  non-translatable.</para>
+				  <para>Do not add quotation marks and separate the
+				  values with a comma.
+				  <example>
+					<title>Ignore tags that contain translate=&quot;no&quot;</title>
+					<para>To ignore this content:</para>
+					<para><code>&lt;span translate=&quot;no&quot;&gt;This
+					content is not translatable&lt;/span&gt;</code></para>
+					<para>use: <literal>translate=no</literal>.</para>
+					<para>All the tags that are marked with
+					<code>translate=&quot;no&quot;</code> will be ignored.</para>
+				  </example>
+				  </para>
+				</listitem>
+			  </varlistentry>
+			</variablelist>
+		  </para>
+		  </listitem>
+		</varlistentry>
+
+		<varlistentry>
+		  <term>HTML and XHTML files</term>
+		  <listitem>
+			<para>Only the options not available under the XHTML files filter
+			(see above) are described here.</para>
+			<variablelist>
+			  <varlistentry>
+				<term>Modify encoding declaration</term>
+				<listitem>
+				  <para>The encoding of an HTML document is generally declared
+				  within a &lt;meta&gt; element situated in the &lt;head&gt;
+				  element.</para>
+				  <para>Source and target files
+				  sometimes require a different encoding.</para>
+				  <para>Here, you can decide whether you add or modify the
+				  declaration of the target file
+				  <itemizedlist>
+					<listitem>
+					  <para>always, based on the file filter settings,</para>
+					</listitem>
+					<listitem>
+					  <para>only  if the file already has a &lt;head&gt; tag,</para>
+					</listitem>
+					<listitem>
+					  <para>only if the file already has a declaration,</para>
+					</listitem>
+					<listitem>
+					  <para>or never and only save the target file in the
+					  encoding specified in the file filter settings.</para>
+					</listitem>
+				  </itemizedlist>
+				  </para>
 				</listitem>
 			  </varlistentry>
 			  <varlistentry>
 				<term>Compress whitespace in translated document</term>
 				<listitem>
-				  <para>Multiple continuous whitespace characters
-				  will be converted into a single whitespace
-				  character in the translated document.</para>
+				  <para>Whitespace outside the tags is considered non
+				  significant in HTML/XHTML.</para>
+				  <para>This option converts such multiple continuous whitespace
+				  characters into a single space in the translated
+				  document.</para>
 				</listitem>
 			  </varlistentry>
 			  <varlistentry>
 				<term>Remove HTML comments in translated
 				document</term>
 				<listitem>
-				  <para>Text in comments (between <literal>&lt;!--
-				  and --&gt;</literal>) will not be copied into the
+				  <para>Comments within an HTML file are generally addressed to
+				  developers.</para>
+				  <para>Text in HTML comments (between <literal>&lt;!--</literal>
+				  and <literal>--&gt;</literal>) will not be copied into the
 				  translated document.</para>
 				</listitem>
 			  </varlistentry>
 			</variablelist>
 		  </listitem>
 		</varlistentry>
-		<varlistentry>
-		  <term>Open Document Format (ODF) files</term>
-		  <listitem>
-			<para>
-			  <variablelist>
-				<varlistentry>
-				  <term>Translate the following elements</term>
-				  <listitem>
-					<para>Index entries, bookmarks, bookmark
-					references, notes, comments, presentation notes,
-					links (URL), and sheet names.</para>
-				  </listitem>
-				</varlistentry>
-			  </variablelist>
-			</para>
-		  </listitem>
+
+
+		<varlistentry id="file.filters.mozilla.ftl">
+		  <term id="file.filters.mozilla.ftl.title">Mozilla FTL</term>
+		  <listitem><para>
+			<variablelist>
+			  <varlistentry>
+				<term>Remove untranslated strings in the target
+				files</term>
+				<listitem>
+				  <para>Having untranslated contents in the translated files
+				  sometimes create compatibility issues.</para>
+				</listitem>
+			  </varlistentry>
+		  </variablelist></para></listitem>
 		</varlistentry>
-		<varlistentry  id="file.filters.xliff">
-		  <term id="file.filters.xliff.title">XLIFF</term>
+
+		<varlistentry id="file.filters.mozilla.dtd">
+		  <term id="file.filters.mozilla.dtd.title">Mozilla DTD</term>
+		  <listitem><para>
+			<variablelist>
+			  <varlistentry>
+				<term>Remove untranslated strings in the target
+				files</term>
+				<listitem>
+				  <para>Having untranslated contents in the translated files
+				  sometimes create compatibility issues.</para>
+				</listitem>
+			  </varlistentry>
+		  </variablelist></para></listitem>
+		</varlistentry>
+
+		<varlistentry id="file.filters.po">
+		  <term id="file.filters.po.title">PO files</term>
 		  <listitem>
-			<para>
-			  <variablelist>
-				<varlistentry>
-				  <term>Identifier used for alternative
-				  translations</term>
-				  <listitem>
-					<para>User can select from three options,
-					Previous and next paragraphs, &lt;trans unit&gt;
-					ID, or, &lt;trans-unit&gt; resname attribute
-					when available, when unavailable, the ID will be
-					used as a fallback.</para>
-				  </listitem>
-				</varlistentry>
-				<varlistentry>
-				  <term>Specify state attribute handling
-				  behavior</term>
-				  <listitem>
-					<para>if checked, OmegaT changes the state to
-					"needs-review-translation" instead of
-					"translated"</para>
-				  </listitem>
-				</varlistentry>
-				<varlistentry>
-				  <term>Java Resource bundle</term>
-				  <listitem>
-					<para>You can select a behavior when loading
-					and saving java resource bundle file</para>
+			<variablelist>
+			  <varlistentry>
+				<term>Allow blank target segments</term>
+				<listitem>
+				  <para>OmegaT always reproduces the source contents when a
+				  segment is not provided. Use this option to leave a non
+				  translated segment blank.</para>
+				</listitem>
+			  </varlistentry>
+			  <varlistentry>
+				<term>Translate blank source segments</term>
+				<listitem>
+				  <para>Blank source segments sometimes act as placeholders for
+				  parts that do not exist in the source language but are
+				  necessary in the target language. Use this option to provide a
+				  translation based on the associated comments.</para>
+				</listitem>
+			  </varlistentry>
+			  <varlistentry>
+				<term>Ignore PO header</term>
+				<listitem>
+				  <para>The PO header will not be displayed for translation.</para>
+				</listitem>
+			  </varlistentry>
+			  <varlistentry>
+				<term>Auto replace 'nplurals=INTEGER; plural=EXPRESSION;'</term>
+				<listitem>
+				  <para>Override the plural specification in the header and use
+				  the target language default.</para>
+				</listitem>
+			  </varlistentry>
+			  <varlistentry>
+				<term>Format:</term>
+				<listitem>
+				  <para>
 					<variablelist>
 					  <varlistentry>
-						<term>Do not unescape Unicode literals
-						(\\uXXXX)</term>
+						<term>Standard</term>
 						<listitem>
-						  <para/>
+						  <para>PO files that use <literal>msgid</literal> as
+						  the source container and expect the translation to be
+						  put in <literal>msgstr</literal></para>
 						</listitem>
 					  </varlistentry>
 					  <varlistentry>
-						<term>Remove untranslated strings in the
-						target files</term>
+						<term>Monolingual</term>
 						<listitem>
-						  <para/>
+						  <para>PO files that use <literal>msgid</literal> as an
+						  ID code, use <literal>msgstr</literal> as the source
+						  container and expect the translation to overwrite
+						  <literal>msgstr</literal></para>
 						</listitem>
 					  </varlistentry>
 					</variablelist>
-				  </listitem>
-				</varlistentry>
-			  </variablelist>
-			</para>
+				  </para>
+				</listitem>
+			  </varlistentry>
+			</variablelist>
+		  </listitem>
+		</varlistentry>
+
+		<varlistentry id="file.filters.moodle.php">
+		  <term id="file.filters.moodle.php.title">Moodle PHP</term>
+		  <listitem><para>
+			<variablelist>
+			  <varlistentry>
+				<term>Remove untranslated strings in the target
+				files</term>
+				<listitem>
+				  <para>Having untranslated contents in the translated files
+				  sometimes create compatibility issues.</para>
+				</listitem>
+			  </varlistentry>
+		  </variablelist></para></listitem>
+		</varlistentry>
+
+		<varlistentry id="file.filter.java.bundle">
+		  <term id="file.filter.java.bundle.title">Java Resource bundle</term>
+		  <listitem>
+			<variablelist>
+			  <varlistentry>
+				<term>Force Unicode literals compatibility with Java 8</term>
+				<listitem>
+				  <para>Java 8 requires ISO-8859-1 encoding and uses Unicode
+				  literals for characters outside that character set. Java 9 and
+				  above requires UTF-8 encoding. This option forces Java 8
+				  compatibility.</para>
+				</listitem>
+			  </varlistentry>
+			  <varlistentry>
+				<term>Remove untranslated strings in the target files</term>
+				<listitem>
+				  <para>Having untranslated contents in the translated files
+				  sometimes create compatibility issues.</para>
+				</listitem>
+			  </varlistentry>
+			  <varlistentry>
+				<term>Keep Unicode literals (\\uXXXX)</term>
+				<listitem>
+				  <para>Some applications require some Unicode literals to be
+				  kept. This option allows for that.</para>
+				</listitem>
+			  </varlistentry>
+			</variablelist>
+		  </listitem>
+		</varlistentry>
+
+<varlistentry id="file.filters.odf">
+  <term id="file.filters.odf.title">Open Document Format (ODF) files</term>
+  <listitem>
+	<para>
+	  <variablelist>
+		<varlistentry>
+		  <term>Translate the following elements</term>
+		  <listitem>
+			<para>Index entries, bookmarks, bookmark
+			references, notes, comments, presentation notes,
+			links (URL), and sheet names.</para>
 		  </listitem>
 		</varlistentry>
 	  </variablelist>
+	</para>
+  </listitem>
+</varlistentry>
+
+
+</variablelist>
 </section>
 </section>
 
@@ -1130,32 +1209,32 @@
 	<emphasis>above</emphasis> break rules</para></warning>
 	
 	<variablelist>
-      <varlistentry id="segmentation.rules.exceptionrule">
+	  <varlistentry id="segmentation.rules.exceptionrule">
 		<term id="segmentation.rules.exceptionrule.title">Exceptions</term>
 
 		<listitem>
-          <para>Specify text combinations that are exceptions to a break
-          rule. For example, <emphasis>Mrs. Dalloway</emphasis> should not
-          be split in two segments even though a break rule for
-          <emphasis>period followed by a space</emphasis> generally defines
-          a sentence.</para>
+		  <para>Specify text combinations that are exceptions to a break
+		  rule. For example, <emphasis>Mrs. Dalloway</emphasis> should not
+		  be split in two segments even though a break rule for
+		  <emphasis>period followed by a space</emphasis> generally defines
+		  a sentence.</para>
 		  
 		  <para>To define an exception rule, leave the
 		  <guilabel>Break/Exception </guilabel>check box unchecked.</para>
 		</listitem>
-      </varlistentry>
+	  </varlistentry>
 
-      <varlistentry id="segmentation.rules.breakrule">
+	  <varlistentry id="segmentation.rules.breakrule">
 		<term id="segmentation.rules.breakrule.title">Breaks</term>
 
 		<listitem>
-          <para>Separates the source text into segments. For example,
-          <emphasis>period followed by a space</emphasis> generally defines
-          a sentence end in English.</para>
+		  <para>Separates the source text into segments. For example,
+		  <emphasis>period followed by a space</emphasis> generally defines
+		  a sentence end in English.</para>
 		  <para>To define a rule as a break rule, check the
 		  <guilabel>Break/Exception</guilabel>  box.</para>
 		</listitem>
-      </varlistentry>
+	  </varlistentry>
 	</variablelist>
   </section>
 

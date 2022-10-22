@@ -1150,8 +1150,7 @@
 
 
 <section id="dialogs.preferences.segmentation.setup">
-  <title id="dialogs.preferences.segmentation.setup.title">Segmentation
-  Setup</title>
+  <title id="dialogs.preferences.segmentation.setup.title">Global Segmentation Rules</title>
 
   <para>See <link linkend="app.segmentation"
   endterm="app.segmentation.title"/> for general explanations about

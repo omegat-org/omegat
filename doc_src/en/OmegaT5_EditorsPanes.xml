@@ -10,10 +10,6 @@
 		<term id="panes.manipulation.title">Manipulation</term>
 		<listitem>	  <para>The main window consists of several panes, described here,  the main <link linkend="menus" endterm="menus.title"/>, and a <link linkend="panes.statusbar" endterm="panes.statusbar.title"/>. You can change the position of a pane, or even undock it as a separate window, by clicking and holding its name and dragging it.</para>
 
-		<note>
-		  <para>If you cannot see all panes (opened or minimized), you can use the <link linkend="menus.view.restore.main.window" endterm="menus.view.restore.main.window.title"/> command in the <link linkend="menus.view" endterm="menus.view.title"/> menu to restore them to their default state.</para>
-		</note>
-
 		<para>The top right corner of a pane will show different icons depending on the type of pane and its current status:</para>
 
 		<table id="table.pane.widgets">
@@ -93,34 +89,49 @@
 
 		<para>You can group panes in the same area of the window. Doing so shows a tab with the name of the panes the top of the group. Panes can be resized by dragging the separators between them.</para>
 
-		<note><para>Should you lose track of the changes you made to the user interface, you can use the <link linkend="menus.view.restore.main.window" endterm="menus.view.restore.main.window.title"/> command in the <link linkend="menus.view" endterm="menus.view.title"/> menu any time to go back to the default layout.</para></note>
+		<note><para>If you lost track of the changes you made to the user interface, and cannot see some panes, use <link linkend="menus.view.restore.main.window" endterm="menus.view.restore.main.window.title"/> in the <link linkend="menus.view" endterm="menus.view.title"/> menu any time to go back to the default layout.</para></note>
 		</listitem>
 	  </varlistentry>
 
 	  <varlistentry id="panes.context.menus">
 		<term id="panes.context.menus.title">Context menus</term>
-		<listitem><para>Some panes have a specific associated context menu. You can call that menu using the standard method for your OS, or with the OmegaT defined shortcuts (see <link linkend="app.shortcuts" endterm="app.shortcuts.title"/> for details).</para>
+		<listitem>
+		  <para>Some panes have a context menu. You can call that menu using the standard method for your OS, or with the OmegaT defined shortcuts:
+		<itemizedlist>
+		  <listitem>
+			<para>
+			  On Windows and Linux: <keycap>Menu</keycap>
+			</para>
+		  </listitem>
+		  <listitem>
+			<para>
+			  On macOS: <keycombo><keycap>S</keycap><keycap>Esc</keycap></keycombo>
+			</para>
+		  </listitem>
+		</itemizedlist>
+		  </para>
 		</listitem>
 	  </varlistentry>
+	  
 	  <varlistentry id="panes.drag.and.drop">
 		<term id="panes.drag.and.drop.title">Dragging and dropping</term>
-		<listitem>		<para>Files can be dragged and dropped on certain panes, with the following results.</para>
-
+		<listitem>
+		  <para>Files can be dragged and dropped on certain panes, with the following results:</para>
 		<variablelist>
 		  <varlistentry>
 			<term>Editor pane</term>
-			<listitem><para>Dropping an OmegaT project file (<filename>omegat.project</filename>) or a full project onto this pane will open the corresponding project after closing the currently open project, if any.</para>
+			<listitem><para>Dropping an OmegaT project file (<filename>omegat.project</filename>) or a full project here will open the corresponding project after closing the currently open project, if any.</para>
 			<para>Dropping other files will copy them to the <filename class="directory">source</filename> folder. This also applies to the <link linkend="windows.project.files" endterm="windows.project.files.title"/> window.</para></listitem>
 		  </varlistentry>
 
 		  <varlistentry>
-			<term>Fuzzy Matches</term>
-			<listitem><para>Dropping <filename>.tmx</filename> files onto this pane will copy them to the <filename class="directory">tm</filename> folder.</para></listitem>
+			<term>Fuzzy Matches pane</term>
+			<listitem><para>Dropping <filename>.tmx</filename> files here will copy them to the <filename class="directory">tm</filename> folder.</para></listitem>
 		  </varlistentry>
 
 		  <varlistentry>
 			<term>Glossary pane</term>
-			<listitem><para>Dropping files with a recognized glossary extension (<filename>.txt</filename>, <filename>.tab</filename>, etc.) will copy them to the <filename class="directory">glossary</filename> folder.</para></listitem>
+			<listitem><para>Dropping files with a recognized glossary extension (<filename>.txt</filename>, <filename>.tab</filename>, etc.) here will copy them to the <filename class="directory">glossary</filename> folder.</para></listitem>
 		  </varlistentry>
 		</variablelist>
 		</listitem>
@@ -149,27 +160,34 @@
     </figure>
 
 	<itemizedlist>
-	  <listitem><para>The line in bold characters against a green background is the source text to translate.</para></listitem>
-	  <listitem><para>The line below showing the cursor is where you enter the translation.</para></listitem>
-	  <listitem><para>That line ends with a segment marker. In this example, <literal>&lt;segment 0400 ¶&gt;</literal> is the marker, with <literal>0400</literal> as the number of the segment in the project and a <literal>¶</literal>  symbol identifying that segment as the first in a paragraph.</para></listitem>
-	  <listitem><para>You can make changes to any of the content that comes before the segment marker.</para></listitem>
-	  <listitem><para>The line below the segment marker is a different segment in the source language that has not been translated yet.</para></listitem>
-	  <listitem><para>Use <link linkend="menus.goto.next.segment" endterm="menus.goto.next.segment.title"/> or another command that moves to a new segment to:<itemizedlist>
-	  <listitem><para>register the segment in the project translation memory, and</para></listitem>
+	  <listitem>
+		<para>The first line, in bold characters against a green background, is the source text to translate.</para>
+	  </listitem>
+	  <listitem>
+		<para>The second line, showing the cursor and a segment marker at its end, is the <emphasis role="bold">translation field</emphasis>. It is where you enter your translation.</para>
+	  </listitem>
+	  <listitem>
+		<para>The segment marker here is <literal>&lt;segment 0400
+		¶&gt;</literal>.</para>
+		<para><literal>0400</literal> is the number of the segment in
+		the project and the <literal>¶</literal> symbol indicates that the
+		segment is the first segment in a paragraph.</para>
+	  </listitem>
+	  <listitem>
+		<para>The cursor is by default locked into the translation field.</para>
+		<para>Use <keycap>F2</keycap> to unlock the cursor and move it beyond the translation field, and to make it come back into the translation field when your are done.</para> 
+	  </listitem>
+	  <listitem>
+		<para>The line below the translation field is a different segment.</para>
+	  </listitem>
+	  <listitem><para>Use <link linkend="menus.goto.next.segment" endterm="menus.goto.next.segment.title"/> or other navigation commands to:<itemizedlist>
+	  <listitem><para>register the translation field contents in the project translation memory, and</para></listitem>
 	  <listitem><para>enter the next segment to translate.</para></listitem>
 	</itemizedlist>
-	See <link linkend="menus.goto" endterm="menus.goto.title"/> for details.
+	See the <link linkend="menus.goto" endterm="menus.goto.title"/> menu for details.
   </para>
 	  </listitem>
 	</itemizedlist>
-
-    <para>Depending on Preferences – <link linkend="dialogs.preferences.editor" endterm="dialogs.preferences.editor.title"/>, entering a new segment will:
-	<itemizedlist>
-	  <listitem><para><link linkend="dialogs.preferences.editor.insert.the.source.text" endterm="dialogs.preferences.editor.insert.the.source.text.title"/> (default behavior)</para></listitem>
-	  <listitem><para><link linkend="dialogs.preferences.editor.leave.the.segment.empty" endterm="dialogs.preferences.editor.leave.the.segment.empty.title"/></para></listitem>
-	  <listitem><para><link linkend="dialogs.preferences.editor.insert.the.best.fuzzy.match" endterm="dialogs.preferences.editor.insert.the.best.fuzzy.match.title"/> (if any)</para></listitem>
-	</itemizedlist>
-	</para>
 
 	<note>
 	  <para>You are free to modify the Editor display to suit your workflow.</para>
@@ -201,29 +219,26 @@
 	<variablelist>
 	  <varlistentry>
 		<term>Empty translations</term>
-		<listitem><para>If you leave the translation field empty, OmegaT will treat it as untranslated and keep it in the original language when it creates the translated documents.</para></listitem>
+		<listitem><para>If you leave the translation field empty, OmegaT will treat the segment as untranslated and keep it in the original language when it creates the translated documents.</para></listitem>
 	  </varlistentry>
 	  <varlistentry>
 		<term>Translations equal to the source</term>
-		<listitem><para>OmegaT can store translations that are identical to the source text. This can be useful for documents that contain trademarks, names or other proper nouns, or sections in a third language that do not require translation. See Preferences – <link linkend="dialogs.preferences.editor.allow.translation.to.be.equal.to.source" endterm="dialogs.preferences.editor.allow.translation.to.be.equal.to.source.title"/> for details.</para></listitem>
+		<listitem><para>OmegaT can store translations that are identical to the source text. This can be useful for documents that contain trademarks, names or other proper nouns, or sections in a third language that do not require translation.</para></listitem>
 	  </varlistentry>
 	  <varlistentry>
 		<term>Dragging text</term>
 		<listitem><para>It is possible to drag text from anywhere in the main window and
-		drop it into the active segment. Text dragged from outside the target
-		segment is copied, while text dragged from within the segment is
+		drop it into the translation field. Text dragged from outside the translation field is copied, while text dragged from within the translation field is
 		moved.</para></listitem>
 	  </varlistentry>
 	  <varlistentry>
 		<term>Overwriting</term>
 		<listitem><para>By default, typing text inserts the new text after the cursor in the
-		typing direction. To overwrite the existing text, use the following keys:</para>
-		
-		<para>Default shortcut:
+		typing direction. To overwrite the existing text, use the following keys:
 		<itemizedlist>
 		  <listitem><para>On Windows and Linux:
 		  <keycombo><keycap>INSERT</keycap></keycombo></para></listitem>
-		  <listitem><para>On macOS: <keycap>F3</keycap>.</para>
+		  <listitem><para>On macOS: <keycap>F3</keycap></para>
 		  </listitem>
 		</itemizedlist>
 		</para>
@@ -233,9 +248,10 @@
 		same key to switch back and forth between each mode.</para>
 		</listitem>
 	  </varlistentry>
+	  
 	  <varlistentry id="panes.editor.cursor.lock">
 		<term id="panes.editor.cursor.lock.title">Cursor lock</term>
-		<listitem><para>By default, the cursor is locked into the target text editing field,
+		<listitem><para>By default, the cursor is locked into the translation field,
 		and the arrow keys cannot be used to move in the source text.</para>
 
 		<para>Pressing <keycap>F2</keycap> unlocks the cursor and makes it
@@ -255,7 +271,7 @@
 		  <para>Default shortcut:
 		  <itemizedlist>
 			<listitem><para>On Windows and Linux: <keycap>Menu</keycap></para></listitem>
-			<listitem><para>On macOS: <keycombo><keycap>S</keycap><keycap>Esc</keycap></keycombo>.</para>
+			<listitem><para>On macOS: <keycombo><keycap>S</keycap><keycap>Esc</keycap></keycombo></para>
 			</listitem>
 		  </itemizedlist>
 		  You can also bring up the menu by right-clicking the mouse
@@ -272,7 +288,7 @@
 			<listitem><para><guilabel>Add Glossary Entry</guilabel> (equivalent to
 			<link linkend="menus.edit.create.glossary.entry" endterm="menus.edit.create.glossary.entry.title"/>),</para></listitem>
 		  </itemizedlist>and other functions available from the <link linkend="menus.edit" endterm="menus.edit.title"/> menu.</para>
-		  <para>If you have selected text and defined entries in Preferences – <link linkend="dialogs.preferences.external.searches" endterm="dialogs.preferences.external.searches.title"/>, they will also be displayed in the menu.</para>
+		  <para>If you have selected text and defined entries in <link linkend="dialogs.preferences.external.searches" endterm="dialogs.preferences.external.searches.title"/>, they will also be displayed in the menu.</para>
 		</listitem>
 	  </varlistentry>
 
@@ -283,7 +299,7 @@
 		  <itemizedlist>
 			<listitem><para>On Windows and Linux:
 			<keycombo><keycap>C</keycap><keycap>Space</keycap></keycombo></para></listitem>
-			<listitem><para>On macOS: <keycap>Esc</keycap>.</para>
+			<listitem><para>On macOS: <keycap>Esc</keycap></para>
 			</listitem>
 		  </itemizedlist></para>
 

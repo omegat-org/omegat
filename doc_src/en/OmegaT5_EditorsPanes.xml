@@ -282,8 +282,7 @@
     </itemizedlist>
 
     <note>
-      <para>You are free to modify the Editor display to suit your
-      workflow.</para>
+      <para>Modify the Editor display to suit your workflow. See the <link linkend="dialogs.preferences.editor" endterm="dialogs.preferences.editor.title"/> preferences for details.</para>
 
       <figure id="modified.editor.target.field">
         <title id="modified.editor.target.field.title">Example of modified
@@ -562,9 +561,9 @@ Dossier de configuration
         </listitem>
     </itemizedlist></para>
 
-    <para>You can change how matches are displayed or sorted. See <link
+    <para>You can change how matches are displayed or sorted. See the <link
     endterm="dialog.preferences.tm.matches.title"
-    linkend="dialog.preferences.tm.matches"/> for details.</para>
+    linkend="dialog.preferences.tm.matches"/> preferences for details.</para>
 
     <para>Use <link endterm="menus.edit.replace.with.match.or.selection.title"
     linkend="menus.edit.replace.with.match.or.selection"/> to replace the
@@ -634,8 +633,8 @@ Folder = <token>Dossier</token></programlisting>
     endterm="menus.edit.title" linkend="menus.edit"/> menu to add terms to
     that file.</para>
 
-	<para>To know more about glossaries, read the <link linkend="app.glossaries"
-	endterm="app.glossaries.title"/> appendix.</para>
+	<para>See the <link linkend="app.glossaries"
+	endterm="app.glossaries.title"/> appendix for details.</para>
   </section>
 
   <section id="panes.dictionary">
@@ -669,28 +668,29 @@ Folder = <token>Dossier</token></programlisting>
         </listitem>
       </itemizedlist></para>
 
-    <para>Press <keycombo>
-        <keycap>C</keycap>
+    <para>Use <link linkend="menus.edit.replace.with.mt.title"
+    endterm="menus.edit.replace.with.mt.title"/> to replace the translation of
+    the current segment with the selected translation engine.</para>
 
-        <keycap>M</keycap>
-      </keycombo> to replace the translation of the current segment with the
-    selected translation highlighted.</para>
+    <para>The "Origin" property of the current segment is assigned the selected
+    engine name.</para>
 
-    <para>The "Origin" property of the current segment properties is updated
-    with the selected engine name.</para>
+	<para>See the <link linkend="dialogs.preferences.mt" endterm="dialogs.preferences.mt.title"/> preferences for details.</para>
   </section>
 
   <section id="panes.multipletranslations">
     <title id="panes.multipletranslations.title">Multiple Translations</title>
 
-    <para>A given source segment may require several different translations,
-    depending on context. If the current translation of the segment is not
-    suitable, you can use the <link
+    <para>A source segment that appears in multiple locations in the project may
+    require several different translations depending on context.</para>
+
+	<para>If the current
+    translation of the segment is not suitable, you can use the <link
     endterm="menus.edit.create.alternative.translation.title"
     linkend="menus.edit.create.alternative.translation"/> command in the <link
     endterm="menus.edit.title" linkend="menus.edit"/> menu to specify an
-    alternative translation. The entered translation will then be treated as
-    an alternative translation of the source segment.</para>
+    alternative translation. The entered translation will then be treated as an
+    alternative translation of the source segment.</para>
 
     <para>You can define one of the alternatives—the most common or likely,
     for instance—as the default translation with the <link

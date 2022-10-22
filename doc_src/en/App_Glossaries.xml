@@ -27,50 +27,72 @@
 		  <para>You do not need to prepare the file in advance.</para>
 		  <para>It will be created the first time you add an entry to the
 		  glossary.</para>
-		  <note><para>If you choose to use an existing file as the default
-		  glossary, check its format beforehand. OmegaT will record all new
-		  entries in tab-separated format, and save the file in UTF-8 encoding
-		  without checking the original format or character set.</para></note>
+
+		  <note>
+        <para>If you choose to use an existing file as the default
+		  glossary, all new entries will be recorded in tab-separated format and
+		  saved in UTF-8 by default.</para>
+        <para>If you want to specify a different encoding, you can do so by
+        adding a “magic” comment that takes the following form:
+          <simplelist>
+            <member>
+              <code># -*- coding: <parameter>&lt;charset&gt;</parameter>
+              -*-</code>,
+            </member>
+          </simplelist>
+        where <parameter>&lt;charset&gt;</parameter> is typically one of the sets listed in the <ulink
+        url="http://www.iana.org/assignments/character-sets/character-sets.xhtml">IANA
+        Charset Registry</ulink>. To specify a glossary in the latin encoding, for
+        example, use:
+          <informalexample>
+            <para><code># -*- coding: ISO-8859-1 -*-</code></para>
+          </informalexample>
+        (or any of the ISO-8859-1 to ISO-8859-10 character sets).</para>
+      </note>
 	  </listitem>
 	</varlistentry>
 	
 	<varlistentry>
-	  <term>The reference glossaries</term>
-	  <listitem><para>They are terminology files in a format that OmegaT
-	  recognises. You cannot modify them from the OmegaT interface like the
-	  project glossary, but you can access them and modify them in a text
-	  editor.</para></listitem>
+	  <term>Reference glossaries</term>
+	  <listitem><para>They are terminology files in a format recognized by 
+    OmegaT. You cannot modify them from the OmegaT interface like the
+	  project glossary, but you can do so in a text editor.</para></listitem>
 	</varlistentry>
   </variablelist>
 </para>
 
-<note><para>As soon as you save the modifications you have made to any glossary,
-they will be taken into account by OmegaT and term matches will be automatically displayed in the <link
-  linkend="panes.glossary" endterm="panes.glossary.title"/> pane.</para></note>
- 
+<note>
+  <para>Modifications made to any glossary, are immediately recognized by OmegaT displayed in the <link
+  linkend="panes.glossary" endterm="panes.glossary.title"/> pane.</para>
+</note>
 
   <section id="glossaries.glossary.folder">
     <title id="glossaries.glossary.folder.title">The glossaries folder</title>
 
     <para>By default, each project contains a <link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/> folder to store the writable glossary and any reference glossaries you want to add to the project. See <link linkend="dialogs.project.properties.file.locations.glossaries" endterm="dialogs.project.properties.file.locations.glossaries.title"/> for details.</para>
 
-	<para>All glossaries must be located in the <link
-	linkend="project.folder.glossary" endterm="project.folder.glossary.title"/>
-	folder. Glossaries located in nested folders are also recognized.</para>
+    <para>All glossaries must be located in the <link
+    linkend="project.folder.glossary" endterm="project.folder.glossary.title"/>
+    folder. Glossaries located in nested folders are also recognized.</para>
 
-	<para>You can create multiple terminology folders based on subject or client
-	and point at them as your project requires by using the  <link
-	linkend="dialogs.project.properties"
-	endterm="dialogs.project.properties.title"/> dialog.</para>
-
-	
+    <para>Within that reference glossaries folder, you can create multiple
+    terminology subfolders organized by topic, client, or any other category
+    that suits your workflow.</para>
+    <para>Use the <link
+    linkend="dialogs.project.properties.file.locations.glossaries">option</link>
+    to set the location of the reference glossaries folder. This folder can be
+    set outside the project, enabling you to use it, or one of the specific
+    subfolders, in other projects.</para>
+		
   </section>
 
   <section id="glossaries.default.glossary">
     <title id="glossaries.default.glossary.title">Project glossary</title>
 
-    <para>The project writable glossary is by default located in the <link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/> folder
-    and called <link linkend="project.folder.glossary.txt" endterm="project.folder.glossary.txt.title"/>.</para>
+    <para>The project writable glossary is by default located in the <link
+    linkend="project.folder.glossary" endterm="project.folder.glossary.title"/>
+    folder and called <link linkend="project.folder.glossary.txt"
+    endterm="project.folder.glossary.txt.title"/>.</para>
 
     <para>You can change its name and location in the <link
     linkend="dialogs.project.properties.file.locations.writable.glossary"
@@ -94,8 +116,10 @@ they will be taken into account by OmegaT and term matches will be automatically
     values” (CSV) files or can also use the TermBase eXchange (TBX)
     format.</para>
 
-    <para>The writable glossary for the project is always a TSV file saved in
-    UTF-8 encoding.</para>
+    <para>A writeable glossary created for the project by OmegaT will be a TSV
+    file saved in UTF-8. User-created files that use only latin characters may
+    be recognized and treated as ISO-8859-1 if it does not contain non-ASCII
+    characters or other characters interpreted as UTF-8.</para>
 
     <para>The encoding used to read reference glossaries depends on
     their file extension:</para>

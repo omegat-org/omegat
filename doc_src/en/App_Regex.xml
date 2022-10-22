@@ -152,7 +152,7 @@
       </varlistentry>
 
       <varlistentry>
-        <term>Letters of the alphabet preceded by a blackslash
+        <term>Letters of the alphabet preceded by a backslash
         (<literal>\</literal>) take on a special meaning</term>
         <listitem>
           <para>Unlike a letter on its own, which simply represents itself
@@ -250,7 +250,7 @@
                 <tbody>
                   <row>
                     <entry></entry>
-                    <entry><literal>0\.\d</literal></entry>
+                    <entry><literal>0\.[0-9]</literal></entry>
                   </row>
 
                   <row>
@@ -258,8 +258,8 @@
                     <entry>
                       <para>A number between <emphasis>0.0</emphasis> and
                       <emphasis/>0.9, or just the final
-                      <emphasis>1.5</emphasis> in numbers such as 11.5 or
-                      561.5.</para>
+                      <emphasis>0.5</emphasis> in numbers such as 10.5 or
+                      560.5.</para>
                       <para>The <literal>\.</literal> cancels the “any
                       character” meaning of the period to match the decimal
                       point, while the <literal>\d</literal> turns the
@@ -271,9 +271,9 @@
                   <row>
                     <entry>Does not match</entry>
                     <entry>
-                      <para>Sequences such as 0,1 or 0-3, in
-                      which a period not preceded by a backslash
-                      would match any character between two digits.</para>
+                      <para>Sequences such as 0,1, 0-3, or the first three
+                      characters of 0x002E, which would be matched if the expression was just <literal>0.[0-9]</literal>, with no
+                      backslash before the period</para>
                     </entry>
                   </row>
                 </tbody>

@@ -10,9 +10,19 @@
   linkend="menus.tools"/> menu to access this tool.</para>
 
     <para>OmegaT also offers a command line based alignment mode for key-based
-formats. See <link linkend="launch.with.command.line.mode.console.align"
-endterm="launch.with.command.line.mode.console.align.title"/> for
-details.</para>
+    formats. See <link linkend="launch.with.command.line.mode.console.align"
+    endterm="launch.with.command.line.mode.console.align.title"/> for
+    details.</para>
+
+	<warning>
+      <para>The aligner does not allow you to save you work partway through an
+      alignment. Therefore, it is recommended that you divide the files to align
+      into shorter files that you can comfortably align in a single
+      session. Doing so has the added benefit of reducing mismatches in the
+      initial automatic alignment, making the manual correction step
+      smoother.</para>
+    </warning>
+
 
   <para>Alignment is the process of creating a bilingual translation memory
   from a pair of already translated monolingual documents. Aligning the
@@ -182,7 +192,7 @@ details.</para>
 
         <listitem>
           <para>The aligner uses sentence segmentation by default. Uncheck the
-          check box to use paragraph segmentation (see Preferences – <link
+          check box to use paragraph segmentation (see <link
           endterm="dialogs.preferences.segmentation.setup.title"
           linkend="dialogs.preferences.segmentation.setup"/>)</para>
         </listitem>
@@ -233,7 +243,7 @@ details.</para>
 
         <listitem>
           <para>Clicking this button lets you edit the file filters that
-          apply to this project. See Preferences – <link linkend="dialogs.preferences.file.filters"
+          apply to this project. See <link linkend="dialogs.preferences.file.filters"
           endterm="dialogs.preferences.file.filters.title"/> for details.</para>
 
 
@@ -475,14 +485,6 @@ details.</para>
       first column are saved to the translation memory.</para>
     </note>
 
-    <warning>
-      <para>The aligner does not allow you to save you work partway through an
-      alignment. Therefore, it is recommended that you divide the files to align
-      into shorter files that you can comfortably align in a single
-      session. Doing so has the added benefit of reducing mismatches in the
-      initial automatic alignment, making the manual correction step
-      smoother.</para>
-    </warning>
 
     <para>In addition to the <guibutton>Save TMX...</guibutton> button, the
     bottom part of the <guilabel>Align</guilabel> window in the manual

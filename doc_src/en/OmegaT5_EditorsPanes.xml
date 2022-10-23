@@ -174,8 +174,8 @@
 
                 <para>Dropping other files will copy them to the <filename
                 class="directory">source</filename> folder. This also applies
-                to the <link endterm="windows.project.files.title"
-                linkend="windows.project.files"/> window.</para>
+                to the <link endterm="windows.source.files.list.title"
+                linkend="windows.source.files.list"/> window.</para>
               </listitem>
             </varlistentry>
 

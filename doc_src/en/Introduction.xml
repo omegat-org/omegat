@@ -163,17 +163,17 @@
 	OmegaT will just ask you to reload the project to take the new locations
 	into account.</para></note>
 	
-    <para>The <link linkend="windows.project.files"
-    endterm="windows.project.files.title"/> dialog opens next.</para>
+    <para>The <link linkend="windows.source.files.list"
+    endterm="windows.source.files.list.title"/> dialog opens next.</para>
 
-	<para>Click on <guibutton><link linkend="windows.project.files.copy.files"
-	endterm="windows.project.files.copy.files.title"/></guibutton> or <guibutton><link
-	linkend="windows.project.files.download.page"
-	endterm="windows.project.files.download.page.title"/></guibutton> and select your source
+	<para>Click on <guibutton><link linkend="windows.source.files.list.copy.files"
+	endterm="windows.source.files.list.copy.files.title"/></guibutton> or <guibutton><link
+	linkend="windows.source.files.list.download.page"
+	endterm="windows.source.files.list.download.page.title"/></guibutton> and select your source
 	files. OmegaT will then copy the selected files to the <link
 	linkend="project.folder.source" endterm="project.folder.source.title"/>
 	folder of your newly created project. You can close the <link
-	linkend="windows.project.files" endterm="windows.project.files.title"/>
+	linkend="windows.source.files.list" endterm="windows.source.files.list.title"/>
 	dialog after the source files have loaded in the <link
 	linkend="panes.editor" endterm="panes.editor.title"/> pane.</para>
 
@@ -476,8 +476,8 @@
         <para>You can access and modify the project settings with <link
         linkend="menus.project.properties"
         endterm="menus.project.properties.title"/>. To see the list of files in
-        the project, use <link linkend="menus.project.project.files"
-        endterm="menus.project.project.files.title"/>. You can access all the
+        the project, use <link linkend="menus.project.source.files.list"
+        endterm="menus.project.source.files.list.title"/>. You can access all the
         resource contents at any time with <link
         linkend="menus.project.access.project.contents"
         endterm="menus.project.access.project.contents.title"/>.</para>

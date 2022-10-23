@@ -527,7 +527,7 @@
             </row>
 
             <row>
-              <entry>Project Files...</entry>
+              <entry>Source Files...</entry>
               <entry>viewFileListMenuItem</entry>
               <entry>ctrl L</entry>
               <entry>meta L</entry>

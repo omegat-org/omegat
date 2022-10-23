@@ -348,7 +348,7 @@
       <varlistentry id="project.folder.omegat.file.order">
         <term id="project.folder.omegat.file.order.title">files_order.txt</term>
         <listitem>
-          <para>This file is created if you manually change the order of the files in the <link linkend="windows.project.files" endterm="windows.project.files.title"/> window.</para>
+          <para>This file is created if you manually change the order of the files in the <link linkend="windows.source.files.list" endterm="windows.source.files.list.title"/> window.</para>
         </listitem>
       </varlistentry>
 

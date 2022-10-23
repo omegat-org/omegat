@@ -80,7 +80,7 @@
   linkend="project.folder.source.title" endterm="project.folder.source.title"/> folder.</para></listitem>
 	</varlistentry>
   </variablelist>
-  The two actions are equivalent to using the <link linkend="" endterm=""/> menu commands <link linkend="" endterm=""/> and <link linkend="" endterm=""/>.
+  The two actions are equivalent to using the <link linkend="menus.project" endterm="menus.project.title"/> menu commands <link linkend="menus.project.copy.files.to.source.folder" endterm="menus.project.copy.files.to.source.folder.title"/> and <link linkend="menus.project.download.mediawiki.page" endterm="menus.project.download.mediawiki.page.title"/>.
   </para>
   
   <note><para>To keep the Source Files list window to automatically open when a project is loaded, manually change <token>project_files_show_on_load</token> to

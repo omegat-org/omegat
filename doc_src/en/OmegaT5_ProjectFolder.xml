@@ -36,7 +36,7 @@
 	</varlistentry>
   </variablelist>
 
-  <para>You can assign locations other than the default ones to the various resources either when you create the project, or later on.</para>
+  <para>By using <link linkend="menus.project.properties" endterm="menus.project.properties.title"/>, you can easily assign locations other than the default ones to the various resources either when you create the project, or later on.</para>
 
   <para>For example, you can
 

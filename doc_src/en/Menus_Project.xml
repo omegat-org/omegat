@@ -42,28 +42,10 @@
     </varlistentry>
 
     <varlistentry id="menus.project.open.recent">
-      <term id="menus.project.open.recent.title">Open Recent Project</term>
+      <term id="menus.project.open.recent.title">Open Recent...</term>
       <listitem>
         <para>Gives access to the last ten edited projects. Clicking one will
         save the current project, close it and open the selected project.</para>
-      </listitem>
-    </varlistentry>
-
-    <varlistentry id="menus.project.copy.files.to.source.folder">
-      <term id="menus.project.copy.files.to.source.folder.title">Copy Files to Source Folder...</term>
-      <listitem>
-        <para>Copies the selected files to the <link
-        linkend="project.folder.source" endterm="project.folder.source.title"/>
-        folder and reloads the project to take the new files into
-        account.</para>
-      </listitem>
-    </varlistentry>
-
-    <varlistentry id="menus.project.download.mediawiki.page">
-      <term id="menus.project.download.mediawiki.page.title">Download MediaWiki Page...</term>
-      <listitem>
-		<para>Opens a dialog where you can paste the URL of the Mediawiki page you want to translate. The source data of the page will be copied into the <link
-        linkend="project.folder.source" endterm="project.folder.source.title"/> folder, as a text file, with the <filename>.utf8</filename> extension.</para>
       </listitem>
     </varlistentry>
 
@@ -107,6 +89,24 @@
       </listitem>
     </varlistentry>
 
+    <varlistentry id="menus.project.copy.files.to.source.folder">
+      <term id="menus.project.copy.files.to.source.folder.title">Add Files...</term>
+      <listitem>
+        <para>Copies the selected files to the <link
+        linkend="project.folder.source" endterm="project.folder.source.title"/>
+        folder and reloads the project to take the new files into
+        account.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry id="menus.project.download.mediawiki.page">
+      <term id="menus.project.download.mediawiki.page.title">Add Online MediaWiki Page...</term>
+      <listitem>
+		<para>Opens a dialog where you can paste the URL of the Mediawiki page you want to translate. The source data of the page will be copied into the <link
+        linkend="project.folder.source" endterm="project.folder.source.title"/> folder, as a text file, with the <filename>.utf8</filename> extension.</para>
+      </listitem>
+    </varlistentry>
+
     <varlistentry id="menus.project.commit.source.files">
       <term id="menus.project.commit.source.files.title">Commit Source Files</term>
       <listitem>
@@ -125,11 +125,11 @@
     </varlistentry>
 
     <varlistentry id="menus.project.create.translated.documents">
-      <term id="menus.project.create.translated.documents.title">Create Translated Documents		  <keycombo><keycap>C</keycap><keycap>D</keycap></keycombo>
+      <term id="menus.project.create.translated.documents.title">Create Translated Files <keycombo><keycap>C</keycap><keycap>D</keycap></keycombo>
 </term>
       <listitem>
-        <para>Creates the target documents based on your translation. The
-        created target documents are located in the <link
+        <para>Creates the target files based on your translation. The
+        created target files are located in the <link
         linkend="project.folder.target" endterm="project.folder.target.title"/> folder.</para>
 		<para>
 		</para>				
@@ -137,10 +137,10 @@
     </varlistentry>
 
     <varlistentry id="menus.project.create.current.translated.document">
-      <term id="menus.project.create.current.translated.document.title">Create Current Translated Document		  <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>D</keycap></keycombo>
+      <term id="menus.project.create.current.translated.document.title">Create Current Translated File		  <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>D</keycap></keycombo>
 </term>
       <listitem>
-        <para>Creates the target document corresponding to source document currently being translated. The resulting document is located in the <link
+        <para>Creates the target file corresponding to source file currently being translated. The resulting file is located in the <link
         linkend="project.folder.target" endterm="project.folder.target.title"/>
         folder.</para>
 		<para>
@@ -176,11 +176,11 @@
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.project.project.files">
-      <term id="menus.project.project.files.title">Project Files...		  <keycombo><keycap>C</keycap><keycap>L</keycap></keycombo>
+    <varlistentry id="menus.project.source.files.list">
+      <term id="menus.project.source.files.list.title">Source Files...		  <keycombo><keycap>C</keycap><keycap>L</keycap></keycombo>
 </term>
       <listitem>
-        <para>Opens the <link linkend="windows.project.files" endterm="windows.project.files.title"/> window.</para>
+        <para>Opens the <link linkend="windows.source.files.list" endterm="windows.source.files.list.title"/> window.</para>
 		<para>
 		</para>				
       </listitem>
@@ -193,47 +193,60 @@
         <para>Gives access to the various project folders. See <link
         linkend="project.folder" endterm="project.folder.title"/> for more details.</para>
         <para>In addition, there are three menu entries that directly open the current
-        source or target documents, or the writable glossary. The documents are
-        opened in the default application set by the operating system. The options are grayed out if the documents do not exist yet.</para>
+        source or target files, or the writable glossary. The files are
+        opened in the default application set by the operating system. The options are grayed out if the files do not exist yet.</para>
 
 		<variablelist>
 		  <varlistentry>
-			<term><link linkend="project.folder" endterm="project.folder.title"/></term>
+			<term><link linkend="project.folder">Project Folder</link></term>
+			<listitem><para>Opens the folder in your file management application</para></listitem>
 		  </varlistentry>
 		  <varlistentry>
-			<term><link linkend="project.folder.dictionary" endterm="project.folder.dictionary.title"/></term>
+			<term><link linkend="project.folder.dictionary">Dictionaries</link></term>
+			<listitem><para>Opens the folder in your file management application</para></listitem>
 		  </varlistentry>
 		  <varlistentry>
-			<term><link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/></term>
+			<term><link linkend="project.folder.glossary">Glossaries</link></term>
+			<listitem><para>Opens the folder in your file management application</para></listitem>
 		  </varlistentry>
 		  <varlistentry>
-			<term><link linkend="project.folder.source" endterm="project.folder.source.title"/></term>
+			<term><link linkend="project.folder.source">Source Files</link></term>
+			<listitem><para>Opens the folder in your file management application</para></listitem>
 		  </varlistentry>
 		  <varlistentry>
-			<term><link linkend="project.folder.target" endterm="project.folder.target.title"/></term>
+			<term><link linkend="project.folder.target">Target Files</link></term>
+			<listitem><para>Opens the folder in your file management application</para></listitem>
 		  </varlistentry>
 		  <varlistentry>
-			<term><link linkend="project.folder.tm" endterm="project.folder.tm.title"/></term>
+			<term><link linkend="project.folder.tm">TMs</link></term>
+			<listitem><para>Opens the folder in your file management application</para></listitem>
 		  </varlistentry>
 		  <varlistentry>
-			<term>Current Source Document</term>
+			<term><link linkend="project.folder.exported.tm">Exported TMs</link></term>
+			<listitem><para>Opens the folder in your file management application</para></listitem>
+		  </varlistentry>
+		  <varlistentry>
+			<term>Current Source File</term>
 			<listitem>
-			  <para>The current source document is located in the <link
+			  <para>The current source file is located in the <link
 			  linkend="project.folder.source"
-			  endterm="project.folder.source.title"/> folder.</para></listitem>
+			  endterm="project.folder.source.title"/> folder.</para>
+			<para>Opens the file in its associated applicationif it exists.</para></listitem>
 		  </varlistentry>
 		  <varlistentry>
-			<term>Current Target Document</term>
+			<term>Current Target File</term>
 			<listitem>
-			  <para>The current target document is located in the <link
+			  <para>The current target file is located in the <link
 			  linkend="project.folder.target"
-			  endterm="project.folder.target.title"/> folder.</para></listitem>
+			  endterm="project.folder.target.title"/> folder.</para>
+			<para>Opens the file in its associated applicationif it exists.</para></listitem>
 		  </varlistentry>
 		  <varlistentry>
 			<term>Writable Glossary</term>
 			<listitem>
 			  <para>The writable glossary is located in the <link
-			  linkend="project.folder.glossary" endterm="project.folder.glossary.title"/> folder.</para></listitem>
+			  linkend="project.folder.glossary" endterm="project.folder.glossary.title"/> folder.</para>
+			<para>Opens the file in its associated applicationif it exists.</para></listitem>
 		  </varlistentry>
 		</variablelist>
       </listitem>

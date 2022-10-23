@@ -77,35 +77,41 @@
 	located inside the OmegaT.app package.</para>
 
 	<para><filename>Configuration.properties</filename> is located in
-	<filename>Contents/Resources/</filename>.
-	<filename>Info.plist</filename> is located in
+	<filename>Contents/Resources/</filename>.</para>
+	<para><filename>Info.plist</filename> is located in
 	<filename>Contents/</filename>.</para>
 
 	<note><para>To access the files inside <filename>OmegaT.app</filename>,
 	right-click on <filename>OmegaT.app</filename> and select “Show Package
 	Contents”.</para></note>
 
-	<para>Right-click on the file you want to modify and select your text
-	editor of choice or <command>cd</command> there directly from the
-	command line and open the files from the command line.</para>
+	<para>Use your text editor of choice to modify the files.</para>
 
-	<para>OmegaT’s configuration is changed by modifying
-	<filename>Configuration.properties</filename>.</para>
-
-	<para>For predefined options, remove the <literal>#</literal> before a
-	parameter to enable it. For example, <literal>user.language=ja</literal>
-	(without the <literal>#</literal>) will launch OmegaT with the user
-	interface in Japanese.</para>
-
-	<para>The Java configuration is changed by modifying
-	<filename>Info.plist</filename>.</para>
-
-	<para>For example, to change the amount of memory available uncomment
-	the line <literal>&lt;!-- &lt;string&gt;-Xmx6g&lt;/string&gt;
-	--&gt;</literal> by removing the <literal>&lt;!--</literal> and
-	<literal>--&gt;</literal>. This will launch OmegaT with 6 GB of memory;
-	change the <literal>6g</literal> to the desired amount.</para>
-
+	<variablelist>
+	  <varlistentry>
+		<term>Configuration.properties</term>
+		<listitem>
+		  <para>For predefined options, remove the <literal>#</literal> before a
+		  parameter to enable it. For example,
+		  <literal>user.language=ja</literal> (without the <literal>#</literal>)
+		  will launch OmegaT with the user interface in Japanese.</para>
+		</listitem>
+	  </varlistentry>
+	  <varlistentry>
+		<term>Info.plist</term>
+		<listitem>
+		  <para>For example, to change the amount of memory available uncomment
+		  the line</para>
+		  <para><literal>&lt;!-- &lt;string&gt;-Xmx6g&lt;/string&gt;
+		  --&gt;</literal></para>
+		  <para>by removing the <literal>&lt;!--</literal> and
+		  <literal>--&gt;</literal>.</para>
+		  <para>This will launch OmegaT with 6 GB of
+		  memory; change the <literal>6g</literal> to the desired amount.</para>
+		</listitem>
+	  </varlistentry>
+	</variablelist>
+	
 	<note><para><filename>OmegaT.app</filename> can make use of macOS Services.
 	You can also use AppleScript, Automator or Shortcuts to create
 	Services or scripts that will automate frequent actions.</para></note>

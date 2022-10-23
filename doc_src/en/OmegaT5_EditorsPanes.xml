@@ -773,7 +773,7 @@ Folder = <token>Dossier</token></programlisting>
   <section id="panes.statusbar">
     <title id="panes.statusbar.title">Status bar</title>
 
-    <para>The bottom of the main window is the status bad.</para>
+    <para>The bottom of the main window is the status bar.</para>
 
 	<para>The left side displays information about actions taken in the project
 	or error messages.</para>

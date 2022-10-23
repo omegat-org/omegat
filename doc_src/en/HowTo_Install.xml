@@ -252,8 +252,8 @@
 
 	<programlisting>./gradlew tasks</programlisting>
 
-	<para>Detailed instructions on building OmegaT are can be found in the  <ulink
+	<para>Detailed instructions on building OmegaT can be found in the  <ulink
 	url="https://sourceforge.net/p/omegat/svn/HEAD/tree/trunk/docs_devel/README.txt">README.txt</ulink>
-	file in the <filename class="directory">docs_devel</filename> subfolder.</para>
+	file located in the <filename class="directory">docs_devel</filename> subfolder.</para>
   </section>
 </section>

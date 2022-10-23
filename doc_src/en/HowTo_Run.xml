@@ -86,8 +86,8 @@
 	Contents”.</para></note>
 
 	<para>Right-click on the file you want to modify and select your text
-	editor of choice or <command>cd</command> there directly from the
-	command line and open the files from the command line.</para>
+	editor of choice, or use the command line to <command>cd</command> to that
+	directory and open the files.</para>
 
 	<para>OmegaT’s configuration is changed by modifying
 	<filename>Configuration.properties</filename>.</para>

@@ -798,19 +798,42 @@ h2:has(a[href="appendices.html"]) ~ ul {
 
 /* status bar */
 
+/* messages */
+#panes\.statusbar\.messages > div.example-contents {
+	background-color:var(--normal-background);	
+}
+																
 #panes\.statusbar\.widgets > div.example-contents > p {
-	background-color:var(--normal-background);
+	background-color:var(--insert-background);
     border: 0.1px solid var(--normal-font) ;
-	border-radius: 5px;
-    padding: 10px;
-	text-align: center;
+	border-radius: 0px;
+	text-align: left;
+}
+
+#panes\.statusbar\.messages > div.example-contents > p > .literal {
+	background-color:var(--insert-background);
+    border: 0.1px solid var(--normal-font) ;
+    padding: 0.5em 5em 0.5em 1em;
+	box-shadow: 0.5px 0.5px;
+	font-size:1em;
+}
+
+/* widget */
+
+#panes\.statusbar\.widgets > div.example-contents {
+	background-color:var(--normal-background);
+}
+
+#panes\.statusbar\.widgets > div.example-contents > p  {
+	background-color:var(--insert-background);
+    border: 0.1px solid var(--normal-font) ;
+    padding: 0.5em 5em 0.5em 1em;
+	box-shadow: 0.5px 0.5px;
+	text-align: left;
 }
 
 #panes\.statusbar\.widgets > div.example-contents > p > .literal {
-	font-weight: 100;
-	font-size: 1.2em;	
-    border: 0px solid var(--normal-font) ;
-    padding: 1px;
+	font-size:1em;	
 }
 
 #panes\.statusbar\.widgets > div.example-contents > p > .literal > .token {
@@ -818,19 +841,22 @@ h2:has(a[href="appendices.html"]) ~ ul {
     padding: 3px;	
 }
 
+/* widget with % */
+#panes\.statusbar\.widgets\.percentage > div.example-contents {
+	background-color:var(--normal-background);	
+}
+
 #panes\.statusbar\.widgets\.percentage > div.example-contents > p {
-	background-color:var(--normal-background);
+	background-color:var(--insert-background);
     border: 0.1px solid var(--normal-font) ;
-	border-radius: 5px;
-    padding: 10px;
-	text-align: center;
+    padding: 0.5em 5em 0.5em 1em;
+	box-shadow: 0.5px 0.5px;
+	text-align: left;
+	font-size:1em;
 }
 
 #panes\.statusbar\.widgets\.percentage > div.example-contents > p > .literal {
-	font-weight: 100;
-	font-size: 1.2em;	
-    border: 0px solid var(--normal-font) ;
-    padding: 1px;
+		font-size:1em;
 }
 
 #panes\.statusbar\.widgets\.percentage > div.example-contents > p > .literal > .token {

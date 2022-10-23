@@ -778,6 +778,18 @@ Folder = <token>Dossier</token></programlisting>
 	<para>The left side displays information about actions taken in the project
 	or error messages.</para>
 
+	<example id="panes.statusbar.messages">
+      <title id="panes.statusbar.messages.title">Status bar messages examples</title>
+	  <para><literal>Synchronization of repositories</literal></para>
+	  <para>→ OmegaT is opening a team project and synchronizes with the remote repository.</para>
+	  <para><literal>Jumping to last edited segment...</literal></para>
+	  <para>→ OmegaT opens the last edited segment from the last session.</para>
+	  <para><literal>Project autosaved at 10:48 PM</literal></para>
+	  <para>→ OmegaT has recently saved the project.</para>
+	  <para><literal>Translated files created</literal></para>
+	  <para>→ Files were created by the user.</para>
+	</example>
+
     <para>The right side displays the <link
     endterm="panes.editor.cursor.lock.title"
     linkend="panes.editor.cursor.lock"/> and the <link linkend="panes.editor.overwriting" endterm="panes.editor.overwriting.title"/> status followed by progress

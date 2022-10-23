@@ -31,7 +31,15 @@
 	  <varlistentry id="configuration.folder.default.contents.omegat.prefs">
 		<term id="configuration.folder.default.contents.omegat.prefs.title">omegat.prefs</term>
 		<listitem><para>This file includes a number of important user
-		preferences.</para></listitem></varlistentry>
+		preferences.</para>
+		<para>Some preference do not have an equivalent in the user interface. They must be modified manually.
+		<example id="no.source.file.display">
+		  <title id="no.source.file.display.title">Do not automatically display the Source Files list</title>
+		  <para>To keep the Source Files list window to automatically open when a project is loaded,  find <token>&lt;project_files_show_on_load></token> and replace <token>true</token> to <token>false</token>:</para>
+		  <para><programlisting>&lt;project_files_show_on_load><token>false</token>&lt;/project_files_show_on_load></programlisting>
+		  </para>
+		</example></para>
+	  <note><para>Only this preference currently requires manual modification.</para></note> </listitem></varlistentry>
 	  
 	  <varlistentry id="configuration.folder.default.contents.uilayout">
 		<term id="configuration.folder.default.contents.uilayout.title">uiLayout.xml</term>

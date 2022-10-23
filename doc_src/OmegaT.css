@@ -15,6 +15,9 @@
 	--accent-line:#BCBCBC;
 	--warning-header:#ff5555;
 	--caps-border:#408000;
+	--term-match:blue;
+	--match-background:#BFFFBC;
+	--replace-color:#FD8A00;
 	
 	--intro-color:#77A43B;
 	--panes-color:#DE5B17;
@@ -199,10 +202,13 @@ code.filename {
 
 .programlisting,
 .literallayout {
+	background-color:var(--normal-background);
+	font-weight: 100;
+	font-size: 1em;	
+	text-align:left;		
+
     border: 1px solid var(--accent-line) ;
-    background: var(--insert-background);
     padding: 1em;
-    font-weight: bold;
     border-radius: 5px;
 }
 
@@ -493,6 +499,7 @@ span.guimenu, span.guimenuitem, span.guilabel {
 
 span.guibutton {
     font-family:monospace;
+	font-size: 1.2em;
     border: .1px solid var(--normal-font);
     border-radius:4px;
     padding: 0 .3rem;
@@ -781,4 +788,93 @@ h2:has(a[href="appendices.html"]) ~ ul {
 	padding-right: 2em;
 	border-right: var(--support-border) var(--appendices-color);
 	border-bottom: var(--support-border) var(--appendices-color);
+}
+
+/* specific items */
+
+.example-contents {
+	background-color:var(--insert-background);
+}
+
+/* status bar */
+
+#panes\.statusbar\.widgets > div.example-contents > p {
+	background-color:var(--normal-background);
+    border: 0.1px solid var(--normal-font) ;
+	border-radius: 5px;
+    padding: 10px;
+	text-align: center;
+}
+
+#panes\.statusbar\.widgets > div.example-contents > p > .literal {
+	font-weight: 100;
+	font-size: 1.2em;	
+    border: 0px solid var(--normal-font) ;
+    padding: 1px;
+}
+
+#panes\.statusbar\.widgets > div.example-contents > p > .literal > .token {
+    border: 0.1px solid var(--normal-font) ;
+    padding: 3px;	
+}
+
+#panes\.statusbar\.widgets\.percentage > div.example-contents > p {
+	background-color:var(--normal-background);
+    border: 0.1px solid var(--normal-font) ;
+	border-radius: 5px;
+    padding: 10px;
+	text-align: center;
+}
+
+#panes\.statusbar\.widgets\.percentage > div.example-contents > p > .literal {
+	font-weight: 100;
+	font-size: 1.2em;	
+    border: 0px solid var(--normal-font) ;
+    padding: 1px;
+}
+
+#panes\.statusbar\.widgets\.percentage > div.example-contents > p > .literal > .token {
+    border: 0.1px solid var(--normal-font) ;
+    padding: 3px;	
+}
+
+
+/* fuzzy match */
+
+#the\.first\.match .token {
+	color:var(--term-match);
+}
+
+/* glossary match */ 
+
+#glossary\.matches .token {
+	font-weight:bold;
+}
+
+#glossary\.matches > div.example-contents > pre > span:nth-child(2) {
+	font-weight:100;	
+}
+
+#no\.source\.file\.display > div.example-contents > pre > span {
+	font-weight:bold;
+}
+
+#search\.for\.doitsu > div.example-contents > pre > .token {
+	color:var(--term-match);
+	font-weight:bold;
+}
+
+
+#select\.second\.match > div.example-contents > pre > span.action {
+	background-color:var(--match-background);
+}
+
+/* replace */
+
+#replace\.with\.allemand > div.example-contents > pre > span:nth-child(1) {
+	color:var(--term-match);	
+}
+
+#replace\.with\.allemand > div.example-contents > pre > span:nth-child(2) {
+	color:var(--replace-color);
 }

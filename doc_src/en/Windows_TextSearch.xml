@@ -7,6 +7,10 @@
   endterm="menus.edit.search.project.title"/> to open a new search window and
   enter the word or phrase you wish to search for in the search field.</para>
   
+  <para>You can have several search windows opened at the same time. Use
+  <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>F</keycap></keycombo> to
+  call the last search window.</para>
+
   <para>Alternatively, select a word or phrase in the <link
   linkend="panes.editor" endterm="panes.editor.title"/>, <link
   linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/>, or <link
@@ -14,9 +18,6 @@
   endterm="menus.edit.search.project.title"/>. The selection is
   automatically entered in the search field.</para>
 
-  <para>You can have several search windows opened at the same time. Use
-  <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>F</keycap></keycombo> to
-  call the last search window.</para>
 
   <para>Click the drop-down arrow of the <guilabel>Search for:</guilabel> field
   to access the last ten searches.</para>
@@ -26,6 +27,17 @@
   
   <para>Matches will be displayed in bold blue characters.</para>
 
+  	  <example id="search.for.doitsu">
+		<title id="search.for.doitsu.title">Search for ドイツ</title>
+		<para>
+		  <programlisting>-- 148> | language = [[日本語]]・[[<token>ドイツ</token>語]]
+---------
+-- 177> [[2001年]]、<token>ドイツ</token>の永住権を取得。
+---------</programlisting>
+		</para>
+	  </example>
+
+  
   <para>The search window has its own menus:</para>
 
   <itemizedlist>
@@ -68,7 +80,9 @@
   <section id="windows.text.search.methods">
     <title id="windows.text.search.methods.title">Search type</title>
 
-    <para>Use the radio buttons to select the type of search. The following
+    <para>Use the radio buttons to select the type of search.</para>
+
+	<para>The following
     search types are available:</para>
 
     <variablelist>
@@ -88,24 +102,9 @@
           <para>Search for segments containing each of the search terms
           separated by a space.</para>
 		  <para>It is equivalent to a web search without quotation marks.</para>
-        </listitem>
-      </varlistentry>
 
-      <varlistentry id="windows.text.search.methods.regex">
-        <term id="windows.text.search.methods.regex.title">Regular
-        expressions</term>
-        <listitem>
-          <para>Treat the search string as a regular expression.</para>
-		  <para>Regular expressions are a very powerful way to search for
-		  general or complex patterns rather than exact strings. See <link
-		  linkend="app.regex" endterm="app.regex.title"/> for
-		  details.</para>
-        </listitem>
-      </varlistentry>
-    </variablelist>
-
-    <para>The <code>*</code> and <code>?</code> characters can be used in both
-    exact and keyword searches:</para>
+	<note><para>The <code>*</code> and <code>?</code> characters can be used in
+	both exact and keyword searches:</para>
 
     <itemizedlist>
       <listitem>
@@ -125,9 +124,28 @@
 		of <literal>running</literal> or <literal>runner</literal>.</para>
       </listitem>
     </itemizedlist>
-<warning><para>The <code>*</code> and <code>?</code> characters have a special
+	</note>
+        </listitem>
+      </varlistentry>
+	</variablelist>
+
+	<variablelist>
+      <varlistentry id="windows.text.search.methods.regex">
+        <term id="windows.text.search.methods.regex.title">Regular
+        expressions</term>
+        <listitem>
+          <para>Treat the search string as a regular expression.</para>
+		  <para>Regular expressions are a very powerful way to search for
+		  general or complex patterns rather than exact strings. See <link
+		  linkend="app.regex" endterm="app.regex.title"/> for
+		  details.</para>
+
+	<warning><para>The <code>*</code> and <code>?</code> characters have a special
 meaning in regular expressions. Therefore, the wild card searches described
 above only apply to exact and keyword searches.</para></warning>
+        </listitem>
+      </varlistentry>
+    </variablelist>
   </section>
 
   <section id="windows.text.search.options">
@@ -145,7 +163,7 @@ above only apply to exact and keyword searches.</para></warning>
 	<varlistentry><term>In source</term><listitem><para>Search in the source
 	segments.</para></listitem></varlistentry>
 
-	<varlistentry><term>In translations</term><listitem><para>Search in the
+	<varlistentry><term>In translation</term><listitem><para>Search in the
 	target segments.</para></listitem></varlistentry>
 
 	<varlistentry><term>In notes</term><listitem><para>Search in notes attached
@@ -173,37 +191,67 @@ above only apply to exact and keyword searches.</para></warning>
 	the file containing the segment is found is displayed above each
 	result.</para></listitem></varlistentry>
 
-	<varlistentry><term>Search in: Project</term><listitem><para>You can check
-	<guilabel>Memory</guilabel> to include the project memory (<link
+	<varlistentry><term>Search in: Project</term>
+	<listitem><para>Search in the various bilingual ressources of the project.</para>
+	<para>Select the scope of the search:
+	<variablelist>
+	  <varlistentry>
+		<term>Memory</term>
+		<listitem><para>include the project memory (<link
 	linkend="project.folder.project.save.tmx"
-	endterm="project.folder.project.save.tmx.title"/>), <guilabel>TMs</guilabel>
-	to include other translation memories located in the <link
-	linkend="project.folder.tm" endterm="project.folder.tm.title"/> folder, and
-	<guilabel>Glossaries</guilabel> to include the glossaries located in the
+	endterm="project.folder.project.save.tmx.title"/>)</para>
+		</listitem>
+	  </varlistentry>
+	  <varlistentry>
+		<term>TMs</term>
+		<listitem><para>include the translation memories located in the <link
+		linkend="project.folder.tm" endterm="project.folder.tm.title"/> folder</para>
+		</listitem>
+	  </varlistentry>
+	  <varlistentry>
+		<term>Glossaries</term>
+		<listitem><para>include the glossaries located in the
 	<link linkend="project.folder.glossary"
-	endterm="project.folder.glossary.title"/> folder, in the
-	search.</para></listitem></varlistentry>
-
-	<varlistentry><term>Search in: Files</term><listitem><para>Search in a
-	single file or in a folder containing several files.</para>
-	<para>File searches (unlike translation memories), are limited to files in
-	source file formats supported by OmegaT. Consequently,
-	<filename>TMX</filename> files are excluded from file searches since OmegaT
-	does not recognize them as a source file format despite supporting them for
+		  endterm="project.folder.glossary.title"/> folder</para>
+		</listitem>
+	  </varlistentry>
+	</variablelist>
+  </para>
+	</listitem>
+	</varlistentry>
+	
+	<varlistentry><term>Search in: Files</term><listitem><para>Search in reference files not included in the project ressources.</para>
+	<para>OmegaT can conduct searches in any file that it can read as source file. See <link linkend="dialogs.preferences.file.filters" endterm="dialogs.preferences.file.filters.title"/> for details.</para>
+	<para>TMX files are excluded from file searches since OmegaT
+	does not recognize them as a source file format despite supporting them as
 	translation memories.</para></listitem></varlistentry>
-  </variablelist>
- 
-    <para>You can click on <guibutton>Show Advanced Options</guibutton>
-    button to select additional criteria such as the person who authored or
+
+  <varlistentry>
+    <term><guibutton>Show Advanced Options</guibutton></term>
+	<listitem>
+	  <para>Select additional criteria such as the person who authored or
     changed the translation, the date and time of translation (modification), or
-    whether to exclude orphan segments.</para>
+    whether to exclude orphan segments.
 
-	<para>Checking the <guilabel>Full/Half-width char insensitive</guilabel>
-	option will return results that match both the full- and half-width forms
-	(CJK characters) of the characters in the search terms.</para>
-
-	<para><guilabel>Number of matching segments</guilabel> sets the maximum
-	number of matches displayed in the search result area.</para>
+	<variablelist>
+	  <varlistentry>
+		<term>Full/Half-width char insensitive</term>
+		<listitem><para>returns results that match both the full- and half-width forms
+		(CJK characters) of the characters in the search terms.</para>
+		</listitem>
+	  </varlistentry>
+	  <varlistentry>
+		<term>Number of matching segments</term>
+		<listitem>
+		  <para>sets the maximum
+		  number of matches displayed in the search result area.</para>
+		</listitem>
+	  </varlistentry>
+	</variablelist>
+	Hide the advanced options with <guibutton>Hide Advanced Options</guibutton></para>
+	</listitem>
+  </varlistentry>
+  </variablelist>
   </section>
 
   <section id="windows.text.search.result.display">
@@ -213,7 +261,10 @@ above only apply to exact and keyword searches.</para></warning>
     translated segments, the original text is displayed above the translated
     text. Only the source text is displayed for untranslated segments.</para>
 
-    <para>You can use the following shortcuts in the search results:
+    <para>Double-click on a segment to open it in the <link
+    linkend="panes.editor" endterm="panes.editor.title"/>.</para>
+
+    <para>You can also use the following shortcuts in the search results:
 	<variablelist>
 	  <varlistentry>
 		<term><keycombo><keycap>C</keycap><keycap>N</keycap></keycombo></term>
@@ -228,18 +279,33 @@ above only apply to exact and keyword searches.</para></warning>
 		<listitem><para>Jump to the current segment in the editor.</para></listitem>
 	  </varlistentry>
 	</variablelist>
+	The selected segment is highlighted in green:
+
+  	<example id="select.second.match">
+		<title id="select.second.match.title">Select the second match</title>
+		<para>
+		  <programlisting>-- 148> | language = [[日本語]]・[[<token>ドイツ</token>語]]
+---------
+<action>-- 177> [[2001年]]、<token>ドイツ</token>の永住権を取得。</action>
+---------</programlisting>
+		</para>
+	  </example>
 	</para>
 	
-    <para>Double-click on a segment to open it in the <link
-    linkend="panes.editor" endterm="panes.editor.title"/>.</para>
-
-  	<para>Check the <guilabel>Auto-sync with Editor</guilabel> box at the bottom
-  	of the search window to have selected segments open in the Editor
-  	automatically.</para>
-
-  	<para>Check the <guilabel>Back to the initial segment on close</guilabel>
-  	box to automatically return to the segment you were in when you started the
-  	search after you close the window.</para>
+	<variablelist>
+	  <varlistentry>
+		<term>Auto-sync with Editor</term>
+		<listitem>
+		  <para>the <link linkend="panes.editor" endterm="panes.editor.title"/> pane synchronizes its display with the selection in the search results</para>
+		</listitem>
+	  </varlistentry>
+	  <varlistentry>
+		<term>Back to the initial segment on close</term>
+		<listitem>
+		  <para>when you close the search windows, the <link linkend="panes.editor" endterm="panes.editor.title"/> pane automatically goes back to the segment that it displayed before the search was started</para>
+		</listitem>
+	  </varlistentry>
+	</variablelist>
   </section>
 	
   <section id="windows.text.search.filter">
@@ -248,6 +314,6 @@ above only apply to exact and keyword searches.</para></warning>
 	<para>Click on <guibutton>Filter</guibutton> to show only the matching search result
 	segments in the <link linkend="panes.editor"
 	endterm="panes.editor.title"/>. To remove the filter, click
-	on <guibutton>Remove Filter</guibutton> or reload the project.</para>
+	on <guibutton>Remove Filter</guibutton> at the top of the <link linkend="panes.editor" endterm="panes.editor.title"/> pane or reload the project.</para>
   </section>
 </section>

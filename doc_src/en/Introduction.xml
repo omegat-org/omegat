@@ -129,26 +129,18 @@
 
 
 	<para>To start using OmegaT, you first have to create a project to hold all
-    your files, such as your source files, translation memories, glossaries, and
-	eventually your translated files.</para>
+    your files.</para>
 
-	<para>To create a new project, use <link linkend="menus.project.new"
+	<para>Use <link linkend="menus.project.new"
 	endterm="menus.project.new.title"/>, select an empty folder, or create a new
 	one with the name of your project.</para>
 
-    <para>That project will hold all your default ressources since an OmegaT
-    project is simply a set of folders and folders.</para>
+    <para>An OmegaT project is simply a set of folders and folders that holds
+    all your default resources.</para>
 
     <para>The <link linkend="dialogs.project.properties"
     endterm="dialogs.project.properties.title"/> dialog opens
     after you have named your project.</para>
-
-	<para>The dialog is identical to the <link
-	linkend="dialogs.project.properties"
-	endterm="dialogs.project.properties.title"/> dialog that you access with
-	<link linkend="menus.project.properties"
-		  endterm="menus.project.properties.title"/>. Refer to that section of the
-	manual to understand the various options.</para>
 
 	<para>At the top of that dialog, select the languages of your source and
 	translated files, set the various options, and click the
@@ -159,7 +151,7 @@
     endterm="menus.project.properties.title"/>.</para>
 
 	<note><para>The structure of a project can be modified at any moment during
-	translation. You can point at new resource folders from that dialog and
+	the translation. You can point at new resource folders from that dialog and
 	OmegaT will just ask you to reload the project to take the new locations
 	into account.</para></note>
 	
@@ -169,17 +161,13 @@
 	<para>Click on <guibutton><link linkend="windows.source.files.list.copy.files"
 	endterm="windows.source.files.list.copy.files.title"/></guibutton> or <guibutton><link
 	linkend="windows.source.files.list.download.page"
-	endterm="windows.source.files.list.download.page.title"/></guibutton> and select your source
-	files. OmegaT will then copy the selected files to the <link
-	linkend="project.folder.source" endterm="project.folder.source.title"/>
-	folder of your newly created project. You can close the <link
-	linkend="windows.source.files.list" endterm="windows.source.files.list.title"/>
-	dialog after the source files have loaded in the <link
-	linkend="panes.editor" endterm="panes.editor.title"/> pane.</para>
+	endterm="windows.source.files.list.download.page.title"/></guibutton> and add source
+	files.</para>
 
 	<para>If you don't remember where your project is, you can use <link
-    linkend="menus.project.open.recent"
-    endterm="menus.project.open.recent.title"/>.</para>
+	linkend="menus.project.access.project.contents"
+	endterm="menus.project.access.project.contents.title"/> from the <link
+	linkend="menus.project" endterm="menus.project.title"/> menu.</para>
 
 	<para>If a file does not appear into the <link linkend="panes.editor"
 	endterm="panes.editor.title"/> pane, then it could be that it is empty, or
@@ -189,9 +177,33 @@
 	file formats. If the format is not there, use third party plugins or convert the file to a
 	format that is supported. See <link linkend="how.to.translate.other.files"
 	endterm="how.to.translate.other.files.title"/> for details.</para>
-
   </section>
-  
+
+    <section id="introduction.manage.your.segments">
+    <title id="introduction.manage.your.segments.title">Manage your segments</title>
+	<para>The default setting for a translation project is to create <emphasis>sentences</emphasis> by splitting the <emphasis>paragraph blocks</emphasis> found in the document. See <link linkend="dialogs.project.properties.options.segmentation" endterm="dialogs.project.properties.options.segmentation.title"/> for details.</para>
+	
+	<para>Segments that are within paragraph can be further segmented, or "unsegmented" (merged).</para>
+
+	<para>To further segment them, add a segmentation rule, to merge them, add an exception rule. See <link linkend="app.segmentation" endterm="app.segmentation.title"/> for details.</para>
+
+	<note><para>Since a standard space character is often used as a boundary for a segment, if you want to merge two parts that are separated by a space character,
+
+	<orderedlist>
+	  <listitem><para>go to the source file with <link
+	  linkend="menus.project.access.project.contents"
+	  endterm="menus.project.access.project.contents.title"/>,</para></listitem>
+	  <listitem><para>find the location of that space,</para></listitem>
+	  <listitem><para>replace it by anything that is not a standard space but
+	  looks like a standard space, like a "non breakable space" for
+	  example,</para></listitem>
+	  <listitem><para>save your modifications,</para></listitem>
+	  <listitem><para>go back to OmegaT and <link
+	linkend="menus.project.reload"
+	endterm="menus.project.reload.title"/>.</para></listitem>
+	</orderedlist></para></note>
+  </section>
+
   <section id="introduction.make.it.look.good">
 	<title id="introduction.make.it.look.good.title">Make it look good!</title>
 
@@ -229,9 +241,8 @@
       </mediaobject>
     </figure>
 
-	<note><para>To display the paragraph marks and see where your segments have
-	been created use <link linkend="menus.view.mark.paragraph.delimitations"
-	endterm="menus.view.mark.paragraph.delimitations.title"/> and Preferences – <link
+	<note><para>To display the paragraph marks and see to which paragraph each segment belongs, use <link linkend="menus.view.mark.paragraph.delimitations"
+	endterm="menus.view.mark.paragraph.delimitations.title"/> and see how to set the paragraph mark here: <link
 	linkend="dialogs.preferences.editor.paragraph.delimitation.format"
 	endterm="dialogs.preferences.editor.paragraph.delimitation.format.title"/>.</para></note>
 
@@ -242,17 +253,26 @@
     <title id="introduction.translate.the.segments.one.by.one.title">Translate
     your files</title>
 
-    <para>In the <link linkend="panes.editor" endterm="panes.editor.title"/>
-    pane, OmegaT will present one segment at a time for you to translate.  After
-    you have typed the translation of a segment, use <link
-    linkend="menus.goto.next.untranslated.segment"
-    endterm="menus.goto.next.untranslated.segment.title"/> to move to the next
-    untranslated segment.</para>
+    <para>The <link linkend="panes.editor" endterm="panes.editor.title"/>
+    pane is the place where you type your translation.</para>
+
+	<note><para>To see how efficient you can be with shortcuts, see <link
+	linkend="app.shortcuts.streamline.workflow"
+	endterm="app.shortcuts.streamline.workflow.title"/>. </para>
+	</note>
+	
+	<para>After you have typed the translation of a segment, use <link
+	linkend="menus.goto.next.untranslated.segment"
+	endterm="menus.goto.next.untranslated.segment.title"/> to move to the next
+	untranslated segment.</para>
 
 	<para>Once you leave the segment, its translation is automatically stored
 	into <link linkend="project.folder.project.save.tmx"
 	endterm="project.folder.project.save.tmx.title"/> and will be used as
 	reference for the rest of your translation.</para>
+
+	<para>See the <link linkend="menus.goto" endterm="menus.goto.title"/> menu
+	for more navigation options.</para>
 
 	<note><para>OmegaT does not have different statuses for translated
 	segments. Either a segment is translated, or it is not. If you need a
@@ -262,38 +282,42 @@
 	endterm="menus.edit.search.project.title"/> to filter segments based on
 	criteria that you set, and review only those, etc.</para></note>
 	
-	<para>You can manually register
-	glossary items that you want to later use in the translation with <link
+	<para>Use <link
 	linkend="menus.edit.create.glossary.entry"
-	endterm="menus.edit.create.glossary.entry.title"/>.</para>
+	endterm="menus.edit.create.glossary.entry.title"/> to add terms to your glossary.</para>
 
-	<para>See the <link linkend="menus.goto" endterm="menus.goto.title"/> menu
-	for more navigation options.</para>
-
-	<para>When you enter a segment that matches some of the content of the
-	project translation memories, OmegaT displays the matches in the <link
-	linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/>
-	pane. Similarly, if there are terms matching the contents of the glossaries,
-	the terms and their translations are displayed in the <link
-	linkend="panes.glossary" endterm="panes.glossary.title"/> pane.</para>
-
-	<para>Use the <link linkend="menus.edit" endterm="menus.edit.title"/> menu
-	to manage translation memory matches and perform other various useful
-	functions. Use <link linkend="menus.view.mark.glossary.matches"
+	<para>Use <link linkend="menus.view.mark.glossary.matches"
 	endterm="menus.view.mark.glossary.matches.title"/> in the <link
-	linkend="menus.view" endterm="menus.view.title"/> menu and Preferences – <link
+	linkend="menus.view" endterm="menus.view.title"/> menu and <link
 	linkend="dialog.preferences.auto.completion"
 	endterm="dialog.preferences.auto.completion.title"/> to
 	manage glossary matches.</para>
+
+	<para>When you enter a segment where terms match terms in your glossaries,
+	the terms and their translations will be displayed in the <link
+	linkend="panes.glossary" endterm="panes.glossary.title"/> pane.</para>
+	
+	<para>When you enter a segment that matches some of the content of the
+	project translation memories, OmegaT displays the matches in the <link
+	linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/>
+	pane.</para>
+
+	<para>Use the <link linkend="menus.edit" endterm="menus.edit.title"/> menu
+	to manage translation memory matches and perform other various useful
+	functions.</para>
 
 	<para>With <link linkend="menus.edit.search.project"
 	endterm="menus.edit.search.project.title"/>, you can search the whole
 	project for terms, sentence fragments and so on, using exact, keyword, or
 	regular expression searches, as well as narrow the scope of the search based
-	on information such as author or date. You can also focus only on the
+	on information such as author or date.</para>
+
+	<para>You can also focus only on the
 	results by filtering them in the Editor. See
 	<link linkend="windows.text.search" endterm="windows.text.search.title"/>
-	for details. You can replace terms with <link
+	for details.</para>
+
+	<para>You can replace terms with <link
 	linkend="menus.edit.search.and.replace"
 	endterm="menus.edit.search.and.replace.title"/> by using a similar
 	dialog. See <link linkend="windows.text.replace"
@@ -315,36 +339,8 @@
 	linkend="panes.editor.auto.completion.menu"
 	endterm="panes.editor.auto.completion.menu.title"/> is also available in the
 	Editor pane.</para>
-
-	<para>To see how efficient you can be with shortcuts, also see <link linkend="app.shortcuts.streamline.workflow" endterm="app.shortcuts.streamline.workflow.title"/>. </para>
-	
   </section>
-  
-  <section id="introduction.manage.your.segments">
-    <title id="introduction.manage.your.segments.title">Manage your segments</title>
-	<para>The default setting for a translation project is to create <emphasis>sentences</emphasis> by splitting the <emphasis>paragraph blocks</emphasis> found in the document. See <link linkend="dialogs.project.properties.options.segmentation" endterm="dialogs.project.properties.options.segmentation.title"/> for details.</para>
-	
-	<para>Segments that are within paragraph can be further segmented, or "unsegmented" (merged).</para>
-
-	<para>To further segment them, add a segmentation rule, to merge them, add an exception rule. See <link linkend="app.segmentation" endterm="app.segmentation.title"/> for details.</para>
-
-	<note><para>Since a standard space character is often used as a boundary for a segment, if you want to merge two parts that are separated by a space character,
-
-	<orderedlist>
-	  <listitem><para>go to the source file with <link
-	  linkend="menus.project.access.project.contents"
-	  endterm="menus.project.access.project.contents.title"/>,</para></listitem>
-	  <listitem><para>find the location of that space,</para></listitem>
-	  <listitem><para>replace it by anything that is not a standard space but
-	  looks like a standard space, like a "non breakable space" for
-	  example,</para></listitem>
-	  <listitem><para>save your modifications,</para></listitem>
-	  <listitem><para>go back to OmegaT and <link
-	linkend="menus.project.reload"
-	endterm="menus.project.reload.title"/>.</para></listitem>
-	</orderedlist></para></note>
-  </section>
-  
+    
   <section id="introduction.manage.your.tags">
     <title id="introduction.manage.your.tags.title">Manage your tags</title>
 

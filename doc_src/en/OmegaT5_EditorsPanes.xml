@@ -786,116 +786,75 @@ Folder = <token>Dossier</token></programlisting>
     <para>Click on the figures to alternate between displaying progress as numbers or
     percentages.</para>
 
-    <table id="panes.statusbar.widgets">
+
+	<example id="panes.statusbar.widgets">
       <title id="panes.statusbar.widgets.title">Status bar progress
       information</title>
-
-      <tgroup cols="1">
-        <colspec align="left" colnum="1"/>
-
-        <tbody>
-          <row>
-            <entry><inlinemediaobject>
-                <imageobject role="html">
-                  <imagedata fileref="images/StatusBarNumbers.png"
-                             width="80%"/>
-                </imageobject>
-
-                <imageobject role="fo">
-                  <imagedata fileref="images/StatusBarNumbers.png" width="40%"/>
-                </imageobject>
-              </inlinemediaobject></entry>
-          </row>
-
-          <row>
-            <entry><variablelist>
-                <varlistentry>
-                  <term>In the file</term>
-
-                  <listitem>
-                    <para><emphasis role="bold">257</emphasis> = number of
-                    translated segments / <emphasis role="bold">271</emphasis>
-                    = total number of segments</para>
-                  </listitem>
-                </varlistentry>
-
-                <varlistentry>
-                  <term>In the project</term>
-
-                  <listitem>
-                    <para><emphasis role="bold">12292</emphasis> = number of
-                    unique translated segments / <emphasis
-                    role="bold">154896</emphasis> = total number of unique
-                    segments, <emphasis role="bold">(177692)</emphasis> =
-                    total number of segments</para>
-                  </listitem>
-                </varlistentry>
-
-                <varlistentry>
-                  <term>In the segment</term>
-
-                  <listitem>
-                    <para><emphasis role="bold">35</emphasis> = number of
-                    characters in the source / <emphasis
-                    role="bold">0</emphasis> = number of characters in the
-                    target area so far</para>
-                  </listitem>
-                </varlistentry>
-              </variablelist></entry>
-          </row>
-
-          <row>
-            <entry><inlinemediaobject>
-                <imageobject role="html">
-                  <imagedata fileref="images/StatusBarPercentages.png"
-                             width="80%"/>
-                </imageobject>
-
-                <imageobject role="fo">
-                  <imagedata fileref="images/StatusBarPercentages.png"
-                             width="40%"/>
-                </imageobject>
-              </inlinemediaobject></entry>
-          </row>
-
-          <row>
-            <entry><variablelist>
-                <varlistentry>
-                  <term>In the file</term>
-
-                  <listitem>
-                    <para><emphasis role="bold">94.8%</emphasis> = % of
-                    translated segments / <emphasis role="bold">14</emphasis>
-                    = number of untranslated segments</para>
-                  </listitem>
-                </varlistentry>
-
-                <varlistentry>
-                  <term>In the project</term>
-
-                  <listitem>
-                    <para><emphasis role="bold">7.9%</emphasis> = % of
-                    translated segments / <emphasis
-                    role="bold">142,604</emphasis> = number of untranslated
-                    segments, <emphasis role="bold">(177,692)</emphasis> =
-                    total number of segments</para>
-                  </listitem>
-                </varlistentry>
-
-                <varlistentry>
-                  <term>In the segment</term>
-
-                  <listitem>
-                    <para><emphasis role="bold">35</emphasis> = number of
-                    characters in the source / <emphasis
-                    role="bold">0</emphasis> = number of characters in the
-                    target area so far</para>
-                  </listitem>
-                </varlistentry>
-              </variablelist></entry>
-          </row>
-        </tbody>
-      </tgroup>
-    </table>
+	  <para><literal>LCK  |  OVR <token>257/271 (12292/154896, 177692)</token><token> 35/0 </token></literal></para>
+<variablelist>
+  <varlistentry>
+    <term>In the file</term>
+    <listitem>
+      <para><emphasis role="bold">257</emphasis> = number of
+      translated segments / <emphasis role="bold">271</emphasis>
+      = total number of segments</para>
+    </listitem>
+  </varlistentry>
+  <varlistentry>
+    <term>In the project</term>
+	<listitem>
+      <para><emphasis role="bold">12292</emphasis> = number of
+      unique translated segments / <emphasis
+      role="bold">154896</emphasis> = total number of unique
+      segments, <emphasis role="bold">(177692)</emphasis> =
+      total number of segments</para>
+    </listitem>
+  </varlistentry>
+  <varlistentry>
+    <term>In the segment</term>
+	<listitem>
+      <para><emphasis role="bold">35</emphasis> = number of
+      characters in the source / <emphasis
+      role="bold">0</emphasis> = number of characters in the
+      target area so far</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+	</example>
+	
+	<example id="panes.statusbar.widgets.percentage">
+      <title id="panes.statusbar.widgets.percentage.title">Status bar progress
+      information, percentage mode</title>
+<para><literal>LCK  |  OVR <token>94.8% (14 left) / 7.9% (142,604 left), 177,692</token> <token>35/0</token></literal></para>
+<variablelist>
+  <varlistentry>
+    <term>In the file</term>
+	<listitem>
+      <para><emphasis role="bold">94.8%</emphasis> = % of
+      translated segments / <emphasis role="bold">14</emphasis>
+      = number of untranslated segments</para>
+    </listitem>
+  </varlistentry>
+  <varlistentry>
+    <term>In the project</term>
+    <listitem>
+      <para><emphasis role="bold">7.9%</emphasis> = % of
+      translated segments / <emphasis
+      role="bold">142,604</emphasis> = number of untranslated
+      segments, <emphasis role="bold">(177,692)</emphasis> =
+      total number of segments</para>
+    </listitem>
+  </varlistentry>
+  <varlistentry>
+    <term>In the segment</term>
+	<listitem>
+      <para><emphasis role="bold">35</emphasis> = number of
+      characters in the source / <emphasis
+      role="bold">0</emphasis> = number of characters in the
+      target area so far</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+	</example>
   </section>
 </chapter>

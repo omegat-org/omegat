@@ -460,7 +460,12 @@
 		<link linkend="menus.project.create.translated.documents"
 		endterm="menus.project.create.translated.documents.title"/> or <link
 		linkend="menus.project.create.current.translated.document"
-		endterm="menus.project.create.current.translated.document.title"/>.</para></listitem>
+		endterm="menus.project.create.current.translated.document.title"/>.</para>
+		<note><para>By default, that folder is the project folder itself but you
+		can change its location to make it more practical to share exported TM
+		files. See <link linkend="how.to.tm.share.translation.memories"
+		endterm="how.to.tm.share.translation.memories.title"/> for
+		details.</para></note></listitem>
 	  </varlistentry>
 
 	  <varlistentry id="dialogs.project.properties.file.locations.tms.to.export">

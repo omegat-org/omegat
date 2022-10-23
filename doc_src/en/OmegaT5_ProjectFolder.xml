@@ -197,6 +197,11 @@
 	<note><para>You can combine folders to create new functions. For example, a 10% penalty folder within the machine translation folder: <filename>tm/mt/penalty-010</filename> would never generate 100% matches that could otherwise be automatically inserted by OmegaT, and would always set a red background to the match whenever it is inserted.</para></note>
   </section>
 
+  <section id="project.folder.exported.tm">
+	<title id="project.folder.exported.tm.title">exported tms folder</title>
+	<para>By default, that folder is the project folder itself but you can change its location to make it more practical to share exported TM files. See <link linkend="how.to.tm.share.translation.memories" endterm="how.to.tm.share.translation.memories.title"/> for details.</para>
+  </section>
+
   <section id="project.folder.dictionary">
     <title id="project.folder.dictionary.title">dictionary</title>
     <para>This folder is initially empty, and is used to store any dictionaries you add to the project.</para>

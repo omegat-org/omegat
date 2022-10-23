@@ -69,19 +69,6 @@
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.edit.replace.with.mt">
-      <term id="menus.edit.replace.with.mt.title">Replace with Machine Translation		  <keycombo><keycap>C</keycap><keycap>M</keycap></keycombo>
-	  </term>
-      <listitem>
-        <para>Replaces the target segment with the translation, provided by the
-        selected Machine Translation service. No action is taken if no Machine
-        Translation service has been activated (in <link
-        linkend="menus.options.mt" endterm="menus.options.mt.title"/>). See Preferences – 
-        <link linkend="dialogs.preferences.mt" endterm="dialogs.preferences.mt.title"/> for
-        details.</para>
-      </listitem>
-    </varlistentry>
-
     <varlistentry id="menus.edit.replace.with.source">
       <term id="menus.edit.replace.with.source.title">Replace with Source		  <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>R</keycap></keycombo>
 	  </term>
@@ -95,6 +82,19 @@
 	  </term>
       <listitem>
         <para>Inserts the segment source at the cursor position.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry id="menus.edit.replace.with.mt">
+      <term id="menus.edit.replace.with.mt.title">Replace with Machine Translation		  <keycombo><keycap>C</keycap><keycap>M</keycap></keycombo>
+	  </term>
+      <listitem>
+        <para>Replaces the target segment with the translation, provided by the
+        selected Machine Translation service. No action is taken if no Machine
+        Translation service has been activated (in <link
+        linkend="menus.options.mt" endterm="menus.options.mt.title"/>). See Preferences – 
+        <link linkend="dialogs.preferences.mt" endterm="dialogs.preferences.mt.title"/> for
+        details.</para>
       </listitem>
     </varlistentry>
 
@@ -132,7 +132,7 @@
     </varlistentry>
 
     <varlistentry id="menus.edit.create.glossary.entry">
-      <term id="menus.edit.create.glossary.entry.title">Create Glossary Entry		  <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>G</keycap></keycombo>
+      <term id="menus.edit.create.glossary.entry.title">Create Glossary Entry...		  <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>G</keycap></keycombo>
 	  </term>
       <listitem>
         <para>Allows the user to create an entry in <link
@@ -170,7 +170,7 @@
     </varlistentry>
 
     <varlistentry id="menus.edit.search.project">
-      <term id="menus.edit.search.project.title">Search Project...		  <keycombo><keycap>C</keycap><keycap>F</keycap></keycombo>
+      <term id="menus.edit.search.project.title">Search...		  <keycombo><keycap>C</keycap><keycap>F</keycap></keycombo>
 	  </term>
       <listitem>
         <para>Opens a new <link linkend="windows.text.search" endterm="windows.text.search.title"/>.</para>
@@ -185,7 +185,7 @@
     </varlistentry>
 
     <varlistentry id="menus.edit.search.and.replace">
-      <term id="menus.edit.search.and.replace.title">Search and Replace...		  <keycombo><keycap>C</keycap><keycap>K</keycap></keycombo>
+      <term id="menus.edit.search.and.replace.title">Replace...		  <keycombo><keycap>C</keycap><keycap>K</keycap></keycombo>
 	  </term>
       <listitem>
         <para>Opens a new <link linkend="windows.text.replace" endterm="windows.text.replace.title"/>.</para>
@@ -214,16 +214,16 @@
         OmegaT selects the word starting with the character immediately to the
         right of the cursor.</para>
 		<itemizedlist>
-		  <listitem><para><guimenuitem>Lower Case</guimenuitem></para>
+		  <listitem><para><guimenuitem>lower case</guimenuitem></para>
 		  <para>all letters in lower case</para>
 		  </listitem>
-		  <listitem><para><guimenuitem>Upper Case</guimenuitem></para>
+		  <listitem><para><guimenuitem>UPPER CASE</guimenuitem></para>
 		  <para>ALL LETTERS IN UPPER CASE</para>
 		  </listitem>
 		  <listitem><para><guimenuitem>Title Case</guimenuitem></para>
 		  <para>Almost all Letters in Lower Case</para>
 		  </listitem>
-		  <listitem><para><guimenuitem>Sentence Case</guimenuitem></para>
+		  <listitem><para><guimenuitem>Sentence case</guimenuitem></para>
 		  <para>Only the first letter in upper case.</para>
 		  </listitem>
 		  <listitem><para><guimenuitem>Cycle</guimenuitem>			<keycombo><keycap>S</keycap><keycap>F3</keycap></keycombo>

@@ -248,7 +248,7 @@
 
       <varlistentry id="dialogs.project.properties.external.searches">
         <term id="dialogs.project.properties.external.searches.title">Local External
-        Search...</term>
+        Searches...</term>
 
         <listitem>
           <para>By default, external searches are global and are shared by all

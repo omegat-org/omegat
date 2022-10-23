@@ -1360,7 +1360,7 @@
 
 <section id="dialogs.preferences.external.searches">
   <title id="dialogs.preferences.external.searches.title">Global External
-  Search</title>
+  Searches</title>
   <para>External searches are either web searches or local commands that
   take the string selected in the Editor as a parameter. The web searches
   are opened in the default browser and the commands are equivalent to items

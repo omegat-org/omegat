@@ -333,10 +333,10 @@
 		endterm="project.folder.source.title"/> for details.</para>
 		<para>If the folder is empty, if none of the files contain translatable
 		contents, or if there are no files supported by OmegaT’s file filters,
-		OmegaT will tell you that the folder is empty.</para></listitem>
-	  </varlistentry>
-	  
-	  <varlistentry id="dialogs.project.properties.file.locations.exclusions">
+		OmegaT will tell you that the folder is empty.</para>
+
+		<variablelist>
+		<varlistentry id="dialogs.project.properties.file.locations.exclusions">
 		<term
 		id="dialogs.project.properties.file.locations.exclusions.title">Exclusions...</term>
 		<listitem>
@@ -368,6 +368,9 @@
 		  url="https://ant.apache.org/manual/dirtasks.html#patterns">Apache ant
 		  syntax</ulink>.</para>
 		</listitem>
+		</varlistentry>
+		</variablelist>
+		</listitem>
 	  </varlistentry>
 	  
 	  <varlistentry id="dialogs.project.properties.file.locations.translation.memories">
@@ -395,22 +398,24 @@
 		endterm="project.folder.glossary.title"/> for details.</para>
 		<para>If matches are found, they will be displayed in the <link
 		linkend="panes.glossary" endterm="panes.glossary.title"/>
-		pane.</para></listitem>
+		pane.</para>
+		<para>See the <link linkend="app.glossaries"
+		endterm="app.glossaries.title"/> appendix for details.</para></listitem>
 	  </varlistentry>
 	  
 	  <varlistentry id="dialogs.project.properties.file.locations.writable.glossary">
 		<term
 		id="dialogs.project.properties.file.locations.writable.glossary.title">Writeable
 		Glossary File</term>
-		<listitem><para>The writeable glossary if the file that OmegaT will use
-		when you want to add translated glossary terms to your project. Use
+		<listitem><para>The writeable glossary if the file that OmegaT uses
+		when you add translated glossary terms to your project with
 		<link linkend="menus.edit.create.glossary.entry"
-		endterm="menus.edit.create.glossary.entry.title"/> to add a term.</para>
+		endterm="menus.edit.create.glossary.entry.title"/>.</para>
 		<para>Added items are automatically recognized and displayed if they
-		match terms in the current segment. See <link
-		linkend="dialogs.preferences.glossary"
-		endterm="dialogs.preferences.glossary.title"/> for
-		details.</para></listitem>
+		match terms in the current segment.</para>
+		<para>This file is <emphasis>always</emphasis> located in the
+		<link linkend="project.folder.glossary"
+		endterm="project.folder.glossary.title"/> folder.</para></listitem>
 	  </varlistentry>
 	  
 	  <varlistentry id="dialogs.project.properties.file.locations.dictionaries">
@@ -418,11 +423,11 @@
 		id="dialogs.project.properties.file.locations.dictionaries.title">Dictionaries
 		Folder</term>
 		<listitem><para>This folder contains the files
-		that you want to use as reference dictionaries. OmegaT will try to read all
-		the files at once, and will match their contents to the segment you are
+		that you want to use as reference dictionaries. OmegaT tries to read all
+		the files at once, and matches their contents to the segment you are
 		translating. See <link linkend="project.folder.dictionary"
 		endterm="project.folder.dictionary.title"/> for details.</para>
-		<para>If matches are found, they will be displayed in the <link
+		<para>If matches are found, they are displayed in the <link
 		linkend="panes.dictionary" endterm="panes.dictionary.title"/>
 		pane.</para></listitem>
 	  </varlistentry>
@@ -431,16 +436,19 @@
 		<term
 		id="dialogs.project.properties.file.locations.translated.files.title">Translated
 		Files Folder</term>
-		<listitem><para>This folder is the place where OmegaT will copy the
-		contents of the <link
+		<listitem><para>This folder is the place where OmegaT creates the translated files.</para>
+		<para>The translated files are the translated versions of the files located in the <link
 		linkend="project.folder.source"
 		endterm="project.folder.source.title"/>
-		folder where all the translated segments will be replaced by their
-		translation and the non-translated segments will be kept in the original
-		language.</para>
-		<para>The folder structure will reflect the copied contents and files
+		folder.</para>
+
+		<para>Segment that have been translated will be replaced by their
+		translation and untranslated segments will remain in the source language.</para>
+		
+		<para>The folder structure reflects the copied contents and files
 		that are not supported by OmegaT’s file filters will be copied without
 		modifications.</para>
+
 		<para>Use <link linkend="menus.project.create.translated.documents"
 		endterm="menus.project.create.translated.documents.title"/> or <link
 		linkend="menus.project.create.current.translated.document"
@@ -453,21 +461,23 @@
 		<term
 		id="dialogs.project.properties.file.locations.exported.tms.title">Exported
 		Translation Memories Folder</term>
-		<listitem><para>This folder is the place where OmegaT will copy the
-		current state of the translation in the form of TMX files.</para>
-		<para>The TMX files will contain only the segments that have been
-		translated with
+		<listitem><para>This folder is the place where OmegaT copies the current
+		state of the translation in the form of TMX files when you create the
+		translated files.</para>
+		<para>The TMX files will contain only the segments that correspond to the current contents of the <link linkend="project.folder.source"
+		endterm="project.folder.source.title"/> folder.</para>
+		<para>Use
 		<link linkend="menus.project.create.translated.documents"
 		endterm="menus.project.create.translated.documents.title"/> or <link
 		linkend="menus.project.create.current.translated.document"
-		endterm="menus.project.create.current.translated.document.title"/>.</para>
+		endterm="menus.project.create.current.translated.document.title"/> to create the translated files and the exported TMX files.</para>
 		<note><para>By default, that folder is the project folder itself but you
 		can change its location to make it more practical to share exported TM
 		files. See <link linkend="how.to.tm.share.translation.memories"
 		endterm="how.to.tm.share.translation.memories.title"/> for
-		details.</para></note></listitem>
-	  </varlistentry>
+		details.</para></note>
 
+		<variablelist>
 	  <varlistentry id="dialogs.project.properties.file.locations.tms.to.export">
 		<term
 		id="dialogs.project.properties.file.locations.tms.to.export.title">Translation
@@ -496,6 +506,9 @@
 			tags encapsulated in a way that is compatible with other CAT
 			tools.</para></listitem>
 		  </varlistentry>
+		</variablelist>
+		</listitem>
+	  </varlistentry>
 		</variablelist>
 		<para>See <ulink
 		url="https://www.gala-global.org/tmx-14b#SectionIntroduction">TMX 1.4b

@@ -25,7 +25,7 @@
       Delimitations</term>
       <listitem>
         <para>If checked, separations between paragraphs in the source document
-        are indicated visually. See Preferences – <link
+        are indicated visually. See <link
         linkend="dialogs.preferences.editor.paragraph.delimitation.format"
         endterm="dialogs.preferences.editor.paragraph.delimitation.format.title"/>.</para>
         </listitem>
@@ -90,7 +90,7 @@
         placed in <link linkend="project.folder.tm.auto"
         endterm="project.folder.tm.auto.title"/> for example) are marked in
         various colors.</para>
-		<para>That color marking is shown as long as Preferences – 
+		<para>That color marking is shown as long as 
         <link linkend="dialogs.preferences.editor.save.auto-populated.status"
         endterm="dialogs.preferences.editor.save.auto-populated.status.title"/>
         is checked.</para>

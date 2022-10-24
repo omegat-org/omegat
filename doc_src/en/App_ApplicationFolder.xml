@@ -136,7 +136,7 @@
 	<varlistentry id="application.folder.plugins">
 	  <term id="application.folder.plugins.title">plugins/</term>
 	  <listitem>
-		<para>The folder where you can install external plugins. See Preferences – <link linkend="dialogs.preferences.plugins" endterm="dialogs.preferences.plugins.title"/> for details.</para>
+		<para>The folder where you can install external plugins. See <link linkend="dialogs.preferences.plugins" endterm="dialogs.preferences.plugins.title"/> for details.</para>
 	  </listitem>
 	</varlistentry>
 

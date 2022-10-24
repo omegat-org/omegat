@@ -41,7 +41,7 @@
 	  <varlistentry id="configuration.folder.default.contents.logs">
 		<term id="configuration.folder.default.contents.logs.title">logs/</term>
 		<listitem><para>This folder contains a number of log files. The most current is <filename>OmegaT.log</filename>.</para>
-		<para>These files record various internal state and program event messages generated while OmegaT is running. If OmegaT behaves erratically, it is important to include this file, or the relevant part thereof, if you submit a bug report.</para>
+		<para>These files record various internal state and program event messages generated while OmegaT is running. If OmegaT behaves erratically, include this file, or the relevant part thereof, to your report.</para>
 		<para>The contents of the file can also be viewed using the <link linkend="menus.help.log" endterm="menus.help.log.title"/> option in the <link linkend="menus.help" endterm="menus.help.title"/> menu.</para>
 		</listitem>
 	  </varlistentry>
@@ -56,11 +56,11 @@
 		  
 		  <varlistentry id="configuration.folder.default.contents.script.source">
 			<term id="configuration.folder.default.contents.script.source.title">source.txt</term>
-			<listitem><para>This file contains the <emphasis>original text</emphasis> from of the current segment when Preferences –  <link linkend="dialogs.preferences.editor.export.the.segment.to.text.files" endterm="dialogs.preferences.editor.export.the.segment.to.text.files.title"/> is active. The text in the file is replaced each time a new segment is entered.</para></listitem>
+			<listitem><para>This file contains the <emphasis>original text</emphasis> from of the current segment when <link linkend="dialogs.preferences.editor.export.the.segment.to.text.files" endterm="dialogs.preferences.editor.export.the.segment.to.text.files.title"/> is active. The text in the file is replaced each time a new segment is entered.</para></listitem>
 		  </varlistentry>
 		  <varlistentry id="configuration.folder.default.contents.script.target">
 			<term id="configuration.folder.default.contents.script.target.title">target.txt</term>
-			<listitem><para>This file contains the <emphasis>translated text</emphasis>  from the current segment when Preferences –  <link linkend="dialogs.preferences.editor.export.the.segment.to.text.files" endterm="dialogs.preferences.editor.export.the.segment.to.text.files.title"/> is active. The text in the file is replaced each time a new segment is entered.</para>
+			<listitem><para>This file contains the <emphasis>translated text</emphasis>  from the current segment when <link linkend="dialogs.preferences.editor.export.the.segment.to.text.files" endterm="dialogs.preferences.editor.export.the.segment.to.text.files.title"/> is active. The text in the file is replaced each time a new segment is entered.</para>
 			</listitem>
 		  </varlistentry>
 	  </variablelist>Those three files provide as a simple way to access some OmegaT content and process it with local programs such as shell scripts.</para></listitem></varlistentry>
@@ -85,13 +85,13 @@
 	
 	<varlistentry id="configuration.folder.extra.contents.filters">
 	  <term id="configuration.folder.extra.contents.filters.title">filters.xml</term>
-	  <listitem><para>This parameter file contains customized file filters. See Preferences – <link linkend="dialogs.preferences.file.filters" endterm="dialogs.preferences.file.filters.title"/> for details.</para>
+	  <listitem><para>This parameter file contains customized file filters. See <link linkend="dialogs.preferences.file.filters" endterm="dialogs.preferences.file.filters.title"/> for details.</para>
 	  </listitem>
 	</varlistentry>
 
 	<varlistentry id="configuration.folder.extra.contents.finder">
 	  <term id="configuration.folder.extra.contents.finder.title">finder.xml</term>
-	  <listitem><para>This parameter file contains customized external search parameters. See Preferences – <link linkend="dialogs.preferences.external.searches" endterm="dialogs.preferences.external.searches.title"/> for details.</para>
+	  <listitem><para>This parameter file contains customized external search parameters. See <link linkend="dialogs.preferences.external.searches" endterm="dialogs.preferences.external.searches.title"/> for details.</para>
 	  </listitem>
 	</varlistentry>
 	
@@ -109,19 +109,19 @@
 
 	<varlistentry id="configuration.folder.extra.contents.segmentation">
 	  <term id="configuration.folder.extra.contents.segmentation.title">segmentation.conf</term>
-	  <listitem><para>This parameter file contains customized segmentation parameters. See Preferences –  <link linkend="dialogs.preferences.segmentation.setup" endterm="dialogs.preferences.segmentation.setup.title"/> for details.</para>
+	  <listitem><para>This parameter file contains customized segmentation parameters. See <link linkend="dialogs.preferences.segmentation.setup" endterm="dialogs.preferences.segmentation.setup.title"/> for details.</para>
 	  </listitem>
 	</varlistentry>
 	
 	<varlistentry id="configuration.folder.extra.contents.plugin">
 	  <term id="configuration.folder.extra.contents.plugin.title">plugins/</term>
-	  <listitem><para>This folder provides an alternative location for manually installed OmegaT extension plugins. See Preferences – <link linkend="dialogs.preferences.plugins" endterm="dialogs.preferences.plugins.title"/> for details.</para>
+	  <listitem><para>This folder provides an alternative location for manually installed OmegaT extension plugins. See <link linkend="dialogs.preferences.plugins" endterm="dialogs.preferences.plugins.title"/> for details.</para>
 	  </listitem>
 	</varlistentry>
 
 	<varlistentry id="configuration.folder.extra.contents.spelling">
 	  <term id="configuration.folder.extra.contents.spelling.title">spelling/</term>
-	  <listitem><para>This folder contains your spelling dictionaries. See <link linkend="dialog.preferences.spellchecker.install.new" endterm="dialog.preferences.spellchecker.install.new.title"/> for details.</para>
+	  <listitem><para>This folder contains your spelling dictionaries. See <link linkend="dialog.preferences.spellchecker" endterm="dialog.preferences.spellchecker.title"/> for details.</para>
 	  </listitem>
 	</varlistentry>
   </variablelist>
@@ -132,6 +132,6 @@
 	endterm="launch.with.command.line.title"
 	linkend="launch.with.command.line"/> for details.</para>
 
-	<para>Preferences are stored in the default configuration folder. If
-	you specify a different configuration folder, all modifications made in the <link linkend="dialogs.preferences" endterm="dialogs.preferences.title"/> dialog will be stored in the newly specified configuration folder.</para></note>
+	<para>Modified preferences are stored in the configuration folder used by the project. If
+	you do not use the default configuration folder, all modifications made in <link linkend="dialogs.preferences" endterm="dialogs.preferences.title"/> will be stored in the specified configuration folder and will not appear when you resume work with the default configuration folder.</para></note>
 </section>

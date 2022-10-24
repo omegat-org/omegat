@@ -272,7 +272,7 @@
 		  details.</para>
 
 		  <note><para>For security purposes, local project-based external searches are
-		  disabled by default. You can enable them by checking Preferences – <link
+		  disabled by default. You can enable them by checking <link
 		  linkend="dialogs.preferences.external.search.enable.project.specific.commands"
 		  endterm="dialogs.preferences.external.search.enable.project.specific.commands.title"/>
 		  in the <link linkend="dialogs.preferences.external.searches"

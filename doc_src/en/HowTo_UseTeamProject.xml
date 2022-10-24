@@ -93,7 +93,7 @@
         <para>OmegaT synchronizes a team project when it is opened, reloaded,
         closed or saved. This means the automatic save function also regularly
         synchronizes your local project with the version on the server at the
-        interval specified in Preferences –  <link
+        interval specified in <link
         endterm="dialog.preferences.saving.and.output.interval.title"
         linkend="dialog.preferences.saving.and.output.interval"/>.</para>
       </listitem>

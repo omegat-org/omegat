@@ -92,7 +92,7 @@
         <para>Replaces the target segment with the translation, provided by the
         selected Machine Translation service. No action is taken if no Machine
         Translation service has been activated (in <link
-        linkend="menus.options.mt" endterm="menus.options.mt.title"/>). See Preferences – 
+        linkend="menus.options.mt" endterm="menus.options.mt.title"/>). See 
         <link linkend="dialogs.preferences.mt" endterm="dialogs.preferences.mt.title"/> for
         details.</para>
       </listitem>
@@ -198,7 +198,7 @@
     <varlistentry id="menus.edit.search.dictionaries">
       <term id="menus.edit.search.dictionaries.title">Search Dictionaries</term>
       <listitem>
-        <para>If Preferences – <link
+        <para>If <link
         linkend="dialogs.preferences.dictionary.automatically.search.segment"
         endterm="dialogs.preferences.dictionary.automatically.search.segment.title"/>
         is disabled, this function allows you to search for the selected word in
@@ -345,7 +345,7 @@
 	  </term>
       <listitem>
 		<para>Use this command to register a translation as identical to the
-		source, even if Preferences – <link
+		source, even if <link
 		linkend="dialogs.preferences.editor.allow.translation.to.be.equal.to.source" endterm="dialogs.preferences.editor.allow.translation.to.be.equal.to.source.title"/> is not
 		checked.</para>
       </listitem>

@@ -390,11 +390,11 @@
 		  endterm="menus.edit.insert.next.missing.tag.title"/> for details.</para>
 
 	<para>You can define custom tags that will be managed in the same
-	manner. See Preferences – <link
+	manner. See <link
 	linkend="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags"
 	endterm="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags.title"/>
 	for details. You can also define strings that OmegaT should warn you about
-	if you leave them in a translation. See Preferences – <link
+	if you leave them in a translation. See <link
 	linkend="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation"
 	endterm="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation.title"/> for details.</para>
 

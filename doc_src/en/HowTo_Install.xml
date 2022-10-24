@@ -130,7 +130,7 @@
   <section id="update.and.delete.omegat">
 	<title id="update.and.delete.omegat.title">Upgrade</title>
 
-	<para>OmegaT can tell you when a new version is available. See Preferences – <link
+	<para>OmegaT can tell you when a new version is available. See <link
 	endterm="dialogs.preferences.updates.title"
 	linkend="dialogs.preferences.updates"/>
 	for details.</para>

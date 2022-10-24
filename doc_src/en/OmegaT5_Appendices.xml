@@ -15,6 +15,9 @@
 
   <xi:include href="App_ShortCuts.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+  <xi:include href="App_ConfigurationFolder.xml"
+              xmlns:xi="http://www.w3.org/2001/XInclude"/>
   
   <xi:include href="App_ApplicationFolder.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>

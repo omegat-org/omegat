@@ -1,19 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<chapter id="configuration.folder">
+<section id="configuration.folder">
   <title id="configuration.folder.title">Configuration Folder</title>
   <para>The configuration folder stores the majority of the OmegaT parameters
   and preferences for the user.</para>
   	<para>You can always access it directly from <link linkend="menus.options.access.configuration.folder" endterm="menus.options.access.configuration.folder.title"/> in the <link linkend="menus.options" endterm="menus.options.title"/> menu.</para>
-
-  <note><para>If anything happens to your OmegaT installation and you can't seem
-  to fix it, close OmegaT, make a backup of the contents of the configuration
-  folder, delete the original configuration folder, and restart OmegaT. You can
-  then copy your backed up configuration files to restore your original
-  preferences.</para>
-  <para>If you are recovering from a corrupt installation, you should copy the
-  backed up files one at a time to make it easier to isolate the problem if it
-  persists.</para></note>
 
   <section id="configuration.folder.location">
     <title id="configuration.folder.location.title">Location</title>	
@@ -143,4 +134,4 @@
 
 	<para>Preferences are stored in the default configuration folder. If
 	you specify a different configuration folder, all modifications made in the <link linkend="dialogs.preferences" endterm="dialogs.preferences.title"/> dialog will be stored in the newly specified configuration folder.</para></note>
-</chapter>
+</section>

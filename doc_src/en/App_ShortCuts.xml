@@ -442,36 +442,36 @@
 
           <tbody>
             <row>
-              <entry>New</entry>
+              <entry>New...</entry>
               <entry>projectNewMenuItem</entry>
               <entry>ctrl shift N</entry>
               <entry>meta shift N</entry>
             </row>
 
             <row>
-              <entry>Download Team Project</entry>
+              <entry>Download Team Project...</entry>
               <entry>projectTeamNewMenuItem</entry>
             </row>
 
             <row>
-              <entry>Open</entry>
+              <entry>Open...</entry>
               <entry>projectOpenMenuItem</entry>
               <entry>ctrl O</entry>
               <entry>meta O</entry>
             </row>
 
             <row>
-              <entry>Open Recent Project</entry>
+              <entry>Open Recent...</entry>
               <entry>projectOpenRecentMenuItem</entry>
             </row>
 
             <row>
-              <entry>Copy Files to Source Folder...</entry>
+              <entry>Add Files...</entry>
               <entry>projectImportMenuItem</entry>
             </row>
 
             <row>
-              <entry>Download MediaWiki Page...</entry>
+              <entry>Add MediaWiki Page...</entry>
               <entry>projectWikiImportMenuItem</entry>
             </row>
 
@@ -506,14 +506,14 @@
             </row>
 
             <row>
-              <entry>Create Translated Documents</entry>
+              <entry>Create Translated Files</entry>
               <entry>projectCompileMenuItem</entry>
               <entry>ctrl D</entry>
               <entry>meta D</entry>
             </row>
 
             <row>
-              <entry>Create Current Translated Documents</entry>
+              <entry>Create Current Translated File</entry>
               <entry>projectSingleCompileMenuItem</entry>
               <entry>ctrl shift D</entry>
               <entry>meta shift D</entry>
@@ -534,7 +534,7 @@
             </row>
 
             <row>
-              <entry>Access Project Contents/Root</entry>
+              <entry>Access Project Contents/Project Folder</entry>
               <entry>projectAccessRootMenuItem</entry>
             </row>
 
@@ -557,6 +557,16 @@
               <entry>Access Project Contents/Target Files</entry>
               <entry>projectAccessTargetMenuItem</entry>
             </row>
+            
+            <row>
+              <entry>Access Project Contents/TMs</entry>
+              <entry>projectAccessTMMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Access Project Contents/Exported TMs</entry>
+              <entry>projectAccessExportTMMenuItem</entry>
+            </row>
 
             <row>
               <entry>Access Project Contents/Current Source Document</entry>
@@ -569,7 +579,7 @@
             </row>
 
             <row>
-              <entry>Access Project Contents/Writeable Glossary</entry>
+              <entry>Access Project Contents/Writable Glossary</entry>
               <entry>projectAccessWriteableGlossaryMenuItem</entry>
             </row>
 

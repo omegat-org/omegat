@@ -55,7 +55,7 @@
         <para>Opens the <link linkend="dialogs.preferences.file.filters"
         endterm="dialogs.preferences.file.filters.title"/> global preference
         dialog.</para>
-        <para>Project specific settings are accessible with <link
+        <para>Project-specific settings are accessible with <link
         linkend="menus.project.properties"
         endterm="menus.project.properties.title"/>.</para>
       </listitem>
@@ -67,7 +67,7 @@
         <para>Opens the <link linkend="dialogs.preferences.segmentation.setup"
         endterm="dialogs.preferences.segmentation.setup.title"/> global
         preference dialog.</para>
-        <para>Project specific settings are accessible with <link
+        <para>Project-specific settings are accessible with <link
         linkend="menus.project.properties"
         endterm="menus.project.properties.title"/>.</para>
       </listitem>

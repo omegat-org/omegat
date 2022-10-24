@@ -578,7 +578,7 @@ Dossier de configuration
 
     <para>The Glossary pane shows terms from your glossary files that
     correspond to terms in the current segment. The glossary files are located
-    in the project's <link endterm="project.folder.glossary.title"
+    in the project’s <link endterm="project.folder.glossary.title"
     linkend="project.folder.glossary"/> folder.</para>
 
     <para>The source term is displayed before the “=” sign and the target
@@ -641,7 +641,7 @@ Folder = <token>Dossier</token></programlisting>
     <title id="panes.dictionary.title">Dictionary</title>
 	<para>The Dictionary pane shows terms from your dictionary files that
 	correspond to terms in the current segment. The dictionary files are located
-	in the project's <link linkend="project.folder.dictionary" endterm="project.folder.dictionary.title"/> folder. See the <link
+	in the project’s <link linkend="project.folder.dictionary" endterm="project.folder.dictionary.title"/> folder. See the <link
     endterm="dialogs.preferences.dictionary.title"
     linkend="dialogs.preferences.dictionary"/> preferences for details.</para>
   </section>

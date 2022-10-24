@@ -89,9 +89,9 @@
   <section id="glossaries.default.glossary">
     <title id="glossaries.default.glossary.title">Project glossary</title>
 
-    <para>The project writable glossary is by default located in the <link
+    <para>The writable project glossary is located in the <link
     linkend="project.folder.glossary" endterm="project.folder.glossary.title"/>
-    folder and called <link linkend="project.folder.glossary.txt"
+    folder by default and called <link linkend="project.folder.glossary.txt"
     endterm="project.folder.glossary.txt.title"/>.</para>
 
     <para>You can change its name and location in the <link
@@ -116,7 +116,7 @@
     values” (CSV) files or can also use the TermBase eXchange (TBX)
     format.</para>
 
-    <para>A writeable glossary created for the project by OmegaT will be a TSV
+    <para>A writable glossary created for the project by OmegaT will be a TSV
     file saved in UTF-8. User-created files that use only latin characters may
     be recognized and treated as ISO-8859-1 if it does not contain non-ASCII
     characters or other characters interpreted as UTF-8.</para>

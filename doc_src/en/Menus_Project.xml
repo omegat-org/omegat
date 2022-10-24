@@ -46,6 +46,8 @@
       <listitem>
         <para>Gives access to the last ten edited projects. Clicking one will
         save the current project, close it and open the selected project.</para>
+        <para>Use <guimenuitem>Clear Menu</guimenuitem> function to delete
+        the list of recent projects.</para>
       </listitem>
     </varlistentry>
 
@@ -194,7 +196,7 @@
         linkend="project.folder" endterm="project.folder.title"/> for more details.</para>
         <para>In addition, there are three menu entries that directly open the current
         source or target files, or the writable glossary. The files are
-        opened in the default application set by the operating system. The options are grayed out if the files do not exist yet.</para>
+        opened in the default application set by the operating system. The options are grayed out if the files do not exist.</para>
 
 		<variablelist>
 		  <varlistentry>
@@ -231,7 +233,7 @@
 			  <para>The current source file is located in the <link
 			  linkend="project.folder.source"
 			  endterm="project.folder.source.title"/> folder.</para>
-			<para>Opens the file in its associated applicationif it exists.</para></listitem>
+			<para>Opens the file in its associated application if it exists.</para></listitem>
 		  </varlistentry>
 		  <varlistentry>
 			<term>Current Target File</term>
@@ -239,7 +241,7 @@
 			  <para>The current target file is located in the <link
 			  linkend="project.folder.target"
 			  endterm="project.folder.target.title"/> folder.</para>
-			<para>Opens the file in its associated applicationif it exists.</para></listitem>
+			<para>Opens the file in its associated application if it exists.</para></listitem>
 		  </varlistentry>
 		  <varlistentry>
 			<term>Writable Glossary</term>

@@ -93,7 +93,7 @@
 		linkend="menus.project.commit.source.files"/> command in the <link
 		endterm="menus.project.title" linkend="menus.project"/> menu.</para>
 
-		<para>You must use your SVN or Git client or the command line to add
+		<para>You must use your SVN or Git client, or the command line, to add
 		and publish any dictionaries, glossaries, translation memories or
 		other files you want to include in the project.</para>
 

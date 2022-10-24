@@ -404,9 +404,9 @@
 	  
 	  <varlistentry id="dialogs.project.properties.file.locations.writable.glossary">
 		<term
-		id="dialogs.project.properties.file.locations.writable.glossary.title">Writeable
+		id="dialogs.project.properties.file.locations.writable.glossary.title">Writable
 		Glossary File</term>
-		<listitem><para>The writeable glossary if the file that OmegaT uses
+		<listitem><para>The writable glossary if the file that OmegaT uses
 		when you add translated glossary terms to your project with
 		<link linkend="menus.edit.create.glossary.entry"
 		endterm="menus.edit.create.glossary.entry.title"/>.</para>

@@ -2,7 +2,7 @@
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="how.to.use.tm">
-  <title id="how.to.use.tm.title">Use Translation Memories</title>
+  <title id="how.to.use.tm.title">Use translation memories</title>
 
   <para>When a project is initially created, it comes with its own empty project
   translation memory, <link linkend="project.folder.project.save.tmx.title"
@@ -72,7 +72,7 @@
 		folder.</para>
 		<para>After reloading the old project, all its translation memory will be
 		applied to the new source files.</para>
-		<note><para>That’s the easiest method to work on the new version of an
+		<note><para>That’s the easiest way to work on the new version of an
 		already translated document.</para></note>
 	  </listitem>
 	  
@@ -89,7 +89,7 @@
 		endterm="project.folder.tm.penalty.title"/>, or even <link
 		linkend="project.folder.tm.mt" endterm="project.folder.tm.mt.title"/> if
 		it comes from machine translation.</para>
-		<note><para>That's the preferred method is you want to start your
+		<note><para>That’s the preferred method if you want to start your
 		translation from scratch.</para></note>
 	  </listitem>
 	</itemizedlist>

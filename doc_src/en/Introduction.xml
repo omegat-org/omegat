@@ -96,6 +96,15 @@
   <section id="introduction.note.on.shortcuts">
 	<title id="introduction.note.on.shortcuts.title">Shortcuts</title>
 
+	<para>OmegaT looks a bit stern, if not outright unfriendly, to people who
+	are used to button based interfaces. Buttons are very few in OmegaT. Most of
+	the action takes place with the help of shortcuts associated to menu
+	items.</para>
+
+	<para>Shortcuts are ubiquitous in this guide and you should be able very
+	shortly to remember the few that are useful in the course of a standard
+	translation day.</para>
+
 	<para>To avoid duplication of shortcut description, we have adopted the
 	following notation in this guide: <example
 	id="example.introduction.note.on.shortcuts"><title
@@ -115,7 +124,7 @@
 	</para>
 	</example></para>
 
-	<para>See <link linkend="menus" endterm="menus.title"/> and <link linkend="app.shortcuts.description" endterm="app.shortcuts.description.title"/> for details.</para>
+	<para>See <link linkend="menus" endterm="menus.title"/> for details.</para>
   </section>
 
   <section id="introduction.create.and.open.new.project">

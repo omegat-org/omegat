@@ -2,9 +2,9 @@
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="how.to.restore.your.data">
-  <title id="how.to.restore.your.data.title">Find lost translations</title>
+  <title id="how.to.restore.your.data.title">Troubleshoot issues</title>
 
-  <warning><para>OmegaT is a robust and trustworthy application, but even so, it is smart take precautions to guard against data loss when using it, just as with any other application.</para></warning>
+  <warning><para>OmegaT is a robust and trustworthy application, but even so, it is smart to take precautions to guard against data loss when using it, just as with any other application.</para></warning>
 
   <section id="how.to.restore.your.data.automatic.backup">
 	<title id="how.to.restore.your.data.automatic.backup.title">Automatic backups</title>
@@ -20,18 +20,29 @@
 	  <note><para>The backup filename follows the pattern <filename>project_save.tmx.YYYYMMDDhhmm.bak</filename> where <code>YYYY</code>
 	  represents the 4-digit year, <code>MM</code> the month, <code>DD</code> the day of the month, and <code>hh</code>
 	  and <code>mm</code> indicate the hours and minutes.</para></note>
-  </listitem>
-  
-  <listitem>
-	  <para>Every time <filename>project_save.tmx</filename> has been modified: either after using <link linkend="menus.project.save" endterm="menus.project.save.title"/>, or as a regular backup every 3 minutes by default, OmegaT creates a backup with the name <filename>project_save.tmx.bak</filename>. That file is a copy of <filename>project_save.tmx</filename> <emphasis>before</emphasis> the modification.</para>
-  </listitem>
+	  </listitem>
+	  
+	  <listitem>
+		<para>Every time <filename>project_save.tmx</filename> has been modified:
+		<itemizedlist>
+		  <listitem><para>either after using <link linkend="menus.project.save" endterm="menus.project.save.title"/>,</para>
+		  </listitem>
+		  <listitem><para>or as a regular backup every 3 minutes by default,</para>
+		  </listitem>
+		</itemizedlist>
+		OmegaT creates a backup with the name <filename>project_save.tmx.bak</filename>.</para>
+		<para>That file is a copy of <filename>project_save.tmx</filename> <emphasis>before</emphasis> the modification.</para>
+	  </listitem>
 
-  <listitem>
-	<para>Everytime you use <link linkend="menus.project.save" endterm="menus.project.save.title"/>, or as a regular backup every 3 minutes by default, OmegaT saves the current state of the translation into <filename>project_save.tmx</filename></para>
-  </listitem>
+	  <listitem>
+		<para>Everytime you use <link linkend="menus.project.save" endterm="menus.project.save.title"/>, or as a regular backup every 3 minutes by default, OmegaT saves the current state of the translation into <filename>project_save.tmx</filename></para>
+	  </listitem>
 	</orderedlist>
 
 	<para>The file <filename>project_save.tmx</filename> always contains the most recent data.</para>
+
+	<note><para>You can control the frequency of the file saving in <link linkend="dialogs.preferences.saving.and.output" endterm="dialogs.preferences.saving.and.output.title"/>.</para></note>
+
   </section>
 
   <section id="how.to.restore.your.data.lost.in.translation">
@@ -64,7 +75,20 @@
 	</orderedlist>
 	</para>
 
-	<para>This action will restore the status of the translation to the moment on which the selected backup was created. You may repeat this operation as needed for locating older situations. Keep an eye on safely storing all the different files you are renaming for eventual reuse. Also remember not modifying the project configuration or adding TMX files on the meantime, as that may affect the results.</para>
+	<para>This action will restore the status of the translation to the moment
+	on which the selected backup was created. You may repeat this operation as
+	needed for locating older situations. Keep an eye on safely storing all the
+	different files you are renaming for eventual reuse. Also remember not
+	modifying the project configuration or adding TMX files on the meantime, as
+	that may affect the results.</para>
+
+	<note><para>Be cautious about making changes to the files in the source
+	folder, to the segmentation rules, or to the file filters, partway through a
+	project. Modifying either after you have started your translation could
+	result in some segments not being displayed anymore, or new unexpected
+	segments appearing instead.</para></note>
+
+
   </section>
 
 
@@ -135,6 +159,52 @@
 	<para>This action will fix the internal tag consistency issues that might have been induced by not properly inserting the tags in the translation while in OmegaT.</para>
   </section>
 
+  <section id="how.to.restore.your.data.omegat.wont.behave">
+	<title id="how.to.restore.your.data.omegat.wont.behave.title">OmegaT won't behave?</title>
+
+	<para>Something has happened and OmegaT won't behave anymore. Whatever you try, you can't seem to be able to fix it. You want to try one last thing before calling for help: restart OmegaT with its default settings.</para>
+
+	<para>Proceed as follows:
+	<orderedlist>
+
+	  <listitem>
+		<para>Use <link linkend="menus.options.access.configuration.folder" endterm="menus.options.access.configuration.folder.title"/> from the <link linkend="menus.options" endterm="menus.options.title"/> menu to access the configuration folder.</para>
+		<note><para>If you can't use OmegaT's menus, see <link linkend="configuration.folder" endterm="configuration.folder.title"/> to find the configuration folder location.</para></note>
+      </listitem>
+
+      <listitem>
+		<para>Close OmegaT.</para>
+      </listitem>
+
+      <listitem>
+		<para>Make a backup of the contents and delete the original folder. </para>
+      </listitem>
+
+      <listitem>
+		<para>Restart OmegaT.</para>
+		<note><para>If OmegaT does not work as expected at this point, feel free to reach out.</para></note>
+      </listitem>
+
+      <listitem>
+		<para>Close OmegaT.</para>
+      </listitem>
+
+      <listitem>
+		<para>Copy one of the old files into the new configuration folder.</para>
+      </listitem>
+	  
+	  <listitem>
+		<para>Restart OmegaT.</para>
+		<note><para>If OmegaT does not work as expected at this point, you have identified the faulty file. Remove it from the configuration folder and proceed.</para></note>
+      </listitem>
+
+	  <listitem>
+		<para>Go back to step 5. above and proceed until you are satisfied.</para>
+      </listitem>
+
+	</orderedlist>
+	</para>
+  </section>
 
   <section id="how.to.restore.your.data.summary">
 	<title id="how.to.restore.your.data.summary.title">Summary</title>
@@ -151,16 +221,6 @@
 		from a project, to make sure you won't lose too much time the day you need
 		to use those skills.</para>
       </listitem>
-
-	  <listitem>
-		<para>You can control the frequency of the file saving in the Preferences – <link linkend="dialogs.preferences.saving.and.output" endterm="dialogs.preferences.saving.and.output.title"/>.</para>
-	  </listitem>
 	</itemizedlist>
-
-	<note><para>Be very cautious about making changes to the files in the source
-	folder, to the segmentation rules, or to the file filters, partway through
-	a project. Modifying either after you have started your translation could
-	result in OmegaT becoming unable to find a segment that you have already
-	translated.</para></note>
   </section>
 </section>

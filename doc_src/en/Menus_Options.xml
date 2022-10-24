@@ -17,8 +17,8 @@
     <varlistentry id="menus.options.mt">
       <term id="menus.options.mt.title">Machine Translate</term>
       <listitem>
-        <para>Select <link linkend="dialogs.preferences.mt.automatically.fetch.trasnlations"
-        endterm="dialogs.preferences.mt.automatically.fetch.trasnlations.title"/> to activate it.</para>
+        <para>Select <link linkend="dialogs.preferences.mt.automatically.fetch.translations"
+        endterm="dialogs.preferences.mt.automatically.fetch.translations.title"/> to activate it.</para>
 		<para>Allows you to activate/deactivate the available machine
 		translation engines.</para>
         <para>If several translation engines are selected, you can also use

@@ -90,7 +90,14 @@
 	  </term>
       <listitem>
         <para>Replaces the target segment with the translation, provided by the
-        selected Machine Translation service. No action is taken if no Machine
+        selected Machine Translation service.</para>
+		<para>If <link
+		linkend="dialogs.preferences.mt.automatically.fetch.translations"
+		endterm="dialogs.preferences.mt.automatically.fetch.translations.title"/>
+		is disabled, use this action a first time to fetch the translation and a
+		second time to insert it.</para>
+		
+		<para>No action is taken if no Machine
         Translation service has been activated (in <link
         linkend="menus.options.mt" endterm="menus.options.mt.title"/>). See 
         <link linkend="dialogs.preferences.mt" endterm="dialogs.preferences.mt.title"/> for

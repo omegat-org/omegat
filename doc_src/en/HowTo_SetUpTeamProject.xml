@@ -72,7 +72,7 @@
         <para>This command also automatically registers the project in
         the version control system.</para>
 		</listitem>
-		<listitem><para>Chose the appropriate settings</para>
+		<listitem><para>Choose the appropriate settings</para>
 		<para>Make the necessary changes to the project properties at this
 		stage, including local file filters or segmentation settings. See <link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/> for details.</para>
 		</listitem>

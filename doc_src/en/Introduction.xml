@@ -27,7 +27,7 @@
 		<para>Translators can easily modify the contents or location of the
 		resources at any time during the translation.</para>
 
-		<para>By default, resources include the project's translation memory,
+		<para>By default, resources include the project’s translation memory,
 		which is automatically created upon project creation, and the files to
 		translate. They can also include reference translation memories,
 		glossaries, and other reference files.</para>
@@ -45,7 +45,7 @@
 		  project. OmegaT takes care of that
 		  <emphasis>automatically</emphasis>.</para>
 
-		  <para>Translators can very easily reuse an existing project's
+		  <para>Translators can very easily reuse an existing projectʼs
 		  translation memory by simply adding new translation files to the old
 		  project, or by copying the old translation memory to a new project.</para>
 		  
@@ -81,10 +81,10 @@
 	because your computer misbehaved, things will look like you have lost that
 	book translation that you had been working on for the past 6 months, or that
 	report that you must deliver in one hour.</para>
-	<para>Whatever has happened, and thanks to the robustness of OmegaT, it is
+	<para>Whatever has happened the robustness of OmegaT makes it
 	<emphasis>extremely</emphasis> unlikely that you have lost more than a few
 	minutes of work.</para>
-	<para>Even if things look very broken, do not panic, and follow the easy
+	<para>Even if things look very broken, do not panic. Just follow the easy
 	steps described in <link linkend="how.to.restore.your.data"
 	endterm="how.to.restore.your.data.title"/>.</para>
 	<para>In the meanwhile, OmegaT will hopefully help you become a better
@@ -109,7 +109,7 @@
 	following notation in this guide: <example
 	id="example.introduction.note.on.shortcuts"><title
 	id="example.introduction.note.on.shortcuts.title">Single letters are used
-	as a common name for modifiers.</title>
+	as a common identifier for modifiers.</title>
 
 	<para>In this guide:
 	<keycombo><keycap>C</keycap><keycap>E</keycap></keycombo>
@@ -155,14 +155,14 @@
 	translated files, set the various options, and click the
 	<guibutton>OK</guibutton> button to continue.</para>
 
-    <para>Once you have created the project, you can return to this dialog at
-    any time by using <link linkend="menus.project.properties"
-    endterm="menus.project.properties.title"/>.</para>
+    <para>After you have created the project, you can use <link
+		linkend="menus.project.properties"
+    endterm="menus.project.properties.title"/> to come back to this dialog as necessary.</para>
 
-	<note><para>The structure of a project can be modified at any moment during
-	the translation. You can point at new resource folders from that dialog and
-	OmegaT will just ask you to reload the project to take the new locations
-	into account.</para></note>
+	<note><para>You can modify the structure of a project at any time after you
+	have started translating. In the dialog, just tell OmegaT what new resource
+	folders to use. It will then just ask you to reload the project and start
+	using the new locations.</para></note>
 	
     <para>The <link linkend="windows.source.files.list"
     endterm="windows.source.files.list.title"/> dialog opens next.</para>
@@ -173,7 +173,7 @@
 	endterm="windows.source.files.list.download.page.title"/></guibutton> and add source
 	files.</para>
 
-	<para>If you don't remember where your project is, you can use <link
+	<para>If you don’t remember where your project is, you can use <link
 	linkend="menus.project.access.project.contents"
 	endterm="menus.project.access.project.contents.title"/> from the <link
 	linkend="menus.project" endterm="menus.project.title"/> menu.</para>
@@ -328,7 +328,7 @@
 
 	<para>You can replace terms with <link
 	linkend="menus.edit.search.and.replace"
-	endterm="menus.edit.search.and.replace.title"/> by using a similar
+	endterm="menus.edit.search.and.replace.title"/> using a similar
 	dialog. See <link linkend="windows.text.replace"
 	endterm="windows.text.replace.title"/> for details.</para>
 

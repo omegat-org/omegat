@@ -251,7 +251,7 @@
       <varlistentry id="project.folder.glossary.txt">
         <term id="project.folder.glossary.txt.title">glossary.txt</term>
         <listitem>
-          <para>This is the project writeable glossary. It is created the first
+          <para>This is the project writable glossary. It is created the first
           time you use <link linkend="menus.edit.create.glossary.entry"
           endterm="menus.edit.create.glossary.entry.title"/>.</para>
 		  <para>You can access it with <link

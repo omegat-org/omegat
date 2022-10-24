@@ -2,7 +2,7 @@
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="how.to.use.tm">
-  <title id="how.to.use.tm.title">Use Translation Memories</title>
+  <title id="how.to.use.tm.title">Use translation memories</title>
 
   <para>When a project is initially created, it comes with its own empty project
   translation memory, <link linkend="project.folder.project.save.tmx.title"
@@ -72,7 +72,7 @@
 		folder.</para>
 		<para>After reloading the old project, all its translation memory will be
 		applied to the new source files.</para>
-		<note><para>That’s the easiest method to work on the new version of an
+		<note><para>That’s the easiest way to work on the new version of an
 		already translated document.</para></note>
 	  </listitem>
 	  
@@ -89,7 +89,7 @@
 		endterm="project.folder.tm.penalty.title"/>, or even <link
 		linkend="project.folder.tm.mt" endterm="project.folder.tm.mt.title"/> if
 		it comes from machine translation.</para>
-		<note><para>That's the preferred method is you want to start your
+		<note><para>That’s the preferred method if you want to start your
 		translation from scratch.</para></note>
 	  </listitem>
 	</itemizedlist>
@@ -182,32 +182,29 @@
 	  <listitem>
 		<para>See <link linkend="how.to.use.tm.create.your.tm" endterm="how.to.use.tm.create.your.tm.title"/> above.</para>
 
-		<para>If the folder where you write the TMX file to is on a shared
-		disk, you can ask your partner to use that folder as the <link
+		<para>If you write the TMX file to a folder on a shared disk, you can
+		ask your partner to use that folder as the <link
 		linkend="project.folder.tm" endterm="project.folder.tm.title"/> folder
 		for the current translation.</para>
 
-		<para>Reciprocally, you can ask your partner to write project TMX files
-		to a folder on a shared disk that you will use as your <link
+		<para>Conversely, you can ask your partner to write the project TMX
+		files to a folder on a shared disk that you will use as your <link
 		linkend="project.folder.tm" endterm="project.folder.tm.title"/> folder
 		for the current translation.</para>
 
-		<para>OmegaT notices instantaneously when a TMX file has been modified
-		so that anytime such a TMX is created on either side, with <link
-		linkend="menus.project.create.translated.documents"
+		<para>OmegaT instantaneously notices modifications to TMX files.
+		Therefore, any time one side creates or modifies such a TMX using
+		<link linkend="menus.project.create.translated.documents"
 		endterm="menus.project.create.translated.documents.title"/>, the other
-		side will not have anything to do to have that TMX be taken into
-		account locally.</para>
+		side does not need to do anything to have that TMX recognized locally.</para>
 
-		<para>Such a sharing method works equally well for glossary sharing,
-		where the <link
+		<para>This approach also works just as well for sharing glossaries where the <link
 		linkend="dialogs.project.properties.file.locations.writable.glossary"
 		endterm="dialogs.project.properties.file.locations.writable.glossary.title"/>
-		,with an appropriate name to avoid overwriting, is located in the <link
+		, named appropriately to prevent overwriting, is located in the <link
 		linkend="dialogs.project.properties.file.locations.glossaries"
 		endterm="dialogs.project.properties.file.locations.glossaries.title"/>
-		that the partner will use only as reference, and
-		reciprocally.</para>
+		that the partner will use only as reference, and vice-versa.</para>
 
 		<note><para>Such sharing works well when the lag between TMX updates is
 		not important, for example, a translator sends data to a reviewer a few

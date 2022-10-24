@@ -52,7 +52,7 @@
 	<para>Proceed as follows:
 	<orderedlist>
       <listitem>
-		<para>Close the project, preventing on any modification on the current status of the backup files.</para>
+		<para>Close the project, preventing any modification to the current status of the backup files.</para>
       </listitem>
 
       <listitem>
@@ -217,7 +217,7 @@
       </listitem>
 
       <listitem>
-		<para>Practice regularly "emergency" measures, like restoring translations
+		<para>Regularly “practice emergency” measures such as restoring translations
 		from a project, to make sure you won't lose too much time the day you need
 		to use those skills.</para>
       </listitem>

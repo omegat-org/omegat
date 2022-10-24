@@ -279,7 +279,7 @@ that on a large project, an "entry_activated" script will be called a lot of tim
         Glossary</term>
 
         <listitem>
-          <para>Open the writeable glossary in an editor.</para>
+          <para>Open the writable glossary in an editor.</para>
         </listitem>
       </varlistentry>
 

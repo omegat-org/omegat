@@ -343,7 +343,7 @@
       <listitem>
 		<para>Define the translation as empty. In the target document, nothing
 		will appear for this segment. In the Editor, the translation is
-		displayed as <guilabel>&lt;EMPTY&gt;</guilabel></para>
+		displayed as <literal>&lt;EMPTY&gt;</literal>.</para>
       </listitem>
 	</varlistentry>
 

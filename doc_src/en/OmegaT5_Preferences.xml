@@ -1468,6 +1468,7 @@
 <section id="dialogs.preferences.editor">
   <title id="dialogs.preferences.editor.title">Editor</title>
 
+  <para>When entering an empty segment:
   <variablelist>
 	<varlistentry id="dialogs.preferences.editor.insert.the.source.text">
 	  <term
@@ -1475,9 +1476,8 @@
 	  the source text</term>
 
 	  <listitem>
-		<para>You can have the source text inserted automatically into the
-		editing field. This is useful for texts containing many trademarks
-		or other proper nouns that must be left unchanged.</para>
+		<para>Use this option temporarily for parts of the translation that
+		do not require much transformation.</para>
 	  </listitem>
 	</varlistentry>
 
@@ -1487,18 +1487,7 @@
 	  the segment empty</term>
 
 	  <listitem>
-		<para>OmegaT leaves the editing field blank. This option allows you
-		to enter the translation without the need to remove the source text,
-		thus saving you two keystrokes (Select All / Delete).</para>
-		<para>Empty translations are now allowed. They are displayed as
-		<literal>&lt;EMPTY&gt;</literal> in the editor pane. To create one,
-		right-click in a segment, and select <menuchoice><guimenuitem>Set
-		empty translation</guimenuitem></menuchoice>. The entry
-		<menuchoice><guimenuitem>Remove
-		translation</guimenuitem></menuchoice> in the same context menu
-		allows you to delete the existing translation of the current
-		segment. You achieve the same effect by clearing the target segment
-		and pressing the <keycap>Enter</keycap> key.</para>
+		<para>You can  enter your translation right away.</para>
 	  </listitem>
 	</varlistentry>
 
@@ -1508,52 +1497,46 @@
 	  the best fuzzy match</term>
 
 	  <listitem>
-		<para>OmegaT automatically inserts the translation of the string
-		most similar to the current source, if it exceeds the similarity
-		threshold you set in this dialog.</para>
-		<para>The prefix is used to identify translations inserted as fuzzy
-		matches. You can also see the prefix as a <link
+		<para>OmegaT inserts the translation with the highest match percentage above
+		the value you set in this dialog.</para>
+		<para>The prefix identifies translations inserted as fuzzy matches. To
+		make sure that you do not forget the prefix in your translation, define it as
+		<link
 		linkend="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation"
 		endterm="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation.title"/>
 		to include it in the tag issues checking process.</para>
-		<para>Some scripts are very useful when it comes to matches
-		insertion. See <link linkend="windows.scripts.distribution"
-		endterm="windows.scripts.distribution.title"/> for details.</para>
 	  </listitem>
 	</varlistentry>
   </variablelist>
-
-  <para>The remaining options are described below.</para>
-
+  </para>
+  
   <variablelist>
 	<varlistentry id="dialogs.preferences.editor.attempt.to.convert.numbers.when.inserting.a.fuzzy.match">
 	  <term
-		  id="dialogs.preferences.editor.attempt.to.convert.numbers.when.inserting.a.fuzzy.match.title">Attempt
-	  to convert numbers when inserting a fuzzy match</term>
+		  id="dialogs.preferences.editor.attempt.to.convert.numbers.when.inserting.a.fuzzy.match.title">Attempt to convert fuzzy match numbers</term>
 
 	  <listitem>
-		<para>If this option is checked, OmegaT attempts to convert the
-		numbers in the fuzzy matches according to the source contents when a
-		fuzzy match is inserted either manually or automatically. There are
-		a number of restrictions:</para>
+		<para>When a fuzzy match is inserted, OmegaT tries to adapt the
+		numbers in the fuzzy match to the numbers in the source.</para>
 
-		<itemizedlist>
-		  <listitem>
-			<para>The source segment and the fuzzy matches must contain the
-			same list of numbers.</para>
-		  </listitem>
+		<note><para>Only integers and simple floats (e.g., 5.4) are
+			considered.</para></note>
 
-		  <listitem>
-			<para>The numbers must be exactly the same between the source
-			and the target matches.</para>
-		  </listitem>
+		<example id="convert.match.numbers">
+		  <title>Fuzzy match number conversion</title>
 
-		  <listitem>
-			<para>Only integers and simple floats (using the period as a
-			decimal character, e.g., 5.4, but not 5,4 or 54E-01) are
-			considered.</para>
-		  </listitem>
-		</itemizedlist>
+		  <para><token>2001</token> in the source:</para>
+		  <para><programlisting>
+[[<token>2001</token>年]]、ドイツの永住権を取得。</programlisting></para>
+		  
+		  <para><token>2003</token> in the fuzzy match:</para>
+		  <para><programlisting>[[<token>2003</token>年]]、ドイツの永住権を取得。
+[[<token>2003</token>]], elle acquiert la nationalité allemande.</programlisting></para>
+
+<para>When the match is inserted, OmegaT will convert <token>2003</token> to <token>2001</token>:</para>
+<para><programlisting>[[<token>2001</token>]], elle acquiert la nationalité allemande.</programlisting></para>
+
+		</example>
 	  </listitem>
 	</varlistentry>
 
@@ -1563,16 +1546,11 @@
 	  translation to be equal to source</term>
 
 	  <listitem>
-		<para>The documents to translate may contain trademarks, names, or
-		other proper nouns that will remain the same in the translated
-		versions. There are two strategies to handle segments containing
-		only such unchanging text.</para>
+		<para>A translation that is
+		identical to the source text is not recognized as a translation by default. OmegaT will erase it and will count the segment as not translation.</para>
 
-		<para>You can decide not to translate such segments at all. OmegaT
-		will then report these segments as not translated. This is the
-		default approach. The alternative is to enter a translation that is
-		identical to the source text. OmegaT can be set to recognize such
-		entries by selecting this option.</para>
+		<para>Use this option to force OmegaT to register such
+		entries and count them as translated.</para>
 	  </listitem>
 	</varlistentry>
 
@@ -1582,54 +1560,26 @@
 	  the segment to text files</term>
 
 	  <listitem>
-		<note><para>Although this function allows segment contents to be
-		exported to text files in a folder named <link
-		linkend="configuration.folder.default.contents.script"
-		endterm="configuration.folder.default.contents.script.title"/>, it has
-		no relation to the <link linkend="windows.scripts.title"
-		endterm="windows.scripts.title"/> feature and only shares a name for
-		historical reasons.</para></note>
-		
-		<para>The text export function exports data from within the current
-		OmegaT project to plain text files. The data is exported when the
-		segment is opened. The files appear in the <link
-		linkend="configuration.folder.default.contents.script"
-		endterm="configuration.folder.default.contents.script.title"/>
-		folder of the OmegaT user file folder (see <link
-		linkend="configuration.folder"
-		endterm="configuration.folder.title"/> for details), and
-		include:</para>
+		<para>When OmegaT enters a segment,
 
 		<itemizedlist>
 		  <listitem>
-			<para>The content of the segment source text (<link
+			<para>the content of the source part is copied to <link
 			linkend="configuration.folder.default.contents.script.source"
-			endterm="configuration.folder.default.contents.script.source.title"/>).</para>
+			endterm="configuration.folder.default.contents.script.source.title"/>,</para>
 		  </listitem>
-
 		  <listitem>
-			<para>The content of the segment target text (<link
+			<para>the content of the target part (if any) is copied to <link
 			linkend="configuration.folder.default.contents.script.target"
-			endterm="configuration.folder.default.contents.script.target.title"/>).</para>
-		  </listitem>
-
-		  <listitem>
-			<para>The text that has been highlighted by the user before
-			using <link linkend="menus.edit.export.selection"
-			endterm="menus.edit.export.selection.title"/> (<link
-			linkend="configuration.folder.default.contents.script.selection"
-			endterm="configuration.folder.default.contents.script.selection.title"/>).</para>
+			endterm="configuration.folder.default.contents.script.target.title"/>,</para>
 		  </listitem>
 		</itemizedlist>
-
-		<para>The content of the files is overwritten either when a new
-		segment is opened or when a new selection is exported.</para>
-
-		<para>The files are unformatted plain text files. The whole process
-		can be steered and controlled via Tck/Tcl-based scripting. See
-		<ulink url="http://www.omegat.org/en/howtos/text_export.html">Using
-		the OmegaT text export function</ulink> for specifics, examples and
-		suggestions.</para>
+		both located in the <link linkend="windows.scripts.title"
+		endterm="windows.scripts.title"/> folder.
+		</para>
+	
+		<para>The files is are overwritten when OmegaT enters a new
+		segment.</para>
 
 		<para>The <link
 		linkend="windows.scripts.distribution.extract.text.content"
@@ -1637,22 +1587,23 @@
 		script does something similar but for the whole project at once. See
 		<link linkend="windows.scripts"
 			  endterm="windows.scripts.title"/>.</para>
+
+		<note><para>This function has
+		no relation to the <link linkend="windows.scripts.title"
+		endterm="windows.scripts.title"/> function.</para></note>
+
 	  </listitem>
 	</varlistentry>
 
 	<varlistentry id="dialogs.preferences.editor.go.to.next.untranslated.segment.stops.where.there.is.at.least.one.alternative.translation">
 	  <term
-		  id="dialogs.preferences.editor.go.to.next.untranslated.segment.stops.where.there.is.at.least.one.alternative.translation.title">Go
-	  To Next Untranslated Segment stops where there is at least one
-	  alternative translation</term>
+	  id="dialogs.preferences.editor.go.to.next.untranslated.segment.stops.where.there.is.at.least.one.alternative.translation.title">Stop at untranslated and alternatives translations</term>
 
 	  <listitem>
-		<para>Checking this  box will cause <link
+		<para><link
 		linkend="menus.goto.next.untranslated.segment"
-		endterm="menus.goto.next.untranslated.segment.title"/> to stop at each
-		segment with more than one possible translation, irrespective of
-		whether it has already been translated. This allows you to make sure
-		there are no mistranslations.</para>
+		endterm="menus.goto.next.untranslated.segment.title"/> also stops at
+		segments with alternative translations.</para>
 	  </listitem>
 	</varlistentry>
 
@@ -1661,21 +1612,17 @@
 	  editing</term>
 
 	  <listitem>
-		<para>Leave this option unchecked to prevent any corruption of the
-		tags (such as a partial deletion) during editing. You can still
-		remove a complete tag by deleting it.</para>
+		<para>Tags should generally not be modified, but that is possible when this option is enabled.</para>
 	  </listitem>
 	</varlistentry>
 
 	<varlistentry id="dialogs.preferences.editor.validate.tags.when.leaving.a.segment">
 	  <term
 		  id="dialogs.preferences.editor.validate.tags.when.leaving.a.segment.title">Check
-	  tags when leaving a segment</term>
+	  issues when leaving a segment</term>
 
 	  <listitem>
-		<para>Check this option to be warned about differences between
-		source and target segment tags each time you leave a
-		segment.</para>
+		<para>OmegaT runs an issues check on the segment as you leave it. See <link linkend="menus.tools.check.issues" endterm="menus.tools.check.issues.title"/> for details.</para>
 	  </listitem>
 	</varlistentry>
 
@@ -1684,12 +1631,14 @@
 	  auto-populated status</term>
 
 	  <listitem>
-		<para>Check this option to record the fact that a segment has been
-		auto-populated in the <filename>project_save.tmx</filename>
-		file. This makes it possible to display those segments in a specific
-		color in the <guilabel>Editor</guilabel> pane (if the &quot;Mark
-		Auto-Populated Segments&quot; option in the <guimenu>View</guimenu>
-		menu is checked).</para>
+		<para>Translation memories in <link linkend="project.folder.tm.auto"
+		endterm="project.folder.tm.auto.title"/> and <link
+		linkend="project.folder.tm.enforce"
+		endterm="project.folder.tm.enforce.title"/> can auto-populate the
+		project memory. Segments that receive automated translation at that time
+		can be marked in the <guilabel>Editor</guilabel> pane with <link
+		linkend="menus.view.mark.auto.populated.segments"
+		endterm="menus.view.mark.auto.populated.segments.title"/>.</para>
 	  </listitem>
 	</varlistentry>
 
@@ -1699,22 +1648,18 @@
 	  origin of translation</term>
 
 	  <listitem>
-        <para>Check this option to save the origin of the translation when
-        the translator uses machine translation. OmegaT will record the name of the
-        engine that was used.</para>
+        <para>When machine translation is enabled, OmegaT registers
+        the name of the engine that was used to populate a given segment.</para>
 	  </listitem>
     </varlistentry>
 
 	<varlistentry id="dialogs.preferences.editor.initially.load.this.many.segments">
 	  <term
-		  id="dialogs.preferences.editor.initially.load.this.many.segments.title">Initially
-	  load this many segments</term>
+		  id="dialogs.preferences.editor.initially.load.this.many.segments.title">Initial number of loaded segments:</term>
 
 	  <listitem>
-		<para>By default the editor initially displays 2,000 segments, and
-		progressively loads more as you scroll up or down. You can increase
-		this number if you have a powerful machine, or dislike how the
-		scrollbar behaves during progressive loading.</para>
+		<para>The editor initially loads and displays 2,000 segments, and
+		progressively loads more as you scroll up or down. Change this number according to your machine performance.</para>
 	  </listitem>
 	</varlistentry>
 
@@ -1724,12 +1669,7 @@
 	  delimitation format</term>
 
 	  <listitem>
-		<para>This string is used to delimit paragraphs in the source
-		text. This is useful when you need to see which source segments
-		belong to which paragraph. You must check the
-		<menuchoice><guimenuitem>Mark Paragraph
-		Delimitations</guimenuitem></menuchoice> option in the View menu to
-		display the delimiter.</para>
+		<para>To identify segments that belong to the same paragraph, use <link linkend="menus.view.mark.paragraph.delimitations" endterm="menus.view.mark.paragraph.delimitations.title"/>.</para>
 	  </listitem>
 	</varlistentry>
   </variablelist>

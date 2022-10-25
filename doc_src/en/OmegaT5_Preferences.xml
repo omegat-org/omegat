@@ -1175,14 +1175,11 @@
   endterm="app.segmentation.title"/> for general explanations about
   segmentation (global or local, paragraph or sentence, etc.)</para>
 
-  <warning><para>This preference dialog accesses only the settings available in
-  the <link linkend="configuration.folder" endterm="configuration.folder.title"/>
-  folder. If you have set local rules, check <link linkend="dialogs.project.properties.segmentation" endterm="dialogs.project.properties.segmentation.title"/> in the <link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/>
-  instead.</para></warning>
+  <warning><para>This dialog only accesses the global segmentation rules. If you have set local rules  in <link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/>, modifications here will not be taken into account.</para></warning>
   
   <section id="dialogs.preferences.segmentation.setup.scope">
 	<title id="dialogs.preferences.segmentation.setup.scope.title">Language
-	rules</title>
+	sets</title>
 
 	<para>Only the rules associated to language patterns that correspond to
 	the source language of your project are applied. See <link
@@ -1191,11 +1188,12 @@
 	linkend="dialogs.project.properties"
 	endterm="dialogs.project.properties.title"/>.</para>
 
-	<para>For example, for a translation from Japanese,
-	<emphasis>only</emphasis> the rule set associated to the <code>JA.*</code>
-	pattern and the rule sets associated to the <code>.*</code> patterns
-	(those are generic patterns that apply to all languages) will be taken
-	into account.</para>
+	<example>
+	  <title>Rules for Japanese</title>
+	  <para>For a translation from Japanese, <emphasis>only</emphasis> the rule
+	  set associated to the <code>JA.*</code> pattern and the generic rule sets
+	  associated to the <code>.*</code> will be taken into account.</para>
+	</example>
 
 	<para>When you click on a language pattern in the top half of the dialog,
 	a list of associated rules will be displayed in the bottom half of the
@@ -1203,42 +1201,57 @@
 
 	<para>All segmentation rule sets for a matching language pattern are
 	active and are applied in order. Rules for specific language regions
-	should be higher than default ones. For example, the rules for
+	should be higher than default ones.</para>
+
+	<example>
+	  <title>Cascading priorities</title>
+	<para>The rules for
 	<emphasis>FR-CA</emphasis> should be set higher than those for
 	<emphasis>FR.*</emphasis>, which should themselves be higher than the
-	generic <emphasis>.*</emphasis> set. Thus, when translating from Canadian
+	generic <emphasis>.*</emphasis> set.</para>
+	<para>Thus, when translating from Canadian
 	French the rules for Canadian French—if any—will apply first, followed by
 	the rules for French and lastly, by the generic rules.</para>
-
-	<para>If you want to create an empty set of rules for a new language
-	pattern click the <guibutton>Add</guibutton> button.</para>
-
-	<para>An empty line will appear at the bottom of the table. Change the
-	name of the rule set and the language pattern to the desired label and
-	corresponding pattern. The language pattern is a regular expression. Use
-	the <guibutton>Move Up</guibutton> button to set the rule set
-	priority.</para>
+	</example>
+	
+	<para>To create a new rule set:
+	<orderedlist>
+	  <listitem>
+		<para>Click <guibutton>Add</guibutton>. An empty line will appear at the bottom of the table.</para>
+	  </listitem>
+	  <listitem>
+		<para>Change the name of the rule set and the language pattern to the
+		desired label and corresponding pattern. The language pattern is a
+		regular expression.</para>
+	  </listitem>
+	  <listitem>
+		<para>Use the <guibutton>Move Up</guibutton> button to set the rule set
+		priority.</para>
+	  </listitem>
+	</orderedlist>
+	</para>
   </section>
 
   <section id="segmentation.rules">
-	<title id="segmentation.rules.title">Modifications</title>
+	<title id="segmentation.rules.title">Set contents</title>
 
 	<warning><para>Exception rules should be listed
-	<emphasis>above</emphasis> break rules</para></warning>
+	<emphasis>above</emphasis> break rules.</para>
+	<para>When OmegaT reads files, it puts a non-breaking marker at every exception location. Places that do not have such markers and that match break rules will be break locations.</para></warning>
 	
 	<variablelist>
 	  <varlistentry id="segmentation.rules.exceptionrule">
 		<term id="segmentation.rules.exceptionrule.title">Exceptions</term>
 
 		<listitem>
+		  <para>To define an exception rule, leave the <guilabel>Break/Exception
+		  </guilabel>check box unchecked.</para>
+
 		  <para>Specify text combinations that are exceptions to a break
-		  rule. For example, <emphasis>Mrs. Dalloway</emphasis> should not
-		  be split in two segments even though a break rule for
-		  <emphasis>period followed by a space</emphasis> generally defines
-		  a sentence.</para>
-		  
-		  <para>To define an exception rule, leave the
-		  <guilabel>Break/Exception </guilabel>check box unchecked.</para>
+		  rule. For example, <emphasis>Mrs. Dalloway</emphasis> should not be
+		  split in two segments even though a break rule for <emphasis>period
+		  followed by a space</emphasis> generally defines a sentence.</para>
+		 
 		</listitem>
 	  </varlistentry>
 
@@ -1246,26 +1259,28 @@
 		<term id="segmentation.rules.breakrule.title">Breaks</term>
 
 		<listitem>
+		  <para>To define a break rule, check the
+		  <guilabel>Break/Exception</guilabel> box.</para>
+
 		  <para>Separates the source text into segments. For example,
-		  <emphasis>period followed by a space</emphasis> generally defines
-		  a sentence end in English.</para>
-		  <para>To define a rule as a break rule, check the
-		  <guilabel>Break/Exception</guilabel>  box.</para>
+		  <emphasis>period followed by a space</emphasis> generally defines a
+		  sentence end in English.</para>
 		</listitem>
 	  </varlistentry>
-	</variablelist>
-  </section>
 
-  <section id="creating.new.rule">
-	<title id="creating.new.rule.title">New rules</title>
-
-	<para>Add the <emphasis role="bold">Before</emphasis>
-	and<emphasis role="bold"> After</emphasis> patterns.</para>
+  <varlistentry id="creating.new.rule">
+	<term id="creating.new.rule.title"><guibutton>Add</guibutton></term>
+	<listitem>
+	  <para>The <emphasis role="bold">Before</emphasis> pattern identifies the parts that are before the break or exception point.</para>
+	  <para>The <emphasis role="bold"> After</emphasis> patterns identifies the parts that are after the break or exception point.</para>
 
 	<para>The <emphasis role="bold">Before</emphasis> and<emphasis
 	role="bold"> After</emphasis> patterns are regular expressions. See
 	<link linkend="app.regex" endterm="app.regex.title"/>
 	for details.</para>
+	</listitem>
+  </varlistentry>
+	</variablelist>
 	
 	<para>The existing rules always provide a good starting point. See also
 	<link linkend="segmentation.simple.examples"

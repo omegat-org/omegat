@@ -990,8 +990,7 @@
 				</listitem>
 			  </varlistentry>
 			  <varlistentry>
-				<term>Remove HTML comments in translated
-				file</term>
+				<term>Remove HTML comments in translated file</term>
 				<listitem>
 				  <para>Comments within an HTML file are generally addressed to
 				  developers.</para>
@@ -1063,7 +1062,7 @@
 				</listitem>
 			  </varlistentry>
 			  <varlistentry>
-				<term>Auto replace 'nplurals=INTEGER; plural=EXPRESSION;'</term>
+				<term>Auto replace plural specification</term>
 				<listitem>
 				  <para>Override the plural specification in the header and use
 				  the target language default.</para>

@@ -118,7 +118,7 @@ team_hc :horizontal -> @close="Close" ;
 
 ### Services tab
 
-services :framed "Online Services" -> gt ms_azk ibm deepl mymem taas ;
+services :framed "Online Services" -> gt ms_azk ibm deepl mymem ;
 
 # Google Translate API key
 
@@ -168,16 +168,6 @@ mymem_help :dialog "Help" -> mymem_m mymem_hc ;
 mymem_m :horizontal -> mymem_t ;
 mymem_t "Provide your email address to be able to make \n1000 requests to MyMemory server a day \ninstead of 100.\nAPI key is used to fetch matches from private TMs" -> @ ;
 mymem_hc :horizontal -> @close="Close" ;
-
-# TaaS key
-
-taas "TaaS user key" -> taas_k ;
-taas_k :horizontal "User key for TaaS" -> @password="" taas_help ;
-
-taas_help :dialog "Help" -> taas_m taas_hc ;
-taas_m :horizontal -> taas_t ;
-taas_t "Enter API key to access your private collection from TaaS (terminology as a service) website" -> @ ;
-taas_hc :horizontal -> @close="Close" ;
 
 
 ### Appearance settings tab
@@ -270,4 +260,4 @@ close_button -> @close="Cancel" ;
 
 ### Launch command
 
-omt -> javaloc " -jar " memory " -Duser.language=" UIlang " -Duser.country=" country " -Dgoogle.api.key=" gt " -Dmicrosoft.api.subscription_key=" ms_azk " -Dibmwatson.api.login=" ibm_login " -Dibmwatson.api.password=" ibm_pass " -Ddeepl.api.key=" deepl " -Dmymemory.api.email=" mymem_em " -Dmymemory.api.key=" mymem_api " -Dtaas.user.key=" taas " -Dhttp.proxyHost=" proxyhost " -Dhttp.proxyPort=" proxyport " -Dawt.useSystemAAFontSettings=" fontaa laf " " jarfileloc " " projectloc " --config-dir=" configloc team ;
+omt -> javaloc " -jar " memory " -Duser.language=" UIlang " -Duser.country=" country " -Dgoogle.api.key=" gt " -Dmicrosoft.api.subscription_key=" ms_azk " -Dibmwatson.api.login=" ibm_login " -Dibmwatson.api.password=" ibm_pass " -Ddeepl.api.key=" deepl " -Dmymemory.api.email=" mymem_em " -Dmymemory.api.key=" mymem_api " -Dhttp.proxyHost=" proxyhost " -Dhttp.proxyPort=" proxyport " -Dawt.useSystemAAFontSettings=" fontaa laf " " jarfileloc " " projectloc " --config-dir=" configloc team ;

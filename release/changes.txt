@@ -2,7 +2,7 @@
  OmegaT 5.8.0
 ----------------------------------------------------------------------
   20 Enhancements
-  20 Bug fixes
+  21 Bug fixes
   1 Localisation updates
 ----------------------------------------------------------------------
 5.8.0 vs 5.7.1
@@ -68,6 +68,9 @@
   https://sourceforge.net/p/omegat/feature-requests/1603/
 
   Bug fixes:
+
+  - GUI: Comment is shown on both Comment and Segment Properties pane
+  https://sourceforge.net/p/omegat/bugs/1119/
 
   - Drop TaaS glossary service connector
 

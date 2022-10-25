@@ -1302,7 +1302,7 @@
 
   <para>Click on <guilabel>Enable history completion</guilabel> or
   <guilabel>Enable history prediction</guilabel> to set history based
-  completions</para>
+  completions.</para>
 
   <note>
 	<para>Absolutely none of your data (history, etc.) is
@@ -1313,7 +1313,7 @@
 
   <para>If the <guilabel>Show Relevant Suggestions Automatically</guilabel>
   option is checked, typing the first letter of a translated glossary entry,
-  or <emphasis>&lt;</emphasis> for a tag, automatically launches the
+  or <literal>&lt;</literal> for a tag, automatically launches the
   auto-completer.</para>
 </section>
 

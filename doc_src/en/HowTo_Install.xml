@@ -236,7 +236,7 @@
 	<ulink url="https://git.code.sf.net/p/omegat/code">Sourceforge</ulink> or <ulink url="https://github.com/omegat-org/omegat.git">GitHub</ulink> repositories.</para>
 	<para>Once the code is downloaded, open a terminal in the source folder
 	(<filename>omegat-code/</filename> if you cloned from Sourceforge, or
-	<filename>/omegat/src</filename> if you cloned from GitHub) and type:</para>
+	<filename>/omegat</filename> if you cloned from GitHub) and type:</para>
 
 	<programlisting>./gradlew installDist</programlisting>
 

@@ -1421,30 +1421,30 @@
 	<varlistentry id="dialogs.preferences.external.search.context.menu.priority">
 	  <term
 		  id="dialogs.preferences.external.search.context.menu.priority.title">Context
-	  Menu Priority:</term>
+	  Menu Priority</term>
 
 	  <listitem>
 		<para>This option enables you to change the order of the commands in
-		the context (right-click) menu. Values around 100 display commands
+		the Editor pane <link linkend="panes.editor.context.menu" endterm="panes.editor.context.menu.title"/>. Values around 100 display commands
 		at the top, and values around 900 display them at the bottom.</para>
 
-		<warning><para>You will need to restart OmegaT for this change to take
-		effect.</para></warning>
+		<warning><para>Restart OmegaT to apply this change.</para></warning>
 	  </listitem>
 	</varlistentry>
 	<varlistentry  id="dialogs.preferences.external.search.items">
-	  <term id="dialogs.preferences.external.search.items.title">Items</term>
+	  <term id="dialogs.preferences.external.search.items.title">Sets</term>
 	  <listitem>
-		<para>Each item represents a group of web searches or local commands
+		<para>Each set represents a group of web searches or local commands
 		that are launched simultaneously.</para>
-		<para>An item must be given a name. The name will be displayed
+		<para>A set must be given a name. The name will be displayed
 		at the bottom of the <link linkend="menus.tools"
-		endterm="menus.tools.title"/> menu. If you check <guilabel>Show
-		in Editor context menu</guilabel>, the name will also be
+		endterm="menus.tools.title"/> menu.</para>
+		<para>If you check <guilabel>Show
+		in Editor context menu</guilabel>, the set name will also be
 		displayed in the <link linkend="panes.editor.context.menu"
 		endterm="panes.editor.context.menu.title"/> if a string is selected.</para>
 		<para>URL searches as well as commands must contain the string
-		<guilabel>{target}</guilabel> to be accepted. The {target}
+		<literal>{target}</literal> to be accepted. The <literal>{target}</literal>
 		placeholder will be replaced by the string that was selected in the
 		Editor.</para>
 		<para>URLs are opened with the default web browser, one per tab.</para>
@@ -1453,8 +1453,8 @@
 		<para>This opens a search for the {target} term on DuckDuckGo with a
 		number of search parameters.</para></example>
 		<para>Commands are opened on the command line. The
-		<guilabel>Delimiter</guilabel> is used to define the delimiter
-		for parameters. The default delimiter is <code>|</code>.</para>
+		<guilabel>Delimiter</guilabel>defines the delimiter between command
+		parameters. The default delimiter is <code>|</code>.</para>
 		<example><title>Command example</title>
 		<programlisting>/usr/bin/open|dict://{target}</programlisting>
 		<para>This opens the dictionary application that implements the

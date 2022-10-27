@@ -1172,7 +1172,7 @@
   <title id="dialogs.preferences.segmentation.setup.title">Global Segmentation Rules</title>
 
   <para>See <link linkend="app.segmentation"
-  endterm="app.segmentation.title"/> for general explanations about
+  endterm="app.segmentation.title"/> for a general explanation of
   segmentation (global or local, paragraph or sentence, etc.)</para>
 
   <warning><para>This dialog only accesses the global segmentation rules. If you have set local rules  in <link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/>, modifications here will not be taken into account.</para></warning>

@@ -122,15 +122,15 @@ dependencies {
         implementation 'tokyo.northside:url-protocol-handler:0.1.4'
 
         // PDF Filter
-        implementation 'org.apache.pdfbox:pdfbox:2.0.26'
+        implementation 'org.apache.pdfbox:pdfbox:2.0.27'
 
         // Aligner
         implementation 'net.loomchild:maligna:3.0.1'
 
         // Dictionary
         implementation 'com.github.takawitter:trie4j:0.9.8'
-        implementation 'io.github.eb4j:dsl4j:0.5.2'
-        implementation 'io.github.eb4j:stardict4j:0.3.2'
+        implementation 'io.github.eb4j:dsl4j:0.5.3'
+        implementation 'tokyo.northside:stardict4j:0.4.1'
 
         // Encoding detections
         implementation 'com.github.albfernandez:juniversalchardet:2.4.0'

@@ -1001,4 +1001,30 @@ public final class StringUtil {
     public static List<String> convertToList(String str) {
         return new ArrayList<String>(Arrays.asList(str.trim().split("\\s+")));
     }
+
+    /**
+     * Wrap line by length.
+     * @param text string to process.
+     * @param length wrap length.
+     * @return string wrapped.
+     */
+    public static String wrap(String text, int length) {
+        StringBuilder sb = new StringBuilder();
+        for (String line : text.split("\\n")) {
+            if (sb.length() > 0) {
+                sb.append(',');
+            }
+            for (String token : line.split("\\s")) {
+                if (sb.length() + 1 + token.length() - sb.lastIndexOf("\n") > length) {
+                    sb.append('\n');
+                }
+                if (sb.length() > 0 && sb.charAt(sb.length() - 1) != '\n') {
+                    sb.append(' ');
+                }
+                sb.append(token);
+            }
+        }
+        return sb.toString();
+    }
+
 }

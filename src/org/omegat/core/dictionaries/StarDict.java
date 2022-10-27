@@ -36,6 +36,9 @@ import java.util.stream.Collectors;
 
 import io.github.eb4j.stardict.StarDictDictionary;
 
+import org.omegat.core.Core;
+import org.omegat.core.CoreEvents;
+import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.util.Language;
 import org.omegat.util.Preferences;
 
@@ -62,6 +65,33 @@ import org.omegat.util.Preferences;
  * @author Suguru Oho
  */
 public class StarDict implements IDictionaryFactory {
+
+    /**
+     * Plugin loader.
+     */
+    public static void loadPlugins() {
+        CoreEvents.registerApplicationEventListener(new StarDictApplicationEventListener());
+    }
+
+    /**
+     * Plugin unloader.
+     */
+    public static void unloadPlugins() {
+    }
+
+    /**
+     * registration of dictionary factory.
+     */
+    static class StarDictApplicationEventListener implements IApplicationEventListener {
+        @Override
+        public void onApplicationStartup() {
+            Core.getDictionaries().addDictionaryFactory(new StarDict());
+        }
+
+        @Override
+        public void onApplicationShutdown() {
+        }
+    }
 
     @Override
     public boolean isSupportedFile(File file) {

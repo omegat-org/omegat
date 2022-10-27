@@ -37,6 +37,12 @@ import org.omegat.util.gui.Styles;
  */
 public class WhitespaceMarkerFactory {
 
+    public static void init() throws Exception {
+        Core.registerMarker(new SpaceMarker());
+        Core.registerMarker(new TabMarker());
+        Core.registerMarker(new LFMarker());
+    }
+
     /**
      * Marker for a normal whitespace.
      *

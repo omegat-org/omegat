@@ -43,6 +43,9 @@ import io.github.eb4j.dsl.data.LanguageName;
 import io.github.eb4j.dsl.visitor.DslVisitor;
 import org.apache.commons.io.FilenameUtils;
 
+import org.omegat.core.Core;
+import org.omegat.core.CoreEvents;
+import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.util.Preferences;
 
 /**
@@ -60,6 +63,33 @@ import org.omegat.util.Preferences;
  * (Russian)</a>
  */
 public class LingvoDSL implements IDictionaryFactory {
+
+    /**
+     * Plugin loader.
+     */
+    public static void loadPlugins() {
+        CoreEvents.registerApplicationEventListener(new LingvoDSLApplicationEventListener());
+    }
+
+    /**
+     * Plugin unloader.
+     */
+    public static void unloadPlugins() {
+    }
+
+    /**
+     * registration of dictionary factory.
+     */
+    static class LingvoDSLApplicationEventListener implements IApplicationEventListener {
+        @Override
+        public void onApplicationStartup() {
+            Core.getDictionaries().addDictionaryFactory(new LingvoDSL());
+        }
+
+        @Override
+        public void onApplicationShutdown() {
+        }
+    }
 
     @Override
     public final boolean isSupportedFile(final File file) {

@@ -54,21 +54,13 @@ import org.omegat.gui.dictionaries.DictionariesTextArea;
 import org.omegat.gui.dictionaries.IDictionaries;
 import org.omegat.gui.editor.EditorController;
 import org.omegat.gui.editor.IEditor;
-import org.omegat.gui.editor.mark.BidiMarkers;
-import org.omegat.gui.editor.mark.ComesFromAutoTMMarker;
-import org.omegat.gui.editor.mark.FontFallbackMarker;
+import org.omegat.gui.editor.MarkerController;
 import org.omegat.gui.editor.mark.IMarker;
-import org.omegat.gui.editor.mark.NBSPMarker;
-import org.omegat.gui.editor.mark.ProtectedPartsMarker;
-import org.omegat.gui.editor.mark.RemoveTagMarker;
-import org.omegat.gui.editor.mark.ReplaceMarker;
-import org.omegat.gui.editor.mark.WhitespaceMarkerFactory;
 import org.omegat.gui.exttrans.IMachineTranslation;
 import org.omegat.gui.exttrans.MachineTranslateTextArea;
 import org.omegat.gui.glossary.GlossaryManager;
 import org.omegat.gui.glossary.GlossaryTextArea;
 import org.omegat.gui.glossary.IGlossaries;
-import org.omegat.gui.glossary.TransTipsMarker;
 import org.omegat.gui.issues.IIssues;
 import org.omegat.gui.issues.IssuesPanelController;
 import org.omegat.gui.main.ConsoleWindow;
@@ -240,18 +232,7 @@ public final class Core {
         MainWindow me = new MainWindow();
         mainWindow = me;
 
-        Core.registerMarker(new ProtectedPartsMarker());
-        Core.registerMarker(new RemoveTagMarker());
-        Core.registerMarker(new NBSPMarker());
-        Core.registerMarker(new TransTipsMarker());
-        Core.registerMarker(new WhitespaceMarkerFactory.SpaceMarker());
-        Core.registerMarker(new WhitespaceMarkerFactory.TabMarker());
-        Core.registerMarker(new WhitespaceMarkerFactory.LFMarker());
-        Core.registerMarker(new BidiMarkers());
-        Core.registerMarker(new ReplaceMarker());
-        Core.registerMarker(new ComesFromAutoTMMarker());
-        Core.registerMarker(new FontFallbackMarker());
-
+        MarkerController.init();
         LanguageToolWrapper.init();
 
         segmenter = new Segmenter(Preferences.getSRX());

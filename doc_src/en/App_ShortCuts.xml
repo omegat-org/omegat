@@ -116,8 +116,8 @@
         term.</para>
 
 		<para>The translator has enabled the auto-completer to automatically
-		display history predictions, but also glossary terms, and pre-defined
-		short strings, which can be entered with simple arrow navigation.</para>
+		display not only history predictions, but also glossary terms, and
+    pre-defined short strings, which can be entered with simple arrow navigation.</para>
 		
         <para>The translator then reaches a revised section of the text where
         the <link linkend="panes.fuzzy.matches"
@@ -137,8 +137,8 @@
         section.</para>
 
         <para>Later on, the translator comes up with a better way to phrase a
-        somewhat thorny expression that came up earlier, so she selects it in
-        the source text, presses
+        somewhat thorny expression that had come up earlier, so she
+        selects it in the source text, presses
         <keycombo><keycap>C</keycap><keycap>F</keycap></keycombo> <link
         linkend="windows.text.search">to find</link> it, and then uses
         <keycombo><keycap>C</keycap><keycap>J</keycap></keycombo> to immediately
@@ -280,7 +280,7 @@
       <listitem>
         <para><code>modifier</code> can be:
         <literal>shift</literal>, <literal>ctrl</literal>,
-        <literal>meta</literal>, <literal>alt</literal>,
+        <literal>meta</literal>, <literal>alt</literal>, or
         <literal>altGraph</literal></para>
 
         <note>

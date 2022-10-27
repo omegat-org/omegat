@@ -52,7 +52,7 @@
 	</varlistentry>
 	<varlistentry id="application.folder.scripts.application.startup">
 	  <term id="application.folder.scripts.application.startup.title">application_startup</term>
-	  <listitem><para>Scripts in this folder will be launched when the scripting engine is available, slightly after OmegaT is launched.</para></listitem>
+	  <listitem><para>Scripts in this folder will be launched when the scripting engine is available, shortly after OmegaT is launched.</para></listitem>
 	</varlistentry>
 	<varlistentry id="application.folder.scripts.entry.activated">
 	  <term id="application.folder.scripts.entry.activated.title">entry_activated</term>

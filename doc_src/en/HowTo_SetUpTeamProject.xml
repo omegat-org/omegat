@@ -55,7 +55,7 @@
 		<para>We
         recommend that you avoid using that folder for translation tasks. If
         you need to perform translation or review tasks on that project, use
-        OmegaT to download a separate copty of the team project and work from
+        OmegaT to download a separate copy of the team project and work from
         there. See <link linkend="how.to.use.team.project"
         endterm="how.to.use.team.project.title"/> for details.</para>
 	  </listitem>

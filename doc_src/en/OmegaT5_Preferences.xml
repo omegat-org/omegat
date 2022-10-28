@@ -1681,8 +1681,7 @@
   <variablelist>
 	<varlistentry id="dialogs.preferences.tag.processing.programming.variables">
 	  <term
-		  id="dialogs.preferences.tag.processing.programming.variables.title">Programming
-	  variables</term>
+		  id="dialogs.preferences.tag.processing.programming.variables.title">Check printf </term>
 	  <listitem><para>When translating software-related files, you can
 	  configure the tag issues options to also check for programming
 	  (<literal>%</literal>) variables or placeholders
@@ -1711,7 +1710,7 @@
 	  <term
 		  id="dialogs.preferences.tag.processing.do.not.allow.creating.translated.documents.with.tag.issues.title">Do
 	  not allow creating translated texts with tag issues</term>
-	  <listitem><para/></listitem>
+	  <listitem><para>See <link linkend="menus.tools.check.issues" endterm="menus.tools.check.issues.title"/> for details.</para></listitem>
 	</varlistentry>
 
 	<varlistentry id="dialogs.preferences.tag.processing.count.protected.text.and.custom.tags.in.statistics">

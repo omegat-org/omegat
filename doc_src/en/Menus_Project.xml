@@ -133,8 +133,7 @@
         <para>Creates the target files based on your translation. The
         created target files are located in the <link
         linkend="project.folder.target" endterm="project.folder.target.title"/> folder.</para>
-		<para>
-		</para>				
+		<note><para>You can block target file creation if tag issues are found. See <link linkend="dialogs.preferences.tag.processing.do.not.allow.creating.translated.documents.with.tag.issues" endterm="dialogs.preferences.tag.processing.do.not.allow.creating.translated.documents.with.tag.issues.title"/> for details.</para></note>
       </listitem>
     </varlistentry>
 

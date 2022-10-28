@@ -66,6 +66,14 @@
             <para>selecting a row, or moving the mouse over it, displays a
             context menu icon in the last column; clicking that icon presents
             actions available to correct or ignore the error.</para>
+			<note><para>You can force issue checking each time you leave a
+			segment (see <link
+			linkend="dialogs.preferences.editor.validate.tags.when.leaving.a.segment"
+			endterm="dialogs.preferences.editor.validate.tags.when.leaving.a.segment.title"/>)
+			and block translated files creation if tag issues are found (see
+			<link
+			linkend="dialogs.preferences.tag.processing.do.not.allow.creating.translated.documents.with.tag.issues"
+			endterm="dialogs.preferences.tag.processing.do.not.allow.creating.translated.documents.with.tag.issues.title"/>).</para></note>
           </listitem>
         </itemizedlist>
       </listitem>

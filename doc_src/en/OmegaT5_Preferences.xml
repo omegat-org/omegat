@@ -1037,6 +1037,7 @@
 		<varlistentry id="file.filters.po">
 		  <term id="file.filters.po.title">PO files</term>
 		  <listitem>
+			<para>The filter checks printf variables ('%s', etc.) by default. See <link linkend="dialogs.preferences.tag.processing.programming.variables" endterm="dialogs.preferences.tag.processing.programming.variables.title"/> for details.</para>
 			<variablelist>
 			  <varlistentry>
 				<term>Allow blank target segments</term>
@@ -1116,6 +1117,7 @@
 		<varlistentry id="file.filter.java.bundle">
 		  <term id="file.filter.java.bundle.title">Java Resource bundle</term>
 		  <listitem>
+			<para>The filter checks Java MessageFormat patterns (e.g. \{0\}) by default. See <link linkend="dialogs.preferences.tag.processing.programming.variables" endterm="dialogs.preferences.tag.processing.programming.variables.title"/> for details.</para>
 			<variablelist>
 			  <varlistentry>
 				<term>Force Unicode literals compatibility with Java 8</term>
@@ -1680,16 +1682,12 @@
 
   <variablelist>
 	<varlistentry id="dialogs.preferences.tag.processing.programming.variables">
-	  <term
-		  id="dialogs.preferences.tag.processing.programming.variables.title">Check printf </term>
-	  <listitem><para>When translating software-related files, you can
-	  configure the tag issues options to also check for programming
-	  (<literal>%</literal>) variables or placeholders
-	  (<literal>{0}</literal>), if the file filter does not already do
-	  so. The PO filter already handles variables marked with
-	  <literal>%</literal>, and the Java™ Resource Bundle filter already
-	  handles <literal>{#}</literal> tags, so you only need this for other
-	  file types.</para></listitem>
+	  <term id="dialogs.preferences.tag.processing.programming.variables.title">printf-function variables</term>
+	  <listitem><para>Configure the tag issues options (see <link linkend="menus.tools.check.issues" endterm="menus.tools.check.issues.title"/>) to check programming variables or placeholders:<literal>%</literal>, (<literal>{0}</literal>), if the file filter does not already do
+	  so.</para>
+
+	  <note><para>The PO filter already handles variables marked with
+	  <literal>%</literal></para></note></listitem>
 	</varlistentry>
 	
 	<varlistentry id="dialogs.preferences.tag.processing.simple.java.messageformat">

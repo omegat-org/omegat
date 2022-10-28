@@ -52,6 +52,7 @@ import org.omegat.util.StringUtil;
 
 import gen.core.filters.Filters;
 import gen.core.project.RepositoryDefinition;
+import gen.core.project.RepositoryMapping;
 
 /**
  * Storage for project properties. May read and write project from/to disk.
@@ -433,6 +434,17 @@ public class ProjectProperties {
 
     public List<RepositoryDefinition> getRepositories() {
         return repositories;
+    }
+
+    public boolean isTeamProject() {
+        for (RepositoryDefinition repositoryDefinition: repositories) {
+            for (RepositoryMapping repositoryMapping: repositoryDefinition.getMapping()) {
+                if ("".equals(repositoryMapping.getLocal()) || "/".equals(repositoryMapping.getLocal())) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public void setRepositories(List<RepositoryDefinition> repositories) {

@@ -439,24 +439,14 @@ public final class ProjectUICommands {
                 Cursor oldCursor = mainWindow.getCursor();
                 mainWindow.setCursor(hourglassCursor);
 
-                try {
-                    // convert old projects if need
-                    ConvertProject.convert(projectRootFolder);
-                } catch (Exception ex) {
-                    Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_CONVERT_PROJECT");
-                    Core.getMainWindow().displayErrorRB(ex, "PP_ERROR_UNABLE_TO_CONVERT_PROJECT");
-                    mainWindow.setCursor(oldCursor);
-                    return null;
-                }
-                
-                // check if project okay
                 ProjectProperties props;
-                try {
-                    props = ProjectFileStorage.loadProjectProperties(projectRootFolder.getAbsoluteFile());
-                    // Here, 'props' is the current project setting read from local copy of omegat.project
-                } catch (Exception ex) {
-                    Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
-                    Core.getMainWindow().displayErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
+                if (convertOldProjectIfNeed(projectRootFolder)) {
+                    props = checkProjectProperties(projectRootFolder);
+                    if (props == null) {
+                        mainWindow.setCursor(oldCursor);
+                        return null;
+                    }
+                } else {
                     mainWindow.setCursor(oldCursor);
                     return null;
                 }
@@ -587,6 +577,32 @@ public final class ProjectUICommands {
                 }
             }
         }.execute();
+    }
+
+    private static boolean convertOldProjectIfNeed(File projectRootFolder) {
+        try {
+            // convert old projects if need
+            ConvertProject.convert(projectRootFolder);
+        } catch (Exception ex) {
+            Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_CONVERT_PROJECT");
+            Core.getMainWindow().displayErrorRB(ex, "PP_ERROR_UNABLE_TO_CONVERT_PROJECT");
+            return false;
+        }
+        return true;
+    }
+
+    private static ProjectProperties checkProjectProperties(File projectRootFolder) {
+        // check if project okay
+        ProjectProperties props;
+        try {
+            props = ProjectFileStorage.loadProjectProperties(projectRootFolder.getAbsoluteFile());
+            // Here, 'props' is the current project setting read from local copy of omegat.project
+        } catch (Exception ex) {
+            Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
+            Core.getMainWindow().displayErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
+            return null;
+        }
+        return props;
     }
 
     /**

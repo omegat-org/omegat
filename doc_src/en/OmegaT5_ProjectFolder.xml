@@ -38,7 +38,7 @@
 
   <para>You can access the project folder and its folders with the <link linkend="menus.project.access.project.contents" endterm="menus.project.access.project.contents.title"/> command in the <link linkend="menus.project" endterm="menus.project.title"/> menu.</para>
 
-  <para>By using <link linkend="menus.project.properties" endterm="menus.project.properties.title"/>, you can easily assign locations other than the default ones to the various resources either when you create the project, or later on.</para>
+  <para>You can use <link linkend="menus.project.properties" endterm="menus.project.properties.title"/>, to easily assign locations other than the default ones to the various resources either when you create the project, or later on.</para>
 
   <para>For example, you can
 
@@ -56,7 +56,7 @@
   <note><para>You can also create OmegaT projects either manually or with scripts by copying a set of prewritten files to a new folder:</para>
   <itemizedlist>
 	<listitem>
-	  <para>Any given folder that contains a valid <filename>omegat.project</filename> file will be recognized by OmegaT as being a translation project (even if it later needs manual adjustments).</para>
+	  <para>Any given folder that contains a valid <filename>omegat.project</filename> file will be recognized as a translation project by OmegaT (even if it later needs manual adjustments).</para>
 	</listitem>
 	<listitem>
   <para>If the folder is an empty repository and the <filename>omegat.project</filename> file contains remote repository information, the project will be recognized by OmegaT as being a team project:
@@ -272,7 +272,11 @@
       <varlistentry id="project.folder.project.save.tmx">
         <term id="project.folder.project.save.tmx.title">project_save.tmx</term>
         <listitem>
-          <para>This is the most important file in the project. When you create a new project it is created empty, and is gradually filled with the translations of the text in files located in the <link linkend="project.folder.source" endterm="project.folder.source.title"/> folder.</para>
+          <para>This is the most important file in the project. When you
+          create a new profject, the file is  empty and is gradually
+          filled with the translations of the text in files located in the <link
+          linkend="project.folder.source"
+          endterm="project.folder.source.title"/> folder.</para>
 		  <para>It constitutes the working translation memory of the project.</para>
 		  <para>OmegaT regularly backs-up that file. See <link linkend="how.to.restore.your.data" endterm="how.to.restore.your.data.title"/> for details.</para>
 		          </listitem>

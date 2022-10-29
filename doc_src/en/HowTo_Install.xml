@@ -52,11 +52,10 @@
   <section id="installing.omegat.linux.intel">
     <title id="installing.omegat.linux.intel.title">On Linux</title>
 
-	<para>Linux distributions offer OmegaT packages with semi-automated
-	installation processes. The instructions given here apply to people who
-	download the package from the <ulink
-	url="https://omegat.org/download">https://omegat.org</ulink>
-	site.</para>
+	<para>Some Linux distributions offer OmegaT in their package manager. The
+	instructions given here apply to people who download the package from the
+	<ulink url="https://omegat.org/download">https://omegat.org</ulink>
+	site and install it manually.</para>
 
 
     <para>Unpack/untar the file you downloaded. This creates a new

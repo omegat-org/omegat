@@ -66,6 +66,6 @@
 
 	<section>
 	  <title>Development</title>
-	  <para>OmegaT provides developpers with a thorough documentation to create file filter plugins. See <ulink url="https://sourceforge.net/p/omegat/code/ci/master/tree/docs_devel/HowToCreateFilterPlugin.md">How to create a file filter plugin for OmegaT</ulink> for details.</para>
+	  <para>OmegaT provides developpers with thorough documentation to create file filter plugins. See <ulink url="https://sourceforge.net/p/omegat/code/ci/master/tree/docs_devel/HowToCreateFilterPlugin.md">How to create a file filter plugin for OmegaT</ulink> for details.</para>
 	</section>
   </section>

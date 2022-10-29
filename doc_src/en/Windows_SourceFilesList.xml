@@ -60,8 +60,8 @@
   endterm="menus.tools.statistics.title"/> item in the <link linkend="menus.tools"
   endterm="menus.tools.title"/> menu will give you more information.</para>
 
-  <para>Modifying the segmentation rules may have the effect of modifying the
-  number of segments/unique segments. This, however, should generally be avoided
+  <para>Modifying the segmentation rules may alter the number of
+  segments/unique segments. This, however, should generally be avoided
   once you have started translating the project. See <link
   linkend="app.segmentation" endterm="app.segmentation.title"/> for
   details.</para>

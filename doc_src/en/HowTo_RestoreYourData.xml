@@ -47,7 +47,7 @@
 
   <section id="how.to.restore.your.data.lost.in.translation">
 	<title id="how.to.restore.your.data.lost.in.translation.title">You lost your translation?</title>
-	<para>If you believe that you have lost translation data, it might probably be safely stored in your most recent backup memory, which is usually less than a few minutes old or so.</para>
+	<para>Even if you fear you might have lost translation data, it is probably be safely stored in your most recent backup memory, which is usually less than a few minutes old or so.</para>
 
 	<para>Proceed as follows:
 	<orderedlist>
@@ -182,7 +182,7 @@
 
       <listitem>
 		<para>Restart OmegaT.</para>
-		<note><para>If OmegaT does not work as expected at this point, feel free to reach out.</para></note>
+		<note><para>If OmegaT does not work as expected at this point, feel free to reach out for support.</para></note>
       </listitem>
 
       <listitem>

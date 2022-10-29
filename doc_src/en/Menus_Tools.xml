@@ -80,7 +80,7 @@
 
     <varlistentry id="menus.tools.check.issues.for.current.document">
       <term id="menus.tools.check.issues.for.current.document.title">Check
-      Issues for Current Document</term>
+      Issues for Current File</term>
       <listitem>
         <para>As above, but only for the document currently displayed in the
         Editor pane.</para>
@@ -186,10 +186,9 @@
       <term id="menus.tools.external.search.commands.title">External search
       commands</term>
       <listitem>
-        <para>If commands to perform external searches have been defined in
+        <para>If you have defined external searches in
         <link linkend="dialogs.preferences.external.searches"
-        endterm="dialogs.preferences.external.searches.title"/>, they are listed
-        and accessible here.</para>
+        endterm="dialogs.preferences.external.searches.title"/>, their names are listed and accessible here.</para>
       </listitem>
     </varlistentry>
   </variablelist>

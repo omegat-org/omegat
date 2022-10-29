@@ -934,14 +934,14 @@
             </row>
 
             <row>
-              <entry>Forward in history...</entry>
+              <entry>Forward in History</entry>
               <entry>gotoHistoryForwardMenuItem</entry>
               <entry>ctrl shift N</entry>
               <entry>meta shift N</entry>
             </row>
 
             <row>
-              <entry>Back in history...</entry>
+              <entry>Back in History</entry>
               <entry>gotoHistoryBackMenuItem</entry>
               <entry>ctrl shift P</entry>
               <entry>meta shift P</entry>

@@ -962,8 +962,8 @@
       <para>Classes are defined by enclosing the desired characters in square
       brackets, and can be specified either by listing each individual character
       to include, or by specifying a range of characters. For example, you could
-      create the <literal>[£€$]</literal> to find any of those three currency
-      symbols in the text, or [1-3] to find the number 1, 2 or 3.
+      create the <literal>[£€$]</literal> class to find any of those three
+      currency symbols in the text, or [1-3] to find the number 1, 2 or 3.
         <note>
           <para>Inside a class, only the backslash (<literal>\</literal>), 
           caret (<literal>^</literal>), closing bracket (<literal>]</literal>)

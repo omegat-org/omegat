@@ -68,7 +68,7 @@
 	</varlistentry>
 	<varlistentry id="application.folder.scripts.project.changed">
 	  <term id="application.folder.scripts.project.changed.title">project_changed</term>
-	  <listitem><para>Scripts in the folder will be launched when the state of the project changes. An "eventType" object is binded and can take the following values: CLOSE, COMPILE, CREATE, LOAD, SAVE.</para></listitem>
+	  <listitem><para>Scripts in the folder will be launched when the state of the project changes. An "eventType" object is bound and can take the following values: CLOSE, COMPILE, CREATE, LOAD, SAVE.</para></listitem>
 	</varlistentry>
   </variablelist>
   </para>
@@ -138,7 +138,7 @@ that on a large project, an "entry_activated" script will be called a lot of tim
 	contributors. Use the script editor to open, run, or modify scripts directly,
 	or to write new scripts for your own use.</para>
 
-	<note><para>The scripts distributed in OmegaT are here for your convenience
+	<note><para>The scripts distributed with OmegaT are here for your convenience
 	but are not supported by the OmegaT development team.</para></note>
 	
 	<para>Follow the instructions provided in the script itself.</para>

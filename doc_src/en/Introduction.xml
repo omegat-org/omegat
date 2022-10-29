@@ -5,100 +5,128 @@
   <title id="chapter.instant.start.guide.title">Introduction to OmegaT</title>
 
   <section id="introduction.omegat.">
-	<title id="introduction.omegat.principles.title">Principles</title>
+		<title id="introduction.omegat.principles.title">Principles</title>
+    
+    <para>Welcome to OmegaT, a computer-assisted translation (CAT) tool
+    that offers great flexibility, performance and robustness, as well as
+    features beyond those of commercial offerings, even for beginning
+    translators.</para>
 
-	<para>OmegaT is a computer-assisted translation (CAT) tool that offers great
-	flexibility and performance, as well as features beyond those of commercial
-	offerings, even for beginning translators.</para>
+    <section id="introduction.omegat.principles.basics">
+      <title id="introduction.omegat.principles.basics.title">The
+			basics</title>
 
-	<variablelist>
-	  <varlistentry><term>Translation project</term>
-	  <listitem>
-		<para>An OmegaT translation project consists of a number of resources in
-		separate folders, of a <link
-		linkend="project.folder.omegat.project.file"
-		endterm="project.folder.omegat.project.file.title"/> file that stores
-		the location of all the resources and of a <link
-		linkend="project.folder.project.save.tmx"
-		endterm="project.folder.project.save.tmx.title"/> translation memory
-		file that stores all the translations made while working on that
-		project.</para>
+      <variablelist>
+        <varlistentry>
+          <term>Translation project</term>
+          <listitem>
+            <para>An OmegaT translation project consists of a number of
+            resources stored in separate folders, of a <link
+            linkend="project.folder.omegat.project.file"
+            endterm="project.folder.omegat.project.file.title"/> file that
+            stores the location of all the resources and of a <link
+            linkend="project.folder.project.save.tmx"
+            endterm="project.folder.project.save.tmx.title"/> translation
+            memory file that stores all the translations made while working
+            on that project.</para>
+            
+            <para>Translators can easily modify the contents or location of
+            those resources at any time during the translation.</para>
+      
+            <para>By default, resources include the project’s translation
+            memory, which is automatically created upon project creation,
+            and the files to translate. They can also include reference
+            translation memories, glossaries, and other reference
+            files.</para>
+      
+            <para>See <link linkend="project.folder"
+              endterm="project.folder.title"/> for details.</para>
+          </listitem>
+        </varlistentry>
+        
+        <varlistentry>
+          <term>Translation memories</term>
+          <listitem>
+            <para>Translators do not have to <emphasis>create</emphasis> a
+            translation memory or <emphasis>associate</emphasis> one to a
+            new project. OmegaT takes care of that
+            <emphasis>automatically</emphasis>.</para>
+            
+            <para>Translators can very easily reuse an existing projectʼs
+            translation memory by simply adding new translation files to
+            the old project, or by copying the old translation memory to
+            a new project.</para>
+            
+            <para>There is no limit to the number of translation memories
+            that can be used as reference in a translation project, and
+            OmegaT makes it very easy to assign different levels of
+            priority to these additional memories.</para>
+            
+            <para>See <link linkend="how.to.use.tm"
+            endterm="how.to.use.tm.title"/> for details.</para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>Collaboration</term>
+          <listitem>
+            <para>Simple settings enable translators to easily share
+            resources and work together on a project.</para>
+    
+            <para>The team functionality offers industrial grade
+            robustness and flexibility to synchronize project resources
+            among team members, while allowing easy resolution of
+            conflicts between different translations.</para>
+    
+            <para>See <link
+            linkend="how.to.tm.share.translation.memories"
+            endterm="how.to.tm.share.translation.memories.title"/> for
+            details.</para>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+    </section>
 
-		<para>Translators can easily modify the contents or location of the
-		resources at any time during the translation.</para>
+    <section id="introduction.omegat.principles.made.for.translators">
+      <title
+				id="introduction.omegat.principles.made.for.translators.title">
+				Made for translators</title>
 
-		<para>By default, resources include the project’s translation memory,
-		which is automatically created upon project creation, and the files to
-		translate. They can also include reference translation memories,
-		glossaries, and other reference files.</para>
+      <para>OmegaT is designed not only to facilitate the translation
+      process, but also to ensure the translator does not have to worry
+      about losing data.</para>
+      
+      <note>
+        <para>You have not use OmegaT yet, but you remember the times
+        you were translating in your word processor and a computer
+        glitch wiped out the book translation you had been working on
+        for the last six months, or the report that was due in one
+        hour.</para>
+        
+        <para>You're considering OmegaT, but… </para>
+        <para>How can OmegaT help against such glitches?</para>
 
-		<para>See <link linkend="project.folder"
-		endterm="project.folder.title"/> for details.</para>
-	  </listitem>
-	  </varlistentry>
+        <para>Not to worry. The robust design of OmegaT makes it
+        <emphasis>extremely</emphasis> unlikely that you have lost
+        more than a few minutes of work.</para>
+        
+        <para>Even if things look very broken, do not panic. Just
+        follow the simple steps described in <link
+        linkend="how.to.restore.your.data"
+        endterm="how.to.restore.your.data.title"/>.</para>
+      </note>
 
-	  <varlistentry>
-		<term>Translation memories</term>
-		<listitem>
-		  <para>Translators do not have to <emphasis>create</emphasis> a
-		  translation memory or <emphasis>associate</emphasis> one to a new
-		  project. OmegaT takes care of that
-		  <emphasis>automatically</emphasis>.</para>
-
-		  <para>Translators can very easily reuse an existing projectʼs
-		  translation memory by simply adding new translation files to the old
-		  project, or by copying the old translation memory to a new project.</para>
-		  
-		  <para>There is no limit to the number of translation memories that can
-		  be used as reference in a translation project, and OmegaT makes it
-		  very easy to assign different levels of priority to these additional
-		  memories.</para>
-
-		  <para>See <link linkend="how.to.use.tm"
-		  endterm="how.to.use.tm.title"/> for details.</para>
-		</listitem>
-	  </varlistentry>
-
-	  <varlistentry>
-		<term>Working in teams</term>
-		<listitem>
-		  <para>Translators can easily share resources and work together on a
-		  project with simple settings.</para>
-
-		  <para>The team functionality offers industrial grade robustness and
-		  flexibility to synchronize project resources among team members,
-		  while allowing easy resolution of conflicts between different
-		  translations.</para>
-
-		  <para>See <link linkend="how.to.tm.share.translation.memories"
-		  endterm="how.to.tm.share.translation.memories.title"/> for
-		  details.</para>
-		</listitem>
-	  </varlistentry>
-	</variablelist>
-
-	<note><para>You have not yet started to even use OmegaT, but one day,
-	because your computer misbehaved, things will look like you have lost that
-	book translation that you had been working on for the past 6 months, or that
-	report that you must deliver in one hour.</para>
-	<para>Whatever has happened the robustness of OmegaT makes it
-	<emphasis>extremely</emphasis> unlikely that you have lost more than a few
-	minutes of work.</para>
-	<para>Even if things look very broken, do not panic. Just follow the easy
-	steps described in <link linkend="how.to.restore.your.data"
-	endterm="how.to.restore.your.data.title"/>.</para>
-	<para>In the meanwhile, OmegaT will hopefully help you become a better
-	translator.</para>
-	<para>Welcome to OmegaT!</para></note>
-
+      <para>And before you ever need to follow those steps, OmegaT will
+      allow you to focus on actually translating, and hopefully help
+      you become a better translator.</para>
+    </section>
   </section>
   
   <section id="introduction.note.on.shortcuts">
-	<title id="introduction.note.on.shortcuts.title">Shortcuts</title>
+		<title id="introduction.note.on.shortcuts.title">Shortcuts</title>
 
 	<para>OmegaT looks a bit stern, if not outright unfriendly, to people who
-	are used to button based interfaces. Buttons are very few in OmegaT. Most of
-	the action takes place with the help of shortcuts associated to menu
+	are used to button based interfaces. Buttons are very few in OmegaT. Most
+	of the action takes place with the help of shortcuts associated to menu
 	items.</para>
 
 	<para>Shortcuts are ubiquitous in this guide and you should be able very

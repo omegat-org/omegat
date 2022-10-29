@@ -59,7 +59,7 @@
 	  <para>Any given folder that contains a valid <filename>omegat.project</filename> file will be recognized as a translation project by OmegaT (even if it later needs manual adjustments).</para>
 	</listitem>
 	<listitem>
-  <para>If the folder is an empty repository and the <filename>omegat.project</filename> file contains remote repository information, the project will be recognized by OmegaT as being a team project:
+  <para>If the folder is an empty repository and the <filename>omegat.project</filename> file contains remote repository information, the project will be recognized as a team project by OmegaT:
 	<programlisting>...
     &lt;external_command&gt;&lt;/external_command&gt;
     &lt;repositories&gt;

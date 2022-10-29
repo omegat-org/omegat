@@ -162,15 +162,13 @@
 		<listitem>
 		  <para>Parameter files that are included in the downloaded OmegaT
 		  package (especially the <filename>OmegaT.l4J.ini</filename> for
-		  <link endterm="running.omegat.on.windows.title"
-				linkend="running.omegat.on.windows"/> and the
+		  <link linkend="running.omegat.on.windows">Windows</link> and the
 		  <filename>Configuration.properties</filename> and
 		  <filename>Info.plist</filename> files for <link
-		  endterm="running.omegat.on.macos.title"
-		  linkend="running.omegat.on.macos"/> packages) might be overwritten
-		  or deleted, so you may want to create a backup before upgrading, if
-		  you have been using these files to modify OmegaT’s launch
-		  parameters.</para>
+		  linkend="running.omegat.on.macos">macOS</link> packages) might be
+			overwritten or deleted, so you may want to create a backup before
+			upgrading, if you have been using these files to modify OmegaT’s
+			launch parameters.</para>
 		</listitem>
 
 		<listitem>

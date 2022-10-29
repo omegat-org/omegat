@@ -414,13 +414,13 @@
                   <row>
                     <entry>Matches</entry>
                     <entry>
-                      <para>Any combinations of four letters
+                      <para>Any combinations of three letters
                         starting with “c” and ending with “t”:
-                        “<emphasis>cart</emphasis>”,
-                        “<emphasis>cult</emphasis>”,
-                        “<emphasis>coat</emphasis>”, or even nonsensical
-                        combinations such as “<emphasis>cbzt</emphasis>”
-                        or “<emphasis>cqlt</emphasis>”.
+                        “<emphasis>cat</emphasis>”,
+                        “<emphasis>cut</emphasis>”,
+                        “<emphasis>cot</emphasis>”, or even nonsensical
+                        combinations such as “<emphasis>czt</emphasis>”
+                        or “<emphasis>cqt</emphasis>”.
                       </para>
                     </entry>
                   </row>
@@ -428,14 +428,13 @@
                   <row>
                     <entry>Does not match</entry>
                     <entry>
-                      <para>Combinations containing four letters that start
-                      with “c” and ending with “t” split, but are split across
-                      more than one line.</para>
+                      <para>Combinations containing three letters that
+                      start with “c” and ending with “t” split, but are
+                      split across more than one line.</para>
                       <para>What is the missing letter?</para>
                         <simplelist>
                           <member><literal>c</literal></member>
                           <member><literal></literal></member>
-                          <member><literal>a</literal></member>
                           <member><literal>t</literal></member>
                         </simplelist>
                     </entry>
@@ -1279,7 +1278,7 @@
             <entry><literal>,\h[\h(\w+\.\w+)\w,'ʼ"“”-]+[\.,]</literal></entry>
             <entry>
               <para>Find clauses that start with a comma followed by a
-              whitesspace character, contain one or more words (including words
+              whitespace character, contain one or more words (including words
               in quotation marks, contractions, and filenames with a file
               extension), and end either with a comma or period.</para>
             </entry>
@@ -1323,7 +1322,7 @@
                     <para>1969.7.20</para>
                   </listitem>
                   <listitem>
-                    <para>2022.10.31</para>
+                    <para>2022-10-31</para>
                   </listitem>
                 </itemizedlist>
               </para>

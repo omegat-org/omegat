@@ -58,7 +58,7 @@
     </varlistentry>
 
     <varlistentry id="menus.view.mark.non.breakable.space">
-      <term id="menus.view.mark.non.breakable.space.title">Mark Non-breakable
+      <term id="menus.view.mark.non.breakable.space.title">Mark Non-Breakable
       Spaces</term>
       <listitem>
         <para>If checked, non-breakable spaces will be displayed with a gray

@@ -250,8 +250,9 @@
       </mediaobject>
     </figure>
 
-	<note><para>To display the paragraph marks and see to which paragraph each segment belongs, use <link linkend="menus.view.mark.paragraph.delimitations"
-	endterm="menus.view.mark.paragraph.delimitations.title"/> and see how to set the paragraph mark here: <link
+	<note><para>To display paragraph marks and see which paragraph each
+	segment is part of, use <link linkend="menus.view.mark.paragraph.delimitations"
+	endterm="menus.view.mark.paragraph.delimitations.title"/>. You can find  how to set the paragraph mark here: <link
 	linkend="dialogs.preferences.editor.paragraph.delimitation.format"
 	endterm="dialogs.preferences.editor.paragraph.delimitation.format.title"/>.</para></note>
 

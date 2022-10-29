@@ -200,7 +200,7 @@
 			</listitem>
 		  </varlistentry>
 		</variablelist>
-		That location is written <filename>path/to/OmegaT.jar</filename> in this chapter but you'll have to replace it with the real location according to your platform.
+		That location is written <filename>path/to/OmegaT.jar</filename> in this chapter but you'll have to replace it with the real location on your platform.
 		</para>
 	  </note>	
 	</section>
@@ -226,7 +226,7 @@
 			<listitem>
 			  <para>Optional parameters accepted by the
 			  <command>java</command> command. The parameters relevant
-			  to running OmegaT are described below :<link
+			  to running OmegaT are described <link
 			  linkend="launch.with.command.line.java.parameters">below.</link></para>
 			</listitem>					
 		  </varlistentry>

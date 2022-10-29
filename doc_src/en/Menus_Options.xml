@@ -42,7 +42,7 @@
     </varlistentry>
 
     <varlistentry id="menus.options.autocompletion">
-      <term id="menus.options.autocompletion.title">Auto-completion</term>
+      <term id="menus.options.autocompletion.title">Auto-Completion</term>
       <listitem>
       <para>Select the various options to activate them. See <link
       linkend="dialog.preferences.auto.completion"

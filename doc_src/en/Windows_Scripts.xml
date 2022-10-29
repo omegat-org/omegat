@@ -41,7 +41,7 @@
 
   <para>Some scripts are <emphasis>event</emphasis> based and can be made to be
   triggered automatically when a given event takes place. Each event corresponds
-  to a subfolder inside <link
+  to a subfolder under <link
   linkend="application.folder.scripts"
   endterm="application.folder.scripts.title"/>:
 

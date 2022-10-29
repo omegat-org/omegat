@@ -1684,20 +1684,20 @@
 	<varlistentry id="dialogs.preferences.tag.processing.programming.variables">
 	  <term id="dialogs.preferences.tag.processing.programming.variables.title">Check printf function variables</term>
 	  <listitem>
-		<para>Check printf variables in file formats other than the PO format. The PO filter already handles variables marked with <literal>%</literal></para>
+		<para>Check printf variables in file formats other than the PO format. The PO filter already handles variables marked with <literal>%</literal>.</para>
 		<para>You can select
 	  <variablelist>
 		<varlistentry>
 		  <term>None</term>
-		  <listitem><para>None of the variable patterns are checked</para></listitem>
+		  <listitem><para>None of the variable patterns are checked.</para></listitem>
 		</varlistentry>
 		<varlistentry>
 		  <term>Simple variables (e.g., %s, %d)</term>
-		  <listitem><para>Only the simlpe variable patterns are checked</para></listitem>
+		  <listitem><para>Only the simlpe variable patterns are checked.</para></listitem>
 		</varlistentry>
 		<varlistentry>
 		  <term>All variables (e.g., %s, %-s)</term>
-		  <listitem><para>This can result in falso positives in some files</para></listitem>
+		  <listitem><para>This can result in falso positives in some files.</para></listitem>
 		</varlistentry>
 	  </variablelist>
 	</para>
@@ -1716,7 +1716,9 @@
 	  <term
 		  id="dialogs.preferences.tag.processing.allow.translated.tags.to.be.in.a.different.order.title">Allow
 	  translated tags to be in a different order</term>
-	  <listitem><para/></listitem>
+	  <listitem>
+		<para>Tags in a different order than the source will not appear in the list of tag issues. See <link linkend="example.check.issues" endterm="example.check.issues.title"/> for details.</para>
+	  </listitem>
 	</varlistentry>
 
 	<varlistentry id="dialogs.preferences.tag.processing.do.not.allow.creating.translated.documents.with.tag.issues">

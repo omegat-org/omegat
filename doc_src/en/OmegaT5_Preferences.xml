@@ -1682,19 +1682,34 @@
 
   <variablelist>
 	<varlistentry id="dialogs.preferences.tag.processing.programming.variables">
-	  <term id="dialogs.preferences.tag.processing.programming.variables.title">printf-function variables</term>
-	  <listitem><para>Configure the tag issues options (see <link linkend="menus.tools.check.issues" endterm="menus.tools.check.issues.title"/>) to check programming variables or placeholders:<literal>%</literal>, (<literal>{0}</literal>), if the file filter does not already do
-	  so.</para>
-
-	  <note><para>The PO filter already handles variables marked with
-	  <literal>%</literal></para></note></listitem>
+	  <term id="dialogs.preferences.tag.processing.programming.variables.title">Check printf function variables</term>
+	  <listitem>
+		<para>Check printf variables in file formats other than the PO format. The PO filter already handles variables marked with <literal>%</literal></para>
+		<para>You can select
+	  <variablelist>
+		<varlistentry>
+		  <term>None</term>
+		  <listitem><para>None of the variable patterns are checked</para></listitem>
+		</varlistentry>
+		<varlistentry>
+		  <term>Simple variables (e.g., %s, %d)</term>
+		  <listitem><para>Only the simlpe variable patterns are checked</para></listitem>
+		</varlistentry>
+		<varlistentry>
+		  <term>All variables (e.g., %s, %-s)</term>
+		  <listitem><para>This can result in falso positives in some files</para></listitem>
+		</varlistentry>
+	  </variablelist>
+	</para>
+	</listitem>
 	</varlistentry>
 	
 	<varlistentry id="dialogs.preferences.tag.processing.simple.java.messageformat">
 	  <term
 		  id="dialogs.preferences.tag.processing.simple.java.messageformat.title">Check
-	  simple java MessageFormat patterns</term>
-	  <listitem><para/></listitem>
+	  simple Java MessageFormat placeholders</term>
+	  <listitem><para>Check  Java MessageFormat placeholders in file formats other than the Java Bundles format. The Java Bundles filter already handles placeholders marked with <literal>{#}</literal> where <literal>#</literal> is a number.</para>
+</listitem>
 	</varlistentry>
 
 	<varlistentry id="dialogs.preferences.tag.processing.allow.translated.tags.to.be.in.a.different.order">

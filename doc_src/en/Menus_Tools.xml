@@ -97,6 +97,22 @@
 		<para>The data is also saved as a text file in <link
 		linkend="project.folder.omegat.folder"
 		endterm="project.folder.omegat.folder.title"/>.</para>
+		<note><para>Word count, segment total and other items can be influenced by the following factors:
+		<itemizedlist>
+		  <listitem>
+			<para>File filter settings: some filters allow for extra parts to be considered for translation. See <link linkend="filters.options" endterm="filters.options.title"/> for details.</para>
+		  </listitem>
+		  <listitem>
+			<para>Segmentation rules: different rules will generate a different number of segment. See <link linkend="app.segmentation" endterm="app.segmentation.title"/> for details.</para>
+		  </listitem>
+		  <listitem>
+			<para>Tags: OmegaT tags are never counted in the statistics but in some cases can split terms and create discrepencies in the way OmegaT counts them. See <link linkend="dialogs.project.properties.remove.tags" endterm="dialogs.project.properties.remove.tags.title"/> for details.</para>
+		  </listitem>
+		  <listitem>
+			<para>Custom tags and flagged text: as for OmegaT tags, they are not counted by default in the statistics, but you can have OmegaT count them as words. See <link linkend="dialogs.preferences.tag.processing.count.protected.text.and.custom.tags.in.statistics" endterm="dialogs.preferences.tag.processing.count.protected.text.and.custom.tags.in.statistics.title"/> for details.</para>
+		  </listitem>
+		</itemizedlist>
+		</para></note>
       </listitem>
     </varlistentry>
 

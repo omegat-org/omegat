@@ -114,7 +114,7 @@
     </varlistentry>
 
     <varlistentry id="menus.goto.forward.in.history">
-      <term id="menus.goto.forward.in.history.title">Forward in history...		  <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>N</keycap></keycombo>
+      <term id="menus.goto.forward.in.history.title">Forward in History		  <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>N</keycap></keycombo>
 </term>
       <listitem>
         <para>OmegaT remembers your segment navigation history.</para>
@@ -125,7 +125,7 @@
     </varlistentry>
 
     <varlistentry id="menus.goto.back.in.history">
-      <term id="menus.goto.back.in.history.title">Back in history...		  <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>P</keycap></keycombo>
+      <term id="menus.goto.back.in.history.title">Back in History		  <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>P</keycap></keycombo>
 </term>
       <listitem>
         <para>OmegaT remembers your segment navigation history.</para>

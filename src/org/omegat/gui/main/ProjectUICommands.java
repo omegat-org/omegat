@@ -728,6 +728,12 @@ public final class ProjectUICommands {
         }
     }
 
+
+    /**
+     * Project reload.
+     * <p>
+     *     When select Project>Reload jump to here.
+     */
     public static void projectReload() {
         UIThreadsUtil.mustBeSwingThread();
 
@@ -738,6 +744,44 @@ public final class ProjectUICommands {
         // commit the current entry first
         Core.getEditor().commitAndLeave();
 
+        if (Core.getProject().getProjectProperties().isTeamProject()) {
+            projectReloadRemote();
+        } else {
+            projectReloadLocal();
+        }
+    }
+
+    /**
+     * Reload project from remote repository.
+     * <p>
+     *     When the project is a team project,
+     *     it reloads `omegat.project` from remote project
+     *     and open the project from start.
+     *     When the project is local project, it acts as
+     *     same as just reload.
+     */
+    private static void projectReloadRemote() {
+        ProjectProperties props = Core.getProject().getProjectProperties();
+        final File projectDirectory = props.getProjectRootDir();
+        CoreEvents.registerProjectChangeListener(new IProjectEventListener() {
+            public void onProjectChanged(PROJECT_CHANGE_TYPE eventType) {
+                if (eventType == PROJECT_CHANGE_TYPE.CLOSE) {
+                    projectOpen(projectDirectory, false);
+                    CoreEvents.unregisterProjectChangeListener(this);
+                }
+            }
+        });
+        projectClose();
+    }
+
+    /**
+     * Reload local project files.
+     * <p>
+     *     This does not reload remote project when team mode.
+     *     It is useful when user added source files in local.
+     *
+     */
+    private static void projectReloadLocal() {
         final ProjectProperties props = Core.getProject().getProjectProperties();
 
         new SwingWorker<Void, Void>() {
@@ -774,6 +818,12 @@ public final class ProjectUICommands {
         }.execute();
     }
 
+    /**
+     * Save project.
+     * <p>
+     *     When the project is a team project, it also commit files and
+     *     push to remote.
+     */
     public static void projectSave() {
         UIThreadsUtil.mustBeSwingThread();
 
@@ -810,6 +860,11 @@ public final class ProjectUICommands {
         }.execute();
     }
 
+    /**
+     * Close project.
+     * <p>
+     *     When the project is a team project, it commits and push first.
+     */
     public static void projectClose() {
         UIThreadsUtil.mustBeSwingThread();
 

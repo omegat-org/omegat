@@ -27,8 +27,7 @@
         <itemizedlist>
           <listitem>
             <para><guilabel>Tag Issues</guilabel> (always selected): detects
-            missing or displaced tags, including custom tags and controlled
-            strings. See <link linkend="dialogs.preferences.tag.processing"
+            missing or displaced tags, including custom tags and flagged text. See <link linkend="dialogs.preferences.tag.processing"
             endterm="dialogs.preferences.tag.processing.title"/> for details.
             The option is always selected.</para>
           </listitem>

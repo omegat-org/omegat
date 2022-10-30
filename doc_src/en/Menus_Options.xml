@@ -15,7 +15,7 @@
     </varlistentry>
 
     <varlistentry id="menus.options.mt">
-      <term id="menus.options.mt.title">Machine Translate</term>
+      <term id="menus.options.mt.title">Machine Translation</term>
       <listitem>
         <para>Select <link linkend="dialogs.preferences.mt.automatically.fetch.translations"
         endterm="dialogs.preferences.mt.automatically.fetch.translations.title"/> to activate it.</para>

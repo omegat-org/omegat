@@ -12,10 +12,6 @@
     features beyond those of commercial offerings, even for beginning
     translators.</para>
 
-    <section id="introduction.omegat.principles.basics">
-      <title id="introduction.omegat.principles.basics.title">The
-			basics</title>
-
       <variablelist>
         <varlistentry>
           <term>Translation project</term>
@@ -83,42 +79,38 @@
             details.</para>
           </listitem>
         </varlistentry>
-      </variablelist>
-    </section>
-
-    <section id="introduction.omegat.principles.made.for.translators">
-      <title
-				id="introduction.omegat.principles.made.for.translators.title">
-				Made for translators</title>
-
-      <para>OmegaT is designed not only to facilitate the translation
-      process, but also to ensure the translator does not have to worry
-      about losing data.</para>
+		<varlistentry>
+		  <term>Made for translators</term>
+		  <listitem>
+			<para>OmegaT is designed not only to facilitate the translation
+			process, but also to ensure the translator does not have to worry
+			about losing data.</para>
       
-      <note>
-        <para>You have not used OmegaT yet, but you remember the times
-        you were translating in your word processor and a computer
-        glitch wiped out the book translation you had been working on
-        for the last six months, or the report that was due in one
-        hour.</para>
+			<note>
+			  <para>You have not used OmegaT yet, but you remember the times you
+			  were translating in your word processor and a computer glitch
+			  wiped out the book translation you had been working on for the
+			  last six months, or the report that was due in one hour.</para>
         
-        <para>You're considering OmegaT, but… </para>
-        <para>How can OmegaT help against such glitches?</para>
+			  <para>You're considering OmegaT, but… </para>
+			  <para>How can OmegaT help against such glitches?</para>
 
-        <para>Not to worry. The robust design of OmegaT makes it
-        <emphasis>extremely</emphasis> unlikely that you have lost
-        more than a few minutes of work.</para>
+			  <para>Not to worry. The robust design of OmegaT makes it
+			  <emphasis>extremely</emphasis> unlikely that you have lost more
+			  than a few minutes of work.</para>
         
-        <para>Even if things look very broken, do not panic. Just
-        follow the simple steps described in <link
-        linkend="how.to.restore.your.data"
-        endterm="how.to.restore.your.data.title"/>.</para>
-      </note>
+			  <para>Even if things look very broken, do not panic. Just follow
+			  the simple steps described in <link
+			  linkend="how.to.restore.your.data"
+			  endterm="how.to.restore.your.data.title"/>.</para>
+			</note>
 
-      <para>And before you ever need to follow those steps, OmegaT will
-      allow you to focus on actually translating, and hopefully help
-      you become a better translator.</para>
-    </section>
+			<para>And before you ever need to follow those steps, OmegaT will
+			allow you to focus on actually translating, and hopefully help you
+			become a better translator.</para>
+		  </listitem>
+		</varlistentry>
+	  </variablelist>
   </section>
   
   <section id="introduction.note.on.shortcuts">

@@ -1,51 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
-"../../../docbook-xml-4.5/docbookx.dtd">
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="menus.help">
-  <title>Help</title>
+  <title id="menus.help.title">Help</title>
 
   <variablelist>
-    <varlistentry>
-      <term>User's Manual...</term>
-
+    <varlistentry id="menus.help.user.manual">
+      <term id="menus.help.user.manual.title">User Guide...		  <keycombo><keycap>F1</keycap></keycombo>
+</term>
       <listitem>
-        <para>Opens this manual in the default browser.</para>
+        <para>Opens this guide in the default browser.</para>
+		<para>
+		</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>About...</term>
-
+    <varlistentry id="menus.help.about">
+      <term id="menus.help.about.title">About...</term>
       <listitem>
-        <para>Displays copyright, credits and license information.</para>
+        <para>Displays copyright, credits and license information.</para>      </listitem>
+    </varlistentry>
+
+    <varlistentry id="menus.help.last.changes">
+      <term id="menus.help.last.changes.title">Last Changes...</term>
+      <listitem>
+        <para>Displays the list of new functionality, enhancements and bug fixes for each new release.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Last Changes...</term>
-
+    <varlistentry id="menus.help.log">
+      <term id="menus.help.log.title">Log...</term>
       <listitem>
-        <para>Displays the list of new functionalities, enhancements and bug
-        fixes for each new release.</para>
+        <para>Displays the current log file. The title of the dialog reflects the file currently in use (which depends on the number of concurrently running OmegaT instances).</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Log...</term>
-
+    <varlistentry id="menus.help.check.for.updates">
+      <term id="menus.help.check.for.updates.title">Check for Updates...</term>
       <listitem>
-        <para>Displays the current log file. The title of the dialog reflects
-        the file actually used (which depends on how many instances of OmegaT
-        are running concurrently).</para>
-      </listitem>
-    </varlistentry>
-
-    <varlistentry>
-      <term>Check for Updates...</term>
-
-      <listitem>
-        <para>Checks to see whether a more recent version of OmegaT has been released.</para>
-      </listitem>
+        <para>Checks to see if a newer version of OmegaT is available.</para>      </listitem>
     </varlistentry>
   </variablelist>
 </section>

@@ -1,0 +1,1419 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+"../../../docbook-xml-4.5/docbookx.dtd"
+[<!ENTITY % manualvariables SYSTEM "manualvariables.mod"> %manualvariables;]>
+
+<section id="app.regex">
+  <title id="app.regex.title">Regular expressions</title>
+
+  <para>This appendix is intended for users interested in exploring a powerful
+  way to boost their productivity. Although seen as daunting and complex, even
+  the simplest regular expressions (often abbreviated <emphasis>regex</emphasis>
+  or <emphasis>regexp</emphasis>) are extremely useful, not only in OmegaT, but
+  in many other applications you might use on a
+  day-to-day basis, with some variations.</para>
+
+  <para>Only the fundamentals most useful to translators are covered. The
+  <link linkend="app.regex.tools" endterm="app.regex.tools.title"/>
+  section at the end of this appendix provides a few starting points to
+  explore advanced or complex uses beyond the scope of this guide. If you need help for a specific case, you can also ask questions in the various support channels.</para>
+  
+  <para>Regular expressions use a combination of letters,
+  digits, and symbols (collectively known as <emphasis>characters</emphasis>)
+  to define an <emphasis>expression</emphasis> that represents a specific text
+  pattern.</para>
+
+  <para>Here are a few examples.
+  <variablelist>
+    <varlistentry>
+      <term>[0-9]</term>
+      <listitem><para>Any single digit from 0 to 9.</para>
+      </listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>\w+</term>
+      <listitem><para>Represents one or more “word characters”, namely
+      the letters of the alphabet, digits, and
+      underscore symbols.</para>
+      </listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>\h?</term>
+      <listitem><para>Represents zero or one horizontal whitespace
+      character (this includes regular and non-breaking spaces as well as
+      tabs, but not line break characters, which belong to the “vertical
+      whitespace” category: \v.)</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>    
+  </para>
+  
+  <para>Many OmegaT functions rely on regular expressions or make them
+  available as an option:
+
+  <variablelist>
+    <varlistentry>
+      <term>Searches</term>
+      <listitem>
+        <para>OmegaT searches include a <link
+        linkend="windows.text.search.methods.regex"
+        endterm="windows.text.search.methods.regex.title"/> option that
+        allows you to make extremely powerful searches across your
+        files.</para>
+        <para>The same option in the <link linkend="windows.text.replace"
+        endterm="windows.text.replace.title"/> dialog allows you to apply
+        regular expressions to both the search and replaced text.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Custom tags</term>
+      <listitem>
+        <para>Custom tags are tags defined with regular expressions that 
+        are handled exactly like native OmegaT tags. See <link
+        linkend="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags"
+        endterm="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags.title"/> 
+        for details.</para>
+        <para>Use the <code>|</code> (OR) character to separate individual
+        tag definitions.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Flagged fragments</term>
+      <listitem>
+        <para><link
+        linkend="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation"
+        endterm="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation.title"/>
+        allow you to define strings that OmegaT will mark in red by
+        default, and treat as extraneous tags for validation
+        purposes.</para>
+        <para>Use the <code>|</code> (OR) character to separate individual
+        fragment definitions.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Segmentation</term>
+      <listitem>
+        <para>Segmentation rules and language patterns are defined with
+        regular expressions. You can modify them freely to improve the
+        segmentation of a document or add additional general rules. See
+        <link linkend="app.segmentation"
+			  endterm="app.segmentation.title"/> for
+        details.</para>
+        <para>Segmentation or exception rules define the position in a
+        segment where a split will, or will not, be made. Two regular
+        expressions are required to define that position: a “before”
+        expression to define the text pattern ahead of where the rule
+        should apply, and an “after” expression to define the text 
+        pattern following that position.</para>
+        <para>A language pattern that matches the source language of the project will apply to that project.</para></listitem>
+    </varlistentry>
+  </variablelist>
+  </para>
+
+  <section id="app.regex.four.rules">
+    <title id="app.regex.four.rules.title">The 4 rules</title>
+
+    <para>Regular expressions are used to find text (including
+    characters that are not visible on the screen or when printed out, such as
+    spaces, tabs, or line breaks. Any given expression either
+    <emphasis>matches</emphasis>, or <emphasis>does
+    <emphasis role="bold">not</emphasis> match</emphasis> a word,
+    phrase, or other sequence of text.</para>
+    
+    <para>Each and every character in the expression is relevant when
+    determining a match.</para>
+    <para>A number of characters or combinations of characters have a
+    special meaning in a regular expression.</para>
+    
+    <warning>
+      <para>Regular expressions only match text. They cannot match decorations
+      such as <emphasis>bold</emphasis>, <emphasis>italics</emphasis>, or other
+      <emphasis>stylistic effects</emphasis>.</para>
+    </warning>
+
+    <para>There are four rules to keep in mind.</para>
+
+    <variablelist>
+      <varlistentry>
+        <term>Most characters simply match themselves</term>
+        <listitem>
+          <para>The majority of characters in a regular expression simply
+          <emphasis>look for themselves</emphasis> in the text
+          sequence.</para>
+          <para>For example, the seven letters spelling out the word
+          “<emphasis>example</emphasis>” simply tell the search function
+          to match exactly those letters, in that order. Simply put, the
+          search just looks for the word
+          “<emphasis>example</emphasis>”.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Letters of the alphabet preceded by a backslash
+        (<literal>\</literal>) take on a special meaning</term>
+        <listitem>
+          <para>Unlike a letter on its own, which simply represents itself
+          as noted above, a letter preceded by a <literal>\</literal> has a
+          special function in a regular expression.</para>
+          <para>For example, <emphasis>r</emphasis> is just a normal
+          character but preceding it with <literal>\</literal> to make it
+          <literal>\r</literal> turns it into a special combination that
+          matches a <emphasis>carriage return character</emphasis>.
+          Similarly, <literal>\R</literal> matches <emphasis>any line
+          break character</emphasis>).</para>
+          <note>
+            <para>Only the letters <emphasis>i j l m o</emphasis>, and
+            <emphasis>y</emphasis>, in both lower- and uppercase, have no
+            special meaning when preceded by a backslash. This guide
+            only describes a small subset of letters that take on a special
+            meaning.</para>
+            <para>Consult the sites in the <link
+            linkend="app.regex.tools" endterm="app.regex.tools.title"/>
+            section below for information on combinations not covered
+            here.</para>
+          </note>
+        </listitem>
+      </varlistentry>
+        
+      <varlistentry>
+      <term>Twelve characters have a special meaning by default</term>
+        <listitem>
+          <para>That special meaning has to be cancelled by another
+          character to match the character itself.</para>
+          <para>The full list characters is presented <link
+          linkend="app.regex.twelve.characters">below</link>. One
+          example is <literal>.</literal>: on its own, it has the
+          special meaning of matching <emphasis>any single
+          character</emphasis>.</para>
+          <para>To find a normal period, that meaning has to be cancelled
+          using the <literal>\</literal>, to make the expression
+          <literal>\.</literal>, which just matches a period.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>The <literal>\</literal> character is a very special
+        character</term>
+        <listitem>
+          <para>As stated above, the <literal>\</literal> character has
+          the default special meaning of either cancelling or activating
+          the special meaning of other characters. It has no effect if
+          placed before a character with no special meaning (either by
+          default or by addition).</para>
+          <para>The <literal>\</literal> can cancel its own special
+          meaning by doubling up to form <literal>\\</literal>, which
+          simply matches the <emphasis>backslash</emphasis> character
+          itself.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </section>
+
+  <section id="app.regex.twelve.characters">
+    <title id="app.regex.twelve.characters.title">The 12 characters</title>
+  
+    <para>The twelve special characters are the
+    <emphasis>backslash</emphasis> <literal>\</literal>, the
+    <emphasis>caret</emphasis> <literal>^</literal>, the
+    <emphasis>dollar sign</emphasis> <literal>$</literal>, the
+    <emphasis>period</emphasis> (or <emphasis>dot</emphasis>)
+    <literal>.</literal>, the
+    <emphasis>vertical bar</emphasis> (or
+    <emphasis>pipe symbol</emphasis>) <literal>|</literal>, the
+    <emphasis>question mark</emphasis> <literal>?</literal>, the
+    <emphasis>asterisk</emphasis> (or <emphasis>star</emphasis>)
+    <literal>*</literal>, the <emphasis>plus sign</emphasis>
+    <literal>+</literal>, the opening <emphasis>parenthesis</emphasis>
+    <literal>(</literal>, the closing <emphasis>parenthesis</emphasis>,
+    <literal>)</literal>, the opening square bracket
+    <literal>[</literal>, and the opening
+    <emphasis>curly brace</emphasis> <literal>{</literal>.</para>
+
+    <para>Each character is briefly described below with examples
+    of regular expressions that rely on the character as well as
+    of text that they do,d or do not, match.
+    
+      <variablelist>
+        <varlistentry>
+          <term>The BACKSLASH: <literal>\</literal></term>
+          <listitem>
+            <para>This character either cancels or activates the special meaning of the following character.</para>
+            
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry></entry>
+                    <entry><literal>0\.[0-9]</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>Matches</entry>
+                    <entry>
+                      <para>A number between <emphasis>0.0</emphasis> and
+                      <emphasis/>0.9, or just the final
+                      <emphasis>0.5</emphasis> in numbers such as 10.5 or
+                      560.5.</para>
+                      <para>The <literal>\.</literal> cancels the “any
+                      character” meaning of the period to match the decimal
+                      point, while the <literal>\d</literal> turns the
+                      ordinarily lowercase “d” letter into an expression
+                      that matches any digit between 0 and 9.</para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>Does not match</entry>
+                    <entry>
+                      <para>Sequences such as 0,1, 0-3, or the first three
+                      characters of 0x002E, which would be matched if the expression was just <literal>0.[0-9]</literal>, with no
+                      backslash before the period</para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>The CARET: <literal>^</literal></term>
+          <listitem>
+            <para>When it is the first character in the expression, the 
+            <emphasis>caret</emphasis> character matches the beginning of a
+            line.</para>
+            <para>When it is the first character in <link
+            linkend="app.regex.types.of.expressions.classes">a character class
+            enclosed in brackets</link>, it excludes the characters in that
+            class from the match.</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry></entry>
+                    <entry>
+                      <orderedlist>
+                        <listitem>
+                          <para><literal>^A</literal></para>
+                        </listitem>
+        
+                        <listitem>
+                          <para>[^abc]</para>
+                        </listitem>
+                      </orderedlist>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>Matches</entry>
+                    <entry>
+                      <orderedlist>
+                        <listitem>
+                          <para>The uppercase “A” in the following sentence:
+                          “A long, but exciting journey was about to
+                          begin”.</para>
+                        </listitem>
+
+                        <listitem>
+                          <para>Any character that is <emphasis>not</emphasis>
+                          “a”, “b”, or “c”. In the word “back”, for instance,
+                          only the “k” is matched.</para>
+                        </listitem>
+                      </orderedlist>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>Does not match</entry>
+                    <entry>
+                      <orderedlist>
+                        <listitem>
+                          <para>The uppercase “A” in the following sentence:
+                          “My friend is writing a book called <emphasis>A Long
+                            Journey</emphasis>”.</para>
+                        </listitem>
+                      
+                        <listitem>
+                          <para>The lowercase “a”, “b”, or “c” in the word
+                          “back”.</para>
+                        </listitem>
+                      </orderedlist>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>The DOLLAR sign: <literal>$</literal></term>
+          <listitem>
+            <para>When it is the last character in an expression, the
+            <emphasis>dollar</emphasis> sign matches the end of a line.</para>
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry></entry>
+                    <entry><literal>^\w+:$</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>Matches</entry>
+                    <entry>
+                      <para>A line that consists of a single word and ends with
+                      a colon:</para>
+                      <para><emphasis>Questions:</emphasis></para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>Does not match</entry>
+                    <entry>
+                      <para>A line that consists of a single word, but does not
+                      end in a colon:</para>
+                      <para><emphasis>Questions?</emphasis></para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>The PERIOD: <literal>.</literal></term>
+          <listitem>
+            <para>Matches any single character.</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry></entry>
+                    <entry><literal>c.t</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>Matches</entry>
+                    <entry>
+                      <para>Any combinations of three letters
+                        starting with “c” and ending with “t”:
+                        “<emphasis>cat</emphasis>”,
+                        “<emphasis>cut</emphasis>”,
+                        “<emphasis>cot</emphasis>”, or even nonsensical
+                        combinations such as “<emphasis>czt</emphasis>”
+                        or “<emphasis>cqt</emphasis>”.
+                      </para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>Does not match</entry>
+                    <entry>
+                      <para>Combinations containing three letters that
+                      start with “c” and ending with “t” split, but are
+                      split across more than one line.</para>
+                      <para>What is the missing letter?</para>
+                        <simplelist>
+                          <member><literal>c</literal></member>
+                          <member><literal></literal></member>
+                          <member><literal>t</literal></member>
+                        </simplelist>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>The VERTICAL BAR: <literal>|</literal></term>
+          <listitem>
+            <para>This character functions as an “OR” and matches either
+            of the expressions that precede or follow it.</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry></entry>
+                    <entry><literal>^An|^The</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>Matches</entry>
+                    <entry>
+                      <para>The initial “An” or “The” in phrases such as:
+                        <simplelist>
+                          <member>“An apple a day…”</member>
+                          <member>“The apple of my eye…”</member>
+                        </simplelist>
+                      </para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>Does not match</entry>
+                    <entry>
+                      <para>The initial “An” or “The” in phrases such as:
+                        <simplelist>
+                          <member>“A story called <emphasis>An Unsung
+                          Hero</emphasis>.”</member>
+                          <member>“They work for <emphasis>The Daily
+                            Post</emphasis>.”</member>
+                        </simplelist>
+                      </para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>The QUESTION MARK: <literal>?</literal></term>
+          <listitem>
+            <para>This character specifies that either zero or one
+            instance of the preceding character or expression should be
+            matched.</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry></entry>
+                    <entry>
+                      <literal>an?␣</literal> (where “␣” represents a
+                      single space).
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>Matches</entry>
+                    <entry>
+                      <para>Either the “a ” or the “an ” in:
+                        <simplelist>
+                          <member>“I have a question.”</member>
+                          <member>“I know an excellent doctor.”</member>
+                        </simplelist>
+                      </para>
+                      
+                      <para>It will also find the final “an ” of “Can ” in a
+                      sentence such as “Can I help you?”, or the final “a ” of
+                      “pasta” in “We had pasta for lunch.”</para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>Does not match</entry>
+                    <entry>
+                      <para>Neither the “a” nor the “an” in:
+                        <simplelist>
+                          <member>The indefinite article: “a” (or
+                          “an”).</member>
+                        </simplelist>
+                      </para>
+                      <para>They are not followed by a space.</para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>The ASTERISK: <literal>*</literal></term>
+          <listitem>
+            <para>This character specifies that zero or more instances of
+            the preceding character or expression should be matched.</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry></entry>
+                    <entry><literal>run\w*</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>Matches</entry>
+                    <entry>
+                      <para>The word “run”, as well as “runs”, “runner”,
+                      “runway”, “runt” in “grunt” or “brunt”, and any other
+                      word or sequence of characters containing “run” followed
+                      by zero or more “<emphasis>word characters</emphasis>”
+                      (which include digits and the underscore, so the part
+                      before the “@” in an email address such as
+                      run_123@example.email.org is also a match).</para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>Does not match</entry>
+                    <entry>
+                      <para>The complete phrase in “run-on” or
+                      “run'n'gun”, because the hyphen and apostrophe are not
+                      included in <literal>\w</literal>. Only the initial “run”
+                      in those phrases is matched.</para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>The PLUS sign: <literal>+</literal></term>
+          <listitem>
+            <para>This character specifies that one or more instances of
+            the preceding character or expression should be matched.</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry></entry>
+                    <entry><literal>\d+.d</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>Matches</entry>
+                    <entry>
+                      <para>Numbers such as “1.5”, “23.2” or “5235.8” with a
+                      single decimal place and any number of digits before the
+                      decimal point.</para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>Does not match</entry>
+                    <entry>
+                      <para>The entire value of numbers such as “5,235.8” or
+                      “21,571.9”. Only the portion of the after the thousands
+                      separator will be matched.</para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>The OPENING PARENTHESIS: <literal>(</literal></term>
+
+          <listitem>
+            <para>This character starts a <emphasis>group</emphasis>, which is a
+            set of characters treated as a single unit. Groups are numbered,
+            and their contents group are stored in memory. They can be reused
+            later in the search expression using
+            <literal>\<option>n</option></literal>, where
+            <option>n</option> is the number of the group.</para>
+            <note>
+              <para>The content of the group can also be used in the <link
+              linkend="windows.text.replace">replacement text</link>. In Java,
+              the syntax for doing so is
+              <literal>$<option>n</option></literal> instead of
+              <literal>\<option>n</option></literal>.</para>
+            </note>
+            <para>Parentheses are always used in opening and closing pairs.
+            Trying to use only the opening or closing parenthesis on its own
+            will cause an error.</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry></entry>
+                    <entry><literal>(\b\w+\b)\h\1\b</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>Matches</entry>
+                    <entry>
+                      <para>Doubled up words separated by a space, such as the
+                      consecutive “an” in the following sentence:</para>
+                      <para>“I bought an an apple.”</para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>Does not match</entry>
+                    <entry>
+                      <para>The “that, that” in the following sentence:</para>
+                      <para>“But that, that is just unbelievable”, because the
+                      first “that” is followed by both a comma and a space
+                      rather than only a space.</para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>The CLOSING PARENTHESIS: <literal>)</literal></term>
+
+          <listitem>
+            <para>This character closes a group. It is special because it can
+            never be used on its own. It must be preceded by the
+            <literal>\</literal> if you need to match the closing parenthesis
+            character itself.</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry></entry>
+                    <entry><literal>^\d+\)</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>Matches</entry>
+                    <entry>
+                      <para>The sequence number (including the parenthesis) at
+                      the beginning of each line in a list such as:
+                        <simplelist>
+                          <member>1) Apples</member>
+                          <member>2) Oranges</member>
+                          <member>3) Pears</member>
+                        </simplelist>
+                      </para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>Does not match</entry>
+                    <entry>
+                      <para>Sequence numbers that are not at the beginning of a
+                      line.</para>
+                      <para>Follow these steps:
+                        <simplelist>
+                          <member>Step 1) Preparation</member>
+                          <member>Step 2) …</member>
+                        </simplelist>
+                      </para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>The OPENING SQUARE BRACKET: <literal>[</literal></term>
+
+          <listitem>
+            <para>This character must be paired with the closing square bracket
+            to enclose a set of individual characters that each represent a
+            valid potential match.</para>
+
+            <para>Only the opening bracket is special and needs to be preceded
+            by a backslash to search for the bracket character itself. If you
+            only want to match the closing bracket as itself, you do not need
+            to precede it with a backslash. (You can still add it, but it will
+            have no effect on the expression or the result.)</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry></entry>
+                    <entry><literal>li[cs]en[cs]e</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>Matches</entry>
+                    <entry>
+                      <para>The correct “licence” and “license” spellings, as
+                      well as the potential “lisence” and “lisense”
+                      mispellings</para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>Does not match</entry>
+                    <entry>
+                      <para>More egregious mispellings such as “licensse” or
+                      “lissense”.</para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>The OPENING CURLY BRACE: <literal>{</literal></term>
+
+          <listitem>
+            <para>This character must be paired with the closing curly
+            brace to encloses an <emphasis>exact number</emphasis>,
+            <emphasis>minimum</emphasis>, <emphasis>maximum</emphasis>,
+            or <emphasis>range</emphasis> specifying how many instances of
+            the preceding character or group should be matched.</para>
+
+            <para>Only the opening brace is special and needs to be
+            preceded by a backslash to search for the brace character
+            itself. If you only want to match the closing brace as
+            itself, you do not need to precede it with a backslash. (You
+            can still add it, but it will have no effect on the
+            expression or the result.)</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry></entry>
+                    <entry><literal>\d{4}/\d{1,3}</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>Matches</entry>
+                    <entry>
+                      <para>Codes such as “1234/5”, “1472/69”, or “9513/842”
+                      consisting of four digits, a forward slash, and one to
+                      three more digits.</para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>Does not match</entry>
+                    <entry>
+                      <para>Codes such as “123/45”, “1472/6985”, or
+                      “95133/15746”.</para>
+                      <para><emphasis role="bold">Caution:</emphasis>
+                      Although the last two codes above are not matched
+                      completely, the expression will return the
+                      “<emphasis>1472/698</emphasis>” portion of “1472/6985”,
+                      as well as the “<emphasis>5133/157</emphasis>” of
+                      “95133/15746”.</para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+    </para>
+  </section>
+
+  <section id="app.regex.types.of.expressions">
+    <title id="app.regex.types.of.expressions.title">Lots of
+    expressions</title>
+
+    <para>This section presents various types of regular expression, ranging
+    from the simple to the complex.</para>
+      
+    <note>
+      <para>Remember that most <emphasis>alphabetic</emphasis> characters
+      preceded by a <literal>\</literal> turn into an expression that represents
+      <emphasis>not the character itself, but its associated special
+      meaning</emphasis>.</para>
+    </note>
+
+    <section id="app.regex.types.of.expressions.simple.expressions">
+      <title id="app.regex.types.of.expressions.simple.expressions.title">
+        Simple expressions
+      </title>
+      <para>The simplest regular expression simply consist of a single character,
+      or combination of a <literal>\</literal> and a character constituting a
+      unit with a single meaning.</para>
+      
+      <table id="app.regex.characters">
+        <title id="app.regex.characters.title">Characters</title>
+
+        <tgroup align="left" cols="2" rowsep="1">
+          <colspec align="left" colnum="1"/>
+
+          <thead>
+            <row>
+              <entry align="left">Expression</entry>
+              <entry align="left">Match</entry>
+            </row>
+          </thead>
+
+          <tbody>
+            <row>
+              <entry><literal>x</literal></entry>
+              <entry>
+                <para>The character “x” itself</para>
+                <para>Most characters match themselves.</para>
+              </entry>
+            </row>
+
+            <row>
+              <entry><literal>\t</literal></entry>
+              <entry>
+                <para>The tab character, not the letter “t”.</para></entry>
+            </row>
+
+            <row>
+              <entry><literal>\n</literal></entry>
+              <entry>The newline (line feed) character, not the letter “n”.</entry>
+            </row>
+
+            <row>
+              <entry><literal>\r</literal></entry>
+              <entry>
+                <para>The carriage-return character, not the letter “r”.</para>
+                <para>similarly, <literal>\R</literal> is any line break character.</para></entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+
+    <section id="app.regex.types.of.expressions.case">
+      <title id="app.regex.types.of.expressions.case.title">Case</title>
+
+      
+      <para>Ordinary OmegaT searches are case insensitive by default: they match
+      both uppercase and lowercase characters, unless you choose to enable the
+      <link linkend="windows.text.search.options">case sensitive option</link>.
+      Doing so makes the entire search expression case sensitive.</para>
+      <para>In contrast, Regular expressions are case sensitive by default. This
+      means that a regular expression search for “OmegaT”, for example, will not
+      match “omegat”. However, regular expressions also provide special modifiers
+      to specify case sensitivity within the expression:
+
+      <variablelist>
+        <varlistentry>
+          <term><literal>(?i)</literal></term>
+          <listitem>
+            <para>Makes the part of the expression to the right of the modifier case insensitive.</para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term><literal>(?-i)</literal></term>
+          <listitem>
+            <para>Makes the part of the expression to the right of the modifier
+            case sensitive.</para>
+          </listitem>
+        </varlistentry>
+      </variablelist> </para>
+
+      <para>You can take advantage of this to apply a fine degree of control to
+      case sensitivity in searches. Suppose, for example, that you want to find
+      instances of “OmegaT” and “omegat”, but not “OMEGAT”. You can do so with the
+      following expression:
+      <literal>(?i)o</literal><literal>(?-i)mega</literal>
+      <literal>(?i)t</literal>, which represents a case insensitive “o” followed
+      by a case sensitive “mega”, followed by a case insensitive “t”.</para>
+    </section>
+
+    <section id="app.regex.types.of.expressions.classes">
+      <title id="app.regex.types.of.expressions.classes.title">Classes</title>
+
+      <para>Regular expressions allow you to create sets of characters—known as
+      <emphasis>classes</emphasis>. Searches will match any of the characters in
+      the set.</para>
+      <para>Classes are defined by enclosing the desired characters in square
+      brackets, and can be specified either by listing each individual character
+      to include, or by specifying a range of characters. For example, you could
+      create the <literal>[£€$]</literal> class to find any of those three
+      currency symbols in the text, or [1-3] to find the number 1, 2 or 3.
+        <note>
+          <para>Inside a class, only the backslash (<literal>\</literal>), 
+          caret (<literal>^</literal>), closing bracket (<literal>]</literal>)
+          and hyphen (<literal>-</literal>) are special. The rest of the twelve
+          characters are normal, and do not have to be preceded by a backslash if
+          you want to search for those characters themselves.</para>
+          <para>You can search for any of the four class special characters as
+          normal characters by preceding them with a backslash. You can also
+          search for the caret, closing bracket, and hyphen as themselves by
+          placing them at a position that does not trigger their special meaning:
+          anywhere except right after the opening bracket for the caret,
+          immediately after either opening bracket or the caret following it for
+          the closing bracket, and either just after the opening bracket or just
+          before the closing bracket for the hyphen.</para>
+        </note>
+      </para>
+      <para>Many frequently used sets have a shorthand form consisting of a
+      backslash followed by a letter of the alphabet. For example,
+      <literal>\d</literal> is a shorthand for <literal>[0-9]</literal>, which
+      matches any digit between 0 and 9. In many cases, the corresponding
+      uppercase later is used to negate the class: <literal>\D</literal> matches
+      any character that is <emphasis role="bold">not</emphasis> a digit.</para>
+      <para>The table below provides various additional examples. These
+      classes never represent only the actual letter used to form the
+      shorthand.</para>
+      
+      <table id="app.regex.classes">
+        <title id="app.regex.classes.title">Examples of classes</title>
+
+        <tgroup align="left" cols="2" rowsep="1">
+          <colspec align="left" colnum="1"/>
+
+          <thead>
+            <row>
+              <entry align="left">Expression</entry>
+              <entry align="left">Match</entry>
+            </row>
+          </thead>
+
+          <tbody>
+            
+            <row>
+              <entry><literal>[abc]</literal></entry>
+              <entry>
+                <para>The letter “a”, “b”, or “c”.</para>
+                <para>A simple class consists of any number of characters
+                enclosed by <literal>[</literal> and <literal>]</literal>.</para>
+              </entry>
+            </row>
+            
+            <row>
+              <entry><literal>[C-X]</literal></entry>
+              <entry>
+                <para>A character in the range of letters from “C” through
+                “X”.</para>
+                <para>A range is defined by the first character in a series,
+                followed by a hyphen, followed by last character in the
+                series. Any number of ranges can be defined:
+                <literal>[a-zA-Z0-9]</literal> means any lowercase character from
+                “a” to “z”, or any uppercase character from “A” to “Z”, or any
+                digit from “0” to “9”.
+                A hyphen placed outside the series is just a hyphen:
+                <literal>[a-z-]</literal> means any lowercase character from
+                “a” to “z”, or the hyphen character itself.</para>
+              </entry>
+            </row>
+            
+            <row>
+              <entry><literal>[^\n\r\t]</literal></entry>
+              <entry>
+                <para>Any character <emphasis>except</emphasis> a newline, a carriage return, or tab.</para>
+                <para>The caret placed immediately after the opening square
+                bracket excludes the rest of the characters in the class.</para>
+              </entry>
+            </row>
+
+            <row>
+              <entry><literal>\w</literal></entry>
+              <entry>
+                <para>A word character, generally defined as
+                <literal>[A-Za-z0-9_]</literal>.</para>
+                <para><literal>\W</literal> is any character that is
+                <emphasis role="bold">not</emphasis> a word character
+                (<literal>[^\w]</literal>).</para>
+              </entry>
+            </row>
+
+            <row>
+              <entry><literal>\s</literal></entry>
+              <entry>
+                <para>A whitespace character, including the space and tab
+                characters, as well as line breaks.</para>
+                <para><literal>\S</literal> is any character that is
+                <emphasis role="bold">not</emphasis> a whitespace character
+                (<literal>[^\s]</literal>).</para>
+              </entry>
+            </row>
+
+            <row>
+              <entry><literal>\h</literal> and <literal>\v</literal></entry>
+              <entry>Horizontal and vertical whitespace (generally preferred to
+              <literal>\s</literal>).
+              <para><literal>\H </literal>is any character that is
+              <emphasis role="bold">not</emphasis> a horizontal white space, and
+              <literal>\V</literal> any character that is
+              <emphasis role="bold">not</emphasis> a vertical white space
+              (<literal>[^\h]</literal> and <literal>[^\v]</literal>,
+              respectively).</para></entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+      
+      <para>Regular expressions are not limited to alphanumeric characters. They
+      cover the entire Unicode character set. Use Unicode blocks, scripts and
+      categories to specify character classes outside the alphanumeric character
+      range. A few examples are presented in the table below.</para>
+
+      <para>See also <ulink
+      url="https://www.regular-expressions.info/unicode.html">Unicode Regular
+      Expressions</ulink> for a thorough review of Unicode regular
+      expressions.</para>
+
+      <table id="app.regex.unicode.blocks">
+        <title id="app.regex.unicode.blocks.title">Unicode blocks, scripts and
+        categories</title>
+        
+        <tgroup align="left" cols="2" rowsep="1">
+          <colspec align="left" colnum="1"/>
+          <thead>
+            <row>
+              <entry align="left">Expression</entry>
+              <entry align="left">Match</entry>
+            </row>
+          </thead>
+          
+          <tbody>
+            <row>
+              <entry><literal>\p{InGreek}</literal></entry>
+              <entry>
+                <para>A character in the Greek block
+                (<ulink url="https://unicode.org/reports/tr18/#Blocks">Unicode
+                block</ulink>)</para>
+                <para><literal>\P{InGreek}</literal> is any character that is
+                <emphasis role="bold">not</emphasis> in the Greek block.</para>
+              </entry>
+            </row>
+          
+            <row>
+              <entry><literal>\p{IsHan}</literal></entry>
+              <entry>
+                <para>A logogram (<emphasis>Han</emphasis>/<emphasis>kanji
+                </emphasis>/<emphasis>hanja</emphasis> character) found in CJK
+                languages (<ulink
+                url="https://unicode.org/reports/tr18/#Script_Property">Unicode
+                script</ulink>)</para>
+              </entry>
+            </row>
+          
+            <row>
+              <entry><literal>\p{Lu}</literal></entry>
+              <entry>
+                <para>An uppercase letter (<ulink
+                url="https://unicode.org/reports/tr18/#General_Category_Property">Unicode
+                category.</ulink>)</para>
+              </entry>
+            </row>
+          
+            <row>
+              <entry><literal>\p{Sc}</literal></entry>
+              <entry>
+                <para>A currency symbol, which is also a <ulink
+                url="https://unicode.org/reports/tr18/#General_Category_Property">Unicode
+                category.</ulink>.</para>
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+
+    <section id="app.regex.more.advanced.expressions">
+      <title id="app.regex.more.advanced.expressions.title">More advanced
+      expressions</title>
+      
+      <para>Some expressions specify a position rather than a character. They
+      indicate where in the text to look for the match, but do not include any
+      characters in that match. The table below list a few of the more common
+      examples. Consult the sites in the <link linkend="app.regex.tools"
+      endterm="app.regex.tools.title" /> section for more information.</para>
+
+      <table id="app.regex.boundary.matchers">
+        <title id="app.regex.boundary.matchers.title">Expressions that mark a position</title>
+      
+        <tgroup align="left" cols="2" rowsep="1">
+          <colspec align="left" colnum="1"/>
+
+          <thead>
+            <row>
+              <entry align="left">Expression</entry>
+              <entry align="left">Match</entry>
+            </row>
+          </thead>
+          
+          <tbody>
+            <row>
+              <entry><literal>^</literal></entry>
+              <entry>
+                <para>The beginning of a line</para>
+              </entry>
+            </row>
+        
+            <row>
+              <entry><literal>$</literal></entry>
+              <entry>
+                <para>The end of a line</para>
+              </entry>
+            </row>
+        
+            <row>
+              <entry><literal>\b</literal></entry>
+              <entry>
+                <para>A word boundary</para>
+              </entry>
+            </row>
+        
+            <row>
+              <entry><literal>\B</literal></entry>
+              <entry>
+                <para><emphasis>Not</emphasis> a word boundary</para>
+              </entry>
+            </row>
+        
+            <row>
+              <entry><literal>(?=u)</literal></entry>
+              <entry>
+                <para>A character followed by a “u”.</para>
+                <para>For example, <literal>q(?=u)</literal> matches the letter
+                “q” when it is followed by a “u”. It therefore matches the
+                “q”in “equal” or “question”, but <emphasis>not</emphasis> the one
+                in “qigong” or “Iraq”.</para>
+              </entry>
+            </row>
+        
+            <row>
+              <entry><literal>(?!u)</literal></entry>
+              <entry>
+                <para>A character that is <emphasis>Not</emphasis> followed by the
+                letter “u”.</para>
+                <para>For example, <literal>q(?!u)</literal> matches the letter
+                “q” when it is <emphasis>not</emphasis> followed by a “u”. It
+                therefore matches the “q” in “qigong” or “Iraq”, but
+                <emphasis>not</emphasis> the one in “equal” or “question”.</para>
+              </entry>
+            </row>
+            
+            <row>
+              <entry><literal>(?&lt;=q)</literal></entry>
+              <entry>
+                <para>A character preceded by the letter “q”.</para>
+                <para>For example, <literal>(?&lt;=q)u</literal> matches the
+                letter “u” if it comes after “q”. It therefore matches the “u”
+                in “quick”, but not the one in “run”.</para>
+              </entry>
+            </row>
+        
+            <row>
+              <entry><literal>(?&lt;!q)</literal></entry>
+              <entry>
+                <para>A character that is <emphasis>not</emphasis> preceded
+                by the letter “q”.</para>
+                <para>For example, <literal>(?&lt;!q)u</literal> matches the
+                letter “u” if it does <emphasis>not</emphasis> come after “q”.
+                It therefore matches the “u” in “run”, but
+                <emphasis>not</emphasis> the one in “quick”.</para>
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>  
+  </section>
+
+  <section id="app.regex.more.examples">
+    <title id="app.regex.more.examples.title">More examples</title>
+
+    <para>This section presents a few examples demonstrating how the various
+    expressions described above can be combined to perform powerful searches in OmegaT.</para>
+    
+    <table id="regex.examples">
+      <title id="regex.examples.title">Examples of regular expressions
+    that use the above expressions</title>
+
+      <tgroup align="left" cols="2" rowsep="1">
+        <colspec align="left" colnum="1"/>
+
+        <thead>
+          <row>
+            <entry>Expression</entry>
+            <entry>Purpose</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry><literal>(\b\w+\b)\h\1\b</literal></entry>
+            <entry>
+              <para>Find double words.</para>
+            </entry>
+          </row>
+
+          <row>
+            <entry><literal>,\h[\h(\w+\.\w+)\w,'ʼ"“”-]+[\.,]</literal></entry>
+            <entry>
+              <para>Find clauses that start with a comma followed by a
+              whitespace character, contain one or more words (including words
+              in quotation marks, contractions, and filenames with a file
+              extension), and end either with a comma or period.</para>
+            </entry>
+          </row>
+
+          <row>
+            <entry><literal>\. \h+$</literal></entry>
+            <entry>
+              <para>Find extra whitespace after the period at the end of a
+              line.</para>
+            </entry>
+          </row>
+
+          <row>
+            <entry><literal>\h+a\h+[aeiou]</literal></entry>
+            <entry>
+              <para>Find words starting with a vowel that come after the
+              article “a” rather than “an”.</para>
+            </entry>
+          </row>
+
+          <row>
+            <entry><literal>\h+an\h+[^aeiou]</literal></entry>
+            <entry>
+              <para>The flip side of the preceding example. Find words
+              starting with consonant that come after “an” rather than “a”.</para>
+            </entry>
+          </row>
+
+          <row>
+            <entry><literal>\d{4}([/\.-]\d{1,2}){2}</literal></entry>
+            <entry>
+              <para>Find numerical dates in year, month, and day order with the
+              month and day separated by a slash, period, or hyphen, such
+              as:
+                <itemizedlist>
+                  <listitem>
+                    <para>2002/11/8</para>
+                  </listitem>
+                  <listitem>
+                    <para>1969.7.20</para>
+                  </listitem>
+                  <listitem>
+                    <para>2022-10-31</para>
+                  </listitem>
+                </itemizedlist>
+              </para>
+              <note>
+                <para>This expression finds number and separator patterns
+                matching possible dates, but does not validate them. It will also
+                find patterns such as “5136/36/71”.</para>
+              </note>
+            </entry>
+          </row>
+
+          <row>
+            <entry><literal>\.[A-Z]</literal></entry>
+            <entry>
+              <para>Find a period followed by an uppercase letter. Useful to
+              find possible missing spaces between the period and the start of a
+              new sentence</para>
+            </entry>
+          </row>
+
+          <row>
+            <entry><literal>\bis\b</literal></entry>
+            <entry>
+              <para>Find “is” as a whole word in a sentence, without matching
+              “this”, “isn’t”, or even “Is”.</para>
+            </entry>
+          </row>
+
+          <row>
+            <entry><literal>[\w\.-]+@[\w\.-]+</literal></entry>
+            <entry>
+              <para>
+                Find an email address. This simple expression may not cover
+                every possible valid email address format.
+              </para>
+            </entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+
+  <section id="app.regex.tools">
+    <title id="app.regex.tools.title">References</title>
+
+    <para>Although OmegaT does not offer fancy colouring for your regular
+    expressions, you can get a lot of practice by using the <link linkend="windows.text.search"
+    endterm="windows.text.search.title"/> window since OmegaT does colour the
+    matching results.</para>
+    
+    <para>A few additional resources are presented below.</para>
+
+    <para>The Java technical reference is useful as a canonical reference.
+
+      <variablelist>
+        <varlistentry id="app.regex.java">
+          <term id="app.regex.java.title"><ulink url="&javaregex;">Java Regex
+          documentation</ulink></term>
+          <listitem>
+            <para>The official reference for regular expressions used in
+            Java.</para>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+      
+      If you want to learn more about using regular expressions, the two
+      following sites have proven very useful.
+
+      <variablelist>
+        <varlistentry id="app.regex.tools.regex101">
+          <term id="app.regex.tools.regex101.title"><ulink url="https://regex101.com">https://regex101.com</ulink></term>
+          <listitem>
+            <para>An online regular expression matcher that lets you enter the
+            text you want to search and the regular expressions you want to test.</para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry id="app.regex.tools.regular.expression.info">
+          <term id="app.regex.tools.regular.expression.info.title"><ulink url="https://www.regular-expressions.info">https://www.regular-expressions.info</ulink></term>
+          <listitem>
+            <para>One of the most thorough regular expression tutorial and
+            reference on the web.</para>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+
+      <note>
+        <para>OmegaT does not support either site in any way. If you find other
+        interesting references—in any language—the OmegaT team would love to
+        hear about them.</para>
+      </note>
+    </para>
+  </section>
+</section>

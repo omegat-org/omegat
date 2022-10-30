@@ -1,25 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
-<chapter id="howtos">
-  <title>How To...</title>
+<chapter id="appendices">
+  <title id="appendices.title">Appendices</title>
 
-  <xi:include href="HowTo_SetUpTeamProject.xml"
+  <xi:include href="App_FileFilters.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
-  <xi:include href="HowTo_UseTeamProject.xml"
+  <xi:include href="App_Segmentation.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
-  <xi:include href="HowTo_ReuseTM.xml"
+  <xi:include href="App_Regex.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
-  <xi:include href="HowTo_PreventDataLoss.xml"
+  <xi:include href="App_Glossaries.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
-  <xi:include href="HowTo_TranslatePDF.xml"
+  <xi:include href="App_ShortCuts.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
-  <xi:include href="HowTo_ManageRTL.xml"
+  <xi:include href="App_ConfigurationFolder.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
-
-</chapter>
+  
+  <xi:include href="App_ApplicationFolder.xml"
+              xmlns:xi="http://www.w3.org/2001/XInclude"/>
+  </chapter>

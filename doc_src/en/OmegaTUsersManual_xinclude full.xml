@@ -1,56 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
-"../../../docbook-xml-4.5/docbookx.dtd">
-<book lang="en">
+"../../../docbook-xml-4.5/docbookx.dtd"
+[<!ENTITY % manualvariables SYSTEM "manualvariables.mod"> %manualvariables;]>
+<book lang="en" id="book.user.guide">
   <bookinfo>
-    <title>OmegaT 4.3.1 - User's Guide</title>
-
-    <author>
-      <firstname>OmegaT team</firstname>
-    </author>
-
-    <pubdate/>
-
+    <title id="book.user.guide.title">OmegaT &vernb; - User Guide <emphasis role="bold">DRAFT</emphasis></title>
+    <pubdate>@timestamp@</pubdate>
+	<!-- TODO automate date insertion -->
     <abstract>
-      <para>This document is the official user's guide to OmegaT, the free
-      Computer Aided Translation tool. It also contains installation
-      instructions.</para>
+      <para>This document is the official user guide to OmegaT, the free
+      Computer-Assisted Translation tool.</para>
     </abstract>
   </bookinfo>
 
-  <xi:include href="InstallingAndRunning.xml"
+  <xi:include href="Introduction.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
-  <xi:include href="OmegaT4_Menus.xml"
+  <xi:include href="OmegaT5_HowTo.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
-  <xi:include href="OmegaT4_WindowsAndDialogs.xml"
+  <xi:include href="OmegaT5_EditorsPanes.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
-  <xi:include href="OmegaT4_EditorsPanes.xml"
+  <xi:include href="OmegaT5_Menus.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
-  <xi:include href="OmegaT4_ProjectFolder.xml"
+  <xi:include href="OmegaT5_WindowsAndDialogs.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
-  <xi:include href="OmegaT4_HowTo.xml"
+  <xi:include href="OmegaT5_ProjectFolder.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
-<!--   <xi:include href="OmegaT4_Troubleshooting.xml"
-              xmlns:xi="http://www.w3.org/2001/XInclude"/> -->
-
-  <xi:include href="App_Dictionaries.xml"
+  <xi:include href="OmegaT5_Preferences.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
-  <xi:include href="App_Glossaries.xml"
-              xmlns:xi="http://www.w3.org/2001/XInclude"/>
-
-   <xi:include href="App_Spellchecker.xml"
-              xmlns:xi="http://www.w3.org/2001/XInclude"/>
-
-  <xi:include href="App_Regexp.xml"
-              xmlns:xi="http://www.w3.org/2001/XInclude"/>
-
-  <xi:include href="App_ShortCutCustomization.xml"
-              xmlns:xi="http://www.w3.org/2001/XInclude"/>
+  <xi:include href="OmegaT5_Appendices.xml"
+	         xmlns:xi="http://www.w3.org/2001/XInclude"/>
+	           
 </book>

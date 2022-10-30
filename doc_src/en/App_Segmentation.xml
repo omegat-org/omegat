@@ -71,16 +71,24 @@
 		  further divides those units into segments.</para>
 
 		  <para>You can visualize segmentation as the process of moving the
-		  cursor along the text, on character at a time. Each time the cursor
-		  moves to the next character, rules consisting of a <emphasis
-		  role="bold">Before</emphasis> and <emphasis role="bold">After
-		  </emphasis> pattern, are checked, in order, for a match with the 
-		  <emphasis role="bold">Before</emphasis> pattern on the left and the
-		  corresponding <emphasis role="bold">After</emphasis> pattern on the
-		  right. The first matching rule is applied, either by creating a new
-		  segment break at the current cursor position (for a break rule), or by
-		  moving the cursor to the next position without inserting a segment
-		  break (for an exception rule).</para>
+		  cursor along the text, one character at a time, and looking for the
+		  position where a break will occur, or where a break will not be
+		  allowed.</para>
+
+		  <para>Each time the cursor
+		  moves to the next character, OmegaT checks whether:
+		  <itemizedlist>
+			<listitem>
+			  <para>the text before the location corresponds to a <emphasis
+		  role="bold">Before</emphasis> rule,</para>
+			</listitem>
+			<listitem>
+			  <para>and the text after the location corresponds to the associated <emphasis
+			  role="bold">After</emphasis> rule.</para>
+			</listitem>
+		  </itemizedlist>
+		  </para>
+		  <para>If the location matches both rules, it is considered either as a break, or as a non-break, depending of what the rule defined.</para>
         </listitem>
 	  </varlistentry>
     </variablelist>

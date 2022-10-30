@@ -635,16 +635,17 @@
 		  id="dialogs.preferences.external.search.enable.project.specific.commands.title">Allow local external search commands</term>
 
 	  <listitem>
-		<para>By default, OmegaT does not execute commands specified in the
-		project-specific settings (the <link
-		linkend="project.folder.omegat.filters"
-		endterm="project.folder.omegat.filters.title"/> file in the <link
-		linkend="project.folder.omegat"
-		endterm="project.folder.omegat.title"/> folder), because
-		they could have a critical impact on system security.</para>
+		<warning><para>For security reasons, <link
+		linkend="dialogs.project.properties.external.searches"
+		endterm="dialogs.project.properties.external.searches.title"/>
+		are disabled by default.</para></warning>
 
-		<para>Only activate this option if you know what you are doing, and
-		can trust the source of the project.</para>
+		<para>Local external search commands are saved in <link
+		linkend="project.folder.omegat.filters"
+		endterm="project.folder.omegat.filters.title"/>. Only activate this
+		option if you trust the source of that file.</para>
+
+		
 	  </listitem>
 	</varlistentry>
 

@@ -221,7 +221,7 @@ above only apply to exact and keyword searches.</para></warning>
 	</varlistentry>
 	
 	<varlistentry><term>Search in: Files</term><listitem><para>Search in reference files not included in the project ressources.</para>
-	<para>OmegaT can conduct searches in any file that it can read as source file. See <link linkend="dialogs.preferences.file.filters" endterm="dialogs.preferences.file.filters.title"/> for details.</para>
+	<para>OmegaT can conduct searches in any file that it can read as source file. See <link linkend="file.filters" endterm="file.filters.title"/> for details.</para>
 	<para>TMX files are excluded from file searches since OmegaT
 	does not recognize them as a source file format despite supporting them as
 	translation memories.</para></listitem></varlistentry>

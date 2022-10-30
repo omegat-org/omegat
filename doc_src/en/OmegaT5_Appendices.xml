@@ -4,6 +4,9 @@
 <chapter id="appendices">
   <title id="appendices.title">Appendices</title>
 
+  <xi:include href="App_FileFilters.xml"
+              xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
   <xi:include href="App_Segmentation.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
 

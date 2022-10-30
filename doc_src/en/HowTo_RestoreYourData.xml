@@ -85,7 +85,7 @@
 	<note><para>Be cautious about making changes to the files in the source
 	folder, to the segmentation rules, or to the file filters, partway through a
 	project. Modifying either after you have started your translation could
-	result in some segments not being displayed anymore, or new unexpected
+	result in some segments not being displayed anymore, or unexpected new
 	segments appearing instead.</para></note>
 
 

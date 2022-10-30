@@ -145,9 +145,9 @@
         <para>Select the two files to align (the source file and its
         translation) and click <guibutton>OK</guibutton> to open the <link
         linkend="windows.aligner" endterm="windows.aligner.title"/> window.</para>
-        <para>The supported file formats are the same as those listed in <link
-        linkend="dialogs.preferences.file.filters"
-        endterm="dialogs.preferences.file.filters.title"/>.</para>
+        <para>The supported file formats depend on your project setting. See <link
+        linkend="file.filters"
+        endterm="file.filters.title"/> for details.</para>
         <para>The source and target files can have different formats (for
         example, a <filename>.docx</filename> file can be aligned with a
         <filename>.pdf</filename> file).</para>

@@ -57,7 +57,7 @@
 		  lines, or not at all. Files containing formatting (ODF, HTML, or
 		  other documents) are divided at block-level (paragraph)
 		  tags. Translatable object attributes in XHTML or HTML files can be
-		  extracted as separate segments.</para>
+		  extracted as separate "paragraphs".</para>
 		</listitem>
 	  </varlistentry>
 

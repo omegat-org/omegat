@@ -8,12 +8,13 @@
 
   <section id="configuration.folder.location">
     <title id="configuration.folder.location.title">Location</title>	
-	<para>The location of the configuration folder varies by system (the <emphasis>~</emphasis> character represents your home directory):<variablelist>
+	<para>The location of the default configuration folder varies by system (the <emphasis>~</emphasis> character represents your home directory):<variablelist>
 	  <varlistentry><term>Linux</term><listitem><para><filename>~/.omegat</filename></para></listitem></varlistentry>
 	  <varlistentry><term>macOS</term><listitem><para><filename>~/Library/Preferences/OmegaT</filename></para></listitem></varlistentry>
 	  <varlistentry><term>Windows</term><listitem><para><filename>~\AppData\Roaming\OmegaT</filename></para></listitem></varlistentry>
 	</variablelist>
 	</para>
+	<para>You can also use non default configuration folders by starting OmegaT from the command line. See <link linkend="launch.with.command.line" endterm="launch.with.command.line.title"/> for details</para>
   </section>
   
   <section id="configuration.folder.default.contents">

@@ -237,7 +237,7 @@
         <listitem>
           <para>By default, file filter settings are global and are shared by
           all projects. They are found in <link
-          linkend="dialogs.preferences.file.filters.title"
+          linkend="dialogs.preferences.file.filters"
           endterm="dialogs.preferences.file.filters.title"/>.</para>
 
 		  <para>Use this button to create local file filters specific to your
@@ -251,8 +251,8 @@
 		  <note><para>To disable project specific file filters, uncheck the
 		  box or remove that file.</para></note>
 		  
-		  <para>See <link linkend="dialogs.preferences.file.filters"
-		  endterm="dialogs.preferences.file.filters.title"/> for details.</para>
+		  <para>See <link linkend="file.filters"
+		  endterm="file.filters.title"/> for details.</para>
         </listitem>
       </varlistentry>
 
@@ -273,7 +273,7 @@
 
       <varlistentry id="dialogs.project.properties.external.searches">
         <term id="dialogs.project.properties.external.searches.title">Local External
-        Searches...</term>
+        Searches</term>
 
         <listitem>
           <para>By default, external searches are global and are shared by all

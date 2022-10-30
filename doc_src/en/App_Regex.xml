@@ -99,8 +99,8 @@
         <para>Segmentation rules and language patterns are defined with
         regular expressions. You can modify them freely to improve the
         segmentation of a document or add additional general rules. See
-        <link linkend="dialogs.preferences.segmentation.setup"
-			  endterm="dialogs.preferences.segmentation.setup.title"/> for
+        <link linkend="app.segmentation"
+			  endterm="app.segmentation.title"/> for
         details.</para>
         <para>Segmentation or exception rules define the position in a
         segment where a split will, or will not, be made. Two regular

@@ -241,21 +241,17 @@
   under</emphasis> the source segment to use as an alternative language
   reference for the source text.</para>
 
-	<figure id="how.to.tm.bridge.two.languages.looks">
-      <title id="how.to.tm.bridge.two.languages.looks.title">Bridge two languages with a third</title>
-      <mediaobject>
-        <imageobject role="html">
-          <imagedata fileref="images/EN-JA-FR.png"/>
-        </imageobject>
-        <imageobject role="fo">
-          <imagedata fileref="images/EN-JA-FR.png" width="60%"/>
-        </imageobject>
-		<caption><para>English as the source language, French in translation,
-		Japanese as "bridge" alternative language reference.</para></caption>
-      </mediaobject>
-    </figure>
-
-
+  <example id="bridge.english.and.french.with.japanese">
+	<title id="replace.with.allemand.title">Bridge English and French with Japanese</title>
+	<para>
+	  <programlisting>— ¶ —————————————————————
+<token>A whitespace character: [ \t\n\x0B\f\r]
+fr-ZB: Un caractère d'espacement (espace, tabulation, etc.) :  [ \t\n\x0B\f\r]
+ja-RV: 空白文字：[ \t\n\x0B\f\r]</token>
+Un caractère d'espacement : [ \t\n\r\f\x0B]<token>&lt;segment 3075 ¶></token>
+— ¶ —————————————————————</programlisting></para>
+<para>The first line is the original English, the second an old French version, the third the Japanese version, and the 4th the current translation to French.</para>	
+  </example>
   
     <para>To achieve this:
 
@@ -280,25 +276,6 @@
 	
     <note><para>You can use any number of TMX files in as many different
     language pairs as "bridge" languages as you want.</para>
-
-	<figure id="how.to.tm.bridge.two.languages.looks3">
-      <title id="how.to.tm.bridge.two.languages.looks3.title">Bridge two
-      languages with several other languages.</title>
-      <mediaobject>
-        <imageobject role="html">
-          <imagedata fileref="images/EN-JA-FR-FRRV.png"/>
-        </imageobject>
-        <imageobject role="fo">
-          <imagedata fileref="images/EN-JA-FR-FRRV.png" width="60%"/>
-        </imageobject>
-		<caption><para>English as the source language, French in translation, a
-		French revision to check and Japanese as "bridge" third language
-		reference.</para>
-		<para>The French revision TMX is also in <link linkend="project.folder.tm" endterm="project.folder.tm.title"/>
-		to provide its matches when relevant.</para></caption>
-      </mediaobject>
-    </figure>
-
 	</note>
 	</para>
   </section>

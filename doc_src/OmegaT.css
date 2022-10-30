@@ -24,7 +24,6 @@
 	--menus-color:#179ADE;
 	--windows-color:#DEBF17;
 	--project-color:#DE1737;
-	--config-color:#B35A00;
 	--prefs-color:#0059B3;
 	--howto-color:#B300B3;
 	--appendices-color:#00B3B3;
@@ -885,6 +884,7 @@ h2:has(a[href="appendices.html"]) ~ ul {
 	font-weight:bold;
 }
 
+/* search */
 #search\.for\.doitsu > div.example-contents > pre > .token {
 	color:var(--term-match);
 	font-weight:bold;
@@ -903,4 +903,46 @@ h2:has(a[href="appendices.html"]) ~ ul {
 
 #replace\.with\.allemand > div.example-contents > pre > span:nth-child(2) {
 	color:var(--replace-color);
+}
+
+/* convert match numbers */
+
+#convert\.match\.numbers > div.example-contents .token {
+	font-weight:bold;	
+}
+
+/* bridge two languages */
+
+#bridge\.english\.and\.french\.with\.japanese > div.example-contents > pre > span:nth-child(1) {
+	background-color:var(--match-background);
+	font-weight:bold;
+}
+
+#bridge\.english\.and\.french\.with\.japanese > div.example-contents > pre > span:nth-child(2) {
+	font-weight:bold;
+}
+
+/* editor pane */
+
+#panes\.editor\.default\.editor\.writing\.space > div.example-contents > pre {
+	border-left: 10px solid lightgrey;
+}
+
+#panes\.editor\.default\.editor\.writing\.space > div.example-contents > pre > span:nth-child(1) {
+	background-color:var(--match-background);
+	font-weight:bold;	
+}
+
+#panes\.editor\.default\.editor\.writing\.space > div.example-contents > pre > span:nth-child(2) {
+	font-weight:bold;	
+}
+
+#panes\.editor\.modified\.editor\.target\.field > div.example-contents > pre  {
+}
+#panes\.editor\.modified\.editor\.target\.field > div.example-contents > pre > span:nth-child(2) {
+	float:left;
+}
+
+#panes\.editor\.modified\.editor\.target\.field > div.example-contents > pre > span:nth-child(4) {
+	float:left;	
 }

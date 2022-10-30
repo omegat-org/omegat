@@ -213,20 +213,19 @@
     <para>The text is split into numbered segments. You can scroll through the
     document and double-click on any segment to open and edit it.</para>
 
-    <figure id="default.editor.target.field">
-      <title id="default.editor.target.field.title">Default editor writing
+  <example id="panes.editor.default.editor.writing.space">
+	<title id="panes.editor.default.editor.writing.space.title">Default editor writing
       space</title>
+	<para>
+	  <programlisting>— ¶ —————————————————————
 
-      <mediaobject>
-        <imageobject role="html">
-          <imagedata fileref="images/defaultEditorDisplay.png"/>
-        </imageobject>
+<token>Remove Tags</token>
+|Supprimer les balises<token>&lt;segment 2148 ¶></token>
 
-        <imageobject role="fo">
-          <imagedata fileref="images/defaultEditorDisplay.png" width="60%"/>
-        </imageobject>
-      </mediaobject>
-    </figure>
+— ¶ —————————————————————
+
+When enabled, all the formatting tags are removed from source segments.</programlisting></para>
+  </example>
 
     <itemizedlist>
       <listitem>
@@ -242,10 +241,10 @@
       </listitem>
 
       <listitem>
-        <para>The segment marker here is <literal>&lt;segment 0400
+        <para>The segment marker here is <literal>&lt;segment 2148
         ¶&gt;</literal>.</para>
 
-        <para><literal>0400</literal> is the number of the segment in the
+        <para><literal>2148</literal> is the number of the segment in the
         project and the <literal>¶</literal> symbol indicates that the segment
         is the first segment in a paragraph.</para>
       </listitem>
@@ -284,22 +283,25 @@
     <note>
       <para>Modify the Editor display to suit your workflow. See the <link linkend="dialogs.preferences.editor" endterm="dialogs.preferences.editor.title"/> preferences for details.</para>
 
-      <figure id="modified.editor.target.field">
-        <title id="modified.editor.target.field.title">Example of modified
-        editor writing space</title>
+<!--   <example id="panes.editor.modified.editor.target.field"> -->
+<!-- 	<title id="panes.editor.modified.editor.target.field.title">Example of modified -->
+<!--         editor writing space</title> -->
+<!-- 	<para> -->
+<!-- 	  <programlisting>— ¶ ————————————————————— -->
 
-        <mediaobject>
-          <imageobject role="html">
-            <imagedata fileref="images/modifiedEditorDisplay.png"/>
-          </imageobject>
+<!-- Translation last modified by Didier on Sep 4, 2012 at 9:16:52 PM -->
+<!-- <token>Remove Ta&amp;gs</token> -->
+<!-- <token>Su&amp;pprimer les balises</token> -->
 
-          <imageobject role="fo">
-            <imagedata fileref="images/modifiedEditorDisplay.png" width="60%"/>
-          </imageobject>
-        </mediaobject>
-      </figure>
+<!-- — ¶ ————————————————————— -->
 
-      <para>The modifications here include:<itemizedlist>
+<!-- <token>External Post-processing Command:</token> -->
+<!-- <token>[fuzzy]</token>Commande de post-traitement externe<token>&lt;segment 3644 ¶></token> -->
+
+<!-- — ¶ —————————————————————</programlisting></para> -->
+<!--   </example> -->
+
+  <para>Modifications can include:<itemizedlist>
           <listitem>
             <para><link endterm="dialogs.preferences.fonts.title"
             linkend="dialogs.preferences.fonts"/></para>

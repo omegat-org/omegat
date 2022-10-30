@@ -11,7 +11,9 @@
   location of the project, or an <filename>omegat.project</filename>
   file.</para>
 
-  <para>After downloading the project the first time, members will access the project from their local copy.</para>
+  <para>Once the project is downloaded, it is installed localy and must only be opened locally to synchronize with the server.</para>
+
+  <para>Repository credentials are stored in <link linkend="configuration.folder.extra.contents.repositories" endterm="configuration.folder.extra.contents.repositories.title"/> and can be deleted from <link linkend="dialog.preferences.team.title.repository.credentials" endterm="dialog.preferences.team.title.repository.credentials.title"/>.</para>
 
   <para>Since synchronization takes place by default every 3 minutes, project
   members will sometime translate or modify a segment that was already translated by

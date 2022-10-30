@@ -1781,7 +1781,7 @@
 	  <listitem>
 		<para>List of projects for which login details have been stored in
 		OmegaT. Remove a project from this list if you want OmegaT to ask
-		you for its login and a password every time you access it.</para>
+		you for its credentials the next time you access it.</para>
 	  </listitem>
 	</varlistentry>
   </variablelist>

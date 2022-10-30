@@ -2007,19 +2007,71 @@ ${targetText}
 <section id="dialog.preferences.view">
   <title id="dialog.preferences.view.title">View</title>
 
-  <para>Contains various options for changing how the text or modification
-  information is displayed.</para>
-
   <variablelist>
-	<varlistentry id="dialog.preferences.view.include.the.first.non-unique.segment.when.marking.non-unique.segments">
+	<varlistentry id="dialog.preferences.view.display.all.source.segments.in.bold">
+	  <term id="dialog.preferences.view.display.all.source.segments.in.bold.title">Display all source segments in bold</term>
+	  <listitem>
+		<para>By default, only the current segment has its source part displayed in bold face.</para>
+	  </listitem>
+	</varlistentry>
+
+	<varlistentry id="dialog.preferences.view.display.active.source.segment.in.bold">
+	  <term id="dialog.preferences.view.display.active.source.segment.in.bold.title">Display active source segment in bold</term>
+	  <listitem>
+		<para>If other segments are displayed in normal face, the current segment can also be displayed in normal face.</para>
+	  </listitem>
+	</varlistentry>
+
+	<varlistentry id="dialog.preferences.view.include.the.first.non-unique.segment.when.marking.non.unique.segments">
 	  <term
-		  id="dialog.preferences.view.include.the.first.non-unique.segment.when.marking.non-unique.segments.title">Include
-	  the first non-unique segment when marking non-unique segments</term>
+		  id="dialog.preferences.view.include.the.first.non-unique.segment.when.marking.non.unique.segments.title">Mark all non-unique segments</term>
 
 	  <listitem>
-		<para>Check this option to display all non-unique segments
-		(repetitions) in light gray. If left unchecked, the second and
-		subsequent non-unique segments are shown in gray.</para>
+		<para>By default, when <link linkend="menus.view.mark.non.unique.segments" endterm="menus.view.mark.non.unique.segments.title"/> is enabled, only
+		the non unique segments after the second are marked. Enable this option
+		to also mark the first.</para>
+	  </listitem>
+	</varlistentry>
+
+	<varlistentry id="dialog.preferences.view.simplify.tooltip.on.protected.parts">
+	  <term id="dialog.preferences.view.simplify.tooltip.on.protected.parts.title">Simplify tag tooltips</term>
+	  <listitem>
+		<para>Tags are protected text. Tag tooltips display the real content of the tag. When that content contains paired tags (as in HTML) such tooltips can be simplified when you hover on them.</para>
+	  </listitem>
+	</varlistentry>
+
+	<varlistentry id="dialog.preferences.view.use.custom.templates.for.modification.info">
+	  <term id="dialog.preferences.view.use.custom.templates.for.modification.info.title">Customize segment modification information</term>
+	  <listitem>
+		<para>Segment modification information is displayed over the segment and by default indicates when and by whom the translation was modified:</para>
+
+		<example id="dialog.preferences.view.use.custom.templates.for.modification.info.example">
+		  <title id="dialog.preferences.view.use.custom.templates.for.modification.info.example.title">Default display</title>
+		  <para>
+		  <programlisting>Translation last modified by suzume on Oct 6, 2022 at 2:18:27 PM
+[[チューリッヒ大学]]大学院博士課程修了。
+[[Université de Zurich]] Elle finit sa thèse de doctorat.&lt;segment 0178></programlisting>
+		  </para>
+		</example>
+
+		<para>Segment modification information is displayed with <link linkend="menus.view.modification.info" endterm="menus.view.modification.info.title"/>.
+		</para>
+	  </listitem>
+	</varlistentry>
+	
+	<varlistentry id="dialog.preferences.view.modification.info.template">
+	  <term id="dialog.preferences.view.modification.info.template.title">Standard template</term>
+	  <listitem>
+		<para>You can adapt the "standard template" to your needs with the template variables.</para>
+	  </listitem>
+	</varlistentry>
+
+	<varlistentry id="dialog.preferences.view.modification.info.template.for.segments.without.date">
+	  <term
+	  id="dialog.preferences.view.modification.info.template.for.segments.without.date.title">Template
+	  for segments without date</term>
+	  <listitem>
+		<para>You can adapt the "template for segments without date" to your needs with the template variables.</para>
 	  </listitem>
 	</varlistentry>
   </variablelist>
@@ -2122,27 +2174,29 @@ ${targetText}
 <section id="dialogs.preferences.proxy.login">
   <title id="dialogs.preferences.proxy.login.title">Proxy Login</title>
 
-  <para>If OmegaT needs to use an authenticated proxy server to access the
-  Internet, enter the details provided by the proxy administrator
-  here.</para>
+  <para>If you use an authenticated proxy server to access the
+  Internet, enter your credentials here.</para>
 </section>
 
 <section id="dialogs.preferences.secure.store">
   <title id="dialogs.preferences.secure.store.title">Secure store</title>
 
-  <para>This option lets you define or reset the master password used to
-  protect login details and access keys for machine translation
-  services. Always make a backup of that information before creating a new
-  password, because they will all be deleted and have to be
-  re-entered.</para>
+  <para>Define or reset the master password used to
+  protect login credentials as well as access keys for machine translation
+  services.</para>
+
+  <para>Before resetting the master password, always make a backup of that
+  information, because it will be deleted and will have to be re-entered.</para>
 </section>
 
 <section id="dialogs.preferences.plugins">
   <title id="dialogs.preferences.plugins.title">Plugins</title>
 
-  <para>This option shows a list of available plugins. Plugins are installed
+  <para>Displays the list of all the installed plugins.</para>
+
+  <para>Plugins are installed
   either in the <link linkend="application.folder.plugins" endterm="application.folder.plugins.title"/> folder under
-  the OmegaT <link linkend="application.folder" endterm="application.folder.title"/>, or in the platform-specific OmegaT
+  the <link linkend="application.folder" endterm="application.folder.title"/>, or in the platform-specific
   <link linkend="configuration.folder" endterm="configuration.folder.title"/>.</para>
   <para>Additional plugins can be found on the <ulink
   url="https://sourceforge.net/p/omegat/wiki/Plugins/">OmegaT development
@@ -2154,5 +2208,7 @@ ${targetText}
 
   <para>Use this option to choose whether to be automatically notified of
   updates to OmegaT.</para>
+
+  <para>If OmegaT detects an update, it will display a link to the download page. See <link linkend="update.and.delete.omegat" endterm="update.and.delete.omegat.title"/> for details.</para>
 </section>
 </chapter>

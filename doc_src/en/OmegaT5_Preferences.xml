@@ -2107,8 +2107,8 @@ ${targetText}
 
 		  <para>You can also define local post-processing commands
 		  available only to a given project. Such commands are defined in <link
-		  linkend="dialogs.preferences.saving.and.output.external.post-processing.command"
-		  endterm="dialogs.preferences.saving.and.output.external.post-processing.command.title"/>.</para>
+		  linkend="dialogs.project.properties.external.processing.command"
+		  endterm="dialogs.project.properties.external.processing.command.title"/>.</para>
 
 		<para>Local post-processing commands are saved in <link linkend="project.folder.omegat.project.file" endterm="project.folder.omegat.project.file.title"/>. Only activate this option if you trust the source of that file.</para>
 

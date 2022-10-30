@@ -143,6 +143,10 @@
         change made to the current segment. Setting it to <guimenuitem>All
         segments</guimenuitem> shows this information for all segments, while
         <guimenuitem>None</guimenuitem> turns this option off.</para>
+		<para>You can adapt the displayed information to your needs. See <link
+		linkend="dialog.preferences.view.use.custom.templates.for.modification.info"
+		endterm="dialog.preferences.view.use.custom.templates.for.modification.info.title"/>
+		for details.</para>
         </listitem>
     </varlistentry>
 	

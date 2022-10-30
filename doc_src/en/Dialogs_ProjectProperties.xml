@@ -179,29 +179,55 @@
 
       <varlistentry id="dialogs.project.properties.external.processing.command">
         <term
-			id="dialogs.project.properties.external.processing.command.title">External
-        Post-processing Command</term>
+			id="dialogs.project.properties.external.processing.command.title">Local
+        Post-processing Commands</term>
 
         <listitem>
-          <para>This area displays the external post-processing
-          command (a script to rename files, for instance) that will be applied
-          each time <link linkend="menus.project.create.translated.documents"
-          endterm="menus.project.create.translated.documents.title"/> is
-          used.</para>
-
-		  <para>By default, post-processing commands are global and are
-		  available to all projects. They are defined in <link
-		  linkend="dialogs.preferences.saving.and.output.external.post-processing.command"
-		  endterm="dialogs.preferences.saving.and.output.external.post-processing.command.title"/>.</para>
-		  
-		  <note><para>For security purposes, project-based local external commands are
-		  disabled by default. You can enable them by checking <link
+		  <warning><para>For security reasons, local post-processing commands are
+		  disabled by default. See <link
 		  linkend="dialogs.preferences.saving.and.output.also.allow.per.project.external.commands"
 		  endterm="dialogs.preferences.saving.and.output.also.allow.per.project.external.commands.title"/>
-		  in the <link linkend="dialogs.preferences.saving.and.output"
-		  endterm="dialogs.preferences.saving.and.output.title"/>
-		  preferences.</para></note>
-		  
+		  for details.</para></warning>
+
+		  <para>Specify the commands that will automatically be run after using <link
+		linkend="menus.project.create.translated.documents"
+		endterm="menus.project.create.translated.documents.title"/> or <link linkend="menus.project.create.current.translated.document" endterm="menus.project.create.current.translated.document.title"/>.</para>
+
+		  <para>The commands
+		specified here are only available to this project. They are saved in <link linkend="project.folder.omegat.project.file" endterm="project.folder.omegat.project.file.title"/>. Only enable local post-processing commands if you trust the source of that file.</para>
+		
+		<para>The template variables list gives you access to various project
+		data and system variables:
+		<example>
+		  <title id="dialogs.preferences.saving.and.output.external.post-processing.command.example.title">Simple examples of post-processing commands:</title>
+		  <variablelist>
+			<varlistentry>
+			  <term>Open the target folder in Linux</term>
+			  <listitem>
+				<programlisting>xdg-open ${targetRoot}</programlisting>
+			  </listitem>
+			</varlistentry>
+			<varlistentry>
+			  <term>Open the target folder in macOS</term>
+			  <listitem>
+				<programlisting>open ${targetRoot}</programlisting>
+			  </listitem>
+			</varlistentry>
+			<varlistentry>
+			  <term>Open the target folder in Windows Powershell</term>
+			  <listitem>
+				<programlisting>Invoke-Item ${targetRoot}</programlisting>
+			  </listitem>
+			</varlistentry>
+		  </variablelist>
+		</example>
+		</para>
+
+		<para>You can also define global post-processing commands
+		  available to all projects that share the same configuration folder. Such commands are defined in <link
+		  linkend="dialogs.preferences.saving.and.output.external.post-processing.command"
+		  endterm="dialogs.preferences.saving.and.output.external.post-processing.command.title"/>.</para>
+		  <note><para>Local commands are run before global commands.</para></note>
         </listitem>
       </varlistentry>
 

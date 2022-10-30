@@ -2031,11 +2031,10 @@ ${targetText}
 
   <variablelist>
 	<varlistentry id="dialog.preferences.saving.and.output.interval">
-	  <term id="dialog.preferences.saving.and.output.interval.title">Saving
+	  <term id="dialog.preferences.saving.and.output.interval.title">Project data saving
 	  interval</term>
 	  <listitem>
-		<para>Allows the user to select the interval—in minutes and
-		seconds—between automatic project saves.</para>
+		<para>Allows the user to select the interval between automatic project data saves.  See <link linkend="how.to.restore.your.data.automatic.backup" endterm="how.to.restore.your.data.automatic.backup.title"/> for details.</para>
 
 		<para>Change the default interval (3 minutes) depending on the
 		characteristics of the project:</para>
@@ -2047,7 +2046,7 @@ ${targetText}
 		  </listitem>
 
 		  <listitem>
-			<para>Long intervals for team projects hosted on external servers.</para>
+			<para>Longer intervals for team projects hosted on external servers.</para>
 		  </listitem>
 		</itemizedlist>
 	  </listitem>
@@ -2055,17 +2054,46 @@ ${targetText}
 
 	<varlistentry id="dialogs.preferences.saving.and.output.external.post-processing.command">
 	  <term
-		  id="dialogs.preferences.saving.and.output.external.post-processing.command.title">External
-	  Post-processing Command</term>
+		  id="dialogs.preferences.saving.and.output.external.post-processing.command.title">Global
+	  Post-processing Commands</term>
 
 	  <listitem>
-		<para>Specify commands to run after using the
-		<link linkend="menus.project.create.translated.documents" endterm="menus.project.create.translated.documents.title"/> command.</para>
+		  <para>Specify the commands that will automatically be run after using <link
+		linkend="menus.project.create.translated.documents"
+		endterm="menus.project.create.translated.documents.title"/> or <link linkend="menus.project.create.current.translated.document" endterm="menus.project.create.current.translated.document.title"/>.</para>
 
-		<para>An example use of this feature would be to send translated
-		documents automatically to the client's FTP server.</para>
+		<para>The commands
+		specified here are available to all the projects that use the same
+		configuration folder. They are saved in <link
+		linkend="configuration.folder.default.contents.omegat.prefs"
+		endterm="configuration.folder.default.contents.omegat.prefs.title"/>.</para>
 
-		<para>Use the various template variables to write your command</para> 
+		<para>The template variables list gives you access to various project
+		data and system variables:
+		<example>
+		  <title id="dialogs.preferences.saving.and.output.external.post-processing.command.example.title">Simple examples of post-processing commands:</title>
+		  <variablelist>
+			<varlistentry>
+			  <term>Open the target folder in Linux</term>
+			  <listitem>
+				<programlisting>xdg-open ${targetRoot}</programlisting>
+			  </listitem>
+			</varlistentry>
+			<varlistentry>
+			  <term>Open the target folder in macOS</term>
+			  <listitem>
+				<programlisting>open ${targetRoot}</programlisting>
+			  </listitem>
+			</varlistentry>
+			<varlistentry>
+			  <term>Open the target folder in Windows Powershell</term>
+			  <listitem>
+				<programlisting>Invoke-Item ${targetRoot}</programlisting>
+			  </listitem>
+			</varlistentry>
+		  </variablelist>
+		</example>
+		</para>
 	  </listitem>
 	</varlistentry>
 
@@ -2074,13 +2102,18 @@ ${targetText}
 		  id="dialogs.preferences.saving.and.output.also.allow.per.project.external.commands.title">Allow local post-processing commands</term>
 
 	  <listitem>
-		<para>By default, OmegaT does not execute commands specified in the
-		project-specific settings (the <filename>omegat.project</filename>
-		file), because they could have a critical impact on system
-		security.</para>
+		<warning><para>For security reasons, <link linkend="dialogs.project.properties.external.processing.command" endterm="dialogs.project.properties.external.processing.command.title"/> are
+		  disabled by default.</para></warning>
 
-		<para>Only activate this option if you know what you are doing, and
-		can trust the source of the project.</para>
+		  <para>You can also define local post-processing commands
+		  available only to a given project. Such commands are defined in <link
+		  linkend="dialogs.preferences.saving.and.output.external.post-processing.command"
+		  endterm="dialogs.preferences.saving.and.output.external.post-processing.command.title"/>.</para>
+
+		<para>Local post-processing commands are saved in <link linkend="project.folder.omegat.project.file" endterm="project.folder.omegat.project.file.title"/>. Only activate this option if you trust the source of that file.</para>
+
+	  	<note><para>Local commands are run before global commands.</para></note>
+
 	  </listitem>
 	</varlistentry>
   </variablelist>

@@ -1840,11 +1840,23 @@
 		<para>Change how fuzzy matches are displayed, through the use of
 		pre-configured variables:</para>
 
+		<para>The default is:</para>
+		<para><programlisting>${id}. ${fuzzyFlag}${sourceText}
+${targetText}
+&lt;${score}/${noStemScore}/${adjustedScore}% ${filePath}></programlisting></para>
+		<para>Here is a possible alternative:</para>
+		<para><programlisting>⥤ ${id}. &lt;${score}/${noStemScore}/${adjustedScore}%> ${fuzzyFlag} ${fileNameOnly}
+[NEW]▷ ${diff}
+
+[OLD]◀ ${diffReversed}
+     ◀ ${targetText}</programlisting></para>
+
+
 		<para>The template variables are also available from a drop-down menu
 		and can be inserted with a button.</para>
 
 		<table id="table.match.pane.setup" colsep="0" rowsep="0">
-		  <title id="table.match.pane.setup.title">Match pane setup</title>
+		  <title id="table.match.pane.setup.title">Match template variables</title>
 
 		  <tgroup cols="2" colsep="1" rowsep="1">
 			<colspec align="left"/>
@@ -1871,8 +1883,7 @@
 				  <literal>${diff}</literal>
 				</entry>
 				<entry>A string that shows the differences between the
-				source and the match. <emphasis>Hint:</emphasis> use this if
-				the text you are translating has been updated.</entry>
+				source and the match.</entry>
 			  </row>
 
 			  <row>

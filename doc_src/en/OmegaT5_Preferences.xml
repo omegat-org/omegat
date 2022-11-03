@@ -418,8 +418,8 @@
 	linkend="dialogs.project.properties"
 	endterm="dialogs.project.properties.title"/>.</para>
 
-	<example>
-	  <title>Rules for Japanese</title>
+	<example id="dialogs.preferences.segmentation.setup.scope.example">
+	  <title id="dialogs.preferences.segmentation.setup.scope.example.title">Rules for Japanese</title>
 	  <para>For a translation from Japanese, <emphasis>only</emphasis> the rule
 	  set associated to the <code>JA.*</code> pattern and the generic rule sets
 	  associated to the <code>.*</code> will be taken into account.</para>
@@ -433,8 +433,8 @@
 	active and are applied in order. Rules for specific language regions
 	should be higher than default ones.</para>
 
-	<example>
-	  <title>Cascading priorities</title>
+	<example id="dialogs.preferences.segmentation.setup.scope.cascading.proprieties.example">
+	  <title id="dialogs.preferences.segmentation.setup.scope.cascading.proprieties.example.title">Cascading priorities</title>
 	<para>The rules for
 	<emphasis>FR-CA</emphasis> should be set higher than those for
 	<emphasis>FR.*</emphasis>, which should themselves be higher than the
@@ -679,14 +679,14 @@
 		placeholder will be replaced by the string that was selected in the
 		Editor.</para>
 		<para>URLs are opened with the default web browser, one per tab.</para>
-		<example><title>URL search example</title>
+		<example id="dialogs.preferences.external.search.items.url.search.example"><title id="dialogs.preferences.external.search.items.url.search.example.title">URL search example</title>
 		<programlisting>https://duckduckgo.com/?q=%22{target}%22+site%3A.fr+-linguee</programlisting>
 		<para>This opens a search for the {target} term on DuckDuckGo with a
 		number of search parameters.</para></example>
 		<para>Commands are opened on the command line. The
 		<guilabel>Delimiter</guilabel>defines the delimiter between command
 		parameters. The default delimiter is <code>|</code>.</para>
-		<example><title>Command example</title>
+		<example id="dialogs.preferences.external.search.items.command.example"><title id="dialogs.preferences.external.search.items.command.example.title">Command example</title>
 		<programlisting>/usr/bin/open|dict://{target}</programlisting>
 		<para>This opens the dictionary application that implements the
 		<code>dict</code> protocol on your machine looking for the
@@ -1350,7 +1350,7 @@ ${targetText}
 
 		<para>The template variables list gives you access to various project
 		data and system variables:
-		<example>
+		<example id="dialogs.preferences.saving.and.output.external.post-processing.command.example">
 		  <title id="dialogs.preferences.saving.and.output.external.post-processing.command.example.title">Simple examples of post-processing commands:</title>
 		  <variablelist>
 			<varlistentry>

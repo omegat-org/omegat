@@ -4,7 +4,7 @@
 <section id="menus.tools">
   <title id="menus.tools.title">Tools</title>
 
-	<example><title id="example.check.issues.title">Check Issues...</title>
+	<example id="example.check.issues"><title id="example.check.issues.title">Check Issues...</title>
 	<para>In this manual:
 	<keycombo><keycap>C</keycap><keycap>S</keycap><keycap>V</keycap></keycombo>
 	</para>

@@ -3,7 +3,7 @@
 "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="menus.project">
   <title id="menus.project.title">Project</title>
-      <example><title id="example.new.project.shortcut.title">New...</title>
+      <example id="example.new.project.shortcut"><title id="example.new.project.shortcut.title">New...</title>
   		<para>In this guide:
 		  <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>N</keycap></keycombo>
 		</para>

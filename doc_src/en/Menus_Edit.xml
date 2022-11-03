@@ -4,7 +4,7 @@
 <section id="menus.edit">
   <title id="menus.edit.title">Edit</title>
 
-	<example>
+	<example id="example.undo.last.action">
 	  <title id="example.undo.last.action.title">Undo Last Action</title>
 	  <para>In this guide:
 	  <keycombo><keycap>C</keycap><keycap>Z</keycap></keycombo>

@@ -305,8 +305,8 @@
 		and <literal>${extension</literal>-<emphasis>extension number}
 		</emphasis> can be used.</para>
 
-		<example>
-		  <title>Target file names</title>
+		<example id="target.name.example">
+		  <title id="target.name.example.title">Target file names</title>
 		<para>For a source file named Document.xx.docx, using
 		the variable variants below will produce the following results:</para>
 
@@ -542,8 +542,8 @@
 				  translated.</para>
 				  <para>Do not add quotation marks and separate the
 				  values with a comma.
-				  <example>
-					<title>Ignore the content part of &lt;meta name="robots"
+				  <example id="file.filters.xhtml.example">
+					<title id="file.filters.xhtml.example.title">Ignore the content part of &lt;meta name="robots"
 					content="index, follow"&gt;</title>
 					<para>To ignore this content:</para>
 					<para><code>&lt;meta name="robots" content="index,
@@ -561,8 +561,8 @@
 				  non-translatable.</para>
 				  <para>Do not add quotation marks and separate the
 				  values with a comma.
-				  <example>
-					<title>Ignore tags that contain translate=&quot;no&quot;</title>
+				  <example id="file.filters.xhtml.ignore.translate.no">
+					<title id="file.filters.xhtml.ignore.translate.no.title">Ignore tags that contain translate=&quot;no&quot;</title>
 					<para>To ignore this content:</para>
 					<para><code>&lt;span translate=&quot;no&quot;&gt;This
 					content is not translatable&lt;/span&gt;</code></para>

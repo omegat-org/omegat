@@ -4,7 +4,7 @@
 <section id="menus.goto">
   <title id="menus.goto.title">Go To</title>
 
-    <example><title id="example.next.untranslated.segment.title">Next Untranslated Segment</title>
+    <example id="example.next.untranslated.segment"><title id="example.next.untranslated.segment.title">Next Untranslated Segment</title>
   		<para>In this guide:
 		  <keycombo><keycap>C</keycap><keycap>U</keycap></keycombo>
 		</para>

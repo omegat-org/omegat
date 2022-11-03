@@ -198,7 +198,7 @@
 		
 		<para>The template variables list gives you access to various project
 		data and system variables:
-		<example>
+		<example id="dialogs.preferences.saving.and.output.external.post-processing.command.example">
 		  <title id="dialogs.preferences.saving.and.output.external.post-processing.command.example.title">Simple examples of post-processing commands:</title>
 		  <variablelist>
 			<varlistentry>

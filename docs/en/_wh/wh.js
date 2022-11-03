@@ -517,15 +517,80 @@ return this;
 })(jQuery);
 var wh = (function () {
 var toc_entries = [
-["Installing and running OmegaT","chapter.installing.and.running.html",[
-["Windows Users","chapter.installing.and.running.html#Windows.users",null],
-["Linux (Intel) Users","chapter.installing.and.running.html#Linux.Intel.users",null],
-["macOS Users","chapter.installing.and.running.html#MAC.OSX.users",null],
-["Other Systems","chapter.installing.and.running.html#other.systems",null],
-["Drag and drop","chapter.installing.and.running.html#drag.and.drop",null],
-["Using Java Web Start","chapter.installing.and.running.html#using.Java.Web.Start",null],
-["Starting OmegaT from the command\n    line","chapter.installing.and.running.html#commandline.launching",null],
-["Building OmegaT From Source","chapter.installing.and.running.html#building.OmegaT.from.source",null]
+["Introduction to OmegaT","chapter.instant.start.guide.html",[
+["Principles","chapter.instant.start.guide.html#introduction.omegat.",null],
+["Shortcuts","chapter.instant.start.guide.html#introduction.note.on.shortcuts",null],
+["Create a new project","chapter.instant.start.guide.html#introduction.create.and.open.new.project",null],
+["Manage your segments","chapter.instant.start.guide.html#introduction.manage.your.segments",null],
+["Make it look good!","chapter.instant.start.guide.html#introduction.make.it.look.good",null],
+["Translate\n    your files","chapter.instant.start.guide.html#introduction.translate.the.segments.one.by.one",null],
+["Manage your tags","chapter.instant.start.guide.html#introduction.manage.your.tags",null],
+["Review your translation","chapter.instant.start.guide.html#introduction.review.the.translation",null],
+["Create the translated files","chapter.instant.start.guide.html#introduction.generate.the.translated.file",null],
+["Manage your projects","chapter.instant.start.guide.html#introduction.one.more.thing",null]
+]],
+["How To...","how.to.html",[
+["Troubleshoot issues","how.to.html#how.to.restore.your.data",[
+["Automatic\n\tbackups","how.to.html#how.to.restore.your.data.automatic.backup",null],
+["You lost your\n\ttranslation?","how.to.html#how.to.restore.your.data.lost.in.translation",null],
+["Your project won’t open?","how.to.html#how.to.restore.your.data.project.wont.open",null],
+["Your translated file won’t open?","how.to.html#how.to.restore.your.data.translated.file.broken",null],
+["OmegaT won’t behave?","how.to.html#how.to.restore.your.data.omegat.wont.behave",null],
+["Summary","how.to.html#how.to.restore.your.data.summary",null]
+]],
+["Support other formats","how.to.html#how.to.translate.other.files",[
+["Association","how.to.html#d0e782",null],
+["Conversion","how.to.html#d0e793",null],
+["Third-party plugin","how.to.html#d0e866",null],
+["Development","how.to.html#d0e901",null]
+]],
+["Use translation memories","how.to.html#how.to.use.tm",[
+["Create your own TMs","how.to.html#how.to.use.tm.create.your.tm",null],
+["Reuse TMs","how.to.html#how.to.use.tm.reuse.tm",null],
+["Share TMs","how.to.html#how.to.tm.share.translation.memories",null],
+["Bridge two\n  languages","how.to.html#how.to.tm.bridge.two.languages",null]
+]],
+["Manage RTL Languages","how.to.html#how.to.manage.right.to.left",[
+["Mixing RTL and LTR","how.to.html#how.to.manage.right.to.left.mixing.rtl.and.ltr",null],
+["Tags in RTL Segments","how.to.html#how.to.manage.right.to.left.omegat.tags.and.rtl",null],
+["Translated Documents","how.to.html#how.to.manage.right.to.left.creating.translated.rtl.documents",null]
+]],
+["Install\n  OmegaT","how.to.html#installing.omegat",[
+["On Windows","how.to.html#installing.omegat.windows",null],
+["On Linux","how.to.html#installing.omegat.linux.intel",null],
+["On macOS","how.to.html#Installing.omegat.macos",null],
+["On other platforms","how.to.html#installing.omegat.other.systems",null],
+["Upgrade","how.to.html#update.and.delete.omegat",null],
+["Delete OmegaT","how.to.html#update.and.delete.omegat.delete",null],
+["Build OmegaT","how.to.html#build.omegat.from.source",null]
+]],
+["Run\n  OmegaT","how.to.html#running.omegat",[
+["On Windows","how.to.html#running.omegat.on.windows",null],
+["On Linux","how.to.html#running.omegat.on.linux",null],
+["On macOS","how.to.html#running.omegat.on.macos",null],
+["On other platforms","how.to.html#running.omegat.on.other.systems",null],
+["Command line launch","how.to.html#launch.with.command.line",null]
+]],
+["Set up a team\n  project","how.to.html#how.to.setup.team.project",[
+["Preparations","how.to.html#how.to.setup.team.project.prepare.the.repository",null],
+["Repository mappings","how.to.html#how.to.setup.team.project.mapping.parameters",null],
+["Example\n\tmappings","how.to.html#how.to.setup.team.project.example.mappings",null],
+["Selective sharing","how.to.html#how.to.setup.team.project.selective.sharing",null]
+]],
+["Use a Team Project","how.to.html#how.to.use.team.project",null]
+]],
+["Panes","panes.html",[
+["Principles","panes.html#panes.principles",null],
+["Editor","panes.html#panes.editor",null],
+["Fuzzy Matches","panes.html#panes.fuzzy.matches",null],
+["Glossary","panes.html#panes.glossary",null],
+["Dictionary","panes.html#panes.dictionary",null],
+["Machine Translation","panes.html#panes.machinetranslation",null],
+["Multiple Translations","panes.html#panes.multipletranslations",null],
+["Notes","panes.html#panes.notes",null],
+["Comments","panes.html#panes.comments",null],
+["Segment properties","panes.html#panes.segment.properties",null],
+["Status bar","panes.html#panes.statusbar",null]
 ]],
 ["Menus","menus.html",[
 ["Project","menus.html#menus.project",null],
@@ -536,70 +601,111 @@ var toc_entries = [
 ["Options","menus.html#menus.options",null],
 ["Help","menus.html#menus.help",null]
 ]],
-["Windows and dialogs","windows.and.dialogs.html",[
-["Project Properties","windows.and.dialogs.html#dialogs.projectproperties",null],
-["Project Files","windows.and.dialogs.html#windows.projectfiles",null],
-["Text Search","windows.and.dialogs.html#windows.textsearch",null],
-["Text Replace","windows.and.dialogs.html#windows.textreplace",null],
-["Aligner","windows.and.dialogs.html#windows.aligner",null],
-["Scripts","windows.and.dialogs.html#windows.scripts",null],
-["General Preferences","windows.and.dialogs.html#dialogs.preferences",null]
+["Windows and Dialogs","windows.and.dialogs.html",[
+["Project Properties","windows.and.dialogs.html#dialogs.project.properties",[
+["Languages","windows.and.dialogs.html#dialogs.project.properties.languages",null],
+["Options","windows.and.dialogs.html#dialogs.project.properties.options",null],
+["File locations","windows.and.dialogs.html#dialogs.project.properties.file.locations",null]
 ]],
-["Panes","panes.html",[
-["Editor","panes.html#panes.editor",null],
-["Fuzzy Matches","panes.html#panes.fuzzymatches",null],
-["Glossary","panes.html#panes.glossary",null],
-["Dictionary","panes.html#panes.dictionary",null],
-["Machine Translation","panes.html#panes.machinetranslation",null],
-["Multiple Translations","panes.html#panes.multipletranslations",null],
-["Notes","panes.html#panes.notes",null],
-["Comments","panes.html#panes.comments",null],
-["Status bar","panes.html#panes.statusbar",null]
+["Source Files","windows.and.dialogs.html#windows.source.files.list",null],
+["Text Search","windows.and.dialogs.html#windows.text.search",[
+["Search type","windows.and.dialogs.html#windows.text.search.methods",null],
+["Options","windows.and.dialogs.html#windows.text.search.options",null],
+["Results display","windows.and.dialogs.html#windows.text.search.result.display",null],
+["Filter","windows.and.dialogs.html#windows.text.search.filter",null]
 ]],
-["Project folder","project.folder.html",[
-["source","project.folder.html#projectfolder.source",null],
-["target","project.folder.html#projectfolder.target",null],
-["tm","project.folder.html#projectfolder.tm",null],
-["dictionary","project.folder.html#projectfolder.dictionary",null],
-["glossary","project.folder.html#projectfolder.glossary",null],
-["omegat","project.folder.html#projectfolder.omegat",null],
-["omegat.project (file)","project.folder.html#projectfolder.omegat.project",null],
-[".repositories","project.folder.html#projectfolder.repositories",null]
+["Text Replace","windows.and.dialogs.html#windows.text.replace",[
+["Search type","windows.and.dialogs.html#windows.text.replace.methods",null],
+["Options","windows.and.dialogs.html#windows.text.replace.options",null],
+["Results display","windows.and.dialogs.html#windows.text.replace.result.display",null]
 ]],
-["How To...","howtos.html",[
-["Set up a Team Project","howtos.html#howto.setupteamproject",null],
-["Use a Team Project","howtos.html#howto.useteamproject",null],
-["Reuse Translation Memories","howtos.html#howto.reusetm",null],
-["Prevent data loss","howtos.html#howto.preventdataloss",null],
-["Translate a PDF file","howtos.html#howto.translatepdf",null],
-["Manage Right-To-Left languages","howtos.html#howto.managerighttoleft",null]
+["Align Files","windows.and.dialogs.html#windows.aligner",[
+["Settings","windows.and.dialogs.html#windows.aligner.adjust",null],
+["Corrections","windows.and.dialogs.html#windows.aligner.manual.corrections",null]
 ]],
-["Appendices","appendix.dictionaries.html",[
-["A. Dictionaries","appendix.dictionaries.html",null],
-["B. Glossaries","appendix.glossaries.html",[
-["Default glossary","appendix.glossaries.html#glossaries.defaultglossary",null],
-["Usage","appendix.glossaries.html#glossaries.usage",null],
-["File format","appendix.glossaries.html#glossaries.fileformat",null],
-["Common glossary problems","appendix.glossaries.html#glossaries.commonproblems",null]
-]],
-["C. Spell checker","appendix.spellchecker.html",[
-["Installing spelling dictionaries","appendix.spellchecker.html#spellchecker.installingdictionaries",null],
-["Using spelling dictionaries","appendix.spellchecker.html#spellchecker.usingdictionaries",null],
-["Hints","appendix.spellchecker.html#spellchecker.hints",null]
-]],
-["D. Regular expressions","appendix.regexp.html",[
-["Regex tools and examples of use","appendix.regexp.html#regex.tools.and.examples.of.use",null]
-]],
-["E. Shortcuts customization","appendix.shortcut.custom.html",[
-["Shortcuts customization","appendix.shortcut.custom.html#ch04.shortcuts.customization",null],
-["Project Menu","appendix.shortcut.custom.html#ch04.shortcuts.ProjectMenu",null],
-["Edit Menu","appendix.shortcut.custom.html#ch04.shortcuts.EditMenu",null],
-["GoTo Menu","appendix.shortcut.custom.html#ch04.shortcuts.GoToMenu",null],
-["View Menu","appendix.shortcut.custom.html#ch04.shortcuts.ViewMenu",null],
-["Tools Menu","appendix.shortcut.custom.html#ch04.shortcuts.ToolsMenu",null],
-["Options Menu","appendix.shortcut.custom.html#ch04.shortcuts.OptionsMenu",null],
-["Help Menu","appendix.shortcut.custom.html#ch04.shortcuts.HelpMenu",null]
+["Scripting","windows.and.dialogs.html#windows.scripts",[
+["The script folder","windows.and.dialogs.html#windows.scripts.folder",null],
+["Usage","windows.and.dialogs.html#windows.scripts.usage",null],
+["Distributed scripts","windows.and.dialogs.html#windows.scripts.distribution",null],
+["Languages","windows.and.dialogs.html#windows.scripts.languages",null]
 ]]
+]],
+["Project Folder","project.folder.html",[
+["source","project.folder.html#project.folder.source",null],
+["target","project.folder.html#project.folder.target",null],
+["tm","project.folder.html#project.folder.tm",null],
+["exported tms folder","project.folder.html#project.folder.exported.tm",null],
+["dictionary","project.folder.html#project.folder.dictionary",null],
+["glossary","project.folder.html#project.folder.glossary",null],
+["omegat","project.folder.html#project.folder.omegat.folder",null],
+["omegat.project","project.folder.html#project.folder.omegat.project",null],
+[".repositories","project.folder.html#project.folder.repositories",null]
+]],
+["Preferences","dialogs.preferences.html",[
+["General","dialogs.preferences.html#dialogs.preferences.general",null],
+["Machine Translation","dialogs.preferences.html#dialogs.preferences.mt",null],
+["Glossary","dialogs.preferences.html#dialogs.preferences.glossary",null],
+["Dictionary","dialogs.preferences.html#dialogs.preferences.dictionary",null],
+["Appearance","dialogs.preferences.html#dialogs.preferences.appearance",[
+["Font","dialogs.preferences.html#dialogs.preferences.fonts",null],
+["Colors","dialogs.preferences.html#dialogs.preferences.colours",null]
+]],
+["Global File Filters","dialogs.preferences.html#dialogs.preferences.file.filters",null],
+["Global Segmentation Rules","dialogs.preferences.html#dialogs.preferences.segmentation.setup",[
+["Language\n\tsets","dialogs.preferences.html#dialogs.preferences.segmentation.setup.scope",null],
+["Set contents","dialogs.preferences.html#segmentation.rules",null]
+]],
+["Auto-Completion","dialogs.preferences.html#dialog.preferences.auto.completion",null],
+["Spellchecker","dialogs.preferences.html#dialog.preferences.spellchecker",null],
+["LanguageTool","dialogs.preferences.html#dialog.preferences.languagetool.plugin",null],
+["Global External\n  Searches","dialogs.preferences.html#dialogs.preferences.external.searches",null],
+["Editor","dialogs.preferences.html#dialogs.preferences.editor",null],
+["Tag Processing","dialogs.preferences.html#dialogs.preferences.tag.processing",null],
+["Team","dialogs.preferences.html#dialog.preferences.team",null],
+["TM Matches","dialogs.preferences.html#dialog.preferences.tm.matches",null],
+["View","dialogs.preferences.html#dialog.preferences.view",null],
+["Saving and\n  Output","dialogs.preferences.html#dialogs.preferences.saving.and.output",null],
+["Proxy Login","dialogs.preferences.html#dialogs.preferences.proxy.login",null],
+["Secure store","dialogs.preferences.html#dialogs.preferences.secure.store",null],
+["Plugins","dialogs.preferences.html#dialogs.preferences.plugins",null],
+["Updates","dialogs.preferences.html#dialogs.preferences.updates",null]
+]],
+["Appendices","appendices.html",[
+["File Filters","appendices.html#file.filters",[
+["Common preferences","appendices.html#file.filters.general",null],
+["Edit","appendices.html#edit.filter.dialog",null],
+["Options","appendices.html#filters.options",null]
+]],
+["Segmentation","appendices.html#app.segmentation",[
+["Paragraph or\n\tsentence?","appendices.html#dialog.preferences.segmentation.setup.type",null],
+["Global or\n\tlocal?","appendices.html#dialog.preferences.segmentation.setup.scope",null],
+["Rules","appendices.html#dialog.preferences.segmentation.setup.rules.based.segmentation",null]
+]],
+["Regular expressions","appendices.html#app.regex",[
+["The 4 rules","appendices.html#app.regex.four.rules",null],
+["The 12 characters","appendices.html#app.regex.twelve.characters",null],
+["Lots of\n    expressions","appendices.html#app.regex.types.of.expressions",null],
+["More examples","appendices.html#app.regex.more.examples",null],
+["References","appendices.html#app.regex.tools",null]
+]],
+["Glossaries","appendices.html#app.glossaries",[
+["The glossaries folder","appendices.html#glossaries.glossary.folder",null],
+["Project glossary","appendices.html#glossaries.default.glossary",null],
+["File format","appendices.html#glossaries.fileformat",null]
+]],
+["OmegaT Shortcuts","appendices.html#app.shortcuts",[
+["Description","appendices.html#app.shortcuts.description",null],
+["A shortcut based workflow","appendices.html#app.shortcuts.streamline.workflow",null],
+["Customization","appendices.html#app.shortcuts.customization",null],
+["Syntax","appendices.html#app.shortcuts.syntax",null],
+["Lists of functions and codes","appendices.html#app.shortcuts.lists",null]
+]],
+["Configuration Folder","appendices.html#configuration.folder",[
+["Location","appendices.html#configuration.folder.location",null],
+["Default  contents","appendices.html#configuration.folder.default.contents",null],
+["Additional contents","appendices.html#configuration.folder.extra.contents",null]
+]],
+["Application Folder","appendices.html#application.folder",null]
 ]]];
 var toc_initiallyCollapsed = false;
 var messages = [
@@ -874,7 +980,7 @@ message = translation[index];
 }
 return message;
 }
-var storageId = "1tytviwahngux-1jqfcozveqxsb";
+var storageId = "-1c10h5bbb5cdz-194t8dcbsy0ne";
 function storageSet(key, value) {
 window.sessionStorage.setItem(key + storageId, String(value));
 }

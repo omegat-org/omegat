@@ -4,7 +4,7 @@
 [<!ENTITY % manualvariables SYSTEM "manualvariables.mod"> %manualvariables;]>
 <book lang="en" id="book.user.guide">
   <bookinfo>
-    <title id="book.user.guide.title">OmegaT &vernb; - User Guide <emphasis role="bold">DRAFT</emphasis></title>
+    <title id="book.user.guide.title">OmegaT &vernb; - User Guide</title>
     <pubdate>@timestamp@</pubdate>
 	<!-- TODO automate date insertion -->
     <abstract>

@@ -902,7 +902,7 @@ tasks.findAll { it.name =~ /^spotbugs.*/ }.each {
 }
 
 checkstyle {
-    toolVersion = '8.29'
+    toolVersion = '8.45.1'
 }
 checkstyleMain.exclude '**/gen/**'
 

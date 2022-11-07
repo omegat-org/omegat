@@ -351,7 +351,7 @@
 				  <emphasis>&lt;path-to-omegat-project-file&gt;</emphasis></term>
 				  <listitem>
 					<para>Download the OmegaT project from the
-					specified URL specified in
+					URL specified in
 					<emphasis>&lt;path-to-omegat-project-file&gt;</emphasis>,
 					and load it.</para>
 				  </listitem>

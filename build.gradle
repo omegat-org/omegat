@@ -175,7 +175,7 @@ dependencies {
         // For gpg signing
         implementation 'org.eclipse.jgit:org.eclipse.jgit.gpg.bc:5.11.1.202105131744-r'
         // For subversion
-        implementation 'org.tmatesoft.svnkit:svnkit:1.8.14'
+        implementation 'org.tmatesoft.svnkit:svnkit:1.10.9'
 
         // Team project conflict resolution
         implementation 'org.madlonkay:supertmxmerge:2.0.3'
@@ -902,7 +902,7 @@ tasks.findAll { it.name =~ /^spotbugs.*/ }.each {
 }
 
 checkstyle {
-    toolVersion = '8.8'
+    toolVersion = '8.45.1'
 }
 checkstyleMain.exclude '**/gen/**'
 

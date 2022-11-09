@@ -53,6 +53,11 @@
         <property name="onCommentFormat" value="// End of variables declaration//GEN-END:variables"/>
     </module>
 
+    <module name="LineLength">
+        <property name="max" value="120"/>
+        <property name="ignorePattern" value="^ *\* *[^ ]+$"/>
+    </module>
+
     <!-- Support default CHECKSTYLE:ON/OFF comments -->
     <module name="SuppressWithPlainTextCommentFilter"/>
 
@@ -134,10 +139,7 @@
 
         <!-- Checks for Size Violations.                    -->
         <!-- See http://checkstyle.sf.net/config_sizes.html -->
-        <module name="LineLength">
-            <property name="max" value="120"/>
-            <property name="ignorePattern" value="^ *\* *[^ ]+$"/>
-        </module>
+
         <module name="MethodLength"/>
         <module name="ParameterNumber"/>
 

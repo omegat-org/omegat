@@ -71,13 +71,13 @@
 	<varlistentry id="windows.source.files.list.copy.files"><term
 	id="windows.source.files.list.copy.files.title">Add Files...</term>
 	<listitem><para>Copies the selected files to the <link
-  linkend="project.folder.source.title" endterm="project.folder.source.title"/>
+  linkend="project.folder.source" endterm="project.folder.source.title"/>
   folder and reloads the project to take the new files into account.</para></listitem>
 	</varlistentry>
 	<varlistentry id="windows.source.files.list.download.page"><term
 	id="windows.source.files.list.download.page.title">Add Online MediaWiki Page...</term>
 	<listitem><para>Asks for the page URL and downloads it into the <link
-  linkend="project.folder.source.title" endterm="project.folder.source.title"/> folder.</para></listitem>
+  linkend="project.folder.source" endterm="project.folder.source.title"/> folder.</para></listitem>
 	</varlistentry>
   </variablelist>
   The two actions are equivalent to using the <link linkend="menus.project" endterm="menus.project.title"/> menu commands <link linkend="menus.project.copy.files.to.source.folder" endterm="menus.project.copy.files.to.source.folder.title"/> and <link linkend="menus.project.download.mediawiki.page" endterm="menus.project.download.mediawiki.page.title"/>.

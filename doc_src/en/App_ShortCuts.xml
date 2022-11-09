@@ -23,8 +23,8 @@
     (Windows, macOS, and Linux being the most mainstream). The modifier keys
     that form the shortcuts vary slightly depending between platforms. To make
     reading easier we have adopted the following convention for modifier keys:
-    <table id="shortcut.description">
-      <title id="shortcut.description.title">Modifier key identifiers</title>
+    <table id="app.shortcut.description">
+      <title id="app.shortcut.description.title">Modifier key identifiers</title>
 
       <tgroup cols="3">
         <thead>

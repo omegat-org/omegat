@@ -125,79 +125,80 @@
     their file extension:</para>
 
     <table id="glossary.extensions">
-      <caption>Format, extensions and expected encoding</caption>
-
+      <title>Format, extensions and expected encoding</title>
+	  <tgroup cols="3">
       <thead>
-        <tr>
-          <td>Format</td>
+        <row>
+          <entry>Format</entry>
 
-          <td>Extension</td>
+          <entry>Extension</entry>
 
-          <td>Encoding</td>
-        </tr>
+          <entry>Encoding</entry>
+        </row>
       </thead>
 
       <tbody>
-        <tr>
-          <td>TSV</td>
+        <row>
+          <entry>TSV</entry>
 
-          <td>
+          <entry>
             <filename>.txt</filename>
-          </td>
+          </entry>
 
-          <td>UTF-8</td>
-        </tr>
+          <entry>UTF-8</entry>
+        </row>
 
-        <tr>
-          <td>TSV</td>
+        <row>
+          <entry>TSV</entry>
 
-          <td>
+          <entry>
             <filename>.utf8</filename>
-          </td>
+          </entry>
 
-          <td>UTF-8</td>
-        </tr>
+          <entry>UTF-8</entry>
+        </row>
 
-        <tr>
-          <td>TSV</td>
+        <row>
+          <entry>TSV</entry>
 
-          <td>
+          <entry>
             <filename>.tab</filename>
-          </td>
+          </entry>
 
-          <td>OS default encoding</td>
-        </tr>
+          <entry>OS default encoding</entry>
+        </row>
 
-        <tr>
-          <td>TSV</td>
+        <row>
+          <entry>TSV</entry>
 
-          <td>
+          <entry>
             <filename>.tsv</filename>
-          </td>
+          </entry>
 
-          <td>OS default encoding</td>
-        </tr>
+          <entry>OS default encoding</entry>
+        </row>
 
-        <tr>
-          <td>CSV</td>
+        <row>
+          <entry>CSV</entry>
 
-          <td>
+          <entry>
             <filename>.csv</filename>
-          </td>
+          </entry>
 
-          <td>UTF-8</td>
-        </tr>
+          <entry>UTF-8</entry>
+        </row>
 
-        <tr>
-          <td>TBX</td>
+        <row>
+          <entry>TBX</entry>
 
-          <td>
+          <entry>
             <filename>.tbx</filename>
-          </td>
+          </entry>
 
-          <td>UTF-8</td>
-        </tr>
+          <entry>UTF-8</entry>
+        </row>
       </tbody>
+      </tgroup>
     </table>
   </section>
 </section>

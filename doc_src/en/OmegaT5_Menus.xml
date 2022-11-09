@@ -6,8 +6,48 @@
   <para>Menus are where you access most of OmegaT's functions. Most of the menu items are associated with a keyboard shortcut.</para>
   <para>Menu items that do not have a shortcut indicated next to them have no default shortcut assigned by default. See <link linkend="app.shortcuts.customization" endterm="app.shortcuts.customization.title"/> if you want to modify or add shortcuts.</para>
 
-  <note><para>Key shortcut description reminder: <link
-  linkend="app.shortcuts" endterm="shortcut.description"/></para></note>
+  <note><para>Key shortcut description reminder:
+    <table id="menus.shortcut.description">
+      <title id="menus.shortcut.description.title">Modifier key identifiers</title>
+
+      <tgroup cols="3">
+        <thead>
+          <row>
+            <entry>Linux/Windows</entry>
+            <entry>Key identifier</entry>
+            <entry>macOS</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry><keycap>Shift</keycap></entry>
+            <entry><keycap>S</keycap></entry>
+            <entry><keycap>shift</keycap> or <keycap>⇧</keycap></entry>
+          </row>
+
+          <row>
+            <entry><keycap>Ctrl</keycap> or <keycap>Control</keycap></entry>
+            <entry><keycap>C</keycap></entry>
+            <entry><keycap>command</keycap> or <keycap>⌘</keycap></entry>
+          </row>
+
+          <row>
+            <entry><keycap>Alt</keycap></entry>
+            <entry><keycap>A</keycap></entry>
+            <entry><keycap>alt / option</keycap> or
+            <keycap>⌥</keycap></entry>
+          </row>
+
+          <row>
+            <entry/>
+            <entry><keycap>Ctrl</keycap></entry>
+            <entry><keycap>control</keycap> or <keycap>⌃</keycap></entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table></para>
+  </note>
 
   <xi:include href="Menus_Project.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>

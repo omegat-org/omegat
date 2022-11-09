@@ -105,8 +105,8 @@
 
 	<para>You can limit the segmentation rules used by the project to that
 	project by either setting local rules with <link
-	linkend="dialogs.project.properties.segmentation"
-	endterm="dialogs.project.properties.segmentation.title"/>, in <link
+	linkend="dialogs.project.properties.local.segmentation"
+	endterm="dialogs.project.properties.local.segmentation.title"/>, in <link
 	linkend="dialogs.project.properties"
 	endterm="dialogs.project.properties.title"/>, or by starting OmegaT from
 	the command line. See <link linkend="launch.with.command.line"

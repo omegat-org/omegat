@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd"
 [<!ENTITY % manualvariables SYSTEM "manualvariables.mod"> %manualvariables;]>
 
@@ -804,8 +804,7 @@
 			endterm="configuration.folder.default.contents.script.target.title"/>,</para>
 		  </listitem>
 		</itemizedlist>
-		both located in the <link linkend="windows.scripts.title"
-		endterm="windows.scripts.title"/> folder.
+		both located in the <link linkend="windows.scripts.folder">scripting folder</link>.
 		</para>
 	
 		<para>The files is are overwritten when OmegaT enters a new
@@ -819,7 +818,7 @@
 			  endterm="windows.scripts.title"/>.</para>
 
 		<note><para>This function has
-		no relation to the <link linkend="windows.scripts.title"
+		no relation to the <link linkend="windows.scripts"
 		endterm="windows.scripts.title"/> function.</para></note>
 
 	  </listitem>

@@ -187,10 +187,10 @@
     <para>The <link linkend="windows.source.files.list"
     endterm="windows.source.files.list.title"/> dialog opens next.</para>
 
-	<para>Click on <guibutton><link linkend="windows.source.files.list.copy.files"
-	endterm="windows.source.files.list.copy.files.title"/></guibutton> or <guibutton><link
+	<para>Click on <link linkend="windows.source.files.list.copy.files"
+	endterm="windows.source.files.list.copy.files.title"/> or <link
 	linkend="windows.source.files.list.download.page"
-	endterm="windows.source.files.list.download.page.title"/></guibutton> and add source
+	endterm="windows.source.files.list.download.page.title"/> and add source
 	files.</para>
 
 	<para>If you don’t remember where your project is, you can use <link

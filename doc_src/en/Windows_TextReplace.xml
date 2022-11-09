@@ -131,7 +131,6 @@
 	<varlistentry><term>Space matches nbsp</term><listitem><para>Space characters in search terms will match both a normal space and a non-breaking space (\u00A) character.</para></listitem></varlistentry>
 
 	<varlistentry><term>Untranslated</term><listitem><para>Also  search in untranslated segments.</para></listitem></varlistentry>
-  </variablelist>
  
   <varlistentry>
     <term><guibutton>Show Advanced Options</guibutton></term>
@@ -151,6 +150,7 @@
 	Hide the advanced options with <guibutton>Hide Advanced Options</guibutton></para>
 	</listitem>
   </varlistentry>
+  </variablelist>
   </section>
 
   <section id="windows.text.replace.result.display">

@@ -55,9 +55,9 @@
 		  endterm="menus.options.segmentation.title"/> in the <link
 		  linkend="menus.options" endterm="menus.options.title"/> menu.</para>
 		  
-		  <para>Click <guibutton><link
-		  linkend="dialogs.project.properties.segmentation"
-		  endterm="dialogs.project.properties.segmentation.title"/></guibutton>
+		  <para>Click <link
+		  linkend="dialogs.project.properties.local.segmentation"
+		  endterm="dialogs.project.properties.local.segmentation.title"/>
 		  if you want to use project specific segmentation rules (local
 		  rules) and not global rules, or start OmegaT from the command
 		  line. See <link linkend="launch.with.command.line"
@@ -89,9 +89,9 @@
         </listitem>
       </varlistentry>
 
-      <varlistentry id="dialogs.project.properties.segmentation">
+      <varlistentry id="dialogs.project.properties.local.segmentation">
         <term
-			id="dialogs.project.properties.segmentation.title">Local Segmentation Rules...</term>
+			id="dialogs.project.properties.local.segmentation.title">Local Segmentation Rules...</term>
         <listitem>
 		  <para>By default, segmentation rules are global and apply to all
 		  projects.</para>
@@ -197,30 +197,7 @@
 		specified here are only available to this project. They are saved in <link linkend="project.folder.omegat.project.file" endterm="project.folder.omegat.project.file.title"/>. Only enable local post-processing commands if you trust the source of that file.</para>
 		
 		<para>The template variables list gives you access to various project
-		data and system variables:
-		<example id="dialogs.preferences.saving.and.output.external.post-processing.command.example">
-		  <title id="dialogs.preferences.saving.and.output.external.post-processing.command.example.title">Simple examples of post-processing commands:</title>
-		  <variablelist>
-			<varlistentry>
-			  <term>Open the target folder in Linux</term>
-			  <listitem>
-				<programlisting>xdg-open ${targetRoot}</programlisting>
-			  </listitem>
-			</varlistentry>
-			<varlistentry>
-			  <term>Open the target folder in macOS</term>
-			  <listitem>
-				<programlisting>open ${targetRoot}</programlisting>
-			  </listitem>
-			</varlistentry>
-			<varlistentry>
-			  <term>Open the target folder in Windows Powershell</term>
-			  <listitem>
-				<programlisting>Invoke-Item ${targetRoot}</programlisting>
-			  </listitem>
-			</varlistentry>
-		  </variablelist>
-		</example>
+		data and system variables. See <link linkend="dialogs.preferences.saving.and.output.external.post-processing.command.example" endterm="dialogs.preferences.saving.and.output.external.post-processing.command.example.title"> for details.</link>
 		</para>
 
 		<para>You can also define global post-processing commands

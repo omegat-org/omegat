@@ -415,28 +415,28 @@
 				<varlistentry id="launch.with.command.line.config.file.">
 				  <term id="launch.with.command.line.config.file.title">--config-file=<emphasis>&lt;path&gt;</emphasis></term>
 				  <listitem>
-					<para>A file written in the Java .properties format used to
-					specify a batch of command line options.</para>
+					<para>A file written in the Java .properties
+					format used to specify a batch of command line
+					options.</para>
 					<para>The options are presented as a list of
-					<parameter>key=value</parameter> pairs. Both Java parameters and
-					OmegaT options can be used.</para>
-					<para>
-						Remove the initial <code>-D</code> or <code>-X</code> to use Java
-						parameters.</para>
-						<para>
-						A simple example:
-						<programlisting>user.language=fr
-config-dir="path/to/new/configdir"</programlisting>
-						Almost all parameters presented in this function can be used in a
-						config file. The notable exception is <code>remote-project</code>.
-					</para>
-						<warning>
-							<para>It is possible to combine <code>--config-file</code> with
-							other command line options compatible with launching the GUI. In
-							such cases, options defined in the config file take precedence
-							over any option with duplicate functionality also passed on the
-							command line.</para>
-						</warning>					
+					<parameter>key=value</parameter> pairs. Both Java
+					parameters and OmegaT options can be used.</para>
+					<note>
+					  <para>Remove the initial <code>-D</code> or
+					  <code>-X</code> to use Java parameters:</para>
+					  <programlisting>user.language=fr
+					  config-dir="path/to/new/configdir"</programlisting>
+					</note>
+					<para>Almost all parameters presented in this
+					function can be used in a config file. The notable
+					exception is <code>remote-project</code>.</para>
+					<para>It is possible to combine
+					<code>--config-file</code> with other command line
+					options compatible with launching the GUI. In such
+					cases, options defined in the config file take
+					precedence over any option with duplicate
+					functionality also passed on the command
+					line.</para>
 				  </listitem>
 				</varlistentry>
 				<varlistentry id="launch.with.command.line.resource.bundle.">
@@ -577,8 +577,8 @@ config-dir="path/to/new/configdir"</programlisting>
 							  </listitem>
 							</varlistentry>
 						  </variablelist>
-						<para>The data is the same as when using <link linkend="menus.tools.statistics" endterm="menus.tools.statistics.title"/>.
-						</para>
+						  <para>The data is the same as when using <link linkend="menus.tools.statistics" endterm="menus.tools.statistics.title"/>.
+						  </para>
 						</listitem>
 					  </varlistentry>
 					</variablelist>												

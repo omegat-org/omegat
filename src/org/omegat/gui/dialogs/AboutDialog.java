@@ -138,7 +138,7 @@ public class AboutDialog extends JDialog {
     }
 
     private int getMB(long bytes) {
-        return (int)(bytes << 20);
+        return (int)(bytes >> 20);
     }
 
     /** @return the return status of this dialog - one of RET_OK or RET_CANCEL */

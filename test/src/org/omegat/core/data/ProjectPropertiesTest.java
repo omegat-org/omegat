@@ -31,7 +31,9 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 import org.junit.Test;
 
@@ -158,5 +160,53 @@ public class ProjectPropertiesTest {
         repositoryDefinition.setUrl("https://example.com/example.git");
         p.setRepositories(Collections.singletonList(repositoryDefinition));
         assertFalse(p.isTeamProject());
+    }
+
+    @Test
+    public void testSetExportTMLevelsAll() {
+        ProjectProperties p = new ProjectProperties();
+        p.setExportTmLevels(true, true, true);
+        assertEquals("omegat", p.getExportTmLevels().get(0));
+        assertEquals("level1", p.getExportTmLevels().get(1));
+        assertEquals("level2", p.getExportTmLevels().get(2));
+    }
+
+    @Test
+    public void testSetExportTMLevelsOmt() {
+        ProjectProperties p = new ProjectProperties();
+        p.setExportTmLevels(true, false, false);
+        assertEquals(1, p.getExportTmLevels().size());
+        assertEquals("omegat", p.getExportTmLevels().get(0));
+    }
+
+    @Test
+    public void testSetExportTMLevelsList1() {
+        ProjectProperties p = new ProjectProperties();
+        List<String> exportLevels = new ArrayList<>();
+        exportLevels.add("omegat");
+        p.setExportTmLevels(exportLevels);
+        assertEquals(1, p.getExportTmLevels().size());
+        assertEquals("omegat", p.getExportTmLevels().get(0));
+    }
+
+    @Test
+    public void testSetExportTMLevelsList2() {
+        ProjectProperties p = new ProjectProperties();
+        List<String> exportLevels = new ArrayList<>();
+        exportLevels.add("level2");
+        exportLevels.add("omegat");
+        p.setExportTmLevels(exportLevels);
+        assertEquals(2, p.getExportTmLevels().size());
+        assertEquals("omegat", p.getExportTmLevels().get(0));
+        assertEquals("level2", p.getExportTmLevels().get(1));
+    }
+
+    @Test
+    public void testSetExportTMLevelsListWrongValue() {
+        ProjectProperties p = new ProjectProperties();
+        List<String> exportLevels = new ArrayList<>();
+        exportLevels.add("foo");
+        p.setExportTmLevels(exportLevels);
+        assertEquals(0, p.getExportTmLevels().size());
     }
 }

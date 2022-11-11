@@ -388,7 +388,7 @@ public class ProjectProperties {
      * OmegaT, Level 1 and Level 2
      */
     public void setExportTmLevels(boolean omT, boolean level1, boolean level2) {
-        List<String> exportTmLevels = new ArrayList<String>();
+        List<String> exportTmLevels = new ArrayList<>();
         if (omT) exportTmLevels.add("omegat");
         if (level1) exportTmLevels.add("level1");
         if (level2) exportTmLevels.add("level2");
@@ -400,7 +400,23 @@ public class ProjectProperties {
      * Accepts list of levels
      */
     public void setExportTmLevels(List<String> levels) {
-        this.exportTmLevels = levels;
+        boolean omegat = false;
+        boolean level1 = false;
+        boolean level2 = false;
+        for (String level: levels) {
+            if ("omegat".equalsIgnoreCase(level)) {
+                omegat = true;
+                continue;
+            }
+            if ("level1".equalsIgnoreCase(level)) {
+                level1 = true;
+                continue;
+            }
+            if ("level2".equalsIgnoreCase(level)) {
+                level2 = true;
+            }
+        }
+        this.setExportTmLevels(omegat, level1, level2);
     }
 
     public List<String> getExportTmLevels() {

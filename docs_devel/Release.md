@@ -91,46 +91,14 @@ Only if a Standard release:
 5. Click Save
 
 
-## 10. Build WebStart dist locally, publish
-
-The Java WebStart dist can only be built with Java 11+.
-
-Make sure `jwsCodebase` is set correctly e.g. in `local.properties` or on the
-command line:
-
-- Latest: `https://omegat.sourceforge.io/webstart-dev/`
-- Standard: `https://omegat.sourceforge.io/webstart/`
-
-If you have SourceForge Web credentials set up (see `local.properties.example`),
-you can just do:
-
-```sh
-./gradlew publishWebstartDev -PjwsCodebase=https://omegat.sourceforge.io/webstart-dev/
-```
-
-or
-
-```sh
-./gradlew publishWebstart -PjwsCodebase=https://omegat.sourceforge.io/webstart/
-```
-
-Otherwise do
-
-```sh
-./gradlew installWebstartDist
-```
-
-and publish the contents to SourceForge Web manually.
-
-
-## 11. Publish the manual and Javadoc
+## 10. Publish the manual and Javadoc
 
 ```sh
 ./gradlew publishManual publishJavadoc
 ```
 
 
-## 12. Publish to Maven Central
+## 11. Publish to Maven Central
 
 ```sh
 ./gradlew publish
@@ -140,7 +108,7 @@ Then log onto [Sonatype Nexus](https://s01.oss.sonatype.org/) and publish the
 release.
 
 
-## 13. Announce to News, user group
+## 12. Announce to News, user group
 
 - [OmegaT News](https://sourceforge.net/p/omegat/news/)
   - [Example](https://sourceforge.net/p/omegat/news/2019/11/omegat-latest-version-510-released/)
@@ -148,7 +116,7 @@ release.
   - [Example](https://sourceforge.net/p/omegat/mailman/omegat-users/thread/CAHvKJZsm4ZSOmvCOpfbtss0z9uo0z7q--bDowRkyAQ5e2zNJJg%40.../#msg36855627)
 
 
-## 14. Cleanup
+## 13. Cleanup
 
 - Bump version in `Version.properties`, `changes.txt`
 - Set fixed bug tickets and implemented RFEs to `closed-fixed`
@@ -157,7 +125,7 @@ release.
 Note: Don't "clean up" old releases by moving them out of the way. It's
 important that distfile URLs remain stable.
 
-## 15. Push new version for version check
+## 14. Push new version for version check
 
 If no catastrophic problems are reported with the new version, once the
 [website](https://github.com/omegat-org/omegat-website/) has been updated, bump

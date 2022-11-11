@@ -1289,7 +1289,7 @@ ${targetText}
 	<varlistentry id="dialog.preferences.view.modification.info.template">
 	  <term id="dialog.preferences.view.modification.info.template.title">Standard template</term>
 	  <listitem>
-		<para>You can adapt the "standard template" to your needs with the template variables.</para>
+		<para>Use the template variables to adapt this template to your needs.</para>
 	  </listitem>
 	</varlistentry>
 
@@ -1298,7 +1298,7 @@ ${targetText}
 	  id="dialog.preferences.view.modification.info.template.for.segments.without.date.title">Template
 	  for segments without date</term>
 	  <listitem>
-		<para>You can adapt the "template for segments without date" to your needs with the template variables.</para>
+		<para>Use the template variables to adapt this template to your needs.</para>
 	  </listitem>
 	</varlistentry>
   </variablelist>

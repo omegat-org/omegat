@@ -437,6 +437,9 @@ public class ProjectProperties {
     }
 
     public boolean isTeamProject() {
+        if (repositories == null) {
+            return false;
+        }
         for (RepositoryDefinition repositoryDefinition: repositories) {
             for (RepositoryMapping repositoryMapping: repositoryDefinition.getMapping()) {
                 if ("".equals(repositoryMapping.getLocal()) || "/".equals(repositoryMapping.getLocal())) {

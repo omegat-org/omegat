@@ -42,7 +42,7 @@ public final class GitRemoteRepository2IT extends AbstractRemoteRepository2IT {
         Git git = Git.init().setDirectory(tempRepoDir.toFile()).call();
         String originalFile = createFile(tempRepoDir.toFile());
         git.add().addFilepattern(originalFile).call();
-        git.commit().setMessage("init").setAuthor("OmegaT unit test", "test@test.nl").call();
+        git.commit().setMessage("init").setAuthor("OmegaT unit test", "test@test.nl").setSign(false).call();
     }
 
     @Override

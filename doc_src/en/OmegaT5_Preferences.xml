@@ -826,7 +826,7 @@
 
 	<varlistentry id="dialogs.preferences.editor.go.to.next.untranslated.segment.stops.where.there.is.at.least.one.alternative.translation">
 	  <term
-	  id="dialogs.preferences.editor.go.to.next.untranslated.segment.stops.where.there.is.at.least.one.alternative.translation.title">Stop at untranslated and alternatives translations</term>
+	  id="dialogs.preferences.editor.go.to.next.untranslated.segment.stops.where.there.is.at.least.one.alternative.translation.title">SStop at segments that are untranslated or have alternative translations</term>
 
 	  <listitem>
 		<para><link

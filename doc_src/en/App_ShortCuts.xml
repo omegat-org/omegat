@@ -74,7 +74,7 @@
 		<para>On macOS:
 		  <keycombo><keycap>Shift</keycap><keycap>Command</keycap><keycap>N</keycap></keycombo>
 		</para>
-  		<para>In this guide:
+  		<para>In this manual:
 		  <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>N</keycap></keycombo>
 		</para>
 		</example>
@@ -590,7 +590,7 @@
 
             <row>
               <entry>Access Project Contents/Writable Glossary</entry>
-              <entry>projectAccessWriteableGlossaryMenuItem</entry>
+              <entry>projectAccessWritableGlossaryMenuItem</entry>
             </row>
 
             <row>
@@ -846,12 +846,12 @@
             </row>
 
             <row>
-              <entry>Remove translation</entry>
+              <entry>Remove Translation</entry>
               <entry>editRegisterUntranslatedMenuItem</entry>
             </row>
 
             <row>
-              <entry>Set empty translation</entry>
+              <entry>Set Empty Translation</entry>
               <entry>editRegisterEmptyMenuItem</entry>
             </row>
 
@@ -1224,7 +1224,7 @@
 
           <tbody>
             <row>
-              <entry>User Guide...</entry>
+              <entry>User Manual...</entry>
               <entry>helpContentsMenuItem</entry>
               <entry namest="3" nameend="4">F1</entry>
             </row>

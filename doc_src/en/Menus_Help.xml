@@ -5,10 +5,10 @@
 
   <variablelist>
     <varlistentry id="menus.help.user.manual">
-      <term id="menus.help.user.manual.title">User Guide...		  <keycombo><keycap>F1</keycap></keycombo>
+      <term id="menus.help.user.manual.title">User Manual...		  <keycombo><keycap>F1</keycap></keycombo>
 </term>
       <listitem>
-        <para>Opens this guide in the default browser.</para>
+        <para>Opens this manual in the default browser.</para>
 		<para>
 		</para>
       </listitem>

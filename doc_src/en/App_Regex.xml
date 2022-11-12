@@ -16,7 +16,7 @@
   <para>Only the fundamentals most useful to translators are covered. The
   <link linkend="app.regex.tools" endterm="app.regex.tools.title"/>
   section at the end of this appendix provides a few starting points to
-  explore advanced or complex uses beyond the scope of this guide. If you need help for a specific case, you can also ask questions in the various support channels.</para>
+  explore advanced or complex uses beyond the scope of this manual. If you need help for a specific case, you can also ask questions in the various support channels.</para>
   
   <para>Regular expressions use a combination of letters,
   digits, and symbols (collectively known as <emphasis>characters</emphasis>)
@@ -167,7 +167,7 @@
           <note>
             <para>Only the letters <emphasis>i j l m o</emphasis>, and
             <emphasis>y</emphasis>, in both lower- and uppercase, have no
-            special meaning when preceded by a backslash. This guide
+            special meaning when preceded by a backslash. This manual
             only describes a small subset of letters that take on a special
             meaning.</para>
             <para>Consult the sites in the <link

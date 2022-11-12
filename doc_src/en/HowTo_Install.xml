@@ -86,7 +86,7 @@
 
     <para>Double click on the package you downloaded to unpack it.  This
     creates a folder called <filename>OmegaT</filename>. The folder contains
-    two files: <filename>index.html</filename> (the user guide index) and
+    two files: <filename>index.html</filename> (the user manual index) and
     <filename>OmegaT.app</filename> (the application). Copy the folder to a
     suitable location (e.g.  <filename>Applications</filename>).</para>
 

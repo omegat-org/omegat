@@ -270,7 +270,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         projectAccessProjectFilesMenu.addSeparator();
         projectAccessProjectFilesMenu.add(projectAccessCurrentSourceDocumentMenuItem = createMenuItem("TF_MENU_FILE_ACCESS_CURRENT_SOURCE_DOCUMENT"));
         projectAccessProjectFilesMenu.add(projectAccessCurrentTargetDocumentMenuItem = createMenuItem("TF_MENU_FILE_ACCESS_CURRENT_TARGET_DOCUMENT"));
-        projectAccessProjectFilesMenu.add(projectAccessWriteableGlossaryMenuItem =
+        projectAccessProjectFilesMenu.add(projectAccessWritableGlossaryMenuItem =
                 createMenuItem("TF_MENU_FILE_ACCESS_WRITEABLE_GLOSSARY"));
         projectAccessProjectFilesMenu.addMenuListener(new MenuListener() {
             @Override
@@ -283,7 +283,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
                     projectAccessCurrentTargetDocumentMenuItem.setEnabled(!StringUtil.isEmpty(targetPath)
                             && new File(Core.getProject().getProjectProperties().getTargetRoot(), targetPath).isFile());
                     String glossaryPath = Core.getProject().getProjectProperties().getWriteableGlossary();
-                    projectAccessWriteableGlossaryMenuItem.setEnabled(!StringUtil.isEmpty(glossaryPath)
+                    projectAccessWritableGlossaryMenuItem.setEnabled(!StringUtil.isEmpty(glossaryPath)
                             && new File(glossaryPath).isFile());
                 }
             }
@@ -854,7 +854,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
     JMenuItem projectAccessExportTMMenuItem;
     JMenuItem projectAccessCurrentSourceDocumentMenuItem;
     JMenuItem projectAccessCurrentTargetDocumentMenuItem;
-    JMenuItem projectAccessWriteableGlossaryMenuItem;
+    JMenuItem projectAccessWritableGlossaryMenuItem;
     JMenuItem sentenceCaseMenuItem;
     JMenu switchCaseSubMenu;
     JMenuItem titleCaseMenuItem;

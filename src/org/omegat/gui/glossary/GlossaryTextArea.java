@@ -408,7 +408,7 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
         openFile.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Core.getMainWindow().getMainMenu().invokeAction("projectAccessWriteableGlossaryMenuItem", e.getModifiers());
+                Core.getMainWindow().getMainMenu().invokeAction("projectAccessWritableGlossaryMenuItem", e.getModifiers());
             }
         });
         openFile.setEnabled(false);

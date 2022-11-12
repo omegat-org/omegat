@@ -189,7 +189,7 @@ dependencies {
             transitive = true
         }
         runtimeOnly 'org.codehaus.groovy:groovy-dateutil:3.0.9'
-        runtimeOnly 'org.apache.ivy:ivy:2.5.0'
+        runtimeOnly 'org.apache.ivy:ivy:2.5.1'
 
         // Script editor
         implementation 'com.fifesoft:rsyntaxtextarea:3.2.0'

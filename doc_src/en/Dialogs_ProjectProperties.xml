@@ -38,7 +38,7 @@
 
     <variablelist>
       <varlistentry id="dialogs.project.properties.options.segmentation">
-        <term id="dialogs.project.properties.options.segmentation.title">Sentence-level Segmenting</term>
+        <term id="dialogs.project.properties.options.segmentation.title">Sentence-level segmenting</term>
         <listitem>
 		  
           <para>Sentence-level segmentation splits the source file “paragraphs”

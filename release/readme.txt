@@ -147,7 +147,7 @@ Current team:
 
 - Marco Cevoli (Telegram community manager)
 - Jean-Christophe Helary (Twitter community manager)
-- Kos Ivantsof (localisation manager)
+- Kos Ivantsov (localisation manager)
 - Concepción Martin (Facebook community manager)
 - Briac Pilpré (webmaster)
 - Lucie Vecerova (Facebook community manager)

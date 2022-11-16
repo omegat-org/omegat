@@ -1238,39 +1238,41 @@ ${targetText}
 	<varlistentry id="dialog.preferences.view.display.all.source.segments.in.bold">
 	  <term id="dialog.preferences.view.display.all.source.segments.in.bold.title">Display all source segments in bold</term>
 	  <listitem>
-		<para>By default, only the current segment has its source part displayed in bold face.</para>
+		<para>By default, only the current segment is displayed in bold face.</para>
 	  </listitem>
 	</varlistentry>
 
 	<varlistentry id="dialog.preferences.view.display.active.source.segment.in.bold">
 	  <term id="dialog.preferences.view.display.active.source.segment.in.bold.title">Display active source segment in bold</term>
 	  <listitem>
-		<para>If other segments are displayed in normal face, the current segment can also be displayed in normal face.</para>
+		<para>If source segments are displayed in normal face, you can use this
+		option to display only the current source segment in bold.</para>
 	  </listitem>
-	</varlistentry>
+</varlistentry>
 
 	<varlistentry id="dialog.preferences.view.include.the.first.non-unique.segment.when.marking.non.unique.segments">
 	  <term
 		  id="dialog.preferences.view.include.the.first.non-unique.segment.when.marking.non.unique.segments.title">Mark all non-unique segments</term>
-
 	  <listitem>
-		<para>By default, when <link linkend="menus.view.mark.non.unique.segments" endterm="menus.view.mark.non.unique.segments.title"/> is enabled, only
-		the non unique segments after the second are marked. Enable this option
-		to also mark the first.</para>
+		<para>By default, only the second and subsequent non-unique segments are
+		marked when <link linkend="menus.view.mark.non.unique.segments"
+		endterm="menus.view.mark.non.unique.segments.title"/> is enabled. Use this
+		option to also mark the first such segment.</para>
 	  </listitem>
 	</varlistentry>
 
 	<varlistentry id="dialog.preferences.view.simplify.tooltip.on.protected.parts">
 	  <term id="dialog.preferences.view.simplify.tooltip.on.protected.parts.title">Simplify tag tooltips</term>
 	  <listitem>
-		<para>Tags are protected text. Tag tooltips display the real content of the tag. When that content contains paired tags (as in HTML) such tooltips can be simplified when you hover on them.</para>
+		<para>Tags are protected text. Tag tooltips display the actual content of the tag. For content with paired tags (as in HTML) the tooltips can be simplified when you hover on them.</para>
 	  </listitem>
 	</varlistentry>
 
 	<varlistentry id="dialog.preferences.view.use.custom.templates.for.modification.info">
 	  <term id="dialog.preferences.view.use.custom.templates.for.modification.info.title">Customize segment modification information</term>
 	  <listitem>
-		<para>Segment modification information is displayed over the segment and by default indicates when and by whom the translation was modified:</para>
+		<para>Segment modification information is displayed over the segment. the
+		default setting shows who last modified the translation and when:</para>
 
 		<example id="dialog.preferences.view.use.custom.templates.for.modification.info.example">
 		  <title id="dialog.preferences.view.use.custom.templates.for.modification.info.example.title">Default display</title>
@@ -1334,23 +1336,24 @@ ${targetText}
 	<varlistentry id="dialogs.preferences.saving.and.output.external.post-processing.command">
 	  <term
 		  id="dialogs.preferences.saving.and.output.external.post-processing.command.title">Global
-	  Post-processing Commands</term>
+	  post-processing commands</term>
 
 	  <listitem>
-		  <para>Specify the commands that will automatically be run after using <link
+		  <para>Specify commands to run automatically after using <link
 		linkend="menus.project.create.translated.documents"
 		endterm="menus.project.create.translated.documents.title"/> or <link linkend="menus.project.create.current.translated.document" endterm="menus.project.create.current.translated.document.title"/>.</para>
 
-		<para>The commands
-		specified here are available to all the projects that use the same
-		configuration folder. They are saved in <link
+		<para>Commands specified here are available to all the projects that use
+		the same configuration folder. They are saved in <link
 		linkend="configuration.folder.default.contents.omegat.prefs"
 		endterm="configuration.folder.default.contents.omegat.prefs.title"/>.</para>
 
 		<para>The template variables list gives you access to various project
 		data and system variables:
 		<example id="dialogs.preferences.saving.and.output.external.post-processing.command.example">
-		  <title id="dialogs.preferences.saving.and.output.external.post-processing.command.example.title">Simple examples of post-processing commands:</title>
+		  <title
+		  id="dialogs.preferences.saving.and.output.external.post-processing.command.example.title">Simple example of a post-processing
+			command:</title>
 		  <variablelist>
 			<varlistentry>
 			  <term>Open the target folder in Linux</term>

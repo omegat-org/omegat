@@ -126,7 +126,7 @@
 
   <variablelist>
     <varlistentry>
-      <term>Go to Next Untranslated Segment stops where there is at least one
+      <term>Go To Next Untranslated Segment stops where there is at least one
       alternative translation<indexterm class="singular">
           <primary>Меню «Параметры»</primary> <secondary>Параметры редактирования</secondary> <tertiary>Сегменты с альтернативными вариантами перевода</tertiary>
         </indexterm></term>

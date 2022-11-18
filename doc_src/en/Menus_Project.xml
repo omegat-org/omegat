@@ -4,7 +4,7 @@
 <section id="menus.project">
   <title id="menus.project.title">Project</title>
       <example id="example.new.project.shortcut"><title id="example.new.project.shortcut.title">New...</title>
-  		<para>In this manual:
+  		<para>In this guide:
 		  <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>N</keycap></keycombo>
 		</para>
 		<para>On Windows and Linux:

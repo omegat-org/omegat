@@ -2,13 +2,13 @@
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd"
 [<!ENTITY % manualvariables SYSTEM "manualvariables.mod"> %manualvariables;]>
-<book lang="en" id="book.user.manual">
+<book lang="en" id="book.user.guide">
   <bookinfo>
-    <title id="book.user.manual.title">OmegaT &vernb; - User Manual</title>
+    <title id="book.user.guide.title">OmegaT &vernb; - User Guide</title>
     <pubdate>@timestamp@</pubdate>
 	<!-- TODO automate date insertion -->
     <abstract>
-      <para>This document is the official user manual to OmegaT, the free
+      <para>This document is the official user guide to OmegaT, the free
       Computer-Assisted Translation tool.</para>
     </abstract>
   </bookinfo>

@@ -60,7 +60,7 @@
 	<varlistentry id="application.folder.index.html">
 	  <term id="application.folder.index.html.title">index.html</term>
 	  <listitem>
-		<para>The index to the multilingual user manual.</para>
+		<para>The index to the multilingual user guide.</para>
 	  </listitem>
 	</varlistentry>
 
@@ -95,7 +95,7 @@
 			<varlistentry id="application.folder.docs.en">
 			  <term id="application.folder.docs.en.title">en/</term>
 			  <listitem>
-				<para>Each translated user manual is in a different language
+				<para>Each translated user guide comes in a different language
 				folder.</para>
 			  </listitem>
 			</varlistentry>
@@ -103,7 +103,7 @@
 			<varlistentry id="application.folder.docs.index.html">
 			  <term id="application.folder.docs.index.html.title">index.html</term>
 			  <listitem>
-				<para>The index to the multilingual user manual.</para>
+				<para>The index to the multilingual user guide.</para>
 			  </listitem>
 			</varlistentry>
 

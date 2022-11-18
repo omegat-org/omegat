@@ -390,7 +390,7 @@
 				<varlistentry id="launch.with.command.line.disable.location.save">
 				  <term id="launch.with.command.line.disable.location.save.title">--disable-location-save</term>
 				  <listitem>
-					<para>Do not remember the last directory
+					<para>Do not remember the last folder
 					opened in the file picker.</para>
 				  </listitem>
 				</varlistentry>
@@ -408,7 +408,7 @@
 				<varlistentry id="launch.with.command.line.config.dir.">
 				  <term id="launch.with.command.line.config.dir.title">--config-dir=<emphasis>&lt;path&gt;</emphasis></term>
 				  <listitem>
-					<para>The directory used to read and write
+					<para>The folder used to read and write
 					OmegaT configuration files.</para>
 				  </listitem>
 				</varlistentry>

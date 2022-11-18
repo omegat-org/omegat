@@ -288,10 +288,9 @@
 
 	<varlistentry id="menus.edit.insert.unicode.control.character">
       <term id="menus.edit.insert.unicode.control.character.title">Insert
-      Unicode Control Character</term>
-	  <listitem><para>Inserts the selected Unicode control character. See <link
-	  linkend="how.to.manage.right.to.left"
-	  endterm="how.to.manage.right.to.left.title"/> for details.</para>
+      Bidirectional Control Character</term>
+	  <listitem><para>Inserts the selected bidirectional control character. See <ulink
+	  url="https://www.unicode.org/reports/tr9/">Unicode Bidirectional Algorithm</ulink> for details.</para>
 	  <itemizedlist>
 		<listitem><para><guimenuitem>Left-to-Right Mark (LRM U+200E)</guimenuitem></para>
 		</listitem>

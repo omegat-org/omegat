@@ -383,16 +383,6 @@ public class EditorTextArea3 extends JEditorPane {
             setSelectionStart(doc.getTranslationStart());
             setSelectionEnd(doc.getTranslationEnd());
             processed = true;
-        } else if (s.equals(KEYSTROKE_SWITCH_ORIENTATION)) {
-            // handle Ctrl+Shift+O - toggle orientation LTR-RTL
-            Cursor oldCursor = this.getCursor();
-            setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            controller.toggleOrientation();
-            setCursor(oldCursor);
-
-            Core.getMainWindow().showTimedStatusMessageRB("ETA_INFO_TOGGLE_LTR_RTL",
-                    StaticUIUtils.getKeyStrokeText(KEYSTROKE_SWITCH_ORIENTATION));
-            processed = true;
         } else if (s.equals(KEYSTROKE_DELETE_PREV_TOKEN)) {
             // Delete previous token
             try {

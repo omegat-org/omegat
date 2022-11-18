@@ -5,7 +5,7 @@
   <title id="menus.goto.title">Go To</title>
 
     <example id="example.next.untranslated.segment"><title id="example.next.untranslated.segment.title">Next Untranslated Segment</title>
-  		<para>In this manual:
+  		<para>In this guide:
 		  <keycombo><keycap>C</keycap><keycap>U</keycap></keycombo>
 		</para>
 		<para>On Windows and Linux:

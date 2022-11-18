@@ -806,31 +806,31 @@
             </row>
 
             <row>
-              <entry>Insert Unicode Control Character/Left-to-Right Mark
+              <entry>Insert Bidi Control Character/Left-to-Right Mark
               (LRM U+200E)</entry>
               <entry>insertCharsLRM</entry>
             </row>
 
             <row>
-              <entry>Insert Unicode Control Character/Right-to-Left Mark
+              <entry>Insert Bidi Control Character/Right-to-Left Mark
               (RLM U+200F)</entry>
               <entry>insertCharsRLM</entry>
             </row>
             
             <row>
-              <entry>Insert Unicode Control Character/Left-to-Right Embedding
+              <entry>Insert Bidi Control Character/Left-to-Right Embedding
               (LRE U+202A)</entry>
               <entry>insertCharsLRE</entry>
             </row>
 
              <row>
-              <entry>Insert Unicode Control Character/Right-to-Left Embedding
+              <entry>Insert Bidi Control Character/Right-to-Left Embedding
               (RLE U+202B)</entry>
               <entry>insertCharsRLE</entry>
             </row>
             
             <row>
-              <entry>Insert Unicode Control Character/Pop Directional
+              <entry>Insert Bidi Control Character/Pop Directional
               Formatting (PDF U+202C)</entry>
               <entry>insertCharsPDF</entry>
             </row>

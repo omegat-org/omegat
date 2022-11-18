@@ -37,7 +37,7 @@
                       </imageobject>
                     </inlinemediaobject></entry>
 
-                  <entry>Lists the various extra actions available in the
+                  <entry>Lists the various extra <emphasis role="bold">actions</emphasis> available in the
                   pane.</entry>
                 </row>
 
@@ -52,7 +52,7 @@
                       </imageobject>
                     </inlinemediaobject></entry>
 
-                  <entry>Minimizes the pane, so that it only shows as a tab at
+                  <entry><emphasis role="bold">Minimizes</emphasis> the pane, so that it only shows as a tab at
                   the bottom of the window.</entry>
                 </row>
 
@@ -67,7 +67,7 @@
                       </imageobject>
                     </inlinemediaobject></entry>
 
-                  <entry>Maximizes the pane</entry>
+                  <entry><emphasis role="bold">Maximizes</emphasis> the pane</entry>
                 </row>
 
                 <row>
@@ -81,7 +81,7 @@
                       </imageobject>
                     </inlinemediaobject></entry>
 
-                  <entry>Restores a maximized pane to its previous
+                  <entry><emphasis role="bold">Restores</emphasis> a maximized pane to its previous
                   layout.</entry>
                 </row>
 
@@ -96,7 +96,7 @@
                       </imageobject>
                     </inlinemediaobject></entry>
 
-                  <entry>Undocks the pane from the main window.</entry>
+                  <entry><emphasis role="bold">Undocks</emphasis> the pane from the main window.</entry>
                 </row>
 
                 <row>
@@ -110,7 +110,7 @@
                       </imageobject>
                     </inlinemediaobject></entry>
 
-                  <entry>Returns the pane to the main window.</entry>
+                  <entry><emphasis role="bold">Returns</emphasis> the pane to the main window.</entry>
                 </row>
               </tbody>
             </tgroup>
@@ -200,6 +200,47 @@
           </variablelist>
         </listitem>
       </varlistentry>
+
+	  <varlistentry id="panes.notifications">
+        <term id="panes.notifications.title">Notifications</term>
+		
+        <listitem>
+          <para>If a pane is closed but has contents to display, OmegaT can
+		  temporarily highlight the pane tab in orange when you enter the segment.</para>
+		  <para>By default, the <guilabel>Comments</guilabel> and
+		  <guilabel>Notes</guilabel> panes have notifications enabled.</para>
+		  <para>To enable or disable notifications,
+		  <itemizedlist>
+			<listitem><para>enter the pane,</para></listitem>
+			<listitem><para>click on the
+			<guilabel>Action</guilabel> widget in the top right,</para></listitem>
+			<listitem><para>and select <guilabel>Notify
+		  Me When a Segment Has...</guilabel> (the ... contents depends on the pane that
+			you want notifications from).</para></listitem>
+		  </itemizedlist>
+		  </para>
+		  <para>Notifications are available from the following panes:</para>
+		  <itemizedlist>
+			<listitem><para>Comments</para></listitem>
+			<listitem><para>Dictionary</para></listitem>
+			<listitem><para>Fuzzy Matches</para></listitem>
+			<listitem><para>Glossary</para></listitem>
+			<listitem><para>Multiple Translations</para></listitem>
+			<listitem><para>Notes</para></listitem>
+			<listitem><para>Segment Properties</para>
+			<para>The <guilabel>Segment Properties</guilabel> pane allows
+			notification settings for each of its item.</para>
+			<para>In <guilabel>Table View</guilabel>, right click on the item
+			and select <guilabel>Notify Me When a Segment Has...</guilabel> (the
+			... contents depends on the item that you want notifications from).</para>
+			<para>In <guilabel>List View</guilabel>, right click on the
+			<guilabel>Action</guilabel> widget at the right-end of the selected property
+			lineand select <guilabel>Notify Me When a Segment Has...</guilabel> (the
+			... contents depends on the item that you want notifications from).</para>
+			</listitem>
+		  </itemizedlist>
+		</listitem>
+	  </varlistentry>
     </variablelist>
   </section>
 

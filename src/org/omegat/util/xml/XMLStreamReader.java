@@ -119,8 +119,7 @@ public class XMLStreamReader implements Closeable {
             mHeadBlock = blk;
         } else {
             // not a valid XML file
-            throw new IOException(OStrings.getString("XSR_ERROR_NONVALID_XML") + "\n"
-                    + OStrings.getString("XSR_ERROR_NONVALID_XML"));
+            throw new IOException(OStrings.getString("XSR_ERROR_NONVALID_XML"));
         }
     }
 
@@ -657,8 +656,7 @@ public class XMLStreamReader implements Closeable {
             data += OStrings.getString("XSR_ERROR_CLOSE_TAG");
         }
         if (blk.numAttributes() > 0) {
-            data += OStrings.getString("XSR_ERROR_LOADED") + blk.numAttributes()
-                    + OStrings.getString("XSR_ERROR_ATTRIBUTES");
+            data += StringUtil.format(OStrings.getString("XSR_ERROR_LOADED"), String.valueOf(blk.numAttributes()));
         }
         throw new TranslationException(msg + data);
     }

@@ -45,7 +45,7 @@ import org.omegat.util.Preferences;
  * This process looks up the source string entries, and find matched glossary
  * entries.
  * <p>
- * Test cases wheter a glossary entry matches a string entry text:
+ * Test cases whether a glossary entry matches a string entry text:
  * <ul>
  * <li>"Edit" vs "Editing" - doesn't match
  * <li>"Old Line" vs "Hold Line" - doesn't match

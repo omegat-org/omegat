@@ -154,7 +154,7 @@ public class ProjectFilesList extends javax.swing.JFrame {
         jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.LINE_AXIS));
         jPanel1.add(filler5);
 
-        org.openide.awt.Mnemonics.setLocalizedText(m_addNewFileButton, OStrings.getString("TF_MENU_FILE_IMPORT")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(m_addNewFileButton, OStrings.getString("PF_ADD_FILES")); // NOI18N
         jPanel1.add(m_addNewFileButton);
 
         org.openide.awt.Mnemonics.setLocalizedText(m_wikiImportButton, OStrings.getString("TF_MENU_WIKI_IMPORT")); // NOI18N

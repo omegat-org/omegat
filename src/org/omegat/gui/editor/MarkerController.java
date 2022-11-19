@@ -37,11 +37,22 @@ import javax.swing.text.Highlighter;
 import javax.swing.text.Position;
 
 import org.omegat.core.Core;
+import org.omegat.core.spellchecker.SpellCheckerMarker;
 import org.omegat.filters2.master.PluginUtils;
+import org.omegat.gui.editor.mark.BidiMarkers;
 import org.omegat.gui.editor.mark.CalcMarkersThread;
+import org.omegat.gui.editor.mark.ComesFromAutoTMMarker;
+import org.omegat.gui.editor.mark.ComesFromMTMarker;
 import org.omegat.gui.editor.mark.EntryMarks;
+import org.omegat.gui.editor.mark.FontFallbackMarker;
 import org.omegat.gui.editor.mark.IMarker;
 import org.omegat.gui.editor.mark.Mark;
+import org.omegat.gui.editor.mark.NBSPMarker;
+import org.omegat.gui.editor.mark.ProtectedPartsMarker;
+import org.omegat.gui.editor.mark.RemoveTagMarker;
+import org.omegat.gui.editor.mark.ReplaceMarker;
+import org.omegat.gui.editor.mark.WhitespaceMarkerFactory;
+import org.omegat.gui.glossary.TransTipsMarker;
 import org.omegat.util.Log;
 import org.omegat.util.gui.UIThreadsUtil;
 
@@ -64,6 +75,21 @@ public class MarkerController {
     protected final CalcMarkersThread[] markerThreads;
 
     private final Highlighter highlighter;
+
+    public static void init() throws Exception {
+        WhitespaceMarkerFactory.init();
+        Core.registerMarker(new ProtectedPartsMarker());
+        Core.registerMarker(new RemoveTagMarker());
+        Core.registerMarker(new NBSPMarker());
+        Core.registerMarker(new TransTipsMarker());
+        Core.registerMarker(new BidiMarkers());
+        Core.registerMarker(new ReplaceMarker());
+        Core.registerMarker(new ComesFromAutoTMMarker());
+        Core.registerMarker(new ComesFromMTMarker());
+        Core.registerMarker(new FontFallbackMarker());
+        Core.registerMarker(new SpellCheckerMarker());
+    }
+
 
     MarkerController(EditorController ec) {
         this.ec = ec;

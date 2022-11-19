@@ -128,9 +128,10 @@ import com.vlsolutions.swing.docking.DockingDesktop;
 
 /**
  * Class for control all editor operations.
- *
+ * <p>
  * You can find good description of java text editor working at
- * http://java.sun.com/products/jfc/tsc/articles/text/overview/
+ * <a href="https://www.comp.nus.edu.sg/~cs3283/ftp/Java/swingConnect/text/text/text.html">Using the Swing Text Package</a>
+ * that was originally found at http://java.sun.com/products/jfc/tsc/articles/text/overview/
  *
  * @author Keith Godfrey
  * @author Benjamin Siband

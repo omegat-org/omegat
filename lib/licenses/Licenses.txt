@@ -1,16 +1,13 @@
 Licenses:
 
-htmlparser.jar version 1.6 is distributed under the GNU Lesser General
-Public License version 2.1 and greater. Sources are available in
-OmegaT sources, in the directory lib/sources.
+htmlparser.jar version 1.5 is distributed under the GNU Lesser General
+Public License version 2.1 and greater.
 
 vldocking-*.jar is distributed under the GNU Lesser General Public
-License. Sources are available in OmegaT sources, in the directory
-lib/sources.
+License.
 
-jmyspell-core-*.jar is distributed under the GNU Lesser General Public
-License version 2.1 and greater. Sources are available in OmegaT
-sources, in the directory lib/sources.
+jmyspell-core is distributed under the GNU Lesser General Public
+License version 2.1 and greater.
 
 svnkit-*.jar is distributed under the TMate Open Source / Commercial
 dual license.
@@ -20,9 +17,8 @@ License.
 
 antlr-runtime-*.jar is distributed under the ANTLR 3 License.
 
-sqljet-*.jar is distributed under the GNU General Public License
-version 2. Sources are available in OmegaT sources, in the directory
-lib/sources.
+sqljet-*.jar is distributed under the GPL Version 3 license
+with a dual-licensing option for closed source usage.
 
 org.eclipse.jgit-*-r.jar is distributed under the Eclipse Distribution
 License (EDL) v 1.0.
@@ -31,9 +27,8 @@ jsch-*.jar is distributed under the JSch License.
 
 jsch-agent-proxy is distributed under the jsch-agent-proxy License.
 
-diff.jar is distributed under the GNU General Public License version 1
-and greater. Sources are available in OmegaT sources, in the directory
-lib/sources.
+gnudiff4j is distributed under the GNU General Public License version 1
+and greater.
 
 trilead-ssh2-*.jar is distributed under the Trilead SSH license.
 
@@ -55,15 +50,14 @@ for scripting).
 
 supertmxmerge-*.jar is distributed under the Apache License 2.0.
 
-slf4j-*.jar is distributed under the MIT License.
+slf4j-*.jar is distributed under the MIT style slf4j License.
 
 OmegaT uses icons from the Modern UI Icons project. See
 ModernUIIcons-license.txt.
 
 juniversalchardet-*.jar is distributed under the GNU Lesser General
 Public License version 2.1 and greater, the GNU Public License version
-2.0 and greater or the Mozilla Public License version 1.1. Sources
-are available in OmegaT sources, in the directory lib/sources.
+2.0 and greater or the Mozilla Public License version 1.1.
 
 JTextPaneLinkifier uses a regex from dperini/regex-web.js
 (https://gist.github.com/dperini/729294) under the MIT License.

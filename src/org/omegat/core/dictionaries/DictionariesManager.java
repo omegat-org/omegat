@@ -76,8 +76,6 @@ public class DictionariesManager implements DirectoryMonitor.Callback {
 
     public DictionariesManager(final IDictionaries pane) {
         this.pane = pane;
-        factories.add(new LingvoDSL());
-        factories.add(new StarDict());
         indexLanguage = new Language(Locale.getDefault());
         tokenizer = new DefaultTokenizer();
     }

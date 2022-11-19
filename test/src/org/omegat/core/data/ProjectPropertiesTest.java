@@ -31,9 +31,16 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import org.junit.Test;
+
 import org.omegat.util.Platform;
+
+import gen.core.project.RepositoryDefinition;
+import gen.core.project.RepositoryMapping;
 
 /**
  * Tests for ProjectProperties class.
@@ -101,5 +108,105 @@ public class ProjectPropertiesTest {
         assertEquals("/tmp/source/", p.getSourceDir().getAsString());
         assertEquals("source/", p.getSourceDir().getUnderRoot());
         assertTrue(p.getSourceDir().isUnderRoot());
+        assertFalse(p.isTeamProject());
+    }
+
+    @Test
+    public void testIsTeamProjectOnGitTeam() {
+        ProjectProperties p = new ProjectProperties();
+        p.setProjectRoot("/tmp");
+        p.getSourceDir().setRelativeOrAbsolute("/tmp/source");
+        RepositoryDefinition repositoryDefinition = new RepositoryDefinition();
+        RepositoryMapping repositoryMapping = new RepositoryMapping();
+        repositoryMapping.setRepository("");
+        repositoryMapping.setLocal("");
+        repositoryDefinition.getMapping().add(repositoryMapping);
+        repositoryDefinition.setType("git");
+        repositoryDefinition.setBranch("main");
+        repositoryDefinition.setUrl("https://example.com/example.git");
+        p.setRepositories(Collections.singletonList(repositoryDefinition));
+        assertTrue(p.isTeamProject());
+    }
+
+    @Test
+    public void testIsTeamProjectOnSVNTeam() {
+        ProjectProperties p = new ProjectProperties();
+        p.setProjectRoot("/tmp");
+        p.getSourceDir().setRelativeOrAbsolute("/tmp/source");
+        RepositoryDefinition repositoryDefinition = new RepositoryDefinition();
+        RepositoryMapping repositoryMapping = new RepositoryMapping();
+        repositoryMapping.setRepository("");
+        repositoryMapping.setLocal("");
+        repositoryDefinition.getMapping().add(repositoryMapping);
+        repositoryDefinition.setType("svn");
+        repositoryDefinition.setBranch("trunk");
+        repositoryDefinition.setUrl("https://example.com/example");
+        p.setRepositories(Collections.singletonList(repositoryDefinition));
+        assertTrue(p.isTeamProject());
+    }
+
+    @Test
+    public void testIsTeamProjectOnGitButNoRemoteProject() {
+        ProjectProperties p = new ProjectProperties();
+        p.setProjectRoot("/tmp");
+        p.getSourceDir().setRelativeOrAbsolute("/tmp/source");
+        RepositoryDefinition repositoryDefinition = new RepositoryDefinition();
+        RepositoryMapping repositoryMapping = new RepositoryMapping();
+        repositoryMapping.setRepository("doc_src/en");
+        repositoryMapping.setLocal("source/foo");
+        repositoryDefinition.getMapping().add(repositoryMapping);
+        repositoryDefinition.setType("git");
+        repositoryDefinition.setBranch("master");
+        repositoryDefinition.setUrl("https://example.com/example.git");
+        p.setRepositories(Collections.singletonList(repositoryDefinition));
+        assertFalse(p.isTeamProject());
+    }
+
+    @Test
+    public void testSetExportTMLevelsAll() {
+        ProjectProperties p = new ProjectProperties();
+        p.setExportTmLevels(true, true, true);
+        assertEquals("omegat", p.getExportTmLevels().get(0));
+        assertEquals("level1", p.getExportTmLevels().get(1));
+        assertEquals("level2", p.getExportTmLevels().get(2));
+    }
+
+    @Test
+    public void testSetExportTMLevelsOmt() {
+        ProjectProperties p = new ProjectProperties();
+        p.setExportTmLevels(true, false, false);
+        assertEquals(1, p.getExportTmLevels().size());
+        assertEquals("omegat", p.getExportTmLevels().get(0));
+    }
+
+    @Test
+    public void testSetExportTMLevelsList1() {
+        ProjectProperties p = new ProjectProperties();
+        List<String> exportLevels = new ArrayList<>();
+        exportLevels.add("omegat");
+        p.setExportTmLevels(exportLevels);
+        assertEquals(1, p.getExportTmLevels().size());
+        assertEquals("omegat", p.getExportTmLevels().get(0));
+    }
+
+    @Test
+    public void testSetExportTMLevelsList2() {
+        ProjectProperties p = new ProjectProperties();
+        List<String> exportLevels = new ArrayList<>();
+        exportLevels.add("level2");
+        exportLevels.add("omegat");
+        p.setExportTmLevels(exportLevels);
+        assertEquals(2, p.getExportTmLevels().size());
+        assertEquals("omegat", p.getExportTmLevels().get(0));
+        assertEquals("level2", p.getExportTmLevels().get(1));
+    }
+
+    @Test
+    public void testSetExportTMLevelsListWrongValue() {
+        ProjectProperties p = new ProjectProperties();
+        List<String> exportLevels = new ArrayList<>();
+        exportLevels.add("foo");
+        p.setExportTmLevels(exportLevels);
+        assertEquals(0, p.getExportTmLevels().size());
     }
 }

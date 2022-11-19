@@ -179,7 +179,7 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
     }
 
     /**
-     * Loads one glossary file. It choose and calls required required reader.
+     * Loads one glossary file. It chooses and calls required reader.
      */
     private List<GlossaryEntry> loadGlossaryFile(final File file) throws Exception {
         boolean isPriority = priorityGlossary.equals(file);
@@ -210,7 +210,7 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
      * @param src
      */
     public List<GlossaryEntry> getGlossaryEntries(String src) {
-        List<GlossaryEntry> result = new ArrayList<GlossaryEntry>();
+        List<GlossaryEntry> result = new ArrayList<>();
         synchronized (this) {
             for (List<GlossaryEntry> en : glossaries.values()) {
                 result.addAll(en);

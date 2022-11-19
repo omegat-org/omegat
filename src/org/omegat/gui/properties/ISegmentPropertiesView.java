@@ -69,6 +69,8 @@ public interface ISegmentPropertiesView {
     };
 
     String PROPERTY_TRANSLATION_KEY = "SEGPROP_KEY_";
+    String PROPERTY_TRANSLATION_VERB = "SEGPROP_VERB_";
+    String PROPERTY_TRANSLATION_NVERB = "SEGPROP_NVERB_";
     Border FOCUS_BORDER = new MatteBorder(1, 1, 1, 1, new Color(0x76AFE8));
     Border MARGIN_BORDER = new EmptyBorder(1, 5, 1, 5);
     Border FOCUS_COMPOUND_BORDER = new CompoundBorder(MARGIN_BORDER, FOCUS_BORDER);

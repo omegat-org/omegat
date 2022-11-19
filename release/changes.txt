@@ -2,7 +2,7 @@
  OmegaT 5.8.0
 ----------------------------------------------------------------------
   20 Enhancements
-  20 Bug fixes
+  24 Bug fixes
   1 Localisation updates
 ----------------------------------------------------------------------
 5.8.0 vs 5.7.1
@@ -69,6 +69,18 @@
 
   Bug fixes:
 
+  - Local project does not update after remote masking some files
+    https://sourceforge.net/p/omegat/bugs/1124/
+
+  - OmegaT --no-team does not complete 3.6 team project conversion
+    https://sourceforge.net/p/omegat/bugs/1063/
+
+  - Drop Moses MT connector because of vulnerability of dependency library.
+    Please see Moses Plugin project: https://github.com/omegat-org/moses-plugin
+
+  - GUI: Comment is shown on both Comment and Segment Properties pane
+  https://sourceforge.net/p/omegat/bugs/1119/
+
   - Drop TaaS glossary service connector
 
   - When converting git local-managed project, OmegaT raise NPE
@@ -77,7 +89,7 @@
   - URL likifier raise exception when opening resource property file
   https://sourceforge.net/p/omegat/bugs/1117/
 
-  BundleProperties filter should accept UTF-8 properties file
+  - BundleProperties filter should accept UTF-8 properties file
   https://sourceforge.net/p/omegat/bugs/1116/
 
   - doc_src/docgen docker container should handle UID/GID properly

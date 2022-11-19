@@ -76,8 +76,12 @@ public class GlossarySearcher {
             }
         }
 
-        // After the matched entries have been tokenized and listed.
-        // We reorder entries: 1) by priority, 2) by length, 3) by alphabet
+        // After the matched entries have been tokenized and listed,
+        // we reorder entries as
+        // 1) by priority
+        // 2) by alphabet of source term
+        // 3) by length of localized term (optional)
+        // 4) by alphabet of localized term
         // Then remove the duplicates and combine the synonyms.
         sortGlossaryEntries(result);
         return filterGlossary(result, mergeAltDefinitions);
@@ -231,18 +235,19 @@ public class GlossarySearcher {
     }
 
     static void sortGlossaryEntries(List<GlossaryEntry> entries) {
-        Collections.sort(entries, (o1, o2) -> {
+        entries.sort((o1, o2) -> {
             int p1 = o1.getPriority() ? 1 : 2;
             int p2 = o2.getPriority() ? 1 : 2;
             int c = p1 - p2;
-            if (c == 0) {
-                c = o2.getSrcText().length() - o1.getSrcText().length();
-            }
             if (c == 0) {
                 c = o1.getSrcText().compareToIgnoreCase(o2.getSrcText());
             }
             if (c == 0) {
                 c = o1.getSrcText().compareTo(o2.getSrcText());
+            }
+            if (c == 0 && Preferences.isPreferenceDefault(
+                    Preferences.GLOSSARY_SORT_BY_LENGTH, false)) {
+                c = o2.getLocText().length() - o1.getLocText().length();
             }
             if (c == 0) {
                 c = o1.getLocText().compareToIgnoreCase(o2.getLocText());

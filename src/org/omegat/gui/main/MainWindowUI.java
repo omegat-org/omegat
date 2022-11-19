@@ -279,20 +279,26 @@ public final class MainWindowUI {
     }
 
     /**
-     * Assume screen size is 800x600 if width less than 900, and 1024x768 if
-     * larger. Assume task bar at bottom of screen. If screen size saved,
-     * recover that and use instead (18may04).
+     * Assume screen size is 800x600 if width less than 900, 1280x800 if
+     * less than 1300 and 1920 otherwise.
+     * Assume task bar at bottom of screen. If screen size saved,
+     * recover that and use instead (19nov22).
+     * https://laptoping.com/laptop-display-specs-explained.html
      */
+
     static Rectangle getDefaultBounds() {
         // size info missing - put window in default position
         GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
         Rectangle scrSize = env.getMaximumWindowBounds();
         if (scrSize.width < 900) {
             // assume 800x600
-            return new Rectangle(0, 0, 580, 536);
+            return new Rectangle(0, 0, 800, 600);
+        } else if (scrSize.width < 1300) {
+            // assume 1280x800
+            return new Rectangle(0, 0, 1280, 800);
         } else {
-            // assume 1024x768 or larger
-            return new Rectangle(0, 0, 690, 700);
+            // assume 1920×1080
+            return new Rectangle(200, 0, 1500, 1000);
         }
     }
 

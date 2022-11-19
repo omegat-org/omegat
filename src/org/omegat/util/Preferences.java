@@ -50,12 +50,11 @@ import gen.core.filters.Filters;
 /**
  * Class to load & save global OmegaT preferences.
  * <p>
- * Initially this class was implemented with static members and methods directly
- * implementing the interface, backed by XML storage. However this was bad for
- * testing and extensibility, or allowing different persistence formats.
+ * Initially this class was implemented with static members and methods directly implementing the interface, backed by
+ * XML storage. However this was bad for testing and extensibility, or allowing different persistence formats.
  * <p>
- * This class's static methods remain for compatibility, but now they wrap a
- * singleton instance of a concrete implementation of {@link IPreferences}.
+ * This class's static methods remain for compatibility, but now they wrap a singleton instance of a concrete
+ * implementation of {@link IPreferences}.
  *
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
@@ -228,14 +227,13 @@ public final class Preferences {
     /** Workflow Option: Minimal Similarity Of the Best Fuzzy Match to insert */
     public static final String BEST_MATCH_MINIMAL_SIMILARITY = "wf_minimalSimilarity";
     /**
-     * Default Value of Workflow Option: Minimal Similarity Of the Best Fuzzy
-     * Match to insert
+     * Default Value of Workflow Option: Minimal Similarity Of the Best Fuzzy Match to insert
      */
     public static final int BEST_MATCH_MINIMAL_SIMILARITY_DEFAULT = 80;
 
     /**
-     * When a fuzzy match is displayed from a memory belonging to a language other
-     * than the target language, a penalty is applied.
+     * When a fuzzy match is displayed from a memory belonging to a language other than the target language, a penalty
+     * is applied.
      */
     public static final String PENALTY_FOR_FOREIGN_MATCHES = "penalty_foreign_matches";
     public static final int PENALTY_FOR_FOREIGN_MATCHES_DEFAULT = 30;
@@ -244,8 +242,9 @@ public final class Preferences {
     public static final String BEST_MATCH_EXPLANATORY_TEXT = "wf_explanatoryText";
     /** Workflow Option: Export current segment */
     public static final String EXPORT_CURRENT_SEGMENT = "wf_exportCurrentSegment";
-    /** Workflow Option: Go To Next Untranslated Segment stops when there is at least one
-    alternative translation */
+    /**
+     * Workflow Option: Go To Next Untranslated Segment stops when there is at least one alternative translation
+     */
     public static final String STOP_ON_ALTERNATIVE_TRANSLATION = "wf_stopOnAlternativeTranslation";
     /** Workflow Option: Attempt to convert numbers when inserting a fuzzy match */
     public static final String CONVERT_NUMBERS = "wf_convertNumbers";
@@ -266,9 +265,9 @@ public final class Preferences {
     public static final String CHECK_ALL_PRINTF_TAGS = "tagValidation_elaborateCheck";
     /** Tag Validation Option: check simple java MessageFormat pattern tags */
     public static final String CHECK_JAVA_PATTERN_TAGS = "tagValidation_javaMessageFormatSimplePatternCheck";
-    /** Tag Validation Option: check user defined tags according to regexp.*/
+    /** Tag Validation Option: check user defined tags according to regexp. */
     public static final String CHECK_CUSTOM_PATTERN = "tagValidation_customPattern";
-    /** Tag Validation Option: check target for text that should have been removed according to regexp.*/
+    /** Tag Validation Option: check target for text that should have been removed according to regexp. */
     public static final String CHECK_REMOVE_PATTERN = "tagValidation_removePattern";
 
     /** Tag Validation Option: allow tag editing in editor. */
@@ -380,7 +379,7 @@ public final class Preferences {
 
     /** Proxy options: User name for proxy access */
     public static final String PROXY_USER_NAME = "proxy_user_name";
-    /** Proxy options: Password for proxy  access */
+    /** Proxy options: Password for proxy access */
     public static final String PROXY_PASSWORD = "proxy_password";
 
     /** Automatic save interval in seconds */
@@ -396,8 +395,7 @@ public final class Preferences {
     public static final String ALLOW_PROJECT_EXTERN_CMD = "allow_project_extern_cmd";
 
     /**
-     * Version of file filters. Unfortunately cannot put it into filters itself
-     * for backwards compatibility reasons.
+     * Version of file filters. Unfortunately cannot put it into filters itself for backwards compatibility reasons.
      */
     public static final String FILTERS_VERSION = "filters_version";
 
@@ -414,8 +412,8 @@ public final class Preferences {
     public static final boolean STAT_COUNTING_CUSTOM_TAGS_DEFAULT = true;
 
     /**
-     * Prefix for keys used to record default tokenizer behavior settings.
-     * Prepend to the full name of the tokenizer, e.g.
+     * Prefix for keys used to record default tokenizer behavior settings. Prepend to the full name of the tokenizer,
+     * e.g.
      *
      * <code>TOK_BEHAVIOR_PREFIX + tokenizer.class.getName()</code> to obtain
      * <code>tokenizer_behavior_org.omegat.tokenizer.LuceneXXTokenizer</code>
@@ -456,7 +454,7 @@ public final class Preferences {
     /** status bar progress mode */
     public static final String SB_PROGRESS_MODE = "sb_progress_mode";
 
-    /** TaaS glossary client.*/
+    /** TaaS glossary client. */
     public static final String TAAS_LOOKUP = "taas_lookup";
     public static final String TAAS_DOMAIN = "taas_domain";
 
@@ -510,14 +508,12 @@ public final class Preferences {
     }
 
     /**
-     * Returns the defaultValue of some preference out of OmegaT's preferences
-     * file.
+     * Returns the defaultValue of some preference out of OmegaT's preferences file.
      * <p>
      * If the key is not found, returns the empty string.
      *
      * @param key
-     *            key of the key to look up, usually a static string from this
-     *            class
+     *            key of the key to look up, usually a static string from this class
      * @return preference defaultValue as a string
      */
     public static String getPreference(String key) {
@@ -540,8 +536,8 @@ public final class Preferences {
     /**
      * Returns the boolean defaultValue of some preference.
      * <p>
-     * Returns true if the preference exists and is equal to "true", false
-     * otherwise (no such preference, or it's equal to "false", etc).
+     * Returns true if the preference exists and is equal to "true", false otherwise (no such preference, or it's equal
+     * to "false", etc).
      *
      * @param key
      *            preference key, usually a static string from this class
@@ -552,15 +548,12 @@ public final class Preferences {
     }
 
     /**
-     * Returns the boolean value of some preference out of OmegaT's preferences
-     * file, if it exists.
+     * Returns the boolean value of some preference out of OmegaT's preferences file, if it exists.
      * <p>
-     * If the key is not found, returns the default value provided and sets the
-     * preference to the default value.
+     * If the key is not found, returns the default value provided and sets the preference to the default value.
      *
      * @param key
-     *            name of the key to look up, usually a static string from this
-     *            class
+     *            name of the key to look up, usually a static string from this class
      * @param defaultValue
      *            default value for the key
      * @return preference value as an boolean
@@ -570,15 +563,12 @@ public final class Preferences {
     }
 
     /**
-     * Returns the value of some preference out of OmegaT's preferences file, if
-     * it exists.
+     * Returns the value of some preference out of OmegaT's preferences file, if it exists.
      * <p>
-     * If the key is not found, returns the default value provided and sets the
-     * preference to the default value.
+     * If the key is not found, returns the default value provided and sets the preference to the default value.
      *
      * @param key
-     *            name of the key to look up, usually a static string from this
-     *            class
+     *            name of the key to look up, usually a static string from this class
      * @param defaultValue
      *            default value for the key
      * @return preference value as a string
@@ -588,15 +578,12 @@ public final class Preferences {
     }
 
     /**
-     * Returns the value of some preference out of OmegaT's preferences file, if
-     * it exists.
+     * Returns the value of some preference out of OmegaT's preferences file, if it exists.
      * <p>
-     * If the key is not found, returns the default value provided and sets the
-     * preference to the default value.
+     * If the key is not found, returns the default value provided and sets the preference to the default value.
      *
      * @param key
-     *            name of the key to look up, usually a static string from this
-     *            class
+     *            name of the key to look up, usually a static string from this class
      * @param defaultValue
      *            default value for the key
      * @return preference value as enum
@@ -606,15 +593,12 @@ public final class Preferences {
     }
 
     /**
-     * Returns the integer value of some preference out of OmegaT's preferences
-     * file, if it exists.
+     * Returns the integer value of some preference out of OmegaT's preferences file, if it exists.
      * <p>
-     * If the key is not found, returns the default value provided and sets the
-     * preference to the default value.
+     * If the key is not found, returns the default value provided and sets the preference to the default value.
      *
      * @param key
-     *            name of the key to look up, usually a static string from this
-     *            class
+     *            name of the key to look up, usually a static string from this class
      * @param defaultValue
      *            default value for the key
      * @return preference value as an integer
@@ -624,8 +608,7 @@ public final class Preferences {
     }
 
     /**
-     * Sets the value of some preference. The value will be persisted to disk as
-     * XML, serialized via value.toString().
+     * Sets the value of some preference. The value will be persisted to disk as XML, serialized via value.toString().
      *
      * @param name
      *            preference key name, usually Preferences.PREF_...
@@ -660,9 +643,8 @@ public final class Preferences {
     /**
      * Register to receive notifications when the specified preference changes.
      * <p>
-     * Note: The value returned by {@code getNewValue()} will be of the "correct" type (Integer, Boolean,
-     * Enum, etc.) but the value returned by {@code getOldValue()} will be the String equivalent for storing
-     * in XML.
+     * Note: The value returned by {@code getNewValue()} will be of the "correct" type (Integer, Boolean, Enum, etc.)
+     * but the value returned by {@code getOldValue()} will be the String equivalent for storing in XML.
      *
      * @param listener
      */
@@ -740,15 +722,12 @@ public final class Preferences {
      * <li>user filter settings
      * <li>user segmentation settings
      * </ul>
-     * from existing files in {@link StaticUtils#getConfigDir()} (and others for
-     * general prefs; see {@link #getPreferencesFile()}) and set things up to
-     * create them via {@link #save()} if they don't yet exist.
+     * from existing files in {@link StaticUtils#getConfigDir()} (and others for general prefs; see
+     * {@link #getPreferencesFile()}) and set things up to create them via {@link #save()} if they don't yet exist.
      * <p>
-     * When the preferences system is required but actual user preferences
-     * shouldn't be loaded or altered (testing scenarios), use
-     * {@link TestPreferencesInitializer} methods or be sure to set the config
-     * dir with {@link RuntimePreferences#setConfigDir(String)} before calling
-     * this method.
+     * When the preferences system is required but actual user preferences shouldn't be loaded or altered (testing
+     * scenarios), use {@link TestPreferencesInitializer} methods or be sure to set the config dir with
+     * {@link RuntimePreferences#setConfigDir(String)} before calling this method.
      */
     public static synchronized void init() {
         if (didInit) {
@@ -802,7 +781,8 @@ public final class Preferences {
     private static Filters filters;
 
     // Support for firing property change events
-    private static final PropertyChangeSupport PROP_CHANGE_SUPPORT = new PropertyChangeSupport(Preferences.class);
+    private static final PropertyChangeSupport PROP_CHANGE_SUPPORT = new PropertyChangeSupport(
+            Preferences.class);
 
     /**
      * Gets the prefs file to use. Looks in these places in this order:

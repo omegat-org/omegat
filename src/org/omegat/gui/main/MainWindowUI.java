@@ -9,6 +9,7 @@
                2008 Andrzej Sawula, Alex Buloichik
                2014 Piotr Kulik
                2015 Aaron Madlon-Kay
+               2023 Jean-Christophe Helary
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -56,6 +57,7 @@ import org.omegat.core.events.IProjectEventListener;
 import org.omegat.gui.editor.EditorController;
 import org.omegat.gui.filelist.ProjectFilesListController;
 import org.omegat.util.Log;
+import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
@@ -89,8 +91,7 @@ public final class MainWindowUI {
     public static final String UI_LAYOUT_FILE = "uiLayout" + OStrings.getBrandingToken() + ".xml";
 
     public enum StatusBarMode {
-        DEFAULT,
-        PERCENTAGE,
+        DEFAULT, PERCENTAGE,
     };
 
     /**
@@ -117,8 +118,8 @@ public final class MainWindowUI {
     }
 
     /**
-     * Installs a {@link IProjectEventListener} that handles loading, storing,
-     * and restoring the main window layout when a project-specific layout is present.
+     * Installs a {@link IProjectEventListener} that handles loading, storing, and restoring the main window layout when
+     * a project-specific layout is present.
      */
     public static void handlePerProjectLayouts(final MainWindow mainWindow) {
         PerProjectLayoutHandler handler = new PerProjectLayoutHandler(mainWindow);
@@ -200,8 +201,8 @@ public final class MainWindowUI {
 
         Border border = UIManager.getBorder("OmegaTStatusArea.border");
 
-        final StatusBarMode progressMode = Preferences.getPreferenceEnumDefault(
-                Preferences.SB_PROGRESS_MODE, StatusBarMode.DEFAULT);
+        final StatusBarMode progressMode = Preferences.getPreferenceEnumDefault(Preferences.SB_PROGRESS_MODE,
+                StatusBarMode.DEFAULT);
 
         String statusText = OStrings.getString("MW_PROGRESS_DEFAULT");
         String tooltipText = "MW_PROGRESS_TOOLTIP";
@@ -217,8 +218,8 @@ public final class MainWindowUI {
             @Override
             public void mouseClicked(MouseEvent e) {
                 StatusBarMode[] modes = StatusBarMode.values();
-                StatusBarMode progressMode = Preferences.getPreferenceEnumDefault(
-                        Preferences.SB_PROGRESS_MODE, StatusBarMode.DEFAULT);
+                StatusBarMode progressMode = Preferences
+                        .getPreferenceEnumDefault(Preferences.SB_PROGRESS_MODE, StatusBarMode.DEFAULT);
                 progressMode = modes[(progressMode.ordinal() + 1) % modes.length];
 
                 Preferences.setPreference(Preferences.SB_PROGRESS_MODE, progressMode);
@@ -267,7 +268,33 @@ public final class MainWindowUI {
      * Initialize the size of OmegaT window, then load the layout prefs.
      */
     public static void initializeScreenLayout(MainWindow mainWindow) {
-        mainWindow.setBounds(getDefaultBounds());
+        /**
+         * (23dec22) Set a reasonable default window size assuming a standard"pro" laptop resolution of 1920x1080.
+         * Smaller screens do not need to be considered since OmegaT will just use the whole window size in such cases.
+         */
+
+        // Check the real available space accounting for macOS DOCK, Windows Toolbar, etc.
+        Rectangle localAvailableSpace = GraphicsEnvironment.getLocalGraphicsEnvironment()
+                .getMaximumWindowBounds();
+        int screenWidth = localAvailableSpace.width;
+        int screenHeight = localAvailableSpace.height;
+        int omegatWidth = OConsts.OMEGAT_WINDOW_WIDTH;
+        int omegatHeight = OConsts.OMEGAT_WINDOW_HEIGHT;
+
+        if (omegatWidth > screenWidth) {
+            omegatWidth = screenWidth;
+        }
+
+        if (omegatHeight > screenHeight) {
+            omegatHeight = screenHeight;
+        }
+
+        // Attempt to center the OmegaT main window on the screen
+        int omegatLeftPosition = (screenWidth - omegatWidth) / 2;
+
+        Rectangle defaultWindowSize = new Rectangle(omegatLeftPosition, 0, omegatWidth, omegatHeight);
+
+        mainWindow.setBounds(defaultWindowSize);
         StaticUIUtils.persistGeometry(mainWindow, Preferences.MAINWINDOW_GEOMETRY_PREFIX);
 
         loadScreenLayoutFromPreferences(mainWindow);
@@ -279,26 +306,8 @@ public final class MainWindowUI {
     }
 
     /**
-     * Assume screen size is 800x600 if width less than 900, and 1024x768 if
-     * larger. Assume task bar at bottom of screen. If screen size saved,
-     * recover that and use instead (18may04).
-     */
-    static Rectangle getDefaultBounds() {
-        // size info missing - put window in default position
-        GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
-        Rectangle scrSize = env.getMaximumWindowBounds();
-        if (scrSize.width < 900) {
-            // assume 800x600
-            return new Rectangle(0, 0, 580, 536);
-        } else {
-            // assume 1024x768 or larger
-            return new Rectangle(0, 0, 690, 700);
-        }
-    }
-
-    /**
-     * Load the main window layout from the global preferences file. Will reset to defaults
-     * if global preferences are not present or if an error occurs.
+     * Load the main window layout from the global preferences file. Will reset to defaults if global preferences are
+     * not present or if an error occurs.
      */
     private static void loadScreenLayoutFromPreferences(MainWindow mainWindow) {
         File uiLayoutFile = new File(StaticUtils.getConfigDir(), MainWindowUI.UI_LAYOUT_FILE);
@@ -310,8 +319,7 @@ public final class MainWindowUI {
     }
 
     /**
-     * Load the main window layout from the specified file. Will reset to
-     * defaults if an error occurs.
+     * Load the main window layout from the specified file. Will reset to defaults if an error occurs.
      */
     private static void loadScreenLayout(MainWindow mainWindow, File uiLayoutFile) {
         try (InputStream in = new FileInputStream(uiLayoutFile)) {

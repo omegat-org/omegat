@@ -71,21 +71,6 @@ be launched.
 
 
 
-Using Java Web Start for installing OmegaT (all platforms)
-===========================================================
-
-If you have already Java installed on your system, one way to install OmegaT is
-to use Java Web Start.
-
-For this purpose download the following file and then execute it:
-
-  https://omegat.sourceforge.net/webstart/OmegaT.jnlp
-
-It will install the correct environment for your computer and the application
-itself on the first run. Later calls do not need to be online.
-
-
-
 Launching OmegaT (Windows)
 ==========================
 
@@ -162,7 +147,7 @@ Current team:
 
 - Marco Cevoli (Telegram community manager)
 - Jean-Christophe Helary (Twitter community manager)
-- Kos Ivantsof (localisation manager)
+- Kos Ivantsov (localisation manager)
 - Concepción Martin (Facebook community manager)
 - Briac Pilpré (webmaster)
 - Lucie Vecerova (Facebook community manager)

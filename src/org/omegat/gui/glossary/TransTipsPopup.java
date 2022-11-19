@@ -27,6 +27,8 @@
 
 package org.omegat.gui.glossary;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -37,6 +39,7 @@ import javax.swing.text.JTextComponent;
 import org.omegat.core.Core;
 import org.omegat.gui.editor.IPopupMenuConstructor;
 import org.omegat.gui.editor.SegmentBuilder;
+import org.omegat.util.StringUtil;
 import org.omegat.util.Token;
 import org.omegat.util.gui.MenuItemPager;
 
@@ -78,6 +81,22 @@ public class TransTipsPopup implements IPopupMenuConstructor {
                             if (!added.contains(s)) {
                                 JMenuItem it = pager.add(new JMenuItem(s));
                                 it.addActionListener(e -> Core.getEditor().insertText(s));
+                                it.addMouseListener(new MouseAdapter() {
+                                    @Override
+                                    public void mouseEntered(final MouseEvent e) {
+                                        String comment = ge.getCommentText();
+                                        if (!StringUtil.isEmpty(comment)) {
+                                            it.setToolTipText(comment);
+                                        }
+                                    }
+
+                                    @Override
+                                    public void mouseReleased(MouseEvent e) {
+                                        if (it.getToolTipText(e) != null) {
+                                            it.setToolTipText(null);
+                                        }
+                                    }
+                                });
                                 added.add(s);
                             }
                         }

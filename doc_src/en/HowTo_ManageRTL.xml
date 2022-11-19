@@ -1,132 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
-"../../../docbook-xml-4.5/docbookx.dtd">
-<section id="howto.managerighttoleft">
-  <title>Manage Right-To-Left languages</title>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="how.to.manage.right.to.left">
+  <title id="how.to.manage.right.to.left.title">Manage RTL Languages</title>
 
-   <para>Justification of source and target segments depends upon the project
-    languages. By default, left justification is used for Left-To-Right (LTR)
-    languages and right justification for Right-To-Left (RTL) languages. You
-    can toggle between different display modes by pressing <keycombo>
-        <keycap>Shift</keycap>
-
-        <keycap>Ctrl</keycap>
-
-        <keycap>O</keycap>
-      </keycombo> (this is the letter O and not the numeral 0). The <keycombo>
-        <keycap>Shift</keycap>
-
-        <keycap>Ctrl</keycap>
-
-        <keycap>O</keycap>
-      </keycombo> toggle has three states:</para>
+   <para>The justification of source and target segments depends on the project languages. By default, left justification is used for left-to-right (LTR) languages and right justification for right-to-left (RTL) languages. You can toggle between the following three justification modes by pressing <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>O</keycap></keycombo>: </para>
 
     <itemizedlist>
       <listitem>
-        <para>default justification, that is as defined by the language</para>
+        <para>Default, as defined by the language</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>left justification</para>
+        <para>Left</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>right justification</para>
+        <para>Right</para>
       </listitem>
     </itemizedlist>
 
-    <para>Using the RTL mode in OmegaT has no
-    influence whatsoever on the display mode of the translated documents
-    created in OmegaT. The display mode of the
-    translated documents must be modified within the application (such as
-    Microsoft Word) commonly used to display or modify them (check the
-    relevant manuals for details). Using <keycombo>
-        <keycap>Shift</keycap>
+    <para>Switching between modes changes both how the text is entered and displayed. Each mode can be used separately in the <guilabel>Editor</guilabel>, <guilabel>Fuzzy Matches</guilabel>, and <guilabel>Glossary</guilabel> panes by selecting the desired pane and toggling the justification mode. It can also be used in all OmegaT input fields, such as the <guilabel>Text Search</guilabel> window or the segmentation rules dialog, for example.</para>
 
-        <keycap>Ctrl</keycap>
+    <para></para>
 
-        <keycap>O</keycap>
-      </keycombo> causes both text input and display in
-    OmegaT to change. It can be used separately for
-    all three panes (Editor, Fuzzy Matches and Glossary) by clicking on the
-    pane and toggling the display mode. It can also be used in all the input
-    fields found in OmegaT - in the search window,
-    for segmentation rules etc.</para>
+    <section id="how.to.manage.right.to.left.mixing.rtl.and.ltr">
+      <title id="how.to.manage.right.to.left.mixing.rtl.and.ltr.title">Mixing RTL and LTR</title>
 
-    <para>Mac OS X users, note: use <keycombo>
-        <keycap>Shift</keycap>
-
-        <keycap>Ctrl</keycap>
-
-        <keycap>O</keycap>
-      </keycombo> shortcut and not
-    <keycombo><keycap>cmd</keycap><keycap>Ctrl</keycap><keycap>O</keycap></keycombo>.</para>
-
-    <section>
-      <title>Mixing RTL and LTR strings in segments</title>
-
-      <para>When writing purely RTL text, the default (LTR) view may be used.
-      In many cases, however, it is necessary to embed LTR text in RTL text.
-      For example, in OmegaT tags, product names that must be left in the LTR
-      source language, place holders in localization files, and numbers in
-      text. In cases like these it becomes necessary to switch to RTL mode, so
-      that the RTL (in fact bidirectional) text is displayed correctly. It
-      should be noted that when OmegaT is in RTL
-      mode, both source and target are displayed in RTL mode. This means that
-      if the source language is LTR and the target language is RTL, or vice
-      versa, it may be necessary to toggle back and forth between RTL and LTR
-      modes to view the source and enter the target easily in their respective
-      modes.</para>
+      <para>You can use the default (LTR) mode to write purely RTL text. However, it is often necessary to include LTR text, such as  OmegaT tags, product names that must retain their original LTR language direction, or placeholders in localization files, within an RTL document.  In such cases, you must switch to RTL mode to ensure the RTL (or, more precisely, bidirectional) text is displayed correctly. Note that OmegaT shows both the source and target in the same mode. Consequently,  if the source language is LTR and the target language is RTL, or vice versa, you will need to toggle back and forth between the two modes to read the source and enter the target easily.</para>
     </section>
 
-    <section>
-      <title>OmegaT tags in RTL segments</title>
+    <section id="how.to.manage.right.to.left.omegat.tags.and.rtl">
+      <title id="how.to.manage.right.to.left.omegat.tags.and.rtl.title">Tags in RTL Segments</title>
 
-      <para>As stated above, OmegaT tags are LTR strings. When translating
-      between RTL and LTR languages, correctly reading the tags from the
-      source and entering them properly in the target may require the
-      translator to toggle between LTR and RTL modes numerous times.</para>
+      <para>OmegaT tags are LTR strings. When translating between RTL and LTR languages, correctly reading the tags from the source and entering them properly in the target may require the translator to toggle between LTR and RTL modes numerous times.</para>
 
-      <para>If the document allows, the translator is strongly encouraged to
-      remove style information from the original document so that as few tags
-      as possible appear in the OmegaT interface. Follow the indications given
-      in Hints for tags management. Frequently validate tags (see Tag
-      validation) and produce translated documents (see below and Menu) at
-      regular intervals to make it easier to catch any problems that arise. A
-      hint: translating a plain text version of the text and adding the
-      necessary style in the relevant application at a later stage may turn
-      out to be less hassle.</para>
+      <para>Therefore, translators are encouraged to remove style information from the original document whenever possible to limit the number of tags displayed in the editor.  Check tag issues with <link linkend="menus.tools.check.issues" endterm="menus.tools.check.issues.title"/> and produce translated documents regularly to catch any problems quickly. Hint: it may be simpler to  translate a plain text version of the document and add any necessary styling in the relevant application at a later stage.</para>
     </section>
 
-    <section>
-      <title>Creating translated RTL documents</title>
+    <section id="how.to.manage.right.to.left.creating.translated.rtl.documents">
+      <title id="how.to.manage.right.to.left.creating.translated.rtl.documents.title">Translated Documents</title>
 
-      <para>When the translated document is created, its display direction
-      will be the same as that of the original document. If the original
-      document was LTR, the display direction of the target document must be
-      changed manually to RTL in its viewing application. Each output format
-      has specific ways of dealing with RTL display; check the relevant
-      application manuals for details.</para>
+      <para>The translated document will be created in the same display direction as the original. You will have to change the text direction of the target document in its own application. </para>
 
-      <para>For .docx files, a number of changes are however done
-      automatically: <itemizedlist>
+      <para>Note that in Microsoft Word .docx files, a number of changes are made automatically:<itemizedlist>
           <listitem>
-            Paragraphs, sections and tables are set to bidi
+            <para>Paragraphs, sections and tables are set to bidirectional text.</para>
           </listitem>
 
           <listitem>
-            Runs (text elements) are set to RTL
+            <para>Runs (short sections of text in the same style) are set to RTL.</para>
           </listitem>
         </itemizedlist></para>
 
-      <para>To avoid changing the target files display parameters each time
-      the files are opened, it may be possible to change the source file
-      display parameters such that such parameters are inherited by the target
-      files. Such modifications are possible in ODF files for example.</para>
-
-  </section>
+      <para>With some file formats, such as ODF, it is also possible to modify the settings in the source file so that they are automatically applied to the target file, eliminating the need to set them every time you open it. </para>
+    </section>
 </section>

@@ -33,12 +33,14 @@ import java.io.File;
 import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
 import org.omegat.gui.dictionaries.IDictionaries;
 import org.omegat.tokenizer.DefaultTokenizer;
 import org.omegat.util.Language;
@@ -96,6 +98,24 @@ public class DictionariesManagerTest {
         fw.println(IGNORE_WORD);
         fw.close();
         assertFalse(fw.checkError());
+
+        manager.addDictionaryFactory(new IDictionaryFactory() {
+            @Override
+            public boolean isSupportedFile(final File file) {
+                return true;
+            }
+            @Override
+            public IDictionary loadDict(final File file) throws Exception {
+                return new DummyDictionaryDriver();
+            }
+        });
+    }
+
+    static class DummyDictionaryDriver implements IDictionary {
+        @Override
+        public List<DictionaryEntry> readArticles(final String word) {
+            return Collections.singletonList(new DictionaryEntry(word, "result"));
+        }
     }
 
     @After
@@ -111,21 +131,21 @@ public class DictionariesManagerTest {
     public void testFileChanged() {
 
         // Nothing is loaded so there should be no result.
-        List<DictionaryEntry> result = manager.findWords(Arrays.asList(IGNORE_WORD));
+        List<DictionaryEntry> result = manager.findWords(Collections.singletonList(IGNORE_WORD));
         assertTrue(result.isEmpty());
 
         // Load sample dictionary.
         manager.fileChanged(DICT_FILE);
 
         // Now we find the result.
-        result = manager.findWords(Arrays.asList(IGNORE_WORD));
+        result = manager.findWords(Collections.singletonList(IGNORE_WORD));
         assertFalse(result.isEmpty());
 
         // Load ignore list.
         manager.fileChanged(IGNORE_FILE);
 
         // Now we should not find the result.
-        result = manager.findWords(Arrays.asList(IGNORE_WORD));
+        result = manager.findWords(Collections.singletonList(IGNORE_WORD));
         assertTrue(result.isEmpty());
     }
 
@@ -136,11 +156,11 @@ public class DictionariesManagerTest {
     public void testLoadIgnoreWords() throws Exception {
         manager.fileChanged(DICT_FILE);
 
-        List<DictionaryEntry> result = manager.findWords(Arrays.asList(IGNORE_WORD));
+        List<DictionaryEntry> result = manager.findWords(Collections.singletonList(IGNORE_WORD));
         assertFalse(result.isEmpty());
 
         manager.loadIgnoreWords(IGNORE_FILE);
-        result = manager.findWords(Arrays.asList(IGNORE_WORD));
+        result = manager.findWords(Collections.singletonList(IGNORE_WORD));
         assertTrue(result.isEmpty());
     }
 
@@ -153,11 +173,11 @@ public class DictionariesManagerTest {
 
         String word = "testudo";
 
-        List<DictionaryEntry> result = manager.findWords(Arrays.asList(word));
+        List<DictionaryEntry> result = manager.findWords(Collections.singletonList(word));
         assertFalse(result.isEmpty());
 
         manager.addIgnoreWord(word);
-        result = manager.findWords(Arrays.asList(word));
+        result = manager.findWords(Collections.singletonList(word));
         assertTrue(result.isEmpty());
     }
 

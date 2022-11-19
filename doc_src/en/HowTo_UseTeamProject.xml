@@ -1,94 +1,240 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="howto.useteamproject">
-  <title>Use a Team Project</title>
+<section id="how.to.use.team.project">
+  <title id="how.to.use.team.project.title">Use a Team Project</title>
 
-  <para>OmegaT team projects must first be <link linkend="howto.setupteamproject">set up</link> on a server.</para>
+  <para>Team projects use synchronization mechanisms between project members.</para>
 
-  <para>To use a team project for the first time, follow the procedure
-  provided by the project manager.</para>
+  <para>Once a OmegaT team project is installed on a server, the administrator
+  sends members the information they need to access it: a URL indicating the
+  location of the project, or an <filename>omegat.project</filename>
+  file.</para>
 
-  <para>Once the project has been opened, translation proceeds in the same way
-  as for a non-team project, except the following points.</para>
+  <para>Once the project is downloaded, it is installed localy and must only be opened locally to synchronize with the server.</para>
 
-  <para><emphasis role="bold">Automatic saving</emphasis></para>
+  <para>Repository credentials are stored in <link linkend="configuration.folder.extra.contents.repositories" endterm="configuration.folder.extra.contents.repositories.title"/> and can be deleted from <link linkend="dialog.preferences.team.title.repository.credentials" endterm="dialog.preferences.team.title.repository.credentials.title"/>.</para>
 
-  <para>Every 3 minutes (by default), the local project is synchronised with
-  the remote repository so that the project manager or other translators can
-  see and use translations added during that period.</para>
+  <para>Since synchronization takes place by default every 3 minutes, project
+  members will sometime translate or modify a segment that was already translated by
+  another member but not synchronized yet. When that happens, members have to
+  select the appropriate translation.</para>
 
-  <para>The interval of 3 minutes can be changed in <link linkend="dialogs.preferences.savingandoutput"><menuchoice>
-      <guimenu>Options</guimenu>
-
-      <guimenuitem>Preferences</guimenuitem>
-
-      <guimenuitem>Saving and Output</guimenuitem>
-    </menuchoice></link>.</para>
-
-  <para><emphasis role="bold">Synchronised files</emphasis></para>
-
-  <para>Whenever the project is automatically saved, but also when it is
-  opened, closed and reloaded, only two files are actually
-  synchronised:</para>
-
-  <itemizedlist>
-    <listitem>
-      <para>omegat/project_save.tmx</para>
-    </listitem>
-
-    <listitem>
-      <para>glossary/glossary.txt</para>
-    </listitem>
-  </itemizedlist>
-
-  <para>All other files will be replaced by the files in the remote
-  repository.</para>
-
-  <para><emphasis role="bold">Adding new source files</emphasis></para>
-
-  <para>To add a new source file:</para>
-
-  <para><orderedlist>
+  <para>Members can take turns translating and reviewing the files. The Search function allows them to filter the editor pane on contents translated by a given person, or on contents translated after or before a given time, etc.</para>
+  
+  <variablelist>
+    <varlistentry>
+      <term>Downloading the project</term>
       <listitem>
-        <para>copy the files to the <filename class="directory">source</filename> folder</para>
-      </listitem>
+		<orderedlist>
+		  <listitem>
+			<para>From a URL</para>
+
+			<para>Click the <link
+			endterm="menus.project.download.team.project.title"
+			linkend="menus.project.download.team.project"/> command in the <link
+			endterm="menus.project.title" linkend="menus.project"/> menu. This will
+			bring up the <guilabel>Download Team Project</guilabel> dialog.</para>
+
+			<para>Enter the URL provided by the team project manager in the
+			<guilabel>Repository URL:</guilabel> field at the top of the dialog, and
+			specify a folder for the project in the <guilabel>New Local Project
+			Folder:</guilabel> field. Leave the <guilabel>Default branch</guilabel>
+			option checked unless the project administrator has provided instructions
+			for using a custom branch.</para>
+		  </listitem>
+
+		  <listitem>
+			<para>From an <filename>omegat.project</filename> file</para>
+
+			<para>Put the <filename>omegat.project</filename> file in an empty
+			folder, and open it in OmegaT. The project will automatically be
+			downloaded to the folder containing that file.</para>
+		  </listitem>
+		</orderedlist>
+
+		<note>
+		  <para>Servers generally use two main types of authentication: entering a
+		  <emphasis>username/password</emphasis>, or
+		  <emphasis>SSH</emphasis>.</para>
+
+		  <para>If the server relies on username/password authentication, OmegaT will
+		  present you with an <guilabel>Authentication</guilabel> dialog to enter your
+		  username and password either when you first download the project or later on
+		  in the process. OmegaT will then remember your credentials for that specific
+		  project unless you explicitly delete them. See <link linkend="dialog.preferences.team.title.repository.credentials" endterm="dialog.preferences.team.title.repository.credentials.title"/> for details.</para>
+
+		  <para>If the server uses SSH authentication, make sure you update your SSH
+		  configuration to include that server before attempting to download the
+		  project, otherwise you will get an authentication error and the project
+		  will fail to load.</para>
+		</note>
+
+	  </listitem>
+	</varlistentry>
+
+    <varlistentry>
+      <term>Synchronization</term>
 
       <listitem>
-        <para>use <menuchoice>
-            <guimenu>Project</guimenu>
+        <para>Synchronizing the project adds translations made by all the team
+        members to local copies of the project. Only the contents of
+        the two following files are synchronized: <itemizedlist>
+        <listitem>
+          <para><filename>project.save</filename></para>
+        </listitem>
 
-            <guimenuitem>Commit Source Files</guimenuitem>
-          </menuchoice></para>
+        <listitem>
+          <para><filename>glossary.txt</filename></para>
+        </listitem>
+        </itemizedlist></para>
+
+        <para>During synchronization, all the other local files are overwritten with the versions on the remote server, exept for <filename>omegat.project</filename>, see below.</para>
+
+        <para>OmegaT synchronizes a team project when it is opened, reloaded,
+        closed or saved. This means the automatic save function also regularly
+        synchronizes local versions with the version on the server at the
+        interval specified in <link
+        endterm="dialog.preferences.saving.and.output.interval.title"
+        linkend="dialog.preferences.saving.and.output.interval"/>.</para>
       </listitem>
-    </orderedlist>Existing source files can be modified, but the commit
-  operation must be carried out before an automatic save and before the
-  project is reloaded or closed.</para>
+    </varlistentry>
 
-  <para><emphasis role="bold">Deleting source files</emphasis></para>
+    <varlistentry>
+      <term>Team project configuration</term>
 
-  <para>Files must be deleted by the project manager.</para>
+      <listitem>
+        <para>As in regular local projects, the configuration of the team
+        project is defined by the contents <filename>omegat.project</filename>
+        file and the optional use of special files to for project-specific
+        filters or segmentation rules.</para>
 
-  <para><emphasis role="bold">Changing segmentation rules or file
-  filters</emphasis></para>
+        <para>The first time the project is downloaded, OmegaT retrieves the
+        <filename>omegat.project</filename> file from the server. This file
+        defines the following parameters:</para>
 
-  <para>Project parameters must be changed by the project manager.</para>
+        <itemizedlist>
+          <listitem>
+            <para><emphasis>Basic project configuration:</emphasis> Source and
+            languages, tokenizers, and the project folder hierarchy.</para>
 
-  <para><emphasis role="bold">Working offline</emphasis></para>
+			<para>In a team
+            project, the basic configuration parameters of the local project
+            are always overridden by the configuration on the server that was
+            set by the project administrator.</para>
+          </listitem>
 
-  <para>A team project can be opened and translated offline. All the changes
-  will be synchronised the next time a connection is available.</para>
+          <listitem>
+            <para><emphasis>Repository mappings</emphasis></para>
 
-  <para>To work offline:</para>
+            <para>See <link
+            linkend="how.to.setup.team.project.mapping.parameters" endterm="how.to.setup.team.project.mapping.parameters.title"/> for details.
 
-  <itemizedlist>
-    <listitem>
-      <para>Disconnect from the network before opening the project,</para>
-    </listitem>
+            <itemizedlist>
+              <listitem>
+                <para>If no custom mappings have been defined for the remote
+                project, but local mappings have been customized, the local
+                settings are preserved without affecting the settings on the
+                server.</para>
+              </listitem>
 
-    <listitem>
-      <para>or open the project with the command line using the
-      <command>--no-team</command> option.</para>
-    </listitem>
-  </itemizedlist>
+              <listitem>
+                <para>If the remote project contains custom mappings, but the
+                local project does not, the mappings from the server are
+                applied to the local project.</para>
+              </listitem>
+
+              <listitem>
+                <para>If the remote project specifies a URL protocol and you
+                download it using a different protocol, your local
+                configuration will be preserved.</para>
+
+                <para>For example, many hosting services support access to the
+                same repository using either the SSH +Git or https protocol.
+                OmegaT will respect the local protocol selection.</para>
+              </listitem>
+
+              <listitem>
+                <para>If you first download the remote project using an
+                <filename>omegat.project</filename> file provided by the
+                project administrator, OmegaT will use the mappings in that
+                file, if any.</para>
+              </listitem>
+
+              <listitem>
+                <para>If there is a conflict between the remote and local
+                versions of the <filename>omegat.project</filename> and the
+                local version is overwritten, OmegaT creates a backup file
+                called <filename>omegat.project.YYYYMMDDhhmm.bak</filename>.
+                The backup files are kept for a least ten days, and older
+                backups are automatically deleted.</para>
+              </listitem>
+            </itemizedlist>
+			</para>
+		  </listitem>
+		</itemizedlist>
+
+        <warning>
+          <para>Remember that any modifications to the local project
+          configuration files will be overwritten by the versions on the
+          server when the project is synchronized.</para>
+        </warning>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Source files</term>
+      <listitem>
+        <warning><para>The <link
+        endterm="menus.project.commit.source.files.title"
+        linkend="menus.project.commit.source.files"/> command should only be used by the project administrator.</para></warning>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Target files</term>
+
+      <listitem>
+        <para>After you generate the target files, and if the project
+        administrator requests so, you can use the <link
+        endterm="menus.project.commit.target.files.title"
+        linkend="menus.project.commit.target.files"/> command to add them to the
+        server.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Deleting files</term>
+
+      <listitem>
+        <para>Files in a team project cannot be deleted from OmegaT or the
+        local file system. They will be restored the next time the project is
+        synchronized. This task is normally performed by the project
+        administrator.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Working offline</term>
+
+      <listitem>
+        <para>You can open a team project and work on it offline. All changes
+        will be synchronized the next time a connection is available.</para>
+
+        <para>There are two ways work offline:</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>Disconnect from the network before opening the
+            project.</para>
+          </listitem>
+
+          <listitem>
+            <para>Open the project from the command line with the
+            <parameter>--no-team</parameter> option. See <link linkend="launch.with.command.line" endterm="launch.with.command.line.title"/> for details.</para>
+          </listitem>
+        </itemizedlist>
+      </listitem>
+    </varlistentry>
+  </variablelist>
 </section>

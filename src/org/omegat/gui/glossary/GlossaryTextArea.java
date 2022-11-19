@@ -408,7 +408,7 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
         openFile.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Core.getMainWindow().getMainMenu().invokeAction("projectAccessWriteableGlossaryMenuItem", e.getModifiers());
+                Core.getMainWindow().getMainMenu().invokeAction("projectAccessWritableGlossaryMenuItem", e.getModifiers());
             }
         });
         openFile.setEnabled(false);
@@ -427,6 +427,13 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
             }
         });
         menu.add(notify);
+        menu.addSeparator();
+        final JMenuItem sortOrderLocLength = new JCheckBoxMenuItem(OStrings.getString(
+                "GUI_GLOSSARYWINDOW_SETTINGS_SORT_BY_LENGTH"));
+        sortOrderLocLength.setSelected(Preferences.isPreferenceDefault(
+                Preferences.GLOSSARY_SORT_BY_LENGTH, false));
+        sortOrderLocLength.addActionListener(actionEvent -> Preferences.setPreference(Preferences.GLOSSARY_SORT_BY_LENGTH,
+                sortOrderLocLength.isSelected()));
+        menu.add(sortOrderLocLength);
     }
-
 }

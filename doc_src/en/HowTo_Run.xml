@@ -239,7 +239,7 @@
 			</listitem>
 		  </varlistentry>
 		  <varlistentry id="launch.with.command.line.intro.omegat.options">
-			<term id="launch.with.command.line.intro.omegat.options.title"><emphasis>&lt;OmegaT parameters&gt;</emphasis></term>
+			<term id="launch.with.command.line.intro.omegat.options.title"><emphasis>&lt;OmegaT options&gt;</emphasis></term>
 			<listitem>
 			  <para>The options specific to OmegaT are described <link
 			  linkend="launch.with.command.line.omegat.options">later
@@ -264,8 +264,8 @@
 			two-letter language code from the <ulink
 			url="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes">ISO
 			639.1</ulink> list.</para>
-			<para>Using this option will launch OmegaT with the user
-			interface in that language, if available (even
+			<para>Using this parameter launches OmegaT with the user
+			interface in the specified language, if available (even
 			partially). If the language is not available, OmegaT
 			defaults to English even if the system uses a different
 			default language.</para>
@@ -280,7 +280,7 @@
 			two-letter country code from the <ulink
 			url="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
 			3166-1 alpha-2</ulink> list.</para>
-			<para>This option combines with the previous user
+			<para>This parameter combines with the previous user
 			interface language parameter to specify a regional
 			variant. If that variant is not available, the user
 			interface follows the same priority as above.</para>
@@ -291,10 +291,9 @@
 		  <term id="launch.with.command.line.maximum.memory.assignment.title">Maximum memory assignment</term>
 		  <listitem>
 			<para><code>-XmxSIZE</code></para>
-			<para>Replace <code>SIZE</code> is a number of bytes in
-			multiples of 1024 and at least 2 MB, followed by
-			<code>k</code> for kilobytes, <code>m</code> for
-			megabytes, or <code>g</code> for gigabytes.</para>
+			<para>Replace <code>SIZE</code> with a number consisting of a multiple of
+			1024 followed by <code>k</code> for kilobytes, <code>m</code> for
+			megabytes, or <code>g</code> for gigabytes. The number must correspond to at least 2 MB.</para>
 		  </listitem>
 		</varlistentry>
 

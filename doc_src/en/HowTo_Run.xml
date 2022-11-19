@@ -174,9 +174,9 @@
 
 	  <note>
 		<para>The syntax used to specify the location of an application or
-		folder depends on the platform. On Windows, the (<code>\</code>
+		folder depends on the platform. On Windows, the <code>\</code>
 		character is used to separate folder and file names, while macOS and
-		Linux the <code>/</code> to do so.</para>
+		Linux use the <code>/</code> to do so.</para>
 
 		<para>Here are the default OmegaT.jar locations for
 		each major platform: 
@@ -197,10 +197,11 @@
 			<term id="launch.with.command.line.linux.title">Linux</term>
 			<listitem>
 			  <para><filename>/opt/omegat/OmegaT.jar</filename></para>
+				<para>(This can vary depending on your distribution.)</para>
 			</listitem>
 		  </varlistentry>
 		</variablelist>
-		That location is written <filename>path/to/OmegaT.jar</filename> in this chapter but you'll have to replace it with the real location on your platform.
+		That location is presented as <filename>path/to/OmegaT.jar</filename> in this chapter. Replace it with the actual location on your system.
 		</para>
 	  </note>	
 	</section>
@@ -210,7 +211,7 @@
 		  id="launch.with.command.line.omegat.terminal.command.syntax.title">Command syntax</title>
 
 	  <para>The syntax to launch OmegaT from the terminal is:
-	  <programlisting>java -jar &lt;java parameters&gt; path/to/OmegaT.jar &lt;OmegaT parameters&gt; </programlisting></para>
+	  <programlisting>java -jar &lt;java parameters&gt; path/to/OmegaT.jar &lt;OmegaT options&gt; </programlisting></para>
 	  <para>
 		<variablelist>
 		  <varlistentry id="launch.with.command.line.java.jar">
@@ -237,11 +238,11 @@
 			  
 			</listitem>
 		  </varlistentry>
-		  <varlistentry id="launch.with.command.line.intro.omegat.parameters">
-			<term id="launch.with.command.line.intro.omegat.parameters.title"><emphasis>&lt;OmegaT parameters&gt;</emphasis></term>
+		  <varlistentry id="launch.with.command.line.intro.omegat.options">
+			<term id="launch.with.command.line.intro.omegat.options.title"><emphasis>&lt;OmegaT parameters&gt;</emphasis></term>
 			<listitem>
 			  <para>The options specific to OmegaT are described <link
-			  linkend="launch.with.command.line.omegat.parameters">later
+			  linkend="launch.with.command.line.omegat.options">later
 			  in this section</link></para>
 			</listitem>					
 		  </varlistentry>
@@ -253,8 +254,7 @@
 	  <title id="launch.with.command.line.java.parameters.title">Java
 	  parameters</title>
 
-	  <para>The list below presents parameters for the <command>java</command>
-	  that can be useful when working with OmegaT.
+	  <para>The list below presents parameters for the <command>java</command> command that can be useful when working with OmegaT.
 	  <variablelist>
 		<varlistentry id="launch.with.command.line.user.interface.language">
 		  <term id="launch.with.command.line.user.interface.language.title">User interface language</term>
@@ -301,27 +301,27 @@
 		<varlistentry id="launch.with.command.line.proxy.host.ip.address">
 		  <term id="launch.with.command.line.proxy.host.ip.address.title">Proxy host ip address</term>
 		  <listitem>
-			<para><code>-Dhttp.proxyHost=.</code></para>
-			<para>Replace <code>.</code> with the IP address of
-			your proxy server, if your system uses one.</para>
+			<para><code>-Dhttp.proxyHost=&lt;proxy IP&gt;</code></para>
+			<para>Replace <code>&lt;proxy IP&gt;</code> with the IP
+			address of your proxy server, if your system uses one.</para>
 		  </listitem>
 		</varlistentry>
 
 		<varlistentry id="launch.with.command.line.proxy.host.port.number">
 		  <term id="launch.with.command.line.proxy.host.port.number.title">Proxy host port number</term>
 		  <listitem>
-			<para><code>-Dhttp.proxyPort=.</code></para>
-			<para>Replace <code>.</code> with the port number your
-			system uses to access the proxy server.</para>
+			<para><code>-Dhttp.proxyPort=&lt;port number&gt;</code></para>
+			<para>Replace <code>&lt;port number&gt;</code> with the port
+			number your system uses to access the proxy server.</para>
 		  </listitem>
 		</varlistentry>
 	  </variablelist>
 	  </para>
 	</section>
 
-	<section id="launch.with.command.line.omegat.parameters">
-	  <title id="launch.with.command.line.omegat.parameters.title">OmegaT
-	  parameters</title>
+	<section id="launch.with.command.line.omegat.options">
+	  <title id="launch.with.command.line.omegat.options.title">OmegaT
+	  options</title>
 
 	  <para>You can also get a list of these options in the terminal with the
 	  <command>java -jar OmegaT.jar --help</command>
@@ -425,10 +425,11 @@
 					  <para>Remove the initial <code>-D</code> or
 					  <code>-X</code> to use Java parameters:</para>
 					  <programlisting>user.language=fr
-					  config-dir="path/to/new/configdir"</programlisting>
+config-dir="path/to/new/configdir"
+						</programlisting>
 					</note>
 					<para>Almost all parameters presented in this
-					function can be used in a config file. The notable
+					section can be used in a config file. The notable
 					exception is <code>remote-project</code>.</para>
 					<para>It is possible to combine
 					<code>--config-file</code> with other command line
@@ -466,8 +467,8 @@
 								<para>A whitelist of regular expressions defining
 								the source files to process. Remember that in
 								regular expressions, the period and backslash
-								character must be escaped: &quot;\.&quot; and
-								&quot;\\&quot;.</para>
+								character must be escaped: <code>\.</code> and
+								<code>\\</code>.</para>
 								<para>Here are some typical examples:
 								<variablelist>
 								  <varlistentry id="launch.with.command.line.html">

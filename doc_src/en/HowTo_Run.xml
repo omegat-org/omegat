@@ -425,7 +425,7 @@
 					  <para>Remove the initial <code>-D</code> or
 					  <code>-X</code> to use Java parameters:</para>
 					  <programlisting>user.language=fr
-					  config-dir="path/to/new/configdir"</programlisting>
+config-dir="path/to/new/configdir"</programlisting>
 					</note>
 					<para>Almost all parameters presented in this
 					function can be used in a config file. The notable

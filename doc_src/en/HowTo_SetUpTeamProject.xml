@@ -217,7 +217,7 @@
       <varlistentry>
 		<term>repository url</term>
 		<listitem>
-          <para>Remote location or directory of the files to translate.</para>
+          <para>Remote location or folder of the files to translate.</para>
 		</listitem>
       </varlistentry>
 
@@ -278,7 +278,7 @@
 	<filename>https://repo_for_OmegaT_team_project</filename> are mapped to
 	the local OmegaT project</para>
 
-	<para>Mapping for projects in a subdirectory of the repository:
+	<para>Mapping for projects in a subfolder of the repository:
 	<programlisting>
 &lt;repository type="svn" url="https://repo_for_All_OmegaT_team_projects"&gt;
   &lt;mapping local="" repository="En-US_DE_project"/&gt;

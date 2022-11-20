@@ -88,7 +88,7 @@ public final class Preferences {
     public static final String TF_SRC_FONT_NAME = "source_font";
     public static final String TF_FONT_DEFAULT = "Dialog";
     public static final String TF_SRC_FONT_SIZE = "source_font_size";
-    public static final int TF_FONT_SIZE_DEFAULT = 12;
+    public static final int TF_FONT_SIZE_DEFAULT = 13;
 
     /** Whether to automatically perform MT requests on entering segment */
     public static final String MT_AUTO_FETCH = "mt_auto_fetch";

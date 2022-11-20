@@ -279,27 +279,19 @@ public final class MainWindowUI {
     }
 
     /**
-     * Assume screen size is 800x600 if width less than 900, 1280x800 if
-     * less than 1300 and 1920 otherwise.
-     * Assume task bar at bottom of screen. If screen size saved,
-     * recover that and use instead (19nov22).
-     * https://laptoping.com/laptop-display-specs-explained.html
+     * (20nov22) it looks like we don't have to worry too much about default
+     * size because if the screen is too small for the setting, OmegaT
+     * will just use the whole window size. So I guess we just have to
+     * consider a maximum useable width for big screens.
+     * Let's assume the "standard" is 1920×1080 for "pro" laptops
+     * https://laptoping.com/laptop-display-specs-explained.html.
      */
 
     static Rectangle getDefaultBounds() {
         // size info missing - put window in default position
         GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
         Rectangle scrSize = env.getMaximumWindowBounds();
-        if (scrSize.width < 900) {
-            // assume 800x600
-            return new Rectangle(0, 0, 800, 600);
-        } else if (scrSize.width < 1300) {
-            // assume 1280x800
-            return new Rectangle(0, 0, 1280, 800);
-        } else {
-            // assume 1920×1080
-            return new Rectangle(200, 0, 1500, 1000);
-        }
+        return new Rectangle(210, 0, 1500, 1080);
     }
 
     /**

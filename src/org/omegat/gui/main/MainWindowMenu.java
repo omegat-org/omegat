@@ -372,6 +372,9 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         gotoMenu.addSeparator();
         gotoMenu.add(gotoHistoryForwardMenuItem = createMenuItem("TF_MENU_GOTO_FORWARD_IN_HISTORY"));
         gotoMenu.add(gotoHistoryBackMenuItem = createMenuItem("TF_MENU_GOTO_BACK_IN_HISTORY"));
+        gotoMenu.addSeparator();
+        gotoMenu.add(gotoNotesPanelMenuItem = createMenuItem("TF_MENU_GOTO_NOTES_PANEL"));
+        gotoMenu.add(gotoEditorPanelMenuItem = createMenuItem("TF_MENU_GOTO_EDITOR_PANEL"));
 
         viewMenu.add(viewMarkTranslatedSegmentsCheckBoxMenuItem = createCheckboxMenuItem("TF_MENU_DISPLAY_MARK_TRANSLATED"));
         viewMenu.add(viewMarkUntranslatedSegmentsCheckBoxMenuItem = createCheckboxMenuItem("TF_MENU_DISPLAY_MARK_UNTRANSLATED"));
@@ -791,6 +794,8 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
     JMenuItem editRegisterIdenticalMenuItem;
     public JMenuItem gotoHistoryBackMenuItem;
     public JMenuItem gotoHistoryForwardMenuItem;
+    JMenuItem gotoNotesPanelMenuItem;
+    JMenuItem gotoEditorPanelMenuItem;
     JMenu gotoMenu;
     JMenuItem gotoNextSegmentMenuItem;
     JMenuItem gotoNextUntranslatedMenuItem;

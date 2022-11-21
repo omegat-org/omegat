@@ -743,6 +743,14 @@ public final class MainWindowMenuHandler {
         Core.getEditor().prevEntryWithNote();
     }
 
+    public void gotoNotesPanelMenuItemActionPerformed() {
+        Core.getNotes().requestFocus();
+    }
+
+    public void gotoEditorPanelMenuItemActionPerformed() {
+        Core.getEditor().requestFocus();
+    }
+
     /**
      * Asks the user for a segment number and then displays the segment.
      */

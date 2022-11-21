@@ -56,4 +56,9 @@ public interface INotes {
 
     /** Redo last undone edits */
     void redo();
+
+    /**
+     * Set current focus to the notes panel.
+     */
+    void requestFocus();
 }

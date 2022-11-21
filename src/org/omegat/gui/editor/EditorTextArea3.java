@@ -99,8 +99,6 @@ public class EditorTextArea3 extends JEditorPane {
             .getKeyStroke("editorInsertLineBreak");
     private static final KeyStroke KEYSTROKE_SELECT_ALL = PropertiesShortcuts.getEditorShortcuts()
             .getKeyStroke("editorSelectAll");
-    private static final KeyStroke KEYSTROKE_SWITCH_ORIENTATION = PropertiesShortcuts.getEditorShortcuts()
-            .getKeyStroke("editorSwitchOrientation");
     private static final KeyStroke KEYSTROKE_DELETE_PREV_TOKEN = PropertiesShortcuts.getEditorShortcuts()
             .getKeyStroke("editorDeletePrevToken");
     private static final KeyStroke KEYSTROKE_DELETE_NEXT_TOKEN = PropertiesShortcuts.getEditorShortcuts()

@@ -159,8 +159,6 @@ public final class OConsts {
 
     /** Number of fuzzy matches to display */
     public static final int MAX_NEAR_STRINGS = 5;
-    /** Number of fuzzy matches to store */
-    public static final int MAX_STORED_NEAR_STRINGS = 50;
 
     public static final int MAX_BACKUPS = 11;
 

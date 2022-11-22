@@ -165,18 +165,11 @@ public final class Preferences {
     public static final String SEARCHWINDOW_SEARCH_HISTORY_ITEM_PREFIX = "search_window_search_history_item_";
     public static final String SEARCHWINDOW_REPLACE_HISTORY_ITEM_PREFIX = "search_window_replace_history_item_";
 
-    // Tag validation window size and position
-    public static final String TAGVWINDOW_WIDTH = "tagv_window_width";
-    public static final String TAGVWINDOW_HEIGHT = "tagv_window_height";
-    public static final String TAGVWINDOW_X = "tagv_window_x";
-    public static final String TAGVWINDOW_Y = "tagv_window_y";
-
     /** Use the TAB button to advance to the next segment */
     public static final String USE_TAB_TO_ADVANCE = "tab_advance";
     /** Always confirm Quit, even if the project is saved */
     public static final String ALWAYS_CONFIRM_QUIT = "always_confirm_quit";
 
-    public static final String ALLOW_GOOGLE_TRANSLATE = "allow_google_translate";
     public static final String ALLOW_GOOGLE2_TRANSLATE = "allow_google2_translate";
 
     public static final String ALLOW_BELAZAR_TRANSLATE = "allow_belazar_translate";

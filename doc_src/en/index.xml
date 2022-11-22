@@ -5351,7 +5351,7 @@ above only apply to exact and keyword searches.</para></warning>
 	
 	<variablelist>
 	  <varlistentry>
-		<term>Auto-sync with Editor</term>
+		<term>Auto-sync with editor</term>
 		<listitem>
 		  <para>the <link linkend="panes.editor" endterm="panes.editor.title"/> pane synchronizes its display with the selection in the search results</para>
 		</listitem>

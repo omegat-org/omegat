@@ -787,7 +787,7 @@
 	<varlistentry id="dialogs.preferences.editor.export.the.segment.to.text.files">
 	  <term
 		  id="dialogs.preferences.editor.export.the.segment.to.text.files.title">Export
-	  the segment to text files</term>
+	  the segment to a text file</term>
 
 	  <listitem>
 		<para>When OmegaT enters a segment,

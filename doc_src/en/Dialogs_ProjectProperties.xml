@@ -38,7 +38,7 @@
 
     <variablelist>
       <varlistentry id="dialogs.project.properties.options.segmentation">
-        <term id="dialogs.project.properties.options.segmentation.title">Sentence-level Segmenting</term>
+        <term id="dialogs.project.properties.options.segmentation.title">Sentence-level segmenting</term>
         <listitem>
 		  
           <para>Sentence-level segmentation splits the source file “paragraphs”
@@ -133,7 +133,7 @@
       <varlistentry id="dialogs.project.properties.auto.propagation">
         <term
 			id="dialogs.project.properties.auto.propagation.title">Auto-propagation
-        of Translations</term>
+        of translations</term>
 
         <listitem>
           <para>If there are duplicated (non-unique) segments in the source
@@ -154,7 +154,7 @@
 
       <varlistentry id="dialogs.project.properties.remove.tags">
         <term id="dialogs.project.properties.remove.tags.title">Remove
-        Tags</term>
+        tags</term>
 
         <listitem>
           <para>Tags are generally useful to reproduce specific layouts or characteristics of the source text into the translated text.</para>
@@ -180,7 +180,7 @@
       <varlistentry id="dialogs.project.properties.external.processing.command">
         <term
 			id="dialogs.project.properties.external.processing.command.title">Local
-        Post-processing Commands</term>
+        post-processing commands</term>
 
         <listitem>
 		  <warning><para>For security reasons, local post-processing commands are
@@ -212,7 +212,7 @@
         <term id="dialogs.project.properties.filters.title">Local File
         Filters...</term>
         <listitem>
-          <para>By default, file filter settings are global and are shared by
+          <para>By default, file filter settings are global and shared by
           all projects. They are found in <link
           linkend="dialogs.preferences.file.filters"
           endterm="dialogs.preferences.file.filters.title"/>.</para>
@@ -327,7 +327,7 @@
 	  <varlistentry id="dialogs.project.properties.file.locations.source.files">
 		<term
 		id="dialogs.project.properties.file.locations.source.files.title">Source
-		Files Folder</term>
+		files folder</term>
 		<listitem><para>This folder contains the files
 		that you want to translate. OmegaT will try to read all the files at once,
 		and will display in the editor the translatable contents that it has
@@ -378,7 +378,7 @@
 	  <varlistentry id="dialogs.project.properties.file.locations.translation.memories">
 		<term
 		id="dialogs.project.properties.file.locations.translation.memories.title">Translation
-		Memories Folder</term>
+		memories folder</term>
 		<listitem><para>This folder contains the files
 		that you want to use as reference translation memories. OmegaT will try to
 		read all the files at once, and will match their contents to the segment
@@ -391,8 +391,8 @@
 	  
 	  <varlistentry id="dialogs.project.properties.file.locations.glossaries">
 		<term
-		id="dialogs.project.properties.file.locations.glossaries.title">Glossaries
-		Folder</term>
+		id="dialogs.project.properties.file.locations.glossaries.title">Glossary
+		files folder</term>
 		<listitem><para>This folder contains the files
 		that you want to use as reference glossaries. OmegaT will try to read all
 		the files at once, and will match their contents to the segment you are
@@ -408,7 +408,7 @@
 	  <varlistentry id="dialogs.project.properties.file.locations.writable.glossary">
 		<term
 		id="dialogs.project.properties.file.locations.writable.glossary.title">Writable
-		Glossary File</term>
+		glossary file</term>
 		<listitem><para>The writable glossary if the file that OmegaT uses
 		when you add translated glossary terms to your project with
 		<link linkend="menus.edit.create.glossary.entry"
@@ -423,7 +423,7 @@
 	  <varlistentry id="dialogs.project.properties.file.locations.dictionaries">
 		<term
 		id="dialogs.project.properties.file.locations.dictionaries.title">Dictionaries
-		Folder</term>
+		folder</term>
 		<listitem><para>This folder contains the files
 		that you want to use as reference dictionaries. OmegaT tries to read all
 		the files at once, and matches their contents to the segment you are
@@ -437,8 +437,8 @@
 	  <varlistentry id="dialogs.project.properties.file.locations.translated.files">
 		<term
 		id="dialogs.project.properties.file.locations.translated.files.title">Translated
-		Files Folder</term>
-		<listitem><para>This folder is the place where OmegaT creates the translated files.</para>
+		files folder</term>
+		<listitem><para>This is the folder where OmegaT creates the translated files.</para>
 		<para>The translated files are the translated versions of the files located in the <link
 		linkend="project.folder.source"
 		endterm="project.folder.source.title"/>
@@ -462,8 +462,8 @@
 	  <varlistentry id="dialogs.project.properties.file.locations.exported.tms">
 		<term
 		id="dialogs.project.properties.file.locations.exported.tms.title">Exported
-		Translation Memories Folder</term>
-		<listitem><para>This folder is the place where OmegaT copies the current
+		translation memories folder</term>
+		<listitem><para>This is the folder where OmegaT copies the current
 		state of the translation in the form of TMX files when you create the
 		translated files.</para>
 		<para>The TMX files will contain only the segments that correspond to the current contents of the <link linkend="project.folder.source"

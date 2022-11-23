@@ -67,6 +67,7 @@ import org.omegat.util.ProjectFileStorage;
 import org.omegat.util.TestPreferencesInitializer;
 
 import com.vlsolutions.swing.docking.Dockable;
+import com.vlsolutions.swing.docking.DockingDesktop;
 import gen.core.project.RepositoryDefinition;
 
 /**
@@ -541,6 +542,11 @@ public final class TestTeamIntegrationChild {
 
         public IMainMenu getMainMenu() {
             return menu;
+        }
+
+        @Override
+        public DockingDesktop getDesktop() {
+            return null;
         }
 
         public Cursor getCursor() {

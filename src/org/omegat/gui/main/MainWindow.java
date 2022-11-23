@@ -550,4 +550,11 @@ public class MainWindow extends JFrame implements IMainWindow {
     public void showMessageDialog(String message) {
         JOptionPane.showMessageDialog(this, message);
     }
+
+    /**
+     * get DockableDesktop object.
+     */
+    public DockingDesktop getDesktop() {
+        return desktop;
+    }
 }

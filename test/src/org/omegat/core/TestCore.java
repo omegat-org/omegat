@@ -52,6 +52,7 @@ import org.omegat.gui.main.IMainWindow;
 import org.omegat.util.TestPreferencesInitializer;
 
 import com.vlsolutions.swing.docking.Dockable;
+import com.vlsolutions.swing.docking.DockingDesktop;
 
 /**
  * Core setup for unit tests.
@@ -139,6 +140,11 @@ public abstract class TestCore {
 
             public IMainMenu getMainMenu() {
                 return mainMenu;
+            }
+
+            @Override
+            public DockingDesktop getDesktop() {
+                return null;
             }
 
             public Cursor getCursor() {

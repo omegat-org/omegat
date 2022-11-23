@@ -36,6 +36,7 @@ import org.omegat.util.RuntimePreferences;
 import org.omegat.util.StringUtil;
 
 import com.vlsolutions.swing.docking.Dockable;
+import com.vlsolutions.swing.docking.DockingDesktop;
 
 /**
  * The main window of OmegaT application, if the program is started in
@@ -135,6 +136,10 @@ public class ConsoleWindow implements IMainWindow {
 
     public IMainMenu getMainMenu() {
         throw new NoSuchMethodError("Invalid call of ConsoleWindow");
+    }
+
+    public DockingDesktop getDesktop() {
+        return null;
     }
 
     public Cursor getCursor() {

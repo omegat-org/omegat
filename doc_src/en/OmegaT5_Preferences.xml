@@ -365,7 +365,7 @@
 	<section id="dialogs.preferences.colours">
       <title id="dialogs.preferences.colours.title">Colors</title>
 
-      <para>You can assign different colors for to the various parts of the user
+      <para>You can assign different colors for the various parts of the user
       interface.</para>
 
       <para>Scripts can be used to set predefined themes. OmegaT is bundled with
@@ -383,13 +383,13 @@
 	<para>This dialog lists the file filters available to projects that do
 	not use local file filters.</para>
 
-	<para>The contents of this preference is identical to the contents of the
+	<para>The contents of this preference are identical to the contents of the
 	<link linkend="dialogs.project.properties.filters"
 	endterm="dialogs.project.properties.filters.title"/> dialog. See <link
 	linkend="file.filters" endterm="file.filters.title"/> for details.</para>
 
 	<note><para>If local file filters are used, modifying global file filters
-	will have no effect of the project.</para></note>
+	will have no effect on the project.</para></note>
 </section>
 
 
@@ -497,7 +497,7 @@
 	<term id="creating.new.rule.title"><guibutton>Add</guibutton></term>
 	<listitem>
 	  <para>The <emphasis role="bold">Before</emphasis> pattern identifies the parts that are before the break or exception point.</para>
-	  <para>The <emphasis role="bold"> After</emphasis> patterns identifies the parts that are after the break or exception point.</para>
+	  <para>The <emphasis role="bold"> After</emphasis> pattern identifies the parts that are after the break or exception point.</para>
 
 	<para>The <emphasis role="bold">Before</emphasis> and<emphasis
 	role="bold"> After</emphasis> patterns are regular expressions. See
@@ -802,7 +802,7 @@
 		both located in the <link linkend="windows.scripts.folder">scripting folder</link>.
 		</para>
 	
-		<para>The files is are overwritten when OmegaT enters a new
+		<para>The files are overwritten when OmegaT enters a new
 		segment.</para>
 
 		<para>The <link
@@ -879,7 +879,7 @@
 
 	<varlistentry id="dialogs.preferences.editor.initially.load.this.many.segments">
 	  <term
-		  id="dialogs.preferences.editor.initially.load.this.many.segments.title">Initial number of loaded segments:</term>
+		  id="dialogs.preferences.editor.initially.load.this.many.segments.title">Initial number of loaded segments</term>
 
 	  <listitem>
 		<para>The editor initially loads and displays 2,000 segments, and
@@ -915,11 +915,11 @@
 		</varlistentry>
 		<varlistentry>
 		  <term>Simple variables (e.g., %s, %d)</term>
-		  <listitem><para>Only the simlpe variable patterns are checked.</para></listitem>
+		  <listitem><para>Only the simple variable patterns are checked.</para></listitem>
 		</varlistentry>
 		<varlistentry>
 		  <term>All variables (e.g., %s, %-s)</term>
-		  <listitem><para>This can result in falso positives in some files.</para></listitem>
+		  <listitem><para>This can result in false positives in some files.</para></listitem>
 		</varlistentry>
 	  </variablelist>
 	</para>

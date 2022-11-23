@@ -145,7 +145,7 @@
         <para>Allows the user to create an entry in <link
         linkend="project.folder.glossary.txt"
         endterm="project.folder.glossary.txt.title"/>.</para>
-		<para>There are two ways to use this function. There first is to call
+		<para>There are two ways to use this function. The first is to call
 		the dialog and then manually fill in the various fields. The second is
 		to select items in one of the OmegaT panes and sequentially call the
 		dialog after each selection to have OmegaT enter it automatically in the

@@ -23,7 +23,9 @@
 		translation engines.</para>
         <para>If several translation engines are selected, you can also use
         <keycombo><keycap>C</keycap><keycap>M</keycap></keycombo> to switch
-        between them and insert the last one selected. See  for details.</para>
+        between them and insert the last one selected. See <link
+        linkend="dialogs.preferences.mt"
+        endterm="dialogs.preferences.mt.title"/> for details.</para>
       </listitem>
     </varlistentry>
 

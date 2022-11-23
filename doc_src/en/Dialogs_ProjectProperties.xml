@@ -218,7 +218,7 @@
           endterm="dialogs.preferences.file.filters.title"/>.</para>
 
 		  <para>Use this button to create local file filters specific to your
-		  project. Check the <guilabel>Use local file filters
+		  project. Check the <guilabel>Use local file filter
 		  settings</guilabel> box, and adjust the settings as desired.</para>
 
 		  <para>The project will store the new set of file filters in the <link
@@ -408,8 +408,8 @@
 	  <varlistentry id="dialogs.project.properties.file.locations.writable.glossary">
 		<term
 		id="dialogs.project.properties.file.locations.writable.glossary.title">Writable
-		glossary file</term>
-		<listitem><para>The writable glossary if the file that OmegaT uses
+	Glossary File</term>
+		<listitem><para>The writable glossary is the file that OmegaT uses
 		when you add translated glossary terms to your project with
 		<link linkend="menus.edit.create.glossary.entry"
 		endterm="menus.edit.create.glossary.entry.title"/>.</para>
@@ -444,7 +444,7 @@
 		endterm="project.folder.source.title"/>
 		folder.</para>
 
-		<para>Segment that have been translated will be replaced by their
+		<para>Segments that have been translated will be replaced by their
 		translation and untranslated segments will remain in the source language.</para>
 		
 		<para>The folder structure reflects the copied contents and files
@@ -484,7 +484,7 @@
 		<term
 		id="dialogs.project.properties.file.locations.tms.to.export.title">Translation
 		memories to export</term>
-		<listitem><para>This checkbox lists lets you choose in which format you
+		<listitem><para>This checkbox lets you choose in which format you
 		want OmegaT to create the above TMX files. See <link
 		linkend="how.to.use.tm" endterm="how.to.use.tm.title"/> for
 		details.</para>

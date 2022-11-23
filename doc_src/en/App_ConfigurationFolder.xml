@@ -14,7 +14,7 @@
 	  <varlistentry><term>Windows</term><listitem><para><filename>~\AppData\Roaming\OmegaT</filename></para></listitem></varlistentry>
 	</variablelist>
 	</para>
-	<para>You can also use non default configuration folders by starting OmegaT from the command line. See <link linkend="launch.with.command.line" endterm="launch.with.command.line.title"/> for details</para>
+	<para>You can also use non default configuration folders by starting OmegaT from the command line. See <link linkend="launch.with.command.line" endterm="launch.with.command.line.title"/> for details.</para>
   </section>
   
   <section id="configuration.folder.default.contents">
@@ -24,10 +24,10 @@
 		<term id="configuration.folder.default.contents.omegat.prefs.title">omegat.prefs</term>
 		<listitem><para>This file includes a number of important user
 		preferences.</para>
-		<para>Some preference do not have an equivalent in the user interface. They must be modified manually.
+		<para>Some preferences do not have an equivalent in the user interface. They must be modified manually.
 		<example id="no.source.file.display">
 		  <title id="no.source.file.display.title">Do not automatically display the Source Files list</title>
-		  <para>To keep the Source Files list window to automatically open when a project is loaded,  find <token>&lt;project_files_show_on_load></token> and replace <token>true</token> to <token>false</token>:</para>
+		  <para>To prevent the Source Files list window from automatically opening when a project is loaded,  find <token>&lt;project_files_show_on_load></token> and replace <token>true</token> to <token>false</token>:</para>
 		  <para><programlisting>&lt;project_files_show_on_load><token>false</token>&lt;/project_files_show_on_load></programlisting>
 		  </para>
 		</example></para>

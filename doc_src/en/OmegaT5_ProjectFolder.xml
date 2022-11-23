@@ -135,7 +135,7 @@
     <varlistentry id="project.folder.tm.enforce">
       <term id="project.folder.tm.enforce.title">tm/enforce</term>
 	  <listitem>
-	  <para>This folder is made for reliable references files that are also meant to automatically overwrite previously translated contents..</para>
+	  <para>This folder is made for reliable references files that are also meant to automatically overwrite previously translated contents.</para>
 
       <para>Translations from TMX files placed in this folder are automatically inserted in matching segments without the automatic prefix, making it unnecessary to confirm these segments. Translations coming from this folder are considered to be <emphasis>more</emphasis> reliable than the current project memory.</para>
 
@@ -221,7 +221,7 @@
     format. You can find some dictionaries on the <ulink url="https://sourceforge.net/p/omegat/wiki/Reference%20Material/">OmegaT
     Wiki</ulink>.</para>
 
-	<para>To installdictionaries:</para>
+	<para>To install dictionaries:</para>
 
     <orderedlist>
       <listitem>
@@ -273,7 +273,7 @@
         <term id="project.folder.project.save.tmx.title">project_save.tmx</term>
         <listitem>
           <para>This is the most important file in the project. When you
-          create a new profject, the file is  empty and is gradually
+          create a new project, the file is  empty and is gradually
           filled with the translations of the text in files located in the <link
           linkend="project.folder.source"
           endterm="project.folder.source.title"/> folder.</para>
@@ -284,7 +284,7 @@
 	  
 	<varlistentry id="project.folder.project.save.tmx.bak">
 	  <term id="project.folder.project.save.tmx.bak.title">project_save.tmx.bak</term>
-	  <listitem><para>This file is a backup of <filename>project_save.tmx</filename> and is automatically recreated everytime <filename>project_save.tmx</filename> has been modified: either after using <link linkend="menus.project.save" endterm="menus.project.save.title"/>, or as a regular backup every 3 minutes by default. See <link linkend="dialog.preferences.saving.and.output.interval" endterm="dialog.preferences.saving.and.output.interval.title"/> for details.</para></listitem>
+	  <listitem><para>This file is a backup of <filename>project_save.tmx</filename> and is automatically recreated every time <filename>project_save.tmx</filename> has been modified: either after using <link linkend="menus.project.save" endterm="menus.project.save.title"/>, or as a regular backup every 3 minutes by default. See <link linkend="dialog.preferences.saving.and.output.interval" endterm="dialog.preferences.saving.and.output.interval.title"/> for details.</para></listitem>
 	</varlistentry>
 	
 	<varlistentry id="project.folder.project.save.tmx.timestamp.bak">

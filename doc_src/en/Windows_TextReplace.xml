@@ -74,7 +74,7 @@
     </listitem>
 
     <listitem>
-      <para><guimenu>Edit </guimenu>&gt; <guimenuitem>Create Glossary Entry</guimenuitem> (<keycombo><keycap>C</keycap><keycap>S</keycap><keycap>G</keycap></keycombo>): add a new glossary item. See <link linkend="menus.edit.create.glossary.entry" endterm="menus.edit.create.glossary.entry.title"/> for details.</para>
+      <para><guimenu>Edit</guimenu> &gt; <guimenuitem>Create Glossary Entry</guimenuitem> (<keycombo><keycap>C</keycap><keycap>S</keycap><keycap>G</keycap></keycombo>): add a new glossary item. See <link linkend="menus.edit.create.glossary.entry" endterm="menus.edit.create.glossary.entry.title"/> for details.</para>
     </listitem>
 
     <listitem>
@@ -103,7 +103,7 @@
       </listitem>
 
       <listitem>
-        <para>'?' matches any single character. For instance, <literal>'run?'</literal> matches <literal>'runs'</literal>, as well as <literal> the 'runn'</literal> portion of <literal>'running'</literal> or <literal>'runner'</literal>.</para>
+        <para>'?' matches any single character. For instance, <literal>'run?'</literal> matches <literal>'runs'</literal>, as well as the <literal>'runn'</literal> portion of <literal>'running'</literal> or <literal>'runner'</literal>.</para>
       </listitem>
     </itemizedlist></note>
         </listitem>

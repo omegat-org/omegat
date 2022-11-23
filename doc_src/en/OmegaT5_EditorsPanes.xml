@@ -117,7 +117,7 @@
           </table>
 
           <para>You can group panes in the same area of the window. Doing so
-          shows a tab with the name of the panes the top of the group. Panes
+          shows a tab with the name of the pane at the top of the group. Panes
           can be resized by dragging the separators between them.</para>
 
           <note>
@@ -294,7 +294,7 @@ When enabled, all the formatting tags are removed from source segments.</program
 
         <para>Use <keycap>F2</keycap> to unlock the cursor and move it beyond
         the translation field, and to make it come back into the translation
-        field when your are done.</para>
+        field when you are done.</para>
       </listitem>
 
       <listitem>
@@ -463,7 +463,7 @@ When enabled, all the formatting tags are removed from source segments.</program
           anywhere else in the editor). This allows you to select text using
           the keyboard.</para>
 
-          <para>The cursor status (locked - <guilabel>LCK</guilabel>) or
+          <para>The cursor status (locked - <guilabel>LCK</guilabel> or
           unlocked - <guilabel>UNL</guilabel>) is shown at the right of the
           <link endterm="panes.statusbar.title" linkend="panes.statusbar"/>.
           Use the same key to lock the cursor again.</para>

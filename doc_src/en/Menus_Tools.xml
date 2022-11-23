@@ -105,7 +105,7 @@
 			<para>Segmentation rules: different rules will generate a different number of segment. See <link linkend="app.segmentation" endterm="app.segmentation.title"/> for details.</para>
 		  </listitem>
 		  <listitem>
-			<para>Tags: OmegaT tags are never counted in the statistics but in some cases can split terms and create discrepencies in the way OmegaT counts them. See <link linkend="dialogs.project.properties.remove.tags" endterm="dialogs.project.properties.remove.tags.title"/> for details.</para>
+			<para>Tags: OmegaT tags are never counted in the statistics but in some cases can split terms and create discrepancies in the way OmegaT counts them. See <link linkend="dialogs.project.properties.remove.tags" endterm="dialogs.project.properties.remove.tags.title"/> for details.</para>
 		  </listitem>
 		  <listitem>
 			<para>Custom tags and flagged text: as for OmegaT tags, they are not counted by default in the statistics, but you can have OmegaT count them as words. See <link linkend="dialogs.preferences.tag.processing.count.protected.text.and.custom.tags.in.statistics" endterm="dialogs.preferences.tag.processing.count.protected.text.and.custom.tags.in.statistics.title"/> for details.</para>
@@ -159,7 +159,7 @@
       <listitem>
         <para>Opens the <link linkend="windows.scripts"
         endterm="windows.scripts.title"/> window, which allows you to set the
-        location where scripts are stored, as well was write and run scripts,
+        location where scripts are stored, as well as write and run scripts,
         and assign them a shortcut.</para>
 		<para>The list below this item displays 12 potential slots for
 		scripts. Clicking on an assigned slot launches the script assigned to

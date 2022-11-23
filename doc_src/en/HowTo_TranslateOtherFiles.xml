@@ -33,7 +33,7 @@
 		  <para>po4a supports a number of free software documentation formats, listed on the site front page, and offers conversion tools to and from the po format. See <link linkend="file.filters.po" endterm="file.filters.po.title"/> for details.</para></listitem>
 		  <listitem><para>The converters from the <ulink url="http://docs.translatehouse.org/projects/translate-toolkit/en/latest/index.html">Translate Toolkit</ulink></para>
 		  <para>License: GNU General Public License v2</para>
-		  <para>The Translate Toolkit offers a number of convertion tools to and from the po format. See <ulink url="http://docs.translatehouse.org/projects/translate-toolkit/en/latest/commands/index.html">Converters</ulink> for details.</para></listitem>
+		  <para>The Translate Toolkit offers a number of conversion tools to and from the po format. See <ulink url="http://docs.translatehouse.org/projects/translate-toolkit/en/latest/commands/index.html">Converters</ulink> for details.</para></listitem>
 		  <listitem><para>OpenXLIFF from <ulink url="https://maxprograms.com/">Maxprograms</ulink></para>
 		  <para>License:  Eclipse Public License v1.0</para>
 		  <para>OpenXLIFF supports a number of file filters, among which some that are not supported natively by OmegaT. See <ulink url="https://maxprograms.com/products/openxliff.html">OpenXLIFF Filters</ulink> for details. Maxprograms also distributes <ulink url="https://maxprograms.com/products/xliffmanager.html">XLIFF Manager</ulink>, which is a graphical user interface for the OpenXLIFF Filters.</para>
@@ -66,6 +66,6 @@
 
 	<section>
 	  <title>Development</title>
-	  <para>OmegaT provides developpers with thorough documentation to create file filter plugins. See <ulink url="https://sourceforge.net/p/omegat/code/ci/master/tree/docs_devel/HowToCreateFilterPlugin.md">How to create a file filter plugin for OmegaT</ulink> for details.</para>
+	  <para>OmegaT provides developers with thorough documentation to create file filter plugins. See <ulink url="https://sourceforge.net/p/omegat/code/ci/master/tree/docs_devel/HowToCreateFilterPlugin.md">How to create a file filter plugin for OmegaT</ulink> for details.</para>
 	</section>
   </section>

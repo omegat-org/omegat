@@ -88,7 +88,8 @@
 			</listitem>
 		  </itemizedlist>
 		  </para>
-		  <para>If the location matches both rules, it is considered either as a break, or as a non-break, depending of what the rule defined.</para>
+		  <para>If the location matches both rules, it is considered either as a
+		  break, or as a non-break, depending on what the rule defined.</para>
         </listitem>
 	  </varlistentry>
     </variablelist>

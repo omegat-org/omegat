@@ -113,7 +113,7 @@
       <term id="menus.project.commit.source.files.title">Commit Source Files</term>
       <listitem>
         <warning><para>This function is specific to team projects. <emphasis>Only the team project manager should use this function</emphasis>. See <link linkend="how.to.use.team.project" endterm="how.to.use.team.project.title"/> for details.</para></warning>
-        <para>Uploads locally added or modified files in the <filename class="directory">source</filename> folder to the team project repository.</para>
+        <para>Uploads locally added or modified files from the <filename class="directory">source</filename> folder to the team project repository.</para>
       </listitem>
     </varlistentry>
 
@@ -121,7 +121,7 @@
       <term id="menus.project.commit.target.files.title">Commit Target Files</term>
       <listitem>
         <warning><para>This function is specific to team projects. <emphasis>Use this function only if the team project manager requested so</emphasis>. See <link linkend="how.to.use.team.project" endterm="how.to.use.team.project.title"/> for details.</para></warning>
-        <para>Uploads locally created in the <link linkend="project.folder.target"
+        <para>Uploads locally created files from the <link linkend="project.folder.target"
         endterm="project.folder.target.title"/> folder to the team project repository.</para>
       </listitem>
     </varlistentry>
@@ -247,7 +247,7 @@
 			<listitem>
 			  <para>The writable glossary is located in the <link
 			  linkend="project.folder.glossary" endterm="project.folder.glossary.title"/> folder.</para>
-			<para>Opens the file in its associated applicationif it exists.</para></listitem>
+			<para>Opens the file in its associated application, if it exists.</para></listitem>
 		  </varlistentry>
 		</variablelist>
       </listitem>

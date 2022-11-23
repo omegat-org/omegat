@@ -49,7 +49,7 @@
 	endterm="dialogs.project.properties.file.locations.exported.tms.title"/>).</para>
 
 	<para>Each of the three files constitutes a bilingual export of the current
-	content of your translation. Their content comes the global project memory
+	content of your translation. Their content comes from the global project memory
 	(<link linkend="project.folder.project.save.tmx"
 	endterm="project.folder.project.save.tmx.title"/>) but is <emphasis>strictly
 	limited</emphasis> to what you have translated so far.</para>
@@ -198,10 +198,11 @@
 		endterm="menus.project.create.translated.documents.title"/>, the other
 		side does not need to do anything to have that TMX recognized locally.</para>
 
-		<para>This approach also works just as well for sharing glossaries where the <link
+		<para>This approach also works just as well for sharing glossaries where
+		the <link
 		linkend="dialogs.project.properties.file.locations.writable.glossary"
-		endterm="dialogs.project.properties.file.locations.writable.glossary.title"/>
-		, named appropriately to prevent overwriting, is located in the <link
+		endterm="dialogs.project.properties.file.locations.writable.glossary.title"/>,
+		named appropriately to prevent overwriting, is located in the <link
 		linkend="dialogs.project.properties.file.locations.glossaries"
 		endterm="dialogs.project.properties.file.locations.glossaries.title"/>
 		that the partner will use only as reference, and vice-versa.</para>

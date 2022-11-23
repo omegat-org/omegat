@@ -228,7 +228,7 @@
 			  <para>Optional parameters accepted by the
 			  <command>java</command> command. The parameters relevant
 			  to running OmegaT are described <link
-			  linkend="launch.with.command.line.java.parameters">below.</link></para>
+			  linkend="launch.with.command.line.java.parameters">below</link>.</para>
 			</listitem>					
 		  </varlistentry>
 		  <varlistentry id="launch.with.command.line.intro.omegat.jar">
@@ -447,7 +447,7 @@ config-dir="path/to/new/configdir"</programlisting>
 				<varlistentry id="launch.with.command.line.mode.console.translate.console.pseudotranslatetmx.console.align.">
 				  <term id="launch.with.command.line.mode.console.translate.console.pseudotranslatetmx.console.align.title">--mode=[console mode name]</term>
 				  <listitem>
-					<para>Specify a mode other than the GUI default.The following
+					<para>Specify a mode other than the GUI default. The following
 					options are available:</para>
 					<variablelist>
 					  <varlistentry id="launch.with.command.line.mode.console.translate">
@@ -543,7 +543,7 @@ config-dir="path/to/new/configdir"</programlisting>
 						  <para>The resulting TMX file is saved in the
 						  /omegat folder as align.tmx. The file types that can be
 						  aligned depend on whether the alignment is supported by the
-						  file filter . Supported filters include: ILIAS Language
+						  file filter. Supported filters include: ILIAS Language
 						  File, Java(TM) Resource Bundles, Key=Value Text, Magento
 						  CE Locale CSV, MoodlePHP, Mozilla DTD, Mozilla FTL, PO,
 						  RC, SubRip Subtitles, and Windows Resources.</para>

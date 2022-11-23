@@ -56,7 +56,7 @@
 	</varlistentry>
 	<varlistentry id="application.folder.scripts.entry.activated">
 	  <term id="application.folder.scripts.entry.activated.title">entry_activated</term>
-	  <listitem><para>Scripts in this folder will be launched when when editing a new segment. The segment is in the "newEntry" binding.</para></listitem>
+	  <listitem><para>Scripts in this folder will be launched when editing a new segment. The segment is in the "newEntry" binding.</para></listitem>
 	</varlistentry>
 	<varlistentry id="application.folder.scripts.new.file">
 	  <term id="application.folder.scripts.new.file.title">new_file</term>
@@ -64,7 +64,7 @@
 	</varlistentry>
 	<varlistentry id="application.folder.scripts.new.word">
 	  <term id="application.folder.scripts.new.word.title">new_word</term>
-	  <listitem><para>Scripts in the folder will be launched when a a new word is edited in the Editor window. The new word is available with "newWord".</para></listitem>
+	  <listitem><para>Scripts in the folder will be launched when a new word is edited in the Editor window. The new word is available with "newWord".</para></listitem>
 	</varlistentry>
 	<varlistentry id="application.folder.scripts.project.changed">
 	  <term id="application.folder.scripts.project.changed.title">project_changed</term>
@@ -235,7 +235,7 @@ that on a large project, an "entry_activated" script will be called a lot of tim
         <listitem>
           <para>Writes all segments to a file named
           <filename>[project_name].doc</filename> and opens it in the default
-          word processor for the system. (Note that the file is a plain text
+          word processor for the system. Note that the file is a plain text
           file. The <filename>.doc</filename> extension simply ensures it opens
           in the word processor.</para>
         </listitem>

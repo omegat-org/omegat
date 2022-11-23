@@ -11,7 +11,7 @@
   location of the project, or an <filename>omegat.project</filename>
   file.</para>
 
-  <para>Once the project is downloaded, it is installed localy and must only be opened locally to synchronize with the server.</para>
+  <para>Once the project is downloaded, it is installed locally and must only be opened locally to synchronize with the server.</para>
 
   <para>Repository credentials are stored in <link linkend="configuration.folder.extra.contents.repositories" endterm="configuration.folder.extra.contents.repositories.title"/> and can be deleted from <link linkend="dialog.preferences.team.title.repository.credentials" endterm="dialog.preferences.team.title.repository.credentials.title"/>.</para>
 
@@ -106,7 +106,7 @@
       <listitem>
         <para>As in regular local projects, the configuration of the team
         project is defined by the contents <filename>omegat.project</filename>
-        file and the optional use of special files to for project-specific
+        file and the optional use of special files for project-specific
         filters or segmentation rules.</para>
 
         <para>The first time the project is downloaded, OmegaT retrieves the

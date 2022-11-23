@@ -116,7 +116,7 @@
   <section id="app.regex.four.rules">
     <title id="app.regex.four.rules.title">The 4 rules</title>
 
-    <para>Regular expressions are used to find text (including
+    <para>Regular expressions are used to find text, including
     characters that are not visible on the screen or when printed out, such as
     spaces, tabs, or line breaks. Any given expression either
     <emphasis>matches</emphasis>, or <emphasis>does
@@ -163,7 +163,7 @@
           <literal>\r</literal> turns it into a special combination that
           matches a <emphasis>carriage return character</emphasis>.
           Similarly, <literal>\R</literal> matches <emphasis>any line
-          break character</emphasis>).</para>
+          break character</emphasis>.</para>
           <note>
             <para>Only the letters <emphasis>i j l m o</emphasis>, and
             <emphasis>y</emphasis>, in both lower- and uppercase, have no
@@ -183,7 +183,7 @@
         <listitem>
           <para>That special meaning has to be cancelled by another
           character to match the character itself.</para>
-          <para>The full list characters is presented <link
+          <para>The full list of characters is presented <link
           linkend="app.regex.twelve.characters">below</link>. One
           example is <literal>.</literal>: on its own, it has the
           special meaning of matching <emphasis>any single
@@ -228,13 +228,13 @@
     <literal>*</literal>, the <emphasis>plus sign</emphasis>
     <literal>+</literal>, the opening <emphasis>parenthesis</emphasis>
     <literal>(</literal>, the closing <emphasis>parenthesis</emphasis>,
-    <literal>)</literal>, the opening square bracket
+    <literal>)</literal>, the opening <emphasis>square bracket</emphasis>
     <literal>[</literal>, and the opening
     <emphasis>curly brace</emphasis> <literal>{</literal>.</para>
 
     <para>Each character is briefly described below with examples
     of regular expressions that rely on the character as well as
-    of text that they do,d or do not, match.
+    of text that they do, or do not, match.
     
       <variablelist>
         <varlistentry>
@@ -257,7 +257,7 @@
                     <entry>Matches</entry>
                     <entry>
                       <para>A number between <emphasis>0.0</emphasis> and
-                      <emphasis/>0.9, or just the final
+                      <emphasis>0.9</emphasis>, or just the final
                       <emphasis>0.5</emphasis> in numbers such as 10.5 or
                       560.5.</para>
                       <para>The <literal>\.</literal> cancels the “any
@@ -429,7 +429,7 @@
                     <entry>Does not match</entry>
                     <entry>
                       <para>Combinations containing three letters that
-                      start with “c” and ending with “t” split, but are
+                      start with “c” and ending with “t”, but are
                       split across more than one line.</para>
                       <para>What is the missing letter?</para>
                         <simplelist>
@@ -772,14 +772,14 @@
                     <entry>
                       <para>The correct “licence” and “license” spellings, as
                       well as the potential “lisence” and “lisense”
-                      mispellings</para>
+                      misspellings</para>
                     </entry>
                   </row>
 
                   <row>
                     <entry>Does not match</entry>
                     <entry>
-                      <para>More egregious mispellings such as “licensse” or
+                      <para>More egregious misspellings such as “licensse” or
                       “lissense”.</para>
                     </entry>
                   </row>
@@ -866,7 +866,7 @@
       <title id="app.regex.types.of.expressions.simple.expressions.title">
         Simple expressions
       </title>
-      <para>The simplest regular expression simply consist of a single character,
+      <para>The simplest regular expression consist of a single character,
       or combination of a <literal>\</literal> and a character constituting a
       unit with a single meaning.</para>
       
@@ -1065,7 +1065,7 @@
               <entry><literal>\h</literal> and <literal>\v</literal></entry>
               <entry>Horizontal and vertical whitespace (generally preferred to
               <literal>\s</literal>).
-              <para><literal>\H </literal>is any character that is
+              <para><literal>\H </literal> is any character that is
               <emphasis role="bold">not</emphasis> a horizontal white space, and
               <literal>\V</literal> any character that is
               <emphasis role="bold">not</emphasis> a vertical white space
@@ -1114,9 +1114,9 @@
             <row>
               <entry><literal>\p{IsHan}</literal></entry>
               <entry>
-                <para>A logogram (<emphasis>Han</emphasis>/<emphasis>kanji
-                </emphasis>/<emphasis>hanja</emphasis> character) found in CJK
-                languages (<ulink
+                <para>A logogram
+                (<emphasis>Han</emphasis>/<emphasis>kanji</emphasis>/<emphasis>hanja</emphasis>
+                character) found in CJK languages (<ulink
                 url="https://unicode.org/reports/tr18/#Script_Property">Unicode
                 script</ulink>)</para>
               </entry>
@@ -1127,7 +1127,7 @@
               <entry>
                 <para>An uppercase letter (<ulink
                 url="https://unicode.org/reports/tr18/#General_Category_Property">Unicode
-                category.</ulink>)</para>
+                category</ulink>)</para>
               </entry>
             </row>
           
@@ -1136,7 +1136,7 @@
               <entry>
                 <para>A currency symbol, which is also a <ulink
                 url="https://unicode.org/reports/tr18/#General_Category_Property">Unicode
-                category.</ulink>.</para>
+                category</ulink>.</para>
               </entry>
             </row>
           </tbody>
@@ -1202,7 +1202,7 @@
                 <para>A character followed by a “u”.</para>
                 <para>For example, <literal>q(?=u)</literal> matches the letter
                 “q” when it is followed by a “u”. It therefore matches the
-                “q”in “equal” or “question”, but <emphasis>not</emphasis> the one
+                “q” in “equal” or “question”, but <emphasis>not</emphasis> the one
                 in “qigong” or “Iraq”.</para>
               </entry>
             </row>
@@ -1210,7 +1210,7 @@
             <row>
               <entry><literal>(?!u)</literal></entry>
               <entry>
-                <para>A character that is <emphasis>Not</emphasis> followed by the
+                <para>A character that is <emphasis>not</emphasis> followed by the
                 letter “u”.</para>
                 <para>For example, <literal>q(?!u)</literal> matches the letter
                 “q” when it is <emphasis>not</emphasis> followed by a “u”. It

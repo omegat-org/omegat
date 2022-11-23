@@ -319,7 +319,7 @@
 
     <para>Empty lines and comments can be added to organize the list and make it
     easier to read. A comment line starts with a <code>#</code>, and everything
-    after that is ignored by the applicaton.</para>
+    after that is ignored by the application.</para>
 
     <para>The easiest way to modify the shortcuts is to download copies of the
     default files to <link linkend="configuration.folder">your configuration
@@ -361,7 +361,7 @@
     <example id="example.shortcut.addition">
       <title id="example.shortcut.addition.title">Adding a shortcut</title>
 
-      <para>If your language pair calls for the frequent use <link
+      <para>If your language pair calls for the frequent use of <link
       linkend="menus.edit.create.alternative.translation">alternative
       translations</link>, you may want to assign a shortcut to that function
       since it does not have one by default.</para>
@@ -399,9 +399,9 @@
             </para>
           </listitem>
           <listitem>
-            <para>Save and close the file. The next time you start OmegaT, you
-            your new shortcut should be active and displayed next to the name of
-            the function in the menu.</para>
+            <para>Save and close the file. The next time you start OmegaT, your
+            new shortcut should be active and displayed next to the name of the
+            function in the menu.</para>
           </listitem>
         </orderedlist>
       </para>
@@ -410,7 +410,7 @@
     <para>Save the file after you have finished making your changes. If OmegaT
     is open, you will have to restart it for your changes to take effect.</para>
     <para>Your modified or added shortcuts should now be displayed next to the
-    menu items you have changed. They will now be availabe in OmegaT as long as
+    menu items you have changed. They will now be available in OmegaT as long as
     there are no conflicts with other functions or with system-wide shortcuts.</para>
 
     <para>The next section presents tables with the function codes and 
@@ -1040,7 +1040,7 @@
             </row>
 
             <row>
-              <entry>Agressive Font Fallback</entry>
+              <entry>Aggressive Font Fallback</entry>
               <entry>viewMarkFontFallbackCheckBoxMenuItem</entry>
             </row>
 
@@ -1109,7 +1109,7 @@
             </row>
 
             <row>
-              <entry>Align File...</entry>
+              <entry>Align Files...</entry>
               <entry>toolsAlignFilesMenuItem</entry>
             </row>            
           </tbody>

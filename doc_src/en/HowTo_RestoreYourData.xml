@@ -75,7 +75,7 @@ most recent data.</para>
       </listitem>
 
       <listitem>
-		<para>Rename the current <filename>project_save.tmx </filename>file (to
+		<para>Rename the current <filename>project_save.tmx</filename> file (to
 		<filename>project_save.tmx.tmp</filename>, for example).</para>
       </listitem>
 
@@ -98,7 +98,7 @@ most recent data.</para>
 	on which the selected backup was created. You may repeat this operation as
 	needed for locating older situations. Keep an eye on safely storing all the
 	different files you are renaming for eventual reuse. Also remember not
-	modifying the project configuration or adding TMX files on the meantime, as
+	modifying the project configuration or adding TMX files in the meantime, as
 	that may affect the results.</para>
 
 	<note><para>Be cautious about making changes to the files in the source
@@ -158,7 +158,7 @@ most recent data.</para>
       </listitem>
 
 	  <listitem>
-		<para>Use <link linkend="menus.tools.check.issues" endterm="menus.tools.check.issues.title"/> and focus on <guilabel>Tag issues</guilabel> .</para>
+		<para>Use <link linkend="menus.tools.check.issues" endterm="menus.tools.check.issues.title"/> and focus on <guilabel>Tag issues</guilabel>.</para>
       </listitem>
 
       <listitem>

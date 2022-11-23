@@ -204,7 +204,7 @@
 	  <literal>--config-dir=&lt;path&gt;</literal> option from the <link
 	  endterm="launch.with.command.line.omegat.options.title"
 	  linkend="launch.with.command.line.omegat.options"/> on the
-	  command line . All the parameters located in a <link
+	  command line. All the parameters located in a <link
 	  endterm="project.folder.title" linkend="project.folder"/> will apply to
 	  that project regardless of which version of OmegaT opens it.</para>
 	  </listitem>
@@ -229,7 +229,7 @@
 	<title id="build.omegat.from.source.title">Build OmegaT</title>
 
 	<para>The source code for the current version can be either be downloaded directly from the OmegaT <ulink
-	url="https://omegat.org/download">download page.</ulink>, or cloned from the
+	url="https://omegat.org/download">download page</ulink>, or cloned from the
 	<ulink url="https://git.code.sf.net/p/omegat/code">Sourceforge</ulink> or <ulink url="https://github.com/omegat-org/omegat.git">GitHub</ulink> repositories.</para>
 	<para>Once the code is downloaded, open a terminal in the source folder
 	(<filename>omegat-code/</filename> if you cloned from Sourceforge, or

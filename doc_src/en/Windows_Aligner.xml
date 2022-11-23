@@ -15,7 +15,7 @@
     details.</para>
 
 	<warning>
-      <para>The aligner does not allow you to save you work partway through an
+      <para>The aligner does not allow you to save your work partway through an
       alignment. Therefore, it is recommended that you divide the files to align
       into shorter files that you can comfortably align in a single
       session. Doing so has the added benefit of reducing mismatches in the
@@ -260,7 +260,7 @@
         <term>Pattern...</term>
 
         <listitem>
-          <para>This option lets you enter a regular expression define the
+          <para>This option lets you enter a regular expression to define the
           pattern used for highlighting text in the source and target
           segments. By default, the aligner uses <literal>\d+</literal> to
           highlight numbers. If your texts contain other elements that would be
@@ -272,7 +272,7 @@
 
     <para>You can also access the <guilabel>Highlight</guilabel> option and the
     dialog to modify the pattern from the <guimenu>View</guimenu> menu, and the
-    other options from the <guimenu>Options</guimenu>menu.</para>
+    other options from the <guimenu>Options</guimenu> menu.</para>
 
     <para>In addition, the <guimenu>File</guimenu> menu provides the following
     commands:</para>
@@ -392,7 +392,7 @@
           this command opens the <guilabel>Edit Text</guilabel> dialog, which
           allows you to make changes to the text of the segment. Use the
           <guibutton>OK</guibutton> button to close the dialog when
-          finished. (In this dialog, the <keycap>Enter</keycap> enters a line
+          finished. In this dialog, the <keycap>Enter</keycap> enters a line
           break in the text.</para>
 		  <para>Use
 		  <keycombo><keycap>C</keycap><keycap>Enter</keycap></keycombo> to close

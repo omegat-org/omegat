@@ -24,7 +24,7 @@
 	<listitem id="how.to.setup.team.project.give.access.rights"><para id="how.to.setup.team.project.give.access.rights.title">Give access rights to your team</para></listitem>
 	<listitem id="how.to.setup.team.project.have.members.download"><para id="how.to.setup.team.project.have.members.download.title">Have everybody download the project from OmegaT</para></listitem>
 	<listitem id="how.to.setup.team.project.download.if.needed"><para id="how.to.setup.team.project.download.if.needed.title">If you need to work on the project too, download the project yourself to a local location different from the local team project location</para></listitem>
-	<listitem id="how.to.setup.team.project.translate"><para id="how.to.setup.team.project.translate.title">Your can now also work on the project with the team</para></listitem>
+	<listitem id="how.to.setup.team.project.translate"><para id="how.to.setup.team.project.translate.title">You can now also work on the project with the team</para></listitem>
   </orderedlist>
   </para>
   
@@ -361,7 +361,7 @@
 	several translators share the <filename>project_save.tmx</filename> file,
 	and only a subset of the other files.</para>
 
-	<para>The basic procedure is the essentially the same, except that the
+	<para>The basic procedure is essentially the same, except that the
 	team project administrator does not add every file to the
 	version-controlled project on the server. The remaining files are either
 	copied by the translators themselves, or mappings that synchronize files

@@ -137,7 +137,7 @@
 		file.</para></warning>
 		
 		
-		<para>Source filename patterns use wild card characters : the
+		<para>Source filename patterns use wild card characters : The
 		<literal>*</literal> character matches zero or more characters, while
 		the <literal>?</literal> character matches exactly one character.</para>
 
@@ -186,7 +186,7 @@
 		<title id="target.name.title">Translated filename</title>
 
 		<para>Files in the <link linkend="project.folder.target"
-		endterm="project.folder.target.title"/> folder are overwritten everytime
+		endterm="project.folder.target.title"/> folder are overwritten every time
 		you create them if they are created with the same name.</para>
 
 		<para>OmegaT can automatically create new file names for the files you
@@ -251,8 +251,8 @@
 
           <varlistentry>
         <term>${timestamp-????}</term>
-        <listitem><para>system time when the file is was created</para>
-		<para>See the <ulink url="&javadate;"> Oracle documentation</ulink> for
+        <listitem><para>system time when the file was created</para>
+		<para>See the <ulink url="&javadate;">Oracle documentation</ulink> for
 		examples.</para>
           </listitem>
 		</varlistentry>
@@ -301,8 +301,8 @@
 		<literal>${nameOnly}</literal> and <literal>${Extension}</literal>.</para>
 		
 		<para>If the file name is ambiguous, variables of the form
-		<literal>${nameonly</literal><emphasis>-extension number</emphasis>}
-		and <literal>${extension</literal>-<emphasis>extension number}
+		<literal>${nameonly-</literal><emphasis>extension number</emphasis>}
+		and <literal>${extension-</literal><emphasis>extension number}
 		</emphasis> can be used.</para>
 
 		<example id="target.name.example">
@@ -372,7 +372,7 @@
 				  <listitem>
 					<para>User can select from three options,
 					Previous and next paragraphs, &lt;trans unit&gt;
-					ID, or, &lt;trans-unit&gt; resname attribute
+					ID, or &lt;trans-unit&gt; resname attribute
 					when available, when unavailable, the ID will be
 					used as a fallback.</para>
 				  </listitem>

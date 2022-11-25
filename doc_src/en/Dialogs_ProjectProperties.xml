@@ -193,12 +193,14 @@
 		linkend="menus.project.create.translated.documents"
 		endterm="menus.project.create.translated.documents.title"/> or <link linkend="menus.project.create.current.translated.document" endterm="menus.project.create.current.translated.document.title"/>.</para>
 
-		  <para>The commands
-		specified here are only available to this project. They are saved in <link linkend="project.folder.omegat.project.file" endterm="project.folder.omegat.project.file.title"/>. Only enable local post-processing commands if you trust the source of that file.</para>
+		  <para>Commands specified here are only available to this project. They
+		  are saved in <link linkend="project.folder.omegat.project.file"
+		  endterm="project.folder.omegat.project.file.title"/>. Only enable
+		  local post-processing commands if you trust the source of that
+		  file.</para>
 		
 		<para>The template variables list gives you access to various project
-		data and system variables. See <link linkend="dialogs.preferences.saving.and.output.external.post-processing.command.example" endterm="dialogs.preferences.saving.and.output.external.post-processing.command.example.title"> for details.</link>
-		</para>
+		data and system variables. See <link linkend="post.processing.commands.template.variables" endterm="post.processing.commands.template.variables.title"/> for details.</para>
 
 		<para>You can also define global post-processing commands
 		  available to all projects that share the same configuration folder. Such commands are defined in <link

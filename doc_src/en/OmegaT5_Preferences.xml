@@ -1344,33 +1344,8 @@ ${targetText}
 		endterm="configuration.folder.default.contents.omegat.prefs.title"/>.</para>
 
 		<para>The template variables list gives you access to various project
-		data and system variables:
-		<example id="dialogs.preferences.saving.and.output.external.post-processing.command.example">
-		  <title
-		  id="dialogs.preferences.saving.and.output.external.post-processing.command.example.title">Simple example of a post-processing
-			command:</title>
-		  <variablelist>
-			<varlistentry>
-			  <term>Open the target folder in Linux</term>
-			  <listitem>
-				<programlisting>xdg-open ${targetRoot}</programlisting>
-			  </listitem>
-			</varlistentry>
-			<varlistentry>
-			  <term>Open the target folder in macOS</term>
-			  <listitem>
-				<programlisting>open ${targetRoot}</programlisting>
-			  </listitem>
-			</varlistentry>
-			<varlistentry>
-			  <term>Open the target folder in Windows Powershell</term>
-			  <listitem>
-				<programlisting>Invoke-Item ${targetRoot}</programlisting>
-			  </listitem>
-			</varlistentry>
-		  </variablelist>
-		</example>
-		</para>
+		data and system variables. See <link linkend="post.processing.commands.template.variables" endterm="post.processing.commands.template.variables.title"/> for details.</para>
+		
 	  </listitem>
 	</varlistentry>
 

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="post.processing.commands">
+  <title id="post.processing.commands.title">Post-Processing Commands</title>
+
+  <para>See <link linkend="dialogs.project.properties.external.processing.command" endterm="dialogs.project.properties.external.processing.command.title"/> for project specific commands.</para>
+  <para>See <link linkend="dialogs.preferences.saving.and.output.external.post-processing.command" endterm="dialogs.preferences.saving.and.output.external.post-processing.command.title"/> for global commands.</para>
+	
+
+  <section id="post.processing.commands.template.variables">
+    <title id="post.processing.commands.template.variables.title">Template Variables</title>
+    <para>
+      The command is passed to Java runtime exec as a string with the
+      template values expanded. All the arguments should be quoted,
+      e.g. <literal>&quot;${fileName}&quot;</literal>.
+    </para>
+    <para>
+      The following template variables are always available. The other
+      items on the template list are environment variables for your
+      system.
+    </para>
+    <table id="post.processing.commands.template.variables.table">
+      <title id="post.processing.commands.template.variables.table.title">Template Variables</title>
+      <tgroup cols="2" colsep="1">
+        <colspec align="left" colname="1" colnum="1"/>
+        <colspec align="left" colname="2" colnum="2"/>
+        <thead>
+          <row>
+            <entry>Variable name</entry>
+            <entry>Value</entry>
+          </row>
+        </thead>
+
+        <tbody>
+		  <row>
+			<entry>${projectName}</entry><entry>The name of the project directory</entry>
+		  </row>
+		  <row>
+			<entry>${projectRoot}</entry><entry>Full path to the project folder</entry>
+		  </row>
+		  <row>
+			<entry>${sourceRoot}</entry><entry>Full path to the source folder</entry>
+		  </row>
+		  <row>
+			<entry>${targetRoot}</entry><entry>Full path to the target folder</entry>
+		  </row>
+		  <row>
+			<entry>${glossaryRoot}</entry><entry>Full path to the glossary folder</entry>
+		  </row>
+		  <row>
+			<entry>${tmRoot}</entry><entry>Full path to the TM root folder</entry>
+		  </row>
+		  <row>
+			<entry>${tmAutoRoot}</entry><entry>Full path to the TM auto folder</entry>
+		  </row>
+		  <row>
+			<entry>${dictRoot}</entry><entry>Full path to the dictionary folder</entry>
+		  </row>
+		  <row>
+			<entry>${tmOtherLangRoot}</entry><entry>TM Root + tmx2source (See <link linkend="how.to.tm.bridge.two.languages" endterm="how.to.tm.bridge.two.languages.title"/> for details.)</entry>
+		  </row>
+		  <row>
+			<entry>${sourceLang}</entry><entry>Source language</entry>
+		  </row>
+		  <row>
+			<entry>${targetLang}</entry><entry>Target language</entry>
+		  </row>
+		  <row>
+			<entry>${filePath}</entry><entry>Full path to source file</entry>
+		  </row>
+		  <row>
+			<entry>${fileShortPath}</entry><entry>Source file name relative to given root</entry>
+		  </row>
+		  <row>
+			<entry>${fileName}</entry><entry>Full name of source file</entry>
+		  </row>
+		  <row>
+			<entry>${fileNameOnly}</entry><entry>Name of source file without extension</entry>
+		  </row>
+		  <row>
+			<entry>${fileExtension}</entry><entry>Extension of source file without a dot</entry>
+		  </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+  
+  <section id="post.processing.commands.user.defined.scripts">
+    <title id="post.processing.commands.user.defined.scripts.title">User Defined Scripts</title>
+    <para>
+      In addition to a regular command, you can call a script. Never run
+      post-processing scripts from untrusted sources. For security reasons,
+      local post-processing commands are disabled by default.
+    </para>
+    <para>
+        Template variables can be used with both regular commands and custom
+        scripts. You may need to use an absolute path for your script. The PATH
+        OmegaT uses may not be the same as the current user’s PATH.
+    </para>
+    <para>
+        STDOUT and STDERR are written to the <link
+        linkend="configuration.folder.default.contents.logs.title">omegat.log</link>
+        file. The exit code and STDERR or the last STDOUT will appear on the
+        status bar.
+    </para>
+  </section>
+
+  <section id="post.processing.commands.linux.and.macos">
+    <title id="post.processing.commands.linux.and.macos.title">Linux and macOS</title>
+    <para>
+      You should use a shebang, e.g. <literal>#! /bin/bash</literal> or
+      <literal>#! /usr/bin/env python3</literal>. And the script must be
+      executable. Chaining commands with <literal>&amp;&amp;</literal> or
+      <literal>||</literal> or pipes <literal>|</literal> will not work here.
+    </para>
+  </section>
+  
+	<example id="post.processing.commands.example">
+	  <title
+		  id="post.processing.commands.example.title">Simple
+	  example of a post-processing commands:</title>
+	  <variablelist>
+		<varlistentry>
+		  <term>Open the target folder in Linux</term>
+		  <listitem>
+			<programlisting>xdg-open ${targetRoot}</programlisting>
+		  </listitem>
+		</varlistentry>
+		<varlistentry>
+		  <term>Open the target folder in macOS</term>
+		  <listitem>
+			<programlisting>open ${targetRoot}</programlisting>
+		  </listitem>
+		</varlistentry>
+		<varlistentry>
+		  <term>Open the target folder in Windows Powershell</term>
+		  <listitem>
+			<programlisting>Invoke-Item ${targetRoot}</programlisting>
+		  </listitem>
+		</varlistentry>
+	  </variablelist>
+	</example>
+  </section>

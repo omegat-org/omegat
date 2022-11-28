@@ -65,10 +65,16 @@ import javax.swing.text.DefaultCaret;
 import javax.swing.text.JTextComponent;
 import javax.swing.undo.UndoManager;
 
+import org.omegat.core.Core;
+import org.omegat.gui.main.DockableScrollPane;
 import org.omegat.util.Java8Compat;
 import org.omegat.util.Platform;
 import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
+
+import com.vlsolutions.swing.docking.Dockable;
+import com.vlsolutions.swing.docking.DockableState;
+import com.vlsolutions.swing.docking.DockingDesktop;
 
 /**
  * @author Henry Pijffers
@@ -450,5 +456,16 @@ public final class StaticUIUtils {
         };
         comp.getInputMap().put(redo, "REDO");
         comp.getActionMap().put("REDO", redoAction);
+    }
+
+    /**
+     * Request to show the pane when it is hidden as a tab.
+     */
+    public static void requestVisible(DockableScrollPane scrollPane) {
+        if (scrollPane.getDockKey().getLocation().equals(DockableState.Location.HIDDEN)) {
+            DockingDesktop desktop = Core.getMainWindow().getDesktop();
+            Dockable dockable = desktop.getContext().getDockableByKey(scrollPane.getDockKey().getKey());
+            desktop.setAutoHide(dockable, false);
+        }
     }
 }

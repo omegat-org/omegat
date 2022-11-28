@@ -91,6 +91,8 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
      */
     protected List<MachineTranslationInfo> displayed = new CopyOnWriteArrayList<>();
 
+    protected final DockableScrollPane scrollPane;
+
     public MachineTranslateTextArea(IMainWindow mw) {
         super(true);
 
@@ -103,7 +105,8 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
         selectedIndex = -1;
 
         String title = OStrings.getString("GUI_MATCHWINDOW_SUBWINDOWTITLE_MachineTranslate");
-        mw.addDockable(new DockableScrollPane("MACHINE_TRANSLATE", title, this, true));
+        scrollPane = new DockableScrollPane("MACHINE_TRANSLATE", title, this, true);
+        mw.addDockable(scrollPane);
 
         for (Class<?> mtc : PluginUtils.getMachineTranslationClasses()) {
             try {

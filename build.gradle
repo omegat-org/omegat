@@ -227,14 +227,30 @@ jar {
         attributes('License': 'GNU Public License version 3 or later',
                    'Implementation-Version': project.version,
                    'Permissions': 'all-permissions',
-                   'OmegaT-Plugins': omtPlugins.plugin,
-                   'OmegaT-Plugin': 'true',
+                   'Plugin-Author': 'OmegaT team',
+                   'Plugin-Link': 'https://omegat.org',
+                   'Plugin-Version': project.version,
                    'Main-Class': mainClassName,
                    'Class-Path': configurations.runtimeClasspath.collect { "lib/${it.name}" }.join(' '))
+        ext.pluginAttr = { name, key, val -> attributes(
+                    'Plugin-Name': name, 'Plugin-Category': key, 'OmegaT-Plugins': val, key)
+        }
         omtPlugins.each { key, val ->
-            if (key != 'plugin') {
+            if (key == 'dictionary') {
+                pluginAttr('Dictionary connectors[bundle]', key, val)
+            } else if (key == 'tokenizer') {
+                pluginAttr('Tokenizers[bundle]', key, val)
+            } else if (key == 'machinetranslator') {
+                pluginAttr('MT Connectors[bundle]', key, val)
+            } else if (key == 'theme') {
+                pluginAttr('Theme[bundle]', key, val)
+            } else if (key == 'miscellaneous') {
+                pluginAttr('Misc[bundle]', key, val)
+            } else if (key == 'filter') {
+                pluginAttr('Filter[bundle]', key, val)
+            } else if (key == 'old-filter') {
                 val.tokenize().each { cls ->
-                    attributes('OmegaT-Plugin': key, cls)
+                    attributes('OmegaT-Plugin': 'filter', cls)
                 }
             }
         }

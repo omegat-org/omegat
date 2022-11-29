@@ -42,6 +42,8 @@ import java.util.zip.ZipOutputStream;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
+
+import org.omegat.core.Core;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.Instance;
@@ -228,5 +230,12 @@ public class OpenDocFilter extends AbstractFilter {
         // Encoding is 'binary', it is zipped. Inside there may be many files. It makes no sense to display
         // the encoding of some xml file inside.
         return "OpenDoc";
+    }
+
+    public static void loadPlugins() {
+        Core.registerFilterClass(OpenDocFilter.class);
+    }
+
+    public static void unloadPlugins() {
     }
 }

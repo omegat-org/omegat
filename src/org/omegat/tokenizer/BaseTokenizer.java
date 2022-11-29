@@ -39,6 +39,7 @@ import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.standard.StandardTokenizer;
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 import org.apache.lucene.analysis.tokenattributes.OffsetAttribute;
+
 import org.omegat.core.Core;
 import org.omegat.core.data.IProject;
 import org.omegat.core.data.SourceTextEntry;
@@ -376,4 +377,5 @@ public abstract class BaseTokenizer implements ITokenizer {
             return ((BaseTokenizer) Core.getProject().getSourceTokenizer()).test(newEntry.getSrcText());
         }
     };
+
 }

@@ -39,6 +39,8 @@ import org.apache.lucene.analysis.standard.StandardFilter;
 import org.apache.lucene.analysis.standard.StandardTokenizer;
 import org.apache.lucene.analysis.util.CharArraySet;
 
+import org.omegat.core.Core;
+
 /**
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Aaron Madlon-Kay
@@ -88,5 +90,12 @@ public class LuceneGermanTokenizer extends BaseTokenizer {
             return new TokenStreamComponents(source, result);
         }
 
+    }
+
+    public static void loadPlugins() {
+        Core.registerTokenizerClass(LuceneGermanTokenizer.class);
+    }
+
+    public static void unloadPlugins() {
     }
 }

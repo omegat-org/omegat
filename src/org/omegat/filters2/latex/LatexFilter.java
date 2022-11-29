@@ -41,8 +41,10 @@ import java.util.ListIterator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.omegat.core.Core;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.Instance;
+import org.omegat.filters2.pdf.PdfFilter;
 import org.omegat.util.LinebreakPreservingReader;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
@@ -503,4 +505,10 @@ public class LatexFilter extends AbstractFilter {
         return par;
     }
 
+    public static void loadPlugins() {
+        Core.registerFilterClass(LatexFilter.class);
+    }
+
+    public static void unloadPlugins() {
+    }
 }

@@ -28,6 +28,7 @@ package org.omegat.filters3.xml.docbook;
 
 import java.io.BufferedReader;
 
+import org.omegat.core.Core;
 import org.omegat.filters2.Instance;
 import org.omegat.filters3.xml.XMLDialect;
 import org.omegat.filters3.xml.XMLFilter;
@@ -126,5 +127,12 @@ public class DocBookFilter extends XMLFilter {
         } catch (Exception e) {
             return false;
         }
+    }
+
+    public static void loadPlugins() {
+        Core.registerFilterClass(DocBookFilter.class);
+    }
+
+    public static void unloadPlugins() {
     }
 }

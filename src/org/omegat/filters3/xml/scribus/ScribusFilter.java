@@ -26,6 +26,7 @@
 
 package org.omegat.filters3.xml.scribus;
 
+import org.omegat.core.Core;
 import org.omegat.filters2.Instance;
 import org.omegat.filters3.xml.XMLFilter;
 import org.omegat.util.OStrings;
@@ -86,5 +87,12 @@ public class ScribusFilter extends XMLFilter {
     @Override
     public boolean isTargetEncodingVariable() {
         return true;
+    }
+
+    public static void loadPlugins() {
+        Core.registerFilterClass(ScribusFilter.class);
+    }
+
+    public static void unloadPlugins() {
     }
 }

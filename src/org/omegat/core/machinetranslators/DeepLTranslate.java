@@ -167,4 +167,11 @@ public class DeepLTranslate extends BaseTranslate {
 
         dialog.show();
     }
+
+    public static void loadPlugins() {
+        Core.registerMachineTranslationClass(DeepLTranslate.class);
+    }
+
+    public static void unloadPlugins() {
+    }
 }

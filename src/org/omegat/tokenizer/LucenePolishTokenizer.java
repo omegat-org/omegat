@@ -33,6 +33,8 @@ import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.pl.PolishAnalyzer;
 import org.apache.lucene.analysis.util.CharArraySet;
 
+import org.omegat.core.Core;
+
 /**
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Aaron Madlon-Kay
@@ -52,5 +54,12 @@ public class LucenePolishTokenizer extends BaseTokenizer {
         } else {
             return getStandardTokenStream(strOrig);
         }
+    }
+
+    public static void loadPlugins() {
+        Core.registerTokenizerClass(LucenePolishTokenizer.class);
+    }
+
+    public static void unloadPlugins() {
     }
 }

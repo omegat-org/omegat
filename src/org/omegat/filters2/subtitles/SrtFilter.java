@@ -32,6 +32,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+import org.omegat.core.Core;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.Instance;
@@ -165,5 +166,14 @@ public class SrtFilter extends AbstractFilter {
                 entryAlignCallback.addTranslation(en.getKey(), en.getValue(), tr, false, null, this);
             }
         }
+    }
+
+    public static void loadPlugins() {
+        Core.registerFilterClass(SrtFilter.class);
+        Core.registerFilterClass(SbvFilter.class);
+        Core.registerFilterClass(WebVttFilter.class);
+    }
+
+    public static void unloadPlugins() {
     }
 }

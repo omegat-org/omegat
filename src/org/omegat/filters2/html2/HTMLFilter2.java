@@ -41,6 +41,8 @@ import java.util.regex.PatternSyntaxException;
 
 import org.htmlparser.Parser;
 import org.htmlparser.util.ParserException;
+
+import org.omegat.core.Core;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.Instance;
 import org.omegat.filters2.TranslationException;
@@ -293,4 +295,10 @@ public class HTMLFilter2 extends AbstractFilter {
         return sourceEncoding;
     }
 
+    public static void loadPlugins() {
+        Core.registerFilterClass(HTMLFilter2.class);
+    }
+
+    public static void unloadPlugins() {
+    }
 }

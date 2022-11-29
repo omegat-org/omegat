@@ -40,6 +40,8 @@ import org.apache.lucene.analysis.ja.JapaneseTokenizer.Mode;
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 import org.apache.lucene.analysis.tokenattributes.OffsetAttribute;
 import org.apache.lucene.analysis.util.CharArraySet;
+
+import org.omegat.core.Core;
 import org.omegat.util.PatternConsts;
 
 /**
@@ -261,5 +263,12 @@ public class LuceneJapaneseTokenizer extends BaseTokenizer {
                 this.startOffset = startOffset;
             }
         }
+    }
+
+    public static void loadPlugins() {
+        Core.registerTokenizerClass(LuceneJapaneseTokenizer.class);
+    }
+
+    public static void unloadPlugins() {
     }
 }

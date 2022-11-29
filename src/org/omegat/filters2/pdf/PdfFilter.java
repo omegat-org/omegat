@@ -39,6 +39,8 @@ import java.util.regex.Pattern;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.encryption.InvalidPasswordException;
 import org.apache.pdfbox.text.PDFTextStripper;
+
+import org.omegat.core.Core;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.Instance;
@@ -119,5 +121,12 @@ public class PdfFilter  extends AbstractFilter {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void loadPlugins() {
+        Core.registerFilterClass(PdfFilter.class);
+    }
+
+    public static void unloadPlugins() {
     }
 }

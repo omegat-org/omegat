@@ -31,6 +31,8 @@ import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.hy.ArmenianAnalyzer;
 import org.apache.lucene.analysis.util.CharArraySet;
 
+import org.omegat.core.Core;
+
 /**
  * @author Aaron Madlon-Kay
  */
@@ -46,5 +48,12 @@ public class LuceneArmenianTokenizer extends BaseTokenizer {
         } else {
             return getStandardTokenStream(strOrig);
         }
+    }
+
+    public static void loadPlugins() {
+        Core.registerTokenizerClass(LuceneArmenianTokenizer.class);
+    }
+
+    public static void unloadPlugins() {
     }
 }

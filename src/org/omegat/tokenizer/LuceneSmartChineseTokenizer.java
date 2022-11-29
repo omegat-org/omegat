@@ -31,6 +31,8 @@ import java.io.StringReader;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.cn.smart.HMMChineseTokenizer;
 import org.apache.lucene.analysis.cn.smart.SmartChineseAnalyzer;
+
+import org.omegat.core.Core;
 import org.omegat.util.Token;
 
 /**
@@ -71,5 +73,12 @@ public class LuceneSmartChineseTokenizer extends BaseTokenizer {
             tokenizer.setReader(new StringReader(strOrig));
             return tokenizer;
         }
+    }
+
+    public static void loadPlugins() {
+        Core.registerTokenizerClass(LuceneSmartChineseTokenizer.class);
+    }
+
+    public static void unloadPlugins() {
     }
 }

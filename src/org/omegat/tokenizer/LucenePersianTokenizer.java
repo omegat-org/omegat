@@ -32,6 +32,8 @@ import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.fa.PersianAnalyzer;
 import org.apache.lucene.analysis.util.CharArraySet;
 
+import org.omegat.core.Core;
+
 /**
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Aaron Madlon-Kay
@@ -50,5 +52,12 @@ public class LucenePersianTokenizer extends BaseTokenizer {
         } else {
             return getStandardTokenStream(strOrig);
         }
+    }
+
+    public static void loadPlugins() {
+        Core.registerTokenizerClass(LucenePersianTokenizer.class);
+    }
+
+    public static void unloadPlugins() {
     }
 }

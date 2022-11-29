@@ -86,6 +86,7 @@ public final class PluginUtils {
         GLOSSARY("glossary"),
         DICTIONARY("dictionary"),
         MISCELLANEOUS("miscellaneous"),
+        THEME("theme"),
         UNKNOWN("Undefined");
 
         private final String typeValue;

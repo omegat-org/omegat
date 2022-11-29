@@ -31,6 +31,8 @@ import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.hu.HungarianAnalyzer;
 import org.apache.lucene.analysis.util.CharArraySet;
 
+import org.omegat.core.Core;
+
 /**
  * @author Aaron Madlon-Kay
  */
@@ -46,5 +48,12 @@ public class LuceneHungarianTokenizer extends BaseTokenizer {
         } else {
             return getStandardTokenStream(strOrig);
         }
+    }
+
+    public static void loadPlugins() {
+        Core.registerTokenizerClass(LuceneHungarianTokenizer.class);
+    }
+
+    public static void unloadPlugins() {
     }
 }

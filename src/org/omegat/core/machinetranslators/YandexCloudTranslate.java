@@ -46,6 +46,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import org.omegat.core.Core;
 import org.omegat.gui.exttrans.MTConfigDialog;
 import org.omegat.util.HttpConnectionUtils;
 import org.omegat.util.Language;
@@ -320,5 +321,12 @@ public class YandexCloudTranslate extends BaseTranslate {
             this.sourceText = sourceText;
             this.translatedText = translatedText;
         }
+    }
+
+    public static void loadPlugins() {
+        Core.registerMachineTranslationClass(YandexCloudTranslate.class);
+    }
+
+    public static void unloadPlugins() {
     }
 }

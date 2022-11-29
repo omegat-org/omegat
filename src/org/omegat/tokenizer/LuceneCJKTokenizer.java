@@ -35,6 +35,8 @@ import org.apache.lucene.analysis.cjk.CJKWidthFilter;
 import org.apache.lucene.analysis.core.LowerCaseFilter;
 import org.apache.lucene.analysis.util.CharArraySet;
 
+import org.omegat.core.Core;
+
 /**
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Aaron Madlon-Kay
@@ -51,5 +53,12 @@ public class LuceneCJKTokenizer extends BaseTokenizer {
         } else {
             return new LowerCaseFilter(new CJKBigramFilter(new CJKWidthFilter(super.getStandardTokenStream(strOrig))));
         }
+    }
+
+    public static void loadPlugins() {
+        Core.registerTokenizerClass(LuceneCJKTokenizer.class);
+    }
+
+    public static void unloadPlugins() {
     }
 }

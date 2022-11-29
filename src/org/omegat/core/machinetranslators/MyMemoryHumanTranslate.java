@@ -31,6 +31,7 @@ package org.omegat.core.machinetranslators;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
+import org.omegat.core.Core;
 import org.omegat.util.Language;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
@@ -76,5 +77,12 @@ public final class MyMemoryHumanTranslate extends AbstractMyMemoryTranslate {
         String translation = jsonResponse.get("responseData").get("translatedText").asText();
         putToCache(sLang, tLang, text, translation);
         return translation;
+    }
+
+    public static void loadPlugins() {
+        Core.registerMachineTranslationClass(MyMemoryHumanTranslate.class);
+    }
+
+    public static void unloadPlugins() {
     }
 }

@@ -32,6 +32,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+import org.omegat.core.Core;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.Instance;
@@ -182,5 +183,12 @@ public class XHTMLFilter extends XMLFilter {
             Log.log(e);
             return null;
         }
+    }
+
+    public static void loadPlugins() {
+        Core.registerFilterClass(XHTMLFilter.class);
+    }
+
+    public static void unloadPlugins() {
     }
 }

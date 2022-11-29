@@ -31,6 +31,8 @@ import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.no.NorwegianAnalyzer;
 import org.apache.lucene.analysis.util.CharArraySet;
 
+import org.omegat.core.Core;
+
 /**
  * @author Aaron Madlon-Kay
  */
@@ -46,5 +48,12 @@ public class LuceneNorwegianTokenizer extends BaseTokenizer {
         } else {
             return getStandardTokenStream(strOrig);
         }
+    }
+
+    public static void loadPlugins() {
+        Core.registerTokenizerClass(LuceneNorwegianTokenizer.class);
+    }
+
+    public static void unloadPlugins() {
     }
 }

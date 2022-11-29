@@ -32,6 +32,8 @@ import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.el.GreekAnalyzer;
 import org.apache.lucene.analysis.util.CharArraySet;
 
+import org.omegat.core.Core;
+
 /**
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Aaron Madlon-Kay
@@ -49,4 +51,10 @@ public class LuceneGreekTokenizer extends BaseTokenizer {
             return getStandardTokenStream(strOrig);
         }
     }
-}
+
+    public static void loadPlugins() {
+        Core.registerTokenizerClass(LuceneGreekTokenizer.class);
+    }
+
+    public static void unloadPlugins() {
+    }}

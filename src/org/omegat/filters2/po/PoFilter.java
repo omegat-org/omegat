@@ -51,6 +51,7 @@ import java.util.regex.Pattern;
 import org.apache.commons.io.ByteOrderMark;
 import org.apache.commons.io.input.BOMInputStream;
 
+import org.omegat.core.Core;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.data.SegmentProperties;
 import org.omegat.filters2.AbstractFilter;
@@ -956,5 +957,12 @@ public class PoFilter extends AbstractFilter {
     @Override
     public boolean isBilingual() {
         return true;
+    }
+
+    public static void loadPlugins() {
+        Core.registerFilterClass(PoFilter.class);
+    }
+
+    public static void unloadPlugins() {
     }
 }

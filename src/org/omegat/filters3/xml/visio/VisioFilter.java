@@ -27,6 +27,7 @@
 
 package org.omegat.filters3.xml.visio;
 
+import org.omegat.core.Core;
 import org.omegat.filters2.Instance;
 import org.omegat.filters3.xml.XMLFilter;
 import org.omegat.util.OStrings;
@@ -91,5 +92,12 @@ public class VisioFilter extends XMLFilter {
     @Override
     protected boolean requirePrevNextFields() {
         return true;
+    }
+
+    public static void loadPlugins() {
+        Core.registerFilterClass(VisioFilter.class);
+    }
+
+    public static void unloadPlugins() {
     }
 }

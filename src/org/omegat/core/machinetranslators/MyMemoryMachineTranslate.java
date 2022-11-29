@@ -32,6 +32,7 @@ package org.omegat.core.machinetranslators;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.apache.commons.lang.StringEscapeUtils;
 
+import org.omegat.core.Core;
 import org.omegat.util.Language;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
@@ -93,5 +94,12 @@ public final class MyMemoryMachineTranslate extends AbstractMyMemoryTranslate {
         String translation = StringEscapeUtils.unescapeHtml(bestEntry.get("translation").asText());
         putToCache(sLang, tLang, text, translation);
         return translation;
+    }
+
+    public static void loadPlugins() {
+        Core.registerMachineTranslationClass(MyMemoryMachineTranslate.class);
+    }
+
+    public static void unloadPlugins() {
     }
 }

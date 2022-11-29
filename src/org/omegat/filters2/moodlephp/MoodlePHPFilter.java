@@ -41,6 +41,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.omegat.core.Core;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.Instance;
@@ -215,4 +216,10 @@ public class MoodlePHPFilter extends AbstractFilter {
         return true;
     }
 
+    public static void loadPlugins() {
+        Core.registerFilterClass(MoodlePHPFilter.class);
+    }
+
+    public static void unloadPlugins() {
+    }
 }

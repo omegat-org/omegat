@@ -46,6 +46,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import org.omegat.core.Core;
 import org.omegat.gui.exttrans.MTConfigDialog;
 import org.omegat.util.HttpConnectionUtils;
 import org.omegat.util.Language;
@@ -283,5 +284,12 @@ public class IBMWatsonTranslate extends BaseTranslate {
         dialog.panel.itemsPanel.add(watsonPanel);
 
         dialog.show();
+    }
+
+    public static void loadPlugins() {
+        Core.registerMachineTranslationClass(IBMWatsonTranslate.class);
+    }
+
+    public static void unloadPlugins() {
     }
 }

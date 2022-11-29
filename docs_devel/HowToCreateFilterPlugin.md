@@ -136,7 +136,8 @@ but it is used when showing a plugin list on preference dialog.
 5. base
 6. glossary
 7. dictionary
-8. miscellaneous
+8. theme
+9. miscellaneous
 
 When plugin has a value other than above, OmegaT will show it as 'unknown' category.
 The list of values above is a superset of possible values for 'Omegat-Plugin:' field in

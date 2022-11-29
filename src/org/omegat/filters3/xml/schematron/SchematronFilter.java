@@ -27,6 +27,7 @@
 
 package org.omegat.filters3.xml.schematron;
 
+import org.omegat.core.Core;
 import org.omegat.filters2.Instance;
 import org.omegat.filters3.xml.XMLFilter;
 import org.omegat.util.OStrings;
@@ -120,4 +121,11 @@ public class SchematronFilter extends XMLFilter {
         return true;
     }
     */
+
+    public static void loadPlugins() {
+        Core.registerFilterClass(SchematronFilter.class);
+    }
+
+    public static void unloadPlugins() {
+    }
 }

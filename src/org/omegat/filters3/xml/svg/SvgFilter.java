@@ -27,6 +27,7 @@
 
 package org.omegat.filters3.xml.svg;
 
+import org.omegat.core.Core;
 import org.omegat.filters2.Instance;
 import org.omegat.filters3.xml.XMLFilter;
 import org.omegat.util.OStrings;
@@ -75,5 +76,12 @@ public class SvgFilter extends XMLFilter {
     @Override
     protected boolean requirePrevNextFields() {
         return true;
+    }
+
+    public static void loadPlugins() {
+        Core.registerFilterClass(SvgFilter.class);
+    }
+
+    public static void unloadPlugins() {
     }
 }

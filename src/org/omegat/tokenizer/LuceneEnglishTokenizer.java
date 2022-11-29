@@ -38,16 +38,6 @@ import org.omegat.core.Core;
 @Tokenizer(languages = { "en" }, isDefault = true)
 public class LuceneEnglishTokenizer extends BaseTokenizer {
 
-    /**
-     * Register plugin into OmegaT.
-     */
-    public static void loadPlugins() {
-        Core.registerTokenizerClass(LuceneEnglishTokenizer.class);
-    }
-
-    public static void unloadPlugins() {
-    }
-
     @SuppressWarnings("resource")
     @Override
     protected TokenStream getTokenStream(final String strOrig, final boolean stemsAllowed,
@@ -58,5 +48,15 @@ public class LuceneEnglishTokenizer extends BaseTokenizer {
         } else {
             return getStandardTokenStream(strOrig);
         }
+    }
+
+    /**
+     * Register plugin into OmegaT.
+     */
+    public static void loadPlugins() {
+        Core.registerTokenizerClass(LuceneEnglishTokenizer.class);
+    }
+
+    public static void unloadPlugins() {
     }
 }

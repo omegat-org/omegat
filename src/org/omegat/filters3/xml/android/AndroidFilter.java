@@ -32,11 +32,13 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 
+import org.xml.sax.Attributes;
+
+import org.omegat.core.Core;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.filters2.Instance;
 import org.omegat.filters3.xml.XMLFilter;
 import org.omegat.util.OStrings;
-import org.xml.sax.Attributes;
 
 /**
  * Filter for Android resources.
@@ -133,5 +135,12 @@ public class AndroidFilter extends XMLFilter {
             }
         }
         return r.replace("'", "\\'");
+    }
+
+    public static void loadPlugins() {
+        Core.registerFilterClass(AndroidFilter.class);
+    }
+
+    public static void unloadPlugins() {
     }
 }

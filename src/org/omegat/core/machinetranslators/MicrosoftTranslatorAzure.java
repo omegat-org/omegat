@@ -38,6 +38,7 @@ import java.util.regex.Pattern;
 
 import javax.swing.JCheckBox;
 
+import org.omegat.core.Core;
 import org.omegat.gui.exttrans.MTConfigDialog;
 import org.omegat.util.HttpConnectionUtils;
 import org.omegat.util.Language;
@@ -203,5 +204,12 @@ public class MicrosoftTranslatorAzure extends BaseTranslate {
         dialog.panel.itemsPanel.add(neuralCheckBox);
 
         dialog.show();
+    }
+
+    public static void loadPlugins() {
+        Core.registerMachineTranslationClass(MicrosoftTranslatorAzure.class);
+    }
+
+    public static void unloadPlugins() {
     }
 }

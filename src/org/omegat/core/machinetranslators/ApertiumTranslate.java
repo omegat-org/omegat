@@ -42,6 +42,7 @@ import javax.swing.event.DocumentListener;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import org.omegat.core.Core;
 import org.omegat.gui.exttrans.MTConfigDialog;
 import org.omegat.util.HttpConnectionUtils;
 import org.omegat.util.Language;
@@ -292,4 +293,10 @@ public class ApertiumTranslate extends BaseTranslate {
         dialog.show();
     }
 
+    public static void loadPlugins() {
+        Core.registerMachineTranslationClass(ApertiumTranslate.class);
+    }
+
+    public static void unloadPlugins() {
+    }
 }

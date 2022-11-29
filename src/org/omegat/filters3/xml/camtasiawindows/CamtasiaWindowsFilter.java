@@ -27,6 +27,7 @@
 
 package org.omegat.filters3.xml.camtasiawindows;
 
+import org.omegat.core.Core;
 import org.omegat.filters2.Instance;
 import org.omegat.filters3.xml.XMLFilter;
 import org.omegat.util.OStrings;
@@ -90,5 +91,12 @@ public class CamtasiaWindowsFilter extends XMLFilter {
     @Override
     protected boolean requirePrevNextFields() {
         return true;
+    }
+
+    public static void loadPlugins() {
+        Core.registerFilterClass(CamtasiaWindowsFilter.class);
+    }
+
+    public static void unloadPlugins() {
     }
 }

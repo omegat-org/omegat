@@ -29,6 +29,7 @@ package org.omegat.filters3.xml.typo3;
 import java.io.BufferedReader;
 import java.util.regex.Matcher;
 
+import org.omegat.core.Core;
 import org.omegat.filters2.Instance;
 import org.omegat.filters3.xml.XMLDialect;
 import org.omegat.filters3.xml.XMLFilter;
@@ -124,4 +125,10 @@ public class Typo3Filter extends XMLFilter {
         return true;
     }
 
+    public static void loadPlugins() {
+        Core.registerFilterClass(Typo3Filter.class);
+    }
+
+    public static void unloadPlugins() {
+    }
 }

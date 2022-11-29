@@ -26,6 +26,7 @@
 
 package org.omegat.filters3.xml.helpandmanual;
 
+import org.omegat.core.Core;
 import org.omegat.filters2.Instance;
 import org.omegat.filters3.xml.XMLFilter;
 import org.omegat.util.OStrings;
@@ -89,5 +90,12 @@ public class HelpAndManualFilter extends XMLFilter {
     @Override
     protected boolean requirePrevNextFields() {
         return true;
+    }
+
+    public static void loadPlugins() {
+        Core.registerFilterClass(HelpAndManualFilter.class);
+    }
+
+    public static void unloadPlugins() {
     }
 }

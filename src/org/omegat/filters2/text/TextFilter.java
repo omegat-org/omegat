@@ -38,6 +38,12 @@ import org.omegat.core.Core;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.Instance;
+import org.omegat.filters2.text.bundles.ResourceBundleFilter;
+import org.omegat.filters2.text.dokuwiki.DokuWikiFilter;
+import org.omegat.filters2.text.ilias.ILIASFilter;
+import org.omegat.filters2.text.ini.INIFilter;
+import org.omegat.filters2.text.magento.MagentoFilter;
+import org.omegat.filters2.text.mozftl.MozillaFTLFilter;
 import org.omegat.util.LinebreakPreservingReader;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
@@ -81,6 +87,12 @@ public class TextFilter extends AbstractFilter {
      * Register plugin into OmegaT.
      */
     public static void loadPlugins() {
+        Core.registerFilterClass(DokuWikiFilter.class);
+        Core.registerFilterClass(INIFilter.class);
+        Core.registerFilterClass(ILIASFilter.class);
+        Core.registerFilterClass(MozillaFTLFilter.class);
+        Core.registerFilterClass(MagentoFilter.class);
+        Core.registerFilterClass(ResourceBundleFilter.class);
         Core.registerFilterClass(TextFilter.class);
     }
 

@@ -26,6 +26,7 @@
 
 package org.omegat.filters3.xml.l10nmgr;
 
+import org.omegat.core.Core;
 import org.omegat.filters2.Instance;
 import org.omegat.filters3.xml.XMLFilter;
 import org.omegat.util.OStrings;
@@ -79,5 +80,12 @@ public class L10nmgrFilter extends XMLFilter {
     @Override
     protected boolean requirePrevNextFields() {
         return true;
+    }
+
+    public static void loadPlugins() {
+        Core.registerFilterClass(L10nmgrFilter.class);
+    }
+
+    public static void unloadPlugins() {
     }
 }

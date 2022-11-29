@@ -37,6 +37,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.util.PatternConsts;
@@ -424,5 +425,12 @@ public class DefaultTokenizer implements ITokenizer {
     @Override
     public String[] getSupportedLanguages() {
         return new String[0];
+    }
+
+    public static void loadPlugins() {
+        Core.registerTokenizerClass(DefaultTokenizer.class);
+    }
+
+    public static void unloadPlugins() {
     }
 }

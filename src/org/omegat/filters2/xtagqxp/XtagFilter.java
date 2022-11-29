@@ -34,6 +34,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.omegat.core.Core;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.Instance;
@@ -281,4 +282,10 @@ public class XtagFilter extends AbstractFilter {
         return entry;
     }
 
+    public static void loadPlugins() {
+        Core.registerFilterClass(XtagFilter.class);
+    }
+
+    public static void unloadPlugins() {
+    }
 }

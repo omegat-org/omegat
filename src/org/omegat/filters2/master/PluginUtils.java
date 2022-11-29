@@ -85,6 +85,7 @@ public final class PluginUtils {
         BASE("base"),
         GLOSSARY("glossary"),
         DICTIONARY("dictionary"),
+        THEME("theme"),
         MISCELLANEOUS("miscellaneous"),
         UNKNOWN("Undefined");
 

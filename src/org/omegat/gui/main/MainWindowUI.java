@@ -97,7 +97,7 @@ public final class MainWindowUI {
      * Create docking desktop panel.
      */
     public static DockingDesktop initDocking(final MainWindow mainWindow) {
-        mainWindow.desktop = new DockingDesktop();
+        mainWindow.desktop = new MainDockingDesktop();
         mainWindow.desktop.addDockableStateWillChangeListener(new DockableStateWillChangeListener() {
             public void dockableStateWillChange(DockableStateWillChangeEvent event) {
                 if (event.getFutureState().isClosed()) {

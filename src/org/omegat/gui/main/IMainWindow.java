@@ -32,7 +32,6 @@ import java.awt.HeadlessException;
 import javax.swing.JFrame;
 
 import com.vlsolutions.swing.docking.Dockable;
-import com.vlsolutions.swing.docking.DockingDesktop;
 
 /**
  * Interface for access to main window functionality.
@@ -203,5 +202,5 @@ public interface IMainWindow {
     /**
      * Retrieve main docking desktop.
      */
-    DockingDesktop getDesktop();
+    MainDockingDesktop getDesktop();
 }

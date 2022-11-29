@@ -89,7 +89,6 @@ import org.omegat.util.gui.UIThreadsUtil;
 
 import com.vlsolutions.swing.docking.Dockable;
 import com.vlsolutions.swing.docking.DockableState;
-import com.vlsolutions.swing.docking.DockingDesktop;
 import com.vlsolutions.swing.docking.FloatingDialog;
 
 /**
@@ -128,7 +127,7 @@ public class MainWindow extends JFrame implements IMainWindow {
     protected JLabel statusLabel;
     protected JLabel lockInsertLabel;
 
-    protected DockingDesktop desktop;
+    protected MainDockingDesktop desktop;
 
     /** Creates new form MainWindow */
     @SuppressWarnings("unchecked")
@@ -631,7 +630,7 @@ public class MainWindow extends JFrame implements IMainWindow {
     /**
      * get DockableDesktop object.
      */
-    public DockingDesktop getDesktop() {
+    public MainDockingDesktop getDesktop() {
         return desktop;
     }
 }

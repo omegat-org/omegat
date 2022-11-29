@@ -72,6 +72,7 @@ import org.omegat.gui.glossary.GlossaryReaderTSV;
 import org.omegat.gui.glossary.IGlossaries;
 import org.omegat.gui.main.IMainMenu;
 import org.omegat.gui.main.IMainWindow;
+import org.omegat.gui.main.MainDockingDesktop;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
@@ -81,7 +82,6 @@ import org.omegat.util.TestPreferencesInitializer;
 import org.omegat.util.gui.MenuExtender.MenuKey;
 
 import com.vlsolutions.swing.docking.Dockable;
-import com.vlsolutions.swing.docking.DockingDesktop;
 import gen.core.project.RepositoryDefinition;
 
 /**
@@ -674,7 +674,7 @@ public final class TestTeamIntegrationChild {
         }
 
         @Override
-        public DockingDesktop getDesktop() {
+        public MainDockingDesktop getDesktop() {
             return null;
         }
 

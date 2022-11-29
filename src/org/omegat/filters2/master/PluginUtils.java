@@ -326,21 +326,23 @@ public final class PluginUtils {
      */
     protected static void loadFromManifest(final Manifest m, final ClassLoader classLoader, final URL mu)
             throws ClassNotFoundException {
-        String pluginClasses = m.getMainAttributes().getValue("OmegaT-Plugins");
-        if (pluginClasses != null) {
-            for (String clazz : pluginClasses.split("\\s+")) {
-                if (clazz.trim().isEmpty()) {
-                    continue;
-                }
-                if (loadClass(clazz, classLoader)) {
-                    if (mu == null) {
-                        PLUGIN_INFORMATIONS.add(PluginInformation.Builder
-                                .fromManifest(clazz, m, null, PluginInformation.Status.BUNDLED));
-                    } else {
-                        PLUGIN_INFORMATIONS.add(PluginInformation.Builder
-                                .fromManifest(clazz, m, mu, PluginInformation.Status.INSTALLED));
+        for (Map.Entry<String, Attributes> entry: m.getEntries().entrySet()) {
+            String pluginClasses = entry.getValue().getValue("OmegaT-Plugins");
+            if (pluginClasses != null) {
+                for (String clazz : pluginClasses.split("\\s+")) {
+                    if (clazz.trim().isEmpty()) {
+                        continue;
                     }
-               }
+                    if (loadClass(clazz, classLoader)) {
+                        if (mu == null) {
+                            PLUGIN_INFORMATIONS.add(PluginInformation.Builder
+                                    .fromManifest(clazz, m, null, PluginInformation.Status.BUNDLED));
+                        } else {
+                            PLUGIN_INFORMATIONS.add(PluginInformation.Builder
+                                    .fromManifest(clazz, m, mu, PluginInformation.Status.INSTALLED));
+                        }
+                   }
+                }
             }
         }
 

@@ -2,14 +2,27 @@
 
 ## How to build and contribute OmegaT
 
-1. Getting started
+1. [Contributing to OmegaT](1.ContributingOmegaT.md)
 2. [How to build OmegaT](2.HowToBuild.md)
-3. Git repository and Issues tracker
-4. How to make plugins
-   1. Common knowlege for the plugins
-   2. [How to make file filters](4.2.HowToCreateFilterPlugin.md)
-   3. How to make theme plugins
-   4. How to make Machine Translation connectors
-5. [OmegaT internals](5.DevelopersGuide.md)
-6. [Integration test](6.IntegrationTest.md)
-7. [Release procedure](7.Release.md)
+3. [How to make plugin](3.HowToCreateFilterPlugin.md)
+4. [OmegaT internals](4.DevelopersGuide.md)
+5. [Integration test](5.IntegrationTest.md)
+6. [Release procedure](6.Release.md)
+
+## Other Files in Asset Directory
+
+### [eclipse-formatting.xml](assets/eclipse-formatting.xml)
+
+   This file is project-standard indent configuration for Eclipse IDE.
+
+### [Support matrix of alternate translations](assets/MultipleTranslationFieldsForFilters.ods)
+
+   This documents how different filters identify "alternate" translations. You can
+   view it with LibreOffice or any ODF-compatible viewer.
+
+### [OmegaT.vpp](assets/OmegaT.vpp)
+
+   This document is the source for the UML diagrams in the developer's guide; it
+   contains no content not also viewable within the developer's guide.
+   Visual Paradigm Community Edition (free) is required to edit the file
+   (http://www.visual-paradigm.com)

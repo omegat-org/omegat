@@ -1,0 +1,8 @@
+site_name: OmegaT developer Documentaion
+markdown_extensions:
+  - tables
+theme:
+  name: material
+  features:
+  - navigation.tracking
+  - navigation.top

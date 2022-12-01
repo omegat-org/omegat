@@ -149,6 +149,7 @@ Current team:
 - Jean-Christophe Helary (Twitter community manager)
 - Kos Ivantsov (localisation manager)
 - Concepción Martin (Facebook community manager)
+- Hiroshi Miura (lead developer)
 - Briac Pilpré (webmaster)
 - Lucie Vecerova (Facebook community manager)
 

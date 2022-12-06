@@ -127,4 +127,8 @@ ext {
             i == 0 ? tok : tok.capitalize()
         }.join()
     }
+
+   clsName = { cls ->
+        cls.split('\\.').last()
+    }
 }

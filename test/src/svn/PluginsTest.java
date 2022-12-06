@@ -61,6 +61,8 @@ public class PluginsTest {
 
         TestPreferencesInitializer.init(); // Some plugins depend on inited prefs
         for (Object o : plugins.keySet()) {
+            if (o.toString().startsWith("plugin.desc"))
+                continue;
             String[] classes = plugins.getProperty(o.toString()).split(" ");
             for (String cls : classes) {
                 try {

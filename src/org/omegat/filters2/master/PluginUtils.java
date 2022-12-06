@@ -351,6 +351,9 @@ public final class PluginUtils {
         for (Object o : props.keySet()) {
             String key = o.toString();
             String[] classes = props.getProperty(key).split("\\s+");
+            if (key.startsWith("plugin.desc")) {
+                continue;
+            }
             if (key.equals("plugin")) {
                 for (String clazz : classes) {
                     if (loadClass(clazz, classLoader)) {

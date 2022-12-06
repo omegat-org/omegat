@@ -141,6 +141,7 @@ public class NotesTextArea extends EntryInfoPane<String> implements INotes, IPan
     
     @Override
     public void requestFocus() {
+        StaticUIUtils.requestVisible(scrollPane);
     	scrollPane.getViewport().getView().requestFocusInWindow();
     }
 }

@@ -1,0 +1,393 @@
+Manifest-Version: 1.0
+License: GNU Public License version 3 or later
+Implementation-Version: 5.8.0
+Permissions: all-permissions
+OmegaT-Plugin: true
+OmegaT-Plugins: org.omegat.filters3.xml.xliff.XLIFFFilter org.omegat.fil
+ ters2.text.TextFilter org.omegat.tokenizer.LuceneEnglishTokenizer org.o
+ megat.tokenizer.HunspellTokenizer org.omegat.core.machinetranslators.Be
+ lazarTranslate org.omegat.gui.scripting.ScriptingWindow org.omegat.exte
+ rnalfinder.ExternalFinder org.omegat.gui.theme.DefaultFlatTheme org.ome
+ gat.gui.theme.DefaultClassicTheme org.omegat.util.gui.HtmlMediaSupport 
+ org.omegat.core.dictionaries.LingvoDSL org.omegat.core.dictionaries.Sta
+ rDict
+Plugin-Author: OmegaT team
+Plugin-Link: https://omegat.org
+Plugin-Version: 5.8.0
+Main-Class: org.omegat.Main
+Class-Path: lib/vldocking-3.0.5.jar lib/slf4j-jdk14-1.7.32.jar lib/org.e
+ clipse.jgit.ssh.jsch-5.13.1.202206130422-r.jar lib/org.eclipse.jgit.gpg
+ .bc-5.11.1.202105131744-r.jar lib/org.eclipse.jgit-5.13.1.202206130422-
+ r.jar lib/language-all-3.5.jar lib/language-en-3.5.jar lib/language-fa-
+ 3.5.jar lib/language-fr-3.5.jar lib/language-de-DE-x-simple-language-3.
+ 5.jar lib/language-de-3.5.jar lib/language-pl-3.5.jar lib/language-ca-3
+ .5.jar lib/language-it-3.5.jar lib/language-br-3.5.jar lib/language-nl-
+ 3.5.jar lib/language-pt-3.5.jar lib/language-ru-3.5.jar lib/language-as
+ t-3.5.jar lib/language-be-3.5.jar lib/language-zh-3.5.jar lib/language-
+ da-3.5.jar lib/language-eo-3.5.jar lib/language-gl-3.5.jar lib/language
+ -el-3.5.jar lib/language-is-3.5.jar lib/language-ja-3.5.jar lib/languag
+ e-km-3.5.jar lib/language-lt-3.5.jar lib/language-ml-3.5.jar lib/langua
+ ge-ro-3.5.jar lib/language-sk-3.5.jar lib/language-sl-3.5.jar lib/langu
+ age-es-3.5.jar lib/language-sv-3.5.jar lib/language-ta-3.5.jar lib/lang
+ uage-tl-3.5.jar lib/language-uk-3.5.jar lib/languagetool-core-3.5.jar l
+ ib/language-detector-0.5.jar lib/svnkit-1.10.9.jar lib/sshd-core-2.8.0.
+ jar lib/sshd-common-2.8.0.jar lib/jcl-over-slf4j-1.7.32.jar lib/slf4j-a
+ pi-1.7.32.jar lib/maligna-3.0.1.jar lib/jaxb-api-2.3.1.jar lib/dsl4j-0.
+ 5.3.jar lib/commons-io-2.11.0.jar lib/ictclas4j-1.0.1.jar lib/commons-l
+ ang-2.6.jar lib/desktopsupport-0.6.0.jar lib/jaxb-impl-2.3.4.jar lib/ur
+ l-protocol-handler-0.1.4.jar lib/pdfbox-2.0.27.jar lib/stardict4j-0.4.1
+ .jar lib/trie4j-0.9.8.jar lib/juniversalchardet-2.4.0.jar lib/htmlparse
+ r-1.5.jar lib/gnudiff4j-1.15.jar lib/lib-mnemonics-1.0.jar lib/jmyspell
+ -core-1.0.0-beta-2.jar lib/lucene-core-5.2.1-1.jar lib/lucene-analyzers
+ -kuromoji-5.2.1.jar lib/lucene-analyzers-smartcn-5.2.1.jar lib/lucene-a
+ nalyzers-stempel-5.2.1.jar lib/lucene-analyzers-common-5.2.1.jar lib/js
+ ch-0.2.3.jar lib/bcpg-jdk15on-1.65.jar lib/bcpkix-jdk15on-1.65.jar lib/
+ bcprov-jdk15on-1.69.jar lib/supertmxmerge-2.0.3.jar lib/jasypt-1.9.3.ja
+ r lib/rstaui-3.2.0.jar lib/languagesupport-3.1.4.jar lib/autocomplete-3
+ .2.0.jar lib/rsyntaxtextarea-3.2.0.jar lib/jackson-annotations-2.13.4.j
+ ar lib/jackson-databind-2.13.4.2.jar lib/jackson-core-2.13.4.jar lib/lu
+ cene-gosen-5.0.0-ipadic.jar lib/hunspell-native-libs-2.9.jar lib/groovy
+ -all-3.0.9.pom lib/groovy-dateutil-3.0.9.jar lib/ivy-2.5.1.jar lib/java
+ x.activation-api-1.2.0.jar lib/jakarta.xml.bind-api-2.3.3.jar lib/jakar
+ ta.activation-1.2.2.jar lib/commons-codec-1.15.jar lib/fontbox-2.0.27.j
+ ar lib/segment-2.0.0.jar lib/commons-logging-1.2.jar lib/jaxb-core-2.3.
+ 0.1.jar lib/dictzip-0.13.0.jar lib/annotations-23.0.0.jar lib/protobuf-
+ java-3.20.0.jar lib/caffeine-2.9.3.jar lib/jna-platform-5.6.0.jar lib/j
+ sch.agentproxy.connector-factory-0.0.7.jar lib/jsch.agentproxy.usocket-
+ jna-0.0.7.jar lib/jsch.agentproxy.pageant-0.0.7.jar lib/jna-5.6.0.jar l
+ ib/morfologik-fsa-builders-2.1.0.jar lib/morfologik-speller-2.1.0.jar l
+ ib/morfologik-polish-2.0.0.jar lib/morfologik-stemming-2.1.0.jar lib/mo
+ rfologik-fsa-2.1.0.jar lib/hppc-0.7.1.jar lib/annotations-12.0.jar lib/
+ lucene-backward-codecs-5.2.1.jar lib/berkeleylm-1.1.2.jar lib/JavaEWAH-
+ 1.1.13.jar lib/jzlib-1.1.1.jar lib/junixsocket-native-common-2.4.0.jar 
+ lib/junixsocket-common-2.4.0.jar lib/eddsa-0.3.0.jar lib/sequence-libra
+ ry-1.0.4.jar lib/sqljet-1.1.15.jar lib/jsch.agentproxy.svnkit-trilead-s
+ sh2-0.0.7.jar lib/trilead-ssh2-1.0.0-build222.jar lib/lz4-java-1.4.1.ja
+ r lib/beansbinding-1.2.1.jar lib/diffutils-1.2.1.jar lib/groovy-ant-3.0
+ .9.jar lib/groovy-astbuilder-3.0.9.jar lib/groovy-cli-picocli-3.0.9.jar
+  lib/groovy-groovysh-3.0.9.jar lib/groovy-console-3.0.9.jar lib/groovy-
+ datetime-3.0.9.jar lib/groovy-groovydoc-3.0.9.jar lib/groovy-docgenerat
+ or-3.0.9.jar lib/groovy-jmx-3.0.9.jar lib/groovy-json-3.0.9.jar lib/gro
+ ovy-jsr223-3.0.9.jar lib/groovy-macro-3.0.9.jar lib/groovy-nio-3.0.9.ja
+ r lib/groovy-servlet-3.0.9.jar lib/groovy-sql-3.0.9.jar lib/groovy-swin
+ g-3.0.9.jar lib/groovy-templates-3.0.9.jar lib/groovy-test-3.0.9.jar li
+ b/groovy-test-junit5-3.0.9.jar lib/groovy-testng-3.0.9.jar lib/groovy-x
+ ml-3.0.9.jar lib/groovy-3.0.9.jar lib/checker-qual-3.19.0.jar lib/error
+ _prone_annotations-2.10.0.jar lib/jsonic-1.2.11.jar lib/openregex-1.1.1
+ .jar lib/guava-16.0.1.jar lib/antlr-runtime-3.4.jar lib/jsch.agentproxy
+ .usocket-nc-0.0.7.jar lib/jsch.agentproxy.sshagent-0.0.7.jar lib/jsch.a
+ gentproxy.core-0.0.7.jar lib/opennlp-tools-1.6.0.jar lib/opennlp-tokeni
+ ze-models-1.5.jar lib/opennlp-postag-models-1.5.jar lib/opennlp-chunk-m
+ odels-1.5.jar lib/jwordsplitter-4.1.jar lib/cjftransform-1.0.1.jar lib/
+ morphology-el-1.0.0.jar lib/ant-junit-1.10.11.jar lib/ant-1.10.11.jar l
+ ib/ant-launcher-1.10.11.jar lib/ant-antlr-1.10.11.jar lib/picocli-4.6.1
+ .jar lib/qdox-1.12.1.jar lib/javaparser-core-3.23.0.jar lib/jline-2.14.
+ 6.jar lib/junit-4.13.2.jar lib/junit-platform-launcher-1.7.2.jar lib/ju
+ nit-platform-engine-1.7.2.jar lib/junit-platform-commons-1.7.2.jar lib/
+ junit-jupiter-engine-5.7.2.jar lib/junit-jupiter-api-5.7.2.jar lib/test
+ ng-7.4.0.jar lib/platform-3.4.0.jar lib/hamcrest-core-1.3.jar lib/opent
+ est4j-1.2.0.jar lib/jcommander-1.78.jar lib/jquery-3.5.1.jar
+
+Name: org/omegat/core/dictionaries/
+Plugin-Name: Dictionary driver[bundle]
+Plugin-Category: dictionary
+Plugin-Description: Bundled dictionary files connectors. There are two b
+ undled connectors. LingvoDSL, connector  for .dsl, .dsl.dz, .dsl.gz and
+  StarDict, connector for .ifo, *.dict
+
+Name: org.omegat.filters2.subtitles.WebVttFilter
+OmegaT-Plugin: filter
+
+Name: org.omegat.filters3.xml.infix.InfixFilter
+OmegaT-Plugin: filter
+
+Name: org.omegat.tokenizer.LuceneRussianTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org.omegat.core.machinetranslators.DeepLTranslate
+OmegaT-Plugin: machinetranslator
+
+Name: org.omegat.tokenizer.LuceneSmartChineseTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org.omegat.tokenizer.LuceneThaiTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org.omegat.tokenizer.LuceneLatvianTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org.omegat.filters2.text.ini.INIFilter
+OmegaT-Plugin: filter
+
+Name: org.omegat.filters3.xml.openxml.OpenXMLFilter
+OmegaT-Plugin: filter
+
+Name: org.omegat.tokenizer.LuceneCatalanTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org.omegat.tokenizer.LuceneBrazilianTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org.omegat.filters3.xml.resx.ResXFilter
+OmegaT-Plugin: filter
+
+Name: org.omegat.core.machinetranslators.MicrosoftTranslatorAzure
+OmegaT-Plugin: machinetranslator
+
+Name: org.omegat.filters3.xml.xhtml.XHTMLFilter
+OmegaT-Plugin: filter
+
+Name: org.omegat.filters3.xml.visio.VisioFilter
+OmegaT-Plugin: filter
+
+Name: org.omegat.filters3.xml.android.AndroidFilter
+OmegaT-Plugin: filter
+
+Name: org.omegat.tokenizer.LuceneGermanTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org.omegat.filters2.xtagqxp.XtagFilter
+OmegaT-Plugin: filter
+
+Name: org.omegat.tokenizer.LuceneNorwegianTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org.omegat.filters2.hhc.HHCFilter2
+OmegaT-Plugin: filter
+
+Name: org.omegat.filters3.xml.properties.PropertiesFilter
+OmegaT-Plugin: filter
+
+Name: org.omegat.core.machinetranslators.MyMemoryMachineTranslate
+OmegaT-Plugin: machinetranslator
+
+Name: org.omegat.tokenizer.LuceneCJKTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org.omegat.tokenizer.LuceneCzechTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org.omegat.filters3.xml.scribus.ScribusFilter
+OmegaT-Plugin: filter
+
+Name: org/omegat/gui/script/
+Plugin-Name: Scripting engine
+Plugin-Category: miscellaneous
+Plugin-Description: Script engine
+
+Name: org.omegat.filters3.xml.flash.FlashFilter
+OmegaT-Plugin: filter
+
+Name: org.omegat.filters3.xml.schematron.SchematronFilter
+OmegaT-Plugin: filter
+
+Name: org.omegat.filters2.html2.HTMLFilter2
+OmegaT-Plugin: filter
+
+Name: org.omegat.tokenizer.LuceneBasqueTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org.omegat.tokenizer.LuceneSwedishTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org.omegat.filters2.latex.LatexFilter
+OmegaT-Plugin: filter
+
+Name: org.omegat.tokenizer.LuceneGalicianTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org.omegat.tokenizer.LucenePolishTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org.omegat.tokenizer.LuceneTurkishTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org.omegat.filters3.xml.relaxng.RelaxNGFilter
+OmegaT-Plugin: filter
+
+Name: org.omegat.filters3.xml.wordpress.WordpressFilter
+OmegaT-Plugin: filter
+
+Name: org.omegat.tokenizer.LuceneDanishTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org/omegat/filters3/
+Plugin-Name: XML filters[bundle]
+Plugin-Category: filter
+Plugin-Description: Bundled filters for various XML files includes MSOff
+ ice (OOXML), LibreOffice (ODF) and XLIFF
+
+Name: org.omegat.tokenizer.LucenePersianTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org/omegat/externalfinder/
+Plugin-Name: Local external search
+Plugin-Category: miscellaneous
+Plugin-Description: Local external search plugin
+
+Name: org.omegat.filters3.xml.camtasiawindows.CamtasiaWindowsFilter
+OmegaT-Plugin: filter
+
+Name: org.omegat.filters2.subtitles.SbvFilter
+OmegaT-Plugin: filter
+
+Name: org/omegat/util/gui/
+Plugin-Name: GUI extensions
+Plugin-Category: miscellaneous
+Plugin-Description: GUI extension
+
+Name: org.omegat.filters2.text.mozftl.MozillaFTLFilter
+OmegaT-Plugin: filter
+
+Name: org.omegat.filters3.xml.docbook.DocBookFilter
+OmegaT-Plugin: filter
+
+Name: org.omegat.filters2.pdf.PdfFilter
+OmegaT-Plugin: filter
+
+Name: org.omegat.filters2.subtitles.SrtFilter
+OmegaT-Plugin: filter
+
+Name: org.omegat.filters3.xml.svg.SvgFilter
+OmegaT-Plugin: filter
+
+Name: org.omegat.core.machinetranslators.ApertiumTranslate
+OmegaT-Plugin: machinetranslator
+
+Name: org.omegat.filters2.mozlang.MozillaLangFilter
+OmegaT-Plugin: filter
+
+Name: org.omegat.core.machinetranslators.MyMemoryHumanTranslate
+OmegaT-Plugin: machinetranslator
+
+Name: org.omegat.tokenizer.LuceneSpanishTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org.omegat.filters3.xml.txml.TXMLFilter
+OmegaT-Plugin: filter
+
+Name: org.omegat.tokenizer.LucenePortugueseTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org.omegat.tokenizer.LuceneHindiTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org.omegat.filters2.mozdtd.MozillaDTDFilter
+OmegaT-Plugin: filter
+
+Name: org.omegat.tokenizer.LuceneBulgarianTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org/omegat/filters2/
+Plugin-Name: File filters[bundle]
+Plugin-Category: filter
+Plugin-Description: Bundled filters for various file types
+
+Name: org.omegat.filters3.xml.wix.WiXFilter
+OmegaT-Plugin: filter
+
+Name: org.omegat.core.machinetranslators.IBMWatsonTranslate
+OmegaT-Plugin: machinetranslator
+
+Name: org.omegat.tokenizer.DefaultTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org.omegat.filters3.xml.l10nmgr.L10nmgrFilter
+OmegaT-Plugin: filter
+
+Name: org.omegat.tokenizer.LuceneJapaneseTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org.omegat.filters3.xml.helpandmanual.HelpAndManualFilter
+OmegaT-Plugin: filter
+
+Name: org.omegat.filters2.po.PoFilter
+OmegaT-Plugin: filter
+
+Name: org.omegat.core.machinetranslators.Google2Translate
+OmegaT-Plugin: machinetranslator
+
+Name: org.omegat.tokenizer.LuceneItalianTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org.omegat.filters2.text.magento.MagentoFilter
+OmegaT-Plugin: filter
+
+Name: org/omegat/core/machinetranslators/
+Plugin-Name: MT connector[bundle]
+Plugin-Category: machinetranslator
+Plugin-Description: Bundled machine translator service connectors. There
+  are several connectors;  Apertium Translate / Belazar Translate / Deep
+ L Translate (only Pro user can use) /IBM Watson Translate / Microsoft T
+ ranslate V2 (obsolete, only user who has v2 key can use) / MyMemory Hum
+ an Translate / MyMemory Machine Translate / Google Translate v2 / Yande
+ x Cloud Translate (obsolete, only user who already has access key can u
+ se)
+
+Name: org.omegat.tokenizer.LuceneFinnishTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org.omegat.tokenizer.LuceneHungarianTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org.omegat.filters2.moodlephp.MoodlePHPFilter
+OmegaT-Plugin: filter
+
+Name: org.omegat.tokenizer.LuceneFrenchTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org.omegat.filters3.xml.xmlspreadsheet.XMLSpreadsheetFilter
+OmegaT-Plugin: filter
+
+Name: org.omegat.tokenizer.LuceneRomanianTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org.omegat.filters2.rc.RcFilter
+OmegaT-Plugin: filter
+
+Name: org.omegat.filters2.text.bundles.ResourceBundleFilter
+OmegaT-Plugin: filter
+
+Name: org.omegat.filters2.text.dokuwiki.DokuWikiFilter
+OmegaT-Plugin: filter
+
+Name: org.omegat.core.machinetranslators.YandexCloudTranslate
+OmegaT-Plugin: machinetranslator
+
+Name: org/omegat/tokenizer/
+Plugin-Name: Tokenizers[bundle]
+Plugin-Category: tokenizer
+Plugin-Description: Bundled tokenizers plugin
+
+Name: org.omegat.tokenizer.LuceneIrishTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org/omegat/gui/theme/
+Plugin-Name: Themes [bundle]
+Plugin-Category: theme
+Plugin-Description: Bundled default theme plugins
+
+Name: org.omegat.tokenizer.LuceneIndonesianTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org.omegat.tokenizer.LuceneGreekTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org.omegat.tokenizer.LuceneArabicTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org.omegat.tokenizer.LuceneArmenianTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org.omegat.tokenizer.LuceneDutchTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org.omegat.filters2.text.ilias.ILIASFilter
+OmegaT-Plugin: filter
+
+Name: org.omegat.filters3.xml.opendoc.OpenDocFilter
+OmegaT-Plugin: filter
+
+Name: org.omegat.filters3.xml.typo3.Typo3Filter
+OmegaT-Plugin: filter
+

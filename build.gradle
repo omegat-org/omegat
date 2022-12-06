@@ -228,17 +228,35 @@ jar {
         attributes('License': 'GNU Public License version 3 or later',
                    'Implementation-Version': project.version,
                    'Permissions': 'all-permissions',
-                   'OmegaT-Plugins': omtPlugins.plugin,
                    'OmegaT-Plugin': 'true',
+                   'OmegaT-Plugins': omtPlugins.plugin,
+                   'Plugin-Author': 'OmegaT team',
+                   'Plugin-Link': 'https://omegat.org',
+                   'Plugin-Version': project.version,
                    'Main-Class': mainClassName,
                    'Class-Path': configurations.runtimeClasspath.collect { "lib/${it.name}" }.join(' '))
+        ext.pluginAttr = { name, path, category, description ->
+            attributes('Plugin-Name': name, 'Plugin-Category': category, 'Plugin-Description': description, path)
+        }
+        def desc = [:]
         omtPlugins.each { key, val ->
-            if (key != 'plugin') {
+            if (key.startsWith('plugin.desc')) {
+                desc[key.split('\\.').last()] = val
+            } else if (key != 'plugin') {
                 val.tokenize().each { cls ->
                     attributes('OmegaT-Plugin': key, cls)
                 }
             }
         }
+        pluginAttr('Dictionary driver[bundle]', 'org/omegat/core/dictionaries/', 'dictionary', desc.dictionary)
+        pluginAttr('MT connector[bundle]', 'org/omegat/core/machinetranslators/', 'machinetranslator', desc.machinetranslator)
+        pluginAttr('File filters[bundle]', 'org/omegat/filters2/', 'filter', desc.filters2)
+        pluginAttr('XML filters[bundle]', 'org/omegat/filters3/', 'filter', desc.filters3)
+        pluginAttr('Tokenizers[bundle]', 'org/omegat/tokenizer/', 'tokenizer', desc.tokenizer)
+        pluginAttr('Themes [bundle]', 'org/omegat/gui/theme/', 'theme', desc.theme)
+        pluginAttr('Scripting engine', 'org/omegat/gui/script/', 'miscellaneous', desc.script)
+        pluginAttr('GUI extensions', 'org/omegat/util/gui/', 'miscellaneous', desc.guiutil)
+        pluginAttr('Local external search', 'org/omegat/externalfinder/', 'miscellaneous', desc.externalfinder)
     }
     // Don't include extra stuff like version number in JAR name
     archiveFileName = "${archiveBaseName.get()}.${archiveExtension.get()}"

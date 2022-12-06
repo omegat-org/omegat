@@ -35,6 +35,8 @@ import java.io.InputStream;
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -78,21 +80,31 @@ public final class PluginUtils {
      * Plugin type definitions.
      */
     public enum PluginType {
+        /** File filters that provide IFilter API. */
         FILTER("filter"),
+        /** Tokenizers, currently bundled and it is for backward compatibility.  */
         TOKENIZER("tokenizer"),
+        /** Markers, that provide IMaker, mostly bundled. */
         MARKER("marker"),
+        /** Machine Translator service connectors, that provide IMachineTranslation API. */
         MACHINETRANSLATOR("machinetranslator"),
+        /** A plugin that change base of OmegaT system, not recommended. */
         BASE("base"),
+        /** Glosary, that provide IGlossary API. */
         GLOSSARY("glossary"),
+        /** Dictionary files/services connectors, that provide IDictionary and/or IDictionaryFactory API. */
         DICTIONARY("dictionary"),
+        /** theme, that register Swing Look-and-Feel with OmegaT properties into UIManager. */
         THEME("theme"),
+        /** Misc plugins, such as GUI extension like web browser spport. */
         MISCELLANEOUS("miscellaneous"),
+        /** When plugin does not defined any of above. */
         UNKNOWN("Undefined");
 
         private final String typeValue;
 
         PluginType(String type) {
-           typeValue = type;
+            typeValue = type;
         }
 
         public String getTypeValue() {
@@ -112,7 +124,7 @@ public final class PluginUtils {
         }
     }
 
-    protected static final List<Class<?>> LOADED_PLUGINS = new ArrayList<>();
+    private static final List<Class<?>> LOADED_PLUGINS = new ArrayList<>();
     private static final Set<PluginInformation> PLUGIN_INFORMATIONS = new HashSet<>();
 
     /** Private constructor to disallow creation */
@@ -180,7 +192,7 @@ public final class PluginUtils {
                 String manifests = params.get(CLIParameters.DEV_MANIFESTS);
                 if (manifests != null) {
                     for (String mf : manifests.split(File.pathSeparator)) {
-                        try (InputStream in = new FileInputStream(mf)) {
+                        try (InputStream in = Files.newInputStream(Paths.get(mf))) {
                             loadFromManifest(new Manifest(in), pluginsClassLoader, null);
                         }
                     }
@@ -266,7 +278,8 @@ public final class PluginUtils {
             String[] languages = ann.languages();
             try {
                 if (languages.length == 1 && languages[0].equals(Tokenizer.DISCOVER_AT_RUNTIME)) {
-                    languages = ((ITokenizer) c.getDeclaredConstructor().newInstance()).getSupportedLanguages();
+                    languages = ((ITokenizer) c.getDeclaredConstructor().newInstance())
+                            .getSupportedLanguages();
                 }
             } catch (Exception ex) {
                 Log.log(ex);
@@ -322,13 +335,14 @@ public final class PluginUtils {
      *            manifest
      * @param classLoader
      *            classloader
-     * @throws ClassNotFoundException when plugin class not found.
+     * @throws ClassNotFoundException
+     *             when plugin class not found.
      */
-    protected static void loadFromManifest(final Manifest m, final ClassLoader classLoader, final URL mu)
+    private static void loadFromManifest(Manifest m, ClassLoader classLoader, URL mu)
             throws ClassNotFoundException {
-        String pluginClasses = m.getMainAttributes().getValue("OmegaT-Plugins");
-        if (pluginClasses != null) {
-            for (String clazz : pluginClasses.split("\\s+")) {
+        String classes = m.getMainAttributes().getValue("OmegaT-Plugins");
+        if (classes != null) {
+            for (String clazz : classes.split("\\s+")) {
                 if (clazz.trim().isEmpty()) {
                     continue;
                 }
@@ -343,11 +357,11 @@ public final class PluginUtils {
                }
             }
         }
-
         loadFromManifestOld(m, classLoader);
     }
 
-    protected static void loadFromProperties(Properties props, ClassLoader classLoader) throws ClassNotFoundException {
+    private static void loadFromProperties(Properties props, ClassLoader classLoader)
+            throws ClassNotFoundException {
         for (Object o : props.keySet()) {
             String key = o.toString();
             String[] classes = props.getProperty(key).split("\\s+");
@@ -372,7 +386,7 @@ public final class PluginUtils {
         }
     }
 
-    protected static boolean loadClass(String clazz, ClassLoader classLoader) {
+    private static boolean loadClass(String clazz, ClassLoader classLoader) {
         try {
             Class<?> c = classLoader.loadClass(clazz);
             if (LOADED_PLUGINS.contains(c)) {
@@ -406,7 +420,7 @@ public final class PluginUtils {
     /**
      * Old-style plugin loading.
      */
-    protected static void loadFromManifestOld(final Manifest m, final ClassLoader classLoader)
+    private static void loadFromManifestOld(final Manifest m, final ClassLoader classLoader)
             throws ClassNotFoundException {
         if (m.getMainAttributes().getValue("OmegaT-Plugin") == null) {
             return;
@@ -428,7 +442,7 @@ public final class PluginUtils {
         }
     }
 
-    protected static boolean loadClassOld(String sType, String key, ClassLoader classLoader)
+    private static boolean loadClassOld(String sType, String key, ClassLoader classLoader)
             throws ClassNotFoundException {
         boolean loadOk = true;
         switch (PluginType.getTypeByValue(sType)) {

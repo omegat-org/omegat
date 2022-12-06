@@ -43,6 +43,7 @@ import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.IPaneMenu;
 import org.omegat.util.gui.JTextPaneLinkifier;
+import org.omegat.util.gui.StaticUIUtils;
 import org.omegat.util.gui.UIThreadsUtil;
 
 /**

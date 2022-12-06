@@ -276,13 +276,13 @@ public final class PluginUtils {
                 continue;
             }
             String[] languages = ann.languages();
-            try {
-                if (languages.length == 1 && languages[0].equals(Tokenizer.DISCOVER_AT_RUNTIME)) {
+            if (languages.length == 1 && languages[0].equals(Tokenizer.DISCOVER_AT_RUNTIME)) {
+                try {
                     languages = ((ITokenizer) c.getDeclaredConstructor().newInstance())
                             .getSupportedLanguages();
+                } catch (Exception ex) {
+                    Log.log(ex);
                 }
-            } catch (Exception ex) {
-                Log.log(ex);
             }
             for (String s : languages) {
                 if (lang.equals(s)) {
@@ -314,19 +314,19 @@ public final class PluginUtils {
         return THEME_PLUGIN_JARS;
     }
 
-    protected static final List<Class<?>> FILTER_CLASSES = new ArrayList<>();
+    private static final List<Class<?>> FILTER_CLASSES = new ArrayList<>();
 
-    protected static final List<Class<?>> TOKENIZER_CLASSES = new ArrayList<>();
+    private static final List<Class<?>> TOKENIZER_CLASSES = new ArrayList<>();
 
-    protected static final List<Class<?>> MARKER_CLASSES = new ArrayList<>();
+    private static final List<Class<?>> MARKER_CLASSES = new ArrayList<>();
 
-    protected static final List<Class<?>> MACHINE_TRANSLATION_CLASSES = new ArrayList<>();
+    private static final List<Class<?>> MACHINE_TRANSLATION_CLASSES = new ArrayList<>();
 
-    protected static final List<Class<?>> GLOSSARY_CLASSES = new ArrayList<>();
+    private static final List<Class<?>> GLOSSARY_CLASSES = new ArrayList<>();
 
-    protected static final List<Class<?>> BASE_PLUGIN_CLASSES = new ArrayList<>();
+    private static final List<Class<?>> BASE_PLUGIN_CLASSES = new ArrayList<>();
 
-    protected static final List<URL> THEME_PLUGIN_JARS = new ArrayList<>();
+    private static final List<URL> THEME_PLUGIN_JARS = new ArrayList<>();
 
     /**
      * Parse one manifest file.

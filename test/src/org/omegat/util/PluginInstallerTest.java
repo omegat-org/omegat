@@ -70,7 +70,7 @@ public class PluginInstallerTest {
 
     @Test
     public final void testParseManifest() throws Exception {
-        File manifest = new File("test/data/plugin/MANIFEST.MF");
+        File manifest = new File("test/data/plugin/simple/MANIFEST.MF");
         final String expectedName = "Filters for OmegaT";
         URL mu = manifest.toURI().toURL();
         Set<PluginInformation> pluginInformationSet = PluginInstaller.parsePluginJarFileManifest(mu);

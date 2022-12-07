@@ -22,7 +22,7 @@ applicationName = 'OmegaT'
 mainClassName = 'org.omegat.Main'
 
 ext {
-    javaVersion = '1.8'
+    javaVersion = '11'
     omtVersion = loadProperties(file('src/org/omegat/Version.properties'))
     omtFlavor = omtVersion.beta.empty ? 'standard' : 'latest'
     omtWebsite = 'https://omegat.org'
@@ -37,12 +37,13 @@ ext {
     }
 }
 
-sourceCompatibility = javaVersion
-targetCompatibility = javaVersion
-
 version = omtVersion.version + getUpdateSuffix(omtVersion.update)
 
 java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(javaVersion)
+        vendor = JvmVendorSpec.ADOPTOPENJDK
+    }
     withSourcesJar()
     withJavadocJar()
 }

@@ -97,7 +97,7 @@
     </varlistentry>
 
     <varlistentry id="menus.goto.next.unique.segment">
-      <term id="menus.goto.next.unique.segment.title">Next Unique Segment		  <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>Q</keycap></keycombo>
+      <term id="menus.goto.next.unique.segment.title">Next Unique Segment		  <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>K</keycap></keycombo>
 </term>
       <listitem>
         <para>Moves to the next unique segment.</para>

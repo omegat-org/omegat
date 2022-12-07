@@ -79,18 +79,18 @@ public class XLIFFFilterTest extends TestFilterBase {
 
     @Test
     public void testParse() throws Exception {
-        parse(filter, "test/data/filters/xliff/file-XLIFFFilter.xlf");
+        parse(filter, "test/data/filters/xliff/filters3/file-XLIFFFilter.xlf");
     }
 
     @Test
     public void testTranslate() throws Exception {
-        translateXML(filter, "test/data/filters/xliff/file-XLIFFFilter.xlf");
-        translateXML(filter, "test/data/filters/xliff/file-XLIFFFilter-SMP.xlf");
+        translateXML(filter, "test/data/filters/xliff/filters3/file-XLIFFFilter.xlf");
+        translateXML(filter, "test/data/filters/xliff/filters3/file-XLIFFFilter-SMP.xlf");
     }
 
     @Test
     public void testLoad() throws Exception {
-        String f = "test/data/filters/xliff/file-XLIFFFilter.xlf";
+        String f = "test/data/filters/xliff/filters3/file-XLIFFFilter.xlf";
         IProject.FileInfo fi = loadSourceFiles(filter, f);
 
         checkMultiStart(fi, f);
@@ -101,7 +101,7 @@ public class XLIFFFilterTest extends TestFilterBase {
 
     @Test
     public void testTags() throws Exception {
-        String f = "test/data/filters/xliff/file-XLIFFFilter-tags.xlf";
+        String f = "test/data/filters/xliff/filters3/file-XLIFFFilter-tags.xlf";
         IProject.FileInfo fi = loadSourceFiles(filter, f);
 
         SourceTextEntry ste;
@@ -131,7 +131,7 @@ public class XLIFFFilterTest extends TestFilterBase {
         checkMultiNoPrevNext("<m0>Check protected-only tag reading</m0>", null, null, null);
         checkMultiEnd();
 
-        File inFile = new File("test/data/filters/xliff/file-XLIFFFilter-tags.xlf");
+        File inFile = new File("test/data/filters/xliff/filters3/file-XLIFFFilter-tags.xlf");
         filter.translateFile(inFile, outFile, new TreeMap<String, String>(), context,
                 new ITranslateCallback() {
                     public String getTranslation(String id, String source, String path) {
@@ -157,7 +157,7 @@ public class XLIFFFilterTest extends TestFilterBase {
 
     @Test
     public void testTagOptimization() throws Exception {
-        String f = "test/data/filters/xliff/file-XLIFFFilter-tags-optimization.xlf";
+        String f = "test/data/filters/xliff/filters3/file-XLIFFFilter-tags-optimization.xlf";
 
         Core.getFilterMaster().getConfig().setRemoveTags(false);
         IProject.FileInfo fi = loadSourceFiles(filter, f);
@@ -182,7 +182,7 @@ public class XLIFFFilterTest extends TestFilterBase {
 
     @Test
     public void testStatCounting() throws Exception {
-        String f = "test/data/filters/xliff/file-XLIFFFilter-statcount.xlf";
+        String f = "test/data/filters/xliff/filters3/file-XLIFFFilter-statcount.xlf";
 
         StatisticsSettings.setCountingProtectedText(true);
         StatisticsSettings.setCountingCustomTags(true);
@@ -193,7 +193,7 @@ public class XLIFFFilterTest extends TestFilterBase {
 
     @Test
     public void testStatCountingNoProtectedText() throws Exception {
-        String f = "test/data/filters/xliff/file-XLIFFFilter-statcount.xlf";
+        String f = "test/data/filters/xliff/filters3/file-XLIFFFilter-statcount.xlf";
 
         StatisticsSettings.setCountingProtectedText(false);
         StatisticsSettings.setCountingCustomTags(true);
@@ -204,7 +204,7 @@ public class XLIFFFilterTest extends TestFilterBase {
 
     @Test
     public void testStatCountingNoCustomTags() throws Exception {
-        String f = "test/data/filters/xliff/file-XLIFFFilter-statcount.xlf";
+        String f = "test/data/filters/xliff/filters3/file-XLIFFFilter-statcount.xlf";
 
         StatisticsSettings.setCountingProtectedText(true);
         StatisticsSettings.setCountingCustomTags(false);
@@ -224,7 +224,7 @@ public class XLIFFFilterTest extends TestFilterBase {
      */
     @Test
     public void testInvalidXML() throws Exception {
-        String f = "test/data/filters/xliff/file-XLIFFFilter-invalid-content.xlf";
+        String f = "test/data/filters/xliff/filters3/file-XLIFFFilter-invalid-content.xlf";
 
         try {
             loadSourceFiles(filter, f);
@@ -248,7 +248,7 @@ public class XLIFFFilterTest extends TestFilterBase {
      */
     @Test
     public void testInvalidXMLOnWeirdPath() throws Exception {
-        String f = "test/data/filters/xliff/file-XLIFFFilter-invalid-content.xlf";
+        String f = "test/data/filters/xliff/filters3/file-XLIFFFilter-invalid-content.xlf";
 
         File tmpDir = Files.createTempDirectory("omegat").toFile();
         assertTrue(tmpDir.isDirectory());
@@ -281,7 +281,7 @@ public class XLIFFFilterTest extends TestFilterBase {
 
     @Test
     public void testProperties() throws Exception {
-        String f = "test/data/filters/xliff/file-XLIFFFilter-properties.xlf";
+        String f = "test/data/filters/xliff/filters3/file-XLIFFFilter-properties.xlf";
         IProject.FileInfo fi = loadSourceFiles(filter, f);
 
         // Check reading as properties. We don't really care about the order of
@@ -415,7 +415,7 @@ public class XLIFFFilterTest extends TestFilterBase {
      */
     public static void checkXLiffTranslationRFE1506(IFilter filter, FilterContext context, File outFile,
             boolean optionNeedsTranslate) throws Exception {
-        File target = new File("test/data/filters/xliff/file-xliff-RFE1506.xliff");
+        File target = new File("test/data/filters/xliff/filters3/file-xliff-RFE1506.xliff");
         Map<String, String> config = new HashMap<>();
         if (optionNeedsTranslate) {
             config.put("changetargetstateneedsreviewtranslation", "true");

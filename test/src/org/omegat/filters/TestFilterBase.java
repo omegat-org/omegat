@@ -423,12 +423,12 @@ public abstract class TestFilterBase extends TestCore {
     }
 
     protected static class ParsedEntry {
-        String id;
-        String source;
-        String translation;
-        boolean isFuzzy;
-        String[] props;
-        String path;
+        public String id;
+        public String source;
+        public String translation;
+        public boolean isFuzzy;
+        public String[] props;
+        public String path;
     }
 
     protected TestFileInfo loadSourceFiles(IFilter filter, String file, Map<String, String> filterOptions)

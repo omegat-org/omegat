@@ -29,6 +29,7 @@ import java.awt.Window;
 
 import java.util.Comparator;
 import java.util.Map;
+import java.util.HashMap;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 import java.util.zip.ZipEntry;
@@ -114,6 +115,11 @@ public class MsOfficeFileFilter extends AbstractZipFilter {
         DOCUMENTS += "|(page\\d+\\.xml)";
 
         TRANSLATABLE = Pattern.compile(DOCUMENTS);
+    }
+    
+    public MsOfficeFileFilter() {
+        super();
+        defineDOCUMENTSOptions(new HashMap<String,String>()); // Define the documents to read
     }
 
 

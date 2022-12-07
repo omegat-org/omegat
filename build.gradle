@@ -1016,6 +1016,16 @@ task debug(type: JavaExec) {
     debug true
 }
 
+task runOnJava17(type: JavaExec) {
+    description = 'Launch app on Java 17'
+    javaLauncher = javaToolchains.launcherFor {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+    mainClass = application.mainClass
+    classpath = sourceSets.main.runtimeClasspath
+    group = 'application'
+}
+
 // E.g. when doing `build`, run checks before making distfiles
 assemble.mustRunAfter check
 

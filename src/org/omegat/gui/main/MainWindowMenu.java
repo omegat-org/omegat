@@ -16,7 +16,7 @@
                2015 Didier Briel, Yu Tang
                2017 Didier Briel
                2019 Thomas Cordonnier
-               Home page: http://www.omegat.org/
+               Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
  This file is part of OmegaT.
@@ -32,7 +32,7 @@
  GNU General Public License for more details.
 
  You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
 package org.omegat.gui.main;

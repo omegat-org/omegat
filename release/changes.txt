@@ -1,13 +1,54 @@
 ----------------------------------------------------------------------
+ OmegaT 6.0.0
+----------------------------------------------------------------------
+  1 Enhancement
+  0 Bug fixes
+  0 Localisation updates
+----------------------------------------------------------------------
+6.0.0 vs 5.8.0
+
+  Implemented requests:
+
+  - OmegaT 6.0 requires Java 11 to run
+
+----------------------------------------------------------------------
  OmegaT 5.8.0
 ----------------------------------------------------------------------
-  20 Enhancements
-  24 Bug fixes
+   4 Removed features
+  23 Enhancements
+  23 Bug fixes
   1 Localisation updates
 ----------------------------------------------------------------------
 5.8.0 vs 5.7.1
 
+  Removed features:
+
+  - Removal of Java Web Start
+  Java Web Start is a deprecated framework that is not available anymore with Java 11.
+  https://www.oracle.com/technetwork/java/javase/javaclientroadmapupdate2018mar-4414431.pdf  
+
+  - Removal of TaaS access
+  The TaaS service does not exist anymore.
+  https://github.com/omegat-org/omegat/pull/302
+
+  - Removal of the Moses MT connector
+  The connector uses a library that shows critical vulnerabilities
+  https://github.com/omegat-org/omegat/pull/321
+  See Moses Plugin project: https://github.com/omegat-org/moses-plugin
+
+  - Removal of the Microsoft Azure Translator MT connector
+  https://sourceforge.net/p/omegat/feature-requests/1432/
+
   Implemented requests:
+
+  - Shortcuts to navigate between Notes and Editor panel
+  https://sourceforge.net/p/omegat/feature-requests/1630/
+
+  - Show glossary comment on context menu candidate
+  https://sourceforge.net/p/omegat/feature-requests/1515/
+
+  - Add a shortcut to select all source text of the current segment
+  https://sourceforge.net/p/omegat/feature-requests/1639/
 
   - Update to new pixel logos and improve macOS UI logos
 
@@ -69,19 +110,20 @@
 
   Bug fixes:
 
+  - Plugin loader does not allow multiple entries of OmegaT-Plugins/Category
+  https://sourceforge.net/p/omegat/bugs/1128/
+
+  - Cmd+Shift+Q conflicts with OS shortcut "logout user" on macOS
+  https://sourceforge.net/p/omegat/bugs/1127/
+
   - Local project does not update after remote masking some files
-    https://sourceforge.net/p/omegat/bugs/1124/
+  https://sourceforge.net/p/omegat/bugs/1124/
 
   - OmegaT --no-team does not complete 3.6 team project conversion
-    https://sourceforge.net/p/omegat/bugs/1063/
-
-  - Drop Moses MT connector because of vulnerability of dependency library.
-    Please see Moses Plugin project: https://github.com/omegat-org/moses-plugin
+  https://sourceforge.net/p/omegat/bugs/1063/
 
   - GUI: Comment is shown on both Comment and Segment Properties pane
   https://sourceforge.net/p/omegat/bugs/1119/
-
-  - Drop TaaS glossary service connector
 
   - When converting git local-managed project, OmegaT raise NPE
   https://sourceforge.net/p/omegat/bugs/1118/

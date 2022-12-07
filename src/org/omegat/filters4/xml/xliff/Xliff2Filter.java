@@ -83,12 +83,29 @@ public class Xliff2Filter extends AbstractXliffFilter {
                 }
                 break;
             case "file": case "group": case "unit":
-                 // Note: in spec, id is REQUIRED
-                path += "/" + startElement.getAttributeByName(new QName("id")).getValue();
+                try {
+                    path += "/" + startElement.getAttributeByName(new QName("id")).getValue();
+                } catch (NullPointerException noid) { // Note: in spec, id is REQUIRED
+                    throw new XMLStreamException("Missing attribute 'id' in <" 
+                        + startElement.getName().getLocalPart() + ">");
+                }
                 updateIgnoreScope(startElement);
                 break;
             case "segment":
-                segId = startElement.getAttributeByName(new QName("id")).getValue(); flushedSegment = false;
+                try {
+                    segId = startElement.getAttributeByName(new QName("id")).getValue(); 
+                } catch (NullPointerException noid) { // Note: in spec, id is OPTIONAL
+                    if (segId == null) {
+                        segId = "1";
+                    } else {
+                        try {
+                            segId = Integer.toString(Integer.parseInt(segId) + 1);
+                        } catch (NumberFormatException fmt) {
+                            segId = "1";
+                        }
+                    }
+                }
+                flushedSegment = false;
                 break;
             case "source": currentBuffer = source; source.clear(); break;
             case "target": target = new LinkedList<XMLEvent>(); currentBuffer = target; inTarget = true; break;

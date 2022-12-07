@@ -83,8 +83,11 @@ public class Xliff1Filter extends AbstractXliffFilter {
                 }
                 break;
             case "file":
-                // Note: in spec, original is REQUIRED
-                path += "/" + startElement.getAttributeByName(new QName("original")).getValue();
+                try {
+                    path += "/" + startElement.getAttributeByName(new QName("original")).getValue();
+                } catch (NullPointerException noid) { // Note: in spec, original is REQUIRED
+                    throw new XMLStreamException("Missing attribute 'original' in <file>");
+                }
                 updateIgnoreScope(startElement);
                 break;
             case "group":
@@ -102,7 +105,11 @@ public class Xliff1Filter extends AbstractXliffFilter {
                 updateIgnoreScope(startElement);
                 break;
             case "trans-unit":
-                unitId = startElement.getAttributeByName(new QName("id")).getValue();
+                try {
+                    unitId = startElement.getAttributeByName(new QName("id")).getValue();
+                } catch (NullPointerException noid) { // Note: in spec, original is REQUIRED
+                    throw new XMLStreamException("Missing attribute 'id' in <trans-unit>");
+                }
                 flushedUnit = false; targetStartEvent = null;
                 updateIgnoreScope(startElement);
                 break;

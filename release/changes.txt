@@ -1,4 +1,17 @@
 ----------------------------------------------------------------------
+ OmegaT 6.0.0
+----------------------------------------------------------------------
+  1 Enhancement
+  0 Bug fixes
+  0 Localisation updates
+----------------------------------------------------------------------
+6.0.0 vs 5.8.0
+
+  Implemented requests:
+
+  - OmegaT 6.0 requires Java 11 to run
+
+----------------------------------------------------------------------
  OmegaT 5.8.0 (2023-04-01)
 ----------------------------------------------------------------------
    4 Removed features
@@ -34,10 +47,10 @@
 
   - New default: Dictionary search should not be automatic
   https://sourceforge.net/p/omegat/feature-requests/1680/
-  
+
   - Share authentication between Git or SVN repositories on the same server
   https://sourceforge.net/p/omegat/feature-requests/1670
-  
+
   - Add filter filtres list sorting
   https://sourceforge.net/p/omegat/feature-requests/1667/
 

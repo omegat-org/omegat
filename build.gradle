@@ -42,6 +42,11 @@ targetCompatibility = javaVersion
 
 version = omtVersion.version + getUpdateSuffix(omtVersion.update)
 
+java {
+    withSourcesJar()
+    withJavadocJar()
+}
+
 sourceSets {
     main {
         java {
@@ -69,19 +74,6 @@ sourceSets {
 
 repositories {
     mavenCentral()
-}
-
-task webstartDocsJar(type: Jar) {
-    description = 'Bundle documents for Java WebStart.'
-    archiveBaseName = 'docs'
-    from('release') {
-        include 'changes.txt', 'OmegaT-license.txt'
-        into 'docs'
-    }
-    from('docs') {
-        include '**/instantStartGuideNoTOC.html', '**/OmegaT.css', '**/images/InstantGuide_*.png'
-        into 'docs'
-    }
 }
 
 configurations {
@@ -302,6 +294,7 @@ task genDocIndex(type: Copy) {
 }
 
 task webManual(type: Sync) {
+    group = 'documentation'
     description = 'Generate the HTML manual'
     dependsOn genDocIndex
     destinationDir = file("${buildDir}/docs/manual")
@@ -595,10 +588,12 @@ task macStapledNotarizedDistZip(type: Zip) {
 
 task mac(dependsOn: [macDistZip, macNotarize]) {
     description = 'Build the Mac distributions.'
+    group = 'distribution'
 }
 
 task linux(dependsOn: [linux64DistTar]) {
     description = 'Build the Linux distributions.'
+    group = 'distribution'
 }
 
 linux64DistTar {
@@ -615,6 +610,7 @@ linux64DistTar {
 
 task l10n(dependsOn: [l10nMinimalDistZip, l10nFullDistZip]) {
     description = 'Build the L10N distributions.'
+    group = 'distribution'
 }
 
 // We bundle our startup scripts separately, so disable startScripts.
@@ -657,6 +653,7 @@ ext.getInnoSetupCustomMessages = {
 
 task win {
     description = 'Build the Windows distributions.'
+    group = 'distribution'
 }
 
 ext.makeWinTask = { args ->
@@ -884,6 +881,7 @@ spotless {
 
 task changedOnBranch {
     description = 'List files that have been modified on this git branch.'
+    group = 'omegat workflow'
     doLast {
         ext.files = project.files(gitModifiedFiles())
         ext.files.each { println(it) }
@@ -892,6 +890,7 @@ task changedOnBranch {
 
 task spotlessChangedApply {
     description = 'Apply code formatting to files that have been changed on the current branch.'
+    group = 'omegat workflow'
     finalizedBy 'spotlessApply'
     dependsOn changedOnBranch
     doFirst {
@@ -907,6 +906,7 @@ jacoco {
 
 tasks.jacocoTestReport {
     dependsOn(tasks.test) // tests are required to run before generating the report
+    group = 'verification'
     reports {
         xml.required = true  // coveralls plugin depends on xml format report
         html.required = true
@@ -915,10 +915,12 @@ tasks.jacocoTestReport {
 
 task manualPdfs {
     description = 'Build PDF manuals for all languages. Requires Docker.'
+    group = 'omegat workflow'
 }
 
 task manualHtmls {
     description = 'Build HTML manuals for all languages. Requires Docker.'
+    group = 'omegat workflow'
 }
 
 ext.manualIndexXmls = fileTree(dir: 'doc_src', include: '**/OmegaTUsersManual_xinclude full.xml')
@@ -958,9 +960,11 @@ manualIndexXmls.each { xml ->
 
 task instantStartGuides {
     description = 'Build Instant Start guides for all languages. Requires Docker.'
+    group = 'omegat workflow'
 }
 
 task updateManuals {
+    group = 'omegat workflow'
     description = 'Update Instant Start guides and HTML manuals.'
     dependsOn manualHtmls, instantStartGuides
     finalizedBy genDocIndex
@@ -984,6 +988,7 @@ instantStartXmls.each { xml ->
 
 task debug(type: JavaExec) {
     description = 'Launch app for debugging.' // Special debug task for NetBeans
+    group = 'application'
     mainClass = mainClassName
     classpath = sourceSets.main.runtimeClasspath
     debug true
@@ -1001,19 +1006,10 @@ test {
 
 task testIntegration(type: JavaExec) {
     description = 'Run integration tests. Pass repo URL as -Domegat.test.repo=<repo>'
+    group = 'omegat workflow'
     mainClass = 'org.omegat.core.data.TestTeamIntegration'
     classpath = sourceSets.testIntegration.runtimeClasspath
     systemProperties = System.properties
-}
-
-task sourceJar(type: Jar) {
-    from sourceSets.main.allJava
-    classifier = 'sources'
-}
-
-task javadocJar(type: Jar) {
-    from javadoc.outputs
-    classifier = 'javadoc'
 }
 
 ext.mavenStyleVersion = version.replace('_', '-')
@@ -1024,9 +1020,6 @@ publishing {
             groupId = 'org.omegat'
             artifactId = 'omegat'
             version = mavenStyleVersion
-            artifact sourceJar
-            artifact javadocJar
-
             from components.java
 
             pom {
@@ -1114,19 +1107,9 @@ ext.publishAtomically = { args ->
 publishAtomically(name: 'manual', sourceTask: webManual)
 publishAtomically(name: 'javadoc', sourceTask: javadoc)
 
-ext {
-    codebasePattern = /^https:\/\/omegat\.sourceforge\.io\/([^\/]+)\/$/
-    def matcher = findProperty('jwsCodebase') =~ codebasePattern
-    jwsTargetDir = matcher ? matcher[0][1] : null
-}
-if (jwsTargetDir) {
-    publishAtomically(name: camelCase(jwsTargetDir),
-                      sourceTask: installWebstartDist,
-                      targetDir: jwsTargetDir)
-}
-
 task publishVersion {
     description = 'Update the version considered current by the version check.'
+    group = 'omegat workflow'
     doLast {
         ssh.run {
             session(remotes.sourceforgeWeb) {

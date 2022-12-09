@@ -2,91 +2,101 @@
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="windows.aligner">
-  <title id="windows.aligner.title">Align Files</title>
+  <title id="windows.aligner.title"><guilabel>Align Files</guilabel></title>
 
-  <para>Select
-  <link endterm="menus.tools.align.files.title"
-  linkend="menus.tools.align.files"/> in the <link endterm="menus.tools.title"
-  linkend="menus.tools"/> menu to access this tool.</para>
+  <para>Use <link endterm="menus.tools.title"
+  linkend="menus.tools"/><link endterm="menus.tools.align.files.title"
+  linkend="menus.tools.align.files"/> to access this tool.</para>
 
-    <para>OmegaT also offers a command line based alignment mode for key-based
-    formats. See <link linkend="launch.with.command.line.mode.console.align"
-    endterm="launch.with.command.line.mode.console.align.title"/> for
-    details.</para>
+  <para>OmegaT also offers a command line based alignment mode for key-based
+  formats. See the <link linkend="launch.with.command.line.mode.console.align"
+  endterm="launch.with.command.line.mode.console.align.title"/> option for
+  details.</para>
 
-	<warning>
-      <para>The aligner does not allow you to save your work partway through an
-      alignment. Therefore, it is recommended that you divide the files to align
-      into shorter files that you can comfortably align in a single
-      session. Doing so has the added benefit of reducing mismatches in the
-      initial automatic alignment, making the manual correction step
-      smoother.</para>
-    </warning>
+  <warning>
+    <para>The aligner does not allow you to save your work partway through an
+    alignment. Therefore, it is recommended that you divide the files to align
+    into shorter files that you can comfortably align in a single session. Doing
+    so has the added benefit of reducing mismatches in the initial automatic
+    alignment, making the manual correction step smoother.</para>
+  </warning>
 
 
-  <para>Alignment is the process of creating a bilingual translation memory
-  from a pair of already translated monolingual documents. Aligning the
-  contents of the files is a four-step process:</para>
+  <para>Alignment is the process of creating a bilingual translation memory from
+  a pair of already translated monolingual documents. Aligning the contents of
+  the files is a four-step process:</para>
+
   <orderedlist>
-	<listitem><para>specify the source and target languages and select the two
-	files you want to align.</para></listitem>
-	<listitem><para>the files are read by the aligner,
-	which attempts to match the segments that correspond to one another in the
-	original and translated texts,</para></listitem> <listitem><para>the
-	translator reviews the results and makes any necessary manual
-	adjustments,</para></listitem>
-	<listitem><para>save the result to TMX</para></listitem>
+	<listitem>
+	  <para>specify the source and target languages and select the two files you
+	  want to align.</para>
+	</listitem>
+
+	<listitem>
+	  <para>the files are read by the aligner, which attempts to match the
+	  segments that correspond to one another in the original and translated
+	  texts,</para>
+	</listitem>
+
+	<listitem>
+	  <para>the translator reviews the results and makes any necessary manual
+	  adjustments,</para>
+	</listitem>
+
+	<listitem>
+	  <para>save the result to TMX</para>
+	</listitem>
   </orderedlist>
 
   <para>The aligner can read all the file formats supported by OmegaT.</para>
   
   <note>
-    <para>If you have a translation project open, the aligner will
-    automatically use the languages from that project, as well the
-    project-specific segmentation rules, if any.</para>
+    <para>If you have a translation project open, the aligner will automatically
+    use the languages from that project, as well the project-specific
+    segmentation rules, if any.</para>
   </note>
 
-  <para>After selecting the language and files, click <guibutton>OK</guibutton> button to  bring up the <guilabel>Align</guilabel> window,
-  which shows the results of the automatic alignment.</para>
+  <para>After selecting the language and files, click <guibutton>OK</guibutton>
+  button to bring up the <guilabel>Align</guilabel> window, which shows the
+  results of the automatic alignment.</para>
 
-  <para>The main part of the window is divided into three columns:
+  <para>The main part of the window is divided into three columns:</para>
+  
   <itemizedlist>
-      <listitem>
-        <para><guilabel>Keep</guilabel>: The segment pairs in rows that have
-        this box checked are saved to the translation memory file.
-        Unchecked rows are discarded.</para>
-      </listitem>
+    <listitem>
+      <para><guilabel>Keep</guilabel>: The segment pairs in rows that have this
+      box checked are saved to the translation memory file.  Unchecked rows are
+      discarded.</para>
+    </listitem>
 
-      <listitem>
-        <para><guilabel>Source</guilabel>: The segments from the original
-        text.</para>
-      </listitem>
+    <listitem>
+      <para><guilabel>Source</guilabel>: The segments from the original
+      text.</para>
+    </listitem>
 
-      <listitem>
-        <para><guilabel>Target</guilabel>: The segments from the translated
-        text.</para>
-      </listitem>
-    </itemizedlist></para>
+    <listitem>
+      <para><guilabel>Target</guilabel>: The segments from the translated
+      text.</para>
+    </listitem>
+  </itemizedlist>
 
   <section id="windows.aligner.adjust">
     <title id="windows.aligner.adjust.title">Settings</title>
 
     <para>In this step, the bottom part of the window presents various
-    parameters and options you can change if the initial alignment looks like
-    it could be improved. It also shows an <guilabel>Average score</guilabel>
-    result for the alignment. As a rule of thumb, the lower that score, the
-    more accurate the alignment. Changing a parameter immediately recalculates
-    the alignment, allowing you to quickly try different combinations to
-    obtain the best results.</para>
+    parameters and options you can change if the initial alignment looks like it
+    could be improved. It also shows an <guilabel>Average score</guilabel>
+    result for the alignment. As a rule of thumb, the lower that score, the more
+    accurate the alignment. Changing a parameter immediately recalculates the
+    alignment, allowing you to quickly try different combinations to obtain the
+    best results.</para>
 
     <para>The available parameters and options are:</para>
 
     <variablelist>
 	  <title>Parameters</title>
-
-      <varlistentry>
+	  <varlistentry>
         <term>Comparison mode</term>
-
         <listitem>
           <itemizedlist>
             <listitem>
@@ -113,12 +123,11 @@
 
       <varlistentry>
         <term>Algorithm:</term>
-
         <listitem>
           <itemizedlist>
             <listitem>
-              <para><guilabel>Viterbi</guilabel>: The default algorithms used
-              to align the documents.</para>
+              <para><guilabel>Viterbi</guilabel>: The default algorithms used to
+              align the documents.</para>
             </listitem>
 
             <listitem>
@@ -127,15 +136,14 @@
             </listitem>
           </itemizedlist>
 
-          <para>There is no hard-and-fast rule on which algorithm you
-          should choose. Try both, and use the one that yields the better
-          result for your files.</para>
+          <para>There is no hard-and-fast rule on which algorithm you should
+          choose. Try both, and use the one that yields the better result for
+          your files.</para>
         </listitem>
       </varlistentry>
 
       <varlistentry>
         <term>Calculator:</term>
-
         <listitem>
           <itemizedlist>
             <listitem>
@@ -149,15 +157,14 @@
             </listitem>
           </itemizedlist>
 
-          <para>As with the algorithms, there is no hard-and-fast rule on
-          which statistical distribution you should choose. Try both and use
-          the one that yields the better result for your files.</para>
+          <para>As with the algorithms, there is no hard-and-fast rule on which
+          statistical distribution you should choose. Try both and use the one
+          that yields the better result for your files.</para>
         </listitem>
       </varlistentry>
 
       <varlistentry>
         <term>Counter:</term>
-
         <listitem>
           <itemizedlist>
             <listitem>
@@ -167,9 +174,9 @@
             </listitem>
 
             <listitem>
-              <para><guilabel>Word</guilabel>: The basic unit used to
-              determine the size of segments in languages that use a space to
-              delimit words.</para>
+              <para><guilabel>Word</guilabel>: The basic unit used to determine
+              the size of segments in languages that use a space to delimit
+              words.</para>
             </listitem>
           </itemizedlist>
 
@@ -186,21 +193,18 @@
 
     <variablelist>
 	  <title>Options</title>
-
       <varlistentry>
         <term>Segment</term>
-
         <listitem>
           <para>The aligner uses sentence segmentation by default. Uncheck the
-          check box to use paragraph segmentation (see <link
+          check box to use paragraph segmentation. See the <link
           endterm="dialogs.preferences.segmentation.setup.title"
-          linkend="dialogs.preferences.segmentation.setup"/>)</para>
+          linkend="dialogs.preferences.segmentation.setup"/> preferences.</para>
         </listitem>
       </varlistentry>
 
       <varlistentry>
         <term>Remove Tags</term>
-
         <listitem>
           <para>The aligner includes tags in the segments by default. Uncheck
           the check box to apply the <link
@@ -209,56 +213,55 @@
         </listitem>
       </varlistentry>
 
-      <varlistentry>
-        <term>Highlight</term>
-
+      <varlistentry id="windows.aligner.adjust.highlight">
+        <term id="windows.aligner.adjust.highlight.title">Highlight</term>
         <listitem>
-          <para>By default, the aligner highlights all numbers in the source
-          and target segments. Uncheck the check box to turn off
-          highlighting.</para>
+		  <para>Uncheck the check box to turn off highlighting.</para>
+
+          <para>The aligner uses the regular expression <code>\d+</code>
+          to highlight all numbers in the source and target segments.</para>
+		  <para>You can modify the regular expression to add highlighted
+		  parts. See the <link linkend="app.regex" endterm="app.regex.title"/>
+		  chapter for details.</para>
         </listitem>
       </varlistentry>
 
       <varlistentry>
         <term>Rules...</term>
-
         <listitem>
           <para>Clicking this button lets you edit the segmentation rules that
-          apply to this project. See <link linkend="app.segmentation"
-          endterm="app.segmentation.title"/> for details.</para>
+          apply to this project. See the <link linkend="app.segmentation"
+          endterm="app.segmentation.title"/> appendix for details.</para>
 
           <warning>
-            <para>If you modify the segmentation rules, you will be asked if
-            you want to save those changes when you exit the aligner. The
-            default choice is <guibutton>Yes</guibutton>, which may not be
-            what you want if you edited the general OmegaT segmentation
-            rules.</para>
+            <para>If you modify the segmentation rules, you will be asked if you
+            want to save those changes when you exit the aligner. The default
+            choice is <guibutton>Yes</guibutton>, which may not be what you want
+            if you edited the general OmegaT segmentation rules.</para>
           </warning>
-
         </listitem>
       </varlistentry>
 
       <varlistentry>
         <term>Filters...</term>
-
         <listitem>
-          <para>Clicking this button lets you edit the file filters that
-          apply to this project. See <link linkend="dialogs.preferences.file.filters"
-          endterm="dialogs.preferences.file.filters.title"/> for details.</para>
-
+          <para>Clicking this button lets you edit the file filters that apply
+          to this project. See the <link
+          linkend="dialogs.preferences.file.filters"
+          endterm="dialogs.preferences.file.filters.title"/> preferences for
+          details.</para>
 
           <warning>
-            <para>If you modify the file filters, you will be asked if you
-            want to save those changes when you exit the aligner. The default
-            choice is <guibutton>Yes</guibutton>, which may not be what you
-            want if you edited the general OmegaT file filters.</para>
+            <para>If you modify the file filters, you will be asked if you want
+            to save those changes when you exit the aligner. The default choice
+            is <guibutton>Yes</guibutton>, which may not be what you want if you
+            edited the general OmegaT file filters.</para>
           </warning>
         </listitem>
       </varlistentry>
 
       <varlistentry>
         <term>Pattern...</term>
-
         <listitem>
           <para>This option lets you enter a regular expression to define the
           pattern used for highlighting text in the source and target
@@ -276,11 +279,13 @@
 
     <para>In addition, the <guimenu>File</guimenu> menu provides the following
     commands:</para>
+	
     <itemizedlist>
       <listitem>
         <para><guimenuitem>Save TMX...</guimenuitem>: This item is grayed out
         until the next step is complete.</para>
       </listitem>
+	  
       <listitem>
         <para><guimenuitem>Reset</guimenuitem>: This command restores all
         parameters to their default value. It can also be called by clicking the
@@ -288,11 +293,13 @@
         pressing
         <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>R</keycap></keycombo></para>
       </listitem>
+
       <listitem>
         <para><guimenuitem>Reload</guimenuitem>: This command reloads the file
         from the disk. You can use this command to parse and align the files
         again if you had to modify their contents.</para>
       </listitem>
+
       <listitem>
         <para><guimenuitem>Close</guimenuitem>: This closes the
         <guilabel>Align</guilabel> dialog. Doing so in this step cancels the
@@ -333,6 +340,7 @@
     the arrow keys. Segment blocks can be selected with the mouse by clicking
     the first segment, and holding the <keycap>Shift</keycap> key while clicking
     the last segment.</para>
+
 	<para>Alternatively, you can press the arrow keys while holding
 	<keycap>Shift</keycap> to select consecutive segments. The available actions
 	are presented below.</para>
@@ -347,15 +355,18 @@
           the main window pane.</para>
         </listitem>
       </varlistentry>
+
       <varlistentry>
         <term>Move Down (<keycap>D</keycap>)</term>
         <listitem>
           <para>Moves the selected segment, or block of consecutive segments,
           down one row.</para>
+
           <para>This command is also available from the button to the right of
           the main window pane.</para>
         </listitem>
       </varlistentry>
+
       <varlistentry>
         <term>Split (<keycap>S</keycap>)</term>
         <listitem>
@@ -364,15 +375,18 @@
           place the cursor at the location where you want to split the text, and
           click <guibutton>OK</guibutton> or press
           <keycap>Enter</keycap>.</para>
+
           <para>If two or more segments occupying separate cells in the same row
           (segments that do not have a <guilabel>Keep</guilabel> check box on
           the same line as their cell) are selected, this command will split
           them the selected cells back into separate rows (with a
           <guilabel>Keep</guilabel> check box).</para>
-          <para>This command is also available from the button to the right of
+
+		  <para>This command is also available from the button to the right of
           the main window pane.</para>
         </listitem>
       </varlistentry>
+
       <varlistentry>
         <term>Merge (<keycap>M</keycap>)</term>
         <listitem>
@@ -381,10 +395,12 @@
           all be merged, but remain in separate cells. Calling the command on
           the same selection one more time merges the contents of all selected
           cells into a single cell.</para>
+
 		  <para>This command is also available from the button to the right of
           the main window pane.</para>
         </listitem>
       </varlistentry>
+
       <varlistentry>
         <term>Edit (<keycap>E</keycap>)</term>
         <listitem>
@@ -394,31 +410,34 @@
           <guibutton>OK</guibutton> button to close the dialog when
           finished. In this dialog, the <keycap>Enter</keycap> enters a line
           break in the text.</para>
+
 		  <para>Use
 		  <keycombo><keycap>C</keycap><keycap>Enter</keycap></keycombo> to close
 		  it without using the mouse.</para>
-          <para>This command is also available from the button to the right of
+
+		  <para>This command is also available from the button to the right of
           the main window pane.</para>
         </listitem>
       </varlistentry>
-      <varlistentry>
-        <term>Mark Accepted
-        (<keycap>A</keycap>)</term>
+
+	  <varlistentry>
+        <term>Mark Accepted (<keycap>A</keycap>)</term>
         <listitem>
           <para>Use this command to confirm that the alignment of the segments
           in the selected row or block of rows is correct. This highlights the
           corresponding <guilabel>Keep</guilabel> column in green.</para>
         </listitem>
       </varlistentry>
-      <varlistentry>
-        <term>Mark Needs Review
-        (<keycap>R</keycap>)</term>
+
+	  <varlistentry>
+        <term>Mark Needs Review (<keycap>R</keycap>)</term>
         <listitem>
           <para>Use this command to identify a row or block of rows for which
           the alignment of the segments is in doubt. This highlights the
           corresponding <guilabel>Keep</guilabel> column in red.</para>
         </listitem>
       </varlistentry>
+
       <varlistentry>
         <term>Clear Mark (<keycap>C</keycap>)</term>
         <listitem>
@@ -427,6 +446,7 @@
           Review</guilabel> commands.</para>
         </listitem>
       </varlistentry>
+
       <varlistentry>
         <term>Realign Pending
         (<keycombo><keycap>C</keycap><keycap>R</keycap></keycombo>)</term>
@@ -435,13 +455,15 @@
           update the alignment for the remaining rows.</para>
         </listitem>
       </varlistentry>
-      <varlistentry>
+
+	  <varlistentry>
         <term>Keep All</term>
         <listitem>
-          <para>Use this command to check the <guilabel>Keep</guilabel> box
-          for all rows.</para>
+          <para>Use this command to check the <guilabel>Keep</guilabel> box for
+          all rows.</para>
         </listitem>
       </varlistentry>
+
       <varlistentry>
         <term>Keep None</term>
         <listitem>
@@ -449,28 +471,31 @@
           box for all rows.</para>
         </listitem>
       </varlistentry>
-      <varlistentry>
-        <term>Toggle Selected
-        (<keycap>K</keycap>)</term>
+
+	  <varlistentry>
+        <term>Toggle Selected (<keycap>K</keycap>)</term>
         <listitem>
           <para>Use this command to switch the <guilabel>Keep</guilabel> check
           box of the selected row or block of rows from checked to unchecked, or
           vice versa.</para>
         </listitem>
       </varlistentry>
+
       <varlistentry>
-        <term>Start Pinpoint Align
-        (<keycap>Space</keycap>)</term>
+        <term>Start Pinpoint Align (<keycap>Space</keycap>)</term>
         <listitem>
           <para>If the corresponding segments are several rows apart and you
           want to quickly align them, use this command to set the first segment
           and then click on the corresponding segment in the other
           column.</para>
+		  
 		  <para>You can also use the arrow keys and press <keycap>Space</keycap>
 		  in the corresponding segment.</para>
+		  
           <para>Segments aligned with this method are automatically marked as
           accepted.</para>
-          <para>It can be helpful to run the <guimenuitem>Realign
+
+		  <para>It can be helpful to run the <guimenuitem>Realign
           Pending</guimenuitem> command after using pinpoint align a few
           times.</para>
         </listitem>
@@ -481,22 +506,22 @@
     TMX...</guibutton> button to create the translation memory.</para>
 
     <note>
-      <para>Only rows with a checked <guilabel>Keep</guilabel> box in the
-      first column are saved to the translation memory.</para>
+      <para>Only rows with a checked <guilabel>Keep</guilabel> box in the first
+      column are saved to the translation memory.</para>
     </note>
 
 
     <para>In addition to the <guibutton>Save TMX...</guibutton> button, the
     bottom part of the <guilabel>Align</guilabel> window in the manual
     correction step features the same <guilabel>Highlight</guilabel> check box
-    and <guibutton>Pattern...</guibutton> button as in the first step. This option is
-    also accessible from the <guimenu>View</guimenu> menu.</para>
+    and <guibutton>Pattern...</guibutton> button as in the first step. This
+    option is also accessible from the <guimenu>View</guimenu> menu.</para>
 
     <warning>
       <para>There is also a <guibutton>Reset</guibutton> button at the bottom of
       the window. <emphasis role="bold">Use it with caution!</emphasis> Clicking
-      this button will discard all your changes and bring you back to
-      the first step.</para>
+      this button will discard all your changes and bring you back to the first
+      step.</para>
     </warning>    
     
   </section>

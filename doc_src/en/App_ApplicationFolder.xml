@@ -3,30 +3,44 @@
 <section id="application.folder">
   <title id="application.folder.title">Application Folder</title>
 
-  <para>The application folder contains the <filename>OmegaT.jar</filename> application and a number of other important files.</para>
-  <note><para>The application folder location depends on your platform and on the way you have installed OmegaT. The recommended or default locations are the following:
+  <para>The application folder contains the <filename>OmegaT.jar</filename>
+  application and a number of other important files.</para>
 
-  <variablelist>
-	<varlistentry>
-	  <term>Windows</term>
-	  <listitem><para><filename>C:\Program Files\OmegaT\</filename></para></listitem>
-	</varlistentry>
-	
-	<varlistentry>
-	  <term>Linux</term>
-	  <listitem><para><filename>/opt/omegat/</filename></para></listitem>
-	</varlistentry>
-	
-	<varlistentry>
-	  <term>macOS</term>
-	  <listitem><para><filename>/Applications/OmegaT.app/Contents/Java/</filename></para></listitem>
-	</varlistentry>
-	
-	<varlistentry>
-	  <term>other platforms</term>
-	  <listitem><para><filename>/opt/omegat/</filename></para></listitem>
-	</varlistentry>
-  </variablelist></para></note>
+  <note>
+	<para>The application folder location depends on your platform and on the
+	way you have installed OmegaT. The recommended or default locations are the
+	following:</para>
+
+	<variablelist>
+	  <varlistentry>
+		<term>Windows</term>
+		<listitem>
+		  <para><filename>C:\Program Files\OmegaT\</filename></para>
+		</listitem>
+	  </varlistentry>
+	  
+	  <varlistentry>
+		<term>Linux</term>
+		<listitem>
+		  <para><filename>/opt/omegat/</filename></para>
+		</listitem>
+	  </varlistentry>
+	  
+	  <varlistentry>
+		<term>macOS</term>
+		<listitem>
+		  <para><filename>/Applications/OmegaT.app/Contents/Java/</filename></para>
+		</listitem>
+	  </varlistentry>
+	  
+	  <varlistentry>
+		<term>other platforms</term>
+		<listitem>
+		  <para><filename>/opt/omegat/</filename></para>
+		</listitem>
+	  </varlistentry>
+	</variablelist>
+  </note>
   
   <variablelist>
 	<varlistentry id="application.folder.omegat.license">
@@ -39,14 +53,17 @@
 	<varlistentry id="application.folder.omegat.jar">
 	  <term id="application.folder.omegat.jar.title">OmegaT.jar</term>
 	  <listitem>
-		<para>OmegaT's executable. Used when launching OmegaT from the command line. See <link linkend="launch.with.command.line" endterm="launch.with.command.line.title"/> for details.</para>
+		<para>OmegaT's executable. Used when launching OmegaT from the command
+		line. See the <link linkend="launch.with.command.line"
+		endterm="launch.with.command.line.title"/> chapter for details.</para>
 	  </listitem>
 	</varlistentry>
 
 	<varlistentry id="application.folder.changes">
 	  <term id="application.folder.changes.title">changes.txt</term>
 	  <listitem>
-		<para>The list of improvements and bug fixes. Check it if you need information on OmegaT's evolution.</para>
+		<para>The list of improvements and bug fixes. Check it if you need
+		information on OmegaT's evolution.</para>
 	  </listitem>
 	</varlistentry>
 
@@ -60,7 +77,7 @@
 	<varlistentry id="application.folder.index.html">
 	  <term id="application.folder.index.html.title">index.html</term>
 	  <listitem>
-		<para>The index to the multilingual user guide.</para>
+		<para>The index to the multilingual user manual.</para>
 	  </listitem>
 	</varlistentry>
 
@@ -83,41 +100,40 @@
 	  <term id="application.folder.docs.title">docs/</term>
 	  <listitem>
 		<para>The documentation folder.
-		  <variablelist>
 
-			<varlistentry id="application.folder.docs.contributors">
-			  <term id="application.folder.docs.contributors.title">contributors.txt</term>
-			  <listitem>
-				<para>The list of individual contributors.</para>
-			  </listitem>
-			</varlistentry>
+		<variablelist>
+		  <varlistentry id="application.folder.docs.contributors">
+			<term id="application.folder.docs.contributors.title">contributors.txt</term>
+			<listitem>
+			  <para>The list of individual contributors.</para>
+			</listitem>
+		  </varlistentry>
 
-			<varlistentry id="application.folder.docs.en">
-			  <term id="application.folder.docs.en.title">en/</term>
-			  <listitem>
-				<para>Each translated user guide comes in a different language
-				folder.</para>
-			  </listitem>
-			</varlistentry>
+		  <varlistentry id="application.folder.docs.en">
+			<term id="application.folder.docs.en.title">en/</term>
+			<listitem>
+			  <para>Each translated user manual comes in a different language
+			  folder.</para>
+			</listitem>
+		  </varlistentry>
 
-			<varlistentry id="application.folder.docs.index.html">
-			  <term id="application.folder.docs.index.html.title">index.html</term>
-			  <listitem>
-				<para>The index to the multilingual user guide.</para>
-			  </listitem>
-			</varlistentry>
+		  <varlistentry id="application.folder.docs.index.html">
+			<term id="application.folder.docs.index.html.title">index.html</term>
+			<listitem>
+			  <para>The index to the multilingual user manual.</para>
+			</listitem>
+		  </varlistentry>
 
-			<varlistentry id="application.folder.docs.librairies.txt">
-			  <term id="application.folder.docs.librairies.txt.title">libraries.txt</term>
-			  <listitem>
-				<para>The list of libraries used by OmegaT.</para>
-			  </listitem>
-			</varlistentry>
-		  </variablelist>
+		  <varlistentry id="application.folder.docs.librairies.txt">
+			<term id="application.folder.docs.librairies.txt.title">libraries.txt</term>
+			<listitem>
+			  <para>The list of libraries used by OmegaT.</para>
+			</listitem>
+		  </varlistentry>
+		</variablelist>
 		</para>
 	  </listitem>
 	</varlistentry>
-
 
 	<varlistentry id="application.folder.images">
 	  <term id="application.folder.images.title">images/</term>
@@ -136,14 +152,19 @@
 	<varlistentry id="application.folder.plugins">
 	  <term id="application.folder.plugins.title">plugins/</term>
 	  <listitem>
-		<para>The folder where you can install external plugins. See <link linkend="dialogs.preferences.plugins" endterm="dialogs.preferences.plugins.title"/> for details.</para>
+		<para>The folder where you can install external plugins. See the <link
+		linkend="dialogs.preferences.plugins"
+		endterm="dialogs.preferences.plugins.title"/> preferences for
+		details.</para>
 	  </listitem>
 	</varlistentry>
 
 	<varlistentry id="application.folder.scripts">
 	  <term id="application.folder.scripts.title">scripts/</term>
 	  <listitem>
-		<para>The folder where distributed scripts are located. See <link linkend="windows.scripts" endterm="windows.scripts.title"/> for details.</para>
+		<para>The folder where distributed scripts are located. See the <link
+		linkend="windows.scripts" endterm="windows.scripts.title"/> window for
+		details.</para>
 	  </listitem>
 	</varlistentry>
   </variablelist>

@@ -2,7 +2,7 @@
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="windows.scripts">
-  <title id="windows.scripts.title">Scripting</title>
+  <title id="windows.scripts.title"><guilabel>Scripting</guilabel></title>
 
   <para>Scripts are short programs (similar to macros in office applications)
   that can be used to automate tasks as well as to extend or customize OmegaT
@@ -10,136 +10,173 @@
   underlying Java virtual machine.</para>
 
 
-  <para>The Scripting window allows you to load an existing script and run it
-  on the current project.</para>
+  <para>The Scripting window allows you to load an existing script and run it on
+  the current project.</para>
 
-  <para>You can access the window from <link
-  endterm="menus.tools.scripting.title" linkend="menus.tools.scripting"/>
-  in the <link endterm="menus.tools.title" linkend="menus.tools"/>
-  menu.</para>
+  <para>Use <link endterm="menus.tools.title" linkend="menus.tools"/><link
+  endterm="menus.tools.scripting.title" linkend="menus.tools.scripting"/> to
+  access the window.</para>
 
   <section id="windows.scripts.folder">
 	<title id="windows.scripts.folder.title">The script folder</title>
 	
-  <para>By default, scripts are stored in the <link
-  linkend="application.folder.scripts"
-  endterm="application.folder.scripts.title"/> folder of the OmegaT
-  application folder.</para>
+	<para>By default, scripts are stored in the <link
+	linkend="application.folder.scripts"
+	endterm="application.folder.scripts.title"/> folder of the OmegaT
+	application folder.</para>
 
-  <para>New scripts added there will appear in the list of available scripts
-  in the left-hand panel of the window.</para>
+	<para>New scripts added there will appear in the list of available scripts
+	in the left-hand panel of the window.</para>
 
-  <warning><para>If a list of scripts is not displayed on the left side of the
-  script editor window, use the Scripting window <guimenu>File</guimenu> > <guimenuitem>Set Scripts Folder...</guimenuitem> menu to locate the place where scripts are stored.</para>
-  </warning>
+	<warning>
+	  <para>If a list of scripts is not displayed on the left side of the script
+	  editor window, use the Scripting window <guimenu>File</guimenu> >
+	  <guimenuitem>Set Scripts Folder...</guimenuitem> menu to locate the place
+	  where scripts are stored.</para>
+	</warning>
 
-  <para>Additional scripts can be found here: <ulink
-  url="https://sourceforge.net/projects/omegatscripts/">OmegaT
-  Scripts</ulink>. Just copy the file and put it in the <link
-  linkend="application.folder.scripts"
-  endterm="application.folder.scripts.title"/> folder.</para>
+	<para>Additional scripts can be found here: <ulink
+	url="https://sourceforge.net/projects/omegatscripts/">OmegaT
+	Scripts</ulink>. Just copy the file and put it in the <link
+	linkend="application.folder.scripts"
+	endterm="application.folder.scripts.title"/> folder.</para>
 
-  <para>Some scripts are <emphasis>event</emphasis> based and can be made to be
-  triggered automatically when a given event takes place. Each event corresponds
-  to a subfolder under <link
-  linkend="application.folder.scripts"
-  endterm="application.folder.scripts.title"/>:
+	<para>Some scripts are <emphasis>event</emphasis> based and can be made to
+	be triggered automatically when a given event takes place. Each event
+	corresponds to a subfolder under the <link
+	linkend="application.folder.scripts"
+	endterm="application.folder.scripts.title"/> folder:</para>
 
-  <variablelist>
-	<varlistentry id="application.folder.scripts.application.shutdown">
-	  <term id="application.folder.scripts.application.shutdown.title">application_shutdown</term>
-	  <listitem><para>Scripts in this folder will be launched before OmegaT shuts down.</para></listitem>
-	</varlistentry>
-	<varlistentry id="application.folder.scripts.application.startup">
-	  <term id="application.folder.scripts.application.startup.title">application_startup</term>
-	  <listitem><para>Scripts in this folder will be launched when the scripting engine is available, shortly after OmegaT is launched.</para></listitem>
-	</varlistentry>
-	<varlistentry id="application.folder.scripts.entry.activated">
-	  <term id="application.folder.scripts.entry.activated.title">entry_activated</term>
-	  <listitem><para>Scripts in this folder will be launched when editing a new segment. The segment is in the "newEntry" binding.</para></listitem>
-	</varlistentry>
-	<varlistentry id="application.folder.scripts.new.file">
-	  <term id="application.folder.scripts.new.file.title">new_file</term>
-	  <listitem><para>Scripts in the folder will be launched when the editor switches to the next file in the project. The new filename is in the "activeFileName" binding.</para></listitem>
-	</varlistentry>
-	<varlistentry id="application.folder.scripts.new.word">
-	  <term id="application.folder.scripts.new.word.title">new_word</term>
-	  <listitem><para>Scripts in the folder will be launched when a new word is edited in the Editor window. The new word is available with "newWord".</para></listitem>
-	</varlistentry>
-	<varlistentry id="application.folder.scripts.project.changed">
-	  <term id="application.folder.scripts.project.changed.title">project_changed</term>
-	  <listitem><para>Scripts in the folder will be launched when the state of the project changes. An "eventType" object is bound and can take the following values: CLOSE, COMPILE, CREATE, LOAD, SAVE.</para></listitem>
-	</varlistentry>
-  </variablelist>
-  </para>
-	<warning><para>Scripts are also launched when you are executing other scripts. That means
-that on a large project, an "entry_activated" script will be called a lot of time when using a search/replace type of script that loops through all the segments, rendering the application unresponsive. </para></warning>
+	<variablelist>
+	  <varlistentry id="application.folder.scripts.application.shutdown">
+		<term
+		id="application.folder.scripts.application.shutdown.title">application_shutdown</term>
+		<listitem>
+		  <para>Scripts in this folder will be launched before OmegaT shuts
+		  down.</para>
+		</listitem>
+	  </varlistentry>
+	  
+	  <varlistentry id="application.folder.scripts.application.startup">
+		<term
+		id="application.folder.scripts.application.startup.title">application_startup</term>
+		<listitem>
+		  <para>Scripts in this folder will be launched when the scripting
+		  engine is available, shortly after OmegaT is launched.</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="application.folder.scripts.entry.activated">
+		<term
+		id="application.folder.scripts.entry.activated.title">entry_activated</term>
+		<listitem>
+		  <para>Scripts in this folder will be launched when editing a new
+		  segment. The segment is in the "newEntry" binding.</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="application.folder.scripts.new.file">
+		<term id="application.folder.scripts.new.file.title">new_file</term>
+		<listitem>
+		  <para>Scripts in the folder will be launched when the editor switches
+		  to the next file in the project. The new filename is in the
+		  "activeFileName" binding.</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="application.folder.scripts.new.word">
+		<term id="application.folder.scripts.new.word.title">new_word</term>
+		<listitem>
+		  <para>Scripts in the folder will be launched when a new word is edited
+		  in the Editor window. The new word is available with "newWord".</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="application.folder.scripts.project.changed">
+		<term
+		id="application.folder.scripts.project.changed.title">project_changed</term>
+		<listitem>
+		  <para>Scripts in the folder will be launched when the state of the
+		  project changes. An "eventType" object is bound and can take the
+		  following values: CLOSE, COMPILE, CREATE, LOAD, SAVE.</para>
+		</listitem>
+	  </varlistentry>
+	</variablelist>
+
+	<warning>
+	  <para>Scripts are also launched when you are executing other scripts. That
+	  means that on a large project, an "entry_activated" script will be called
+	  a lot of time when using a search/replace type of script that loops
+	  through all the segments, rendering the application unresponsive. </para>
+	</warning>
   </section>
   
 
-<section id="windows.scripts.usage">
-  <title id="windows.scripts.usage.title">Usage</title>
+  <section id="windows.scripts.usage">
+	<title id="windows.scripts.usage.title">Usage</title>
 
-  
-  <itemizedlist>
-    <listitem>
-      <para>Click the name of a script in the list in the left-hand panel. The
-      script is loaded in the editor.</para>
-    </listitem>
+	<itemizedlist>
+      <listitem>
+		<para>Click the name of a script in the list in the left-hand panel. The
+		script is loaded in the editor.</para>
+      </listitem>
 
-    <listitem>
-      <para>Click <guibutton>Run</guibutton> at the bottom of the window, or
-      press <keycombo><keycap>C</keycap><keycap>R</keycap></keycombo> to
-      launch the script immediately.</para>
-    </listitem>
+      <listitem>
+		<para>Click <guibutton>Run</guibutton> at the bottom of the window, or
+		press <keycombo><keycap>C</keycap><keycap>R</keycap></keycombo> to
+		launch the script immediately.</para>
+      </listitem>
 
-    <listitem>
-      <para>To create a shortcut to a script that you use frequently, right-click one of the
-      <guibutton>&lt;1&gt;</guibutton> to <guibutton>&lt;12&gt;</guibutton>
-      buttons at the bottom of the window and select <guilabel>Add
-      Script</guilabel> to assign the script to that number.</para>
+      <listitem>
+		<para>To create a shortcut to a script that you use frequently,
+		right-click one of the <guibutton>&lt;1&gt;</guibutton> to
+		<guibutton>&lt;12&gt;</guibutton> buttons at the bottom of the window
+		and select <guilabel>Add Script</guilabel> to assign the script to that
+		number.</para>
 
-	  <para>If you want to detach the script from the shortcut, right-click on its button and select <guilabel>Remove Script</guilabel></para>
-    </listitem>
+		<para>If you want to detach the script from the shortcut, right-click on
+		its button and select <guilabel>Remove Script</guilabel></para>
+      </listitem>
 
-    <listitem>
-      <para>You can then click on the number to run its assigned script. You
-      can also run the script from the <link linkend="menus.tools.scripting"
-      endterm="menus.tools.scripting.title"/> menu by selecting the applicable
-      menu item or by pressing the associated shortcut
-      (<keycombo><keycap>C</keycap><keycap>A</keycap><keycap>F1 to
-      F12</keycap></keycombo>).</para>
-    </listitem>
-  </itemizedlist>
+      <listitem>
+		<para>You can then click on the number to run its assigned script. You
+		can also run the script from the <link linkend="menus.tools"
+		endterm="menus.tools.title"/><link linkend="menus.tools.scripting"
+		endterm="menus.tools.scripting.title"/> menu by selecting the applicable
+		menu item or by pressing the associated shortcut
+		(<keycombo><keycap>C</keycap><keycap>A</keycap><keycap>F1 to
+		F12</keycap></keycombo>).</para>
+      </listitem>
+	</itemizedlist>
 
+	<warning>
+      <para>Linux users: depending on the configuration of your operating
+      system, you may not have permission to write to the default scripts folder
+      location.</para>
 
-  <warning>
-    <para>Linux users: depending on the configuration of your operating
-    system, you may not have permission to write to the default scripts folder
-    location.</para>
+      <para>In such cases, you will have to copy or move the script folder to a
+      location for which you have write permissions, such as the <link
+      linkend="configuration.folder.location">configuration folder</link>, if
+      you want to write your own scripts, add new ones, or modify existing
+      ones.</para>
 
-    <para>In such cases, you will have to copy or move the script folder to
-    a location for which you have write permissions, such as the <link
-    endterm="configuration.folder.location.title"
-    linkend="configuration.folder.location"/>, if you want to write your own
-    scripts, add new ones, or modify existing ones.</para>
+      <para>If you do have permission to write to the default folder, make sure
+      you change the name, or make a backup, of any scripts you modify, as they
+      will be overwritten when OmegaT is updated.</para>
+	</warning>
+  </section>
 
-    <para>If you do have permission to write to the default folder, make sure
-    you change the name, or make a backup, of any scripts you modify, as they
-    will be overwritten when OmegaT is updated.</para>
-  </warning>
-</section>
-
-  
   <section id="windows.scripts.distribution">
     <title id="windows.scripts.distribution.title">Distributed scripts</title>
 
     <para>OmegaT comes with a number of scripts developed by OmegaT
-	contributors. Use the script editor to open, run, or modify scripts directly,
-	or to write new scripts for your own use.</para>
+    contributors. Use the script editor to open, run, or modify scripts
+    directly, or to write new scripts for your own use.</para>
 
-	<note><para>The scripts distributed with OmegaT are here for your convenience
-	but are not supported by the OmegaT development team.</para></note>
+	<note>
+	  <para>The scripts distributed with OmegaT are here for your convenience
+	  but are not supported by the OmegaT development team.</para>
+	</note>
 	
 	<para>Follow the instructions provided in the script itself.</para>
 
@@ -156,7 +193,7 @@ that on a large project, an "entry_activated" script will be called a lot of tim
 
       <varlistentry id="windows.scripts.distribution.auto.open.last.project">
         <term
-			id="windows.scripts.distribution.auto.open.last.project.title">Auto Open
+        id="windows.scripts.distribution.auto.open.last.project.title">Auto Open
         Last Project</term>
 
         <listitem>
@@ -175,7 +212,7 @@ that on a large project, an "entry_activated" script will be called a lot of tim
 
       <varlistentry id="windows.scripts.distribution.currency.translator">
         <term
-			id="windows.scripts.distribution.currency.translator.title">Currency
+        id="windows.scripts.distribution.currency.translator.title">Currency
         Translator</term>
 
         <listitem>
@@ -189,7 +226,7 @@ that on a large project, an "entry_activated" script will be called a lot of tim
 
       <varlistentry id="windows.scripts.distribution.example.gui.scripting">
         <term
-			id="windows.scripts.distribution.example.gui.scripting.title">Example -
+        id="windows.scripts.distribution.example.gui.scripting.title">Example -
         GUI Scripting</term>
 
         <listitem>
@@ -199,7 +236,7 @@ that on a large project, an "entry_activated" script will be called a lot of tim
 
       <varlistentry id="windows.scripts.distribution.example.key.binding">
         <term
-			id="windows.scripts.distribution.example.key.binding.title">Example -
+        id="windows.scripts.distribution.example.key.binding.title">Example -
         Key Binding</term>
 
         <listitem>
@@ -209,7 +246,7 @@ that on a large project, an "entry_activated" script will be called a lot of tim
 
       <varlistentry id="windows.scripts.distribution.example.modify.segment">
         <term
-			id="windows.scripts.distribution.example.modify.segment.title">Example -
+        id="windows.scripts.distribution.example.modify.segment.title">Example -
         Modify Segment</term>
 
         <listitem>
@@ -219,7 +256,7 @@ that on a large project, an "entry_activated" script will be called a lot of tim
 
       <varlistentry id="windows.scripts.distribution.example.search.and.replace">
         <term
-			id="windows.scripts.distribution.example.search.and.replace.title">Example
+        id="windows.scripts.distribution.example.search.and.replace.title">Example
         - Search and Replace</term>
 
         <listitem>
@@ -229,7 +266,7 @@ that on a large project, an "entry_activated" script will be called a lot of tim
 
       <varlistentry id="windows.scripts.distribution.external.spellcheck">
         <term
-			id="windows.scripts.distribution.external.spellcheck.title">External
+        id="windows.scripts.distribution.external.spellcheck.title">External
         spellcheck</term>
 
         <listitem>
@@ -243,7 +280,7 @@ that on a large project, an "entry_activated" script will be called a lot of tim
 
       <varlistentry id="windows.scripts.distribution.extract.text.content">
         <term
-			id="windows.scripts.distribution.extract.text.content.title">Extract
+        id="windows.scripts.distribution.extract.text.content.title">Extract
         Text Content</term>
 
         <listitem>
@@ -256,7 +293,7 @@ that on a large project, an "entry_activated" script will be called a lot of tim
 
       <varlistentry id="windows.scripts.distribution.non.breaking.space">
         <term
-			id="windows.scripts.distribution.non.breaking.space.title">Non-breaking
+        id="windows.scripts.distribution.non.breaking.space.title">Non-breaking
         space</term>
 
         <listitem>
@@ -349,7 +386,7 @@ that on a large project, an "entry_activated" script will be called a lot of tim
 
       <varlistentry id="windows.scripts.distribution.spellcheck">
         <term
-			id="windows.scripts.distribution.spellcheck.title">Spellcheck</term>
+        id="windows.scripts.distribution.spellcheck.title">Spellcheck</term>
 
         <listitem>
           <para>Global spell checking.</para>
@@ -402,7 +439,7 @@ that on a large project, an "entry_activated" script will be called a lot of tim
 
       <varlistentry id="windows.scripts.distribution.issue.provider.sample.groovy">
         <term
-			id="windows.scripts.distribution.issue.provider.sample.groovy.title">issue_provider_sample.groovy</term>
+        id="windows.scripts.distribution.issue.provider.sample.groovy.title">issue_provider_sample.groovy</term>
 
         <listitem>
           <para>(no description)</para>
@@ -410,7 +447,8 @@ that on a large project, an "entry_activated" script will be called a lot of tim
       </varlistentry>
 
       <varlistentry id="windows.scripts.distribution.toolbar.groovy">
-        <term id="windows.scripts.distribution.toolbar.groovy.title">toolbar.groovy</term>
+        <term
+        id="windows.scripts.distribution.toolbar.groovy.title">toolbar.groovy</term>
         <listitem>
           <para>(no description)</para>
         </listitem>

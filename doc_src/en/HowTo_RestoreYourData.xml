@@ -4,9 +4,11 @@
 <section id="how.to.restore.your.data">
   <title id="how.to.restore.your.data.title">Troubleshoot issues</title>
 
-  <warning><para>OmegaT is a robust and trustworthy application, but even so, it
-  is smart to take precautions to guard against data loss when using it, just as
-  with any other application.</para></warning>
+  <warning>
+	<para>OmegaT is a robust and trustworthy application, but even so, it is
+	smart to take precautions to guard against data loss when using it, just as
+	with any other application.</para>
+  </warning>
 
   <section id="how.to.restore.your.data.automatic.backup">
 	<title id="how.to.restore.your.data.automatic.backup.title">Automatic
@@ -20,58 +22,81 @@
 	backups of that file.</para>
 
 	<orderedlist>
-	  <listitem><para>When you open a project, OmegaT backs
-	  <filename>project_save.tmx</filename> up into a timestamped backup
-	  file.</para>
-	  <para>OmegaT keeps up to 10 of those files.</para>
-	  <note><para>The backup filename follows the pattern <filename>project_save.tmx.YYYYMMDDhhmm.bak</filename> where <code>YYYY</code>
-	  represents the 4-digit year, <code>MM</code> the month, <code>DD</code> the day of the month, and <code>hh</code>
-	  and <code>mm</code> indicate the hours and minutes.</para></note>
+	  <listitem>
+		<para>When you open a project, OmegaT backs
+		<filename>project_save.tmx</filename> up into a timestamped backup
+		file.</para>
+
+		<para>OmegaT keeps up to 10 of those files.</para>
+
+		<note>
+		  <para>The backup filename follows the pattern
+		  <filename>project_save.tmx.YYYYMMDDhhmm.bak</filename> where
+		  <code>YYYY</code> represents the 4-digit year, <code>MM</code> the
+		  month, <code>DD</code> the day of the month, and <code>hh</code> and
+		  <code>mm</code> indicate the hours and minutes.</para>
+		</note>
 	  </listitem>
 	  
 	  <listitem>
 		<para>Every time <filename>project_save.tmx</filename> has been
-		modified:
+		modified:</para>
+		
 		<itemizedlist>
-		  <listitem><para>either after using <link linkend="menus.project.save" endterm="menus.project.save.title"/>,</para>
+		  <listitem>
+			<para>either after saving the project data (use <link
+			linkend="menus.project" endterm="menus.project.title"/><link
+			linkend="menus.project.save"
+			endterm="menus.project.save.title"/>),</para>
 		  </listitem>
-		  <listitem><para>or as a regular backup every 3 minutes by default,</para>
+
+		  <listitem>
+			<para>or as a regular backup every 3 minutes by default,</para>
 		  </listitem>
 		</itemizedlist>
-		OmegaT creates a backup with the name
+
+		<para>OmegaT creates a backup with the name
 		<filename>project_save.tmx.bak</filename>.</para>
+
 		<para>That file is a copy of <filename>project_save.tmx</filename>
 		<emphasis>before</emphasis> the modification.</para>
 	  </listitem>
 
 	  <listitem>
-		<para>Every time you use <link linkend="menus.project.save"
-		endterm="menus.project.save.title"/>, or as a regular backup every 3
-		minutes by default, OmegaT saves the current state of the translation
-		into <filename>project_save.tmx</filename></para>
+		<para>Every time you save the project data (use <link
+		linkend="menus.project" endterm="menus.project.title"/><link
+		linkend="menus.project.save" endterm="menus.project.save.title"/>), or
+		as a regular backup every 3 minutes by default, OmegaT saves the current
+		state of the translation into
+		<filename>project_save.tmx</filename></para>
 	  </listitem>
 	</orderedlist>
 
 	<para>The file <filename>project_save.tmx</filename> always contains the
-most recent data.</para>
+	most recent data.</para>
 
-	<note><para>You can control the frequency of the file saving in <link
-	linkend="dialogs.preferences.saving.and.output"
-	endterm="dialogs.preferences.saving.and.output.title"/>.</para></note>
+	<note>
+	  <para>You can control the frequency of the file saving in the <link
+	  linkend="dialogs.preferences.saving.and.output"
+	  endterm="dialogs.preferences.saving.and.output.title"/> preference.</para>
+	</note>
 
   </section>
 
   <section id="how.to.restore.your.data.lost.in.translation">
 	<title id="how.to.restore.your.data.lost.in.translation.title">You lost your
 	translation?</title>
+
 	<para>Even if you fear you might have lost translation data, it is probably
 	safely stored in your most recent backup memory, which is usually less than
 	a few minutes old or so.</para>
 
-	<para>Proceed as follows:
+	<para>Proceed as follows:</para>
+	
 	<orderedlist>
       <listitem>
-		<para>Close the project, preventing any modification to the current status of the backup files.</para>
+		<para>Close the project, preventing any modification to the current
+		status of the backup files.</para>
       </listitem>
 
       <listitem>
@@ -80,8 +105,8 @@ most recent data.</para>
       </listitem>
 
       <listitem>
-		<para>Select the backup translation memory most likely to contain the data
-		you are looking for.</para>
+		<para>Select the backup translation memory most likely to contain the
+		data you are looking for.</para>
       </listitem>
 
       <listitem>
@@ -92,7 +117,6 @@ most recent data.</para>
 		<para>Reopen the project.</para>
       </listitem>
 	</orderedlist>
-	</para>
 
 	<para>This action will restore the status of the translation to the moment
 	on which the selected backup was created. You may repeat this operation as
@@ -101,33 +125,40 @@ most recent data.</para>
 	modifying the project configuration or adding TMX files in the meantime, as
 	that may affect the results.</para>
 
-	<note><para>Be cautious about making changes to the files in the source
-	folder, to the segmentation rules, or to the file filters, partway through a
-	project. Modifying either after you have started your translation could
-	result in some segments not being displayed anymore, or unexpected new
-	segments appearing instead.</para></note>
-
-
+	<note>
+	  <para>Be cautious about making changes to the files in the source folder,
+	  to the segmentation rules, or to the file filters, partway through a
+	  project. Modifying either after you have started your translation could
+	  result in some segments not being displayed anymore, or unexpected new
+	  segments appearing instead.</para>
+	</note>
   </section>
 
 
   <section id="how.to.restore.your.data.project.wont.open">
-	<title id="how.to.restore.your.data.project.wont.open.title">Your project won’t open?</title>
-	<para>In rare cases where your computer freezes and OmegaT does not have the time to properly close, some important files can be broken and keep your project from reopening after you have rebooted your machine.</para>
+	<title id="how.to.restore.your.data.project.wont.open.title">Your project
+	won’t open?</title>
 
-	<para>Proceed as follows:
+	<para>In rare cases where your computer freezes and OmegaT does not have the
+	time to properly close, some important files can be broken and keep your
+	project from reopening after you have rebooted your machine.</para>
+
+	<para>Proceed as follows:</para>
+
 	<orderedlist>
       <listitem>
 		<para>Create a new project with the same settings.</para>
       </listitem>
 
 	  <listitem>
-		<para>Copy the contents of the various user folders to their equivalent in the new project (source files, reference translation memory files, glossary files).</para>
+		<para>Copy the contents of the various user folders to their equivalent
+		in the new project (source files, reference translation memory files,
+		glossary files).</para>
       </listitem>
 
       <listitem>
-		<para>In the old project, select the translation memory (backup or not) most likely
-		to contain the data you are looking for.</para>
+		<para>In the old project, select the translation memory (backup or not)
+		most likely to contain the data you are looking for.</para>
       </listitem>
 
       <listitem>
@@ -135,30 +166,41 @@ most recent data.</para>
       </listitem>
 
       <listitem>
-		<para>Copy it to the <filename>omegat/</filename> folder of your new project.</para>
+		<para>Copy it to the <filename>omegat/</filename> folder of your new
+		project.</para>
       </listitem>
 
       <listitem>
 		<para>Open the new project.</para>
       </listitem>
 	</orderedlist>
-	</para>
 
-	<para>This action will restore in the new project the status of the translation to the moment on which the selected project translation memory was created in the old project.</para>
+	<para>This action will restore in the new project the status of the
+	translation to the moment on which the selected project translation memory
+	was created in the old project.</para>
   </section>
 
   <section id="how.to.restore.your.data.translated.file.broken">
-	<title id="how.to.restore.your.data.translated.file.broken.title">Your translated file won’t open?</title>
-	<para>Very often, office suite files contain tags that must be copied into the translation to ensure that the translated file can be opened in the original application. In some cases, missing tags will keep the file from opening.</para>
+	<title id="how.to.restore.your.data.translated.file.broken.title">Your
+	translated file won’t open?</title>
+
+	<para>Very often, office suite files contain tags that must be copied into
+	the translation to ensure that the translated file can be opened in the
+	original application. In some cases, missing tags will keep the file from
+	opening.</para>
 	
-	<para>Proceed as follows:
+	<para>Proceed as follows:</para>
+
 	<orderedlist>
       <listitem>
 		<para>Open the project in OmegaT.</para>
       </listitem>
 
 	  <listitem>
-		<para>Use <link linkend="menus.tools.check.issues" endterm="menus.tools.check.issues.title"/> and focus on <guilabel>Tag issues</guilabel>.</para>
+		<para>Use <link linkend="menus.tools" endterm="menus.tools.title"/><link
+		linkend="menus.tools.check.issues"
+		endterm="menus.tools.check.issues.title"/> and focus on <guilabel>Tag
+		issues</guilabel>.</para>
       </listitem>
 
       <listitem>
@@ -166,29 +208,46 @@ most recent data.</para>
       </listitem>
 
       <listitem>
-		<para>Use <link linkend="menus.project.create.translated.documents" endterm="menus.project.create.translated.documents.title"/> to recreate the documents.</para>
+		<para>Use <link linkend="menus.project"
+		endterm="menus.project.title"/><link
+		linkend="menus.project.create.translated.documents"
+		endterm="menus.project.create.translated.documents.title"/> to recreate
+		the documents.</para>
       </listitem>
 
       <listitem>
 		<para>Open the documents again in the original application.</para>
       </listitem>
 	</orderedlist>
-	</para>
 
-	<para>This action will fix the internal tag consistency issues that might have been induced by not properly inserting the tags in the translation while in OmegaT.</para>
+	<para>This action will fix the internal tag consistency issues that might
+	have been induced by not properly inserting the tags in the translation
+	while in OmegaT.</para>
   </section>
 
   <section id="how.to.restore.your.data.omegat.wont.behave">
-	<title id="how.to.restore.your.data.omegat.wont.behave.title">OmegaT won’t behave?</title>
+	<title id="how.to.restore.your.data.omegat.wont.behave.title">OmegaT won’t
+	behave?</title>
 
-	<para>Something has happened and OmegaT won’t behave anymore. Whatever you try, you can’t seem to be able to fix it. You want to try one last thing before calling for help: restart OmegaT with its default settings.</para>
+	<para>Something has happened and OmegaT won’t behave anymore. Whatever you
+	try, you can’t seem to be able to fix it. You want to try one last thing
+	before calling for help: restart OmegaT with its default settings.</para>
 
-	<para>Proceed as follows:
+	<para>Proceed as follows:</para>
+	
 	<orderedlist>
-
 	  <listitem>
-		<para>Use <link linkend="menus.options.access.configuration.folder" endterm="menus.options.access.configuration.folder.title"/> from the <link linkend="menus.options" endterm="menus.options.title"/> menu to access the configuration folder.</para>
-		<note><para>If you can’t use OmegaT’s menus, see <link linkend="configuration.folder" endterm="configuration.folder.title"/> to find the configuration folder location.</para></note>
+		<para>Use <link linkend="menus.options"
+		endterm="menus.options.title"/><link
+		linkend="menus.options.access.configuration.folder"
+		endterm="menus.options.access.configuration.folder.title"/> to access
+		the configuration folder.</para>
+		
+		<note>
+		  <para>If you can’t use OmegaT’s menus, see the <link
+		  linkend="configuration.folder" endterm="configuration.folder.title"/>
+		  chapter to find the configuration folder location.</para>
+		</note>
       </listitem>
 
       <listitem>
@@ -196,12 +255,17 @@ most recent data.</para>
       </listitem>
 
       <listitem>
-		<para>Make a backup of the contents and delete the original folder. </para>
+		<para>Make a backup of the contents and delete the original
+		folder. </para>
       </listitem>
 
       <listitem>
 		<para>Restart OmegaT.</para>
-		<note><para>If OmegaT does not work as expected at this point, feel free to reach out for support.</para></note>
+
+		<note>
+		  <para>If OmegaT does not work as expected at this point, feel free to
+		  reach out for support.</para>
+		</note>
       </listitem>
 
       <listitem>
@@ -209,20 +273,25 @@ most recent data.</para>
       </listitem>
 
       <listitem>
-		<para>Copy one of the old files into the new configuration folder.</para>
+		<para>Copy one of the old files into the new configuration
+		folder.</para>
       </listitem>
 	  
 	  <listitem>
 		<para>Restart OmegaT.</para>
-		<note><para>If OmegaT does not work as expected at this point, you have identified the faulty file. Remove it from the configuration folder and proceed.</para></note>
+
+		<note>
+		  <para>If OmegaT does not work as expected at this point, you have
+		  identified the faulty file. Remove it from the configuration folder
+		  and proceed.</para>
+		</note>
       </listitem>
 
 	  <listitem>
-		<para>Go back to step 5. above and proceed until you are satisfied.</para>
+		<para>Go back to step 5. above and proceed until you are
+		satisfied.</para>
       </listitem>
-
 	</orderedlist>
-	</para>
   </section>
 
   <section id="how.to.restore.your.data.summary">
@@ -231,14 +300,14 @@ most recent data.</para>
 	<itemizedlist>
       <listitem>
 		<para>To avoid losing important data, make regular copies of the file
-		<filename>/omegat/project_save.tmx</filename> to a backup media, such as a
-		USB key or an external hard drive, or to a cloud service.</para>
+		<filename>/omegat/project_save.tmx</filename> to a backup media, such as
+		a USB key or an external hard drive, or to a cloud service.</para>
       </listitem>
 
       <listitem>
-		<para>Regularly “practice emergency” measures such as restoring translations
-		from a project, to make sure you won’t lose too much time the day you need
-		to use those skills.</para>
+		<para>Regularly “practice emergency” measures such as restoring
+		translations from a project, to make sure you won’t lose too much time
+		the day you need to use those skills.</para>
       </listitem>
 	</itemizedlist>
   </section>

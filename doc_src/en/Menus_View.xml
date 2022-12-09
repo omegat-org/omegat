@@ -1,165 +1,190 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="menus.view">
-  <title id="menus.view.title">View</title>
+  <title id="menus.view.title"><guimenu>View</guimenu></title>
+
+  <para>This menu allows you to select the information you want to OmegaT to
+  display.</para>
 
   <variablelist>
     <varlistentry id="menus.view.mark.translated.segments">
-      <term id="menus.view.mark.translated.segments.title">Mark Translated
-      Segments</term>
+      <term
+		  id="menus.view.mark.translated.segments.title"><guimenuitem>Translated
+      Segments</guimenuitem></term>
       <listitem>
         <para>If checked, translated segments will be marked in yellow.</para>
-        </listitem>
+      </listitem>
     </varlistentry>
 
     <varlistentry id="menus.view.mark.untranslated.segments">
-      <term id="menus.view.mark.untranslated.segments.title">Mark Untranslated
-      Segments</term>
+      <term
+      id="menus.view.mark.untranslated.segments.title"><guimenuitem>Untranslated
+      Segments</guimenuitem></term>
       <listitem>
         <para>If checked, untranslated segments will be marked in violet.</para>
-        </listitem>
+      </listitem>
     </varlistentry>
 
     <varlistentry id="menus.view.mark.paragraph.delimitations">
-      <term id="menus.view.mark.paragraph.delimitations.title">Mark Paragraph
-      Delimitations</term>
+      <term
+      id="menus.view.mark.paragraph.delimitations.title"><guimenuitem>Paragraph
+      Delimitations</guimenuitem></term>
       <listitem>
         <para>If checked, separations between paragraphs in the source document
-        are indicated visually. See <link
+        are indicated visually. You can change the paragraph delimitation string
+        in the <link
         linkend="dialogs.preferences.editor.paragraph.delimitation.format"
-        endterm="dialogs.preferences.editor.paragraph.delimitation.format.title"/>.</para>
-        </listitem>
+        endterm="dialogs.preferences.editor.paragraph.delimitation.format.title"/>
+        preference.</para>
+      </listitem>
     </varlistentry>
 
     <varlistentry id="menus.view.display.source.segments">
-      <term id="menus.view.display.source.segments.title">Display Source
-      Segments</term>
+      <term id="menus.view.display.source.segments.title"><guimenuitem>Source
+      Segments</guimenuitem></term>
       <listitem>
-        <para>If checked, source segments will be shown and marked in green.
-        If not checked, source segments will not be shown.</para>      </listitem>
+        <para>If checked, all the source segments will be shown and marked in
+        green.  If not checked, only the current source segments will be
+        shown.</para>
+      </listitem>
     </varlistentry>
 
     <varlistentry id="menus.view.mark.non.unique.segments">
-      <term id="menus.view.mark.non.unique.segments.title">Mark Non-Unique
-      Segments</term>
+      <term
+      id="menus.view.mark.non.unique.segments.title"><guimenuitem>Non-Unique
+      Segments</guimenuitem></term>
       <listitem>
         <para>If checked, non-unique segments will be marked in pale
-        gray.</para>      </listitem>
+        gray.</para>
+      </listitem>
     </varlistentry>
 
     <varlistentry id="menus.view.mark.segments.with.notes">
-      <term id="menus.view.mark.segments.with.notes.title">Mark Segments with
-      Notes</term>
+      <term id="menus.view.mark.segments.with.notes.title"><guimenuitem>Segments
+      with Notes</guimenuitem></term>
       <listitem>
         <para>If checked, segments with notes will be marked in cyan. This
         marking has priority over <guimenuitem>Mark Translated
         Segments</guimenuitem> and <guimenuitem>Mark Untranslated
-        Segments</guimenuitem>.</para>      </listitem>
+        Segments</guimenuitem>.</para>
+      </listitem>
     </varlistentry>
 
     <varlistentry id="menus.view.mark.non.breakable.space">
-      <term id="menus.view.mark.non.breakable.space.title">Mark Non-Breakable
-      Spaces</term>
+      <term
+      id="menus.view.mark.non.breakable.space.title"><guimenuitem>Non-Breakable
+      Spaces</guimenuitem></term>
       <listitem>
         <para>If checked, non-breakable spaces will be displayed with a gray
-        background.</para>      </listitem>
+        background.</para>
+      </listitem>
     </varlistentry>
 
     <varlistentry id="menus.view.mark.white.space">
-      <term id="menus.view.mark.white.space.title">Mark Whitespace</term>
+      <term
+      id="menus.view.mark.white.space.title"><guimenuitem>Whitespace</guimenuitem></term>
       <listitem>
         <para>If checked, white spaces will be displayed with a small
-        dot.</para>      </listitem>
+        dot.</para>
+      </listitem>
     </varlistentry>
 
     <varlistentry id="menus.view.mark.bidirectional.algorithm.control.character">
       <term
-      id="menus.view.mark.bidirectional.algorithm.control.character.title">Mark
-      Bidirectional Algorithm Control Characters</term>
+      id="menus.view.mark.bidirectional.algorithm.control.character.title"><guimenuitem>BiDi
+      Control Characters</guimenuitem></term>
       <listitem>
         <para>This option displays <ulink
-        url="http://www.w3.org/International/questions/qa-bidi-controls">bidirectional
-        control characters</ulink></para> </listitem>
+        url="https://www.unicode.org/reports/tr9/">Unicode Bidirectional
+        Algorithm</ulink></para>
+	  </listitem>
     </varlistentry>
 
     <varlistentry id="menus.view.mark.auto.populated.segments">
-      <term id="menus.view.mark.auto.populated.segments.title">Mark
-      Auto-Populated Segments</term>
+      <term
+      id="menus.view.mark.auto.populated.segments.title"><guimenuitem>Auto-Populated
+      Segments</guimenuitem></term>
       <listitem>
-        <para>If checked, segments that have been auto-populated (from TMXs
-        placed in <link linkend="project.folder.tm.auto"
-        endterm="project.folder.tm.auto.title"/> for example) are marked in
+        <para>If checked, segments that have been auto-populated are marked in
         various colors.</para>
-		<para>That color marking is shown as long as 
-        <link linkend="dialogs.preferences.editor.save.auto-populated.status"
-        endterm="dialogs.preferences.editor.save.auto-populated.status.title"/>
-        is checked.</para>
-		<para>Normal translations inserted from the <filename
-        class="directory">tm/auto</filename> folder are marked in orange. Other
-        translations specifically identified in the TMX, can be marked in
-        different colors. See the <ulink
-        url="http://sourceforge.net/p/omegat/feature-requests/963/">Request For
-        Enhancement</ulink> for technical details.</para>
+
+		<para>See the <link
+		linkend="dialogs.preferences.editor.save.auto-populated.status"
+		endterm="dialogs.preferences.editor.save.auto-populated.status.title"/>
+		preference for details.</para>
       </listitem>
     </varlistentry>
 
     <varlistentry id="menus.view.mark.glossary.matches">
-      <term id="menus.view.mark.glossary.matches.title">Mark Glossary
-      Matches</term>
+      <term id="menus.view.mark.glossary.matches.title"><guimenuitem>Glossary
+      Matches</guimenuitem></term>
       <listitem>
         <para>Underlines source terms that have a match in the
         glossaries. Hovering on an underlined term displays the matching target
         term. Right-clicking on an underlined term displays the matching target
         term, which can be selected and inserted at the cursor position in the
-        target text.</para> </listitem>
+        target text.</para>
+	  </listitem>
     </varlistentry>
 
     <varlistentry id="menus.view.mark.language.checker">
-      <term id="menus.view.mark.language.checker.title">Language Checker</term>
+      <term id="menus.view.mark.language.checker.title"><guimenuitem>Language
+      Checker</guimenuitem></term>
       <listitem>
         <para>Underlines parts of the target where LanguageTool has found
-        errors. See <link linkend="dialog.preferences.languagetool.plugin"
-        endterm="dialog.preferences.languagetool.plugin.title"/> for
-        details.</para> </listitem>
+        errors. See the <link linkend="dialog.preferences.languagetool.plugin"
+        endterm="dialog.preferences.languagetool.plugin.title"/> preferences for
+        details.</para>
+	  </listitem>
     </varlistentry>
 	
     <varlistentry id="menus.view.aggressive.font.fallback">
-      <term id="menus.view.aggressive.font.fallback.title">Aggressive Font Fallback</term>
+      <term
+      id="menus.view.aggressive.font.fallback.title"><guimenuitem>Aggressive
+      Font Fallback</guimenuitem></term>
       <listitem>
         <para>Check this option in case OmegaT does not display certain glyphs
         properly (even if the fonts containing the relevant glyphs are installed
-        on your machine).</para> <note><para>On Windows this manual font
-        fallback mechanism has been known to interfere with the standard font
-        fallback, causing undesirable font substitutions. For that reason, it is
-        OFF by default.</para></note>
+        on your machine).</para>
+
+		<note>
+		  <para>On Windows this manual font fallback mechanism has been known to
+		  interfere with the standard font fallback, causing undesirable font
+		  substitutions. For that reason, it is OFF by default.</para>
+		</note>
       </listitem>
     </varlistentry>
 
     <varlistentry id="menus.view.modification.info">
-      <term id="menus.view.modification.info.title">Modification Info</term>
+      <term id="menus.view.modification.info.title"><guisubmenu>Modification
+      Info</guisubmenu></term>
       <listitem>
-        <para>Setting the Display Modification option to <guimenuitem>Current
-        segment</guimenuitem> will display the time and the author of the last
-        change made to the current segment. Setting it to <guimenuitem>All
-        segments</guimenuitem> shows this information for all segments, while
-        <guimenuitem>None</guimenuitem> turns this option off.</para>
-		<para>You can adapt the displayed information to your needs. See <link
+        <para>Displays the time and the author of the last change made to a
+        segment.</para>
+		
+		<para>The default value is <guimenuitem>Current segment</guimenuitem>
+		and it can be set to <guimenuitem>All segments</guimenuitem> or to
+		<guimenuitem>None</guimenuitem>.</para>
+
+		<para>You can modify the displayed information. See the <link
 		linkend="dialog.preferences.view.use.custom.templates.for.modification.info"
 		endterm="dialog.preferences.view.use.custom.templates.for.modification.info.title"/>
-		for details.</para>
-        </listitem>
+		preferences for details.</para>
+      </listitem>
     </varlistentry>
 	
 	<varlistentry id="menus.view.restore.main.window">
-      <term id="menus.view.restore.main.window.title">Restore Main Window</term>
+      <term id="menus.view.restore.main.window.title"><guimenuitem>Restore Main
+      Window</guimenuitem></term>
       <listitem>
-        <para>Restores the OmegaT main window layout to its default values, with
-        the <guilabel>Editor</guilabel> pane on the left, the <guilabel>Fuzzy
-        Matches</guilabel> pane at the top right and the
-        <guilabel>Glossary</guilabel> pane at the bottom right. All other panes
-        are minimized.</para>
-		<note><para>Use this function when you run into problems while
-        rearranging the window layout.</para></note> </listitem>
+        <para>Restores the OmegaT main window layout to its default
+        values.</para>
+
+		<note>
+		  <para>Use this function when you run into problems while
+		  rearranging the window layout.</para>
+		</note>
+	  </listitem>
     </varlistentry>
   </variablelist>
 </section>

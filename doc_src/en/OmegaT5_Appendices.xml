@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
-<chapter id="appendices">
-  <title id="appendices.title">Appendices</title>
+<chapter id="chapter.appendices">
+  <title id="chapter.appendices.title">Appendices</title>
 
   <xi:include href="App_FileFilters.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>

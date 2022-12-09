@@ -2,26 +2,31 @@
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="windows.source.files.list">
-  <title id="windows.source.files.list.title">Source Files</title>
+  <title id="windows.source.files.list.title"><guilabel>Source
+  Files</guilabel></title>
 
-  <para>This window is displayed automatically when OmegaT loads a project,
-  and at any time by using <link linkend="menus.project.source.files.list" endterm="menus.project.source.files.list.title"/>.</para>
+  <para>This window is displayed automatically when OmegaT loads a project, and
+  at any time by using <link linkend="menus.project"
+  endterm="menus.project.title"/><link linkend="menus.project.source.files.list"
+  endterm="menus.project.source.files.list.title"/>.</para>
 
   <para>The window displays the following information:</para>
 
   <itemizedlist>
     <listitem>
-      <para>in the window title: the total number of translatable files in the project.</para>
-	  <para>These are the
-      files present in the <link linkend="project.folder.source"
-      endterm="project.folder.source.title"/> folder in a format that OmegaT is
-      able to recognize.</para>
+      <para>in the window title: the total number of translatable files in the
+      project.</para>
+
+	  <para>These are the files present in the <link
+	  linkend="project.folder.source" endterm="project.folder.source.title"/>
+	  folder in a format that OmegaT is able to recognize.</para>
     </listitem>
 
     <listitem>
       <para>as a list: all the translatable files in the project.</para>
+
 	  <para>Clicking on any file will open it in the <link
-	  linkend="panes.editor" endterm="panes.editor.title"/> for
+	  linkend="panes.editor" endterm="panes.editor.title"/> pane for
 	  translation.</para>
     </listitem>
 
@@ -42,10 +47,12 @@
   arrows to select a file, and open it for translation by pressing
   <keycap>Enter</keycap>.</para>
 
-  <note><para>Filenames (in the first column) can be sorted alphabetically by
-  clicking in the header. It is also possible to change the position of a
-  filename, by clicking on it and pressing the <guibutton>Move ...</guibutton>
-  button on the right.</para></note>
+  <note>
+	<para>Filenames (in the first column) can be sorted alphabetically by
+	clicking in the header. It is also possible to change the position of a
+	filename, by clicking on it and pressing the <guibutton>Move ...</guibutton>
+	button on the right.</para>
+  </note>
 
   <para>Right-clicking on a filename opens a popup that allows opening the
   source file and (if it exists) the target file.</para>
@@ -56,33 +63,52 @@
 
   <para>The difference between &quot;Number of segments&quot; and &quot;Number
   of unique segments&quot; provides an approximate idea of the number of
-  repetitions in the text. The <link linkend="menus.tools.statistics"
-  endterm="menus.tools.statistics.title"/> item in the <link linkend="menus.tools"
-  endterm="menus.tools.title"/> menu will give you more information.</para>
+  repetitions in the text. Use <link linkend="menus.tools"
+  endterm="menus.tools.title"/><link linkend="menus.tools.statistics"
+  endterm="menus.tools.statistics.title"/> to obtain more information.</para>
 
-  <para>Modifying the segmentation rules may alter the number of
-  segments/unique segments. This, however, should generally be avoided
-  once you have started translating the project. See <link
-  linkend="app.segmentation" endterm="app.segmentation.title"/> for
-  details.</para>
+  <para>Modifying the segmentation rules may alter the number of segments/unique
+  segments. This, however, should generally be avoided once you have started
+  translating the project. See the <link linkend="app.segmentation"
+  endterm="app.segmentation.title"/> appendix for details.</para>
 
-  <para>The buttons at the bottom can be used to add files to your project:
+  <para>The buttons at the bottom can be used to add files to your project:</para>
+  
   <variablelist>
-	<varlistentry id="windows.source.files.list.copy.files"><term
-	id="windows.source.files.list.copy.files.title">Add Files...</term>
-	<listitem><para>Copies the selected files to the <link
-  linkend="project.folder.source" endterm="project.folder.source.title"/>
-  folder and reloads the project to take the new files into account.</para></listitem>
+	<varlistentry id="windows.source.files.list.copy.files">
+	  <term id="windows.source.files.list.copy.files.title"><guibutton>Add
+	  Files...</guibutton></term>
+	<listitem>
+	  <para>Copies the selected files to the <link
+	  linkend="project.folder.source" endterm="project.folder.source.title"/>
+	  folder and reloads the project to take the new files into account.</para>
+	</listitem>
 	</varlistentry>
-	<varlistentry id="windows.source.files.list.download.page"><term
-	id="windows.source.files.list.download.page.title">Add Online MediaWiki Page...</term>
-	<listitem><para>Asks for the page URL and downloads it into the <link
-  linkend="project.folder.source" endterm="project.folder.source.title"/> folder.</para></listitem>
+	
+	<varlistentry id="windows.source.files.list.download.page">
+	  <term id="windows.source.files.list.download.page.title"><guibutton>Add
+	  Online MediaWiki Page...</guibutton></term>
+	  <listitem>
+		<para>Asks for the page URL and downloads it into the <link
+		linkend="project.folder.source" endterm="project.folder.source.title"/>
+		folder.</para>
+	  </listitem>
 	</varlistentry>
   </variablelist>
-  The two actions are equivalent to using the <link linkend="menus.project" endterm="menus.project.title"/> menu commands <link linkend="menus.project.copy.files.to.source.folder" endterm="menus.project.copy.files.to.source.folder.title"/> and <link linkend="menus.project.download.mediawiki.page" endterm="menus.project.download.mediawiki.page.title"/>.
-  </para>
   
-  <note><para>To keep the Source Files list window to automatically open when a project is loaded, manually change <token>project_files_show_on_load</token> to
-  <token>false</token> in the <link linkend="configuration.folder.default.contents.omegat.prefs" endterm="configuration.folder.default.contents.omegat.prefs.title"/> configuration file.</para></note>
+  <para>The two actions are equivalent to using the <link
+  linkend="menus.project" endterm="menus.project.title"/><link
+  linkend="menus.project.copy.files.to.source.folder"
+  endterm="menus.project.copy.files.to.source.folder.title"/> and <link
+  linkend="menus.project" endterm="menus.project.title"/><link
+  linkend="menus.project.download.mediawiki.page"
+  endterm="menus.project.download.mediawiki.page.title"/> menu items.</para>
+  
+  <note>
+	<para>To keep the Source Files list window to automatically open when a
+	project is loaded, you can manually change the <link
+	linkend="configuration.folder.default.contents.omegat.prefs"
+	endterm="configuration.folder.default.contents.omegat.prefs.title"/>
+	configuration file.</para>
+  </note>
 </section>

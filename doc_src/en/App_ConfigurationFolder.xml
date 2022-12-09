@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+"../../../docbook-xml-4.5/docbookx.dtd">
 <section id="configuration.folder">
   <title id="configuration.folder.title">Configuration Folder</title>
-  <para>The configuration folder stores the majority of the OmegaT options
-  and preferences for the user.</para>
-  	<para>You can always access it directly from <link linkend="menus.options.access.configuration.folder" endterm="menus.options.access.configuration.folder.title"/> in the <link linkend="menus.options" endterm="menus.options.title"/> menu.</para>
+  <para>The configuration folder stores the majority of the OmegaT options and
+  preferences for the user.</para>
+  
+  <para>Use <link linkend="menus.options" endterm="menus.options.title"/><link
+  linkend="menus.options.access.configuration.folder"
+  endterm="menus.options.access.configuration.folder.title"/> to access it
+  directly.</para>
 
   <section id="configuration.folder.location">
     <title id="configuration.folder.location.title">Location</title>	
@@ -12,9 +17,21 @@
 	  <varlistentry><term>Linux</term><listitem><para><filename>~/.omegat</filename></para></listitem></varlistentry>
 	  <varlistentry><term>macOS</term><listitem><para><filename>~/Library/Preferences/OmegaT</filename></para></listitem></varlistentry>
 	  <varlistentry><term>Windows</term><listitem><para><filename>~\AppData\Roaming\OmegaT</filename></para></listitem></varlistentry>
-	</variablelist>
-	</para>
-	<para>You can also use non default configuration folders by starting OmegaT from the command line. See <link linkend="launch.with.command.line" endterm="launch.with.command.line.title"/> for details.</para>
+	</variablelist></para>
+
+	<note>
+	  <para>You can specify a configuration folder other than the default when
+	  you start OmegaT from the command line. See the <link
+	  endterm="launch.with.command.line.title"
+	  linkend="launch.with.command.line"/> how-to for details.</para>
+
+	  <para>Modified preferences are stored in the configuration folder used by
+	  the project. If you do not use the default configuration folder, all
+	  modifications made in the <link
+	  linkend="chapter.dialogs.preferences">preferences</link> will be stored in
+	  the specified configuration folder and will not appear when you resume
+	  work with the default configuration folder.</para>
+	</note>
   </section>
   
   <section id="configuration.folder.default.contents">
@@ -22,117 +39,204 @@
 	<variablelist>
 	  <varlistentry id="configuration.folder.default.contents.omegat.prefs">
 		<term id="configuration.folder.default.contents.omegat.prefs.title">omegat.prefs</term>
-		<listitem><para>This file includes a number of important user
-		preferences.</para>
-		<para>Some preferences do not have an equivalent in the user interface. They must be modified manually.
-		<example id="no.source.file.display">
-		  <title id="no.source.file.display.title">Do not automatically display the Source Files list</title>
-		  <para>To prevent the Source Files list window from automatically opening when a project is loaded,  find <token>&lt;project_files_show_on_load></token> and replace <token>true</token> to <token>false</token>:</para>
-		  <para><programlisting>&lt;project_files_show_on_load><token>false</token>&lt;/project_files_show_on_load></programlisting>
-		  </para>
-		</example></para>
-	  <note><para>Only this preference currently requires manual modification.</para></note> </listitem></varlistentry>
+		<listitem>
+		  <para>This file includes a number of important user
+		  preferences.</para>
+
+		  <para>Some preferences do not have an equivalent in the user
+		  interface. They must be modified manually.</para>
+		  
+		  <example id="no.source.file.display">
+			<title id="no.source.file.display.title">Do not automatically
+			display the Source Files list</title>
+			<para>To prevent the Source Files list window from automatically
+			opening when a project is loaded, find
+			<token>&lt;project_files_show_on_load></token> and replace
+			<token>true</token> to <token>false</token>:</para>
+
+			<para><programlisting>&lt;project_files_show_on_load><token>false</token>&lt;/project_files_show_on_load></programlisting></para>
+		  </example>
+		  
+		  <note>
+			<para>Only this preference currently requires manual
+			modification.</para>
+		  </note>
+		</listitem>
+	  </varlistentry>
 	  
 	  <varlistentry id="configuration.folder.default.contents.uilayout">
 		<term id="configuration.folder.default.contents.uilayout.title">uiLayout.xml</term>
-		<listitem><para>This file describes the overall OmegaT layout.</para>
-	</listitem>
+		<listitem>
+		  <para>This file describes the overall OmegaT layout.</para>
+		</listitem>
 	  </varlistentry>
 	  
 	  <varlistentry id="configuration.folder.default.contents.logs">
 		<term id="configuration.folder.default.contents.logs.title">logs/</term>
-		<listitem><para>This folder contains a number of log files. The most current is <filename>OmegaT.log</filename>.</para>
-		<para>These files record various internal state and program event messages generated while OmegaT is running. If OmegaT behaves erratically, include this file, or the relevant part thereof, to your report.</para>
-		<para>The contents of the file can also be viewed using the <link linkend="menus.help.log" endterm="menus.help.log.title"/> option in the <link linkend="menus.help" endterm="menus.help.title"/> menu.</para>
+		<listitem>
+		  <para>This folder contains a number of log files. The most current is
+		  <filename>OmegaT.log</filename>.</para>
+
+		  <para>These files record various internal state and program event
+		  messages generated while OmegaT is running. If OmegaT behaves
+		  erratically, include this file, or the relevant part thereof, to your
+		  report.</para>
+
+		  <para>Use <link linkend="menus.help" endterm="menus.help.title"/><link
+		  linkend="menus.help.log" endterm="menus.help.log.title"/> to view the
+		  contents of the file.</para>
 		</listitem>
 	  </varlistentry>
 
 	  <varlistentry id="configuration.folder.default.contents.script">
 		<term id="configuration.folder.default.contents.script.title">script/</term>
-		<listitem><para>If the applicable functions are used, this folder can contain up to three text files:<variablelist>
-		  <varlistentry id="configuration.folder.default.contents.script.selection">
-			<term id="configuration.folder.default.contents.script.selection.title">selection.txt</term>
-			<listitem><para>This file stores the currently selected text when the <link linkend="menus.edit.export.selection" endterm="menus.edit.export.selection.title"/> command in the <link linkend="menus.edit" endterm="menus.edit.title"/> menu is used. The text in the file is replaced each time this function is called.</para></listitem>
-		  </varlistentry>
+		<listitem>
+		  <para>If the applicable functions are used, this folder can contain up
+		  to three text files:</para>
+
+		  <variablelist>
+			<varlistentry id="configuration.folder.default.contents.script.selection">
+			  <term id="configuration.folder.default.contents.script.selection.title">selection.txt</term>
+			  <listitem>
+				<para>This file stores the currently selected text when <link
+				linkend="menus.edit" endterm="menus.edit.title"/><link
+				linkend="menus.edit.export.selection"
+				endterm="menus.edit.export.selection.title"/> is used. The text
+				in the file is replaced each time this function is
+				called.</para>
+			  </listitem>
+			</varlistentry>
 		  
-		  <varlistentry id="configuration.folder.default.contents.script.source">
-			<term id="configuration.folder.default.contents.script.source.title">source.txt</term>
-			<listitem><para>This file contains the <emphasis>original text</emphasis> from of the current segment when <link linkend="dialogs.preferences.editor.export.the.segment.to.text.files" endterm="dialogs.preferences.editor.export.the.segment.to.text.files.title"/> is active. The text in the file is replaced each time a new segment is entered.</para></listitem>
-		  </varlistentry>
-		  <varlistentry id="configuration.folder.default.contents.script.target">
-			<term id="configuration.folder.default.contents.script.target.title">target.txt</term>
-			<listitem><para>This file contains the <emphasis>translated text</emphasis>  from the current segment when <link linkend="dialogs.preferences.editor.export.the.segment.to.text.files" endterm="dialogs.preferences.editor.export.the.segment.to.text.files.title"/> is active. The text in the file is replaced each time a new segment is entered.</para>
-			</listitem>
-		  </varlistentry>
-	  </variablelist>Those three files provide as a simple way to access some OmegaT content and process it with local programs such as shell scripts.</para></listitem></varlistentry>
+			<varlistentry id="configuration.folder.default.contents.script.source">
+			  <term id="configuration.folder.default.contents.script.source.title">source.txt</term>
+			  <listitem>
+				<para>This file contains the <emphasis>original text</emphasis>
+				from of the current segment when the <link
+				linkend="dialogs.preferences.editor.export.the.segment.to.text.files"
+				endterm="dialogs.preferences.editor.export.the.segment.to.text.files.title"/>
+				preference is enabled. The text in the file is replaced each
+				time a new segment is entered.</para>
+			  </listitem>
+			</varlistentry>
+
+			<varlistentry id="configuration.folder.default.contents.script.target">
+			  <term id="configuration.folder.default.contents.script.target.title">target.txt</term>
+			  <listitem>
+				<para>This file contains the <emphasis>translated
+				text</emphasis> from the current segment when the <link
+				linkend="dialogs.preferences.editor.export.the.segment.to.text.files"
+				endterm="dialogs.preferences.editor.export.the.segment.to.text.files.title"/>
+				preference is enabled. The text in the file is replaced each
+				time a new segment is entered.</para>
+			  </listitem>
+			</varlistentry>
+		  </variablelist>
+
+		  <para>Those three files provide as a simple way to access some OmegaT
+		  content and process it with local programs such as shell
+		  scripts.</para>
+		</listitem>
+	  </varlistentry>
 	</variablelist>
   </section>
   
-    <section id="configuration.folder.extra.contents">
+  <section id="configuration.folder.extra.contents">
     <title id="configuration.folder.extra.contents.title">Additional contents</title>
 
 	<variablelist>
-	<varlistentry id="configuration.folder.extra.contents.editorshortcuts">
-	  <term id="configuration.folder.extra.contents.editorshortcuts.title">EditorShortcuts.properties</term>
-	  <listitem><para>This parameter file  contains customized editor shortcuts. See <link linkend="app.shortcuts.customization" endterm="app.shortcuts.customization.title"/> for details.</para>
-	  </listitem>
-	</varlistentry>
+	  <varlistentry id="configuration.folder.extra.contents.editorshortcuts">
+		<term id="configuration.folder.extra.contents.editorshortcuts.title">EditorShortcuts.properties</term>
+		<listitem>
+		  <para>This parameter file contains customized editor shortcuts. See
+		  the <link linkend="app.shortcuts.customization"
+		  endterm="app.shortcuts.customization.title"/> appendix for
+		  details.</para>
+		</listitem>
+	  </varlistentry>
 	
-	<varlistentry id="configuration.folder.extra.contents.maninmenushortcut">
-	  <term id="configuration.folder.extra.contents.maninmenushortcut.title">MainMenuShortcuts.properties</term>
-	  <listitem><para>This parameter file  contains customized user interface shortcuts. See <link linkend="app.shortcuts.customization" endterm="app.shortcuts.customization.title"/> for details.</para>
-	  </listitem>
-	</varlistentry>
+	  <varlistentry id="configuration.folder.extra.contents.maninmenushortcut">
+		<term id="configuration.folder.extra.contents.maninmenushortcut.title">MainMenuShortcuts.properties</term>
+		<listitem>
+		  <para>This parameter file contains customized user interface
+		  shortcuts. See the <link linkend="app.shortcuts.customization"
+		  endterm="app.shortcuts.customization.title"/> appendix for
+		  details.</para>
+		</listitem>
+	  </varlistentry>
 	
-	<varlistentry id="configuration.folder.extra.contents.filters">
-	  <term id="configuration.folder.extra.contents.filters.title">filters.xml</term>
-	  <listitem><para>This parameter file contains customized file filters. See <link linkend="dialogs.preferences.file.filters" endterm="dialogs.preferences.file.filters.title"/> for details.</para>
-	  </listitem>
-	</varlistentry>
+	  <varlistentry id="configuration.folder.extra.contents.filters">
+		<term id="configuration.folder.extra.contents.filters.title">filters.xml</term>
+		<listitem>
+		  <para>This parameter file contains customized file filters. See the
+		  <link linkend="dialogs.preferences.file.filters"
+		  endterm="dialogs.preferences.file.filters.title"/> preferences for
+		  details.</para>
+		</listitem>
+	  </varlistentry>
 
-	<varlistentry id="configuration.folder.extra.contents.finder">
-	  <term id="configuration.folder.extra.contents.finder.title">finder.xml</term>
-	  <listitem><para>This parameter file contains customized external search parameters. See <link linkend="dialogs.preferences.external.searches" endterm="dialogs.preferences.external.searches.title"/> for details.</para>
-	  </listitem>
+	  <varlistentry id="configuration.folder.extra.contents.finder">
+		<term id="configuration.folder.extra.contents.finder.title">finder.xml</term>
+		<listitem>
+		  <para>This parameter file contains customized external search
+		  parameters. See the <link
+		  linkend="dialogs.preferences.external.searches"
+		  endterm="dialogs.preferences.external.searches.title"/> preferences
+		  for details.</para>
+		</listitem>
 	</varlistentry>
 	
 	<varlistentry id="configuration.folder.extra.contents.omegat.autotext">
 	  <term id="configuration.folder.extra.contents.omegat.autotext.title">omegat.autotext</term>
-	  <listitem><para>This parameter file contains customized autotext parameters. See <link linkend="dialog.preferences.auto.completion" endterm="dialog.preferences.auto.completion.title"/> for details.</para>
+	  <listitem>
+		<para>This parameter file contains customized autotext parameters. See
+		the <link linkend="dialog.preferences.auto.completion"
+		endterm="dialog.preferences.auto.completion.title"/> preferences for
+		details.</para>
 	  </listitem>
 	</varlistentry>
 
 	<varlistentry id="configuration.folder.extra.contents.repositories">
 	  <term id="configuration.folder.extra.contents.repositories.title">repositories.properties</term>
-	  <listitem><para>This file contains the login information for your team project repositories.<warning><para>The file contents are not encrypted.</para></warning>See <link linkend="how.to.setup.team.project" endterm="how.to.setup.team.project.title"/> for details.</para>
+	  <listitem>
+		<para>This file contains the login information for your team project
+		repositories.<warning><para>The file contents are not
+		encrypted.</para></warning>See the <link
+		linkend="how.to.setup.team.project"
+		endterm="how.to.setup.team.project.title"/> how-to for details.</para>
 	  </listitem>
 	</varlistentry>
 
 	<varlistentry id="configuration.folder.extra.contents.segmentation">
 	  <term id="configuration.folder.extra.contents.segmentation.title">segmentation.conf</term>
-	  <listitem><para>This parameter file contains customized segmentation parameters. See <link linkend="dialogs.preferences.segmentation.setup" endterm="dialogs.preferences.segmentation.setup.title"/> for details.</para>
+	  <listitem>
+		<para>This parameter file contains customized segmentation
+		parameters. See the <link
+		linkend="dialogs.preferences.segmentation.setup"
+		endterm="dialogs.preferences.segmentation.setup.title"/> preferences for
+		details.</para>
 	  </listitem>
 	</varlistentry>
 	
 	<varlistentry id="configuration.folder.extra.contents.plugin">
 	  <term id="configuration.folder.extra.contents.plugin.title">plugins/</term>
-	  <listitem><para>This folder provides an alternative location for manually installed OmegaT extension plugins. See <link linkend="dialogs.preferences.plugins" endterm="dialogs.preferences.plugins.title"/> for details.</para>
+	  <listitem>
+		<para>This folder provides an alternative location for manually
+		installed OmegaT extension plugins. See the <link
+		linkend="dialogs.preferences.plugins"
+		endterm="dialogs.preferences.plugins.title"/> preference for
+		details.</para>
 	  </listitem>
 	</varlistentry>
 
 	<varlistentry id="configuration.folder.extra.contents.spelling">
 	  <term id="configuration.folder.extra.contents.spelling.title">spelling/</term>
-	  <listitem><para>This folder contains your spelling dictionaries. See <link linkend="dialog.preferences.spellchecker" endterm="dialog.preferences.spellchecker.title"/> for details.</para>
+	  <listitem>
+		<para>This folder contains your spelling dictionaries. See the <link
+		linkend="dialog.preferences.spellchecker"
+		endterm="dialog.preferences.spellchecker.title"/> preferences for
+		details.</para>
 	  </listitem>
 	</varlistentry>
-  </variablelist>
-	</section>
-	
-	<note><para>You can specify a configuration folder other than the default when you
-	start OmegaT from the command line. See <link
-	endterm="launch.with.command.line.title"
-	linkend="launch.with.command.line"/> for details.</para>
-
-	<para>Modified preferences are stored in the configuration folder used by the project. If
-	you do not use the default configuration folder, all modifications made in <link linkend="dialogs.preferences" endterm="dialogs.preferences.title"/> will be stored in the specified configuration folder and will not appear when you resume work with the default configuration folder.</para></note>
+	</variablelist>
+  </section>
 </section>

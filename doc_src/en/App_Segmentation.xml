@@ -8,19 +8,15 @@
 	<title id="dialog.preferences.segmentation.setup.type.title">Paragraph or
 	sentence?</title>
 	
-	<para>Translation memory tools work with textual units called
-	segments. When a translation is entered, the segment containing the source
-	text is stored with its translation in the project memory, and
-	subsequently used to match other source segments in the project.</para>
+	<para>Translation memory tools work with textual units called segments. When
+	a translation is entered, the segment containing the source text is stored
+	with its translation in the project memory, and subsequently used to match
+	other source segments in the project.</para>
 
-	<para>Select the type of segmentation by clicking <link
-	linkend="menus.project.properties"
-	endterm="menus.project.properties.title"/> in the <link
-	linkend="menus.project" endterm="menus.project.title"/> menu and checking or
-	unchecking the <link
+	<para>Use the <link
 	linkend="dialogs.project.properties.options.segmentation"
-	endterm="dialogs.project.properties.options.segmentation.title"/>
-	box.</para>
+	endterm="dialogs.project.properties.options.segmentation.title"/> project
+	property to select the type of segmentation.</para>
 
 	<para>Segments are by default <emphasis role="bold">paragraphs</emphasis>
 	defined by the file format itself.</para>
@@ -50,14 +46,14 @@
 
 		<listitem>
 		  <para>OmegaT first parses the text for paragraph-level
-		  segmentation. This process relies only on the structure of the
-		  source file to produce segments.</para>
+		  segmentation. This process relies only on the structure of the source
+		  file to produce segments.</para>
 
 		  <para>For example, text files may be segmented on line breaks, empty
-		  lines, or not at all. Files containing formatting (ODF, HTML, or
-		  other documents) are divided at block-level (paragraph)
-		  tags. Translatable object attributes in XHTML or HTML files can be
-		  extracted as separate "paragraphs".</para>
+		  lines, or not at all. Files containing formatting (ODF, HTML, or other
+		  documents) are divided at block-level (paragraph) tags. Translatable
+		  object attributes in XHTML or HTML files can be extracted as separate
+		  "paragraphs".</para>
 		</listitem>
 	  </varlistentry>
 
@@ -75,19 +71,21 @@
 		  position where a break will occur, or where a break will not be
 		  allowed.</para>
 
-		  <para>Each time the cursor
-		  moves to the next character, OmegaT checks whether:
+		  <para>Each time the cursor moves to the next character, OmegaT checks
+		  whether:</para>
+		  
 		  <itemizedlist>
 			<listitem>
 			  <para>the text before the location corresponds to a <emphasis
-		  role="bold">Before</emphasis> rule,</para>
+			  role="bold">Before</emphasis> rule,</para>
 			</listitem>
+			
 			<listitem>
 			  <para>and the text after the location corresponds to the associated <emphasis
 			  role="bold">After</emphasis> rule.</para>
 			</listitem>
 		  </itemizedlist>
-		  </para>
+
 		  <para>If the location matches both rules, it is considered either as a
 		  break, or as a non-break, depending on what the rule defined.</para>
         </listitem>
@@ -99,19 +97,22 @@
 	<title id="dialog.preferences.segmentation.setup.scope.title">Global or
 	local?</title>
 
-	<note><para>The same mechanisms and dialogs are used to define global and
-	local segmentation rules.</para></note>
+	<note>
+	  <para>The same mechanisms and dialogs are used to define global and local
+	  segmentation rules.</para>
+	</note>
 
-	<para>By default, segmentation settings are global and shared by all projects.</para>
+	<para>By default, segmentation settings are global and shared by all
+	projects.</para>
 
-	<para>You can limit the segmentation rules used by the project to that
-	project by either setting local rules with <link
-	linkend="dialogs.project.properties.local.segmentation"
-	endterm="dialogs.project.properties.local.segmentation.title"/>, in <link
-	linkend="dialogs.project.properties"
-	endterm="dialogs.project.properties.title"/>, or by starting OmegaT from
-	the command line. See <link linkend="launch.with.command.line"
-	endterm="launch.with.command.line.title"/> for details.</para>
+	<para>Use the <link linkend="dialogs.project.properties.local.segmentation"
+	endterm="dialogs.project.properties.local.segmentation.title"/> project
+	property to limit the scope of the segmentation rules to the current
+	project.</para>
+
+	<para>You can achieve a similar result by starting OmegaT from the command
+	line. See the <link linkend="launch.with.command.line"
+	endterm="launch.with.command.line.title"/> how-to for details.</para>
 	
 	<para>If you use local rules, you can still access the global rules, but
 	modifying them will have no effect on your project.</para>
@@ -121,9 +122,8 @@
   <section id="dialog.preferences.segmentation.setup.rules.based.segmentation">
 	<title id="dialog.preferences.segmentation.setup.rules.based.segmentation.title">Rules</title>
 	<para>OmegaT provides predefined segmentation rules, and the translator can
-	use regular expressions to modify them. See <link
-	linkend="app.regex" endterm="app.regex.title"/> for
-	details.</para>
+	use regular expressions to modify them. See the <link linkend="app.regex"
+	endterm="app.regex.title"/> appendix for details.</para>
 
 	<para>As a reminder, rules work the following way: when a rule matches,
 	OmegaT puts a marker at the match location so that rules that come after
@@ -138,54 +138,58 @@
 	  translation will still be in the project memory.</para>
 	</warning>
 
-		<table id="segmentation.simple.examples">
-		<title id="segmentation.simple.examples.title">A few simple examples</title>
-          <tgroup cols="5">
-			<colspec align="left" colnum="1"/>
-			<colspec align="left" colnum="2"/>
-			<colspec align="center" colnum="3"/>
-			<colspec align="center" colnum="4"/>
-			<colspec align="left" colnum="5"/>
-			<thead>
-              <row>
-				<entry>Category</entry>
-				<entry>Intention</entry>
-				<entry align="center">Before</entry>
-				<entry align="center">After</entry>
-				<entry>Explanation</entry>
-              </row>
-			</thead>
-			<tbody>
-			  <row>
-				<entry>Exception rule, box unchecked, higher in the list</entry>
-				<entry>Do not segment after Ms.</entry>
-				<entry align="center">Ms\.</entry>
-				<entry align="center">\s</entry>
-				<entry>Ms, followed by a period, followed by a whitespace.</entry>
-			  </row>
-			  <row>
-				<entry>Exception rule, box unchecked, higher in the list</entry>
-				<entry>Excel cells with lines breaks that do not represent segments</entry>
-				<entry align="center">\n</entry>
-				<entry align="center">.</entry>
-				<entry>Line break, followed by anything.</entry>
-			  </row>
-			  <row>
-				<entry>Break rule, box checked, lower in the list</entry>
-				<entry>Start a new segment start after a period followed by a space, tab, or other whitespace.</entry>
-				<entry align="center">\.</entry>
-				<entry align="center">\s</entry>
-				<entry>A period followed by a whitespace</entry>
-			  </row>
-			  <row>
-				<entry>Break rule, box checked, lower in the list</entry>
-				<entry>Start a new segment after “。” (Japanese period).</entry>
-				<entry align="center">。</entry>
-				<entry align="center"/>
-				<entry>Note that the <literal>Pattern After</literal> field can be empty.</entry>
-			  </row>
-			</tbody>
-		  </tgroup>
-		</table>
-	  </section>
+	<table id="segmentation.simple.examples">
+	  <title id="segmentation.simple.examples.title">A few simple examples</title>
+      <tgroup cols="5">
+		<colspec align="left" colnum="1"/>
+		<colspec align="left" colnum="2"/>
+		<colspec align="center" colnum="3"/>
+		<colspec align="center" colnum="4"/>
+		<colspec align="left" colnum="5"/>
+		<thead>
+          <row>
+			<entry>Category</entry>
+			<entry>Intention</entry>
+			<entry align="center">Before</entry>
+			<entry align="center">After</entry>
+			<entry>Explanation</entry>
+          </row>
+		</thead>
+		<tbody>
+		  <row>
+			<entry>Exception rule, box unchecked, higher in the list</entry>
+			<entry>Do not segment after Ms.</entry>
+			<entry align="center">Ms\.</entry>
+			<entry align="center">\s</entry>
+			<entry>Ms, followed by a period, followed by a
+			whitespace.</entry>
+		  </row>
+		  <row>
+			<entry>Exception rule, box unchecked, higher in the list</entry>
+			<entry>Excel cells with lines breaks that do not represent
+			segments</entry>
+			<entry align="center">\n</entry>
+			<entry align="center">.</entry>
+			<entry>Line break, followed by anything.</entry>
+		  </row>
+		  <row>
+			<entry>Break rule, box checked, lower in the list</entry>
+			<entry>Start a new segment start after a period followed by a
+			space, tab, or other whitespace.</entry>
+			<entry align="center">\.</entry>
+			<entry align="center">\s</entry>
+			<entry>A period followed by a whitespace</entry>
+		  </row>
+		  <row>
+			<entry>Break rule, box checked, lower in the list</entry>
+			<entry>Start a new segment after “。” (Japanese period).</entry>
+			<entry align="center">。</entry>
+			<entry align="center"/>
+			<entry>Note that the <literal>Pattern After</literal> field can
+			be empty.</entry>
+		  </row>
+		</tbody>
+	  </tgroup>
+	</table>
+  </section>
 </section>

@@ -10,34 +10,39 @@
   way to boost their productivity. Although seen as daunting and complex, even
   the simplest regular expressions (often abbreviated <emphasis>regex</emphasis>
   or <emphasis>regexp</emphasis>) are extremely useful, not only in OmegaT, but
-  in many other applications you might use on a
-  day-to-day basis, with some variations.</para>
+  in many other applications you might use on a day-to-day basis, with some
+  variations.</para>
 
   <para>Only the fundamentals most useful to translators are covered. The
   <link linkend="app.regex.tools" endterm="app.regex.tools.title"/>
-  section at the end of this appendix provides a few starting points to
-  explore advanced or complex uses beyond the scope of this guide. If you need help for a specific case, you can also ask questions in the various support channels.</para>
+  section at the end of this appendix provides a few starting points to explore
+  advanced or complex uses beyond the scope of this manual. If you need help for
+  a specific case, you can also ask questions in the various support
+  channels.</para>
   
-  <para>Regular expressions use a combination of letters,
-  digits, and symbols (collectively known as <emphasis>characters</emphasis>)
-  to define an <emphasis>expression</emphasis> that represents a specific text
+  <para>Regular expressions use a combination of letters, digits, and symbols
+  (collectively known as <emphasis>characters</emphasis>) to define an
+  <emphasis>expression</emphasis> that represents a specific text
   pattern.</para>
 
-  <para>Here are a few examples.
+  <para>Here are a few examples.</para>
+  
   <variablelist>
     <varlistentry>
       <term>[0-9]</term>
       <listitem><para>Any single digit from 0 to 9.</para>
       </listitem>
     </varlistentry>
-    <varlistentry>
+
+	<varlistentry>
       <term>\w+</term>
       <listitem><para>Represents one or more “word characters”, namely
       the letters of the alphabet, digits, and
       underscore symbols.</para>
       </listitem>
     </varlistentry>
-    <varlistentry>
+
+	<varlistentry>
       <term>\h?</term>
       <listitem><para>Represents zero or one horizontal whitespace
       character (this includes regular and non-breaking spaces as well as
@@ -46,10 +51,9 @@
       </listitem>
     </varlistentry>
   </variablelist>    
-  </para>
   
-  <para>Many OmegaT functions rely on regular expressions or make them
-  available as an option:
+  <para>Many OmegaT functions rely on regular expressions or make them available
+  as an option:</para>
 
   <variablelist>
     <varlistentry>
@@ -60,6 +64,7 @@
         endterm="windows.text.search.methods.regex.title"/> option that
         allows you to make extremely powerful searches across your
         files.</para>
+
         <para>The same option in the <link linkend="windows.text.replace"
         endterm="windows.text.replace.title"/> dialog allows you to apply
         regular expressions to both the search and replaced text.</para>
@@ -69,58 +74,74 @@
     <varlistentry>
       <term>Custom tags</term>
       <listitem>
-        <para>Custom tags are tags defined with regular expressions that 
-        are handled exactly like native OmegaT tags. See <link
+        <para>Custom tags are tags defined with regular expressions that are
+        handled exactly like native OmegaT tags. See the <link
         linkend="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags"
-        endterm="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags.title"/> 
-        for details.</para>
-        <para>Use the <code>|</code> (OR) character to separate individual
+        endterm="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags.title"/>
+        preference for details.</para>
+
+		<para>Use the <code>|</code> (OR) character to separate individual
         tag definitions.</para>
       </listitem>
     </varlistentry>
 
     <varlistentry>
-      <term>Flagged fragments</term>
+      <term>Flagged text</term>
       <listitem>
-        <para><link
+        <para>The <link
         linkend="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation"
         endterm="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation.title"/>
-        allow you to define strings that OmegaT will mark in red by
-        default, and treat as extraneous tags for validation
-        purposes.</para>
-        <para>Use the <code>|</code> (OR) character to separate individual
+        preference allows you to define strings that OmegaT will mark in red by
+        default, and treat as extraneous tags for validation purposes.</para>
+
+		<para>Use the <code>|</code> (OR) character to separate individual
         fragment definitions.</para>
       </listitem>
     </varlistentry>
 
     <varlistentry>
+      <term>Text highlighting in alignments</term>
+      <listitem>
+        <para>Visual cues can help verifying that your alignment is correct. The
+        <link linkend="windows.aligner.adjust.highlight"
+        endterm="windows.aligner.adjust.highlight.title"/> setting allows you to
+        define strings that OmegaT will highlight in the aligned
+        documents.</para>
+
+		<para>Use the <code>|</code> (OR) character to separate individual
+        expressions.</para>
+      </listitem>
+    </varlistentry>	
+
+    <varlistentry>
       <term>Segmentation</term>
       <listitem>
-        <para>Segmentation rules and language patterns are defined with
-        regular expressions. You can modify them freely to improve the
-        segmentation of a document or add additional general rules. See
-        <link linkend="app.segmentation"
-			  endterm="app.segmentation.title"/> for
+        <para>Segmentation rules and language patterns are defined with regular
+        expressions. You can modify them freely to improve the segmentation of a
+        document or add additional general rules. See the <link
+        linkend="app.segmentation" endterm="app.segmentation.title"/> appendix for
         details.</para>
+
         <para>Segmentation or exception rules define the position in a
         segment where a split will, or will not, be made. Two regular
         expressions are required to define that position: a “before”
         expression to define the text pattern ahead of where the rule
         should apply, and an “after” expression to define the text 
         pattern following that position.</para>
-        <para>A language pattern that matches the source language of the project will apply to that project.</para></listitem>
+
+		<para>A language pattern that matches the source language of the project
+		will apply to that project.</para>
+	  </listitem>
     </varlistentry>
   </variablelist>
-  </para>
 
   <section id="app.regex.four.rules">
     <title id="app.regex.four.rules.title">The 4 rules</title>
 
-    <para>Regular expressions are used to find text, including
-    characters that are not visible on the screen or when printed out, such as
-    spaces, tabs, or line breaks. Any given expression either
-    <emphasis>matches</emphasis>, or <emphasis>does
-    <emphasis role="bold">not</emphasis> match</emphasis> a word,
+    <para>Regular expressions are used to find text, including characters that
+    are not visible on the screen or when printed out, such as spaces, tabs, or
+    line breaks. Any given expression either <emphasis>matches</emphasis>, or
+    <emphasis>does <emphasis role="bold">not</emphasis> match</emphasis> a word,
     phrase, or other sequence of text.</para>
     
     <para>Each and every character in the expression is relevant when
@@ -143,11 +164,11 @@
           <para>The majority of characters in a regular expression simply
           <emphasis>look for themselves</emphasis> in the text
           sequence.</para>
-          <para>For example, the seven letters spelling out the word
-          “<emphasis>example</emphasis>” simply tell the search function
-          to match exactly those letters, in that order. Simply put, the
-          search just looks for the word
-          “<emphasis>example</emphasis>”.</para>
+
+		  <para>For example, the seven letters spelling out the word
+		  “<emphasis>example</emphasis>” simply tell the search function to
+		  match exactly those letters, in that order. Simply put, the search
+		  just looks for the word “<emphasis>example</emphasis>”.</para>
         </listitem>
       </varlistentry>
 
@@ -155,25 +176,27 @@
         <term>Letters of the alphabet preceded by a backslash
         (<literal>\</literal>) take on a special meaning</term>
         <listitem>
-          <para>Unlike a letter on its own, which simply represents itself
-          as noted above, a letter preceded by a <literal>\</literal> has a
-          special function in a regular expression.</para>
-          <para>For example, <emphasis>r</emphasis> is just a normal
-          character but preceding it with <literal>\</literal> to make it
-          <literal>\r</literal> turns it into a special combination that
-          matches a <emphasis>carriage return character</emphasis>.
-          Similarly, <literal>\R</literal> matches <emphasis>any line
-          break character</emphasis>.</para>
+          <para>Unlike a letter on its own, which simply represents itself as
+          noted above, a letter preceded by a <literal>\</literal> has a special
+          function in a regular expression.</para>
+
+		  <para>For example, <emphasis>r</emphasis> is just a normal character
+		  but preceding it with <literal>\</literal> to make it
+		  <literal>\r</literal> turns it into a special combination that matches
+		  a <emphasis>carriage return character</emphasis>.  Similarly,
+		  <literal>\R</literal> matches <emphasis>any line break
+		  character</emphasis>.</para>
+		  
           <note>
             <para>Only the letters <emphasis>i j l m o</emphasis>, and
             <emphasis>y</emphasis>, in both lower- and uppercase, have no
-            special meaning when preceded by a backslash. This guide
-            only describes a small subset of letters that take on a special
+            special meaning when preceded by a backslash. This manual only
+            describes a small subset of letters that take on a special
             meaning.</para>
-            <para>Consult the sites in the <link
-            linkend="app.regex.tools" endterm="app.regex.tools.title"/>
-            section below for information on combinations not covered
-            here.</para>
+
+			<para>Consult the sites in the <link linkend="app.regex.tools"
+			endterm="app.regex.tools.title"/> section below for information on
+			combinations not covered here.</para>
           </note>
         </listitem>
       </varlistentry>
@@ -181,16 +204,17 @@
       <varlistentry>
       <term>Twelve characters have a special meaning by default</term>
         <listitem>
-          <para>That special meaning has to be cancelled by another
-          character to match the character itself.</para>
+          <para>That special meaning has to be cancelled by another character to
+          match the character itself.</para>
+
           <para>The full list of characters is presented <link
-          linkend="app.regex.twelve.characters">below</link>. One
-          example is <literal>.</literal>: on its own, it has the
-          special meaning of matching <emphasis>any single
-          character</emphasis>.</para>
-          <para>To find a normal period, that meaning has to be cancelled
-          using the <literal>\</literal>, to make the expression
-          <literal>\.</literal>, which just matches a period.</para>
+          linkend="app.regex.twelve.characters">below</link>. One example is
+          <literal>.</literal>: on its own, it has the special meaning of
+          matching <emphasis>any single character</emphasis>.</para>
+
+		  <para>To find a normal period, that meaning has to be cancelled using
+		  the <literal>\</literal>, to make the expression
+		  <literal>\.</literal>, which just matches a period.</para>
         </listitem>
       </varlistentry>
 
@@ -198,15 +222,15 @@
         <term>The <literal>\</literal> character is a very special
         character</term>
         <listitem>
-          <para>As stated above, the <literal>\</literal> character has
-          the default special meaning of either cancelling or activating
-          the special meaning of other characters. It has no effect if
-          placed before a character with no special meaning (either by
-          default or by addition).</para>
-          <para>The <literal>\</literal> can cancel its own special
-          meaning by doubling up to form <literal>\\</literal>, which
-          simply matches the <emphasis>backslash</emphasis> character
-          itself.</para>
+          <para>As stated above, the <literal>\</literal> character has the
+          default special meaning of either cancelling or activating the special
+          meaning of other characters. It has no effect if placed before a
+          character with no special meaning (either by default or by
+          addition).</para>
+
+          <para>The <literal>\</literal> can cancel its own special meaning by
+          doubling up to form <literal>\\</literal>, which simply matches the
+          <emphasis>backslash</emphasis> character itself.</para>
         </listitem>
       </varlistentry>
     </variablelist>
@@ -215,13 +239,11 @@
   <section id="app.regex.twelve.characters">
     <title id="app.regex.twelve.characters.title">The 12 characters</title>
   
-    <para>The twelve special characters are the
-    <emphasis>backslash</emphasis> <literal>\</literal>, the
-    <emphasis>caret</emphasis> <literal>^</literal>, the
-    <emphasis>dollar sign</emphasis> <literal>$</literal>, the
+    <para>The twelve special characters are the <emphasis>backslash</emphasis>
+    <literal>\</literal>, the <emphasis>caret</emphasis> <literal>^</literal>,
+    the <emphasis>dollar sign</emphasis> <literal>$</literal>, the
     <emphasis>period</emphasis> (or <emphasis>dot</emphasis>)
-    <literal>.</literal>, the
-    <emphasis>vertical bar</emphasis> (or
+    <literal>.</literal>, the <emphasis>vertical bar</emphasis> (or
     <emphasis>pipe symbol</emphasis>) <literal>|</literal>, the
     <emphasis>question mark</emphasis> <literal>?</literal>, the
     <emphasis>asterisk</emphasis> (or <emphasis>star</emphasis>)
@@ -229,12 +251,12 @@
     <literal>+</literal>, the opening <emphasis>parenthesis</emphasis>
     <literal>(</literal>, the closing <emphasis>parenthesis</emphasis>,
     <literal>)</literal>, the opening <emphasis>square bracket</emphasis>
-    <literal>[</literal>, and the opening
-    <emphasis>curly brace</emphasis> <literal>{</literal>.</para>
+    <literal>[</literal>, and the opening <emphasis>curly brace</emphasis>
+    <literal>{</literal>.</para>
 
-    <para>Each character is briefly described below with examples
-    of regular expressions that rely on the character as well as
-    of text that they do, or do not, match.
+    <para>Each character is briefly described below with examples of regular
+    expressions that rely on the character as well as of text that they do, or
+    do not, match.</para>
     
       <variablelist>
         <varlistentry>
@@ -260,11 +282,12 @@
                       <emphasis>0.9</emphasis>, or just the final
                       <emphasis>0.5</emphasis> in numbers such as 10.5 or
                       560.5.</para>
+
                       <para>The <literal>\.</literal> cancels the “any
                       character” meaning of the period to match the decimal
                       point, while the <literal>\d</literal> turns the
-                      ordinarily lowercase “d” letter into an expression
-                      that matches any digit between 0 and 9.</para>
+                      ordinarily lowercase “d” letter into an expression that
+                      matches any digit between 0 and 9.</para>
                     </entry>
                   </row>
 
@@ -272,7 +295,8 @@
                     <entry>Does not match</entry>
                     <entry>
                       <para>Sequences such as 0,1, 0-3, or the first three
-                      characters of 0x002E, which would be matched if the expression was just <literal>0.[0-9]</literal>, with no
+                      characters of 0x002E, which would be matched if the
+                      expression was just <literal>0.[0-9]</literal>, with no
                       backslash before the period</para>
                     </entry>
                   </row>
@@ -285,13 +309,14 @@
         <varlistentry>
           <term>The CARET: <literal>^</literal></term>
           <listitem>
-            <para>When it is the first character in the expression, the 
+            <para>When it is the first character in the expression, the
             <emphasis>caret</emphasis> character matches the beginning of a
             line.</para>
+
             <para>When it is the first character in <link
             linkend="app.regex.types.of.expressions.classes">a character class
-            enclosed in brackets</link>, it excludes the characters in that
-            class from the match.</para>
+            enclosed in brackets</link>, it matches all the characters that are
+            not part of that class.</para>
 
             <informaltable>
               <tgroup cols="2">
@@ -319,9 +344,8 @@
                     <entry>
                       <orderedlist>
                         <listitem>
-                          <para>The uppercase “A” in the following sentence:
-                          “A long, but exciting journey was about to
-                          begin”.</para>
+                          <para>The uppercase “A” in the following sentence: “A
+                          long, but exciting journey was about to begin”.</para>
                         </listitem>
 
                         <listitem>
@@ -338,9 +362,9 @@
                     <entry>
                       <orderedlist>
                         <listitem>
-                          <para>The uppercase “A” in the following sentence:
-                          “My friend is writing a book called <emphasis>A Long
-                            Journey</emphasis>”.</para>
+                          <para>The uppercase “A” in the following sentence: “My
+                          friend is writing a book called <emphasis>A Long
+                          Journey</emphasis>”.</para>
                         </listitem>
                       
                         <listitem>
@@ -551,8 +575,8 @@
         <varlistentry>
           <term>The ASTERISK: <literal>*</literal></term>
           <listitem>
-            <para>This character specifies that zero or more instances of
-            the preceding character or expression should be matched.</para>
+            <para>This character specifies that zero or more instances of the
+            preceding character or expression should be matched.</para>
 
             <informaltable>
               <tgroup cols="2">
@@ -569,12 +593,12 @@
                     <entry>Matches</entry>
                     <entry>
                       <para>The word “run”, as well as “runs”, “runner”,
-                      “runway”, “runt” in “grunt” or “brunt”, and any other
-                      word or sequence of characters containing “run” followed
-                      by zero or more “<emphasis>word characters</emphasis>”
-                      (which include digits and the underscore, so the part
-                      before the “@” in an email address such as
-                      run_123@example.email.org is also a match).</para>
+                      “runway”, “runt” in “grunt” or “brunt”, and any other word
+                      or sequence of characters containing “run” followed by
+                      zero or more “<emphasis>word characters</emphasis>” (which
+                      include digits and the underscore, so the part before the
+                      “@” in an email address such as run_123@example.email.org
+                      is also a match).</para>
                     </entry>
                   </row>
 
@@ -638,18 +662,19 @@
 
           <listitem>
             <para>This character starts a <emphasis>group</emphasis>, which is a
-            set of characters treated as a single unit. Groups are numbered,
-            and their contents group are stored in memory. They can be reused
-            later in the search expression using
-            <literal>\<option>n</option></literal>, where
-            <option>n</option> is the number of the group.</para>
+            set of characters treated as a single unit. Groups are numbered, and
+            their contents group are stored in memory. They can be reused later
+            in the search expression using
+            <literal>\<option>n</option></literal>, where <option>n</option> is
+            the number of the group.</para>
+
             <note>
               <para>The content of the group can also be used in the <link
-              linkend="windows.text.replace">replacement text</link>. In Java,
-              the syntax for doing so is
-              <literal>$<option>n</option></literal> instead of
-              <literal>\<option>n</option></literal>.</para>
+              linkend="windows.text.replace">replacement text</link>. Use
+              <literal>$<option>n</option></literal>, where <option>n</option>
+              is the number of the group defined in the search.</para>
             </note>
+
             <para>Parentheses are always used in opening and closing pairs.
             Trying to use only the opening or closing parenthesis on its own
             will cause an error.</para>
@@ -670,7 +695,8 @@
                     <entry>
                       <para>Doubled up words separated by a space, such as the
                       consecutive “an” in the following sentence:</para>
-                      <para>“I bought an an apple.”</para>
+
+					  <para>“I bought an an apple.”</para>
                     </entry>
                   </row>
 
@@ -678,7 +704,8 @@
                     <entry>Does not match</entry>
                     <entry>
                       <para>The “that, that” in the following sentence:</para>
-                      <para>“But that, that is just unbelievable”, because the
+
+					  <para>“But that, that is just unbelievable”, because the
                       first “that” is followed by both a comma and a space
                       rather than only a space.</para>
                     </entry>
@@ -713,13 +740,13 @@
                     <entry>Matches</entry>
                     <entry>
                       <para>The sequence number (including the parenthesis) at
-                      the beginning of each line in a list such as:
-                        <simplelist>
-                          <member>1) Apples</member>
-                          <member>2) Oranges</member>
-                          <member>3) Pears</member>
-                        </simplelist>
-                      </para>
+                      the beginning of each line in a list such as:</para>
+
+                      <simplelist>
+                        <member>1) Apples</member>
+                        <member>2) Oranges</member>
+                        <member>3) Pears</member>
+                      </simplelist>
                     </entry>
                   </row>
 
@@ -728,12 +755,12 @@
                     <entry>
                       <para>Sequence numbers that are not at the beginning of a
                       line.</para>
-                      <para>Follow these steps:
-                        <simplelist>
-                          <member>Step 1) Preparation</member>
-                          <member>Step 2) …</member>
-                        </simplelist>
-                      </para>
+
+                      <para>Follow these steps:</para>
+                      <simplelist>
+                        <member>Step 1) Preparation</member>
+                        <member>Step 2) …</member>
+                      </simplelist>
                     </entry>
                   </row>
                 </tbody>
@@ -752,9 +779,9 @@
 
             <para>Only the opening bracket is special and needs to be preceded
             by a backslash to search for the bracket character itself. If you
-            only want to match the closing bracket as itself, you do not need
-            to precede it with a backslash. (You can still add it, but it will
-            have no effect on the expression or the result.)</para>
+            only want to match the closing bracket as itself, you do not need to
+            precede it with a backslash. (You can still add it, but it will have
+            no effect on the expression or the result.)</para>
 
             <informaltable>
               <tgroup cols="2">
@@ -845,7 +872,6 @@
           </listitem>
         </varlistentry>
       </variablelist>
-    </para>
   </section>
 
   <section id="app.regex.types.of.expressions">
@@ -895,19 +921,22 @@
             <row>
               <entry><literal>\t</literal></entry>
               <entry>
-                <para>The tab character, not the letter “t”.</para></entry>
+                <para>The tab character, not the letter “t”.</para>
+			  </entry>
             </row>
 
             <row>
               <entry><literal>\n</literal></entry>
-              <entry>The newline (line feed) character, not the letter “n”.</entry>
+              <entry>The newline (line feed) character, not the letter
+              “n”.</entry>
             </row>
 
             <row>
               <entry><literal>\r</literal></entry>
               <entry>
                 <para>The carriage-return character, not the letter “r”.</para>
-                <para>similarly, <literal>\R</literal> is any line break character.</para></entry>
+                <para>similarly, <literal>\R</literal> is any line break character.</para>
+			  </entry>
             </row>
           </tbody>
         </tgroup>
@@ -920,18 +949,21 @@
       
       <para>Ordinary OmegaT searches are case insensitive by default: they match
       both uppercase and lowercase characters, unless you choose to enable the
-      <link linkend="windows.text.search.options">case sensitive option</link>.
-      Doing so makes the entire search expression case sensitive.</para>
+      <link linkend="windows.text.search.options"
+      endterm="windows.text.search.options.title"/> option. Doing so makes the
+      entire search expression case sensitive.</para>
+
       <para>In contrast, Regular expressions are case sensitive by default. This
       means that a regular expression search for “OmegaT”, for example, will not
       match “omegat”. However, regular expressions also provide special modifiers
-      to specify case sensitivity within the expression:
+      to specify case sensitivity within the expression:</para>
 
       <variablelist>
         <varlistentry>
           <term><literal>(?i)</literal></term>
           <listitem>
-            <para>Makes the part of the expression to the right of the modifier case insensitive.</para>
+            <para>Makes the part of the expression to the right of the modifier
+            case insensitive.</para>
           </listitem>
         </varlistentry>
         <varlistentry>
@@ -941,12 +973,12 @@
             case sensitive.</para>
           </listitem>
         </varlistentry>
-      </variablelist> </para>
-
+      </variablelist>
+	  
       <para>You can take advantage of this to apply a fine degree of control to
       case sensitivity in searches. Suppose, for example, that you want to find
-      instances of “OmegaT” and “omegat”, but not “OMEGAT”. You can do so with the
-      following expression:
+      instances of “OmegaT” and “omegat”, but not “OMEGAT”. You can do so with
+      the following expression:
       <literal>(?i)o</literal><literal>(?-i)mega</literal>
       <literal>(?i)t</literal>, which represents a case insensitive “o” followed
       by a case sensitive “mega”, followed by a case insensitive “t”.</para>
@@ -958,33 +990,36 @@
       <para>Regular expressions allow you to create sets of characters—known as
       <emphasis>classes</emphasis>. Searches will match any of the characters in
       the set.</para>
-      <para>Classes are defined by enclosing the desired characters in square
+
+	  <para>Classes are defined by enclosing the desired characters in square
       brackets, and can be specified either by listing each individual character
       to include, or by specifying a range of characters. For example, you could
       create the <literal>[£€$]</literal> class to find any of those three
-      currency symbols in the text, or [1-3] to find the number 1, 2 or 3.
-        <note>
-          <para>Inside a class, only the backslash (<literal>\</literal>), 
-          caret (<literal>^</literal>), closing bracket (<literal>]</literal>)
-          and hyphen (<literal>-</literal>) are special. The rest of the twelve
-          characters are normal, and do not have to be preceded by a backslash if
-          you want to search for those characters themselves.</para>
-          <para>You can search for any of the four class special characters as
-          normal characters by preceding them with a backslash. You can also
-          search for the caret, closing bracket, and hyphen as themselves by
-          placing them at a position that does not trigger their special meaning:
-          anywhere except right after the opening bracket for the caret,
-          immediately after either opening bracket or the caret following it for
-          the closing bracket, and either just after the opening bracket or just
-          before the closing bracket for the hyphen.</para>
-        </note>
-      </para>
-      <para>Many frequently used sets have a shorthand form consisting of a
-      backslash followed by a letter of the alphabet. For example,
-      <literal>\d</literal> is a shorthand for <literal>[0-9]</literal>, which
-      matches any digit between 0 and 9. In many cases, the corresponding
-      uppercase later is used to negate the class: <literal>\D</literal> matches
-      any character that is <emphasis role="bold">not</emphasis> a digit.</para>
+      currency symbols in the text, or [1-3] to find the number 1, 2 or 3.</para>
+
+      <note>
+        <para>Inside a class, only the backslash (<literal>\</literal>), caret
+        (<literal>^</literal>), closing bracket (<literal>]</literal>) and
+        hyphen (<literal>-</literal>) are special. The rest of the twelve
+        characters are normal, and do not have to be preceded by a backslash if
+        you want to search for those characters themselves.</para>
+
+		<para>You can search for any of the four class special characters as
+		normal characters by preceding them with a backslash. You can also
+		search for the caret, closing bracket, and hyphen as themselves by
+		placing them at a position that does not trigger their special meaning:
+		anywhere except right after the opening bracket for the caret,
+		immediately after either opening bracket or the caret following it for
+		the closing bracket, and either just after the opening bracket or just
+		before the closing bracket for the hyphen.</para>
+      </note>
+
+	  <para>Many frequently used sets have a shorthand form consisting of a
+	  backslash followed by a letter of the alphabet. For example,
+	  <literal>\d</literal> is a shorthand for <literal>[0-9]</literal>, which
+	  matches any digit between 0 and 9. In many cases, the corresponding
+	  uppercase later is used to negate the class: <literal>\D</literal> matches
+	  any character that is <emphasis role="bold">not</emphasis> a digit.</para>
       <para>The table below provides various additional examples. These
       classes never represent only the actual letter used to form the
       shorthand.</para>
@@ -1008,7 +1043,8 @@
               <entry><literal>[abc]</literal></entry>
               <entry>
                 <para>The letter “a”, “b”, or “c”.</para>
-                <para>A simple class consists of any number of characters
+
+				<para>A simple class consists of any number of characters
                 enclosed by <literal>[</literal> and <literal>]</literal>.</para>
               </entry>
             </row>
@@ -1018,15 +1054,16 @@
               <entry>
                 <para>A character in the range of letters from “C” through
                 “X”.</para>
-                <para>A range is defined by the first character in a series,
-                followed by a hyphen, followed by last character in the
-                series. Any number of ranges can be defined:
-                <literal>[a-zA-Z0-9]</literal> means any lowercase character from
-                “a” to “z”, or any uppercase character from “A” to “Z”, or any
-                digit from “0” to “9”.
-                A hyphen placed outside the series is just a hyphen:
-                <literal>[a-z-]</literal> means any lowercase character from
-                “a” to “z”, or the hyphen character itself.</para>
+
+				<para>A range is defined by the first character in a series,
+				followed by a hyphen, followed by last character in the
+				series. Any number of ranges can be defined:
+				<literal>[a-zA-Z0-9]</literal> means any lowercase character
+				from “a” to “z”, or any uppercase character from “A” to “Z”, or
+				any digit from “0” to “9”.  A hyphen placed outside the series
+				is just a hyphen: <literal>[a-z-]</literal> means any lowercase
+				character from “a” to “z”, or the hyphen character
+				itself.</para>
               </entry>
             </row>
             
@@ -1034,6 +1071,7 @@
               <entry><literal>[^\n\r\t]</literal></entry>
               <entry>
                 <para>Any character <emphasis>except</emphasis> a newline, a carriage return, or tab.</para>
+
                 <para>The caret placed immediately after the opening square
                 bracket excludes the rest of the characters in the class.</para>
               </entry>
@@ -1044,6 +1082,7 @@
               <entry>
                 <para>A word character, generally defined as
                 <literal>[A-Za-z0-9_]</literal>.</para>
+
                 <para><literal>\W</literal> is any character that is
                 <emphasis role="bold">not</emphasis> a word character
                 (<literal>[^\w]</literal>).</para>
@@ -1055,6 +1094,7 @@
               <entry>
                 <para>A whitespace character, including the space and tab
                 characters, as well as line breaks.</para>
+
                 <para><literal>\S</literal> is any character that is
                 <emphasis role="bold">not</emphasis> a whitespace character
                 (<literal>[^\s]</literal>).</para>
@@ -1062,15 +1102,21 @@
             </row>
 
             <row>
-              <entry><literal>\h</literal> and <literal>\v</literal></entry>
-              <entry>Horizontal and vertical whitespace (generally preferred to
-              <literal>\s</literal>).
-              <para><literal>\H </literal> is any character that is
-              <emphasis role="bold">not</emphasis> a horizontal white space, and
-              <literal>\V</literal> any character that is
-              <emphasis role="bold">not</emphasis> a vertical white space
-              (<literal>[^\h]</literal> and <literal>[^\v]</literal>,
-              respectively).</para></entry>
+              <entry>
+				<literal>\h</literal> and <literal>\v</literal>
+			  </entry>
+
+              <entry>
+				<para>Horizontal and vertical whitespace (generally preferred to
+				<literal>\s</literal>).</para>
+
+				<para><literal>\H </literal> is any character that is <emphasis
+				role="bold">not</emphasis> a horizontal white space, and
+				<literal>\V</literal> any character that is <emphasis
+				role="bold">not</emphasis> a vertical white space
+				(<literal>[^\h]</literal> and <literal>[^\v]</literal>,
+				respectively).</para>
+			  </entry>
             </row>
           </tbody>
         </tgroup>
@@ -1103,9 +1149,10 @@
             <row>
               <entry><literal>\p{InGreek}</literal></entry>
               <entry>
-                <para>A character in the Greek block
-                (<ulink url="https://unicode.org/reports/tr18/#Blocks">Unicode
+                <para>A character in the Greek block (<ulink
+                url="https://unicode.org/reports/tr18/#Blocks">Unicode
                 block</ulink>)</para>
+				
                 <para><literal>\P{InGreek}</literal> is any character that is
                 <emphasis role="bold">not</emphasis> in the Greek block.</para>
               </entry>
@@ -1200,9 +1247,10 @@
               <entry><literal>(?=u)</literal></entry>
               <entry>
                 <para>A character followed by a “u”.</para>
+				
                 <para>For example, <literal>q(?=u)</literal> matches the letter
-                “q” when it is followed by a “u”. It therefore matches the
-                “q” in “equal” or “question”, but <emphasis>not</emphasis> the one
+                “q” when it is followed by a “u”. It therefore matches the “q”
+                in “equal” or “question”, but <emphasis>not</emphasis> the one
                 in “qigong” or “Iraq”.</para>
               </entry>
             </row>
@@ -1212,6 +1260,7 @@
               <entry>
                 <para>A character that is <emphasis>not</emphasis> followed by the
                 letter “u”.</para>
+				
                 <para>For example, <literal>q(?!u)</literal> matches the letter
                 “q” when it is <emphasis>not</emphasis> followed by a “u”. It
                 therefore matches the “q” in “qigong” or “Iraq”, but
@@ -1223,6 +1272,7 @@
               <entry><literal>(?&lt;=q)</literal></entry>
               <entry>
                 <para>A character preceded by the letter “q”.</para>
+				
                 <para>For example, <literal>(?&lt;=q)u</literal> matches the
                 letter “u” if it comes after “q”. It therefore matches the “u”
                 in “quick”, but not the one in “run”.</para>
@@ -1234,6 +1284,7 @@
               <entry>
                 <para>A character that is <emphasis>not</emphasis> preceded
                 by the letter “q”.</para>
+				
                 <para>For example, <literal>(?&lt;!q)u</literal> matches the
                 letter “u” if it does <emphasis>not</emphasis> come after “q”.
                 It therefore matches the “u” in “run”, but
@@ -1250,11 +1301,12 @@
     <title id="app.regex.more.examples.title">More examples</title>
 
     <para>This section presents a few examples demonstrating how the various
-    expressions described above can be combined to perform powerful searches in OmegaT.</para>
+    expressions described above can be combined to perform powerful searches in
+    OmegaT.</para>
     
     <table id="regex.examples">
-      <title id="regex.examples.title">Examples of regular expressions
-    that use the above expressions</title>
+      <title id="regex.examples.title">Examples of regular expressions that use
+      the above expressions</title>
 
       <tgroup align="left" cols="2" rowsep="1">
         <colspec align="left" colnum="1"/>
@@ -1313,7 +1365,8 @@
             <entry>
               <para>Find numerical dates in year, month, and day order with the
               month and day separated by a slash, period, or hyphen, such
-              as:
+              as:</para>
+			  
                 <itemizedlist>
                   <listitem>
                     <para>2002/11/8</para>
@@ -1325,12 +1378,12 @@
                     <para>2022-10-31</para>
                   </listitem>
                 </itemizedlist>
-              </para>
-              <note>
-                <para>This expression finds number and separator patterns
-                matching possible dates, but does not validate them. It will also
-                find patterns such as “5136/36/71”.</para>
-              </note>
+
+				<note>
+                  <para>This expression finds number and separator patterns
+                  matching possible dates, but does not validate them. It will
+                  also find patterns such as “5136/36/71”.</para>
+				</note>
             </entry>
           </row>
 
@@ -1369,9 +1422,9 @@
     <title id="app.regex.tools.title">References</title>
 
     <para>Although OmegaT does not offer fancy colouring for your regular
-    expressions, you can get a lot of practice by using the <link linkend="windows.text.search"
-    endterm="windows.text.search.title"/> window since OmegaT does colour the
-    matching results.</para>
+    expressions, you can get a lot of practice by using the <link
+    linkend="windows.text.search" endterm="windows.text.search.title"/> window
+    since OmegaT does colour the matching results.</para>
     
     <para>A few additional resources are presented below.</para>
 
@@ -1393,15 +1446,18 @@
 
       <variablelist>
         <varlistentry id="app.regex.tools.regex101">
-          <term id="app.regex.tools.regex101.title"><ulink url="https://regex101.com">https://regex101.com</ulink></term>
+          <term id="app.regex.tools.regex101.title"><ulink
+          url="https://regex101.com">https://regex101.com</ulink></term>
           <listitem>
             <para>An online regular expression matcher that lets you enter the
-            text you want to search and the regular expressions you want to test.</para>
+            text you want to search and the regular expressions you want to
+            test.</para>
           </listitem>
         </varlistentry>
 
         <varlistentry id="app.regex.tools.regular.expression.info">
-          <term id="app.regex.tools.regular.expression.info.title"><ulink url="https://www.regular-expressions.info">https://www.regular-expressions.info</ulink></term>
+          <term id="app.regex.tools.regular.expression.info.title"><ulink
+          url="https://www.regular-expressions.info">https://www.regular-expressions.info</ulink></term>
           <listitem>
             <para>One of the most thorough regular expression tutorial and
             reference on the web.</para>

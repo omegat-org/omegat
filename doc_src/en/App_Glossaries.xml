@@ -4,72 +4,87 @@
 <section id="app.glossaries">
   <title id="app.glossaries.title">Glossaries</title>
 
-  <para>Glossaries are terminology files stored in the <link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/> folder.</para>
+  <para>Glossaries are terminology files stored in the <link
+  linkend="project.folder.glossary" endterm="project.folder.glossary.title"/>
+  folder.</para>
 
-  <para>All terms in a segment with a match in <emphasis>any</emphasis> of
-  the glossaries will be displayed in the <link
-  linkend="panes.glossary" endterm="panes.glossary.title"/> pane.</para>
+  <para>All terms in a segment with a match in <emphasis>any</emphasis> of the
+  glossaries will be displayed in the <link linkend="panes.glossary"
+  endterm="panes.glossary.title"/> pane.</para>
 
   <para>Source terms can be multi-word expressions.</para>
 
-  <para>There are 2 kinds of glossary files:
+  <para>There are 2 kinds of glossary files:</para>
 
   <variablelist>
 	<varlistentry>
 	  <term>The project glossary</term>
 	  <listitem>
-		<para>You can use <link linkend="menus.edit.create.glossary.entry"
-          endterm="menus.edit.create.glossary.entry.title"/> to enter new terms in this glossary. It is called the <emphasis>writable</emphasis> glossary for this reason.</para>
-		  <para>You can also access it with <link
-		  linkend="menus.project.access.project.contents.title"
-		  endterm="menus.project.access.project.contents.title"/>, open it in a
-		  text editor and modify it.</para>
-		  <para>You do not need to prepare the file in advance.</para>
-		  <para>It will be created the first time you add an entry to the
-		  glossary.</para>
+		<para>Use <link linkend="menus.edit" endterm="menus.edit.title"/><link
+		linkend="menus.edit.create.glossary.entry"
+		endterm="menus.edit.create.glossary.entry.title"/> to enter new terms in
+		this glossary. It is called the <emphasis>writable</emphasis> glossary
+		for this reason.</para>
+		
+		<para>Use <link linkend="menus.project"
+		endterm="menus.project.title"/><link
+		linkend="menus.project.access.project.contents.title"
+		endterm="menus.project.access.project.contents.title"/> to directly
+		access it. You can then open it in a text editor and modify it.</para>
 
-		  <note>
-        <para>If you choose to use an existing file as the default
-		  glossary, all new entries will be recorded in tab-separated format and
-		  saved in UTF-8 by default.</para>
-        <para>If you want to specify a different encoding, you can do so by
-        adding a “magic” comment that takes the following form:
-          <simplelist>
+		<para>You do not need to prepare the file in advance.</para>
+
+		<para>It will be created the first time you add an entry to the
+		glossary.</para>
+
+		<note>
+          <para>If you choose to use an existing file as the default glossary,
+          all new entries will be recorded in tab-separated format and saved in
+          UTF-8 by default.</para>
+
+		  <para>If you want to specify a different encoding, you can do so by
+		  adding a “magic” comment that takes the following form:</para>
+
+		  <simplelist>
             <member>
-              <code># -*- coding: <parameter>&lt;charset&gt;</parameter>
-              -*-</code>,
+              <code># -*- coding: &lt;charset&gt; -*-</code>,
             </member>
           </simplelist>
-        where <parameter>&lt;charset&gt;</parameter> is typically one of the sets listed in the <ulink
-        url="http://www.iana.org/assignments/character-sets/character-sets.xhtml">IANA
-        Charset Registry</ulink>. To specify a glossary in the latin encoding, for
-        example, use:
-          <informalexample>
-            <para><code># -*- coding: ISO-8859-1 -*-</code></para>
-          </informalexample>
-        (or any of the ISO-8859-1 to ISO-8859-10 character sets).</para>
-      </note>
+		  
+          <para>where <parameter>&lt;charset&gt;</parameter> is typically one of
+          the sets listed in the <ulink
+          url="http://www.iana.org/assignments/character-sets/character-sets.xhtml">IANA
+          Charset Registry</ulink>.</para>
+		</note>
 	  </listitem>
 	</varlistentry>
 	
 	<varlistentry>
 	  <term>Reference glossaries</term>
-	  <listitem><para>They are terminology files in a format recognized by 
-    OmegaT. You cannot modify them from the OmegaT interface like the
-	  project glossary, but you can do so in a text editor.</para></listitem>
+	  <listitem>
+		<para>They are terminology files in a format recognized by OmegaT. You
+		cannot modify them from the OmegaT interface like the project glossary,
+		but you can do so in a text editor.</para>
+	  </listitem>
 	</varlistentry>
   </variablelist>
-</para>
 
-<note>
-  <para>Modifications made to any glossary are immediately recognized by OmegaT displayed in the <link
-  linkend="panes.glossary" endterm="panes.glossary.title"/> pane.</para>
-</note>
+  <note>
+	<para>Modifications made to any glossary are immediately recognized by
+	OmegaT displayed in the <link linkend="panes.glossary"
+	endterm="panes.glossary.title"/> pane.</para>
+  </note>
 
   <section id="glossaries.glossary.folder">
     <title id="glossaries.glossary.folder.title">The glossaries folder</title>
 
-    <para>By default, each project contains a <link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/> folder to store the writable glossary and any reference glossaries you want to add to the project. See <link linkend="dialogs.project.properties.file.locations.glossaries" endterm="dialogs.project.properties.file.locations.glossaries.title"/> for details.</para>
+    <para>By default, each project contains a <link
+    linkend="project.folder.glossary" endterm="project.folder.glossary.title"/>
+    folder to store the writable glossary and any reference glossaries you want
+    to add to the project. See the <link
+    linkend="dialogs.project.properties.file.locations.glossaries"
+    endterm="dialogs.project.properties.file.locations.glossaries.title"/>
+    project property for details.</para>
 
     <para>All glossaries must be located in the <link
     linkend="project.folder.glossary" endterm="project.folder.glossary.title"/>
@@ -79,11 +94,11 @@
     terminology subfolders organized by topic, client, or any other category
     that suits your workflow.</para>
     <para>Use the <link
-    linkend="dialogs.project.properties.file.locations.glossaries">option</link>
-    to set the location of the reference glossaries folder. This folder can be
-    set outside the project, enabling you to use it, or one of the specific
-    subfolders, in other projects.</para>
-		
+    linkend="dialogs.project.properties.file.locations.glossaries"
+    endterm="dialogs.project.properties.file.locations.glossaries.title"/> project
+    property to set the location of the reference glossaries folder. This folder
+    can be set outside the project, enabling you to use it, or one of the
+    specific subfolders, in other projects.</para>
   </section>
 
   <section id="glossaries.default.glossary">
@@ -101,7 +116,6 @@
     <filename>.utf8</filename> extension, and store it within the <link
     linkend="project.folder.glossary" endterm="project.folder.glossary.title"/>
     folder or in one of its subfolders.</para>
-
   </section>
 
   <section id="glossaries.fileformat">

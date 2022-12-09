@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
-<chapter id="panes">
-  <title id="panes.title">Panes</title>
+<chapter id="chapter.panes">
+  <title id="chapter.panes.title">Panes</title>
 
   <section id="panes.principles">
     <title id="panes.principles.title">Principles</title>
@@ -12,11 +12,12 @@
         <term id="panes.manipulation.title">Manipulation</term>
 
         <listitem>
-          <para>The main window consists of several panes, described here, the
-          main <link endterm="menus.title" linkend="menus"/>, and a <link
-          endterm="panes.statusbar.title" linkend="panes.statusbar"/>. You can
-          change the position of a pane, or even undock it as a separate
-          window, by clicking and holding its name and dragging it.</para>
+          <para>The main window consists of several panes, described here, menus
+          described in the <link linkend="chapter.menus"
+          endterm="chapter.menus.title"/> chapter, and a status bar described
+          <link linkend="panes.statusbar">below</link>. You can change the
+          position of a pane, or even undock it as a separate window, by
+          clicking and holding its name and dragging it.</para>
 
           <para>The top right corner of a pane will show different icons
           depending on the type of pane and its current status:</para>
@@ -37,8 +38,8 @@
                       </imageobject>
                     </inlinemediaobject></entry>
 
-                  <entry>Lists the various extra <emphasis role="bold">actions</emphasis> available in the
-                  pane.</entry>
+                  <entry>Lists the various extra <emphasis
+                  role="bold">actions</emphasis> available in the pane.</entry>
                 </row>
 
                 <row>
@@ -52,8 +53,9 @@
                       </imageobject>
                     </inlinemediaobject></entry>
 
-                  <entry><emphasis role="bold">Minimizes</emphasis> the pane, so that it only shows as a tab at
-                  the bottom of the window.</entry>
+                  <entry><emphasis role="bold">Minimizes</emphasis> the pane, so
+                  that it only shows as a tab at the bottom of the
+                  window.</entry>
                 </row>
 
                 <row>
@@ -81,8 +83,8 @@
                       </imageobject>
                     </inlinemediaobject></entry>
 
-                  <entry><emphasis role="bold">Restores</emphasis> a maximized pane to its previous
-                  layout.</entry>
+                  <entry><emphasis role="bold">Restores</emphasis> a maximized
+                  pane to its previous layout.</entry>
                 </row>
 
                 <row>
@@ -96,7 +98,8 @@
                       </imageobject>
                     </inlinemediaobject></entry>
 
-                  <entry><emphasis role="bold">Undocks</emphasis> the pane from the main window.</entry>
+                  <entry><emphasis role="bold">Undocks</emphasis> the pane from
+                  the main window.</entry>
                 </row>
 
                 <row>
@@ -110,7 +113,8 @@
                       </imageobject>
                     </inlinemediaobject></entry>
 
-                  <entry><emphasis role="bold">Returns</emphasis> the pane to the main window.</entry>
+                  <entry><emphasis role="bold">Returns</emphasis> the pane to
+                  the main window.</entry>
                 </row>
               </tbody>
             </tgroup>
@@ -121,12 +125,12 @@
           can be resized by dragging the separators between them.</para>
 
           <note>
-            <para>If you lost track of the changes you made to the user
-            interface, and cannot see some panes, use <link
+            <para>Use <link endterm="menus.view.title"
+            linkend="menus.view"/><link
             endterm="menus.view.restore.main.window.title"
-            linkend="menus.view.restore.main.window"/> in the <link
-            endterm="menus.view.title" linkend="menus.view"/> menu any time to
-            go back to the default layout.</para>
+            linkend="menus.view.restore.main.window"/> to go back to the default
+            layout if you lost track of the changes you made to the user
+            interface, and cannot see some panes.</para>
           </note>
         </listitem>
       </varlistentry>
@@ -206,37 +210,74 @@
 		
         <listitem>
           <para>If a pane is closed but has contents to display, OmegaT can
-		  temporarily highlight the pane tab in orange when you enter the segment.</para>
+          temporarily highlight the pane tab in orange when you enter the
+          segment.</para>
+		  
 		  <para>By default, the <guilabel>Comments</guilabel> and
 		  <guilabel>Notes</guilabel> panes have notifications enabled.</para>
-		  <para>To enable or disable notifications,
+		  
+		  <para>To enable or disable notifications,</para>
+		  
 		  <itemizedlist>
-			<listitem><para>enter the pane,</para></listitem>
-			<listitem><para>click on the
-			<guilabel>Action</guilabel> widget in the top right,</para></listitem>
-			<listitem><para>and select <guilabel>Notify
-		  Me When a Segment Has...</guilabel> (the ... contents depends on the pane that
-			you want notifications from).</para></listitem>
+			<listitem>
+			  <para>enter the pane,</para>
+			</listitem>
+
+			<listitem>
+			  <para>click on the <guilabel>Action</guilabel> widget in the top
+			  right,</para>
+			</listitem>
+			
+			<listitem>
+			  <para>and select <guilabel>Notify Me When a Segment
+			  Has...</guilabel> (the ... contents depends on the pane that you
+			  want notifications from).</para>
+			</listitem>
 		  </itemizedlist>
-		  </para>
+
 		  <para>Notifications are available from the following panes:</para>
+
 		  <itemizedlist>
-			<listitem><para>Comments</para></listitem>
-			<listitem><para>Dictionary</para></listitem>
-			<listitem><para>Fuzzy Matches</para></listitem>
-			<listitem><para>Glossary</para></listitem>
-			<listitem><para>Multiple Translations</para></listitem>
-			<listitem><para>Notes</para></listitem>
-			<listitem><para>Segment Properties</para>
-			<para>The <guilabel>Segment Properties</guilabel> pane allows
-			notification settings for each of its item.</para>
-			<para>In <guilabel>Table View</guilabel>, right click on the item
-			and select <guilabel>Notify Me When a Segment Has...</guilabel> (the
-			... contents depends on the item that you want notifications from).</para>
-			<para>In <guilabel>List View</guilabel>, right click on the
-			<guilabel>Action</guilabel> widget at the right-end of the selected property
-			lineand select <guilabel>Notify Me When a Segment Has...</guilabel> (the
-			... contents depends on the item that you want notifications from).</para>
+			<listitem>
+			  <para>Comments</para>
+			</listitem>
+
+			<listitem>
+			  <para>Dictionary</para>
+			</listitem>
+
+			<listitem>
+			  <para>Fuzzy Matches</para>
+			</listitem>
+
+			<listitem>
+			  <para>Glossary</para>
+			</listitem>
+
+			<listitem>
+			  <para>Multiple Translations</para>
+			</listitem>
+
+			<listitem>
+			  <para>Notes</para>
+			</listitem>
+
+			<listitem>
+			  <para>Segment Properties</para>
+
+			  <para>The <guilabel>Segment Properties</guilabel> pane allows
+			  notification settings for each of its item.</para>
+
+			  <para>In <guilabel>Table View</guilabel>, right click on the item
+			  and select <guilabel>Notify Me When a Segment Has...</guilabel>
+			  (the ... contents depends on the item that you want notifications
+			  from).</para>
+
+			  <para>In <guilabel>List View</guilabel>, right click on the
+			  <guilabel>Action</guilabel> widget at the right-end of the
+			  selected property lineand select <guilabel>Notify Me When a
+			  Segment Has...</guilabel> (the ... contents depends on the item
+			  that you want notifications from).</para>
 			</listitem>
 		  </itemizedlist>
 		</listitem>
@@ -245,18 +286,18 @@
   </section>
 
   <section id="panes.editor">
-    <title id="panes.editor.title">Editor</title>
+    <title id="panes.editor.title"><guilabel>Editor</guilabel></title>
 
     <para>This is where you type and edit your translations.</para>
 
     <para>The text is split into numbered segments. You can scroll through the
     document and double-click on any segment to open and edit it.</para>
 
-  <example id="panes.editor.default.editor.writing.space">
-	<title id="panes.editor.default.editor.writing.space.title">Default editor writing
-      space</title>
-	<para>
-	  <programlisting>— ¶ —————————————————————
+	<example id="panes.editor.default.editor.writing.space">
+	  <title id="panes.editor.default.editor.writing.space.title">Default editor
+	  writing space</title>
+	  <para>
+		<programlisting>— ¶ —————————————————————
 
 <token>Remove Tags</token>
 |Supprimer les balises<token>&lt;segment 2148 ¶></token>
@@ -264,7 +305,7 @@
 — ¶ —————————————————————
 
 When enabled, all the formatting tags are removed from source segments.</programlisting></para>
-  </example>
+	</example>
 
     <itemizedlist>
       <listitem>
@@ -303,94 +344,121 @@ When enabled, all the formatting tags are removed from source segments.</program
       </listitem>
 
       <listitem>
-        <para>Use <link endterm="menus.goto.next.segment.title"
+        <para>Use <link  linkend="menus.goto" endterm="menus.goto.title"/><link
+        endterm="menus.goto.next.segment.title"
         linkend="menus.goto.next.segment"/> or other navigation commands
-        to:<itemizedlist>
-            <listitem>
-              <para>register the translation field contents in the project
-              translation memory, and</para>
-            </listitem>
+        to:</para>
 
-            <listitem>
-              <para>enter the next segment to translate.</para>
-            </listitem>
-          </itemizedlist> See the <link endterm="menus.goto.title"
-        linkend="menus.goto"/> menu for details.</para>
+		<itemizedlist>
+          <listitem>
+            <para>register the translation field contents in the project
+            translation memory, and</para>
+          </listitem>
+
+          <listitem>
+            <para>enter the next segment to translate.</para>
+          </listitem>
+        </itemizedlist>
+
+		<para>See the <link endterm="menus.goto.title" linkend="menus.goto"/>
+		menu for details.</para>
       </listitem>
     </itemizedlist>
 
     <note>
-      <para>Modify the Editor display to suit your workflow. See the <link linkend="dialogs.preferences.editor" endterm="dialogs.preferences.editor.title"/> preferences for details.</para>
+      <para>Modify the Editor display to suit your workflow.</para>
 
-<!--   <example id="panes.editor.modified.editor.target.field"> -->
-<!-- 	<title id="panes.editor.modified.editor.target.field.title">Example of modified -->
-<!--         editor writing space</title> -->
-<!-- 	<para> -->
-<!-- 	  <programlisting>— ¶ ————————————————————— -->
+	  <!--   <example id="panes.editor.modified.editor.target.field"> -->
+	  <!-- 	<title id="panes.editor.modified.editor.target.field.title">Example of modified -->
+	  <!--         editor writing space</title> -->
+	  <!-- 	<para> -->
+	  <!-- 	  <programlisting>— ¶ ————————————————————— -->
 
-<!-- Translation last modified by Didier on Sep 4, 2012 at 9:16:52 PM -->
-<!-- <token>Remove Ta&amp;gs</token> -->
-<!-- <token>Su&amp;pprimer les balises</token> -->
+	  <!-- Translation last modified by Didier on Sep 4, 2012 at 9:16:52 PM -->
+	  <!-- <token>Remove Ta&amp;gs</token> -->
+	  <!-- <token>Su&amp;pprimer les balises</token> -->
 
-<!-- — ¶ ————————————————————— -->
+	  <!-- — ¶ ————————————————————— -->
 
-<!-- <token>External Post-processing Command:</token> -->
-<!-- <token>[fuzzy]</token>Commande de post-traitement externe<token>&lt;segment 3644 ¶></token> -->
+	  <!-- <token>External Post-processing Command:</token> -->
+	  <!-- <token>[fuzzy]</token>Commande de post-traitement externe<token>&lt;segment 3644 ¶></token> -->
 
-<!-- — ¶ —————————————————————</programlisting></para> -->
-<!--   </example> -->
+	  <!-- — ¶ —————————————————————</programlisting></para> -->
+	  <!--   </example> -->
 
-  <para>Modifications can include:<itemizedlist>
-          <listitem>
-            <para><link endterm="dialogs.preferences.fonts.title"
-            linkend="dialogs.preferences.fonts"/></para>
-          </listitem>
+	  <para>Modifications can include:</para>
+	  
+	  <itemizedlist>
+		<listitem>
+		  <para>Font modifications, defined in the <link
+		  endterm="dialogs.preferences.fonts.title"
+		  linkend="dialogs.preferences.fonts"/> preference</para>
+		</listitem>
 
-          <listitem>
-            <para><link
-            endterm="menus.view.mark.paragraph.delimitations.title"
-            linkend="menus.view.mark.paragraph.delimitations"/></para>
-          </listitem>
+		<listitem>
+		  <para>Paragraph delimitation display, enabled by using <link
+		  endterm="menus.view.title" linkend="menus.view"/><link
+		  endterm="menus.view.mark.paragraph.delimitations.title"
+		  linkend="menus.view.mark.paragraph.delimitations"/></para>
+		</listitem>
 
-          <listitem>
-            <para><link
-            endterm="dialogs.preferences.editor.paragraph.delimitation.format.title"
-            linkend="dialogs.preferences.editor.paragraph.delimitation.format"/></para>
-          </listitem>
+		<listitem>
+		  <para>The paragraph delimitation format, defined in the <link
+		  endterm="dialogs.preferences.editor.paragraph.delimitation.format.title"
+		  linkend="dialogs.preferences.editor.paragraph.delimitation.format"/>
+		  preference</para>
+		</listitem>
 
-          <listitem>
-            <para><link endterm="menus.view.modification.info.title"
-            linkend="menus.view.modification.info"/></para>
-          </listitem>
+		<listitem>
+		  <para>Segment modification info display, enabled by using <link
+		  endterm="menus.view.title" linkend="menus.view"/><link
+		  endterm="menus.view.modification.info.title"
+		  linkend="menus.view.modification.info"/></para>
+		</listitem>
 
-          <listitem>
-            <para><link endterm="menus.view.display.source.segments.title"
-            linkend="menus.view.display.source.segments"/></para>
-          </listitem>
+		<listitem>
+		  <para>Source segments display, enabled by using <link
+		  endterm="menus.view.title" linkend="menus.view"/><link
+		  endterm="menus.view.display.source.segments.title"
+		  linkend="menus.view.display.source.segments"/></para>
+		</listitem>
 
-          <listitem>
-            <para><link endterm="menus.view.mark.translated.segments.title"
-            linkend="menus.view.mark.translated.segments"/></para>
-          </listitem>
+		<listitem>
+		  <para>Translated segments highlighting, enabled by using <link
+		  endterm="menus.view.title" linkend="menus.view"/><link
+		  endterm="menus.view.mark.translated.segments.title"
+		  linkend="menus.view.mark.translated.segments"/></para>
+		</listitem>
 
-          <listitem>
-            <para><link
-            endterm="dialogs.preferences.editor.leave.the.segment.empty.title"
-            linkend="dialogs.preferences.editor.leave.the.segment.empty"/></para>
-          </listitem>
+		<listitem>
+		  <para>Do not insert the source text in the translation field, enabled
+		  by the <link
+		  endterm="dialogs.preferences.editor.leave.the.segment.empty.title"
+		  linkend="dialogs.preferences.editor.leave.the.segment.empty"/>
+		  preference</para>
+		</listitem>
 
-          <listitem>
-            <para><link
-            endterm="dialogs.preferences.editor.insert.the.best.fuzzy.match.title"
-            linkend="dialogs.preferences.editor.insert.the.best.fuzzy.match"/></para>
-          </listitem>
+		<listitem>
+		  <para>Insert the best fuzzy match above a given threshold, enabled by
+		  the <link
+		  endterm="dialogs.preferences.editor.insert.the.best.fuzzy.match.title"
+		  linkend="dialogs.preferences.editor.insert.the.best.fuzzy.match"/>
+		  preference</para>
+		</listitem>
 
-          <listitem>
-            <para><link
-            endterm="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation.title"
-            linkend="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation"/></para>
-          </listitem>
-        </itemizedlist></para>
+		<listitem>
+		  <para>Define text that you do not want to remain in the translation,
+		  enabled by the <link
+		  endterm="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation.title"
+		  linkend="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation"/>
+		  preference</para>
+		</listitem>
+	  </itemizedlist>
+
+	  <para>See the <link linkend="dialogs.preferences.editor"
+	  endterm="dialogs.preferences.editor.title"/> preferences and the <link
+	  endterm="menus.view.title" linkend="menus.view"/> menu for details.
+	  </para>
     </note>
 
     <variablelist>
@@ -398,9 +466,9 @@ When enabled, all the formatting tags are removed from source segments.</program
         <term>Empty translations</term>
 
         <listitem>
-          <para>If you leave the translation field empty, OmegaT will treat
-          the segment as untranslated and keep it in the original language
-          when it creates the translated documents.</para>
+          <para>If you leave the translation field empty, OmegaT will treat the
+          segment as untranslated and keep it in the original language when it
+          creates the translated documents.</para>
         </listitem>
       </varlistentry>
 
@@ -409,9 +477,9 @@ When enabled, all the formatting tags are removed from source segments.</program
 
         <listitem>
           <para>OmegaT can store translations that are identical to the source
-          text. This can be useful for documents that contain trademarks,
-          names or other proper nouns, or sections in a third language that do
-          not require translation.</para>
+          text. This can be useful for documents that contain trademarks, names
+          or other proper nouns, or sections in a third language that do not
+          require translation.</para>
         </listitem>
       </varlistentry>
 
@@ -419,9 +487,9 @@ When enabled, all the formatting tags are removed from source segments.</program
         <term>Dragging text</term>
 
         <listitem>
-          <para>It is possible to drag text from anywhere in the main window
-          and drop it into the translation field. Text dragged from outside
-          the translation field is copied, while text dragged from within the
+          <para>It is possible to drag text from anywhere in the main window and
+          drop it into the translation field. Text dragged from outside the
+          translation field is copied, while text dragged from within the
           translation field is moved.</para>
         </listitem>
       </varlistentry>
@@ -430,24 +498,26 @@ When enabled, all the formatting tags are removed from source segments.</program
         <term id="panes.editor.overwriting.title">Overwriting</term>
 
         <listitem>
-          <para>By default, typing text inserts the new text after the cursor
-          in the typing direction. To overwrite the existing text, use the
-          following keys: <itemizedlist>
-              <listitem>
-                <para>On Windows and Linux: <keycombo>
-                    <keycap>INSERT</keycap>
-                  </keycombo></para>
-              </listitem>
+          <para>By default, typing text inserts the new text after the cursor in
+          the typing direction. To overwrite the existing text, use the
+          following keys:</para>
 
-              <listitem>
-                <para>On macOS: <keycap>F3</keycap></para>
-              </listitem>
-            </itemizedlist></para>
+		  <itemizedlist>
+            <listitem>
+              <para>On Windows and Linux: <keycombo>
+              <keycap>INSERT</keycap>
+              </keycombo></para>
+            </listitem>
 
-          <para>The writing mode (overwrite - <guilabel>OVR</guilabel> or
-          insert - <guilabel>INS</guilabel>) is shown at the right of the
-          <link endterm="panes.statusbar.title" linkend="panes.statusbar"/>.
-          Use the same key to switch back and forth between each mode.</para>
+            <listitem>
+              <para>On macOS: <keycap>F3</keycap></para>
+            </listitem>
+          </itemizedlist>
+
+          <para>The writing mode (overwrite - <guilabel>OVR</guilabel> or insert
+          - <guilabel>INS</guilabel>) is shown at the right of the <link
+          linkend="panes.statusbar">status bar</link>. Use the same key to
+          switch back and forth between each mode.</para>
         </listitem>
       </varlistentry>
 
@@ -455,18 +525,18 @@ When enabled, all the formatting tags are removed from source segments.</program
         <term id="panes.editor.cursor.lock.title">Cursor lock</term>
 
         <listitem>
-          <para>By default, the cursor is locked into the translation field,
-          and the arrow keys cannot be used to move in the source text.</para>
+          <para>By default, the cursor is locked into the translation field, and
+          the arrow keys cannot be used to move in the source text.</para>
 
           <para>Pressing <keycap>F2</keycap> unlocks the cursor and makes it
-          possible to use the arrow keys to move in the source text (or
-          anywhere else in the editor). This allows you to select text using
-          the keyboard.</para>
+          possible to use the arrow keys to move in the source text (or anywhere
+          else in the editor). This allows you to select text using the
+          keyboard.</para>
 
-          <para>The cursor status (locked - <guilabel>LCK</guilabel> or
-          unlocked - <guilabel>UNL</guilabel>) is shown at the right of the
-          <link endterm="panes.statusbar.title" linkend="panes.statusbar"/>.
-          Use the same key to lock the cursor again.</para>
+          <para>The cursor status (locked - <guilabel>LCK</guilabel> or unlocked
+          - <guilabel>UNL</guilabel>) is shown at the right of the <link
+          linkend="panes.statusbar">status bar</link>. Use the same key to lock
+          the cursor again.</para>
         </listitem>
       </varlistentry>
 
@@ -474,50 +544,57 @@ When enabled, all the formatting tags are removed from source segments.</program
         <term id="panes.editor.context.menu.title">Context menu</term>
 
         <listitem>
-          <para>Default shortcut: <itemizedlist>
-              <listitem>
-                <para>On Windows and Linux: <keycap>Menu</keycap></para>
-              </listitem>
+          <para>Default shortcut:</para>
 
-              <listitem>
-                <para>On macOS: <keycombo>
-                    <keycap>S</keycap>
+		  <itemizedlist>
+			<listitem>
+              <para>On Windows and Linux: <keycap>Menu</keycap></para>
+			</listitem>
 
-                    <keycap>Esc</keycap>
-                  </keycombo></para>
-              </listitem>
-            </itemizedlist> You can also bring up the menu by right-clicking
-          the mouse (<keycap>C</keycap> + <keycap>click</keycap> on
-          macOS).</para>
+			<listitem>
+              <para>On macOS:
+              <keycombo><keycap>S</keycap><keycap>Esc</keycap></keycombo></para>
+			</listitem>
+          </itemizedlist>
 
-          <para>The Editor pane context menu offers: <itemizedlist>
-              <listitem>
-                <para><emphasis role="bold">Cut, Copy, Paste</emphasis>
-                functions,</para>
-              </listitem>
+		  <para>You can also bring up the menu by right-clicking the mouse
+		  (<keycap>C</keycap> + <keycap>click</keycap> on macOS).</para>
 
-              <listitem>
-                <para><guilabel>Go To Segment</guilabel> (to jump to the
-                segment under the pointer),</para>
-              </listitem>
+          <para>The Editor pane context menu offers:</para>
 
-              <listitem>
-                <para><guilabel>Search Dictionaries</guilabel> (to search for
-                the selected term in an installed dictionary),</para>
-              </listitem>
+		  <itemizedlist>
+            <listitem>
+              <para><guilabel>Cut</guilabel>, <guilabel>Copy</guilabel>,
+              <guilabel>Paste</guilabel> functions,</para>
+            </listitem>
 
-              <listitem>
-                <para><guilabel>Add Glossary Entry</guilabel> (equivalent to
-                <link endterm="menus.edit.create.glossary.entry.title"
-                linkend="menus.edit.create.glossary.entry"/>),</para>
-              </listitem>
-            </itemizedlist>and other functions available from the <link
-          endterm="menus.edit.title" linkend="menus.edit"/> menu.</para>
+            <listitem>
+              <para><guilabel>Go To Segment</guilabel> (to jump to the segment
+              under the pointer),</para>
+            </listitem>
 
-          <para>If you have selected text and defined entries in <link
+            <listitem>
+              <para><guilabel>Search Dictionaries</guilabel> (to search for the
+              selected term in an installed dictionary),</para>
+            </listitem>
+
+            <listitem>
+              <para><guilabel>Add Glossary Entry</guilabel> (equivalent to using
+              <link endterm="menus.edit.title" linkend="menus.edit"/><link
+              endterm="menus.edit.create.glossary.entry.title"
+              linkend="menus.edit.create.glossary.entry"/>),</para>
+            </listitem>
+
+          </itemizedlist>
+
+		  <para>and other functions available from the <link
+		  endterm="menus.edit.title" linkend="menus.edit"/> menu.</para>
+
+          <para>If you have selected text and defined entries in the <link
           endterm="dialogs.preferences.external.searches.title"
-          linkend="dialogs.preferences.external.searches"/>, they will also be
-          displayed in the menu.</para>
+          linkend="dialogs.preferences.external.searches"/> preferences, they
+          will also be displayed in the menu (local searches will also be
+          displayed).</para>
         </listitem>
       </varlistentry>
 
@@ -526,56 +603,69 @@ When enabled, all the formatting tags are removed from source segments.</program
         menu</term>
 
         <listitem>
-          <para>Default shortcut: <itemizedlist>
-              <listitem>
-                <para>On Windows and Linux: <keycombo>
-                    <keycap>C</keycap>
+          <para>Default shortcut:</para>
+		  
+		  <itemizedlist>
+			<listitem>
+              <para>On Windows and Linux:
+              <keycombo><keycap>C</keycap><keycap>Space</keycap></keycombo></para>
+			</listitem>
 
-                    <keycap>Space</keycap>
-                  </keycombo></para>
-              </listitem>
-
-              <listitem>
-                <para>On macOS: <keycap>Esc</keycap></para>
-              </listitem>
-            </itemizedlist></para>
-
-          <para>This menu offers the auto-completion options set in <link
+			<listitem>
+              <para>On macOS: <keycap>Esc</keycap></para>
+			</listitem>
+          </itemizedlist>
+		  			
+          <para>This menu offers the auto-completion options set in the <link
           endterm="dialog.preferences.auto.completion.title"
-          linkend="dialog.preferences.auto.completion"/>.</para>
+          linkend="dialog.preferences.auto.completion"/> preferences.</para>
         </listitem>
       </varlistentry>
+
+      <varlistentry id="panes.editor.navigation">
+        <term id="panes.editor.navigation.title">Navigation</term>
+        <listitem>
+		  <para>Use <link linkend="menus.goto" endterm="menus.goto.title"/><link
+		  linkend="menus.goto.notes.pane"
+		  endterm="menus.goto.notes.pane.title"/> to enter the pane and add or
+		  modify a note.</para>
+
+		  <para>Use <link linkend="menus.goto" endterm="menus.goto.title"/><link
+		  linkend="menus.goto.editor.pane"
+		  endterm="menus.goto.editor.pane.title"/> to go back to the
+		  Editor.</para>
+        </listitem>
+	  </varlistentry>
     </variablelist>
   </section>
 
   <section id="panes.fuzzy.matches">
-    <title id="panes.fuzzy.matches.title">Fuzzy Matches</title>
+    <title id="panes.fuzzy.matches.title"><guilabel>Fuzzy Matches</guilabel></title>
 
     <para>The match viewer shows segments from your translation memories that
     are the most similar to the segment you are currently translating.</para>
 
-    <para>Matches are found both in the internal project translation memory
-    that you create in real time as you translate the project, and in external
+    <para>Matches are found both in the internal project translation memory that
+    you create in real time as you translate the project, and in external
     memories you have imported from previous projects or received from third
-    parties. See <link endterm="how.to.use.tm.title" linkend="how.to.use.tm"/>
-    for details.</para>
+    parties. See the <link endterm="how.to.use.tm.title"
+    linkend="how.to.use.tm"/> how-to for details.</para>
 
     <para>When you enter a segment, the first fuzzy match (the one with the
     highest match percentage) is automatically selected. You can press
-    <keycombo>
-        <keycap>C</keycap>
+    <keycombo><keycap>C</keycap><keycap>2, 3, 4, 5</keycap></keycombo> to select
+    a different match or use <link linkend="menus.edit"
+    endterm="menus.edit.title"/><link linkend="menus.edit.select.match"
+    endterm="menus.edit.select.match.title"/>.</para>
 
-        <keycap>2, 3, 4, 5</keycap>
-      </keycombo> to select a different match.</para>
-
-	  <example id="the.first.match">
-		<title id="the.first.match.title">The first match</title>
-		<para>
-		  <programlisting>1. <token>Configuration</token> Folder
+	<example id="the.first.match">
+	  <title id="the.first.match.title">The first match</title>
+	  <para>
+		<programlisting>1. <token>Configuration</token> Folder
 Dossier de configuration
 &lt;50/50/66% &gt;</programlisting>
-		</para>
-	  </example>
+	  </para>
+	</example>
 
     <para>The selected fuzzy match is highlighted in bold, with words missing
     from the segment you are translating shown in blue, and adjacent words
@@ -584,49 +674,52 @@ Dossier de configuration
     <para>The match also displays three percentages.</para>
 
     <para>The three matching percentages have the following meaning, in
-    order:<itemizedlist>
-        <listitem>
-          <para>Percentage calculated with stemming based on the source
-          language tokenizer, and ignoring tags and numbers (generally the
-          highest).</para>
-        </listitem>
+    order:</para>
 
-        <listitem>
-          <para>Percentage calculated without stemming, and still ignoring
-          tags and numbers (generally slightly lower).</para>
-        </listitem>
+	<itemizedlist>
+      <listitem>
+        <para>Percentage calculated with stemming based on the source language
+        tokenizer, and ignoring tags and numbers (generally the highest).</para>
+      </listitem>
 
-        <listitem>
-          <para>Percentage calculated on the entire text, including tags and
-          numbers (generally the lowest).</para>
-        </listitem>
-    </itemizedlist></para>
+      <listitem>
+        <para>Percentage calculated without stemming, and still ignoring tags
+        and numbers (generally slightly lower).</para>
+      </listitem>
 
+      <listitem>
+        <para>Percentage calculated on the entire text, including tags and
+        numbers (generally the lowest).</para>
+      </listitem>
+    </itemizedlist>
+  
     <para>You can change how matches are displayed or sorted. See the <link
     endterm="dialog.preferences.tm.matches.title"
     linkend="dialog.preferences.tm.matches"/> preferences for details.</para>
 
-    <para>Use <link endterm="menus.edit.replace.with.match.or.selection.title"
+    <para>Use <link linkend="menus.edit" endterm="menus.edit.title"/><link
+    endterm="menus.edit.replace.with.match.or.selection.title"
     linkend="menus.edit.replace.with.match.or.selection"/> to replace the
-    translation field with the match, or <link
+    translation field with the match, or <link linkend="menus.edit"
+    endterm="menus.edit.title"/><link
     endterm="menus.edit.insert.match.or.selection.title"
-    linkend="menus.edit.insert.match.or.selection"/> to insert it at the
-    cursor position.</para>
+    linkend="menus.edit.insert.match.or.selection"/> to insert it at the cursor
+    position.</para>
   </section>
 
   <section id="panes.glossary">
-    <title id="panes.glossary.title">Glossary</title>
+    <title id="panes.glossary.title"><guilabel>Glossary</guilabel></title>
 
-    <para>The Glossary pane shows terms from your glossary files that
-    correspond to terms in the current segment. The glossary files are located
-    in the project’s <link endterm="project.folder.glossary.title"
+    <para>The Glossary pane shows terms from your glossary files that correspond
+    to terms in the current segment. The glossary files are located in the
+    project’s <link endterm="project.folder.glossary.title"
     linkend="project.folder.glossary"/> folder.</para>
 
-    <para>The source term is displayed before the “=” sign and the target
-    terms after it. If the entry contains comments, they are numbered and
-    displayed on separate lines below the terms. Terms found in the writable
-    glossary are shown in bold, while those from other glossaries are
-    presented as regular text.</para>
+    <para>The source term is displayed before the “=” sign and the target terms
+    after it. If the entry contains comments, they are numbered and displayed on
+    separate lines below the terms. Terms found in the writable glossary are
+    shown in bold, while those from other glossaries are presented as regular
+    text.</para>
 
 	<example id="glossary.matches">
 	  <title id="glossary.matches.title">Glossary matches</title>
@@ -641,75 +734,80 @@ Folder = <token>Dossier</token></programlisting>
     <para>The glossary file name is shown as a tooltip when hovering over the
     terms.</para>
 
-    <para>Hyperlinks can be present in the comment field of an entry and can be clicked
-    upon for further reference.</para>
-	<para>Links to local files
-    (<filename>file:///PATH/filename</filename>) open in the associated
-    program. Web addresses (<filename>http://...</filename>) open in the
-    default browser.</para>
+    <para>Hyperlinks can be present in the comment field of an entry and can be
+    clicked upon for further reference.</para>
+
+	<para>Links to local files (<filename>file:///PATH/filename</filename>) open
+	in the associated program. Web addresses (<filename>http://...</filename>)
+	open in the default browser.</para>
 
     <para>You can select a term in the glossary pane and right click on it to
     insert it into the translation.</para>
 
-    <para>If you have activated <link
+    <para>Use <link endterm="menus.view.title" linkend="menus.view"/><link
     endterm="menus.view.mark.glossary.matches.title"
-    linkend="menus.view.mark.glossary.matches"/> in the <link
-    endterm="menus.view.title" linkend="menus.view"/> menu, you can
-    right-click on the highlighted word in the source segment to open a pop-up
-    menu listing the translations available in your glossaries. Selecting one
-    will insert it in the segment at the current cursor position.</para>
+    linkend="menus.view.mark.glossary.matches"/> to underline glossary
+    matches.</para>
+
+	<para>You can then right-click on the underlined word in the source segment
+	to open a pop-up menu listing the translations available in your
+	glossaries. Selecting one will insert it in the segment at the current
+	cursor position.</para>
 
     <para>You can use the glossary preferences to fine-tune how the glossaries
-    are displayed. See the <link
-    endterm="dialogs.preferences.glossary.title"
+    are displayed. See the <link endterm="dialogs.preferences.glossary.title"
     linkend="dialogs.preferences.glossary"/> preferences for details.</para>
 
     <para>Modifications to any glossary file in the glossary folder are
-    immediately recognized by OmegaT and displayed in the glossary
-    pane.</para>
+    immediately recognized by OmegaT and displayed in the glossary pane.</para>
 
     <para>OmegaT includes one writable glossary file per project. Use <link
+    endterm="menus.edit.title" linkend="menus.edit"/><link
     endterm="menus.edit.create.glossary.entry.title"
-    linkend="menus.edit.create.glossary.entry"/> in the <link
-    endterm="menus.edit.title" linkend="menus.edit"/> menu to add terms to
-    that file.</para>
+    linkend="menus.edit.create.glossary.entry"/> to add terms to that
+    file.</para>
 
 	<para>See the <link linkend="app.glossaries"
 	endterm="app.glossaries.title"/> appendix for details.</para>
   </section>
 
   <section id="panes.dictionary">
-    <title id="panes.dictionary.title">Dictionary</title>
+    <title id="panes.dictionary.title"><guilabel>Dictionary</guilabel></title>
+
 	<para>The Dictionary pane shows terms from your dictionary files that
 	correspond to terms in the current segment. The dictionary files are located
-	in the project’s <link linkend="project.folder.dictionary" endterm="project.folder.dictionary.title"/> folder. See the <link
-    endterm="dialogs.preferences.dictionary.title"
-    linkend="dialogs.preferences.dictionary"/> preferences for details.</para>
+	in the project’s <link linkend="project.folder.dictionary"
+	endterm="project.folder.dictionary.title"/> folder. See the <link
+	endterm="dialogs.preferences.dictionary.title"
+	linkend="dialogs.preferences.dictionary"/> preferences for details.</para>
   </section>
   
   <section id="panes.machinetranslation">
-    <title id="panes.machinetranslation.title">Machine Translation</title>
+    <title id="panes.machinetranslation.title"><guilabel>Machine
+    Translation</guilabel></title>
 
     <para>The machine translation pane, when opened, contains the suggestions
     produced for the current segment by one or more enabled translation
-    engines. When suggestions from more than one engine are available,
+    engines. When suggestions from more than one engine are available,</para>
+	
     <itemizedlist>
-        <listitem>
-          <para>the name of the engine will appear after the translated
-          text,</para>
-        </listitem>
+      <listitem>
+        <para>the name of the engine will appear after the translated
+        text,</para>
+      </listitem>
 
-        <listitem>
-          <para>the results are sorted in alphabetical order of engine
-          names,</para>
-        </listitem>
+      <listitem>
+        <para>the results are sorted in alphabetical order of engine
+        names,</para>
+      </listitem>
 
-        <listitem>
-          <para>and the currently selected translation is highlighted.</para>
-        </listitem>
-      </itemizedlist></para>
+      <listitem>
+        <para>and the currently selected translation is highlighted.</para>
+      </listitem>
+    </itemizedlist>
 
-    <para>Use <link linkend="menus.edit.replace.with.mt.title"
+    <para>Use <link linkend="menus.edit" endterm="menus.edit.title"/><link
+    linkend="menus.edit.replace.with.mt.title"
     endterm="menus.edit.replace.with.mt.title"/> to replace the translation of
     the current segment with the selected translation engine.</para>
 
@@ -722,55 +820,66 @@ Folder = <token>Dossier</token></programlisting>
 
     <para>Make sure the service is enabled and your credentials are entered
     correctly. If they are, you may need to contact the service provider for
-    assistance. Similarly, an error such as <literal>Unable to parse
-    translation service response</literal> suggests that there may be a
-    communication problem between your system and the provider's
-    server.</para>
+    assistance. Similarly, an error such as <literal>Unable to parse translation
+    service response</literal> suggests that there may be a communication
+    problem between your system and the provider's server.</para>
 
-	<para>See the <link linkend="dialogs.preferences.mt" endterm="dialogs.preferences.mt.title"/> preferences for details.</para>
+	<para>See the <link linkend="dialogs.preferences.mt"
+	endterm="dialogs.preferences.mt.title"/> preferences for details.</para>
   </section>
 
   <section id="panes.multipletranslations">
-    <title id="panes.multipletranslations.title">Multiple Translations</title>
+    <title id="panes.multipletranslations.title"><guilabel>Multiple
+    Translations</guilabel></title>
 
     <para>A source segment that appears in multiple locations in the project may
     require several different translations depending on context.</para>
 
-	<para>If the current
-    translation of the segment is not suitable, you can use the <link
-    endterm="menus.edit.create.alternative.translation.title"
-    linkend="menus.edit.create.alternative.translation"/> command in the <link
-    endterm="menus.edit.title" linkend="menus.edit"/> menu to specify an
-    alternative translation. The entered translation will then be treated as an
-    alternative translation of the source segment.</para>
+	<para>Use <link endterm="menus.edit.title" linkend="menus.edit"/><link
+	endterm="menus.edit.create.alternative.translation.title"
+	linkend="menus.edit.create.alternative.translation"/> to register an
+	alternative translation if the current translation of the segment is not
+	suitable. The entered translation will then be treated as an alternative
+	translation of the source segment.</para>
 
-    <para>You can define one of the alternatives—the most common or likely,
-    for instance—as the default translation with the <link
+    <para>Use <link endterm="menus.edit.title" linkend="menus.edit"/><link
     endterm="menus.edit.use.as.default.translation.title"
-    linkend="menus.edit.use.as.default.translation"/> command.</para>
+    linkend="menus.edit.use.as.default.translation"/> to define one of the
+    alternatives—the most common or likely, for instance—as the default
+    translation.</para>
   </section>
 
   <section id="panes.notes">
-    <title id="panes.notes.title">Notes</title>
+    <title id="panes.notes.title"><guilabel>Notes</guilabel></title>
 
-    <para>The Notes pane is an <emphasis>editable</emphasis> space where you can add notes to the currently active segment.</para>
+    <para>The Notes pane is an <emphasis>editable</emphasis> space where you can
+    add notes to the currently active segment.</para>
 
 	<para>This lets you come back to it later to review the translation, check
-	that alternative translations are correct or, in shared projects, ask colleagues for their
-	opinion, for example.</para>
+	that alternative translations are correct or, in shared projects, ask
+	colleagues for their opinion, for example.</para>
 
-	<para>You can browse through the notes using <link
+	<para>Use <link endterm="menus.goto.title" linkend="menus.goto"/><link
 	endterm="menus.goto.next.note.title" linkend="menus.goto.next.note"/> and
-	<link endterm="menus.goto.previous.note.title"
-		  linkend="menus.goto.previous.note"/>.</para>
+	<link endterm="menus.goto.title" linkend="menus.goto"/><link
+	endterm="menus.goto.previous.note.title"
+	linkend="menus.goto.previous.note"/> to browse through the notes.</para>
 
-	<note><para>The notes are stored in the translation memory of the
-	project. They are <emphasis>not</emphasis> stored in the translated
-	files.</para></note>
+	<para>Use <link linkend="menus.goto" endterm="menus.goto.title"/><link
+	linkend="menus.goto.notes.pane" endterm="menus.goto.notes.pane.title"/> to
+	enter the pane and add or modify a note.</para>
+	<para>Use <link linkend="menus.goto" endterm="menus.goto.title"/><link
+	linkend="menus.goto.editor.pane" endterm="menus.goto.editor.pane.title"/> to
+	go back to the Editor.</para>
+
+	<note>
+	  <para>The notes are stored in the translation memory of the project. They
+	  are <emphasis>not</emphasis> stored in the translated files.</para>
+	</note>
   </section>
 
   <section id="panes.comments">
-    <title id="panes.comments.title">Comments</title>
+    <title id="panes.comments.title"><guilabel>Comments</guilabel></title>
 
     <para>Some file formats, such as the PO format, can provide the translator
     with comments to add context to the translation. Such comments are displayed
@@ -781,30 +890,34 @@ Folder = <token>Dossier</token></programlisting>
       displays information that is included in the file.</para>
 
 	  <para>To write your own comments about a translation, use the <link
-      endterm="panes.notes.title" linkend="panes.notes"/> pane instead.</para>
+	  endterm="panes.notes.title" linkend="panes.notes"/> pane instead.</para>
     </note>
   </section>
 
   <section id="panes.segment.properties">
-    <title id="panes.segment.properties.title">Segment properties</title>
+    <title id="panes.segment.properties.title"><guilabel>Segment
+    properties</guilabel></title>
 
-    <para>All segments have properties. The properties are displayed in this pane.</para>
-	<para>Common properties include:
+    <para>All segments have properties. The properties are displayed in this
+    pane.</para>
+	<para>Common properties include:</para>
+	
 	<variablelist>
 	  <varlistentry>
 		<term>Is duplicate</term>
 		<listitem>
-	  <para>indicates that a segment is a duplicate and specifies whether the segment is the FIRST or not.</para>
+		  <para>indicates that a segment is a duplicate and specifies whether
+		  the segment is the FIRST or not.</para>
 		</listitem>
 	  </varlistentry>
 	  <varlistentry>
 		<term>File</term>
 		<listitem>
-		<para>indicates the file where the segment is stored.</para>
+		  <para>indicates the file where the segment is stored.</para>
 		</listitem>
 	  </varlistentry>
 	</variablelist>
-</para>
+
     <note>
       <para>The Properties pane is <emphasis>not</emphasis> editable. It only
       displays information that is related to the segment.</para>
@@ -812,39 +925,61 @@ Folder = <token>Dossier</token></programlisting>
   </section>
 
   <section id="panes.statusbar">
-    <title id="panes.statusbar.title">Status bar</title>
+    <title id="panes.statusbar.title"><guilabel>Status bar</guilabel></title>
 
     <para>The bottom of the main window is the status bar.</para>
 
-	<para>The left side displays information about actions taken in the project
-	or error messages.</para>
+	<para>The left side of the status bar displays information about actions
+	taken in the project or error messages.</para>
 
 	<example id="panes.statusbar.messages">
       <title id="panes.statusbar.messages.title">Status bar messages examples</title>
 	  <para><literal>Synchronization of repositories</literal></para>
-	  <para>→ OmegaT is opening a team project and synchronizes with the remote repository.</para>
+
+	  <para>→ OmegaT is opening a team project and synchronizes with the remote
+	  repository.</para>
+
 	  <para><literal>Jumping to last edited segment...</literal></para>
+
 	  <para>→ OmegaT opens the last edited segment from the last session.</para>
+
 	  <para><literal>Project autosaved at 10:48 PM</literal></para>
+
 	  <para>→ OmegaT has recently saved the project.</para>
+
 	  <para><literal>Translated files created</literal></para>
+
 	  <para>→ Files were created by the user.</para>
 	</example>
 
-    <para>The right side displays the <link
+    <para>The right side of the status bar indicates whether the cursor is
+    locked withing the segment (see the <link
     endterm="panes.editor.cursor.lock.title"
-    linkend="panes.editor.cursor.lock"/> and the <link linkend="panes.editor.overwriting" endterm="panes.editor.overwriting.title"/> status followed by progress
-    information.</para>
+    linkend="panes.editor.cursor.lock"/> setting), whether the cursor overwrites
+    the existing text (see the <link linkend="panes.editor.overwriting"
+    endterm="panes.editor.overwriting.title"/> setting), and also displays
+    progress information.</para>
 
     <para>Click on the figures to alternate between displaying progress as numbers or
     percentages.</para>
 
-
 	<example id="panes.statusbar.widgets">
-      <title id="panes.statusbar.widgets.title">Status bar progress
-      information</title>
-	  <para><literal>LCK  |  OVR <token>257/271 (12292/154896, 177692)</token><token> 35/0 </token></literal></para>
+      <title id="panes.statusbar.widgets.title">Status bar information</title>
+	  <para><literal>LCK | OVR <token>257/271 (12292/154896,
+	  177692)</token><token> 35/0 </token></literal></para>
+
 	  <variablelist>
+		<varlistentry>
+		  <term>Cursor status</term>
+		  <listitem>
+			<para><literal>LCK</literal> indicates that the cursor is locked
+			inside the segment.</para>
+
+			<para><literal>OVR</literal> indicates that the cursor overwrites
+			the existing text.</para>
+		  </listitem>
+		</varlistentry>
+		
 		<varlistentry>
 		  <term>In the file</term>
 		  <listitem>
@@ -853,6 +988,7 @@ Folder = <token>Dossier</token></programlisting>
 			= total number of segments</para>
 		  </listitem>
 		</varlistentry>
+
 		<varlistentry>
 		  <term>In the project</term>
 		  <listitem>
@@ -863,23 +999,36 @@ Folder = <token>Dossier</token></programlisting>
 			total number of segments</para>
 		  </listitem>
 		</varlistentry>
+
 		<varlistentry>
 		  <term>In the segment</term>
 		  <listitem>
-			<para><emphasis role="bold">35</emphasis> = number of
-			characters in the source / <emphasis
-			role="bold">0</emphasis> = number of characters in the
-			target area so far</para>
+			<para><emphasis role="bold">35</emphasis> = number of characters in
+			the source / <emphasis role="bold">0</emphasis> = number of
+			characters in the target area so far</para>
 		  </listitem>
 		</varlistentry>
 	  </variablelist>
 	</example>
 	
 	<example id="panes.statusbar.widgets.percentage">
-      <title id="panes.statusbar.widgets.percentage.title">Status bar progress
+      <title id="panes.statusbar.widgets.percentage.title">Status bar
       information, percentage mode</title>
-	  <para><literal>LCK  |  OVR <token>94.8% (14 left) / 7.9% (142,604 left), 177,692</token> <token>35/0</token></literal></para>
+	  <para><literal>UNL | INS <token>94.8% (14 left) / 7.9% (142,604 left),
+	  177,692</token> <token>35/0</token></literal></para>
 	  <variablelist>
+		<varlistentry>
+		  <term>Cursor status</term>
+		  <listitem>
+			<para><literal>UNL</literal> indicates that the cursor is not locked
+			inside the segment and can navigate around the editor window with
+			standard navigation commands.</para>
+
+			<para><literal>INS</literal> indicates that the cursor inserts
+			text.</para>
+		  </listitem>
+		</varlistentry>
+
 		<varlistentry>
 		  <term>In the file</term>
 		  <listitem>
@@ -888,6 +1037,7 @@ Folder = <token>Dossier</token></programlisting>
 			= number of untranslated segments</para>
 		  </listitem>
 		</varlistentry>
+
 		<varlistentry>
 		  <term>In the project</term>
 		  <listitem>
@@ -898,6 +1048,7 @@ Folder = <token>Dossier</token></programlisting>
 			total number of segments</para>
 		  </listitem>
 		</varlistentry>
+
 		<varlistentry>
 		  <term>In the segment</term>
 		  <listitem>

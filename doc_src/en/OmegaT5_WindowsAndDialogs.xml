@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<chapter id="windows.and.dialogs">
-  <title id="windows.and.dialogs.title">Windows and Dialogs</title>
-
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+"../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.windows.and.dialogs">
+  <title id="chapter.windows.and.dialogs.title">Windows and Dialogs</title>
   
-  <para>A <emphasis>window</emphasis> can be kept open next to the editor and lets you interact with both.</para>
-  <para>A <emphasis>dialog</emphasis> requires you to take action and close it before you can go back to translating.</para>
+  <para>A <emphasis>window</emphasis> can be kept open next to the editor and
+  lets you interact with both.</para>
+  <para>A <emphasis>dialog</emphasis> requires you to take action and close it
+  before you can go back to translating.</para>
 
   <xi:include href="Dialogs_ProjectProperties.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 

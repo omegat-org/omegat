@@ -1,10 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
-<chapter id="menus">
-  <title id="menus.title">Menus</title>
-  <para>Menus are where you access most of OmegaT's functions. Most of the menu items are associated with a keyboard shortcut.</para>
-  <para>Menu items that do not have a shortcut indicated next to them have no default shortcut assigned by default. See <link linkend="app.shortcuts.customization" endterm="app.shortcuts.customization.title"/> if you want to modify or add shortcuts.</para>
+<chapter id="chapter.menus">
+  <title id="chapter.menus.title">Menus</title>
+
+  	<para>OmegaT looks a bit stern, if not outright unfriendly, to people who
+  	are used to button based interfaces. Buttons are very few in OmegaT. Most of
+  	the action takes place with the help of shortcuts associated to menu
+  	items.</para>
+
+	<para>Shortcuts are ubiquitous in this manual and you should be able very
+	shortly to remember the few that are useful in the course of a standard
+	translation day.</para>
+
+	<para>Menus are where you access most of OmegaT's functions. Most of the
+	menu items are associated with a keyboard shortcut.</para>
+
+	<para>Menu items that do not have a shortcut indicated next to them have no
+	default shortcut assigned by default. See the <link
+	linkend="app.shortcuts.customization"
+	endterm="app.shortcuts.customization.title"/> appendix if you want to modify
+	or add shortcuts.</para>
 
   <note><para>Key shortcut description reminder:
     <table id="menus.shortcut.description">
@@ -51,16 +67,23 @@
 
   <xi:include href="Menus_Project.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
+  
   <xi:include href="Menus_Edit.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
   <xi:include href="Menus_GoTo.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
   <xi:include href="Menus_View.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
   <xi:include href="Menus_Tools.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
   <xi:include href="Menus_Options.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
   <xi:include href="Menus_Help.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
 </chapter>

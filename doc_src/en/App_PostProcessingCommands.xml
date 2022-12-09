@@ -3,24 +3,30 @@
 <section id="post.processing.commands">
   <title id="post.processing.commands.title">Post-Processing Commands</title>
 
-  <para>See <link linkend="dialogs.project.properties.external.processing.command" endterm="dialogs.project.properties.external.processing.command.title"/> for project specific commands.</para>
-  <para>See <link linkend="dialogs.preferences.saving.and.output.external.post-processing.command" endterm="dialogs.preferences.saving.and.output.external.post-processing.command.title"/> for global commands.</para>
+  <para>See the <link
+  linkend="dialogs.project.properties.external.processing.command"
+  endterm="dialogs.project.properties.external.processing.command.title"/>
+  projet property for project specific commands.</para>
+
+  <para>See the <link
+  linkend="dialogs.preferences.saving.and.output.external.post-processing.command"
+  endterm="dialogs.preferences.saving.and.output.external.post-processing.command.title"/>
+  preference for global commands.</para>
 	
 
   <section id="post.processing.commands.template.variables">
     <title id="post.processing.commands.template.variables.title">Template Variables</title>
-    <para>
-      The command is passed to Java runtime exec as a string with the
-      template values expanded. All the arguments should be quoted,
-      e.g. <literal>&quot;${fileName}&quot;</literal>.
-    </para>
-    <para>
-      The following template variables are always available. The other
-      items on the template list are environment variables for your
-      system.
-    </para>
+    <para>The command is passed to Java runtime exec as a string with the
+    template values expanded. All the arguments should be quoted,
+    e.g. <literal>&quot;${fileName}&quot;</literal>.</para>
+
+    <para>The following template variables are always available. The other items
+    on the template list are environment variables for your system.</para>
+	
     <table id="post.processing.commands.template.variables.table">
-      <title id="post.processing.commands.template.variables.table.title">Template Variables</title>
+      <title
+      id="post.processing.commands.template.variables.table.title">Template
+      Variables</title>
       <tgroup cols="2" colsep="1">
         <colspec align="left" colname="1" colnum="1"/>
         <colspec align="left" colname="2" colnum="2"/>
@@ -33,52 +39,71 @@
 
         <tbody>
 		  <row>
-			<entry>${projectName}</entry><entry>The name of the project directory</entry>
+			<entry>${projectName}</entry>
+			<entry>The name of the project directory</entry>
 		  </row>
 		  <row>
-			<entry>${projectRoot}</entry><entry>Full path to the project folder</entry>
+			<entry>${projectRoot}</entry>
+			<entry>Full path to the project folder</entry>
 		  </row>
 		  <row>
-			<entry>${sourceRoot}</entry><entry>Full path to the source folder</entry>
+			<entry>${sourceRoot}</entry>
+			<entry>Full path to the source folder</entry>
 		  </row>
 		  <row>
-			<entry>${targetRoot}</entry><entry>Full path to the target folder</entry>
+			<entry>${targetRoot}</entry>
+			<entry>Full path to the target folder</entry>
 		  </row>
 		  <row>
-			<entry>${glossaryRoot}</entry><entry>Full path to the glossary folder</entry>
+			<entry>${glossaryRoot}</entry>
+			<entry>Full path to the glossary folder</entry>
 		  </row>
 		  <row>
-			<entry>${tmRoot}</entry><entry>Full path to the TM root folder</entry>
+			<entry>${tmRoot}</entry>
+			<entry>Full path to the TM root folder</entry>
 		  </row>
 		  <row>
-			<entry>${tmAutoRoot}</entry><entry>Full path to the TM auto folder</entry>
+			<entry>${tmAutoRoot}</entry>
+			<entry>Full path to the TM auto folder</entry>
 		  </row>
 		  <row>
-			<entry>${dictRoot}</entry><entry>Full path to the dictionary folder</entry>
+			<entry>${dictRoot}</entry>
+			<entry>Full path to the dictionary folder</entry>
 		  </row>
 		  <row>
-			<entry>${tmOtherLangRoot}</entry><entry>TM Root + tmx2source (See <link linkend="how.to.tm.bridge.two.languages" endterm="how.to.tm.bridge.two.languages.title"/> for details.)</entry>
+			<entry>${tmOtherLangRoot}</entry>
+			<entry>TM Root + tmx2source (See the <link
+			linkend="how.to.tm.bridge.two.languages"
+			endterm="how.to.tm.bridge.two.languages.title"/> how-to for
+			details.)</entry>
 		  </row>
 		  <row>
-			<entry>${sourceLang}</entry><entry>Source language</entry>
+			<entry>${sourceLang}</entry>
+			<entry>Source language</entry>
 		  </row>
 		  <row>
-			<entry>${targetLang}</entry><entry>Target language</entry>
+			<entry>${targetLang}</entry>
+			<entry>Target language</entry>
 		  </row>
 		  <row>
-			<entry>${filePath}</entry><entry>Full path to source file</entry>
+			<entry>${filePath}</entry>
+			<entry>Full path to source file</entry>
 		  </row>
 		  <row>
-			<entry>${fileShortPath}</entry><entry>Source file name relative to given root</entry>
+			<entry>${fileShortPath}</entry>
+			<entry>Source file name relative to given root</entry>
 		  </row>
 		  <row>
-			<entry>${fileName}</entry><entry>Full name of source file</entry>
+			<entry>${fileName}</entry>
+			<entry>Full name of source file</entry>
 		  </row>
 		  <row>
-			<entry>${fileNameOnly}</entry><entry>Name of source file without extension</entry>
+			<entry>${fileNameOnly}</entry>
+			<entry>Name of source file without extension</entry>
 		  </row>
 		  <row>
-			<entry>${fileExtension}</entry><entry>Extension of source file without a dot</entry>
+			<entry>${fileExtension}</entry>
+			<entry>Extension of source file without a dot</entry>
 		  </row>
         </tbody>
       </tgroup>
@@ -86,7 +111,8 @@
   </section>
   
   <section id="post.processing.commands.user.defined.scripts">
-    <title id="post.processing.commands.user.defined.scripts.title">User Defined Scripts</title>
+    <title id="post.processing.commands.user.defined.scripts.title">User Defined
+    Scripts</title>
     <para>
       In addition to a regular command, you can call a script. Never run
       post-processing scripts from untrusted sources. For security reasons,
@@ -106,7 +132,8 @@
   </section>
 
   <section id="post.processing.commands.linux.and.macos">
-    <title id="post.processing.commands.linux.and.macos.title">Linux and macOS</title>
+    <title id="post.processing.commands.linux.and.macos.title">Linux and
+    macOS</title>
     <para>
       You should use a shebang, e.g. <literal>#! /bin/bash</literal> or
       <literal>#! /usr/bin/env python3</literal>. And the script must be
@@ -115,23 +142,24 @@
     </para>
   </section>
   
-	<example id="post.processing.commands.example">
-	  <title
-		  id="post.processing.commands.example.title">Simple
-	  example of a post-processing commands:</title>
+  <example id="post.processing.commands.example">
+	  <title id="post.processing.commands.example.title">Simple example of a
+	  post-processing commands:</title>
 	  <variablelist>
 		<varlistentry>
 		  <term>Open the target folder in Linux</term>
 		  <listitem>
 			<programlisting>xdg-open ${targetRoot}</programlisting>
 		  </listitem>
-		</varlistentry>
+		</varlistentry
+		>
 		<varlistentry>
 		  <term>Open the target folder in macOS</term>
 		  <listitem>
 			<programlisting>open ${targetRoot}</programlisting>
 		  </listitem>
 		</varlistentry>
+
 		<varlistentry>
 		  <term>Open the target folder in Windows Powershell</term>
 		  <listitem>

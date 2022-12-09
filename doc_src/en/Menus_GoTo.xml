@@ -2,24 +2,28 @@
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="menus.goto">
-  <title id="menus.goto.title">Go To</title>
+  <title id="menus.goto.title"><guimenu>Go To</guimenu></title>
 
-    <example id="example.next.untranslated.segment"><title id="example.next.untranslated.segment.title">Next Untranslated Segment</title>
-  		<para>In this guide:
-		  <keycombo><keycap>C</keycap><keycap>U</keycap></keycombo>
-		</para>
-		<para>On Windows and Linux:
-		  <keycombo><keycap>Control</keycap><keycap>U</keycap></keycombo>
-		</para>
-		<para>On macOS:
-		  <keycombo><keycap>Command</keycap><keycap>U</keycap></keycombo>
-		</para>
-		</example>
+  <para>This menu gives you access to the segment and panes navigation commands.</para>
+
+  <example id="example.next.untranslated.segment">
+	<title id="example.next.untranslated.segment.title">Shortcut description
+	example</title>
+	<para>On Windows and Linux:
+	<keycombo><keycap>Control</keycap><keycap>U</keycap></keycombo></para>
+
+	<para>On macOS:
+	<keycombo><keycap>Command</keycap><keycap>U</keycap></keycombo></para>
+
+	<para><emphasis role="bold">In this
+	manual:</emphasis><keycombo><keycap>C</keycap><keycap>U</keycap></keycombo></para>
+  </example>
 
   <variablelist>
     <varlistentry id="menus.goto.next.untranslated.segment">
-      <term id="menus.goto.next.untranslated.segment.title">Next Untranslated Segment		  <keycombo><keycap>C</keycap><keycap>U</keycap></keycombo>
-</term>
+      <term id="menus.goto.next.untranslated.segment.title"><guimenuitem>Next
+      Untranslated Segment</guimenuitem>
+      <keycombo><keycap>C</keycap><keycap>U</keycap></keycombo></term>
 
       <listitem>
         <para>Moves to the next segment with no target language entry in the
@@ -28,8 +32,9 @@
     </varlistentry>
 
     <varlistentry id="menus.goto.next.translated.segment">
-      <term id="menus.goto.next.translated.segment.title">Next Translated Segment		  <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>U</keycap></keycombo>
-</term>
+      <term id="menus.goto.next.translated.segment.title"><guimenuitem>Next
+      Translated Segment</guimenuitem>
+      <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>U</keycap></keycombo></term>
 
       <listitem>
         <para>Moves to the next already translated segment, ignoring
@@ -38,75 +43,90 @@
     </varlistentry>
 
     <varlistentry id="menus.goto.next.segment">
-      <term id="menus.goto.next.segment.title">Next Segment		  <keycombo><keycap>C</keycap><keycap>N</keycap></keycombo>
-</term>
+      <term id="menus.goto.next.segment.title"><guimenuitem>Next
+      Segment</guimenuitem>
+      <keycombo><keycap>C</keycap><keycap>N</keycap></keycombo></term>
 
       <listitem>
-		<para>Also:
-		  <keycombo><keycap>Enter</keycap></keycombo>
-		</para>
+		<para>Also: <keycombo><keycap>Enter</keycap></keycombo></para>
+
         <para>Moves to the next segment, or to the first segment of the next
         file if the current segment is the last one in the file.</para>
 
-        <note><para><keycap>TAB</keycap> can be used as an
-        alternate shortcut if <link
-        linkend="dialogs.preferences.general.use.tab.to.advance" endterm="dialogs.preferences.general.use.tab.to.advance.title"/> is selected.</para>
-		<para>This is useful for character entry systems that use
-		<keycap>Enter</keycap> to validate input.</para></note>
+        <note>
+		  <para><keycap>TAB</keycap> can be used as an alternate shortcut if the
+		  <link linkend="dialogs.preferences.general.use.tab.to.advance"
+		  endterm="dialogs.preferences.general.use.tab.to.advance.title"/>
+		  preference is enabled.</para>
+		  
+		  <para>This is useful for character entry systems that use
+		  <keycap>Enter</keycap> to validate input.</para></note>
       </listitem>
     </varlistentry>
 
     <varlistentry id="menus.goto.previous.segment">
-      <term id="menus.goto.previous.segment.title">Previous Segment		  <keycombo><keycap>C</keycap><keycap>P</keycap></keycombo>
-</term>
+      <term id="menus.goto.previous.segment.title"><guimenuitem>Previous
+      Segment</guimenuitem>
+      <keycombo><keycap>C</keycap><keycap>P</keycap></keycombo></term>
       <listitem>
 		<para>Also:
-		  <keycombo><keycap>C</keycap><keycap>Enter</keycap></keycombo>
-		</para>
-        <para>Moves to the previous segment, or to the last segment of the previous
-        file if the current segment is the first one in the file.</para>
-		<para>
-		</para>
+		<keycombo><keycap>C</keycap><keycap>Enter</keycap></keycombo></para>
 
-        <note><para><keycombo><keycap>C</keycap><keycap>TAB</keycap></keycombo>
-        can be used as an alternate shortcut if <link
-        linkend="dialogs.preferences.general.use.tab.to.advance" endterm="dialogs.preferences.general.use.tab.to.advance.title"/> is selected.</para>
-		<para>This is useful for character entry systems that use
-		<keycap>Enter</keycap> to validate input.</para></note>
+        <para>Moves to the previous segment, or to the last segment of the
+        previous file if the current segment is the first one in the
+        file.</para>
+
+        <note>
+		  <para><keycombo><keycap>C</keycap><keycap>TAB</keycap></keycombo> can
+		  be used as an alternate shortcut if the <link
+		  linkend="dialogs.preferences.general.use.tab.to.advance"
+		  endterm="dialogs.preferences.general.use.tab.to.advance.title"/>
+		  preference is enabled.</para>
+		  
+		  <para>This is useful for character entry systems that use
+		  <keycap>Enter</keycap> to validate input.</para>
+		</note>
       </listitem>
     </varlistentry>
 
     <varlistentry id="menus.goto.segment.number">
-      <term id="menus.goto.segment.number.title">Segment number...		  <keycombo><keycap>C</keycap><keycap>J</keycap></keycombo>
-</term>
+      <term id="menus.goto.segment.number.title"><guimenuitem>Segment
+      number...</guimenuitem>
+      <keycombo><keycap>C</keycap><keycap>J</keycap></keycombo></term>
       <listitem>
         <para>Jumps to the segment whose call-out or number is entered.</para>
       </listitem>
     </varlistentry>
 
     <varlistentry id="menus.goto.next.note">
-      <term id="menus.goto.next.note.title">Next Note</term>
+      <term id="menus.goto.next.note.title"><guimenuitem>Next
+      Note</guimenuitem></term>
       <listitem>
-        <para>Moves to the next segment with a note.</para>      </listitem>
+		<para>Moves to the next segment with a note.</para>
+      </listitem>
     </varlistentry>
 
     <varlistentry id="menus.goto.previous.note">
-      <term id="menus.goto.previous.note.title">Previous Note</term>
+      <term id="menus.goto.previous.note.title"><guimenuitem>Previous
+      Note</guimenuitem></term>
       <listitem>
-        <para>Moves to the previous segment with a note.</para>      </listitem>
+		<para>Moves to the previous segment with a note.</para>
+      </listitem>
     </varlistentry>
 
     <varlistentry id="menus.goto.next.unique.segment">
-      <term id="menus.goto.next.unique.segment.title">Next Unique Segment		  <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>K</keycap></keycombo>
-</term>
+      <term id="menus.goto.next.unique.segment.title"><guimenuitem>Next Unique
+      Segment</guimenuitem>
+      <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>K</keycap></keycombo></term>
       <listitem>
         <para>Moves to the next unique segment.</para>
       </listitem>
     </varlistentry>
 
     <varlistentry id="menus.goto.source.of.selected.match">
-      <term id="menus.goto.source.of.selected.match.title">Source of Selected Match		  <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>M</keycap></keycombo>
-</term>
+      <term id="menus.goto.source.of.selected.match.title"><guimenuitem>Source
+      of Selected Match</guimenuitem>
+      <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>M</keycap></keycombo></term>
       <listitem>
         <para>Moves to the segment that corresponds to the currently
         selected match in the <guilabel>Fuzzy matches</guilabel> pane.</para>
@@ -114,22 +134,50 @@
     </varlistentry>
 
     <varlistentry id="menus.goto.forward.in.history">
-      <term id="menus.goto.forward.in.history.title">Forward in History		  <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>N</keycap></keycombo>
-</term>
+      <term id="menus.goto.forward.in.history.title"><guimenuitem>Forward in
+      History</guimenuitem>
+      <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>N</keycap></keycombo></term>
       <listitem>
         <para>OmegaT remembers your segment navigation history.</para>
-        <para>This command allows you to move forward one segment at a time to segments that you have previously visited with <link
-		linkend="menus.goto.back.in.history"
-		endterm="menus.goto.back.in.history.title"/>.</para>
+
+        <para>This command allows you to move forward one segment at a time to
+        segments that you have previously visited with <link
+        linkend="menus.goto"
+        endterm="menus.goto.title"/><link
+        linkend="menus.goto.back.in.history"
+        endterm="menus.goto.back.in.history.title"/>.</para>
       </listitem>
     </varlistentry>
 
     <varlistentry id="menus.goto.back.in.history">
-      <term id="menus.goto.back.in.history.title">Back in History		  <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>P</keycap></keycombo>
-</term>
+      <term id="menus.goto.back.in.history.title"><guimenuitem>Back in
+      History</guimenuitem>
+      <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>P</keycap></keycombo></term>
       <listitem>
         <para>OmegaT remembers your segment navigation history.</para>
-        <para>This command allows you to move backward one segment at a time to segments that you have previously visited.</para>
+        <para>This command allows you to move backward one segment at a time to
+        segments that you have previously visited.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry id="menus.goto.notes.pane">
+      <term id="menus.goto.notes.pane.title"><guimenuitem>Notes Pane</guimenuitem>
+	  <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>N</keycap></keycombo></term>
+      <listitem>
+        <para>Enter the <link linkend="panes.notes"
+        endterm="panes.notes.title"/> pane to write or modify a note associated
+        to the current segment.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry id="menus.goto.editor.pane">
+      <term id="menus.goto.editor.pane.title"><guimenuitem>Editor
+      Pane</guimenuitem>
+      <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>E</keycap></keycombo></term>
+      <listitem>
+        <para>Enter the <link linkend="panes.editor"
+        endterm="panes.editor.title"/> pane to proceed with your
+        translation.</para>
       </listitem>
     </varlistentry>
   </variablelist>

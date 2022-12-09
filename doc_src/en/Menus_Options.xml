@@ -1,97 +1,147 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+"../../../docbook-xml-4.5/docbookx.dtd">
 <section id="menus.options">
-  <title id="menus.options.title">Options</title>
+  <title id="menus.options.title"><guimenu>Options</guimenu></title>
 
+  <para>This menu gives quick access to a few frequently used
+  preferences.</para>
+  
   <variablelist>
     <varlistentry id="menus.options.preferences">
-      <term id="menus.options.preferences.title">Preferences...</term>
+      <term id="menus.options.preferences.title"><guimenuitem>Preferences...</guimenuitem></term>
       <listitem>
-        <para>Opens the <link linkend="dialogs.preferences"
-        endterm="dialogs.preferences.title"/> dialog.</para>
-		<note><para>In macOS, this menu item is found under the
-		<guimenu>OmegaT</guimenu> menu.</para></note>
+        <para>Opens the <link linkend="chapter.dialogs.preferences"
+        endterm="chapter.dialogs.preferences.title"/> dialog.</para>
+
+		<note>
+		  <para>In macOS, this menu item is found under the
+		  <guimenu>OmegaT</guimenu> menu.</para>
+		</note>
       </listitem>
     </varlistentry>
 
     <varlistentry id="menus.options.mt">
-      <term id="menus.options.mt.title">Machine Translation</term>
+      <term id="menus.options.mt.title"><guisubmenu>Machine Translation</guisubmenu></term>
       <listitem>
-        <para>Select <link linkend="dialogs.preferences.mt.automatically.fetch.translations"
-        endterm="dialogs.preferences.mt.automatically.fetch.translations.title"/> to activate it.</para>
+		<itemizedlist>
+		  <listitem>
+			<para><link linkend="dialogs.preferences.mt.automatically.fetch.translations"
+        endterm="dialogs.preferences.mt.automatically.fetch.translations.title"/></para>
+		  </listitem>
+		</itemizedlist>
+
 		<para>Allows you to activate/deactivate the available machine
 		translation engines.</para>
+
         <para>If several translation engines are selected, you can also use
         <keycombo><keycap>C</keycap><keycap>M</keycap></keycombo> to switch
-        between them and insert the last one selected. See <link
+        between them and insert the last one selected. See the <link
         linkend="dialogs.preferences.mt"
-        endterm="dialogs.preferences.mt.title"/> for details.</para>
+        endterm="dialogs.preferences.mt.title"/> preferences for details.</para>
       </listitem>
     </varlistentry>
 
     <varlistentry id="menus.options.glossary">
-      <term id="menus.options.glossary.title">Glossary</term>
+      <term
+      id="menus.options.glossary.title"><guisubmenu>Glossary</guisubmenu></term>
       <listitem>
-        <para>Select <link linkend="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries" endterm="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries.title"/> to activate it.</para>
+		<itemizedlist>
+		  <listitem>
+			<para><link linkend="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries" endterm="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries.title"/></para>
+		  </listitem>
+		</itemizedlist>
+
+        <para>Allows you to activate/deactivate fuzzy matching for glossary
+        maches.</para>
+
+		<para>See the <link linkend="dialogs.preferences.glossary"
+		endterm="dialogs.preferences.glossary.title"/> preferences for
+		details.</para>
       </listitem>
     </varlistentry>
 
     <varlistentry id="menus.options.dictionary">
-      <term id="menus.options.dictionary.title">Dictionary</term>
+      <term
+      id="menus.options.dictionary.title"><guisubmenu>Dictionary</guisubmenu></term>
       <listitem>
-        <para>Select <link linkend="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries" endterm="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries.title"/> to activate it.</para>
+		<itemizedlist>
+		  <listitem>
+			<para><link linkend="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries" endterm="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries.title"/></para>
+		  </listitem>
+		</itemizedlist>
+
+        <para>Allows you to activate/deactivate fuzzy matching for dictionary
+        maches.</para>
+
+		<para>See the <link linkend="dialogs.preferences.dictionary"
+		endterm="dialogs.preferences.dictionary.title"/> preferences for
+		details.</para>
       </listitem>
     </varlistentry>
 
     <varlistentry id="menus.options.autocompletion">
-      <term id="menus.options.autocompletion.title">Auto-Completion</term>
+      <term
+      id="menus.options.autocompletion.title"><guisubmenu>Auto-Completion</guisubmenu></term>
       <listitem>
-      <para>Select the various options to activate them. See <link
-      linkend="dialog.preferences.auto.completion"
-      endterm="dialog.preferences.auto.completion.title"/> for details.</para></listitem>
+		<para>Select the various options to activate/deactivate them. See the
+		<link linkend="dialog.preferences.auto.completion"
+		endterm="dialog.preferences.auto.completion.title"/> preferences for
+		details.</para>
+	  </listitem>
     </varlistentry>
 
     <varlistentry id="menus.options.file.filters">
-      <term id="menus.options.file.filters.title">Global File Filters...</term>
+      <term id="menus.options.file.filters.title"><guimenuitem>Global File
+      Filters...</guimenuitem></term>
       <listitem>
         <para>Opens the <link linkend="dialogs.preferences.file.filters"
-        endterm="dialogs.preferences.file.filters.title"/> global preference
-        dialog.</para>
-        <para>Project-specific settings are accessible with <link
-        linkend="menus.project.properties"
-        endterm="menus.project.properties.title"/>.</para>
+        endterm="dialogs.preferences.file.filters.title"/> preferences.</para>
+
+        <para>Use <link linkend="menus.project"
+        endterm="menus.project.title"/><link linkend="menus.project.properties"
+        endterm="menus.project.properties.title"/> to access the local file
+        filter preferences.</para>
       </listitem>
     </varlistentry>
 
     <varlistentry id="menus.options.segmentation">
-      <term id="menus.options.segmentation.title">Global Segmentation Rules...</term>
+      <term id="menus.options.segmentation.title"><guimenuitem>Global
+      Segmentation Rules...</guimenuitem></term>
       <listitem>
         <para>Opens the <link linkend="dialogs.preferences.segmentation.setup"
-        endterm="dialogs.preferences.segmentation.setup.title"/> global
-        preference dialog.</para>
-        <para>Project-specific settings are accessible with <link
-        linkend="menus.project.properties"
-        endterm="menus.project.properties.title"/>.</para>
+        endterm="dialogs.preferences.segmentation.setup.title"/>
+        preferences.</para>
+
+        <para>Use <link linkend="menus.project"
+        endterm="menus.project.title"/><link linkend="menus.project.properties"
+        endterm="menus.project.properties.title"/> to access the local
+        segmentation rules preferences.</para>
       </listitem>
     </varlistentry>
 
     <varlistentry id="menus.options.editor">
-      <term id="menus.options.editor.title">Editor...</term>
+      <term
+      id="menus.options.editor.title"><guimenuitem>Editor...</guimenuitem></term>
       <listitem>
         <para>Opens the <link linkend="dialogs.preferences.editor"
-        endterm="dialogs.preferences.editor.title"/> global preferences dialog.</para>
+        endterm="dialogs.preferences.editor.title"/> preferences.</para>
       </listitem>
     </varlistentry>
 
     <varlistentry id="menus.options.access.configuration.folder">
-      <term id="menus.options.access.configuration.folder.title">Access
-      Configuration Folder</term>
+      <term
+      id="menus.options.access.configuration.folder.title"><guimenuitem>Access
+      Configuration Folder</guimenuitem></term>
       <listitem>
         <para>Opens the local folder where OmegaT configuration files are
         stored.</para>
-		<note><para>The location depends on the operating system and launch
-		options. See <link linkend="configuration.folder"
-		endterm="configuration.folder.title"/> for details.</para></note>
+
+		<note>
+		  <para>The location depends on the operating system and launch
+		  options. See the <link linkend="configuration.folder"
+		  endterm="configuration.folder.title"/> appendix for details.</para>
+		</note>
       </listitem>
     </varlistentry>
   </variablelist>

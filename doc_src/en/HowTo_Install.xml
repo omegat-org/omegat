@@ -4,8 +4,8 @@
 <!ENTITY % manualvariables SYSTEM "manualvariables.mod">
 %manualvariables;
 ]>
-<section id="installing.omegat">
-  <title id="installing.omegat.title">Install
+<section id="how.to.installing.omegat">
+  <title id="how.to.installing.omegat.title">Install
   OmegaT</title>
 
   <para>OmegaT comes in two editions:</para>
@@ -13,31 +13,42 @@
   <variablelist>
 	<varlistentry>
 	  <term>Standard: OmegaT &vernb;</term>
-	  <listitem><para>This edition is recommended for everyday use.</para></listitem>
+	  <listitem>
+		<para>This edition is recommended for everyday use.</para>
+	  </listitem>
 	</varlistentry>
 	<varlistentry>
 	  <term>Developer: OmegaT Nightly</term>
-	  <listitem><para>This edition is automatically generated every time new
+	  <listitem>
+		<para>This edition is automatically generated every time new
 	  code is added to OmegaT. It is used for testing
-	  purposes.</para></listitem>
+		purposes.</para>
+	  </listitem>
 	</varlistentry>
   </variablelist>
 
   <para>The files are downloadable directly from <ulink
   url="https://omegat.org/download">https://omegat.org</ulink>.</para>
 
-  <note><para>OmegaT &vernb; requires a &javaversionlong; (JRE) to run.</para>
+  <note>
+	<para>OmegaT &vernb; requires a &javaversionlong; (JRE) to run.</para>
 
-  <para>OmegaT packages are available both in versions bundled with Java, and
-  versions without it. Packages without Java rely on a &javaversionlong;
-  installed systemwide.</para>
+	<para>OmegaT packages are available both in versions bundled with Java, and
+	versions without it. Packages without Java rely on a &javaversionlong;
+	installed systemwide.</para>
 
-  <para>OmegaT 5.8.0 and later also support Java 11 Runtime Environment on any
-  platforms.</para>
+	<para>OmegaT 5.8.0 and later can also run with Java 11 Runtime Environment
+	on any platforms.</para>
 
-  <para>Due to licensing considerations, the OmegaT team recommends the Java
-  runtime Eclipse Temurin provided by the &preferedopenjdk;, but any Java 8
-  compatible runtime environment should work.</para></note>
+	<para>Due to licensing considerations, the OmegaT team recommends the Java
+	runtime Eclipse Temurin provided by the &preferedopenjdk;, but any Java 8
+	compatible runtime environment should work. See <ulink
+	url="https://projects.eclipse.org/projects/adoptium.temurin">The Eclipse
+	Temurin™ project</ulink>.</para>
+
+	<para>IBM provides JREs for Linux PowerPC at <ulink
+	url="https://developer.ibm.com/languages/java/semeru-runtimes/downloads/"/>.</para>
+  </note>
 
   <section id="installing.omegat.windows">
     <title id="installing.omegat.windows.title">On Windows</title>
@@ -62,40 +73,39 @@
     folder named after the package you downloaded. That folder contains
     all the files needed to run OmegaT.</para>
 
-    <note><para>Although you can run OmegaT directly from the available
-    files, you can also run the <filename>linux-install.sh</filename>
-    script found there to have OmegaT installed in more appropriate
-    locations.</para>
+    <note>
+	  <para>Although you can run OmegaT directly from the available files, you
+	  can also run the <filename>linux-install.sh</filename> script found there
+	  to have OmegaT installed in more appropriate locations.</para>
 
-    <para>Running the script will require you to enter your
-    <filename>sudo</filename> password.</para>
+      <para>Running the script will require you to enter your
+      <filename>sudo</filename> password.</para>
 
-    <para>The script checks for an existing installation of the same
-    OmegaT version in <filename>/opt/omegat/</filename>. If there isn’t
-    one, it installs the program in
-    <filename>/opt/omegat/OmegaT_&vernb;</filename> and sets it as the
-    default version (in
-    <filename>/opt/omegat/OmegaT-default</filename>).</para></note>
+      <para>The script checks for an existing installation of the same OmegaT
+      version in <filename>/opt/omegat/</filename>. If there isn’t one, it
+      installs the program in <filename>/opt/omegat/OmegaT_&vernb;</filename>
+      and sets it as the default version (in
+      <filename>/opt/omegat/OmegaT-default</filename>).</para>
+	</note>
 
-    <para>After the unpacking or installation is complete, you can
-    delete the downloaded file as it is no longer needed.</para>
+    <para>After the unpacking or installation is complete, you can delete the
+    downloaded file as it is no longer needed.</para>
   </section>
 
   <section id="Installing.omegat.macos">
     <title id="Installing.omegat.macos.title">On macOS</title>
 
-    <para>Double click on the package you downloaded to unpack it.  This
-    creates a folder called <filename>OmegaT</filename>. The folder contains
-    two files: <filename>index.html</filename> (the user guide index) and
+    <para>Double click on the package you downloaded to unpack it.  This creates
+    a folder called <filename>OmegaT</filename>. The folder contains two files:
+    <filename>index.html</filename> (the user manual entry file) and
     <filename>OmegaT.app</filename> (the application). Copy the folder to a
     suitable location (e.g.  <filename>Applications</filename>).</para>
 
     <para>Eventually, drag and drop <filename>OmegaT.app</filename> onto the
     Dock to easily access it.</para>
 
-	<para>Once you have done this, you can delete the downloaded file as it
-    is no longer needed.</para>
-
+	<para>Once you have done this, you can delete the downloaded package as it
+	is no longer needed.</para>
   </section>
 
   <section id="installing.omegat.other.systems">
@@ -109,30 +119,19 @@
     <para>Download the <emphasis>Cross-platform without JRE</emphasis>
     version.</para>
 
-    <note><para>The Eclipse Foundation provides OpenJDK Runtime Environments
-    JREs for many systems at <ulink
-    url="https://adoptium.net/temurin"/>.</para>
+    <para>Unpack the file that you downloaded. This creates a folder with all
+    the files necessary to run OmegaT.</para>
 
-    <para>IBM provides JREs for Linux PowerPC at <ulink
-    url="https://developer.ibm.com/languages/java/semeru-runtimes/downloads/"/>.</para>
-
-    <para>Follow the installation instructions of the package you
-    need.</para></note>
-
-    <para>Unpack the file that you downloaded. This creates a folder with
-    all the files necessary to run OmegaT.</para>
-
-      <para>Follow your system’s instructions to install OmegaT shortcuts in
-      convenient places of your choosing.</para>
+    <para>Follow your system’s instructions to install OmegaT shortcuts in
+    convenient places of your choosing.</para>
   </section>
 
   <section id="update.and.delete.omegat">
 	<title id="update.and.delete.omegat.title">Upgrade</title>
 
-	<para>OmegaT can tell you when a new version is available. See <link
+	<para>OmegaT can tell you when a new version is available. See the <link
 	endterm="dialogs.preferences.updates.title"
-	linkend="dialogs.preferences.updates"/>
-	for details.</para>
+	linkend="dialogs.preferences.updates"/> preference for details.</para>
 
 	<para>The changes between your version and the current version are
 	documented in the development site’s <ulink
@@ -145,10 +144,10 @@
 
 	  <itemizedlist>
 		<listitem>
-		  <para>OmegaT’s preferences are stored in the configuration folder
-		  and will <emphasis>not</emphasis> be modified by the new version.
-		  See <link endterm="configuration.folder.title"
-		  linkend="configuration.folder"/> for details.</para>
+		  <para>OmegaT’s preferences are stored in the configuration folder and
+		  will <emphasis>not</emphasis> be modified by the new version.  See the
+		  <link endterm="configuration.folder.title"
+		  linkend="configuration.folder"/> chapter for details.</para>
 		</listitem>
 
 		<listitem>
@@ -182,31 +181,34 @@
 	<variablelist>
 	  <varlistentry id="update.and.delete.omegat.over.existing.package">
 		<term id="update.and.delete.omegat.over.existing.package.title">Over an existing version</term>
+
 		<listitem>
-	  <para>To do this, simply select the same installation folder as the
-	  existing installation when installing the new version. The “old” version
-	  of OmegaT will be overwritten, but settings made from the OmegaT
-	  interface will be retained in the various configurations folders (see
-	  above).</para>
+		  <para>To do this, simply select the same installation folder as the
+		  existing installation when installing the new version. The “old”
+		  version of OmegaT will be overwritten, but settings made from the
+		  OmegaT interface will be retained in the various configurations
+		  folders (see above).</para>
 		</listitem>
 	  </varlistentry>
 	  
 	<varlistentry id="update.and.delete.omegat.along.existing.package">
 	  <term  id="update.and.delete.omegat.along.existing.package.title">Alongside an existing version</term>
-	  <listitem>
-	  <para>This will enable you to keep any number of versions side-by-side,
-	  which you may wish to do until you feel comfortable with the new
-	  version.</para>
 
-	  <para>All the parameters located in the <link
-	  endterm="configuration.folder.title" linkend="configuration.folder"/> will
+	  <listitem>
+		<para>This will enable you to keep any number of versions side-by-side,
+		which you may wish to do until you feel comfortable with the new
+		version.</para>
+
+	  <para>All the parameters located in the OmegaT configuration folder will
 	  be shared unless you specify a different configuration folder with the
-	  <literal>--config-dir=&lt;path&gt;</literal> option from the <link
+	  <literal>--config-dir=&lt;path&gt;</literal> option on the command
+	  line. See the <link
 	  endterm="launch.with.command.line.omegat.options.title"
-	  linkend="launch.with.command.line.omegat.options"/> on the
-	  command line. All the parameters located in a <link
-	  endterm="project.folder.title" linkend="project.folder"/> will apply to
-	  that project regardless of which version of OmegaT opens it.</para>
+	  linkend="launch.with.command.line.omegat.options"/> section.</para>
+
+	  <para>All the parameters located in a <link
+	  linkend="chapter.project.folder">project folder</link> will apply to that
+	  project regardless of which version of OmegaT opens it.</para>
 	  </listitem>
 	</varlistentry>
 	</variablelist>
@@ -215,9 +217,9 @@
 	<section id="update.and.delete.omegat.delete">
 	  <title id="update.and.delete.omegat.delete.title">Delete OmegaT</title>
 
-	  <para>Use your operating system’s standard procedure to remove OmegaT.
-	  If you want to remove OmegaT completely, you will also have to delete
-	  the configuration folder.</para>
+	  <para>Use your operating system’s standard procedure to remove OmegaT.  If
+	  you want to remove OmegaT completely, you will also have to delete the
+	  configuration folder.</para>
 
 	  <para>If you performed a manual installation on Linux, you will have to
 	  manually delete the OmegaT folders in <filename>opt/</filename>, as well
@@ -228,9 +230,12 @@
   <section id="build.omegat.from.source">
 	<title id="build.omegat.from.source.title">Build OmegaT</title>
 
-	<para>The source code for the current version can be either be downloaded directly from the OmegaT <ulink
-	url="https://omegat.org/download">download page</ulink>, or cloned from the
-	<ulink url="https://git.code.sf.net/p/omegat/code">Sourceforge</ulink> or <ulink url="https://github.com/omegat-org/omegat.git">GitHub</ulink> repositories.</para>
+	<para>The source code for the current version can be either be downloaded
+	directly from the OmegaT <ulink url="https://omegat.org/download">download
+	page</ulink>, or cloned from the <ulink
+	url="https://git.code.sf.net/p/omegat/code">Sourceforge</ulink> or <ulink
+	url="https://github.com/omegat-org/omegat.git">GitHub</ulink>
+	repositories.</para>
 	<para>Once the code is downloaded, open a terminal in the source folder
 	(<filename>omegat-code/</filename> if you cloned from Sourceforge, or
 	<filename>/omegat</filename> if you cloned from GitHub) and type:</para>

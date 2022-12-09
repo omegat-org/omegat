@@ -7,22 +7,25 @@
   <section id="app.shortcuts.description">
     <title id="app.shortcuts.description.title">Description</title>
 
-    <para>The OmegaT interface generally does not rely on buttons to give
-    access to its functions. Instead, they are called from the menus or, for the
+    <para>The OmegaT interface generally does not rely on buttons to give access
+    to its functions. Instead, they are called from the menus or, for the
     majority of functions, from their assigned default shortcut.</para>
   
-    <para>Learning the most frequent shortcuts will not take long once you
-    start working with OmegaT. The shortcuts are indicated next to each menu
-    item, allowing them to learn new shortcuts gradually as you use the software.</para>
+    <para>Learning the most frequent shortcuts will not take long once you start
+    working with OmegaT. The shortcuts are indicated next to each menu item,
+    allowing them to learn new shortcuts gradually as you use the
+    software.</para>
 
-    <para>You can customize the majority of the shortcuts in OmegaT. See <link
-    endterm="app.shortcuts.customization.title"
-    linkend="app.shortcuts.customization"/> for details.</para>
+    <para>You can customize the majority of the shortcuts in OmegaT. See the
+    <link endterm="app.shortcuts.customization.title"
+    linkend="app.shortcuts.customization"/> section for details.</para>
 
     <para>OmegaT runs on any platform that runs a Java Runtime Environment
     (Windows, macOS, and Linux being the most mainstream). The modifier keys
     that form the shortcuts vary slightly depending between platforms. To make
-    reading easier we have adopted the following convention for modifier keys:
+    reading easier we have adopted the following convention for modifier
+    keys:</para>
+	
     <table id="app.shortcut.description">
       <title id="app.shortcut.description.title">Modifier key identifiers</title>
 
@@ -62,138 +65,156 @@
           </row>
         </tbody>
       </tgroup>
-      </table></para>
-      
-      <para>The <emphasis role="bold">Key identifiers</emphasis> above enable us
-      to avoid listing multiple notations for every shortcut.</para>
+    </table>
+        
+    <para>The <emphasis role="bold">Key identifiers</emphasis> above enable us
+    to avoid listing multiple notations for every shortcut.</para>
 
-          <example id="example.avoid.listing.multiple.notations"><title id="example.avoid.listing.multiple.notations.title">How we avoid listing multiple notations:</title>
-		<para>On Windows and Linux:
-		  <keycombo><keycap>Ctrl</keycap><keycap>Shift</keycap><keycap>N</keycap></keycombo>
-		</para>
-		<para>On macOS:
-		  <keycombo><keycap>Shift</keycap><keycap>Command</keycap><keycap>N</keycap></keycombo>
-		</para>
-  		<para>In this guide:
-		  <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>N</keycap></keycombo>
-		</para>
-		</example>
+    <example id="example.avoid.listing.multiple.notations">
+	  <title id="example.avoid.listing.multiple.notations.title">How we avoid
+	  listing multiple notations:</title>
+	  <para>On Windows and Linux:
+	  <keycombo><keycap>Ctrl</keycap><keycap>Shift</keycap><keycap>N</keycap></keycombo></para>
+
+	  <para>On macOS:
+	  <keycombo><keycap>Shift</keycap><keycap>Command</keycap><keycap>N</keycap></keycombo></para>
+
+	  <para>In this manual:
+	  <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>N</keycap></keycombo></para>
+	</example>
   </section>
   
   <section id="app.shortcuts.streamline.workflow">
-    <title id="app.shortcuts.streamline.workflow.title">A shortcut based workflow</title>
+    <title id="app.shortcuts.streamline.workflow.title">A shortcut based
+    workflow</title>
 
     <para>Remembering the main editing and navigation shortcuts (or <link
     linkend="app.shortcuts.customization">modifying them to suit your
     needs</link>) can help you streamline your work.</para>
     <para>This is best illustrated with an example:</para>
 
-      <example id="example.shortcuts.streamline.workflow">
-        <title id="example.shortcuts.streamline.workflow.title">Using shortcuts
-        to streamline the translation process</title>
+    <example id="example.shortcuts.streamline.workflow">
+      <title id="example.shortcuts.streamline.workflow.title">Using shortcuts to
+      streamline the translation process</title>
 
-        <para>Picture a technical translator tasked with translating an updated
-        version of a manual from a previous job.</para>
+      <para>Picture a technical translator tasked with translating an updated
+      version of a manual from a previous job.</para>
         
-        <para>Since the first few pages have not changed, the translator is
-        greeted with a screenful of already translated segments from the
-        previous job's memory upon opening the project.</para>
+      <para>Since the first few pages have not changed, the translator is
+      greeted with a screenful of already translated segments from the previous
+      job's memory upon opening the project.</para>
 
-		<para>Rather than tediously scroll down until she finds the first
-		segment to translate, the translator quickly presses
-		<keycombo><keycap>C</keycap><keycap>U</keycap></keycombo> to <link
-		linkend="menus.goto.next.untranslated.segment">jump straight into the
-		action</link> and start translating. (And doing so again each time she
-		reaches a large unchanged section.)</para>
+	  <para>Rather than tediously scroll down until she finds the first segment
+	  to translate, the translator quickly presses
+	  <keycombo><keycap>C</keycap><keycap>U</keycap></keycombo> to <link
+	  linkend="menus.goto.next.untranslated.segment">jump straight into the
+	  action</link> and start translating. (And doing so again each time she
+	  reaches a large unchanged section.)</para>
 
-        <para>A few segments later, the translator comes across a term she
-        should add to the glossary. Instead of reaching for the mouse, she unlocks the cursor with <link linkend="panes.editor.cursor.lock"><keycap>F2</keycap></link>,
-       uses the cursor keys and standard system shortcuts to navigate to the
-        term and select it, and then presses
-        <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>G</keycap>
-        </keycombo> to <link linkend="menus.edit.create.glossary.entry">call up
-        the glossary entry dialog</link> to enter the source term, and then
-        switches back to the editor and repeats the process to enter the target
-        term.</para>
+      <para>A few segments later, the translator comes across a term she should
+      add to the glossary. Instead of reaching for the mouse, she unlocks the
+      cursor with <link
+      linkend="panes.editor.cursor.lock"><keycap>F2</keycap></link>, uses the
+      cursor keys and standard system shortcuts to navigate to the term and
+      select it, and then presses
+      <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>G</keycap></keycombo>
+      to <link linkend="menus.edit.create.glossary.entry">call up the glossary
+      entry dialog</link> to enter the source term, and then switches back to
+      the editor and repeats the process to enter the target term.</para>
 
-		<para>The translator has enabled the <link
-		linkend="dialog.preferences.auto.completion"
-		endterm="dialog.preferences.auto.completion.title"/> to automatically
-		display not only history predictions, but also glossary terms, and
-		pre-defined short strings, which can be entered with simple arrow
-		navigation.</para>
+	  <para>The translator has enabled the <link
+	  linkend="dialog.preferences.auto.completion">auto-completion</link> to
+	  automatically display not only history predictions, but also glossary
+	  terms, and pre-defined short strings, which can be entered with simple
+	  arrow navigation.</para>
 		
-        <para>The translator then reaches a revised section of the text where
-        the <link linkend="panes.fuzzy.matches"
-        endterm="panes.fuzzy.matches.title"/> pane shows a number of similar
-        segments from the previous job.</para>
+      <para>The translator then reaches a revised section of the text where the
+      <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/>
+      pane shows a number of similar segments from the previous job.</para>
 
-		<para>After quickly tapping
-        <keycombo><keycap>C</keycap><keycap>I</keycap></keycombo> to insert the
-        match, she makes the necessary changes to match the revised text. This
-        continues, with the occasional sequence of
-        <keycombo><keycap>C</keycap><keycap>2</keycap></keycombo> (or other
-        number) followed by
-        <keycombo><keycap>C</keycap><keycap>I</keycap></keycombo> when one of
-        the matches from 2 to 5 is more suitable.</para>
+	  <para>After quickly tapping
+	  <keycombo><keycap>C</keycap><keycap>I</keycap></keycombo> to insert the
+	  match, she makes the necessary changes to match the revised text.</para>
 
-		<para>By the time she gets near the
-        end of the section, she has also used
-        <keycombo><keycap>C</keycap><keycap>R</keycap></keycombo> once or twice
-        to replace already automatically entered fuzzy matches from the previous
-        translation with better matches from earlier in the current
-        section.</para>
+	  <para>This continues, with the occasional sequence of
+	  <keycombo><keycap>C</keycap><keycap>2</keycap></keycombo> (or other
+	  number) followed by
+	  <keycombo><keycap>C</keycap><keycap>I</keycap></keycombo> when one of the
+	  matches from 2 to 5 is more suitable.</para>
 
-        <para>Later on, the translator comes up with a better way to phrase a
-        somewhat thorny expression that had come up earlier, so she
-        selects it in the source text, presses
-        <keycombo><keycap>C</keycap><keycap>F</keycap></keycombo> <link
-        linkend="windows.text.search">to find</link> it, and then uses
-        <keycombo><keycap>C</keycap><keycap>J</keycap></keycombo> to immediately
-        jump to that segment from the search dialog.</para>
+	  <para>Some segments will require modifications later on, so she uses
+	  <keycombo><keycap>A</keycap><keycap>C</keycap><keycap>N</keycap></keycombo>
+	  to enter the Notes pane, leave herself a note and comes back to the Editor
+	  pane with
+	  <keycombo><keycap>A</keycap><keycap>C</keycap><keycap>E</keycap></keycombo>.</para>
+	  
+	  <para>By the time she gets near the end of the section, she has also used
+	  <keycombo><keycap>C</keycap><keycap>R</keycap></keycombo> once or twice to
+	  replace already automatically entered fuzzy matches from the previous
+	  translation with better matches from earlier in the current
+	  section.</para>
 
-		<para>Since OmegaT has registered her navigation history, she only needs
-		to use
-		<keycombo><keycap>C</keycap><keycap>S</keycap><keycap>J</keycap></keycombo>
-		to immediately continue from where she left off.</para>
+      <para>Later on, the translator comes up with a better way to phrase a
+      somewhat thorny expression that had come up earlier, so she selects it in
+      the source text, presses
+      <keycombo><keycap>C</keycap><keycap>F</keycap></keycombo> <link
+      linkend="windows.text.search">to find</link> it, and then uses
+      <keycombo><keycap>C</keycap><keycap>J</keycap></keycombo> to immediately
+      jump to that segment from the search dialog.</para>
 
-        <para>Time for a break. As she savours her coffee, the translator
-        reflects on how much more smoothly she was able to use the various
-        OmegaT functions compared to when she had just gotten started and spent
-        a lot of time clicking through menus.</para>
+	  <para>Since OmegaT has registered her navigation history, she only needs
+	  to use
+	  <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>J</keycap></keycombo>
+	  to immediately continue from where she left off.</para>
+
+	  <para>She now decides to review the annoted segments. She uses
+	  <keycombo><keycap>C</keycap><keycap>F</keycap></keycombo> to find them,
+	  and in the search window uses
+	  <keycombo><keycap>C</keycap><keycap>N</keycap></keycombo> and
+	  <keycombo><keycap>C</keycap><keycap>P</keycap></keycombo> to navigate the
+	  results. OmegaT synchronises the Editor contents with the selected result,
+	  so she can edit the segments right away.</para>
         
-        <para>The smoother workfow, in turn, allowed her to better focus on the
-        translation itself.</para>
+      <para>Time for a break. As she savours her coffee, the translator reflects
+      on how much more smoothly she was able to use the various OmegaT functions
+      compared to when she had just gotten started and spent a lot of time
+      clicking through menus.</para>
+
+      <para>The smoother workfow, in turn, allowed her to better focus on the
+      translation itself.</para>
         
-        <para>At the same time, the translator realized that during her
-        session, she used the menu and cursor keys to select the
-        <link linkend="menus.edit.create.alternative.translation"
-        endterm="menus.edit.create.alternative.translation.title"/> function
-        several times, and decides to <link
-        linkend="example.shortcut.addition">add a new shortcut</link> to
-        streamline that part of the process as well.</para>
-      </example>
+      <para>At the same time, the translator realized that during her session,
+      she used the <link linkend="menus.edit" endterm="menus.edit.title"/><link
+      linkend="menus.edit.create.alternative.translation"
+      endterm="menus.edit.create.alternative.translation.title"/> menu and the
+      cursor keys several times, and decides to <link
+      linkend="example.shortcut.addition">add a new shortcut</link> to
+      streamline that part of the process as well.</para>
+	  
+    </example>
     
     <para>Taking the time to learn the shortcuts for the functions you use often
-    will be well worth your while.</para>    
+    will be well worth your while.</para>
   </section>
 
   <section id="app.shortcuts.customization">
     <title id="app.shortcuts.customization.title">Customization</title>
 
     <para>OmegaT assigns shortcuts to most of the functions available in the
-    <link linkend="menus.project" endterm="menus.project.title"/>,
-    <link linkend="menus.edit" endterm="menus.edit.title"/>, and
-    <link linkend="menus.goto" endterm="menus.goto.title"/> menus and	to a
-    number of functions in the Editor window. You can also add or modify the
-    shortcuts for most of the functions.</para>
-    <para>To do so, you have to put the appropriate shortcut definition file in
-    your OmegaT configuration folder. See <link
-    endterm="configuration.folder.title" linkend="configuration.folder"/> for
-    details.</para>
+    <link linkend="menus.project" endterm="menus.project.title"/>, <link
+    linkend="menus.edit" endterm="menus.edit.title"/>, and <link
+    linkend="menus.goto" endterm="menus.goto.title"/> menus and to a number of
+    functions in the Editor window. You can also add or modify the shortcuts for
+    most of the functions.</para>
+
+	<para>To do so, you have to put the appropriate shortcut definition file in
+	your OmegaT configuration folder. See the <link
+	endterm="configuration.folder.title" linkend="configuration.folder"/>
+	appendix for details.</para>
 
     <para>There are two shortcut definition files.</para>
-    <variablelist>
+
+	<variablelist>
       <varlistentry>
         <term id="MainMenuShortcuts.properties">MainMenuShortcuts.properties</term>
         <listitem>
@@ -201,7 +222,8 @@
           items.</para>
         </listitem>
       </varlistentry>
-      <varlistentry>
+
+	  <varlistentry>
         <term id="EditorShortcuts.properties">EditorShortcuts.properties</term>
         <listitem><para>The shortcut definition file for the editor.</para>
         </listitem>
@@ -213,9 +235,9 @@
 
     <note>
       <para>You can copy the default OmegaT shortcut files from the OmegaT
-      development site on Sourceforge to
-      <link linkend="configuration.folder">your configuration folder</link> and
-      modify them to suit your needs:</para>
+      development site on Sourceforge to <link
+      linkend="configuration.folder">your configuration folder</link> and modify
+      them to suit your needs:</para>
 
       <variablelist>
         <varlistentry>
@@ -226,6 +248,7 @@
                 <para><ulink
                 url="https://github.com/omegat-org/omegat/tree/master/src/org/omegat/gui/main/MainMenuShortcuts.properties">MainMenuShortcuts.properties</ulink></para>
               </listitem>
+
               <listitem>
                 <para><ulink
                 url="https://github.com/omegat-org/omegat/tree/master/src/org/omegat/gui/main/EditorShortcuts.properties">EditorShortcuts.properties</ulink></para>
@@ -233,6 +256,7 @@
             </itemizedlist>
           </listitem>
         </varlistentry>
+		
         <varlistentry><term>macOS default shortcuts</term>
           <listitem>
             <itemizedlist>
@@ -240,6 +264,7 @@
                 <para><ulink
                 url="https://github.com/omegat-org/omegat/tree/master/src/org/omegat/gui/main/MainMenuShortcuts.mac.properties">MainMenuShortcuts.mac.properties</ulink></para>
               </listitem>
+
               <listitem>
                 <para><ulink
                 url="https://github.com/omegat-org/omegat/tree/master/src/org/omegat/gui/main/EditorShortcuts.mac.properties">EditorShortcuts.mac.properties</ulink></para>
@@ -248,28 +273,32 @@
           </listitem>
         </varlistentry>
       </variablelist>
-        <para>The macOS files must be renamed <link linkend="MainMenuShortcuts.properties" endterm="MainMenuShortcuts.properties"/> and
-        <link linkend="EditorShortcuts.properties"
+
+      <para>The macOS files must be renamed <link
+      linkend="MainMenuShortcuts.properties"
+      endterm="MainMenuShortcuts.properties"/> and <link
+      linkend="EditorShortcuts.properties"
       endterm="EditorShortcuts.properties"/> for OmegaT to recognize
       them.</para>
     </note>
-    <para>
-      The next section describes the syntax used in the shortcut definition
-      files, and provides an example modification.
-    </para>
+
+    <para>The next section describes the syntax used in the shortcut definition
+    files, and provides an example modification.</para>
   </section>
 
   <section id="app.shortcuts.syntax">
     <title id="app.shortcuts.syntax.title">Syntax</title>
 
     <para>The basic syntax of the shortcut definitions files is simply:</para>
+
     <para><code>function code=shortcut</code></para>
-    <para>Use the tables in the <link linkend="app.shortcuts.lists"
-    endterm="app.shortcuts.lists.title"/> section below to find the values for
-    <code>function code</code>.</para>
+
+	<para>Use the tables in the <link linkend="app.shortcuts.lists"
+	endterm="app.shortcuts.lists.title"/> section below to find the values for
+	<code>function code</code>.</para>
     
     <para>The <code>shortcut</code> represents the key combination pressed by
-    the user. It takes the following form:
+    the user. It takes the following form:</para>
     
     <itemizedlist>
       <listitem>
@@ -284,22 +313,21 @@
         <para>followed by 1 <code>key</code></para>
       </listitem>
     </itemizedlist>
-    where:</para>
-    
+
     <itemizedlist>
       <listitem>
-        <para><code>modifier</code> can be:
-        <literal>shift</literal>, <literal>ctrl</literal>,
-        <literal>meta</literal>, <literal>alt</literal>, or
-        <literal>altGraph</literal></para>
+        <para>where <code>modifier</code> can be: <literal>shift</literal>,
+        <literal>ctrl</literal>, <literal>meta</literal>,
+        <literal>alt</literal>, or <literal>altGraph</literal></para>
 
         <note>
-          <para><literal>meta</literal> refers to the key with the Windows
-          logo on most keyboards for Windows or Linux systems, and to the
+          <para><literal>meta</literal> refers to the key with the Windows logo
+          on most keyboards for Windows or Linux systems, and to the
           <literal>command</literal> on macOS.</para>
+
           <para><literal>altGraph</literal> refers to the
-          <emphasis>Alt</emphasis> key to the right of the spacebar on
-          keyboards with two <emphasis>Alt</emphasis> keys.</para>
+          <emphasis>Alt</emphasis> key to the right of the spacebar on keyboards
+          with two <emphasis>Alt</emphasis> keys.</para>
         </note>
       </listitem>
 
@@ -311,9 +339,10 @@
       <listitem>
         <para>and <code>key</code> can be any key available on your
         keyboard. You can refer to the <link
-        linkend="app.shortcuts.lists.function.codes.editor.table">table presenting the different
-        editor shortcuts</link> to find the values for keys such as
-        <literal>Home</literal>, <literal>Page Up</literal>, or the arrow keys.</para>
+        linkend="app.shortcuts.lists.function.codes.editor.table">table
+        presenting the different editor shortcuts</link> to find the values for
+        keys such as <literal>Home</literal>, <literal>Page Up</literal>, or the
+        arrow keys.</para>
       </listitem>
     </itemizedlist>
 
@@ -330,32 +359,29 @@
       shortcut</title>
 
       <para>The default shortcut for <link linkend="menus.project.close">closing
-      a project</link> is defined as:
-        <simplelist>
-          <member><code>projectCloseMenuItem=ctrl shift W</code></member>
-        </simplelist>
-      on Windows and Linux, and as
-        <simplelist>
-          <member><code>projectCloseMenuItem=meta shift W</code></member>
-        </simplelist>
-      on macOS.
-      </para>
+      a project</link> is defined on Windows and Linux as:</para>
+
+	  <para><code>projectCloseMenuItem=ctrl shift W</code></para>
+
+      <para>and on macOS as:</para>
+	  
+	  <para><code>projectCloseMenuItem=meta shift W</code></para>
 
       <para>However, you may want to remove the <keycap>S</keycap> key from the
       shortcut to make it only
       <keycombo><keycap>Ctrl</keycap><keycap>W</keycap></keycombo> (or
       <keycombo><keycap>Command</keycap><keycap>W</keycap></keycombo> on macOS)
-      to match the shortcut you use in other applications. To do so, modify the
-      <filename>MainMenuShortcuts.properties</filename> as follows:
-        <simplelist>
-          <member><code>projectCloseMenuItem=ctrl W</code></member>
-        </simplelist>
-      in Windows or Linux, or</para>
-      <para>
-        <simplelist>
-          <member><code>projectCloseMenuItem=meta W</code></member>
-        </simplelist>
-      on macOS.</para>
+      to match the shortcut you use in other applications.</para>
+
+	  <para>To do so, modify the
+	  <filename>MainMenuShortcuts.properties</filename> as follows for Windows
+	  or Linux:</para>
+
+	  <para><code>projectCloseMenuItem=ctrl W</code></para>
+
+	  <para>or as follows for macOS:</para>
+
+      <para><code>projectCloseMenuItem=meta W</code></para>
     </example>
 
     <example id="example.shortcut.addition">
@@ -367,53 +393,56 @@
       since it does not have one by default.</para>
 
       <para>The steps below demonstrate how to assign the
-      <keycombo><keycap>Alt</keycap><keycap>X</keycap></keycombo> shortcut to the
-      <link linkend="menus.edit.create.alternative.translation"
-      endterm="menus.edit.create.alternative.translation.title"/> function.
-        <orderedlist>
-          <listitem>
-            <para>Open the <filename>MainMenuShortcuts.properties</filename> you
-            have copied to <link linkend="configuration.folder">your
-            configuration folder</link> in a text editor.</para>
-          </listitem>
-          <listitem>
-            <para>As shown in the <link
-            linkend="app.shortcuts.lists.function.codes.edit.menu.table">Edit
-            menu table</link> below, the function code for the <guimenuitem>Create Alternative Translation</guimenuitem> function
-            is <code>editMultipleAlternate</code>.</para>
-            <para>Searching for that code in the file will bring you to the
-            following line:
-              <simplelist>
-                <member><code>#	editMultipleAlternate=</code></member>                
-              </simplelist>
-            </para>
-          </listitem>
-          <listitem>
+      <keycombo><keycap>Alt</keycap><keycap>X</keycap></keycombo> shortcut to
+      the <link linkend="menus.edit" endterm="menus.edit.title"/><link
+      linkend="menus.edit.create.alternative.translation"
+      endterm="menus.edit.create.alternative.translation.title"/> menu item.</para>
+	  
+      <orderedlist>
+        <listitem>
+          <para>Open the <filename>MainMenuShortcuts.properties</filename> you
+          have copied to <link linkend="configuration.folder">your configuration
+          folder</link> in a text editor.</para>
+        </listitem>
+
+		<listitem>
+          <para>As shown in the <link
+          linkend="app.shortcuts.lists.function.codes.edit.menu.table">Edit menu
+          table</link> below, the function code for the <guimenuitem>Create
+          Alternative Translation</guimenuitem> function is
+          <code>editMultipleAlternate</code>.</para>
+
+          <para>Searching for that code in the file will bring you to the
+          following line:</para>
+		  
+          <para><code>#	editMultipleAlternate=</code></para>
+        </listitem>
+
+		<listitem>
             <para>The line is currently a comment. Delete the <code>#</code> at
             the beginning of the line so OmegaT will recognize the shortcut, and
             add <option>alt X</option> after the <code>=</code> sign at the end
-            of the line:
-              <simplelist>
-                <member><code>editMultipleAlternate=alt X</code></member>
-              </simplelist>
-            </para>
-          </listitem>
-          <listitem>
+            of the line:</para>
+			
+            <para><code>editMultipleAlternate=alt X</code></para>
+        </listitem>
+
+		<listitem>
             <para>Save and close the file. The next time you start OmegaT, your
             new shortcut should be active and displayed next to the name of the
             function in the menu.</para>
           </listitem>
         </orderedlist>
-      </para>
     </example>
 
     <para>Save the file after you have finished making your changes. If OmegaT
     is open, you will have to restart it for your changes to take effect.</para>
     <para>Your modified or added shortcuts should now be displayed next to the
     menu items you have changed. They will now be available in OmegaT as long as
-    there are no conflicts with other functions or with system-wide shortcuts.</para>
+    there are no conflicts with other functions or with system-wide
+    shortcuts.</para>
 
-    <para>The next section presents tables with the function codes and 
+    <para>The next section presents tables with the function codes and
     corresponding default shortcut for each menu or editor function in
     OmegaT.</para>
   </section>
@@ -433,7 +462,9 @@
       <filename>EditorShortcuts.properties</filename>.</para>
 
       <table id="app.shortcuts.lists.function.codes.project.menu.table">
-        <title id="app.shortcuts.lists.function.codes.project.menu.table.title">Project Menu</title>
+        <title
+        id="app.shortcuts.lists.function.codes.project.menu.table.title">Project
+        Menu</title>
 
         <tgroup cols="4" colsep="1">
           <colspec align="left" colname="1" colnum="1"/>
@@ -609,7 +640,9 @@
       </table>
 
       <table id="app.shortcuts.lists.function.codes.edit.menu.table">
-        <title id="app.shortcuts.lists.function.codes.edit.menu.table.title">Edit Menu</title>
+        <title
+        id="app.shortcuts.lists.function.codes.edit.menu.table.title">Edit
+        Menu</title>
 
         <tgroup cols="4" colsep="1">
           <colspec align="left" colname="1" colnum="1"/>
@@ -866,7 +899,9 @@
       </table>
 
       <table id="app.shortcuts.lists.function.codes.goto.menu.table">
-        <title id="app.shortcuts.lists.function.codes.goto.menu.table.title">GoTo Menu</title>
+        <title
+        id="app.shortcuts.lists.function.codes.goto.menu.table.title">GoTo
+        Menu</title>
 
         <tgroup cols="4" colsep="1">
           <colspec align="left" colname="1" colnum="1"/>
@@ -956,12 +991,29 @@
               <entry>ctrl shift P</entry>
               <entry>meta shift P</entry>
             </row>
+
+            <row>
+              <entry>Notes Pane</entry>
+              <entry>gotoNotesPanelMenuItem</entry>
+              <entry>ctrl alt N</entry>
+              <entry>meta alt N</entry>
+            </row>
+
+            <row>
+              <entry>Editor Pane</entry>
+              <entry>gotoEditorPanelMenuItem</entry>
+              <entry>ctrl alt E</entry>
+              <entry>meta alt E</entry>
+            </row>
+
           </tbody>
         </tgroup>
       </table>
 
       <table id="app.shortcuts.lists.function.codes.view.menu.table">
-        <title id="app.shortcuts.lists.function.codes.view.menu.table.title">View Menu</title>
+        <title
+        id="app.shortcuts.lists.function.codes.view.menu.table.title">View
+        Menu</title>
 
         <tgroup cols="4" colsep="1">
           <colspec align="left" colname="1" colnum="1"/>
@@ -1063,7 +1115,9 @@
       </table>
 
       <table id="app.shortcuts.lists.function.codes.tools.menu.table">
-        <title id="app.shortcuts.lists.function.codes.tools.menu.table.title">Tools Menu</title>
+        <title
+        id="app.shortcuts.lists.function.codes.tools.menu.table.title">Tools
+        Menu</title>
 
         <tgroup cols="4" colsep="1">
           <colspec align="left" colname="1" colnum="1"/>
@@ -1121,6 +1175,7 @@
         endterm="windows.scripts.title"/> item in the <link
         linkend="menus.tools" endterm="menus.tools.title"/> menu is an
         exception.</para>
+
         <para>It is not possible to add a shortcut to call the script editor, or
         to modify the shortcuts assigned to the scripts.</para>
       </note>
@@ -1205,7 +1260,9 @@
       </table>
 
       <table id="app.shortcuts.lists.function.codes.help.menu.table">
-        <title id="app.shortcuts.lists.function.codes.help.menu.table.title">Help Menu</title>
+        <title
+        id="app.shortcuts.lists.function.codes.help.menu.table.title">Help
+        Menu</title>
 
         <tgroup cols="4" colsep="1">
           <colspec align="left" colname="1" colnum="1"/>
@@ -1224,7 +1281,7 @@
 
           <tbody>
             <row>
-              <entry>User Guide...</entry>
+              <entry>User Manual...</entry>
               <entry>helpContentsMenuItem</entry>
               <entry namest="3" nameend="4">F1</entry>
             </row>
@@ -1253,7 +1310,9 @@
       </table>
       
       <table id="app.shortcuts.lists.function.codes.search.window.table">
-        <title id="app.shortcuts.lists.function.codes.search.window.table.title">Search Window</title>
+        <title
+        id="app.shortcuts.lists.function.codes.search.window.table.title">Search
+        Window</title>
 
         <tgroup cols="4" colsep="1">
           <colspec align="left" colname="1" colnum="1"/>
@@ -1433,7 +1492,8 @@
       </table>
 
       <table id="app.shortcuts.lists.function.codes.autocompleter.table">
-        <title id="app.shortcuts.lists.function.codes.autocompleter.table.title">Autocompleter</title>
+        <title
+        id="app.shortcuts.lists.function.codes.autocompleter.table.title">Autocompleter</title>
 
         <tgroup cols="4" colsep="1">
           <colspec align="left" colname="1" colnum="1"/>

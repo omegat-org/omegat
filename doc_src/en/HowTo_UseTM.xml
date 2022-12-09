@@ -5,8 +5,8 @@
   <title id="how.to.use.tm.title">Use translation memories</title>
 
   <para>When a project is initially created, it comes with its own empty project
-  translation memory, <link linkend="project.folder.project.save.tmx.title"
-  endterm="project.folder.project.save.tmx.title"/>, located in the <link
+  translation memory, the <link linkend="project.folder.project.save.tmx.title"
+  endterm="project.folder.project.save.tmx.title"/> file, located in the <link
   linkend="project.folder.omegat" endterm="project.folder.omegat.title"/>
   folder. This memory is gradually filled as your translation progresses.</para>
 
@@ -16,18 +16,17 @@
 	<itemizedlist>
 	  <listitem>
 		<para>If a given sentence has already been translated once, there is no
-		need to retranslate it. See <link
+		need to retranslate it. See the <link
 		linkend="dialogs.project.properties.auto.propagation"
-		endterm="dialogs.project.properties.auto.propagation.title"/> in the
-		<link linkend="dialogs.project.properties"
-		endterm="dialogs.project.properties.title"/> dialog.</para>
+		endterm="dialogs.project.properties.auto.propagation.title"/> project
+		property.</para>
 	  </listitem>
 
 	  <listitem>
-		<para>If an old translation is similar to the contents of the segment you
-		are translating, you can recycle it in your translation. See <link
-		linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/> for
-		details.</para>
+		<para>If an old translation is similar to the contents of the segment
+		you are translating, you can recycle it in your translation. See the
+		<link linkend="panes.fuzzy.matches"
+		endterm="panes.fuzzy.matches.title"/> pane for details.</para>
 	  </listitem>
 
 	  <listitem>
@@ -40,21 +39,25 @@
   <section id="how.to.use.tm.create.your.tm">
 	<title id="how.to.use.tm.create.your.tm.title">Create your own TMs</title>
 	
-	<para>When you use <link linkend="menus.project.create.translated.documents"
+	<para>When you use <link linkend="menus.project"
+	endterm="menus.project.title"/><link
+	linkend="menus.project.create.translated.documents"
 	endterm="menus.project.create.translated.documents.title"/> to create the
 	target documents for a project, OmegaT also outputs three translation
 	memories that reflect the current state of the translation for the files in
-	the source folder (see <link
+	the source folder. See the <link
 	linkend="dialogs.project.properties.file.locations.exported.tms"
-	endterm="dialogs.project.properties.file.locations.exported.tms.title"/>).</para>
+	endterm="dialogs.project.properties.file.locations.exported.tms.title"/>
+	project property for details.</para>
 
 	<para>Each of the three files constitutes a bilingual export of the current
-	content of your translation. Their content comes from the global project memory
-	(<link linkend="project.folder.project.save.tmx"
+	content of your translation. Their content comes from the global project
+	memory (<link linkend="project.folder.project.save.tmx"
 	endterm="project.folder.project.save.tmx.title"/>) but is <emphasis>strictly
 	limited</emphasis> to what you have translated so far.</para>
 
-	<para>You can also use the <link linkend="menus.tools.align.files"
+	<para>You can also use the <link linkend="menus.tools"
+	endterm="menus.tools.title"/><link linkend="menus.tools.align.files"
 	endterm="menus.tools.align.files.title"/> tool to create a TMX from two
 	files in a format that OmegaT supports.</para>
   </section>
@@ -63,107 +66,127 @@
 	<title id="how.to.use.tm.reuse.tm.title">Reuse TMs</title>
 	
 	<para>To reuse translation memories from a previous project you have 2
-	options:
+	options:</para>
 
 	<itemizedlist>
 	  <listitem>
 		<para>Open the old project and put the new source files in its <link
 		linkend="project.folder.source" endterm="project.folder.source.title"/>
 		folder.</para>
-		<para>After reloading the old project, all its translation memory will be
-		applied to the new source files.</para>
-		<note><para>That’s the easiest way to work on the new version of an
-		already translated document.</para></note>
+		
+		<para>After reloading the old project, all its translation memory will
+		be applied to the new source files.</para>
+
+		<note>
+		  <para>That’s the easiest way to work on the new version of an already
+		  translated document.</para>
+		</note>
 	  </listitem>
 	  
 	  <listitem>
 		<para>Put the reference memories that you took from the old project and
 		put them in the <link linkend="project.folder.tm"
 		endterm="project.folder.tm.title"/> folder of the new project. Depending
-		on how reliable the memory is, you can prefer <link
-		linkend="project.folder.tm.enforce"
-		endterm="project.folder.tm.enforce.title"/>, <link
-		linkend="project.folder.tm.auto"
-		endterm="project.folder.tm.auto.title"/>, <link
-		linkend="project.folder.tm.penalty"
-		endterm="project.folder.tm.penalty.title"/>, or even <link
-		linkend="project.folder.tm.mt" endterm="project.folder.tm.mt.title"/> if
-		it comes from machine translation.</para>
-		<note><para>That’s the preferred method if you want to start your
-		translation from scratch.</para></note>
+		on how reliable the memory is, you can prefer to put it in either of the
+		following subfolder:</para>
+
+		<itemizedlist>
+		  <listitem>
+			<para><link linkend="project.folder.tm.enforce"
+			endterm="project.folder.tm.enforce.title"/>,</para>
+		  </listitem>
+		  <listitem>
+			<para><link linkend="project.folder.tm.auto"
+			endterm="project.folder.tm.auto.title"/>,</para>
+		  </listitem>
+		  <listitem>
+			<para><link linkend="project.folder.tm.penalty"
+			endterm="project.folder.tm.penalty.title"/>,</para>
+		  </listitem>
+		</itemizedlist>
+		
+		<note>
+		  <para>That’s the preferred method if you want to start your
+		  translation from scratch.</para>
+		</note>
 	  </listitem>
 	</itemizedlist>
 	
-  </para>
-
     <section id="how.to.tm.read.and.write">
-    <title id="how.to.tm.read.and.write.title">Reading TMs  from other tools</title>
+      <title id="how.to.tm.read.and.write.title">Reading TMs from other
+      tools</title>
 
-    <para>OmegaT can read conformant TMX memories produced by other
-    tools.</para>
+      <para>OmegaT can read conformant TMX memories produced by other
+      tools.</para>
 
-    <para>Some tools produce invalid TMX files under certain conditions. You
-    will have to fix them if you want to use them as reference memories,
-    otherwise OmegaT will report an error and fail to load them. Fixes are
-    generally simple, and the error message provided by OmegaT will help you
-    pinpoint the error. You can also ask the user group for advice if you have
-    problems.</para>
-  </section>
+      <para>Some tools produce invalid TMX files under certain conditions. You
+      will have to fix them if you want to use them as reference memories,
+      otherwise OmegaT will report an error and fail to load them. Fixes are
+      generally simple, and the error message provided by OmegaT will help you
+      pinpoint the error. You can also ask the user group for advice if you have
+      problems.</para>
+	</section>
 
-  <section id="how.to.use.tm.store.your.tm">
-	<title id="how.to.use.tm.store.your.tm.title">Managing your TMs</title>
+	<section id="how.to.use.tm.store.your.tm">
+	  <title id="how.to.use.tm.store.your.tm.title">Managing your TMs</title>
 
-	<para>You may want to store translation memories in separate folders, by
-	client or by specialty so as to be able to reuse them quickly when need
-	arises. In which case you will just need to use the appropriate folder as
-	the
-  <link linkend="dialogs.project.properties.file.locations.translation.memories"
-  endterm="dialogs.project.properties.file.locations.translation.memories.title"/>
-  of your project.</para>
-  </section>
+	  <para>You may want to store translation memories in separate folders, by
+	  client or by specialty so as to be able to reuse them quickly when need
+	  arises. Any storage folder can be used in replacement of the project <link
+	  linkend="project.folder.tm" endterm="project.folder.tm.title"/>
+	  folder. See the <link linkend="dialogs.project.properties.file.locations"
+	  endterm="dialogs.project.properties.file.locations.title"/> section of the
+	  project property dialog.</para>
+	</section>
   
-  <section id="how.to.tm.creating.a.tm.for.selected.documents">
-    <title
-    id="how.to.tm.creating.a.tm.for.selected.documents.title">Creating a
-    TM specific to selected documents</title>
+	<section id="how.to.tm.creating.a.tm.for.selected.documents">
+      <title id="how.to.tm.creating.a.tm.for.selected.documents.title">Creating
+      a TM specific to selected documents</title>
 
-    <para>In situations where you need to share a TMX that contain only the text
-    from certain specific files and excludes other content, follow the procedure
-    below:</para>
+      <para>In situations where you need to share a TMX that contain only the
+      text from certain specific files and excludes other content, follow the
+      procedure below:</para>
 
-    <itemizedlist>
-      <listitem>
-        <para>Copy the documents for which you want to create a translation
-        memory into the <filename class="directory">source</filename> folder of
-        your project.</para>
-      </listitem>
- 
-      <listitem>
-        <para>Open the project.</para>
-	  </listitem>
+      <itemizedlist>
+		<listitem>
+          <para>Copy the documents for which you want to create a translation
+          memory into the <filename class="directory">source</filename> folder
+          of your project.</para>
+		</listitem>
+		
+		<listitem>
+          <para>Open the project.</para>
+		</listitem>
 
-	  <listitem>
-		<para>Use <link linkend="menus.goto.next.untranslated.segment" endterm="menus.goto.next.untranslated.segment.title"/> to
-		find any untranslated segments (and eventually translate them),</para>
-	  </listitem>
+		<listitem>
+		  <para>Use <link linkend="menus.goto" endterm="menus.goto.title"/><link
+		  linkend="menus.goto.next.untranslated.segment"
+		  endterm="menus.goto.next.untranslated.segment.title"/> to find any
+		  untranslated segments (and eventually translate them),</para>
+		</listitem>
 
-	  <listitem>
-		<para>Use <link linkend="menus.tools.check.issues" endterm="menus.tools.check.issues.title"/> to check for
-        possible issues,</para>
-	  </listitem>
+		<listitem>
+		  <para>Use <link linkend="menus.tools"
+		  endterm="menus.tools.title"/><link linkend="menus.tools.check.issues"
+		  endterm="menus.tools.check.issues.title"/> to check for possible
+		  issues,</para>
+		</listitem>
 
-	  <listitem>
-		<para>Use <link linkend="menus.project.create.translated.documents" endterm="menus.project.create.translated.documents.title"/> to create
-        the TMX files that correspond to the current contents.</para>
-      </listitem>
-    </itemizedlist>
+		<listitem>
+		  <para>Use <link linkend="menus.project"
+		  endterm="menus.project.title"/><link
+		  linkend="menus.project.create.translated.documents"
+		  endterm="menus.project.create.translated.documents.title"/> to create
+		  the TMX files that correspond to the current contents.</para>
+		</listitem>
+      </itemizedlist>
 
-    <para>The TMX files located in the <link
-    linkend="dialogs.project.properties.file.locations.exported.tms"
-    endterm="dialogs.project.properties.file.locations.exported.tms.title"/>
-    folder now contain only the original and translated text, in the selected
-    language pair, of the files you copied into the source folder.</para>
-
+      <para>The TMX files located in the exported translation memory folder now
+      contain only the original and translated text, in the selected language
+      pair, of the files you copied into the source folder. See the <link
+      linkend="dialogs.project.properties.file.locations.exported.tms"
+      endterm="dialogs.project.properties.file.locations.exported.tms.title"/>
+      project property for details.</para>
   </section>
 </section>
 
@@ -171,79 +194,90 @@
   <title id="how.to.tm.share.translation.memories.title">Share TMs</title>
 
   <para>For large jobs involving a team of translators, it is easier for
-  everyone involved in sharing common translation memories rather than pass local
-  versions back and forth.</para>
+  everyone involved in sharing common translation memories rather than pass
+  local versions back and forth.</para>
 
-  <para>There are two ways to share translation memories:
+  <para>There are two ways to share translation memories:</para>
 
   <variablelist>
 	<varlistentry>
 	  <term>The good enough way</term>
 	  <listitem>
-		<para>See <link linkend="how.to.use.tm.create.your.tm" endterm="how.to.use.tm.create.your.tm.title"/> above.</para>
+		
+		<para>See the <link linkend="how.to.use.tm.create.your.tm"
+		endterm="how.to.use.tm.create.your.tm.title"/> section above.</para>
 
 		<para>If you write the TMX file to a folder on a shared disk, you can
-		ask your partner to use that folder as the <link
+		ask your partner to use that folder in replacement of the <link
 		linkend="project.folder.tm" endterm="project.folder.tm.title"/> folder
 		for the current translation.</para>
 
 		<para>Conversely, you can ask your partner to write the project TMX
-		files to a folder on a shared disk that you will use as your <link
-		linkend="project.folder.tm" endterm="project.folder.tm.title"/> folder
-		for the current translation.</para>
+		files to a folder on a shared disk that you will use in replacement of
+		your <link linkend="project.folder.tm"
+		endterm="project.folder.tm.title"/> folder for the current
+		translation.</para>
 
 		<para>OmegaT instantaneously notices modifications to TMX files.
-		Therefore, any time one side creates or modifies such a TMX using
-		<link linkend="menus.project.create.translated.documents"
+		Therefore, any time one side creates or modifies such a TMX using <link
+		linkend="menus.project"
+		endterm="menus.project.title"/><link
+		linkend="menus.project.create.translated.documents"
 		endterm="menus.project.create.translated.documents.title"/>, the other
-		side does not need to do anything to have that TMX recognized locally.</para>
+		side does not need to do anything to have that TMX recognized
+		locally.</para>
 
 		<para>This approach also works just as well for sharing glossaries where
-		the <link
-		linkend="dialogs.project.properties.file.locations.writable.glossary"
-		endterm="dialogs.project.properties.file.locations.writable.glossary.title"/>,
-		named appropriately to prevent overwriting, is located in the <link
-		linkend="dialogs.project.properties.file.locations.glossaries"
-		endterm="dialogs.project.properties.file.locations.glossaries.title"/>
-		that the partner will use only as reference, and vice-versa.</para>
+		the project writable glossary (with a non-default name to avoir
+		overwriting) is located in a common glossary folder. See the <link
+		linkend="app.glossaries" endterm="app.glossaries.title"/> appendix for
+		details.</para>
 
-		<note><para>Such sharing works well when the lag between TMX updates is
-		not important, for example, a translator sends data to a reviewer a few
-		times a day.</para></note>
+		<note>
+		  <para>Such sharing works well when the lag between TMX updates is not
+		  important, for example, a translator sends data to a reviewer a few
+		  times a day.</para>
+		</note>
 	  </listitem>
 	</varlistentry>
-  
+	
 	<varlistentry>
 	  <term>The technical approach</term>
 	  <listitem>
-		<para>OmegaT uses collaborative version control systems to share data.</para>
+		<para>OmegaT uses collaborative version control systems to share
+		data.</para>
+
 		<para>Such systems are free to use, install and manage and are widely
 		used in the computer development world, making them extremely
 		robust.</para>
-		<para>See <link linkend="how.to.setup.team.project"
-		endterm="how.to.setup.team.project.title"/> for details.</para>
+
+		<para>See the <link linkend="how.to.setup.team.project"
+		endterm="how.to.setup.team.project.title"/> how-to for details.</para>
 	  </listitem>
 	</varlistentry>
   </variablelist>
-  </para>
 </section>
 
 <section id="how.to.tm.bridge.two.languages">
-  <title id="how.to.tm.bridge.two.languages.title">Bridge two
-  languages</title>
+  <title id="how.to.tm.bridge.two.languages.title">Bridge two languages</title>
 
   <para>OmegaT displays fuzzy matches in the <link linkend="panes.fuzzy.matches"
   endterm="panes.fuzzy.matches.title"/> pane. Such matches are by default
-  limited to the source and target languages defined in <link
+  limited to the source and target languages defined in the <link
   linkend="dialogs.project.properties"
-  endterm="dialogs.project.properties.title"/>, but you can also add matches in languages that are not the target language. See <link linkend="dialog.preferences.tm.matches.other.languages" endterm="dialog.preferences.tm.matches.other.languages.title"/> for details.</para>
+  endterm="dialogs.project.properties.title"/> dialog, but you can also add
+  matches in languages that are not the target language. See the <link
+  linkend="dialog.preferences.tm.matches.other.languages"
+  endterm="dialog.preferences.tm.matches.other.languages.title"/> preference for
+  details.</para>
 
   <para>With OmegaT, you can also display a third language <emphasis>right
   under</emphasis> the source segment to use as an alternative language
   reference for the source text.</para>
 
   <example id="bridge.english.and.french.with.japanese">
-	<title id="replace.with.allemand.title">Bridge English and French with Japanese</title>
+	<title id="replace.with.allemand.title">Bridge English and French with
+	Japanese</title>
 	<para>
 	  <programlisting>— ¶ —————————————————————
 <token>A whitespace character: [ \t\n\x0B\f\r]
@@ -251,20 +285,23 @@ fr-ZB: Un caractère d'espacement (espace, tabulation, etc.) :  [ \t\n\x0B\f\r
 ja-RV: 空白文字：[ \t\n\x0B\f\r]</token>
 Un caractère d'espacement : [ \t\n\r\f\x0B]<token>&lt;segment 3075 ¶></token>
 — ¶ —————————————————————</programlisting></para>
-<para>The first line is the original English, the second an old French version, the third the Japanese version, and the 4th the current translation to French.</para>	
+<para>The first line is the original English, the second an old French version
+with an arbitrary language code, the third the Japanese version with an equally
+arbitrary language code, and the 4th the current translation to French.</para>
   </example>
   
-    <para>To achieve this:
+    <para>To achieve this:</para>
 
 	<orderedlist>
 	  <listitem>
 		<para>create a folder called <filename
-		class="directory">tmx2source</filename> in the <link linkend="project.folder.tm" endterm="project.folder.tm.title"/> folder,</para>
+		class="directory">tmx2source</filename> in the <link
+		linkend="project.folder.tm" endterm="project.folder.tm.title"/>
+		folder,</para>
 	  </listitem>
 
 	  <listitem>
-		<para>copy your "first-third" language translation
-		memory there,</para>
+		<para>copy your "first-third" language translation memory there,</para>
 	  </listitem>
 
 	  <listitem>
@@ -275,9 +312,9 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<token>&lt;segment 3075 ¶></toke
 	  </listitem>
 	</orderedlist>
 	
-    <note><para>You can use any number of TMX files in as many different
-    language pairs as "bridge" languages as you want.</para>
+    <note>
+	  <para>You can use any number of TMX files in as many different language
+	  pairs as "bridge" languages as you want.</para>	  
 	</note>
-	</para>
   </section>
 </section>

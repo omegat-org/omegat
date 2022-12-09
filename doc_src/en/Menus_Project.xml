@@ -2,47 +2,59 @@
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="menus.project">
-  <title id="menus.project.title">Project</title>
-      <example id="example.new.project.shortcut"><title id="example.new.project.shortcut.title">New...</title>
-  		<para>In this guide:
-		  <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>N</keycap></keycombo>
-		</para>
-		<para>On Windows and Linux:
-		  <keycombo><keycap>Control</keycap><keycap>Shift</keycap><keycap>N</keycap></keycombo>
-		</para>
-		<para>On macOS:
-		  <keycombo><keycap>Shift</keycap><keycap>Command</keycap><keycap>N</keycap></keycombo>
-		</para>
-		</example>
+  <title id="menus.project.title"><guimenu>Project</guimenu></title>
+  <para>This menu gives you access to project management commands.</para>
+
+  <example id="example.new.project.shortcut">
+	<title id="example.new.project.shortcut.title">Shortcut description
+	example</title>
+	<para>On Windows and Linux:
+	<keycombo><keycap>Control</keycap><keycap>Shift</keycap><keycap>N</keycap></keycombo>
+	</para>
+
+	<para>On macOS:
+	<keycombo><keycap>Shift</keycap><keycap>Command</keycap><keycap>N</keycap></keycombo>
+	</para>
+
+	<para><emphasis role="bold">In this manual:</emphasis>
+	<keycombo><keycap>C</keycap><keycap>S</keycap><keycap>N</keycap></keycombo>
+	</para>
+  </example>
   
   <variablelist>
     <varlistentry id="menus.project.new">
-      <term id="menus.project.new.title">New...		  <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>N</keycap></keycombo>
-</term>
+      <term id="menus.project.new.title"><guimenuitem>New...</guimenuitem>
+	  <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>N</keycap></keycombo>
+	  </term>
       <listitem>
-        <para>Creates and opens a new project. See <link
-        linkend="introduction.create.and.open.new.project" endterm="introduction.create.and.open.new.project.title"/> for details.</para>
+        <para>Creates and opens a new project. See the <link
+        linkend="introduction.create.and.open.new.project"
+        endterm="introduction.create.and.open.new.project.title"/> section for
+        details.</para>
       </listitem>
     </varlistentry>
 
     <varlistentry id="menus.project.download.team.project">
-      <term id="menus.project.download.team.project.title">Download Team Project...</term>
+      <term id="menus.project.download.team.project.title"><guimenuitem>Download
+      Team Project...</guimenuitem></term>
       <listitem>
-        <para>Creates a local copy of a remote OmegaT project. See <link
+        <para>Creates a local copy of a remote OmegaT project. See the <link
         linkend="how.to.use.team.project"
-        endterm="how.to.use.team.project.title"/> for details.</para>
+        endterm="how.to.use.team.project.title"/> how-to for details.</para>
       </listitem>
     </varlistentry>
 
     <varlistentry id="menus.project.open">
-      <term id="menus.project.open.title">Open... <keycombo><keycap>C</keycap><keycap>O</keycap></keycombo></term>
+      <term id="menus.project.open.title"><guimenuitem>Open...</guimenuitem>
+	  <keycombo><keycap>C</keycap><keycap>O</keycap></keycombo></term>
       <listitem>
         <para>Opens a previously created project.</para>
       </listitem>
     </varlistentry>
 
     <varlistentry id="menus.project.open.recent">
-      <term id="menus.project.open.recent.title">Open Recent...</term>
+      <term id="menus.project.open.recent.title"><guimenuitem>Open
+      Recent...</guimenuitem></term>
       <listitem>
         <para>Gives access to the last ten edited projects. Clicking one will
         save the current project, close it and open the selected project.</para>
@@ -52,47 +64,51 @@
     </varlistentry>
 
     <varlistentry id="menus.project.reload">
-      <term id="menus.project.reload.title">Reload		  <keycombo><keycap>F5</keycap></keycombo>
-</term>
+      <term id="menus.project.reload.title"><guimenuitem>Reload</guimenuitem>
+	  <keycombo><keycap>F5</keycap></keycombo></term>
       <listitem>
         <para>Reloads the project to take external changes in source files and
         project settings into account.</para>
         <note><para>New translation memories placed in the <link
         linkend="project.folder.tm" endterm="project.folder.tm.title"/> folder
-        while translating are loaded automatically as soon as the cursor moves
-        from one segment to another. Similarly, the contents of the <link
-        linkend="project.folder.glossary"
+        while translating are automatically taken into account as soon as the
+        cursor moves from one segment to another. Similarly, the contents of the
+        <link linkend="project.folder.glossary"
         endterm="project.folder.glossary.title"/> folder are automatically
         recognized and do not require reloading the project.</para></note>
       </listitem>
     </varlistentry>
 
     <varlistentry id="menus.project.close">
-      <term id="menus.project.close.title">Close		  <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>W</keycap></keycombo>
-</term>
+      <term id="menus.project.close.title"><guimenuitem>Close</guimenuitem>
+	  <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>W</keycap></keycombo></term>
       <listitem>
-        <para>Saves the project translation memory and closes the project. See
-        <link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/> for details.</para>
+        <para>Saves the project translation memory (<link
+        linkend="project.folder.project.save.tmx"
+        endterm="project.folder.project.save.tmx.title"/>) and closes the
+        project.</para>
       </listitem>
     </varlistentry>
 
     <varlistentry id="menus.project.save">
-      <term id="menus.project.save.title">Save		  <keycombo><keycap>C</keycap><keycap>S</keycap></keycombo>
-</term>
+      <term id="menus.project.save.title"><guimenuitem>Save</guimenuitem>
+	  <keycombo><keycap>C</keycap><keycap>S</keycap></keycombo></term>
       <listitem>
-        <para>Saves the project translation memory. See <link
+        <para>Saves the project translation memory (<link
         linkend="project.folder.project.save.tmx"
-        endterm="project.folder.project.save.tmx.title"/> for details.</para>
+        endterm="project.folder.project.save.tmx.title"/>).</para>
 		<para>OmegaT automatically saves translations every 3 minutes as well as
-		when you close the project or quit OmegaT. See <link
+		when you close the project or quit OmegaT. See the <link
 		linkend="dialog.preferences.saving.and.output.interval"
-		endterm="dialog.preferences.saving.and.output.interval.title"/> for
-		details.</para>
+		endterm="dialog.preferences.saving.and.output.interval.title"/>
+		preference for details.</para>
       </listitem>
     </varlistentry>
 
     <varlistentry id="menus.project.copy.files.to.source.folder">
-      <term id="menus.project.copy.files.to.source.folder.title">Add Files...</term>
+      <term
+		  id="menus.project.copy.files.to.source.folder.title"><guimenuitem>Add
+      Files...</guimenuitem></term>
       <listitem>
         <para>Copies the selected files to the <link
         linkend="project.folder.source" endterm="project.folder.source.title"/>
@@ -102,46 +118,70 @@
     </varlistentry>
 
     <varlistentry id="menus.project.download.mediawiki.page">
-      <term id="menus.project.download.mediawiki.page.title">Add Online MediaWiki Page...</term>
+      <term id="menus.project.download.mediawiki.page.title"><guimenuitem>Add
+      Online MediaWiki Page...</guimenuitem></term>
       <listitem>
-		<para>Opens a dialog where you can paste the URL of the Mediawiki page you want to translate. The source data of the page will be copied into the <link
-        linkend="project.folder.source" endterm="project.folder.source.title"/> folder, as a text file, with the <filename>.utf8</filename> extension.</para>
+		<para>Opens a dialog where you can paste the URL of the Mediawiki page
+		you want to translate. The source data of the page will be copied into
+		the <link linkend="project.folder.source"
+		endterm="project.folder.source.title"/> folder, as a text file, with the
+		<filename>.utf8</filename> extension.</para>
       </listitem>
     </varlistentry>
 
     <varlistentry id="menus.project.commit.source.files">
-      <term id="menus.project.commit.source.files.title">Commit Source Files</term>
+      <term id="menus.project.commit.source.files.title"><guimenuitem>Commit
+      Source Files</guimenuitem></term>
       <listitem>
-        <warning><para>This function is specific to team projects. <emphasis>Only the team project manager should use this function</emphasis>. See <link linkend="how.to.use.team.project" endterm="how.to.use.team.project.title"/> for details.</para></warning>
-        <para>Uploads locally added or modified files from the <filename class="directory">source</filename> folder to the team project repository.</para>
+        <warning><para>This function is specific to team
+        projects. <emphasis>Only the team project manager should use this
+        function</emphasis>. See the <link linkend="how.to.use.team.project"
+        endterm="how.to.use.team.project.title"/> how-to for details.</para></warning>
+        <para>Uploads locally added or modified files from the <filename
+        class="directory">source</filename> folder to the team project
+        repository.</para>
       </listitem>
     </varlistentry>
 
     <varlistentry id="menus.project.commit.target.files">
-      <term id="menus.project.commit.target.files.title">Commit Target Files</term>
+      <term id="menus.project.commit.target.files.title"><guimenuitem>Commit
+      Target Files</guimenuitem></term>
       <listitem>
-        <warning><para>This function is specific to team projects. <emphasis>Use this function only if the team project manager requested so</emphasis>. See <link linkend="how.to.use.team.project" endterm="how.to.use.team.project.title"/> for details.</para></warning>
-        <para>Uploads locally created files from the <link linkend="project.folder.target"
-        endterm="project.folder.target.title"/> folder to the team project repository.</para>
+        <warning><para>This function is specific to team projects. <emphasis>Use
+        this function only if the team project manager requested
+        so</emphasis>. See the <link linkend="how.to.use.team.project"
+        endterm="how.to.use.team.project.title"/> how-to for details.</para></warning>
+        <para>Uploads locally created from the <link
+        linkend="project.folder.target" endterm="project.folder.target.title"/>
+        folder to the team project repository.</para>
       </listitem>
     </varlistentry>
 
     <varlistentry id="menus.project.create.translated.documents">
-      <term id="menus.project.create.translated.documents.title">Create Translated Files <keycombo><keycap>C</keycap><keycap>D</keycap></keycombo>
-</term>
+      <term
+		  id="menus.project.create.translated.documents.title"><guimenuitem>Create
+      Translated Files</guimenuitem>
+      <keycombo><keycap>C</keycap><keycap>D</keycap></keycombo></term>
       <listitem>
-        <para>Creates the target files based on your translation. The
-        created target files are located in the <link
-        linkend="project.folder.target" endterm="project.folder.target.title"/> folder.</para>
-		<note><para>You can block target file creation if tag issues are found. See <link linkend="dialogs.preferences.tag.processing.do.not.allow.creating.translated.documents.with.tag.issues" endterm="dialogs.preferences.tag.processing.do.not.allow.creating.translated.documents.with.tag.issues.title"/> for details.</para></note>
+        <para>Creates the target files based on your translation. The created
+        target files are located in the <link linkend="project.folder.target"
+        endterm="project.folder.target.title"/> folder.</para>
+		<note><para>You can block target file creation if tag issues are
+		found. See the <link
+		linkend="dialogs.preferences.tag.processing.do.not.allow.creating.translated.documents.with.tag.issues"
+		endterm="dialogs.preferences.tag.processing.do.not.allow.creating.translated.documents.with.tag.issues.title"/>
+		preference for details.</para></note>
       </listitem>
     </varlistentry>
 
     <varlistentry id="menus.project.create.current.translated.document">
-      <term id="menus.project.create.current.translated.document.title">Create Current Translated File		  <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>D</keycap></keycombo>
-</term>
+      <term
+		  id="menus.project.create.current.translated.document.title"><guimenuitem>Create
+      Current Translated File</guimenuitem>
+      <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>D</keycap></keycombo></term>
       <listitem>
-        <para>Creates the target file corresponding to source file currently being translated. The resulting file is located in the <link
+        <para>Creates the target file corresponding to source file currently
+        being translated. The resulting file is located in the <link
         linkend="project.folder.target" endterm="project.folder.target.title"/>
         folder.</para>
 		<para>
@@ -150,7 +190,8 @@
     </varlistentry>
 
     <varlistentry id="menus.project.open.med.project">
-      <term id="menus.project.open.med.project.title">Open MED Project...</term>
+      <term id="menus.project.open.med.project.title"><guimenuitem>Open MED
+      Project...</guimenuitem></term>
 	  <!-- TODO add link to a format description -->
       <listitem>
         <para>Opens a project package in the MED format defined by the EU
@@ -159,7 +200,8 @@
     </varlistentry>
 
     <varlistentry id="menus.project.create.med.project">
-      <term id="menus.project.create.med.project.title">Create MED Projects...</term>
+      <term id="menus.project.create.med.project.title"><guimenuitem>Create MED
+      Projects...</guimenuitem></term>
 	  <!-- TODO add link to a format description -->
       <listitem>
         <para>Converts the current project into a MED package.</para>
@@ -167,107 +209,158 @@
     </varlistentry>
 
     <varlistentry id="menus.project.properties">
-      <term id="menus.project.properties.title">Properties...		  <keycombo><keycap>C</keycap><keycap>E</keycap></keycombo>
-</term>
+      <term
+		  id="menus.project.properties.title"><guimenuitem>Properties...</guimenuitem>
+      <keycombo><keycap>C</keycap><keycap>E</keycap></keycombo></term>
       <listitem>
-        <para>Displays the <link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/> dialog to edit the project languages and folder
-        locations.</para>
+        <para>Displays the <link linkend="dialogs.project.properties"
+        endterm="dialogs.project.properties.title"/> dialog to edit the project
+        languages and folder locations.</para>
 		<para>
 		</para>		
       </listitem>
     </varlistentry>
 
     <varlistentry id="menus.project.source.files.list">
-      <term id="menus.project.source.files.list.title">Source Files...		  <keycombo><keycap>C</keycap><keycap>L</keycap></keycombo>
-</term>
+      <term id="menus.project.source.files.list.title"><guimenuitem>Source
+      Files...</guimenuitem>
+      <keycombo><keycap>C</keycap><keycap>L</keycap></keycombo></term>
       <listitem>
-        <para>Opens the <link linkend="windows.source.files.list" endterm="windows.source.files.list.title"/> window.</para>
+        <para>Opens the <link linkend="windows.source.files.list"
+        endterm="windows.source.files.list.title"/> window.</para>
 		<para>
 		</para>				
       </listitem>
     </varlistentry>
 
     <varlistentry id="menus.project.access.project.contents">
-      <term id="menus.project.access.project.contents.title">Access Project
-      Contents</term>
+      <term id="menus.project.access.project.contents.title"><guisubmenu>Access
+      Project Contents</guisubmenu></term>
       <listitem>
-        <para>Gives access to the various project folders. See <link
-        linkend="project.folder" endterm="project.folder.title"/> for more details.</para>
-        <para>In addition, there are three menu entries that directly open the current
-        source or target files, or the writable glossary. The files are
-        opened in the default application set by the operating system. The options are grayed out if the files do not exist.</para>
+        <para>Gives access to the various project folders. See the <link
+        linkend="chapter.project.folder"
+        endterm="chapter.project.folder.title"/> chapter for more
+        details.</para>
+        <para>In addition, there are three menu entries that directly open the
+        current source or target files, or the writable glossary. The files are
+        opened in the default application set by the operating system. The
+        options are grayed out if the files do not exist.</para>
 
 		<variablelist>
 		  <varlistentry>
-			<term><link linkend="project.folder">Project Folder</link></term>
-			<listitem><para>Opens the folder in your file management application</para></listitem>
+			<term><link linkend="chapter.project.folder"><guimenuitem>Project
+			Folder</guimenuitem></link></term>
+			<listitem>
+			  <para>Opens the folder in your file management application</para>
+			</listitem>
 		  </varlistentry>
+
 		  <varlistentry>
-			<term><link linkend="project.folder.dictionary">Dictionaries</link></term>
-			<listitem><para>Opens the folder in your file management application</para></listitem>
+			<term><link
+			linkend="project.folder.dictionary"><guimenuitem>Dictionaries</guimenuitem></link></term>
+			<listitem>
+			  <para>Opens the folder in your file management application</para>
+			</listitem>
 		  </varlistentry>
+
 		  <varlistentry>
-			<term><link linkend="project.folder.glossary">Glossaries</link></term>
-			<listitem><para>Opens the folder in your file management application</para></listitem>
+			<term><link
+			linkend="project.folder.glossary"><guimenuitem>Glossaries</guimenuitem></link></term>
+			<listitem>
+			  <para>Opens the folder in your file management application</para>
+			</listitem>
 		  </varlistentry>
+
 		  <varlistentry>
-			<term><link linkend="project.folder.source">Source Files</link></term>
-			<listitem><para>Opens the folder in your file management application</para></listitem>
+			<term><link linkend="project.folder.source"><guimenuitem>Source
+			Files</guimenuitem></link></term>
+			<listitem>
+			  <para>Opens the folder in your file management application</para>
+			</listitem>
 		  </varlistentry>
+
 		  <varlistentry>
-			<term><link linkend="project.folder.target">Target Files</link></term>
-			<listitem><para>Opens the folder in your file management application</para></listitem>
+			<term><link linkend="project.folder.target"><guimenuitem>Target
+			Files</guimenuitem></link></term>
+			<listitem>
+			  <para>Opens the folder in your file management application</para>
+			</listitem>
 		  </varlistentry>
+
 		  <varlistentry>
-			<term><link linkend="project.folder.tm">TMs</link></term>
-			<listitem><para>Opens the folder in your file management application</para></listitem>
+			<term><link
+			linkend="project.folder.tm"><guimenuitem>TMs</guimenuitem></link></term>
+			<listitem>
+			  <para>Opens the folder in your file management application</para>
+			</listitem>
 		  </varlistentry>
+		  
 		  <varlistentry>
-			<term><link linkend="project.folder.exported.tm">Exported TMs</link></term>
-			<listitem><para>Opens the folder in your file management application</para></listitem>
+			<term><link
+			linkend="project.folder.exported.tm"><guimenuitem>Exported
+			TMs</guimenuitem></link></term>
+			<listitem>
+			  <para>Opens the folder in your file management application</para>
+			</listitem>
 		  </varlistentry>
+
 		  <varlistentry>
-			<term>Current Source File</term>
+			<term><guimenuitem>Current Source File</guimenuitem></term>
 			<listitem>
 			  <para>The current source file is located in the <link
 			  linkend="project.folder.source"
 			  endterm="project.folder.source.title"/> folder.</para>
-			<para>Opens the file in its associated application if it exists.</para></listitem>
+
+			  <para>Opens the file in its associated application.</para>
+			</listitem>
 		  </varlistentry>
+
 		  <varlistentry>
-			<term>Current Target File</term>
+			<term><guimenuitem>Current Target File</guimenuitem></term>
 			<listitem>
 			  <para>The current target file is located in the <link
 			  linkend="project.folder.target"
 			  endterm="project.folder.target.title"/> folder.</para>
-			<para>Opens the file in its associated application if it exists.</para></listitem>
+
+			  <para>Opens the file in its associated application if it exists.</para>
+			</listitem>
 		  </varlistentry>
+
 		  <varlistentry>
-			<term>Writable Glossary</term>
+			<term><guimenuitem>Writable Glossary</guimenuitem></term>
 			<listitem>
 			  <para>The writable glossary is located in the <link
-			  linkend="project.folder.glossary" endterm="project.folder.glossary.title"/> folder.</para>
-			<para>Opens the file in its associated application, if it exists.</para></listitem>
+			  linkend="project.folder.glossary"
+			  endterm="project.folder.glossary.title"/> folder.</para>
+
+			  <para>Opens the file in its associated application, if it exists.</para>
+			</listitem>
 		  </varlistentry>
 		</variablelist>
       </listitem>
     </varlistentry>
 
     <varlistentry id="menus.project.restart">
-      <term id="menus.project.restart.title">Restart</term>
+      <term
+      id="menus.project.restart.title"><guimenuitem>Restart</guimenuitem></term>
       <listitem>
-        <para>Saves the project and restarts OmegaT. You are asked to confirm that you really want to quit if you have not yet saved the project.</para>
+        <para>Saves the project and restarts OmegaT. You are asked to confirm
+        that you really want to quit if you have not yet saved the
+        project.</para>
       </listitem>
     </varlistentry>
 
     <varlistentry id="menus.project.quit">
-      <term id="menus.project.quit.title">Quit		  <keycombo><keycap>C</keycap><keycap>Q</keycap></keycombo>
-</term>
+      <term id="menus.project.quit.title"><guimenuitem>Quit</guimenuitem>
+      <keycombo><keycap>C</keycap><keycap>Q</keycap></keycombo></term>
       <listitem>
         <para>Saves the project and quits OmegaT. You are asked to confirm that
         you really want to quit if you have not yet saved the project.</para>
-		<note><para>In macOS, this menu item is found under the
-		<guimenu>OmegaT</guimenu> menu.</para></note>
+
+		<note>
+		  <para>In macOS, this menu item is found under the
+		  <guimenu>OmegaT</guimenu> menu.</para>
+		</note>
       </listitem>
     </varlistentry>
   </variablelist>

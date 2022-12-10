@@ -366,6 +366,18 @@ public final class TestTeamIntegrationChild {
         public void prevEntry() {
         }
 
+        public void nextXAutoEntry() {
+        }
+
+        public void prevXAutoEntry() {
+        }
+
+        public void nextXEnforcedEntry() {
+        }
+
+        public void prevXEnforcedEntry() {
+        }
+
         public void nextUntranslatedEntry() {
         }
 

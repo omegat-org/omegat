@@ -47,6 +47,8 @@ import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.util.Preferences;
+import org.omegat.util.cache.LRUCache;
+import org.omegat.util.cache.LRUCacheFactory;
 
 /**
  * Dictionary implementation for Lingvo DSL format.
@@ -106,6 +108,7 @@ public class LingvoDSL implements IDictionaryFactory {
     static class LingvoDSLDict implements IDictionary {
         protected final DslDictionary data;
         private final HtmlVisitor htmlVisitor;
+        private final LRUCache<String, List<DictionaryEntry>> cache;
 
         /**
          * Constructor of LingvoDSL Dictionary driver.
@@ -118,6 +121,7 @@ public class LingvoDSL implements IDictionaryFactory {
             data = DslDictionary.loadDictionary(dictPath, indexPath, validateIndexAbsPath);
             htmlVisitor = new HtmlVisitor(dictPath.getParent().toString(),
                     Preferences.isPreferenceDefault(Preferences.DICTIONARY_CONDENSED_VIEW, false));
+            cache = LRUCacheFactory.createLRUCache(500);
         }
 
         /**
@@ -129,7 +133,7 @@ public class LingvoDSL implements IDictionaryFactory {
          */
         @Override
         public List<DictionaryEntry> readArticles(final String word) throws IOException {
-            return readEntries(word, data.lookup(word));
+            return readArticles(word, false);
         }
 
         /**
@@ -141,7 +145,22 @@ public class LingvoDSL implements IDictionaryFactory {
          */
         @Override
         public List<DictionaryEntry> readArticlesPredictive(final String word) throws IOException {
-            return readEntries(word, data.lookupPredictive(word));
+            return readArticles(word, true);
+        }
+
+        public List<DictionaryEntry> readArticles(final String word, boolean predictive) throws IOException {
+            List<DictionaryEntry> result;
+            String cacheKey = predictive? "1" : "0" + word;
+            result = cache.get(cacheKey);
+            if (result == null) {
+                if (predictive) {
+                    result = readEntries(word, data.lookupPredictive(word));
+                } else {
+                    result = readEntries(word, data.lookup(word));
+                }
+                cache.put(cacheKey, result);
+            }
+            return result;
         }
 
         private List<DictionaryEntry> readEntries(final String word, final DslResult dslResult) {

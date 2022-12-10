@@ -31,5 +31,5 @@ public interface LRUCache<K, V> extends Map<K, V> {
 
     void cleanUp();
 
-    void getMaxCacheSize();
+    int getMaxCacheSize();
 }

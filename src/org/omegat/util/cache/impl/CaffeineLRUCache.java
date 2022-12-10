@@ -46,6 +46,7 @@ public class CaffeineLRUCache<K, V> implements LRUCache<K, V>, RemovalListener<K
     private final Cache<K, V> cache;
     private final Map<K, V> map;
     private final Consumer<V> evict;
+    private final int maximumCacheSize;
 
     /**
      * LRU cache implementation that use Caffeine cache library.
@@ -53,7 +54,7 @@ public class CaffeineLRUCache<K, V> implements LRUCache<K, V>, RemovalListener<K
      * please use LRUCacheFactory instead of instantiate directly.
      * </p>
      * 
-     * @param maxCacheSize
+     * @param maxCacheSize the maximum cache size.
      */
     public CaffeineLRUCache(int maxCacheSize) {
         this(16, maxCacheSize);
@@ -84,36 +85,37 @@ public class CaffeineLRUCache<K, V> implements LRUCache<K, V>, RemovalListener<K
         this.cache = caffeine.build();
         this.map = cache.asMap();
         this.evict = Objects.requireNonNull(evict);
+        this.maximumCacheSize = maxCacheSize;
     }
 
     @Override
     public void cleanUp() {
-
+        cache.cleanUp();
     }
 
     @Override
-    public void getMaxCacheSize() {
-
+    public int getMaxCacheSize() {
+        return maximumCacheSize;
     }
 
     @Override
     public int size() {
-        return 0;
+        return (int) cache.estimatedSize();
     }
 
     @Override
     public boolean isEmpty() {
-        return false;
+        return map.isEmpty();
     }
 
     @Override
     public boolean containsKey(Object o) {
-        return false;
+        return map.containsKey(o);
     }
 
     @Override
     public boolean containsValue(Object o) {
-        return false;
+        return map.containsValue(o);
     }
 
     @Override

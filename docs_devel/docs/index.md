@@ -6,6 +6,7 @@
 
 * [Contributing to OmegaT](01.ContributingOmegaT.md)
 * [How to build OmegaT](02.HowToBuild.md)
+* [Coding styles](30.CodingStyles.md)
 
 ## How to create plugin
 
@@ -14,13 +15,15 @@
 * [Loading Plugins](17.LoadingPlugins.md)
 * [Plugin manifest](19.PluginManifest.md)
 
-## Understanding OmegaT 
+## Understanding OmegaT Internals
 
 * [OmegaT internals](21.DevelopersGuide.md)
-* [Core Events](18.CoreEvents.md)
+* [Core Events](22.CoreEvents.md)
+* [Core Methods](23.CoreMethods.md)
 
 ## Quality Assurance and tests
 
+* [Test and coverage](33.TestAndCoverage.md)
 * [Integration test](34.IntegrationTest.md)
 
 ## Release management

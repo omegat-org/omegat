@@ -23,47 +23,46 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  **************************************************************************/
 
-package org.omegat.util.cache;
+package org.omegat.util.cache.impl;
 
-import org.omegat.util.cache.impl.CaffeineLRUCacheFactory;
-import org.omegat.util.cache.impl.CaffeineLRUSoftCacheFactory;
-import org.omegat.util.cache.impl.CaffeineLRUWeakCacheFactory;
-import org.omegat.util.cache.impl.SimpleLRUCacheFactory;
+import org.omegat.util.cache.LRUCache;
+import org.omegat.util.cache.LRUCacheFactory;
 
 /**
  * @author Hiroshi Miura
  */
-public abstract class LRUCacheFactory {
+public class CaffeineLRUWeakCacheFactory extends LRUCacheFactory {
 
-    protected LRUCacheFactory() {
+    private static CaffeineLRUWeakCacheFactory instance = null;
+
+    private CaffeineLRUWeakCacheFactory() {
+        super();
     }
 
-    static public LRUCacheFactory getFactory(String id) {
-        if (id.equalsIgnoreCase("Caffeine")) {
-            return CaffeineLRUCacheFactory.getInstance();
-        } else if (id.equalsIgnoreCase("Weak")) {
-            return CaffeineLRUWeakCacheFactory.getInstance();
-        } else if (id.equalsIgnoreCase("Soft")) {
-            return CaffeineLRUSoftCacheFactory.getInstance();
-        } else {
-            return SimpleLRUCacheFactory.getInstance();
+    public static CaffeineLRUWeakCacheFactory getInstance() {
+        if (instance == null) {
+            instance = new CaffeineLRUWeakCacheFactory();
         }
+        return instance;
     }
 
     /**
-     * Create default cache.
-     * @param maxCacheSize
-     *            max capacity.
-     */
-    public abstract <K, V> LRUCache<K, V> createLRUCache(int maxCacheSize);
-
-    /**
-     * Create default cache.
-     * @param initialCapacity
-     *          initial capacity
+     * Create weak cache.
      * @param maxCacheSize
      *          max capacity.
      */
-    public abstract <K, V> LRUCache<K, V> createLRUCache(int initialCapacity, int maxCacheSize);
+    public <K, V> LRUCache<K, V> createLRUCache(int maxCacheSize) {
+        return new CaffeineLRUCache<>(16, maxCacheSize, false, false, true);
+    }
 
+    /**
+     * Create weak cache.
+     * @param initialCapacity
+     *          initial capacity.
+     * @param maxCacheSize
+     *          max capacity.
+     */
+    public <K, V> LRUCache<K, V> createLRUCache(int initialCapacity, int maxCacheSize) {
+        return new CaffeineLRUCache<>(initialCapacity, maxCacheSize, false, false, true);
+    }
 }

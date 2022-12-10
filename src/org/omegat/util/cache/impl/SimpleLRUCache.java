@@ -27,14 +27,16 @@ package org.omegat.util.cache.impl;
 
 import org.omegat.util.cache.LRUCache;
 
+import java.io.Serializable;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
  * @author Hiroshi Miura
  */
-public class SimpleLRUCache<K, V> extends LinkedHashMap<K, V> implements LRUCache<K, V> {
+public class SimpleLRUCache<K, V> extends LinkedHashMap<K, V> implements LRUCache<K, V>, Serializable {
 
+    private static final long serialVersionUID = 1L;
 
     static final float LOAD_FACTOR = 0.75f;
 

@@ -52,6 +52,7 @@ public abstract class LRUCacheFactory {
 
     /**
      * Create default cache.
+     * 
      * @param maxCacheSize
      *            max capacity.
      */
@@ -59,10 +60,11 @@ public abstract class LRUCacheFactory {
 
     /**
      * Create default cache.
+     * 
      * @param initialCapacity
-     *          initial capacity
+     *            initial capacity
      * @param maxCacheSize
-     *          max capacity.
+     *            max capacity.
      */
     public abstract <K, V> LRUCache<K, V> createLRUCache(int initialCapacity, int maxCacheSize);
 

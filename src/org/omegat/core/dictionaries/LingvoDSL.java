@@ -46,7 +46,6 @@ import org.apache.commons.io.FilenameUtils;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.events.IApplicationEventListener;
-import org.omegat.core.events.IProjectEventListener;
 import org.omegat.util.Preferences;
 import org.omegat.util.cache.LRUCache;
 import org.omegat.util.cache.LRUCacheFactory;
@@ -60,10 +59,8 @@ import org.omegat.util.cache.LRUCacheFactory;
  * @author Aaron Madlon-Kay
  * @author Hiroshi Miura
  * @see <a href="https://github.com/eb4j/dsl4j">DSL4j library</a>
- * @see <a href="http://lingvo.helpmax.net/en/troubleshooting/dsl-compiler/">DSL
- * Documentation (English)</a>
- * @see <a href="http://www.dsleditor.narod.ru/art_03.htm">DSL documentation
- * (Russian)</a>
+ * @see <a href="http://lingvo.helpmax.net/en/troubleshooting/dsl-compiler/">DSL Documentation (English)</a>
+ * @see <a href="http://www.dsleditor.narod.ru/art_03.htm">DSL documentation (Russian)</a>
  */
 public class LingvoDSL implements IDictionaryFactory {
 
@@ -111,24 +108,28 @@ public class LingvoDSL implements IDictionaryFactory {
         private final HtmlVisitor htmlVisitor;
         private final LRUCache<String, List<DictionaryEntry>> cache;
 
-
         /**
          * Constructor of LingvoDSL Dictionary driver.
-         * @param dictPath *.dsl file object.
-         * @param indexPath index cache file.
-         * @throws Exception when loading dictionary failed.
+         * 
+         * @param dictPath
+         *            *.dsl file object.
+         * @param indexPath
+         *            index cache file.
+         * @throws Exception
+         *             when loading dictionary failed.
          */
         LingvoDSLDict(final Path dictPath, final Path indexPath, final boolean validateIndexAbsPath)
                 throws Exception {
             data = DslDictionary.loadDictionary(dictPath, indexPath, validateIndexAbsPath);
             htmlVisitor = new HtmlVisitor(dictPath.getParent().toString(),
                     Preferences.isPreferenceDefault(Preferences.DICTIONARY_CONDENSED_VIEW, false));
-            cache = LRUCacheFactory.getFactory("Caffeine").createLRUCache(64,1000);
+            cache = LRUCacheFactory.getFactory("Caffeine").createLRUCache(64, 1000);
             CoreEvents.registerProjectChangeListener(eventType -> cache.cleanUp());
         }
 
         /**
          * read article with exact match.
+         * 
          * @param word
          *            The word to look up in the dictionary
          *
@@ -141,6 +142,7 @@ public class LingvoDSL implements IDictionaryFactory {
 
         /**
          * read article with predictive match.
+         * 
          * @param word
          *            The word to look up in the dictionary
          *
@@ -153,7 +155,7 @@ public class LingvoDSL implements IDictionaryFactory {
 
         public List<DictionaryEntry> readArticles(final String word, boolean predictive) throws IOException {
             List<DictionaryEntry> result;
-            String cacheKey = predictive? "1" : "0" + word;
+            String cacheKey = predictive ? "1" : "0" + word;
             result = cache.get(cacheKey);
             if (result == null) {
                 if (predictive) {
@@ -195,8 +197,11 @@ public class LingvoDSL implements IDictionaryFactory {
 
         /**
          * Constructor with media path.
-         * @param dirPath media base path.
-         * @throws IOException when given directory not found.
+         * 
+         * @param dirPath
+         *            media base path.
+         * @throws IOException
+         *             when given directory not found.
          */
         public HtmlVisitor(final String dirPath, final boolean condensedView) throws IOException {
             File dir = new File(dirPath);
@@ -212,7 +217,7 @@ public class LingvoDSL implements IDictionaryFactory {
         /**
          * Start of accept.
          * <p>
-         *     super#visit(ElementSequence) call this.
+         * super#visit(ElementSequence) call this.
          * </p>
          */
         @Override
@@ -223,7 +228,7 @@ public class LingvoDSL implements IDictionaryFactory {
         /**
          * End of accept.
          * <p>
-         *     super#visit(ElementSequence) call this.
+         * super#visit(ElementSequence) call this.
          * </p>
          */
         @Override
@@ -233,7 +238,8 @@ public class LingvoDSL implements IDictionaryFactory {
         /**
          * Visit a tag.
          *
-         * @param tag to visit.
+         * @param tag
+         *            to visit.
          */
         @Override
         public void visit(final DslArticle.Tag tag) {
@@ -339,7 +345,8 @@ public class LingvoDSL implements IDictionaryFactory {
         /**
          * Visit an EndTag.
          *
-         * @param endTag to visit.
+         * @param endTag
+         *            to visit.
          */
         @Override
         public void visit(final DslArticle.EndTag endTag) {
@@ -358,18 +365,18 @@ public class LingvoDSL implements IDictionaryFactory {
                     return;
                 }
                 if (endTag.isTagName("video")) {
-                    sb.append("<a href=\"").append(getMediaUrl()).append("\">")
-                            .append(previousText).append("</a>");
+                    sb.append("<a href=\"").append(getMediaUrl()).append("\">").append(previousText)
+                            .append("</a>");
                 } else if (endTag.isTagName("s")) {
                     if (isMediaImage()) {
                         sb.append("<img src=\"").append(getMediaUrl()).append("\" />");
-                    } else {  // sound and unknown files
-                        sb.append("<a href=\"").append(getMediaUrl()).append("\" >")
-                                .append(previousText).append("</a>");
+                    } else { // sound and unknown files
+                        sb.append("<a href=\"").append(getMediaUrl()).append("\" >").append(previousText)
+                                .append("</a>");
                     }
                 } else if (endTag.isTagName("url")) {
-                    sb.append("<a href=\"").append(previousText).append("\">")
-                            .append(previousText).append("</a>");
+                    sb.append("<a href=\"").append(previousText).append("\">").append(previousText)
+                            .append("</a>");
                 }
                 delayText = false;
                 previousText = null;
@@ -411,7 +418,8 @@ public class LingvoDSL implements IDictionaryFactory {
         /**
          * Visit a text.
          *
-         * @param t Text object to process.
+         * @param t
+         *            Text object to process.
          */
         @Override
         public void visit(final DslArticle.Text t) {
@@ -427,7 +435,8 @@ public class LingvoDSL implements IDictionaryFactory {
         /**
          * Visit an Attribute.
          *
-         * @param a Attribute object to visit.
+         * @param a
+         *            Attribute object to visit.
          */
         @Override
         public void visit(final DslArticle.Attribute a) {
@@ -436,7 +445,8 @@ public class LingvoDSL implements IDictionaryFactory {
         /**
          * Visit a NewLine.
          *
-         * @param n NewLine object to visit.
+         * @param n
+         *            NewLine object to visit.
          */
         @Override
         public void visit(final DslArticle.Newline n) {

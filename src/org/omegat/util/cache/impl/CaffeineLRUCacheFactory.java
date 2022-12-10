@@ -48,6 +48,7 @@ public class CaffeineLRUCacheFactory extends LRUCacheFactory {
 
     /**
      * Create default cache.
+     * 
      * @param maxCacheSize
      *            max capacity.
      */
@@ -57,10 +58,11 @@ public class CaffeineLRUCacheFactory extends LRUCacheFactory {
 
     /**
      * Create default cache.
+     * 
      * @param initialCapacity
-     *          initial capacity
+     *            initial capacity
      * @param maxCacheSize
-     *          max capacity.
+     *            max capacity.
      */
     public <K, V> LRUCache<K, V> createLRUCache(int initialCapacity, int maxCacheSize) {
         return new CaffeineLRUCache<>(initialCapacity, maxCacheSize);

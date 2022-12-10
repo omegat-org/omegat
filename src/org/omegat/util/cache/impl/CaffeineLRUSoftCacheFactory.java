@@ -48,8 +48,9 @@ public class CaffeineLRUSoftCacheFactory extends LRUCacheFactory {
 
     /**
      * Create soft cache.
+     * 
      * @param maxCacheSize
-     *          max cache size.
+     *            max cache size.
      */
     public <K, V> LRUCache<K, V> createLRUCache(int maxCacheSize) {
         return new CaffeineLRUCache<>(16, maxCacheSize, false, true, false);
@@ -57,10 +58,11 @@ public class CaffeineLRUSoftCacheFactory extends LRUCacheFactory {
 
     /**
      * Create soft cache.
+     * 
      * @param initialCapacity
-     *          initial capacity
+     *            initial capacity
      * @param maxCacheSize
-     *          max capacity
+     *            max capacity
      */
     public <K, V> LRUCache<K, V> createLRUCache(int initialCapacity, int maxCacheSize) {
         return new CaffeineLRUCache<>(initialCapacity, maxCacheSize, false, true, false);

@@ -48,8 +48,9 @@ public class CaffeineLRUWeakCacheFactory extends LRUCacheFactory {
 
     /**
      * Create weak cache.
+     * 
      * @param maxCacheSize
-     *          max capacity.
+     *            max capacity.
      */
     public <K, V> LRUCache<K, V> createLRUCache(int maxCacheSize) {
         return new CaffeineLRUCache<>(16, maxCacheSize, false, false, true);
@@ -57,10 +58,11 @@ public class CaffeineLRUWeakCacheFactory extends LRUCacheFactory {
 
     /**
      * Create weak cache.
+     * 
      * @param initialCapacity
-     *          initial capacity.
+     *            initial capacity.
      * @param maxCacheSize
-     *          max capacity.
+     *            max capacity.
      */
     public <K, V> LRUCache<K, V> createLRUCache(int initialCapacity, int maxCacheSize) {
         return new CaffeineLRUCache<>(initialCapacity, maxCacheSize, false, false, true);

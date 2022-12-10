@@ -54,7 +54,8 @@ public class CaffeineLRUCache<K, V> implements LRUCache<K, V>, RemovalListener<K
      * please use LRUCacheFactory instead of instantiate directly.
      * </p>
      * 
-     * @param maxCacheSize the maximum cache size.
+     * @param maxCacheSize
+     *            the maximum cache size.
      */
     public CaffeineLRUCache(int maxCacheSize) {
         this(16, maxCacheSize);

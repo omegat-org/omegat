@@ -735,6 +735,22 @@ public final class MainWindowMenuHandler {
         Core.getEditor().prevEntry();
     }
 
+    public void gotoNextXAutoMenuItemActionPerformed() {
+        Core.getEditor().nextXAutoEntry();
+    }
+
+    public void gotoPrevXAutoMenuItemActionPerformed() {
+        Core.getEditor().prevXAutoEntry();
+    }
+
+    public void gotoNextXEnforcedMenuItemActionPerformed() {
+        Core.getEditor().nextXEnforcedEntry();
+    }
+
+    public void gotoPrevXEnforcedMenuItemActionPerformed() {
+        Core.getEditor().prevXEnforcedEntry();
+    }
+
     public void gotoNextNoteMenuItemActionPerformed() {
         Core.getEditor().nextEntryWithNote();
     }

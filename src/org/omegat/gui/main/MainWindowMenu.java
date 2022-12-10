@@ -370,6 +370,12 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         gotoMenu.add(gotoNextUniqueMenuItem = createMenuItem("TF_MENU_GOTO_NEXT_UNIQUE"));
         gotoMenu.add(gotoMatchSourceSegment = createMenuItem("TF_MENU_GOTO_SELECTED_MATCH_SOURCE"));
         gotoMenu.addSeparator();
+        gotoMenu.add(gotoXEntrySubmenu = createMenu("TF_MENU_GOTO_X_SUBMENU"));
+        gotoXEntrySubmenu.add(gotoNextXAutoMenuItem = createMenuItem("TF_MENU_GOTO_NEXT_XAUTO"));
+        gotoXEntrySubmenu.add(gotoPrevXAutoMenuItem = createMenuItem("TF_MENU_GOTO_PREV_XAUTO"));
+        gotoXEntrySubmenu.add(gotoNextXEnforcedMenuItem = createMenuItem("TF_MENU_GOTO_NEXT_XENFORCED"));
+        gotoXEntrySubmenu.add(gotoPrevXEnforcedMenuItem = createMenuItem("TF_MENU_GOTO_PREV_XENFORCED"));
+        gotoMenu.addSeparator();
         gotoMenu.add(gotoHistoryForwardMenuItem = createMenuItem("TF_MENU_GOTO_FORWARD_IN_HISTORY"));
         gotoMenu.add(gotoHistoryBackMenuItem = createMenuItem("TF_MENU_GOTO_BACK_IN_HISTORY"));
         gotoMenu.addSeparator();
@@ -802,6 +808,11 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
     JMenuItem gotoNextTranslatedMenuItem;
     JMenuItem gotoPreviousSegmentMenuItem;
     JMenuItem gotoSegmentMenuItem;
+    JMenu gotoXEntrySubmenu;
+    JMenuItem gotoNextXAutoMenuItem;
+    JMenuItem gotoPrevXAutoMenuItem;
+    JMenuItem gotoNextXEnforcedMenuItem;
+    JMenuItem gotoPrevXEnforcedMenuItem;
     JMenuItem gotoNextNoteMenuItem;
     JMenuItem gotoPreviousNoteMenuItem;
     JMenuItem gotoMatchSourceSegment;

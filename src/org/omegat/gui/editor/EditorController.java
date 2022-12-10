@@ -1456,6 +1456,36 @@ public class EditorController implements IEditor {
         nextTranslatedEntry(true);
     }
 
+    private void linkedEntry(boolean forward, String linked) {
+        iterateToEntry(forward, ste -> {
+                TMXEntry info = Core.getProject().getTranslationInfo(ste);
+                if (String.valueOf(info.linked).equals(linked)) {
+                    return true;
+                }
+                return false;
+            });
+    }
+
+    /**
+     * Finds the next/previous x-auto translated entry
+     */
+    public void nextXAutoEntry() {
+        linkedEntry(true, "xAUTO");
+    }
+    public void prevXAutoEntry() {
+        linkedEntry(false, "xAUTO");
+    }
+
+    /**
+     * Finds the next/previous x-enforced translated entry
+     */
+    public void nextXEnforcedEntry() {
+        linkedEntry(true, "xENFORCED");
+    }
+    public void prevXEnforcedEntry() {
+        linkedEntry(false, "xENFORCED");
+    }
+
     private void entryWithNote(boolean forward) {
         iterateToEntry(forward, ste -> Core.getProject().getTranslationInfo(ste).hasNote());
     }

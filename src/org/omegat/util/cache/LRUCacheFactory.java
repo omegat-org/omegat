@@ -36,6 +36,7 @@ public class LRUCacheFactory {
     }
 
     /**
+     * Create default cache.
      * @param maxCacheSize
      *            max capacity.
      */
@@ -43,22 +44,52 @@ public class LRUCacheFactory {
         return new CaffeineLRUCache<>(maxCacheSize);
     }
 
+    /**
+     * Create default cache.
+     * @param initialCapacity
+     *          initial capacity
+     * @param maxCacheSize
+     *          max capacity.
+     */
     public static <K, V> LRUCache<K, V> createLRUCache(int initialCapacity, int maxCacheSize) {
         return new CaffeineLRUCache<>(initialCapacity, maxCacheSize);
     }
 
+    /**
+     * Create soft cache.
+     * @param maxCacheSize
+     */
     public static <K, V> LRUCache<K, V> createLRUSoftCache(int maxCacheSize) {
         return new CaffeineLRUCache<>(16, maxCacheSize, false, true, false);
     }
 
+    /**
+     * Create soft cache.
+     * @param initialCapacity
+     *          initial capacity
+     * @param maxCacheSize
+     *          max capacity
+     */
     public static <K, V> LRUCache<K, V> createLRUSoftCache(int initialCapacity, int maxCacheSize) {
         return new CaffeineLRUCache<>(initialCapacity, maxCacheSize, false, true, false);
     }
 
+    /**
+     * Create weak cache.
+     * @param maxCacheSize
+     *          max capacity.
+     */
     public static <K, V> LRUCache<K, V> createLRUWeakCache(int maxCacheSize) {
         return new CaffeineLRUCache<>(16, maxCacheSize, false, false, true);
     }
 
+    /**
+     * Create weak cache.
+     * @param initialCapacity
+     *          initial capacity.
+     * @param maxCacheSize
+     *          max capacity.
+     */
     public static <K, V> LRUCache<K, V> createLRUWeakCache(int initialCapacity, int maxCacheSize) {
         return new CaffeineLRUCache<>(initialCapacity, maxCacheSize, false, false, true);
     }

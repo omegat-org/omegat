@@ -303,10 +303,19 @@ public class SegmentPropertiesArea implements IPaneMenu {
     }
 
     private String getBooleanValueVerb(String key, boolean value) {
-        if (value) {
-            return OStrings.getString(ISegmentPropertiesView.PROPERTY_TRANSLATION_VERB + key.toUpperCase());
-        } else {
-            return OStrings.getString(ISegmentPropertiesView.PROPERTY_TRANSLATION_NVERB + key.toUpperCase());
+        try {
+            if (value) {
+                return OStrings.getString(ISegmentPropertiesView.PROPERTY_TRANSLATION_VERB + key.toUpperCase());
+            } else {
+                return OStrings.getString(ISegmentPropertiesView.PROPERTY_TRANSLATION_NVERB + key.toUpperCase());
+            }
+        } catch (MissingResourceException ex) {
+            // fallback to default expression
+            if (value) {
+                return OStrings.getString(ISegmentPropertiesView.PROPERTY_TRANSLATION_VERB + "YES");
+            } else {
+                return OStrings.getString(ISegmentPropertiesView.PROPERTY_TRANSLATION_VERB + "NO");
+            }
         }
     }
 

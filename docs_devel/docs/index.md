@@ -20,6 +20,7 @@
 * [OmegaT internals](21.DevelopersGuide.md)
 * [Core Events](22.CoreEvents.md)
 * [Core Methods](23.CoreMethods.md)
+* [Utility functions](27.UtilityClasses.md)
 
 ## Quality Assurance and tests
 

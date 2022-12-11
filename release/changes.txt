@@ -11,6 +11,9 @@
 
   - Update to new pixel logos and improve macOS UI logos
 
+  - Add a shortcut to select all source text of the current segment
+  https://sourceforge.net/p/omegat/feature-requests/1639/
+
   - Hyperlinks to local files in the glossary
   https://sourceforge.net/p/omegat/feature-requests/1604/
 

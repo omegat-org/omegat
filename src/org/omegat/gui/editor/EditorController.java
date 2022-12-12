@@ -1459,10 +1459,7 @@ public class EditorController implements IEditor {
     private void linkedEntry(boolean forward, String linked) {
         iterateToEntry(forward, ste -> {
                 TMXEntry info = Core.getProject().getTranslationInfo(ste);
-                if (String.valueOf(info.linked).equals(linked)) {
-                    return true;
-                }
-                return false;
+                return String.valueOf(info.linked).equals(linked);
             });
     }
 

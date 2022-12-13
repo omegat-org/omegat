@@ -25,11 +25,11 @@
 
 package org.omegat.util.cache.impl;
 
-import org.omegat.util.cache.LRUCache;
-
 import java.io.Serializable;
 import java.util.LinkedHashMap;
 import java.util.Map;
+
+import org.omegat.util.cache.LRUCache;
 
 /**
  * @author Hiroshi Miura
@@ -54,11 +54,6 @@ public class SimpleLRUCache<K, V> extends LinkedHashMap<K, V> implements LRUCach
     @Override
     public void cleanUp() {
         this.clear();
-    }
-
-    @Override
-    public int getMaxCacheSize() {
-        return maximumCacheSize;
     }
 
     @Override

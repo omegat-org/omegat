@@ -25,7 +25,8 @@
 
 package org.omegat.util.cache.impl;
 
-import org.omegat.util.cache.LRUCache;
+import java.util.Map;
+
 import org.omegat.util.cache.LRUCacheFactory;
 
 /**
@@ -52,7 +53,7 @@ public class SimpleLRUCacheFactory extends LRUCacheFactory {
      * @param maxCacheSize
      *            max capacity.
      */
-    public <K, V> LRUCache<K, V> createLRUCache(int maxCacheSize) {
+    public <K, V> Map<K, V> createLRUCache(int maxCacheSize) {
         return new SimpleLRUCache<>(maxCacheSize);
     }
 
@@ -64,7 +65,7 @@ public class SimpleLRUCacheFactory extends LRUCacheFactory {
      * @param maxCacheSize
      *            max capacity.
      */
-    public <K, V> LRUCache<K, V> createLRUCache(int initialCapacity, int maxCacheSize) {
+    public <K, V> Map<K, V> createLRUCache(int initialCapacity, int maxCacheSize) {
         return new SimpleLRUCache<>(initialCapacity, maxCacheSize);
     }
 

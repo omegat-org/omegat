@@ -27,27 +27,21 @@ package org.omegat.util.cache.impl;
 
 import java.util.Collection;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.ForkJoinPool;
-import java.util.function.Consumer;
 
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
 import com.github.benmanes.caffeine.cache.RemovalCause;
 import com.github.benmanes.caffeine.cache.RemovalListener;
 
-import org.omegat.util.cache.LRUCache;
 
 /**
  * @author Hiroshi Miura
  */
-public class CaffeineLRUCache<K, V> implements LRUCache<K, V>, RemovalListener<K, V> {
-
-    private final Cache<K, V> cache;
+public class CaffeineLRUCache<K, V> implements Map<K, V>, RemovalListener<K, V> {
     private final Map<K, V> map;
-    private final Consumer<V> evict;
-    private final int maximumCacheSize;
+    private final Cache<K, V> cache;
 
     /**
      * LRU cache implementation that use Caffeine cache library.
@@ -58,14 +52,7 @@ public class CaffeineLRUCache<K, V> implements LRUCache<K, V>, RemovalListener<K
      * @param maxCacheSize
      *            the maximum cache size.
      */
-    public CaffeineLRUCache(int initalCapacity, int maxCacheSize, boolean stopOnEviction, boolean soft,
-            boolean weak) {
-        this(initalCapacity, maxCacheSize,
-                stopOnEviction ? CaffeineLRUCache::doStop : CaffeineLRUCache::doNothing, soft, weak);
-    }
-
-    public CaffeineLRUCache(int initialCapacity, int maxCacheSize, Consumer<V> evict, boolean soft,
-            boolean weak) {
+    public CaffeineLRUCache(int initialCapacity, int maxCacheSize, boolean soft, boolean weak) {
         Caffeine<K, V> caffeine = Caffeine.newBuilder().initialCapacity(initialCapacity)
                 .maximumSize(maxCacheSize).removalListener(this);
         if (soft) {
@@ -78,23 +65,11 @@ public class CaffeineLRUCache<K, V> implements LRUCache<K, V>, RemovalListener<K
         caffeine.executor(task -> ForkJoinPool.commonPool().execute(task));
         this.cache = caffeine.build();
         this.map = cache.asMap();
-        this.evict = Objects.requireNonNull(evict);
-        this.maximumCacheSize = maxCacheSize;
-    }
-
-    @Override
-    public void cleanUp() {
-        cache.cleanUp();
-    }
-
-    @Override
-    public int getMaxCacheSize() {
-        return maximumCacheSize;
     }
 
     @Override
     public int size() {
-        return (int) cache.estimatedSize();
+        return map.size();
     }
 
     @Override
@@ -128,8 +103,8 @@ public class CaffeineLRUCache<K, V> implements LRUCache<K, V>, RemovalListener<K
     }
 
     @Override
-    public void putAll(Map<? extends K, ? extends V> map) {
-        this.cache.putAll(map);
+    public void putAll(Map<? extends K, ? extends V> o) {
+        map.putAll(o);
     }
 
     @Override
@@ -154,14 +129,6 @@ public class CaffeineLRUCache<K, V> implements LRUCache<K, V>, RemovalListener<K
 
     @Override
     public void onRemoval(K key, V value, RemovalCause cause) {
-        if (cause.wasEvicted()) {
-            evict.accept(value);
-        }
     }
 
-    static <V> void doNothing(V value) {
-    }
-
-    static <V> void doStop(V value) {
-    }
 }

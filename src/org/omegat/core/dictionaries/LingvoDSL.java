@@ -47,7 +47,6 @@ import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.util.Preferences;
-import org.omegat.util.cache.LRUCache;
 import org.omegat.util.cache.LRUCacheFactory;
 
 /**
@@ -106,7 +105,7 @@ public class LingvoDSL implements IDictionaryFactory {
     static class LingvoDSLDict implements IDictionary {
         protected final DslDictionary data;
         private final HtmlVisitor htmlVisitor;
-        private final LRUCache<String, List<DictionaryEntry>> cache;
+        private final Map<String, List<DictionaryEntry>> cache;
 
         /**
          * Constructor of LingvoDSL Dictionary driver.
@@ -124,7 +123,7 @@ public class LingvoDSL implements IDictionaryFactory {
             htmlVisitor = new HtmlVisitor(dictPath.getParent().toString(),
                     Preferences.isPreferenceDefault(Preferences.DICTIONARY_CONDENSED_VIEW, false));
             cache = LRUCacheFactory.getInstance("standard").createLRUCache(64, 1000);
-            CoreEvents.registerProjectChangeListener(eventType -> cache.cleanUp());
+            CoreEvents.registerProjectChangeListener(eventType -> cache.clear());
         }
 
         /**

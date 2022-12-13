@@ -54,24 +54,14 @@ public class SoftCacheFactory extends CacheFactory {
     }
 
     /**
-     * Create default cache.
-     * 
-     * @param maxCacheSize
-     *            max capacity.
-     */
-    public <K, V> Map<K, V> createLRUCache(int maxCacheSize) {
-        return createLRUCache(16, maxCacheSize);
-    }
-
-    /**
-     * Create default cache.
+     * Create cache.
      * 
      * @param initialCapacity
      *            initial capacity
      * @param maxCacheSize
      *            max capacity.
      */
-    public <K, V> Map<K, V> createLRUCache(int initialCapacity, int maxCacheSize) {
+    public <K, V> Map<K, V> createCache(int initialCapacity, int maxCacheSize) {
         Caffeine<K, V> caffeine = Caffeine.newBuilder().initialCapacity(initialCapacity)
                 .maximumSize(maxCacheSize).removalListener(new Listener<>());
         caffeine.softValues();

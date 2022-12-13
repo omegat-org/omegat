@@ -122,7 +122,7 @@ public class LingvoDSL implements IDictionaryFactory {
             data = DslDictionary.loadDictionary(dictPath, indexPath, validateIndexAbsPath);
             htmlVisitor = new HtmlVisitor(dictPath.getParent().toString(),
                     Preferences.isPreferenceDefault(Preferences.DICTIONARY_CONDENSED_VIEW, false));
-            cache = CacheFactory.getInstance("simple").createLRUCache(64, 1000);
+            cache = CacheFactory.getInstance("simple").createCache(64, 1000);
             CoreEvents.registerProjectChangeListener(eventType -> cache.clear());
         }
 

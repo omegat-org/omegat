@@ -46,21 +46,13 @@ public abstract class CacheFactory {
     }
 
     /**
-     * Create default cache.
-     * 
-     * @param maxCacheSize
-     *            max capacity.
-     */
-    public abstract <K, V> Map<K, V> createLRUCache(int maxCacheSize);
-
-    /**
-     * Create default cache.
+     * Create cache.
      * 
      * @param initialCapacity
      *            initial capacity
      * @param maxCacheSize
      *            max capacity.
      */
-    public abstract <K, V> Map<K, V> createLRUCache(int initialCapacity, int maxCacheSize);
+    public abstract <K, V> Map<K, V> createCache(int initialCapacity, int maxCacheSize);
 
 }

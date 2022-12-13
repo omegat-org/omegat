@@ -51,31 +51,21 @@ public class SimpleCacheFactory extends CacheFactory {
     }
 
     /**
-     * Create default cache.
-     * 
-     * @param maxCacheSize
-     *            max capacity.
-     */
-    public <K, V> Map<K, V> createLRUCache(int maxCacheSize) {
-        return new SimpleLRUCache<>(maxCacheSize);
-    }
-
-    /**
-     * Create default cache.
+     * Create cache.
      * 
      * @param initialCapacity
      *            initial capacity
      * @param maxCacheSize
      *            max capacity.
      */
-    public <K, V> Map<K, V> createLRUCache(int initialCapacity, int maxCacheSize) {
-        return new SimpleLRUCache<>(initialCapacity, maxCacheSize);
+    public <K, V> Map<K, V> createCache(int initialCapacity, int maxCacheSize) {
+        return new SimpleCache<>(initialCapacity, maxCacheSize);
     }
 
     /**
      * @author Hiroshi Miura
      */
-    public static class SimpleLRUCache<K, V> extends LinkedHashMap<K, V> implements Serializable {
+    public static class SimpleCache<K, V> extends LinkedHashMap<K, V> implements Serializable {
 
         private static final long serialVersionUID = 1L;
 
@@ -83,18 +73,13 @@ public class SimpleCacheFactory extends CacheFactory {
 
         private final int maximumCacheSize;
 
-        public SimpleLRUCache(int maximumCacheSize) {
+        public SimpleCache(int maximumCacheSize) {
             this(16, maximumCacheSize);
         }
 
-        public SimpleLRUCache(int initialCapacity, int maxCacheSize) {
+        public SimpleCache(int initialCapacity, int maxCacheSize) {
             super(initialCapacity, LOAD_FACTOR, true);
             this.maximumCacheSize = maxCacheSize;
-        }
-
-        @Override
-        public V put(K key, V value) {
-            return super.put(key, value);
         }
 
         @Override

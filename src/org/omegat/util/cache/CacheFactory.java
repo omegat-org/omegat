@@ -23,28 +23,26 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  **************************************************************************/
 
-package org.omegat.util.cache.impl;
+package org.omegat.util.cache;
 
 import java.util.Map;
-
-import org.omegat.util.cache.LRUCacheFactory;
 
 /**
  * @author Hiroshi Miura
  */
-public class SimpleLRUCacheFactory extends LRUCacheFactory {
+public abstract class CacheFactory {
 
-    private static LRUCacheFactory instance = null;
-
-    private SimpleLRUCacheFactory() {
-        super();
+    protected CacheFactory() {
     }
 
-    public static LRUCacheFactory getInstance() {
-        if (instance == null) {
-            instance = new SimpleLRUCacheFactory();
+    public static CacheFactory getInstance(String id) {
+        if ("soft".equalsIgnoreCase(id)) {
+            return SoftCacheFactory.getInstance();
+        } else if ("simple".equalsIgnoreCase(id)) {
+            return SimpleCacheFactory.getInstance();
+        } else {
+            return SimpleCacheFactory.getInstance();
         }
-        return instance;
     }
 
     /**
@@ -53,9 +51,7 @@ public class SimpleLRUCacheFactory extends LRUCacheFactory {
      * @param maxCacheSize
      *            max capacity.
      */
-    public <K, V> Map<K, V> createLRUCache(int maxCacheSize) {
-        return new SimpleLRUCache<>(maxCacheSize);
-    }
+    public abstract <K, V> Map<K, V> createLRUCache(int maxCacheSize);
 
     /**
      * Create default cache.
@@ -65,8 +61,6 @@ public class SimpleLRUCacheFactory extends LRUCacheFactory {
      * @param maxCacheSize
      *            max capacity.
      */
-    public <K, V> Map<K, V> createLRUCache(int initialCapacity, int maxCacheSize) {
-        return new SimpleLRUCache<>(initialCapacity, maxCacheSize);
-    }
+    public abstract <K, V> Map<K, V> createLRUCache(int initialCapacity, int maxCacheSize);
 
 }

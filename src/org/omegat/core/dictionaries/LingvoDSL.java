@@ -47,7 +47,7 @@ import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.util.Preferences;
-import org.omegat.util.cache.LRUCacheFactory;
+import org.omegat.util.cache.CacheFactory;
 
 /**
  * Dictionary implementation for Lingvo DSL format.
@@ -122,7 +122,7 @@ public class LingvoDSL implements IDictionaryFactory {
             data = DslDictionary.loadDictionary(dictPath, indexPath, validateIndexAbsPath);
             htmlVisitor = new HtmlVisitor(dictPath.getParent().toString(),
                     Preferences.isPreferenceDefault(Preferences.DICTIONARY_CONDENSED_VIEW, false));
-            cache = LRUCacheFactory.getInstance("standard").createLRUCache(64, 1000);
+            cache = CacheFactory.getInstance("simple").createLRUCache(64, 1000);
             CoreEvents.registerProjectChangeListener(eventType -> cache.clear());
         }
 

@@ -25,18 +25,19 @@
 
 package org.omegat.util.cache.impl;
 
-import com.github.benmanes.caffeine.cache.Cache;
-import com.github.benmanes.caffeine.cache.Caffeine;
-import com.github.benmanes.caffeine.cache.RemovalCause;
-import com.github.benmanes.caffeine.cache.RemovalListener;
-import org.omegat.util.cache.LRUCache;
-
 import java.util.Collection;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.ForkJoinPool;
 import java.util.function.Consumer;
+
+import com.github.benmanes.caffeine.cache.Cache;
+import com.github.benmanes.caffeine.cache.Caffeine;
+import com.github.benmanes.caffeine.cache.RemovalCause;
+import com.github.benmanes.caffeine.cache.RemovalListener;
+
+import org.omegat.util.cache.LRUCache;
 
 /**
  * @author Hiroshi Miura
@@ -57,14 +58,6 @@ public class CaffeineLRUCache<K, V> implements LRUCache<K, V>, RemovalListener<K
      * @param maxCacheSize
      *            the maximum cache size.
      */
-    public CaffeineLRUCache(int maxCacheSize) {
-        this(16, maxCacheSize);
-    }
-
-    public CaffeineLRUCache(int initialCapacity, int maxCacheSize) {
-        this(initialCapacity, maxCacheSize, false, false, false);
-    }
-
     public CaffeineLRUCache(int initalCapacity, int maxCacheSize, boolean stopOnEviction, boolean soft,
             boolean weak) {
         this(initalCapacity, maxCacheSize,

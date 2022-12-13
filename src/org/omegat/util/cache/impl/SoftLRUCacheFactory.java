@@ -31,17 +31,17 @@ import org.omegat.util.cache.LRUCacheFactory;
 /**
  * @author Hiroshi Miura
  */
-public class CaffeineLRUCacheFactory extends LRUCacheFactory {
+public class SoftLRUCacheFactory extends LRUCacheFactory {
 
-    private static CaffeineLRUCacheFactory instance = null;
+    private static LRUCacheFactory instance = null;
 
-    private CaffeineLRUCacheFactory() {
+    private SoftLRUCacheFactory() {
         super();
     }
 
-    public static CaffeineLRUCacheFactory getInstance() {
+    public static LRUCacheFactory getInstance() {
         if (instance == null) {
-            instance = new CaffeineLRUCacheFactory();
+            instance = new SoftLRUCacheFactory();
         }
         return instance;
     }
@@ -53,7 +53,7 @@ public class CaffeineLRUCacheFactory extends LRUCacheFactory {
      *            max capacity.
      */
     public <K, V> LRUCache<K, V> createLRUCache(int maxCacheSize) {
-        return new CaffeineLRUCache<>(maxCacheSize);
+        return createLRUCache(16, maxCacheSize);
     }
 
     /**
@@ -65,7 +65,7 @@ public class CaffeineLRUCacheFactory extends LRUCacheFactory {
      *            max capacity.
      */
     public <K, V> LRUCache<K, V> createLRUCache(int initialCapacity, int maxCacheSize) {
-        return new CaffeineLRUCache<>(initialCapacity, maxCacheSize);
+        return new CaffeineLRUCache<>(initialCapacity, maxCacheSize, false, true, false);
     }
 
 }

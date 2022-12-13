@@ -33,13 +33,13 @@ import org.omegat.util.cache.LRUCacheFactory;
  */
 public class SimpleLRUCacheFactory extends LRUCacheFactory {
 
-    private static SimpleLRUCacheFactory instance = null;
+    private static LRUCacheFactory instance = null;
 
     private SimpleLRUCacheFactory() {
         super();
     }
 
-    public static SimpleLRUCacheFactory getInstance() {
+    public static LRUCacheFactory getInstance() {
         if (instance == null) {
             instance = new SimpleLRUCacheFactory();
         }

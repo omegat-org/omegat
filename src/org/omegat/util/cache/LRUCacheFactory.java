@@ -25,9 +25,7 @@
 
 package org.omegat.util.cache;
 
-import org.omegat.util.cache.impl.CaffeineLRUCacheFactory;
-import org.omegat.util.cache.impl.CaffeineLRUSoftCacheFactory;
-import org.omegat.util.cache.impl.CaffeineLRUWeakCacheFactory;
+import org.omegat.util.cache.impl.SoftLRUCacheFactory;
 import org.omegat.util.cache.impl.SimpleLRUCacheFactory;
 
 /**
@@ -38,13 +36,11 @@ public abstract class LRUCacheFactory {
     protected LRUCacheFactory() {
     }
 
-    static public LRUCacheFactory getFactory(String id) {
-        if (id.equalsIgnoreCase("Caffeine")) {
-            return CaffeineLRUCacheFactory.getInstance();
-        } else if (id.equalsIgnoreCase("Weak")) {
-            return CaffeineLRUWeakCacheFactory.getInstance();
-        } else if (id.equalsIgnoreCase("Soft")) {
-            return CaffeineLRUSoftCacheFactory.getInstance();
+    public static LRUCacheFactory getInstance(String id) {
+        if ("soft".equalsIgnoreCase(id)) {
+            return SoftLRUCacheFactory.getInstance();
+        } else if ("standard".equalsIgnoreCase(id)) {
+            return SimpleLRUCacheFactory.getInstance();
         } else {
             return SimpleLRUCacheFactory.getInstance();
         }

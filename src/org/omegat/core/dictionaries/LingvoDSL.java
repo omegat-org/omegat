@@ -109,7 +109,7 @@ public class LingvoDSL implements IDictionaryFactory {
 
         /**
          * Constructor of LingvoDSL Dictionary driver.
-         * 
+         *
          * @param dictPath
          *            *.dsl file object.
          * @param indexPath
@@ -128,10 +128,9 @@ public class LingvoDSL implements IDictionaryFactory {
 
         /**
          * read article with exact match.
-         * 
+         *
          * @param word
          *            The word to look up in the dictionary
-         *
          * @return list of results.
          */
         @Override
@@ -141,10 +140,9 @@ public class LingvoDSL implements IDictionaryFactory {
 
         /**
          * read article with predictive match.
-         * 
+         *
          * @param word
          *            The word to look up in the dictionary
-         *
          * @return list of results.
          */
         @Override
@@ -152,7 +150,7 @@ public class LingvoDSL implements IDictionaryFactory {
             return readArticles(word, true);
         }
 
-        public List<DictionaryEntry> readArticles(final String word, boolean predictive) throws IOException {
+        private List<DictionaryEntry> readArticles(final String word, boolean predictive) throws IOException {
             List<DictionaryEntry> result;
             String cacheKey = predictive ? "1" : "0" + word;
             result = cache.get(cacheKey);

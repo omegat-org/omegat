@@ -27,21 +27,27 @@
 
 package org.omegat.core.machinetranslators;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.OptionalLong;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.cache.Cache;
+import javax.cache.CacheManager;
+import javax.cache.Caching;
+import javax.cache.expiry.CreatedExpiryPolicy;
+import javax.cache.expiry.Duration;
+import javax.cache.spi.CachingProvider;
 import javax.swing.JCheckBoxMenuItem;
 
-import org.omegat.util.HTMLUtils;
+import com.github.benmanes.caffeine.jcache.configuration.CaffeineConfiguration;
 import org.openide.awt.Mnemonics;
 
 import org.omegat.core.Core;
+import org.omegat.core.CoreEvents;
 import org.omegat.gui.exttrans.IMTGlossarySupplier;
 import org.omegat.gui.exttrans.IMachineTranslation;
 import org.omegat.util.CredentialsManager;
+import org.omegat.util.HTMLUtils;
 import org.omegat.util.Language;
 import org.omegat.util.PatternConsts;
 import org.omegat.util.Preferences;
@@ -58,12 +64,13 @@ public abstract class BaseTranslate implements IMachineTranslation {
     protected boolean enabled;
     protected IMTGlossarySupplier glossarySupplier;
 
+    protected static final Pattern RE_HTML = Pattern.compile("&#([0-9]+);");
 
     /**
-     * Machine translation implementation can use this cache for skip requests twice. Cache will not be
-     * cleared during OmegaT work, but it's okay - nobody will work weeks without exit.
+     * Machine translation implementation can use this cache for skip requests
+     * twice. Cache will be cleared when project change.
      */
-    private final Map<String, String> cache = Collections.synchronizedMap(new HashMap<String, String>());
+    private final Cache<String, String> cache;
 
     public BaseTranslate() {
         // Options menu item
@@ -79,6 +86,21 @@ public abstract class BaseTranslate implements IMachineTranslation {
             menuItem.setSelected(newValue);
             enabled = newValue;
         });
+        cache = getCafeineCache(getName());
+        CoreEvents.registerProjectChangeListener(eventType -> cache.clear());
+    }
+
+    protected Cache<String, String> getCafeineCache(String name) {
+        CachingProvider provider = Caching.getCachingProvider();
+        CacheManager manager = provider.getCacheManager();
+        Cache<String, String> cache1 = manager.getCache(name);
+        if (cache1 != null) {
+            return cache1;
+        }
+        CaffeineConfiguration<String, String> config = new CaffeineConfiguration<>();
+        config.setExpiryPolicyFactory(() -> new CreatedExpiryPolicy(Duration.ONE_DAY));
+        config.setMaximumSize(OptionalLong.of(1000));
+        return manager.createCache(name, config);
     }
 
     @Override
@@ -120,10 +142,14 @@ public abstract class BaseTranslate implements IMachineTranslation {
     protected abstract String translate(Language sLang, Language tLang, String text) throws Exception;
 
     /**
-     * Attempt to clean spaces added around tags by machine translators. Do it by comparing spaces between the source
-     * text and the machine translated text.
-     * @param machineText The text returned by the machine translator
-     * @param sourceText The original source segment
+     * Attempt to clean spaces added around tags by machine translators. Do it
+     * by comparing spaces between the source text and the machine translated
+     * text.
+     * 
+     * @param machineText
+     *            The text returned by the machine translator
+     * @param sourceText
+     *            The original source segment
      * @return
      */
     protected String cleanSpacesAroundTags(String machineText, String sourceText) {
@@ -132,7 +158,9 @@ public abstract class BaseTranslate implements IMachineTranslation {
         Matcher tag = PatternConsts.OMEGAT_TAG_SPACE.matcher(machineText);
         while (tag.find()) {
             String searchTag = tag.group();
-            if (sourceText.indexOf(searchTag) == -1) { // The tag didn't appear with a trailing space in the source text
+            if (sourceText.indexOf(searchTag) == -1) { // The tag didn't appear
+                                                       // with a trailing space
+                                                       // in the source text
                 String replacement = searchTag.substring(0, searchTag.length() - 1);
                 machineText = machineText.replace(searchTag, replacement);
             }
@@ -142,7 +170,9 @@ public abstract class BaseTranslate implements IMachineTranslation {
         tag = PatternConsts.SPACE_OMEGAT_TAG.matcher(machineText);
         while (tag.find()) {
             String searchTag = tag.group();
-            if (sourceText.indexOf(searchTag) == -1) { // The tag didn't appear with a leading space in the source text
+            if (sourceText.indexOf(searchTag) == -1) { // The tag didn't appear
+                                                       // with a leading space
+                                                       // in the source text
                 String replacement = searchTag.substring(1, searchTag.length());
                 machineText = machineText.replace(searchTag, replacement);
             }
@@ -154,8 +184,8 @@ public abstract class BaseTranslate implements IMachineTranslation {
         return cache.get(sLang + "/" + tLang + "/" + text);
     }
 
-    protected String putToCache(Language sLang, Language tLang, String text, String result) {
-        return cache.put(sLang + "/" + tLang + "/" + text, result);
+    protected void putToCache(Language sLang, Language tLang, String text, String result) {
+        cache.put(sLang.toString() + "/" + tLang.toString() + "/" + text, result);
     }
 
     /**
@@ -166,9 +196,9 @@ public abstract class BaseTranslate implements IMachineTranslation {
     }
 
     /**
-     * Retrieve a credential with the given ID. First checks temporary system properties, then falls back to
-     * the program's persistent preferences. Store a credential with
-     * {@link #setCredential(String, String, boolean)}.
+     * Retrieve a credential with the given ID. First checks temporary system
+     * properties, then falls back to the program's persistent preferences.
+     * Store a credential with {@link #setCredential(String, String, boolean)}.
      *
      * @param id
      *            ID or key of the credential to retrieve
@@ -183,16 +213,18 @@ public abstract class BaseTranslate implements IMachineTranslation {
     }
 
     /**
-     * Store a credential. Credentials are stored in temporary system properties and, if
-     * <code>temporary</code> is <code>false</code>, in the program's persistent preferences encoded in
-     * Base64. Retrieve a credential with {@link #getCredential(String)}.
+     * Store a credential. Credentials are stored in temporary system properties
+     * and, if <code>temporary</code> is <code>false</code>, in the program's
+     * persistent preferences encoded in Base64. Retrieve a credential with
+     * {@link #getCredential(String)}.
      *
      * @param id
      *            ID or key of the credential to store
      * @param value
      *            value of the credential to store
      * @param temporary
-     *            if <code>false</code>, encode with Base64 and store in persistent preferences as well
+     *            if <code>false</code>, encode with Base64 and store in
+     *            persistent preferences as well
      */
     protected void setCredential(String id, String value, boolean temporary) {
         System.setProperty(id, value);
@@ -200,9 +232,10 @@ public abstract class BaseTranslate implements IMachineTranslation {
     }
 
     /**
-     * Determine whether a credential has been stored "temporarily" according to the definition in
-     * {@link #setCredential(String, String, boolean)}. The result will be <code>false</code> if the
-     * credential is not stored at all, or if it is stored permanently.
+     * Determine whether a credential has been stored "temporarily" according to
+     * the definition in {@link #setCredential(String, String, boolean)}. The
+     * result will be <code>false</code> if the credential is not stored at all,
+     * or if it is stored permanently.
      *
      * @param id
      *            ID or key of credential
@@ -213,7 +246,6 @@ public abstract class BaseTranslate implements IMachineTranslation {
     protected boolean isCredentialStoredTemporarily(String id) {
         return !CredentialsManager.getInstance().isStored(id) && !System.getProperty(id, "").isEmpty();
     }
-
 
     /** Convert entities to character. Ex: "&#39;" to "'". */
     protected static String unescapeHTML(String text) {

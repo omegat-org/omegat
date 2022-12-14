@@ -194,6 +194,14 @@ dependencies {
         // JSON parser
         implementation "com.fasterxml.jackson.core:jackson-core:2.13.4"
         implementation "com.fasterxml.jackson.core:jackson-databind:2.13.4.2"
+
+        implementation("com.github.ben-manes.caffeine:caffeine:2.9.3") {
+            attributes {
+                attribute(Bundling.BUNDLING_ATTRIBUTE, project.objects.named(Bundling.class, Bundling.EXTERNAL))
+            }
+        }
+        implementation("com.github.ben-manes.caffeine:jcache:2.9.3")
+
     }
 
     // Test dependencies

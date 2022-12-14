@@ -32,6 +32,7 @@ import java.io.File;
 import java.time.Duration;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import io.github.eb4j.stardict.StarDictDictionary;
@@ -41,6 +42,7 @@ import org.omegat.core.CoreEvents;
 import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.util.Language;
 import org.omegat.util.Preferences;
+import org.omegat.util.cache.CacheFactory;
 
 /**
  * StarDict Dictionary support.
@@ -112,23 +114,19 @@ public class StarDict implements IDictionaryFactory {
 
         protected final StarDictDictionary dictionary;
         protected final Language language;
+        private final Map<String, List<DictionaryEntry>> cache;
 
         StarDictDict(final File file, Language language) throws Exception {
             dictionary = StarDictDictionary.loadDictionary(file, 1_000, Duration.ofMinutes(30));
             // Max cache size  to 1,000 items and expiry to 30 min.
             this.language = language;
+            cache = CacheFactory.getInstance("simple").createCache(64, 1000);
+            CoreEvents.registerProjectChangeListener(eventType -> cache.clear());
         }
 
         @Override
-        public List<DictionaryEntry> readArticles(String word) throws Exception {
-            List<StarDictDictionary.Entry> result = dictionary.readArticles(word);
-            if (result.isEmpty()) {
-                result = dictionary.readArticles(word.toLowerCase(language.getLocale()));
-            }
-            return result.stream()
-                    .filter(StarDictDict::useEntry)
-                    .map(StarDictDict::convertEntry)
-                    .collect(Collectors.toList());
+        public List<DictionaryEntry> readArticles(String word) {
+            return readArticles(word, false);
         }
 
         /**
@@ -136,14 +134,33 @@ public class StarDict implements IDictionaryFactory {
          */
         @Override
         public List<DictionaryEntry> readArticlesPredictive(String word) {
-            List<StarDictDictionary.Entry> result = dictionary.readArticlesPredictive(word);
-            if (result.isEmpty()) {
-                result = dictionary.readArticlesPredictive(word.toLowerCase(language.getLocale()));
+            return readArticles(word, true);
+        }
+
+        private List<DictionaryEntry> readArticles(String word, boolean predictive) {
+            List<DictionaryEntry> result;
+            String cacheKey = predictive ? "1" : "0" + word;
+            result = cache.get(cacheKey);
+            if (result == null) {
+                List<StarDictDictionary.Entry> entries;
+                if (predictive) {
+                    entries = dictionary.readArticlesPredictive(word);
+                    if (entries.isEmpty()) {
+                        entries = dictionary.readArticlesPredictive(word.toLowerCase(language.getLocale()));
+                    }
+                } else {
+                    entries = dictionary.readArticles(word);
+                    if (entries.isEmpty()) {
+                        entries = dictionary.readArticles(word.toLowerCase(language.getLocale()));
+                    }
+                }
+                result = entries.stream()
+                        .filter(StarDictDict::useEntry)
+                        .map(StarDictDict::convertEntry)
+                        .collect(Collectors.toList());
+                cache.put(cacheKey, result);
             }
-            return result.stream()
-                    .filter(StarDictDict::useEntry)
-                    .map(StarDictDict::convertEntry)
-                    .collect(Collectors.toList());
+            return result;
         }
 
         private static boolean useEntry(StarDictDictionary.Entry entry) {

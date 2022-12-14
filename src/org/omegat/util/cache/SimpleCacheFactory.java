@@ -29,6 +29,7 @@
 package org.omegat.util.cache;
 
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -59,7 +60,7 @@ public class SimpleCacheFactory extends CacheFactory {
      *            max capacity.
      */
     public <K, V> Map<K, V> createCache(int initialCapacity, int maxCacheSize) {
-        return new SimpleCache<>(initialCapacity, maxCacheSize);
+        return  Collections.synchronizedMap(new SimpleCache<>(initialCapacity, maxCacheSize));
     }
 
     /**

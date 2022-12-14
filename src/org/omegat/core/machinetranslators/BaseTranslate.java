@@ -27,8 +27,6 @@
 
 package org.omegat.core.machinetranslators;
 
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -38,12 +36,14 @@ import javax.swing.JCheckBoxMenuItem;
 import org.openide.awt.Mnemonics;
 
 import org.omegat.core.Core;
+import org.omegat.core.CoreEvents;
 import org.omegat.gui.exttrans.IMTGlossarySupplier;
 import org.omegat.gui.exttrans.IMachineTranslation;
 import org.omegat.util.CredentialsManager;
 import org.omegat.util.Language;
 import org.omegat.util.PatternConsts;
 import org.omegat.util.Preferences;
+import org.omegat.util.cache.SimpleCacheFactory;
 
 /**
  * Base class for machine translation.
@@ -60,10 +60,10 @@ public abstract class BaseTranslate implements IMachineTranslation {
     protected static final Pattern RE_HTML  = Pattern.compile("&#([0-9]+);");
 
     /**
-     * Machine translation implementation can use this cache for skip requests twice. Cache will not be
-     * cleared during OmegaT work, but it's okay - nobody will work weeks without exit.
+     * Machine translation implementation can use this cache for skip requests twice.
+     * Cache will be cleared when project change.
      */
-    private final Map<String, String> cache = Collections.synchronizedMap(new HashMap<String, String>());
+    private final Map<String, String> cache = SimpleCacheFactory.getInstance().createCache(64, 1024);
 
     public BaseTranslate() {
         // Options menu item
@@ -79,6 +79,7 @@ public abstract class BaseTranslate implements IMachineTranslation {
             menuItem.setSelected(newValue);
             enabled = newValue;
         });
+        CoreEvents.registerProjectChangeListener(eventType -> cache.clear());
     }
 
     @Override

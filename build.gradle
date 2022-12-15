@@ -122,7 +122,7 @@ dependencies {
         // Dictionary
         implementation 'com.github.takawitter:trie4j:0.9.8'
         implementation 'io.github.eb4j:dsl4j:0.5.3'
-        implementation 'tokyo.northside:stardict4j:0.4.1'
+        implementation 'tokyo.northside:stardict4j:0.5.0'
 
         // Encoding detections
         implementation 'com.github.albfernandez:juniversalchardet:2.4.0'

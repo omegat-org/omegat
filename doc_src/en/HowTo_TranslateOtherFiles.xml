@@ -6,24 +6,23 @@
 
   <para>OmegaT's file filters provide a wide range of support for common and
   less common file formats. If you need to support formats that are not covered
-  by OmegaT, there are four ways to do that:</para>
+  by OmegaT, there are four ways to do so:</para>
 
   <itemizedlist>
 	<listitem>
-	  <para>by associating the format to an already supported format,</para>
+	  <para>Associate the format to an already supported format.</para>
 	</listitem>
 	
 	<listitem>
-	  <para>by converting the format to an already supported format,</para>
+	  <para>Converting the format to an already supported format.</para>
 	</listitem>
 
 	<listitem>
-	  <para>by extending OmegaT with third-party plugins that offer support for
-	  that format,</para>
+	  <para>Extend OmegaT with third-party plugins that support the format.</para>
 	</listitem>
 
 	<listitem>
-	  <para>or by developping a filter for that format.</para>
+	  <para>Develop a filter for the format.</para>
 	</listitem>
   </itemizedlist>
   
@@ -55,7 +54,7 @@
 	  format.</para>
 
 	  <para>A number of free software third party utilities provide such
-	  "round-trip" conversion, including:</para>
+		“round-trip” conversion, including:</para>
 	  
 	  <itemizedlist id="how.to.translate.other.files.third.party.utilities">
 		<listitem id="how.to.translate.other.files.third.party.utilities.rainbow">
@@ -64,13 +63,12 @@
 
 		  <para>License: Apache License Version 2.0</para>
 
-		  <para>The Okapi Framework comes with a number of file filters, among
-		  which some that are not supported natively by OmegaT. See <ulink
+		  <para>The Okapi Framework comes with a number of file filters, including some not supported natively by OmegaT. See <ulink
 		  url="https://okapiframework.org/wiki/index.php?title=Filters">List of
 		  file filters</ulink> for details.</para>
 
 		  <para>Rainbow can create XLIFF 1.2 compliant files or OmegaT projects
-		  from all the files set as "input" files. Rainbow supported files are
+		  from all the files set as “input” files. Rainbow-supported files are
 		  converted into XLIFF and inserted as source files into a full fledged
 		  OmegaT project that you can open with OmegaT right away. See <ulink
 		  url="https://okapiframework.org/wiki/index.php/Rainbow_TKit_-_OmegaT_Project">Rainbow
@@ -107,12 +105,12 @@
 
 		  <para>License:  Eclipse Public License v1.0</para>
 
-		  <para>OpenXLIFF supports a number of file filters, among which some
-		  that are not supported natively by OmegaT. See <ulink
+		  <para>OpenXLIFF supports a number of file filters, including some
+		  not supported natively by OmegaT. See <ulink
 		  url="https://maxprograms.com/products/openxliff.html">OpenXLIFF
 		  Filters</ulink> for details. Maxprograms also distributes <ulink
 		  url="https://maxprograms.com/products/xliffmanager.html">XLIFF
-		  Manager</ulink>, which is a graphical user interface for the OpenXLIFF
+		  Manager</ulink>, a graphical user interface for the OpenXLIFF
 		  Filters.</para>
 
 		  <para>OpenXLIFF produces XLIFF 1.2 compliant files.</para>
@@ -121,31 +119,30 @@
 	  
 	  <warning>
 		<para>OmegaT's po support is robust enough to handle most po files, but
-		OmegaT's default XLIFF filter will not be sufficient to support XLIFF
-		files created by Rainbow, OpenXLIFF or any other CAT tool. Proper XLIFF
+		OmegaT's default XLIFF filter is not sufficient to support XLIFF
+		files created by Rainbow, OpenXLIFF or other CAT tools. Proper XLIFF
 		support in OmegaT can only be obtained thought third-party plugins. See
 		<link
 		linkend="how.to.translate.other.files.third.party.plugins">below</link>.</para>
 	  </warning>
 
-		<para>Some formats, like PDF, cannot be properly handled through "round
-		trip" conversions. They require a first conversion to a supported
-		format, and that format must be used as a base to manually create a
-		proper target language document.</para>
+		<para>Some formats, like PDF, cannot be properly handled through “round
+		trip” conversions. They require an intermediate conversion to a supported
+		format that serves as a base to manually create a proper target language
+		document.</para>
 		
-		<para>In the case of PDF, you will find a number of online or offline
-		utilities that provide a conversion to common office formats, but the
-		conversion will always require a lot of manual modifications to the
-		target document before being able to produce a proper PDF document. Make
-		sure you understand the format requirements when you start working on a
-		PDF or similar file.</para>
+		<para>You can find a number of online or offline utilities that convert PDF
+		to common office formats, but the conversion will always require extensive
+		manual adjustments to the target document before a proper PDF document can
+		be produced. Make sure you understand the format requirements when you
+		start working on a PDF or similar file.</para>
 	  </section>
 
 	  <section
 		  id="how.to.translate.other.files.third.party.plugins">
 		<title
 		id="how.to.translate.other.files.third.party.plugins.title">Third-party
-		plugin</title>
+		plugins</title>
 
 		<itemizedlist>
 		  <listitem>
@@ -161,7 +158,7 @@
 
 			<para>When installed, the plugin offers direct access to the added
 			formats and also allows you to associate a custom filter parameters
-			file that you have created in Rainbow. See <link
+			file created in Rainbow. See <link
 			linkend="how.to.translate.other.files.third.party.utilities.rainbow">above</link>.</para>
 		  </listitem>
 

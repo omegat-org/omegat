@@ -23,11 +23,11 @@
 
 	<orderedlist>
 	  <listitem>
-		<para>When you open a project, OmegaT backs
-		<filename>project_save.tmx</filename> up into a timestamped backup
+		<para>When you open a project, OmegaT backs up the
+		<filename>project_save.tmx</filename> file to a timestamped backup
 		file.</para>
 
-		<para>OmegaT keeps up to 10 of those files.</para>
+		<para>OmegaT keeps up to ten of those files.</para>
 
 		<note>
 		  <para>The backup filename follows the pattern
@@ -39,7 +39,7 @@
 	  </listitem>
 	  
 	  <listitem>
-		<para>Every time <filename>project_save.tmx</filename> has been
+		<para>Every time the <filename>project_save.tmx</filename> file is
 		modified:</para>
 		
 		<itemizedlist>
@@ -51,32 +51,31 @@
 		  </listitem>
 
 		  <listitem>
-			<para>or as a regular backup every 3 minutes by default,</para>
+			<para>or when making a regular backup (every 3 minutes by default),</para>
 		  </listitem>
 		</itemizedlist>
 
-		<para>OmegaT creates a backup with the name
+		<para>OmegaT creates a backup file named
 		<filename>project_save.tmx.bak</filename>.</para>
 
 		<para>That file is a copy of <filename>project_save.tmx</filename>
-		<emphasis>before</emphasis> the modification.</para>
+		<emphasis>before</emphasis> it was modified.</para>
 	  </listitem>
 
 	  <listitem>
 		<para>Every time you save the project data (use <link
 		linkend="menus.project" endterm="menus.project.title"/><link
 		linkend="menus.project.save" endterm="menus.project.save.title"/>), or
-		as a regular backup every 3 minutes by default, OmegaT saves the current
-		state of the translation into
-		<filename>project_save.tmx</filename></para>
+		when making a regular backup, OmegaT saves the current state of the
+		translation into <filename>project_save.tmx</filename>.</para>
 	  </listitem>
 	</orderedlist>
 
-	<para>The file <filename>project_save.tmx</filename> always contains the
+	<para>The <filename>project_save.tmx</filename> file always contains the
 	most recent data.</para>
 
 	<note>
-	  <para>You can control the frequency of the file saving in the <link
+	  <para>You can set the frequency of the regular backups in the <link
 	  linkend="dialogs.preferences.saving.and.output"
 	  endterm="dialogs.preferences.saving.and.output.title"/> preference.</para>
 	</note>
@@ -95,7 +94,7 @@
 	
 	<orderedlist>
       <listitem>
-		<para>Close the project, preventing any modification to the current
+		<para>Close the project to prevent any changes to the current
 		status of the backup files.</para>
       </listitem>
 
@@ -118,19 +117,19 @@
       </listitem>
 	</orderedlist>
 
-	<para>This action will restore the status of the translation to the moment
-	on which the selected backup was created. You may repeat this operation as
-	needed for locating older situations. Keep an eye on safely storing all the
-	different files you are renaming for eventual reuse. Also remember not
-	modifying the project configuration or adding TMX files in the meantime, as
-	that may affect the results.</para>
+	<para>This action will restore your translation to its state at the point the
+	selected backup was created. You may repeat this operation as
+	needed to find older states. Consider safely storing all the different
+	files you are renaming for eventual reuse. Also remember not to modify
+	the project configuration or add TMX files in the meantime, as doing so
+	may affect the results.</para>
 
 	<note>
-	  <para>Be cautious about making changes to the files in the source folder,
-	  to the segmentation rules, or to the file filters, partway through a
-	  project. Modifying either after you have started your translation could
-	  result in some segments not being displayed anymore, or unexpected new
-	  segments appearing instead.</para>
+	  <para>Exercise caution with changes made to files in the source folder,
+	  the segmentation rules, or the file filters, partway through a
+	  project. Modifying any of those after you have started your translation
+		could result in some segments disapparing or new segments appearing
+		unexpectedly.</para>
 	</note>
   </section>
 
@@ -139,9 +138,9 @@
 	<title id="how.to.restore.your.data.project.wont.open.title">Your project
 	won’t open?</title>
 
-	<para>In rare cases where your computer freezes and OmegaT does not have the
-	time to properly close, some important files can be broken and keep your
-	project from reopening after you have rebooted your machine.</para>
+	<para>In the rare case where your computer freezes and OmegaT does not have
+	time to close properly, some important files can be corrupted and keep your
+	project from reopening after you reboot your system.</para>
 
 	<para>Proceed as follows:</para>
 
@@ -151,18 +150,18 @@
       </listitem>
 
 	  <listitem>
-		<para>Copy the contents of the various user folders to their equivalent
-		in the new project (source files, reference translation memory files,
-		glossary files).</para>
+		<para>Copy the contents of the various user folders to the equivalent
+		location in the new project (source files, reference translation memory
+		files, glossary files).</para>
       </listitem>
 
       <listitem>
-		<para>In the old project, select the translation memory (backup or not)
-		most likely to contain the data you are looking for.</para>
+		<para>In the old project, select the translation memory file (main or
+		backup) most likely to contain the data you are looking for.</para>
       </listitem>
 
       <listitem>
-		<para>Rename it <filename>project_save.tmx</filename>.</para>
+		<para>Rename it <filename>project_save.tmx</filename> if necessary.</para>
       </listitem>
 
       <listitem>
@@ -175,9 +174,9 @@
       </listitem>
 	</orderedlist>
 
-	<para>This action will restore in the new project the status of the
-	translation to the moment on which the selected project translation memory
-	was created in the old project.</para>
+	<para>This action will set the new project the state of your translation
+	at the point the selected project translation memory was created in the old
+	project.</para>
   </section>
 
   <section id="how.to.restore.your.data.translated.file.broken">
@@ -204,7 +203,7 @@
       </listitem>
 
       <listitem>
-		<para>Fix all the tag issues that were found in your documents.</para>
+		<para>Fix all tag issues found in your documents.</para>
       </listitem>
 
       <listitem>
@@ -220,9 +219,8 @@
       </listitem>
 	</orderedlist>
 
-	<para>This action will fix the internal tag consistency issues that might
-	have been induced by not properly inserting the tags in the translation
-	while in OmegaT.</para>
+	<para>This action will fix any internal tag consistency issues due to not
+	inserting tags properly while entering the translation in OmegaT.</para>
   </section>
 
   <section id="how.to.restore.your.data.omegat.wont.behave">
@@ -273,8 +271,8 @@
       </listitem>
 
       <listitem>
-		<para>Copy one of the old files into the new configuration
-		folder.</para>
+		<para>Copy <emphasis>one</emphasis> of the old files into the new
+		configuration folder.</para>
       </listitem>
 	  
 	  <listitem>
@@ -283,12 +281,12 @@
 		<note>
 		  <para>If OmegaT does not work as expected at this point, you have
 		  identified the faulty file. Remove it from the configuration folder
-		  and proceed.</para>
+		  and, restart OmegaT, and proceed with your work.</para>
 		</note>
       </listitem>
 
 	  <listitem>
-		<para>Go back to step 5. above and proceed until you are
+		<para>Go back to Step 5. above and continue until you are
 		satisfied.</para>
       </listitem>
 	</orderedlist>
@@ -299,14 +297,14 @@
 
 	<itemizedlist>
       <listitem>
-		<para>To avoid losing important data, make regular copies of the file
-		<filename>/omegat/project_save.tmx</filename> to a backup media, such as
-		a USB key or an external hard drive, or to a cloud service.</para>
+		<para>To avoid losing important data, make regular copies of the
+		<filename>/omegat/project_save.tmx</filename> file to a backup medium
+		such as a USB key, an external hard drive, or a cloud service.</para>
       </listitem>
 
       <listitem>
-		<para>Regularly “practice emergency” measures such as restoring
-		translations from a project, to make sure you won’t lose too much time
+		<para>Regularly practice “emergency measures” such as restoring
+		translations from a project to make sure you won’t lose too much time
 		the day you need to use those skills.</para>
       </listitem>
 	</itemizedlist>

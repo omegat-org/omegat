@@ -52,8 +52,8 @@
 
 	<para>Each of the three files constitutes a bilingual export of the current
 	content of your translation. Their content comes from the global project
-	memory (<link linkend="project.folder.project.save.tmx"
-	endterm="project.folder.project.save.tmx.title"/>) but is <emphasis>strictly
+	memory (the <link linkend="project.folder.project.save.tmx"
+	endterm="project.folder.project.save.tmx.title"/> file) but is <emphasis>strictly
 	limited</emphasis> to what you have translated so far.</para>
 
 	<para>You can also use the <link linkend="menus.tools"
@@ -65,7 +65,7 @@
   <section id="how.to.use.tm.reuse.tm">
 	<title id="how.to.use.tm.reuse.tm.title">Reuse TMs</title>
 	
-	<para>To reuse translation memories from a previous project you have 2
+	<para>To reuse translation memories from a previous project you have two
 	options:</para>
 
 	<itemizedlist>
@@ -87,8 +87,8 @@
 		<para>Put the reference memories that you took from the old project and
 		put them in the <link linkend="project.folder.tm"
 		endterm="project.folder.tm.title"/> folder of the new project. Depending
-		on how reliable the memory is, you can prefer to put it in either of the
-		following subfolder:</para>
+		on how reliable a given memory is, you might prefer to put it in one of the
+		following subfolders:</para>
 
 		<itemizedlist>
 		  <listitem>
@@ -116,7 +116,7 @@
       <title id="how.to.tm.read.and.write.title">Reading TMs from other
       tools</title>
 
-      <para>OmegaT can read conformant TMX memories produced by other
+      <para>OmegaT can read TMX-standard compliant memories produced by other
       tools.</para>
 
       <para>Some tools produce invalid TMX files under certain conditions. You
@@ -131,8 +131,8 @@
 	  <title id="how.to.use.tm.store.your.tm.title">Managing your TMs</title>
 
 	  <para>You may want to store translation memories in separate folders, by
-	  client or by specialty so as to be able to reuse them quickly when need
-	  arises. Any storage folder can be used in replacement of the project <link
+	  client or area of specialty so you can reuse them quickly when the need
+	  arises. Any writable folder can be used instead of the project <link
 	  linkend="project.folder.tm" endterm="project.folder.tm.title"/>
 	  folder. See the <link linkend="dialogs.project.properties.file.locations"
 	  endterm="dialogs.project.properties.file.locations.title"/> section of the
@@ -149,8 +149,7 @@
 
       <itemizedlist>
 		<listitem>
-          <para>Copy the documents for which you want to create a translation
-          memory into the <filename class="directory">source</filename> folder
+          <para>Copy only the documents whose content you want to include into the <filename class="directory">source</filename> folder
           of your project.</para>
 		</listitem>
 		
@@ -162,14 +161,14 @@
 		  <para>Use <link linkend="menus.goto" endterm="menus.goto.title"/><link
 		  linkend="menus.goto.next.untranslated.segment"
 		  endterm="menus.goto.next.untranslated.segment.title"/> to find any
-		  untranslated segments (and eventually translate them),</para>
+		  untranslated segments (and translate them, if need be).</para>
 		</listitem>
 
 		<listitem>
 		  <para>Use <link linkend="menus.tools"
 		  endterm="menus.tools.title"/><link linkend="menus.tools.check.issues"
 		  endterm="menus.tools.check.issues.title"/> to check for possible
-		  issues,</para>
+		  issues.</para>
 		</listitem>
 
 		<listitem>
@@ -182,9 +181,9 @@
       </itemizedlist>
 
       <para>The TMX files located in the exported translation memory folder now
-      contain only the original and translated text, in the selected language
-      pair, of the files you copied into the source folder. See the <link
-      linkend="dialogs.project.properties.file.locations.exported.tms"
+      contain only the original and translated text from the files you copied
+      into the source folder, in the selected language pair. See the
+      <link linkend="dialogs.project.properties.file.locations.exported.tms"
       endterm="dialogs.project.properties.file.locations.exported.tms.title"/>
       project property for details.</para>
   </section>
@@ -208,17 +207,17 @@
 		endterm="how.to.use.tm.create.your.tm.title"/> section above.</para>
 
 		<para>If you write the TMX file to a folder on a shared disk, you can
-		ask your partner to use that folder in replacement of the <link
+		ask your partner to assign that folder as the <link
 		linkend="project.folder.tm" endterm="project.folder.tm.title"/> folder
 		for the current translation.</para>
 
 		<para>Conversely, you can ask your partner to write the project TMX
-		files to a folder on a shared disk that you will use in replacement of
+		files to a folder on a shared disk that you will assign as
 		your <link linkend="project.folder.tm"
 		endterm="project.folder.tm.title"/> folder for the current
 		translation.</para>
 
-		<para>OmegaT instantaneously notices modifications to TMX files.
+		<para>OmegaT instantaneously recognizes modifications to TMX files.
 		Therefore, any time one side creates or modifies such a TMX using <link
 		linkend="menus.project"
 		endterm="menus.project.title"/><link
@@ -228,15 +227,15 @@
 		locally.</para>
 
 		<para>This approach also works just as well for sharing glossaries where
-		the project writable glossary (with a non-default name to avoir
-		overwriting) is located in a common glossary folder. See the <link
+		the project writable glossary (with a non-default name to avoid
+		overwriting the file) is located in a shared glossary folder. See the <link
 		linkend="app.glossaries" endterm="app.glossaries.title"/> appendix for
 		details.</para>
 
 		<note>
-		  <para>Such sharing works well when the lag between TMX updates is not
-		  important, for example, a translator sends data to a reviewer a few
-		  times a day.</para>
+		  <para>This approach to sharing works well when the lag between TMX
+			updates is not important: a translator sending data to a reviewer a few
+		  times a day, for example.</para>
 		</note>
 	  </listitem>
 	</varlistentry>
@@ -294,27 +293,26 @@ arbitrary language code, and the 4th the current translation to French.</para>
 
 	<orderedlist>
 	  <listitem>
-		<para>create a folder called <filename
+		<para>Create a folder called <filename
 		class="directory">tmx2source</filename> in the <link
 		linkend="project.folder.tm" endterm="project.folder.tm.title"/>
-		folder,</para>
+		folder.</para>
 	  </listitem>
 
 	  <listitem>
-		<para>copy your "first-third" language translation memory there,</para>
+		<para>Copy your “first-third” language translation memory there.</para>
 	  </listitem>
 
 	  <listitem>
-		<para>rename the memory <filename>LL_CC.tmx</filename> or
+		<para>Rename the memory <filename>LL_CC.tmx</filename> or
 		<filename>LL-CC.tmx</filename>, where <emphasis>LL</emphasis> is the
-		internal language code that you want to display as reference and
+		internal code of the language you want to display as reference and
 		<emphasis>CC</emphasis> is an arbitrary 2-letter code.</para>
 	  </listitem>
 	</orderedlist>
 	
     <note>
-	  <para>You can use any number of TMX files in as many different language
-	  pairs as "bridge" languages as you want.</para>	  
+	  <para>You can use any number of TMX files containing as many different “bridge” language pairs as you want.</para>	  
 	</note>
   </section>
 </section>

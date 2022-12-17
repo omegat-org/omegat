@@ -155,38 +155,39 @@
     </target>
 
     <target name="css">
-      <copy file="OmegaT.css"
+      <copy file="OmegaT_webhelp.css"
             tofile="../docs/${language}/OmegaT_webhelp.css" />
     </target>
 
 
-    <target name="instant-start">
+    <target name="first-steps">
         <java dir="."
               fork="true"
               failonerror="true"
               maxmemory="128m"
               classname="com.icl.saxon.StyleSheet" >
             <arg value="-o" />
-            <arg value="../docs/${language}/instantStartGuideNoTOC.html" />
-            <arg value="${language}/InstantStartGuide.xml" />
+            <arg value="../docs/${language}/first_steps.html" />
+            <arg value="${language}/First_Steps.xml" />
             <arg value="../../docbook-utf8.xsl" />
             <arg value="base.dir=../docs/${language}/" />
             <arg value="chunk.section.depth=0" />
             <arg value="chunk.first.sections=0" />
             <arg value="use.extensions=1" />
             <arg value="chapter.autolabel=0" />
-            <arg value="section.autolabel=1" />
+            <arg value="section.autolabel=0" />
             <arg value="tablecolumns.extension=0" />
             <arg value="toc.max.depth=0" />
             <arg value="generate.toc=0" />
             <arg value="generate.index=0" />
-            <arg value="html.stylesheet=OmegaT.css" />
+            <arg value="html.stylesheet=OmegaT_first_steps.css" />
             <classpath>
                 <pathelement location="${saxon}" />
                 <pathelement path="${saxon}" />
             </classpath>
         </java>
-        <copy file="${language}/OmegaT.css" tofile="../docs/${language}/OmegaT.css" />
+		<copy file="OmegaT_first_steps.css"
+			  tofile="../docs/${language}/OmegaT_first_steps.css" />
     </target>
 
     <target name="pictures">

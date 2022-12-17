@@ -1,0 +1,20 @@
+body {
+	font-family: sans-serif;
+	margin: 1em;
+	line-height: 1.2em;
+}
+
+h1, h2, table, dt {
+	color: #77A43B;
+}
+
+code,
+.guimenu,
+.guisubmenu,
+.guimenuitem {
+	color: #DE5B17;
+}
+
+.guibutton {
+    background: #dcdcdc;
+}

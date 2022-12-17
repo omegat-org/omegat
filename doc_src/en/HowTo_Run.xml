@@ -38,15 +38,15 @@
 	<title id="running.omegat.on.linux.title">On Linux</title>
 
 	<para>You can launch OmegaT from the command line with a script that
-	includes start-up options. See <link
+	includes start-up options. See the <link
 	endterm="launch.with.command.line.title"
-	linkend="launch.with.command.line"/> for details.</para>
+	linkend="launch.with.command.line"/> section for details.</para>
 
 	<para>You can also click on <filename>OmegaT.jar</filename> to launch it
-	directly if the <filename>.jar</filename> extension is associated to the
+	directly if the <filename>.jar</filename> extension is associated with the
 	system Java launcher.</para>
 
-	<para>The package also provides a <filename>omegat.kaptn</filename> Kaptain
+	<para>The package also provides the <filename>omegat.kaptn</filename> Kaptain
 	script, which KDE users might find useful, as well as an
 	<filename>OmegaT</filename> bash script that automatically launches the
 	appropriate <application>java</application> command to run OmegaT.</para>
@@ -65,24 +65,24 @@
 
 	<para>And it also comes with the generic <filename>OmegaT.jar</filename>
 	file located in <filename>OmegaT.app/Contents/MacOS/Java/</filename> that
-	you can use to launch OmegaT from the command line. See <link
+	you can use to launch OmegaT from the command line. See the <link
 	endterm="launch.with.command.line.title"
-	linkend="launch.with.command.line"/> for details.</para>
+	linkend="launch.with.command.line"/> section for details.</para>
 
 	<para>You can modify the behavior of OmegaT.app by editing the
 	<filename>Configuration.properties</filename> (OmegaT configuration) as well
 	as the <filename>Info.plist</filename> (Java configuration) files located
 	inside the OmegaT.app package.</para>
 
-	<para><filename>Configuration.properties</filename> is located in
-	<filename>Contents/Resources/</filename>.</para>
-	<para><filename>Info.plist</filename> is located in
-	<filename>Contents/</filename>.</para>
+	<para>The <filename>Configuration.properties</filename> file is located in
+	the <filename>Contents/Resources/</filename> folder.</para>
+	<para>The <filename>Info.plist</filename> file is located in the
+	<filename>Contents/</filename> folder.</para>
 
 	<note>
-	  <para>To access the files inside <filename>OmegaT.app</filename>,
-	  right-click on <filename>OmegaT.app</filename> and select “Show Package
-	  Contents”.</para>
+	  <para>To access the files inside the <filename>OmegaT.app</filename>,
+	  package right-click on <filename>OmegaT.app</filename> and select “Show 
+	  Package Contents”.</para>
 	</note>
 
 	<para>Use your text editor of choice to modify the files.</para>
@@ -92,8 +92,8 @@
 		<term>Configuration.properties</term>
 
 		<listitem>
-		  <para>For predefined options, remove the <literal>#</literal> before a
-		  parameter to enable it. For example,
+		  <para>For predefined options, remove the <literal>#</literal> symbol 
+		  before a parameter to enable it. For example,
 		  <literal>user.language=ja</literal> (without the <literal>#</literal>)
 		  will launch OmegaT with the user interface in Japanese.</para>
 		</listitem>
@@ -108,7 +108,7 @@
 		  <para><literal>&lt;!-- &lt;string&gt;-Xmx6g&lt;/string&gt;
 		  --&gt;</literal></para>
 		  <para>by removing the <literal>&lt;!--</literal> and
-		  <literal>--&gt;</literal>.</para>
+		  <literal>--&gt;</literal> markers.</para>
 
 		  <para>This will launch OmegaT with 6 GB of memory; change the
 		  <literal>6g</literal> to the desired amount.</para>
@@ -127,13 +127,13 @@
 	<title id="running.omegat.on.other.systems.title">On other platforms</title>
 
 	<para>Methods vary from one system to another, but in general, once OmegaT
-	is installed, you can launch it directly from the command line.  See <link
+	is installed, you can launch it directly from the command line.  See the <link
 	endterm="launch.with.command.line.title"
-	linkend="launch.with.command.line"/> for details.</para>
+	linkend="launch.with.command.line"/> section for details.</para>
 
 	<para>You can create a script that includes the desired command line launch
 	parameters. If <filename>.jar</filename> files are properly associated with
-	&javaversionlong; and your PATH settings are correct, you can also simply
+	the &javaversionlong; and your PATH settings are correct, you can also simply
 	click (or double-click) on <filename>OmegaT.jar</filename> to launch it
 	directly.</para>
 
@@ -211,7 +211,7 @@
 		
 		<para>That location is presented as
 		<filename>path/to/OmegaT.jar</filename> in this chapter. Replace it with
-		the actual location on your system.</para>
+		the actual location of the file on your system.</para>
 	  </note>	
 	</section>
 

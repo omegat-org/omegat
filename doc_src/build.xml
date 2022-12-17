@@ -154,49 +154,42 @@
               tofile="../docs/${language}/${version.properties.filename}" />
     </target>
 
-    <target name="check-css">
-	  <available property="file.exists" file="../doc_src/${language}/OmegaT.css"/>
-	</target>
-	
-	<target name="local-css" depends="check-css" if="${file.exists}">
-      <copy file="../doc_src/${language}/OmegaT.css"
-            tofile="../docs/${language}/OmegaT.css" />
-    </target>
-
-	<target name="global-css" depends="check-css" unless="${file.exists}">
-      <copy file="OmegaT.css"
-            tofile="../docs/${language}/OmegaT.css" />
+    <target name="css">
+      <copy file="OmegaT_webhelp.css"
+            tofile="../docs/${language}/OmegaT_webhelp.css" />
     </target>
 
 	<target name="css" depends="local-css,global-css"/>
 	
 
-    <target name="instant-start" depends="css">
+    <target name="first-steps">
         <java dir="."
               fork="true"
               failonerror="true"
               maxmemory="128m"
               classname="com.icl.saxon.StyleSheet" >
             <arg value="-o" />
-            <arg value="../docs/${language}/instantStartGuideNoTOC.html" />
-            <arg value="${language}/InstantStartGuide.xml" />
+            <arg value="../docs/${language}/first_steps.html" />
+            <arg value="${language}/First_Steps.xml" />
             <arg value="../../docbook-utf8.xsl" />
             <arg value="base.dir=../docs/${language}/" />
             <arg value="chunk.section.depth=0" />
             <arg value="chunk.first.sections=0" />
             <arg value="use.extensions=1" />
             <arg value="chapter.autolabel=0" />
-            <arg value="section.autolabel=1" />
+            <arg value="section.autolabel=0" />
             <arg value="tablecolumns.extension=0" />
             <arg value="toc.max.depth=0" />
             <arg value="generate.toc=0" />
             <arg value="generate.index=0" />
-            <arg value="html.stylesheet=OmegaT.css" />
+            <arg value="html.stylesheet=OmegaT_first_steps.css" />
             <classpath>
                 <pathelement location="${saxon}" />
                 <pathelement path="${saxon}" />
             </classpath>
         </java>
+		<copy file="OmegaT_first_steps.css"
+			  tofile="../docs/${language}/OmegaT_first_steps.css" />
     </target>
 
     <target name="pictures">

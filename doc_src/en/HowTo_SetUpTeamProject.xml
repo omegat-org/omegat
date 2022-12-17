@@ -26,7 +26,7 @@
     <title
     id="how.to.setup.team.project.prepare.the.repository.title">Preparations</title>
 
-	<para>The steps to set up a team project are the following:</para>
+	<para>Here are the steps to set up a team project:</para>
 
 	<orderedlist>
       <listitem id="how.to.setup.team.project.create.empty.repository">
@@ -177,7 +177,7 @@
           <listitem>
 			<para>Projects on a self-hosted server</para>
 
-			<para>If the server is self-hosted that does not have a provision
+			<para>If the server is self-hosted and does not have a provision
 			for translators to register an account themselves, the team project
 			administrator must create accounts with write access for the
 			translators.</para>
@@ -254,7 +254,7 @@
 	disparate locations, it can also be used for other types of files.</para>
 
 	<para>A list of mapping parameters is presented below, and examples of their
-	use is provided in the next section.</para>
+	use are provided in the next section.</para>
 
 	<variablelist>
       <varlistentry>

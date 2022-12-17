@@ -11,8 +11,8 @@
   location of the project, or an <filename>omegat.project</filename>
   file.</para>
 
-  <para>Once the project is downloaded, it is installed locally and must only be
-  opened locally to synchronize with the server.</para>
+  <para>After the project is downloaded, it is installed locally and only needs
+  to be opened locally to synchronize with the server.</para>
 
   <para>Repository credentials are stored in the <link
   linkend="configuration.folder.extra.contents.repositories"
@@ -22,15 +22,15 @@
   endterm="dialog.preferences.team.title.repository.credentials.title"/>
   preferences.</para>
 
-  <para>Since synchronization takes place by default every 3 minutes, project
-  members will sometime translate or modify a segment that was already
-  translated by another member but not synchronized yet. When that happens,
+  <para>Since synchronization takes place by default every three minutes, 
+  project members will sometime translate or modify a segment that has already
+  been translated by another member but not synchronized yet. When that happens,
   members have to select the appropriate translation.</para>
 
   <para>Members can take turns translating and reviewing the files. The Search
   function allows them to filter the editor pane on contents translated by a
   given person, or on contents translated after or before a given time,
-  etc.</para>
+  for example.</para>
   
   <variablelist>
     <varlistentry>
@@ -46,7 +46,7 @@
 			linkend="menus.project.download.team.project"/> to bring up the
 			<guilabel>Download Team Project</guilabel> dialog.</para>
 
-			<para>Enter the URL provided by the team project manager in the
+			<para>Enter the URL provided by the team project administrator in the
 			<guilabel>Repository URL:</guilabel> field at the top of the dialog,
 			and specify a folder for the project in the <guilabel>New Local
 			Project Folder:</guilabel> field. Leave the <guilabel>Default
@@ -90,7 +90,7 @@
       <term>Synchronization</term>
 
       <listitem>
-        <para>Synchronizing the project adds translations made by all the team
+        <para>Synchronizing the project adds translations made by all team
         members to local copies of the project. Only the contents of the two
         following files are synchronized:</para>
 
@@ -104,9 +104,9 @@
           </listitem>
         </itemizedlist>
 
-        <para>During synchronization, all the other local files are overwritten
+        <para>During synchronization, all other local files are overwritten
         with the versions on the remote server, exept for
-        <filename>omegat.project</filename>, see below.</para>
+        <filename>omegat.project</filename> (see below).</para>
 
         <para>OmegaT synchronizes a team project when it is opened, reloaded,
         closed or saved. This means the automatic save function also regularly
@@ -138,7 +138,7 @@
 
 			<para>In a team project, the basic configuration parameters of the
 			local project are always overridden by the configuration on the
-			server that was set by the project administrator.</para>
+			server originally set by the project administrator.</para>
           </listitem>
 
           <listitem>
@@ -217,12 +217,12 @@
       <term>Target files</term>
 
       <listitem>
-        <para>After you generate the target files, and if the project
-        administrator requests so, use <link endterm="menus.project.title"
+        <para>After you generate the target files use
+        <link endterm="menus.project.title"
         linkend="menus.project"/><link
         endterm="menus.project.commit.target.files.title"
         linkend="menus.project.commit.target.files"/> to add them to the
-        server.</para>
+        server, if the project administrator has requested you to do so.</para>
       </listitem>
     </varlistentry>
 

@@ -591,6 +591,12 @@
 	<title
 	id="dialog.preferences.auto.completion.title"><guilabel>Auto-Completion</guilabel></title>
 
+	<para>The auto-completion menu is available in the <link
+	linkend="panes.editor" endterm="panes.editor.title"/> pane. See the <link
+	linkend="panes.editor.auto.completion.menu"
+	endterm="panes.editor.auto.completion.menu.title"/> section for
+	details.</para>
+	
 	<para>Click on <guilabel>Glossary</guilabel> to configure the auto-completer
 	glossary view.</para>
 

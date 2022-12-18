@@ -69,13 +69,17 @@
       <listitem>
         <para>Reloads the project to take external changes in source files and
         project settings into account.</para>
-        <note><para>New translation memories placed in the <link
-        linkend="project.folder.tm" endterm="project.folder.tm.title"/> folder
-        while translating are automatically taken into account as soon as the
-        cursor moves from one segment to another. Similarly, the contents of the
-        <link linkend="project.folder.glossary"
-        endterm="project.folder.glossary.title"/> folder are automatically
-        recognized and do not require reloading the project.</para></note>
+        <note>
+		  <para>New translation memories placed in the <link
+		  linkend="project.folder.tm" endterm="project.folder.tm.title"/> folder
+		  while translating are automatically taken into account as soon as the
+		  cursor moves from one segment to another. Similarly, the contents of
+		  the <link linkend="project.folder.glossary"
+		  endterm="project.folder.glossary.title"/> folder are automatically
+		  recognized and do not require reloading the project.</para>
+		</note>
+		<para>When reloading a team project, OmegaT reloads the remote
+		properties, not the local properties.</para>
       </listitem>
     </varlistentry>
 

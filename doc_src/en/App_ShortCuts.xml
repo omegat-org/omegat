@@ -710,6 +710,13 @@
             </row>
 
             <row>
+              <entry>Select Source Text</entry>
+              <entry>editSelectSourceMenuItem</entry>
+              <entry>ctrl shift A</entry>
+              <entry>meta shift A</entry>
+            </row>
+
+            <row>
               <entry>Insert Missing Source Tags</entry>
               <entry>editTagPainterMenuItem</entry>
               <entry>ctrl shift T</entry>

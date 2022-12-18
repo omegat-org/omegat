@@ -234,13 +234,14 @@
 		  <emphasis>as</emphasis> reliable as the project memory.</para>
 
 		  <note>
-			<para>Only the <filename>tm/auto</filename> folder is automatically
-			generated at project creation. You must manually create and fill any
-			other <filename>tm</filename> folder that you want to
-			use.</para>
+			<para>Enable the <link
+			linkend="dialogs.preferences.editor.save.auto-populated.status"
+			endterm="dialogs.preferences.editor.save.auto-populated.status.title"/>
+			option to have OmegaT remember that the inserted matches came from
+			this folder.</para>
 		  </note>
 
-		  <orderedlist>
+		<orderedlist>
 			<listitem>
 			  <para>Put the applicable memories in the <filename
 			  class="directory">tm/auto</filename> folder.</para>
@@ -261,7 +262,13 @@
 			  project translation memory.</para>
 			</listitem>
 		  </orderedlist>
-		  
+
+		  <para>Use the navigation menus found in <link linkend="menus.goto"
+		  endterm="menus.goto.title"/><link
+		  linkend="menus.goto.auto.populated.segments"
+		  endterm="menus.goto.auto.populated.segments.title"/> to navigate the
+		  segments that have been inserted.</para>
+				
 		  <warning>
 			<para>If you remove a TMX file from <filename
 			class="directory">tm/auto</filename> before Step 3, its content will
@@ -278,15 +285,25 @@
 
 		  <para>Translations from TMX files placed in this folder are
 		  automatically inserted in matching segments without the automatic
-		  prefix, making it unnecessary to confirm these segments. Translations
-		  coming from this folder are considered to be <emphasis>more</emphasis>
-		  reliable than the current project memory.</para>
+		  prefix, making it unnecessary to confirm these segments.</para>
+
+		  <para>Translations coming from this folder are considered to be
+		  <emphasis>more</emphasis> reliable than the current project
+		  memory.</para>
 
 		  <para>If you have no doubt that a given TMX contains more accurate
 		  translations than the current <filename>project_save.tmx</filename>
 		  file, put that TMX in the <filename
-		  class="directory">tm/enforce</filename> folder to overwrite the existing
-		  translations unconditionally.</para>
+		  class="directory">tm/enforce</filename> folder to overwrite the
+		  existing translations unconditionally.</para>
+
+		  <note>
+			<para>Enable the <link
+			linkend="dialogs.preferences.editor.save.auto-populated.status"
+			endterm="dialogs.preferences.editor.save.auto-populated.status.title"/>
+			option to have OmegaT remember that the inserted matches came from
+			this folder.</para>
+		  </note>
 
 		  <orderedlist>
 			<listitem>
@@ -325,7 +342,13 @@
 			  </itemizedlist>
 			</listitem>
 		  </orderedlist>
-		  
+
+		  <para>Use the navigation menus found in <link linkend="menus.goto"
+		  endterm="menus.goto.title"/><link
+		  linkend="menus.goto.auto.populated.segments"
+		  endterm="menus.goto.auto.populated.segments.title"/> to navigate the
+		  segments that have been inserted.</para>
+
 		  <warning>
 			<para>If you remove a TMX file from <filename
 			class="directory">tm/enforce</filename> before Step 3, none of the

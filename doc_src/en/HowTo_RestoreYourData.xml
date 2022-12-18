@@ -13,7 +13,13 @@
   <section id="how.to.restore.your.data.automatic.backup">
 	<title id="how.to.restore.your.data.automatic.backup.title">Automatic
 	backups</title>
-	
+
+	<para>OmegaT creates backups of your project settings to ensure it can
+	retrieve them in cas of problem. See the <link
+	linkend="project.folder.omegat.project.file"
+	endterm="project.folder.omegat.project.file.title"/> section for
+	details.</para>
+	  
 	<para>OmegaT regularly and automatically stores all your progress in the
 	<link linkend="project.folder.project.save.tmx"
 	endterm="project.folder.project.save.tmx.title"/> file located in the

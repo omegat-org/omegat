@@ -979,6 +979,34 @@
             </row>
 
             <row>
+              <entry>Next Segment from tm/auto/</entry>
+              <entry>gotoNextXAutoMenuItem</entry>
+              <entry>ctrl alt COMMA</entry>
+              <entry>meta alt COMMA</entry>
+            </row>
+
+            <row>
+              <entry>Previous Segment from tm/auto/</entry>
+              <entry>gotoPrevXAutoMenuItem</entry>
+              <entry>ctrl alt shift COMMA</entry>
+              <entry>meta alt shift COMMA</entry>
+            </row>
+
+            <row>
+              <entry>Next Segment from tm/enforce/</entry>
+              <entry>gotoNextXEnforcedMenuItem</entry>
+              <entry>ctrl alt PERIOD</entry>
+              <entry>meta alt PERIOD</entry>
+            </row>
+
+            <row>
+              <entry>Previous Segment from tm/enforce/</entry>
+              <entry>gotoPrevXEnforcedMenuItem</entry>
+              <entry>ctrl alt shift PERIOD</entry>
+              <entry>meta alt shift PERIOD</entry>
+            </row>
+
+            <row>
               <entry>Forward in History</entry>
               <entry>gotoHistoryForwardMenuItem</entry>
               <entry>ctrl shift N</entry>

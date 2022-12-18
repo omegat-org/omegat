@@ -63,7 +63,8 @@
 
 		  <para>License: Apache License Version 2.0</para>
 
-		  <para>The Okapi Framework comes with a number of file filters, including some not supported natively by OmegaT. See <ulink
+		  <para>The Okapi Framework comes with a number of file filters,
+		  including some not supported natively by OmegaT. See <ulink
 		  url="https://okapiframework.org/wiki/index.php?title=Filters">List of
 		  file filters</ulink> for details.</para>
 

@@ -133,6 +133,64 @@
       </listitem>
     </varlistentry>
 
+	<varlistentry id="menus.goto.auto.populated.segments">
+	  <term
+	  id="menus.goto.auto.populated.segments.title"><guisubmenu>Auto-Populated
+	  Segments</guisubmenu></term>
+	  <listitem>
+        <para>Navigate between segments that were automatically populated by
+        exact matches from the <link linkend="project.folder.tm.auto"
+        endterm="project.folder.tm.auto.title"/> and <link
+        linkend="project.folder.tm.enforce.title"
+        endterm="project.folder.tm.enforce.title"/> subfolders.</para>
+
+		<para>See the <link linkend="how.to.use.tm.reuse.tm"
+		endterm="how.to.use.tm.reuse.tm.title"/> how-to for details.</para>
+
+		<itemizedlist>
+		  <listitem id="menus.goto.auto.populated.segments.next.auto">
+			<para
+			id="menus.goto.auto.populated.segments.next.auto.title"><guimenuitem>Next
+			Segment from tm/auto/</guimenuitem>
+			<keycombo><keycap>C</keycap><keycap>A</keycap><keycap>,</keycap></keycombo></para>
+
+			<para>Moves to the next segment that was inserted from
+			<filename>tm/auto/</filename>.</para>
+		  </listitem>
+
+		  <listitem id="menus.goto.auto.populated.segments.prev.auto">
+			<para
+			id="menus.goto.auto.populated.segments.prev.auto.title"><guimenuitem>Previous
+			Segment from tm/auto/</guimenuitem>
+			<keycombo><keycap>S</keycap><keycap>C</keycap><keycap>A</keycap><keycap>,</keycap></keycombo></para>
+
+			<para>Moves to the previous segment that was inserted from
+			<filename>tm/auto/</filename>.</para>
+		  </listitem>
+
+		  <listitem id="menus.goto.auto.populated.segments.next.enforce">
+			<para
+			id="menus.goto.auto.populated.segments.next.enforce.title"><guimenuitem>Next
+			Segment from tm/enforce/</guimenuitem>
+			<keycombo><keycap>C</keycap><keycap>A</keycap><keycap>.</keycap></keycombo></para>
+
+			<para>Moves to the next segment that was inserted from
+			<filename>tm/enforce/</filename>.</para>
+		  </listitem>
+
+		  <listitem id="menus.goto.auto.populated.segments.prev.enforce">
+			<para
+			id="menus.goto.auto.populated.segments.prev.enforce.title"><guimenuitem>Next
+			Segment from tm/auto/</guimenuitem>
+			<keycombo><keycap>S</keycap><keycap>C</keycap><keycap>A</keycap><keycap>.</keycap></keycombo></para>
+
+			<para>Moves to the previous segment that was inserted from
+			<filename>tm/enforce/</filename>.</para>
+		  </listitem>
+		</itemizedlist>
+	  </listitem>
+	</varlistentry>
+
     <varlistentry id="menus.goto.forward.in.history">
       <term id="menus.goto.forward.in.history.title"><guimenuitem>Forward in
       History</guimenuitem>

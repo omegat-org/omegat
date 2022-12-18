@@ -563,7 +563,16 @@ When enabled, all the formatting tags are removed from source segments.</program
           <para>The Editor pane context menu offers:</para>
 
 		  <itemizedlist>
-            <listitem>
+			<listitem>
+			  <para>Matched glossary items, and their comments as a tooltip if
+			  existing. Use <link endterm="menus.view.title"
+			  linkend="menus.view"/><link
+			  endterm="menus.view.mark.glossary.matches.title"
+			  linkend="menus.view.mark.glossary.matches"/> to enable this
+			  feature.</para>
+			</listitem>
+
+			<listitem>
               <para><guilabel>Cut</guilabel>, <guilabel>Copy</guilabel>,
               <guilabel>Paste</guilabel> functions,</para>
             </listitem>

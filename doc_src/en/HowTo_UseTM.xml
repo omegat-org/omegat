@@ -70,7 +70,7 @@
 
 	<itemizedlist>
 	  <listitem>
-		<para>Either open the old project and put the new source files in its <link
+		<para>Open the old project and put the new source files in its <link
 		linkend="project.folder.source" endterm="project.folder.source.title"/>
 		folder.</para>
 		
@@ -87,9 +87,9 @@
 	  </listitem>
 	  
 	  <listitem>
-		<para>Or put the reference memories that you took from the old project and
-		put them in the <link linkend="project.folder.tm"
-		endterm="project.folder.tm.title"/> folder of the new project.</para>
+		<para>Alternatively, put the reference memories from the old project in
+		the <link linkend="project.folder.tm" endterm="project.folder.tm.title"/>
+		folder of the new one.</para>
 
 		<note>
 		  <para>That’s the preferred method if you want to start your
@@ -135,8 +135,8 @@
 		<para>Use the navigation menus found in <link linkend="menus.goto"
 		endterm="menus.goto.title"/><link
 		linkend="menus.goto.auto.populated.segments"
-		endterm="menus.goto.auto.populated.segments.title"/> to navigate the
-		segments that have been inserted.</para>
+		endterm="menus.goto.auto.populated.segments.title"/> to navigate to an
+		automatically inserted segment.</para>
 	  </listitem>
 	</itemizedlist>
 	

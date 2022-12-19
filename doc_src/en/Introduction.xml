@@ -691,7 +691,7 @@
 	  to translate, you quickly press
 	  <keycombo><keycap>C</keycap><keycap>U</keycap></keycombo> to <link
 	  linkend="menus.goto.next.untranslated.segment">jump straight into the
-	  action</link> and start translating. (And doing so again each time you
+	  action</link> and start translating. (And do so again each time you
 	  reach a large unchanged section.)</para>
 
       <para>A few segments later, you come across a term you should add to the
@@ -701,7 +701,7 @@
       select it, and then press
       <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>G</keycap></keycombo>
       to <link linkend="menus.edit.create.glossary.entry">call up the glossary
-      entry dialog</link> to enter the source term, and then switch back to the
+      entry dialog</link> to enter the source term You then switch back to the
       editor and repeat the process to enter the target term.</para>
 
 	  <para>You have enabled the <link
@@ -724,11 +724,11 @@
 	  <keycombo><keycap>C</keycap><keycap>I</keycap></keycombo> when one of the
 	  matches from 2 to 5 is more suitable.</para>
 
-	  <para>Some segments will require modifications later on, so you use
-	  <keycombo><keycap>A</keycap><keycap>C</keycap><keycap>N</keycap></keycombo>
+	  <para>Some segments will require further modification later on, so you use
+	  <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>N</keycap></keycombo>
 	  to enter the Notes pane, leave yourself a note and come back to the Editor
 	  pane with
-	  <keycombo><keycap>A</keycap><keycap>C</keycap><keycap>E</keycap></keycombo>.</para>
+	  <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>E</keycap></keycombo>.</para>
 	  
 	  <para>By the time you get near the end of the section, you have also used
 	  <keycombo><keycap>C</keycap><keycap>R</keycap></keycombo> once or twice to
@@ -748,7 +748,7 @@
 	  <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>J</keycap></keycombo>
 	  to immediately continue from where you left off.</para>
 
-	  <para>You now decide to review the annoted segments. You use
+	  <para>You now decide to review the annotated segments. You use
 	  <keycombo><keycap>C</keycap><keycap>F</keycap></keycombo> to find them,
 	  and in the search window use
 	  <keycombo><keycap>C</keycap><keycap>N</keycap></keycombo> and
@@ -764,7 +764,7 @@
       <para>The smoother workfow, in turn, allowed you to better focus on the
       translation itself.</para>
         
-      <para>At the same time, you realized that during you session,
+      <para>At the same time, you realize that during you session,
       you used the <link linkend="menus.edit" endterm="menus.edit.title"/><link
       linkend="menus.edit.create.alternative.translation"
       endterm="menus.edit.create.alternative.translation.title"/> menu and the

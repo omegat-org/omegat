@@ -84,13 +84,13 @@ public class GeneralOptionsController extends BasePreferencesController {
     @Override
     protected void initFromPrefs() {
         panel.tabAdvanceCheckBox.setSelected(Core.getEditor().getSettings().isUseTabForAdvance());
-        panel.confirmQuitCheckBox.setSelected(Preferences.isPreference(Preferences.ALWAYS_CONFIRM_QUIT));
+        panel.confirmQuitCheckBox.setSelected(Preferences.isPreferenceDefault(Preferences.ALWAYS_CONFIRM_QUIT, true));
     }
 
     @Override
     public void restoreDefaults() {
         panel.tabAdvanceCheckBox.setSelected(false);
-        panel.confirmQuitCheckBox.setSelected(false);
+        panel.confirmQuitCheckBox.setSelected(true);
     }
 
     @Override

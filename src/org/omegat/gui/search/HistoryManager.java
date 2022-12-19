@@ -42,7 +42,7 @@ public final class HistoryManager {
     private static final int MAX_ITEMS;
 
     static {
-        MAX_ITEMS = Preferences.getPreferenceDefault(Preferences.SEARCHWINDOW_HISTORY_SIZE, 10);
+        MAX_ITEMS = Preferences.getPreferenceDefault(Preferences.SEARCHWINDOW_HISTORY_SIZE, 50);
         SEARCH_ITEMS = new ArrayList<String>(MAX_ITEMS);
         REPLACE_ITEMS = new ArrayList<String>(MAX_ITEMS);
         for (int i = 0; i < MAX_ITEMS; i++) {

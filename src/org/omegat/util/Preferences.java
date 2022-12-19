@@ -208,6 +208,7 @@ public final class Preferences {
 
     /** Mark paragraphs starts */
     public static final String MARK_PARA_DELIMITATIONS = "mark_para_delimitation";
+    public static final boolean MARK_PARA_DELIMITATIONS_DEFAULT = true;
     public static final String MARK_PARA_TEXT = "mark_para_delimitation_text";
     /** Default paragraph delimitation indicator */
     public static final String MARK_PARA_TEXT_DEFAULT = "\u2014 \u00b6 \u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014";

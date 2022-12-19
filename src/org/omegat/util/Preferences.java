@@ -456,10 +456,6 @@ public final class Preferences {
     /** status bar progress mode */
     public static final String SB_PROGRESS_MODE = "sb_progress_mode";
 
-    /** TaaS glossary client.*/
-    public static final String TAAS_LOOKUP = "taas_lookup";
-    public static final String TAAS_DOMAIN = "taas_domain";
-
     /** Segment Properties Area preferences */
     public static final String SEGPROPS_INITIAL_MODE = "segment_properties_initial_mode";
     public static final String SEGPROPS_SHOW_RAW_KEYS = "segment_properties_show_raw_keys";

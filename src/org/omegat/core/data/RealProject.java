@@ -278,6 +278,10 @@ public class RealProject implements IProject {
             createDirectory(config.getGlossaryRoot(), OConsts.DEFAULT_GLOSSARY);
             createDirectory(config.getTMRoot(), OConsts.DEFAULT_TM);
             createDirectory(config.getTMAutoRoot(), OConsts.AUTO_TM);
+            createDirectory(config.getTMEnforceRoot(), OConsts.AUTO_ENFORCE_TM);
+            createDirectory(config.getTMMTRoot(), OConsts.MT_TM);
+            createDirectory(config.getTMPenaltyRoot(), OConsts.PENALTY_TM);
+            createDirectory(config.getTMOtherLangRoot(), OConsts.DEFAULT_OTHERLANG);
             createDirectory(config.getDictRoot(), OConsts.DEFAULT_DICT);
             createDirectory(config.getTargetRoot(), OConsts.DEFAULT_TARGET);
             //createDirectory(m_config.getTMOtherLangRoot(), OConsts.DEFAULT_OTHERLANG);

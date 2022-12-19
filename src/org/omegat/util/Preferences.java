@@ -231,7 +231,7 @@ public final class Preferences {
      * Default Value of Workflow Option: Minimal Similarity Of the Best Fuzzy
      * Match to insert
      */
-    public static final int BEST_MATCH_MINIMAL_SIMILARITY_DEFAULT = 80;
+    public static final int BEST_MATCH_MINIMAL_SIMILARITY_DEFAULT = 100;
 
     /**
      * When a fuzzy match is displayed from a memory belonging to a language other

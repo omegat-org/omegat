@@ -93,7 +93,8 @@ public class EditorSettings implements IEditorSettings {
         displayModificationInfo = Preferences.getPreferenceDefault(Preferences.DISPLAY_MODIFICATION_INFO,
                 DISPLAY_MODIFICATION_INFO_NONE);
         autoSpellChecking = Preferences.isPreference(Preferences.ALLOW_AUTO_SPELLCHECKING);
-        markAutoPopulated = Preferences.isPreference(Preferences.MARK_AUTOPOPULATED);
+        markAutoPopulated = Preferences.isPreferenceDefault(Preferences.MARK_AUTOPOPULATED,
+                Preferences.MARK_AUTOPOPULATED_DEFAULT);
 
         // options from preferences 'view' pane
         viewSourceBold = Preferences.isPreferenceDefault(Preferences.VIEW_OPTION_SOURCE_ALL_BOLD,

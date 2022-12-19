@@ -15,7 +15,7 @@
 	backups</title>
 
 	<para>OmegaT creates backups of your project settings to ensure it can
-	retrieve them in cas of problem. See the <link
+	retrieve them in case of problem. See the <link
 	linkend="project.folder.omegat.project.file"
 	endterm="project.folder.omegat.project.file.title"/> section for
 	details.</para>

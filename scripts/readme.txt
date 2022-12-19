@@ -12,5 +12,5 @@ Copyright (c) 2011-2018 Briac PilPré, Didier Briel, Yu Tang, Kos Ivantsov, Piot
 References:
 
 - OmegaT Javadoc: https://omegat.sourceforge.io/javadoc-latest/
-- Groovy 2.4.10 language reference: http://groovy-lang.org/single-page-documentation.html
+- Groovy language documentation: https://groovy-lang.org/documentation.html
 - ECMAScript 262 Language Specification: https://www.ecma-international.org/ecma-262/5.1/

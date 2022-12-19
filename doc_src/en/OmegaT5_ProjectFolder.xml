@@ -150,9 +150,9 @@
 		  <para>It also acts as an <emphasis>address book</emphasis> that
 		  specifies where project resources are located.</para>
 
-		  <para>OmegaT also automatically creates an
-		  <filename>omegat.project.bak</filename> to restore your project
-		  settings in case of need.</para>
+		  <para>OmegaT also creates a backup of that file
+		  (<filename>omegat.project.bak</filename>) and will automatically use it to
+		  restore your project settings in case of need.</para>
 		</listitem>
 	  </varlistentry>
 	</variablelist>

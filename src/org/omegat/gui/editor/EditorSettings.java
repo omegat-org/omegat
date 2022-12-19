@@ -75,6 +75,11 @@ public class EditorSettings implements IEditorSettings {
     public static final String DISPLAY_MODIFICATION_INFO_SELECTED = "selected";
     public static final String DISPLAY_MODIFICATION_INFO_ALL = "all";
 
+    private static final boolean MARK_NON_UNIQUE_SEGMENTS_DEFAULT = true;
+    private static final boolean MARK_PARA_DELIMITATIONS_DEFAULT = true;
+    private static final boolean MARK_AUTOPOPULATED_DEFAULT = true;
+    private static final boolean MARK_GLOSSARY_MATCHES_DEFAULT = true;
+
     protected EditorSettings(final EditorController parent) {
         this.parent = parent;
 
@@ -83,16 +88,19 @@ public class EditorSettings implements IEditorSettings {
         markTranslated = Preferences.isPreference(Preferences.MARK_TRANSLATED_SEGMENTS);
         markUntranslated = Preferences.isPreference(Preferences.MARK_UNTRANSLATED_SEGMENTS);
         displaySegmentSources = Preferences.isPreference(Preferences.DISPLAY_SEGMENT_SOURCES);
-        markNonUniqueSegments = Preferences.isPreference(Preferences.MARK_NON_UNIQUE_SEGMENTS);
+        markNonUniqueSegments = Preferences.isPreferenceDefault(Preferences.MARK_NON_UNIQUE_SEGMENTS,
+               MARK_NON_UNIQUE_SEGMENTS_DEFAULT);
         markNoted = Preferences.isPreference(Preferences.MARK_NOTED_SEGMENTS);
         markNBSP  = Preferences.isPreference(Preferences.MARK_NBSP);
-        markParagraphDelimitations = Preferences.isPreference(Preferences.MARK_PARA_DELIMITATIONS);
+        markParagraphDelimitations = Preferences.isPreferenceDefault(Preferences.MARK_PARA_DELIMITATIONS,
+                MARK_PARA_DELIMITATIONS_DEFAULT);
         markWhitespace  = Preferences.isPreference(Preferences.MARK_WHITESPACE);
         markBidi  = Preferences.isPreference(Preferences.MARK_BIDI);
         displayModificationInfo = Preferences.getPreferenceDefault(Preferences.DISPLAY_MODIFICATION_INFO,
-                DISPLAY_MODIFICATION_INFO_NONE);
+                DISPLAY_MODIFICATION_INFO_SELECTED);
         autoSpellChecking = Preferences.isPreference(Preferences.ALLOW_AUTO_SPELLCHECKING);
-        markAutoPopulated = Preferences.isPreference(Preferences.MARK_AUTOPOPULATED);
+        markAutoPopulated = Preferences.isPreferenceDefault(Preferences.MARK_AUTOPOPULATED,
+                MARK_AUTOPOPULATED_DEFAULT);
 
         // options from preferences 'view' pane
         viewSourceBold = Preferences.isPreferenceDefault(Preferences.VIEW_OPTION_SOURCE_ALL_BOLD,
@@ -100,7 +108,8 @@ public class EditorSettings implements IEditorSettings {
         viewActiveSourceBold = Preferences.isPreferenceDefault(Preferences.VIEW_OPTION_SOURCE_ACTIVE_BOLD,
                 Preferences.VIEW_OPTION_SOURCE_ACTIVE_BOLD_DEFAULT);
         markFirstNonUnique = Preferences.isPreference(Preferences.VIEW_OPTION_UNIQUE_FIRST);
-        markGlossaryMatches = Preferences.isPreference(Preferences.MARK_GLOSSARY_MATCHES);
+        markGlossaryMatches = Preferences.isPreferenceDefault(Preferences.MARK_GLOSSARY_MATCHES,
+                MARK_GLOSSARY_MATCHES_DEFAULT);
         markLanguageChecker = !Preferences.isPreferenceDefault(Preferences.LT_DISABLED,
                 Preferences.LT_DISABLED_DEFAULT);
         doFontFallback = Preferences.isPreference(Preferences.FONT_FALLBACK);
@@ -472,7 +481,7 @@ public class EditorSettings implements IEditorSettings {
      *            is it a source segment or a target segment
      * @param isPlaceholder
      *            is it for a placeholder (OmegaT tag or sprintf-variable etc.) or regular text inside the segment?
-     * @param isremovetext
+     * @param isRemoveText
      *            is it text that should be removed from translation?
      * @param duplicate
      *            is the sourceTextEntry a duplicate or not? values: DUPLICATE.NONE, DUPLICATE.FIRST or DUPLICATE.NEXT.

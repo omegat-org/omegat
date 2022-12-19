@@ -92,7 +92,7 @@ public class EditorSettings implements IEditorSettings {
         markWhitespace  = Preferences.isPreference(Preferences.MARK_WHITESPACE);
         markBidi  = Preferences.isPreference(Preferences.MARK_BIDI);
         displayModificationInfo = Preferences.getPreferenceDefault(Preferences.DISPLAY_MODIFICATION_INFO,
-                DISPLAY_MODIFICATION_INFO_NONE);
+                DISPLAY_MODIFICATION_INFO_SELECTED);
         autoSpellChecking = Preferences.isPreference(Preferences.ALLOW_AUTO_SPELLCHECKING);
         markAutoPopulated = Preferences.isPreferenceDefault(Preferences.MARK_AUTOPOPULATED,
                 Preferences.MARK_AUTOPOPULATED_DEFAULT);

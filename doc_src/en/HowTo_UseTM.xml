@@ -70,7 +70,7 @@
 
 	<itemizedlist>
 	  <listitem>
-		<para>either ppen the old project and put the new source files in its <link
+		<para>Either open the old project and put the new source files in its <link
 		linkend="project.folder.source" endterm="project.folder.source.title"/>
 		folder.</para>
 		
@@ -87,7 +87,7 @@
 	  </listitem>
 	  
 	  <listitem>
-		<para>or put the reference memories that you took from the old project and
+		<para>Or put the reference memories that you took from the old project and
 		put them in the <link linkend="project.folder.tm"
 		endterm="project.folder.tm.title"/> folder of the new project.</para>
 

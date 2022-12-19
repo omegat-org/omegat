@@ -507,9 +507,9 @@ public class SearchWindowController {
 
         // editor related options
         form.m_autoSyncWithEditor
-                .setSelected(Preferences.isPreferenceDefault(Preferences.SEARCHWINDOW_AUTO_SYNC, false));
+                .setSelected(Preferences.isPreferenceDefault(Preferences.SEARCHWINDOW_AUTO_SYNC, true));
         form.m_backToInitialSegment
-                .setSelected(Preferences.isPreferenceDefault(Preferences.SEARCHWINDOW_BACK_TO_INITIAL_SEGMENT, false));
+                .setSelected(Preferences.isPreferenceDefault(Preferences.SEARCHWINDOW_BACK_TO_INITIAL_SEGMENT, true));
 
         // update the enabled/selected status of normal options
         updateOptionStatus();

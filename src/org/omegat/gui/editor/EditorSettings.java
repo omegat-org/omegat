@@ -87,7 +87,8 @@ public class EditorSettings implements IEditorSettings {
                 Preferences.MARK_NON_UNIQUE_SEGMENTS_DEFAULT);
         markNoted = Preferences.isPreference(Preferences.MARK_NOTED_SEGMENTS);
         markNBSP  = Preferences.isPreference(Preferences.MARK_NBSP);
-        markParagraphDelimitations = Preferences.isPreference(Preferences.MARK_PARA_DELIMITATIONS);
+        markParagraphDelimitations = Preferences.isPreferenceDefault(Preferences.MARK_PARA_DELIMITATIONS,
+                Preferences.MARK_PARA_DELIMITATIONS_DEFAULT);
         markWhitespace  = Preferences.isPreference(Preferences.MARK_WHITESPACE);
         markBidi  = Preferences.isPreference(Preferences.MARK_BIDI);
         displayModificationInfo = Preferences.getPreferenceDefault(Preferences.DISPLAY_MODIFICATION_INFO,

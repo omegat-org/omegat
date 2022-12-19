@@ -131,8 +131,8 @@ public final class ProjectUICommands {
 
                 // ask about new project properties
                 ProjectProperties props = new ProjectProperties(dir);
-                props.setSourceLanguage(Preferences.getPreferenceDefault(Preferences.SOURCE_LOCALE, "EN-US"));
-                props.setTargetLanguage(Preferences.getPreferenceDefault(Preferences.TARGET_LOCALE, "EN-GB"));
+                props.setSourceLanguage(Preferences.getPreferenceDefault(Preferences.SOURCE_LOCALE, "AR-LB"));
+                props.setTargetLanguage(Preferences.getPreferenceDefault(Preferences.TARGET_LOCALE, "UK-UA"));
                 ProjectPropertiesDialog newProjDialog = new ProjectPropertiesDialog(
                         Core.getMainWindow().getApplicationFrame(),
                         props, dir.getAbsolutePath(),

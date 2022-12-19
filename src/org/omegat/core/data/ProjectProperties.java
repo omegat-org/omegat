@@ -112,8 +112,8 @@ public class ProjectProperties {
         setSupportDefaultTranslations(true);
         setRemoveTags(false);
 
-        setSourceLanguage("EN-US");
-        setTargetLanguage("EN-GB");
+        setSourceLanguage("AR-LB");
+        setTargetLanguage("UK-UA");
 
         loadProjectSRX();
         loadProjectFilters();

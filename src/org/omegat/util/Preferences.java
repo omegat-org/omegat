@@ -402,7 +402,7 @@ public final class Preferences {
     public static final String FILTERS_VERSION = "filters_version";
 
     public static final String LT_DISABLED = "lt_disabled";
-    public static final boolean LT_DISABLED_DEFAULT = true;
+    public static final boolean LT_DISABLED_DEFAULT = false;
 
     public static final String LOOSE_TAG_ORDERING = "loose_tag_ordering";
 

@@ -84,7 +84,7 @@ public class EditingBehaviorController extends BasePreferencesController {
             panel.prefixText.setText(Preferences.getPreference(Preferences.BEST_MATCH_EXPLANATORY_TEXT));
         }
 
-        panel.allowTranslationEqualToSource.setSelected(Preferences.isPreference(Preferences.ALLOW_TRANS_EQUAL_TO_SRC));
+        panel.allowTranslationEqualToSource.setSelected(!Preferences.isPreference(Preferences.ALLOW_TRANS_EQUAL_TO_SRC));
         panel.exportCurrentSegment.setSelected(Preferences.isPreference(Preferences.EXPORT_CURRENT_SEGMENT));
         panel.stopOnAlternativeTranslation
                 .setSelected(Preferences.isPreference(Preferences.STOP_ON_ALTERNATIVE_TRANSLATION));
@@ -109,7 +109,7 @@ public class EditingBehaviorController extends BasePreferencesController {
         panel.similaritySpinner.setValue(Preferences.BEST_MATCH_MINIMAL_SIMILARITY_DEFAULT);
         panel.prefixText.setText(OStrings.getString("WF_DEFAULT_PREFIX"));
 
-        panel.allowTranslationEqualToSource.setSelected(false);
+        panel.allowTranslationEqualToSource.setSelected(true);
         panel.exportCurrentSegment.setSelected(false);
         panel.stopOnAlternativeTranslation.setSelected(false);
         panel.convertNumbers.setSelected(false);

@@ -266,8 +266,8 @@
 		  <para>Use the navigation menus found in <link linkend="menus.goto"
 		  endterm="menus.goto.title"/><link
 		  linkend="menus.goto.auto.populated.segments"
-		  endterm="menus.goto.auto.populated.segments.title"/> to navigate the
-		  segments that have been inserted.</para>
+		  endterm="menus.goto.auto.populated.segments.title"/> to navigate to the
+		  inserted segments.</para>
 				
 		  <warning>
 			<para>If you remove a TMX file from <filename
@@ -284,7 +284,7 @@
 		  meant to automatically overwrite previously translated contents.</para>
 
 		  <para>Translations from TMX files placed in this folder are
-		  automatically inserted in matching segments without the automatic
+		  automatically inserted in matching segments without the fuzzy match
 		  prefix, making it unnecessary to confirm these segments.</para>
 
 		  <para>Translations coming from this folder are considered to be

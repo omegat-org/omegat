@@ -145,7 +145,7 @@
 		  <para>This file contains the project parameters defined in the <link
 		  linkend="dialogs.project.properties">project properties</link>, such as
 		  the source and target languages, their respective tokenizers and the type of
-		  segmentation, etc.</para>
+		  segmentation.</para>
 		  
 		  <para>It also acts as an <emphasis>address book</emphasis> that
 		  specifies where project resources are located.</para>

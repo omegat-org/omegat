@@ -701,7 +701,7 @@
       select it, and then press
       <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>G</keycap></keycombo>
       to <link linkend="menus.edit.create.glossary.entry">call up the glossary
-      entry dialog</link> to enter the source term You then switch back to the
+      entry dialog</link> to enter the source term. You then switch back to the
       editor and repeat the process to enter the target term.</para>
 
 	  <para>You have enabled the <link

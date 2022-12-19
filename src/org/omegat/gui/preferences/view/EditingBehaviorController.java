@@ -72,10 +72,10 @@ public class EditingBehaviorController extends BasePreferencesController {
 
     @Override
     protected void initFromPrefs() {
-        panel.defaultRadio.setSelected(!Preferences.isPreference(Preferences.DONT_INSERT_SOURCE_TEXT));
-        panel.leaveEmptyRadio.setSelected(Preferences.isPreference(Preferences.DONT_INSERT_SOURCE_TEXT));
+        panel.defaultRadio.setSelected(Preferences.isPreference(Preferences.DONT_INSERT_SOURCE_TEXT));
+        panel.leaveEmptyRadio.setSelected(!Preferences.isPreference(Preferences.DONT_INSERT_SOURCE_TEXT));
 
-        panel.insertFuzzyCheckBox.setSelected(Preferences.isPreference(Preferences.BEST_MATCH_INSERT));
+        panel.insertFuzzyCheckBox.setSelected(!Preferences.isPreference(Preferences.BEST_MATCH_INSERT));
         panel.similaritySpinner.setValue(Preferences.getPreferenceDefault(Preferences.BEST_MATCH_MINIMAL_SIMILARITY,
                 Preferences.BEST_MATCH_MINIMAL_SIMILARITY_DEFAULT));
         if (!Preferences.existsPreference(Preferences.BEST_MATCH_EXPLANATORY_TEXT)) {
@@ -102,10 +102,10 @@ public class EditingBehaviorController extends BasePreferencesController {
 
     @Override
     public void restoreDefaults() {
-        panel.defaultRadio.setSelected(true);
-        panel.leaveEmptyRadio.setSelected(false);
+        panel.defaultRadio.setSelected(false);
+        panel.leaveEmptyRadio.setSelected(true);
 
-        panel.insertFuzzyCheckBox.setSelected(false);
+        panel.insertFuzzyCheckBox.setSelected(true);
         panel.similaritySpinner.setValue(Preferences.BEST_MATCH_MINIMAL_SIMILARITY_DEFAULT);
         panel.prefixText.setText(OStrings.getString("WF_DEFAULT_PREFIX"));
 

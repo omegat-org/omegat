@@ -428,13 +428,20 @@
     </variablelist>
   </section>
 
-  <section id="windows.scripts.languages">
-    <title id="windows.scripts.languages.title">Languages</title>
-    
-    <para>The following scripting languages are supported
-    by default.</para>
+  <section id="windows.scripts.references">
+    <title id="windows.scripts.references.title">References</title>
 
     <variablelist>
+      <varlistentry>
+        <term>OmegaT Javadoc</term>
+
+        <listitem>
+          <para>The <ulink
+          url="https://omegat.sourceforge.io/javadoc-latest/">OmegaT API</ulink>
+          documentation.</para>
+        </listitem>
+      </varlistentry>
+
       <varlistentry>
         <term>Groovy</term>
 
@@ -442,7 +449,7 @@
           <para>A dynamic language for the Java Virtual machine. It builds upon
           the strengths of Java, and adds powerful features inspired by
           languages like Python, Ruby and Smalltalk. See <ulink
-          url="https://groovy-lang.org">Apache Groovy</ulink> for
+          url="https://groovy-lang.org/documentation.html">Apache Groovy</ulink> for
           details.</para>
         </listitem>
       </varlistentry>
@@ -457,9 +464,11 @@
           programming styles. See <ulink
           url="https://developer.oracle.com/databases/nashorn-javascript-part1.html">Practical
           Nashorn, Part 1: Introducing JavaScript, ECMAScript, and
-          Nashorn</ulink>.</para>
+          Nashorn</ulink> and <ulink
+          url="https://www.ecma-international.org/ecma-262/5.1/">ECMAScript® 5.1
+          Language Specification</ulink>.</para>
         </listitem>
-      </varlistentry>
+      </varlistentry>	  
     </variablelist>
 
     <para>All languages have access to the OmegaT object model, with the project

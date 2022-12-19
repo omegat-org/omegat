@@ -576,7 +576,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         optionsAutoCompleteHistoryPredictionMenuItem
                 .setSelected(!Preferences.isPreference(Preferences.AC_HISTORY_PREDICTION_ENABLED));
         optionsMTAutoFetchCheckboxMenuItem.setSelected(Preferences.isPreferenceDefault(
-                Preferences.MT_AUTO_FETCH, true));
+                Preferences.MT_AUTO_FETCH, false));
         optionsDictionaryFuzzyMatchingCheckBoxMenuItem.setSelected(Preferences.isPreferenceDefault(
                 Preferences.DICTIONARY_FUZZY_MATCHING, true));
         optionsGlossaryFuzzyMatchingCheckBoxMenuItem.setSelected(Preferences.isPreferenceDefault(

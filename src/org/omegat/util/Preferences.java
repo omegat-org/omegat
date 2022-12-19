@@ -268,6 +268,8 @@ public final class Preferences {
     public static final String CHECK_JAVA_PATTERN_TAGS = "tagValidation_javaMessageFormatSimplePatternCheck";
     /** Tag Validation Option: check user defined tags according to regexp.*/
     public static final String CHECK_CUSTOM_PATTERN = "tagValidation_customPattern";
+    /** Tag Validation Option: check user defined tags according to regexp.*/
+    public static final String CHECK_CUSTOM_PATTERN_DEFAULT = "\\d+";
     /** Tag Validation Option: check target for text that should have been removed according to regexp.*/
     public static final String CHECK_REMOVE_PATTERN = "tagValidation_removePattern";
 

@@ -192,6 +192,7 @@ public final class Preferences {
      * backwards-compatibility.
      */
     public static final String MARK_GLOSSARY_MATCHES = "transtips";
+    public static final boolean MARK_GLOSSARY_MATCHES_DEFAULT = true;
 
     /** Mark the segments with a note with a different color */
     public static final String MARK_NOTED_SEGMENTS = "mark_noted_segments";

@@ -14,7 +14,11 @@
 <table>
 <% languages.each { lang -> %>
     <tr>
-        <td><a href="${lang.code}/index.html">${lang.name}</a></td>
+        <td>
+            <p>${lang.name}:</p>
+        </td>
+        <td><a href="${lang.code}/index.html">HTML/Web</a></td>
+        <td><a href="https://sourceforge.net/projects/omegat/files/OmegaT%20-%20Standard/OmegaT%20${lang.version}/OmegaT_documentation_${lang.code}.PDF/download">PDF</a></td>
         <td>(<span class="${lang.status}">${lang.version}</span>)</td>
     </tr>
 <% } %>

@@ -74,21 +74,30 @@
 		linkend="project.folder.source" endterm="project.folder.source.title"/>
 		folder.</para>
 		
-		<para>After reloading the old project, all its translation memory will
-		be applied to the new source files.</para>
-
 		<note>
 		  <para>That’s the easiest way to work on the new version of an already
 		  translated document.</para>
 		</note>
+
+		<para>After reloading the old project, its translation memory will
+		be applied to the new source files. Identical segments will be
+		automatically translated. Similar segments will be provided with
+		matches from the project translated memory as you enter them.</para>
+
 	  </listitem>
 	  
 	  <listitem>
-		<para>Put the reference memories that you took from the old project and
-		put them in the <link linkend="project.folder.tm"
-		endterm="project.folder.tm.title"/> folder of the new project. Depending
-		on how reliable a given memory is, you might prefer to put it in one of the
-		following subfolders:</para>
+		<para>Alternatively, put the reference memories from the old project in
+		the <link linkend="project.folder.tm" endterm="project.folder.tm.title"/>
+		folder of the new one.</para>
+
+		<note>
+		  <para>That’s the preferred method if you want to start your
+		  translation from scratch.</para>
+		</note>
+
+		<para>Depending on how reliable the memory is, you can prefer to put it
+		in one of the following subfolders:</para>
 
 		<itemizedlist>
 		  <listitem>
@@ -104,11 +113,30 @@
 			endterm="project.folder.tm.penalty.title"/>,</para>
 		  </listitem>
 		</itemizedlist>
-		
-		<note>
-		  <para>That’s the preferred method if you want to start your
-		  translation from scratch.</para>
-		</note>
+
+		<para>Exact matches coming from the <link
+		linkend="project.folder.tm.enforce"
+		endterm="project.folder.tm.enforce.title"/> and the <link
+		linkend="project.folder.tm.auto"
+		endterm="project.folder.tm.auto.title"/> subfolders will be
+		automatically inserted into the translation, without the prefix that is
+		inserted by OmegaT when it inserts matches above a set threshold. See
+		the <link
+		linkend="dialogs.preferences.editor.insert.the.best.fuzzy.match"
+		endterm="dialogs.preferences.editor.insert.the.best.fuzzy.match.title"/>
+		preference for details.</para>
+
+		<para>Enable the <link
+		linkend="dialogs.preferences.editor.save.auto-populated.status"
+		endterm="dialogs.preferences.editor.save.auto-populated.status.title"/>
+		option to have OmegaT remember that the inserted matches came from those
+		folders.</para>
+
+		<para>Use the navigation menus found in <link linkend="menus.goto"
+		endterm="menus.goto.title"/><link
+		linkend="menus.goto.auto.populated.segments"
+		endterm="menus.goto.auto.populated.segments.title"/> to navigate to an
+		automatically inserted segment.</para>
 	  </listitem>
 	</itemizedlist>
 	

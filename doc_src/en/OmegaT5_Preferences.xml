@@ -1030,6 +1030,9 @@
 		  <link linkend="menus.view" endterm="menus.view.title"/>.<link
 		  linkend="menus.view.mark.auto.populated.segments"
 		  endterm="menus.view.mark.auto.populated.segments.title"/>.</para>
+
+		  <para>See the <link linkend="how.to.use.tm.reuse.tm"
+		  endterm="how.to.use.tm.reuse.tm.title"/> how-to for details.</para>
 		</listitem>
 	  </varlistentry>
 

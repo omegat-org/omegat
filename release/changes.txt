@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 5.8.0
 ----------------------------------------------------------------------
-  20 Enhancements
+  21 Enhancements
   24 Bug fixes
   1 Localisation updates
 ----------------------------------------------------------------------
@@ -10,6 +10,9 @@
   Implemented requests:
 
   - Update to new pixel logos and improve macOS UI logos
+
+  -  Navigate between segments inserted from /tm/auto and /tm/enforce
+  https://sourceforge.net/p/omegat/feature-requests/1641/
 
   - Add a shortcut to select all source text of the current segment
   https://sourceforge.net/p/omegat/feature-requests/1639/

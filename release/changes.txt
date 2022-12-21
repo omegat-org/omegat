@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
   21 Enhancements
   24 Bug fixes
-  1 Localisation updates
+  2 Localisation updates
 ----------------------------------------------------------------------
 5.8.0 vs 5.7.1
 
@@ -143,6 +143,7 @@
 
   Localisation Updates:
 
+  - Dutch localisation updated to 5.8 (UI)
   - Japanese localisation updated to 5.8.0 (UI, documentation)
 
 ----------------------------------------------------------------------

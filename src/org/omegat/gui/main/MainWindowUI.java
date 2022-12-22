@@ -283,7 +283,7 @@ public final class MainWindowUI {
      * size because if the screen is too small for the setting, OmegaT
      * will just use the whole window size. So I guess we just have to
      * consider a maximum useable width for big screens.
-     * Let's assume the "standard" is 1920×1080 for "pro" laptops
+     * Let's assume the "standard" is 1920x1080 for "pro" laptops
      * https://laptoping.com/laptop-display-specs-explained.html.
      */
 

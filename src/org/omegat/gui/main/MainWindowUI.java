@@ -279,7 +279,7 @@ public final class MainWindowUI {
     }
 
     /**
-     * (20nov22) it looks like we don't have to worry too much about default
+     * (20nov22) We don't  worry  about default
      * size because if the screen is too small for the setting, OmegaT
      * will just use the whole window size. So I guess we just have to
      * consider a maximum useable width for big screens.

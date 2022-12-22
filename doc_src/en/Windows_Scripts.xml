@@ -41,8 +41,8 @@
 	linkend="application.folder.scripts"
 	endterm="application.folder.scripts.title"/> folder.</para>
 
-  <para>Some scripts are <emphasis>event</emphasis> based and can be made to be
-  triggered automatically when a given event takes place. Each event corresponds
+  <para>Some scripts are <emphasis>event</emphasis>-based and can be set to
+  trigger automatically when a given event takes place. Each event corresponds
   to a subfolder under <link
   linkend="application.folder.scripts"
   endterm="application.folder.scripts.title"/>:</para>
@@ -50,27 +50,27 @@
   <variablelist>
 	<varlistentry id="application.folder.scripts.application.shutdown">
 	  <term id="application.folder.scripts.application.shutdown.title">application_shutdown</term>
-	  <listitem><para>Scripts in this folder will be launched before OmegaT shuts down.</para></listitem>
+	  <listitem><para>Scripts in this folder are launched before OmegaT shuts down.</para></listitem>
 	</varlistentry>
 	<varlistentry id="application.folder.scripts.application.startup">
 	  <term id="application.folder.scripts.application.startup.title">application_startup</term>
-	  <listitem><para>Scripts in this folder will be launched when the scripting engine is available, shortly after OmegaT is launched.</para></listitem>
+	  <listitem><para>Scripts in this folder are launched as soon as the scripting engine is available, shortly after OmegaT starts.</para></listitem>
 	</varlistentry>
 	<varlistentry id="application.folder.scripts.entry.activated">
 	  <term id="application.folder.scripts.entry.activated.title">entry_activated</term>
-	  <listitem><para>Scripts in this folder will be launched when when editing a new segment. The segment is in the "newEntry" binding.</para></listitem>
+	  <listitem><para>Scripts in this folder are launched when when editing a new segment. The segment is in the "newEntry" binding.</para></listitem>
 	</varlistentry>
 	<varlistentry id="application.folder.scripts.new.file">
 	  <term id="application.folder.scripts.new.file.title">new_file</term>
-	  <listitem><para>Scripts in the folder will be launched when the editor switches to the next file in the project. The new filename is in the "activeFileName" binding.</para></listitem>
+	  <listitem><para>Scripts in this folder are launched when the editor switches to the next file in the project. The new filename is in the "activeFileName" binding.</para></listitem>
 	</varlistentry>
 	<varlistentry id="application.folder.scripts.new.word">
 	  <term id="application.folder.scripts.new.word.title">new_word</term>
-	  <listitem><para>Scripts in the folder will be launched when a a new word is edited in the Editor window. The new word is available with "newWord".</para></listitem>
+	  <listitem><para>Scripts in this folder are launched when a new word is edited in the Editor window. The new word is available from the "newWord" binding.</para></listitem>
 	</varlistentry>
 	<varlistentry id="application.folder.scripts.project.changed">
 	  <term id="application.folder.scripts.project.changed.title">project_changed</term>
-	  <listitem><para>Scripts in the folder will be launched when the state of the project changes. An "eventType" object is bound and can take the following values: CLOSE, COMPILE, CREATE, LOAD, SAVE.</para></listitem>
+	  <listitem><para>Scripts in this folder are launched when the state of the project changes. An "eventType" object is bound and can take the following values: CLOSE, COMPILE, CREATE, LOAD, or SAVE.</para></listitem>
 	</varlistentry>
   </variablelist>
 
@@ -81,7 +81,7 @@
 	<para>Scripts are also launched when you are executing other scripts. That
 	means that on a large project, an "entry_activated" script will be called a
 	lot of time when using a search/replace type of script that loops through
-	all the segments, rendering the application unresponsive. </para>
+	all the segments, rendering the application unresponsive.</para>
   </warning>
   </section>
   

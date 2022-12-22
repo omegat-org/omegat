@@ -35,6 +35,7 @@ import java.util.regex.Pattern;
 
 import javax.swing.JCheckBoxMenuItem;
 
+import org.omegat.util.HTMLUtils;
 import org.openide.awt.Mnemonics;
 
 import org.omegat.core.Core;
@@ -57,7 +58,6 @@ public abstract class BaseTranslate implements IMachineTranslation {
     protected boolean enabled;
     protected IMTGlossarySupplier glossarySupplier;
 
-    protected static final Pattern RE_HTML  = Pattern.compile("&#([0-9]+);");
 
     /**
      * Machine translation implementation can use this cache for skip requests twice. Cache will not be
@@ -217,19 +217,6 @@ public abstract class BaseTranslate implements IMachineTranslation {
 
     /** Convert entities to character. Ex: "&#39;" to "'". */
     protected static String unescapeHTML(String text) {
-
-        text = text.replace("&quot;", "\"")
-                .replace("&gt;", ">")
-                .replace("&lt;", "<")
-                .replace("&amp;", "&");
-
-        Matcher m = RE_HTML.matcher(text);
-        while (m.find()) {
-            String g = m.group();
-            int codePoint = Integer.parseInt(m.group(1));
-            String cpString = String.valueOf(Character.toChars(codePoint));
-            text = text.replace(g, cpString);
-        }
-        return text;
+        return HTMLUtils.entitiesToChars(text);
     }
 }

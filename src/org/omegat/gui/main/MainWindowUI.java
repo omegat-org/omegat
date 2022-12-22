@@ -284,7 +284,6 @@ public final class MainWindowUI {
      * will just use the whole window size. So I guess we just have to
      * consider a maximum useable width for big screens.
      * Let's assume the "standard" is 1920x1080 for "pro" laptops
-     * https://laptoping.com/laptop-display-specs-explained.html.
      */
 
     static Rectangle getDefaultBounds() {

@@ -279,18 +279,23 @@ public final class MainWindowUI {
     }
 
     /**
-     * (20nov22) We don't  worry  about default
-     * size because if the screen is too small for the setting, OmegaT
-     * will just use the whole window size. So I guess we just have to
-     * consider a maximum useable width for big screens.
-     * Let's assume the "standard" is 1920x1080 for "pro" laptops
+     * (22dec22) Assume a standard size of 1920x1080 for "pro" laptops,
+     * with a fallback of 1366x768 for laptops with a lower resolution.
+     * Smaller screens do not need to be considered since OmegaT
+     * will just use the whole window size in such cases.
      */
 
     static Rectangle getDefaultBounds() {
         // size info missing - put window in default position
         GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
         Rectangle scrSize = env.getMaximumWindowBounds();
-        return new Rectangle(210, 0, 1500, 1080);
+        if (scrSize.width < 1500){
+            // Use 1366x768 if the screen is too small to accommodate
+            // a window with a width of 1500
+            return new Rectangle(150, 0, 1100, 768);
+        } else {
+            return new Rectangle(210, 0, 1500, 1080);
+        }        
     }
 
     /**

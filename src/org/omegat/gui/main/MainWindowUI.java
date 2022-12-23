@@ -267,7 +267,14 @@ public final class MainWindowUI {
      * Initialize the size of OmegaT window, then load the layout prefs.
      */
     public static void initializeScreenLayout(MainWindow mainWindow) {
-        mainWindow.setBounds(getDefaultBounds());
+         /** 
+         * (23dec22) Set a reasonable default window size assuming 
+         * a standard"pro" laptop resolution of 1920x1080.
+         * Smaller screens do not need to be considered since OmegaT
+         * will just use the whole window size in such cases.
+         */
+        Rectangle defaultWindowSize = new Rectangle(210, 0, 1500, 1080);
+        mainWindow.setBounds(defaultWindowSize);
         StaticUIUtils.persistGeometry(mainWindow, Preferences.MAINWINDOW_GEOMETRY_PREFIX);
 
         loadScreenLayoutFromPreferences(mainWindow);
@@ -276,26 +283,6 @@ public final class MainWindowUI {
         // panes not included in an older layout file, or e.g. panes installed by
         // plugins.
         UIDesignManager.ensureDockablesVisible(mainWindow.desktop);
-    }
-
-    /**
-     * (22dec22) Assume a standard size of 1920x1080 for "pro" laptops,
-     * with a fallback of 1366x768 for laptops with a lower resolution.
-     * Smaller screens do not need to be considered since OmegaT
-     * will just use the whole window size in such cases.
-     */
-
-    static Rectangle getDefaultBounds() {
-        // size info missing - put window in default position
-        GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
-        Rectangle scrSize = env.getMaximumWindowBounds();
-        if (scrSize.width < 1500){
-            // Use 1366x768 if the screen is too small to accommodate
-            // a window with a width of 1500
-            return new Rectangle(150, 0, 1100, 768);
-        } else {
-            return new Rectangle(210, 0, 1500, 1080);
-        }        
     }
 
     /**

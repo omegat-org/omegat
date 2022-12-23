@@ -58,7 +58,7 @@
 	</varlistentry>
 	<varlistentry id="application.folder.scripts.entry.activated">
 	  <term id="application.folder.scripts.entry.activated.title">entry_activated</term>
-	  <listitem><para>Scripts in this folder are launched when when editing a new segment. The segment is in the "newEntry" binding.</para></listitem>
+	  <listitem><para>Scripts in this folder are launched when editing a new segment. The segment is in the "newEntry" binding.</para></listitem>
 	</varlistentry>
 	<varlistentry id="application.folder.scripts.new.file">
 	  <term id="application.folder.scripts.new.file.title">new_file</term>

@@ -14,6 +14,7 @@ plugins {
     id 'com.diffplug.spotless' version '6.0.0'
     id 'com.github.ben-manes.versions' version '0.39.0'
     id 'ru.vyarus.mkdocs' version '3.0.0'
+    id "org.sonarqube" version "3.5.0.2730"
 }
 
 apply from: 'gradle/utils.gradle'
@@ -1123,6 +1124,14 @@ task publishVersion {
 python.docker.use = true
 mkdocs {
     sourcesDir = 'docs_devel'
+}
+
+sonarqube {
+  properties {
+    property "sonar.projectKey", "damien-rembert_omegat"
+    property "sonar.organization", "damien-rembert-all"
+    property "sonar.host.url", "https://sonarcloud.io"
+  }
 }
 
 // Allow setting the max heap size for the run task from the command line, e.g.

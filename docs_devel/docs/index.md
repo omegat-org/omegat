@@ -32,6 +32,10 @@
 
 * [Release procedure](40.ReleaseProcedure.md)
 
+## Details of features
+
+* [External Finder](51.ExternalFinder.md)
+
 ## Other information
 
-* [Appendix](50.appendix.md)
+* [Appendix](90.appendix.md)

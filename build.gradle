@@ -911,6 +911,34 @@ tasks.jacocoTestReport {
         xml.required = true  // coveralls plugin depends on xml format report
         html.required = true
     }
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: ["gen/core/**/*", "org/omegat/**/gui/*", "org/omegat/**/data/*"])
+        }))
+    }
+}
+
+// check.dependsOn jacocoTestCoverageVerification
+tasks.jacocoTestCoverageVerification {
+    dependsOn(tasks.test)
+    violationRules {
+        rule {
+            element = 'CLASS'
+            includes = ['org.omegat.core.machinetranslators.*', 'org.omegat.core.dictionaries.*']
+            excludes = ['**.*.1', '**.*.2', '**.*.3']  // ignore inner classes
+            limit { minimum = 0.20 }
+        }
+        rule {
+            element = 'PACKAGE'
+            includes = ['org.omegat.filters?.*',
+                        'org.omegat.externalfinder', 'org.omegat.languagetools', 'org.omegat.util',
+                        'org.omegat.core.events', 'org.omegat.core.matching', 'org.omegat.core.search',
+                        'org.omegat.core.segmentation', 'org.omegat.core.spellchecker', 'org.omegat.core.statistics',
+                        'org.omegat.core.tagvalidation', 'org.omegat.core.team2.*']
+            excludes = ['org.omegat.core.team2.gui', 'org.omegat.util.xml.*']
+            limit { minimum = 0.60 }
+        }
+    }
 }
 
 task manualPdfs {

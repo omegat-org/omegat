@@ -80,6 +80,12 @@ public class LingvoDSLTest {
     }
 
     @Test
+    public void testIsSupported() throws Exception {
+        assertTrue(new LingvoDSL().isSupportedFile(TEST_DICT));
+        assertFalse(new LingvoDSL().isSupportedFile(TEST_DICT_IDX.toFile()));
+    }
+
+    @Test
     public void testReadFileDict() throws Exception {
         LingvoDSLDict dict = (LingvoDSLDict) new LingvoDSL().loadDict(TEST_DICT);
         String word = "space";

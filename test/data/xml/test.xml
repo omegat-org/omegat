@@ -10,5 +10,6 @@
     <a-hex>&#x0001F0BF;</a-hex>
     <named>&amp;&lt;&gt;&apos;&quot;</named>
     <standalone/>
+    <standalone attr="val"/>
   </body>
 </root>

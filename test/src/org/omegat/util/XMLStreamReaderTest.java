@@ -32,9 +32,11 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import org.junit.Test;
+
 import org.omegat.filters2.TranslationException;
 import org.omegat.util.xml.XMLBlock;
 import org.omegat.util.xml.XMLStreamReader;
@@ -61,7 +63,7 @@ public class XMLStreamReaderTest {
         assertEquals("foo", blk.getAttribute("attr"));
         assertNotNull(lst = xml.closeBlock(blk));
 
-        assertEquals(25, lst.size());
+        assertEquals(26, lst.size());
 
         assertOpenTag(lst.get(0), "ascii");
         assertText(lst.get(1), "bar");
@@ -97,6 +99,9 @@ public class XMLStreamReaderTest {
 
         assertStandaloneTag(lst.get(24), "standalone");
 
+        assertStandaloneTag(lst.get(25), "standalone");
+        assertEquals("val", lst.get(25).getAttribute("attr"));
+
         xml.close();
     }
 
@@ -127,6 +132,14 @@ public class XMLStreamReaderTest {
             } catch (TranslationException ex) {
             }
         }
+    }
+
+    @Test
+    public void testMakeValidXML() throws IOException {
+       try (XMLStreamReader xml = new XMLStreamReader()) {
+           assertEquals("&amp;", xml.makeValidXML(38));
+           assertEquals("&amp;&lt;&gt;", xml.makeValidXML("&<>"));
+       }
     }
 
     private void assertOpenTag(XMLBlock block, String name) {

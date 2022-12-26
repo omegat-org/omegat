@@ -30,9 +30,9 @@ import java.io.FileOutputStream;
 
 import org.omegat.util.Preferences;
 import org.omegat.util.Preferences.IPreferences;
-import org.omegat.util.PreferencesImpl;
-import org.omegat.util.PreferencesXML;
 import org.omegat.util.StaticUtils;
+import org.omegat.util.preferences.PreferencesImpl;
+import org.omegat.util.preferences.PreferencesXML;
 
 /**
  * Convert UI settings to v2.1.3.

@@ -44,6 +44,8 @@ import java.util.Objects;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.master.FiltersUtil;
+import org.omegat.util.preferences.PreferencesImpl;
+import org.omegat.util.preferences.PreferencesXML2;
 
 import gen.core.filters.Filters;
 
@@ -758,7 +760,7 @@ public final class Preferences {
 
         File loadFile = getPreferencesFile();
         File saveFile = new File(StaticUtils.getConfigDir(), Preferences.FILE_PREFERENCES);
-        preferences = new PreferencesImpl(new PreferencesXML(loadFile, saveFile));
+        preferences = new PreferencesImpl(new PreferencesXML2(loadFile, saveFile));
     }
 
     public static synchronized void initFilters() {

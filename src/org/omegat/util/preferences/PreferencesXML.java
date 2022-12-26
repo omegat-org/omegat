@@ -1,39 +1,29 @@
-/**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool
-          with fuzzy matching, translation memory, keyword search,
-          glossaries, and translation leveraging into updated projects.
+/*
+ *  OmegaT - Computer Assisted Translation (CAT) tool
+ *           with fuzzy matching, translation memory, keyword search,
+ *           glossaries, and translation leveraging into updated projects.
+ *
+ *  Copyright (C) 2022 miurahr.
+ *                Home page: http://www.omegat.org/
+ *                Support center: https://omegat.org/support
+ *
+ *  This file is part of OmegaT.
+ *
+ *  OmegaT is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  OmegaT is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
- Copyright (C) 2000-2006 Keith Godfrey, Maxym Mykhalchuk, and Henry Pijffers
-               2007 Zoltan Bartko
-               2008-2009 Didier Briel
-               2010 Wildrich Fourie, Antonio Vilei, Didier Briel
-               2011 John Moran, Didier Briel
-               2012 Martin Fleurke, Wildrich Fourie, Didier Briel, Thomas Cordonnier,
-                    Aaron Madlon-Kay
-               2013 Aaron Madlon-Kay, Zoltan Bartko
-               2014 Piotr Kulik, Aaron Madlon-Kay
-               2015 Aaron Madlon-Kay, Yu Tang, Didier Briel, Hiroshi Miura
-               2016 Aaron Madlon-Kay
-               Home page: http://www.omegat.org/
-               Support center: https://omegat.org/support
-
- This file is part of OmegaT.
-
- OmegaT is free software: you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation, either version 3 of the License, or
- (at your option) any later version.
-
- OmegaT is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
- **************************************************************************/
-
-package org.omegat.util;
+package org.omegat.util.preferences;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -48,7 +38,10 @@ import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.omegat.filters2.TranslationException;
-import org.omegat.util.PreferencesImpl.IPrefsPersistence;
+import org.omegat.util.Log;
+import org.omegat.util.Preferences;
+import org.omegat.util.StringUtil;
+import org.omegat.util.preferences.PreferencesImpl.IPrefsPersistence;
 import org.omegat.util.xml.XMLBlock;
 import org.omegat.util.xml.XMLStreamReader;
 

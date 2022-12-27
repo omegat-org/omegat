@@ -29,19 +29,19 @@ See also:
 The creation of the documentation requires a number of tools:
 
 - DocBook XSL Stylesheets 1.75.2 ("dbk") or above
-  https://github.com/docbook/xslt10-stylesheets
+  [https://github.com/docbook/xslt10-stylesheets](https://github.com/docbook/xslt10-stylesheets)
 - DocBook XML 4.5 ("docbook-xml-4.5")
-  https://docbook.org/xml/4.5/
+  [https://docbook.org/xml/4.5/](https://docbook.org/xml/4.5/)
 - fop 1.1 ("fop-1.1")
-  https://xmlgraphics.apache.org/fop/1.1/
+  [https://xmlgraphics.apache.org/fop/1.1/](https://xmlgraphics.apache.org/fop/1.1/)
 - libxml2 2-2.7.7 ("libxml2-2.7.7")
-  http://xmlsoft.org
+  [http://xmlsoft.org](http://xmlsoft.org)
 - Saxon 6-5-5 ("saxon")
-  https://sourceforge.net/projects/saxon/files/saxon6/
+  [https://sourceforge.net/projects/saxon/files/saxon6/](https://sourceforge.net/projects/saxon/files/saxon6/)
 - XMLmind Web Help Compiler ("whc")
-  https://www.xmlmind.com/ditac/whc.shtml
+  [https://www.xmlmind.com/ditac/whc.shtml](https://www.xmlmind.com/ditac/whc.shtml)
 - Ant 1.7.1 or above ("apache-ant")
-  https://ant.apache.org
+  [https://ant.apache.org](https://ant.apache.org)
 
 ### Path to the DTD
 
@@ -126,10 +126,10 @@ All the dependencies can be installed through
     sudo port install apache-ant docbook-xml-4.5 docbook-xsl-nons fop libxml2
 
 - Saxon 6-5-5 ("saxon")
-  https://sourceforge.net/projects/saxon/files/saxon6/
+  [https://sourceforge.net/projects/saxon/files/saxon6/](https://sourceforge.net/projects/saxon/files/saxon6/)
 
 - XMLmind Web Help Compiler ("whc")
-  https://www.xmlmind.com/ditac/whc.shtml
+  [https://www.xmlmind.com/ditac/whc.shtml](https://www.xmlmind.com/ditac/whc.shtml)
 
 Unzip the downloaded packages and put them in your prefered location. The
 example below uses the `/Applications` folder.

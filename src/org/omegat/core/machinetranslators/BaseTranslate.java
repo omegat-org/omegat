@@ -150,7 +150,7 @@ public abstract class BaseTranslate implements IMachineTranslation {
      *            The text returned by the machine translator
      * @param sourceText
      *            The original source segment
-     * @return
+     * @return replaced text
      */
     protected String cleanSpacesAroundTags(String machineText, String sourceText) {
 
@@ -158,7 +158,7 @@ public abstract class BaseTranslate implements IMachineTranslation {
         Matcher tag = PatternConsts.OMEGAT_TAG_SPACE.matcher(machineText);
         while (tag.find()) {
             String searchTag = tag.group();
-            if (sourceText.indexOf(searchTag) == -1) { // The tag didn't appear
+            if (!sourceText.contains(searchTag)) { // The tag didn't appear
                                                        // with a trailing space
                                                        // in the source text
                 String replacement = searchTag.substring(0, searchTag.length() - 1);
@@ -170,10 +170,10 @@ public abstract class BaseTranslate implements IMachineTranslation {
         tag = PatternConsts.SPACE_OMEGAT_TAG.matcher(machineText);
         while (tag.find()) {
             String searchTag = tag.group();
-            if (sourceText.indexOf(searchTag) == -1) { // The tag didn't appear
+            if (!sourceText.contains(searchTag)) { // The tag didn't appear
                                                        // with a leading space
                                                        // in the source text
-                String replacement = searchTag.substring(1, searchTag.length());
+                String replacement = searchTag.substring(1);
                 machineText = machineText.replace(searchTag, replacement);
             }
         }

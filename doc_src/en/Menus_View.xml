@@ -12,7 +12,7 @@
 		  id="menus.view.mark.translated.segments.title"><guimenuitem>Translated
       Segments</guimenuitem></term>
       <listitem>
-        <para>If checked, translated segments will be marked in yellow.</para>
+        <para>If checked, translated segments are marked in yellow.</para>
       </listitem>
     </varlistentry>
 
@@ -21,7 +21,7 @@
       id="menus.view.mark.untranslated.segments.title"><guimenuitem>Untranslated
       Segments</guimenuitem></term>
       <listitem>
-        <para>If checked, untranslated segments will be marked in violet.</para>
+        <para>If checked, untranslated segments are marked in violet.</para>
       </listitem>
     </varlistentry>
 
@@ -43,9 +43,9 @@
       <term id="menus.view.display.source.segments.title"><guimenuitem>Source
       Segments</guimenuitem></term>
       <listitem>
-        <para>If checked, all the source segments will be shown and marked in
-        green.  If not checked, only the current source segments will be
-        shown.</para>
+        <para>If checked, all source segments are shown and marked in
+        green.  Otherwise, only the current source segment is shown.
+        </para>
       </listitem>
     </varlistentry>
 
@@ -54,7 +54,7 @@
       id="menus.view.mark.non.unique.segments.title"><guimenuitem>Non-Unique
       Segments</guimenuitem></term>
       <listitem>
-        <para>If checked, non-unique segments will be marked in pale
+        <para>If checked, non-unique segments are marked in pale
         gray.</para>
       </listitem>
     </varlistentry>
@@ -63,7 +63,7 @@
       <term id="menus.view.mark.segments.with.notes.title"><guimenuitem>Segments
       with Notes</guimenuitem></term>
       <listitem>
-        <para>If checked, segments with notes will be marked in cyan. This
+        <para>If checked, segments with notes are marked in cyan. This
         marking has priority over <guimenuitem>Mark Translated
         Segments</guimenuitem> and <guimenuitem>Mark Untranslated
         Segments</guimenuitem>.</para>
@@ -75,7 +75,7 @@
       id="menus.view.mark.non.breakable.space.title"><guimenuitem>Non-Breakable
       Spaces</guimenuitem></term>
       <listitem>
-        <para>If checked, non-breakable spaces will be displayed with a gray
+        <para>If checked, non-breakable spaces are displayed with a gray
         background.</para>
       </listitem>
     </varlistentry>
@@ -84,7 +84,7 @@
       <term
       id="menus.view.mark.white.space.title"><guimenuitem>Whitespace</guimenuitem></term>
       <listitem>
-        <para>If checked, white spaces will be displayed with a small
+        <para>If checked, white spaces are displayed as a small
         dot.</para>
       </listitem>
     </varlistentry>
@@ -148,7 +148,7 @@
       id="menus.view.aggressive.font.fallback.title"><guimenuitem>Aggressive
       Font Fallback</guimenuitem></term>
       <listitem>
-        <para>Check this option in case OmegaT does not display certain glyphs
+        <para>Check this option if OmegaT does not display certain glyphs
         properly (even if the fonts containing the relevant glyphs are installed
         on your machine).</para>
 

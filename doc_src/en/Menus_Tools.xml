@@ -5,7 +5,7 @@
   <title id="menus.tools.title"><guimenu>Tools</guimenu></title>
 
   <para>This menu gives you access to a number of tools, including QA
-  validation, match reports, an aligner, scripting, etc.</para>
+  validation, match reports, an aligner, and scripting.</para>
 
   <example id="example.check.issues">
 	<title id="example.check.issues.title">Shortcut description example</title>
@@ -33,7 +33,7 @@
         <itemizedlist>
           <listitem>
             <para><guilabel>Tag Issues</guilabel> (always selected): detects
-            missing or displaced tags, including custom tags and flagged
+            missing or misplaced tags, including custom tags and flagged
             text. See the <link linkend="dialogs.preferences.tag.processing"
             endterm="dialogs.preferences.tag.processing.title"/> preferences for
             details.</para>
@@ -71,18 +71,18 @@
         <para>The results are presented as a table in which:</para>
         <itemizedlist>
           <listitem>
-            <para>double-clicking a row activates the corresponding segment in
-            the Editor pane,</para>
+            <para>Double-clicking a row activates the corresponding segment in
+            the Editor pane.</para>
           </listitem>
 
           <listitem>
-            <para>clicking a column header changes the sort order for that
-            column,</para>
+            <para>Clicking a column header changes the sort order for that
+            column.</para>
           </listitem>
 
           <listitem>
-            <para>selecting a row, or moving the mouse over it, displays a
-            context menu icon in the last column; clicking that icon presents
+            <para>Selecting or mousing over a row displays a
+            context menu icon in the last column. Clicking that icon presents
             actions available to correct or ignore the error.</para>
 
 			<note>
@@ -92,8 +92,8 @@
 			  endterm="dialogs.preferences.editor.validate.tags.when.leaving.a.segment.title"/>
 			  preference.</para>
 
-			  <para>To block translated files creation if tag issues are found,
-			  enable the <link
+			  <para>To prevent the creation of translated files if tag issues are 
+			  found, enable the <link
 			  linkend="dialogs.preferences.tag.processing.do.not.allow.creating.translated.documents.with.tag.issues"
 			  endterm="dialogs.preferences.tag.processing.do.not.allow.creating.translated.documents.with.tag.issues.title"/>
 			  preference.</para>
@@ -158,7 +158,7 @@
 			</listitem>
 
 			<listitem>
-			  <para>Custom tags and flagged text: as for OmegaT tags, they are
+			  <para>Custom tags and flagged text: as with OmegaT tags, they are
 			  not counted by default in the statistics, but you can have OmegaT
 			  count them as words. See the <link
 			  linkend="dialogs.preferences.tag.processing.count.protected.text.and.custom.tags.in.statistics"
@@ -174,9 +174,9 @@
       <term id="menus.tools.match.statistics.title"><guimenuitem>Match
       Statistics</guimenuitem></term>
       <listitem>
-        <para>Displays the Match Statistics for the project: the number of
-        repetitions, exact matches, fuzzy matches and no-matches for segments,
-        words and characters.</para>
+        <para>Displays the match statistics for the project, which consist of 
+        the number of repetitions, exact matches, fuzzy matches and no-matches 
+        for segments, words and characters.</para>
 
 		<para>The data is saved in the <link
 		linkend="project.folder.omegat.project.stats.match"
@@ -191,9 +191,9 @@
       <term id="menus.tools.match.statistics.per.file.title"><guimenuitem>Match
       Statistics per File</guimenuitem></term>
       <listitem>
-        <para>Displays the Match Statistics for each file of the project: the
+        <para>Displays the individual match statistics, which consist of the
         number of repetitions, exact matches, fuzzy matches and no-matches for
-        segments, words and characters.</para>
+        segments, words and characters, for each file in the project.</para>
 
 		<para>The data is saved in the <link
 		linkend="project.folder.omegat.project.stats.match.per.file"
@@ -262,7 +262,7 @@
         <para>If you have defined external searches in the <link
         linkend="dialogs.preferences.external.searches"
         endterm="dialogs.preferences.external.searches.title"/> preferences,
-        their names are listed and accessible here.</para>
+        they are listed and accessible here.</para>
       </listitem>
     </varlistentry>
   </variablelist>

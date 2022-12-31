@@ -73,22 +73,6 @@ Sie es. OmegaT kann danach gestartet werden.
 
 
 
-Java Web Start für die OmegaT-Installation verwenden (alle Plattformen)
-=======================================================================
-
-Wenn Sie Java bereits auf Ihrem System installiert haben, können Sie OmegaT
-unter anderem über Java Web Start installieren.
-
-Laden Sie dazu die folgende Datei herunter und führen Sie sie danach aus:
-
-  https://omegat.sourceforge.net/webstart/OmegaT.jnlp
-
-Wenn sie das erste Mal ausgeführt wird, wird die richtige Umgebung für Ihren
-Computer und das Programm selbst installiert. Spätere Aufrufe müssen nicht
-online erfolgen.
-
-
-
 OmegaT starten (Windows)
 ========================
 
@@ -162,16 +146,16 @@ Mitwirkende
 
 OmegaT ist das Originalwerk von Keith Godfrey.
 
-Aaron Madlon-Kay ist der Projektmanager von OmegaT.
+Jean-Christophe Helary ist der Projektmanager von OmegaT.
 
 Aktuelles Team:
 (in alphabetischer Reihenfolge)
 
-- Vincent Bidaux (Dokumentationsmanager)
 - Marco Cevoli (Telegram Community Manager)
 - Jean-Christophe Helary (Twitter Community Manager)
-- Kos Ivantsof (Lokalisierungsmanager)
+- Kos Ivantsov (Lokalisierungsmanager)
 - Concepción Martin (Facebook Community Manager)
+- Hiroshi Miura (Hauptentwickler)
 - Briac Pilpré (Webmaster)
 - Lucie Vecerova (Facebook Community Manager)
 
@@ -181,11 +165,12 @@ Zu den früheren Mitwirkenden gehören:
 (in alphabetischer Reihenfolge)
 
 - Anthony Baldwin (Lokalisierungsmanager)
+- Vincent Bidaux (Dokumentationsmanager)
 - Didier Briel (Projektmanager)
 - Alex Buloichik (Hauptentwickler)
 - Sabine Cretella
 - Dmitri Gabinski
-- Jean-Christophe Helary (Supportgruppenbesitzer, Lokalisierungsmanager)
+- Aaron Madlon-Kay (Projektmanager)
 - Maxym Mykhalchuk (Hauptentwickler)
 - Samuel Murray
 - Henry Pijffers (Release-Manager)
@@ -207,7 +192,7 @@ Die aktuellsten Informationen über OmegaT finden Sie unter:
 
   https://omegat.org/
 
-Unterstützungen für den Benutzer:
+Unterstützungen für den Nutzer:
 
   https://omegat.org/support
 

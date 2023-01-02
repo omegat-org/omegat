@@ -25,16 +25,4 @@
         <xsl:call-template name="toc.item"/>
     </xsl:template>
 
-    <xsl:template match="htm:li[htm:span[@class='appendix']]">
-        <xsl:if test="not(preceding-sibling::htm:li[htm:span[@class='appendix']])">
-            <whc:entry href="{htm:span/htm:a/@href}">
-                <whc:title><xsl:value-of select="$translations/entry[@id='appendices']"/></whc:title>
-                <whc:entry href="{htm:span/htm:a/@href}">
-                    <whc:title><xsl:value-of select="htm:span/htm:a"/></whc:title>
-                </whc:entry>
-                <xsl:apply-templates select="following-sibling::htm:li[htm:span[@class='appendix']]" mode="appendices"/>
-            </whc:entry>
-        </xsl:if>
-    </xsl:template>
-
 </xsl:stylesheet>

@@ -11,15 +11,14 @@
 
 <h1>OmegaT User Manual</h1>
 
-<table>
+<table width="20%">
 <% languages.each { lang -> %>
     <tr>
         <td>
-            <p>${lang.name}:</p>
+            <p><a href="${lang.code}/index.html">${lang.name}</a></p>
         </td>
-        <td><a href="${lang.code}/index.html">HTML/Web</a></td>
-        <td><a href="https://sourceforge.net/projects/omegat/files/OmegaT%20-%20Standard/OmegaT%20${lang.version}/OmegaT_documentation_${lang.code}.PDF/download">PDF</a></td>
         <td>(<span class="${lang.status}">${lang.version}</span>)</td>
+        <td><a target="blank" href="https://sourceforge.net/projects/omegat/files/OmegaT%20-%20Standard/OmegaT%20${lang.version}/OmegaT_documentation_${lang.code}.PDF/download">PDF</a></td>
     </tr>
 <% } %>
 </table>

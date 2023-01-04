@@ -142,7 +142,7 @@
             <arg value="generate.toc=book toc,title,figure,table chapter toc appendix toc" />
             <arg value="generate.index=1" />
             <arg value="root.filename=index_" />
-            <arg value="html.stylesheet=OmegaT_webhelp.css" />
+            <arg value="html.stylesheet=OmegaT.css" />
             <arg value="docbook.css.link=0" />
             <arg value="saxon.character.representation=native;decimal"/>
             <classpath>
@@ -154,13 +154,24 @@
               tofile="../docs/${language}/${version.properties.filename}" />
     </target>
 
-    <target name="css">
-      <copy file="OmegaT.css"
-            tofile="../docs/${language}/OmegaT_webhelp.css" />
+    <target name="check-css">
+	  <available property="file.exists" file="../doc_src/${language}/OmegaT.css"/>
+	</target>
+	
+	<target name="local-css" depends="check-css" if="${file.exists}">
+      <copy file="../doc_src/${language}/OmegaT.css"
+            tofile="../docs/${language}/OmegaT.css" />
     </target>
 
+	<target name="global-css" depends="check-css" unless="${file.exists}">
+      <copy file="OmegaT.css"
+            tofile="../docs/${language}/OmegaT.css" />
+    </target>
 
-    <target name="instant-start">
+	<target name="css" depends="local-css,global-css"/>
+	
+
+    <target name="instant-start" depends="css">
         <java dir="."
               fork="true"
               failonerror="true"
@@ -186,7 +197,6 @@
                 <pathelement path="${saxon}" />
             </classpath>
         </java>
-        <copy file="${language}/OmegaT.css" tofile="../docs/${language}/OmegaT.css" />
     </target>
 
     <target name="pictures">

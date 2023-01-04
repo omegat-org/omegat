@@ -1,12 +1,83 @@
-/* reset some of the wh styesheet */
+body {
+	font-family: sans-serif;
+	margin: 1em;
+}
 
-* {
+h1, h2, table, dt {
+	color: navy;
+}
+
+h3, h4, ul a {
+	color: green;
+}
+
+code, .code {
+	color: black;
+	background: #ffffcc;
+	vertical-align: top;
+}
+
+.new {
+	font-size: x-small;
+	color: red;
+	background: yellow;
+}
+
+.updated {
+	font-size: x-small;
+	color: orange;
+}
+
+.note {
+	font-size: small;
+	color: black;
+	background: silver;
+}
+
+.warning {
+	color: red;
+	background: yellow;
+}
+
+.chapter {
+	color: black;
+}
+
+.navbar-top, .navbar-bottom {
+	margin-top: 1em;
+	margin-bottom: 1em;
+}
+
+.rel-p {
+	width: 9%;
+	align: left;
+	valign: center;
+	font-weight: bold;
+}
+
+.rel-n {
+	width: 6%;
+	align: left;
+	valign: center;
+	font-weight: bold;
+} 
+
+.nav-link {
+	width: 39%;
+	align: left;
+	valign: center;
+}
+
+.toc-link {
+	 width: 7%;
+	 align: left;
+	 valign: center;
 }
 
 
 /* default color as variables */
 :root {
-	--main-color:#77A43B;
+	--main-color:MidnightBlue;
 	--insert-background:#F5F5F5; /* note, warning */
 	--link-color:#DE5B17;
 	--hover-color:#AB5421;
@@ -19,33 +90,23 @@
 	--match-background:#BFFFBC;
 	--replace-color:#FD8A00;
 	
-	--intro-color:#77A43B;
-	--panes-color:#DE5B17;
-	--menus-color:#179ADE;
-	--windows-color:#DEBF17;
-	--project-color:#DE1737;
-	--prefs-color:#0059B3;
-	--howto-color:#B300B3;
-	--appendices-color:#00B3B3;
+	--intro-color:MidnightBlue;
+	--panes-color:MidnightBlue;
+	--menus-color:MidnightBlue;
+	--windows-color:MidnightBlue;
+	--project-color:MidnightBlue;
+	--prefs-color:MidnightBlue;
+	--howtos-color:MidnightBlue;
+	--appendices-color:MidnightBlue;
+	--install-color:MidnightBlue;
 	--support-border:solid 6px;
-}
-
-/*
-#EBEBEB
-#DE5B17
-#AB5421
-#2F3A2F
-*/
-
-h1, h2, h3, h4, dt {
-    color: var(--main-color);
 }
 
 #wh-navigation {
 	margin-right:3em;
 }
 #wh-toc a.wh-toc-selected {
-	color:var(--normal-font) !important;
+	color:#3F3F3F !important;
 	border-bottom-width:0px !important;
 	font-weight:bold;
 	font-size: 1.1em;
@@ -54,9 +115,9 @@ h1, h2, h3, h4, dt {
 #wh-content {
     font-family: sans-serif;
 	/*    font-size: 10pt; */
-    background-color: var(--normal-background);
+    background-color: #FDFDFD;
     line-height: 1.5;
-    color:var(--normal-font);
+    color:#3F3F3F;
     text-align:left;
     clip-path: padding-box;
 }
@@ -134,7 +195,7 @@ h2 {
     line-height: 1.2;
     margin: 0.8em 0;
     padding-top: 1em;
-    border-bottom: 1px solid var(--accent-line);
+    border-bottom: 1px solid #BCBCBC;
 }
 
 h3 {
@@ -196,7 +257,7 @@ blockquote {
 }
 
 code.filename {
-	color:var(--main-color);
+	color:MidnightBlue;
 }
 
 .programlisting,
@@ -222,7 +283,7 @@ samp,
 var,
 pre {
     font-family: monospace;
-    font-size: 1.3em;
+    font-size: 1em;
 }
 
 kbd {
@@ -420,7 +481,7 @@ a.ulink:visited {
 
 .table-title {
     font-style:italic;
-    color: var(--main-color);
+    color: MidnightBlue;
     font-size : .9em;
     margin-bottom: .75em;
 }
@@ -442,7 +503,7 @@ td,th {
 
 .figure-title {
     font-style:italic;
-    color: var(--main-color);
+    color: MidnightBlue;
     font-size : .9em;
     margin-bottom: .75em;
 }
@@ -457,7 +518,7 @@ td,th {
 
 .example-title {
     font-style:italic;
-    color: var(--main-color);
+    color: MidnightBlue;
     font-size : .9em;
     margin-bottom: .75em;
 }
@@ -489,8 +550,8 @@ a[href^="appendix"], a[href^="how.to"] {
 /* gui items */
 
 span.guimenu, span.guimenuitem, span.guilabel {
-	font-style: italic;
-    font-size: 1.2 em;
+	font:bold;
+    font-size: 1 em;
     padding: 0 .3rem;
     margin: 0 .2rem;
     color: var(--normal-font);
@@ -498,7 +559,8 @@ span.guimenu, span.guimenuitem, span.guilabel {
 
 span.guibutton {
     font-family:monospace;
-	font-size: 1.2em;
+    font:bold;
+	font-size: 1em;
     border: .1px solid var(--normal-font);
     border-radius:4px;
     padding: 0 .3rem;
@@ -519,22 +581,9 @@ span.term>span.keycap {
     margin: 0 .2rem;
     background: var(--insert-background);
     color: var(--normal-font);
-	padding-left:.3rem;
-	padding-right:1.2rem; 
+	padding: 0 .3rem;
 }
 
-section.section>p>span.keycap:last-of-type, 
-p span.keycap:last-of-type, 
-dd span.keycap:last-of-type, 
-li.listitem span.keycap:last-of-type, 
-span.term>span.keycap:last-of-type, 
-div.example-contents span.keycap:last-of-type, 
-p > span.keycap:last-child  {
-    background: var(--main-color);
-    color: var(--normal-background);
-    border-color: var(--caps-border);
-    padding: 0 .3rem;
-} 
 
 /* index page */
 #wh-content .book  div.toc {
@@ -580,7 +629,7 @@ p > span.keycap:last-child  {
 
 #wh-content .book  div.toc h2 {
     font-size: 1.2em;
-    color:var(--main-color);
+    color:MidnightBlue;
     font-weight:bold;
     margin:.8rem 1rem 0 1rem;
 }
@@ -610,7 +659,7 @@ p > span.keycap:last-child  {
     border-bottom-width: 1px;
     border-bottom-color: var(--accent-line);
     border-bottom-style: solid;
-    background-color:var(--main-color);
+    background-color:MidnightBlue;
     color:var(--normal-background);
 }
 
@@ -693,6 +742,22 @@ h2:has(a[href="menus.html"]) ~ ul {
 	border-bottom: var(--support-border) var(--menus-color);
 }
 
+/* href="chapter.installing.and.running.html" */
+
+a[href="chapter.installing.and.running.html"] ~ ul {
+	border-left: var(--support-border) var(--install-color);
+}
+
+h2:has(a[href="chapter.installing.and.running.html"]) ~ ul {
+	border-right: var(--support-border) var(--install-color);
+	padding-right: 1em;
+}
+#chapter\.installing\.and\.running {
+	padding-right: 2em;
+	border-right: var(--support-border) var(--install-color);
+	border-bottom: var(--support-border) var(--install-color);
+}
+
 /* href="windows.and.dialogs.html" */
 
 a[href="windows.and.dialogs.html"] ~ ul {
@@ -725,6 +790,23 @@ h2:has(a[href="project.folder.html"]) ~ ul {
 	border-bottom: var(--support-border) var(--project-color);
 }
 
+/* href="howtos.html" */
+
+a[href="howtos.html"] ~ ul {
+	border-left: var(--support-border) var(--howtos-color);
+}
+
+h2:has(a[href="howtos.html"]) ~ ul {
+	border-right: var(--support-border) var(--howtos-color);
+	padding-right: 1em;
+}
+#howtos {
+	padding-right: 2em;
+	border-right: var(--support-border) var(--howtos-color);
+	border-bottom: var(--support-border) var(--howtos-color);
+}
+
+
 /* href="configuration.folder.html" */
 
 a[href="configuration.folder.html"] ~ ul {
@@ -751,11 +833,6 @@ h2:has(a[href="dialogs.preferences.html"]) ~ ul {
 	border-right: var(--support-border) var(--prefs-color);
 	padding-right: 1em;
 }
-#dialogs\.preferences {
-	padding-right: 2em;
-	border-right: var(--support-border) var(--prefs-color);
-	border-bottom: var(--support-border) var(--prefs-color);
-}
 
 /* href="how.to.html" */
 
@@ -775,15 +852,15 @@ h2:has(a[href="how.to.html"]) ~ ul {
 
 /* href="appendices.html" */
 
-a[href="appendices.html"] ~ ul {
+a[href*="appendix"] ~ ul {
 	border-left: var(--support-border) var(--appendices-color);
 }
 
-h2:has(a[href="appendices.html"]) ~ ul {
+h2:has(a[href*="appendix"]) ~ ul {
 	border-right: var(--support-border) var(--appendices-color);
 	padding-right: 1em;
 }
-#appendices {
+.appendix {
 	padding-right: 2em;
 	border-right: var(--support-border) var(--appendices-color);
 	border-bottom: var(--support-border) var(--appendices-color);

@@ -3,6 +3,9 @@
 * {
 }
 
+body {
+	font-family:sans-serif;
+}
 
 /* default color as variables */
 :root {
@@ -38,7 +41,7 @@
 */
 
 h1, h2, h3, h4, dt {
-    color: var(--main-color);
+    color: #77A43B;
 }
 
 #wh-navigation {
@@ -490,7 +493,7 @@ a[href^="appendix"], a[href^="how.to"] {
 
 span.guimenu, span.guimenuitem, span.guilabel {
 	font-style: italic;
-    font-size: 1.2 em;
+    font-size: 1.1 em;
     padding: 0 .3rem;
     margin: 0 .2rem;
     color: var(--normal-font);
@@ -498,7 +501,7 @@ span.guimenu, span.guimenuitem, span.guilabel {
 
 span.guibutton {
     font-family:monospace;
-	font-size: 1.2em;
+	font-size: 1.1em;
     border: .1px solid var(--normal-font);
     border-radius:4px;
     padding: 0 .3rem;
@@ -663,31 +666,31 @@ h2:has(a[href="chapter.instant.start.guide.html"]) ~ ul {
 }
 
 /* panes side color */
-a[href="panes.html"] ~ ul {
+a[href="chapter.panes.html"] ~ ul {
 	border-left: var(--support-border) var(--panes-color);
 }
 
-h2:has(a[href="panes.html"]) ~ ul {
+h2:has(a[href="chapter.panes.html"]) ~ ul {
 	border-right: var(--support-border) var(--panes-color);
 	padding-right: 1em;
 }
 
-#panes {
+#chapter\.panes {
 	padding-right: 2em;
 	border-right: var(--support-border) var(--panes-color);
 	border-bottom: var(--support-border) var(--panes-color);
 }
 
 /* menus side color */
-a[href="menus.html"] ~ ul {
+a[href="chapter.menus.html"] ~ ul {
 	border-left: var(--support-border) var(--menus-color);
 }
 
-h2:has(a[href="menus.html"]) ~ ul {
+h2:has(a[href="chapter.menus.html"]) ~ ul {
 	border-right: var(--support-border) var(--menus-color);
 	padding-right: 1em;
 }
-#menus {
+#chapter\.menus {
 	padding-right: 2em;
 	border-right: var(--support-border) var(--menus-color);
 	border-bottom: var(--support-border) var(--menus-color);
@@ -695,15 +698,15 @@ h2:has(a[href="menus.html"]) ~ ul {
 
 /* href="windows.and.dialogs.html" */
 
-a[href="windows.and.dialogs.html"] ~ ul {
+a[href="chapter.windows.and.dialogs.html"] ~ ul {
 	border-left: var(--support-border) var(--windows-color);
 }
 
-h2:has(a[href="windows.and.dialogs.html"]) ~ ul {
+h2:has(a[href="chapter.windows.and.dialogs.html"]) ~ ul {
 	border-right: var(--support-border) var(--windows-color);
 	padding-right: 1em;
 }
-#windows\.and\.dialogs {
+#chapter\.windows\.and\.dialogs {
 	padding-right: 2em;
 	border-right: var(--support-border) var(--windows-color);
 	border-bottom: var(--support-border) var(--windows-color);
@@ -711,15 +714,15 @@ h2:has(a[href="windows.and.dialogs.html"]) ~ ul {
 
 /* href="project.folder.html" */
 
-a[href="project.folder.html"] ~ ul {
+a[href="chapter.project.folder.html"] ~ ul {
 	border-left: var(--support-border) var(--project-color);
 }
 
-h2:has(a[href="project.folder.html"]) ~ ul {
+h2:has(a[href="chapter.project.folder.html"]) ~ ul {
 	border-right: var(--support-border) var(--project-color);
 	padding-right: 1em;
 }
-#project\.folder {
+#chapter\.project\.folder {
 	padding-right: 2em;
 	border-right: var(--support-border) var(--project-color);
 	border-bottom: var(--support-border) var(--project-color);
@@ -727,15 +730,15 @@ h2:has(a[href="project.folder.html"]) ~ ul {
 
 /* href="configuration.folder.html" */
 
-a[href="configuration.folder.html"] ~ ul {
+a[href="chapter.configuration.folder.html"] ~ ul {
 	border-left: var(--support-border) var(--config-color);
 }
 
-h2:has(a[href="configuration.folder.html"]) ~ ul {
+h2:has(a[href="chapter.configuration.folder.html"]) ~ ul {
 	border-right: var(--support-border) var(--config-color);
 	padding-right: 1em;
 }
-#configuration\.folder {
+#chapter\.configuration\.folder {
 	padding-right: 2em;
 	border-right: var(--support-border) var(--config-color);
 	border-bottom: var(--support-border) var(--config-color);
@@ -743,15 +746,15 @@ h2:has(a[href="configuration.folder.html"]) ~ ul {
 
 /* href="dialogs.preferences.html" */
 
-a[href="dialogs.preferences.html"] ~ ul {
+a[href="chapter.dialogs.preferences.html"] ~ ul {
 	border-left: var(--support-border) var(--prefs-color);
 }
 
-h2:has(a[href="dialogs.preferences.html"]) ~ ul {
+h2:has(a[href="chapter.dialogs.preferences.html"]) ~ ul {
 	border-right: var(--support-border) var(--prefs-color);
 	padding-right: 1em;
 }
-#dialogs\.preferences {
+#chapter\.dialogs\.preferences {
 	padding-right: 2em;
 	border-right: var(--support-border) var(--prefs-color);
 	border-bottom: var(--support-border) var(--prefs-color);
@@ -759,15 +762,15 @@ h2:has(a[href="dialogs.preferences.html"]) ~ ul {
 
 /* href="how.to.html" */
 
-a[href="how.to.html"] ~ ul {
+a[href="chapter.how.to.html"] ~ ul {
 	border-left: var(--support-border) var(--howto-color);
 }
 
-h2:has(a[href="how.to.html"]) ~ ul {
+h2:has(a[href="chapter.how.to.html"]) ~ ul {
 	border-right: var(--support-border) var(--howto-color);
 	padding-right: 1em;
 }
-#how\.to {
+#chapter\.how\.to {
 	padding-right: 2em;
 	border-right: var(--support-border) var(--howto-color);
 	border-bottom: var(--support-border) var(--howto-color);
@@ -775,15 +778,15 @@ h2:has(a[href="how.to.html"]) ~ ul {
 
 /* href="appendices.html" */
 
-a[href="appendices.html"] ~ ul {
+a[href="chapter.appendices.html"] ~ ul {
 	border-left: var(--support-border) var(--appendices-color);
 }
 
-h2:has(a[href="appendices.html"]) ~ ul {
+h2:has(a[href="chapter.appendices.html"]) ~ ul {
 	border-right: var(--support-border) var(--appendices-color);
 	padding-right: 1em;
 }
-#appendices {
+#chapter\.appendices {
 	padding-right: 2em;
 	border-right: var(--support-border) var(--appendices-color);
 	border-bottom: var(--support-border) var(--appendices-color);

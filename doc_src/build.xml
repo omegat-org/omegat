@@ -167,15 +167,19 @@
 
 	<target name="css" depends="old-css,new-css"/>
 	
-    <target name="instant-start" depends="css">
+    <target name="check-instant-start">
+	  <available property="file.exists" file="../doc_src/${language}/InstantStartGuide.xml"/>
+	</target>
+
+	<target name="old-instant-start" depends="css,check-instant-start" if="${file.exists}">
         <java dir="."
               fork="true"
               failonerror="true"
               maxmemory="128m"
               classname="com.icl.saxon.StyleSheet" >
             <arg value="-o" />
-            <arg value="../docs/${language}/first_steps.html" />
-            <arg value="${language}/First_Steps.xml" />
+            <arg value="../docs/${language}/index.html" />
+            <arg value="${language}/InstantStartGuide.xml" />
             <arg value="../../docbook-utf8.xsl" />
             <arg value="base.dir=../docs/${language}/" />
             <arg value="chunk.section.depth=0" />
@@ -193,6 +197,8 @@
                 <pathelement path="${saxon}" />
             </classpath>
         </java>
+        <copy file="${language}/${version.properties.filename}"
+              tofile="../docs/${language}/${version.properties.filename}" />
     </target>
 
     <target name="first-steps" depends="css">
@@ -222,6 +228,8 @@
             </classpath>
         </java>
     </target>
+
+	<target name="instant-start" depends="first-steps,old-instant-start"/>
 
     <target name="pictures">
         <copy todir="../docs/${language}/images">

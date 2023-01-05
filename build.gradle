@@ -294,6 +294,10 @@ task genDocIndex(type: Copy) {
             def name = langNameExceptions[code] ?: locale.getDisplayName(locale)
             def docVersion = loadProperties(props).version
             def status = docVersion == omtVersion.version ? 'up-to-date' : 'out-of-date'
+            if (docVersion == "2.3.0") {
+            	status = 'instant-start'
+            }
+            println status
             ['code': code, 'name': name, 'version': docVersion, 'status': status]
         }.sort { it.code }
         expand('languages': langInfos)

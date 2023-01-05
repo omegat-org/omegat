@@ -154,30 +154,30 @@
               tofile="../docs/${language}/${version.properties.filename}" />
     </target>
 
-	<target name="old-css" depends="check-instant-start" if="${file.exists}">
+    <target name="check-first-steps">
+	  <available property="FirstSteps.exists" file="../doc_src/${language}/First_Steps.xml"/>
+	</target>
+
+	<target name="old-css" depends="check-first-steps" unless="${FirstSteps.exists}">
       <copy file="OmegaT_old.css"
             tofile="../docs/${language}/OmegaT.css" />
     </target>
 
-	<target name="new-css" depends="check-instant-start" unless="${file.exists}">
+	<target name="new-css" depends="check-first-steps" if="${FirstSteps.exists}">
       <copy file="OmegaT_new.css"
             tofile="../docs/${language}/OmegaT.css" />
     </target>
 
 	<target name="css" depends="old-css,new-css"/>
 	
-    <target name="check-instant-start">
-	  <available property="file.exists" file="../doc_src/${language}/InstantStartGuide.xml"/>
-	</target>
-
-	<target name="old-instant-start" depends="css,check-instant-start" if="${file.exists}">
+	<target name="instant-start" depends="check-first-steps, css, pictures" unless="${FirstSteps.exists}">
         <java dir="."
               fork="true"
               failonerror="true"
               maxmemory="128m"
               classname="com.icl.saxon.StyleSheet" >
             <arg value="-o" />
-            <arg value="../docs/${language}/index.html" />
+            <arg value="../docs/${language}/first_steps.html" />
             <arg value="${language}/InstantStartGuide.xml" />
             <arg value="../../docbook-utf8.xsl" />
             <arg value="base.dir=../docs/${language}/" />
@@ -198,9 +198,11 @@
         </java>
         <copy file="${language}/${version.properties.filename}"
               tofile="../docs/${language}/${version.properties.filename}" />
+        <copy file="../docs/${language}/first_steps.html"
+              tofile="../docs/${language}/index.html" />
     </target>
 
-    <target name="first-steps" depends="css">
+    <target name="first-steps" depends="check-first-steps, css" if="${FirstSteps.exists}">
         <java dir="."
               fork="true"
               failonerror="true"
@@ -227,8 +229,6 @@
             </classpath>
         </java>
     </target>
-
-	<target name="instant-start" depends="first-steps,old-instant-start"/>
 
     <target name="pictures">
         <copy todir="../docs/${language}/images">

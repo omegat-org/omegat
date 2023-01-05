@@ -942,11 +942,32 @@ task instantStartGuides {
     group = 'omegat workflow'
 }
 
+task firstSteps {
+    description = 'Build First Step pages for all languages. Requires Docker.'
+    group = 'omegat workflow'
+}
+
 task updateManuals {
     group = 'omegat workflow'
     description = 'Update Instant Start guides and HTML manuals.'
-    dependsOn manualHtmls, instantStartGuides
+    dependsOn manualHtmls, firstSteps, instantStartGuides
     finalizedBy genDocIndex
+}
+
+ext.firstStepsXmls = fileTree(dir: 'doc_src', include: '**/First_Steps.xml')
+firstStepsXmls.each { xml ->
+    def lang = xml.parentFile.name
+    def taskName = "firstSteps${lang.capitalize()}"
+    task(taskName) {
+        inputs.files fileTree(dir: "doc_src/${lang}", include: '**/*.xml')
+        doLast {
+            exec {
+                workingDir = 'doc_src'
+                commandLine './docgen', "-Dlanguage=${lang}", 'first-steps'
+            }
+        }
+    }
+    firstSteps.dependsOn taskName
 }
 
 ext.instantStartXmls = fileTree(dir: 'doc_src', include: '**/InstantStartGuide.xml')
@@ -964,6 +985,8 @@ instantStartXmls.each { xml ->
     }
     instantStartGuides.dependsOn taskName
 }
+
+
 
 task debug(type: JavaExec) {
     description = 'Launch app for debugging.' // Special debug task for NetBeans

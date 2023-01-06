@@ -138,7 +138,7 @@
             <arg value="chapter.autolabel=0" />
             <arg value="section.autolabel=0" />
             <arg value="tablecolumns.extension=0" />
-            <arg value="toc.max.depth=3" />
+            <arg value="toc.max.depth=2" />
             <arg value="generate.toc=book toc,title,figure,table chapter toc appendix toc" />
             <arg value="generate.index=1" />
             <arg value="root.filename=index_" />

@@ -91,12 +91,17 @@
 
     <varlistentry id="menus.view.mark.bidirectional.algorithm.control.character">
       <term
-      id="menus.view.mark.bidirectional.algorithm.control.character.title"><guimenuitem>BiDi
+      id="menus.view.mark.bidirectional.algorithm.control.character.title"><guimenuitem>Bidi
       Control Characters</guimenuitem></term>
       <listitem>
-        <para>This option displays <ulink
+        <para>This option displays Unicode directional formatting characters. See <ulink
         url="https://www.unicode.org/reports/tr9/">Unicode Bidirectional
-        Algorithm</ulink></para>
+        Algorithm</ulink> for details.</para>
+		<para>Use <link linkend="menus.edit" endterm="menus.edit.title"/><link
+		linkend="menus.edit.insert.unicode.control.character"
+		endterm="menus.edit.insert.unicode.control.character.title"/> to insert
+		a selection of characters directly from the OmegaT interface. See <link
+		linkend="app.bidi" endterm="app.bidi.title"/> for details.</para>
 	  </listitem>
     </varlistentry>
 

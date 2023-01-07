@@ -372,11 +372,12 @@
 
 	<varlistentry id="menus.edit.insert.unicode.control.character">
       <term id="menus.edit.insert.unicode.control.character.title"><guisubmenu>Insert
-      Unicode Control Character</guisubmenu></term>
+      Bidi Control Character</guisubmenu></term>
 	  <listitem>
-		<para>Inserts the selected Unicode control character. See <ulink
-		url="https://www.unicode.org/reports/tr9/">Unicode Bidirectional
-		Algorithm</ulink> for details.</para>
+		<para>Inserts the selected Unicode directional formatting character. See
+		<ulink
+		url="https://www.unicode.org/reports/tr9/#Directional_Formatting_Characters">Unicode
+		Bidirectional Algorithm</ulink> for details.</para>
 
 		<itemizedlist>
 		  <listitem>
@@ -399,6 +400,12 @@
 			<para><guimenuitem>Pop Directional Formatting (PDF U+202C)</guimenuitem></para>
 		  </listitem>
 		</itemizedlist>
+		<para>Use <link linkend="menus.view" endterm="menus.view.title"/><link
+		linkend="menus.view.mark.bidirectional.algorithm.control.character"
+		endterm="menus.view.mark.bidirectional.algorithm.control.character.title"
+		/> to display the characters for easier manipulation. See <link
+		linkend="app.bidi" endterm="app.bidi.title"/> for details.</para>
+
       </listitem>
 	</varlistentry>
 

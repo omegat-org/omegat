@@ -83,6 +83,12 @@
 	  <para>To access the files inside the <filename>OmegaT.app</filename>,
 	  package right-click on <filename>OmegaT.app</filename> and select “Show 
 	  Package Contents”.</para>
+
+	  <para>It is also possible to use <filename>OmegaT.app</filename> itself to
+	  launch OmegaT from the terminal. See the <link
+	  linkend="launch.with.command.line.omegat.terminal.command.syntax"
+	  endterm="launch.with.command.line.omegat.terminal.command.syntax.title"/>
+	  section below for details.</para>
 	</note>
 
 	<para>Use your text editor of choice to modify the files.</para>
@@ -222,6 +228,14 @@
 
 	  <para>The syntax to launch OmegaT from the terminal is:
 	  <programlisting>java -jar &lt;java parameters&gt; path/to/OmegaT.jar &lt;OmegaT options&gt; </programlisting></para>
+
+	  <note>
+		<para>On macOS, it is also possible to use
+		<filename>OmegaT.app</filename> directly in the terminal, in which case
+		java parameters cannot be added:
+		<programlisting>open path/to/OmegaT.app --args &lt;OmegaT options&gt;</programlisting>
+		Use <programlisting>man open</programlisting> to discover the options to that command.</para>
+	  </note>
 
 	  <variablelist>
 		<varlistentry id="launch.with.command.line.java.jar">

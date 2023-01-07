@@ -56,9 +56,9 @@
     <varlistentry id="menus.view.mark.non.unique.segments">
       <term
       id="menus.view.mark.non.unique.segments.title"><guimenuitem>Highlight
-      Non-Unique Segments</guimenuitem></term>
+      Repeated Segments</guimenuitem></term>
       <listitem>
-        <para>If checked, non-unique segments will be highlighted in pale
+        <para>If checked, repeated segments will be highlighted in pale
         gray.</para>
       </listitem>
     </varlistentry>

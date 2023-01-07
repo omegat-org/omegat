@@ -182,7 +182,7 @@
         of translations</option></term>
 
 		<listitem>
-          <para>If there are duplicated (non-unique) segments in the source
+          <para>If there are duplicated (repeated) segments in the source
           documents, checking this option will set the first translated segment
           as the default translation and automatically use the same target text
           in the remaining repeated segments.</para>

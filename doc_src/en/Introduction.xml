@@ -530,7 +530,7 @@
     have nothing to do with decorations, but are nevertheless important in the
     source files (and, consequently, in the translated files).</para>
 
-	<para>A source sentence might look like:</para>
+	<para>A sentence might look like this in its original application:</para>
     
 	<example id="example.source.segment.with.decorations">
 	  <title id="example.source.segment.with.decorations.title">Sentence with
@@ -550,22 +550,52 @@
 	  role="tag">&lt;t2/&gt;</code>eager<code role="tag">&lt;t3/&gt;</code>
 	  translators</para>
     </example>
+
+	<note>
+	  <para>The various tag related settings can be very helpful to properly
+	  manage the tags in a documents. See the following options and scripts for
+	  details:</para>
+	  <itemizedlist>
+		<listitem>
+		  <para><link linkend="dialogs.project.properties.remove.tags" endterm="dialogs.project.properties.remove.tags.title"/></para>
+		</listitem>
+		<listitem>
+		  <para><link linkend="dialogs.preferences.tag.processing" endterm="dialogs.preferences.tag.processing.title"/></para>
+		</listitem>
+		<listitem>
+		  <para><link linkend="windows.scripts.distribution.tagwipe" endterm="windows.scripts.distribution.tagwipe.title"/></para>
+		</listitem>
+		<listitem>
+		  <para><link linkend="windows.scripts.distribution.adapt.standard.tags" endterm="windows.scripts.distribution.adapt.standard.tags.title"/></para>
+		</listitem>
+		<listitem>
+		  <para><link linkend="windows.scripts.distribution.strip.tags" endterm="windows.scripts.distribution.strip.tags.title"/></para>
+		</listitem>
+		<listitem>
+		  <para><link linkend="windows.scripts.distribution.tag.free.match" endterm="windows.scripts.distribution.tag.free.match.title"/></para>
+		</listitem>
+	  </itemizedlist>
+	</note>
 	
     <para>The tags in OmegaT are grayed, making them easy to recognize. They are
     protected to prevent you from modifying their contents, but you can delete
-    them, enter them by hand or move them around in the target sentence. See
+    them, enter them by hand or move them around in the target sentence.</para>
+	<para>Use
     <link linkend="menus.edit" endterm="menus.edit.title"/>
     <link linkend="menus.edit.insert.missing.source.tag"
     endterm="menus.edit.insert.missing.source.tag.title"/> and <link
     linkend="menus.edit.insert.next.missing.tag"
-    endterm="menus.edit.insert.next.missing.tag.title"/> for details.</para>
+    endterm="menus.edit.insert.next.missing.tag.title"/> to insert the tags at
+    the cursor location.</para>
 
 	<para>You can define custom tags that will be managed in the same
 	manner. See the <link
 	linkend="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags"
 	endterm="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags.title"/>
 	section for details. You can also define strings that OmegaT should warn you
-	about if you leave them in a translation. See the <link
+	about if you leave them in a translation.</para>
+
+	<para>See the <link
 	linkend="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation"
 	endterm="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation.title"/>
 	section for details.</para>

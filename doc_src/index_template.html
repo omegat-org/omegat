@@ -5,23 +5,67 @@
    <style type="text/css">
       .up-to-date { color: green; font-weight: bold; }
       .out-of-date { color: red; }
+        h1 {
+            width: 30%;
+            text-align: center;
+        }
+        table {
+            text-align: center;
+            width: 30%;
+        }
+        .lang {
+            text-align: left;
+        }
+
    </style>
 </head>
 <body dir="ltr">
 
 <h1>OmegaT User Manual</h1>
 
-<table width="20%">
-<% languages.each { lang -> %>
-    <tr>
-        <td>
-            <p><a href="${lang.code}/index.html">${lang.name}</a></p>
-        </td>
-        <td>(<span class="${lang.status}">${lang.version}</span>)</td>
-        <td><a target="blank" href="https://sourceforge.net/projects/omegat/files/OmegaT%20-%20Standard/OmegaT%20${lang.version}/OmegaT_documentation_${lang.code}.PDF/download">PDF</a></td>
-    </tr>
-<% } %>
+<table>
+    <thead>
+        <tr>
+            <th>
+                <p>HTML</p>
+            </th>
+            <th>
+                <p>Version</p>
+            </th>
+            <th>
+                <p>PDF</p>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <% languages.each { lang -> if (lang.nomanual) { %>
+            <tr>
+                <td>
+                    <p class="lang">${lang.name}:</p>
+                </td>
+                <td>
+                    <p>(N/A)</p>
+                </td>
+                <td><a href="${lang.code}/instantStartGuideNoTOC.html">First Steps Guide</a>
+                </td>
+                <td>
+                    <p></p>
+                </td>
+            </tr>
+        <% } else { %>
+            <tr>
+                <td>
+                    <p class="lang"><a href="${lang.code}/index.html">${lang.name}</a></p>
+                </td>
+                <td>(<span class="${lang.status}">${lang.version}</span>)</td>
+                <td><a target="blank"
+                        href="https://sourceforge.net/projects/omegat/files/OmegaT%20-%20Standard/OmegaT%20${lang.version}/OmegaT_documentation_${lang.code}.PDF/download">PDF</a>
+                </td>
+            </tr>
+        <% } } %>
+    </tbody>
 </table>
 
 </body>
+
 </html>

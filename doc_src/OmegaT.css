@@ -3,7 +3,6 @@
 * {
 }
 
-
 /* default color as variables */
 :root {
 	--main-color:#77A43B;
@@ -99,7 +98,6 @@ h1, h2, h3, h4, dt {
 		padding-bottom: 5em;
 	}
 }
-
 
 h1 {
     /*
@@ -335,6 +333,18 @@ dd {
     color: red;
     background: yellow;
 }
+
+/* Numbered bullets in the Introduction, under the main screenshot */
+
+#introduction\.make\.it\.look\.good ol>li::marker {
+	color: red;
+	font-weight:bold;
+}
+
+/***************************************/
+/* CSS for "docbook" coded screenshots */
+/***************************************/
+>>>>>>> 7da400f2d (number the UI sections on the screenshot + description):doc_src/OmegaT_new.css
 
 .updated {
     font-size: x-small;

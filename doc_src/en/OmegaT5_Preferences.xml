@@ -1498,7 +1498,7 @@ ${filePath}></programlisting></para>
 		id="dialog.preferences.view.simplify.tooltip.on.protected.parts.title"><option>Simplify
 		tag tooltips</option></term>
 		<listitem>
-		  <para>OmegaT tags are protected text that represents format specific
+		  <para>OmegaT tags are protected text that represents format-specific
 		  tags in the source document. When hovering on an OmegaT tag, OmegaT
 		  displays a tooltip that contains the original content of the tag. If
 		  that content was originally enclosed in paired tags, the paired tags

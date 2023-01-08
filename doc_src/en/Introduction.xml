@@ -353,35 +353,53 @@
       </mediaobject>
     </figure>
 
+	<orderedlist>
+	  <listitem>
+		<para>The <link linkend="panes.editor" endterm="panes.editor.title"/>
+		pane </para>
+	  </listitem>
+	  <listitem>
+		<para>The <link linkend="panes.notes" endterm="panes.notes.title"/>
+		pane</para>
+	  </listitem>
+	  <listitem>
+		<para>The <link linkend="panes.fuzzy.matches"
+		endterm="panes.fuzzy.matches.title"/> pane</para>
+	  </listitem>
+	  <listitem>
+		<para>The <link linkend="panes.glossary"
+		endterm="panes.glossary.title"/> pane</para>
+	  </listitem>
+	  <listitem>
+		<para>The <link linkend="panes.segment.properties"
+		endterm="panes.segment.properties.title"/> pane</para>
+	  </listitem>
+	  <listitem>
+		<para>The <link linkend="panes.comments"
+		endterm="panes.comments.title"/> pane</para>
+	  </listitem>
+	  <listitem>
+		<para>The <link linkend="panes.multipletranslations"
+		endterm="panes.multipletranslations.title"/> pane</para>
+	  </listitem>
+	  <listitem>
+		<para> The <link linkend="panes.dictionary"
+		endterm="panes.dictionary.title"/> pane and the <link
+		linkend="panes.machinetranslation"
+		endterm="panes.machinetranslation.title"/> pane are docked</para>
+	  </listitem>
+	  <listitem>
+		<para>The <link linkend="panes.statusbar"
+		endterm="panes.statusbar.title"/> (right-side), displaying project
+		information</para>
+	  </listitem>
+	</orderedlist>
+	
 	<para>Use the various options in the <link linkend="menus.view"
 	endterm="menus.view.title"/> menu and move the various <link
 	linkend="chapter.panes">panes</link> around to obtain the layout that fits
-	your workflow best:</para>
+	your workflow best.</para>
 	
-	<figure id="modified.omegat.layout">
-      <title id="modified.omegat.layout.title">Modified OmegaT layout with
-      auto-completion</title>
-      <mediaobject>
-        <imageobject role="html">
-          <imagedata fileref="images/modifiedOmegaTLayout.png"/>
-        </imageobject>
-        <imageobject role="fo">
-          <imagedata fileref="images/modifiedOmegaTLayout.png" width="60%"/>
-        </imageobject>
-      </mediaobject>
-    </figure>
-
-	<note>
-	  <para>To display paragraph delimitations and see which paragraph each
-	  segment is part of, use <link linkend="menus.view"
-	  endterm="menus.view.title"/><link
-	  linkend="menus.view.mark.paragraph.delimitations"
-	  endterm="menus.view.mark.paragraph.delimitations.title"/>. Paragraph
-	  delimitations are defined in the <link
-	  linkend="dialogs.preferences.editor.paragraph.delimitation.format"
-	  endterm="dialogs.preferences.editor.paragraph.delimitation.format.title"/>
-	  preference.</para>
-	</note>
   </section>
 
   <section id="introduction.translate.the.segments.one.by.one">

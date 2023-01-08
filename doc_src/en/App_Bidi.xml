@@ -4,36 +4,35 @@
 <section id="app.bidi">
   <title id="app.bidi.title">Directional Formatting Characters</title>
 
-  <para>Bidi control characters can be found in the menu <link
+  <para>Bidi control characters are available from <link
   linkend="menus.edit" endterm="menus.edit.title"/><link
   linkend="menus.edit.insert.unicode.control.character"
-  endterm="menus.edit.insert.unicode.control.character.title"/> and may be used
+  endterm="menus.edit.insert.unicode.control.character.title"/>. They can be used
   to:</para>
 
   <itemizedlist>
 	<listitem>
-	  <para>insert an invisible character with a certain strong directionality
+	  <para>Insert an invisible character with a strong directionality
 	  to force a specific position for a character with weak or neutral
-	  directionality</para>
+	  directionality.</para>
 	</listitem>
 	<listitem>
-	  <para>create an embedding which works as a sort of protective environment
-	  within which text can flow in the opposite direction of the
-	  segment.</para>
+	  <para>Create a section of text that flows in the
+	  direction opposite that of the segment.</para>
 	</listitem>
   </itemizedlist>
   
-  <para>These control characters can change directionality but are
-  invisible. Use <link linkend="menus.view" endterm="menus.view.title"/><link
+  <para>These control characters change directionality but are invisible.
+  Use <link linkend="menus.view" endterm="menus.view.title"/><link
   linkend="menus.view.mark.bidirectional.algorithm.control.character"
   endterm="menus.view.mark.bidirectional.algorithm.control.character.title"/> to
-  see a visual hint of where these characters are inserted.</para>
+  show a visual indication of their position.</para>
 
   <section id="app.bidi.marks">
 	<title id="app.bidi.marks.title">Marks</title>
 
 	<para>To change the position of a character with weak or neutral
-	directionality (like punctuation symbols), insert a LRM or a RLM character
+	directionality (like punctuation symbols), insert an LRM or RLM character
 	after the character, depending on the directionality of the segment:</para>
 
 	<itemizedlist>
@@ -53,23 +52,23 @@
   <section id="app.bidi.embeddings">
 	<title id="app.bidi.embeddings.title">Embeddings</title>
 
-	<para>Embeddings can be used to create a longer portion of text (containing
-	several words and spaces) that must run in the opposite directionality of
-	that of the segment. You can create two kinds of embeddings depending on the
+	<para>Embeddings can be used to create a longer section of text (containing
+	several words and spaces) that must flow in the direction opposite that of
+	the segment. You can create two kinds of embeddings depending on the
 	directionality of the segment:</para>
 
 	<itemizedlist>
 	  <listitem>
 		<para>To create a left-to-right embedding in a right-to-left segment,
-		insert a left-to-right embedding (LRE) character, then type or insert
-		the left-to-right text, then insert the pop directional formatting (PDF)
+		insert a left-to-right embedding (LRE) character, type or insert the
+		left-to-right text, and then insert the pop directional formatting (PDF)
 		character.</para>
 	  </listitem>
 	  <listitem>
 		<para>To create a
-  right-to-left embedding in a left-to-right segment, you would insert a
-  right-to-left embedding (RLE) character, then type or insert the right-to-left
-		text, then insert the PDF character.</para>
+  right-to-left embedding in a left-to-right segment, insert a
+  right-to-left embedding (RLE) character, type or insert the right-to-left
+		text, and then insert the PDF character.</para>
 	  </listitem>
 	</itemizedlist>
   </section>

@@ -24,19 +24,6 @@
 <h1>OmegaT User Manual</h1>
 
 <table>
-    <thead>
-        <tr>
-            <th>
-                <p>HTML</p>
-            </th>
-            <th>
-                <p>Version</p>
-            </th>
-            <th>
-                <p>PDF</p>
-            </th>
-        </tr>
-        </thead>
         <tbody>
         <% languages.each { lang -> if (lang.nomanual) { %>
             <tr>
@@ -46,7 +33,7 @@
                 <td>
                     <p>(N/A)</p>
                 </td>
-                <td><a href="${lang.code}/instantStartGuideNoTOC.html">First Steps Guide</a>
+                <td><a href="${lang.code}/instantStartGuideNoTOC.html">First Steps</a>
                 </td>
                 <td>
                     <p></p>

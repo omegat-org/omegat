@@ -271,6 +271,8 @@ task genDocIndex(type: Copy) {
     description = 'Generate the docs index file'
     def docPropsFiles = fileTree(dir: 'docs', include: '*/version*.properties').findAll {
         file("${it.parent}/index.html").file
+    }
+    def isgFiles = fileTree(dir: 'docs', include: '*/instantStartGuideNoTOC.html').findAll {
         file("${it.parent}/instantStartGuideNoTOC.html").file
     }
     inputs.files docPropsFiles
@@ -281,15 +283,26 @@ task genDocIndex(type: Copy) {
     rename('index_template.html', 'index.html')
     doFirst {
         def langNameExceptions = loadProperties(file('doc_src/lang_exceptions.properties'))
+        def isgInfos = isgFiles.collect { isg ->
+            def code = isg.parentFile.name
+            def locale = Locale.forLanguageTag(code.replace('_', '-'))
+            def name = langNameExceptions[code] ?: locale.getDisplayName(locale)
+            def docVersion = 0
+            def noManual = true
+            def status = 'out-of-date'
+            ['code': code, 'name': name, 'version': docVersion, 'status': status, 'nomanual': noManual]
+        }
         def langInfos = docPropsFiles.collect { props ->
             def code = props.parentFile.name
             def locale = Locale.forLanguageTag(code.replace('_', '-'))
             def name = langNameExceptions[code] ?: locale.getDisplayName(locale)
             def docVersion = loadProperties(props).version
-            def noManual = loadProperties(props).noManual
+            def noManual = false
             def status = docVersion == omtVersion.version ? 'up-to-date' : 'out-of-date'
             ['code': code, 'name': name, 'version': docVersion, 'status': status, 'nomanual': noManual]
-        }.sort { it.code }
+        }
+        langInfos.addAll(isgInfos)
+        langInfos.sort { one -> one.code }
         expand('languages': langInfos)
         filteringCharset = 'UTF-8'
     }

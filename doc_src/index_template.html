@@ -28,12 +28,13 @@
         <% languages.each { lang -> if (lang.nomanual) { %>
             <tr>
                 <td>
-                    <p class="lang">${lang.name}:</p>
+                    <p class="lang"><a href="${lang.code}/instantStartGuideNoTOC.html">${lang.name}</a> (Instant Start Guide only)</p>
+
                 </td>
                 <td>
                     <p>(N/A)</p>
                 </td>
-                <td><a href="${lang.code}/instantStartGuideNoTOC.html">First Steps</a>
+                <td>
                 </td>
                 <td>
                     <p></p>

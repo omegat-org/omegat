@@ -310,8 +310,10 @@ task genDocIndex(type: Copy) {
             def status = docVersion == omtVersion.version ? 'up-to-date' : 'out-of-date'
             ['code': code, 'name': name, 'version': docVersion, 'status': status, 'nomanual': noManual]
         }
-        langInfos.addAll(isgInfos)
-        langInfos.sort { one -> one.code }
+        def filterSet = langInfos.collect {entry -> entry.code}
+        def filteredIsgInfos = isgInfos.findAll{entry -> !filterSet.contains(entry.code)}
+        langInfos.addAll(filteredIsgInfos)
+        langInfos.sort { entry -> entry.code }
         expand('languages': langInfos)
         filteringCharset = 'UTF-8'
     }

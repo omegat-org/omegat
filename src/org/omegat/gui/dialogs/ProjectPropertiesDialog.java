@@ -192,11 +192,6 @@ public class ProjectPropertiesDialog extends JDialog {
         messageArea.setLineWrap(true);
         messageArea.setWrapStyleWord(true);
         messageArea.setBorder(new EmptyBorder(5, 5, 5, 5));
-        Box bMes = Box.createHorizontalBox();
-        bMes.setBorder(emptyBorder);
-        bMes.add(messageArea);
-        bMes.add(Box.createHorizontalGlue());
-        centerBox.add(bMes);
 
         // Source and target languages and tokenizers
         Box localesBox = Box.createHorizontalBox();

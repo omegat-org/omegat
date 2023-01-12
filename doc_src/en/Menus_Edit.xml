@@ -432,7 +432,7 @@
 
 	<varlistentry id="menus.edit.remove.translation">
       <term id="menus.edit.remove.translation.title"><guimenuitem>Remove
-      Translation</guimenuitem></term>
+      Translation</guimenuitem><keycombo><keycap>C</keycap><keycap>S</keycap><keycap>X</keycap></keycombo></term>
       <listitem>
 		<para>Deletes the current translation and sets the segment as
 		untranslated.</para>

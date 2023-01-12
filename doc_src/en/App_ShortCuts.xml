@@ -888,6 +888,8 @@
             <row>
               <entry>Remove translation</entry>
               <entry>editRegisterUntranslatedMenuItem</entry>
+              <entry>ctrl shift X</entry>
+              <entry>meta shift X</entry>
             </row>
 
             <row>

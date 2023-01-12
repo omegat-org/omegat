@@ -588,16 +588,10 @@ public class AlignPanelController {
 
         panel.table.setTransferHandler(new AlignTransferHandler());
         panel.table.addPropertyChangeListener("dropLocation", new DropLocationListener());
-        if (Preferences.isPreference(Preferences.PROJECT_FILES_USE_FONT)) {
-            try {
-                String fontName = Preferences.getPreference(Preferences.TF_SRC_FONT_NAME);
-                int fontSize = Integer.parseInt(Preferences.getPreference(Preferences.TF_SRC_FONT_SIZE));
-                panel.table.setFont(new Font(fontName, Font.PLAIN, fontSize));
-            } catch (Exception e) {
-                Log.log(e);
-            }
-        }
-
+        String fontName = Preferences.getPreference(Preferences.TF_SRC_FONT_NAME);
+        int fontSize = Integer.parseInt(Preferences.getPreference(Preferences.TF_SRC_FONT_SIZE));
+        panel.table.setFont(new Font(fontName, Font.PLAIN, fontSize));
+        
         // Set initial state
         updateHighlight();
         updatePanel();

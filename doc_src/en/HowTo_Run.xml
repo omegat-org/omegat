@@ -154,6 +154,9 @@
 	of options in scripts that you can then use to launch OmegaT for a
 	particular purpose.</para>
 
+	<para>Launching OmegaT from the command line also creates a new OmegaT
+	instance for each launch. You can thus use multiple projects simultaneously,
+	each with its own parameters.</para>
 
 	<section id="launch.with.command.line.tutorial">
 	  <title id="launch.with.command.line.tutorial.title">Simplified

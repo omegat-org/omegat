@@ -4,8 +4,8 @@
 <chapter id="chapter.menus">
   <title id="chapter.menus.title">Menus</title>
 
-  	<para>OmegaT looks a bit stern, if not outright unfriendly, to people who
-  	are used to button based interfaces. Buttons are very few in OmegaT. Most of
+  	<para>OmegaT has very few buttons and looks a bit stern, if not outright
+    unfriendly, to people who are used to button-based interfaces. Most of
   	the action takes place with the help of shortcuts associated to menu
   	items.</para>
 
@@ -13,11 +13,10 @@
 	shortly to remember the few that are useful in the course of a standard
 	translation day.</para>
 
-	<para>Menus are where you access most of OmegaT's functions. Most of the
-	menu items are associated with a keyboard shortcut.</para>
+	<para>Menus are where you access most of OmegaT's functions. Most 
+	menu items have an associated keyboard shortcut.</para>
 
-	<para>Menu items that do not have a shortcut indicated next to them have no
-	default shortcut assigned by default. See the <link
+	<para>Menu items that do not indicate a shortcut do nothave one assigned by default. See the <link
 	linkend="app.shortcuts.customization"
 	endterm="app.shortcuts.customization.title"/> appendix if you want to modify
 	or add shortcuts.</para>

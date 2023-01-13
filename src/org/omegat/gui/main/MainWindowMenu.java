@@ -376,8 +376,8 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         gotoXEntrySubmenu.add(gotoNextXEnforcedMenuItem = createMenuItem("TF_MENU_GOTO_NEXT_XENFORCED"));
         gotoXEntrySubmenu.add(gotoPrevXEnforcedMenuItem = createMenuItem("TF_MENU_GOTO_PREV_XENFORCED"));
         gotoMenu.addSeparator();
-        gotoMenu.add(gotoHistoryForwardMenuItem = createMenuItem("TF_MENU_GOTO_FORWARD_IN_HISTORY"));
         gotoMenu.add(gotoHistoryBackMenuItem = createMenuItem("TF_MENU_GOTO_BACK_IN_HISTORY"));
+        gotoMenu.add(gotoHistoryForwardMenuItem = createMenuItem("TF_MENU_GOTO_FORWARD_IN_HISTORY"));
         gotoMenu.addSeparator();
         gotoMenu.add(gotoNotesPanelMenuItem = createMenuItem("TF_MENU_GOTO_NOTES_PANEL"));
         gotoMenu.add(gotoEditorPanelMenuItem = createMenuItem("TF_MENU_GOTO_EDITOR_PANEL"));

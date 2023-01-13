@@ -16,7 +16,7 @@
       id="menus.view.mark.translated.segments.title"><guimenuitem>Highlight
       Translated Segments</guimenuitem></term>
       <listitem>
-        <para>If checked, translated segments will be highlighted in yellow.</para>
+        <para>If checked, translated segments are highlighted in yellow.</para>
       </listitem>
     </varlistentry>
 
@@ -25,7 +25,7 @@
       id="menus.view.mark.untranslated.segments.title"><guimenuitem>Highlight
       Untranslated Segments</guimenuitem></term>
       <listitem>
-        <para>If checked, untranslated segments will be highlighted in violet.</para>
+        <para>If checked, untranslated segments are highlighted in violet.</para>
       </listitem>
     </varlistentry>
 
@@ -47,8 +47,8 @@
       <term id="menus.view.display.source.segments.title"><guimenuitem>Display
       Source Segments</guimenuitem></term>
       <listitem>
-        <para>If checked, all the source segments will be shown and highlighted
-        in green.  If not checked, only the current source segments will be
+        <para>If checked, all the source segments are shown and highlighted
+        in green.  If not checked, only the current source segments is
         shown.</para>
       </listitem>
     </varlistentry>
@@ -56,9 +56,9 @@
     <varlistentry id="menus.view.mark.non.unique.segments">
       <term
       id="menus.view.mark.non.unique.segments.title"><guimenuitem>Highlight
-      Repeated Segments</guimenuitem></term>
+      Non-Unique Segments</guimenuitem></term>
       <listitem>
-        <para>If checked, repeated segments will be highlighted in pale
+        <para>If checked, non-unique segments are highlighted in pale
         gray.</para>
       </listitem>
     </varlistentry>
@@ -68,7 +68,7 @@
       id="menus.view.mark.segments.with.notes.title"><guimenuitem>Highlight
       Segments with Notes</guimenuitem></term>
       <listitem>
-        <para>If checked, segments with notes will be highlighted in cyan. This
+        <para>If checked, segments with notes are highlighted in cyan. This
         marking has priority over <guimenuitem>Highlight Translated
         Segments</guimenuitem> and <guimenuitem>Highlight Untranslated
         Segments</guimenuitem>.</para>
@@ -79,7 +79,8 @@
       <term id="menus.view.mark.non.breakable.space.title"><guimenuitem>Display
       Non-Breakable Spaces</guimenuitem></term>
       <listitem>
-        <para>If checked, non-breakable spaces will be displayed with a gray
+        <para>If checked, non-breakable spaces are displayed with a gray
+        <para>If checked, non-breakable spaces are displayed with a gray
         background.</para>
       </listitem>
     </varlistentry>
@@ -88,7 +89,7 @@
       <term id="menus.view.mark.white.space.title"><guimenuitem>Display
       Whitespace</guimenuitem></term>
       <listitem>
-        <para>If checked, white spaces will be displayed with a small
+        <para>If checked, white spaces are displayed as a small
         dot.</para>
       </listitem>
     </varlistentry>
@@ -114,8 +115,8 @@
       id="menus.view.mark.auto.populated.segments.title"><guimenuitem>Highlight
       Auto-Populated Segments</guimenuitem></term>
       <listitem>
-        <para>If checked, segments that have been auto-populated will be
-        displayed in various colors.</para>
+        <para>If checked, segments that have been auto-populated are
+        highlighted in various colors.</para>
 
 		<para>See the <link
 		linkend="dialogs.preferences.editor.save.auto-populated.status"
@@ -151,7 +152,7 @@
       <term id="menus.view.aggressive.font.fallback.title"><guimenuitem>Use
       Aggressive Font Fallback</guimenuitem></term>
       <listitem>
-        <para>Check this option in case OmegaT does not display certain glyphs
+        <para>Check this option if OmegaT does not display certain glyphs
         properly (even if the fonts containing the relevant glyphs are installed
         on your machine).</para>
 

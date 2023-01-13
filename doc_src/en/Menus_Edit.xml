@@ -24,9 +24,8 @@
       Action</guimenuitem>
       <keycombo><keycap>C</keycap><keycap>Z</keycap></keycombo></term>
       <listitem>
-        <para>Cancels the modifications made to the segment while the segment is
-        current. Once the segment is left, the modification history is
-        lost.</para>
+        <para>Cancels modifications made to the segment while it is
+        current. Modification history is lost upon leaving the segment.</para>
       </listitem>
     </varlistentry>
 
@@ -35,9 +34,8 @@
 	  <keycombo><keycap>C</keycap><keycap>Y</keycap></keycombo>
 	  </term>
       <listitem>
-        <para>Reapplies the modifications that were cancelled while the segment
-        is current. Once the segment is left, the modification history is
-        lost.</para>
+        <para>Reapplies modifications that were cancelled while the segment
+        is current. Modification history is lost upon leaving the segment.</para>
       </listitem>
     </varlistentry>
 
@@ -47,11 +45,11 @@
 	  </term>
       <listitem>
         <para>Replaces the target segment with the currently selected fuzzy
-        match (by default the first match is selected) or with the text selected
+        match (the first match by default) or with the text selected
         in the <link linkend="panes.fuzzy.matches"
         endterm="panes.fuzzy.matches.title"/> pane.</para>
 
-        <para>The selected text has priority over the selected match.</para>
+        <para>Selected text has priority over the selected match.</para>
 
 		<para>See the <link linkend="panes.fuzzy.matches"
 		endterm="panes.fuzzy.matches.title"/> pane description for
@@ -68,7 +66,7 @@
         the <link linkend="panes.fuzzy.matches"
         endterm="panes.fuzzy.matches.title"/> pane at the cursor position. If a
         part of the target segment has been selected, that part will be
-        overwriten.</para>
+        overwritten.</para>
 
         <para>The selected text has priority over the selected match.</para>
 
@@ -94,7 +92,7 @@
       <listitem>
         <para>Inserts the segment source at the cursor position. If a part of
         the target segment has been selected, that part will be
-        overwriten.</para>
+        overwritten.</para>
       </listitem>
     </varlistentry>
 
@@ -105,13 +103,13 @@
       <listitem>
         <para>Selects the source text.</para>
 
-		<para>The selection can be directly used in OmegaT for <link
+		<para>The selection can be used directly in OmegaT for <link
 		linkend="windows.text.search">internal searches</link>, <link
 		linkend="windows.text.replace">replacements</link>, <link
-		linkend="menus.edit.create.glossary.entry">glossary term entry</link>,
+		linkend="menus.edit.create.glossary.entry">entering glossary terms</link>,
 		<link linkend="dialogs.preferences.external.searches">external
-		searches</link>, etc. Once copied to the OS clipboard, it can also be
-		used in web searches and otherwise.</para>
+		searches</link>, and so on. Once copied to the OS clipboard, it can also be
+		used in web searches and elsewhere.</para>
       </listitem>
     </varlistentry>
 
@@ -120,13 +118,13 @@
 	  <keycombo><keycap>C</keycap><keycap>M</keycap></keycombo>
 	  </term>
       <listitem>
-        <para>Replaces the target segment with the translation, provided by the
-        selected Machine Translation service.</para>
+        <para>Replaces the target segment with the translation provided by the
+        selected machine translation service.</para>
 		<para>If the <link
 		linkend="dialogs.preferences.mt.automatically.fetch.translations"
 		endterm="dialogs.preferences.mt.automatically.fetch.translations.title"/>
-		preference is disabled, use this action a first time to fetch the
-		translation and a second time to insert it.</para>
+		preference is disabled, use this action once to fetch the
+		translation, and a second time to insert it.</para>
 		
 		<para>No action is taken if no machine translation service has been
 		activated in the <link linkend="menus.options"
@@ -179,8 +177,8 @@
 	  </term>
       <listitem>
         <para>Allows the user to create an entry in the project writable
-        glossary (<link linkend="project.folder.glossary.txt"
-        endterm="project.folder.glossary.txt.title"/>).</para>
+        glossary (the <link linkend="project.folder.glossary.txt"
+        endterm="project.folder.glossary.txt.title"/> file).</para>
 
 		<para>There are two ways to use this function.</para>
 
@@ -204,7 +202,7 @@
 				<para>Press
 				<keycombo><keycap>C</keycap><keycap>S</keycap><keycap>G</keycap></keycombo></para>
 				
-				<para>The selection will be entered in the <guilabel>Source
+				<para>The selection is entered in the <guilabel>Source
 				term</guilabel> field.</para>
 			  </listitem>
 
@@ -216,7 +214,7 @@
 				<para>Press
 				<keycombo><keycap>C</keycap><keycap>S</keycap><keycap>G</keycap></keycombo></para>
 
-				<para>The selection will be entered in the <guilabel>Target
+				<para>The selection is entered in the <guilabel>Target
 				term</guilabel> field.</para>
 			  </listitem>
 
@@ -228,7 +226,7 @@
 				<para>[Optional] Press
 				<keycombo><keycap>C</keycap><keycap>S</keycap><keycap>G</keycap></keycombo></para>
 
-				<para>The selection will be entered in the
+				<para>The selection is entered in the
 				<guilabel>Comment</guilabel> field.</para>
 			  </listitem>
 
@@ -254,9 +252,9 @@
         function, the text will be pasted by default in the <guilabel>Search
         for:</guilabel> field.</para>
 
-		<para><keycombo><keycap>C</keycap><keycap>S</keycap><keycap>F</keycap></keycombo>
-		reuses the most recent still open Search window (instead of opening a
-		new one).</para>
+		<para>The <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>F</keycap></keycombo>
+		combination reuses the most recent still open Search window instead of 
+		opening a new one.</para>
       </listitem>
     </varlistentry>
 
@@ -415,7 +413,7 @@
       <listitem>
 		<para>If several alternative translations are available for the active
 		segment, you can label the alternative selected as the default
-		translation. The entry will be greyed if only one translation is
+		translation. The entry will be grayed if only one translation is
 		available.</para>
       </listitem>
 	</varlistentry>
@@ -445,9 +443,9 @@
       <term id="menus.edit.set.empty.translation.title"><guimenuitem>Set Empty
       Translation</guimenuitem></term>
       <listitem>
-		<para>Define the translation as empty. In the target document, nothing
-		will appear for this segment. In the Editor, the translation is
-		displayed as <literal>&lt;EMPTY&gt;</literal>.</para>
+		<para>Define the translation as empty. The target document contains nothing
+		for this segment, while the Editor marks it with the
+		<literal>&lt;EMPTY&gt;</literal> identifier.</para>
       </listitem>
 	</varlistentry>
 

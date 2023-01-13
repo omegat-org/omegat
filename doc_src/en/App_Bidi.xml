@@ -39,12 +39,12 @@
 	  <listitem>
 		<para>Insert a LRM after a weak-directionality character that must run
 		left-to-right in a right-to-left segment (e.g. an English excerpt inside
-		Arabic text)</para>
+		Arabic text).</para>
 	  </listitem>
 	  <listitem>
 		<para>Insert a RLM after a weak-directionality character that must run
 		right-to-left in a left-to-right segment (e.g. an Arabic excerpt inside
-		English text)</para>
+		English text).</para>
 	  </listitem>
 	</itemizedlist>
   </section>

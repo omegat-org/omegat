@@ -60,9 +60,9 @@
     <listitem>
         <para><guibutton>Replace:</guibutton> replaces each entry one at a time
         in the Editor pane.</para>
-		<para>Click <guibutton>Replace Next</guibutton> or
-		<guibutton>Skip</guibutton>, to move to the next entry, and click
-		<guibutton>Finish</guibutton> to end the replacement operation.</para>
+		<para>Clickthe <guibutton>Replace Next</guibutton> or
+		<guibutton>Skip</guibutton> button, to move to the next entry, and click the
+		<guibutton>Finish</guibutton> button to end the replacement operation.</para>
     </listitem>
   </itemizedlist>
 
@@ -131,7 +131,7 @@
       <varlistentry id="windows.text.replace.methods.exact">
         <term id="windows.text.replace.methods.exact.title">Exact search</term>
         <listitem>
-          <para>Search for the string exactly as it was entered in the search
+          <para>Search for the string exactly as entered in the search
           field.</para>
 
 		  <para>It is equivalent to a web search enclosed in quotation marks.</para>
@@ -173,8 +173,9 @@
 
 		  <note>
 			<para>The replacement string supports references to groups defined
-			in the search string. Use <code>$n</code> in the replacement field
-			to refer to the <code>nth</code> group in the search field.</para>
+			in the search string. Use <code>$n</code> (where <code>n</code> is a
+			digit from 1 to 9) in the replacement field to refer to the
+			<code>nth</code>group in the search field.</para>
 		  </note>
         </listitem>
       </varlistentry>
@@ -219,14 +220,14 @@
 			<varlistentry>
 			  <term>Full/Half-width char insensitive</term>
 			  <listitem>
-				<para>returns results that match both the full- and half-width
+				<para>Returns results that match both the full- and half-width
 				forms (CJK characters) of the characters in the search
 				terms.</para>
 			  </listitem>
 			</varlistentry>
 		  </variablelist>
-		  <para>Hide the advanced options with <guibutton>Hide Advanced
-		  Options</guibutton></para>
+		  <para>Use the <guibutton>Hide Advanced Options</guibutton>
+			button to stop showing the advanced options.</para>
 		</listitem>
 	  </varlistentry>
 	</variablelist>

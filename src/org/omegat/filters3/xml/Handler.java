@@ -43,6 +43,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Stack;
 
+import org.xml.sax.Attributes;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
+import org.xml.sax.ext.DeclHandler;
+import org.xml.sax.ext.LexicalHandler;
+import org.xml.sax.helpers.DefaultHandler;
+
 import org.omegat.core.Core;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.filters2.FilterContext;
@@ -53,13 +61,6 @@ import org.omegat.filters3.Entry;
 import org.omegat.filters3.Tag;
 import org.omegat.util.OStrings;
 import org.omegat.util.StringUtil;
-import org.xml.sax.Attributes;
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
-import org.xml.sax.SAXParseException;
-import org.xml.sax.ext.DeclHandler;
-import org.xml.sax.ext.LexicalHandler;
-import org.xml.sax.helpers.DefaultHandler;
 
 /**
  * The part of XML filter that actually does the job. This class is called back
@@ -148,7 +149,8 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
     }
 
     private boolean isSpacePreservingTag() {
-        if (Core.getFilterMaster().getConfig().isPreserveSpaces()) { // Preserve spaces for all tags
+        if (Core.getFilterMaster().getConfig().isPreserveSpaces()) {
+            // Preserve spaces for all tags
             return true;
         } else {
             return spacePreserve;
@@ -199,7 +201,9 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
      * next, but some nice things may happen before.
      */
     private DTD dtd = null;
-    /** SAX parser parses DTD -- we don't extract translatable text from there */
+    /**
+     * SAX parser parses DTD -- we don't extract translatable text from there
+     */
     private boolean inDTD = false;
 
     /**
@@ -216,10 +220,10 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
         return processedFiles.isEmpty() ? null : processedFiles;
     }
 
-    /** Throws a nice error message when SAX parser encounders fastal error. */
-    private void reportFatalError(SAXParseException e) throws SAXException, MalformedURLException,
-            URISyntaxException {
-        int linenum = e.getLineNumber();
+    /** Throws a nice error message when SAX parser encounters fatal error. */
+    private void reportFatalError(SAXParseException e)
+            throws SAXException, MalformedURLException, URISyntaxException {
+        final int lineNumber = e.getLineNumber();
         String filename;
         if (e.getSystemId() != null) {
             File errorfile = new File(inFile.getParentFile(), localizeSystemId(e.getSystemId()));
@@ -231,9 +235,8 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
         } else {
             filename = inFile.getAbsolutePath();
         }
-        throw new SAXException("\n"
-                + StringUtil.format(e.getMessage() + "\n" + OStrings.getString("XML_FATAL_ERROR"),
-                        filename, linenum));
+        throw new SAXException("\n" + StringUtil
+                .format(e.getMessage() + "\n" + OStrings.getString("XML_FATAL_ERROR"), filename, lineNumber));
     }
 
     /**
@@ -289,8 +292,7 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
             try {
                 String thisOutPath = sourceFolderFile.relativize(thisOutFile).toString();
                 return thisOutPath.replace("\\", "/");
-            }
-            catch (IllegalArgumentException ex) {
+            } catch (IllegalArgumentException ex) {
                 // Failed to relativize
             }
         }
@@ -371,12 +373,11 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
      * Resolves external entity and creates a new writer if it's an included
      * file.
      */
-    public InputSource doResolve(String publicId, String systemId) throws SAXException, TranslationException,
-            IOException, URISyntaxException {
-        if (dtd != null
-                && StringUtil.equal(publicId, dtd.getPublicId())
-                && (StringUtil.equal(systemId, dtd.getSystemId()) || StringUtil.equal(
-                        localizeSystemId(systemId), dtd.getSystemId()))) {
+    public InputSource doResolve(String publicId, String systemId)
+            throws SAXException, TranslationException, IOException, URISyntaxException {
+        if (dtd != null && StringUtil.equal(publicId, dtd.getPublicId())
+                && (StringUtil.equal(systemId, dtd.getSystemId())
+                        || StringUtil.equal(localizeSystemId(systemId), dtd.getSystemId()))) {
             inDTD = true;
         }
 
@@ -426,7 +427,8 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
             translator.text(s);
         }
 
-        // TODO: ideally, xml:space=preserved would be handled at this level, but that would suppose
+        // TODO: ideally, xml:space=preserved would be handled at this level,
+        // but that would suppose
         // knowing here whether we're inside a preformatted tag, etc.
         if (internalEntityStarted != null && s.equals(internalEntityStarted.getValue())) {
             currEntry().add(new XMLEntityText(internalEntityStarted));
@@ -456,8 +458,8 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
         setSpacePreservingTag(XMLUtils.convertAttributes(attributes));
         if (!collectingIntactText()) {
             if (isContentBasedTag(tag, XMLUtils.convertAttributes(attributes))) {
-                intacttag = new XMLContentBasedTag(dialect, this, tag, getShortcut(tag), dialect
-                        .getContentBasedTags().get(tag), attributes);
+                intacttag = new XMLContentBasedTag(dialect, this, tag, getShortcut(tag),
+                        dialect.getContentBasedTags().get(tag), attributes);
                 xmltag = intacttag;
                 intacttagName = tag;
                 intacttagAttributes = XMLUtils.convertAttributes(attributes);
@@ -482,8 +484,8 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
         if (!collectingIntactText()) {
             for (int i = 0; i < xmltag.getAttributes().size(); i++) {
                 Attribute attr = xmltag.getAttributes().get(i);
-                if ((dialect.getTranslatableAttributes().contains(attr.getName()) || dialect
-                        .getTranslatableTagAttributes().containsPair(tag, attr.getName()))
+                if ((dialect.getTranslatableAttributes().contains(attr.getName())
+                        || dialect.getTranslatableTagAttributes().containsPair(tag, attr.getName()))
                         && dialect.validateTranslatableTagAttribute(tag, attr.getName(),
                                 xmltag.getAttributes())) {
                     attr.setValue(StringUtil.makeValidXML(
@@ -494,14 +496,14 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
     }
 
     /**
-     * Queue tag that should be ignored by editor, including content and all subtags.
+     * Queue tag that should be ignored by editor, including content and all
+     * subtags.
      */
     private void queueIgnoredTag(String tag, Attributes attributes) {
         Tag xmltag = null;
         setSpacePreservingTag(XMLUtils.convertAttributes(attributes));
         if (xmltag == null) {
-            xmltag = new XMLTag(tag, getShortcut(tag), Tag.Type.BEGIN, attributes,
-                    this.translator);
+            xmltag = new XMLTag(tag, getShortcut(tag), Tag.Type.BEGIN, attributes, this.translator);
             xmlTagName.push(xmltag.getTag());
             xmlTagAttributes.push(xmltag.getAttributes());
         }
@@ -510,10 +512,10 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
 
     private void queueEndTag(String tag) {
         int len = currEntry().size();
-        if (len > 0
-                && (currEntry().get(len - 1) instanceof XMLTag)
-                && (((XMLTag) currEntry().get(len - 1)).getTag().equals(tag) && ((XMLTag) currEntry().get(
-                        len - 1)).getType() == Tag.Type.BEGIN) && !isClosingTagRequired()) {
+        if (len > 0 && (currEntry().get(len - 1) instanceof XMLTag)
+                && (((XMLTag) currEntry().get(len - 1)).getTag().equals(tag)
+                        && ((XMLTag) currEntry().get(len - 1)).getType() == Tag.Type.BEGIN)
+                && !isClosingTagRequired()) {
             if (((XMLTag) currEntry().get(len - 1)).getTag().equals(xmlTagName.lastElement())) {
                 xmlTagName.pop();
                 xmlTagAttributes.pop();
@@ -523,7 +525,8 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
             XMLTag xmltag = new XMLTag(tag, getShortcut(tag), Tag.Type.END, null, this.translator);
             if (xmltag.getTag().equals(xmlTagName.lastElement())) {
                 xmlTagName.pop();
-                xmltag.setStartAttributes(xmlTagAttributes.pop()); // Restore attributes
+                xmltag.setStartAttributes(xmlTagAttributes.pop()); // Restore
+                                                                   // attributes
             }
             currEntry().add(xmltag);
         }
@@ -551,7 +554,8 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
 
         if (!translator.isInIgnored()) {
             if (isOutOfTurnTag(tag)) {
-                XMLOutOfTurnTag ootTag = new XMLOutOfTurnTag(dialect, this, tag, getShortcut(tag), attributes);
+                XMLOutOfTurnTag ootTag = new XMLOutOfTurnTag(dialect, this, tag, getShortcut(tag),
+                        attributes);
                 currEntry().add(ootTag);
                 outofturnEntries.push(ootTag.getEntry());
             } else {
@@ -620,11 +624,8 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
         String src = currEntry().sourceToShortcut(tagsAggregation, dialect, shortcutDetails);
         Element lead = currEntry().get(0);
         String translation = src;
-        if ((lead instanceof Tag)
-             && (isPreformattingTag(((Tag) lead).getTag(), ((Tag) lead).getAttributes())
-                 || isSpacePreservingTag())
-             && isTranslatableTag()
-             && !StringUtil.isEmpty(src)) {
+        if ((lead instanceof Tag) && (isPreformattingTag(((Tag) lead).getTag(), ((Tag) lead).getAttributes())
+                || isSpacePreservingTag()) && isTranslatableTag() && !StringUtil.isEmpty(src)) {
             resetSpacePreservingTag();
             translation = translator.translate(src, shortcutDetails);
         } else {
@@ -866,7 +867,8 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
     }
 
     /**
-     * If the space-preserving flag is not set, and the attributes say it is one, set it
+     * If the space-preserving flag is not set, and the attributes say it is
+     * one, set it
      *
      * @param atts
      *            The attributes of the current tag
@@ -891,7 +893,9 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
         return dialect.getOutOfTurnTags() != null && dialect.getOutOfTurnTags().contains(tag);
     }
 
-    /** Returns a shortcut for a tag. Queries dialect first, else returns null. */
+    /**
+     * Returns a shortcut for a tag. Queries dialect first, else returns null.
+     */
     private String getShortcut(String tag) {
         if (dialect.getShortcuts() != null) {
             return dialect.getShortcuts().get(tag);
@@ -902,7 +906,9 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
 
     /**
      * Checks whether the xml:space="preserve" attribute is present
-     * @param currentAttributes The current Attributes
+     * 
+     * @param currentAttributes
+     *            The current Attributes
      * @return true or false
      */
     private boolean isSpacePreservingSet(org.omegat.filters3.Attributes currentAttributes) {
@@ -916,7 +922,7 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
         for (int i = 0; i < currentAttributes.size(); i++) {
             Attribute oneAttribute = currentAttributes.get(i);
             if ((oneAttribute.getName().equalsIgnoreCase("xml:space")
-                 && oneAttribute.getValue().equalsIgnoreCase("preserve"))) {
+                    && oneAttribute.getValue().equalsIgnoreCase("preserve"))) {
                 preserve = true;
             }
         }
@@ -1040,9 +1046,7 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
     public void fatalError(org.xml.sax.SAXParseException e) throws SAXException {
         try {
             reportFatalError(e);
-        } catch (MalformedURLException ex) {
-            throw new SAXException(ex);
-        } catch (URISyntaxException ex) {
+        } catch (MalformedURLException | URISyntaxException ex) {
             throw new SAXException(ex);
         }
     }

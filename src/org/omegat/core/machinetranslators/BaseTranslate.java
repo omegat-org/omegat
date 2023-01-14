@@ -92,7 +92,9 @@ public abstract class BaseTranslate implements IMachineTranslation {
      * Creat cache object.
      * <p>
      * MT connectors can override cache size and invalidate policy.
-     * @param name name of cache which should be unique among MT connectors.
+     * 
+     * @param name
+     *            name of cache which should be unique among MT connectors.
      * @return Cache object
      */
     protected Cache<String, String> getCacheLayer(String name) {
@@ -112,9 +114,13 @@ public abstract class BaseTranslate implements IMachineTranslation {
 
     /**
      * Common function to obtain CaffeineCache instance.
-     * @param name name of cache.
-     * @param sizeOfCache size of cache.
-     * @param duration duration before clear.
+     * 
+     * @param name
+     *            name of cache.
+     * @param sizeOfCache
+     *            size of cache.
+     * @param duration
+     *            duration before clear.
      * @return Cache object.
      */
     protected Cache<String, String> getCaffeineCache(String name, int sizeOfCache, Duration duration) {
@@ -186,8 +192,8 @@ public abstract class BaseTranslate implements IMachineTranslation {
         while (tag.find()) {
             String searchTag = tag.group();
             if (!sourceText.contains(searchTag)) { // The tag didn't appear
-                                                       // with a trailing space
-                                                       // in the source text
+                                                   // with a trailing space
+                                                   // in the source text
                 String replacement = searchTag.substring(0, searchTag.length() - 1);
                 machineText = machineText.replace(searchTag, replacement);
             }
@@ -198,8 +204,8 @@ public abstract class BaseTranslate implements IMachineTranslation {
         while (tag.find()) {
             String searchTag = tag.group();
             if (!sourceText.contains(searchTag)) { // The tag didn't appear
-                                                       // with a leading space
-                                                       // in the source text
+                                                   // with a leading space
+                                                   // in the source text
                 String replacement = searchTag.substring(1);
                 machineText = machineText.replace(searchTag, replacement);
             }

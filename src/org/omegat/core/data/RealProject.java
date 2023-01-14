@@ -84,6 +84,7 @@ import org.omegat.core.threads.CommandMonitor;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.IAlignCallback;
 import org.omegat.filters2.IFilter;
+import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.gui.glossary.GlossaryEntry;
 import org.omegat.gui.glossary.GlossaryReaderTSV;
@@ -1156,24 +1157,28 @@ public class RealProject implements IProject {
             FileInfo fi = new FileInfo();
             fi.filePath = filepath;
 
-            loadFilesCallback.setCurrentFile(fi);
+            try {
+                loadFilesCallback.setCurrentFile(fi);
+                IFilter filter = fm.loadFile(config.getSourceRoot() + filepath,
+                        new FilterContext(config), loadFilesCallback);
+                loadFilesCallback.fileFinished();
 
-            IFilter filter = fm.loadFile(config.getSourceRoot() + filepath, new FilterContext(config),
-                    loadFilesCallback);
-
-            loadFilesCallback.fileFinished();
-
-            if (filter != null && !fi.entries.isEmpty()) {
-                fi.filterClass = filter.getClass(); //Don't store the instance, because every file gets an instance and
-                                                    // then we consume a lot of memory for all instances.
-                                                    //See also IFilter "TODO: each filter should be stateless"
-                fi.filterFileFormatName = filter.getFileFormatName();
-                try {
-                    fi.fileEncoding = filter.getInEncodingLastParsedFile();
-                } catch (Error e) { // In case a filter doesn't have getInEncodingLastParsedFile() (e.g., Okapi plugin)
-                    fi.fileEncoding = "";
+                if (filter != null && !fi.entries.isEmpty()) {
+                    fi.filterClass = filter.getClass(); //Don't store the instance, because every file gets an instance and
+                                                        // then we consume a lot of memory for all instances.
+                                                        //See also IFilter "TODO: each filter should be stateless"
+                    fi.filterFileFormatName = filter.getFileFormatName();
+                    try {
+                        fi.fileEncoding = filter.getInEncodingLastParsedFile();
+                    } catch (Error e) { // In case a filter doesn't have getInEncodingLastParsedFile() (e.g., Okapi plugin)
+                        fi.fileEncoding = "";
+                    }
+                    projectFilesList.add(fi);
                 }
-                projectFilesList.add(fi);
+            } catch (TranslationException e) {
+                // ignore failed file and continue loading next.
+                Log.logErrorRB("TF_SOURCE_LOAD_ERROR", e.getLocalizedMessage());
+                Core.getMainWindow().displayErrorRB(e, "TF_SOURCE_LOAD_ERROR", filepath);
             }
         }
 

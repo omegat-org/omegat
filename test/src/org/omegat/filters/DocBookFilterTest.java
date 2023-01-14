@@ -36,6 +36,7 @@ import java.util.List;
 
 import org.junit.Test;
 import org.omegat.core.data.IProject;
+import org.omegat.filters2.TranslationException;
 import org.omegat.filters3.xml.docbook.DocBookFilter;
 
 public class DocBookFilterTest extends TestFilterBase {
@@ -54,6 +55,12 @@ public class DocBookFilterTest extends TestFilterBase {
     @Test
     public void testTranslateExtWriter() throws Exception {
         translateText(new DocBookFilter(), "test/data/filters/docBook/file-DocBookFilter-extWriter.xml");
+    }
+
+    @Test(expected = TranslationException.class)
+    public void testLoadInvalidXml() throws Exception {
+        List<String> lines = parse(new DocBookFilter(),
+                "test/data/filters/docBook/file-DocBookFilter-invalid2.xml");
     }
 
     @Test

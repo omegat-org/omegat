@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="menus.view">
+  <title id="menus.view.title"><guimenu>View</guimenu></title>
+
+  <para>This menu allows you to select the information you want to OmegaT to
+  display.</para>
+
+  <para>All the colors indicated in the descriptions can be modified in the
+  <link linkend="dialogs.preferences.colours"
+  endterm="dialogs.preferences.colours.title"/> preference.</para>
+
+  <variablelist>
+    <varlistentry id="menus.view.mark.translated.segments">
+      <term
+      id="menus.view.mark.translated.segments.title"><guimenuitem>Highlight
+      Translated Segments</guimenuitem></term>
+      <listitem>
+        <para>If checked, translated segments are highlighted in yellow.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry id="menus.view.mark.untranslated.segments">
+      <term
+      id="menus.view.mark.untranslated.segments.title"><guimenuitem>Highlight
+      Untranslated Segments</guimenuitem></term>
+      <listitem>
+        <para>If checked, untranslated segments are highlighted in violet.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry id="menus.view.mark.paragraph.delimitations">
+      <term
+      id="menus.view.mark.paragraph.delimitations.title"><guimenuitem>Display
+      Paragraph Delimitations</guimenuitem></term>
+      <listitem>
+        <para>If checked, separations between paragraphs in the source document
+        are indicated visually. You can change the paragraph delimitation string
+        in the <link
+        linkend="dialogs.preferences.editor.paragraph.delimitation.format"
+        endterm="dialogs.preferences.editor.paragraph.delimitation.format.title"/>
+        preference.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry id="menus.view.display.source.segments">
+      <term id="menus.view.display.source.segments.title"><guimenuitem>Display
+      Source Segments</guimenuitem></term>
+      <listitem>
+        <para>If checked, all the source segments are shown and highlighted
+        in green.  If not checked, only the current source segments is
+        shown.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry id="menus.view.mark.non.unique.segments">
+      <term
+      id="menus.view.mark.non.unique.segments.title"><guimenuitem>Highlight
+      Repeated Segments</guimenuitem></term>
+      <listitem>
+        <para>If checked, repeated segments are highlighted in pale
+        gray.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry id="menus.view.mark.segments.with.notes">
+      <term
+      id="menus.view.mark.segments.with.notes.title"><guimenuitem>Highlight
+      Segments with Notes</guimenuitem></term>
+      <listitem>
+        <para>If checked, segments with notes are highlighted in cyan. This
+        marking has priority over <guimenuitem>Highlight Translated
+        Segments</guimenuitem> and <guimenuitem>Highlight Untranslated
+        Segments</guimenuitem>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry id="menus.view.mark.non.breakable.space">
+      <term id="menus.view.mark.non.breakable.space.title"><guimenuitem>Display
+      Non-Breakable Spaces</guimenuitem></term>
+      <listitem>
+        <para>If checked, non-breakable spaces are displayed with a gray
+        <para>If checked, non-breakable spaces are displayed with a gray
+        background.</para>
+      </listitem>
+    </varlistentry>
+
+  </variablelist>
+</section>

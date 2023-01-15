@@ -35,6 +35,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
+import org.xml.sax.Attributes;
+
 import org.omegat.core.Core;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.filters2.FilterContext;
@@ -44,7 +46,6 @@ import org.omegat.filters3.xml.xliff.XLIFFOptions.ID_TYPE;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.StringUtil;
-import org.xml.sax.Attributes;
 
 /**
  * Filter for XLIFF files.
@@ -67,7 +68,8 @@ public class XLIFFFilter extends XMLFilter {
     private HashSet<String> altIDCache = new HashSet<String>();
 
     private String id;
-   /**
+
+    /**
      * Sets whether alternative translations are identified by previous and next paragraphs or by &lt;trans-unit&gt; ID
     */
      private ID_TYPE altTransIDType = ID_TYPE.CONTEXT;

@@ -118,10 +118,12 @@ public class XLIFFFilterTest extends TestFilterBase {
         assertEquals("Gandalf", ste.getProtectedParts()[0].getReplacementMatchCalculation());
         assertEquals("<m1>", ste.getProtectedParts()[1].getTextInSourceSegment());
         assertEquals("<mrk mtype=\"other\">", ste.getProtectedParts()[1].getDetailsFromSourceFile());
-        assertEquals(StaticUtils.TAG_REPLACEMENT, ste.getProtectedParts()[1].getReplacementMatchCalculation());
+        assertEquals(StaticUtils.TAG_REPLACEMENT,
+                ste.getProtectedParts()[1].getReplacementMatchCalculation());
         assertEquals("</m1>", ste.getProtectedParts()[2].getTextInSourceSegment());
         assertEquals("</mrk>", ste.getProtectedParts()[2].getDetailsFromSourceFile());
-        assertEquals(StaticUtils.TAG_REPLACEMENT, ste.getProtectedParts()[2].getReplacementMatchCalculation());
+        assertEquals(StaticUtils.TAG_REPLACEMENT,
+                ste.getProtectedParts()[2].getReplacementMatchCalculation());
         checkMultiNoPrevNext("one <o0>two</o0> three", null, null, null);
         checkMultiNoPrevNext("one <t0/> three", null, null, null);
         checkMultiNoPrevNext("one <w0/> three", null, null, null);
@@ -147,8 +149,8 @@ public class XLIFFFilterTest extends TestFilterBase {
                     }
                 });
         File trFile = new File(outFile.getPath() + "-translated");
-        List<String> lines = Files.lines(inFile.toPath()).map(line -> line.replace("NONTRANSLATED", "TRANSLATED"))
-                .collect(Collectors.toList());
+        List<String> lines = Files.lines(inFile.toPath())
+                .map(line -> line.replace("NONTRANSLATED", "TRANSLATED")).collect(Collectors.toList());
         Files.write(trFile.toPath(), lines);
         compareXML(trFile, outFile);
     }
@@ -282,16 +284,20 @@ public class XLIFFFilterTest extends TestFilterBase {
         String f = "test/data/filters/xliff/file-XLIFFFilter-properties.xlf";
         IProject.FileInfo fi = loadSourceFiles(filter, f);
 
-        // Check reading as properties. We don't really care about the order of the content in the parsed
-        // properties array (as long as the key=value pairs are consistent), so we do lose checking.
+        // Check reading as properties. We don't really care about the order of
+        // the content in the parsed
+        // properties array (as long as the key=value pairs are consistent), so
+        // we do lose checking.
         checkMultiStart(fi, f);
         checkMultiProps("tr1=This is test", null, null, "", "tr2=test2", "note", "foo", "group", "bazinga");
         checkMultiProps("tr2=test2", null, null, "tr1=This is test", "", "note", "bar", "resname", "baz",
                 "group", "bazinga");
         checkMultiEnd();
 
-        // Check reading as old comment string blobs. We don't really care about the order of the content in
-        // the parsed properties array, but the way the test currently works, it will break if the order
+        // Check reading as old comment string blobs. We don't really care about
+        // the order of the content in
+        // the parsed properties array, but the way the test currently works, it
+        // will break if the order
         // changes.
         checkMultiStart(fi, f);
         checkMulti("tr1=This is test", null, null, "", "tr2=test2", "foo\nbazinga");
@@ -306,46 +312,57 @@ public class XLIFFFilterTest extends TestFilterBase {
             public int getLength() {
                 return 1;
             }
+
             @Override
             public String getURI(int i) {
                 return null;
             }
+
             @Override
             public String getLocalName(int i) {
                 return "state";
             }
+
             @Override
             public String getQName(int i) {
                 return "state";
             }
+
             @Override
             public String getType(int i) {
                 return null;
             }
+
             @Override
             public String getValue(int i) {
                 return "needs-translation";
             }
+
             @Override
             public int getIndex(String s, String s1) {
                 return 1;
             }
+
             @Override
             public int getIndex(String s) {
                 return 1;
             }
+
             @Override
             public String getType(String s, String s1) {
                 return getType(0);
             }
+
             @Override
             public String getType(String s) {
                 return getType(0);
             }
+
             @Override
             public String getValue(String s, String s1) {
                 return getValue(0);
             }
+
             @Override
             public String getValue(String s) {
                 return "needs-translation";
@@ -370,16 +387,16 @@ public class XLIFFFilterTest extends TestFilterBase {
         tag = new XMLTag("target", null, Tag.Type.BEGIN, attributes, filter);
         dialect.handleXMLTag(tag, true);
         assertEquals("needs-review-translation", tag.getAttribute("state"));
-   }
+    }
 
     /**
-     * Test with live example of XLIFF version 1.2,
-     * as similar with exported file from Crowdin service.
+     * Test with live example of XLIFF version 1.2, as similar with exported
+     * file from Crowdin service.
      */
     @Test
     public void testTranslationRFE1506() throws Exception {
         checkXLiffTranslationRFE1506(filter, context, outFile, false);
-        checkXLiffTranslationRFE1506(filter, context, outFile,true);
+        checkXLiffTranslationRFE1506(filter, context, outFile, true);
     }
 
     /**
@@ -387,59 +404,58 @@ public class XLIFFFilterTest extends TestFilterBase {
      * <p>
      * Just return when pass the cases. Otherwise, raises assertion error.
      *
-     * @param filter filter object
-     * @param context filter context
-     * @param outFile translated output from the filter.
-     * @throws IOException when failed to read target file.
+     * @param filter
+     *            filter object
+     * @param context
+     *            filter context
+     * @param outFile
+     *            translated output from the filter.
+     * @throws IOException
+     *             when failed to read target file.
      */
-    public static void checkXLiffTranslationRFE1506(IFilter filter, FilterContext context,
-                                                    File outFile, boolean optionNeedsTranslate) throws Exception {
+    public static void checkXLiffTranslationRFE1506(IFilter filter, FilterContext context, File outFile,
+            boolean optionNeedsTranslate) throws Exception {
         File target = new File("test/data/filters/xliff/file-xliff-RFE1506.xliff");
         Map<String, String> config = new HashMap<>();
         if (optionNeedsTranslate) {
             config.put("changetargetstateneedsreviewtranslation", "true");
         }
         assertTrue(filter.isFileSupported(target, config, context));
-        filter.translateFile(target, outFile, config, context,
-                new ITranslateCallback() {
-                    public String getTranslation(String id, String source, String path) {
-                        if ("Create".equals(source)) {
-                            return "\u4F5C\u6210";
-                        }
-                        if ("Emoji".equals(source)) {
-                            return "\u7D75\u6587\u5B57";
-                        }
-                        return null; // not translated or already translated
-                    }
+        filter.translateFile(target, outFile, config, context, new ITranslateCallback() {
+            public String getTranslation(String id, String source, String path) {
+                if ("Create".equals(source)) {
+                    return "\u4F5C\u6210";
+                }
+                if ("Emoji".equals(source)) {
+                    return "\u7D75\u6587\u5B57";
+                }
+                return null; // not translated or already translated
+            }
 
-                    public String getTranslation(String id, String source) {
-                        return getTranslation(id,source,"");
-                    }
+            public String getTranslation(String id, String source) {
+                return getTranslation(id, source, "");
+            }
 
-                    public void linkPrevNextSegments() {
-                    }
+            public void linkPrevNextSegments() {
+            }
 
-                    public void setPass(int pass) {
-                    }
-                });
+            public void setPass(int pass) {
+            }
+        });
         try (XMLStreamReader xml = new XMLStreamReader()) {
             xml.setStream(outFile);
             /*
-             expect:
-             <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
-            */
+             * expect: <xliff version="1.2"
+             * xmlns="urn:oasis:names:tc:xliff:document:1.2">
+             */
             XMLBlock xliffBlock = xml.advanceToTag("xliff");
             assertEquals("1.2", xliffBlock.getAttribute("version"));
-            assertEquals("urn:oasis:names:tc:xliff:document:1.2",
-                    xliffBlock.getAttribute("xmlns"));
+            assertEquals("urn:oasis:names:tc:xliff:document:1.2", xliffBlock.getAttribute("xmlns"));
             xml.advanceToTag("body");
             /*
-             expect:
-               <trans-unit id="5078">
-                <source>1.0.1</source>
-                <target state="needs-translation">1.0.1</target>
-              </trans-unit>
-            */
+             * expect: <trans-unit id="5078"> <source>1.0.1</source> <target
+             * state="needs-translation">1.0.1</target> </trans-unit>
+             */
             XMLBlock block = xml.advanceToTag("trans-unit");
             assertEquals("5078", block.getAttribute("id"));
             xml.advanceToTag("source");
@@ -450,12 +466,10 @@ public class XLIFFFilterTest extends TestFilterBase {
             block = xml.advanceToTag("trans-unit");
             assertTrue(block.isClose());
             /*
-             expect:
-               <trans-unit id="5086" approved="yes">
-                <source>foo</source>
-                <target state="final">bar</target>
-              </trans-unit>
-            */
+             * expect: <trans-unit id="5086" approved="yes">
+             * <source>foo</source> <target state="final">bar</target>
+             * </trans-unit>
+             */
             block = xml.advanceToTag("trans-unit");
             assertEquals("5086", block.getAttribute("id"));
             xml.advanceToTag("source");
@@ -466,12 +480,11 @@ public class XLIFFFilterTest extends TestFilterBase {
             block = xml.advanceToTag("trans-unit");
             assertTrue(block.isClose());
             /*
-             expect:
-               <trans-unit id="5088" approved="yes">
-                <source>Organization</source>
-                <target state="needs-review-translation">&#x7D44;&#x7E54;</target>
-              </trans-unit>
-            */
+             * expect: <trans-unit id="5088" approved="yes">
+             * <source>Organization</source> <target
+             * state="needs-review-translation">&#x7D44;&#x7E54;</target>
+             * </trans-unit>
+             */
             block = xml.advanceToTag("trans-unit");
             assertEquals("5088", block.getAttribute("id"));
             xml.advanceToTag("source");
@@ -482,18 +495,15 @@ public class XLIFFFilterTest extends TestFilterBase {
             block = xml.advanceToTag("trans-unit");
             assertTrue(block.isClose());
             /*
-             expect in default:
-               <trans-unit id="5090">
-                <source>Create</source>
-                <target state="translated">&#x4F5C;&#x6210;</target>
-              </trans-unit>
-
-             expect with option:
-               <trans-unit id="5090">
-                <source>Create</source>
-                <target state="needs-review-translation">&#x4F5C;&#x6210;</target>
-              </trans-unit>
-            */
+             * expect in default: <trans-unit id="5090"> <source>Create</source>
+             * <target state="translated">&#x4F5C;&#x6210;</target>
+             * </trans-unit>
+             * 
+             * expect with option: <trans-unit id="5090">
+             * <source>Create</source> <target
+             * state="needs-review-translation">&#x4F5C;&#x6210;</target>
+             * </trans-unit>
+             */
             block = xml.advanceToTag("trans-unit");
             assertEquals("5090", block.getAttribute("id"));
             xml.advanceToTag("source");
@@ -508,12 +518,10 @@ public class XLIFFFilterTest extends TestFilterBase {
             block = xml.advanceToTag("trans-unit");
             assertTrue(block.isClose());
             /*
-             expected:
-                  <trans-unit id="5128" approved="yes">
-                    <source>- Emoji</source>
-                    <target state="final">&#x7D75;&#x6587;&#x5B57;</target>
-                  </trans-unit>
-            */
+             * expected: <trans-unit id="5128" approved="yes"> <source>-
+             * Emoji</source> <target
+             * state="final">&#x7D75;&#x6587;&#x5B57;</target> </trans-unit>
+             */
             block = xml.advanceToTag("trans-unit");
             assertEquals("5128", block.getAttribute("id"));
             xml.advanceToTag("source");

@@ -70,9 +70,10 @@ public class XLIFFFilter extends XMLFilter {
     private String id;
 
     /**
-     * Sets whether alternative translations are identified by previous and next paragraphs or by &lt;trans-unit&gt; ID
-    */
-     private ID_TYPE altTransIDType = ID_TYPE.CONTEXT;
+     * Sets whether alternative translations are identified by previous and next
+     * paragraphs or by &lt;trans-unit&gt; ID
+     */
+    private ID_TYPE altTransIDType = ID_TYPE.CONTEXT;
 
     /**
      * Register plugin into OmegaT.
@@ -112,9 +113,8 @@ public class XLIFFFilter extends XMLFilter {
      */
     @Override
     public Instance[] getDefaultInstances() {
-        return new Instance[] { new Instance("*.xlf", null, null),
-                                new Instance("*.xliff", null, null),
-                                new Instance("*.sdlxliff", null, null), };
+        return new Instance[] { new Instance("*.xlf", null, null), new Instance("*.xliff", null, null),
+                new Instance("*.sdlxliff", null, null), };
     }
 
     /**
@@ -157,7 +157,8 @@ public class XLIFFFilter extends XMLFilter {
      *
      * @param currentOptions
      *            Current options to edit.
-     * @return Updated filter options if user confirmed the changes, and current options otherwise.
+     * @return Updated filter options if user confirmed the changes, and current
+     *         options otherwise.
      */
     @Override
     public Map<String, String> changeOptions(Window parent, Map<String, String> currentOptions) {
@@ -177,28 +178,30 @@ public class XLIFFFilter extends XMLFilter {
     }
 
     /**
-     * We're not actually checking whether it is a valid XLIFF file; we just need a place to call defineDialect.
+     * We're not actually checking whether it is a valid XLIFF file; we just
+     * need a place to call defineDialect.
      */
     @Override
     public boolean isFileSupported(File inFile, Map<String, String> config, FilterContext context) {
         boolean result = super.isFileSupported(inFile, config, context);
         if (result) {
-                // Defining the actual dialect, because at this step
-                // we have the options
-                XLIFFDialect dialect = (XLIFFDialect) this.getDialect();
-                dialect.defineDialect(new XLIFFOptions(config));
-                try {
-                    super.processFile(inFile, null, context);
-                } catch (Exception e) {
-                    Log.log(e);
-                }
-                this.altTransIDType = dialect.altTransIDType;
+            // Defining the actual dialect, because at this step
+            // we have the options
+            XLIFFDialect dialect = (XLIFFDialect) this.getDialect();
+            dialect.defineDialect(new XLIFFOptions(config));
+            try {
+                super.processFile(inFile, null, context);
+            } catch (Exception e) {
+                Log.log(e);
+            }
+            this.altTransIDType = dialect.altTransIDType;
         }
         return result;
     }
 
     /**
-     * Support of group and trans-unit resname attribute and trans-unit <note> as comment, based on ResXFilter code
+     * Support of group and trans-unit resname attribute and trans-unit <note>
+     * as comment, based on ResXFilter code
      */
     @Override
     public void tagStart(String path, Attributes atts) {

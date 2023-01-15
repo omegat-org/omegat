@@ -181,7 +181,7 @@ public class XLIFFDialect extends DefaultXMLDialect {
         }
         String state = attr.getValue();
         String nextTranslatedState = changeStateToNeedsReviewTranslation ? "needs-review-translation" : "translated";
-        if (translated && "needs-translation".equals(state)) {
+        if (translated && ("needs-translation".equals(state) || "needs-review-translation".equals(state))) {
             attr.setValue(nextTranslatedState);
         } else if ("new".equals(state)) {
             String next = translated ? nextTranslatedState : "needs-translation";

@@ -78,6 +78,27 @@ public final class FileUtil {
     }
 
     /**
+     * Get most recent backup file path.
+     * 
+     * @param originalFile
+     *            target original file name.
+     */
+    public static File getRecentBackup(final File originalFile) {
+        File[] bakFiles = null;
+        try {
+            bakFiles = originalFile.getParentFile()
+                    .listFiles(f -> !f.isDirectory() && f.getName().startsWith(originalFile.getName())
+                            && f.getName().endsWith(OConsts.BACKUP_EXTENSION));
+        } catch (Exception ignored) {
+        }
+        if (bakFiles == null) {
+            return null;
+        }
+        Arrays.sort(bakFiles, (f1, f2) -> Long.compare(f2.lastModified(), f1.lastModified()));
+        return bakFiles[0];
+    }
+
+    /**
      * Removes older backups to be under specified number of files.
      * @param originalFile target original file name.
      * @param maxBackups maximum number of back up files.

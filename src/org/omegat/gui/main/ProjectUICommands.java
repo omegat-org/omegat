@@ -39,8 +39,6 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -394,7 +392,8 @@ public final class ProjectUICommands {
     }
 
     /**
-     * Open project. Does nothing if a project is already open and closeCurrent is false.
+     * Open project. Does nothing if a project is already open and closeCurrent
+     * is false.
      *
      * @param projectDirectory
      *            project directory or null if user must choose it
@@ -433,30 +432,7 @@ public final class ProjectUICommands {
                 mainWindow.setCursor(hourglassCursor);
 
                 if (convertOldProjectIfNeed(projectRootFolder)) {
-                    ProjectProperties props = checkProjectProperties(projectRootFolder);
-                    if (props == null) {
-                        // try with backup file
-                        try {
-                            Files.copy(Paths.get(projectRootFolder.getAbsoluteFile() + File.separator
-                                + OConsts.FILE_PROJECT + OConsts.BACKUP_EXTENSION),
-                                Paths.get(projectRootFolder.getAbsoluteFile() + File.separator + OConsts.FILE_PROJECT),
-                                StandardCopyOption.REPLACE_EXISTING);
-                            props = ProjectFileStorage.loadProjectProperties(projectRootFolder.getAbsoluteFile());
-                        } catch (Exception ex) {
-                            Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
-                            Core.getMainWindow().displayErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
-                            mainWindow.setCursor(oldCursor);
-                            return null;
-                        }
-                    }
-                    projectOpenImpl(projectRootFolder, props);
-                    try {
-                        Files.copy(Paths.get(projectRootFolder.getAbsoluteFile() + File.separator + OConsts.FILE_PROJECT),
-                            Paths.get(projectRootFolder.getAbsoluteFile() + File.separator + OConsts.FILE_PROJECT + OConsts.BACKUP_EXTENSION),
-                            StandardCopyOption.REPLACE_EXISTING);
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
+                    projectOpenImpl(projectRootFolder);
                 }
 
                 mainWindow.setCursor(oldCursor);
@@ -517,11 +493,22 @@ public final class ProjectUICommands {
         return props;
     }
 
-    private static void projectOpenImpl(File projectRootFolder, ProjectProperties props) {
+    private static void projectOpenImpl(File projectRootFolder) {
         IMainWindow mainWindow = Core.getMainWindow();
         try {
+            File newProjectFile = null;
             // open LOCAL copy of "omegat.project"
-            File projectFile = new File(projectRootFolder, OConsts.FILE_PROJECT);
+            ProjectProperties props = checkProjectProperties(projectRootFolder);
+            if (props == null) {
+                // try with backup file
+                newProjectFile = FileUtil
+                        .getRecentBackup(new File(projectRootFolder.getAbsoluteFile(), OConsts.FILE_PROJECT));
+                if (newProjectFile == null) {
+                    throw new KnownException("PROJECT_INVALID");
+                }
+                props = ProjectFileStorage.loadPropertiesFile(projectRootFolder.getAbsoluteFile(),
+                        newProjectFile);
+            }
             boolean needToSaveProperties = false;
             File newProjectFile = null;
             if (props.hasRepositories()) {  /* This a remote project
@@ -588,6 +575,7 @@ public final class ProjectUICommands {
                 props.autocreateDirectories();
             } else {
                 // not a team project - ask for non-exist directories
+                File projectFile = new File(projectRootFolder, OConsts.FILE_PROJECT);
                 while (!props.isProjectValid()) {
                     // something wrong with the project - display open dialog to fix it
                     ProjectPropertiesDialog prj = new ProjectPropertiesDialog(
@@ -613,6 +601,7 @@ public final class ProjectUICommands {
                 // make backup and save omegat.project file when required
                 if (finalNewProjectFile != null) {
                     if (succeeded && finalNeedToSaveProperties) {
+                        File projectFile = new File(projectRootFolder, OConsts.FILE_PROJECT);
                         File backup = FileUtil.backupFile(projectFile);
                         FileUtil.removeOldBackups(projectFile, OConsts.MAX_BACKUPS);
                         Log.logWarningRB("PP_REMOTE_PROJECT_CONTENT_OVERRIDES_THE_CURRENT_PROJECT",

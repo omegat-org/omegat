@@ -32,20 +32,28 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 import org.apache.commons.io.FileUtils;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.xml.sax.SAXException;
+
 import org.omegat.core.Core;
 import org.omegat.core.data.IProject;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.statistics.StatCount;
 import org.omegat.core.statistics.StatisticsSettings;
+import org.omegat.filters2.FilterContext;
+import org.omegat.filters2.IFilter;
 import org.omegat.filters2.ITranslateCallback;
 import org.omegat.filters2.TranslationException;
 import org.omegat.filters3.Tag;
@@ -56,7 +64,8 @@ import org.omegat.filters3.xml.xliff.XLIFFOptions;
 import org.omegat.util.PatternConsts;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
-import org.xml.sax.SAXException;
+import org.omegat.util.xml.XMLBlock;
+import org.omegat.util.xml.XMLStreamReader;
 
 public class XLIFFFilterTest extends TestFilterBase {
     XLIFFFilter filter;
@@ -362,4 +371,168 @@ public class XLIFFFilterTest extends TestFilterBase {
         dialect.handleXMLTag(tag, true);
         assertEquals("needs-review-translation", tag.getAttribute("state"));
    }
+
+    /**
+     * Test with live example of XLIFF version 1.2,
+     * as similar with exported file from Crowdin service.
+     */
+    @Test
+    public void testTranslationRFE1506() throws Exception {
+        checkXLiffTranslationRFE1506(filter, context, outFile, false);
+        checkXLiffTranslationRFE1506(filter, context, outFile,true);
+    }
+
+    /**
+     * Test function to check translation of RFE1506 case.
+     * <p>
+     * Just return when pass the cases. Otherwise, raises assertion error.
+     *
+     * @param filter filter object
+     * @param context filter context
+     * @param outFile translated output from the filter.
+     * @throws IOException when failed to read target file.
+     */
+    public static void checkXLiffTranslationRFE1506(IFilter filter, FilterContext context,
+                                                    File outFile, boolean optionNeedsTranslate) throws Exception {
+        File target = new File("test/data/filters/xliff/file-xliff-RFE1506.xliff");
+        Map<String, String> config = new HashMap<>();
+        if (optionNeedsTranslate) {
+            config.put("changetargetstateneedsreviewtranslation", "true");
+        }
+        assertTrue(filter.isFileSupported(target, config, context));
+        filter.translateFile(target, outFile, config, context,
+                new ITranslateCallback() {
+                    public String getTranslation(String id, String source, String path) {
+                        if ("Create".equals(source)) {
+                            return "\u4F5C\u6210";
+                        }
+                        if ("Emoji".equals(source)) {
+                            return "\u7D75\u6587\u5B57";
+                        }
+                        return null; // not translated or already translated
+                    }
+
+                    public String getTranslation(String id, String source) {
+                        return getTranslation(id,source,"");
+                    }
+
+                    public void linkPrevNextSegments() {
+                    }
+
+                    public void setPass(int pass) {
+                    }
+                });
+        try (XMLStreamReader xml = new XMLStreamReader()) {
+            xml.setStream(outFile);
+            /*
+             expect:
+             <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+            */
+            XMLBlock xliffBlock = xml.advanceToTag("xliff");
+            assertEquals("1.2", xliffBlock.getAttribute("version"));
+            assertEquals("urn:oasis:names:tc:xliff:document:1.2",
+                    xliffBlock.getAttribute("xmlns"));
+            xml.advanceToTag("body");
+            /*
+             expect:
+               <trans-unit id="5078">
+                <source>1.0.1</source>
+                <target state="needs-translation">1.0.1</target>
+              </trans-unit>
+            */
+            XMLBlock block = xml.advanceToTag("trans-unit");
+            assertEquals("5078", block.getAttribute("id"));
+            xml.advanceToTag("source");
+            assertEquals("1.0.1", xml.getNextBlock().getText());
+            block = xml.advanceToTag("target");
+            assertEquals("needs-translation", block.getAttribute("state"));
+            assertEquals("1.0.1", xml.getNextBlock().getText());
+            block = xml.advanceToTag("trans-unit");
+            assertTrue(block.isClose());
+            /*
+             expect:
+               <trans-unit id="5086" approved="yes">
+                <source>foo</source>
+                <target state="final">bar</target>
+              </trans-unit>
+            */
+            block = xml.advanceToTag("trans-unit");
+            assertEquals("5086", block.getAttribute("id"));
+            xml.advanceToTag("source");
+            assertEquals("foo", xml.getNextBlock().getText());
+            block = xml.advanceToTag("target");
+            assertEquals("final", block.getAttribute("state"));
+            assertEquals("bar", xml.getNextBlock().getText());
+            block = xml.advanceToTag("trans-unit");
+            assertTrue(block.isClose());
+            /*
+             expect:
+               <trans-unit id="5088" approved="yes">
+                <source>Organization</source>
+                <target state="needs-review-translation">&#x7D44;&#x7E54;</target>
+              </trans-unit>
+            */
+            block = xml.advanceToTag("trans-unit");
+            assertEquals("5088", block.getAttribute("id"));
+            xml.advanceToTag("source");
+            assertEquals("Organization", xml.getNextBlock().getText());
+            block = xml.advanceToTag("target");
+            assertEquals("needs-review-translation", block.getAttribute("state"));
+            assertEquals("\u7D44\u7E54", xml.getNextBlock().getText());
+            block = xml.advanceToTag("trans-unit");
+            assertTrue(block.isClose());
+            /*
+             expect in default:
+               <trans-unit id="5090">
+                <source>Create</source>
+                <target state="translated">&#x4F5C;&#x6210;</target>
+              </trans-unit>
+
+             expect with option:
+               <trans-unit id="5090">
+                <source>Create</source>
+                <target state="needs-review-translation">&#x4F5C;&#x6210;</target>
+              </trans-unit>
+            */
+            block = xml.advanceToTag("trans-unit");
+            assertEquals("5090", block.getAttribute("id"));
+            xml.advanceToTag("source");
+            assertEquals("Create", xml.getNextBlock().getText());
+            block = xml.advanceToTag("target");
+            if (optionNeedsTranslate) {
+                assertEquals("needs-review-translation", block.getAttribute("state"));
+            } else {
+                assertEquals("translated", block.getAttribute("state"));
+            }
+            assertEquals("\u4F5C\u6210", xml.getNextBlock().getText());
+            block = xml.advanceToTag("trans-unit");
+            assertTrue(block.isClose());
+            /*
+             expected:
+                  <trans-unit id="5128" approved="yes">
+                    <source>- Emoji</source>
+                    <target state="final">&#x7D75;&#x6587;&#x5B57;</target>
+                  </trans-unit>
+            */
+            block = xml.advanceToTag("trans-unit");
+            assertEquals("5128", block.getAttribute("id"));
+            xml.advanceToTag("source");
+            assertEquals("Emoji", xml.getNextBlock().getText());
+            block = xml.advanceToTag("target");
+            if (optionNeedsTranslate) {
+                assertEquals("needs-review-translation", block.getAttribute("state"));
+            } else {
+                assertEquals("translated", block.getAttribute("state"));
+            }
+            assertEquals("\u7D75\u6587\u5B57", xml.getNextBlock().getText());
+            block = xml.advanceToTag("trans-unit");
+            assertTrue(block.isClose());
+            // here should be end of body block
+            block = xml.advanceToTag("body");
+            assertTrue(block.isClose());
+        } catch (TranslationException e) {
+            Assert.fail(String.format("Read error for filter output: %s", outFile.getPath()));
+        }
+    }
+
 }

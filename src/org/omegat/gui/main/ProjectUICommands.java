@@ -345,11 +345,10 @@ public final class ProjectUICommands {
                 }
 
                 ProjectProperties props = ProjectFileStorage.loadProjectProperties(projectRoot);
-                if (props.getRepositories() == null) { // We assume it's a
-                                                       // project with no
-                                                       // repository mapping,
-                    props.setRepositories(repos); // so we add root repository
-                                                  // mapping
+                if (props.getRepositories() == null) {
+                    // We assume it's a project with no repository mapping,
+                    // so we add root repository mapping
+                    props.setRepositories(repos);
                 } else {
                     RepositoryDefinition remoteRepo = getRootGitRepositoryMapping(props.getRepositories());
                     if (isRepositoryEquals(remoteRepo, repo)) {
@@ -468,7 +467,7 @@ public final class ProjectUICommands {
             if (OmegaTFileChooser.APPROVE_OPTION != pfc
                     .showOpenDialog(Core.getMainWindow().getApplicationFrame())) {
                 return null;
-            }
+             }
             projectRootFolder = pfc.getSelectedFile();
         } else {
             projectRootFolder = projectDirectory;
@@ -478,7 +477,7 @@ public final class ProjectUICommands {
 
     private static boolean convertOldProjectIfNeed(File projectRootFolder) {
         try {
-            // convert old projects if need
+            // convert old projects if needed
             ConvertProject.convert(projectRootFolder);
         } catch (Exception ex) {
             Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_CONVERT_PROJECT");
@@ -525,41 +524,41 @@ public final class ProjectUICommands {
                  * Every time we reopen the project, we copy omegat.project from
                  * the remote project, We take following strategy and procedure
                  * to open the project.
-                 * 
-                 * ￼ 1. When opening a teamwork project as local only
+                 *
+                 *   1. When opening a teamwork project as local only
                  *      non-teamwork by passing 'no-team' to command line, skip
                  *      teamwork treatment.
-                 * 
-                 * ￼ 2. Save the currently effective repository mapping from
+                 *
+                 *   2. Save the currently effective repository mapping from
                  *      LOCAL to variable 'repos'.
-                 * 
-                 * ￼ 3. Update project.properties from REMOTE copy of
+                 *
+                 *   3. Update project.properties from REMOTE copy of
                  *      omegat.project that has postfix .NEW by calling
                  *      loadPropertiesFile(... ) with "omegat.project.NEW".
                  *      It respects a local root repository URL than remote
                  *      mapping configuration
-                 * 
-                 * ￼ 4. Handles mappings of four cases.
                  *
-                 *    ￼ a. no mapping
-                 * 
-                 * ￼    b. no remote mapping, there are local mapping(s)
-                 *  ￼      the locally defined mapping(s) are merged into
+                 *   4. Handles mappings of four cases.
+                 *
+                 *      a. no mapping
+                 *
+                 *      b. no remote mapping, there are local mapping(s)
+                 *         the locally defined mapping(s) are merged into
                  *         local omegat.project.
-                 * 
-                 * ￼    c. remote mapping, no local mapping(s)
-                 * 
-                 * ￼    d. remote and local mappings
-                 *       ￼ Local mapping changes are overwritten except
+                 *
+                 *      c. remote mapping, no local mapping(s)
+                 *
+                 *      d. remote and local mappings
+                 *         Local mapping changes are overwritten except
                  *         for root repository mapping.
-                 * 
-                 * ￼ 5. We save the original project file with as
+                 *
+                 *   5. We save the original project file with as
                  *      omegat.project.timestamp.bak
-                 * 
+                 *
                  * @note: We may want to make sure that the remote
-                 * props.GetRepositories match ￼ the previous current setup, but
-                 * this does not seem to be the intention of ￼ the current
-                 * mapping usage. ￼
+                 * props.GetRepositories match the previous current setup, but
+                 * this does not seem to be the intention of the current
+                 * mapping usage.
                  */
                 if (!Core.getParams().containsKey(CLIParameters.NO_TEAM)) {
                     ProjectProperties localProps = props;

@@ -159,7 +159,17 @@
 	  <available property="FirstSteps.exists" file="../doc_src/${language}/First_Steps.xml"/>
 	</target>
 
-	<target name="old-css" depends="check-first-steps" unless="${FirstSteps.exists}">
+    <target name="check-manual-exist">
+      <condition property="ManualContents.exists">
+        <or>
+          <available file="../doc_src/${language}/Introduction.xml"/>
+          <available file="../doc_src/${language}/InstallingAndRunning.xml"/>
+          <available file="../doc_src/${language}/AboutOmegaT.xml"/>
+        </or>
+      </condition>
+    </target>
+
+    <target name="old-css" depends="check-first-steps" unless="${FirstSteps.exists}">
       <copy file="OmegaT_old.css"
             tofile="../docs/${language}/OmegaT.css" />
     </target>
@@ -170,8 +180,14 @@
     </target>
 
 	<target name="css" depends="old-css,new-css"/>
-	
-	<target name="instant-start" depends="check-first-steps, css, pictures" unless="${FirstSteps.exists}">
+
+    <target name="copy-index-from-first-step" depends="check-manual-exist,generate-instant-start"
+            unless="${ManualContents.exists}">
+        <copy file="../docs/${language}/first_steps.html"
+              tofile="../docs/${language}/index.html" />
+    </target>
+
+	<target name="generate-instant-start" depends="check-first-steps, css, pictures" unless="${FirstSteps.exists}">
         <java dir="."
               fork="true"
               failonerror="true"
@@ -199,9 +215,9 @@
         </java>
         <copy file="${language}/${version.properties.filename}"
               tofile="../docs/${language}/${version.properties.filename}" />
-        <copy file="../docs/${language}/first_steps.html"
-              tofile="../docs/${language}/index.html" />
     </target>
+
+    <target name="instant-start" depends="generate-instant-start, copy-index-from-first-step"/>
 
     <target name="first-steps" depends="check-first-steps, css" if="${FirstSteps.exists}">
         <java dir="."

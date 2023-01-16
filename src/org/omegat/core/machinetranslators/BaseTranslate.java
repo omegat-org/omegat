@@ -184,8 +184,9 @@ public abstract class BaseTranslate implements IMachineTranslation {
         return cache.get(sLang + "/" + tLang + "/" + text);
     }
 
-    protected void putToCache(Language sLang, Language tLang, String text, String result) {
+    protected String putToCache(Language sLang, Language tLang, String text, String result) {
         cache.put(sLang.toString() + "/" + tLang.toString() + "/" + text, result);
+        return null; // always return null, just for method compatibility
     }
 
     /**

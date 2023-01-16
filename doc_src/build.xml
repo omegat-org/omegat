@@ -156,30 +156,30 @@
     </target>
 
     <target name="check-first-steps">
-	  <available property="FirstSteps.exists" file="../doc_src/${language}/First_Steps.xml"/>
-	</target>
+        <available property="FirstSteps.exists" file="../doc_src/${language}/First_Steps.xml"/>
+    </target>
 
     <target name="check-manual-exist">
-      <condition property="ManualContents.exists">
-        <or>
-          <available file="../doc_src/${language}/Introduction.xml"/>
-          <available file="../doc_src/${language}/InstallingAndRunning.xml"/>
-          <available file="../doc_src/${language}/AboutOmegaT.xml"/>
-        </or>
-      </condition>
+        <condition property="ManualContents.exists">
+            <or>
+                <available file="../doc_src/${language}/Introduction.xml"/>
+                <available file="../doc_src/${language}/InstallingAndRunning.xml"/>
+                <available file="../doc_src/${language}/AboutOmegaT.xml"/>
+            </or>
+        </condition>
     </target>
 
     <target name="old-css" depends="check-first-steps" unless="${FirstSteps.exists}">
-      <copy file="OmegaT_old.css"
-            tofile="../docs/${language}/OmegaT.css" />
+        <copy file="OmegaT_old.css"
+              tofile="../docs/${language}/OmegaT.css"/>
     </target>
 
-	<target name="new-css" depends="check-first-steps" if="${FirstSteps.exists}">
-      <copy file="OmegaT_new.css"
-            tofile="../docs/${language}/OmegaT.css" />
+    <target name="new-css" depends="check-first-steps" if="${FirstSteps.exists}">
+        <copy file="OmegaT_new.css"
+              tofile="../docs/${language}/OmegaT.css"/>
     </target>
 
-	<target name="css" depends="old-css,new-css"/>
+    <target name="css" depends="old-css,new-css"/>
 
     <target name="copy-index-from-first-step" depends="check-manual-exist,generate-instant-start"
             unless="${ManualContents.exists}">

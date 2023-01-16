@@ -4,7 +4,7 @@
 <section id="menus.goto">
   <title id="menus.goto.title"><guimenu>Go To</guimenu></title>
 
-  <para>This menu gives you access to the segment and panes navigation commands.</para>
+  <para>This menu gives you access to the segment and pane navigation commands.</para>
 
   <example id="example.next.untranslated.segment">
 	<title id="example.next.untranslated.segment.title">Shortcut description
@@ -54,12 +54,13 @@
         file if the current segment is the last one in the file.</para>
 
         <note>
-		  <para><keycap>TAB</keycap> can be used as an alternate shortcut if the
+		  <para>You can use <keycap>TAB</keycap> as an alternative shortcut by
+		  enabling the
 		  <link linkend="dialogs.preferences.general.use.tab.to.advance"
 		  endterm="dialogs.preferences.general.use.tab.to.advance.title"/>
-		  preference is enabled.</para>
+		  preference.</para>
 		  
-		  <para>This is useful for character entry systems that use
+		  <para>This is useful with character entry systems that use
 		  <keycap>Enter</keycap> to validate input.</para></note>
       </listitem>
     </varlistentry>
@@ -77,13 +78,13 @@
         file.</para>
 
         <note>
-		  <para><keycombo><keycap>C</keycap><keycap>TAB</keycap></keycombo> can
-		  be used as an alternate shortcut if the <link
+		  <para>You can use <keycombo><keycap>C</keycap><keycap>TAB</keycap></keycombo>
+		  as an alternative shortcut by enabling the <link
 		  linkend="dialogs.preferences.general.use.tab.to.advance"
 		  endterm="dialogs.preferences.general.use.tab.to.advance.title"/>
-		  preference is enabled.</para>
+		  preference.</para>
 		  
-		  <para>This is useful for character entry systems that use
+		  <para>This is useful with character entry systems that use
 		  <keycap>Enter</keycap> to validate input.</para>
 		</note>
       </listitem>
@@ -191,6 +192,17 @@
 	  </listitem>
 	</varlistentry>
 
+    <varlistentry id="menus.goto.back.in.history">
+      <term id="menus.goto.back.in.history.title"><guimenuitem>Back in
+      History</guimenuitem>
+      <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>P</keycap></keycombo></term>
+      <listitem>
+        <para>OmegaT remembers your segment navigation history.</para>
+        <para>This command allows you to move backward one segment at a time to
+        segments you have previously visited.</para>
+      </listitem>
+    </varlistentry>
+    
     <varlistentry id="menus.goto.forward.in.history">
       <term id="menus.goto.forward.in.history.title"><guimenuitem>Forward in
       History</guimenuitem>
@@ -199,22 +211,11 @@
         <para>OmegaT remembers your segment navigation history.</para>
 
         <para>This command allows you to move forward one segment at a time to
-        segments that you have previously visited with <link
+        segments you have previously visited with the above <link
         linkend="menus.goto"
         endterm="menus.goto.title"/><link
         linkend="menus.goto.back.in.history"
-        endterm="menus.goto.back.in.history.title"/>.</para>
-      </listitem>
-    </varlistentry>
-
-    <varlistentry id="menus.goto.back.in.history">
-      <term id="menus.goto.back.in.history.title"><guimenuitem>Back in
-      History</guimenuitem>
-      <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>P</keycap></keycombo></term>
-      <listitem>
-        <para>OmegaT remembers your segment navigation history.</para>
-        <para>This command allows you to move backward one segment at a time to
-        segments that you have previously visited.</para>
+        endterm="menus.goto.back.in.history.title"/> command.</para>
       </listitem>
     </varlistentry>
 

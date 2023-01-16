@@ -83,6 +83,12 @@
 	  <para>To access the files inside the <filename>OmegaT.app</filename>,
 	  package right-click on <filename>OmegaT.app</filename> and select “Show 
 	  Package Contents”.</para>
+
+	  <para>It is also possible to use <filename>OmegaT.app</filename> itself to
+	  launch OmegaT from the terminal. See the <link
+	  linkend="launch.with.command.line.omegat.terminal.command.syntax"
+	  endterm="launch.with.command.line.omegat.terminal.command.syntax.title"/>
+	  section below for details.</para>
 	</note>
 
 	<para>Use your text editor of choice to modify the files.</para>
@@ -148,6 +154,9 @@
 	of options in scripts that you can then use to launch OmegaT for a
 	particular purpose.</para>
 
+	<para>Launching OmegaT from the command line also creates a new OmegaT
+	instance for each launch. You can thus use multiple projects simultaneously,
+	each with its own parameters.</para>
 
 	<section id="launch.with.command.line.tutorial">
 	  <title id="launch.with.command.line.tutorial.title">Simplified
@@ -222,6 +231,15 @@
 
 	  <para>The syntax to launch OmegaT from the terminal is:
 	  <programlisting>java -jar &lt;java parameters&gt; path/to/OmegaT.jar &lt;OmegaT options&gt; </programlisting></para>
+
+	  <note>
+		<para>On macOS, it is also possible to use
+		<filename>OmegaT.app</filename> directly in the terminal, in which case
+		java parameters cannot be added: <programlisting>open path/to/OmegaT.app
+		-n --args &lt;OmegaT options&gt;</programlisting> where
+		<userinput>-n</userinput> is used to create a new instance of
+		OmegaT.</para>
+	  </note>
 
 	  <variablelist>
 		<varlistentry id="launch.with.command.line.java.jar">

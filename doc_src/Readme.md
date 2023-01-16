@@ -183,9 +183,9 @@ All the scripts require the language folder as argument and must be run from the
 
 Note: Replace `ant` with `docgen` if you are using the `docgen` script.
 
-## Building Instant Start only
+## Building First Steps only
 
-    ant -Dlanguage=en instant-start
+    ant -Dlanguage=en first-steps
 
 ## Building everything except Javahelp:
 
@@ -207,4 +207,4 @@ Note: Replace `ant` with `docgen` if you are using the `docgen` script.
 
 - `build.xml`: Main script
 - `doc_src_paths.xml`: Set the paths for utilities
-- `docbook-utf8.xsl`: Allows to issue the Instant Start Guide in UTF-8
+- `docbook-utf8.xsl`: Allows to issue the First Steps in UTF-8

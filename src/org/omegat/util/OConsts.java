@@ -62,7 +62,7 @@ public final class OConsts {
 
     // help
     public static final String HELP_HOME = "index.html";
-    public static final String HELP_INSTANT_START = "instantStartGuideNoTOC.html";
+    public static final String HELP_FIRST_STEPS = "first_steps.html";
     public static final String HELP_DIR = "docs";
     public static final String HELP_LANG_INDEX = "languageIndex.html";
 

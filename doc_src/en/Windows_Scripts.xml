@@ -29,89 +29,63 @@
 	in the left-hand panel of the window.</para>
 
 	<warning>
-	  <para>If a list of scripts is not displayed on the left side of the script
-	  editor window, use the Scripting window <guimenu>File</guimenu> >
-	  <guimenuitem>Set Scripts Folder...</guimenuitem> menu to locate the place
-	  where scripts are stored.</para>
+	  <para>If no list of scripts is displayed on the left side of 
+	  the script editor window, use the Scripting window <guimenu>File</guimenu> >
+	  <guimenuitem>Set Scripts Folder...</guimenuitem> menu to set 
+	  the location of the scripts.</para>
 	</warning>
 
 	<para>Additional scripts can be found here: <ulink
 	url="https://sourceforge.net/projects/omegatscripts/">OmegaT
-	Scripts</ulink>. Just copy the file and put it in the <link
+	Scripts</ulink>. Just copy the file to the <link
 	linkend="application.folder.scripts"
 	endterm="application.folder.scripts.title"/> folder.</para>
 
-	<para>Some scripts are <emphasis>event</emphasis> based and can be made to
-	be triggered automatically when a given event takes place. Each event
-	corresponds to a subfolder under the <link
-	linkend="application.folder.scripts"
-	endterm="application.folder.scripts.title"/> folder:</para>
+  <para>Some scripts are <emphasis>event</emphasis>-based and can be set to
+  trigger automatically when a given event takes place. Each event corresponds
+  to a subfolder under <link
+  linkend="application.folder.scripts"
+  endterm="application.folder.scripts.title"/>:</para>
 
-	<variablelist>
-	  <varlistentry id="application.folder.scripts.application.shutdown">
-		<term
-		id="application.folder.scripts.application.shutdown.title">application_shutdown</term>
-		<listitem>
-		  <para>Scripts in this folder will be launched before OmegaT shuts
-		  down.</para>
-		</listitem>
-	  </varlistentry>
-	  
-	  <varlistentry id="application.folder.scripts.application.startup">
-		<term
-		id="application.folder.scripts.application.startup.title">application_startup</term>
-		<listitem>
-		  <para>Scripts in this folder will be launched when the scripting
-		  engine is available, shortly after OmegaT is launched.</para>
-		</listitem>
-	  </varlistentry>
+  <variablelist>
+	<varlistentry id="application.folder.scripts.application.shutdown">
+	  <term id="application.folder.scripts.application.shutdown.title">application_shutdown</term>
+	  <listitem><para>Scripts in this folder are launched before OmegaT shuts down.</para></listitem>
+	</varlistentry>
+	<varlistentry id="application.folder.scripts.application.startup">
+	  <term id="application.folder.scripts.application.startup.title">application_startup</term>
+	  <listitem><para>Scripts in this folder are launched as soon as the scripting engine is available, shortly after OmegaT starts.</para></listitem>
+	</varlistentry>
+	<varlistentry id="application.folder.scripts.entry.activated">
+	  <term id="application.folder.scripts.entry.activated.title">entry_activated</term>
+	  <listitem><para>Scripts in this folder are launched when editing a new segment. The segment is in the <code>newEntry></code> binding.</para></listitem>
+	</varlistentry>
+	<varlistentry id="application.folder.scripts.new.file">
+	  <term id="application.folder.scripts.new.file.title">new_file</term>
+	  <listitem><para>Scripts in this folder are launched when the editor switches to the next file in the project. The new filename is in the <code>activeFileName</code> binding.</para></listitem>
+	</varlistentry>
+	<varlistentry id="application.folder.scripts.new.word">
+	  <term id="application.folder.scripts.new.word.title">new_word</term>
+	  <listitem><para>Scripts in this folder are launched when a new word is edited in the Editor window. The new word is available from the <code>newWord</code> binding.</para></listitem>
+	</varlistentry>
+	<varlistentry id="application.folder.scripts.project.changed">
+	  <term id="application.folder.scripts.project.changed.title">project_changed</term>
+	  <listitem><para>Scripts in this folder are launched when the state of the project changes. An <code>eventType</code> object is bound and can take the following values: CLOSE, COMPILE, CREATE, LOAD, or SAVE.</para></listitem>
+	</varlistentry>
+  </variablelist>
 
-	  <varlistentry id="application.folder.scripts.entry.activated">
-		<term
-		id="application.folder.scripts.entry.activated.title">entry_activated</term>
-		<listitem>
-		  <para>Scripts in this folder will be launched when editing a new
-		  segment. The segment is in the "newEntry" binding.</para>
-		</listitem>
-	  </varlistentry>
-
-	  <varlistentry id="application.folder.scripts.new.file">
-		<term id="application.folder.scripts.new.file.title">new_file</term>
-		<listitem>
-		  <para>Scripts in the folder will be launched when the editor switches
-		  to the next file in the project. The new filename is in the
-		  "activeFileName" binding.</para>
-		</listitem>
-	  </varlistentry>
-
-	  <varlistentry id="application.folder.scripts.new.word">
-		<term id="application.folder.scripts.new.word.title">new_word</term>
-		<listitem>
-		  <para>Scripts in the folder will be launched when a new word is edited
-		  in the Editor window. The new word is available with "newWord".</para>
-		</listitem>
-	  </varlistentry>
-
-	  <varlistentry id="application.folder.scripts.project.changed">
-		<term
-		id="application.folder.scripts.project.changed.title">project_changed</term>
-		<listitem>
-		  <para>Scripts in the folder will be launched when the state of the
-		  project changes. An "eventType" object is bound and can take the
-		  following values: CLOSE, COMPILE, CREATE, LOAD, SAVE.</para>
-		</listitem>
-	  </varlistentry>
-	</variablelist>
-
-	<warning>
-	  <para>Scripts are also launched when you are executing other scripts. That
-	  means that on a large project, an "entry_activated" script will be called
-	  a lot of time when using a search/replace type of script that loops
-	  through all the segments, rendering the application unresponsive. </para>
-	</warning>
+  <para>The folders are already created in the script folder that comes with the
+  distribution.</para>
+  
+  <warning>
+	<para>Scripts are also launched when you are executing other scripts. 
+	Consequently, in a large project, an <code>entry_activated</code> script is
+  called frequently when a search/replace type of script that
+  loops through all segments is used, rendering the application
+  unresponsive.</para>
+  </warning>
   </section>
   
-
   <section id="windows.scripts.usage">
 	<title id="windows.scripts.usage.title">Usage</title>
 
@@ -122,7 +96,7 @@
       </listitem>
 
       <listitem>
-		<para>Click <guibutton>Run</guibutton> at the bottom of the window, or
+		<para>Click the <guibutton>Run</guibutton> button at the bottom of the window, or
 		press <keycombo><keycap>C</keycap><keycap>R</keycap></keycombo> to
 		launch the script immediately.</para>
       </listitem>
@@ -174,7 +148,7 @@
     directly, or to write new scripts for your own use.</para>
 
 	<note>
-	  <para>The scripts distributed with OmegaT are here for your convenience
+	  <para>The scripts distributed with OmegaT are included for your convenience
 	  but are not supported by the OmegaT development team.</para>
 	</note>
 	
@@ -206,7 +180,7 @@
         Same Segment</term>
 
         <listitem>
-          <para>Check for identical segments (case sensitive)</para>
+          <para>Check for identical segments (case sensitive).</para>
         </listitem>
       </varlistentry>
 
@@ -230,7 +204,7 @@
         GUI Scripting</term>
 
         <listitem>
-          <para>Example of GUI scripting</para>
+          <para>Example of GUI scripting.</para>
         </listitem>
       </varlistentry>
 
@@ -250,7 +224,7 @@
         Modify Segment</term>
 
         <listitem>
-          <para>Example showing how to modify a segment.</para>
+          <para>Example that shows how to modify a segment.</para>
         </listitem>
       </varlistentry>
 
@@ -287,7 +261,7 @@
           <para>Extracts the content of the project to a single text file (one
           line per segment). See <ulink
           url="https://sourceforge.net/p/omegat/feature-requests/182/">RFE#182
-          Extracts the content of the projects to text file</ulink></para>
+          Extracts the content of the projects to text file</ulink>.</para>
         </listitem>
       </varlistentry>
 
@@ -325,7 +299,7 @@
         Project Folder</term>
 
         <listitem>
-          <para>Open the project folder in the operating system.</para>
+          <para>Open the project folder in the default file manager.</para>
         </listitem>
       </varlistentry>
 
@@ -334,7 +308,7 @@
         Folder</term>
 
         <listitem>
-          <para>Open the /tm folder.</para>
+          <para>Open the <filename class="directory">/tm</filename> folder.</para>
         </listitem>
       </varlistentry>
 
@@ -482,7 +456,7 @@
           programming styles. See <ulink
           url="https://developer.oracle.com/databases/nashorn-javascript-part1.html">Practical
           Nashorn, Part 1: Introducing JavaScript, ECMAScript, and
-          Nashorn</ulink></para>
+          Nashorn</ulink>.</para>
         </listitem>
       </varlistentry>
     </variablelist>

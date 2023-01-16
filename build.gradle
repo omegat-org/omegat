@@ -194,6 +194,14 @@ dependencies {
         // JSON parser
         implementation "com.fasterxml.jackson.core:jackson-core:2.13.4"
         implementation "com.fasterxml.jackson.core:jackson-databind:2.13.4.2"
+
+        implementation("com.github.ben-manes.caffeine:caffeine:2.9.3") {
+            attributes {
+                attribute(Bundling.BUNDLING_ATTRIBUTE, project.objects.named(Bundling.class, Bundling.EXTERNAL))
+            }
+        }
+        implementation("com.github.ben-manes.caffeine:jcache:2.9.3")
+
     }
 
     // Test dependencies
@@ -244,6 +252,7 @@ jar {
         pluginAttr('MT connector[bundle]', 'org/omegat/core/machinetranslators/', 'machinetranslator', desc.machinetranslator)
         pluginAttr('File filters[bundle]', 'org/omegat/filters2/', 'filter', desc.filters2)
         pluginAttr('XML filters[bundle]', 'org/omegat/filters3/', 'filter', desc.filters3)
+        pluginAttr('New XML filters[bundle]', 'org/omegat/filters4/', 'filter', desc.filters4)
         pluginAttr('Tokenizers[bundle]', 'org/omegat/tokenizer/', 'tokenizer', desc.tokenizer)
         pluginAttr('Themes [bundle]', 'org/omegat/gui/theme/', 'theme', desc.theme)
         pluginAttr('Scripting engine', 'org/omegat/gui/script/', 'miscellaneous', desc.script)
@@ -947,11 +956,32 @@ task instantStartGuides {
     group = 'omegat workflow'
 }
 
+task firstSteps {
+    description = 'Build First Step pages for all languages. Requires Docker.'
+    group = 'omegat workflow'
+}
+
 task updateManuals {
     group = 'omegat workflow'
     description = 'Update Instant Start guides and HTML manuals.'
-    dependsOn manualHtmls, instantStartGuides
+    dependsOn manualHtmls, firstSteps, instantStartGuides
     finalizedBy genDocIndex
+}
+
+ext.firstStepsXmls = fileTree(dir: 'doc_src', include: '**/First_Steps.xml')
+firstStepsXmls.each { xml ->
+    def lang = xml.parentFile.name
+    def taskName = "firstSteps${lang.capitalize()}"
+    task(taskName) {
+        inputs.files fileTree(dir: "doc_src/${lang}", include: '**/*.xml')
+        doLast {
+            exec {
+                workingDir = 'doc_src'
+                commandLine './docgen', "-Dlanguage=${lang}", 'first-steps'
+            }
+        }
+    }
+    firstSteps.dependsOn taskName
 }
 
 ext.instantStartXmls = fileTree(dir: 'doc_src', include: '**/InstantStartGuide.xml')
@@ -969,6 +999,8 @@ instantStartXmls.each { xml ->
     }
     instantStartGuides.dependsOn taskName
 }
+
+
 
 task debug(type: JavaExec) {
     description = 'Launch app for debugging.' // Special debug task for NetBeans

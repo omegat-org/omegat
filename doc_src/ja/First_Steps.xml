@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd"
+[
+<!ENTITY % manualvariables SYSTEM "manualvariables.mod">
+]>
+<article lang="ja" id="first.steps">
+  <title>OmegaT </title>
+  <section>
+	<title id="first-steps">最初の一歩</title>
+	<para>取扱説明書を開くには、 <keycap>F1</keycap> キーを押すか、 <guimenu>&gt; ヘルプ</guimenu>メニューにアクセスします。取扱説明書には、OmegaTの徹底入門が含まれています。最低限の構成でOmegaTを使いはじめるには、次のようにします。<orderedlist id="first-step-list">
+	  <listitem>
+		<para>新規プロジェクトを、メニューの <guimenu>&gt;プロジェクト</guimenu> <guimenuitem>&gt; 新規作成...</guimenuitem> から作成します。</para>
+	  </listitem>
+	  <listitem>
+		<para>言語コードを、実施したい原文と訳文の言語にあわせます。<guibutton>OK</guibutton>をクリックします。</para>
+
+		<para>→ OmegaTは、必要となるフォルダー構成とファイル群を自動的に作成します。同時に、空の翻訳メモリも作成されます。翻訳作業で分節を翻訳するごとに、バックグラウンド処理で翻訳メモリに翻訳データが追加されます。翻訳メモリの検索結果は、<guilabel>参考訳文</guilabel>ウィンドウにやがて表示されるようになります。</para>
+	  </listitem>
+	  <listitem>
+		<para><guibutton>ファイルを追加...</guibutton>をクリックして、翻訳したい原文のファイルを追加します。ウィンドウをとじます。</para>
+
+		<para>→ OmegaTは、この画面で選択されたファイルをプロジェクトにコピーします。そして、ひとつづつ翻訳するために、分節ごとに表示されます。</para>
+	  </listitem>
+	  <listitem>
+		<para>最初の分節で翻訳結果を入力します。 <keycap>Enter</keycap>キーを押します。</para>
+
+		<para>→ OmegaTは、分節をプロジェクトの翻訳メモリに登録し、カーソルを次の分節に移動します。</para>
+	  </listitem>
+
+	  <listitem>
+		<para>いつでも、メニューの<guimenu>&gt;プロジェクト</guimenu><guimenuitem>&gt; 訳文ファイルを生成</guimenuitem>を使用して、訳文の文書を出力できます。</para>
+
+		<para>→ OmegaT は、訳文ファイルを、最初のステップで作成したプロジェクトの<guilabel>target</guilabel> フォルダーに作成します。メニューの <guimenu>&gt;プロジェクト</guimenu> <guisubmenu>&gt;プロジェクト構成物へ</guisubmenu> から、これらのファイルを閲覧できます。</para>
+	  </listitem>
+
+	  <listitem>
+		<para>これ以上の詳細は、取扱説明書を参照してください。</para>
+	  </listitem>
+	</orderedlist>
+	</para>
+  </section>
+
+  <section>
+	<title id="freedoms">自由について</title>
+	<para>OmegaT は、プロの翻訳者のための、フリー のコンピューター翻訳支援ツールです。このソフトウエアは、<emphasis>GNU General Public License, version 3.0</emphasis>の条件で頒布されています。 <guimenu>&gt; ヘルプ</guimenu> <guimenu>&gt; OmegaTについて</guimenu>から参照してください。このライセンスは、ユーザに次の自由を保障しています。<itemizedlist id="freedoms.list">
+	  <listitem>
+		<para>OmegaTをいかなる目的に対しても利用することができる自由。</para>
+	  </listitem>
+
+	  <listitem>
+		<para>OmegaTがどのように動作しているのかを学び、望みに応じて自分で好きなように変更する自由。</para>
+	  </listitem>
+
+	  <listitem>
+		<para>他の方を助けるためにソフトウエアを再配布する自由。</para>
+	  </listitem>
+
+	  <listitem>
+		<para>変更したバージョンを他の方に配布する自由。</para>
+	  </listitem>
+	</itemizedlist>
+	</para>
+  </section>
+</article>

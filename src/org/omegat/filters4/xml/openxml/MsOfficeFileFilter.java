@@ -55,14 +55,15 @@ public class MsOfficeFileFilter extends AbstractZipFilter {
      */
     private void defineDOCUMENTSOptions(Map<String, String> config) {
         /*
-         Complete string when all options are enabled
-         Word: "(document\\.xml)|(comments\\.xml)|(footnotes\\.xml)|(endnotes\\.xml)|(header\\d+\\.xml)|(footer\\d+\\.xml)"
-         Excel: "|(sharedStrings\\.xml)|(comments\\d+\\.xml)"
-         PowerPoint: "|(slide\\d+\\.xml)|(slideMaster\\d+\\.xml)| (slideLayout\\d+\\.xml)|(notesSlide\\d+\\.xml)"
-         Global: "|(data\\d+\\.xml)|(chart\\d+\\.xml)|(drawing\\d+\\.xml)"
-         Excel: "|(workbook\\.xml)"
-         Visio: "|(page\\d+\\.xml)
-        */
+         * Complete string when all options are enabled.
+         * Word: "(document\\.xml)|(comments\\.xml)|(footnotes\\.xml)|(endnotes\\.xml)
+         * |(header\\d+\\.xml)| (footer\\d+\\.xml)"
+         * Excel: "|(sharedStrings\\.xml)|(comments\\d+\\.xml)"
+         * PowerPoint: "|(slide\\d+\\.xml)|(slideMaster\\d+\\.xml)| (slideLayout\\d+\\.xml)|
+         * (notesSlide\\d+\\.xml)"
+         * Global: "|(data\\d+\\.xml)|(chart\\d+\\.xml)|(drawing\\d+\\.xml)"
+         * Excel: "|(workbook\\.xml)" Visio: "|(page\\d+\\.xml)
+         */
 
         DOCUMENTS = "(document\\d?\\.xml)";
 
@@ -109,18 +110,20 @@ public class MsOfficeFileFilter extends AbstractZipFilter {
         if (options.getTranslateSheetNames()) {
             DOCUMENTS += "|(workbook\\.xml)";
         }
-        //if (options.getTranslateSlideLinks()) DOCUMENTS += "|(slide\\d+\\.xml\\.rels)";
+        // if (options.getTranslateSlideLinks()) DOCUMENTS +=
+        // "|(slide\\d+\\.xml\\.rels)";
 
         DOCUMENTS += "|(page\\d+\\.xml)";
 
         TRANSLATABLE = Pattern.compile(DOCUMENTS);
     }
-    
+
     public MsOfficeFileFilter() {
         super();
-        defineDOCUMENTSOptions(new HashMap<String,String>()); // Define the documents to read
+        defineDOCUMENTSOptions(new HashMap<String, String>()); // Define the
+                                                               // documents to
+                                                               // read
     }
-
 
     @Override
     public boolean isFileSupported(java.io.File inFile, Map<String, String> config, FilterContext context) {
@@ -140,11 +143,11 @@ public class MsOfficeFileFilter extends AbstractZipFilter {
 
     @Override
     protected boolean acceptInternalFile(ZipEntry entry, FilterContext fc) {
-        return entry.getName().endsWith("document.xml")    // Word
-            || entry.getName().endsWith("document2.xml")    // Word 365
-            || entry.getName().endsWith("sharedStrings.xml")    // Excel
-            || entry.getName().endsWith("slide1.xml")    // Powerpoint
-            || entry.getName().endsWith("page1.xml");    // Visio
+        return entry.getName().endsWith("document.xml") // Word
+                || entry.getName().endsWith("document2.xml") // Word 365
+                || entry.getName().endsWith("sharedStrings.xml") // Excel
+                || entry.getName().endsWith("slide1.xml") // Powerpoint
+                || entry.getName().endsWith("page1.xml"); // Visio
     }
 
     @Override
@@ -155,7 +158,10 @@ public class MsOfficeFileFilter extends AbstractZipFilter {
         return TRANSLATABLE.matcher(removePath(entry.getName())).matches();
     }
 
-    /** If comments are not selected, their references are removed in document so better remove the file **/
+    /**
+     * If comments are not selected, their references are removed in document so
+     * better remove the file
+     **/
     protected boolean mustDeleteInternalFile(ZipEntry entry, boolean writeMode, FilterContext context) {
         if (entry.getName().endsWith("comments.xml")) {
             return !DOCUMENTS.contains("comments");
@@ -168,7 +174,8 @@ public class MsOfficeFileFilter extends AbstractZipFilter {
             fileName = fileName.substring(fileName.lastIndexOf('/') + 1);
         }
         if (fileName.lastIndexOf('\\') >= 0) {
-            fileName = fileName.substring(fileName.lastIndexOf('\\') + 1); // Some weird files may use a backslash
+            // Some weird files may use a backslash
+            fileName = fileName.substring(fileName.lastIndexOf('\\') + 1);
         }
         return fileName;
     }
@@ -181,7 +188,7 @@ public class MsOfficeFileFilter extends AbstractZipFilter {
             String[] words1 = s1.split("\\d+\\."), words2 = s2.split("\\d+\\.");
             // Digits at the end and same text
             if ((words1.length > 1 && words2.length > 1) && // Digits
-                    (words1[0].equals(words2[0]))) {        // Same text
+            (words1[0].equals(words2[0]))) { // Same text
                 int number1 = 0, number2 = 0;
                 Matcher getDigits = DIGITS.matcher(s1);
                 if (getDigits.find()) {
@@ -204,7 +211,8 @@ public class MsOfficeFileFilter extends AbstractZipFilter {
                 // Specific case for Excel
                 // because "comments" is present twice in DOCUMENTS
                 if (shortname1.indexOf("sharedStrings") >= 0 || shortname2.indexOf("sharedStrings") >= 0) {
-                    if (shortname2.indexOf("sharedStrings") >= 0) return 1; // sharedStrings must be first
+                    if (shortname2.indexOf("sharedStrings") >= 0)
+                        return 1; // sharedStrings must be first
                     else {
                         return -1;
                     }
@@ -222,7 +230,8 @@ public class MsOfficeFileFilter extends AbstractZipFilter {
                 } else if (index1 < index2) {
                     return -1;
                 } else {
-                    return s1.compareTo(s2); // Documents were not in DOCUMENTS, we keep the normal order
+                    return s1.compareTo(s2); // Documents were not in DOCUMENTS,
+                                             // we keep the normal order
                 }
             }
         };
@@ -230,13 +239,8 @@ public class MsOfficeFileFilter extends AbstractZipFilter {
 
     @Override
     public Instance[] getDefaultInstances() {
-        return new Instance[] {
-            new Instance("*.doc?"),
-            new Instance("*.dotx"),
-            new Instance("*.xls?"),
-            new Instance("*.ppt?"),
-            new Instance("*.vsdx")
-        };
+        return new Instance[] { new Instance("*.doc?"), new Instance("*.dotx"), new Instance("*.xls?"),
+                new Instance("*.ppt?"), new Instance("*.vsdx") };
     }
 
     public boolean hasOptions() {
@@ -248,7 +252,8 @@ public class MsOfficeFileFilter extends AbstractZipFilter {
      *
      * @param currentOptions
      *            Current options to edit.
-     * @return Updated filter options if user confirmed the changes, and current options otherwise.
+     * @return Updated filter options if user confirmed the changes, and current
+     *         options otherwise.
      */
     @Override
     public Map<String, String> changeOptions(Window parent, Map<String, String> currentOptions) {

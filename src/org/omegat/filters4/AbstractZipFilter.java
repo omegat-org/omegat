@@ -41,7 +41,6 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipOutputStream;
 
-import org.omegat.core.Core;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.TranslationException;
@@ -50,7 +49,7 @@ import org.omegat.filters4.xml.AbstractXmlFilter;
 import org.omegat.util.Log;
 
 /**
- * Filter for a file format which is an archive containing XML
+ * Filter for a file format which is an archive containing XML.
  *
  * @author Thomas Cordonnier
  */
@@ -58,15 +57,17 @@ public abstract class AbstractZipFilter extends AbstractFilter {
 
     @Override
     public boolean isSourceEncodingVariable() {
-         return true;
+        return true;
     }
 
     @Override
     public boolean isTargetEncodingVariable() {
-         return true;
+        return true;
     }
 
-    /** Indicate that this file contained in the archive should be considered **/
+    /**
+     * Indicate that this file contained in the archive should be considered
+     **/
     protected abstract boolean acceptInternalFile(ZipEntry entry, FilterContext context);
 
     @Override
@@ -87,24 +88,34 @@ public abstract class AbstractZipFilter extends AbstractFilter {
         return false;
     }
 
-    /** Indicate that this file contained in the archive should be translated **/
-    protected abstract boolean mustTranslateInternalFile(ZipEntry entry, boolean writeMode, FilterContext context);
+    /**
+     * Indicate that this file contained in the archive should be translated
+     **/
+    protected abstract boolean mustTranslateInternalFile(ZipEntry entry, boolean writeMode,
+            FilterContext context);
 
-    /** Indicate that this file contained in the archive should not appear in the target at all. Defaults to false **/
+    /**
+     * Indicate that this file contained in the archive should not appear in the
+     * target at all. Defaults to false.
+     **/
     protected boolean mustDeleteInternalFile(ZipEntry entry, boolean writeMode, FilterContext context) {
-         return false;
+        return false;
     }
 
     protected abstract AbstractXmlFilter getFilter(ZipEntry ze);
 
-    /** If not null, indicates that we want to see internal XML files in a certain order **/
+    /**
+     * If not null, indicates that we want to see internal XML files in a
+     * certain order.
+     **/
     protected Comparator<ZipEntry> getEntryComparator() {
-         return null;
+        return null;
     }
 
     /** Processes a ZIP file. */
     @Override
-    public void processFile(File inFile, File outFile, FilterContext fc) throws IOException, TranslationException {
+    public void processFile(File inFile, File outFile, FilterContext fc)
+            throws IOException, TranslationException {
         ZipFile zf = new ZipFile(inFile);
         ZipOutputStream zipout = null;
         if (outFile != null) {
@@ -113,7 +124,8 @@ public abstract class AbstractZipFilter extends AbstractFilter {
 
         try {
             Enumeration<? extends ZipEntry> zipcontents = zf.entries();
-            List<ZipEntry> toTranslate = new LinkedList<>(); Comparator<ZipEntry> cmp = getEntryComparator();
+            List<ZipEntry> toTranslate = new LinkedList<>();
+            Comparator<ZipEntry> cmp = getEntryComparator();
             while (zipcontents.hasMoreElements()) {
                 ZipEntry ze = zipcontents.nextElement();
                 if (mustTranslateInternalFile(ze, outFile != null, fc)) {
@@ -135,7 +147,7 @@ public abstract class AbstractZipFilter extends AbstractFilter {
             if (cmp != null) {
                 Collections.sort(toTranslate, cmp);
             }
-            for (ZipEntry ze: toTranslate) {
+            for (ZipEntry ze : toTranslate) {
                 translateEntry(zf, zipout, fc, ze);
             }
         } finally {
@@ -145,6 +157,7 @@ public abstract class AbstractZipFilter extends AbstractFilter {
             zf.close();
         }
     }
+
     private void translateEntry(ZipFile zf, ZipOutputStream zipout, FilterContext fc, ZipEntry ze) {
         try {
             AbstractXmlFilter xmlfilter = getFilter(ze);
@@ -153,19 +166,22 @@ public abstract class AbstractZipFilter extends AbstractFilter {
             if (zipout == null) {
                 xmlfilter.processFile(reader, null, fc);
             } else {
-                ZipEntry outEntry = new ZipEntry(ze.getName()); zipout.putNextEntry(outEntry);
-                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter (zipout, xReader.getEncoding()));
+                ZipEntry outEntry = new ZipEntry(ze.getName());
+                zipout.putNextEntry(outEntry);
+                BufferedWriter writer = new BufferedWriter(
+                        new OutputStreamWriter(zipout, xReader.getEncoding()));
                 xmlfilter.processFile(reader, writer, fc);
                 zipout.closeEntry();
             }
         } catch (Exception e) {
             Log.log(e);
-            // continue: an error in one file should not prevent generation of other files!
+            // continue: an error in one file should not prevent generation of
+            // other files!
         }
     }
 
     protected void processFile(BufferedReader inFile, BufferedWriter outFile, FilterContext fc)
-        throws IOException, TranslationException {
+            throws IOException, TranslationException {
         throw new IOException("Not implemented");
     }
 

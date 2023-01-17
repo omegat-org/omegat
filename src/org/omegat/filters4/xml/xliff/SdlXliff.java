@@ -52,7 +52,7 @@ import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 
 /**
- * Overrides XLiff-1 for features which only work with SDL-Xliff
+ * Overrides XLiff-1 for features which only work with SDL-Xliff.
  *
  * @author Thomas Cordonnier
  */
@@ -69,7 +69,7 @@ public class SdlXliff extends Xliff1Filter {
 
     @Override
     public Instance[] getDefaultInstances() {
-        return new Instance[]  { new Instance("*.sdlxliff") };
+        return new Instance[] { new Instance("*.sdlxliff") };
     }
 
     @Override
@@ -80,7 +80,8 @@ public class SdlXliff extends Xliff1Filter {
                 return false;
             }
             namespace = el.getName().getNamespaceURI();
-            if (el.getAttributeByName(new QName("http://sdl.com/FileTypes/SdlXliff/1.0", "version")) != null) {
+            if (el.getAttributeByName(
+                    new QName("http://sdl.com/FileTypes/SdlXliff/1.0", "version")) != null) {
                 return true;
             }
             return super.isFileSupported(inFile, config, context);
@@ -102,7 +103,8 @@ public class SdlXliff extends Xliff1Filter {
     private java.util.Set<String> midSet = new java.util.HashSet<String>();
     private boolean has_seg_defs = false, mid_has_modifier = false, mid_has_modif_date = false;
 
-    @Override    // also starts on cmt-defs or tag-defs, else like in standard XLIFF
+    @Override // also starts on cmt-defs or tag-defs, else like in standard
+              // XLIFF
     protected void checkCurrentCursorPosition(javax.xml.stream.XMLStreamReader reader, boolean doWrite) {
         if (reader.getEventType() == StartElement.START_ELEMENT) {
             String name = reader.getLocalName();
@@ -118,7 +120,7 @@ public class SdlXliff extends Xliff1Filter {
 
     @Override
     protected boolean processStartElement(StartElement startElement, XMLStreamWriter writer)
-        throws  XMLStreamException {
+            throws XMLStreamException {
         if (startElement.getName().getLocalPart().equals("cmt-def")) {
             commentBuf = new StringBuffer();
             sdlComments.put(startElement.getAttributeByName(new QName("id")).getValue(), commentBuf);
@@ -128,9 +130,11 @@ public class SdlXliff extends Xliff1Filter {
             if (startElement.getAttributeByName(new QName("mtype")).getValue().equals("seg")) {
                 currentMid = startElement.getAttributeByName(new QName("mid")).getValue();
                 midSet.add(currentMid);
-            } else if (startElement.getAttributeByName(new QName("mtype")).getValue().equals("x-sdl-comment")) {
-                String id = startElement.getAttributeByName(new QName("http://sdl.com/FileTypes/SdlXliff/1.0", "cid"))
-                    .getValue();
+            } else if (startElement.getAttributeByName(new QName("mtype")).getValue()
+                    .equals("x-sdl-comment")) {
+                String id = startElement
+                        .getAttributeByName(new QName("http://sdl.com/FileTypes/SdlXliff/1.0", "cid"))
+                        .getValue();
                 this.addNoteFromSource(currentMid, sdlComments.get(id).toString());
             }
         }
@@ -140,19 +144,21 @@ public class SdlXliff extends Xliff1Filter {
         }
         if (writer != null) {
             if (startElement.getName().equals(new QName("http://sdl.com/FileTypes/SdlXliff/1.0", "seg"))) {
-                mid_has_modifier = false; mid_has_modif_date = false;
-                currentProp = null; has_seg_defs = true; // start a new set of properties
+                mid_has_modifier = false;
+                mid_has_modif_date = false;
+                currentProp = null;
+                has_seg_defs = true; // start a new set of properties
                 fromEventToWriter(eFactory.createStartElement(startElement.getName(), null,
-                    startElement.getNamespaces()), writer);
+                        startElement.getNamespaces()), writer);
                 String id = null;
-                for (java.util.Iterator<Attribute> iter = startElement.getAttributes(); iter.hasNext(); ) {
+                for (java.util.Iterator<Attribute> iter = startElement.getAttributes(); iter.hasNext();) {
                     Attribute attr = iter.next();
                     if (attr.getName().getLocalPart().equals("id")) {
                         id = attr.getValue();
                     }
                     if (!attr.getName().getLocalPart().equals("conf")) {
                         writer.writeAttribute(attr.getName().getPrefix(), attr.getName().getNamespaceURI(),
-                            attr.getName().getLocalPart(), attr.getValue());
+                                attr.getName().getLocalPart(), attr.getValue());
                     }
                 }
                 if ((id != null) && this.isCurrentSegmentTranslated(id)) {
@@ -172,50 +178,52 @@ public class SdlXliff extends Xliff1Filter {
 
     @Override
     protected boolean processEndElement(EndElement endElement, XMLStreamWriter writer)
-        throws  XMLStreamException {
+            throws XMLStreamException {
         if (endElement.getName().getLocalPart().equals("seg")) {
             if ((writer != null) && isCurrentSegmentTranslated(currentMid)) {
                 if (!mid_has_modifier) { // no such value in the file
                     writer.writeStartElement("http://sdl.com/FileTypes/SdlXliff/1.0", "value");
                     writer.writeAttribute("key", "last_modified_by");
                     writer.writeCharacters(Preferences.getPreferenceDefault(Preferences.TEAM_AUTHOR,
-                        System.getProperty("user.name")));
-                    writer.writeEndElement(/*"sdl:value*/);
+                            System.getProperty("user.name")));
+                    writer.writeEndElement(/* "sdl:value */);
                 }
                 if (!mid_has_modif_date) { // no such value in the file
                     writer.writeStartElement("http://sdl.com/FileTypes/SdlXliff/1.0", "value");
                     writer.writeAttribute("key", "modified_on");
                     writer.writeCharacters(TRADOS_DATE_FORMAT.format(new java.util.Date()));
-                    writer.writeEndElement(/*"sdl:value*/);
+                    writer.writeEndElement(/* "sdl:value */);
                 }
             }
-            midSet.remove(currentMid); currentMid = null;
+            midSet.remove(currentMid);
+            currentMid = null;
         }
         if (endElement.getName().getLocalPart().equals("trans-unit")) {
             if (writer != null) {
                 if ((midSet.size() > 0) && (!has_seg_defs)) {
                     writer.writeStartElement("http://sdl.com/FileTypes/SdlXliff/1.0", "seg-defs");
                 }
-                for (String mid0: midSet) {    // those which were not generated by previous lines
+                for (String mid0 : midSet) { // those which were not generated
+                                             // by previous lines
                     writer.writeStartElement("http://sdl.com/FileTypes/SdlXliff/1.0", "seg");
                     writer.writeAttribute("id", mid0);
                     writer.writeAttribute("conf", "Translated");
                     if (isCurrentSegmentTranslated(mid0)) {
                         writer.writeStartElement("http://sdl.com/FileTypes/SdlXliff/1.0", "value");
                         writer.writeAttribute("key", "last_modified_by");
-                        writer.writeCharacters(Preferences.getPreferenceDefault(
-                            Preferences.TEAM_AUTHOR, System.getProperty("user.name")));
-                        writer.writeEndElement(/*"sdl:value*/);
+                        writer.writeCharacters(Preferences.getPreferenceDefault(Preferences.TEAM_AUTHOR,
+                                System.getProperty("user.name")));
+                        writer.writeEndElement(/* "sdl:value */);
 
                         writer.writeStartElement("http://sdl.com/FileTypes/SdlXliff/1.0", "value");
                         writer.writeAttribute("key", "modified_on");
                         writer.writeCharacters(TRADOS_DATE_FORMAT.format(new java.util.Date()));
-                        writer.writeEndElement(/*"sdl:value*/);
+                        writer.writeEndElement(/* "sdl:value */);
                     }
-                    writer.writeEndElement(/*"sdl:seg*/);
+                    writer.writeEndElement(/* "sdl:seg */);
                 }
                 if ((midSet.size() > 0) && (!has_seg_defs)) {
-                    writer.writeEndElement(/*"sdl:seg-defs */);
+                    writer.writeEndElement(/* "sdl:seg-defs */);
                 }
             }
             midSet.clear();
@@ -235,7 +243,9 @@ public class SdlXliff extends Xliff1Filter {
                         return;
                     }
 
-                    UUID id = UUID.randomUUID(); omegatNotes.put(id, trans.note); defaultNoteLocations.put(source, id);
+                    UUID id = UUID.randomUUID();
+                    omegatNotes.put(id, trans.note);
+                    defaultNoteLocations.put(source, id);
                     createSdlNote(id, trans, writer);
                 });
                 proj.iterateByMultipleTranslations((EntryKey key, TMXEntry trans) -> {
@@ -243,11 +253,14 @@ public class SdlXliff extends Xliff1Filter {
                         return;
                     }
 
-                    UUID id = UUID.randomUUID(); omegatNotes.put(id, trans.note); altNoteLocations.put(key, id);
+                    UUID id = UUID.randomUUID();
+                    omegatNotes.put(id, trans.note);
+                    altNoteLocations.put(key, id);
                     createSdlNote(id, trans, writer);
                 });
             }
-            return false; // when isEventMode changes, next iteration will send the current event
+            return false; // when isEventMode changes, next iteration will send
+                          // the current event
         }
         return super.processEndElement(endElement, writer);
     }
@@ -255,16 +268,16 @@ public class SdlXliff extends Xliff1Filter {
     // Do not generate tag for comment inside source
     protected boolean isUntaggedTag(StartElement stEl) {
         return (stEl.getName().equals(new QName("urn:oasis:names:tc:xliff:document:1.2", "mrk"))
-            && (stEl.getAttributeByName(new QName("mtype")).getValue().equals("x-sdl-comment")
-            || stEl.getAttributeByName(new QName("mtype")).getValue().equals("x-sdl-added")))
-            || super.isUntaggedTag(stEl);
+                && (stEl.getAttributeByName(new QName("mtype")).getValue().equals("x-sdl-comment")
+                        || stEl.getAttributeByName(new QName("mtype")).getValue().equals("x-sdl-added")))
+                || super.isUntaggedTag(stEl);
     }
 
     // Track change 'DELETED' should not appear at all in the
     protected boolean isDeletedTag(StartElement stEl) {
         return (stEl.getName().equals(new QName("urn:oasis:names:tc:xliff:document:1.2", "mrk"))
-            && stEl.getAttributeByName(new QName("mtype")).getValue().equals("x-sdl-deleted"))
-            || super.isUntaggedTag(stEl);
+                && stEl.getAttributeByName(new QName("mtype")).getValue().equals("x-sdl-deleted"))
+                || super.isUntaggedTag(stEl);
     }
 
     @Override
@@ -273,7 +286,7 @@ public class SdlXliff extends Xliff1Filter {
             try {
                 String tagId = stEl.getAttributeByName(new QName("id")).getValue();
                 List<XMLEvent> contents = tagDefs.get(tagId);
-                for (XMLEvent ev: contents) {
+                for (XMLEvent ev : contents) {
                     if (ev.isCharacters()) {
                         String txt = ev.asCharacters().getData();
                         if (txt.contains("italic") && !txt.contains("bold")) {
@@ -307,8 +320,7 @@ public class SdlXliff extends Xliff1Filter {
                         }
                     }
                 }
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
             }
         }
         // default
@@ -322,9 +334,9 @@ public class SdlXliff extends Xliff1Filter {
             writer.writeStartElement("http://sdl.com/FileTypes/SdlXliff/1.0", "Comments");
             writer.writeStartElement("http://sdl.com/FileTypes/SdlXliff/1.0", "Comment");
             writer.writeCharacters(trans.note);
-            writer.writeEndElement(/*Comment*/);
-            writer.writeEndElement(/*Comments*/);
-            writer.writeEndElement(/*cmt-def*/);
+            writer.writeEndElement(/* Comment */);
+            writer.writeEndElement(/* Comments */);
+            writer.writeEndElement(/* cmt-def */);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -336,24 +348,28 @@ public class SdlXliff extends Xliff1Filter {
             commentBuf.append(event.toString());
             if ((writer != null) && isCurrentSegmentTranslated(currentMid)) {
                 if ("last_modified_by".equals(currentProp)) {
-                    writer.writeCharacters(Preferences.getPreferenceDefault(
-                        Preferences.TEAM_AUTHOR, System.getProperty("user.name")));
-                    mid_has_modifier = true; return false;
+                    writer.writeCharacters(Preferences.getPreferenceDefault(Preferences.TEAM_AUTHOR,
+                            System.getProperty("user.name")));
+                    mid_has_modifier = true;
+                    return false;
                 }
                 if ("modified_on".equals(currentProp)) {
                     writer.writeCharacters(TRADOS_DATE_FORMAT.format(new java.util.Date()));
-                    mid_has_modif_date = true; return false;
+                    mid_has_modif_date = true;
+                    return false;
                 }
             }
         }
         return super.processCharacters(event, writer);
     }
 
-    // This method is called only during translation generation: so we can use it to add notes!
+    // This method is called only during translation generation: so we can use
+    // it to add notes!
     @Override
     protected List<XMLEvent> restoreTags(String unitId, String path, String src, String tra) {
         List<XMLEvent> res = super.restoreTags(unitId, path, src, tra);
-        EntryKey key = new EntryKey("", src, unitId, null, null, path); UUID addNote = null;
+        EntryKey key = new EntryKey("", src, unitId, null, null, path);
+        UUID addNote = null;
         if (altNoteLocations.get(key) != null) {
             addNote = altNoteLocations.get(key);
         } else if (defaultNoteLocations.get(src) != null) {
@@ -361,12 +377,13 @@ public class SdlXliff extends Xliff1Filter {
         }
         if ((addNote != null) && (omegatNotes.get(addNote) != null)) {
             List<Attribute> attr = new java.util.LinkedList<Attribute>();
-            attr.add(eFactory.createAttribute("sdl", "http://sdl.com/FileTypes/SdlXliff/1.0",
-                "cid", addNote.toString()));
+            attr.add(eFactory.createAttribute("sdl", "http://sdl.com/FileTypes/SdlXliff/1.0", "cid",
+                    addNote.toString()));
             attr.add(eFactory.createAttribute(new QName("mtype"), "x-sdl-comment"));
             res.add(0, eFactory.createStartElement(new QName("urn:oasis:names:tc:xliff:document:1.2", "mrk"),
-                attr.iterator(), null));
-            res.add(eFactory.createEndElement(new QName("urn:oasis:names:tc:xliff:document:1.2", "mrk"), null));
+                    attr.iterator(), null));
+            res.add(eFactory.createEndElement(new QName("urn:oasis:names:tc:xliff:document:1.2", "mrk"),
+                    null));
         }
         return res;
     }
@@ -396,15 +413,15 @@ public class SdlXliff extends Xliff1Filter {
                 java.io.Writer writer = new java.io.StringWriter();
                 try {
                     javax.xml.stream.XMLEventWriter eventWriter = oFactory.createXMLEventWriter(writer);
-                    for (XMLEvent ev: tagDefList) {
+                    for (XMLEvent ev : tagDefList) {
                         eventWriter.add(ev);
                     }
                 } catch (XMLStreamException xe) {
                     try {
-                        for (XMLEvent ev: saved)
+                        for (XMLEvent ev : saved)
                             if (ev.isEndElement()) {
                                 writer.write("</" + ev.asEndElement().getName().getPrefix() + ":"
-                                    + ev.asEndElement().getName().getLocalPart() + ">");
+                                        + ev.asEndElement().getName().getLocalPart() + ">");
                             } else {
                                 writer.write(ev.toString());
                             }
@@ -417,9 +434,8 @@ public class SdlXliff extends Xliff1Filter {
         return base;
     }
 
-
     @Override
     protected boolean isStandardTranslationState() {
-        return false;  // because SDLXLIFF does not have attributes in target
+        return false; // because SDLXLIFF does not have attributes in target
     }
 }

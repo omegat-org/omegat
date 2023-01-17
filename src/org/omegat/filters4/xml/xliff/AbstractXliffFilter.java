@@ -48,7 +48,7 @@ import org.omegat.filters2.Instance;
 import org.omegat.filters2.FilterContext;
 
 /**
- * Filter for support Xliff 1 files as bilingual (unlike filters3/xml/xliff)
+ * Filter for support Xliff files as bilingual.
  *
  * @author Thomas Cordonnier
  */
@@ -58,7 +58,7 @@ abstract class AbstractXliffFilter extends AbstractXmlFilter {
 
     @Override
     public Instance[] getDefaultInstances() {
-        return new Instance[]  { new Instance("*.xlf"), new Instance("*.xliff") };
+        return new Instance[] { new Instance("*.xlf"), new Instance("*.xliff") };
     }
 
     protected String namespace = null;
@@ -70,7 +70,8 @@ abstract class AbstractXliffFilter extends AbstractXmlFilter {
             if (el == null) {
                 return false;
             }
-            if (el.getAttributeByName(new QName("http://sdl.com/FileTypes/SdlXliff/1.0", "version")) != null) {
+            if (el.getAttributeByName(
+                    new QName("http://sdl.com/FileTypes/SdlXliff/1.0", "version")) != null) {
                 return false;
             }
             namespace = el.getName().getNamespaceURI();
@@ -90,7 +91,8 @@ abstract class AbstractXliffFilter extends AbstractXmlFilter {
 
     protected abstract String versionPrefix();
 
-    // ----------------------------- AbstractXmlFilter part ----------------------
+    // ----------------------------- AbstractXmlFilter part
+    // ----------------------
 
     /* -- Data about current unit */
     protected String path = "/", ignoreScope = null;
@@ -99,27 +101,30 @@ abstract class AbstractXliffFilter extends AbstractXmlFilter {
     protected List<XMLEvent> source = new LinkedList<>(), target = null, note = new LinkedList<>();
 
     protected void cleanBuffers() {
-        source.clear(); target = null; note.clear();
+        source.clear();
+        target = null;
+        note.clear();
     }
 
-    @Override    // start events on body
+    @Override // start events on body
     protected void checkCurrentCursorPosition(XMLStreamReader reader, boolean doWrite) {
         if (reader.getEventType() == StartElement.START_ELEMENT) {
             if (reader.getLocalName().equals("body")) {
                 this.isEventMode = true;
             } else if (reader.getLocalName().equals("xliff")) {
-                 if (namespace == null) {
-                     namespace = reader.getName().getNamespaceURI();
-                 }
+                if (namespace == null) {
+                    namespace = reader.getName().getNamespaceURI();
+                }
             } else if (reader.getLocalName().equals("file") || reader.getLocalName().equals("group")
-            || reader.getLocalName().equals("unit")) {
+                    || reader.getLocalName().equals("unit")) {
                 final List<Attribute> attributes = new LinkedList<>();
                 for (int i = 0, len = reader.getAttributeCount(); i < len; i++) {
-                    attributes.add(eFactory.createAttribute(reader.getAttributeName(i), reader.getAttributeValue(i)));
+                    attributes.add(eFactory.createAttribute(reader.getAttributeName(i),
+                            reader.getAttributeValue(i)));
                 }
                 try {
-                     processStartElement(eFactory.createStartElement(reader.getName(), attributes.iterator(),
-                         null), null);
+                    processStartElement(
+                            eFactory.createStartElement(reader.getName(), attributes.iterator(), null), null);
                 } catch (Exception ex) {
                 }
             }
@@ -127,7 +132,8 @@ abstract class AbstractXliffFilter extends AbstractXmlFilter {
     }
 
     @Override
-    protected boolean processCharacters(Characters event, XMLStreamWriter evWriter) throws XMLStreamException {
+    protected boolean processCharacters(Characters event, XMLStreamWriter evWriter)
+            throws XMLStreamException {
         if (currentBuffer != null) {
             currentBuffer.add(event);
         }
@@ -139,7 +145,7 @@ abstract class AbstractXliffFilter extends AbstractXmlFilter {
             if ("no".equals(startElement.getAttributeByName(new QName("translate")).getValue())) {
                 ignoreScope = startElement.getName().getLocalPart();
             } else if ("yes".equals(startElement.getAttributeByName(new QName("translate")).getValue())) {
-                if (ignoreScope != null)  {
+                if (ignoreScope != null) {
                     ignoreScope = "!" + startElement.getName().getLocalPart() + " " + ignoreScope;
                 }
             }
@@ -155,7 +161,7 @@ abstract class AbstractXliffFilter extends AbstractXmlFilter {
 
     /** Add one unit to OmegaT, or more in case of <mrk mtype="seg"> **/
     protected void registerCurrentTransUnit(String entryId, List<XMLEvent> unitSource,
-        List<XMLEvent> unitTarget, String notePattern) {
+            List<XMLEvent> unitTarget, String notePattern) {
         String src = buildTags(unitSource, false);
         String tra = null;
         if (unitTarget != null && unitTarget.size() > 0) {
@@ -167,14 +173,16 @@ abstract class AbstractXliffFilter extends AbstractXmlFilter {
         if (entryParseCallback != null) {
             StringBuffer noteStr = null;
             if (notePattern != null && note != null && note.size() > 0) {
-                 noteStr = new StringBuffer();
-                 for (XMLEvent ev: note) {
-                     noteStr.append(ev.toString());
-                 }
+                noteStr = new StringBuffer();
+                for (XMLEvent ev : note) {
+                    noteStr.append(ev.toString());
+                }
             }
             if (notePattern != null && !".*".equals(notePattern)) {
-                StringBuffer subNoteBuf = noteStr; if (subNoteBuf != null) {
-                    subNoteBuf = new StringBuffer(); String noteStrStr = noteStr.toString();
+                StringBuffer subNoteBuf = noteStr;
+                if (subNoteBuf != null) {
+                    subNoteBuf = new StringBuffer();
+                    String noteStrStr = noteStr.toString();
                     Matcher noteMatch = Pattern.compile(notePattern).matcher(noteStr.toString());
                     while (noteMatch.find()) {
                         if (noteMatch.group(1).equals(entryId.substring(entryId.lastIndexOf("/") + 1))) {
@@ -188,7 +196,7 @@ abstract class AbstractXliffFilter extends AbstractXmlFilter {
                 noteStr = subNoteBuf;
             }
             entryParseCallback.addEntry(entryId, src.toString(), tra, false,
-                noteStr == null ? null : noteStr.toString(), path, this, buildProtectedParts(src));
+                    noteStr == null ? null : noteStr.toString(), path, this, buildProtectedParts(src));
         }
         if (entryAlignCallback != null) {
             entryAlignCallback.addTranslation(entryId, src.toString(), tra.toString(), false, path, this);
@@ -202,19 +210,19 @@ abstract class AbstractXliffFilter extends AbstractXmlFilter {
     protected abstract String[] getPairIdNames(boolean start);
 
     // Starts an OmegaT tag based on start element and native code
-    protected String startPair(boolean reuse, boolean isEmpty, StartElement stEl, char prefix,
-        int count, List<XMLEvent> nativeCode) {
+    protected String startPair(boolean reuse, boolean isEmpty, StartElement stEl, char prefix, int count,
+            List<XMLEvent> nativeCode) {
         if (reuse) {
             return findKey(stEl, isEmpty);
         } else {
             tagsMap.put("" + prefix + count, nativeCode);
             if (!isEmpty) {
                 Attribute pairId = null;
-                for (String attrName: getPairIdNames(true)) {
-                     pairId = stEl.getAttributeByName(new QName(attrName));
-                     if (pairId != null) {
-                         break;
-                     }
+                for (String attrName : getPairIdNames(true)) {
+                    pairId = stEl.getAttributeByName(new QName(attrName));
+                    if (pairId != null) {
+                        break;
+                    }
                 }
                 pairedHolders.put(pairId.getValue(), "" + prefix + count);
             }
@@ -223,14 +231,15 @@ abstract class AbstractXliffFilter extends AbstractXmlFilter {
     }
 
     // Ends an OmegaT tag based on start element and native code
-    protected String endPair(boolean reuse, StartElement stEl, char prefix, int count, List<XMLEvent> nativeCode) {
+    protected String endPair(boolean reuse, StartElement stEl, char prefix, int count,
+            List<XMLEvent> nativeCode) {
         tagsCount.put(prefix, count); // this is not a new tag!
         Attribute pairId = null;
-        for (String attrName: getPairIdNames(false)) {
-             pairId = stEl.getAttributeByName(new QName(attrName));
-             if (pairId != null) {
-                 break;
-             }
+        for (String attrName : getPairIdNames(false)) {
+            pairId = stEl.getAttributeByName(new QName(attrName));
+            if (pairId != null) {
+                break;
+            }
         }
         String key = pairedHolders.get(pairId.getValue());
         if (!reuse) {
@@ -239,13 +248,17 @@ abstract class AbstractXliffFilter extends AbstractXmlFilter {
         return "</" + key + ">";
     }
 
-    protected void startStackElement(boolean reuse, StartElement stEl, char prefix, int count, StringBuffer res) {
+    protected void startStackElement(boolean reuse, StartElement stEl, char prefix, int count,
+            StringBuffer res) {
         if (reuse) {
-            String k = findKey(stEl, false); Matcher m = OMEGAT_TAG.matcher(k);
+            String k = findKey(stEl, false);
+            Matcher m = OMEGAT_TAG.matcher(k);
             if (m.matches()) {
-                 tagStack.push(m.group(2)); res.append(k);
+                tagStack.push(m.group(2));
+                res.append(k);
             } else {
-                 tagStack.push("z" + count); res.append("<z").append(count).append(">");
+                tagStack.push("z" + count);
+                res.append("<z").append(count).append(">");
             }
         } else {
             tagsMap.put("" + prefix + count, Collections.singletonList(stEl));
@@ -254,5 +267,6 @@ abstract class AbstractXliffFilter extends AbstractXmlFilter {
         }
     }
 
-    protected static final javax.xml.stream.XMLEventFactory eFactory = javax.xml.stream.XMLEventFactory.newInstance();
+    protected static final javax.xml.stream.XMLEventFactory eFactory = javax.xml.stream.XMLEventFactory
+            .newInstance();
 }

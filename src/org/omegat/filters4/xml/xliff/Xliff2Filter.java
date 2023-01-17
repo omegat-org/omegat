@@ -39,15 +39,14 @@ import javax.xml.stream.events.XMLEvent;
 
 import org.omegat.util.OStrings;
 
-
 /**
- * Filter for support Xliff 2.0 files as bilingual (unlike filters3/xml/xliff).
+ * Filter for support Xliff 2.0 files as bilingual.
  *
  * @author Thomas Cordonnier
  */
 public class Xliff2Filter extends AbstractXliffFilter {
 
-    // ---------------------------- IFilter API ----------------------------
+    // --------------------------- IFilter API ----------------------------
 
     @Override
     public String getFileFormatName() {
@@ -55,17 +54,17 @@ public class Xliff2Filter extends AbstractXliffFilter {
     }
 
     protected final String versionPrefix() {
-        return "2.";  // can be 2.0, maybe more in the future
+        return "2."; // can be 2.0, maybe more in the future
     }
 
-    // ----------------------------- AbstractXmlFilter part ----------------------
+    // ------------------- AbstractXmlFilter part -------------------------
 
-    @Override    // start events on body
+    @Override // start events on body
     protected void checkCurrentCursorPosition(javax.xml.stream.XMLStreamReader reader, boolean doWrite) {
         super.checkCurrentCursorPosition(reader, doWrite);
         if (reader.getEventType() == StartElement.START_ELEMENT) {
             if (reader.getLocalName().equals("notes") || reader.getLocalName().equals("group")
-                || reader.getLocalName().equals("unit")) {
+                    || reader.getLocalName().equals("unit")) {
                 this.isEventMode = true;
             }
         }
@@ -77,98 +76,124 @@ public class Xliff2Filter extends AbstractXliffFilter {
 
     @Override
     protected boolean processStartElement(StartElement startElement, XMLStreamWriter writer)
-        throws XMLStreamException {
+            throws XMLStreamException {
         switch (startElement.getName().getLocalPart()) {
-            case "xliff":
-                if (namespace == null) {
-                    namespace = startElement.getName().getNamespaceURI();
-                }
-                break;
-            case "file": case "group": case "unit":
-                try {
-                    path += "/" + startElement.getAttributeByName(new QName("id")).getValue();
-                } catch (NullPointerException noid) { // Note: in spec, id is REQUIRED
-                    throw new XMLStreamException(OStrings.getString(
-                            "XLIFF_MANDATORY_ORIGINAL_MISSING",  "id",  startElement.getName().getLocalPart()));
-                }
-                updateIgnoreScope(startElement);
-                break;
-            case "segment":
-                try {
-                    segId = startElement.getAttributeByName(new QName("id")).getValue(); 
-                } catch (NullPointerException noid) { // Note: in spec, id is OPTIONAL
-                    if (segId == null) {
+        case "xliff":
+            if (namespace == null) {
+                namespace = startElement.getName().getNamespaceURI();
+            }
+            break;
+        case "file":
+        case "group":
+        case "unit":
+            try {
+                path += "/" + startElement.getAttributeByName(new QName("id")).getValue();
+            } catch (NullPointerException noid) { // Note: in spec, id is
+                                                  // REQUIRED
+                throw new XMLStreamException(OStrings.getString("XLIFF_MANDATORY_ORIGINAL_MISSING", "id",
+                        startElement.getName().getLocalPart()));
+            }
+            updateIgnoreScope(startElement);
+            break;
+        case "segment":
+            try {
+                segId = startElement.getAttributeByName(new QName("id")).getValue();
+            } catch (NullPointerException noid) { // Note: in spec, id is
+                                                  // OPTIONAL
+                if (segId == null) {
+                    segId = "1";
+                } else {
+                    try {
+                        segId = Integer.toString(Integer.parseInt(segId) + 1);
+                    } catch (NumberFormatException fmt) {
                         segId = "1";
-                    } else {
-                        try {
-                            segId = Integer.toString(Integer.parseInt(segId) + 1);
-                        } catch (NumberFormatException fmt) {
-                            segId = "1";
-                        }
                     }
                 }
-                flushedSegment = false;
-                break;
-            case "source": currentBuffer = source; source.clear(); break;
-            case "target": target = new LinkedList<XMLEvent>(); currentBuffer = target; inTarget = true; break;
-            case "notes": note.clear(); break;
-            case "note":
-                if (startElement.getAttributeByName(new QName("id")) != null) {
-                    note.add(eFactory.createCharacters("\n\n["
-                        + startElement.getAttributeByName(new QName("id")).getValue() + "] "));
-                } else if (!note.isEmpty()) {
-                    note.add(eFactory.createCharacters("\n\n"));
-                }
-                currentBuffer = note; break;
-            default:
-                if (currentBuffer != null) {
-                    currentBuffer.add(startElement);
-                }
-                // <target> must be before any oter-namespace markup
-                else if (((ignoreScope == null || ignoreScope.startsWith("!")) && (segId != null))
+            }
+            flushedSegment = false;
+            break;
+        case "source":
+            currentBuffer = source;
+            source.clear();
+            break;
+        case "target":
+            target = new LinkedList<XMLEvent>();
+            currentBuffer = target;
+            inTarget = true;
+            break;
+        case "notes":
+            note.clear();
+            break;
+        case "note":
+            if (startElement.getAttributeByName(new QName("id")) != null) {
+                note.add(eFactory.createCharacters(
+                        "\n\n[" + startElement.getAttributeByName(new QName("id")).getValue() + "] "));
+            } else if (!note.isEmpty()) {
+                note.add(eFactory.createCharacters("\n\n"));
+            }
+            currentBuffer = note;
+            break;
+        default:
+            if (currentBuffer != null) {
+                currentBuffer.add(startElement);
+            }
+            // <target> must be before any other-namespace markup
+            else if (((ignoreScope == null || ignoreScope.startsWith("!")) && (segId != null))
                     && (!startElement.getName().getNamespaceURI().equals(namespace))) {
-                    flushTranslations(writer);
-                }
+                flushTranslations(writer);
+            }
         }
         return !inTarget;
     }
 
     @Override
     protected boolean processEndElement(EndElement endElement, XMLStreamWriter writer)
-        throws XMLStreamException {
+            throws XMLStreamException {
         switch (endElement.getName().getLocalPart()) {
-            case "source": case "note": currentBuffer = null; break;
-            case "target":
-                currentBuffer = null;
-                if (ignoreScope == null || ignoreScope.startsWith("!")) {
-                   flushTranslations(writer); // we are in the correct place
-                }
-                inTarget = false; return false;
-            case "segment":
-                if (ignoreScope == null || ignoreScope.startsWith("!")) {
-                    flushTranslations(writer); // if there was no <target> at all
-                }
-                if (ignoreScope == null || ignoreScope.startsWith("!")) {
-                    registerCurrentTransUnit(segId, source, target, ".*");
-                }
-                segId = null; cleanBuffers(); break;
-            case "unit": case "group": case "file":
-                segId = ""; path = path.substring(0, path.lastIndexOf('/')); cleanBuffers();
-                if (endElement.getName().getLocalPart().equals(ignoreScope)) {
-                    ignoreScope = null;
-                } else if (ignoreScope != null && ignoreScope.startsWith("!" + endElement.getName().getLocalPart())) {
-                    ignoreScope = ignoreScope.substring(endElement.getName().getLocalPart().length() + 2);
-                }
-                break;
-            default:
-                if (currentBuffer != null) {
-                    currentBuffer.add(endElement);
-                }
+        case "source":
+        case "note":
+            currentBuffer = null;
+            break;
+        case "target":
+            currentBuffer = null;
+            if (ignoreScope == null || ignoreScope.startsWith("!")) {
+                flushTranslations(writer); // we are in the correct place
+            }
+            inTarget = false;
+            return false;
+        case "segment":
+            if (ignoreScope == null || ignoreScope.startsWith("!")) {
+                flushTranslations(writer); // if there was no <target> at all
+            }
+            if (ignoreScope == null || ignoreScope.startsWith("!")) {
+                registerCurrentTransUnit(segId, source, target, ".*");
+            }
+            segId = null;
+            cleanBuffers();
+            break;
+        case "unit":
+        case "group":
+        case "file":
+            segId = "";
+            path = path.substring(0, path.lastIndexOf('/'));
+            cleanBuffers();
+            if (endElement.getName().getLocalPart().equals(ignoreScope)) {
+                ignoreScope = null;
+            } else if (ignoreScope != null
+                    && ignoreScope.startsWith("!" + endElement.getName().getLocalPart())) {
+                ignoreScope = ignoreScope.substring(endElement.getName().getLocalPart().length() + 2);
+            }
+            break;
+        default:
+            if (currentBuffer != null) {
+                currentBuffer.add(endElement);
+            }
         }
         return !inTarget;
     }
 
-    @Override protected String[] getPairIdNames(boolean start) {
+    @Override
+    protected String[] getPairIdNames(boolean start) {
         if (start) {
             return new String[] { "id" };
         } else {
@@ -176,48 +201,67 @@ public class Xliff2Filter extends AbstractXliffFilter {
         }
     }
 
-    /** Converts List<XMLEvent> to OmegaT format, with <x0/>, <g0>...</g0>, etc. Also build maps to be reused later **/
+    /**
+     * Converts List<XMLEvent> to OmegaT format, with <x0/>, <g0>...</g0>, etc.
+     * Also build maps to be reused later
+     **/
     protected String buildTags(List<XMLEvent> srcList, boolean reuse) {
         if (!reuse) {
-             tagsMap.clear();
-             for (Character c: tagsCount.keySet()) {
-                 tagsCount.put(c, 0);
-             }
+            tagsMap.clear();
+            for (Character c : tagsCount.keySet()) {
+                tagsCount.put(c, 0);
+            }
         }
         StringBuffer res = new StringBuffer(), saveBuf = null;
-        for (XMLEvent ev: srcList) {
+        for (XMLEvent ev : srcList) {
             if (ev.isCharacters()) {
                 res.append(ev.asCharacters().getData());
             } else if (ev.isStartElement()) {
                 StartElement stEl = ev.asStartElement();
-                String name = stEl.getName().getLocalPart(); char prefix = findPrefix(stEl);
+                String name = stEl.getName().getLocalPart();
+                char prefix = findPrefix(stEl);
                 Integer count = tagsCount.get(prefix);
                 if (count == null) {
-                    count = 0; tagsCount.put(prefix, count + 1);
+                    count = 0;
+                    tagsCount.put(prefix, count + 1);
                 }
                 switch (name) {
-                    case "mrk":
-                        break;
-                    case "ph": case "cp":  // empty element
-                        res.append(startPair(reuse, true, stEl, prefix, count, toPair(stEl))); break;
-                    case "sc": case "sm":  // empty element, paired, start
-                        res.append(startPair(reuse, false, stEl, prefix, count, toPair(stEl))); break;
-                    case "ec": case "em": // empty element, paired, end
-                        res.append(endPair(reuse, stEl, prefix, count, toPair(stEl))); break;
-                    case "pc": default:
-                        startStackElement(reuse, stEl, prefix, count, res); break;
+                case "mrk":
+                    break;
+                case "ph":
+                case "cp": // empty element
+                    res.append(startPair(reuse, true, stEl, prefix, count, toPair(stEl)));
+                    break;
+                case "sc":
+                case "sm": // empty element, paired, start
+                    res.append(startPair(reuse, false, stEl, prefix, count, toPair(stEl)));
+                    break;
+                case "ec":
+                case "em": // empty element, paired, end
+                    res.append(endPair(reuse, stEl, prefix, count, toPair(stEl)));
+                    break;
+                case "pc":
+                default:
+                    startStackElement(reuse, stEl, prefix, count, res);
+                    break;
                 }
             } else if (ev.isEndElement()) {
                 EndElement endEl = ev.asEndElement();
                 switch (endEl.getName().getLocalPart()) {
-                    case "mrk": break;
-                    case "ph": case "cp": case "sc": case "ec": break; // Should be empty!!!
-                    case "pc": default: {
-                        String pop = tagStack.pop();
-                        tagsMap.put("/" + pop, Collections.singletonList(ev));
-                        res.append("</").append(pop).append(">");
-                        break;
-                    }
+                case "mrk":
+                    break;
+                case "ph":
+                case "cp":
+                case "sc":
+                case "ec":
+                    break; // Should be empty!!!
+                case "pc":
+                default: {
+                    String pop = tagStack.pop();
+                    tagsMap.put("/" + pop, Collections.singletonList(ev));
+                    res.append("</").append(pop).append(">");
+                    break;
+                }
                 }
             }
         }
@@ -231,7 +275,8 @@ public class Xliff2Filter extends AbstractXliffFilter {
             if (type != null && type.getValue().startsWith("xlf:")) {
                 return type.getValue().charAt(4);
             }
-            return 'f'; // value = fmt, so we are almost in a format, but we don't know which one
+            return 'f'; // value = fmt, so we are almost in a format, but we
+                        // don't know which one
         }
         String name = stEl.getName().getLocalPart();
         if (name.equals("pc")) {
@@ -262,20 +307,24 @@ public class Xliff2Filter extends AbstractXliffFilter {
         String src = buildTags(source, false);
         String tra = entryTranslateCallback.getTranslation(segId, src, path);
         if (tra != null) {
-            writer.writeStartElement(namespace, "target"); // even if source did not contain target, here we generate translation from OmegaT
-            for (XMLEvent ev: restoreTags(tra)) {
+            writer.writeStartElement(namespace, "target");
+            // even if source did not contain target,
+            // here we generate translation from OmegaT
+            for (XMLEvent ev : restoreTags(tra)) {
                 fromEventToWriter(ev, writer);
             }
         } else {
             if (target == null) {
                 return;
             }
-            writer.writeStartElement(namespace, "target"); // only if there was <target> in the source file
-            for (XMLEvent ev: target) {
+            writer.writeStartElement(namespace, "target");
+            // only if there was <target> in the source file
+            for (XMLEvent ev : target) {
                 fromEventToWriter(ev, writer);
             }
         }
-        writer.writeEndElement(/*target*/); flushedSegment = true;
+        writer.writeEndElement(/* target */);
+        flushedSegment = true;
     }
 
 }

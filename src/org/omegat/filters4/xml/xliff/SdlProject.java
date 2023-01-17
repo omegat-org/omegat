@@ -33,7 +33,7 @@ import org.omegat.filters4.AbstractZipFilter;
 import org.omegat.util.OStrings;
 
 /**
- * Filter for SDL project
+ * Filter for SDL project.
  *
  * @author Thomas Cordonnier
  */
@@ -51,12 +51,12 @@ public class SdlProject extends AbstractZipFilter {
 
     protected boolean mustTranslateInternalFile(ZipEntry entry, boolean writeMode, FilterContext fc) {
         return entry.getName().startsWith(fc.getTargetLang().getLanguage())
-            && entry.getName().endsWith(".sdlxliff");
+                && entry.getName().endsWith(".sdlxliff");
     }
 
     @Override
     public Instance[] getDefaultInstances() {
-        return new Instance[]  { new Instance("*.sdlppx") };
+        return new Instance[] { new Instance("*.sdlppx") };
     }
 
     @Override

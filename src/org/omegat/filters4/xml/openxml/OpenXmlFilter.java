@@ -52,7 +52,8 @@ import org.omegat.filters2.FilterContext;
 import org.omegat.util.OStrings;
 
 /**
- * Filter for Ms Office's XML files (those which are inside the DOCX, XLSX, PPTX...)
+ * Filter for MS Office's XML files (those which are inside the DOCX, XLSX,
+ * PPTX...)
  *
  * @author Thomas Cordonnier
  */
@@ -60,7 +61,7 @@ class OpenXmlFilter extends AbstractXmlFilter {
     private boolean removeComments;
 
     OpenXmlFilter(boolean withComments) {
-         this.removeComments = !withComments;
+        this.removeComments = !withComments;
     }
 
     // ---------------------------- IFilter API ----------------------------
@@ -88,55 +89,60 @@ class OpenXmlFilter extends AbstractXmlFilter {
         return inFile.getName().toLowerCase().endsWith(".xml");
     }
 
-    // ----------------------------- AbstractXmlFilter part ----------------------
+    // ----------------------------- AbstractXmlFilter part
+    // ----------------------
 
     private QName OOXML_MAIN_PARA_ELEMENT = null;
 
     private LinkedList<List<XMLEvent>> currentPara = null;
     private List<XMLEvent> currentBuffer = null;
 
-    @Override    // start events on body
+    @Override // start events on body
     protected void checkCurrentCursorPosition(javax.xml.stream.XMLStreamReader reader, boolean doWrite) {
         this.isEventMode = true; // for the moment, always work in events mode
     }
 
     @Override
     protected boolean processStartElement(StartElement startElement, XMLStreamWriter writer)
-    throws XMLStreamException {
+            throws XMLStreamException {
         if (OOXML_MAIN_PARA_ELEMENT == null) {
             OOXML_MAIN_PARA_ELEMENT = startElement.getName();
         }
         if (OOXML_MAIN_PARA_ELEMENT.getNamespaceURI().contains("presentation")) { // powerpoint
             OOXML_MAIN_PARA_ELEMENT = new QName(startElement.getNamespaceContext().getNamespaceURI("a"),
-                OOXML_MAIN_PARA_ELEMENT.getLocalPart(), "a");
+                    OOXML_MAIN_PARA_ELEMENT.getLocalPart(), "a");
         }
         QName name = startElement.getName();
         if (OOXML_MAIN_PARA_ELEMENT.getNamespaceURI().equals(name.getNamespaceURI())) {
             if ("p".equals(name.getLocalPart()) // word
-            ||    "si".equals(name.getLocalPart()) || "comment".equals(name.getLocalPart())    // excel
+                    || "si".equals(name.getLocalPart()) || "comment".equals(name.getLocalPart()) // excel
             ) {
                 currentBuffer = new LinkedList<>();
-                currentPara = new LinkedList<>(); currentPara.add(currentBuffer);
-                currentBuffer.add(startElement); return false;
+                currentPara = new LinkedList<>();
+                currentPara.add(currentBuffer);
+                currentBuffer.add(startElement);
+                return false;
             }
             if ("r".equals(name.getLocalPart())) {
                 if (!currentBuffer.isEmpty()) {
                     currentBuffer = new LinkedList<>();
                     currentPara.add(currentBuffer);
                 }
-                currentBuffer.add(startElement); return false;
+                currentBuffer.add(startElement);
+                return false;
             }
             if ((writer != null)
-                && ("lang".equals(name.getLocalPart()) || "themeFontLang".equals(name.getLocalPart()))) {
+                    && ("lang".equals(name.getLocalPart()) || "themeFontLang".equals(name.getLocalPart()))) {
                 fromEventToWriterOrBuffer(eFactory.createStartElement(startElement.getName(), null,
-                    startElement.getNamespaces()), writer);
+                        startElement.getNamespaces()), writer);
                 for (Iterator<Attribute> iter = startElement.getAttributes(); iter.hasNext();) {
                     Attribute attr = iter.next();
                     ProjectProperties prop = Core.getProject().getProjectProperties();
                     String aval = attr.getValue(), pval = prop.getSourceLanguage().toString();
                     if (aval.equalsIgnoreCase(pval)) {
-                        fromEventToWriterOrBuffer(eFactory.createAttribute(attr.getName(),
-                            prop.getTargetLanguage().toString()), writer);
+                        fromEventToWriterOrBuffer(
+                                eFactory.createAttribute(attr.getName(), prop.getTargetLanguage().toString()),
+                                writer);
                     } else {
                         if ((aval.length() > 2) && (aval.charAt(2) == '-')) {
                             aval = aval.substring(0, 2);
@@ -146,16 +152,18 @@ class OpenXmlFilter extends AbstractXmlFilter {
                         }
                         if (aval.equalsIgnoreCase(pval)) {
                             fromEventToWriterOrBuffer(eFactory.createAttribute(attr.getName(),
-                                prop.getTargetLanguage().toString()), writer);
+                                    prop.getTargetLanguage().toString()), writer);
                         } else {
-                            // if not in source language, should not have been translated
+                            // if not in source language, should not have been
+                            // translated
                             fromEventToWriterOrBuffer(attr, writer);
                         }
                     }
                 }
                 return false; // we already added current element
             }
-            if (removeComments) { // add comment reference only if we transtate them
+            if (removeComments) { // add comment reference only if we transtate
+                                  // them
                 if ("commentRangeStart".equals(name.getLocalPart())) {
                     return false;
                 }
@@ -163,19 +171,22 @@ class OpenXmlFilter extends AbstractXmlFilter {
                     return false;
                 }
                 if ("commentReference".equals(name.getLocalPart())) {
-                   return false;
+                    return false;
                 }
             }
             if ("ins".equals(name.getLocalPart())) {
-                return false; // same, because we remove track changes but keep last version
+                return false; // same, because we remove track changes but keep
+                              // last version
             }
-            if ("del".equals(name.getLocalPart())) { // contents of del is totally removed
+            if ("del".equals(name.getLocalPart())) { // contents of del is
+                                                     // totally removed
                 currentBuffer = new LinkedList<>();
                 return false;
             }
         }
         if (currentBuffer != null) {
-             currentBuffer.add(startElement); return false;
+            currentBuffer.add(startElement);
+            return false;
         }
         return true;
     }
@@ -189,20 +200,25 @@ class OpenXmlFilter extends AbstractXmlFilter {
     }
 
     @Override
-    protected boolean processEndElement(EndElement endElement, XMLStreamWriter writer) throws XMLStreamException {
+    protected boolean processEndElement(EndElement endElement, XMLStreamWriter writer)
+            throws XMLStreamException {
         QName name = endElement.getName();
         if (OOXML_MAIN_PARA_ELEMENT.getNamespaceURI().equals(name.getNamespaceURI())) {
             if ("p".equals(name.getLocalPart()) // word
-            ||    "si".equals(name.getLocalPart()) || "comment".equals(name.getLocalPart())    // excel
+                    || "si".equals(name.getLocalPart()) || "comment".equals(name.getLocalPart()) // excel
             ) {
-                flushTranslation(writer); currentBuffer = null; return true;
+                flushTranslation(writer);
+                currentBuffer = null;
+                return true;
             }
             if ("r".equals(name.getLocalPart())) {
-                 currentBuffer.add(endElement);
-                 currentBuffer = new LinkedList<>(); currentPara.add(currentBuffer);
-                 return false;
+                currentBuffer.add(endElement);
+                currentBuffer = new LinkedList<>();
+                currentPara.add(currentBuffer);
+                return false;
             }
-            if (removeComments) { // add comment reference only if we transtate them
+            if (removeComments) {
+                // add comment reference only if we translate them
                 if ("commentRangeStart".equals(name.getLocalPart())) {
                     return false;
                 }
@@ -214,15 +230,18 @@ class OpenXmlFilter extends AbstractXmlFilter {
                 }
             }
             if ("ins".equals(name.getLocalPart())) {
-                return false; // same, because we remove track changes but keep last version
+                // same, because we remove track changes but keep last version
+                return false;
             }
             if ("del".equals(name.getLocalPart())) {
-                currentBuffer = currentPara.getLast(); // end of deletion, restore normal behaviour
+                // end of deletion, restore normal behaviour
+                currentBuffer = currentPara.getLast();
                 return false;
             }
         }
         if (currentBuffer != null) {
-             currentBuffer.add(endElement); return false;
+            currentBuffer.add(endElement);
+            return false;
         }
         return true;
     }
@@ -238,26 +257,28 @@ class OpenXmlFilter extends AbstractXmlFilter {
     private void flushTranslation(XMLStreamWriter writer) throws XMLStreamException {
         String src = buildTags();
         if (writer != null) {
-            for (XMLEvent ev: currentPara.getFirst()) {
+            for (XMLEvent ev : currentPara.getFirst()) {
                 fromEventToWriter(ev, writer);
             }
             if (currentPara.size() == 1) {
                 return;
             }
-            String tra = entryTranslateCallback.getTranslation(null /* entryId */, src, null /* path */);
+            String tra = entryTranslateCallback
+                    .getTranslation(null /* entryId */, src, null /* path */);
             if (tra == null) {
                 tra = src;
             }
-            for (XMLEvent ev: restoreTags(tra)) {
+            for (XMLEvent ev : restoreTags(tra)) {
                 fromEventToWriter(ev, writer);
             }
-            for (XMLEvent ev: currentPara.getLast()) {
+            for (XMLEvent ev : currentPara.getLast()) {
                 fromEventToWriter(ev, writer);
             }
         }
         if (entryParseCallback != null) {
-            entryParseCallback.addEntry(null /* entryId */, src, null /* translation */,
-                false, null /* note */, null /* path */, this, buildProtectedParts(src));
+            entryParseCallback.addEntry(null /* entryId */, src,
+                    null /* translation */, false, null /* note */,
+                    null /* path */, this, buildProtectedParts(src));
         }
     }
 
@@ -265,9 +286,10 @@ class OpenXmlFilter extends AbstractXmlFilter {
     private List<XMLEvent> defaultsForParagraph = new LinkedList<>();
 
     private QName TEXT_ELEMENT;
-    private static final Pattern
-        PTN_EMPTY_AND_START = Pattern.compile("((?:<[a-zA-Z]+[0-9]+/>)*)<([a-zA-Z]+[0-9]+)>((?:<[a-zA-Z]+[0-9]+/>)*)"),
-        PTN_EMPTY_AND_END = Pattern.compile("((?:<[a-zA-Z]+[0-9]+/>)*)<(/[a-zA-Z]+[0-9]+)>((?:<[a-zA-Z]+[0-9]+/>)*)");
+    private static final Pattern PTN_EMPTY_AND_START = Pattern
+            .compile("((?:<[a-zA-Z]+[0-9]+/>)*)<([a-zA-Z]+[0-9]+)>((?:<[a-zA-Z]+[0-9]+/>)*)"),
+            PTN_EMPTY_AND_END = Pattern
+                    .compile("((?:<[a-zA-Z]+[0-9]+/>)*)<(/[a-zA-Z]+[0-9]+)>((?:<[a-zA-Z]+[0-9]+/>)*)");
 
     /**
      * Converts List<XMLEvent> to OmegaT format, with <x0/>, <g0>...</g0>, etc.
@@ -278,7 +300,7 @@ class OpenXmlFilter extends AbstractXmlFilter {
             TEXT_ELEMENT = new QName(OOXML_MAIN_PARA_ELEMENT.getNamespaceURI(), "t");
         }
         tagsMap.clear();
-        for (Character c: tagsCount.keySet()) {
+        for (Character c : tagsCount.keySet()) {
             tagsCount.put(c, 0);
         }
         StringBuffer res = new StringBuffer();
@@ -289,23 +311,25 @@ class OpenXmlFilter extends AbstractXmlFilter {
                 continue;
             }
             if (run.get(0).isStartElement()
-                && ((StartElement) run.get(0)).asStartElement().getName().getLocalPart().equals("r")) {
+                    && ((StartElement) run.get(0)).asStartElement().getName().getLocalPart().equals("r")) {
                 ListIterator<XMLEvent> runIter = run.listIterator();
                 char prefix = findPrefix(runIter);
                 Integer tc = tagsCount.get(prefix);
                 if (tc == null) {
                     tc = 0;
                 }
-                if ((prefix == 'n') || (prefix == 'd') || (prefix == 'e')) {    // empty tags
-                    res.append("<" + prefix + tc + "/>"); tagsMap.put("" + prefix + tc, run);
+                if ((prefix == 'n') || (prefix == 'd') || (prefix == 'e')) { // empty
+                                                                             // tags
+                    res.append("<" + prefix + tc + "/>");
+                    tagsMap.put("" + prefix + tc, run);
                     tagsCount.put(prefix, tc + 1);
-                } else {    // contains text
-                    if (prefix != '\u0000') {    // add begin tag
+                } else { // contains text
+                    if (prefix != '\u0000') { // add begin tag
                         res.append("<" + prefix + tc + ">");
                         tagsMap.put("" + prefix + tc, run.subList(0, runIter.nextIndex()));
                     }
                     browseRunContents(run, runIter, res);
-                    if (prefix != '\u0000')    {    // add end tag
+                    if (prefix != '\u0000') { // add end tag
                         res.append("</" + prefix + tc + ">");
                         tagsMap.put("/" + prefix + tc, run.subList(runIter.previousIndex(), run.size()));
                         tagsCount.put(prefix, tc + 1);
@@ -313,63 +337,78 @@ class OpenXmlFilter extends AbstractXmlFilter {
                 }
             } else {
                 if (i == 0) {
-                    if ((run.size() > 1) && run.get(1).isStartElement()
-                        && ((StartElement) run.get(1)).asStartElement().getName().getLocalPart().equals("pPr")) {
-                        defaultsForParagraph = run; // looks like defaults, but...
-                        LOOP2:
-                        for (int j = 1; j < currentPara.size(); j++) {
-                            ListIterator<XMLEvent> ir = currentPara.get(j).listIterator(); if (!ir.hasNext()) {
-                                 currentPara.remove(j);
-                                 continue LOOP2;
+                    if ((run.size() > 1) && run.get(1).isStartElement() && run.get(1)
+                            .asStartElement().getName().getLocalPart().equals("pPr")) {
+                        defaultsForParagraph = run; // looks like defaults,
+                                                    // but...
+                        LOOP2: for (int j = 1; j < currentPara.size(); j++) {
+                            ListIterator<XMLEvent> ir = currentPara.get(j).listIterator();
+                            if (!ir.hasNext()) {
+                                currentPara.remove(j);
+                                continue LOOP2;
                             }
                             XMLEvent ev = ir.next();
-                            if (!(ev.isStartElement() && ev.asStartElement().getName().getLocalPart().equals("r"))) {
+                            if (!(ev.isStartElement()
+                                    && ev.asStartElement().getName().getLocalPart().equals("r"))) {
                                 continue LOOP2;
                             }
                             ev = ir.next();
-                            if (!(ev.isStartElement() && ev.asStartElement().getName().getLocalPart().equals("rPr"))) {
-                                // Segments contain <w:r> without <w:rPr>: cannot use defaults
+                            if (!(ev.isStartElement()
+                                    && ev.asStartElement().getName().getLocalPart().equals("rPr"))) {
+                                // Segments contain <w:r> without <w:rPr>:
+                                // cannot use defaults
                                 defaultsForParagraph = null;
                                 break LOOP2;
                             }
-                            LOOP3:
-                            while (ir.hasNext()) {
+                            LOOP3: while (ir.hasNext()) {
                                 ev = ir.next();
-                                if (ev.isEndElement() && ev.asEndElement().getName().getLocalPart().equals("rPr")) {
+                                if (ev.isEndElement()
+                                        && ev.asEndElement().getName().getLocalPart().equals("rPr")) {
                                     break LOOP3;
                                 }
-                                // We keep defaultsForParagraph only if all elements from it
-                                //remain unchanged in current run
+                                // We keep defaultsForParagraph only if all
+                                // elements from it
+                                // remain unchanged in current run
                                 if (ev.isEndElement()) {
-                                    continue LOOP3; // in StaX, empty tags are represented by open+close
+                                    continue LOOP3; // in StaX, empty tags are
+                                                    // represented by open+close
                                 }
                                 if (!ev.isStartElement()) {
-                                    defaultsForParagraph = null; break LOOP2; // we compare only start elements
+                                    defaultsForParagraph = null;
+                                    break LOOP2; // we compare only start
+                                                 // elements
                                 }
                                 if (isInDefaults(ev.asStartElement()) == 1) {
-                                    // Check whenever attributes are in separate StaX events
+                                    // Check whenever attributes are in separate
+                                    // StaX events
                                     List<Attribute> la = new LinkedList<>();
                                     XMLEvent ev2 = ir.next();
                                     while (ev2.isAttribute()) {
-                                         la.add((Attribute) ev2); ev2 = ir.next();
+                                        la.add((Attribute) ev2);
+                                        ev2 = ir.next();
                                     }
                                     while (ev2 != ev) {
-                                         ir.remove(); ir.previous();
+                                        ir.remove();
+                                        ir.previous();
                                     }
                                     ir.remove();
                                     ev = eFactory.createStartElement(ev.asStartElement().getName(),
-                                        la.iterator(), ev.asStartElement().getNamespaces());
+                                            la.iterator(), ev.asStartElement().getNamespaces());
                                     ir.add(ev);
-                                    // Test again with eventually collapsed event
-                                    if (isInDefaults(ev.asStartElement()) == 1) {  // present but different
+                                    // Test again with eventually collapsed
+                                    // event
+                                    if (isInDefaults(ev.asStartElement()) == 1) {
+                                        // present but different
                                         defaultsForParagraph = null;
                                         break LOOP2;
                                     }
                                 }
                                 // if isInDefaults = 0:
-                                //    ev is not at all in defaults, it will be used to find the prefix.
+                                // ev is not at all in defaults, it will be used
+                                // to find the prefix.
                                 // if isInDefaults = 2:
-                                //    ev is in defaults, it will be excluded from prefix generation
+                                // ev is in defaults, it will be excluded from
+                                // prefix generation
                             }
                         }
                     }
@@ -379,14 +418,16 @@ class OpenXmlFilter extends AbstractXmlFilter {
                     break;
                 }
                 // Something between two <w:r>
-                if ((run.size() == 1) && run.get(0).isCharacters() && (0 == run.get(0).toString().trim().length())) {
+                if ((run.size() == 1) && run.get(0).isCharacters()
+                        && (0 == run.get(0).toString().trim().length())) {
                     continue;
                 }
                 Integer tc = tagsCount.get('x');
                 if (tc == null) {
                     tc = 0;
                 }
-                res.append("<x" + tc + "/>"); tagsMap.put("x" + tc, run);
+                res.append("<x" + tc + "/>");
+                tagsMap.put("x" + tc, run);
                 tagsCount.put('x', tc + 1);
             }
         }
@@ -394,9 +435,11 @@ class OpenXmlFilter extends AbstractXmlFilter {
         if (!this.doCompactTags) {
             return res.toString();
         }
-        compactBuiltTags(res, PTN_EMPTY_AND_START); compactBuiltTags(res, PTN_EMPTY_AND_END);
-        for (Map.Entry<Character, Integer> me: tagsCount.entrySet()) {
-            char key = me.getKey(); int count = me.getValue();
+        compactBuiltTags(res, PTN_EMPTY_AND_START);
+        compactBuiltTags(res, PTN_EMPTY_AND_END);
+        for (Map.Entry<Character, Integer> me : tagsCount.entrySet()) {
+            char key = me.getKey();
+            int count = me.getValue();
             // Search for removed tags...
             for (int i = count - 2; i >= 0; i--) {
                 if (!res.toString().contains("<" + key + i)) {
@@ -410,7 +453,7 @@ class OpenXmlFilter extends AbstractXmlFilter {
                         Matcher mThisTag = PTN_THIS_TAG.matcher(res);
                         while (mThisTag.find()) {
                             res.replace(mThisTag.start(), mThisTag.end(),
-                                mThisTag.group(1) + key + (j - 1) + mThisTag.group(2));
+                                    mThisTag.group(1) + key + (j - 1) + mThisTag.group(2));
                             mThisTag.reset(res);
                         }
                     }
@@ -421,26 +464,33 @@ class OpenXmlFilter extends AbstractXmlFilter {
     }
 
     private void browseRunContents(List<XMLEvent> run, ListIterator<XMLEvent> runIter, StringBuffer res) {
-         XMLEvent next;
-    IN_TEXT_LOOP:
+        XMLEvent next;
         while (runIter.hasNext()) {
             next = runIter.next();
             if (next.isEndElement()) {
                 if (next.asEndElement().getName().getLocalPart().equals("r")) {
                     runIter.previous(); // used if prefix != 0
-                    break IN_TEXT_LOOP;
-                } else {
-                    continue IN_TEXT_LOOP;
+                    break;
                 }
             } else if (next.isStartElement()) {
-                char prefixInt = '\u0000'; final int idx = runIter.previousIndex();
+                char prefixInt = '\u0000';
+                final int idx = runIter.previousIndex();
                 String name = next.asStartElement().getName().getLocalPart();
                 switch (name) {
-                    case "footnoteRef": prefixInt = 'n'; break;
-                    case "tab": case "br": prefixInt = 'd'; break;
-                    case "drawing": prefixInt = 'g'; break;
-                    case "t": continue IN_TEXT_LOOP;
-                    default: prefixInt = 'e';
+                    case "footnoteRef":
+                        prefixInt = 'n';
+                        break;
+                    case "tab":
+                    case "br":
+                        prefixInt = 'd';
+                        break;
+                    case "drawing":
+                        prefixInt = 'g';
+                        break;
+                    case "t":
+                        continue;
+                    default:
+                        prefixInt = 'e';
                 }
                 while (!(next.isEndElement() && next.asEndElement().getName().getLocalPart().equals(name))) {
                     next = runIter.next();
@@ -452,16 +502,16 @@ class OpenXmlFilter extends AbstractXmlFilter {
                 LinkedList<XMLEvent> nList = new LinkedList<>();
                 nList.addAll(run.subList(idx, runIter.nextIndex()));
                 QName qR = new QName(OOXML_MAIN_PARA_ELEMENT.getNamespaceURI(), "r",
-                    OOXML_MAIN_PARA_ELEMENT.getPrefix());
+                        OOXML_MAIN_PARA_ELEMENT.getPrefix());
                 nList.add(0, eFactory.createStartElement(qR, null, null));
                 nList.add(eFactory.createEndElement(qR, null));
-                res.append("<" + prefixInt + tcInt + "/>"); tagsMap.put("" + prefixInt + tcInt, nList);
+                res.append("<" + prefixInt + tcInt + "/>");
+                tagsMap.put("" + prefixInt + tcInt, nList);
             } else {
-                res.append(next.toString()); // character data
+                res.append(next); // character data
             }
         }
     }
-
 
     private void compactBuiltTags(StringBuffer res, Pattern PTN) {
         Matcher mFull = PTN.matcher(res), mUniq;
@@ -470,8 +520,10 @@ class OpenXmlFilter extends AbstractXmlFilter {
                 continue;
             }
             List<XMLEvent> lGlobal = tagsMap.get(mFull.group(2));
-            if (!(lGlobal instanceof LinkedList)) {    // subList: copy because it will be modified
-                lGlobal = new LinkedList<>(); lGlobal.addAll(tagsMap.get(mFull.group(2)));
+            if (!(lGlobal instanceof LinkedList)) { // subList: copy because it
+                                                    // will be modified
+                lGlobal = new LinkedList<>();
+                lGlobal.addAll(tagsMap.get(mFull.group(2)));
                 tagsMap.put(mFull.group(2), lGlobal);
             }
             mUniq = OMEGAT_TAG.matcher(mFull.group(3));
@@ -486,19 +538,20 @@ class OpenXmlFilter extends AbstractXmlFilter {
             for (java.util.Iterator<XMLEvent> iAdd = lToAdd.descendingIterator(); iAdd.hasNext();) {
                 lGlobal.add(0, iAdd.next());
             }
-            res.replace(mFull.start(), mFull.end(), "<" + mFull.group(2) + ">"); mFull.reset(res);
+            res.replace(mFull.start(), mFull.end(), "<" + mFull.group(2) + ">");
+            mFull.reset(res);
         }
     }
 
     protected char findPrefix(ListIterator<XMLEvent> wr) {
-        XMLEvent next = wr.next(); next = wr.next(); // pass w:r
+        XMLEvent next = wr.next();
+        next = wr.next(); // pass w:r
         if (next.isStartElement() && next.asStartElement().getName().getLocalPart().equals("t")) {
             return '\u0000';
         }
         if (next.isStartElement() && next.asStartElement().getName().getLocalPart().equals("rPr")) {
             List<String> attrs = new LinkedList<String>();
-        RPR_LOOP:
-            while (wr.hasNext()) {    // read w:rPr
+            RPR_LOOP: while (wr.hasNext()) { // read w:rPr
                 next = wr.next();
                 if (next.isEndElement() && next.asEndElement().getName().getLocalPart().equals("rPr")) {
                     break;
@@ -507,7 +560,8 @@ class OpenXmlFilter extends AbstractXmlFilter {
                     continue;
                 }
                 if ((defaultsForParagraph != null) && (isInDefaults(next.asStartElement()) > 1)) {
-                    continue RPR_LOOP; // Remove all elements which are identical in defaultsForParagraph
+                    continue RPR_LOOP; // Remove all elements which are
+                                       // identical in defaultsForParagraph
                 }
                 String name = next.asStartElement().getName().getLocalPart();
                 if ("lang".equals(name)) {
@@ -515,7 +569,8 @@ class OpenXmlFilter extends AbstractXmlFilter {
                 }
                 attrs.add(name);
             }
-            while (wr.hasNext()) { // now, search for cases of empty runs with special markup
+            while (wr.hasNext()) { // now, search for cases of empty runs with
+                                   // special markup
                 if ((next = wr.next()).isStartElement()) {
                     QName name = next.asStartElement().getName();
                     if (name.equals(TEXT_ELEMENT)) {
@@ -534,7 +589,7 @@ class OpenXmlFilter extends AbstractXmlFilter {
                         return 'e';
                     }
                     if (name.getLocalPart().equals("instrText")) {
-                        return 'e';    // instrText should NOT be translated!!!
+                        return 'e'; // instrText should NOT be translated!!!
                     }
                 }
             }
@@ -548,16 +603,32 @@ class OpenXmlFilter extends AbstractXmlFilter {
                 return 'p'; // plural
             }
             switch (attrs.get(0)) {
-                case "rStyle": return 's';
-                case "rFonts": case "sz": return 'f';
-                case "b": case "bCs": return 'b'; // bold
-                case "i": case "iCs": return 'i'; // italic
-                case "u": case "uCs": return 'u'; // underline
-                case "caps": case "smallCaps": return 'C'; // uppercase
-                case "color": return 'c';
-                case "strike": case "dStrike": return 'l'; // line
-                case "vertAlign": return 'v'; // exposant or subscript
-                case "lang": return '\u0000';
+            case "rStyle":
+                return 's';
+            case "rFonts":
+            case "sz":
+                return 'f';
+            case "b":
+            case "bCs":
+                return 'b'; // bold
+            case "i":
+            case "iCs":
+                return 'i'; // italic
+            case "u":
+            case "uCs":
+                return 'u'; // underline
+            case "caps":
+            case "smallCaps":
+                return 'C'; // uppercase
+            case "color":
+                return 'c';
+            case "strike":
+            case "dStrike":
+                return 'l'; // line
+            case "vertAlign":
+                return 'v'; // exposant or subscript
+            case "lang":
+                return '\u0000';
             }
         }
         while (wr.hasNext()) { // not a w:rPr, generate something else
@@ -580,10 +651,11 @@ class OpenXmlFilter extends AbstractXmlFilter {
                     return 'e';
                 }
                 if (name.getLocalPart().equals("instrText")) {
-                    return 'e';    // instrText should NOT be translated!!!
+                    return 'e'; // instrText should NOT be translated!!!
                 }
             } else if (next.isCharacters()) {
-                 wr.previous(); return 'o';
+                wr.previous();
+                return 'o';
             }
         }
         return 'e'; // other, non-text
@@ -592,7 +664,7 @@ class OpenXmlFilter extends AbstractXmlFilter {
     // True if we can find in defaults this element with same attributes.
     // 0 = not found, 1 = found but differs, 2 = found equal
     private int isInDefaults(StartElement stEl) {
-        for (XMLEvent dev: defaultsForParagraph) {
+        for (XMLEvent dev : defaultsForParagraph) {
             if (dev.isStartElement() && dev.asStartElement().getName().equals(stEl.getName())) {
                 Map<QName, String> mapNext = new java.util.HashMap<>(), mapDev = new java.util.HashMap<>();
                 for (Iterator<Attribute> iter = dev.asStartElement().getAttributes(); iter.hasNext();) {
@@ -610,8 +682,8 @@ class OpenXmlFilter extends AbstractXmlFilter {
     }
 
     /**
-     * Produces xliff content for the translated text.
-     * Note: must be called after buildTags(src, true) to have the necessary variables filled!
+     * Produces xliff content for the translated text. Note: must be called
+     * after buildTags(src, true) to have the necessary variables filled!
      **/
     protected List<XMLEvent> restoreTags(String tra) {
         LinkedList<XMLEvent> res = new LinkedList<XMLEvent>();
@@ -626,10 +698,12 @@ class OpenXmlFilter extends AbstractXmlFilter {
                     res.addAll(saved);
                 }
                 boolean isAlone = m.group().endsWith("/>");
-                tra = tra.substring(m.end()); m.reset(tra);
+                tra = tra.substring(m.end());
+                m.reset(tra);
                 if (!isAlone) {
                     if (!m.find()) {
-                         this.addCharacters(res, tra); return res;
+                        this.addCharacters(res, tra);
+                        return res;
                     } else {
                         this.addCharacters(res, tra.substring(0, m.start()));
                         saved = tagsMap.get(m.group(1) + m.group(2));
@@ -648,11 +722,14 @@ class OpenXmlFilter extends AbstractXmlFilter {
     }
 
     private void addSimpleRun(LinkedList<XMLEvent> res, String text) {
-        QName qR = new QName(OOXML_MAIN_PARA_ELEMENT.getNamespaceURI(), "r", OOXML_MAIN_PARA_ELEMENT.getPrefix());
-        QName qT = new QName(OOXML_MAIN_PARA_ELEMENT.getNamespaceURI(), "t", OOXML_MAIN_PARA_ELEMENT.getPrefix());
+        QName qR = new QName(OOXML_MAIN_PARA_ELEMENT.getNamespaceURI(), "r",
+                OOXML_MAIN_PARA_ELEMENT.getPrefix());
+        QName qT = new QName(OOXML_MAIN_PARA_ELEMENT.getNamespaceURI(), "t",
+                OOXML_MAIN_PARA_ELEMENT.getPrefix());
         res.add(eFactory.createStartElement(qR, null, null));
         if (defaultsForParagraph != null) {
-            // these are not really defaults, we must repeat it when generating the target file
+            // these are not really defaults, we must repeat it when generating
+            // the target file
             boolean inRpr = false;
             for (XMLEvent ev : defaultsForParagraph) {
                 if (ev.isStartElement() && ev.asStartElement().getName().getLocalPart().equals("rPr")) {
@@ -668,13 +745,15 @@ class OpenXmlFilter extends AbstractXmlFilter {
         }
         res.add(eFactory.createStartElement(qT, null, null));
         this.addCharacters(res, text);
-        res.add(eFactory.createEndElement(qT, null)); res.add(eFactory.createEndElement(qR, null));
+        res.add(eFactory.createEndElement(qT, null));
+        res.add(eFactory.createEndElement(qR, null));
     }
 
     // Add characters with eventually xml:space=preserve
     private void addCharacters(LinkedList<XMLEvent> res, String text) {
         if (text.trim().equals(text)) {
-             res.add(eFactory.createCharacters(text)); return;
+            res.add(eFactory.createCharacters(text));
+            return;
         }
         XMLEvent lastEv = res.getLast();
         if (lastEv.isStartElement() && lastEv.asStartElement().getName().getLocalPart().equals("t")) {
@@ -687,8 +766,8 @@ class OpenXmlFilter extends AbstractXmlFilter {
                 }
             }
             if (!hasPreserve) {
-                res.add(eFactory.createAttribute("xml", "http://www.w3.org/XML/1998/namespace",
-                    "space", "preserve"));
+                res.add(eFactory.createAttribute("xml", "http://www.w3.org/XML/1998/namespace", "space",
+                        "preserve"));
             }
         }
         res.add(eFactory.createCharacters(text));

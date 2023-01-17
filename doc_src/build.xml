@@ -171,12 +171,14 @@
 
     <target name="old-css" depends="check-first-steps" unless="${FirstSteps.exists}">
         <copy file="OmegaT_old.css"
-              tofile="../docs/${language}/OmegaT.css"/>
+              tofile="../docs/${language}/OmegaT.css"
+              force="true"/>
     </target>
 
     <target name="new-css" depends="check-first-steps" if="${FirstSteps.exists}">
         <copy file="OmegaT_new.css"
-              tofile="../docs/${language}/OmegaT.css"/>
+              tofile="../docs/${language}/OmegaT.css"
+              force="true"/>
     </target>
 
     <target name="css" depends="old-css,new-css"/>
@@ -187,7 +189,7 @@
               tofile="../docs/${language}/index.html" />
     </target>
 
-    <target name="generate-instant-start" depends="check-first-steps, css, pictures" unless="${FirstSteps.exists}">
+    <target name="generate-instant-start" depends="check-first-steps, old-css, pictures" unless="${FirstSteps.exists}">
         <java dir="."
               fork="true"
               failonerror="true"
@@ -219,7 +221,7 @@
 
     <target name="instant-start" depends="generate-instant-start, copy-index-from-first-step"/>
 
-    <target name="first-steps" depends="check-first-steps, css" if="${FirstSteps.exists}">
+    <target name="first-steps" depends="check-first-steps, new-css" if="${FirstSteps.exists}">
         <java dir="."
               fork="true"
               failonerror="true"

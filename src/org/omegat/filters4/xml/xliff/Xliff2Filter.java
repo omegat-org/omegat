@@ -50,7 +50,7 @@ public class Xliff2Filter extends AbstractXliffFilter {
 
     @Override
     public String getFileFormatName() {
-        return OStrings.getString("XLIFF2_FILTER_NAME");
+        return OStrings.getString("XLIFF2FILTER_FILTER_NAME");
     }
 
     protected final String versionPrefix() {

@@ -52,7 +52,7 @@ public class Xliff1Filter extends AbstractXliffFilter {
 
     @Override
     public String getFileFormatName() {
-        return OStrings.getString("XLIFF1X_FILTER_NAME");
+        return OStrings.getString("XLIFF1FILTER_FILTER_NAME");
     }
 
     protected final String versionPrefix() {

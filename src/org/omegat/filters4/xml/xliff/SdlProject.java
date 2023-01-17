@@ -25,12 +25,12 @@
 
 package org.omegat.filters4.xml.xliff;
 
-import java.util.Enumeration;
 import java.util.zip.ZipEntry;
 
-import org.omegat.filters2.Instance;
 import org.omegat.filters2.FilterContext;
+import org.omegat.filters2.Instance;
 import org.omegat.filters4.AbstractZipFilter;
+import org.omegat.util.OStrings;
 
 /**
  * Filter for SDL project
@@ -41,7 +41,7 @@ public class SdlProject extends AbstractZipFilter {
 
     @Override
     public String getFileFormatName() {
-        return "SDL project (StaX)";
+        return OStrings.getString("SDLPROJECT_FILTER_NAME");
     }
 
     @Override

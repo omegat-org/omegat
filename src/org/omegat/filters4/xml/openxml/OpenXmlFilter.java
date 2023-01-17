@@ -49,6 +49,7 @@ import org.omegat.filters3.xml.openxml.OpenXMLOptions;
 import org.omegat.filters4.xml.AbstractXmlFilter;
 import org.omegat.filters2.Instance;
 import org.omegat.filters2.FilterContext;
+import org.omegat.util.OStrings;
 
 /**
  * Filter for Ms Office's XML files (those which are inside the DOCX, XLSX, PPTX...)
@@ -66,7 +67,7 @@ class OpenXmlFilter extends AbstractXmlFilter {
 
     @Override
     public String getFileFormatName() {
-        return "Microsoft Office Open XML";
+        return OStrings.getString("OPENXML4_FILTER_NAME");
     }
 
     @Override

@@ -39,6 +39,8 @@ import javax.xml.stream.events.EndElement;
 import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 
+import org.omegat.util.OStrings;
+
 /**
  * Filter for support Xliff 1 files as bilingual (unlike filters3/xml/xliff)
  *
@@ -50,7 +52,7 @@ public class Xliff1Filter extends AbstractXliffFilter {
 
     @Override
     public String getFileFormatName() {
-        return "Xliff 1.x(StaX)";
+        return OStrings.getString("XLIFF1X_FILTER_NAME");
     }
 
     protected final String versionPrefix() {
@@ -86,7 +88,8 @@ public class Xliff1Filter extends AbstractXliffFilter {
                 try {
                     path += "/" + startElement.getAttributeByName(new QName("original")).getValue();
                 } catch (NullPointerException noid) { // Note: in spec, original is REQUIRED
-                    throw new XMLStreamException("Missing attribute 'original' in <file>");
+                    throw new XMLStreamException(OStrings.getString(
+                            "XLIFF_MANDATORY_ORIGINAL_MISSING",  "original",  "file"));
                 }
                 updateIgnoreScope(startElement);
                 break;
@@ -108,7 +111,8 @@ public class Xliff1Filter extends AbstractXliffFilter {
                 try {
                     unitId = startElement.getAttributeByName(new QName("id")).getValue();
                 } catch (NullPointerException noid) { // Note: in spec, original is REQUIRED
-                    throw new XMLStreamException("Missing attribute 'id' in <trans-unit>");
+                    throw new XMLStreamException(OStrings.getString(
+                            "XLIFF_MANDATORY_ORIGINAL_MISSING",  "id",  "trans-unit"));
                 }
                 flushedUnit = false; targetStartEvent = null;
                 updateIgnoreScope(startElement);
@@ -240,7 +244,7 @@ public class Xliff1Filter extends AbstractXliffFilter {
              }
         }
         StringBuffer res = new StringBuffer(); LinkedList<StringBuffer> saveBuf = new LinkedList<>();
-        List<XMLEvent> nativeCode = null; int errCount = 0;
+        List<XMLEvent> nativeCode = null;
         for (XMLEvent ev: srcList) {
             if (nativeCode != null) {
                 nativeCode.add(ev);

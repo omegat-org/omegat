@@ -26,20 +26,19 @@
 package org.omegat.filters4.xml.openxml;
 
 import java.awt.Window;
-
-import java.util.Comparator;
-import java.util.Map;
 import java.util.HashMap;
-import java.util.regex.Pattern;
+import java.util.Map;
 import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.zip.ZipEntry;
 
-import org.omegat.filters2.Instance;
 import org.omegat.filters2.FilterContext;
+import org.omegat.filters2.Instance;
 import org.omegat.filters3.xml.openxml.EditOpenXMLOptionsDialog;
 import org.omegat.filters3.xml.openxml.OpenXMLOptions;
 import org.omegat.filters4.AbstractZipFilter;
 import org.omegat.util.Log;
+import org.omegat.util.OStrings;
 
 /**
  * Filter for Microsoft Open XML
@@ -131,7 +130,7 @@ public class MsOfficeFileFilter extends AbstractZipFilter {
 
     @Override
     public String getFileFormatName() {
-        return "Microsoft Office Open XML (StaX)";
+        return OStrings.getString("MSOFFICE4_FILTER_NAME");
     }
 
     @Override

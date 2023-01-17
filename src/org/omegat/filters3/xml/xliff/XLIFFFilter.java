@@ -310,16 +310,25 @@ public class XLIFFFilter extends XMLFilter {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isInIgnored() {
         return ignored;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void text(String text) {
         this.text.append(text);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String translate(String entry, List<ProtectedPart> protectedParts) {
         if (entryParseCallback != null) {
@@ -335,5 +344,13 @@ public class XLIFFFilter extends XMLFilter {
         } else {
             return entry;
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isEnabledInDefault() {
+        return false;
     }
 }

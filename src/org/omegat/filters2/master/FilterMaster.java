@@ -763,7 +763,7 @@ public class FilterMaster {
         }
         Filter fc = new Filter();
         fc.setClassName(f.getClass().getName());
-        fc.setEnabled(true);
+        fc.setEnabled(f.isEnabledInDefault());
         for (Instance ins : f.getDefaultInstances()) {
             Files ff = new Files();
             ff.setSourceEncoding(ins.getSourceEncoding());

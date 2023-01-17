@@ -220,4 +220,16 @@ public interface IFilter {
     default boolean isBilingual() {
         return false;
     }
+
+    /**
+     * Is the filter enabled in default.
+     * <p>
+     * Deprecated filter may be disabled in default. So it can
+     * override the method to return false;
+     * @return false when the filter is disabled in default.
+     * @since 5.8.0
+     */
+    default boolean isEnabledInDefault() {
+        return true;
+    }
 }

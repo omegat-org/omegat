@@ -1,0 +1,150 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>五分钟内学会使用 OmegaT！</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="chapter">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h2 class="title"><a name="chapter.instant.start.guide"></a>五分钟内学会使用 OmegaT！
+                  </h2>
+               </div>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="create.and.open.new.project"></a>建立新项目<a class="indexterm" name="d0e7"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p><em><span class="remark">注：</span></em>在 Apple Mac 上，要使用 <span class="keycap"><strong>Command</strong></span> 键而非 <span class="keycap"><strong>Control</strong></span> 键。
+            </p><a class="indexterm" name="d0e22"></a><p>要开始使用 OmegaT，首先要创建项目来容纳所有有关文件，例如原文文件、翻译记忆库、词汇表、以及最终的译文文件。在<span class="guimenu">项目</span>菜单中选择<span class="guimenuitem">新建...</span>并输入项目名称。记住您创建项目的位置，稍后还需要回到此处。
+            </p>
+            <p>为项目命名后，将会打开<span class="guilabel">创建新项目</span>对话框。在该对话框顶部选择原文文件的语言和翻译后文件应有的语言，然后点击<span class="guibutton">确定</span>继续。
+            </p>
+            <p>如果对该对话框中的其他设置感兴趣，则随时都可以按 <span class="keycap"><strong>Ctrl+E</strong></span> 返回此对话框。
+            </p>
+            <p>接着，会打开<span class="guilabel">项目文件</span>对话框。点击<span class="guibutton">将文件复制到原文文件夹...</span>来选择原文文件。然后 OmegaT 会将选定文件复制到你新建立的项目中的 <code class="filename">/source/</code> 子文件夹下。在<span class="guilabel">编辑器</span>窗格中加载了原文文件后，您可以关掉<span class="guilabel">项目文件</span>对话框。
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="translate.the.segments.one.by.one"></a>翻译文件
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>OmegaT 将一次呈现一个片段供您翻译。翻译完一个片段后，按下 <span class="keycap"><strong>Ctrl+U</strong></span> 前往下一个未译片段（或用 <span class="keycap"><strong>Ctrl+Shift+U</strong></span> 前往下一个已译片段）。当您想查看译文的最终呈现格式时，请按 <span class="keycap"><strong>Ctrl+D</strong></span> 来生成译文文档，它们会在项目文件夹中的 <code class="filename">/target/</code> 子文件夹内创建。在翻译过程中，可以用<span class="guimenu">编辑</span>和<span class="guimenu">转到</span>菜单来执行各种有用的功能。
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e89"></a>验证标签
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>如果原文文件是格式化文件，例如 Microsoft Word、LibreOffice Writer 或 HTML 文件，OmegaT 会把格式信息转化为包围所译文本的标签。文档还经常含有与格式无关的标签，但这些标签在原文文件（以及译文文件）中也一样很重要。原文语句可能类似于：</p>
+            <div class="mediaobject" align="justify"><img src="images/InstantGuide_1.png" align="justify"></div>
+            <p>
+               
+            </p>
+            <p>但 OmegaT 会将该语句以如下方式呈现：</p>
+            <div class="mediaobject" align="justify"><img src="images/InstantGuide_2.png" align="justify"></div>
+            <p>
+               
+            </p>
+            <p>标签在 OmegaT 中是灰色的，因此很容易识别。它们受到保护，因此您不能修改其内容，但可以将它们删除、手动输入或移动它们在译文语句中的位置。不过，如果在输入格式化时犯错，那么译文文件可能会无法打开。因此，在生成译文文件前请按 <span class="keycap"><strong>Ctrl+Shift+V</strong></span> 来检验标签是否正确。
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e113"></a>生成译文文件
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>一旦确定译文中没有标签错误，请按 <span class="keycap"><strong>Ctrl+D</strong></span> 来生成译文文件，它们会在项目文件夹的 <code class="filename">/target/</code> 子文件夹中生成。
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e124"></a>其他一些需要记住的东西
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>如果文件没有加载到<span class="guilabel">编辑器</span>窗格中，则可能因为此文件是 OmegaT 无法处理的格式。有关 OmegaT 能够处理的文件格式清单，参见<span class="guimenuitem">选项</span> → <span class="guimenuitem">首选项...</span> → <span class="guimenuitem">文件过滤器</span>。
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>你可以为每个新任务创建一个新项目，并且任何时候都可以往往项目中添加新的原文文档。</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>要让自己回想起项目的初始设置，请 <span class="keycap"><strong>Ctrl+E</strong></span> 打开项目属性对话框。要查看项目中的文件清单，请按 <span class="keycap"><strong>Ctrl+L</strong></span> 打开<span class="guilabel">项目文件</span>对话框。
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>在翻译结束时，OmegaT 会往在项目文件夹中导出三个翻译记忆库，分别名叫 <code class="filename">level1</code>、<code class="filename">level2</code> 和 <code class="filename">omegat</code>。<code class="filename">level1</code> 和 <code class="filename">level2</code> 记忆库可以与其他翻译程序的用户共享。名为 <code class="filename">omegat</code> 的记忆库可以在未来你所创建的项目中由 OmegaT 自身所用。如果你将此类翻译记忆库文件放在项目的 <code class="filename">/tm/</code> 子文件夹中，则 OmegaT 会自动在其中搜索类似的片段，这称为“模糊匹配”。
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>你可以按下 <span class="keycap"><strong>Ctrl+Shift+G</strong></span> 来将新词汇添加到词汇表，也可以将现有的词汇表复制到项目文件夹的 <code class="filename">/glossary/</code> 子文件夹中，OmegaT 会自动在其中查找单词。
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>在原文文本和你的译文中搜索单词和短语通常会很有用，因此随时都可以按下 <span class="keycap"><strong>Ctrl+F</strong></span> 来打开<span class="guilabel">文本搜索</span>对话框。
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>更全面的介绍请参阅 OmegaT 网站上的 <a class="ulink" href="https://omegat.org/files/OmegaT_for_Beginners.pdf" target="_top">OmegaT 初学者教程</a>。如果您需要 OmegaT 任何一方面的帮助，可随时加入 <a class="ulink" href="https://omegat.org/support" target="_top">OmegaT 用户组</a>。
+                     </p>
+                  </li>
+               </ul>
+            </div>
+         </div>
+      </div>
+   </body>
+</html>

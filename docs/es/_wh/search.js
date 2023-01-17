@@ -1364,7 +1364,7 @@ wh.search_titleList = [
  "Comportamiento del campo de edición",
  "Memorias de Traducción",
  "La interfaz de usuario",
- "OmegaT - Guía de usuario",
+ "OmegaT 2.3.0 - Guía de usuario",
  "Índice"
 ];
 wh.search_wordMap= {

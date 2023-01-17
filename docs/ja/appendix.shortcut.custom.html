@@ -2,14 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
    <head><meta charset="UTF-8" />
       <title>付録E ショートカットのカスタマイズ</title>
-      <link href="OmegaT_webhelp.css" rel="stylesheet" type="text/css" />
+      <link href="OmegaT.css" rel="stylesheet" type="text/css" />
       <meta content="DocBook XSL Stylesheets V1.79.1" name="generator" />
       <link href="appendix.regexp.html" rel="prev" title="付録D 正規表現" />
    <meta content="width=device-width, initial-scale=1" name="viewport" /><link href="_wh/wh.css" rel="stylesheet" type="text/css" /><script src="_wh/jquery/jquery.min.js" type="text/javascript"></script><script charset="UTF-8" src="_wh/wh.js" type="text/javascript"></script><script charset="UTF-8" defer="defer" src="_wh/search.js" type="text/javascript"></script></head>
    
 <body>
     <div id="wh-header">
-    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 4.2 - 取扱説明書</a></div></div>
+    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 4.3.1 - 取扱説明書</a></div></div>
 
     <div id="wh-body">
       <div class="wh-icon-menu" id="wh-menu"></div>
@@ -101,16 +101,16 @@
                   </div>
                </div>
             </div>
-            <p>メインメニューに表示されるほとんどの項目には、新しいショートカットを割り当てることができます。ショートカット定義ファイルを<span class="application">OmegaT</span>環境設定フォルダ(メニューから<span class="guimenuitem">設定</span> → <span class="guimenuitem">設定フォルダー</span>でアクセス可能)に置くと、すでに割り当てられているショートカットを変更したり、新しいショートカットを追加したりできます。</p>
+            <p>メインメニューに表示されるほとんどの項目には、新しいショートカットを割り当てることができます。ショートカット定義ファイルをOmegaT環境設定フォルダ(メニューから<span class="guimenuitem">設定</span> → <span class="guimenuitem">設定フォルダー</span>でアクセス可能)に置くと、すでに割り当てられているショートカットを変更したり、新しいショートカットを追加したりできます。</p>
             <p>ショートカット定義ファイルには必ず <code class="filename">MainMenuShortcuts.properties</code> という名前を付け、ショートカット定義を少なくとも一行は記述しておく必要があります。空行も含めることができます。また「//」で始まる行はコメント行として扱われます。「//」から行末までは、すべて無視されます。</p>
             <p>
-               <code class="filename">MainMenuShortcuts.properties</code> ファイルを修正した場合は、新しいショートカット設定を反映させるために、忘れず <span class="application">OmegaT</span> を再起動してください。</p>
+               <code class="filename">MainMenuShortcuts.properties</code> ファイルを修正した場合は、新しいショートカット設定を反映させるために、忘れず OmegaT を再起動してください。</p>
             <p>ショートカット定義構文は、次の通りです：<code class="code">&lt;メニュー項目コード&gt;=&lt;ショートカット&gt;</code>。<span class="emphasis">
                   <em>&lt;メニュー項目コード&gt;</em>
                </span> の値は、後述する表を参照してください。<span class="emphasis">
                   <em>&lt;ショートカット&gt;</em>
-               </span> には割り当てたいキーの組み合わせを指定します<a class="footnote" href="#ftn.d0e6430">
-                  <sup class="footnote" id="d0e6430">[2]</sup>
+               </span> には割り当てたいキーの組み合わせを指定します<a class="footnote" href="#ftn.d0e5074">
+                  <sup class="footnote" id="d0e5074">[2]</sup>
                </a>
             </p>
             <p>&lt;ショートカット&gt; は次の形式に従います：０個以上の <code class="code">&lt;修飾子&gt;</code>、続いて０個または１個の <code class="code">&lt;イベント&gt;</code>、続いて１個の <code class="code">&lt;キー&gt;</code>。ただし：</p>
@@ -127,8 +127,8 @@
                         </span>、<span class="emphasis">
                            <em>meta</em>
                         </span>
-                        <a class="footnote" href="#ftn.d0e6463">
-                           <sup class="footnote" id="d0e6463">[3]</sup>
+                        <a class="footnote" href="#ftn.d0e5107">
+                           <sup class="footnote" id="d0e5107">[3]</sup>
                         </a>、<span class="emphasis">
                            <em>alt</em>
                         </span>、<span class="emphasis">
@@ -148,15 +148,15 @@
                      </p>
                   </li>
                   <li class="listitem">
-                     <p>そして <code class="code">&lt;キー&gt;</code> には、キーボード上で利用可能な任意のキーを指定できます<a class="footnote" href="#ftn.d0e6497">
-                           <sup class="footnote" id="d0e6497">[4]</sup>
+                     <p>そして <code class="code">&lt;キー&gt;</code> には、キーボード上で利用可能な任意のキーを指定できます<a class="footnote" href="#ftn.d0e5141">
+                           <sup class="footnote" id="d0e5141">[4]</sup>
                         </a>
                      </p>
                   </li>
                </ul>
             </div>
-            <p>例として、OmegaT のデフォルトのショートカット<a class="footnote" href="#ftn.d0e6504">
-                  <sup class="footnote" id="d0e6504">[5]</sup>
+            <p>例として、OmegaT のデフォルトのショートカット<a class="footnote" href="#ftn.d0e5148">
+                  <sup class="footnote" id="d0e5148">[5]</sup>
                </a>は次のようになっています：</p>
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
@@ -198,7 +198,7 @@
                <code class="code"> toolsShowStatisticsStandardMenuItem=shift meta
     S</code>
             </p>
-            <p>ファイルを保存したら、<span class="application">OmegaT</span> を再起動してください。新しいショートカットが、修正したメニュー項目の隣に表示されるはずです。システム用のショートカットと衝突しない限り、新しいショートカットは OmegaT で機能するでしょう。</p>
+            <p>ファイルを保存したら、OmegaT を再起動してください。新しいショートカットが、修正したメニュー項目の隣に表示されるはずです。システム用のショートカットと衝突しない限り、新しいショートカットは OmegaT で機能するでしょう。</p>
          </section>
          <section class="section" id="ch04.shortcuts.ProjectMenu">
             <div class="titlepage">
@@ -208,7 +208,7 @@
                   </div>
                </div>
             </div>
-            <div class="table" id="d0e6580">
+            <div class="table" id="d0e5221">
                <div class="table-title">表E.1 プロジェクトメニュー</div>
                <div class="table-contents">
                   <table style="border-collapse: collapse; border-top: 1px solid ; border-bottom: 1px solid ; border-left: 1px solid ; border-right: 1px solid ; ">
@@ -367,6 +367,11 @@
                            <td style="text-align: left; border-bottom: 1px solid ; ">projectAccessWriteableGlossaryMenuItem</td>
                         </tr>
                         <tr>
+                           <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">再起動</td>
+                           <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; "> </td>
+                           <td style="text-align: left; border-bottom: 1px solid ; ">projectRestartMenuItem</td>
+                        </tr>
+                        <tr>
                            <td style="text-align: left; border-right: 1px solid ; ">終了</td>
                            <td style="text-align: left; border-right: 1px solid ; ">
                               <span class="keycap">
@@ -389,7 +394,7 @@
                   </div>
                </div>
             </div>
-            <div class="table" id="d0e6751">
+            <div class="table" id="d0e5398">
                <div class="table-title">表E.2 編集メニュー</div>
                <div class="table-contents">
                   <table style="border-collapse: collapse; border-top: 1px solid ; border-bottom: 1px solid ; border-left: 1px solid ; border-right: 1px solid ; ">
@@ -667,7 +672,7 @@
                   </div>
                </div>
             </div>
-            <div class="table" id="d0e7001">
+            <div class="table" id="d0e5648">
                <div class="table-title">表E.3 移動メニュー</div>
                <div class="table-contents">
                   <table style="border-collapse: collapse; border-top: 1px solid ; border-bottom: 1px solid ; border-left: 1px solid ; border-right: 1px solid ; ">
@@ -797,7 +802,7 @@
                   </div>
                </div>
             </div>
-            <div class="table" id="d0e7116">
+            <div class="table" id="d0e5763">
                <div class="table-title">表E.4 表示メニュー</div>
                <div class="table-contents">
                   <table style="border-collapse: collapse; border-top: 1px solid ; border-bottom: 1px solid ; border-left: 1px solid ; border-right: 1px solid ; ">
@@ -888,7 +893,7 @@
                   </div>
                </div>
             </div>
-            <div class="table" id="d0e7207">
+            <div class="table" id="d0e5854">
                <div class="table-title">表E.5 ツールメニュー</div>
                <div class="table-contents">
                   <table style="border-collapse: collapse; border-top: 1px solid ; border-bottom: 1px solid ; border-left: 1px solid ; border-right: 1px solid ; ">
@@ -948,7 +953,7 @@
                   </div>
                </div>
             </div>
-            <div class="table" id="d0e7258">
+            <div class="table" id="d0e5905">
                <div class="table-title">表E.6 設定メニュー</div>
                <div class="table-contents">
                   <table style="border-collapse: collapse; border-top: 1px solid ; border-bottom: 1px solid ; border-left: 1px solid ; border-right: 1px solid ; ">
@@ -1099,7 +1104,7 @@
                   </div>
                </div>
             </div>
-            <div class="table" id="d0e7421">
+            <div class="table" id="d0e6068">
                <div class="table-title">表E.7 ヘルプメニュー</div>
                <div class="table-contents">
                   <table style="border-collapse: collapse; border-top: 1px solid ; border-bottom: 1px solid ; border-left: 1px solid ; border-right: 1px solid ; ">
@@ -1149,16 +1154,16 @@
          <div class="footnotes">
             <br />
             <hr class="footnote-hr" />
-            <div class="footnote" id="ftn.d0e6430">
+            <div class="footnote" id="ftn.d0e5074">
                <p>
-                  <a class="para" href="#d0e6430">
+                  <a class="para" href="#d0e5074">
                      <sup class="para">[2] </sup>
                   </a>キーストローク（ショートカット）の完全な構文定義は、Oracle による次の Java 1.6 技術文書（ページの最後）を参照してください：<a class="ulink" href="http://docs.oracle.com/javase/jp/6/api/javax/swing/KeyStroke.html" target="_top">Java 1.6 keystrokes shortcuts</a>
                </p>
             </div>
-            <div class="footnote" id="ftn.d0e6463">
+            <div class="footnote" id="ftn.d0e5107">
                <p>
-                  <a class="para" href="#d0e6463">
+                  <a class="para" href="#d0e5107">
                      <sup class="para">[3] </sup>
                   </a>Mac では、修飾子 <span class="emphasis">
                      <em>meta</em>
@@ -1166,16 +1171,16 @@
                      <em>command</em>
                   </span> キーを指定します。</p>
             </div>
-            <div class="footnote" id="ftn.d0e6497">
+            <div class="footnote" id="ftn.d0e5141">
                <p>
-                  <a class="para" href="#d0e6497">
+                  <a class="para" href="#d0e5141">
                      <sup class="para">[4] </sup>
                   </a>利用できるキーイベント（キー）の一覧は、Oracle による次の Java 1.6 技術文書を参照してください：<a class="ulink" href="http://docs.oracle.com/javase/jp/6/api/java/awt/event/KeyEvent.html" target="_top">Java 1.6 keyEvents description</a>
                </p>
             </div>
-            <div class="footnote" id="ftn.d0e6504">
+            <div class="footnote" id="ftn.d0e5148">
                <p>
-                  <a class="para" href="#d0e6504">
+                  <a class="para" href="#d0e5148">
                      <sup class="para">[5] </sup>
                   </a>デフォルトの OmegaT のショートカット定義ファイルは Sourceforge から入手できます：<a class="ulink" href="https://sourceforge.net/p/omegat/svn/HEAD/tree/trunk/src/org/omegat/gui/main/MainMenuShortcuts.properties" target="_top">デフォルトの OmegaT ショートカット</a>
                </p>

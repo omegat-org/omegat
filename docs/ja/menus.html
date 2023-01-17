@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
    <head><meta charset="UTF-8" />
       <title>メニュー</title>
-      <link href="OmegaT_webhelp.css" rel="stylesheet" type="text/css" />
+      <link href="OmegaT.css" rel="stylesheet" type="text/css" />
       <meta content="DocBook XSL Stylesheets V1.79.1" name="generator" />
       <link href="chapter.installing.and.running.html" rel="prev" title="OmegaT のインストールと実行" />
       <link href="windows.and.dialogs.html" rel="next" title="ウィンドウとダイアログ" />
@@ -10,7 +10,7 @@
    
 <body>
     <div id="wh-header">
-    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 4.2 - 取扱説明書</a></div></div>
+    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 4.3.1 - 取扱説明書</a></div></div>
 
     <div id="wh-body">
       <div class="wh-icon-menu" id="wh-menu"></div>
@@ -145,7 +145,7 @@
                               <p>Wikipediaページの<span class="guilabel">[編集]</span>タブをクリックします。</p>
                            </li>
                            <li class="listitem">
-                              <p>ページのURL(<span class="guilabel">action=edit</span>で終わる)をコピーし、<span class="application">OmegaT</span>に貼り付けます。</p>
+                              <p>ページのURL(<span class="guilabel">action=edit</span>で終わる)をコピーし、OmegaTに貼り付けます。</p>
                            </li>
                         </ol>
                      </div>
@@ -167,7 +167,7 @@
                   </dt>
                   <dd>
                      <p>プロジェクトを再ロードして、ソースファイルとプロジェクト設定の外部変更を反映します。</p>
-                     <p>翻訳中に<code class="filename">/tm</code>フォルダに保存された新しい翻訳メモリは、カーソルセグメント間を移動するとすぐに自動的にロードされます。</p>
+                     <p>翻訳中に<code class="filename">tm</code>フォルダに保存された新しい翻訳メモリは、カーソルセグメント間を移動するとすぐに自動的にロードされます。</p>
                   </dd>
                   <dt>
                      <span class="term">閉じる</span>
@@ -180,8 +180,8 @@
                   </dt>
                   <dd>
                      <p>内部翻訳メモリをハードディスクに保存します。OmegaT はデフォルトで 3分ごとに翻訳を自動保存します。プロジェクトを閉じる時や、OmegaT の終了時も同様です。</p>
-                     <p>3分の間隔は、<a class="link" href="windows.and.dialogs.html#dialogs.preferences.savingandoutput" title="保存と訳文ファイル生成">
-                           <span class="guimenuitem">[設定]</span> → <span class="guimenuitem">[環境設定]</span> → <span class="guimenuitem">[保存と訳文ファイル生成]</span>
+                     <p>3分の間隔は、<a class="link" href="">
+                           <span class="guimenu">[設定]</span> → <span class="guimenuitem">[環境設定]</span> → <span class="guimenuitem">[保存と訳文ファイル生成]</span>
                         </a>で変更できます。</p>
                   </dd>
                   <dt>
@@ -245,10 +245,17 @@
                      <p>また、メニュー項目から、作業中の原文ファイル、訳文ファイル、および書き込み可能な用語集を直接開くことができます。これらのファイルは、OS において選択されたプログラムによって開かれます。対応する文書がない場合は、メニュー項目がグレーアウトされます。</p>
                   </dd>
                   <dt>
+                     <span class="term">再起動</span>
+                  </dt>
+                  <dd>
+                     <p>プロジェクトを保存し OmegaT を終了します。まだ一度も手動で保存していなかった場合は、本当に閉じてもよいかどうか確認メッセージが表示されます。</p>
+                  </dd>
+                  <dt>
                      <span class="term">終了</span>
                   </dt>
                   <dd>
-                     <p>プロジェクトを保存し <span class="application">OmegaT</span> を終了します。まだ一度も手動で保存していなかった場合は、本当に閉じてもよいかどうか確認メッセージが表示されます。</p>
+                     <p>プロジェクトを保存し OmegaT を終了します。まだ一度も手動で保存していなかった場合は、本当に閉じてもよいかどうか確認メッセージが表示されます。</p>
+                     <p>macOSでは、この項目がアプリケーション・メニューに表示されます。</p>
                   </dd>
                </dl>
             </div>
@@ -326,7 +333,7 @@
                      <span class="term">選択領域を出力</span>
                   </dt>
                   <dd>
-                     <p>選択した領域を別のテキストファイルに出力します。選択領域がない場合、現在開いている原文がこのファイルに書き込まれます。<span class="application">OmegaT</span> を閉じるとき、このファイルは空の状態ではなく、通常のクリップボードと同じように機能します。出力された内容は、個人設定フォルダーの <code class="filename">selection.txt</code> というファイルにコピーされます。</p>
+                     <p>選択した領域を別のテキストファイルに出力します。選択領域がない場合、現在開いている原文がこのファイルに書き込まれます。OmegaT を閉じるとき、このファイルは空の状態ではなく、通常のクリップボードと同じように機能します。出力された内容は、個人設定フォルダーの <code class="filename">selection.txt</code> というファイルにコピーされます。</p>
                   </dd>
                   <dt>
                      <span class="term">用語の追加</span>
@@ -383,7 +390,7 @@
                   </dt>
                   <dd>
                      <p>
-                        <a class="link" href="windows.and.dialogs.html#dialogs.preferences.dictionary" title="辞書">辞書内のセグメント・テキストを自動的に検索</a>が無効になっている場合は、選択した単語を辞書内で検索できます。</p>
+                        <a class="link" href="">辞書内のセグメント・テキストを自動的に検索</a>が無効になっている場合は、選択した単語を辞書内で検索できます。</p>
                   </dd>
                   <dt>
                      <span class="term">大/小文字設定</span>
@@ -393,7 +400,7 @@
                            <strong>[Shift]</strong>
                         </span>+<span class="keycap">
                            <strong>[F3]</strong>
-                        </span>を使用して、4つの選択肢を順番に切り替えます。テキストを何も選択していない場合、<span class="application">OmegaT</span> はカーソル右にある単語をその場で選択して実行します。</p>
+                        </span>を使用して、4つの選択肢を順番に切り替えます。テキストを何も選択していない場合、OmegaT はカーソル右にある単語をその場で選択して実行します。</p>
                   </dd>
                   <dt>
                      <span class="term">参考訳文を選択</span>
@@ -429,7 +436,7 @@
                      <span class="term">原文と同一訳文を登録</span>
                   </dt>
                   <dd>
-                     <p>原文と同じ訳文を登録できます。<a class="link" href="windows.and.dialogs.html#dialogs.preferences.editor.allowtranslationtobeequaltosource">
+                     <p>原文と同じ訳文を登録できます。<a class="link" href="">
                            <span class="guilabel">［原文と同じ訳文を許可］</span>
                         </a>にチェックが入っていない場合でも、有効です。</p>
                   </dd>
@@ -466,7 +473,7 @@
                      <p>次の分節に移動します。現在の分節がファイル末尾である場合は、次のファイルの最初の分節へ移動します。</p>
                      <p>注:<span class="keycap">
                            <strong>[Enter]</strong>
-                        </span>は、<a class="link" href="windows.and.dialogs.html#dialogs.preferences.general.usetabtoadvance">[Tab]を使用して進む</a>オプションが選択されていない場合の代替ショートカットです。</p>
+                        </span>は、<a class="link" href="">[Tab]を使用して進む</a>オプションが選択されていない場合の代替ショートカットです。</p>
                   </dd>
                   <dt>
                      <span class="term">前の分節</span>
@@ -477,7 +484,7 @@
                            <strong>[Ctrl]</strong>
                         </span>+<span class="keycap">
                            <strong>[Enter]</strong>
-                        </span>は、<a class="link" href="windows.and.dialogs.html#dialogs.preferences.general.usetabtoadvance">[Tabを使用して進む]</a>オプションが選択されていない場合の代替ショートカットです。</p>
+                        </span>は、<a class="link" href="">[Tabを使用して進む]</a>オプションが選択されていない場合の代替ショートカットです。</p>
                   </dd>
                   <dt>
                      <span class="term">分節番号を指定...</span>
@@ -508,8 +515,7 @@
                      <span class="term">分節の選択履歴を進む</span>
                   </dt>
                   <dd>
-                     <p>
-                        <span class="application">OmegaT</span> は分節を選択した履歴を記憶しています。このコマンドを実行すると、<span class="guimenuitem">［分節の選択履歴を戻る］</span>コマンドによって移動した履歴をたどり、戻る前に選択していた分節へ移動できます。</p>
+                     <p>OmegaT は分節を選択した履歴を記憶しています。このコマンドを実行すると、<span class="guimenuitem">［分節の選択履歴を戻る］</span>コマンドによって移動した履歴をたどり、戻る前に選択していた分節へ移動できます。</p>
                   </dd>
                   <dt>
                      <span class="term">分節の選択履歴を戻る</span>
@@ -588,16 +594,15 @@
                      <span class="term">auto フォルダー由来の分節を色付け</span>
                   </dt>
                   <dd>
-                     <p>チェックがある場合、（たとえば <code class="filename">/tm/auto</code> フォルダー内の TMX ファイルから）自動挿入された全分節の背景を色付けします。色付けは、<a class="link" href="windows.and.dialogs.html#dialogs.preferences.editor.saveautopopulatedstatus">
+                     <p>チェックがある場合、（たとえば <code class="filename">/tm/auto</code> フォルダー内の TMX ファイルから）自動挿入された全分節の背景を色付けします。色付けは、<a class="link" href="">
                            <span class="guimenuitem">［auto フォルダー由来の翻訳かどうかを記録する］</span>
-                        </a>にチェックが入っている場合に限り、有効です。auto フォルダーから挿入された通常の翻訳は、オレンジ色で表示されます。それ以外の翻訳は、TMX の種類に応じた異なる色で表示されます。技術的な詳細は、<a class="ulink" href="http://sourceforge.net/p/omegat/feature-requests/963/" target="_top">機能改善リクエスト</a>を参照してください。</p>
+                        </a>にチェックが入っている場合に限り、有効です。<code class="filename">auto</code> フォルダーから挿入された通常の翻訳は、オレンジ色で表示されます。それ以外の翻訳は、TMX の種類に応じた異なる色で表示されます。技術的な詳細は、<a class="ulink" href="http://sourceforge.net/p/omegat/feature-requests/963/" target="_top">機能改善リクエスト</a>を参照してください。</p>
                   </dd>
                   <dt>
                      <span class="term">代替フォントを積極的に使用</span>
                   </dt>
                   <dd>
-                     <p>
-                        <span class="application">OmegaT</span> が一部の絵文字を正しく表示しない場合、このオプションにチェックを入れます（該当する絵文字を含む字体がコンピュータにインストールされている場合に有効）。注意：Windows では、この手動による代替フォント機能が標準の代替フォント機能と衝突し、望ましくない字体に置き換わることがあるようです。そのため、デフォルトではチェックが外されています。</p>
+                     <p>OmegaT が一部の絵文字を正しく表示しない場合、このオプションにチェックを入れます（該当する絵文字を含む字体がコンピュータにインストールされている場合に有効）。注意：Windows では、この手動による代替フォント機能が標準の代替フォント機能と衝突し、望ましくない字体に置き換わることがあるようです。そのため、デフォルトではチェックが外されています。</p>
                   </dd>
                   <dt>
                      <span class="term">更新情報を表示</span>
@@ -628,7 +633,7 @@
                         <ul class="itemizedlist" style="list-style-type: disc; ">
                            <li class="listitem">
                               <p>
-                                 <a class="link" href="windows.and.dialogs.html#dialogs.preferences.tagprocessing" title="タグ処理">カスタムタグ</a>を含めて欠落したタグまたは置換されたタグ。[<span class="guilabel">タグの問題</span>]オプションは常に選択されています。</p>
+                                 <a class="link" href="">カスタムタグ</a>を含めて欠落したタグまたは置換されたタグ。[<span class="guilabel">タグの問題</span>]オプションは常に選択されています。</p>
                            </li>
                            <li class="listitem">
                               <p>
@@ -724,7 +729,7 @@
                      <span class="term">(外部検索コマンド)</span>
                   </dt>
                   <dd>
-                     <p>外部検索を実行するコマンドが<a class="link" href="windows.and.dialogs.html#dialogs.preferences.externalsearch" title="外部検索">[環境設定]</a>で定義されている場合は、ここに一覧表示され、アクセスできます。</p>
+                     <p>外部検索を実行するコマンドが<a class="link" href="">[環境設定]</a>で定義されている場合は、ここに一覧表示され、アクセスできます。</p>
                   </dd>
                </dl>
             </div>
@@ -744,7 +749,7 @@
                   </dt>
                   <dd>
                      <p>
-                        <a class="link" href="windows.and.dialogs.html#dialogs.preferences" title="一般設定">[環境設定]</a>ダイアログボックスを開きます。</p>
+                        <a class="link" href="">[環境設定]</a>ダイアログボックスを開きます。</p>
                   </dd>
                   <dt>
                      <span class="term">機械翻訳</span>
@@ -782,21 +787,21 @@
                      <span class="term">ファイルフィルター...</span>
                   </dt>
                   <dd>
-                     <p>環境設定ダイアログボックスの<a class="link" href="windows.and.dialogs.html#dialogs.preferences.filefilters" title="ファイルフィルター">[ファイルフィルター]</a>を開きます。</p>
+                     <p>環境設定ダイアログボックスの<a class="link" href="">[ファイルフィルター]</a>を開きます。</p>
                      <p>これらの設定は、OmegaTの全体、つまりすべてのプロジェクトに適用されます。</p>
                   </dd>
                   <dt>
                      <span class="term">分節化規則...</span>
                   </dt>
                   <dd>
-                     <p>環境設定ダイアログボックスの<a class="link" href="windows.and.dialogs.html#dialogs.preferences.segmentationsetup" title="分節化規則の設定">[分節化規則の設定]</a>を開きます。</p>
+                     <p>環境設定ダイアログボックスの<a class="link" href="">[分節化規則の設定]</a>を開きます。</p>
                      <p>これらの設定は、OmegaTの全体、つまりすべてのプロジェクトに適用されます。</p>
                   </dd>
                   <dt>
                      <span class="term">編集...</span>
                   </dt>
                   <dd>
-                     <p>環境設定ダイアログボックスの<a class="link" href="windows.and.dialogs.html#dialogs.preferences.editor" title="編集">[編集]</a>を開きます。</p>
+                     <p>環境設定ダイアログボックスの<a class="link" href="">[編集]</a>を開きます。</p>
                      <p>これらの設定は、OmegaTの全体、つまりすべてのプロジェクトに適用されます。</p>
                   </dd>
                   <dt>
@@ -846,7 +851,7 @@
                      <span class="term">更新の確認...</span>
                   </dt>
                   <dd>
-                     <p>より新しいバージョンの<span class="application">OmegaT</span>がリリースされたかどうかを確認します。</p>
+                     <p>より新しいバージョンのOmegaTがリリースされたかどうかを確認します。</p>
                   </dd>
                </dl>
             </div>
@@ -864,8 +869,7 @@
                   </td>
                </tr>
                <tr>
-                  <td style="width: 40%; text-align: left; vertical-align: top; ">
-                     <span class="application">OmegaT</span> のインストールと実行 </td>
+                  <td style="width: 40%; text-align: left; vertical-align: top; ">OmegaT のインストールと実行 </td>
                   <td style="width: 20%; text-align: center; ">
                      <a accesskey="h" href="index_.html">ホーム</a>
                   </td>

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
    <head><meta charset="UTF-8" />
       <title>付録A 辞書</title>
-      <link href="OmegaT_webhelp.css" rel="stylesheet" type="text/css" />
+      <link href="OmegaT.css" rel="stylesheet" type="text/css" />
       <meta content="DocBook XSL Stylesheets V1.79.1" name="generator" />
       <link href="howtos.html" rel="prev" title="操作方法..." />
       <link href="appendix.glossaries.html" rel="next" title="付録B 用語集 (Glossaries)" />
@@ -10,7 +10,7 @@
    
 <body>
     <div id="wh-header">
-    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 4.2 - 取扱説明書</a></div></div>
+    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 4.3.1 - 取扱説明書</a></div></div>
 
     <div id="wh-body">
       <div class="wh-icon-menu" id="wh-menu"></div>
@@ -55,17 +55,17 @@
             <ul class="toc">
                <li>
                   <span class="section">
-                     <a href="appendix.dictionaries.html#d0e5471">辞書のダウンロードとインストール方法</a>
+                     <a href="appendix.dictionaries.html#d0e4127">辞書のダウンロードとインストール方法</a>
                   </span>
                </li>
                <li>
                   <span class="section">
-                     <a href="appendix.dictionaries.html#d0e5539">辞書に関するトラブルシューティング</a>
+                     <a href="appendix.dictionaries.html#d0e4193">辞書に関するトラブルシューティング</a>
                   </span>
                </li>
             </ul>
          </div>
-         <section class="section" id="d0e5471">
+         <section class="section" id="d0e4127">
             <div class="titlepage">
                <div>
                   <div>
@@ -73,8 +73,7 @@
                   </div>
                </div>
             </div>
-            <p>
-               <span class="application">OmegaT</span> は、StarDict 形式および Lingvo DSL 形式の辞書に対応しています。StarDict 形式の辞書は、次の手順でインストールしてください：</p>
+            <p>OmegaTは、StarDict 形式および Lingvo DSL 形式の辞書に対応しています。StarDict 形式の辞書は、次の手順でインストールしてください：</p>
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
@@ -85,22 +84,14 @@
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p>辞書ファイルをダウンロードします。これは <code class="filename">TAR アーカイブ</code>（拡張子 <span class="emphasis">
-                           <em>tar.bz</em>
-                        </span> または <span class="emphasis">
-                           <em>tar.bz2</em>
-                        </span>）である必要があります。</p>
+                     <p>ファイルをダウンロードします。これは tarball アーカイブ (拡張子 <code class="filename">tar.bz</code> または <code class="filename">tar.bz2</code>) をダウンロードする必要があります。</p>
                   </li>
                </ul>
             </div>
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p>untar コマンド（Windows であれば、たとえば <code class="filename">WinRAR</code> などのユーティリティ）で、そのファイルを展開します。展開先は、プロジェクトフォルダー配下の「dictionary」フォルダーの中です。展開すると、拡張子が <span class="emphasis">
-                           <em>dz, idx </em>
-                        </span>、<span class="emphasis">
-                           <em>ifo</em>
-                        </span> の３つのファイルができるはずです。</p>
+                     <p>untarユーティリティ(またはWindowsでは<code class="filename">winrar</code>などの同等のユーティリティ)を使用して、その内容をプロジェクトの<code class="filename">dictionary</code>フォルダに抽出します。拡張子は <code class="filename">dz、 idx </code>、および <code class="filename">ifo</code>の 3 つのファイルがあるはずです。</p>
                   </li>
                </ul>
             </div>
@@ -144,7 +135,7 @@
             </div>
             <br class="figure-break" />
          </section>
-         <section class="section" id="d0e5539">
+         <section class="section" id="d0e4193">
             <div class="titlepage">
                <div>
                   <div>
@@ -170,9 +161,7 @@
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p>そのフォルダーには同じ名前のファイルが３つ（拡張子違いで）存在していますか？　もし１つしか見当たらなければ、拡張子を確認してみましょう。<span class="emphasis">
-                           <em>tar.bz</em>
-                        </span> だったら、圧縮ファイルを展開し忘れています。</p>
+                     <p>そのフォルダーには同じ名前のファイルが３つ（拡張子違いで）存在していますか？　もし１つしか見当たらなければ、拡張子を確認してみましょう。<code class="filename">tar.bz</code> だったら、圧縮ファイルを展開し忘れています。</p>
                   </li>
                </ul>
             </div>

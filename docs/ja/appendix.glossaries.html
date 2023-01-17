@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
    <head><meta charset="UTF-8" />
       <title>付録B 用語集 (Glossaries)</title>
-      <link href="OmegaT_webhelp.css" rel="stylesheet" type="text/css" />
+      <link href="OmegaT.css" rel="stylesheet" type="text/css" />
       <meta content="DocBook XSL Stylesheets V1.79.1" name="generator" />
       <link href="appendix.dictionaries.html" rel="prev" title="付録A 辞書" />
       <link href="appendix.spellchecker.html" rel="next" title="付録C 綴り確認" />
@@ -10,7 +10,7 @@
    
 <body>
     <div id="wh-header">
-    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 4.2 - 取扱説明書</a></div></div>
+    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 4.3.1 - 取扱説明書</a></div></div>
 
     <div id="wh-body">
       <div class="wh-icon-menu" id="wh-menu"></div>
@@ -55,22 +55,22 @@
             <ul class="toc">
                <li>
                   <span class="section">
-                     <a href="appendix.glossaries.html#d0e5574">デフォルトの用語集</a>
+                     <a href="appendix.glossaries.html#glossaries.defaultglossary">デフォルトの用語集</a>
                   </span>
                </li>
                <li>
                   <span class="section">
-                     <a href="appendix.glossaries.html#d0e5598">使い方</a>
+                     <a href="appendix.glossaries.html#glossaries.usage">使い方</a>
                   </span>
                </li>
                <li>
                   <span class="section">
-                     <a href="appendix.glossaries.html#d0e5648">ファイル形式</a>
+                     <a href="appendix.glossaries.html#glossaries.fileformat">ファイル形式</a>
                   </span>
                </li>
                <li>
                   <span class="section">
-                     <a href="appendix.glossaries.html#d0e5764">用語集に関するよくある問題</a>
+                     <a href="appendix.glossaries.html#glossaries.commonproblems">用語集に関するよくある問題</a>
                   </span>
                </li>
             </ul>
@@ -78,7 +78,7 @@
          <p>用語集(Glossaries)は、用語のファイルです。手動で作成および更新することも、他のプロジェクトからインポートすることもできます。</p>
          <p>各プロジェクトは任意の数の用語集を参照用に持つことができますが、1つの用語集(プロジェクトのデフォルト用語集)のみがOmegaTユーザー・インターフェースから直接書き込み可能になります。</p>
          <p>プロジェクト内の用語集の数に関係なく、セグメント内の単語と一致する用語が[用語集]ペインに表示されます。</p>
-         <section class="section" id="d0e5574">
+         <section class="section" id="glossaries.defaultglossary">
             <div class="titlepage">
                <div>
                   <div>
@@ -87,10 +87,10 @@
                </div>
             </div>
             <p>デフォルトの書き込み可能な用語集は<code class="filename">/glossary</code>プロジェクトフォルダにあり、<code class="filename">glossary.txt</code>という名前が付いています。</p>
-            <p>名前と場所はプロジェクトのプロパティダイアログで変更できますが、拡張子は<code class="filename">.txt</code>または<code class="filename">.utf8</code>で、場所は<code class="filename">/glossary</code>プロジェクトフォルダに含まれている必要があります。</p>
+            <p>名前と場所はプロジェクトのプロパティダイアログで変更できますが、拡張子は<code class="filename">.txt</code>または<code class="filename">.utf8</code>で、場所は<code class="filename">glossary</code>プロジェクトフォルダに含まれている必要があります。</p>
             <p>ファイルは、設定時に存在する必要はありません。最初の用語集エントリを追加するときに作成されます。ファイルがすでに存在する場合は、ファイルの形式または文字セットの確認は行われません。新しいエントリは常にタブ区切り形式で、ファイルはUTF-8エンコーディングで保存されます。</p>
          </section>
-         <section class="section" id="d0e5598">
+         <section class="section" id="glossaries.usage">
             <div class="titlepage">
                <div>
                   <div>
@@ -98,7 +98,7 @@
                   </div>
                </div>
             </div>
-            <p>既存の用語集を使用するには、プロジェクトの作成後に<code class="filename">/glossary</code>フォルダに配置します。<span class="application">OmegaT</span>は、プロジェクトを開くと、このフォルダ内の用語集ファイルを自動的に検出します。</p>
+            <p>既存の用語集を使用するには、プロジェクトの作成後に<code class="filename">glossary</code>フォルダに配置します。OmegaTは、プロジェクトを開くと、このフォルダ内の用語集ファイルを自動的に検出します。</p>
             <p>書き込み可能な用語集に新しい用語を追加するには、<span class="guimenuitem">編集</span>&gt;<span class="guimenuitem">用語の追加</span>(<span class="keycap">
                   <strong>Ctrl+Shift+G</strong>
                </span>)を使用します。新しく追加された用語はすぐに認識されます。新しい用語を参照用の用語集に追加するには、外部テキストエディタで編集します。追加した用語は、用語集ファイルの変更が保存され次第、認識されます。</p>
@@ -112,7 +112,7 @@
                </span>)をクリックします。</p>
             <p>分節の原文部分で一致する用語に下線を付けるには、<span class="guimenuitem">表示</span>&gt;<span class="guimenuitem">用語集の一致をマーク</span>を使用します。下線の付いた用語を右クリックし訳文を選択し、分節のターゲット部分のカーソル位置に挿入します。</p>
          </section>
-         <section class="section" id="d0e5648">
+         <section class="section" id="glossaries.fileformat">
             <div class="titlepage">
                <div>
                   <div>
@@ -185,9 +185,9 @@
                </div>
             </div>
             <br class="table-break" />
-            <p>用語集は<code class="filename">/glossary</code>プロジェクトフォルダに配置する必要があります。フォルダ内のさらにフォルダー内にある用語集も認識されます。</p>
+            <p>用語集は<code class="filename">glossary</code>プロジェクトフォルダに配置する必要があります。フォルダ内のさらにフォルダー内にある用語集も認識されます。</p>
          </section>
-         <section class="section" id="d0e5764">
+         <section class="section" id="glossaries.commonproblems">
             <div class="titlepage">
                <div>
                   <div>
@@ -203,7 +203,8 @@
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p>glossary フォルダーに用語集ファイルがない</p>
+                     <p>
+                        <code class="filename">glossary</code> フォルダーに用語集ファイルがない</p>
                   </li>
                </ul>
             </div>

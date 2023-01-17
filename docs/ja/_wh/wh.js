@@ -517,8 +517,8 @@ return this;
 })(jQuery);
 var wh = (function () {
 var toc_entries = [
-["\n                        OmegaT のインストールと実行","chapter.installing.and.running.html",[
-["Windows ユーザー","chapter.installing.and.running.html#d0e17",null],
+["OmegaT のインストールと実行","chapter.installing.and.running.html",[
+["Windows ユーザー","chapter.installing.and.running.html#Windows.users",null],
 ["Linux（Intel）ユーザー","chapter.installing.and.running.html#Linux.Intel.users",null],
 ["macOS ユーザー","chapter.installing.and.running.html#MAC.OSX.users",null],
 ["その他のシステム","chapter.installing.and.running.html#other.systems",null],
@@ -542,29 +542,28 @@ var toc_entries = [
 ["プロジェクトの検索","windows.and.dialogs.html#windows.textsearch",null],
 ["テキストの置換","windows.and.dialogs.html#windows.textreplace",null],
 ["整合ツール","windows.and.dialogs.html#windows.aligner",null],
-["スクリプト","windows.and.dialogs.html#windows.scripts",null],
-["一般設定","windows.and.dialogs.html#dialogs.preferences",null]
+["スクリプト","windows.and.dialogs.html#windows.scripts",null]
 ]],
 ["ウィンドウ","panes.html",[
-["編集","panes.html#editor.pane",null],
-["参考訳文","panes.html#d0e4310",null],
-["用語集","panes.html#d0e4359",null],
-["辞書","panes.html#d0e4372",null],
-["機械翻訳","panes.html#d0e4380",null],
-["複数訳文","panes.html#d0e4388",null],
-["メモ","panes.html#d0e4399",null],
-["コメント","panes.html#d0e4410",null],
-["ステータスバー","panes.html#d0e4415",null]
+["編集","panes.html#panes.editor",null],
+["参考訳文","panes.html#panes.fuzzymatches",null],
+["用語集","panes.html#panes.glossary",null],
+["辞書","panes.html#panes.dictionary",null],
+["機械翻訳","panes.html#panes.machinetranslation",null],
+["複数訳文","panes.html#panes.multipletranslations",null],
+["メモ","panes.html#panes.notes",null],
+["コメント","panes.html#panes.comments",null],
+["ステータスバー","panes.html#panes.statusbar",null]
 ]],
 ["プロジェクトフォルダー","project.folder.html",[
-["source","project.folder.html#d0e4455",null],
-["target","project.folder.html#d0e4460",null],
-["tm","project.folder.html#d0e4483",null],
-["辞書","project.folder.html#d0e4592",null],
-["用語集","project.folder.html#d0e4600",null],
-["omegat","project.folder.html#folder.omegat",null],
-["omegat.project（ファイル）","project.folder.html#d0e4668",null],
-[".repositories","project.folder.html#d0e4675",null]
+["source","project.folder.html#projectfolder.source",null],
+["target","project.folder.html#projectfolder.target",null],
+["tm","project.folder.html#projectfolder.tm",null],
+["辞書","project.folder.html#projectfolder.dictionary",null],
+["用語集","project.folder.html#projectfolder.glossary",null],
+["omegat","project.folder.html#projectfolder.omegat",null],
+["omegat.project（ファイル）","project.folder.html#projectfolder.omegat.project",null],
+[".repositories","project.folder.html#projectfolder.repositories",null]
 ]],
 ["操作方法...","howtos.html",[
 ["チームプロジェクトを設定する","howtos.html#howto.setupteamproject",null],
@@ -574,18 +573,20 @@ var toc_entries = [
 ["PDFファイルの翻訳","howtos.html#howto.translatepdf",null],
 ["右から左へ表記する言語","howtos.html#howto.managerighttoleft",null]
 ]],
-["Appendices","appendix.dictionaries.html",[
-["A. 辞書","appendix.dictionaries.html",null],
+["A. 辞書","appendix.dictionaries.html",[
+["辞書のダウンロードとインストール方法","appendix.dictionaries.html#d0e4127",null],
+["辞書に関するトラブルシューティング","appendix.dictionaries.html#d0e4193",null]
+]],
 ["B. 用語集 (Glossaries)","appendix.glossaries.html",[
-["デフォルトの用語集","appendix.glossaries.html#d0e5574",null],
-["使い方","appendix.glossaries.html#d0e5598",null],
-["ファイル形式","appendix.glossaries.html#d0e5648",null],
-["用語集に関するよくある問題","appendix.glossaries.html#d0e5764",null]
+["デフォルトの用語集","appendix.glossaries.html#glossaries.defaultglossary",null],
+["使い方","appendix.glossaries.html#glossaries.usage",null],
+["ファイル形式","appendix.glossaries.html#glossaries.fileformat",null],
+["用語集に関するよくある問題","appendix.glossaries.html#glossaries.commonproblems",null]
 ]],
 ["C. 綴り確認","appendix.spellchecker.html",[
-["綴り確認用辞書の組み込み","appendix.spellchecker.html#d0e5814",null],
-["綴り確認用辞書の使用","appendix.spellchecker.html#d0e5862",null],
-["使用時のヒント","appendix.spellchecker.html#hints",null]
+["綴り確認用辞書の組み込み","appendix.spellchecker.html#spellchecker.installingdictionaries",null],
+["綴り確認用辞書の使用","appendix.spellchecker.html#spellchecker.usingdictionaries",null],
+["使用時のヒント","appendix.spellchecker.html#spellchecker.hints",null]
 ]],
 ["D. 正規表現","appendix.regexp.html",[
 ["正規表現関連ツールとその使用例","appendix.regexp.html#regex.tools.and.examples.of.use",null]
@@ -599,7 +600,6 @@ var toc_entries = [
 ["ツールメニュー","appendix.shortcut.custom.html#ch04.shortcuts.ToolsMenu",null],
 ["設定メニュー","appendix.shortcut.custom.html#ch04.shortcuts.OptionsMenu",null],
 ["ヘルプメニュー","appendix.shortcut.custom.html#ch04.shortcuts.HelpMenu",null]
-]]
 ]]];
 var toc_initiallyCollapsed = false;
 var messages = [
@@ -874,7 +874,7 @@ message = translation[index];
 }
 return message;
 }
-var storageId = "1q1htkuizgoo-1hk8qojkah2bp";
+var storageId = "-12l0nuhrbz1y3-199dh7z56y9wo";
 function storageSet(key, value) {
 window.sessionStorage.setItem(key + storageId, String(value));
 }

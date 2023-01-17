@@ -48,7 +48,7 @@ import org.omegat.util.OStrings;
  */
 public class Xliff1Filter extends AbstractXliffFilter {
 
-    // ---------------------------- IFilter API----------------------------
+    // ---------------------------- IFilter API---------------------------
 
     @Override
     public String getFileFormatName() {
@@ -59,16 +59,15 @@ public class Xliff1Filter extends AbstractXliffFilter {
         return "1."; // can be 1.0, 1.1 or 1.2
     }
 
-    // ----------------------------- AbstractXmlFilter
-    // part----------------------
+    // ----------------------- AbstractXmlFilter part----------------------
 
     /** Current translation unit **/
     private String unitId = null;
     private boolean flushedUnit = false;
     private int lastGroupId = 0; // only used when group id is not present in
                                  // the file
-    private List<XMLEvent> segSource = new LinkedList<>();
-    private Map<String, List<XMLEvent>> subSegments = new TreeMap<>();
+    private final List<XMLEvent> segSource = new LinkedList<>();
+    private final Map<String, List<XMLEvent>> subSegments = new TreeMap<>();
     private StartElement targetStartEvent = null;
     private int inSubSeg = 0;
 
@@ -93,8 +92,8 @@ public class Xliff1Filter extends AbstractXliffFilter {
         case "file":
             try {
                 path += "/" + startElement.getAttributeByName(new QName("original")).getValue();
-            } catch (NullPointerException noid) { // Note: in spec, original is
-                                                  // REQUIRED
+            } catch (NullPointerException noid) {
+                // Note: in spec, original is REQUIRED
                 throw new XMLStreamException(
                         OStrings.getString("XLIFF_MANDATORY_ORIGINAL_MISSING", "original", "file"));
             }
@@ -103,8 +102,8 @@ public class Xliff1Filter extends AbstractXliffFilter {
         case "group":
             try {
                 path += "/" + startElement.getAttributeByName(new QName("id")).getValue();
-            } catch (NullPointerException noid) { // in XLIFF 1, this attribute
-                                                  // is not REQUIRED
+            } catch (NullPointerException noid) {
+                // in XLIFF 1, this attribute is not REQUIRED
                 try {
                     path += "/" + startElement.getAttributeByName(new QName("resname")).getValue();
                 } catch (NullPointerException noresname) {
@@ -336,24 +335,17 @@ public class Xliff1Filter extends AbstractXliffFilter {
                         } else {
                             Attribute posAttr = stEl.getAttributeByName(new QName("pos"));
                             String posVal = posAttr == null ? "" : posAttr.getValue();
-                            if ("close".equals(posVal) || "end".equals(posVal)) { // in
-                                                                                  // OT,
-                                                                                  // appear
-                                                                                  // as
-                                                                                  // close
-                                                                                  // tag
+                            if ("close".equals(posVal) || "end".equals(posVal)) {
+                                // in OT, appear as close tag
                                 tagsMap.put("/" + prefix + count, nativeCode);
                                 res.append("</").append(prefix).append(count).append(">");
                             } else {
                                 tagsMap.put("" + prefix + count, nativeCode);
-                                if ("open".equals(posVal) || "begin".equals(posVal)) { // in
-                                                                                       // OT,
-                                                                                       // appear
-                                                                                       // as
-                                                                                       // open
-                                                                                       // tag
+                                if ("open".equals(posVal) || "begin".equals(posVal)) {
+                                    // in OT,appear as open tag
                                     res.append("<").append(prefix).append(count).append(">");
-                                } else { // in OT, appear as empty
+                                } else {
+                                    // in OT, appear as empty
                                     res.append("<").append(prefix).append(count).append("/>");
                                 }
                             }
@@ -363,8 +355,8 @@ public class Xliff1Filter extends AbstractXliffFilter {
                         nativeCode.add(ev);
                         tagStack.push("mark-protected");
                         break;
-                    } else if (isDeletedTag(stEl)) { // generate nothing, not
-                                                     // either the contents
+                    } else if (isDeletedTag(stEl)) {
+                        // generate nothing, not either the contents
                         tagStack.push("mark-deleted");
                         saveBuf.add(res);
                         res = new StringBuffer();
@@ -447,8 +439,8 @@ public class Xliff1Filter extends AbstractXliffFilter {
         return name.charAt(0);
     }
 
-    // A tag whose content should be replaced by empty tag, for protection. Can
-    // be overridden
+    // A tag whose content should be replaced by empty tag, for protection.
+    // Can be overridden
     protected boolean isProtectedTag(StartElement stEl) {
         return stEl.getName().equals(new QName(namespace, "ph"))
                 || stEl.getName().equals(new QName(namespace, "it"))

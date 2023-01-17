@@ -212,7 +212,7 @@ public class Xliff2Filter extends AbstractXliffFilter {
                 tagsCount.put(c, 0);
             }
         }
-        StringBuffer res = new StringBuffer(), saveBuf = null;
+        StringBuffer res = new StringBuffer();
         for (XMLEvent ev : srcList) {
             if (ev.isCharacters()) {
                 res.append(ev.asCharacters().getData());

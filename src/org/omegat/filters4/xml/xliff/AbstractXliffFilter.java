@@ -54,7 +54,7 @@ import org.omegat.filters2.FilterContext;
  */
 abstract class AbstractXliffFilter extends AbstractXmlFilter {
 
-    // ---------------------------- IFilter API ----------------------------
+    // ---------------------------- IFilter API ---------------------------
 
     @Override
     public Instance[] getDefaultInstances() {
@@ -91,8 +91,7 @@ abstract class AbstractXliffFilter extends AbstractXmlFilter {
 
     protected abstract String versionPrefix();
 
-    // ----------------------------- AbstractXmlFilter part
-    // ----------------------
+    // --------------------- AbstractXmlFilter part -----------------------
 
     /* -- Data about current unit */
     protected String path = "/", ignoreScope = null;

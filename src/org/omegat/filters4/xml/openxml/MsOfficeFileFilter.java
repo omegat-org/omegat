@@ -41,7 +41,7 @@ import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 
 /**
- * Filter for Microsoft Open XML
+ * Filter for Microsoft Open XML.
  *
  * @author Thomas Cordonnier
  */

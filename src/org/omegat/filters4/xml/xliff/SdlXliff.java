@@ -28,6 +28,7 @@ package org.omegat.filters4.xml.xliff;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 import java.util.UUID;
 import java.util.regex.Matcher;
@@ -100,11 +101,16 @@ public class SdlXliff extends Xliff1Filter {
     private Map<EntryKey, UUID> altNoteLocations = new TreeMap<>();
     private Map<String, List<XMLEvent>> tagDefs = new TreeMap<>();
     private String currentProp = null;
-    private java.util.Set<String> midSet = new java.util.HashSet<String>();
-    private boolean has_seg_defs = false, mid_has_modifier = false, mid_has_modif_date = false;
+    private Set<String> midSet = new java.util.HashSet<>();
+    private boolean has_seg_defs = false;
+    private boolean mid_has_modifier = false;
+    private boolean mid_has_modif_date = false;
 
-    @Override // also starts on cmt-defs or tag-defs, else like in standard
-              // XLIFF
+
+    /**
+     * Also starts on cmt-defs or tag-defs, else like in standard XLIFF.
+     */
+    @Override
     protected void checkCurrentCursorPosition(javax.xml.stream.XMLStreamReader reader, boolean doWrite) {
         if (reader.getEventType() == StartElement.START_ELEMENT) {
             String name = reader.getLocalName();
@@ -320,7 +326,7 @@ public class SdlXliff extends Xliff1Filter {
                         }
                     }
                 }
-            } catch (Exception e) {
+            } catch (Exception ignored) {
             }
         }
         // default
@@ -425,7 +431,7 @@ public class SdlXliff extends Xliff1Filter {
                             } else {
                                 writer.write(ev.toString());
                             }
-                    } catch (Exception ex2) {
+                    } catch (Exception ignored) {
                     }
                 }
                 return base + ": " + writer.toString();

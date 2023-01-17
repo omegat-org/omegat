@@ -53,7 +53,7 @@ import org.omegat.util.OStrings;
 
 /**
  * Filter for MS Office's XML files (those which are inside the DOCX, XLSX,
- * PPTX...)
+ * PPTX...).
  *
  * @author Thomas Cordonnier
  */

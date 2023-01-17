@@ -48,6 +48,7 @@ import org.omegat.core.data.IProject;
 import org.omegat.core.data.TMXEntry;
 import org.omegat.filters2.Instance;
 import org.omegat.filters2.FilterContext;
+import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 
 /**
@@ -63,7 +64,7 @@ public class SdlXliff extends Xliff1Filter {
 
     @Override
     public String getFileFormatName() {
-        return "SDL XLIFF (StaX)";
+        return OStrings.getString("SDLXLIFF_FILTER_NAME");
     }
 
     @Override

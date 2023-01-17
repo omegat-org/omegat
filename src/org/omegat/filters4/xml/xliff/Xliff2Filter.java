@@ -37,9 +37,11 @@ import javax.xml.stream.events.EndElement;
 import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 
+import org.omegat.util.OStrings;
+
 
 /**
- * Filter for support Xliff 1 files as bilingual (unlike filters3/xml/xliff)
+ * Filter for support Xliff 2.0 files as bilingual (unlike filters3/xml/xliff).
  *
  * @author Thomas Cordonnier
  */
@@ -49,7 +51,7 @@ public class Xliff2Filter extends AbstractXliffFilter {
 
     @Override
     public String getFileFormatName() {
-        return "Xliff 2.x(StaX)";
+        return OStrings.getString("XLIFF2FILTER_FILTER_NAME");
     }
 
     protected final String versionPrefix() {
@@ -86,8 +88,8 @@ public class Xliff2Filter extends AbstractXliffFilter {
                 try {
                     path += "/" + startElement.getAttributeByName(new QName("id")).getValue();
                 } catch (NullPointerException noid) { // Note: in spec, id is REQUIRED
-                    throw new XMLStreamException("Missing attribute 'id' in <" 
-                        + startElement.getName().getLocalPart() + ">");
+                    throw new XMLStreamException(OStrings.getString(
+                            "XLIFF_MANDATORY_ORIGINAL_MISSING",  "id",  startElement.getName().getLocalPart()));
                 }
                 updateIgnoreScope(startElement);
                 break;

@@ -208,7 +208,8 @@ public class FiltersCustomizerController extends BasePreferencesController {
     @Override
     protected void initFromPrefs() {
         editableFilters = isProjectSpecific && projectFilters != null
-                ? FilterMaster.cloneConfig(projectFilters) : FilterMaster.cloneConfig(userFilters);
+                ? FilterMaster.cloneConfig(projectFilters)
+                : FilterMaster.cloneConfig(userFilters);
         panel.filtersTable.setModel(new FiltersTableModel(editableFilters));
         TableRowSorter<TableModel> sorter = new TableRowSorter<>(panel.filtersTable.getModel());
         panel.filtersTable.setRowSorter(sorter);

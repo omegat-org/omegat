@@ -44,6 +44,7 @@ import java.util.regex.Pattern;
 
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
+import javax.swing.UIManager;
 import javax.swing.text.JTextComponent;
 
 import org.omegat.Main;
@@ -408,11 +409,14 @@ public final class MainWindowMenuHandler {
             projectModified = Core.getProject().isProjectModified();
         }
         // RFE 1302358
-        // Add Yes/No Warning before OmegaT quits
+        // Add Ok/Cancel Warning before OmegaT quits, default is cancel
         if (projectModified || Preferences.isPreference(Preferences.ALWAYS_CONFIRM_QUIT)) {
-            if (JOptionPane.YES_OPTION != JOptionPane.showConfirmDialog(mainWindow,
+            final String okText = UIManager.getString("OptionPane.okButtonText");
+            final String cancelText = UIManager.getString("OptionPane.cancelButtonText");
+            Object[] options = {okText, cancelText};
+            if (JOptionPane.YES_OPTION != JOptionPane.showOptionDialog(mainWindow,
                     OStrings.getString("MW_QUIT_CONFIRM"), OStrings.getString("CONFIRM_DIALOG_TITLE"),
-                    JOptionPane.YES_NO_OPTION)) {
+                    JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, null, options, cancelText)) {
                 return;
             }
         }

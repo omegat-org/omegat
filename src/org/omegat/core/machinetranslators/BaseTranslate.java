@@ -29,7 +29,6 @@ package org.omegat.core.machinetranslators;
 
 import java.util.OptionalLong;
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javax.cache.Cache;
 import javax.cache.CacheManager;
@@ -44,6 +43,7 @@ import org.openide.awt.Mnemonics;
 
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
+import org.omegat.core.events.IProjectEventListener;
 import org.omegat.gui.exttrans.IMTGlossarySupplier;
 import org.omegat.gui.exttrans.IMachineTranslation;
 import org.omegat.util.CredentialsManager;
@@ -63,8 +63,6 @@ public abstract class BaseTranslate implements IMachineTranslation {
 
     protected boolean enabled;
     protected IMTGlossarySupplier glossarySupplier;
-
-    protected static final Pattern RE_HTML = Pattern.compile("&#([0-9]+);");
 
     /**
      * Machine translation implementation can use this cache for skip requests
@@ -86,11 +84,40 @@ public abstract class BaseTranslate implements IMachineTranslation {
             menuItem.setSelected(newValue);
             enabled = newValue;
         });
-        cache = getCafeineCache(getName());
-        CoreEvents.registerProjectChangeListener(eventType -> cache.clear());
+        cache = getCacheLayer(getName());
+        setCacheClearPolicy();
     }
 
-    protected Cache<String, String> getCafeineCache(String name) {
+    /**
+     * Creat cache object.
+     * <p>
+     * MT connectors can override cache size and invalidate policy.
+     * @param name name of cache which should be unique among MT connectors.
+     * @return Cache object
+     */
+    protected Cache<String, String> getCacheLayer(String name) {
+        return getCaffeineCache(name, 1_000, Duration.ONE_DAY);
+    }
+
+    /**
+     * Register cache clear policy.
+     */
+    protected void setCacheClearPolicy() {
+        CoreEvents.registerProjectChangeListener(eventType -> {
+            if (eventType.equals(IProjectEventListener.PROJECT_CHANGE_TYPE.CLOSE)) {
+                cache.clear();
+            }
+        });
+    }
+
+    /**
+     * Common function to obtain CaffeineCache instance.
+     * @param name name of cache.
+     * @param sizeOfCache size of cache.
+     * @param duration duration before clear.
+     * @return Cache object.
+     */
+    protected Cache<String, String> getCaffeineCache(String name, int sizeOfCache, Duration duration) {
         CachingProvider provider = Caching.getCachingProvider();
         CacheManager manager = provider.getCacheManager();
         Cache<String, String> cache1 = manager.getCache(name);
@@ -98,8 +125,8 @@ public abstract class BaseTranslate implements IMachineTranslation {
             return cache1;
         }
         CaffeineConfiguration<String, String> config = new CaffeineConfiguration<>();
-        config.setExpiryPolicyFactory(() -> new CreatedExpiryPolicy(Duration.ONE_DAY));
-        config.setMaximumSize(OptionalLong.of(1000));
+        config.setExpiryPolicyFactory(() -> new CreatedExpiryPolicy(duration));
+        config.setMaximumSize(OptionalLong.of(sizeOfCache));
         return manager.createCache(name, config);
     }
 

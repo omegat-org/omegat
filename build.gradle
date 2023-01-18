@@ -101,8 +101,6 @@ dependencies {
     } else {
         implementation 'commons-io:commons-io:2.11.0'
         implementation 'commons-lang:commons-lang:2.6'
-        api 'org.slf4j:slf4j-api:1.7.32'
-        implementation 'org.slf4j:slf4j-jdk14:1.7.32'
 
         // macOS integration
         implementation 'org.madlonkay:desktopsupport:0.6.0'
@@ -129,6 +127,7 @@ dependencies {
 
         // Legacy projects re-hosted on Maven Central
         api 'org.omegat:vldocking:3.0.5'
+        runtimeOnly 'org.slf4j:slf4j-jdk14:1.7.32' // needed by vldocking
         implementation 'org.omegat:htmlparser:1.5'
         implementation 'org.omegat:gnudiff4j:1.15'
         implementation 'org.omegat:lib-mnemonics:1.0'

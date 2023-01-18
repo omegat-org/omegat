@@ -313,10 +313,10 @@
 	  </variablelist>
 		
 	  <para>Additional variants are available for <literal>${nameOnly}</literal>
-	  and <literal>${Extension}</literal>.</para>
+	  and <literal>${extension}</literal>.</para>
 		
 	  <para>If the file name is ambiguous, variables of the form
-	  <literal>${nameonly-</literal><emphasis>extension number</emphasis>} and
+	  <literal>${nameOnly-</literal><emphasis>extension number</emphasis>} and
 	  <literal>${extension-</literal><emphasis>extension number} </emphasis> can
 	  be used.</para>
 

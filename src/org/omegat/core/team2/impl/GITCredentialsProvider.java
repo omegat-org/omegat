@@ -42,7 +42,6 @@ import com.jcraft.jsch.IdentityRepository;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.SSHAgentConnector;
 import com.jcraft.jsch.Session;
-import com.jcraft.jsch.Slf4jLogger;
 import org.eclipse.jgit.errors.UnsupportedCredentialItem;
 import org.eclipse.jgit.transport.CredentialItem;
 import org.eclipse.jgit.transport.CredentialsProvider;
@@ -85,7 +84,7 @@ public class GITCredentialsProvider extends CredentialsProvider {
 
     static {
         // Set up ssh-agent support
-        JSch.setLogger(new Slf4jLogger());
+        JSch.setLogger(new JSchCompatLogger());
         JschConfigSessionFactory sessionFactory = new JschConfigSessionFactory() {
 
             /**

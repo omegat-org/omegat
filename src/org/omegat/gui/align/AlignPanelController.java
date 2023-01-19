@@ -28,7 +28,6 @@ package org.omegat.gui.align;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Cursor;
-import java.awt.Font;
 import java.awt.Rectangle;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
@@ -90,7 +89,9 @@ import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 
 import org.apache.commons.io.FilenameUtils;
+
 import org.omegat.core.Core;
+import org.omegat.core.CoreEvents;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.filters2.master.FilterMaster;
@@ -588,10 +589,9 @@ public class AlignPanelController {
 
         panel.table.setTransferHandler(new AlignTransferHandler());
         panel.table.addPropertyChangeListener("dropLocation", new DropLocationListener());
-        String fontName = Preferences.getPreference(Preferences.TF_SRC_FONT_NAME);
-        int fontSize = Integer.parseInt(Preferences.getPreference(Preferences.TF_SRC_FONT_SIZE));
-        panel.table.setFont(new Font(fontName, Font.PLAIN, fontSize));
-        
+        panel.table.setFont(Core.getMainWindow().getApplicationFont());
+        CoreEvents.registerFontChangedEventListener(panel.table::setFont);
+
         // Set initial state
         updateHighlight();
         updatePanel();

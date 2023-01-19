@@ -35,6 +35,7 @@ package org.omegat.gui.search;
 
 import java.awt.Component;
 import java.awt.Container;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -63,7 +64,10 @@ import javax.swing.event.DocumentListener;
 import javax.swing.text.BadLocationException;
 import javax.swing.undo.UndoManager;
 
+import org.openide.awt.Mnemonics;
+
 import org.omegat.core.Core;
+import org.omegat.core.CoreEvents;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.search.SearchExpression;
 import org.omegat.core.search.SearchMode;
@@ -86,7 +90,6 @@ import org.omegat.util.gui.OSXIntegration;
 import org.omegat.util.gui.OmegaTFileChooser;
 import org.omegat.util.gui.StaticUIUtils;
 import org.omegat.util.gui.UIThreadsUtil;
-import org.openide.awt.Mnemonics;
 
 /**
  * This is a window that appears when user'd like to search for something. For
@@ -115,6 +118,9 @@ public class SearchWindowController {
     public SearchWindowController(SearchMode mode) {
         form = new SearchWindowForm();
         form.setJMenuBar(new SearchWindowMenu(this));
+        Font f = Core.getMainWindow().getApplicationFont();
+        setFont(f);
+
         this.mode = mode;
         initialEntry = Core.getEditor().getCurrentEntryNumber();
         initialCaret = getCurrentPositionInEntryTranslationInEditor(Core.getEditor());
@@ -189,6 +195,7 @@ public class SearchWindowController {
             form.m_excludeOrphans.setVisible(false);
             break;
         }
+        CoreEvents.registerFontChangedEventListener(this::setFont);
     }
 
     public SearchMode getMode() {
@@ -320,6 +327,14 @@ public class SearchWindowController {
                 }
             }
         });
+    }
+
+    private void setFont(Font f) {
+        form.setFont(f);
+        form.m_searchField.setFont(f);
+        form.m_replaceField.setFont(f);
+        form.m_viewer.setFont(f);
+        form.revalidate();
     }
 
     private void configureHistoryComboBox(final JComboBox<String> box) {

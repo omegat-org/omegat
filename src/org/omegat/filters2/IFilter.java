@@ -33,8 +33,9 @@ import java.util.Map;
 /**
  * Interface for filters declaration.
  *
- * TODO: each filter should be stateless, i.e. options shouldn't be stored in filter, but should be sent to
- * filter on each parse, align, or translate operation.
+ * TODO: each filter should be stateless, i.e. options shouldn't be stored in
+ * filter, but should be sent to filter on each parse, align, or translate
+ * operation.
  *
  * Filters shouldn't use Core, but use Context instead.
  *
@@ -49,16 +50,18 @@ public interface IFilter {
     String getFileFormatName();
 
     /**
-     * Returns the hint displayed while the user edits the filter, and when she adds/edits the instance of
-     * this filter. The hint may be any string, preferably in a non-geek language.
+     * Returns the hint displayed while the user edits the filter, and when she
+     * adds/edits the instance of this filter. The hint may be any string,
+     * preferably in a non-geek language.
      *
      * @return The hint for editing the filter in a non-geek language.
      */
     String getHint();
 
     /**
-     * The default list of filter instances that this filter class has. One filter class may have different
-     * filter instances, different by source file mask, encoding of the source file etc.
+     * The default list of filter instances that this filter class has. One
+     * filter class may have different filter instances, different by source
+     * file mask, encoding of the source file etc.
      * <p>
      * Note that the user may change the instances freely.
      *
@@ -71,9 +74,10 @@ public interface IFilter {
      * <p>
      * True means that OmegaT should handle all the encoding mess.
      * <p>
-     * Return false to state that your filter doesn't need encoding management provided by OmegaT, because it
-     * either autodetects the encoding based on file contents (like HTML filter does) or the encoding is fixed
-     * (like in OpenOffice files).
+     * Return false to state that your filter doesn't need encoding management
+     * provided by OmegaT, because it either autodetects the encoding based on
+     * file contents (like HTML filter does) or the encoding is fixed (like in
+     * OpenOffice files).
      *
      * @return whether source encoding can be changed by the user
      */
@@ -84,27 +88,28 @@ public interface IFilter {
      * <p>
      * True means that OmegaT should handle all the encoding mess.
      * <p>
-     * Return false to state that your filter doesn't need encoding management provided by OmegaT, because the
-     * encoding is fixed (like in OpenOffice files), or for some other reason.
+     * Return false to state that your filter doesn't need encoding management
+     * provided by OmegaT, because the encoding is fixed (like in OpenOffice
+     * files), or for some other reason.
      *
      * @return whether target encoding can be changed by the user
      */
     boolean isTargetEncodingVariable();
 
     /**
-     * Define fuzzy mark prefix for source which will be stored in TM. It's 'fuzzy' by default, but each
-     * filter can redefine it.
+     * Define fuzzy mark prefix for source which will be stored in TM. It's
+     * 'fuzzy' by default, but each filter can redefine it.
      *
      * @return fuzzy mark prefix
      */
     String getFuzzyMark();
 
     /**
-     * Returns whether the file is supported by the filter, given the file and possible file's encoding (
-     * <code>null</code> encoding means autodetect).
+     * Returns whether the file is supported by the filter, given the file and
+     * possible file's encoding ( <code>null</code> encoding means autodetect).
      * <p>
-     * For example, DocBook files have .xml extension, as possibly many other XML files, so the filter should
-     * check a DTD of the document.
+     * For example, DocBook files have .xml extension, as possibly many other
+     * XML files, so the filter should check a DTD of the document.
      *
      * @param inFile
      *            Source file.
@@ -151,8 +156,8 @@ public interface IFilter {
             ITranslateCallback callback) throws Exception;
 
     /**
-     * Align source and translated files.
-     * NB: this is not used for Tools->align files..., but for aligning in console mode
+     * Align source and translated files. NB: this is not used for Tools->align
+     * files..., but for aligning in console mode
      *
      * @param inFile
      *            source file
@@ -204,14 +209,16 @@ public interface IFilter {
 
     /**
      * Returns the encoding of the last parsed source file.
-     * @return the encoding of the last parsed source file, or null when no file has been parsed yet.
+     * 
+     * @return the encoding of the last parsed source file, or null when no file
+     *         has been parsed yet.
      */
     String getInEncodingLastParsedFile();
 
     /**
-     * Indicates whether the filter is bilingual, and thus can be used as external TM
-     * (i.e. files can be added to the /tm/ folder of an OmegaT project).
-     * Bilingual filters will supply both source strings and
+     * Indicates whether the filter is bilingual, and thus can be used as
+     * external TM (i.e. files can be added to the /tm/ folder of an OmegaT
+     * project). Bilingual filters will supply both source strings and
      * translation strings to {@link IParseCallback}.addEntry().
      *
      * @return <code>true</code> if the filter is bilingual
@@ -219,5 +226,18 @@ public interface IFilter {
      */
     default boolean isBilingual() {
         return false;
+    }
+
+    /**
+     * Is the filter enabled in default.
+     * <p>
+     * Deprecated filter may be disabled in default. So it can override the
+     * method to return false;
+     * 
+     * @return false when the filter is disabled in default.
+     * @since 5.8.0
+     */
+    default boolean isEnabledInDefault() {
+        return true;
     }
 }

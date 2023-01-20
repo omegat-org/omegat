@@ -313,12 +313,14 @@
 	  </variablelist>
 		
 	  <para>Additional variants are available for <literal>${nameOnly}</literal>
-	  and <literal>${Extension}</literal>.</para>
+	  and <literal>${extension}</literal>.</para>
 		
-	  <para>If the file name is ambiguous, variables of the form
-	  <literal>${nameonly-</literal><emphasis>extension number</emphasis>} and
-	  <literal>${extension-</literal><emphasis>extension number} </emphasis> can
-	  be used.</para>
+	  <para>If the use of multiple periods makes identifying the file name and
+	  extension ambiguous, you can use variables of the form
+	  <literal>${nameOnly-</literal><emphasis>number</emphasis>} or
+	  <literal>${extension-</literal><emphasis>number} </emphasis> to
+	  specify which portions are part of the name or extension, as shown in the
+	  example below.</para>
 
 	  <example id="target.name.example">
 		<title id="target.name.example.title">Target file names</title>

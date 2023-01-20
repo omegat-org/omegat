@@ -28,6 +28,7 @@ package org.omegat.core.dictionaries;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
@@ -79,6 +80,12 @@ public class LingvoDSLTest {
     }
 
     @Test
+    public void testIsSupported() throws Exception {
+        assertTrue(new LingvoDSL().isSupportedFile(TEST_DICT));
+        assertFalse(new LingvoDSL().isSupportedFile(TEST_DICT_IDX.toFile()));
+    }
+
+    @Test
     public void testReadFileDict() throws Exception {
         LingvoDSLDict dict = (LingvoDSLDict) new LingvoDSL().loadDict(TEST_DICT);
         String word = "space";
@@ -98,6 +105,21 @@ public class LingvoDSLTest {
         assertEquals(word, result.get(0).getWord());
         assertEquals("<div style=\"text-indent: 30px\">Translation line also can have a single TAB char</div>",
                 result.get(0).getArticle());
+    }
+
+    @Test
+    public void testReadArticle2() throws Exception {
+        LingvoDSLDict dict = (LingvoDSLDict) new LingvoDSL().loadDict(TEST_DICT);
+        String word = "ta";
+        List<DictionaryEntry> result = dict.readArticlesPredictive(word);
+        assertEquals(2, result.size());  // tag and tab
+        assertTrue(result.get(0).getWord().startsWith(word));
+        for (DictionaryEntry entry: result) {
+            if (entry.getWord().equals("tab")) {
+                assertEquals("<div style=\"text-indent: 30px\">Translation line also can have a single TAB char</div>",
+                        entry.getArticle());
+            }
+        }
     }
 
     @Test

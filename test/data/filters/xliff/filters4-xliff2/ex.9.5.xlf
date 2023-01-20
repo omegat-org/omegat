@@ -1,0 +1,94 @@
+<xliff xmlns="urn:oasis:names:tc:xliff:document:2.0"
+       xmlns:fs="urn:oasis:names:tc:xliff:fs:2.0"
+       xmlns:mda="urn:oasis:names:tc:xliff:metadata:2.0"
+       version="2.0"
+       srcLang="en">
+  <file id="groups">
+    <group id="N65541xdocument" name="document">
+      <mda:metadata>
+        <mda:metaGroup category="XMLattribute">
+          <mda:meta type="status">draft</mda:meta>
+          <mda:meta type="id">d1</mda:meta>
+        </mda:metaGroup>
+      </mda:metadata>
+      <group id="N65541bxmarksection-1" name="section">
+        <mda:metadata>
+          <mda:metaGroup category="XMLattribute">
+            <mda:meta type="id">s1</mda:meta>
+          </mda:metaGroup>
+        </mda:metadata>
+        <unit id="title-2" name="title">
+          <segment>
+            <source>Birds in Oregon</source>
+          </segment>
+        </unit>
+        <unit id="paragraph-3" name="paragraph">
+          <segment>
+            <source>Oregon is a mostly temperate state. There are
+            many different kinds of birds that thrive</source>
+          </segment>
+        </unit>
+        <group id="N65547bxmarksection-4" name="section">
+          <mda:metadata>
+            <mda:metaGroup category="XMLattribute">
+              <mda:meta type="id">s1a</mda:meta>
+            </mda:metaGroup>
+          </mda:metadata>
+          <unit id="title-5" name="title">
+            <segment id="seg-title5">
+              <source><sc id='1' isolated='yes'/>High Altitude Birds</source>
+              <target><sc id='1' isolated='yes'/>Oiseaux de haute altitude</target>
+            </segment>
+          </unit>
+          <unit id="paragraph-6" name="paragraph">
+            <segment>
+              <source>Birds that thrive in the high altitude
+              include the Whitetailed Ptarmigan, Sharp-tailed
+              Grouse, Yellow-billed Loon, Cattle Egret, Gyrfalcon,
+              Snowy Owl, Yellow-billed Cuckoo, and Boreal
+              Owl.</source>
+            </segment>
+          </unit>
+        </group>
+        <group id="N65553bxmarksection-7" name="section">
+          <mda:metadata>
+            <mda:metaGroup category="XMLattribute">
+              <mda:meta type="id">s1b</mda:meta>
+            </mda:metaGroup>
+          </mda:metadata>
+          <unit id="title-8" name="title">
+            <segment>
+              <source>Ocean Birds</source>
+            </segment>
+          </unit>
+          <unit id="paragraph-9">
+            <segment>
+              <source>Common ocean birds are Brandt's Cormorant,
+              Double-crested Cormorant, Pelagic Cormorant, Pigeon
+              Guillemot, and the Tufted Puffin.</source>
+            </segment>
+          </unit>
+        </group>
+        <group id="N65559bxmarksection-10" name="section">
+          <mda:metadata>
+            <mda:metaGroup category="XMLattribute">
+              <mda:meta type="id">s1c</mda:meta>
+            </mda:metaGroup>
+          </mda:metadata>
+          <unit id="title-11" name="title">
+            <segment>
+              <source>Desert Birds</source>
+            </segment>
+          </unit>
+          <unit id="paragraph-12" name="paragraph" translate="no">
+            <segment>
+              <source>Birds you find in the desert include the Sage
+              Grouse, California Quail, and Prairie
+              Falcon.</source>
+            </segment>
+          </unit>
+        </group>
+      </group>
+    </group>
+  </file>
+</xliff>

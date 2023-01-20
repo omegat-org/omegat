@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<items priority="50">
+    <item nopopup="true">
+        <name>Google</name>
+        <url target="both" encoding="default">https://www.google.com/search?q={target}</url>
+        <url target="ascii_only">https://www.google.com/search?q=define%3A{target}</url>
+        <keystroke>ctrl shift F</keystroke>
+    </item>
+    <item>
+        <name>Yahoo</name>
+        <url target="ascii_only">http://search.yahoo.com/search?p={target}</url>
+        <url target="non_ascii_only">http://search.yahoo.co.jp/search?p={target}</url>
+    </item>
+    <item>
+        <name>Google &amp;definition</name>
+        <url target="ascii_only">https://www.google.com/search?q=Define+{target}</url>
+    </item>
+    <item>
+        <name>Google &amp;patent</name>
+        <url target="ascii_only">https://www.google.com/search?q=Patent+{target}</url>
+    </item>
+    <item>
+        <name>Google (&amp;ja)</name>
+        <url target="both" encoding="default">https://www.google.com/search?q=%22{target}%22&amp;lr=lang_ja&amp;ie=UTF-8</url>
+    </item>
+    <item>
+        <name>Dictionary</name>
+        <command encoding="default">/usr/bin/open|dict://{target}</command>
+        <keystroke>ctrl shift K</keystroke>
+    </item>
+</items>

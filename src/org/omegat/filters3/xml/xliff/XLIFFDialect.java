@@ -63,8 +63,9 @@ public class XLIFFDialect extends DefaultXMLDialect {
     private boolean ignoreTypeForBptTags;
     private boolean changeStateToNeedsReviewTranslation;
     /**
-     * Sets whether alternative translations are identified by previous and next paragraphs or by &lt;trans-unit&gt; ID
-    */
+     * Sets whether alternative translations are identified by previous and next
+     * paragraphs or by &lt;trans-unit&gt; ID
+     */
     protected ID_TYPE altTransIDType;
 
     public XLIFFDialect() {
@@ -80,21 +81,21 @@ public class XLIFFDialect extends DefaultXMLDialect {
 
         defineOutOfTurnTags(new String[] { "sub", });
 
-        if (options.get26Compatibility()) { // Old tag handling compatible with 2.6
+        if (options.get26Compatibility()) { // Old tag handling compatible with
+                                            // 2.6
             defineIntactTags(new String[] { "source", "header", "bin-unit", "prop-group", "count-group",
-                    "alt-trans", "note",
-                    "ph", "bpt", "ept", "it", "context", "seg-source", "sdl:seg-defs"});
+                    "alt-trans", "note", "ph", "bpt", "ept", "it", "context", "seg-source", "sdl:seg-defs" });
 
         } else { // New tag handling
             defineIntactTags(new String[] { "source", "header", "bin-unit", "prop-group", "count-group",
-                    "alt-trans", "note",
-                    "context", "seg-source", "sdl:seg-defs"});
+                    "alt-trans", "note", "context", "seg-source", "sdl:seg-defs" });
 
             defineContentBasedTag("bpt", Tag.Type.BEGIN);
             defineContentBasedTag("ept", Tag.Type.END);
             defineContentBasedTag("it", Tag.Type.ALONE);
             defineContentBasedTag("ph", Tag.Type.ALONE);
-            // "mrk", only <mrk mtype="protected"> is content-based tag. see validateContentBasedTag
+            // "mrk", only <mrk mtype="protected"> is content-based tag. see
+            // validateContentBasedTag
 
             forceShortCutToF = options.getForceShortcutToF();
             ignoreTypeForPhTags = options.getIgnoreTypeForPhTags();
@@ -132,6 +133,7 @@ public class XLIFFDialect extends DefaultXMLDialect {
     /**
      * In the XLKIFF filter, content shouldn't be translated if translate="no"
      * http://docs.oasis-open.org/xliff/v1.2/os/xliff-core.html#translate
+     * 
      * @param tag
      *            An XML tag
      * @param atts
@@ -145,9 +147,9 @@ public class XLIFFDialect extends DefaultXMLDialect {
             return true;
         }
 
-        if (!tag.equalsIgnoreCase("group") &&     // Translate can only appear in these tags
-            !tag.equalsIgnoreCase("trans-unit") &&
-            !tag.equalsIgnoreCase("bin-unit")) {
+        if (!tag.equalsIgnoreCase("group") && // Translate can only appear in
+                                              // these tags
+                !tag.equalsIgnoreCase("trans-unit") && !tag.equalsIgnoreCase("bin-unit")) {
             return false;
         }
 
@@ -166,9 +168,14 @@ public class XLIFFDialect extends DefaultXMLDialect {
 
     /**
      * Handle &lt;target state="..."&gt; attribute according to filter settings.
-     * @see <a href="https://sourceforge.net/p/omegat/feature-requests/1506/">RFE #1506</a>
-     * @param tag XML tag to be processed.
-     * @param translated is the value considered translated?
+     * 
+     * @see <a href=
+     *      "https://sourceforge.net/p/omegat/feature-requests/1506/">RFE
+     *      #1506</a>
+     * @param tag
+     *            XML tag to be processed.
+     * @param translated
+     *            is the value considered translated?
      */
     @Override
     public void handleXMLTag(XMLTag tag, boolean translated) {
@@ -180,8 +187,9 @@ public class XLIFFDialect extends DefaultXMLDialect {
             return;
         }
         String state = attr.getValue();
-        String nextTranslatedState = changeStateToNeedsReviewTranslation ? "needs-review-translation" : "translated";
-        if (translated && "needs-translation".equals(state)) {
+        String nextTranslatedState = changeStateToNeedsReviewTranslation ? "needs-review-translation"
+                : "translated";
+        if (translated && ("needs-translation".equals(state) || "needs-review-translation".equals(state))) {
             attr.setValue(nextTranslatedState);
         } else if ("new".equals(state)) {
             String next = translated ? nextTranslatedState : "needs-translation";
@@ -206,18 +214,22 @@ public class XLIFFDialect extends DefaultXMLDialect {
                 if ("bpt".equals(tag.getTag())) {
                     // XLIFF specification requires 'rid' and 'id' attributes,
                     // but some tools uses 'i' attribute like for TMX
-                    tagHandler.startBPT(tag.getAttribute("rid"), tag.getAttribute("id"), tag.getAttribute("i"));
+                    tagHandler.startBPT(tag.getAttribute("rid"), tag.getAttribute("id"),
+                            tag.getAttribute("i"));
                     shortcutLetter = calcTagShortcutLetter(tag, ignoreTypeForBptTags);
                     tagHandler.setTagShortcutLetter(shortcutLetter);
                     tagIndex = tagHandler.endBPT();
-                    shortcut = "<" + (shortcutLetter != 0 ? String.valueOf(Character.toChars(shortcutLetter)) : 'f')
+                    shortcut = "<"
+                            + (shortcutLetter != 0 ? String.valueOf(Character.toChars(shortcutLetter)) : 'f')
                             + tagIndex + '>';
                     tagProtected = false;
                 } else if ("ept".equals(tag.getTag())) {
-                    tagHandler.startEPT(tag.getAttribute("rid"), tag.getAttribute("id"), tag.getAttribute("i"));
+                    tagHandler.startEPT(tag.getAttribute("rid"), tag.getAttribute("id"),
+                            tag.getAttribute("i"));
                     tagIndex = tagHandler.endEPT();
                     shortcutLetter = tagHandler.getTagShortcutLetter();
-                    shortcut = "</" + (shortcutLetter != 0 ? String.valueOf(Character.toChars(shortcutLetter)) : 'f')
+                    shortcut = "</"
+                            + (shortcutLetter != 0 ? String.valueOf(Character.toChars(shortcutLetter)) : 'f')
                             + tagIndex + '>';
                     tagProtected = false;
                 } else if ("it".equals(tag.getTag())) {
@@ -227,17 +239,22 @@ public class XLIFFDialect extends DefaultXMLDialect {
                     // XLIFF specification requires 'open/close' values,
                     // but some tools may use 'begin/end' values like for TMX
                     shortcutLetter = calcTagShortcutLetter(tag);
-                    if ("close".equals(tagHandler.getCurrentPos()) || "end".equals(tagHandler.getCurrentPos())) {
-                        // In some cases, even if we're able to compute a shortcut, it's better to force to "f"
+                    if ("close".equals(tagHandler.getCurrentPos())
+                            || "end".equals(tagHandler.getCurrentPos())) {
+                        // In some cases, even if we're able to compute a
+                        // shortcut, it's better to force to "f"
                         // for better compatibility with corresponding TMX files
                         if (forceShortCutToF) {
                             shortcutLetter = 'f';
                         }
                         shortcut = "</"
-                                + (shortcutLetter != 0 ? String.valueOf(Character.toChars(shortcutLetter)) : 'f')
+                                + (shortcutLetter != 0 ? String.valueOf(Character.toChars(shortcutLetter))
+                                        : 'f')
                                 + tagIndex + '>';
                     } else {
-                        shortcut = "<" + (shortcutLetter != 0 ? String.valueOf(Character.toChars(shortcutLetter)) : 'f')
+                        shortcut = "<"
+                                + (shortcutLetter != 0 ? String.valueOf(Character.toChars(shortcutLetter))
+                                        : 'f')
                                 + tagIndex + '>';
                     }
                     tagProtected = false;
@@ -245,15 +262,16 @@ public class XLIFFDialect extends DefaultXMLDialect {
                     tagHandler.startOTHER();
                     tagIndex = tagHandler.endOTHER();
                     shortcutLetter = calcTagShortcutLetter(tag, ignoreTypeForPhTags);
-                    shortcut = "<" + (shortcutLetter != 0 ? String.valueOf(Character.toChars(shortcutLetter)) : 'f')
+                    shortcut = "<"
+                            + (shortcutLetter != 0 ? String.valueOf(Character.toChars(shortcutLetter)) : 'f')
                             + tagIndex + "/>";
                     tagProtected = false;
                 } else if ("mrk".equals(tag.getTag())) {
                     tagHandler.startOTHER();
                     tagIndex = tagHandler.endOTHER();
                     shortcutLetter = 'm';
-                    shortcut = "<m" + tagIndex + ">" + tag.getIntactContents().sourceToOriginal() + "</m" + tagIndex
-                            + ">";
+                    shortcut = "<m" + tagIndex + ">" + tag.getIntactContents().sourceToOriginal() + "</m"
+                            + tagIndex + ">";
                     tagProtected = true;
                 } else {
                     shortcutLetter = 'f';
@@ -270,11 +288,13 @@ public class XLIFFDialect extends DefaultXMLDialect {
                 if (tagProtected) {
                     // protected text with related tags, like <m0>Acme</m0>
                     if (StatisticsSettings.isCountingProtectedText()) {
-                        // Protected texts are counted, but related tags are not counted in the word count
+                        // Protected texts are counted, but related tags are not
+                        // counted in the word count
                         pp.setReplacementWordsCountCalculation(StaticUtils.TAG_REPLACEMENT
                                 + tag.getIntactContents().sourceToOriginal() + StaticUtils.TAG_REPLACEMENT);
                     } else {
-                        // All protected parts are not counted in the word count(default)
+                        // All protected parts are not counted in the word
+                        // count(default)
                         pp.setReplacementWordsCountCalculation(StaticUtils.TAG_REPLACEMENT);
                     }
                     pp.setReplacementUniquenessCalculation(StaticUtils.TAG_REPLACEMENT);

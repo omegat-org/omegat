@@ -1998,18 +1998,18 @@ public class EditorController implements IEditor {
         translationFromOrigin = null;
     }
 
-    /** Loads Instant start article */
+    /** Loads First Steps article */
     private void createAdditionalPanes() {
-        introPaneTitle = OStrings.getString("DOCKING_INSTANT_START_TITLE");
+        introPaneTitle = OStrings.getString("DOCKING_FIRST_STEPS_TITLE");
         try {
-            String language = detectInstantStartLanguage();
+            String language = detectFirstStepsLanguage();
             introPane = new JTextPane();
             introPane
                     .setComponentOrientation(Language.isRTL(language) ? ComponentOrientation.RIGHT_TO_LEFT
                             : ComponentOrientation.LEFT_TO_RIGHT);
             introPane.setEditable(false);
             DragTargetOverlay.apply(introPane, dropInfo);
-            URI uri = Help.getHelpFileURI(language, OConsts.HELP_INSTANT_START);
+            URI uri = Help.getHelpFileURI(language, OConsts.HELP_FIRST_STEPS);
             if (uri != null) {
                 introPane.setPage(uri.toURL());
             }
@@ -2026,23 +2026,23 @@ public class EditorController implements IEditor {
     }
 
     /**
-     * Detects the language of the instant start guide (checks if present in default locale's language).
+     * Detects the language of the first steps guide (checks if present in default locale's language).
      *
-     * If there is no instant start guide in the default locale's language, "en" (English) is returned,
+     * If there is no first steps guide in the default locale's language, "en" (English) is returned,
      * otherwise the acronym for the default locale's language.
      */
-    private String detectInstantStartLanguage() {
+    private String detectFirstStepsLanguage() {
         // Get the system language and country
         String language = Locale.getDefault().getLanguage().toLowerCase(Locale.ENGLISH);
         String country = Locale.getDefault().getCountry().toUpperCase(Locale.ENGLISH);
 
         // Check if there's a translation for the full locale (lang + country)
-        if (Help.getHelpFileURI(language + "_" + country, OConsts.HELP_INSTANT_START) != null) {
+        if (Help.getHelpFileURI(language + "_" + country, OConsts.HELP_FIRST_STEPS) != null) {
             return language + "_" + country;
         }
 
         // Check if there's a translation for the language only
-        if (Help.getHelpFileURI(language, OConsts.HELP_INSTANT_START) != null) {
+        if (Help.getHelpFileURI(language, OConsts.HELP_FIRST_STEPS) != null) {
             return language;
         }
         // Default to English, if no translation exists

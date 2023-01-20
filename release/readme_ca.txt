@@ -1,9 +1,9 @@
 Han participat en la localització de l'OmegaT al català:
 Mikel Forcada Zubizarreta (versió 1.4)
-Jordi Serratosa Quintana (versió 1.6 a 3.0)
+Jordi Serratosa Quintana (versions 1.6 a 3.0)
 Mariona Galofré Pujol (versió 4.1)
 Moisés Piñero Fernandez (versió 4.1)
-Marc Riera Irigoyen (versió 4.1 a l'actual)
+Marc Riera Irigoyen (versions 4.1 a l'actual)
 
 
 Què és l'OmegaT?
@@ -78,21 +78,6 @@ està a punt per a executar-se.
 
 
 
-Instal·lació de l'OmegaT amb Java Web Start (tots els sistemes operatius)
-=========================================================================
-
-Si ja teniu el Java instal·lat en el vostre ordinador, una manera d'instal·lar
-l'OmegaT és utilitzar Java Web Start.
-
-Per a fer-ho, baixeu el fitxer següent i executeu-lo:
-
-  https://omegat.sourceforge.net/webstart/OmegaT.jnlp
-
-Això instal·larà l'entorn correcte per al vostre ordinador i l'aplicació en si
-durant la primera execució. Posteriorment no caldrà que estigueu en línia.
-
-
-
 Execució de l'OmegaT (Windows)
 ==============================
 
@@ -164,35 +149,36 @@ Contribucions
 
 L'OmegaT és una obra original de Keith Godfrey.
 
-Aaron Madlon-Kay és el coordinador del projecte OmegaT.
+Jean-Christophe Helary és el coordinador del projecte OmegaT.
 
 Equip actual:
 (en ordre alfabètic)
 
-- Vincent Bidaux (gestor de la documentació)
-- Marco Cevoli (gestor de la comunitat del Telegram)
-- Jean-Christophe Helary (gestor de la comunitat de Twitter)
-- Kos Ivantsof (gestor de la documentació)
-- Concepción Martin (gestora de la comunitat de Facebook)
+- Marco Cevoli (coordinador de la comunitat del Telegram)
+- Jean-Christophe Helary (coordinador de la comunitat de Twitter)
+- Kos Ivantsov (coordinador de la localització)
+- Concepción Martin (coordinadora de la comunitat de Facebook)
+- Hiroshi Miura (desenvolupador principal)
 - Briac Pilpré (administrador de la web)
-- Lucie Vecerova (gestora de la comunitat de Facebook)
+- Lucie Vecerova (coordinadora de la comunitat de Facebook)
 
 Les contribucions al codi estan documentades a /docs/contributors.txt.
 
 Contribucions anteriors:
 (en ordre alfabètic)
 
-- Anthony Baldwin (gestor de la localització)
+- Anthony Baldwin (coordinador de la localització)
+- Vincent Bidaux (coordinador de la documentació)
 - Didier Briel (coordinador del projecte)
 - Alex Buloichik (desenvolupador principal)
 - Sabine Cretella
 - Dmitri Gabinski
-- Jean-Christophe Helary (propietari del grup d'assistència, gestor de la localització)
+- Aaron Madlon-Kay (coordinador del projecte)
 - Maxym Mykhalchuk (desenvolupador principal)
 - Samuel Murray
-- Henry Pijffers (gestor dels llançaments)
+- Henry Pijffers (coordinador dels llançaments)
 - Marc Prior (coordinador del projecte, administrador de la web)
-- Vito Smolej (gestor de la documentació)
+- Vito Smolej (coordinador de la documentació)
 
 i moltes altres persones que han aportat una ajuda inestimable.
 

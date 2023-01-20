@@ -1,4 +1,4 @@
-Stu ducumentu, ma dinù a prima versione d’OmegaT in lingua corsa, sò stati tradutti da Patriccollu di Santa Maria è Sichè, diritti di copia o copyright© 2020-2021.
+Stu ducumentu, è soprattuttu a prima versione d’OmegaT in lingua corsa, sò stati tradutti da Patriccollu di Santa Maria è Sichè, diritti di copia, copyright © 2020-2022.
 
 
 Cosa hè OmegaT ?
@@ -55,19 +55,6 @@ Installazione d’OmegaT (Solaris, FreeBSD, etc.)
 ===============================================
 
 Piazzate l’archiviu in u cartulare di a vostra scelta è spacchittatelu. Tandu OmegaT hè prontu à esse lanciatu.
-
-
-
-Impiegu di Java Web Start per l’installazione d’OmegaT (tutte piattaforme)
-==========================================================================
-
-S’è Java hè dighjà installatu nant’à u vostru sistema, una manera d’installà OmegaT hè d’impiegà Java Web Start.
-
-Per fà què, scaricate stu schedariu è eseguitelu :
-
-  https://omegat.sourceforge.net/webstart/OmegaT.jnlp
-
-St’azzione installerà l’ambiente appostu per u vostru urdinatore è l’appiecazione stessa durante u primu lanciu. Dopu ùn ci serà più bisognu d’esse in linea.
 
 
 
@@ -130,16 +117,16 @@ Cuntribuenti
 
 OmegaT hè l’opera originale di Keith Godfrey.
 
-Aaron Madlon-Kay hè u risponsevule di u prughjettu OmegaT.
+Jean-Christophe Helary hè u risponsevule di u prughjettu OmegaT.
 
 A squadra attuale hè :
 (in ordine alfabeticu)
 
-- Vincent Bidaux (risponsevule di a documentazione)
 - Marco Cevoli (rispunsevule di cumunità Telegram)
 - Jean-Christophe Helary (rispunsevule di cumunità Twitter)
-- Kos Ivantsof (rispunsevule di a lucalisazione)
+- Kos Ivantsov (rispunsevule di a lucalizazione)
 - Concepción Martin (rispunsevule di cumunità Facebook)
+- Hiroshi Miura (sviluppatore principale)
 - Briac Pilpré (webmaestru)
 - Lucie Vecerova (rispunsevule di cumunità Facebook)
 
@@ -148,19 +135,20 @@ E cuntribuzioni à u codice sò ducumentate in /docs/contributors.txt.
 I precedente cuntribuenti includenu :
 (in ordine alfabeticu)
 
-- Anthony Baldwin (rispunsevule di a lucalisazione)
+- Anthony Baldwin (rispunsevule di a lucalizazione)
+- Vincent Bidaux (risponsevule di a documentazione)
 - Didier Briel (risponsevule di u prughjettu)
 - Alex Buloichik (sviluppatore principale)
 - Sabine Cretella
 - Dmitri Gabinski
-- Jean-Christophe Helary (prupietariu di u gruppu d’assistenza, rispunsevule di a lucalisazione)
+- Aaron Madlon-Kay (risponsevule di u prughjettu)
 - Samuel Murray
 - Maxym Mykhalchuk (sviluppatore principale)
 - Henry Pijffers (rispunsevule di versione)
 - Marc Prior (cuurdinatore di prughjettu, webmaestru)
 - Vito Smolej (risponsevule di a documentazione)
 
-è assai assai personne chì ci anu aiutatu.
+è assai assai persone chì ci anu aiutatu.
 
 (S’ella vi pare chì vo avete cuntribuitu assai à u prughjettu OmegaT ma chì u vostru nome ùn si trova micca nant’à e liste, cuntattateci puru.)
 

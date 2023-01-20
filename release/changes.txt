@@ -1,15 +1,18 @@
 ----------------------------------------------------------------------
  OmegaT 5.8.0
 ----------------------------------------------------------------------
-  20 Enhancements
+  21 Enhancements
   24 Bug fixes
-  1 Localisation updates
+  9 Localisation updates
 ----------------------------------------------------------------------
 5.8.0 vs 5.7.1
 
   Implemented requests:
 
   - Update to new pixel logos and improve macOS UI logos
+
+  -  Navigate between segments inserted from /tm/auto and /tm/enforce
+  https://sourceforge.net/p/omegat/feature-requests/1641/
 
   - Add a shortcut to select all source text of the current segment
   https://sourceforge.net/p/omegat/feature-requests/1639/
@@ -140,7 +143,15 @@
 
   Localisation Updates:
 
+  - Belarusian localisation updated to 5.8 (UI, readme)
+  - Brazilian Portuguese localisation updated to 5.8 (UI)
+  - Catalan localisation updated to 5.8 (UI, readme)
+  - Corsican localisation updated to 5.8 (UI, readme)
+  - Dutch localisation updated to 5.8 (UI)
+  - German localisation updated to 5.8 (UI, readme)
   - Japanese localisation updated to 5.8.0 (UI, documentation)
+  - Simplified Chinese localisation updated to 5.8 (UI, readme)
+  - Ukrainian localisation updated to 5.8 (UI, readme)
 
 ----------------------------------------------------------------------
 OmegaT 5.7.1 (2022-03-19)

@@ -15,7 +15,7 @@
  OmegaT 5.8.0
 ----------------------------------------------------------------------
    4 Removed features
-  28 Enhancements
+  29 Enhancements
   24 Bug fixes
   9 Localisation updates
 ----------------------------------------------------------------------
@@ -56,6 +56,9 @@
   - Show glossary comment on context menu candidate
   https://sourceforge.net/p/omegat/feature-requests/1515/
 
+  - Allow file filters list to be sorted
+  https://sourceforge.net/p/omegat/feature-requests/1667/
+  
   - Add a shortcut to select all source text of the current segment
   https://sourceforge.net/p/omegat/feature-requests/1639/
 

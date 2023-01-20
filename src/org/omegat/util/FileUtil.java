@@ -78,15 +78,39 @@ public final class FileUtil {
     }
 
     /**
+     * Get most recent backup file path.
+     * 
+     * @param originalFile
+     *            target original file name.
+     */
+    public static File getRecentBackup(final File originalFile) {
+        File[] bakFiles = null;
+        try {
+            bakFiles = originalFile.getParentFile()
+                    .listFiles(f -> !f.isDirectory() && f.getName().startsWith(originalFile.getName())
+                            && f.getName().endsWith(OConsts.BACKUP_EXTENSION));
+        } catch (Exception ignored) {
+        }
+        if (bakFiles == null) {
+            return null;
+        }
+        Arrays.sort(bakFiles, (f1, f2) -> Long.compare(f2.lastModified(), f1.lastModified()));
+        return bakFiles[0];
+    }
+
+    /**
      * Removes older backups to be under specified number of files.
-     * @param originalFile target original file name.
-     * @param maxBackups maximum number of back up files.
+     * 
+     * @param originalFile
+     *            target original file name.
+     * @param maxBackups
+     *            maximum number of back up files.
      */
     public static void removeOldBackups(final File originalFile, int maxBackups) {
         try {
-            File[] bakFiles = originalFile.getParentFile().listFiles(
-                    f -> !f.isDirectory() && f.getName().startsWith(originalFile.getName())
-                    && f.getName().endsWith(OConsts.BACKUP_EXTENSION));
+            File[] bakFiles = originalFile.getParentFile()
+                    .listFiles(f -> !f.isDirectory() && f.getName().startsWith(originalFile.getName())
+                            && f.getName().endsWith(OConsts.BACKUP_EXTENSION));
 
             if (bakFiles != null && bakFiles.length > maxBackups) {
                 Arrays.sort(bakFiles, (f1, f2) -> Long.compare(f2.lastModified(), f1.lastModified()));
@@ -101,7 +125,9 @@ public final class FileUtil {
 
     /**
      * Create file backup with datetime suffix.
-     * @param original a file to copy as backup file.
+     * 
+     * @param original
+     *            a file to copy as backup file.
      * @return Backup file.
      */
     public static File backupFile(File original) throws IOException {
@@ -113,8 +139,8 @@ public final class FileUtil {
     }
 
     /**
-     * Renames file, with checking errors and 3 seconds retry against external programs (like antivirus or
-     * TortoiseSVN) locking.
+     * Renames file, with checking errors and 3 seconds retry against external
+     * programs (like antivirus or TortoiseSVN) locking.
      */
     public static void rename(File from, File to) throws IOException {
         if (!from.exists()) {
@@ -133,8 +159,8 @@ public final class FileUtil {
     }
 
     /**
-     * Copy file and create output directory if need. EOL will be converted into target-specific or into
-     * platform-specific if target doesn't exist.
+     * Copy file and create output directory if need. EOL will be converted into
+     * target-specific or into platform-specific if target doesn't exist.
      */
     public static void copyFileWithEolConversion(File inFile, File outFile, Charset charset)
             throws IOException {
@@ -148,7 +174,8 @@ public final class FileUtil {
             eol = getEOL(outFile, charset);
         }
         if (eol == null) {
-            // file does not exist or EOL not detected - use system-dependent value
+            // file does not exist or EOL not detected - use system-dependent
+            // value
             eol = System.lineSeparator();
         }
         try (BufferedReader in = Files.newBufferedReader(inFile.toPath(), charset)) {
@@ -166,7 +193,8 @@ public final class FileUtil {
     /**
      * Read a file to determine its end-of-line character(s).
      *
-     * If neither '\n' nor '\r' are present in the file then it will return null.
+     * If neither '\n' nor '\r' are present in the file then it will return
+     * null.
      *
      * @param file
      * @param charset
@@ -290,10 +318,12 @@ public final class FileUtil {
 
     /**
      * Expand tilde(~) in first character in path string.
-     * @param path path string
+     * 
+     * @param path
+     *            path string
      * @return expanded path string
      */
-    public static String expandTildeHomeDir(final String path){
+    public static String expandTildeHomeDir(final String path) {
         if (path.startsWith("~+/") || path.equals("~+")) {
             Path currentRelativePath = Paths.get("");
             String pwd = currentRelativePath.toAbsolutePath().toString();
@@ -318,16 +348,22 @@ public final class FileUtil {
     }
 
     /**
-     * Copy a collection of files to a destination. Recursively copies contents of directories
-     * while preserving relative paths. Provide an {@link ICollisionCallback} to determine
-     * what to do with files with conflicting names; they will be overwritten if the callback is null.
-     * @param destination Directory to copy to
-     * @param toCopy Files to copy
-     * @param onCollision Callback that determines what to do in case files with the same name
-     * already exist
+     * Copy a collection of files to a destination. Recursively copies contents
+     * of directories while preserving relative paths. Provide an
+     * {@link ICollisionCallback} to determine what to do with files with
+     * conflicting names; they will be overwritten if the callback is null.
+     * 
+     * @param destination
+     *            Directory to copy to
+     * @param toCopy
+     *            Files to copy
+     * @param onCollision
+     *            Callback that determines what to do in case files with the
+     *            same name already exist
      * @throws IOException
      */
-    public static void copyFilesTo(File destination, File[] toCopy, ICollisionCallback onCollision) throws IOException {
+    public static void copyFilesTo(File destination, File[] toCopy, ICollisionCallback onCollision)
+            throws IOException {
         if (destination.exists() && !destination.isDirectory()) {
             throw new IOException("Copy-to destination exists and is not a directory.");
         }
@@ -356,7 +392,8 @@ public final class FileUtil {
         }
     }
 
-    private static Map<File, File> copyFilesTo(File destination, File[] toCopy, File root) throws IOException {
+    private static Map<File, File> copyFilesTo(File destination, File[] toCopy, File root)
+            throws IOException {
         Map<File, File> collisions = new LinkedHashMap<File, File>();
         for (File file : toCopy) {
             if (destination.getPath().startsWith(file.getPath())) {
@@ -396,8 +433,9 @@ public final class FileUtil {
     }
 
     /**
-     * Converts Windows absolute path into current system's absolute path. It required for conversion like
-     * 'C:\zzz' into '/zzz' for be real absolute in Linux.
+     * Converts Windows absolute path into current system's absolute path. It
+     * required for conversion like 'C:\zzz' into '/zzz' for be real absolute in
+     * Linux.
      */
     public static String absoluteForSystem(String path, Platform.OsType currentOsType) {
         path = path.replace('\\', '/');
@@ -425,18 +463,18 @@ public final class FileUtil {
         }
     }
 
-    public static List<String> buildRelativeFilesList(File rootDir, List<String> includes, List<String> excludes)
-            throws IOException {
+    public static List<String> buildRelativeFilesList(File rootDir, List<String> includes,
+            List<String> excludes) throws IOException {
         Path root = rootDir.toPath();
         Pattern[] includeMasks = FileUtil.compileFileMasks(includes);
         Pattern[] excludeMasks = FileUtil.compileFileMasks(excludes);
         BiPredicate<Path, BasicFileAttributes> pred = (p, attr) -> {
-            return p.toFile().isFile() && FileUtil.checkFileInclude(root.relativize(p).toString(), includeMasks, excludeMasks);
+            return p.toFile().isFile()
+                    && FileUtil.checkFileInclude(root.relativize(p).toString(), includeMasks, excludeMasks);
         };
         try (Stream<Path> stream = Files.find(root, Integer.MAX_VALUE, pred, FileVisitOption.FOLLOW_LINKS)) {
             return stream.map(p -> root.relativize(p).toString().replace('\\', '/'))
-                .sorted(StreamUtil.localeComparator(Function.identity()))
-                .collect(Collectors.toList());
+                    .sorted(StreamUtil.localeComparator(Function.identity())).collect(Collectors.toList());
         }
     }
 
@@ -514,16 +552,18 @@ public final class FileUtil {
     }
 
     /**
-     * Given a list of paths, return a list of filenames (a la {@code File.getName()}) plus the minimum number of parent
-     * path segments required to make each filename unique within the result list. E.g.
+     * Given a list of paths, return a list of filenames (a la
+     * {@code File.getName()}) plus the minimum number of parent path segments
+     * required to make each filename unique within the result list. E.g.
      * <ul>
      * <li>{@code [foo/bar.txt, foo/baz.txt] -> [bar.txt, baz.txt]}
      * <li>{@code [foo/bar/baz.txt, foo/fop/baz.txt] -> [bar/baz.txt, fop/baz.txt]}
      * <li>{@code [foo/bar/baz/fop.txt, foo/buz/baz/fop.txt] -> [bar/baz/fop.txt, buz/baz/fop.txt]}
-     * <li>{@code [foo.txt, foo.txt] -> [foo.txt, foo.txt]} (actual duplicates are unmodified)
+     * <li>{@code [foo.txt, foo.txt] -> [foo.txt, foo.txt]} (actual duplicates
+     * are unmodified)
      * </ul>
-     * Note that paths will be normalized (indirections removed, trailing and duplicate separators removed, separators
-     * become {@code /}).
+     * Note that paths will be normalized (indirections removed, trailing and
+     * duplicate separators removed, separators become {@code /}).
      *
      * @param paths
      *            A list of paths
@@ -532,7 +572,8 @@ public final class FileUtil {
     public static List<String> getUniqueNames(List<String> paths) {
         // Normalize
         List<String> fullPaths = new ArrayList<>(paths);
-        fullPaths.replaceAll(p -> Optional.ofNullable(FilenameUtils.normalizeNoEndSeparator(p, true)).orElse(""));
+        fullPaths.replaceAll(
+                p -> Optional.ofNullable(FilenameUtils.normalizeNoEndSeparator(p, true)).orElse(""));
         // Create working array with first attempt (one segment)
         List<String> working = new ArrayList<>(fullPaths);
         working.replaceAll(p -> StringUtil.getTailSegments(p, '/', 1));
@@ -553,7 +594,8 @@ public final class FileUtil {
                     // Re-trim the duplicate with one extra segment
                     String curr = working.get(i);
                     String trimmed = StringUtil.getTailSegments(fullPaths.get(i), '/', ++segments[i]);
-                    // Re-trimmed value only valid if distinct from previous value
+                    // Re-trimmed value only valid if distinct from previous
+                    // value
                     if (!curr.equals(trimmed)) {
                         working.set(i, trimmed);
                         didTrim = true;
@@ -575,8 +617,8 @@ public final class FileUtil {
     }
 
     /**
-     * Comparator to sort the tm/ folder alphabetically, but always put tm/enforce
-     * and tm/auto results before other similar % matches.
+     * Comparator to sort the tm/ folder alphabetically, but always put
+     * tm/enforce and tm/auto results before other similar % matches.
      */
     public static class TmFileComparator implements Comparator<String> {
         private static final String AUTO_PREFIX = OConsts.AUTO_TM + "/";

@@ -75,9 +75,8 @@ public final class RebaseAndCommit {
         // retrieve HEAD version
         File headFile = provider.switchToVersion(path, null);
         // get version id
-        String headVersion = provider.getVersion(path);
         // save it to prepared dir
-        r.versionHead = headVersion;
+        r.versionHead = provider.getVersion(path);
         r.fileHead = provider.toPrepared(headFile);
         return r;
     }
@@ -188,12 +187,12 @@ public final class RebaseAndCommit {
             // code below tries to update file "in transaction" with update version
             if (localFile.exists()) {
                 final File bakTemp = new File(projectDir, path + "#oldbased_on_" + currentBaseVersion);
-                bakTemp.delete();
+                boolean ignored = bakTemp.delete();
                 FileUtils.moveFile(localFile, bakTemp);
             }
             provider.getTeamSettings().set(VERSION_PREFIX + path, headVersion);
             if (tempOut.exists()) {
-                localFile.delete();
+                boolean ignored = localFile.delete();
                 FileUtils.moveFile(tempOut, localFile);
             }
         }
@@ -242,7 +241,7 @@ public final class RebaseAndCommit {
          * Rebaser should read and parse BASE version of file. It can't just remember file path because file
          * will be removed after switch into other version. Rebase can be called after that or can not be
          * called.
-         *
+         * <p>
          * Case for non-exist file: it's correct call. That means file is just created in local box. But after
          * that, remote repository can also contain file, i.e. two users created file independently, then
          * rebase will be called. Implementation should interpret non-exist file as empty data.
@@ -253,7 +252,7 @@ public final class RebaseAndCommit {
          * Rebaser should read and parse HEAD version of file. It can't just remember file path because file
          * will be removed after switch into other version. Rebase can be called after that or can not be
          * called.
-         *
+         * <p>
          * Case for non-exist file: it's correct call. That means file was removed from repository.
          * Implementation should interpret non-exist file as empty data.
          */

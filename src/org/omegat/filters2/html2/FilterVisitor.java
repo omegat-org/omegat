@@ -47,6 +47,7 @@ import org.htmlparser.Text;
 import org.htmlparser.nodes.TextNode;
 import org.htmlparser.visitors.NodeVisitor;
 import org.omegat.core.Core;
+import org.omegat.util.HTMLUtils;
 import org.omegat.util.OStrings;
 import org.omegat.util.PatternConsts;
 import org.omegat.util.StringUtil;

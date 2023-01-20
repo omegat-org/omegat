@@ -1,7 +1,0 @@
-Manifest-Version: 1.0
-Plugin-Name: Filters for OmegaT
-Plugin-Author: Example Author
-Plugin-Description: Example Description.
-Plugin-Link: https://example.com
-Plugin-Category: filter
-OmegaT-Plugins: com.example.ExampleFilter

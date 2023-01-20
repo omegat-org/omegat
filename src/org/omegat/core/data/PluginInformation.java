@@ -32,6 +32,7 @@ import java.util.jar.Attributes;
 import java.util.jar.Manifest;
 
 import org.omegat.filters2.master.PluginUtils;
+import org.omegat.util.OStrings;
 
 /**
  * Plugin information POJO data class.
@@ -43,6 +44,7 @@ public class PluginInformation {
     public enum Status {
         INSTALLED,
         BUNDLED,
+        NEW,
     }
 
     private final String className;
@@ -224,21 +226,43 @@ public class PluginInformation {
          * @param status Plugin status, bundled or installed
          * @return PluginInformation object.
          */
-        public static PluginInformation fromManifest(final String className, final Manifest manifest, final URL mu,
-                                                     final Status status) {
-            Attributes mainAttrs = manifest.getMainAttributes();
-            Attributes attrs = manifest.getEntries().get(className);
-            if (attrs == null) {
-                  attrs = manifest.getMainAttributes();
+        public static PluginInformation fromManifest(final String className, final Manifest manifest,
+                                                     final URL mu, final Status status) {
+            Attributes targetAttrs = new Attributes(manifest.getMainAttributes());
+            String packageName = className.substring(0, className.lastIndexOf(".") + 1)
+                    .replaceAll("\\.", "/");
+            // package section
+            String targetPackage;
+            int i = 0;
+            while (i < packageName.length()) {
+                i = packageName.indexOf("/", i) + 1;
+                Attributes attrs = manifest.getEntries().get(packageName.substring(0, i));
+                if (attrs != null) {
+                    targetAttrs.putAll(attrs);
+                }
             }
-            return new PluginInformation(className, findName(className, attrs),
-                    findVersion(attrs, mainAttrs), findAuthor(mainAttrs), attrs.getValue(PLUGIN_DESCRIPTION),
-                    PluginUtils.PluginType.getTypeByValue(findCategoryKey(attrs)),
-                    attrs.getValue(PLUGIN_LINK), mu, status);
+            // Specific class section
+            Attributes attrs = manifest.getEntries().get(className);
+            if (attrs != null) {
+                targetAttrs.putAll(attrs);
+            }
+            return new PluginInformation(className,
+                    findName(className, targetAttrs),
+                    findVersion(targetAttrs),
+                    findAuthor(targetAttrs),
+                    lookupAttribute(targetAttrs, PLUGIN_DESCRIPTION),
+                    findCategory(targetAttrs),
+                    lookupAttribute(targetAttrs, PLUGIN_LINK), mu, status);
         }
+
+        private static final String AUTHOR = "OmegaT team";
+        private static final String LINK = "https://www.omegat.org";
 
         /**
          * Build PluginInformation from properties.
+         * <p>
+         *     This builder is useful when OmegaT run from Gradle build system.
+         * </p>
          * @param className Plugin class name.
          * @param props plugin properties bundled with OmegaT.
          * @param key plugin type string.
@@ -246,45 +270,47 @@ public class PluginInformation {
          * @param status Plugin status, bundled or installed
          * @return PluginInformation object.
          */
-        public static PluginInformation fromProperties(String className, Properties props, final String key,
-                                                       final URL mu, final Status status) {
-            return new PluginInformation(className, findName(className, null),
-                    null, null, null,
-                    PluginUtils.PluginType.getTypeByValue(key),
-                    null, mu, status);
+        public static PluginInformation fromProperties(String className, Properties props,
+                                                       final String key, final URL mu, final Status status) {
+            return new PluginInformation(className, key, OStrings.getSimpleVersion(), AUTHOR,
+                    props.getProperty(String.format("plugin.desc.%s", key)),
+                    PluginUtils.PluginType.getTypeByValue(key), LINK, mu, status);
         }
 
-        private static String findCategoryKey(Attributes attrs) {
-            return lookupAttribute(attrs, PLUGIN_CATEGORY, PLUGIN_TYPE);
+        private static PluginUtils.PluginType findCategory(Attributes attrs) {
+            String categoryKey;
+            categoryKey = lookupAttribute(attrs, PLUGIN_CATEGORY, PLUGIN_TYPE);
+            if (categoryKey != null) {
+                return PluginUtils.PluginType.getTypeByValue(categoryKey);
+            }
+            return PluginUtils.PluginType.MISCELLANEOUS;
         }
 
         private static String findName(String className, Attributes attrs) {
-            if (attrs != null) {
-                String name = lookupAttribute(attrs, PLUGIN_NAME, BUNDLE_NAME, IMPLEMENTATION_TITLE);
-                if (name != null) {
-                    return name;
-                }
+            String name = lookupAttribute(attrs, PLUGIN_NAME, BUNDLE_NAME, IMPLEMENTATION_TITLE);
+            if (name != null) {
+                return name;
             }
             return className.substring(className.lastIndexOf(".") + 1);
         }
 
-        private static String findVersion(Attributes attrs, Attributes mainAttrs) {
+        private static String findVersion(Attributes attrs) {
             String version = lookupAttribute(attrs, PLUGIN_VERSION, BUNDLE_VERSION, IMPLEMENTATION_VERSION);
             if (version != null) {
                 return version;
             }
-            version = lookupAttribute(mainAttrs, PLUGIN_VERSION, BUNDLE_VERSION, IMPLEMENTATION_VERSION);
-            if (version != null) {
-                return version;
-            }
-            return "unknown";
+            return "";
         }
 
         private static String findAuthor(Attributes attrs) {
+            String author = lookupAttribute(attrs, PLUGIN_AUTHOR, IMPLEMENTATION_VENDOR, BUILT_BY);
+            if (author != null) {
+                return author;
+            }
             if ("org.omegat.Main".equals(attrs.getValue("Main-Class"))) {
                 return "OmegaT team";
             }
-            return lookupAttribute(attrs, PLUGIN_AUTHOR, IMPLEMENTATION_VENDOR, BUILT_BY);
+            return "Unknown";
         }
 
         private static String lookupAttribute(Attributes attrs, String... candidates) {

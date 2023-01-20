@@ -99,6 +99,26 @@ public class ConsoleBindings implements IGlossaries, IEditor, IScriptLogger {
     }
 
     @Override
+    public void nextXAutoEntry() {
+
+    }
+
+    @Override
+    public void prevXAutoEntry() {
+
+    }
+
+    @Override
+    public void nextXEnforcedEntry() {
+
+    }
+
+    @Override
+    public void prevXEnforcedEntry() {
+
+    }
+
+    @Override
     public void nextEntryWithNote() {
 
     }

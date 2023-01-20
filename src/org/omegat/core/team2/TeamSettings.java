@@ -57,11 +57,8 @@ public final class TeamSettings {
         try {
             Properties p = new Properties();
             if (getConfigFile().exists()) {
-                FileInputStream in = new FileInputStream(getConfigFile());
-                try {
+                try (FileInputStream in = new FileInputStream(getConfigFile())) {
                     p.load(in);
-                } finally {
-                    in.close();
                 }
             }
             return p.keySet();
@@ -77,11 +74,8 @@ public final class TeamSettings {
         try {
             Properties p = new Properties();
             if (getConfigFile().exists()) {
-                FileInputStream in = new FileInputStream(getConfigFile());
-                try {
+                try (FileInputStream in = new FileInputStream(getConfigFile())) {
                     p.load(in);
-                } finally {
-                    in.close();
                 }
             }
             return p.getProperty(key);
@@ -99,27 +93,21 @@ public final class TeamSettings {
             File f = getConfigFile();
             File fNew = new File(getConfigFile().getAbsolutePath() + ".new");
             if (f.exists()) {
-                FileInputStream in = new FileInputStream(f);
-                try {
+                try (FileInputStream in = new FileInputStream(f)) {
                     p.load(in);
-                } finally {
-                    in.close();
                 }
             } else {
-                f.getParentFile().mkdirs();
+                boolean ignored = f.getParentFile().mkdirs();
             }
             if (newValue != null) {
                 p.setProperty(key, newValue);
             } else {
                 p.remove(key);
             }
-            FileOutputStream out = new FileOutputStream(fNew);
-            try {
+            try (FileOutputStream out = new FileOutputStream(fNew)) {
                 p.store(out, null);
-            } finally {
-                out.close();
             }
-            f.delete();
+            boolean ignored = f.delete();
             FileUtils.moveFile(fNew, f);
         } catch (Exception ex) {
             throw new RuntimeException(ex);

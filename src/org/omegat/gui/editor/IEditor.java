@@ -159,6 +159,34 @@ public interface IEditor {
     void prevEntry();
 
     /**
+     * Move to next x-auto translated entry.
+     *
+     * Must be called only from UI thread.
+     */
+    void nextXAutoEntry();
+
+    /**
+     * Move to previous x-auto translated entry.
+     *
+     * Must be called only from UI thread.
+     */
+    void prevXAutoEntry();
+
+    /**
+     * Move to next x-enforced translated entry.
+     *
+     * Must be called only from UI thread.
+     */
+    void nextXEnforcedEntry();
+
+    /**
+     * Move to previous x-enforced translated entry.
+     *
+     * Must be called only from UI thread.
+     */
+    void prevXEnforcedEntry();
+
+    /**
      * Move to next entry with a note.
      *
      * Must be called only from UI thread.

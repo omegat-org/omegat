@@ -79,6 +79,17 @@ public class XMLReader extends Reader {
     /**
      * Creates a new instance of XMLReader. If encoding cannot be detected,
      * falls back to default UTF-8.
+     * 
+     * @param fileName
+     *            - the file to read
+     */
+    public XMLReader(InputStream is) throws IOException {
+        reader = createReader(is, encoding);
+    }
+
+    /**
+     * Creates a new instance of XMLReader. If encoding cannot be detected,
+     * falls back to default UTF-8.
      *
      * @param fileName
      *            - the file to read
@@ -98,7 +109,7 @@ public class XMLReader extends Reader {
      *            The encoding to use if we can't autodetect.
      */
     public XMLReader(File file, String encoding) throws IOException {
-        reader = createReader(file, encoding);
+        reader = createReader(new FileInputStream(file), encoding);
     }
 
     /**
@@ -116,9 +127,9 @@ public class XMLReader extends Reader {
      * <p>
      * Note that we cannot detect UTF-16 encoding, if there's no BOM!
      */
-    private BufferedReader createReader(File file, String defaultEncoding) throws IOException {
+    private BufferedReader createReader(InputStream in, String defaultEncoding) throws IOException {
         // BOM detection
-        BufferedInputStream is = new BufferedInputStream(new FileInputStream(file));
+        BufferedInputStream is = new BufferedInputStream(in);
 
         is.mark(OConsts.READ_AHEAD_LIMIT);
 

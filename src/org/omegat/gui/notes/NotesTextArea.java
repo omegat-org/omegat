@@ -29,8 +29,6 @@
 package org.omegat.gui.notes;
 
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenuItem;
@@ -45,6 +43,7 @@ import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.IPaneMenu;
 import org.omegat.util.gui.JTextPaneLinkifier;
+import org.omegat.util.gui.StaticUIUtils;
 import org.omegat.util.gui.UIThreadsUtil;
 
 /**
@@ -137,12 +136,13 @@ public class NotesTextArea extends EntryInfoPane<String> implements INotes, IPan
     public void populatePaneMenu(JPopupMenu menu) {
         final JMenuItem notify = new JCheckBoxMenuItem(OStrings.getString("GUI_NOTESWINDOW_NOTIFICATIONS"));
         notify.setSelected(Preferences.isPreference(Preferences.NOTIFY_NOTES));
-        notify.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Preferences.setPreference(Preferences.NOTIFY_NOTES, notify.isSelected());
-            }
-        });
+        notify.addActionListener(e -> Preferences.setPreference(Preferences.NOTIFY_NOTES, notify.isSelected()));
         menu.add(notify);
+    }
+    
+    @Override
+    public void requestFocus() {
+        StaticUIUtils.requestVisible(scrollPane);
+    	scrollPane.getViewport().getView().requestFocusInWindow();
     }
 }

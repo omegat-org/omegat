@@ -44,7 +44,8 @@ public class PluginInfoTableModel extends DefaultTableModel {
     protected static final int COLUMN_AUTHOR = 3;
     protected static final int COLUMN_DESCRIPTION = 4;
 
-    private static final String[] COLUMN_NAMES = { "NAME", "CLASS", "VERSION", "AUTHOR", "DESCRIPTION" };
+    private static final String[] COLUMN_NAMES = { "PREFS_PLUGINS_COL_NAME", "PREFS_PLUGINS_COL_CLASS",
+            "PREFS_PLUGINS_COL_VERSION", "PREFS_PLUGINS_COL_AUTHOR", "PREFS_PLUGINS_COL_DESCRIPTION" };
 
     private final List<PluginInformation> listPlugins = new ArrayList<>();
 
@@ -76,7 +77,7 @@ public class PluginInfoTableModel extends DefaultTableModel {
 
     @Override
     public String getColumnName(int column) {
-        return OStrings.getString("PREFS_PLUGINS_COL_" + COLUMN_NAMES[column]);
+        return OStrings.getString(COLUMN_NAMES[column]);
     }
 
     @Override

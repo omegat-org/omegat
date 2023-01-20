@@ -53,6 +53,7 @@ public class PluginsPreferencesPanel extends JPanel {
         messageLabel = new javax.swing.JLabel();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 5), new java.awt.Dimension(0, 5), new java.awt.Dimension(32767, 5));
         browsePluginsButton = new javax.swing.JButton();
+        installFromDiskButton = new javax.swing.JButton();
         panelPluginsInfo = new javax.swing.JPanel();
         labelTableTitle = new javax.swing.JLabel();
         scrollTable = new javax.swing.JScrollPane();
@@ -70,6 +71,9 @@ public class PluginsPreferencesPanel extends JPanel {
         org.openide.awt.Mnemonics.setLocalizedText(browsePluginsButton, OStrings.getString("PREFS_PLUGINS_BROWSE_ONLINE")); // NOI18N
         browsePluginsButton.setAlignmentY(0.0F);
         panelInfo.add(browsePluginsButton);
+
+        org.openide.awt.Mnemonics.setLocalizedText(installFromDiskButton, OStrings.getString("PREFS_PLUGINS_INSTALL_FROM_DISK")); // NOI18N
+        panelInfo.add(installFromDiskButton);
 
         add(panelInfo);
 
@@ -103,6 +107,7 @@ public class PluginsPreferencesPanel extends JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     javax.swing.JButton browsePluginsButton;
     private javax.swing.Box.Filler filler1;
+    javax.swing.JButton installFromDiskButton;
     private javax.swing.JLabel labelTableTitle;
     private javax.swing.JLabel messageLabel;
     private javax.swing.JPanel panelInfo;

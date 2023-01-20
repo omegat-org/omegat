@@ -181,7 +181,7 @@ public class RemoteRepositoryProvider {
      */
     public File toPrepared(File inFile) throws IOException {
         File dir = new File(projectRoot, REPO_PREPARE_SUBDIR);
-        dir.mkdirs();
+        boolean ignored = dir.mkdirs();
         File out = File.createTempFile("prepared", "", dir);
         FileUtils.copyFile(inFile, out);
         return out;
@@ -311,7 +311,7 @@ public class RemoteRepositoryProvider {
     }
 
     protected File getRepositoryDir(RepositoryDefinition repo) {
-        String path = repo.getUrl().replaceAll("[^A-Za-z0-9\\.]", "_").replaceAll("__+", "_");
+        String path = repo.getUrl().replaceAll("[^A-Za-z0-9.]", "_").replaceAll("__+", "_");
         return new File(new File(projectRoot, REPO_SUBDIR), path);
     }
 
@@ -425,10 +425,6 @@ public class RemoteRepositoryProvider {
          */
         public boolean matches() {
             return filterPrefix != null;
-        }
-
-        public void copyFromRepoToProject() throws IOException {
-            copyFromRepoToProject("");
         }
 
         public void copyFromRepoToProject(final String postfix) throws IOException {
@@ -555,7 +551,7 @@ public class RemoteRepositoryProvider {
             }
             try {
                 if (f.isFile()) {
-                    f.delete();
+                    boolean ignored = f.delete();
                 } else {
                     FileUtils.deleteDirectory(f);
                 }

@@ -74,7 +74,7 @@ public class ProjectTeamSettings {
                     p.load(in);
                 }
             } else {
-                f.getParentFile().mkdirs();
+                boolean ignored = f.getParentFile().mkdirs();
             }
             if (newValue != null) {
                 p.setProperty(key, newValue);
@@ -84,7 +84,7 @@ public class ProjectTeamSettings {
             try (FileOutputStream out = new FileOutputStream(fNew)) {
                 p.store(out, null);
             }
-            f.delete();
+            boolean ignored = f.delete();
             FileUtils.moveFile(fNew, f);
         } catch (Exception ex) {
             throw new RuntimeException(ex);

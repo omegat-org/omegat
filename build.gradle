@@ -42,6 +42,11 @@ targetCompatibility = javaVersion
 
 version = omtVersion.version + getUpdateSuffix(omtVersion.update)
 
+java {
+    withSourcesJar()
+    withJavadocJar()
+}
+
 sourceSets {
     main {
         java {
@@ -69,19 +74,6 @@ sourceSets {
 
 repositories {
     mavenCentral()
-}
-
-task webstartDocsJar(type: Jar) {
-    description = 'Bundle documents for Java WebStart.'
-    archiveBaseName = 'docs'
-    from('release') {
-        include 'changes.txt', 'OmegaT-license.txt'
-        into 'docs'
-    }
-    from('docs') {
-        include '**/instantStartGuideNoTOC.html', '**/OmegaT.css', '**/images/InstantGuide_*.png'
-        into 'docs'
-    }
 }
 
 configurations {
@@ -130,7 +122,7 @@ dependencies {
         // Dictionary
         implementation 'com.github.takawitter:trie4j:0.9.8'
         implementation 'io.github.eb4j:dsl4j:0.5.3'
-        implementation 'tokyo.northside:stardict4j:0.4.1'
+        implementation 'tokyo.northside:stardict4j:0.5.0'
 
         // Encoding detections
         implementation 'com.github.albfernandez:juniversalchardet:2.4.0'
@@ -202,6 +194,14 @@ dependencies {
         // JSON parser
         implementation "com.fasterxml.jackson.core:jackson-core:2.13.4"
         implementation "com.fasterxml.jackson.core:jackson-databind:2.13.4.2"
+
+        implementation("com.github.ben-manes.caffeine:caffeine:2.9.3") {
+            attributes {
+                attribute(Bundling.BUNDLING_ATTRIBUTE, project.objects.named(Bundling.class, Bundling.EXTERNAL))
+            }
+        }
+        implementation("com.github.ben-manes.caffeine:jcache:2.9.3")
+
     }
 
     // Test dependencies
@@ -228,17 +228,36 @@ jar {
         attributes('License': 'GNU Public License version 3 or later',
                    'Implementation-Version': project.version,
                    'Permissions': 'all-permissions',
-                   'OmegaT-Plugins': omtPlugins.plugin,
                    'OmegaT-Plugin': 'true',
+                   'OmegaT-Plugins': omtPlugins.plugin,
+                   'Plugin-Author': 'OmegaT team',
+                   'Plugin-Link': 'https://omegat.org',
+                   'Plugin-Version': project.version,
                    'Main-Class': mainClassName,
                    'Class-Path': configurations.runtimeClasspath.collect { "lib/${it.name}" }.join(' '))
+        ext.pluginAttr = { name, path, category, description ->
+            attributes('Plugin-Name': name, 'Plugin-Category': category, 'Plugin-Description': description, path)
+        }
+        def desc = [:]
         omtPlugins.each { key, val ->
-            if (key != 'plugin') {
+            if (key.startsWith('plugin.desc')) {
+                desc[key.split('\\.').last()] = val
+            } else if (key != 'plugin') {
                 val.tokenize().each { cls ->
                     attributes('OmegaT-Plugin': key, cls)
                 }
             }
         }
+        pluginAttr('Dictionary driver[bundle]', 'org/omegat/core/dictionaries/', 'dictionary', desc.dictionary)
+        pluginAttr('MT connector[bundle]', 'org/omegat/core/machinetranslators/', 'machinetranslator', desc.machinetranslator)
+        pluginAttr('File filters[bundle]', 'org/omegat/filters2/', 'filter', desc.filters2)
+        pluginAttr('XML filters[bundle]', 'org/omegat/filters3/', 'filter', desc.filters3)
+        pluginAttr('New XML filters[bundle]', 'org/omegat/filters4/', 'filter', desc.filters4)
+        pluginAttr('Tokenizers[bundle]', 'org/omegat/tokenizer/', 'tokenizer', desc.tokenizer)
+        pluginAttr('Themes [bundle]', 'org/omegat/gui/theme/', 'theme', desc.theme)
+        pluginAttr('Scripting engine', 'org/omegat/gui/script/', 'miscellaneous', desc.script)
+        pluginAttr('GUI extensions', 'org/omegat/util/gui/', 'miscellaneous', desc.guiutil)
+        pluginAttr('Local external search', 'org/omegat/externalfinder/', 'miscellaneous', desc.externalfinder)
     }
     // Don't include extra stuff like version number in JAR name
     archiveFileName = "${archiveBaseName.get()}.${archiveExtension.get()}"
@@ -262,6 +281,9 @@ task genDocIndex(type: Copy) {
     def docPropsFiles = fileTree(dir: 'docs', include: '*/version*.properties').findAll {
         file("${it.parent}/index.html").file
     }
+    def isgFiles = fileTree(dir: 'docs', include: '*/instantStartGuideNoTOC.html').findAll {
+        file("${it.parent}/instantStartGuideNoTOC.html").file
+    }
     inputs.files docPropsFiles
     from('doc_src') {
         include 'index_template.html'
@@ -270,20 +292,35 @@ task genDocIndex(type: Copy) {
     rename('index_template.html', 'index.html')
     doFirst {
         def langNameExceptions = loadProperties(file('doc_src/lang_exceptions.properties'))
+        def isgInfos = isgFiles.collect { isg ->
+            def code = isg.parentFile.name
+            def locale = Locale.forLanguageTag(code.replace('_', '-'))
+            def name = langNameExceptions[code] ?: locale.getDisplayName(locale)
+            def docVersion = 0
+            def noManual = true
+            def status = 'out-of-date'
+            ['code': code, 'name': name, 'version': docVersion, 'status': status, 'nomanual': noManual]
+        }
         def langInfos = docPropsFiles.collect { props ->
             def code = props.parentFile.name
             def locale = Locale.forLanguageTag(code.replace('_', '-'))
             def name = langNameExceptions[code] ?: locale.getDisplayName(locale)
             def docVersion = loadProperties(props).version
+            def noManual = false
             def status = docVersion == omtVersion.version ? 'up-to-date' : 'out-of-date'
-            ['code': code, 'name': name, 'version': docVersion, 'status': status]
-        }.sort { it.code }
+            ['code': code, 'name': name, 'version': docVersion, 'status': status, 'nomanual': noManual]
+        }
+        def filterSet = langInfos.collect {entry -> entry.code}
+        def filteredIsgInfos = isgInfos.findAll{entry -> !filterSet.contains(entry.code)}
+        langInfos.addAll(filteredIsgInfos)
+        langInfos.sort { entry -> entry.code }
         expand('languages': langInfos)
         filteringCharset = 'UTF-8'
     }
 }
 
 task webManual(type: Sync) {
+    group = 'documentation'
     description = 'Generate the HTML manual'
     dependsOn genDocIndex
     destinationDir = file("${buildDir}/docs/manual")
@@ -407,62 +444,6 @@ distributions {
             }
         }
     }
-
-    l10nMinimal {
-        contents {
-            from 'release/l10n-project'
-            from('doc_src') {
-                include 'en/InstantStartGuide.xml',
-                    'en/images/InstantGuide_1.png',
-                    'en/images/InstantGuide_2.png'
-                into 'source/doc_src'
-            }
-            from('src') {
-                include 'org/omegat/Bundle.properties'
-                into 'source/src'
-            }
-            from('release') {
-                include 'win32-specific/CustomMessages.ini'
-                into 'source/release'
-            }
-            from('scripts') {
-                include 'properties/check_rules.properties',
-                    'properties/spellcheck.properties',
-                    'properties/svn_cleanup_selected.properties',
-                    'properties/search_replace.properties',
-                    'properties/replace_strip_tags.properties',
-                    'properties/strip_bidi_marks.properties',
-                    'properties/nbsp.properties',
-                    'extract_text_content.properties'
-                into 'source/scripts'
-            }
-            from('release') {
-                include 'mac-specific/OmegaT.app/Contents/Resources/en.lproj/Localizable.strings'
-                into 'source/release'
-            }
-            from('release') {
-                include 'readme.txt'
-                into 'source'
-                filter(ReplaceTokens, tokens: [TRANSLATION_NOTICE: 'This translation is the work of [insert your name], copyright\u00a9 [insert year].'])
-                filter(FixCrLfFilter,  eol: FixCrLfFilter.CrLf.newInstance('crlf'))
-                rename '.txt$', '.utf8'
-                filteringCharset = 'UTF-8'
-            }
-        }
-        l10nMinimalDistZip.archiveFileName = "${applicationName}_${project.version}${omtVersion.beta}_L10N_Minimal.zip"
-    }
-
-    l10nFull {
-        contents {
-            with l10nMinimal.contents
-            from('doc_src') {
-                include 'en/**'
-                exclude 'en/html/**', 'en/pdf/**'
-                into 'source/doc_src'
-            }
-        }
-        l10nFullDistZip.archiveFileName = "${applicationName}_${version}${omtVersion.beta}_L10N_Full.zip"
-    }
 }
 
 installMacDist {
@@ -577,10 +558,12 @@ task macStapledNotarizedDistZip(type: Zip) {
 
 task mac(dependsOn: [macDistZip, macNotarize]) {
     description = 'Build the Mac distributions.'
+    group = 'distribution'
 }
 
 task linux(dependsOn: [linux64DistTar]) {
     description = 'Build the Linux distributions.'
+    group = 'distribution'
 }
 
 linux64DistTar {
@@ -593,10 +576,6 @@ linux64DistTar {
     archiveFileName = "${applicationName}_${project.version}${omtVersion.beta}_Linux_64.tar.bz2"
     compression = Compression.BZIP2
     archiveExtension = 'tar.bz2'
-}
-
-task l10n(dependsOn: [l10nMinimalDistZip, l10nFullDistZip]) {
-    description = 'Build the L10N distributions.'
 }
 
 // We bundle our startup scripts separately, so disable startScripts.
@@ -639,6 +618,7 @@ ext.getInnoSetupCustomMessages = {
 
 task win {
     description = 'Build the Windows distributions.'
+    group = 'distribution'
 }
 
 ext.makeWinTask = { args ->
@@ -866,6 +846,7 @@ spotless {
 
 task changedOnBranch {
     description = 'List files that have been modified on this git branch.'
+    group = 'omegat workflow'
     doLast {
         ext.files = project.files(gitModifiedFiles())
         ext.files.each { println(it) }
@@ -874,6 +855,7 @@ task changedOnBranch {
 
 task spotlessChangedApply {
     description = 'Apply code formatting to files that have been changed on the current branch.'
+    group = 'omegat workflow'
     finalizedBy 'spotlessApply'
     dependsOn changedOnBranch
     doFirst {
@@ -889,18 +871,49 @@ jacoco {
 
 tasks.jacocoTestReport {
     dependsOn(tasks.test) // tests are required to run before generating the report
+    group = 'verification'
     reports {
         xml.required = true  // coveralls plugin depends on xml format report
         html.required = true
+    }
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: ["gen/core/**/*", "org/omegat/**/gui/*", "org/omegat/**/data/*"])
+        }))
+    }
+}
+
+// check.dependsOn jacocoTestCoverageVerification
+tasks.jacocoTestCoverageVerification {
+    dependsOn(tasks.test)
+    violationRules {
+        rule {
+            element = 'CLASS'
+            includes = ['org.omegat.core.machinetranslators.*', 'org.omegat.core.dictionaries.*']
+            excludes = ['**.*.1', '**.*.2', '**.*.3']  // ignore inner classes
+            limit { minimum = 0.20 }
+        }
+        rule {
+            element = 'PACKAGE'
+            includes = ['org.omegat.filters?.*',
+                        'org.omegat.externalfinder', 'org.omegat.languagetools', 'org.omegat.util',
+                        'org.omegat.core.events', 'org.omegat.core.matching', 'org.omegat.core.search',
+                        'org.omegat.core.segmentation', 'org.omegat.core.spellchecker', 'org.omegat.core.statistics',
+                        'org.omegat.core.tagvalidation', 'org.omegat.core.team2.*']
+            excludes = ['org.omegat.core.team2.gui', 'org.omegat.util.xml.*']
+            limit { minimum = 0.60 }
+        }
     }
 }
 
 task manualPdfs {
     description = 'Build PDF manuals for all languages. Requires Docker.'
+    group = 'omegat workflow'
 }
 
 task manualHtmls {
     description = 'Build HTML manuals for all languages. Requires Docker.'
+    group = 'omegat workflow'
 }
 
 ext.manualIndexXmls = fileTree(dir: 'doc_src', include: '**/OmegaTUsersManual_xinclude full.xml')
@@ -940,12 +953,35 @@ manualIndexXmls.each { xml ->
 
 task instantStartGuides {
     description = 'Build Instant Start guides for all languages. Requires Docker.'
+    group = 'omegat workflow'
+}
+
+task firstSteps {
+    description = 'Build First Step pages for all languages. Requires Docker.'
+    group = 'omegat workflow'
 }
 
 task updateManuals {
+    group = 'omegat workflow'
     description = 'Update Instant Start guides and HTML manuals.'
-    dependsOn manualHtmls, instantStartGuides
+    dependsOn manualHtmls, firstSteps, instantStartGuides
     finalizedBy genDocIndex
+}
+
+ext.firstStepsXmls = fileTree(dir: 'doc_src', include: '**/First_Steps.xml')
+firstStepsXmls.each { xml ->
+    def lang = xml.parentFile.name
+    def taskName = "firstSteps${lang.capitalize()}"
+    task(taskName) {
+        inputs.files fileTree(dir: "doc_src/${lang}", include: '**/*.xml')
+        doLast {
+            exec {
+                workingDir = 'doc_src'
+                commandLine './docgen', "-Dlanguage=${lang}", 'first-steps'
+            }
+        }
+    }
+    firstSteps.dependsOn taskName
 }
 
 ext.instantStartXmls = fileTree(dir: 'doc_src', include: '**/InstantStartGuide.xml')
@@ -964,8 +1000,11 @@ instantStartXmls.each { xml ->
     instantStartGuides.dependsOn taskName
 }
 
+
+
 task debug(type: JavaExec) {
     description = 'Launch app for debugging.' // Special debug task for NetBeans
+    group = 'application'
     mainClass = mainClassName
     classpath = sourceSets.main.runtimeClasspath
     debug true
@@ -983,19 +1022,10 @@ test {
 
 task testIntegration(type: JavaExec) {
     description = 'Run integration tests. Pass repo URL as -Domegat.test.repo=<repo>'
+    group = 'omegat workflow'
     mainClass = 'org.omegat.core.data.TestTeamIntegration'
     classpath = sourceSets.testIntegration.runtimeClasspath
     systemProperties = System.properties
-}
-
-task sourceJar(type: Jar) {
-    from sourceSets.main.allJava
-    classifier = 'sources'
-}
-
-task javadocJar(type: Jar) {
-    from javadoc.outputs
-    classifier = 'javadoc'
 }
 
 ext.mavenStyleVersion = version.replace('_', '-')
@@ -1006,9 +1036,6 @@ publishing {
             groupId = 'org.omegat'
             artifactId = 'omegat'
             version = mavenStyleVersion
-            artifact sourceJar
-            artifact javadocJar
-
             from components.java
 
             pom {
@@ -1096,19 +1123,9 @@ ext.publishAtomically = { args ->
 publishAtomically(name: 'manual', sourceTask: webManual)
 publishAtomically(name: 'javadoc', sourceTask: javadoc)
 
-ext {
-    codebasePattern = /^https:\/\/omegat\.sourceforge\.io\/([^\/]+)\/$/
-    def matcher = findProperty('jwsCodebase') =~ codebasePattern
-    jwsTargetDir = matcher ? matcher[0][1] : null
-}
-if (jwsTargetDir) {
-    publishAtomically(name: camelCase(jwsTargetDir),
-                      sourceTask: installWebstartDist,
-                      targetDir: jwsTargetDir)
-}
-
 task publishVersion {
     description = 'Update the version considered current by the version check.'
+    group = 'omegat workflow'
     doLast {
         ssh.run {
             session(remotes.sourceforgeWeb) {

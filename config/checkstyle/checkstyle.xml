@@ -53,6 +53,7 @@
         <property name="onCommentFormat" value="// End of variables declaration//GEN-END:variables"/>
     </module>
 
+    <!-- @see docs_devel/docs/30.CodingStyles.md -->
     <module name="LineLength">
         <property name="max" value="120"/>
         <property name="ignorePattern" value="^ *\* *[^ ]+$"/>

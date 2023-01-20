@@ -1,28 +1,58 @@
-# Welcome to OmegaT contribution guide
+# OmegaT contribution guide
 
+# Table of contents
+
+* [Variety of Contribution](00.ContributingEcoSystem.md)
+ 
 ## How to build and contribute OmegaT
 
-1. [Contributing to OmegaT](1.ContributingOmegaT.md)
-2. [How to build OmegaT](2.HowToBuild.md)
-3. [How to make plugin](3.HowToCreateFilterPlugin.md)
-4. [OmegaT internals](4.DevelopersGuide.md)
-5. [Integration test](5.IntegrationTest.md)
-6. [Release procedure](6.Release.md)
+* [Contributing to OmegaT development](01.ContributingOmegaT.md)
+* [How to build OmegaT](02.HowToBuild.md)
+* [Git workflow](03.GitWorkFlows.md)
+* [Coding styles](30.CodingStyles.md)
 
-## Other Files in Asset Directory
+## How to create plugin
 
-### [eclipse-formatting.xml](assets/eclipse-formatting.xml)
+* [How to make filter plugin](11.HowToCreateFilterPlugin.md)
+* [Setup your plugin project](15.SetupPluginProject.md)
+* [Loading Plugins](17.LoadingPlugins.md)
+* [Plugin manifest](19.PluginManifest.md)
 
-   This file is project-standard indent configuration for Eclipse IDE.
+## Understanding OmegaT Internals
 
-### [Support matrix of alternate translations](assets/MultipleTranslationFieldsForFilters.ods)
+* [OmegaT internals](21.DevelopersGuide.md)
+* [Core Events](22.CoreEvents.md)
+* [Core Methods](23.CoreMethods.md)
+* [Caching](26.Caching.md)
+* [Utility functions](27.UtilityClasses.md)
 
-   This documents how different filters identify "alternate" translations. You can
-   view it with LibreOffice or any ODF-compatible viewer.
+## Quality Assurance and tests
 
-### [OmegaT.vpp](assets/OmegaT.vpp)
+* [Test and coverage](33.TestAndCoverage.md)
+* [Integration test](34.IntegrationTest.md)
 
-   This document is the source for the UML diagrams in the developer's guide; it
-   contains no content not also viewable within the developer's guide.
-   Visual Paradigm Community Edition (free) is required to edit the file
-   (http://www.visual-paradigm.com)
+## Documentation
+
+* [Contributing to Documentation](40.ContributingDocument.md)
+
+## Localization
+
+* [Localize applications and manuals](45.LocalizeApplicationAndManuals.md)
+
+## Website
+
+* [Authoring website](47.WebsiteProject.md)
+
+
+## Scripting
+
+* [How to write an OmegaT script](51.HowToWriteScript.md)
+
+## Details of features
+
+* [External Finder](81.ExternalFinder.md)
+
+## Other information
+
+* [Release procedure](90.ReleaseProcedure.md)
+* [Appendix](91.appendix.md)

@@ -29,15 +29,15 @@
 	in the left-hand panel of the window.</para>
 
 	<warning>
-	  <para>If a list of scripts is not displayed on the left side of the script
-	  editor window, use the Scripting window <guimenu>File</guimenu> >
-	  <guimenuitem>Set Scripts Folder...</guimenuitem> menu to locate the place
-	  where scripts are stored.</para>
+	  <para>If no list of scripts is displayed on the left side of 
+	  the script editor window, use the Scripting window <guimenu>File</guimenu> >
+	  <guimenuitem>Set Scripts Folder...</guimenuitem> menu to set 
+	  the location of the scripts.</para>
 	</warning>
 
 	<para>Additional scripts can be found here: <ulink
 	url="https://sourceforge.net/projects/omegatscripts/">OmegaT
-	Scripts</ulink>. Just copy the file and put it in the <link
+	Scripts</ulink>. Just copy the file to the <link
 	linkend="application.folder.scripts"
 	endterm="application.folder.scripts.title"/> folder.</para>
 
@@ -78,15 +78,13 @@
   distribution.</para>
   
   <warning>
-	<para>Scripts are also launched when you are executing other
-	scripts. Consequently, in a large project, an <code>entry_activated</code>
-	script will be called frequently when using a search/replace type of
-	script that loops through all the segments, rendering the application
-	unresponsive.</para>
+	<para>Scripts are also launched when you are executing other scripts.
+	Consequently, in a large project, an <code>entry_activated</code> script
+	will frequently be called when a search/replace type of script that loops
+	through all segments is used, rendering the application unresponsive.</para>
   </warning>
   </section>
   
-
   <section id="windows.scripts.usage">
 	<title id="windows.scripts.usage.title">Usage</title>
 
@@ -226,7 +224,7 @@
         Modify Segment</term>
 
         <listitem>
-          <para>Example showing how to modify a segment.</para>
+          <para>Example that shows how to modify a segment.</para>
         </listitem>
       </varlistentry>
 
@@ -310,7 +308,7 @@
         Folder</term>
 
         <listitem>
-          <para>Open the /tm folder.</para>
+          <para>Open the <filename class="directory">/tm</filename> folder.</para>
         </listitem>
       </varlistentry>
 

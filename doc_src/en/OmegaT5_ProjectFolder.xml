@@ -4,143 +4,159 @@
 <chapter id="chapter.project.folder">
   <title id="chapter.project.folder.title">Project Folder</title>
 
-  <para>An OmegaT project consists of a set of folders and files that contain
-  the resources used for translating.</para>
+  <section>
+	<title>Default structure</title>
+	<para>An OmegaT project consists of a set of folders and files that contain
+	the resources used for translating.</para>
 
-  <para>A project is a folder containing, at a minimum, the following:</para>
-  
-  <variablelist>
-	<varlistentry id="project.folder.omegat">
-	  <term id="project.folder.omegat.title">omegat</term>
-	  <listitem>
-		<para>This is the project folder that always contains <link
-		linkend="project.folder.project.save.tmx"
-		endterm="project.folder.project.save.tmx.title"/>, the project
-		translation memory, and <link linkend="project.folder.project.stats"
-		endterm="project.folder.project.stats.title"/>, the statistics data file
-		for the project.</para>
-		<para>Other files will be added over the course of the
-		translation.</para>
-	  </listitem>
-	</varlistentry>
+	<para>By default, a newly created project will contain all the required
+	resources within its folder, and those resources are assigned the default
+	names below.</para>
 
-	<varlistentry id="project.folder.omegat.project.file">
-	  <term id="project.folder.omegat.project.file.title">omegat.project</term>
-	  <listitem>
-		<para>This file contains the properties of the project (source and
-		target languages, their respective tokenizers, the type of segmentation
-		used, etc.) and also acts as an <emphasis>address book</emphasis> that
-		specifies where project resources are located.</para>
-
-		<para>By default, a newly created project will contain all the required
-		resources within its folder, and those resources are assigned the
-		default names below.</para>
-		
-		<itemizedlist>
-		  <listitem>
-			<para><link linkend="project.folder.source"
-			endterm="project.folder.source.title"/> contains the source
-			files</para>
-		  </listitem>
-
-		  <listitem>
-			<para><link linkend="project.folder.target"
-			endterm="project.folder.target.title"/> is the location where the
-			target files are created</para>
-		  </listitem>
-
-		  <listitem>
-			<para><link linkend="project.folder.glossary"
-			endterm="project.folder.glossary.title"/> contains the
-			glossaries</para>
-		  </listitem>
-
-		  <listitem>
-			<para><link linkend="project.folder.glossary.txt"
-			endterm="project.folder.glossary.txt.title"/> is the project
-			writable glossary</para>
-		  </listitem>
-
-		  <listitem>
-			<para><link linkend="project.folder.tm"
-			endterm="project.folder.tm.title"/> contains the reference
-			translation memories</para>
-		  </listitem>
-
-		  <listitem>
-			<para><link linkend="project.folder.dictionary"
-			endterm="project.folder.dictionary.title"/> contains the reference
-			dictionaries</para>
-		  </listitem>
-		</itemizedlist>
-	  </listitem>
-	</varlistentry>
-  </variablelist>
-
-  <para>Use <link linkend="menus.project" endterm="menus.project.title"/><link
-  linkend="menus.project.access.project.contents"
-  endterm="menus.project.access.project.contents.title"/> to access the project
-  folder and its subfolders.</para>
-
-  <para>Use <link linkend="menus.project" endterm="menus.project.title"/><link
-  linkend="menus.project.properties" endterm="menus.project.properties.title"/>,
-  to easily assign locations other than the default ones to the various
-  resources either when you create the project, or later on.</para>
-
-  <para>For example, you can</para>
-
-  <itemizedlist>
-	<listitem>
-	  <para>create the translated files in a shared folder outside the project
-	  folder, in a location easily accessible to your reviewer, or</para>
-	</listitem>
-
-	<listitem>
-	  <para>use a glossary folder from a separate but related project, or</para>
-	</listitem>
-
-	<listitem>
-	  <para>use a reference translation memory folder that you have set up for
-	  related projects, and so on.</para>
-	</listitem>
-  </itemizedlist>
-  
-  <para>Creating a project gives it a core hierarchy, but its final structure is
-  not fixed. You can always remove or add files and folders to the
-  project.</para>
-
-  <note>
-	<para>You can also create OmegaT projects either manually or with scripts by
-	copying a set of prewritten files to a new folder:</para>
-	
 	<itemizedlist>
 	  <listitem>
-		<para>Any given folder that contains a valid
-		<filename>omegat.project</filename> file will be recognized as a
-		translation project by OmegaT (even if it later needs manual
-		adjustments).</para>
+		<para><link linkend="project.folder.source"
+		endterm="project.folder.source.title"/> contains the source files</para>
 	  </listitem>
 
 	  <listitem>
-		<para>If the folder is an empty repository and the
-		<filename>omegat.project</filename> file contains remote repository
-		information, the project will be recognized as a team project by
-		OmegaT:</para>
-		
-		<programlisting>...
+		<para><link linkend="project.folder.target"
+		endterm="project.folder.target.title"/> is the location where the target
+		files are created</para>
+	  </listitem>
+
+	  <listitem>
+		<para><link linkend="project.folder.glossary"
+		endterm="project.folder.glossary.title"/> contains the glossaries</para>
+	  </listitem>
+
+	  <listitem>
+		<para><link linkend="project.folder.glossary.txt"
+		endterm="project.folder.glossary.txt.title"/> is the project writable
+		glossary</para>
+	  </listitem>
+
+	  <listitem>
+		<para><link linkend="project.folder.tm"
+		endterm="project.folder.tm.title"/> contains the reference translation
+		memories</para>
+	  </listitem>
+
+	  <listitem>
+		<para><link linkend="project.folder.dictionary"
+		endterm="project.folder.dictionary.title"/> contains the reference
+		dictionaries</para>
+	  </listitem>
+	</itemizedlist>
+
+	<para>Use <link linkend="menus.project" endterm="menus.project.title"/><link
+	linkend="menus.project.access.project.contents"
+	endterm="menus.project.access.project.contents.title"/> to access the project
+	folder and its subfolders.</para>
+
+	<para>Use <link linkend="menus.project" endterm="menus.project.title"/><link
+	linkend="menus.project.properties" endterm="menus.project.properties.title"/>,
+	to easily assign locations other than the default ones to the various
+	resources either when you create the project, or later on.</para>
+
+	<para>For example, you can</para>
+
+	<itemizedlist>
+	  <listitem>
+		<para>create the translated files in a shared folder outside the project
+		folder, in a location easily accessible to your reviewer, or</para>
+	  </listitem>
+
+	  <listitem>
+		<para>use a glossary folder from a separate but related project, or</para>
+	  </listitem>
+
+	  <listitem>
+		<para>use a reference translation memory folder that you have set up for
+		related projects, and so on.</para>
+	  </listitem>
+	</itemizedlist>
+	
+	<para>Creating a project gives it a core hierarchy, but its final structure is
+	not fixed. You can always remove or add files and folders to the
+	project.</para>
+
+	<note>
+	  <para>You can also create OmegaT projects either manually or with scripts by
+	  copying a set of prewritten files to a new folder:</para>
+	  
+	  <itemizedlist>
+		<listitem>
+		  <para>Any given folder that contains a valid
+		  <filename>omegat.project</filename> file will be recognized as a
+		  translation project by OmegaT (even if it later needs manual
+		  adjustments).</para>
+		</listitem>
+
+		<listitem>
+		  <para>If the folder is an empty repository and the
+		  <filename>omegat.project</filename> file contains remote repository
+		  information, the project will be recognized as a team project by
+		  OmegaT:</para>
+		  
+		  <programlisting>...
     &lt;external_command&gt;&lt;/external_command&gt;
     &lt;repositories&gt;
         &lt;repository type="git" url="https://URL/OF/THE/REMOTE/PROJECT/REPOSITORY"&gt;
             &lt;mapping local="/" repository="/"/&gt;
         &lt;/repository&gt;
     &lt;/repositories&gt;
-&lt;/project&gt;</programlisting>
+&lt;/project&gt;
+		  </programlisting>
 
-		<para>See the <link linkend="how.to.setup.team.project"
-		endterm="how.to.setup.team.project.title"/> how-to for details.</para>
-	  </listitem>
-	</itemizedlist>
-  </note>
+		  <para>See the <link linkend="how.to.setup.team.project"
+		  endterm="how.to.setup.team.project.title"/> how-to for details.</para>
+		</listitem>
+	  </itemizedlist>
+	</note>
+  </section>
+
+  <section>
+	<title>Minimal contents</title>
+
+	<para>A project is a folder containing, at a minimum, the following:</para>
+	
+	<variablelist>
+	  <varlistentry id="project.folder.omegat">
+		<term id="project.folder.omegat.title">omegat</term>
+		<listitem>
+		  <para>This is the project folder that always contains <link
+		  linkend="project.folder.project.save.tmx"
+		  endterm="project.folder.project.save.tmx.title"/>, the project
+		  translation memory, and <link linkend="project.folder.project.stats"
+		  endterm="project.folder.project.stats.title"/>, the statistics data file
+		  for the project.</para>
+
+		  <para>Other files will be added over the course of the translation.</para>
+
+		  <para>See <link linkend="project.folder.omegat.folder">below</link> for
+		  details.</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="project.folder.omegat.project.file">
+		<term id="project.folder.omegat.project.file.title">omegat.project</term>
+		<listitem>
+		  <para>This file contains the project parameters defined in the <link
+		  linkend="dialogs.project.properties">project properties</link>, such as
+		  the source and target languages, their respective tokenizers and the type of
+		  segmentation.</para>
+		  
+		  <para>It also acts as an <emphasis>address book</emphasis> that
+		  specifies where project resources are located.</para>
+
+		  <para>OmegaT also creates a backup of that file
+		  (<filename>omegat.project.bak</filename>) and will automatically use it to
+		  restore your project settings in case of need.</para>
+		</listitem>
+	  </varlistentry>
+	</variablelist>
+  </section>
   
   <section id="project.folder.source">
     <title id="project.folder.source.title">source</title>
@@ -234,13 +250,14 @@
 		  <emphasis>as</emphasis> reliable as the project memory.</para>
 
 		  <note>
-			<para>Only the <filename>tm/auto</filename> folder is automatically
-			generated at project creation. You must manually create and fill any
-			other <filename>tm</filename> folder that you want to
-			use.</para>
+			<para>Enable the <link
+			linkend="dialogs.preferences.editor.save.auto-populated.status"
+			endterm="dialogs.preferences.editor.save.auto-populated.status.title"/>
+			option to have OmegaT remember that the inserted matches came from
+			this folder.</para>
 		  </note>
 
-		  <orderedlist>
+		<orderedlist>
 			<listitem>
 			  <para>Put the applicable memories in the <filename
 			  class="directory">tm/auto</filename> folder.</para>
@@ -261,7 +278,13 @@
 			  project translation memory.</para>
 			</listitem>
 		  </orderedlist>
-		  
+
+		  <para>Use the navigation menus found in <link linkend="menus.goto"
+		  endterm="menus.goto.title"/><link
+		  linkend="menus.goto.auto.populated.segments"
+		  endterm="menus.goto.auto.populated.segments.title"/> to navigate to the
+		  inserted segments.</para>
+				
 		  <warning>
 			<para>If you remove a TMX file from <filename
 			class="directory">tm/auto</filename> before Step 3, its content will
@@ -277,16 +300,26 @@
 		  meant to automatically overwrite previously translated contents.</para>
 
 		  <para>Translations from TMX files placed in this folder are
-		  automatically inserted in matching segments without the automatic
-		  prefix, making it unnecessary to confirm these segments. Translations
-		  coming from this folder are considered to be <emphasis>more</emphasis>
-		  reliable than the current project memory.</para>
+		  automatically inserted in matching segments without the fuzzy match
+		  prefix, making it unnecessary to confirm these segments.</para>
+
+		  <para>Translations coming from this folder are considered to be
+		  <emphasis>more</emphasis> reliable than the current project
+		  memory.</para>
 
 		  <para>If you have no doubt that a given TMX contains more accurate
 		  translations than the current <filename>project_save.tmx</filename>
 		  file, put that TMX in the <filename
-		  class="directory">tm/enforce</filename> folder to overwrite the existing
-		  translations unconditionally.</para>
+		  class="directory">tm/enforce</filename> folder to overwrite the
+		  existing translations unconditionally.</para>
+
+		  <note>
+			<para>Enable the <link
+			linkend="dialogs.preferences.editor.save.auto-populated.status"
+			endterm="dialogs.preferences.editor.save.auto-populated.status.title"/>
+			option to have OmegaT remember that the inserted matches came from
+			this folder.</para>
+		  </note>
 
 		  <orderedlist>
 			<listitem>
@@ -325,7 +358,13 @@
 			  </itemizedlist>
 			</listitem>
 		  </orderedlist>
-		  
+
+		  <para>Use the navigation menus found in <link linkend="menus.goto"
+		  endterm="menus.goto.title"/><link
+		  linkend="menus.goto.auto.populated.segments"
+		  endterm="menus.goto.auto.populated.segments.title"/> to navigate to the
+		  segments that have been inserted.</para>
+
 		  <warning>
 			<para>If you remove a TMX file from <filename
 			class="directory">tm/enforce</filename> before Step 3, none of the
@@ -617,12 +656,6 @@
         </listitem>
       </varlistentry>	  
     </variablelist>
-  </section>
-
-  <section id="project.folder.omegat.project">
-    <title id="project.folder.omegat.project.title">omegat.project</title>
-    <para>This file contains the project parameters defined in the <link
-    linkend="dialogs.project.properties">project properties</link>.</para>
   </section>
 
   <section id="project.folder.repositories">

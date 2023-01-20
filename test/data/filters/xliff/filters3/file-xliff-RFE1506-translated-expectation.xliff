@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file id="92" original="/22.txt" source-language="en" target-language="ja" datatype="plaintext" project-id="375123" tool-id="foo">
+    <header>
+      <tool tool-id="foo" tool-name="Boo" tool-version="1.0"/>
+    </header>
+    <body>
+      <trans-unit id="5078">
+        <source>1.0.1</source>
+        <target state="needs-translation">1.0.1</target>
+      </trans-unit>
+      <trans-unit id="5086" approved="yes">
+        <source>foo</source>
+        <target state="final">bar</target>
+      </trans-unit>
+      <trans-unit id="5088" approved="yes">
+        <source>Organizations list</source>
+        <target state="needs-review-translation">組織</target>
+      </trans-unit>
+      <trans-unit id="5090">
+        <source>Create</source>
+        <target state="translated">作成</target>
+      </trans-unit>
+     <trans-unit id="5128" approved="yes">
+        <source>- Emoji</source>
+        <target state="final">絵文字</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

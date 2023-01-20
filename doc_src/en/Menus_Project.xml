@@ -58,7 +58,7 @@
       <listitem>
         <para>Gives access to the last ten edited projects. Clicking one will
         save the current project, close it and open the selected project.</para>
-        <para>Use <guimenuitem>Clear Menu</guimenuitem> function to delete
+        <para>Use the <guimenuitem>Clear Menu</guimenuitem> function to delete
         the list of recent projects.</para>
       </listitem>
     </varlistentry>
@@ -78,8 +78,8 @@
 		  endterm="project.folder.glossary.title"/> folder are automatically
 		  recognized and do not require reloading the project.</para>
 		</note>
-		<para>When reloading a team project, OmegaT reloads the remote
-		properties, not the local properties.</para>
+		<para>When reloading a team project, OmegaT reloads the remote,
+		rather than the local, properties.</para>
       </listitem>
     </varlistentry>
 
@@ -101,8 +101,8 @@
         <para>Saves the project translation memory (<link
         linkend="project.folder.project.save.tmx"
         endterm="project.folder.project.save.tmx.title"/>).</para>
-		<para>OmegaT automatically saves translations every 3 minutes as well as
-		when you close the project or quit OmegaT. See the <link
+		<para>OmegaT automatically saves translations every three minutes as well as
+		when you close the project or quit the program. See the <link
 		linkend="dialog.preferences.saving.and.output.interval"
 		endterm="dialog.preferences.saving.and.output.interval.title"/>
 		preference for details.</para>
@@ -128,7 +128,7 @@
 		<para>Opens a dialog where you can paste the URL of the Mediawiki page
 		you want to translate. The source data of the page will be copied into
 		the <link linkend="project.folder.source"
-		endterm="project.folder.source.title"/> folder, as a text file, with the
+		endterm="project.folder.source.title"/> folder, as a text file with the
 		<filename>.utf8</filename> extension.</para>
       </listitem>
     </varlistentry>
@@ -152,10 +152,10 @@
       Target Files</guimenuitem></term>
       <listitem>
         <warning><para>This function is specific to team projects. <emphasis>Use
-        this function only if the team project manager requested
-        so</emphasis>. See the <link linkend="how.to.use.team.project"
+        this function only if the team project manager asked you to
+        do so</emphasis>. See the <link linkend="how.to.use.team.project"
         endterm="how.to.use.team.project.title"/> how-to for details.</para></warning>
-        <para>Uploads locally created from the <link
+        <para>Uploads locally created translated files from the <link
         linkend="project.folder.target" endterm="project.folder.target.title"/>
         folder to the team project repository.</para>
       </listitem>
@@ -170,7 +170,7 @@
         <para>Creates the target files based on your translation. The created
         target files are located in the <link linkend="project.folder.target"
         endterm="project.folder.target.title"/> folder.</para>
-		<note><para>You can block target file creation if tag issues are
+		<note><para>You can prevent the creation of target files if tag issues are
 		found. See the <link
 		linkend="dialogs.preferences.tag.processing.do.not.allow.creating.translated.documents.with.tag.issues"
 		endterm="dialogs.preferences.tag.processing.do.not.allow.creating.translated.documents.with.tag.issues.title"/>
@@ -255,7 +255,7 @@
 			<term><link linkend="chapter.project.folder"><guimenuitem>Project
 			Folder</guimenuitem></link></term>
 			<listitem>
-			  <para>Opens the folder in your file management application</para>
+			  <para>Opens the folder in your default file manager.</para>
 			</listitem>
 		  </varlistentry>
 
@@ -263,7 +263,7 @@
 			<term><link
 			linkend="project.folder.dictionary"><guimenuitem>Dictionaries</guimenuitem></link></term>
 			<listitem>
-			  <para>Opens the folder in your file management application</para>
+			  <para>Opens the folder in your default file manager.</para>
 			</listitem>
 		  </varlistentry>
 
@@ -271,7 +271,7 @@
 			<term><link
 			linkend="project.folder.glossary"><guimenuitem>Glossaries</guimenuitem></link></term>
 			<listitem>
-			  <para>Opens the folder in your file management application</para>
+			  <para>Opens the folder in your default file manager.</para>
 			</listitem>
 		  </varlistentry>
 
@@ -279,7 +279,7 @@
 			<term><link linkend="project.folder.source"><guimenuitem>Source
 			Files</guimenuitem></link></term>
 			<listitem>
-			  <para>Opens the folder in your file management application</para>
+			  <para>Opens the folder in your default file manager.</para>
 			</listitem>
 		  </varlistentry>
 
@@ -287,7 +287,7 @@
 			<term><link linkend="project.folder.target"><guimenuitem>Target
 			Files</guimenuitem></link></term>
 			<listitem>
-			  <para>Opens the folder in your file management application</para>
+			  <para>Opens the folder in your default file manager.</para>
 			</listitem>
 		  </varlistentry>
 
@@ -295,7 +295,7 @@
 			<term><link
 			linkend="project.folder.tm"><guimenuitem>TMs</guimenuitem></link></term>
 			<listitem>
-			  <para>Opens the folder in your file management application</para>
+			  <para>Opens the folder in your default file manager.</para>
 			</listitem>
 		  </varlistentry>
 		  
@@ -304,7 +304,7 @@
 			linkend="project.folder.exported.tm"><guimenuitem>Exported
 			TMs</guimenuitem></link></term>
 			<listitem>
-			  <para>Opens the folder in your file management application</para>
+			  <para>Opens the folder in your default file manager.</para>
 			</listitem>
 		  </varlistentry>
 
@@ -315,7 +315,7 @@
 			  linkend="project.folder.source"
 			  endterm="project.folder.source.title"/> folder.</para>
 
-			  <para>Opens the file in its associated application.</para>
+			  <para>Opens the file in the associated application.</para>
 			</listitem>
 		  </varlistentry>
 
@@ -326,7 +326,7 @@
 			  linkend="project.folder.target"
 			  endterm="project.folder.target.title"/> folder.</para>
 
-			  <para>Opens the file in its associated application if it exists.</para>
+			  <para>Opens the file in the associated application if the file exists.</para>
 			</listitem>
 		  </varlistentry>
 
@@ -337,7 +337,7 @@
 			  linkend="project.folder.glossary"
 			  endterm="project.folder.glossary.title"/> folder.</para>
 
-			  <para>Opens the file in its associated application, if it exists.</para>
+			  <para>Opens the file in the associated application if the file exists.</para>
 			</listitem>
 		  </varlistentry>
 		</variablelist>

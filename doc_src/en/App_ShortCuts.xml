@@ -84,119 +84,6 @@
 	</example>
   </section>
   
-  <section id="app.shortcuts.streamline.workflow">
-    <title id="app.shortcuts.streamline.workflow.title">A shortcut based
-    workflow</title>
-
-    <para>Remembering the main editing and navigation shortcuts (or <link
-    linkend="app.shortcuts.customization">modifying them to suit your
-    needs</link>) can help you streamline your work.</para>
-    <para>This is best illustrated with an example:</para>
-
-    <example id="example.shortcuts.streamline.workflow">
-      <title id="example.shortcuts.streamline.workflow.title">Using shortcuts to
-      streamline the translation process</title>
-
-      <para>Picture a technical translator tasked with translating an updated
-      version of a manual from a previous job.</para>
-        
-      <para>Since the first few pages have not changed, the translator is
-      greeted with a screenful of already translated segments from the previous
-      job's memory upon opening the project.</para>
-
-	  <para>Rather than tediously scroll down until she finds the first segment
-	  to translate, the translator quickly presses
-	  <keycombo><keycap>C</keycap><keycap>U</keycap></keycombo> to <link
-	  linkend="menus.goto.next.untranslated.segment">jump straight into the
-	  action</link> and start translating. (And doing so again each time she
-	  reaches a large unchanged section.)</para>
-
-      <para>A few segments later, the translator comes across a term she should
-      add to the glossary. Instead of reaching for the mouse, she unlocks the
-      cursor with <link
-      linkend="panes.editor.cursor.lock"><keycap>F2</keycap></link>, uses the
-      cursor keys and standard system shortcuts to navigate to the term and
-      select it, and then presses
-      <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>G</keycap></keycombo>
-      to <link linkend="menus.edit.create.glossary.entry">call up the glossary
-      entry dialog</link> to enter the source term, and then switches back to
-      the editor and repeats the process to enter the target term.</para>
-
-	  <para>The translator has enabled the <link
-	  linkend="dialog.preferences.auto.completion">auto-completion</link> to
-	  automatically display not only history predictions, but also glossary
-	  terms, and pre-defined short strings, which can be entered with simple
-	  arrow navigation.</para>
-		
-      <para>The translator then reaches a revised section of the text where the
-      <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/>
-      pane shows a number of similar segments from the previous job.</para>
-
-	  <para>After quickly tapping
-	  <keycombo><keycap>C</keycap><keycap>I</keycap></keycombo> to insert the
-	  match, she makes the necessary changes to match the revised text.</para>
-
-	  <para>This continues, with the occasional sequence of
-	  <keycombo><keycap>C</keycap><keycap>2</keycap></keycombo> (or other
-	  number) followed by
-	  <keycombo><keycap>C</keycap><keycap>I</keycap></keycombo> when one of the
-	  matches from 2 to 5 is more suitable.</para>
-
-	  <para>Some segments will require modifications later on, so she uses
-	  <keycombo><keycap>A</keycap><keycap>C</keycap><keycap>N</keycap></keycombo>
-	  to enter the Notes pane, leave herself a note and comes back to the Editor
-	  pane with
-	  <keycombo><keycap>A</keycap><keycap>C</keycap><keycap>E</keycap></keycombo>.</para>
-	  
-	  <para>By the time she gets near the end of the section, she has also used
-	  <keycombo><keycap>C</keycap><keycap>R</keycap></keycombo> once or twice to
-	  replace already automatically entered fuzzy matches from the previous
-	  translation with better matches from earlier in the current
-	  section.</para>
-
-      <para>Later on, the translator comes up with a better way to phrase a
-      somewhat thorny expression that had come up earlier, so she selects it in
-      the source text, presses
-      <keycombo><keycap>C</keycap><keycap>F</keycap></keycombo> <link
-      linkend="windows.text.search">to find</link> it, and then uses
-      <keycombo><keycap>C</keycap><keycap>J</keycap></keycombo> to immediately
-      jump to that segment from the search dialog.</para>
-
-	  <para>Since OmegaT has registered her navigation history, she only needs
-	  to use
-	  <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>J</keycap></keycombo>
-	  to immediately continue from where she left off.</para>
-
-	  <para>She now decides to review the annoted segments. She uses
-	  <keycombo><keycap>C</keycap><keycap>F</keycap></keycombo> to find them,
-	  and in the search window uses
-	  <keycombo><keycap>C</keycap><keycap>N</keycap></keycombo> and
-	  <keycombo><keycap>C</keycap><keycap>P</keycap></keycombo> to navigate the
-	  results. OmegaT synchronises the Editor contents with the selected result,
-	  so she can edit the segments right away.</para>
-        
-      <para>Time for a break. As she savours her coffee, the translator reflects
-      on how much more smoothly she was able to use the various OmegaT functions
-      compared to when she had just gotten started and spent a lot of time
-      clicking through menus.</para>
-
-      <para>The smoother workfow, in turn, allowed her to better focus on the
-      translation itself.</para>
-        
-      <para>At the same time, the translator realized that during her session,
-      she used the <link linkend="menus.edit" endterm="menus.edit.title"/><link
-      linkend="menus.edit.create.alternative.translation"
-      endterm="menus.edit.create.alternative.translation.title"/> menu and the
-      cursor keys several times, and decides to <link
-      linkend="example.shortcut.addition">add a new shortcut</link> to
-      streamline that part of the process as well.</para>
-	  
-    </example>
-    
-    <para>Taking the time to learn the shortcuts for the functions you use often
-    will be well worth your while.</para>
-  </section>
-
   <section id="app.shortcuts.customization">
     <title id="app.shortcuts.customization.title">Customization</title>
 
@@ -985,6 +872,34 @@
               <entry>gotoMatchSourceSegment</entry>
               <entry>ctrl shift M</entry>
               <entry>meta shift M</entry>
+            </row>
+
+            <row>
+              <entry>Next Segment from tm/auto/</entry>
+              <entry>gotoNextXAutoMenuItem</entry>
+              <entry>ctrl alt COMMA</entry>
+              <entry>meta alt COMMA</entry>
+            </row>
+
+            <row>
+              <entry>Previous Segment from tm/auto/</entry>
+              <entry>gotoPrevXAutoMenuItem</entry>
+              <entry>ctrl alt shift COMMA</entry>
+              <entry>meta alt shift COMMA</entry>
+            </row>
+
+            <row>
+              <entry>Next Segment from tm/enforce/</entry>
+              <entry>gotoNextXEnforcedMenuItem</entry>
+              <entry>ctrl alt PERIOD</entry>
+              <entry>meta alt PERIOD</entry>
+            </row>
+
+            <row>
+              <entry>Previous Segment from tm/enforce/</entry>
+              <entry>gotoPrevXEnforcedMenuItem</entry>
+              <entry>ctrl alt shift PERIOD</entry>
+              <entry>meta alt shift PERIOD</entry>
             </row>
 
             <row>

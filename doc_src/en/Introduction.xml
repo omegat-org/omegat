@@ -107,6 +107,11 @@
 	  <para>And before you ever need to follow those steps, OmegaT will allow
 	  you to focus on actually translating, and hopefully help you become a
 	  better translator.</para>
+
+	  <para>If you need assistance with any aspect of OmegaT, feel free to join
+	  the <ulink url="https://omegat.org/support">OmegaT user
+	  groups.</ulink></para>
+
 	</section>
   </section>
 
@@ -659,11 +664,117 @@
         section for details.</para>
       </listitem>
     </itemizedlist>
-	
-    <para>For a more comprehensive introduction see <ulink
-    url="https://omegat.org/files/OmegaT_for_Beginners.pdf">OmegaT for
-    beginners</ulink> on the OmegaT web site. If you need assistance with any
-    aspect of OmegaT, feel free to join the <ulink
-    url="https://omegat.org/support">OmegaT user groups.</ulink></para>
   </section>
+
+  <section id="app.shortcuts.streamline.workflow">
+    <title id="app.shortcuts.streamline.workflow.title">A shortcut based
+    workflow</title>
+
+    <para>Remembering the main editing and navigation shortcuts (or <link
+    linkend="app.shortcuts.customization">modifying them to suit your
+    needs</link>) can help you streamline your work.</para>
+    <para>This is best illustrated with an example:</para>
+
+    <example id="example.shortcuts.streamline.workflow">
+      <title id="example.shortcuts.streamline.workflow.title">Using shortcuts to
+      streamline the translation process</title>
+
+      <para>Picture yourself tasked with translating an updated version of a
+      manual from a previous job. See the <link linkend="how.to.use.tm.reuse.tm"
+      endterm="how.to.use.tm.reuse.tm.title"/> how-to for details.</para>
+        
+      <para>Since the first few pages have not changed, your are greeted with a
+      screenful of already translated segments from the previous job's memory
+      upon opening the project.</para>
+
+	  <para>Rather than tediously scroll down until you find the first segment
+	  to translate, you quickly press
+	  <keycombo><keycap>C</keycap><keycap>U</keycap></keycombo> to <link
+	  linkend="menus.goto.next.untranslated.segment">jump straight into the
+	  action</link> and start translating. (And do so again each time you
+	  reach a large unchanged section.)</para>
+
+      <para>A few segments later, you come across a term you should add to the
+      glossary. Instead of reaching for the mouse, you unlock the cursor with
+      <link linkend="panes.editor.cursor.lock"><keycap>F2</keycap></link>, use
+      the cursor keys and standard system shortcuts to navigate to the term and
+      select it, and then press
+      <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>G</keycap></keycombo>
+      to <link linkend="menus.edit.create.glossary.entry">call up the glossary
+      entry dialog</link> to enter the source term. You then switch back to the
+      editor and repeat the process to enter the target term.</para>
+
+	  <para>You have enabled the <link
+	  linkend="dialog.preferences.auto.completion">auto-completion</link> to
+	  automatically display not only history predictions, but also glossary
+	  terms, and pre-defined short strings, which can be entered with simple
+	  arrow navigation.</para>
+		
+      <para>You then reach a revised section of the text where the
+      <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/>
+      pane shows a number of similar segments from the previous job.</para>
+
+	  <para>After quickly tapping
+	  <keycombo><keycap>C</keycap><keycap>I</keycap></keycombo> to insert the
+	  match, you make the necessary changes to match the revised text.</para>
+
+	  <para>This continues, with the occasional sequence of
+	  <keycombo><keycap>C</keycap><keycap>2</keycap></keycombo> (or other
+	  number) followed by
+	  <keycombo><keycap>C</keycap><keycap>I</keycap></keycombo> when one of the
+	  matches from 2 to 5 is more suitable.</para>
+
+	  <para>Some segments will require further modification later on, so you use
+	  <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>N</keycap></keycombo>
+	  to enter the Notes pane, leave yourself a note and come back to the Editor
+	  pane with
+	  <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>E</keycap></keycombo>.</para>
+	  
+	  <para>By the time you get near the end of the section, you have also used
+	  <keycombo><keycap>C</keycap><keycap>R</keycap></keycombo> once or twice to
+	  replace already automatically entered fuzzy matches from the previous
+	  translation with better matches from earlier in the current
+	  section.</para>
+
+      <para>Later on, you come up with a better way to phrase a somewhat thorny
+      expression that had come up earlier, so you select it in the source text,
+      press <keycombo><keycap>C</keycap><keycap>F</keycap></keycombo> <link
+      linkend="windows.text.search">to find</link> it, and then use
+      <keycombo><keycap>C</keycap><keycap>J</keycap></keycombo> to immediately
+      jump to that segment from the search dialog.</para>
+
+	  <para>Since OmegaT has registered your navigation history, you only need
+	  to use
+	  <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>J</keycap></keycombo>
+	  to immediately continue from where you left off.</para>
+
+	  <para>You now decide to review the annotated segments. You use
+	  <keycombo><keycap>C</keycap><keycap>F</keycap></keycombo> to find them,
+	  and in the search window use
+	  <keycombo><keycap>C</keycap><keycap>N</keycap></keycombo> and
+	  <keycombo><keycap>C</keycap><keycap>P</keycap></keycombo> to navigate the
+	  results. OmegaT synchronises the Editor contents with the selected result,
+	  so you can edit the segments right away.</para>
+        
+      <para>Time for a break. As you savour your coffee, you reflect
+      on how much more smoothly you were able to use the various OmegaT functions
+      compared to when you had just gotten started and spent a lot of time
+      clicking through menus.</para>
+
+      <para>The smoother workfow, in turn, allowed you to better focus on the
+      translation itself.</para>
+        
+      <para>At the same time, you realize that during you session,
+      you used the <link linkend="menus.edit" endterm="menus.edit.title"/><link
+      linkend="menus.edit.create.alternative.translation"
+      endterm="menus.edit.create.alternative.translation.title"/> menu and the
+      cursor keys several times, and decide to <link
+      linkend="example.shortcut.addition">add a new shortcut</link> to
+      streamline that part of the process as well.</para>
+	  
+    </example>
+    
+    <para>Taking the time to learn the shortcuts for the functions you use often
+    will be well worth your while.</para>
+  </section>  
 </chapter>

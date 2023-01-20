@@ -15,7 +15,7 @@
  OmegaT 5.8.0
 ----------------------------------------------------------------------
    4 Removed features
-  23 Enhancements
+  28 Enhancements
   24 Bug fixes
   9 Localisation updates
 ----------------------------------------------------------------------
@@ -40,6 +40,15 @@
   https://sourceforge.net/p/omegat/feature-requests/1432/
 
   Implemented requests:
+  
+  - New OmegaT default layout and preferences
+  https://sourceforge.net/p/omegat/feature-requests/1652/
+  
+  - New user manual
+  https://sourceforge.net/p/omegat/feature-requests/1646/
+  
+  - Add the Stax filters plugin
+  https://sourceforge.net/p/omegat/feature-requests/1666/
 
   - Shortcuts to navigate between Notes and Editor panel
   https://sourceforge.net/p/omegat/feature-requests/1630/

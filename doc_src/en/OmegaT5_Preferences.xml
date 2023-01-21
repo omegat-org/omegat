@@ -888,14 +888,14 @@
 	</variablelist>
 	
 	<variablelist>
-	  <varlistentry id="dialogs.preferences.editor.attempt.to.convert.numbers.when.inserting.a.fuzzy.match">
+	  <varlistentry id="dialogs.preferences.editor.attempt.to.replace.numbers.when.inserting.a.fuzzy.match">
 		<term
-		id="dialogs.preferences.editor.attempt.to.convert.numbers.when.inserting.a.fuzzy.match.title"><option>Attempt
-		to convert fuzzy match numbers</option></term>
+		id="dialogs.preferences.editor.attempt.to.replace.numbers.when.inserting.a.fuzzy.match.title"><option>Attempt
+		to replace fuzzy match numbers</option></term>
 
 		<listitem>
-		  <para>When a fuzzy match is inserted, OmegaT tries to adapt the numbers
-		  in the fuzzy match to the numbers in the source.</para>
+		  <para>When a fuzzy match is inserted, OmegaT tries to replace the numbers
+		  in the fuzzy match with the numbers in the source text.</para>
 
 		  <note>
 			<para>Only integers and simple floats (e.g., 5.4) are

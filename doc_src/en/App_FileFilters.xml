@@ -30,6 +30,9 @@
   the files that are associated to it. Their contents will not be displayed for
   translation.</para>
 
+  <para>You can order the filters by name or by enabled status. Click on the
+  header to order in ascendant order or in descendant order.</para>
+
   <para>To modify the file extensions, target file name and encodings associated
   to a filter, select it in the list and click the
   <guibutton>Edit...</guibutton> button.</para>

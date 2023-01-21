@@ -240,7 +240,7 @@
 		<term>Display: all matching segments</term>
 		<listitem>
 		  <para>Every segment is displayed individually, even if it is a
-		  duplicate found in either the same document or a different document in
+		  repetition found in either the same document or a different document in
 		  the project.</para>
 		</listitem>
 	  </varlistentry>

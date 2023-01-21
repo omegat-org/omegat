@@ -64,18 +64,19 @@ public class ImportFromAutoTMX {
      * @param isEnforcedTMX If true, existing default translations will be overwritten in all cases
      */
     void process(ExternalTMX tmx, boolean isEnforcedTMX) {
-
         for (ITMXEntry e : tmx.getEntries()) { // iterate by all entries in TMX
             List<SourceTextEntry> list = existEntries.get(e.getSourceText());
             if (list == null) {
                 continue; // there is no entries for this source
             }
+
             for (SourceTextEntry ste : list) { // for each TMX entry - get all sources in project
                 TMXEntry existTranslation = project.getTranslationInfo(ste);
 
                 String id = ste.getKey().id;
                 boolean hasICE = id != null && e.hasPropValue(ProjectTMX.PROP_XICE, id);
                 boolean has100PC = id != null && e.hasPropValue(ProjectTMX.PROP_X100PC, id);
+                boolean hasAlternateTranslations = altTranslationMatches(e, ste.getKey());
 
                 if (e.hasPropValue(ExternalTMFactory.TMXLoader.PROP_FOREIGN_MATCH, "true")) {
                     // Never automatically include matches from foreign languages.
@@ -87,7 +88,7 @@ public class ImportFromAutoTMX {
                         // Existing translation is alt but the TMX entry is not.
                         continue;
                     }
-                    if (!isDefaultTranslation && !altTranslationMatches(e, ste.getKey())) {
+                    if (!isDefaultTranslation && !hasAlternateTranslations) {
                         // TMX entry is an alternative translation that does not match this STE.
                         continue;
                     }
@@ -99,7 +100,7 @@ public class ImportFromAutoTMX {
                         // - the existing translation doesn't come from an enforced TM or
                         // - the existing enforced translation was a default translation but this one is not
                         setTranslation(ste, e, isDefaultTranslation, TMXEntry.ExternalLinked.xENFORCED);
-                    } else if (!existTranslation.isTranslated()) {
+                    } else if (!existTranslation.isTranslated() || (!isDefaultTranslation && hasAlternateTranslations)) {
                         // default translation not exist - use from auto tmx
                         setTranslation(ste, e, isDefaultTranslation, TMXEntry.ExternalLinked.xAUTO);
                     }

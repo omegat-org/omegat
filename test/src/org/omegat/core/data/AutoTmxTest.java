@@ -45,103 +45,166 @@ import org.omegat.util.TestPreferencesInitializer;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class AutoTmxTest {
-    RealProject p;
+	RealProject p;
 
-    @Before
-    public final void setUp() throws Exception {
-        TestPreferencesInitializer.init();
-        Core.setSegmenter(new Segmenter(SRX.getDefault()));
-    }
+	@Before
+	public final void setUp() throws Exception {
+		TestPreferencesInitializer.init();
+		Core.setSegmenter(new Segmenter(SRX.getDefault()));
+	}
 
-    @Test
-    public void test1() throws Exception {
-        ProjectProperties props = new ProjectProperties();
-        props.setSourceLanguage("en");
-        props.setTargetLanguage("fr");
-        props.setTargetTokenizer(LuceneFrenchTokenizer.class);
-        File file = new File("test/data/autotmx/auto1.tmx");
-        ExternalTMX autoTMX = new ExternalTMFactory.TMXLoader(file)
-                .setDoSegmenting(props.isSentenceSegmentingEnabled())
-                .load(props.getSourceLanguage(), props.getTargetLanguage());
+	@Test
+	public void test1() throws Exception {
+		ProjectProperties props = new ProjectProperties();
+		props.setSourceLanguage("en");
+		props.setTargetLanguage("fr");
+		props.setTargetTokenizer(LuceneFrenchTokenizer.class);
+		File file = new File("test/data/autotmx/auto1.tmx");
+		ExternalTMX autoTMX = new ExternalTMFactory.TMXLoader(file).setDoSegmenting(props.isSentenceSegmentingEnabled())
+				.load(props.getSourceLanguage(), props.getTargetLanguage());
 
-        ITMXEntry e1 = autoTMX.getEntries().get(0);
-        checkListValues(e1, ProjectTMX.PROP_XICE, "11");
+		ITMXEntry e1 = autoTMX.getEntries().get(0);
+		checkListValues(e1, ProjectTMX.PROP_XICE, "11");
 
-        ITMXEntry e2 = autoTMX.getEntries().get(1);
-        checkListValues(e2, ProjectTMX.PROP_XICE, "12");
-        checkListValues(e2, ProjectTMX.PROP_X100PC, "10");
+		ITMXEntry e2 = autoTMX.getEntries().get(1);
+		checkListValues(e2, ProjectTMX.PROP_XICE, "12");
+		checkListValues(e2, ProjectTMX.PROP_X100PC, "10");
 
-        Core.initializeConsole(new HashMap<String, String>());
+		Core.initializeConsole(new HashMap<String, String>());
 
-        p = new RealProject(props);
-        p.projectTMX = new ProjectTMX(props.getSourceLanguage(), props.getTargetLanguage(), false, new File(
-                "test/data/autotmx/project1.tmx"), new ProjectTMX.CheckOrphanedCallback() {
-            public boolean existSourceInProject(String src) {
-                return true;
-            }
+		p = new RealProject(props);
+		p.projectTMX = new ProjectTMX(props.getSourceLanguage(), props.getTargetLanguage(), false,
+				new File("test/data/autotmx/project1.tmx"), new ProjectTMX.CheckOrphanedCallback() {
+					@Override
+					public boolean existSourceInProject(String src) {
+						return true;
+					}
 
-            public boolean existEntryInProject(EntryKey key) {
-                return true;
-            }
-        });
-        SourceTextEntry ste10, ste11, ste12;
-        p.allProjectEntries.add(ste10 = createSTE("10", "Edit"));
-        p.allProjectEntries.add(ste11 = createSTE("11", "Edit"));
-        p.allProjectEntries.add(ste12 = createSTE("12", "Edit"));
-        p.importHandler = new ImportFromAutoTMX(p, p.allProjectEntries);
-        p.appendFromAutoTMX(autoTMX, false);
-        checkTranslation(ste10, "Modifier", TMXEntry.ExternalLinked.x100PC);
-        checkTranslation(ste11, "Edition", TMXEntry.ExternalLinked.xICE);
-        checkTranslation(ste12, "Modifier", TMXEntry.ExternalLinked.xICE);
-    }
+					@Override
+					public boolean existEntryInProject(EntryKey key) {
+						return true;
+					}
+				});
+		SourceTextEntry ste10, ste11, ste12;
+		p.allProjectEntries.add(ste10 = createSTE("10", "Edit"));
+		p.allProjectEntries.add(ste11 = createSTE("11", "Edit"));
+		p.allProjectEntries.add(ste12 = createSTE("12", "Edit"));
+		p.importHandler = new ImportFromAutoTMX(p, p.allProjectEntries);
+		p.appendFromAutoTMX(autoTMX, false);
+		checkTranslation(ste10, "Modifier", TMXEntry.ExternalLinked.x100PC);
+		checkTranslation(ste11, "Edition", TMXEntry.ExternalLinked.xICE);
+		checkTranslation(ste12, "Modifier", TMXEntry.ExternalLinked.xICE);
+	}
 
-    @Test
-    public void test2() throws Exception {
-        ProjectProperties props = new ProjectProperties();
-        props.setSourceLanguage("en");
-        props.setTargetLanguage("fr");
-        props.setTargetTokenizer(LuceneFrenchTokenizer.class);
-        File file = new File("test/data/enforcetmx/enforce1.tmx");
-        ExternalTMX enforceTMX = new ExternalTMFactory.TMXLoader(file)
-                .setDoSegmenting(props.isSentenceSegmentingEnabled())
-                .load(props.getSourceLanguage(), props.getTargetLanguage());
+	@Test
+	public void test2() throws Exception {
+		ProjectProperties props = new ProjectProperties();
+		props.setSourceLanguage("en");
+		props.setTargetLanguage("fr");
+		props.setTargetTokenizer(LuceneFrenchTokenizer.class);
+		File file = new File("test/data/enforcetmx/enforce1.tmx");
+		ExternalTMX enforceTMX = new ExternalTMFactory.TMXLoader(file)
+				.setDoSegmenting(props.isSentenceSegmentingEnabled())
+				.load(props.getSourceLanguage(), props.getTargetLanguage());
 
-        Core.initializeConsole(new HashMap<String, String>());
+		Core.initializeConsole(new HashMap<String, String>());
 
-        p = new RealProject(props);
-        p.projectTMX = new ProjectTMX(props.getSourceLanguage(), props.getTargetLanguage(), false,
-                new File("test/data/enforcetmx/project1.tmx"), new ProjectTMX.CheckOrphanedCallback() {
-                    public boolean existSourceInProject(String src) {
-                        return true;
-                    }
+		p = new RealProject(props);
+		p.projectTMX = new ProjectTMX(props.getSourceLanguage(), props.getTargetLanguage(), false,
+				new File("test/data/enforcetmx/project1.tmx"), new ProjectTMX.CheckOrphanedCallback() {
+					@Override
+					public boolean existSourceInProject(String src) {
+						return true;
+					}
 
-                    public boolean existEntryInProject(EntryKey key) {
-                        return true;
-                    }
-                });
+					@Override
+					public boolean existEntryInProject(EntryKey key) {
+						return true;
+					}
+				});
 
-        SourceTextEntry ste;
-        p.allProjectEntries.add(ste = createSTE(null, "Edit"));
-        checkTranslation(ste, "foobar", null);
-        p.importHandler = new ImportFromAutoTMX(p, p.allProjectEntries);
-        p.appendFromAutoTMX(enforceTMX, true);
-        checkTranslation(ste, "bizbaz", TMXEntry.ExternalLinked.xENFORCED);
-    }
+		SourceTextEntry ste;
+		p.allProjectEntries.add(ste = createSTE(null, "Edit"));
+		checkTranslation(ste, "foobar", null);
+		p.importHandler = new ImportFromAutoTMX(p, p.allProjectEntries);
+		p.appendFromAutoTMX(enforceTMX, true);
+		checkTranslation(ste, "bizbaz", TMXEntry.ExternalLinked.xENFORCED);
+	}
 
-    SourceTextEntry createSTE(String id, String source) {
-        EntryKey ek = new EntryKey("file", source, id, null, null, null);
-        return new SourceTextEntry(ek, 0, null, null, new ArrayList<ProtectedPart>());
-    }
+	/**
+	 * Test that an alternate translation matching an id is correctly applied when
+	 * the memory is in tm/enforce.
+	 */
+	@Test
+	public void test_alternateOnEnforce() throws Exception {
+		ExternalTMX enforceTMX = prepareTestTM();
 
-    void checkListValues(ITMXEntry en, String propType, String propValue) {
-        assertTrue(en.hasPropValue(propType, propValue));
-    }
+		SourceTextEntry ste = createSTE("1_0", "Edit");
+		p.allProjectEntries.add(ste);
+		checkTranslation(ste, "foobar", null);
+		p.importHandler = new ImportFromAutoTMX(p, p.allProjectEntries);
+		p.appendFromAutoTMX(enforceTMX, true);
+		checkTranslation(ste, "alternative", TMXEntry.ExternalLinked.xENFORCED);
+	}
 
-    void checkTranslation(SourceTextEntry ste, String expectedTranslation,
-            TMXEntry.ExternalLinked expectedExternalLinked) {
-        TMXEntry e = p.getTranslationInfo(ste);
-        assertTrue(e.isTranslated());
-        assertEquals(expectedTranslation, e.translation);
-        assertEquals(expectedExternalLinked, e.linked);
-    }
+	/**
+	 * Test that an alternate translation matching an id is correctly applied when
+	 * the memory is in tm/auto.
+	 */
+	@Test
+	public void test_alternateOnAuto() throws Exception {
+		ExternalTMX enforceTMX = prepareTestTM();
+
+		SourceTextEntry ste = createSTE("1_0", "Edit");
+		p.allProjectEntries.add(ste);
+		checkTranslation(ste, "foobar", null);
+		p.importHandler = new ImportFromAutoTMX(p, p.allProjectEntries);
+		p.appendFromAutoTMX(enforceTMX, false);
+		checkTranslation(ste, "alternative", TMXEntry.ExternalLinked.xAUTO);
+	}
+
+	private ExternalTMX prepareTestTM() throws Exception {
+		ProjectProperties props = new ProjectProperties();
+		props.setSourceLanguage("en");
+		props.setTargetLanguage("fr");
+		props.setTargetTokenizer(LuceneFrenchTokenizer.class);
+		File file = new File("test/data/enforcetmx/alternative.tmx");
+
+		Core.initializeConsole(new HashMap<String, String>());
+
+		p = new RealProject(props);
+		p.projectTMX = new ProjectTMX(props.getSourceLanguage(), props.getTargetLanguage(), false,
+				new File("test/data/enforcetmx/project1.tmx"), new ProjectTMX.CheckOrphanedCallback() {
+					@Override
+					public boolean existSourceInProject(String src) {
+						return true;
+					}
+
+					@Override
+					public boolean existEntryInProject(EntryKey key) {
+						return true;
+					}
+				});
+		ExternalTMX enforceTMX = new ExternalTMFactory.TMXLoader(file)
+				.setDoSegmenting(props.isSentenceSegmentingEnabled())
+				.load(props.getSourceLanguage(), props.getTargetLanguage());
+		return enforceTMX;
+	}
+
+	SourceTextEntry createSTE(String id, String source) {
+		EntryKey ek = new EntryKey("file", source, id, null, null, null);
+		return new SourceTextEntry(ek, 0, null, null, new ArrayList<ProtectedPart>());
+	}
+
+	void checkListValues(ITMXEntry en, String propType, String propValue) {
+		assertTrue(en.hasPropValue(propType, propValue));
+	}
+
+	void checkTranslation(SourceTextEntry ste, String expectedTranslation,
+			TMXEntry.ExternalLinked expectedExternalLinked) {
+		TMXEntry e = p.getTranslationInfo(ste);
+		assertTrue(e.isTranslated());
+		assertEquals(expectedTranslation, e.translation);
+		assertEquals(expectedExternalLinked, e.linked);
+	}
 }

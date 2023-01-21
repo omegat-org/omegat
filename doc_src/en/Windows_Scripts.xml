@@ -451,7 +451,7 @@
         <term>JavaScript</term>
 
         <listitem>
-          <para>A prototype-based scripting language t hat is dynamic, weakly
+          <para>A prototype-based scripting language that is dynamic, weakly
           typed and has first-class functions. It is a multi-paradigm language
           that supports the object-oriented, imperative, and functional
           programming styles. See <ulink
@@ -467,7 +467,7 @@
     through all segments in every file in the current project and prints out the
     source and the target text of segments that contain a translation.</para>
 
-    <programlisting>files = project.projectFiles; 
+    <programlisting>files = project.projectFiles;
 for (i in 0 ..&lt; files.size())
 {
 	for (j in 0 ..&lt; files[i].entries.size())

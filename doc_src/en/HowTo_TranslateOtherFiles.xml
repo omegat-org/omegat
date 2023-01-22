@@ -10,24 +10,24 @@
 
   <itemizedlist>
 	<listitem>
-	  <para>Associate the format to an already supported format.</para>
+	  <para><link linkend="how.to.translate.other.files.associate">Associate</link> the format to an already supported format.</para>
 	</listitem>
 	
 	<listitem>
-	  <para>Convert the format to an already supported format.</para>
+	  <para><link linkend="how.to.translate.other.files.convert">Convert</link> the format to an already supported format.</para>
 	</listitem>
 
 	<listitem>
-	  <para>Extend OmegaT with third-party plugins that support the format.</para>
+	  <para><link linkend="how.to.translate.other.files.third.party.plugins">Extend</link> OmegaT with third-party plugins that support the format.</para>
 	</listitem>
 
 	<listitem>
-	  <para>Develop a filter for the format.</para>
+	  <para><link linkend="how.to.translate.other.files.develop">Develop</link> a filter for the format.</para>
 	</listitem>
   </itemizedlist>
   
-	<section>
-	  <title>Association</title>
+	<section id="how.to.translate.other.files.associate">
+	  <title id="how.to.translate.other.files.associate.title">Association</title>
 
 	  <para>File filters have a list of file extensions that are associated to
 	  them. If the format you want to translate is structurally close to an
@@ -45,8 +45,8 @@
 	  preferences for details.</para>
 	</section>
 	
-	<section>
-	  <title>Conversion</title>
+	<section id="how.to.translate.other.files.convert">
+	  <title id="how.to.translate.other.files.convert.title">Conversion</title>
 
 	  <para>To ensure that all the properties of a format are properly taken
 	  into account, it is sometimes preferable to convert the file to a
@@ -63,7 +63,8 @@
 
 		  <para>License: Apache License Version 2.0</para>
 
-		  <para>The Okapi Framework comes with a number of file filters, including some not supported natively by OmegaT. See <ulink
+		  <para>The Okapi Framework comes with a number of file filters,
+		  including some not supported natively by OmegaT. See <ulink
 		  url="https://okapiframework.org/wiki/index.php?title=Filters">List of
 		  file filters</ulink> for details.</para>
 
@@ -161,20 +162,6 @@
 			file created in Rainbow. See <link
 			linkend="how.to.translate.other.files.third.party.utilities.rainbow">above</link>.</para>
 		  </listitem>
-
-		  <listitem>
-			<para>The <ulink
-			url="http://185.13.37.79:8003/index.php/p/stax-filters/downloads/">StaX</ulink>
-			filters</para>
-
-			<para>License: GNU General Public License v3+</para>
-
-			<para>StaX provides OmegaT with filters for SDLXLIFF files and
-			packages, XLIFF 1 and 2, MqXliff and DOCX.</para>
-
-			<para>The filters originate from the European Union DGT version of
-			OmegaT.</para>
-		  </listitem>
 		</itemizedlist>
 
 		<para>Other plugins for less common formats are listed on the OmegaT
@@ -182,12 +169,12 @@
 		url="https://sourceforge.net/p/omegat/wiki/Plugins/">Plugins</ulink>.</para>
 	</section>
 
-	<section>
-	  <title>Development</title>
+	<section id="how.to.translate.other.files.develop">
+	  <title id="how.to.translate.other.files.develop.title">Development</title>
 
 	  <para>OmegaT provides developers with thorough documentation to create
 	  file filter plugins. See <ulink
-	  url="https://sourceforge.net/p/omegat/code/ci/master/tree/docs_devel/HowToCreateFilterPlugin.md">How
+	  url="https://omegat.readthedocs.io/en/latest/11.HowToCreateFilterPlugin/">How
 	  to create a file filter plugin for OmegaT</ulink> for details.</para>
 	</section>
   </section>

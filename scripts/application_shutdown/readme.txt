@@ -1,1 +1,1 @@
-Scripts in this folder will be launched before OmegaT shuts down.
+Scripts in this folder are launched before OmegaT shuts down.

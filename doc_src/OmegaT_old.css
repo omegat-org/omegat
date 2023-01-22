@@ -74,7 +74,6 @@ code, .code {
 	 valign: center;
 }
 
-
 /* default color as variables */
 :root {
 	--main-color:MidnightBlue;
@@ -160,7 +159,6 @@ code, .code {
 		padding-bottom: 5em;
 	}
 }
-
 
 h1 {
     /*
@@ -396,6 +394,17 @@ dd {
     color: red;
     background: yellow;
 }
+
+/* Numbered bullets in the Introduction, under the main screenshot */
+
+#introduction\.make\.it\.look\.good ol>li::marker {
+	color: red;
+	font-weight:bold;
+}
+
+/***************************************/
+/* CSS for "docbook" coded screenshots */
+/***************************************/
 
 .updated {
     font-size: x-small;

@@ -76,6 +76,9 @@ public class SegmentBuilder {
     public static final String SEGMENT_SPELL_CHECK = "SEGMENT_SPELL_CHECK";
     private static final DecimalFormat NUMBER_FORMAT = new DecimalFormat("0000");
 
+    // false: insert source text / true: leave the segment empty
+    public static final boolean DONT_INSERT_SOURCE_TEXT_DEFAULT = false;
+
     private static final String BIDI_LRE = "\u202a";
     private static final String BIDI_RLE = "\u202b";
     private static final String BIDI_PDF = "\u202c";
@@ -290,7 +293,8 @@ public class SegmentBuilder {
                 //translation exist
                 translationText = trans.translation;
             } else {
-                boolean insertSource = !Preferences.isPreference(Preferences.DONT_INSERT_SOURCE_TEXT);
+                boolean insertSource = Preferences.isPreferenceDefault(Preferences.DONT_INSERT_SOURCE_TEXT,
+                        DONT_INSERT_SOURCE_TEXT_DEFAULT);
                 if (controller.entriesFilter != null && controller.entriesFilter.isSourceAsEmptyTranslation()) {
                     insertSource = true;
                 }

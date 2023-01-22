@@ -32,6 +32,7 @@ package org.omegat.gui.preferences.view;
 
 import javax.swing.JComponent;
 
+import org.omegat.gui.editor.SegmentBuilder;
 import org.omegat.gui.preferences.BasePreferencesController;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
@@ -72,10 +73,11 @@ public class EditingBehaviorController extends BasePreferencesController {
 
     @Override
     protected void initFromPrefs() {
-        panel.defaultRadio.setSelected(Preferences.isPreference(Preferences.DONT_INSERT_SOURCE_TEXT));
-        panel.leaveEmptyRadio.setSelected(!Preferences.isPreference(Preferences.DONT_INSERT_SOURCE_TEXT));
+        boolean prefInsertSource = Preferences.isPreferenceDefault(Preferences.DONT_INSERT_SOURCE_TEXT, SegmentBuilder.DONT_INSERT_SOURCE_TEXT_DEFAULT);
+        panel.defaultRadio.setSelected(prefInsertSource);
+        panel.leaveEmptyRadio.setSelected(!prefInsertSource);
 
-        panel.insertFuzzyCheckBox.setSelected(!Preferences.isPreference(Preferences.BEST_MATCH_INSERT));
+        panel.insertFuzzyCheckBox.setSelected(Preferences.isPreferenceDefault(Preferences.BEST_MATCH_INSERT, true));
         panel.similaritySpinner.setValue(Preferences.getPreferenceDefault(Preferences.BEST_MATCH_MINIMAL_SIMILARITY,
                 Preferences.BEST_MATCH_MINIMAL_SIMILARITY_DEFAULT));
         if (!Preferences.existsPreference(Preferences.BEST_MATCH_EXPLANATORY_TEXT)) {
@@ -102,8 +104,8 @@ public class EditingBehaviorController extends BasePreferencesController {
 
     @Override
     public void restoreDefaults() {
-        panel.defaultRadio.setSelected(false);
-        panel.leaveEmptyRadio.setSelected(true);
+        panel.defaultRadio.setSelected(SegmentBuilder.DONT_INSERT_SOURCE_TEXT_DEFAULT);
+        panel.leaveEmptyRadio.setSelected(!SegmentBuilder.DONT_INSERT_SOURCE_TEXT_DEFAULT);
 
         panel.insertFuzzyCheckBox.setSelected(true);
         panel.similaritySpinner.setValue(Preferences.BEST_MATCH_MINIMAL_SIMILARITY_DEFAULT);
@@ -132,7 +134,7 @@ public class EditingBehaviorController extends BasePreferencesController {
 
     @Override
     public void persist() {
-        Preferences.setPreference(Preferences.DONT_INSERT_SOURCE_TEXT, panel.leaveEmptyRadio.isSelected());
+        Preferences.setPreference(Preferences.DONT_INSERT_SOURCE_TEXT, panel.defaultRadio.isSelected());
 
         Preferences.setPreference(Preferences.BEST_MATCH_INSERT, panel.insertFuzzyCheckBox.isSelected());
         if (panel.insertFuzzyCheckBox.isSelected()) {

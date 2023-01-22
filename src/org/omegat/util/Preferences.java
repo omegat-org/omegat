@@ -221,6 +221,8 @@ public final class Preferences {
 
     /** Workflow Option: Don't Insert Source Text Into Translated Segment */
     public static final String DONT_INSERT_SOURCE_TEXT = "wf_noSourceText";
+    // false: insert source / true: empty
+
     /** Workflow Option: Allow translation to be equal to source */
     public static final String ALLOW_TRANS_EQUAL_TO_SRC = "wf_allowTransEqualToSrc";
     /** Workflow Option: Insert Best Match Into Translated Segment */
@@ -269,7 +271,6 @@ public final class Preferences {
     /** Tag Validation Option: check user defined tags according to regexp.*/
     public static final String CHECK_CUSTOM_PATTERN = "tagValidation_customPattern";
     /** Tag Validation Option: check user defined tags according to regexp.*/
-    public static final String CHECK_CUSTOM_PATTERN_DEFAULT = "\\d+";
     /** Tag Validation Option: check target for text that should have been removed according to regexp.*/
     public static final String CHECK_REMOVE_PATTERN = "tagValidation_removePattern";
 

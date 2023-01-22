@@ -469,7 +469,7 @@
           url="https://www.ecma-international.org/ecma-262/5.1/">ECMAScript® 5.1
           Language Specification</ulink>.</para>
         </listitem>
-      </varlistentry>	  
+      </varlistentry>
     </variablelist>
 
     <para>All languages have access to the OmegaT object model, with the project

@@ -184,15 +184,6 @@ public class ProjectPropertiesDialog extends JDialog {
         centerBox.setOpaque(true);
         centerBox.setBorder(new EmptyBorder(5, 5, 5, 5));
 
-        // hinting message
-        JTextArea messageArea = new JTextArea();
-        messageArea.setEditable(false);
-        messageArea.setOpaque(false);
-        messageArea.setFont(new Label().getFont());
-        messageArea.setLineWrap(true);
-        messageArea.setWrapStyleWord(true);
-        messageArea.setBorder(new EmptyBorder(5, 5, 5, 5));
-
         // Source and target languages and tokenizers
         Box localesBox = Box.createHorizontalBox();
         localesBox.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),
@@ -812,7 +803,6 @@ public class ProjectPropertiesDialog extends JDialog {
 
         // Pack once to get the width...
         pack();
-        updateUIText(messageArea);
         // Then again to expand the height to accomodate the message.
         // This is needed because the height isn't known until the
         // amount of linewrapping is known.
@@ -1220,16 +1210,12 @@ public class ProjectPropertiesDialog extends JDialog {
         switch (dialogType) {
         case NEW_PROJECT:
             setTitle(OStrings.getString("PP_CREATE_PROJ"));
-            messageArea.setText(OStrings.getString("PP_MESSAGE_CONFIGPROJ"));
             break;
         case RESOLVE_DIRS:
             setTitle(OStrings.getString("PP_OPEN_PROJ"));
-            messageArea.setText(OStrings.getString("PP_MESSAGE_BADPROJ"));
-            messageArea.setFont(messageArea.getFont().deriveFont(Font.BOLD));
             break;
         case EDIT_PROJECT:
             setTitle(OStrings.getString("PP_EDIT_PROJECT"));
-            messageArea.setText(OStrings.getString("PP_MESSAGE_EDITPROJ"));
             break;
         }
     }

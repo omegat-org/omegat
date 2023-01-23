@@ -84,7 +84,7 @@ public class EditorSettings implements IEditorSettings {
         markUntranslated = Preferences.isPreference(Preferences.MARK_UNTRANSLATED_SEGMENTS);
         displaySegmentSources = Preferences.isPreference(Preferences.DISPLAY_SEGMENT_SOURCES);
         markNonUniqueSegments = Preferences.isPreferenceDefault(Preferences.MARK_NON_UNIQUE_SEGMENTS,
-                Preferences.MARK_NON_UNIQUE_SEGMENTS_DEFAULT);
+               MARK_NON_UNIQUE_SEGMENTS_DEFAULT);
         markNoted = Preferences.isPreference(Preferences.MARK_NOTED_SEGMENTS);
         markNBSP  = Preferences.isPreference(Preferences.MARK_NBSP);
         markParagraphDelimitations = Preferences.isPreferenceDefault(Preferences.MARK_PARA_DELIMITATIONS,

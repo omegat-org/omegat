@@ -43,23 +43,16 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 import javax.swing.JOptionPane;
-import javax.swing.SwingWorker;
 import javax.swing.text.JTextComponent;
 
-import org.omegat.Main;
 import org.omegat.core.Core;
-import org.omegat.core.CoreEvents;
-import org.omegat.core.KnownException;
-import org.omegat.core.data.ProjectFactory;
 import org.omegat.core.data.ProjectTMX;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
 import org.omegat.core.matching.NearString;
 import org.omegat.core.matching.NearString.MATCH_SOURCE;
 import org.omegat.core.search.SearchMode;
-import org.omegat.core.spellchecker.ISpellChecker;
 import org.omegat.core.tagvalidation.ErrorReport;
-import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.align.AlignFilePickerController;
 import org.omegat.gui.dialogs.AboutDialog;
 import org.omegat.gui.dialogs.GoToSegmentDialog;
@@ -383,7 +376,7 @@ public final class MainWindowMenuHandler {
 
     /** Quits OmegaT */
     public void projectExitMenuItemActionPerformed() {
-        prepareForExit(() -> System.exit(0));
+        ProjectUICommands.saveAndExit();
     }
 
     /** Restart OmegaT */
@@ -391,74 +384,7 @@ public final class MainWindowMenuHandler {
         String projectDir = Core.getProject().isProjectLoaded()
                 ? Core.getProject().getProjectProperties().getProjectRoot()
                 : null;
-        prepareForExit(() -> {
-            Main.restartGUI(projectDir);
-        });
-    }
-
-    protected void prepareForExit(Runnable onCompletion) {
-        // Bug #902: commit the current entry first
-        // We do it before checking project status, so that it can eventually change it
-        if (Core.getProject().isProjectLoaded()) {
-            Core.getEditor().commitAndLeave();
-        }
-
-        boolean projectModified = false;
-        if (Core.getProject().isProjectLoaded()) {
-            projectModified = Core.getProject().isProjectModified();
-        }
-        // RFE 1302358
-        // Add Yes/No Warning before OmegaT quits
-        if (projectModified || Preferences.isPreference(Preferences.ALWAYS_CONFIRM_QUIT)) {
-            if (JOptionPane.YES_OPTION != JOptionPane.showConfirmDialog(mainWindow,
-                    OStrings.getString("MW_QUIT_CONFIRM"), OStrings.getString("CONFIRM_DIALOG_TITLE"),
-                    JOptionPane.YES_NO_OPTION)) {
-                return;
-            }
-        }
-
-        SegmentExportImport.flushExportedSegments();
-
-        new SwingWorker<Void, Void>() {
-            @Override
-            protected Void doInBackground() throws Exception {
-                if (Core.getProject().isProjectLoaded()) {
-                    // Save the list of learned and ignore words
-                    ISpellChecker sc = Core.getSpellChecker();
-                    sc.saveWordLists();
-                    try {
-                        Core.executeExclusively(true, () -> {
-                            Core.getProject().saveProject(true);
-                            ProjectFactory.closeProject();
-                        });
-                    } catch (KnownException ex) {
-                        // hide exception on shutdown
-                    }
-                }
-
-                CoreEvents.fireApplicationShutdown();
-
-                PluginUtils.unloadPlugins();
-
-                return null;
-            }
-
-            @Override
-            protected void done() {
-                try {
-                    get();
-
-                    MainWindowUI.saveScreenLayout(mainWindow);
-
-                    Preferences.save();
-
-                    onCompletion.run();
-                } catch (Exception ex) {
-                    Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
-                    Core.getMainWindow().displayErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
-                }
-            }
-        }.execute();
+        ProjectUICommands.saveAndRestart(projectDir);
     }
 
     public void editUndoMenuItemActionPerformed() {

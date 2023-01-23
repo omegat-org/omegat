@@ -39,15 +39,16 @@ import java.awt.Rectangle;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.file.Files;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.border.Border;
+
+import org.openide.awt.Mnemonics;
 
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
@@ -61,7 +62,6 @@ import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.gui.StaticUIUtils;
 import org.omegat.util.gui.UIDesignManager;
-import org.openide.awt.Mnemonics;
 
 import com.vlsolutions.swing.docking.DockingDesktop;
 import com.vlsolutions.swing.docking.event.DockableStateWillChangeEvent;
@@ -314,7 +314,7 @@ public final class MainWindowUI {
      * defaults if an error occurs.
      */
     private static void loadScreenLayout(MainWindow mainWindow, File uiLayoutFile) {
-        try (InputStream in = new FileInputStream(uiLayoutFile)) {
+        try (InputStream in = Files.newInputStream(uiLayoutFile.toPath())) {
             mainWindow.desktop.readXML(in);
         } catch (Exception ex) {
             Log.log(ex);
@@ -326,16 +326,34 @@ public final class MainWindowUI {
      * Stores main window docking layout to disk.
      */
     public static void saveScreenLayout(MainWindow mainWindow) {
+        saveScreenLayout(mainWindow.desktop);
+    }
+
+    /**
+     * Stores main window docking layout to disk.
+     */
+    public static void saveScreenLayout() {
+        saveScreenLayout(Core.getMainWindow().getDesktop());
+    }
+
+    /**
+     * Stores main window docking layout to disk.
+     */
+    public static void saveScreenLayout(MainWindow mainWindow, File uiLayoutFile) {
+        saveScreenLayout(mainWindow.desktop, uiLayoutFile);
+    }
+
+    public static void saveScreenLayout(DockingDesktop desktop) {
         File uiLayoutFile = new File(StaticUtils.getConfigDir(), MainWindowUI.UI_LAYOUT_FILE);
-        saveScreenLayout(mainWindow, uiLayoutFile);
+        saveScreenLayout(desktop, uiLayoutFile);
     }
 
     /**
      * Stores main window layout to the specified output file.
      */
-    private static void saveScreenLayout(MainWindow mainWindow, File uiLayoutFile) {
-        try (OutputStream out = new FileOutputStream(uiLayoutFile)) {
-            mainWindow.desktop.writeXML(out);
+    private static void saveScreenLayout(DockingDesktop desktop, File uiLayoutFile) {
+        try (OutputStream out = Files.newOutputStream(uiLayoutFile.toPath())) {
+            desktop.writeXML(out);
         } catch (Exception ex) {
             Log.log(ex);
         }

@@ -104,7 +104,7 @@ public class EditorSettings implements IEditorSettings {
                 Preferences.VIEW_OPTION_SOURCE_ACTIVE_BOLD_DEFAULT);
         markFirstNonUnique = Preferences.isPreference(Preferences.VIEW_OPTION_UNIQUE_FIRST);
         markGlossaryMatches = Preferences.isPreferenceDefault(Preferences.MARK_GLOSSARY_MATCHES,
-                Preferences.MARK_GLOSSARY_MATCHES_DEFAULT);
+                MARK_GLOSSARY_MATCHES_DEFAULT);
         markLanguageChecker = !Preferences.isPreferenceDefault(Preferences.LT_DISABLED,
                 Preferences.LT_DISABLED_DEFAULT);
         doFontFallback = Preferences.isPreference(Preferences.FONT_FALLBACK);

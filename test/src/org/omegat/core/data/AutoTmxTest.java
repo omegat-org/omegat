@@ -54,15 +54,9 @@ public class AutoTmxTest {
     }
 
     @Test
-    public void test1() throws Exception {
-        ProjectProperties props = new ProjectProperties();
-        props.setSourceLanguage("en");
-        props.setTargetLanguage("fr");
-        props.setTargetTokenizer(LuceneFrenchTokenizer.class);
-        File file = new File("test/data/autotmx/auto1.tmx");
-        ExternalTMX autoTMX = new ExternalTMFactory.TMXLoader(file)
-                .setDoSegmenting(props.isSentenceSegmentingEnabled())
-                .load(props.getSourceLanguage(), props.getTargetLanguage());
+    public void autoFromIceAnd100PC() throws Exception {
+        ExternalTMX autoTMX = prepareExternalTMX(new File("test/data/autotmx/project1.tmx"),
+                new File("test/data/autotmx/auto1.tmx"));
 
         ITMXEntry e1 = autoTMX.getEntries().get(0);
         checkListValues(e1, ProjectTMX.PROP_XICE, "11");
@@ -73,19 +67,6 @@ public class AutoTmxTest {
 
         Core.initializeConsole(new HashMap<String, String>());
 
-        p = new RealProject(props);
-        p.projectTMX = new ProjectTMX(props.getSourceLanguage(), props.getTargetLanguage(), false,
-                new File("test/data/autotmx/project1.tmx"), new ProjectTMX.CheckOrphanedCallback() {
-                    @Override
-                    public boolean existSourceInProject(String src) {
-                        return true;
-                    }
-
-                    @Override
-                    public boolean existEntryInProject(EntryKey key) {
-                        return true;
-                    }
-                });
         SourceTextEntry ste10, ste11, ste12;
         p.allProjectEntries.add(ste10 = createSTE("10", "Edit"));
         p.allProjectEntries.add(ste11 = createSTE("11", "Edit"));
@@ -98,31 +79,9 @@ public class AutoTmxTest {
     }
 
     @Test
-    public void test2() throws Exception {
-        ProjectProperties props = new ProjectProperties();
-        props.setSourceLanguage("en");
-        props.setTargetLanguage("fr");
-        props.setTargetTokenizer(LuceneFrenchTokenizer.class);
-        File file = new File("test/data/enforcetmx/enforce1.tmx");
-        ExternalTMX enforceTMX = new ExternalTMFactory.TMXLoader(file)
-                .setDoSegmenting(props.isSentenceSegmentingEnabled())
-                .load(props.getSourceLanguage(), props.getTargetLanguage());
-
-        Core.initializeConsole(new HashMap<String, String>());
-
-        p = new RealProject(props);
-        p.projectTMX = new ProjectTMX(props.getSourceLanguage(), props.getTargetLanguage(), false,
-                new File("test/data/enforcetmx/project1.tmx"), new ProjectTMX.CheckOrphanedCallback() {
-                    @Override
-                    public boolean existSourceInProject(String src) {
-                        return true;
-                    }
-
-                    @Override
-                    public boolean existEntryInProject(EntryKey key) {
-                        return true;
-                    }
-                });
+    public void enforcedMatchesOverrideDefault() throws Exception {
+        ExternalTMX enforceTMX = prepareExternalTMX(new File("test/data/enforcetmx/project1.tmx"),
+                new File("test/data/enforcetmx/enforce1.tmx"));
 
         SourceTextEntry ste;
         p.allProjectEntries.add(ste = createSTE(null, "Edit"));
@@ -133,12 +92,13 @@ public class AutoTmxTest {
     }
 
     /**
-     * Test that an alternate translation matching an id is correctly applied
-     * when the memory is in tm/enforce.
+     * Test that an alternate translation matching an id is correctly applied when
+     * the memory is in tm/enforce.
      */
     @Test
-    public void test_alternateOnEnforce() throws Exception {
-        ExternalTMX enforceTMX = prepareTestTM();
+    public void enforcedAlternativeMatches() throws Exception {
+        ExternalTMX enforceTMX = prepareExternalTMX(new File("test/data/enforcetmx/project1.tmx"),
+                new File("test/data/enforcetmx/alternative.tmx"));
 
         SourceTextEntry ste = createSTE("1_0", "Edit");
         p.allProjectEntries.add(ste);
@@ -149,33 +109,33 @@ public class AutoTmxTest {
     }
 
     /**
-     * Test that an alternate translation matching an id is correctly applied
-     * when the memory is in tm/auto.
+     * Test that an alternate translation matching an id is correctly applied when
+     * the memory is in tm/auto.
      */
     @Test
-    public void test_alternateOnAuto() throws Exception {
-        ExternalTMX enforceTMX = prepareTestTM();
+    public void autoAlternativeMatches() throws Exception {
+        ExternalTMX autoTMX = prepareExternalTMX(new File("test/data/enforcetmx/project1.tmx"),
+                new File("test/data/enforcetmx/alternative.tmx"));
 
         SourceTextEntry ste = createSTE("1_0", "Edit");
         p.allProjectEntries.add(ste);
         checkTranslation(ste, "foobar", null);
         p.importHandler = new ImportFromAutoTMX(p, p.allProjectEntries);
-        p.appendFromAutoTMX(enforceTMX, false);
+        p.appendFromAutoTMX(autoTMX, false);
         checkTranslation(ste, "alternative", TMXEntry.ExternalLinked.xAUTO);
     }
 
-    private ExternalTMX prepareTestTM() throws Exception {
+    private ExternalTMX prepareExternalTMX(File projectFile, File tmxFile) throws Exception {
         ProjectProperties props = new ProjectProperties();
         props.setSourceLanguage("en");
         props.setTargetLanguage("fr");
         props.setTargetTokenizer(LuceneFrenchTokenizer.class);
-        File file = new File("test/data/enforcetmx/alternative.tmx");
 
         Core.initializeConsole(new HashMap<String, String>());
 
         p = new RealProject(props);
-        p.projectTMX = new ProjectTMX(props.getSourceLanguage(), props.getTargetLanguage(), false,
-                new File("test/data/enforcetmx/project1.tmx"), new ProjectTMX.CheckOrphanedCallback() {
+        p.projectTMX = new ProjectTMX(props.getSourceLanguage(), props.getTargetLanguage(), false, projectFile,
+                new ProjectTMX.CheckOrphanedCallback() {
                     @Override
                     public boolean existSourceInProject(String src) {
                         return true;
@@ -186,13 +146,12 @@ public class AutoTmxTest {
                         return true;
                     }
                 });
-        ExternalTMX enforceTMX = new ExternalTMFactory.TMXLoader(file)
-                .setDoSegmenting(props.isSentenceSegmentingEnabled())
+
+        return new ExternalTMFactory.TMXLoader(tmxFile).setDoSegmenting(props.isSentenceSegmentingEnabled())
                 .load(props.getSourceLanguage(), props.getTargetLanguage());
-        return enforceTMX;
     }
 
-    SourceTextEntry createSTE(String id, String source) {
+    private SourceTextEntry createSTE(String id, String source) {
         EntryKey ek = new EntryKey("file", source, id, null, null, null);
         return new SourceTextEntry(ek, 0, null, null, new ArrayList<ProtectedPart>());
     }

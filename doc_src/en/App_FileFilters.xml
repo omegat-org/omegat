@@ -421,8 +421,8 @@
 		  <warning>
 			<para>The <code>Microsoft Office Open XML (legacy filter)</code> is
 			the original OmegaT filter. You should only use it to avoid
-			compatibility issues with old projects that you handled with that
-			filter.</para>
+			compatibility issues with previous projects containing files you
+			handled with that filter.</para>
 		  </warning>
 
 		  <para>You can choose additional document elements to translate. They
@@ -513,10 +513,10 @@
 			  </listitem>
 			</varlistentry>
 			<varlistentry>
-			  <term>Ignored paragraphs at loading (regular expression)</term>
+			  <term>Paragraphs ignored when loading (regular expression)</term>
 			  <listitem>
-				  <para>At loading, any paragraph matching the regular
-				  expression will be ignored and will not be displayed for
+				  <para>Any paragraph matching the regular expression
+				  is ignored while loading and is not displayed for
 				  translation.</para>
 
 				  <para>This option is convenient when dealing with HTML parts
@@ -823,8 +823,8 @@
 		<listitem>
 		  <warning>
 			<para>This filter is the original OmegaT XLIFF filter. You should
-			only use it to avoir compatibility issues with old projects that you
-			handled with this filter.</para>
+			only use it to avoir compatibility issues with previous projects
+			containing files you handled with that filter.</para>
 		  </warning>
 		  
 		  <para>
@@ -858,9 +858,9 @@
 			  <varlistentry>
 				<term>Target segment status</term>
 				<listitem>
-				  <para>if checked, OmegaT changes the state of the XLIFF target
-				  part to "needs-review-translation" instead of
-				  "translated"</para>
+				  <para>if checked, OmegaT changes the XLIFF target state to
+				  “needs-review-translation” instead of
+				  “translated”.</para>
 				</listitem>
 			  </varlistentry>
 			</variablelist>

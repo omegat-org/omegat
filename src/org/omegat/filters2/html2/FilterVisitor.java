@@ -33,6 +33,7 @@ package org.omegat.filters2.html2;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.TreeMap;
@@ -371,41 +372,47 @@ public class FilterVisitor extends NodeVisitor {
      */
     private boolean isParagraphTag(Tag tag) {
         String tagname = tag.getTagName();
-        return
-        // Bugfix for https://sourceforge.net/p/omegat/bugs/84/
-        // ADDRESS tag is also a paragraph tag
-        tagname.equals("ADDRESS") || tagname.equals("BLOCKQUOTE") || tagname.equals("BODY")
-                || tagname.equals("CENTER") || tagname.equals("DIV") || tagname.equals("H1")
-                || tagname.equals("H2") || tagname.equals("H3") || tagname.equals("H4")
-                || tagname.equals("H5") || tagname.equals("H6") || tagname.equals("HTML")
-                || tagname.equals("HEAD") || tagname.equals("TITLE") || tagname.equals("TABLE")
-                || tagname.equals("TR") || tagname.equals("TD") || tagname.equals("TH")
-                || tagname.equals("P") || tagname.equals("PRE") || tagname.equals("OL")
-                || tagname.equals("UL")
-                || tagname.equals("LI")
-                ||
-                // Added by JC to have dictionary list parsed as segmenting.
-                tagname.equals("DL") || tagname.equals("DT")
-                || tagname.equals("DD")
-                ||
-                // End of JC's contribution
-                tagname.equals("FORM") || tagname.equals("TEXTAREA") || tagname.equals("FIELDSET")
-                || tagname.equals("LEGEND") || tagname.equals("LABEL") || tagname.equals("SELECT")
-                || tagname.equals("OPTION") || tagname.equals("HR")
-                // Optional paragraph on BR
-                || (tagname.equals("BR") && options.getParagraphOnBr());
 
+        String[] blockElementTags = { "ADDRESS", "ARTICLE", "ASIDE", "BLOCKQUOTE", "BODY", "CANVAS", "CENTER",
+                "DD", "DIV", "DL", "DT", "FIELDSET", "FIGCAPTION", "FIGURE", "FOOTER", "FORM", "H1", "H2",
+                "H3", "H4", "H5", "H6", "HEADER", "HR", "LABEL", "LEGEND", "LI", "MAIN", "NAV", "NOSCRIPT",
+                "OL", "OPTION", "P", "PRE", "SECTION", "SELECT", "TABLE", "TD", "TEXTAREA", "TFOOT", "TH",
+                "TITLE", "TR", "UL", "VIDEO" };
+        String[] parentElementTags = { "HEAD", "HTML" };
+
+        return (tagname.equals("BR") && options.getParagraphOnBr())
+                || Arrays.stream(parentElementTags).anyMatch(tagname::equals)
+                || Arrays.stream(blockElementTags).anyMatch(tagname::equals);
     }
 
     /** Should the content of this tag be kept intact? */
     private boolean isProtectedTag(Tag tag) {
         String tagname = tag.getTagName();
-        return tagname.equals("!DOCTYPE")
-                || tagname.equals("STYLE")
-                || tagname.equals("SCRIPT")
-                || tagname.equals("OBJECT")
-                || tagname.equals("EMBED")
-                || (tagname.equals("META") && "content-type".equalsIgnoreCase(tag.getAttribute("http-equiv")));
+
+        String[] noEditTags = { "!DOCTYPE", "STYLE", "SCRIPT", "OBJECT", "EMBED" };
+        boolean keepIntact = Arrays.stream(noEditTags).anyMatch(tagname::equals) || (tagname.equals("META")
+                && "content-type".equalsIgnoreCase(tag.getAttribute("http-equiv")));
+
+        if (!keepIntact) {
+            keepIntact = hasSpecialAttributes(tag);
+        }
+        return keepIntact;
+    }
+
+    private boolean hasSpecialAttributes(Tag tag) {
+        boolean attributeIsOnIgnoreTagsList = false;
+        Vector<?> tagAttributes = tag.getAttributesEx();
+        Iterator<?> i = tagAttributes.iterator();
+
+        while (i.hasNext() && !attributeIsOnIgnoreTagsList) {
+            Attribute attribute = (Attribute) i.next();
+            String name = attribute.getName();
+            String value = attribute.getValue();
+            if (name != null && value != null) {
+                attributeIsOnIgnoreTagsList = this.filter.checkIgnoreTags(name, value);
+            }
+        }
+        return attributeIsOnIgnoreTagsList;
     }
 
     /** Is the tag space-preserving? */

@@ -1,13 +1,16 @@
 ----------------------------------------------------------------------
  OmegaT 5.8.0
 ----------------------------------------------------------------------
-  21 Enhancements
+  22 Enhancements
   25 Bug fixes
   9 Localisation updates
 ----------------------------------------------------------------------
 5.8.0 vs 5.7.1
 
   Implemented requests:
+
+  - Font settings in Aligner
+  https://sourceforge.net/p/omegat/feature-requests/1360
 
   - Update to new pixel logos and improve macOS UI logos
 

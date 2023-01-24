@@ -2,7 +2,7 @@
  OmegaT 5.8.0
 ----------------------------------------------------------------------
   21 Enhancements
-  24 Bug fixes
+  25 Bug fixes
   9 Localisation updates
 ----------------------------------------------------------------------
 5.8.0 vs 5.7.1
@@ -75,14 +75,17 @@
 
   Bug fixes:
 
+  - Font Rendering issue in OmegaT (Santali)
+  https://sourceforge.net/p/omegat/bugs/1133/
+
   - Local project does not update after remote masking some files
-    https://sourceforge.net/p/omegat/bugs/1124/
+  https://sourceforge.net/p/omegat/bugs/1124/
 
   - OmegaT --no-team does not complete 3.6 team project conversion
-    https://sourceforge.net/p/omegat/bugs/1063/
+  https://sourceforge.net/p/omegat/bugs/1063/
 
   - Drop Moses MT connector because of vulnerability of dependency library.
-    Please see Moses Plugin project: https://github.com/omegat-org/moses-plugin
+  Please see Moses Plugin project: https://github.com/omegat-org/moses-plugin
 
   - GUI: Comment is shown on both Comment and Segment Properties pane
   https://sourceforge.net/p/omegat/bugs/1119/

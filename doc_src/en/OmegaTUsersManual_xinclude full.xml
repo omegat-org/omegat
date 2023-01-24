@@ -28,10 +28,10 @@
   <xi:include href="OmegaT5_WindowsAndDialogs.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
-  <xi:include href="OmegaT5_ProjectFolder.xml"
+  <xi:include href="OmegaT5_Preferences.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
-  <xi:include href="OmegaT5_Preferences.xml"
+  <xi:include href="OmegaT5_ProjectFolder.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
   <xi:include href="OmegaT5_Appendices.xml"

@@ -75,6 +75,8 @@ public class EditorSettings implements IEditorSettings {
     public static final String DISPLAY_MODIFICATION_INFO_SELECTED = "selected";
     public static final String DISPLAY_MODIFICATION_INFO_ALL = "all";
 
+    public static final boolean MARK_NON_UNIQUE_SEGMENTS_DEFAULT = true;
+
     protected EditorSettings(final EditorController parent) {
         this.parent = parent;
 

@@ -84,11 +84,11 @@ public class EditingBehaviorController extends BasePreferencesController {
             panel.prefixText.setText(Preferences.getPreference(Preferences.BEST_MATCH_EXPLANATORY_TEXT));
         }
 
-        panel.allowTranslationEqualToSource.setSelected(Preferences.isPreference(Preferences.ALLOW_TRANS_EQUAL_TO_SRC));
+        panel.allowTranslationEqualToSource.setSelected(Preferences.isPreferenceDefault(Preferences.ALLOW_TRANS_EQUAL_TO_SRC, true));
         panel.exportCurrentSegment.setSelected(Preferences.isPreference(Preferences.EXPORT_CURRENT_SEGMENT));
         panel.stopOnAlternativeTranslation
                 .setSelected(Preferences.isPreference(Preferences.STOP_ON_ALTERNATIVE_TRANSLATION));
-        panel.convertNumbers.setSelected(Preferences.isPreference(Preferences.CONVERT_NUMBERS));
+        panel.convertNumbers.setSelected(Preferences.isPreferenceDefault(Preferences.CONVERT_NUMBERS, true));
         panel.allowTagEditing.setSelected(Preferences.isPreference(Preferences.ALLOW_TAG_EDITING));
         panel.tagValidateOnLeave.setSelected(Preferences.isPreference(Preferences.TAG_VALIDATE_ON_LEAVE));
         panel.cbSaveAutoStatus.setSelected(Preferences.isPreference(Preferences.SAVE_AUTO_STATUS));
@@ -109,10 +109,10 @@ public class EditingBehaviorController extends BasePreferencesController {
         panel.similaritySpinner.setValue(Preferences.BEST_MATCH_MINIMAL_SIMILARITY_DEFAULT);
         panel.prefixText.setText(OStrings.getString("WF_DEFAULT_PREFIX"));
 
-        panel.allowTranslationEqualToSource.setSelected(false);
+        panel.allowTranslationEqualToSource.setSelected(true);
         panel.exportCurrentSegment.setSelected(false);
         panel.stopOnAlternativeTranslation.setSelected(false);
-        panel.convertNumbers.setSelected(false);
+        panel.convertNumbers.setSelected(true);
         panel.allowTagEditing.setSelected(false);
         panel.tagValidateOnLeave.setSelected(false);
         panel.cbSaveAutoStatus.setSelected(false);

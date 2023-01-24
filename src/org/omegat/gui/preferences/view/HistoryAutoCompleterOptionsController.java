@@ -59,15 +59,15 @@ public class HistoryAutoCompleterOptionsController extends BasePreferencesContro
     @Override
     protected void initFromPrefs() {
         panel.historyCompletionCheckBox
-                .setSelected(Preferences.isPreference(Preferences.AC_HISTORY_COMPLETION_ENABLED));
+                .setSelected(Preferences.isPreferenceDefault(Preferences.AC_HISTORY_COMPLETION_ENABLED, true));
         panel.historyPredictionCheckBox
-                .setSelected(Preferences.isPreference(Preferences.AC_HISTORY_PREDICTION_ENABLED));
+                .setSelected(Preferences.isPreferenceDefault(Preferences.AC_HISTORY_PREDICTION_ENABLED, true));
     }
 
     @Override
     public void restoreDefaults() {
-        panel.historyCompletionCheckBox.setSelected(false);
-        panel.historyPredictionCheckBox.setSelected(false);
+        panel.historyCompletionCheckBox.setSelected(true);
+        panel.historyPredictionCheckBox.setSelected(true);
     }
 
     @Override

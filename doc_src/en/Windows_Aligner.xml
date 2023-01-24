@@ -28,27 +28,27 @@
 
   <orderedlist>
 	<listitem>
-	  <para>specify the source and target languages and select the two files you
+	  <para>Specify the source and target languages and select the two files you
 	  want to align.</para>
 	</listitem>
 
 	<listitem>
-	  <para>the files are read by the aligner, which attempts to match the
+	  <para>The aligner reads the files and attempts to match the
 	  segments that correspond to one another in the original and translated
-	  texts,</para>
+	  texts.</para>
 	</listitem>
 
 	<listitem>
-	  <para>the translator reviews the results and makes any necessary manual
-	  adjustments,</para>
+	  <para>Review the results and makes any necessary manual
+	  adjustments.</para>
 	</listitem>
 
 	<listitem>
-	  <para>save the result to TMX</para>
+	  <para>Save the result to a TMX file.</para>
 	</listitem>
   </orderedlist>
 
-  <para>The aligner can read all the file formats supported by OmegaT.</para>
+  <para>The aligner can read all file formats supported by OmegaT.</para>
   
   <note>
     <para>If you have a translation project open, the aligner will automatically
@@ -237,7 +237,7 @@
             <para>If you modify the segmentation rules, you will be asked if you
             want to save those changes when you exit the aligner. The default
             choice is <guibutton>Yes</guibutton>, which may not be what you want
-            if you edited the general OmegaT segmentation rules.</para>
+            if you edited the global OmegaT segmentation rules.</para>
           </warning>
         </listitem>
       </varlistentry>
@@ -255,7 +255,7 @@
             <para>If you modify the file filters, you will be asked if you want
             to save those changes when you exit the aligner. The default choice
             is <guibutton>Yes</guibutton>, which may not be what you want if you
-            edited the general OmegaT file filters.</para>
+            edited the global OmegaT file filters.</para>
           </warning>
         </listitem>
       </varlistentry>
@@ -264,11 +264,12 @@
         <term>Pattern...</term>
         <listitem>
           <para>This option lets you enter a regular expression to define the
-          pattern used for highlighting text in the source and target
+          pattern used to highlight text in the source and target
           segments. By default, the aligner uses <literal>\d+</literal> to
           highlight numbers. If your texts contain other elements that would be
           useful to highlight, modify the regular expression to include those
-          elements, separated by a <literal>|</literal>.</para>
+          elements, using the <literal>|</literal> symbol to separate each
+          element.</para>
         </listitem>
       </varlistentry>      
     </variablelist>
@@ -327,7 +328,7 @@
 
     <para>All available actions can be accessed from the <guimenu>Edit</guimenu>
     menu or by pressing the corresponding shortcut key. The most common actions
-    are also accessible from the buttons to the right of the main pane.</para>
+    are also accessible from the buttons at the right of the main pane.</para>
 
     <note>
       <para>The shortcut keys are well worth remembering if you use the aligner
@@ -351,7 +352,7 @@
         <listitem>
           <para>Moves the selected segment, or block of consecutive segments, up
           one row.</para>
-          <para>This command is also available from the button to the right of
+          <para>This command is also available from the button at the right of
           the main window pane.</para>
         </listitem>
       </varlistentry>
@@ -362,7 +363,7 @@
           <para>Moves the selected segment, or block of consecutive segments,
           down one row.</para>
 
-          <para>This command is also available from the button to the right of
+          <para>This command is also available from the button at the right of
           the main window pane.</para>
         </listitem>
       </varlistentry>
@@ -373,16 +374,15 @@
           <para>If a single segment is selected, this command opens the
           <guilabel>Split Text</guilabel> dialog. Use the mouse or arrow keys to
           place the cursor at the location where you want to split the text, and
-          click <guibutton>OK</guibutton> or press
+          click the <guibutton>OK</guibutton> button or press
           <keycap>Enter</keycap>.</para>
 
           <para>If two or more segments occupying separate cells in the same row
-          (segments that do not have a <guilabel>Keep</guilabel> check box on
-          the same line as their cell) are selected, this command will split
-          them the selected cells back into separate rows (with a
+          (multi-cell segments containing lines without a <guilabel>Keep</guilabel> check box) are selected, this command will 
+          split the selected cells back into separate rows (with a
           <guilabel>Keep</guilabel> check box).</para>
 
-		  <para>This command is also available from the button to the right of
+		  <para>This command is also available from the button at the right of
           the main window pane.</para>
         </listitem>
       </varlistentry>
@@ -396,7 +396,7 @@
           the same selection one more time merges the contents of all selected
           cells into a single cell.</para>
 
-		  <para>This command is also available from the button to the right of
+		  <para>This command is also available from the button at the right of
           the main window pane.</para>
         </listitem>
       </varlistentry>
@@ -415,7 +415,7 @@
 		  <keycombo><keycap>C</keycap><keycap>Enter</keycap></keycombo> to close
 		  it without using the mouse.</para>
 
-		  <para>This command is also available from the button to the right of
+		  <para>This command is also available from the button at the right of
           the main window pane.</para>
         </listitem>
       </varlistentry>
@@ -485,19 +485,19 @@
         <term>Start Pinpoint Align (<keycap>Space</keycap>)</term>
         <listitem>
           <para>If the corresponding segments are several rows apart and you
-          want to quickly align them, use this command to set the first segment
-          and then click on the corresponding segment in the other
+          want to quickly align them, use this command to select the first 
+          segment and then click on the corresponding segment in the other
           column.</para>
 		  
 		  <para>You can also use the arrow keys and press <keycap>Space</keycap>
 		  in the corresponding segment.</para>
 		  
-          <para>Segments aligned with this method are automatically marked as
+          <para>Segments aligned using this method are automatically marked as
           accepted.</para>
 
 		  <para>It can be helpful to run the <guimenuitem>Realign
-          Pending</guimenuitem> command after using pinpoint align a few
-          times.</para>
+          Pending</guimenuitem> command after using the pinpoint align command 
+          a few times.</para>
         </listitem>
       </varlistentry>
     </variablelist>

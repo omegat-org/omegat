@@ -30,6 +30,11 @@
   the files that are associated to it. Their contents will not be displayed for
   translation.</para>
 
+  <note>
+	<para>You can sort the filters by name or by whether they are enabled. Click
+	on the relevant header to sort them in ascending or descending order.</para>
+  </note>
+
   <para>To modify the file extensions, target file name and encodings associated
   to a filter, select it in the list and click the
   <guibutton>Edit...</guibutton> button.</para>
@@ -313,12 +318,14 @@
 	  </variablelist>
 		
 	  <para>Additional variants are available for <literal>${nameOnly}</literal>
-	  and <literal>${Extension}</literal>.</para>
+	  and <literal>${extension}</literal>.</para>
 		
-	  <para>If the file name is ambiguous, variables of the form
-	  <literal>${nameonly-</literal><emphasis>extension number</emphasis>} and
-	  <literal>${extension-</literal><emphasis>extension number} </emphasis> can
-	  be used.</para>
+	  <para>If the use of multiple periods makes identifying the file name and
+	  extension ambiguous, you can use variables of the form
+	  <literal>${nameOnly-</literal><emphasis>number</emphasis>} or
+	  <literal>${extension-</literal><emphasis>number} </emphasis> to
+	  specify which portions are part of the name or extension, as shown in the
+	  example below.</para>
 
 	  <example id="target.name.example">
 		<title id="target.name.example.title">Target file names</title>
@@ -363,50 +370,6 @@
 	<para>The available options are:</para>
 
 	<variablelist>
-	  <varlistentry  id="file.filters.xliff">
-		<term id="file.filters.xliff.title">Monolingual XLIFF</term>
-		<listitem>
-		  <para>
-			<variablelist>
-			  <varlistentry>
-				<term>Compatibility with OmegaT 2.6</term>
-				<listitem>
-				  <para>Enable this option if you need to work with XLIFF files
-				  created with OmegaT 2.6.</para>
-				</listitem>
-			  </varlistentry>
-
-			  <varlistentry>
-				<term>Identifier used for alternative translations</term>
-				<listitem>
-				  <para>User can select from three options, Previous and next
-				  paragraphs, &lt;trans unit&gt; ID, or &lt;trans-unit&gt;
-				  resname attribute when available, when unavailable, the ID
-				  will be used as a fallback.</para>
-				</listitem>
-			  </varlistentry>
-			  
-			  <varlistentry>
-				<term>Tag shortcuts</term>
-				<listitem>
-				  <para>These option specify the way OmegaT creates tags from
-				  the XLIFF contents.</para>
-				</listitem>
-			  </varlistentry>
-
-			  <varlistentry>
-				<term>Target segment status</term>
-				<listitem>
-				  <para>if checked, OmegaT changes the state of the XLIFF target
-				  part to "needs-review-translation" instead of
-				  "translated"</para>
-				</listitem>
-			  </varlistentry>
-			</variablelist>
-		  </para>
-		</listitem>
-	  </varlistentry>
-		
 	  <varlistentry id="file.filters.text">
 		<term id="file.filters.text.title">Text files</term>
 		<listitem>
@@ -455,6 +418,13 @@
 	  <varlistentry id="file.filter.microsoft">
 		<term id="file.filter.microsoft.title">Microsoft Office Open XML files</term>
 		<listitem>
+		  <warning>
+			<para>The <code>Microsoft Office Open XML (legacy filter)</code> is
+			the original OmegaT filter. You should only use it to avoid
+			compatibility issues with previous projects containing files you
+			handled with that filter.</para>
+		  </warning>
+
 		  <para>You can choose additional document elements to translate. They
 		  will appear as separate segments in the editor.</para>
 		  <variablelist>
@@ -543,10 +513,10 @@
 			  </listitem>
 			</varlistentry>
 			<varlistentry>
-			  <term>Ignored paragraphs at loading (regular expression)</term>
+			  <term>Paragraphs ignored when loading (regular expression)</term>
 			  <listitem>
-				  <para>At loading, any paragraph matching the regular
-				  expression will be ignored and will not be displayed for
+				  <para>Any paragraph matching the regular expression
+				  is ignored while loading and is not displayed for
 				  translation.</para>
 
 				  <para>This option is convenient when dealing with HTML parts
@@ -847,6 +817,57 @@
 		  </variablelist>
 		</listitem>
 	  </varlistentry>
+
+	  <varlistentry  id="file.filters.xliff">
+		<term id="file.filters.xliff.title">XLIFF (legacy filter)</term>
+		<listitem>
+		  <warning>
+			<para>This filter is the original OmegaT XLIFF filter. You should
+			only use it to avoir compatibility issues with previous projects
+			containing files you handled with that filter.</para>
+		  </warning>
+		  
+		  <para>
+			<variablelist>
+			  <varlistentry>
+				<term>Compatibility with OmegaT 2.6</term>
+				<listitem>
+				  <para>Enable this option if you need to work with XLIFF files
+				  created with OmegaT 2.6.</para>
+				</listitem>
+			  </varlistentry>
+
+			  <varlistentry>
+				<term>Identifier used for alternative translations</term>
+				<listitem>
+				  <para>User can select from three options, Previous and next
+				  paragraphs, &lt;trans unit&gt; ID, or &lt;trans-unit&gt;
+				  resname attribute when available, when unavailable, the ID
+				  will be used as a fallback.</para>
+				</listitem>
+			  </varlistentry>
+			  
+			  <varlistentry>
+				<term>Tag shortcuts</term>
+				<listitem>
+				  <para>These option specify the way OmegaT creates tags from
+				  the XLIFF contents.</para>
+				</listitem>
+			  </varlistentry>
+
+			  <varlistentry>
+				<term>Target segment status</term>
+				<listitem>
+				  <para>if checked, OmegaT changes the XLIFF target state to
+				  “needs-review-translation” instead of
+				  “translated”.</para>
+				</listitem>
+			  </varlistentry>
+			</variablelist>
+		  </para>
+		</listitem>
+	  </varlistentry>
+
 	</variablelist>
   </section>
 </section>

@@ -775,6 +775,8 @@
             <row>
               <entry>Remove translation</entry>
               <entry>editRegisterUntranslatedMenuItem</entry>
+              <entry>ctrl shift X</entry>
+              <entry>meta shift X</entry>
             </row>
 
             <row>
@@ -974,7 +976,7 @@
             </row>
 
             <row>
-              <entry>Mark Non-Unique Segments</entry>
+              <entry>Mark Repeated Segments</entry>
               <entry>viewMarkNonUniqueSegmentsCheckBoxMenuItem</entry>
             </row>
 

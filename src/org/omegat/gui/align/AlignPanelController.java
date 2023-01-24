@@ -28,7 +28,6 @@ package org.omegat.gui.align;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Cursor;
-import java.awt.Font;
 import java.awt.Rectangle;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
@@ -90,7 +89,9 @@ import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 
 import org.apache.commons.io.FilenameUtils;
+
 import org.omegat.core.Core;
+import org.omegat.core.CoreEvents;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.filters2.master.FilterMaster;
@@ -142,7 +143,8 @@ public class AlignPanelController {
     /**
      * The alignment workflow is separated into two phases:
      * <ol>
-     * <li>Align: Verify and tweak the results of automatic algorithmic alignment
+     * <li>Align: Verify and tweak the results of automatic algorithmic
+     * alignment
      * <li>Edit: Manually edit the results
      * </ol>
      */
@@ -158,7 +160,8 @@ public class AlignPanelController {
     }
 
     /**
-     * Display the align tool. The tool is not modal, so this call will return immediately.
+     * Display the align tool. The tool is not modal, so this call will return
+     * immediately.
      *
      * @param parent
      *            Parent window of the align tool
@@ -295,7 +298,8 @@ public class AlignPanelController {
             public void actionPerformed(ActionEvent e) {
                 int[] rows = panel.table.getSelectedRows();
                 int col = panel.table.getSelectedColumn();
-                boolean up = e.getSource().equals(panel.moveUpButton) || e.getSource().equals(frame.moveUpItem);
+                boolean up = e.getSource().equals(panel.moveUpButton)
+                        || e.getSource().equals(frame.moveUpItem);
                 BeadTableModel model = (BeadTableModel) panel.table.getModel();
                 if ((e.getModifiers() & Java8Compat.getMenuShortcutKeyMaskEx()) != 0) {
                     int trgRow = up ? model.prevBeadFromRow(rows[0])
@@ -322,12 +326,12 @@ public class AlignPanelController {
                     rows = new int[] { rows[0], model.nextNonEmptyCell(rows[0], col) };
                 }
                 int beads = model.beadsInRowSpan(rows);
-                if (beads < 1) {
-                    // Do nothing
-                } else if (beads == 1) {
-                    mergeRows(rows, col);
-                } else {
-                    moveRows(rows, col, rows[0]);
+                if (beads >= 1) {
+                    if (beads == 1) {
+                        mergeRows(rows, col);
+                    } else {
+                        moveRows(rows, col, rows[0]);
+                    }
                 }
             }
         };
@@ -341,12 +345,12 @@ public class AlignPanelController {
                 int col = panel.table.getSelectedColumn();
                 BeadTableModel model = (BeadTableModel) panel.table.getModel();
                 int beads = model.beadsInRowSpan(rows);
-                if (beads != 1) {
-                    // Do nothing
-                } else if (rows.length == 1) {
-                    splitRow(rows[0], col);
-                } else {
-                    splitBead(rows, col);
+                if (beads == 1) {
+                    if (rows.length == 1) {
+                        splitRow(rows[0], col);
+                    } else {
+                        splitBead(rows, col);
+                    }
                 }
             }
         };
@@ -389,7 +393,8 @@ public class AlignPanelController {
                             if (JOptionPane.OK_OPTION != JOptionPane.showConfirmDialog(frame,
                                     StringUtil.format(OStrings.getString("ALIGNER_PANEL_DIALOG_OVERWRITE"),
                                             file.getName()),
-                                    OStrings.getString("ALIGNER_DIALOG_WARNING_TITLE"), JOptionPane.WARNING_MESSAGE)) {
+                                    OStrings.getString("ALIGNER_DIALOG_WARNING_TITLE"),
+                                    JOptionPane.WARNING_MESSAGE)) {
                                 continue;
                             }
                         }
@@ -400,7 +405,8 @@ public class AlignPanelController {
                             modified = false;
                         } catch (Exception ex) {
                             Log.log(ex);
-                            JOptionPane.showMessageDialog(frame, OStrings.getString("ALIGNER_PANEL_SAVE_ERROR"),
+                            JOptionPane.showMessageDialog(frame,
+                                    OStrings.getString("ALIGNER_PANEL_SAVE_ERROR"),
                                     OStrings.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
                         }
                     }
@@ -565,9 +571,8 @@ public class AlignPanelController {
             }
         });
 
-        frame.resetItem.setAccelerator(
-                KeyStroke.getKeyStroke(KeyEvent.VK_R,
-                        Java8Compat.getMenuShortcutKeyMaskEx() | KeyEvent.SHIFT_DOWN_MASK));
+        frame.resetItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R,
+                Java8Compat.getMenuShortcutKeyMaskEx() | KeyEvent.SHIFT_DOWN_MASK));
         frame.realignPendingItem.setAccelerator(
                 KeyStroke.getKeyStroke(KeyEvent.VK_R, Java8Compat.getMenuShortcutKeyMaskEx()));
         frame.saveItem.setAccelerator(
@@ -588,15 +593,8 @@ public class AlignPanelController {
 
         panel.table.setTransferHandler(new AlignTransferHandler());
         panel.table.addPropertyChangeListener("dropLocation", new DropLocationListener());
-        if (Preferences.isPreference(Preferences.PROJECT_FILES_USE_FONT)) {
-            try {
-                String fontName = Preferences.getPreference(Preferences.TF_SRC_FONT_NAME);
-                int fontSize = Integer.parseInt(Preferences.getPreference(Preferences.TF_SRC_FONT_SIZE));
-                panel.table.setFont(new Font(fontName, Font.PLAIN, fontSize));
-            } catch (Exception e) {
-                Log.log(e);
-            }
-        }
+        panel.table.setFont(Core.getMainWindow().getApplicationFont());
+        CoreEvents.registerFontChangedEventListener(panel.table::setFont);
 
         // Set initial state
         updateHighlight();
@@ -638,7 +636,8 @@ public class AlignPanelController {
         int[] resultRows = model.slide(realRows, col, offset);
         int selStart = resultRows[0];
         int selEnd = resultRows[1];
-        // If we have a multi-cell selection, trim the selection so that the result remains slideable
+        // If we have a multi-cell selection, trim the selection so that the
+        // result remains slideable
         if (selStart != selEnd) {
             while (offset < 0 && !model.canMove(selStart, col, true)) {
                 selStart++;
@@ -837,11 +836,8 @@ public class AlignPanelController {
     }
 
     /**
-     * Reloads the beads with the current settings. The loading itself takes place on a background thread.
-     * Calls {@link #updatePanel(AlignPanel, AlignMenuFrame)} afterwards.
-     *
-     * @param panel
-     * @param frame
+     * Reloads the beads with the current settings. The loading itself takes
+     * place on a background thread.
      */
     private void reloadBeads() {
         if (loader != null) {
@@ -896,11 +892,8 @@ public class AlignPanelController {
     }
 
     /**
-     * Ensure that the panel controls and available menu items are synced with the settings of the underlying
-     * aligner.
-     *
-     * @param panel
-     * @param frame
+     * Ensure that the panel controls and available menu items are synced with
+     * the settings of the underlying aligner.
      */
     private void updatePanel() {
         panel.comparisonComboBox.setSelectedItem(aligner.comparisonMode);
@@ -936,7 +929,8 @@ public class AlignPanelController {
         panel.instructionsLabel.setText(instructions);
         frame.editMenu.setEnabled(phase != Phase.ALIGN);
         for (Component c : frame.editMenu.getComponents()) {
-            // Batch-enable/disable Edit menu items here, then override later if necessary
+            // Batch-enable/disable Edit menu items here, then override later if
+            // necessary
             c.setEnabled(phase == Phase.EDIT);
         }
         frame.optionsMenu.setEnabled(phase == Phase.ALIGN);
@@ -946,7 +940,8 @@ public class AlignPanelController {
                 phase == Phase.PINPOINT ? Cursor.CROSSHAIR_CURSOR : Cursor.DEFAULT_CURSOR));
         frame.pinpointAlignStartItem.setVisible(phase != Phase.PINPOINT);
         frame.pinpointAlignEndItem.setVisible(phase == Phase.PINPOINT);
-        // frame.pinpointAlign[Start|End]Item enabledness depends on table selection
+        // frame.pinpointAlign[Start|End]Item enabledness depends on table
+        // selection
         frame.pinpointAlignCancelItem.setVisible(phase == Phase.PINPOINT);
         frame.pinpointAlignCancelItem.setEnabled(phase == Phase.PINPOINT);
 
@@ -983,13 +978,12 @@ public class AlignPanelController {
         List<Integer> realRows = model.realCellsInRowSpan(col, rows);
         boolean enabled = phase == Phase.EDIT && !realRows.isEmpty() && cols.length == 1
                 && model.isEditableColumn(col);
-        boolean canUp = enabled ? model.canMove(realRows.get(0), col, true) : false;
-        boolean canDown = enabled ? model.canMove(realRows.get(realRows.size() - 1), col, false) : false;
+        boolean canUp = enabled && model.canMove(realRows.get(0), col, true);
+        boolean canDown = enabled && model.canMove(realRows.get(realRows.size() - 1), col, false);
         int beads = model.beadsInRowSpan(rows);
         boolean canSplit = (realRows.size() == 1 && rows.length == 1) || (!realRows.isEmpty() && beads == 1);
-        boolean canMerge = realRows.size() > 1
-                || (realRows.size() == 1 && rows.length == 1
-                        && realRows.get(0) < panel.table.getRowCount() - 1);
+        boolean canMerge = realRows.size() > 1 || (realRows.size() == 1 && rows.length == 1
+                && realRows.get(0) < panel.table.getRowCount() - 1);
         boolean canEdit = realRows.size() == 1;
         panel.moveDownButton.setEnabled(enabled && canDown);
         frame.moveDownItem.setEnabled(enabled && canDown);
@@ -1002,9 +996,9 @@ public class AlignPanelController {
         panel.editButton.setEnabled(enabled && canEdit);
         frame.editItem.setEnabled(enabled && canEdit);
         frame.pinpointAlignStartItem.setEnabled(enabled && rows.length == 1);
-        frame.pinpointAlignEndItem.setEnabled(phase == Phase.PINPOINT && rows.length == 1 && cols.length == 1
-                && realRows.size() == 1 && realRows.get(0) != ppRow && col != ppCol
-                && model.isEditableColumn(col));
+        frame.pinpointAlignEndItem.setEnabled(
+                phase == Phase.PINPOINT && rows.length == 1 && cols.length == 1 && realRows.size() == 1
+                        && realRows.get(0) != ppRow && col != ppCol && model.isEditableColumn(col));
     }
 
     private String getOutFileName() {
@@ -1027,9 +1021,10 @@ public class AlignPanelController {
     }
 
     /**
-     * If the user has modified the SRX rules, offer to save them permanently. Otherwise they are simply
-     * discarded. Does nothing when OmegaT's main window is not available (changes are always discarded under
-     * standalone use).
+     * If the user has modified the SRX rules, offer to save them permanently.
+     * Otherwise, they are simply discarded. Does nothing when OmegaT's main
+     * window is not available (changes are always discarded under standalone
+     * use).
      *
      * @param comp
      *            Parent component for dialog boxes
@@ -1059,9 +1054,10 @@ public class AlignPanelController {
     }
 
     /**
-     * If the user has modified the file filter settings, offer to save them permanently. Otherwise they are
-     * simply discarded. Does nothing when OmegaT's main window is not available (changes are always discarded
-     * under standalone use).
+     * If the user has modified the file filter settings, offer to save them
+     * permanently. Otherwise they are simply discarded. Does nothing when
+     * OmegaT's main window is not available (changes are always discarded under
+     * standalone use).
      *
      * @param comp
      *            Parent component for dialog boxes
@@ -1072,8 +1068,7 @@ public class AlignPanelController {
         }
         if (JOptionPane.OK_OPTION == JOptionPane.showConfirmDialog(comp,
                 OStrings.getString("ALIGNER_DIALOG_FILTERS_CONFIRM_MESSAGE"),
-                OStrings.getString("ALIGNER_DIALOG_CONFIRM_TITLE"),
-                JOptionPane.OK_CANCEL_OPTION)) {
+                OStrings.getString("ALIGNER_DIALOG_CONFIRM_TITLE"), JOptionPane.OK_CANCEL_OPTION)) {
             if (Core.getProject().isProjectLoaded()
                     && Core.getProject().getProjectProperties().getProjectFilters() != null) {
                 Core.getProject().getProjectProperties().setProjectFilters(customizedFilters);
@@ -1130,8 +1125,8 @@ public class AlignPanelController {
         }
 
         @Override
-        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
-                int row, int column) {
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
+                boolean hasFocus, int row, int column) {
             if (value instanceof Boolean) {
                 doStyling(checkBox, table, isSelected, hasFocus, row, column);
                 checkBox.setSelected((Boolean) value);
@@ -1169,9 +1164,8 @@ public class AlignPanelController {
                 } else if (row == ppRow && column == ppCol) {
                     comp.setBackground(Color.GREEN);
                 } else {
-                    comp.setBackground(
-                            getBeadNumber(table, row) % 2 == 0 ? table.getBackground()
-                                    : Styles.EditorColor.COLOR_ALIGNER_TABLE_ROW_HIGHLIGHT.getColor());
+                    comp.setBackground(getBeadNumber(table, row) % 2 == 0 ? table.getBackground()
+                            : Styles.EditorColor.COLOR_ALIGNER_TABLE_ROW_HIGHLIGHT.getColor());
                     comp.setForeground(table.getForeground());
                 }
             }
@@ -1204,7 +1198,8 @@ public class AlignPanelController {
 
     @SuppressWarnings("serial")
     class BeadTableModel extends AbstractTableModel {
-        // For debugging purposes, additional columns are defined as COL_CHECKBOX - n.
+        // For debugging purposes, additional columns are defined as
+        // COL_CHECKBOX - n.
         // To enable them, set COL_CHECKBOX > 0.
         static final int COL_CHECKBOX = 0;
         static final int COL_SRC = COL_CHECKBOX + 1;
@@ -1212,8 +1207,10 @@ public class AlignPanelController {
 
         private final List<MutableBead> data;
 
-        // Maintain an integer (index) mapping of the contents of each row. This is required when modifying
-        // the underlying beads, as all changes are destructive and non-atomic. It also speeds up access.
+        // Maintain an integer (index) mapping of the contents of each row. This
+        // is required when modifying
+        // the underlying beads, as all changes are destructive and non-atomic.
+        // It also speeds up access.
         List<Float> rowToDistance;
         List<MutableBead> rowToBead;
         List<String> rowToSourceLine;
@@ -1227,7 +1224,8 @@ public class AlignPanelController {
         private void makeCache() {
             for (int i = 0; i < data.size(); i++) {
                 MutableBead bead = data.get(i);
-                // Cull empty beads (can be created by splitting top/bottom line)
+                // Cull empty beads (can be created by splitting top/bottom
+                // line)
                 if (bead.isEmpty()) {
                     data.remove(i--);
                     continue;
@@ -1356,15 +1354,17 @@ public class AlignPanelController {
         }
 
         /**
-         * Move the specified lines located in <code>rows</code> and <code>col</code> into the bead indicated
-         * by <code>trgRow</code>.
+         * Move the specified lines located in <code>rows</code> and
+         * <code>col</code> into the bead indicated by <code>trgRow</code>.
          *
          * @param rows
          *            Rows to move
          * @param col
          *            Column of
          * @param trgRow
-         * @return An array of two ints indicating the start and end rows of the selection after moving
+         *            Target to move
+         * @return An array of two ints indicating the start and end rows of the
+         *         selection after moving
          */
         int[] move(List<Integer> rows, int col, int trgRow) {
             if (!isEditableColumn(col)) {
@@ -1414,10 +1414,12 @@ public class AlignPanelController {
         }
 
         /**
-         * Split the specified bead into two: one with an equal number of source and target lines (e.g. 1-1)
-         * and one with the remainder (e.g. 0-1). The new bead is inserted into the underlying data store.
+         * Split the specified bead into two: one with an equal number of source
+         * and target lines (e.g. 1-1) and one with the remainder (e.g. 0-1).
+         * The new bead is inserted into the underlying data store.
          *
          * @param bead
+         *            to split.
          * @return The remainder bead
          */
         private MutableBead splitBead(MutableBead bead) {
@@ -1431,8 +1433,8 @@ public class AlignPanelController {
         }
 
         /**
-         * Split the specified bead into two: the first with the specified count of lines, and the second with
-         * the remainder.
+         * Split the specified bead into two: the first with the specified count
+         * of lines, and the second with the remainder.
          *
          * @param bead
          * @param count
@@ -1466,8 +1468,9 @@ public class AlignPanelController {
         }
 
         /**
-         * Indicate whether the line at the specified <code>row</code> and <code>col</code> can be moved in
-         * the indicated direction. A line is movable if it is not blocked by another line in the same bead.
+         * Indicate whether the line at the specified <code>row</code> and
+         * <code>col</code> can be moved in the indicated direction. A line is
+         * movable if it is not blocked by another line in the same bead.
          *
          * @param row
          * @param col
@@ -1490,17 +1493,22 @@ public class AlignPanelController {
         }
 
         /**
-         * Indicate whether the line at the specified <code>row</code> and <code>col</code> can be moved to
-         * the bead indicated by <code>trgRow</code>. In addition to requiring
-         * {@link #canMove(int, int, boolean)} to return true, the bead must be different from the current
-         * bead, and no non-empty cells can exist between the current and target rows.
+         * Indicate whether the line at the specified <code>row</code> and
+         * <code>col</code> can be moved to the bead indicated by
+         * <code>trgRow</code>. In addition to requiring
+         * {@link #canMove(int, int, boolean)} to return true, the bead must be
+         * different from the current bead, and no non-empty cells can exist
+         * between the current and target rows.
          *
          * @param trgRow
+         *            target row to be moved.
          * @param row
+         *            specified row to move.
          * @param col
+         *            specified column to move.
          * @param up
          *            Up (toward index=0) when true, down when false
-         * @return
+         * @return false when condition not met, otherwise true.
          */
         boolean canMoveTo(int trgRow, int row, int col, boolean up) {
             if (!canMove(row, col, up) || trgRow == row) {
@@ -1556,12 +1564,14 @@ public class AlignPanelController {
         }
 
         /**
-         * Get a list of rows for which the cell in the specified <code>col</code> represents an actual line
-         * (is not empty).
+         * Get a list of rows for which the cell in the specified
+         * <code>col</code> represents an actual line (is not empty).
          *
          * @param col
+         *            column number
          * @param rows
-         * @return
+         *            requested row index
+         * @return list of row numbers cell in.
          */
         List<Integer> realCellsInRowSpan(int col, int... rows) {
             List<Integer> result = new ArrayList<Integer>();
@@ -1574,9 +1584,11 @@ public class AlignPanelController {
         }
 
         /**
-         * Get the last row of the bead immediately preceding the one at the indicated <code>row</code>.
+         * Get the last row of the bead immediately preceding the one at the
+         * indicated <code>row</code>.
          *
          * @param row
+         *            offset to move.
          * @return The row, or -1 if there is no previous bead
          */
         int prevBeadFromRow(int row) {
@@ -1584,9 +1596,11 @@ public class AlignPanelController {
         }
 
         /**
-         * Get the first row of the bead immediately after the one at the indicated <code>row</code>.
+         * Get the first row of the bead immediately after the one at the
+         * indicated <code>row</code>.
          *
          * @param row
+         *            offset to move.
          * @return The row, or -1 if there is no next bead
          */
         int nextBeadFromRow(int row) {
@@ -1604,12 +1618,15 @@ public class AlignPanelController {
         }
 
         /**
-         * Merge all lines at the indicated <code>rows</code> and <code>col</code> into the first specified
-         * row. This is destructive in that it actually joins the strings together and replaces the existing
+         * Merge all lines at the indicated <code>rows</code> and
+         * <code>col</code> into the first specified row. This is destructive in
+         * that it actually joins the strings together and replaces the existing
          * value.
          *
          * @param rows
+         *            target to be merged.
          * @param col
+         *            Column of
          * @return The resulting row
          */
         int mergeRows(List<Integer> rows, int col) {
@@ -1645,14 +1662,18 @@ public class AlignPanelController {
         }
 
         /**
-         * Replace the line at <code>row</code> and <code>col</code> with the specified <code>split</code>
-         * lines, which are inserted in its place. This is destructive in that it removes the original line
-         * entirely.
+         * Replace the line at <code>row</code> and <code>col</code> with the
+         * specified <code>split</code> lines, which are inserted in its place.
+         * This is destructive in that it removes the original line entirely.
          *
          * @param row
+         *            target to split.
          * @param col
+         *            Column of
          * @param split
-         * @return A two-member array indicating the first and last resulting rows
+         *            lines to insert.
+         * @return A two-member array indicating the first and last resulting
+         *         rows
          */
         int[] splitRow(int row, int col, String[] split) {
             if (!isEditableColumn(col)) {
@@ -1680,8 +1701,9 @@ public class AlignPanelController {
         }
 
         /**
-         * Replace the line at <code>row</code> and <code>col</code> with the specified <code>newVal</code>.
-         * This is destructive in that it removes the original line entirely.
+         * Replace the line at <code>row</code> and <code>col</code> with the
+         * specified <code>newVal</code>. This is destructive in that it removes
+         * the original line entirely.
          *
          * @param row
          * @param col
@@ -1701,18 +1723,24 @@ public class AlignPanelController {
         }
 
         /**
-         * Move the lines at the specified <code>rows</code> and <code>col</code> by the specified offset,
-         * e.g. +1 or -1 where negative indicates the upwards direction in the table.
+         * Move the lines at the specified <code>rows</code> and
+         * <code>col</code> by the specified offset, e.g. +1 or -1 where
+         * negative indicates the upwards direction in the table.
          * <p>
-         * This is different from {@link #move(List, int, int)} in that the intended effect is to give the
-         * impression of each row moving by the offset relative to the opposing column. Because displayed rows
-         * don't map directly to lines, that means some rows won't move at all, e.g. if the target row is
-         * still the same bead.
+         * This is different from {@link #move(List, int, int)} in that the
+         * intended effect is to give the impression of each row moving by the
+         * offset relative to the opposing column. Because displayed rows don't
+         * map directly to lines, that means some rows won't move at all, e.g.
+         * if the target row is still the same bead.
          *
          * @param rows
+         *            rows data
          * @param col
+         *            column number to slide
          * @param offset
-         * @return A two-member array indicating the first and last resulting rows
+         *            offset of slide
+         * @return A two-member array indicating the first and last resulting
+         *         rows
          */
         int[] slide(List<Integer> rows, int col, int offset) {
             if (offset == 0) {
@@ -1723,7 +1751,8 @@ public class AlignPanelController {
             }
             Collections.sort(rows);
             if (offset > 0) {
-                // Handling traversing empty rows when sliding down requires sliding in reverse order.
+                // Handling traversing empty rows when sliding down requires
+                // sliding in reverse order.
                 Collections.reverse(rows);
             }
             int origRowCount = getRowCount();
@@ -1754,7 +1783,8 @@ public class AlignPanelController {
                         // Already in target bead
                         continue;
                     } else {
-                        // Moving down in unbalanced bead where target is blank cell -> split bead and place
+                        // Moving down in unbalanced bead where target is blank
+                        // cell -> split bead and place
                         // into resulting remainder bead
                         trgBead = splitBead(trgBead);
                     }
@@ -1797,11 +1827,12 @@ public class AlignPanelController {
         }
 
         /**
-         * Split the lines specified at <code>rows</code> and <code>col</code> into multiple beads.
+         * Split the lines specified at <code>rows</code> and <code>col</code>
+         * into multiple beads.
          *
          * @param rows
-         * @param col
-         * @return A two-member array indicating the first and last resulting rows
+         * @return A two-member array indicating the first and last resulting
+         *         rows
          */
         void splitBead(int[] rows) {
             int origRowCount = getRowCount();
@@ -1957,7 +1988,8 @@ public class AlignPanelController {
                     return false;
                 }
 
-                javax.swing.JTable.DropLocation dloc = (javax.swing.JTable.DropLocation) support.getDropLocation();
+                javax.swing.JTable.DropLocation dloc = (javax.swing.JTable.DropLocation) support
+                        .getDropLocation();
                 if (dloc.getColumn() != col) {
                     return false;
                 }
@@ -1989,7 +2021,8 @@ public class AlignPanelController {
                 int[] cols = sel[1];
                 int col = cols[0];
 
-                javax.swing.JTable.DropLocation dloc = (javax.swing.JTable.DropLocation) support.getDropLocation();
+                javax.swing.JTable.DropLocation dloc = (javax.swing.JTable.DropLocation) support
+                        .getDropLocation();
                 int trgRow = dloc.getRow();
 
                 moveRows(rows, col, trgRow);
@@ -2035,7 +2068,8 @@ public class AlignPanelController {
     static class DropLocationListener implements PropertyChangeListener {
         private static final int ERASE_MARGIN = 5;
         private static final int INSET_MARGIN = 3;
-        private static final Border BORDER = new RoundedCornerBorder(8, Color.BLUE, RoundedCornerBorder.SIDE_ALL, 2);
+        private static final Border BORDER = new RoundedCornerBorder(8, Color.BLUE,
+                RoundedCornerBorder.SIDE_ALL, 2);
 
         @Override
         public void propertyChange(PropertyChangeEvent evt) {
@@ -2056,7 +2090,8 @@ public class AlignPanelController {
                 SwingUtilities.invokeLater(new Runnable() {
                     @Override
                     public void run() {
-                        BORDER.paintBorder(table, table.getGraphics(), rect.x, rect.y, rect.width, rect.height);
+                        BORDER.paintBorder(table, table.getGraphics(), rect.x, rect.y, rect.width,
+                                rect.height);
                     }
                 });
             }

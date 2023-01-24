@@ -62,7 +62,7 @@ public final class OConsts {
 
     // help
     public static final String HELP_HOME = "index.html";
-    public static final String HELP_INSTANT_START = "instantStartGuideNoTOC.html";
+    public static final String HELP_FIRST_STEPS = "first_steps.html";
     public static final String HELP_DIR = "docs";
     public static final String HELP_LANG_INDEX = "languageIndex.html";
 
@@ -104,12 +104,16 @@ public final class OConsts {
     /** Project subfolder for automatically applied translation memories within the tm folder. Existing
         translation are overwritten */
     public static final String AUTO_ENFORCE_TM = "enforce";
+    /** Project subfolder for machine translation memories. */
+    public static final String MT_TM = "mt";
+    /** Project subfolder for generic penalty based translation memories. */
+    public static final String PENALTY_TM = "penalty-xxx";
+    /** Project subfolder for translation memories with other languages as alternative sources. */
+    public static final String DEFAULT_OTHERLANG = "tmx2source";
     /** Project subfolder for dictionaries default name. */
     public static final String DEFAULT_DICT = "dictionary";
     /** Project subfolder for project's translation memory. */
     public static final String DEFAULT_INTERNAL = "omegat";
-    /** Project subfolder for translation memories with other languages as alternative sources. */
-    public static final String DEFAULT_OTHERLANG = "tmx2source";
     /** Default name for spelling dictionary directory */
     public static final String SPELLING_DICT_DIR = "spelling";
 

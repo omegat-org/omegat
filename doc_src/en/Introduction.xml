@@ -48,8 +48,8 @@
       takes care of that <emphasis>automatically</emphasis>.</para>
 
       <para>Translators can very easily reuse an existing projectʼs translation
-      memory by simply adding new translation files to the old project, or by
-      copying the old translation memory to a new project.</para>
+      memory by simply adding new translation files to an existing project, or by
+      copying an existing translation memory to a new project.</para>
 
       <para>There is no limit to the number of translation memories that can be
       used as reference in a translation project, and OmegaT makes it very easy
@@ -67,7 +67,7 @@
       <para>Simple settings enable translators to easily share resources and
       work together on a project.</para>
 
-      <para>The team functionality offers industrial grade robustness and
+      <para>The team functionality offers industrial grade robustness and the
       flexibility to synchronize project resources among team members, while
       allowing easy resolution of conflicts between different
       translations.</para>
@@ -295,7 +295,7 @@
 	property for details.</para>
 	
 	<para>Segments within a paragraph can be further segmented, or "unsegmented"
-	(merged). Add a segmentation rule to segment further them, or an exception
+	(merged). Add a segmentation rule to further segment them, or an exception
 	rule to merge them with the part they were split from. See the <link
 	linkend="app.segmentation" endterm="app.segmentation.title"/> appendix for
 	details.</para>
@@ -353,35 +353,53 @@
       </mediaobject>
     </figure>
 
+	<orderedlist>
+	  <listitem>
+		<para>The <link linkend="panes.editor" endterm="panes.editor.title"/>
+		pane </para>
+	  </listitem>
+	  <listitem>
+		<para>The <link linkend="panes.notes" endterm="panes.notes.title"/>
+		pane</para>
+	  </listitem>
+	  <listitem>
+		<para>The <link linkend="panes.fuzzy.matches"
+		endterm="panes.fuzzy.matches.title"/> pane</para>
+	  </listitem>
+	  <listitem>
+		<para>The <link linkend="panes.glossary"
+		endterm="panes.glossary.title"/> pane</para>
+	  </listitem>
+	  <listitem>
+		<para>The <link linkend="panes.segment.properties"
+		endterm="panes.segment.properties.title"/> pane</para>
+	  </listitem>
+	  <listitem>
+		<para>The <link linkend="panes.comments"
+		endterm="panes.comments.title"/> pane</para>
+	  </listitem>
+	  <listitem>
+		<para>The <link linkend="panes.multipletranslations"
+		endterm="panes.multipletranslations.title"/> pane</para>
+	  </listitem>
+	  <listitem>
+		<para> The <link linkend="panes.dictionary"
+		endterm="panes.dictionary.title"/> and <link
+		linkend="panes.machinetranslation"
+		endterm="panes.machinetranslation.title"/> panes are docked</para>
+	  </listitem>
+	  <listitem>
+		<para>The <link linkend="panes.statusbar"
+		endterm="panes.statusbar.title"/> (on the right), which contains
+		project information</para>
+	  </listitem>
+	</orderedlist>
+	
 	<para>Use the various options in the <link linkend="menus.view"
 	endterm="menus.view.title"/> menu and move the various <link
 	linkend="chapter.panes">panes</link> around to obtain the layout that fits
-	your workflow best:</para>
+	your workflow best.</para>
 	
-	<figure id="modified.omegat.layout">
-      <title id="modified.omegat.layout.title">Modified OmegaT layout with
-      auto-completion</title>
-      <mediaobject>
-        <imageobject role="html">
-          <imagedata fileref="images/modifiedOmegaTLayout.png"/>
-        </imageobject>
-        <imageobject role="fo">
-          <imagedata fileref="images/modifiedOmegaTLayout.png" width="60%"/>
-        </imageobject>
-      </mediaobject>
-    </figure>
-
-	<note>
-	  <para>To display paragraph delimitations and see which paragraph each
-	  segment is part of, use <link linkend="menus.view"
-	  endterm="menus.view.title"/><link
-	  linkend="menus.view.mark.paragraph.delimitations"
-	  endterm="menus.view.mark.paragraph.delimitations.title"/>. Paragraph
-	  delimitations are defined in the <link
-	  linkend="dialogs.preferences.editor.paragraph.delimitation.format"
-	  endterm="dialogs.preferences.editor.paragraph.delimitation.format.title"/>
-	  preference.</para>
-	</note>
   </section>
 
   <section id="introduction.translate.the.segments.one.by.one">
@@ -425,7 +443,7 @@
 		  <para>Use <link linkend="menus.goto" endterm="menus.goto.title"/><link
 		  linkend="menus.goto.notes.pane"
 		  endterm="menus.goto.notes.pane.title"/> to enter the Notes pane and
-		  add your remark,</para>
+		  add your remark.</para>
 
 		  <para>Use <link linkend="menus.goto" endterm="menus.goto.title"/><link
 		  linkend="menus.goto.editor.pane"
@@ -455,7 +473,7 @@
 	glossary matches.</para>
 
 	<para>When you enter a segment containing terms that match entries in your
-	glossaries, those terms and their translations will be displayed in the
+	glossaries, those terms and their translations are displayed in the
 	<link linkend="panes.glossary" endterm="panes.glossary.title"/> pane.</para>
 	
 	<para>When you enter a segment that matches part of the content of the
@@ -469,7 +487,7 @@
 
 	<para>The <link linkend="menus.edit.search.project"
 	endterm="menus.edit.search.project.title"/> function lets you search the
-	entire project for terms, sentence fragments and so on, using exact,
+	entire project for terms, sentence fragments, and so on, using exact,
 	keyword, or regular expression searches. You can also narrow the scope of
 	the search based on information such as author or date.</para>
 
@@ -512,7 +530,7 @@
     have nothing to do with decorations, but are nevertheless important in the
     source files (and, consequently, in the translated files).</para>
 
-	<para>A source sentence might look like:</para>
+	<para>A sentence might look like this in its original application:</para>
     
 	<example id="example.source.segment.with.decorations">
 	  <title id="example.source.segment.with.decorations.title">Sentence with
@@ -532,21 +550,51 @@
 	  role="tag">&lt;t2/&gt;</code>eager<code role="tag">&lt;t3/&gt;</code>
 	  translators</para>
     </example>
+
+	<note>
+	  <para>The various tag related settings can be very helpful to properly
+	  manage the tags in a documents. See the following options and scripts for
+	  details:</para>
+	  <itemizedlist>
+		<listitem>
+		  <para><link linkend="dialogs.project.properties.remove.tags" endterm="dialogs.project.properties.remove.tags.title"/></para>
+		</listitem>
+		<listitem>
+		  <para><link linkend="dialogs.preferences.tag.processing" endterm="dialogs.preferences.tag.processing.title"/></para>
+		</listitem>
+		<listitem>
+		  <para><link linkend="windows.scripts.distribution.tagwipe" endterm="windows.scripts.distribution.tagwipe.title"/></para>
+		</listitem>
+		<listitem>
+		  <para><link linkend="windows.scripts.distribution.adapt.standard.tags" endterm="windows.scripts.distribution.adapt.standard.tags.title"/></para>
+		</listitem>
+		<listitem>
+		  <para><link linkend="windows.scripts.distribution.strip.tags" endterm="windows.scripts.distribution.strip.tags.title"/></para>
+		</listitem>
+		<listitem>
+		  <para><link linkend="windows.scripts.distribution.tag.free.match" endterm="windows.scripts.distribution.tag.free.match.title"/></para>
+		</listitem>
+	  </itemizedlist>
+	</note>
 	
     <para>The tags in OmegaT are grayed, making them easy to recognize. They are
     protected to prevent you from modifying their contents, but you can delete
-    them, enter them by hand or move them around in the target sentence. See
+    them, enter them by hand or move them around in the target sentence.</para>
+	<para>Use
     <link linkend="menus.edit" endterm="menus.edit.title"/>
     <link linkend="menus.edit.insert.missing.source.tag"
     endterm="menus.edit.insert.missing.source.tag.title"/> and <link
     linkend="menus.edit.insert.next.missing.tag"
-    endterm="menus.edit.insert.next.missing.tag.title"/> for details.</para>
+    endterm="menus.edit.insert.next.missing.tag.title"/> to insert the tags at
+    the cursor location.</para>
 
 	<para>You can define custom tags that will be managed in the same
 	manner. See the <link
 	linkend="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags"
 	endterm="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags.title"/>
-	section for details. You can also define strings that OmegaT should warn you
+	section for details.</para>
+
+	<para>You can also define strings that OmegaT should warn you
 	about if you leave them in a translation. See the <link
 	linkend="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation"
 	endterm="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation.title"/>
@@ -591,8 +639,8 @@
 
 	<warning>
 	  <para>Any time you create the translated files, any previously created
-	  files with the same name will be overwritten. If you want to keep files
-	  from being overwritten, change their name after you create them. You can
+	  files with the same name are overwritten. Rename any files you want to
+	  prevent from being overwritten after you create them. You can
 	  automate file name changes using the <link linkend="edit.filter.dialog"
 	  endterm="edit.filter.dialog.title"/> option for the file filter.</para>
 	
@@ -604,15 +652,14 @@
 	  folder of your project.</para>
 
 	  <para>Deleting the contents of the <link linkend="project.folder.target"
-	  endterm="project.folder.target.title"/> folder will
-	  <emphasis>never</emphasis> impact the content of your translations.</para>
+	  endterm="project.folder.target.title"/> folder 
+	  <emphasis>never</emphasis> impacts the content of your translations.</para>
 	</warning>
 
-	<para>The documents will be created in the <link
+	<para>The documents are created in the <link
 	linkend="project.folder.target" endterm="project.folder.target.title"/>
-	folder of your project, and unless you have modified the names of the files
-	that were previously created, they will be overwritten by the
-	process...</para>
+	folder of your project. Previously created files are overwritten by the
+	process unless you have renamed them...</para>
 
 	<para>Once the translated files have been created, you can open them in
 	their original application to check their contents and eventually further
@@ -749,8 +796,8 @@
 	  to immediately continue from where you left off.</para>
 
 	  <para>You now decide to review the annotated segments. You use
-	  <keycombo><keycap>C</keycap><keycap>F</keycap></keycombo> to find them,
-	  and in the search window use
+	  <keycombo><keycap>C</keycap><keycap>F</keycap></keycombo> to find them
+	  and, in the search window, use
 	  <keycombo><keycap>C</keycap><keycap>N</keycap></keycombo> and
 	  <keycombo><keycap>C</keycap><keycap>P</keycap></keycombo> to navigate the
 	  results. OmegaT synchronises the Editor contents with the selected result,

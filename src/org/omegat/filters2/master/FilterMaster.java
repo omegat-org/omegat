@@ -71,8 +71,8 @@ import gen.core.filters.Filter.Option;
 import gen.core.filters.Filters;
 
 /**
- * A master class that registers and handles all the filters. Singleton - there can be only one instance of
- * this class.
+ * A master class that registers and handles all the filters. Singleton - there
+ * can be only one instance of this class.
  *
  * @author Maxym Mykhalchuk
  * @author Henry Pijffers
@@ -91,7 +91,8 @@ public class FilterMaster {
     private static final JAXBContext CONFIG_CTX;
 
     /**
-     * There was no version of file filters support (1.4.5 Beta 1 -- 1.6.0 RC12).
+     * There was no version of file filters support (1.4.5 Beta 1 -- 1.6.0
+     * RC12).
      */
     public static final String INITIAL_VERSION = "";
     /** File filters support of 1.6.0 RC12a: now upgrading the configuration. */
@@ -211,17 +212,20 @@ public class FilterMaster {
     /**
      * OmegaT core calls this method to translate a source file.
      * <ul>
-     * <li>OmegaT first looks through registered filter instances to find filter(s) that can handle this file.
+     * <li>OmegaT first looks through registered filter instances to find
+     * filter(s) that can handle this file.
      * <li>Tests if filter(s) want to handle it.
      * <li>If the filter accepts the file,
      * <li>Filter is asked to process the file.
      * </ul>
-     * If no filter is found, that processes this file, we simply copy it to target folder.
+     * If no filter is found, that processes this file, we simply copy it to
+     * target folder.
      *
      * @param sourcedir
      *            The folder of the source inFile.
      * @param filename
-     *            The name of the source inFile to process (only the part, relative to source folder).
+     *            The name of the source inFile to process (only the part,
+     *            relative to source folder).
      * @param targetdir
      *            The folder to place the translated inFile to.
      * @param fc
@@ -238,11 +242,12 @@ public class FilterMaster {
         }
 
         File inFile = new File(sourcedir, filename).getCanonicalFile();
-        File outFile = new File(targetdir, getTargetForSource(filename, lookup, fc.getTargetLang())).getCanonicalFile();
+        File outFile = new File(targetdir, getTargetForSource(filename, lookup, fc.getTargetLang()))
+                .getCanonicalFile();
 
         if (inFile.equals(outFile)) {
-            throw new TranslationException(
-                    StringUtil.format(OStrings.getString("FILTERMASTER_ERROR_SRC_TRG_SAME_FILE"), inFile.getPath()));
+            throw new TranslationException(StringUtil
+                    .format(OStrings.getString("FILTERMASTER_ERROR_SRC_TRG_SAME_FILE"), inFile.getPath()));
         }
 
         fc.setInEncoding(lookup.outFilesInfo.getSourceEncoding());
@@ -298,8 +303,8 @@ public class FilterMaster {
     }
 
     /**
-     * Gets the filter according to the source filename provided. In case of failing to find a filter to
-     * handle the file returns <code>null</code>.
+     * Gets the filter according to the source filename provided. In case of
+     * failing to find a filter to handle the file returns <code>null</code>.
      *
      * In case of finding an appropriate filter it
      * <ul>
@@ -308,11 +313,12 @@ public class FilterMaster {
      * <li>Checks whether the filter supports the file.
      * </ul>
      *
-     * @param inFile The full path to the source file
+     * @param inFile
+     *            The full path to the source file
      * @return The corresponding LookupInformation
      */
-    private LookupInformation lookupFilter(File inFile, FilterContext fc) throws TranslationException,
-            IOException {
+    private LookupInformation lookupFilter(File inFile, FilterContext fc)
+            throws TranslationException, IOException {
         for (Filter f : config.getFilters()) {
             if (!f.isEnabled()) {
                 continue;
@@ -391,7 +397,8 @@ public class FilterMaster {
     private static List<String> supportedEncodings = null;
 
     /**
-     * Queries JRE for the list of supported encodings. Also adds the human name for no/automatic inEncoding.
+     * Queries JRE for the list of supported encodings. Also adds the human name
+     * for no/automatic inEncoding.
      *
      *
      * @return names of all the encodings in an array
@@ -426,8 +433,8 @@ public class FilterMaster {
     }
 
     /**
-     * Loads information about the filters from an XML file. If there's an error loading a file, it calls
-     * <code>setupDefaultFilters</code>.
+     * Loads information about the filters from an XML file. If there's an error
+     * loading a file, it calls <code>setupDefaultFilters</code>.
      *
      * @throws IOException
      */
@@ -478,7 +485,8 @@ public class FilterMaster {
     // ////////////////////////////////////////////////////////////////////////
 
     /**
-     * Whether the mask matches the filename. Filename should be "name.ext", without path.
+     * Whether the mask matches the filename. Filename should be "name.ext",
+     * without path.
      *
      * @param filename
      *            The filename to check
@@ -507,10 +515,15 @@ public class FilterMaster {
 
     /**
      * Calculate the target path corresponding to the given source file.
-     * @param sourceDir Path to the project's <code>source</code> dir
-     * @param srcRelPath Relative path under <code>sourceDir</code> of the source file
-     * @param fc Filter context
-     * @return The relative path under <code>target</code> of the corresponding target file
+     * 
+     * @param sourceDir
+     *            Path to the project's <code>source</code> dir
+     * @param srcRelPath
+     *            Relative path under <code>sourceDir</code> of the source file
+     * @param fc
+     *            Filter context
+     * @return The relative path under <code>target</code> of the corresponding
+     *         target file
      * @throws IOException
      * @throws TranslationException
      */
@@ -525,7 +538,8 @@ public class FilterMaster {
         return getTargetForSource(srcRelPath, lookup, fc.getTargetLang());
     }
 
-    private static String getTargetForSource(String srcRelPath, LookupInformation lookup, Language targetLang) {
+    private static String getTargetForSource(String srcRelPath, LookupInformation lookup,
+            Language targetLang) {
         File srcRelFile = new File(srcRelPath);
         return new File(srcRelFile.getParent(),
                 constructTargetFilename(lookup.outFilesInfo.getSourceFilenameMask(), srcRelFile.getName(),
@@ -535,29 +549,36 @@ public class FilterMaster {
     }
 
     /**
-     * Construct a target filename according to pattern from a file's name. Filename should be "name.ext",
-     * without path.
+     * Construct a target filename according to pattern from a file's name.
+     * Filename should be "name.ext", without path.
      * <p>
      * Output filename pattern is pretty complex. <br>
-     * It may consist of normal characters and some substituted variables. They have the format
-     * <code>${variableName}</code> and are case insensitive. <br>
+     * It may consist of normal characters and some substituted variables. They
+     * have the format <code>${variableName}</code> and are case insensitive.
+     * <br>
      * There're such variables:
      * <ul>
-     * <li><code>${filename}</code> - full filename of the input file, both name and extension (default)
-     * <li><code>${nameOnly}</code> - only the name of the input file without extension part
+     * <li><code>${filename}</code> - full filename of the input file, both name
+     * and extension (default)
+     * <li><code>${nameOnly}</code> - only the name of the input file without
+     * extension part
      * <li><code>${extension}</code> - the extension of the input file
-     * <li><code>${nameOnly-1}</code> - only the name of the input file with first extension
+     * <li><code>${nameOnly-1}</code> - only the name of the input file with
+     * first extension
      * <li><code>${extension-1}</code> - the extensions, without the first one
      * <li><code>${targetLocale}</code> - target locale code (of a form "xx_YY")
-     * <li><code>${targetLanguage}</code> - the target language and country code together (of a form "XX-YY")
+     * <li><code>${targetLanguage}</code> - the target language and country code
+     * together (of a form "XX-YY")
      * <li><code>${targetLanguageCode}</code> - the target language only ("XX")
      * <li><code>${targetCountryCode}</code> - the target country only ("YY")
      * <li><code>${1}, ${2}, ...</code> - variables captured by jokers (* or ?)
      * </ul>
      * <p>
-     * Most file filters will use default "<code>${filename}</code>, that leads to the name of translated file
-     * being the same as the name of source file. But for example the Java(TM) Resource Bundles file filter
-     * will have the pattern equal to "<code>${nameonly}_${targetlanguage}.${extension}</code> ".
+     * Most file filters will use default "<code>${filename}</code>, that leads
+     * to the name of translated file being the same as the name of source file.
+     * But for example the Java(TM) Resource Bundles file filter will have the
+     * pattern equal to "<code>${nameonly}_${targetlanguage}.${extension}</code>
+     * ".
      * <p>
      * E.g. if you have
      * <ul>
@@ -763,7 +784,7 @@ public class FilterMaster {
         }
         Filter fc = new Filter();
         fc.setClassName(f.getClass().getName());
-        fc.setEnabled(true);
+        fc.setEnabled(f.isEnabledInDefault());
         for (Instance ins : f.getDefaultInstances()) {
             Files ff = new Files();
             ff.setSourceEncoding(ins.getSourceEncoding());

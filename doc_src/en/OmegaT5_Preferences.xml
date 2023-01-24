@@ -888,14 +888,14 @@
 	</variablelist>
 	
 	<variablelist>
-	  <varlistentry id="dialogs.preferences.editor.attempt.to.convert.numbers.when.inserting.a.fuzzy.match">
+	  <varlistentry id="dialogs.preferences.editor.attempt.to.replace.numbers.when.inserting.a.fuzzy.match">
 		<term
-		id="dialogs.preferences.editor.attempt.to.convert.numbers.when.inserting.a.fuzzy.match.title"><option>Attempt
-		to convert fuzzy match numbers</option></term>
+		id="dialogs.preferences.editor.attempt.to.replace.numbers.when.inserting.a.fuzzy.match.title"><option>Attempt
+		to replace fuzzy match numbers</option></term>
 
 		<listitem>
-		  <para>When a fuzzy match is inserted, OmegaT tries to adapt the numbers
-		  in the fuzzy match to the numbers in the source.</para>
+		  <para>When a fuzzy match is inserted, OmegaT tries to replace the numbers
+		  in the fuzzy match with the numbers in the source text.</para>
 
 		  <note>
 			<para>Only integers and simple floats (e.g., 5.4) are
@@ -1483,13 +1483,13 @@ ${filePath}></programlisting></para>
 	  <varlistentry id="dialog.preferences.view.include.the.first.non-unique.segment.when.marking.non.unique.segments">
 		<term
 		id="dialog.preferences.view.include.the.first.non-unique.segment.when.marking.non.unique.segments.title"><option>Mark
-		all non-unique segments</option></term>
+		all repeated segments</option></term>
 		<listitem>
 		  <para>Use <link linkend="menus.view" endterm="menus.view.title"/><link
 		  linkend="menus.view.mark.non.unique.segments"
 		  endterm="menus.view.mark.non.unique.segments.title"/> to mark the
-		  second and subsequent non-unique segments. Use this option to also
-		  mark the first such segment.</para>
+		  second and subsequent copy of a repeated segments. Use this option to
+		  also mark the first copy of the segment.</para>
 		</listitem>
 	  </varlistentry>
 
@@ -1498,9 +1498,11 @@ ${filePath}></programlisting></para>
 		id="dialog.preferences.view.simplify.tooltip.on.protected.parts.title"><option>Simplify
 		tag tooltips</option></term>
 		<listitem>
-		  <para>Tags are protected text. Tag tooltips display the actual content
-		  of the tag. For content with paired tags (as in HTML) the tooltips can
-		  be simplified when you hover on them.</para>
+		  <para>OmegaT tags are protected text that represents format-specific
+		  tags in the source document. When hovering on an OmegaT tag, OmegaT
+		  displays a tooltip that contains the original content of the tag. If
+		  that content was originally enclosed in paired tags, the paired tags
+		  can be removed from the tooltip for better readability.</para>
 		</listitem>
 	  </varlistentry>
 

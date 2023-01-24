@@ -67,6 +67,9 @@ public class RealProjectTest {
 
     @After
     public final void tearDown() throws Exception {
+        if (project != null) {
+            project.unlockProject();
+        }
         FileUtils.deleteDirectory(tempDir.toFile());
     }
 

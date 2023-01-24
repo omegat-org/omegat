@@ -30,7 +30,7 @@ Bugs: https://sourceforge.net/p/omegat/bugs/
 
 Documentation: https://sourceforge.net/p/omegat/documentation/ 
 
- Plesae paste a ticket title and URL  
+ Please paste a ticket title and URL  
 -->
 
 - Title ex. fix...

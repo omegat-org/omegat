@@ -138,11 +138,12 @@
             <arg value="chapter.autolabel=0" />
             <arg value="section.autolabel=0" />
             <arg value="tablecolumns.extension=0" />
-            <arg value="toc.max.depth=3" />
+            <arg value="toc.max.depth=2" />
             <arg value="generate.toc=book toc,title,figure,table chapter toc appendix toc" />
             <arg value="generate.index=1" />
             <arg value="root.filename=index_" />
-            <arg value="html.stylesheet=OmegaT_webhelp.css" />
+            <arg value="html.stylesheet=OmegaT.css" />
+            <arg value="html.stylesheet=OmegaT.css" />
             <arg value="docbook.css.link=0" />
             <arg value="saxon.character.representation=native;decimal"/>
             <classpath>
@@ -154,20 +155,48 @@
               tofile="../docs/${language}/${version.properties.filename}" />
     </target>
 
-    <target name="css">
-      <copy file="OmegaT.css"
-            tofile="../docs/${language}/OmegaT_webhelp.css" />
+    <target name="check-first-steps">
+        <available property="FirstSteps.exists" file="../doc_src/${language}/First_Steps.xml"/>
     </target>
 
+    <target name="check-manual-exist">
+        <condition property="ManualContents.exists">
+            <or>
+                <available file="../doc_src/${language}/Introduction.xml"/>
+                <available file="../doc_src/${language}/InstallingAndRunning.xml"/>
+                <available file="../doc_src/${language}/AboutOmegaT.xml"/>
+            </or>
+        </condition>
+    </target>
 
-    <target name="instant-start">
+    <target name="old-css" depends="check-first-steps" unless="${FirstSteps.exists}">
+        <copy file="OmegaT_old.css"
+              tofile="../docs/${language}/OmegaT.css"
+              force="true"/>
+    </target>
+
+    <target name="new-css" depends="check-first-steps" if="${FirstSteps.exists}">
+        <copy file="OmegaT_new.css"
+              tofile="../docs/${language}/OmegaT.css"
+              force="true"/>
+    </target>
+
+    <target name="css" depends="old-css,new-css"/>
+
+    <target name="copy-index-from-first-step" depends="check-manual-exist,generate-instant-start"
+            unless="${ManualContents.exists}">
+        <copy file="../docs/${language}/first_steps.html"
+              tofile="../docs/${language}/index.html" />
+    </target>
+
+    <target name="generate-instant-start" depends="check-first-steps, old-css, pictures" unless="${FirstSteps.exists}">
         <java dir="."
               fork="true"
               failonerror="true"
               maxmemory="128m"
               classname="com.icl.saxon.StyleSheet" >
             <arg value="-o" />
-            <arg value="../docs/${language}/instantStartGuideNoTOC.html" />
+            <arg value="../docs/${language}/first_steps.html" />
             <arg value="${language}/InstantStartGuide.xml" />
             <arg value="../../docbook-utf8.xsl" />
             <arg value="base.dir=../docs/${language}/" />
@@ -175,7 +204,7 @@
             <arg value="chunk.first.sections=0" />
             <arg value="use.extensions=1" />
             <arg value="chapter.autolabel=0" />
-            <arg value="section.autolabel=1" />
+            <arg value="section.autolabel=0" />
             <arg value="tablecolumns.extension=0" />
             <arg value="toc.max.depth=0" />
             <arg value="generate.toc=0" />
@@ -186,7 +215,38 @@
                 <pathelement path="${saxon}" />
             </classpath>
         </java>
-        <copy file="${language}/OmegaT.css" tofile="../docs/${language}/OmegaT.css" />
+        <copy file="${language}/${version.properties.filename}"
+              tofile="../docs/${language}/${version.properties.filename}" />
+    </target>
+
+    <target name="instant-start" depends="generate-instant-start, copy-index-from-first-step"/>
+
+    <target name="first-steps" depends="check-first-steps, new-css" if="${FirstSteps.exists}">
+        <java dir="."
+              fork="true"
+              failonerror="true"
+              maxmemory="128m"
+              classname="com.icl.saxon.StyleSheet" >
+            <arg value="-o" />
+            <arg value="../docs/${language}/first_steps.html" />
+            <arg value="${language}/First_Steps.xml" />
+            <arg value="../../docbook-utf8.xsl" />
+            <arg value="base.dir=../docs/${language}/" />
+            <arg value="chunk.section.depth=0" />
+            <arg value="chunk.first.sections=0" />
+            <arg value="use.extensions=1" />
+            <arg value="chapter.autolabel=0" />
+            <arg value="section.autolabel=0" />
+            <arg value="tablecolumns.extension=0" />
+            <arg value="toc.max.depth=0" />
+            <arg value="generate.toc=0" />
+            <arg value="generate.index=0" />
+            <arg value="html.stylesheet=OmegaT.css" />
+            <classpath>
+                <pathelement location="${saxon}" />
+                <pathelement path="${saxon}" />
+            </classpath>
+        </java>
     </target>
 
     <target name="pictures">

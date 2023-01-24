@@ -276,7 +276,7 @@ public class SpellcheckerConfigurationController extends BasePreferencesControll
 
     @Override
     protected void initFromPrefs() {
-        panel.autoSpellcheckCheckBox.setSelected(Preferences.isPreference(Preferences.ALLOW_AUTO_SPELLCHECKING));
+        panel.autoSpellcheckCheckBox.setSelected(Preferences.isPreferenceDefault(Preferences.ALLOW_AUTO_SPELLCHECKING, true));
         // initialize things from the preferences
         updateDetailPanel();
         String dictionaryUrl = Preferences.getPreference(Preferences.SPELLCHECKER_DICTIONARY_URL);
@@ -303,7 +303,7 @@ public class SpellcheckerConfigurationController extends BasePreferencesControll
 
     @Override
     public void restoreDefaults() {
-        panel.autoSpellcheckCheckBox.setSelected(false);
+        panel.autoSpellcheckCheckBox.setSelected(true);
         panel.dictionaryUrlTextField.setText(DICT_URL);
         directoryChanged();
         listSelectionChanged();

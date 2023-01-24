@@ -31,7 +31,7 @@
 		  </listitem>
 		</itemizedlist>
 
-		<para>Allows you to activate/deactivate the available machine
+		<para>Allows you to activate or deactivate the available machine
 		translation engines.</para>
 
         <para>If several translation engines are selected, you can also use
@@ -52,7 +52,7 @@
 		  </listitem>
 		</itemizedlist>
 
-        <para>Allows you to activate/deactivate fuzzy matching for glossary
+        <para>Allows you to activate or deactivate fuzzy matching for glossary
         maches.</para>
 
 		<para>See the <link linkend="dialogs.preferences.glossary"
@@ -71,7 +71,7 @@
 		  </listitem>
 		</itemizedlist>
 
-        <para>Allows you to activate/deactivate fuzzy matching for dictionary
+        <para>Allows you to activate or deactivate fuzzy matching for dictionary
         maches.</para>
 
 		<para>See the <link linkend="dialogs.preferences.dictionary"
@@ -84,7 +84,7 @@
       <term
       id="menus.options.autocompletion.title"><guisubmenu>Auto-Completion</guisubmenu></term>
       <listitem>
-		<para>Select the various options to activate/deactivate them. See the
+		<para>Select the various options to activate or deactivate them. See the
 		<link linkend="dialog.preferences.auto.completion"
 		endterm="dialog.preferences.auto.completion.title"/> preferences for
 		details.</para>

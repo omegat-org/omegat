@@ -9,9 +9,9 @@
   endterm="menus.edit.search.project.title"/> to open a new search window and
   enter the word or phrase you wish to search for in the search field.</para>
   
-  <para>You can have several search windows opened at the same time. Use
+  <para>You can have several search windows opened at the same time. Hit
   <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>F</keycap></keycombo> to
-  call the last search window.</para>
+  reuse the most recent search window.</para>
 
   <para>Alternatively, select a word or phrase in the <link
   linkend="panes.editor" endterm="panes.editor.title"/>, <link
@@ -99,7 +99,7 @@
       <varlistentry id="windows.text.search.methods.exact">
         <term id="windows.text.search.methods.exact.title">Exact search</term>
         <listitem>
-          <para>Search for the string exactly as it was entered in the search
+          <para>Search for the string exactly as entered in the search
           field.</para>
 
 		  <para>It is equivalent to a web search enclosed in quotation marks.</para>
@@ -240,7 +240,7 @@
 		<term>Display: all matching segments</term>
 		<listitem>
 		  <para>Every segment is displayed individually, even if it is a
-		  duplicate found in either the same document or a different document in
+		  repetition found in either the same document or a different document in
 		  the project.</para>
 		</listitem>
 	  </varlistentry>
@@ -248,7 +248,7 @@
 	  <varlistentry>
 		<term>Display: file names</term>
 		<listitem>
-		  <para>The name of the file containing the segment is found is
+		  <para>The name of the file where the segment is found is
 		  displayed above each result.</para>
 		</listitem>
 	  </varlistentry>
@@ -264,27 +264,27 @@
 			<varlistentry>
 			  <term>Memory</term>
 			  <listitem>
-				<para>include the project memory (<link
+				<para>Include the project memory (<link
 				linkend="project.folder.project.save.tmx"
-				endterm="project.folder.project.save.tmx.title"/>)</para>
+				endterm="project.folder.project.save.tmx.title"/>).</para>
 			  </listitem>
 			</varlistentry>
 
 			<varlistentry>
 			  <term>TMs</term>
 			  <listitem>
-				<para>include the translation memories located in the <link
+				<para>Include the translation memories located in the <link
 				linkend="project.folder.tm" endterm="project.folder.tm.title"/>
-				folder</para>
+				folder.</para>
 			  </listitem>
 			</varlistentry>
 
 			<varlistentry>
 			  <term>Glossaries</term>
 			  <listitem>
-				<para>include the glossaries located in the <link
+				<para>Include the glossaries located in the <link
 				linkend="project.folder.glossary"
-				endterm="project.folder.glossary.title"/> folder</para>
+				endterm="project.folder.glossary.title"/> folder.</para>
 			  </listitem>
 			</varlistentry>
 		  </variablelist>
@@ -318,7 +318,7 @@
 			<varlistentry>
 			  <term>Full/Half-width char insensitive</term>
 			  <listitem>
-				<para>returns results that match both the full- and half-width
+				<para>Returns results that match both the full- and half-width
 				forms (CJK characters) of the characters in the search
 				terms.</para>
 			  </listitem>
@@ -327,13 +327,14 @@
 			<varlistentry>
 			  <term>Number of matching segments</term>
 			  <listitem>
-				<para>sets the maximum number of matches displayed in the search
+				<para>Sets the maximum number of matches displayed in the search
 				result area.</para>
 			  </listitem>
 			</varlistentry>
 		  </variablelist>
 
-		  <para>Hide the advanced options with <guibutton>Hide Advanced Options</guibutton></para>
+		  <para>Use the <guibutton>Hide Advanced Options</guibutton> button to stop showing
+			the advanced options.</para>
 		</listitem>
 	  </varlistentry>
 	</variablelist>
@@ -409,11 +410,11 @@
   <section id="windows.text.search.filter">
     <title id="windows.text.search.filter.title">Filter</title>
 
-	<para>Click on <guibutton>Filter</guibutton> to show only the matching
-	search result segments in the <link linkend="panes.editor"
-	endterm="panes.editor.title"/> pane. To remove the filter, click on
-	<guibutton>Remove Filter</guibutton> at the top of the <link
-	linkend="panes.editor" endterm="panes.editor.title"/> pane or reload the
+	<para>Click on the <guibutton>Filter</guibutton> button to show only the 
+	matching search result segments in the <link linkend="panes.editor"
+	endterm="panes.editor.title"/> pane. To remove the filter, click on the
+	<guibutton>Remove Filter</guibutton> button at the top of the <link
+	linkend="panes.editor" endterm="panes.editor.title"/> pane, or reload the
 	project.</para>
   </section>
 </section>

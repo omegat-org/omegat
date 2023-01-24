@@ -112,8 +112,8 @@ public class ProjectProperties {
         setSupportDefaultTranslations(true);
         setRemoveTags(false);
 
-        setSourceLanguage("EN-US");
-        setTargetLanguage("EN-GB");
+        setSourceLanguage("AR-LB");
+        setTargetLanguage("UK-UA");
 
         loadProjectSRX();
         loadProjectFilters();
@@ -219,7 +219,22 @@ public class ProjectProperties {
     public String getTMAutoRoot() {
         return tmDir.getAsString() + OConsts.AUTO_TM + '/';
     }
-
+    
+    /** Returns The Translation Memory (TMX) Files Directory for automatically enforced files. */
+    public String getTMEnforceRoot() {
+        return tmDir.getAsString() + OConsts.AUTO_ENFORCE_TM + '/';
+    }
+    
+    /** Returns The Translation Memory (TMX) Files Directory for machine translation files. */
+    public String getTMMTRoot() {
+        return tmDir.getAsString() + OConsts.MT_TM + '/';
+    }
+    
+    /** Returns The Translation Memory (TMX) Files Directory for files with penalties. */
+    public String getTMPenaltyRoot() {
+        return tmDir.getAsString() + OConsts.PENALTY_TM + '/';
+    }
+    
     public ProjectPath getDictDir() {
         return dictDir;
     }

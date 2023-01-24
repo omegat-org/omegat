@@ -83,8 +83,27 @@ public class GITCredentialsProvider extends CredentialsProvider {
                     "Are you sure you want to continue connecting\\?";
 
     static {
-        // Set up ssh-agent support
-        JSch.setLogger(new JSchCompatLogger());
+        JSch.setLogger(new com.jcraft.jsch.Logger(){
+            public boolean isEnabled(final int level) {
+                return level >= WARN;
+            }
+
+            @Override
+            public void log(final int level, final String message) {
+                if (level > WARN) {
+                    Log.log(message);
+                } else if (level == WARN) {
+                    Log.logWarningRB("TEAM_GIT_SSH_CREDENTIAL_ERROR, message");
+                } else {
+                    Log.logErrorRB("TEAM_GIT_SSH_CREDENTIAL_ERROR", message);
+                }
+            }
+
+            @Override
+            public void log(final int level, final String message, final Throwable cause) {
+                Log.logErrorRB(cause, "TEAM_GIT_SSH_CREDENTIAL_ERROR", message);
+            }
+        });
         JschConfigSessionFactory sessionFactory = new JschConfigSessionFactory() {
 
             /**

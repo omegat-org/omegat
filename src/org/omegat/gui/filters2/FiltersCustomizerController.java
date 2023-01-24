@@ -33,6 +33,7 @@ import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -42,8 +43,12 @@ import java.util.stream.Collectors;
 import javax.swing.JComponent;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
+import javax.swing.RowSorter;
+import javax.swing.SortOrder;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 import org.omegat.core.Core;
 import org.omegat.filters2.IFilter;
@@ -203,8 +208,15 @@ public class FiltersCustomizerController extends BasePreferencesController {
     @Override
     protected void initFromPrefs() {
         editableFilters = isProjectSpecific && projectFilters != null
-                ? FilterMaster.cloneConfig(projectFilters) : FilterMaster.cloneConfig(userFilters);
+                ? FilterMaster.cloneConfig(projectFilters)
+                : FilterMaster.cloneConfig(userFilters);
         panel.filtersTable.setModel(new FiltersTableModel(editableFilters));
+        TableRowSorter<TableModel> sorter = new TableRowSorter<>(panel.filtersTable.getModel());
+        panel.filtersTable.setRowSorter(sorter);
+        List<RowSorter.SortKey> sortkeys = new ArrayList<>();
+        sortkeys.add(new RowSorter.SortKey(1, SortOrder.DESCENDING));
+        sortkeys.add(new RowSorter.SortKey(0, SortOrder.ASCENDING));
+        sorter.setSortKeys(sortkeys);
         if (isProjectSpecific) {
             panel.projectSpecificCB.setSelected(projectFilters != null);
         }

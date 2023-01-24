@@ -182,7 +182,7 @@
     <Component class="javax.swing.JCheckBox" name="convertNumbers">
       <Properties>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="org/omegat/Bundle.properties" key="WF_OPTION_CONVERT_NUMBERS" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+          <ResourceString bundle="org/omegat/Bundle.properties" key="WF_OPTION_REPLACE_NUMBERS" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
         </Property>
       </Properties>
       <AuxValues>

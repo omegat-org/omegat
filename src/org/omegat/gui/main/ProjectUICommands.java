@@ -34,7 +34,9 @@
 
 package org.omegat.gui.main;
 
+import java.awt.BorderLayout;
 import java.awt.Cursor;
+import java.awt.Dimension;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -44,8 +46,11 @@ import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 
+import javax.swing.JDialog;
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JProgressBar;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 
@@ -67,7 +72,6 @@ import org.omegat.core.spellchecker.ISpellChecker;
 import org.omegat.core.team2.IRemoteRepository2;
 import org.omegat.core.team2.RemoteRepositoryProvider;
 import org.omegat.filters2.master.FilterMaster;
-import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.dialogs.ChooseMedProject;
 import org.omegat.gui.dialogs.FileCollisionDialog;
 import org.omegat.gui.dialogs.NewProjectFileChooser;
@@ -1348,50 +1352,82 @@ public final class ProjectUICommands {
 
         SegmentExportImport.flushExportedSegments();
 
-        new SwingWorker<Void, Void>() {
-            @Override
-            protected Void doInBackground() throws Exception {
-                if (Core.getProject().isProjectLoaded()) {
-                    // Save the list of learned and ignore words
-                    ISpellChecker sc = Core.getSpellChecker();
-                    sc.saveWordLists();
-                    try {
-                        Core.executeExclusively(true, () -> {
-                            Core.getProject().saveProject(true);
-                            ProjectFactory.closeProject();
-                        });
-                    } catch (KnownException ex) {
-                        // hide exception on shutdown
-                    }
-                }
+        JDialog progressDialog = new JDialog();
+        final JProgressBar progressBar = new JProgressBar(0, 100);
+        progressBar.setMaximumSize(new Dimension(280, 50));
+        progressDialog.setTitle(OStrings.getString("SAVE_AND_EXIT_CONFIRM_DIALOG_TITLE"));
+        progressDialog.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+        progressDialog.setLayout(new BorderLayout());
+        JLabel label = new JLabel(OStrings.getString("MW_SAVE_QUIT_CONFIRM"));
+        progressDialog.add(label, BorderLayout.NORTH);
+        progressDialog.add(progressBar, BorderLayout.SOUTH);
+        progressDialog.setSize(300, 150);
+        progressDialog.setLocationRelativeTo(Core.getMainWindow().getApplicationFrame());
 
-                CoreEvents.fireApplicationShutdown();
-
-                PluginUtils.unloadPlugins();
-
-                return null;
+        SaveTask task;
+        if (restart) {
+            task = new SaveTask(progressDialog, ()->Main.restartGUI(projectDir));
+        } else {
+            task = new SaveTask(progressDialog, ()->System.exit(0));
+        }
+        task.addPropertyChangeListener(evt -> {
+            if ("progress".equals(evt.getPropertyName())) {
+                progressBar.setValue((Integer)evt.getNewValue());
             }
+        });
+        task.execute();
+    }
 
-            @Override
-            protected void done() {
+    private static class SaveTask extends SwingWorker<Void, Void> {
+
+        private final JDialog dialog;
+        private final Runnable onComplete;
+
+        public SaveTask(final JDialog dialog, Runnable onComplete) {
+            this.dialog = dialog;
+            this.onComplete = onComplete;
+        }
+
+        @Override
+        protected Void doInBackground() throws Exception {
+            SwingUtilities.invokeLater(() -> dialog.setVisible(true));
+
+            if (Core.getProject().isProjectLoaded()) {
+                // Save the list of learned and ignore words
+                ISpellChecker sc = Core.getSpellChecker();
+                sc.saveWordLists();
+                setProgress(20);
                 try {
-                    get();
-
-                    MainWindowUI.saveScreenLayout();
-
-                    Preferences.save();
-
-                    if (restart) {
-                        Main.restartGUI(projectDir);
-                    } else {
-                        System.exit(0);
-                    }
-                } catch (Exception ex) {
-                    Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
-                    Core.getMainWindow().displayErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
+                    Core.executeExclusively(true, () -> {
+                        Core.getProject().saveProject(true);
+                        setProgress(60);
+                        ProjectFactory.closeProject();
+                    });
+                } catch (KnownException ex) {
+                    // hide exception on shutdown
                 }
             }
-        }.execute();
+            setProgress(90);
+            Thread.sleep(1000);
+            return null;
+        }
+
+        @Override
+        protected void done() {
+            try {
+                get();
+
+                MainWindowUI.saveScreenLayout();
+                Preferences.save();
+
+                onComplete.run();
+            } catch (Exception ex) {
+                Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
+                Core.getMainWindow().displayErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
+            }
+            dialog.setVisible(false);
+            dialog.dispose();
+        }
     }
 
     private static boolean ensureProjectDir(File dir) {

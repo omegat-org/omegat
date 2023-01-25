@@ -2,7 +2,7 @@
  OmegaT 5.8.0
 ----------------------------------------------------------------------
   22 Enhancements
-  25 Bug fixes
+  26 Bug fixes
   9 Localisation updates
 ----------------------------------------------------------------------
 5.8.0 vs 5.7.1
@@ -77,6 +77,9 @@
   https://sourceforge.net/p/omegat/feature-requests/1603/
 
   Bug fixes:
+
+  - Fix context-bound matches in TMX that were ignored in /tm/auto
+  https://sourceforge.net/p/omegat/bugs/1140/
 
   - Font Rendering issue in OmegaT (Santali)
   https://sourceforge.net/p/omegat/bugs/1133/

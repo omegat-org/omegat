@@ -74,9 +74,21 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
     /** Creates a new instance of XMLFilter */
     public XMLFilter(XMLDialect dialect) {
         parserFactory = SAXParserFactory.newInstance();
-        // parserFactory.setValidating(false);
         try {
+            // We validate XML in default
             parserFactory.setFeature("http://xml.org/sax/features/validation", true);
+            // When driver writer want not to validate please override and set features false.
+            // ex. parserFactory.setValidating(false);
+
+            // Protecting from a XXE attack.
+            // We try to avoid internet connection to validate with external DTD.
+            parserFactory.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
+            // Disable external general entities
+            parserFactory.setFeature("http://xml.org/sax/features/external-general-entities", false);
+            // Disable external parameter entities
+            parserFactory.setFeature("http://xml.org/sax/features/external-parameter-entities", false);
+            // Disable XInclude
+            parserFactory.setXIncludeAware(false);
         } catch (Exception ignored) {
         }
         this.dialect = dialect;

@@ -99,6 +99,11 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
         return dialect;
     }
 
+    protected void setSAXFeature(String feature, boolean b) throws SAXNotSupportedException,
+            SAXNotRecognizedException, ParserConfigurationException {
+        parserFactory.setFeature(feature, b);
+    }
+
     /** Detected encoding of the input XML file. */
     private String encoding;
 
@@ -134,7 +139,7 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
      *            The target file.
      * @param outEncoding
      *            Encoding of the target file, if the filter supports it.
-     *            Otherwise null.
+     *            Otherwise, null.
      * @return The writer for the target file.
      *
      * @throws UnsupportedEncodingException

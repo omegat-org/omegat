@@ -101,7 +101,8 @@
 
     <varlistentry id="menus.goto.next.note">
       <term id="menus.goto.next.note.title"><guimenuitem>Next
-      Note</guimenuitem></term>
+      Note</guimenuitem>
+      <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>↓</keycap></keycombo></term>
       <listitem>
 		<para>Moves to the next segment with a note.</para>
       </listitem>
@@ -109,7 +110,8 @@
 
     <varlistentry id="menus.goto.previous.note">
       <term id="menus.goto.previous.note.title"><guimenuitem>Previous
-      Note</guimenuitem></term>
+      Note</guimenuitem>
+      <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>↑</keycap></keycombo></term>
       <listitem>
 		<para>Moves to the previous segment with a note.</para>
       </listitem>

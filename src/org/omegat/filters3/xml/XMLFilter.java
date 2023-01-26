@@ -38,6 +38,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.xml.XMLConstants;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
@@ -45,12 +46,15 @@ import javax.xml.parsers.SAXParserFactory;
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
+import org.xml.sax.SAXNotRecognizedException;
+import org.xml.sax.SAXNotSupportedException;
 
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.TranslationException;
 import org.omegat.util.Language;
+import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.PatternConsts;
 
@@ -78,18 +82,24 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
             // We validate XML in default
             parserFactory.setFeature("http://xml.org/sax/features/validation", true);
             // When driver writer want not to validate please override and set features false.
-            // ex. parserFactory.setValidating(false);
+            // ex. setSAXFeature("http://xml.org/sax/features/validation", false);
 
             // Protecting from a XXE attack.
-            // We try to avoid internet connection to validate with external DTD.
+
+            // "Feature for Secure Processing (FSP)" is the central mechanism to
+            // help safeguard XML processing. It instructs XML processors, such as parsers,
+            // validators, and transformers, to try and process XML securely.
+            parserFactory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
+            // Avoid internet connection to validate with external DTD.
             parserFactory.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
             // Disable external general entities
             parserFactory.setFeature("http://xml.org/sax/features/external-general-entities", false);
             // Disable external parameter entities
             parserFactory.setFeature("http://xml.org/sax/features/external-parameter-entities", false);
-            // Disable XInclude
+            // as well, per Timothy Morgan's 2014 paper: "XML Schema, DTD, and Entity Attacks"
             parserFactory.setXIncludeAware(false);
-        } catch (Exception ignored) {
+        } catch (Exception ex) {
+            Log.log(ex.getMessage());
         }
         this.dialect = dialect;
     }

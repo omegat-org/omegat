@@ -161,7 +161,7 @@
       <listitem>
         <para>Exports the current selection to a text file for processing. If no
         text has been selected, the current source segment is written to this
-        file. To remain consistent with usual clipboard behavior this file is
+        file. To remain consistent with usual clipboard behaviour this file is
         not emptied when the user exits OmegaT. The exported contents are copied
         to the <link
         linkend="configuration.folder.default.contents.script.selection.title"

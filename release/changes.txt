@@ -1,13 +1,17 @@
 ----------------------------------------------------------------------
  OmegaT 5.8.0
 ----------------------------------------------------------------------
-  22 Enhancements
+  23 Enhancements
   26 Bug fixes
   9 Localisation updates
 ----------------------------------------------------------------------
 5.8.0 vs 5.7.1
 
   Implemented requests:
+
+  - Can share authentication between Git or SVN repositories 
+which are in the same server
+  https://sourceforge.net/p/omegat/feature-requests/1670
 
   - Font settings in Aligner
   https://sourceforge.net/p/omegat/feature-requests/1360

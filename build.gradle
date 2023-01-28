@@ -762,8 +762,6 @@ ext.makeJaxbTask = { args ->
     genJAXB.dependsOn taskName
 }
 
-makeJaxbTask(name: 'segmentation', outdir: 'src/gen/core/segmentation',
-             args: ['-no-header', '-d', 'src', '-p', 'gen.core.segmentation', 'src/schemas/srx20.xsd'])
 makeJaxbTask(name: 'filters', outdir: 'src/gen/core/filters',
              args: ['-no-header', '-d', 'src', '-p', 'gen.core.filters', 'src/schemas/filters.xsd'])
 makeJaxbTask(name: 'project', outdir: 'src/gen/core/project',

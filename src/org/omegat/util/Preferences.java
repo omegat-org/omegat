@@ -221,6 +221,8 @@ public final class Preferences {
 
     /** Workflow Option: Don't Insert Source Text Into Translated Segment */
     public static final String DONT_INSERT_SOURCE_TEXT = "wf_noSourceText";
+    // false: insert source / true: empty
+
     /** Workflow Option: Allow translation to be equal to source */
     public static final String ALLOW_TRANS_EQUAL_TO_SRC = "wf_allowTransEqualToSrc";
     /** Workflow Option: Insert Best Match Into Translated Segment */

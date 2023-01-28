@@ -66,9 +66,11 @@ public class HTMLFilter2Test extends TestFilterBase {
         HTMLFilter2 filter = new HTMLFilter2();
         translateText(filter, "test/data/filters/html/file-HTMLFilter2.html");
         translateText(filter, "test/data/filters/html/file-HTMLFilter2-SMP.html");
+        translateText(filter, "test/data/filters/html/file-HTMLFilter2-all-block-elements.html");
         translateText(filter, "test/data/filters/html/file-HTMLFilter2-recurse-bugfix-SF205.html");
         translateText(filter, "test/data/filters/html/file-HTMLFilter2-tag-dropping-bugfix-SF609.html");
-        translateText(filter, "test/data/filters/html/file-HTMLFilter2-all-block-elements.html");
+        translateText(filter, "test/data/filters/html/file-HTMLFilter2-tag-dropping-bugfix-SF613.html");
+        translateText(filter, "test/data/filters/html/file-HTMLFilter2-tag-dropping-bugfix-SF873.html");
     }
 
     @Test

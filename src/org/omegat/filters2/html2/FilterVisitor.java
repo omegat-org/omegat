@@ -176,8 +176,8 @@ public class FilterVisitor extends NodeVisitor {
                 recurseChildren = false;
             }
         } else {
-            if (isParagraphTag(tag) && isTextUpForCollection) {
-                endup();
+            if (isParagraphTag(tag)) {
+                handleParagraphTag();
             }
             if (isPreformattingTag(tag)) {
                 preformatting = true;
@@ -246,6 +246,13 @@ public class FilterVisitor extends NodeVisitor {
      */
     private boolean hasAnEndTag(Tag tag) {
         return tag.getEndTag() != null;
+    }
+
+    private void handleParagraphTag() {
+        recurseChildren = true;
+        if (isTextUpForCollection) {
+            endup();
+        }
     }
 
     /**

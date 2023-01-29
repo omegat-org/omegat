@@ -254,6 +254,16 @@
 	files, set the various options, and click on <guibutton>OK</guibutton> to
 	continue.</para>
 
+	<warning>
+	  <para>The target language code that you select here and the spellchecking
+	  dictionary name need to correspond for the spellchecker to properly verify
+	  your spelling.</para>
+
+	  <para>See the <link linkend="introduction.install.spellchecker.dictionary"
+	  endterm="introduction.install.spellchecker.dictionary.title"/> section
+	  below for details.</para>
+	</warning>
+
     <para>Use <link linkend="menus.project" endterm="menus.project.title"/><link
     linkend="menus.project.properties"
     endterm="menus.project.properties.title"/> to come back to this dialog after
@@ -290,6 +300,77 @@
 	plugins or convert the file to a format that is supported. See the <link
 	linkend="how.to.translate.other.files"
 	endterm="how.to.translate.other.files.title"/> how-to for details.</para>
+  </section>
+
+  <section id="introduction.install.spellchecker.dictionary">
+	<title id="introduction.install.spellchecker.dictionary.title">Spellchecking
+	dictionaries</title>
+
+	<para>Omegat provides you with a spellchecking system but not with the
+	dictionaries that are required to actually spellcheck your
+	translations. You need to install them now.</para>
+
+	<para>Use the <link linkend="dialog.preferences.spellchecker"
+	endterm="dialog.preferences.spellchecker.title"/> section in the general
+	<link linkend="chapter.dialogs.preferences"
+	endterm="chapter.dialogs.preferences.title"/> dialog to access the
+	spellchecking preferences.</para>
+
+	<orderedlist>
+	  <listitem>
+		<para>Click on the <link
+		linkend="dialog.preferences.spellchecker.install.new"
+		endterm="dialog.preferences.spellchecker.install.new.title"/> button to
+		display a list of the dictionaries available at the URL specified in the
+		field above.</para>
+	  </listitem>
+	  <listitem>
+		<para>Select as many dictionaries as you want and click on the
+		<guibutton>Install</guibutton> button. OmegaT will need some time to
+		download them from the specified URL and copy them to the spellchecking
+		dictionaries location specified at the top of the dialog (by default,
+		the <link linkend="configuration.folder">configuration</link>
+		folder).</para>
+	  </listitem>
+	  <listitem>
+		<para>Click on the <guibutton>Close</guibutton> button. OmegaT will
+		display the installed dictionaries as a list.</para>
+	  </listitem>
+	</orderedlist>
+
+	<warning>
+	  <para>OmegaT does not automatically recognise languages. If the
+	  dictionary name does not correspond to the target language code, OmegaT
+	  will not use the dictionary.</para>
+	</warning>
+
+	<example>
+	  <title>Project target language code and spellchecking dictionary
+	  name</title>
+	  <para>If the project target language is <emphasis
+	  role="bold">fr</emphasis> and the dictionary name is <emphasis
+	  role="bold">fr_fr</emphasis> or <emphasis role="bold">fr-fr</emphasis>,
+	  adapt either name by doing the following:</para>
+
+	  <itemizedlist>
+		<listitem>
+		  <para>either use <link linkend="menus.project"
+		  endterm="menus.project.title"/><link
+		  linkend="menus.project.properties"
+		  endterm="menus.project.properties.title"/> to change the project
+		  target language to <emphasis role="bold">fr-fr</emphasis>,</para>
+		</listitem>
+		<listitem>
+		  <para>or use <link linkend="menus.options"
+		  endterm="menus.options.title"/><link
+		  linkend="menus.options.access.configuration.folder"
+		  endterm="menus.options.access.configuration.folder.title"/> to enter
+		  the <link linkend="configuration.folder">configuration</link> folder
+		  and change the dictionary files names to <emphasis
+		  role="bold">fr</emphasis>.</para>
+		</listitem>
+	  </itemizedlist>
+	  </example>
   </section>
 
   <section id="introduction.manage.your.segments">

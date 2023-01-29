@@ -696,8 +696,8 @@
 
 	  <varlistentry id="dialog.preferences.spellchecker.install.new">
 		<term
-		id="dialog.preferences.spellchecker.install.new.title"><option>Install
-		new language...</option></term>
+		id="dialog.preferences.spellchecker.install.new.title"><guibutton>Install
+		new language...</guibutton></term>
 		<listitem>
 		  <para>Displays the list of available dictionaries from the above
 		  URL.</para>

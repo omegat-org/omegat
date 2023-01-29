@@ -13,6 +13,11 @@
     </abstract>
   </bookinfo>
 
+  <article>
+	<title>10 shortcuts to remember</title>
+	<para>stuff</para>
+  </article>
+  
   <xi:include href="Introduction.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
 

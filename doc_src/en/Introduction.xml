@@ -130,11 +130,20 @@
 
 	<variablelist>
 	  <varlistentry>
-		<term>Menu items</term>
+		<term>Menu items that are assigned a default shortcut</term>
 		<listitem>
 		  <para>Use <link linkend="menus.project"
 		  endterm="menus.project.title"/><link linkend="menus.project.new"
 		  endterm="menus.project.new.title"/>.</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry>
+		<term>Menu items that are not assigned a default shortcut</term>
+		<listitem>
+		  <para>Use <link linkend="menus.project"
+		  endterm="menus.project.title"/><link linkend="menus.project.copy.files.to.source.folder"
+		  endterm="menus.project.copy.files.to.source.folder.title"/>.</para>
 		</listitem>
 	  </varlistentry>
 

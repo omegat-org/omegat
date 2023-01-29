@@ -864,10 +864,10 @@
 	  matches from 2 to 5 is more suitable.</para>
 
 	  <para>Some segments will require further modification later on, so you use
-	  <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>N</keycap></keycombo>
+	  <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>9</keycap></keycombo>
 	  to enter the Notes pane, leave yourself a note and come back to the Editor
 	  pane with
-	  <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>E</keycap></keycombo>.</para>
+	  <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>0</keycap></keycombo>.</para>
 	  
 	  <para>By the time you get near the end of the section, you have also used
 	  <keycombo><keycap>C</keycap><keycap>R</keycap></keycombo> once or twice to

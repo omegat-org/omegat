@@ -202,7 +202,8 @@ public class FiltersCustomizerController extends BasePreferencesController {
     }
 
     private Filter getFilterAtRow(int row) {
-        return ((FiltersTableModel) panel.filtersTable.getModel()).getFilterAtRow(row);
+        return ((FiltersTableModel) panel.filtersTable.getModel())
+                .getFilterAtRow(panel.filtersTable.convertRowIndexToModel(row));
     }
 
     @Override

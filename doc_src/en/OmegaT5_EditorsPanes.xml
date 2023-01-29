@@ -4,6 +4,80 @@
 <chapter id="chapter.panes">
   <title id="chapter.panes.title">Panes</title>
 
+  <section id="panes.default.layout">
+	<title id="panes.default.layout.title">Default layout</title>
+
+	<para>The first time you start OmegaT, the main window displays the
+	following default layout:</para>
+
+		<figure id="default.omegat.layout">
+      <title id="default.omegat.layout.title">Default OmegaT layout on
+      macOS</title>
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/defaultOmegaTLayout.png"/>
+        </imageobject>
+        <imageobject role="fo">
+          <imagedata fileref="images/defaultOmegaTLayout.png" width="60%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+	<orderedlist>
+	  <listitem>
+		<para>The <link linkend="panes.editor" endterm="panes.editor.title"/>
+		pane </para>
+	  </listitem>
+	  <listitem>
+		<para>The <link linkend="panes.notes" endterm="panes.notes.title"/>
+		pane</para>
+	  </listitem>
+	  <listitem>
+		<para>The <link linkend="panes.fuzzy.matches"
+		endterm="panes.fuzzy.matches.title"/> pane</para>
+	  </listitem>
+	  <listitem>
+		<para>The <link linkend="panes.glossary"
+		endterm="panes.glossary.title"/> pane</para>
+	  </listitem>
+	  <listitem>
+		<para>The <link linkend="panes.segment.properties"
+		endterm="panes.segment.properties.title"/> pane</para>
+	  </listitem>
+	  <listitem>
+		<para>The <link linkend="panes.comments"
+		endterm="panes.comments.title"/> pane</para>
+	  </listitem>
+	  <listitem>
+		<para>The <link linkend="panes.multipletranslations"
+		endterm="panes.multipletranslations.title"/> pane</para>
+	  </listitem>
+	  <listitem>
+		<para> The <link linkend="panes.dictionary"
+		endterm="panes.dictionary.title"/> and <link
+		linkend="panes.machinetranslation"
+		endterm="panes.machinetranslation.title"/> panes are docked</para>
+	  </listitem>
+	  <listitem>
+		<para>The <link linkend="panes.statusbar"
+		endterm="panes.statusbar.title"/> (on the right), which contains
+		project information</para>
+	  </listitem>
+	</orderedlist>
+	
+	<para>Use the various options in the <link linkend="menus.view"
+	endterm="menus.view.title"/> menu and move the various <link
+	linkend="chapter.panes">panes</link> around to obtain the layout that fits
+	your workflow best.</para>
+
+	<warning>
+	  <para>Use <link linkend="menus.view" endterm="menus.view.title"/><link
+	  linkend="menus.view.restore.main.window"
+	  endterm="menus.view.restore.main.window.title"/> when you run into
+	  problems while rearranging the window layout.</para>
+	</warning>
+  </section>
+
   <section id="panes.principles">
     <title id="panes.principles.title">Principles</title>
 

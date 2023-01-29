@@ -243,7 +243,7 @@
 	linkend="menus.project.new" endterm="menus.project.new.title"/>, and select
 	an empty folder or create a new one with the name of your project.</para>
 
-    <para>An OmegaT project is simply a set of folders and folders that holds
+    <para>An OmegaT project is simply a set of folders that holds
     all your default resources.</para>
 
     <para>The <link linkend="dialogs.project.properties"

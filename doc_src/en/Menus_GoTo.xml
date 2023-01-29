@@ -102,7 +102,7 @@
     <varlistentry id="menus.goto.next.note">
       <term id="menus.goto.next.note.title"><guimenuitem>Next
       Note</guimenuitem>
-      <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>↓</keycap></keycombo></term>
+      <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>N</keycap></keycombo></term>
       <listitem>
 		<para>Moves to the next segment with a note.</para>
       </listitem>
@@ -111,7 +111,7 @@
     <varlistentry id="menus.goto.previous.note">
       <term id="menus.goto.previous.note.title"><guimenuitem>Previous
       Note</guimenuitem>
-      <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>↑</keycap></keycombo></term>
+      <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>P</keycap></keycombo></term>
       <listitem>
 		<para>Moves to the previous segment with a note.</para>
       </listitem>
@@ -223,7 +223,7 @@
 
     <varlistentry id="menus.goto.notes.pane">
       <term id="menus.goto.notes.pane.title"><guimenuitem>Notes Pane</guimenuitem>
-	  <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>N</keycap></keycombo></term>
+	  <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>9</keycap></keycombo></term>
       <listitem>
         <para>Enter the <link linkend="panes.notes"
         endterm="panes.notes.title"/> pane to write or modify a note associated
@@ -234,7 +234,7 @@
     <varlistentry id="menus.goto.editor.pane">
       <term id="menus.goto.editor.pane.title"><guimenuitem>Editor
       Pane</guimenuitem>
-      <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>E</keycap></keycombo></term>
+      <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>0</keycap></keycombo></term>
       <listitem>
         <para>Enter the <link linkend="panes.editor"
         endterm="panes.editor.title"/> pane to proceed with your

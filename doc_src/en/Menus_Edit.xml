@@ -318,6 +318,12 @@
 		  <listitem>
 			<para><guimenuitem>Cycle</guimenuitem>
 			<keycombo><keycap>S</keycap><keycap>F3</keycap></keycombo></para>
+			<warning>
+			  <para>The <keycombo><keycap>F3</keycap></keycombo> key on macOS
+			  enables the <emphasis role="bold">overwrite</emphasis> mode in the
+			  editor. See <link linkend="panes.editor.overwriting"
+			  endterm="panes.editor.overwriting.title"/> for details.</para>
+			</warning>
 		  </listitem>
 		</itemizedlist>
 	  </listitem>

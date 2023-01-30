@@ -73,7 +73,7 @@
 	<warning>
 	  <para>Use <link linkend="menus.view" endterm="menus.view.title"/><link
 	  linkend="menus.view.restore.main.window"
-	  endterm="menus.view.restore.main.window.title"/> when you run into
+	  endterm="menus.view.restore.main.window.title"/> if you run into
 	  problems while rearranging the window layout.</para>
 	</warning>
   </section>

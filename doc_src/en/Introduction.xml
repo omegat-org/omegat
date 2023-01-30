@@ -130,7 +130,7 @@
 
 	<variablelist>
 	  <varlistentry>
-		<term>Menu items that are assigned a default shortcut</term>
+		<term>Menu items with a default shortcut</term>
 		<listitem>
 		  <para>Use <link linkend="menus.project"
 		  endterm="menus.project.title"/><link linkend="menus.project.new"
@@ -139,7 +139,7 @@
 	  </varlistentry>
 
 	  <varlistentry>
-		<term>Menu items that are not assigned a default shortcut</term>
+		<term>Menu items with no default shortcut</term>
 		<listitem>
 		  <para>Use <link linkend="menus.project"
 		  endterm="menus.project.title"/><link linkend="menus.project.copy.files.to.source.folder"
@@ -255,9 +255,9 @@
 	continue.</para>
 
 	<warning>
-	  <para>The target language code that you select here and the spellchecking
-	  dictionary name need to correspond for the spellchecker to properly verify
-	  your spelling.</para>
+	  <para>The target language code selected here and the name of the 
+	  spellchecking dictionary name must match for the spellchecker to properly
+	  verify your spelling.</para>
 
 	  <para>See the <link linkend="introduction.install.spellchecker.dictionary"
 	  endterm="introduction.install.spellchecker.dictionary.title"/> section
@@ -306,9 +306,9 @@
 	<title id="introduction.install.spellchecker.dictionary.title">Spellchecking
 	dictionaries</title>
 
-	<para>Omegat provides you with a spellchecking system but not with the
-	dictionaries that are required to actually spellcheck your
-	translations. You need to install them now.</para>
+	<para>Omegat provides a spellchecking system, but does not come with the
+	dictionaries required to actually spellcheck your translations.
+	You need to install the dictionaries you need yourself.</para>
 
 	<para>Use the <link linkend="dialog.preferences.spellchecker"
 	endterm="dialog.preferences.spellchecker.title"/> section in the general
@@ -321,27 +321,27 @@
 		<para>Click on the <link
 		linkend="dialog.preferences.spellchecker.install.new"
 		endterm="dialog.preferences.spellchecker.install.new.title"/> button to
-		display a list of the dictionaries available at the URL specified in the
-		field above.</para>
+		display a list of dictionaries available at the URL in the <guilabel>URL of
+		downloadable spellchecking dictionaries</guilabel> field above that
+		button.</para>
 	  </listitem>
 	  <listitem>
-		<para>Select as many dictionaries as you want and click on the
-		<guibutton>Install</guibutton> button. OmegaT will need some time to
-		download them from the specified URL and copy them to the spellchecking
-		dictionaries location specified at the top of the dialog (by default,
-		the <link linkend="configuration.folder">configuration</link>
-		folder).</para>
+		<para>Select as many dictionaries as you want and click the
+		<guibutton>Install</guibutton> button. OmegaT will download them
+		and copy them to the spellchecking dictionaries location specified
+		at the top of the dialog (the
+		<link linkend="configuration.folder">configuration</link>
+		folder by default). This operation may take some time.</para>
 	  </listitem>
 	  <listitem>
-		<para>Click on the <guibutton>Close</guibutton> button. OmegaT will
-		display the installed dictionaries as a list.</para>
+		<para>Click the <guibutton>Close</guibutton> button. OmegaT will
+		display a list of the installed dictionaries.</para>
 	  </listitem>
 	</orderedlist>
 
 	<warning>
-	  <para>OmegaT does not automatically recognise languages. If the
-	  dictionary name does not correspond to the target language code, OmegaT
-	  will not use the dictionary.</para>
+	  <para>OmegaT does not recognize languages automatically, and only uses
+		a dictionary if its name matches the target language code.</para>
 	</warning>
 
 	<example>
@@ -350,23 +350,23 @@
 	  <para>If the project target language is <emphasis
 	  role="bold">fr</emphasis> and the dictionary name is <emphasis
 	  role="bold">fr_fr</emphasis> or <emphasis role="bold">fr-fr</emphasis>,
-	  adapt either name by doing the following:</para>
+	  you can either:</para>
 
 	  <itemizedlist>
 		<listitem>
-		  <para>either use <link linkend="menus.project"
+		  <para>use <link linkend="menus.project"
 		  endterm="menus.project.title"/><link
 		  linkend="menus.project.properties"
 		  endterm="menus.project.properties.title"/> to change the project
-		  target language to <emphasis role="bold">fr-fr</emphasis>,</para>
+		  target language to <emphasis role="bold">fr-fr</emphasis>, or</para>
 		</listitem>
 		<listitem>
-		  <para>or use <link linkend="menus.options"
+		  <para>use <link linkend="menus.options"
 		  endterm="menus.options.title"/><link
 		  linkend="menus.options.access.configuration.folder"
-		  endterm="menus.options.access.configuration.folder.title"/> to enter
+		  endterm="menus.options.access.configuration.folder.title"/> to access
 		  the <link linkend="configuration.folder">configuration</link> folder
-		  and change the dictionary files names to <emphasis
+		  and change the dictionary file names to <emphasis
 		  role="bold">fr</emphasis>.</para>
 		</listitem>
 	  </itemizedlist>

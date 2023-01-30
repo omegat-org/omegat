@@ -75,7 +75,10 @@ public class EditorSettings implements IEditorSettings {
     public static final String DISPLAY_MODIFICATION_INFO_SELECTED = "selected";
     public static final String DISPLAY_MODIFICATION_INFO_ALL = "all";
 
-    public static final boolean MARK_NON_UNIQUE_SEGMENTS_DEFAULT = true;
+    private static final boolean MARK_NON_UNIQUE_SEGMENTS_DEFAULT = true;
+    private static final boolean MARK_PARA_DELIMITATIONS_DEFAULT = true;
+    private static final boolean MARK_AUTOPOPULATED_DEFAULT = true;
+    private static final boolean MARK_GLOSSARY_MATCHES_DEFAULT = true;
 
     protected EditorSettings(final EditorController parent) {
         this.parent = parent;
@@ -90,14 +93,14 @@ public class EditorSettings implements IEditorSettings {
         markNoted = Preferences.isPreference(Preferences.MARK_NOTED_SEGMENTS);
         markNBSP  = Preferences.isPreference(Preferences.MARK_NBSP);
         markParagraphDelimitations = Preferences.isPreferenceDefault(Preferences.MARK_PARA_DELIMITATIONS,
-                Preferences.MARK_PARA_DELIMITATIONS_DEFAULT);
+                MARK_PARA_DELIMITATIONS_DEFAULT);
         markWhitespace  = Preferences.isPreference(Preferences.MARK_WHITESPACE);
         markBidi  = Preferences.isPreference(Preferences.MARK_BIDI);
         displayModificationInfo = Preferences.getPreferenceDefault(Preferences.DISPLAY_MODIFICATION_INFO,
                 DISPLAY_MODIFICATION_INFO_SELECTED);
         autoSpellChecking = Preferences.isPreference(Preferences.ALLOW_AUTO_SPELLCHECKING);
         markAutoPopulated = Preferences.isPreferenceDefault(Preferences.MARK_AUTOPOPULATED,
-                Preferences.MARK_AUTOPOPULATED_DEFAULT);
+                MARK_AUTOPOPULATED_DEFAULT);
 
         // options from preferences 'view' pane
         viewSourceBold = Preferences.isPreferenceDefault(Preferences.VIEW_OPTION_SOURCE_ALL_BOLD,
@@ -478,7 +481,7 @@ public class EditorSettings implements IEditorSettings {
      *            is it a source segment or a target segment
      * @param isPlaceholder
      *            is it for a placeholder (OmegaT tag or sprintf-variable etc.) or regular text inside the segment?
-     * @param isremovetext
+     * @param isRemoveText
      *            is it text that should be removed from translation?
      * @param duplicate
      *            is the sourceTextEntry a duplicate or not? values: DUPLICATE.NONE, DUPLICATE.FIRST or DUPLICATE.NEXT.

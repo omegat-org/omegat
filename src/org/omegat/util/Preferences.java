@@ -207,7 +207,6 @@ public final class Preferences {
 
     /** Mark paragraphs starts */
     public static final String MARK_PARA_DELIMITATIONS = "mark_para_delimitation";
-    public static final boolean MARK_PARA_DELIMITATIONS_DEFAULT = true;
     public static final String MARK_PARA_TEXT = "mark_para_delimitation_text";
     /** Default paragraph delimitation indicator */
     public static final String MARK_PARA_TEXT_DEFAULT = "\u2014 \u00b6 \u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014";
@@ -216,7 +215,7 @@ public final class Preferences {
     public static final String MARK_TRANSLATED_SEGMENTS = "mark_translated_segments";
 
     public static final String MARK_AUTOPOPULATED = "mark_autopopulated";
-    
+
     /** Mark the untranslated segments with a different color */
     public static final String MARK_UNTRANSLATED_SEGMENTS = "mark_untranslated_segments";
 
@@ -343,7 +342,7 @@ public final class Preferences {
      * mark unique segments
      */
     public static final String MARK_NON_UNIQUE_SEGMENTS = "mark_non_unique_segments";
-    
+
     /**
      * display modification info (author and modification date)
      */

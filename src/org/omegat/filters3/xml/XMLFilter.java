@@ -184,8 +184,10 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
             parser.setProperty("http://xml.org/sax/properties/lexical-handler", handler);
             parser.setProperty("http://xml.org/sax/properties/declaration-handler", handler);
             parser.parse(source, handler);
-        } catch (ParserConfigurationException | SAXException e) {
+        } catch (ParserConfigurationException e) {
             throw new TranslationException(e);
+        } catch (SAXException e) {
+            throw new TranslationException(e.getMessage());
         }
     }
 

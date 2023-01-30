@@ -1187,6 +1187,8 @@ public class RealProject implements IProject {
                 .stream().sorted(StreamUtil.comparatorByList(getSourceFilesOrder()))
                 .collect(Collectors.toList());
 
+        List<String> errorSrcList = new ArrayList<>();
+
         for (String filepath : srcPathList) {
             Core.getMainWindow().showStatusMessageRB("CT_LOAD_FILE_MX", filepath);
 
@@ -1227,12 +1229,17 @@ public class RealProject implements IProject {
                 // ignore failed file and continue loading next.
                 Log.logErrorRB("TF_SOURCE_LOAD_ERROR", e.getLocalizedMessage());
                 Core.getMainWindow().displayErrorRB(e, "TF_SOURCE_LOAD_ERROR", filepath);
+                errorSrcList.add(filepath);
             }
         }
 
         findNonUniqueSegments();
 
-        Core.getMainWindow().showStatusMessageRB("CT_LOAD_SRC_COMPLETE");
+        if (errorSrcList.size() > 0) {
+            Core.getMainWindow().showStatusMessageRB("CT_LOAD_SRC_SKIP_FILES");
+        } else {
+            Core.getMainWindow().showStatusMessageRB("CT_LOAD_SRC_COMPLETE");
+        }
         long en = System.currentTimeMillis();
         Log.log("Load project source files: " + (en - st) + "ms");
     }

@@ -59,7 +59,7 @@
 
     <listitem>
         <para><guibutton>Replace:</guibutton> replaces each entry one at a time
-        in the Editor pane.</para>
+        in the Editor.</para>
 		<para>Clickthe <guibutton>Replace Next</guibutton> or
 		<guibutton>Skip</guibutton> button, to move to the next entry, and click the
 		<guibutton>Finish</guibutton> button to end the replacement operation.</para>

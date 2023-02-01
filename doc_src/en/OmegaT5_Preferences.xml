@@ -275,7 +275,7 @@
         <term id="dialogs.preferences.glossary.glossary.layout.title"><option>Layout</option></term>
 
         <listitem>
-          <para>Select a layout for the glossary pane contents. Additional
+          <para>Select a layout for the glossaries pane contents. Additional
           layouts can be added as plugins.</para>
         </listitem>
       </varlistentry>
@@ -401,9 +401,9 @@
 		</varlistentry>
 
 		<varlistentry>
-		  <term><option>Apply a different font size to the dictionary pane</option></term>
+		  <term><option>Apply a different font size to the dictionaries pane</option></term>
 		  <listitem>
-			<para>By default, the dictionary pane uses the same font size as
+			<para>By default, the dictionaries pane uses the same font size as
 			the main window panes.</para>
 		  </listitem>
 		</varlistentry>

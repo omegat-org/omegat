@@ -220,23 +220,21 @@
     </varlistentry>
 
     <varlistentry id="menus.goto.notes.pane">
-      <term id="menus.goto.notes.pane.title"><guimenuitem>Notes Pane</guimenuitem>
+      <term id="menus.goto.notes.pane.title"><guimenuitem>Notepad</guimenuitem>
 	  <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>N</keycap></keycombo></term>
       <listitem>
         <para>Enter the <link linkend="panes.notes"
-        endterm="panes.notes.title"/> pane to write or modify a note associated
+        endterm="panes.notes.title"/> to write or modify a note associated
         to the current segment.</para>
       </listitem>
     </varlistentry>
 
     <varlistentry id="menus.goto.editor.pane">
-      <term id="menus.goto.editor.pane.title"><guimenuitem>Editor
-      Pane</guimenuitem>
+      <term id="menus.goto.editor.pane.title"><guimenuitem>Editor</guimenuitem>
       <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>E</keycap></keycombo></term>
       <listitem>
         <para>Enter the <link linkend="panes.editor"
-        endterm="panes.editor.title"/> pane to proceed with your
-        translation.</para>
+        endterm="panes.editor.title"/> to proceed with your translation.</para>
       </listitem>
     </varlistentry>
   </variablelist>

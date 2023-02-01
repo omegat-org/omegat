@@ -265,7 +265,7 @@
             </varlistentry>
 
             <varlistentry>
-              <term>Glossary pane</term>
+              <term>Glossaries pane</term>
 
               <listitem>
                 <para>Dropping files with a recognized glossary extension
@@ -287,7 +287,7 @@
           segment.</para>
 		  
 		  <para>By default, the <guilabel>Comments</guilabel> and
-		  <guilabel>Notes</guilabel> panes have notifications enabled.</para>
+		  <guilabel>Notepad</guilabel> panes have notifications enabled.</para>
 		  
 		  <para>To enable or disable notifications,</para>
 		  
@@ -316,7 +316,7 @@
 			</listitem>
 
 			<listitem>
-			  <para>Dictionary</para>
+			  <para>Dictionaries</para>
 			</listitem>
 
 			<listitem>
@@ -324,7 +324,7 @@
 			</listitem>
 
 			<listitem>
-			  <para>Glossary</para>
+			  <para>Glossaries</para>
 			</listitem>
 
 			<listitem>
@@ -332,7 +332,7 @@
 			</listitem>
 
 			<listitem>
-			  <para>Notes</para>
+			  <para>Notepad</para>
 			</listitem>
 
 			<listitem>
@@ -784,9 +784,9 @@ Dossier de configuration
   </section>
 
   <section id="panes.glossary">
-    <title id="panes.glossary.title"><guilabel>Glossary</guilabel></title>
+    <title id="panes.glossary.title"><guilabel>Glossaries</guilabel></title>
 
-    <para>The Glossary pane shows terms from your glossary files that correspond
+    <para>This pane shows terms from your glossary files that correspond
     to terms in the current segment. The glossary files are located in the
     project’s <link endterm="project.folder.glossary.title"
     linkend="project.folder.glossary"/> folder.</para>
@@ -810,13 +810,14 @@ Folder = <token>Dossier</token></programlisting>
     <para>The glossary file name is shown as a tooltip when hovering over the
     terms.</para>
 
-    <para>The comment field of an entry can contain hyperlinks, which can be clicked for further reference.</para>
+    <para>The comment field of an entry can contain hyperlinks, which can be
+    clicked for further reference.</para>
 
 	<para>Links to local files (<filename>file:///PATH/filename</filename>) open
 	in the associated program. Web addresses (<filename>https://...</filename>)
 	open in the default browser.</para>
 
-    <para>You can select a term in the glossary pane and right click on it to
+    <para>You can select a term in the glossaries pane and right click on it to
     insert it into the translation.</para>
 
     <para>Use <link endterm="menus.view.title" linkend="menus.view"/><link
@@ -834,7 +835,7 @@ Folder = <token>Dossier</token></programlisting>
     linkend="dialogs.preferences.glossary"/> preferences for details.</para>
 
     <para>Modifications to any glossary file in the glossary folder are
-    immediately recognized by OmegaT and displayed in the glossary pane.</para>
+    immediately recognized by OmegaT and displayed in the glossaries pane.</para>
 
     <para>OmegaT includes one writable glossary file per project. Use <link
     endterm="menus.edit.title" linkend="menus.edit"/><link
@@ -847,9 +848,9 @@ Folder = <token>Dossier</token></programlisting>
   </section>
 
   <section id="panes.dictionary">
-    <title id="panes.dictionary.title"><guilabel>Dictionary</guilabel></title>
+    <title id="panes.dictionary.title"><guilabel>Dictionaries</guilabel></title>
 
-	<para>The Dictionary pane shows terms from your dictionary files that
+	<para>This pane shows terms from your dictionary files that
 	correspond to terms in the current segment. The dictionary files are located
 	in the project’s <link linkend="project.folder.dictionary"
 	endterm="project.folder.dictionary.title"/> folder. See the <link
@@ -859,9 +860,9 @@ Folder = <token>Dossier</token></programlisting>
   
   <section id="panes.machinetranslation">
     <title id="panes.machinetranslation.title"><guilabel>Machine
-    Translation</guilabel></title>
+    Translations</guilabel></title>
 
-    <para>The machine translation pane, when opened, shows the suggestions
+    <para>This pane, when opened, shows the suggestions
     for the current segment produced by each enabled translation
     engine . When suggestions from more than one engine are available,</para>
 	
@@ -923,9 +924,9 @@ Folder = <token>Dossier</token></programlisting>
   </section>
 
   <section id="panes.notes">
-    <title id="panes.notes.title"><guilabel>Notes</guilabel></title>
+    <title id="panes.notes.title"><guilabel>Notepad</guilabel></title>
 
-    <para>The Notes pane is an <emphasis>editable</emphasis> space where you can
+    <para>This pane is an <emphasis>editable</emphasis> space where you can
     add notes to the currently active segment.</para>
 
 	<para>This lets you come back to it later to review the translation, check
@@ -959,11 +960,11 @@ Folder = <token>Dossier</token></programlisting>
     are displayed here.</para>
 
     <note>
-      <para>The <guilabel>Comments</guilabel> pane is <emphasis>not</emphasis> editable. It only
-      displays the information contained in the file.</para>
+      <para>The <guilabel>Comments</guilabel> pane is <emphasis>not</emphasis>
+      editable. It only displays the information contained in the file.</para>
 
-	  <para>Use the <link
-	  endterm="panes.notes.title" linkend="panes.notes"/> pane to enter your own comments about a translation.</para>
+	  <para>Use the <link endterm="panes.notes.title" linkend="panes.notes"/>
+	  pane to enter your own comments about a translation.</para>
     </note>
   </section>
 
@@ -1002,10 +1003,12 @@ Folder = <token>Dossier</token></programlisting>
 
     <para>The bottom of the main window is the status bar.</para>
 
-	<para>The left side of the status bar displays information on project actions or error messages.</para>
+	<para>The left side of the status bar displays information on project
+	actions or error messages.</para>
 
 	<example id="panes.statusbar.messages">
-      <title id="panes.statusbar.messages.title">Status bar messages examples</title>
+      <title id="panes.statusbar.messages.title">Status bar messages
+      examples</title>
 	  <para><literal>Synchronization of repositories</literal></para>
 
 	  <para>→ OmegaT is opening a team project and synchronizes with the remote

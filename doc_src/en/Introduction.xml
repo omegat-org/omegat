@@ -532,13 +532,13 @@
 
 		  <para>Use <link linkend="menus.goto" endterm="menus.goto.title"/><link
 		  linkend="menus.goto.notes.pane"
-		  endterm="menus.goto.notes.pane.title"/> to enter the Notes pane and
+		  endterm="menus.goto.notes.pane.title"/> to enter the Notepad and
 		  add your remark.</para>
 
 		  <para>Use <link linkend="menus.goto" endterm="menus.goto.title"/><link
 		  linkend="menus.goto.editor.pane"
-		  endterm="menus.goto.editor.pane.title"/> to return to the Editor pane
-		  and resume your translation.</para>
+		  endterm="menus.goto.editor.pane.title"/> to return to the Editor and
+		  resume your translation.</para>
 		</listitem>
 
 		<listitem>
@@ -865,7 +865,7 @@
 
 	  <para>Some segments will require further modification later on, so you use
 	  <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>9</keycap></keycombo>
-	  to enter the Notes pane, leave yourself a note and come back to the Editor
+	  to enter the Notepad pane, leave yourself a note and come back to the Editor
 	  pane with
 	  <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>0</keycap></keycombo>.</para>
 	  

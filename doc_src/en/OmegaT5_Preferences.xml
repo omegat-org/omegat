@@ -294,7 +294,7 @@
   </section>
 
   <section id="dialogs.preferences.dictionary">
-    <title id="dialogs.preferences.dictionary.title"><guilabel>Dictionary</guilabel></title>
+    <title id="dialogs.preferences.dictionary.title"><guilabel>Dictionaries</guilabel></title>
 
 	<para>Preferences here define how the contents of the <link
 	linkend="project.folder.dictionary"

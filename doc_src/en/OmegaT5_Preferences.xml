@@ -198,13 +198,13 @@
   </section>
 
   <section id="dialogs.preferences.glossary">
-    <title id="dialogs.preferences.glossary.title"><guilabel>Glossary</guilabel></title>
+    <title id="dialogs.preferences.glossary.title"><guilabel>Glossaries</guilabel></title>
 
     <variablelist>
       <varlistentry id="dialogs.preferences.glossary.display.context.description.for.tbx.glossaries">
         <term
         id="dialogs.preferences.glossary.display.context.description.for.tbx.glossaries.title"><option>Display
-        TBX glossaries context description</option></term>
+        TBX glossaries context description (TBX 2)</option></term>
 
         <listitem>
           <para>Uncheck this option if the context description shown for each

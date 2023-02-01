@@ -82,6 +82,9 @@
 		  SSH configuration to include that server before attempting to download
 		  the project, otherwise you will get an authentication error and the
 		  project will fail to load.</para>
+
+		  <para>If you use multiple projects on the same server, credentials
+		  will only be asked once for that server.</para>
 		</note>
 	  </listitem>
 	</varlistentry>

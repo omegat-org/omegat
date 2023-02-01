@@ -127,7 +127,7 @@
     column.</para>
 
     <para>Glossaries can be “tab-separated values” (TSV) or “comma-separated
-    values” (CSV) files or can also use the TermBase eXchange (TBX)
+    values” (CSV) files or can also use the TermBase eXchange (TBX 2)
     format.</para>
 
     <para>A writable glossary created for the project by OmegaT will be a TSV

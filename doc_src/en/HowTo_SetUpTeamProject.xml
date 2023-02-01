@@ -158,6 +158,11 @@
 		<para id="how.to.setup.team.project.give.access.rights.title">Give
 		access rights to your team</para>
 
+		<note>
+		  <para>If you use multiple projects on the same server, credentials
+		  will only be asked once for that server.</para>
+		</note>
+
 		<para>After the project is ready and has been uploaded to the server,
 		the team project administrator has to set up access for the translators.
 		Accessing a team project requires the following information:</para>

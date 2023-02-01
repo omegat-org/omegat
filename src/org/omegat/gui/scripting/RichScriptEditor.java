@@ -202,7 +202,7 @@ public class RichScriptEditor extends AbstractScriptEditor implements SearchList
 
         item = new JMenuItem();
         Mnemonics.setLocalizedText(item, OStrings.getString("SCW_MENU_REPLACE"));
-        item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_H, Java8Compat.getMenuShortcutKeyMaskEx()));
+        item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_G, Java8Compat.getMenuShortcutKeyMaskEx()));
         item.addActionListener(new ShowReplaceDialogAction());
         menu.add(item);
 
@@ -219,7 +219,7 @@ public class RichScriptEditor extends AbstractScriptEditor implements SearchList
         Action a = m_csp.addBottomComponent(ks, m_findToolBar);
         a.putValue(Action.NAME, OStrings.getString("SCW_MENU_SHOW_FIND_BAR"));
         menu.add(new JMenuItem(a));
-        ks = KeyStroke.getKeyStroke(KeyEvent.VK_H, metaShiftMask);
+        ks = KeyStroke.getKeyStroke(KeyEvent.VK_G, metaShiftMask);
         a = m_csp.addBottomComponent(ks, m_replaceToolBar);
         a.putValue(Action.NAME, OStrings.getString("SCW_MENU_SHOW_REPLACE_BAR"));
         menu.add(new JMenuItem(a));

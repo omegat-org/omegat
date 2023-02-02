@@ -38,6 +38,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.omegat.core.Core;
 import org.omegat.core.data.ProjectProperties;
+import org.omegat.filters2.TranslationException;
 import org.omegat.gui.exttrans.MTConfigDialog;
 import org.omegat.util.HttpConnectionUtils;
 import org.omegat.util.Language;
@@ -153,19 +154,28 @@ public class DeepLTranslate extends BaseCachedTranslate {
      * @return translation, or null when API returns empty result, or error
      *         message when parse failed.
      */
-    protected String getJsonResults(String json) {
+    protected String getJsonResults(String json) throws TranslationException {
         ObjectMapper mapper = new ObjectMapper();
         try {
             // { "translations": [ { "detected_source_language": "DE", "text":
             // "Hello World!" } ] }
             JsonNode rootNode = mapper.readTree(json);
             JsonNode translations = rootNode.get("translations");
+            if (translations == null) {
+                Log.logErrorRB("MT_JSON_ERROR");
+                throw new Exception(OStrings.getString("MT_JSON_ERROR"));
+            }
             if (translations.has(0)) {
+                JsonNode textNode = translations.get(0).get("text");
+                if (textNode == null) {
+                    Log.logErrorRB("MT_JSON_ERROR");
+                    throw new Exception(OStrings.getString("MT_JSON_ERROR"));
+                }
                 return translations.get(0).get("text").asText();
             }
         } catch (Exception e) {
             Log.logErrorRB(e, "MT_JSON_ERROR");
-            return OStrings.getString("MT_JSON_ERROR");
+            throw new TranslationException(OStrings.getString("MT_JSON_ERROR"));
         }
         return null;
     }

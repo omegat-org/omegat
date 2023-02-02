@@ -29,6 +29,7 @@
 package org.omegat.core.machinetranslators;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -42,14 +43,21 @@ import org.omegat.util.Preferences;
 
 public class DeepLTranslateTest extends TestMachineTranslatorBase {
 
-
     @Test
-    public void testGetJsonResults() {
+    public void testGetJsonResults() throws Exception {
         Preferences.setPreference(Preferences.ALLOW_DEEPL_TRANSLATE, true);
         DeepLTranslate deepLTranslate = new DeepLTranslate();
         String json = "{ \"translations\": [ { \"detected_source_language\": \"DE\", \"text\": \"Hello World!\" } ] }";
         String result = deepLTranslate.getJsonResults(json);
         assertEquals("Hello World!", result);
+    }
+
+    @Test
+    public void testGetJsonResultsWithWrongJson() {
+        Preferences.setPreference(Preferences.ALLOW_DEEPL_TRANSLATE, true);
+        DeepLTranslate deepLTranslate = new DeepLTranslate();
+        String json = "{ \"response\": \"failed\" }";
+        assertThrows(Exception.class, () -> { deepLTranslate.getJsonResults(json); });
     }
 
     @Test

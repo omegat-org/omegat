@@ -283,6 +283,18 @@
 	  </listitem>
 	</varlistentry>
   </variablelist>
+  <warning>
+	<para>Be cautious when you put a whole project in a file-sharing system like
+	DropBox, OneCloud and the likes.</para>
+	<para><emphasis>Such systems are not designed to keep track of the internal
+	modifications of a given file.</emphasis></para>
+	<para>An OmegaT project is a complex set of files. Such systems will not
+	always be able to provide you with the most recent version of your data, may
+	even lock some files for no obvious reasons and can even corrupt team
+	project related files.</para>
+	<para>Make sure that you have properly tested your project layout and set up
+	a separate data backup before sharing data in such a system.</para>
+  </warning>
 </section>
 
 <section id="how.to.tm.bridge.two.languages">

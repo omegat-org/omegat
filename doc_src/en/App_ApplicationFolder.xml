@@ -152,8 +152,12 @@
 	<varlistentry id="application.folder.plugins">
 	  <term id="application.folder.plugins.title">plugins/</term>
 	  <listitem>
-		<para>The folder where you can install external plugins. See the <link
-		linkend="dialogs.preferences.plugins"
+		<para>The folder where you can install external plugins. The prefered
+		location for plugin manual installs is the <link
+		linkend="configuration.folder.extra.contents.plugin"
+		endterm="configuration.folder.extra.contents.plugin.title"/> folder
+		located in the <link linkend="configuration.folder">configuration</link>
+		folder. See the <link linkend="dialogs.preferences.plugins"
 		endterm="dialogs.preferences.plugins.title"/> preferences for
 		details.</para>
 	  </listitem>

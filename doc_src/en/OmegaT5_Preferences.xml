@@ -1662,11 +1662,11 @@ ${filePath}></programlisting></para>
 
 	<para>Displays the list of all the installed plugins.</para>
 
-	<para>Plugins are installed either in the <link
-	linkend="application.folder.plugins"
+	<para>Plugins are by default installed in the <link
+	linkend="configuration.folder">configuration folder</link>, but can also be
+	installed in the <link linkend="application.folder.plugins"
 	endterm="application.folder.plugins.title"/> folder under the <link
-	linkend="application.folder">application folder</link>, or in the
-	platform-specific <link linkend="configuration.folder">configuration folder</link></para>
+	linkend="application.folder">application</link> folder.</para>
 
 	<para>Additional plugins can be found on the <ulink
 	url="https://sourceforge.net/p/omegat/wiki/Plugins/">OmegaT development

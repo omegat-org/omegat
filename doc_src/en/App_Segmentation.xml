@@ -94,15 +94,15 @@
   </section>
   
   <section id="dialog.preferences.segmentation.setup.scope">
-	<title id="dialog.preferences.segmentation.setup.scope.title">Global or
-	local?</title>
+	<title id="dialog.preferences.segmentation.setup.scope.title">General or
+	private?</title>
 
 	<note>
-	  <para>The same mechanisms and dialogs are used to define global and local
-	  segmentation rules.</para>
+	  <para>The same mechanisms and dialogs are used to define general and
+	  private segmentation rules.</para>
 	</note>
 
-	<para>By default, segmentation settings are global and shared by all
+	<para>By default, segmentation settings are general and shared by all
 	projects.</para>
 
 	<para>Use the <link linkend="dialogs.project.properties.local.segmentation"
@@ -114,7 +114,7 @@
 	line. See the <link linkend="launch.with.command.line"
 	endterm="launch.with.command.line.title"/> how-to for details.</para>
 	
-	<para>If you use local rules, you can still access the global rules, but
+	<para>If you use private rules, you can still access the general rules, but
 	modifying them will have no effect on your project.</para>
   </section>
 

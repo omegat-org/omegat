@@ -237,7 +237,7 @@
             <para>If you modify the segmentation rules, you will be asked if you
             want to save those changes when you exit the aligner. The default
             choice is <guibutton>Yes</guibutton>, which may not be what you want
-            if you edited the global OmegaT segmentation rules.</para>
+            if you edited the general OmegaT segmentation rules.</para>
           </warning>
         </listitem>
       </varlistentry>
@@ -255,7 +255,7 @@
             <para>If you modify the file filters, you will be asked if you want
             to save those changes when you exit the aligner. The default choice
             is <guibutton>Yes</guibutton>, which may not be what you want if you
-            edited the global OmegaT file filters.</para>
+            edited the general OmegaT file filters.</para>
           </warning>
         </listitem>
       </varlistentry>

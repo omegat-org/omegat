@@ -100,7 +100,7 @@
 
         <para>Use <link linkend="menus.project"
         endterm="menus.project.title"/><link linkend="menus.project.properties"
-        endterm="menus.project.properties.title"/> to access the local file
+        endterm="menus.project.properties.title"/> to access the private file
         filter preferences.</para>
       </listitem>
     </varlistentry>
@@ -115,7 +115,7 @@
 
         <para>Use <link linkend="menus.project"
         endterm="menus.project.title"/><link linkend="menus.project.properties"
-        endterm="menus.project.properties.title"/> to access the local
+        endterm="menus.project.properties.title"/> to access the private
         segmentation rules preferences.</para>
       </listitem>
     </varlistentry>

@@ -79,7 +79,7 @@
 			<para>Choose the appropriate settings</para>
 
 			<para>Make the necessary changes to the project properties at this
-			stage, including local file filters or segmentation settings. See
+			stage, including private file filters or segmentation settings. See
 			the <link linkend="dialogs.project.properties"
 			endterm="dialogs.project.properties.title"/> dialog for
 			details.</para>

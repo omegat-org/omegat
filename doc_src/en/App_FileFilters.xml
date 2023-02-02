@@ -6,8 +6,8 @@
   <title id="file.filters.title">File Filters</title>
 
   <warning>
-	<para>File filters are either local and specific to a given project, or
-	global and available to all the projects that share a configuration
+	<para>File filters are either private and specific to a given project, or
+	general and available to all the projects that share a configuration
 	folder.</para>
 
 	<para>For details, see:</para>
@@ -45,19 +45,19 @@
   <para>Click the <guibutton>Restore Defaults</guibutton> button to reset the
   file filters to their default settings.</para>
 
-  <para>Modified global file filter preferences are saved in <link
+  <para>Modified general file filter preferences are saved in <link
   linkend="configuration.folder.extra.contents.filters"
   endterm="configuration.folder.extra.contents.filters.title"/>, in the
   configuration folder. See <link linkend="configuration.folder"
   endterm="configuration.folder.title"/> for details. Deleting that file also
   resets the filter preferences.</para>
 
-  <para>Modified local file filters are saved in the <link
+  <para>Modified private file filters are saved in the <link
   linkend="configuration.folder.extra.contents.filters"
   endterm="configuration.folder.extra.contents.filters.title"/> file, located in
   the project folder. See the <link linkend="chapter.project.folder"
   endterm="chapter.project.folder.title"/> chapter for details. Deleting that
-  file also resets the filter preferences and reverts the project to global file
+  file also resets the filter preferences and reverts the project to general file
   filters.</para>
 
   <section id="file.filters.general">

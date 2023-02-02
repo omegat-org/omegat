@@ -571,33 +571,33 @@ When enabled, all the formatting tags are removed from source segments.</program
 			</listitem>
 
 			<listitem>
-        <para><guilabel>Cut</guilabel>, <guilabel>Copy</guilabel>,
-        <guilabel>Paste</guilabel> functions,</para>
-      </listitem>
+			  <para><guilabel>Cut</guilabel>, <guilabel>Copy</guilabel>,
+			  <guilabel>Paste</guilabel> functions,</para>
+			</listitem>
 
-      <listitem>
-        <para><guilabel>Go To Segment</guilabel> (to jump to the segment
-        under the pointer).</para>
-      </listitem>
+			<listitem>
+			  <para><guilabel>Go To Segment</guilabel> (to jump to the segment
+			  under the pointer).</para>
+			</listitem>
 
-      <listitem>
-        <para><guilabel>Search Dictionaries</guilabel> (to search for the
-        selected term in an installed dictionary).</para>
-      </listitem>
+			<listitem>
+			  <para><guilabel>Search Dictionaries</guilabel> (to search for the
+			  selected term in an installed dictionary).</para>
+			</listitem>
 
-      <listitem>
-        <para><guilabel>Add Glossary Entry</guilabel> (equivalent to using
-        <link endterm="menus.edit.title" linkend="menus.edit"/><link
-        endterm="menus.edit.create.glossary.entry.title"
-        linkend="menus.edit.create.glossary.entry"/>).</para>
-      </listitem>
+			<listitem>
+			  <para><guilabel>Add Glossary Entry</guilabel> (equivalent to using
+			  <link endterm="menus.edit.title" linkend="menus.edit"/><link
+			  endterm="menus.edit.create.glossary.entry.title"
+			  linkend="menus.edit.create.glossary.entry"/>).</para>
+			</listitem>
 
-      </itemizedlist>
+		  </itemizedlist>
 
           <para>If you have selected text and defined entries in the <link
           endterm="dialogs.preferences.external.searches.title"
           linkend="dialogs.preferences.external.searches"/> preferences, they
-          will also be displayed in this menu (as will local searches).</para>
+          will also be displayed in this menu (as will private searches).</para>
         </listitem>
       </varlistentry>
 

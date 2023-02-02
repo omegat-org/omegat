@@ -83,19 +83,19 @@
 		  <para>Disable this option if you prefer not to further segment the
 		  paragraphs.</para>
 
-		  <para>By default, segmentation rules are global and apply to all
+		  <para>By default, segmentation rules are general and apply to all
 		  projects.</para>
 
 		  <para>Use <link linkend="menus.options"
 		  endterm="menus.options.title"/><link
 		  linkend="menus.options.segmentation"
-		  endterm="menus.options.segmentation.title"/> to access the global
+		  endterm="menus.options.segmentation.title"/> to access the general
 		  segmentation rules.</para>
 		  
 		  <para>Click on <link
 		  linkend="dialogs.project.properties.local.segmentation"
 		  endterm="dialogs.project.properties.local.segmentation.title"/> to use
-		  project-specific (local) segmentation rules rather than the global
+		  project-specific (private) segmentation rules rather than the general
 		  rules. You can also start OmegaT from the command line with a project
 		  specific configuration setting to achieve a similar result.</para>
 
@@ -103,7 +103,7 @@
 		  endterm="launch.with.command.line.title"/> section for details.</para>
 
 		  <note>
-			<para>If you use local rules, you can still access the global rules,
+			<para>If you use private rules, you can still access the general rules,
 			but modifying them will have no effect on your project.</para>
 		  </note>
 		  
@@ -125,19 +125,19 @@
 		  will still be in the project memory.</para>
 
 		  <para>See the <link linkend="app.segmentation"
-		  endterm="app.segmentation.title"/> appendix for general explanations about
-		  segmentation (global or local, paragraph or sentence, settings,
-		  and so on).</para>
+		  endterm="app.segmentation.title"/> appendix for general explanations
+		  about segmentation (private or general, paragraph or sentence,
+		  settings, and so on).</para>
         </listitem>
       </varlistentry>
 
       <varlistentry id="dialogs.project.properties.local.segmentation">
         <term
-        id="dialogs.project.properties.local.segmentation.title"><guibutton>Local
+        id="dialogs.project.properties.local.segmentation.title"><guibutton>Private
         Segmentation Rules...</guibutton></term>
 
 		<listitem>
-		  <para>By default, segmentation rules are global and apply to all
+		  <para>By default, segmentation rules are general and apply to all
 		  projects.</para>
 		  
 			<para>The segmentation rules presented when you open the <link
@@ -146,11 +146,11 @@
 			(using <link linkend="menus.options"
 			endterm="menus.options.title"/><link
 			linkend="menus.options.segmentation"
-			endterm="menus.options.segmentation.title"/>) are the global
+			endterm="menus.options.segmentation.title"/>) are the general
 			rules.</para>
 
-		  <para>Use this button to create local rules specific to your
-		  project. Check the <option>Use local segmentation rules</option>
+		  <para>Use this button to create private rules specific to your
+		  project. Check the <option>Use private segmentation rules</option>
 		  box, and adjust the segmentation rules as desired.</para>
 		  
 		  <para>The project will store the new set of rules in the <link
@@ -158,20 +158,20 @@
 		  endterm="project.folder.omegat.segmentation.title"/> file located in
 		  its <link linkend="project.folder.omegat.folder"
 		  endterm="project.folder.omegat.folder.title"/> folder. These rules
-		  will supersede the global segmentation rules.</para>
+		  will supersede the general segmentation rules.</para>
 		  
-		  <para>To disable local segmentation rules, disable this option or
+		  <para>To disable private segmentation rules, disable this option or
 		  remove that file.</para>
 
 		  <warning>
-			<para>If you use local rules, you can still access the global rules,
+			<para>If you use private rules, you can still access the general rules,
 			but modifying them will have no effect on your project.</para>
 		  </warning>
 
 		  <para>See the <link linkend="app.segmentation"
 		  endterm="app.segmentation.title"/> appendix for general explanations
-		  about segmentation (global or local, paragraph or sentence, settings,
-		  and so on).</para>
+		  about segmentation (private or general, paragraph or sentence,
+		  settings, and so on).</para>
         </listitem>
       </varlistentry>
 	  
@@ -231,12 +231,12 @@
 
       <varlistentry id="dialogs.project.properties.external.processing.command">
         <term
-        id="dialogs.project.properties.external.processing.command.title"><option>Local
+        id="dialogs.project.properties.external.processing.command.title"><option>Private
         post-processing commands</option></term>
 
 		<listitem>
 		  <warning>
-			<para>For security reasons, local post-processing commands are
+			<para>For security reasons, private post-processing commands are
 			disabled by default.</para>
 
 			<para>See the <link
@@ -262,7 +262,7 @@
 		  <para>Commands specified here are only available to this project. They
 		  are saved in the <link linkend="project.folder.omegat.project.file"
 		  endterm="project.folder.omegat.project.file.title"/> file. Only enable
-		  local post-processing commands if you trust the source of that
+		  private post-processing commands if you trust the source of that
 		  file.</para>
 		
 		  <para>The template variables list gives you access to various project
@@ -272,7 +272,7 @@
 		  endterm="post.processing.commands.title"/> appendix for
 		  details.</para>
 
-		  <para>You can also define global post-processing commands available to
+		  <para>You can also define general post-processing commands available to
 		  all projects that share the same configuration folder. Such commands
 		  are defined in the <link
 		  linkend="dialogs.preferences.saving.and.output.external.post-processing.command"
@@ -280,31 +280,31 @@
 		  preference.</para>
 
 		  <note>
-			<para>Local commands are run before global commands.</para>
+			<para>Private commands are run before general commands.</para>
 		  </note>
         </listitem>
       </varlistentry>
 
       <varlistentry id="dialogs.project.properties.filters">
-        <term id="dialogs.project.properties.filters.title"><guibutton>Local
+        <term id="dialogs.project.properties.filters.title"><guibutton>Private
         File Filters...</guibutton></term>
 
         <listitem>
-          <para>By default, file filter settings are global and shared by
+          <para>By default, file filter settings are general and shared by
           all projects. They are found in the <link
           linkend="dialogs.preferences.file.filters"
           endterm="dialogs.preferences.file.filters.title"/> preferences.</para>
 
-		  <para>Use this button to create local file filters specific to your
-		  project. Check the <option>Use local file filter
+		  <para>Use this button to create private file filters specific to your
+		  project. Check the <option>Use private file filter
 		  settings</option> box, and adjust the settings as desired.</para>
 
 		  <para>The project will store the new set of file filters in the <link
 		  linkend="project.folder.omegat.filters"
 		  endterm="project.folder.omegat.filters.title"/> file located in its
 		  <link linkend="project.folder.omegat.folder"
-		  endterm="project.folder.omegat.folder.title"/> folder. These settings will supersede the global file filter
-		  settings.</para>
+		  endterm="project.folder.omegat.folder.title"/> folder. These settings
+		  will supersede the general file filter settings.</para>
 
 		  <note>
 			<para>To disable project-specific file filters, uncheck the
@@ -335,17 +335,17 @@
 
       <varlistentry id="dialogs.project.properties.external.searches">
         <term
-        id="dialogs.project.properties.external.searches.title"><guibutton>Local
+        id="dialogs.project.properties.external.searches.title"><guibutton>Private
         External Searches</guibutton></term>
 
         <listitem>
-          <para>By default, external searches are global and are shared by all
+          <para>By default, external searches are general and are shared by all
           projects. They are defined in the <link
           linkend="dialogs.preferences.external.searches"
           endterm="dialogs.preferences.external.searches.title"/>
           preferences.</para>
 
-		  <para>Use this button to create local external searches specific to your
+		  <para>Use this button to create private external searches specific to your
 		  project and adjust the settings as desired.</para>
 
 		  <para>The project will store the new set of external searches in the
@@ -353,7 +353,7 @@
 		  endterm="project.folder.omegat.finder.title"/> file located in its
 		  <link linkend="project.folder.omegat.folder"
 		  endterm="project.folder.omegat.folder.title"/> folder. These
-		  settings will supersede the global external searches settings.</para>
+		  settings will supersede the general external searches settings.</para>
 
 		  <para>To delete project specific external searches, click on the
 		  <guibutton>Remove</guibutton> button or remove that file.</para>
@@ -363,7 +363,7 @@
 		  for details.</para>
 
 		  <note>
-			<para>For security purposes, local project-based external searches
+			<para>For security purposes, private external searches
 			are disabled by default. To enable them, check <link
 			linkend="dialogs.preferences.external.search.enable.project.specific.commands"
 			endterm="dialogs.preferences.external.search.enable.project.specific.commands.title"/>

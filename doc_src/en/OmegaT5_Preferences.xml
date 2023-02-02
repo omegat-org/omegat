@@ -432,35 +432,35 @@
   </section>
 
   <section id="dialogs.preferences.file.filters">
-	<title id="dialogs.preferences.file.filters.title"><guilabel>Global File
+	<title id="dialogs.preferences.file.filters.title"><guilabel>General File
 	Filters</guilabel></title>
 
 	<para>This dialog lists the file filters available to projects that do not
-	use local file filters.</para>
+	use private file filters.</para>
 
 	<para>The contents of this preference are identical to the contents of the
-	<link linkend="dialogs.project.properties.filters">local file filters</link>
+	<link linkend="dialogs.project.properties.filters">private file filters</link>
 	dialog. See the <link linkend="file.filters" endterm="file.filters.title"/>
 	appendix for details.</para>
 
 	<note>
-	  <para>If local file filters are used, modifying global file filters will
+	  <para>If private file filters are used, modifying general file filters will
 	  have no effect on the project.</para>
 	</note>
   </section>
 
 
   <section id="dialogs.preferences.segmentation.setup">
-	<title id="dialogs.preferences.segmentation.setup.title"><guilabel>Global
+	<title id="dialogs.preferences.segmentation.setup.title"><guilabel>General
 	Segmentation Rules</guilabel></title>
 
 	<para>See the <link linkend="app.segmentation"
 	endterm="app.segmentation.title"/> appendix for a general explanation of
-	segmentation (global or local, paragraph or sentence, etc.)</para>
+	segmentation (private or general, paragraph or sentence, etc.)</para>
 
 	<warning>
-	  <para>This dialog only accesses the global segmentation rules. If you have
-	  set local rules in the <link linkend="dialogs.project.properties"
+	  <para>This dialog only accesses the general segmentation rules. If you have
+	  set private rules in the <link linkend="dialogs.project.properties"
 	  endterm="dialogs.project.properties.title"/> dialog, modifications here
 	  will not be taken into account.</para>
 	</warning>
@@ -746,7 +746,7 @@
   </section>
 
   <section id="dialogs.preferences.external.searches">
-	<title id="dialogs.preferences.external.searches.title"><guilabel>Global External
+	<title id="dialogs.preferences.external.searches.title"><guilabel>General External
 	Searches</guilabel></title>
 	<para>External searches are either web searches or local commands that take
 	the string selected in the Editor as a parameter. The web searches are
@@ -757,16 +757,16 @@
 	  <varlistentry id="dialogs.preferences.external.search.enable.project.specific.commands">
 		<term
 		id="dialogs.preferences.external.search.enable.project.specific.commands.title"><option>Allow
-		local external search commands</option></term>
+		private external search commands</option></term>
 
 		<listitem>
 		  <warning>
 			<para>For security reasons, <link
-			linkend="dialogs.project.properties.external.searches">local
+			linkend="dialogs.project.properties.external.searches">private
 			externam searches</link> are disabled by default.</para>
 		  </warning>
 
-		  <para>Local external search commands are saved in the <link
+		  <para>Private external search commands are saved in the <link
 		  linkend="project.folder.omegat.filters"
 		  endterm="project.folder.omegat.filters.title"/> file. Only activate
 		  this option if you trust the source of that file.</para>
@@ -1591,7 +1591,7 @@ ${filePath}></programlisting></para>
 
 	  <varlistentry id="dialogs.preferences.saving.and.output.external.post-processing.command">
 		<term
-		id="dialogs.preferences.saving.and.output.external.post-processing.command.title"><option>Global
+		id="dialogs.preferences.saving.and.output.external.post-processing.command.title"><option>General
 		post-processing commands</option></term>
 
 		<listitem>
@@ -1622,28 +1622,28 @@ ${filePath}></programlisting></para>
 	  <varlistentry id="dialogs.preferences.saving.and.output.also.allow.per.project.external.commands">
 		<term
 		id="dialogs.preferences.saving.and.output.also.allow.per.project.external.commands.title"><option>Allow
-		local post-processing commands</option></term>
+		private post-processing commands</option></term>
 
 		<listitem>
 		  <warning>
 			<para>For security reasons, the <link
-			linkend="dialogs.project.properties.external.processing.command">local
+			linkend="dialogs.project.properties.external.processing.command">private
 			post-processing commands</link> are disabled by default.</para>
 		  </warning>
 
-		  <para>You can also define local post-processing commands available
+		  <para>You can also define private post-processing commands available
 		  only to a given project. Such commands are defined in the <link
 		  linkend="dialogs.project.properties.external.processing.command"
 		  endterm="dialogs.project.properties.external.processing.command.title"/>
 		  window.</para>
 
-		  <para>Local post-processing commands are saved in the <link
+		  <para>Private post-processing commands are saved in the <link
 		  linkend="project.folder.omegat.project.file"
 		  endterm="project.folder.omegat.project.file.title"/> file. Only
 		  activate this option if you trust the source of that file.</para>
 
 	  	  <note>
-			<para>Local commands are run before global commands.</para>
+			<para>Private commands are run before general commands.</para>
 		  </note>
 
 		</listitem>

@@ -11,7 +11,7 @@
   <para>See the <link
   linkend="dialogs.preferences.saving.and.output.external.post-processing.command"
   endterm="dialogs.preferences.saving.and.output.external.post-processing.command.title"/>
-  preference for global commands.</para>
+  preference for general commands.</para>
 	
 
   <section id="post.processing.commands.template.variables">
@@ -116,7 +116,7 @@
     <para>
       In addition to a regular command, you can call a script. Never run
       post-processing scripts from untrusted sources. For security reasons,
-      local post-processing commands are disabled by default.
+      private post-processing commands are disabled by default.
     </para>
     <para>
         Template variables can be used with both regular commands and custom

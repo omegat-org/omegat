@@ -1674,12 +1674,21 @@ ${filePath}></programlisting></para>
 
 	<para>Displays the list of all the installed plugins.</para>
 
-	<para>Plugins are installed either in the <link
-	linkend="application.folder.plugins"
+	<para>Plugins are by default installed in the <link
+	linkend="configuration.folder">configuration folder</link>, but can also be
+	installed in the <link linkend="application.folder.plugins"
 	endterm="application.folder.plugins.title"/> folder under the <link
-	linkend="application.folder">application folder</link>, or in the
-	platform-specific <link linkend="configuration.folder">configuration folder</link></para>
+	linkend="application.folder">application</link> folder.</para>
 
+	<warning>
+	  <para>Plugins installed in the <link linkend="application.folder.plugins"
+	  endterm="application.folder.plugins.title"/> folder under the <link
+	  linkend="application.folder">application</link> folder are at risk of
+	  being overwritten in the case of an OmegaT upgrade.</para>
+	  <para>See the <link linkend="update.and.delete.omegat"
+	  endterm="update.and.delete.omegat.title"/> section for details.</para>
+	</warning>
+	
 	<para>Additional plugins can be found on the <ulink
 	url="https://sourceforge.net/p/omegat/wiki/Plugins/">OmegaT development
 	site</ulink>.</para>

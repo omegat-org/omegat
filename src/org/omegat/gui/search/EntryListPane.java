@@ -190,7 +190,7 @@ class EntryListPane extends JTextPane {
 
         initActions();
         useTabForAdvance = Core.getEditor().getSettings().isUseTabForAdvance();
-        autoSyncWithEditor = Preferences.isPreferenceDefault(Preferences.SEARCHWINDOW_AUTO_SYNC, false);
+        autoSyncWithEditor = Preferences.isPreferenceDefault(Preferences.SEARCHWINDOW_AUTO_SYNC, true);
         initInputMap(useTabForAdvance);
         setEditable(false);
     }

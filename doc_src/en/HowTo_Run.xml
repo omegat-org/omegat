@@ -69,7 +69,7 @@
 	endterm="launch.with.command.line.title"
 	linkend="launch.with.command.line"/> section for details.</para>
 
-	<para>You can modify the behavior of OmegaT.app by editing the
+	<para>You can modify the behaviour of OmegaT.app by editing the
 	<filename>Configuration.properties</filename> (OmegaT configuration) as well
 	as the <filename>Info.plist</filename> (Java configuration) files located
 	inside the OmegaT.app package.</para>
@@ -150,7 +150,7 @@
 	<title id="launch.with.command.line.title">Command line launch</title>
 
 	<para>Using the command line allows you to set various options that control
-	or modify the behavior of the application. You can also define and save sets
+	or modify the behaviour of the application. You can also define and save sets
 	of options in scripts that you can then use to launch OmegaT for a
 	particular purpose.</para>
 

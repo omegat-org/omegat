@@ -377,9 +377,9 @@
 		<term id="project.folder.tm.mt.title">tm/mt</term>
 		<listitem>
 		  <para>When a match is inserted from a TMX contained in this folder, the
-		  background color of the active segment changes to red.</para>
+		  background colour of the active segment changes to red.</para>
 
-		  <para>The background color is restored to normal when you leave the
+		  <para>The background colour is restored to normal when you leave the
 		  segment or when you modify the segment.</para>
 		</listitem>
 	  </varlistentry>

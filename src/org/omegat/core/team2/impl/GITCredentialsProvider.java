@@ -6,7 +6,7 @@
  Copyright (C) 2012 Alex Buloichik
                2014 Alex Buloichik, Aaron Madlon-Kay
                2015 Hiroshi Miura, Aaron Madlon-Kay
-               2022 Hiroshi Miura
+               2022 Hiroshi Miura, Thomas Cordonnier
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -42,7 +42,6 @@ import com.jcraft.jsch.IdentityRepository;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.SSHAgentConnector;
 import com.jcraft.jsch.Session;
-import com.jcraft.jsch.Slf4jLogger;
 import org.eclipse.jgit.errors.UnsupportedCredentialItem;
 import org.eclipse.jgit.transport.CredentialItem;
 import org.eclipse.jgit.transport.CredentialsProvider;
@@ -84,8 +83,27 @@ public class GITCredentialsProvider extends CredentialsProvider {
                     "Are you sure you want to continue connecting\\?";
 
     static {
-        // Set up ssh-agent support
-        JSch.setLogger(new Slf4jLogger());
+        JSch.setLogger(new com.jcraft.jsch.Logger(){
+            public boolean isEnabled(final int level) {
+                return level >= WARN;
+            }
+
+            @Override
+            public void log(final int level, final String message) {
+                if (level > WARN) {
+                    Log.log(message);
+                } else if (level == WARN) {
+                    Log.logWarningRB("TEAM_GIT_SSH_CREDENTIAL_ERROR, message");
+                } else {
+                    Log.logErrorRB("TEAM_GIT_SSH_CREDENTIAL_ERROR", message);
+                }
+            }
+
+            @Override
+            public void log(final int level, final String message, final Throwable cause) {
+                Log.logErrorRB(cause, "TEAM_GIT_SSH_CREDENTIAL_ERROR", message);
+            }
+        });
         JschConfigSessionFactory sessionFactory = new JschConfigSessionFactory() {
 
             /**
@@ -140,15 +158,20 @@ public class GITCredentialsProvider extends CredentialsProvider {
     }
 
     private Credentials loadCredentials(URIish uri) {
-        String url = uri.toString();
+        String url = uri.toString(); // now we use schema://server:port but we keep this for backward compatibility
         Credentials credentials = new Credentials();
         credentials.username = TeamSettings.get(url + "!" + KEY_USERNAME_SUFFIX);
         credentials.password = TeamUtils.decodePassword(TeamSettings.get(url + "!" + KEY_PASSWORD_SUFFIX));
+        if (credentials.username == null) {
+            url = "" + uri.getScheme() + "://" + uri.getHost() + ":" + uri.getPort();
+            credentials.username = TeamSettings.get(url + "!" + KEY_USERNAME_SUFFIX);
+            credentials.password = TeamUtils.decodePassword(TeamSettings.get(url + "!" + KEY_PASSWORD_SUFFIX));
+        }
         return credentials;
     }
 
     private void saveCredentials(URIish uri, Credentials credentials) {
-        String url = uri.toString();
+        String url = "" + uri.getScheme() + "://" + uri.getHost() + ":" + uri.getPort();
         try {
             TeamSettings.set(url + "!" + KEY_USERNAME_SUFFIX, credentials.username);
             TeamSettings.set(url + "!" + KEY_PASSWORD_SUFFIX, TeamUtils.encodePassword(credentials.password));

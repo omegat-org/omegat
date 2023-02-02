@@ -28,18 +28,14 @@ package org.omegat.filters4;
 import static org.junit.Assert.assertEquals;
 
 import java.io.File;
-import java.net.URL;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.HashMap;
 
 import org.junit.Test;
 
-import org.omegat.core.Core;
-import org.omegat.core.data.IProject;
 import org.omegat.filters2.ITranslateCallback;
 import org.omegat.filters4.xml.xliff.Xliff2Filter;
-import org.omegat.util.Language;
 
 public class Xliff2FilterTest extends org.omegat.filters.TestFilterBase {
     @Test
@@ -65,8 +61,8 @@ public class Xliff2FilterTest extends org.omegat.filters.TestFilterBase {
         List<ParsedEntry> entries = parse3(new Xliff2Filter(), "test/data/filters/xliff/filters4-xliff2/ex.9.5.xlf",
             java.util.Collections.emptyMap());
         ParsedEntry firstEntry = entries.get(0);
-        assertEquals(firstEntry.id, "1"); // <segment> has no id, not mandatory
-        assertEquals(firstEntry.path, "//groups/N65541xdocument/N65541bxmarksection-1/title-2");
+        assertEquals("1", firstEntry.id); // <segment> has no id, not mandatory
+        assertEquals("//groups/N65541xdocument/N65541bxmarksection-1/title-2", firstEntry.path);
         ParsedEntry secondEntry = entries.get(2);
         assertEquals("<t0>High Altitude Birds", secondEntry.source);
         assertEquals("<t0>Oiseaux de haute altitude", secondEntry.translation);            

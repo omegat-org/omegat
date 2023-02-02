@@ -33,6 +33,7 @@ package org.omegat.filters2.html2;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.TreeMap;
@@ -48,6 +49,7 @@ import org.htmlparser.nodes.TextNode;
 import org.htmlparser.visitors.NodeVisitor;
 import org.omegat.core.Core;
 import org.omegat.util.HTMLUtils;
+import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.PatternConsts;
 import org.omegat.util.StringUtil;
@@ -72,8 +74,9 @@ public class FilterVisitor extends NodeVisitor {
         if (opts != null) {
             this.options = opts;
         } else {
-            // To prevent a null pointer exception later, see https://sourceforge.net/p/omegat/bugs/651/
-            this.options = new HTMLOptions(new TreeMap<String, String>());
+            // To prevent a null pointer exception later, see
+            // https://sourceforge.net/p/omegat/bugs/651/
+            this.options = new HTMLOptions(new TreeMap<>());
         }
         this.writer = bufwriter;
     }
@@ -82,11 +85,16 @@ public class FilterVisitor extends NodeVisitor {
     // Variable declaration
     // ///////////////////////////////////////////////////////////////////////
 
-    /** Should the parser call us for this tag's ending tag and its inner tags. */
-    protected boolean recurse = true;
+    /** Should the parser call us for this tag's ending tag. */
+    protected boolean recurseSelf = true;
+
+    /**
+     * Should the parser call us for this tag's inner tags.
+     */
+    protected boolean recurseChildren = true;
 
     /** Do we collect the translatable text now. */
-    protected boolean text = false;
+    protected boolean isTextUpForCollection = false;
 
     /** Did the PRE block start (it means we mustn't compress the spaces). */
     protected boolean preformatting = false;
@@ -100,10 +108,10 @@ public class FilterVisitor extends NodeVisitor {
      * <li>Otherwise they are written out directly.
      * </ul>
      */
-    protected List<Node> befors;
+    protected List<Node> precedingNodes;
 
     /** The list of nodes forming a chunk of text. */
-    protected List<Node> translatable;
+    protected List<Node> translatableNodes;
 
     /**
      * The list of non-paragraph tags following a chunk of text.
@@ -113,7 +121,7 @@ public class FilterVisitor extends NodeVisitor {
      * <li>Otherwise (paragraph tag follows), they are written out directly.
      * </ul>
      */
-    protected List<Node> afters;
+    protected List<Node> followingNodes;
 
     /** The tags behind the shortcuts */
     protected List<Tag> sTags;
@@ -131,7 +139,8 @@ public class FilterVisitor extends NodeVisitor {
      */
     @Override
     public boolean shouldRecurseSelf() {
-        return recurse;
+
+        return recurseSelf;
     }
 
     /**
@@ -141,7 +150,7 @@ public class FilterVisitor extends NodeVisitor {
      */
     @Override
     public boolean shouldRecurseChildren() {
-        return recurse;
+        return recurseChildren;
     }
 
     /**
@@ -153,38 +162,22 @@ public class FilterVisitor extends NodeVisitor {
     @Override
     public void visitTag(Tag tag) {
 
-        boolean keepIntact = keepIntact(tag);
-
-        if (!keepIntact) {
-            // Decide whether this tag should be kept intact, based on the key-value pairs stored in the
-            // configuration
-            Vector<?> tagAttributes = tag.getAttributesEx();
-            Iterator<?> i = tagAttributes.iterator();
-            while (i.hasNext() && !keepIntact) {
-                Attribute attribute = (Attribute) i.next();
-                String name = attribute.getName();
-                String value = attribute.getValue();
-                if (name == null || value == null) {
-                    continue;
-                }
-                keepIntact = this.filter.checkIgnoreTags(name, value);
-            }
-        }
+        boolean keepIntact = isProtectedTag(tag);
 
         if (keepIntact) {
-            if (text) {
+            if (isTextUpForCollection) {
                 endup();
             } else {
-                flushbefors();
+                writeOutPrecedingNodes();
             }
             writeout(tag.toHtml());
-            if (tag.getEndTag() != null) {
-                recurse = false;
+            if (hasAnEndTag(tag)) {
+                recurseSelf = true;
+                recurseChildren = false;
             }
         } else {
-            // recurse = true;
-            if (isParagraphTag(tag) && text) {
-                endup();
+            if (isParagraphTag(tag)) {
+                handleParagraphTag();
             }
             if (isPreformattingTag(tag)) {
                 preformatting = true;
@@ -249,6 +242,20 @@ public class FilterVisitor extends NodeVisitor {
     }
 
     /**
+     * Returns true if the tag is the opening tag of a composite tag pair.
+     */
+    private boolean hasAnEndTag(Tag tag) {
+        return tag.getEndTag() != null;
+    }
+
+    private void handleParagraphTag() {
+        recurseChildren = true;
+        if (isTextUpForCollection) {
+            endup();
+        }
+    }
+
+    /**
      * If the attribute of the tag is not empty, it translates it as a separate
      * segment.
      *
@@ -277,7 +284,8 @@ public class FilterVisitor extends NodeVisitor {
      */
     @Override
     public void visitStringNode(Text string) {
-        recurse = true;
+        recurseSelf = true;
+        recurseChildren = true;
         // nbsp is special case - process it like usual spaces
         String trimmedtext = HTMLUtils.entitiesToChars(string.getText()).replace((char) 160, ' ').trim();
         if (!trimmedtext.isEmpty()) {
@@ -289,13 +297,13 @@ public class FilterVisitor extends NodeVisitor {
                 return;
             }
 
-            text = true;
+            isTextUpForCollection = true;
             firstcall = false;
         } else if (preformatting) {
-            text = true;
+            isTextUpForCollection = true;
         }
 
-        if (text) {
+        if (isTextUpForCollection) {
             queueTranslatable(string);
         } else {
             queuePrefix(string);
@@ -310,11 +318,12 @@ public class FilterVisitor extends NodeVisitor {
      */
     @Override
     public void visitRemarkNode(Remark remark) {
-        recurse = true;
-        if (text) {
+        recurseSelf = true;
+        recurseChildren = true;
+        if (isTextUpForCollection) {
             endup();
         } else {
-            flushbefors();
+            writeOutPrecedingNodes();
         }
         if (!options.getRemoveComments()) {
             writeout(remark.toHtml());
@@ -329,8 +338,9 @@ public class FilterVisitor extends NodeVisitor {
      */
     @Override
     public void visitEndTag(Tag tag) {
-        recurse = true;
-        if (isParagraphTag(tag) && text) {
+        recurseSelf = true;
+        recurseChildren = true;
+        if (isParagraphTag(tag) && isTextUpForCollection) {
             endup();
         }
         if (isPreformattingTag(tag)) {
@@ -352,10 +362,10 @@ public class FilterVisitor extends NodeVisitor {
      */
     @Override
     public void finishedParsing() {
-        if (text) {
+        if (isTextUpForCollection) {
             endup();
         } else {
-            flushbefors();
+            writeOutPrecedingNodes();
         }
     }
 
@@ -369,41 +379,47 @@ public class FilterVisitor extends NodeVisitor {
      */
     private boolean isParagraphTag(Tag tag) {
         String tagname = tag.getTagName();
-        return
-        // Bugfix for https://sourceforge.net/p/omegat/bugs/84/
-        // ADDRESS tag is also a paragraph tag
-        tagname.equals("ADDRESS") || tagname.equals("BLOCKQUOTE") || tagname.equals("BODY")
-                || tagname.equals("CENTER") || tagname.equals("DIV") || tagname.equals("H1")
-                || tagname.equals("H2") || tagname.equals("H3") || tagname.equals("H4")
-                || tagname.equals("H5") || tagname.equals("H6") || tagname.equals("HTML")
-                || tagname.equals("HEAD") || tagname.equals("TITLE") || tagname.equals("TABLE")
-                || tagname.equals("TR") || tagname.equals("TD") || tagname.equals("TH")
-                || tagname.equals("P") || tagname.equals("PRE") || tagname.equals("OL")
-                || tagname.equals("UL")
-                || tagname.equals("LI")
-                ||
-                // Added by JC to have dictionary list parsed as segmenting.
-                tagname.equals("DL") || tagname.equals("DT")
-                || tagname.equals("DD")
-                ||
-                // End of JC's contribution
-                tagname.equals("FORM") || tagname.equals("TEXTAREA") || tagname.equals("FIELDSET")
-                || tagname.equals("LEGEND") || tagname.equals("LABEL") || tagname.equals("SELECT")
-                || tagname.equals("OPTION") || tagname.equals("HR")
-                // Optional paragraph on BR
-                || (tagname.equals("BR") && options.getParagraphOnBr());
 
+        String[] blockElementTags = { "ADDRESS", "ARTICLE", "ASIDE", "BLOCKQUOTE", "BODY", "CANVAS", "CENTER",
+                "DD", "DIV", "DL", "DT", "FIELDSET", "FIGCAPTION", "FIGURE", "FOOTER", "FORM", "H1", "H2",
+                "H3", "H4", "H5", "H6", "HEADER", "HR", "LABEL", "LEGEND", "LI", "MAIN", "NAV", "NOSCRIPT",
+                "OL", "OPTION", "P", "PRE", "SECTION", "SELECT", "TABLE", "TD", "TEXTAREA", "TFOOT", "TH",
+                "TITLE", "TR", "UL", "VIDEO" };
+        String[] parentElementTags = { "HEAD", "HTML" };
+
+        return (tagname.equals("BR") && options.getParagraphOnBr())
+                || Arrays.stream(parentElementTags).anyMatch(tagname::equals)
+                || Arrays.stream(blockElementTags).anyMatch(tagname::equals);
     }
 
-    /** Should a contents of this tag be kept intact? */
-    private boolean keepIntact(Tag tag) {
+    /** Should the content of this tag be kept intact? */
+    private boolean isProtectedTag(Tag tag) {
         String tagname = tag.getTagName();
-        return tagname.equals("!DOCTYPE")
-                || tagname.equals("STYLE")
-                || tagname.equals("SCRIPT")
-                || tagname.equals("OBJECT")
-                || tagname.equals("EMBED")
-                || (tagname.equals("META") && "content-type".equalsIgnoreCase(tag.getAttribute("http-equiv")));
+
+        String[] noEditTags = { "!DOCTYPE", "STYLE", "SCRIPT", "OBJECT", "EMBED" };
+        boolean keepIntact = Arrays.stream(noEditTags).anyMatch(tagname::equals) || (tagname.equals("META")
+                && "content-type".equalsIgnoreCase(tag.getAttribute("http-equiv")));
+
+        if (!keepIntact) {
+            keepIntact = hasSpecialAttributes(tag);
+        }
+        return keepIntact;
+    }
+
+    private boolean hasSpecialAttributes(Tag tag) {
+        boolean attributeIsOnIgnoreTagsList = false;
+        Vector<?> tagAttributes = tag.getAttributesEx();
+        Iterator<?> i = tagAttributes.iterator();
+
+        while (i.hasNext() && !attributeIsOnIgnoreTagsList) {
+            Attribute attribute = (Attribute) i.next();
+            String name = attribute.getName();
+            String value = attribute.getValue();
+            if (name != null && value != null) {
+                attributeIsOnIgnoreTagsList = this.filter.checkIgnoreTags(name, value);
+            }
+        }
+        return attributeIsOnIgnoreTagsList;
     }
 
     /** Is the tag space-preserving? */
@@ -417,7 +433,7 @@ public class FilterVisitor extends NodeVisitor {
         try {
             writer.write(something);
         } catch (IOException ioe) {
-            System.out.println(ioe);
+            Log.log(ioe);
         }
     }
 
@@ -426,116 +442,112 @@ public class FilterVisitor extends NodeVisitor {
      * core, and some extra tags to writer.
      */
     protected void endup() {
-        // detecting the first starting tag in 'befors'
+        // detecting the first starting tag in 'precedingNodes'
         // that has its ending in the paragraph
         // all before this "first good" are simply written out
-        List<Node> all = new ArrayList<>();
-        all.addAll(befors);
-        all.addAll(translatable);
-        int firstgoodlimit = befors.size();
-        int firstgood = 0;
-        while (firstgood < firstgoodlimit) {
-            Node goodNode = all.get(firstgood);
-            if (!(goodNode instanceof Tag)) {
-                firstgood++;
-                continue;
-            }
-            Tag good = (Tag) goodNode;
 
-            // trying to test
-            int recursion = 1;
-            boolean found = false;
-            for (int i = firstgood + 1; i < all.size(); i++) {
-                Node candNode = all.get(i);
-                if (candNode instanceof Tag) {
-                    Tag cand = (Tag) candNode;
-                    if (cand.getTagName().equals(good.getTagName())) {
-                        if (!cand.isEndTag()) {
-                            recursion++;
-                        } else {
-                            recursion--;
-                            if (recursion == 0) {
-                                if (i >= firstgoodlimit) {
-                                    found = true;
+        // SETUP
+        List<Node> allNodesInParagraph = new ArrayList<>();
+        allNodesInParagraph.addAll(precedingNodes);
+        allNodesInParagraph.addAll(translatableNodes);
+        allNodesInParagraph.addAll(followingNodes);
+        int lastPrecedingNodePosition = precedingNodes.size() - 1;
+        int lastTranslatableNodePosition = lastPrecedingNodePosition + translatableNodes.size();
+        int lastFollowingPosition = allNodesInParagraph.size() - 1;
+
+        // DETERMINE FIRST TAG IN PRECEDING TO INCLUDE
+        int firstTagToIncludeFromPreceding;
+        for (firstTagToIncludeFromPreceding = 0; firstTagToIncludeFromPreceding <= lastPrecedingNodePosition; firstTagToIncludeFromPreceding++) {
+            Node startNode = allNodesInParagraph.get(firstTagToIncludeFromPreceding);
+            if (startNode instanceof Tag) {
+                Tag openingTag = (Tag) startNode;
+                int recursion = 1;
+                boolean found = false;
+                for (int i = firstTagToIncludeFromPreceding + 1; i <= lastTranslatableNodePosition; i++) {
+                    Node candidateNode = allNodesInParagraph.get(i);
+                    if (candidateNode instanceof Tag) {
+                        Tag candidateTag = (Tag) candidateNode;
+                        if (candidateTag.getTagName().equals(openingTag.getTagName())) {
+                            if (candidateTag.isEndTag()) {
+                                recursion--;
+                                if (recursion == 0) {
+                                    if (i > lastPrecedingNodePosition) {
+                                        found = true;
+                                    }
+                                    break;
                                 }
-                                // we've found an ending tag for this "good one"
-                                break;
+                            } else {
+                                recursion++;
                             }
                         }
                     }
                 }
+                if (found) {
+                    break;
+                }
             }
-            // if we could find an ending,
-            // this is a "good one"
-            if (found) {
-                break;
-            }
-            firstgood++;
         }
 
-        // detecting the last ending tag in 'afters'
-        // that has its starting in the paragraph
+        // detecting the last ending tag in 'followingNodes'
+        // that has its opening in the paragraph
         // all after this "last good" is simply writen out
-        int lastgoodlimit = all.size() - 1;
-        all.addAll(afters);
-        int lastgood = all.size() - 1;
-        while (lastgood > lastgoodlimit) {
-            Node goodNode = all.get(lastgood);
-            if (!(goodNode instanceof Tag)) {
-                lastgood--;
-                continue;
-            }
-            Tag good = (Tag) goodNode;
 
-            // trying to test
-            int recursion = 1;
-            boolean found = false;
-            for (int i = lastgood - 1; i >= firstgoodlimit; i--) {
-                Node candNode = all.get(i);
-                if (candNode instanceof Tag) {
-                    Tag cand = (Tag) candNode;
-                    if (cand.getTagName().equals(good.getTagName())) {
-                        if (cand.isEndTag()) {
-                            recursion++;
-                        } else {
-                            recursion--;
-                            if (recursion == 0) {
-                                if (i <= lastgoodlimit) {
-                                    found = true;
+        // DETERMINE LAST TAG IN FOLLOWING TO INCLUDE
+        int lastTagKeptInFollowing;
+        for (lastTagKeptInFollowing = lastFollowingPosition; lastTagKeptInFollowing > lastTranslatableNodePosition; lastTagKeptInFollowing--) {
+            Node endNode = allNodesInParagraph.get(lastTagKeptInFollowing);
+            if (endNode instanceof Tag) {
+                Tag closingTag = (Tag) endNode;
+
+                int recursion = 1;
+                boolean found = false;
+                for (int i = lastTagKeptInFollowing - 1; i > lastPrecedingNodePosition; i--) {
+                    Node candidateNode = allNodesInParagraph.get(i);
+                    if (candidateNode instanceof Tag) {
+                        Tag candidateTag = (Tag) candidateNode;
+                        if (candidateTag.getTagName().equals(closingTag.getTagName())) {
+                            if (candidateTag.isEndTag()) {
+                                recursion++;
+                            } else {
+                                recursion--;
+                                if (recursion == 0) {
+                                    if (i <= lastTranslatableNodePosition) {
+                                        found = true;
+                                    }
+                                    // we've found a starting tag for this
+                                    // "good one"
+                                    break;
                                 }
-                                // we've found a starting tag for this
-                                // "good one"
-                                break;
                             }
                         }
                     }
                 }
+                // if we coud find a starting,
+                // this is a "good one"
+                if (found) {
+                    break;
+                }
             }
-            // if we coud find a starting,
-            // this is a "good one"
-            if (found) {
-                break;
-            }
-            lastgood--;
         }
 
+        // SET POSITION OF FIRST AND LAST TAGS INCLUDED
         boolean changed = true;
         while (changed) {
             changed = false;
             boolean removeTags = Core.getFilterMaster().getConfig().isRemoveTags();
             if (!removeTags) {
-                for (int i = 0; i < firstgood; i++) {
-                    Node node = all.get(i);
+                for (int i = 0; i < firstTagToIncludeFromPreceding; i++) {
+                    Node node = allNodesInParagraph.get(i);
                     if (node instanceof Tag) {
-                        firstgood = i;
+                        firstTagToIncludeFromPreceding = i;
                         changed = true;
                         break;
                     }
                 }
-                for (int i = all.size() - 1; i > lastgood; i--) {
-                    Node node = all.get(i);
+                for (int i = lastFollowingPosition; i > lastTagKeptInFollowing; i--) {
+                    Node node = allNodesInParagraph.get(i);
                     if (node instanceof Tag) {
-                        lastgood = i;
+                        lastTagKeptInFollowing = i;
                         changed = true;
                         break;
                     }
@@ -544,18 +556,18 @@ public class FilterVisitor extends NodeVisitor {
 
             boolean removeSpacesAround = Core.getFilterMaster().getConfig().isRemoveSpacesNonseg();
             if (!removeSpacesAround) {
-                for (int i = 0; i < firstgood; i++) {
-                    Node node = all.get(i);
+                for (int i = 0; i < firstTagToIncludeFromPreceding; i++) {
+                    Node node = allNodesInParagraph.get(i);
                     if (node instanceof TextNode) {
-                        firstgood = i;
+                        firstTagToIncludeFromPreceding = i;
                         changed = true;
                         break;
                     }
                 }
-                for (int i = all.size() - 1; i > lastgood; i--) {
-                    Node node = all.get(i);
+                for (int i = allNodesInParagraph.size() - 1; i > lastTagKeptInFollowing; i--) {
+                    Node node = allNodesInParagraph.get(i);
                     if (node instanceof TextNode) {
-                        lastgood = i;
+                        lastTagKeptInFollowing = i;
                         changed = true;
                         break;
                     }
@@ -563,9 +575,9 @@ public class FilterVisitor extends NodeVisitor {
             }
         }
 
-        // writing out all tags before the "first good" one
-        for (int i = 0; i < firstgood; i++) {
-            Node node = all.get(i);
+        // WRITING OUT ALL TAGS BEFORE THE FIRST ONE INCLUDED
+        for (int i = 0; i < firstTagToIncludeFromPreceding; i++) {
+            Node node = allNodesInParagraph.get(i);
             if (node instanceof Tag) {
                 writeout("<" + node.getText() + ">");
             } else {
@@ -573,11 +585,11 @@ public class FilterVisitor extends NodeVisitor {
             }
         }
 
-        // appending all tags until "last good" one to paragraph text
+        // APPENDING TO PARAGRAPH TEXT ALL TAGS UNTIL THE LAST INCLUDED ONE
         StringBuilder paragraph = new StringBuilder();
         // appending all tags starting from "first good" one to paragraph text
-        for (int i = firstgood; i <= lastgood; i++) {
-            Node node = all.get(i);
+        for (int i = firstTagToIncludeFromPreceding; i <= lastTagKeptInFollowing; i++) {
+            Node node = allNodesInParagraph.get(i);
             if (node instanceof Tag) {
                 shortcut((Tag) node, paragraph);
             } else { // node instanceof Text
@@ -585,6 +597,7 @@ public class FilterVisitor extends NodeVisitor {
             }
         }
 
+        // COMPRESS SPACES IF NEEDED
         String uncompressed = paragraph.toString();
         String compressed = uncompressed;
         String spacePrefix = "";
@@ -634,8 +647,8 @@ public class FilterVisitor extends NodeVisitor {
         writeout(spacePostfix);
 
         // writing out all tags after the "last good" one
-        for (int i = lastgood + 1; i < all.size(); i++) {
-            Node node = all.get(i);
+        for (int i = lastTagKeptInFollowing + 1; i < allNodesInParagraph.size(); i++) {
+            Node node = allNodesInParagraph.get(i);
             if (node instanceof Tag) {
                 writeout("<" + node.getText() + ">");
             } else {
@@ -650,12 +663,12 @@ public class FilterVisitor extends NodeVisitor {
      * Inits a new paragraph.
      */
     private void cleanup() {
-        text = false;
-        recurse = true;
-        // paragraph = new StringBuffer();
-        befors = new ArrayList<>();
-        translatable = new ArrayList<>();
-        afters = new ArrayList<>();
+        isTextUpForCollection = false;
+        recurseSelf = true;
+        recurseChildren = true;
+        precedingNodes = new ArrayList<>();
+        translatableNodes = new ArrayList<>();
+        followingNodes = new ArrayList<>();
         sTags = new ArrayList<>();
         sTagNumbers = new ArrayList<>();
         sShortcuts = new ArrayList<>();
@@ -761,11 +774,11 @@ public class FilterVisitor extends NodeVisitor {
      */
     private void queueTranslatable(Text txt) {
         if (!txt.toHtml().trim().isEmpty() || preformatting) {
-            translatable.addAll(afters);
-            afters.clear();
-            translatable.add(txt);
+            translatableNodes.addAll(followingNodes);
+            followingNodes.clear();
+            translatableNodes.add(txt);
         } else {
-            afters.add(txt);
+            followingNodes.add(txt);
         }
     }
 
@@ -776,7 +789,7 @@ public class FilterVisitor extends NodeVisitor {
      * the translatable text only if some meaningful text follows it.
      */
     private void queueTranslatable(Tag tag) {
-        afters.add(tag);
+        followingNodes.add(tag);
     }
 
     /**
@@ -786,13 +799,13 @@ public class FilterVisitor extends NodeVisitor {
      * list that is inspected when the translatable text is sent to OmegaT core.
      */
     protected void queuePrefix(Tag tag) {
-        if (text) {
+        if (isTextUpForCollection) {
             queueTranslatable(tag);
         } else if (isParagraphTag(tag)) {
-            flushbefors();
+            writeOutPrecedingNodes();
             writeout("<" + tag.getText() + ">");
         } else {
-            befors.add(tag);
+            precedingNodes.add(tag);
         }
     }
 
@@ -803,19 +816,19 @@ public class FilterVisitor extends NodeVisitor {
      * list that is inspected when the translatable text is sent to OmegaT core.
      */
     private void queuePrefix(Text txt) {
-        befors.add(txt);
+        precedingNodes.add(txt);
     }
 
-    /** Saves "Befors" to output stream and cleans the list. */
-    private void flushbefors() {
-        for (Node node : befors) {
+    /** Saves "precedingNodes" to output stream and cleans the list. */
+    private void writeOutPrecedingNodes() {
+        for (Node node : precedingNodes) {
             if (node instanceof Tag) {
                 writeout("<" + node.getText() + ">");
             } else {
                 writeout(compressWhitespace(node.getText()));
             }
         }
-        befors.clear();
+        precedingNodes.clear();
     }
 
     /**

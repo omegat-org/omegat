@@ -37,6 +37,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.omegat.core.Core;
+import org.omegat.core.data.ProjectProperties;
 import org.omegat.gui.exttrans.MTConfigDialog;
 import org.omegat.util.HttpConnectionUtils;
 import org.omegat.util.Language;
@@ -57,6 +58,7 @@ import org.omegat.util.Preferences;
  */
 public class DeepLTranslate extends BaseCachedTranslate {
     protected static final String PROPERTY_API_KEY = "deepl.api.key";
+    private String temporaryKey = null;
     // DO NOT MOVE TO THE V2 API until it becomes available for CAT tool
     // integration.
     //
@@ -64,8 +66,24 @@ public class DeepLTranslate extends BaseCachedTranslate {
     // > not included in DeepL plans for CAT tool users.
     //
     // See https://www.deepl.com/docs-api/accessing-the-api/api-versions/
-    protected static final String DEEPL_URL = "https://api.deepl.com/v1/translate";
+    protected static final String DEEPL_PATH = "/v1/translate";
+    protected final String deepLUrl;
+
     private final static int MAX_TEXT_LENGTH = 5000;
+
+    public DeepLTranslate() {
+        deepLUrl = "https://api.deepl.com/v1/translate";
+    }
+
+    /**
+     * Constructor for tests.
+     * @param baseUrl custom base url
+     * @param key temporary api key
+     */
+    public DeepLTranslate(String baseUrl, String key) {
+        deepLUrl = baseUrl + DEEPL_PATH;
+        temporaryKey = key;
+    }
 
     @Override
     protected String getPreferenceName() {
@@ -87,9 +105,11 @@ public class DeepLTranslate extends BaseCachedTranslate {
         }
 
         String apiKey = getCredential(PROPERTY_API_KEY);
-
         if (apiKey == null || apiKey.isEmpty()) {
-            throw new Exception(OStrings.getString("DEEPL_API_KEY_NOTFOUND"));
+            if (temporaryKey == null) {
+                throw new Exception(OStrings.getString("DEEPL_API_KEY_NOTFOUND"));
+            }
+            apiKey = temporaryKey;
         }
 
         Map<String, String> params = new TreeMap<>();
@@ -102,15 +122,20 @@ public class DeepLTranslate extends BaseCachedTranslate {
         params.put("target_lang", tLang.getLanguageCode().toUpperCase());
         params.put("tag_handling", "xml");
         // Check if the project segmentation is done by sentence
-        String splitSentence = Core.getProject().getProjectProperties().isSentenceSegmentingEnabled() ? "1"
-                : "0";
+        ProjectProperties projectProperties = Core.getProject().getProjectProperties();
+        String splitSentence; // can be null when testing
+        if (projectProperties != null && projectProperties.isSentenceSegmentingEnabled()) {
+            splitSentence = "1";
+        } else {
+            splitSentence = "0";
+        }
         params.put("split_sentences", splitSentence);
         params.put("preserve_formatting", "1");
         params.put("auth_key", apiKey);
 
         Map<String, String> headers = new TreeMap<>();
 
-        String v = HttpConnectionUtils.get(DEEPL_URL, params, headers, "UTF-8");
+        String v = HttpConnectionUtils.get(deepLUrl, params, headers, "UTF-8");
         String tr = getJsonResults(v);
         if (tr == null) {
             return null;
@@ -123,13 +148,11 @@ public class DeepLTranslate extends BaseCachedTranslate {
 
     /**
      * Parse API response and return translated text.
-     * 
      * @param json
      *            API response json string.
      * @return translation, or null when API returns empty result, or error
      *         message when parse failed.
      */
-    @SuppressWarnings("unchecked")
     protected String getJsonResults(String json) {
         ObjectMapper mapper = new ObjectMapper();
         try {

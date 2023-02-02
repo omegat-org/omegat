@@ -214,6 +214,8 @@ dependencies {
         testImplementation "org.languagetool:language-${it}:${languageToolVersion}"
     }
     testRuntimeOnly "org.languagetool:language-pl:${languageToolVersion}"
+    // http connection tests
+    testImplementation 'com.github.tomakehurst:wiremock-jre8-standalone:2.35.0'
 
     // JAXB codegen only
     jaxb 'com.sun.xml.bind:jaxb-xjc:2.3.4'

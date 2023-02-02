@@ -131,8 +131,9 @@ public class SVNAuthenticationManager implements ISVNAuthenticationManager {
 
         String user = userPassDialog.userText.getText();
         String pass = new String(userPassDialog.passwordField.getPassword());
-        TeamSettings.set(repoUrl + "!" + KEY_USERNAME_SUFFIX, user);
-        TeamSettings.set(repoUrl + "!" + KEY_PASSWORD_SUFFIX, TeamUtils.encodePassword(pass));
+        String saveUri = "" + url.getProtocol() + "://" + url.getHost() + ":" + url.getPort();
+        TeamSettings.set(saveUri + "!" + KEY_USERNAME_SUFFIX, user);
+        TeamSettings.set(saveUri + "!" + KEY_PASSWORD_SUFFIX, TeamUtils.encodePassword(pass));
 
         if (ISVNAuthenticationManager.PASSWORD.equals(kind)) {
             return SVNPasswordAuthentication.newInstance(user, pass.toCharArray(), false, url, false);
@@ -167,6 +168,11 @@ public class SVNAuthenticationManager implements ISVNAuthenticationManager {
         }
         String user = TeamSettings.get(repoUrl + "!" + KEY_USERNAME_SUFFIX);
         String pass = TeamUtils.decodePassword(TeamSettings.get(repoUrl + "!" + KEY_PASSWORD_SUFFIX));
+        if (user == null) {
+            String saveUri = "" + url.getProtocol() + "://" + url.getHost() + ":" + url.getPort();
+            user = TeamSettings.get(saveUri + "!" + KEY_USERNAME_SUFFIX);
+            pass = TeamUtils.decodePassword(TeamSettings.get(saveUri + "!" + KEY_PASSWORD_SUFFIX));
+        }
         if (user != null && pass != null) {
             if (ISVNAuthenticationManager.PASSWORD.equals(kind)) {
                 return SVNPasswordAuthentication.newInstance(user, pass.toCharArray(), false, url, false);

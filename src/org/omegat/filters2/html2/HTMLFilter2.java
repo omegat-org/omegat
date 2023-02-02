@@ -92,6 +92,7 @@ public class HTMLFilter2 extends AbstractFilter {
     protected boolean requirePrevNextFields() {
         return true;
     }
+
     /**
      * Customized version of creating input reader for HTML files, aware of
      * encoding by using <code>EncodingAwareReader</code> class.
@@ -179,7 +180,7 @@ public class HTMLFilter2 extends AbstractFilter {
             parser.setInputHTML(all.toString());
             parser.visitAllNodesWith(new FilterVisitor(this, outfile, options));
         } catch (ParserException pe) {
-            System.out.println(pe);
+            Log.logErrorRB(pe, "HTML_EXCEPTION_PARSER");
         } catch (StringIndexOutOfBoundsException se) {
             throw new StringIndexOutOfBoundsException(OStrings.getString("HTML__INVALID_HTML"));
         }
@@ -191,10 +192,8 @@ public class HTMLFilter2 extends AbstractFilter {
     public String privateProcessEntry(String entry, String comment) {
         if (skipRegExpPattern != null) {
             if (skipRegExpPattern.matcher(entry).matches()) {
-                // System.out.println("Skipping \""+entry+"\"");
                 return entry;
             } else {
-                // System.out.println("Using: \""+entry+"\"");
                 return super.processEntry(entry, comment);
             }
         }
@@ -248,7 +247,7 @@ public class HTMLFilter2 extends AbstractFilter {
      * (X)HTML Filter shows a <b>modal</b> dialog to edit its own options.
      *
      * @param currentOptions
-     *            Current options to edit.
+     *                       Current options to edit.
      * @return Updated filter options if user confirmed the changes, and current
      *         options otherwise.
      */

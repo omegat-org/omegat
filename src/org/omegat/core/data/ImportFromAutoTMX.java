@@ -43,7 +43,10 @@ import org.omegat.util.TMXProp;
  */
 public class ImportFromAutoTMX {
     final RealProject project;
-    /** Map of all segments in project by source text. Just for optimize some processes. */
+    /**
+     * Map of all segments in project by source text. Just for optimize some
+     * processes.
+     */
     Map<String, List<SourceTextEntry>> existEntries = new HashMap<String, List<SourceTextEntry>>();
 
     public ImportFromAutoTMX(RealProject project, List<SourceTextEntry> allProjectEntries) {
@@ -60,25 +63,32 @@ public class ImportFromAutoTMX {
 
     /**
      * Process a TMX from an automatic folder
-     * @param tmx The name of the TMX to process
-     * @param isEnforcedTMX If true, existing default translations will be overwritten in all cases
+     * 
+     * @param tmx
+     *            The name of the TMX to process
+     * @param isEnforcedTMX
+     *            If true, existing default translations will be overwritten in
+     *            all cases
      */
     void process(ExternalTMX tmx, boolean isEnforcedTMX) {
-
         for (ITMXEntry e : tmx.getEntries()) { // iterate by all entries in TMX
             List<SourceTextEntry> list = existEntries.get(e.getSourceText());
             if (list == null) {
                 continue; // there is no entries for this source
             }
-            for (SourceTextEntry ste : list) { // for each TMX entry - get all sources in project
+
+            for (SourceTextEntry ste : list) { // for each TMX entry - get all
+                                               // sources in project
                 TMXEntry existTranslation = project.getTranslationInfo(ste);
 
                 String id = ste.getKey().id;
                 boolean hasICE = id != null && e.hasPropValue(ProjectTMX.PROP_XICE, id);
                 boolean has100PC = id != null && e.hasPropValue(ProjectTMX.PROP_X100PC, id);
+                boolean hasAlternateTranslations = altTranslationMatches(e, ste.getKey());
 
                 if (e.hasPropValue(ExternalTMFactory.TMXLoader.PROP_FOREIGN_MATCH, "true")) {
-                    // Never automatically include matches from foreign languages.
+                    // Never automatically include matches from foreign
+                    // languages.
                     continue;
                 }
                 if (!hasICE && !has100PC) { // TMXEntry without x-ids
@@ -87,8 +97,9 @@ public class ImportFromAutoTMX {
                         // Existing translation is alt but the TMX entry is not.
                         continue;
                     }
-                    if (!isDefaultTranslation && !altTranslationMatches(e, ste.getKey())) {
-                        // TMX entry is an alternative translation that does not match this STE.
+                    if (!isDefaultTranslation && !hasAlternateTranslations) {
+                        // TMX entry is an alternative translation that does not
+                        // match this STE.
                         continue;
                     }
                     if (isEnforcedTMX && (!existTranslation.isTranslated()
@@ -96,10 +107,13 @@ public class ImportFromAutoTMX {
                             || (!isDefaultTranslation && existTranslation.defaultTranslation))) {
                         // If there's
                         // - no translation or
-                        // - the existing translation doesn't come from an enforced TM or
-                        // - the existing enforced translation was a default translation but this one is not
+                        // - the existing translation doesn't come from an
+                        // enforced TM or
+                        // - the existing enforced translation was a default
+                        // translation but this one is not
                         setTranslation(ste, e, isDefaultTranslation, TMXEntry.ExternalLinked.xENFORCED);
-                    } else if (!existTranslation.isTranslated()) {
+                    } else if (!existTranslation.isTranslated()
+                            || (!isDefaultTranslation && hasAlternateTranslations)) {
                         // default translation not exist - use from auto tmx
                         setTranslation(ste, e, isDefaultTranslation, TMXEntry.ExternalLinked.xAUTO);
                     }
@@ -114,14 +128,14 @@ public class ImportFromAutoTMX {
                     } else if (existTranslation.linked == TMXEntry.ExternalLinked.xICE
                             || existTranslation.linked == TMXEntry.ExternalLinked.x100PC) {
                         // already contains x-ice
-                        if (hasICE
-                                && !Objects.equals(existTranslation.getTranslationText(), e.getTranslationText())) {
+                        if (hasICE && !Objects.equals(existTranslation.getTranslationText(),
+                                e.getTranslationText())) {
                             setTranslation(ste, e, false, TMXEntry.ExternalLinked.xICE);
                         }
                     } else if (existTranslation.linked == TMXEntry.ExternalLinked.x100PC) {
                         // already contains x-100pc
-                        if (has100PC
-                                && !Objects.equals(existTranslation.getTranslationText(), e.getTranslationText())) {
+                        if (has100PC && !Objects.equals(existTranslation.getTranslationText(),
+                                e.getTranslationText())) {
                             setTranslation(ste, e, false, TMXEntry.ExternalLinked.x100PC);
                         }
                     }
@@ -139,10 +153,8 @@ public class ImportFromAutoTMX {
         for (TMXProp p : entry.getProperties()) {
             if (p.getType().equals(ProjectTMX.PROP_FILE)) {
                 hasFileProp = true;
-            } else if (p.getType().equals(ProjectTMX.PROP_ID)
-                    || p.getType().equals(ProjectTMX.ATTR_TUID)
-                    || p.getType().equals(ProjectTMX.PROP_NEXT)
-                    || p.getType().equals(ProjectTMX.PROP_PATH)
+            } else if (p.getType().equals(ProjectTMX.PROP_ID) || p.getType().equals(ProjectTMX.ATTR_TUID)
+                    || p.getType().equals(ProjectTMX.PROP_NEXT) || p.getType().equals(ProjectTMX.PROP_PATH)
                     || p.getType().equals(ProjectTMX.PROP_PREV)) {
                 hasOtherProp = true;
             }

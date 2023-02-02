@@ -58,7 +58,7 @@
   source file or the target file (if it exists).</para>
 
   <para>The number of <emphasis role="bold">Unique</emphasis> segments is
-  calculated by removing the number of duplicate segments from the total
+  calculated by removing the number of repeated segments from the total
   number of segments.</para>
 
   <para>The difference between &quot;Number of segments&quot; and &quot;Number

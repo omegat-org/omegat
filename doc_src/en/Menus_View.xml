@@ -6,7 +6,7 @@
   <para>This menu allows you to select the information you want to OmegaT to
   display.</para>
 
-  <para>All the colors indicated in the descriptions can be modified in the
+  <para>All the colours indicated in the descriptions can be modified in the
   <link linkend="dialogs.preferences.colours"
   endterm="dialogs.preferences.colours.title"/> preference.</para>
 
@@ -115,7 +115,7 @@
       Auto-Populated Segments</guimenuitem></term>
       <listitem>
         <para>If checked, segments that have been auto-populated are
-        highlighted in various colors.</para>
+        highlighted in various colours.</para>
 
 		<para>See the <link
 		linkend="dialogs.preferences.editor.save.auto-populated.status"

@@ -35,6 +35,7 @@ package org.omegat.gui.search;
 
 import java.awt.Component;
 import java.awt.Container;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -63,7 +64,10 @@ import javax.swing.event.DocumentListener;
 import javax.swing.text.BadLocationException;
 import javax.swing.undo.UndoManager;
 
+import org.openide.awt.Mnemonics;
+
 import org.omegat.core.Core;
+import org.omegat.core.CoreEvents;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.search.SearchExpression;
 import org.omegat.core.search.SearchMode;
@@ -86,7 +90,6 @@ import org.omegat.util.gui.OSXIntegration;
 import org.omegat.util.gui.OmegaTFileChooser;
 import org.omegat.util.gui.StaticUIUtils;
 import org.omegat.util.gui.UIThreadsUtil;
-import org.openide.awt.Mnemonics;
 
 /**
  * This is a window that appears when user'd like to search for something. For
@@ -115,6 +118,9 @@ public class SearchWindowController {
     public SearchWindowController(SearchMode mode) {
         form = new SearchWindowForm();
         form.setJMenuBar(new SearchWindowMenu(this));
+        Font f = Core.getMainWindow().getApplicationFont();
+        setFont(f);
+
         this.mode = mode;
         initialEntry = Core.getEditor().getCurrentEntryNumber();
         initialCaret = getCurrentPositionInEntryTranslationInEditor(Core.getEditor());
@@ -148,8 +154,8 @@ public class SearchWindowController {
         form.m_dateToSpinner.setModel(dateToModel);
 
         // Box Number of results
-        SpinnerNumberModel numberModel = new SpinnerNumberModel(OConsts.ST_MAX_SEARCH_RESULTS, 1, Integer.MAX_VALUE,
-                1);
+        SpinnerNumberModel numberModel = new SpinnerNumberModel(OConsts.ST_MAX_SEARCH_RESULTS, 1,
+                Integer.MAX_VALUE, 1);
         form.m_numberOfResults.setModel(numberModel);
 
         loadPreferences();
@@ -189,6 +195,7 @@ public class SearchWindowController {
             form.m_excludeOrphans.setVisible(false);
             break;
         }
+        CoreEvents.registerFontChangedEventListener(this::setFont);
     }
 
     public SearchMode getMode() {
@@ -205,8 +212,8 @@ public class SearchWindowController {
         form.m_replaceAllButton.addActionListener(e -> doReplaceAll());
 
         form.m_searchButton.addActionListener(e -> doSearch());
-        form.m_advancedButton.addActionListener(e ->
-            setAdvancedOptionsVisible(!form.m_advancedVisiblePane.isVisible()));
+        form.m_advancedButton
+                .addActionListener(e -> setAdvancedOptionsVisible(!form.m_advancedVisiblePane.isVisible()));
 
         form.m_authorCB.addActionListener(e -> enableDisableAuthor());
 
@@ -308,18 +315,28 @@ public class SearchWindowController {
 
                 // back to the initial segment
                 int currentEntry = Core.getEditor().getCurrentEntryNumber();
-                if (initialEntry > 0 && form.m_backToInitialSegment.isSelected() && initialEntry != currentEntry) {
+                if (initialEntry > 0 && form.m_backToInitialSegment.isSelected()
+                        && initialEntry != currentEntry) {
                     boolean isSegDisplayed = isSegmentDisplayed(initialEntry);
                     if (isSegDisplayed) {
                         // Restore caretPosition too
                         ((EditorController) Core.getEditor()).gotoEntry(initialEntry, initialCaret);
                     } else {
-                        // The segment is not displayed (maybe filter on). Ignore caretPosition.
+                        // The segment is not displayed (maybe filter on).
+                        // Ignore caretPosition.
                         Core.getEditor().gotoEntry(initialEntry);
                     }
                 }
             }
         });
+    }
+
+    private void setFont(Font f) {
+        form.setFont(f);
+        form.m_searchField.setFont(f);
+        form.m_replaceField.setFont(f);
+        form.m_viewer.setFont(f);
+        form.revalidate();
     }
 
     private void configureHistoryComboBox(final JComboBox<String> box) {
@@ -359,8 +376,8 @@ public class SearchWindowController {
         });
 
         // Set up undo/redo handling
-        KeyStroke undoKey = KeyStroke.getKeyStroke(KeyEvent.VK_Z,
-                Java8Compat.getMenuShortcutKeyMaskEx(), false);
+        KeyStroke undoKey = KeyStroke.getKeyStroke(KeyEvent.VK_Z, Java8Compat.getMenuShortcutKeyMaskEx(),
+                false);
         map.put(undoKey, new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -369,8 +386,8 @@ public class SearchWindowController {
                 }
             }
         });
-        KeyStroke redoKey = KeyStroke.getKeyStroke(KeyEvent.VK_Y,
-                Java8Compat.getMenuShortcutKeyMaskEx(), false);
+        KeyStroke redoKey = KeyStroke.getKeyStroke(KeyEvent.VK_Y, Java8Compat.getMenuShortcutKeyMaskEx(),
+                false);
         map.put(redoKey, new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -419,12 +436,12 @@ public class SearchWindowController {
             form.m_rbProject.setSelected(true);
         }
         form.m_dirField.setText(Preferences.getPreferenceDefault(Preferences.SEARCHWINDOW_DIR, ""));
-        form.m_recursiveCB.setSelected(Preferences.isPreferenceDefault(Preferences.SEARCHWINDOW_RECURSIVE, true));
+        form.m_recursiveCB
+                .setSelected(Preferences.isPreferenceDefault(Preferences.SEARCHWINDOW_RECURSIVE, true));
 
         // search type
         SearchExpression.SearchExpressionType searchType = Preferences.getPreferenceEnumDefault(
-                Preferences.SEARCHWINDOW_SEARCH_TYPE,
-                SearchExpression.SearchExpressionType.EXACT);
+                Preferences.SEARCHWINDOW_SEARCH_TYPE, SearchExpression.SearchExpressionType.EXACT);
         switch (searchType) {
         case EXACT:
         default:
@@ -439,18 +456,18 @@ public class SearchWindowController {
         }
 
         // case sensitivity
-        form.m_searchCase.setSelected(Preferences.isPreferenceDefault(
-                Preferences.SEARCHWINDOW_CASE_SENSITIVE, false));
+        form.m_searchCase
+                .setSelected(Preferences.isPreferenceDefault(Preferences.SEARCHWINDOW_CASE_SENSITIVE, false));
 
         // nbsp as space
-        form.m_searchSpaceMatchNbsp.setSelected(Preferences.isPreferenceDefault(
-                Preferences.SEARCHWINDOW_SPACE_MATCH_NBSP, false));
+        form.m_searchSpaceMatchNbsp.setSelected(
+                Preferences.isPreferenceDefault(Preferences.SEARCHWINDOW_SPACE_MATCH_NBSP, false));
 
         // search source
-        form.m_searchSource.setSelected(Preferences.isPreferenceDefault(
-                Preferences.SEARCHWINDOW_SEARCH_SOURCE, true));
-        form.m_searchTranslation.setSelected(Preferences.isPreferenceDefault(
-                Preferences.SEARCHWINDOW_SEARCH_TRANSLATION, true));
+        form.m_searchSource
+                .setSelected(Preferences.isPreferenceDefault(Preferences.SEARCHWINDOW_SEARCH_SOURCE, true));
+        form.m_searchTranslation.setSelected(
+                Preferences.isPreferenceDefault(Preferences.SEARCHWINDOW_SEARCH_TRANSLATION, true));
 
         SearchExpression.SearchState searchState = Preferences.getPreferenceEnumDefault(
                 Preferences.SEARCHWINDOW_SEARCH_STATE, SearchExpression.SearchState.TRANSLATED_UNTRANSLATED);
@@ -468,12 +485,12 @@ public class SearchWindowController {
         }
 
         // case sensitivity
-        form.m_replaceCase
-                .setSelected(Preferences.isPreferenceDefault(Preferences.SEARCHWINDOW_CASE_SENSITIVE_REPLACE, false));
+        form.m_replaceCase.setSelected(
+                Preferences.isPreferenceDefault(Preferences.SEARCHWINDOW_CASE_SENSITIVE_REPLACE, false));
 
-                // nbsp as space
-        form.m_replaceSpaceMatchNbsp.setSelected(Preferences.isPreferenceDefault(
-                Preferences.SEARCHWINDOW_SPACE_MATCH_NBSP_REPLACE, false));
+        // nbsp as space
+        form.m_replaceSpaceMatchNbsp.setSelected(
+                Preferences.isPreferenceDefault(Preferences.SEARCHWINDOW_SPACE_MATCH_NBSP_REPLACE, false));
 
         // replace type
         SearchExpression.SearchExpressionType replaceType = Preferences.getPreferenceEnumDefault(
@@ -488,28 +505,32 @@ public class SearchWindowController {
             break;
         }
 
-        form.m_replaceUntranslated.setSelected(Preferences.isPreferenceDefault(
-                Preferences.SEARCHWINDOW_REPLACE_UNTRANSLATED, true));
+        form.m_replaceUntranslated.setSelected(
+                Preferences.isPreferenceDefault(Preferences.SEARCHWINDOW_REPLACE_UNTRANSLATED, true));
 
-        form.m_searchNotesCB.setSelected(Preferences.isPreferenceDefault(Preferences.SEARCHWINDOW_SEARCH_NOTES, true));
+        form.m_searchNotesCB
+                .setSelected(Preferences.isPreferenceDefault(Preferences.SEARCHWINDOW_SEARCH_NOTES, true));
         form.m_searchCommentsCB
                 .setSelected(Preferences.isPreferenceDefault(Preferences.SEARCHWINDOW_SEARCH_COMMENTS, true));
 
-        form.m_cbSearchInGlossaries.setSelected(Preferences.isPreferenceDefault(
-                Preferences.SEARCHWINDOW_GLOSSARY_SEARCH, true));
-        form.m_cbSearchInMemory.setSelected(Preferences.isPreferenceDefault(Preferences.SEARCHWINDOW_MEMORY_SEARCH,
-                true));
-        form.m_cbSearchInTMs.setSelected(Preferences.isPreferenceDefault(Preferences.SEARCHWINDOW_TM_SEARCH, true));
+        form.m_cbSearchInGlossaries
+                .setSelected(Preferences.isPreferenceDefault(Preferences.SEARCHWINDOW_GLOSSARY_SEARCH, true));
+        form.m_cbSearchInMemory
+                .setSelected(Preferences.isPreferenceDefault(Preferences.SEARCHWINDOW_MEMORY_SEARCH, true));
+        form.m_cbSearchInTMs
+                .setSelected(Preferences.isPreferenceDefault(Preferences.SEARCHWINDOW_TM_SEARCH, true));
 
         // all results
-        form.m_allResultsCB.setSelected(Preferences.isPreferenceDefault(Preferences.SEARCHWINDOW_ALL_RESULTS, false));
-        form.m_fileNamesCB.setSelected(Preferences.isPreferenceDefault(Preferences.SEARCHWINDOW_FILE_NAMES, false));
+        form.m_allResultsCB
+                .setSelected(Preferences.isPreferenceDefault(Preferences.SEARCHWINDOW_ALL_RESULTS, false));
+        form.m_fileNamesCB
+                .setSelected(Preferences.isPreferenceDefault(Preferences.SEARCHWINDOW_FILE_NAMES, false));
 
         // editor related options
         form.m_autoSyncWithEditor
-                .setSelected(Preferences.isPreferenceDefault(Preferences.SEARCHWINDOW_AUTO_SYNC, false));
-        form.m_backToInitialSegment
-                .setSelected(Preferences.isPreferenceDefault(Preferences.SEARCHWINDOW_BACK_TO_INITIAL_SEGMENT, false));
+                .setSelected(Preferences.isPreferenceDefault(Preferences.SEARCHWINDOW_AUTO_SYNC, true));
+        form.m_backToInitialSegment.setSelected(
+                Preferences.isPreferenceDefault(Preferences.SEARCHWINDOW_BACK_TO_INITIAL_SEGMENT, true));
 
         // update the enabled/selected status of normal options
         updateOptionStatus();
@@ -539,18 +560,22 @@ public class SearchWindowController {
 
         // search options
         Preferences.setPreference(Preferences.SEARCHWINDOW_CASE_SENSITIVE, form.m_searchCase.isSelected());
-        Preferences.setPreference(Preferences.SEARCHWINDOW_SPACE_MATCH_NBSP, form.m_searchSpaceMatchNbsp.isSelected());
+        Preferences.setPreference(Preferences.SEARCHWINDOW_SPACE_MATCH_NBSP,
+                form.m_searchSpaceMatchNbsp.isSelected());
 
         Preferences.setPreference(Preferences.SEARCHWINDOW_SEARCH_SOURCE, form.m_searchSource.isSelected());
-        Preferences.setPreference(Preferences.SEARCHWINDOW_SEARCH_TRANSLATION, form.m_searchTranslation.isSelected());
+        Preferences.setPreference(Preferences.SEARCHWINDOW_SEARCH_TRANSLATION,
+                form.m_searchTranslation.isSelected());
 
         if (form.m_searchTranslatedUntranslated.isSelected()) {
             Preferences.setPreference(Preferences.SEARCHWINDOW_SEARCH_STATE,
                     SearchExpression.SearchState.TRANSLATED_UNTRANSLATED);
         } else if (form.m_searchTranslated.isSelected()) {
-            Preferences.setPreference(Preferences.SEARCHWINDOW_SEARCH_STATE, SearchExpression.SearchState.TRANSLATED);
+            Preferences.setPreference(Preferences.SEARCHWINDOW_SEARCH_STATE,
+                    SearchExpression.SearchState.TRANSLATED);
         } else if (form.m_searchUntranslated.isSelected()) {
-            Preferences.setPreference(Preferences.SEARCHWINDOW_SEARCH_STATE, SearchExpression.SearchState.UNTRANSLATED);
+            Preferences.setPreference(Preferences.SEARCHWINDOW_SEARCH_STATE,
+                    SearchExpression.SearchState.UNTRANSLATED);
         }
 
         // replace options
@@ -569,26 +594,32 @@ public class SearchWindowController {
                 form.m_replaceUntranslated.isSelected());
 
         Preferences.setPreference(Preferences.SEARCHWINDOW_SEARCH_NOTES, form.m_searchNotesCB.isSelected());
-        Preferences.setPreference(Preferences.SEARCHWINDOW_SEARCH_COMMENTS, form.m_searchCommentsCB.isSelected());
+        Preferences.setPreference(Preferences.SEARCHWINDOW_SEARCH_COMMENTS,
+                form.m_searchCommentsCB.isSelected());
 
-        Preferences.setPreference(Preferences.SEARCHWINDOW_GLOSSARY_SEARCH, form.m_cbSearchInGlossaries.isSelected());
-        Preferences.setPreference(Preferences.SEARCHWINDOW_MEMORY_SEARCH, form.m_cbSearchInMemory.isSelected());
+        Preferences.setPreference(Preferences.SEARCHWINDOW_GLOSSARY_SEARCH,
+                form.m_cbSearchInGlossaries.isSelected());
+        Preferences.setPreference(Preferences.SEARCHWINDOW_MEMORY_SEARCH,
+                form.m_cbSearchInMemory.isSelected());
         Preferences.setPreference(Preferences.SEARCHWINDOW_TM_SEARCH, form.m_cbSearchInTMs.isSelected());
 
         Preferences.setPreference(Preferences.SEARCHWINDOW_ALL_RESULTS, form.m_allResultsCB.isSelected());
         Preferences.setPreference(Preferences.SEARCHWINDOW_FILE_NAMES, form.m_fileNamesCB.isSelected());
         // advanced search options
-        Preferences.setPreference(Preferences.SEARCHWINDOW_ADVANCED_VISIBLE, form.m_advancedVisiblePane.isVisible());
+        Preferences.setPreference(Preferences.SEARCHWINDOW_ADVANCED_VISIBLE,
+                form.m_advancedVisiblePane.isVisible());
         Preferences.setPreference(Preferences.SEARCHWINDOW_SEARCH_AUTHOR, form.m_authorCB.isSelected());
         Preferences.setPreference(Preferences.SEARCHWINDOW_AUTHOR_NAME, form.m_authorField.getText());
         Preferences.setPreference(Preferences.SEARCHWINDOW_DATE_FROM, form.m_dateFromCB.isSelected());
         Preferences.setPreference(Preferences.SEARCHWINDOW_DATE_FROM_VALUE,
                 dateFormat.format(dateFromModel.getDate()));
         Preferences.setPreference(Preferences.SEARCHWINDOW_DATE_TO, form.m_dateToCB.isSelected());
-        Preferences.setPreference(Preferences.SEARCHWINDOW_DATE_TO_VALUE, dateFormat.format(dateToModel.getDate()));
+        Preferences.setPreference(Preferences.SEARCHWINDOW_DATE_TO_VALUE,
+                dateFormat.format(dateToModel.getDate()));
         Preferences.setPreference(Preferences.SEARCHWINDOW_NUMBER_OF_RESULTS,
                 ((Integer) form.m_numberOfResults.getValue()));
-        Preferences.setPreference(Preferences.SEARCHWINDOW_EXCLUDE_ORPHANS, form.m_excludeOrphans.isSelected());
+        Preferences.setPreference(Preferences.SEARCHWINDOW_EXCLUDE_ORPHANS,
+                form.m_excludeOrphans.isSelected());
         Preferences.setPreference(Preferences.SEARCHWINDOW_FULLHALFWIDTH_INSENSITIVE,
                 form.m_fullHalfWidthInsensitive.isSelected());
 
@@ -611,8 +642,9 @@ public class SearchWindowController {
     }
 
     /**
-     * Reset search options to their default values. Search terms are left unchanged, as are any settings that
-     * don't affect the search results (such as syncing with editor).
+     * Reset search options to their default values. Search terms are left
+     * unchanged, as are any settings that don't affect the search results (such
+     * as syncing with editor).
      */
     public void resetOptions() {
         form.m_rbProject.setSelected(true);
@@ -677,14 +709,15 @@ public class SearchWindowController {
             public void run() {
                 EntryListPane viewer = (EntryListPane) form.m_viewer;
                 viewer.displaySearchResult(searcher, ((Integer) form.m_numberOfResults.getValue()));
-                form.m_resultsLabel.setText(StringUtil.format(OStrings.getString("SW_NR_OF_RESULTS"),
-                        viewer.getNrEntries()));
+                form.m_resultsLabel.setText(
+                        StringUtil.format(OStrings.getString("SW_NR_OF_RESULTS"), viewer.getNrEntries()));
                 boolean haveResults = !searcher.getSearchResults().isEmpty();
                 form.m_filterButton.setEnabled(haveResults);
                 form.m_replaceButton.setEnabled(haveResults);
                 form.m_replaceAllButton.setEnabled(haveResults);
                 if (!haveResults) {
-                    // RFE#1143 https://sourceforge.net/p/omegat/feature-requests/1143/
+                    // RFE#1143
+                    // https://sourceforge.net/p/omegat/feature-requests/1143/
                     focusSearchField();
                 } else {
                     viewer.requestFocus();
@@ -722,7 +755,8 @@ public class SearchWindowController {
 
     private void doFilter() {
         EntryListPane viewer = (EntryListPane) form.m_viewer;
-        Core.getEditor().commitAndLeave(); // Otherwise, the current segment being edited is lost
+        Core.getEditor().commitAndLeave(); // Otherwise, the current segment
+                                           // being edited is lost
         Core.getEditor().setFilter(new SearchFilter(viewer.getEntryList()));
     }
 
@@ -733,9 +767,9 @@ public class SearchWindowController {
         form.m_replaceField.setModel(new DefaultComboBoxModel<>(HistoryManager.getReplaceItems()));
 
         EntryListPane viewer = (EntryListPane) form.m_viewer;
-        Core.getEditor().commitAndLeave(); // Otherwise, the current segment being edited is lost
-        Core.getEditor()
-                .setFilter(new ReplaceFilter(viewer.getEntryList(), viewer.getSearcher()));
+        Core.getEditor().commitAndLeave(); // Otherwise, the current segment
+                                           // being edited is lost
+        Core.getEditor().setFilter(new ReplaceFilter(viewer.getEntryList(), viewer.getSearcher()));
     }
 
     private void doReplaceAll() {
@@ -745,7 +779,8 @@ public class SearchWindowController {
         form.m_replaceField.setModel(new DefaultComboBoxModel<>(HistoryManager.getReplaceItems()));
 
         EntryListPane viewer = (EntryListPane) form.m_viewer;
-        Core.getEditor().commitAndDeactivate(); // Otherwise, the current segment being edited is lost
+        Core.getEditor().commitAndDeactivate(); // Otherwise, the current
+                                                // segment being edited is lost
         int count = viewer.getEntryList().size();
         String msg = MessageFormat.format(OStrings.getString("SW_REPLACE_ALL_CONFIRM"), count);
         int r = JOptionPane.showConfirmDialog(form, msg, OStrings.getString("CONFIRM_DIALOG_TITLE"),
@@ -1027,7 +1062,8 @@ public class SearchWindowController {
     }
 
     /**
-     * Insert the specified text into the currently active (focused) search field: either Search or Replace
+     * Insert the specified text into the currently active (focused) search
+     * field: either Search or Replace
      *
      * @param text
      *            The text to insert
@@ -1042,7 +1078,8 @@ public class SearchWindowController {
     }
 
     /**
-     * Replace the text of the currently active (focused) search field: either Search or Replace
+     * Replace the text of the currently active (focused) search field: either
+     * Search or Replace
      *
      * @param text
      *            The text to set
@@ -1089,8 +1126,8 @@ public class SearchWindowController {
         }
 
         // Number of results
-        form.m_numberOfResults.setValue(Preferences.getPreferenceDefault(Preferences.SEARCHWINDOW_NUMBER_OF_RESULTS,
-                OConsts.ST_MAX_SEARCH_RESULTS));
+        form.m_numberOfResults.setValue(Preferences.getPreferenceDefault(
+                Preferences.SEARCHWINDOW_NUMBER_OF_RESULTS, OConsts.ST_MAX_SEARCH_RESULTS));
 
         form.m_excludeOrphans.setSelected(Preferences.isPreference(Preferences.SEARCHWINDOW_EXCLUDE_ORPHANS));
         form.m_fullHalfWidthInsensitive
@@ -1131,7 +1168,8 @@ public class SearchWindowController {
     }
 
     /*
-     * TODO: This should be a method on EditorController exposed via IEditor, NOT here.
+     * TODO: This should be a method on EditorController exposed via IEditor,
+     * NOT here.
      */
     private CaretPosition getCurrentPositionInEntryTranslationInEditor(IEditor editor) {
         if (editor instanceof EditorController) {

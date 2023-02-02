@@ -978,9 +978,9 @@ Folder = <token>Dossier</token></programlisting>
 	
 	<variablelist>
 	  <varlistentry>
-		<term>Is duplicate</term>
+		<term>Is repetition</term>
 		<listitem>
-		  <para>Indicates that a segment is a duplicate and specifies whether
+		  <para>Indicates that a segment is a repetition and specifies whether
 		  it is the FIRST instance.</para>
 		</listitem>
 	  </varlistentry>

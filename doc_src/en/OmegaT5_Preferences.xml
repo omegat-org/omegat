@@ -357,7 +357,7 @@
           <para>Select a theme for the OmegaT user interface.</para>
 
           <para>Additional themes can be added as plugins. The themes also
-          provide predefined set of default colors.</para>
+          provide predefined set of default colours.</para>
 
 		  <para>Not all natively provided Java themes are compatible with OmegaT
 		  operation.</para>
@@ -417,9 +417,9 @@
 	</section>
 
 	<section id="dialogs.preferences.colours">
-      <title id="dialogs.preferences.colours.title"><guilabel>Colors</guilabel></title>
+      <title id="dialogs.preferences.colours.title"><guilabel>Colours</guilabel></title>
 
-      <para>You can assign different colors for the various parts of the user
+      <para>You can assign different colours for the various parts of the user
       interface.</para>
 
       <para>Scripts can be used to set predefined themes. OmegaT is bundled with
@@ -888,14 +888,14 @@
 	</variablelist>
 	
 	<variablelist>
-	  <varlistentry id="dialogs.preferences.editor.attempt.to.convert.numbers.when.inserting.a.fuzzy.match">
+	  <varlistentry id="dialogs.preferences.editor.attempt.to.replace.numbers.when.inserting.a.fuzzy.match">
 		<term
-		id="dialogs.preferences.editor.attempt.to.convert.numbers.when.inserting.a.fuzzy.match.title"><option>Attempt
-		to convert fuzzy match numbers</option></term>
+		id="dialogs.preferences.editor.attempt.to.replace.numbers.when.inserting.a.fuzzy.match.title"><option>Attempt
+		to replace fuzzy match numbers</option></term>
 
 		<listitem>
-		  <para>When a fuzzy match is inserted, OmegaT tries to adapt the numbers
-		  in the fuzzy match to the numbers in the source.</para>
+		  <para>When a fuzzy match is inserted, OmegaT tries to replace the numbers
+		  in the fuzzy match with the numbers in the source text.</para>
 
 		  <note>
 			<para>Only integers and simple floats (e.g., 5.4) are

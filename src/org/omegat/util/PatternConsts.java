@@ -50,6 +50,10 @@ public final class PatternConsts {
     private static final String RE_PRINTF_VARS = "%([1-9]+\\$)?([+-])?('.)?(-)?([0-9]*)(\\.[0-9]*)?[bcdeEfFgGinopsuxX%]";
     private static final String RE_SIMPLE_PRINTF_VARS = "%([1-9]+\\$)?([0-9]*)(\\.[0-9]*)?[bcdeEfFgGinopsuxX%]";
     private static final String RE_SIMPLE_JAVA_MESSAGEFORMAT_PATTERN_VARS = "\\{([0-9])+\\}";
+
+    /** Tag Validation Option: check user defined tags according to regexp.*/
+    public static final String CHECK_CUSTOM_PATTERN_DEFAULT = "\\d+";
+
     /**
      * Compiled pattern to extract the encoding from XML file, if any. Found
      * encoding is stored in group #1.
@@ -252,7 +256,7 @@ public final class PatternConsts {
                 regexp += "|" + RE_SIMPLE_JAVA_MESSAGEFORMAT_PATTERN_VARS;
             }
             // assume: customRegExp has already been validated.
-            String customRegExp = Preferences.getPreference(Preferences.CHECK_CUSTOM_PATTERN);
+            String customRegExp = Preferences.getPreferenceDefault(Preferences.CHECK_CUSTOM_PATTERN, CHECK_CUSTOM_PATTERN_DEFAULT);
             if (!"".equalsIgnoreCase(customRegExp)) {
                 regexp += "|" + customRegExp;
             }
@@ -287,7 +291,7 @@ public final class PatternConsts {
 
     public static Pattern getCustomTagPattern() {
         if (customTags == null) {
-            String customTagsRegex = Preferences.getPreference(Preferences.CHECK_CUSTOM_PATTERN);
+            String customTagsRegex = Preferences.getPreferenceDefault(Preferences.CHECK_CUSTOM_PATTERN, CHECK_CUSTOM_PATTERN_DEFAULT);
             if (!"".equalsIgnoreCase(customTagsRegex)) {
                 customTags = Pattern.compile(customTagsRegex);
             }

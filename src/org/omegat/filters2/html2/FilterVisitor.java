@@ -319,13 +319,13 @@ public class FilterVisitor extends NodeVisitor {
     @Override
     public void visitRemarkNode(Remark remark) {
         recurseSelf = true;
-        recurseChildren = true;
-        if (isTextUpForCollection) {
-            endup();
-        } else {
-            writeOutPrecedingNodes();
-        }
+        recurseChildren = false;
         if (!options.getRemoveComments()) {
+            if (isTextUpForCollection) {
+                endup();
+            } else {
+                writeOutPrecedingNodes();
+            }
             writeout(remark.toHtml());
         }
     }

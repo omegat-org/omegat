@@ -183,12 +183,6 @@
 				  <entry><ulink
 				  url="https://cloud.google.com/translate/docs/reference/rest/">https://cloud.google.com/translate/</ulink></entry>
 				</row>
-				<row>
-				  <entry>Yandex</entry>
-				  <entry>API key</entry>
-				  <entry><ulink
-				  url="https://yandex.com/dev/dictionary/keys/get/">https://yandex.com/</ulink></entry>
-				</row>
 			  </tbody>
 			</tgroup>
 		  </table>

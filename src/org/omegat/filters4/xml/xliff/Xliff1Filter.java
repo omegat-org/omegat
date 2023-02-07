@@ -468,6 +468,7 @@ public class Xliff1Filter extends AbstractXliffFilter {
         return true;
     }
 
+    @SuppressWarnings("unchecked")
     protected final void generateTargetStartElement(XMLStreamWriter writer) throws XMLStreamException {
         if (!isStandardTranslationState()) {
             if (targetStartEvent == null) {

@@ -9,8 +9,7 @@
 
   Implemented requests:
 
-  - Can share authentication between Git or SVN repositories 
-which are in the same server
+  - Share authentication between repositories on the same server
   https://sourceforge.net/p/omegat/feature-requests/1670
 
   - Font settings in Aligner

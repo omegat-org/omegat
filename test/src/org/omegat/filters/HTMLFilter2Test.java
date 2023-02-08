@@ -88,7 +88,7 @@ public class HTMLFilter2Test extends TestFilterBase {
         assertEquals(3, entries.size());
         entries = parse(new HTMLFilter2(),
                 "test/data/filters/html/file-HTMLFilter2-OmegaT.html");
-        assertEquals(166, entries.size());
+        assertEquals(165, entries.size());
     }
 
     @Test

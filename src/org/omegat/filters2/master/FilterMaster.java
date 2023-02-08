@@ -203,6 +203,8 @@ public class FilterMaster {
             filterObject = lookup.filterObject;
 
             filterObject.parseFile(inFile, lookup.config, fc, parseCallback);
+        } catch (TranslationException e) {
+            throw e;
         } catch (Exception ioe) {
             throw new IOException(filename + "\n" + ioe, ioe);
         }

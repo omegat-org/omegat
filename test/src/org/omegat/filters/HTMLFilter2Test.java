@@ -71,6 +71,25 @@ public class HTMLFilter2Test extends TestFilterBase {
                 "test/data/filters/html/file-HTMLFilter2-all-block-elements.html");
         assertEquals(49, entries.size());
     }
+    
+    @Test
+    public void testParseRegression() throws Exception {
+        List<String> entries = parse(new HTMLFilter2(),
+                "test/data/filters/html/file-HTMLFilter2-recurse-bugfix-SF205.html");
+        assertEquals(3, entries.size());
+        entries = parse(new HTMLFilter2(),
+                "test/data/filters/html/file-HTMLFilter2-tag-dropping-bugfix-SF609.html");
+        assertEquals(1, entries.size());
+        entries = parse(new HTMLFilter2(),
+                "test/data/filters/html/file-HTMLFilter2-tag-dropping-bugfix-SF613.html");
+        assertEquals(2, entries.size());
+        entries = parse(new HTMLFilter2(),
+                "test/data/filters/html/file-HTMLFilter2-tag-dropping-bugfix-SF873.html");
+        assertEquals(3, entries.size());
+        entries = parse(new HTMLFilter2(),
+                "test/data/filters/html/file-HTMLFilter2-OmegaT.html");
+        assertEquals(166, entries.size());
+    }
 
     @Test
     public void testTranslate() throws Exception {
@@ -82,6 +101,7 @@ public class HTMLFilter2Test extends TestFilterBase {
         translateText(filter, "test/data/filters/html/file-HTMLFilter2-tag-dropping-bugfix-SF609.html");
         translateText(filter, "test/data/filters/html/file-HTMLFilter2-tag-dropping-bugfix-SF613.html");
         translateText(filter, "test/data/filters/html/file-HTMLFilter2-tag-dropping-bugfix-SF873.html");
+        translateText(filter, "test/data/filters/html/file-HTMLFilter2-OmegaT.html");
     }
 
     @Test

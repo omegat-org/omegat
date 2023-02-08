@@ -42,6 +42,10 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
+import org.xml.sax.Attributes;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.FilterContext;
@@ -49,13 +53,11 @@ import org.omegat.filters2.TranslationException;
 import org.omegat.util.Language;
 import org.omegat.util.OConsts;
 import org.omegat.util.PatternConsts;
-import org.xml.sax.Attributes;
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
 
 /**
- * Abstract basis filter for XML format filters: OpenDocument, DocBook etc. Ideally should allow creation of a
- * new XML dialect filter by simply specifying translatable tags and attributes.
+ * Abstract basis filter for XML format filters: OpenDocument, DocBook etc.
+ * Ideally should allow creation of a new XML dialect filter by simply
+ * specifying translatable tags and attributes.
  *
  * @author Maxym Mykhalchuk
  * @author Didier Briel
@@ -64,10 +66,10 @@ import org.xml.sax.SAXException;
  */
 public abstract class XMLFilter extends AbstractFilter implements Translator {
     /** Factory for SAX parsers. */
-    private SAXParserFactory parserFactory;
+    private final SAXParserFactory parserFactory;
 
     /** XML dialect this filter handles. */
-    private XMLDialect dialect;
+    private final XMLDialect dialect;
 
     /** Creates a new instance of XMLFilter */
     public XMLFilter(XMLDialect dialect) {
@@ -75,7 +77,7 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
         // parserFactory.setValidating(false);
         try {
             parserFactory.setFeature("http://xml.org/sax/features/validation", true);
-        } catch (Exception e) {
+        } catch (Exception ignored) {
         }
         this.dialect = dialect;
     }
@@ -104,8 +106,8 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
      *             If any I/O Error occurs upon reader creation.
      */
     @Override
-    public BufferedReader createReader(File inFile, String inEncoding) throws UnsupportedEncodingException,
-            IOException {
+    public BufferedReader createReader(File inFile, String inEncoding)
+            throws UnsupportedEncodingException, IOException {
         XMLReader xmlreader = new XMLReader(inFile, inEncoding);
         this.encoding = xmlreader.getEncoding();
         this.eol = xmlreader.getEol();
@@ -113,13 +115,14 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
     }
 
     /**
-     * Creates a writer of the translated file. Accepts <code>null</code> output file -- returns a writer to
-     * <code>/dev/null</code> in this case ;-)
+     * Creates a writer of the translated file. Accepts <code>null</code> output
+     * file -- returns a writer to <code>/dev/null</code> in this case ;-)
      *
      * @param outFile
      *            The target file.
      * @param outEncoding
-     *            Encoding of the target file, if the filter supports it. Otherwise null.
+     *            Encoding of the target file, if the filter supports it.
+     *            Otherwise null.
      * @return The writer for the target file.
      *
      * @throws UnsupportedEncodingException
@@ -128,8 +131,8 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
      *             If any I/O Error occurs upon writer creation
      */
     @Override
-    public BufferedWriter createWriter(File outFile, String outEncoding) throws UnsupportedEncodingException,
-            IOException {
+    public BufferedWriter createWriter(File outFile, String outEncoding)
+            throws UnsupportedEncodingException, IOException {
         if (outEncoding == null) {
             outEncoding = this.encoding;
         }
@@ -168,8 +171,8 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
 
     /** Processes an XML file. */
     @Override
-    public void processFile(File inFile, File outFile, FilterContext fc) throws IOException,
-            TranslationException {
+    public void processFile(File inFile, File outFile, FilterContext fc)
+            throws IOException, TranslationException {
         try (BufferedReader inReader = createReader(inFile, fc.getInEncoding())) {
             inEncodingLastParsedFile = this.encoding;
             targetLanguage = fc.getTargetLang();
@@ -184,19 +187,21 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
         } catch (ParserConfigurationException e) {
             throw new TranslationException(e);
         } catch (SAXException e) {
-            throw new TranslationException(e);
+            throw new TranslationException(e.getMessage());
         }
     }
+
     @Override
-    protected void processFile(BufferedReader inFile, BufferedWriter outFile, FilterContext fc) throws IOException,
-            TranslationException {
+    protected void processFile(BufferedReader inFile, BufferedWriter outFile, FilterContext fc)
+            throws IOException, TranslationException {
         throw new UnsupportedOperationException(
                 "XMLFilter.processFile(BufferedReader,BufferedWriter) should never be called!");
     }
 
     /**
-     * Whether source encoding can be varied by the user. If XML file has no encoding declaration, UTF-8 will
-     * be used, hence returns <code>false</code> by default.
+     * Whether source encoding can be varied by the user. If XML file has no
+     * encoding declaration, UTF-8 will be used, hence returns
+     * <code>false</code> by default.
      *
      * @return <code>false</code>
      */
@@ -216,7 +221,8 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
     }
 
     /**
-     * The method the Handler would call to pass translatable content to OmegaT core and receive translation.
+     * The method the Handler would call to pass translatable content to OmegaT
+     * core and receive translation.
      */
     @Override
     public String translate(String entry, List<ProtectedPart> protectedParts) {
@@ -226,7 +232,8 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
         } else if (entryTranslateCallback != null) {
             String translation = entryTranslateCallback.getTranslation(null, entry, null);
             return translation != null ? translation : entry;
-        } else { // We're not supposed to be there,  (parsing called from inside isFileSupported, for instance)
+        } else { // We're not supposed to be there, (parsing called from inside
+                 // isFileSupported, for instance)
             return entry; // so what we return is not important
         }
 
@@ -234,8 +241,9 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
 
     /**
      * Returns whether the XML file is supported by the filter. <br>
-     * Reads {@link org.omegat.util.OConsts#READ_AHEAD_LIMIT} and tries to detect constrained text and match
-     * constraints defined in {@link XMLDialect} against them.
+     * Reads {@link org.omegat.util.OConsts#READ_AHEAD_LIMIT} and tries to
+     * detect constrained text and match constraints defined in
+     * {@link XMLDialect} against them.
      */
     @Override
     public boolean isFileSupported(BufferedReader reader) {
@@ -283,14 +291,11 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
             matcher = PatternConsts.XML_XMLNS.matcher(buf);
             if (matcher.find()) {
                 Pattern xmlns = dialect.getConstraints().get(XMLDialect.CONSTRAINT_XMLNS);
-                if (xmlns != null && (matcher.group(2) == null || !xmlns.matcher(matcher.group(2)).matches())) {
-                    return false;
-                }
-            } else if (dialect.getConstraints().containsKey(XMLDialect.CONSTRAINT_XMLNS)) {
-                return false;
+                return xmlns == null
+                        || (matcher.group(2) != null && xmlns.matcher(matcher.group(2)).matches());
+            } else {
+                return !dialect.getConstraints().containsKey(XMLDialect.CONSTRAINT_XMLNS);
             }
-
-            return true;
 
         } catch (Exception e) {
             return false;

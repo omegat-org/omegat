@@ -103,6 +103,7 @@ class OpenXmlFilter extends AbstractXmlFilter {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     protected boolean processStartElement(StartElement startElement, XMLStreamWriter writer)
             throws XMLStreamException {
         if (OOXML_MAIN_PARA_ELEMENT == null) {
@@ -663,6 +664,7 @@ class OpenXmlFilter extends AbstractXmlFilter {
 
     // True if we can find in defaults this element with same attributes.
     // 0 = not found, 1 = found but differs, 2 = found equal
+    @SuppressWarnings("unchecked")
     private int isInDefaults(StartElement stEl) {
         for (XMLEvent dev : defaultsForParagraph) {
             if (dev.isStartElement() && dev.asStartElement().getName().equals(stEl.getName())) {
@@ -750,6 +752,7 @@ class OpenXmlFilter extends AbstractXmlFilter {
     }
 
     // Add characters with eventually xml:space=preserve
+    @SuppressWarnings("unchecked")
     private void addCharacters(LinkedList<XMLEvent> res, String text) {
         if (text.trim().equals(text)) {
             res.add(eFactory.createCharacters(text));

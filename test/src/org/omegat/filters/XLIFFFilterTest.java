@@ -27,13 +27,12 @@
 package org.omegat.filters;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.List;
@@ -45,15 +44,12 @@ import org.apache.commons.io.FileUtils;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.xml.sax.SAXException;
 
 import org.omegat.core.Core;
 import org.omegat.core.data.IProject;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.statistics.StatCount;
 import org.omegat.core.statistics.StatisticsSettings;
-import org.omegat.filters2.FilterContext;
-import org.omegat.filters2.IFilter;
 import org.omegat.filters2.ITranslateCallback;
 import org.omegat.filters2.TranslationException;
 import org.omegat.filters3.Tag;
@@ -64,6 +60,8 @@ import org.omegat.filters3.xml.xliff.XLIFFOptions;
 import org.omegat.util.PatternConsts;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
+import org.omegat.filters2.FilterContext;
+import org.omegat.filters2.IFilter;
 import org.omegat.util.xml.XMLBlock;
 import org.omegat.util.xml.XMLStreamReader;
 
@@ -230,7 +228,9 @@ public class XLIFFFilterTest extends TestFilterBase {
             loadSourceFiles(filter, f);
             fail("Should have died due to invalid XML character");
         } catch (TranslationException ex) {
-            assertTrue(wasCausedBy(ex, SAXException.class));
+            // Now OmegaT unwrap SAXException
+            assertNull(ex.getCause());
+            // assertTrue(wasCausedBy(ex, SAXException.class));
         }
     }
 
@@ -261,23 +261,21 @@ public class XLIFFFilterTest extends TestFilterBase {
             loadSourceFiles(filter, testFile.getAbsolutePath());
             fail("Should have died due to invalid XML character");
         } catch (TranslationException ex) {
-            assertTrue(wasCausedBy(ex, SAXException.class));
-            assertFalse(wasCausedBy(ex, URISyntaxException.class));
+            // Now OmegaT unwrap SAXException
+            // assertTrue(wasCausedBy(ex, SAXException.class));
+            assertNull(ex.getCause());
+            // assertFalse(wasCausedBy(ex, URISyntaxException.class));
         }
 
         FileUtils.deleteDirectory(tmpDir);
     }
 
-    private static boolean wasCausedBy(Throwable ex, Class<?> cls) {
-        Throwable cause = ex.getCause();
-        if (cause == null) {
-            return false;
-        } else if (cause.getClass().equals(cls)) {
-            return true;
-        } else {
-            return wasCausedBy(cause, cls);
-        }
-    }
+    /*
+     * Unused now. private static boolean wasCausedBy(Throwable ex, Class<?>
+     * cls) { Throwable cause = ex.getCause(); if (cause == null) { return
+     * false; } else if (cause.getClass().equals(cls)) { return true; } else {
+     * return wasCausedBy(cause, cls); } }
+     */
 
     @Test
     public void testProperties() throws Exception {

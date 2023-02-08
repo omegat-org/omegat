@@ -139,7 +139,51 @@
 	</note>
   </section>
 
+  <section id="how.to.restore.your.data.project.locked">
+	<title id="how.to.restore.your.data.project.locked.title">Your project is
+	locked?</title>
 
+	<para>In the rare case where your computer freezes and OmegaT does not have
+	time to close properly, the <filename>omegat.project</filename> file can be
+	locked by the operating system and keep you from reopening after you reboot
+	your system.</para>
+
+	<para>Proceed as follows:</para>
+
+	<orderedlist>
+      <listitem>
+		<para>Identify the project folder that OmegaT refuses to open and open
+		it in your file manager. The folder contents should be similar to a
+		standard <link linkend="chapter.project.folder">project</link>
+		folder.</para>
+      </listitem>
+
+	  <listitem>
+		<para>In the folder, you should find a
+		<filename>omegat.project</filename> file as well as a
+		<filename>omegat.project.bak</filename> file. Make sure that the files
+		are identical.</para>
+      </listitem>
+
+      <listitem>
+		<para>Rename the <filename>omegat.project</filename> file (to
+		<filename>omegat.project.locked</filename> for example).</para>
+      </listitem>
+
+      <listitem>
+		<para>Rename the <filename>omegat.project.bak</filename> file to
+		<filename>omegat.project</filename>.</para>
+      </listitem>
+
+      <listitem>
+		<para>Open the project.</para>
+      </listitem>
+	</orderedlist>
+
+	<para>This action will open the project with the automatically created
+	backup <filename>omegat.project</filename> file.</para>
+  </section>
+  
   <section id="how.to.restore.your.data.project.wont.open">
 	<title id="how.to.restore.your.data.project.wont.open.title">Your project
 	won’t open?</title>

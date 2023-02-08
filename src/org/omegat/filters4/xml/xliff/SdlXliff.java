@@ -125,6 +125,7 @@ public class SdlXliff extends Xliff1Filter {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     protected boolean processStartElement(StartElement startElement, XMLStreamWriter writer)
             throws XMLStreamException {
         if (startElement.getName().getLocalPart().equals("cmt-def")) {

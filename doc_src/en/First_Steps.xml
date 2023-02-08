@@ -23,7 +23,7 @@
 		will also create an empty translation memory that it will fill in the
 		background, one segment at as time as you type your translation. Matches
 		for that memory will eventually appear in the <guilabel>Fuzzy
-		Match</guilabel> pane.</para>
+		Matches</guilabel> pane.</para>
 	  </listitem>
 	  <listitem>
 		<para>Click on <guibutton>Add Files...</guibutton> and add the files

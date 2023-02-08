@@ -368,6 +368,7 @@ public abstract class AbstractXmlFilter extends AbstractFilter {
         }
     }
 
+    @SuppressWarnings("unchecked")
     protected final void fromEventToWriter(XMLEvent ev, XMLStreamWriter writer) throws XMLStreamException {
         switch (ev.getEventType()) {
         case XMLEvent.ENTITY_REFERENCE:
@@ -534,6 +535,7 @@ public abstract class AbstractXmlFilter extends AbstractFilter {
         return l;
     }
 
+    @SuppressWarnings("unchecked")
     protected String findKey(StartElement findEl, boolean isEmpty) {
         for (Map.Entry<String, List<XMLEvent>> me : tagsMap.entrySet()) {
             try {

@@ -128,7 +128,7 @@ dependencies {
         // Legacy projects re-hosted on Maven Central
         api 'org.omegat:vldocking:3.0.5'
         runtimeOnly 'org.slf4j:slf4j-jdk14:1.7.32' // needed by vldocking
-        implementation 'org.omegat:htmlparser:1.5'
+        implementation 'org.omegat:htmlparser:1.6-20230203'
         implementation 'org.omegat:gnudiff4j:1.15'
         implementation 'org.omegat:lib-mnemonics:1.0'
         implementation 'org.omegat:jmyspell-core:1.0.0-beta-2'

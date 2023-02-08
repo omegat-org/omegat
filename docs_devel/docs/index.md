@@ -50,6 +50,7 @@
 
 ## Details of features
 
+* [Editor pane Key assigns](80.EditorKeys.md)
 * [External Finder](81.ExternalFinder.md)
 
 ## Other information

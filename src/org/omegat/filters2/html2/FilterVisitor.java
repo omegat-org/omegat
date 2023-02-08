@@ -118,13 +118,13 @@ public class FilterVisitor extends NodeVisitor {
      * <ul>
      * <li>If another chunk of text follows, they get appended to the
      * translatable paragraph,
-     * <li>Otherwise (paragraph tag follows), they are written out directly.
+     * <li>Otherwise (eg if a paragraph tag follows), they are written out directly.
      * </ul>
      */
     protected List<Node> followingNodes;
 
     /** The tags behind the shortcuts */
-    protected List<Tag> sTags;
+    protected List<Node> sTags;
     /** The tag numbers of shorcutized tags */
     protected List<Integer> sTagNumbers;
     /** The list of all the tag shortcuts */
@@ -162,9 +162,8 @@ public class FilterVisitor extends NodeVisitor {
     @Override
     public void visitTag(Tag tag) {
 
-        boolean keepIntact = isProtectedTag(tag);
 
-        if (keepIntact) {
+        if (isProtectedTag(tag)) {
             if (isTextUpForCollection) {
                 endup();
             } else {
@@ -318,16 +317,18 @@ public class FilterVisitor extends NodeVisitor {
      */
     @Override
     public void visitRemarkNode(Remark remark) {
-        recurseSelf = true;
-        recurseChildren = false;
-        if (!options.getRemoveComments()) {
+        if (shouldKeepComments()) {
             if (isTextUpForCollection) {
-                endup();
+                translatableNodes.add(remark);
             } else {
                 writeOutPrecedingNodes();
+                writeout(remark.toHtml());
             }
-            writeout(remark.toHtml());
         }
+    }
+
+    private boolean shouldKeepComments() {
+        return !options.getRemoveComments();
     }
 
     /**
@@ -591,7 +592,9 @@ public class FilterVisitor extends NodeVisitor {
         for (int i = firstTagToIncludeFromPreceding; i <= lastTagKeptInFollowing; i++) {
             Node node = allNodesInParagraph.get(i);
             if (node instanceof Tag) {
-                shortcut((Tag) node, paragraph);
+                assignShortcut((Tag) node, paragraph);
+            } else if (node instanceof Remark) {
+                assignShortcut((Remark) node, paragraph);
             } else { // node instanceof Text
                 paragraph.append(HTMLUtils.entitiesToChars(node.toHtml()));
             }
@@ -640,7 +643,7 @@ public class FilterVisitor extends NodeVisitor {
         // note that this doesn't change < and > of tag shortcuts
         translation = HTMLUtils.charsToEntities(translation, filter.getTargetEncoding(), sShortcuts);
         // expands tag shortcuts into full-blown tags
-        translation = unshorcutize(translation);
+        translation = revertShortcut(translation);
         // writing out the paragraph into target file
         writeout(spacePrefix);
         writeout(translation);
@@ -678,7 +681,7 @@ public class FilterVisitor extends NodeVisitor {
     /**
      * Creates and stores a shortcut for the tag.
      */
-    private void shortcut(Tag tag, StringBuilder paragraph) {
+    private void assignShortcut(Tag tag, StringBuilder paragraph) {
         StringBuilder result = new StringBuilder();
         result.append('<');
         int n = -1;
@@ -687,17 +690,18 @@ public class FilterVisitor extends NodeVisitor {
             // trying to lookup for appropriate starting tag
             int recursion = 1;
             for (int i = sTags.size() - 1; i >= 0; i--) {
-                Tag othertag = sTags.get(i);
-                if (othertag.getTagName().equals(tag.getTagName())) {
-                    if (othertag.isEndTag()) {
-                        recursion++;
-                    } else {
-                        recursion--;
-                        if (recursion == 0) {
-                            // we've found a starting tag for this ending one
-                            // !!!
-                            n = sTagNumbers.get(i);
-                            break;
+                if (sTags.get(i) instanceof Tag) {
+                    Tag othertag = (Tag) sTags.get(i);
+                    if (othertag.getTagName().equals(tag.getTagName())) {
+                        if (othertag.isEndTag()) {
+                            recursion++;
+                        } else {
+                            recursion--;
+                            if (recursion == 0) {
+                                // found starting tag for this endTag
+                                n = sTagNumbers.get(i);
+                                break;
+                            }
                         }
                     }
                 }
@@ -743,22 +747,50 @@ public class FilterVisitor extends NodeVisitor {
     }
 
     /**
+     * Creates and stores a shortcut for the comment (Remark node).
+     */
+    private void assignShortcut(Remark remark, StringBuilder paragraph) {
+        StringBuilder result = new StringBuilder();
+        int n = sNumShortcuts++;
+        result.append("<c");
+        result.append(n);
+        result.append("/>");
+        String shortcut = result.toString();
+        sTags.add(remark);
+        sTagNumbers.add(n);
+        sShortcuts.add(shortcut);
+        paragraph.append(shortcut);
+    }
+
+    /**
      * Recovers tag shortcuts into full tags.
      */
-    private String unshorcutize(String str) {
+    private String revertShortcut(String str) {
         for (int i = 0; i < sShortcuts.size(); i++) {
             String shortcut = sShortcuts.get(i);
             int pos = -1;
             while ((pos = str.indexOf(shortcut, pos + 1)) >= 0) {
-                Tag tag = sTags.get(i);
-                try {
-                    str = str.substring(0, pos) + "<" + tag.getText() + ">"
-                            + str.substring(pos + shortcut.length());
-                } catch (StringIndexOutOfBoundsException sioobe) {
-                    // nothing, string doesn't change
-                    // but prevent endless loop
-                    break;
-                }
+                if (sTags.get(i) instanceof Tag) {
+                    Tag tag = (Tag) sTags.get(i);
+                    try {
+                        str = str.substring(0, pos) + "<" + tag.getText() + ">"
+                                + str.substring(pos + shortcut.length());
+                    } catch (StringIndexOutOfBoundsException sioobe) {
+                        // nothing, string doesn't change
+                        // but prevent endless loop
+                        break;
+                    }
+                } else if (sTags.get(i) instanceof Remark) {
+                     Remark comment = (Remark) sTags.get(i);
+                     try {
+                         str = str.substring(0, pos) + comment.toHtml()
+                                 + str.substring(pos + shortcut.length());
+                     } catch (StringIndexOutOfBoundsException sioobe) {
+                         // nothing, string doesn't change
+                         // but prevent endless loop
+                         break;
+                     }
+                 }
             }
         }
         return str;

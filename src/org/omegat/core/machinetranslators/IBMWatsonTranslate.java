@@ -174,19 +174,23 @@ public class IBMWatsonTranslate extends BaseCachedTranslate {
      * @return translated text.
      */
     @SuppressWarnings("unchecked")
-    protected String getJsonResults(String json) {
+    protected String getJsonResults(String json) throws Exception {
         ObjectMapper mapper = new ObjectMapper();
+        JsonNode rootNode;
         try {
-            JsonNode rootNode = mapper.readTree(json);
-            JsonNode translations = rootNode.get("translations");
-            if (translations.has(0)) {
-                return translations.get(0).get("translation").asText();
-            }
+            rootNode = mapper.readTree(json);
         } catch (Exception e) {
             Log.logErrorRB(e, "MT_JSON_ERROR");
-            return OStrings.getString("MT_JSON_ERROR");
+            throw new Exception(OStrings.getString("MT_JSON_ERROR"));
         }
-        return null;
+        JsonNode translations = rootNode.get("translations");
+        if (translations != null && translations.has(0)) {
+            if (translations.get(0) != null && translations.get(0).get("translation") != null) {
+                return translations.get(0).get("translation").asText();
+            }
+        }
+        Log.logErrorRB( "MT_JSON_ERROR");
+        throw new Exception(OStrings.getString("MT_JSON_ERROR"));
     }
 
     @Override

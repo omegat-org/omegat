@@ -77,7 +77,9 @@ public abstract class BaseTranslate implements IMachineTranslation {
         menuItem.addActionListener(e -> setEnabled(menuItem.isSelected()));
         enabled = Preferences.isPreference(getPreferenceName());
         menuItem.setState(enabled);
-        Core.getMainWindow().getMainMenu().getMachineTranslationMenu().add(menuItem);
+        if (Core.getMainWindow() != null) {  // can be null in unit test
+            Core.getMainWindow().getMainMenu().getMachineTranslationMenu().add(menuItem);
+        }
         // Preferences listener
         Preferences.addPropertyChangeListener(getPreferenceName(), e -> {
             boolean newValue = (Boolean) e.getNewValue();

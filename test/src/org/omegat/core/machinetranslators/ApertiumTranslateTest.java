@@ -35,6 +35,7 @@ import java.util.Map;
 
 import com.github.tomakehurst.wiremock.client.WireMock;
 import com.github.tomakehurst.wiremock.matching.StringValuePattern;
+import org.junit.Assert;
 import org.junit.Test;
 
 import org.omegat.util.Language;
@@ -48,7 +49,7 @@ public class ApertiumTranslateTest extends TestMachineTranslatorBase {
             + "\"responseStatus\": 200}";
 
     @Test
-    public void testGetJsonResults() {
+    public void testGetJsonResults() throws Exception {
         Preferences.setPreference(Preferences.ALLOW_APERTIUM_TRANSLATE, true);
         ApertiumTranslate apertiumTranslate = new ApertiumTranslate();
         String result = apertiumTranslate.getJsonResults(json);
@@ -81,4 +82,36 @@ public class ApertiumTranslateTest extends TestMachineTranslatorBase {
         String result = apertiumTranslate.translate(new Language("EN"), new Language("DE"), "source text");
         assertEquals("Abc", result);
     }
+
+    @Test
+    public void testErrorResponse() throws Exception {
+        Preferences.setPreference(Preferences.ALLOW_APERTIUM_TRANSLATE, true);
+        int port = wireMockRule.port();
+        String url = String.format("http://localhost:%d", port);
+        System.setProperty(ApertiumTranslate.PROPERTY_APERTIUM_SERVER_CUSTOM, "true");
+        System.setProperty(ApertiumTranslate.PROPERTY_APERTIUM_SERVER_URL, url);
+        System.setProperty(ApertiumTranslate.PROPERTY_APERTIUM_SERVER_KEY, "abcdefg");
+
+        String errorResponse = "{\"responseStatus\": 400,"
+                + " \"responseDetails\": \"That pair is invalid, use e.g. eng|spa\"}\"";
+
+        Map<String, StringValuePattern> params = new HashMap<>();
+        params.put("q", WireMock.equalTo("This    works well?"));
+        params.put("langpair", WireMock.equalTo("en|es"));
+        params.put("key", WireMock.matching("\\w+"));
+        params.put("markUnknown", WireMock.equalTo("no"));
+        WireMock.stubFor(WireMock.get(WireMock.urlPathEqualTo("/translate"))
+                .withQueryParams(params)
+                .willReturn(WireMock.aResponse()
+                        .withStatus(200)
+                        .withHeader("Content-Type", "application/json")
+                        .withBody(errorResponse)
+                )
+        );
+        ApertiumTranslate apertiumTranslate = new ApertiumTranslate();
+        Assert.assertThrows(MachineTranslateError.class, () -> {
+            apertiumTranslate.translate(new Language("EN"), new Language("ES"), "This    works well?");
+        });
+    }
+
 }

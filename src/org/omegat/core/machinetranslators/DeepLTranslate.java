@@ -108,7 +108,7 @@ public class DeepLTranslate extends BaseCachedTranslate {
         String apiKey = getCredential(PROPERTY_API_KEY);
         if (apiKey == null || apiKey.isEmpty()) {
             if (temporaryKey == null) {
-                throw new Exception(OStrings.getString("DEEPL_API_KEY_NOTFOUND"));
+                throw new MachineTranslateError(OStrings.getString("DEEPL_API_KEY_NOTFOUND"));
             }
             apiKey = temporaryKey;
         }
@@ -154,7 +154,7 @@ public class DeepLTranslate extends BaseCachedTranslate {
      * @return translation, or null when API returns empty result, or error
      *         message when parse failed.
      */
-    protected String getJsonResults(String json) throws TranslationException {
+    protected String getJsonResults(String json) throws TranslationException, MachineTranslateError {
         ObjectMapper mapper = new ObjectMapper();
         try {
             // { "translations": [ { "detected_source_language": "DE", "text":
@@ -163,21 +163,22 @@ public class DeepLTranslate extends BaseCachedTranslate {
             JsonNode translations = rootNode.get("translations");
             if (translations == null) {
                 Log.logErrorRB("MT_JSON_ERROR");
-                throw new Exception(OStrings.getString("MT_JSON_ERROR"));
+                throw new MachineTranslateError(OStrings.getString("MT_JSON_ERROR"));
             }
             if (translations.has(0)) {
                 JsonNode textNode = translations.get(0).get("text");
                 if (textNode == null) {
                     Log.logErrorRB("MT_JSON_ERROR");
-                    throw new Exception(OStrings.getString("MT_JSON_ERROR"));
+                    throw new MachineTranslateError(OStrings.getString("MT_JSON_ERROR"));
                 }
                 return translations.get(0).get("text").asText();
             }
         } catch (Exception e) {
             Log.logErrorRB(e, "MT_JSON_ERROR");
-            throw new TranslationException(OStrings.getString("MT_JSON_ERROR"));
+            throw new MachineTranslateError(OStrings.getString("MT_JSON_ERROR"));
         }
-        return null;
+        Log.logErrorRB( "MT_JSON_ERROR");
+        throw new MachineTranslateError(OStrings.getString("MT_JSON_ERROR"));
     }
 
     @Override

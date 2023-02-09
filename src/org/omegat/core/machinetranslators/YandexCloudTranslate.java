@@ -132,9 +132,9 @@ public class YandexCloudTranslate extends BaseCachedTranslate {
             String errorMessage = extractErrorMessage(e.body);
             if (errorMessage == null) {
                 errorMessage = OStrings.getString("MT_ENGINE_YANDEX_CLOUD_BAD_TRANSLATE_RESPONSE");
-                throw new Exception(errorMessage);
+                throw new MachineTranslateError(errorMessage);
             }
-            throw e;
+            throw new MachineTranslateError(e.getMessage());
         }
         if (response == null) {
             return null;
@@ -232,7 +232,7 @@ public class YandexCloudTranslate extends BaseCachedTranslate {
     }
 
     @SuppressWarnings("unchecked")
-    protected String extractTranslation(final String json) {
+    protected String extractTranslation(final String json) throws MachineTranslateError {
         JsonNode rootNode;
         ObjectMapper mapper = new ObjectMapper();
         try {
@@ -240,7 +240,8 @@ public class YandexCloudTranslate extends BaseCachedTranslate {
             return rootNode.get("translations").get(0).get("text").asText();
         } catch (Exception e) {
             Log.logErrorRB(e, "MT_JSON_ERROR");
-            return OStrings.getString("MT_ENGINE_YANDEX_CLOUD_BAD_TRANSLATE_RESPONSE");
+            throw new MachineTranslateError(OStrings.getString(
+                    "MT_ENGINE_YANDEX_CLOUD_BAD_TRANSLATE_RESPONSE"));
         }
     }
 

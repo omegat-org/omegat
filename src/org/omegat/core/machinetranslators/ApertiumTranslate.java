@@ -40,6 +40,7 @@ import javax.swing.JCheckBox;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -67,6 +68,7 @@ public class ApertiumTranslate extends BaseCachedTranslate {
     protected static final String APERTIUM_SERVER_URL_FORMAT = "%s/translate?q=%s&markUnknown=%s&langpair=%s|%s&key=%s";
     // Specific OmegaT key
     protected static final String APERTIUM_SERVER_KEY_DEFAULT = "bwuxb5jS+VwSJ8mLz1qMfmMrDGA";
+    private ObjectMapper mapper = new ObjectMapper();
 
     @Override
     protected String getPreferenceName() {
@@ -152,12 +154,11 @@ public class ApertiumTranslate extends BaseCachedTranslate {
      *         error message when parse failed.
      */
     @SuppressWarnings("unchecked")
-    protected String getJsonResults(String json) {
-        ObjectMapper mapper = new ObjectMapper();
+    protected String getJsonResults(String json) throws Exception {
         try {
             JsonNode rootNode = mapper.readTree(json);
             if (!rootNode.has("responseStatus")) {
-                return OStrings.getString("APERTIUM_CUSTOM_SERVER_INVALID");
+                throw new MachineTranslateError(OStrings.getString("APERTIUM_CUSTOM_SERVER_INVALID"));
             }
             int code = rootNode.get("responseStatus").asInt();
             if (code == HTTP_OK) {
@@ -166,13 +167,13 @@ public class ApertiumTranslate extends BaseCachedTranslate {
                     return tr;
                 }
             }
-            // Returns an error message if there's no translatedText or if there
-            // was a problem
+            // throw exception if there's no translatedText or if there was
+            // a problem
             String details = rootNode.get("responseDetails").asText();
-            return StringUtil.format(OStrings.getString("APERTIUM_ERROR"), code, details);
-        } catch (Exception e) {
+            throw new MachineTranslateError(StringUtil.format(OStrings.getString("APERTIUM_ERROR"), code, details));
+        } catch (JsonParseException e) {
             Log.logErrorRB(e, "MT_JSON_ERROR");
-            return OStrings.getString("MT_JSON_ERROR");
+            throw new MachineTranslateError(OStrings.getString("MT_JSON_ERROR"));
         }
     }
 

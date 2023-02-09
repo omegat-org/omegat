@@ -51,6 +51,7 @@ import org.omegat.core.Core;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
+import org.omegat.core.machinetranslators.MachineTranslateError;
 import org.omegat.core.machinetranslators.MachineTranslators;
 import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.common.EntryInfoSearchThread;
@@ -273,10 +274,13 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
             }
             try {
                 return translator.getTranslation(source, target, src);
-            } catch (Exception e) {
+            } catch (MachineTranslateError e) {
                 Log.log(e);
                 Core.getMainWindow()
                         .showTimedStatusMessageRB("MT_ENGINE_ERROR", translator.getName(), e.getLocalizedMessage());
+                return null;
+            } catch (Exception e) {
+                Log.logErrorRB(e, "MT_ENGINE_EXCEPTION");
                 return null;
             }
         }

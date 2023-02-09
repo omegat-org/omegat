@@ -55,7 +55,7 @@ public class Google2TranslateTest extends TestMachineTranslatorBase {
             + "}";
 
     @Test
-    public void testGetJsonResults() throws Exception {
+    public void testGetJsonResults() throws MachineTranslateError {
         Preferences.setPreference(Preferences.ALLOW_GOOGLE2_TRANSLATE, true);
         Google2Translate google2Translate = new Google2Translate();
         String translation = google2Translate.getJsonResults(json);

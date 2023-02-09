@@ -44,7 +44,7 @@ import org.omegat.util.Preferences;
 public class YandexCloudTranslateTest extends TestCore {
 
     @Test
-    public void getJsonResults() {
+    public void getJsonResults() throws MachineTranslateError {
         YandexCloudTranslate yandexCloudTranslate = new YandexCloudTranslate();
         String json = "{\"translations\": [{\"text\": \"translated text goes here.\" }]}";
         String translation = yandexCloudTranslate.extractTranslation(json);

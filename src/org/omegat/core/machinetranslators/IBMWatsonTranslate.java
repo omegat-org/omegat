@@ -95,7 +95,7 @@ public class IBMWatsonTranslate extends BaseCachedTranslate {
         String apiPassword = getCredential(PROPERTY_PASSWORD);
 
         if (apiLogin == null || apiLogin.isEmpty()) {
-            throw new Exception(OStrings.getString("IBMWATSON_API_KEY_NOTFOUND"));
+            throw new MachineTranslateError(OStrings.getString("IBMWATSON_API_KEY_NOTFOUND"));
         }
 
         // If the instance uses IAM authentication
@@ -181,7 +181,7 @@ public class IBMWatsonTranslate extends BaseCachedTranslate {
             rootNode = mapper.readTree(json);
         } catch (Exception e) {
             Log.logErrorRB(e, "MT_JSON_ERROR");
-            throw new Exception(OStrings.getString("MT_JSON_ERROR"));
+            throw new MachineTranslateError(OStrings.getString("MT_JSON_ERROR"));
         }
         JsonNode translations = rootNode.get("translations");
         if (translations != null && translations.has(0)) {
@@ -190,7 +190,7 @@ public class IBMWatsonTranslate extends BaseCachedTranslate {
             }
         }
         Log.logErrorRB( "MT_JSON_ERROR");
-        throw new Exception(OStrings.getString("MT_JSON_ERROR"));
+        throw new MachineTranslateError(OStrings.getString("MT_JSON_ERROR"));
     }
 
     @Override

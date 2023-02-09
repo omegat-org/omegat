@@ -157,7 +157,7 @@ public abstract class BaseTranslate implements IMachineTranslation {
     @Override
     public String getTranslation(Language sLang, Language tLang, String text) throws Exception {
         if (enabled) {
-            return translate(sLang, tLang, text);
+            return putToCache(sLang, tLang, text, translate(sLang, tLang, text));
         } else {
             return null;
         }
@@ -220,8 +220,10 @@ public abstract class BaseTranslate implements IMachineTranslation {
     }
 
     protected String putToCache(Language sLang, Language tLang, String text, String result) {
-        cache.put(sLang.toString() + "/" + tLang.toString() + "/" + text, result);
-        return null; // always return null, just for method compatibility
+        if (result != null) {
+            cache.put(sLang.toString() + "/" + tLang.toString() + "/" + text, result);
+        }
+        return result;
     }
 
     /**

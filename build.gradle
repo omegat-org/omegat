@@ -891,7 +891,8 @@ tasks.jacocoTestCoverageVerification {
         rule {
             element = 'CLASS'
             includes = ['org.omegat.core.machinetranslators.*', 'org.omegat.core.dictionaries.*']
-            excludes = ['**.*.1', '**.*.2', '**.*.3']  // ignore inner classes
+            excludes = ['**.*.1', '**.*.2', '**.*.3',  // ignore inner classes
+                    'org.omegat.core.machinetranslators.MachineTranslators']  // simple plugin reg.
             limit { minimum = 0.20 }
         }
         rule {

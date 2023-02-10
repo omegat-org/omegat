@@ -218,8 +218,8 @@
           <para>Tags are generally useful to reproduce specific layouts or
           characteristics of the source text in the translated text.</para>
 
-		  <para>If you activate this function, tags in the source
-		  segments will be hidden.</para>
+		  <para>Activating this function hides the tags in the source
+		  segments, freeing you from the need to handle them manually.</para>
 		  
 		  <para>This is especially useful when dealing with texts where inline
 		  formatting is not particularly useful (e.g., OCRed PDF, or poorly

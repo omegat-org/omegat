@@ -97,7 +97,7 @@ public class FilterVisitor extends NodeVisitor {
     protected boolean isTextUpForCollection = false;
 
     /** Did the PRE block start (it means we mustn't compress the spaces). */
-    protected boolean preformatting = false;
+    protected boolean betweenPreformattingTags = false;
 
     /**
      * The list of non-paragraph tags before a chunk of text.
@@ -179,7 +179,7 @@ public class FilterVisitor extends NodeVisitor {
                 handleParagraphTag();
             }
             if (isPreformattingTag(tag)) {
-                preformatting = true;
+                betweenPreformattingTags = true;
             }
             // Translate attributes of tags if they are not null.
             maybeTranslateAttribute(tag, "abbr");
@@ -286,19 +286,19 @@ public class FilterVisitor extends NodeVisitor {
         recurseSelf = true;
         recurseChildren = true;
         // nbsp is special case - process it like usual spaces
-        String trimmedtext = HTMLUtils.entitiesToChars(string.getText()).replace((char) 160, ' ').trim();
-        if (!trimmedtext.isEmpty()) {
+        String textAsCleanedString = HTMLUtils.entitiesToChars(string.getText()).replace((char) 160, ' ');
+        if (hasMoreThanJustWhitepaces(textAsCleanedString)) {
             // Hack around HTMLParser not being able to handle XHTML
-            // RFE pending:
+            // RFE:
             // http://sourceforge.net/tracker/index.php?func=detail&aid=1227222&group_id=24399&atid=381402
-            if (firstcall && PatternConsts.XML_HEADER.matcher(trimmedtext).matches()) {
+            if (firstcall && PatternConsts.XML_HEADER.matcher(textAsCleanedString.trim()).matches()) {
                 writeout(string.toHtml());
                 return;
             }
 
             isTextUpForCollection = true;
             firstcall = false;
-        } else if (preformatting) {
+        } else if (betweenPreformattingTags) {
             isTextUpForCollection = true;
         }
 
@@ -318,11 +318,16 @@ public class FilterVisitor extends NodeVisitor {
     @Override
     public void visitRemarkNode(Remark remark) {
         if (shouldKeepComments()) {
+            recurseSelf = true;
+            recurseChildren = true;
+            if (betweenPreformattingTags) {
+                isTextUpForCollection = true;
+            }
+
             if (isTextUpForCollection) {
-                translatableNodes.add(remark);
+                queueTranslatable(remark);
             } else {
-                writeOutPrecedingNodes();
-                writeout(remark.toHtml());
+                queuePrefix(remark);
             }
         }
     }
@@ -345,7 +350,7 @@ public class FilterVisitor extends NodeVisitor {
             endup();
         }
         if (isPreformattingTag(tag)) {
-            preformatting = false;
+            betweenPreformattingTags = false;
         }
         queuePrefix(tag);
     }
@@ -581,6 +586,8 @@ public class FilterVisitor extends NodeVisitor {
             Node node = allNodesInParagraph.get(i);
             if (node instanceof Tag) {
                 writeout("<" + node.getText() + ">");
+            } else if (node instanceof Remark) {
+                writeout(node.toHtml());
             } else {
                 writeout(compressWhitespace(node.getText()));
             }
@@ -616,7 +623,7 @@ public class FilterVisitor extends NodeVisitor {
         // (This changes the layout, therefore it is an option. NB: an alternative implementation is to compress by
         // default, and use Core.getFilterMaster().getConfig().isPreserveSpaces() option instead to compress if
         // not checked.)
-        if (!preformatting) {
+        if (!betweenPreformattingTags) {
 
             spacePrefix = HTMLUtils.getSpacePrefix(uncompressed, options.getCompressWhitespace());
             spacePostfix = HTMLUtils.getSpacePostfix(uncompressed, options.getCompressWhitespace());
@@ -654,6 +661,8 @@ public class FilterVisitor extends NodeVisitor {
             Node node = allNodesInParagraph.get(i);
             if (node instanceof Tag) {
                 writeout("<" + node.getText() + ">");
+            } else if (node instanceof Remark) {
+                writeout(node.toHtml());
             } else {
                 writeout(compressWhitespace(node.getText()));
             }
@@ -805,12 +814,26 @@ public class FilterVisitor extends NodeVisitor {
      * Whitespace text is simply added to the queue.
      */
     private void queueTranslatable(Text txt) {
-        if (!txt.toHtml().trim().isEmpty() || preformatting) {
+        if (hasMoreThanJustWhitepaces(txt.toHtml()) || betweenPreformattingTags) {
             translatableNodes.addAll(followingNodes);
             followingNodes.clear();
             translatableNodes.add(txt);
         } else {
             followingNodes.add(txt);
+        }
+    }
+
+    private boolean hasMoreThanJustWhitepaces(String string) {
+        return !string.trim().isEmpty();
+    }
+
+    private void queueTranslatable(Remark remark) {
+        if (betweenPreformattingTags) {
+            translatableNodes.addAll(followingNodes);
+            followingNodes.clear();
+            translatableNodes.add(remark);
+        } else {
+            followingNodes.add(remark);
         }
     }
 
@@ -842,13 +865,19 @@ public class FilterVisitor extends NodeVisitor {
     }
 
     /**
-     * Queues up some text, possibly before a meaningful text. If the text is
-     * collected now, the tag is queued up as translatable by calling
-     * {@link #queueTranslatable(Tag)}, otherwise it's collected to a special
-     * list that is inspected when the translatable text is sent to OmegaT core.
+     * Queues up some Text node, possibly before more meaningful text.
+     * The Text node is added to the precedingNodes list.
      */
     private void queuePrefix(Text txt) {
         precedingNodes.add(txt);
+    }
+
+    /**
+     * Queues up some Remark node (HTML comment), possibly before more meaningful
+     * text. The Remark node is added to the precedingNodes list.
+     */
+    private void queuePrefix(Remark remark) {
+        precedingNodes.add(remark);
     }
 
     /** Saves "precedingNodes" to output stream and cleans the list. */
@@ -856,6 +885,8 @@ public class FilterVisitor extends NodeVisitor {
         for (Node node : precedingNodes) {
             if (node instanceof Tag) {
                 writeout("<" + node.getText() + ">");
+            } else if (node instanceof Remark) {
+                writeout(node.toHtml());
             } else {
                 writeout(compressWhitespace(node.getText()));
             }

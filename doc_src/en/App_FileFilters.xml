@@ -633,7 +633,7 @@
 			  <term>Remove HTML comments</term>
 			  <listitem>
 				<para>Comments in an HTML file are generally addressed to
-				developers.</para>
+				developers. Use this option to remove them. If unchecked, the comments are displayed as tags.</para>
 
 				<para>Text in HTML comments (between <literal>&lt;!--</literal>
 				and <literal>--&gt;</literal>) are not copied into the

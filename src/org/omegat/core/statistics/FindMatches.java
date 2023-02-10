@@ -402,6 +402,11 @@ public class FindMatches {
             return;
         }
 
+        if (similarityStem < fuzzyMatchThreshold && similarityNoStem < fuzzyMatchThreshold
+                && simAdjusted < fuzzyMatchThreshold) {
+            return;
+        }
+
         addNearString(key, source, translation, comesFrom, fuzzy, similarityStem, similarityNoStem,
                 simAdjusted, null, tmxName, creator, creationDate, changer, changedDate, props);
     }

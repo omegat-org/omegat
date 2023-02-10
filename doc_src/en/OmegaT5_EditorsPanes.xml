@@ -370,12 +370,12 @@
 	  <para>
 		<programlisting>— ¶ —————————————————————
 
-<token>Remove Tags</token>
-|Supprimer les balises<token>&lt;segment 2148 ¶></token>
+<token>Hide Tags</token>
+|Dissimuler les balises<token>&lt;segment 2148 ¶></token>
 
 — ¶ —————————————————————
 
-When enabled, all the formatting tags are removed from source segments.</programlisting></para>
+When enabled, all formatting in the source segments are hidden.</programlisting></para>
 	</example>
 
     <itemizedlist>
@@ -446,8 +446,8 @@ When enabled, all the formatting tags are removed from source segments.</program
 	  <!-- 	  <programlisting>— ¶ ————————————————————— -->
 
 	  <!-- Translation last modified by Didier on Sep 4, 2012 at 9:16:52 PM -->
-	  <!-- <token>Remove Ta&amp;gs</token> -->
-	  <!-- <token>Su&amp;pprimer les balises</token> -->
+	  <!-- <token>Hide Ta&amp;gs</token> -->
+	  <!-- <token>Dissi&amp;muler les balises</token> -->
 
 	  <!-- — ¶ ————————————————————— -->
 

@@ -651,7 +651,7 @@
 	  details:</para>
 	  <itemizedlist>
 		<listitem>
-		  <para><link linkend="dialogs.project.properties.remove.tags" endterm="dialogs.project.properties.remove.tags.title"/></para>
+		  <para><link linkend="dialogs.project.properties.hide.tags" endterm="dialogs.project.properties.hide.tags.title"/></para>
 		</listitem>
 		<listitem>
 		  <para><link linkend="dialogs.preferences.tag.processing" endterm="dialogs.preferences.tag.processing.title"/></para>

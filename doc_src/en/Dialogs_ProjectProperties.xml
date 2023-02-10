@@ -210,24 +210,23 @@
         </listitem>
       </varlistentry>
 
-      <varlistentry id="dialogs.project.properties.remove.tags">
-        <term id="dialogs.project.properties.remove.tags.title"><option>Remove
+      <varlistentry id="dialogs.project.properties.hide.tags">
+        <term id="dialogs.project.properties.hide.tags.title"><option>Hide
         tags</option></term>
 
 		<listitem>
           <para>Tags are generally useful to reproduce specific layouts or
           characteristics of the source text in the translated text.</para>
 
-		  <para>If you activate this function, no tag will be displayed in the
-		  source segments.</para>
+		  <para>If you activate this function, tags in the source
+		  segments will be hidden.</para>
 		  
 		  <para>This is especially useful when dealing with texts where inline
 		  formatting is not particularly useful (e.g., OCRed PDF, or poorly
 		  converted .odt or .docx files.)</para>
 
 		  <note>
-			<para>The tags are not really removed from the document, but rather
-			stacked at the end of the segment. In most cases, this should not
+			<para>Hidden tags are simply stacked at the end of the segment. In most cases, this should not
 			keep the translated file from opening. If you just need to reduce
 			the number of tags in a <application>Microsoft Word</application>
 			(2007 and later) document, you can use the <link

@@ -96,15 +96,13 @@ public class YandexCloudTranslate extends BaseCachedTranslate {
     }
 
     @Override
+    protected int getMaxTextLength() {
+        return MAX_TEXT_LENGTH;
+    }
+
+    @Override
     protected String translate(final Language sLang, final Language tLang, final String text)
             throws Exception {
-        String trText = text.length() > MAX_TEXT_LENGTH ? text.substring(0, MAX_TEXT_LENGTH - 3) + "..."
-                : text;
-        String prev = getFromCache(sLang, tLang, trText);
-        if (prev != null) {
-            return prev;
-        }
-
         String oAuthToken = getCredential(PROPERTY_OAUTH_TOKEN);
         if (oAuthToken == null || oAuthToken.isEmpty()) {
             throw new Exception(OStrings.getString("MT_ENGINE_YANDEX_CLOUD_OAUTH_TOKEN_NOT_FOUND"));
@@ -120,7 +118,7 @@ public class YandexCloudTranslate extends BaseCachedTranslate {
             throw new Exception(IAMErrorMessage);
         }
 
-        String request = createJsonRequest(sLang, tLang, trText, folderId);
+        String request = createJsonRequest(sLang, tLang, text, folderId);
 
         Map<String, String> headers = new TreeMap<>();
         headers.put("Authorization", "Bearer " + IAMToken);
@@ -143,9 +141,7 @@ public class YandexCloudTranslate extends BaseCachedTranslate {
         if (tr == null) {
             return null;
         }
-        tr = cleanSpacesAroundTags(tr, trText);
-        putToCache(sLang, tLang, trText, tr);
-        return tr;
+        return cleanSpacesAroundTags(tr, text);
     }
 
     @Override
@@ -247,7 +243,7 @@ public class YandexCloudTranslate extends BaseCachedTranslate {
 
     @SuppressWarnings("unchecked")
     private String getIAMToken(final String oAuthToken) {
-        if (System.currentTimeMillis() - lastIAMTokenTime > IAM_TOKEN_TTL_SECONDS * 1000) {
+        if (System.currentTimeMillis() - lastIAMTokenTime > IAM_TOKEN_TTL_SECONDS * 1_000) {
 
             String request = "{\"yandexPassportOauthToken\":\"" + oAuthToken + "\"}";
             String response;

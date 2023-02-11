@@ -71,22 +71,13 @@ public final class MyMemoryHumanTranslate extends AbstractMyMemoryTranslate {
     @SuppressWarnings("unchecked")
     @Override
     protected String translate(final Language sLang, final Language tLang, final String text) throws Exception {
-        String prev = getFromCache(sLang, tLang, text);
-        if (prev != null) {
-            return prev;
-        }
-
-        JsonNode jsonResponse;
         try {
             // Get MyMemory response in JSON format
-            jsonResponse = getMyMemoryResponse(sLang, tLang, text);
-
+            JsonNode jsonResponse = getMyMemoryResponse(sLang, tLang, text);
             // responseData/translatedText contains the best match.
             JsonNode responseData = jsonResponse.get("responseData");
             if (responseData != null) {
-                String translation = responseData.get("translatedText").asText();
-                putToCache(sLang, tLang, text, translation);
-                return translation;
+                return responseData.get("translatedText").asText();
             }
         } catch (IOException e) {
             throw new MachineTranslateError("MT_ENGINE_MYMEMORY_ERROR", e);

@@ -70,15 +70,11 @@ public final class MyMemoryMachineTranslate extends AbstractMyMemoryTranslate {
     }
 
     @Override
-    protected String translate(final Language sLang, final Language tLang, final String text) throws Exception {
-        String prev = getFromCache(sLang, tLang, text);
-        if (prev != null) {
-            return prev;
-        }
-        JsonNode jsonResponse;
+    protected String translate(final Language sLang, final Language tLang, final String text)
+            throws Exception {
         try {
             // Get MyMemory response in JSON format
-            jsonResponse = getMyMemoryResponse(sLang, tLang, text);
+            JsonNode jsonResponse = getMyMemoryResponse(sLang, tLang, text);
 
             // Find the best Human translation if no MT translation is provided for
             // this text. If there is a MT translation, it will always take

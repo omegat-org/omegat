@@ -111,13 +111,6 @@ public class ApertiumTranslate extends BaseCachedTranslate {
 
     @Override
     protected String translate(Language sLang, Language tLang, String text) throws Exception {
-        String prev = getFromCache(sLang, tLang, text);
-        if (prev != null) {
-            return prev;
-        }
-
-        String trText = text;
-
         String sourceLang = apertiumCode(sLang);
         String targetLang = apertiumCode(tLang);
 
@@ -129,7 +122,7 @@ public class ApertiumTranslate extends BaseCachedTranslate {
             apiKey = APERTIUM_SERVER_KEY_DEFAULT;
         }
         String markUnknownVal = useMarkUnknown() ? "yes" : "no";
-        String url = String.format(APERTIUM_SERVER_URL_FORMAT, server, URLEncoder.encode(trText, "UTF-8"),
+        String url = String.format(APERTIUM_SERVER_URL_FORMAT, server, URLEncoder.encode(text, "UTF-8"),
                 markUnknownVal, sourceLang, targetLang, apiKey);
         String v;
         try {
@@ -139,10 +132,7 @@ public class ApertiumTranslate extends BaseCachedTranslate {
             throw new Exception(OStrings.getString("APERTIUM_CUSTOM_SERVER_NOTFOUND"));
         }
 
-        String tr = getJsonResults(v);
-
-        putToCache(sLang, tLang, trText, tr);
-        return tr;
+        return getJsonResults(v);
     }
 
     /**
@@ -199,9 +189,8 @@ public class ApertiumTranslate extends BaseCachedTranslate {
      * Get the custom server URL.
      */
     private String getCustomServerUrl() {
-        String value = System.getProperty(PROPERTY_APERTIUM_SERVER_URL,
+        return System.getProperty(PROPERTY_APERTIUM_SERVER_URL,
                 Preferences.getPreference(PROPERTY_APERTIUM_SERVER_URL));
-        return value;
     }
 
     /**

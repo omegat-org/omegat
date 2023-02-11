@@ -5,7 +5,7 @@
 
  Copyright (C) 2010-2015 Alex Buloichik
                2013 Didier Briel
-               2022 Hiroshi Miura
+               2022,2023 Hiroshi Miura
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -27,23 +27,13 @@
 
 package org.omegat.core.machinetranslators;
 
-import java.util.OptionalLong;
 import java.util.regex.Matcher;
 
-import javax.cache.Cache;
-import javax.cache.CacheManager;
-import javax.cache.Caching;
-import javax.cache.expiry.CreatedExpiryPolicy;
-import javax.cache.expiry.Duration;
-import javax.cache.spi.CachingProvider;
 import javax.swing.JCheckBoxMenuItem;
 
-import com.github.benmanes.caffeine.jcache.configuration.CaffeineConfiguration;
 import org.openide.awt.Mnemonics;
 
 import org.omegat.core.Core;
-import org.omegat.core.CoreEvents;
-import org.omegat.core.events.IProjectEventListener;
 import org.omegat.gui.exttrans.IMTGlossarySupplier;
 import org.omegat.gui.exttrans.IMachineTranslation;
 import org.omegat.util.CredentialsManager;
@@ -64,12 +54,6 @@ public abstract class BaseTranslate implements IMachineTranslation {
     protected boolean enabled;
     protected IMTGlossarySupplier glossarySupplier;
 
-    /**
-     * Machine translation implementation can use this cache for skip requests
-     * twice. Cache will be cleared when project change.
-     */
-    private final Cache<String, String> cache;
-
     public BaseTranslate() {
         // Options menu item
         JCheckBoxMenuItem menuItem = new JCheckBoxMenuItem();
@@ -77,7 +61,7 @@ public abstract class BaseTranslate implements IMachineTranslation {
         menuItem.addActionListener(e -> setEnabled(menuItem.isSelected()));
         enabled = Preferences.isPreference(getPreferenceName());
         menuItem.setState(enabled);
-        if (Core.getMainWindow() != null) {  // can be null in unit test
+        if (Core.getMainWindow() != null) { // can be null in unit test
             Core.getMainWindow().getMainMenu().getMachineTranslationMenu().add(menuItem);
         }
         // Preferences listener
@@ -86,90 +70,51 @@ public abstract class BaseTranslate implements IMachineTranslation {
             menuItem.setSelected(newValue);
             enabled = newValue;
         });
-        cache = getCacheLayer(getName());
-        setCacheClearPolicy();
     }
 
     /**
-     * Creat cache object.
-     * <p>
-     * MT connectors can override cache size and invalidate policy.
-     * 
-     * @param name
-     *            name of cache which should be unique among MT connectors.
-     * @return Cache object
+     * {@inheritDoc}
      */
-    protected Cache<String, String> getCacheLayer(String name) {
-        return getCaffeineCache(name, 1_000, Duration.ONE_DAY);
-    }
-
-    /**
-     * Register cache clear policy.
-     */
-    protected void setCacheClearPolicy() {
-        CoreEvents.registerProjectChangeListener(eventType -> {
-            if (eventType.equals(IProjectEventListener.PROJECT_CHANGE_TYPE.CLOSE)) {
-                cache.clear();
-            }
-        });
-    }
-
-    /**
-     * Common function to obtain CaffeineCache instance.
-     * 
-     * @param name
-     *            name of cache.
-     * @param sizeOfCache
-     *            size of cache.
-     * @param duration
-     *            duration before clear.
-     * @return Cache object.
-     */
-    protected Cache<String, String> getCaffeineCache(String name, int sizeOfCache, Duration duration) {
-        CachingProvider provider = Caching.getCachingProvider();
-        CacheManager manager = provider.getCacheManager();
-        Cache<String, String> cache1 = manager.getCache(name);
-        if (cache1 != null) {
-            return cache1;
-        }
-        CaffeineConfiguration<String, String> config = new CaffeineConfiguration<>();
-        config.setExpiryPolicyFactory(() -> new CreatedExpiryPolicy(duration));
-        config.setMaximumSize(OptionalLong.of(sizeOfCache));
-        return manager.createCache(name, config);
-    }
-
     @Override
     public boolean isEnabled() {
         return enabled;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
         Preferences.setPreference(getPreferenceName(), enabled);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setGlossarySupplier(IMTGlossarySupplier glossarySupplier) {
         this.glossarySupplier = glossarySupplier;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getTranslation(Language sLang, Language tLang, String text) throws Exception {
         if (enabled) {
-            return putToCache(sLang, tLang, text, translate(sLang, tLang, text));
+            return translate(sLang, tLang, text);
         } else {
             return null;
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getCachedTranslation(Language sLang, Language tLang, String text) {
-        if (enabled) {
-            return getFromCache(sLang, tLang, text);
-        } else {
-            return null;
-        }
+        return null;
     }
 
     protected abstract String getPreferenceName();
@@ -180,7 +125,7 @@ public abstract class BaseTranslate implements IMachineTranslation {
      * Attempt to clean spaces added around tags by machine translators. Do it
      * by comparing spaces between the source text and the machine translated
      * text.
-     * 
+     *
      * @param machineText
      *            The text returned by the machine translator
      * @param sourceText
@@ -193,9 +138,10 @@ public abstract class BaseTranslate implements IMachineTranslation {
         Matcher tag = PatternConsts.OMEGAT_TAG_SPACE.matcher(machineText);
         while (tag.find()) {
             String searchTag = tag.group();
-            if (!sourceText.contains(searchTag)) { // The tag didn't appear
-                                                   // with a trailing space
-                                                   // in the source text
+            if (!sourceText.contains(searchTag)) {
+                // The tag didn't appear
+                // with a trailing space
+                // in the source text
                 String replacement = searchTag.substring(0, searchTag.length() - 1);
                 machineText = machineText.replace(searchTag, replacement);
             }
@@ -205,9 +151,10 @@ public abstract class BaseTranslate implements IMachineTranslation {
         tag = PatternConsts.SPACE_OMEGAT_TAG.matcher(machineText);
         while (tag.find()) {
             String searchTag = tag.group();
-            if (!sourceText.contains(searchTag)) { // The tag didn't appear
-                                                   // with a leading space
-                                                   // in the source text
+            if (!sourceText.contains(searchTag)) {
+                // The tag didn't appear
+                // with a leading space
+                // in the source text
                 String replacement = searchTag.substring(1);
                 machineText = machineText.replace(searchTag, replacement);
             }
@@ -215,22 +162,63 @@ public abstract class BaseTranslate implements IMachineTranslation {
         return machineText;
     }
 
+    /**
+     * Get translation from cache.
+     * <p>
+     * {@link org.omegat.core.machinetranslators.BaseTranslate} class always
+     * return null. When connector want to use cache layer, it can use
+     * {@link org.omegat.core.machinetranslators.BaseCachedTranslate} class
+     * instead.
+     * </p>
+     * @param sLang
+     *            Source langauge.
+     * @param tLang
+     *            Target language.
+     * @param text
+     *            source text.
+     * @return translated text if exists in cache, otherwise null.
+     */
+    // @Deprecated(since="6.1")
     protected String getFromCache(Language sLang, Language tLang, String text) {
-        return cache.get(sLang + "/" + tLang + "/" + text);
+        return null;
     }
 
+    /**
+     * Put translation to cache.
+     * <p>
+     * {@link org.omegat.core.machinetranslators.BaseTranslate} class do
+     * nothing. When connector want to use cache layer, it can inherit
+     * {@link org.omegat.core.machinetranslators.BaseCachedTranslate} class
+     * and implement
+     * {@link org.omegat.core.machinetranslators.BaseCachedTranslate#translate}
+     * method.
+     * </p>
+     * @param sLang
+     *            source langauge.
+     * @param tLang
+     *            target language.
+     * @param text
+     *            source text.
+     * @param result
+     *            translation.
+     * @return given translation.
+     */
+    // @Deprecated(since="6.1")
     protected String putToCache(Language sLang, Language tLang, String text, String result) {
-        if (result != null) {
-            cache.put(sLang.toString() + "/" + tLang.toString() + "/" + text, result);
-        }
         return result;
     }
 
     /**
      * Clear the machine translation cache.
+     * <p>
+     * {@link org.omegat.core.machinetranslators.BaseTranslate} class do
+     * nothing. When connector want to use cache layer, it can use
+     * {@link org.omegat.core.machinetranslators.BaseCachedTranslate} class
+     * instead.
+     * You can all it when you want to clear cache; ex. change server config.
+     * </p>
      */
     protected void clearCache() {
-        cache.clear();
     }
 
     /**
@@ -255,7 +243,6 @@ public abstract class BaseTranslate implements IMachineTranslation {
      * and, if <code>temporary</code> is <code>false</code>, in the program's
      * persistent preferences encoded in Base64. Retrieve a credential with
      * {@link #getCredential(String)}.
-     *
      * @param id
      *            ID or key of the credential to store
      * @param value
@@ -274,7 +261,6 @@ public abstract class BaseTranslate implements IMachineTranslation {
      * the definition in {@link #setCredential(String, String, boolean)}. The
      * result will be <code>false</code> if the credential is not stored at all,
      * or if it is stored permanently.
-     *
      * @param id
      *            ID or key of credential
      * @return <code>true</code> only if the credential is stored temporarily

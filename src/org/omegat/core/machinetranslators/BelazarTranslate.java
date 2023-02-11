@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2010 Alex Buloichik
+               2023 Hiroshi Miura
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -43,7 +44,7 @@ import org.omegat.util.Preferences;
  *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public class BelazarTranslate extends BaseTranslate {
+public class BelazarTranslate extends BaseCachedTranslate {
     protected static final String CHARSET = "Cp1251";
 
     /**
@@ -73,7 +74,8 @@ public class BelazarTranslate extends BaseTranslate {
         }
 
         String mode;
-        if ("be".equalsIgnoreCase(sLang.getLanguageCode()) && "ru".equalsIgnoreCase(tLang.getLanguageCode())) {
+        if ("be".equalsIgnoreCase(sLang.getLanguageCode())
+                && "ru".equalsIgnoreCase(tLang.getLanguageCode())) {
             mode = "br";
         } else if ("ru".equalsIgnoreCase(sLang.getLanguageCode())
                 && "be".equalsIgnoreCase(tLang.getLanguageCode())) {

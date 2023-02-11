@@ -1,15 +1,16 @@
 /**************************************************************************
  OmegaT - Computer Assisted Translation (CAT) tool
- with fuzzy matching, translation memory, keyword search,
- glossaries, and translation leveraging into updated projects.
+          with fuzzy matching, translation memory, keyword search,
+          glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2010 Alex Buloichik, Didier Briel
- 2011 Briac Pilpre, Alex Buloichik
- 2013 Didier Briel
- 2016 Aaron Madlon-Kay
- 2020 Lev Abashkin
- Home page: http://www.omegat.org/
- Support center: https://omegat.org/support
+               2011 Briac Pilpre, Alex Buloichik
+               2013 Didier Briel
+               2016 Aaron Madlon-Kay
+               2020 Lev Abashkin
+               2023 Hiroshi Miura
+               Home page: http://www.omegat.org/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -53,7 +54,6 @@ import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 
-
 /**
  * Support of Yandex.Cloud machine translation.
  *
@@ -63,9 +63,11 @@ import org.omegat.util.Preferences;
  * @author Aaron Madlon-Kay
  * @author Lev Abashkin
  *
- * @see <a href="https://cloud.yandex.com/docs/translate/api-ref/Translation/">Translation API</a>
+ * @see <a href=
+ *      "https://cloud.yandex.com/docs/translate/api-ref/Translation/">Translation
+ *      API</a>
  */
-public class YandexCloudTranslate extends BaseTranslate {
+public class YandexCloudTranslate extends BaseCachedTranslate {
 
     private static final String PROPERTY_OAUTH_TOKEN = "yandex.cloud.oauth-token";
     private static final String PROPERTY_FOLDER_ID = "yandex.cloud.folder-id";
@@ -94,8 +96,10 @@ public class YandexCloudTranslate extends BaseTranslate {
     }
 
     @Override
-    protected String translate(final Language sLang, final Language tLang, final String text) throws Exception {
-        String trText = text.length() > MAX_TEXT_LENGTH ? text.substring(0, MAX_TEXT_LENGTH - 3) + "..." : text;
+    protected String translate(final Language sLang, final Language tLang, final String text)
+            throws Exception {
+        String trText = text.length() > MAX_TEXT_LENGTH ? text.substring(0, MAX_TEXT_LENGTH - 3) + "..."
+                : text;
         String prev = getFromCache(sLang, tLang, trText);
         if (prev != null) {
             return prev;
@@ -151,9 +155,11 @@ public class YandexCloudTranslate extends BaseTranslate {
         extraPanel.setAlignmentX(JComponent.LEFT_ALIGNMENT);
         extraPanel.setLayout(new BoxLayout(extraPanel, BoxLayout.Y_AXIS));
         extraPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 15, 0));
-        JCheckBox glossaryCheckBox = new JCheckBox(OStrings.getString("MT_ENGINE_YANDEX_CLOUD_GLOSSARY_CHECKBOX"));
+        JCheckBox glossaryCheckBox = new JCheckBox(
+                OStrings.getString("MT_ENGINE_YANDEX_CLOUD_GLOSSARY_CHECKBOX"));
         extraPanel.add(glossaryCheckBox);
-        JCheckBox keepTagsCheckBox = new JCheckBox(OStrings.getString("MT_ENGINE_YANDEX_CLOUD_KEEP_TAGS_CHECKBOX"));
+        JCheckBox keepTagsCheckBox = new JCheckBox(
+                OStrings.getString("MT_ENGINE_YANDEX_CLOUD_KEEP_TAGS_CHECKBOX"));
         extraPanel.add(keepTagsCheckBox);
 
         MTConfigDialog dialog = new MTConfigDialog(parent, getName()) {
@@ -207,7 +213,7 @@ public class YandexCloudTranslate extends BaseTranslate {
     }
 
     protected String createJsonRequest(final Language sLang, final Language tLang, final String trText,
-                                       final String folderId) throws JsonProcessingException {
+            final String folderId) throws JsonProcessingException {
         Map<String, Object> params = new TreeMap<>();
         params.put("sourceLanguageCode", sLang.getLanguageCode().toLowerCase());
         params.put("targetLanguageCode", tLang.getLanguageCode().toLowerCase());
@@ -275,9 +281,11 @@ public class YandexCloudTranslate extends BaseTranslate {
     }
 
     /**
-     * create glossary config part of request json.
-     * we make visibility to protected for test purpose.
-     * @param glossaryTerms glossary map.
+     * create glossary config part of request json. we make visibility to
+     * protected for test purpose.
+     * 
+     * @param glossaryTerms
+     *            glossary map.
      */
     protected GlossaryConfig createGlossaryConfigPart(Map<String, String> glossaryTerms) {
         List<GlossaryPair> pairs = new ArrayList<>();
@@ -295,6 +303,7 @@ public class YandexCloudTranslate extends BaseTranslate {
      */
     static class GlossaryConfig {
         public final GlossaryData glossaryData;
+
         GlossaryConfig(GlossaryData glossaryData) {
             this.glossaryData = glossaryData;
         }
@@ -305,6 +314,7 @@ public class YandexCloudTranslate extends BaseTranslate {
      */
     static class GlossaryData {
         public final List<GlossaryPair> glossaryPairs;
+
         GlossaryData(List<GlossaryPair> glossaryPairs) {
             this.glossaryPairs = Collections.unmodifiableList(glossaryPairs);
         }
@@ -316,6 +326,7 @@ public class YandexCloudTranslate extends BaseTranslate {
     static class GlossaryPair {
         public final String sourceText;
         public final String translatedText;
+
         GlossaryPair(String sourceText, String translatedText) {
             this.sourceText = sourceText;
             this.translatedText = translatedText;

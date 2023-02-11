@@ -7,7 +7,7 @@
                2011 Briac Pilpre, Alex Buloichik
                2013 Didier Briel
                2016 Aaron Madlon-Kay
-               2022 Hiroshi Miura
+               2022,2023 Hiroshi Miura
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -36,7 +36,6 @@ import java.util.Base64;
 import java.util.Collections;
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.regex.Pattern;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -61,9 +60,11 @@ import org.omegat.util.Preferences;
  * @author Briac Pilpre
  * @author Aaron Madlon-Kay
  *
- * @see <a href="https://www.ibm.com/watson/developercloud/language-translator/api/v3/">Translation API</a>
+ * @see <a href=
+ *      "https://www.ibm.com/watson/developercloud/language-translator/api/v3/">Translation
+ *      API</a>
  */
-public class IBMWatsonTranslate extends BaseTranslate {
+public class IBMWatsonTranslate extends BaseCachedTranslate {
     protected static final String PROPERTY_LOGIN = "ibmwatson.api.login";
     protected static final String PROPERTY_PASSWORD = "ibmwatson.api.password";
     protected static final String PROPERTY_MODEL = "ibmwatson.api.model";
@@ -71,7 +72,6 @@ public class IBMWatsonTranslate extends BaseTranslate {
 
     protected static final String WATSON_URL = "https://gateway.watsonplatform.net/language-translator/api/v3/translate";
     protected static final String WATSON_VERSION = "2018-05-01";
-    protected static final Pattern RE_HTML = Pattern.compile("&#([0-9]+);");
 
     @Override
     protected String getPreferenceName() {
@@ -98,9 +98,12 @@ public class IBMWatsonTranslate extends BaseTranslate {
             throw new Exception(OStrings.getString("IBMWATSON_API_KEY_NOTFOUND"));
         }
 
-        // If the instance uses IAM authentication (https://console.bluemix.net/docs/services/watson/getting-started-iam.html)
-        // only an API Key is provided, in this case the authentication header is "apikey:apikey"
-        // see https://www.ibm.com/watson/developercloud/language-translator/api/v2/curl.html?curl#authentication
+        // If the instance uses IAM authentication
+        // (https://console.bluemix.net/docs/services/watson/getting-started-iam.html)
+        // only an API Key is provided, in this case the authentication header
+        // is "apikey:apikey"
+        // see
+        // https://www.ibm.com/watson/developercloud/language-translator/api/v2/curl.html?curl#authentication
         if (apiPassword == null || apiPassword.isEmpty()) {
             apiPassword = apiLogin;
             apiLogin = "apikey";
@@ -112,19 +115,19 @@ public class IBMWatsonTranslate extends BaseTranslate {
         // By default, all Watson services log requests and their results.
         // The logged data is not shared or made public. To prevent IBM
         // from accessing your data for general service improvements, set
-        // the X-Watson-Learning-Opt-Out request header to true for all requests.
+        // the X-Watson-Learning-Opt-Out request header to true for all
+        // requests.
 
         // Let's opt out then.
         headers.put("X-Watson-Learning-Opt-Out", "true");
 
-        String authentication = "Basic " + Base64
-                .getMimeEncoder(-1, new byte[] {})
+        String authentication = "Basic " + Base64.getMimeEncoder(-1, new byte[] {})
                 .encodeToString((apiLogin + ":" + apiPassword).getBytes(StandardCharsets.ISO_8859_1));
         headers.put("Authorization", authentication);
         headers.put("Accept", "application/json");
 
-        String v = HttpConnectionUtils.postJSON(getWatsonUrl() + "/v3/translate?version=" + WATSON_VERSION, json,
-                headers);
+        String v = HttpConnectionUtils.postJSON(getWatsonUrl() + "/v3/translate?version=" + WATSON_VERSION,
+                json, headers);
         String tr = getJsonResults(v);
         if (tr == null) {
             return null;
@@ -150,7 +153,8 @@ public class IBMWatsonTranslate extends BaseTranslate {
     /**
      * Create Watson request and return as json string.
      */
-    protected String createJsonRequest(Language sLang, Language tLang, String trText) throws JsonProcessingException {
+    protected String createJsonRequest(Language sLang, Language tLang, String trText)
+            throws JsonProcessingException {
         Map<String, Object> params = new TreeMap<>();
         params.put("text", Collections.singletonList(trText));
         String modelId = getModelId();
@@ -163,8 +167,10 @@ public class IBMWatsonTranslate extends BaseTranslate {
     }
 
     /**
-     * Parse Watson response and return translated text.
-     * @param json response.
+     * Parse Watson response and return translated text.sed
+     * 
+     * @param json
+     *            response.
      * @return translated text.
      */
     @SuppressWarnings("unchecked")
@@ -276,7 +282,8 @@ public class IBMWatsonTranslate extends BaseTranslate {
         dialog.panel.valueLabel2.setText(OStrings.getString("MT_ENGINE_IBMWATSON_PASSWORD_LABEL"));
         dialog.panel.valueField2.setText(getCredential(PROPERTY_PASSWORD));
 
-        // TODO Apparently, the API URL can change if the user has their own instance.
+        // TODO Apparently, the API URL can change if the user has their own
+        // instance.
 
         dialog.panel.temporaryCheckBox.setSelected(isCredentialStoredTemporarily(PROPERTY_PASSWORD));
 

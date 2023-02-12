@@ -764,8 +764,12 @@ Dossier de configuration
       </listitem>
 
       <listitem>
-        <para>Percentage calculated on the entire text, including tags and
-        numbers (generally the lowest).</para>
+        <para>Percentage calculated on <emphasis role="bold">the entire text,
+        including tags and numbers</emphasis> (generally the lowest).</para>
+		<note>
+		  <para>If the segment contains only numbers or symbols, this percentage
+		  will be the highest.</para>
+		</note>
       </listitem>
     </itemizedlist>
   

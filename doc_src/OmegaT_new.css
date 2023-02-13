@@ -461,6 +461,7 @@ span.guibutton {
     border-radius:3px;
     padding: 2px 1em;
     vertical-align: baseline;
+    border-color:var(--main-color);
 }
 
 .warning {
@@ -902,10 +903,95 @@ dd {
     border-radius: 5px;
 }
 
-/* Fuzzy match */
+/* Editor pane */
 
-#the\.first\.match .token {
-	color:var(--term-match);
+#panes\.editor\.default\.editor\.writing\.space > div.example-contents > pre {
+	border-left: 10px solid lightgrey;
+}
+
+#panes\.editor\.default\.editor\.writing\.space > div.example-contents > pre > span:nth-child(1) {
+	background-color:var(--match-background);
+	font-weight:bold;	
+}
+
+#panes\.editor\.default\.editor\.writing\.space > div.example-contents > pre > span:nth-child(2) {
+	font-weight:bold;	
+}
+
+#panes\.editor\.modified\.editor\.target\.field > div.example-contents > pre  {
+}
+#panes\.editor\.modified\.editor\.target\.field > div.example-contents > pre > span:nth-child(2) {
+	float:left;
+}
+
+#panes\.editor\.modified\.editor\.target\.field > div.example-contents > pre > span:nth-child(4) {
+	float:left;	
+}
+
+
+/* Fuzzy match pane */
+
+#table\.pane\.matches > table,
+#table\.pane\.matches > table > tbody > tr > td:nth-child(1) > div > table{
+	width: 100%;
+	border-collapse:separate !important;
+	border: 0px !important;
+}
+
+#table\.pane\.matches > table td {
+	border: 0px;
+}
+
+#table\.pane\.matches > table > tbody > tr {
+	vertical-align: top;
+}
+
+#table\.pane\.matches > table > tbody > tr > td:nth-child(1) {
+	border-right: 0px !important;
+}
+
+/** Editor side **/
+
+#table\.pane\.matches > table > tbody > tr > td:nth-child(1) > div > table > tbody > tr > td,
+#table\.pane\.matches > table > tbody > tr > td:nth-child(2) > div > table > tbody > tr > td {
+	border: 1px solid lightgrey;
+	border-left: 10px solid lightgrey;
+	border-radius: 5px;
+}
+
+#table\.pane\.matches > table > tbody > tr > td:nth-child(1) > div > table > tbody > tr > td > pre > span:nth-child(1),
+#table\.pane\.matches > table > tbody > tr > td:nth-child(1) > div > table > tbody > tr > td > pre > span:nth-child(2) {
+	font-weight:bold;	
+}
+
+/** fuzzy pane side **/
+
+#table\.pane\.matches > table > tbody > tr > td:nth-child(2) > div > table {
+	width: 100%;
+	border-collapse:separate !important;
+	border: 0px !important;
+}
+
+#table\.pane\.matches > table > tbody > tr > td:nth-child(2) > div > table > tbody > tr > td > pre {
+	border:0px;
+}
+
+#table\.pane\.matches > table > tbody > tr > td:nth-child(2) > div > table > tbody > tr > td > pre:nth-child(1) {
+	font-weight:bold;
+}
+
+#table\.pane\.matches > table > tbody > tr > td:nth-child(2) > div > table > tbody > tr > td > pre:nth-child(1) > span {
+	color:blue;
+}
+
+/** Explanations **/
+
+#panes\.fuzzy\.matches > p:nth-child(7) > span:nth-child(2) > strong {
+	color: blue;
+}
+
+#panes\.fuzzy\.matches > p:nth-child(7) > span:nth-child(3) > strong {
+	color: green;
 }
 
 /* Glossary match */ 
@@ -957,29 +1043,4 @@ dd {
 
 #bridge\.english\.and\.french\.with\.japanese > div.example-contents > pre > span:nth-child(2) {
 	font-weight:bold;
-}
-
-/* Editor pane */
-
-#panes\.editor\.default\.editor\.writing\.space > div.example-contents > pre {
-	border-left: 10px solid lightgrey;
-}
-
-#panes\.editor\.default\.editor\.writing\.space > div.example-contents > pre > span:nth-child(1) {
-	background-color:var(--match-background);
-	font-weight:bold;	
-}
-
-#panes\.editor\.default\.editor\.writing\.space > div.example-contents > pre > span:nth-child(2) {
-	font-weight:bold;	
-}
-
-#panes\.editor\.modified\.editor\.target\.field > div.example-contents > pre  {
-}
-#panes\.editor\.modified\.editor\.target\.field > div.example-contents > pre > span:nth-child(2) {
-	float:left;
-}
-
-#panes\.editor\.modified\.editor\.target\.field > div.example-contents > pre > span:nth-child(4) {
-	float:left;	
 }

@@ -422,7 +422,7 @@ class OpenXmlFilter extends AbstractXmlFilter {
                 }
                 // Something between two <w:r>
                 if ((run.size() == 1) && run.get(0).isCharacters()
-                        && (0 == run.get(0).toString().trim().length())) {
+                        && (0 == run.get(0).asCharacters().getData().trim().length())) {
                     continue;
                 }
                 Integer tc = tagsCount.get('x');
@@ -510,8 +510,8 @@ class OpenXmlFilter extends AbstractXmlFilter {
                 nList.add(eFactory.createEndElement(qR, null));
                 res.append("<" + prefixInt + tcInt + "/>");
                 tagsMap.put("" + prefixInt + tcInt, nList);
-            } else {
-                res.append(next); // character data
+            } else if (next.isCharacters()){
+                res.append(next.asCharacters().getData());
             }
         }
     }

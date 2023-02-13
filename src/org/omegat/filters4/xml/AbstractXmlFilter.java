@@ -205,6 +205,7 @@ public abstract class AbstractXmlFilter extends AbstractFilter {
                     }
                 } else {
                     strWriter = oFactory.createXMLStreamWriter(writer);
+                    strWriter.setNamespaceContext(strReader.getNamespaceContext());
                     while (strReader.hasNext()) {
                         if (strReader.getEventType() == XMLEvent.START_DOCUMENT) {
                             // special case: don't use strWriter because StaX

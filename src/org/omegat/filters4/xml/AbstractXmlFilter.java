@@ -181,26 +181,25 @@ public abstract class AbstractXmlFilter extends AbstractFilter {
             try {
                 strReader = iFactory.createXMLStreamReader(inReader);
                 eventReader = iFactory.createXMLEventReader(strReader);
-                isEventMode = false; // always start like this, even with new
-                                     // file
+                // always start like this, even with new file
+                isEventMode = false;
                 if (writer == null) {
                     while (strReader.hasNext()) {
                         if (!isEventMode) {
                             checkCurrentCursorPosition(strReader, false);
-                        }
-                        if (isEventMode) { // calculated after
-                                           // checkCurrentCursorPosition, may
-                                           // have changed!
-                            XMLEvent event = eventReader.nextEvent();
-                            if (event.isStartElement()) {
-                                processStartElement(event.asStartElement(), null);
-                            } else if (event.isEndElement()) {
-                                processEndElement(event.asEndElement(), null);
-                            } else if (event.isCharacters()) {
-                                processCharacters(event.asCharacters(), null);
-                            }
-                        } else {
                             strReader.next();
+                            continue;
+                        }
+                        // calculated after
+                        // checkCurrentCursorPosition, may
+                        // have changed!
+                        XMLEvent event = eventReader.nextEvent();
+                        if (event.isStartElement()) {
+                            processStartElement(event.asStartElement(), null);
+                        } else if (event.isEndElement()) {
+                            processEndElement(event.asEndElement(), null);
+                        } else if (event.isCharacters()) {
+                            processCharacters(event.asCharacters(), null);
                         }
                     }
                 } else {

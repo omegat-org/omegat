@@ -908,7 +908,12 @@ dd {
 	color:var(--term-match);
 }
 
-/* Glossary match */ 
+/* Glossary match */
+
+#glossary\.matches > div.example-contents > pre {
+	border-left: 10px solid lightgrey;
+	border-radius: 5px;
+}
 
 #glossary\.matches .token {
 	font-weight:bold;

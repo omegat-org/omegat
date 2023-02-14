@@ -30,6 +30,7 @@
 package org.omegat.core.machinetranslators;
 
 import java.awt.Window;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -89,7 +90,7 @@ public class Google2Translate extends BaseTranslate {
      * @throws Exception when error occurred.
      */
     @Override
-    protected String translate(Language sLang, Language tLang, String text) throws Exception {
+    protected String translate(Language sLang, Language tLang, String text) throws MachineTranslateError, IOException {
         String trText = text.length() > MAX_TEXT_LENGTH ? text.substring(0, MAX_TEXT_LENGTH - 3) + "..." : text;
 
         String prev = getFromCache(sLang, tLang, trText);
@@ -109,7 +110,7 @@ public class Google2Translate extends BaseTranslate {
         String googleKey = getCredential(PROPERTY_API_KEY);
 
         if (googleKey == null || googleKey.isEmpty()) {
-            throw new Exception(OStrings.getString("GOOGLE_API_KEY_NOTFOUND"));
+            throw new MachineTranslateError(OStrings.getString("GOOGLE_API_KEY_NOTFOUND"));
         }
 
         Map<String, String> params = new TreeMap<String, String>();
@@ -147,7 +148,7 @@ public class Google2Translate extends BaseTranslate {
      * @return translation text.
      */
     @SuppressWarnings("unchecked")
-    protected String getJsonResults(String json) {
+    protected String getJsonResults(String json) throws MachineTranslateError {
         ObjectMapper mapper = new ObjectMapper();
         try {
             Response response = mapper.readValue(json, Response.class);
@@ -157,13 +158,13 @@ public class Google2Translate extends BaseTranslate {
             }
         } catch (Exception e) {
             Log.logErrorRB(e, "MT_JSON_ERROR");
-            return OStrings.getString("MT_JSON_ERROR");
+            throw new MachineTranslateError(OStrings.getString("MT_JSON_ERROR"));
         }
         return null;
     }
 
     /**
-     * Whether or not to use the new Neural Machine Translation System
+     * Whether to use the new Neural Machine Translation System
      *
      * @see <a href="https://research.googleblog.com/2016/09/a-neural-network-for-machine.html">A Neural
      *      Network for Machine Translation, at Production Scale</a>

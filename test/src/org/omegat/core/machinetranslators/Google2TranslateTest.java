@@ -39,7 +39,7 @@ import org.omegat.util.Preferences;
 public class Google2TranslateTest extends TestCore {
 
     @Test
-    public void testGetJsonResults() {
+    public void testGetJsonResults() throws Exception {
         Preferences.setPreference(Preferences.ALLOW_GOOGLE2_TRANSLATE, true);
         Google2Translate google2Translate = new Google2Translate();
         String json = "{\n"

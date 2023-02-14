@@ -226,17 +226,26 @@
 		  converted .odt or .docx files.)</para>
 
 		  <note>
-			<para>Hidden tags are simply stacked at the end of the segment. In most cases, this should not
-			keep the translated file from opening. If you just need to reduce
-			the number of tags in a <application>Microsoft Word</application>
-			(2007 and later) document, you can use the <link
-			linkend="windows.scripts.distribution.tagwipe"
-			endterm="windows.scripts.distribution.tagwipe.title"/> script.</para>
-
-			<para>See the <link linkend="windows.scripts"
-			endterm="windows.scripts.title"/> section for details.</para>
-		  </note>
-        </listitem>
+			<para>Hidden tags are simply stacked at the end of the segment. Although
+			this does not normally prevent the translated file from opening, keep the
+			following points in mind when using this function:</para>
+			<itemizedlist>
+				<listitem>
+					<para>You will have to manually apply bold, italics, or other text
+					decorations in the translated file.</para>
+				</listitem>
+				<listitem>
+					<para>If you simply want to reduce the number of tags in a
+					<application>Microsoft Word</application> (2007 and later) document,
+					you can use the <link
+					linkend="windows.scripts.distribution.tagwipe"
+					endterm="windows.scripts.distribution.tagwipe.title"/> script.</para>
+					<para>See the <link linkend="windows.scripts"
+						endterm="windows.scripts.title"/> section for details.</para>
+				</listitem>
+			</itemizedlist>
+			</note>
+      </listitem>
       </varlistentry>
 
       <varlistentry id="dialogs.project.properties.external.processing.command">

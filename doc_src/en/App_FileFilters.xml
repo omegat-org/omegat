@@ -65,15 +65,15 @@
 	  
 	<variablelist>
 	  <varlistentry>
-		<term>Remove leading and trailing tags</term>
+		<term>Hide leading and trailing tags</term>
 		<listitem>
 		  <para>Leading and trailing tags are generally required by OmegaT to
-		  properly recreate the translated segment. Removing them from the
+		  properly recreate the translated segment. Hiding them from the
 		  translatable contents ensures that you will not erase or modify them
 		  by mistake.</para>
 
-		  <para>If you keep the leading and trailing tags, make sure that they
-		  are leading and trailing as well in the translation.</para>
+		  <para>If you keep the leading and trailing tags, make sure you also
+		  include them in the translated text.</para>
 		</listitem>
 	  </varlistentry>
 

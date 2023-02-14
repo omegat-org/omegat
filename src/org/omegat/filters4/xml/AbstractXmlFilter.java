@@ -71,9 +71,12 @@ import org.omegat.util.StaticUtils;
  * This class is more low-level than 'filters3' API, but this is necessary to
  * implement bilingual or very complex XML formats. <br/>
  * To implement your own filter based on this class you must implement
- * {@link org.omegat.filters4.xml.AbstractXmlFilter#processStartElement processStartElement},
- * {@link org.omegat.filters4.xml.AbstractXmlFilter#processEndElement processEndElement} and
- * {@link org.omegat.filters4.xml.AbstractXmlFilter#processCharacters processCharacters} <br/>
+ * {@link org.omegat.filters4.xml.AbstractXmlFilter#processStartElement
+ * processStartElement},
+ * {@link org.omegat.filters4.xml.AbstractXmlFilter#processEndElement
+ * processEndElement} and
+ * {@link org.omegat.filters4.xml.AbstractXmlFilter#processCharacters
+ * processCharacters} <br/>
  * Boolean return value will be ignored during reading process (when event
  * writer is null), while during project compilation, it says whenever the event
  * must be kept in the result or not (generally, parts of the XML file which are
@@ -173,8 +176,8 @@ public abstract class AbstractXmlFilter extends AbstractFilter {
     /**
      * Processes a buffer.
      * <p>
-     * This method works only if buffered reader and writer
-     * are already configured with correct encoding and EOL.
+     * This method works only if buffered reader and writer are already
+     * configured with correct encoding and EOL.
      **/
     @Override
     public void processFile(BufferedReader inReader, BufferedWriter writer, FilterContext fc)
@@ -283,8 +286,8 @@ public abstract class AbstractXmlFilter extends AbstractFilter {
     /**
      * Indicates whenever we are in event mode or not.
      * <p>
-     * We always start with
-     * false, and checkCurrentCursorPosition may set it to true
+     * We always start with false, and checkCurrentCursorPosition may set it to
+     * true
      **/
     protected boolean isEventMode = false;
 

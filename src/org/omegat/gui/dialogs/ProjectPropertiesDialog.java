@@ -34,12 +34,10 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.Frame;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.Label;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -803,6 +801,7 @@ public class ProjectPropertiesDialog extends JDialog {
 
         // Pack once to get the width...
         pack();
+        updateUIText();
         // Then again to expand the height to accomodate the message.
         // This is needed because the height isn't known until the
         // amount of linewrapping is known.
@@ -1206,7 +1205,7 @@ public class ProjectPropertiesDialog extends JDialog {
         setVisible(false);
     }
 
-    private void updateUIText(JTextArea messageArea) {
+    private void updateUIText() {
         switch (dialogType) {
         case NEW_PROJECT:
             setTitle(OStrings.getString("PP_CREATE_PROJ"));

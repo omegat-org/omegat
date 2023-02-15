@@ -416,6 +416,13 @@
       endterm="windows.scripts.distribution.switch.colour.theme.title"/> that
       provides a default dark theme. See the <link linkend="windows.scripts"
       endterm="windows.scripts.title"/> window for details.</para>
+
+	  <note>
+		<para>Linux users who run OmegaT with OpenJDK with the Gnome/GTK look
+		and feel can benefit from automatic dark theme detection. This feature
+		depends on Java features that is not yet available on other
+		platforms.</para>
+	  </note>
 	</section>
   </section>
 

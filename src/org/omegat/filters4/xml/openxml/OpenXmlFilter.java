@@ -125,7 +125,7 @@ class OpenXmlFilter extends AbstractXmlFilter {
                 return false;
             }
             if ("r".equals(name.getLocalPart())) {
-                if (!currentBuffer.isEmpty()) {
+                if ((currentBuffer == null) || (!currentBuffer.isEmpty())) {
                     currentBuffer = new LinkedList<>();
                     currentPara.add(currentBuffer);
                 }
@@ -213,9 +213,11 @@ class OpenXmlFilter extends AbstractXmlFilter {
                 return true;
             }
             if ("r".equals(name.getLocalPart())) {
-                currentBuffer.add(endElement);
-                currentBuffer = new LinkedList<>();
-                currentPara.add(currentBuffer);
+                if (currentBuffer != null) { // run which almost contains some text
+                    currentBuffer.add(endElement);
+                    currentBuffer = new LinkedList<>();
+                    currentPara.add(currentBuffer);
+                }
                 return false;
             }
             if (removeComments) {
@@ -390,7 +392,7 @@ class OpenXmlFilter extends AbstractXmlFilter {
                                     }
                                     while (ev2 != ev) {
                                         ir.remove();
-                                        ir.previous();
+                                        ev2 = ir.previous();
                                     }
                                     ir.remove();
                                     ev = eFactory.createStartElement(ev.asStartElement().getName(),

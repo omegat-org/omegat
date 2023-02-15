@@ -86,6 +86,14 @@ public abstract class AbstractXmlFilter extends AbstractFilter {
     /** Detected encoding and eol of the input XML file. */
     private String encoding, eol;
 
+    protected XMLInputFactory iFactory;
+    protected XMLOutputFactory oFactory;
+
+    public AbstractXmlFilter() {
+        iFactory = XMLInputFactory.newInstance();
+        oFactory = XMLOutputFactory.newInstance();
+    }
+
     @Override
     public boolean isSourceEncodingVariable() {
         return true;
@@ -162,9 +170,6 @@ public abstract class AbstractXmlFilter extends AbstractFilter {
         }
     }
 
-    protected XMLInputFactory iFactory = XMLInputFactory.newInstance();
-    protected XMLOutputFactory oFactory = XMLOutputFactory.newInstance();
-
     /**
      * Processes a buffer.
      * <p>
@@ -205,26 +210,27 @@ public abstract class AbstractXmlFilter extends AbstractFilter {
                     }
                 } else {
                     strWriter = oFactory.createXMLStreamWriter(writer);
+                    strWriter.setNamespaceContext(strReader.getNamespaceContext());
                     while (strReader.hasNext()) {
                         if (strReader.getEventType() == XMLEvent.START_DOCUMENT) {
                             // special case: don't use strWriter because StaX
                             // has a bug!
-                            String toWrite = "<?xml ";
+                            StringBuilder sb = new StringBuilder("<?xml ");
                             String version = strReader.getVersion();
                             if (version != null) {
-                                toWrite += " version=\"" + version + "\"";
+                                sb.append(" version=\"").append(version).append("\"");
                             }
                             String escheme = strReader.getCharacterEncodingScheme();
                             if (escheme != null) {
-                                toWrite += " encoding=\"" + escheme + "\"";
+                                sb.append(" encoding=\"").append(escheme).append("\"");
                             }
                             if (strReader.standaloneSet()) {
-                                toWrite += " standalone=\"" + (strReader.isStandalone() ? "yes" : "no")
-                                        + "\"";
+                                sb.append(" standalone=\"").append(strReader.isStandalone() ? "yes" : "no")
+                                        .append("\"");
                                 // not possible using strWriter!!!
                             }
-                            toWrite += " ?>";
-                            writer.write(toWrite);
+                            sb.append(" ?>");
+                            writer.write(sb.toString());
                             strReader.next();
                             continue;
                         }
@@ -249,10 +255,8 @@ public abstract class AbstractXmlFilter extends AbstractFilter {
                                 keep = true;
                             }
                             if (keep) {
-                                fromEventToWriter(event, strWriter); // convert
-                                                                     // current
-                                                                     // event to
-                                                                     // stream
+                                // convert current event to stream
+                                fromEventToWriter(event, strWriter);
                             }
                         } else {
                             strReader.next();
@@ -326,7 +330,7 @@ public abstract class AbstractXmlFilter extends AbstractFilter {
             final String localName = xmlr.getLocalName(), namespaceURI = xmlr.getNamespaceURI();
             if (namespaceURI != null && namespaceURI.length() > 0) {
                 final String prefix = xmlr.getPrefix();
-                if (prefix != null) {
+                if (prefix != null && prefix.length() > 0) {
                     writer.writeStartElement(prefix, localName, namespaceURI);
                 } else {
                     writer.writeStartElement(namespaceURI, localName);
@@ -339,7 +343,7 @@ public abstract class AbstractXmlFilter extends AbstractFilter {
             }
             for (int i = 0, len = xmlr.getAttributeCount(); i < len; i++) {
                 String attUri = xmlr.getAttributeNamespace(i);
-                if (attUri != null) {
+                if (attUri != null && attUri.length() > 0) {
                     writer.writeAttribute(attUri, xmlr.getAttributeLocalName(i), xmlr.getAttributeValue(i));
                 } else {
                     writer.writeAttribute(xmlr.getAttributeLocalName(i), xmlr.getAttributeValue(i));

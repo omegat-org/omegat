@@ -150,8 +150,8 @@
 			  <para>Tags: OmegaT tags are never counted in the statistics but in
 			  some cases can split terms and create discrepancies in the way
 			  OmegaT counts them. See the <link
-			  linkend="dialogs.project.properties.remove.tags"
-			  endterm="dialogs.project.properties.remove.tags.title"/>
+			  linkend="dialogs.project.properties.hide.tags"
+			  endterm="dialogs.project.properties.hide.tags.title"/>
 			  preference in the <link linkend="dialogs.project.properties"
 			  endterm="dialogs.project.properties.title"/> dialog for
 			  details.</para>

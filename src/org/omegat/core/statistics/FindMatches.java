@@ -402,6 +402,11 @@ public class FindMatches {
             return;
         }
 
+        if (similarityStem < fuzzyMatchThreshold && similarityNoStem < fuzzyMatchThreshold
+                && simAdjusted < fuzzyMatchThreshold) {
+            return;
+        }
+
         addNearString(key, source, translation, comesFrom, fuzzy, similarityStem, similarityNoStem,
                 simAdjusted, null, tmxName, creator, creationDate, changer, changedDate, props);
     }
@@ -419,9 +424,6 @@ public class FindMatches {
      * @return true if we have chance
      */
     protected boolean haveChanceToAdd(final int simStem, final int simNoStem, final int simExactly) {
-        if (simStem < fuzzyMatchThreshold && simNoStem < fuzzyMatchThreshold) {
-            return false;
-        }
         if (result.size() < maxCount) {
             return true;
         }

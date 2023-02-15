@@ -90,4 +90,19 @@ public final class ResourcesUtil {
         }
         return properties;
     }
+
+    /**
+     * Load default colors scheme for LAF theme.
+     *
+     * @param style a style name, should be 'light' or 'dark'
+     * @return Properties object loaded when succeeded, otherwise null
+     */
+    public static Properties getBundleSystemColorProperties(final String style) throws IOException {
+        String resourcePath = APP_ROOT + "SystemColors_" + style + ".properties";
+        Properties properties = new Properties();
+        try (InputStream is = ResourcesUtil.class.getResourceAsStream(resourcePath)) {
+            properties.load(is);
+        }
+        return properties;
+    }
 }

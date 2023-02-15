@@ -201,6 +201,10 @@ dependencies {
         }
         implementation("com.github.ben-manes.caffeine:jcache:2.9.3")
 
+        implementation("com.github.weisj:darklaf-macos:3.0.2")
+        implementation("com.github.weisj:darklaf-windows:3.0.2")
+        implementation("com.github.weisj:darklaf-platform-preferences:3.0.2")
+
     }
 
     // Test dependencies

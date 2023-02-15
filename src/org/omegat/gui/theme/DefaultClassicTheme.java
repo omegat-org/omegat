@@ -41,8 +41,6 @@ import javax.swing.border.MatteBorder;
 
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
-import org.omegat.util.gui.UIDesignManager;
-
 
 @SuppressWarnings("serial")
 public class DefaultClassicTheme extends DelegatingLookAndFeel {
@@ -83,15 +81,16 @@ public class DefaultClassicTheme extends DelegatingLookAndFeel {
      * Apply theme default values to the supplied {@link UIDefaults} object.
      * Suitable for third-party themes that want to modify the default theme.
      *
-     * @param defaults the {@link UIDefaults} object such as from
-     *                 {@link LookAndFeel#getDefaults()}
+     * @param defaults
+     *            the {@link UIDefaults} object such as from
+     *            {@link LookAndFeel#getDefaults()}
      * @return the modified {@link UIDefaults} object
      */
     public static UIDefaults setDefaults(UIDefaults defaults) {
         defaults.put("OmegaTStatusArea.border", new MatteBorder(1, 1, 1, 1, Color.BLACK));
 
         try {
-            UIDesignManager.loadDefaultColors(defaults);
+            AppearanceManager.loadDefaultColors(defaults);
         } catch (IOException e) {
             Log.log(e);
         }

@@ -31,8 +31,10 @@
  **************************************************************************/
 package org.omegat.gui.theme;
 
+import static org.omegat.gui.theme.AppearanceManager.isWindowsClassicLAF;
+import static org.omegat.gui.theme.AppearanceManager.isWindowsLAF;
+
 import java.awt.Color;
-import java.awt.Toolkit;
 import java.io.IOException;
 
 import javax.swing.LookAndFeel;
@@ -47,8 +49,6 @@ import org.omegat.util.OStrings;
 import org.omegat.util.Platform;
 import org.omegat.util.gui.ResourcesUtil;
 import org.omegat.util.gui.RoundedCornerBorder;
-import org.omegat.util.gui.UIDesignManager;
-
 
 @SuppressWarnings("serial")
 public class DefaultFlatTheme extends DelegatingLookAndFeel {
@@ -91,10 +91,12 @@ public class DefaultFlatTheme extends DelegatingLookAndFeel {
      * Apply theme default values to the supplied {@link UIDefaults} object.
      * Suitable for third-party themes that want to modify the default theme.
      *
-     * @param defaults the {@link UIDefaults} object such as from
-     *                 {@link LookAndFeel#getDefaults()}
-     * @param lafId    the ID of the LAF that will make use of the defaults (from
-     *                 {@link LookAndFeel#getID()})
+     * @param defaults
+     *            the {@link UIDefaults} object such as from
+     *            {@link LookAndFeel#getDefaults()}
+     * @param lafId
+     *            the ID of the LAF that will make use of the defaults (from
+     *            {@link LookAndFeel#getID()})
      * @return the modified {@link UIDefaults} object
      */
     public static UIDefaults setDefaults(UIDefaults defaults, String lafId) {
@@ -102,18 +104,18 @@ public class DefaultFlatTheme extends DelegatingLookAndFeel {
         // #EEEEEE on Metal & OS X LAF
         Color standardBgColor = defaults.getColor("Panel.background");
         // #EEEEEE -> #F6F6F6; Lighter than standard background
-        Color activeTitleBgColor = adjustRGB(standardBgColor, 0xF6 - 0xEE);
+        Color activeTitleBgColor = AppearanceManager.adjustRGB(standardBgColor, 0xF6 - 0xEE);
         // #EEEEEE -> #DEDEDE; Darkest background
-        Color bottomAreaBgColor = adjustRGB(standardBgColor, 0xDE - 0xEE);
+        Color bottomAreaBgColor = AppearanceManager.adjustRGB(standardBgColor, 0xDE - 0xEE);
         // #EEEEEE -> #9B9B9B; Standard border. Darker than standard background.
-        Color borderColor = adjustRGB(standardBgColor, 0x9B - 0xEE);
+        Color borderColor = AppearanceManager.adjustRGB(standardBgColor, 0x9B - 0xEE);
         defaults.put("OmegaTBorder.color", borderColor);
         // #EEEEEE -> #575757; Darkest border
-        Color statusAreaColor = adjustRGB(standardBgColor, 0x57 - 0xEE);
+        Color statusAreaColor = AppearanceManager.adjustRGB(standardBgColor, 0x57 - 0xEE);
 
         // load default colors
         try {
-            UIDesignManager.loadDefaultColors(defaults);
+            AppearanceManager.loadDefaultColors(defaults);
         } catch (IOException e) {
             Log.log(e);
         }
@@ -131,22 +133,27 @@ public class DefaultFlatTheme extends DelegatingLookAndFeel {
         UIManager.put("DockingDesktop.border", new EmptyBorder(outside, outside, outside, outside));
 
         // Docked, visible panels get two borders if we're not careful:
-        // 1. Drawn by VLDocking. Surrounds panel content AND header. Set this to empty margin instead.
+        // 1. Drawn by VLDocking. Surrounds panel content AND header. Set this
+        // to empty margin instead.
         int panel = 2;
         UIManager.put("DockView.singleDockableBorder", new EmptyBorder(panel, panel, panel, panel));
         int maxPanel = outside + panel;
-        UIManager.put("DockView.maximizedDockableBorder", new EmptyBorder(maxPanel, maxPanel, maxPanel, maxPanel));
+        UIManager.put("DockView.maximizedDockableBorder",
+                new EmptyBorder(maxPanel, maxPanel, maxPanel, maxPanel));
         // 2. Drawn by OmegaT-defined Dockables. Make this a 1px line.
         defaults.put("OmegaTDockablePanel.border", new MatteBorder(1, 1, 1, 1, borderColor));
 
         // GTK+ LAF has a default border on the viewport. Disable this.
         defaults.put("OmegaTDockablePanelViewport.border", new EmptyBorder(0, 0, 0, 0));
 
-        // Use proportionally sized internal margin for text document-like panels
+        // Use proportionally sized internal margin for text document-like
+        // panels
         defaults.put("OmegaTDockablePanel.isProportionalMargins", true);
 
-        // Tabbed docked, visible panels are surrounded by LAF-specific chrome, but the surrounding
-        // colors don't appear to be available through the API. These values are from visual inspection.
+        // Tabbed docked, visible panels are surrounded by LAF-specific chrome,
+        // but the surrounding
+        // colors don't appear to be available through the API. These values are
+        // from visual inspection.
         if (Platform.isMacOSX()) {
             UIManager.put("DockView.tabbedDockableBorder", new MatteBorder(0, 5, 5, 5, new Color(0xE6E6E6)));
         } else if (isWindowsLAF(lafId) && !isWindowsClassicLAF(lafId)) {
@@ -156,12 +163,12 @@ public class DefaultFlatTheme extends DelegatingLookAndFeel {
         }
 
         // Windows 8+ is very square.
-        int cornerRadius = isFlatWindows() ? 0 : 8;
+        int cornerRadius = AppearanceManager.isFlatWindows() ? 0 : 8;
 
         // Panel title bars
         Color activeTitleText = defaults.getColor("Label.foreground");
         // #000000 -> #808080; GTK+ has Color.WHITE for Label.disabledForeground
-        Color inactiveTitleText = adjustRGB(activeTitleText, 0x80);
+        Color inactiveTitleText = AppearanceManager.adjustRGB(activeTitleText, 0x80);
         UIManager.put("DockViewTitleBar.border",
                 new RoundedCornerBorder(cornerRadius, borderColor, RoundedCornerBorder.SIDE_TOP));
         // Windows 7 "Classic" has Color.WHITE for this
@@ -174,10 +181,10 @@ public class DefaultFlatTheme extends DelegatingLookAndFeel {
 
         // Main window bottom area
 
-        // AutoHideButtonPanel is where minimized panel tabs go. Use compound border to give left/right margins.
+        // AutoHideButtonPanel is where minimized panel tabs go. Use compound
+        // border to give left/right margins.
         UIManager.put("AutoHideButtonPanel.bottomBorder", new CompoundBorder(
-                new MatteBorder(1, 0, 0, 0, borderColor),
-                new EmptyBorder(0, 2 * outside, 0, 2 * outside)));
+                new MatteBorder(1, 0, 0, 0, borderColor), new EmptyBorder(0, 2 * outside, 0, 2 * outside)));
         UIManager.put("AutoHideButtonPanel.background", bottomAreaBgColor);
         UIManager.put("AutoHideButton.expandBorderBottom",
                 new RoundedCornerBorder(cornerRadius, borderColor, RoundedCornerBorder.SIDE_BOTTOM));
@@ -185,7 +192,8 @@ public class DefaultFlatTheme extends DelegatingLookAndFeel {
         // OmegaT-defined status box in lower right
         defaults.put("OmegaTStatusArea.border", new MatteBorder(1, 1, 1, 1, statusAreaColor));
         // Lowermost section margins
-        defaults.put("OmegaTMainWindowBottomMargin.border", new EmptyBorder(0, 2 * outside, outside, 2 * outside));
+        defaults.put("OmegaTMainWindowBottomMargin.border",
+                new EmptyBorder(0, 2 * outside, outside, 2 * outside));
 
         defaults.put("OmegaTEditorFilter.border", new MatteBorder(1, 1, 0, 1, borderColor));
 
@@ -226,15 +234,18 @@ public class DefaultFlatTheme extends DelegatingLookAndFeel {
         UIManager.put("DockTabbedPane.menu.maximize", getIcon("appbar.app.tall.png"));
         UIManager.put("DockTabbedPane.menu.float", getIcon("appbar.fullscreen.png"));
 
-        // Windows only accepts a 32x32 cursor image with no semitransparency, so you basically
+        // Windows only accepts a 32x32 cursor image with no semitransparency,
+        // so you basically
         // need a special image just for that.
-        UIManager.put("DragControler.detachCursor", ResourcesUtil.getBundledImage("appbar.fullscreen.cursor32x32.png"));
+        UIManager.put("DragControler.detachCursor",
+                ResourcesUtil.getBundledImage("appbar.fullscreen.cursor32x32.png"));
 
         // Use more native-looking icons on OS X
         if (Platform.isMacOSX()) {
             UIManager.put("DockViewTitleBar.maximize", getIcon("appbar.fullscreen.corners.inactive.png"));
             UIManager.put("DockViewTitleBar.maximize.rollover", getIcon("appbar.fullscreen.corners.png"));
-            UIManager.put("DockViewTitleBar.maximize.pressed", getIcon("appbar.fullscreen.corners.pressed.png"));
+            UIManager.put("DockViewTitleBar.maximize.pressed",
+                    getIcon("appbar.fullscreen.corners.pressed.png"));
             UIManager.put("DockViewTitleBar.restore", getIcon("appbar.restore.corners.inactive.png"));
             UIManager.put("DockViewTitleBar.restore.rollover", getIcon("appbar.restore.corners.png"));
             UIManager.put("DockViewTitleBar.restore.pressed", getIcon("appbar.restore.corners.pressed.png"));
@@ -249,35 +260,10 @@ public class DefaultFlatTheme extends DelegatingLookAndFeel {
             UIManager.put("DockTabbedPane.menu.hide", getIcon("appbar.minus.png"));
             UIManager.put("DockTabbedPane.menu.maximize", getIcon("appbar.fullscreen.corners.png"));
 
-            UIManager.put("DragControler.detachCursor", ResourcesUtil.getBundledImage("appbar.fullscreen.png"));
+            UIManager.put("DragControler.detachCursor",
+                    ResourcesUtil.getBundledImage("appbar.fullscreen.png"));
         }
         return defaults;
     }
 
-    /**
-     * Adjust a color by adding some constant to its RGB values, clamping to the
-     * range 0-255.
-     */
-    private static Color adjustRGB(Color color, int adjustment) {
-        Color result = new Color(Math.max(0, Math.min(255, color.getRed() + adjustment)),
-                Math.max(0, Math.min(255, color.getGreen() + adjustment)),
-                Math.max(0, Math.min(255, color.getBlue() + adjustment)));
-        return result;
-    }
-
-    // Windows Classic LAF detection from http://stackoverflow.com/a/4386821/448068
-    private static boolean isWindowsLAF(String systemID) {
-        return systemID.equals("Windows");
-    }
-
-    private static boolean isWindowsClassicLAF(String systemID) {
-        return isWindowsLAF(systemID) && !(Boolean) Toolkit.getDefaultToolkit().getDesktopProperty("win.xpstyle.themeActive");
-    }
-
-    // This check fails to detect Windows 10 correctly on Java 1.8 prior to u60.
-    // See: https://bugs.openjdk.java.net/browse/JDK-8066504
-    private static boolean isFlatWindows() {
-        return System.getProperty("os.name").startsWith("Windows")
-                && System.getProperty("os.version").matches("6\\.[23]|10\\..*");
-    }
 }

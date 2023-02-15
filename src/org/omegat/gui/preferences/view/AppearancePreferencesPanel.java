@@ -48,9 +48,9 @@ public class AppearancePreferencesPanel extends JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        cbThemeSelect = new javax.swing.JComboBox<>();
+        themeSelectionScrollPane = new javax.swing.JScrollPane();
+        themeList = new javax.swing.JList<>();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 8), new java.awt.Dimension(0, 8), new java.awt.Dimension(32767, 8));
         restoreWindowButton = new javax.swing.JButton();
 
@@ -58,17 +58,22 @@ public class AppearancePreferencesPanel extends JPanel {
         setMinimumSize(new java.awt.Dimension(250, 200));
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.PAGE_AXIS));
 
-        jPanel1.setAlignmentX(0.0F);
-        jPanel1.setLayout(new java.awt.BorderLayout());
-
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("org/omegat/Bundle"); // NOI18N
         org.openide.awt.Mnemonics.setLocalizedText(jLabel1, bundle.getString("MW_OPTIONMENU_APPEARANCE_THEME_LABEL")); // NOI18N
-        jPanel1.add(jLabel1, java.awt.BorderLayout.WEST);
+        add(jLabel1);
 
-        cbThemeSelect.setMinimumSize(new java.awt.Dimension(280, 80));
-        jPanel1.add(cbThemeSelect, java.awt.BorderLayout.CENTER);
+        themeSelectionScrollPane.setMinimumSize(new java.awt.Dimension(160, 16));
+        themeSelectionScrollPane.setPreferredSize(new java.awt.Dimension(160, 160));
 
-        add(jPanel1);
+        themeList.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        themeSelectionScrollPane.setViewportView(themeList);
+
+        add(themeSelectionScrollPane);
         add(filler1);
 
         org.openide.awt.Mnemonics.setLocalizedText(restoreWindowButton, OStrings.getString("MW_OPTIONSMENU_RESTORE_GUI")); // NOI18N
@@ -76,10 +81,10 @@ public class AppearancePreferencesPanel extends JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    javax.swing.JComboBox<String> cbThemeSelect;
     private javax.swing.Box.Filler filler1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
     javax.swing.JButton restoreWindowButton;
+    javax.swing.JList<String> themeList;
+    javax.swing.JScrollPane themeSelectionScrollPane;
     // End of variables declaration//GEN-END:variables
 }

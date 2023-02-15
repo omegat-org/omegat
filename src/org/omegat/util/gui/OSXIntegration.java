@@ -66,6 +66,8 @@ public final class OSXIntegration {
         try {
             System.setProperty("apple.laf.useScreenMenuBar", "true");
             System.setProperty("com.apple.mrj.application.apple.menu.about.name", "OmegaT");
+            // Enable dark mode detection on OpenJDK JRE14 and later, or Oracle Java
+            System.setProperty("apple.awt.application.appearance", "system");
 
             DesktopSupport.getSupport().setDockIconImage(APP_ICON_MAC);
 

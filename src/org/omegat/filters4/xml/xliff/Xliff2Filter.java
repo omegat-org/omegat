@@ -59,12 +59,14 @@ public class Xliff2Filter extends AbstractXliffFilter {
 
     // ------------------- AbstractXmlFilter part -------------------------
 
-    @Override // start events on body
+    @Override
     protected void checkCurrentCursorPosition(javax.xml.stream.XMLStreamReader reader, boolean doWrite) {
-        super.checkCurrentCursorPosition(reader, doWrite);
         if (reader.getEventType() == StartElement.START_ELEMENT) {
-            if (reader.getLocalName().equals("notes") || reader.getLocalName().equals("group")
-                    || reader.getLocalName().equals("unit")) {
+            // XLIFF 2 has no body, so we must start on another markup
+            // Warning: this solution works for pure XLIFF 2 only:
+            // if later we write a derivative (like SDLXLIFF inheriting from XLIFF 1)
+            // then the derivative may need a finer algorithm.
+            if (reader.getLocalName().equals("xliff")) {
                 this.isEventMode = true;
             }
         }

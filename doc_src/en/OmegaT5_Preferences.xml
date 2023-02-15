@@ -418,10 +418,10 @@
       endterm="windows.scripts.title"/> window for details.</para>
 
 	  <note>
-		<para>Linux users who run OmegaT with OpenJDK with the Gnome/GTK look
-		and feel can benefit from automatic dark theme detection. This feature
-		depends on Java features that is not yet available on other
-		platforms.</para>
+		<para>Automatic dark theme detection is available on Linux systems
+		with the Gnome/GTK look and feel for users who run OmegaT on OpenJDK.
+		This feature depends on Java functionality that is not yet available
+		on other platforms.</para>
 	  </note>
 	</section>
   </section>

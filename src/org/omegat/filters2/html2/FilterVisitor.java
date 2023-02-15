@@ -97,7 +97,7 @@ public class FilterVisitor extends NodeVisitor {
     protected boolean isTextUpForCollection = false;
 
     /** Did the PRE block start (it means we mustn't compress the spaces). */
-    protected boolean preformatting = false;
+    protected boolean betweenPreformattingTags = false;
 
     /**
      * The list of non-paragraph tags before a chunk of text.
@@ -118,13 +118,13 @@ public class FilterVisitor extends NodeVisitor {
      * <ul>
      * <li>If another chunk of text follows, they get appended to the
      * translatable paragraph,
-     * <li>Otherwise (paragraph tag follows), they are written out directly.
+     * <li>Otherwise (eg if a paragraph tag follows), they are written out directly.
      * </ul>
      */
     protected List<Node> followingNodes;
 
     /** The tags behind the shortcuts */
-    protected List<Tag> sTags;
+    protected List<Node> sTags;
     /** The tag numbers of shorcutized tags */
     protected List<Integer> sTagNumbers;
     /** The list of all the tag shortcuts */
@@ -162,9 +162,8 @@ public class FilterVisitor extends NodeVisitor {
     @Override
     public void visitTag(Tag tag) {
 
-        boolean keepIntact = isProtectedTag(tag);
 
-        if (keepIntact) {
+        if (isProtectedTag(tag)) {
             if (isTextUpForCollection) {
                 endup();
             } else {
@@ -180,7 +179,7 @@ public class FilterVisitor extends NodeVisitor {
                 handleParagraphTag();
             }
             if (isPreformattingTag(tag)) {
-                preformatting = true;
+                betweenPreformattingTags = true;
             }
             // Translate attributes of tags if they are not null.
             maybeTranslateAttribute(tag, "abbr");
@@ -287,19 +286,19 @@ public class FilterVisitor extends NodeVisitor {
         recurseSelf = true;
         recurseChildren = true;
         // nbsp is special case - process it like usual spaces
-        String trimmedtext = HTMLUtils.entitiesToChars(string.getText()).replace((char) 160, ' ').trim();
-        if (!trimmedtext.isEmpty()) {
+        String textAsCleanedString = HTMLUtils.entitiesToChars(string.getText()).replace((char) 160, ' ');
+        if (hasMoreThanJustWhitepaces(textAsCleanedString)) {
             // Hack around HTMLParser not being able to handle XHTML
-            // RFE pending:
+            // RFE:
             // http://sourceforge.net/tracker/index.php?func=detail&aid=1227222&group_id=24399&atid=381402
-            if (firstcall && PatternConsts.XML_HEADER.matcher(trimmedtext).matches()) {
+            if (firstcall && PatternConsts.XML_HEADER.matcher(textAsCleanedString.trim()).matches()) {
                 writeout(string.toHtml());
                 return;
             }
 
             isTextUpForCollection = true;
             firstcall = false;
-        } else if (preformatting) {
+        } else if (betweenPreformattingTags) {
             isTextUpForCollection = true;
         }
 
@@ -318,16 +317,23 @@ public class FilterVisitor extends NodeVisitor {
      */
     @Override
     public void visitRemarkNode(Remark remark) {
-        recurseSelf = true;
-        recurseChildren = true;
-        if (isTextUpForCollection) {
-            endup();
-        } else {
-            writeOutPrecedingNodes();
+        if (shouldKeepComments()) {
+            recurseSelf = true;
+            recurseChildren = true;
+            if (betweenPreformattingTags) {
+                isTextUpForCollection = true;
+            }
+
+            if (isTextUpForCollection) {
+                queueTranslatable(remark);
+            } else {
+                queuePrefix(remark);
+            }
         }
-        if (!options.getRemoveComments()) {
-            writeout(remark.toHtml());
-        }
+    }
+
+    private boolean shouldKeepComments() {
+        return !options.getRemoveComments();
     }
 
     /**
@@ -344,7 +350,7 @@ public class FilterVisitor extends NodeVisitor {
             endup();
         }
         if (isPreformattingTag(tag)) {
-            preformatting = false;
+            betweenPreformattingTags = false;
         }
         queuePrefix(tag);
     }
@@ -580,6 +586,8 @@ public class FilterVisitor extends NodeVisitor {
             Node node = allNodesInParagraph.get(i);
             if (node instanceof Tag) {
                 writeout("<" + node.getText() + ">");
+            } else if (node instanceof Remark) {
+                writeout(node.toHtml());
             } else {
                 writeout(compressWhitespace(node.getText()));
             }
@@ -591,7 +599,9 @@ public class FilterVisitor extends NodeVisitor {
         for (int i = firstTagToIncludeFromPreceding; i <= lastTagKeptInFollowing; i++) {
             Node node = allNodesInParagraph.get(i);
             if (node instanceof Tag) {
-                shortcut((Tag) node, paragraph);
+                assignShortcut((Tag) node, paragraph);
+            } else if (node instanceof Remark) {
+                assignShortcut((Remark) node, paragraph);
             } else { // node instanceof Text
                 paragraph.append(HTMLUtils.entitiesToChars(node.toHtml()));
             }
@@ -613,7 +623,7 @@ public class FilterVisitor extends NodeVisitor {
         // (This changes the layout, therefore it is an option. NB: an alternative implementation is to compress by
         // default, and use Core.getFilterMaster().getConfig().isPreserveSpaces() option instead to compress if
         // not checked.)
-        if (!preformatting) {
+        if (!betweenPreformattingTags) {
 
             spacePrefix = HTMLUtils.getSpacePrefix(uncompressed, options.getCompressWhitespace());
             spacePostfix = HTMLUtils.getSpacePostfix(uncompressed, options.getCompressWhitespace());
@@ -640,7 +650,7 @@ public class FilterVisitor extends NodeVisitor {
         // note that this doesn't change < and > of tag shortcuts
         translation = HTMLUtils.charsToEntities(translation, filter.getTargetEncoding(), sShortcuts);
         // expands tag shortcuts into full-blown tags
-        translation = unshorcutize(translation);
+        translation = revertShortcut(translation);
         // writing out the paragraph into target file
         writeout(spacePrefix);
         writeout(translation);
@@ -651,6 +661,8 @@ public class FilterVisitor extends NodeVisitor {
             Node node = allNodesInParagraph.get(i);
             if (node instanceof Tag) {
                 writeout("<" + node.getText() + ">");
+            } else if (node instanceof Remark) {
+                writeout(node.toHtml());
             } else {
                 writeout(compressWhitespace(node.getText()));
             }
@@ -678,7 +690,7 @@ public class FilterVisitor extends NodeVisitor {
     /**
      * Creates and stores a shortcut for the tag.
      */
-    private void shortcut(Tag tag, StringBuilder paragraph) {
+    private void assignShortcut(Tag tag, StringBuilder paragraph) {
         StringBuilder result = new StringBuilder();
         result.append('<');
         int n = -1;
@@ -687,17 +699,18 @@ public class FilterVisitor extends NodeVisitor {
             // trying to lookup for appropriate starting tag
             int recursion = 1;
             for (int i = sTags.size() - 1; i >= 0; i--) {
-                Tag othertag = sTags.get(i);
-                if (othertag.getTagName().equals(tag.getTagName())) {
-                    if (othertag.isEndTag()) {
-                        recursion++;
-                    } else {
-                        recursion--;
-                        if (recursion == 0) {
-                            // we've found a starting tag for this ending one
-                            // !!!
-                            n = sTagNumbers.get(i);
-                            break;
+                if (sTags.get(i) instanceof Tag) {
+                    Tag othertag = (Tag) sTags.get(i);
+                    if (othertag.getTagName().equals(tag.getTagName())) {
+                        if (othertag.isEndTag()) {
+                            recursion++;
+                        } else {
+                            recursion--;
+                            if (recursion == 0) {
+                                // found starting tag for this endTag
+                                n = sTagNumbers.get(i);
+                                break;
+                            }
                         }
                     }
                 }
@@ -743,22 +756,50 @@ public class FilterVisitor extends NodeVisitor {
     }
 
     /**
+     * Creates and stores a shortcut for the comment (Remark node).
+     */
+    private void assignShortcut(Remark remark, StringBuilder paragraph) {
+        StringBuilder result = new StringBuilder();
+        int n = sNumShortcuts++;
+        result.append("<c");
+        result.append(n);
+        result.append("/>");
+        String shortcut = result.toString();
+        sTags.add(remark);
+        sTagNumbers.add(n);
+        sShortcuts.add(shortcut);
+        paragraph.append(shortcut);
+    }
+
+    /**
      * Recovers tag shortcuts into full tags.
      */
-    private String unshorcutize(String str) {
+    private String revertShortcut(String str) {
         for (int i = 0; i < sShortcuts.size(); i++) {
             String shortcut = sShortcuts.get(i);
             int pos = -1;
             while ((pos = str.indexOf(shortcut, pos + 1)) >= 0) {
-                Tag tag = sTags.get(i);
-                try {
-                    str = str.substring(0, pos) + "<" + tag.getText() + ">"
-                            + str.substring(pos + shortcut.length());
-                } catch (StringIndexOutOfBoundsException sioobe) {
-                    // nothing, string doesn't change
-                    // but prevent endless loop
-                    break;
-                }
+                if (sTags.get(i) instanceof Tag) {
+                    Tag tag = (Tag) sTags.get(i);
+                    try {
+                        str = str.substring(0, pos) + "<" + tag.getText() + ">"
+                                + str.substring(pos + shortcut.length());
+                    } catch (StringIndexOutOfBoundsException sioobe) {
+                        // nothing, string doesn't change
+                        // but prevent endless loop
+                        break;
+                    }
+                } else if (sTags.get(i) instanceof Remark) {
+                     Remark comment = (Remark) sTags.get(i);
+                     try {
+                         str = str.substring(0, pos) + comment.toHtml()
+                                 + str.substring(pos + shortcut.length());
+                     } catch (StringIndexOutOfBoundsException sioobe) {
+                         // nothing, string doesn't change
+                         // but prevent endless loop
+                         break;
+                     }
+                 }
             }
         }
         return str;
@@ -773,12 +814,26 @@ public class FilterVisitor extends NodeVisitor {
      * Whitespace text is simply added to the queue.
      */
     private void queueTranslatable(Text txt) {
-        if (!txt.toHtml().trim().isEmpty() || preformatting) {
+        if (hasMoreThanJustWhitepaces(txt.toHtml()) || betweenPreformattingTags) {
             translatableNodes.addAll(followingNodes);
             followingNodes.clear();
             translatableNodes.add(txt);
         } else {
             followingNodes.add(txt);
+        }
+    }
+
+    private boolean hasMoreThanJustWhitepaces(String string) {
+        return !string.trim().isEmpty();
+    }
+
+    private void queueTranslatable(Remark remark) {
+        if (betweenPreformattingTags) {
+            translatableNodes.addAll(followingNodes);
+            followingNodes.clear();
+            translatableNodes.add(remark);
+        } else {
+            followingNodes.add(remark);
         }
     }
 
@@ -810,13 +865,19 @@ public class FilterVisitor extends NodeVisitor {
     }
 
     /**
-     * Queues up some text, possibly before a meaningful text. If the text is
-     * collected now, the tag is queued up as translatable by calling
-     * {@link #queueTranslatable(Tag)}, otherwise it's collected to a special
-     * list that is inspected when the translatable text is sent to OmegaT core.
+     * Queues up some Text node, possibly before more meaningful text.
+     * The Text node is added to the precedingNodes list.
      */
     private void queuePrefix(Text txt) {
         precedingNodes.add(txt);
+    }
+
+    /**
+     * Queues up some Remark node (HTML comment), possibly before more meaningful
+     * text. The Remark node is added to the precedingNodes list.
+     */
+    private void queuePrefix(Remark remark) {
+        precedingNodes.add(remark);
     }
 
     /** Saves "precedingNodes" to output stream and cleans the list. */
@@ -824,6 +885,8 @@ public class FilterVisitor extends NodeVisitor {
         for (Node node : precedingNodes) {
             if (node instanceof Tag) {
                 writeout("<" + node.getText() + ">");
+            } else if (node instanceof Remark) {
+                writeout(node.toHtml());
             } else {
                 writeout(compressWhitespace(node.getText()));
             }

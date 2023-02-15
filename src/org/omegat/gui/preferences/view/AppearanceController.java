@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2016 Aaron Madlon-Kay
-               2021 Hiroshi Miura
+               2021,2023 Hiroshi Miura
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -27,9 +27,11 @@
 package org.omegat.gui.preferences.view;
 
 import java.util.Arrays;
+import java.util.Map;
+import java.util.stream.Collectors;
 
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComponent;
+import javax.swing.ListSelectionModel;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 
@@ -39,14 +41,15 @@ import org.omegat.gui.main.MainWindowUI;
 import org.omegat.gui.preferences.BasePreferencesController;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
-import org.omegat.util.gui.DelegatingComboBoxRenderer;
 
 /**
  * @author Aaron Madlon-Kay
+ * @author Hiroshi Miura
  */
 public class AppearanceController extends BasePreferencesController {
 
     private AppearancePreferencesPanel panel;
+    private Map<String, String> themes;
 
     @Override
     public JComponent getGui() {
@@ -64,25 +67,17 @@ public class AppearanceController extends BasePreferencesController {
 
     private void initGui() {
         panel = new AppearancePreferencesPanel();
-        String[] lafs = Arrays.asList(UIManager.getInstalledLookAndFeels()).stream().map(LookAndFeelInfo::getClassName)
-                .toArray(String[]::new);
-        panel.cbThemeSelect.setModel(new DefaultComboBoxModel<>(lafs));
-        panel.cbThemeSelect.setRenderer(new DelegatingComboBoxRenderer<String, String>() {
-            @Override
-            protected String getDisplayText(String value) {
-                for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-                    if (info.getClassName().equals(value)) {
-                        return info.getName();
-                    }
-                }
-                return value;
-            }
-        });
-        panel.cbThemeSelect.addActionListener(e -> {
-            String selected = panel.cbThemeSelect.getSelectedItem().toString();
-            String current = UIManager.getLookAndFeel().getClass().getName();
+        themes = Arrays.asList(UIManager.getInstalledLookAndFeels()).stream()
+                .collect(Collectors.toMap(LookAndFeelInfo::getName, LookAndFeelInfo::getClassName));
+        panel.themeList.setListData(themes.keySet().toArray(new String[0]));
+        panel.themeList.setVisibleRowCount(10);
+        panel.themeList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        panel.themeList.addListSelectionListener(e -> {
+            String selected = themes.get(panel.themeList.getSelectedValue());
+            String current = UIManager.getLookAndFeel().getName();
             setRestartRequired(!selected.equals(current));
         });
+
         // TODO: Properly abstract the restore function
         panel.restoreWindowButton
                 .addActionListener(e -> MainWindowUI.resetDesktopLayout((MainWindow) Core.getMainWindow()));
@@ -90,16 +85,23 @@ public class AppearanceController extends BasePreferencesController {
 
     @Override
     protected void initFromPrefs() {
-        panel.cbThemeSelect.setSelectedItem(UIManager.getLookAndFeel().getClass().getName());
+        String current = UIManager.getLookAndFeel().getName();
+        panel.themeList.setSelectedValue(current, true);
     }
 
     @Override
     public void restoreDefaults() {
-        panel.cbThemeSelect.setSelectedItem(Preferences.THEME_CLASS_NAME_DEFAULT);
+        String defaultClassName = Preferences.THEME_CLASS_NAME_DEFAULT;
+        for (Map.Entry<String, String> entry : themes.entrySet()) {
+            if (entry.getValue().equals(defaultClassName)) {
+                panel.themeList.setSelectedValue(entry.getKey(), true);
+            }
+        }
     }
 
     @Override
     public void persist() {
-        Preferences.setPreference(Preferences.THEME_CLASS_NAME, panel.cbThemeSelect.getSelectedItem().toString());
+        Preferences.setPreference(Preferences.THEME_CLASS_NAME,
+                themes.get(panel.themeList.getSelectedValue()));
     }
 }

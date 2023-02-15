@@ -26,10 +26,16 @@
 package org.omegat.gui.preferences.view;
 
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.RowSorter;
+import javax.swing.SortOrder;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 import org.omegat.core.Core;
 import org.omegat.gui.dialogs.ChoosePluginFile;
@@ -64,6 +70,12 @@ public class PluginsPreferencesController extends BasePreferencesController {
     private void initGui() {
         panel = new PluginsPreferencesPanel();
         TableColumnSizer.autoSize(panel.tablePluginsInfo, 0, true);
+        TableRowSorter<TableModel> sorter = new TableRowSorter<>(panel.tablePluginsInfo.getModel());
+        panel.tablePluginsInfo.setRowSorter(sorter);
+        List<RowSorter.SortKey> sortkeys = new ArrayList<>();
+        sortkeys.add(new RowSorter.SortKey(0, SortOrder.ASCENDING));
+        sortkeys.add(new RowSorter.SortKey(1, SortOrder.ASCENDING));
+        sorter.setSortKeys(sortkeys);
         panel.browsePluginsButton.addActionListener(e -> {
             try {
                 DesktopWrapper.browse(URI.create(PLUGINS_WIKI_URL));

@@ -62,6 +62,7 @@ public class EditorSettings implements IEditorSettings {
     private boolean markWhitespace;
     private boolean markParagraphDelimitations;
     private boolean markBidi;
+    private boolean hideTagonlySegments;
     private String displayModificationInfo;
     private boolean autoSpellChecking;
     private boolean viewSourceBold;
@@ -101,6 +102,7 @@ public class EditorSettings implements IEditorSettings {
         autoSpellChecking = Preferences.isPreference(Preferences.ALLOW_AUTO_SPELLCHECKING);
         markAutoPopulated = Preferences.isPreferenceDefault(Preferences.MARK_AUTOPOPULATED,
                 MARK_AUTOPOPULATED_DEFAULT);
+        hideTagonlySegments = Preferences.isPreferenceDefault(Preferences.HIDE_TAGONLY_SEGMENTS, false);
 
         // options from preferences 'view' pane
         viewSourceBold = Preferences.isPreferenceDefault(Preferences.VIEW_OPTION_SOURCE_ALL_BOLD,
@@ -328,6 +330,34 @@ public class EditorSettings implements IEditorSettings {
         if (Core.getProject().isProjectLoaded()) {
             parent.loadDocument();
             parent.activateEntry();
+        }
+    }
+
+    public boolean isHideTagonlySegments() {
+        return hideTagonlySegments;
+    }
+
+    public void setHideTagonlySegments(boolean hideTos) {
+        UIThreadsUtil.mustBeSwingThread();
+
+        parent.commitAndDeactivate();
+
+        this.hideTagonlySegments = hideTos;
+        Preferences.setPreference(Preferences.HIDE_TAGONLY_SEGMENTS, hideTos);
+
+        if (hideTos) {
+            Core.getEditor().setFilter( new IEditorFilter() {
+                public boolean isSourceAsEmptyTranslation() { return false; }
+                public java.awt.Component getControlComponent() { return null; }
+                final java.util.regex.Pattern PTN = java.util.regex.Pattern.compile("^\\s*(<[^>]+>[\\s\\r\\n]*)+$");
+                public boolean allowed(org.omegat.core.data.SourceTextEntry ste) {
+                    String txt = ste.getSrcText();
+                    System.err.println("" + ste.getSrcText() + " : " + PTN.matcher(txt).matches());
+                    return ! (PTN.matcher(txt).matches());
+                }
+            });        
+        } else {
+            Core.getEditor().removeFilter();
         }
     }
 

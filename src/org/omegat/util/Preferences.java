@@ -218,6 +218,9 @@ public final class Preferences {
     /** Mark the untranslated segments with a different color */
     public static final String MARK_UNTRANSLATED_SEGMENTS = "mark_untranslated_segments";
 
+    /** Hide segments with only tags **/
+    public static final String HIDE_TAGONLY_SEGMENTS = "hide_tagonly_segments";
+
     /** Workflow Option: Don't Insert Source Text Into Translated Segment */
     public static final String DONT_INSERT_SOURCE_TEXT = "wf_noSourceText";
     // false: insert source / true: empty

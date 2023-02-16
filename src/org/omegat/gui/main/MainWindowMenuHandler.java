@@ -816,6 +816,13 @@ public final class MainWindowMenuHandler {
                         mainWindow.menu.viewMarkParagraphStartCheckBoxMenuItem.isSelected());
     }
 
+    public void viewHideTagonlyCheckBoxMenuItemActionPerformed() {
+        Core.getEditor()
+                .getSettings()
+                .setHideTagonlySegments(
+                        mainWindow.menu.viewHideTagonlyCheckBoxMenuItem.isSelected());
+    }
+
     public void viewDisplaySegmentSourceCheckBoxMenuItemActionPerformed() {
         Core.getEditor()
                 .getSettings()

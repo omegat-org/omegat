@@ -395,6 +395,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         viewMenu.add(viewMarkGlossaryMatchesCheckBoxMenuItem = createCheckboxMenuItem("MW_VIEW_GLOSSARY_MARK"));
         viewMenu.add(viewMarkLanguageCheckerCheckBoxMenuItem = createCheckboxMenuItem("LT_OPTIONS_MENU_ENABLED"));
         viewMenu.add(viewMarkFontFallbackCheckBoxMenuItem = createCheckboxMenuItem("MW_VIEW_MENU_MARK_FONT_FALLBACK"));
+        viewMenu.add(viewHideTagonlyCheckBoxMenuItem = createCheckboxMenuItem("MV_VIEW_MENU_HIDE_ONLYTAGS"));
         viewMenu.add(viewModificationInfoMenu = createMenu("MW_VIEW_MENU_MODIFICATION_INFO"));
         ButtonGroup viewModificationInfoMenuBG = new ButtonGroup();
         viewModificationInfoMenu.add(viewDisplayModificationInfoNoneRadioButtonMenuItem = createRadioButtonMenuItem(
@@ -556,6 +557,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
                 .isMarkAutoPopulated());
         viewMarkGlossaryMatchesCheckBoxMenuItem.setSelected(Core.getEditor().getSettings().isMarkGlossaryMatches());
         viewMarkLanguageCheckerCheckBoxMenuItem.setSelected(Core.getEditor().getSettings().isMarkLanguageChecker());
+        viewHideTagonlyCheckBoxMenuItem.setSelected(Core.getEditor().getSettings().isHideTagonlySegments());
         viewMarkFontFallbackCheckBoxMenuItem.setSelected(Core.getEditor().getSettings()
                 .isDoFontFallback());
 
@@ -902,5 +904,6 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
     JCheckBoxMenuItem viewMarkTranslatedSegmentsCheckBoxMenuItem;
     JCheckBoxMenuItem viewMarkUntranslatedSegmentsCheckBoxMenuItem;
     JCheckBoxMenuItem viewMarkParagraphStartCheckBoxMenuItem;
+    JCheckBoxMenuItem viewHideTagonlyCheckBoxMenuItem;
     JMenu viewMenu;
 }

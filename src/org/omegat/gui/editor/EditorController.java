@@ -2104,7 +2104,9 @@ public class EditorController implements IEditor {
 
         entriesFilter = filter;
         entriesFilterControlComponent = filter.getControlComponent();
-        pane.add(entriesFilterControlComponent, BorderLayout.NORTH);
+        if (entriesFilterControlComponent != null) {
+            pane.add(entriesFilterControlComponent, BorderLayout.NORTH);
+        }
         pane.revalidate();
 
         SourceTextEntry curEntry = getCurrentEntry();

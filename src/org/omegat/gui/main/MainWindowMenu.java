@@ -171,6 +171,8 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
     public void menuSelected(MenuEvent evt) {
         // Item what perform event.
         JMenu menu = (JMenu) evt.getSource();
+        menu.setBackground(UIManager.getColor("Menu.background"));
+        menu.setForeground(UIManager.getColor("Menu.foreground"));
 
         // Get item name from actionCommand.
         String action = menu.getActionCommand();
@@ -211,6 +213,8 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
     // CHECKSTYLE:OFF
     JMenuBar initComponents() {
         mainMenu = new JMenuBar();
+        mainMenu.setForeground(UIManager.getColor("MenuBar.foreground"));
+        mainMenu.setBackground(UIManager.getColor("MenuBar.background"));
         mainMenu.add(projectMenu = createMenu("TF_MENU_FILE"));
         mainMenu.add(editMenu = createMenu("TF_MENU_EDIT"));
         mainMenu.add(gotoMenu = createMenu("MW_GOTOMENU"));
@@ -603,6 +607,8 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         List<String> items = RecentProjects.getRecentProjects();
         for (String project : items) {
             JMenuItem recentProjectMenuItem = new JMenuItem(project);
+            recentProjectMenuItem.setBackground(UIManager.getColor("MenuItem.background"));
+            recentProjectMenuItem.setForeground(UIManager.getColor("MenuItem.foreground"));
             File projectFile = new File(project);
             recentProjectMenuItem.addActionListener(event -> ProjectUICommands.projectOpen(projectFile, true));
             recentProjectMenuItem.setEnabled(projectFile.isDirectory() && projectFile.canRead());
@@ -622,6 +628,8 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
      */
     private JMenu createMenu(final String titleKey) {
         JMenu result = new JMenu();
+        result.setBackground(UIManager.getColor("Menu.background"));
+        result.setForeground(UIManager.getColor("Menu.foreground"));
         Mnemonics.setLocalizedText(result, OStrings.getString(titleKey));
         result.addMenuListener(this);
         return result;
@@ -636,6 +644,8 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
      */
     private JMenuItem createMenuItem(final String titleKey) {
         JMenuItem result = new JMenuItem();
+        result.setBackground(UIManager.getColor("MenuItem.background"));
+        result.setForeground(UIManager.getColor("MenuItem.foreground"));
         Mnemonics.setLocalizedText(result, OStrings.getString(titleKey));
         result.addActionListener(this);
         return result;
@@ -650,6 +660,8 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
      */
     private JCheckBoxMenuItem createCheckboxMenuItem(final String titleKey) {
         JCheckBoxMenuItem result = new JCheckBoxMenuItem();
+        result.setBackground(UIManager.getColor("CheckBoxMenuItem.background"));
+        result.setForeground(UIManager.getColor("CheckBoxMenuItem.foreground"));
         Mnemonics.setLocalizedText(result, OStrings.getString(titleKey));
         result.addActionListener(this);
         return result;
@@ -664,6 +676,8 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
      */
     private JRadioButtonMenuItem createRadioButtonMenuItem(final String titleKey, ButtonGroup buttonGroup) {
         JRadioButtonMenuItem result = new JRadioButtonMenuItem();
+        result.setBackground(UIManager.getColor("RadioButtonMenuItem.background"));
+        result.setForeground(UIManager.getColor("RadioButtonMenuItem.foreground"));
         Mnemonics.setLocalizedText(result, OStrings.getString(titleKey));
         result.addActionListener(this);
         buttonGroup.add(result);

@@ -59,6 +59,7 @@ import com.vlsolutions.swing.docking.ui.DockingUISettings;
 
 /**
  * UI Design Manager.
+ * 
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
  * @author Henry Pijffers
@@ -152,7 +153,8 @@ public final class UIDesignManager {
         // to ensure DockViewTitleBar title readability
         Color textColor = UIManager.getColor("InternalFrame.inactiveTitleForeground");
         Color backColor = UIManager.getColor("Panel.background");
-        if (textColor != null && backColor != null) { // One of these could be null
+        // One of these could be null
+        if (textColor != null && backColor != null) {
             if (textColor.equals(backColor)) {
                 float[] hsb = Color.RGBtoHSB(textColor.getRed(),
                         textColor.getGreen(), textColor.getBlue(), null);
@@ -169,12 +171,12 @@ public final class UIDesignManager {
         }
 
         UIManager.put("DockingDesktop.notificationBlinkCount", 2);
-        UIManager.put("DockingDesktop.notificationColor", Styles.EditorColor.COLOR_NOTIFICATION_MAX.getColor());
+        UIManager.put("DockingDesktop.notificationColor",
+                Styles.EditorColor.COLOR_NOTIFICATION_MAX.getColor());
     }
 
     /**
      * Load icon from classpath.
-     *
      * @param iconName
      *            icon file name
      * @return icon instance
@@ -236,10 +238,11 @@ public final class UIDesignManager {
     /**
      * Heuristic detection of dark theme.
      * <p>
-     *     isDarkTheme method derived from NetBeans licensed by Apache-2.0
+     * isDarkTheme method derived from NetBeans licensed by Apache-2.0
+     *
      * @return true when dark theme, otherwise false.
      */
-    private static boolean isDarkTheme(UIDefaults uiDefaults) {
+    public static boolean isDarkTheme(UIDefaults uiDefaults) {
         // Based on tests with different LAFs and color combinations, a light
         // theme can be reliably detected by observing the brightness value of
         // the HSB Values of Table.background and Table.foreground
@@ -262,63 +265,71 @@ public final class UIDesignManager {
         // Windows HighContrast Black (dark) / 1.0 / 0
         Color foreground = uiDefaults.getColor("Table.foreground");
         Color background = uiDefaults.getColor("Table.background");
-        float foreground_brightness = Color.RGBtoHSB(
-                foreground.getRed(),
-                foreground.getGreen(),
-                foreground.getBlue(),
-                null)[2];
-        float background_brightness = Color.RGBtoHSB(
-                background.getRed(),
-                background.getGreen(),
-                background.getBlue(),
-                null)[2];
+        float foreground_brightness = Color.RGBtoHSB(foreground.getRed(), foreground.getGreen(),
+                foreground.getBlue(), null)[2];
+        float background_brightness = Color.RGBtoHSB(background.getRed(), background.getGreen(),
+                background.getBlue(), null)[2];
         return background_brightness < foreground_brightness;
     }
 
-    private static void loadColors(UIDefaults defaults, final String scheme) throws IOException {
-        ResourcesUtil.getBundleColorProperties(scheme).forEach((k, v) -> {
-            if (v.toString().charAt(0) != '#') {
-                throw new RuntimeException("Invalid color value for key " + k + ": " + v);
+    private static void loadColors(UIDefaults defaults, String k, String v) {
+        if (v.charAt(0) != '#') {
+            throw new RuntimeException("Invalid color value for key " + k + ": " + v);
+        }
+        try {
+            String hex = v.substring(1);
+            Color color;
+            if (hex.length() <= 6) {
+                color = new Color(Integer.parseInt(hex, 16)); // int(rgb)
+            } else {
+                long val = Long.parseLong(hex, 16);
+                int a = (int) (val & 0xFF);
+                int b = (int) (val >> 8 & 0xFF);
+                int g = (int) (val >> 16 & 0xFF);
+                int r = (int) (val >> 24 & 0xFF);
+                color = new Color(r, g, b, a); // hasAlpha
             }
-            try {
-                String hex = v.toString().substring(1);
-                Color color;
-                if (hex.length() <= 6) {
-                    color = new Color(Integer.parseInt(hex, 16)); // int(rgb)
-                } else {
-                    long val = Long.parseLong(hex, 16);
-                    int a = (int) (val & 0xFF);
-                    int b = (int) (val >> 8 & 0xFF);
-                    int g = (int) (val >> 16 & 0xFF);
-                    int r = (int) (val >> 24 & 0xFF);
-                    color = new Color(r, g, b, a); // hasAlpha
-                }
-                defaults.put(k.toString(), color);
-            } catch (NumberFormatException ex) {
-                throw new RuntimeException("Invalid color value for key '" + k + "': " + v, ex);
-            }
-        });
+            defaults.put(k, color);
+        } catch (NumberFormatException ex) {
+            throw new RuntimeException("Invalid color value for key '" + k + "': " + v, ex);
+        }
     }
 
     /**
      * Load application default colors
      */
     public static void loadDefaultColors(UIDefaults uiDefaults) throws IOException {
-        Color hilite;
         if (isDarkTheme(uiDefaults)) {
-            loadColors(uiDefaults, "dark");
-            hilite = uiDefaults.getColor("TextArea.background").brighter();  // NOI18N
-            // Hack for JDK GTKLookAndFeel bug.
-            // TextPane.background is always white but should be a text_background of GTK.
-            // List.background is as same color as text_background.
-            if (Platform.isLinux() && Color.WHITE.equals(uiDefaults.getColor("TextPane.background"))) {
-                uiDefaults.put("TextPane.background", uiDefaults.getColor("List.background"));
-            }
+            loadDefaultAppDarkColors(uiDefaults);
         } else {
-            loadColors(uiDefaults, "light");
-            Color bg = uiDefaults.getColor("TextArea.background").darker();  // NOI18N
-            hilite = new Color(bg.getRed(), bg.getBlue(), bg.getGreen(), 32);
+            loadDefaultAppLightColors(uiDefaults);
+            Color bg = uiDefaults.getColor("TextArea.background").darker(); // NOI18N
+            Color hilite = new Color(bg.getRed(), bg.getBlue(), bg.getGreen(), 32);
+            uiDefaults.put("OmegaT.alternatingHilite", hilite);
+        }
+    }
+
+    public static void loadDefaultAppDarkColors(UIDefaults uiDefaults) throws IOException {
+        ResourcesUtil.getBundleColorProperties("dark")
+                .forEach((k, v) -> loadColors(uiDefaults, k.toString(), v.toString()));
+        Color hilite = uiDefaults.getColor("TextArea.background").brighter(); // NOI18N
+        // Hack for JDK GTKLookAndFeel bug.
+        // TextPane.background is always white but should be a text_background
+        // of GTK.
+        // List.background is as same color as text_background.
+        if (Platform.isLinux() && Color.WHITE.equals(uiDefaults.getColor("TextPane.background"))) {
+            uiDefaults.put("TextPane.background", uiDefaults.getColor("List.background"));
         }
         uiDefaults.put("OmegaT.alternatingHilite", hilite);
+    }
+
+    public static void loadDefaultSystemDarkColors(UIDefaults uiDefaults) throws IOException {
+        ResourcesUtil.getBundleSystemColorProperties("dark")
+                .forEach((k, v) -> loadColors(uiDefaults, k.toString(), v.toString()));
+    }
+
+    public static void loadDefaultAppLightColors(UIDefaults uiDefaults) throws IOException {
+        ResourcesUtil.getBundleColorProperties("light")
+                .forEach((k, v) -> loadColors(uiDefaults, k.toString(), v.toString()));
     }
 }

@@ -29,7 +29,6 @@ package org.omegat.filters4;
 import static org.junit.Assert.assertEquals;
 
 import java.io.File;
-import java.net.URL;
 import java.util.List;
 
 import org.junit.Test;
@@ -40,12 +39,28 @@ import org.omegat.filters4.xml.openxml.MsOfficeFileFilter;
 import org.omegat.util.Language;
 
 public class OpenXMLFilterTest extends org.omegat.filters.TestFilterBase {
+
+    private final static String TEST_DATA1 = "test/data/filters/openXML/file-OpenXMLFilter.docx";
+    private final static String TEST_DATA2 = "test/data/filters/openXML/file-OpenXMLFilter-tables.docx";
+
     @Test
     public void testParse() throws Exception {
-        List<String> entries = parse(new MsOfficeFileFilter(), "test/data/filters/openXML/file-OpenXMLFilter.docx");
+        List<String> entries = parse(new MsOfficeFileFilter(), TEST_DATA1);
         assertEquals(2, entries.size());
         assertEquals("This is first line.", entries.get(0));
         assertEquals("This is second line.", entries.get(1));
+    }
+
+    @Test
+    public void testParseTables() throws Exception {
+        List<String> entries = parse(new MsOfficeFileFilter(), TEST_DATA2);
+        assertEquals(51, entries.size());
+        assertEquals("Title for paper", entries.get(0));
+        assertEquals("First Author<v0>*</v0>, Second Author<v1>**</v1>, Third Author<v2>**</v2>",
+                entries.get(1));
+        assertEquals("Table <e0/><e1/><e2/>1<e3/>. Table captions should be placed above the table",
+                entries.get(26));
+        assertEquals("Graphics", entries.get(27));
     }
 
     @Test

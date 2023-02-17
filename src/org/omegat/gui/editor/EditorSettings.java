@@ -357,7 +357,8 @@ public class EditorSettings implements IEditorSettings {
     public IEditorFilter getMenusFilter() {
         Predicate<SourceTextEntry> p = null;
         if (this.hideTagonlySegments) {
-            final java.util.regex.Pattern PTN = java.util.regex.Pattern.compile("^\\s*(<[^>]+>[\\s\\r\\n]*)+$");
+            final java.util.regex.Pattern PTN = java.util.regex.Pattern.compile(Preferences.getPreferenceDefault(
+                Preferences.EXPR_TAGONLY_SEGMENTS, Preferences.EXPR_TAGONLY_SEGMENTS_DEFAULT));
             Predicate<SourceTextEntry> p1 = ste -> {
                     String txt = ste.getSrcText();
                     return ! (PTN.matcher(txt).matches());

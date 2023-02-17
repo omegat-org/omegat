@@ -333,7 +333,7 @@ public final class TestTeamIntegrationChild {
         public void replaceEditTextAndMark(final String text, final String origin) {
         }
 
-        public void removeFilter() {
+        public void removeAttachedFilter() {
         }
 
         public void remarkOneMarker(String markerClassName) {

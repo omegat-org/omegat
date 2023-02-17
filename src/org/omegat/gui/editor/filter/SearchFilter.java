@@ -51,7 +51,7 @@ public class SearchFilter implements IEditorFilter {
         controlComponent.btnRemoveFilter.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 Core.getEditor().commitAndDeactivate(); // Make sure that any change done in the current segment is not lost
-                Core.getEditor().removeFilter();
+                Core.getEditor().removeAttachedFilter();
             }
         });
     }

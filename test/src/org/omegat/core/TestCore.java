@@ -320,6 +320,15 @@ public abstract class TestCore {
             public boolean isMarkParagraphDelimitations() {
                 return false;
             }
+
+            @Override
+            public void setHideTagonlySegments(boolean ts) {
+            }
+
+            @Override
+            public boolean isHideTagonlySegments() {
+                return false;
+            }
         };
         TestCoreInitializer.initEditor(new IEditor() {
 
@@ -356,7 +365,7 @@ public abstract class TestCore {
             }
 
             @Override
-            public void removeFilter() {
+            public void removeAttachedFilter() {
             }
 
             @Override

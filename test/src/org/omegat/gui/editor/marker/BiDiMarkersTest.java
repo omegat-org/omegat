@@ -234,6 +234,15 @@ public class BiDiMarkersTest extends TestCore {
         public boolean isMarkParagraphDelimitations() {
             return false;
         }
+
+        @Override
+        public void setHideTagonlySegments(boolean ts) {
+        }
+
+        @Override
+        public boolean isHideTagonlySegments() {
+            return false;
+        }
     };
 
     final IEditor editor = new IEditor() {
@@ -271,7 +280,7 @@ public class BiDiMarkersTest extends TestCore {
         }
 
         @Override
-        public void removeFilter() {
+        public void removeAttachedFilter() {
         }
 
         @Override

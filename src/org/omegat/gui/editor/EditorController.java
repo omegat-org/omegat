@@ -241,7 +241,7 @@ public class EditorController implements IEditor {
             case CREATE:
             case LOAD:
                 history.clear();
-                removeFilter();
+                removeAttachedFilter();
                 if (!Core.getProject().getAllEntries().isEmpty()) {
                     showType = SHOW_TYPE.FIRST_ENTRY;
                 } else {
@@ -253,7 +253,7 @@ public class EditorController implements IEditor {
             case CLOSE:
                 m_docSegList = null;
                 history.clear();
-                removeFilter();
+                removeAttachedFilter();
                 markerController.removeAll();
                 showType = SHOW_TYPE.INTRO;
                 deactivateWithoutCommit();
@@ -2134,15 +2134,11 @@ public class EditorController implements IEditor {
     }
 
     /**
-     * {@inheritDoc} Document is reloaded if appropriate to immediately remove
-     * the filter;
+     * Removes the filter which has been set by another window, such as search window
+     * but the filter associated to menus will be restored.
      */
-    public void removeFilter() {
+    public void removeAttachedFilter() {
         UIThreadsUtil.mustBeSwingThread();
-
-        if (entriesFilter == null && entriesFilterControlComponent == null) {
-            return;
-        }
 
         entriesFilter = null;
         if (entriesFilterControlComponent != null) {
@@ -2150,17 +2146,24 @@ public class EditorController implements IEditor {
             pane.revalidate();
             entriesFilterControlComponent = null;
         }
-
-        int curEntryNum = getCurrentEntryNumber();
-        Document3 doc = editor.getOmDocument();
-        IProject project = Core.getProject();
-        // `if` check is to prevent NullPointerErrors in loadDocument.
-        // Only load if there is a document and the project is loaded.
-        if (doc != null && project != null && project.isProjectLoaded()) {
-            List<FileInfo> files = project.getProjectFiles();
-            if (files != null && !files.isEmpty()) {
-                loadDocument();
-                gotoEntry(curEntryNum);
+        
+        // Restore the filters which comes from View menu
+        entriesFilter = settings.getMenusFilter();
+        if (entriesFilter != null) {
+            setFilter(entriesFilter);
+            // will also set the correct current segment
+        } else {
+            int curEntryNum = getCurrentEntryNumber();
+            Document3 doc = editor.getOmDocument();
+            IProject project = Core.getProject();
+            // `if` check is to prevent NullPointerErrors in loadDocument.
+            // Only load if there is a document and the project is loaded.
+            if (doc != null && project != null && project.isProjectLoaded()) {
+                List<FileInfo> files = project.getProjectFiles();
+                if (files != null && !files.isEmpty()) {
+                    loadDocument();
+                    gotoEntry(curEntryNum);
+                }
             }
         }
     }

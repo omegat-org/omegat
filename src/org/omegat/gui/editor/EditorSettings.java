@@ -30,10 +30,12 @@ package org.omegat.gui.editor;
 
 import java.awt.Color;
 import java.awt.event.KeyEvent;
+import java.util.function.Predicate;
 
 import javax.swing.text.AttributeSet;
 
 import org.omegat.core.Core;
+import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.SourceTextEntry.DUPLICATE;
 import org.omegat.core.spellchecker.SpellCheckerMarker;
 import org.omegat.util.Preferences;
@@ -344,20 +346,44 @@ public class EditorSettings implements IEditorSettings {
 
         this.hideTagonlySegments = hideTos;
         Preferences.setPreference(Preferences.HIDE_TAGONLY_SEGMENTS, hideTos);
-
-        if (hideTos) {
-            Core.getEditor().setFilter( new IEditorFilter() {
-                public boolean isSourceAsEmptyTranslation() { return false; }
-                public java.awt.Component getControlComponent() { return null; }
-                final java.util.regex.Pattern PTN = java.util.regex.Pattern.compile("^\\s*(<[^>]+>[\\s\\r\\n]*)+$");
-                public boolean allowed(org.omegat.core.data.SourceTextEntry ste) {
+        
+        Core.getEditor().removeAttachedFilter(); // restore options-based filter
+    }
+    
+    /**
+     * Get the filter based on selected checkbox menu items
+     * Actually only option hideTagonlySegments is concerned but there may be others later
+     **/
+    public IEditorFilter getMenusFilter() {
+        Predicate<SourceTextEntry> p = null;
+        if (this.hideTagonlySegments) {
+            final java.util.regex.Pattern PTN = java.util.regex.Pattern.compile("^\\s*(<[^>]+>[\\s\\r\\n]*)+$");
+            Predicate<SourceTextEntry> p1 = ste -> {
                     String txt = ste.getSrcText();
-                    System.err.println("" + ste.getSrcText() + " : " + PTN.matcher(txt).matches());
                     return ! (PTN.matcher(txt).matches());
+                };
+            // Cascade method to enable, in the future, to add more filters
+            if (p == null) {
+                p = p1;
+            } else {
+                p = p.and(p1);
+            }
+        }
+        if (p != null) {
+            final Predicate<SourceTextEntry> p1 = p;
+            return new IEditorFilter() {
+                public boolean isSourceAsEmptyTranslation() {
+                    return false; // we don't need to override option
                 }
-            });        
+                public java.awt.Component getControlComponent() {
+                    return null;
+                }
+                public boolean allowed(SourceTextEntry ste) {
+                    return p1.test(ste);
+                }
+            };
         } else {
-            Core.getEditor().removeFilter();
+            return null;
         }
     }
 

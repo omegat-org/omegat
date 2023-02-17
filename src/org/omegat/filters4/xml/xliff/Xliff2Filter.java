@@ -68,6 +68,9 @@ public class Xliff2Filter extends AbstractXliffFilter {
             // then the derivative may need a finer algorithm.
             if (reader.getLocalName().equals("xliff")) {
                 this.isEventMode = true;
+                if (namespace == null) {
+                    namespace = reader.getName().getNamespaceURI();
+                }
             }
         }
     }

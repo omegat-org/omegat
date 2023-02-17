@@ -342,7 +342,7 @@ public class EditorSettings implements IEditorSettings {
     public void setHideTagonlySegments(boolean hideTos) {
         UIThreadsUtil.mustBeSwingThread();
 
-        parent.commitAndDeactivate();
+        Core.getEditor().commitAndDeactivate();
 
         this.hideTagonlySegments = hideTos;
         Preferences.setPreference(Preferences.HIDE_TAGONLY_SEGMENTS, hideTos);

@@ -14,6 +14,7 @@
                2014 Piotr Kulik, Aaron Madlon-Kay
                2015 Aaron Madlon-Kay, Yu Tang, Didier Briel, Hiroshi Miura
                2016 Aaron Madlon-Kay
+               2022-2023 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -35,22 +36,31 @@
 
 package org.omegat.util;
 
+import static org.omegat.util.PreferencesImpl.IPrefsPersistence;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.databind.SerializerProvider;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.StdSerializer;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
+import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
 import org.apache.commons.io.FileUtils;
-import org.omegat.filters2.TranslationException;
-import org.omegat.util.PreferencesImpl.IPrefsPersistence;
-import org.omegat.util.xml.XMLBlock;
-import org.omegat.util.xml.XMLStreamReader;
 
 public class PreferencesXML implements IPrefsPersistence {
 
@@ -62,51 +72,38 @@ public class PreferencesXML implements IPrefsPersistence {
         this.saveFile = saveFile;
     }
 
-    /**
-     * Loads the preferences from disk, from the specified file or, if the
-     * file is null, it attempts to load from a prefs file bundled inside
-     * the JAR (not supplied by default).
-     */
     @Override
-    public void load(List<String> keys, List<String> values) {
+    public void load(final List<String> keys, final List<String> values) {
+        if (loadFile == null) {
+            return;
+        }
+        try (InputStream is = Files.newInputStream(loadFile.toPath())) {
+            loadXml(is, keys, values);
+        } catch (IOException e) {
+            Log.logErrorRB(e, "PM_ERROR_READING_FILE");
+            makeBackup(loadFile);
+        }
+    }
 
-        try (XMLStreamReader xml = new XMLStreamReader()) {
-            xml.killEmptyBlocks();
-            if (loadFile == null) {
-                // If no prefs file is present, look inside JAR for
-                // defaults. Useful for e.g. Web Start.
-                try (InputStream is = getClass().getResourceAsStream(Preferences.FILE_PREFERENCES)) {
-                    if (is != null) {
-                        xml.setStream(is);
-                        readXmlPrefs(xml, keys, values);
-                    }
-                }
-            } else {
-                xml.setStream(loadFile);
-                readXmlPrefs(xml, keys, values);
-            }
-        } catch (TranslationException te) {
-            // error loading preference file - keep whatever was
-            // loaded then return gracefully to calling function
-            // print an error to the console as an FYI
-            Log.logWarningRB("PM_WARNING_PARSEERROR_ON_READ");
-            Log.log(te);
-            makeBackup(loadFile);
-        } catch (IndexOutOfBoundsException e3) {
-            // error loading preference file - keep whatever was
-            // loaded then return gracefully to calling function
-            // print an error to the console as an FYI
-            Log.logWarningRB("PM_WARNING_PARSEERROR_ON_READ");
-            Log.log(e3);
-            makeBackup(loadFile);
-        } catch (UnsupportedEncodingException e3) {
-            // unsupported encoding - forget about it
-            Log.logErrorRB(e3, "PM_UNSUPPORTED_ENCODING");
-            makeBackup(loadFile);
-        } catch (IOException e4) {
-            // can't read file - forget about it and move on
-            Log.logErrorRB(e4, "PM_ERROR_READING_FILE");
-            makeBackup(loadFile);
+    private void loadXml(InputStream is, List<String> keys, List<String> values) throws IOException {
+        XmlMapper mapper = new XmlMapper();
+        OmegaT rootComponent = mapper.readValue(is, OmegaT.class);
+        rootComponent.preference.getRows().forEach((key, value) -> {
+            keys.add(key);
+            values.add(value);
+        });
+    }
+
+    @Override
+    public void save(final List<String> keys, final List<String> values) throws Exception {
+        XmlMapper mapper = new XmlMapper();
+        OmegaT rootComponent = new OmegaT();
+        for (int i = 0; i < keys.size(); i++) {
+            rootComponent.preference.put(keys.get(i), values.get(i));
+        }
+        String xmlString = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(rootComponent);
+        try (BufferedWriter writer = Files.newBufferedWriter(saveFile.toPath(), StandardCharsets.UTF_8)) {
+            writer.write(xmlString);
         }
     }
 
@@ -124,70 +121,83 @@ public class PreferencesXML implements IPrefsPersistence {
         }
     }
 
-    static void readXmlPrefs(XMLStreamReader xml, List<String> keys, List<String> values)
-            throws TranslationException {
-        XMLBlock blk;
-        List<XMLBlock> lst;
+    /**
+     * POJO for omegat.prefs.
+     */
+    @JacksonXmlRootElement(localName = "omegat")
+    static class OmegaT {
+        @JacksonXmlProperty(localName = "preference")
+        public Preference preference = new Preference();
+    }
 
-        String pref;
-        String val;
-        // advance to omegat tag
-        if (xml.advanceToTag("omegat") == null) {
-            return;
+    /**
+     * POJO for omegat.prefs, preference entries.
+     */
+    @JsonSerialize(using = Serializer.class)
+    static class Preference {
+        public String version;
+        private Map<String, String> rows = new TreeMap<>();
+
+        @JsonAnySetter
+        public void put(String key, String value) {
+            rows.put(key, value);
         }
-        // advance to project tag
-        if ((blk = xml.advanceToTag("preference")) == null) {
-            return;
+
+        @JsonAnyGetter
+        public Map<String, String> getRows() {
+            return rows;
         }
-        String ver = blk.getAttribute("version");
-        if (ver != null && !ver.equals("1.0")) {
-            // unsupported preference file version - abort read
-            return;
-        }
-        lst = xml.closeBlock(blk);
-        if (lst == null) {
-            return;
-        }
-        for (int i = 0; i < lst.size(); i++) {
-            blk = lst.get(i);
-            if (blk.isClose()) {
-                continue;
-            }
-            if (!blk.isTag()) {
-                continue;
-            }
-            pref = blk.getTagName();
-            blk = lst.get(++i);
-            if (blk.isClose()) {
-                // allow empty string as a preference value
-                val = "";
-            } else {
-                val = blk.getText();
-            }
-            if (pref != null && val != null) {
-                // valid match - record these
-                keys.add(pref);
-                values.add(val);
-            }
+
+        public String get(String key) {
+            return rows.get(key);
         }
     }
 
-    @Override
-    public void save(List<String> keys, List<String> values) throws Exception {
-        try (BufferedWriter out = Files.newBufferedWriter(saveFile.toPath(), StandardCharsets.UTF_8)) {
-            out.write("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n");
-            out.write("<omegat>\n");
-            out.write("  <preference version=\"1.0\">\n");
+    /**
+     * Custom serializer for Preference class.
+     */
+    public static class Serializer extends StdSerializer<Preference> {
 
-            for (int i = 0; i < keys.size(); i++) {
-                String name = keys.get(i);
-                String val = StringUtil.makeValidXML(values.get(i).toString());
-                out.write("    <" + name + ">");
-                out.write(val);
-                out.write("</" + name + ">\n");
+        private static final long serialVersionUID = 1L;
+
+        public Serializer() {
+            this(null);
+        }
+
+        public Serializer(Class<Preference> t) {
+            super(t);
+        }
+
+        /**
+         * Custom serialize method for preference values.
+         *
+         * @param preference Value to serialize; can <b>not</b> be null.
+         * @param gen Generator used to output resulting Json content
+         * @param provider Provider that can be used to get serializers for
+         *   serializing Objects value contains, if any.
+         * @throws IOException when write error.
+         */
+        @Override
+        public void serialize(final Preference preference, final JsonGenerator gen,
+                final SerializerProvider provider) throws IOException {
+            if (gen instanceof ToXmlGenerator) {
+                gen.writeStartObject();
+                ((ToXmlGenerator) gen).setNextIsAttribute(true);
+                String version = preference.version;
+                if (version == null) {
+                    version = "1.0";
+                }
+                gen.writeStringField("version", version);
+                ((ToXmlGenerator) gen).setNextIsAttribute(false);
+                for (Map.Entry<String, String> item : preference.getRows().entrySet()) {
+                    if (item.getValue() == null) {
+                        continue;
+                    }
+                    gen.writeFieldName(item.getKey());
+                    gen.writeString(item.getValue());
+                }
+                gen.writeEndObject();
             }
-            out.write("  </preference>\n");
-            out.write("</omegat>\n");
         }
     }
 }

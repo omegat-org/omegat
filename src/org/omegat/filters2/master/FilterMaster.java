@@ -48,8 +48,8 @@ import java.util.TreeMap;
 import java.util.regex.Pattern;
 
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-import com.fasterxml.jackson.module.jaxb.JaxbAnnotationModule;
 import org.apache.commons.io.FileUtils;
+
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.IAlignCallback;
@@ -58,6 +58,7 @@ import org.omegat.filters2.IParseCallback;
 import org.omegat.filters2.ITranslateCallback;
 import org.omegat.filters2.Instance;
 import org.omegat.filters2.TranslationException;
+import org.omegat.util.JaxbXmlMapper;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
@@ -434,7 +435,7 @@ public class FilterMaster {
         }
         Filters result;
         try {
-            XmlMapper mapper = new XmlMapper();
+            XmlMapper mapper = JaxbXmlMapper.getXmlMapper();
             result = mapper.readValue(configFile, Filters.class);
         } catch (Exception e) {
             Log.logErrorRB("FILTERMASTER_ERROR_LOADING_FILTERS_CONFIG");
@@ -460,8 +461,7 @@ public class FilterMaster {
             return;
         }
         try {
-            XmlMapper mapper = new XmlMapper();
-            mapper.registerModule(new JaxbAnnotationModule());
+            XmlMapper mapper = JaxbXmlMapper.getXmlMapper();
             mapper.writerWithDefaultPrettyPrinter().writeValue(configFile, config);
         } catch (Exception e) {
             Log.logErrorRB("FILTERMASTER_ERROR_SAVING_FILTERS_CONFIG");

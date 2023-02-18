@@ -37,7 +37,6 @@ import java.nio.file.Paths;
 import java.util.List;
 
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-import com.fasterxml.jackson.module.jaxb.JaxbAnnotationModule;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
 
@@ -75,8 +74,7 @@ public final class ProjectFileStorage {
     }
 
     public static Omegat parseProjectFile(byte[] projectFile) throws Exception {
-        XmlMapper mapper = new XmlMapper();
-        mapper.registerModule(new JaxbAnnotationModule());
+        XmlMapper mapper = JaxbXmlMapper.getXmlMapper();
         return mapper.readValue(projectFile, Omegat.class);
     }
 
@@ -236,8 +234,7 @@ public final class ProjectFileStorage {
             om.getProject().getRepositories().getRepository().addAll(props.getRepositories());
         }
 
-        XmlMapper mapper = new XmlMapper();
-        mapper.registerModule(new JaxbAnnotationModule());
+        XmlMapper mapper = JaxbXmlMapper.getXmlMapper();
         mapper.writeValue(outFile, om);
     }
 

@@ -66,10 +66,12 @@ public class PreferencesXML implements IPrefsPersistence {
 
     private final File loadFile;
     private final File saveFile;
+    private final XmlMapper mapper;
 
     public PreferencesXML(File loadFile, File saveFile) {
         this.loadFile = loadFile;
         this.saveFile = saveFile;
+        mapper = JaxbXmlMapper.getXmlMapper();
     }
 
     @Override
@@ -86,7 +88,6 @@ public class PreferencesXML implements IPrefsPersistence {
     }
 
     private void loadXml(InputStream is, List<String> keys, List<String> values) throws IOException {
-        XmlMapper mapper = new XmlMapper();
         OmegaT rootComponent = mapper.readValue(is, OmegaT.class);
         rootComponent.preference.getRows().forEach((key, value) -> {
             keys.add(key);
@@ -96,7 +97,6 @@ public class PreferencesXML implements IPrefsPersistence {
 
     @Override
     public void save(final List<String> keys, final List<String> values) throws Exception {
-        XmlMapper mapper = new XmlMapper();
         OmegaT rootComponent = new OmegaT();
         for (int i = 0; i < keys.size(); i++) {
             rootComponent.preference.put(keys.get(i), values.get(i));

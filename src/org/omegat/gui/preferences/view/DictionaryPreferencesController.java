@@ -60,7 +60,7 @@ public class DictionaryPreferencesController extends BasePreferencesController {
     protected void initFromPrefs() {
         panel.fuzzyMatchingCheckBox.setSelected(Preferences.isPreference(Preferences.DICTIONARY_FUZZY_MATCHING));
         panel.autoCheckSegmentsCheckBox.setSelected(Preferences.isPreferenceDefault(Preferences.DICTIONARY_AUTO_SEARCH,
-                true));
+                false));
         panel.condensedViewCheckBox.setSelected(Preferences.isPreferenceDefault(Preferences.DICTIONARY_CONDENSED_VIEW,
                 false));
     }
@@ -68,7 +68,7 @@ public class DictionaryPreferencesController extends BasePreferencesController {
     @Override
     public void restoreDefaults() {
         panel.fuzzyMatchingCheckBox.setSelected(false);
-        panel.autoCheckSegmentsCheckBox.setSelected(true);
+        panel.autoCheckSegmentsCheckBox.setSelected(false);
         panel.condensedViewCheckBox.setSelected(false);
     }
 

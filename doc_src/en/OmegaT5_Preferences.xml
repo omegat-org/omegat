@@ -303,12 +303,14 @@
         automatically</option></term>
 
         <listitem>
-          <para>If you disable this function you will need to use <link
-          linkend="menus.edit"
+          <para>While the option is disabled, use <link linkend="menus.edit"
           endterm="menus.edit.title"/><link
           linkend="menus.edit.search.dictionaries"
-          endterm="menus.edit.search.dictionaries.title"/> to search for
-          dictionary matches.</para>
+          endterm="menus.edit.search.dictionaries.title"/> to search for matches
+          of the selection or of all the terms in the segment source.</para>
+		  <para>When the option is enabled, OmegaT automatically searches in all
+		  the dictionaries for matches of the terms it identified in the
+		  segment, as it enters the segment.</para>
         </listitem>
       </varlistentry>
 

@@ -52,7 +52,7 @@ public class PreferencesTest {
 
     @Before
     public final void setUp() throws Exception {
-        tmpDir = Files.createTempDirectory("oemgat").toFile();
+        tmpDir = Files.createTempDirectory("omegat").toFile();
         assertTrue(tmpDir.isDirectory());
     }
 

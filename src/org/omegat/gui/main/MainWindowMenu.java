@@ -578,7 +578,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         optionsMTAutoFetchCheckboxMenuItem.setSelected(Preferences.isPreferenceDefault(
                 Preferences.MT_AUTO_FETCH, false));
         optionsDictionaryFuzzyMatchingCheckBoxMenuItem.setSelected(Preferences.isPreferenceDefault(
-                Preferences.DICTIONARY_FUZZY_MATCHING, true));
+                Preferences.DICTIONARY_FUZZY_MATCHING, false));
         optionsGlossaryFuzzyMatchingCheckBoxMenuItem.setSelected(Preferences.isPreferenceDefault(
                 Preferences.GLOSSARY_STEMMING, true));
     }

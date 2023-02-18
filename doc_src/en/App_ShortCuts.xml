@@ -655,6 +655,7 @@
             <row>
               <entry>Search Dictionaries</entry>
               <entry>editSearchDictionaryMenuItem</entry>
+              <entry namest="3" nameend="4">alt shift D</entry>
             </row>
 
             <row>

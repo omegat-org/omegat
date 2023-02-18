@@ -2,7 +2,7 @@
  OmegaT 5.8.0
 ----------------------------------------------------------------------
   23 Enhancements
-  27 Bug fixes
+  28 Bug fixes
   9 Localization updates
 ----------------------------------------------------------------------
 5.8.0 vs 5.7.1
@@ -83,6 +83,9 @@
 
   - BidiMarker does not respect disable menu action
   https://sourceforge.net/p/omegat/bugs/1143/
+
+  - XML/DocBook filter breaks project load when XML has error
+  https://sourceforge.net/p/omegat/bugs/1138/
 
   - Fix context-bound matches in TMX that were ignored in /tm/auto
   https://sourceforge.net/p/omegat/bugs/1140/

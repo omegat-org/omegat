@@ -1344,12 +1344,6 @@
             </row>
 
             <row>
-              <entry>Switch RtL/LtR Orientation</entry>
-              <entry>editorSwitchOrientation</entry>
-              <entry namest="3" nameend="4">ctrl shift O</entry>
-            </row>
-
-            <row>
               <entry>Delete Previous Token</entry>
               <entry>editorDeletePrevToken</entry>
               <entry>ctrl BACK_SPACE</entry>

@@ -545,6 +545,7 @@ p > span.keycap:last-child  {
 /* Introduction */
 a[href="chapter.instant.start.guide.html"] ~ ul {
 	border-left: var(--support-border) var(--intro-color);
+	border-radius: 3px;
 }
 
 h2:has(a[href="chapter.instant.start.guide.html"]) ~ ul {
@@ -563,6 +564,7 @@ h2:has(a[href="chapter.instant.start.guide.html"]) ~ ul {
 
 a[href="chapter.how.to.html"] ~ ul {
 	border-left: var(--support-border) var(--howto-color);
+	border-radius: 3px;
 }
 
 h2:has(a[href="chapter.how.to.html"]) ~ ul {
@@ -578,6 +580,7 @@ h2:has(a[href="chapter.how.to.html"]) ~ ul {
 /* Panes */
 a[href="chapter.panes.html"] ~ ul {
 	border-left: var(--support-border) var(--panes-color);
+	border-radius: 3px;
 }
 
 h2:has(a[href="chapter.panes.html"]) ~ ul {
@@ -594,6 +597,7 @@ h2:has(a[href="chapter.panes.html"]) ~ ul {
 /* Menus */
 a[href="chapter.menus.html"] ~ ul {
 	border-left: var(--support-border) var(--menus-color);
+	border-radius: 3px;
 }
 
 h2:has(a[href="chapter.menus.html"]) ~ ul {
@@ -610,6 +614,7 @@ h2:has(a[href="chapter.menus.html"]) ~ ul {
 
 a[href="chapter.windows.and.dialogs.html"] ~ ul {
 	border-left: var(--support-border) var(--windows-color);
+	border-radius: 3px;
 }
 
 h2:has(a[href="chapter.windows.and.dialogs.html"]) ~ ul {
@@ -626,6 +631,7 @@ h2:has(a[href="chapter.windows.and.dialogs.html"]) ~ ul {
 
 a[href="chapter.project.folder.html"] ~ ul {
 	border-left: var(--support-border) var(--project-color);
+	border-radius: 3px;
 }
 
 h2:has(a[href="chapter.project.folder.html"]) ~ ul {
@@ -642,6 +648,7 @@ h2:has(a[href="chapter.project.folder.html"]) ~ ul {
 
 a[href="chapter.dialogs.preferences.html"] ~ ul {
 	border-left: var(--support-border) var(--prefs-color);
+	border-radius: 3px;
 }
 
 h2:has(a[href="chapter.dialogs.preferences.html"]) ~ ul {
@@ -658,6 +665,7 @@ h2:has(a[href="chapter.dialogs.preferences.html"]) ~ ul {
 
 a[href="chapter.appendices.html"] ~ ul {
 	border-left: var(--support-border) var(--appendices-color);
+	border-radius: 3px;
 }
 
 h2:has(a[href="chapter.appendices.html"]) ~ ul {

@@ -16,8 +16,8 @@
 	<para>Menus are where you access most of OmegaT's functions. Most 
 	menu items have an associated keyboard shortcut.</para>
 
-	<para>Menu items that do not indicate a shortcut do nothave one assigned by default. See the <link
-	linkend="app.shortcuts.customization"
+	<para>Menu items that do not indicate a shortcut do not have one assigned by
+	default. See the <link linkend="app.shortcuts.customization"
 	endterm="app.shortcuts.customization.title"/> appendix if you want to modify
 	or add shortcuts.</para>
 

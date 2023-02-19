@@ -7,7 +7,7 @@
                2011 Briac Pilpre, Alex Buloichik
                2013 Didier Briel
                2016 Aaron Madlon-Kay
-               2021 Hiroshi Miura
+               2021,2023 Hiroshi Miura
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -30,6 +30,7 @@
 package org.omegat.core.machinetranslators;
 
 import java.awt.Window;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -54,9 +55,11 @@ import org.omegat.util.Preferences;
  * @author Aaron Madlon-Kay
  * @author Hiroshi Miura
  *
- * @see <a href="https://cloud.google.com/translate/docs/basic/setup-basic">Translation API</a>
+ * @see <a href=
+ *      "https://cloud.google.com/translate/docs/basic/setup-basic">Translation
+ *      API</a>
  */
-public class Google2Translate extends BaseTranslate {
+public class Google2Translate extends BaseCachedTranslate {
     protected static final String PROPERTY_PREMIUM_KEY = "google.api.premium";
     protected static final String PROPERTY_API_KEY = "google.api.key";
     protected static final String GT_URL = "https://translation.googleapis.com/language/translate/v2";
@@ -64,6 +67,7 @@ public class Google2Translate extends BaseTranslate {
 
     /**
      * Return GOOGLE2 preference constant.
+     *
      * @return ALLOW_GOOGLE2_TRANSLATE
      */
     @Override
@@ -73,6 +77,7 @@ public class Google2Translate extends BaseTranslate {
 
     /**
      * Return Google2 engine name.
+     *
      * @return localized name.
      */
     @Override
@@ -81,15 +86,20 @@ public class Google2Translate extends BaseTranslate {
     }
 
     /**
-     * Query google translate API and return translation text.
-     * @param sLang source language.
-     * @param tLang target language.
-     * @param text source text.
+     * Query Google Translate API and return translation text.
+     *
+     * @param sLang
+     *            source language.
+     * @param tLang
+     *            target language.
+     * @param text
+     *            source text.
      * @return translation.
-     * @throws Exception when error occurred.
+     * @throws Exception
+     *             when error occurred.
      */
     @Override
-    protected String translate(Language sLang, Language tLang, String text) throws Exception {
+    protected String translate(Language sLang, Language tLang, String text) throws MachineTranslateError, IOException {
         String trText = text.length() > MAX_TEXT_LENGTH ? text.substring(0, MAX_TEXT_LENGTH - 3) + "..." : text;
 
         String prev = getFromCache(sLang, tLang, trText);
@@ -109,7 +119,7 @@ public class Google2Translate extends BaseTranslate {
         String googleKey = getCredential(PROPERTY_API_KEY);
 
         if (googleKey == null || googleKey.isEmpty()) {
-            throw new Exception(OStrings.getString("GOOGLE_API_KEY_NOTFOUND"));
+            throw new MachineTranslateError(OStrings.getString("GOOGLE_API_KEY_NOTFOUND"));
         }
 
         Map<String, String> params = new TreeMap<String, String>();
@@ -122,9 +132,10 @@ public class Google2Translate extends BaseTranslate {
         params.put("source", sLang.getLanguageCode());
         params.put("target", targetLang);
         params.put("q", trText);
-        // The 'text' format mangles the tags, whereas the 'html' encodes some characters
-        // as entities. Since it's more reliable to convert the entities back, we are
-        // using 'html' and convert the text with the unescapeHTML() method.
+        // The 'text' format mangles the tags, whereas the 'html' encodes some
+        // characters as entities. Since it's more reliable to convert the
+        // entities back, we are using 'html' and convert the text with the
+        // unescapeHTML() method.
         params.put("format", "html");
 
         Map<String, String> headers = new TreeMap<String, String>();
@@ -143,11 +154,13 @@ public class Google2Translate extends BaseTranslate {
 
     /**
      * Parse response and return translation.
-     * @param json response string.
+     *
+     * @param json
+     *            response string.
      * @return translation text.
      */
     @SuppressWarnings("unchecked")
-    protected String getJsonResults(String json) {
+    protected String getJsonResults(String json) throws MachineTranslateError {
         ObjectMapper mapper = new ObjectMapper();
         try {
             Response response = mapper.readValue(json, Response.class);
@@ -157,16 +170,17 @@ public class Google2Translate extends BaseTranslate {
             }
         } catch (Exception e) {
             Log.logErrorRB(e, "MT_JSON_ERROR");
-            return OStrings.getString("MT_JSON_ERROR");
+            throw new MachineTranslateError(OStrings.getString("MT_JSON_ERROR"));
         }
         return null;
     }
 
     /**
-     * Whether or not to use the new Neural Machine Translation System
+     * Whether to use the new Neural Machine Translation System.
      *
-     * @see <a href="https://research.googleblog.com/2016/09/a-neural-network-for-machine.html">A Neural
-     *      Network for Machine Translation, at Production Scale</a>
+     * @see <a href=
+     *      "https://research.googleblog.com/2016/09/a-neural-network-for-machine.html">A
+     *      Neural Network for Machine Translation, at Production Scale</a>
      */
     private boolean isPremium() {
         String value = System.getProperty(PROPERTY_PREMIUM_KEY,
@@ -176,6 +190,7 @@ public class Google2Translate extends BaseTranslate {
 
     /**
      * Engine is configurable.
+     *
      * @return true
      */
     @Override
@@ -185,7 +200,9 @@ public class Google2Translate extends BaseTranslate {
 
     /**
      * Default configuration UI.
-     * @param parent main window.
+     *
+     * @param parent
+     *            main window.
      */
     @Override
     public void showConfigurationUI(Window parent) {

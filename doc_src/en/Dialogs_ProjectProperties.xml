@@ -22,14 +22,15 @@
     <title
     id="dialogs.project.properties.languages.title"><guilabel>Languages</guilabel></title>
 
-    <para>Select the source and target languages by hand, or use the drop-down
-    menus.</para>
+    <para>Select the source and target languages from the drop-down list,
+    or enter them manually.</para>
 
-	<warning>
-	  <para>A number of issues come from not selecting the right language here,
-	  or from not matching it in other preferences.</para>
-	</warning>
-
+	<para>OmegaT provides a convenient short list of two-letter language
+	codes, but you can type any code that conforms to <ulink
+	url="https://www.rfc-editor.org/rfc/bcp/bcp47.txt">BCP-47</ulink>
+	(including the three-letter language codes) into the appropriate
+	field.</para>
+	
 	<para>Language codes are used in various places in OmegaT to:</para>
 	
 	<itemizedlist>
@@ -60,7 +61,17 @@
 	</itemizedlist>
 
 	  <para>and so on.</para>
-    <para>OmegaT automatically selects the tokenizers that correspond to the
+
+	<warning>
+	  <para>Make sure you enter the correct language codes and that
+	  all other locations requiring such a code match the one you
+	  assign here exactly. Functions that depend on a language either
+	  fail or produce incorrect results if there is a mismatch between
+	  the language codes.</para>
+	</warning>
+
+	  
+      <para>OmegaT automatically selects the tokenizers that correspond to the
     source and target languages but you can manually modify those
     settings. Tokenizers allow OmegaT to provide better matches.</para>
   </section>
@@ -199,34 +210,42 @@
         </listitem>
       </varlistentry>
 
-      <varlistentry id="dialogs.project.properties.remove.tags">
-        <term id="dialogs.project.properties.remove.tags.title"><option>Remove
+      <varlistentry id="dialogs.project.properties.hide.tags">
+        <term id="dialogs.project.properties.hide.tags.title"><option>Hide
         tags</option></term>
 
 		<listitem>
           <para>Tags are generally useful to reproduce specific layouts or
           characteristics of the source text in the translated text.</para>
 
-		  <para>If you activate this function, no tag will be displayed in the
-		  source segments.</para>
+		  <para>Activating this function hides the tags in the source
+		  segments, freeing you from the need to handle them manually.</para>
 		  
 		  <para>This is especially useful when dealing with texts where inline
 		  formatting is not particularly useful (e.g., OCRed PDF, or poorly
 		  converted .odt or .docx files.)</para>
 
 		  <note>
-			<para>The tags are not really removed from the document, but rather
-			stacked at the end of the segment. In most cases, this should not
-			keep the translated file from opening. If you just need to reduce
-			the number of tags in a <application>Microsoft Word</application>
-			(2007 and later) document, you can use the <link
-			linkend="windows.scripts.distribution.tagwipe"
-			endterm="windows.scripts.distribution.tagwipe.title"/> script.</para>
-
-			<para>See the <link linkend="windows.scripts"
-			endterm="windows.scripts.title"/> section for details.</para>
-		  </note>
-        </listitem>
+			<para>Hidden tags are simply stacked at the end of the segment. Although
+			this does not normally prevent the translated file from opening, keep the
+			following points in mind when using this function:</para>
+			<itemizedlist>
+				<listitem>
+					<para>You will have to manually apply bold, italics, or other text
+					decorations in the translated file.</para>
+				</listitem>
+				<listitem>
+					<para>If you simply want to reduce the number of tags in a
+					<application>Microsoft Word</application> (2007 and later) document,
+					you can use the <link
+					linkend="windows.scripts.distribution.tagwipe"
+					endterm="windows.scripts.distribution.tagwipe.title"/> script.</para>
+					<para>See the <link linkend="windows.scripts"
+						endterm="windows.scripts.title"/> section for details.</para>
+				</listitem>
+			</itemizedlist>
+			</note>
+      </listitem>
       </varlistentry>
 
       <varlistentry id="dialogs.project.properties.external.processing.command">

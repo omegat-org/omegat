@@ -71,9 +71,12 @@ import org.omegat.util.StaticUtils;
  * This class is more low-level than 'filters3' API, but this is necessary to
  * implement bilingual or very complex XML formats. <br/>
  * To implement your own filter based on this class you must implement
- * {@link org.omegat.filters4.xml.AbstractXmlFilter#processStartElement processStartElement},
- * {@link org.omegat.filters4.xml.AbstractXmlFilter#processEndElement processEndElement} and
- * {@link org.omegat.filters4.xml.AbstractXmlFilter#processCharacters processCharacters} <br/>
+ * {@link org.omegat.filters4.xml.AbstractXmlFilter#processStartElement
+ * processStartElement},
+ * {@link org.omegat.filters4.xml.AbstractXmlFilter#processEndElement
+ * processEndElement} and
+ * {@link org.omegat.filters4.xml.AbstractXmlFilter#processCharacters
+ * processCharacters} <br/>
  * Boolean return value will be ignored during reading process (when event
  * writer is null), while during project compilation, it says whenever the event
  * must be kept in the result or not (generally, parts of the XML file which are
@@ -85,6 +88,14 @@ public abstract class AbstractXmlFilter extends AbstractFilter {
 
     /** Detected encoding and eol of the input XML file. */
     private String encoding, eol;
+
+    protected XMLInputFactory iFactory;
+    protected XMLOutputFactory oFactory;
+
+    public AbstractXmlFilter() {
+        iFactory = XMLInputFactory.newInstance();
+        oFactory = XMLOutputFactory.newInstance();
+    }
 
     @Override
     public boolean isSourceEncodingVariable() {
@@ -162,14 +173,11 @@ public abstract class AbstractXmlFilter extends AbstractFilter {
         }
     }
 
-    protected XMLInputFactory iFactory = XMLInputFactory.newInstance();
-    protected XMLOutputFactory oFactory = XMLOutputFactory.newInstance();
-
     /**
      * Processes a buffer.
      * <p>
-     * This method works only if buffered reader and writer
-     * are already configured with correct encoding and EOL.
+     * This method works only if buffered reader and writer are already
+     * configured with correct encoding and EOL.
      **/
     @Override
     public void processFile(BufferedReader inReader, BufferedWriter writer, FilterContext fc)
@@ -205,26 +213,27 @@ public abstract class AbstractXmlFilter extends AbstractFilter {
                     }
                 } else {
                     strWriter = oFactory.createXMLStreamWriter(writer);
+                    strWriter.setNamespaceContext(strReader.getNamespaceContext());
                     while (strReader.hasNext()) {
                         if (strReader.getEventType() == XMLEvent.START_DOCUMENT) {
                             // special case: don't use strWriter because StaX
                             // has a bug!
-                            String toWrite = "<?xml ";
+                            StringBuilder sb = new StringBuilder("<?xml ");
                             String version = strReader.getVersion();
                             if (version != null) {
-                                toWrite += " version=\"" + version + "\"";
+                                sb.append(" version=\"").append(version).append("\"");
                             }
                             String escheme = strReader.getCharacterEncodingScheme();
                             if (escheme != null) {
-                                toWrite += " encoding=\"" + escheme + "\"";
+                                sb.append(" encoding=\"").append(escheme).append("\"");
                             }
                             if (strReader.standaloneSet()) {
-                                toWrite += " standalone=\"" + (strReader.isStandalone() ? "yes" : "no")
-                                        + "\"";
+                                sb.append(" standalone=\"").append(strReader.isStandalone() ? "yes" : "no")
+                                        .append("\"");
                                 // not possible using strWriter!!!
                             }
-                            toWrite += " ?>";
-                            writer.write(toWrite);
+                            sb.append(" ?>");
+                            writer.write(sb.toString());
                             strReader.next();
                             continue;
                         }
@@ -249,10 +258,8 @@ public abstract class AbstractXmlFilter extends AbstractFilter {
                                 keep = true;
                             }
                             if (keep) {
-                                fromEventToWriter(event, strWriter); // convert
-                                                                     // current
-                                                                     // event to
-                                                                     // stream
+                                // convert current event to stream
+                                fromEventToWriter(event, strWriter);
                             }
                         } else {
                             strReader.next();
@@ -279,8 +286,8 @@ public abstract class AbstractXmlFilter extends AbstractFilter {
     /**
      * Indicates whenever we are in event mode or not.
      * <p>
-     * We always start with
-     * false, and checkCurrentCursorPosition may set it to true
+     * We always start with false, and checkCurrentCursorPosition may set it to
+     * true
      **/
     protected boolean isEventMode = false;
 
@@ -326,7 +333,7 @@ public abstract class AbstractXmlFilter extends AbstractFilter {
             final String localName = xmlr.getLocalName(), namespaceURI = xmlr.getNamespaceURI();
             if (namespaceURI != null && namespaceURI.length() > 0) {
                 final String prefix = xmlr.getPrefix();
-                if (prefix != null) {
+                if (prefix != null && prefix.length() > 0) {
                     writer.writeStartElement(prefix, localName, namespaceURI);
                 } else {
                     writer.writeStartElement(namespaceURI, localName);
@@ -339,7 +346,7 @@ public abstract class AbstractXmlFilter extends AbstractFilter {
             }
             for (int i = 0, len = xmlr.getAttributeCount(); i < len; i++) {
                 String attUri = xmlr.getAttributeNamespace(i);
-                if (attUri != null) {
+                if (attUri != null && attUri.length() > 0) {
                     writer.writeAttribute(attUri, xmlr.getAttributeLocalName(i), xmlr.getAttributeValue(i));
                 } else {
                     writer.writeAttribute(xmlr.getAttributeLocalName(i), xmlr.getAttributeValue(i));

@@ -5,7 +5,8 @@
 
  Copyright (C) 2010 Alex Buloichik, Ibai Lakunza Velasco, Didier Briel
                2019 Marc Riera Irigoyen
-               2021 Kevin Brubeck Unhammer, Hiroshi Miura
+               2021 Kevin Brubeck Unhammer
+               2021-2023 Hiroshi Miura
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -54,7 +55,7 @@ import org.omegat.util.StringUtil;
  * @author Ibai Lakunza Velasco
  * @author Didier Briel
  */
-public class ApertiumTranslate extends BaseTranslate {
+public class ApertiumTranslate extends BaseCachedTranslate {
 
     private static final int HTTP_OK = 200;
 
@@ -74,6 +75,7 @@ public class ApertiumTranslate extends BaseTranslate {
 
     /**
      * Apertium engine name.
+     *
      * @return engine name.
      */
     public String getName() {
@@ -143,8 +145,11 @@ public class ApertiumTranslate extends BaseTranslate {
 
     /**
      * Parse response and return translation text.
-     * @param json response string.
-     * @return translation text, or null when engine returns empty result, or error message when parse failed.
+     *
+     * @param json
+     *            response string.
+     * @return translation text, or null when engine returns empty result, or
+     *         error message when parse failed.
      */
     @SuppressWarnings("unchecked")
     protected String getJsonResults(String json) {
@@ -161,8 +166,8 @@ public class ApertiumTranslate extends BaseTranslate {
                     return tr;
                 }
             }
-            // Returns an error message if there's no translatedText or if there was
-            // a problem
+            // Returns an error message if there's no translatedText or if there
+            // was a problem
             String details = rootNode.get("responseDetails").asText();
             return StringUtil.format(OStrings.getString("APERTIUM_ERROR"), code, details);
         } catch (Exception e) {
@@ -172,7 +177,7 @@ public class ApertiumTranslate extends BaseTranslate {
     }
 
     /**
-     * Whether or not to use the markUnknown feature.
+     * Whether to use the markUnknown feature.
      */
     private boolean useMarkUnknown() {
         String value = System.getProperty(PROPERTY_APERTIUM_MARKUNKNOWN,
@@ -181,7 +186,7 @@ public class ApertiumTranslate extends BaseTranslate {
     }
 
     /**
-     * Whether or not to use a custom Apertium server.
+     * Whether to use a custom Apertium server.
      */
     private boolean useCustomServer() {
         String value = System.getProperty(PROPERTY_APERTIUM_SERVER_CUSTOM,
@@ -200,6 +205,7 @@ public class ApertiumTranslate extends BaseTranslate {
 
     /**
      * Apertium engine is configurable.
+     *
      * @return true
      */
     @Override
@@ -211,7 +217,9 @@ public class ApertiumTranslate extends BaseTranslate {
 
     /**
      * Show configuration UI.
-     * @param parent main window.
+     *
+     * @param parent
+     *            main window.
      */
     @Override
     public void showConfigurationUI(Window parent) {
@@ -227,7 +235,8 @@ public class ApertiumTranslate extends BaseTranslate {
                 boolean temporary = panel.temporaryCheckBox.isSelected();
                 System.setProperty(PROPERTY_APERTIUM_MARKUNKNOWN, Boolean.toString(unkCheckBox.isSelected()));
                 Preferences.setPreference(PROPERTY_APERTIUM_MARKUNKNOWN, unkCheckBox.isSelected());
-                System.setProperty(PROPERTY_APERTIUM_SERVER_CUSTOM, Boolean.toString(apiCheckBox.isSelected()));
+                System.setProperty(PROPERTY_APERTIUM_SERVER_CUSTOM,
+                        Boolean.toString(apiCheckBox.isSelected()));
                 Preferences.setPreference(PROPERTY_APERTIUM_SERVER_CUSTOM, apiCheckBox.isSelected());
                 String server = panel.valueField1.getText().trim();
                 String apiKey = panel.valueField2.getText().trim();
@@ -254,9 +263,11 @@ public class ApertiumTranslate extends BaseTranslate {
             public void changedUpdate(DocumentEvent event) {
                 updateOk.run();
             }
+
             public void insertUpdate(DocumentEvent event) {
                 updateOk.run();
             }
+
             public void removeUpdate(DocumentEvent event) {
                 updateOk.run();
             }
@@ -277,7 +288,6 @@ public class ApertiumTranslate extends BaseTranslate {
         apiCheckBox.addItemListener(toggleInterface);
         dialog.panel.valueField1.getDocument().addDocumentListener(toggleOkButton);
 
-
         dialog.panel.itemsPanel.add(unkCheckBox);
         dialog.panel.itemsPanel.add(apiCheckBox, 1);
         dialog.panel.valueLabel1.setText(OStrings.getString("APERTIUM_CUSTOM_SERVER_URL_LABEL"));
@@ -285,7 +295,8 @@ public class ApertiumTranslate extends BaseTranslate {
         dialog.panel.valueField1.setColumns(CONFIG_URL_COLUMN_WIDTH);
         dialog.panel.valueLabel2.setText(OStrings.getString("APERTIUM_CUSTOM_SERVER_KEY_LABEL"));
         dialog.panel.valueField2.setText(getCredential(PROPERTY_APERTIUM_SERVER_KEY));
-        dialog.panel.temporaryCheckBox.setSelected(isCredentialStoredTemporarily(PROPERTY_APERTIUM_SERVER_KEY));
+        dialog.panel.temporaryCheckBox
+                .setSelected(isCredentialStoredTemporarily(PROPERTY_APERTIUM_SERVER_KEY));
 
         toggleInterface.itemStateChanged(null);
 

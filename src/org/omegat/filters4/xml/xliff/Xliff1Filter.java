@@ -32,6 +32,7 @@ import java.util.TreeMap;
 import java.util.Collections;
 
 import javax.xml.namespace.QName;
+import javax.xml.stream.XMLStreamReader;
 import javax.xml.stream.XMLStreamWriter;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.events.Attribute;
@@ -79,6 +80,31 @@ public class Xliff1Filter extends AbstractXliffFilter {
         subSegments.clear();
     }
 
+    @Override // start events on body
+    protected void checkCurrentCursorPosition(XMLStreamReader reader, boolean doWrite) {
+        if (reader.getEventType() == StartElement.START_ELEMENT) {
+            if (reader.getLocalName().equals("body")) {
+                this.isEventMode = true;
+            } else if (reader.getLocalName().equals("xliff")) {
+                if (namespace == null) {
+                    namespace = reader.getName().getNamespaceURI();
+                }
+            } else if (reader.getLocalName().equals("file") || reader.getLocalName().equals("group")
+                    || reader.getLocalName().equals("unit")) {
+                final List<Attribute> attributes = new LinkedList<>();
+                for (int i = 0, len = reader.getAttributeCount(); i < len; i++) {
+                    attributes.add(eFactory.createAttribute(reader.getAttributeName(i),
+                            reader.getAttributeValue(i)));
+                }
+                try {
+                    processStartElement(
+                            eFactory.createStartElement(reader.getName(), attributes.iterator(), null), null);
+                } catch (Exception ex) {
+                }
+            }
+        }
+    }
+    
     @Override
     @SuppressWarnings("fallthrough")
     protected boolean processStartElement(StartElement startElement, XMLStreamWriter writer)

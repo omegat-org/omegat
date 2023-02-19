@@ -7,7 +7,7 @@
                2011 Briac Pilpre, Alex Buloichik
                2013 Didier Briel
                2016 Aaron Madlon-Kay
-               2021 Hiroshi Miura
+               2021,2023 Hiroshi Miura
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -55,9 +55,10 @@ import org.omegat.util.Preferences;
  *
  * @see <a href="https://www.deepl.com/api.html">Translation API</a>
  */
-public class DeepLTranslate extends BaseTranslate {
+public class DeepLTranslate extends BaseCachedTranslate {
     protected static final String PROPERTY_API_KEY = "deepl.api.key";
-    // DO NOT MOVE TO THE V2 API until it becomes available for CAT tool integration.
+    // DO NOT MOVE TO THE V2 API until it becomes available for CAT tool
+    // integration.
     //
     // > Version 2 (v2) of the DeepL API is not compatible with CAT tools and is
     // > not included in DeepL plans for CAT tool users.
@@ -78,7 +79,8 @@ public class DeepLTranslate extends BaseTranslate {
 
     @Override
     protected String translate(Language sLang, Language tLang, String text) throws Exception {
-        String trText = text.length() > MAX_TEXT_LENGTH ? text.substring(0, MAX_TEXT_LENGTH - 3) + "..." : text;
+        String trText = text.length() > MAX_TEXT_LENGTH ? text.substring(0, MAX_TEXT_LENGTH - 3) + "..." :
+                text;
         String prev = getFromCache(sLang, tLang, trText);
         if (prev != null) {
             return prev;
@@ -92,14 +94,16 @@ public class DeepLTranslate extends BaseTranslate {
 
         Map<String, String> params = new TreeMap<>();
 
-        // No check is done, but only "EN", "DE", "FR", "ES", "IT", "NL", "PL" are supported right now.
+        // No check is done, but only "EN", "DE", "FR", "ES", "IT", "NL", "PL"
+        // are supported right now.
 
         params.put("text", trText);
         params.put("source_lang", sLang.getLanguageCode().toUpperCase());
         params.put("target_lang", tLang.getLanguageCode().toUpperCase());
         params.put("tag_handling", "xml");
         // Check if the project segmentation is done by sentence
-        String splitSentence = Core.getProject().getProjectProperties().isSentenceSegmentingEnabled() ? "1" : "0";
+        String splitSentence = Core.getProject().getProjectProperties().isSentenceSegmentingEnabled() ? "1"
+                : "0";
         params.put("split_sentences", splitSentence);
         params.put("preserve_formatting", "1");
         params.put("auth_key", apiKey);
@@ -119,15 +123,18 @@ public class DeepLTranslate extends BaseTranslate {
 
     /**
      * Parse API response and return translated text.
-     * @param json API response json string.
-     * @return
-     *        translation, or null when API returns empty result, or error message when parse failed.
+     * 
+     * @param json
+     *            API response json string.
+     * @return translation, or null when API returns empty result, or error
+     *         message when parse failed.
      */
     @SuppressWarnings("unchecked")
     protected String getJsonResults(String json) {
         ObjectMapper mapper = new ObjectMapper();
         try {
-            // { "translations": [ { "detected_source_language": "DE", "text": "Hello World!" } ] }
+            // { "translations": [ { "detected_source_language": "DE", "text":
+            // "Hello World!" } ] }
             JsonNode rootNode = mapper.readTree(json);
             JsonNode translations = rootNode.get("translations");
             if (translations.has(0)) {

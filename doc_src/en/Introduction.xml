@@ -250,20 +250,24 @@
     endterm="dialogs.project.properties.title"/> dialog opens after you have
     named your project.</para>
 
-	<para>In that dialog, select the languages of your source and translated
-	files, set the various options, and click on <guibutton>OK</guibutton> to
-	continue.</para>
+	<para>In that dialog, select or enter the languages of your source and
+	translated files, set the various options, and click on <guibutton>OK</guibutton>
+	to continue.</para>
+
+	<para>OmegaT provides a convenient short list of two-letter language
+	codes, but you can type any code that conforms to <ulink
+	url="https://www.rfc-editor.org/rfc/bcp/bcp47.txt">BCP-47</ulink>
+	(including the three-letter language codes) into the appropriate
+	field.</para>
 
 	<warning>
-	  <para>The target language code selected here and the name of the 
-	  spellchecking dictionary name must match for the spellchecker to properly
-	  verify your spelling.</para>
-
-	  <para>See the <link linkend="introduction.install.spellchecker.dictionary"
-	  endterm="introduction.install.spellchecker.dictionary.title"/> section
-	  below for details.</para>
+	  <para>Make sure that you enter the correct languages and that all other
+	  locations requiring a language code match the code you assign here. See
+	  the <link linkend="dialogs.project.properties.languages"
+	  endterm="dialogs.project.properties.languages.title"/> section for
+	  details.</para>
 	</warning>
-
+	
     <para>Use <link linkend="menus.project" endterm="menus.project.title"/><link
     linkend="menus.project.properties"
     endterm="menus.project.properties.title"/> to come back to this dialog after
@@ -341,36 +345,36 @@
 
 	<warning>
 	  <para>OmegaT does not recognize languages automatically, and only uses
-		a dictionary if its name matches the target language code.</para>
-	</warning>
+	  a dictionary if its name matches the target language code.</para>
 
-	<example>
-	  <title>Project target language code and spellchecking dictionary
-	  name</title>
-	  <para>If the project target language is <emphasis
-	  role="bold">fr</emphasis> and the dictionary name is <emphasis
-	  role="bold">fr_fr</emphasis> or <emphasis role="bold">fr-fr</emphasis>,
-	  you can either:</para>
+	  <example>
+		<title>Project target language code and spellchecking dictionary
+		name</title>
+		<para>If the project target language is <emphasis
+		role="bold">fr</emphasis> and the dictionary name is <emphasis
+		role="bold">fr_fr</emphasis> or <emphasis role="bold">fr-fr</emphasis>,
+		you can either:</para>
 
-	  <itemizedlist>
-		<listitem>
-		  <para>use <link linkend="menus.project"
-		  endterm="menus.project.title"/><link
-		  linkend="menus.project.properties"
-		  endterm="menus.project.properties.title"/> to change the project
-		  target language to <emphasis role="bold">fr-fr</emphasis>, or</para>
-		</listitem>
-		<listitem>
-		  <para>use <link linkend="menus.options"
-		  endterm="menus.options.title"/><link
-		  linkend="menus.options.access.configuration.folder"
-		  endterm="menus.options.access.configuration.folder.title"/> to access
-		  the <link linkend="configuration.folder">configuration</link> folder
-		  and change the dictionary file names to <emphasis
-		  role="bold">fr</emphasis>.</para>
-		</listitem>
-	  </itemizedlist>
+		<itemizedlist>
+		  <listitem>
+			<para>use <link linkend="menus.project"
+			endterm="menus.project.title"/><link
+			linkend="menus.project.properties"
+			endterm="menus.project.properties.title"/> to change the project
+			target language to <emphasis role="bold">fr-fr</emphasis>, or</para>
+		  </listitem>
+		  <listitem>
+			<para>use <link linkend="menus.options"
+			endterm="menus.options.title"/><link
+			linkend="menus.options.access.configuration.folder"
+			endterm="menus.options.access.configuration.folder.title"/> to access
+			the <link linkend="configuration.folder">configuration</link> folder
+			and change the dictionary file names to <emphasis
+			role="bold">fr</emphasis>.</para>
+		  </listitem>
+		</itemizedlist>
 	  </example>
+	</warning>
   </section>
 
   <section id="introduction.manage.your.segments">
@@ -647,7 +651,7 @@
 	  details:</para>
 	  <itemizedlist>
 		<listitem>
-		  <para><link linkend="dialogs.project.properties.remove.tags" endterm="dialogs.project.properties.remove.tags.title"/></para>
+		  <para><link linkend="dialogs.project.properties.hide.tags" endterm="dialogs.project.properties.hide.tags.title"/></para>
 		</listitem>
 		<listitem>
 		  <para><link linkend="dialogs.preferences.tag.processing" endterm="dialogs.preferences.tag.processing.title"/></para>

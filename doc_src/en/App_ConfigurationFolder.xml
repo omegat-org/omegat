@@ -220,11 +220,14 @@
 	<varlistentry id="configuration.folder.extra.contents.plugin">
 	  <term id="configuration.folder.extra.contents.plugin.title">plugins/</term>
 	  <listitem>
-		<para>This folder provides an alternative location for manually
+		<para>This folder provides the standard location for manually
 		installed OmegaT extension plugins. See the <link
 		linkend="dialogs.preferences.plugins"
 		endterm="dialogs.preferences.plugins.title"/> preference for
 		details.</para>
+		<para>It is also possible to install plugins in the application <link
+		linkend="application.folder.plugins"
+		endterm="application.folder.plugins.title"/> folder.</para>
 	  </listitem>
 	</varlistentry>
 

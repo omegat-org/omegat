@@ -1,11 +1,31 @@
 ----------------------------------------------------------------------
  OmegaT 5.8.0
 ----------------------------------------------------------------------
-  23 Enhancements
-  26 Bug fixes
+   4 Removed features
+  36 Enhancements
+  42 Bug fixes
   9 Localization updates
 ----------------------------------------------------------------------
 5.8.0 vs 5.7.1
+
+  Removed features:
+
+  - Removal of Java Web Start
+  Java Web Start is a deprecated framework that is not available anymore with Java 11.
+  https://www.oracle.com/technetwork/java/javase/javaclientroadmapupdate2018mar-4414431.pdf  
+
+  - Removal of TaaS access
+  The TaaS service does not exist anymore.
+  https://github.com/omegat-org/omegat/pull/302
+
+  - Removal of the Moses MT connector
+  The connector uses a library that shows critical vulnerabilities
+  https://github.com/omegat-org/omegat/pull/321
+  See Moses Plugin project: https://github.com/omegat-org/moses-plugin
+
+  - Removal of the Microsoft Azure Translator MT connector
+  https://sourceforge.net/p/omegat/feature-requests/1432/
+  See Azure Translate V2/V3 Plugin project: https://github.com/omegat-org/azure-translate-plugin
 
   Implemented requests:
 
@@ -13,10 +33,22 @@
 which are in the same server
   https://sourceforge.net/p/omegat/feature-requests/1670
 
-  - Font settings in Aligner
-  https://sourceforge.net/p/omegat/feature-requests/1360
-
-  - Update to new pixel logos and improve macOS UI logos
+  - Integrate the Stax filters to OmegaT
+  https://sourceforge.net/p/omegat/feature-requests/1666/
+  
+  - New default settings
+  https://sourceforge.net/p/omegat/feature-requests/1652/
+  
+  - Fix various UI labels for consistency
+  https://sourceforge.net/p/omegat/feature-requests/1647/
+  https://sourceforge.net/p/omegat/feature-requests/1635/
+  https://sourceforge.net/p/omegat/feature-requests/1379/
+  https://sourceforge.net/p/omegat/feature-requests/1332/
+  https://sourceforge.net/p/omegat/feature-requests/486/
+  https://sourceforge.net/p/omegat/feature-requests/485/
+  
+  - Update the user guide for version 5.8/6.0
+  https://sourceforge.net/p/omegat/feature-requests/1646/
 
   -  Navigate between segments inserted from /tm/auto and /tm/enforce
   https://sourceforge.net/p/omegat/feature-requests/1641/
@@ -24,40 +56,41 @@ which are in the same server
   - Add a shortcut to select all source text of the current segment
   https://sourceforge.net/p/omegat/feature-requests/1639/
 
-  - Hyperlinks to local files in the glossary
-  https://sourceforge.net/p/omegat/feature-requests/1604/
-
-  - Do not propose source text as match from other languages
-  https://sourceforge.net/p/omegat/feature-requests/1578/
-
   - BundleProperties Filter: write properties file in UTF-8 w/ escape in default
   https://sourceforge.net/p/omegat/feature-requests/1634/
+
+  - Shortcuts to navigate between Notes and Editor panel
+  https://sourceforge.net/p/omegat/feature-requests/1630/
 
   - Git/Team project should preserve access URL when download team
   https://sourceforge.net/p/omegat/feature-requests/1629/
 
-  - Support Git branch in Team Project
-  https://sourceforge.net/p/omegat/feature-requests/918/
+  - CLI option to print the project stats to the console (text, xml or json)
+  https://sourceforge.net/p/omegat/feature-requests/1624/
 
   - New project properties options for export TM directory and which TMs should be exported
   https://sourceforge.net/p/omegat/feature-requests/1611/
 
-  - Option to export project's master TMs when pressing Ctrl+D
-  https://sourceforge.net/p/omegat/feature-requests/1591/
-
-  - Changing the flow of updating teamwork omegat.project
-
-  - CLI option to print the project stats to the console (text, xml or json)
-  https://sourceforge.net/p/omegat/feature-requests/1624/
-
   - Dictionary: support condensed view
   https://sourceforge.net/p/omegat/feature-requests/1609/
 
+  - Glossary pane sorting
+  https://sourceforge.net/p/omegat/feature-requests/1606/
+  
   - Skip candidates from machine translators which returned 403: Forbidden on Ctrl+M.
   https://sourceforge.net/p/omegat/feature-requests/1605/
 
+  - Hyperlinks to local files in the glossary
+  https://sourceforge.net/p/omegat/feature-requests/1604/
+
+  - Allow jumping to the selected segment from Search using a keyboard shortcut
+  https://sourceforge.net/p/omegat/feature-requests/1603/
+
   - Dictionary: Oxford dictionary online API support
   https://sourceforge.net/p/omegat/feature-requests/1597/
+
+  - Option to export project's master TMs when pressing Ctrl+D
+  https://sourceforge.net/p/omegat/feature-requests/1591/
 
   - Glossary pane. Dictionary Layout. Fix indentation
   https://sourceforge.net/p/omegat/feature-requests/1588/
@@ -68,6 +101,21 @@ which are in the same server
   - Able to add note which MT engine used
   https://sourceforge.net/p/omegat/feature-requests/1584/
 
+  - Do not propose source text as match from other languages
+  https://sourceforge.net/p/omegat/feature-requests/1578/
+
+  - Utilize Jackson library for JSON parser
+  https://sourceforge.net/p/omegat/feature-requests/1575/
+  
+  - Online help and onboard help version discrepancies
+  https://sourceforge.net/p/omegat/feature-requests/1558/
+ 
+  - Support metadata plugin.link for plugins
+  https://sourceforge.net/p/omegat/feature-requests/1544/
+   
+  - Show glossary comment on context menu candidate
+  https://sourceforge.net/p/omegat/feature-requests/1515/
+
   - Notify which Machine Translation was picked
   https://sourceforge.net/p/omegat/feature-requests/1477/
 
@@ -77,30 +125,70 @@ which are in the same server
   - In mode=console-align, generate tmx with mutiples translations
   https://sourceforge.net/p/omegat/feature-requests/1408/
 
-  - Allow jumping to the selected segment from Search using a keyboard shortcut
-  https://sourceforge.net/p/omegat/feature-requests/1603/
+  - Font settings in Aligner
+  https://sourceforge.net/p/omegat/feature-requests/1360
+  
+  - Sorting terms alphabetically in glossary pane
+  https://sourceforge.net/p/omegat/feature-requests/1241/
+
+  - Support Git branch in Team Project
+  https://sourceforge.net/p/omegat/feature-requests/918/
+  
+  - Keyboard shortcut for "clear target segment"
+  https://sourceforge.net/p/omegat/feature-requests/622/
+
+  - Update to new pixel logos and improve macOS UI logos
+  https://github.com/omegat-org/omegat/pull/154
+  
+  - Changing the flow of updating teamwork omegat.project
+  https://github.com/omegat-org/omegat/pull/122
 
   Bug fixes:
 
   - Fix context-bound matches in TMX that were ignored in /tm/auto
   https://sourceforge.net/p/omegat/bugs/1140/
+  
+  - MT cache cleared on saving or committing translation to memory
+  https://sourceforge.net/p/omegat/bugs/1139/
+  
+  - XML/DocBook filter breaks project load when XML has error
+  https://sourceforge.net/p/omegat/bugs/1138/
+  
+  - Error displayed when opening a project on Windows 10
+  https://sourceforge.net/p/omegat/bugs/1136/
 
   - Font Rendering issue in OmegaT (Santali)
   https://sourceforge.net/p/omegat/bugs/1133/
 
+  - Plugin loader does not allow multiple entries of OmegaT-Plugins/Category
+  https://sourceforge.net/p/omegat/bugs/1128/
+
   - Local project does not update after remote masking some files
   https://sourceforge.net/p/omegat/bugs/1124/
+  
+  - MainMenuShortcuts.properties not up to date
+  https://sourceforge.net/p/omegat/bugs/1121/
+  
+  - When converting git local-managed project, OmegaT raise NPE
+  https://sourceforge.net/p/omegat/bugs/1118/
+  
+  - URL linkifier raise exception when opening resource property file
+  https://sourceforge.net/p/omegat/bugs/1117/
+  
+  - BundleProperties filter should accept UTF-8 properties file
+  https://sourceforge.net/p/omegat/bugs/1116/
+  
+  - doc_src/docgen docker container should handle UID/GID properly
+  https://sourceforge.net/p/omegat/bugs/1112/
+  
+  - Unable to check-out or open/save team projects
+  https://sourceforge.net/p/omegat/bugs/1075/
 
   - OmegaT --no-team does not complete 3.6 team project conversion
   https://sourceforge.net/p/omegat/bugs/1063/
 
-  - Drop Moses MT connector because of vulnerability of dependency library.
-  Please see Moses Plugin project: https://github.com/omegat-org/moses-plugin
-
   - GUI: Comment is shown on both Comment and Segment Properties pane
   https://sourceforge.net/p/omegat/bugs/1119/
-
-  - Drop TaaS glossary service connector
 
   - When converting git local-managed project, OmegaT raise NPE
   https://sourceforge.net/p/omegat/bugs/1118/
@@ -116,6 +204,9 @@ which are in the same server
 
   - Team project piles up backup files of omegat.project
   https://sourceforge.net/p/omegat/bugs/1110/
+  
+  - About dialog show incorrect library list
+  https://sourceforge.net/p/omegat/bugs/1108/
 
   - OpenSSH new key format and ECDSA/ED25519 keys
   https://sourceforge.net/p/omegat/bugs/1107/
@@ -138,6 +229,9 @@ which are in the same server
 
   - Enforced ID-bound alternative translations not recognized
   https://sourceforge.net/p/omegat/bugs/1092/
+  
+  - OmegaT default colors can be lost when a plugin fails to initialize
+  https://sourceforge.net/p/omegat/bugs/1091/
 
   - ArrayIndexOutOfBoundsException on loading a PO-project with multi-line plurals
   https://sourceforge.net/p/omegat/bugs/1082/
@@ -150,9 +244,33 @@ which are in the same server
 
   - Dictionary fails to jump to selected word
   https://sourceforge.net/p/omegat/bugs/1074/
+  
+  - Gradle: HTMLFilter2Test failed on non-English OS
+  https://sourceforge.net/p/omegat/bugs/1066/
+  
+  - OmegaT --no-team does not complete 3.6 team project conversion
+  https://sourceforge.net/p/omegat/bugs/1063/
+  
+  - HTML segmentation dropping whole tags
+  https://sourceforge.net/p/omegat/bugs/873/
+  
+  - "Go to Next Unique Segment" bound to shortcut used by macOS
+  https://sourceforge.net/p/omegat/bugs/851/
+  
+  - HTML: some content not available
+  https://sourceforge.net/p/omegat/bugs/613/
+  
+  - HTML comment tag segments
+  https://sourceforge.net/p/omegat/bugs/610/
+  
+  - script + style HTML elements in source, missing stylesheet in result.
+  https://sourceforge.net/p/omegat/bugs/609/
+  
+  - HTML parsing error
+  https://sourceforge.net/p/omegat/bugs/205/
 
-  - Highlight found text even if normalized text (for feature "full/half width insensitive") 
-    differs from original
+  - Highlight found text even if normalized text differs from original
+  https://github.com/omegat-org/omegat/pull/234
 
   Localization Updates:
 

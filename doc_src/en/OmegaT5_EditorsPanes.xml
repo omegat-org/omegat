@@ -416,8 +416,8 @@ When enabled, all the formatting tags are removed from source segments.</program
 
       <listitem>
         <para>Use <link  linkend="menus.goto" endterm="menus.goto.title"/><link
-        endterm="menus.goto.next.segment.title"
-        linkend="menus.goto.next.segment"/> or other navigation commands
+        endterm="menus.goto.next.untranslated.segment.title"
+        linkend="menus.goto.next.untranslated.segment"/> or other navigation commands
         to:</para>
 
 		<itemizedlist>

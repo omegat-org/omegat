@@ -10,13 +10,38 @@
     <abstract>
       <para>This document is the official user manual to OmegaT, the free
       Computer-Assisted Translation tool.</para>
+
+	  <para>OmegaT's main purpose is to help you create a good translation the
+	  fastest possible by giving you access to your translation ressources in
+	  the most reliable way possible.</para>
+
+	  <para>OmegaT is distributed under the terms of the <emphasis>GNU General
+	  Public License, version 3.0</emphasis>. The license grants you the
+	  following freedoms:
+	  
+	  <itemizedlist id="freedoms.list">
+		<listitem>
+		  <para>The freedom to run OmegaT as you wish, for any purpose.</para>
+		</listitem>
+
+		<listitem>
+		  <para>The freedom to study how OmegaT works, and change it so it does
+		  your computing as you wish.</para>
+		</listitem>
+
+		<listitem>
+		  <para>The freedom to redistribute copies so you can help others.</para>
+		</listitem>
+
+		<listitem>
+		  <para>The freedom to distribute copies of your modified versions to
+		  others.</para>
+		</listitem>
+	  </itemizedlist>
+	  </para>
     </abstract>
   </bookinfo>
 
-  <article>
-	<title>10 shortcuts to remember</title>
-	<para>stuff</para>
-  </article>
   
   <xi:include href="Introduction.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>

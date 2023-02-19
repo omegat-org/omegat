@@ -91,8 +91,9 @@
     <link linkend="menus.project" endterm="menus.project.title"/>, <link
     linkend="menus.edit" endterm="menus.edit.title"/>, and <link
     linkend="menus.goto" endterm="menus.goto.title"/> menus and to a number of
-    functions in the Editor window. You can also add or modify the shortcuts for
-    most of the functions.</para>
+    functions in the <link linkend="panes.editor" endterm="panes.editor.title"/>
+    pane. You can also add or modify the shortcuts for most of the
+    functions.</para>
 
 	<para>To do so, you have to put the appropriate shortcut definition file in
 	your OmegaT configuration folder. See the <link

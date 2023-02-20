@@ -129,6 +129,7 @@ public class MainWindow extends JFrame implements IMainWindow {
             public void windowClosing(WindowEvent e) {
                 menu.mainWindowMenuHandler.projectExitMenuItemActionPerformed();
             }
+
             @Override
             public void windowDeactivated(WindowEvent we) {
                 Core.getEditor().windowDeactivated();
@@ -136,7 +137,8 @@ public class MainWindow extends JFrame implements IMainWindow {
         });
 
         // load default font from preferences
-        String fontName = Preferences.getPreferenceDefault(Preferences.TF_SRC_FONT_NAME, Preferences.TF_FONT_DEFAULT);
+        String fontName = Preferences.getPreferenceDefault(Preferences.TF_SRC_FONT_NAME,
+                Preferences.TF_FONT_DEFAULT);
         int fontSize = Preferences.getPreferenceDefault(Preferences.TF_SRC_FONT_SIZE,
                 Preferences.TF_FONT_SIZE_DEFAULT);
         font = new Font(fontName, Font.PLAIN, fontSize);
@@ -240,8 +242,8 @@ public class MainWindow extends JFrame implements IMainWindow {
             if (near != null) {
                 text = near.translation;
                 if (Preferences.isPreference(Preferences.CONVERT_NUMBERS)) {
-                    text = Core.getMatcher().substituteNumbers(Core.getEditor().getCurrentEntry().getSrcText(),
-                        near.source, near.translation);
+                    text = Core.getMatcher().substituteNumbers(
+                            Core.getEditor().getCurrentEntry().getSrcText(), near.source, near.translation);
                 }
 
                 if (DataUtils.isFromMTMemory(near)) {
@@ -276,12 +278,12 @@ public class MainWindow extends JFrame implements IMainWindow {
         if (near != null) {
             String translation = near.translation;
             if (Preferences.isPreference(Preferences.CONVERT_NUMBERS)) {
-                translation = Core.getMatcher().substituteNumbers(Core.getEditor().getCurrentEntry().getSrcText(),
-                        near.source, near.translation);
+                translation = Core.getMatcher().substituteNumbers(
+                        Core.getEditor().getCurrentEntry().getSrcText(), near.source, near.translation);
             }
-            if (near.comesFrom == NearString.MATCH_SOURCE.TM
-                    && FileUtil.isInPath(new File(Core.getProject().getProjectProperties().getTMRoot(), OConsts.MT_TM),
-                            new File(near.projs[0]))) {
+            if (near.comesFrom == NearString.MATCH_SOURCE.TM && FileUtil.isInPath(
+                    new File(Core.getProject().getProjectProperties().getTMRoot(), OConsts.MT_TM),
+                    new File(near.projs[0]))) {
                 Core.getEditor().replaceEditTextAndMark(translation, "TM:[tm/mt]");
             } else {
                 Core.getEditor().replaceEditText(translation, "TM:[generic]");
@@ -292,9 +294,7 @@ public class MainWindow extends JFrame implements IMainWindow {
 
     private String getSelectedTextInMatcher() {
         IMatcher matcher = Core.getMatcher();
-        return matcher instanceof JTextComponent
-                ? ((JTextComponent) matcher).getSelectedText()
-                : null;
+        return matcher instanceof JTextComponent ? ((JTextComponent) matcher).getSelectedText() : null;
     }
 
     protected void addSearchWindow(final SearchWindowController newSearchWindow) {
@@ -371,7 +371,7 @@ public class MainWindow extends JFrame implements IMainWindow {
                 statusLabel.setText(null);
             }
         });
-        timer.setRepeats(false);  // one-time only
+        timer.setRepeats(false); // one-time only
         timer.start();
     }
 
@@ -385,10 +385,10 @@ public class MainWindow extends JFrame implements IMainWindow {
         progressLabel.setText(messageText);
     }
 
-    /* Set progress bar tooltip text.
+    /*
+     * Set progress bar tooltip text.
      *
-     * @param tooltipText
-     *            tooltip text
+     * @param tooltipText tooltip text
      */
     public void setProgressToolTipText(String toolTipText) {
         progressLabel.setToolTipText(toolTipText);
@@ -408,7 +408,7 @@ public class MainWindow extends JFrame implements IMainWindow {
         lockInsertLabel.setText(messageText);
         lockInsertLabel.setToolTipText(toolTip);
     }
-   
+
     // /////////////////////////////////////////////////////////////
     // /////////////////////////////////////////////////////////////
     // display oriented code
@@ -426,7 +426,8 @@ public class MainWindow extends JFrame implements IMainWindow {
     /**
      * {@inheritDoc}
      */
-    public void displayWarningRB(final String warningKey, final String supercedesKey, final Object... params) {
+    public void displayWarningRB(final String warningKey, final String supercedesKey,
+            final Object... params) {
         UIThreadsUtil.executeInSwingThread(() -> {
             String msg;
             if (params != null) {
@@ -489,8 +490,8 @@ public class MainWindow extends JFrame implements IMainWindow {
         for (DockableState dock : desktop.getDockables()) {
             if (!dock.isDocked()) {
                 dock.getDockable().getComponent().setEnabled(false);
-                for (Container parent = dock.getDockable().getComponent().getParent(); parent != null; parent = parent
-                        .getParent()) {
+                for (Container parent = dock.getDockable().getComponent()
+                        .getParent(); parent != null; parent = parent.getParent()) {
                     if (parent instanceof FloatingDialog) {
                         parent.setEnabled(false);
                         break;
@@ -509,8 +510,8 @@ public class MainWindow extends JFrame implements IMainWindow {
         // unlock undocked dockables
         for (DockableState dock : desktop.getDockables()) {
             if (!dock.isDocked()) {
-                for (Container parent = dock.getDockable().getComponent().getParent(); parent != null; parent = parent
-                        .getParent()) {
+                for (Container parent = dock.getDockable().getComponent()
+                        .getParent(); parent != null; parent = parent.getParent()) {
                     if (parent instanceof FloatingDialog) {
                         parent.setEnabled(true);
                         break;
@@ -542,8 +543,8 @@ public class MainWindow extends JFrame implements IMainWindow {
      * @see JOptionPane#showConfirmDialog(java.awt.Component, Object, String,
      *      int, int)
      */
-    public int showConfirmDialog(Object message, String title, int optionType,
-            int messageType) throws HeadlessException {
+    public int showConfirmDialog(Object message, String title, int optionType, int messageType)
+            throws HeadlessException {
         return JOptionPane.showConfirmDialog(this, message, title, optionType, messageType);
     }
 

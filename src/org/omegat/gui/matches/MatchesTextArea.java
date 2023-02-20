@@ -151,18 +151,22 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
             public String getImportDestination() {
                 return Core.getProject().getProjectProperties().getTMRoot();
             }
+
             @Override
             public boolean acceptFile(File pathname) {
                 return pathname.getName().toLowerCase(Locale.ENGLISH).endsWith(OConsts.TMX_EXTENSION);
             }
+
             @Override
             public String getOverlayMessage() {
                 return OStrings.getString("DND_ADD_TM_FILE");
             }
+
             @Override
             public boolean canAcceptDrop() {
                 return Core.getProject().isProjectLoaded();
             }
+
             @Override
             public Component getComponentToOverlay() {
                 return scrollPane;
@@ -199,7 +203,8 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
             scrollPane.notify(true);
         }
 
-        NearString.SORT_KEY key = Preferences.getPreferenceEnumDefault(Preferences.EXT_TMX_SORT_KEY, SORT_KEY.SCORE);
+        NearString.SORT_KEY key = Preferences.getPreferenceEnumDefault(Preferences.EXT_TMX_SORT_KEY,
+                SORT_KEY.SCORE);
         newMatches.sort(Comparator.comparing(ns -> ns.scores[0], new ScoresComparator(key).reversed()));
 
         matches.addAll(newMatches);
@@ -279,20 +284,21 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
         return substituteNumbers(source, sourceMatch, targetMatch, sourceTok, targetTok);
     }
 
-    static String substituteNumbers(String source, String sourceMatch, String targetMatch, ITokenizer sourceTok,
-            ITokenizer targetTok) {
+    static String substituteNumbers(String source, String sourceMatch, String targetMatch,
+            ITokenizer sourceTok, ITokenizer targetTok) {
 
         List<String> sourceMatchNumbers = Stream.of(sourceTok.tokenizeVerbatimToStrings(sourceMatch))
                 .filter(MatchesTextArea::isNumber).collect(Collectors.toList());
 
         String[] targetTokens = targetTok.tokenizeVerbatimToStrings(targetMatch);
-        List<String> targetMatchNumbers = Stream.of(targetTokens)
-                .filter(MatchesTextArea::isNumber).collect(Collectors.toList());
+        List<String> targetMatchNumbers = Stream.of(targetTokens).filter(MatchesTextArea::isNumber)
+                .collect(Collectors.toList());
 
         List<String> sourceNumbers = Stream.of(sourceTok.tokenizeVerbatimToStrings(source))
                 .filter(MatchesTextArea::isNumber).collect(Collectors.toList());
 
-        if (sourceMatchNumbers.size() != sourceNumbers.size() || sourceMatchNumbers.size() != targetMatchNumbers.size()
+        if (sourceMatchNumbers.size() != sourceNumbers.size()
+                || sourceMatchNumbers.size() != targetMatchNumbers.size()
                 || !new HashSet<>(sourceMatchNumbers).equals(new HashSet<>(targetMatchNumbers))) {
             return targetMatch;
         }
@@ -398,8 +404,8 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
 
                     String translation = thebest.translation;
                     if (Preferences.isPreference(Preferences.CONVERT_NUMBERS)) {
-                        translation =
-                            substituteNumbers(currentEntry.getSrcText(), thebest.source, thebest.translation);
+                        translation = substituteNumbers(currentEntry.getSrcText(), thebest.source,
+                                thebest.translation);
                     }
 
                     if (DataUtils.isFromMTMemory(thebest)) {
@@ -469,18 +475,16 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
                         int tokstart = delimiters.get(i) + diffPos + r.start;
                         switch (r.type) {
                         case DELETE:
-                            doc.setCharacterAttributes(
-                                tokstart,
-                                r.length,
-                                i == activeMatch ? ATTRIBUTES_DELETED_ACTIVE : ATTRIBUTES_DELETED_INACTIVE,
-                                false);
+                            doc.setCharacterAttributes(tokstart, r.length,
+                                    i == activeMatch ? ATTRIBUTES_DELETED_ACTIVE
+                                            : ATTRIBUTES_DELETED_INACTIVE,
+                                    false);
                             break;
                         case INSERT:
-                            doc.setCharacterAttributes(
-                                tokstart,
-                                r.length,
-                                i == activeMatch ? ATTRIBUTES_INSERTED_ACTIVE : ATTRIBUTES_INSERTED_INACTIVE,
-                                false);
+                            doc.setCharacterAttributes(tokstart, r.length,
+                                    i == activeMatch ? ATTRIBUTES_INSERTED_ACTIVE
+                                            : ATTRIBUTES_INSERTED_INACTIVE,
+                                    false);
                             break;
                         case NOCHANGE:
                             // Nothing
@@ -672,7 +676,8 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
     public void populatePaneMenu(JPopupMenu menu) {
         populateContextMenu(menu, activeMatch);
         menu.addSeparator();
-        final JMenuItem notify = new JCheckBoxMenuItem(OStrings.getString("GUI_MATCHWINDOW_SETTINGS_NOTIFICATIONS"));
+        final JMenuItem notify = new JCheckBoxMenuItem(
+                OStrings.getString("GUI_MATCHWINDOW_SETTINGS_NOTIFICATIONS"));
         notify.setSelected(Preferences.isPreference(Preferences.NOTIFY_FUZZY_MATCHES));
         notify.addActionListener(
                 e -> Preferences.setPreference(Preferences.NOTIFY_FUZZY_MATCHES, notify.isSelected()));

@@ -43,11 +43,11 @@ public final class DataUtils {
 
     /** Check if a NearString match comes from the tm/mt/ folder. */
     public static boolean isFromMTMemory(NearString near) {
-        if (near == null) 
-        {
+        if (near == null) {
             return false;
         }
         return near.comesFrom == NearString.MATCH_SOURCE.TM && FileUtil.isInPath(
-                new File(Core.getProject().getProjectProperties().getTMRoot(), OConsts.MT_TM), new File(near.projs[0]));
+                new File(Core.getProject().getProjectProperties().getTMRoot(), OConsts.MT_TM),
+                new File(near.projs[0]));
     }
 }

@@ -281,9 +281,7 @@ public class MainWindow extends JFrame implements IMainWindow {
                 translation = Core.getMatcher().substituteNumbers(
                         Core.getEditor().getCurrentEntry().getSrcText(), near.source, near.translation);
             }
-            if (near.comesFrom == NearString.MATCH_SOURCE.TM && FileUtil.isInPath(
-                    new File(Core.getProject().getProjectProperties().getTMRoot(), OConsts.MT_TM),
-                    new File(near.projs[0]))) {
+            if (DataUtils.isFromMTMemory(near)) {
                 Core.getEditor().replaceEditTextAndMark(translation, "TM:[tm/mt]");
             } else {
                 Core.getEditor().replaceEditText(translation, "TM:[generic]");

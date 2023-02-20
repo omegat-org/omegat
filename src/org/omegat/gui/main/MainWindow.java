@@ -56,6 +56,7 @@ import javax.swing.text.JTextComponent;
 
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
+import org.omegat.core.data.DataUtils;
 import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.matching.NearString;
@@ -63,6 +64,7 @@ import org.omegat.gui.filelist.ProjectFilesListController;
 import org.omegat.gui.matches.IMatcher;
 import org.omegat.gui.search.SearchWindowController;
 import org.omegat.util.FileUtil;
+import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
@@ -242,9 +244,7 @@ public class MainWindow extends JFrame implements IMainWindow {
                         near.source, near.translation);
                 }
 
-                if (near.comesFrom == NearString.MATCH_SOURCE.TM
-                    && FileUtil.isInPath(new File(Core.getProject().getProjectProperties().getTMRoot(), "mt"),
-                    new File(near.projs[0]))) {
+                if (DataUtils.isFromMTMemory(near)) {
                     fromMT = true;
                 }
             }
@@ -280,7 +280,7 @@ public class MainWindow extends JFrame implements IMainWindow {
                         near.source, near.translation);
             }
             if (near.comesFrom == NearString.MATCH_SOURCE.TM
-                    && FileUtil.isInPath(new File(Core.getProject().getProjectProperties().getTMRoot(), "mt"),
+                    && FileUtil.isInPath(new File(Core.getProject().getProjectProperties().getTMRoot(), OConsts.MT_TM),
                             new File(near.projs[0]))) {
                 Core.getEditor().replaceEditTextAndMark(translation, "TM:[tm/mt]");
             } else {

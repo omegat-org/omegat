@@ -62,6 +62,7 @@ import javax.swing.text.Caret;
 import javax.swing.text.StyledDocument;
 
 import org.omegat.core.Core;
+import org.omegat.core.data.DataUtils;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.StringData;
 import org.omegat.core.data.TMXEntry;
@@ -400,7 +401,12 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
                         translation =
                             substituteNumbers(currentEntry.getSrcText(), thebest.source, thebest.translation);
                     }
-                    Core.getEditor().replaceEditText(prefix + translation, "TM: auto");
+
+                    if (DataUtils.isFromMTMemory(thebest)) {
+                        Core.getEditor().replaceEditTextAndMark(prefix + translation, "TM:[tm/mt]");
+                    } else {
+                        Core.getEditor().replaceEditText(prefix + translation, "TM: auto");
+                    }
                 }
             }
         }

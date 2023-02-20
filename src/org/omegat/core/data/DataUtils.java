@@ -25,6 +25,13 @@
 
 package org.omegat.core.data;
 
+import java.io.File;
+
+import org.omegat.core.Core;
+import org.omegat.core.matching.NearString;
+import org.omegat.util.FileUtil;
+import org.omegat.util.OConsts;
+
 public final class DataUtils {
 
     private DataUtils() {
@@ -32,5 +39,15 @@ public final class DataUtils {
 
     public static boolean isDuplicate(SourceTextEntry ste, TMXEntry te) {
         return ste.getDuplicate() == SourceTextEntry.DUPLICATE.NEXT && te.defaultTranslation;
+    }
+
+    /** Check if a NearString match comes from the tm/mt/ folder. */
+    public static boolean isFromMTMemory(NearString near) {
+        if (near == null) 
+        {
+            return false;
+        }
+        return near.comesFrom == NearString.MATCH_SOURCE.TM && FileUtil.isInPath(
+                new File(Core.getProject().getProjectProperties().getTMRoot(), OConsts.MT_TM), new File(near.projs[0]));
     }
 }

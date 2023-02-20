@@ -416,6 +416,13 @@
       endterm="windows.scripts.distribution.switch.colour.theme.title"/> that
       provides a default dark theme. See the <link linkend="windows.scripts"
       endterm="windows.scripts.title"/> window for details.</para>
+
+	  <note>
+		<para>Automatic dark theme detection is available on Linux systems
+		with the Gnome/GTK look and feel for users who run OmegaT on OpenJDK.
+		This feature depends on Java functionality that is not yet available
+		on other platforms.</para>
+	  </note>
 	</section>
   </section>
 
@@ -1237,8 +1244,15 @@
 	  <varlistentry id="dialog.preferences.tm.matches.minimum.threshold">
 		<term id="dialog.preferences.tm.matches.minimum.threshold.title"><option>Minimal threshold to show a fuzzy match</option></term>
 		<listitem>
-		  <para>OmegaT displays the 5 best fuzzy matches above 30% by
-		  default. You can change the threshold here.</para>
+		  <para>OmegaT displays the five best fuzzy matches above 30% by
+		  default. You can change that threshold here.</para>
+			<note>
+				<para>Each of the three types of matching percentages presented in the <link linkend="panes.fuzzy.matches"
+				endterm="panes.fuzzy.matches.title"/> pane are taken into
+				account to determine whether a match is displayed. Potential
+				matches are rejected if all three percentages are below
+				the threshold.</para>
+			</note>
 		</listitem>
 	  </varlistentry>
 

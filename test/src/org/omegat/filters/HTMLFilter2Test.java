@@ -55,6 +55,17 @@ public class HTMLFilter2Test extends TestFilterBase {
     }
 
     @Test
+    public void testIgnoreCommentParse() throws Exception {
+        Map<String, String> options = new HashMap<>();
+        options.put(HTMLOptions.OPTION_REMOVE_COMMENTS, "true");
+        List<String> entries = parse(new HTMLFilter2(), "test/data/filters/html/file-HTMLFilter2-ignored-comments-no-break-SF610.html", options);
+        assertEquals(3, entries.size());
+        assertEquals("en", entries.get(0));
+        assertEquals("This is the first line.", entries.get(1));
+        assertEquals("This is the second line.", entries.get(2));
+    }
+
+    @Test
     public void testParseAllBlockElements() throws Exception {
         List<String> entries = parse(new HTMLFilter2(),
                 "test/data/filters/html/file-HTMLFilter2-all-block-elements.html");
@@ -77,7 +88,7 @@ public class HTMLFilter2Test extends TestFilterBase {
         assertEquals(3, entries.size());
         entries = parse(new HTMLFilter2(),
                 "test/data/filters/html/file-HTMLFilter2-OmegaT.html");
-        assertEquals(166, entries.size());
+        assertEquals(165, entries.size());
     }
 
     @Test

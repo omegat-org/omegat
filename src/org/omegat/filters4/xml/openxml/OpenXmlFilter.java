@@ -125,7 +125,7 @@ class OpenXmlFilter extends AbstractXmlFilter {
                 return false;
             }
             if ("r".equals(name.getLocalPart())) {
-                if (!currentBuffer.isEmpty()) {
+                if ((currentBuffer == null) || (!currentBuffer.isEmpty())) {
                     currentBuffer = new LinkedList<>();
                     currentPara.add(currentBuffer);
                 }
@@ -213,9 +213,12 @@ class OpenXmlFilter extends AbstractXmlFilter {
                 return true;
             }
             if ("r".equals(name.getLocalPart())) {
-                currentBuffer.add(endElement);
-                currentBuffer = new LinkedList<>();
-                currentPara.add(currentBuffer);
+                if (currentBuffer != null) {
+                    // run which almost contains some text
+                    currentBuffer.add(endElement);
+                    currentBuffer = new LinkedList<>();
+                    currentPara.add(currentBuffer);
+                }
                 return false;
             }
             if (removeComments) {
@@ -338,8 +341,8 @@ class OpenXmlFilter extends AbstractXmlFilter {
                 }
             } else {
                 if (i == 0) {
-                    if ((run.size() > 1) && run.get(1).isStartElement() && run.get(1)
-                            .asStartElement().getName().getLocalPart().equals("pPr")) {
+                    if ((run.size() > 1) && run.get(1).isStartElement()
+                            && run.get(1).asStartElement().getName().getLocalPart().equals("pPr")) {
                         defaultsForParagraph = run; // looks like defaults,
                                                     // but...
                         LOOP2: for (int j = 1; j < currentPara.size(); j++) {
@@ -390,7 +393,7 @@ class OpenXmlFilter extends AbstractXmlFilter {
                                     }
                                     while (ev2 != ev) {
                                         ir.remove();
-                                        ir.previous();
+                                        ev2 = ir.previous();
                                     }
                                     ir.remove();
                                     ev = eFactory.createStartElement(ev.asStartElement().getName(),
@@ -420,7 +423,7 @@ class OpenXmlFilter extends AbstractXmlFilter {
                 }
                 // Something between two <w:r>
                 if ((run.size() == 1) && run.get(0).isCharacters()
-                        && (0 == run.get(0).toString().trim().length())) {
+                        && (0 == run.get(0).asCharacters().getData().trim().length())) {
                     continue;
                 }
                 Integer tc = tagsCount.get('x');
@@ -478,20 +481,20 @@ class OpenXmlFilter extends AbstractXmlFilter {
                 final int idx = runIter.previousIndex();
                 String name = next.asStartElement().getName().getLocalPart();
                 switch (name) {
-                    case "footnoteRef":
-                        prefixInt = 'n';
-                        break;
-                    case "tab":
-                    case "br":
-                        prefixInt = 'd';
-                        break;
-                    case "drawing":
-                        prefixInt = 'g';
-                        break;
-                    case "t":
-                        continue;
-                    default:
-                        prefixInt = 'e';
+                case "footnoteRef":
+                    prefixInt = 'n';
+                    break;
+                case "tab":
+                case "br":
+                    prefixInt = 'd';
+                    break;
+                case "drawing":
+                    prefixInt = 'g';
+                    break;
+                case "t":
+                    continue;
+                default:
+                    prefixInt = 'e';
                 }
                 while (!(next.isEndElement() && next.asEndElement().getName().getLocalPart().equals(name))) {
                     next = runIter.next();
@@ -508,8 +511,8 @@ class OpenXmlFilter extends AbstractXmlFilter {
                 nList.add(eFactory.createEndElement(qR, null));
                 res.append("<" + prefixInt + tcInt + "/>");
                 tagsMap.put("" + prefixInt + tcInt, nList);
-            } else {
-                res.append(next); // character data
+            } else if (next.isCharacters()) {
+                res.append(next.asCharacters().getData());
             }
         }
     }

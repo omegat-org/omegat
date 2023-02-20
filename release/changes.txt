@@ -29,8 +29,7 @@
 
   Implemented requests:
 
-  - Can share authentication between Git or SVN repositories 
-which are in the same server
+  - Share authentication between repositories on the same server
   https://sourceforge.net/p/omegat/feature-requests/1670
 
   - Integrate the Stax filters to OmegaT
@@ -144,6 +143,12 @@ which are in the same server
   https://github.com/omegat-org/omegat/pull/122
 
   Bug fixes:
+
+  - BidiMarker does not respect disable menu action
+  https://sourceforge.net/p/omegat/bugs/1143/
+
+  - XML/DocBook filter breaks project load when XML has error
+  https://sourceforge.net/p/omegat/bugs/1138/
 
   - Fix context-bound matches in TMX that were ignored in /tm/auto
   https://sourceforge.net/p/omegat/bugs/1140/

@@ -70,6 +70,9 @@ public class BidiMarkers extends AbstractMarker {
     @Override
     public List<Mark> getMarksForEntry(SourceTextEntry ste, String sourceText, String text, boolean isActive)
             throws Exception {
+        if (!isEnabled()) {
+            return null;
+        }
         if (!isActive || text == null || text.trim().isEmpty()) {
             return EMPTY_LIST;
         }

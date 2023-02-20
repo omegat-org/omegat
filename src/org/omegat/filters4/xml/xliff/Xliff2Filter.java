@@ -25,13 +25,14 @@
 
 package org.omegat.filters4.xml.xliff;
 
-import java.util.List;
-import java.util.LinkedList;
 import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.regex.Pattern;
 
 import javax.xml.namespace.QName;
-import javax.xml.stream.XMLStreamWriter;
 import javax.xml.stream.XMLStreamException;
+import javax.xml.stream.XMLStreamWriter;
 import javax.xml.stream.events.Attribute;
 import javax.xml.stream.events.EndElement;
 import javax.xml.stream.events.StartElement;
@@ -45,6 +46,7 @@ import org.omegat.util.OStrings;
  * @author Thomas Cordonnier
  */
 public class Xliff2Filter extends AbstractXliffFilter {
+    private Pattern intPattern = Pattern.compile("-?\\d+");
 
     // --------------------------- IFilter API ----------------------------
 
@@ -59,13 +61,20 @@ public class Xliff2Filter extends AbstractXliffFilter {
 
     // ------------------- AbstractXmlFilter part -------------------------
 
-    @Override // start events on body
+    @Override
     protected void checkCurrentCursorPosition(javax.xml.stream.XMLStreamReader reader, boolean doWrite) {
-        super.checkCurrentCursorPosition(reader, doWrite);
         if (reader.getEventType() == StartElement.START_ELEMENT) {
-            if (reader.getLocalName().equals("notes") || reader.getLocalName().equals("group")
-                    || reader.getLocalName().equals("unit")) {
+            // XLIFF 2 has no "body", so we must start on another
+            // markup
+            // Warning: this solution works for pure XLIFF 2 only:
+            // if later we write a derivative (like SDLXLIFF inheriting
+            // from XLIFF 1) then the derivative may need a finer
+            // algorithm.
+            if (reader.getLocalName().equals("xliff")) {
                 this.isEventMode = true;
+                if (namespace == null) {
+                    namespace = reader.getName().getNamespaceURI();
+                }
             }
         }
     }
@@ -86,29 +95,27 @@ public class Xliff2Filter extends AbstractXliffFilter {
         case "file":
         case "group":
         case "unit":
-            try {
-                path += "/" + startElement.getAttributeByName(new QName("id")).getValue();
-            } catch (NullPointerException noid) { // Note: in spec, id is
-                                                  // REQUIRED
+            Attribute idAttr = startElement.getAttributeByName(new QName(("id")));
+            if (idAttr != null) {
+                path += "/" + idAttr.getValue();
+            } else {
+                // id is REQUIRED in spec, so we treat as error.
                 throw new XMLStreamException(OStrings.getString("XLIFF_MANDATORY_ORIGINAL_MISSING", "id",
                         startElement.getName().getLocalPart()));
             }
             updateIgnoreScope(startElement);
             break;
         case "segment":
-            try {
-                segId = startElement.getAttributeByName(new QName("id")).getValue();
-            } catch (NullPointerException noid) { // Note: in spec, id is
-                                                  // OPTIONAL
-                if (segId == null) {
-                    segId = "1";
-                } else {
-                    try {
-                        segId = Integer.toString(Integer.parseInt(segId) + 1);
-                    } catch (NumberFormatException fmt) {
-                        segId = "1";
-                    }
-                }
+            idAttr = startElement.getAttributeByName(new QName("id"));
+            // because id is OPTIONAL in spec, it can be null
+            if (idAttr != null) {
+                segId = idAttr.getValue();
+            } else if (segId == null) {
+                segId = "1";
+            } else if (intPattern.matcher(segId).matches()) {
+                segId = Integer.toString(Integer.parseInt(segId) + 1);
+            } else {
+                segId = "1";
             }
             flushedSegment = false;
             break;

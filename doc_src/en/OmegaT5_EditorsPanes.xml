@@ -370,12 +370,12 @@
 	  <para>
 		<programlisting>— ¶ —————————————————————
 
-<token>Remove Tags</token>
-|Supprimer les balises<token>&lt;segment 2148 ¶></token>
+<token>Hide Tags</token>
+|Dissimuler les balises<token>&lt;segment 2148 ¶></token>
 
 — ¶ —————————————————————
 
-When enabled, all the formatting tags are removed from source segments.</programlisting></para>
+When enabled, all formatting in the source segments are hidden.</programlisting></para>
 	</example>
 
     <itemizedlist>
@@ -446,8 +446,8 @@ When enabled, all the formatting tags are removed from source segments.</program
 	  <!-- 	  <programlisting>— ¶ ————————————————————— -->
 
 	  <!-- Translation last modified by Didier on Sep 4, 2012 at 9:16:52 PM -->
-	  <!-- <token>Remove Ta&amp;gs</token> -->
-	  <!-- <token>Su&amp;pprimer les balises</token> -->
+	  <!-- <token>Hide Ta&amp;gs</token> -->
+	  <!-- <token>Dissi&amp;muler les balises</token> -->
 
 	  <!-- — ¶ ————————————————————— -->
 
@@ -736,17 +736,61 @@ When enabled, all the formatting tags are removed from source segments.</program
     a different match .</para>
 
 	<example id="the.first.match">
-	  <title id="the.first.match.title">The first match</title>
-	  <para>
-		<programlisting>1. <token>Configuration</token> Folder
+	  <title id="the.first.match.title">An empty segment and its first two matches</title>
+      <para>
+		<informaltable id="table.pane.matches">
+          <tgroup cols="2">
+            <tbody>
+              <row>
+                <entry><para>
+				  <informaltable>
+					<tgroup cols="1">
+					  <tbody>
+						<row>
+						  <entry>
+							<programlisting>— ¶ —————————————————————
+
+<token>Application Folder</token>
+|<token>&lt;segment 1879 ¶></token>
+
+— ¶ —————————————————————
+</programlisting></entry>
+						</row>
+					  </tbody>
+					</tgroup>
+				  </informaltable>
+				</para>
+				</entry>
+                <entry><para>
+				  <informaltable>
+					<tgroup cols="1">
+					  <tbody>
+						<row>
+						  <entry>
+							<programlisting>1. <token>Top</token> Folder
+Dossier racine
+&lt;50/50/66% Orphan segments (+1 more)&gt;</programlisting>
+<programlisting>2. Configuration Folder
 Dossier de configuration
-&lt;50/50/66% &gt;</programlisting>
+&lt;50/50/66% &gt;</programlisting></entry>
+						</row>
+					  </tbody>
+					</tgroup>
+				  </informaltable>
+				</para>
+				</entry>
+			  </row>
+			</tbody>
+		  </tgroup>
+		</informaltable>
 	  </para>
 	</example>
 
-    <para>The selected fuzzy match is highlighted in bold. Words missing
-    from the segment you are translating are shown in blue, and adjacent words
-    in green.</para>
+    <para>The selected fuzzy match is highlighted in <emphasis
+    role="bold">bold</emphasis>. Words missing from the segment you are
+    translating are shown in <emphasis role="bold">blue</emphasis>, and adjacent
+    parts in <emphasis role="bold">green</emphasis> (when the adjacent part is a
+    space, as above, the part is left uncolored).</para>
 
     <para>The match also displays three matching percentages.</para>
 
@@ -754,18 +798,25 @@ Dossier de configuration
 
 	<itemizedlist>
       <listitem>
-        <para>Percentage calculated with stemming based on the source language
-        tokenizer, and ignoring tags and numbers (generally the highest).</para>
+        <para>Percentage calculated <emphasis role="bold">with
+        stemming</emphasis> based on the source language tokenizer, and
+        <emphasis role="bold">ignoring tags and numbers</emphasis> (generally
+        the highest).</para>
       </listitem>
 
       <listitem>
-        <para>Percentage calculated without stemming, while still ignoring tags
-        and numbers (generally slightly lower).</para>
+        <para>Percentage calculated <emphasis role="bold">without
+        stemming</emphasis>, while still <emphasis role="bold">ignoring tags and
+        numbers</emphasis> (generally slightly lower).</para>
       </listitem>
 
       <listitem>
-        <para>Percentage calculated on the entire text, including tags and
-        numbers (generally the lowest).</para>
+        <para>Percentage calculated on <emphasis role="bold">the entire text,
+        including tags and numbers</emphasis> (generally the lowest).</para>
+		<note>
+		  <para>If the segment contains only numbers or symbols, this percentage
+		  will be the highest.</para>
+		</note>
       </listitem>
     </itemizedlist>
   

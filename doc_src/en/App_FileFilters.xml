@@ -65,15 +65,15 @@
 	  
 	<variablelist>
 	  <varlistentry>
-		<term>Remove leading and trailing tags</term>
+		<term>Hide leading and trailing tags</term>
 		<listitem>
 		  <para>Leading and trailing tags are generally required by OmegaT to
-		  properly recreate the translated segment. Removing them from the
+		  properly recreate the translated segment. Hiding them from the
 		  translatable contents ensures that you will not erase or modify them
 		  by mistake.</para>
 
-		  <para>If you keep the leading and trailing tags, make sure that they
-		  are leading and trailing as well in the translation.</para>
+		  <para>If you keep the leading and trailing tags, make sure you also
+		  include them in the translated text.</para>
 		</listitem>
 	  </varlistentry>
 
@@ -630,13 +630,13 @@
 			  </listitem>
 			</varlistentry>
 			<varlistentry>
-			  <term>Remove HTML comments in translated file</term>
+			  <term>Remove HTML comments</term>
 			  <listitem>
-				<para>Comments within an HTML file are generally addressed to
-				developers.</para>
+				<para>Comments in an HTML file are generally addressed to
+				developers. Use this option to remove them. If unchecked, the comments are displayed as tags.</para>
 
 				<para>Text in HTML comments (between <literal>&lt;!--</literal>
-				and <literal>--&gt;</literal>) will not be copied into the
+				and <literal>--&gt;</literal>) are not copied into the
 				translated document.</para>
 			  </listitem>
 			</varlistentry>
@@ -652,7 +652,7 @@
 			  <term>Remove untranslated strings in the target files</term>
 			  <listitem>
 				<para>Having untranslated contents in the translated files
-				sometimes create compatibility issues.</para>
+				sometimes creates compatibility issues.</para>
 			  </listitem>
 			</varlistentry>
 		  </variablelist>
@@ -667,7 +667,7 @@
 			  <term>Remove untranslated strings in the target files</term>
 			  <listitem>
 				  <para>Having untranslated contents in the translated files
-				  sometimes create compatibility issues.</para>
+				  sometimes creates compatibility issues.</para>
 			  </listitem>
 			</varlistentry>
 		  </variablelist>

@@ -8,6 +8,7 @@
                2014 Manfred Martin
                2015 Didier Briel
                2017 Briac Pilpre
+               2023 Hiroshi Miura
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -48,7 +49,7 @@ import org.omegat.util.OStrings;
  * @author Manfred Martin
  * @author Briac Pilpre
  */
-public abstract class AbstractMyMemoryTranslate extends BaseTranslate {
+public abstract class AbstractMyMemoryTranslate extends BaseCachedTranslate {
 
     private static final String MYMEMORY_API_EMAIL = "mymemory.api.email";
     private static final String MYMEMORY_API_KEY = "mymemory.api.key";

@@ -53,6 +53,7 @@ import javax.swing.Timer;
 import javax.swing.WindowConstants;
 import javax.swing.text.JTextComponent;
 
+import org.apache.commons.lang.WordUtils;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.DataUtils;
@@ -461,9 +462,13 @@ public class MainWindow extends JFrame implements IMainWindow {
             }
 
             statusLabel.setText(msg);
-            String fulltext = msg;
+            StringBuilder fulltext = new StringBuilder(msg);
             if (ex != null) {
-                fulltext += "\n" + ex.toString();
+                fulltext.append("\n");
+                for (String s : ex.toString().split("\\R")) {
+                    fulltext.append(WordUtils.wrap(s, 150, "\n    ", true));
+                    fulltext.append("\n");
+                }
             }
             JOptionPane.showMessageDialog(MainWindow.this, fulltext, OStrings.getString("TF_ERROR"),
                     JOptionPane.ERROR_MESSAGE);

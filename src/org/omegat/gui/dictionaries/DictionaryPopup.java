@@ -27,9 +27,12 @@ package org.omegat.gui.dictionaries;
 
 import org.omegat.core.Core;
 import org.omegat.core.data.SourceTextEntry;
+import org.omegat.gui.editor.EditorPopups;
 import org.omegat.gui.editor.IPopupMenuConstructor;
 import org.omegat.gui.editor.SegmentBuilder;
 import org.omegat.util.OStrings;
+
+import org.openide.awt.Mnemonics;
 
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
@@ -50,7 +53,7 @@ public class DictionaryPopup implements IPopupMenuConstructor {
         }
 
         JMenuItem searchMenuItem = new JMenuItem();
-        searchMenuItem.setText(OStrings.getString("TF_MENU_EDIT_SEARCH_DICTIONARY"));
+        searchMenuItem.setText(Mnemonics.removeMnemonics(OStrings.getString("TF_MENU_EDIT_SEARCH_DICTIONARY")));
         searchMenuItem.addActionListener(e -> Core.getDictionaries().searchText(searchedText));
         menu.add(searchMenuItem);
         menu.addSeparator();

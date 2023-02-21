@@ -2,8 +2,8 @@
  OmegaT 5.8.0
 ----------------------------------------------------------------------
    4 Removed features
-  36 Enhancements
-  44 Bug fixes
+  37 Enhancements
+  45 Bug fixes
   9 Localization updates
 ----------------------------------------------------------------------
 5.8.0 vs 5.7.1
@@ -28,6 +28,9 @@
   See Azure Translate V2/V3 Plugin project: https://github.com/omegat-org/azure-translate-plugin
 
   Implemented requests:
+
+  - Help user to copy error message to clipboard
+  https://sourceforge.net/p/omegat/feature-requests/1683/
 
   - Can share authentication between Git or SVN repositories 
 which are in the same server
@@ -144,6 +147,9 @@ which are in the same server
   https://github.com/omegat-org/omegat/pull/122
 
   Bug fixes:
+
+  - Wrap long lines in error messages
+  https://sourceforge.net/p/omegat/bugs/1145
 
   - Color the fuzzy matches from /tm/mt
   https://sourceforge.net/p/omegat/bugs/1144

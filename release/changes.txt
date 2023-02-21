@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
    4 Removed features
   36 Enhancements
-  43 Bug fixes
+  44 Bug fixes
   9 Localization updates
 ----------------------------------------------------------------------
 5.8.0 vs 5.7.1
@@ -144,6 +144,9 @@ which are in the same server
   https://github.com/omegat-org/omegat/pull/122
 
   Bug fixes:
+
+  - Color the fuzzy matches from /tm/mt
+  https://sourceforge.net/p/omegat/bugs/1144
 
   - BidiMarker does not respect disable menu action
   https://sourceforge.net/p/omegat/bugs/1143/

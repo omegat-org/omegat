@@ -75,6 +75,9 @@ public class YandexCloudTranslate extends BaseCachedTranslate {
     private static final String PROPERTY_KEEP_TAGS = "yandex.cloud.keep-tags";
 
     private static final int MAX_GLOSSARY_TERMS = 50;
+
+    // API limit
+    // see https://cloud.yandex.com/en/docs/translate/concepts/limits
     private static final int MAX_TEXT_LENGTH = 10000;
     private static final int IAM_TOKEN_TTL_SECONDS = 3600; // Recommended value
 

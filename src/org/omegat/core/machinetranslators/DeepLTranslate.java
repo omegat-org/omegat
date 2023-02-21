@@ -74,6 +74,11 @@ public class DeepLTranslate extends BaseCachedTranslate {
     protected final String deepLUrl;
 
     private final static int MAX_TEXT_BYTES = 128 * 1024; // Max limit is 128KiB
+    protected static final String DEEPL_URL = "https://api.deepl.com/v1/translate";
+    // See https://support.deepl.com/hc/en-us/articles/4405712799250-Character-count-for-translation-within
+    // -applications
+    // max application limit is 5000 characters.
+    private final static int MAX_TEXT_LENGTH = 5000;
 
     public DeepLTranslate() {
         deepLUrl = DEEPL_V1_URL;
@@ -106,8 +111,8 @@ public class DeepLTranslate extends BaseCachedTranslate {
     }
 
     @Override
-    protected int getMaxTextBytes() {
-        return MAX_TEXT_BYTES;
+    protected int getMaxTextLength() {
+        return MAX_TEXT_LENGTH;
     }
 
     @Override

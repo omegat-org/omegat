@@ -145,6 +145,9 @@ which are in the same server
 
   Bug fixes:
 
+  - Wrap long lines in error messages
+  https://sourceforge.net/p/omegat/bugs/1145
+
   - Color the fuzzy matches from /tm/mt
   https://sourceforge.net/p/omegat/bugs/1144
 

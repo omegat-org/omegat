@@ -1,71 +1,170 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="howto.useteamproject">
-  <title>チームプロジェクトを使用する</title>
+<section id="how.to.use.team.project">
+  <title id="how.to.use.team.project.title">チームプロジェクトを使用する</title>
 
-  <para>OmegaTチームプロジェクトは、最初にサーバー上に<link linkend="howto.setupteamproject">セットアップ</link>する必要があります。</para>
+  <para>チームプロジェクトでは、プロジェクトメンバー間の同期メカニズムを使用します。</para>
 
-  <para>チームプロジェクトを初めて使用する場合は、プロジェクトマネージャの指示に従ってください。</para>
+  <para>OmegaTチームプロジェクトがサーバにインストールされると、管理者は、プロジェクトの場所を示すURLまたは<filename>OmegaT.project</filename>ファイルなど、プロジェクトにアクセスするために必要な情報をメンバーに送信します。</para>
 
-  <para>プロジェクトを開くと、次の点を除いて、チームではないプロジェクトと同様に翻訳をします。</para>
+  <para>ダウンロードされた後は、プロジェクトは自分の環境で開始されて、サーバと同期するようになります。</para>
 
-  <para><emphasis role="bold">自動保存</emphasis></para>
+  <para>リポジトリ認証情報は<link linkend="configuration.folder.extra.contents.repositories" endterm="configuration.folder.extra.contents.repositories.title"/>ファイルに保存され、必要に応じて<link linkend="dialog.preferences.team.title.repository.credentials" endterm="dialog.preferences.team.title.repository.credentials.title"/>環境設定で削除できます。</para>
 
-  <para>3分ごとに(デフォルトで)、ローカルプロジェクトはリモートリポジトリと同期され、プロジェクトマネージャや他の翻訳者はその期間中に追加された翻訳を表示して使用できます。</para>
+  <para>同期はデフォルトではで3分ごとに行われるため、同じタイミングで作業していると、別のメンバーによって既に翻訳され、まだ同期されて取得されていない分節を、同時に翻訳したり修正することがあります。その場合、どちらの訳文を使うのか、選択する必要があります。</para>
 
-  <para>3分の間隔は、<link linkend="dialogs.preferences.savingandoutput"><menuchoice><guimenu>[設定]</guimenu><guimenuitem>[環境設定]</guimenuitem><guimenuitem>[保存と訳文ファイル生成]</guimenuitem></menuchoice></link>で変更できます。</para>
-
-  <para><emphasis role="bold">同期ファイル</emphasis></para>
-
-  <para>プロジェクトが自動的に保存されると同時に、2つのファイルのみが実際に同期されます。プロジェクトを開いたとき、閉じたとき、再ロードされたときも同様に同期されます。</para>
-
-  <itemizedlist>
-    <listitem>
-      <para>omegat/project_save.tmx</para>
-    </listitem>
-
-    <listitem>
-      <para>glossary/glossary.txt</para>
-    </listitem>
-  </itemizedlist>
-
-  <para>他のすべてのファイルは、リモートリポジトリ内のファイルに置き換えられます。</para>
-
-  <para><emphasis role="bold">新しいソースファイルの追加</emphasis></para>
-
-  <para>新しいソースファイルを追加するには</para>
-
-  <para><orderedlist>
+  <para>チームのメンバーは、ファイルの翻訳とレビューを交代で行うこともできます。検索機能では、例えば、特定の人が翻訳したコンテンツや、特定の時間の後または前に翻訳されたコンテンツを編集ウィンドウにフィルターすることができます。</para>
+  
+  <variablelist>
+    <varlistentry>
+      <term>プロジェクトのダウンロード</term>
       <listitem>
-        <para>ファイルを<filename class="directory">source</filename>フォルダにコピーします。</para>
-      </listitem>
+		<orderedlist>
+		  <listitem>
+			<para>URLから</para>
+
+			<para><link endterm="menus.project.title" linkend="menus.project"/><link endterm="menus.project.download.team.project.title" linkend="menus.project.download.team.project"/>を使用して、<guilabel>チームプロジェクトをダウンロード</guilabel>ダイアログを表示します。</para>
+
+			<para>ダイアログの上部にある<guilabel>リポジトリURL:</guilabel>欄に、チームプロジェクト管理者から提供されたURLを入力し、<guilabel>新規ローカルプロジェクトフォルダー:</guilabel>欄に、プロジェクトのフォルダーを指定します。プロジェクト管理者が、プロジェクト特有のブランチ名を指示していない限り、<guilabel>標準ブランチ</guilabel>設定はオンのままにします。</para>
+		  </listitem>
+
+		  <listitem>
+			<para><filename>OmegaT.project</filename>ファイルから</para>
+
+			<para><filename>OmegaT.project</filename>ファイルを空のフォルダーに配置し、OmegaTで開きます。プロジェクトは、そのファイルを含むフォルダーに自動的にダウンロードされます。</para>
+		  </listitem>
+		</orderedlist>
+
+		<note>
+		  <para>通常2つの主要な認証タイプである、<emphasis>ユーザー名/パスワード</emphasis>の入力か、<emphasis>SSH</emphasis>鍵認証のいずれかを接続に使用します。</para>
+
+		  <para>サーバがユーザー名/パスワード認証に依存している場合に、プロジェクトを最初にダウンロードするときか、またはプロセスの後半でユーザー名とパスワードを要求された際に、<guilabel>認証</guilabel>ダイアログを表示して入力を依頼します。明示的に削除しない限り、OmegaTはその特定のプロジェクトの認証情報を記憶します。詳細の<link linkend="dialog.preferences.team.title.repository.credentials" endterm="dialog.preferences.team.title.repository.credentials.title"/>環境設定を参照してください。</para>
+
+		  <para>サーバがSSH認証を使用している場合は、プロジェクトをダウンロードする前に、そのサーバに接続できるようにユーザのSSH設定(通常ホームディレクトの.ssh/configファイル)を更新してください。そうしないと、認証エラーが発生し、プロジェクトは読み込みに失敗します。</para>
+
+		  <para>同じサーバで複数のプロジェクトを使用する場合、資格情報はそのサーバに対して1回だけ要求されます。</para>
+		</note>
+	  </listitem>
+	</varlistentry>
+
+    <varlistentry>
+      <term>チーム同期</term>
 
       <listitem>
-        <para> <menuchoice> <guimenu>プロジェクト</guimenu> <guimenuitem>原文ファイルをコミット</guimenuitem> </menuchoice>を使用します</para>
+        <para>プロジェクトを同期すると、チームメンバーによって作成された翻訳によって、自分のプロジェクトが更新されます。次の2つのファイルの内容だけが同期されます：</para>
+
+		<itemizedlist>
+          <listitem>
+			<para><filename>project.save</filename></para>
+          </listitem>
+
+          <listitem>
+			<para><filename>glossary.txt</filename></para>
+          </listitem>
+        </itemizedlist>
+
+        <para>同期の際には、<filename>omegat.project</filename>(下記参照)を除き、他のすべてのローカルファイルはリモートOmegaTのバージョンで上書きされます。</para>
+
+        <para>OmegaTチームプロジェクトを開いたり、再ロードしたり、閉じたり、保存したりすると、チームプロジェクトが同期されます。つまり、自動保存機能は、<link endterm="dialog.preferences.saving.and.output.interval.title" linkend="dialog.preferences.saving.and.output.interval"/>設定で指定された時間間隔で、サーバのバージョンと同期させます。</para>
       </listitem>
-    </orderedlist>既存のソースファイルは変更できますが、コミット操作は、自動保存の前、およびプロジェクトを再ロードまたは閉じる前に実行する必要があります。</para>
+    </varlistentry>
 
-  <para><emphasis role="bold">ソースファイルの削除</emphasis></para>
+    <varlistentry>
+      <term>チームプロジェクトの設定</term>
 
-  <para>ファイルは、プロジェクトマネージャが削除する必要があります。</para>
+      <listitem>
+        <para>通常のローカルプロジェクトと同様に、チームプロジェクトの構成は、コンテンツ<filename>OmegaT.project</filename>ファイルと、プロジェクト固有のフィルタまたはセグメント化ルールのための特別なファイルのオプションの使用によって定義されます。</para>
 
-  <para><emphasis role="bold">分節化規則またはファイルフィルタの変更</emphasis></para>
+        <para>プロジェクトが初めてダウンロードされるとき、OmegaTは<filename>OmegaT.project</filename>ファイルをサーバから取得します。このファイルでは、次のパラメータを定義します。</para>
 
-  <para>プロジェクトパラメータは、プロジェクトマネージャが変更する必要があります。</para>
+        <itemizedlist>
+          <listitem>
+            <para><emphasis>基本プロジェクト構成:</emphasis>原文ファイル、原文言語、訳文言語、トークナイザー、およびプロジェクトフォルダー構造の持ち方。</para>
 
-  <para><emphasis role="bold">オフラインでの作業</emphasis></para>
+			<para>チームプロジェクトでは、ローカルのプロジェクトの基本プロジェクト構成は、プロジェクト管理者が最初に設定したサーバの設定によって常に上書きされます。</para>
+          </listitem>
 
-  <para>チームプロジェクトは、オフラインで開いて翻訳できます。すべての変更は、次に接続が使用可能になったときに同期されます。</para>
+          <listitem>
+            <para><emphasis>リポジトリマッピング</emphasis></para>
 
-  <para>オフラインで作業するには：</para>
+            <para>詳細については、 <link linkend="how.to.setup.team.project.mapping.parameters" endterm="how.to.setup.team.project.mapping.parameters.title"/>を参照してください。</para>
 
-  <itemizedlist>
-    <listitem>
-      <para>プロジェクトを開く前にネットワークから切断します。</para>
-    </listitem>
+            <itemizedlist>
+              <listitem>
+                <para>リモートプロジェクトにカスタムマッピングが定義されていない場合で、ローカルにマッピング定義が追加されている場合は、サーバの設定に影響を与えることなく、ローカルでの設定を保持することができます。</para>
+              </listitem>
 
-    <listitem>
-      <para>または、コマンドラインで<command>--no-team</command>オプションを使用してプロジェクトを開きます。</para>
-    </listitem>
-  </itemizedlist>
+              <listitem>
+                <para>リモートプロジェクトにカスタムマッピングが定義されていて、ローカルプロジェクトに含まれていない場合は、サーバで定義されているマッピングがローカルのプロジェクトに適用されます。</para>
+              </listitem>
+
+              <listitem>
+                <para>リモートプロジェクトでURLプロトコル(例えばhttps)が指定されている場合で、別のプロトコル(例えばssh)を使用してダウンロードする場合に、ローカルでの指定が保持されます。</para>
+
+                <para>たとえば、多くの商業ホスティングサービスにおいて、SSH +Gitまたはhttpsプロトコルを使用して同じリポジトリにアクセスすることができます。OmegaTは、ユーザが指定したプロトコルを尊重します。</para>
+              </listitem>
+
+              <listitem>
+                <para>プロジェクト管理者から提供された<filename>OmegaT.project</filename>ファイルを使用してリモートプロジェクトを最初にダウンロードする時は、OmegaTはそのファイル内のマッピング(定義されている場合)を使用します。</para>
+              </listitem>
+
+              <listitem>
+                <para><filename>OmegaT.project</filename>のリモート版とローカル版の間に競合があり、OmegaTによってローカル側が更新された場合に、OmegaTは<filename>OmegaT.project.YYYYMMDDhhmm.bak</filename>というバックアップファイルを作成します。バックアップファイルは少なくとも10回分保持され、古いバックアップは自動的に削除されます。</para>
+              </listitem>
+            </itemizedlist>
+		  </listitem>
+		</itemizedlist>
+
+        <warning>
+          <para>プロジェクトが同期されると、ローカルのプロジェクト設定ファイルに対する変更は、サーバのバージョンによって上書きされることに注意してください。</para>
+        </warning>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>原文ファイル</term>
+
+      <listitem>
+        <warning>
+		  <para><link endterm="menus.project.title" linkend="menus.project"/><link endterm="menus.project.commit.source.files.title" linkend="menus.project.commit.source.files"/>は、プロジェクト管理者のみが使用できます。</para>
+		</warning>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>訳文ファイル</term>
+
+      <listitem>
+        <para>訳文ファイルを生成した後、プロジェクト管理者から要求された場合は、<link endterm="menus.project.title" linkend="menus.project"/><link endterm="menus.project.commit.target.files.title" linkend="menus.project.commit.target.files"/>を使用してサーバに追加します。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>ファイルを削除</term>
+
+      <listitem>
+        <para>チームプロジェクトのファイルは、OmegaTまたはローカルのファイルシステムから削除できません。これらは、次にプロジェクトを同期するときに復元されます。削除タスクは通常、プロジェクト管理者によって実行されます。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>オフラインでの作業</term>
+
+      <listitem>
+        <para>チームプロジェクトをオフラインで開いて、作業することができます。すべての変更は、次に接続が使用可能になったときに同期されます。</para>
+
+        <para>オフラインで作業するには、次の2つの方法があります：</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>プロジェクトを開く前に、ネットワークから切断します。</para>
+          </listitem>
+
+          <listitem>
+            <para><parameter>--no-team</parameter>設定を使用して、コマンドラインからプロジェクトを開きます。詳細は<link linkend="launch.with.command.line" endterm="launch.with.command.line.title"/>項をご覧ください。</para>
+          </listitem>
+        </itemizedlist>
+      </listitem>
+    </varlistentry>
+  </variablelist>
 </section>

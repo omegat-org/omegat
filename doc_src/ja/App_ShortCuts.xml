@@ -1,0 +1,1440 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="app.shortcuts">
+  <title id="app.shortcuts.title">OmegaTのショートカット</title>
+
+  <section id="app.shortcuts.description">
+    <title id="app.shortcuts.description.title">説明</title>
+
+    <para>OmegaTでは、通常の機能にアクセスするのに、ボタンをクリックすることがありません。 メニューから機能にアクセスでき、多くの機能にはデフォルトのショートカットがあります。</para>
+  
+    <para>最も頻繁に使用されるショートカットについては、OmegaTを使用して作業を開始すればすぐに習得できます。ショートカットは各メニュー項目の横に表示され、ソフトウェアを使用するたびに新しいショートカットを学習できます。</para>
+
+    <para>OmegaTのほとんどのショートカットはカスタマイズできます。詳細は<link endterm="app.shortcuts.customization.title" linkend="app.shortcuts.customization"/>項をご覧ください。</para>
+
+    <para>OmegaT は、JRE（Java Runtime Environment）がインストールされた、あるいはインストールできる、すべてのオペレーティングシステムl(Windowsや macOS、LinuxなどメジャーなOS)上で動きます。ショートカットを構成する修飾キーは、OSによって多少異なります。読みやすくするために、修飾キーに次の表記法を採用しています。</para>
+	
+    <table id="app.shortcut.description">
+      <title id="app.shortcut.description.title">修飾キー識別子</title>
+
+      <tgroup cols="3">
+        <thead>
+          <row>
+            <entry>Linux/Windows</entry>
+            <entry>キー識別子</entry>
+            <entry>macOS</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry><keycap>Shift</keycap></entry>
+            <entry><keycap>S</keycap></entry>
+            <entry><keycap>shift</keycap> または <keycap>⇧</keycap></entry>
+          </row>
+
+          <row>
+            <entry><keycap>Ctrl</keycap> or <keycap>Control</keycap></entry>
+            <entry><keycap>C</keycap></entry>
+            <entry><keycap>command</keycap> または <keycap>⌘</keycap></entry>
+          </row>
+
+          <row>
+            <entry><keycap>Alt</keycap></entry>
+            <entry><keycap>A</keycap></entry>
+            <entry><keycap>alt / option</keycap> または <keycap>⌥</keycap></entry>
+          </row>
+
+          <row>
+            <entry/>
+            <entry><keycap>Ctrl</keycap></entry>
+            <entry><keycap>control</keycap> または <keycap>⌃</keycap></entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+        
+    <para>上記の<emphasis role="bold">キー識別子</emphasis>を使用すると、すべてのショートカットに対して複数の表記をリストする必要がなくなります。</para>
+
+    <example id="example.avoid.listing.multiple.notations">
+	  <title id="example.avoid.listing.multiple.notations.title">複数の表記をリストすることを避ける方法::</title>
+	  <para>Windows と Linuxでは: <keycombo><keycap>Ctrl</keycap><keycap>Shift</keycap><keycap>N</keycap></keycombo></para>
+
+	  <para>macOSでは: <keycombo><keycap>Shift</keycap><keycap>Command</keycap><keycap>N</keycap></keycombo></para>
+
+	  <para>この説明書での表記は: <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>N</keycap></keycombo></para>
+	</example>
+  </section>
+  
+  <section id="app.shortcuts.customization">
+    <title id="app.shortcuts.customization.title">カスタマイズ</title>
+
+    <para>OmegaTは、<link linkend="menus.project" endterm="menus.project.title"/>、<link linkend="menus.edit" endterm="menus.edit.title"/>、および<link linkend="menus.goto" endterm="menus.goto.title"/>メニューの機能と、<link linkend="panes.editor" endterm="panes.editor.title"/>ウィンドウの機能の大多数にショートカットを割り当てています。ほとんどの機能のショートカットを追加または変更することもできます。</para>
+
+	<para>そのためには、適切なショートカット定義ファイルをOmegaT構成フォルダーに置く必要があります。詳細は、付録の <link endterm="configuration.folder.title" linkend="configuration.folder"/> をご覧ください。</para>
+
+    <para>2つのショートカット定義ファイルがあります。</para>
+
+	<variablelist>
+      <varlistentry>
+        <term id="MainMenuShortcuts.properties">MainMenuShortcuts.properties</term>
+        <listitem>
+          <para>メニューからアクセスできる機能のショートカット定義です。</para>
+        </listitem>
+      </varlistentry>
+
+	  <varlistentry>
+        <term id="EditorShortcuts.properties">EditorShortcuts.properties</term>
+        <listitem><para>編集ウィンドウのショートカット定義ファイルです。</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <para>新しいショートカットを有効にするには、ショートカット定義ファイルが変更された後でOmegaTを再始動する必要があります。</para>
+
+    <note>
+      <para>SourceforgeのOmegaTの開発サイトからデフォルトのOmegaTショートカットファイルを<link linkend="configuration.folder">構成フォルダ</link>にコピーし、必要に応じて変更することができます。</para>
+
+      <variablelist>
+        <varlistentry>
+          <term>Windows や Linux のデフォルトのショートカットキー</term>
+          <listitem>
+            <itemizedlist>
+              <listitem>
+                <para><ulink url="https://github.com/omegat-org/omegat/tree/master/src/org/omegat/gui/main/MainMenuShortcuts.properties">MainMenuShortcuts.properties</ulink></para>
+              </listitem>
+
+              <listitem>
+                <para><ulink url="https://github.com/omegat-org/omegat/tree/master/src/org/omegat/gui/main/EditorShortcuts.properties">EditorShortcuts.properties</ulink></para>
+              </listitem>
+            </itemizedlist>
+          </listitem>
+        </varlistentry>
+		
+        <varlistentry><term>macOSのデフォルトのショートカット</term>
+          <listitem>
+            <itemizedlist>
+              <listitem>
+                <para><ulink url="https://github.com/omegat-org/omegat/tree/master/src/org/omegat/gui/main/MainMenuShortcuts.mac.properties">MainMenuShortcuts.mac.properties</ulink></para>
+              </listitem>
+
+              <listitem>
+                <para><ulink url="https://github.com/omegat-org/omegat/tree/master/src/org/omegat/gui/main/EditorShortcuts.mac.properties">EditorShortcuts.mac.properties</ulink></para>
+              </listitem>
+            </itemizedlist>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+
+      <para>The macOS files must be renamed <link linkend="MainMenuShortcuts.properties" endterm="MainMenuShortcuts.properties"/> and <link linkend="EditorShortcuts.properties" endterm="EditorShortcuts.properties"/> for OmegaT to recognize
+      them.</para>
+    </note>
+
+    <para>次の項では、ショートカット定義ファイルで使用される構文について説明し、変更例を示します。</para>
+  </section>
+
+  <section id="app.shortcuts.syntax">
+    <title id="app.shortcuts.syntax.title">構文</title>
+
+    <para>ショートカット定義ファイルの基本的な構文は次のとおりです。</para>
+
+    <para><code>機能コード=ショートカット</code></para>
+
+	<para>以下の<link linkend="app.shortcuts.lists" endterm="app.shortcuts.lists.title"/>項の表を使用して、<code>機能コード</code>の値を確認してください。</para>
+    
+    <para><code>ショートカット</code> は、ユーザーが打鍵するキーの組み合わせを意味します。次の形式になります。</para>
+    
+    <itemizedlist>
+      <listitem>
+        <para>0以上の<code>修飾子</code></para>
+      </listitem>
+    
+      <listitem>
+        <para>0または1が続く<code>イベント</code></para>
+      </listitem>
+    
+      <listitem>
+        <para>1 <code>key</code>が続きます</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>ここで <code>修飾子</code> は次のいずれかです: <literal>shift</literal>、 <literal>ctrl</literal>、 <literal>meta</literal>、 <literal>alt</literal>、<literal>altGraph</literal></para>
+
+        <note>
+          <para><literal>meta</literal>は、WindowsまたはLinuxシステムのほとんどのキーボードにあるWindowsロゴのキーと、macOSの<literal>コマンド</literal>を指します。</para>
+
+          <para><literal>altGraph</literal>は、2つの<emphasis>Alt</emphasis>キーを持つキーボードのスペースバーの右側にある<emphasis>Alt</emphasis>キーを指します。</para>
+        </note>
+      </listitem>
+
+      <listitem>
+        <para><code>イベント</code>は、<option>入力された</option>、<option>押された</option>、<option>解放された</option>です。</para>
+      </listitem>
+
+      <listitem>
+        <para><code>key</code>は、キーボードで使用可能な任意のキーです。<link linkend="app.shortcuts.lists.function.codes.editor.table">さまざまな編集ショートカットを示す表</link>を参照して、<literal>Home</literal>、<literal>Page Up</literal>、矢印キーなどのキーの値を確認できます。</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>空行とコメントを追加してリストを整理し、読みやすくすることができます。コメント行は<code>#</code>で始まり、それ以降はすべてアプリケーションによって無視されます。</para>
+
+    <para>ショートカットを変更する最も簡単な方法は、前述のように、デフォルトのファイルのコピーを<link linkend="configuration.folder">構成フォルダー</link>にダウンロードし、そこで必要な変更を行うことです。</para>
+    
+    <example id="example.shortcut.modification">
+      <title id="example.shortcut.modification.title">ショートカットの変更</title>
+
+      <para>WindowsとLinuxでは、<link linkend="menus.project.close">プロジェクトを閉じる</link>デフォルトのショートカットは、次のように定義されています:</para>
+
+	  <para><code>projectCloseMenuItem=ctrl shift W</code></para>
+
+      <para>macOS では次のようになります:</para>
+	  
+	  <para><code>projectCloseMenuItem=meta shift W</code></para>
+
+      <para>ただし、ショートカットから<keycap>S</keycap>キーを削除して、<keycombo><keycap>Ctrl</keycap><keycap>W</keycap></keycombo>(または<keycombo><keycap>Command</keycap><keycap>W</keycap></keycombo>(macOSの場合))して、他のアプリケーションで使用するショートカットと一致させることもできます。</para>
+
+	  <para>そのためにWindowsとLinuxでは、<filename>MainMenuShortcuts.properties</filename>ファイルを次のように変更します。</para>
+
+	  <para><code>projectCloseMenuItem=ctrl W</code></para>
+
+	  <para>macOSでは同様に:</para>
+
+      <para><code>projectCloseMenuItem=meta W</code></para>
+    </example>
+
+    <example id="example.shortcut.addition">
+      <title id="example.shortcut.addition.title">ショートカットの追加</title>
+
+      <para>言語ペアが<link linkend="menus.edit.create.alternative.translation">代替翻訳</link>を頻繁に使用する必要がある場合に、デフォルトのショートカットが無いため、ショートカットを割り当てたいと思うでしょう。</para>
+
+      <para>以下の手順は、<keycombo><keycap>Alt</keycap><keycap>X</keycap></keycombo>ショートカットを<link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.create.alternative.translation" endterm="menus.edit.create.alternative.translation.title"/>メニュー項目に割り当てる方法を示しています。</para>
+	  
+      <orderedlist>
+        <listitem>
+          <para><link linkend="configuration.folder">構成フォルダー</link>にコピーした<filename>MainMenuShortcuts.properties</filename>をテキストエディターで開きます。</para>
+        </listitem>
+
+		<listitem>
+          <para>以下の<link linkend="app.shortcuts.lists.function.codes.edit.menu.table">編集メニュー表</link>に示すように、<guimenuitem>[例外訳文の作成]</guimenuitem>の機能コードは<code>editMultipleAlternate</code>です。</para>
+
+          <para>ファイル内でそのコードを検索すると、次の行が表示されます。</para>
+		  
+          <para><code>#	editMultipleAlternate=</code></para>
+        </listitem>
+
+		<listitem>
+            <para>この行は現在コメントです。行の先頭の<code>#</code>を削除して、OmegaTがショートカットを認識できるようにし、行の最後の<code>=</code>記号の後に<option>alt X</option>を追加します。</para>
+			
+            <para><code>editMultipleAlternate=alt X</code></para>
+        </listitem>
+
+		<listitem>
+            <para>ファイルを保存して閉じます。次にOmegaTを起動すると、新しいショートカットがアクティブになり、メニューの機能名の横に表示されます。</para>
+          </listitem>
+        </orderedlist>
+    </example>
+
+    <para>変更が完了したら、ファイルを保存します。OmegaTが開いている場合は、変更を有効にするために再起動する必要があります。</para>
+    <para>変更または追加したショートカットが、変更したメニュー項目の横に表示されます。他の機能やシステム全体のショートカットと競合しない限り、これらはOmegaTで利用できるようになります。</para>
+
+    <para>次の項には、機能コードと、OmegaTの各メニューまたはデフォルトの関数に対応する編集ショートカットを示す表があります。</para>
+  </section>
+
+  
+
+  <section id="app.shortcuts.lists">
+    <title id="app.shortcuts.lists.title">機能とコードのリスト</title>
+    <section id="app.shortcuts.lists.function.codes.menus">
+      <title id="app.shortcuts.lists.function.codes.menus.title">メニュー機能</title>
+
+      <para><filename>MainMenuShortcuts.properties</filename>ファイルで変更できる機能のデフォルト値を以下の表に示します。括弧内のショートカットは、<filename>EditorShortcuts.properties</filename>にある同じ機能の代替です。</para>
+
+      <table id="app.shortcuts.lists.function.codes.project.menu.table">
+        <title id="app.shortcuts.lists.function.codes.project.menu.table.title">プロジェクトメニュー</title>
+
+        <tgroup cols="4" colsep="1">
+          <colspec align="left" colname="1" colnum="1"/>
+          <colspec align="left" colname="2" colnum="2"/>
+          <colspec align="center" colname="3" colnum="3"/>
+          <colspec align="center" colname="4" colnum="4"/>
+
+          <thead>
+            <row>
+              <entry>メニュー項目</entry>
+              <entry>機能コード</entry>
+              <entry>Windows/Linux</entry>
+              <entry>macOS</entry>
+            </row>
+          </thead>
+
+          <tbody>
+            <row>
+              <entry>新規作成...</entry>
+              <entry>projectNewMenuItem</entry>
+              <entry>ctrl shift N</entry>
+              <entry>meta shift N</entry>
+            </row>
+
+            <row>
+              <entry>チームプロジェクトをダウンロード...</entry>
+              <entry>projectTeamNewMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>開く...</entry>
+              <entry>projectOpenMenuItem</entry>
+              <entry>ctrl O</entry>
+              <entry>meta O</entry>
+            </row>
+
+            <row>
+              <entry>最近使用したプロジェクト</entry>
+              <entry>projectOpenRecentMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>ファイルを追加...</entry>
+              <entry>projectImportMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>MediaWiki からの原文ファイル追加</entry>
+              <entry>projectWikiImportMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>再読み込み</entry>
+              <entry>projectReloadMenuItem</entry>
+              <entry namest="3" nameend="4">F5</entry>
+            </row>
+
+            <row>
+              <entry>閉じる</entry>
+              <entry>projectCloseMenuItem</entry>
+              <entry>ctrl shift W</entry>
+              <entry>meta shift W</entry>
+            </row>
+
+            <row>
+              <entry>保存</entry>
+              <entry>projectSaveMenuItem</entry>
+              <entry>ctrl S</entry>
+              <entry>meta S</entry>
+            </row>
+
+            <row>
+              <entry> 原文ファイルをコミット</entry>
+              <entry>projectCommitSourceFiles</entry>
+            </row>
+
+            <row>
+              <entry>訳文ファイルをコミット</entry>
+              <entry>projectCommitTargetFiles</entry>
+            </row>
+
+            <row>
+              <entry>訳文ファイルを生成</entry>
+              <entry>projectCompileMenuItem</entry>
+              <entry>ctrl D</entry>
+              <entry>meta D</entry>
+            </row>
+
+            <row>
+              <entry>現在の訳文ファイルのみ生成</entry>
+              <entry>projectSingleCompileMenuItem</entry>
+              <entry>ctrl shift D</entry>
+              <entry>meta shift D</entry>
+            </row>
+
+            <row>
+              <entry>プロジェクト設定...</entry>
+              <entry>projectEditMenuItem</entry>
+              <entry>ctrl E</entry>
+              <entry>meta E</entry>
+            </row>
+
+            <row>
+              <entry>原文ファイル...</entry>
+              <entry>viewFileListMenuItem</entry>
+              <entry>ctrl L</entry>
+              <entry>meta L</entry>
+            </row>
+
+            <row>
+              <entry>プロジェクト構成物/原文にアクセス</entry>
+              <entry>projectAccessRootMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>プロジェクト構成物/辞書にアクセス</entry>
+              <entry>projectAccessDictionaryMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>プロジェクト構成物/用語集にアクセス</entry>
+              <entry>projectAccessGlossaryMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>プロジェクト構成物/原文にアクセス</entry>
+              <entry>projectAccessSourceMenuItem </entry>
+            </row>
+
+            <row>
+              <entry>プロジェクト構成物/訳文にアクセス</entry>
+              <entry>projectAccessTargetMenuItem</entry>
+            </row>
+            
+            <row>
+              <entry>プロジェクト構成物/翻訳メモリにアクセス</entry>
+              <entry>projectAccessTMMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>プロジェクト構成物/エキスポート用翻訳メモリにアクセス</entry>
+              <entry>projectAccessExportTMMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>プロジェクト構成物/現在作業中の原文ファイルにアクセス</entry>
+              <entry>projectAccessCurrentSourceDocumentMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>プロジェクト構成物/現在作業中の訳文ファイルへアクセス</entry>
+              <entry>projectAccessCurrentTargetDocumentMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>プロジェクト構成物/更新可能な用語集にアクセス</entry>
+              <entry>projectAccessWriteableGlossaryMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>再起動</entry>
+              <entry>projectRestartMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>終了</entry>
+              <entry>projectExitMenuItem</entry>
+              <entry>ctrl Q</entry>
+              <entry>meta Q</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+
+      <table id="app.shortcuts.lists.function.codes.edit.menu.table">
+        <title id="app.shortcuts.lists.function.codes.edit.menu.table.title">編集メニュー</title>
+
+        <tgroup cols="4" colsep="1">
+          <colspec align="left" colname="1" colnum="1"/>
+          <colspec align="left" colname="2" colnum="2"/>
+          <colspec align="center" colname="3" colnum="3"/>
+          <colspec align="center" colname="4" colnum="4"/>
+
+          <thead>
+            <row>
+              <entry>メニュー項目</entry>
+              <entry>機能コード</entry>
+              <entry>Windows/Linux</entry>
+              <entry>macOS</entry>
+            </row>
+          </thead>
+
+          <tbody>
+            <row>
+              <entry>取り消す</entry>
+              <entry>editUndoMenuItem</entry>
+              <entry>ctrl Z</entry>
+              <entry>meta Z</entry>
+            </row>
+
+            <row>
+              <entry>やり直す</entry>
+              <entry>editRedoMenuItem</entry>
+              <entry>ctrl Y</entry>
+              <entry>meta Y</entry>
+            </row>
+
+            <row>
+              <entry>参考訳文または選択範囲によって置換</entry>
+              <entry>editOverwriteTranslationMenuItem</entry>
+              <entry>ctrl R</entry>
+              <entry>meta R</entry>
+            </row>
+
+            <row>
+              <entry>参考訳文または選択範囲を挿入</entry>
+              <entry>editInsertTranslationMenuItem</entry>
+              <entry>ctrl I</entry>
+              <entry>meta I</entry>
+            </row>
+
+            <row>
+              <entry>機械翻訳に置換</entry>
+              <entry>editOverwriteMachineTranslationMenuItem</entry>
+              <entry>ctrl M</entry>
+              <entry>meta M</entry>
+            </row>
+
+            <row>
+              <entry>原文に置換</entry>
+              <entry>editOverwriteSourceMenuItem</entry>
+              <entry>ctrl shift R</entry>
+              <entry>meta shift R</entry>
+            </row>
+
+            <row>
+              <entry>原文を挿入</entry>
+              <entry>editInsertSourceMenuItem</entry>
+              <entry>ctrl shift I</entry>
+              <entry>meta shift I</entry>
+            </row>
+
+            <row>
+              <entry>原文テキストを選択</entry>
+              <entry>editSelectSourceMenuItem</entry>
+              <entry>ctrl shift A</entry>
+              <entry>meta shift A</entry>
+            </row>
+
+            <row>
+              <entry>未使用の原文のタグを挿入</entry>
+              <entry>editTagPainterMenuItem</entry>
+              <entry>ctrl shift T</entry>
+              <entry>meta shift T</entry>
+            </row>
+
+            <row>
+              <entry>次の未使用のタグを挿入</entry>
+              <entry>editTagNextMissedMenuItem</entry>
+              <entry>ctrl T</entry>
+              <entry>meta T</entry>
+            </row>
+
+            <row>
+              <entry>選択領域を出力</entry>
+              <entry>editExportSelectionMenuItem</entry>
+              <entry>ctrl shift C</entry>
+              <entry>meta shift C</entry>
+            </row>
+
+            <row>
+              <entry>用語の追加</entry>
+              <entry>editCreateGlossaryEntryMenuItem</entry>
+              <entry>ctrl shift G</entry>
+              <entry>meta shift G</entry>
+            </row>
+
+            <row>
+              <entry>プロジェクトを検索...</entry>
+              <entry>editFindInProjectMenuItem</entry>
+              <entry>ctrl F</entry>
+              <entry>meta F</entry>
+            </row>
+
+            <row>
+              <entry>(最新の検索ウィンドウを呼びだす)</entry>
+              <entry>findInProjectReuseLastWindow</entry>
+              <entry>ctrl shift F</entry>
+              <entry>meta shift F</entry>
+            </row>
+
+            <row>
+              <entry>検索と置換...</entry>
+              <entry>editReplaceInProjectMenuItem</entry>
+              <entry>ctrl K</entry>
+              <entry>meta K</entry>
+            </row>
+
+            <row>
+              <entry>辞書を検索</entry>
+              <entry>editSearchDictionaryMenuItem</entry>
+              <entry namest="3" nameend="4">alt shift D</entry>
+            </row>
+
+            <row>
+              <entry>大/小文字設定→すべて小文字に</entry>
+              <entry>lowerCaseMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>大/小文字設定→すべて大文字に</entry>
+              <entry>upperCaseMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>大/小文字設定→単語の先頭を大文字に</entry>
+              <entry>titleCaseMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>大文字/小文字の切り替え</entry>
+              <entry>sentenceCaseMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>大/小文字の切り替え / 循環</entry>
+              <entry>cycleSwitchCaseMenuItem</entry>
+              <entry namest="3" nameend="4">shift F3</entry>
+            </row>
+
+            <row>
+              <entry>前の参考訳文を選択</entry>
+              <entry>editSelectFuzzyPrevMenuItem</entry>
+              <entry>ctrl UP</entry>
+              <entry>meta UP</entry>
+            </row>
+
+            <row>
+              <entry>次の参考訳文を選択</entry>
+              <entry>editSelectFuzzyNextMenuItem</entry>
+              <entry>ctrl DOWN</entry>
+              <entry>meta DOWN</entry>
+            </row>
+
+            <row>
+              <entry>一致#1を選択</entry>
+              <entry>editSelectFuzzy1MenuItem</entry>
+              <entry>ctrl 1</entry>
+              <entry>meta 1</entry>
+            </row>
+
+            <row>
+              <entry>一致#2を選択</entry>
+              <entry>editSelectFuzzy2MenuItem</entry>
+              <entry>ctrl 2</entry>
+              <entry>meta 2</entry>
+            </row>
+
+            <row>
+              <entry>一致#3を選択</entry>
+              <entry>editSelectFuzzy3MenuItem</entry>
+              <entry>ctrl 3</entry>
+              <entry>meta 3</entry>
+            </row>
+
+            <row>
+              <entry>一致#4を選択</entry>
+              <entry>editSelectFuzzy4MenuItem</entry>
+              <entry>ctrl 4</entry>
+              <entry>meta 4</entry>
+            </row>
+
+            <row>
+              <entry>一致#5を選択</entry>
+              <entry>editSelectFuzzy5MenuItem</entry>
+              <entry>ctrl 5</entry>
+              <entry>meta 5</entry>
+            </row>
+
+            <row>
+              <entry>BiDi制御文字/左から右へのマークの挿入(LRM U+200E)</entry>
+              <entry>insertCharsLRM</entry>
+            </row>
+
+            <row>
+              <entry>BiDi制御文字/右から左への記号の挿入(RLM U+200F)</entry>
+              <entry>insertCharsRLM</entry>
+            </row>
+            
+            <row>
+              <entry>BiDi制御文字/右から左への記号の挿入(RLM U+200F)</entry>
+              <entry>insertCharsLRE</entry>
+            </row>
+
+             <row>
+              <entry>BiDi制御文字/右から左への埋め込みの挿入(RLE U+202B)</entry>
+              <entry>insertCharsRLE</entry>
+            </row>
+            
+            <row>
+              <entry>BiDi制御文字/ポップ方向フォーマットの挿入(PDF U+202C)</entry>
+              <entry>insertCharsPDF</entry>
+            </row>
+
+            <row>
+              <entry>基本訳文として使用</entry>
+              <entry>editMultipleDefault</entry>
+            </row>
+
+            <row>
+              <entry>例外訳文を登録</entry>
+              <entry>editMultipleAlternate</entry>
+            </row>
+
+            <row>
+              <entry>訳文を削除</entry>
+              <entry>editRegisterUntranslatedMenuItem</entry>
+              <entry>ctrl shift X</entry>
+              <entry>meta shift X</entry>
+            </row>
+
+            <row>
+              <entry>訳文を&lt;空訳文&gt;にする</entry>
+              <entry>editRegisterEmptyMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>原文と同一訳文を登録</entry>
+              <entry>editRegisterIdenticalMenuItem</entry>
+              <entry>ctrl shift S</entry>
+              <entry>meta shift S</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+
+      <table id="app.shortcuts.lists.function.codes.goto.menu.table">
+        <title id="app.shortcuts.lists.function.codes.goto.menu.table.title">移動メニュー</title>
+
+        <tgroup cols="4" colsep="1">
+          <colspec align="left" colname="1" colnum="1"/>
+          <colspec align="left" colname="2" colnum="2"/>
+          <colspec align="center" colname="3" colnum="3"/>
+          <colspec align="center" colname="4" colnum="4"/>
+
+          <thead>
+            <row>
+              <entry>メニュー項目</entry>
+              <entry>機能コード</entry>
+              <entry>Windows/Linux</entry>
+              <entry>macOS</entry>
+            </row>
+          </thead>
+
+          <tbody>
+            <row>
+              <entry>次の未翻訳分節</entry>
+              <entry>gotoNextUntranslatedMenuItem</entry>
+              <entry>ctrl U</entry>
+              <entry>meta U</entry>
+            </row>
+
+            <row>
+              <entry>次の翻訳済み分節</entry>
+              <entry>gotoNextTranslatedMenuItem</entry>
+              <entry>ctrl shift U</entry>
+              <entry>meta shift U</entry>
+            </row>
+
+            <row>
+              <entry>次の分節</entry>
+              <entry>gotoNextSegmentMenuItem</entry>
+              <entry>ctrl N (Enter/Tab)</entry>
+              <entry>meta N (Enter/Tab)</entry>
+            </row>
+
+            <row>
+              <entry>前の分節</entry>
+              <entry>gotoPreviousSegmentMenuItem</entry>
+              <entry>ctrl P (ctrl Enter / ctrl Tab)</entry>
+              <entry>meta P (meta Enter / shift Tab)</entry>
+            </row>
+
+            <row>
+              <entry>分節番号を指定...</entry>
+              <entry>gotoSegmentMenuItem</entry>
+              <entry>ctrl J</entry>
+              <entry>meta J</entry>
+            </row>
+
+            <row>
+              <entry>次のメモ</entry>
+              <entry>gotoNextNoteMenuItem</entry>
+              <entry>ctrl alt N</entry>
+              <entry>meta alt N</entry>
+            </row>
+
+            <row>
+              <entry>前のメモ</entry>
+              <entry>gotoPreviousNoteMenuItem</entry>
+              <entry>ctrl alt P</entry>
+              <entry>meta alt P</entry>
+            </row>
+
+            <row>
+              <entry>次の繰り返しを除いた分節</entry>
+              <entry>gotoNextUniqueMenuItem</entry>
+              <entry>ctrl shift K</entry>
+              <entry>meta shift K</entry>
+            </row>
+
+            <row>
+              <entry>選択中の参考訳文の元分節</entry>
+              <entry>gotoMatchSourceSegment</entry>
+              <entry>ctrl shift M</entry>
+              <entry>meta shift M</entry>
+            </row>
+
+            <row>
+              <entry>tm/auto/ からの次の分節</entry>
+              <entry>gotoNextXAutoMenuItem</entry>
+              <entry>ctrl alt COMMA</entry>
+              <entry>meta alt COMMA</entry>
+            </row>
+
+            <row>
+              <entry>tm/auto/ からの前の分節</entry>
+              <entry>gotoPrevXAutoMenuItem</entry>
+              <entry>ctrl alt shift COMMA</entry>
+              <entry>meta alt shift COMMA</entry>
+            </row>
+
+            <row>
+              <entry>tm/enforce/からの次の分節</entry>
+              <entry>gotoNextXEnforcedMenuItem</entry>
+              <entry>ctrl alt PERIOD</entry>
+              <entry>meta alt PERIOD</entry>
+            </row>
+
+            <row>
+              <entry>tm/enforce/からの以前の分節</entry>
+              <entry>gotoPrevXEnforcedMenuItem</entry>
+              <entry>ctrl alt shift PERIOD</entry>
+              <entry>meta alt shift PERIOD</entry>
+            </row>
+
+            <row>
+              <entry>分節の選択履歴を進む</entry>
+              <entry>gotoHistoryForwardMenuItem</entry>
+              <entry>ctrl shift N</entry>
+              <entry>meta shift N</entry>
+            </row>
+
+            <row>
+              <entry>分節の選択履歴を戻る</entry>
+              <entry>gotoHistoryBackMenuItem</entry>
+              <entry>ctrl shift P</entry>
+              <entry>meta shift P</entry>
+            </row>
+
+            <row>
+              <entry>メモウィンドウ</entry>
+              <entry>gotoNotesPanelMenuItem</entry>
+              <entry>ctrl alt 9</entry>
+              <entry>meta alt 9</entry>
+            </row>
+
+            <row>
+              <entry>編集ウィンドウ</entry>
+              <entry>gotoEditorPanelMenuItem</entry>
+              <entry>ctrl alt 0</entry>
+              <entry>meta alt 0</entry>
+            </row>
+
+          </tbody>
+        </tgroup>
+      </table>
+
+      <table id="app.shortcuts.lists.function.codes.view.menu.table">
+        <title id="app.shortcuts.lists.function.codes.view.menu.table.title">表示メニュー</title>
+
+        <tgroup cols="4" colsep="1">
+          <colspec align="left" colname="1" colnum="1"/>
+          <colspec align="left" colname="2" colnum="2"/>
+          <colspec align="center" colname="3" colnum="3"/>
+          <colspec align="center" colname="4" colnum="4"/>
+
+          <thead>
+            <row>
+              <entry>メニュー項目</entry>
+              <entry>機能コード</entry>
+              <entry>Windows/Linux</entry>
+              <entry>macOS</entry>
+            </row>
+          </thead>
+
+          <tbody>
+            <row>
+              <entry>翻訳済み分節を色づけ</entry>
+              <entry>viewMarkTranslatedSegmentsCheckBoxMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>未翻訳分節を色づけ</entry>
+              <entry>viewMarkUntranslatedSegmentsCheckBoxMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Mark Paragraph Delimitations</entry>
+              <entry>viewMarkParagraphStartCheckBoxMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>原文を表示</entry>
+              <entry>viewDisplaySegmentSourceCheckBoxMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>繰り返しのある分節を色づけ</entry>
+              <entry>viewMarkNonUniqueSegmentsCheckBoxMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>メモ付き分節を色付け</entry>
+              <entry>viewMarkNotedSegmentsCheckBoxMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>ノーブレークスペースを色付け</entry>
+              <entry>viewMarkNBSPCheckBoxMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>空白文字を色付け</entry>
+              <entry>viewMarkWhitespaceCheckBoxMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>双方向アルゴリズム制御文字を色付け</entry>
+              <entry>viewMarkBidiCheckBoxMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>auto フォルダー由来の分節を色付け</entry>
+              <entry>viewMarkAutoPopulatedCheckBoxMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>用語集の一致をマーク</entry>
+              <entry>viewMarkGlossaryMatchesCheckBoxMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>言語チェッカー</entry>
+              <entry>viewMarkLanguageCheckerCheckBoxMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>代替フォントを積極的に使用</entry>
+              <entry>viewMarkFontFallbackCheckBoxMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>更新情報を表示 / 表示しない</entry>
+              <entry>viewDisplayModificationInfoNoneRadioButtonMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Modification Info/Display for Current Segment</entry>
+              <entry>viewDisplayModificationInfoSelectedRadioButtonMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>更新情報を表示 / すべての分節で表示</entry>
+              <entry>viewDisplayModificationInfoAllRadioButtonMenuItem</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+
+      <table id="app.shortcuts.lists.function.codes.tools.menu.table">
+        <title id="app.shortcuts.lists.function.codes.tools.menu.table.title">ツールメニュー</title>
+
+        <tgroup cols="4" colsep="1">
+          <colspec align="left" colname="1" colnum="1"/>
+          <colspec align="left" colname="2" colnum="2"/>
+          <colspec align="center" colname="3" colnum="3"/>
+          <colspec align="center" colname="4" colnum="4"/>
+
+          <thead>
+            <row>
+              <entry>メニュー項目</entry>
+              <entry>機能コード</entry>
+              <entry>Windows/Linux</entry>
+              <entry>macOS</entry>
+            </row>
+          </thead>
+
+          <tbody>
+            <row>
+              <entry>品質チェック...</entry>
+              <entry>toolsCheckIssuesMenuItem</entry>
+              <entry>ctrl shift V</entry>
+              <entry>meta shift V</entry>
+            </row>
+
+            <row>
+              <entry>現在のドキュメントの品質をチェック</entry>
+              <entry>toolsCheckIssuesCurrentFileMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>翻訳状況</entry>
+              <entry>toolsShowStatisticsStandardMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>参考訳文の一致率</entry>
+              <entry>toolsShowStatisticsMatchesMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>参考訳文の一致率（ファイル別）</entry>
+              <entry>toolsShowStatisticsMatchesPerFileMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>整合ツール...</entry>
+              <entry>toolsAlignFilesMenuItem</entry>
+            </row>            
+          </tbody>
+        </tgroup>
+      </table>
+
+      <note>
+        <para><link linkend="menus.tools" endterm="menus.tools.title"/>メニューの<link linkend="windows.scripts" endterm="windows.scripts.title"/>項目は例外です。</para>
+
+        <para>ショートカットを追加してスクリプト編集を呼び出したり、スクリプトに割り当てられたショートカットを変更したりすることはできません。</para>
+      </note>
+
+      <table id="app.shortcuts.lists.function.codes.options.menu.table">
+        <title id="app.shortcuts.lists.function.codes.options.menu.table.title">設定メニュー</title>
+
+        <tgroup cols="4" colsep="1">
+          <colspec align="left" colname="1" colnum="1"/>
+          <colspec align="left" colname="2" colnum="2"/>
+          <colspec align="center" colname="3" colnum="3"/>
+          <colspec align="center" colname="4" colnum="4"/>
+
+          <thead>
+            <row>
+              <entry>メニュー項目</entry>
+              <entry>機能コード</entry>
+              <entry>Windows/Linux</entry>
+              <entry>macOS</entry>
+            </row>
+          </thead>
+
+          <tbody>
+            <row>
+              <entry>環境設定</entry>
+              <entry>optionsPreferencesMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>機械翻訳/翻訳を自動的に取得する</entry>
+              <entry>optionsMTAutoFetchCheckboxMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>用語集/用語の照合にトークナイザーを使う</entry>
+              <entry>optionsGlossaryFuzzyMatchingCheckBoxMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>辞書/辞書項目の照合にトークナイザーを使う</entry>
+              <entry>optionsDictionaryFuzzyMatchingCheckBoxMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>自動補完/関連性の強い補完候補を自動的に表示する</entry>
+              <entry>optionsAutoCompleteShowAutomaticallyItem</entry>
+            </row>
+
+            <row>
+              <entry>Auto-completion/History Completion</entry>
+              <entry>optionsAutoCompleteHistoryCompletionMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Auto-completion/History Prediction</entry>
+              <entry>optionsAutoCompleteHistoryPredictionMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>ファイルフィルター...</entry>
+              <entry>optionsSetupFileFiltersMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>分節化規則...</entry>
+              <entry>optionsSentsegMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>編集...</entry>
+              <entry>optionsWorkflowMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>設定フォルダにアクセス</entry>
+              <entry>optionsAccessConfigDirMenuItem</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+
+      <table id="app.shortcuts.lists.function.codes.help.menu.table">
+        <title id="app.shortcuts.lists.function.codes.help.menu.table.title">ヘルプメニュー</title>
+
+        <tgroup cols="4" colsep="1">
+          <colspec align="left" colname="1" colnum="1"/>
+          <colspec align="left" colname="2" colnum="2"/>
+          <colspec align="center" colname="3" colnum="3"/>
+          <colspec align="center" colname="4" colnum="4"/>
+
+          <thead>
+            <row>
+              <entry>メニュー項目</entry>
+              <entry>機能コード</entry>
+              <entry>Windows/Linux</entry>
+              <entry>macOS</entry>
+            </row>
+          </thead>
+
+          <tbody>
+            <row>
+              <entry>取扱説明書...</entry>
+              <entry>helpContentsMenuItem</entry>
+              <entry namest="3" nameend="4">F1</entry>
+            </row>
+
+            <row>
+              <entry>OmegaT について...</entry>
+              <entry>helpAboutMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>最近の更新履歴...</entry>
+              <entry>helpLastChangesMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>ログ...</entry>
+              <entry>helpLogMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>更新の確認...</entry>
+              <entry>helpUpdateCheckMenuItem</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+      
+      <table id="app.shortcuts.lists.function.codes.search.window.table">
+        <title id="app.shortcuts.lists.function.codes.search.window.table.title">検索ウィンドウ</title>
+
+        <tgroup cols="4" colsep="1">
+          <colspec align="left" colname="1" colnum="1"/>
+          <colspec align="left" colname="2" colnum="2"/>
+          <colspec align="center" colname="3" colnum="3"/>
+          <colspec align="center" colname="4" colnum="4"/>
+
+          <thead>
+            <row>
+              <entry>メニュー項目</entry>
+              <entry>機能コード</entry>
+              <entry>Windows/Linux</entry>
+              <entry>macOS</entry>
+            </row>
+          </thead>
+
+          <tbody>
+            <row>
+              <entry>編集ウィンドウのエントリへジャンプ</entry>
+              <entry>jumpToEntryInEditor</entry>
+              <entry>ctrl J</entry>
+              <entry>meta J</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+  
+    <section id="app.shortcuts.lists.function.codes.windows">
+      <title id="app.shortcuts.lists.function.codes.windows.title">編集機能</title>
+
+      <para><filename>EditorShortcuts.properties</filename>ファイルで変更できるショートカットとそのデフォルト値を次の表に示します。</para>
+
+      <table id="app.shortcuts.lists.function.codes.editor.table">
+        <title id="app.shortcuts.lists.function.codes.editor.table.title">編集</title>
+
+        <tgroup cols="4" colsep="1">
+          <colspec align="left" colname="1" colnum="1"/>
+          <colspec align="left" colname="2" colnum="2"/>
+          <colspec align="center" colname="3" colnum="3"/>
+          <colspec align="center" colname="4" colnum="4"/>
+
+          <thead>
+            <row>
+              <entry>機能</entry>
+              <entry>機能コード</entry>
+              <entry>Windows/Linux</entry>
+              <entry>macOS</entry>
+            </row>
+          </thead>
+
+          <tbody>
+            <row id="shortcuts.open.contextual.menu">
+              <entry>コンテキストメニューを開く</entry>
+              <entry>editorContextMenu</entry>
+              <entry>CONTEXT_MENU</entry>
+              <entry>shift ESCAPE</entry>
+            </row>
+
+            <row>
+              <entry>次の分節に移動</entry>
+              <entry>editorNextSegment</entry>
+              <entry namest="3" nameend="4">TAB</entry>
+            </row>
+
+            <row>
+              <entry>前の分節に移動</entry>
+              <entry>editorPrevSegment</entry>
+              <entry namest="3" nameend="4">shift TAB</entry>
+            </row>
+
+            <row>
+              <entry>次の分節に移動(Tabキーではない)</entry>
+              <entry>editorNextSegmentNotTab</entry>
+              <entry namest="3" nameend="4">ENTER</entry>
+            </row>
+
+            <row>
+              <entry>前の分節に移動(Tabキーではない)</entry>
+              <entry>editorPrevSegmentNotTab</entry>
+              <entry>ctrl ENTER</entry>
+              <entry>meta ENTER</entry>
+            </row>
+
+            <row>
+              <entry>Insert Linebreak</entry>
+              <entry>editorInsertLineBreak</entry>
+              <entry namest="3" nameend="4">shift ENTER</entry>
+            </row>
+
+            <row>
+              <entry>Select All</entry>
+              <entry>editorSelectAll</entry>
+              <entry>ctrl A</entry>
+              <entry>meta A</entry>
+            </row>
+
+            <row>
+              <entry>前のトークンの削除</entry>
+              <entry>editorDeletePrevToken</entry>
+              <entry>ctrl BACK_SPACE</entry>
+              <entry>alt BACK_SPACE</entry>
+            </row>
+
+            <row>
+              <entry>次のトークンの削除</entry>
+              <entry>editorDeleteNextToken</entry>
+              <entry>ctrl DELETE</entry>
+              <entry>alt DELETE</entry>
+            </row>
+
+            <row>
+              <entry>最初の分節に移動</entry>
+              <entry>editorFirstSegment</entry>
+              <entry>ctrl PAGE_UP</entry>
+              <entry>meta PAGE_UP</entry>
+            </row>
+
+            <row>
+              <entry>最後の分節に移動</entry>
+              <entry>editorLastSegment</entry>
+              <entry>ctrl PAGE_DOWN</entry>
+              <entry>meta PAGE_DOWN</entry>
+            </row>
+
+            <row>
+              <entry>次のトークンをスキップ</entry>
+              <entry>editorSkipNextToken</entry>
+              <entry>ctrl RIGHT</entry>
+              <entry>alt RIGHT</entry>
+            </row>
+
+            <row>
+              <entry>前のトークンをスキップ</entry>
+              <entry>editorSkipPrevToken</entry>
+              <entry>ctrl LEFT</entry>
+              <entry>alt RIGHT</entry>
+            </row>
+
+            <row>
+              <entry>選択した次のトークンをスキップ</entry>
+              <entry>editorSkipNextTokenWithSelection</entry>
+              <entry>ctrl shift RIGHT</entry>
+              <entry>alt shift RIGHT</entry>
+            </row>
+
+            <row>
+              <entry>選択した前のトークンをスキップ</entry>
+              <entry>editorSkipPrevTokenWithSelection</entry>
+              <entry>ctrl shift LEFT</entry>
+              <entry>alt shift LEFT</entry>
+            </row>
+
+            <row>
+              <entry>カーソルロックの切り替え</entry>
+              <entry>editorToggleCursorLock</entry>
+              <entry namest="3" nameend="4">F2</entry>
+            </row>
+
+            <row>
+              <entry>上書き入力の切り替え</entry>
+              <entry>editorToggleOvertype</entry>
+              <entry>INSERT</entry>
+              <entry>F3</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+
+      <table id="app.shortcuts.lists.function.codes.autocompleter.table">
+        <title id="app.shortcuts.lists.function.codes.autocompleter.table.title">Autocompleter</title>
+
+        <tgroup cols="4" colsep="1">
+          <colspec align="left" colname="1" colnum="1"/>
+          <colspec align="left" colname="2" colnum="2"/>
+          <colspec align="center" colname="3" colnum="3"/>
+          <colspec align="center" colname="4" colnum="4"/>
+
+          <thead>
+            <row>
+              <entry>機能</entry>
+              <entry>機能コード</entry>
+              <entry>Windows/Linux</entry>
+              <entry>macOS</entry>
+            </row>
+          </thead>
+
+          <tbody>
+            <row>
+              <entry>自動補完機能を開く</entry>
+              <entry>autocompleterTrigger</entry>
+              <entry>ctrl SPACE</entry>
+              <entry>ESCAPE</entry>
+            </row>
+
+            <row>
+              <entry>次の自動補完ビューを開く</entry>
+              <entry>autocompleterNextView</entry>
+              <entry>ctrl SPACE</entry>
+              <entry>ctrl DOWN</entry>
+            </row>
+
+            <row>
+              <entry>前の自動補完ビューを開く</entry>
+              <entry>autocompleterPrevView</entry>
+              <entry>ctrl shift SPACE</entry>
+              <entry>ctrl UP</entry>
+            </row>
+
+            <row>
+              <entry>自動補完を確認して閉じる</entry>
+              <entry>autocompleterConfirmAndClose</entry>
+              <entry namest="3" nameend="4">ENTER</entry>
+            </row>
+
+            <row>
+              <entry>閉じずに自動補完を確認する</entry>
+              <entry>autocompleterConfirmWithoutClose</entry>
+              <entry namest="3" nameend="4">INSERT</entry>
+            </row>
+
+            <row>
+              <entry>自動補完を閉じる</entry>
+              <entry>autocompleterClose</entry>
+              <entry namest="3" nameend="4">ESCAPE</entry>
+            </row>
+
+            <row>
+              <entry>リストを上に移動</entry>
+              <entry>autocompleterListUp</entry>
+              <entry namest="3" nameend="4">UP</entry>
+            </row>
+
+            <row>
+              <entry>リストの下へ移動</entry>
+              <entry>autocompleterListDown</entry>
+              <entry namest="3" nameend="4">DOWN</entry>
+            </row>
+
+            <row>
+              <entry>1ページ上へ移動</entry>
+              <entry>autocompleterListPageUp</entry>
+              <entry namest="3" nameend="4">PAGE_UP</entry>
+            </row>
+
+            <row>
+              <entry>1ページ下へ移動</entry>
+              <entry>autocompleterListPageDown</entry>
+              <entry namest="3" nameend="4">PAGE_DOWN</entry>
+            </row>
+
+            <row>
+              <entry>表内を上へ移動</entry>
+              <entry>autocompleterTableUp</entry>
+              <entry namest="3" nameend="4">UP</entry>
+            </row>
+
+            <row>
+              <entry>表内を下へ移動</entry>
+              <entry>autocompleterTableDown</entry>
+              <entry namest="3" nameend="4">DOWN</entry>
+            </row>
+
+            <row>
+              <entry>表内を左へ移動</entry>
+              <entry>autocompleterTableLeft</entry>
+              <entry namest="3" nameend="4">LEFT</entry>
+            </row>
+
+            <row>
+              <entry>表内を右へ移動</entry>
+              <entry>autocompleterTableRight</entry>
+              <entry namest="3" nameend="4">RIGHT</entry>
+            </row>
+
+            <row>
+              <entry>表の1ページ上へ移動</entry>
+              <entry>autocompleterTablePageUp</entry>
+              <entry namest="3" nameend="4">PAGE_UP</entry>
+            </row>
+
+            <row>
+              <entry>表の1ページ下へ移動</entry>
+              <entry>autocompleterTablePageDown</entry>
+              <entry namest="3" nameend="4">PAGE_DOWN</entry>
+            </row>
+
+            <row>
+              <entry>最初の表に移動</entry>
+              <entry>autocompleterTableFirst</entry>
+              <entry>ctrl HOME</entry>
+              <entry>meta HOME</entry>
+            </row>
+
+            <row>
+              <entry>最後の表に移動</entry>
+              <entry>autocompleterTableLast</entry>
+              <entry>ctrl END</entry>
+              <entry>meta END</entry>
+            </row>
+
+            <row>
+              <entry>表の最初の行に移動</entry>
+              <entry>autocompleterTableFirstInRow</entry>
+              <entry namest="3" nameend="4">HOME</entry>
+            </row>
+
+            <row>
+              <entry>表の最後の行に移動</entry>
+              <entry>autocompleterTableLastInRow</entry>
+              <entry namest="3" nameend="4">END</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+  </section>
+</section>

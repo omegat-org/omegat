@@ -1,0 +1,1207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd"
+[
+<!ENTITY % manualvariables SYSTEM "manualvariables.mod">
+%manualvariables;
+]>
+<chapter id="chapter.dialogs.preferences">
+  <title id="chapter.dialogs.preferences.title"><guilabel>環境設定</guilabel></title>
+
+  <para> <link endterm="menus.options.title" linkend="menus.options"/><link endterm="menus.options.preferences.title" linkend="menus.options.preferences"/>を使用 (macOSでは、 <literal>OmegaT</literal>メニューを使用)してこのダイアログにアクセスします。</para>
+
+  <para>環境設定リストの上部にある検索領域を使用して、特定の項目を検索できます。</para>
+  
+  <para>このダイアログで設定された環境設定は、デフォルトの<link linkend="configuration.folder">構成フォルダー</link>に保存され、別の構成フォルダーを指定しない限り、すべての翻訳プロジェクトに適用されます。</para>
+
+  <note>
+    <para>OmegaTで別の構成フォルダーを使用して、プロジェクト固有の構成を定義することもできます。詳細は<link endterm="launch.with.command.line.title" linkend="launch.with.command.line"/>項をご覧ください。このように構成フォルダーを指定すると、このダイアログで行われたすべての変更が、指定されたフォルダーに格納されます。</para>
+  </note>
+
+  <section id="dialogs.preferences.general">
+    <title id="dialogs.preferences.general.title"><guilabel>一般</guilabel></title>
+
+    <variablelist>
+      <varlistentry id="dialogs.preferences.general.use.tab.to.advance">
+        <term id="dialogs.preferences.general.use.tab.to.advance.title"><option>TAB キーで次の分節へ</option></term>
+
+        <listitem>
+		  <para>デフォルトでの確定と分節の移動は、<keycap>Enter</keycap>のキーになります。</para>
+          <para>編集する分節を次へ進めるキーを、代わりに<keycap>Tab</keycap>キーとします。</para>
+
+		  <para>この設定は、中国語、日本語、または朝鮮語のような入力システムの場合に便利です。</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="dialogs.preferences.general.always.confirm.quit">
+        <term id="dialogs.preferences.general.always.confirm.quit.title"><option>終了時に常に確認</option></term>
+
+        <listitem>
+          <para>OmegaT を終了する前に、常に確認します。</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="dialogs.preferences.general.access.configuration.folder">
+        <term id="dialogs.preferences.general.access.configuration.folder.title"><option>設定フォルダにアクセス</option></term>
+		<listitem>
+          <para>OmegaT設定ファイルが保管されているローカル・ディレクトリーを開きます。</para>
+		  <note>
+			<para>オペレーティング・システムや起動時オプションによって開く場所は異なります。詳細は、付録の <link linkend="configuration.folder" endterm="configuration.folder.title"/> をご覧ください。</para>
+		  </note>
+		</listitem>
+      </varlistentry>
+
+	</variablelist>
+  </section>
+
+  <section id="dialogs.preferences.mt">
+    <title id="dialogs.preferences.mt.title"><guilabel>機械翻訳</guilabel></title>
+
+    <variablelist>
+      <varlistentry id="dialogs.preferences.mt.automatically.fetch.translations">
+        <term id="dialogs.preferences.mt.automatically.fetch.translations.title"><option>翻訳を自動的に取得する</option></term>
+
+        <listitem>
+          <para>このオプションを無効にすると、 <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.replace.with.mt" endterm="menus.edit.replace.with.mt.title"/>を押した場合に現在の分節の機械翻訳が取得されます。再度、キーを押すと、提案された機械翻訳結果が挿入されます。</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="dialogs.preferences.mt.untranslated.segments.only">
+        <term id="dialogs.preferences.mt.untranslated.segments.only.title"><option>未翻訳分節のみを対象とする</option></term>
+
+        <listitem>
+          <para>未翻訳分節のみを機械翻訳サービスに送信するには、このチェックボックスをオンにします。</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="dialogs.preferences.mt.provider.list">
+        <term id="dialogs.preferences.mt.provider.list.title"><option>機械翻訳サービスリスト</option></term>
+
+        <listitem>
+          <para>OmegaTで利用可能な機械翻訳サービス一覧で、利用したい各プロバイダの<guilabel>有効</guilabel>ボックスにチェックを入れます。<guibutton>設定</guibutton>ボタンで、そのプロバイダの認証資格情報を管理できます。</para>
+
+		  <note>
+			<para>ほとんどのプロバイダは、サービスを利用する前に何らかの登録を必要とします。この機能を使用する前に、適切な資格情報を入手してください。</para>
+		  </note>
+
+		  <table id="dialogs.preferences.mt.provider.list.configuration">
+			<title id="dialogs.preferences.mt.provider.list.configuration.title"><option>必要な資格情報</option></title>
+
+			<tgroup align="left" cols="3" rowsep="1">
+			  <colspec align="left" colnum="1"/>
+			  <thead>
+				<row>
+				  <entry>エンジン</entry>
+				  <entry>必要な資格情報</entry>
+				  <entry>リンク</entry>
+				</row>
+			  </thead>
+			  <tbody>
+				<row>
+				  <entry>Belazar</entry>
+				  <entry/>
+				  <entry/>
+				</row>
+				<row>
+				  <entry>DeepL</entry>
+				  <entry>一部の国でのみ利用可能なDeepl Pro Advancedプランの契約が必要です</entry>
+				  <entry><ulink url="https://www.deepl.com/en/pro">https://www.deepl.com/en/pro</ulink></entry>
+				</row>
+				<row>
+				  <entry>MyMemory (machine translation)</entry>
+				  <entry/>
+				  <entry><ulink url="https://mymemory.translated.net/doc/cat.php">https://mymemory.translated.net/</ulink></entry>
+				</row>
+				<row>
+				  <entry>Apertium</entry>
+				  <entry>URL, key</entry>
+				  <entry><ulink url="http://www.apertium.org">http://www.apertium.org</ulink></entry>
+				</row>
+				<row>
+				  <entry>MyMemory (human translation)</entry>
+				  <entry/>
+				  <entry/>
+				</row>
+				<row>
+				  <entry>IBM Watson</entry>
+				  <entry>URL, Model ID, Login ID, Password</entry>
+				  <entry><ulink url="https://www.ibm.com/watson">https://www.ibm.com/watson</ulink></entry>
+				</row>
+				<row>
+				  <entry>Google Translate v2</entry>
+				  <entry>API key</entry>
+				  <entry><ulink url="https://cloud.google.com/translate/docs/reference/rest/">https://cloud.google.com/translate/</ulink></entry>
+				</row>
+			  </tbody>
+			</tgroup>
+		  </table>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </section>
+
+  <section id="dialogs.preferences.glossary">
+    <title id="dialogs.preferences.glossary.title"><guilabel>用語集</guilabel></title>
+
+    <variablelist>
+      <varlistentry id="dialogs.preferences.glossary.display.context.description.for.tbx.glossaries">
+        <term id="dialogs.preferences.glossary.display.context.description.for.tbx.glossaries.title"><option>TBX用語集(TBX2)を文脈として表示</option></term>
+
+        <listitem>
+          <para>各用語集エントリに表示されるコンテキストの説明が不要であるか、長すぎる場合は、この選択肢をオフにします。</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="dialogs.preferences.glossary.use.terms.appearing.separately.in.the.source.text">
+        <term id="dialogs.preferences.glossary.use.terms.appearing.separately.in.the.source.text.title"><option>用語が別々に表示されている場合でも、用語グループを一致させる</option></term>
+
+        <listitem>
+          <para>用語集の用語が複合語である場合、原文テキストで単語が別々に表示されていても、その用語は一致します。</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="dialogs.preferences.glossary.use.stemming.for.glossary.entries">
+        <term id="dialogs.preferences.glossary.use.stemming.for.glossary.entries.title"><option>Use
+        stemming</option></term>
+
+        <listitem>
+          <para>用語集の機能の検索に、語幹処理(ステミング)を使用します。</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="dialogs.preferences.glossary.replace.glossary.hits.when.inserting.source.text">
+        <term id="dialogs.preferences.glossary.replace.glossary.hits.when.inserting.source.text.title"><option>原文挿入時に用語集から置換</option></term>
+        <listitem>
+          <para>When you use</para>
+		  
+		  <itemizedlist>
+			<listitem>
+			  <para><link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.replace.with.source" endterm="menus.edit.replace.with.source.title"/>,</para>
+			</listitem>
+
+			<listitem>
+			  <para><link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.insert.source" endterm="menus.edit.insert.source.title"/> or</para>
+			</listitem>
+
+			<listitem>
+			  <para><link linkend="dialogs.preferences.editor.insert.the.source.text" endterm="dialogs.preferences.editor.insert.the.source.text.title"/>設定など</para>
+			</listitem>
+		  </itemizedlist>
+
+		  <para>原文のまま訳文の分節に挿入すると、用語集にある単語は、自動的にその訳文に置き換えられます。</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="dialogs.preferences.glossary.ignore.hits.with.very.different.case">
+        <term id="dialogs.preferences.glossary.ignore.hits.with.very.different.case.title"><option>大/小文字が異なる(例:USER対user)検出結果を無視</option></term>
+
+        <listitem>
+          <para>大文字と小文字が大きく異なる検出結果を表示しません。</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="dialogs.preferences.glossary.glossary.layout">
+        <term id="dialogs.preferences.glossary.glossary.layout.title"><option>レイアウト</option></term>
+
+        <listitem>
+          <para>用語集画面のレイアウトを選択できます。選択可能なレイアウトの種類は、プラグインとして追加できます。</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="dialogs.preferences.glossary.merge.alternate.definitions.for.the.same.term">
+        <term id="dialogs.preferences.glossary.merge.alternate.definitions.for.the.same.term.title"><option>同じ用語の代替の定義を結合します</option></term>
+
+        <listitem>
+          <para>用語集の用語に複数の定義があったときに、同じ行に一度に表示します。</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </section>
+
+  <section id="dialogs.preferences.dictionary">
+    <title id="dialogs.preferences.dictionary.title"><guilabel>辞書</guilabel></title>
+
+	<para>ここでは、<link linkend="project.folder.dictionary" endterm="project.folder.dictionary.title"/>フォルダーの内容が<link linkend="panes.dictionary" endterm="panes.dictionary.title"/>ウィンドウにどのように表示されるか、定義します。</para>
+	
+    <variablelist>
+      <varlistentry id="dialogs.preferences.dictionary.automatically.search.segment">
+        <term id="dialogs.preferences.dictionary.automatically.search.segment.title"><option>自動的に検索</option></term>
+
+        <listitem>
+          <para>設定が無効になっている場合は、<link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.search.dictionaries" endterm="menus.edit.search.dictionaries.title"/>を使用して、選択または原文分節内のすべての用語を検索します。</para>
+		  <para>設定が有効になっている場合、OmegaTは分節を移動するときに、分節で識別した用語をすべての辞書で自動的に検索します。</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries">
+        <term id="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries.title"><option>用語に語幹処理を使用</option></term>
+
+        <listitem>
+          <para>用語集の機能の検索に、語幹処理(ステミング)を使用します。</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="dialogs.preferences.dictionary.use.condensed.view">
+        <term id="dialogs.preferences.dictionary.use.condensed.view.title"><option>要約ビューを使用する</option></term>
+
+        <listitem>
+          <para>プラグインとして提供されている一部の辞書ドライバは、この機能をサポートしていません。</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </section>
+
+  <section id="dialogs.preferences.appearance">
+    <title id="dialogs.preferences.appearance.title"><guilabel>外観</guilabel></title>
+
+    <variablelist>
+      <varlistentry id="dialogs.preferences.appearance.theme">
+        <term id="dialogs.preferences.appearance.theme.title"><option>テーマ</option></term>
+
+        <listitem>
+          <para>OmegaTのユーザインタフェースのテーマを選択できます。</para>
+
+          <para>様々なテーマをプラグインとして追加できます。テーマには、一連の定義済みのデフォルト色が用意されています。</para>
+
+		  <para>ネイティブに提供されているすべてのJavaテーマがOmegaT操作と互換性があるわけではありません。</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="dialogs.preferences.appearance.restore.main.window">
+        <term id="dialogs.preferences.appearance.restore.main.window.title"><option>ウインドウを初期位置に復元</option></term>
+
+        <listitem>
+          <para>OmegaT で使用する各ウィンドウを、初期位置に戻します。</para>
+
+		  <para>この機能は、1つまたは複数のペインをドッキング解除、移動、または非表示にした後で、目的の配置を復元できない場合に使用します。また、OmegaT をバージョンアップし、期待するウィンドウが表示されなくなったような場合にも、使用できます。</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+	
+	<section id="dialogs.preferences.fonts">
+      <title id="dialogs.preferences.fonts.title"><guilabel>字体設定</guilabel></title>
+
+      <para>メイン画面のウィンドウに使用するテキストの字体とサイズを選択します。</para>
+
+	  <note>
+		<para>OmegaTでは、原文と訳文の両方に同じ字体を使用します。異なる記述方式を使用する言語ペアで作業する場合は、両方の言語を正しく表示できる字体を選択してください。サポートされていない文字は四角形で表示されます。</para>
+	  </note>
+
+	  <variablelist>
+		<varlistentry>
+		  <term><option>この字体を表形式データ(プロジェクトファイル、翻訳状況など)に適用する</option></term>
+		  <listitem>
+			<para>表形式のデータは、列が正しく位置合わせされるように、デフォルトではで等間隔の字体で表示されます。プロポーショナル字体を使用すると、そのレイアウトが壊れるかもしれません。</para>
+		  </listitem>
+		</varlistentry>
+
+		<varlistentry>
+		  <term><option>字体サイズ設定を辞書ウィンドウに適用する</option></term>
+		  <listitem>
+			<para>デフォルトでは、辞書ウィンドウはメイン ウィンドウと同じ字体のサイズを使用しています。</para>
+		  </listitem>
+		</varlistentry>
+	  </variablelist>
+	</section>
+
+	<section id="dialogs.preferences.colours">
+      <title id="dialogs.preferences.colours.title"><guilabel>配色</guilabel></title>
+
+      <para>ユーザーインターフェースの各部分について、任意の色に変更できます。</para>
+
+      <para>スクリプトを使用して、定義済みのテーマを設定できます。OmegaTには、デフォルトのの暗いテーマを提供する<link linkend="windows.scripts.distribution.switch.colour.theme" endterm="windows.scripts.distribution.switch.colour.theme.title"/>というスクリプトがバンドルされています。詳細については、<link linkend="windows.scripts" endterm="windows.scripts.title"/>ウインドウを参照してください。</para>
+
+	  <note>
+		<para>OpenJDKでOmegaTを実行しているユーザは、Gnome/GTKのルック&amp;フィールを備えたLinuxシステムで、ダークテーマの自動検出を利用できます。この機能は、他のプラットフォームではまだ利用できないJavaの機能に依存しています。</para>
+	  </note>
+	</section>
+  </section>
+
+  <section id="dialogs.preferences.file.filters">
+	<title id="dialogs.preferences.file.filters.title"><guilabel>ユーザーレベルファイルフィルタ</guilabel></title>
+
+	<para>このダイアログには、プロジェクト専用のファイルフィルタを使用しないで使用可能なフィルタが一覧で表示されます。</para>
+
+	<para>この設定の内容は、<link linkend="dialogs.project.properties.filters">プロジェクト専用ファイルフィルタ</link>ダイアログの内容と同じです。詳細は、付録の <link linkend="file.filters" endterm="file.filters.title"/> をご覧ください。</para>
+
+	<note>
+	  <para>プロジェクト専用のファイルフィルタが使用されている場合、ユーザーレベルファイルフィルタを変更してもプロジェクトに影響しません。</para>
+	</note>
+  </section>
+
+
+  <section id="dialogs.preferences.segmentation.setup">
+	<title id="dialogs.preferences.segmentation.setup.title"><guilabel>ユーザーレベルの分節化規則</guilabel></title>
+
+	<para>分節化(ユーザレベルまたはプロジェクト専用、段落または文、設定など)の一般的な説明については、<link linkend="app.segmentation" endterm="app.segmentation.title"/>を参照してください。</para>
+
+	<warning>
+	  <para>このダイアログでは、ユーザーレベルの分節化規則のみ変更できます。<link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/>ダイアログでプロジェクト専用のルールを設定した場合に、ここでの変更は考慮されません。</para>
+	</warning>
+	
+	<section id="dialogs.preferences.segmentation.setup.scope">
+	  <title id="dialogs.preferences.segmentation.setup.scope.title">言語セット</title>
+
+	  <para>プロジェクトの原文言語に対応する言語ごとの規則が適用されます。<link linkend="dialogs.project.properties.languages" endterm="dialogs.project.properties.languages.title"/>プロジェクト設定を見てください。</para>
+
+	  <example id="dialogs.preferences.segmentation.setup.scope.example">
+		<title id="dialogs.preferences.segmentation.setup.scope.example.title">日本語の規則</title>
+		<para>日本語からの翻訳では、<emphasis></emphasis><code>JA.*</code>パターンに関連付けられた規則集と<code>.*</code>に関連付けられた汎用の規則のみが考慮されます。</para>
+	  </example>
+
+	  <para>ダイアログの上半分にある言語の構成例をクリックすると、関連付けられたルールのリストがダイアログの下半分に表示されます。</para>
+
+	  <para>言語の構成例に一致する分節化規則は、設定れた優先順で適用されます。特定の言語のために設定した規則は、デフォルトのものより高い優先順位を与えるほうがよいでしょう。</para>
+
+	  <example id="dialogs.preferences.segmentation.setup.scope.cascading.proprieties.example">
+		<title id="dialogs.preferences.segmentation.setup.scope.cascading.proprieties.example.title">優先順位のカスケード</title>
+		<para>カナダフランス語<emphasis>FR-CA</emphasis>用の規則は、フランス語<emphasis>FR.*</emphasis>用の規則よりも優先順位を高くし、なおかつ汎用<emphasis>.*</emphasis>の規則よりも高くしておきます。</para>
+
+		<para>こうしておけば、カナダフランス語を原文とするプロジェクトでは、まずカナダフランス語用の規則、次にフランス語用の規則、最後に汎用の規則、という順序で適用されます。</para>
+	  </example>
+	  
+	  <para>規則の新規作成</para>
+	  <orderedlist>
+		<listitem>
+		  <para><guibutton>追加</guibutton>をクリックします。表の最下部に新しい行が作成されます。</para>
+		</listitem>
+		
+		<listitem>
+		  <para>規則集と言語の構成例の名前について、目的の名称と対応するパターンに変更します。言語の構成には、正規表現を使用します。</para>
+		</listitem>
+
+		<listitem>
+		  <para><guibutton>上へ移動</guibutton>ボタンを使用して、規則集の優先順位を設定します。</para>
+		</listitem>
+	  </orderedlist>
+	</section>
+
+	<section id="segmentation.rules">
+	  <title id="segmentation.rules.title"><guilabel>設定済み、保存済み</guilabel></title>
+	  <warning>
+		<para>例外規則は、分節規則よりも<emphasis>前に</emphasis>なければなりません。</para>
+
+		<para>OmegaTがファイルを読み込むとき、すべての例外の場所に非分割マーカーを配置します。このようなマーカーがなく、分節規則に一致する場所が分割位置になります。</para>
+	  </warning>
+	  
+	  <variablelist>
+		<varlistentry id="segmentation.rules.exceptionrule">
+		  <term id="segmentation.rules.exceptionrule.title"><option>例外</option></term>
+
+		  <listitem>
+			<para>改節を禁止するための規則を定義する場合は、<guilabel>分割する/しない</guilabel>チェックボックスにチェックを入れずにおきます。</para>
+
+			<para>分節規則の例外となるテキストの組合せを指定します。たとえば、一般的に<emphasis>空白文字が後に続くピリオド</emphasis>の分節規則を定義する場合でも、<emphasis>Mrs. Dalloway</emphasis>は2つの分節に分割されるべきではありません。</para>
+			
+		  </listitem>
+		</varlistentry>
+
+		<varlistentry id="segmentation.rules.breakrule">
+		  <term id="segmentation.rules.breakrule.title"><option>区切り</option></term>
+
+		  <listitem>
+			<para>分節規則を定義する場合は、<guilabel>分割する/しない</guilabel>チェックボックスにチェックを入れます。</para>
+
+			<para>原文テキストを２つの分節に分割します。例えば、<emphasis>空白文字が後に続くピリオド</emphasis>は、通常、英語の文の終わりを定義します。</para>
+		  </listitem>
+		</varlistentry>
+
+		<varlistentry id="creating.new.rule">
+		  <term id="creating.new.rule.title"><guibutton>追加</guibutton></term>
+		  <listitem>
+			<para><emphasis role="bold">前</emphasis>パターンは、分割ポイントまたは例外ポイントの前にあるパーツを識別します。</para>
+
+			<para><emphasis role="bold">後</emphasis>パターンは、分割ポイントまたは例外ポイントの後にあるパーツを識別します。</para>
+
+			<para><emphasis role="bold">前</emphasis>と<emphasis role="bold">後</emphasis>のパターンには正規表現を使用します。詳細は、付録の <link linkend="app.regex" endterm="app.regex.title"/> をご覧ください。</para>
+		  </listitem>
+		</varlistentry>
+	  </variablelist>
+	  
+	  <para>既存のルールは、常に適切な出発点となります。</para>
+	</section>
+  </section>
+
+  <section id="dialog.preferences.auto.completion">
+	<title id="dialog.preferences.auto.completion.title"><guilabel>入力補完</guilabel></title>
+
+	<para>入力補完メニューは、<link linkend="panes.editor" endterm="panes.editor.title"/>ウィンドウで利用できます。詳細は<link linkend="panes.editor.auto.completion.menu" endterm="panes.editor.auto.completion.menu.title"/>項をご覧ください。</para>
+	
+	<para><guilabel>用語集</guilabel>をクリックすると、入力補完の用語集ビューの設定を変更できます。</para>
+
+	<para><guilabel>定型文</guilabel>をクリックして、定型文の設定変更や、定型文の追加と削除ができます。</para>
+
+	<para><guilabel>文字一覧</guilabel>をクリックすると、文字一覧の設定を変更できます。</para>
+
+	<para><guilabel>履歴による補完を有効にする</guilabel>または<guilabel>履歴による予測を有効にする</guilabel>をクリックして、履歴ベースの補完を設定します。</para>
+
+	<note>
+	  <para>利用者のデータ(履歴など)が、処理のためにOmegaTから外部のサーバに送信されることは<emphasis>ありません</emphasis>。予測/補完は、すべてローカルで計算されます。</para>
+	</note>
+
+	<para><guilabel>関連性の強い補完候補を自動的に表示する</guilabel>にチェックが入っていると、用語集の訳語項目の最初の文字を入力することにより、またはタグの場合は<literal>&lt;</literal>を入力することにより、入力補完が自動的に起動します。</para>
+  </section>
+
+  <section id="dialog.preferences.spellchecker">
+	<title id="dialog.preferences.spellchecker.title"><guilabel>スペルチェッカー</guilabel></title>
+
+	<para>OmegaTにはスペルチェッカーが組み込まれていますが、訳文言語用のスペルチェック辞書をインストールする必要があります。</para>
+
+	<warning>
+	  <para>OmegaTは、<link linkend="dialogs.project.properties.languages" endterm="dialogs.project.properties.languages.title"/>プロジェクト辞書で設定された訳文言語コードと同じ名前の言語属性を使用します。<emphasis>FR-FR</emphasis>辞書は、<emphasis>FR</emphasis>訳文分節をスペルチェックしません。必要であれば、辞書ファイルの名前を変更するか、または逆にプロジェクトの言語設定を変更してください。</para>
+	</warning>
+
+	<variablelist>
+	  <varlistentry id="dialog.preferences.spellchecker.automatic.check">
+		<term id="dialog.preferences.spellchecker.automatic.check.title"><option>訳文をスペルチェック</option></term>
+		<listitem>
+		  <para>スペルチェック辞書をインストールした後に有効にします。OmegaTは、スペルミスに赤い波線で下線を引きます。</para>
+		  <para><link linkend="panes.editor.context.menu">編集ウィンドウのコンテキストメニュー</link>を使用して間違いを修正したり、または<guimenuitem>すべて無視</guimenuitem>や<guimenuitem>辞書に追加</guimenuitem>を選択します。詳細については、<link linkend="project.folder.omegat.spellcheck">スペルチェッカーファイル</link>を参照してください。</para>
+		</listitem>
+	  </varlistentry>
+	  
+	  <varlistentry id="dialog.preferences.spellchecker.dictionary.folder">
+		<term id="dialog.preferences.spellchecker.dictionary.folder.title"><option>スペルチェック辞書の場所</option></term>
+		<listitem>
+		  <para>OmegaTがスペルチェック辞書をインストールして検索するフォルダー。通常は<link linkend="configuration.folder" endterm="configuration.folder.title"/>フォルダーにあります。</para>
+		</listitem>
+	  </varlistentry>
+	  
+	  <varlistentry id="dialog.preferences.spellchecker.already.installed">
+		<term id="dialog.preferences.spellchecker.already.installed.title"><option>利用可能な言語</option></term>
+		<listitem>
+		  <para>上記フォルダーに現存する辞書の一覧があります</para>
+
+		  <para>何も表示されない場合は、スペルチェック辞書がまだインストールされていないか、プロジェクトでスペルチェックフォルダーを含まない特定の設定辞書が使用されていることを意味します。</para>
+		</listitem>
+	  </varlistentry>
+	  
+	  <varlistentry id="dialog.preferences.spellchecker.url">
+		<term id="dialog.preferences.spellchecker.url.title"><option>ダウンロード可能なスペルチェック辞書のURL</option></term>
+		<listitem>
+		  <para>OmegaTがインストールする辞書を探す標準のURLです。</para>
+
+		  <para>他の場所から辞書をダウンロードしたり、ローカルにインストールされた辞書をコピーすることもできます。</para></listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialog.preferences.spellchecker.install.new">
+		<term id="dialog.preferences.spellchecker.install.new.title"><guibutton>新しい言語をインストール...</guibutton></term>
+		<listitem>
+		  <para>上記URLから利用可能な辞書の一覧を表示します。</para>
+
+		  <warning>
+			<para>この操作を行うにはインターネット接続が必要です</para>
+		  </warning>
+
+		  <para>インストールする辞書を選択し、<guibutton>インストール</guibutton>をクリックします。インターネット接続によっては、辞書が導入されるまでに時間がかかる場合があります。</para>
+		</listitem>
+	  </varlistentry>
+	</variablelist>
+  </section>
+  
+  <section id="dialog.preferences.languagetool.plugin">
+	<title id="dialog.preferences.languagetool.plugin.title"><guilabel>LanguageTool</guilabel></title>
+
+	<variablelist>
+	  <varlistentry id="dialog.preferences.languagetool.plugin.servicetype">
+		<term id="dialog.preferences.languagetool.plugin.servicetype.title"><option>使用する LanguageTool</option></term>
+
+		<listitem>
+		  <para>言語チェッカーの場所を選択</para>
+
+		  <para>ローカル・マシン上で、 OmegaT で提供されている言語チェッカーとは異なる言語チェッカーを使用すると、検証ルールを個別設定できるようになります。</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialog.preferences.languagetool.plugin.rules">
+		<term id="dialog.preferences.languagetool.plugin.rules.title"><option>規則</option></term>
+
+		<listitem>
+		  <para>翻訳しているテキストのタイプに関連しているかどうかに応じてルールを選択します。</para>
+		</listitem>
+	  </varlistentry>
+	</variablelist>
+  </section>
+
+  <section id="dialogs.preferences.external.searches">
+	<title id="dialogs.preferences.external.searches.title"><guilabel>ユーザーレベルの外部検索</guilabel></title>
+	<para>外部検索は、ウェブ検索または編集で選択された文字列を引数として使用するローカルコマンドです。ウェブ検索は標準ブラウザで開かれ、コマンドはコマンドラインで起動される項目と同じです。</para>
+
+	<variablelist>
+	  <varlistentry id="dialogs.preferences.external.search.enable.project.specific.commands">
+		<term id="dialogs.preferences.external.search.enable.project.specific.commands.title"><option>プロジェクト専用の後処理用コマンドを許可</option></term>
+
+		<listitem>
+		  <warning>
+			<para>セキュリティ上の理由により、<link linkend="dialogs.project.properties.external.searches">プロジェクト専用の外部検索</link>は、デフォルトでは無効になっています。</para>
+		  </warning>
+
+		  <para>プロジェクト専用の外部検索コマンドは、<link linkend="project.folder.omegat.filters" endterm="project.folder.omegat.filters.title"/>ファイルに保存されます。そのファイルの出自が信頼できる場合にのみ、この設定を有効にしてください。</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialogs.preferences.external.search.context.menu.priority">
+		<term id="dialogs.preferences.external.search.context.menu.priority.title"><option>コンテキストメニューの優先度</option></term>
+
+		<listitem>
+		  <para>この設定を使用すると、編集ウィンドウの<link linkend="panes.editor.context.menu">コンテキストメニュー</link>のコマンドの順序を変更できます。100前後の値を指定すると、コマンドが最上部に表示され、900前後の値を指定すると、コマンドが最下部に表示されます。</para>
+
+		  <warning>
+			<para>変更を適用するために再起動が必要です。</para>
+		  </warning>
+		</listitem>
+	  </varlistentry>
+	  
+	  <varlistentry id="dialogs.preferences.external.search.items">
+		<term id="dialogs.preferences.external.search.items.title"><option>セット</option></term>
+		<listitem>
+		  <para>各セットは、同時に起動されるウェブ検索またはローカルコマンドのグループを表します。</para>
+
+		  <para>セットには名前を付ける必要があります。名前は<link linkend="menus.tools" endterm="menus.tools.title"/>メニューの下部に表示されます。</para>
+
+		  <para><guilabel>編集のコンテキストメニューに表示</guilabel>をオンにした場合、文字列が選択されていると、セット名も<link linkend="panes.editor.context.menu">コンテキストメニュー</link>に表示されます。</para>
+
+		  <para>URL検索およびコマンドの中には、受信する文字列<literal>{target}</literal>が必要です。<literal>{target}</literal>プレースホルダは、編集で選択された文字列に置き換えられます。</para>
+
+		  <para>URLは、タブごとに1つずつ、標準ウェブブラウザで開きます。</para>
+
+		  <example id="dialogs.preferences.external.search.items.url.search.example">
+			<title id="dialogs.preferences.external.search.items.url.search.example.title">URL検索の例</title>
+			<programlisting>https://duckduckgo.com/?q=%22{target}%22+site%3A.fr+-linguee</programlisting>
+
+			<para>いくつかの検索パラメータを使用して、DuckDuckGoで{target}用語の検索が開きます。</para></example>
+
+			<para>コマンドはコマンドラインで開きます。<guilabel>Delimiter</guilabel>は、コマンドパラメータ間の区切りを定義します。デフォルトの区切り文字は<code>|</code>です。</para>
+
+		  <example id="dialogs.preferences.external.search.items.command.example">
+			<title id="dialogs.preferences.external.search.items.command.example.title">コマンドの例</title>
+			<programlisting>/usr/bin/open|dict://{target}</programlisting>
+
+			<para>{target}用語を検索するマシン上の<code>dict</code>プロトコルを実装する辞書プログラムが開きます。</para></example>
+		</listitem>
+	  </varlistentry>
+	</variablelist>
+  </section>
+
+  <section id="dialogs.preferences.editor">
+	<title id="dialogs.preferences.editor.title"><guilabel>編集</guilabel></title>
+
+	<para>空の分節に入る場合:</para>
+	<variablelist>
+	  <varlistentry id="dialogs.preferences.editor.insert.the.source.text">
+		<term id="dialogs.preferences.editor.insert.the.source.text.title"><option>原文を挿入</option></term>
+
+		<listitem>
+		  <para>この設定は、訳語をあまり必要としない分節に対して一時的に使用できます。</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialogs.preferences.editor.leave.the.segment.empty">
+		<term id="dialogs.preferences.editor.leave.the.segment.empty.title"><option>原文を挿入しない</option></term>
+
+		<listitem>
+		  <para>翻訳文はすぐに入力できます。</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialogs.preferences.editor.insert.the.best.fuzzy.match">
+		<term id="dialogs.preferences.editor.insert.the.best.fuzzy.match.title"><option>最も一致率の高い参考訳文を自動で挿入</option></term>
+
+		<listitem>
+		  <para>OmegaTでは、このダイアログで設定した値よりも一致パーセンテージが高い訳文が挿入されます。</para>
+
+		  <para>接頭辞によって、参考訳文で挿入された訳文を識別できます。<link linkend="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation" endterm="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation.title"/>設定に接頭辞を登録して、タグチェックの処理に含めることもできます。作業時に忘れないようにしてください。</para>
+		</listitem>
+	  </varlistentry>
+	</variablelist>
+	
+	<variablelist>
+	  <varlistentry id="dialogs.preferences.editor.attempt.to.replace.numbers.when.inserting.a.fuzzy.match">
+		<term id="dialogs.preferences.editor.attempt.to.replace.numbers.when.inserting.a.fuzzy.match.title"><option>参考訳文の番号を変更する(&amp;N)</option></term>
+
+		<listitem>
+		  <para>参考訳文を挿入する際に、OmegaT は参考訳文に含まれる数値を、挿入先の原文に照らして変更しようとします。</para>
+
+		  <note>
+			<para>整数と単純な小数I(例えば、5.4 ）だけを対象としています。</para>
+		  </note>
+
+		  <example id="convert.match.numbers">
+			<title>参考訳文の数字変換</title>
+			<para>原文での<token>2001</token>:</para>
+			<para>
+			  <programlisting>[[<token>2001</token>年]]、ドイツの永住権を取得。</programlisting></para>
+			
+			<para>参考訳文では<token>2003</token>:</para>
+			<para><programlisting>[[<token>2003</token>年]]、ドイツの永住権を取得。
+[[<token>2003</token>]], elle acquiert la nationalité allemande.</programlisting></para>
+
+			<para>参考訳文が挿入されるときに、OmegaTは<token>2003</token>から<token>2001</token>に置き換えます。</para>
+
+			<para><programlisting>[[<token>2001</token>]], elle acquiert la nationalité allemande.</programlisting></para>
+		  </example>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialogs.preferences.editor.allow.translation.to.be.equal.to.source">
+		<term id="dialogs.preferences.editor.allow.translation.to.be.equal.to.source.title"><option>原文と同じ訳文を許可</option></term>
+
+		<listitem>
+		  <para>原文と同じ訳文は、デフォルトでは翻訳として認識されません。OmegaTはそれを消去し、分節は翻訳されていないものとしてカウントします。</para>
+
+		  <para>この設定を使用すると、OmegaTがこのようなエントリを登録し、翻訳済みとしてカウントするように強制します。</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialogs.preferences.editor.export.the.segment.to.text.files">
+		<term id="dialogs.preferences.editor.export.the.segment.to.text.files.title"><option>分節をテキストファイルへ出力</option></term>
+
+		<listitem>
+		  <para>OmegaTが分節に入ると</para>
+
+		  <itemizedlist>
+			<listitem>
+			  <para>原文のパーツの内容が<link linkend="configuration.folder.default.contents.script.source" endterm="configuration.folder.default.contents.script.source.title"/>ファイルにコピーされます。</para>
+			</listitem>
+			<listitem>
+			  <para>訳文のパーツの内容(存在する場合)が<link linkend="configuration.folder.default.contents.script.target" endterm="configuration.folder.default.contents.script.target.title"/>ファイルにコピーされます。</para>
+			</listitem>
+		  </itemizedlist>
+		  
+		  <para>どちらも<link linkend="windows.scripts.folder">スクリプトフォルダー</link>にあります。</para>
+		  
+		  <note>
+			<para>この機能には、<link linkend="windows.scripts" endterm="windows.scripts.title"/>機能との関係はありません。</para>
+		  </note>
+
+		  <para>OmegaTが新しい分節に入ると、ファイルは上書きされます。</para>
+
+		  <para><link linkend="windows.scripts.distribution.extract.text.content" endterm="windows.scripts.distribution.extract.text.content.title"/>スクリプトは、プロジェクト全体に対して一度に同じようなことを行います。<link linkend="windows.scripts" endterm="windows.scripts.title"/>ウィンドウを参照してください。</para>
+
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialogs.preferences.editor.go.to.next.untranslated.segment.stops.where.there.is.at.least.one.alternative.translation">
+		<term id="dialogs.preferences.editor.go.to.next.untranslated.segment.stops.where.there.is.at.least.one.alternative.translation.title"><option>未翻訳および代替翻訳のある分節で停止</option></term>
+
+		<listitem>
+		  <para><link linkend="menus.goto" endterm="menus.goto.title"/><link linkend="menus.goto.next.untranslated.segment" endterm="menus.goto.next.untranslated.segment.title"/>同様に代替翻訳のある分節で停止します。</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialogs.preferences.editor.allow.tag.editing">
+		<term id="dialogs.preferences.editor.allow.tag.editing.title"><option>タグの編集を許可する</option></term>
+
+		<listitem>
+		  <para>通常、タグは変更できませんが、この設定が有効になっている場合は変更できます。</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialogs.preferences.editor.validate.tags.when.leaving.a.segment">
+		<term id="dialogs.preferences.editor.validate.tags.when.leaving.a.segment.title"><option>分節を離れる時に品質チェックする</option></term>
+
+		<listitem>
+		  <para>OmegaTは、お客様が分節を離れるときに問題をチェックします。この設定は、<link linkend="menus.tools" endterm="menus.tools.title"/><link linkend="menus.tools.check.issues" endterm="menus.tools.check.issues.title"/>を使用するのと同じです。</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialogs.preferences.editor.save.auto-populated.status">
+		<term id="dialogs.preferences.editor.save.auto-populated.status.title"><option>auto フォルダー由来の翻訳かどうかを記録する</option></term>
+
+		<listitem>
+		  <para><link linkend="project.folder.tm.auto" endterm="project.folder.tm.auto.title"/>と<link linkend="project.folder.tm.enforce" endterm="project.folder.tm.enforce.title"/>に配置された翻訳メモリによって、プロジェクトのメモリを自動的に設定できます。自動翻訳を受けいれる分節は、<link linkend="menus.view" endterm="menus.view.title"/>.<link linkend="menus.view.mark.auto.populated.segments" endterm="menus.view.mark.auto.populated.segments.title"/>を使用して<guilabel>編集</guilabel>ウィンドウで色づけ表示されます。</para>
+
+		  <para>詳細については、 <link linkend="how.to.use.tm.reuse.tm" endterm="how.to.use.tm.reuse.tm.title"/>を参照してください。</para>
+		</listitem>
+	  </varlistentry>
+
+      <varlistentry id="dialogs.preferences.editor.save.orgin.of.translation">
+		<term id="dialogs.preferences.editor.save.orgin.of.translation.title"><option>訳文の由来を保存する</option></term>
+
+		<listitem>
+          <para>自動翻訳が有効になっている場合、OmegaTは、特定の分節の入力に使用されたエンジンの名前を登録します。</para>
+		</listitem>
+      </varlistentry>
+
+	  <varlistentry id="dialogs.preferences.editor.initially.load.this.many.segments">
+		<term id="dialogs.preferences.editor.initially.load.this.many.segments.title"><option>最初に読み込む最大分節数</option></term>
+
+		<listitem>
+		  <para>編集ウィンドウに、最初に2000個の分節が表示されます。上下にスクロールするにつれ、徐々にロードされるようになります。この数値は、利用するPCの性能に応じて変更してください。</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialogs.preferences.editor.paragraph.delimitation.format">
+		<term id="dialogs.preferences.editor.paragraph.delimitation.format.title"><option>段落区切り形式</option></term>
+
+		<listitem>
+		  <para><link linkend="menus.view" endterm="menus.view.title"/><link linkend="menus.view.mark.paragraph.delimitations" endterm="menus.view.mark.paragraph.delimitations.title"/>を使用して、同じ段落に属する分節を識別します。</para>
+		</listitem>
+	  </varlistentry>
+	</variablelist>
+  </section>
+
+  <section id="dialogs.preferences.tag.processing">
+	<title id="dialogs.preferences.tag.processing.title"><guilabel>タグ処理</guilabel></title>
+
+	<variablelist>
+	  <varlistentry id="dialogs.preferences.tag.processing.programming.variables">
+		<term id="dialogs.preferences.tag.processing.programming.variables.title"><option>printf関数の変数をチェックする</option></term>
+		<listitem>
+		  <para>PO書式以外のファイル形式のprintf変数をチェックしてください。POフィルタはすでに<literal>%</literal>を処理しており</para>
+
+		  <para>次のいずれかを選択できます。</para>
+		  
+		  <variablelist>
+			<varlistentry>
+			  <term><option>なし</option></term>
+			  <listitem>
+				<para>どの変数パターンもチェックしない。</para>
+			  </listitem>
+			</varlistentry>
+			
+			<varlistentry>
+			  <term><option>単純な変数(%s、%dなど)</option></term>
+			  <listitem>
+				<para>シンプルな変数パターンのみをチェック。</para>
+			  </listitem>
+			</varlistentry>
+
+			<varlistentry>
+			  <term><option>すべての変数(%s、%-sなど)</option></term>
+			  <listitem>
+				<para>一部のファイルで誤検出が発生する可能性があります。</para>
+			  </listitem>
+			</varlistentry>
+		  </variablelist>
+		</listitem>
+	  </varlistentry>
+	  
+	  <varlistentry id="dialogs.preferences.tag.processing.simple.java.messageformat">
+		<term id="dialogs.preferences.tag.processing.simple.java.messageformat.title"><option>Java の簡単な MessageFormatのプレースホルダを確認する</option></term>
+		<listitem>
+		  <para>Java Bundle書式以外のファイル形式のJava MessageFormatプレースホルダをチェックします。Javaバンドルフィルターでは、<literal>{#}</literal>でマークされたプレースホルダがすでに処理されています。ここで、<literal>#</literal>は数値です。</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialogs.preferences.tag.processing.allow.translated.tags.to.be.in.a.different.order">
+		<term id="dialogs.preferences.tag.processing.allow.translated.tags.to.be.in.a.different.order.title"><option>翻訳されたタグを別の順序に置くことを許可します</option></term>
+		<listitem>
+		  <para>原文とは異なる順序のタグは、タグの問題の一覧に表示されなくなります。詳細については、<link linkend="menus.tools" endterm="menus.tools.title"/><link linkend="menus.tools.check.issues" endterm="menus.tools.check.issues.title"/>メニューを参照してください。</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialogs.preferences.tag.processing.do.not.allow.creating.translated.documents.with.tag.issues">
+		<term id="dialogs.preferences.tag.processing.do.not.allow.creating.translated.documents.with.tag.issues.title"><option>タグに課題がある訳文ファイルの作成をブロックする</option></term>
+		<listitem>
+		  <para>訳文ファイルを作成しようとすると、OmegaTは問題が見つからなくなるまで、見付かった問題をダイアログに表示します。詳細については、<link linkend="menus.tools" endterm="menus.tools.title"/><link linkend="menus.tools.check.issues" endterm="menus.tools.check.issues.title"/>メニューを参照してください。</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialogs.preferences.tag.processing.count.protected.text.and.custom.tags.in.statistics">
+		<term id="dialogs.preferences.tag.processing.count.protected.text.and.custom.tags.in.statistics.title"><option>フラグの設定されたテキストと独自タグを翻訳状況にカウントする</option></term>
+		<listitem>
+		  <para>OmegaTタグとは異なり、フラグ付き文章タグおよびカスタムタグは、翻訳状況でデフォルトではとしてカウントされます。詳細については、<link linkend="menus.tools" endterm="menus.tools.title"/><link linkend="menus.tools.statistics" endterm="menus.tools.statistics.title"/>メニューを参照してください。</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags">
+		<term id="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags.title"><option>カスタムタグ</option></term>
+		<listitem>
+		  <para>正規表現&lt;を使用して、カスタムタグを定義します。一連のタグを定義するには、各タグを括弧で囲み、<literal></literal>(正規表現&lt;の「OR」に相当)でグループを区切ります。</para>
+
+		  <para>たとえば、<userinput>\d+</userinput>を使用すると、すべての数値をタグとして扱うことができ、変換時に数値が誤って変更されていないことを確認できます。</para>
+
+		  <para>同様に、<userinput>&lt;/?[^&gt;]+&gt;</userinput>を使用して、ソース文章に入力されたHTML(または同様の)タグが変換時に変更されずに保持されるようにします。</para>
+
+		  <para>OmegaTが2つのタグを考慮するようにするには、括弧と<literal>|</literal>を使用します: <userinput>(\d+)(&lt;/?[^&gt;]+&gt;)</userinput>。</para>
+
+		  <para>詳細は、付録の <link linkend="app.regex" endterm="app.regex.title"/> をご覧ください。</para>
+		</listitem>
+	  </varlistentry>
+	  
+	  <varlistentry id="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation">
+		<term id="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation.title"><option>フラグ付き文字列</option></term>
+		<listitem>
+		  <para>この表現に一致する訳文分節の文章は赤でマークされ、問題をチェックするために外部タグとして識別されます。詳細については、<link linkend="menus.tools" endterm="menus.tools.title"/><link linkend="menus.tools.check.issues" endterm="menus.tools.check.issues.title"/>メニューを参照してください。</para>
+		</listitem>
+	  </varlistentry>
+	</variablelist>
+  </section>
+
+  <section id="dialog.preferences.team">
+	<title id="dialog.preferences.team.title"><guilabel>チーム</guilabel></title>
+
+	<para>ここで入力した名前は、翻訳するすべての分節に付与されます。</para>
+
+	<variablelist>
+	  <varlistentry id="dialog.preferences.team.title.repository.credentials">
+		<term id="dialog.preferences.team.title.repository.credentials.title"><option>リポジトリ認証情報</option></term>
+		<listitem>
+		  <para>ログイン情報がOmegaTに保管されているプロジェクトのリスト。プロジェクトにアクセスするたびにOmegaTからログインとパスワードの入力を求められるようにするには、このリストからプロジェクトを削除します。</para>
+		</listitem>
+	  </varlistentry>
+	</variablelist>
+  </section>
+
+  <section id="dialog.preferences.tm.matches">
+	<title id="dialog.preferences.tm.matches.title"><option>参考訳文</option></title>
+
+	<variablelist>
+	  <varlistentry id="dialog.preferences.tm.matches.sort.fuzzy.matches.by">
+		<term id="dialog.preferences.tm.matches.sort.fuzzy.matches.by.title"><option>参考訳文の並べ替え基準：</option></term>
+
+		<listitem>
+		  <para>デフォルトでは、<guilabel>参考訳文</guilabel>ウィンドウに表示される最も近い一致は、ステミングを使用して決定されます。</para>
+
+		  <para>100%に近いより多くのリテラル一致を取得するには、[<guilabel>タグと数字を含むフルテキスト</guilabel>]オプションを選択します。</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialog.preferences.tm.matches.minimum.threshold">
+		<term id="dialog.preferences.tm.matches.minimum.threshold.title"><option>参考訳文を表示する最小しきい値</option></term>
+		<listitem>
+		  <para>OmegaTでは、デフォルトではの30%を超える参考訳文の上位5つが表示されます。このしきい値はここで変更できます。</para>
+			<note>
+				<para><link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/>ウィンドウに表示される3種類の一致パーセンテージのそれぞれが、一致が表示されるかどうかを決定するために考慮されます。3つの割合すべてがしきい値を下回る場合、一致する可能性のあるものは拒否されます。</para>
+			</note>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialog.preferences.tm.matches.displaying.tags.in.non-omegat.tmxs">
+		<term id="dialog.preferences.tm.matches.displaying.tags.in.non-omegat.tmxs.title"><option>OmegaT以外のTMXのタグの表示方法を選択します</option></term>
+
+		<listitem>
+		  <para>他のツールで生成されたTMXファイル内のタグの処理方法を決定します。</para>
+
+		  <para>それらを表示するかどうか、およびスタンドアロンタグ(&lt;i/&gt;など)に標準XML表記を使用するかどうかを選択できます。</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialog.preferences.tm.matches.other.languages">
+		<term id="dialog.preferences.tm.matches.other.languages.title"><option>他の言語の一致をふくむ</option></term>
+		<listitem>
+		  <para>異なるターゲット言語で一致するセグメントは、<link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/>ウィンドウにも表示できます。このような一致にはペナルティを適用できます。</para>
+		</listitem>
+	  </varlistentry>
+
+	  
+	  <varlistentry id="dialog.preferences.tm.matches.match.display.template">
+		<term id="dialog.preferences.tm.matches.match.display.template.title"><option>参考訳文表示テンプレート</option></term>
+
+		<listitem>
+		  <para>あらかじめ設定された変数を使用して、ファジーマッチの表示方法を変更します。</para>
+
+		  <para>デフォルトは：</para>
+		  
+		  <para><programlisting>${id}. ${fuzzyFlag}${sourceText} ${targetText}
+&lt;${score}/${noStemScore}/${adjustedScore}%
+${filePath}&gt;</programlisting></para>
+
+		  <para>次に、可能な代替案を示します:</para>
+
+		  <para>
+			<programlisting>l⥤ ${id}. &lt;${score}/${noStemScore}/${adjustedScore}%&gt; ${fuzzyFlag} ${fileNameOnly}
+[NEW]▷ ${diff}
+			
+[OLD]◀ ${diffReversed}
+◀ ${targetText}</programlisting></para>
+
+
+		  <para>テンプレート変数はドロップダウンメニューからも使用でき、ボタンを使用して挿入できます。</para>
+
+		  <table id="table.match.pane.setup" colsep="0" rowsep="0">
+			<title id="table.match.pane.setup.title">テンプレート変数の一致</title>
+
+			<tgroup cols="2" colsep="1" rowsep="1">
+			  <colspec align="left"/>
+			  <colspec align="left"/>
+			  <tbody>
+				<row>
+				  <entry>
+					<literal>${id}</literal>
+				  </entry>
+				  <entry>1 から 5 までの、参考訳文の番号</entry>
+				</row>
+
+				<row>
+				  <entry>
+					<literal>${sourceText}</literal>
+				  </entry>
+				  <entry>参考訳文の原文</entry>
+				</row>
+
+				<row>
+				  <entry>
+					<literal>${diff}</literal>
+				  </entry>
+				  <entry>原文と参考訳文との差異を表示します。</entry>
+				</row>
+
+				<row>
+				  <entry>
+					<literal>${diffReversed}</literal>
+				  </entry>
+				  <entry>$ {diff}と同じですが、 ( 挿入および削除される ) 相違点が反転しています。</entry>
+				</row>
+
+				<row>
+				  <entry>
+					<literal>${targetText}</literal>
+				  </entry>
+				  <entry>参考訳文の訳文</entry>
+				</row>
+
+				<row>
+				  <entry>
+					<literal>${score}</literal>
+				  </entry>
+				  <entry><guilabel>「ステミング、タグなし、数値なし」</guilabel> オプションで計算されたパーセンテージ。</entry>
+				</row>
+
+				<row>
+				  <entry>
+					<literal>${noStemScore}</literal>
+				  </entry>
+				  <entry><guilabel>「タグなし」および「数値なし」</guilabel> オプションで計算されたパーセンテージ。</entry>
+				</row>
+
+				<row>
+				  <entry>
+					<literal>${adjustedScore}</literal>
+				  </entry>
+				  <entry><guilabel>[タグと番号を含むフルテキスト]</guilabel>オプションを使用して計算されたパーセンテージ。</entry>
+				</row>
+
+				<row>
+				  <entry>
+					<literal>${fileNameOnly}</literal>
+				  </entry>
+				  <entry>拡張子を除いたTMファイル名。</entry>
+				</row>
+
+				<row>
+				  <entry>
+					<literal>${filePath}</literal>
+				  </entry>
+				  <entry>TMファイルのフルパスです。</entry>
+				</row>
+
+				<row>
+				  <entry>
+					<literal>${fileShortPath}</literal>
+				  </entry>
+				  <entry>TMファイルの相対パスです。</entry>
+				</row>
+
+				<row>
+				  <entry>
+					<literal>${initialCreationID}</literal>
+				  </entry>
+				  <entry>分節を作成した翻訳者のID。</entry>
+				</row>
+
+				<row>
+				  <entry>
+					<literal>${initialCreationDate}</literal>
+				  </entry>
+				  <entry>分節が作成された日付。</entry>
+				</row>
+
+				<row>
+				  <entry>
+					<literal>${changeID}</literal>
+				  </entry>
+				  <entry>最後に分節を変更した翻訳者のID。</entry>
+				</row>
+
+				<row>
+				  <entry>
+					<literal>${changeDate}</literal>
+				  </entry>
+				  <entry>分節が最後に変更された日付。</entry>
+				</row>
+
+				<row>
+				  <entry>
+					<literal>${fuzzyFlag}</literal>
+				  </entry>
+				  <entry>参考訳文がファジーであることを示す（今のところ #fuzzy マークのついた PO ファイルの翻訳でのみ有効）</entry>
+				</row>
+
+				<row>
+				  <entry>
+					<literal>${sourceLanguage}</literal>
+				  </entry>
+				  <entry>分節の原文言語</entry>
+				</row>
+
+				<row>
+				  <entry>
+					<literal>${targetLanguage}</literal>
+				  </entry>
+				  <entry>分節の訳文言語</entry>
+				</row>
+
+			  </tbody>
+			</tgroup>
+		  </table>
+		</listitem>
+	  </varlistentry>
+	</variablelist>
+  </section>
+
+  <section id="dialog.preferences.view">
+	<title id="dialog.preferences.view.title"><guilabel>表示</guilabel></title>
+
+	<variablelist>
+	  <varlistentry id="dialog.preferences.view.display.all.source.segments.in.bold">
+		<term id="dialog.preferences.view.display.all.source.segments.in.bold.title"><option>原文を太字で表示</option></term>
+		<listitem>
+		  <para>デフォルトでは、現在の分節のみが太字で表示されます。</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialog.preferences.view.display.active.source.segment.in.bold">
+		<term id="dialog.preferences.view.display.active.source.segment.in.bold.title"><option>アクティブな原文の分節を太字で表示</option></term>
+		<listitem>
+		  <para>原文分節が通常のフォントで表示されている場合は、現在の原文分節のみが太字で表示されるように、この設定を表示設定として使用できます。</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialog.preferences.view.include.the.first.non-unique.segment.when.marking.non.unique.segments">
+		<term id="dialog.preferences.view.include.the.first.non-unique.segment.when.marking.non.unique.segments.title"><option>繰り返しのある全分節を色づけ</option></term>
+		<listitem>
+		  <para><link linkend="menus.view" endterm="menus.view.title"/><link linkend="menus.view.mark.non.unique.segments" endterm="menus.view.mark.non.unique.segments.title"/>を使用して、繰り返される分節の2番目以降のコピーをマークします。この設定を使用して、分節の最初のコピーもマークします。</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialog.preferences.view.simplify.tooltip.on.protected.parts">
+		<term id="dialog.preferences.view.simplify.tooltip.on.protected.parts.title"><option>タグとツールチップを簡略化</option></term>
+		<listitem>
+		  <para>OmegaTタグは、原文文章内の書式固有のタグを表す保護されたテキストです。OmegaTタグにカーソルを合わせると、OmegaTにはタグの元の内容を含むツールチップが表示されます。そのコンテンツがもともとペアのタグで囲まれていた場合は、読みやすくするために、ペアのタグをツールチップから削除できます。</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialog.preferences.view.use.custom.templates.for.modification.info">
+		<term id="dialog.preferences.view.use.custom.templates.for.modification.info.title"><option>分節の変更情報のカスタマイズ</option></term>
+		<listitem>
+		  <para>分節に分節更新情報が表示されます。標準の設定には、訳文を最後に変更したユーザとその日時が表示されます。</para>
+
+		  <example id="dialog.preferences.view.use.custom.templates.for.modification.info.example">
+			<title id="dialog.preferences.view.use.custom.templates.for.modification.info.example.title">デフォルト表示</title>
+			<para>
+			  <programlisting>Translation last modified by suzume on Oct 6, 2022 at 2:18:27 PM
+[[チューリッヒ大学]]大学院博士課程修了。
+[[Université de Zurich]] Elle finit sa thèse de doctorat.&lt;segment 0178&gt;</programlisting>
+			</para>
+		  </example>
+
+		  <para><link linkend="menus.view" endterm="menus.view.title"/><link linkend="menus.view.modification.info" endterm="menus.view.modification.info.title"/>を使用して、分節の変更情報を表示します。</para>
+		</listitem>
+	  </varlistentry>
+	  
+	  <varlistentry id="dialog.preferences.view.modification.info.template">
+		<term id="dialog.preferences.view.modification.info.template.title"><option>標準テンプレート</option></term>
+		<listitem>
+		  <para>テンプレート変数を使用して、このテンプレートを必要に応じて調整します。</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialog.preferences.view.modification.info.template.for.segments.without.date">
+		<term id="dialog.preferences.view.modification.info.template.for.segments.without.date.title"><option>日付のない分節のテンプレート</option></term>
+		<listitem>
+		  <para>テンプレート変数を使用して、このテンプレートを必要に応じて調整します。</para>
+		</listitem>
+	  </varlistentry>
+	</variablelist>
+  </section>
+
+  <section id="dialogs.preferences.saving.and.output">
+	<title id="dialogs.preferences.saving.and.output.title"><guilabel>保存と訳文ファイル生成</guilabel></title>
+
+	<variablelist>
+	  <varlistentry id="dialog.preferences.saving.and.output.interval">
+		<term id="dialog.preferences.saving.and.output.interval.title"><option>プロジェクト保存間隔</option></term>
+		<listitem>
+		  <para>プロジェクトを自動的に保存する間隔を、分と秒で指定します。詳細は<link linkend="how.to.restore.your.data.automatic.backup" endterm="how.to.restore.your.data.automatic.backup.title"/>項をご覧ください。</para>
+
+		  <para>プロジェクトの特性に応じて、デフォルトの間隔 (3 分) を変更します。</para>
+
+		  <itemizedlist>
+			<listitem>
+			  <para>内部サーバーで同期されるプロジェクトの短い間隔 (最小: 10 秒 ) 。</para>
+			</listitem>
+
+			<listitem>
+			  <para>外部サーバーでホストされるチーム・プロジェクトの長い間隔。</para>
+			</listitem>
+		  </itemizedlist>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialogs.preferences.saving.and.output.external.post-processing.command">
+		<term id="dialogs.preferences.saving.and.output.external.post-processing.command.title"><option>ユーザーレベルの後処理用外部コマンド</option></term>
+
+		<listitem>
+		  <para><link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.create.translated.documents" endterm="menus.project.create.translated.documents.title"/>または<link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.create.current.translated.document" endterm="menus.project.create.current.translated.document.title"/>を使用すると、OmegaTは自動的にコマンドを実行できます。コマンドは、ここで定義できます。</para>
+
+		  <para>ここで指定したコマンドは、同じ設定フォルダーを使用するすべてのプロジェクトで使用できます。その指定は、 <link linkend="configuration.folder.default.contents.omegat.prefs" endterm="configuration.folder.default.contents.omegat.prefs.title"/> ファイルに保存されます。</para>
+
+		  <para>テンプレート変数により、さまざまなプロジェクトのデータや、システム変数へのアクセスが提供されています。詳細は<link linkend="post.processing.commands.template.variables" endterm="post.processing.commands.template.variables.title"/>項をご覧ください。</para>
+		  
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialogs.preferences.saving.and.output.also.allow.per.project.external.commands">
+		<term id="dialogs.preferences.saving.and.output.also.allow.per.project.external.commands.title"><option>プロジェクト専用の後処理用コマンドを許可(&amp;A)</option></term>
+
+		<listitem>
+		  <warning>
+			<para>セキュリティ上の理由から、<link linkend="dialogs.project.properties.external.processing.command">プロジェクト専用の後処理用コマンド</link>はデフォルトで無効になっています。</para>
+		  </warning>
+
+		  <para>特定のプロジェクトでのみ使用可能なローカル後処理コマンドを定義することもできます。そのようなコマンドは<link linkend="dialogs.project.properties.external.processing.command" endterm="dialogs.project.properties.external.processing.command.title"/>ウィンドウで定義できます。</para>
+
+		  <para>プロジェクト専用の後処理コマンドは、<link linkend="project.folder.omegat.project.file" endterm="project.folder.omegat.project.file.title"/>ファイルに保存されます。そのファイルの出自が信頼できる場合にのみ、この設定を有効にしてください。</para>
+
+	  	  <note>
+			<para>プロジェクト専用の後処理用コマンドは、ユーザーレベルコマンドの前に実行されます。</para>
+		  </note>
+
+		</listitem>
+	  </varlistentry>
+	</variablelist>
+  </section>
+
+  <section id="dialogs.preferences.proxy.login">
+	<title id="dialogs.preferences.proxy.login.title"><guilabel>プロキシ認証</guilabel></title>
+
+	<para>認証ありのプロキシサーバを使用してインターネットにアクセスする場合は、ここに資格情報を入力します。</para>
+  </section>
+
+  <section id="dialogs.preferences.secure.store">
+	<title id="dialogs.preferences.secure.store.title"><guilabel>機密データ</guilabel></title>
+
+	<para>機械翻訳サービスのログインおよびアクセス・キーを保護するために使用されるマスター・パスワードを定義できます。</para>
+
+	<para>マスターパスワードをリセットする前に、必ずその情報のバックアップを作成してください。資格情報は削除され、再入力する必要があります。</para>
+  </section>
+
+  <section id="dialogs.preferences.plugins">
+	<title id="dialogs.preferences.plugins.title"><guilabel>プラグイン</guilabel></title>
+
+	<para>インストールされているすべてのプラグインを一覧表示します。</para>
+
+	<para>プラグインは、<link linkend="configuration.folder">構成フォルダー</link>にインストールされますが、<link linkend="application.folder">プログラム</link>フォルダーの下の<link linkend="application.folder.plugins" endterm="application.folder.plugins.title"/>フォルダーにインストールすることもできます。</para>
+
+	<para>その他のプラグインは、<ulink url="https://sourceforge.net/p/omegat/wiki/Plugins/">OmegaT開発サイト</ulink>にあります。</para>
+  </section>
+
+  <section id="dialogs.preferences.updates">
+	<title id="dialogs.preferences.updates.title"><guilabel>更新</guilabel></title>
+
+	<para>この設定を使用して、OmegaTへの更新を自動的に通知するかどうかを選択します。</para>
+
+	<para>OmegaTはアップデートを検出すると、ダウンロードページへのリンクを表示します。詳細は<link linkend="update.and.delete.omegat" endterm="update.and.delete.omegat.title"/>項をご覧ください。</para>
+  </section>
+</chapter>

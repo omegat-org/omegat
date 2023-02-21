@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="app.bidi">
+  <title id="app.bidi.title">方向制御用の書式設定文字</title>
+
+  <para>Bidi制御文字は<link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.insert.unicode.control.character" endterm="menus.edit.insert.unicode.control.character.title"/>から使用できます。これらは次の目的で使用できます。</para>
+
+  <itemizedlist>
+	<listitem>
+	  <para>方向を強く持つ非表示の文字を挿入して、方向性の弱い文字または方向性のない文字に特定の位置を強制します。</para>
+	</listitem>
+	<listitem>
+	  <para>分節のなかに、反対方向に文字が綴られる項を作成します。</para>
+	</listitem>
+  </itemizedlist>
+  
+  <para>これらの制御文字は綴り方向を変えますが、見えません。<link linkend="menus.view" endterm="menus.view.title"/><link linkend="menus.view.mark.bidirectional.algorithm.control.character" endterm="menus.view.mark.bidirectional.algorithm.control.character.title"/>を使用すると、その位置を視覚的に表示します。</para>
+
+  <section id="app.bidi.marks">
+	<title id="app.bidi.marks.title">マーク</title>
+
+	<para>(句読点記号のような)弱いまたは中立的な方向性を持つ文字の位置を変更するには、その分節の方向に応じて、文字の後にLRMまたはRLM文字を挿入します。</para>
+
+	<itemizedlist>
+	  <listitem>
+		<para>右から左への分節で、左から右に綴る必要がある弱い方向性の文字の後に、左から右へ指示(LRM: left-to-right Mark)文字を挿入します。(例えばアラビア語の文章の中の英語の抜粋の場合)</para>
+	  </listitem>
+	  <listitem>
+		<para>左から右の分節の中で、右から左に綴る必要がある弱い方向性の文字の後に、右から左へ指示(RLM: right-to-left mark)文字を挿入します。(例えば英語の文章の中のアラビア語の抜粋の場合)</para>
+	  </listitem>
+	</itemizedlist>
+  </section>
+
+  <section id="app.bidi.embeddings">
+	<title id="app.bidi.embeddings.title">埋め込み</title>
+
+	<para>埋め込みを使用して、分節の綴り方向と反対に綴る必要がある(いくつかの単語とスペースを含むような)長い文章を作成することができます。分節の綴り方向に応じて、次の2種類の埋め込みを作成できます。</para>
+
+	<itemizedlist>
+	  <listitem>
+		<para>右から左への分節に左から右への埋め込みを作成するには、左から右への埋め込み(LRE: Left-to-Right Embedding)文字を挿入し、左から右への文章を入力または挿入してから、ポップ方向書式設定(PDF: Pop Directional Formatting)文字を挿入します。</para>
+	  </listitem>
+	  <listitem>
+		<para>左から右の分節に右から左への埋め込みを作成するには、右から左への埋め込み(RLE: Right-to-Left embedding)文字を挿入し、右から左への文章を入力または挿入してから、PDF文字を挿入します。</para>
+	  </listitem>
+	</itemizedlist>
+  </section>
+</section>

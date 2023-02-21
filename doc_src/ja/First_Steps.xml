@@ -2,9 +2,10 @@
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd"
 [
 <!ENTITY % manualvariables SYSTEM "manualvariables.mod">
+%manualvariables;
 ]>
 <article lang="ja" id="first.steps">
-  <title>OmegaT </title>
+  <title>OmegaT &vernb;</title>
   <section>
 	<title id="first-steps">最初の一歩</title>
 	<para>取扱説明書を開くには、 <keycap>F1</keycap> キーを押すか、 <guimenu>&gt; ヘルプ</guimenu>メニューにアクセスします。取扱説明書には、OmegaTの徹底入門が含まれています。最低限の構成でOmegaTを使いはじめるには、次のようにします。<orderedlist id="first-step-list">

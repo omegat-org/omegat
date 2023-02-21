@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="windows.source.files.list">
+  <title id="windows.source.files.list.title"><guilabel>翻訳対象ファイル一覧</guilabel></title>
+
+  <para><link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.source.files.list" endterm="menus.project.source.files.list.title"/>を選択したときと同様に、OmegaT がプロジェクトを読み込むと自動的に表示されます。</para>
+
+  <para>このウィンドウは、次の情報を表示します：</para>
+
+  <itemizedlist>
+    <listitem>
+      <para>タイトル： プロジェクト中の翻訳可能なファイル数。</para>
+
+	  <para>対象は、<link linkend="project.folder.source" endterm="project.folder.source.title"/>フォルダーに存在し、OmegaT が扱える形式のファイルです。</para>
+    </listitem>
+
+    <listitem>
+      <para>一覧： プロジェクト中の翻訳可能な全ファイル。</para>
+
+	  <para>クリックすると、翻訳作業のために<link linkend="panes.editor" endterm="panes.editor.title"/>ウィンドウに開くことができます。</para>
+    </listitem>
+
+    <listitem>
+      <para>各ファイル毎に、名前、ファイルフィルターの形式、エンコーディング、および含まれる分節数が一覧表示されます。</para>
+    </listitem>
+
+    <listitem>
+      <para>表の最下部には、「すべての分節数」と「繰り返しを除いた分節数」、「繰り返しを除いた翻訳済み分節数」が表示されます。</para>
+    </listitem>
+  </itemizedlist>
+
+  <para>任意のテキストを入力すると<guilabel>フィルター欄</guilabel>が開き、そこにファイル名の一部を入力することができます。矢印を使用してファイルを選択し、<keycap>Enter</keycap>キーを押して変換用に開くことができます。</para>
+
+  <note>
+	<para>ヘッダーをクリックすると、たとえばファイル名（左端の列）のアルファベット順で並べ替えたりできます。ファイルの位置を変更するには、ファイルを選択し、右側の<guibutton>[移動.]</guibutton>ボタンのいずれかをクリックします。</para>
+  </note>
+
+  <para>ファイル名を右クリックするとポップアップが開き、原文ファイルと訳文ファイル(存在する場合)を開くことができます。</para>
+
+  <para><emphasis role="bold">繰り返しを除いた</emphasis>分節の数は、分節の総数から繰り返される分節の数を削除することによって計算されます。</para>
+
+  <para>「すべての分節数」と「繰り返しを除いた分節数」の差から、すべての文中に繰り返しの表現がどれくらいあるかを大まかに見積もることができます。詳細な情報を取得するには、<link linkend="menus.tools" endterm="menus.tools.title"/><link linkend="menus.tools.statistics" endterm="menus.tools.statistics.title"/>を使用してください。</para>
+
+  <para>分節化規則を修正すると、「すべての分節数」と「繰り返しを除いた分節数」が変わる可能性があります。いったんプロジェクトの翻訳を開始したら、規則の変更はなるべく行わないようにしてください。詳細は、付録の <link linkend="app.segmentation" endterm="app.segmentation.title"/> をご覧ください。</para>
+
+  <para>ウィンドウの下部にあるボタンを使用して、プロジェクトにファイルを追加できます。</para>
+  
+  <variablelist>
+	<varlistentry id="windows.source.files.list.copy.files">
+	  <term id="windows.source.files.list.copy.files.title"><guibutton>ファイルを追加...</guibutton></term>
+	<listitem>
+	  <para>選択したファイルをプロジェクトの <link linkend="project.folder.source" endterm="project.folder.source.title"/>フォルダーにコピーし、その新しいファイルを読み込むために、プロジェクトを再読み込みします。</para>
+	</listitem>
+	</varlistentry>
+	
+	<varlistentry id="windows.source.files.list.download.page">
+	  <term id="windows.source.files.list.download.page.title"><guibutton>MediaWiki からの原文ファイル追加...</guibutton></term>
+	  <listitem>
+		<para>ページのURLを要求し、<link linkend="project.folder.source" endterm="project.folder.source.title"/>フォルダーにダウンロードします。</para>
+	  </listitem>
+	</varlistentry>
+  </variablelist>
+  
+  <para>この2つのアクションは、<link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.copy.files.to.source.folder" endterm="menus.project.copy.files.to.source.folder.title"/>および<link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.download.mediawiki.page" endterm="menus.project.download.mediawiki.page.title"/>メニュー項目を使用するのと同じです。</para>
+  
+  <note>
+	<para><link linkend="configuration.folder.default.contents.omegat.prefs" endterm="configuration.folder.default.contents.omegat.prefs.title"/>設定ファイルを手動で編集して、プロジェクトのロード時にソースファイル翻訳対象一覧ウィンドウが自動的に開かないようにすることができます。</para>
+  </note>
+</section>

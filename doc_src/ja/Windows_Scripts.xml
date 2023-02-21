@@ -1,68 +1,379 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="windows.scripts">
-  <title>スクリプト</title>
+  <title id="windows.scripts.title"><guilabel>スクリプト</guilabel></title>
 
-  <para>このウィンドウにアクセスするには、<menuchoice><guimenuitem>[ツール]</guimenuitem>--<guimenuitem>[スクリプト...]</guimenuitem></menuchoice>を選択します。</para>
+  <para>スクリプトは、Officeアプリケーションのマクロに似た短いプログラムで、タスクを自動化したり、OmegaTの機能を拡張またはカスタマイズするために使用できます。スクリプトは、ユーザーが基礎となるJava仮想マシンが理解できる任意の言語で作成できます。</para>
 
-  <section>
-    <title>使い方</title>
 
-    <para>スクリプト ウィンドウ上では、既存のスクリプトをテキスト欄に読み込んだり、いま開いているプロジェクトに対して実行できます。スクリプトをカスタマイズする手順は、次の通りです：</para>
+  <para>スクリプト ウィンドウ上では、既存のスクリプトを読み込んだり、開いているプロジェクト上で実行できます。</para>
 
-    <itemizedlist>
-      <listitem>
-        <para>左側のスクリプト一覧から目的のスクリプト名をクリックして、編集ウィンドウに読み込みます。</para>
+  <para><link endterm="menus.tools.title" linkend="menus.tools"/><link endterm="menus.tools.scripting.title" linkend="menus.tools.scripting"/>を使用してウィンドウにアクセスします。</para>
+
+  <section id="windows.scripts.folder">
+  <title id="windows.scripts.folder.title">スクリプトフォルダー</title>
+
+  <para>スクリプトファイルは、デフォルトでは、OmegaTのプログラムフォルダー配下の<link linkend="application.folder.scripts" endterm="application.folder.scripts.title"/>フォルダーに格納されています。</para>
+
+  <para>そこに追加された新しいスクリプトは、箇条書きの左側のパネルにある使用可能なスクリプトのウィンドウに表示されます。</para>
+
+  <warning>
+    <para>スクリプト編集ウィンドウの左側に、スクリプト一覧が表示されない場合は、スクリプトウィンドウの<guimenu>ファイル</guimenu>]&gt;<guimenuitem>スクリプトフォルダーの設定...</guimenuitem>メニューを使用して、スクリプトの場所を設定してください。</para>
+  </warning>
+
+  <para>追加できるスクリプトが<ulink url="https://sourceforge.net/projects/omegatscripts/">OmegaT Scripts</ulink> にあります。ファイルを<link linkend="application.folder.scripts" endterm="application.folder.scripts.title"/>フォルダにコピーします。</para>
+
+  <para><emphasis>イベント</emphasis>ベースのスクリプトもあります。スクリプトを含むフォルダーには、使用可能なイベントに対応するサブフォルダが含まれます。スクリプトを適切なサブフォルダーに配置することで、スクリプトを自動的にトリガーできます。</para>
+
+  <variablelist>
+	<varlistentry id="application.folder.scripts.application.shutdown">
+	  <term id="application.folder.scripts.application.shutdown.title">application_shutdown</term>
+	  <listitem><para>このフォルダーにあるスクリプトは、OmegaT を終了する前に常に実行されます。</para></listitem>
+	</varlistentry>
+	<varlistentry id="application.folder.scripts.application.startup">
+	  <term id="application.folder.scripts.application.startup.title">application_startup</term>
+	  <listitem><para>このフォルダーにあるスクリプトは、OmegaT が開始した後すぐに、スクリプト実行エンジンが利用可能になった時に実行されます。</para></listitem>
+	</varlistentry>
+	<varlistentry id="application.folder.scripts.entry.activated">
+	  <term id="application.folder.scripts.entry.activated.title">entry_activated</term>
+	  <listitem><para>このフォルダーにあるスクリプトは、新たな分節を編集開始するときに実行されます。分節は、<code>newEntry</code>に保存されます。</para></listitem>
+	</varlistentry>
+	<varlistentry id="application.folder.scripts.new.file">
+	  <term id="application.folder.scripts.new.file.title">new_file</term>
+	  <listitem><para>このフォルダーにあるスクリプトは、編集画面で次のファイルに遷移するときに実行されます。新しいファイル名は、<code>activeFileName</code>に保存されます。</para></listitem>
+	</varlistentry>
+	<varlistentry id="application.folder.scripts.new.word">
+	  <term id="application.folder.scripts.new.word.title">new_word</term>
+	  <listitem><para>このフォルダーにあるスクリプトは、編集ウィンドウで新たな単語を編集するときに実行されます。新たな単語は、<code>newWord</code>に保存されます。</para></listitem>
+	</varlistentry>
+	<varlistentry id="application.folder.scripts.project.changed">
+	  <term id="application.folder.scripts.project.changed.title">project_changed</term>
+	  <listitem><para>このフォルダーのスクリプトは、プロジェクトの状態が変更されると実行されます。<code>eventType</code>オブジェクトの値としてCLOSE、COMPILE、CREATE、READ、またはSAVEを取ります。</para></listitem>
+	</varlistentry>
+  </variablelist>
+
+  <para>これらのサブフォルダは、ディストリビューションに付属しているスクリプトフォルダーにすでに作成されています。</para>
+  
+  <warning>
+	<para>スクリプトは、他のスクリプトを実行しているときにも起動されます。そのため、大規模なプロジェクトでは、すべてのセグメントをループする検索/置換タイプのスクリプトが使用されている場合に<code>entry_activated</code>スクリプトが頻繁に呼び出され、プログラムが応答しなくなることがあります。</para>
+  </warning>
+  </section>
+  
+  <section id="windows.scripts.usage">
+	<title id="windows.scripts.usage.title">使い方</title>
+
+	<itemizedlist>
+    <listitem>
+		<para>左側のパネルの一覧でスクリプトの名前をクリックします。スクリプトが編集画面に読み込まれます。</para>
       </listitem>
-    </itemizedlist>
 
-    <itemizedlist>
       <listitem>
-        <para>下部にある<guilabel>「1」</guilabel>から<guilabel>「12」</guilabel>のどれかのボタンの上で右クリックし、<guilabel>［スクリプトを設定］</guilabel>を選びます。</para>
+		<para>ウィンドウの下部にある<guibutton>実行</guibutton>ボタンをクリックするか、<keycombo><keycap>C</keycap><keycap>R</keycap></keycombo>を押してスクリプトをすぐに起動します。</para>
       </listitem>
-    </itemizedlist>
 
-    <itemizedlist>
       <listitem>
-        <para>数値ボタンを左クリックすると、そこに設定されているスクリプトを実行できます。また<guisubmenu>［ツール］</guisubmenu>メニューからスクリプトを選んだり、割り当てられたショートカットキー <keycombo><keycap>Ctrl</keycap><keycap>Alt</keycap><keycap>F#</keycap></keycombo>（# は 1 から 12）を使うことで、スクリプトを実行できます。</para>
+		<para>頻繁に使用するスクリプトへのショートカットを作成するには、ウィンドウの下部にある<guibutton>&lt;1&gt;</guibutton>から<guibutton>&lt;12&gt;</guibutton>までのボタンのいずれかを右クリックし、<guilabel>スクリプトの追加</guilabel>を選択して、その番号にスクリプトを割り当てます。</para>
+
+		<para>ショートカットからスクリプトを削除する場合は、そのボタンを右クリックし、<guilabel>スクリプトの削除</guilabel>を選択します。</para>
       </listitem>
-    </itemizedlist>
 
-    <para>デフォルトでは、スクリプトファイルは<filename class="directory">「scripts」</filename>フォルダーに格納されています。このフォルダーは、OmegaT のインストール先フォルダー（<filename>OmegaT.jar </filename>ファイルを含む）の配下にあります。</para>
+      <listitem>
+		<para>次に、番号をクリックして、割り当てられたスクリプトを実行できます。また、<link linkend="menus.tools" endterm="menus.tools.title"/><link linkend="menus.tools.scripting" endterm="menus.tools.scripting.title"/>メニューからスクリプトを実行するには、該当するメニュー項目を選択するか、関連するショートカット(<keycombo><keycap>C</keycap><keycap>A</keycap><keycap>F1～F12</keycap></keycombo>)を押します。</para>
+      </listitem>
+	</itemizedlist>
 
-    <para>このフォルダーに新しいスクリプトファイルを追加すると、<guilabel>スクリプト</guilabel> ウィンドウの一覧に表示されます。</para>
+	<warning>
+      <para>Linuxユーザ:オペレーティングシステムの設定によっては、標準のスクリプトフォルダーの場所に書き込む権限がない場合があります。</para>
 
-    <para>追加できるスクリプトがいくつか <ulink url="https://sourceforge.net/projects/omegatscripts/">OmegaT Scripts</ulink> にあります。</para>
+      <para>このような場合、独自のスクリプトを記述したり、新しいスクリプトを追加したり、既存のスクリプトを変更したりするには、<link linkend="configuration.folder.location">設定フォルダー</link>など、書き込み権限のある場所にスクリプトをコピーしたり、フォルダーを移動する必要があります。</para>
+
+      <para>標準フォルダーに書き込む権限がある場合は、変更したスクリプトの名前を変更するか、バックアップを作成してください。OmegaTが更新される時に、スクリプトが上書きされます。</para>
+	</warning>
   </section>
 
-  <section>
-    <title>スクリプト言語</title>
+  <section id="windows.scripts.distribution">
+    <title id="windows.scripts.distribution.title">配付されているスクリプト</title>
 
-    <para>以下のスクリプト言語は、最初から使える状態になっています：</para>
+    <para>OmegaTには、OmegaTの貢献者によって開発された多くのスクリプトが付属しています。スクリプト編集を使用して、スクリプトを直接開いたり、実行したり、変更したり、さらには独自に使用する新しいスクリプトを作成することもできます。</para>
 
-    <para><itemizedlist>
+	<note>
+	  <para>OmegaTで配布されているスクリプトは、お客様の利便性のために含まれていますが、OmegaTの開発チームではサポートしていません。</para>
+	</note>
+	
+	<para>スクリプト自体に記載されている指示に従ってください。</para>
+
+    <variablelist>
+      <varlistentry id="windows.scripts.distribution.adapt.standard.tags">
+        <term id="windows.scripts.distribution.adapt.standard.tags.title">標準タグを適用する</term>
+
         <listitem>
-          <para><emphasis role="bold">Groovy</emphasis>（http://groovy.codehaus.org）：Java 仮想マシン向けの動的言語です。構文的に Java との互換性を最大限に保った上で、さらに Python や Ruby、Smalltalk に触発された強力な拡張機能を持ちます。</para>
+          <para>[一致するものと置換]コマンドが呼び出されたときに、標準タグを適合させます。</para>
         </listitem>
-      </itemizedlist><itemizedlist>
-        <listitem>
-          <para><emphasis role="bold">JavaScript</emphasis>（JS と略すこともあり、Java とは無関係）：プロトタイプ ベースのスクリプト言語です。動的で、弱い型付け、ファーストクラス関数などの特徴を持ちます。オブジェクト指向、命令型、および関数型プログラミングのスタイルをサポートする、マルチパラダイム言語です。Firefox のような人気のあるプログラムで利用されていることから、とりわけオープンソースの分野で普及し好まれています。</para>
-        </listitem>
-      </itemizedlist>すべての言語から、プロジェクトを先頭のオブジェクトとする OmegaT のオブジェクトモデルにアクセスできます。次に示すコードスニペットは、現在のプロジェクトから全ファイルの全分節を走査する groovy スクリプトです。このスクリプトは、もし訳文が存在していれば、その分節の原文と訳文を出力します：</para>
+      </varlistentry>
 
-    <programlisting>    files = project.projectFiles;
-    for (i in 0 ..&lt; files.size())
-    {
-        for (j in 0 ..&lt; files[i].entries.size())
-        {
-            currsegment = files[i].entries[j];
-            if (project.getTranslationInfo(currSegment))
-            {
-                source = currsegment.getSrcText();
-                target = project.getTranslationInfo(currsegment).translation;
-                console.println(source + &quot; &gt;&gt;&gt;&gt; &quot; + target);
-            }
-        }
-    }</programlisting>
+      <varlistentry id="windows.scripts.distribution.auto.open.last.project">
+        <term id="windows.scripts.distribution.auto.open.last.project.title">起動時に前回のプロジェクトを開く</term>
+
+        <listitem>
+          <para>前回使用した OmegaT プロジェクトを自動的に開きます</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="windows.scripts.distribution.check.same.segment">
+        <term id="windows.scripts.distribution.check.same.segment.title">同一の分節をチェック</term>
+
+        <listitem>
+          <para>同一の分節(大文字 /小文字を識別)をチェックします。</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="windows.scripts.distribution.currency.translator">
+        <term id="windows.scripts.distribution.currency.translator.title">通貨表記の変換</term>
+
+        <listitem>
+          <para>原文中の通貨表記を、訳文の言語設定に応じて変換します。</para>
+
+          <para>たとえば原文に「$123,399.99」とあれば、これを「123 399,99 USD」に変換します。</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="windows.scripts.distribution.example.gui.scripting">
+        <term id="windows.scripts.distribution.example.gui.scripting.title">サンプル - GUI の表示</term>
+
+        <listitem>
+          <para>GUI を表示するサンプルです</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="windows.scripts.distribution.example.key.binding">
+        <term id="windows.scripts.distribution.example.key.binding.title">サンプル - キーバインディングの変更</term>
+
+        <listitem>
+          <para>キーバインディング イベントのサンプルです。</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="windows.scripts.distribution.example.modify.segment">
+        <term id="windows.scripts.distribution.example.modify.segment.title">サンプル - 分節の変更</term>
+
+        <listitem>
+          <para> 分節の変更をおこなうサンプルです。</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="windows.scripts.distribution.example.search.and.replace">
+        <term id="windows.scripts.distribution.example.search.and.replace.title">サンプル - 訳文の置換</term>
+
+        <listitem>
+          <para>訳文の置換スクリプト（簡易版）</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="windows.scripts.distribution.external.spellcheck">
+        <term id="windows.scripts.distribution.external.spellcheck.title">外部スペルチェック</term>
+
+        <listitem>
+          <para>すべての分節を<filename>[project_name].doc</filename>という名前のファイルに書き込み、システムの標準ワードプロセッサで開きます。注意： ファイルはプレーンテキストファイルです。<filename>.doc</filename>拡張子は、ワードプロセッサで開くことを保証するだけです。</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="windows.scripts.distribution.extract.text.content">
+        <term id="windows.scripts.distribution.extract.text.content.title">文章コンテンツを抽出</term>
+
+        <listitem>
+          <para>プロジェクトの内容を単一の文章ファイル(分節ごとに1行)に抽出します。<ulink url="https://sourceforge.net/p/omegat/feature-requests/182/">RFE#182「プロジェクトの内容を文章ファイルに抽出」</ulink>を参照してください。</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="windows.scripts.distribution.non.breaking.space">
+        <term id="windows.scripts.distribution.non.breaking.space.title">ノーブレークスペース文字</term>
+
+        <listitem>
+          <para>スペース文字をノーブレークスペース文字に置き換えます(フランス語用)。</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="windows.scripts.distribution.open.current.file">
+        <term id="windows.scripts.distribution.open.current.file.title">開く - 現在の原文ファイル</term>
+
+        <listitem>
+          <para>現在翻訳中の原文ファイルを開きます</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="windows.scripts.distribution.open.glossary">
+        <term id="windows.scripts.distribution.open.glossary.title">開く - 用語集ファイル</term>
+
+        <listitem>
+          <para>書き込み可能な用語集ファイルをエディターで開きます</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="windows.scripts.distribution.open.project.folder">
+        <term id="windows.scripts.distribution.open.project.folder.title">開く - プロジェクトフォルダー</term>
+
+        <listitem>
+          <para>現在のプロジェクトフォルダーを OS の標準ファイル管理ソフト上で開きます</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="windows.scripts.distribution.open.tm.folder">
+        <term id="windows.scripts.distribution.open.tm.folder.title">開く - TM フォルダー</term>
+
+        <listitem>
+          <para><filename class="directory">/tm</filename> フォルダー（参考訳文用の翻訳メモリ配置フォルダー）を開きます</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="windows.scripts.distribution.open.project.save.tmx">
+        <term id="windows.scripts.distribution.open.project.save.tmx.title">project_save.tmxを開きます。</term>
+
+        <listitem>
+          <para>テキストエディターでproject_save.tmxを開きます。</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="windows.scripts.distribution.qa.check.rules">
+        <term id="windows.scripts.distribution.qa.check.rules.title">QA - 規則集によるチェック</term>
+
+        <listitem>
+          <para>品質管理スクリプトです。</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="windows.scripts.distribution.qa.identical.segments">
+        <term id="windows.scripts.distribution.qa.identical.segments.title">QA - 同一の分節</term>
+
+        <listitem>
+          <para>同一の分節(大文字 /小文字を識別)をチェックします。</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="windows.scripts.distribution.svn.cleanup.recursive">
+        <term id="windows.scripts.distribution.svn.cleanup.recursive.title">SVN - クリーンアップ（再起的）</term>
+
+        <listitem>
+          <para>現在のプロジェクトまたはローカルの任意の SVN リポジトリ（作業コピー）に対して、クリーンアップ（矛盾した状態を解決する）を実行します</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="windows.scripts.distribution.show.same.segments">
+        <term id="windows.scripts.distribution.show.same.segments.title">原文と訳文が同一の分節を表示</term>
+
+        <listitem>
+          <para>原文と訳文が同一の分節一覧を表示します</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="windows.scripts.distribution.spellcheck">
+        <term id="windows.scripts.distribution.spellcheck.title">スペルチェック</term>
+
+        <listitem>
+          <para>綴りの間違いを検査します</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="windows.scripts.distribution.strip.bidi.marks">
+        <term id="windows.scripts.distribution.strip.bidi.marks.title">BiDi マークを削除</term>
+
+        <listitem>
+          <para>現在の訳文からBiDiマークを削除します</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="windows.scripts.distribution.strip.tags">
+        <term id="windows.scripts.distribution.strip.tags.title">タグを削除</term>
+
+        <listitem>
+          <para>現在の訳文や選択からタグを削除します</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="windows.scripts.distribution.switch.colour.theme">
+        <term id="windows.scripts.distribution.switch.colour.theme.title">色テーマの切り替え</term>
+
+        <listitem>
+          <para>編集で使用する色のテーマを切り替えます。</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="windows.scripts.distribution.tag.free.match">
+        <term id="windows.scripts.distribution.tag.free.match.title">参考訳文（タグ削除済み）に置換</term>
+
+        <listitem>
+          <para>タグを削除した参考訳文に置換します</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="windows.scripts.distribution.tagwipe">
+        <term id="windows.scripts.distribution.tagwipe.title">Tagwipe</term>
+
+        <listitem>
+          <para>DOCX ファイルからタグを削除します</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="windows.scripts.distribution.issue.provider.sample.groovy">
+        <term id="windows.scripts.distribution.issue.provider.sample.groovy.title">issue_provider_sample.groovy</term>
+
+        <listitem>
+          <para>(no description)(no description)</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="windows.scripts.distribution.toolbar.groovy">
+        <term id="windows.scripts.distribution.toolbar.groovy.title">toolbar.groovy</term>
+        <listitem>
+          <para>(no description)(no description)</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </section>
+
+  <section id="windows.scripts.references">
+    <title id="windows.scripts.references.title">参考資料</title>
+
+    <variablelist>
+      <varlistentry>
+        <term>OmegaT Javadoc</term>
+
+        <listitem>
+          <para><ulink url="https://omegat.sourceforge.io/javadoc-latest/">OmegaT API</ulink>のドキュメント。</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Groovy</term>
+
+        <listitem>
+          <para>Java仮想マシン用の動的言語。構文的に Java との互換性を最大限に保った上で、さらに Python や Ruby、Smalltalk に触発された強力な機能を持ちます。詳細については、<ulink url="https://groovy-lang.org/documentation.html">Apache Groovy</ulink>を参照してください。</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>JavaScript</term>
+
+        <listitem>
+          <para>プロトタイプ ベースのスクリプト言語です。動的で、弱い型付け、ファーストクラス関数などの特徴を持ちます。オブジェクト指向、命令型、および関数型プログラミングのスタイルのマルチパラダイム言語です。<ulink url="https://developer.oracle.com/databases/nashorn-javascript-part1.html">Practical Nashorn,Part 1:Introducing JavaScript,ECMAScript,and Nashorn</ulink>および<ulink url="https://www.ecma-international.org/ecma-262/5.1/">ECMAScript®5.1 Language Specification</ulink>を参照してください。</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <para>すべての言語から、プロジェクトを先頭のオブジェクトとする OmegaT のオブジェクトモデルにアクセスできます。次に示すコードスニペットは、現在のプロジェクトから全ファイルの全分節を走査する groovy スクリプトです。このスクリプトは、もし訳文が存在していれば、その分節の原文と訳文を出力します：</para>
+
+    <programlisting>files = project.projectFiles;
+for (i in 0 ..&lt; files.size())
+{
+	for (j in 0 ..&lt; files[i].entries.size())
+	{
+		currSegment = files[i].entries[j];
+		if (project.getTranslationInfo(currSegment))
+		{
+			source = currSegment.getSrcText();
+			target = project.getTranslationInfo(currSegment).translation;
+			console.println(source + &quot; &gt;&gt;&gt;&gt; &quot; + target);
+		}     
+	}
+}</programlisting>
   </section>
 </section>

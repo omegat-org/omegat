@@ -1,0 +1,1135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd"
+[
+<!ENTITY % manualvariables SYSTEM "manualvariables.mod">
+%manualvariables;
+]>
+<section id="app.regex">
+  <title id="app.regex.title">正規表現</title>
+
+  <para>この付録は、生産性を向上させる強力な方法に関心のあるユーザーを対象としています。最も単純な正規表現(<emphasis>regex</emphasis>または<emphasis>regexp</emphasis>と略されることが多い)でさえ、気が遠く複雑に見えますが、OmegaTだけでなく、日常的に使用する他の多くのアプリケーションでも非常に役立ちます。</para>
+
+  <para>ここでは、翻訳者にとって最も有用な基礎についてのみ説明します。この付録の最後にある<link linkend="app.regex.tools" endterm="app.regex.tools.title"/>のセクションでは、この取扱説明書の範囲を超えた高度な使用方法や複雑な使用方法について説明します。特定のケースについてヘルプが必要な場合は、さまざまなサポートチャネルで質問することもできます。</para>
+  
+  <para>正規表現では、文字、数字、記号(<emphasis>文字</emphasis>と総称されます)の組み合わせを使用して、特定のテキストパターンを表す<emphasis>式</emphasis>を定義します。</para>
+
+  <para>以下にいくつかの例を示します。</para>
+  
+  <variablelist>
+    <varlistentry>
+      <term>[0-9]</term>
+      <listitem><para>0～9の任意の1桁。</para>
+      </listitem>
+    </varlistentry>
+
+	<varlistentry>
+      <term>\w+</term>
+      <listitem><para>1つ以上の「単語文字」、つまりアルファベット、数字、およびアンダースコア記号の文字を表します。</para>
+      </listitem>
+    </varlistentry>
+
+	<varlistentry>
+      <term>\h?</term>
+      <listitem><para>0または1つの水平空白文字を表します(これには、通常の改行しないスペースとタブが含まれますが、「垂直空白文字」カテゴリ:\vに属する改行文字は含まれません)。</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>    
+  
+  <para>多くのOmegaT関数は正規表現に依存しているか、または正規表現をオプションとして使用可能にしています。</para>
+
+  <variablelist>
+    <varlistentry>
+      <term>検索</term>
+      <listitem>
+        <para>OmegaT検索には<link linkend="windows.text.search.methods.regex" endterm="windows.text.search.methods.regex.title"/>オプションがあり、ファイルを横断して非常に強力な検索を行うことができます。</para>
+
+        <para><link linkend="windows.text.replace" endterm="windows.text.replace.title"/>ダイアログの同じオプションを使用すると、検索テキストと置換テキストの両方に正規表現を適用できます。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>カスタムタグ</term>
+      <listitem>
+        <para>カスタムタグとは、正規表現で定義されたタグであり、ネイティブのOmegaTタグとまったく同じように処理されます。詳細は<link linkend="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags" endterm="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags.title"/>の設定を参照してください。</para>
+
+		<para><code>|</code>(OR)文字を使用して、個々のタグ定義を区切ります。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>フラグ付き文字列</term>
+      <listitem>
+        <para><link linkend="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation" endterm="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation.title"/> 設定を使用すると、 OmegaT がデフォルトで赤色でマークする文字列を定義し、検証の際に検証対象ではないタグとして扱うことができます。</para>
+
+		<para><code>|</code>(OR)文字を使用して、個々の文字列定義を区切ります。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>整合内のテキストの強調表示</term>
+      <listitem>
+        <para>視覚的な手がかりは、位置合わせの整合を確認するのに役立ちます。<link linkend="windows.aligner.adjust.highlight" endterm="windows.aligner.adjust.highlight.title"/> 設定を使用すると、整合された文書内で OmegaT が強調表示する文字列を定義できます。</para>
+
+		<para><code>|</code>(OR)文字を使用して、個々の表現を区切ります。</para>
+      </listitem>
+    </varlistentry>	
+
+    <varlistentry>
+      <term>分節化規則</term>
+      <listitem>
+        <para>分節化規則と言語の構成例は、正規表現で定義されます。自由に変更して、文書の分節化を改善したり、一般的なルールを追加したりできます。詳細は、付録の <link linkend="app.segmentation" endterm="app.segmentation.title"/> をご覧ください。</para>
+
+        <para>分節化規則または例外規則は、分節に分割する位置または分割しない位置を定義します。その位置を定義するには、2つの正規表現が必要です。1つは「before」式で、ルールが適用される場所の前のテキストパターンを定義し、もう1つは「after」式で、その位置の後のテキストパターンを定義します。</para>
+
+		<para>プロジェクトの原文の言語と一致する言語の構成例が、そのプロジェクトに適用されます。</para>
+	  </listitem>
+    </varlistentry>
+  </variablelist>
+
+  <section id="app.regex.four.rules">
+    <title id="app.regex.four.rules.title">4つのルール</title>
+
+    <para>正規表現は、スペース、タブ、改行など、画面に表示されない文字や印刷されない文字を含む文字列を検索するために使用できます。指定された式は、単語、フレーズ、またはその他の文字列に<emphasis>一致する</emphasis>か、<emphasis>一致しない<emphasis role="bold"></emphasis></emphasis>かのいずれかです。</para>
+    
+    <para>式のすべての文字は、一致を判断するときに関連します。</para>
+    <para>正規表現では、多数の文字または文字の組み合わせに特別な意味があります。</para>
+    
+    <warning>
+      <para>正規表現はテキストとのみ一致します。<emphasis>太字</emphasis>、<emphasis>斜体</emphasis>、その他の<emphasis>スタイル効果</emphasis>などの装飾と一致させることはできません。</para>
+    </warning>
+
+    <para>注意すべき4つのルールがあります。</para>
+
+    <variablelist>
+      <varlistentry>
+        <term>ほとんどの文字は単純に一致します。</term>
+        <listitem>
+          <para>正規表現のほとんどの文字は、テキストの文字列内で単に<emphasis>自身を検索します</emphasis>。</para>
+
+		  <para>たとえば、「<emphasis>example</emphasis>」という単語をつづる7つの文字は、単に検索機能に対して、その順序でそれらの文字と正確に一致するように指示します。簡単に言うと、この検索では「<emphasis>example</emphasis>」という単語が検索されます。</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>バックスラッシュ(<literal>\</literal>)がついたアルファベットは、特別な意味を持ちます。</term>
+        <listitem>
+          <para>上記のように単純にそれ自体を表す文字とは異なり、<literal>\</literal>が前にある文字は、正規表現では特別な機能を持ちます。</para>
+
+		  <para>たとえば、<emphasis>r</emphasis>は通常の文字ですが、その前に<literal>\</literal>を付けて<literal>\r</literal>にすると、<emphasis>キャリッジリターン文字</emphasis>と一致する特殊な組み合わせになります。同様に、<literal>\R</literal>は<emphasis>任意の改行文字</emphasis>と一致します。</para>
+		  
+          <note>
+            <para><emphasis>i j l m o</emphasis>と<emphasis>y</emphasis>の文字だけは、小文字と大文字の両方で、前にバックスラッシュが付いていても特別な意味はありません。この説明書では、特別な意味を持つ文字のごく一部について説明します。</para>
+
+			<para>ここで説明されていない組み合わせについては、以下の<link linkend="app.regex.tools" endterm="app.regex.tools.title"/>項で紹介されるWebページを参照してください。</para>
+          </note>
+        </listitem>
+      </varlistentry>
+        
+      <varlistentry>
+      <term>デフォルトでは、12文字が特別な意味を持ちます。</term>
+        <listitem>
+          <para>その特別な意味は、文字自体に一致する別の文字によってキャンセルされる必要があります。</para>
+
+          <para>完全な文字のリストは、<link linkend="app.regex.twelve.characters">次のとおり</link>です。1つの例は<literal>.</literal>です。これ自体には、<emphasis>任意の1文字</emphasis>を照合するという特別な意味があります。</para>
+
+		  <para>通常のピリオドを見つけるには、<literal>\</literal>を使用して意味をキャンセルし、式<literal>\.</literal>を作成する必要があります。これは、ピリオドとのみ一致します。</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><literal>\</literal>文字は非常に特殊な文字です。</term>
+        <listitem>
+          <para>前述したように、<literal>\</literal>文字には、他の文字の特別な意味をキャンセルまたはアクティブにするというデフォルトの特別な意味があります。特別な意味を持たない文字(デフォルトまたは追加)の前に配置しても効果はありません。</para>
+
+          <para><literal>\</literal>は、<literal>\\</literal>という形式に二重化することによって、それ自体の特別な意味をキャンセルすることができます。これは、単に<emphasis>バックスラッシュ</emphasis>文字自体に一致します。</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </section>
+
+  <section id="app.regex.twelve.characters">
+    <title id="app.regex.twelve.characters.title">特別な12文字</title>
+  
+    <para>The twelve special characters are the <emphasis>backslash</emphasis>
+    <literal>\</literal>, the <emphasis>caret</emphasis> <literal>^</literal>,
+    the <emphasis>dollar sign</emphasis> <literal>$</literal>, the
+    <emphasis>period</emphasis> (or <emphasis>dot</emphasis>)
+    <literal>.</literal>, the <emphasis>vertical bar</emphasis> (or
+    <emphasis>pipe symbol</emphasis>) <literal>|</literal>, the
+    <emphasis>question mark</emphasis> <literal>?</literal>, the
+    <emphasis>asterisk</emphasis> (or <emphasis>star</emphasis>)
+    <literal>*</literal>, the <emphasis>plus sign</emphasis>
+    <literal>+</literal>, the opening <emphasis>parenthesis</emphasis>
+    <literal>(</literal>, the closing <emphasis>parenthesis</emphasis>,
+    <literal>)</literal>, the opening <emphasis>square bracket</emphasis>
+    <literal>[</literal>, and the opening <emphasis>curly brace</emphasis>
+    <literal>{</literal>.</para>
+
+    <para>各文字について、その文字に依存する正規表現と、一致するかどうかにかかわらず一致するテキストの例を使用して簡単に説明します。</para>
+    
+      <variablelist>
+        <varlistentry>
+          <term>バックスラッシュ: <literal>\</literal></term>
+          <listitem>
+            <para>この文字は、次の文字の特別な意味をキャンセルまたはアクティブにします。</para>
+            
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry/>
+                    <entry><literal>0\.[0-9]</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>一致</entry>
+                    <entry>
+                      <para><emphasis>0.0</emphasis>から<emphasis>0.9</emphasis>の間の数字、または10.5や560.5などのうち、最後の<emphasis>0.5</emphasis>だけの数字。</para>
+
+                      <para><literal>\.</literal>は、ピリオドの意味である「任意の文字」をキャンセルして小数点に一致させます。一方、<literal>\d</literal>は、通常は小文字の「d」文字を、0～9の任意の数字に一致する式に変換します。</para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>一致しない</entry>
+                    <entry>
+                      <para>0,1、0-3、または0x002Eの最初の3文字などのシーケンスは、式が<literal>0.[0-9]</literal>で、ピリオドの前にバックスラッシュがない場合に一致します。</para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>キャレット: <literal>^</literal></term>
+          <listitem>
+            <para>これが式の最初の文字である場合、<emphasis>キャレット</emphasis>文字は行の先頭と一致します。</para>
+
+            <para><link linkend="app.regex.types.of.expressions.classes">角括弧で囲まれた文字クラス</link>の最初の文字である場合、そのクラスの文字は除外されて、それ以外の文字全てに一致します。</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry/>
+                    <entry>
+                      <orderedlist>
+                        <listitem>
+                          <para><literal>^A</literal></para>
+                        </listitem>
+        
+                        <listitem>
+                          <para>[^abc]</para>
+                        </listitem>
+                      </orderedlist>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>一致</entry>
+                    <entry>
+                      <orderedlist>
+                        <listitem>
+                          <para>“A long, but exciting journey was about to begin”の最初の大文字の「A」に一致。</para>
+                        </listitem>
+
+                        <listitem>
+                          <para>「a」、「b」または「c」<emphasis>以外</emphasis>の任意の文字。例えば、単語「back」では、「k」のみが一致します。</para>
+                        </listitem>
+                      </orderedlist>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>一致しない</entry>
+                    <entry>
+                      <orderedlist>
+                        <listitem>
+                          <para> “My friend is writing a book called <emphasis>A Long Journey</emphasis>”の大文字の」「A」に一致。</para>
+                        </listitem>
+                      
+                        <listitem>
+                          <para>単語「back」の小文字の「a」、「b」、または「c」に一致。</para>
+                        </listitem>
+                      </orderedlist>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>ドル記号: <literal>$</literal></term>
+          <listitem>
+            <para>式の最後の文字である場合、<emphasis>ドル</emphasis>記号は行の末尾と一致します。</para>
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry/>
+                    <entry><literal>^\w+:$</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>一致</entry>
+                    <entry>
+                      <para>1つの単語で構成され、コロンで終わる行:</para>
+                      <para><emphasis>Questions:</emphasis></para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>一致しない</entry>
+                    <entry>
+                      <para>1つの単語で構成され、コロンで終わらない行:</para>
+                      <para><emphasis>Questions?</emphasis></para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>ピリオド: <literal>.</literal></term>
+          <listitem>
+            <para>任意の1文字と一致します。</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry/>
+                    <entry><literal>c.t</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>一致</entry>
+                    <entry>
+                      <para>「c」で始まり「t」でおわる3文字の任意の組み合わせ:  <emphasis>cat</emphasis>、<emphasis>cut</emphasis>、<emphasis>cot</emphasis>、または<emphasis>cot</emphasis><emphasis>cqt</emphasis>などの無意味な組合せ。</para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>一致しない</entry>
+                    <entry>
+                      <para>「c」で始まり「t」で終わる4文字を含む組み合わせだが、複数の行になっている場合は一致しません。</para>
+                      <para>What is the missing letter?</para>
+                        <simplelist>
+                          <member><literal>c</literal></member>
+                          <member><literal/></member>
+                          <member><literal>t</literal></member>
+                        </simplelist>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>縦棒: <literal>|</literal></term>
+          <listitem>
+            <para>この文字は「OR」として機能し、その前後にある式のいずれかと一致します。</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry/>
+                    <entry><literal>^An|^The</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>一致</entry>
+                    <entry>
+                      <para>次のようなフレーズの最初の「An」または「The」：<simplelist>
+                          <member>“An apple a day…”</member>
+                          <member>“The apple of my eye…”</member>
+                        </simplelist>
+                      </para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>一致しない</entry>
+                    <entry>
+                      <para>次のようなフレーズの最初の「An」または「The」：<simplelist>
+                          <member>“A story called <emphasis>An Unsung
+                          Hero</emphasis>.”</member>
+                          <member>“They work for <emphasis>The Daily
+                            Post</emphasis>.”</member>
+                        </simplelist>
+                      </para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>クエスチョンマーク: <literal>?</literal></term>
+          <listitem>
+            <para>この文字は、直前の文字または式の0または1つのインスタンスを照合することを指定します。</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry/>
+                    <entry>
+                      <literal>an?␣</literal> (ここで “␣” は1つの空白文字を意味します)。</entry>
+                  </row>
+
+                  <row>
+                    <entry>一致</entry>
+                    <entry>
+                      <para>次の「a」または「an」のいずれか:<simplelist>
+                          <member>“I have a question.”</member>
+                          <member>“I know an excellent doctor.”</member>
+                        </simplelist>
+                      </para>
+                      
+                      <para>また、「Can I help you?」のような文の「Can」の最後の「an」や、「We have pasta for lunch」の「pasta」の最後の「a」も検索されます。</para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>一致しない</entry>
+                    <entry>
+                      <para>&quot;a&quot;も&quot;an&quot;もありません:<simplelist>
+                          <member>The indefinite article: “a” (or
+                          “an”).</member>
+                        </simplelist>
+                      </para>
+                      <para>They are not followed by a space.</para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>アスタリスク文字: <literal>*</literal></term>
+          <listitem>
+            <para>この文字は、直前の文字または式の0個以上のインスタンスが一致することを指定します。</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry/>
+                    <entry><literal>run\w*</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>一致</entry>
+                    <entry>
+                      <para>「run」という単語、「runs」、「runner」、「runway」、「grunt」または「brunt」の「runt」、および「run」の後に0個以上の「<emphasis>word characters</emphasis>」(数字とアンダースコアを含むため、run_123@example.email.orgなどの電子メールアドレスの「@」の前の部分も一致します)が続くその他の単語または文字列。</para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>一致しない</entry>
+                    <entry>
+                      <para><literal>\w</literal>にはハイフンとアポストロフィは含まれていないため、「run-on」または「run'n'gun」の完全なフレーズには一致しない。これらのフレーズの最初の「run」だけが一致します。</para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>プラス記号: <literal>+</literal></term>
+          <listitem>
+            <para>この文字は、前の文字または式の1つ以上のインスタンスを一致させることを指定します。</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry/>
+                    <entry><literal>\d+.d</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>一致</entry>
+                    <entry>
+                      <para>「1.5」、「23.2」、「5235.8」などの数字。小数点以下が1桁で、小数点の前に任意の桁数があります。</para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>一致しない</entry>
+                    <entry>
+                      <para>「5,235.8」や「21,571.9」などの数値の値全体。千単位の区切り文字の後の部分だけが一致します。</para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>左括弧: <literal>(</literal></term>
+
+          <listitem>
+            <para>この文字は<emphasis>グループ</emphasis>を開始します。グループとは、1つの単位として扱われる文字のセットです。グループには番号が付けられ、その内容グループはメモリに格納されます。これらは、後で<literal>\<option>n</option></literal>を使用して検索式で再利用できます。ここで、<option>n</option>はグループの番号です。</para>
+
+            <note>
+              <para>グループの内容は、<link linkend="windows.text.replace">置換テキスト</link>でも使用できます。検索で定義された<option>n</option> 番目のグループを参照するには<literal>$<option>n</option></literal> を使用します。</para>
+            </note>
+
+            <para>開始と終了のペアでは、常に括弧が使用されます。開き括弧または閉じ括弧だけを単独で使用しようとすると、エラーが発生します。</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry/>
+                    <entry><literal>(\b\w+\b)\h\1\b</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>一致</entry>
+                    <entry>
+                      <para>次の文の連続する「an」のように、スペースで区切られた重複した単語:</para>
+
+					  <para>“I bought an an apple.”</para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>一致しない</entry>
+                    <entry>
+                      <para>次の文の「that,that」:</para>
+
+					  <para>“But that, that is just unbelievable”の最初の「that」の後に、スペースだけではなく、カンマとスペースが続いているため、一致しません。</para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>右括弧: <literal>)</literal></term>
+
+          <listitem>
+            <para>この文字はグループを閉じます。それだけでは使えないので、特別です。右括弧文字自体を一致させる必要がある場合は、前に<literal>\</literal>を付ける必要があります。</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry/>
+                    <entry><literal>^\d+\)</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>一致</entry>
+                    <entry>
+                      <para>次のようなリストの各行の先頭にあるシーケンス番号(括弧を含む):</para>
+
+                      <simplelist>
+                        <member>1)Apples</member>
+                        <member>2)Oranges</member>
+                        <member>3)Pears</member>
+                      </simplelist>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>一致しない</entry>
+                    <entry>
+                      <para>行の先頭以外にあるシーケンス番号。</para>
+
+                      <para>Follow these steps:</para>
+                      <simplelist>
+                        <member>Step 1) Preparation</member>
+                        <member>Step 2) …</member>
+                      </simplelist>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>開き角括弧:  <literal>[</literal></term>
+
+          <listitem>
+            <para>この文字は閉じ角括弧と組み合わせる必要があり、それぞれが有効な一致候補を表す個々の文字のセットを囲みます。</para>
+
+            <para>開き括弧だけが特別であり、括弧文字自体を検索するには、前にバックスラッシュを付ける必要があります。閉じ括弧だけをそのまま使用する場合は、前にバックスラッシュを付ける必要はありません。(追加することはできますが、式や結果には影響しません)。</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry/>
+                    <entry><literal>li[cs]en[cs]e</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>一致</entry>
+                    <entry>
+                      <para>正しい “licence”や“license”の綴りや、綴り間違いの “lisence” や “lisense”に一致。</para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>一致しない</entry>
+                    <entry>
+                      <para>もっと間違いのある “licensse” や “lissense”には一致しない。</para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>開き中括弧: <literal>{</literal></term>
+
+          <listitem>
+            <para>前の文字またはグループの一致するインスタンスの数を指定する<emphasis>正確な数</emphasis>、<emphasis>最小</emphasis>、<emphasis>最大</emphasis>、または<emphasis>範囲</emphasis>を囲み、閉じ中括弧と対にする必要があります。</para>
+
+            <para>中括弧のみが特別であり、中括弧文字自体を検索するには、前にバックスラッシュを付ける必要があります。閉じ括弧をそのまま使用する場合は、前にバックスラッシュを付ける必要はありません。(追加することはできますが、式や結果には影響しません)。</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry/>
+                    <entry><literal>\d{4}/\d{1,3}</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>一致</entry>
+                    <entry>
+                      <para> “1234/5”や “1472/69” あるいは “9513/842”といった4桁の数字、1つのスラッシュ、さらに1〜3桁の数字で構成された文字列に一致します。</para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>一致しない</entry>
+                    <entry>
+                      <para>“123/45”や “1472/6985”あるいは “95133/15746”。</para>
+                      <para><emphasis role="bold">注意:</emphasis> 最後の二つのコードは、完全には一致しませんが、この式は “1472/6985”のなかの“<emphasis>1472/698</emphasis>”の部分や、“95133/15746”の “<emphasis>5133/157</emphasis>”の部分を返します。</para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+  </section>
+
+  <section id="app.regex.types.of.expressions">
+    <title id="app.regex.types.of.expressions.title">たくさんの表現</title>
+
+    <para>この項では、単純なものから複雑なものまで、さまざまなタイプの正規表現について説明します。</para>
+      
+    <note>
+      <para><literal>\</literal>で始まるすべての<emphasis>アルファベット</emphasis>文字は、<emphasis>文字自体ではなく、関連する特別な意味</emphasis>を表す式になることに注意してください。</para>
+    </note>
+
+    <section id="app.regex.types.of.expressions.simple.expressions">
+      <title id="app.regex.types.of.expressions.simple.expressions.title">単純な式</title>
+      <para>最も単純な正規表現は、単に1つの文字、または<literal>\</literal>と1つの意味を持つ単位を構成する文字の組み合わせで構成されます。</para>
+      
+      <table id="app.regex.characters">
+        <title id="app.regex.characters.title">文字</title>
+
+        <tgroup align="left" cols="2" rowsep="1">
+          <colspec align="left" colnum="1"/>
+
+          <thead>
+            <row>
+              <entry align="left">式</entry>
+              <entry align="left">一致</entry>
+            </row>
+          </thead>
+
+          <tbody>
+            <row>
+              <entry><literal>x</literal></entry>
+              <entry>
+                <para>文字「x」自体</para>
+                <para>ほとんどの文字はそれ自身に一致します。</para>
+              </entry>
+            </row>
+
+            <row>
+              <entry><literal>\t</literal></entry>
+              <entry>
+                <para>文字「t」ではなく、タブ文字。</para>
+			  </entry>
+            </row>
+
+            <row>
+              <entry><literal>\n</literal></entry>
+              <entry>文字「n」ではなく、改行(ラインフィード)文字。</entry>
+            </row>
+
+            <row>
+              <entry><literal>\r</literal></entry>
+              <entry>
+                <para>文字「r」ではなく、復帰(キャリッジリターン)文字。</para>
+                <para>同様に、<literal>\R</literal>は任意の改行文字です。</para>
+			  </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+
+    <section id="app.regex.types.of.expressions.case">
+      <title id="app.regex.types.of.expressions.case.title">大文字/小文字</title>
+
+      
+      <para>通常のOmegaT検索は、デフォルトでは大文字と小文字が区別されません。オプション<link linkend="windows.text.search.options" endterm="windows.text.search.options.title"/>を有効にしない限り、大文字と小文字の両方が一致します。これにより、検索式全体で大文字と小文字が区別されます。</para>
+
+      <para>これに対して、正規表現ではデフォルトで大文字と小文字が区別されます。&quot;omegat&quot;を正規表現で検索しても、&quot;OmegaT&quot;とは一致しません。ただし、正規表現には、式の中で大文字/小文字指定を制御するための特別な修飾子もあります。</para>
+
+      <variablelist>
+        <varlistentry>
+          <term><literal>(?i)</literal></term>
+          <listitem>
+            <para>式のうち、修飾子の右側の部分の大文字と小文字を区別しないようにします。</para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term><literal>(?-i)</literal></term>
+          <listitem>
+            <para>式の修飾子の右側の部分で大文字と小文字が区別されるようにします。</para>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+	  
+      <para>これを利用して、検索時の大文字と小文字の区別を細かく制御できます。たとえば、&quot;omegat&quot;と&quot;OmegaT&quot;の出現箇所を検索し、&quot;OMEGAT&quot;の出現箇所は検索しないようにします。これを行うには、次の式を使用します:<literal>(?i)o</literal><literal>(?-i)mega</literal><literal>(?i)t</literal>。これは、大文字と小文字を区別しない「o」の後に大文字と小文字を区別する「mega」が続き、その後に大文字と小文字を区別しない「t」が続くことを表します。</para>
+    </section>
+
+    <section id="app.regex.types.of.expressions.classes">
+      <title id="app.regex.types.of.expressions.classes.title">文字クラス</title>
+
+      <para>正規表現を使用すると、<emphasis>文字クラス</emphasis>と呼ばれる文字集合を作成できます。検索をすると、文字集合内の任意の文字が一致します。</para>
+
+	  <para>文字クラスは、必要な文字を角括弧で囲むことによって定義され、含める個々の文字を逐次指定するか、文字の範囲で指定できます。たとえば、<literal>[£€$]</literal>を指定して、テキスト内の3つの通貨記号のいずれかを検索したり、[1-3]を指定して、数値1、2、3を検索したりできます。</para>
+
+      <note>
+        <para>文字クラスの内部では、バックスラッシュ(<literal>\</literal>)、キャレット(<literal>^</literal>)、閉じ括弧(<literal>]</literal>)、ハイフン(<literal>-</literal>)のみが特別です。残りの12文字は通常の文字であり、これらの文字自体を検索する場合は、前にバックスラッシュを付ける必要はありません。</para>
+
+		<para>4つの文字クラスの特殊文字の前にバックスラッシュを付けると、通常の文字として検索できます。また、キャレット、閉じ括弧、およびハイフンを特別な意味を持たない位置に置くことで、キャレット、閉じ括弧、およびハイフン自体を検索することもできます。ただし、キャレットの場合は開き括弧の直後、閉じ括弧の場合はいずれかの開き括弧またはそれに続くキャレットの直後、ハイフンの場合は開き括弧の直後または閉じ括弧の直前を除きます。</para>
+      </note>
+
+	  <para>頻繁に使用される多くのセットには、バックスラッシュとそれに続くアルファベットの文字で構成される省略形があります。たとえば、<literal>\d</literal>は<literal>[0-9]</literal>の省略形であり、0～9の任意の数字に一致します。多くの場合、対応する大文字の後がクラスを否定するために使用されます:<literal>\D</literal>は、数字ではない<emphasis role="bold"></emphasis>任意の文字に一致します。</para>
+      <para>次の表に、その他のさまざまな例を示します。これらの文字クラスは、省略形を形成するために使用される実際の文字だけを表すことはありません。</para>
+      
+      <table id="app.regex.classes">
+        <title id="app.regex.classes.title">文字クラスの例</title>
+
+        <tgroup align="left" cols="2" rowsep="1">
+          <colspec align="left" colnum="1"/>
+
+          <thead>
+            <row>
+              <entry align="left">式</entry>
+              <entry align="left">一致</entry>
+            </row>
+          </thead>
+
+          <tbody>
+            
+            <row>
+              <entry><literal>[abc]</literal></entry>
+              <entry>
+                <para>文字「a」、「b」、または「c」。</para>
+
+				<para>単純な文字クラスは、<literal>[</literal>および<literal>]</literal>で囲まれた任意の数の文字で構成されます。</para>
+              </entry>
+            </row>
+            
+            <row>
+              <entry><literal>[C-X]</literal></entry>
+              <entry>
+                <para>「C」から「X」までの文字範囲の文字。</para>
+
+				<para>範囲は、連続する最初の文字、ハイフン、連続する最後の文字で定義されます。任意の数の範囲を定義できます:<literal>[a-zA-Z0-9]</literal>は、「a」から「z」までの任意の小文字、「A」から「Z」までの任意の大文字、または「0」から「9」までの任意の数字を意味します。系列の外に置かれたハイフンは単なるハイフンです:<literal>[a-z-]</literal>は、「a」から「z」までの任意の小文字、またはハイフン自体を意味します。</para>
+              </entry>
+            </row>
+            
+            <row>
+              <entry><literal>[^\n\r\t]</literal></entry>
+              <entry>
+                <para>改行、復帰、タブを<emphasis>除く</emphasis>任意の文字。</para>
+
+                <para>開始角括弧の直後にキャレットを置くと、クラス内の残りの文字が除外されます。</para>
+              </entry>
+            </row>
+
+            <row>
+              <entry><literal>\w</literal></entry>
+              <entry>
+                <para>一般に<literal>[A-Za-z0-9_]</literal>と定義される単語文字。</para>
+
+                <para><literal>\W</literal>は、単語文字(<literal>[^\w]</literal>)では<emphasis role="bold">ない</emphasis>任意の文字です。</para>
+              </entry>
+            </row>
+
+            <row>
+              <entry><literal>\s</literal></entry>
+              <entry>
+                <para>空白文字(スペース、タブ文字、改行を含む)。</para>
+
+                <para><literal>\S</literal>は、空白文字(<literal>[^\s]</literal>)では<emphasis role="bold">ない</emphasis>任意の文字です。</para>
+              </entry>
+            </row>
+
+            <row>
+              <entry>
+				<literal>\h</literal> および <literal>\v</literal>
+			  </entry>
+
+              <entry>
+				<para>タブ、スペース、改行などの空白文字(通常、 <literal>\s</literal>が使用される)。</para>
+
+				<para><literal>\H</literal>は水平方向の空白<emphasis role="bold">以外</emphasis>の文字で、<literal>\V</literal>は垂直方向の空白<emphasis role="bold">以外</emphasis>の文字です(それぞれ<literal>[^\h]</literal>と<literal>[^\v]</literal>)。</para>
+			  </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+      
+      <para>正規表現は英数字に限定されません。これらはUnicode文字セット全体を対象としています。Unicodeブロック、スクリプトおよびカテゴリを使用して、英数字の範囲外の文字クラスを指定します。いくつかの例を次の表に示します。</para>
+
+      <para>Unicode正規表現の詳細については、<ulink url="https://www.regular-expressions.info/unicode.html">Unicode正規表現</ulink>も参照してください。</para>
+
+      <table id="app.regex.unicode.blocks">
+        <title id="app.regex.unicode.blocks.title">Unicodeブロック、スクリプト、およびカテゴリ</title>
+        
+        <tgroup align="left" cols="2" rowsep="1">
+          <colspec align="left" colnum="1"/>
+          <thead>
+            <row>
+              <entry align="left">式</entry>
+              <entry align="left">一致</entry>
+            </row>
+          </thead>
+          
+          <tbody>
+            <row>
+              <entry><literal>\p{InGreek}</literal></entry>
+              <entry>
+                <para>ギリシャ語ブロック(<ulink url="https://unicode.org/reports/tr18/#Blocks">Unicodeブロック</ulink>)の文字</para>
+				
+                <para><literal>\P{InGreek}</literal>は、ギリシャ語ブロックに<emphasis role="bold">含まれない</emphasis>任意の文字です。</para>
+              </entry>
+            </row>
+          
+            <row>
+              <entry><literal>\p{IsHan}</literal></entry>
+              <entry>
+                <para>CJK言語(<ulink url="https://unicode.org/reports/tr18/#Script_Property">Unicodeスクリプト</ulink>)の表意文字(<emphasis>Han</emphasis>/<emphasis>漢字</emphasis>/<emphasis>hanja</emphasis>)</para>
+              </entry>
+            </row>
+          
+            <row>
+              <entry><literal>\p{Lu}</literal></entry>
+              <entry>
+                <para>大文字(<ulink url="https://unicode.org/reports/tr18/#General_Category_Property">Unicodeカテゴリ</ulink>)</para>
+              </entry>
+            </row>
+          
+            <row>
+              <entry><literal>\p{Sc}</literal></entry>
+              <entry>
+                <para>通貨記号、<ulink url="https://unicode.org/reports/tr18/#General_Category_Property">Unicodeカテゴリでもあります</ulink>。</para>
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+
+    <section id="app.regex.more.advanced.expressions">
+      <title id="app.regex.more.advanced.expressions.title">高度な式</title>
+      
+      <para>式の中には、文字ではなく位置を指定するものもあります。これらは、テキスト内で一致を検索する場所を示しますが、その一致には文字は含まれません。次の表に、一般的な例をいくつか示します。詳細については、<link linkend="app.regex.tools" endterm="app.regex.tools.title"/>項のWebページを参照してください。</para>
+
+      <table id="app.regex.boundary.matchers">
+        <title id="app.regex.boundary.matchers.title">位置を示す式</title>
+      
+        <tgroup align="left" cols="2" rowsep="1">
+          <colspec align="left" colnum="1"/>
+
+          <thead>
+            <row>
+              <entry align="left">式</entry>
+              <entry align="left">一致</entry>
+            </row>
+          </thead>
+          
+          <tbody>
+            <row>
+              <entry><literal>^</literal></entry>
+              <entry>
+                <para>行の先頭</para>
+              </entry>
+            </row>
+        
+            <row>
+              <entry><literal>$</literal></entry>
+              <entry>
+                <para>行の末尾</para>
+              </entry>
+            </row>
+        
+            <row>
+              <entry><literal>\b</literal></entry>
+              <entry>
+                <para>単語境界</para>
+              </entry>
+            </row>
+        
+            <row>
+              <entry><literal>\B</literal></entry>
+              <entry>
+                <para><emphasis>単語の境界ではない</emphasis></para>
+              </entry>
+            </row>
+        
+            <row>
+              <entry><literal>(?=u)</literal></entry>
+              <entry>
+                <para>「u」が後に続く文字。</para>
+				
+                <para>たとえば、<literal>q(?=u)</literal>は、文字「q」の後に「u」が続く場合、文字「q」と一致します。したがって、「equal」または「question」の「q」と一致しますが、「qigong」または「Iraq」の「q」とは<emphasis>一致しません</emphasis>。</para>
+              </entry>
+            </row>
+        
+            <row>
+              <entry><literal>(?!u)</literal></entry>
+              <entry>
+                <para>その後に文字「u」が続く文字<emphasis>ではない</emphasis>。</para>
+				
+                <para>たとえば、<literal>q(!u)</literal>は、「u」が後に<emphasis>続かない</emphasis>場合に、文字「q」と一致します。したがって、「qigong」(気功の意)または「Iraq」(イラク)の「q」と一致しますが、「equal」または「question」の「q」とは<emphasis>一致しません</emphasis>。</para>
+              </entry>
+            </row>
+            
+            <row>
+              <entry><literal>(?&lt;=q)</literal></entry>
+              <entry>
+                <para>文字「q」の後に続く文字。</para>
+				
+                <para>たとえば、<literal>(?&lt;=q)u</literal>は、文字「u」が「q」の後にある場合に一致します。したがって、「quick」の「u」には一致しますが、「run」の「u」には一致しません。</para>
+              </entry>
+            </row>
+        
+            <row>
+              <entry><literal>(?&lt;!q)</literal></entry>
+              <entry>
+                <para>文字「q」の前に<emphasis>ない</emphasis>文字。</para>
+				
+                <para>たとえば、<literal>(?&lt;!q)u</literal>は、「q」の後に<emphasis>来ない</emphasis>場合、文字「u」と一致します。したがって、「run」の「u」と一致しますが、「quick」の「u」とは<emphasis>一致しません</emphasis>。</para>
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>  
+  </section>
+
+  <section id="app.regex.more.examples">
+    <title id="app.regex.more.examples.title">その他の例</title>
+
+    <para>このセクションでは、上記のさまざまな式を組み合わせて、OmegaTで強力な検索を実行する方法を示す例をいくつか示します。</para>
+    
+    <table id="regex.examples">
+      <title id="regex.examples.title">上記の式を使用する正規表現の例</title>
+
+      <tgroup align="left" cols="2" rowsep="1">
+        <colspec align="left" colnum="1"/>
+
+        <thead>
+          <row>
+            <entry>式</entry>
+            <entry>目的</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry><literal>(\b\w+\b)\h\1\b</literal></entry>
+            <entry>
+              <para>ダブルワードを検索します。</para>
+            </entry>
+          </row>
+
+          <row>
+            <entry><literal>,\h[\h(\w+\.\w+)\w,'ʼ&quot;“”-]+[\.,]</literal></entry>
+            <entry>
+              <para>コンマで始まり、その後に空白文字が続き、1つ以上の単語(引用符で囲まれた単語、短縮形、およびファイル拡張子の付いたファイル名を含む)を含み、コンマまたはピリオドで終わる句を検索します。</para>
+            </entry>
+          </row>
+
+          <row>
+            <entry><literal>\. \h+$</literal></entry>
+            <entry>
+              <para>行末のピリオドの後にある余分な空白を検索します。</para>
+            </entry>
+          </row>
+
+          <row>
+            <entry><literal>\h+a\h+[aeiou]</literal></entry>
+            <entry>
+              <para>「an」ではなく、「a」の後にある母音で始まる単語を検索します。</para>
+            </entry>
+          </row>
+
+          <row>
+            <entry><literal>\h+an\h+[^aeiou]</literal></entry>
+            <entry>
+              <para>前の例の逆の例です。「a」ではなく「an」の後に来る子音で始まる単語を検索します。</para>
+            </entry>
+          </row>
+
+          <row>
+            <entry><literal>\d{4}([/\.-]\d{1,2}){2}</literal></entry>
+            <entry>
+              <para>次のように、スラッシュ、ピリオドまたはハイフンで区切られた月と日を使用して、年、月および日の順序で数値の日付を検索します:</para>
+			  
+                <itemizedlist>
+                  <listitem>
+                    <para>2002/11/8</para>
+                  </listitem>
+                  <listitem>
+                    <para>1969.7.20</para>
+                  </listitem>
+                  <listitem>
+                    <para>2022-10-31</para>
+                  </listitem>
+                </itemizedlist>
+
+				<note>
+                  <para>この式は、可能な日付に一致する数値パターンと区切りパターンを検索しますが、検証は行いません。また、「5136/36/71」などのパターンも検索されます。</para>
+				</note>
+            </entry>
+          </row>
+
+          <row>
+            <entry><literal>\.[A-Z]</literal></entry>
+            <entry>
+              <para>ピリオドの後に大文字が続く文字列を検索します。ピリオドと新しい文の始まりの間に欠落している可能性のあるスペースを見つけるのに役立ちます。</para>
+            </entry>
+          </row>
+
+          <row>
+            <entry><literal>\bis\b</literal></entry>
+            <entry>
+              <para>「is」を文中の単語全体として検索します。「this」、「is not」、または「Is」と一致するものは検索しません。</para>
+            </entry>
+          </row>
+
+          <row>
+            <entry><literal>[\w\.-]+@[\w\.-]+</literal></entry>
+            <entry>
+              <para>電子メールアドレスを検索します。この単純な表現では、有効なすべての電子メールアドレス形式に対応していない場合があります。</para>
+            </entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+
+  <section id="app.regex.tools">
+    <title id="app.regex.tools.title">参考資料</title>
+
+    <para>OmegaTは正規表現に派手な色付けをしませんが、OmegaTは一致結果に色を付けるので、<link linkend="windows.text.search" endterm="windows.text.search.title"/>ウィンドウを使って多くの練習をすることができます。</para>
+    
+    <para>いくつかの追加リソースを以下に示します。</para>
+
+    <para>Javaテクニカル・リファレンスは、標準的なリファレンスとして役立ちます。<variablelist>
+        <varlistentry id="app.regex.java">
+          <term id="app.regex.java.title"><ulink url="https://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html">Java Regexのドキュメント</ulink></term>
+          <listitem>
+            <para>Javaで使用される正規表現の公式リファレンスです。</para>
+          </listitem>
+        </varlistentry>
+      </variablelist>正規表現の使用についてさらに詳しく知りたい場合は、次の2つのWebサイトが非常に便利です。<variablelist>
+        <varlistentry id="app.regex.tools.regex101">
+          <term id="app.regex.tools.regex101.title"><ulink url="https://regex101.com">https://regex101.com</ulink></term>
+          <listitem>
+            <para>検索したいテキストとテストしたい正規表現を入力できるオンライン正規表現マッチングツール。</para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry id="app.regex.tools.regular.expression.info">
+          <term id="app.regex.tools.regular.expression.info.title"><ulink url="https://www.regular-expressions.info">https://www.regular-expressions.info</ulink></term>
+          <listitem>
+            <para>Web上で最も徹底した正規表現のチュートリアルおよびリファレンスの1つ。</para>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+
+      <note>
+        <para>OmegaTはいずれのサイトもサポートしていません。どの言語であれ、他にも興味深い参考資料があれば、OmegaTチームは提案されたサイトを追記したいとおもいます。</para>
+      </note>
+    </para>
+  </section>
+</section>

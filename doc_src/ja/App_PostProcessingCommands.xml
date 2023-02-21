@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="post.processing.commands">
+  <title id="post.processing.commands.title">後処理用コマンド：</title>
+
+  <para>プロジェクト固有のコマンドについては、<link linkend="dialogs.project.properties.external.processing.command" endterm="dialogs.project.properties.external.processing.command.title"/>プロジェクト設定を参照してください。</para>
+
+  <para>ユーザーレベルのコマンドは<link linkend="dialogs.preferences.saving.and.output.external.post-processing.command" endterm="dialogs.preferences.saving.and.output.external.post-processing.command.title"/>設定を参照してください。</para>
+	
+
+  <section id="post.processing.commands.template.variables">
+    <title id="post.processing.commands.template.variables.title">テンプレート変数</title>
+    <para>コマンドでは、 Java ランタイムの実行時に、テンプレートの値が展開された文字列として渡されます。すべての引数は引用符で囲む必要があります。たとえば、<literal>&quot;${fileName}&quot;</literal>。</para>
+
+    <para>次のテンプレート変数は常に使用できます。テンプレート一覧のその他の項目は、システムの環境変数です。</para>
+	
+    <table id="post.processing.commands.template.variables.table">
+      <title id="post.processing.commands.template.variables.table.title">テンプレート変数</title>
+      <tgroup cols="2" colsep="1">
+        <colspec align="left" colname="1" colnum="1"/>
+        <colspec align="left" colname="2" colnum="2"/>
+        <thead>
+          <row>
+            <entry>変数名</entry>
+            <entry>値</entry>
+          </row>
+        </thead>
+
+        <tbody>
+		  <row>
+			<entry>${projectName}</entry>
+			<entry>プロジェクト・ディレクトリーの名前</entry>
+		  </row>
+		  <row>
+			<entry>${projectRoot}</entry>
+			<entry>プロジェクトのフォルダーへの絶対パス</entry>
+		  </row>
+		  <row>
+			<entry>${sourceRoot}</entry>
+			<entry>原文フォルダーへの絶対パス</entry>
+		  </row>
+		  <row>
+			<entry>${targetRoot}</entry>
+			<entry>訳文フォルダーへの絶対パス</entry>
+		  </row>
+		  <row>
+			<entry>${glossaryRoot}</entry>
+			<entry>用語集フォルダーへの絶対パス</entry>
+		  </row>
+		  <row>
+			<entry>${tmRoot}</entry>
+			<entry>TM ルート・フォルダーへの絶対パス</entry>
+		  </row>
+		  <row>
+			<entry>${tmAutoRoot}</entry>
+			<entry>TM 自動フォルダーへの絶対パス</entry>
+		  </row>
+		  <row>
+			<entry>${dictRoot}</entry>
+			<entry>辞書フォルダーへの絶対パス</entry>
+		  </row>
+		  <row>
+			<entry>${tmOtherLangRoot}</entry>
+			<entry>TM ルート + tmx2source ( 詳細については、 <link linkend="how.to.tm.bridge.two.languages" endterm="how.to.tm.bridge.two.languages.title"/> の how-to を参照してください。)</entry>
+		  </row>
+		  <row>
+			<entry>${sourceLang}</entry>
+			<entry>原文言語</entry>
+		  </row>
+		  <row>
+			<entry>${targetLang}</entry>
+			<entry>訳文言語</entry>
+		  </row>
+		  <row>
+			<entry>${filePath}</entry>
+			<entry>原文ファイルへの絶対パス</entry>
+		  </row>
+		  <row>
+			<entry>${fileShortPath}</entry>
+			<entry>指定されたルートに対する原文ファイル名</entry>
+		  </row>
+		  <row>
+			<entry>${fileName}</entry>
+			<entry>原文ファイルの完全な名前</entry>
+		  </row>
+		  <row>
+			<entry>${fileNameOnly}</entry>
+			<entry>原文ファイルの拡張子を除いた名前</entry>
+		  </row>
+		  <row>
+			<entry>${fileExtension}</entry>
+			<entry>原文ファイルのドットを除いた拡張子</entry>
+		  </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+  
+  <section id="post.processing.commands.user.defined.scripts">
+    <title id="post.processing.commands.user.defined.scripts.title">ユーザー定義スクリプト</title>
+    <para>通常のコマンドに加えて、スクリプトを呼び出すことができます。信頼されていない情報源からの後処理スクリプトは、決して実行しないでください。セキュリティ上の理由から、プロジェクト専用の後処理用コマンドはデフォルトで無効になっています。</para>
+    <para>テンプレート変数は、通常のコマンドとユーザ定義スクリプトの両方で使用できます。スクリプトには絶対パスを使用する必要があります。OmegaTが使用するPATHは、現在のユーザーのPATHと同じでない場合があります。</para>
+    <para>STDOUT および STDERR は、 <link linkend="configuration.folder.default.contents.logs.title">omegat.log</link> ファイルに書き込まれます。終了コードと STDERR 、または最後の STDOUT がステータス・バーに表示されます。</para>
+  </section>
+
+  <section id="post.processing.commands.linux.and.macos">
+    <title id="post.processing.commands.linux.and.macos.title">LinuxとmacOSの場合</title>
+    <para>shebang表記( <literal>#! )を使用する必要があります。/bin/bash</literal>または<literal>#!/usr/bin/env python3</literal>. スクリプトは実行可能でなければなりません。<literal>&amp;&amp;</literal> または <literal>||</literal> またはパイプ <literal>|</literal> でコマンドをつなぐ機能は利用できません。</para>
+  </section>
+  
+  <example id="post.processing.commands.example">
+	  <title id="post.processing.commands.example.title">簡単な後処理用コマンドの例</title>
+	  <variablelist>
+		<varlistentry>
+		  <term>Linux で訳文フォルダーを開く</term>
+		  <listitem>
+			<programlisting>xdg-open ${targetRoot}</programlisting>
+		  </listitem>
+		</varlistentry>
+		<varlistentry>
+		  <term>macOSで訳文フォルダーを開く</term>
+		  <listitem>
+			<programlisting>open ${targetRoot}</programlisting>
+		  </listitem>
+		</varlistentry>
+
+		<varlistentry>
+		  <term>Windows Powershellで訳文フォルダーを開く</term>
+		  <listitem>
+			<programlisting>Invoke-Item ${targetRoot}</programlisting>
+		  </listitem>
+		</varlistentry>
+	  </variablelist>
+	</example>
+  </section>

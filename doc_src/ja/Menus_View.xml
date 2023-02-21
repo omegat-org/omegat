@@ -1,103 +1,131 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="menus.view">
-  <title>表示</title>
+  <title id="menus.view.title"><guimenu>表示</guimenu></title>
+
+  <para>このメニューでは、OmegaTを最大限に活用するために、表示する情報を選択できます。</para>
+
+  <para>説明に示されているすべての色は、<link linkend="dialogs.preferences.colours" endterm="dialogs.preferences.colours.title"/>設定で変更できます。</para>
 
   <variablelist>
-    <varlistentry>
-      <term>翻訳済み分節を色づけ</term>
-
+    <varlistentry id="menus.view.mark.translated.segments">
+      <term id="menus.view.mark.translated.segments.title"><guimenuitem>翻訳済み分節を色づけ</guimenuitem></term>
       <listitem>
-        <para>チェックがある場合、翻訳済みの分節が黄色でハイライト表示されます。</para>
+        <para>チェックがある場合、翻訳済みの分節が黄色で色付け表示されます。</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>未翻訳分節を色づけ</term>
-
+    <varlistentry id="menus.view.mark.untranslated.segments">
+      <term id="menus.view.mark.untranslated.segments.title"><guimenuitem>未翻訳分節を色づけ</guimenuitem></term>
       <listitem>
-        <para>チェックがある場合、未翻訳の分節が紫色でハイライト表示されます。</para>
+        <para>チェックがある場合、未翻訳の分節が紫色で色付け表示されます。</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>段落区切りをマーク</term>
-
+    <varlistentry id="menus.view.mark.paragraph.delimitations">
+      <term id="menus.view.mark.paragraph.delimitations.title"><guimenuitem>段落区切りを表示</guimenuitem></term>
       <listitem>
-        <para>このチェックボックスをオンにすると、元の文書の段落間の区切りが視覚的に示されます。</para>
+        <para>このチェックボックスをオンにすると、元の文書の段落間の区切りが視覚的に示されます。<link linkend="dialogs.preferences.editor.paragraph.delimitation.format" endterm="dialogs.preferences.editor.paragraph.delimitation.format.title"/>設定で、段落区切り文字列を変更できます。</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>原文を表示</term>
-
+    <varlistentry id="menus.view.display.source.segments">
+      <term id="menus.view.display.source.segments.title"><guimenuitem>原文を表示</guimenuitem></term>
       <listitem>
-        <para>チェックがある場合、各分節に対応した原文が緑色にハイライト表示されます。チェックがない場合、原文の分節は表示されません。</para>
+        <para>チェックがある場合、各分節に対応した原文が緑色に色付け表示されます。チェックがない場合、原文の分節は表示されません。</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>繰り返しのある分節を色づけ</term>
-
+    <varlistentry id="menus.view.mark.non.unique.segments">
+      <term id="menus.view.mark.non.unique.segments.title"><guimenuitem>繰り返しのある分節を色づけ</guimenuitem></term>
       <listitem>
-        <para>チェックがある場合、繰り返しのある分節が淡い灰色の文字色で表示されます。</para>
+        <para>チェックがある場合、繰り返しのある分節が紫色で色付け表示されます。</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>メモ付き分節を色付け</term>
-
+    <varlistentry id="menus.view.mark.segments.with.notes">
+      <term id="menus.view.mark.segments.with.notes.title"><guimenuitem>メモ付き分節を色付け</guimenuitem></term>
       <listitem>
-        <para>チェックがある場合、メモ付きの分節が水色でハイライト表示されます。この色付けは、<guimenuitem>［翻訳済み分節を色づけ］</guimenuitem>や<guimenuitem>［未翻訳分節を色づけ］</guimenuitem>よりも優先度が上です。</para>
+        <para>チェックがある場合、メモ付きの分節が水色で色付け表示されます。この色付けは、<guimenuitem>翻訳済み分節を色づけ</guimenuitem>や<guimenuitem>未翻訳分節を色づけ</guimenuitem>よりも優先度が上です。</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>ノーブレークスペースを色付け</term>
-
+    <varlistentry id="menus.view.mark.non.breakable.space">
+      <term id="menus.view.mark.non.breakable.space.title"><guimenuitem>ノーブレークスペース(NBSP)を表示</guimenuitem></term>
       <listitem>
         <para>チェックがある場合、ノーブレークスペース（自動改行しないスペース文字）が灰色の背景色で表示されます。</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>空白文字を色付け</term>
-
+    <varlistentry id="menus.view.mark.white.space">
+      <term id="menus.view.mark.white.space.title"><guimenuitem>空白文字を表示</guimenuitem></term>
       <listitem>
-        <para>チェックがある場合、スペース文字が小さな点で表示されます。</para>
+        <para>チェックがある場合、空白文字が小さな点で表示されます。</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>双方向アルゴリズム制御文字を色付け</term>
-
+    <varlistentry id="menus.view.mark.bidirectional.algorithm.control.character">
+      <term id="menus.view.mark.bidirectional.algorithm.control.character.title"><guimenuitem>Bidi制御文字を表示</guimenuitem></term>
       <listitem>
-        <para>チェックがある場合、<ulink url="http://www.w3.org/International/questions/qa-bidi-controls">双方向アルゴリズム制御文字</ulink>を表示します。</para>
+        <para>この設定には、ユニコード方向書式設定文字が表示されます。詳細については、<ulink url="https://www.unicode.org/reports/tr9/">Unicodeの双方向アルゴリズム</ulink>を参照してください。</para>
+		<para><link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.insert.unicode.control.character" endterm="menus.edit.insert.unicode.control.character.title"/> を使用して、OmegaTのUIから方向指示制御文字を追加します。詳細は<link linkend="app.bidi" endterm="app.bidi.title"/>を参照してください。</para>
+	  </listitem>
+    </varlistentry>
+
+    <varlistentry id="menus.view.mark.auto.populated.segments">
+      <term id="menus.view.mark.auto.populated.segments.title"><guimenuitem>自動生成分節を色づけ</guimenuitem></term>
+      <listitem>
+        <para>チェックがある場合、自動入力された分節が水色で色付け表示されます。</para>
+
+		<para>詳細は<link linkend="dialogs.preferences.editor.save.auto-populated.status" endterm="dialogs.preferences.editor.save.auto-populated.status.title"/>の設定を参照してください。</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>auto フォルダー由来の分節を色付け</term>
-
+    <varlistentry id="menus.view.mark.glossary.matches">
+      <term id="menus.view.mark.glossary.matches.title"><guimenuitem>用語集の一致をマーク</guimenuitem></term>
       <listitem>
-        <para>チェックがある場合、（たとえば <filename class="directory">/tm/auto</filename> フォルダー内の TMX ファイルから）自動挿入された全分節の背景を色付けします。色付けは、<link linkend="dialogs.preferences.editor.saveautopopulatedstatus"><guimenuitem>［auto フォルダー由来の翻訳かどうかを記録する］</guimenuitem></link>にチェックが入っている場合に限り、有効です。<filename class="directory">auto</filename> フォルダーから挿入された通常の翻訳は、オレンジ色で表示されます。それ以外の翻訳は、TMX の種類に応じた異なる色で表示されます。技術的な詳細は、<ulink url="http://sourceforge.net/p/omegat/feature-requests/963/">機能改善リクエスト</ulink>を参照してください。</para>
+        <para>用語集で一致する原文用語に下線を引きます。下線の付いた用語の上にカーソルを置くと、一致する訳文用語が表示されます。下線の付いた用語を右クリックすると、一致する訳文用語が表示されます。訳文用語を選択して、訳文のカーソル位置に挿入できます。</para>
+	  </listitem>
+    </varlistentry>
+
+    <varlistentry id="menus.view.mark.language.checker">
+      <term id="menus.view.mark.language.checker.title"><guimenuitem>言語チェッカーの指摘</guimenuitem></term>
+      <listitem>
+        <para>LanguageToolがエラーを検出した訳文の部分に下線を引きます。詳細については、設定-<link linkend="dialog.preferences.languagetool.plugin" endterm="dialog.preferences.languagetool.plugin.title"/>を参照してください。</para>
+	  </listitem>
+    </varlistentry>
+	
+    <varlistentry id="menus.view.aggressive.font.fallback">
+      <term id="menus.view.aggressive.font.fallback.title"><guimenuitem>代替フォントを積極的に使用</guimenuitem></term>
+      <listitem>
+        <para>OmegaT が一部の絵文字を正しく表示しない場合、このオプションにチェックを入れます（該当する絵文字を含む字体がコンピュータにインストールされている場合に有効）。</para>
+
+		<note>
+		  <para>注意：Windows では、この手動による代替フォント機能が標準の代替フォント機能と衝突し、望ましくない字体に置き換わることがあるようです。そのため、デフォルトではチェックが外されています。</para>
+		</note>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>代替フォントを積極的に使用</term>
-
+    <varlistentry id="menus.view.modification.info">
+      <term id="menus.view.modification.info.title"><guisubmenu>更新情報を表示</guisubmenu></term>
       <listitem>
-        <para>OmegaT が一部の絵文字を正しく表示しない場合、このオプションにチェックを入れます（該当する絵文字を含む字体がコンピュータにインストールされている場合に有効）。注意：Windows では、この手動による代替フォント機能が標準の代替フォント機能と衝突し、望ましくない字体に置き換わることがあるようです。そのため、デフォルトではチェックが外されています。</para>
+        <para>現在の分節を最後に更新した作業者と更新日時の情報を表示します。</para>
+		
+		<para>デフォルトの値は<guimenuitem>現在の分節</guimenuitem>で、<guimenuitem>すべての分節</guimenuitem>または<guimenuitem>なし</guimenuitem>に設定できます。</para>
+
+		<para>表示された情報を修正できます。詳細については、設定-<link linkend="dialog.preferences.view.use.custom.templates.for.modification.info" endterm="dialog.preferences.view.use.custom.templates.for.modification.info.title"/>を参照してください。</para>
       </listitem>
     </varlistentry>
-
-    <varlistentry>
-      <term>更新情報を表示</term>
-
+	
+	<varlistentry id="menus.view.restore.main.window">
+      <term id="menus.view.restore.main.window.title"><guimenuitem>ウインドウを初期位置に復元</guimenuitem></term>
       <listitem>
-        <para>更新情報の表示に関するオプション設定です。<guimenuitem>［現在の分節で表示］</guimenuitem>を選ぶと、現在の分節を最後に更新した作業者と更新日時の情報を表示します。<guimenuitem>［すべての分節で表示」</guimenuitem>を選ぶと、すべての分節について同様の情報を表示します。<guimenuitem>［表示しない」</guimenuitem>を選ぶと、何も表示しません。</para>
-      </listitem>
+        <para>OmegaT で使用する各ウィンドウを、初期位置に戻します。</para>
+
+		<note>
+		  <para>ウィンドウレイアウトの再配置中に問題が発生した場合は、この機能を使ってください。</para>
+		</note>
+	  </listitem>
     </varlistentry>
   </variablelist>
 </section>

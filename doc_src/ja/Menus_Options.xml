@@ -1,92 +1,107 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="menus.options">
-  <title>設定</title>
+  <title id="menus.options.title"><guimenu>設定</guimenu></title>
 
+  <para>このメニューを使用すると、頻繁に使用するいくつかの環境設定にすばやくアクセスできます。</para>
+  
   <variablelist>
-    <varlistentry>
-      <term>環境設定...</term>
-
+    <varlistentry id="menus.options.preferences">
+      <term id="menus.options.preferences.title"><guimenuitem>環境設定...</guimenuitem></term>
       <listitem>
-        <para><link linkend="dialogs.preferences">[環境設定]</link>ダイアログボックスを開きます。</para>
+        <para><link linkend="chapter.dialogs.preferences" endterm="chapter.dialogs.preferences.title"/>ダイアログボックスを開きます。</para>
+
+		<note>
+		  <para>macOSでは、この項目が<guimenu>OmegaT</guimenu>メニューに表示されます。</para>
+		</note>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>機械翻訳</term>
-
+    <varlistentry id="menus.options.mt">
+      <term id="menus.options.mt.title"><guisubmenu>機械翻訳</guisubmenu></term>
       <listitem>
-        <para>機械翻訳ツールを有効または無効にします。</para>
+		<itemizedlist>
+		  <listitem>
+			<para><link linkend="dialogs.preferences.mt.automatically.fetch.translations" endterm="dialogs.preferences.mt.automatically.fetch.translations.title"/></para>
+		  </listitem>
+		</itemizedlist>
 
-        <para>複数の変換エンジンを選択した場合は、<keycombo><keycap>[Ctrl]</keycap><keycap>[M]</keycap></keycombo>を使用して変換エンジンを切り替え、最後に選択した変換エンジンを挿入します。</para>
+		<para>機械翻訳エンジンを有効または無効にします。</para>
+
+        <para>複数の変換エンジンを選択した場合は、<keycombo><keycap>C</keycap><keycap>M</keycap></keycombo>を使用して変換エンジンの翻訳結果を切り替え、最後に選択した訳文候補を挿入します。詳細の<link linkend="dialogs.preferences.mt" endterm="dialogs.preferences.mt.title"/>環境設定を参照してください。</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>用語集</term>
-
+    <varlistentry id="menus.options.glossary">
+      <term id="menus.options.glossary.title"><guisubmenu>用語集</guisubmenu></term>
       <listitem>
-        <para>[<guimenuitem>Taas Terminology Lookup</guimenuitem>]を選択して、この検索をアクティブにします。</para>
+		<itemizedlist>
+		  <listitem>
+			<para><link linkend="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries" endterm="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries.title"/></para>
+		  </listitem>
+		</itemizedlist>
+
+        <para>用語集検索のファジーマッチングを有効または無効にできます。</para>
+
+		<para>詳細については、設定-<link linkend="dialogs.preferences.glossary" endterm="dialogs.preferences.glossary.title"/>を参照してください。</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>辞書</term>
-
+    <varlistentry id="menus.options.dictionary">
+      <term id="menus.options.dictionary.title"><guisubmenu>辞書</guisubmenu></term>
       <listitem>
-        <para>同じ語根を持つ単語を辞書に表示する場合は、[<guimenuitem>辞書項目の照合にトークナイザを使用する</guimenuitem>]オプションをオンにします。</para>
+		<itemizedlist>
+		  <listitem>
+			<para><link linkend="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries" endterm="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries.title"/></para>
+		  </listitem>
+		</itemizedlist>
+
+        <para>辞書検索のファジーマッチングを有効または無効にできます。</para>
+
+		<para>詳細については、設定-<link linkend="dialogs.preferences.dictionary" endterm="dialogs.preferences.dictionary.title"/>を参照してください。</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>入力補完</term>
-
+    <varlistentry id="menus.options.autocompletion">
+      <term id="menus.options.autocompletion.title"><guisubmenu>入力補完</guisubmenu></term>
       <listitem>
-        <para><guimenuitem>［関連性の強い補完候補を自動的に表示する］</guimenuitem>にチェックが入っていると、用語集の訳語項目の最初の数文字を入力することにより、またはタグの場合は「&lt;」を入力することにより、入力補完が自動的に起動します。</para>
+		<para>さまざまな機能の毎に有効または無効にします。詳細については、設定-<link linkend="dialog.preferences.auto.completion" endterm="dialog.preferences.auto.completion.title"/>を参照してください。</para>
+	  </listitem>
+    </varlistentry>
 
-        <para>[<guimenuitem>履歴補完</guimenuitem>]をオンにすると、最初の文字が入力されるとすぐに候補の単語が表示されます。</para>
+    <varlistentry id="menus.options.file.filters">
+      <term id="menus.options.file.filters.title"><guimenuitem>ユーザーレベルのファイルフィルター...</guimenuitem></term>
+      <listitem>
+        <para><link linkend="dialogs.preferences.file.filters" endterm="dialogs.preferences.file.filters.title"/>設定を開きます。</para>
 
-        <para>[<guimenuitem>履歴予測</guimenuitem>]をオンにすると、入力した直後の単語の後に続く一般的な候補単語が表示されます。</para>
+        <para>プロジェクト専用ファイルフィルターの設定をするには、<link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.properties" endterm="menus.project.properties.title"/>を使用します。</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>ファイルフィルター...</term>
-
+    <varlistentry id="menus.options.segmentation">
+      <term id="menus.options.segmentation.title"><guimenuitem>ユーザーレベルの分節化規則...</guimenuitem></term>
       <listitem>
-        <para>環境設定ダイアログボックスの<link linkend="dialogs.preferences.filefilters">[ファイルフィルター]</link>を開きます。</para>
+        <para><link linkend="dialogs.preferences.segmentation.setup" endterm="dialogs.preferences.segmentation.setup.title"/>設定を開きます。</para>
 
-        <para>これらの設定は、OmegaTの全体、つまりすべてのプロジェクトに適用されます。</para>
+        <para>プロジェクト専用の分節化規則の設定をするには、<link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.properties" endterm="menus.project.properties.title"/>を使用します。</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>分節化規則...</term>
-
+    <varlistentry id="menus.options.editor">
+      <term id="menus.options.editor.title"><guimenuitem>編集...</guimenuitem></term>
       <listitem>
-        <para>環境設定ダイアログボックスの<link linkend="dialogs.preferences.segmentationsetup">[分節化規則の設定]</link>を開きます。</para>
-
-        <para>これらの設定は、OmegaTの全体、つまりすべてのプロジェクトに適用されます。</para>
-
+        <para><link linkend="dialogs.preferences.editor" endterm="dialogs.preferences.editor.title"/>設定を開きます。</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>編集...</term>
-
+    <varlistentry id="menus.options.access.configuration.folder">
+      <term id="menus.options.access.configuration.folder.title"><guimenuitem>設定フォルダにアクセス</guimenuitem></term>
       <listitem>
-        <para>環境設定ダイアログボックスの<link linkend="dialogs.preferences.editor">[編集]</link>を開きます。</para>
+        <para>OmegaT設定ファイルが保管されているローカル・ディレクトリーを開きます。</para>
 
-        <para>これらの設定は、OmegaTの全体、つまりすべてのプロジェクトに適用されます。</para>
-
-      </listitem>
-    </varlistentry>
-
-    <varlistentry>
-      <term>設定フォルダにアクセス</term>
-
-      <listitem>
-        <para>OmegaT設定ファイルが保管されているローカル・ディレクトリーを開きます(オペレーティング・システムによって異なります)。</para>
+		<note>
+		  <para>オペレーティング・システムや起動時オプションによって開く場所は異なります。詳細は、付録の <link linkend="configuration.folder" endterm="configuration.folder.title"/> をご覧ください。</para>
+		</note>
       </listitem>
     </varlistentry>
   </variablelist>

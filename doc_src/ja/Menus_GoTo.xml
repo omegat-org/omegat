@@ -1,92 +1,164 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="menus.goto">
-  <title>移動</title>
+  <title id="menus.goto.title"><guimenu>移動</guimenu></title>
 
-  <para>このメニューにエントリが表示されるのは、プロジェクトが開いている場合だけです。</para>
+  <para>このメニューでは、分節とウィンドウナビゲーションコマンドにアクセスできます。</para>
+
+  <example id="example.next.untranslated.segment">
+	<title id="example.next.untranslated.segment.title">ショートカットの説明の例</title>
+	<para>WindowsおよびLinux:<keycombo><keycap>Control</keycap><keycap>U</keycap></keycombo></para>
+
+	<para>Mac OS:<keycombo><keycap>Command</keycap><keycap>U</keycap></keycombo></para>
+
+	<para><emphasis role="bold">この取扱説明書では:</emphasis> <keycombo><keycap>C</keycap><keycap>U</keycap></keycombo></para>
+  </example>
 
   <variablelist>
-    <varlistentry>
-      <term>次の未翻訳分節</term>
+    <varlistentry id="menus.goto.next.untranslated.segment">
+      <term id="menus.goto.next.untranslated.segment.title"><guimenuitem>次の未翻訳分節</guimenuitem><keycombo><keycap>C</keycap><keycap>U</keycap></keycombo></term>
 
       <listitem>
         <para>プロジェクトの翻訳メモリにまだ存在していない（未翻訳の）次の分節に移動します。</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>次の翻訳済み分節</term>
+    <varlistentry id="menus.goto.next.translated.segment">
+      <term id="menus.goto.next.translated.segment.title"><guimenuitem>次の翻訳済みの分節</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>U</keycap></keycombo></term>
 
       <listitem>
         <para>未翻訳分節を飛ばして、次の翻訳済み分節に移動します。</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>次の分節</term>
+    <varlistentry id="menus.goto.next.segment">
+      <term id="menus.goto.next.segment.title"><guimenuitem>次の分節</guimenuitem> <keycombo><keycap>C</keycap><keycap>N</keycap></keycombo></term>
 
       <listitem>
-        <para>次の分節に移動します。現在の分節がファイル末尾である場合は、次のファイルの最初の分節へ移動します。</para>
+		<para>同様:<keycombo><keycap>Enter</keycap></keycombo></para>
 
-        <para>注:<keycap>[Enter]</keycap>は、<link linkend="dialogs.preferences.general.usetabtoadvance">[Tab]を使用して進む</link>オプションが選択されていない場合の代替ショートカットです。</para>
+        <para>次の分節へ移動します。また、現在の分節がファイル末尾である場合は、次のファイルの先頭の分節へ移動します。</para>
+
+        <note>
+		  <para><link linkend="dialogs.preferences.general.use.tab.to.advance" endterm="dialogs.preferences.general.use.tab.to.advance.title"/>設定を有効にすることで、<keycap>TAB</keycap>を代替のショートカットとして使用できます。</para>
+		  
+		  <para>日本語入力のように、見出し語入力に<keycap>Enter</keycap>を使用する入力メソッド・システムで役立ちます。</para></note>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>前の分節</term>
-
+    <varlistentry id="menus.goto.previous.segment">
+      <term id="menus.goto.previous.segment.title"><guimenuitem>前の分節</guimenuitem> <keycombo><keycap>C</keycap><keycap>P</keycap></keycombo></term>
       <listitem>
-        <para>一つ前の分節に移動します。現在の分節がファイル先頭である場合は、前のファイルの末尾の分節へ移動します。</para>
+		<para>同様: <keycombo><keycap>C</keycap><keycap>Enter</keycap></keycombo></para>
 
-        <para>注:<keycombo><keycap>[Ctrl]</keycap><keycap>[Enter]</keycap></keycombo>は、<link linkend="dialogs.preferences.general.usetabtoadvance">[Tabを使用して進む]</link>オプションが選択されていない場合の代替ショートカットです。</para>
+        <para>前の分節へ移動します。また、現在の分節がファイル先頭である場合は、前のファイルの末尾の分節へ移動します。</para>
+
+        <note>
+		  <para><link linkend="dialogs.preferences.general.use.tab.to.advance" endterm="dialogs.preferences.general.use.tab.to.advance.title"/>設定を有効にすることで、 <keycombo><keycap>C</keycap><keycap>TAB</keycap></keycombo>を代替のショートカットとして使用できます。</para>
+		  
+		  <para>日本語入力のように、見出し語入力に<keycap>Enter</keycap>を使用する入力メソッド・システムで役立ちます。</para>
+		</note>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>分節番号を指定...</term>
-
+    <varlistentry id="menus.goto.segment.number">
+      <term id="menus.goto.segment.number.title"><guimenuitem>分節番号...</guimenuitem><keycombo><keycap>C</keycap><keycap>J</keycap></keycombo></term>
       <listitem>
-        <para>分節を英文字で呼び出すか、または分節番号を入力すれば、対応する分節が開きます。</para>
+        <para>番号で指定された分節にジャンプします。</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>次のメモ</term>
-
+    <varlistentry id="menus.goto.next.note">
+      <term id="menus.goto.next.note.title"><guimenuitem>次のメモ</guimenuitem><keycombo><keycap>C</keycap><keycap>A</keycap><keycap>N</keycap></keycombo></term>
       <listitem>
-        <para>メモが添付された次の分節を開きます。</para>
+		<para>メモのある次の分節に移動します。</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>前のメモ</term>
-
+    <varlistentry id="menus.goto.previous.note">
+      <term id="menus.goto.previous.note.title"><guimenuitem>前のメモ</guimenuitem><keycombo><keycap>C</keycap><keycap>A</keycap><keycap>P</keycap></keycombo></term>
       <listitem>
-        <para>メモが添付された前の分節を開きます。</para>
+		<para>メモのある前の分節に移動します。</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>選択中の参考訳文の元分節</term>
+    <varlistentry id="menus.goto.next.unique.segment">
+      <term id="menus.goto.next.unique.segment.title"><guimenuitem>次の繰り返しを除いた分節</guimenuitem><keycombo><keycap>C</keycap><keycap>S</keycap><keycap>K</keycap></keycombo></term>
+      <listitem>
+        <para>次の繰り返しを除いた分節に移動します。</para>
+      </listitem>
+    </varlistentry>
 
+    <varlistentry id="menus.goto.source.of.selected.match">
+      <term id="menus.goto.source.of.selected.match.title"><guimenuitem>選択中の参考訳文の元分節</guimenuitem><keycombo><keycap>C</keycap><keycap>S</keycap><keycap>M</keycap></keycombo></term>
       <listitem>
         <para><guilabel>参考訳文</guilabel>ウィンドウ内で選択されている参考訳文に対応する分節へ移動します。</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>分節の選択履歴を進む</term>
+	<varlistentry id="menus.goto.auto.populated.segments">
+	  <term id="menus.goto.auto.populated.segments.title"><guisubmenu>自動生成分節</guisubmenu></term>
+	  <listitem>
+        <para><link linkend="project.folder.tm.auto" endterm="project.folder.tm.auto.title"/>および<link linkend="project.folder.tm.enforce.title" endterm="project.folder.tm.enforce.title"/>サブフォルダからの完全一致によって自動的に入力された分節間を移動します。</para>
 
+		<para>詳細については、 <link linkend="how.to.use.tm.reuse.tm" endterm="how.to.use.tm.reuse.tm.title"/>を参照してください。</para>
+
+		<itemizedlist>
+		  <listitem id="menus.goto.auto.populated.segments.next.auto">
+			<para id="menus.goto.auto.populated.segments.next.auto.title"><guimenuitem>次のtm/auto/からの分節</guimenuitem><keycombo><keycap>C</keycap><keycap>A</keycap><keycap>,</keycap></keycombo></para>
+
+			<para><filename>tm/auto/</filename>から挿入された次の分節に移動します。</para>
+		  </listitem>
+
+		  <listitem id="menus.goto.auto.populated.segments.prev.auto">
+			<para id="menus.goto.auto.populated.segments.prev.auto.title"><guimenuitem>tm/auto/からの前の分節</guimenuitem><keycombo><keycap>S</keycap><keycap>C</keycap><keycap>A</keycap><keycap>,</keycap></keycombo></para>
+
+			<para><filename>tm/auto/</filename>から挿入された前の分節に移動します。</para>
+		  </listitem>
+
+		  <listitem id="menus.goto.auto.populated.segments.next.enforce">
+			<para id="menus.goto.auto.populated.segments.next.enforce.title"><guimenuitem>次のtm/enforce/からの分節</guimenuitem><keycombo><keycap>C</keycap><keycap>A</keycap><keycap>.</keycap></keycombo></para>
+
+			<para><filename>tm/enforce/</filename>から挿入された次の分節に移動します。</para>
+		  </listitem>
+
+		  <listitem id="menus.goto.auto.populated.segments.prev.enforce">
+			<para id="menus.goto.auto.populated.segments.prev.enforce.title"><guimenuitem>次のtm/auto/からの分節</guimenuitem><keycombo><keycap>S</keycap><keycap>C</keycap><keycap>A</keycap><keycap>.</keycap></keycombo></para>
+
+			<para><filename>tm/enforce/</filename>から挿入された前の分節に移動します。</para>
+		  </listitem>
+		</itemizedlist>
+	  </listitem>
+	</varlistentry>
+
+    <varlistentry id="menus.goto.back.in.history">
+      <term id="menus.goto.back.in.history.title"><guimenuitem>履歴を戻る</guimenuitem><keycombo><keycap>C</keycap><keycap>S</keycap><keycap>P</keycap></keycombo></term>
       <listitem>
-        <para>OmegaT は分節を選択した履歴を記憶しています。このコマンドを実行すると、<guimenuitem>［分節の選択履歴を戻る］</guimenuitem>コマンドによって移動した履歴をたどり、戻る前に選択していた分節へ移動できます。</para>
+        <para>OmegaTはあなたの分節の訪問履歴を記憶しています。</para>
+        <para>このコマンドのおかげで、１つ前に選択していた分節へ戻ることができます。</para>
+      </listitem>
+    </varlistentry>
+    
+    <varlistentry id="menus.goto.forward.in.history">
+      <term id="menus.goto.forward.in.history.title"><guimenuitem>履歴を進む</guimenuitem><keycombo><keycap>C</keycap><keycap>S</keycap><keycap>N</keycap></keycombo></term>
+      <listitem>
+        <para>OmegaTはあなたの分節の訪問履歴を記憶しています。</para>
+
+        <para>上の<link linkend="menus.goto" endterm="menus.goto.title"/><link linkend="menus.goto.back.in.history" endterm="menus.goto.back.in.history.title"/>コマンドで分節に訪問したあとに、１つ先で選択していた分節へ戻ることができます。</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>分節の選択履歴を戻る</term>
-
+    <varlistentry id="menus.goto.notes.pane">
+      <term id="menus.goto.notes.pane.title"><guimenuitem>メモ帳</guimenuitem><keycombo><keycap>C</keycap><keycap>A</keycap><keycap>N</keycap></keycombo></term>
       <listitem>
-        <para>１つ前に選択していた分節へ戻ることができます。後で現在の分節に復帰するには、上にある<guimenuitem>［分節の選択履歴を進む］</guimenuitem>コマンドを使います。</para>
+        <para><link linkend="panes.notes" endterm="panes.notes.title"/>を入力して、現在のメモに関連付けられている分節を記入または修正します。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry id="menus.goto.editor.pane">
+      <term id="menus.goto.editor.pane.title"><guimenuitem>編集</guimenuitem><keycombo><keycap>C</keycap><keycap>A</keycap><keycap>E</keycap></keycombo></term>
+      <listitem>
+        <para><link linkend="panes.editor" endterm="panes.editor.title"/>を入力して、翻訳を続行します。</para>
       </listitem>
     </varlistentry>
   </variablelist>

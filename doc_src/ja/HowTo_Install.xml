@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd"
+[
+<!ENTITY % manualvariables SYSTEM "manualvariables.mod">
+%manualvariables;
+]>
+<section id="how.to.installing.omegat">
+  <title id="how.to.installing.omegat.title">OmegaT をインストールする</title>
+
+  <para>OmeaTには2つのエディションがあります。</para>
+
+  <variablelist>
+	<varlistentry>
+	  <term>標準版: OmegaT 5.8.0</term>
+	  <listitem>
+		<para>デイリーユースにおすすめのエディションです。</para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term>開発版:OmegaT Nightly</term>
+	  <listitem>
+		<para>この版は、新しいコードがOmegaTに追加されるたびに自動的に生成されます。テスト目的で使用されます。</para>
+	  </listitem>
+	</varlistentry>
+  </variablelist>
+
+  <para>ファイルは<ulink url="https://omegat.org/download">https://omegat.org</ulink>から直接ダウンロードできます。</para>
+
+  <note>
+	<para>OmegaT 5.8.0 の実行には、Java 8 Runtime Environment（JRE) が必要です。</para>
+
+	<para>OmeaTパッケージは、Javaにバンドルされているバージョンとバンドルされていないバージョンの両方で利用できます。Javaを含まないパッケージは、システム全体にインストールされたJava 8 Runtime Environmentに依存します。</para>
+
+	<para>OmegaT 5.8.0以降では、すべてのプラットフォームでJava 11 Runtime Environmentもサポートしています。</para>
+
+	<para>OmegaTチームはEclipse FoundationのAdoptium Projectが提供するJavaランタイムEclipse Temurinを推奨していますが、Java 8互換のランタイム環境であればどれでも動作するはずです。 <ulink url="https://projects.eclipse.org/projects/adoptium.temurin">The Eclipse Temurin™ project</ulink>を参照。</para>
+
+	<para>IBMは<ulink url="https://developer.ibm.com/languages/java/semeru-runtimes/downloads/"/>でLinux PowerPC 用のJREを提供しています。</para>
+  </note>
+
+  <section id="installing.omegat.windows">
+    <title id="installing.omegat.windows.title">Windows の場合</title>
+
+    <para>ダウンロードしたファイルをダブルクリックしてください</para>
+
+    <para>インストール時に使用する言語とOmegaTで使用する言語を選択できます。<filename>OmegaT.l4J.ini</filename>を編集して、後でこれを変更することもできます。</para>
+  </section>
+
+  <section id="installing.omegat.linux.intel">
+    <title id="installing.omegat.linux.intel.title">Linux の場合</title>
+
+	<para>一部のLinuxディストリビューションでは、パッケージマネージャにOmegaTが用意されています。ここに記載されている手順は、<ulink url="https://omegat.org/download">https://omegat.org</ulink>のサイトからパッケージをダウンロードする人に適用されます。</para>
+
+
+    <para>ダウンロードしたファイルを解凍します。これにより、ダウンロードしたパッケージの名前が付いた新しいフォルダが作成されます。このフォルダーには、OmegaTの実行に必要なすべてのファイルが含まれています。</para>
+
+    <note>
+	  <para>使用可能なファイルからOmegaTを直接実行することもできますが、そこにある<filename>linux-install.sh</filename>スクリプトを実行して、OmegaTをより適切な場所にインストールすることもできます。</para>
+
+      <para>スクリプトを実行するには、<filename>sudo</filename>パスワードを入力する必要があります。</para>
+
+      <para>このスクリプトは、<filename>/opt/OmegaT/</filename>にある同じバージョンのOmegaTの既存のインストールをチェックします。存在しない場合は、<filename>/opt/omegat/OmegaT_5.8.0</filename>にプログラムをインストールし、デフォルトバージョンとして設定します(<filename>/opt/omegat/OmegaT-default</filename>)。</para>
+	</note>
+
+    <para>解凍またはインストールが完了したら、ダウンロードしたファイルは不要になったため削除できます。</para>
+  </section>
+
+  <section id="Installing.omegat.macos">
+    <title id="Installing.omegat.macos.title">macOSの場合</title>
+
+    <para>ダウンロードしたパッケージをダブルクリックして解凍します。<filename>OmegaT</filename> フォルダーが作成されます。このフォルダには、<filename>index.html</filename>(取扱説明書入口ページ)と<filename>OmegaT.app</filename>(アプリケーション)の2つのファイルが含まれています。このフォルダーを適切な場所（<filename>Applications</filename>フォルダなど）へコピーしてください。</para>
+
+    <para>希望する場合、<filename>OmegaT.app</filename> ファイルをドックへドラッグ＆ドロップして、簡単にアクセスできるようにします。</para>
+
+	<para>ここまでくれば、ダウンロードしたファイルは不要になり、削除することができます。</para>
+  </section>
+
+  <section id="installing.omegat.other.systems">
+    <title id="installing.omegat.other.systems.title">その他のシステム</title>
+
+    <para>この情報は、Java 8 Runtime Environmentと互換性のあるJavaバージョンを持つすべてのシステムに適用されます。これには、上記のプラットフォームだけでなく、特定のパッケージが提供されていないプラットフォームも含まれます。</para>
+
+    <para><emphasis>クロスプラットフォーム(JRE無し)</emphasis>バージョンをダウンロードします。</para>
+
+    <para>ダウンロードしたファイルを解凍します。これにより、OmegaTの実行に必要なすべてのファイルを含むフォルダーが作成されます。</para>
+
+    <para>システムの指示に従って、選択した便利な場所にOmegaTショートカットをインストールします。</para>
+  </section>
+
+  <section id="update.and.delete.omegat">
+	<title id="update.and.delete.omegat.title">アップグレード</title>
+
+	<para>OmegaTは、新しいバージョンが利用可能になったときに通知します。詳細は<link endterm="dialogs.preferences.updates.title" linkend="dialogs.preferences.updates"/>の設定を参照してください。</para>
+
+	<para>あなたのバージョンから最新バージョンへの変更は、開発サイトの<ulink url="https://sourceforge.net/p/omegat/code/ci/master/tree/release/changes.txt">changes.txt</ulink>ファイルに文書化されています。</para>
+
+	<note>
+	  <para>新しいバージョンをインストールする場合は、次の点に注意してください。</para>
+
+	  <itemizedlist>
+		<listitem>
+		  <para>OmegaTの環境設定は構成フォルダに格納され、新しいバージョンによって変更されることは<emphasis>ありません</emphasis>。詳細については-<link endterm="configuration.folder.title" linkend="configuration.folder"/>を参照してください。</para>
+		</listitem>
+
+		<listitem>
+		  <para>過去に作成したプロジェクトや現在使用しているプロジェクトは、<emphasis>変更または削除されません</emphasis>。OmegaTプロジェクトは、OmegaT内に格納<emphasis>されません</emphasis>。これらは、OmegaTアプリケーション自体に物理的に接続されていない独立したオブジェクトです。</para>
+		</listitem>
+
+		<listitem>
+		  <para>ダウンロードしたOmegaTパッケージに含まれるパラメータファイル(特に<link linkend="running.omegat.on.windows">WIndows</link>むけの<filename>OmegaT.l4J.ini</filename>、おおび<link linkend="running.omegat.on.macos">macOS</link>パッケージの<filename>Configuration.properties</filename>および<filename>Info.plist</filename>ファイル)は上書きまたは削除される可能性があるため、これらのファイルを使用してOmegaTの起動パラメータを変更している場合は、アップグレードの前にバックアップを作成することをお勧めします。</para>
+		</listitem>
+
+		<listitem>
+		  <para><filename>plugins</filename>および<filename>scripts</filename>フォルダは上書きされる可能性があるため、アップグレードする前にバックアップを作成することをお勧めします。</para>
+		</listitem>
+	  </itemizedlist>
+	</note>
+
+	<variablelist>
+	  <varlistentry id="update.and.delete.omegat.over.existing.package">
+		<term id="update.and.delete.omegat.over.existing.package.title">既存のバージョンを上書き</term>
+
+		<listitem>
+		  <para>これを行うには、新しいバージョンをインストールするときに、既存のインストールと同じインストールフォルダを選択します。「古い」バージョンの OmegaT は上書きされますが、OmegaTのインターフェースからの個人設定は、さまざまな構成フォルダに保持されます(上記参照)。</para>
+		</listitem>
+	  </varlistentry>
+	  
+	<varlistentry id="update.and.delete.omegat.along.existing.package">
+	  <term id="update.and.delete.omegat.along.existing.package.title">既存のバージョンと併存</term>
+
+	  <listitem>
+		<para>この方法を使うと、古いバージョンと新しいバージョンを共存させることができます。新しいバージョンに慣れるまでは、古いバージョンも使い続けたいという場合に、適しています。</para>
+
+	  <para>コマンドラインで<literal>--config-dir=&lt;path&gt;</literal>OmegaTを使用して別の構成フォルダーを指定しない限り、フォルダー構成設定にあるすべてのパラメータが共有されます。詳細は<link endterm="launch.with.command.line.omegat.options.title" linkend="launch.with.command.line.omegat.options"/>項をご覧ください。</para>
+
+	  <para><link linkend="chapter.project.folder">プロジェクトフォルダー</link>にあるすべてのパラメーターは、そのプロジェクトを開くOmegaTのバージョンに関係なく、そのプロジェクトに適用されます。</para>
+	  </listitem>
+	</varlistentry>
+	</variablelist>
+  </section>
+  
+	<section id="update.and.delete.omegat.delete">
+	  <title id="update.and.delete.omegat.delete.title">OmegaTの削除</title>
+
+	  <para>ご使用のオペレーティング・システムの標準手順に従って、OmegaTを削除します。OmegaTを完全に削除したい場合は、構成フォルダーも削除する必要があります。</para>
+
+	  <para>Linuxで手動インストールを実行した場合は、<filename>opt/</filename>のOmegaTフォルダと、インストール・スクリプトによって<filename>/usr/local/bin/</filename>に置かれたシンボリック・リンクを手動で削除する必要があります。</para>
+	</section>
+
+  <section id="build.omegat.from.source">
+	<title id="build.omegat.from.source.title">OmegaTの構築</title>
+
+	<para>現在のバージョンのソースコードは、OmegaTの<ulink url="https://omegat.org/download">ダウンロードページ</ulink>から直接ダウンロードするか、<ulink url="https://git.code.sf.net/p/omegat/code">Sourceforge</ulink>または<ulink url="https://github.com/omegat-org/omegat.git">GitHub</ulink>リポジトリからクローンすることができます。</para>
+	<para>コードがダウンロードされたら、(もしSourceforgeからクローンした場合はソースフォルダ<filename>omegat-code/</filename>、GitHubからクローンしたら<filename>omegat/</filename>)で端末を開き、次のように入力します。</para>
+
+	<programlisting>./gradlew installDist</programlisting>
+
+	<para>これにより、<filename>build/install/OmegaT</filename>フォルダにOmegaTの完全なディストリビューションが作成されます。</para>
+
+	<para>次のコマンドを使用して、アプリケーションを直接実行することもできます。</para>
+
+	<programlisting>./gradlew run</programlisting>
+
+	<para>使用可能なすべてのタスクの一覧を表示するには、次のように入力します。</para>
+
+	<programlisting>./gradlew tasks</programlisting>
+
+	<para>OmegaTのビルドに関する詳細な手順については、<filename class="directory">docs_devel</filename>フォルダの中の<ulink url="https://sourceforge.net/p/omegat/svn/HEAD/tree/trunk/docs_devel/README.txt">README.txt</ulink>ファイルを参照してください。</para>
+  </section>
+</section>

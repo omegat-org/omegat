@@ -1,33 +1,224 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="windows.textreplace">
-  <title>テキストの置換</title>
+<section id="windows.text.replace">
+  <title id="windows.text.replace.title"><guilabel>テキストの置換</guilabel></title>
 
-  <para><keycombo><keycap>Ctrl</keycap> <keycap>K</keycap></keycombo> で検索と置換ウィンドウを開き、<guilabel>［検索文字列］</guilabel>欄に検索したい語句または正規表現を入力します。</para>
+  <para><link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.search.and.replace" endterm="menus.edit.search.and.replace.title"/>を使用して新しい検索ウィンドウを開き、検索する単語またはフレーズを検索領域に入力します。</para>
+  
+  <para>あるいは、 <link linkend="panes.editor" endterm="panes.editor.title"/>、 <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/>、 または <link linkend="panes.glossary" endterm="panes.glossary.title"/>ウィンドウで単語や語句を選択してから <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.search.and.replace" endterm="menus.edit.search.and.replace.title"/>を使用できます。この場合、検索領域に選択した単語や語句が自動的に入力されます。</para>
 
-  <para><guibutton>［検索］</guibutton>ボタンをクリックすると、検索条件に一致したすべての分節が表示されます。</para>
+  <para>同時に複数の検索ウィンドウを開くことができます。</para>
 
-  <para><guilabel>［置換後の文字列］</guilabel>欄に新しい語句を入力し（正規表現は使えません）、以下のいずれかをクリックします：<itemizedlist>
-      <listitem>
-        <para><guilabel>すべて置換：</guilabel>すべての検索文字列を置換後の文字列で置き換えます（事前に置換件数を示した確認ダイアログが表示されます）。</para>
-      </listitem>
-    </itemizedlist><itemizedlist>
-      <listitem>
-        <para><guilabel>置換フィルター：</guilabel>編集ウィンドウに置換用のフィルターをかけ、<guilabel>編集ウィンドウのヘッダー</guilabel>に現れるボタンを使って、1 件ずつ置換します。<guilabel>［置換して次へ］</guilabel>か<guilabel>［次を検索］</guilabel>をクリックしていき、最後に<guilabel>［フィルターを解除］</guilabel>でフィルターを解除します。</para>
-      </listitem>
-    </itemizedlist><itemizedlist>
-      <listitem>
-        <para><guilabel>閉じる：</guilabel>変更なしにウィンドウを閉じます。</para>
-      </listitem>
-    </itemizedlist></para>
+  <para><guilabel>検索文字列</guilabel>欄や、<guilabel>置換文字列</guilabel>欄のドロップダウンボタンをクリックすると、直近の検索履歴が 10 個まで表示されます。</para>
 
-  <section>
-    <title>検索オプション</title>
+  <para>検索語を置換するために挿入する文字列を<guilabel>置換後の文字列:</guilabel>領域に入力し、<guibutton>検索</guibutton>をクリックします。カーソルがフィールド内にある場合は、<keycap>Enter</keycap>を押します。</para>
 
-    <para>検索オプションは、<link linkend="windows.textsearch">検索ウィンドウ</link>に表示される検索オプションとほぼ同じです。</para>
+  <para>検索の一致は青い太字で表示され、変更された文字列はオレンジ色で表示され、置換の結果を示します。</para>
 
-    <para>例外的に、<guilabel>未翻訳分節</guilabel>にチェックを入れると、翻訳前の分節の原文も検索対象になります。</para>
 
-    <para>検索条件に一致した未翻訳分節に対しては、原文を訳文にコピーした上で置換が実行されます。置換が実行されなかった場合、未翻訳分節はそのままです。つまり、原文は訳文にコピーされません。</para>
+  <example id="replace.with.allemand">
+	<title id="replace.with.allemand.title">用語を置き換える</title>
+	<para>
+	  <programlisting>多和田葉子.UTF8
+-- 148&gt; | language = [[日本語]]・[[ドイツ語]]
+&lt;- | language = [[Japonais]]・[[<token>Alllemand</token>]]
+-&gt; | language = [[Japonais]]・[[<token>Allemand</token>]]
+---------</programlisting></para>
+  </example>
+  
+  <note>
+	<para>この段階では、まだ置換は行われていません。</para>
+  </note>
+
+  <para>次のいずれかの選択肢をクリックします。</para>
+
+  <itemizedlist>
+    <listitem>
+      <para><guibutton>すべて置換：</guibutton>すべての検索文字列を置換後の文字列で置き換えます（事前に置換件数を示した確認ダイアログが表示されます）。</para>
+    </listitem>
+
+    <listitem>
+        <para><guibutton>置換を表示</guibutton>は、編集ウィンドウのエントリをフィルタし、置換される要素を色付け表示します。</para>
+		<para><guibutton>置換して次へ</guibutton>か<guibutton>次を検索</guibutton>をクリックしていき、最後に<guibutton>フィルターを解除</guibutton>して置換操作を終了します。</para>
+    </listitem>
+  </itemizedlist>
+
+  <itemizedlist>
+    <listitem>
+      <para><guibutton>閉じる：</guibutton>変更なしにウィンドウを閉じます。</para>
+    </listitem>
+  </itemizedlist>
+
+  <para>置換ウィンドウには独自のメニューがあります。</para>
+ 
+  <itemizedlist>
+    <listitem>
+      <para><guimenu>ファイル</guimenu> &gt; <guimenuitem>選択範囲を検索</guimenuitem> (<keycombo><keycap>C</keycap><keycap>F</keycap></keycombo>): 検索欄に選択されている単語や語句が入力されます。</para>
+    </listitem>
+
+    <listitem>
+      <para><guimenu>ファイル</guimenu> &gt; <guimenuitem>閉じる</guimenuitem> (<keycombo><keycap>C</keycap><keycap>W</keycap></keycombo>):検索ウィンドウを閉じます。</para>
+    </listitem>
+
+    <listitem>
+      <para><guimenu>Edit</guimenu> &gt; <guimenuitem>Insert
+      Source</guimenuitem>
+      (<keycombo><keycap>C</keycap><keycap>S</keycap><keycap>I</keycap></keycombo>):
+      insert the content of the current source segment.</para>
+    </listitem>
+
+    <listitem>
+      <para><guimenu>編集</guimenu>&gt;<guimenuitem>原文に置換</guimenuitem>(<keycombo><keycap>C</keycap><keycap>S</keycap><keycap>R</keycap></keycombo>):検索領域の内容を現在の原文分節の内容で置換します。</para>
+    </listitem>
+
+    <listitem>
+      <para><guimenu>編集</guimenu>&gt;<guimenuitem>用語の追加</guimenuitem>(<keycombo><keycap>C</keycap><keycap>S</keycap><keycap>G</keycap></keycombo>): 新しい用語集の用語を追加します。詳細は<link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.create.glossary.entry" endterm="menus.edit.create.glossary.entry.title"/>を参照してください。</para>
+    </listitem>
+
+    <listitem>
+      <para><guimenu>編集</guimenu>&gt;<guimenuitem>設定をリセット</guimenuitem>:検索ウィンドウのオプションをリセットします。</para>
+    </listitem>
+  </itemizedlist>
+
+  <section id="windows.text.replace.methods">
+    <title id="windows.text.replace.methods.title">検索の種類</title>
+
+    <para>ラジオボタンを使用して、検索方法を選択します。</para>
+
+	<para>以下の検索方法を利用できます：</para>
+
+    <variablelist>
+      <varlistentry id="windows.text.replace.methods.exact">
+        <term id="windows.text.replace.methods.exact.title">完全一致検索</term>
+        <listitem>
+          <para>検索欄に指定した文字列そのまま含む分節を検索します。</para>
+
+		  <para>これは、Web検索で引用符マークで囲んだ時と同じです。</para>
+
+		  <note>
+			<para><code>*</code>および<code>?</code>文字は、完全一致検索とキーワード検索の両方で使用できます。</para>
+
+			<itemizedlist>
+			  <listitem>
+				<para>'*'は、現在の位置から単語末までの０個以上の任意の文字と一致します。たとえば、検索文字列が<literal>run*</literal>である場合は、<literal>run</literal>や <literal>runs</literal>や、さらに<literal>running</literal>にも一致します。</para>
+			  </listitem>
+
+			  <listitem>
+				<para>「?」は任意の１文字と一致します。たとえば、検索文字列が<literal>run?</literal>の時に、<literal>runs</literal>に一致すると同時に、<literal>running</literal>や<literal>runner</literal>の中の<literal>runn</literal>の部分に一致します。</para>
+			  </listitem>
+			</itemizedlist>
+		  </note>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="windows.text.replace.methods.regex">
+        <term id="windows.text.replace.methods.regex.title">正規表現</term>
+        <listitem>
+          <para>検索文字列が正規表現として扱われます。</para>
+
+		  <para>正規表現は、完全一致の文字列ではなく、全般的な検索や複雑なパターンの検索を行なうときに、とても効果的な方法です。詳細は、付録の <link linkend="app.regex" endterm="app.regex.title"/> をご覧ください。</para>
+
+		  <note>
+			<para>置換文字列は検索文字列で定義されたグループへの参照をサポートします。検索領域の<code>n番目</code>のグループを参照するには、置換領域で<code>$n</code>(<code>n</code>は1～9の数字)を使用します。</para>
+		  </note>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </section>
+
+  <section id="windows.text.replace.options">
+	<title id="windows.text.replace.options.title">設定</title>
+	
+	<variablelist>
+	  <varlistentry>
+		<term>大文字と小文字を区別</term>
+		<listitem>
+		  <para>検索語と大文字小文字が一致する結果のみを返します。</para>
+		</listitem>
+	  </varlistentry>
+	
+	  <varlistentry>
+		<term>空白文字でノンブレーク空白文字(NBSP)も検索</term>
+		<listitem>
+		  <para>検索文字列に入力されたスペース文字は、通常のスペース文字だけでなく、ノーブレークスペース（\u00A）にも一致するようになります。</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry>
+		<term>未翻訳分節</term>
+		<listitem>
+		  <para>未翻訳分節でも検索できます。</para>
+		</listitem>
+	  </varlistentry>
+ 
+	  <varlistentry>
+		<term><guibutton>詳細設定を表示する</guibutton></term>
+		<listitem>
+		  <para>翻訳を作成または変更したユーザー、翻訳(変更)の日時、現在の原文に存在しない分節を除外するかどうかなどの追加の検索条件を選択します。</para>
+
+		  <variablelist>
+			<varlistentry>
+			  <term>全角/半角文字を区別しない</term>
+			  <listitem>
+				<para>検索語の文字の全角と半角(CJK文字)の両方に一致する結果を返します。</para>
+			  </listitem>
+			</varlistentry>
+		  </variablelist>
+		  <para>詳細設定の表示を停止するには、<guibutton>詳細設定を隠す</guibutton>ボタンを使用します。</para>
+		</listitem>
+	  </varlistentry>
+	</variablelist>
+  </section>
+
+  <section id="windows.text.replace.result.display">
+    <title id="windows.text.replace.result.display.title">検索結果表示画面</title>
+
+    <para>検索された分節は、プロジェクト中で現れる順に表示されます。翻訳済みの分節の場合、原文は訳文の上に表示されます。未翻訳分節の場合には、原文のみが表示されます。</para>
+
+	<para>分節をダブルクリックすることで<link linkend="panes.editor" endterm="panes.editor.title"/>ウィンドウで、対象分節にジャンプします。</para>
+
+    <para>検索結果画面では、次のショートカットを使用することができます。</para>
+	
+	<variablelist>
+	  <varlistentry>
+		<term><keycombo><keycap>C</keycap><keycap>N</keycap></keycombo></term>
+		<listitem>
+		  <para>次の分節に移動します</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry>
+		<term><keycombo><keycap>C</keycap><keycap>P</keycap></keycombo></term>
+		<listitem>
+		  <para>一つ前の分節に移動します</para>
+		</listitem>
+
+	  </varlistentry>
+
+	  <varlistentry>
+		<term><keycombo><keycap>C</keycap><keycap>J</keycap></keycombo></term>
+		<listitem>
+		  <para>編集ウインドウの現在の分節にジャンプします。</para>
+		</listitem>
+	  </varlistentry>
+	</variablelist>
+
+	<para>選択した分節が緑色で色付け表示されます。</para>
+	
+	<variablelist>
+	  <varlistentry>
+		<term>編集ウィンドウと同期</term>
+		<listitem>
+		  <para><link linkend="panes.editor" endterm="panes.editor.title"/>ウィンドウの表示を、検索結果の選択肢と同期します。</para>
+		</listitem>
+	  </varlistentry>
+	  
+	  <varlistentry>
+		<term>検索ウィンドウを閉じた際に初期分節へ戻る</term>
+		<listitem>
+		  <para>検索ウィンドウを閉じると、<link linkend="panes.editor" endterm="panes.editor.title"/>ウィンドウは検索が開始される前に表示されていた分節に自動的に戻ります。</para>
+		</listitem>
+	  </varlistentry>
+	</variablelist>
   </section>
 </section>

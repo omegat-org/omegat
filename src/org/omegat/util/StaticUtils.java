@@ -579,4 +579,17 @@ public final class StaticUtils {
         return true;
     }
 
+    public static String getSupportInfo() {
+        Runtime runtime = Runtime.getRuntime();
+        String memory = String.format("%dMiB total / %dMiB free / %dMiB max",
+                getMB(runtime.totalMemory()), getMB(runtime.freeMemory()), getMB(runtime.maxMemory()));
+        return String.format("Version: %s%nPlatform: %s %s%nJava: %s %s%nMemory: %s",
+                OStrings.getNameAndVersion(), System.getProperty("os.name"), System.getProperty("os.version"),
+                System.getProperty("java.version"), System.getProperty("os.arch"), memory);
+    }
+
+    /** Convert bytes into Megabytes */
+    public static int getMB(long bytes) {
+        return (int)(bytes >> 20);
+    }
 } // StaticUtils

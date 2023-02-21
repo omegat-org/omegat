@@ -40,6 +40,7 @@ import org.omegat.help.Help;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Platform;
+import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.ResourcesUtil;
 import org.omegat.util.gui.StaticUIUtils;
@@ -71,9 +72,9 @@ public class AboutDialog extends JDialog {
 
         versionLabel.setText(getVersionString());
 
-        Object[] args = { getMB(Runtime.getRuntime().totalMemory()),
-                getMB(Runtime.getRuntime().freeMemory()),
-                getMB(Runtime.getRuntime().maxMemory())};
+        Object[] args = { StaticUtils.getMB(Runtime.getRuntime().totalMemory()),
+                StaticUtils.getMB(Runtime.getRuntime().freeMemory()),
+                StaticUtils.getMB(Runtime.getRuntime().maxMemory())};
         String memoryUsage = StringUtil.format(OStrings.getString("MEMORY_USAGE"), args);
         memoryusage.setText(memoryUsage);
 
@@ -128,17 +129,7 @@ public class AboutDialog extends JDialog {
     }
 
     private void copySupportInfo() {
-        Runtime runtime = Runtime.getRuntime();
-        String memory = String.format("%dMiB total / %dMiB free / %dMiB max",
-                getMB(runtime.totalMemory()), getMB(runtime.freeMemory()), getMB(runtime.maxMemory()));
-        String info = String.format("Version: %s\nPlatform: %s %s\nJava: %s %s\nMemory: %s",
-                OStrings.getNameAndVersion(), System.getProperty("os.name"), System.getProperty("os.version"),
-                System.getProperty("java.version"), System.getProperty("os.arch"), memory);
-        Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(info), null);
-    }
-
-    private int getMB(long bytes) {
-        return (int)(bytes >> 20);
+        Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(StaticUtils.getSupportInfo()), null);
     }
 
     /** @return the return status of this dialog - one of RET_OK or RET_CANCEL */

@@ -188,8 +188,8 @@
                 versions of the <filename>omegat.project</filename> and the
                 local version is overwritten, OmegaT creates a backup file
                 called <filename>omegat.project.YYYYMMDDhhmm.bak</filename>.
-                The backup files are kept for a least ten days, and older
-                backups are automatically deleted.</para>
+                OmegaT creates up to ten backup files, and older backups
+                are automatically deleted in turn.</para>
               </listitem>
             </itemizedlist>
 		  </listitem>

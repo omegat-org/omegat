@@ -1,0 +1,2449 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head><meta charset="UTF-8" />
+      <title>ウィンドウとダイアログ</title>
+      <link href="OmegaT.css" rel="stylesheet" type="text/css" />
+      <meta content="DocBook XSL Stylesheets V1.79.1" name="generator" />
+      <link href="chapter.menus.html" rel="prev" title="メニュー" />
+      <link href="chapter.dialogs.preferences.html" rel="next" title="環境設定" />
+   <meta content="width=device-width, initial-scale=1" name="viewport" /><link href="_wh/wh.css" rel="stylesheet" type="text/css" /><script src="_wh/jquery/jquery.min.js" type="text/javascript"></script><script charset="UTF-8" src="_wh/wh.js" type="text/javascript"></script><script charset="UTF-8" defer="defer" src="_wh/search.js" type="text/javascript"></script></head>
+   
+<body>
+    <div id="wh-header">
+    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 5.8.0-取扱説明書</a></div></div>
+
+    <div id="wh-body">
+      <div class="wh-icon-menu" id="wh-menu"></div>
+      <div id="wh-navigation">
+        <div id="wh-navigation-form"><span id="wh-search-group"><span class="wh-icon-search" id="wh-do-search"></span><input id="wh-search-field" type="text" /><span class="wh-icon-cancel" id="wh-cancel-search"></span></span></div>
+        <div id="wh-toc-pane">
+        </div>
+        <div id="wh-search-pane">
+          <div id="wh-search-results">
+          </div>
+        </div>
+      </div>
+      <div id="wh-separator"></div>
+      <div id="wh-content">
+      
+      <header>
+         <div class="navheader">
+            <table style="width: 100%; ">
+               <tr>
+                  <th colspan="3" style="text-align: center; ">ウィンドウとダイアログ</th>
+               </tr>
+               <tr>
+                  <td style="width: 20%; text-align: left; ">
+                     <a accesskey="p" href="chapter.menus.html">戻る</a> </td>
+                  <th style="width: 60%; text-align: center; "> </th>
+                  <td style="width: 20%; text-align: right; "> <a accesskey="n" href="chapter.dialogs.preferences.html">次へ</a>
+                  </td>
+               </tr>
+            </table>
+            <hr />
+         </div>
+      </header>
+      <section class="chapter" id="chapter.windows.and.dialogs">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title">ウィンドウとダイアログ</h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <ul class="toc">
+               <li>
+                  <span class="section">
+                     <a href="chapter.windows.and.dialogs.html#dialogs.project.properties">
+                        <span class="guilabel">プロジェクト設定</span>
+                     </a>
+                  </span>
+                  <ul>
+                     <li>
+                        <span class="section">
+                           <a href="chapter.windows.and.dialogs.html#dialogs.project.properties.languages">
+                              <span class="guilabel">言語設定</span>
+                           </a>
+                        </span>
+                     </li>
+                     <li>
+                        <span class="section">
+                           <a href="chapter.windows.and.dialogs.html#dialogs.project.properties.options">
+                              <span class="guilabel">設定</span>
+                           </a>
+                        </span>
+                     </li>
+                     <li>
+                        <span class="section">
+                           <a href="chapter.windows.and.dialogs.html#dialogs.project.properties.file.locations">
+                              <span class="guilabel">ファイル場所設定</span>
+                           </a>
+                        </span>
+                     </li>
+                  </ul>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="chapter.windows.and.dialogs.html#windows.source.files.list">
+                        <span class="guilabel">翻訳対象ファイル一覧</span>
+                     </a>
+                  </span>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="chapter.windows.and.dialogs.html#windows.text.search">
+                        <span class="guilabel">プロジェクトの検索</span>
+                     </a>
+                  </span>
+                  <ul>
+                     <li>
+                        <span class="section">
+                           <a href="chapter.windows.and.dialogs.html#windows.text.search.methods">検索の種類</a>
+                        </span>
+                     </li>
+                     <li>
+                        <span class="section">
+                           <a href="chapter.windows.and.dialogs.html#windows.text.search.options">設定</a>
+                        </span>
+                     </li>
+                     <li>
+                        <span class="section">
+                           <a href="chapter.windows.and.dialogs.html#windows.text.search.result.display">検索結果表示画面</a>
+                        </span>
+                     </li>
+                     <li>
+                        <span class="section">
+                           <a href="chapter.windows.and.dialogs.html#windows.text.search.filter">フィルター</a>
+                        </span>
+                     </li>
+                  </ul>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="chapter.windows.and.dialogs.html#windows.text.replace">
+                        <span class="guilabel">テキストの置換</span>
+                     </a>
+                  </span>
+                  <ul>
+                     <li>
+                        <span class="section">
+                           <a href="chapter.windows.and.dialogs.html#windows.text.replace.methods">検索の種類</a>
+                        </span>
+                     </li>
+                     <li>
+                        <span class="section">
+                           <a href="chapter.windows.and.dialogs.html#windows.text.replace.options">設定</a>
+                        </span>
+                     </li>
+                     <li>
+                        <span class="section">
+                           <a href="chapter.windows.and.dialogs.html#windows.text.replace.result.display">検索結果表示画面</a>
+                        </span>
+                     </li>
+                  </ul>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="chapter.windows.and.dialogs.html#windows.aligner">
+                        <span class="guilabel">整合ツール</span>
+                     </a>
+                  </span>
+                  <ul>
+                     <li>
+                        <span class="section">
+                           <a href="chapter.windows.and.dialogs.html#windows.aligner.adjust">設定</a>
+                        </span>
+                     </li>
+                     <li>
+                        <span class="section">
+                           <a href="chapter.windows.and.dialogs.html#windows.aligner.manual.corrections">訂正</a>
+                        </span>
+                     </li>
+                  </ul>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="chapter.windows.and.dialogs.html#windows.scripts">
+                        <span class="guilabel">スクリプト</span>
+                     </a>
+                  </span>
+                  <ul>
+                     <li>
+                        <span class="section">
+                           <a href="chapter.windows.and.dialogs.html#windows.scripts.folder">スクリプトフォルダー</a>
+                        </span>
+                     </li>
+                     <li>
+                        <span class="section">
+                           <a href="chapter.windows.and.dialogs.html#windows.scripts.usage">使い方</a>
+                        </span>
+                     </li>
+                     <li>
+                        <span class="section">
+                           <a href="chapter.windows.and.dialogs.html#windows.scripts.distribution">配付されているスクリプト</a>
+                        </span>
+                     </li>
+                     <li>
+                        <span class="section">
+                           <a href="chapter.windows.and.dialogs.html#windows.scripts.references">参考資料</a>
+                        </span>
+                     </li>
+                  </ul>
+               </li>
+            </ul>
+         </div>
+         <p>
+            <span class="emphasis">
+               <em>ウィンドウ</em>
+            </span>は、編集ウィンドウの横に開いたままにしておき、他方のウィンドウを見ながら作業できます。</p>
+         <p>
+            <span class="emphasis">
+               <em>ダイアログ</em>
+            </span>では、翻訳作業に戻るには、アクションを実行して、それを閉じる必要があります。</p>
+         <section class="section" id="dialogs.project.properties">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">
+                        <span class="guilabel">プロジェクト設定</span>
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>
+               <a class="link" href="chapter.menus.html#menus.project" title="プロジェクト">
+                  <span class="guimenu">プロジェクト</span>
+               </a>
+               <a class="link" href="chapter.menus.html#menus.project.properties">
+                  <span class="guimenuitem">プロジェクト設定...</span>
+                  <span class="keycap">
+                     <strong>C</strong>
+                  </span>+<span class="keycap">
+                     <strong>E</strong>
+                  </span>
+               </a> からダイアログを開きます。</p>
+            <p>ダイアログは、新しいプロジェクトを作成するときに最初のプロジェクト設定のために使用されます。また、プロジェクトが作成された後で、修正するためにも使用されます。</p>
+            <p>詳細については-<a class="link" href="chapter.instant.start.guide.html#introduction.create.and.open.new.project" title="プロジェクトの新規作成">プロジェクトの新規作成</a>を参照してください。</p>
+            <section class="section" id="dialogs.project.properties.languages">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title">
+                           <span class="guilabel">言語設定</span>
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>ドロップダウンの一覧から原文言語と訳文言語を選択するか、手動で入力します。</p>
+               <p>OmegaTは、2文字の言語コードの便利な短い一覧を提供しますが、<a class="ulink" href="https://www.rfc-editor.org/rfc/bcp/bcp47.txt" target="_top">BCP-47</a>に準拠する任意のコード(3文字の言語コードを含む)を適切な領域に入力できます。</p>
+               <p>言語コードは、 OmegaTの様々な箇所で使用されています：</p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p> 
+                           <a class="link" href="chapter.panes.html#panes.fuzzy.matches" title="参考訳文">
+                              <span class="guilabel">参考訳文</span>
+                           </a>ウィンドウの結果を取得したり、</p>
+                     </li>
+                     <li class="listitem">
+                        <p>
+                           <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.segmentation.setup" title="ユーザーレベルの分節化規則">
+                              <span class="guilabel">ユーザーレベルの分節化規則</span>
+                           </a>設定で定義する分節規則を適用したり、</p>
+                     </li>
+                     <li class="listitem">
+                        <p>
+                           <a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.spellchecker" title="スペルチェッカー">
+                              <span class="guilabel">スペルチェッカー</span>
+                           </a>設定でインストールされるスペルチェッカー用辞書をインストールしたり、</p>
+                     </li>
+                     <li class="listitem">
+                        <p> 
+                           <a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.languagetool.plugin" title="LanguageTool">
+                              <span class="guilabel">LanguageTool</span>
+                           </a> 設定などで規則集を選択して、文法エラーや綴りの間違いをチェックしたり、</p>
+                     </li>
+                  </ul>
+               </div>
+               <p>などなどです。</p>
+               <div class="warning">
+                  <h3 class="title">警告</h3>
+                  <p>正しい言語コードを入力し、そのようなコードを必要とする他のすべての場所が、ここで割り当てたものと正確に一致することを確認してください。言語に依存する関数は、言語コード間に不一致がある場合、失敗するか、誤った結果を生成します。</p>
+               </div>
+               <p>OmegaTは原文言語と訳文言語に対応するトークナイザーを自動的に選択しますが、設定を手動で変更することもできます。トークナイザーは、OmegaTが検索結果を良くするのに重要な働きをしています。</p>
+            </section>
+            <section class="section" id="dialogs.project.properties.options">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title">
+                           <span class="guilabel">設定</span>
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <div class="variablelist">
+                  <dl class="variablelist">
+                     <dt id="dialogs.project.properties.options.segmentation">
+                        <span class="term" id="dialogs.project.properties.options.segmentation.title">
+                           <code class="option">文単位の分節化</code>
+                        </span>
+                     </dt>
+                     <dd>
+                        <p>文単位の分節化では、原文ファイルが、分節化規則に基づいて分節に分割されます。</p>
+                        <p>段落を分割しない場合は、この設定をオフにします。</p>
+                        <p>デフォルトでは、分節化の設定はユーザーレベルであり、すべてのプロジェクトで共有されます。</p>
+                        <p>
+                           <a class="link" href="chapter.menus.html#menus.options" title="設定">
+                              <span class="guimenu">設定</span>
+                           </a>
+                           <a class="link" href="chapter.menus.html#menus.options.segmentation">
+                              <span class="guimenuitem">ユーザーレベルの分節化規則...</span>
+                           </a>では、ユーザーレベルの分節化規則を変更できます。</p>
+                        <p> 
+                           <a class="link" href="chapter.windows.and.dialogs.html#dialogs.project.properties.local.segmentation">
+                              <span class="guibutton">プロジェクト専用の分節化規則...</span>
+                           </a>をクリックして、ユーザーレベルの規則のかわりに、特定の分節化規則(プロジェクト専用のルール)を使用することができます。OmegaT を実行する際に、コマンドラインに起動オプションをプロジェクト専用の設定を記述して実行することもできます。</p>
+                        <p>詳細は<a class="link" href="chapter.how.to.html#launch.with.command.line" title="コマンドライン起動">コマンドライン起動</a>項をご覧ください。</p>
+                        <div class="note">
+                           <h3 class="title">注記</h3>
+                           <p>ローカル規則を使用している場合でも、グローバル規則にアクセスすることはできますが、それらを変更してもプロジェクトには影響しません。</p>
+                        </div>
+                        <p>翻訳中に分節化規則の設定を変更しても、プロジェクトの翻訳メモリに登録されている分節は変更されません。</p>
+                        <p>たとえば、翻訳の途中で分節化を<span class="bold">
+                              <strong>文単位</strong>
+                           </span>から<span class="bold">
+                              <strong>段落単位</strong>
+                           </span>に変更しても、そのプロジェクトの内部翻訳メモリは何も変わりません。OmegaT は段落単位でしか分節化できなかった旧形式の翻訳メモリをアップグレードできますが、その逆はできないのです。ただし OmegaT は、文単位の既存の翻訳を結合して、段落単位の参考訳文を作ることはできます。</p>
+                        <p>翻訳中に分節化規則を変更した場合は、新しい分節化規則を有効にするためにプロジェクトを再ロードする必要があります。すると、以前に翻訳済みの一部の分節が分割または結合され、翻訳済みの分節ではなくなります。ただし、元の翻訳はプロジェクトの翻訳メモリ内に残ります。</p>
+                        <p>(ユーザレベルまたはプロジェクト専用、段落または文、設定など)分節化の一般的な説明については、付録<a class="link" href="chapter.appendices.html#app.segmentation" title="分節化規則">分節化規則</a>を参照してください。</p>
+                     </dd>
+                     <dt id="dialogs.project.properties.local.segmentation">
+                        <span class="term" id="dialogs.project.properties.local.segmentation.title">
+                           <span class="guibutton">プロジェクト専用の分節化規則...</span>
+                        </span>
+                     </dt>
+                     <dd>
+                        <p>デフォルトでは、分節化の設定はユーザーレベルであり、すべてのプロジェクトで共有されます。</p>
+                        <p>(<a class="link" href="chapter.menus.html#menus.options" title="設定">
+                              <span class="guimenu">設定</span>
+                           </a>
+                           <a class="link" href="chapter.menus.html#menus.options.segmentation">
+                              <span class="guimenuitem">ユーザーレベルの分節化規則...</span>
+                           </a>を使用して)<a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.segmentation.setup" title="ユーザーレベルの分節化規則">
+                              <span class="guilabel">ユーザーレベルの分節化規則</span>
+                           </a>設定を開いたときに表示される分節化規則は、ユーザーレベルです。</p>
+                        <p>プロジェクト専用のルールを作成するには、このボタンを使用します。<code class="option">［分節化規則をプロジェクト専用にする］</code>チェックボックスにチェックを入れてから、分節化規則を必要な状態に変更してください。</p>
+                        <p>新しい規則集は、プロジェクトと共に<a class="link" href="chapter.project.folder.html#project.folder.omegat.folder" title="omegat">omegat</a>フォルダーの<a class="link" href="chapter.project.folder.html#project.folder.omegat.segmentation">segmentation.conf</a>ファイルに保存されます。またユーザーレベルの分節化規則集には干渉しません。</p>
+                        <p>プロジェクト専用の分節化規則を削除したい場合は、この設定オプションを無効にするか、このファイルを削除してください。</p>
+                        <div class="warning">
+                           <h3 class="title">警告</h3>
+                           <p>ローカル規則を使用している場合でも、グローバル規則にアクセスすることはできますが、それらを変更してもプロジェクトには影響しません。</p>
+                        </div>
+                        <p>(ユーザレベルまたはプロジェクト専用、段落または文、設定など)分節化の一般的な説明については、付録<a class="link" href="chapter.appendices.html#app.segmentation" title="分節化規則">分節化規則</a>を参照してください。</p>
+                     </dd>
+                     <dt id="dialogs.project.properties.auto.propagation">
+                        <span class="term" id="dialogs.project.properties.auto.propagation.title">
+                           <code class="option">翻訳自動反映</code>
+                        </span>
+                     </dt>
+                     <dd>
+                        <p>同じ内容の分節が何箇所か原文に存在する場合、［翻訳自動反映］チェックボックスにチェックを入れると、最初にその内容を一箇所翻訳した時点で、それが基本訳文に設定され、他の訳文分節にも同じ内容が設定されます。</p>
+                        <p>異なる訳文が必要な分節には、例外訳文を割りあてるために、<a class="link" href="chapter.menus.html#menus.edit" title="編集">
+                              <span class="guimenu">編集</span>
+                           </a>
+                           <a class="link" href="chapter.menus.html#menus.edit.create.alternative.translation">
+                              <span class="guimenuitem">例外訳文を登録</span>
+                           </a>を使うことができます。</p>
+                        <p>この設定オプションを有効にしていなければ、すべての分節に異なる訳文を割りあてることができます。</p>
+                     </dd>
+                     <dt id="dialogs.project.properties.hide.tags">
+                        <span class="term" id="dialogs.project.properties.hide.tags.title">
+                           <code class="option">タグを隠す</code>
+                        </span>
+                     </dt>
+                     <dd>
+                        <p>タグは一般に、原文の特定のレイアウトまたは修飾属性などを訳文に再現するのに役立ちます。</p>
+                        <p>この機能を有効にすると、原文分節のタグが非表示になり、手動でタグを処理する必要がなくなります。</p>
+                        <p>これはインラインの整形を実際には使わないテキスト（たとえば OCR ソフトが出力した PDF ファイルや、変換精度の低い .odt ファイルや .docx ファイルなど）を扱う場合に役に立ちます。</p>
+                        <div class="note">
+                           <h3 class="title">注記</h3>
+                           <p>非表示のタグは、単に分節の端に積み重ねられます。通常、これによって訳文ファイルが開くのを防ぐことはできませんが、この機能を使用するときは、次の点に注意してください。</p>
+                           <div class="itemizedlist">
+                              <ul class="itemizedlist" style="list-style-type: disc; ">
+                                 <li class="listitem">
+                                    <p>訳文ファイルに太字、斜体、またはその他の文章装飾を手動で適用する必要があります。</p>
+                                 </li>
+                                 <li class="listitem">
+                                    <p>単に<span class="application">Microsoft Word</span>(2007以降)の文書でタグの数を減らす必要がある場合は、<a class="link" href="chapter.windows.and.dialogs.html#windows.scripts.distribution.tagwipe">Tagwipe</a>スクリプトを使用できます。</p>
+                                    <p>詳細は<a class="link" href="chapter.windows.and.dialogs.html#windows.scripts" title="スクリプト">
+                                          <span class="guilabel">スクリプト</span>
+                                       </a>項をご覧ください。</p>
+                                 </li>
+                              </ul>
+                           </div>
+                        </div>
+                     </dd>
+                     <dt id="dialogs.project.properties.external.processing.command">
+                        <span class="term" id="dialogs.project.properties.external.processing.command.title">
+                           <code class="option">プロジェクト専用の後処理用コマンド：</code>
+                        </span>
+                     </dt>
+                     <dd>
+                        <div class="warning">
+                           <h3 class="title">警告</h3>
+                           <p>セキュリティ上の理由から、プロジェクト専用の後処理用コマンドはデフォルトで無効になっています。</p>
+                           <p>詳細については、設定-<a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.saving.and.output.also.allow.per.project.external.commands">
+                                 <code class="option">プロジェクト専用の後処理用コマンドを許可(&amp;A)</code>
+                              </a>を参照してください。</p>
+                        </div>
+                        <p>OmegaTは、訳文ファイルを生成したあとに自動的にコマンドを実行させることができます。</p>
+                        <p>この領域で実行するコマンドを入力します。</p>
+                        <p>
+                           <a class="link" href="chapter.menus.html#menus.project" title="プロジェクト">
+                              <span class="guimenu">プロジェクト</span>
+                           </a>
+                           <a class="link" href="chapter.menus.html#menus.project.create.translated.documents">
+                              <span class="guimenuitem">訳文ファイルの生成</span>
+                              <span class="keycap">
+                                 <strong>C</strong>
+                              </span>+<span class="keycap">
+                                 <strong>D</strong>
+                              </span>
+                           </a>または<a class="link" href="chapter.menus.html#menus.project" title="プロジェクト">
+                              <span class="guimenu">プロジェクト</span>
+                           </a>
+                           <a class="link" href="chapter.menus.html#menus.project.create.current.translated.document">
+                              <span class="guimenuitem">現在の訳文ファイルを作成</span>
+                              <span class="keycap">
+                                 <strong>C</strong>
+                              </span>+<span class="keycap">
+                                 <strong>S</strong>
+                              </span>+<span class="keycap">
+                                 <strong>D</strong>
+                              </span>
+                           </a>を使用したときに、訳文ファイルを作成してコマンドを起動します。</p>
+                        <p>ここで指定したコマンドは、このプロジェクトでのみ有効です。その指定は、 <a class="link" href="chapter.project.folder.html#project.folder.omegat.project.file">omegat.project</a> ファイルに保存されます。あなたがコマンドを信頼しているときのみ、プロジェクト専用の後処理コマンドを有効にしてください。</p>
+                        <p>テンプレート変数により、さまざまなプロジェクトのデータや、システム変数へのアクセスが提供されています。</p>
+                        <p>詳細は、付録の <a class="link" href="chapter.appendices.html#post.processing.commands" title="後処理用コマンド：">後処理用コマンド：</a> をご覧ください。</p>
+                        <p>また、同じユーザーレベル設定を共有するすべてのプロジェクトで使用可能なフォルダー後処理コマンドを定義することもできます。そのようなコマンドは<a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.saving.and.output.external.post-processing.command">
+                              <code class="option">ユーザーレベルの後処理用外部コマンド</code>
+                           </a>設定でで定義できます。</p>
+                        <div class="note">
+                           <h3 class="title">注記</h3>
+                           <p>プロジェクト専用の後処理用コマンドは、ユーザーレベルコマンドの前に実行されます。</p>
+                        </div>
+                     </dd>
+                     <dt id="dialogs.project.properties.filters">
+                        <span class="term" id="dialogs.project.properties.filters.title">
+                           <span class="guibutton">プロジェクト専用ファイルフィルター</span>
+                        </span>
+                     </dt>
+                     <dd>
+                        <p>デフォルトでは、フィルターの設定はユーザーレベルであり、すべてのプロジェクトで共有されます。これらの設定は、 <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.file.filters" title="ユーザーレベルファイルフィルタ">
+                              <span class="guilabel">ユーザーレベルファイルフィルタ</span>
+                           </a>設定で定義できます。</p>
+                        <p>プロジェクト専用のフィルター設定を作成するには、このボタンを使用します。 <code class="option">フィルター設定をプロジェクト専用にする</code>チェックボックスにチェックを入れてから、必要な設定に変更してください。</p>
+                        <p>新しいファイルフィルターの設定は、プロジェクトと共に<a class="link" href="chapter.project.folder.html#project.folder.omegat.folder" title="omegat">omegat</a>フォルダーの<a class="link" href="chapter.project.folder.html#project.folder.omegat.filters">filters.xml</a>ファイルに保存されます。これらの設定は、ユーザーレベルファイルのフィルター設定よりも優先されます。</p>
+                        <div class="note">
+                           <h3 class="title">注記</h3>
+                           <p>プロジェクト専用のファイルフィルターを無効にするには、チェックボックスをオフにするか、そのファイルを削除します。</p>
+                        </div>
+                        <p>詳細は、付録の <a class="link" href="chapter.appendices.html#file.filters" title="ファイルフィルター">ファイルフィルター</a> をご覧ください。</p>
+                     </dd>
+                     <dt id="dialogs.project.properties.repository.mapping">
+                        <span class="term" id="dialogs.project.properties.repository.mapping.title">
+                           <span class="guibutton">リポジトリマッピング...</span>
+                        </span>
+                     </dt>
+                     <dd>
+                        <p>チームプロジェクトで作業する場合、このウィンドウでリモートフォルダとローカルフォルダ間のマッピングを定義できます。</p>
+                        <p>詳細については、 <a class="link" href="chapter.how.to.html#how.to.setup.team.project" title="チームプロジェクトを設定する">チームプロジェクトを設定する</a>ハウツー項の<a class="link" href="chapter.how.to.html#how.to.setup.team.project.mapping.parameters" title="リポジトリマッピング">リポジトリマッピング</a>章を参照してください。</p>
+                     </dd>
+                     <dt id="dialogs.project.properties.external.searches">
+                        <span class="term" id="dialogs.project.properties.external.searches.title">
+                           <span class="guibutton">プロジェクト専用の外部検索</span>
+                        </span>
+                     </dt>
+                     <dd>
+                        <p>デフォルトでは、外部検索はユーザーレベルであり、すべてのプロジェクトで使用できます。これらの設定は、 <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.external.searches" title="ユーザーレベルの外部検索">
+                              <span class="guilabel">ユーザーレベルの外部検索</span>
+                           </a>設定で定義できます。</p>
+                        <p>プロジェクト専用の外部検索を作成するには、このボタンを使用します。</p>
+                        <p>新しい外部検索の設定は、プロジェクトと共に<a class="link" href="chapter.project.folder.html#project.folder.omegat.folder" title="omegat">omegat</a>フォルダーの<a class="link" href="chapter.project.folder.html#project.folder.omegat.finder">finder.xml</a>ファイルに保存されます。これらの設定は、ユーザーレベルファイルの外部検索設定よりも優先されます。</p>
+                        <p>プロジェクト専用の外部検索を無効にするには、<span class="guibutton">削除</span>をクリックにするか、そのファイルを削除します。</p>
+                        <p>詳細については、設定-<a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.external.searches" title="ユーザーレベルの外部検索">
+                              <span class="guilabel">ユーザーレベルの外部検索</span>
+                           </a>を参照してください。</p>
+                        <div class="note">
+                           <h3 class="title">注記</h3>
+                           <p>セキュリティ上の理由から、プロジェクトベースの外部検索はデフォルトで無効になっています。有効にするには、<a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.external.searches" title="ユーザーレベルの外部検索">
+                                 <span class="guilabel">ユーザーレベルの外部検索</span>
+                              </a> 設定の <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.external.search.enable.project.specific.commands">
+                                 <code class="option">プロジェクト専用の後処理用コマンドを許可</code>
+                              </a>でチェックをいれます。</p>
+                        </div>
+                     </dd>
+                  </dl>
+               </div>
+            </section>
+            <section class="section" id="dialogs.project.properties.file.locations">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title">
+                           <span class="guilabel">ファイル場所設定</span>
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>OmegaT の翻訳プロジェクトは、複数のフォルダーの様々な資材から構成されています。</p>
+               <p>新しいプロジェクトが作成されると、OmegaTは翻訳で使用されるすべての資材を含むプロジェクトフォルダーを提案しますが、その構造は必須ではありません。</p>
+               <p>資材のフォルダは、共有ディスクを含むシステム上の任意の場所に配置できます。</p>
+               <p>詳細については-<a class="link" href="chapter.project.folder.html" title="プロジェクトフォルダー">プロジェクトフォルダー</a>を参照してください。</p>
+               <p>フォルダにファイルを追加または削除したり、プロジェクトで使用するフォルダを変更したりすることで、プロジェクトの構造を変更することができます。これは、翻訳中でも可能です。</p>
+               <p>プロジェクト資材の場所にアクセスするには、 <a class="link" href="chapter.menus.html#menus.project" title="プロジェクト">
+                     <span class="guimenu">プロジェクト</span>
+                  </a>
+                  <a class="link" href="chapter.menus.html#menus.project.access.project.contents">
+                     <span class="guisubmenu">プロジェクト構成物へのアクセス</span>
+                  </a>を使用しサブメニューを選択します。</p>
+               <div class="variablelist">
+                  <dl class="variablelist">
+                     <dt id="dialogs.project.properties.file.locations.browse">
+                        <span class="term" id="dialogs.project.properties.file.locations.browse.title">
+                           <span class="guibutton">参照</span>
+                        </span>
+                     </dt>
+                     <dd>
+                        <p>
+                           <span class="guibutton">[参照]</span>ボタンは、すべてのユーザー定義プロジェクト資源で使用できます。</p>
+                        <div class="note">
+                           <h3 class="title">注記</h3>
+                           <p>資材は、OmegaTが作成するデフォルトのプロジェクト・フォルダーに保存されている必要はありません。共有ディスク上のフォルダなど、リソースを格納する任意のフォルダーを選択できます。</p>
+                        </div>
+                        <p>ボタンをクリックして、デフォルトの資材フォルダの代わりに使用するフォルダを選択します。</p>
+                     </dd>
+                     <dt id="dialogs.project.properties.file.locations.source.files">
+                        <span class="term" id="dialogs.project.properties.file.locations.source.files.title">
+                           <code class="option">原文ファイルフォルダー</code>
+                        </span>
+                     </dt>
+                     <dd>
+                        <p>翻訳対象の原文ファイルがこのフォルダにあるとみなします。OmegaTは、すべてのファイルを一度に読み取ろうとし、翻訳可能な内容をエディタに表示します。</p>
+                        <p>詳細は<a class="link" href="chapter.project.folder.html#project.folder.source" title="source">source</a>項をご覧ください。</p>
+                        <p>フォルダーが空の場合、翻訳可能なコンテンツを含むファイルがない場合、またはOmegaTのファイルフィルターでサポートされているファイルがない場合、OmegaTはフォルダーが空であると通知します。</p>
+                        <div class="variablelist">
+                           <dl class="variablelist">
+                              <dt id="dialogs.project.properties.file.locations.exclusions">
+                                 <span class="term" id="dialogs.project.properties.file.locations.exclusions.title">
+                                    <span class="guibutton">除外...</span>
+                                 </span>
+                              </dt>
+                              <dd>
+                                 <p>
+                                    <span class="guibutton">[除外]</span>をクリックして、OmegaTによって無視されるファイルまたはフォルダを定義します。無視されたファイルまたはフォルダー:</p>
+                                 <div class="itemizedlist">
+                                    <ul class="itemizedlist" style="list-style-type: disc; ">
+                                       <li class="listitem">
+                                          <p>
+                                             <a class="link" href="chapter.panes.html#panes.editor" title="編集">
+                                                <span class="guilabel">編集</span>
+                                             </a>ウィンドウには表示されません。</p>
+                                       </li>
+                                       <li class="listitem">
+                                          <p>翻訳状況の集計対象になりません(<a class="link" href="chapter.menus.html#menus.tools" title="ツール">
+                                                <span class="guimenu">ツール</span>
+                                             </a>
+                                             <a class="link" href="chapter.menus.html#menus.tools.statistics">
+                                                <span class="guimenuitem">翻訳状況</span>
+                                             </a>を使用)</p>
+                                       </li>
+                                       <li class="listitem">
+                                          <p>訳文ファイル生成時に、<a class="link" href="chapter.project.folder.html#project.folder.target" title="target">target</a>フォルダーにコピーされません。</p>
+                                       </li>
+                                    </ul>
+                                 </div>
+                                 <p>除外構成例集ダイアログで、構成例の追加と削除ができます。また ダブルクリックや構成例を選んで<span class="keycap">
+                                       <strong>F2</strong>
+                                    </span> キーを押すと編集もできます。除外定義には <a class="ulink" href="https://ant.apache.org/manual/dirtasks.html#patterns" target="_top">Ant 構文</a>が使えます。</p>
+                              </dd>
+                           </dl>
+                        </div>
+                     </dd>
+                     <dt id="dialogs.project.properties.file.locations.translation.memories">
+                        <span class="term" id="dialogs.project.properties.file.locations.translation.memories.title">
+                           <code class="option">翻訳メモリフォルダー</code>
+                        </span>
+                     </dt>
+                     <dd>
+                        <p>このフォルダに、翻訳メモリとして利用するファイルが保存されます。すべての辞書ファイルの索引を一度に読み取り、翻訳したい分節に対して比較を行ないます。</p>
+                        <p>詳細は<a class="link" href="chapter.project.folder.html#project.folder.tm" title="tm">tm</a>項をご覧ください。</p>
+                        <p>一致するものが見つかると、<a class="link" href="chapter.panes.html#panes.fuzzy.matches" title="参考訳文">
+                              <span class="guilabel">参考訳文</span>
+                           </a>に表示されます。</p>
+                     </dd>
+                     <dt id="dialogs.project.properties.file.locations.glossaries">
+                        <span class="term" id="dialogs.project.properties.file.locations.glossaries.title">
+                           <code class="option">用語集フォルダー</code>
+                        </span>
+                     </dt>
+                     <dd>
+                        <p>このフォルダに用語集として利用するファイルを保存します。すべての辞書ファイルの索引を一度に読み取り、翻訳したい分節に対して比較を行ないます。</p>
+                        <p>詳細は<a class="link" href="chapter.project.folder.html#project.folder.glossary" title="用語集">用語集</a>項をご覧ください。</p>
+                        <p>一致するものが見つかると、<a class="link" href="chapter.panes.html#panes.glossary" title="用語集">
+                              <span class="guilabel">用語集</span>
+                           </a>に表示されます。</p>
+                        <p>詳細は、付録の <a class="link" href="chapter.appendices.html#app.glossaries" title="用語集">用語集</a> をご覧ください。</p>
+                     </dd>
+                     <dt id="dialogs.project.properties.file.locations.writable.glossary">
+                        <span class="term" id="dialogs.project.properties.file.locations.writable.glossary.title">
+                           <code class="option">書き込み可能な用語集ファイルを開く</code>
+                        </span>
+                     </dt>
+                     <dd>
+                        <p>書き込み可能な用語集は、<a class="link" href="chapter.menus.html#menus.edit" title="編集">
+                              <span class="guimenu">編集</span>
+                           </a>
+                           <a class="link" href="chapter.menus.html#menus.edit.create.glossary.entry">
+                              <span class="guimenuitem">用語の追加...</span> 
+                              <span class="keycap">
+                                 <strong>C</strong>
+                              </span>+<span class="keycap">
+                                 <strong>S</strong>
+                              </span>+<span class="keycap">
+                                 <strong>G</strong>
+                              </span>
+	  
+                           </a>コマンドを使用して翻訳されたOmegaT用語をプロジェクトに追加するときに用語集機能が使用するファイルです。</p>
+                        <p>このファイルは、最初の用語定義を作成したときに自動的に生成されます。</p>
+                        <p>追加された項目は、現在の分節内の用語と一致する場合に自動的に認識され、表示されます。</p>
+                        <p>このファイルはプロジェクトの<a class="link" href="chapter.project.folder.html#project.folder.glossary" title="用語集">用語集</a>フォルダーに<span class="emphasis">
+                              <em>必ず存在</em>
+                           </span>します。</p>
+                     </dd>
+                     <dt id="dialogs.project.properties.file.locations.dictionaries">
+                        <span class="term" id="dialogs.project.properties.file.locations.dictionaries.title">
+                           <code class="option">辞書フォルダー</code>
+                        </span>
+                     </dt>
+                     <dd>
+                        <p>このフォルダに辞書として利用するファイルを保存します。すべての辞書ファイルの索引を一度に読み取り、翻訳したい分節に対する検索を行ないます。</p>
+                        <p>詳細は<a class="link" href="chapter.project.folder.html#project.folder.dictionary" title="辞書">辞書</a>項をご覧ください。</p>
+                        <p>一致するものが見つかると、<a class="link" href="chapter.panes.html#panes.dictionary" title="辞書">
+                              <span class="guilabel">辞書</span>
+                           </a>に表示されます。</p>
+                     </dd>
+                     <dt id="dialogs.project.properties.file.locations.translated.files">
+                        <span class="term" id="dialogs.project.properties.file.locations.translated.files.title">
+                           <code class="option">訳文ファイルフォルダー</code>
+                        </span>
+                     </dt>
+                     <dd>
+                        <p>ここはOmegaTが訳文ファイルを作成するフォルダーです。</p>
+                        <p>訳文ファイルは、<a class="link" href="chapter.project.folder.html#project.folder.source" title="source">source</a>フォルダーにあるファイルの翻訳バージョンです。</p>
+                        <p>翻訳された分節はその翻訳に置き換えられ、未翻訳分節は元の言語のままになります。</p>
+                        <p>フォルダーの構造は、<a class="link" href="chapter.project.folder.html#project.folder.source" title="source">source</a>フォルダーの構造を反映しています。OmegaTのファイルフィルタでサポートされていないファイルは、変更されずにコピーされます。</p>
+                        <p>
+                           <a class="link" href="chapter.menus.html#menus.project.create.translated.documents">
+                              <span class="guimenuitem">訳文ファイルの生成</span>
+                              <span class="keycap">
+                                 <strong>C</strong>
+                              </span>+<span class="keycap">
+                                 <strong>D</strong>
+                              </span>
+                           </a>または<a class="link" href="chapter.menus.html#menus.project.create.current.translated.document">
+                              <span class="guimenuitem">現在の訳文ファイルを作成</span>
+                              <span class="keycap">
+                                 <strong>C</strong>
+                              </span>+<span class="keycap">
+                                 <strong>S</strong>
+                              </span>+<span class="keycap">
+                                 <strong>D</strong>
+                              </span>
+                           </a>を使用して、翻訳されたファイルを作成します。</p>
+                        <p>詳細は<a class="link" href="chapter.project.folder.html#project.folder.target" title="target">target</a>項をご覧ください。</p>
+                     </dd>
+                     <dt id="dialogs.project.properties.file.locations.exported.tms">
+                        <span class="term" id="dialogs.project.properties.file.locations.exported.tms.title">
+                           <code class="option">翻訳メモリ出力フォルダー：</code>
+                        </span>
+                     </dt>
+                     <dd>
+                        <p>このフォルダーは、OmegaTが訳文生成の際に、翻訳の現在の状態をTMXファイル形式で出力する場所です。</p>
+                        <div class="note">
+                           <h3 class="title">注記</h3>
+                           <p>デフォルトでは、そのフォルダーはプロジェクトフォルダーそのものですが、場所を変更して、書き出されたTMファイルを共有しやすくすることができます。</p>
+                           <p>詳細については、 <a class="link" href="chapter.how.to.html#how.to.tm.share.translation.memories" title="翻訳メモリの共有">翻訳メモリの共有</a>を参照してください。</p>
+                        </div>
+                        <p>TMXファイルには、<a class="link" href="chapter.project.folder.html#project.folder.source" title="source">source</a>フォルダーの現在のコンテンツに対応する分節だけが含まれています。</p>
+                        <p>
+                           <a class="link" href="chapter.menus.html#menus.project.create.translated.documents">
+                              <span class="guimenuitem">訳文ファイルの生成</span>
+                              <span class="keycap">
+                                 <strong>C</strong>
+                              </span>+<span class="keycap">
+                                 <strong>D</strong>
+                              </span>
+                           </a>または<a class="link" href="chapter.menus.html#menus.project.create.current.translated.document">
+                              <span class="guimenuitem">現在の訳文ファイルを作成</span>
+                              <span class="keycap">
+                                 <strong>C</strong>
+                              </span>+<span class="keycap">
+                                 <strong>S</strong>
+                              </span>+<span class="keycap">
+                                 <strong>D</strong>
+                              </span>
+                           </a>を使用して、訳文ファイルとTMXファイル出力を作成します。</p>
+                        <div class="variablelist">
+                           <dl class="variablelist">
+                              <dt id="dialogs.project.properties.file.locations.tms.to.export">
+                                 <span class="term" id="dialogs.project.properties.file.locations.tms.to.export.title">
+                                    <code class="option">エクスポートする翻訳メモリ</code>
+                                 </span>
+                              </dt>
+                              <dd>
+                                 <p>このチェックボックスでは、OmegaTで上記のTMXファイルを作成するときのフォーマットを選択できます。</p>
+                                 <p>詳細については、 <a class="link" href="chapter.how.to.html#how.to.use.tm" title="翻訳メモリを使用する">翻訳メモリを使用する</a>を参照してください。</p>
+                                 <div class="variablelist">
+                                    <dl class="variablelist">
+                                       <dt>
+                                          <span class="term">
+                                             <code class="option">OmegaT</code>
+                                          </span>
+                                       </dt>
+                                       <dd>
+                                          <p>&quot;OmegaT&quot;のTMXには、OmegaTが作成したタグが、OmegaTプロジェクトでしか適切に使用できない形式で含まれています。</p>
+                                       </dd>
+                                       <dt>
+                                          <span class="term">
+                                             <code class="option">TMX Level 1</code>
+                                          </span>
+                                       </dt>
+                                       <dd>
+                                          <p>level1 ファイルには、文書情報のみが含まれます。</p>
+                                       </dd>
+                                       <dt>
+                                          <span class="term">
+                                             <code class="option">TMX Level 2</code>
+                                          </span>
+                                       </dt>
+                                       <dd>
+                                          <p>「レベル2」TMXには、他のCATツールと互換性のある方法でカプセル化されたタグとともにテキストデータが含まれています。</p>
+                                       </dd>
+                                    </dl>
+                                 </div>
+                              </dd>
+                           </dl>
+                        </div>
+                        <p>詳細については、<a class="ulink" href="https://www.gala-global.org/tmx-14b#SectionIntroduction" target="_top">TMX 1.4b仕様</a>を参照してください。</p>
+                     </dd>
+                  </dl>
+               </div>
+            </section>
+         </section>
+         <section class="section" id="windows.source.files.list">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">
+                        <span class="guilabel">翻訳対象ファイル一覧</span>
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>
+               <a class="link" href="chapter.menus.html#menus.project" title="プロジェクト">
+                  <span class="guimenu">プロジェクト</span>
+               </a>
+               <a class="link" href="chapter.menus.html#menus.project.source.files.list">
+                  <span class="guimenuitem">原文ファイル...</span>
+                  <span class="keycap">
+                     <strong>C</strong>
+                  </span>+<span class="keycap">
+                     <strong>L</strong>
+                  </span>
+               </a>を選択したときと同様に、OmegaT がプロジェクトを読み込むと自動的に表示されます。</p>
+            <p>このウィンドウは、次の情報を表示します：</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>タイトル： プロジェクト中の翻訳可能なファイル数。</p>
+                     <p>対象は、<a class="link" href="chapter.project.folder.html#project.folder.source" title="source">source</a>フォルダーに存在し、OmegaT が扱える形式のファイルです。</p>
+                  </li>
+                  <li class="listitem">
+                     <p>一覧： プロジェクト中の翻訳可能な全ファイル。</p>
+                     <p>クリックすると、翻訳作業のために<a class="link" href="chapter.panes.html#panes.editor" title="編集">
+                           <span class="guilabel">編集</span>
+                        </a>ウィンドウに開くことができます。</p>
+                  </li>
+                  <li class="listitem">
+                     <p>各ファイル毎に、名前、ファイルフィルターの形式、エンコーディング、および含まれる分節数が一覧表示されます。</p>
+                  </li>
+                  <li class="listitem">
+                     <p>表の最下部には、「すべての分節数」と「繰り返しを除いた分節数」、「繰り返しを除いた翻訳済み分節数」が表示されます。</p>
+                  </li>
+               </ul>
+            </div>
+            <p>任意のテキストを入力すると<span class="guilabel">フィルター欄</span>が開き、そこにファイル名の一部を入力することができます。矢印を使用してファイルを選択し、<span class="keycap">
+                  <strong>Enter</strong>
+               </span>キーを押して変換用に開くことができます。</p>
+            <div class="note">
+               <h3 class="title">注記</h3>
+               <p>ヘッダーをクリックすると、たとえばファイル名（左端の列）のアルファベット順で並べ替えたりできます。ファイルの位置を変更するには、ファイルを選択し、右側の<span class="guibutton">[移動.]</span>ボタンのいずれかをクリックします。</p>
+            </div>
+            <p>ファイル名を右クリックするとポップアップが開き、原文ファイルと訳文ファイル(存在する場合)を開くことができます。</p>
+            <p>
+               <span class="bold">
+                  <strong>繰り返しを除いた</strong>
+               </span>分節の数は、分節の総数から繰り返される分節の数を削除することによって計算されます。</p>
+            <p>「すべての分節数」と「繰り返しを除いた分節数」の差から、すべての文中に繰り返しの表現がどれくらいあるかを大まかに見積もることができます。詳細な情報を取得するには、<a class="link" href="chapter.menus.html#menus.tools" title="ツール">
+                  <span class="guimenu">ツール</span>
+               </a>
+               <a class="link" href="chapter.menus.html#menus.tools.statistics">
+                  <span class="guimenuitem">翻訳状況</span>
+               </a>を使用してください。</p>
+            <p>分節化規則を修正すると、「すべての分節数」と「繰り返しを除いた分節数」が変わる可能性があります。いったんプロジェクトの翻訳を開始したら、規則の変更はなるべく行わないようにしてください。詳細は、付録の <a class="link" href="chapter.appendices.html#app.segmentation" title="分節化規則">分節化規則</a> をご覧ください。</p>
+            <p>ウィンドウの下部にあるボタンを使用して、プロジェクトにファイルを追加できます。</p>
+            <div class="variablelist">
+               <dl class="variablelist">
+                  <dt id="windows.source.files.list.copy.files">
+                     <span class="term" id="windows.source.files.list.copy.files.title">
+                        <span class="guibutton">ファイルを追加...</span>
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>選択したファイルをプロジェクトの <a class="link" href="chapter.project.folder.html#project.folder.source" title="source">source</a>フォルダーにコピーし、その新しいファイルを読み込むために、プロジェクトを再読み込みします。</p>
+                  </dd>
+                  <dt id="windows.source.files.list.download.page">
+                     <span class="term" id="windows.source.files.list.download.page.title">
+                        <span class="guibutton">MediaWiki からの原文ファイル追加...</span>
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>ページのURLを要求し、<a class="link" href="chapter.project.folder.html#project.folder.source" title="source">source</a>フォルダーにダウンロードします。</p>
+                  </dd>
+               </dl>
+            </div>
+            <p>この2つのアクションは、<a class="link" href="chapter.menus.html#menus.project" title="プロジェクト">
+                  <span class="guimenu">プロジェクト</span>
+               </a>
+               <a class="link" href="chapter.menus.html#menus.project.copy.files.to.source.folder">
+                  <span class="guimenuitem">ファイルを追加...</span>
+               </a>および<a class="link" href="chapter.menus.html#menus.project" title="プロジェクト">
+                  <span class="guimenu">プロジェクト</span>
+               </a>
+               <a class="link" href="chapter.menus.html#menus.project.download.mediawiki.page">
+                  <span class="guimenuitem">MediaWiki からの原文ファイル追加...</span>
+               </a>メニュー項目を使用するのと同じです。</p>
+            <div class="note">
+               <h3 class="title">注記</h3>
+               <p>
+                  <a class="link" href="chapter.appendices.html#configuration.folder.default.contents.omegat.prefs">omegat.prefs</a>設定ファイルを手動で編集して、プロジェクトのロード時にソースファイル翻訳対象一覧ウィンドウが自動的に開かないようにすることができます。</p>
+            </div>
+         </section>
+         <section class="section" id="windows.text.search">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">
+                        <span class="guilabel">プロジェクトの検索</span>
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>
+               <a class="link" href="chapter.menus.html#menus.edit" title="編集">
+                  <span class="guimenu">編集</span>
+               </a>
+               <a class="link" href="chapter.menus.html#menus.edit.search.project">
+                  <span class="guimenuitem">検索...</span> 
+                  <span class="keycap">
+                     <strong>C</strong>
+                  </span>+<span class="keycap">
+                     <strong>F</strong>
+                  </span>
+	  
+               </a>を使用して新しい検索ウィンドウを開き、検索する単語またはフレーズを検索領域に入力します。</p>
+            <p>同時に複数の検索ウィンドウを開くことができます。最後に使用した検索ウィンドウを呼びだすには、<span class="keycap">
+                  <strong>C</strong>
+               </span>+<span class="keycap">
+                  <strong>S</strong>
+               </span>+<span class="keycap">
+                  <strong>F</strong>
+               </span> を使用します。</p>
+            <p>あるいは、 <a class="link" href="chapter.panes.html#panes.editor" title="編集">
+                  <span class="guilabel">編集</span>
+               </a>、 <a class="link" href="chapter.panes.html#panes.fuzzy.matches" title="参考訳文">
+                  <span class="guilabel">参考訳文</span>
+               </a>、 または <a class="link" href="chapter.panes.html#panes.glossary" title="用語集">
+                  <span class="guilabel">用語集</span>
+               </a>ウィンドウで単語や語句を選択してから <a class="link" href="chapter.menus.html#menus.edit" title="編集">
+                  <span class="guimenu">編集</span>
+               </a>
+               <a class="link" href="chapter.menus.html#menus.edit.search.project">
+                  <span class="guimenuitem">検索...</span> 
+                  <span class="keycap">
+                     <strong>C</strong>
+                  </span>+<span class="keycap">
+                     <strong>F</strong>
+                  </span>
+	  
+               </a>を使用できます。この場合、検索領域に選択した単語や語句が自動的に入力されます。</p>
+            <p>
+               <span class="guilabel">［検索文字列］</span>欄のドロップダウンボタンをクリックすると、直近の検索履歴が 10 個まで表示されます。</p>
+            <p>検索欄を選択して検索をスタートするには、 <span class="guibutton">検索</span>をクリックするか、 <span class="keycap">
+                  <strong>Enter</strong>
+               </span> キーを入力します。</p>
+            <p>一致した文字列は、青い太字で表示されます。</p>
+            <div class="example" id="search.for.doitsu">
+               <div class="example-title">例17 ドイツの検索</div>
+               <div class="example-contents">
+                  <p>
+	  
+                  </p>
+                  <pre class="programlisting">-- 148&gt; | language = [[日本語]]・[[<span class="token">ドイツ</span>語]]
+---------
+-- 177&gt; [[2001年]]、<span class="token">ドイツ</span>の永住権を取得。
+---------</pre>
+                  <p>
+	
+                  </p>
+               </div>
+            </div>
+            <br class="example-break" />
+            <p>「プロジェクトの検索」ウィンドウには独自のメニューがあります。</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>
+                        <span class="guimenu">ファイル</span> &gt; <span class="guimenuitem">選択範囲を検索</span> (<span class="keycap">
+                           <strong>C</strong>
+                        </span>+<span class="keycap">
+                           <strong>F</strong>
+                        </span>): 検索欄に選択されている単語や語句が入力されます。</p>
+                  </li>
+                  <li class="listitem">
+                     <p>
+                        <span class="guimenu">ファイル</span> &gt; <span class="guimenuitem">閉じる</span> (<span class="keycap">
+                           <strong>C</strong>
+                        </span>+<span class="keycap">
+                           <strong>W</strong>
+                        </span>):検索ウィンドウを閉じます。</p>
+                  </li>
+                  <li class="listitem">
+                     <p>
+                        <span class="guimenu">Edit</span> &gt; <span class="guimenuitem">Insert
+      Source</span>
+      (<span class="keycap">
+                           <strong>C</strong>
+                        </span>+<span class="keycap">
+                           <strong>S</strong>
+                        </span>+<span class="keycap">
+                           <strong>I</strong>
+                        </span>):
+      insert the content of the current source segment.</p>
+                  </li>
+                  <li class="listitem">
+                     <p>
+                        <span class="guimenu">編集</span>&gt;<span class="guimenuitem">原文に置換</span>(<span class="keycap">
+                           <strong>C</strong>
+                        </span>+<span class="keycap">
+                           <strong>S</strong>
+                        </span>+<span class="keycap">
+                           <strong>R</strong>
+                        </span>):検索領域の内容を現在の原文分節の内容で置換します。</p>
+                  </li>
+                  <li class="listitem">
+                     <p>
+                        <span class="guimenu">編集</span>&gt;<span class="guimenuitem">用語の追加</span>(<span class="keycap">
+                           <strong>C</strong>
+                        </span>+<span class="keycap">
+                           <strong>S</strong>
+                        </span>+<span class="keycap">
+                           <strong>G</strong>
+                        </span>): 新しい用語集の用語を追加します。詳細は<a class="link" href="chapter.menus.html#menus.edit" title="編集">
+                           <span class="guimenu">編集</span>
+                        </a>
+                        <a class="link" href="chapter.menus.html#menus.edit.create.glossary.entry">
+                           <span class="guimenuitem">用語の追加...</span> 
+                           <span class="keycap">
+                              <strong>C</strong>
+                           </span>+<span class="keycap">
+                              <strong>S</strong>
+                           </span>+<span class="keycap">
+                              <strong>G</strong>
+                           </span>
+	  
+                        </a>を参照してください。</p>
+                  </li>
+                  <li class="listitem">
+                     <p>
+                        <span class="guimenu">編集</span>&gt;<span class="guimenuitem">設定をリセット</span>:検索ウィンドウのオプションをリセットします。</p>
+                  </li>
+               </ul>
+            </div>
+            <section class="section" id="windows.text.search.methods">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title">検索の種類</h3>
+                     </div>
+                  </div>
+               </div>
+               <p>ラジオボタンを使用して、検索方法を選択します。</p>
+               <p>以下の検索方法を利用できます：</p>
+               <div class="variablelist">
+                  <dl class="variablelist">
+                     <dt id="windows.text.search.methods.exact">
+                        <span class="term" id="windows.text.search.methods.exact.title">完全一致検索</span>
+                     </dt>
+                     <dd>
+                        <p>検索欄に指定した文字列そのまま含む分節を検索します。</p>
+                        <p>これは、Web検索で引用符マークで囲んだ時と同じです。</p>
+                     </dd>
+                     <dt id="windows.text.search.methods.keyword">
+                        <span class="term" id="windows.text.search.methods.keyword.title">キーワード検索</span>
+                     </dt>
+                     <dd>
+                        <p>空白で区切って指定したすべてのキーワードを含む分節を検索します。</p>
+                        <p>引用符を使わずに実行したWeb検索と同様です。</p>
+                        <div class="note">
+                           <h3 class="title">注記</h3>
+                           <p>
+                              <code class="code">*</code>および<code class="code">?</code>文字は、完全一致検索とキーワード検索の両方で使用できます。</p>
+                           <div class="itemizedlist">
+                              <ul class="itemizedlist" style="list-style-type: disc; ">
+                                 <li class="listitem">
+                                    <p>
+                                       <code class="code">*</code>は、０個以上の任意の文字と一致します。</p>
+                                    <p>たとえば、検索文字列が<code class="literal">run*</code>である場合は、<code class="literal">run</code>や <code class="literal">runs</code>や、さらに<code class="literal">running</code>にも一致します。</p>
+                                 </li>
+                              </ul>
+                           </div>
+                           <div class="itemizedlist">
+                              <ul class="itemizedlist" style="list-style-type: disc; ">
+                                 <li class="listitem">
+                                    <p>
+                                       <code class="code">?</code>は任意の１文字と一致します。</p>
+                                    <p>たとえば、検索文字列が<code class="literal">run?</code>の時に、<code class="literal">runs</code>に一致すると同時に、<code class="literal">running</code>や<code class="literal">runner</code>の中の<code class="literal">runn</code>の部分に一致します。</p>
+                                 </li>
+                              </ul>
+                           </div>
+                        </div>
+                     </dd>
+                  </dl>
+               </div>
+               <div class="variablelist">
+                  <dl class="variablelist">
+                     <dt id="windows.text.search.methods.regex">
+                        <span class="term" id="windows.text.search.methods.regex.title">正規表現</span>
+                     </dt>
+                     <dd>
+                        <p>検索文字列が正規表現として扱われます。</p>
+                        <p>正規表現は、完全一致の文字列ではなく、全般的な検索や複雑なパターンの検索を行なうときに、とても効果的な方法です。詳細は、付録の <a class="link" href="chapter.appendices.html#app.regex" title="正規表現">正規表現</a> をご覧ください。</p>
+                        <div class="warning">
+                           <h3 class="title">警告</h3>
+                           <p>
+                              <code class="code">*</code>と<code class="code">?</code>の文字は、正規表現では特別な意味を持ちます。したがって、上記のワイルドカード検索は、完全一致検索とキーワード検索にのみ適用されます。</p>
+                        </div>
+                     </dd>
+                  </dl>
+               </div>
+            </section>
+            <section class="section" id="windows.text.search.options">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title">設定</h3>
+                     </div>
+                  </div>
+               </div>
+               <div class="variablelist">
+                  <dl class="variablelist">
+                     <dt>
+                        <span class="term">大文字と小文字を区別</span>
+                     </dt>
+                     <dd>
+                        <p>検索語と大文字小文字が一致する結果のみを返します。</p>
+                     </dd>
+                     <dt>
+                        <span class="term">空白文字でノンブレーク空白文字(NBSP)も検索</span>
+                     </dt>
+                     <dd>
+                        <p>検索文字列に入力されたスペース文字は、通常のスペース文字だけでなく、ノーブレークスペース（\u00A）にも一致するようになります。</p>
+                     </dd>
+                     <dt>
+                        <span class="term">原文を検索</span>
+                     </dt>
+                     <dd>
+                        <p>原文分節を検索します。</p>
+                     </dd>
+                     <dt>
+                        <span class="term">訳文を検索</span>
+                     </dt>
+                     <dd>
+                        <p>訳文分節を検索します。</p>
+                     </dd>
+                     <dt>
+                        <span class="term">メモを検索</span>
+                     </dt>
+                     <dd>
+                        <p>分節に付加されたメモを検索します。</p>
+                     </dd>
+                     <dt>
+                        <span class="term">コメントを検索</span>
+                     </dt>
+                     <dd>
+                        <p>分節に添付されているコメントを検索します。</p>
+                     </dd>
+                     <dt>
+                        <span class="term">翻訳済または未翻訳</span>
+                     </dt>
+                     <dd>
+                        <p>翻訳済み分節と未翻訳分節の両方で検索します。</p>
+                     </dd>
+                     <dt>
+                        <span class="term">翻訳済分節</span>
+                     </dt>
+                     <dd>
+                        <p>翻訳済分節のみ検索します。</p>
+                     </dd>
+                     <dt>
+                        <span class="term">未翻訳分節</span>
+                     </dt>
+                     <dd>
+                        <p>未翻訳分節のみ検索します。</p>
+                     </dd>
+                     <dt>
+                        <span class="term">表示：繰り返し分節</span>
+                     </dt>
+                     <dd>
+                        <p>プロジェクト内で内容が同じ分節が複数見つかった場合でも、検索結果にすべての分節を繰り返し表示します。</p>
+                     </dd>
+                     <dt>
+                        <span class="term">表示: ファイル名</span>
+                     </dt>
+                     <dd>
+                        <p>分節ごとに、その分節が属するファイル名を先頭に表示します。</p>
+                     </dd>
+                     <dt>
+                        <span class="term">検索対象: プロジェクト</span>
+                     </dt>
+                     <dd>
+                        <p>プロジェクトのさまざまな複数言語の資材を検索します。</p>
+                        <p>検索の範囲を選択：</p>
+                        <div class="variablelist">
+                           <dl class="variablelist">
+                              <dt>
+                                 <span class="term">内部メモリ</span>
+                              </dt>
+                              <dd>
+                                 <p>プロジェクトの内部メモリ(<a class="link" href="chapter.project.folder.html#project.folder.project.save.tmx">project_save.tmx</a>)を含めます。</p>
+                              </dd>
+                              <dt>
+                                 <span class="term">翻訳メモリ</span>
+                              </dt>
+                              <dd>
+                                 <p>
+                                    <a class="link" href="chapter.project.folder.html#project.folder.tm" title="tm">tm</a>フォルダーにある翻訳メモリを含めます。</p>
+                              </dd>
+                              <dt>
+                                 <span class="term">用語集</span>
+                              </dt>
+                              <dd>
+                                 <p>
+                                    <a class="link" href="chapter.project.folder.html#project.folder.glossary" title="用語集">用語集</a>フォルダーにある用語集を含めます。</p>
+                              </dd>
+                           </dl>
+                        </div>
+                     </dd>
+                     <dt>
+                        <span class="term">検索対象: ファイル</span>
+                     </dt>
+                     <dd>
+                        <p>プロジェクト資材に含まれていない参照用ファイルを検索します。</p>
+                        <p>OmegaTは、原文ファイルとして読み込むことができる全てのファイルで検索を実行できます。詳細については-<a class="link" href="chapter.appendices.html#file.filters" title="ファイルフィルター">ファイルフィルター</a>を参照してください。</p>
+                        <p>TMXファイルは、翻訳メモリとしてサポートされていますが、OmegaTでは原文ファイル形式として認識されないため、ファイル検索から除外されます。</p>
+                     </dd>
+                     <dt>
+                        <span class="term">
+                           <span class="guibutton">詳細設定を表示する</span>
+                        </span>
+                     </dt>
+                     <dd>
+                        <p>翻訳を作成または変更したユーザー、翻訳(変更)の日時、現在の原文に存在しない分節を除外するかどうかなどの追加の検索条件を選択します。</p>
+                        <div class="variablelist">
+                           <dl class="variablelist">
+                              <dt>
+                                 <span class="term">全角/半角文字を区別しない</span>
+                              </dt>
+                              <dd>
+                                 <p>検索語の文字の全角と半角(CJK文字)の両方に一致する結果を返します。</p>
+                              </dd>
+                              <dt>
+                                 <span class="term">検索結果の上限数</span>
+                              </dt>
+                              <dd>
+                                 <p>検索結果領域に表示される一致項目の最大数を設定します。</p>
+                              </dd>
+                           </dl>
+                        </div>
+                        <p>詳細設定の表示を停止するには、<span class="guibutton">詳細設定を隠す</span>ボタンを使用します。</p>
+                     </dd>
+                  </dl>
+               </div>
+            </section>
+            <section class="section" id="windows.text.search.result.display">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title">検索結果表示画面</h3>
+                     </div>
+                  </div>
+               </div>
+               <p>検索された分節は、プロジェクト中で現れる順に表示されます。翻訳済みの分節の場合、原文は訳文の上に表示されます。未翻訳分節の場合には、原文のみが表示されます。</p>
+               <p>分節をダブルクリックすることで<a class="link" href="chapter.panes.html#panes.editor" title="編集">
+                     <span class="guilabel">編集</span>
+                  </a>ウィンドウで、対象分節にジャンプします。</p>
+               <p>検索結果画面では、次のショートカットを使用することもできます。</p>
+               <div class="variablelist">
+                  <dl class="variablelist">
+                     <dt>
+                        <span class="term">
+                           <span class="keycap">
+                              <strong>C</strong>
+                           </span>+<span class="keycap">
+                              <strong>N</strong>
+                           </span>
+                        </span>
+                     </dt>
+                     <dd>
+                        <p>次の分節に移動します</p>
+                     </dd>
+                     <dt>
+                        <span class="term">
+                           <span class="keycap">
+                              <strong>C</strong>
+                           </span>+<span class="keycap">
+                              <strong>P</strong>
+                           </span>
+                        </span>
+                     </dt>
+                     <dd>
+                        <p>一つ前の分節に移動します</p>
+                     </dd>
+                     <dt>
+                        <span class="term">
+                           <span class="keycap">
+                              <strong>C</strong>
+                           </span>+<span class="keycap">
+                              <strong>J</strong>
+                           </span>
+                        </span>
+                     </dt>
+                     <dd>
+                        <p>編集ウインドウの現在の分節にジャンプします。</p>
+                     </dd>
+                  </dl>
+               </div>
+               <p>選択した分節が緑色でハイライト表示されます。</p>
+               <div class="example" id="select.second.match">
+                  <div class="example-title">例18 二番目の検索結果を選択</div>
+                  <div class="example-contents">
+                     <p>
+		
+                     </p>
+                     <pre class="programlisting">-- 148&gt; | language = [[日本語]]・[[<span class="token">ドイツ</span>語]]
+---------
+<span class="action">-- 177&gt; [[2001年]]、<span class="token">ドイツ</span>の永住権を取得。</span>
+---------</pre>
+                     <p>
+	  
+                     </p>
+                  </div>
+               </div>
+               <br class="example-break" />
+               <div class="variablelist">
+                  <dl class="variablelist">
+                     <dt>
+                        <span class="term">編集ウィンドウと同期</span>
+                     </dt>
+                     <dd>
+                        <p>
+                           <a class="link" href="chapter.panes.html#panes.editor" title="編集">
+                              <span class="guilabel">編集</span>
+                           </a>ウィンドウの表示を、検索結果の選択肢と同期します。</p>
+                     </dd>
+                     <dt>
+                        <span class="term">検索ウィンドウを閉じた際に初期分節へ戻る</span>
+                     </dt>
+                     <dd>
+                        <p>検索ウィンドウを閉じると、<a class="link" href="chapter.panes.html#panes.editor" title="編集">
+                              <span class="guilabel">編集</span>
+                           </a>ウィンドウは検索が開始される前に表示されていた分節に自動的に戻ります。</p>
+                     </dd>
+                  </dl>
+               </div>
+            </section>
+            <section class="section" id="windows.text.search.filter">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title">フィルター</h3>
+                     </div>
+                  </div>
+               </div>
+               <p>
+                  <span class="guibutton">フィルター</span>ボタンをクリックすると、<a class="link" href="chapter.panes.html#panes.editor" title="編集">
+                     <span class="guilabel">編集</span>
+                  </a>ウィンドウ内の一致する検索結果分節のみが表示されます。フィルターを解除するには、<a class="link" href="chapter.panes.html#panes.editor" title="編集">
+                     <span class="guilabel">編集</span>
+                  </a>ウィンドウの上部にある<span class="guibutton">フィルターを解除</span>ボタンをクリックするか、またはプロジェクトを再読み込みしてください。</p>
+            </section>
+         </section>
+         <section class="section" id="windows.text.replace">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">
+                        <span class="guilabel">テキストの置換</span>
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>
+               <a class="link" href="chapter.menus.html#menus.edit" title="編集">
+                  <span class="guimenu">編集</span>
+               </a>
+               <a class="link" href="chapter.menus.html#menus.edit.search.and.replace">
+                  <span class="guimenuitem">置換...</span>
+                  <span class="keycap">
+                     <strong>C</strong>
+                  </span>+<span class="keycap">
+                     <strong>K</strong>
+                  </span>
+	  
+               </a>を使用して新しい検索ウィンドウを開き、検索する単語またはフレーズを検索領域に入力します。</p>
+            <p>あるいは、 <a class="link" href="chapter.panes.html#panes.editor" title="編集">
+                  <span class="guilabel">編集</span>
+               </a>、 <a class="link" href="chapter.panes.html#panes.fuzzy.matches" title="参考訳文">
+                  <span class="guilabel">参考訳文</span>
+               </a>、 または <a class="link" href="chapter.panes.html#panes.glossary" title="用語集">
+                  <span class="guilabel">用語集</span>
+               </a>ウィンドウで単語や語句を選択してから <a class="link" href="chapter.menus.html#menus.edit" title="編集">
+                  <span class="guimenu">編集</span>
+               </a>
+               <a class="link" href="chapter.menus.html#menus.edit.search.and.replace">
+                  <span class="guimenuitem">置換...</span>
+                  <span class="keycap">
+                     <strong>C</strong>
+                  </span>+<span class="keycap">
+                     <strong>K</strong>
+                  </span>
+	  
+               </a>を使用できます。この場合、検索領域に選択した単語や語句が自動的に入力されます。</p>
+            <p>同時に複数の検索ウィンドウを開くことができます。</p>
+            <p>
+               <span class="guilabel">検索文字列</span>欄や、<span class="guilabel">置換文字列</span>欄のドロップダウンボタンをクリックすると、直近の検索履歴が 10 個まで表示されます。</p>
+            <p>検索語を置換するために挿入する文字列を<span class="guilabel">置換後の文字列:</span>領域に入力し、<span class="guibutton">検索</span>をクリックします。カーソルがフィールド内にある場合は、<span class="keycap">
+                  <strong>Enter</strong>
+               </span>を押します。</p>
+            <p>検索の一致は青い太字で表示され、変更された文字列はオレンジ色で表示され、置換の結果を示します。</p>
+            <div class="example" id="replace.with.allemand">
+               <div class="example-title">例19 用語を置き換える</div>
+               <div class="example-contents">
+                  <p>
+	  
+                  </p>
+                  <pre class="programlisting">多和田葉子.UTF8
+-- 148&gt; | language = [[日本語]]・[[ドイツ語]]
+&lt;- | language = [[Japonais]]・[[<span class="token">Alllemand</span>]]
+-&gt; | language = [[Japonais]]・[[<span class="token">Allemand</span>]]
+---------</pre>
+               </div>
+            </div>
+            <br class="example-break" />
+            <div class="note">
+               <h3 class="title">注記</h3>
+               <p>この段階では、まだ置換は行われていません。</p>
+            </div>
+            <p>次のいずれかの選択肢をクリックします。</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>
+                        <span class="guibutton">すべて置換：</span>すべての検索文字列を置換後の文字列で置き換えます（事前に置換件数を示した確認ダイアログが表示されます）。</p>
+                  </li>
+                  <li class="listitem">
+                     <p>
+                        <span class="guibutton">置換を表示</span>は、編集ウィンドウのエントリをフィルタし、置換される要素を色付け表示します。</p>
+                     <p>
+                        <span class="guibutton">置換して次へ</span>か<span class="guibutton">次を検索</span>をクリックしていき、最後に<span class="guibutton">フィルターを解除</span>して置換操作を終了します。</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>
+                        <span class="guibutton">閉じる：</span>変更なしにウィンドウを閉じます。</p>
+                  </li>
+               </ul>
+            </div>
+            <p>置換ウィンドウには独自のメニューがあります。</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>
+                        <span class="guimenu">ファイル</span> &gt; <span class="guimenuitem">選択範囲を検索</span> (<span class="keycap">
+                           <strong>C</strong>
+                        </span>+<span class="keycap">
+                           <strong>F</strong>
+                        </span>): 検索欄に選択されている単語や語句が入力されます。</p>
+                  </li>
+                  <li class="listitem">
+                     <p>
+                        <span class="guimenu">ファイル</span> &gt; <span class="guimenuitem">閉じる</span> (<span class="keycap">
+                           <strong>C</strong>
+                        </span>+<span class="keycap">
+                           <strong>W</strong>
+                        </span>):検索ウィンドウを閉じます。</p>
+                  </li>
+                  <li class="listitem">
+                     <p>
+                        <span class="guimenu">Edit</span> &gt; <span class="guimenuitem">Insert
+      Source</span>
+      (<span class="keycap">
+                           <strong>C</strong>
+                        </span>+<span class="keycap">
+                           <strong>S</strong>
+                        </span>+<span class="keycap">
+                           <strong>I</strong>
+                        </span>):
+      insert the content of the current source segment.</p>
+                  </li>
+                  <li class="listitem">
+                     <p>
+                        <span class="guimenu">編集</span>&gt;<span class="guimenuitem">原文に置換</span>(<span class="keycap">
+                           <strong>C</strong>
+                        </span>+<span class="keycap">
+                           <strong>S</strong>
+                        </span>+<span class="keycap">
+                           <strong>R</strong>
+                        </span>):検索領域の内容を現在の原文分節の内容で置換します。</p>
+                  </li>
+                  <li class="listitem">
+                     <p>
+                        <span class="guimenu">編集</span>&gt;<span class="guimenuitem">用語の追加</span>(<span class="keycap">
+                           <strong>C</strong>
+                        </span>+<span class="keycap">
+                           <strong>S</strong>
+                        </span>+<span class="keycap">
+                           <strong>G</strong>
+                        </span>): 新しい用語集の用語を追加します。詳細は<a class="link" href="chapter.menus.html#menus.edit" title="編集">
+                           <span class="guimenu">編集</span>
+                        </a>
+                        <a class="link" href="chapter.menus.html#menus.edit.create.glossary.entry">
+                           <span class="guimenuitem">用語の追加...</span> 
+                           <span class="keycap">
+                              <strong>C</strong>
+                           </span>+<span class="keycap">
+                              <strong>S</strong>
+                           </span>+<span class="keycap">
+                              <strong>G</strong>
+                           </span>
+	  
+                        </a>を参照してください。</p>
+                  </li>
+                  <li class="listitem">
+                     <p>
+                        <span class="guimenu">編集</span>&gt;<span class="guimenuitem">設定をリセット</span>:検索ウィンドウのオプションをリセットします。</p>
+                  </li>
+               </ul>
+            </div>
+            <section class="section" id="windows.text.replace.methods">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title">検索の種類</h3>
+                     </div>
+                  </div>
+               </div>
+               <p>ラジオボタンを使用して、検索方法を選択します。</p>
+               <p>以下の検索方法を利用できます：</p>
+               <div class="variablelist">
+                  <dl class="variablelist">
+                     <dt id="windows.text.replace.methods.exact">
+                        <span class="term" id="windows.text.replace.methods.exact.title">完全一致検索</span>
+                     </dt>
+                     <dd>
+                        <p>検索欄に指定した文字列そのまま含む分節を検索します。</p>
+                        <p>これは、Web検索で引用符マークで囲んだ時と同じです。</p>
+                        <div class="note">
+                           <h3 class="title">注記</h3>
+                           <p>
+                              <code class="code">*</code>および<code class="code">?</code>文字は、完全一致検索とキーワード検索の両方で使用できます。</p>
+                           <div class="itemizedlist">
+                              <ul class="itemizedlist" style="list-style-type: disc; ">
+                                 <li class="listitem">
+                                    <p>'*'は、現在の位置から単語末までの０個以上の任意の文字と一致します。たとえば、検索文字列が<code class="literal">run*</code>である場合は、<code class="literal">run</code>や <code class="literal">runs</code>や、さらに<code class="literal">running</code>にも一致します。</p>
+                                 </li>
+                                 <li class="listitem">
+                                    <p>「?」は任意の１文字と一致します。たとえば、検索文字列が<code class="literal">run?</code>の時に、<code class="literal">runs</code>に一致すると同時に、<code class="literal">running</code>や<code class="literal">runner</code>の中の<code class="literal">runn</code>の部分に一致します。</p>
+                                 </li>
+                              </ul>
+                           </div>
+                        </div>
+                     </dd>
+                     <dt id="windows.text.replace.methods.regex">
+                        <span class="term" id="windows.text.replace.methods.regex.title">正規表現</span>
+                     </dt>
+                     <dd>
+                        <p>検索文字列が正規表現として扱われます。</p>
+                        <p>正規表現は、完全一致の文字列ではなく、全般的な検索や複雑なパターンの検索を行なうときに、とても効果的な方法です。詳細は、付録の <a class="link" href="chapter.appendices.html#app.regex" title="正規表現">正規表現</a> をご覧ください。</p>
+                        <div class="note">
+                           <h3 class="title">注記</h3>
+                           <p>置換文字列は検索文字列で定義されたグループへの参照をサポートします。検索領域の<code class="code">n番目</code>のグループを参照するには、置換領域で<code class="code">$n</code>(<code class="code">n</code>は1～9の数字)を使用します。</p>
+                        </div>
+                     </dd>
+                  </dl>
+               </div>
+            </section>
+            <section class="section" id="windows.text.replace.options">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title">設定</h3>
+                     </div>
+                  </div>
+               </div>
+               <div class="variablelist">
+                  <dl class="variablelist">
+                     <dt>
+                        <span class="term">大文字と小文字を区別</span>
+                     </dt>
+                     <dd>
+                        <p>検索語と大文字小文字が一致する結果のみを返します。</p>
+                     </dd>
+                     <dt>
+                        <span class="term">空白文字でノンブレーク空白文字(NBSP)も検索</span>
+                     </dt>
+                     <dd>
+                        <p>検索文字列に入力されたスペース文字は、通常のスペース文字だけでなく、ノーブレークスペース（\u00A）にも一致するようになります。</p>
+                     </dd>
+                     <dt>
+                        <span class="term">未翻訳分節</span>
+                     </dt>
+                     <dd>
+                        <p>未翻訳分節でも検索できます。</p>
+                     </dd>
+                     <dt>
+                        <span class="term">
+                           <span class="guibutton">詳細設定を表示する</span>
+                        </span>
+                     </dt>
+                     <dd>
+                        <p>翻訳を作成または変更したユーザー、翻訳(変更)の日時、現在の原文に存在しない分節を除外するかどうかなどの追加の検索条件を選択します。</p>
+                        <div class="variablelist">
+                           <dl class="variablelist">
+                              <dt>
+                                 <span class="term">全角/半角文字を区別しない</span>
+                              </dt>
+                              <dd>
+                                 <p>検索語の文字の全角と半角(CJK文字)の両方に一致する結果を返します。</p>
+                              </dd>
+                           </dl>
+                        </div>
+                        <p>詳細設定の表示を停止するには、<span class="guibutton">詳細設定を隠す</span>ボタンを使用します。</p>
+                     </dd>
+                  </dl>
+               </div>
+            </section>
+            <section class="section" id="windows.text.replace.result.display">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title">検索結果表示画面</h3>
+                     </div>
+                  </div>
+               </div>
+               <p>検索された分節は、プロジェクト中で現れる順に表示されます。翻訳済みの分節の場合、原文は訳文の上に表示されます。未翻訳分節の場合には、原文のみが表示されます。</p>
+               <p>分節をダブルクリックすることで<a class="link" href="chapter.panes.html#panes.editor" title="編集">
+                     <span class="guilabel">編集</span>
+                  </a>ウィンドウで、対象分節にジャンプします。</p>
+               <p>検索結果画面では、次のショートカットを使用することができます。</p>
+               <div class="variablelist">
+                  <dl class="variablelist">
+                     <dt>
+                        <span class="term">
+                           <span class="keycap">
+                              <strong>C</strong>
+                           </span>+<span class="keycap">
+                              <strong>N</strong>
+                           </span>
+                        </span>
+                     </dt>
+                     <dd>
+                        <p>次の分節に移動します</p>
+                     </dd>
+                     <dt>
+                        <span class="term">
+                           <span class="keycap">
+                              <strong>C</strong>
+                           </span>+<span class="keycap">
+                              <strong>P</strong>
+                           </span>
+                        </span>
+                     </dt>
+                     <dd>
+                        <p>一つ前の分節に移動します</p>
+                     </dd>
+                     <dt>
+                        <span class="term">
+                           <span class="keycap">
+                              <strong>C</strong>
+                           </span>+<span class="keycap">
+                              <strong>J</strong>
+                           </span>
+                        </span>
+                     </dt>
+                     <dd>
+                        <p>編集ウインドウの現在の分節にジャンプします。</p>
+                     </dd>
+                  </dl>
+               </div>
+               <p>選択した分節が緑色で色付け表示されます。</p>
+               <div class="variablelist">
+                  <dl class="variablelist">
+                     <dt>
+                        <span class="term">編集ウィンドウと同期</span>
+                     </dt>
+                     <dd>
+                        <p>
+                           <a class="link" href="chapter.panes.html#panes.editor" title="編集">
+                              <span class="guilabel">編集</span>
+                           </a>ウィンドウの表示を、検索結果の選択肢と同期します。</p>
+                     </dd>
+                     <dt>
+                        <span class="term">検索ウィンドウを閉じた際に初期分節へ戻る</span>
+                     </dt>
+                     <dd>
+                        <p>検索ウィンドウを閉じると、<a class="link" href="chapter.panes.html#panes.editor" title="編集">
+                              <span class="guilabel">編集</span>
+                           </a>ウィンドウは検索が開始される前に表示されていた分節に自動的に戻ります。</p>
+                     </dd>
+                  </dl>
+               </div>
+            </section>
+         </section>
+         <section class="section" id="windows.aligner">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">
+                        <span class="guilabel">整合ツール</span>
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>
+               <a class="link" href="chapter.menus.html#menus.tools" title="ツール">
+                  <span class="guimenu">ツール</span>
+               </a>
+               <a class="link" href="chapter.menus.html#menus.tools.align.files">
+                  <span class="guimenuitem">整合ツール...</span>
+               </a>を使用してこのツールにアクセスします。</p>
+            <p>OmegaTでは、キーベースのフォーマット用にコマンドラインベースの整合モードも提供しています。詳細については、<a class="link" href="chapter.how.to.html#launch.with.command.line.mode.console.align">
+                  <code class="option">--mode=console-align
+					  <span class="emphasis">
+                        <em>--alignDir=&lt;path&gt;</em>
+                     </span>
+                  </code>
+               </a>ウインドウを参照してください。</p>
+            <div class="warning">
+               <h3 class="title">警告</h3>
+               <p>整合ツールでは、配置の途中で作業内容を保存することはできません。そのため、整合ツールで利用するファイルは、1つのセッションで快適に作業できるように、短いファイルに分割することをお勧めします。そうすることは、最初の自動整合における不一致を減少させ、手動補正ステップをより円滑にするという利点もあります。</p>
+            </div>
+            <p>整合とは、既に翻訳された原文言語と訳文言語の文書ペアから二言語の対の翻訳メモリを作成するプロセスです。ファイルのコンテンツを整合するには、4つのステップで作業します。</p>
+            <div class="orderedlist">
+               <ol class="orderedlist" type="1">
+                  <li class="listitem">
+                     <p>原文と訳文の言語を指定し、整合するふたつのファイルを選択します。</p>
+                  </li>
+                  <li class="listitem">
+                     <p>整合ツールはファイルを読み取り、元のテキストと翻訳されたテキストで互いに対応するセグメントを一致させようとします。</p>
+                  </li>
+                  <li class="listitem">
+                     <p>結果を確認して、必要な手動調整を行います。</p>
+                  </li>
+                  <li class="listitem">
+                     <p>結果をTMXファイルに保存します。</p>
+                  </li>
+               </ol>
+            </div>
+            <p>整合ツールは、OmegaTがサポートするすべてのファイル形式を読み込むことができます。</p>
+            <div class="note">
+               <h3 class="title">注記</h3>
+               <p>翻訳プロジェクトを開いている場合、整合ツールでは自動的にそのプロジェクトの言語が使用されます。また、プロジェクト固有の分割ルールがある場合は、そのルールも使用されます。</p>
+            </div>
+            <p>言語とファイルを選択した後、<span class="guibutton">確定</span>ボタンをクリックして<span class="guilabel">整合</span>ウィンドウを表示すると、自動整合の結果が表示されます。</p>
+            <p>ウィンドウの主要部分は3つの柱に分かれています。</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>
+                        <span class="guilabel">採用</span>:このボックスがオンになっている行の分節ペアは、翻訳メモリファイルに保存されます。チェックのない行は削除されます。</p>
+                  </li>
+                  <li class="listitem">
+                     <p>
+                        <span class="guilabel">原文</span>:原文テキストからの分節。</p>
+                  </li>
+                  <li class="listitem">
+                     <p>
+                        <span class="guilabel">訳文</span>:訳文テキストからの分節。</p>
+                  </li>
+               </ul>
+            </div>
+            <section class="section" id="windows.aligner.adjust">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title">設定</h3>
+                     </div>
+                  </div>
+               </div>
+               <p>このステップでは、ウィンドウの最下部に、さまざまなパラメータや設定オプションがあり、初期の整合がより良くなるように変更することができます。また、整合の<span class="guilabel">平均スコア</span>の結果も表示されます。経験則として、スコアが低いほど、整合はより正確になります。調整値を変更すると、すぐに整合方法が再計算されるため、さまざまな組み合わせをすばやく試して最適な結果を得ることができます。</p>
+               <p>可能な設定は以下の通りです：</p>
+               <div class="variablelist">
+                  <div class="variablelist-title">調整値</div>
+                  <dl class="variablelist">
+                     <dt>
+                        <span class="term">比較モード</span>
+                     </dt>
+                     <dd>
+                        <div class="itemizedlist">
+                           <ul class="itemizedlist" style="list-style-type: disc; ">
+                              <li class="listitem">
+                                 <p>
+                                    <span class="guilabel">Heapwise</span>モードでは、文書のテキストを全体で評価します。</p>
+                              </li>
+                              <li class="listitem">
+                                 <p>
+                                    <span class="guilabel">Parsewise</span>モードでは、分節ごとに評価します。整合するファイルで使用可能な場合にのみ表示されます。</p>
+                              </li>
+                              <li class="listitem">
+                                 <p>
+                                    <span class="guilabel">ID</span>: このモードでは、 <code class="literal">key = value</code>のエントリーからなるファイルに適用できます。これは、2つのファイルのキーの順序が同じでない場合や、2つのファイルに同じ量の情報が含まれていない場合でも機能します。整合するファイルが、key=valueファイルだと判断された場合にのみ表示されます。</p>
+                              </li>
+                           </ul>
+                        </div>
+                     </dd>
+                     <dt>
+                        <span class="term">アルゴリズム:</span>
+                     </dt>
+                     <dd>
+                        <div class="itemizedlist">
+                           <ul class="itemizedlist" style="list-style-type: disc; ">
+                              <li class="listitem">
+                                 <p>
+                                    <span class="guilabel">Viterbi</span>: デフォルトのアルゴリズムによりファイルを整合します。</p>
+                              </li>
+                              <li class="listitem">
+                                 <p>
+                                    <span class="guilabel">Forward-Backward</span>: 代替のアルゴリズムで、文書の整合に利用できます。</p>
+                              </li>
+                           </ul>
+                        </div>
+                        <p>どのアルゴリズムを選択するとよいのか、堅牢で簡単なルールはありません。双方を試してみて、よりよい結果がでたほうを利用してください。</p>
+                     </dd>
+                     <dt>
+                        <span class="term">計算方法:</span>
+                     </dt>
+                     <dd>
+                        <div class="itemizedlist">
+                           <ul class="itemizedlist" style="list-style-type: disc; ">
+                              <li class="listitem">
+                                 <p>
+                                    <span class="guilabel">Normal</span>: 文書を整合するときに使用するデフォルトの統計的分散</p>
+                              </li>
+                              <li class="listitem">
+                                 <p>
+                                    <span class="guilabel">Poisson</span>: 代替の統計的分散で文書の整合に利用できます。</p>
+                              </li>
+                           </ul>
+                        </div>
+                        <p>アルゴリズムごとに、選択する統計的分散を決定する簡単で堅牢な方法はありません。双方を試してみて、よりよい結果がでたほうを利用してください。</p>
+                     </dd>
+                     <dt>
+                        <span class="term">カウンター:</span>
+                     </dt>
+                     <dd>
+                        <div class="itemizedlist">
+                           <ul class="itemizedlist" style="list-style-type: disc; ">
+                              <li class="listitem">
+                                 <p>
+                                    <span class="guilabel">文字</span>:単語の区切りに空白を使用しない言語で、分節のサイズを決定するために使用される基本単位。</p>
+                              </li>
+                              <li class="listitem">
+                                 <p>
+                                    <span class="guilabel">単語</span>:単語を区切るために空白を使用する言語で、分節のサイズを決定するために使用される基本単位。</p>
+                              </li>
+                           </ul>
+                        </div>
+                        <p>整合ツールは、整合するファイルの原文言語と訳文言語に基づいて、カウンターを自動的に選択します。デフォルトでは、 片方の言語が単語分割に空白文字を使用しないときには<span class="guilabel">文字</span>を選択します。そうでなければ、 <span class="guilabel">単語</span> を使用します。If you are working with one of each, you can try to switch between the two to see which one yields better results.</p>
+                     </dd>
+                  </dl>
+               </div>
+               <div class="variablelist">
+                  <div class="variablelist-title">設定</div>
+                  <dl class="variablelist">
+                     <dt>
+                        <span class="term">分節</span>
+                     </dt>
+                     <dd>
+                        <p>整合ツールは文単位の分節化デフォルトではを利用しています。段落単位の分節化を使用するには、チェックボックスをオフにします。詳細については、設定-<a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.segmentation.setup" title="ユーザーレベルの分節化規則">
+                              <span class="guilabel">ユーザーレベルの分節化規則</span>
+                           </a>を参照してください。</p>
+                     </dd>
+                     <dt>
+                        <span class="term">タグを隠す</span>
+                     </dt>
+                     <dd>
+                        <p>整合ツールは、デフォルトでは分節のタグも利用しています。<a class="link" href="chapter.windows.and.dialogs.html#dialogs.project.properties.hide.tags">
+                              <code class="option">タグを隠す</code>
+                           </a>設定を適用するには、チェックボックスをオフにします。</p>
+                     </dd>
+                     <dt id="windows.aligner.adjust.highlight">
+                        <span class="term" id="windows.aligner.adjust.highlight.title">ハイライト</span>
+                     </dt>
+                     <dd>
+                        <p>ハイライトを使用しないときは、チェックボックスをオフにします。</p>
+                        <p>整合ツールでは、正規表現<code class="code">\d+</code>を使用して、原文分節と訳文分節のすべての数字が強調表示されます。</p>
+                        <p>正規表現を修正して、ハイライト表示される部分を追加することができます。詳細については-<a class="link" href="chapter.appendices.html#app.regex" title="正規表現">正規表現</a>を参照してください。</p>
+                     </dd>
+                     <dt>
+                        <span class="term">ルール...</span>
+                     </dt>
+                     <dd>
+                        <p>プロジェクトに適用される分節化規則を編集するには、このボタンを使用します。詳細は、付録の <a class="link" href="chapter.appendices.html#app.segmentation" title="分節化規則">分節化規則</a> をご覧ください。</p>
+                        <div class="warning">
+                           <h3 class="title">警告</h3>
+                           <p>分節化規則を変更した場合は、整合ツールを終了するときに変更を保存するかどうか、確認するメッセージが表示されます。デフォルトの選択肢は<span class="guibutton">[はい]</span>です。一般的なOmegaT分節化規則を編集した場合、保存を必要としない場合もあります。</p>
+                        </div>
+                     </dd>
+                     <dt>
+                        <span class="term">フィルター...</span>
+                     </dt>
+                     <dd>
+                        <p>プロジェクトに適用されるファイルフィルターを編集するには、このボタンを使用します。詳細については、設定-<a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.file.filters" title="ユーザーレベルファイルフィルタ">
+                              <span class="guilabel">ユーザーレベルファイルフィルタ</span>
+                           </a>を参照してください。</p>
+                        <div class="warning">
+                           <h3 class="title">警告</h3>
+                           <p>ファイルフィルタを変更した場合は、整合ツールを終了するときに、変更を保存するかどうかを確認するメッセージが表示されます。デフォルトの選択肢は<span class="guibutton">はい</span>です。ユーザレベルのOmegaTのファイルフィルターの設定を編集した場合、保存を必要としない場合もあります。</p>
+                        </div>
+                     </dd>
+                     <dt>
+                        <span class="term">パターン...</span>
+                     </dt>
+                     <dd>
+                        <p>この設定では、原文分節と訳文分節の文章を色付け表示する正規表現のパターンを定義できます。整合ツールは、デフォルトでは<code class="literal">\d+</code>を使用して数値を色付け表示します。強調表示すると便利な他の要素がテキストに含まれている場合は、<code class="literal"></code>記号を使用して各要素を区切り、それらの要素を含むように正規表現を修正します。</p>
+                     </dd>
+                  </dl>
+               </div>
+               <p>
+                  <span class="guilabel">色づけ</span>設定とダイアログにアクセスして、<span class="guimenu">表示</span>メニューからパターンを修正したり、<span class="guimenu">その他のオプション</span>メニューからオプションを修正したりすることもできます。</p>
+               <p>また、<span class="guimenu">ファイル</span>メニューには次のコマンドがあります。</p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>
+                           <span class="guimenuitem">TMXを保存.</span>:この項目は、次の手順が完了するまで淡色表示されます。</p>
+                     </li>
+                     <li class="listitem">
+                        <p>
+                           <span class="guimenuitem">リセット</span>:このコマンドは、すべてのパラメータをデフォルト値に復元します。また、ウィンドウの右下にある<span class="guibutton">リセット</span>をクリックするか、<span class="keycap">
+                              <strong>C</strong>
+                           </span>+<span class="keycap">
+                              <strong>S</strong>
+                           </span>+<span class="keycap">
+                              <strong>R</strong>
+                           </span>を押して呼び出すこともできます。</p>
+                     </li>
+                     <li class="listitem">
+                        <p>
+                           <span class="guimenuitem">再読み込み</span>:このコマンドは、ディスクからファイルを再ロードします。内容を変更する必要がある場合は、このコマンドを使用して、ファイルを再度解析および整合することができます。</p>
+                     </li>
+                     <li class="listitem">
+                        <p>
+                           <span class="guimenuitem">閉じる</span>:これは<span class="guilabel">整合</span>ダイアログを閉じます。この手順でキャンセルすると、翻訳メモリファイルにデータを保存せずに整合作業がキャンセルされます。このコマンドは、<span class="keycap">
+                              <strong>C</strong>
+                           </span>+<span class="keycap">
+                              <strong>W</strong>
+                           </span>を押して呼び出すこともできます。</p>
+                     </li>
+                  </ul>
+               </div>
+               <p>このステップでは、<span class="guimenu">編集</span>メニューはグレー表示されています。</p>
+               <p>この手順の結果に問題がなければ、<span class="guibutton">続行</span>ボタンをクリックして次の手順に進みます。</p>
+            </section>
+            <section class="section" id="windows.aligner.manual.corrections">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title">訂正</h3>
+                     </div>
+                  </div>
+               </div>
+               <p>通常の場合、最初の自動整合プロセスの後に手動調整が必要です。分節を上下に移動して他方の言語の正しい分節と対応関係を整合する作業と、分節を分割または結合する作業を行なっていきます。整合ツールでは、分節の内容を編集することもできます。これは、分節のスペルミスなどのエラーに気付いた場合に便利です。</p>
+               <p>整合に必要な操作は<span class="guimenu">編集</span>メニューから実行できるほか、対応するショートカットキーを押すことでも利用できます。最も一般的な操作は、メインウィンドウの右側にあるボタンからもアクセスできます。</p>
+               <div class="note">
+                  <h3 class="title">注記</h3>
+                  <p>ショートカットキーは、整合ツールを頻繁に使用する場合や、大きなドキュメントで作業する場合に覚えておくと便利です。ショートカットキーを使用すると、操作をすばやく実行できます。</p>
+               </div>
+               <p>操作を実行するには、該当する分節または連続する分節のブロックを選択します。個々の分節は、マウスまたは矢印キーで選択できます。分節のブロックは、マウスで最初の分節をクリックし、<span class="keycap">
+                     <strong>Shift</strong>
+                  </span>キーを押しながら最後の分節をクリックすることによって選択できます。</p>
+               <p>または、<span class="keycap">
+                     <strong>Shift</strong>
+                  </span>を押しながら矢印キーを押して、連続する分節を選択することもできます。使用可能な操作を以下に示します。</p>
+               <div class="variablelist">
+                  <dl class="variablelist">
+                     <dt>
+                        <span class="term">上へ移動(<span class="keycap">
+                              <strong>U</strong>
+                           </span>)</span>
+                     </dt>
+                     <dd>
+                        <p>選択した分節、または連続する分節のブロックを1行上に移動します。</p>
+                        <p>このコマンドは、メインウィンドウの右側にあるボタンからも使用できます。</p>
+                     </dd>
+                     <dt>
+                        <span class="term">下へ移動(<span class="keycap">
+                              <strong>D</strong>
+                           </span>)</span>
+                     </dt>
+                     <dd>
+                        <p>選択した分節、または連続する分節のブロックを1行下に移動します。</p>
+                        <p>このコマンドは、メインウィンドウの右側にあるボタンからも使用できます。</p>
+                     </dd>
+                     <dt>
+                        <span class="term">分割(<span class="keycap">
+                              <strong>S</strong>
+                           </span>)</span>
+                     </dt>
+                     <dd>
+                        <p>単一の分節が選択されている場合、このコマンドは<span class="guilabel">文章の分割</span>ダイアログを開きます。マウスまたは矢印キーを使用して文章を分割する位置にカーソルを置き、<span class="guibutton">確定</span>ボタンをクリックするか、<span class="keycap">
+                              <strong>Enter</strong>
+                           </span>を押します。</p>
+                        <p>同じ行の別々のセルを占有する2つ以上の分節(<span class="guilabel">採用</span>チェックボックスのない行を含む複数のセル分節)が選択されている場合、このコマンドは選択されたセルを(<span class="guilabel">採用</span>チェックボックスを使用)別々の行に分割します。</p>
+                        <p>このコマンドは、メインウィンドウの右側にあるボタンからも使用できます。</p>
+                     </dd>
+                     <dt>
+                        <span class="term">結合(<span class="keycap">
+                              <strong>M</strong>
+                           </span>)</span>
+                     </dt>
+                     <dd>
+                        <p>分節が1つだけ選択されている場合は、整合ツールによって次の分節と結合されます。2つ以上の分節が選択されている場合、それらはすべて結合されますが、別のセルに残ります。同じ選択肢でもう一度このコマンドを呼び出すと、選択したすべてのセルの内容が1つのセルに結合されます。</p>
+                        <p>このコマンドは、メインウィンドウの右側にあるボタンからも使用できます。</p>
+                     </dd>
+                     <dt>
+                        <span class="term">編集(<span class="keycap">
+                              <strong>E</strong>
+                           </span>)</span>
+                     </dt>
+                     <dd>
+                        <p>このコマンドは、単一の分節に対してのみ実行できます。このコマンドを呼び出すと、<span class="guilabel">テキスト編集</span>ダイアログが開き、分節のテキストを変更できます。終了したら、<span class="guibutton">確定</span>ボタンを使用してダイアログを閉じます。このダイアログでは、<span class="keycap">
+                              <strong>Enter</strong>
+                           </span>は文章に改行を入力します。</p>
+                        <p>
+                           <span class="keycap">
+                              <strong>C</strong>
+                           </span>+<span class="keycap">
+                              <strong>Enter</strong>
+                           </span>を使用して、マウスを使用せずにそれを閉じます。</p>
+                        <p>このコマンドは、メインウィンドウの右側にあるボタンからも使用できます。</p>
+                     </dd>
+                     <dt>
+                        <span class="term">確定済みマーク(<span class="keycap">
+                              <strong>A</strong>
+                           </span>)</span>
+                     </dt>
+                     <dd>
+                        <p>このコマンドを使用して、選択した行または行のブロックの分節の配置が正しいことを確認します。対応する<span class="guilabel">採用</span>カラムが緑色で強調表示されます。</p>
+                     </dd>
+                     <dt>
+                        <span class="term">マークはレビューが必要です(<span class="keycap">
+                              <strong>R</strong>
+                           </span>)</span>
+                     </dt>
+                     <dd>
+                        <p>このコマンドを使用して、分節の配置が疑わしい行または行のブロックを識別します。対応する<span class="guilabel">採用</span>カラムが赤で強調表示されます。</p>
+                     </dd>
+                     <dt>
+                        <span class="term">クリアマーク(<span class="keycap">
+                              <strong>C</strong>
+                           </span>)</span>
+                     </dt>
+                     <dd>
+                        <p>このコマンドを使用して、<span class="guilabel">確定済み</span>または<span class="guilabel">要チェック</span>コマンドによって設定された1つまたは複数のマークを削除します。</p>
+                     </dd>
+                     <dt>
+                        <span class="term">未確定項目を再整合(<span class="keycap">
+                              <strong>C</strong>
+                           </span>+<span class="keycap">
+                              <strong>R</strong>
+                           </span>)</span>
+                     </dt>
+                     <dd>
+                        <p>確定済みとしてマークされている行がある場合は、このコマンドを使用して残りの行の配置を更新できます。</p>
+                     </dd>
+                     <dt>
+                        <span class="term">すべてのチェックを入れる</span>
+                     </dt>
+                     <dd>
+                        <p>このコマンドを使用して、すべての行の<span class="guilabel">確定済み</span>チェックボックスをオンにします。</p>
+                     </dd>
+                     <dt>
+                        <span class="term">すべてのチェックを外す</span>
+                     </dt>
+                     <dd>
+                        <p>このコマンドを使用して、すべての行の<span class="guilabel">確定済み</span>チェックボックスを外します。</p>
+                     </dd>
+                     <dt>
+                        <span class="term">現在のチェックを反転(<span class="keycap">
+                              <strong>K</strong>
+                           </span>)</span>
+                     </dt>
+                     <dd>
+                        <p>このコマンドを使用して、選択した行または行のブロックの<span class="guilabel">確定済み</span>チェックボックスをオンからオフに、またはその逆に切り替えます。</p>
+                     </dd>
+                     <dt>
+                        <span class="term">ピンポイント整合を開始(<span class="keycap">
+                              <strong>Space</strong>
+                           </span>)</span>
+                     </dt>
+                     <dd>
+                        <p>対応するセグメントが数行離れていて、それらをすばやく整列する場合は、このコマンドを使用して最初の分節を選択してから、他の分節の対応するカラムをクリックします。</p>
+                        <p>矢印キーを使用して、対応する分節の<span class="keycap">
+                              <strong>Space</strong>
+                           </span>を押すこともできます。</p>
+                        <p>この方法を使用して位置合わせされた分節は、自動的に受け入れられたものとしてマークされ</p>
+                        <p>ピンポイント整合コマンドを数回使用した後に、<span class="guimenuitem">未確定項目を再整合</span>コマンドを実行すると便利です。</p>
+                     </dd>
+                  </dl>
+               </div>
+               <p>2つのカラムの整合が完了したら、<span class="guibutton">TMXを保存...</span>ボタンをクリックして翻訳メモリを作成します。</p>
+               <div class="note">
+                  <h3 class="title">注記</h3>
+                  <p>翻訳メモリの作成時には、最初の列で<span class="guilabel">確定済み</span>ボックスがオンになっている行だけが含まれます。</p>
+               </div>
+               <p>
+                  <span class="guibutton">TMXに保存...</span>ボタンに加えて、手動修正ステップの<span class="guilabel">整合</span>ウィンドウの下部には、最初のステップと同じ<span class="guilabel">色付け表示</span>チェックボックスと<span class="guibutton">パターン...</span>ボタンがあります。この設定には、<span class="guimenu">表示</span>メニューからもアクセスできます。</p>
+               <div class="warning">
+                  <h3 class="title">警告</h3>
+                  <p>ウィンドウの下部には、<span class="guibutton">リセット</span>ボタンもあります。<span class="bold">
+                        <strong>注意して利用してください!</strong>
+                     </span>このボタンをクリックすると、すべての変更が破棄され、最初のステップに戻ります。</p>
+               </div>
+            </section>
+         </section>
+         <section class="section" id="windows.scripts">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">
+                        <span class="guilabel">スクリプト</span>
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>スクリプトは、Officeアプリケーションのマクロに似た短いプログラムで、タスクを自動化したり、OmegaTの機能を拡張またはカスタマイズするために使用できます。スクリプトは、ユーザーが基礎となるJava仮想マシンが理解できる任意の言語で作成できます。</p>
+            <p>スクリプト ウィンドウ上では、既存のスクリプトを読み込んだり、開いているプロジェクト上で実行できます。</p>
+            <p>
+               <a class="link" href="chapter.menus.html#menus.tools" title="ツール">
+                  <span class="guimenu">ツール</span>
+               </a>
+               <a class="link" href="chapter.menus.html#menus.tools.scripting">
+                  <span class="guimenuitem">スクリプト...</span>
+               </a>を使用してウィンドウにアクセスします。</p>
+            <section class="section" id="windows.scripts.folder">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title">スクリプトフォルダー</h3>
+                     </div>
+                  </div>
+               </div>
+               <p>スクリプトファイルは、デフォルトでは、OmegaTのプログラムフォルダー配下の<a class="link" href="chapter.appendices.html#application.folder.scripts">scripts/</a>フォルダーに格納されています。</p>
+               <p>そこに追加された新しいスクリプトは、箇条書きの左側のパネルにある使用可能なスクリプトのウィンドウに表示されます。</p>
+               <div class="warning">
+                  <h3 class="title">警告</h3>
+                  <p>スクリプト編集ウィンドウの左側に、スクリプト一覧が表示されない場合は、スクリプトウィンドウの<span class="guimenu">ファイル</span>]&gt;<span class="guimenuitem">スクリプトフォルダーの設定...</span>メニューを使用して、スクリプトの場所を設定してください。</p>
+               </div>
+               <p>追加できるスクリプトが<a class="ulink" href="https://sourceforge.net/projects/omegatscripts/" target="_top">OmegaT Scripts</a> にあります。ファイルを<a class="link" href="chapter.appendices.html#application.folder.scripts">scripts/</a>フォルダにコピーします。</p>
+               <p>
+                  <span class="emphasis">
+                     <em>イベント</em>
+                  </span>ベースのスクリプトもあります。スクリプトを含むフォルダーには、使用可能なイベントに対応するサブフォルダが含まれます。スクリプトを適切なサブフォルダーに配置することで、スクリプトを自動的にトリガーできます。</p>
+               <div class="variablelist">
+                  <dl class="variablelist">
+                     <dt id="application.folder.scripts.application.shutdown">
+                        <span class="term" id="application.folder.scripts.application.shutdown.title">application_shutdown</span>
+                     </dt>
+                     <dd>
+                        <p>このフォルダーにあるスクリプトは、OmegaT を終了する前に常に実行されます。</p>
+                     </dd>
+                     <dt id="application.folder.scripts.application.startup">
+                        <span class="term" id="application.folder.scripts.application.startup.title">application_startup</span>
+                     </dt>
+                     <dd>
+                        <p>このフォルダーにあるスクリプトは、OmegaT が開始した後すぐに、スクリプト実行エンジンが利用可能になった時に実行されます。</p>
+                     </dd>
+                     <dt id="application.folder.scripts.entry.activated">
+                        <span class="term" id="application.folder.scripts.entry.activated.title">entry_activated</span>
+                     </dt>
+                     <dd>
+                        <p>このフォルダーにあるスクリプトは、新たな分節を編集開始するときに実行されます。分節は、<code class="code">newEntry</code>に保存されます。</p>
+                     </dd>
+                     <dt id="application.folder.scripts.new.file">
+                        <span class="term" id="application.folder.scripts.new.file.title">new_file</span>
+                     </dt>
+                     <dd>
+                        <p>このフォルダーにあるスクリプトは、編集画面で次のファイルに遷移するときに実行されます。新しいファイル名は、<code class="code">activeFileName</code>に保存されます。</p>
+                     </dd>
+                     <dt id="application.folder.scripts.new.word">
+                        <span class="term" id="application.folder.scripts.new.word.title">new_word</span>
+                     </dt>
+                     <dd>
+                        <p>このフォルダーにあるスクリプトは、編集ウィンドウで新たな単語を編集するときに実行されます。新たな単語は、<code class="code">newWord</code>に保存されます。</p>
+                     </dd>
+                     <dt id="application.folder.scripts.project.changed">
+                        <span class="term" id="application.folder.scripts.project.changed.title">project_changed</span>
+                     </dt>
+                     <dd>
+                        <p>このフォルダーのスクリプトは、プロジェクトの状態が変更されると実行されます。<code class="code">eventType</code>オブジェクトの値としてCLOSE、COMPILE、CREATE、READ、またはSAVEを取ります。</p>
+                     </dd>
+                  </dl>
+               </div>
+               <p>これらのサブフォルダは、ディストリビューションに付属しているスクリプトフォルダーにすでに作成されています。</p>
+               <div class="warning">
+                  <h3 class="title">警告</h3>
+                  <p>スクリプトは、他のスクリプトを実行しているときにも起動されます。そのため、大規模なプロジェクトでは、すべてのセグメントをループする検索/置換タイプのスクリプトが使用されている場合に<code class="code">entry_activated</code>スクリプトが頻繁に呼び出され、プログラムが応答しなくなることがあります。</p>
+               </div>
+            </section>
+            <section class="section" id="windows.scripts.usage">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title">使い方</h3>
+                     </div>
+                  </div>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>左側のパネルの一覧でスクリプトの名前をクリックします。スクリプトが編集画面に読み込まれます。</p>
+                     </li>
+                     <li class="listitem">
+                        <p>ウィンドウの下部にある<span class="guibutton">実行</span>ボタンをクリックするか、<span class="keycap">
+                              <strong>C</strong>
+                           </span>+<span class="keycap">
+                              <strong>R</strong>
+                           </span>を押してスクリプトをすぐに起動します。</p>
+                     </li>
+                     <li class="listitem">
+                        <p>頻繁に使用するスクリプトへのショートカットを作成するには、ウィンドウの下部にある<span class="guibutton">&lt;1&gt;</span>から<span class="guibutton">&lt;12&gt;</span>までのボタンのいずれかを右クリックし、<span class="guilabel">スクリプトの追加</span>を選択して、その番号にスクリプトを割り当てます。</p>
+                        <p>ショートカットからスクリプトを削除する場合は、そのボタンを右クリックし、<span class="guilabel">スクリプトの削除</span>を選択します。</p>
+                     </li>
+                     <li class="listitem">
+                        <p>次に、番号をクリックして、割り当てられたスクリプトを実行できます。また、<a class="link" href="chapter.menus.html#menus.tools" title="ツール">
+                              <span class="guimenu">ツール</span>
+                           </a>
+                           <a class="link" href="chapter.menus.html#menus.tools.scripting">
+                              <span class="guimenuitem">スクリプト...</span>
+                           </a>メニューからスクリプトを実行するには、該当するメニュー項目を選択するか、関連するショートカット(<span class="keycap">
+                              <strong>C</strong>
+                           </span>+<span class="keycap">
+                              <strong>A</strong>
+                           </span>+<span class="keycap">
+                              <strong>F1～F12</strong>
+                           </span>)を押します。</p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="warning">
+                  <h3 class="title">警告</h3>
+                  <p>Linuxユーザ:オペレーティングシステムの設定によっては、標準のスクリプトフォルダーの場所に書き込む権限がない場合があります。</p>
+                  <p>このような場合、独自のスクリプトを記述したり、新しいスクリプトを追加したり、既存のスクリプトを変更したりするには、<a class="link" href="chapter.appendices.html#configuration.folder.location" title="場所">設定フォルダー</a>など、書き込み権限のある場所にスクリプトをコピーしたり、フォルダーを移動する必要があります。</p>
+                  <p>標準フォルダーに書き込む権限がある場合は、変更したスクリプトの名前を変更するか、バックアップを作成してください。OmegaTが更新される時に、スクリプトが上書きされます。</p>
+               </div>
+            </section>
+            <section class="section" id="windows.scripts.distribution">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title">配付されているスクリプト</h3>
+                     </div>
+                  </div>
+               </div>
+               <p>OmegaTには、OmegaTの貢献者によって開発された多くのスクリプトが付属しています。スクリプト編集を使用して、スクリプトを直接開いたり、実行したり、変更したり、さらには独自に使用する新しいスクリプトを作成することもできます。</p>
+               <div class="note">
+                  <h3 class="title">注記</h3>
+                  <p>OmegaTで配布されているスクリプトは、お客様の利便性のために含まれていますが、OmegaTの開発チームではサポートしていません。</p>
+               </div>
+               <p>スクリプト自体に記載されている指示に従ってください。</p>
+               <div class="variablelist">
+                  <dl class="variablelist">
+                     <dt id="windows.scripts.distribution.adapt.standard.tags">
+                        <span class="term" id="windows.scripts.distribution.adapt.standard.tags.title">標準タグを適用する</span>
+                     </dt>
+                     <dd>
+                        <p>[一致するものと置換]コマンドが呼び出されたときに、標準タグを適合させます。</p>
+                     </dd>
+                     <dt id="windows.scripts.distribution.auto.open.last.project">
+                        <span class="term" id="windows.scripts.distribution.auto.open.last.project.title">起動時に前回のプロジェクトを開く</span>
+                     </dt>
+                     <dd>
+                        <p>前回使用した OmegaT プロジェクトを自動的に開きます</p>
+                     </dd>
+                     <dt id="windows.scripts.distribution.check.same.segment">
+                        <span class="term" id="windows.scripts.distribution.check.same.segment.title">同一の分節をチェック</span>
+                     </dt>
+                     <dd>
+                        <p>同一の分節(大文字 /小文字を識別)をチェックします。</p>
+                     </dd>
+                     <dt id="windows.scripts.distribution.currency.translator">
+                        <span class="term" id="windows.scripts.distribution.currency.translator.title">通貨表記の変換</span>
+                     </dt>
+                     <dd>
+                        <p>原文中の通貨表記を、訳文の言語設定に応じて変換します。</p>
+                        <p>たとえば原文に「$123,399.99」とあれば、これを「123 399,99 USD」に変換します。</p>
+                     </dd>
+                     <dt id="windows.scripts.distribution.example.gui.scripting">
+                        <span class="term" id="windows.scripts.distribution.example.gui.scripting.title">サンプル - GUI の表示</span>
+                     </dt>
+                     <dd>
+                        <p>GUI を表示するサンプルです</p>
+                     </dd>
+                     <dt id="windows.scripts.distribution.example.key.binding">
+                        <span class="term" id="windows.scripts.distribution.example.key.binding.title">サンプル - キーバインディングの変更</span>
+                     </dt>
+                     <dd>
+                        <p>キーバインディング イベントのサンプルです。</p>
+                     </dd>
+                     <dt id="windows.scripts.distribution.example.modify.segment">
+                        <span class="term" id="windows.scripts.distribution.example.modify.segment.title">サンプル - 分節の変更</span>
+                     </dt>
+                     <dd>
+                        <p> 分節の変更をおこなうサンプルです。</p>
+                     </dd>
+                     <dt id="windows.scripts.distribution.example.search.and.replace">
+                        <span class="term" id="windows.scripts.distribution.example.search.and.replace.title">サンプル - 訳文の置換</span>
+                     </dt>
+                     <dd>
+                        <p>訳文の置換スクリプト（簡易版）</p>
+                     </dd>
+                     <dt id="windows.scripts.distribution.external.spellcheck">
+                        <span class="term" id="windows.scripts.distribution.external.spellcheck.title">外部スペルチェック</span>
+                     </dt>
+                     <dd>
+                        <p>すべての分節を<code class="filename">[project_name].doc</code>という名前のファイルに書き込み、システムの標準ワードプロセッサで開きます。注意： ファイルはプレーンテキストファイルです。<code class="filename">.doc</code>拡張子は、ワードプロセッサで開くことを保証するだけです。</p>
+                     </dd>
+                     <dt id="windows.scripts.distribution.extract.text.content">
+                        <span class="term" id="windows.scripts.distribution.extract.text.content.title">文章コンテンツを抽出</span>
+                     </dt>
+                     <dd>
+                        <p>プロジェクトの内容を単一の文章ファイル(分節ごとに1行)に抽出します。<a class="ulink" href="https://sourceforge.net/p/omegat/feature-requests/182/" target="_top">RFE#182「プロジェクトの内容を文章ファイルに抽出」</a>を参照してください。</p>
+                     </dd>
+                     <dt id="windows.scripts.distribution.non.breaking.space">
+                        <span class="term" id="windows.scripts.distribution.non.breaking.space.title">ノーブレークスペース文字</span>
+                     </dt>
+                     <dd>
+                        <p>スペース文字をノーブレークスペース文字に置き換えます(フランス語用)。</p>
+                     </dd>
+                     <dt id="windows.scripts.distribution.open.current.file">
+                        <span class="term" id="windows.scripts.distribution.open.current.file.title">開く - 現在の原文ファイル</span>
+                     </dt>
+                     <dd>
+                        <p>現在翻訳中の原文ファイルを開きます</p>
+                     </dd>
+                     <dt id="windows.scripts.distribution.open.glossary">
+                        <span class="term" id="windows.scripts.distribution.open.glossary.title">開く - 用語集ファイル</span>
+                     </dt>
+                     <dd>
+                        <p>書き込み可能な用語集ファイルをエディターで開きます</p>
+                     </dd>
+                     <dt id="windows.scripts.distribution.open.project.folder">
+                        <span class="term" id="windows.scripts.distribution.open.project.folder.title">開く - プロジェクトフォルダー</span>
+                     </dt>
+                     <dd>
+                        <p>現在のプロジェクトフォルダーを OS の標準ファイル管理ソフト上で開きます</p>
+                     </dd>
+                     <dt id="windows.scripts.distribution.open.tm.folder">
+                        <span class="term" id="windows.scripts.distribution.open.tm.folder.title">開く - TM フォルダー</span>
+                     </dt>
+                     <dd>
+                        <p>
+                           <code class="filename">/tm</code> フォルダー（参考訳文用の翻訳メモリ配置フォルダー）を開きます</p>
+                     </dd>
+                     <dt id="windows.scripts.distribution.open.project.save.tmx">
+                        <span class="term" id="windows.scripts.distribution.open.project.save.tmx.title">project_save.tmxを開きます。</span>
+                     </dt>
+                     <dd>
+                        <p>テキストエディターでproject_save.tmxを開きます。</p>
+                     </dd>
+                     <dt id="windows.scripts.distribution.qa.check.rules">
+                        <span class="term" id="windows.scripts.distribution.qa.check.rules.title">QA - 規則集によるチェック</span>
+                     </dt>
+                     <dd>
+                        <p>品質管理スクリプトです。</p>
+                     </dd>
+                     <dt id="windows.scripts.distribution.qa.identical.segments">
+                        <span class="term" id="windows.scripts.distribution.qa.identical.segments.title">QA - 同一の分節</span>
+                     </dt>
+                     <dd>
+                        <p>同一の分節(大文字 /小文字を識別)をチェックします。</p>
+                     </dd>
+                     <dt id="windows.scripts.distribution.svn.cleanup.recursive">
+                        <span class="term" id="windows.scripts.distribution.svn.cleanup.recursive.title">SVN - クリーンアップ（再起的）</span>
+                     </dt>
+                     <dd>
+                        <p>現在のプロジェクトまたはローカルの任意の SVN リポジトリ（作業コピー）に対して、クリーンアップ（矛盾した状態を解決する）を実行します</p>
+                     </dd>
+                     <dt id="windows.scripts.distribution.show.same.segments">
+                        <span class="term" id="windows.scripts.distribution.show.same.segments.title">原文と訳文が同一の分節を表示</span>
+                     </dt>
+                     <dd>
+                        <p>原文と訳文が同一の分節一覧を表示します</p>
+                     </dd>
+                     <dt id="windows.scripts.distribution.spellcheck">
+                        <span class="term" id="windows.scripts.distribution.spellcheck.title">スペルチェック</span>
+                     </dt>
+                     <dd>
+                        <p>綴りの間違いを検査します</p>
+                     </dd>
+                     <dt id="windows.scripts.distribution.strip.bidi.marks">
+                        <span class="term" id="windows.scripts.distribution.strip.bidi.marks.title">BiDi マークを削除</span>
+                     </dt>
+                     <dd>
+                        <p>現在の訳文からBiDiマークを削除します</p>
+                     </dd>
+                     <dt id="windows.scripts.distribution.strip.tags">
+                        <span class="term" id="windows.scripts.distribution.strip.tags.title">タグを削除</span>
+                     </dt>
+                     <dd>
+                        <p>現在の訳文や選択からタグを削除します</p>
+                     </dd>
+                     <dt id="windows.scripts.distribution.switch.colour.theme">
+                        <span class="term" id="windows.scripts.distribution.switch.colour.theme.title">色テーマの切り替え</span>
+                     </dt>
+                     <dd>
+                        <p>編集で使用する色のテーマを切り替えます。</p>
+                     </dd>
+                     <dt id="windows.scripts.distribution.tag.free.match">
+                        <span class="term" id="windows.scripts.distribution.tag.free.match.title">参考訳文（タグ削除済み）に置換</span>
+                     </dt>
+                     <dd>
+                        <p>タグを削除した参考訳文に置換します</p>
+                     </dd>
+                     <dt id="windows.scripts.distribution.tagwipe">
+                        <span class="term" id="windows.scripts.distribution.tagwipe.title">Tagwipe</span>
+                     </dt>
+                     <dd>
+                        <p>DOCX ファイルからタグを削除します</p>
+                     </dd>
+                     <dt id="windows.scripts.distribution.issue.provider.sample.groovy">
+                        <span class="term" id="windows.scripts.distribution.issue.provider.sample.groovy.title">issue_provider_sample.groovy</span>
+                     </dt>
+                     <dd>
+                        <p>(no description)(no description)</p>
+                     </dd>
+                     <dt id="windows.scripts.distribution.toolbar.groovy">
+                        <span class="term" id="windows.scripts.distribution.toolbar.groovy.title">toolbar.groovy</span>
+                     </dt>
+                     <dd>
+                        <p>(no description)(no description)</p>
+                     </dd>
+                  </dl>
+               </div>
+            </section>
+            <section class="section" id="windows.scripts.references">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title">参考資料</h3>
+                     </div>
+                  </div>
+               </div>
+               <div class="variablelist">
+                  <dl class="variablelist">
+                     <dt>
+                        <span class="term">OmegaT Javadoc</span>
+                     </dt>
+                     <dd>
+                        <p>
+                           <a class="ulink" href="https://omegat.sourceforge.io/javadoc-latest/" target="_top">OmegaT API</a>のドキュメント。</p>
+                     </dd>
+                     <dt>
+                        <span class="term">Groovy</span>
+                     </dt>
+                     <dd>
+                        <p>Java仮想マシン用の動的言語。構文的に Java との互換性を最大限に保った上で、さらに Python や Ruby、Smalltalk に触発された強力な機能を持ちます。詳細については、<a class="ulink" href="https://groovy-lang.org/documentation.html" target="_top">Apache Groovy</a>を参照してください。</p>
+                     </dd>
+                     <dt>
+                        <span class="term">JavaScript</span>
+                     </dt>
+                     <dd>
+                        <p>プロトタイプ ベースのスクリプト言語です。動的で、弱い型付け、ファーストクラス関数などの特徴を持ちます。オブジェクト指向、命令型、および関数型プログラミングのスタイルのマルチパラダイム言語です。<a class="ulink" href="https://developer.oracle.com/databases/nashorn-javascript-part1.html" target="_top">Practical Nashorn,Part 1:Introducing JavaScript,ECMAScript,and Nashorn</a>および<a class="ulink" href="https://www.ecma-international.org/ecma-262/5.1/" target="_top">ECMAScript®5.1 Language Specification</a>を参照してください。</p>
+                     </dd>
+                  </dl>
+               </div>
+               <p>すべての言語から、プロジェクトを先頭のオブジェクトとする OmegaT のオブジェクトモデルにアクセスできます。次に示すコードスニペットは、現在のプロジェクトから全ファイルの全分節を走査する groovy スクリプトです。このスクリプトは、もし訳文が存在していれば、その分節の原文と訳文を出力します：</p>
+               <pre class="programlisting">files = project.projectFiles;
+for (i in 0 ..&lt; files.size())
+{
+	for (j in 0 ..&lt; files[i].entries.size())
+	{
+		currSegment = files[i].entries[j];
+		if (project.getTranslationInfo(currSegment))
+		{
+			source = currSegment.getSrcText();
+			target = project.getTranslationInfo(currSegment).translation;
+			console.println(source + &quot; &gt;&gt;&gt;&gt; &quot; + target);
+		}     
+	}
+}</pre>
+            </section>
+         </section>
+      </section>
+      <footer>
+         <div class="navfooter">
+            <hr />
+            <table style="width: 100%; ">
+               <tr>
+                  <td style="width: 40%; text-align: left; ">
+                     <a accesskey="p" href="chapter.menus.html">戻る</a> </td>
+                  <td style="width: 20%; text-align: center; "> </td>
+                  <td style="width: 40%; text-align: right; "> <a accesskey="n" href="chapter.dialogs.preferences.html">次へ</a>
+                  </td>
+               </tr>
+               <tr>
+                  <td style="width: 40%; text-align: left; vertical-align: top; ">メニュー </td>
+                  <td style="width: 20%; text-align: center; ">
+                     <a accesskey="h" href="index_.html">ホーム</a>
+                  </td>
+                  <td style="width: 40%; text-align: right; vertical-align: top; "> <span class="guilabel">環境設定</span>
+                  </td>
+               </tr>
+            </table>
+         </div>
+      </footer>
+   </div>
+    </div>
+
+    
+  </body></html>

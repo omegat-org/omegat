@@ -549,7 +549,7 @@ var toc_entries = [
 ["\n                              辞書\n                           ","chapter.panes.html#panes.dictionary",null],
 ["\n                              機械翻訳\n                           ","chapter.panes.html#panes.machinetranslation",null],
 ["\n                              複数訳文\n                           ","chapter.panes.html#panes.multipletranslations",null],
-["\n                              メモウインドウ\n                           ","chapter.panes.html#panes.notes",null],
+["\n                              メモ帳\n                           ","chapter.panes.html#panes.notes",null],
 ["\n                              コメント\n                           ","chapter.panes.html#panes.comments",null],
 ["\n                              文節属性\n                           ","chapter.panes.html#panes.segment.properties",null],
 ["\n                              ステータスバー\n                           ","chapter.panes.html#panes.statusbar",null]
@@ -563,9 +563,9 @@ var toc_entries = [
 ["\n                              設定\n                           ","chapter.menus.html#menus.options",null],
 ["\n                              ヘルプ\n                           ","chapter.menus.html#menus.help",null]
 ]],
-["Windows and Dialogs","chapter.windows.and.dialogs.html",[
+["ウィンドウとダイアログ","chapter.windows.and.dialogs.html",[
 ["\n                              プロジェクト設定\n                           ","chapter.windows.and.dialogs.html#dialogs.project.properties",null],
-["\n                              Source\n  Files\n                           ","chapter.windows.and.dialogs.html#windows.source.files.list",null],
+["\n                              翻訳対象ファイル一覧\n                           ","chapter.windows.and.dialogs.html#windows.source.files.list",null],
 ["\n                              プロジェクトの検索\n                           ","chapter.windows.and.dialogs.html#windows.text.search",null],
 ["\n                              テキストの置換\n                           ","chapter.windows.and.dialogs.html#windows.text.replace",null],
 ["\n                              整合ツール\n                           ","chapter.windows.and.dialogs.html#windows.aligner",null],
@@ -595,12 +595,12 @@ var toc_entries = [
 ["\n                              更新\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.updates",null]
 ]],
 ["プロジェクトフォルダー","chapter.project.folder.html",[
-["デフォルトの構造","chapter.project.folder.html#d0e10212",null],
-["Minimal contents","chapter.project.folder.html#d0e10290",null],
+["デフォルトの構造","chapter.project.folder.html#d0e10172",null],
+["最小のコンテンツ","chapter.project.folder.html#d0e10248",null],
 ["source","chapter.project.folder.html#project.folder.source",null],
 ["target","chapter.project.folder.html#project.folder.target",null],
 ["tm","chapter.project.folder.html#project.folder.tm",null],
-["exported tms folder","chapter.project.folder.html#project.folder.exported.tm",null],
+["エキスポート先フォルダー","chapter.project.folder.html#project.folder.exported.tm",null],
 ["辞書","chapter.project.folder.html#project.folder.dictionary",null],
 ["用語集","chapter.project.folder.html#project.folder.glossary",null],
 ["omegat","chapter.project.folder.html#project.folder.omegat.folder",null],
@@ -890,7 +890,7 @@ message = translation[index];
 }
 return message;
 }
-var storageId = "-1zbr8nxmbp4o-1o3xy2qs4e5z5";
+var storageId = "18hlchqtfy904-1ul49cs8hil5o";
 function storageSet(key, value) {
 window.sessionStorage.setItem(key + storageId, String(value));
 }

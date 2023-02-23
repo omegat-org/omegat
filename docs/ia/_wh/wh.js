@@ -647,7 +647,6 @@ var toc_entries = [
 ["Preparationes del typo de character","chapter.misc.html#font.settings",null],
 ["Impedir le Perdita del datos","chapter.misc.html#preventing.data.loss",null]
 ]],
-["Appendices","appendix.languages.html",[
 ["A. Linguas - lista del codices ISO 639\n  \n  \n  ","appendix.languages.html",null],
 ["B. Vias breve del Claviero in le editor","appendix.keyboard.html",null],
 ["C. Projectos de equipa OmegaT","appendix.TeamProjects.html",[
@@ -689,7 +688,6 @@ var toc_entries = [
 ]],
 ["J. Recognitiones","appendix.acknowledgements.html",[
 ["Gratias a vos omne!","appendix.acknowledgements.html#d0e13276",null]
-]]
 ]],
 ["Index","ix01.html",null]];
 var toc_initiallyCollapsed = false;
@@ -965,7 +963,7 @@ message = translation[index];
 }
 return message;
 }
-var storageId = "1ohnsdpjpx4lm-1ghwd6pgqs097";
+var storageId = "-16sv7m6i72oce-1ed9vs3d2ul3t";
 function storageSet(key, value) {
 window.sessionStorage.setItem(key + storageId, String(value));
 }

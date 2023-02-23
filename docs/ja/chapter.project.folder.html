@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head><meta charset="UTF-8" />
+      <title>プロジェクトフォルダー</title>
+      <link href="OmegaT.css" rel="stylesheet" type="text/css" />
+      <meta content="DocBook XSL Stylesheets V1.79.1" name="generator" />
+      <link href="chapter.dialogs.preferences.html" rel="prev" title="環境設定" />
+      <link href="chapter.appendices.html" rel="next" title="付録" />
+   <meta content="width=device-width, initial-scale=1" name="viewport" /><link href="_wh/wh.css" rel="stylesheet" type="text/css" /><script src="_wh/jquery/jquery.min.js" type="text/javascript"></script><script charset="UTF-8" src="_wh/wh.js" type="text/javascript"></script><script charset="UTF-8" defer="defer" src="_wh/search.js" type="text/javascript"></script></head>
+   
+<body>
+    <div id="wh-header">
+    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 5.8.0-取扱説明書</a></div></div>
+
+    <div id="wh-body">
+      <div class="wh-icon-menu" id="wh-menu"></div>
+      <div id="wh-navigation">
+        <div id="wh-navigation-form"><span id="wh-search-group"><span class="wh-icon-search" id="wh-do-search"></span><input id="wh-search-field" type="text" /><span class="wh-icon-cancel" id="wh-cancel-search"></span></span></div>
+        <div id="wh-toc-pane">
+        </div>
+        <div id="wh-search-pane">
+          <div id="wh-search-results">
+          </div>
+        </div>
+      </div>
+      <div id="wh-separator"></div>
+      <div id="wh-content">
+      
+      <header>
+         <div class="navheader">
+            <table style="width: 100%; ">
+               <tr>
+                  <th colspan="3" style="text-align: center; ">プロジェクトフォルダー</th>
+               </tr>
+               <tr>
+                  <td style="width: 20%; text-align: left; ">
+                     <a accesskey="p" href="chapter.dialogs.preferences.html">戻る</a> </td>
+                  <th style="width: 60%; text-align: center; "> </th>
+                  <td style="width: 20%; text-align: right; "> <a accesskey="n" href="chapter.appendices.html">次へ</a>
+                  </td>
+               </tr>
+            </table>
+            <hr />
+         </div>
+      </header>
+      <section class="chapter" id="chapter.project.folder">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title">プロジェクトフォルダー</h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <ul class="toc">
+               <li>
+                  <span class="section">
+                     <a href="chapter.project.folder.html#d0e10172">デフォルトの構造</a>
+                  </span>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="chapter.project.folder.html#d0e10248">最小のコンテンツ</a>
+                  </span>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="chapter.project.folder.html#project.folder.source">source</a>
+                  </span>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="chapter.project.folder.html#project.folder.target">target</a>
+                  </span>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="chapter.project.folder.html#project.folder.tm">tm</a>
+                  </span>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="chapter.project.folder.html#project.folder.exported.tm">エキスポート先フォルダー</a>
+                  </span>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="chapter.project.folder.html#project.folder.dictionary">辞書</a>
+                  </span>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="chapter.project.folder.html#project.folder.glossary">用語集</a>
+                  </span>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="chapter.project.folder.html#project.folder.omegat.folder">omegat</a>
+                  </span>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="chapter.project.folder.html#project.folder.repositories">.repositories</a>
+                  </span>
+               </li>
+            </ul>
+         </div>
+         <section class="section" id="d0e10172">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">デフォルトの構造</h2>
+                  </div>
+               </div>
+            </div>
+            <p>OmegaTプロジェクトは、一連のフォルダーからなり、翻訳に使用する資材からなるファイルが格納されます。</p>
+            <p>デフォルトでは、新規に作成されるプロジェクトフォルダーには、すべての資材が格納されます。これらのファイルやフォルダーには、次のデフォルトの名前がつけられます。</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>
+                        <a class="link" href="chapter.project.folder.html#project.folder.source" title="source">source</a>原文ファイルが格納される</p>
+                  </li>
+                  <li class="listitem">
+                     <p>
+                        <a class="link" href="chapter.project.folder.html#project.folder.target" title="target">target</a>訳文ファイルが作成される</p>
+                  </li>
+                  <li class="listitem">
+                     <p>
+                        <a class="link" href="chapter.project.folder.html#project.folder.glossary" title="用語集">用語集</a>用語集が格納される</p>
+                  </li>
+                  <li class="listitem">
+                     <p>
+                        <a class="link" href="chapter.project.folder.html#project.folder.glossary.txt">glossary.txt</a>プロジェクトの書き込み可能な用語集です</p>
+                  </li>
+                  <li class="listitem">
+                     <p>
+                        <a class="link" href="chapter.project.folder.html#project.folder.tm" title="tm">tm</a>参照翻訳メモリがはいる</p>
+                  </li>
+                  <li class="listitem">
+                     <p>
+                        <a class="link" href="chapter.project.folder.html#project.folder.dictionary" title="辞書">辞書</a>参考にする辞書がはいる</p>
+                  </li>
+               </ul>
+            </div>
+            <p>
+               <a class="link" href="chapter.menus.html#menus.project" title="プロジェクト">
+                  <span class="guimenu">プロジェクト</span>
+               </a>
+               <a class="link" href="chapter.menus.html#menus.project.access.project.contents">
+                  <span class="guisubmenu">プロジェクト構成物へのアクセス</span>
+               </a>を使用して、プロジェクトのフォルダーやそのサブフォルダーにアクセスできます。</p>
+            <p>
+               <a class="link" href="chapter.menus.html#menus.project" title="プロジェクト">
+                  <span class="guimenu">プロジェクト</span>
+               </a>
+               <a class="link" href="chapter.menus.html#menus.project.properties">
+                  <span class="guimenuitem">プロジェクト設定...</span>
+                  <span class="keycap">
+                     <strong>C</strong>
+                  </span>+<span class="keycap">
+                     <strong>E</strong>
+                  </span>
+               </a>を使用すると、プロジェクトの作成時または後で、標準以外の場所のさまざまな翻訳資材を簡単に割り当てることができます。</p>
+            <p>たとえば、次の操作を実行できます。</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>訳文ファイルを、プロジェクトフォルダー外の共有フォルダーで、レビュー担当者が簡単にアクセスできる場所に作成します。</p>
+                  </li>
+                  <li class="listitem">
+                     <p>関連する別のプロジェクトの用語集フォルダーを使用したり、</p>
+                  </li>
+                  <li class="listitem">
+                     <p>関連プロジェクト用に設定した参照翻訳メモリフォルダーなどを使用できます。</p>
+                  </li>
+               </ul>
+            </div>
+            <p>プロジェクトを作成すると本的なフォルダー構成が作られますが、その構成は固定ではありません。ファイルやフォルダは、いつでもプロジェクトから削除したり、プロジェクトに追加することができます。</p>
+            <div class="note">
+               <h3 class="title">注記</h3>
+               <p>OmegaTプロジェクトは、手動またはスクリプトを使用して、事前に作成された一連のファイルを新しいフォルダーにコピーすることによって作成することもできます。</p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>後で手動調整が必要になるにしても、有効な<code class="filename">omegat.project</code>ファイルを含む任意のフォルダーは、OmegaTは翻訳プロジェクトとして認識します。</p>
+                     </li>
+                     <li class="listitem">
+                        <p>フォルダーが空のリポジトリで、<code class="filename">OmegaT.project</code>ファイルにリモートリポジトリ情報が含まれている場合には、OmegaTはチームプロジェクトとして認識します。</p>
+                        <pre class="programlisting">...
+    &lt;external_command&gt;&lt;/external_command&gt;
+    &lt;repositories&gt;
+        &lt;repository type=&quot;git&quot; url=&quot;https://URL/OF/THE/REMOTE/PROJECT/REPOSITORY&quot;&gt;
+            &lt;mapping local=&quot;/&quot; repository=&quot;/&quot;/&gt;
+        &lt;/repository&gt;
+    &lt;/repositories&gt;
+&lt;/project&gt;
+		  </pre>
+                        <p>詳細については、 <a class="link" href="chapter.how.to.html#how.to.setup.team.project" title="チームプロジェクトを設定する">チームプロジェクトを設定する</a>を参照してください。</p>
+                     </li>
+                  </ul>
+               </div>
+            </div>
+         </section>
+         <section class="section" id="d0e10248">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">最小のコンテンツ</h2>
+                  </div>
+               </div>
+            </div>
+            <p>プロジェクトは、最小限では、次を含みます。</p>
+            <div class="variablelist">
+               <dl class="variablelist">
+                  <dt id="project.folder.omegat">
+                     <span class="term" id="project.folder.omegat.title">omegat</span>
+                  </dt>
+                  <dd>
+                     <p>常に<a class="link" href="chapter.project.folder.html#project.folder.project.save.tmx">project_save.tmx</a>(プロジェクトフォルダー)と<a class="link" href="chapter.project.folder.html#project.folder.project.stats">project_stats.txt</a>(プロジェクトの翻訳メモリデータファイル)を含むプロジェクト翻訳状況を保存しています。</p>
+                     <p>その他のファイルは、翻訳の過程で追加されます。</p>
+                     <p>
+                        <a class="link" href="chapter.project.folder.html#project.folder.omegat.folder" title="omegat">以下に詳細</a>を示します。</p>
+                  </dd>
+                  <dt id="project.folder.omegat.project.file">
+                     <span class="term" id="project.folder.omegat.project.file.title">omegat.project</span>
+                  </dt>
+                  <dd>
+                     <p>このファイルには、<a class="link" href="chapter.windows.and.dialogs.html#dialogs.project.properties" title="プロジェクト設定">プロジェクト設定</a>で定義されたプロジェクトのパラメータが含まれています。たとえば、原文言語と訳文言語、それぞれのトークナイザ、分節化のタイプなどです。</p>
+                     <p>また、プロジェクトリソースの場所を指定する<span class="emphasis">
+                           <em>アドレス帳</em>
+                        </span>としても機能します。</p>
+                     <p>OmegaTはまた、そのファイルのバックアップ(<code class="filename">OmegaT.project.YYYYMMDD.bak</code>)を作成し、必要に応じて自動的にそれを使用してプロジェクト設定を復元します。</p>
+                  </dd>
+               </dl>
+            </div>
+         </section>
+         <section class="section" id="project.folder.source">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">source</h2>
+                  </div>
+               </div>
+            </div>
+            <p>原文フォルダーには、翻訳するファイルが含まれています。</p>
+            <p>
+               <a class="link" href="chapter.menus.html#menus.project" title="プロジェクト">
+                  <span class="guimenu">プロジェクト</span>
+               </a>
+               <a class="link" href="chapter.menus.html#menus.project.copy.files.to.source.folder">
+                  <span class="guimenuitem">ファイルを追加...</span>
+               </a>を使用するか、<a class="link" href="chapter.panes.html#panes.editor" title="編集">
+                  <span class="guilabel">編集</span>
+               </a>ウィンドウにファイルをドロップして、必要なときにいつでもファイルを追加できます。</p>
+            <p>OmegaTがサポートする形式のファイルの内容は、翻訳作業ができるように<a class="link" href="chapter.panes.html#panes.editor" title="編集">
+                  <span class="guilabel">編集</span>
+               </a>ウィンドウに表示されます。</p>
+            <p>ファイルマネージャを使用して、フォルダの追加やファイルの削除を行うこともできます。</p>
+            <p>翻訳プロジェクトに多数のフォルダが含まれていて、一度に1つのフォルダーで作業したい場合は、<a class="link" href="chapter.menus.html#menus.project" title="プロジェクト">
+                  <span class="guimenu">プロジェクト</span>
+               </a>
+               <a class="link" href="chapter.menus.html#menus.project.properties">
+                  <span class="guimenuitem">プロジェクト設定...</span>
+                  <span class="keycap">
+                     <strong>C</strong>
+                  </span>+<span class="keycap">
+                     <strong>E</strong>
+                  </span>
+               </a>を使用してプロジェクトプロジェクト設定にアクセスし、割り当てられた<a class="link" href="chapter.windows.and.dialogs.html#dialogs.project.properties.file.locations.source.files">ソースフォルダー</a>を必要に応じて変更します。</p>
+         </section>
+         <section class="section" id="project.folder.target">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">target</h2>
+                  </div>
+               </div>
+            </div>
+            <p>このフォルダーは、最初は空の状態です。</p>
+            <p>
+               <a class="link" href="chapter.menus.html#menus.project.create.translated.documents">
+                  <span class="guimenuitem">訳文ファイルの生成</span>
+                  <span class="keycap">
+                     <strong>C</strong>
+                  </span>+<span class="keycap">
+                     <strong>D</strong>
+                  </span>
+               </a>または<a class="link" href="chapter.menus.html#menus.project.create.current.translated.document">
+                  <span class="guimenuitem">現在の訳文ファイルを作成</span>
+                  <span class="keycap">
+                     <strong>C</strong>
+                  </span>+<span class="keycap">
+                     <strong>S</strong>
+                  </span>+<span class="keycap">
+                     <strong>D</strong>
+                  </span>
+               </a>を使用するたびに、訳文ファイルが生成されます。</p>
+            <p>
+               <a class="link" href="chapter.project.folder.html#project.folder.source" title="source">source</a>フォルダーのコンテンツに対応する訳文ファイルは、翻訳が完了しているかどうかに関わらず、原文フォルダーと同じフォルダー構造を使用して作成されます。</p>
+            <p>ここで作成されるファイルには、現在の翻訳状態が反映されます。未翻訳分節は、原文言語のままになります。</p>
+         </section>
+         <section class="section" id="project.folder.tm">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">tm</h2>
+                  </div>
+               </div>
+            </div>
+            <p>このフォルダーには、任意の数のバイリンガル参照文書(TMXファイルだけでなく、POファイルなど、OmegaTがサポートするバイリンガル形式の任意のファイル)を含めることができ、TMXファイルはgzip書式で圧縮することもできます。</p>
+            <p>OmegaTは、自動訳文挿入するように指示されます。OmegaTが自動訳文挿入しており、自身でおこなったのでは無いことを記録するため、<a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.editor.insert.the.best.fuzzy.match">
+                  <code class="option">最も一致率の高い参考訳文を自動で挿入</code>
+               </a>設定で接頭語を追加させることもできます。</p>
+            <p>参照メモリからの一致は、プロジェクトの翻訳メモリである<a class="link" href="chapter.project.folder.html#project.folder.project.save.tmx">project_save.tmx</a>からと同様に<a class="link" href="chapter.panes.html#panes.fuzzy.matches" title="参考訳文">
+                  <span class="guilabel">参考訳文</span>
+               </a>ウィンドウに参考訳文として表示されます。</p>
+            <p>このような検索結果は、デフォルトでは<a class="link" href="chapter.windows.and.dialogs.html#dialogs.project.properties" title="プロジェクト設定">
+                  <span class="guilabel">プロジェクト設定</span>
+               </a>で定義された原文言語と訳文言語に限定された訳文候補になりますが、プロジェクトの訳文言語以外の言語での表示を追加することもできます。詳細の<a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.tm.matches.other.languages">
+                  <code class="option">他の言語の一致をふくむ</code>
+               </a>環境設定を参照してください。</p>
+            <p>フォルダーには、次のような特別な機能を持つサブフォルダを含め、任意の数のサブフォルダを含めることができます。</p>
+            <div class="variablelist">
+               <dl class="variablelist">
+                  <dt id="project.folder.tm.auto">
+                     <span class="term" id="project.folder.tm.auto.title">tm/auto</span>
+                  </dt>
+                  <dd>
+                     <p>完全に一致した場合に未翻訳分節を自動的に入力することができる、信頼性の高い参照ファイルが入ります。</p>
+                     <p>このフォルダーに配置されたTMXファイルからの翻訳は、自動の接頭辞なしで一致する分節に自動的に挿入されるため、これらの分節を確認する必要はありません。</p>
+                     <p>このフォルダーからの訳文は、プロジェクトメモリと<span class="emphasis">
+                           <em>同じ</em>
+                        </span>信頼性があると見なされます。</p>
+                     <div class="note">
+                        <h3 class="title">注記</h3>
+                        <p>
+                           <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.editor.save.auto-populated.status">
+                              <code class="option">auto フォルダー由来の翻訳かどうかを記録する</code>
+                           </a>設定を有効にして、挿入された一致がこのフォルダーからのものであることをOmegaTに記憶させます。</p>
+                     </div>
+                     <div class="orderedlist">
+                        <ol class="orderedlist" type="1">
+                           <li class="listitem">
+                              <p>該当するメモリを<code class="filename">tm/auto</code>フォルダーに配置します。</p>
+                           </li>
+                           <li class="listitem">
+                              <p>プロジェクトを開きます。これらのメモリ内の原文分節と同一の分節がすでに入力されていることがわかります。<a class="link" href="chapter.menus.html#menus.view" title="表示">
+                                    <span class="guimenu">表示</span>
+                                 </a>
+                                 <a class="link" href="chapter.menus.html#menus.view.mark.auto.populated.segments">
+                                    <span class="guimenuitem">自動生成分節を色づけ</span>
+                                 </a>を使用して色付け表示します。</p>
+                           </li>
+                           <li class="listitem">
+                              <p>プロジェクト内の任意の場所で小さな変更を行い、保存します。tm/autoフォルダーからロードされた訳文がプロジェクト翻訳メモリに追加されます。</p>
+                           </li>
+                        </ol>
+                     </div>
+                     <p>
+                        <a class="link" href="chapter.menus.html#menus.goto" title="移動">
+                           <span class="guimenu">移動</span>
+                        </a>
+                        <a class="link" href="chapter.menus.html#menus.goto.auto.populated.segments">
+                           <span class="guisubmenu">自動生成分節</span>
+                        </a>のナビゲーションメニューを使用して、挿入された分節に移動します。</p>
+                     <div class="warning">
+                        <h3 class="title">警告</h3>
+                        <p>ステップ3の前に<code class="filename">tm/auto</code>からTMXファイルを削除すると、その内容は保持されません。</p>
+                     </div>
+                  </dd>
+                  <dt id="project.folder.tm.enforce">
+                     <span class="term" id="project.folder.tm.enforce.title">tm/enforce</span>
+                  </dt>
+                  <dd>
+                     <p>以前に翻訳された内容を自動的に上書きすることを目的とした、信頼性の高い参照ファイル用です。</p>
+                     <p>このフォルダーに配置されたTMXファイルからの訳文は、訳文の接頭辞のなしに、一致する分節に自動的に挿入されるため、これらの分節を確認する必要はありません。</p>
+                     <p>このフォルダーからの翻訳は、現在のプロジェクトの翻訳メモリよりも<span class="emphasis">
+                           <em>さらに</em>
+                        </span>信頼性が高いと考えられます。</p>
+                     <p> 
+                        <code class="filename">project_save.tmx</code> よりも優先度が高いことが明らかな TMX がある場合は、そのファイルを <code class="filename">tm/enforce</code> に配置してください。そこからの分節は、既存の翻訳を無条件に上書きします。</p>
+                     <div class="note">
+                        <h3 class="title">注記</h3>
+                        <p>
+                           <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.editor.save.auto-populated.status">
+                              <code class="option">auto フォルダー由来の翻訳かどうかを記録する</code>
+                           </a>設定を有効にして、挿入された一致がこのフォルダーからのものであることをOmegaTに記憶させます。</p>
+                     </div>
+                     <div class="orderedlist">
+                        <ol class="orderedlist" type="1">
+                           <li class="listitem">
+                              <p>該当するメモリを<code class="filename">tm/enforce</code>フォルダーに配置します。</p>
+                           </li>
+                           <li class="listitem">
+                              <p>プロジェクトを開きます。これらのメモリ内の原文分節と同一の分節がすでに入力されていることがわかります。</p>
+                           </li>
+                           <li class="listitem">
+                              <p>プロジェクト内の任意の場所で小さな変更を行い、保存します。プロジェクトの翻訳メモリが更新されました。</p>
+                           </li>
+                           <li class="listitem">
+                              <p>強制する分節の不変性について決定します。</p>
+                              <div class="itemizedlist">
+                                 <ul class="itemizedlist" style="list-style-type: disc; ">
+                                    <li class="listitem">
+                                       <p>それ以上変更されないようにする<span class="emphasis">
+                                             <em>必要がない</em>
+                                          </span>場合は、<code class="filename">tm/enforce</code>からTMXを削除します。</p>
+                                    </li>
+                                    <li class="listitem">
+                                       <p>それ以上変更されないようにする<span class="emphasis">
+                                             <em>必要がある</em>
+                                          </span>場合は、<code class="filename">tm/enforce</code>にTMXを残します。これらのメモリからの分節への変更は<span class="emphasis">
+                                             <em>考慮されません</em>
+                                          </span>。</p>
+                                    </li>
+                                 </ul>
+                              </div>
+                           </li>
+                        </ol>
+                     </div>
+                     <p>
+                        <a class="link" href="chapter.menus.html#menus.goto" title="移動">
+                           <span class="guimenu">移動</span>
+                        </a>
+                        <a class="link" href="chapter.menus.html#menus.goto.auto.populated.segments">
+                           <span class="guisubmenu">自動生成分節</span>
+                        </a>のナビゲーションメニューを使用して、挿入された分節に移動します。</p>
+                     <div class="warning">
+                        <h3 class="title">警告</h3>
+                        <p>ステップ3の前に<code class="filename">tm/enforce</code>からTMXファイルを削除すると、その強制される訳文は保持されません。</p>
+                     </div>
+                  </dd>
+                  <dt id="project.folder.tm.mt">
+                     <span class="term" id="project.folder.tm.mt.title">tm/mt</span>
+                  </dt>
+                  <dd>
+                     <p>このフォルダーに含まれるTMXから訳文が挿入されると、アクティブな分節の背景色が赤に変わります。</p>
+                     <p>分節を離れるとき、または分節を修正したときに、背景色は通常色に戻ります。</p>
+                  </dd>
+                  <dt id="project.folder.tm.penalty">
+                     <span class="term" id="project.folder.tm.penalty.title">tm/penalty-xxx</span>
+                  </dt>
+                  <dd>
+                     <p>
+                        <code class="literal">xxx</code>は、このフォルダーからの分節の一致パーセンテージから差し引かれるペナルティとして機能する0～100の数値です。</p>
+                     <p>例えば、<code class="filename">penalty-30</code>と名づけたフォルダーに保存されてたTMXからの100%一致は、70%一致になります。このペナルティは、参考訳文候補に併記される３種類の一致率すべてに適用されます。一致率 75、80、90 の場合は、45、50、60 に引き下げられます。</p>
+                  </dd>
+                  <dt id="project.folder.tm.tmx2source">
+                     <span class="term" id="project.folder.tm.tmx2source.title">tm/tmx2source</span>
+                  </dt>
+                  <dd>
+                     <p>原文分節の<span class="emphasis">
+                           <em>右</em>
+                        </span>に第3の言語の内容を表示して、原文文章の代替言語の参照として使用することもできます。詳細は、 <a class="link" href="chapter.how.to.html#how.to.tm.bridge.two.languages" title="2つの言語の橋渡し">2つの言語の橋渡し</a> のハウツー項を参照してください。</p>
+                  </dd>
+               </dl>
+            </div>
+            <div class="note">
+               <h3 class="title">注記</h3>
+               <p>フォルダ名を結合して新しい機能性を作成できます。例えば、機械翻訳フォルダー内の10%のペナルティフォルダー:<code class="filename">tm/mt/penalty-010</code>は、OmegaTによって自動的に挿入される可能性のある100%の一致を生成することはなく、かつ、一致が挿入されるたびに常に赤い背景を設定します。</p>
+            </div>
+         </section>
+         <section class="section" id="project.folder.exported.tm">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">エキスポート先フォルダー</h2>
+                  </div>
+               </div>
+            </div>
+            <p>デフォルトでは、そのフォルダーはプロジェクトフォルダーそのものですが、場所を変更して、書き出されたTMファイルを共有しやすくすることができます。詳細については、 <a class="link" href="chapter.how.to.html#how.to.tm.share.translation.memories" title="翻訳メモリの共有">翻訳メモリの共有</a>を参照してください。</p>
+         </section>
+         <section class="section" id="project.folder.dictionary">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">辞書</h2>
+                  </div>
+               </div>
+            </div>
+            <p>このフォルダーは最初は空で、プロジェクトに追加する辞書を格納するために使用されます。</p>
+            <p>分節の用語の一部に一致する辞書の項目が、<a class="link" href="chapter.panes.html#panes.dictionary" title="辞書">
+                  <span class="guilabel">辞書</span>
+               </a>ウィンドウに表示されます。詳細の<a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.dictionary" title="辞書">
+                  <span class="guilabel">辞書</span>
+               </a>環境設定を参照してください。</p>
+            <p>OmegaTは、StarDict 形式および Lingvo DSL 形式の辞書に対応しています。<a class="ulink" href="https://sourceforge.net/p/omegat/wiki/Reference%20Material/" target="_top">OmegaTウィキ</a>で公開されている辞書を探すこともできます。</p>
+            <p>辞書をインストールするには:</p>
+            <div class="orderedlist">
+               <ol class="orderedlist" type="1">
+                  <li class="listitem">
+                     <p>ファイルをダウンロードします。これは TARアーカイブ (拡張子 <code class="filename">tar.bz</code> または <code class="filename">tar.bz2</code>) をダウンロードする必要があります。</p>
+                  </li>
+                  <li class="listitem">
+                     <p>その中身をこのフォルダーに展開します展開すると、拡張子が <code class="filename">dz</code>, <code class="filename">idx</code>, <code class="filename">ifo</code>の３つのファイルができるはずです。</p>
+                  </li>
+               </ol>
+            </div>
+            <p>辞書で検索したくない単語を指定する場合は、UTF-8でエンコードされた<code class="filename">ignore.txt</code>ファイルをフォルダーに追加します。ファイルには1行に1語が必要です。OmegaTはリストに含まれる単語を無視します。</p>
+         </section>
+         <section class="section" id="project.folder.glossary">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">用語集</h2>
+                  </div>
+               </div>
+            </div>
+            <p>このフォルダーは、最初は空の状態です。プロジェクトで利用する標準の追加書き込み可能な用語集と参照用語集を格納するために使用されます。</p>
+            <p>分節の用語の一部に一致する用語集の項目が、<a class="link" href="chapter.panes.html#panes.glossary" title="用語集">
+                  <span class="guilabel">用語集</span>
+               </a>ウィンドウに表示されます。詳細は、付録の <a class="link" href="chapter.appendices.html#app.glossaries" title="用語集">用語集</a> をご覧ください。</p>
+            <div class="variablelist">
+               <dl class="variablelist">
+                  <dt id="project.folder.glossary.txt">
+                     <span class="term" id="project.folder.glossary.txt.title">glossary.txt</span>
+                  </dt>
+                  <dd>
+                     <p>プロジェクトの書き込み可能な用語集です最初に<a class="link" href="chapter.menus.html#menus.edit.create.glossary.entry">
+                           <span class="guimenuitem">用語の追加...</span> 
+                           <span class="keycap">
+                              <strong>C</strong>
+                           </span>+<span class="keycap">
+                              <strong>S</strong>
+                           </span>+<span class="keycap">
+                              <strong>G</strong>
+                           </span>
+	  
+                        </a>を利用したときに、自動的に作成されます。</p>
+                     <p>
+                        <a class="link" href="chapter.menus.html#menus.project.access.project.contents.title">
+                           <span class="guisubmenu">プロジェクト構成物へのアクセス</span>
+                        </a>でアクセスして、テキストエディタで開いて変更することもできます。用語集に加えた変更を保存すると、OmegaTはそれを利用するようになります。</p>
+                  </dd>
+               </dl>
+            </div>
+         </section>
+         <section class="section" id="project.folder.omegat.folder">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">omegat</h2>
+                  </div>
+               </div>
+            </div>
+            <p>
+               <code class="filename">OmegaT</code>フォルダーには、少なくとも<a class="link" href="chapter.project.folder.html#project.folder.project.save.tmx">project_save.tmx</a>ファイルと<a class="link" href="chapter.project.folder.html#project.folder.project.stats">project_stats.txt</a>ファイルが含まれています。他の複数のファイルが含まれている場合もあります。</p>
+            <div class="variablelist">
+               <dl class="variablelist">
+                  <dt id="project.folder.project.save.tmx">
+                     <span class="term" id="project.folder.project.save.tmx.title">project_save.tmx</span>
+                  </dt>
+                  <dd>
+                     <p>これは、プロジェクトで最も重要なファイルです。プロジェクトを最初に作成したときは、空の翻訳メモリですが、徐々に翻訳作業したテキストによって、<a class="link" href="chapter.project.folder.html#project.folder.source" title="source">source</a>フォルダーのファイルがうめられていきます。</p>
+                     <p>これが、プロジェクトの作業用の翻訳メモリになります。</p>
+                     <p>OmegaTはそのファイルを定期的にバックアップしています。詳細については、 <a class="link" href="chapter.how.to.html#how.to.restore.your.data" title="問題のトラブルシューティング">問題のトラブルシューティング</a>を参照してください。</p>
+                  </dd>
+                  <dt id="project.folder.project.save.tmx.bak">
+                     <span class="term" id="project.folder.project.save.tmx.bak.title">project_save.tmx.bak</span>
+                  </dt>
+                  <dd>
+                     <p>
+                        <code class="filename">project_save.tmx</code>のバックアップであり、<code class="filename">project_save.tmx</code>が変更される毎に作成されます。<a class="link" href="chapter.menus.html#menus.project" title="プロジェクト">
+                           <span class="guimenu">プロジェクト</span>
+                        </a>
+                        <a class="link" href="chapter.menus.html#menus.project.save">
+                           <span class="guimenuitem">保存</span>
+                           <span class="keycap">
+                              <strong>C</strong>
+                           </span>+<span class="keycap">
+                              <strong>S</strong>
+                           </span>
+                        </a>を利用した後や、デフォルトで3分ごと に通常のバックアップが作成されます。詳細は<a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.saving.and.output.interval">
+                           <code class="option">プロジェクト保存間隔</code>
+                        </a>の設定を参照してください。</p>
+                  </dd>
+                  <dt id="project.folder.project.save.tmx.timestamp.bak">
+                     <span class="term" id="project.folder.project.save.tmx.timestamp.bak.title">project_save.tmx.timestamp.bak</span>
+                  </dt>
+                  <dd>
+                     <p>プロジェクトが読み込まれるたびに、OmegaTは<code class="filename">project_save.tmx</code>のバックアップを<code class="filename">project_save.tmx.[タイムスタンプ].bak</code>という名前で作成します。OmegaTはこれらのファイルを10個まで保持しています。</p>
+                  </dd>
+                  <dt id="project.folder.project.stats">
+                     <span class="term" id="project.folder.project.stats.title">project_stats.txt</span>
+                  </dt>
+                  <dd>
+                     <p>プロジェクト全体の翻訳状況ファイルです。プロジェクトを再ロードするたびに更新されます。</p>
+                     <p>
+                        <a class="link" href="chapter.menus.html#menus.tools" title="ツール">
+                           <span class="guimenu">ツール</span>
+                        </a>
+                        <a class="link" href="chapter.menus.html#menus.tools.statistics">
+                           <span class="guimenuitem">翻訳状況</span>
+                        </a>を使用して更新します。</p>
+                  </dd>
+                  <dt id="project.folder.omegat.project.stats.match">
+                     <span class="term" id="project.folder.omegat.project.stats.match.title">project_stats_match.txt</span>
+                  </dt>
+                  <dd>
+                     <p>最新のプロジェクトの参考訳文の一致の統計が含まれています。<a class="link" href="chapter.menus.html#menus.tools" title="ツール">
+                           <span class="guimenu">ツール</span>
+                        </a>
+                        <a class="link" href="chapter.menus.html#menus.tools.match.statistics">
+                           <span class="guimenuitem">参考訳文の一致率</span>
+                        </a>を使用して生成します。</p>
+                  </dd>
+                  <dt id="project.folder.omegat.project.stats.match.per.file">
+                     <span class="term" id="project.folder.omegat.project.stats.match.per.file.title">project_stats_match_per_file.txt</span>
+                  </dt>
+                  <dd>
+                     <p>最新のプロジェクトの参考訳文の一致のファイル毎の統計が含まれています。<a class="link" href="chapter.menus.html#menus.tools" title="ツール">
+                           <span class="guimenu">ツール</span>
+                        </a>
+                        <a class="link" href="chapter.menus.html#menus.tools.match.statistics.per.file">
+                           <span class="guimenuitem">参考訳文の一致率（ファイル別）</span>
+                        </a>を使用して生成します。</p>
+                  </dd>
+                  <dt id="project.folder.omegat.spellcheck">
+                     <span class="term" id="project.folder.omegat.ignored.words.title">ignored_words.txt, </span>
+                     <span class="term" id="project.folder.omegat.learned.words">learned_words.txt</span>
+                  </dt>
+                  <dd>
+                     <p>これらのファイルは、スペルチェッカーによって作成および使用されます。<a class="link" href="chapter.panes.html#panes.editor" title="編集">
+                           <span class="guilabel">編集</span>
+                        </a>ウィンドウに用語を追加するには、正しくないとマークされた単語を右クリックし、<a class="link" href="chapter.panes.html#panes.editor.context.menu">コンテキストメニュー</a>から<span class="guimenuitem">[すべて無視]</span>(スペルチェック中にスキップする単語の場合)または<span class="guimenuitem">[辞書に追加]</span>(正しいと受け入れる単語の場合)をそれぞれ選択します。詳細の<a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.spellchecker" title="スペルチェッカー">
+                           <span class="guilabel">スペルチェッカー</span>
+                        </a>環境設定を参照してください。</p>
+                     <p>すでに修正済で、綴り確認機能に無視させるか学習させる単語は、対応する名前で文書ファイルに入力して、<a class="link" href="chapter.project.folder.html#project.folder.omegat.folder" title="omegat">omegat</a> フォルダーに保存しておきます。</p>
+                  </dd>
+                  <dt id="project.folder.omegat.segmentation">
+                     <span class="term" id="project.folder.omegat.segmentation.title">segmentation.conf</span>
+                  </dt>
+                  <dd>
+                     <p>このファイルには、プロジェクト固有の分節化規則が含まれています。</p>
+                  </dd>
+                  <dt id="project.folder.omegat.filters">
+                     <span class="term" id="project.folder.omegat.filters.title">filters.xml</span>
+                  </dt>
+                  <dd>
+                     <p>このファイルには、プロジェクト固有のファイルフィルター設定が含まれています。</p>
+                  </dd>
+                  <dt id="project.folder.omegat.uiLayout">
+                     <span class="term" id="project.folder.omegat.uiLayout.title">uiLayout.xml</span>
+                  </dt>
+                  <dd>
+                     <p>このファイルには、プロジェクト固有のGUI設定が含まれています。</p>
+                  </dd>
+                  <dt id="project.folder.omegat.finder">
+                     <span class="term" id="project.folder.omegat.finder.title">finder.xml</span>
+                  </dt>
+                  <dd>
+                     <p>このファイルには、プロジェクト固有の外部検索が含まれています。</p>
+                  </dd>
+                  <dt id="project.folder.omegat.file.order">
+                     <span class="term" id="project.folder.omegat.file.order.title">files_order.txt</span>
+                  </dt>
+                  <dd>
+                     <p>このファイルは、<a class="link" href="chapter.windows.and.dialogs.html#windows.source.files.list" title="翻訳対象ファイル一覧">
+                           <span class="guilabel">翻訳対象ファイル一覧</span>
+                        </a>ウィンドウのファイルの順序を手動で変更した場合に作成されます。</p>
+                  </dd>
+                  <dt id="project.folder.omegat.last.entry">
+                     <span class="term" id="project.folder.omegat.last.entry.title">last_entry.properties</span>
+                  </dt>
+                  <dd>
+                     <p>このファイルには、最後に訪問した分節の番号、ソースの内容、ファイル名、および日付が記録されるので、プロジェクトを再読み込み/再起動するときに、作業中のファイルに戻ることができます。</p>
+                  </dd>
+               </dl>
+            </div>
+         </section>
+         <section class="section" id="project.folder.repositories">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">.repositories</h2>
+                  </div>
+               </div>
+            </div>
+            <p>チームプロジェクトの場合、このフォルダには、リモートサーバーに直接リンクされたプロジェクトツリー構造のバージョン管理されたコピーが含まれます。</p>
+            <p>このフォルダーで変更を行い、GitまたはSVNクライアントを使用してリモートサーバと同期することで、リモートファイルに変更(削除や置換など)を加えることができます。詳細については、 <a class="link" href="chapter.how.to.html#how.to.setup.team.project" title="チームプロジェクトを設定する">チームプロジェクトを設定する</a>を参照してください。</p>
+            <p>一部のオペレーティングシステムでは、このフォルダは既定で表示されません。システム内の隠しファイルを表示するには、設定をオンにします。</p>
+         </section>
+      </section>
+      <footer>
+         <div class="navfooter">
+            <hr />
+            <table style="width: 100%; ">
+               <tr>
+                  <td style="width: 40%; text-align: left; ">
+                     <a accesskey="p" href="chapter.dialogs.preferences.html">戻る</a> </td>
+                  <td style="width: 20%; text-align: center; "> </td>
+                  <td style="width: 40%; text-align: right; "> <a accesskey="n" href="chapter.appendices.html">次へ</a>
+                  </td>
+               </tr>
+               <tr>
+                  <td style="width: 40%; text-align: left; vertical-align: top; ">
+                     <span class="guilabel">環境設定</span> </td>
+                  <td style="width: 20%; text-align: center; ">
+                     <a accesskey="h" href="index_.html">ホーム</a>
+                  </td>
+                  <td style="width: 40%; text-align: right; vertical-align: top; "> 付録</td>
+               </tr>
+            </table>
+         </div>
+      </footer>
+   </div>
+    </div>
+
+    
+  </body></html>

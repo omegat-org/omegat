@@ -1,0 +1,1635 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head><meta charset="UTF-8" />
+      <title>Panes</title>
+      <link href="OmegaT.css" rel="stylesheet" type="text/css" />
+      <meta content="DocBook XSL Stylesheets V1.79.1" name="generator" />
+      <link href="chapter.how.to.html" rel="prev" title="How To..." />
+      <link href="chapter.menus.html" rel="next" title="Menus" />
+   <meta content="width=device-width, initial-scale=1" name="viewport" /><link href="_wh/wh.css" rel="stylesheet" type="text/css" /><script src="_wh/jquery/jquery.min.js" type="text/javascript"></script><script charset="UTF-8" src="_wh/wh.js" type="text/javascript"></script><script charset="UTF-8" defer="defer" src="_wh/search.js" type="text/javascript"></script></head>
+   
+<body>
+    <div id="wh-header">
+    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 5.8.0 - User Manual</a></div></div>
+
+    <div id="wh-body">
+      <div class="wh-icon-menu" id="wh-menu"></div>
+      <div id="wh-navigation">
+        <div id="wh-navigation-form"><span id="wh-search-group"><span class="wh-icon-search" id="wh-do-search"></span><input id="wh-search-field" type="text" /><span class="wh-icon-cancel" id="wh-cancel-search"></span></span></div>
+        <div id="wh-toc-pane">
+        </div>
+        <div id="wh-search-pane">
+          <div id="wh-search-results">
+          </div>
+        </div>
+      </div>
+      <div id="wh-separator"></div>
+      <div id="wh-content">
+      
+      <header>
+         <div class="navheader">
+            <table style="width: 100%; ">
+               <tr>
+                  <th colspan="3" style="text-align: center; ">Panes</th>
+               </tr>
+               <tr>
+                  <td style="width: 20%; text-align: left; ">
+                     <a accesskey="p" href="chapter.how.to.html">Prev</a> </td>
+                  <th style="width: 60%; text-align: center; "> </th>
+                  <td style="width: 20%; text-align: right; "> <a accesskey="n" href="chapter.menus.html">Next</a>
+                  </td>
+               </tr>
+            </table>
+            <hr />
+         </div>
+      </header>
+      <section class="chapter" id="chapter.panes">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title">Panes</h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <ul class="toc">
+               <li>
+                  <span class="section">
+                     <a href="chapter.panes.html#panes.default.layout">Default layout</a>
+                  </span>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="chapter.panes.html#panes.principles">Principles</a>
+                  </span>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="chapter.panes.html#panes.editor">
+                        <span class="guilabel">Editor</span>
+                     </a>
+                  </span>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="chapter.panes.html#panes.fuzzy.matches">
+                        <span class="guilabel">Fuzzy Matches</span>
+                     </a>
+                  </span>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="chapter.panes.html#panes.glossary">
+                        <span class="guilabel">Glossaries</span>
+                     </a>
+                  </span>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="chapter.panes.html#panes.dictionary">
+                        <span class="guilabel">Dictionaries</span>
+                     </a>
+                  </span>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="chapter.panes.html#panes.machinetranslation">
+                        <span class="guilabel">Machine
+    Translations</span>
+                     </a>
+                  </span>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="chapter.panes.html#panes.multipletranslations">
+                        <span class="guilabel">Multiple
+    Translations</span>
+                     </a>
+                  </span>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="chapter.panes.html#panes.notes">
+                        <span class="guilabel">Notepad</span>
+                     </a>
+                  </span>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="chapter.panes.html#panes.comments">
+                        <span class="guilabel">Comments</span>
+                     </a>
+                  </span>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="chapter.panes.html#panes.segment.properties">
+                        <span class="guilabel">Segment
+    properties</span>
+                     </a>
+                  </span>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="chapter.panes.html#panes.statusbar">
+                        <span class="guilabel">Status bar</span>
+                     </a>
+                  </span>
+               </li>
+            </ul>
+         </div>
+         <section class="section" id="panes.default.layout">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">Default layout</h2>
+                  </div>
+               </div>
+            </div>
+            <p>The first time you start OmegaT, the main window displays the
+	following default layout:</p>
+            <div class="figure" id="default.omegat.layout">
+               <div class="figure-title">Figure 2. Default OmegaT layout on
+      macOS</div>
+               <div class="figure-contents">
+                  <div class="mediaobject">
+                     <img alt="Default OmegaT layout on macOS" src="images/defaultOmegaTLayout.png" />
+                  </div>
+               </div>
+            </div>
+            <br class="figure-break" />
+            <div class="orderedlist">
+               <ol class="orderedlist" type="1">
+                  <li class="listitem">
+                     <p>The <a class="link" href="chapter.panes.html#panes.editor" title="Editor">
+                           <span class="guilabel">Editor</span>
+                        </a>
+		pane </p>
+                  </li>
+                  <li class="listitem">
+                     <p>The <a class="link" href="chapter.panes.html#panes.notes" title="Notepad">
+                           <span class="guilabel">Notepad</span>
+                        </a>
+		pane</p>
+                  </li>
+                  <li class="listitem">
+                     <p>The <a class="link" href="chapter.panes.html#panes.fuzzy.matches" title="Fuzzy Matches">
+                           <span class="guilabel">Fuzzy Matches</span>
+                        </a> pane</p>
+                  </li>
+                  <li class="listitem">
+                     <p>The <a class="link" href="chapter.panes.html#panes.glossary" title="Glossaries">
+                           <span class="guilabel">Glossaries</span>
+                        </a> pane</p>
+                  </li>
+                  <li class="listitem">
+                     <p>The <a class="link" href="chapter.panes.html#panes.segment.properties" title="Segment properties">
+                           <span class="guilabel">Segment
+    properties</span>
+                        </a> pane</p>
+                  </li>
+                  <li class="listitem">
+                     <p>The <a class="link" href="chapter.panes.html#panes.comments" title="Comments">
+                           <span class="guilabel">Comments</span>
+                        </a> pane</p>
+                  </li>
+                  <li class="listitem">
+                     <p>The <a class="link" href="chapter.panes.html#panes.multipletranslations" title="Multiple Translations">
+                           <span class="guilabel">Multiple
+    Translations</span>
+                        </a> pane</p>
+                  </li>
+                  <li class="listitem">
+                     <p> The <a class="link" href="chapter.panes.html#panes.dictionary" title="Dictionaries">
+                           <span class="guilabel">Dictionaries</span>
+                        </a> and <a class="link" href="chapter.panes.html#panes.machinetranslation" title="Machine Translations">
+                           <span class="guilabel">Machine
+    Translations</span>
+                        </a> panes are docked</p>
+                  </li>
+                  <li class="listitem">
+                     <p>The <a class="link" href="chapter.panes.html#panes.statusbar" title="Status bar">
+                           <span class="guilabel">Status bar</span>
+                        </a> (on the right), which contains
+		project information</p>
+                  </li>
+               </ol>
+            </div>
+            <p>Use the various options in the <a class="link" href="chapter.menus.html#menus.view" title="View">
+                  <span class="guimenu">View</span>
+               </a> menu and move the various <a class="link" href="chapter.panes.html" title="Panes">panes</a> around to obtain the layout that fits
+	your workflow best.</p>
+            <div class="warning">
+               <h3 class="title">Warning</h3>
+               <p>Use <a class="link" href="chapter.menus.html#menus.view" title="View">
+                     <span class="guimenu">View</span>
+                  </a>
+                  <a class="link" href="chapter.menus.html#menus.view.restore.main.window">
+                     <span class="guimenuitem">Restore Main
+      Window</span>
+                  </a> if you run into
+	  problems while rearranging the window layout.</p>
+            </div>
+         </section>
+         <section class="section" id="panes.principles">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">Principles</h2>
+                  </div>
+               </div>
+            </div>
+            <div class="variablelist">
+               <dl class="variablelist">
+                  <dt id="panes.manipulation">
+                     <span class="term" id="panes.manipulation.title">Manipulation</span>
+                  </dt>
+                  <dd>
+                     <p>The main window consists of several panes, described here, menus,
+          described in the <a class="link" href="chapter.menus.html" title="Menus">Menus</a> chapter, and a status bar, described
+          <a class="link" href="chapter.panes.html#panes.statusbar" title="Status bar">below</a>. You can click and 
+          hold the name of a pane to drag it to a new position or even undock it
+          as a separate window.</p>
+                     <p>The top right corner of each pane shows different icons
+          depending on the type of pane and its current status:</p>
+                     <div class="table" id="table.pane.widgets">
+                        <div class="table-title">Table 1. Pane widgets</div>
+                        <div class="table-contents">
+                           <table style="border-collapse: collapse; border-top: 1px solid ; border-bottom: 1px solid ; border-left: 1px solid ; border-right: 1px solid ; ">
+                              <colgroup>
+                                 <col />
+                                 <col />
+                              </colgroup>
+                              <tbody>
+                                 <tr>
+                                    <td style="border-right: 1px solid ; border-bottom: 1px solid ; ">
+                                       <span class="inlinemediaobject">
+                                          <img src="images/Settings.png" width="60%" />
+                                       </span>
+                                    </td>
+                                    <td style="border-bottom: 1px solid ; ">Lists the various extra <span class="bold">
+                                          <strong>actions</strong>
+                                       </span> available in the pane.</td>
+                                 </tr>
+                                 <tr>
+                                    <td style="border-right: 1px solid ; border-bottom: 1px solid ; ">
+                                       <span class="inlinemediaobject">
+                                          <img src="images/Minimize.png" width="60%" />
+                                       </span>
+                                    </td>
+                                    <td style="border-bottom: 1px solid ; ">
+                                       <span class="bold">
+                                          <strong>Minimizes</strong>
+                                       </span> the
+                  pane to a tab at the bottom of the window.</td>
+                                 </tr>
+                                 <tr>
+                                    <td style="border-right: 1px solid ; border-bottom: 1px solid ; ">
+                                       <span class="inlinemediaobject">
+                                          <img src="images/Maximize.png" width="60%" />
+                                       </span>
+                                    </td>
+                                    <td style="border-bottom: 1px solid ; ">
+                                       <span class="bold">
+                                          <strong>Maximizes</strong>
+                                       </span> the pane</td>
+                                 </tr>
+                                 <tr>
+                                    <td style="border-right: 1px solid ; border-bottom: 1px solid ; ">
+                                       <span class="inlinemediaobject">
+                                          <img src="images/Restore.png" width="60%" />
+                                       </span>
+                                    </td>
+                                    <td style="border-bottom: 1px solid ; ">
+                                       <span class="bold">
+                                          <strong>Restores</strong>
+                                       </span> a maximized
+                  pane to its previous layout.</td>
+                                 </tr>
+                                 <tr>
+                                    <td style="border-right: 1px solid ; border-bottom: 1px solid ; ">
+                                       <span class="inlinemediaobject">
+                                          <img src="images/Undock.png" width="60%" />
+                                       </span>
+                                    </td>
+                                    <td style="border-bottom: 1px solid ; ">
+                                       <span class="bold">
+                                          <strong>Undocks</strong>
+                                       </span> the pane from
+                  the main window.</td>
+                                 </tr>
+                                 <tr>
+                                    <td style="border-right: 1px solid ; ">
+                                       <span class="inlinemediaobject">
+                                          <img src="images/Dock.png" width="60%" />
+                                       </span>
+                                    </td>
+                                    <td>
+                                       <span class="bold">
+                                          <strong>Returns</strong>
+                                       </span> the pane to
+                  the main window.</td>
+                                 </tr>
+                              </tbody>
+                           </table>
+                        </div>
+                     </div>
+                     <br class="table-break" />
+                     <p>You can group panes in the same area of the window. Doing so
+          shows a tab with the name of the pane at the top of the group. Panes
+          can be resized by dragging the separators between them.</p>
+                     <div class="note">
+                        <h3 class="title">Note</h3>
+                        <p>Use <a class="link" href="chapter.menus.html#menus.view" title="View">
+                              <span class="guimenu">View</span>
+                           </a>
+                           <a class="link" href="chapter.menus.html#menus.view.restore.main.window">
+                              <span class="guimenuitem">Restore Main
+      Window</span>
+                           </a> to go back to the default
+            layout if you lose track of the changes you made to the user
+            interface and can no longer see certain panes.</p>
+                     </div>
+                  </dd>
+                  <dt id="panes.context.menus">
+                     <span class="term" id="panes.context.menus.title">Context menus</span>
+                  </dt>
+                  <dd>
+                     <p>Some panes have a context menu. You can call that menu using
+          the standard method for your OS, or with the OmegaT defined
+          shortcuts: </p>
+                     <div class="itemizedlist">
+                        <ul class="itemizedlist" style="list-style-type: disc; ">
+                           <li class="listitem">
+                              <p>On Windows and Linux: <span class="keycap">
+                                    <strong>Menu</strong>
+                                 </span>
+                              </p>
+                           </li>
+                           <li class="listitem">
+                              <p>On macOS: <span class="keycap">
+                                    <strong>S</strong>
+                                 </span>+<span class="keycap">
+                                    <strong>Esc</strong>
+                                 </span>
+                              </p>
+                           </li>
+                        </ul>
+                     </div>
+                  </dd>
+                  <dt id="panes.drag.and.drop">
+                     <span class="term" id="panes.drag.and.drop.title">Dragging and dropping</span>
+                  </dt>
+                  <dd>
+                     <p>Files can be dragged and dropped on certain panes, with the
+          following results:</p>
+                     <div class="variablelist">
+                        <dl class="variablelist">
+                           <dt>
+                              <span class="term">Editor pane</span>
+                           </dt>
+                           <dd>
+                              <p>Dropping an OmegaT project file
+                (<code class="filename">omegat.project</code>) or a full project here
+                will open the corresponding project after closing the
+                currently open project, if any.</p>
+                              <p>Dropping other files will copy them to the <code class="filename">source</code> folder. This also applies
+                to the <a class="link" href="chapter.windows.and.dialogs.html#windows.source.files.list" title="Source Files">
+                                    <span class="guilabel">Source
+  Files</span>
+                                 </a> window.</p>
+                           </dd>
+                           <dt>
+                              <span class="term">Fuzzy Matches pane</span>
+                           </dt>
+                           <dd>
+                              <p>Dropping <code class="filename">.tmx</code> files here will copy
+                them to the <code class="filename">tm</code>
+                folder.</p>
+                           </dd>
+                           <dt>
+                              <span class="term">Glossaries pane</span>
+                           </dt>
+                           <dd>
+                              <p>Dropping files with a recognized glossary extension
+                (<code class="filename">.txt</code>, <code class="filename">.tab</code>, etc.)
+                here will copy them to the <code class="filename">glossary</code> folder.</p>
+                           </dd>
+                        </dl>
+                     </div>
+                  </dd>
+                  <dt id="panes.notifications">
+                     <span class="term" id="panes.notifications.title">Notifications</span>
+                  </dt>
+                  <dd>
+                     <p>If a pane is closed but has contents to display, OmegaT can
+          temporarily highlight the pane tab in orange when you enter the
+          segment.</p>
+                     <p>By default, the <span class="guilabel">Comments</span> and
+		  <span class="guilabel">Notepad</span> panes have notifications enabled.</p>
+                     <p>To enable or disable notifications,</p>
+                     <div class="itemizedlist">
+                        <ul class="itemizedlist" style="list-style-type: disc; ">
+                           <li class="listitem">
+                              <p>Enter the pane.</p>
+                           </li>
+                           <li class="listitem">
+                              <p>Click on the <span class="guilabel">Action</span> widget at the top
+			  right.</p>
+                           </li>
+                           <li class="listitem">
+                              <p>Select <span class="guilabel">Notify Me When a Segment
+			  Has...</span> (where ... varies depending on the pane for which you
+			  are enabling notifications.</p>
+                           </li>
+                        </ul>
+                     </div>
+                     <p>The following panes can provide notifications:</p>
+                     <div class="itemizedlist">
+                        <ul class="itemizedlist" style="list-style-type: disc; ">
+                           <li class="listitem">
+                              <p>Comments</p>
+                           </li>
+                           <li class="listitem">
+                              <p>Dictionaries</p>
+                           </li>
+                           <li class="listitem">
+                              <p>Fuzzy Matches</p>
+                           </li>
+                           <li class="listitem">
+                              <p>Glossaries</p>
+                           </li>
+                           <li class="listitem">
+                              <p>Multiple Translations</p>
+                           </li>
+                           <li class="listitem">
+                              <p>Notepad</p>
+                           </li>
+                           <li class="listitem">
+                              <p>Segment Properties</p>
+                              <p>The <span class="guilabel">Segment Properties</span> pane allows
+			  notification settings for each of its item.</p>
+                              <p>In <span class="guilabel">Table View</span>, right click on the item
+			  and select <span class="guilabel">Notify Me When a Segment Has...</span>
+			  (where ... varies according to the desired notification).</p>
+                              <p>In <span class="guilabel">List View</span>, right click on the
+			  <span class="guilabel">Action</span> widget at the right-end of the
+			  selected property line and select <span class="guilabel">Notify Me When a
+			  Segment Has...</span> (where ... varies according to the desired notification).</p>
+                           </li>
+                        </ul>
+                     </div>
+                  </dd>
+               </dl>
+            </div>
+         </section>
+         <section class="section" id="panes.editor">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">
+                        <span class="guilabel">Editor</span>
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>This is where you type and edit your translations.</p>
+            <p>The text is split into numbered segments. You can scroll through the
+    document and double-click on any segment to open and edit it.</p>
+            <div class="example" id="panes.editor.default.editor.writing.space">
+               <div class="example-title">Example 7. Default editor
+	  writing space</div>
+               <div class="example-contents">
+                  <p>
+		
+                  </p>
+                  <pre class="programlisting">— ¶ —————————————————————
+
+<span class="token">Hide Tags</span>
+|Dissimuler les balises<span class="token">&lt;segment 2148 ¶&gt;</span>
+
+— ¶ —————————————————————
+
+When enabled, all formatting in the source segments are hidden.</pre>
+               </div>
+            </div>
+            <br class="example-break" />
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>The first line, in bold characters against a green background,
+        is the source text to translate.</p>
+                  </li>
+                  <li class="listitem">
+                     <p>The <span class="bold">
+                           <strong>translation field</strong>
+                        </span> is the
+        second line, between the left border and the segment marker on the
+        right. The <span class="bold">
+                           <strong>translation field</strong>
+                        </span> is where
+        you enter your translation.</p>
+                  </li>
+                  <li class="listitem">
+                     <p>The segment marker here is <code class="literal">&lt;segment 2148
+        ¶&gt;</code>.</p>
+                     <p>
+                        <code class="literal">2148</code> is the number of the segment in the
+        project and the <code class="literal">¶</code> symbol indicates that the segment
+        is the first segment in a paragraph.</p>
+                  </li>
+                  <li class="listitem">
+                     <p>The cursor is locked into the translation field
+        by default.</p>
+                     <p>Use <span class="keycap">
+                           <strong>F2</strong>
+                        </span> to unlock it and freely move it
+        back and forth between the translation field and other parts of
+        the pane.</p>
+                  </li>
+                  <li class="listitem">
+                     <p>The line below the translation field is a different
+        segment.</p>
+                  </li>
+                  <li class="listitem">
+                     <p>Use <a class="link" href="chapter.menus.html#menus.goto" title="Go To">
+                           <span class="guimenu">Go To</span>
+                        </a>
+                        <a class="link" href="chapter.menus.html#menus.goto.next.untranslated.segment">
+                           <span class="guimenuitem">Next
+      Untranslated Segment</span>
+      
+                           <span class="keycap">
+                              <strong>C</strong>
+                           </span>+<span class="keycap">
+                              <strong>U</strong>
+                           </span>
+                        </a> or other navigation commands
+        to:</p>
+                     <div class="itemizedlist">
+                        <ul class="itemizedlist" style="list-style-type: circle; ">
+                           <li class="listitem">
+                              <p>register the contents of the translation field in the 
+            project translation memory, and</p>
+                           </li>
+                           <li class="listitem">
+                              <p>enter the next segment to translate.</p>
+                           </li>
+                        </ul>
+                     </div>
+                     <p>See the <a class="link" href="chapter.menus.html#menus.goto" title="Go To">
+                           <span class="guimenu">Go To</span>
+                        </a>
+		menu for details.</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="note">
+               <h3 class="title">Note</h3>
+               <p>Modify the Editor display to suit your workflow.</p>
+               <p>Modifications can include:</p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>Changing the font as described in the <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.fonts" title="Font">
+                              <span class="guilabel">Font</span>
+                           </a> preference.</p>
+                     </li>
+                     <li class="listitem">
+                        <p>Showing or hiding paragraph delimitations using <a class="link" href="chapter.menus.html#menus.view" title="View">
+                              <span class="guimenu">View</span>
+                           </a>
+                           <a class="link" href="chapter.menus.html#menus.view.mark.paragraph.delimitations">
+                              <span class="guimenuitem">Display
+      Paragraph Delimitations</span>
+                           </a>.</p>
+                     </li>
+                     <li class="listitem">
+                        <p>Changing the paragraph delimitation format, defined in the <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.editor.paragraph.delimitation.format">
+                              <code class="option">Paragraph
+		delimitation format</code>
+                           </a>
+		  preference.</p>
+                     </li>
+                     <li class="listitem">
+                        <p>Showing segment modification information using <a class="link" href="chapter.menus.html#menus.view" title="View">
+                              <span class="guimenu">View</span>
+                           </a>
+                           <a class="link" href="chapter.menus.html#menus.view.modification.info">
+                              <span class="guisubmenu">Display
+      Modification Info</span>
+                           </a>.</p>
+                     </li>
+                     <li class="listitem">
+                        <p>Showing or hiding source segments using <a class="link" href="chapter.menus.html#menus.view" title="View">
+                              <span class="guimenu">View</span>
+                           </a>
+                           <a class="link" href="chapter.menus.html#menus.view.display.source.segments">
+                              <span class="guimenuitem">Display
+      Source Segments</span>
+                           </a>.</p>
+                     </li>
+                     <li class="listitem">
+                        <p>Highlighting translated segments using <a class="link" href="chapter.menus.html#menus.view" title="View">
+                              <span class="guimenu">View</span>
+                           </a>
+                           <a class="link" href="chapter.menus.html#menus.view.mark.translated.segments">
+                              <span class="guimenuitem">Highlight
+      Translated Segments</span>
+                           </a>.</p>
+                     </li>
+                     <li class="listitem">
+                        <p>Automatically inserting the source text in the translation
+      field by disabling the <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.editor.leave.the.segment.empty">
+                              <code class="option">Leave the
+		segment empty</code>
+                           </a>
+		  preference.</p>
+                     </li>
+                     <li class="listitem">
+                        <p>Inserting the best fuzzy match above the threshold defined in
+		  <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.editor.insert.the.best.fuzzy.match">
+                              <code class="option">Insert
+		the best fuzzy match</code>
+                           </a>
+		  preference.</p>
+                     </li>
+                     <li class="listitem">
+                        <p>Defining text that you want to leave out of the translation,
+		  enabled in the <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation">
+                              <code class="option">Flagged
+		text</code>
+                           </a>
+		  preference.</p>
+                     </li>
+                  </ul>
+               </div>
+               <p>See the <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.editor" title="Editor">
+                     <span class="guilabel">Editor</span>
+                  </a> preferences and the <a class="link" href="chapter.menus.html#menus.view" title="View">
+                     <span class="guimenu">View</span>
+                  </a> menu for details.
+	  </p>
+            </div>
+            <div class="variablelist">
+               <dl class="variablelist">
+                  <dt>
+                     <span class="term">Empty translations</span>
+                  </dt>
+                  <dd>
+                     <p>If you leave the translation field empty, OmegaT will treat the
+          segment as untranslated and keep it in the original language when it
+          creates the translated documents.</p>
+                  </dd>
+                  <dt>
+                     <span class="term">Translations equal to the source</span>
+                  </dt>
+                  <dd>
+                     <p>OmegaT can store translations that are identical to the source
+          text. This can be useful for documents that contain trademarks, names
+          or other proper nouns, or sections in a third language that do not
+          require translation.</p>
+                  </dd>
+                  <dt>
+                     <span class="term">Dragging text</span>
+                  </dt>
+                  <dd>
+                     <p>It is possible to drag text from anywhere in the main window and
+          drop it into the translation field. Text dragged from outside the
+          translation field is copied, while text dragged from within the
+          translation field is moved.</p>
+                  </dd>
+                  <dt id="panes.editor.overwriting">
+                     <span class="term" id="panes.editor.overwriting.title">Overwriting</span>
+                  </dt>
+                  <dd>
+                     <p>By default, typing text inserts the new text after the cursor in
+          the typing direction. To overwrite the existing text, use the
+          following keys:</p>
+                     <div class="itemizedlist">
+                        <ul class="itemizedlist" style="list-style-type: disc; ">
+                           <li class="listitem">
+                              <p>On Windows and Linux: <span class="keycap">
+                                    <strong>INSERT</strong>
+                                 </span>
+                              </p>
+                           </li>
+                           <li class="listitem">
+                              <p>On macOS: <span class="keycap">
+                                    <strong>F3</strong>
+                                 </span>
+                              </p>
+                           </li>
+                        </ul>
+                     </div>
+                     <p>The writing mode (overwrite - <span class="guilabel">OVR</span> or insert
+          - <span class="guilabel">INS</span>) is shown at the right of the <a class="link" href="chapter.panes.html#panes.statusbar" title="Status bar">status bar</a>. The same key toggles between each mode.</p>
+                  </dd>
+                  <dt id="panes.editor.cursor.lock">
+                     <span class="term" id="panes.editor.cursor.lock.title">Cursor lock</span>
+                  </dt>
+                  <dd>
+                     <p>By default, the cursor is locked in the translation field, and
+          the arrow keys cannot be used to move in the source text.</p>
+                     <p>Pressing <span class="keycap">
+                           <strong>F2</strong>
+                        </span> unlocks the cursor and makes it
+          possible to use the arrow keys to move in the source text (or anywhere
+          else in the editor). This allows you to select text using the
+          keyboard.</p>
+                     <p>The cursor status (locked - <span class="guilabel">LCK</span> or unlocked
+          - <span class="guilabel">UNL</span>) is shown at the right of the <a class="link" href="chapter.panes.html#panes.statusbar" title="Status bar">status bar</a>. The same key toggles
+          between locking and unlocking the cursor.</p>
+                  </dd>
+                  <dt id="panes.editor.context.menu">
+                     <span class="term" id="panes.editor.context.menu.title">Context menu</span>
+                  </dt>
+                  <dd>
+                     <p>Default shortcut:</p>
+                     <div class="itemizedlist">
+                        <ul class="itemizedlist" style="list-style-type: disc; ">
+                           <li class="listitem">
+                              <p>On Windows and Linux: <span class="keycap">
+                                    <strong>Menu</strong>
+                                 </span>
+                              </p>
+                           </li>
+                           <li class="listitem">
+                              <p>On macOS:
+              <span class="keycap">
+                                    <strong>S</strong>
+                                 </span>+<span class="keycap">
+                                    <strong>Esc</strong>
+                                 </span>
+                              </p>
+                           </li>
+                        </ul>
+                     </div>
+                     <p>You can also bring up the menu by right-clicking the mouse
+		  (<span class="keycap">
+                           <strong>C</strong>
+                        </span> + <span class="keycap">
+                           <strong>click</strong>
+                        </span> on macOS).</p>
+                     <p>The Editor pane context menu offers various functions available
+          from the <a class="link" href="chapter.menus.html#menus.edit" title="Edit">
+                           <span class="guimenu">Edit</span>
+                        </a> menu, notably:</p>
+                     <div class="itemizedlist">
+                        <ul class="itemizedlist" style="list-style-type: disc; ">
+                           <li class="listitem">
+                              <p>Matched glossary items, with comments, if any presented as a
+        tooltip. Use <a class="link" href="chapter.menus.html#menus.view" title="View">
+                                    <span class="guimenu">View</span>
+                                 </a>
+                                 <a class="link" href="chapter.menus.html#menus.view.mark.glossary.matches">
+                                    <span class="guimenuitem">Mark
+      Glossary Matches</span>
+                                 </a> to enable this
+			  feature.</p>
+                           </li>
+                           <li class="listitem">
+                              <p>
+                                 <span class="guilabel">Cut</span>, <span class="guilabel">Copy</span>,
+        <span class="guilabel">Paste</span> functions,</p>
+                           </li>
+                           <li class="listitem">
+                              <p>
+                                 <span class="guilabel">Go To Segment</span> (to jump to the segment
+        under the pointer).</p>
+                           </li>
+                           <li class="listitem">
+                              <p>
+                                 <span class="guilabel">Search Dictionaries</span> (to search for the
+        selected term in an installed dictionary).</p>
+                           </li>
+                           <li class="listitem">
+                              <p>
+                                 <span class="guilabel">Add Glossary Entry</span> (equivalent to using
+        <a class="link" href="chapter.menus.html#menus.edit" title="Edit">
+                                    <span class="guimenu">Edit</span>
+                                 </a>
+                                 <a class="link" href="chapter.menus.html#menus.edit.create.glossary.entry">
+                                    <span class="guimenuitem">Create Glossary Entry...</span>
+	  
+                                    <span class="keycap">
+                                       <strong>C</strong>
+                                    </span>+<span class="keycap">
+                                       <strong>S</strong>
+                                    </span>+<span class="keycap">
+                                       <strong>G</strong>
+                                    </span>
+	  
+                                 </a>).</p>
+                           </li>
+                        </ul>
+                     </div>
+                     <p>If you have selected text and defined entries in the <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.external.searches" title="Global External Searches">
+                           <span class="guilabel">Global External
+	Searches</span>
+                        </a> preferences, they
+          will also be displayed in this menu (as will local searches).</p>
+                  </dd>
+                  <dt id="panes.editor.auto.completion.menu">
+                     <span class="term" id="panes.editor.auto.completion.menu.title">Auto-completion
+        menu</span>
+                  </dt>
+                  <dd>
+                     <p>Default shortcut:</p>
+                     <div class="itemizedlist">
+                        <ul class="itemizedlist" style="list-style-type: disc; ">
+                           <li class="listitem">
+                              <p>On Windows and Linux:
+              <span class="keycap">
+                                    <strong>C</strong>
+                                 </span>+<span class="keycap">
+                                    <strong>Space</strong>
+                                 </span>
+                              </p>
+                           </li>
+                           <li class="listitem">
+                              <p>On macOS: <span class="keycap">
+                                    <strong>Esc</strong>
+                                 </span>
+                              </p>
+                           </li>
+                        </ul>
+                     </div>
+                     <p>This menu offers the auto-completion options set in the <a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.auto.completion" title="Auto-Completion">
+                           <span class="guilabel">Auto-Completion</span>
+                        </a> preferences.</p>
+                  </dd>
+                  <dt id="panes.editor.navigation">
+                     <span class="term" id="panes.editor.navigation.title">Navigation</span>
+                  </dt>
+                  <dd>
+                     <p>Use <a class="link" href="chapter.menus.html#menus.goto" title="Go To">
+                           <span class="guimenu">Go To</span>
+                        </a>
+                        <a class="link" href="chapter.menus.html#menus.goto.notes.pane">
+                           <span class="guimenuitem">Notepad</span>
+	  
+                           <span class="keycap">
+                              <strong>C</strong>
+                           </span>+<span class="keycap">
+                              <strong>A</strong>
+                           </span>+<span class="keycap">
+                              <strong>N</strong>
+                           </span>
+                        </a> to enter the pane and add or
+		  modify a note.</p>
+                     <p>Use <a class="link" href="chapter.menus.html#menus.goto" title="Go To">
+                           <span class="guimenu">Go To</span>
+                        </a>
+                        <a class="link" href="chapter.menus.html#menus.goto.editor.pane">
+                           <span class="guimenuitem">Editor</span>
+      
+                           <span class="keycap">
+                              <strong>C</strong>
+                           </span>+<span class="keycap">
+                              <strong>A</strong>
+                           </span>+<span class="keycap">
+                              <strong>E</strong>
+                           </span>
+                        </a> to go back to the
+		  Editor.</p>
+                  </dd>
+               </dl>
+            </div>
+         </section>
+         <section class="section" id="panes.fuzzy.matches">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">
+                        <span class="guilabel">Fuzzy Matches</span>
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>The match viewer shows the segments from your translation memories that
+    are most similar to the segment you are currently translating.</p>
+            <p>Matches are taken from both the internal project translation
+    memory created in real time as you translate the project, and
+    external memories you have imported from previous projects or
+    received from third parties. See the <a class="link" href="chapter.how.to.html#how.to.use.tm" title="Use translation memories">Use translation memories</a> how-to for details.</p>
+            <p>When you enter a segment, the first fuzzy match (the one with the
+    highest match percentage) is automatically selected. You can press
+    <span class="keycap">
+                  <strong>C</strong>
+               </span>+<span class="keycap">
+                  <strong>2, 3, 4, or 5</strong>
+               </span>, or use <a class="link" href="chapter.menus.html#menus.edit" title="Edit">
+                  <span class="guimenu">Edit</span>
+               </a>
+               <a class="link" href="chapter.menus.html#menus.edit.select.match">
+                  <span class="guisubmenu">Select Match</span>
+               </a>, to select
+    a different match .</p>
+            <div class="example" id="the.first.match">
+               <div class="example-title">Example 8. An empty segment and its first two matches</div>
+               <div class="example-contents">
+                  <p>
+		
+                  </p>
+                  <div class="informaltable" id="table.pane.matches">
+                     <table style="border-collapse: collapse; border-top: 1px solid ; border-bottom: 1px solid ; border-left: 1px solid ; border-right: 1px solid ; ">
+                        <colgroup>
+                           <col />
+                           <col />
+                        </colgroup>
+                        <tbody>
+                           <tr>
+                              <td style="border-right: 1px solid ; ">
+                                 <p>
+				  
+                                 </p>
+                                 <div class="informaltable">
+                                    <table style="border-collapse: collapse; border-top: 1px solid ; border-bottom: 1px solid ; border-left: 1px solid ; border-right: 1px solid ; ">
+                                       <colgroup>
+                                          <col />
+                                       </colgroup>
+                                       <tbody>
+                                          <tr>
+                                             <td>
+							
+                                                <pre class="programlisting">— ¶ —————————————————————
+
+<span class="token">Application Folder</span>
+|<span class="token">&lt;segment 1879 ¶&gt;</span>
+
+— ¶ —————————————————————
+</pre>
+                                             </td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <p>
+				
+                                 </p>
+				
+                              </td>
+                              <td>
+                                 <p>
+				  
+                                 </p>
+                                 <div class="informaltable">
+                                    <table style="border-collapse: collapse; border-top: 1px solid ; border-bottom: 1px solid ; border-left: 1px solid ; border-right: 1px solid ; ">
+                                       <colgroup>
+                                          <col />
+                                       </colgroup>
+                                       <tbody>
+                                          <tr>
+                                             <td>
+							
+                                                <pre class="programlisting">1. <span class="token">Top</span> Folder
+Dossier racine
+&lt;50/50/66% Orphan segments (+1 more)&gt;</pre>
+
+                                                <pre class="programlisting">2. Configuration Folder
+Dossier de configuration
+&lt;50/50/66% &gt;</pre>
+                                             </td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <p>
+				
+                                 </p>
+				
+                              </td>
+                           </tr>
+                        </tbody>
+                     </table>
+                  </div>
+                  <p>
+	  
+                  </p>
+               </div>
+            </div>
+            <br class="example-break" />
+            <p>The selected fuzzy match is highlighted in <span class="bold">
+                  <strong>bold</strong>
+               </span>. Words missing from the segment you are
+    translating are shown in <span class="bold">
+                  <strong>blue</strong>
+               </span>, and adjacent
+    parts in <span class="bold">
+                  <strong>green</strong>
+               </span> (when the adjacent part is a
+    space, as above, the part is left uncolored).</p>
+            <p>The match also displays three matching percentages.</p>
+            <p>These percentages have the following meaning, in order:</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Percentage calculated <span class="bold">
+                           <strong>with
+        stemming</strong>
+                        </span> based on the source language tokenizer, and
+        <span class="bold">
+                           <strong>ignoring tags and numbers</strong>
+                        </span> (generally
+        the highest).</p>
+                  </li>
+                  <li class="listitem">
+                     <p>Percentage calculated <span class="bold">
+                           <strong>without
+        stemming</strong>
+                        </span>, while still <span class="bold">
+                           <strong>ignoring tags and
+        numbers</strong>
+                        </span> (generally slightly lower).</p>
+                  </li>
+                  <li class="listitem">
+                     <p>Percentage calculated on <span class="bold">
+                           <strong>the entire text,
+        including tags and numbers</strong>
+                        </span> (generally the lowest).</p>
+                     <div class="note">
+                        <h3 class="title">Note</h3>
+                        <p>If the segment contains only numbers or symbols, this percentage
+		  will be the highest.</p>
+                     </div>
+                  </li>
+               </ul>
+            </div>
+            <p>You can change how matches are displayed or sorted. See the <a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.tm.matches" title="TM Matches">
+                  <code class="option">TM Matches</code>
+               </a> preferences for details.</p>
+            <p>Use <a class="link" href="chapter.menus.html#menus.edit" title="Edit">
+                  <span class="guimenu">Edit</span>
+               </a>
+               <a class="link" href="chapter.menus.html#menus.edit.replace.with.match.or.selection">
+                  <span class="guimenuitem">Replace With Match or Selection</span>
+	  
+                  <span class="keycap">
+                     <strong>C</strong>
+                  </span>+<span class="keycap">
+                     <strong>R</strong>
+                  </span>
+	  
+               </a> to replace the
+    translation field with the match, or <a class="link" href="chapter.menus.html#menus.edit" title="Edit">
+                  <span class="guimenu">Edit</span>
+               </a>
+               <a class="link" href="chapter.menus.html#menus.edit.insert.match.or.selection">
+                  <span class="guimenuitem">Insert
+      Match or Selection</span>
+      
+                  <span class="keycap">
+                     <strong>C</strong>
+                  </span>+<span class="keycap">
+                     <strong>I</strong>
+                  </span>
+               </a> to insert it at the cursor
+    position.</p>
+         </section>
+         <section class="section" id="panes.glossary">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">
+                        <span class="guilabel">Glossaries</span>
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>This pane shows terms from your glossary files that correspond
+    to terms in the current segment. The glossary files are located in the
+    project’s <a class="link" href="chapter.project.folder.html#project.folder.glossary" title="glossary">glossary</a> folder.</p>
+            <p>The source term is displayed before the “=” sign and the target terms
+    after it. If the entry contains comments, they are numbered and displayed on
+    separate lines below the terms. Terms found in the writable glossary are
+    shown in bold, while those from other glossaries are presented as regular
+    text.</p>
+            <div class="example" id="glossary.matches">
+               <div class="example-title">Example 9. Glossary matches</div>
+               <div class="example-contents">
+                  <p>
+		
+                  </p>
+                  <pre class="programlisting">Project = <span class="token">Projet</span>
+1. Projet de traduction
+
+Folder = <span class="token">Dossier</span>
+                  </pre>
+                  <p>
+	  
+                  </p>
+               </div>
+            </div>
+            <br class="example-break" />
+            <p>The glossary file name is shown as a tooltip when hovering over the
+    terms.</p>
+            <p>The comment field of an entry can contain hyperlinks, which can be
+    clicked for further reference.</p>
+            <p>Links to local files (<code class="filename">file:///PATH/filename</code>) open
+	in the associated program. Web addresses (<code class="filename">https://...</code>)
+	open in the default browser.</p>
+            <p>You can select a term in the glossaries pane and right click on it to
+    insert it into the translation.</p>
+            <p>Use <a class="link" href="chapter.menus.html#menus.view" title="View">
+                  <span class="guimenu">View</span>
+               </a>
+               <a class="link" href="chapter.menus.html#menus.view.mark.glossary.matches">
+                  <span class="guimenuitem">Mark
+      Glossary Matches</span>
+               </a> to underline glossary
+    matches.</p>
+            <p>You can then right-click on the underlined word in the source segment
+	to open a pop-up menu listing the translations available in your
+	glossaries. Select one to insert it at the current
+	cursor position in the segment.</p>
+            <p>You can use the glossary preferences to fine-tune how the glossaries
+    are displayed. See the <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.glossary" title="Glossaries">
+                  <span class="guilabel">Glossaries</span>
+               </a> preferences for details.</p>
+            <p>Modifications to any glossary file in the glossary folder are
+    immediately recognized by OmegaT and displayed in the glossaries pane.</p>
+            <p>OmegaT includes one writable glossary file per project. Use <a class="link" href="chapter.menus.html#menus.edit" title="Edit">
+                  <span class="guimenu">Edit</span>
+               </a>
+               <a class="link" href="chapter.menus.html#menus.edit.create.glossary.entry">
+                  <span class="guimenuitem">Create Glossary Entry...</span>
+	  
+                  <span class="keycap">
+                     <strong>C</strong>
+                  </span>+<span class="keycap">
+                     <strong>S</strong>
+                  </span>+<span class="keycap">
+                     <strong>G</strong>
+                  </span>
+	  
+               </a> to add terms to that
+    file.</p>
+            <p>See the <a class="link" href="chapter.appendices.html#app.glossaries" title="Glossaries">Glossaries</a> appendix for details.</p>
+         </section>
+         <section class="section" id="panes.dictionary">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">
+                        <span class="guilabel">Dictionaries</span>
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>This pane shows terms from your dictionary files that
+	correspond to terms in the current segment. The dictionary files are located
+	in the project’s <a class="link" href="chapter.project.folder.html#project.folder.dictionary" title="dictionary">dictionary</a> folder. See the <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.dictionary" title="Dictionaries">
+                  <span class="guilabel">Dictionaries</span>
+               </a> preferences for details.</p>
+         </section>
+         <section class="section" id="panes.machinetranslation">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">
+                        <span class="guilabel">Machine
+    Translations</span>
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>This pane, when opened, shows the suggestions
+    for the current segment produced by each enabled translation
+    engine . When suggestions from more than one engine are available,</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>the name of the engine appears after the translated
+        text,</p>
+                  </li>
+                  <li class="listitem">
+                     <p>the results are sorted alphabetically by engine name, and</p>
+                  </li>
+                  <li class="listitem">
+                     <p>the currently selected translation is highlighted.</p>
+                  </li>
+               </ul>
+            </div>
+            <p>Use <a class="link" href="chapter.menus.html#menus.edit" title="Edit">
+                  <span class="guimenu">Edit</span>
+               </a>
+               <a class="link" href="chapter.menus.html#menus.edit.replace.with.mt.title">
+                  <span class="guimenuitem">Replace with Machine Translation</span>
+	  
+                  <span class="keycap">
+                     <strong>C</strong>
+                  </span>+<span class="keycap">
+                     <strong>M</strong>
+                  </span>
+	  
+               </a> to replace the translation of
+    the current segment with the selected translation engine.</p>
+            <p>The selected engine name is assigned to the <em class="parameter">
+                  <code>Origin</code>
+               </em> property of the current segment.</p>
+            <p>If there is a connection or authentication error with a machine
+	translation engine, the status bar at the bottom of the window will briefly
+	display status message.</p>
+            <p>Make sure the service is enabled and your credentials are entered
+    correctly. If they are, you may need to contact the service provider for
+    assistance. Similarly, an error such as <code class="literal">Unable to parse translation
+    service response</code> suggests that there may be a communication
+    problem between your system and the provider's server.</p>
+            <p>See the <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.mt" title="Machine Translation">
+                  <span class="guilabel">Machine Translation</span>
+               </a> preferences for details.</p>
+         </section>
+         <section class="section" id="panes.multipletranslations">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">
+                        <span class="guilabel">Multiple
+    Translations</span>
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>A source segment that appears in multiple locations in the project may
+    require several different translations depending on context.</p>
+            <p>Use <a class="link" href="chapter.menus.html#menus.edit" title="Edit">
+                  <span class="guimenu">Edit</span>
+               </a>
+               <a class="link" href="chapter.menus.html#menus.edit.create.alternative.translation">
+                  <span class="guimenuitem">Create
+      Alternative Translation</span>
+               </a> to register an
+	alternative translation if the current translation of the segment is not
+	suitable. The entered translation will then be treated as an alternative
+	translation of the source segment.</p>
+            <p>Use <a class="link" href="chapter.menus.html#menus.edit" title="Edit">
+                  <span class="guimenu">Edit</span>
+               </a>
+               <a class="link" href="chapter.menus.html#menus.edit.use.as.default.translation">
+                  <span class="guimenuitem">Use as Default
+      Translation</span>
+               </a> to define one of the
+    alternatives—the most common or likely, for instance—as the default
+    translation.</p>
+         </section>
+         <section class="section" id="panes.notes">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">
+                        <span class="guilabel">Notepad</span>
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>This pane is an <span class="emphasis">
+                  <em>editable</em>
+               </span> space where you can
+    add notes to the currently active segment.</p>
+            <p>This lets you come back to it later to review the translation, check
+	that alternative translations are correct or, in shared projects, ask
+	colleagues for their opinion, for example.</p>
+            <p>Use <a class="link" href="chapter.menus.html#menus.goto" title="Go To">
+                  <span class="guimenu">Go To</span>
+               </a>
+               <a class="link" href="chapter.menus.html#menus.goto.next.note">
+                  <span class="guimenuitem">Next
+      Note</span>
+      
+                  <span class="keycap">
+                     <strong>C</strong>
+                  </span>+<span class="keycap">
+                     <strong>A</strong>
+                  </span>+<span class="keycap">
+                     <strong>N</strong>
+                  </span>
+               </a> and
+	<a class="link" href="chapter.menus.html#menus.goto" title="Go To">
+                  <span class="guimenu">Go To</span>
+               </a>
+               <a class="link" href="chapter.menus.html#menus.goto.previous.note">
+                  <span class="guimenuitem">Previous
+      Note</span>
+      
+                  <span class="keycap">
+                     <strong>C</strong>
+                  </span>+<span class="keycap">
+                     <strong>A</strong>
+                  </span>+<span class="keycap">
+                     <strong>P</strong>
+                  </span>
+               </a> to browse through the notes.</p>
+            <p>Use <a class="link" href="chapter.menus.html#menus.goto" title="Go To">
+                  <span class="guimenu">Go To</span>
+               </a>
+               <a class="link" href="chapter.menus.html#menus.goto.notes.pane">
+                  <span class="guimenuitem">Notepad</span>
+	  
+                  <span class="keycap">
+                     <strong>C</strong>
+                  </span>+<span class="keycap">
+                     <strong>A</strong>
+                  </span>+<span class="keycap">
+                     <strong>N</strong>
+                  </span>
+               </a> to
+	enter the pane and add or modify a note.</p>
+            <p>Use <a class="link" href="chapter.menus.html#menus.goto" title="Go To">
+                  <span class="guimenu">Go To</span>
+               </a>
+               <a class="link" href="chapter.menus.html#menus.goto.editor.pane">
+                  <span class="guimenuitem">Editor</span>
+      
+                  <span class="keycap">
+                     <strong>C</strong>
+                  </span>+<span class="keycap">
+                     <strong>A</strong>
+                  </span>+<span class="keycap">
+                     <strong>E</strong>
+                  </span>
+               </a> to
+	go back to the Editor.</p>
+            <div class="note">
+               <h3 class="title">Note</h3>
+               <p>The notes are stored in the translation memory of the project. They
+	  are <span class="emphasis">
+                     <em>not</em>
+                  </span> stored in the translated files.</p>
+            </div>
+         </section>
+         <section class="section" id="panes.comments">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">
+                        <span class="guilabel">Comments</span>
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Some file formats, such as the PO format, can contain comments
+    for the translator to add context to the translation. Such comments
+    are displayed here.</p>
+            <div class="note">
+               <h3 class="title">Note</h3>
+               <p>The <span class="guilabel">Comments</span> pane is <span class="emphasis">
+                     <em>not</em>
+                  </span>
+      editable. It only displays the information contained in the file.</p>
+               <p>Use the <a class="link" href="chapter.panes.html#panes.notes" title="Notepad">
+                     <span class="guilabel">Notepad</span>
+                  </a>
+	  pane to enter your own comments about a translation.</p>
+            </div>
+         </section>
+         <section class="section" id="panes.segment.properties">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">
+                        <span class="guilabel">Segment
+    properties</span>
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>All segments have properties. The properties are displayed in this
+    pane.</p>
+            <p>Common properties include:</p>
+            <div class="variablelist">
+               <dl class="variablelist">
+                  <dt>
+                     <span class="term">Is repetition</span>
+                  </dt>
+                  <dd>
+                     <p>Indicates that a segment is a repetition and specifies whether
+		  it is the FIRST instance.</p>
+                  </dd>
+                  <dt>
+                     <span class="term">File</span>
+                  </dt>
+                  <dd>
+                     <p>Indicates which file contains the segment.</p>
+                  </dd>
+               </dl>
+            </div>
+            <div class="note">
+               <h3 class="title">Note</h3>
+               <p>The Properties pane is <span class="emphasis">
+                     <em>not</em>
+                  </span> editable. It only
+      displays information that is related to the segment.</p>
+            </div>
+         </section>
+         <section class="section" id="panes.statusbar">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">
+                        <span class="guilabel">Status bar</span>
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>The bottom of the main window is the status bar.</p>
+            <p>The left side of the status bar displays information on project
+	actions or error messages.</p>
+            <div class="example" id="panes.statusbar.messages">
+               <div class="example-title">Example 10. Status bar messages
+      examples</div>
+               <div class="example-contents">
+                  <p>
+                     <code class="literal">Synchronization of repositories</code>
+                  </p>
+                  <p>→ OmegaT is opening a team project and synchronizes with the remote
+	  repository.</p>
+                  <p>
+                     <code class="literal">Jumping to last edited segment...</code>
+                  </p>
+                  <p>→ OmegaT opens the last edited segment from the last session.</p>
+                  <p>
+                     <code class="literal">Project autosaved at 10:48 PM</code>
+                  </p>
+                  <p>→ OmegaT has recently saved the project.</p>
+                  <p>
+                     <code class="literal">Translated files created</code>
+                  </p>
+                  <p>→ Files were created by the user.</p>
+               </div>
+            </div>
+            <br class="example-break" />
+            <p>The right side of the status bar indicates whether the cursor is
+    locked within the segment (see the <a class="link" href="chapter.panes.html#panes.editor.cursor.lock">Cursor lock</a> setting) and whether the cursor overwrites
+    the existing text (see the <a class="link" href="chapter.panes.html#panes.editor.overwriting">Overwriting</a> setting). It also displays
+    progress information.</p>
+            <p>Click on the figures to alternate between displaying progress as numbers or
+    percentages.</p>
+            <div class="example" id="panes.statusbar.widgets">
+               <div class="example-title">Example 11. Status bar information</div>
+               <div class="example-contents">
+                  <p>
+                     <code class="literal">LCK | OVR <span class="token">257/271 (12292/154896,
+	  177692)</span>
+                        <span class="token"> 35/0 </span>
+                     </code>
+                  </p>
+                  <div class="variablelist">
+                     <dl class="variablelist">
+                        <dt>
+                           <span class="term">Cursor status</span>
+                        </dt>
+                        <dd>
+                           <p>
+                              <code class="literal">LCK</code> indicates that the cursor is locked
+			inside the segment.</p>
+                           <p>
+                              <code class="literal">OVR</code> indicates that the cursor overwrites
+			the existing text.</p>
+                        </dd>
+                        <dt>
+                           <span class="term">In the file</span>
+                        </dt>
+                        <dd>
+                           <p>
+                              <span class="bold">
+                                 <strong>257</strong>
+                              </span> = number of
+			translated segments / <span class="bold">
+                                 <strong>271</strong>
+                              </span>
+			= total number of segments</p>
+                        </dd>
+                        <dt>
+                           <span class="term">In the project</span>
+                        </dt>
+                        <dd>
+                           <p>
+                              <span class="bold">
+                                 <strong>12292</strong>
+                              </span> = number of
+			unique translated segments / <span class="bold">
+                                 <strong>154896</strong>
+                              </span> = total number of unique
+			segments, <span class="bold">
+                                 <strong>(177692)</strong>
+                              </span> =
+			total number of segments</p>
+                        </dd>
+                        <dt>
+                           <span class="term">In the segment</span>
+                        </dt>
+                        <dd>
+                           <p>
+                              <span class="bold">
+                                 <strong>35</strong>
+                              </span> = number of characters in
+			the source / <span class="bold">
+                                 <strong>0</strong>
+                              </span> = number of
+			characters in the target area so far</p>
+                        </dd>
+                     </dl>
+                  </div>
+               </div>
+            </div>
+            <br class="example-break" />
+            <div class="example" id="panes.statusbar.widgets.percentage">
+               <div class="example-title">Example 12. Status bar
+      information, percentage mode</div>
+               <div class="example-contents">
+                  <p>
+                     <code class="literal">UNL | INS <span class="token">94.8% (14 left) / 7.9% (142,604 left),
+	  177,692</span> 
+                        <span class="token">35/0</span>
+                     </code>
+                  </p>
+                  <div class="variablelist">
+                     <dl class="variablelist">
+                        <dt>
+                           <span class="term">Cursor status</span>
+                        </dt>
+                        <dd>
+                           <p>
+                              <code class="literal">UNL</code> indicates that the cursor is not locked
+			inside the segment and can navigate around the editor window with
+			standard navigation commands.</p>
+                           <p>
+                              <code class="literal">INS</code> indicates that the cursor inserts
+			text.</p>
+                        </dd>
+                        <dt>
+                           <span class="term">In the file</span>
+                        </dt>
+                        <dd>
+                           <p>
+                              <span class="bold">
+                                 <strong>94.8%</strong>
+                              </span> = % of
+			translated segments / <span class="bold">
+                                 <strong>14</strong>
+                              </span>
+			= number of untranslated segments</p>
+                        </dd>
+                        <dt>
+                           <span class="term">In the project</span>
+                        </dt>
+                        <dd>
+                           <p>
+                              <span class="bold">
+                                 <strong>7.9%</strong>
+                              </span> = % of
+			translated segments / <span class="bold">
+                                 <strong>142,604</strong>
+                              </span> = number of untranslated
+			segments, <span class="bold">
+                                 <strong>(177,692)</strong>
+                              </span> =
+			total number of segments</p>
+                        </dd>
+                        <dt>
+                           <span class="term">In the segment</span>
+                        </dt>
+                        <dd>
+                           <p>
+                              <span class="bold">
+                                 <strong>35</strong>
+                              </span> = number of
+			characters in the source / <span class="bold">
+                                 <strong>0</strong>
+                              </span> = number of characters in the
+			target area so far</p>
+                        </dd>
+                     </dl>
+                  </div>
+               </div>
+            </div>
+            <br class="example-break" />
+         </section>
+      </section>
+      <footer>
+         <div class="navfooter">
+            <hr />
+            <table style="width: 100%; ">
+               <tr>
+                  <td style="width: 40%; text-align: left; ">
+                     <a accesskey="p" href="chapter.how.to.html">Prev</a> </td>
+                  <td style="width: 20%; text-align: center; "> </td>
+                  <td style="width: 40%; text-align: right; "> <a accesskey="n" href="chapter.menus.html">Next</a>
+                  </td>
+               </tr>
+               <tr>
+                  <td style="width: 40%; text-align: left; vertical-align: top; ">How To... </td>
+                  <td style="width: 20%; text-align: center; ">
+                     <a accesskey="h" href="index_.html">Home</a>
+                  </td>
+                  <td style="width: 40%; text-align: right; vertical-align: top; "> Menus</td>
+               </tr>
+            </table>
+         </div>
+      </footer>
+   </div>
+    </div>
+
+    
+  </body></html>

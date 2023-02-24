@@ -220,7 +220,7 @@ public final class Preferences {
 
     /** Hide segments with only tags **/
     public static final String HIDE_TAGONLY_SEGMENTS = "hide_tagonly_segments";
-    
+
     /** Expression for tag-only segment: can be changed by expert users, but should not be documented yet **/
     public static final String EXPR_TAGONLY_SEGMENTS = "expr_tagonly_segments";
     public static final String EXPR_TAGONLY_SEGMENTS_DEFAULT = "^[\\p{Zs}\\u200C]*(<[^>]+>[\\p{Zs}\\u200C]*)+$";

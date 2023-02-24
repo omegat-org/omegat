@@ -346,10 +346,10 @@ public class EditorSettings implements IEditorSettings {
 
         this.hideTagonlySegments = hideTos;
         Preferences.setPreference(Preferences.HIDE_TAGONLY_SEGMENTS, hideTos);
-        
+
         Core.getEditor().removeAttachedFilter(); // restore options-based filter
     }
-    
+
     /**
      * Get the filter based on selected checkbox menu items
      * Actually only option hideTagonlySegments is concerned but there may be others later
@@ -357,11 +357,11 @@ public class EditorSettings implements IEditorSettings {
     public IEditorFilter getMenusFilter() {
         Predicate<SourceTextEntry> p = null;
         if (this.hideTagonlySegments) {
-            final java.util.regex.Pattern PTN = java.util.regex.Pattern.compile(Preferences.getPreferenceDefault(
+            final java.util.regex.Pattern ptn = java.util.regex.Pattern.compile(Preferences.getPreferenceDefault(
                 Preferences.EXPR_TAGONLY_SEGMENTS, Preferences.EXPR_TAGONLY_SEGMENTS_DEFAULT));
             Predicate<SourceTextEntry> p1 = ste -> {
                     String txt = ste.getSrcText();
-                    return ! (PTN.matcher(txt).matches());
+                    return ! (ptn.matcher(txt).matches());
                 };
             // Cascade method to enable, in the future, to add more filters
             if (p == null) {

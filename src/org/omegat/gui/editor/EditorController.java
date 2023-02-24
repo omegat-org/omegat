@@ -2146,7 +2146,7 @@ public class EditorController implements IEditor {
             pane.revalidate();
             entriesFilterControlComponent = null;
         }
-        
+
         // Restore the filters which comes from View menu
         entriesFilter = settings.getMenusFilter();
         if (entriesFilter != null) {

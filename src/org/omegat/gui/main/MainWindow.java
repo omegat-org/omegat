@@ -465,7 +465,7 @@ public class MainWindow extends JFrame implements IMainWindow {
             StringBuilder fulltext = new StringBuilder(msg);
             if (ex != null) {
                 fulltext.append("\n");
-                for (String s : ex.toString().split("\\R")) {
+                for (String s : ex.getLocalizedMessage().split("\\R")) {
                     fulltext.append(WordUtils.wrap(s, 150, "\n    ", true));
                     fulltext.append("\n");
                 }

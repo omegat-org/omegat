@@ -199,7 +199,12 @@ dependencies {
                 attribute(Bundling.BUNDLING_ATTRIBUTE, project.objects.named(Bundling.class, Bundling.EXTERNAL))
             }
         }
-        implementation("com.github.ben-manes.caffeine:jcache:2.9.3")
+        implementation("com.github.ben-manes.caffeine:jcache:2.9.3") {
+            exclude module: 'caffeine'
+            attributes {
+                attribute(Bundling.BUNDLING_ATTRIBUTE, project.objects.named(Bundling.class, Bundling.EXTERNAL))
+            }
+        }
 
     }
 

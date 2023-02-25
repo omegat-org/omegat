@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd"
+[
+<!ENTITY % manualvariables SYSTEM "manualvariables.mod">
+%manualvariables;
+]>
+<article lang="ca" id="first.steps">
+  <title>OmegaT &vernb;</title>
+  <section>
+	<title id="first-steps">Primers passos</title>
+	<para>Premeu <keycap>F1</keycap> o accediu al menú <guimenu>&gt; Ajuda</guimenu> per a obrir el manual d'usuari. Inclou una introducció detallada a l'OmegaT. Per a començar a utilitzar l'OmegaT amb una configuració mínima, feu el següent:<orderedlist id="first-step-list">
+	  <listitem>
+		<para>Utilitzeu <guimenu>&gt; Projecte</guimenu> <guimenuitem>&gt; Crea...</guimenuitem> per a crear un projecte nou.</para>
+	  </listitem>
+	  <listitem>
+		<para>Canvieu els codis de llengua perquè reflecteixin les vostres llengües d'origen i destinació. Feu clic en <guibutton>D'acord</guibutton>.</para>
+
+		<para>→ L'OmegaT crearà un conjunt de carpetes que conté els vostres fitxers. També crearà una memòria de traducció buida que anirà emplenant en segon terme, segment a segment, a mesura que escriviu la traducció. Les coincidències d'aquesta memòria apareixeran en algun moment en la subfinestra <guilabel>Coincidències parcials</guilabel>.</para>
+	  </listitem>
+	  <listitem>
+		<para>Feu clic en <guibutton>Afegeix fitxers...</guibutton> i afegiu els fitxers que voleu traduir. Tanqueu la finestra.</para>
+
+		<para>→ L'OmegaT copiarà els fitxers seleccionats al projecte que heu creat en el pas anterior. Ara els mostra segment per segment perquè els traduïu.</para>
+	  </listitem>
+	  <listitem>
+		<para>Escriviu la traducció del primer segment. Premeu <keycap>Retorn</keycap>.</para>
+
+		<para>→ L'OmegaT enregistrarà aquest segment en la memòria de traducció del projecte i desplaçarà el cursor al segment següent.</para>
+	  </listitem>
+
+	  <listitem>
+		<para>Utilitzeu <guimenu>&gt; Projecte</guimenu><guimenuitem>&gt; Crea els fitxers traduïts</guimenuitem> per a crear el fitxer traduït en qualsevol moment.</para>
+
+		<para>→ L'OmegaT emmagatzemarà els fitxers traduïts en la carpeta <guilabel>target</guilabel> del projecte creat en el primer pas. Utilitzeu <guimenu>&gt; Projecte</guimenu> <guisubmenu>&gt; Accedeix als continguts del projecte</guisubmenu> per a accedir als fitxers.</para>
+	  </listitem>
+
+	  <listitem>
+		<para>Si voleu conèixer més detalls, llegiu el manual d'usuari.</para>
+	  </listitem>
+	</orderedlist>
+	</para>
+  </section>
+
+  <section>
+	<title id="freedoms">Llibertats</title>
+	<para>L'OmegaT és solució lliure de traducció assistida per ordinador (TAO) per a traductors professionals. Es distribueix sota els termes de la <emphasis>Llicència Pública General GNU, versió 3.0</emphasis>. Consulteu <guimenu>&gt; Ajuda</guimenu> <guimenu>&gt; Quant a</guimenu>. La llicència us concedeix les llibertats següents:<itemizedlist id="freedoms.list">
+	  <listitem>
+		<para>Llibertat d'executar l'OmegaT amb qualsevol finalitat</para>
+	  </listitem>
+
+	  <listitem>
+		<para>Llibertat d'estudiar el funcionament de l'OmegaT i modificar-lo perquè funcioni com vulgueu</para>
+	  </listitem>
+
+	  <listitem>
+		<para>Llibertat de distribuir còpies per a ajudar altres persones</para>
+	  </listitem>
+
+	  <listitem>
+		<para>Llibertat de distribuir còpies de les versions modificades a altres persones</para>
+	  </listitem>
+	</itemizedlist>
+	</para>
+  </section>
+</article>

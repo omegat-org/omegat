@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="menus.tools">
+  <title id="menus.tools.title"><guimenu>Eines</guimenu></title>
+
+  <para>Aquest menú us dona accés a una sèrie d'eines, incloent-hi un control de qualitat, informes de coincidències, un alineador i scripts.</para>
+
+  <example id="example.check.issues">
+	<title id="example.check.issues.title">Exemple de descripció d'una drecera</title>
+	<para>Windows i Linux: <keycombo><keycap>Control</keycap><keycap>Maj</keycap><keycap>V</keycap></keycombo></para>
+
+	<para>macOS: <keycombo><keycap>Maj</keycap><keycap>Ordre</keycap><keycap>V</keycap></keycombo></para>
+
+	<para><emphasis role="bold">Aquest manual:</emphasis> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>V</keycap></keycombo></para>
+  </example>
+
+  <variablelist>
+    <varlistentry id="menus.tools.check.issues">
+      <term id="menus.tools.check.issues.title"><guimenuitem>Comprova si hi ha errors...</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>V</keycap></keycombo></term>
+      <listitem>
+        <para>Aquesta eina de control de qualitat duu a terme totes les comprovacions automàtiques alhora i mostra els resultats en una finestra.</para>
+
+        <para>Es poden detectar quatre tipus d'errors:</para>
+
+        <itemizedlist>
+          <listitem>
+            <para><guilabel>Errors d'etiquetes</guilabel> (seleccionat sempre): detecta les etiquetes que falten o estan mal col·locades, incloent-hi les etiquetes personalitzades i el text marcat. Consulteu les preferències de <link linkend="dialogs.preferences.tag.processing" endterm="dialogs.preferences.tag.processing.title"/> per a conèixer més detalls.</para>
+
+			<note>
+			  <para>L'opció sempre està seleccionada.</para>
+			</note>
+          </listitem>
+
+          <listitem>
+            <para><guilabel>Errors ortogràfics</guilabel> (opcional): detecta els errors ortogràfics. Només funciona si s'ha instal·lat un diccionari ortogràfic. Consulteu les preferències de <link linkend="dialog.preferences.spellchecker" endterm="dialog.preferences.spellchecker.title"/> per a conèixer més detalls.</para>
+          </listitem>
+
+          <listitem>
+            <para><guilabel>Errors de terminologia</guilabel> (opcional): detecta tots els termes del glossari que no s'han traduït correctament. Consulteu les preferències de <link linkend="dialogs.preferences.glossary" endterm="dialogs.preferences.glossary.title"/> per a conèixer més detalls.</para>
+          </listitem>
+
+		  <listitem>
+            <para><guilabel>Errors del LanguageTool</guilabel> (opcional): detecta errors gramaticals o tipogràfics. Consulteu les preferències de <link linkend="dialog.preferences.languagetool.plugin" endterm="dialog.preferences.languagetool.plugin.title"/> per a conèixer més detalls.</para>
+          </listitem>
+        </itemizedlist>
+
+        <para>Els resultats es presenten en una taula en què:</para>
+        <itemizedlist>
+          <listitem>
+            <para>Si feu doble clic en una fila, s'activa el segment corresponent en la subfinestra «Editor».</para>
+          </listitem>
+
+          <listitem>
+            <para>Si feu clic en la capçalera d'una columna, es canvia l'ordre de la columna.</para>
+          </listitem>
+
+          <listitem>
+            <para>Si seleccioneu una fila o hi passeu el ratolí, es mostra una icona de menú contextual en la darrera columna. En fer clic en aquesta icona, teniu accions disponibles per a corregir o ignorar l'error.</para>
+
+			<note>
+			  <para>Per a forçar la comprovació d'errors cada vegada que sortiu d'un segment, habiliteu la preferència <link linkend="dialogs.preferences.editor.validate.tags.when.leaving.a.segment" endterm="dialogs.preferences.editor.validate.tags.when.leaving.a.segment.title"/>.</para>
+
+			  <para>Per a impedir la creació dels fitxers traduïts si es detecten errors d'etiquetes, habiliteu la preferència <link linkend="dialogs.preferences.tag.processing.do.not.allow.creating.translated.documents.with.tag.issues" endterm="dialogs.preferences.tag.processing.do.not.allow.creating.translated.documents.with.tag.issues.title"/>.</para>
+			</note>
+          </listitem>
+        </itemizedlist>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry id="menus.tools.check.issues.for.current.document">
+      <term id="menus.tools.check.issues.for.current.document.title"><guimenuitem>Comprova si hi ha errors en el fitxer actual</guimenuitem></term>
+      <listitem>
+        <para>Igual que l'opció anterior, però només per al fitxer que es mostra actualment en la subfinestra «Editor».</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry id="menus.tools.statistics">
+      <term id="menus.tools.statistics.title"><guimenuitem>Estadístiques</guimenuitem></term>
+      <listitem>
+        <para>Obre una finestra nova i mostra les estadístiques del projecte, com el recompte total de paraules o de segments del projecte, i els totals per a cada fitxer del projecte.</para>
+
+		<para>Les dades es desen en el fitxer <link linkend="project.folder.project.stats" endterm="project.folder.project.stats.title"/> de la carpeta <link linkend="project.folder.omegat.folder" endterm="project.folder.omegat.folder.title"/> del projecte.</para>
+
+		<note>
+		  <para>El recompte de paraules, el total de segments i altres elements es poden veure influïts pels factors següents:</para>
+		  
+		  <itemizedlist>
+			<listitem>
+			  <para>Paràmetres dels filtres de fitxers: alguns filtres permeten tenir en compte parts addicionals per a la traducció. Consulteu les <link linkend="filters.options">opcions</link> del filtre de fitxers per a conèixer més detalls.</para>
+			</listitem>
+
+			<listitem>
+			  <para>Regles de segmentació: unes regles diferents generaran un nombre de segments diferent. Consulteu l'annex <link linkend="app.segmentation" endterm="app.segmentation.title"/> per a conèixer més detalls.</para>
+			</listitem>
+
+			<listitem>
+			  <para>Etiquetes: les etiquetes de l'OmegaT no es compten mai en les estadístiques, però en alguns casos poden dividir termes i crear discrepàncies en la manera de comptar-les en l'OmegaT. Consulteu la preferència <link linkend="dialogs.project.properties.hide.tags" endterm="dialogs.project.properties.hide.tags.title"/> del quadre de diàleg <link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/> per a conèixer més detalls.</para>
+			</listitem>
+
+			<listitem>
+			  <para>Etiquetes personalitzades i text marcat: de la mateixa manera que les etiquetes de l'OmegaT, per defecte no es compten en les estadístiques, però podeu fer que l'OmegaT ho compti com a paraules. Consulteu les preferències de <link linkend="dialogs.preferences.tag.processing.count.protected.text.and.custom.tags.in.statistics" endterm="dialogs.preferences.tag.processing.count.protected.text.and.custom.tags.in.statistics.title"/> per a conèixer més detalls.</para>
+			</listitem>
+		  </itemizedlist>
+		</note>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry id="menus.tools.match.statistics">
+      <term id="menus.tools.match.statistics.title"><guimenuitem>Estadístiques de coincidències</guimenuitem></term>
+      <listitem>
+        <para>Mostra les estadístiques de coincidències del projecte: nombre de repeticions, coincidències exactes, coincidències parcials i no concordances per segments, paraules i caràcters.</para>
+
+		<para>Les dades es desen en el fitxer <link linkend="project.folder.omegat.project.stats.match" endterm="project.folder.omegat.project.stats.match.title"/> de la carpeta <link linkend="project.folder.omegat.folder" endterm="project.folder.omegat.folder.title"/> del projecte.</para>
+      </listitem>
+    </varlistentry>
+	
+    <varlistentry id="menus.tools.match.statistics.per.file">
+      <term id="menus.tools.match.statistics.per.file.title"><guimenuitem>Estadístiques de coincidències per fitxer</guimenuitem></term>
+      <listitem>
+        <para>Mostra les estadístiques de coincidències individuals: nombre de repeticions, coincidències exactes, coincidències parcials i no concordances per segments, paraules i caràcters, per a cada fitxer del projecte.</para>
+
+		<para>Les dades es desen en el fitxer <link linkend="project.folder.omegat.project.stats.match.per.file" endterm="project.folder.omegat.project.stats.match.per.file.title"/> de la carpeta <link linkend="project.folder.omegat.folder" endterm="project.folder.omegat.folder.title"/> del projecte.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry id="menus.tools.align.files">
+      <term id="menus.tools.align.files.title"><guimenuitem>Alinea fitxers...</guimenuitem></term>
+      <listitem>
+        <para>Seleccioneu els dos fitxers que vulgueu alinear (el fitxer d'origen i la traducció) i feu clic en <guibutton>D'acord</guibutton> per a obrir la finestra <link linkend="windows.aligner" endterm="windows.aligner.title"/>.</para>
+
+        <para>Els formats de fitxer admesos depenen de la configuració del projecte. Consulteu l'annex <link linkend="file.filters" endterm="file.filters.title"/> per a conèixer més detalls.</para>
+        <para>Els fitxers d'origen i de destinació poden tenir formats diferents (per exemple, es pot alinear un fitxer <filename>.docx</filename> amb un fitxer <filename>.pdf</filename>).</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry id="menus.tools.scripting">
+      <term id="menus.tools.scripting.title"><guimenuitem>Scripts...</guimenuitem></term>
+      <listitem>
+        <para>Obre la finestra <link linkend="windows.scripts" endterm="windows.scripts.title"/>, que us permet definir la ubicació on s'emmagatzemen els scripts, escriure i executar scripts i assignar-los una drecera.</para>
+		<para>La llista sota aquest element mostra 12 ranures possibles per a scripts. En fer clic en una ranura assignada, s'inicia l'script assignat a la ranura.</para>
+
+		<note>
+		  <para>Per a assignar un número a un script:</para>
+
+          <orderedlist>
+			<listitem>
+              <para>Obriu la finestra de scripts.</para>
+			</listitem>
+
+			<listitem>
+              <para>Seleccioneu l'script que voleu de la llista de l'esquerra.</para>
+			</listitem>
+
+			<listitem>
+              <para>En la part inferior de la finestra, feu clic dret en un número sense assignar i seleccioneu <guilabel>Afegeix l'script</guilabel>.</para>
+			</listitem>
+          </orderedlist>
+		</note>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry id="menus.tools.external.search.commands">
+      <term id="menus.tools.external.search.commands.title">Ordres de cerca externa</term>
+      <listitem>
+        <para>Si heu definit cerques externes en les preferències de <link linkend="dialogs.preferences.external.searches" endterm="dialogs.preferences.external.searches.title"/>, s'indiquen i hi podeu accedir aquí.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</section>

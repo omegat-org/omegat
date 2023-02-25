@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.windows.and.dialogs">
+  <title id="chapter.windows.and.dialogs.title">Finestres i quadres de diàleg</title>
+  
+  <para>Una <emphasis>finestra</emphasis> es pot mantenir oberta juntament amb l'editor i us permet interactuar-hi alhora.</para>
+  <para>Un <emphasis>quadre de diàleg</emphasis> requereix que feu accions i el tanqueu abans de tornar a traduir.</para>
+
+  <xi:include href="Dialogs_ProjectProperties.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+  <xi:include href="Windows_SourceFilesList.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+  <xi:include href="Windows_TextSearch.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+  <xi:include href="Windows_TextReplace.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+  <xi:include href="Windows_Aligner.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+  <xi:include href="Windows_Scripts.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+</chapter>

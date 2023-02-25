@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="menus.help">
+  <title id="menus.help.title"><guimenu>Ajuda</guimenu></title>
+
+  <para>Aquest menú us dona accés a informació que us ajudarà a treure el màxim profit de l'OmegaT.</para>
+
+  <variablelist>
+    <varlistentry id="menus.help.user.manual">
+      <term id="menus.help.user.manual.title"><guimenuitem>Manual d'usuari...</guimenuitem> <keycombo><keycap>F1</keycap></keycombo></term>
+      <listitem>
+        <para>Obre aquest manual en el navegador per defecte.</para>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry id="menus.help.about">
+      <term id="menus.help.about.title"><guimenuitem>Quant a...</guimenuitem></term>
+      <listitem>
+        <para>Mostra informació dels drets d'autor, crèdits i llicències.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry id="menus.help.last.changes">
+      <term id="menus.help.last.changes.title"><guimenuitem>Darrers Canvis...</guimenuitem></term>
+      <listitem>
+        <para>Mostra la llista de noves funcionalitats, millores i correccions d'errors per a cada versió nova.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry id="menus.help.log">
+      <term id="menus.help.log.title"><guimenuitem>Registre...</guimenuitem></term>
+      <listitem>
+        <para>Mostra el fitxer de registre actual. El títol del quadre de diàleg reflecteix el fitxer en ús actualment (que depèn del nombre d'instàncies de l'OmegaT en execució simultàniament).</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry id="menus.help.check.for.updates">
+      <term id="menus.help.check.for.updates.title"><guimenuitem>Comprova si hi ha actualitzacions...</guimenuitem></term>
+      <listitem>
+        <para>Comprova si hi ha disponible una versió més nova de l'OmegaT.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</section>

@@ -1,0 +1,715 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd"
+[
+<!ENTITY % manualvariables SYSTEM "manualvariables.mod">
+%manualvariables;
+]>
+<section id="file.filters">
+  <title id="file.filters.title">Filtres de fitxers</title>
+
+  <warning>
+	<para>Els filtres de fitxers són locals i específics d'un projecte determinat, o bé globals i disponibles per a tots els projectes que comparteixen una carpeta de configuració.</para>
+
+	<para>Per a conèixer més detalls, consulteu:</para>
+	<itemizedlist>
+	  <listitem>
+		<para><link linkend="dialogs.project.properties.filters" endterm="dialogs.project.properties.filters.title"/></para>
+	  </listitem>
+	  <listitem>
+		<para><link linkend="dialogs.preferences.file.filters" endterm="dialogs.preferences.file.filters.title"/></para>
+	  </listitem>
+	  <listitem>
+		<para><link linkend="configuration.folder" endterm="configuration.folder.title"/></para>
+	  </listitem>
+	</itemizedlist>
+  </warning>
+  
+  <para>Els filtres en negreta s'utilitzen en el projecte actual.</para>
+
+  <para>Podeu desmarcar la casella d'un filtre per a inhabilitar-lo si preferiu no traduir els fitxers associats. El contingut no es mostrarà per a la traducció.</para>
+
+  <note>
+	<para>Podeu ordenar els filtres per nom o en funció de si estan habilitats o no. Feu clic en la capçalera en qüestió per a ordenar-los en ordre ascendent o descendent.</para>
+  </note>
+
+  <para>Per a modificar les extensions de fitxer, el nom dels fitxers de destinació i les codificacions associades a un filtre, seleccioneu-lo en la llista i feu clic en el botó <guibutton>Edita...</guibutton>.</para>
+
+  <para>Alguns filtres proporcionen un botó <guibutton>Opcions...</guibutton> per a personalitzar encara més els paràmetres.</para>
+	
+  <para>Feu clic en el botó <guibutton>Reinicialitza els valors per defecte</guibutton> per a reinicialitzar els filtres de fitxer als paràmetres per defecte.</para>
+
+  <para>Les preferències dels filtres de fitxers globals modificades es desen en <link linkend="configuration.folder.extra.contents.filters" endterm="configuration.folder.extra.contents.filters.title"/>, en la carpeta de configuració. Consulteu <link linkend="configuration.folder" endterm="configuration.folder.title"/> per a conèixer més detalls. Si suprimiu aquest fitxer, també es reinicialitzen les preferències dels filtres.</para>
+
+  <para>Els filtres de fitxers locals modificats es desen en el fitxer <link linkend="configuration.folder.extra.contents.filters" endterm="configuration.folder.extra.contents.filters.title"/>, dins de la carpeta del projecte. Consulteu el capítol <link linkend="chapter.project.folder" endterm="chapter.project.folder.title"/> per a conèixer més detalls. Si suprimiu aquest fitxer, també es reinicialitzen les preferències dels filtres i el projecte torna a utilitzar els filtres de fitxers globals.</para>
+
+  <section id="file.filters.general">
+	<title id="file.filters.general.title">Preferències comunes</title>
+	  
+	<variablelist>
+	  <varlistentry>
+		<term>Amaga les etiquetes inicials i finals</term>
+		<listitem>
+		  <para>Normalment, l'OmegaT requereix les etiquetes inicials i finals per a recrear correctament el segment traduït. Si les amagueu del contingut traduïble, us assegureu que no les esborrareu ni modificareu per error.</para>
+
+		  <para>Si conserveu les etiquetes inicials i finals, assegureu-vos d'incloure-les també en el text traduït.</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry>
+		<term>Suprimeix els espais en blanc inicials i finals en projectes no segmentats</term>
+		<listitem>
+		  <para>Per defecte, l'OmegaT suprimeix qualsevol espai en blanc inicial i final del contingut traduïble. En els projectes sense segmentar, inhabiliteu aquesta opció per a poder modificar els espais en blanc inicials i finals en la traducció.</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry>
+		<term>Conserva els espais en totes les etiquetes</term>
+		<listitem>
+		  <para>Si els documents d'origen contenen espais en blanc per a controlar la disposició, s'ha de conservar l'espai en blanc en el document traduït.</para>
+		</listitem>
+	  </varlistentry>
+	  <varlistentry>
+		<term>No utilitzis el nom del fitxer per a identificar les traduccions alternatives</term>
+		<listitem>
+		  <para>El nom del fitxer d'origen és un dels elements que caracteritzen una traducció alternativa. Si es marca aquesta opció, s'utilitzaran només els segments anteriors/següents o un identificador de segment per a identificar una traducció alternativa.</para>
+
+		  <para>Els segments amb les mateixes característiques en altres fitxers es traduiran de la mateixa manera.</para>
+		</listitem>
+	  </varlistentry>
+	</variablelist>
+  </section>
+	
+  <section id="edit.filter.dialog">
+    <title id="edit.filter.dialog.title">Edita</title>
+	
+    <para>Feu doble clic en els camps editables per a aplicar modificacions senzilles o feu clic en el botó <guibutton>Edita...</guibutton> per a accedir al quadre de diàleg de modificació.</para>
+
+	<para>Per a afegir un patró de filtre, feu clic en <guibutton>Afegeix</guibutton> per a obrir un quadre de diàleg similar.</para>
+
+	<para>Tots dos quadres de diàlegs us permeten personalitzar els patrons de nom de fitxer per als fitxers d'origen i destinació associats a aquest el filtre i seleccionar la codificació corresponent.</para>
+
+	<para>Utilitzeu el menú desplegable <guilabel>Variables de nom del fitxer</guilabel> per a personalitzar el nom del fitxer de destinació.</para>
+
+    <section id="source.filetype.and.filename.pattern">
+	  <title id="source.filetype.and.filename.pattern.title">Patró de nom del fitxer d'origen</title>
+
+	  <para>Per a associar un filtre a un fitxer, OmegaT comprova la seva extensió de fitxer i intenta fer-lo coincidir amb els patrons del nom de fitxer d'origen en un filtre.</para>
+
+	  <para>Per exemple, el patró <literal>.xhtml</literal> registrat en el filtre XHTML coincideix amb qualsevol fitxer amb l'extensió <filename>xhtml</filename>. Si es troba un fitxer així en la carpeta <link linkend="project.folder.source" endterm="project.folder.source.title"/>, el fitxer es tractarà amb el filtre XHTML.</para>
+
+	  <para>Podeu canviar o afegir patrons de nom del fitxer per a associar diferents fitxers a un filtre.</para>
+		
+	  <warning>
+		<para>L'associació d'una extensió de fitxer a un filtre no és suficient perquè el filtre tracti correctament el fitxer. L'estructura del fitxer també ha de ser compatible amb el filtre: encara que associeu l'extensió <literal>.odt</literal> al filtre XHMTL, el filtre no podrà processar el contingut d'un fitxer del LibreOffice Writer.</para>
+	  </warning>
+		
+		
+	  <para>Els patrons de nom del fitxer d'origen utilitzen caràcters comodí: el caràcter <literal>*</literal> coincideix amb zero o més caràcters, mentre que el caràcter <literal>?</literal> coincideix exactament amb un caràcter.</para>
+
+	  <para>Per exemple, utilitzeu el patró <literal>read*</literal> si voleu que el filtre de text tracti fitxers Llegeix-me (<literal>readme, read.me</literal> o <literal>readme.txt</literal>).</para>
+    </section>
+
+    <section id="source.and.target.files.encoding">
+	  <title id="source.and.target.files.encoding.title">Codificació dels fitxers d'origen i destinació</title>
+
+	  <para>La majoria dels formats de fitxers permeten diverses codificacions. Per defecte, la codificació del fitxer traduït és la mateixa que la del fitxer d'origen.</para>
+
+	  <para>Els camps de codificació dels fitxers d'origen i destinació utilitzen menús desplegables que indiquen totes les codificacions admeses. Si seleccioneu l'opció <guilabel>&lt;auto&gt;</guilabel>, l'OmegaT decidirà la codificació segons els criteris següents:</para>
+
+	  <itemizedlist>
+        <listitem>
+		  <para>L'OmegaT utilitza la declaració de codificació en el fitxer d'origen, si està present, per a identificar la codificació (fitxers HTML o basats en XML).</para>
+        </listitem>
+	  </itemizedlist>
+
+	  <itemizedlist>
+        <listitem>
+		  <para>L'OmegaT té instruccions per a utilitzar una codificació obligatòria per a certs formats de fitxer (per exemple, propietats del Java).</para>
+        </listitem>
+	  </itemizedlist>
+
+	  <itemizedlist>
+        <listitem>
+		  <para>L'OmegaT utilitza la codificació per defecte del sistema operatiu per als fitxers de text.</para>
+        </listitem>
+	  </itemizedlist>
+    </section>
+
+    <section id="target.name">
+	  <title id="target.name.title">Nom del fitxer traduït</title>
+	  
+	  <para>Els fitxers de la carpeta <link linkend="project.folder.target" endterm="project.folder.target.title"/> se sobreescriuen cada vegada que els creeu si es creen amb el mateix nom.</para>
+
+	  <para>L'OmegaT pot crear automàticament noms de fitxers nous per als fitxers que creeu i, per exemple, afegir-hi un codi de llengua o una marca de temps.</para>
+
+	  <para>El patró de nom dels fitxers de destinació utilitza una sintaxi especial. La manera més fàcil de modificar-lo és utilitzar el quadre de diàleg <guilabel>Edició del patró</guilabel>. El quadre de diàleg ofereix diverses opcions:</para>
+
+	  <variablelist>
+        <varlistentry>
+          <term>${filename}</term>
+          <listitem>
+			<para>Patró per defecte. Representa el nom complet del fitxer d'origen, incloent-hi l'extensió. L'ús d'aquest patró assigna al fitxer traduït el mateix nom que el fitxer d'origen.</para>
+          </listitem>
+		</varlistentry>
+
+        <varlistentry>
+          <term>${nameOnly}</term>
+          <listitem>
+			<para>Nom del fitxer d'origen, sense l'extensió.</para>
+          </listitem>
+		</varlistentry>
+
+        <varlistentry>
+          <term>${extension} </term>
+          <listitem>
+			<para>Extensió del fitxer original.</para>
+          </listitem>
+		</varlistentry>
+
+        <varlistentry>
+          <term>${targetLocale}</term>
+          <listitem>
+			<para>Llengua de destinació+codi de regió (xx_YY)</para>
+          </listitem>
+		</varlistentry>
+
+        <varlistentry>
+          <term>${targetLanguage}</term>
+          <listitem>
+			<para>Llengua de destinació+regió (xx-YY)</para>
+          </listitem>
+		</varlistentry>
+
+        <varlistentry>
+          <term>${targetLanguageCode}</term>
+          <listitem>
+			<para>Codi de la llengua de destinació (xx)</para>
+          </listitem>
+		</varlistentry>
+
+        <varlistentry>
+          <term>${targetCountryCode}</term>
+          <listitem>
+			<para>Codi de la regió de destinació (YY)</para>
+          </listitem>
+		</varlistentry>
+
+        <varlistentry>
+          <term>${timestamp-????}</term>
+          <listitem>
+			<para>Hora del sistema en crear el fitxer</para>
+
+			<para>Consulteu la <ulink url="https://docs.oracle.com/javase/8/docs/api/java/text/SimpleDateFormat.html">Documentació d'Oracle</ulink> per a veure exemples.</para>
+          </listitem>
+		</varlistentry>
+
+        <varlistentry>
+          <term>${system-os-name}</term>
+          <listitem>
+			<para>Nom del sistema operatiu</para>
+          </listitem>
+		</varlistentry>
+
+        <varlistentry>
+          <term>${system-user-name}</term>
+          <listitem>
+			<para>Nom d'inici de sessió de l'usuari</para>
+          </listitem>
+		</varlistentry>
+
+        <varlistentry>
+          <term>${system-host-name}</term>
+          <listitem>
+			<para>Nom de l'ordinador en el sistema</para>
+          </listitem>
+		</varlistentry>
+
+        <varlistentry>
+          <term>${file-source-encoding}</term>
+          <listitem>
+			<para>Codificació del fitxer d'origen</para>
+		  </listitem>
+		</varlistentry>
+		  
+        <varlistentry>
+          <term>${file-target-encoding}</term>
+          <listitem>
+			<para>Codificació del fitxer de destinació</para>
+          </listitem>
+		</varlistentry>
+
+        <varlistentry>
+          <term>${targetLocaleLCID}</term>
+          <listitem>
+			<para>Configuració regional de destinació de Microsoft</para>
+          </listitem>
+		</varlistentry>
+	  </variablelist>
+		
+	  <para>Hi ha variants addicionals disponibles per a <literal>${nameOnly}</literal> i <literal>${extension}</literal>.</para>
+		
+	  <para>Si l'ús de diversos punts fa que la identificació del nom del fitxer i de l'extensió sigui ambigua, podeu utilitzar variables com ara <literal>${nameOnly-</literal><emphasis>número</emphasis>} o <literal>${extension-</literal><emphasis>número} </emphasis> per a especificar quins fragments formen part del nom o de l'extensió, com es mostra en l'exemple següent.</para>
+
+	  <example id="target.name.example">
+		<title id="target.name.example.title">Noms dels fitxers de destinació</title>
+		<para>Per a un fitxer d'origen anomenat Document.xx.docx, l'ús d'aquestes variants produirà els resultats següents:</para>
+
+		<itemizedlist>
+          <listitem>
+			<para><literal>${nameOnly-0}</literal>: <filename>Document</filename></para>
+          </listitem>
+
+          <listitem>
+			<para><literal>${nameOnly-1}</literal>: <filename>Document.xx</filename></para>
+          </listitem>
+
+          <listitem>
+			<para><literal>${nameOnly-2}</literal>: <filename>Document.xx.docx</filename></para>
+          </listitem>
+
+          <listitem>
+			<para><literal>${extension-0}</literal>: <filename>docx</filename></para>
+          </listitem>
+
+          <listitem>
+			<para><literal>${extension-1}</literal>: <filename>xx.docx</filename></para>
+          </listitem>
+
+          <listitem>
+			<para><literal>${extension-2}</literal>: <filename>Document.xx.docx</filename></para>
+          </listitem>
+		</itemizedlist>
+	  </example>
+    </section>
+  </section>
+	
+  <section id="filters.options">
+    <title id="filters.options.title">Opcions</title>
+
+    <para>Hi ha diversos filtres que ofereixen opcions. Seleccioneu el filtre de la llista i feu clic en <guibutton>Opcions...</guibutton> per a modificar-les.</para>
+
+	<para>Les opcions disponibles són:</para>
+
+	<variablelist>
+	  <varlistentry id="file.filters.text">
+		<term id="file.filters.text.title">Fitxers de text</term>
+		<listitem>
+		  <para>
+			<variablelist>
+			  <varlistentry>
+				<term>Crea paràgrafs per a:</term>
+				<listitem>
+				  <para>Els fitxers de text no tenen marcadors de paràgraf genèrics. Trieu aquí la manera en què l'OmegaT crea paràgrafs en els fitxers de text.</para>
+				</listitem>
+			  </varlistentry>
+
+			  <varlistentry>
+				<term>Longitud de la línia en els fitxers de destinació (0=sense límit)</term>
+				<listitem>
+				  <para>
+					<variablelist>
+					  <varlistentry>
+						<term>Longitud de línia</term>
+						<listitem>
+						  <para>Especifica el nombre màxim de caràcters abans de trencar una línia llarga. Un valor de 0 equival a no tenir cap límit.</para>
+						</listitem>
+					  </varlistentry>
+
+					  <varlistentry>
+						<term>Longitud de línia màxima</term>
+						<listitem>
+						  <para>Especifica el nombre màxim de caràcters abans de tallar una línia i ignorar la resta. Un valor de 0 equival a no tenir cap límit.</para>
+						</listitem>
+					  </varlistentry>
+					</variablelist>
+				  </para>
+				</listitem>
+			  </varlistentry>
+			</variablelist>
+		  </para>
+		</listitem>
+	  </varlistentry>
+		
+	  <varlistentry id="file.filter.microsoft">
+		<term id="file.filter.microsoft.title">Fitxers Microsoft Office Open XML</term>
+		<listitem>
+		  <warning>
+			<para>El filtre <code>Microsoft Office Open XML (filtre antic)</code> és el filtre original de l'OmegaT. Només l'hauríeu d'utilitzar per a evitar problemes de compatibilitat amb projectes anteriors que continguin fitxers tractats amb aquest filtre.</para>
+		  </warning>
+
+		  <para>Podeu triar elements del document addicionals per a traduir. Apareixeran com a segments independents en l'editor.</para>
+		  <variablelist>
+			<varlistentry>
+			  <term>Paraules</term>
+			  <listitem>
+				<para>Text d'instruccions no visible, comentaris, notes al peu, notes finals, peus de pàgina, text alternatiu duplicat i propietats del document.</para>
+			  </listitem>
+			</varlistentry>
+
+			<varlistentry>
+			  <term>Excel</term>
+			  <listitem>
+				<para>Comentaris i noms dels fulls.</para>
+			  </listitem>
+			  </varlistentry>
+
+			  <varlistentry>
+				<term>PowerPoint</term>
+				<listitem>
+				  <para>Comentaris de les diapositives, diapositives mestres i dissenys de diapositives.</para>
+				</listitem>
+			  </varlistentry>
+
+			  <varlistentry>
+				<term>Global</term>
+				<listitem>
+				  <para>Enllaços externs, gràfics, diagrames, dibuixos i WordArt.</para>
+				</listitem>
+			  </varlistentry>
+			  
+			  <varlistentry>
+				<term>Altres opcions:</term>
+				<listitem>
+				  <variablelist>
+					<varlistentry>
+					  <term>Agrega les etiquetes</term>
+					  <listitem>
+						<para>Les etiquetes que no incloguin text traduïble s'agregaran en una sola etiqueta.</para>
+					  </listitem>
+					</varlistentry>
+
+					<varlistentry>
+					  <term>Conserva els espais en totes les etiquetes</term>
+					  <listitem>
+						<para>Es conservaran els espais en blanc (espais i línies noves), encara que aquesta opció no estigui definida en el document.</para>
+					  </listitem>
+					</varlistentry>
+
+					<varlistentry>
+					  <term>Inicia un paràgraf nou en els salts de línia suaus del Word</term>
+					  <listitem>
+						<para>Habiliteu aquesta opció si voleu que els salts de línia suaus iniciïn els paràgrafs.</para>
+					  </listitem>
+					</varlistentry>
+				  </variablelist>
+				</listitem>
+			  </varlistentry>
+		  </variablelist>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="file.filters.xhtml">
+		<term id="file.filters.xhtml.title">Fitxers XHTML</term>
+		<listitem>
+		  <variablelist>
+			<varlistentry>
+			  <term>Tradueix els atributs següents</term>
+			  <listitem>
+				<para>Els atributs seleccionats apareixeran com a segments traduïbles en la subfinestra <guilabel>Editor</guilabel>.</para>
+			  </listitem>
+			</varlistentry>
+			<varlistentry>
+			  <term>Comença un nou paràgraf amb</term>
+			  <listitem>
+				<para>L'etiqueta HTML &lt;br&gt; constituirà un salt de paràgraf per a la segmentació.</para>
+			  </listitem>
+			</varlistentry>
+			<varlistentry>
+			  <term>Paràgrafs ignorats en carregar (expressió regular)</term>
+			  <listitem>
+				  <para>En carregar el fitxer, qualsevol paràgraf que coincideixi amb l'expressió regular s'ignorarà i no es mostrarà per a la traducció.</para>
+
+				  <para>Aquesta opció és pràctica en tractar parts de fitxers HTML que només contenen text no traduïble.</para>
+			  </listitem>
+			</varlistentry>
+			<varlistentry>
+			  <term>Atribut «content» de les etiquetes &lt;meta&gt; ignorat</term>
+			  <listitem>
+				<para>Definiu els valors de l'atribut &lt;meta&gt; per als quals l'atribut «content» associat no es traduirà.</para>
+
+				<para>No afegiu cometes i separeu els valors per comes.</para>
+				
+				<example id="file.filters.xhtml.example">
+				  <title id="file.filters.xhtml.example.title">Ignorar la part «content» de &lt;meta name=&quot;robots&quot; content=&quot;index, follow&quot;&gt;</title>
+				  <para>Per a ignorar aquest contingut:</para>
+
+				  <para><code>&lt;meta name=&quot;robots&quot; content=&quot;index,
+				  follow&quot;&gt;</code></para>
+
+				  <para>Utilitzeu:</para>
+
+				  <para><literal>name=robots</literal></para>					
+				</example>
+			  </listitem>
+			</varlistentry>
+
+			<varlistentry>
+			  <term>Etiquetes ignorades (atribut=valor)</term>
+			  <listitem>
+				<para>Definiu els valors d'atribut que fan que una etiqueta sigui no traduïble.</para>
+
+				<para>No afegiu cometes i separeu els valors per comes.</para>
+
+				<example id="file.filters.xhtml.ignore.translate.no">
+				  <title id="file.filters.xhtml.ignore.translate.no.title">Ignora les etiquetes que contenen «translate=&quot;no&quot;»</title>
+				  <para>Per a ignorar aquest contingut:</para>
+
+				  <para><code>&lt;span translate=&quot;no&quot;&gt;Aquest contingut no és traduïble&lt;/span&gt;</code></para>
+
+				  <para>Utilitzeu: <literal>translate=no</literal>.</para>
+
+				  <para>S'ignoraran totes les etiquetes marcades amb <code>translate=&quot;no&quot;</code>.</para>
+				</example>
+			  </listitem>
+			</varlistentry>
+		  </variablelist>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry>
+		<term>Fitxers HTML i XHTML</term>
+		<listitem>
+		  <para>Aquí només es descriuen les opcions no disponibles en el filtre de fitxers XHTML (consulteu l'apartat anterior).</para>
+
+		  <variablelist>
+			<varlistentry>
+			  <term>Modifica la declaració de codificació</term>
+			  <listitem>
+				<para>La codificació d'un fitxer HTML generalment es declara dins d'un element &lt;meta&gt; en l'element &lt;head&gt;.</para>
+
+				<para>De vegades, els fitxers d'origen i de destinació requereixen una codificació diferent.</para>
+
+				<para>Aquí podeu decidir si s'ha d'afegir o modificar la declaració del fitxer de destinació:</para>
+				
+				<itemizedlist>
+				  <listitem>
+					<para>Sempre, a partir dels paràmetres del filtre de fitxers.</para>
+				  </listitem>
+
+				  <listitem>
+					<para>Només si el fitxer ja té una etiqueta &lt;head&gt;.</para>
+				  </listitem>
+
+				  <listitem>
+					<para>Només si el fitxer ja té una declaració.</para>
+				  </listitem>
+
+				  <listitem>
+					<para>Mai i només desar el fitxer de destinació en la codificació especificada en els paràmetres del filtre de fitxers.</para>
+				  </listitem>
+				</itemizedlist>
+			  </listitem>
+			</varlistentry>
+
+			<varlistentry>
+			  <term>Comprimeix els espais en blanc en el fitxer traduït</term>
+			  <listitem>
+				<para>Els espais en blanc fora de les etiquetes es considera no rellevant en el format HTML/XHTML.</para>
+
+				<para>Aquesta opció converteix diversos caràcters d'espai en blanc seguit en un sol espai en el fitxer traduït.</para>
+			  </listitem>
+			</varlistentry>
+			<varlistentry>
+			  <term>Suprimeix els comentaris HTML</term>
+			  <listitem>
+				<para>Els comentaris d'un fitxer HTML generalment s'adrecen als desenvolupadors. Utilitzeu aquesta opció per a suprimir-los. If unchecked, the comments are displayed as tags.</para>
+
+				<para>Text in HTML comments (between <literal>&lt;!--</literal>
+				and <literal>--&gt;</literal>) are not copied into the
+				translated document.</para>
+			  </listitem>
+			</varlistentry>
+		  </variablelist>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="file.filters.mozilla.ftl">
+		<term id="file.filters.mozilla.ftl.title">FTL de Mozilla</term>
+		<listitem>
+		  <variablelist>
+			<varlistentry>
+			  <term>Suprimeix les cadenes sense traduir en els fitxers de destinació</term>
+			  <listitem>
+				<para>Having untranslated contents in the translated files
+				sometimes creates compatibility issues.</para>
+			  </listitem>
+			</varlistentry>
+		  </variablelist>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="file.filters.mozilla.dtd">
+		<term id="file.filters.mozilla.dtd.title">DTD de Mozilla</term>
+		<listitem>
+		  <variablelist>
+			<varlistentry>
+			  <term>Suprimeix les cadenes sense traduir en els fitxers de destinació</term>
+			  <listitem>
+				  <para>Having untranslated contents in the translated files
+				  sometimes creates compatibility issues.</para>
+			  </listitem>
+			</varlistentry>
+		  </variablelist>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="file.filters.po">
+		<term id="file.filters.po.title">Fitxers PO</term>
+		<listitem>
+			<para>El filtre comprova les variables del printf («%s», etc.) per defecte. Consulteu les preferències de <link linkend="dialogs.preferences.tag.processing.programming.variables" endterm="dialogs.preferences.tag.processing.programming.variables.title"/> per a conèixer més detalls.</para>
+
+			<variablelist>
+			  <varlistentry>
+				<term>Permet els segments de destinació buits</term>
+				<listitem>
+				  <para>L'OmegaT sempre reprodueix el contingut original quan no es proporciona un segment. Utilitzeu aquesta opció per a deixar buits els segments sense traduir.</para>
+				</listitem>
+			  </varlistentry>
+			  
+			  <varlistentry>
+				<term>Tradueix els segments d'origen buits</term>
+				<listitem>
+				  <para>Els segments d'origen buits de vegades actuen com a marcadors de posició de parts que no existeixen en la llengua d'origen, però que són necessàries en la llengua de destinació. Utilitzeu aquesta opció per a proporcionar una traducció basada en els comentaris associats.</para>
+				</listitem>
+			  </varlistentry>
+			  
+			  <varlistentry>
+				<term>Ignora la capçalera del fitxer PO</term>
+				<listitem>
+				  <para>La capçalera del fitxer PO no es mostrarà per a la traducció.</para>
+				</listitem>
+			  </varlistentry>
+
+			  <varlistentry>
+				<term>Substitueix automàticament l'especificació de plurals</term>
+				<listitem>
+				  <para>Sobreescriu l'especificació de plurals de la capçalera i utilitza el valor per defecte de la llengua de destinació.</para>
+				</listitem>
+			  </varlistentry>
+
+			  <varlistentry>
+				<term>Format:</term>
+				<listitem>
+				  <variablelist>
+					<varlistentry>
+					  <term>Estàndard</term>
+					  <listitem>
+						<para>Fitxers PO que utilitzen l'element <literal>msgid</literal> com a contenidor del text d'origen i que esperen que la traducció s'indiqui en l'element <literal>msgstr</literal></para>
+					  </listitem>
+					</varlistentry>
+					
+					<varlistentry>
+					  <term>Monolingüe</term>
+					  <listitem>
+						<para>Fitxers PO que utilitzen l'element <literal>msgid</literal> com a codi d'ID, <literal>msgstr</literal> com a contenidor del text d'origen i que esperen que la traducció sobreescrigui l'element <literal>msgstr</literal></para>
+					  </listitem>
+					</varlistentry>
+				  </variablelist>
+				</listitem>
+			  </varlistentry>
+			</variablelist>
+		  </listitem>
+	  </varlistentry>
+
+	  <varlistentry id="file.filters.moodle.php">
+		<term id="file.filters.moodle.php.title">PHP del Moodle</term>
+		<listitem>
+		  <variablelist>
+			<varlistentry>
+			  <term>Suprimeix les cadenes sense traduir en els fitxers de destinació</term>
+			  <listitem>
+				<para>Deixar contingut sense traduir en els fitxers traduïts de vegades crea problemes de compatibilitat.</para>
+			  </listitem>
+			</varlistentry>
+		  </variablelist>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="file.filter.java.bundle">
+		<term id="file.filter.java.bundle.title">Paquet de recursos del Java</term>
+		<listitem>
+			<para>El filtre comprova els patrons de MessageFormat del Java (p. ex. m \{0\}) per defecte. Consulteu les preferències de <link linkend="dialogs.preferences.tag.processing.programming.variables" endterm="dialogs.preferences.tag.processing.programming.variables.title"/> per a conèixer més detalls.</para>
+
+			<variablelist>
+			  <varlistentry>
+				<term>Força la compatibilitat dels codis literals d'Unicode amb el Java 8</term>
+				<listitem>
+				  <para>El Java 8 requereix la codificació ISO-8859-1 i utilitza codis literals d'Unicode per a caràcters aliens a aquest joc de caràcters. El Java 9 i les versions posteriors requereixen la codificació UTF-8. Aquesta opció força la compatibilitat amb el Java 8.</para>
+				</listitem>
+			  </varlistentry>
+
+			  <varlistentry>
+				<term>Suprimeix les cadenes sense traduir en els fitxers de destinació</term>
+				<listitem>
+				  <para>Deixar contingut sense traduir en els fitxers traduïts de vegades crea problemes de compatibilitat.</para>
+				</listitem>
+			  </varlistentry>
+
+			  <varlistentry>
+				<term>Conserva els codis literals d'Unicode (\uXXXX)</term>
+				<listitem>
+				  <para>Algunes aplicacions requereixen conservar alguns codis literals d'Unicode. Aquesta opció ho permet.</para>
+				</listitem>
+			  </varlistentry>
+			</variablelist>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="file.filters.odf">
+		<term id="file.filters.odf.title">Fitxers en format OpenDocument (ODF)</term>
+		<listitem>
+		  <variablelist>
+			<varlistentry>
+			  <term>Tradueix els elements següents</term>
+			  <listitem>
+				<para>Entrades d'índex, adreces d'interès, referències d'adreces d'interès, notes, comentaris, notes de la presentació, enllaços (URL) i noms dels fulls.</para>
+			  </listitem>
+			</varlistentry>
+		  </variablelist>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="file.filters.xliff">
+		<term id="file.filters.xliff.title">XLIFF (filtre antic)</term>
+		<listitem>
+		  <warning>
+			<para>Aquest filtre és el filtre XLIFF original de l'OmegaT. Només l'hauríeu d'utilitzar per a evitar problemes de compatibilitat amb projectes anteriors que continguin fitxers tractats amb aquest filtre.</para>
+		  </warning>
+		  
+		  <para>
+			<variablelist>
+			  <varlistentry>
+				<term>Compatibilitat amb l'OmegaT 2.6</term>
+				<listitem>
+				  <para>Habiliteu aquesta opció si necessiteu treballar amb fitxers XLIFF creats amb l'OmegaT 2.6.</para>
+				</listitem>
+			  </varlistentry>
+
+			  <varlistentry>
+				<term>Identificador per a les traduccions alternatives</term>
+				<listitem>
+				  <para>L'usuari pot seleccionar tres opcions, «Paràgrafs anteriors i següents», «ID de l'element &lt;trans unit&gt;» o «Atribut resname de l'element &lt;trans unit&gt; si està disponible». Si no està disponible, s'utilitzarà l'ID com a alternativa.</para>
+				</listitem>
+			  </varlistentry>
+			  
+			  <varlistentry>
+				<term>Dreceres d'etiquetes</term>
+				<listitem>
+				  <para>Aquesta opció especifica la manera en què l'OmegaT crea les etiquetes a partir del contingut del fitxer XLIFF.</para>
+				</listitem>
+			  </varlistentry>
+
+			  <varlistentry>
+				<term>Estat del segment de destinació</term>
+				<listitem>
+				  <para>Si es marca, l'OmegaT canvia l'estat de destinació del fitxer XLIFF a &quot;needs-review-translation&quot; en comptes de &quot;translated&quot;.</para>
+				</listitem>
+			  </varlistentry>
+			</variablelist>
+		  </para>
+		</listitem>
+	  </varlistentry>
+
+	</variablelist>
+  </section>
+</section>

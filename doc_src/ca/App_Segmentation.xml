@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="app.segmentation">
+  <title id="app.segmentation.title">Segmentació</title>
+
+  <section id="dialog.preferences.segmentation.setup.type">
+	<title id="dialog.preferences.segmentation.setup.type.title">Paràgrafs o frases?</title>
+	
+	<para>Les eines de traducció assistida per ordinador funcionen amb unitats textuals anomenades segments. Quan s'introdueix una traducció, el segment que conté el text d'origen s'emmagatzema en la memòria del projecte, juntament amb la traducció i, posteriorment, s'utilitza per a les coincidències amb altres segments d'origen del projecte.</para>
+
+	<para>Utilitzeu la propietat del projecte <link linkend="dialogs.project.properties.options.segmentation" endterm="dialogs.project.properties.options.segmentation.title"/> per a seleccionar el tipus de segmentació.</para>
+
+	<para>Per defecte, els segments són <emphasis role="bold">paràgrafs</emphasis> definits pel format del fitxer.</para>
+	
+	<para>No utilitzar la segmentació per <emphasis role="bold">frases</emphasis> en un document és equivalent a utilitzar la segmentació per <emphasis>paràgrafs</emphasis>. En aquest cas, cada paràgraf (segons ho defineixi el format del document original) es mostra com un sol segment i el traductor té la llibertat de reorganitzar les frases del segment en la traducció.</para>
+	
+	<para>La <emphasis>segmentació per paràgrafs</emphasis> funciona bé amb textos més literaris o creatius i, en general, amb documents per als quals les coincidències de la memòria de traducció no són tan importants.</para>
+
+	<para>La <emphasis>segmentació per frases</emphasis> es basa en una sèrie de regles (anomenades <emphasis>regles de segmentació</emphasis>) que defineixen què constitueix una frase en la llengua d'origen. Aquest paràmetre funciona bé amb documents en què són habituals les repeticions o les frases similars, com ara documents tècnics o legals.</para>
+
+	<variablelist>
+	  <varlistentry id="dialogs.preferences.segmentation.setup.structure.level.segmentation">
+		<term id="dialogs.preferences.segmentation.setup.structure.level.segmentation.title">Segmentació per paràgrafs</term>
+
+		<listitem>
+		  <para>En primer lloc, l'OmegaT analitza el text per a segmentar-lo per paràgrafs. Aquest procés només es basa en l'estructura del fitxer d'origen per a produir segments.</para>
+
+		  <para>Per exemple, els fitxers de text es poden segmentar per salts de línia, línies buides o no segmentar-se. Els fitxers que contenen format (ODF, HTML o altres documents) es divideixen segons les etiquetes de bloc (paràgraf). Els atributs d'objectes traduïbles dels fitxers XHTML o HTML es poden extreure com a «paràgrafs» independents.</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialogs.preferences.segmentation.rules.sentence.level.segmentation">
+        <term id="dialogs.preferences.segmentation.rules.sentence.level.segmentation.title">Segmentació per frases</term>
+
+        <listitem>
+		  <para>Després de dividir el fitxer d'origen en unitats estructurals, l'OmegaT divideix aquestes unitats en segments.</para>
+
+		  <para>Podeu pensar en la segmentació com el procés de desplaçar el cursor al llarg del text, caràcter per caràcter, i cercar la posició on es produirà una separació o on no es permetrà.</para>
+
+		  <para>Cada vegada que el cursor es desplaça fins al caràcter següent, l'OmegaT comprova aquestes condicions:</para>
+		  
+		  <itemizedlist>
+			<listitem>
+			  <para>El text anterior a la ubicació correspon a una regla <emphasis role="bold">Anterior</emphasis>.</para>
+			</listitem>
+			
+			<listitem>
+			  <para>El text després de la ubicació correspon a la regla <emphasis role="bold">Posterior</emphasis> associada.</para>
+			</listitem>
+		  </itemizedlist>
+
+		  <para>Si la ubicació coincideix amb les dues regles, es considera una separació o no, en funció del que defineixi la regla.</para>
+        </listitem>
+	  </varlistentry>
+    </variablelist>
+  </section>
+  
+  <section id="dialog.preferences.segmentation.setup.scope">
+	<title id="dialog.preferences.segmentation.setup.scope.title">Globals o locals?</title>
+
+	<note>
+	  <para>S'utilitzen els mateixos mecanismes i quadres de diàleg per a definir les regles de segmentació globals i locals.</para>
+	</note>
+
+	<para>Per defecte, els paràmetres de segmentació són globals i es comparteixen entre tots els projectes.</para>
+
+	<para>Utilitzeu la propietat del projecte <link linkend="dialogs.project.properties.local.segmentation" endterm="dialogs.project.properties.local.segmentation.title"/> per a limitar l'àmbit de les regles de segmentació al projecte actual.</para>
+
+	<para>Podeu aconseguir un resultat similar iniciant l'OmegaT des de la línia d'ordres. Consulteu la guia <link linkend="launch.with.command.line" endterm="launch.with.command.line.title"/> per a conèixer més detalls.</para>
+	
+	<para>Si utilitzeu regles locals, encara podreu accedir a les regles globals, però modificar-les no tindrà cap efecte en el projecte.</para>
+  </section>
+
+
+  <section id="dialog.preferences.segmentation.setup.rules.based.segmentation">
+	<title id="dialog.preferences.segmentation.setup.rules.based.segmentation.title">Regles</title>
+	<para>L'OmegaT proporciona regles de segmentació predefinides i el traductor pot utilitzar expressions regulars per a modificar-les. Consulteu l'annex <link linkend="app.regex" endterm="app.regex.title"/> per a conèixer més detalls.</para>
+
+	<para>Com a recordatori, les regles funcionen de la manera següent: quan una regla coincideix, l'OmegaT col·loca un marcador en la ubicació de la coincidència perquè les regles posteriors ignorin aquesta ubicació. Aquesta és la raó per la qual les regles d'excepció han d'estar abans de les regles de segmentació.</para>
+	
+	<warning>
+	  <para>Si canvieu la segmentació durant la traducció, haureu de tornar a carregar el projecte perquè la nova segmentació tingui efecte. Això dividirà o fusionarà alguns segments que ja s'havien traduït, que deixaran de considerar-se traduïts. Malgrat tot, la traducció original es conservarà en la memòria del projecte.</para>
+	</warning>
+
+	<table id="segmentation.simple.examples">
+	  <title id="segmentation.simple.examples.title">Alguns exemples senzills</title>
+      <tgroup cols="5">
+		<colspec align="left" colnum="1"/>
+		<colspec align="left" colnum="2"/>
+		<colspec align="center" colnum="3"/>
+		<colspec align="center" colnum="4"/>
+		<colspec align="left" colnum="5"/>
+		<thead>
+          <row>
+			<entry>Categoria</entry>
+			<entry>Intenció</entry>
+			<entry align="center">Abans</entry>
+			<entry align="center">Després</entry>
+			<entry>Explicació</entry>
+          </row>
+		</thead>
+		<tbody>
+		  <row>
+			<entry>Regla d'excepció, casella sense marcar, més amunt en la llista</entry>
+			<entry>No segmentar després de Sr.</entry>
+			<entry align="center">Sr\.</entry>
+			<entry align="center">\s</entry>
+			<entry>Sr seguit d'un punt i un espai en blanc.</entry>
+		  </row>
+		  <row>
+			<entry>Regla d'excepció, casella sense marcar, més amunt en la llista</entry>
+			<entry>Cel·les de l'Excel amb salts de línia que no representen segments</entry>
+			<entry align="center">\n</entry>
+			<entry align="center">.</entry>
+			<entry>Salt de línia, seguit de qualsevol caràcter.</entry>
+		  </row>
+		  <row>
+			<entry>Regla de separació, casella marcada, més avall en la llista</entry>
+			<entry>Començar un segment nou després d'un punt seguir d'un espai, una tabulació o un altre espai en blanc</entry>
+			<entry align="center">\.</entry>
+			<entry align="center">\s</entry>
+			<entry>Punt seguir d'un espai en blanc.</entry>
+		  </row>
+		  <row>
+			<entry>Regla de separació, casella marcada, més avall en la llista</entry>
+			<entry>Iniciar un segment nou després de «。» (punt japonès)</entry>
+			<entry align="center">。</entry>
+			<entry align="center"/>
+			<entry>Tingueu en compte que el camp <literal>Patró posterior</literal> pot estar buit.</entry>
+		  </row>
+		</tbody>
+	  </tgroup>
+	</table>
+  </section>
+</section>

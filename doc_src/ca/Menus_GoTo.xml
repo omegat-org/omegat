@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="menus.goto">
+  <title id="menus.goto.title"><guimenu>Ves a</guimenu></title>
+
+  <para>Aquest menú us dona accés a les ordres de navegació pels segments i subfinestres.</para>
+
+  <example id="example.next.untranslated.segment">
+	<title id="example.next.untranslated.segment.title">Exemple de descripció d'una drecera</title>
+	<para>Windows i Linux: <keycombo><keycap>Control</keycap><keycap>U</keycap></keycombo></para>
+
+	<para>macOS: <keycombo><keycap>Ordre</keycap><keycap>U</keycap></keycombo></para>
+
+	<para><emphasis role="bold">Aquest manual:</emphasis><keycombo><keycap>C</keycap><keycap>U</keycap></keycombo></para>
+  </example>
+
+  <variablelist>
+    <varlistentry id="menus.goto.next.untranslated.segment">
+      <term id="menus.goto.next.untranslated.segment.title"><guimenuitem>Segment sense traduir següent</guimenuitem> <keycombo><keycap>C</keycap><keycap>U</keycap></keycombo></term>
+
+      <listitem>
+        <para>Es desplaça al segment següent sense entrada en la llengua de destinació en la memòria de traducció.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry id="menus.goto.next.translated.segment">
+      <term id="menus.goto.next.translated.segment.title"><guimenuitem>Segment traduït següent</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>U</keycap></keycombo></term>
+
+      <listitem>
+        <para>Es desplaça al segment ja traduït següent, ignorant els segments sense traduir.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry id="menus.goto.next.segment">
+      <term id="menus.goto.next.segment.title"><guimenuitem>Segment següent</guimenuitem> <keycombo><keycap>C</keycap><keycap>N</keycap></keycombo></term>
+
+      <listitem>
+		<para>També: <keycombo><keycap>Retorn</keycap></keycombo></para>
+
+        <para>Es desplaça al segment següent, o bé al primer segment del fitxer següent si el segment actual és l'últim del fitxer.</para>
+
+        <note>
+		  <para>Podeu utilitzar <keycap>Tab</keycap> com a drecera alternativa si s'ha habilitat la preferència <link linkend="dialogs.preferences.general.use.tab.to.advance" endterm="dialogs.preferences.general.use.tab.to.advance.title"/>.</para>
+		  
+		  <para>Això és útil per als sistemes d'entrada de caràcters que utilitzen <keycap>Retorn</keycap> per a validar l'entrada.</para></note>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry id="menus.goto.previous.segment">
+      <term id="menus.goto.previous.segment.title"><guimenuitem>Segment anterior</guimenuitem> <keycombo><keycap>C</keycap><keycap>P</keycap></keycombo></term>
+      <listitem>
+		<para>També: <keycombo><keycap>C</keycap><keycap>Retorn</keycap></keycombo></para>
+
+        <para>Es desplaça al segment anterior, o bé a l'últim segment del fitxer anterior si el segment actual és el primer del fitxer.</para>
+
+        <note>
+		  <para>Podeu utilitzar <keycombo><keycap>C</keycap><keycap>Tab</keycap></keycombo> com a drecera alternativa si s'ha habilitat la preferència <link linkend="dialogs.preferences.general.use.tab.to.advance" endterm="dialogs.preferences.general.use.tab.to.advance.title"/>.</para>
+		  
+		  <para>Això és útil per als sistemes d'entrada de caràcters que utilitzen <keycap>Retorn</keycap> per a validar l'entrada.</para>
+		</note>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry id="menus.goto.segment.number">
+      <term id="menus.goto.segment.number.title"><guimenuitem>Segment número...</guimenuitem> <keycombo><keycap>C</keycap><keycap>J</keycap></keycombo></term>
+      <listitem>
+        <para>Salta al segment amb el número indicat.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry id="menus.goto.next.note">
+      <term id="menus.goto.next.note.title"><guimenuitem>Next
+      Note</guimenuitem>
+      <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>N</keycap></keycombo></term>
+      <listitem>
+		<para>Es desplaça al segment amb una nota següent.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry id="menus.goto.previous.note">
+      <term id="menus.goto.previous.note.title"><guimenuitem>Previous
+      Note</guimenuitem>
+      <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>P</keycap></keycombo></term>
+      <listitem>
+		<para>Es desplaça segment amb una nota anterior.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry id="menus.goto.next.unique.segment">
+      <term id="menus.goto.next.unique.segment.title"><guimenuitem>Segment únic següent</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>K</keycap></keycombo></term>
+      <listitem>
+        <para>Es desplaça al segment únic següent.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry id="menus.goto.source.of.selected.match">
+      <term id="menus.goto.source.of.selected.match.title"><guimenuitem>Segment d'origen de la coincidència seleccionada</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>M</keycap></keycombo></term>
+      <listitem>
+        <para>Es desplaça al segment que correspon a la coincidència seleccionada actualment en la subfinestra <guilabel>Coincidències parcials</guilabel>.</para>
+      </listitem>
+    </varlistentry>
+
+	<varlistentry id="menus.goto.auto.populated.segments">
+	  <term id="menus.goto.auto.populated.segments.title"><guisubmenu>Segments propagats automàticament</guisubmenu></term>
+	  <listitem>
+        <para>Navega entre els segments en què s'han propagat automàticament les coincidències exactes de les subcarpetes <link linkend="project.folder.tm.auto" endterm="project.folder.tm.auto.title"/> i <link linkend="project.folder.tm.enforce.title" endterm="project.folder.tm.enforce.title"/>.</para>
+
+		<para>Consulteu la guia <link linkend="how.to.use.tm.reuse.tm" endterm="how.to.use.tm.reuse.tm.title"/> per a conèixer més detalls.</para>
+
+		<itemizedlist>
+		  <listitem id="menus.goto.auto.populated.segments.next.auto">
+			<para id="menus.goto.auto.populated.segments.next.auto.title"><guimenuitem>Segment de tm/auto/ següent</guimenuitem> <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>,</keycap></keycombo></para>
+
+			<para>Es desplaça al segment inserit des de <filename>tm/auto/</filename> següent.</para>
+		  </listitem>
+
+		  <listitem id="menus.goto.auto.populated.segments.prev.auto">
+			<para id="menus.goto.auto.populated.segments.prev.auto.title"><guimenuitem>Segment de tm/auto/ anterior</guimenuitem> <keycombo><keycap>S</keycap><keycap>C</keycap><keycap>A</keycap><keycap>,</keycap></keycombo></para>
+
+			<para>Es desplaça al segment inserit des de <filename>tm/auto/</filename> anterior.</para>
+		  </listitem>
+
+		  <listitem id="menus.goto.auto.populated.segments.next.enforce">
+			<para id="menus.goto.auto.populated.segments.next.enforce.title"><guimenuitem>Segment de tm/enforce/ següent</guimenuitem> <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>.</keycap></keycombo></para>
+
+			<para>Es desplaça al segment inserit des de <filename>tm/enforce/</filename> següent.</para>
+		  </listitem>
+
+		  <listitem id="menus.goto.auto.populated.segments.prev.enforce">
+			<para id="menus.goto.auto.populated.segments.prev.enforce.title"><guimenuitem>Segment de tm/enforce/ anterior</guimenuitem> <keycombo><keycap>S</keycap><keycap>C</keycap><keycap>A</keycap><keycap>.</keycap></keycombo></para>
+
+			<para>Es desplaça al segment inserit des de <filename>tm/enforce/</filename> anterior.</para>
+		  </listitem>
+		</itemizedlist>
+	  </listitem>
+	</varlistentry>
+
+    <varlistentry id="menus.goto.back.in.history">
+      <term id="menus.goto.back.in.history.title"><guimenuitem>Enrere en l'historial</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>P</keycap></keycombo></term>
+      <listitem>
+        <para>L'OmegaT recorda l'historial de navegació per segments.</para>
+        <para>Aquesta ordre us permet tornar, un segment a la vegada, a segments que heu visitat anteriorment.</para>
+      </listitem>
+    </varlistentry>
+    
+    <varlistentry id="menus.goto.forward.in.history">
+      <term id="menus.goto.forward.in.history.title"><guimenuitem>Endavant en l'historial</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>N</keycap></keycombo></term>
+      <listitem>
+        <para>L'OmegaT recorda l'historial de navegació per segments.</para>
+
+        <para>Aquesta ordre us permet desplaçar-vos endavant, un segment a la vegada, a segments que heu visitat anteriorment amb l'ordre <link linkend="menus.goto" endterm="menus.goto.title"/><link linkend="menus.goto.back.in.history" endterm="menus.goto.back.in.history.title"/> anterior.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry id="menus.goto.notes.pane">
+      <term id="menus.goto.notes.pane.title"><guimenuitem>Notepad</guimenuitem>
+	  <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>N</keycap></keycombo></term>
+      <listitem>
+        <para>Enter the <link linkend="panes.notes" endterm="panes.notes.title"/> to write or modify a note associated
+        to the current segment.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry id="menus.goto.editor.pane">
+      <term id="menus.goto.editor.pane.title"><guimenuitem>Editor</guimenuitem>
+      <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>E</keycap></keycombo></term>
+      <listitem>
+        <para>Enter the <link linkend="panes.editor" endterm="panes.editor.title"/> to proceed with your translation.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</section>

@@ -282,7 +282,7 @@ which are in the same server
 
   - Belarusian localization updated to 5.8 (UI, readme)
   - Brazilian Portuguese localization updated to 5.8 (UI)
-  - Catalan localization updated to 5.8 (UI, readme)
+  - Catalan localization updated to 5.8 (UI, readme, documentation)
   - Corsican localization updated to 5.8 (UI, readme)
   - Dutch localization updated to 5.8 (UI)
   - German localization updated to 5.8 (UI, readme)

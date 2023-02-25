@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="menus.edit">
+  <title id="menus.edit.title"><guimenu>Edita</guimenu></title>
+
+  <para>Aquest menú us dona accés a les ordres d'edició de segments.</para>
+
+  <example id="example.undo.last.action">
+	<title id="example.undo.last.action.title">Exemple de descripció d'una drecera</title>
+	<para>Windows i Linux: <keycombo><keycap>Control</keycap><keycap>Z</keycap></keycombo></para>
+
+	<para>macOS: <keycombo><keycap>Ordre</keycap><keycap>Z</keycap></keycombo></para>
+
+	<para><emphasis role="bold">Aquest manual:</emphasis> <keycombo><keycap>C</keycap><keycap>Z</keycap></keycombo></para>
+  </example>
+
+  <variablelist>
+    <varlistentry id="menus.edit.undo.last.action">
+      <term id="menus.edit.undo.last.action.title"><guimenuitem>Desfés la darrera acció</guimenuitem> <keycombo><keycap>C</keycap><keycap>Z</keycap></keycombo></term>
+      <listitem>
+        <para>Cancel·la les modificacions aplicades al segment actiu. L'historial de modificacions es perd en sortir del segment.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry id="menus.edit.redo.last.action">
+      <term id="menus.edit.redo.last.action.title"><guimenuitem>Refés la darrera acció</guimenuitem> <keycombo><keycap>C</keycap><keycap>Y</keycap></keycombo>
+	  </term>
+      <listitem>
+        <para>Torna a aplicar les modificacions cancel·lades amb el segment actiu. L'historial de modificacions es perd en sortir del segment.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry id="menus.edit.replace.with.match.or.selection">
+      <term id="menus.edit.replace.with.match.or.selection.title"><guimenuitem>Substitueix per la coincidència o la selecció</guimenuitem> <keycombo><keycap>C</keycap><keycap>R</keycap></keycombo>
+	  </term>
+      <listitem>
+        <para>Substitueix el segment de destinació per la coincidència parcial seleccionada (per defecte, la primera coincidència) o pel text seleccionat en la subfinestra <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/>.</para>
+
+        <para>El text seleccionat té prioritat sobre la coincidència seleccionada.</para>
+
+		<para>Consulteu la descripció de la subfinestra <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/> per a conèixer més detalls.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry id="menus.edit.insert.match.or.selection">
+      <term id="menus.edit.insert.match.or.selection.title"><guimenuitem>Insereix la coincidència o la selecció</guimenuitem> <keycombo><keycap>C</keycap><keycap>I</keycap></keycombo></term>
+      <listitem>
+        <para>Insereix la coincidència parcial seleccionada o el text seleccionat en la subfinestra <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/> en la posició del cursor. Si s'ha seleccionat una part del segment de destinació, se sobreescriu la part seleccionada.</para>
+
+        <para>El text seleccionat té prioritat sobre la coincidència seleccionada.</para>
+
+		<para>Consulteu la descripció de la subfinestra <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/> per a conèixer més detalls.</para>
+	  </listitem>
+    </varlistentry>
+
+    <varlistentry id="menus.edit.replace.with.source">
+      <term id="menus.edit.replace.with.source.title"><guimenuitem>Substitueix pel text d'origen</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>R</keycap></keycombo>
+	  </term>
+      <listitem>
+        <para>Substitueix tot el segment de destinació pel segment d'origen.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry id="menus.edit.insert.source">
+      <term id="menus.edit.insert.source.title"><guimenuitem>Insereix el text d'origen</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>I</keycap></keycombo>
+	  </term>
+      <listitem>
+        <para>Insereix el segment d'origen en la posició del cursor. Si s'ha seleccionat una part del segment de destinació, se sobreescriu la part seleccionada.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry id="menus.edit.select.source.text">
+      <term id="menus.edit.select.source.text.title"><guimenuitem>Selecciona el text d'origen</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>A</keycap></keycombo>
+	  </term>
+      <listitem>
+        <para>Selecciona el text d'origen.</para>
+
+		<para>La selecció es pot utilitzar directament en l'OmegaT per a <link linkend="windows.text.search">cerques internes</link>, <link linkend="windows.text.replace">substitucions</link>, <link linkend="menus.edit.create.glossary.entry">introducció de termes en el glossari</link>, <link linkend="dialogs.preferences.external.searches">cerques externes</link>, etc. Quan s'ha copiat al porta-retalls del sistema operatiu, també es pot utilitzar en cerques web i altres llocs.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry id="menus.edit.replace.with.mt">
+      <term id="menus.edit.replace.with.mt.title"><guimenuitem>Substitueix per la traducció automàtica</guimenuitem> <keycombo><keycap>C</keycap><keycap>M</keycap></keycombo>
+	  </term>
+      <listitem>
+        <para>Substitueix el segment de destinació per la traducció proporcionada pel servei de traducció automàtica seleccionat.</para>
+		<para>Si la preferència <link linkend="dialogs.preferences.mt.automatically.fetch.translations" endterm="dialogs.preferences.mt.automatically.fetch.translations.title"/> està inhabilitada, utilitzeu aquesta acció una primera vegada per a obtenir la traducció i una segona vegada per a inserir-la.</para>
+		
+		<para>No ocorre cap acció si no s'ha activat cap servei de traducció automàtica en el menú <link linkend="menus.options" endterm="menus.options.title"/><link linkend="menus.options.mt" endterm="menus.options.mt.title"/>. Consulteu les preferències de <link linkend="dialogs.preferences.mt" endterm="dialogs.preferences.mt.title"/> per a conèixer més detalls.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry id="menus.edit.insert.missing.source.tag">
+      <term id="menus.edit.insert.missing.source.tag.title"><guimenuitem>Insereix les etiquetes del text d'origen que falten</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>T</keycap></keycombo>
+	  </term>
+      <listitem>
+        <para>Insereix les etiquetes del text d'origen que falten en la posició del cursor.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry id="menus.edit.insert.next.missing.tag">
+      <term id="menus.edit.insert.next.missing.tag.title"><guimenuitem>Insereix l'etiqueta que falta següent</guimenuitem> <keycombo><keycap>C</keycap><keycap>T</keycap></keycombo>
+	  </term>
+      <listitem>
+        <para>Insereix l'etiqueta que falta següent en la posició del cursor.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry id="menus.edit.export.selection">
+      <term id="menus.edit.export.selection.title"><guimenuitem>Exporta la selecció</guimenuitem> <keycombo><keycap>C</keycap><keycap>C</keycap><keycap>S</keycap></keycombo>
+	  </term>
+      <listitem>
+        <para>Exporta la selecció actual a un fitxer de text per al processament. Si no s'ha seleccionat cap text, s'escriu el segment d'origen actual en aquest fitxer. To remain consistent with usual clipboard behaviour this file is not emptied when the user exits OmegaT. Els continguts exportats es copien al fitxer <link linkend="configuration.folder.default.contents.script.selection.title" endterm="configuration.folder.default.contents.script.selection.title"/> de la carpeta de <link linkend="configuration.folder">configuració</link>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry id="menus.edit.create.glossary.entry">
+      <term id="menus.edit.create.glossary.entry.title"><guimenuitem>Crea una entrada en el glossari...</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>G</keycap></keycombo>
+	  </term>
+      <listitem>
+        <para>Permet a l'usuari crear una entrada en el glossari modificable del projecte (fitxer <link linkend="project.folder.glossary.txt" endterm="project.folder.glossary.txt.title"/>).</para>
+
+		<para>Hi ha dues maneres d'utilitzar aquesta funció.</para>
+
+		<itemizedlist>
+		  <listitem>
+			<para>La primera és obrir el quadre de diàleg i emplenar manualment els diferents camps.</para>
+		  </listitem>
+
+		  <listitem>
+			<para>La segona és seleccionar elements en una de les subfinestres de l'OmegaT i obrir el quadre de diàleg després de cada selecció perquè l'OmegaT introdueixi els elements automàticament en els diversos camps:</para>
+			
+			<orderedlist>
+			  <listitem>
+				<para>Seleccioneu una cadena de text en qualsevol subfinestra</para>
+			  </listitem>
+
+			  <listitem>
+				<para>Premeu <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>G</keycap></keycombo></para>
+				
+				<para>S'introdueix la selecció en el camp <guilabel>Terme d'origen</guilabel>.</para>
+			  </listitem>
+
+			  <listitem>
+				<para>Seleccioneu una cadena de text en qualsevol subfinestra</para>
+			  </listitem>
+
+			  <listitem>
+				<para>Premeu <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>G</keycap></keycombo></para>
+
+				<para>S'introdueix la selecció en el camp <guilabel>Terme de destinació</guilabel>.</para>
+			  </listitem>
+
+			  <listitem>
+				<para>(Opcional) Seleccioneu una cadena de text en qualsevol subfinestra</para>
+			  </listitem>
+
+			  <listitem>
+				<para>(Opcional) Premeu <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>G</keycap></keycombo></para>
+
+				<para>S'introdueix la selecció en el camp <guilabel>Comentari</guilabel>.</para>
+			  </listitem>
+
+			  <listitem>
+				<para>Premeu <keycap>Retorn</keycap> o feu clic en <guibutton>D'acord</guibutton></para>
+			  </listitem>
+			</orderedlist>
+		  </listitem>
+		</itemizedlist>
+	  </listitem>
+    </varlistentry>
+
+    <varlistentry id="menus.edit.search.project">
+      <term id="menus.edit.search.project.title"><guimenuitem>Cerca...</guimenuitem> <keycombo><keycap>C</keycap><keycap>F</keycap></keycombo>
+	  </term>
+      <listitem>
+        <para>Obre una finestra de <link linkend="windows.text.search" endterm="windows.text.search.title"/> nova.</para>
+
+        <para>Si seleccioneu una cadena de text (en qualsevol subfinestra) abans d'executar la funció, per defecte s'enganxarà el text en el camp <guilabel>Cerca:</guilabel>.</para>
+
+		<para>La combinació <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>F</keycap></keycombo> reutilitza la finestra de cerca més recent encara oberta en comptes d'obrir-ne una de nova.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry id="menus.edit.search.and.replace">
+      <term id="menus.edit.search.and.replace.title"><guimenuitem>Substitueix...</guimenuitem> <keycombo><keycap>C</keycap><keycap>K</keycap></keycombo>
+	  </term>
+      <listitem>
+        <para>Obre una finestra de <link linkend="windows.text.replace" endterm="windows.text.replace.title"/> nova.</para>
+
+        <para>Si seleccioneu una cadena de text (en qualsevol subfinestra) abans d'executar la funció, per defecte s'enganxarà el text en el camp <guilabel>Cerca:</guilabel>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry id="menus.edit.search.dictionaries">
+      <term id="menus.edit.search.dictionaries.title"><guimenuitem>Search Dictionaries</guimenuitem>
+	  <keycombo><keycap>A</keycap><keycap>S</keycap><keycap>D</keycap></keycombo>
+	  </term>
+      <listitem>
+        <para>If the <link linkend="dialogs.preferences.dictionary.automatically.search.segment" endterm="dialogs.preferences.dictionary.automatically.search.segment.title"/>
+        preference is disabled, this function allows you to search for the
+        selected word or for the whole segment terms in the dictionaries.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry id="menus.edit.switch.case">
+      <term id="menus.edit.switch.case.title"><guisubmenu>Canvia les majúscules i minúscules a</guisubmenu></term>
+      <listitem>
+        <para>Canvia les majúscules del text seleccionat en el segment de destinació a l'opció seleccionada, o canvia cíclicament entre les opcions. Si no s'ha seleccionat cap text, l'OmegaT selecciona la paraula que comença pel caràcter immediatament a la dreta del cursor.</para>
+
+		<itemizedlist>
+		  <listitem>
+			<para><guimenuitem>minúscules</guimenuitem></para>
+
+			<para>totes les lletres en minúscules</para>
+		  </listitem>
+
+		  <listitem>
+			<para><guimenuitem>MAJÚSCULES</guimenuitem></para>
+
+			<para>TOTES LES LLETRES EN MAJÚSCULES</para>
+		  </listitem>
+
+		  <listitem>
+			<para><guimenuitem>Cada Paraula En Majúscula Inicial</guimenuitem></para>
+
+			<para>Gairebé totes les lletres en minúscules</para>
+		  </listitem>
+
+		  <listitem>
+			<para><guimenuitem>Estil d'oració</guimenuitem></para>
+			<para>Només la primera lletra en majúscules.</para>
+		  </listitem>
+
+		  <listitem>
+			<para><guimenuitem>Cíclic</guimenuitem> <keycombo><keycap>S</keycap><keycap>F3</keycap></keycombo></para>
+			<warning>
+			  <para>On macOS, the <keycombo><keycap>F3</keycap></keycombo> key 
+			  enables the <emphasis role="bold">overwrite</emphasis> mode in the
+			  editor. See <link linkend="panes.editor.overwriting" endterm="panes.editor.overwriting.title"/> for details.</para>
+			</warning>
+		  </listitem>
+		</itemizedlist>
+	  </listitem>
+	</varlistentry>
+
+	<varlistentry id="menus.edit.select.match">
+      <term id="menus.edit.select.match.title"><guisubmenu>Selecciona la coincidència</guisubmenu></term>
+      <listitem>
+		<para>Selecciona la coincidència parcial anterior, següent o núm. <varname>n</varname> de la subfinestra «Coincidències parcials» per a substituir o inserir-la en el segment.</para>
+		
+		<itemizedlist>
+		  <listitem>
+			<para><guimenuitem>Selecciona la coincidència anterior</guimenuitem> <keycombo><keycap>A</keycap><keycap>↑</keycap></keycombo></para>
+		  </listitem>
+
+		  <listitem>
+			<para><guimenuitem>Selecciona la coincidència següent</guimenuitem> <keycombo><keycap>A</keycap><keycap>↓</keycap></keycombo></para>
+		  </listitem>
+
+		  <listitem>
+			<para><guimenuitem>Selecciona la coincidència núm. 1</guimenuitem> <keycombo><keycap>C</keycap><keycap>1</keycap></keycombo></para>
+		  </listitem>
+		  
+		  <listitem>
+			<para><guimenuitem>Selecciona la coincidència núm. 2</guimenuitem> <keycombo><keycap>C</keycap><keycap>2</keycap></keycombo></para>
+		  </listitem>
+		  <listitem>
+			<para><guimenuitem>Selecciona la coincidència núm. 3</guimenuitem> <keycombo><keycap>C</keycap><keycap>3</keycap></keycombo></para>
+		  </listitem>
+
+		  <listitem>
+			<para><guimenuitem>Selecciona la coincidència núm. 4</guimenuitem> <keycombo><keycap>C</keycap><keycap>4</keycap></keycombo></para>
+		  </listitem>
+
+		  <listitem>
+			<para><guimenuitem>Selecciona la coincidència núm. 5</guimenuitem> <keycombo><keycap>C</keycap><keycap>5</keycap></keycombo></para>
+		  </listitem>
+		</itemizedlist>
+      </listitem>
+	</varlistentry>
+
+	<varlistentry id="menus.edit.insert.unicode.control.character">
+      <term id="menus.edit.insert.unicode.control.character.title"><guisubmenu>Insereix un caràcter de control bidireccional</guisubmenu></term>
+	  <listitem>
+		<para>Insereix el caràcter de format direccional d'Unicode seleccionat. Consulteu <ulink url="https://www.unicode.org/reports/tr9/#Directional_Formatting_Characters">Algorisme bidireccional d'Unicode</ulink> per a conèixer més detalls.</para>
+
+		<itemizedlist>
+		  <listitem>
+			<para><guimenuitem>Marca d'esquerra a dreta (LRM U+200E)</guimenuitem></para>
+		  </listitem>
+		
+		  <listitem>
+			<para><guimenuitem>Marca de dreta a esquerra (RLM U+200F)</guimenuitem></para>
+		  </listitem>
+		  
+		  <listitem>
+			<para><guimenuitem>Incrustació d'esquerra a dreta (LRE U+202A)</guimenuitem></para>
+		  </listitem>
+		  
+		  <listitem>
+			<para><guimenuitem>Incrustació de dreta a esquerra (RLE U+202B)</guimenuitem></para>
+		  </listitem>
+		  
+		  <listitem>
+			<para><guimenuitem>Fi del format direccional (PDF U+202C)</guimenuitem></para>
+		  </listitem>
+		</itemizedlist>
+		<para>Utilitzeu <link linkend="menus.view" endterm="menus.view.title"/><link linkend="menus.view.mark.bidirectional.algorithm.control.character" endterm="menus.view.mark.bidirectional.algorithm.control.character.title"/> per a mostrar els caràcters i manipular-los més fàcilment. Consulteu <link linkend="app.bidi" endterm="app.bidi.title"/> per a conèixer més detalls.</para>
+
+      </listitem>
+	</varlistentry>
+
+	<varlistentry id="menus.edit.use.as.default.translation">
+      <term id="menus.edit.use.as.default.translation.title"><guimenuitem>Utilitza com a traducció per defecte</guimenuitem></term>
+      <listitem>
+		<para>Si hi ha diverses traduccions alternatives disponibles per al segment actiu, es pot etiquetar l'alternativa seleccionada com a traducció per defecte. L'entrada estarà atenuada si només hi ha una traducció disponible.</para>
+      </listitem>
+	</varlistentry>
+
+	<varlistentry id="menus.edit.create.alternative.translation">
+      <term id="menus.edit.create.alternative.translation.title"><guimenuitem>Crea una traducció alternativa</guimenuitem></term>
+      <listitem>
+		<para>És possible que els segments idèntics, en funció del context, requereixin traduccions diferents. Si la traducció actual no és adequada, seleccioneu aquest element del menú i indiqueu la traducció alternativa.</para>
+      </listitem>
+	</varlistentry>
+
+	<varlistentry id="menus.edit.remove.translation">
+      <term id="menus.edit.remove.translation.title"><guimenuitem>Suprimeix la traducció</guimenuitem><keycombo><keycap>C</keycap><keycap>S</keycap><keycap>X</keycap></keycombo></term>
+      <listitem>
+		<para>Suprimeix la traducció actual i defineix el segment com a no traduït.</para>
+      </listitem>
+	</varlistentry>
+
+	<varlistentry id="menus.edit.set.empty.translation">
+      <term id="menus.edit.set.empty.translation.title"><guimenuitem>Defineix una traducció buida</guimenuitem></term>
+      <listitem>
+		<para>Defineix la traducció com a buida. El fitxer de destinació no conté res per a aquest segment, mentre que l'editor el marca amb l'identificador <literal>&lt;EMPTY&gt;</literal>.</para>
+      </listitem>
+	</varlistentry>
+
+	<varlistentry id="menus.edit.register.identical.translation">
+      <term id="menus.edit.register.identical.translation.title"><guimenuitem>Registra una traducció idèntica</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>S</keycap></keycombo>
+	  </term>
+      <listitem>
+		<para>Utilitzeu aquesta ordre per a registrar una traducció com a idèntica al text d'origen, encara que no s'hagi habilitat la preferència <link linkend="dialogs.preferences.editor.allow.translation.to.be.equal.to.source" endterm="dialogs.preferences.editor.allow.translation.to.be.equal.to.source.title"/>.</para>
+      </listitem>
+	</varlistentry>
+  </variablelist>
+</section>

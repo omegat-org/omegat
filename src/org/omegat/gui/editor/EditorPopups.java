@@ -43,6 +43,8 @@ import javax.swing.text.AbstractDocument;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.JTextComponent;
 
+import org.openide.awt.Mnemonics;
+
 import org.omegat.core.Core;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.spellchecker.SpellCheckerMarker;
@@ -84,7 +86,7 @@ public final class EditorPopups {
      * because they do not work with context menus
      **/
     public static String translateMenu(String id) {
-        return OStrings.getString(id).replace("&","");
+        return Mnemonics.removeMnemonics(OStrings.getString(id));
     }
 
     /**

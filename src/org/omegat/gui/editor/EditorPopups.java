@@ -81,14 +81,6 @@ public final class EditorPopups {
     private EditorPopups() {
     }
     
-    /** 
-     * Translate menu item but ensuring it does not contain mnemonics,
-     * because they do not work with context menus
-     **/
-    public static String translateMenu(String id) {
-        return Mnemonics.removeMnemonics(OStrings.getString(id));
-    }
-
     /**
      * create the spell checker popup menu - suggestions for a wrong word, add
      * and ignore. Works only for the active segment, for the translation
@@ -162,7 +154,7 @@ public final class EditorPopups {
 
                 // what if no action is done?
                 if (suggestions.isEmpty()) {
-                    JMenuItem item = menu.add(translateMenu("SC_NO_SUGGESTIONS"));
+                    JMenuItem item = menu.add(Mnemonics.removeMnemonics(OStrings.getString("SC_NO_SUGGESTIONS")));
                     item.addActionListener(new ActionListener() {
                         public void actionPerformed(ActionEvent e) {
                             // just hide the menu
@@ -173,7 +165,7 @@ public final class EditorPopups {
                 menu.addSeparator();
 
                 // let us ignore it
-                JMenuItem item = menu.add(translateMenu("SC_IGNORE_ALL"));
+                JMenuItem item = menu.add(Mnemonics.removeMnemonics(OStrings.getString("SC_IGNORE_ALL")));
                 item.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
                         addIgnoreWord(word, wordStart, false);
@@ -181,7 +173,7 @@ public final class EditorPopups {
                 });
 
                 // or add it to the dictionary
-                item = menu.add(translateMenu("SC_ADD_TO_DICTIONARY"));
+                item = menu.add(Mnemonics.removeMnemonics(OStrings.getString("SC_ADD_TO_DICTIONARY")));
                 item.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
                         addIgnoreWord(word, wordStart, true);
@@ -245,7 +237,7 @@ public final class EditorPopups {
             }
 
             // Cut
-            JMenuItem cutContextItem = menu.add(translateMenu("CCP_CUT"));
+            JMenuItem cutContextItem = menu.add(Mnemonics.removeMnemonics(OStrings.getString("CCP_CUT")));
             if (cutEnabled) {
                 cutContextItem.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
@@ -257,7 +249,7 @@ public final class EditorPopups {
             }
 
             // Copy
-            JMenuItem copyContextItem = menu.add(translateMenu("CCP_COPY"));
+            JMenuItem copyContextItem = menu.add(Mnemonics.removeMnemonics(OStrings.getString("CCP_COPY")));
             if (copyEnabled) {
                 copyContextItem.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
@@ -269,7 +261,7 @@ public final class EditorPopups {
             }
 
             // Paste
-            JMenuItem pasteContextItem = menu.add(translateMenu("CCP_PASTE"));
+            JMenuItem pasteContextItem = menu.add(Mnemonics.removeMnemonics(OStrings.getString("CCP_PASTE")));
             if (pasteEnabled) {
                 pasteContextItem.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
@@ -283,7 +275,7 @@ public final class EditorPopups {
             menu.addSeparator();
 
             // Add glossary entry
-            JMenuItem item = menu.add(translateMenu("GUI_GLOSSARYWINDOW_addentry"));
+            JMenuItem item = menu.add(Mnemonics.removeMnemonics(OStrings.getString("GUI_GLOSSARYWINDOW_addentry")));
             item.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     Core.getGlossary()
@@ -313,7 +305,7 @@ public final class EditorPopups {
                 return;
             }
 
-            JMenuItem item = menu.add(translateMenu("MW_PROMPT_SEG_NR_TITLE"));
+            JMenuItem item = menu.add(Mnemonics.removeMnemonics(OStrings.getString("MW_PROMPT_SEG_NR_TITLE")));
             item.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     comp.setCaretPosition(mousepos);
@@ -344,12 +336,14 @@ public final class EditorPopups {
                 return;
             }
             JMenuItem header = menu
-                    .add(StringUtil.format(translateMenu("MW_GO_TO_DUPLICATE_HEADER"), dups.size()));
+                    .add(StringUtil.format(Mnemonics.removeMnemonics(OStrings.getString("MW_GO_TO_DUPLICATE_HEADER")), 
+                    dups.size()));
             header.setEnabled(false);
             MenuItemPager pager = new MenuItemPager(menu);
             for (SourceTextEntry entry : dups) {
                 int entryNum = entry.entryNum();
-                String label = StringUtil.format(translateMenu("MW_GO_TO_DUPLICATE_ITEM"), entryNum);
+                String label = StringUtil.format(Mnemonics.removeMnemonics(OStrings.getString("MW_GO_TO_DUPLICATE_ITEM")), 
+                    entryNum);
                 JMenuItem item = pager.add(new JMenuItem(label));
                 item.addActionListener(e -> ec.gotoEntry(entryNum));
             }
@@ -373,19 +367,19 @@ public final class EditorPopups {
                 return;
             }
 
-            menu.add(translateMenu("TRANS_POP_EMPTY_TRANSLATION")).addActionListener(
+            menu.add(Mnemonics.removeMnemonics(OStrings.getString("TRANS_POP_EMPTY_TRANSLATION"))).addActionListener(
                     new ActionListener() {
                         public void actionPerformed(ActionEvent e) {
                             ec.registerEmptyTranslation();
                         }
                     });
-            menu.add(translateMenu("TRANS_POP_REMOVE_TRANSLATION")).addActionListener(
+            menu.add(Mnemonics.removeMnemonics(OStrings.getString("TRANS_POP_REMOVE_TRANSLATION"))).addActionListener(
                     new ActionListener() {
                         public void actionPerformed(ActionEvent e) {
                             ec.registerUntranslated();
                         }
                     });
-            menu.add(translateMenu("TRANS_POP_IDENTICAL_TRANSLATION")).addActionListener(
+            menu.add(Mnemonics.removeMnemonics(OStrings.getString("TRANS_POP_IDENTICAL_TRANSLATION"))).addActionListener(
                     new ActionListener() {
                         public void actionPerformed(ActionEvent e) {
                             ec.registerIdenticalTranslation();
@@ -409,7 +403,8 @@ public final class EditorPopups {
             }
 
             for (final Tag tag : TagUtil.getAllTagsMissingFromTarget()) {
-                JMenuItem item = menu.add(StringUtil.format(translateMenu("TF_MENU_EDIT_TAG_INSERT_N"), tag.tag));
+                JMenuItem item = menu.add(StringUtil.format(Mnemonics.removeMnemonics(
+                    OStrings.getString("TF_MENU_EDIT_TAG_INSERT_N")), tag.tag));
                 item.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
                         Core.getEditor().insertTag(tag.tag);
@@ -436,9 +431,9 @@ public final class EditorPopups {
             if (!isInActiveTranslation) {
                 return;
             }
-            JMenu submenu = new JMenu(translateMenu("TF_MENU_EDIT_INSERT_CHARS"));
+            JMenu submenu = new JMenu(Mnemonics.removeMnemonics(OStrings.getString("TF_MENU_EDIT_INSERT_CHARS")));
             for (int i = 0; i < names.length; i++) {
-                JMenuItem item = new JMenuItem(translateMenu(names[i]));
+                JMenuItem item = new JMenuItem(Mnemonics.removeMnemonics(OStrings.getString(names[i])));
                 final String insertText = inserts[i];
                 item.addActionListener(new ActionListener() {
                     @Override

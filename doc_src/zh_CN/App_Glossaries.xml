@@ -1,129 +1,161 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<appendix id="appendix.glossaries">
-  <title>词汇表</title>
+<section id="app.glossaries">
+  <title id="app.glossaries.title">词汇表</title>
 
-  <para>词汇表是术语文件。可以手工创建和更新之，也可以从其他项目中导入。</para>
+  <para>词汇表是存储在 <link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/> 文件夹中的术语文件。</para>
 
-  <para>给定的项目可以拥有任意数量的参考词汇表，但是只有一个词汇表（该项目的默认词汇表）可以直接从 OmegaT 用户界面写入。</para>
+  <para>片段中所有在<emphasis>任意</emphasis>词汇表中存在匹配的术语都会显示在<link linkend="panes.glossary" endterm="panes.glossary.title"/>窗格中。</para>
 
-  <para>无论项目中有多少词汇表，片段中出现的在任一词汇表内有匹配匹配项的术语都会显示在“词汇表”窗格中。</para>
+  <para>原文术语可以是多个单词的语句。</para>
 
-  <section>
-    <title>默认词汇表</title>
+  <para>有 2 种词汇表文件：</para>
 
-    <para>默认的可写词汇表位于 <filename>/glossary</filename> 项目文件夹中，名为 <filename>glossary.txt</filename>。</para>
+  <variablelist>
+	<varlistentry>
+	  <term>项目词汇表</term>
+	  <listitem>
+		<para>用<link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.create.glossary.entry" endterm="menus.edit.create.glossary.entry.title"/>可在词汇表中输入新词汇。因此，它被称为<emphasis>可写</emphasis>词汇表。</para>
+		
+		<para>用<link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.access.project.contents.title" endterm="menus.project.access.project.contents.title"/>可直访问它。然后可以用文本编辑器打开它并进行修改。</para>
 
-    <para>可以在项目属性对话框中更改其名称和位置，但其扩展名必须是 <filename>.txt</filename> 或 <filename>.utf8</filename>，且其位置必须位于 <filename>/glossary</filename> 项目文件夹下。</para>
+		<para>并不需要事先准备此文件。</para>
 
-    <para>进行设置时，并不要求相应文件已存在，在添加第一个词条时会自动创建之。如果该文件已存在，不会对其格式或字符集进行检查：新条目始终采用制表符分隔的格式，并且文件将会以 UTF-8 编码保存。</para>
+		<para>它会在首次往词汇表中添加词条时创建。</para>
+
+		<note>
+          <para>如果选择使用一个现有文件作为默认词汇表，则默认情况下，所有新词条会以 tab 分隔的格式进行记录并以 UTF-8 保存。</para>
+
+		  <para>如果要指定不同的编码，可以通过添加以下格式的“魔术”注释：</para>
+
+		  <simplelist>
+            <member>
+              <code># -*- coding: &lt;charset&gt; -*-</code>,
+            </member>
+          </simplelist>
+		  
+          <para>其中 <parameter>&lt;charset&gt;</parameter> 通常是 <ulink url="http://www.iana.org/assignments/character-sets/character-sets.xhtml">IANA Charset Registry</ulink> 中所列出的集合之一。</para>
+		</note>
+	  </listitem>
+	</varlistentry>
+	
+	<varlistentry>
+	  <term>参考词汇表</term>
+	  <listitem>
+		<para>它们是 OmegaT 可识别格式的术语文件。你不能像项目词汇表那般从 OmegaT 的界面修改它们，但可以在文本编辑器中做到这点。</para>
+	  </listitem>
+	</varlistentry>
+  </variablelist>
+
+  <note>
+	<para>对任何一个词汇表做出的修改都会立刻被 OmegaT 识别到并显示在 <link linkend="panes.glossary" endterm="panes.glossary.title"/> 窗格中。</para>
+  </note>
+
+  <section id="glossaries.glossary.folder">
+    <title id="glossaries.glossary.folder.title">词汇表文件夹</title>
+
+    <para>默认情况下，每个项目都包含一个 <link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/> 文件夹，用于存储可写词汇表和需要添加到项目中的所有参考词汇表。详情请参阅<link linkend="dialogs.project.properties.file.locations.glossaries" endterm="dialogs.project.properties.file.locations.glossaries.title"/>项目属性。</para>
+
+    <para>所有词汇表必须位于 <link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/> 项目文件夹中。位于其中嵌套的文件夹下的词汇表也会被识别。</para>
+
+    <para>在该参考词汇表文件夹中，你可以创建多个参考词汇表文件夹，按主题、客户、或任何其他适合于工作流程的分类方式来组织。</para>
+    <para>用<link linkend="dialogs.project.properties.file.locations.glossaries" endterm="dialogs.project.properties.file.locations.glossaries.title"/>项目属性来设置参考词汇表文件夹的位置。此文件夹可以设置为使用在项目之外的文件夹或其他项目的特定子文件夹之一。</para>
   </section>
 
-  <section>
-    <title>用法</title>
+  <section id="glossaries.default.glossary">
+    <title id="glossaries.default.glossary.title">项目词汇表</title>
 
-    <para>要使用现有的术语表，只需在创建项目后将它放到 <filename>/glossary</filename> 目录下。在打开项目时，<application>OmegaT</application> 会自动检测该目录下的术语表文件。</para>
+    <para>默认情况下，可写项目词汇表位于 <link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/> 文件夹中，名为 <link linkend="project.folder.glossary.txt" endterm="project.folder.glossary.txt.title"/>。</para>
 
-    <para>要向可写词汇表中添加新词汇，请使用 <guimenuitem>编辑</guimenuitem> &gt; <guimenuitem>创建词条</guimenuitem>（<keycap>Ctrl+Shift+G</keycap>）。新添加的词汇立即就会被识别生效。要向参考词汇表中添加词汇，请用外部文本编辑器编辑之。新添加的词汇会在变更保存后立即识别生效。</para>
-
-    <para>词汇原文可以是多单词词汇。</para>
-
-    <para>词汇表功能使用词干分析来查找匹配项。在 OmegaT 的全局首选项中停用<guimenuitem>对词条使用词干分析</guimenuitem>可以只查找词汇的精确匹配项。</para>
-
-    <para>在“=”号之前显示的是词汇原文，之后是词汇译文。注释前面会显示一个数字，并且每条注释都单独占一行。来自项目可写词汇表的词汇会使用粗体显示。来自参考词汇表的词汇则用标准字体显示。</para>
-
-    <para>要显示词汇表匹配项的<guimenuitem>自动完成</guimenuitem>上下文菜单，请按与操作系统关联的热键（对于 macOS 是 <keycap>Escape</keycap>，其他平台则是 <keycap>Ctrl+Space</keycap>）。</para>
-
-    <para>若要在片段的原文部分中给匹配的词汇加上下划线，请使用<guimenuitem>视图</guimenuitem> &gt; <guimenuitem>标记词汇表匹配</guimenuitem>。右键点击带下划线的词汇并选择一个词汇译文可以将其插入片段的译文部分中当前光标位置处。</para>
+    <para>可以在<link linkend="dialogs.project.properties.file.locations.writable.glossary" endterm="dialogs.project.properties.file.locations.writable.glossary.title"/>对话框中更改其名称和位置，但必须使用 <filename>.txt</filename> 或 <filename>.utf8</filename> 扩展名，并且将其存储在 <link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/> 文件夹或其子文件夹内。</para>
   </section>
 
-  <section>
-    <title>文件格式</title>
+  <section id="glossaries.fileformat">
+    <title id="glossaries.fileformat.title">文件格式</title>
 
-    <para>OmegaT 词汇表文件是简单的纯文本三列列表，第一列是词汇原文，第二列是词汇译文，而第三列则是注释。第二列和第三列都是可选的。</para>
+    <para>OmegaT 的词汇表文件是包含三列列表的简单纯文本文件，第一列是词汇原文，第二列是词汇译文，而第三列则是注释。第二列和第三列都是可选的。</para>
 
-    <para>纯文本词汇表可以是“制表符分隔的值”（TSV）文件或“逗号分隔的值”（CSV）文件。第三种可能的格式是“TBX”（TermBase eXchange）ISO 标准。</para>
+    <para>词汇表可以是“tab 分隔的值”（TSV）或“逗号分隔的值”（CSV）文件，也可以使用 TermBase eXchange（TBX 2）格式。</para>
 
-    <para>项目的默认可写词汇表则总是以 UTF-8 编码保存的 TSV 文件。</para>
+    <para>由 OmegaT 为项目创建的可写词汇表将是以 UTF-8 保存的 TSV 文件。用户创建的仅使用拉丁字符的文件如果不包含非 ASCII 字符或其他会被解析为 UTF-8 的字符，那么可能会被识别并视为 ISO-8859-1 进行处理。</para>
 
-    <para>读取词汇表时使用的编码取决于文件扩展名：</para>
+    <para>读取参考词汇表时使用的编码取决于其文件扩展名：</para>
 
-    <table xml:id="glossary.extensions">
-      <caption>格式、扩展名和预期编码</caption>
-
+    <table id="glossary.extensions">
+      <title>格式、扩展名和预期编码</title>
+	  <tgroup cols="3">
       <thead>
-        <tr>
-          <td>格式</td> <td>扩展名</td> <td>编码</td>
-        </tr>
+        <row>
+          <entry>格式</entry>
+
+          <entry>扩展名</entry>
+
+          <entry>编码</entry>
+        </row>
       </thead>
 
       <tbody>
-        <tr> <td>TSV</td> <td> <filename>.txt</filename> </td> <td>UTF-8</td> </tr> <tr> <td>TSV</td> <td> <filename>.utf8</filename> </td> <td>UTF-8</td> </tr> <tr> <td>TSV</td> <td> <filename>.tab</filename> </td> <td>操作系统默认编码</td> </tr> <tr> <td>TSV</td> <td> <filename>.tsv</filename> </td> <td>操作系统默认编码</td> </tr> <tr> <td>CSV</td> <td> <filename>.csv</filename> </td> <td>UTF-8</td> </tr> <tr> <td>TBX</td> <td> <filename>.tbx</filename> </td> <td>UTF-8</td> </tr>
+        <row>
+          <entry>TSV</entry>
+
+          <entry>
+            <filename>.txt</filename>
+          </entry>
+
+          <entry>UTF-8</entry>
+        </row>
+
+        <row>
+          <entry>TSV</entry>
+
+          <entry>
+            <filename>.utf8</filename>
+          </entry>
+
+          <entry>UTF-8</entry>
+        </row>
+
+        <row>
+          <entry>TSV</entry>
+
+          <entry>
+            <filename>.tab</filename>
+          </entry>
+
+          <entry>操作系统默认编码</entry>
+        </row>
+
+        <row>
+          <entry>TSV</entry>
+
+          <entry>
+            <filename>.tsv</filename>
+          </entry>
+
+          <entry>操作系统默认编码</entry>
+        </row>
+
+        <row>
+          <entry>CSV</entry>
+
+          <entry>
+            <filename>.csv</filename>
+          </entry>
+
+          <entry>UTF-8</entry>
+        </row>
+
+        <row>
+          <entry>TBX</entry>
+
+          <entry>
+            <filename>.tbx</filename>
+          </entry>
+
+          <entry>UTF-8</entry>
+        </row>
       </tbody>
+      </tgroup>
     </table>
-
-    <para>词汇表必须位于 <filename>/glossary</filename> 项目文件夹中。位于其中嵌套的文件夹下的词汇表也会被识别。</para>
   </section>
-
-  <section>
-    <title>常见词汇表问题</title>
-
-    <para><emphasis role="bold">问题：不显示词汇表词汇——可能的原因：</emphasis></para>
-
-    <itemizedlist>
-      <listitem>
-        <para>在 “glossary” 文件夹中没找到词汇表文件。</para>
-      </listitem>
-    </itemizedlist>
-
-    <itemizedlist>
-      <listitem>
-        <para>词汇表文件为空。</para>
-      </listitem>
-    </itemizedlist>
-
-    <itemizedlist>
-      <listitem>
-        <para>条目不是以制表符分隔的。</para>
-      </listitem>
-    </itemizedlist>
-
-    <itemizedlist>
-      <listitem>
-        <para>词汇表文件没有正确的扩展名（.tab、.utf8 或 .txt）。</para>
-      </listitem>
-    </itemizedlist>
-
-    <itemizedlist>
-      <listitem>
-        <para>词汇表的词条和文档中的原文文本之间并不是“精确”匹配——比如，复数形式。</para>
-      </listitem>
-    </itemizedlist>
-
-    <itemizedlist>
-      <listitem>
-        <para>词汇表文件没有采用正确的编码。</para>
-      </listitem>
-    </itemizedlist>
-
-    <itemizedlist>
-      <listitem>
-        <para>当前片段中没有词汇和与词汇表中的词汇相匹配。</para>
-      </listitem>
-    </itemizedlist>
-
-    <itemizedlist>
-      <listitem>
-        <para>已修正了若干以上问题，但还未重新载入项目。</para>
-      </listitem>
-    </itemizedlist>
-
-    <para><emphasis role="bold">问题：在术语表窗格中某些字符显示不正确</emphasis></para>
-
-    <itemizedlist>
-      <listitem>
-        <para>……但这些字符在编辑窗格中能正确显示：扩展名与文件编码不一致。</para>
-      </listitem>
-    </itemizedlist>
-  </section>
-</appendix>
+</section>

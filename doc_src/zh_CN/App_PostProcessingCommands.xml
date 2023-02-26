@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="post.processing.commands">
+  <title id="post.processing.commands.title">后处理命令</title>
+
+  <para>有关专属于项目的命令，参见<link linkend="dialogs.project.properties.external.processing.command" endterm="dialogs.project.properties.external.processing.command.title"/>项目属性。</para>
+
+  <para>有关全局命令，参见<link linkend="dialogs.preferences.saving.and.output.external.post-processing.command" endterm="dialogs.preferences.saving.and.output.external.post-processing.command.title"/>首选项。</para>
+	
+
+  <section id="post.processing.commands.template.variables">
+    <title id="post.processing.commands.template.variables.title">模板变量</title>
+    <para>该命令以带有展开的模板值的字符串的形式传递给 Java Runtime 的 exec 方法。所有的参数都应当用引号括起来，例如 <literal>&quot;${fileName}&quot;</literal>。</para>
+
+    <para>以下模板变量始终可用。模板列表中的其他条目是系统的环境变量。</para>
+	
+    <table id="post.processing.commands.template.variables.table">
+      <title id="post.processing.commands.template.variables.table.title">模板变量</title>
+      <tgroup cols="2" colsep="1">
+        <colspec align="left" colname="1" colnum="1"/>
+        <colspec align="left" colname="2" colnum="2"/>
+        <thead>
+          <row>
+            <entry>变量名</entry>
+            <entry>值</entry>
+          </row>
+        </thead>
+
+        <tbody>
+		  <row>
+			<entry>${projectName}</entry>
+			<entry>项目目录的名称</entry>
+		  </row>
+		  <row>
+			<entry>${projectRoot}</entry>
+			<entry>项目文件夹的完整路径</entry>
+		  </row>
+		  <row>
+			<entry>${sourceRoot}</entry>
+			<entry>source 文件夹的完整路径</entry>
+		  </row>
+		  <row>
+			<entry>${targetRoot}</entry>
+			<entry>target 文件夹的完整路径</entry>
+		  </row>
+		  <row>
+			<entry>${glossaryRoot}</entry>
+			<entry>glossary 文件夹的完整路径</entry>
+		  </row>
+		  <row>
+			<entry>${tmRoot}</entry>
+			<entry>TM 根文件夹的完整路径</entry>
+		  </row>
+		  <row>
+			<entry>${tmAutoRoot}</entry>
+			<entry> TM 下的 auto 文件夹的完整路径</entry>
+		  </row>
+		  <row>
+			<entry>${dictRoot}</entry>
+			<entry>dictionary 文件夹的完整路径</entry>
+		  </row>
+		  <row>
+			<entry>${tmOtherLangRoot}</entry>
+			<entry>TM 根 + tmx2source（详情请参阅指南<link linkend="how.to.tm.bridge.two.languages" endterm="how.to.tm.bridge.two.languages.title"/>。）</entry>
+		  </row>
+		  <row>
+			<entry>${sourceLang}</entry>
+			<entry>原文语言</entry>
+		  </row>
+		  <row>
+			<entry>${targetLang}</entry>
+			<entry>译文语言</entry>
+		  </row>
+		  <row>
+			<entry>${filePath}</entry>
+			<entry>原文文件的完整路径</entry>
+		  </row>
+		  <row>
+			<entry>${fileShortPath}</entry>
+			<entry>相对于给定根目录的原文文件名</entry>
+		  </row>
+		  <row>
+			<entry>${fileName}</entry>
+			<entry>原文文件的完整文件名</entry>
+		  </row>
+		  <row>
+			<entry>${fileNameOnly}</entry>
+			<entry>不带扩展名的原文文件名</entry>
+		  </row>
+		  <row>
+			<entry>${fileExtension}</entry>
+			<entry>不带点号的原文文件扩展名</entry>
+		  </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+  
+  <section id="post.processing.commands.user.defined.scripts">
+    <title id="post.processing.commands.user.defined.scripts.title">用户定义的脚本</title>
+    <para>除了常规命令外，你还可以调用脚本。切勿运行来自不受信任来源的后处理脚本。出于安全原因，默认情况下禁用局部后处理命令。</para>
+    <para>常规命令和自定义脚本皆可使用模板变量。对于脚本，你可能需要使用绝对路径。OmegaT 所使用的 PATH 环境变量和当前用户的 PATH 可能并不相同。</para>
+    <para>STDOUT 和 STDERR 会被写入 <link linkend="configuration.folder.default.contents.logs.title">omegat.log</link> 文件中。退出码和 STDERR 或最后一个 STDOUT 会出现在状态栏上。</para>
+  </section>
+
+  <section id="post.processing.commands.linux.and.macos">
+    <title id="post.processing.commands.linux.and.macos.title">Linux 和 macOS</title>
+    <para>你应当使用 shebang，例如 <literal>#! /bin/bash</literal> 或 <literal>#! /usr/bin/env python3</literal>。并且脚本必须是可执行的。使用 <literal>&amp;&amp;</literal> 或 <literal>||</literal> 或管道 <literal>|</literal> 链接命令在这里不起作用。</para>
+  </section>
+  
+  <example id="post.processing.commands.example">
+	  <title id="post.processing.commands.example.title">后处理命令的简单示例：</title>
+	  <variablelist>
+		<varlistentry>
+		  <term>在 Linux 中打开 target 文件夹</term>
+		  <listitem>
+			<programlisting>xdg-open ${targetRoot}</programlisting>
+		  </listitem>
+		</varlistentry>
+		<varlistentry>
+		  <term>在 macOS 中打开 target 文件夹</term>
+		  <listitem>
+			<programlisting>open ${targetRoot}</programlisting>
+		  </listitem>
+		</varlistentry>
+
+		<varlistentry>
+		  <term>在 Windows Powershell 中打开  target 文件夹</term>
+		  <listitem>
+			<programlisting>Invoke-Item ${targetRoot}</programlisting>
+		  </listitem>
+		</varlistentry>
+	  </variablelist>
+	</example>
+  </section>

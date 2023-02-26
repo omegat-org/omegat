@@ -1,0 +1,1179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd"
+[
+<!ENTITY % manualvariables SYSTEM "manualvariables.mod">
+%manualvariables;
+]>
+<section id="app.regex">
+  <title id="app.regex.title">正则表达式</title>
+
+  <para>本附录面向对探索提高工作效率的强大方法感兴趣的用户。尽管看起来令人生畏且复杂，但即使是最简单的正则表达式（regulax expression，通常缩写为 <emphasis>regex</emphasis> 或 <emphasis>regexp</emphasis>）也十分有用，不仅在 OmegaT 中，在很多其他应用程序中你也可能会天天用到（可能是某种变体）。</para>
+
+  <para>此处仅涵盖对翻译人员最有用的基础知识。本附录末尾的<link linkend="app.regex.tools" endterm="app.regex.tools.title"/>章节提供一些起点，可供探索超出本手册范围的高级或复杂用途。如果你需要针对特定案例的帮助，也可以在各种支持渠道中提问。</para>
+  
+  <para>正则表达式使用字母、数字和符号（统称为<emphasis>字符</emphasis>）的组合来定义表示特定文本模式的<emphasis>表达式</emphasis>。</para>
+
+  <para>这里有一些例子。</para>
+  
+  <variablelist>
+    <varlistentry>
+      <term>[0-9]</term>
+      <listitem><para>0 到 9 之间的任何一位数字。</para>
+      </listitem>
+    </varlistentry>
+
+	<varlistentry>
+      <term>\w+</term>
+      <listitem><para>表示一个或多个“单词字符”，即字母表中的字母、数字、和下划线符号。</para>
+      </listitem>
+    </varlistentry>
+
+	<varlistentry>
+      <term>\h?</term>
+      <listitem><para>表示零个或一个水平空格字符（这包括常规空格和不换行空格以及制表符，但不包括换行符，后者属于“垂直空格”类别（用 \v 表示）。)</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>    
+  
+  <para>很多 OmegaT 功能依赖于正则表达式或将其作为一个选项提供：</para>
+
+  <variablelist>
+    <varlistentry>
+      <term>搜索</term>
+      <listitem>
+        <para>OmegaT 的搜索包含一个<link linkend="windows.text.search.methods.regex" endterm="windows.text.search.methods.regex.title"/>选项，允许你在文件中进行极其强大的搜索。</para>
+
+        <para><link linkend="windows.text.replace" endterm="windows.text.replace.title"/>对话框中的相同选项则允许你将正则表达式应用于搜索文本和替换文本。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>自定义标签</term>
+      <listitem>
+        <para>自定义标签是使用正则表达式定义的标签，其处理方式和原生的 OmegaT 标签完全相同。详情请参阅<link linkend="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags" endterm="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags.title"/>首选项。</para>
+
+		<para>使用 <code>|</code>（或）字符来分隔各个标签定义。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>标记的文本</term>
+      <listitem>
+        <para><link linkend="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation" endterm="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation.title"/>首选项让你能定义一些字符串，OmegaT 默认情况下会将其显示为红色，并且会将其排除在验证目的之外。</para>
+
+		<para>使用 <code>|</code>（或）字符来分隔各个片段定义。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>对齐中的文本高亮</term>
+      <listitem>
+        <para>视觉提示有助于验证你的对齐是否正确。<link linkend="windows.aligner.adjust.highlight" endterm="windows.aligner.adjust.highlight.title"/>设置允许你定义 OmegaT 会在对齐的文档中高亮显示的字符串。</para>
+
+		<para>使用 <code>|</code>（或）字符来分隔各个表达式。</para>
+      </listitem>
+    </varlistentry>	
+
+    <varlistentry>
+      <term>分割规则</term>
+      <listitem>
+        <para>分割规则和语言模式是用正则表达式定义的。你可以随意修改它们以改进文档的片段分割或者添加其他通用规则。详情请参阅附录<link linkend="app.segmentation" endterm="app.segmentation.title"/>。</para>
+
+        <para>分割规则或例外规则定义了在片段中进行拆分或不能拆分的位置。定义该位置需要两个正则表达式：“前”表达式定义了需要应用该规则的位置之前的文本模式，而“后”表达式这定义此位置之后的文本模式。</para>
+
+		<para>与项目的原文语言相匹配的语言模式将应用于该项目。</para>
+	  </listitem>
+    </varlistentry>
+  </variablelist>
+
+  <section id="app.regex.four.rules">
+    <title id="app.regex.four.rules.title">4 条规则</title>
+
+    <para>正则表达式用于查找文本，包括在屏幕上或打印输出时不可见的字符，例如空格、tab、或断行。任何给定表达式要么<emphasis>匹配</emphasis>要么<emphasis><emphasis role="bold">不</emphasis>匹配</emphasis>单词、片语、或其他文本序列。</para>
+    
+    <para>在确定匹配时，表达式中的每一个字符都是有实际意义的。</para>
+    <para>许多字符或字符组合在正则表达式中具有特殊含义。</para>
+    
+    <warning>
+      <para>正则表达式只匹配文本。它们不会匹配诸如<emphasis>粗体</emphasis>、<emphasis>斜体</emphasis>等修饰或其他<emphasis>格式效果</emphasis>。</para>
+    </warning>
+
+    <para>有四条规则需要牢记。</para>
+
+    <variablelist>
+      <varlistentry>
+        <term>大多数字符只是匹配其自身</term>
+        <listitem>
+          <para>正则表达式中的大多数字符只是在文本序列中<emphasis>查找其自身</emphasis>。</para>
+
+		  <para>例如，以七个字母拼出的单词“<emphasis>example</emphasis>”只是告诉搜索功能要按此顺序精确匹配这些字母。简而言之，这样的搜索只是在查找单词“<emphasis>example</emphasis>”。</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>前面有反斜杠（<literal>\</literal>）的字母具有特殊含义</term>
+        <listitem>
+          <para>与单独的字母（如上文所述，仅表示其自身）不同，前面有 <literal>\</literal> 的字母在正则表达式中具有特殊功能。</para>
+
+		  <para>例如，<emphasis>r</emphasis> 只是一个普通的字符，但前面加上 <literal>\</literal> 变成 <literal>\r</literal> 就将其变为匹配<emphasis>回车字符</emphasis>的特殊组合。类似地，<literal>\R</literal> 匹配 <emphasis>任意换行符</emphasis>。</para>
+		  
+          <note>
+            <para>字母中只有 <emphasis>i j l m o</emphasis> 和 <emphasis>y</emphasis>（大写和小写都算）在其前面加上反斜杠时没有特殊含义。本手册只介绍一小部分具有特殊含义的字母。</para>
+
+			<para>关于这里未涵盖的组合的信息，请参阅下文<link linkend="app.regex.tools" endterm="app.regex.tools.title"/>部分中的站点。</para>
+          </note>
+        </listitem>
+      </varlistentry>
+        
+      <varlistentry>
+      <term>默认情况下，有十二个字符具有特殊含义</term>
+        <listitem>
+          <para>这种特殊含义必须用另一个字符来取消才能匹配此字符本身。</para>
+
+          <para>完整的字符列表呈现在<link linkend="app.regex.twelve.characters">下文</link>。范例之一是 <literal>.</literal>：单独出现时，它具有匹配<emphasis>任意单个字符</emphasis>的特殊含义。</para>
+
+		  <para>要查找普通的句点，就必须用 <literal>\</literal> 来取消此含义，这就形成了表达式 <literal>\.</literal>，它正好匹配一个句点。</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><literal>\</literal> 字符是个非常特殊的字符</term>
+        <listitem>
+          <para>如上所述，<literal>\</literal> 字符具有取消或激活其他字符的特殊含义的默认特殊含义。如果将其放在没有特殊含义的字符（无论是默认还是附加）之前，它都不会有任何效果。</para>
+
+          <para>可以通过双写 <literal>\</literal> 来取消其自身的特殊含义，即 <literal>\\</literal> 的形式，这只会匹配<emphasis>反斜杠</emphasis>字符本身。</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </section>
+
+  <section id="app.regex.twelve.characters">
+    <title id="app.regex.twelve.characters.title">12 个字符</title>
+  
+    <para>十二个特殊字符是<emphasis>反斜杠</emphasis> <literal>\</literal>、<emphasis>脱字符</emphasis> <literal>^</literal>、<emphasis>美元符号</emphasis> <literal>$</literal>、<emphasis>句点</emphasis>（或者叫<emphasis>点号</emphasis>）<literal>.</literal>、<emphasis>竖线</emphasis>（或者叫<emphasis>管道符号</emphasis>）<literal>|</literal>、<emphasis>问号</emphasis> <literal>?</literal>、<emphasis>星号</emphasis> <literal>*</literal>、<emphasis>加号</emphasis> <literal>+</literal>、左<emphasis>括号</emphasis> <literal>(</literal>、右<emphasis>括号</emphasis> <literal>)</literal>、左<emphasis>方括号</emphasis> <literal>[</literal>、和左<emphasis>花括号</emphasis> <literal>{</literal>。</para>
+
+    <para>下面用依赖于各个字符的正则表达式以及与其匹配或不匹配的文本来作为例子简要介绍每个字符。</para>
+    
+      <variablelist>
+        <varlistentry>
+          <term>反斜杠：<literal>\</literal></term>
+          <listitem>
+            <para>此字符取消或激活后继字符的特殊含义。</para>
+            
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry/>
+                    <entry><literal>0\.[0-9]</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>匹配</entry>
+                    <entry>
+                      <para><emphasis>0.0</emphasis> 到 <emphasis>0.9</emphasis> 的数字，或者诸如 10.5 或 560.5 之类的数字中最后的 <emphasis>0.5</emphasis>。</para>
+
+                      <para><literal>\.</literal> 取消了句点的“任意字符”的含义，让其匹配小数点，而 <literal>\d</literal> 将普通的小写“d”字母转变为匹配任意 0 到 9 数字的表达式。</para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>不匹配</entry>
+                    <entry>
+                      <para>诸如 0、1、0-3 这样的序列，或 0x002E 的前三个字符（如果正则表达式只是 <literal>0.[0-9]</literal> 就能匹配了，其中句点前面没有反斜杠）</para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>脱字符：<literal>^</literal></term>
+          <listitem>
+            <para>当它是表达式的第一个字符时，<emphasis>脱字符</emphasis>这个字符匹配一行的开头。</para>
+
+            <para>当它是<link linkend="app.regex.types.of.expressions.classes">方括号括起的字符类</link>中的第一个字符时，它匹配不属于该类的所有字符。</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry/>
+                    <entry>
+                      <orderedlist>
+                        <listitem>
+                          <para><literal>^A</literal></para>
+                        </listitem>
+        
+                        <listitem>
+                          <para>[^abc]</para>
+                        </listitem>
+                      </orderedlist>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>匹配</entry>
+                    <entry>
+                      <orderedlist>
+                        <listitem>
+                          <para>The uppercase “A” 以下句子中的大写“A”：“A long, but exciting journey was about to begin”。</para>
+                        </listitem>
+
+                        <listitem>
+                          <para>任意<emphasis>不是</emphasis>“a”、“b”、或“c”的字符。例如，在单词“back”中，只有“k”是匹配的。</para>
+                        </listitem>
+                      </orderedlist>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>不匹配</entry>
+                    <entry>
+                      <orderedlist>
+                        <listitem>
+                          <para>以下句子中的大写“A”：“My friend is writing a book called <emphasis>A Long Journey</emphasis>”。</para>
+                        </listitem>
+                      
+                        <listitem>
+                          <para>单词“back”中的小写“a”、“b”、或“c”。</para>
+                        </listitem>
+                      </orderedlist>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>美元符号：<literal>$</literal></term>
+          <listitem>
+            <para>当它是表达式的最后一个字符时，<emphasis>美元</emphasis>符号匹配一行的末尾。</para>
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry/>
+                    <entry><literal>^\w+:$</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>匹配</entry>
+                    <entry>
+                      <para>由单个单词组成并以冒号结尾的行：</para>
+                      <para><emphasis>Questions:</emphasis></para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>不匹配</entry>
+                    <entry>
+                      <para>由单个单词组成但不以冒号结尾的行：</para>
+                      <para><emphasis>Questions?</emphasis></para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>句点：<literal>.</literal></term>
+          <listitem>
+            <para>匹配任何单个字符。</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry/>
+                    <entry><literal>c.t</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>匹配</entry>
+                    <entry>
+                      <para>任何以“c”开头并以“t”结尾的三字母组合：“<emphasis>cat</emphasis>”、“<emphasis>cut</emphasis>”、“<emphasis>cot</emphasis>”、或者甚至诸如“<emphasis>czt</emphasis>”或“<emphasis>cqt</emphasis>”这样无意义的组合。</para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>不匹配</entry>
+                    <entry>
+                      <para>包含以“c”开头并以“t”结尾、但拆分成多行的三字母组合：</para>
+                      <para>What is the missing letter?</para>
+                        <simplelist>
+                          <member><literal>c</literal></member>
+                          <member><literal/></member>
+                          <member><literal>t</literal></member>
+                        </simplelist>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>竖线：<literal>|</literal></term>
+          <listitem>
+            <para>此字符起到了“或”的作用，匹配其前面或者后面表达式任一者。</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry/>
+                    <entry><literal>^An|^The</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>匹配</entry>
+                    <entry>
+                      <para>诸如以下片语中开头的“An”或“The”，比如：<simplelist>
+                          <member>“An apple a day…”</member>
+                          <member>“The apple of my eye…”</member>
+                        </simplelist>
+                      </para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>不匹配</entry>
+                    <entry>
+                      <para>诸如以下片语中开头的“An”或“The”，比如：<simplelist>
+                          <member>“A story called <emphasis>An Unsung
+                          Hero</emphasis>.”</member>
+                          <member>“They work for <emphasis>The Daily
+                            Post</emphasis>.”</member>
+                        </simplelist>
+                      </para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>问号：<literal>?</literal></term>
+          <listitem>
+            <para>此字符指定应该匹配前面那个字符或表达式的零个或一个实例。</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry/>
+                    <entry>
+                      <literal>an?␣</literal>（其中的“␣”代表单个空格）</entry>
+                  </row>
+
+                  <row>
+                    <entry>匹配</entry>
+                    <entry>
+                      <para>下面其中的“a ”或“an ”：<simplelist>
+                          <member>“I have a question.”</member>
+                          <member>“I know an excellent doctor.”</member>
+                        </simplelist>
+                      </para>
+                      
+                      <para>它也会找到诸如“Can I help you?”这样的句子中“Can ”最后的“an ”，或者“We had pasta for lunch.”中“pasta ”最后的“a ”。</para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>不匹配</entry>
+                    <entry>
+                      <para>下面其中的“a”或“an”：<simplelist>
+                          <member>The indefinite article: “a” (or
+                          “an”).</member>
+                        </simplelist>
+                      </para>
+                      <para>它们后面没有跟着空格。</para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>星号：<literal>*</literal></term>
+          <listitem>
+            <para>此字符指定应该匹配前面那个字符或表达式的零个或更多个实例。</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry/>
+                    <entry><literal>run\w*</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>匹配</entry>
+                    <entry>
+                      <para>单词“run”，还有“runs”、“runner”、“runway”、“grunt”或“brunt”中的“runt”，以及包含“run”后面跟着零个或更多个“<emphasis>单词字符</emphasis>”（包括数字和下划线，因此诸如 run_123@example.email.org 这样的 Email 地址中“@”之前的部分也是匹配项）的任意其他单词或字符序列。</para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>不匹配</entry>
+                    <entry>
+                      <para>整个“run-on”或“run'n'gun”，因为 <literal>\w</literal> 中不包括连字符和撇号。这些片语中只有开头的“run”才是匹配的。</para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>加号：<literal>+</literal></term>
+          <listitem>
+            <para>此字符指定应该匹配前面那个字符或表达式的一个或多个实例。</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry/>
+                    <entry><literal>\d+.d</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>匹配</entry>
+                    <entry>
+                      <para>诸如“1.5”、“23.2”或“5235.8”这样小数点前面有任意多位但小数点后只有一位的数字。</para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>不匹配</entry>
+                    <entry>
+                      <para>整个“5,235.8”或“21,571.9”。只有千位分隔符后面的部分会被匹配。</para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>左括号：<literal>(</literal></term>
+
+          <listitem>
+            <para>此字符开启一个<emphasis>分组</emphasis>，这是一组被视为单一单元的字符。分组会被编号，其内容组存储在内存中。之后可以在搜索表达式中用 <literal>\<option>n</option></literal> 来重用它们，其中 <option>n</option> 是分组的编号。</para>
+
+            <note>
+              <para>分组的内容可以用在<link linkend="windows.text.replace">替换文本</link>中。使用 <literal>$<option>n</option></literal>，其中 <option>n</option> 是在搜索中该定义的分组编号。</para>
+            </note>
+
+            <para>括号始终要左右成对使用，试图单独使用左括号或右括号会导致错误。</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry/>
+                    <entry><literal>(\b\w+\b)\h\1\b</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>匹配</entry>
+                    <entry>
+                      <para>空格隔开的重复单词，例如以下句子中的连续“an”：</para>
+
+					  <para>“I bought an an apple.”</para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>不匹配</entry>
+                    <entry>
+                      <para>以下句子中的“that, that”：</para>
+
+					  <para>“But that, that is just unbelievable”，因为第一个“that”后面跟的是逗号加上空格而非仅只一个空格。</para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>右括号：<literal>)</literal></term>
+
+          <listitem>
+            <para>此字符结束一个分组。它十分特别，因为它永远不能单独使用。如果需要匹配右括号字符本身，则必须在其前面加上 <literal>\</literal>。</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry/>
+                    <entry><literal>^\d+\)</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>匹配</entry>
+                    <entry>
+                      <para>列表中每一行开头的序号（包括括弧），诸如：</para>
+
+                      <simplelist>
+                        <member>1) Apples</member>
+                        <member>2) Oranges</member>
+                        <member>3) Pears</member>
+                      </simplelist>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>不匹配</entry>
+                    <entry>
+                      <para>不在行首处的序列号。</para>
+
+                      <para>Follow these steps:</para>
+                      <simplelist>
+                        <member>Step 1) Preparation</member>
+                        <member>Step 2) …</member>
+                      </simplelist>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>左方括号：<literal>[</literal></term>
+
+          <listitem>
+            <para>此字符必须与右方括号成对出现，括起一组单个字符，其中每个字符都代表一个有效的潜在匹配项。</para>
+
+            <para>只有左方括号是特殊的，需要在前面加上反斜杠才能搜索方括号字符本身。如果只需要匹配右方括号本身，并不需要在前面加上反斜杠。（你还是可以加，但这并不会对表达式或结果产生任何影响。）</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry/>
+                    <entry><literal>li[cs]en[cs]e</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>匹配</entry>
+                    <entry>
+                      <para>正确的“licence”和“license”拼写，以及潜在的错误拼写“lisence”和“lisense”。</para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>不匹配</entry>
+                    <entry>
+                      <para>诸如“licensse”或“lissense”这类更严重的错误拼写。</para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>左花括号：<literal>{</literal></term>
+
+          <listitem>
+            <para>此字符必须与右大括号成对出现，括起一个<emphasis>精确数字</emphasis>、<emphasis>最小值</emphasis>、<emphasis>最大值</emphasis>、或<emphasis>区间</emphasis>，用于指定应匹配前一个字符或分组实例的数量。</para>
+
+            <para>只有左花括号是特殊的，需要在前面加上反斜杠才能搜索花括号字符本身。如果只需要匹配右花括号本身，并不需要在前面加上反斜杠。（你还是可以加，但这并不会对表达式或结果产生任何影响。）</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry/>
+                    <entry><literal>\d{4}/\d{1,3}</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>匹配</entry>
+                    <entry>
+                      <para>诸如“1234/5”、“1472/69”、或“9513/842”这样由四个数字、一个斜杠再加一到三个数字组成的代码。</para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>不匹配</entry>
+                    <entry>
+                      <para>诸如“123/45”、“1472/6985”、或“95133/15746”这样的代码。</para>
+                      <para><emphasis role="bold">注意：</emphasis> 虽然上面的代码中最后两个并不完全匹配，但是表达式会返回“1472/6985”中的“<emphasis>1472/698</emphasis>”部分，以及“95133/15746”中的“<emphasis>5133/157</emphasis>”部分。</para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+  </section>
+
+  <section id="app.regex.types.of.expressions">
+    <title id="app.regex.types.of.expressions.title">大量表达式</title>
+
+    <para>本章节介绍各种正则表达式，由浅入深。</para>
+      
+    <note>
+      <para>要记住，大部分<emphasis>字母</emphasis>字符在前面加一个 <literal>\</literal> 时会变为一个<emphasis>表示有关特定含义而非此字符本身</emphasis>的表达式。</para>
+    </note>
+
+    <section id="app.regex.types.of.expressions.simple.expressions">
+      <title id="app.regex.types.of.expressions.simple.expressions.title">简单表达式</title>
+      <para>最简单的正则表达式由单个字符或 <literal>\</literal> 和单个字符组成的具有单一含义的单元。</para>
+      
+      <table id="app.regex.characters">
+        <title id="app.regex.characters.title">字符</title>
+
+        <tgroup align="left" cols="2" rowsep="1">
+          <colspec align="left" colnum="1"/>
+
+          <thead>
+            <row>
+              <entry align="left">表达式</entry>
+              <entry align="left">匹配</entry>
+            </row>
+          </thead>
+
+          <tbody>
+            <row>
+              <entry><literal>x</literal></entry>
+              <entry>
+                <para>字符“x”本身</para>
+                <para>大多数字符匹配其自身</para>
+              </entry>
+            </row>
+
+            <row>
+              <entry><literal>\t</literal></entry>
+              <entry>
+                <para>制表符，而不是字母“t”。</para>
+			  </entry>
+            </row>
+
+            <row>
+              <entry><literal>\n</literal></entry>
+              <entry>换行符，而不是字母“n”。</entry>
+            </row>
+
+            <row>
+              <entry><literal>\r</literal></entry>
+              <entry>
+                <para>回车符，而不是字母“r”。</para>
+                <para>同样，<literal>\R</literal> 是任意换行字符。</para>
+			  </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+
+    <section id="app.regex.types.of.expressions.case">
+      <title id="app.regex.types.of.expressions.case.title">大小写</title>
+
+      
+      <para>默认情况下，常规的 OmegaT 搜索不区分大小写：它们同时匹配大小写字符，除非你启用<link linkend="windows.text.search.options" endterm="windows.text.search.options.title"/>选项。这样做会让整个搜索表达式区分大小写。</para>
+
+      <para>相比之下，正则表达式在默认情况下是区分大小写的。举例说，这意味着用正则表达式“OmegaT”进行搜索是不会匹配“omegat”的。但是，正则表达式还提供特殊修饰符来在表达式内指定区分大小写：</para>
+
+      <variablelist>
+        <varlistentry>
+          <term><literal>(?i)</literal></term>
+          <listitem>
+            <para>让修饰符右侧的表达式片段不区分大小写。</para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term><literal>(?-i)</literal></term>
+          <listitem>
+            <para>让修饰符右侧的表达式片段区分大小写。</para>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+	  
+      <para>可以利用这一点在搜索中对大小写区分进行精细控制。举例说，假设要查找“OmegaT”和“omegat”的实例但不想要“OMEGAT”。可以用以下表达式做到这点：<literal>(?i)o</literal><literal>(?-i)mega</literal> <literal>(?i)t</literal>，这表示一个不区分大小写的“o”后面跟着区分大小写的“mega”然后在跟上一个不区分大小写的“t”。</para>
+    </section>
+
+    <section id="app.regex.types.of.expressions.classes">
+      <title id="app.regex.types.of.expressions.classes.title">类</title>
+
+      <para>正则表达式允许你创建字符集合——称为<emphasis>类</emphasis>。搜索将匹配集合中的任何一个字符。</para>
+
+	  <para>类是通过将所需的字符括在方括号中来定义的，并且可以通过罗列每一个需要包括的字符或者通过指定字符区间来指定。例如，可以创建 <literal>[£€$]</literal> 类来在文本中查找这三个货币符号中的任何一个，或创建 [1-3] 来查找数字 1、2 或 3。</para>
+
+      <note>
+        <para>在一个类中，只有反斜杠（<literal>\</literal>）、脱字符（<literal>^</literal>）、右方括号（<literal>]</literal>）和连字符（<literal>-</literal>）是特殊的。十二个字符的其他几个则是普通的，如果需要搜索这些字符本身，不必在前面加上反斜杠。</para>
+
+		<para>可以通过在前面加上反斜杠来搜索这四个类特殊字符本身。对于脱字符、右方括号和连字符，还可以通过将其放在不会触发其特殊含义的位置来搜索其本身：对于脱字符，是除了紧跟在左方括号的位置之外的任何位置；对于右方括号，是紧跟在左方括号之后、或紧跟在左方括号后面的脱字符之后的位置；对于连字符，是紧跟在左方括号之后或紧挨在右方括号之前的位置。</para>
+      </note>
+
+	  <para>许多常用的集合都有一个反斜杠后跟一个字母组成的简写形式。例如，<literal>\d</literal> 是 <literal>[0-9]</literal> 的简写，它匹配 0 到 9 之间的任意数字，后面字母的对应大写用于取反这个类：<literal>\D</literal> 匹配任何<emphasis role="bold">不是</emphasis>数字的字符。</para>
+      <para>下表提供了各式其他示例。这些类绝不会只表示用于形成简写的实际字母。</para>
+      
+      <table id="app.regex.classes">
+        <title id="app.regex.classes.title">类的示例</title>
+
+        <tgroup align="left" cols="2" rowsep="1">
+          <colspec align="left" colnum="1"/>
+
+          <thead>
+            <row>
+              <entry align="left">表达式</entry>
+              <entry align="left">匹配</entry>
+            </row>
+          </thead>
+
+          <tbody>
+            
+            <row>
+              <entry><literal>[abc]</literal></entry>
+              <entry>
+                <para>字母“a”、“b”、或“c”。</para>
+
+				<para>一个简单的类由 <literal>[</literal> 和 <literal>]</literal> 括起来的任意数量的字符组成。</para>
+              </entry>
+            </row>
+            
+            <row>
+              <entry><literal>[C-X]</literal></entry>
+              <entry>
+                <para>从“C”到“X”区间内的单个字母。</para>
+
+				<para>区间是通过序列中的第一个字符后跟一个连字符再跟上序列中的最后一个字符来定义的。可以定义任意数量的区间：<literal>[a-zA-Z0-9]</literal> 意味着从“a”到“z”的任意小写字符、或从“A”到“Z”的任意大写字符、或从“0”到“9”的任意数字。放置在序列外的连字符则就只是连字符：<literal>[a-z-]</literal> 意思是任意从“a”到“z”的小写字符或连字符本身。</para>
+              </entry>
+            </row>
+            
+            <row>
+              <entry><literal>[^\n\r\t]</literal></entry>
+              <entry>
+                <para>换行符、回车符、或制表符<emphasis>以外</emphasis>的任意字符。</para>
+
+                <para>紧跟在左方括号之后的脱字符将排除掉类中的其他字符。</para>
+              </entry>
+            </row>
+
+            <row>
+              <entry><literal>\w</literal></entry>
+              <entry>
+                <para>单词字符，通常定义为 <literal>[A-Za-z0-9_]</literal>。</para>
+
+                <para><literal>\W</literal> 是任意<emphasis role="bold">非</emphasis>单词字符（<literal>[^\w]</literal>）。</para>
+              </entry>
+            </row>
+
+            <row>
+              <entry><literal>\s</literal></entry>
+              <entry>
+                <para>空白字符，包括空格、制表符、以及换行符。</para>
+
+                <para><literal>\S</literal> 是任意<emphasis role="bold">非</emphasis>空白字符（<literal>[^\s]</literal>）。</para>
+              </entry>
+            </row>
+
+            <row>
+              <entry>
+				<literal>\h</literal> 和 <literal>\v</literal>
+			  </entry>
+
+              <entry>
+				<para>水平和垂直空白（通常首选使用 <literal>\s</literal>）。</para>
+
+				<para><literal>\H </literal> 是任意<emphasis role="bold">非</emphasis>水平空白字符，而 <literal>\V</literal> 是任意<emphasis role="bold">非</emphasis>垂直空白字符（分别是 <literal>[^\h]</literal> 和 <literal>[^\v]</literal>）。</para>
+			  </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+      
+      <para>正则表达式并不限于字母数字字符。它们覆盖了整个 Unicode 字符集。可以用 Unicode 的 block（区段）、script（文字）或 category（类别）来指定字母数字区间以外的字符类。下表列出了一些示例：</para>
+
+      <para>另请参阅 <ulink url="https://www.regular-expressions.info/unicode.html">Unicode 正则表达式</ulink>以全面了解 Unicode 正则表达式。</para>
+
+      <table id="app.regex.unicode.blocks">
+        <title id="app.regex.unicode.blocks.title">Unicode 区块（block）、字符体系（script）与类别（category）</title>
+        
+        <tgroup align="left" cols="2" rowsep="1">
+          <colspec align="left" colnum="1"/>
+          <thead>
+            <row>
+              <entry align="left">表达式</entry>
+              <entry align="left">匹配</entry>
+            </row>
+          </thead>
+          
+          <tbody>
+            <row>
+              <entry><literal>\p{InGreek}</literal></entry>
+              <entry>
+                <para>希腊字母区（<ulink url="https://unicode.org/reports/tr18/#Blocks">Unicode 区块</ulink>）中的一个字符</para>
+				
+                <para><literal>\P{InGreek}</literal> 是任意<emphasis role="bold">不</emphasis>在希腊字母区中的字符。</para>
+              </entry>
+            </row>
+          
+            <row>
+              <entry><literal>\p{IsHan}</literal></entry>
+              <entry>
+                <para>A logogram
+                (<emphasis>Han</emphasis>/<emphasis>kanji</emphasis>/<emphasis>hanja</emphasis>
+                character) found in CJK languages (<ulink url="https://unicode.org/reports/tr18/#Script_Property">Unicode
+                script</ulink>)</para>
+              </entry>
+            </row>
+          
+            <row>
+              <entry><literal>\p{Lu}</literal></entry>
+              <entry>
+                <para>An uppercase letter (<ulink url="https://unicode.org/reports/tr18/#General_Category_Property">Unicode
+                category</ulink>)</para>
+              </entry>
+            </row>
+          
+            <row>
+              <entry><literal>\p{Sc}</literal></entry>
+              <entry>
+                <para>A currency symbol, which is also a <ulink url="https://unicode.org/reports/tr18/#General_Category_Property">Unicode
+                category</ulink>.</para>
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+
+    <section id="app.regex.more.advanced.expressions">
+      <title id="app.regex.more.advanced.expressions.title">More advanced
+      expressions</title>
+      
+      <para>Some expressions specify a position rather than a character. They
+      indicate where in the text to look for the match, but do not include any
+      characters in that match. The table below list a few of the more common
+      examples. Consult the sites in the <link linkend="app.regex.tools" endterm="app.regex.tools.title"/> section for more information.</para>
+
+      <table id="app.regex.boundary.matchers">
+        <title id="app.regex.boundary.matchers.title">Expressions that mark a position</title>
+      
+        <tgroup align="left" cols="2" rowsep="1">
+          <colspec align="left" colnum="1"/>
+
+          <thead>
+            <row>
+              <entry align="left">表达式</entry>
+              <entry align="left">匹配</entry>
+            </row>
+          </thead>
+          
+          <tbody>
+            <row>
+              <entry><literal>^</literal></entry>
+              <entry>
+                <para>行首</para>
+              </entry>
+            </row>
+        
+            <row>
+              <entry><literal>$</literal></entry>
+              <entry>
+                <para>行尾</para>
+              </entry>
+            </row>
+        
+            <row>
+              <entry><literal>\b</literal></entry>
+              <entry>
+                <para>单词边界</para>
+              </entry>
+            </row>
+        
+            <row>
+              <entry><literal>\B</literal></entry>
+              <entry>
+                <para><emphasis>Not</emphasis> a word boundary</para>
+              </entry>
+            </row>
+        
+            <row>
+              <entry><literal>(?=u)</literal></entry>
+              <entry>
+                <para>A character followed by a “u”.</para>
+				
+                <para>For example, <literal>q(?=u)</literal> matches the letter
+                “q” when it is followed by a “u”. It therefore matches the “q”
+                in “equal” or “question”, but <emphasis>not</emphasis> the one
+                in “qigong” or “Iraq”.</para>
+              </entry>
+            </row>
+        
+            <row>
+              <entry><literal>(?!u)</literal></entry>
+              <entry>
+                <para>A character that is <emphasis>not</emphasis> followed by the
+                letter “u”.</para>
+				
+                <para>For example, <literal>q(?!u)</literal> matches the letter
+                “q” when it is <emphasis>not</emphasis> followed by a “u”. It
+                therefore matches the “q” in “qigong” or “Iraq”, but
+                <emphasis>not</emphasis> the one in “equal” or “question”.</para>
+              </entry>
+            </row>
+            
+            <row>
+              <entry><literal>(?&lt;=q)</literal></entry>
+              <entry>
+                <para>A character preceded by the letter “q”.</para>
+				
+                <para>For example, <literal>(?&lt;=q)u</literal> matches the
+                letter “u” if it comes after “q”. It therefore matches the “u”
+                in “quick”, but not the one in “run”.</para>
+              </entry>
+            </row>
+        
+            <row>
+              <entry><literal>(?&lt;!q)</literal></entry>
+              <entry>
+                <para>A character that is <emphasis>not</emphasis> preceded
+                by the letter “q”.</para>
+				
+                <para>For example, <literal>(?&lt;!q)u</literal> matches the
+                letter “u” if it does <emphasis>not</emphasis> come after “q”.
+                It therefore matches the “u” in “run”, but
+                <emphasis>not</emphasis> the one in “quick”.</para>
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>  
+  </section>
+
+  <section id="app.regex.more.examples">
+    <title id="app.regex.more.examples.title">More examples</title>
+
+    <para>This section presents a few examples demonstrating how the various
+    expressions described above can be combined to perform powerful searches in
+    OmegaT.</para>
+    
+    <table id="regex.examples">
+      <title id="regex.examples.title">Examples of regular expressions that use
+      the above expressions</title>
+
+      <tgroup align="left" cols="2" rowsep="1">
+        <colspec align="left" colnum="1"/>
+
+        <thead>
+          <row>
+            <entry>表达式</entry>
+            <entry>目的</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry><literal>(\b\w+\b)\h\1\b</literal></entry>
+            <entry>
+              <para>Find double words.</para>
+            </entry>
+          </row>
+
+          <row>
+            <entry><literal>,\h[\h(\w+\.\w+)\w,'ʼ&quot;“”-]+[\.,]</literal></entry>
+            <entry>
+              <para>Find clauses that start with a comma followed by a
+              whitespace character, contain one or more words (including words
+              in quotation marks, contractions, and filenames with a file
+              extension), and end either with a comma or period.</para>
+            </entry>
+          </row>
+
+          <row>
+            <entry><literal>\. \h+$</literal></entry>
+            <entry>
+              <para>Find extra whitespace after the period at the end of a
+              line.</para>
+            </entry>
+          </row>
+
+          <row>
+            <entry><literal>\h+a\h+[aeiou]</literal></entry>
+            <entry>
+              <para>Find words starting with a vowel that come after the
+              article “a” rather than “an”.</para>
+            </entry>
+          </row>
+
+          <row>
+            <entry><literal>\h+an\h+[^aeiou]</literal></entry>
+            <entry>
+              <para>The flip side of the preceding example. Find words
+              starting with consonant that come after “an” rather than “a”.</para>
+            </entry>
+          </row>
+
+          <row>
+            <entry><literal>\d{4}([/\.-]\d{1,2}){2}</literal></entry>
+            <entry>
+              <para>Find numerical dates in year, month, and day order with the
+              month and day separated by a slash, period, or hyphen, such
+              as:</para>
+			  
+                <itemizedlist>
+                  <listitem>
+                    <para>2002/11/8</para>
+                  </listitem>
+                  <listitem>
+                    <para>1969.7.20</para>
+                  </listitem>
+                  <listitem>
+                    <para>2022-10-31</para>
+                  </listitem>
+                </itemizedlist>
+
+				<note>
+                  <para>This expression finds number and separator patterns
+                  matching possible dates, but does not validate them. It will
+                  also find patterns such as “5136/36/71”.</para>
+				</note>
+            </entry>
+          </row>
+
+          <row>
+            <entry><literal>\.[A-Z]</literal></entry>
+            <entry>
+              <para>Find a period followed by an uppercase letter. Useful to
+              find possible missing spaces between the period and the start of a
+              new sentence</para>
+            </entry>
+          </row>
+
+          <row>
+            <entry><literal>\bis\b</literal></entry>
+            <entry>
+              <para>Find “is” as a whole word in a sentence, without matching
+              “this”, “isn’t”, or even “Is”.</para>
+            </entry>
+          </row>
+
+          <row>
+            <entry><literal>[\w\.-]+@[\w\.-]+</literal></entry>
+            <entry>
+              <para>
+                Find an email address. This simple expression may not cover
+                every possible valid email address format.
+              </para>
+            </entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+
+  <section id="app.regex.tools">
+    <title id="app.regex.tools.title">References</title>
+
+    <para>Although OmegaT does not offer fancy colouring for your regular
+    expressions, you can get a lot of practice by using the <link linkend="windows.text.search" endterm="windows.text.search.title"/> window
+    since OmegaT does colour the matching results.</para>
+    
+    <para>A few additional resources are presented below.</para>
+
+    <para>The Java technical reference is useful as a canonical reference.
+
+      <variablelist>
+        <varlistentry id="app.regex.java">
+          <term id="app.regex.java.title"><ulink url="https://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html">Java Regex
+          documentation</ulink></term>
+          <listitem>
+            <para>The official reference for regular expressions used in
+            Java.</para>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+      
+      If you want to learn more about using regular expressions, the two
+      following sites have proven very useful.
+
+      <variablelist>
+        <varlistentry id="app.regex.tools.regex101">
+          <term id="app.regex.tools.regex101.title"><ulink url="https://regex101.com">https://regex101.com</ulink></term>
+          <listitem>
+            <para>An online regular expression matcher that lets you enter the
+            text you want to search and the regular expressions you want to
+            test.</para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry id="app.regex.tools.regular.expression.info">
+          <term id="app.regex.tools.regular.expression.info.title"><ulink url="https://www.regular-expressions.info">https://www.regular-expressions.info</ulink></term>
+          <listitem>
+            <para>One of the most thorough regular expression tutorial and
+            reference on the web.</para>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+
+      <note>
+        <para>OmegaT does not support either site in any way. If you find other
+        interesting references—in any language—the OmegaT team would love to
+        hear about them.</para>
+      </note>
+    </para>
+  </section>
+</section>

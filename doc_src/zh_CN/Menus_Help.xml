@@ -1,46 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="menus.help">
-  <title>帮助</title>
+  <title id="menus.help.title"><guimenu>帮助</guimenu></title>
+
+  <para>This menu gives you access to information that will help you make the
+  best of OmegaT.</para>
 
   <variablelist>
-    <varlistentry>
-      <term>用户手册...</term>
-
+    <varlistentry id="menus.help.user.manual">
+      <term id="menus.help.user.manual.title"><guimenuitem>User
+      Manual...</guimenuitem> <keycombo><keycap>F1</keycap></keycombo></term>
       <listitem>
         <para>在默认浏览器中打开本手册。</para>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry id="menus.help.about">
+      <term id="menus.help.about.title"><guimenuitem>关于...</guimenuitem></term>
+      <listitem>
+        <para>显示版权、制作人员和许可证信息。</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>关于...</term>
-
+    <varlistentry id="menus.help.last.changes">
+      <term id="menus.help.last.changes.title"><guimenuitem>最近变更...</guimenuitem></term>
       <listitem>
-        <para>显示版权、制作人员和授权信息。</para>
+        <para>Displays the list of new functionality, enhancements and bug fixes
+        for each new release.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>最近变更...</term>
-
+    <varlistentry id="menus.help.log">
+      <term id="menus.help.log.title"><guimenuitem>日志...</guimenuitem></term>
       <listitem>
-        <para>显示每个新版本的新功能、改进和修复的 Bug。</para>
+        <para>Displays the current log file. The title of the dialog reflects
+        the file currently in use (which depends on the number of concurrently
+        running OmegaT instances).</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>日志...</term>
-
+    <varlistentry id="menus.help.check.for.updates">
+      <term id="menus.help.check.for.updates.title"><guimenuitem>检查更新...</guimenuitem></term>
       <listitem>
-        <para>显示当前日志文件。对话框的标题反映了实际使用的文件（这取决于并发运行的 OmegaT 实例的数量）。</para>
-      </listitem>
-    </varlistentry>
-
-    <varlistentry>
-      <term>检查更新...</term>
-
-      <listitem>
-        <para>检查是否已经发布了更新版本的 <application>OmegaT</application>。</para>
+        <para>Checks to see if a newer version of OmegaT is available.</para>
       </listitem>
     </varlistentry>
   </variablelist>

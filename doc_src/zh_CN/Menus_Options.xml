@@ -1,92 +1,125 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="menus.options">
-  <title>选项</title>
+  <title id="menus.options.title"><guimenu>选项</guimenu></title>
 
+  <para>This menu gives quick access to a few frequently used
+  preferences.</para>
+  
   <variablelist>
-    <varlistentry>
-      <term>首选项...</term>
-
+    <varlistentry id="menus.options.preferences">
+      <term id="menus.options.preferences.title"><guimenuitem>首选项...</guimenuitem></term>
       <listitem>
-        <para>打开<link linkend="dialogs.preferences">首选项</link>对话框。</para>
+        <para>Opens the <link linkend="chapter.dialogs.preferences" endterm="chapter.dialogs.preferences.title"/> dialog.</para>
+
+		<note>
+		  <para>In macOS, this menu item is found under the
+		  <guimenu>OmegaT</guimenu> menu.</para>
+		</note>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>机器翻译</term>
-
+    <varlistentry id="menus.options.mt">
+      <term id="menus.options.mt.title"><guisubmenu>机器翻译</guisubmenu></term>
       <listitem>
-        <para>允许您激活/停用提供的机器翻译工具。</para>
+		<itemizedlist>
+		  <listitem>
+			<para><link linkend="dialogs.preferences.mt.automatically.fetch.translations" endterm="dialogs.preferences.mt.automatically.fetch.translations.title"/></para>
+		  </listitem>
+		</itemizedlist>
 
-        <para>如果选择了多个翻译引擎，则可以用<keycombo> <keycap>Ctrl</keycap> <keycap>M</keycap> </keycombo>在它们之间切换并插入最后一个选定的结果。</para>
+		<para>Allows you to activate or deactivate the available machine
+		translation engines.</para>
+
+        <para>If several translation engines are selected, you can also use
+        <keycombo><keycap>C</keycap><keycap>M</keycap></keycombo> to switch
+        between them and insert the last one selected. See the <link linkend="dialogs.preferences.mt" endterm="dialogs.preferences.mt.title"/> preferences for details.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>词汇表</term>
-
+    <varlistentry id="menus.options.glossary">
+      <term id="menus.options.glossary.title"><guisubmenu>词汇表</guisubmenu></term>
       <listitem>
-        <para>选择<guimenuitem>Taas 术语查询</guimenuitem>以激活该查询。</para>
+		<itemizedlist>
+		  <listitem>
+			<para><link linkend="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries" endterm="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries.title"/></para>
+		  </listitem>
+		</itemizedlist>
+
+        <para>Allows you to activate or deactivate fuzzy matching for glossary
+        maches.</para>
+
+		<para>See the <link linkend="dialogs.preferences.glossary" endterm="dialogs.preferences.glossary.title"/> preferences for
+		details.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>词典</term>
-
+    <varlistentry id="menus.options.dictionary">
+      <term id="menus.options.dictionary.title"><guisubmenu>词典</guisubmenu></term>
       <listitem>
-        <para>如果你希望词典中显示有着相同词根的词汇，请勾选<guimenuitem>对词典条目使用模糊匹配</guimenuitem>选项。</para>
+		<itemizedlist>
+		  <listitem>
+			<para><link linkend="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries" endterm="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries.title"/></para>
+		  </listitem>
+		</itemizedlist>
+
+        <para>Allows you to activate or deactivate fuzzy matching for dictionary
+        maches.</para>
+
+		<para>See the <link linkend="dialogs.preferences.dictionary" endterm="dialogs.preferences.dictionary.title"/> preferences for
+		details.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>自动完成</term>
-
+    <varlistentry id="menus.options.autocompletion">
+      <term id="menus.options.autocompletion.title"><guisubmenu>自动完成</guisubmenu></term>
       <listitem>
-        <para>如果勾选了<guimenuitem>自动显示相关建议</guimenuitem>选项，自动完成器会在输入已翻译术语表中条目的头几个字母或输入标签的“&lt;”后自动启动。</para>
+		<para>Select the various options to activate or deactivate them. See the
+		<link linkend="dialog.preferences.auto.completion" endterm="dialog.preferences.auto.completion.title"/> preferences for
+		details.</para>
+	  </listitem>
+    </varlistentry>
 
-        <para>勾选<guimenuitem>历史完成</guimenuitem>以在输入第一个字母后就立即显示建议单词。</para>
+    <varlistentry id="menus.options.file.filters">
+      <term id="menus.options.file.filters.title"><guimenuitem>Global File
+      Filters...</guimenuitem></term>
+      <listitem>
+        <para>Opens the <link linkend="dialogs.preferences.file.filters" endterm="dialogs.preferences.file.filters.title"/> preferences.</para>
 
-        <para>勾选<guimenuitem>历史预测</guimenuitem>以显示通常跟在刚输入的单词之后的建议单词。</para>
+        <para>Use <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.properties" endterm="menus.project.properties.title"/> to access the local file
+        filter preferences.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>文件过滤器...</term>
-
+    <varlistentry id="menus.options.segmentation">
+      <term id="menus.options.segmentation.title"><guimenuitem>Global
+      Segmentation Rules...</guimenuitem></term>
       <listitem>
-        <para>打开首选项对话框中的<link linkend="dialogs.preferences.filefilters">文件过滤器</link>选项。</para>
+        <para>Opens the <link linkend="dialogs.preferences.segmentation.setup" endterm="dialogs.preferences.segmentation.setup.title"/>
+        preferences.</para>
 
-        <para>这些设置是应用到 OmegaT 级别的，对所有项目生效。</para>
+        <para>Use <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.properties" endterm="menus.project.properties.title"/> to access the local
+        segmentation rules preferences.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>片段分割...</term>
-
+    <varlistentry id="menus.options.editor">
+      <term id="menus.options.editor.title"><guimenuitem>编辑器...</guimenuitem></term>
       <listitem>
-        <para>打开首选项对话框中的<link linkend="dialogs.preferences.segmentationsetup">分割设置</link>选项。</para>
-
-        <para>这些设置是应用到 OmegaT 级别的，对所有项目生效。</para>
-
+        <para>Opens the <link linkend="dialogs.preferences.editor" endterm="dialogs.preferences.editor.title"/> preferences.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>编辑器...</term>
-
+    <varlistentry id="menus.options.access.configuration.folder">
+      <term id="menus.options.access.configuration.folder.title"><guimenuitem>访问配置文件夹</guimenuitem></term>
       <listitem>
-        <para>打开首选项对话框中的<link linkend="dialogs.preferences.editor">编辑器</link>选项。</para>
+        <para>Opens the local folder where OmegaT configuration files are
+        stored.</para>
 
-        <para>这些设置是应用到 OmegaT 级别的，对所有项目生效。</para>
-
-      </listitem>
-    </varlistentry>
-
-    <varlistentry>
-      <term>访问配置文件夹</term>
-
-      <listitem>
-        <para>打开存储着 OmegaT 配置文件的本地目录（取决于操作系统）。</para>
+		<note>
+		  <para>The location depends on the operating system and launch
+		  options. See the <link linkend="configuration.folder" endterm="configuration.folder.title"/> appendix for details.</para>
+		</note>
       </listitem>
     </varlistentry>
   </variablelist>

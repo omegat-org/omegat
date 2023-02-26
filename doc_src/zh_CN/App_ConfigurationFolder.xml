@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="configuration.folder">
+  <title id="configuration.folder.title">配置文件夹</title>
+  <para>配置文件夹中存储了用户的大部分 OmegaT 选项和首选项。</para>
+  
+  <para>用 <link linkend="menus.options" endterm="menus.options.title"/><link linkend="menus.options.access.configuration.folder" endterm="menus.options.access.configuration.folder.title"/> 可以直接访问它。</para>
+
+  <section id="configuration.folder.location">
+    <title id="configuration.folder.location.title">位置</title>	
+	<para>配置文件夹的默认位置因系统而异（<emphasis>~</emphasis> 字符代表你的主文件夹）：<variablelist>
+	  <varlistentry><term>Linux</term><listitem><para><filename>~/.omegat</filename></para></listitem></varlistentry>
+	  <varlistentry><term>macOS</term><listitem><para><filename>~/Library/Preferences/OmegaT</filename></para></listitem></varlistentry>
+	  <varlistentry><term>Windows</term><listitem><para><filename>~\AppData\Roaming\OmegaT</filename></para></listitem></varlistentry>
+	</variablelist></para>
+
+	<note>
+	  <para>从命令行启动 OmegaT 时，可以另行指定非默认值的配置文件夹。详情请参阅指南<link endterm="launch.with.command.line.title" linkend="launch.with.command.line"/>。</para>
+
+	  <para>修改后的首选项存储在项目所使用的配置文件夹中。如果不使用默认配置文件夹，那么在<link linkend="chapter.dialogs.preferences">首选项</link>中所做的所有修改都会存储在指定的配置文件夹中，并且在恢复为使用默认配置文件夹继续工作时不会出现。</para>
+	</note>
+  </section>
+  
+  <section id="configuration.folder.default.contents">
+    <title id="configuration.folder.default.contents.title">默认内容</title>
+	<variablelist>
+	  <varlistentry id="configuration.folder.default.contents.omegat.prefs">
+		<term id="configuration.folder.default.contents.omegat.prefs.title">omegat.prefs</term>
+		<listitem>
+		  <para>此文件包含许多重要的用户首选项。</para>
+
+		  <para>一些首选项在用户界面中没有对应项。它们必须手动进行修改。</para>
+		  
+		  <example id="no.source.file.display">
+			<title id="no.source.file.display.title">不自动显示原文文件列表</title>
+			<para>要避免在加载项目时自动打开原文文件列表窗口，请查找 <token>&lt;project_files_show_on_load&gt;</token> 并将<token>true</token> 替换为 <token>false</token>：</para>
+
+			<para><programlisting>&lt;project_files_show_on_load&gt;<token>false</token>&lt;/project_files_show_on_load&gt;</programlisting></para>
+		  </example>
+		  
+		  <note>
+			<para>目前只有此首选项必须手动修改。</para>
+		  </note>
+		</listitem>
+	  </varlistentry>
+	  
+	  <varlistentry id="configuration.folder.default.contents.uilayout">
+		<term id="configuration.folder.default.contents.uilayout.title">uiLayout.xml</term>
+		<listitem>
+		  <para>此文件描述了 OmegaT 的整体布局。</para>
+		</listitem>
+	  </varlistentry>
+	  
+	  <varlistentry id="configuration.folder.default.contents.logs">
+		<term id="configuration.folder.default.contents.logs.title">logs/</term>
+		<listitem>
+		  <para>此文件夹包含许多日志文件。最新的是 <filename>OmegaT.log</filename>。</para>
+
+		  <para>这些文件记录了 OmegaT 运行中的各种内部状态和生成的程序事件消息。如果 OmegaT 运行不稳定，请在你的报告中附上此文件或其相关的部分。</para>
+
+		  <para>用<link linkend="menus.help" endterm="menus.help.title"/><link linkend="menus.help.log" endterm="menus.help.log.title"/>来查看文件的内容。</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="configuration.folder.default.contents.script">
+		<term id="configuration.folder.default.contents.script.title">script/</term>
+		<listitem>
+		  <para>如果使用了适用的功能，此文件夹中会包含最多三个文本文件：</para>
+
+		  <variablelist>
+			<varlistentry id="configuration.folder.default.contents.script.selection">
+			  <term id="configuration.folder.default.contents.script.selection.title">selection.txt</term>
+			  <listitem>
+				<para>当使用了<link linkend="menus.edit.export.selection" endterm="menus.edit.export.selection.title"/><link linkend="menus.edit" endterm="menus.edit.title"/>后，此文件存储着当前选定的文本。每次调用此功能都会替换此文件中的文本。</para>
+			  </listitem>
+			</varlistentry>
+		  
+			<varlistentry id="configuration.folder.default.contents.script.source">
+			  <term id="configuration.folder.default.contents.script.source.title">source.txt</term>
+			  <listitem>
+				<para>当启用了首选项<link linkend="dialogs.preferences.editor.export.the.segment.to.text.files" endterm="dialogs.preferences.editor.export.the.segment.to.text.files.title"/>后，此文件包含当前片段的<emphasis>原文文本</emphasis>。每次进入一个新片段时都会替换此文件中的文本。</para>
+			  </listitem>
+			</varlistentry>
+
+			<varlistentry id="configuration.folder.default.contents.script.target">
+			  <term id="configuration.folder.default.contents.script.target.title">target.txt</term>
+			  <listitem>
+				<para>当启用了首选项<link linkend="dialogs.preferences.editor.export.the.segment.to.text.files" endterm="dialogs.preferences.editor.export.the.segment.to.text.files.title"/>后，此文件包含当前片段的<emphasis>译文文本</emphasis>。每次进入一个新片段时都会替换此文件中的文本。</para>
+			  </listitem>
+			</varlistentry>
+		  </variablelist>
+
+		  <para>这三个文件提供了一种简便的办法来访问某些 OmegaT 内容并可用诸如 shell 脚本等本地程序来对其进行处理。</para>
+		</listitem>
+	  </varlistentry>
+	</variablelist>
+  </section>
+  
+  <section id="configuration.folder.extra.contents">
+    <title id="configuration.folder.extra.contents.title">其他内容</title>
+
+	<variablelist>
+	  <varlistentry id="configuration.folder.extra.contents.editorshortcuts">
+		<term id="configuration.folder.extra.contents.editorshortcuts.title">EditorShortcuts.properties</term>
+		<listitem>
+		  <para>这个参数文件包含自定义的编辑器快捷键。详情请参阅附录<link linkend="app.shortcuts.customization" endterm="app.shortcuts.customization.title"/>。</para>
+		</listitem>
+	  </varlistentry>
+	
+	  <varlistentry id="configuration.folder.extra.contents.maninmenushortcut">
+		<term id="configuration.folder.extra.contents.maninmenushortcut.title">MainMenuShortcuts.properties</term>
+		<listitem>
+		  <para>这个参数文件包含自定义的用户界面快捷键。详情请参阅附录<link linkend="app.shortcuts.customization" endterm="app.shortcuts.customization.title"/>。</para>
+		</listitem>
+	  </varlistentry>
+	
+	  <varlistentry id="configuration.folder.extra.contents.filters">
+		<term id="configuration.folder.extra.contents.filters.title">filters.xml</term>
+		<listitem>
+		  <para>这个参数文件包含自定义的文件筛选器。详情请参阅<link linkend="dialogs.preferences.file.filters" endterm="dialogs.preferences.file.filters.title"/>首选项。</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="configuration.folder.extra.contents.finder">
+		<term id="configuration.folder.extra.contents.finder.title">finder.xml</term>
+		<listitem>
+		  <para>这个参数文件包含自定义的外部搜索参数。详情请参阅<link linkend="dialogs.preferences.external.searches" endterm="dialogs.preferences.external.searches.title"/>首选项。</para>
+		</listitem>
+	</varlistentry>
+	
+	<varlistentry id="configuration.folder.extra.contents.omegat.autotext">
+	  <term id="configuration.folder.extra.contents.omegat.autotext.title">omegat.autotext</term>
+	  <listitem>
+		<para>这个参数文件包含自定义的自动文本参数。详情请参阅<link linkend="dialog.preferences.auto.completion" endterm="dialog.preferences.auto.completion.title"/>首选项。</para>
+	  </listitem>
+	</varlistentry>
+
+	<varlistentry id="configuration.folder.extra.contents.repositories">
+	  <term id="configuration.folder.extra.contents.repositories.title">repositories.properties</term>
+	  <listitem>
+		<para>此文件包含团队项目存储库的登录信息。<warning><para>文件内容未加密。</para></warning>详情请参阅指南<link linkend="how.to.setup.team.project" endterm="how.to.setup.team.project.title"/>。</para>
+	  </listitem>
+	</varlistentry>
+
+	<varlistentry id="configuration.folder.extra.contents.segmentation">
+	  <term id="configuration.folder.extra.contents.segmentation.title">segmentation.conf</term>
+	  <listitem>
+		<para>这个参数文件包含自定义分割参数。详情请参阅<link linkend="dialogs.preferences.segmentation.setup" endterm="dialogs.preferences.segmentation.setup.title"/>首选项。</para>
+	  </listitem>
+	</varlistentry>
+	
+	<varlistentry id="configuration.folder.extra.contents.plugin">
+	  <term id="configuration.folder.extra.contents.plugin.title">plugins/</term>
+	  <listitem>
+		<para>此文件夹提供了手动安装 OmegaT 扩展插件的标准位置。详情请参见<link linkend="dialogs.preferences.plugins" endterm="dialogs.preferences.plugins.title"/>首选项。</para>
+		<para>也可以在应用程序的 <link linkend="application.folder.plugins" endterm="application.folder.plugins.title"/> 文件夹中安装插件。</para>
+	  </listitem>
+	</varlistentry>
+
+	<varlistentry id="configuration.folder.extra.contents.spelling">
+	  <term id="configuration.folder.extra.contents.spelling.title">spelling/</term>
+	  <listitem>
+		<para>此文件夹包含你的拼写词典。详情请参阅<link linkend="dialog.preferences.spellchecker" endterm="dialog.preferences.spellchecker.title"/>首选项。</para>
+	  </listitem>
+	</varlistentry>
+	</variablelist>
+  </section>
+</section>

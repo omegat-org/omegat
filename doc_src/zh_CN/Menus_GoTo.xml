@@ -1,92 +1,222 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="menus.goto">
-  <title>转到</title>
+  <title id="menus.goto.title"><guimenu>转到</guimenu></title>
 
-  <para>仅当打开了项目后此菜单下才会显示条目。</para>
+  <para>This menu gives you access to the segment and pane navigation commands.</para>
+
+  <example id="example.next.untranslated.segment">
+	<title id="example.next.untranslated.segment.title">Shortcut description
+	example</title>
+	<para>On Windows and Linux:
+	<keycombo><keycap>Control</keycap><keycap>U</keycap></keycombo></para>
+
+	<para>On macOS:
+	<keycombo><keycap>Command</keycap><keycap>U</keycap></keycombo></para>
+
+	<para><emphasis role="bold">In this
+	manual:</emphasis><keycombo><keycap>C</keycap><keycap>U</keycap></keycombo></para>
+  </example>
 
   <variablelist>
-    <varlistentry>
-      <term>下一个未译片段</term>
+    <varlistentry id="menus.goto.next.untranslated.segment">
+      <term id="menus.goto.next.untranslated.segment.title"><guimenuitem>Next
+      Untranslated Segment</guimenuitem>
+      <keycombo><keycap>C</keycap><keycap>U</keycap></keycombo></term>
 
       <listitem>
-        <para>移动到下一个在翻译记忆库中无相同内容的片段。</para>
+        <para>Moves to the next segment with no target language entry in the
+        translation memory.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>下一个已译片段</term>
+    <varlistentry id="menus.goto.next.translated.segment">
+      <term id="menus.goto.next.translated.segment.title"><guimenuitem>Next
+      Translated Segment</guimenuitem>
+      <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>U</keycap></keycombo></term>
 
       <listitem>
         <para>移动到下一个已译片段，忽略未译片段。</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>下一个片段</term>
+    <varlistentry id="menus.goto.next.segment">
+      <term id="menus.goto.next.segment.title"><guimenuitem>Next
+      Segment</guimenuitem>
+      <keycombo><keycap>C</keycap><keycap>N</keycap></keycombo></term>
 
       <listitem>
-        <para>移动到下一个片段。如果当前片段是文件中的最后一个片段，则会移动到下一个文件的第一个片段。</para>
+		<para>Also: <keycombo><keycap>Enter</keycap></keycombo></para>
 
-        <para>注意：如果未选择<link linkend="dialogs.preferences.general.usetabtoadvance">用 TAB 前进</link>选项，则亦可用 <keycap>Enter</keycap> 快捷键。</para>
+        <para>Moves to the next segment, or to the first segment of the next
+        file if the current segment is the last one in the file.</para>
+
+        <note>
+		  <para>You can use <keycap>TAB</keycap> as an alternative shortcut by
+		  enabling the
+		  <link linkend="dialogs.preferences.general.use.tab.to.advance" endterm="dialogs.preferences.general.use.tab.to.advance.title"/>
+		  preference.</para>
+		  
+		  <para>This is useful with character entry systems that use
+		  <keycap>Enter</keycap> to validate input.</para></note>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>上一个片段</term>
-
+    <varlistentry id="menus.goto.previous.segment">
+      <term id="menus.goto.previous.segment.title"><guimenuitem>Previous
+      Segment</guimenuitem>
+      <keycombo><keycap>C</keycap><keycap>P</keycap></keycombo></term>
       <listitem>
-        <para>移动到上一个片段。如果当前片段是文件中的第一个片段，则会移动到上一个文件的最后一个片段。</para>
+		<para>Also:
+		<keycombo><keycap>C</keycap><keycap>Enter</keycap></keycombo></para>
 
-        <para>注意：如果未选择<link linkend="dialogs.preferences.general.usetabtoadvance">用 TAB 前进</link>选项，则亦可用<keycombo> <keycap>Ctrl</keycap> <keycap>Enter</keycap> </keycombo>快捷键。</para>
+        <para>Moves to the previous segment, or to the last segment of the
+        previous file if the current segment is the first one in the
+        file.</para>
+
+        <note>
+		  <para>You can use <keycombo><keycap>C</keycap><keycap>TAB</keycap></keycombo>
+		  as an alternative shortcut by enabling the <link linkend="dialogs.preferences.general.use.tab.to.advance" endterm="dialogs.preferences.general.use.tab.to.advance.title"/>
+		  preference.</para>
+		  
+		  <para>This is useful with character entry systems that use
+		  <keycap>Enter</keycap> to validate input.</para>
+		</note>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>片段序号...</term>
-
+    <varlistentry id="menus.goto.segment.number">
+      <term id="menus.goto.segment.number.title"><guimenuitem>Segment
+      number...</guimenuitem>
+      <keycombo><keycap>C</keycap><keycap>J</keycap></keycombo></term>
       <listitem>
-        <para>在输入片段的序号或编号后就会打开该片段</para>
+        <para>Jumps to the segment whose call-out or number is entered.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>下一个备注</term>
-
+    <varlistentry id="menus.goto.next.note">
+      <term id="menus.goto.next.note.title"><guimenuitem>Next
+      Note</guimenuitem>
+      <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>N</keycap></keycombo></term>
       <listitem>
-        <para>会打开下一个带有备注的片段。</para>
+		<para>Moves to the next segment with a note.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>上一个备注</term>
-
+    <varlistentry id="menus.goto.previous.note">
+      <term id="menus.goto.previous.note.title"><guimenuitem>Previous
+      Note</guimenuitem>
+      <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>P</keycap></keycombo></term>
       <listitem>
-        <para>会打开上一个带有备注的片段。</para>
+		<para>Moves to the previous segment with a note.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>所选匹配的来源</term>
-
+    <varlistentry id="menus.goto.next.unique.segment">
+      <term id="menus.goto.next.unique.segment.title"><guimenuitem>Next Unique
+      Segment</guimenuitem>
+      <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>K</keycap></keycombo></term>
       <listitem>
-        <para>移动到<guilabel>模糊匹配</guilabel>窗格中当前选择的匹配相对应的片段。</para>
+        <para>Moves to the next unique segment.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>在历史中前进...</term>
-
+    <varlistentry id="menus.goto.source.of.selected.match">
+      <term id="menus.goto.source.of.selected.match.title"><guimenuitem>Source
+      of Selected Match</guimenuitem>
+      <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>M</keycap></keycombo></term>
       <listitem>
-        <para><application>OmegaT</application> 会记住处理过的片段。使用此命令你可以前进到之前用<guimenuitem>在历史中后退</guimenuitem>...命令所离开的拿个片段。</para>
+        <para>Moves to the segment that corresponds to the currently
+        selected match in the <guilabel>Fuzzy matches</guilabel> pane.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>在历史中后退...</term>
+	<varlistentry id="menus.goto.auto.populated.segments">
+	  <term id="menus.goto.auto.populated.segments.title"><guisubmenu>Auto-Populated
+	  Segments</guisubmenu></term>
+	  <listitem>
+        <para>Navigate between segments that were automatically populated by
+        exact matches from the <link linkend="project.folder.tm.auto" endterm="project.folder.tm.auto.title"/> and <link linkend="project.folder.tm.enforce.title" endterm="project.folder.tm.enforce.title"/> subfolders.</para>
 
+		<para>详情请参阅指南<link linkend="how.to.use.tm.reuse.tm" endterm="how.to.use.tm.reuse.tm.title"/>。</para>
+
+		<itemizedlist>
+		  <listitem id="menus.goto.auto.populated.segments.next.auto">
+			<para id="menus.goto.auto.populated.segments.next.auto.title"><guimenuitem>Next
+			Segment from tm/auto/</guimenuitem>
+			<keycombo><keycap>C</keycap><keycap>A</keycap><keycap>,</keycap></keycombo></para>
+
+			<para>Moves to the next segment inserted from
+			<filename>tm/auto/</filename>.</para>
+		  </listitem>
+
+		  <listitem id="menus.goto.auto.populated.segments.prev.auto">
+			<para id="menus.goto.auto.populated.segments.prev.auto.title"><guimenuitem>Previous
+			Segment from tm/auto/</guimenuitem>
+			<keycombo><keycap>S</keycap><keycap>C</keycap><keycap>A</keycap><keycap>,</keycap></keycombo></para>
+
+			<para>Moves to the previous segment inserted from
+			<filename>tm/auto/</filename>.</para>
+		  </listitem>
+
+		  <listitem id="menus.goto.auto.populated.segments.next.enforce">
+			<para id="menus.goto.auto.populated.segments.next.enforce.title"><guimenuitem>Next
+			Segment from tm/enforce/</guimenuitem>
+			<keycombo><keycap>C</keycap><keycap>A</keycap><keycap>.</keycap></keycombo></para>
+
+			<para>Moves to the next segment inserted from
+			<filename>tm/enforce/</filename>.</para>
+		  </listitem>
+
+		  <listitem id="menus.goto.auto.populated.segments.prev.enforce">
+			<para id="menus.goto.auto.populated.segments.prev.enforce.title"><guimenuitem>Next
+			Segment from tm/auto/</guimenuitem>
+			<keycombo><keycap>S</keycap><keycap>C</keycap><keycap>A</keycap><keycap>.</keycap></keycombo></para>
+
+			<para>Moves to the previous segment inserted from
+			<filename>tm/enforce/</filename>.</para>
+		  </listitem>
+		</itemizedlist>
+	  </listitem>
+	</varlistentry>
+
+    <varlistentry id="menus.goto.back.in.history">
+      <term id="menus.goto.back.in.history.title"><guimenuitem>Back in
+      History</guimenuitem>
+      <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>P</keycap></keycombo></term>
       <listitem>
-        <para>使用此命令，你一次可以退后一个片段，稍后可以用下面的<guimenuitem>在历史中前进...</guimenuitem>命令回到当前片段。</para>
+        <para>OmegaT remembers your segment navigation history.</para>
+        <para>This command allows you to move backward one segment at a time to
+        segments you have previously visited.</para>
+      </listitem>
+    </varlistentry>
+    
+    <varlistentry id="menus.goto.forward.in.history">
+      <term id="menus.goto.forward.in.history.title"><guimenuitem>Forward in
+      History</guimenuitem>
+      <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>N</keycap></keycombo></term>
+      <listitem>
+        <para>OmegaT remembers your segment navigation history.</para>
+
+        <para>This command allows you to move forward one segment at a time to
+        segments you have previously visited with the above <link linkend="menus.goto" endterm="menus.goto.title"/><link linkend="menus.goto.back.in.history" endterm="menus.goto.back.in.history.title"/> command.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry id="menus.goto.notes.pane">
+      <term id="menus.goto.notes.pane.title"><guimenuitem>Notepad</guimenuitem>
+	  <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>N</keycap></keycombo></term>
+      <listitem>
+        <para>Enter the <link linkend="panes.notes" endterm="panes.notes.title"/> to write or modify a note associated
+        to the current segment.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry id="menus.goto.editor.pane">
+      <term id="menus.goto.editor.pane.title"><guimenuitem>Editor</guimenuitem>
+      <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>E</keycap></keycombo></term>
+      <listitem>
+        <para>Enter the <link linkend="panes.editor" endterm="panes.editor.title"/> to proceed with your translation.</para>
       </listitem>
     </varlistentry>
   </variablelist>

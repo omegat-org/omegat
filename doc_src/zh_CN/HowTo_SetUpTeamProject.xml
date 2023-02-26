@@ -1,257 +1,374 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="howto.setupteamproject">
-  <title>建立团队项目</title>
+<section id="how.to.setup.team.project">
+  <title id="how.to.setup.team.project.title">Set up a team project</title>
 
-  <para>建立团队项目需要一些关于服务器和 SVN 或 Git 版本控制系统的知识。因此，它应当由项目经理、项目负责人或本地化工程师来执行。</para>
+  <para>Managing a team project calls for some knowledge of either the
+  <emphasis>SVN</emphasis> or <emphasis>Git</emphasis> version control system
+  (<emphasis>VCS</emphasis> in the rest of this section).</para>
 
-  <para>由于很容易获得大量关于 SVN 和 Git 的信息，在这里我们不描述它们如何工作，而只描述 OmegaT 如何使用它们。</para>
+  <para>As information on those topics is readily available, this manual limits
+  itself to describing their use in the context of an OmegaT team
+  project.</para>
 
-  <section>
-    <title>第 1 步：在服务器上创建一个空项目</title>
+  <note>
+	<para>An OmegaT team projects synchronizes the project translation memory
+	<link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/> and the project writable
+	glossary <link linkend="project.folder.glossary.txt" endterm="project.folder.glossary.txt.title"/> between the hosting server and
+	all the participating team members, and manages all possible conflicts
+	between them.</para>
+  </note>
 
-    <para><emphasis role="bold">在服务器上创建一个空项目</emphasis></para>
+  <section id="how.to.setup.team.project.prepare.the.repository">
+    <title id="how.to.setup.team.project.prepare.the.repository.title">Preparations</title>
 
-    <orderedlist>
-      <listitem>
-        <para>在服务器上创建一个译者可访问的 SVN 或 Git 存储库。</para>
-      </listitem>
+	<para>Here are the steps to set up a team project:</para>
 
-      <listitem>
-        <para>创建此存储库的本地副本（对 SVN 是 <command>check out</command>，对 Git 是 <command>clone</command>）。</para>
-      </listitem>
+	<orderedlist>
+      <listitem id="how.to.setup.team.project.create.empty.repository">
+		<para id="how.to.setup.team.project.create.empty.repository.title">Create an
+		empty repository on your VCS hosting server</para>
 
-      <listitem>
-        <para>在本地存储库中建立一个新的、空的 OmegaT 项目。有两种方式可以完成这一点：</para>
+		<para>This can normally be done through a web interface, a graphical
+		application, or the command line. Consult the documentation for your
+		server or hosting service for details.</para>
+	  </listitem>
 
-        <itemizedlist>
+	  <listitem id="how.to.setup.team.project.clone.locally">
+		<para id="how.to.setup.team.project.clone.locally.title">Use the local
+		VCS to make a local copy (clone)</para>
+
+		<note>
+		  <para>This local version contains your <emphasis>project
+		  manager</emphasis> copy of the OmegaT project. Use it to make
+		  modifications that affect the entire team.</para>
+		</note>
+
+		<para>The local repository is used to add the initial project to the
+		server, and can also be used for maintenance tasks, such as deleting
+		files, that cannot be performed directly within OmegaT.</para>
+		<para>We recommend that you avoid using that folder for translation
+		tasks. If you need to perform translation or review tasks on that
+		project, use OmegaT to download a separate copy of the team project and
+		work from there. See the <link linkend="how.to.use.team.project" endterm="how.to.use.team.project.title"/> how-to for details.</para>
+	  </listitem>
+
+	  <listitem id="how.to.setup.team.project.fill.local.clone">
+		<para id="how.to.setup.team.project.fill.local.clone.title">Fill the
+		empty local copy with a real OmegaT project</para>
+		<itemizedlist>
+		  <listitem>
+			<para>Create the project structure</para>
+
+			<para>If you are creating a new empty project, you can follow the
+			<link linkend="introduction.create.and.open.new.project">GUI
+			procedure</link>, or create it directly from the command line:
+			<command>java -jar OmegaT.jar team init &lt;source language&gt;
+			&lt;target language&gt;</command></para>
+
+			<para>This command also automatically registers the project in the
+			version control system.</para>
+		  </listitem>
+		  <listitem>
+			<para>Choose the appropriate settings</para>
+
+			<para>Make the necessary changes to the project properties at this
+			stage, including local file filters or segmentation settings. See
+			the <link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/> dialog for
+			details.</para>
+		  </listitem>
+
+		  <listitem>
+			<para>Add the necessary files</para>
+
+			<para>Similarly add any relevant lists of spellchecker files you
+			want to make available to everyone working on the project. See <link linkend="project.folder.omegat.spellcheck">spellchecker files</link>
+			for details.</para>
+
+			<para>If you are converting an existing project, make sure you
+			delete any files in the project that you do not need or want to
+			upload to the server before proceeding to the next step.</para>
+
+			<para>Copy the files to translate to the source/ folder, and use
+			your SVN or Git client, or the command line, to add and publish them
+			to the repository. Use <link endterm="menus.project.title" linkend="menus.project"/><link linkend="menus.project.commit.source.files" endterm="menus.project.commit.source.files.title"/> to add files
+			from OmegaT.</para>
+
+			<para>You must use your SVN or Git client, or the command line, to
+			add and publish any dictionaries, glossaries, translation memories
+			or other files you want to include in the project.</para>
+
+			<para>This step can be performed before the registering and publishing
+			the project for the first time, and can also be used to add new files,
+			or update existing ones after the project has been created.</para>
+		  </listitem>
+		</itemizedlist>
+
+		<note>
+          <para>In team projects that use a simple mapping between the local
+          repository and the remote repository (the default), <emphasis role="bold">and only in such projects</emphasis>, the source and
+          target files can be modified locally and uploaded to the server using
+          <link linkend="menus.project" endterm="menus.project.title"/><link endterm="menus.project.commit.source.files.title" linkend="menus.project.commit.source.files"/> and <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.commit.target.files" endterm="menus.project.commit.target.files.title"/>.</para>
+
+          <para>The team project administrator must use the local VCS to
+          <emphasis role="bold">modify</emphasis> or <emphasis role="bold">delete</emphasis> those files. Some plugins can make this
+          task easier. See the <link linkend="dialogs.preferences.plugins" endterm="dialogs.preferences.plugins.title"/> preference for
+          details.</para>
+		</note>
+	  </listitem>
+
+	  <listitem id="how.to.setup.team.project.register">
+		<para id="how.to.setup.team.project.register.title">Register the project
+		files into the local VCS</para>
+
+		<para>If you created the project from the GUI, you then have to
+		explicitly add it to the version control system (<command>add</command>
+		in both SVN and Git).</para>
+	  </listitem>
+
+	  <listitem id="how.to.setup.team.project.push">
+		<para id="how.to.setup.team.project.push.title">Put the registered files
+		on the hosting server</para>
+
+		<para>Finally, publish your project to the remote server
+		(<command>commit</command> in SVN, <command>commit</command> and
+		<command>push</command> in Git).</para>
+	  </listitem>
+
+	  <listitem id="how.to.setup.team.project.give.access.rights">
+		<para id="how.to.setup.team.project.give.access.rights.title">Give
+		access rights to your team</para>
+
+		<note>
+		  <para>If you use multiple projects on the same server, credentials
+		  will only be asked once for that server.</para>
+		</note>
+
+		<para>After the project is ready and has been uploaded to the server,
+		the team project administrator has to set up access for the translators.
+		Accessing a team project requires the following information:</para>
+
+		<orderedlist>
           <listitem>
-            <para><menuchoice>
-                <guimenuitem>项目</guimenuitem> <guimenuitem>新建...</guimenuitem>
-              </menuchoice></para>
+			<para>Projects on a hosting service</para>
+
+			<para>The translators will have to create an account for the
+			service, and send their user name to the team project
+			administrator.</para>
+
+			<para>The administrator will then grant write access to the
+			repository to those accounts.</para>
           </listitem>
 
           <listitem>
-            <para>在命令行：<command>java -jar OmegaT.jar team init [语言1] [语言2]</command></para>
+			<para>Projects on a self-hosted server</para>
+
+			<para>If the server is self-hosted and does not have a provision
+			for translators to register an account themselves, the team project
+			administrator must create accounts with write access for the
+			translators.</para>
+
+			<para>After creating the accounts, the administrator must send the
+			translators their individual credentials.</para>
           </listitem>
-        </itemizedlist>
-      </listitem>
+		</orderedlist>	  
+	  </listitem>
 
-      <listitem>
-        <para>将新建立的 OmegaT 项目添加到版本控制系统（对于 SVN 和 Git 都是 <command>add</command>）</para>
+	  <listitem id="how.to.setup.team.project.have.members.download">
+		<para id="how.to.setup.team.project.have.members.download.title">Have
+		everybody download the project from OmegaT</para>
 
-        <para>注意：如果在第 3 步是用命令行创建的项目，则该步骤已由程序完成。</para>
-      </listitem>
+		<para>Administrators have two options for sending the location of the
+		project to the translators:</para>
 
-      <listitem>
-        <para>将新建立的 OmegaT 项目发布到服务器上（对 SVN 是 <command>commit</command>，对 Gti 是 <command>commit</command> 然后跟着 <command>push</command>）。</para>
-      </listitem>
-    </orderedlist>
+		<orderedlist>
+          <listitem>
+			<para>Send a URL and ask the translators to use <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.download.team.project" endterm="menus.project.download.team.project.title"/> to create a
+			local copy of the project on their own system.</para>
+          </listitem>
 
-    <para><emphasis role="bold">专用参数</emphasis></para>
+          <listitem>
+			<para>Send an <filename>omegat.project</filename> file containing
+			the project URL, and then have the translators copy it to an empty
+			folder and open it in OmegaT. This can be useful if the project is
+			set up to use different <link linkend="how.to.setup.team.project.mapping.parameters">mappings</link>
+			for each translator.</para>
+          </listitem>
+		</orderedlist>
 
-    <para>如果项目使用专用过滤器和片段分割参数，<filename>filters.xml</filename> 和 <filename>segmentation.conf</filename> 文件都必须添加到版本控制系统中并发布到服务器上。</para>
+		<para>After the team project administrator confirms that a translator
+		has been able to open the team project, it is a good idea to make sure
+		that the <link linkend="menus.tools.statistics">project
+		statistics</link> are the same for both the administrator (on the
+		server) and the translator (locally).</para>
+
+		<para>If they do not match, make sure the
+		<filename>filters.xml</filename> and
+		<filename>segmentation.conf</filename> files are properly shared.</para>
+	  </listitem>
+
+	  <listitem id="how.to.setup.team.project.download.if.needed">
+		<para id="how.to.setup.team.project.download.if.needed.title">If you
+		need to work on the project too, download the project yourself to a
+		local location different from the local team project location</para>
+	  </listitem>
+
+	  <listitem id="how.to.setup.team.project.translate">
+		<para id="how.to.setup.team.project.translate.title">You can now also
+		work on the project with the team</para>
+	  </listitem>
+	</orderedlist>
   </section>
 
-  <section>
-    <title>第 2 步：添加要翻译的文件和其他资源</title>
+  <section id="how.to.setup.team.project.mapping.parameters">
+	<title id="how.to.setup.team.project.mapping.parameters.title">Repository
+	mappings</title>
 
-    <para>使用 SVN 或 Git 客户端添加要翻译的文件。</para>
+	<para>It is possible to map various remote locations to local files via the
+	OmegaT user interface using <link linkend="dialogs.project.properties.repository.mapping.title" endterm="dialogs.project.properties.repository.mapping.title"/> in the <link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/> dialog, or by editing the <link linkend="project.folder.omegat.project.file.title" endterm="project.folder.omegat.project.file.title"/> file. Although the
+	mapping feature is primarily intended for gathering source files from
+	disparate locations, it can also be used for other types of files.</para>
 
-    <para>这也可以在 OmegaT 中完成：</para>
+	<para>A list of mapping parameters is presented below, and examples of their
+	use are provided in the next section.</para>
 
-    <orderedlist>
-      <listitem>
-        <para>将文件复制到 <filename>/source</filename> 目录中</para>
-      </listitem>
-
-      <listitem>
-        <para>使用 <menuchoice> <guimenuitem>项目</guimenuitem> <guimenuitem>提交原文文件</guimenuitem> </menuchoice></para>
-      </listitem>
-    </orderedlist>
-
-    <para>要添加其他资源（词典、TMX、或词汇表），请使用 SVN 或 Git 客户端。</para>
-
-    <para>要<emphasis role="bold">删除文件</emphasis>，请使用 SVN 或 Git 客户端。</para>
-
-    <para>请注意，在翻译期间，OmegaT 只修改两个文件：</para>
-
-    <itemizedlist>
-      <listitem>
-        <para><filename>omegat/project_save.tmx</filename></para>
-      </listitem>
-
-      <listitem>
-        <para><filename>glossary/glossary.txt</filename></para>
-      </listitem>
-    </itemizedlist>
-
-    <para>所有其他的文件都是只读的。如果译者试图修改它们，则只要项目被打开、关闭、保存或重新载入，它们就会回复到原始状态。</para>
-  </section>
-
-  <section>
-    <title>第 3 步：向译者发送邀请</title>
-
-    <para>一旦项目在服务器上建立好之后，项目经理可以邀请译者在其上工作，两种方式任选其一：</para>
-
-    <itemizedlist>
-      <listitem>
-        <para>发送项目网址并要求译者用<menuchoice> <guimenuitem>项目</guimenuitem> <guimenuitem>下载团队项目</guimenuitem> </menuchoice>创建本地副本。</para>
-      </listitem>
-
-      <listitem>
-        <para>发送包含对网址的引用的 <filename>omegat.project</filename>文件并要求译者将其复制到专用的文件夹中然后用 OmegaT 打开它。</para>
-
-        <para>对网址的引用如下所示（此处为 Git 存储库）：</para>
-
-        <programlisting>&lt;repositories&gt;
- &lt;repository type=&quot;git&quot; url=&quot;https://repo_for_OmegaT_team_project.git&quot;&gt;
-  &lt;mapping local=&quot;&quot; repository=&quot;&quot;/&gt;
- &lt;/repository&gt;
-&lt;/repositories&gt;</programlisting>
-      </listitem>
-    </itemizedlist>
-
-    <para>两种情况下，项目经理都必须发给译者他们用来访问的存储库的 ID 和密码。</para>
-
-    <para><emphasis role="bold">检查统计数据</emphasis></para>
-
-    <para>项目经理应当与译者核实确认两侧（服务器侧与译者侧）的统计数据是一致的。</para>
-
-    <para>如果有所不同，请检查 <filename>filters.xml</filename> 和 <filename>segmentation.conf</filename> 文件是否受版本控制。</para>
-  </section>
-
-  <section>
-    <title>特殊情况：选择性共享</title>
-
-    <para>上面的流程是通常的情况，其中项目经理希望完全控制项目，文件（与统计数据）在两侧（服务器侧与译者侧）是一样的。</para>
-
-    <para>OmegaT 团队项目也可以以不同的方式建立，其中多个译者共享 project_save.tmx 文件但不共享（全部）（原文）文件。</para>
-
-    <para>在这种情况下，流程是一样的，但项目经理并不会将（所有）文件添加到版本控制的项目中。而是由译者自行复制文件，或者添加映射来从其他位置同步文件。</para>
-
-      <para>可以通过 UI：<menuchoice> <guimenuitem>项目</guimenuitem> <guimenuitem>属性</guimenuitem> <guimenuitem>存储库映射</guimenuitem> </menuchoice>或通过编辑 <filename>omegat.project</filename> 来添加映射。</para>
-  </section>
-
-  <section id="howto.setupteamproject.mappingparameters">
-    <title>映射参数</title>
-
-    <variablelist>
+	<variablelist>
       <varlistentry>
-        <term>存储库类型（repository type）</term>
-
-        <listitem>
-          <para>这可以是 http（包括 https）、svn、git 或文件。</para>
-        </listitem>
+		<term>存储库类型（repository type）</term>
+		<listitem>
+          <para>This can be either <emphasis>http</emphasis> (which includes
+          https), <emphasis>svn</emphasis>, <emphasis>git</emphasis>, or
+          <emphasis>file</emphasis>.</para>
+		</listitem>
       </varlistentry>
 
       <varlistentry>
-        <term>存储库网址（repository url）</term>
-
-        <listitem>
-          <para>要翻译的文件的远程位置或目录</para>
-        </listitem>
+		<term>存储库 URL（repository url）</term>
+		<listitem>
+          <para>Remote location or folder of the files to translate.</para>
+		</listitem>
       </varlistentry>
 
       <varlistentry>
-        <term>映射本地（mapping local）</term>
-
-        <listitem>
+		<term>映射本地（mapping local）</term>
+		<listitem>
           <para>本地文件夹或文件的名称，相对于 OmegaT 项目的根文件夹。</para>
-        </listitem>
+		</listitem>
       </varlistentry>
 
       <varlistentry>
-        <term>映射存储库（mapping repository）</term>
-
-        <listitem>
-          <para>远程文件夹或文件的名称，相对于存储库网址。</para>
-        </listitem>
+		<term>映射存储库（mapping repository）</term>
+		<listitem>
+          <para>远程文件夹或文件的名称，相对于存储库 URL。</para>
+		</listitem>
       </varlistentry>
 
       <varlistentry>
-        <term>排除（excludes）</term>
-
-        <listitem>
-          <para>用通配符（*、?、**，Apache Ant 风格）来添加模式。不同模式之间用分号分隔。</para>
-
-          <para>例：<userinput>**/excludedfolder/**;*.txt</userinput> 会排除路径中包含有 /excludedfolder/ 的文件，以及扩展名为 .txt 的文件。</para>
-        </listitem>
+		<term>排除（excludes）</term>
+		<listitem>
+          <para>Use wildcards (following the Apache Ant style: *, ?, **) to add
+          patterns for files that should not be part of the mapping. Use a
+          semicolon to separate different patterns.</para>
+          <para>Example: <userinput>**/excludedfolder/**;*.txt</userinput>
+          excludes files that have /excludedfolder/ in the path, as well as
+          files with the <filename>.txt</filename> extension.</para>
+		</listitem>
       </varlistentry>
 
       <varlistentry>
-        <term>包含（includes）</term>
-
-        <listitem>
-          <para>同上。</para>
-
-          <para>例如：<userinput>**/*.docx</userinput> 会添加所有 .docx 文件，无论它们位于项目中何处，哪怕是在排除文件夹中。</para>
-
-          <para>默认情况下，所有未被排除的文件都会被包含。所以只在要否决某些排除项的时候才需要指定本项内容。</para>
-        </listitem>
+		<term>包含（includes）</term>
+		<listitem>
+          <para>As above, but for files that should be part of the mapping.
+          Since files are included by default unless specifically excluded, this
+          option is only necessary to specify exceptions to an exclusion
+          pattern.</para>
+          <para>Example: <userinput>**/*.docx</userinput> to add all .docx
+          files in the project, even if they are located in an excluded
+          folder.</para>
+		</listitem>
       </varlistentry>
-    </variablelist>
+	</variablelist>
   </section>
 
-  <section>
-    <title>示例映射</title>
+  <section id="how.to.setup.team.project.example.mappings">
+	<title id="how.to.setup.team.project.example.mappings.title">示例映射</title>
 
-    <para>默认项目映射：<programlisting>&lt;repositories&gt;
- &lt;repository type=&quot;svn&quot; url=&quot;https://repo_for_OmegaT_team_project&quot;&gt;
-  &lt;mapping local=&quot;&quot; repository=&quot;&quot;/&gt;
- &lt;/repository&gt;
-&lt;/repositories&gt;</programlisting></para>
-
-    <para><filename>https://repo_for_OmegaT_team_project</filename> 的所有内容映射到本地 OmegaT 项目</para>
-
-    <para>在存储库的子目录中映射项目：<programlisting>&lt;repositories&gt;
- &lt;repository type=&quot;svn&quot; url=&quot;https://repo_for_All_OmegaT_team_projects&quot;&gt;
-  &lt;mapping local=&quot;&quot; repository=&quot;En-US_DE_project&quot;/&gt;
- &lt;/repository&gt;
-&lt;/repositories&gt;</programlisting></para>
-
-    <para><filename>https://repo_for_All_OmegaT_team_projects/En-US_DE_project</filename> 的所有内容映射到本地 OmegaT 项目。</para>
-
-    <para>用过滤器从远程存储库映射其他资源：<programlisting>
-&lt;repositories&gt;
- &lt;repository type=&quot;svn&quot; url=&quot;https://repo_for_All_OmegaT_team_project_sources&quot;&gt;
-  &lt;mapping local=&quot;source/subdir&quot; repository=&quot;&quot;&gt;
-   &lt;excludes&gt;**/*.bak&lt;/excludes&gt;
-   &lt;includes&gt;readme.bak&lt;/includes&gt;
-  &lt;/mapping&gt;
- &lt;/repository&gt;
-&lt;/repositories&gt;</programlisting></para>
-
-    <para><filename>https://repo_for_All_OmegaT_team_project_sources</filename> 的所有内容都映射到本地 OmegaT 项目的原文文件夹，除了 readme.bak 之外的 *.bak 文件则排除在外。</para>
-
-    <para><programlisting>从网站映射其他原文文件：&lt;repository type=&quot;http&quot; url=&quot;https://github.com/omegat-org/omegat/raw/master/&quot;&gt;
- &lt;mapping local=&quot;source/Bundle.properties&quot; repository=&quot;src/org/omegat/Bundle.properties&quot;/&gt;
+	<para>默认项目映射：<programlisting>&lt;repository type=&quot;svn&quot; url=&quot;https://repo_for_OmegaT_team_project&quot;&gt;
+	&lt;mapping local=&quot;&quot; repository=&quot;&quot;/&gt;
 &lt;/repository&gt;</programlisting></para>
 
-    <para>远程文件 <filename>https://github.com/omegat-org/omegat/raw/master/src/org/omegat/Bundle.properties</filename> 映射到本地文件 <filename>source/Bundle.properties</filename>。</para>
+	<para><filename>https://repo_for_OmegaT_team_project</filename> 的所有内容映射到本地 OmegaT 项目</para>
 
-    <para>带重命名的映射：<programlisting>&lt;repository type=&quot;http&quot; url=&quot;https://github.com/omegat-org/omegat/raw/master/&quot;&gt;
- &lt;mapping local=&quot;source/readme_tr.txt&quot; repository=&quot;release/readme.txt&quot;/&gt;
+	<para>Mapping for projects in a subfolder of the repository:
+	<programlisting>&lt;repository type=&quot;svn&quot; url=&quot;https://repo_for_All_OmegaT_team_projects&quot;&gt;
+	&lt;mapping local=&quot;&quot; repository=&quot;En-US_DE_project&quot;/&gt;
 &lt;/repository&gt;</programlisting></para>
 
-    <para>远程文件 <filename>https://github.com/omegat-org/omegat/raw/master/release/readme.txt</filename> 映射到本地文件 <filename>source/readme_tr.txt</filename>。</para>
+	<para><filename>https://repo_for_All_OmegaT_team_projects/En-US_DE_project</filename> 的所有内容映射到本地 OmegaT 项目。</para>
 
-    <para>这让重命名要翻译的文件成为可能。</para>
-
-    <para>本地文件映射：<programlisting>&lt;repository type=&quot;file&quot; url=&quot;/home/me/myfiles&quot;&gt;
- &lt;mapping local=&quot;source/file.txt&quot; repository=&quot;my/file.txt&quot;/&gt;
- &lt;mapping local=&quot;source/file2.txt&quot; repository=&quot;some/file.txt&quot;/&gt;
+	<para>Mapping for additional sources from a remote repository, with
+	filters:
+	<programlisting>&lt;repository type=&quot;svn&quot; url=&quot;https://repo_for_All_OmegaT_team_project_sources&quot;&gt;
+	&lt;mapping local=&quot;source/subdir&quot; repository=&quot;&quot;&gt;
+	    &lt;excludes&gt;**/*.bak&lt;/excludes&gt;
+    	&lt;includes&gt;readme.bak&lt;/includes&gt;
+	&lt;/mapping&gt;
 &lt;/repository&gt;</programlisting></para>
 
-    <para>本地文件 <filename>/home/me/myfiles/my/file.txt</filename> 映射成本地文件 <filename>source/file.txt</filename>，<filename>/home/me/myfiles/some/file.txt</filename> 映射成本地文件 <filename>source/file2.txt</filename>。</para>
+	<para>Everything in
+	<filename>https://repo_for_All_OmegaT_team_project_sources</filename> is
+	mapped to the local OmegaT project source folder, except files with a
+	<filename>.bak</filename> extension. However, the
+	<filename>readme.bak</filename> is also included.</para>
 
-    <para>警告：如果文件不存在，则不会加载项目。</para>
-    <para>你可以根据需要添加任意数量的映射，但是只能在团队项目的上下文环境中添加，即，其中必须有一个映射包含 omegat.project。此功能旨在汇集原文文件，但并不限制你将它用于原文文件之外。</para>
+	<para>Mapping for extra source files from the web:
+	<programlisting>&lt;repository type=&quot;http&quot; url=&quot;https://github.com/omegat-org/omegat/raw/master/&quot;&gt;
+	&lt;mapping local=&quot;source/Bundle.properties&quot; repository=&quot;src/org/omegat/Bundle.properties&quot;/&gt;
+&lt;/repository&gt;</programlisting></para>
+
+	<para>远程文件 <filename>https://github.com/omegat-org/omegat/raw/master/src/org/omegat/Bundle.properties</filename> 映射到本地文件 <filename>source/Bundle.properties</filename>。</para>
+
+	<para>带重命名的映射：<programlisting>&lt;repository type=&quot;http&quot; url=&quot;https://github.com/omegat-org/omegat/raw/master/&quot;&gt;
+	&lt;mapping local=&quot;source/readme_tr.txt&quot; repository=&quot;release/readme.txt&quot;/&gt;
+&lt;/repository&gt;</programlisting></para>
+
+	<para>远程文件 <filename>https://github.com/omegat-org/omegat/raw/master/release/readme.txt</filename> 映射到本地文件 <filename>source/readme_tr.txt</filename>。</para>
+
+	<para>This makes it possible to rename the file to translate.</para>
+
+	<para>本地文件映射：<programlisting>&lt;repository type=&quot;file&quot; url=&quot;/home/me/myfiles&quot;&gt;
+	&lt;mapping local=&quot;source/file.txt&quot; repository=&quot;my/file.txt&quot;/&gt;
+	&lt;mapping local=&quot;source/file2.txt&quot; repository=&quot;some/file.txt&quot;/&gt;
+&lt;/repository&gt;</programlisting></para>
+
+	<para>本地文件 <filename>/home/me/myfiles/my/file.txt</filename> 映射成本地文件 <filename>source/file.txt</filename>，<filename>/home/me/myfiles/some/file.txt</filename> 映射成本地文件 <filename>source/file2.txt</filename>。</para>
+
+	<warning>
+      <para>The project will not load if a file specified in a mapping does not
+      exist.</para>
+	</warning>
+
+	<para>You can add as many mappings as you want, but one of the mappings must
+	include the <filename>omegat.project</filename> file.</para>
+
   </section>
-  <section>
-    <title>关于 omegat.project 和映射的说明</title>
-    <para>创建新项目并提交到存储库时，<filename>omegat.project</filename> 文件并不包含任何映射。当你下载项目时，项目会在本地被转换为团队项目并且会添加默认映射。</para>
-    <para>要注意，存储库中的 omegat.project 文件并不会自动更改，因此依然不包含任何映射。当你加载项目时，存储库中的所有更改都会被复制到本地项目中，包括带有项目设置的 <filename>omegat.project</filename> 文件。如果此文件不包含映射，则会重新应用现存的本地映射，且只会应用这些映射。对项目所做的其他本地更改都会被回退还原。如果文件包含映射，则本地对映射进行的更改都会丢失。</para>
-  </section>
+  <section id="how.to.setup.team.project.selective.sharing">
+	<title id="how.to.setup.team.project.selective.sharing.title">Selective
+	sharing</title>
 
+	<para>The above process describes the most common scenario, in which the
+	team project administrator has full control of the project and all files
+	(and statistics) are identical in all instances of the project, both on the
+	server and the local systems of the translators.</para>
+
+	<para>It is also possible to use a team project configuration where several
+	translators share the <filename>project_save.tmx</filename> file, and only a
+	subset of the other files.</para>
+
+	<para>The basic procedure is essentially the same, except that the team
+	project administrator does not add every file to the version-controlled
+	project on the server. The remaining files are either copied by the
+	translators themselves, or mappings that synchronize files from other
+	locations are defined.</para>
+  </section>
 </section>

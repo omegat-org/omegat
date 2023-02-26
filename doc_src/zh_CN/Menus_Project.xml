@@ -1,320 +1,190 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="menus.project">
-  <title id="menus.project.title"><guimenu>项目</guimenu></title>
-  <para>This menu gives you access to project management commands.</para>
+  <title>项目</title>
 
-  <example id="example.new.project.shortcut">
-	<title id="example.new.project.shortcut.title">Shortcut description
-	example</title>
-	<para>On Windows and Linux:
-	<keycombo><keycap>Control</keycap><keycap>Shift</keycap><keycap>N</keycap></keycombo>
-	</para>
-
-	<para>On macOS:
-	<keycombo><keycap>Shift</keycap><keycap>Command</keycap><keycap>N</keycap></keycombo>
-	</para>
-
-	<para><emphasis role="bold">In this manual:</emphasis>
-	<keycombo><keycap>C</keycap><keycap>S</keycap><keycap>N</keycap></keycombo>
-	</para>
-  </example>
-  
   <variablelist>
-    <varlistentry id="menus.project.new">
-      <term id="menus.project.new.title"><guimenuitem>New...</guimenuitem>
-	  <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>N</keycap></keycombo>
-	  </term>
+    <varlistentry>
+      <term><guimenuitem>新建...</guimenuitem></term>
+
       <listitem>
-        <para>Creates and opens a new project. See the <link linkend="introduction.create.and.open.new.project" endterm="introduction.create.and.open.new.project.title"/> section for
-        details.</para>
+        <para>创建并打开新项目。</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.project.download.team.project">
-      <term id="menus.project.download.team.project.title"><guimenuitem>下载团队项目...</guimenuitem></term>
+    <varlistentry>
+      <term><guimenuitem>下载团队项目...</guimenuitem></term>
+
       <listitem>
-        <para>Creates a local copy of a remote OmegaT project. See the <link linkend="how.to.use.team.project" endterm="how.to.use.team.project.title"/> how-to for details.</para>
+        <para>创建远程 OmegaT 项目的本地副本。详细信息请参考<link linkend="howto.useteamproject">使用团队项目</link>。</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.project.open">
-      <term id="menus.project.open.title"><guimenuitem>Open...</guimenuitem>
-	  <keycombo><keycap>C</keycap><keycap>O</keycap></keycombo></term>
+    <varlistentry>
+      <term>打开...</term>
+
       <listitem>
         <para>打开之前创建的项目。</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.project.open.recent">
-      <term id="menus.project.open.recent.title"><guimenuitem>Open
-      Recent...</guimenuitem></term>
+    <varlistentry>
+      <term>打开最近的项目</term>
+
       <listitem>
-        <para>Gives access to the last ten edited projects. Clicking one will
-        save the current project, close it and open the selected project.</para>
-        <para>Use the <guimenuitem>Clear Menu</guimenuitem> function to delete
-        the list of recent projects.</para>
+        <para>可以访问最后编辑的十个项目。点击其中之一会保存并关闭当前项目然后打开另一个项目。</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.project.reload">
-      <term id="menus.project.reload.title"><guimenuitem>Reload</guimenuitem>
-	  <keycombo><keycap>F5</keycap></keycombo></term>
+    <varlistentry>
+      <term>将文件复制到原文文件夹...</term>
+
+      <listitem>
+        <para>将选中的文件复制到 <filename>source</filename> 文件夹然后重新载入项目以载入新文件。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>下载 MediaWiki 页面...</term>
+
+      <listitem>
+        <para>要翻译 Wikipedia 页面的内容（例如）：</para>
+
+        <orderedlist>
+          <listitem>
+            <para>点击 Wikipedia 页面上的<guilabel>编辑</guilabel>标签卡。</para>
+          </listitem>
+
+          <listitem>
+            <para>复制页面的网址（以 <guilabel>action=edit</guilabel> 结尾）并粘贴到 <application>OmegaT</application> 中。</para>
+          </listitem>
+        </orderedlist>
+
+        <para>当你完成了翻译后，将其导入 Wikipedia：</para>
+
+        <orderedlist>
+          <listitem>
+            <para>打开生成的 <filename>/target</filename> 文件夹中 <filename>.UTF8</filename> 文件。</para>
+          </listitem>
+
+          <listitem>
+            <para>复制文本并将其粘贴到 Wikipedia 页面的翻译版本中。</para>
+          </listitem>
+        </orderedlist>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>重新载入</term>
+
       <listitem>
         <para>重新加载项目，让对原文文件与项目设置的外部更改生效。</para>
-        <note>
-		  <para>New translation memories placed in the <link linkend="project.folder.tm" endterm="project.folder.tm.title"/> folder
-		  while translating are automatically taken into account as soon as the
-		  cursor moves from one segment to another. Similarly, the contents of
-		  the <link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/> folder are automatically
-		  recognized and do not require reloading the project.</para>
-		</note>
-		<para>When reloading a team project, OmegaT reloads the remote,
-		rather than the local, properties.</para>
+
+        <para>在翻译过程中新放入 <filename>/tm</filename> 文件夹的翻译记忆库会在光标从一个片段移动到另一个片段时立即自动载入。</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.project.close">
-      <term id="menus.project.close.title"><guimenuitem>Close</guimenuitem>
-	  <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>W</keycap></keycombo></term>
+    <varlistentry>
+      <term>关闭</term>
+
       <listitem>
-        <para>Saves the project translation memory (<link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/>) and closes the
-        project.</para>
+        <para>保存翻译并关闭项目。</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.project.save">
-      <term id="menus.project.save.title"><guimenuitem>Save</guimenuitem>
-	  <keycombo><keycap>C</keycap><keycap>S</keycap></keycombo></term>
+    <varlistentry>
+      <term>保存</term>
+
       <listitem>
-        <para>Saves the project translation memory (<link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/>).</para>
-		<para>OmegaT automatically saves translations every three minutes as well as
-		when you close the project or quit the program. See the <link linkend="dialog.preferences.saving.and.output.interval" endterm="dialog.preferences.saving.and.output.interval.title"/>
-		preference for details.</para>
+        <para>将内部的翻译记忆库保存到硬盘。OmegaT 每 3 分钟自动保存一次翻译，在关闭项目或退出 OmegaT 前也会自动保存。</para>
+
+        <para>3 分钟的间隔可以在<link linkend="dialogs.preferences.savingandoutput"><menuchoice> <guimenuitem>选项</guimenuitem> <guimenuitem>首选项</guimenuitem> <guimenuitem>保存和输出</guimenuitem> </menuchoice></link>中更改。</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.project.copy.files.to.source.folder">
-      <term id="menus.project.copy.files.to.source.folder.title"><guimenuitem>Add
-      Files...</guimenuitem></term>
+    <varlistentry>
+      <term>提交原文文件</term>
+
       <listitem>
-        <para>Copies the selected files to the <link linkend="project.folder.source" endterm="project.folder.source.title"/>
-        folder and reloads the project to take the new files into
-        account.</para>
+        <para>将 <filename>source</filename> 目录中在本地添加或修改的文件上传到存储库中。</para>
+
+        <para>此功能是团队项目特有的。</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.project.download.mediawiki.page">
-      <term id="menus.project.download.mediawiki.page.title"><guimenuitem>Add
-      Online MediaWiki Page...</guimenuitem></term>
+    <varlistentry>
+      <term>提交译文文件</term>
+
       <listitem>
-		<para>Opens a dialog where you can paste the URL of the Mediawiki page
-		you want to translate. The source data of the page will be copied into
-		the <link linkend="project.folder.source" endterm="project.folder.source.title"/> folder, as a text file with the
-		<filename>.utf8</filename> extension.</para>
+        <para>将 <filename>target</filename> 目录中本地创建的文件上传到存储库。</para>
+
+        <para>此功能是团队项目特有的。</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.project.commit.source.files">
-      <term id="menus.project.commit.source.files.title"><guimenuitem>提交原文文件</guimenuitem></term>
+    <varlistentry>
+      <term>创建译文文档</term>
+
       <listitem>
-        <warning><para>This function is specific to team
-        projects. <emphasis>Only the team project manager should use this
-        function</emphasis>. See the <link linkend="how.to.use.team.project" endterm="how.to.use.team.project.title"/> how-to for details.</para></warning>
-        <para>Uploads locally added or modified files from the <filename class="directory">source</filename> folder to the team project
-        repository.</para>
+        <para>根据你的翻译创建译文文档。创建的译文文档位于 <filename>target</filename> 文件夹中。</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.project.commit.target.files">
-      <term id="menus.project.commit.target.files.title"><guimenuitem>提交译文文件</guimenuitem></term>
+    <varlistentry>
+      <term>创建当前译文文档</term>
+
       <listitem>
-        <warning><para>This function is specific to team projects. <emphasis>Use
-        this function only if the team project manager asked you to
-        do so</emphasis>. See the <link linkend="how.to.use.team.project" endterm="how.to.use.team.project.title"/> how-to for details.</para></warning>
-        <para>Uploads locally created translated files from the <link linkend="project.folder.target" endterm="project.folder.target.title"/>
-        folder to the team project repository.</para>
+        <para>为当前正在翻译的文档创建对应的译文文档</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.project.create.translated.documents">
-      <term id="menus.project.create.translated.documents.title"><guimenuitem>Create
-      Translated Files</guimenuitem>
-      <keycombo><keycap>C</keycap><keycap>D</keycap></keycombo></term>
-      <listitem>
-        <para>Creates the target files based on your translation. The created
-        target files are located in the <link linkend="project.folder.target" endterm="project.folder.target.title"/> folder.</para>
-		<note><para>You can prevent the creation of target files if tag issues are
-		found. See the <link linkend="dialogs.preferences.tag.processing.do.not.allow.creating.translated.documents.with.tag.issues" endterm="dialogs.preferences.tag.processing.do.not.allow.creating.translated.documents.with.tag.issues.title"/>
-		preference for details.</para></note>
-      </listitem>
-    </varlistentry>
+    <varlistentry>
+      <term>打开 MED 项目...</term>
 
-    <varlistentry id="menus.project.create.current.translated.document">
-      <term id="menus.project.create.current.translated.document.title"><guimenuitem>Create
-      Current Translated File</guimenuitem>
-      <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>D</keycap></keycombo></term>
-      <listitem>
-        <para>Creates the target file corresponding to source file currently
-        being translated. The resulting file is located in the <link linkend="project.folder.target" endterm="project.folder.target.title"/>
-        folder.</para>
-		<para>
-		</para>				
-      </listitem>
-    </varlistentry>
-
-    <varlistentry id="menus.project.open.med.project">
-      <term id="menus.project.open.med.project.title"><guimenuitem>打开 MED 项目...</guimenuitem></term>
-	  <!-- TODO add link to a format description -->
       <listitem>
         <para>打开 MED 格式的项目包。此格式由欧盟翻译总局定义。</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.project.create.med.project">
-      <term id="menus.project.create.med.project.title"><guimenuitem>创建 MED 项目...</guimenuitem></term>
-	  <!-- TODO add link to a format description -->
+    <varlistentry>
+      <term>创建 MED 项目...</term>
+
       <listitem>
         <para>将当前项目转换为 MED 包。</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.project.properties">
-      <term id="menus.project.properties.title"><guimenuitem>Properties...</guimenuitem>
-      <keycombo><keycap>C</keycap><keycap>E</keycap></keycombo></term>
+    <varlistentry>
+      <term>属性...</term>
+
       <listitem>
-        <para>Displays the <link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/> dialog to edit the project
-        languages and folder locations.</para>
-		<para>
-		</para>		
+        <para>显示<link linkend="dialogs.projectproperties">项目属性</link>对话框以编辑项目语言和文件夹位置。</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.project.source.files.list">
-      <term id="menus.project.source.files.list.title"><guimenuitem>Source
-      Files...</guimenuitem>
-      <keycombo><keycap>C</keycap><keycap>L</keycap></keycombo></term>
+    <varlistentry>
+      <term>项目文件...</term>
+
       <listitem>
-        <para>Opens the <link linkend="windows.source.files.list" endterm="windows.source.files.list.title"/> window.</para>
-		<para>
-		</para>				
+        <para>打开<link linkend="windows.projectfiles">项目文件</link>窗口。</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.project.access.project.contents">
-      <term id="menus.project.access.project.contents.title"><guisubmenu>访问项目内容</guisubmenu></term>
+    <varlistentry>
+      <term>访问项目内容</term>
+
       <listitem>
-        <para>Gives access to the various project folders. See the <link linkend="chapter.project.folder" endterm="chapter.project.folder.title"/> chapter for more
-        details.</para>
-        <para>In addition, there are three menu entries that directly open the
-        current source or target files, or the writable glossary. The files are
-        opened in the default application set by the operating system. The
-        options are grayed out if the files do not exist.</para>
+        <para>可以访问项目的各个文件夹。</para>
 
-		<variablelist>
-		  <varlistentry>
-			<term><link linkend="chapter.project.folder"><guimenuitem>Project
-			Folder</guimenuitem></link></term>
-			<listitem>
-			  <para>Opens the folder in your default file manager.</para>
-			</listitem>
-		  </varlistentry>
-
-		  <varlistentry>
-			<term><link linkend="project.folder.dictionary"><guimenuitem>词典</guimenuitem></link></term>
-			<listitem>
-			  <para>Opens the folder in your default file manager.</para>
-			</listitem>
-		  </varlistentry>
-
-		  <varlistentry>
-			<term><link linkend="project.folder.glossary"><guimenuitem>词汇表</guimenuitem></link></term>
-			<listitem>
-			  <para>Opens the folder in your default file manager.</para>
-			</listitem>
-		  </varlistentry>
-
-		  <varlistentry>
-			<term><link linkend="project.folder.source"><guimenuitem>Source
-			Files</guimenuitem></link></term>
-			<listitem>
-			  <para>Opens the folder in your default file manager.</para>
-			</listitem>
-		  </varlistentry>
-
-		  <varlistentry>
-			<term><link linkend="project.folder.target"><guimenuitem>Target
-			Files</guimenuitem></link></term>
-			<listitem>
-			  <para>Opens the folder in your default file manager.</para>
-			</listitem>
-		  </varlistentry>
-
-		  <varlistentry>
-			<term><link linkend="project.folder.tm"><guimenuitem>翻译记忆库</guimenuitem></link></term>
-			<listitem>
-			  <para>Opens the folder in your default file manager.</para>
-			</listitem>
-		  </varlistentry>
-		  
-		  <varlistentry>
-			<term><link linkend="project.folder.exported.tm"><guimenuitem>Exported
-			TMs</guimenuitem></link></term>
-			<listitem>
-			  <para>Opens the folder in your default file manager.</para>
-			</listitem>
-		  </varlistentry>
-
-		  <varlistentry>
-			<term><guimenuitem>Current Source File</guimenuitem></term>
-			<listitem>
-			  <para>The current source file is located in the <link linkend="project.folder.source" endterm="project.folder.source.title"/> folder.</para>
-
-			  <para>Opens the file in the associated application.</para>
-			</listitem>
-		  </varlistentry>
-
-		  <varlistentry>
-			<term><guimenuitem>Current Target File</guimenuitem></term>
-			<listitem>
-			  <para>The current target file is located in the <link linkend="project.folder.target" endterm="project.folder.target.title"/> folder.</para>
-
-			  <para>Opens the file in the associated application if the file exists.</para>
-			</listitem>
-		  </varlistentry>
-
-		  <varlistentry>
-			<term><guimenuitem>Writable Glossary</guimenuitem></term>
-			<listitem>
-			  <para>The writable glossary is located in the <link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/> folder.</para>
-
-			  <para>Opens the file in the associated application if the file exists.</para>
-			</listitem>
-		  </varlistentry>
-		</variablelist>
+        <para>另外，有两个菜单项允许直接打开当前的原文与译文文档以及可写词汇表。这些文档是用操作系统所选择的应用程序打开的。如果文档不可用，则条目会灰掉。</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.project.restart">
-      <term id="menus.project.restart.title"><guimenuitem>Restart</guimenuitem></term>
-      <listitem>
-        <para>Saves the project and restarts OmegaT. You are asked to confirm
-        that you really want to quit if you have not yet saved the
-        project.</para>
-      </listitem>
-    </varlistentry>
+    <varlistentry>
+      <term>退出</term>
 
-    <varlistentry id="menus.project.quit">
-      <term id="menus.project.quit.title"><guimenuitem>Quit</guimenuitem>
-      <keycombo><keycap>C</keycap><keycap>Q</keycap></keycombo></term>
       <listitem>
-        <para>Saves the project and quits OmegaT. You are asked to confirm that
-        you really want to quit if you have not yet saved the project.</para>
-
-		<note>
-		  <para>In macOS, this menu item is found under the
-		  <guimenu>OmegaT</guimenu> menu.</para>
-		</note>
+        <para>保存项目并退出 <application>OmegaT</application>。如果尚未保存项目，则此操作会手工确认您是否确实要退出。</para>
       </listitem>
     </varlistentry>
   </variablelist>

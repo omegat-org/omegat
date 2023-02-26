@@ -1,246 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="how.to.use.team.project">
-  <title id="how.to.use.team.project.title">Use a team project</title>
+<section id="howto.useteamproject">
+  <title>使用团队项目</title>
 
-  <para>Team projects use synchronization mechanisms between project members.</para>
+  <para>OmegaT 团队项目必须先在服务器上<link linkend="howto.setupteamproject">建立</link>起来。</para>
 
-  <para>Once a OmegaT team project is installed on a server, the administrator
-  sends members the information they need to access it: a URL indicating the
-  location of the project, or an <filename>omegat.project</filename>
-  file.</para>
+  <para>首次使用团队项目时，请按照项目经理所提供的流程进行操作。</para>
 
-  <para>After the project is downloaded, it is installed locally and only needs
-  to be opened locally to synchronize with the server.</para>
+  <para>一旦项目已经打开，翻译的进行方式与非团队项目相同，但以下几点除外。</para>
 
-  <para>Repository credentials are stored in the <link linkend="configuration.folder.extra.contents.repositories" endterm="configuration.folder.extra.contents.repositories.title"/> file and
-  can be deleted from the <link linkend="dialog.preferences.team.title.repository.credentials" endterm="dialog.preferences.team.title.repository.credentials.title"/>
-  preferences.</para>
+  <para><emphasis role="bold">自动保存</emphasis></para>
 
-  <para>Since synchronization takes place by default every three minutes, 
-  project members will sometime translate or modify a segment that has already
-  been translated by another member but not synchronized yet. When that happens,
-  members have to select the appropriate translation.</para>
+  <para>每隔 3 分钟（默认情况下），本地项目将与远程存储库进行同步，这样项目经理或其他译者就可以查看并使用在此期间添加的翻译。</para>
 
-  <para>Members can take turns translating and reviewing the files. The Search
-  function allows them to filter the Editor pane on contents translated by a
-  given person, or on contents translated after or before a given time,
-  for example.</para>
-  
-  <variablelist>
-    <varlistentry>
-      <term>Downloading the project</term>
+  <para>3 分钟的间隔可以在<link linkend="dialogs.preferences.savingandoutput"><menuchoice> <guimenuitem>选项</guimenuitem> <guimenuitem>首选项</guimenuitem> <guimenuitem>保存和输出</guimenuitem> </menuchoice></link>中更改。</para>
+
+  <para><emphasis role="bold">同步文件</emphasis></para>
+
+  <para>每当项目自动保存时，以及打开、关闭和重新载入时，实际上只会同步两个文件：</para>
+
+  <itemizedlist>
+    <listitem>
+      <para><filename>omegat/project_save.tmx</filename></para>
+    </listitem>
+
+    <listitem>
+      <para><filename>glossary/glossary.txt</filename></para>
+    </listitem>
+  </itemizedlist>
+
+  <para>所有其他文件将被远程存储库中的文件替换。</para>
+
+  <para><emphasis role="bold">添加新原文文件</emphasis></para>
+
+  <para>要添加新的原文文件：</para>
+
+  <para><orderedlist>
       <listitem>
-		<orderedlist>
-		  <listitem>
-			<para>From a URL</para>
-
-			<para>Use <link endterm="menus.project.title" linkend="menus.project"/><link endterm="menus.project.download.team.project.title" linkend="menus.project.download.team.project"/> to bring up the
-			<guilabel>Download Team Project</guilabel> dialog.</para>
-
-			<para>Enter the URL provided by the team project administrator in the
-			<guilabel>Repository URL:</guilabel> field at the top of the dialog,
-			and specify a folder for the project in the <guilabel>New Local
-			Project Folder:</guilabel> field. Leave the <guilabel>Default
-			branch</guilabel> option checked unless the project administrator
-			has provided instructions for using a custom branch.</para>
-		  </listitem>
-
-		  <listitem>
-			<para>From an <filename>omegat.project</filename> file</para>
-
-			<para>Put the <filename>omegat.project</filename> file in an empty
-			folder, and open it in OmegaT. The project will automatically be
-			downloaded to the folder containing that file.</para>
-		  </listitem>
-		</orderedlist>
-
-		<note>
-		  <para>Servers generally use two main types of authentication: entering
-		  a <emphasis>username/password</emphasis>, or
-		  <emphasis>SSH</emphasis>.</para>
-
-		  <para>If the server relies on username/password authentication, OmegaT
-		  will present you with an <guilabel>Authentication</guilabel> dialog to
-		  enter your username and password either when you first download the
-		  project or later on in the process. OmegaT will then remember your
-		  credentials for that specific project unless you explicitly delete
-		  them. See the <link linkend="dialog.preferences.team.title.repository.credentials" endterm="dialog.preferences.team.title.repository.credentials.title"/>
-		  preferences for details.</para>
-
-		  <para>If the server uses SSH authentication, make sure you update your
-		  SSH configuration to include that server before attempting to download
-		  the project, otherwise you will get an authentication error and the
-		  project will fail to load.</para>
-
-		  <para>If you use multiple projects on the same server, credentials
-		  will only be asked once for that server.</para>
-		</note>
-	  </listitem>
-	</varlistentry>
-
-    <varlistentry>
-      <term>Synchronization</term>
-
-      <listitem>
-        <para>Synchronizing the project adds translations made by all team
-        members to local copies of the project. Only the contents of the two
-        following files are synchronized:</para>
-
-		<itemizedlist>
-          <listitem>
-			<para><filename>project.save</filename></para>
-          </listitem>
-
-          <listitem>
-			<para><filename>glossary.txt</filename></para>
-          </listitem>
-        </itemizedlist>
-
-        <para>During synchronization, all other local files are overwritten
-        with the versions on the remote server, exept for
-        <filename>omegat.project</filename> (see below).</para>
-
-        <para>OmegaT synchronizes a team project when it is opened, reloaded,
-        closed or saved. This means the automatic save function also regularly
-        synchronizes local versions with the version on the server at the
-        interval specified in the <link endterm="dialog.preferences.saving.and.output.interval.title" linkend="dialog.preferences.saving.and.output.interval"/>
-        preference.</para>
+        <para>将文件复制到 <filename>/source</filename> 目录中</para>
       </listitem>
-    </varlistentry>
-
-    <varlistentry>
-      <term>Team project configuration</term>
 
       <listitem>
-        <para>As in regular local projects, the configuration of the team
-        project is defined by the contents <filename>omegat.project</filename>
-        file and the optional use of special files for project-specific
-        filters or segmentation rules.</para>
-
-        <para>The first time the project is downloaded, OmegaT retrieves the
-        <filename>omegat.project</filename> file from the server. This file
-        defines the following parameters:</para>
-
-        <itemizedlist>
-          <listitem>
-            <para><emphasis>Basic project configuration:</emphasis> Source and
-            languages, tokenizers, and the project folder hierarchy.</para>
-
-			<para>In a team project, the basic configuration parameters of the
-			local project are always overridden by the configuration on the
-			server originally set by the project administrator.</para>
-          </listitem>
-
-          <listitem>
-            <para><emphasis>Repository mappings</emphasis></para>
-
-            <para>详情请参阅指南<link linkend="how.to.setup.team.project.mapping.parameters" endterm="how.to.setup.team.project.mapping.parameters.title"/>。</para>
-
-            <itemizedlist>
-              <listitem>
-                <para>If no custom mappings have been defined for the remote
-                project, but local mappings have been customized, the local
-                settings are preserved without affecting the settings on the
-                server.</para>
-              </listitem>
-
-              <listitem>
-                <para>If the remote project contains custom mappings, but the
-                local project does not, the mappings from the server are applied
-                to the local project.</para>
-              </listitem>
-
-              <listitem>
-                <para>If the remote project specifies a URL protocol and you
-                download it using a different protocol, your local configuration
-                will be preserved.</para>
-
-                <para>For example, many hosting services support access to the
-                same repository using either the SSH +Git or https protocol.
-                OmegaT will respect the local protocol selection.</para>
-              </listitem>
-
-              <listitem>
-                <para>If you first download the remote project using an
-                <filename>omegat.project</filename> file provided by the project
-                administrator, OmegaT will use the mappings in that file, if
-                any.</para>
-              </listitem>
-
-              <listitem>
-                <para>If there is a conflict between the remote and local
-                versions of the <filename>omegat.project</filename> and the
-                local version is overwritten, OmegaT creates a backup file
-                called <filename>omegat.project.YYYYMMDDhhmm.bak</filename>.
-                The backup files are kept for a least ten days, and older
-                backups are automatically deleted.</para>
-              </listitem>
-            </itemizedlist>
-		  </listitem>
-		</itemizedlist>
-
-        <warning>
-          <para>Remember that any modifications to the local project
-          configuration files will be overwritten by the versions on the server
-          when the project is synchronized.</para>
-        </warning>
+        <para>使用 <menuchoice> <guimenuitem>项目</guimenuitem> <guimenuitem>提交原文文件</guimenuitem> </menuchoice></para>
       </listitem>
-    </varlistentry>
+    </orderedlist>可以修改现有的原文文件，但必须在自动保存之前以及项目被重新载入或关闭之前执行 commit 操作。</para>
 
-    <varlistentry>
-      <term>Source files</term>
+  <para><emphasis role="bold">删除原文文件</emphasis></para>
 
-      <listitem>
-        <warning>
-		  <para>Only the project administrator should use <link endterm="menus.project.title" linkend="menus.project"/><link endterm="menus.project.commit.source.files.title" linkend="menus.project.commit.source.files"/>.</para>
-		</warning>
-      </listitem>
-    </varlistentry>
+  <para>文件必须由项目管理器删除。</para>
 
-    <varlistentry>
-      <term>Target files</term>
+  <para><emphasis role="bold">更改片段分割规则或文件过滤器</emphasis></para>
 
-      <listitem>
-        <para>After you generate the target files use
-        <link endterm="menus.project.title" linkend="menus.project"/><link endterm="menus.project.commit.target.files.title" linkend="menus.project.commit.target.files"/> to add them to the
-        server, if the project administrator has requested you to do so.</para>
-      </listitem>
-    </varlistentry>
+  <para>项目参数必须由项目经理来更改。</para>
 
-    <varlistentry>
-      <term>Deleting files</term>
+  <para><emphasis role="bold">离线工作</emphasis></para>
 
-      <listitem>
-        <para>Files in a team project cannot be deleted from OmegaT or the local
-        file system. They will be restored the next time the project is
-        synchronized. This task is normally performed by the project
-        administrator.</para>
-      </listitem>
-    </varlistentry>
+  <para>团队项目可以离线打开并翻译。所有更改将在下次连接可用时进行同步。</para>
 
-    <varlistentry>
-      <term>离线工作</term>
+  <para>要离线工作：</para>
 
-      <listitem>
-        <para>You can open a team project and work on it offline. All changes
-        will be synchronized the next time a connection is available.</para>
+  <itemizedlist>
+    <listitem>
+      <para>在打开项目前断开网络连接，</para>
+    </listitem>
 
-        <para>There are two ways work offline:</para>
-
-        <itemizedlist>
-          <listitem>
-            <para>Disconnect from the network before opening the
-            project.</para>
-          </listitem>
-
-          <listitem>
-            <para>Open the project from the command line with the
-            <parameter>--no-team</parameter> option. See the <link linkend="launch.with.command.line" endterm="launch.with.command.line.title"/> section for
-            details.</para>
-          </listitem>
-        </itemizedlist>
-      </listitem>
-    </varlistentry>
-  </variablelist>
+    <listitem>
+      <para>或者用命令行使用 <command>--no-team</command> 选项来打开项目。</para>
+    </listitem>
+  </itemizedlist>
 </section>

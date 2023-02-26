@@ -1,439 +1,191 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="menus.edit">
-  <title id="menus.edit.title"><guimenu>编辑</guimenu></title>
+  <title>编辑</title>
 
-  <para>This menu gives you access to segment edition commands.</para>
-
-  <example id="example.undo.last.action">
-	<title id="example.undo.last.action.title">Shortcut description example</title>
-	<para>On Windows and Linux:
-	<keycombo><keycap>Control</keycap><keycap>Z</keycap></keycombo></para>
-
-	<para>On macOS:
-	<keycombo><keycap>Command</keycap><keycap>Z</keycap></keycombo></para>
-
-	<para><emphasis role="bold">In this manual:</emphasis>
-	<keycombo><keycap>C</keycap><keycap>Z</keycap></keycombo></para>
-  </example>
+  <para>仅当打开了项目后此菜单下才会显示条目。</para>
 
   <variablelist>
-    <varlistentry id="menus.edit.undo.last.action">
-      <term id="menus.edit.undo.last.action.title"><guimenuitem>Undo Last
-      Action</guimenuitem>
-      <keycombo><keycap>C</keycap><keycap>Z</keycap></keycombo></term>
+    <varlistentry>
+      <term><guimenuitem>撤消前一操作</guimenuitem></term>
+
       <listitem>
-        <para>Cancels modifications made to the segment while it is
-        current. Modification history is lost upon leaving the segment.</para>
+        <para>恢复到执行上一个编辑操作之前的状态。如果修改后的片段已经确认，则该命令不起作用。</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.edit.redo.last.action">
-      <term id="menus.edit.redo.last.action.title"><guimenuitem>Redo Last Action</guimenuitem>
-	  <keycombo><keycap>C</keycap><keycap>Y</keycap></keycombo>
-	  </term>
+    <varlistentry>
+      <term>恢复前一操作</term>
+
       <listitem>
-        <para>Reapplies modifications that were cancelled while the segment
-        is current. Modification history is lost upon leaving the segment.</para>
+        <para>恢复到取消上一个编辑操作之前的状态。如果修改后的片段已经确认，则该命令不起作用。</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.edit.replace.with.match.or.selection">
-      <term id="menus.edit.replace.with.match.or.selection.title"><guimenuitem>Replace With Match or Selection</guimenuitem>
-	  <keycombo><keycap>C</keycap><keycap>R</keycap></keycombo>
-	  </term>
+    <varlistentry>
+      <term>用匹配或所选内容替换译文</term>
+
       <listitem>
-        <para>Replaces the target segment with the currently selected fuzzy
-        match (the first match by default) or with the text selected
-        in the <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/> pane.</para>
+        <para>用当前选中的模糊匹配（默认情况下会选中第一个匹配）替换掉整个译文片段。</para>
 
-        <para>Selected text has priority over the selected match.</para>
-
-		<para>See the <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/> pane description for
-		details..</para>
+        <para>如果在模糊匹配内选择了部分文本，那么只有被选中的部分替换掉整个译文片段。</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.edit.insert.match.or.selection">
-      <term id="menus.edit.insert.match.or.selection.title"><guimenuitem>Insert
-      Match or Selection</guimenuitem>
-      <keycombo><keycap>C</keycap><keycap>I</keycap></keycombo></term>
+    <varlistentry>
+      <term>插入匹配或所选内容</term>
+
       <listitem>
-        <para>Inserts the currently selected fuzzy match or the text selected in
-        the <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/> pane at the cursor position. If a
-        part of the target segment has been selected, that part will be
-        overwritten.</para>
+        <para>在光标位置插入当前选中的模糊匹配。如果已经选择了译文片段的一部分，则此功能会覆盖所选部分。</para>
 
-        <para>The selected text has priority over the selected match.</para>
-
-		<para>See the <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/> pane description for
-		details..</para>
-	  </listitem>
-    </varlistentry>
-
-    <varlistentry id="menus.edit.replace.with.source">
-      <term id="menus.edit.replace.with.source.title"><guimenuitem>Replace with Source</guimenuitem>
-	  <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>R</keycap></keycombo>
-	  </term>
-      <listitem>
-        <para>Replaces the entire target segment with the segment source.</para>
+        <para>如果在模糊匹配内选择了部分文本，那么只有被选中的部分插入到光标位置处。</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.edit.insert.source">
-      <term id="menus.edit.insert.source.title"><guimenuitem>Insert Source</guimenuitem>
-	  <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>I</keycap></keycombo>
-	  </term>
+    <varlistentry>
+      <term>替换为机器翻译</term>
+
       <listitem>
-        <para>Inserts the segment source at the cursor position. If a part of
-        the target segment has been selected, that part will be
-        overwritten.</para>
+        <para>用所选机器翻译服务提供的译文替换掉译文片段。如果未激活任何机器翻译服务（在<menuchoice><guimenu>选项</guimenu><guimenuitem>机器翻译</guimenuitem></menuchoice>中）则不会有任何动作。</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.edit.select.source.text">
-      <term id="menus.edit.select.source.text.title"><guimenuitem>Select Source Text</guimenuitem>
-	  <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>A</keycap></keycombo>
-	  </term>
-      <listitem>
-        <para>Selects the source text.</para>
+    <varlistentry>
+      <term>替换为原文</term>
 
-		<para>The selection can be used directly in OmegaT for <link linkend="windows.text.search">internal searches</link>, <link linkend="windows.text.replace">replacements</link>, <link linkend="menus.edit.create.glossary.entry">entering glossary terms</link>,
-		<link linkend="dialogs.preferences.external.searches">external
-		searches</link>, and so on. Once copied to the OS clipboard, it can also be
-		used in web searches and elsewhere.</para>
+      <listitem>
+        <para>用原文替换掉整个目标片段。</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.edit.replace.with.mt">
-      <term id="menus.edit.replace.with.mt.title"><guimenuitem>Replace with Machine Translation</guimenuitem>
-	  <keycombo><keycap>C</keycap><keycap>M</keycap></keycombo>
-	  </term>
+    <varlistentry>
+      <term>插入原文</term>
+
       <listitem>
-        <para>Replaces the target segment with the translation provided by the
-        selected machine translation service.</para>
-		<para>If the <link linkend="dialogs.preferences.mt.automatically.fetch.translations" endterm="dialogs.preferences.mt.automatically.fetch.translations.title"/>
-		preference is disabled, use this action once to fetch the
-		translation, and a second time to insert it.</para>
-		
-		<para>No action is taken if no machine translation service has been
-		activated in the <link linkend="menus.options" endterm="menus.options.title"/><link linkend="menus.options.mt" endterm="menus.options.mt.title"/> menu. See the <link linkend="dialogs.preferences.mt" endterm="dialogs.preferences.mt.title"/> preferences for details.</para>
+        <para>在光标位置插入原文。</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.edit.insert.missing.source.tag">
-      <term id="menus.edit.insert.missing.source.tag.title"><guimenuitem>Insert Missing Source Tags</guimenuitem>
-	  <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>T</keycap></keycombo>
-	  </term>
+    <varlistentry>
+      <term>插入缺失的原文标签</term>
+
       <listitem>
-        <para>Inserts the remaining missing source tags at the cursor
-        position.</para>
+        <para>在光标位置插入（如果有缺失的）原文标签。</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.edit.insert.next.missing.tag">
-      <term id="menus.edit.insert.next.missing.tag.title"><guimenuitem>Insert Next Missing Tag</guimenuitem>
-	  <keycombo><keycap>C</keycap><keycap>T</keycap></keycombo>
-	  </term>
+    <varlistentry>
+      <term>插入下一个缺失标签</term>
+
       <listitem>
-        <para>Inserts the next missing tag at the cursor position.</para>
+        <para>在光标位置处只插入一个标签（所有缺失标签之一）。</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.edit.export.selection">
-      <term id="menus.edit.export.selection.title"><guimenuitem>Export Selection</guimenuitem>
-	  <keycombo><keycap>C</keycap><keycap>C</keycap><keycap>S</keycap></keycombo>
-	  </term>
+    <varlistentry>
+      <term>导出所选部分</term>
+
       <listitem>
-        <para>Exports the current selection to a text file for processing. If no
-        text has been selected, the current source segment is written to this
-        file. To remain consistent with usual clipboard behaviour this file is
-        not emptied when the user exits OmegaT. The exported contents are copied
-        to the <link linkend="configuration.folder.default.contents.script.selection.title" endterm="configuration.folder.default.contents.script.selection.title"/>
-        file located in the <link linkend="configuration.folder">configuration</link> folder.</para>
+        <para>将当前选中内容导出至文本文件进行处理。如果未选择任何文本，则将当前原文片段写入该文件。当用户退出 <application>OmegaT</application> 时，此文件并不会被清空，以与常规的剪贴板行为一致。导出的内容将被复制到位于用户偏好设置文件所在的文件夹内的 <filename>selection.txt</filename> 文件中。</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.edit.create.glossary.entry">
-      <term id="menus.edit.create.glossary.entry.title"><guimenuitem>Create Glossary Entry...</guimenuitem>
-	  <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>G</keycap></keycombo>
-	  </term>
+    <varlistentry>
+      <term>创建词条</term>
+
       <listitem>
-        <para>Allows the user to create an entry in the project writable
-        glossary (the <link linkend="project.folder.glossary.txt" endterm="project.folder.glossary.txt.title"/> file).</para>
+        <para>允许用户在默认的词汇表文件中创建条目。</para>
 
-		<para>There are two ways to use this function.</para>
+        <para>如果您在按<keycombo> <keycap>Ctrl</keycap> <keycap>Shift</keycap> <keycap>G</keycap> </keycombo>之前（于任意窗格中）选择了文本字符串，则默认会将选中的文本粘贴到<guilabel>原文词汇</guilabel>字段中。</para>
 
-		<itemizedlist>
-		  <listitem>
-			<para>The first is to call the dialog and then manually fill
-			in the various fields.</para>
-		  </listitem>
-
-		  <listitem>
-			<para>The second is to select items in one of the OmegaT panes and
-			sequentially call the dialog after each selection to have OmegaT
-			enter it automatically in the various fields:</para>
-			
-			<orderedlist>
-			  <listitem>
-				<para>Select a text string in any pane</para>
-			  </listitem>
-
-			  <listitem>
-				<para>Press
-				<keycombo><keycap>C</keycap><keycap>S</keycap><keycap>G</keycap></keycombo></para>
-				
-				<para>The selection is entered in the <guilabel>Source
-				term</guilabel> field.</para>
-			  </listitem>
-
-			  <listitem>
-				<para>Select a text string in any pane</para>
-			  </listitem>
-
-			  <listitem>
-				<para>Press
-				<keycombo><keycap>C</keycap><keycap>S</keycap><keycap>G</keycap></keycombo></para>
-
-				<para>The selection is entered in the <guilabel>Target
-				term</guilabel> field.</para>
-			  </listitem>
-
-			  <listitem>
-				<para>[Optional] Select a text string in any pane</para>
-			  </listitem>
-
-			  <listitem>
-				<para>[Optional] Press
-				<keycombo><keycap>C</keycap><keycap>S</keycap><keycap>G</keycap></keycombo></para>
-
-				<para>The selection is entered in the
-				<guilabel>Comment</guilabel> field.</para>
-			  </listitem>
-
-			  <listitem>
-				<para>Hit <keycap>Enter</keycap> or click on
-				<guibutton>OK</guibutton></para>
-			  </listitem>
-			</orderedlist>
-		  </listitem>
-		</itemizedlist>
-	  </listitem>
-    </varlistentry>
-
-    <varlistentry id="menus.edit.search.project">
-      <term id="menus.edit.search.project.title"><guimenuitem>Search...</guimenuitem>
-	  <keycombo><keycap>C</keycap><keycap>F</keycap></keycombo>
-	  </term>
-      <listitem>
-        <para>Opens a new <link linkend="windows.text.search" endterm="windows.text.search.title"/> window.</para>
-
-        <para>If you select a text string (in any pane) before calling the
-        function, the text will be pasted by default in the <guilabel>Search
-        for:</guilabel> field.</para>
-
-		<para>The <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>F</keycap></keycombo>
-		combination reuses the most recent still open Search window instead of 
-		opening a new one.</para>
+        <para>这也能应用于<guimenuitem>译文词汇</guimenuitem>和<guimenuitem>注释</guimenuitem>字段，只要做出新的选择并再次按下<keycombo> <keycap>Ctrl</keycap> <keycap>Shift</keycap> <keycap>G</keycap> </keycombo>即可。</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.edit.search.and.replace">
-      <term id="menus.edit.search.and.replace.title"><guimenuitem>Replace...</guimenuitem>
-	  <keycombo><keycap>C</keycap><keycap>K</keycap></keycombo>
-	  </term>
-      <listitem>
-        <para>Opens a new <link linkend="windows.text.replace" endterm="windows.text.replace.title"/> window.</para>
+    <varlistentry>
+      <term>在项目中查找...</term>
 
-        <para>If you select a text string (in any pane) before calling the
-        function, the text will be pasted by default in the <guilabel>Search
-        for:</guilabel> field.</para>
+      <listitem>
+        <para>打开新的<link linkend="windows.textsearch">查找窗口</link>。</para>
+
+        <para>如果您按<keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo>之前（于任意窗格中）选择了文本字符串，则默认会将选中的文本粘贴到<guilabel>查找</guilabel>字段。</para>
+
+        <para>按下<keycombo> <keycap>Ctrl</keycap> <keycap>Shift</keycap> <keycap>F</keycap> </keycombo>会显示最后一个已打开的查找窗口（而不是新打开一个）。</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.edit.search.dictionaries">
-      <term id="menus.edit.search.dictionaries.title"><guimenuitem>Search Dictionaries</guimenuitem>
-	  <keycombo><keycap>A</keycap><keycap>S</keycap><keycap>D</keycap></keycombo>
-	  </term>
+    <varlistentry>
+      <term>查找并替换...</term>
+
       <listitem>
-        <para>If the <link linkend="dialogs.preferences.dictionary.automatically.search.segment" endterm="dialogs.preferences.dictionary.automatically.search.segment.title"/>
-        preference is disabled, this function allows you to search for the
-        selected word or for the whole segment terms in the dictionaries.</para>
+        <para>打开新的<link linkend="windows.textreplace">查找与替换窗口</link>。</para>
+
+        <para>如果您在按<keycombo> <keycap>Ctrl</keycap> <keycap>K</keycap> </keycombo>之前（于任意窗格中）选择了文本字符串，则默认会将选中的文本粘贴到<guilabel>查找</guilabel>字段。</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.edit.switch.case">
-      <term id="menus.edit.switch.case.title"><guisubmenu>转换大小写为</guisubmenu></term>
+    <varlistentry>
+      <term>查找词典</term>
+
       <listitem>
-        <para>Changes the case of the selected text in the target segment to the
-        selected option, or cycles through the options. If no text is selected,
-        OmegaT selects the word starting with the character immediately to the
-        right of the cursor.</para>
+        <para>如果禁用了<link linkend="dialogs.preferences.dictionary">自动在词典中查找</link>，则此功能可让您在词典中查找所选单词。</para>
+      </listitem>
+    </varlistentry>
 
-		<itemizedlist>
-		  <listitem>
-			<para><guimenuitem>lower case</guimenuitem></para>
+    <varlistentry>
+      <term>转换大小写为</term>
 
-			<para>all letters in lower case</para>
-		  </listitem>
-
-		  <listitem>
-			<para><guimenuitem>UPPER CASE</guimenuitem></para>
-
-			<para>ALL LETTERS IN UPPER CASE</para>
-		  </listitem>
-
-		  <listitem>
-			<para><guimenuitem>Title Case</guimenuitem></para>
-
-			<para>Almost all Letters in Lower Case</para>
-		  </listitem>
-
-		  <listitem>
-			<para><guimenuitem>Sentence case</guimenuitem></para>
-			<para>Only the first letter in upper case.</para>
-		  </listitem>
-
-		  <listitem>
-			<para><guimenuitem>Cycle</guimenuitem>
-			<keycombo><keycap>S</keycap><keycap>F3</keycap></keycombo></para>
-			<warning>
-			  <para>On macOS, the <keycombo><keycap>F3</keycap></keycombo> key 
-			  enables the <emphasis role="bold">overwrite</emphasis> mode in the
-			  editor. See <link linkend="panes.editor.overwriting" endterm="panes.editor.overwriting.title"/> for details.</para>
-			</warning>
-		  </listitem>
-		</itemizedlist>
-	  </listitem>
-	</varlistentry>
-
-	<varlistentry id="menus.edit.select.match">
-      <term id="menus.edit.select.match.title"><guisubmenu>选择匹配</guisubmenu></term>
       <listitem>
-		<para>Selects the previous, next or <varname>n</varname>th fuzzy match
-		displayed in the fuzzy match pane to replace or insert it to the
-		segment.</para>
-		
-		<itemizedlist>
-		  <listitem>
-			<para><guimenuitem>Select Previous Match</guimenuitem>
-			<keycombo><keycap>A</keycap><keycap>↑</keycap></keycombo></para>
-		  </listitem>
-
-		  <listitem>
-			<para><guimenuitem>Select Next Match</guimenuitem>
-			<keycombo><keycap>A</keycap><keycap>↓</keycap></keycombo></para>
-		  </listitem>
-
-		  <listitem>
-			<para><guimenuitem>Select Match #1</guimenuitem>
-			<keycombo><keycap>C</keycap><keycap>1</keycap></keycombo></para>
-		  </listitem>
-		  
-		  <listitem>
-			<para><guimenuitem>Select Match #2</guimenuitem>
-			<keycombo><keycap>C</keycap><keycap>2</keycap></keycombo></para>
-		  </listitem>
-		  <listitem>
-			<para><guimenuitem>Select Match #3</guimenuitem>
-			<keycombo><keycap>C</keycap><keycap>3</keycap></keycombo></para>
-		  </listitem>
-
-		  <listitem>
-			<para><guimenuitem>Select Match #4</guimenuitem>
-			<keycombo><keycap>C</keycap><keycap>4</keycap></keycombo></para>
-		  </listitem>
-
-		  <listitem>
-			<para><guimenuitem>Select Match #5</guimenuitem>
-			<keycombo><keycap>C</keycap><keycap>5</keycap></keycombo></para>
-		  </listitem>
-		</itemizedlist>
+        <para>将译文片段中高亮选定的文本的按所选选项（小写、大写、标题式大小写或句子式大小写）改变大小写。用<keycombo> <keycap>Shift</keycap> <keycap>F3</keycap> </keycombo>可以在四个选项中循环切换。如果未选择任何文本，<application>OmegaT</application> 会选择紧挨着光标右边的那个字符所属的单词。</para>
       </listitem>
-	</varlistentry>
+    </varlistentry>
 
-	<varlistentry id="menus.edit.insert.unicode.control.character">
-      <term id="menus.edit.insert.unicode.control.character.title"><guisubmenu>Insert
-      Bidi Control Character</guisubmenu></term>
-	  <listitem>
-		<para>Inserts the selected Unicode directional formatting character. See
-		<ulink url="https://www.unicode.org/reports/tr9/#Directional_Formatting_Characters">Unicode
-		Bidirectional Algorithm</ulink> for details.</para>
+    <varlistentry>
+      <term>选择匹配</term>
 
-		<itemizedlist>
-		  <listitem>
-			<para><guimenuitem>Left-to-Right Mark (LRM U+200E)</guimenuitem></para>
-		  </listitem>
-		
-		  <listitem>
-			<para><guimenuitem>Right-to-Left Mark (RLM U+200F)</guimenuitem></para>
-		  </listitem>
-		  
-		  <listitem>
-			<para><guimenuitem>Left-to-Right Embedding (LRE U+202A)</guimenuitem></para>
-		  </listitem>
-		  
-		  <listitem>
-			<para><guimenuitem>Right-to-Left Embedding (RLE U+202B)</guimenuitem></para>
-		  </listitem>
-		  
-		  <listitem>
-			<para><guimenuitem>Pop Directional Formatting (PDF U+202C)</guimenuitem></para>
-		  </listitem>
-		</itemizedlist>
-		<para>Use <link linkend="menus.view" endterm="menus.view.title"/><link linkend="menus.view.mark.bidirectional.algorithm.control.character" endterm="menus.view.mark.bidirectional.algorithm.control.character.title"/> to display the characters for easier manipulation. See <link linkend="app.bidi" endterm="app.bidi.title"/> for details.</para>
-
-      </listitem>
-	</varlistentry>
-
-	<varlistentry id="menus.edit.use.as.default.translation">
-      <term id="menus.edit.use.as.default.translation.title"><guimenuitem>用作默认译文</guimenuitem></term>
       <listitem>
-		<para>If several alternative translations are available for the active
-		segment, you can label the alternative selected as the default
-		translation. The entry will be grayed if only one translation is
-		available.</para>
+        <para>选择显示在模糊匹配窗格中的上一个、下一个或第 N 个模糊匹配来将其替换或插入到片段中。</para>
       </listitem>
-	</varlistentry>
+    </varlistentry>
 
-	<varlistentry id="menus.edit.create.alternative.translation">
-      <term id="menus.edit.create.alternative.translation.title"><guimenuitem>创建不同译文</guimenuitem></term>
-      <listitem>
-		<para>Segments that are one and the same segment may, depending on the
-		context, require different translations. If the current translation does
-		not apply, select this menu item and enter the alternative
-		translation.</para>
-      </listitem>
-	</varlistentry>
+    <varlistentry>
+      <term>用作默认译文</term>
 
-	<varlistentry id="menus.edit.remove.translation">
-      <term id="menus.edit.remove.translation.title"><guimenuitem>Remove
-      Translation</guimenuitem><keycombo><keycap>C</keycap><keycap>S</keycap><keycap>X</keycap></keycombo></term>
       <listitem>
-		<para>Deletes the current translation and sets the segment as
-		untranslated.</para>
+        <para>如果当前片段有多个备选译文，您可以将所选择的译文标记为默认译文。如果只有一个可用译文，则该条目将为灰色。</para>
       </listitem>
-	</varlistentry>
+    </varlistentry>
 
-	<varlistentry id="menus.edit.set.empty.translation">
-      <term id="menus.edit.set.empty.translation.title"><guimenuitem>设置为空译文</guimenuitem></term>
-      <listitem>
-		<para>Define the translation as empty. The target document contains nothing
-		for this segment, while the Editor marks it with the
-		<literal>&lt;EMPTY&gt;</literal> identifier.</para>
-      </listitem>
-	</varlistentry>
+    <varlistentry>
+      <term>创建不同译文</term>
 
-	<varlistentry id="menus.edit.register.identical.translation">
-      <term id="menus.edit.register.identical.translation.title"><guimenuitem>Register Identical Translation</guimenuitem>
-	  <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>S</keycap></keycombo>
-	  </term>
       <listitem>
-		<para>Use this command to register a translation as identical to the
-		source, even if the <link linkend="dialogs.preferences.editor.allow.translation.to.be.equal.to.source" endterm="dialogs.preferences.editor.allow.translation.to.be.equal.to.source.title"/>
-		preference is not enabled.</para>
+        <para>一个片段和另一个相同的片段可能会因为上下文而需要不同的译文。如果当前译文不适用，请选择此菜单条目，然后输入替代译文。</para>
       </listitem>
-	</varlistentry>
+    </varlistentry>
+
+    <varlistentry>
+      <term>移除译文</term>
+
+      <listitem>
+        <para>删除译文并将片段设置为未译</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>设置为空译文</term>
+
+      <listitem>
+        <para>将译文定义为空。此片段在译文文档中不会显示任何东西。在编辑器中，译文会显示为&lt;空&gt;</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>登记全同译文</term>
+
+      <listitem>
+        <para>即使未选中<link linkend="dialogs.preferences.editor.allowtranslationtobeequaltosource"><guilabel>允许译文和原文相同</guilabel></link>时也可以用此命令来将译文登记为与原文完全相同。</para>
+      </listitem>
+    </varlistentry>
   </variablelist>
 </section>

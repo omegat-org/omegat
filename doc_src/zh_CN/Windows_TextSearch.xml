@@ -1,396 +1,181 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="windows.text.search">
-  <title id="windows.text.search.title"><guilabel>文本搜索</guilabel></title>
+<section id="windows.textsearch">
+  <title>文本查找</title>
 
-  <para>Use <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.search.project" endterm="menus.edit.search.project.title"/> to open a new search window and
-  enter the word or phrase you wish to search for in the search field.</para>
-  
-  <para>You can have several search windows opened at the same time. Hit
-  <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>F</keycap></keycombo> to
-  reuse the most recent search window.</para>
+  <para>用<keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo>打开查找窗口，把你要查找的单词或短语输入<emphasis>查找</emphasis>框。</para>
 
-  <para>Alternatively, select a word or phrase in the <link linkend="panes.editor" endterm="panes.editor.title"/>, <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/>, or <link linkend="panes.glossary" endterm="panes.glossary.title"/> pane and use <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.search.project" endterm="menus.edit.search.project.title"/>. The selection is automatically
-  entered in the search field.</para>
+  <para>或者，可以在编辑器窗格、模糊匹配窗格或词汇表窗格中选择单词或短语，然后按下<keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo>。此单词或短语会自动输入到<emphasis>查找</emphasis>框中。可以同时打开多个查找窗口，不过不再需要的时候请关掉它们，免得把桌面搞得乱七八糟。</para>
 
+  <para>点击<emphasis>查找</emphasis>框中的下拉箭头可以访问最后 10 个查找条目。</para>
 
-  <para>Click the drop-down arrow of the <guilabel>Search for:</guilabel> field
-  to access the last ten searches.</para>
-
-  <para>Click on <guibutton>Search</guibutton> or hit <keycap>Enter</keycap>
-  when the search field is selected to start the search.</para>
-  
-  <para>Matches will be displayed in bold blue characters.</para>
-
-  <example id="search.for.doitsu">
-	<title id="search.for.doitsu.title">Search for ドイツ</title>
-	<para>
-	  <programlisting>-- 148&gt; | language = [[日本語]]・[[<token>ドイツ</token>語]]
----------
--- 177&gt; [[2001年]]、<token>ドイツ</token>の永住権を取得。
----------</programlisting>
-	</para>
-  </example>
-
-  <para>The search window has its own menus:</para>
+  <para>查找窗口有它自己的菜单：</para>
 
   <itemizedlist>
     <listitem>
-      <para><guimenu>File</guimenu> &gt; <guimenuitem>Search for
-      Selection</guimenuitem>
-      (<keycombo><keycap>C</keycap><keycap>F</keycap></keycombo>): the current
-      selection is inserted in the search field.</para>
+      <para>文件 &gt; 查找转选区（<keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo>）：焦点重新转到查找字段，并选定其全部内容。</para>
     </listitem>
 
     <listitem>
-      <para><guimenu>File</guimenu> &gt; <guimenuitem>Close</guimenuitem>
-      (<keycombo><keycap>C</keycap><keycap>W</keycap></keycombo>): close the
-      search window.</para>
+      <para>文件 &gt; 关闭（<keycombo> <keycap>Ctrl</keycap> <keycap>W</keycap> </keycombo>）：关闭查找窗口（与<keycap>Esc</keycap>相同）</para>
     </listitem>
 
     <listitem>
-      <para><guimenu>Edit</guimenu> &gt; <guimenuitem>Insert
-      Source</guimenuitem>
-      (<keycombo><keycap>C</keycap><keycap>S</keycap><keycap>I</keycap></keycombo>):
-      insert the content of the current source segment.</para>
+      <para>编辑 &gt; 插入原文（<keycombo> <keycap>Ctrl</keycap> <keycap>Shift</keycap> <keycap>I</keycap> </keycombo>）插入当前片段的原文。</para>
     </listitem>
 
     <listitem>
-      <para><guimenu>Edit</guimenu> &gt; <guimenuitem>Replace with
-      Source</guimenuitem>
-      (<keycombo><keycap>C</keycap><keycap>S</keycap><keycap>R</keycap></keycombo>):
-      replace the contents of the search field with those of the current source
-      segment.</para>
+      <para>编辑 &gt; 替换为原文（<keycombo> <keycap>Ctrl</keycap> <keycap>Shift</keycap> <keycap>R</keycap> </keycombo>）：替换为当前片段的原文。</para>
     </listitem>
 
     <listitem>
-      <para><guimenu>Edit</guimenu> &gt; <guimenuitem>Create Glossary
-      Entry</guimenuitem>
-      (<keycombo><keycap>C</keycap><keycap>S</keycap><keycap>G</keycap></keycombo>):
-      add a new glossary item. See <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.create.glossary.entry" endterm="menus.edit.create.glossary.entry.title"/> for details.</para>
-    </listitem>
-
-    <listitem>
-      <para><guimenu>Edit</guimenu> &gt; <guimenuitem>Reset
-      Options</guimenuitem>: reset the search window options.</para>
+      <para>编辑 &gt; 创建词条（<keycombo> <keycap>Ctrl</keycap> <keycap>Shift</keycap> <keycap>G</keycap> </keycombo>）：添加新词条。</para>
     </listitem>
   </itemizedlist>
 
-  <section id="windows.text.search.methods">
-    <title id="windows.text.search.methods.title">Search type</title>
+  <section id="using.wild.cards">
+    <title>使用通配符</title>
 
-    <para>Use the radio buttons to select the type of search.</para>
+    <para>无论是精确查找还是关键字查找，都可以使用通配符“*”和“?”。它们具有 Word 用户很熟悉的含义：</para>
 
-	<para>The following search types are available:</para>
+    <itemizedlist>
+      <listitem>
+        <para>“*”匹配从给定单词的当前位置到结尾的零个或多个字符。例如，查找词<literal>“run*”</literal>将匹配单词<literal>“run”</literal>、<literal>“runs”</literal>和<literal>“running”</literal>。</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>“?”匹配任意单个字符。例如，<literal>“run?”</literal>将匹配单词<literal>“runs”</literal>和单词<literal>“running”</literal>中的<literal>“runn”</literal>。</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>匹配部分将以蓝色粗体显示。注意“*”和“?”在正则表达式中有特殊含义，因此此处所述的通配符查找仅适用于精确查找和关键字查找（见下文）。</para>
+  </section>
+
+  <section id="search.methoids">
+    <title>查找方法和选项</title>
+
+    <para>用单选按钮选择方法。有以下查找方法：</para>
 
     <variablelist>
-      <varlistentry id="windows.text.search.methods.exact">
-        <term id="windows.text.search.methods.exact.title">Exact search</term>
-        <listitem>
-          <para>Search for the string exactly as entered in the search
-          field.</para>
+      <varlistentry>
+        <term>精确查找</term>
 
-		  <para>It is equivalent to a web search enclosed in quotation marks.</para>
+        <listitem>
+          <para>查找包含指定的确切字符串的片段。精确查找以短语方式查找，即，如果输入了多个单词，则只会在完全按此顺序出现时才会被找出来。因此，查找 <literal>open file</literal> 会找到字符串 <emphasis><literal>open file</literal></emphasis> 的所有出现之处，但不会找到 <emphasis><literal>file opened</literal></emphasis> 或 <emphasis><literal>open input file</literal></emphasis>。</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry id="windows.text.search.methods.keyword">
-        <term id="windows.text.search.methods.keyword.title">Keyword
-        search</term>
+      <varlistentry>
+        <term>关键字查找</term>
+
         <listitem>
-          <para>Search for segments containing each of the search terms
-          separated by a space.</para>
-
-		  <para>It is equivalent to a web search without quotation marks.</para>
-
-		  <note>
-			<para>The <code>*</code> and <code>?</code> characters can be used
-			in both exact and keyword searches:</para>
-
-			<itemizedlist>
-			  <listitem>
-				<para><code>*</code> matches zero or more characters, from the
-				current position up to the end of a word.</para>
-
-				<para>The search term <literal>run*</literal>, for example,
-				matches <literal>run</literal>, <literal>runs</literal> and
-				<literal>running</literal>.</para>
-			  </listitem>
-			</itemizedlist>
-
-			<itemizedlist>
-			  <listitem>
-				<para><code>?</code> matches any single character.</para>
-
-				<para>For instance, <literal>run?</literal> matches
-				<literal>runs</literal>, as well as the <literal>runn</literal>
-				portion of <literal>running</literal> or
-				<literal>runner</literal>.</para>
-			  </listitem>
-			</itemizedlist>
-		  </note>
+          <para>查找以任意顺序包含全部指定关键字的片段。选择关键字查找来以任意顺序查找任意数量的单个完整单词。OmegaT 会显示所有包含全部指定单词的片段的列表。关键字查找类似于诸如 Google 之类因特网搜索引擎的“包含全部关键字”（AND 逻辑）搜索。因此，用 <emphasis><literal>open file</literal></emphasis> 进行关键字查找会找到字符串 <emphasis><literal>open file</literal></emphasis>的所有出现之处，也会找到 <emphasis><literal>file opened</literal>、<literal>open input file</literal>、<literal>file may not be safe to open</literal></emphasis>等的出现之处。</para>
         </listitem>
       </varlistentry>
-	</variablelist>
 
-	<variablelist>
-      <varlistentry id="windows.text.search.methods.regex">
-        <term id="windows.text.search.methods.regex.title">正则表达式</term>
+      <varlistentry>
+        <term><emphasis role="bold">正则表达式</emphasis></term>
+
         <listitem>
-          <para>Treat the search string as a regular expression.</para>
-		  <para>Regular expressions are a very powerful way to search for
-		  general or complex patterns rather than exact strings. See the <link linkend="app.regex" endterm="app.regex.title"/> appendix for
-		  details.</para>
-
-		  <warning>
-			<para>The <code>*</code> and <code>?</code> characters have a special
-			meaning in regular expressions. Therefore, the wild card searches described
-			above only apply to exact and keyword searches.</para>
-		  </warning>
+          <para>查找字符串将被视为正则表达式。例如，在上面的例子中，查找字符串——[a-zA-Z]+[öäüqwß]——会在译文片段中查找包含疑似来自德语键盘的字符的单词。<link linkend="appendix.regexp">正则表达式</link>是一种强大的查找字符串实例的方法。</para>
         </listitem>
       </varlistentry>
     </variablelist>
+
+    <para>除了选定上述方法之一，您还可以再选择：</para>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">区分大小写</emphasis>：查找将会对指定字符串进行精确匹配，即，会注意大小写。</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">空格可匹配不换行空格</emphasis>：勾选此选项时，搜索条目中的空格可以匹配普通的空格字符或不换行空格（\u00A）字符。</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">在原文中：</emphasis>在原文片段中查找</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">在译文中：</emphasis>在译文片段中查找</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">在备注中：</emphasis>在片段的备注中查找</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">在注释中：</emphasis>在片段的注释中查找</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">已译或未译：</emphasis>已译和未译片段中都进行查找。</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">已译：</emphasis>只在已译片段中查找。</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">未译：</emphasis>只在未译片段中查找。</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">显示：所有匹配的片段：</emphasis>如果勾选，所有片段都会一一显示，即使它们在同一文档或不同文档中多次出现。</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">显示：文件名：</emphasis>如果勾选，将在每个结果上方显示片段所在的文件名。</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">在项目中查找：</emphasis>：勾选<emphasis>项目记忆库</emphasis>以在查找中包含项目记忆库（project_save.tmx file）。勾选<emphasis>翻译记忆库</emphasis>以在查找中包含位于 <filename>tm</filename> 目录中的翻译记忆库。勾选<emphasis>词汇表</emphasis>以在查找中包含位于 <filename>glossary</filename> 目录下的词汇表。</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">在文件中查找：</emphasis>在单个文件或包含一组文件的文件夹中查找。对文件进行查找（与对翻译记忆库进行查找相对）时，OmegaT 会将查找限制在具有原文文件格式的文件内。因此，尽管 OmegaT 完全有能力处理 <filename> tmx</filename> 文件，但它并不会将其包含在“查找文件”的查找内。</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>如果点击<guibutton>高级选项</guibutton>按钮，就可以选择其他约束条件（翻译的作者或修改者、翻译的日期、排除孤立片段等）。勾选<emphasis>不区分全角/半角字符</emphasis>选项后，查找全角形式（CJK 字符）会匹配半角形式，反之亦然。</para>
   </section>
 
-  <section id="windows.text.search.options">
-	<title id="windows.text.search.options.title">选项</title>
-	
-	<variablelist>
-	  <varlistentry>
-		<term>Case sensitive</term>
-		<listitem>
-		  <para>Only returns results with the same letter case as the search
-		  terms.</para>
-		</listitem>
-	  </varlistentry>
-	  
-	  <varlistentry>
-		<term>Space matches nbsp</term>
-		<listitem>
-		  <para>Space characters in search terms will match both a normal space
-		  and a non-breaking space (\u00A)
-		  character.</para>
-		</listitem>
-	  </varlistentry>
+  <section id="search.result.display">
+    <title>查找结果显示</title>
 
-	  <varlistentry>
-		<term>In source</term>
-		<listitem>
-		  <para>Search in the source segments.</para>
-		</listitem>
-	  </varlistentry>
+    <para>在查找字段输入字符串后，点击查找按钮会把项目中所有包含输入字符串的片段显示出来。由于 <application>OmegaT</application> 将完全相同的片段视为单一实体，因此只显示第一个独特片段。片段按在项目中出现的顺序显示。已译片段会以上面显示原文、下面显示译文的形式显示，而未译片段只显示原文。</para>
 
-	  <varlistentry>
-		<term>In translation</term>
-		<listitem>
-		  <para>Search in the target segments.</para>
-		</listitem>
-	  </varlistentry>
+    <para>双击某个片段可在编辑器中将其打开以进行修改（勾选<emphasis role="bold">自动于编辑器同步</emphasis>选项后只需单击即可）。随后可以切回查找窗口处理下一个结果片段，例如进行检查并在必要的情况下更正术语。</para>
 
-	  <varlistentry>
-		<term>在备注中(&amp;T)</term>
-		<listitem>
-		  <para>Search in notes attached to segments.</para>
-		</listitem>
-	  </varlistentry>
+    <para>在查找窗口中，你可以使用标准快捷键（<keycombo> <keycap>Ctrl</keycap> <keycap>N</keycap> </keycombo>、<keycombo> <keycap>Ctrl</keycap> <keycap>P</keycap> </keycombo>）从一个片段移动至另一个。</para>
 
-	  <varlistentry>
-		<term>在注释中</term>
-		<listitem>
-		  <para>Search in comments attached to segments.</para>
-		</listitem>
-	  </varlistentry>
-
-	  <varlistentry>
-		<term>Translated or untranslated</term>
-		<listitem>
-		  <para>Search in both translated and untranslated segments.</para>
-		</listitem>
-	  </varlistentry>
-
-	  <varlistentry>
-		<term>已译</term>
-		<listitem>
-		  <para>Search only in translated segments.</para>
-		</listitem>
-	  </varlistentry>
-
-	  <varlistentry>
-		<term>Untranslated</term>
-		<listitem>
-		  <para>Search only in untranslated segments.</para>
-		</listitem>
-	  </varlistentry>
-
-	  <varlistentry>
-		<term>Display: all matching segments</term>
-		<listitem>
-		  <para>Every segment is displayed individually, even if it is a
-		  repetition found in either the same document or a different document in
-		  the project.</para>
-		</listitem>
-	  </varlistentry>
-
-	  <varlistentry>
-		<term>Display: file names</term>
-		<listitem>
-		  <para>The name of the file where the segment is found is
-		  displayed above each result.</para>
-		</listitem>
-	  </varlistentry>
-
-	  <varlistentry>
-		<term>Search in: Project</term>
-		<listitem>
-		  <para>Search in the various bilingual resources of the project.</para>
-
-		  <para>Select the scope of the search:</para>
-		  
-		  <variablelist>
-			<varlistentry>
-			  <term>记忆</term>
-			  <listitem>
-				<para>Include the project memory (<link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/>).</para>
-			  </listitem>
-			</varlistentry>
-
-			<varlistentry>
-			  <term>翻译记忆库</term>
-			  <listitem>
-				<para>Include the translation memories located in the <link linkend="project.folder.tm" endterm="project.folder.tm.title"/>
-				folder.</para>
-			  </listitem>
-			</varlistentry>
-
-			<varlistentry>
-			  <term>词汇表</term>
-			  <listitem>
-				<para>Include the glossaries located in the <link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/> folder.</para>
-			  </listitem>
-			</varlistentry>
-		  </variablelist>
-		</listitem>
-	  </varlistentry>
-	  
-	  <varlistentry>
-		<term>Search in: Files</term>
-		<listitem>
-		  <para>Search in reference files not included in the project
-		  resources.</para>
-
-		  <para>OmegaT can conduct searches in any file that it can read as
-		  source file. See the <link linkend="file.filters" endterm="file.filters.title"/> chapter for details.</para>
-
-		  <para>TMX files are excluded from file searches since OmegaT does not
-		  recognize them as a source file format despite supporting them as
-		  translation memories.</para>
-		</listitem>
-	  </varlistentry>
-
-	  <varlistentry>
-		<term><guibutton>Show Advanced Options</guibutton></term>
-		<listitem>
-		  <para>Select additional criteria such as the person who authored or
-		  changed the translation, the date and time of translation
-		  (modification), or whether to exclude orphan segments.</para>
-
-		  <variablelist>
-			<varlistentry>
-			  <term>Full/Half-width char insensitive</term>
-			  <listitem>
-				<para>Returns results that match both the full- and half-width
-				forms (CJK characters) of the characters in the search
-				terms.</para>
-			  </listitem>
-			</varlistentry>
-
-			<varlistentry>
-			  <term>Number of matching segments</term>
-			  <listitem>
-				<para>Sets the maximum number of matches displayed in the search
-				result area.</para>
-			  </listitem>
-			</varlistentry>
-		  </variablelist>
-
-		  <para>Use the <guibutton>Hide Advanced Options</guibutton> button to stop showing
-			the advanced options.</para>
-		</listitem>
-	  </varlistentry>
-	</variablelist>
+    <para>你可能会同时打开多个查找窗口。可以通过查看其标题来快速确认其内容：标题中会包含所使用的查找词。</para>
   </section>
 
-  <section id="windows.text.search.result.display">
-    <title id="windows.text.search.result.display.title">Results display</title>
+  <section id="search.filter">
+    <title>在编辑器中根据查找来过滤条目</title>
 
-    <para>Matches are displayed in their order of appearance in the project. For
-    translated segments, the original text is displayed above the translated
-    text. Only the source text is displayed for untranslated segments.</para>
+    <para>为了跟轻松地在查找结果集中导航，可以将查找应用到编辑器上。按下底部的<emphasis role="bold">过滤器</emphasis>按钮来将编辑器窗口中显示的条目限制为当前查找所匹配的那些。可以用常规的导航操作进行跳转，例如转到下一个符合当前查找约束条件的（未译）片段。</para>
 
-    <para>Double-click on a segment to open it in the <link linkend="panes.editor" endterm="panes.editor.title"/> pane.</para>
+    <para>注意：</para>
 
-    <para>You can also use the following shortcuts in the search results:</para>
-	
-	<variablelist>
-	  <varlistentry>
-		<term><keycombo><keycap>C</keycap><keycap>N</keycap></keycombo></term>
-		<listitem>
-		  <para>Move to the next segment</para>
-		</listitem>
-	  </varlistentry>
-	  
-	  <varlistentry>
-		<term><keycombo><keycap>C</keycap><keycap>P</keycap></keycombo></term>
-		<listitem>
-		  <para>Move to the preceding segment</para>
-		</listitem>
-	  </varlistentry>
-	  <varlistentry>
-		<term><keycombo><keycap>C</keycap><keycap>J</keycap></keycombo></term>
-		<listitem>
-		  <para>Jump to the current segment in the editor.</para>
-		</listitem>
-	  </varlistentry>
-	</variablelist>
-	
-	<para>The selected segment is highlighted in green:</para>
+    <itemizedlist>
+      <listitem>
+        <para>查找可能会被限制为 1000 个条目，因此如果查找常见短语，编辑器会只显示这 1000 个匹配的条目而非所有符合查找约束条件的条目。</para>
+      </listitem>
 
-  	<example id="select.second.match">
-	  <title id="select.second.match.title">Select the second match</title>
-	  <para>
-		<programlisting>-- 148&gt; | language = [[日本語]]・[[<token>ドイツ</token>語]]
----------
-<action>-- 177&gt; [[2001年]]、<token>ドイツ</token>の永住権を取得。</action>
----------</programlisting>
-	  </para>
-	</example>
+      <listitem>
+        <para>某个文件可能没有匹配的条目，因此会显示空白。</para>
+      </listitem>
 
-	<variablelist>
-	  <varlistentry>
-		<term>自动与编辑器同步</term>
-		<listitem>
-		  <para>The <link linkend="panes.editor" endterm="panes.editor.title"/>
-		  pane synchronizes its display with the selection in the search
-		  results</para>
-		</listitem>
-	  </varlistentry>
-	  <varlistentry>
-		<term>关闭后回到原本的片段</term>
-		<listitem>
-		  <para>When you close the search windows, the <link linkend="panes.editor" endterm="panes.editor.title"/> pane
-		  automatically goes back to the segment that it displayed before the
-		  search was started</para>
-		</listitem>
-	  </varlistentry>
-	</variablelist>
-  </section>
-  
-  <section id="windows.text.search.filter">
-    <title id="windows.text.search.filter.title">筛选器</title>
+      <listitem>
+        <para>如果查找结果删除了重复项，则这些重复项不会出现在编辑器中。</para>
+      </listitem>
+    </itemizedlist>
 
-	<para>Click on the <guibutton>Filter</guibutton> button to show only the 
-	matching search result segments in the <link linkend="panes.editor" endterm="panes.editor.title"/> pane. To remove the filter, click on the
-	<guibutton>Remove Filter</guibutton> button at the top of the <link linkend="panes.editor" endterm="panes.editor.title"/> pane, or reload the
-	project.</para>
+    <para>要删除过滤器，请按<emphasis role="bold">删除过滤器</emphasis>按钮，或重新载入项目。</para>
   </section>
 </section>

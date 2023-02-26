@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.instant.start.guide">
+  <title>五分钟内学会使用 OmegaT！</title>
+
+  <section id="create.and.open.new.project">
+    <title>建立新项目<indexterm class="singular">
+        <primary>项目</primary> <secondary>新创建/打开</secondary>
+      </indexterm></title>
+
+    <para><remark>注：</remark>在 Apple Mac 上，要使用 <keycap>Command</keycap> 键而非 <keycap>Control</keycap> 键。</para>
+
+      <indexterm class="singular">
+        <primary>菜单 项目</primary> <secondary>新建...</secondary>
+      </indexterm>
+
+    <para>要开始使用 OmegaT，首先要创建项目来容纳所有有关文件，例如原文文件、翻译记忆库、词汇表、以及最终的译文文件。在<guimenu>项目</guimenu>菜单中选择<menuchoice><guimenuitem>新建...</guimenuitem></menuchoice>并输入项目名称。记住您创建项目的位置，稍后还需要回到此处。</para>
+
+    <para>为项目命名后，将会打开<guilabel>创建新项目</guilabel>对话框。在该对话框顶部选择原文文件的语言和翻译后文件应有的语言，然后点击<guibutton>确定</guibutton>继续。</para>
+
+    <para>如果对该对话框中的其他设置感兴趣，则随时都可以按 <keycap>Ctrl+E</keycap> 返回此对话框。</para>
+
+    <para>接着，会打开<guilabel>项目文件</guilabel>对话框。点击<guibutton>将文件复制到原文文件夹...</guibutton>来选择原文文件。然后 OmegaT 会将选定文件复制到你新建立的项目中的 <filename>/source/</filename> 子文件夹下。在<guilabel>编辑器</guilabel>窗格中加载了原文文件后，您可以关掉<guilabel>项目文件</guilabel>对话框。</para>
+  </section>
+
+  <section id="translate.the.segments.one.by.one">
+    <title>翻译文件</title>
+
+    <para>OmegaT 将一次呈现一个片段供您翻译。翻译完一个片段后，按下 <keycap>Ctrl+U</keycap> 前往下一个未译片段（或用 <keycap>Ctrl+Shift+U</keycap> 前往下一个已译片段）。当您想查看译文的最终呈现格式时，请按 <keycap>Ctrl+D</keycap> 来生成译文文档，它们会在项目文件夹中的 <filename>/target/</filename> 子文件夹内创建。在翻译过程中，可以用<guimenu>编辑</guimenu>和<guimenu>转到</guimenu>菜单来执行各种有用的功能。</para>
+  </section>
+
+  <section>
+    <title>验证标签</title>
+
+    <para>如果原文文件是格式化文件，例如 Microsoft Word、LibreOffice Writer 或 HTML 文件，OmegaT 会把格式信息转化为包围所译文本的标签。文档还经常含有与格式无关的标签，但这些标签在原文文件（以及译文文件）中也一样很重要。原文语句可能类似于：<mediaobject>
+      <imageobject role="html">
+        <imagedata align="justify" fileref="images/InstantGuide_1.png"/>
+      </imageobject>
+      <imageobject role="fo">
+        <imagedata align="justify" fileref="images/InstantGuide_1.png" width="40%"/>
+      </imageobject>
+    </mediaobject>
+    </para>
+
+    <para>但 OmegaT 会将该语句以如下方式呈现：<mediaobject>
+      <imageobject role="html">
+        <imagedata align="justify" fileref="images/InstantGuide_2.png"/>
+      </imageobject>
+      <imageobject role="fo">
+        <imagedata align="justify" fileref="images/InstantGuide_2.png" width="45%"/>
+      </imageobject>
+    </mediaobject>
+    </para>
+    
+    <para>标签在 OmegaT 中是灰色的，因此很容易识别。它们受到保护，因此您不能修改其内容，但可以将它们删除、手动输入或移动它们在译文语句中的位置。不过，如果在输入格式化时犯错，那么译文文件可能会无法打开。因此，在生成译文文件前请按 <keycap>Ctrl+Shift+V</keycap> 来检验标签是否正确。</para>
+  </section>
+
+  <section>
+    <title>生成译文文件</title>
+
+    <para>一旦确定译文中没有标签错误，请按 <keycap>Ctrl+D</keycap> 来生成译文文件，它们会在项目文件夹的 <filename>/target/</filename> 子文件夹中生成。</para>
+  </section>
+
+  <section>
+    <title>其他一些需要记住的东西</title>
+
+    <itemizedlist>
+      <listitem>
+        <para>如果文件没有加载到<guilabel>编辑器</guilabel>窗格中，则可能因为此文件是 OmegaT 无法处理的格式。有关 OmegaT 能够处理的文件格式清单，参见<menuchoice><guimenuitem>选项</guimenuitem><guimenuitem>首选项...</guimenuitem><guimenuitem>文件过滤器</guimenuitem></menuchoice>。</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>你可以为每个新任务创建一个新项目，并且任何时候都可以往往项目中添加新的原文文档。</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>要让自己回想起项目的初始设置，请 <keycap>Ctrl+E</keycap> 打开项目属性对话框。要查看项目中的文件清单，请按 <keycap>Ctrl+L</keycap> 打开<guilabel>项目文件</guilabel>对话框。</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>在翻译结束时，OmegaT 会往在项目文件夹中导出三个翻译记忆库，分别名叫 <filename>level1</filename>、<filename>level2</filename> 和 <filename>omegat</filename>。<filename>level1</filename> 和 <filename>level2</filename> 记忆库可以与其他翻译程序的用户共享。名为 <filename>omegat</filename> 的记忆库可以在未来你所创建的项目中由 OmegaT 自身所用。如果你将此类翻译记忆库文件放在项目的 <filename>/tm/</filename> 子文件夹中，则 OmegaT 会自动在其中搜索类似的片段，这称为“模糊匹配”。</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>你可以按下 <keycap>Ctrl+Shift+G</keycap> 来将新词汇添加到词汇表，也可以将现有的词汇表复制到项目文件夹的 <filename>/glossary/</filename> 子文件夹中，OmegaT 会自动在其中查找单词。</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>在原文文本和你的译文中搜索单词和短语通常会很有用，因此随时都可以按下 <keycap>Ctrl+F</keycap> 来打开<guilabel>文本搜索</guilabel>对话框。</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>更全面的介绍请参阅 OmegaT 网站上的 <ulink url="https://omegat.org/files/OmegaT_for_Beginners.pdf">OmegaT 初学者教程</ulink>。如果您需要 OmegaT 任何一方面的帮助，可随时加入 <ulink url="https://omegat.org/support">OmegaT 用户组</ulink>。</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+</chapter>

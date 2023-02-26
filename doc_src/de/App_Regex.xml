@@ -1,0 +1,1122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd"
+[
+<!ENTITY % manualvariables SYSTEM "manualvariables.mod">
+%manualvariables;
+]>
+<section id="app.regex">
+  <title id="app.regex.title">Reguläre Ausdrücke</title>
+
+  <para>Diese Seite richtet sich an Nutzer, die ihre Produktivität erheblich steigern möchten. Obwohl reguläre Ausdrücke (oft mit <emphasis>regex</emphasis> oder <emphasis>regexp</emphasis> abgekürzt) als abschreckend und komplex angesehen werden, sind die einfachsten unter ihnen äußerst nützlich - sowohl in OmegaT als auch in vielen anderen Applikationen, die Sie tagtäglich verwenden, mit einigen Variationen.</para>
+
+  <para>Es werden nur die Grundlagen behandelt, die für Übersetzer am nützlichsten sind. Der Abschnitt <link linkend="app.regex.tools" endterm="app.regex.tools.title"/> am Ende dieser Seite bietet einige Anregungen für fortgeschrittene oder komplexe Anwendungsfälle, die über den Rahmen dieser Dokumentation hinausgehen. Wenn Sie Hilfe benötigen, können Sie Ihre Fragen auch in den verschiedenen Support-Kanälen stellen.</para>
+  
+  <para>Reguläre Ausdrücke verwenden eine Kombination aus Buchstaben, Ziffern und Symbolen (zusammenfassend als <emphasis>Zeichen</emphasis> bezeichnet), um einen <emphasis>Ausdruck</emphasis> zu definieren, der ein bestimmtes Textmuster repräsentiert.</para>
+
+  <para>Hier einige Beispiele.</para>
+  
+  <variablelist>
+    <varlistentry>
+      <term>[0-9]</term>
+      <listitem><para>Eine beliebige Ziffer von 0 bis 9.</para>
+      </listitem>
+    </varlistentry>
+
+	<varlistentry>
+      <term>\w+</term>
+      <listitem><para>Repräsentiert ein oder mehr &quot;Wortzeichen&quot; (Buchstaben, Ziffern und der Unterstrich).</para>
+      </listitem>
+    </varlistentry>
+
+	<varlistentry>
+      <term>\h?</term>
+      <listitem><para>Repräsentiert ein optionales horizontales Leerraumzeichen (dazu zählen reguläre und geschützte Leerzeichen sowie Tabulatorzeichen, aber keine Zeilenumbruchzeichen, die zur Kategorie &quot;vertikaler Leerraum&quot; gehören: \v.)</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>    
+  
+  <para>Viele OmegaT-Funktionen verwenden reguläre Ausdrücke oder stellen sie als Option zur Verfügung:</para>
+
+  <variablelist>
+    <varlistentry>
+      <term>Suche</term>
+      <listitem>
+        <para>Die Suche in OmegaT bietet die Option <link linkend="windows.text.search.methods.regex" endterm="windows.text.search.methods.regex.title"/>, mit der Sie Ihre Dateien mit hoher Effizienz durchsuchen können.</para>
+
+        <para>Das Dialogfenster <link linkend="windows.text.replace" endterm="windows.text.replace.title"/> besitzt dieselbe Option, mit der Sie reguläre Ausdrücke sowohl auf den gesuchten als auch auf den ersetzten Text anwenden können.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Benutzerdefinierte Tags</term>
+      <listitem>
+        <para>Benutzerdefinierte Tags sind regex-definierte Tags, die von OmegaT wie normale Tags behandelt werden. Siehe die <link linkend="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags" endterm="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags.title"/>-Einstellung für weitere Informationen.</para>
+
+		<para>Verwenden Sie das <code>|</code>-Zeichen (OR), um mehrere Tags voneinander zu trennen.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Geschützter Text</term>
+      <listitem>
+        <para>Die <link linkend="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation" endterm="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation.title"/>-Einstellung ermöglicht es Ihnen, Zeichenketten zu definieren, die OmegaT standardmäßig rot markiert und zu Validierungszwecken als überschüssige Tags behandelt.</para>
+
+		<para>Verwenden Sie das <code>|</code>-Zeichen (OR), um mehrere Textfragmente voneinander zu trennen.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Texthervorhebung in Ausrichtungen</term>
+      <listitem>
+        <para>Mithilfe von visuellen Indikatoren können Sie überprüfen, ob Ihre Ausrichtung korrekt ist. Mit der <link linkend="windows.aligner.adjust.highlight" endterm="windows.aligner.adjust.highlight.title"/>-Einstellung können Sie Zeichenketten festlegen, die OmegaT in den ausgerichteten Dokumenten hervorheben soll.</para>
+
+		<para>Verwenden Sie das <code>|</code>-Zeichen (OR), um mehrere Ausdrücke voneinander zu trennen.</para>
+      </listitem>
+    </varlistentry>	
+
+    <varlistentry>
+      <term>Segmentierung</term>
+      <listitem>
+        <para>Segmentierungsregeln und Sprachmuster werden mit regulären Ausdrücken definiert. Sie können diese nach Belieben ändern, um die Segmentierung eines Dokuments zu verbessern oder zusätzliche Grundregeln hinzuzufügen. Einzelheiten finden Sie unter <link linkend="app.segmentation" endterm="app.segmentation.title"/>.</para>
+
+        <para>Segmentierungs- oder Ausnahmeregeln definieren die Position in einem Segment, an der eine Trennung erfolgen oder nicht erfolgen soll. Um diese Position zu definieren, sind zwei reguläre Ausdrücke erforderlich: ein &quot;davor&quot;-Ausdruck, um das Textmuster vor der Position zu definieren, auf die die Regel angewendet werden soll, und ein &quot;danach&quot;-Ausdruck, um das Textmuster nach dieser Position zu definieren.</para>
+
+		<para>Jedes Sprachmuster, das mit der Quellsprache des Projekts übereinstimmt, wird auf dieses Projekt angewendet.</para>
+	  </listitem>
+    </varlistentry>
+  </variablelist>
+
+  <section id="app.regex.four.rules">
+    <title id="app.regex.four.rules.title">Die 4 Regeln</title>
+
+    <para>Reguläre Ausdrücke werden verwendet, um Texte zu finden, einschließlich Zeichen, die auf dem Bildschirm oder beim Ausdruck nicht sichtbar sind, wie z. B. Leerzeichen, Tabulatorzeichen oder Zeilenumbrüche. Jeder Ausdruck ist so beschaffen, dass er entweder mit einem Wort, einem Satz oder einer anderen Zeichenkette <emphasis>übereinstimmt</emphasis> oder <emphasis><emphasis role="bold">nicht</emphasis> übereinstimmt</emphasis>.</para>
+    
+    <para>Jedes einzelne Zeichen des Ausdrucks ist für die Ermittlung einer Übereinstimmung relevant.</para>
+    <para>Eine Vielzahl von Zeichen oder Zeichenkombinationen haben eine besondere Bedeutung in regulären Ausdrücken.</para>
+    
+    <warning>
+      <para>Reguläre Ausdrücke finden nur Text. Sie können keine Schriftauszeichnungen wie <emphasis>fett</emphasis>, <emphasis>kursiv</emphasis> oder <emphasis>andere stilistische Effekte</emphasis> finden.</para>
+    </warning>
+
+    <para>Es gibt vier Regeln, die zu beachten sind.</para>
+
+    <variablelist>
+      <varlistentry>
+        <term>Die meisten Zeichen finden sich selbst</term>
+        <listitem>
+          <para>Die meisten Zeichen in einem regulären Ausdruck <emphasis>suchen sich einfach selbst</emphasis> in der Zeichenkette.</para>
+
+		  <para>Die acht Buchstaben des Wortes &quot;<emphasis>Beispiel</emphasis>&quot; bewirken zum Beispiel, dass die Suchfunktion genau diese Buchstaben in dieser Reihenfolge finden soll. Es wird einfach nach dem Wort &quot;<emphasis>Beispiel</emphasis>&quot; gesucht.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Buchstaben mit einem umgekehrten Schrägstrich (<literal>\</literal>) davor haben eine besondere Bedeutung</term>
+        <listitem>
+          <para>Im Gegensatz zu einem einzelnen Buchstaben, der wie oben erwähnt einfach nur sich selbst repräsentiert, hat ein Buchstabe, dem ein <literal>\</literal> vorangestellt ist, eine spezielle Funktion in einem regulären Ausdruck.</para>
+
+		  <para><emphasis>r</emphasis> ist zum Beispiel ein normales Zeichen, aber wenn ein <literal>\</literal> vorangestellt wird, um es zu einem <literal>\r</literal> zu machen, wird daraus eine spezielle Kombination, die ein <emphasis>Wagenrücklaufzeichen (CR)</emphasis> findet. <literal>\R</literal> hingegen findet <emphasis>ein beliebiges Zeilenumbruchzeichen</emphasis>.</para>
+		  
+          <note>
+            <para>Nur die Buchstaben <emphasis>i j l m o</emphasis> und <emphasis>y</emphasis>, egal ob groß- oder kleingeschrieben, haben keine besondere Bedeutung, wenn ihnen ein umgekehrter Schrägstrich vorangestellt wird. Diese Dokumentation behandelt nur einen kleinen Teil der Buchstaben, die eine besondere Bedeutung haben.</para>
+
+			<para>Informieren Sie sich auf den Seiten im Abschnitt <link linkend="app.regex.tools" endterm="app.regex.tools.title"/> über Kombinationen, die hier nicht aufgeführt sind.</para>
+          </note>
+        </listitem>
+      </varlistentry>
+        
+      <varlistentry>
+      <term>Zwölf Zeichen haben standardmäßig eine besondere Bedeutung</term>
+        <listitem>
+          <para>Diese besondere Bedeutung muss durch ein anderes Zeichen aufgehoben werden, um das Zeichen selbst zu finden.</para>
+
+          <para>Die vollständige Liste der Zeichen finden Sie <link linkend="app.regex.twelve.characters">unten</link>. Ein Beispiel ist <literal>.</literal>: Alleinstehend hat es die besondere Bedeutung, <emphasis>ein beliebiges Zeichen</emphasis> zu finden.</para>
+
+		  <para>Um einen normalen Punkt zu finden, muss diese Bedeutung mithilfe von <literal>\</literal> aufgehoben werden, wodurch der Ausdruck <literal>\.</literal> entsteht.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Das <literal>\</literal>-Zeichen ist etwas ganz Besonderes</term>
+        <listitem>
+          <para>Wie bereits erwähnt, hat das <literal>\</literal>-Zeichen standardmäßig die besondere Bedeutung, die besondere Bedeutung der anderen Zeichen entweder aufzuheben oder zu aktivieren. Es hat keine Wirkung, wenn es vor einem Zeichen ohne besondere Bedeutung steht (entweder standardmäßig oder durch Hinzufügen).</para>
+
+          <para><literal>\</literal> kann seine eigene besondere Bedeutung aufheben, indem man es verdoppelt, um <literal>\\</literal> zu erhalten. Auf diese Wiese kann ein <emphasis>umgekehrter Schrägstrich</emphasis> gefunden werden.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </section>
+
+  <section id="app.regex.twelve.characters">
+    <title id="app.regex.twelve.characters.title">Die 12 Zeichen</title>
+  
+    <para>Die zwölf Sonderzeichen sind der <emphasis>umgekehrte Schrägstrich</emphasis> <literal>\</literal>, der <emphasis>Zirkumflex</emphasis> <literal>^</literal>, das <emphasis>Dollarzeichen</emphasis> <literal>$</literal>, der <emphasis>Punkt</emphasis><emphasis></emphasis> <literal>.</literal>, der <emphasis>senkrechte Strich</emphasis> (oder <emphasis>Pipe</emphasis>) <literal>|</literal>, das <emphasis>Fragezeichen</emphasis> <literal>?</literal>, das <emphasis>Sternchen</emphasis> (oder <emphasis>Asterisk</emphasis>) <literal>*</literal>, das <emphasis>Pluszeichen</emphasis> <literal>+</literal>, die öffnende <emphasis>runde Klammer</emphasis> <literal>(</literal>, die schließende <emphasis>runde Klammer</emphasis> <literal>)</literal>, die öffnende <emphasis>eckige Klammer</emphasis> <literal>[</literal>, und die öffnende <emphasis>geschweifte Klammer</emphasis> <literal>{</literal>.</para>
+
+    <para>Nachfolgend wird jedes Zeichen kurz beschrieben, mit entsprechenden RegEx-Beispielen und was damit gefunden oder nicht gefunden wird.</para>
+    
+      <variablelist>
+        <varlistentry>
+          <term>Der UMGEKEHRTE SCHRÄGSTRICH: <literal>\</literal></term>
+          <listitem>
+            <para>Dieses Zeichen hebt die besondere Bedeutung des nächsten Zeichens entweder auf oder aktiviert sie.</para>
+            
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry/>
+                    <entry><literal>0\.[0-9]</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>Findet</entry>
+                    <entry>
+                      <para>Eine Zahl zwischen <emphasis>0.0</emphasis> und <emphasis>0.9</emphasis>, oder eine Zahl, die mit <emphasis>0.5</emphasis> endet, wie z. B. 10.5 oder 560.5.</para>
+
+                      <para><literal>\.</literal> hebt die &quot;beliebiges Zeichen&quot;-Bedeutung des Punktes auf, um den Dezimalpunkt zu finden, während <literal>\d</literal> den normalen Kleinbuchstaben &quot;d&quot; in einen Ausdruck verwandelt, der eine beliebige Ziffer zwischen 0 und 9 findet.</para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>Findet nicht</entry>
+                    <entry>
+                      <para>Sequenzen wie 0,1, 0-3 oder die ersten drei Zeichen von 0x002E, die übereinstimmen würden, wenn der Ausdruck nur <literal>0.[0-9]</literal> wäre, ohne umgekehrten Schrägstrich vor dem Punkt</para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>Der ZIRKUMFLEX: <literal>^</literal></term>
+          <listitem>
+            <para>Wird er als erstes Zeichen in einem Ausdruck verwendet, findet der <emphasis>Zirkumflex</emphasis> den Anfang einer Zeile.</para>
+
+            <para>Wird er als erstes Zeichen in einer <link linkend="app.regex.types.of.expressions.classes">mit eckigen Klammern umschlossenen Zeichenklasse</link> verwendet, werden alle Zeichen gefunden, die nicht zu dieser Klasse gehören.</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry/>
+                    <entry>
+                      <orderedlist>
+                        <listitem>
+                          <para><literal>^A</literal></para>
+                        </listitem>
+        
+                        <listitem>
+                          <para>[^abc]</para>
+                        </listitem>
+                      </orderedlist>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>Findet</entry>
+                    <entry>
+                      <orderedlist>
+                        <listitem>
+                          <para>Den Großbuchstaben &quot;A&quot; im folgenden Satz: &quot;A long, but exciting journey was about to begin&quot;.</para>
+                        </listitem>
+
+                        <listitem>
+                          <para>Ein beliebiges Zeichen, das <emphasis>nicht</emphasis> &quot;a&quot;, &quot;b&quot; oder &quot;c&quot; ist. Zum Beispiel wird im Wort &quot;back&quot; nur das &quot;k&quot; gefunden.</para>
+                        </listitem>
+                      </orderedlist>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>Findet nicht</entry>
+                    <entry>
+                      <orderedlist>
+                        <listitem>
+                          <para>Den Großbuchstaben &quot;A&quot; im folgenden Satz: &quot;My friend is writing a book called <emphasis>A Long Journey</emphasis>&quot;.</para>
+                        </listitem>
+                      
+                        <listitem>
+                          <para>Den Kleinbuchstaben &quot;a&quot;, &quot;b&quot; oder &quot;c&quot; im Wort &quot;back&quot;.</para>
+                        </listitem>
+                      </orderedlist>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>Das DOLLARZEICHEN: <literal>$</literal></term>
+          <listitem>
+            <para>Wird es als erstes Zeichen in einem Ausdruck verwendet, findet das <emphasis>Dollarzeichen</emphasis> das Ende einer Zeile.</para>
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry/>
+                    <entry><literal>^\w+:$</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>Findet</entry>
+                    <entry>
+                      <para>Eine Zeile, die aus einem einzigen Wort besteht und mit einem Doppelpunkt endet:</para>
+                      <para><emphasis>Fragen:</emphasis></para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>Findet nicht</entry>
+                    <entry>
+                      <para>Eine Zeile, die aus einem einzigen Wort besteht, aber nicht mit einem Doppelpunkt endet:</para>
+                      <para><emphasis>Fragen?</emphasis></para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>Der PUNKT: <literal>.</literal></term>
+          <listitem>
+            <para>Findet ein beliebiges Zeichen.</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry/>
+                    <entry><literal>c.t</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>Findet</entry>
+                    <entry>
+                      <para>Beliebige Kombinationen aus drei Buchstaben, die mit &quot;c&quot; beginnen und mit &quot;t&quot; enden: &quot;<emphasis>cat</emphasis>&quot;, &quot;<emphasis>cut</emphasis>&quot;, &quot;<emphasis>cot</emphasis>&quot;, oder auch absurde Kombinationen wie &quot;<emphasis>czt</emphasis>&quot; oder &quot;<emphasis>cqt</emphasis>&quot;.</para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>Findet nicht</entry>
+                    <entry>
+                      <para>Kombinationen aus drei Buchstaben, die mit &quot;c&quot; beginnen und mit &quot;t&quot; enden, aber auf mehr als eine Zeile verteilt sind.</para>
+                      <para>Welcher Buchstabe fehlt?</para>
+                        <simplelist>
+                          <member><literal>c</literal></member>
+                          <member><literal/></member>
+                          <member><literal>t</literal></member>
+                        </simplelist>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>Der SENKRECHTE STRICH: <literal>|</literal></term>
+          <listitem>
+            <para>Dieses Zeichen fungiert als &quot;ODER&quot; und findet entweder den vorangehenden oder den nachfolgenden Ausdruck.</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry/>
+                    <entry><literal>^An|^The</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>Findet</entry>
+                    <entry>
+                      <para>Das einleitende &quot;An&quot; oder &quot;The&quot; in Sätzen wie:<simplelist>
+                          <member>“An apple a day…”</member>
+                          <member>“The apple of my eye…”</member>
+                        </simplelist>
+                      </para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>Findet nicht</entry>
+                    <entry>
+                      <para>Das einleitende &quot;An&quot; oder &quot;The&quot; in Sätzen wie:<simplelist>
+                          <member>“A story called <emphasis>An Unsung
+                          Hero</emphasis>.”</member>
+                          <member>“They work for <emphasis>The Daily
+                            Post</emphasis>.”</member>
+                        </simplelist>
+                      </para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>Das FRAGEZEICHEN: <literal>?</literal></term>
+          <listitem>
+            <para>Dieses Zeichen bewirkt, dass entweder keine oder eine Instanz des vorangehenden Zeichens oder Ausdrucks gefunden wird.</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry/>
+                    <entry>
+                      <literal>an?␣</literal> (wobei &quot;␣&quot; ein einzelnes Leerzeichen repräsentiert).</entry>
+                  </row>
+
+                  <row>
+                    <entry>Findet</entry>
+                    <entry>
+                      <para>Das &quot;a&quot; oder das &quot;an&quot; in:<simplelist>
+                          <member>“I have a question.”</member>
+                          <member>“I know an excellent doctor.”</member>
+                        </simplelist>
+                      </para>
+                      
+                      <para>Es findet auch das letzte &quot;an &quot; von &quot;Can &quot; in einem Satz wie &quot;Can I help you?&quot; oder das letzte &quot;a &quot; von &quot;pasta &quot; in &quot;We had pasta for lunch.&quot;</para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>Findet nicht</entry>
+                    <entry>
+                      <para>Das &quot;a&quot; noch das &quot;an&quot; in:<simplelist>
+                          <member>The indefinite article: “a” (or
+                          “an”).</member>
+                        </simplelist>
+                      </para>
+                      <para>Sie haben kein Leerzeichen dahinter.</para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>Das STERNCHEN: <literal>*</literal></term>
+          <listitem>
+            <para>Dieses Zeichen bewirkt, dass entweder keine oder mehrere Instanzen des vorangehenden Zeichens oder Ausdrucks gefunden werden.</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry/>
+                    <entry><literal>run\w*</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>Findet</entry>
+                    <entry>
+                      <para>Das Wort &quot;run&quot; sowie auch &quot;runs&quot;, &quot;runner&quot;, &quot;runway&quot;, &quot;runt&quot; in &quot;grunt&quot; oder &quot;brunt&quot; und jede andere Zeichenkette, die &quot;run&quot; enthält, gefolgt von null oder mehr &quot;<emphasis>Wortzeichen</emphasis>&quot; (zu denen auch Ziffern und der Unterstrich gehören, so dass der Teil vor dem &quot;@&quot; in einer E-Mail-Adresse wie run_123@example.email.org ebenfalls gefunden werden kann).</para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>Findet nicht</entry>
+                    <entry>
+                      <para>Den vollständigen Satz in &quot;run-on&quot; oder &quot;run'n'gun&quot;, weil der Bindestrich und Apostroph nicht in <literal>\w</literal> enthalten sind. Nur das initiale &quot;run&quot; in diesen Sätzen wird gefunden.</para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>Das PLUSZEICHEN: <literal>+</literal></term>
+          <listitem>
+            <para>Dieses Zeichen bewirkt, dass entweder eine oder mehrere Instanzen des vorangehenden Zeichens oder Ausdrucks gefunden werden.</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry/>
+                    <entry><literal>\d+.d</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>Findet</entry>
+                    <entry>
+                      <para>Zahlen wie &quot;1.5&quot;, &quot;23.2&quot; oder &quot;5235.8&quot; mit einer Dezimalstelle und einer beliebigen Anzahl von Ziffern vor dem Dezimalpunkt.</para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>Findet nicht</entry>
+                    <entry>
+                      <para>Den gesamten Wert von Zahlen wie &quot;5,235.8&quot; oder &quot;21,571.9&quot;. Es wird nur der Teil nach dem Tausendertrennzeichen gefunden.</para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>Die ÖFFNENDE RUNDE KLAMMER: <literal>(</literal></term>
+
+          <listitem>
+            <para>Dieses Zeichen leitet eine <emphasis>Gruppe</emphasis> ein; also eine Gruppe von Zeichen, die als eine Einheit behandelt werden. Die Gruppen sind nummeriert, und ihr Inhalt wird im Speicher abgelegt. Sie können später im Suchausdruck mit <literal>\<option>n</option></literal> wiederverwendet werden, wobei <option>n</option> die Nummer der Gruppe ist.</para>
+
+            <note>
+              <para>Der Inhalt der Gruppe kann auch im <link linkend="windows.text.replace">Ersetzungstext</link> verwendet werden. Verwenden Sie <literal>$<option>n</option></literal>, wobei <option>n</option> die Nummer der Gruppe ist, die in der Suche definiert wurde.</para>
+            </note>
+
+            <para>Öffnende und schließende runde Klammern werden immer paarweise verwendet. Der Versuch, eine runde Klammer ohne ihr Gegenstück zu benutzen, löst einen Fehler aus.</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry/>
+                    <entry><literal>(\b\w+\b)\h\1\b</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>Findet</entry>
+                    <entry>
+                      <para>Doppelte Wörter, die mit einem Leerzeichen voneinander getrennt sind, wie z. B. das doppelte &quot;an&quot; im folgenden Satz:</para>
+
+					  <para>“I bought an an apple.”</para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>Findet nicht</entry>
+                    <entry>
+                      <para>Das &quot;that, that&quot; im folgenden Satz:</para>
+
+					  <para>“But that, that is just unbelievable”, weil das erste &quot;that&quot; sowohl ein Komma als auch ein Leerzeichen dahinter hat, nicht nur ein Leerzeichen.</para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>Die SCHLIEßENDE RUNDE KLAMMER: <literal>)</literal></term>
+
+          <listitem>
+            <para>Dieses Zeichen schließt eine Gruppe. Es ist besonders, weil es niemals allein verwendet werden kann. Um die schließende runde Klammer selbst zu finden, müssen Sie ihr das Zeichen <literal>\</literal> voranstellen.</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry/>
+                    <entry><literal>^\d+\)</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>Findet</entry>
+                    <entry>
+                      <para>Die Ordnungszahlen (einschließlich der runden Klammern) am Anfang jeder Zeile einer Liste wie z. B.:</para>
+
+                      <simplelist>
+                        <member>1) Äpfel</member>
+                        <member>2) Orangen</member>
+                        <member>3) Birnen</member>
+                      </simplelist>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>Findet nicht</entry>
+                    <entry>
+                      <para>Ordnungszahlen, die nicht am Anfang einer Zeile stehen.</para>
+
+                      <para>Gehen Sie wie folgt vor:</para>
+                      <simplelist>
+                        <member>Schritt 1) Vorbereitung</member>
+                        <member>Schritt 2) …</member>
+                      </simplelist>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>Die ÖFFNENDE ECKIGE KLAMMER: <literal>[</literal></term>
+
+          <listitem>
+            <para>Dieses Zeichen muss mit der schließenden eckigen Klammer kombiniert werden, um eine Reihe von einzelnen Zeichen zu umschließen, die jeweils eine potenzielle Übereinstimmung darstellen.</para>
+
+            <para>Nur die öffnende eckige Klammer ist besonders und muss mit einem umgekehrten Schrägstrich vorangestellt werden, wenn sie gefunden werden soll. Wenn Sie nur die schließende eckige Klammer finden wollen, müssen Sie ihr keinen umgekehrten Schrägstrich voranstellen. (Sie können den Schrägstrich trotzdem hinzufügen, aber er hat keine Auswirkungen auf den Ausdruck oder das Ergebnis).</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry/>
+                    <entry><literal>li[cs]en[cs]e</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>Findet</entry>
+                    <entry>
+                      <para>Die korrekte Schreibweise von &quot;licence&quot; und &quot;license&quot; sowie die möglichen Falschschreibungen von &quot;lisence&quot; und &quot;lisense&quot;</para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>Findet nicht</entry>
+                    <entry>
+                      <para>Krassere Falschschreibungen wie &quot;licensse&quot; oder &quot;lissense&quot;.</para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>Die ÖFFNENDE GESCHWEIFTE KLAMMER: <literal>{</literal></term>
+
+          <listitem>
+            <para>Dieses Zeichen muss mit der schließenden geschweiften Klammer kombiniert werden, um eine <emphasis>genaue Anzahl</emphasis>, ein <emphasis>Minimum</emphasis>, ein <emphasis>Maximum</emphasis> oder einen <emphasis>Zahlenbereich</emphasis> zu umschließen. Diese geben an, wie viele Instanzen des vorherigen Zeichens oder der vorherigen Gruppe gefunden werden sollen.</para>
+
+            <para>Nur die öffnende geschweifte Klammer ist besonders und muss mit einem umgekehrten Schrägstrich vorangestellt werden, wenn sie gefunden werden soll. Wenn Sie nur die schließende geschweifte Klammer finden wollen, müssen Sie ihr keinen umgekehrten Schrägstrich voranstellen. (Sie können den Schrägstrich trotzdem hinzufügen, aber er hat keine Auswirkungen auf den Ausdruck oder das Ergebnis).</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry/>
+                    <entry><literal>\d{4}/\d{1,3}</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>Findet</entry>
+                    <entry>
+                      <para>Codes wie &quot;1234/5&quot;, &quot;1472/69&quot; oder &quot;9513/842&quot;, die aus vier Ziffern, einem Schrägstrich und 1-3 weiteren Ziffern bestehen.</para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>Findet nicht</entry>
+                    <entry>
+                      <para>Codes wie &quot;123/45&quot;, &quot;1472/6985&quot; oder &quot;95133/15746&quot;.</para>
+                      <para><emphasis role="bold">Warnung:</emphasis> Obwohl die beiden letzten Codes als Ganzes nicht gefunden werden, gibt der Ausdruck den Teil &quot;<emphasis>1472/698</emphasis>&quot; von &quot;1472/6985&quot; sowie den Teil &quot;<emphasis>5133/157</emphasis>&quot; von &quot;95133/15746&quot; zurück.</para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+  </section>
+
+  <section id="app.regex.types.of.expressions">
+    <title id="app.regex.types.of.expressions.title">Weitere Ausdrücke</title>
+
+    <para>Dieser Abschnitt enthält verschiedene Arten von regulären Ausdrücken, die von einfach bis komplex reichen.</para>
+      
+    <note>
+      <para>Denken Sie daran, dass die meisten <emphasis>alphabetischen</emphasis> Zeichen, denen ein <literal>\</literal> vorangestellt ist, zu einem Ausdruck werden, der <emphasis>nicht das Zeichen selbst, sondern die damit verbundene besondere Bedeutung</emphasis> repräsentiert.</para>
+    </note>
+
+    <section id="app.regex.types.of.expressions.simple.expressions">
+      <title id="app.regex.types.of.expressions.simple.expressions.title">Einfache Ausdrücke</title>
+      <para>Der einfachste reguläre Ausdruck besteht aus einem einzigen Zeichen, oder aus einem <literal>\</literal> und einem Zeichen, die zusammen eine besondere Bedeutung haben.</para>
+      
+      <table id="app.regex.characters">
+        <title id="app.regex.characters.title">Zeichen</title>
+
+        <tgroup align="left" cols="2" rowsep="1">
+          <colspec align="left" colnum="1"/>
+
+          <thead>
+            <row>
+              <entry align="left">Ausdruck</entry>
+              <entry align="left">Übereinstimmung</entry>
+            </row>
+          </thead>
+
+          <tbody>
+            <row>
+              <entry><literal>x</literal></entry>
+              <entry>
+                <para>Das &quot;x&quot;-Zeichen selbst</para>
+                <para>Die meisten Zeichen finden sich selbst.</para>
+              </entry>
+            </row>
+
+            <row>
+              <entry><literal>\t</literal></entry>
+              <entry>
+                <para>Das Tabulatorzeichen, nicht der Buchstabe &quot;t&quot;.</para>
+			  </entry>
+            </row>
+
+            <row>
+              <entry><literal>\n</literal></entry>
+              <entry>Das Zeilenvorschubzeichen (LF), nicht der Buchstabe &quot;n&quot;.</entry>
+            </row>
+
+            <row>
+              <entry><literal>\r</literal></entry>
+              <entry>
+                <para>Das Wagenrücklaufzeichen (CR), nicht der Buchstabe &quot;r&quot;.</para>
+                <para><literal>\R</literal> hingegen findet ein beliebiges Zeilenumbruchzeichen.</para>
+			  </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+
+    <section id="app.regex.types.of.expressions.case">
+      <title id="app.regex.types.of.expressions.case.title">Groß-/Kleinschreibung</title>
+
+      
+      <para>Die normale OmegaT-Suche ist standardmäßig nicht Groß-/Kleinschreibung-sensitiv: Sie findet sowohl Groß- als auch Kleinbuchstaben, es sei denn, Sie haben die Option <link linkend="windows.text.search.options" endterm="windows.text.search.options.title"/> aktiviert. Dadurch wird die Groß- und Kleinschreibung des gesamten Suchbegriffs berücksichtigt.</para>
+
+      <para>Reguläre Ausdrücke hingegen sind standardmäßig Groß-/Kleinschreibung-sensitiv. Das bedeutet, dass eine RegEx-Suche nach &quot;OmegaT&quot; zum Beispiel &quot;omegat&quot; nicht finden wird. Allerdings bieten reguläre Ausdrücke spezielle Modifikatoren, um die Groß-/Kleinschreibung-Sensitivität innerhalb des Ausdrucks umzustellen:</para>
+
+      <variablelist>
+        <varlistentry>
+          <term><literal>(?i)</literal></term>
+          <listitem>
+            <para>Macht den Teil des Ausdrucks rechts vom Modifikator nicht-Groß-/Kleinschreibung-sensitiv.</para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term><literal>(?-i)</literal></term>
+          <listitem>
+            <para>Macht den Teil des Ausdrucks rechts vom Modifikator Groß-/Kleinschreibung-sensitiv.</para>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+	  
+      <para>Sie können das nutzen, um die Groß-/Kleinschreibung-Sensitivität bei der Suche präzise einzustellen. Nehmen wir zum Beispiel an, dass Sie Instanzen von &quot;OmegaT&quot; und &quot;omegat&quot; finden wollen, aber nicht &quot;OMEGAT&quot;. Sie können das mit folgendem Ausdruck tun: <literal>(?i)o</literal><literal>(?-i)mega</literal> <literal>(?i)t</literal> (ein groß- oder kleingeschriebenes &quot;o&quot;, gefolgt von einem kleingeschriebenen &quot;mega&quot;, gefolgt von einem groß- oder kleingeschriebenen &quot;t&quot;).</para>
+    </section>
+
+    <section id="app.regex.types.of.expressions.classes">
+      <title id="app.regex.types.of.expressions.classes.title">Klassen</title>
+
+      <para>Reguläre Ausdrücke ermöglichen es Ihnen, Zeichensätze zu erstellen, die als <emphasis>Klassen</emphasis> bezeichnet werden. Bei der Suche werden alle Zeichen des Satzes berücksichtigt.</para>
+
+	  <para>Um eine Klasse zu definieren, umschließen Sie einzelne Zeichen und/oder Zeichenbereiche mit eckigen Klammern. Sie können zum Beispiel die Klasse <literal>[£€$]</literal> erstellen, um eines der drei Währungssymbole im Text zu finden, oder [1-3], um die Zahlen 1, 2 oder 3 zu finden.</para>
+
+      <note>
+        <para>Innerhalb einer Klasse haben nur der umgekehrte Schrägstrich (<literal>\</literal>), der Zirkumflex (<literal>^</literal>), die schließende eckige Klammer (<literal>]</literal>) und der Bindestrich (<literal>-</literal>) eine besondere Bedeutung. Die restlichen zwölf Zeichen sind normal und müssen nicht mit einem umgekehrten Schrägstrich versehen werden, wenn Sie nach diesen Zeichen selbst suchen möchten.</para>
+
+		<para>Wenn Sie eines der vier besonderen Klassenzeichen als normales Zeichen suchen möchten, setzen Sie einen umgekehrten Schrägstrich davor. Sie können auch nach dem Zirkumflex, der schließenden eckigen Klammer und dem Bindestrich selbst suchen, indem Sie sie an einer Position platzieren, die ihre besondere Bedeutung nicht auslöst: Im Falle des Zirkumflexes an einer beliebigen Stelle außer direkt nach der öffnenden eckigen Klammer, im Falle der schließenden eckigen Klammer direkt nach entweder der öffnenden eckigen Klammer oder dem Zirkumflex und im Falle des Bindestrichs entweder direkt nach der öffnenden eckigen Klammer oder direkt vor der schließenden eckigen Klammer.</para>
+      </note>
+
+	  <para>Viele häufig verwendete Zeichensätze haben eine Kurzform, die aus einem umgekehrten Schrägstrich, gefolgt von einem Buchstaben, besteht. Zum Beispiel ist <literal>\d</literal> die Kurzform für <literal>[0-9]</literal>, womit eine beliebige Ziffer zwischen 0 und 9 gefunden werden kann. In vielen Fällen wird der entsprechende Großbuchstabe verwendet, um die Klasse zu negieren: <literal>\D</literal> findet ein beliebiges Zeichen, das <emphasis role="bold">keine</emphasis> Ziffer ist.</para>
+      <para>Die folgende Tabelle enthält weitere Beispiele. Diese Klassen repräsentieren niemals nur den eigentlichen Buchstaben, mit dem die Kurzform gebildet wird.</para>
+      
+      <table id="app.regex.classes">
+        <title id="app.regex.classes.title">Klassenbeispiele</title>
+
+        <tgroup align="left" cols="2" rowsep="1">
+          <colspec align="left" colnum="1"/>
+
+          <thead>
+            <row>
+              <entry align="left">Ausdruck</entry>
+              <entry align="left">Übereinstimmung</entry>
+            </row>
+          </thead>
+
+          <tbody>
+            
+            <row>
+              <entry><literal>[abc]</literal></entry>
+              <entry>
+                <para>Der Buchstabe &quot;a&quot;, &quot;b&quot; oder &quot;c&quot;.</para>
+
+				<para>Eine einfache Klasse besteht aus einer beliebigen Anzahl von Zeichen, die von <literal>[</literal> und <literal>]</literal> umschlossen sind.</para>
+              </entry>
+            </row>
+            
+            <row>
+              <entry><literal>[C-X]</literal></entry>
+              <entry>
+                <para>Ein Zeichen im Bereich von &quot;C&quot; bis &quot;X&quot;.</para>
+
+				<para>Ein Zeichenbereich besteht aus dem ersten Zeichen einer Reihe, gefolgt von einem Bindestrich, gefolgt vom letzten Zeichen der Reihe. Es können beliebig viele Zeichenbereiche definiert werden: <literal>[a-zA-Z0-9]</literal> findet einen beliebigen Kleinbuchstaben von &quot;a&quot; bis &quot;z&quot;, oder einen beliebigen Großbuchstaben von &quot;A&quot; bis &quot;Z&quot;, oder eine beliebige Ziffer von &quot;0&quot; bis &quot;9&quot;. Ein Bindestrich außerhalb des Zeichenbereichs wird als normaler Bindestrich behandelt: <literal>[a-z-]</literal> findet einen beliebigen Kleinbuchstaben von &quot;a&quot; bis &quot;z&quot; oder den Bindestrich selbst.</para>
+              </entry>
+            </row>
+            
+            <row>
+              <entry><literal>[^\n\r\t]</literal></entry>
+              <entry>
+                <para>Ein beliebiges Zeichen, das <emphasis>kein</emphasis> Zeilenvorschub-, Wagenrücklauf- oder Tabulatorzeichen ist.</para>
+
+                <para>Der Zirkumflex unmittelbar nach der öffnenden eckigen Klammer exkludiert die nachfolgenden Zeichen in der Klasse.</para>
+              </entry>
+            </row>
+
+            <row>
+              <entry><literal>\w</literal></entry>
+              <entry>
+                <para>Ein Wortzeichen, generell definiert als <literal>[A-Za-z0-9_]</literal>.</para>
+
+                <para><literal>\W</literal> ist ein beliebiges Zeichen, das <emphasis role="bold">kein</emphasis> Wortzeichen ist (<literal>[^\w]</literal>).</para>
+              </entry>
+            </row>
+
+            <row>
+              <entry><literal>\s</literal></entry>
+              <entry>
+                <para>Ein Leerraumzeichen, wozu auch die Leer- und Tabulatorzeichen sowie Zeilenumbrüche gehören.</para>
+
+                <para><literal>\S</literal> ist ein beliebiges Zeichen, das <emphasis role="bold">kein</emphasis> Leerraumzeichen ist (<literal>[^\s]</literal>).</para>
+              </entry>
+            </row>
+
+            <row>
+              <entry>
+				<literal>\h</literal> und <literal>\v</literal>
+			  </entry>
+
+              <entry>
+				<para>Horizontales und vertikales Leerraumzeichen (grundsätzlich gegenüber <literal>\s</literal> vorzuziehen).</para>
+
+				<para><literal>\H</literal> ist ein beliebiges Zeichen, das <emphasis role="bold">kein</emphasis> horizontales Leerraumzeichen ist, und <literal>\V</literal> ist ein beliebiges Zeichen, das <emphasis role="bold">kein</emphasis> vertikales Leerraumzeichen ist (<literal>[^\h]</literal> bzw. <literal>[^\v]</literal>).</para>
+			  </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+      
+      <para>Reguläre Ausdrücke sind nicht auf alphanumerische Zeichen beschränkt. Sie decken den gesamten Unicode-Zeichensatz ab. Verwenden Sie Unicode-Blöcke, -Skripte und -Kategorien, um Zeichenklassen außerhalb des alphanumerischen Zeichenbereichs anzugeben. Einige Beispiele sind in der folgenden Tabelle aufgeführt.</para>
+
+      <para>Eine ausführliche Übersicht über Unicode-basierte reguläre Ausdrücke finden Sie auch unter <ulink url="https://www.regular-expressions.info/unicode.html">Unicode Regular Expressions</ulink> (englisch).</para>
+
+      <table id="app.regex.unicode.blocks">
+        <title id="app.regex.unicode.blocks.title">Unicode-Blöcke, -Skripte und -Kategorien</title>
+        
+        <tgroup align="left" cols="2" rowsep="1">
+          <colspec align="left" colnum="1"/>
+          <thead>
+            <row>
+              <entry align="left">Ausdruck</entry>
+              <entry align="left">Übereinstimmung</entry>
+            </row>
+          </thead>
+          
+          <tbody>
+            <row>
+              <entry><literal>\p{InGreek}</literal></entry>
+              <entry>
+                <para>Ein Zeichen im griechischen Block (<ulink url="https://unicode.org/reports/tr18/#Blocks">Unicode-Block</ulink>)</para>
+				
+                <para><literal>\P{InGreek}</literal> ist ein beliebiges Zeichen, das <emphasis role="bold">nicht</emphasis> im griechischen Block ist.</para>
+              </entry>
+            </row>
+          
+            <row>
+              <entry><literal>\p{IsHan}</literal></entry>
+              <entry>
+                <para>Ein Logogramm (<emphasis>Han</emphasis>/<emphasis>Kanji</emphasis>/<emphasis>Hanja</emphasis>-Zeichen), das in CJK-Sprachen vorkommt (<ulink url="https://unicode.org/reports/tr18/#Script_Property">Unicode-Skript</ulink>)</para>
+              </entry>
+            </row>
+          
+            <row>
+              <entry><literal>\p{Lu}</literal></entry>
+              <entry>
+                <para>Ein Großbuchstabe (<ulink url="https://unicode.org/reports/tr18/#General_Category_Property">Unicode-Kategorie</ulink>)</para>
+              </entry>
+            </row>
+          
+            <row>
+              <entry><literal>\p{Sc}</literal></entry>
+              <entry>
+                <para>Ein Währungssymbol, das auch eine <ulink url="https://unicode.org/reports/tr18/#General_Category_Property">Unicode-Kategorie</ulink> ist.</para>
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+
+    <section id="app.regex.more.advanced.expressions">
+      <title id="app.regex.more.advanced.expressions.title">Fortgeschrittene Ausdrücke</title>
+      
+      <para>Einige Ausdrücke spezifizieren eher eine Position als ein Zeichen. Sie geben an, wo im Text nach der Übereinstimmung zu suchen ist, enthalten aber keine Zeichen in dieser Übereinstimmung. Die folgende Tabelle enthält einige der Beispiele, die häufiger verwendet werden. Informieren Sie sich auf den Seiten im Abschnitt <link linkend="app.regex.tools" endterm="app.regex.tools.title"/>, um mehr zu erfahren.</para>
+
+      <table id="app.regex.boundary.matchers">
+        <title id="app.regex.boundary.matchers.title">Ausdrücke, die eine Position kennzeichnen</title>
+      
+        <tgroup align="left" cols="2" rowsep="1">
+          <colspec align="left" colnum="1"/>
+
+          <thead>
+            <row>
+              <entry align="left">Ausdruck</entry>
+              <entry align="left">Übereinstimmung</entry>
+            </row>
+          </thead>
+          
+          <tbody>
+            <row>
+              <entry><literal>^</literal></entry>
+              <entry>
+                <para>Der Anfang einer Zeile</para>
+              </entry>
+            </row>
+        
+            <row>
+              <entry><literal>$</literal></entry>
+              <entry>
+                <para>Das Ende einer Zeile</para>
+              </entry>
+            </row>
+        
+            <row>
+              <entry><literal>\b</literal></entry>
+              <entry>
+                <para>Eine Wortgrenze</para>
+              </entry>
+            </row>
+        
+            <row>
+              <entry><literal>\B</literal></entry>
+              <entry>
+                <para><emphasis>Keine</emphasis> Wortgrenze</para>
+              </entry>
+            </row>
+        
+            <row>
+              <entry><literal>(?=u)</literal></entry>
+              <entry>
+                <para>Ein Zeichen gefolgt von einem &quot;u&quot;.</para>
+				
+                <para>Zum Beispiel findet <literal>q(?=u)</literal> den Buchstaben &quot;q&quot;, wenn dahinter ein &quot;u&quot; steht. Es findet also das &quot;q&quot; in &quot;equal&quot; oder &quot;question&quot;, aber <emphasis>nicht</emphasis> in &quot;qigong&quot; oder &quot;Iraq&quot;.</para>
+              </entry>
+            </row>
+        
+            <row>
+              <entry><literal>(?!u)</literal></entry>
+              <entry>
+                <para>Ein Zeichen, das <emphasis>nicht</emphasis> den Buchstaben &quot;u&quot; dahinter hat.</para>
+				
+                <para>Zum Beispiel findet <literal>q(?!u)</literal> den Buchstaben &quot;q&quot;, wenn dahinter <emphasis>kein</emphasis> &quot;u&quot; steht. Es findet also das &quot;q&quot; in &quot;qigong&quot; oder &quot;Iraq&quot;, aber <emphasis>nicht</emphasis> in &quot;equal&quot; oder &quot;question&quot;.</para>
+              </entry>
+            </row>
+            
+            <row>
+              <entry><literal>(?&lt;=q)</literal></entry>
+              <entry>
+                <para>Ein Zeichen, das den Buchstaben &quot;q&quot; davor hat.</para>
+				
+                <para>Zum Beispiel findet <literal>(?&lt;=q)u</literal> den Buchstaben &quot;u&quot;, wenn davor ein &quot;q&quot; steht. Es findet also das &quot;u&quot; in &quot;quick&quot;, aber nicht in &quot;run&quot;.</para>
+              </entry>
+            </row>
+        
+            <row>
+              <entry><literal>(?&lt;!q)</literal></entry>
+              <entry>
+                <para>Ein Zeichen, das <emphasis>nicht</emphasis> den Buchstaben &quot;q&quot; davor hat.</para>
+				
+                <para>Zum Beispiel findet <literal>(?&lt;!q)u</literal> den Buchstaben &quot;u&quot;, wenn davor <emphasis>kein</emphasis> &quot;q&quot; steht. Es findet also das &quot;u&quot; in &quot;run&quot;, aber <emphasis>nicht</emphasis> in &quot;quick&quot;.</para>
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>  
+  </section>
+
+  <section id="app.regex.more.examples">
+    <title id="app.regex.more.examples.title">Weitere Beispiele</title>
+
+    <para>Dieser Abschnitt enthält einige Beispiele, die zeigen, wie die verschiedenen oben beschriebenen Ausdrücke kombiniert werden können, um die Suche in OmegaT zu optimieren.</para>
+    
+    <table id="regex.examples">
+      <title id="regex.examples.title">RegEx-Beispiele, die die oben genannten Ausdrücke verwenden</title>
+
+      <tgroup align="left" cols="2" rowsep="1">
+        <colspec align="left" colnum="1"/>
+
+        <thead>
+          <row>
+            <entry>Ausdruck</entry>
+            <entry>Zweck</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry><literal>(\b\w+\b)\h\1\b</literal></entry>
+            <entry>
+              <para>Wortwiederholungen finden.</para>
+            </entry>
+          </row>
+
+          <row>
+            <entry><literal>,\h[\h(\w+\.\w+)\w,'ʼ&quot;“”-]+[\.,]</literal></entry>
+            <entry>
+              <para>Nebensätze finden, die mit einem Komma gefolgt von einem Leerzeichen beginnen, ein oder mehrere Wörter enthalten (einschließlich Wörter in Anführungszeichen, Verschmelzungen und Dateinamen mit einer Dateiendung) und entweder mit einem Komma oder einem Punkt enden.</para>
+            </entry>
+          </row>
+
+          <row>
+            <entry><literal>\. \h+$</literal></entry>
+            <entry>
+              <para>Überschüssige Leerräume nach dem Punkt am Ende einer Zeile finden.</para>
+            </entry>
+          </row>
+
+          <row>
+            <entry><literal>\h+a\h+[aeiou]</literal></entry>
+            <entry>
+              <para>Wörter finden, die mit einem Vokal beginnen und den Artikel &quot;a&quot; statt &quot;an&quot; davor haben.</para>
+            </entry>
+          </row>
+
+          <row>
+            <entry><literal>\h+an\h+[^aeiou]</literal></entry>
+            <entry>
+              <para>Die Kehrseite des vorherigen Beispiels. Wörter finden, die mit einem Konsonanten beginnen und den Artikel &quot;an&quot; statt &quot;a&quot; davor haben.</para>
+            </entry>
+          </row>
+
+          <row>
+            <entry><literal>\d{4}([/\.-]\d{1,2}){2}</literal></entry>
+            <entry>
+              <para>Numerische Datumsangaben in der Reihenfolge Jahr, Monat und Tag finden, wobei Monat und Tag mit einem Schrägstrich, Punkt oder Bindestrich voneinander getrennt sind, wie z. B.:</para>
+			  
+                <itemizedlist>
+                  <listitem>
+                    <para>2002/11/8</para>
+                  </listitem>
+                  <listitem>
+                    <para>1969.7.20</para>
+                  </listitem>
+                  <listitem>
+                    <para>2022-10-31</para>
+                  </listitem>
+                </itemizedlist>
+
+				<note>
+                  <para>Dieser Ausdruck findet Zahlen- und Trennzeichenmuster, die eventuell Datumsangaben sein könnten, prüft sie aber nicht auf Richtigkeit. Er wird auch Muster wie &quot;5136/36/71&quot; finden.</para>
+				</note>
+            </entry>
+          </row>
+
+          <row>
+            <entry><literal>\.[A-Z]</literal></entry>
+            <entry>
+              <para>Einen Punkt gefolgt von einem Großbuchstaben finden. Nützlich, um eventuell fehlende Leerzeichen zwischen dem Punkt und dem Beginn eines neuen Satzes zu finden.</para>
+            </entry>
+          </row>
+
+          <row>
+            <entry><literal>\bis\b</literal></entry>
+            <entry>
+              <para>&quot;is&quot; als ganzes Wort in einem Satz finden, ohne &quot;this&quot;, &quot;isn't&quot; oder sogar &quot;Is&quot; einzubeziehen.</para>
+            </entry>
+          </row>
+
+          <row>
+            <entry><literal>[\w\.-]+@[\w\.-]+</literal></entry>
+            <entry>
+              <para>Eine E-Mail-Adresse finden. Dieser einfache Ausdruck findet vermutlich nicht alle möglichen gültigen E-Mail-Adressformate.</para>
+            </entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+
+  <section id="app.regex.tools">
+    <title id="app.regex.tools.title">Referenzen</title>
+
+    <para>Obwohl OmegaT keine ausgefallene Färbung für Ihre regulären Ausdrücke bereitstellt, können Sie durch Nutzung des Fensters <link linkend="windows.text.search" endterm="windows.text.search.title"/> viel Übung bekommen, da OmegaT die passenden Ergebnisse einfärbt.</para>
+    
+    <para>Nachfolgend sind einige zusätzliche Ressourcen aufgeführt.</para>
+
+    <para>Die technische Java-Referenz ist nützlich als kanonische Referenz.<variablelist>
+        <varlistentry id="app.regex.java">
+          <term id="app.regex.java.title"><ulink url="https://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html">Java-Regex-Dokumentation</ulink></term>
+          <listitem>
+            <para>Die offizielle Referenz für in Java verwendete reguläre Ausdrücke.</para>
+          </listitem>
+        </varlistentry>
+      </variablelist>Wenn Sie mehr über die Nutzung regulärer Ausdrücke erfahren möchten, könnten die beiden folgenden Seiten sehr nützlich sein.<variablelist>
+        <varlistentry id="app.regex.tools.regex101">
+          <term id="app.regex.tools.regex101.title"><ulink url="https://regex101.com">https://regex101.com</ulink></term>
+          <listitem>
+            <para>Ein RegEx-Online-Tool, das Ihnen erlaubt, den Text, der durchsucht werden soll, und die regulären Ausdrücke, die getestet werden sollen, einzutragen.</para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry id="app.regex.tools.regular.expression.info">
+          <term id="app.regex.tools.regular.expression.info.title"><ulink url="https://www.regular-expressions.info">https://www.regular-expressions.info</ulink></term>
+          <listitem>
+            <para>Eines der ausführlichsten Tutorials und Referenzen für reguläre Ausdrücke im Internet.</para>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+
+      <note>
+        <para>OmegaT unterstützt keine der beiden Seiten in irgendeiner Weise. Wenn Sie weitere interessante Referenzen finden - egal in welcher Sprache - würde sich das OmegaT-Team freuen, davon zu hören.</para>
+      </note>
+    </para>
+  </section>
+</section>

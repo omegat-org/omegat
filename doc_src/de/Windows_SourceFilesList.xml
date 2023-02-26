@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="windows.source.files.list">
+  <title id="windows.source.files.list.title"><guilabel>Quelldateien</guilabel></title>
+
+  <para>Dieses Fenster wird automatisch angezeigt, wenn OmegaT ein Projekt lädt, und kann jederzeit mittels <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.source.files.list" endterm="menus.project.source.files.list.title"/> aufgerufen werden.</para>
+
+  <para>Das Fenster zeigt die folgenden Informationen an:</para>
+
+  <itemizedlist>
+    <listitem>
+      <para>Im Fenstertitel: Die Gesamtzahl aller übersetzbaren Dateien im Projekt.</para>
+
+	  <para>Das sind die Dateien, die sich im <link linkend="project.folder.source" endterm="project.folder.source.title"/>-Ordner befinden, in einem für OmegaT erkennbaren Format.</para>
+    </listitem>
+
+    <listitem>
+      <para>Als Liste: Alle übersetzbaren Dateien im Projekt.</para>
+
+	  <para>Klicken Sie auf eine beliebige Datei, um sie im <link linkend="panes.editor" endterm="panes.editor.title"/>-Bereich zu öffnen und zu übersetzen.</para>
+    </listitem>
+
+    <listitem>
+      <para>Für jeden Dateinamen in der Liste wird zusätzlich noch der verwendete Filter, die Kodierung und die Anzahl der enthaltenen Segmente angezeigt.</para>
+    </listitem>
+
+    <listitem>
+      <para>Direkt darunter wird die Gesamtzahl der Segmente, die Anzahl einmaliger Segmente im gesamten Projekt und die Anzahl bereits übersetzter einmaliger Segmente angezeigt.</para>
+    </listitem>
+  </itemizedlist>
+
+  <para>Wenn Sie einen beliebigen Text eingeben, öffnet sich ein <guilabel>Filter</guilabel>-Feld im unteren Bereich des Fensters, das die Eingabe von Dateinamen ermöglicht. Sie können eine Datei mit den Pfeiltasten auswählen und durch Drücken von <keycap>Enter</keycap> öffnen, um sie zu übersetzen.</para>
+
+  <note>
+	<para>Dateinamen (die erste Spalte) können durch Klicken auf die Spaltenüberschrift alphabetisch sortiert werden. Sie können auch einen Dateinamen verschieben, indem Sie ihn auswählen und auf die Schaltflächen <guibutton>Nach oben/unten</guibutton> auf der rechten Seite klicken.</para>
+  </note>
+
+  <para>Wenn Sie mit der rechten Maustaste auf einen Dateinamen klicken, wird ein Kontextmenü geöffnet, das das Öffnen der Quelldatei und der Zieldatei (falls vorhanden) ermöglicht.</para>
+
+  <para>Die Anzahl der <emphasis role="bold">eindeutigen</emphasis> Segmente errechnet sich durch Abzug der Anzahl der mehrmaligen Segmente von der Gesamtzahl der Segmente.</para>
+
+  <para>Der Unterschied zwischen &quot;Anzahl von Segmenten&quot; und &quot;Anzahl von einmaligen Segmenten&quot; vermittelt einen ungefähren Eindruck von der Anzahl an Wiederholungen im Text. Verwenden Sie <link linkend="menus.tools" endterm="menus.tools.title"/><link linkend="menus.tools.statistics" endterm="menus.tools.statistics.title"/>, um weitere Informationen zu erhalten.</para>
+
+  <para>Eine Änderung der Segmentierungsregeln kann bewirken, dass sich die Anzahl der Segmente/einmaligen Segmente ändert. Dies sollte jedoch ohnehin vermieden werden, falls Sie bereits mit der Übersetzung des Projekts begonnen haben. Einzelheiten finden Sie unter <link linkend="app.segmentation" endterm="app.segmentation.title"/>.</para>
+
+  <para>Mit den Schaltflächen im unteren Bereich des Fensters können Sie Dateien zu Ihrem Projekt hinzufügen:</para>
+  
+  <variablelist>
+	<varlistentry id="windows.source.files.list.copy.files">
+	  <term id="windows.source.files.list.copy.files.title"><guibutton>Dateien hinzufügen...</guibutton></term>
+	<listitem>
+	  <para>Kopiert die ausgewählten Dateien in den Ordner <link linkend="project.folder.source" endterm="project.folder.source.title"/> und lädt das Projekt neu, um die neuen Dateien einzubeziehen.</para>
+	</listitem>
+	</varlistentry>
+	
+	<varlistentry id="windows.source.files.list.download.page">
+	  <term id="windows.source.files.list.download.page.title"><guibutton>Online-MediaWiki-Seite hinzufügen...</guibutton></term>
+	  <listitem>
+		<para>Fragt nach der URL der Seite und lädt sie in den <link linkend="project.folder.source" endterm="project.folder.source.title"/>-Ordner herunter.</para>
+	  </listitem>
+	</varlistentry>
+  </variablelist>
+  
+  <para>Die beiden Aktionen sind das gleiche wie, als würde man die Menüpunkte <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.copy.files.to.source.folder" endterm="menus.project.copy.files.to.source.folder.title"/> und <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.download.mediawiki.page" endterm="menus.project.download.mediawiki.page.title"/> verwenden.</para>
+  
+  <note>
+	<para>Sie können die <link linkend="configuration.folder.default.contents.omegat.prefs" endterm="configuration.folder.default.contents.omegat.prefs.title"/>-Konfigurationsdatei manuell bearbeiten, um das automatische Öffnen des Projektdateien-Fensters beim Laden eines Projekts zu verhindern.</para>
+  </note>
+</section>

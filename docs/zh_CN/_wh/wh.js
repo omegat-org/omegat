@@ -517,105 +517,89 @@ return this;
 })(jQuery);
 var wh = (function () {
 var toc_entries = [
-["Introduction to OmegaT","chapter.instant.start.guide.html",[
-["原则","chapter.instant.start.guide.html#introduction.omegat.principles",null],
-["Conventions used in\n\tthis manual","chapter.instant.start.guide.html#introduction.how.to.use.the.manual",null],
-["Create a new\n    project","chapter.instant.start.guide.html#introduction.create.and.open.new.project",null],
-["Spellchecking\n\tdictionaries","chapter.instant.start.guide.html#introduction.install.spellchecker.dictionary",null],
-["Manage your\n    segments","chapter.instant.start.guide.html#introduction.manage.your.segments",null],
-["Make it look good!","chapter.instant.start.guide.html#introduction.make.it.look.good",null],
-["Translate\n    your files","chapter.instant.start.guide.html#introduction.translate.the.segments.one.by.one",null],
-["Manage your tags","chapter.instant.start.guide.html#introduction.manage.your.tags",null],
-["Review your\n    translation","chapter.instant.start.guide.html#introduction.review.the.translation",null],
-["Create the\n    translated files","chapter.instant.start.guide.html#introduction.generate.the.translated.file",null],
-["Manage your projects","chapter.instant.start.guide.html#introduction.one.more.thing",null],
-["A shortcut based\n    workflow","chapter.instant.start.guide.html#app.shortcuts.streamline.workflow",null]
+["安装和运行 OmegaT\n                     ","chapter.installing.and.running.html",[
+["Windows 用户","chapter.installing.and.running.html#d0e17",null],
+["Linux（Intel）用户","chapter.installing.and.running.html#Linux.Intel.users",null],
+["macOS 用户","chapter.installing.and.running.html#MAC.OSX.users",null],
+["其它系统","chapter.installing.and.running.html#other.systems",null],
+["拖放","chapter.installing.and.running.html#drag.and.drop",null],
+["使用 Java Web Start","chapter.installing.and.running.html#using.Java.Web.Start",null],
+["从命令行启动 OmegaT","chapter.installing.and.running.html#commandline.launching",null],
+["从源代码构建 OmegaT\n                           ","chapter.installing.and.running.html#building.OmegaT.from.source",null]
 ]],
-["指南","chapter.how.to.html",[
-["Troubleshoot issues","chapter.how.to.html#how.to.restore.your.data",null],
-["Use translation memories","chapter.how.to.html#how.to.use.tm",null],
-["Support other formats","chapter.how.to.html#how.to.translate.other.files",null],
-["Set up a team project","chapter.how.to.html#how.to.setup.team.project",null],
-["Use a team project","chapter.how.to.html#how.to.use.team.project",null],
-["安装 OmegaT","chapter.how.to.html#how.to.installing.omegat",null],
-["Run OmegaT","chapter.how.to.html#how.to.running.omegat",null]
+["菜单","menus.html",[
+["项目","menus.html#menus.project",null],
+["编辑","menus.html#menus.edit",null],
+["转到","menus.html#menus.goto",null],
+["视图","menus.html#menus.view",null],
+["工具","menus.html#menus.tools",null],
+["选项","menus.html#menus.options",null],
+["帮助","menus.html#menus.help",null]
 ]],
-["窗格","chapter.panes.html",[
-["Default layout","chapter.panes.html#panes.default.layout",null],
-["原则","chapter.panes.html#panes.principles",null],
-["\n                              编辑器\n                           ","chapter.panes.html#panes.editor",null],
-["\n                              模糊匹配\n                           ","chapter.panes.html#panes.fuzzy.matches",null],
-["\n                              词汇表\n                           ","chapter.panes.html#panes.glossary",null],
-["\n                              词典\n                           ","chapter.panes.html#panes.dictionary",null],
-["\n                              机器翻译\n                           ","chapter.panes.html#panes.machinetranslation",null],
-["\n                              多重译文\n                           ","chapter.panes.html#panes.multipletranslations",null],
-["\n                              记事本\n                           ","chapter.panes.html#panes.notes",null],
-["\n                              注释\n                           ","chapter.panes.html#panes.comments",null],
-["\n                              Segment\n    properties\n                           ","chapter.panes.html#panes.segment.properties",null],
-["\n                              状态栏\n                           ","chapter.panes.html#panes.statusbar",null]
+["窗口与对话框","windows.and.dialogs.html",[
+["项目属性","windows.and.dialogs.html#dialogs.projectproperties",null],
+["项目文件","windows.and.dialogs.html#windows.projectfiles",null],
+["文本查找","windows.and.dialogs.html#windows.textsearch",null],
+["文本替换","windows.and.dialogs.html#windows.textreplace",null],
+["对齐器","windows.and.dialogs.html#windows.aligner",null],
+["脚本","windows.and.dialogs.html#windows.scripts",null],
+["通用首选项","windows.and.dialogs.html#dialogs.preferences",null]
 ]],
-["菜单","chapter.menus.html",[
-["\n                              项目\n                           ","chapter.menus.html#menus.project",null],
-["\n                              编辑\n                           ","chapter.menus.html#menus.edit",null],
-["\n                              转到\n                           ","chapter.menus.html#menus.goto",null],
-["\n                              视图\n                           ","chapter.menus.html#menus.view",null],
-["\n                              工具\n                           ","chapter.menus.html#menus.tools",null],
-["\n                              选项\n                           ","chapter.menus.html#menus.options",null],
-["\n                              帮助\n                           ","chapter.menus.html#menus.help",null]
+["窗格","panes.html",[
+["编辑器","panes.html#editor.pane",null],
+["模糊匹配","panes.html#d0e4364",null],
+["词汇表","panes.html#d0e4412",null],
+["词典","panes.html#d0e4425",null],
+["机器翻译","panes.html#d0e4433",null],
+["多重译文","panes.html#d0e4441",null],
+["备注","panes.html#d0e4452",null],
+["注释","panes.html#d0e4463",null],
+["状态栏","panes.html#d0e4468",null]
 ]],
-["Windows and Dialogs","chapter.windows.and.dialogs.html",[
-["\n                              项目属性\n                           ","chapter.windows.and.dialogs.html#dialogs.project.properties",null],
-["\n                              Source\n  Files\n                           ","chapter.windows.and.dialogs.html#windows.source.files.list",null],
-["\n                              文本搜索\n                           ","chapter.windows.and.dialogs.html#windows.text.search",null],
-["\n                              文本替换\n                           ","chapter.windows.and.dialogs.html#windows.text.replace",null],
-["\n                              对齐文件\n                           ","chapter.windows.and.dialogs.html#windows.aligner",null],
-["\n                              脚本\n                           ","chapter.windows.and.dialogs.html#windows.scripts",null]
+["项目文件夹","project.folder.html",[
+["source","project.folder.html#d0e4508",null],
+["target","project.folder.html#d0e4513",null],
+["tm","project.folder.html#d0e4536",null],
+["dictionary","project.folder.html#d0e4647",null],
+["glossary","project.folder.html#d0e4655",null],
+["omegat","project.folder.html#folder.omegat",null],
+["omegat.project（文件）","project.folder.html#d0e4723",null],
+[".repositories","project.folder.html#d0e4731",null]
 ]],
-["\n                        首选项\n                     ","chapter.dialogs.preferences.html",[
-["\n                              通用\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.general",null],
-["\n                              机器翻译\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.mt",null],
-["\n                              词汇表\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.glossary",null],
-["\n                              词典\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.dictionary",null],
-["\n                              外观\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.appearance",null],
-["\n                              全局文件筛选器\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.file.filters",null],
-["\n                              全局分割规则\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.segmentation.setup",null],
-["\n                              自动完成\n                           ","chapter.dialogs.preferences.html#dialog.preferences.auto.completion",null],
-["\n                              拼写检查器\n                           ","chapter.dialogs.preferences.html#dialog.preferences.spellchecker",null],
-["\n                              LanguageTool\n                           ","chapter.dialogs.preferences.html#dialog.preferences.languagetool.plugin",null],
-["\n                              全局外部搜索\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.external.searches",null],
-["\n                              编辑器\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.editor",null],
-["\n                              标签处理\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.tag.processing",null],
-["\n                              团队\n                           ","chapter.dialogs.preferences.html#dialog.preferences.team",null],
-["\n                              翻译记忆库匹配\n                           ","chapter.dialogs.preferences.html#dialog.preferences.tm.matches",null],
-["\n                              视图\n                           ","chapter.dialogs.preferences.html#dialog.preferences.view",null],
-["\n                              保存和输出\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.saving.and.output",null],
-["\n                              代理服务器登录\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.proxy.login",null],
-["\n                              安全存储\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.secure.store",null],
-["\n                              插件\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.plugins",null],
-["\n                              更新\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.updates",null]
+["指南","howtos.html",[
+["建立团队项目","howtos.html#howto.setupteamproject",null],
+["使用团队项目","howtos.html#howto.useteamproject",null],
+["重用翻译记忆库","howtos.html#howto.reusetm",null],
+["防止数据丢失","howtos.html#howto.preventdataloss",null],
+["翻译 PDF 文件","howtos.html#howto.translatepdf",null],
+["驾驭从右向左的语言","howtos.html#howto.managerighttoleft",null]
 ]],
-["Project Folder","chapter.project.folder.html",[
-["Default structure","chapter.project.folder.html#d0e10406",null],
-["Minimal contents","chapter.project.folder.html#d0e10484",null],
-["source","chapter.project.folder.html#project.folder.source",null],
-["target","chapter.project.folder.html#project.folder.target",null],
-["tm","chapter.project.folder.html#project.folder.tm",null],
-["exported tms folder","chapter.project.folder.html#project.folder.exported.tm",null],
-["dictionary","chapter.project.folder.html#project.folder.dictionary",null],
-["glossary","chapter.project.folder.html#project.folder.glossary",null],
-["omegat","chapter.project.folder.html#project.folder.omegat.folder",null],
-[".repositories","chapter.project.folder.html#project.folder.repositories",null]
+["Appendices","appendix.dictionaries.html",[
+["A. 词典","appendix.dictionaries.html",null],
+["B. 词汇表","appendix.glossaries.html",[
+["默认词汇表","appendix.glossaries.html#d0e5631",null],
+["用法","appendix.glossaries.html#d0e5655",null],
+["文件格式","appendix.glossaries.html#d0e5705",null],
+["常见词汇表问题","appendix.glossaries.html#d0e5821",null]
 ]],
-["附录","chapter.appendices.html",[
-["文件筛选器","chapter.appendices.html#file.filters",null],
-["分割规则","chapter.appendices.html#app.segmentation",null],
-["正则表达式","chapter.appendices.html#app.regex",null],
-["词汇表","chapter.appendices.html#app.glossaries",null],
-["定向格式符","chapter.appendices.html#app.bidi",null],
-["后处理命令","chapter.appendices.html#post.processing.commands",null],
-["OmegaT Shortcuts","chapter.appendices.html#app.shortcuts",null],
-["配置文件夹","chapter.appendices.html#configuration.folder",null],
-["应用程序文件夹","chapter.appendices.html#application.folder",null]
+["C. 拼写检查","appendix.spellchecker.html",[
+["安装拼写词典","appendix.spellchecker.html#d0e5871",null],
+["使用拼写词典","appendix.spellchecker.html#d0e5920",null],
+["提示","appendix.spellchecker.html#hints",null]
+]],
+["D. 正则表达式","appendix.regexp.html",[
+["正则表达式工具和使用实例","appendix.regexp.html#regex.tools.and.examples.of.use",null]
+]],
+["E. 快捷键自定义","appendix.shortcut.custom.html",[
+["快捷键自定义","appendix.shortcut.custom.html#ch04.shortcuts.customization",null],
+["项目菜单","appendix.shortcut.custom.html#ch04.shortcuts.ProjectMenu",null],
+["编辑菜单","appendix.shortcut.custom.html#ch04.shortcuts.EditMenu",null],
+["转到菜单","appendix.shortcut.custom.html#ch04.shortcuts.GoToMenu",null],
+["视图菜单","appendix.shortcut.custom.html#ch04.shortcuts.ViewMenu",null],
+["工具菜单","appendix.shortcut.custom.html#ch04.shortcuts.ToolsMenu",null],
+["选项菜单","appendix.shortcut.custom.html#ch04.shortcuts.OptionsMenu",null],
+["帮助菜单","appendix.shortcut.custom.html#ch04.shortcuts.HelpMenu",null]
+]]
 ]]];
 var toc_initiallyCollapsed = false;
 var messages = [
@@ -890,7 +874,7 @@ message = translation[index];
 }
 return message;
 }
-var storageId = "-1ht3z320es8d-130j734to91p9";
+var storageId = "ahbnep3t73tc-1rs94u58hnsfr";
 function storageSet(key, value) {
 window.sessionStorage.setItem(key + storageId, String(value));
 }

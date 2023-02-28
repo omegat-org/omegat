@@ -204,12 +204,11 @@
       </varlistentry>
 
       <varlistentry>
-        <term>Hide Tags</term>
+        <term>Remove Tags</term>
         <listitem>
           <para>The aligner includes tags in the segments by default. Uncheck
-          the check box to apply the <link
-          endterm="dialogs.project.properties.hide.tags.title"
-          linkend="dialogs.project.properties.hide.tags"/> option.</para>
+          the check box to remove all tags from the alignment and the resulting
+	  TMX.</para>
         </listitem>
       </varlistentry>
 

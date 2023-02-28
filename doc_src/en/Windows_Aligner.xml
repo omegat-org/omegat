@@ -207,7 +207,7 @@
         <term>Remove Tags</term>
         <listitem>
           <para>The aligner includes tags in the segments by default. Uncheck
-          the check box to remove all tags from the alignment and from the resulting
+          the check box to remove all tags from the alignment and the resulting
 	  TMX.</para>
         </listitem>
       </varlistentry>

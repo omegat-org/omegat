@@ -505,20 +505,23 @@ public final class ProjectUICommands {
     private static void projectOpenImpl(File projectRootFolder) {
         IMainWindow mainWindow = Core.getMainWindow();
         try {
-            File newProjectFile = null;
             // open LOCAL copy of "omegat.project"
             ProjectProperties props = checkProjectProperties(projectRootFolder);
+            // When failed to load, we try with backup file
             if (props == null) {
-                // try with backup file
-                newProjectFile = FileUtil
+                File backupProjectFile = FileUtil
                         .getRecentBackup(new File(projectRootFolder.getAbsoluteFile(), OConsts.FILE_PROJECT));
-                if (newProjectFile == null) {
+                if (backupProjectFile == null) {
                     throw new KnownException("PROJECT_INVALID");
                 }
                 props = ProjectFileStorage.loadPropertiesFile(projectRootFolder.getAbsoluteFile(),
-                        newProjectFile);
+                        backupProjectFile);
             }
             boolean needToSaveProperties = false;
+            // newProjectFile represent a `omegat.project.NEW` file.
+            // It is created when modification of
+            // properties in remote.
+            File newProjectFile = null;
             if (props.hasRepositories()) {
                 /* <p>
                  * Every time we reopen the project, we copy omegat.project from
@@ -603,49 +606,52 @@ public final class ProjectUICommands {
                         throw e;
                     }
                 }
-                // team project - non-exist directories could be created from
-                // repo
-                props.autocreateDirectories();
             } else {
-                // not a team project - ask for non-exist directories
+                // not a team project
                 File projectFile = new File(projectRootFolder, OConsts.FILE_PROJECT);
-                while (!props.isProjectValid()) {
-                    // something wrong with the project - display open dialog to
-                    // fix it
-                    ProjectPropertiesDialog prj = new ProjectPropertiesDialog(
-                            Core.getMainWindow().getApplicationFrame(), props, projectFile.getAbsolutePath(),
-                            ProjectPropertiesDialog.Mode.RESOLVE_DIRS);
-                    prj.setVisible(true);
-                    props = prj.getResult();
-                    prj.dispose();
-                    if (props == null) {
-                        // user clicks on 'Cancel'
-                        return;
-                    }
+                if (!props.isProjectValid()) {
+                    do {
+                        // something wrong with the project.
+                        // We display open dialog to fix it.
+                        ProjectPropertiesDialog prj = new ProjectPropertiesDialog(
+                                Core.getMainWindow().getApplicationFrame(), props, projectFile.getAbsolutePath(),
+                                ProjectPropertiesDialog.Mode.RESOLVE_DIRS);
+                        prj.setVisible(true);
+                        props = prj.getResult();
+                        prj.dispose();
+                        if (props == null) {
+                            // user clicks on 'Cancel'
+                            return;
+                        }
+                    } while (!props.isProjectValid());
+                    needToSaveProperties = true;
                 }
-                needToSaveProperties = true;
             }
+            // non-exist directories could be created
+            props.autocreateDirectories();
+            // Critical section, create backup and save
+            // properties.
             final ProjectProperties propsP = props;
-            final File finalNewProjectFile = newProjectFile;
             final boolean finalNeedToSaveProperties = needToSaveProperties;
+            final boolean onlineMode = true;
             Core.executeExclusively(true, () -> {
                 // loading modified new project property
-                boolean succeeded = ProjectFactory.loadProject(propsP, true);
+                boolean succeeded = ProjectFactory.loadProject(propsP, onlineMode);
+                File projectFile = new File(projectRootFolder, OConsts.FILE_PROJECT);
                 // make backup and save omegat.project file when required
-                if (finalNewProjectFile != null) {
-                    if (succeeded && finalNeedToSaveProperties) {
-                        File projectFile = new File(projectRootFolder, OConsts.FILE_PROJECT);
-                        File backup = FileUtil.backupFile(projectFile);
-                        FileUtil.removeOldBackups(projectFile, OConsts.MAX_BACKUPS);
-                        Log.logWarningRB("PP_REMOTE_PROJECT_CONTENT_OVERRIDES_THE_CURRENT_PROJECT",
-                                backup.getName());
-                    }
-                    Files.deleteIfExists(finalNewProjectFile.toPath());
-                }
                 if (succeeded && finalNeedToSaveProperties) {
+                    File backup = FileUtil.backupFile(projectFile);
+                    FileUtil.removeOldBackups(projectFile, OConsts.MAX_BACKUPS);
+                    Log.logWarningRB("PP_REMOTE_PROJECT_CONTENT_OVERRIDES_THE_CURRENT_PROJECT",
+                            backup.getName());
                     Core.getProject().saveProjectProperties();
+                } else if (succeeded && FileUtil.getRecentBackup(projectFile) == null) {
+                    FileUtil.backupFile(projectFile);
                 }
             });
+            if (newProjectFile != null) {
+                Files.deleteIfExists(newProjectFile.toPath());
+            }
             RecentProjects.add(projectRootFolder.getAbsolutePath());
         } catch (Exception ex) {
             Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
@@ -654,7 +660,7 @@ public final class ProjectUICommands {
     }
 
     /**
-     * Detect whether local omegat.project is identical with remote one.
+     * Detect whether local `omegat.project` is identical * with remote one.
      * 
      * @param that
      *            remote omegat.project.

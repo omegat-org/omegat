@@ -91,7 +91,7 @@ public final class FileUtil {
                             && f.getName().endsWith(OConsts.BACKUP_EXTENSION));
         } catch (Exception ignored) {
         }
-        if (bakFiles == null) {
+        if (bakFiles == null || bakFiles.length == 0) {
             return null;
         }
         Arrays.sort(bakFiles, (f1, f2) -> Long.compare(f2.lastModified(), f1.lastModified()));

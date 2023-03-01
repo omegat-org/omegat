@@ -549,11 +549,6 @@ var toc_entries = [
 ["Ιδιότητες έργου","chapter.project.properties.html",[
 ["Διάλογος ιδιοτήτων","chapter.project.properties.html#properties.dialog",null]
 ]],
-["Φίλτρα αρχείων","chapter.file.filters.html",[
-["Διάλογος φίλτρων αρχείου","chapter.file.filters.html#file.filters.dialog",null],
-["Επιλογές φίλτρου","chapter.file.filters.html#filters.options",null],
-["Επεξεργασία διαλόγου φίλτρου","chapter.file.filters.html#edit.filter.dialog",null]
-]],
 ["\n                        OmegaT Αρχεία και Κατάλογοι","chapter.files.and.directories.html",[
 ["Translation project files","chapter.files.and.directories.html#translation.project.files",null],
 ["User settings files","chapter.files.and.directories.html#user.files",null],
@@ -572,7 +567,7 @@ var toc_entries = [
 ["Μεταφραστικές μνήμες","chapter.translation.memories.html",[
 ["Μεταφραστικές μνήμες στο OmegaT","chapter.translation.memories.html#OmegaT.and.tmx.files",null],
 ["Επανάχρηση μεταφραστικών μνημών","chapter.translation.memories.html#using.translation.memories.from.previous.projects",null],
-["Πηγές με υπάρχουσες μεταφράσεις","chapter.translation.memories.html#d0e6520",null],
+["Πηγές με υπάρχουσες μεταφράσεις","chapter.translation.memories.html#d0e6019",null],
 ["Ψευδο-ματαφρασμένη μνήμη","chapter.translation.memories.html#pseudo.translated.memory",null],
 ["Γίνεται αναβάθμιση μεταφραστικών μνημών","chapter.translation.memories.html#upgrading.translation.memories",null]
 ]],
@@ -592,56 +587,55 @@ var toc_entries = [
 ["Εργαλεία Regex και Παραδείγματα χρήσης","chapter.regexp.html#regex.tools.and.examples.of.use",null]
 ]],
 ["Λεξικά","chapter.dictionaries.html",[
-["Πως να μεταφορτωνετε και να εγκαθιστάτε λεξικά","chapter.dictionaries.html#d0e7596",null],
-["Προβλήματα με τα λεξικά","chapter.dictionaries.html#d0e7697",null]
+["Πως να μεταφορτωνετε και να εγκαθιστάτε λεξικά","chapter.dictionaries.html#d0e7095",null],
+["Προβλήματα με τα λεξικά","chapter.dictionaries.html#d0e7196",null]
 ]],
 ["Γλωσσάρια","chapter.glossaries.html",[
-["Χρήση","chapter.glossaries.html#d0e7765",null],
-["Μορφή αρχείου","chapter.glossaries.html#d0e7820",null],
-["Πως να δημιουργείτε γλωσσάρια","chapter.glossaries.html#d0e7859",null],
-["Χρήση του Trados MultiTerm","chapter.glossaries.html#d0e7904",null],
-["Συνηθισμένα προβλήματα με τα γλωσσάρια","chapter.glossaries.html#d0e7920",null]
+["Χρήση","chapter.glossaries.html#d0e7264",null],
+["Μορφή αρχείου","chapter.glossaries.html#d0e7319",null],
+["Πως να δημιουργείτε γλωσσάρια","chapter.glossaries.html#d0e7358",null],
+["Χρήση του Trados MultiTerm","chapter.glossaries.html#d0e7403",null],
+["Συνηθισμένα προβλήματα με τα γλωσσάρια","chapter.glossaries.html#d0e7419",null]
 ]],
 ["Μηχανική Μετάφραση","chapter.machine.translate.html",[
-["Εισαγωγή","chapter.machine.translate.html#d0e7976",null],
+["Εισαγωγή","chapter.machine.translate.html#d0e7475",null],
 ["Google Translate","chapter.machine.translate.html#introduction",null],
-["\n                              OmegaT χρήστες και το Google Translate","chapter.machine.translate.html#d0e8017",null],
-["Belazar","chapter.machine.translate.html#d0e8069",null],
-["Apertium","chapter.machine.translate.html#d0e8082",null],
+["\n                              OmegaT χρήστες και το Google Translate","chapter.machine.translate.html#d0e7516",null],
+["Belazar","chapter.machine.translate.html#d0e7568",null],
+["Apertium","chapter.machine.translate.html#d0e7581",null],
 ["Μηχανική Μετάφραση - Επίλυση προβλημάτων","chapter.machine.translate.html#Google.Translate.troubleshooting",null]
 ]],
 ["Ορθογραφικός διορθωτής","chapter.spellchecker.html",[
-["Εγκατάσταση ορθογραφικών λεξικών","chapter.spellchecker.html#d0e8159",null],
-["Χρήση ορθογραφικών λεξικών","chapter.spellchecker.html#d0e8219",null],
+["Εγκατάσταση ορθογραφικών λεξικών","chapter.spellchecker.html#d0e7658",null],
+["Χρήση ορθογραφικών λεξικών","chapter.spellchecker.html#d0e7718",null],
 ["Συμβουλές","chapter.spellchecker.html#hints",null]
 ]],
 ["Διάφορα θέματα","chapter.misc.html",[
 ["OmegaT Τρόπος κονσόλας","chapter.misc.html#omegat.misc.console.mode",null],
-["Πρόγραμμα αυτόματης στοίχισης ιδιοτήτων Java","chapter.misc.html#d0e8469",null],
+["Πρόγραμμα αυτόματης στοίχισης ιδιοτήτων Java","chapter.misc.html#d0e7968",null],
 ["Ρυθμίσεις γραμματοσειρών","chapter.misc.html#font.settings",null],
 ["Πρόληψη απώλειας δεδομένων","chapter.misc.html#preventing.data.loss",null]
 ]],
-["Appendices","appendix.languages.html",[
 ["A. Γλώσσες - Κατάλογος με κωδικούς κατά ISO 639\n  \n  \n  ","appendix.languages.html",null],
 ["B. Συντμεύσεις πληκτρολογίου στο πρόγραμμα επεξεργασίας (editor)","appendix.keyboard.html",null],
 ["C. Ομαδικά έργα του OmegaT","appendix.TeamProjects.html",[
-["Έλεγχος έκδοσης (Version control) - Εισαγωγή","appendix.TeamProjects.html#d0e10183",null],
-["Διαμοιρασμός ενός έργου με τη χρήση SVN","appendix.TeamProjects.html#d0e10254",null],
-["Χρήση Ομαδικού έργου στο OmegaT","appendix.TeamProjects.html#d0e10472",null]
+["Έλεγχος έκδοσης (Version control) - Εισαγωγή","appendix.TeamProjects.html#d0e9682",null],
+["Διαμοιρασμός ενός έργου με τη χρήση SVN","appendix.TeamProjects.html#d0e9753",null],
+["Χρήση Ομαδικού έργου στο OmegaT","appendix.TeamProjects.html#d0e9971",null]
 ]],
 ["D. Πρόσθετο Σύστημα δημιουργίας λεκτικών μονάδων (Tokenizer plugin)","appendix.TokenizerPlugin.inOmegaT.html",[
-["Εισαγωγή","appendix.TokenizerPlugin.inOmegaT.html#d0e10502",null],
-["Εγκατάσταση και χρήση από γραμμή εντολών","appendix.TokenizerPlugin.inOmegaT.html#d0e10531",null],
-["Ιδιαιτερότητες του Mac OS X","appendix.TokenizerPlugin.inOmegaT.html#d0e10548",null],
-["Troubleshooting","appendix.TokenizerPlugin.inOmegaT.html#d0e10562",null]
+["Εισαγωγή","appendix.TokenizerPlugin.inOmegaT.html#d0e10001",null],
+["Εγκατάσταση και χρήση από γραμμή εντολών","appendix.TokenizerPlugin.inOmegaT.html#d0e10030",null],
+["Ιδιαιτερότητες του Mac OS X","appendix.TokenizerPlugin.inOmegaT.html#d0e10047",null],
+["Troubleshooting","appendix.TokenizerPlugin.inOmegaT.html#d0e10061",null]
 ]],
 ["E. Πρόσθετο Εργαλείο γλώσσας","appendix.LanguageToolPlugin.inOmegaT.html",[
-["Εισαγωγή","appendix.LanguageToolPlugin.inOmegaT.html#d0e10588",null],
-["Εγκατάσταση και Χρήση","appendix.LanguageToolPlugin.inOmegaT.html#d0e10607",null]
+["Εισαγωγή","appendix.LanguageToolPlugin.inOmegaT.html#d0e10087",null],
+["Εγκατάσταση και Χρήση","appendix.LanguageToolPlugin.inOmegaT.html#d0e10106",null]
 ]],
 ["F. Πρόσθετο για Δημιουργία σεναρίων","appendix.ScriptingPlugin.inOmegaT.html",[
-["Εισαγωγή","appendix.ScriptingPlugin.inOmegaT.html#d0e10634",null],
-["Εγκατάσταση και Χρήση","appendix.ScriptingPlugin.inOmegaT.html#d0e10639",null]
+["Εισαγωγή","appendix.ScriptingPlugin.inOmegaT.html#d0e10133",null],
+["Εγκατάσταση και Χρήση","appendix.ScriptingPlugin.inOmegaT.html#d0e10138",null]
 ]],
 ["G. Το OmegaT στο διαδίτκυο","appendix.website.html",[
 ["Ιστότοποι του OmegaT και  το OmegaT στο έργο SourceForge","appendix.website.html#OmegaT.sites.and.OmegaT.SourceForge.project",null],
@@ -663,8 +657,7 @@ var toc_entries = [
 ["Για την εφαρμογή","appendix.legal.notices.html#legal.ntices.for.application",null]
 ]],
 ["J. Αναγνώριση συνεισφορών","appendix.acknowledgements.html",[
-["Σας ευχαριστώ όλους!","appendix.acknowledgements.html#d0e11790",null]
-]]
+["Σας ευχαριστώ όλους!","appendix.acknowledgements.html#d0e11289",null]
 ]],
 ["Ευρετήριο","ix01.html",null]];
 var toc_initiallyCollapsed = false;
@@ -940,7 +933,7 @@ message = translation[index];
 }
 return message;
 }
-var storageId = "-yn3yh3384p29-14mu0qohzdbkj";
+var storageId = "-1rw724lv4l4j0-1suwd948pnfjd";
 function storageSet(key, value) {
 window.sessionStorage.setItem(key + storageId, String(value));
 }

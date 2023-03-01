@@ -574,8 +574,10 @@ var toc_entries = [
 ["Een PDF-bestand vertalen","howtos.html#howto.translatepdf",null],
 ["Van rechts naar links talen beheren","howtos.html#howto.managerighttoleft",null]
 ]],
-["Appendices","appendix.dictionaries.html",[
-["A. Woordenboeken","appendix.dictionaries.html",null],
+["A. Woordenboeken","appendix.dictionaries.html",[
+["Hoe woordenboeken te downloaden en te installeren","appendix.dictionaries.html#d0e5513",null],
+["Problemen met woordenboeken","appendix.dictionaries.html#d0e5582",null]
+]],
 ["B. Woordenlijsten","appendix.glossaries.html",[
 ["Standaard woordenlijst","appendix.glossaries.html#d0e5617",null],
 ["Gebruik","appendix.glossaries.html#d0e5641",null],
@@ -599,7 +601,6 @@ var toc_entries = [
 ["menu Extra","appendix.shortcut.custom.html#ch04.shortcuts.ToolsMenu",null],
 ["menu Opties","appendix.shortcut.custom.html#ch04.shortcuts.OptionsMenu",null],
 ["menu Help","appendix.shortcut.custom.html#ch04.shortcuts.HelpMenu",null]
-]]
 ]]];
 var toc_initiallyCollapsed = false;
 var messages = [
@@ -874,7 +875,7 @@ message = translation[index];
 }
 return message;
 }
-var storageId = "-1wxx11gp7z6hi-11ctmee8od6a6";
+var storageId = "uo4wr1ohk7kn-1m0qig2rzujy0";
 function storageSet(key, value) {
 window.sessionStorage.setItem(key + storageId, String(value));
 }

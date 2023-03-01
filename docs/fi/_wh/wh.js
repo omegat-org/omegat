@@ -574,8 +574,10 @@ var toc_entries = [
 ["PDF-tiedoston kääntäminen","howtos.html#howto.translatepdf",null],
 ["Oikealta vasemmalle luettavien kielien hallinta","howtos.html#howto.managerighttoleft",null]
 ]],
-["Appendices","appendix.dictionaries.html",[
-["A. Sanakirjat","appendix.dictionaries.html",null],
+["A. Sanakirjat","appendix.dictionaries.html",[
+["Kuinka sanakirjoja ladataan ja asennetaan","appendix.dictionaries.html#d0e5514",null],
+["Ongelmia sanakirjojen käytössä","appendix.dictionaries.html#d0e5582",null]
+]],
 ["B. Sanastot","appendix.glossaries.html",[
 ["Oletussanasto","appendix.glossaries.html#d0e5617",null],
 ["Käyttö","appendix.glossaries.html#d0e5641",null],
@@ -599,7 +601,6 @@ var toc_entries = [
 ["Työkalut-valikko","appendix.shortcut.custom.html#ch04.shortcuts.ToolsMenu",null],
 ["Valinnat-valikko","appendix.shortcut.custom.html#ch04.shortcuts.OptionsMenu",null],
 ["Ohjeet-valikko","appendix.shortcut.custom.html#ch04.shortcuts.HelpMenu",null]
-]]
 ]]];
 var toc_initiallyCollapsed = false;
 var messages = [
@@ -874,7 +875,7 @@ message = translation[index];
 }
 return message;
 }
-var storageId = "-djleip6fwulh-1beje4m0z26cl";
+var storageId = "7d2oa1xyikox-1iovprlm0r8o9";
 function storageSet(key, value) {
 window.sessionStorage.setItem(key + storageId, String(value));
 }

@@ -574,8 +574,10 @@ var toc_entries = [
 ["翻译 PDF 文件","howtos.html#howto.translatepdf",null],
 ["驾驭从右向左的语言","howtos.html#howto.managerighttoleft",null]
 ]],
-["Appendices","appendix.dictionaries.html",[
-["A. 词典","appendix.dictionaries.html",null],
+["A. 词典","appendix.dictionaries.html",[
+["如何下载并安装词典","appendix.dictionaries.html#d0e5529",null],
+["与词典相关的问题","appendix.dictionaries.html#d0e5596",null]
+]],
 ["B. 词汇表","appendix.glossaries.html",[
 ["默认词汇表","appendix.glossaries.html#d0e5631",null],
 ["用法","appendix.glossaries.html#d0e5655",null],
@@ -599,7 +601,6 @@ var toc_entries = [
 ["工具菜单","appendix.shortcut.custom.html#ch04.shortcuts.ToolsMenu",null],
 ["选项菜单","appendix.shortcut.custom.html#ch04.shortcuts.OptionsMenu",null],
 ["帮助菜单","appendix.shortcut.custom.html#ch04.shortcuts.HelpMenu",null]
-]]
 ]]];
 var toc_initiallyCollapsed = false;
 var messages = [
@@ -874,7 +875,7 @@ message = translation[index];
 }
 return message;
 }
-var storageId = "ahbnep3t73tc-1rs94u58hnsfr";
+var storageId = "-73ra70js1ons-1d2gdu6ztfywm";
 function storageSet(key, value) {
 window.sessionStorage.setItem(key + storageId, String(value));
 }

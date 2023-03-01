@@ -574,8 +574,10 @@ var toc_entries = [
 ["Переклад файлів PDF","howtos.html#howto.translatepdf",null],
 ["Підтримка мов з письмом справа наліво","howtos.html#howto.managerighttoleft",null]
 ]],
-["Appendices","appendix.dictionaries.html",[
-["A. Словники","appendix.dictionaries.html",null],
+["A. Словники","appendix.dictionaries.html",[
+["Як завантажити та встановити словники","appendix.dictionaries.html#d0e5525",null],
+["Проблеми зі словниками","appendix.dictionaries.html#d0e5594",null]
+]],
 ["B. Глосарії","appendix.glossaries.html",[
 ["Типовий глосарій","appendix.glossaries.html#d0e5631",null],
 ["Використання","appendix.glossaries.html#d0e5655",null],
@@ -599,7 +601,6 @@ var toc_entries = [
 ["Меню «Інструменти»","appendix.shortcut.custom.html#ch04.shortcuts.ToolsMenu",null],
 ["Меню «Налаштування»","appendix.shortcut.custom.html#ch04.shortcuts.OptionsMenu",null],
 ["Меню «Довідка»","appendix.shortcut.custom.html#ch04.shortcuts.HelpMenu",null]
-]]
 ]]];
 var toc_initiallyCollapsed = false;
 var messages = [
@@ -874,7 +875,7 @@ message = translation[index];
 }
 return message;
 }
-var storageId = "-o1l1lq5ar6in-1hfeliyuia928";
+var storageId = "-15sbt94dm8h93-1rvgccmm3i46n";
 function storageSet(key, value) {
 window.sessionStorage.setItem(key + storageId, String(value));
 }

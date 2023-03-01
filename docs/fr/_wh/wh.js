@@ -574,8 +574,10 @@ var toc_entries = [
 ["Traduire un fichier PDF","howtos.html#howto.translatepdf",null],
 ["Gestion des langues s\'écrivant de droite à gauche","howtos.html#howto.managerighttoleft",null]
 ]],
-["Annexes","appendix.dictionaries.html",[
-["A. Dictionnaires","appendix.dictionaries.html",null],
+["A. Dictionnaires","appendix.dictionaries.html",[
+["Comment télécharger et installer des dictionnaires","appendix.dictionaries.html#d0e5521",null],
+["Problèmes rencontrés concernant les dictionnaires","appendix.dictionaries.html#d0e5590",null]
+]],
 ["B. Glossaires","appendix.glossaries.html",[
 ["Glossaire par défaut","appendix.glossaries.html#d0e5625",null],
 ["Utilisation","appendix.glossaries.html#d0e5649",null],
@@ -599,7 +601,6 @@ var toc_entries = [
 ["Menu Outils","appendix.shortcut.custom.html#ch04.shortcuts.ToolsMenu",null],
 ["Menu Options","appendix.shortcut.custom.html#ch04.shortcuts.OptionsMenu",null],
 ["Menu Aide","appendix.shortcut.custom.html#ch04.shortcuts.HelpMenu",null]
-]]
 ]]];
 var toc_initiallyCollapsed = false;
 var messages = [
@@ -874,7 +875,7 @@ message = translation[index];
 }
 return message;
 }
-var storageId = "-uindkso1cm03-10oqbua91ux9x";
+var storageId = "1t839hf3m8uy8-zrmf96no8b9b";
 function storageSet(key, value) {
 window.sessionStorage.setItem(key + storageId, String(value));
 }

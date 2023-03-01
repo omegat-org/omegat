@@ -34,10 +34,13 @@ package org.omegat.gui.main;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Frame;
 import java.awt.HeadlessException;
+import java.awt.Toolkit;
 import java.awt.Window;
+import java.awt.datatransfer.StringSelection;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
@@ -45,15 +48,22 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 import javax.swing.WindowConstants;
 import javax.swing.text.JTextComponent;
 
-import org.apache.commons.lang.WordUtils;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.DataUtils;
@@ -462,15 +472,38 @@ public class MainWindow extends JFrame implements IMainWindow {
             }
 
             statusLabel.setText(msg);
-            StringBuilder fulltext = new StringBuilder(msg);
+
+            JPanel pane = new JPanel();
+            pane.setLayout(new BoxLayout(pane, BoxLayout.PAGE_AXIS));
+            pane.setSize(new Dimension(900, 400));
+
+            JLabel jlabel = new JLabel(msg);
+            jlabel.setAlignmentX(LEFT_ALIGNMENT);
+            pane.add(jlabel);
+
             if (ex != null) {
-                fulltext.append("\n");
-                for (String s : ex.getLocalizedMessage().split("\\R")) {
-                    fulltext.append(WordUtils.wrap(s, 150, "\n    ", true));
-                    fulltext.append("\n");
-                }
+                pane.add(Box.createRigidArea(new Dimension(0, 5)));
+                JTextArea message = new JTextArea();
+                message.setText(ex.getLocalizedMessage());
+                message.setLineWrap(true);
+                message.setEditable(false);
+                JScrollPane jScrollPane = new JScrollPane(message,
+                        ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
+                        ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+                jScrollPane.setAlignmentX(LEFT_ALIGNMENT);
+                jScrollPane.setPreferredSize(new Dimension(800, 200));
+                jScrollPane.getVerticalScrollBar().setValue(0);
+                pane.add(jScrollPane);
+                pane.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+                JButton jbutton = new JButton(OStrings.getString("TF_ERROR_COPY_CLIPBOARD"));
+                // Copy to clipboard action
+                jbutton.addActionListener(l -> Toolkit.getDefaultToolkit().getSystemClipboard()
+                        .setContents(new StringSelection(ex.getLocalizedMessage()), null));
+                jbutton.setAlignmentX(LEFT_ALIGNMENT);
+                pane.add(jbutton);
             }
-            JOptionPane.showMessageDialog(MainWindow.this, fulltext, OStrings.getString("TF_ERROR"),
+
+            JOptionPane.showMessageDialog(MainWindow.this, pane, OStrings.getString("TF_ERROR"),
                     JOptionPane.ERROR_MESSAGE);
         });
     }

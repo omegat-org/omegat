@@ -647,7 +647,6 @@ var toc_entries = [
 ["Postavke fonta","chapter.misc.html#font.settings",null],
 ["Sprječavanje gubitka podataka","chapter.misc.html#preventing.data.loss",null]
 ]],
-["Appendices","appendix.languages.html",[
 ["A. Jezici – popis oznaka ISO 639\n  \n  \n  ","appendix.languages.html",null],
 ["B. Tipkovni prečaci u oknu za obradu","appendix.keyboard.html",null],
 ["C. OmegaT – timski projekti","appendix.TeamProjects.html",[
@@ -689,7 +688,6 @@ var toc_entries = [
 ]],
 ["J. Zahvale","appendix.acknowledgements.html",[
 ["Hvala svima!","appendix.acknowledgements.html#d0e13273",null]
-]]
 ]],
 ["Index","ix01.html",null]];
 var toc_initiallyCollapsed = false;
@@ -965,7 +963,7 @@ message = translation[index];
 }
 return message;
 }
-var storageId = "-7tnmcgbmduxw-1rrq1lo5jhx8x";
+var storageId = "-ntidogm1s42t-1pgvm6zittf8w";
 function storageSet(key, value) {
 window.sessionStorage.setItem(key + storageId, String(value));
 }

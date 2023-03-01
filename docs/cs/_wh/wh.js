@@ -574,8 +574,10 @@ var toc_entries = [
 ["Překlad souboru PDF","howtos.html#howto.translatepdf",null],
 ["Spravovat jazyky se zápisem zprava doleva","howtos.html#howto.managerighttoleft",null]
 ]],
-["Appendices","appendix.dictionaries.html",[
-["A. Slovníky","appendix.dictionaries.html",null],
+["A. Slovníky","appendix.dictionaries.html",[
+["Jak stáhnout a nainstalovat slovníky","appendix.dictionaries.html#d0e5429",null],
+["Problémy se slovníky","appendix.dictionaries.html#d0e5498",null]
+]],
 ["B. Glosáře","appendix.glossaries.html",[
 ["Používání","appendix.glossaries.html#d0e5550",null],
 ["Formát souboru","appendix.glossaries.html#d0e5589",null],
@@ -600,7 +602,6 @@ var toc_entries = [
 ["Nabídka ‚Nástroje‛","appendix.shortcut.custom.html#ch04.shortcuts.ToolsMenu",null],
 ["Nabídka ‚Možnosti‛","appendix.shortcut.custom.html#ch04.shortcuts.OptionsMenu",null],
 ["Nabídka ‚Nápověda‛","appendix.shortcut.custom.html#ch04.shortcuts.HelpMenu",null]
-]]
 ]]];
 var toc_initiallyCollapsed = false;
 var messages = [
@@ -875,7 +876,7 @@ message = translation[index];
 }
 return message;
 }
-var storageId = "-1epnvs9s2w7nx-14lhczz9kvfe0";
+var storageId = "-17b1kdscvzujc-1kri1u2i3jdyw";
 function storageSet(key, value) {
 window.sessionStorage.setItem(key + storageId, String(value));
 }

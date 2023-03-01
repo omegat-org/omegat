@@ -630,7 +630,6 @@ var toc_entries = [
 ["Настройки шрифтов","chapter.misc.html#font.settings",null],
 ["Предотвращение потери данных","chapter.misc.html#preventing.data.loss",null]
 ]],
-["Appendices","appendix.languages.html",[
 ["A. Языки - список кодов ISO 639\n  \n  \n  ","appendix.languages.html",null],
 ["B. Сочетания клавиш для редактирования текста","appendix.keyboard.html",null],
 ["C. Командные проекты в ОмегаТ","appendix.TeamProjects.html",[
@@ -671,7 +670,6 @@ var toc_entries = [
 ]],
 ["J. Благодарности","appendix.acknowledgements.html",[
 ["Спасибо вам всем!","appendix.acknowledgements.html#d0e12000",null]
-]]
 ]],
 ["Предметный указатель","ix01.html",null]];
 var toc_initiallyCollapsed = false;
@@ -947,7 +945,7 @@ message = translation[index];
 }
 return message;
 }
-var storageId = "-hzep7db4ncbe-1i32fsgnftjnz";
+var storageId = "-1szvj6m2kths0-13qocs3powjp3";
 function storageSet(key, value) {
 window.sessionStorage.setItem(key + storageId, String(value));
 }

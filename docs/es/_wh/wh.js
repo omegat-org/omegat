@@ -643,8 +643,11 @@ var toc_entries = [
 ["Configurando el tipo de letra","chapter.misc.html#font.settings",null],
 ["Previniendo la pérdida de datos","chapter.misc.html#preventing.data.loss",null]
 ]],
-["Appendices","appendix.website.html",[
-["A. OmegaT en la web","appendix.website.html",null],
+["A. OmegaT en la web","appendix.website.html",[
+["Sitios OmegaT y el proyecto OmegaT en SourceForge","appendix.website.html#OmegaT.sites.and.OmegaT.SourceForge.project",null],
+["Informe de fallos","appendix.website.html#bug.reports",null],
+["Contribuyendo al proyecto OmegaT\n                           ","appendix.website.html#contributing.to.omegat.project",null]
+]],
 ["B. Idiomas ― Lista de códigos ISO 639\n  \n  \n  ","appendix.languages.html",null],
 ["C. Atajos de teclado en el editor","appendix.keyboard.html",null],
 ["D. Aviso Legal","appendix.legal.notices.html",[
@@ -653,7 +656,6 @@ var toc_entries = [
 ]],
 ["E. Agradecimientos","appendix.acknowledgements.html",[
 ["¡Gracias a todos!","appendix.acknowledgements.html#d0e9785",null]
-]]
 ]],
 ["Índice","ix01.html",null]];
 var toc_initiallyCollapsed = false;
@@ -929,7 +931,7 @@ message = translation[index];
 }
 return message;
 }
-var storageId = "1j27t4ox07wxe-1q3o1j9kx0m7q";
+var storageId = "-14pscvbmqcdla-zhbpfmsy0pih";
 function storageSet(key, value) {
 window.sessionStorage.setItem(key + storageId, String(value));
 }

@@ -631,7 +631,6 @@ var toc_entries = [
 ["Configuración do tipo de letra","chapter.misc.html#font.settings",null],
 ["Previr a perda de datos","chapter.misc.html#preventing.data.loss",null]
 ]],
-["Appendices","appendix.languages.html",[
 ["A. Idiomas - lista do código ISO 639\n  \n  \n  ","appendix.languages.html",null],
 ["B. Atallos de teclado no editor","appendix.keyboard.html",null],
 ["C. Proxectos en equipo de OmegaT","appendix.TeamProjects.html",[
@@ -672,7 +671,6 @@ var toc_entries = [
 ]],
 ["J. Agradecementos","appendix.acknowledgements.html",[
 ["Grazas a todos!","appendix.acknowledgements.html#d0e12153",null]
-]]
 ]],
 ["Index","ix01.html",null]];
 var toc_initiallyCollapsed = false;
@@ -948,7 +946,7 @@ message = translation[index];
 }
 return message;
 }
-var storageId = "-1ty9zskk3njjm-1lzzuv4lzu9sx";
+var storageId = "-1ocfx6fwlnbc4-1dsk1697b7a40";
 function storageSet(key, value) {
 window.sessionStorage.setItem(key + storageId, String(value));
 }

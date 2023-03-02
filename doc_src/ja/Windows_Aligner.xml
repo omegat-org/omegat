@@ -1,55 +1,363 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="windows.aligner">
-  <title>整合ツール</title>
+  <title id="windows.aligner.title"><guilabel>整合ツール</guilabel></title>
 
-  <para>整合ツールでは、翻訳済みの単一言語の文書から二か国語の翻訳メモリを作成します。</para>
+  <para><link endterm="menus.tools.title" linkend="menus.tools"/><link endterm="menus.tools.align.files.title" linkend="menus.tools.align.files"/>を使用してこのツールにアクセスします。</para>
 
-  <para>このウィンドウにアクセスするには、<menuchoice><guimenu>[ツール]</guimenu><guimenuitem>[整合ツール...]</guimenuitem></menuchoice>を選択します。</para>
+  <para>OmegaTでは、キーベースのフォーマット用にコマンドラインベースの整合モードも提供しています。詳細については、<link linkend="launch.with.command.line.mode.console.align" endterm="launch.with.command.line.mode.console.align.title"/>ウインドウを参照してください。</para>
 
-  <section>
-    <title>手順1:整合パラメータを調整する</title>
+  <warning>
+    <para>整合ツールでは、配置の途中で作業内容を保存することはできません。そのため、整合ツールで利用するファイルは、1つのセッションで快適に作業できるように、短いファイルに分割することをお勧めします。そうすることは、最初の自動整合における不一致を減少させ、手動補正ステップをより円滑にするという利点もあります。</para>
+  </warning>
 
-    <para>整合が改善できるように見える場合は、パラメータを変更してみてください。ほとんどの場合、<guilabel>平均スコア</guilabel>が低いほど整合が良好になります。</para>
 
-    <para><guilabel>Heapwise</guilabel>比較モードでは、テキストはグローバルに評価されます。<guilabel>Parsewise</guilabel>比較モードでは、セグメントごとに評価されます。このオプションは、このような選択が可能な場合にのみ表示されます。</para>
+  <para>整合とは、既に翻訳された原文言語と訳文言語の文書ペアから二言語の対の翻訳メモリを作成するプロセスです。ファイルのコンテンツを整合するには、4つのステップで作業します。</para>
 
-    <para>Key=Value テキストを整合するには、<guilabel>ID</guilabel>比較モードを使用します。これは、2つのファイルのキーの順序が同じでない場合や、2つのファイルに同じ量の情報が含まれていない場合でも機能します。このオプションは、選択した両方のファイルがKey=Valueファイルとして認識される場合にのみ表示されます。</para>
+  <orderedlist>
+	<listitem>
+	  <para>原文と訳文の言語を指定し、整合するふたつのファイルを選択します。</para>
+	</listitem>
 
-    <para><guilabel>Viterbi</guilabel>および<guilabel>Forward-Backward</guilabel>アルゴリズムは、2つの異なる計算方法です。最良の結果が得られるものを選択します。</para>
+	<listitem>
+	  <para>整合ツールはファイルを読み取り、元のテキストと翻訳されたテキストで互いに対応するセグメントを一致させようとします。</para>
+	</listitem>
 
-    <para>[<guibutton>続行</guibutton>]をクリックして、次の手順に進みます。</para>
+	<listitem>
+	  <para>結果を確認して、必要な手動調整を行います。</para>
+	</listitem>
+
+	<listitem>
+	  <para>結果をTMXファイルに保存します。</para>
+	</listitem>
+  </orderedlist>
+
+  <para>整合ツールは、OmegaTがサポートするすべてのファイル形式を読み込むことができます。</para>
+  
+  <note>
+    <para>翻訳プロジェクトを開いている場合、整合ツールでは自動的にそのプロジェクトの言語が使用されます。また、プロジェクト固有の分割ルールがある場合は、そのルールも使用されます。</para>
+  </note>
+
+  <para>言語とファイルを選択した後、<guibutton>確定</guibutton>ボタンをクリックして<guilabel>整合</guilabel>ウィンドウを表示すると、自動整合の結果が表示されます。</para>
+
+  <para>ウィンドウの主要部分は3つの柱に分かれています。</para>
+  
+  <itemizedlist>
+    <listitem>
+      <para><guilabel>採用</guilabel>:このボックスがオンになっている行の分節ペアは、翻訳メモリファイルに保存されます。チェックのない行は削除されます。</para>
+    </listitem>
+
+    <listitem>
+      <para><guilabel>原文</guilabel>:原文テキストからの分節。</para>
+    </listitem>
+
+    <listitem>
+      <para><guilabel>訳文</guilabel>:訳文テキストからの分節。</para>
+    </listitem>
+  </itemizedlist>
+
+  <section id="windows.aligner.adjust">
+    <title id="windows.aligner.adjust.title">設定</title>
+
+    <para>このステップでは、ウィンドウの最下部に、さまざまなパラメータや設定オプションがあり、初期の整合がより良くなるように変更することができます。また、整合の<guilabel>平均スコア</guilabel>の結果も表示されます。経験則として、スコアが低いほど、整合はより正確になります。調整値を変更すると、すぐに整合方法が再計算されるため、さまざまな組み合わせをすばやく試して最適な結果を得ることができます。</para>
+
+    <para>可能な設定は以下の通りです：</para>
+
+    <variablelist>
+	  <title>調整値</title>
+	  <varlistentry>
+        <term>比較モード</term>
+        <listitem>
+          <itemizedlist>
+            <listitem>
+              <para><guilabel>Heapwise</guilabel>モードでは、文書のテキストを全体で評価します。</para>
+            </listitem>
+
+            <listitem>
+              <para><guilabel>Parsewise</guilabel>モードでは、分節ごとに評価します。整合するファイルで使用可能な場合にのみ表示されます。</para>
+            </listitem>
+
+            <listitem>
+              <para><guilabel>ID</guilabel>: このモードでは、 <literal>key = value</literal>のエントリーからなるファイルに適用できます。これは、2つのファイルのキーの順序が同じでない場合や、2つのファイルに同じ量の情報が含まれていない場合でも機能します。整合するファイルが、key=valueファイルだと判断された場合にのみ表示されます。</para>
+            </listitem>
+          </itemizedlist>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>アルゴリズム:</term>
+        <listitem>
+          <itemizedlist>
+            <listitem>
+              <para><guilabel>Viterbi</guilabel>: デフォルトのアルゴリズムによりファイルを整合します。</para>
+            </listitem>
+
+            <listitem>
+              <para><guilabel>Forward-Backward</guilabel>: 代替のアルゴリズムで、文書の整合に利用できます。</para>
+            </listitem>
+          </itemizedlist>
+
+          <para>どのアルゴリズムを選択するとよいのか、堅牢で簡単なルールはありません。双方を試してみて、よりよい結果がでたほうを利用してください。</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>計算方法:</term>
+        <listitem>
+          <itemizedlist>
+            <listitem>
+              <para><guilabel>Normal</guilabel>: 文書を整合するときに使用するデフォルトの統計的分散</para>
+            </listitem>
+
+            <listitem>
+              <para><guilabel>Poisson</guilabel>: 代替の統計的分散で文書の整合に利用できます。</para>
+            </listitem>
+          </itemizedlist>
+
+          <para>アルゴリズムごとに、選択する統計的分散を決定する簡単で堅牢な方法はありません。双方を試してみて、よりよい結果がでたほうを利用してください。</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>カウンター:</term>
+        <listitem>
+          <itemizedlist>
+            <listitem>
+              <para><guilabel>文字</guilabel>:単語の区切りに空白を使用しない言語で、分節のサイズを決定するために使用される基本単位。</para>
+            </listitem>
+
+            <listitem>
+              <para><guilabel>単語</guilabel>:単語を区切るために空白を使用する言語で、分節のサイズを決定するために使用される基本単位。</para>
+            </listitem>
+          </itemizedlist>
+
+          <para>整合ツールは、整合するファイルの原文言語と訳文言語に基づいて、カウンターを自動的に選択します。デフォルトでは、 片方の言語が単語分割に空白文字を使用しないときには<guilabel>文字</guilabel>を選択します。そうでなければ、 <guilabel>単語</guilabel> を使用します。If you are working with one of each, you can try to switch between the two to see which one yields better results.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <variablelist>
+	  <title>設定</title>
+      <varlistentry>
+        <term>分節</term>
+        <listitem>
+          <para>整合ツールは文単位の分節化デフォルトではを利用しています。段落単位の分節化を使用するには、チェックボックスをオフにします。詳細については、設定-<link endterm="dialogs.preferences.segmentation.setup.title" linkend="dialogs.preferences.segmentation.setup"/>を参照してください。</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>タグを隠す</term>
+        <listitem>
+          <para>整合ツールは、デフォルトでは分節のタグも利用しています。<link endterm="dialogs.project.properties.hide.tags.title" linkend="dialogs.project.properties.hide.tags"/>設定を適用するには、チェックボックスをオフにします。</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="windows.aligner.adjust.highlight">
+        <term id="windows.aligner.adjust.highlight.title">ハイライト</term>
+        <listitem>
+		  <para>ハイライトを使用しないときは、チェックボックスをオフにします。</para>
+
+          <para>整合ツールでは、正規表現<code>\d+</code>を使用して、原文分節と訳文分節のすべての数字が強調表示されます。</para>
+		  <para>正規表現を修正して、ハイライト表示される部分を追加することができます。詳細については-<link linkend="app.regex" endterm="app.regex.title"/>を参照してください。</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>ルール...</term>
+        <listitem>
+          <para>プロジェクトに適用される分節化規則を編集するには、このボタンを使用します。詳細は、付録の <link linkend="app.segmentation" endterm="app.segmentation.title"/> をご覧ください。</para>
+
+          <warning>
+            <para>分節化規則を変更した場合は、整合ツールを終了するときに変更を保存するかどうか、確認するメッセージが表示されます。デフォルトの選択肢は<guibutton>[はい]</guibutton>です。一般的なOmegaT分節化規則を編集した場合、保存を必要としない場合もあります。</para>
+          </warning>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>フィルター...</term>
+        <listitem>
+          <para>プロジェクトに適用されるファイルフィルターを編集するには、このボタンを使用します。詳細については、設定-<link linkend="dialogs.preferences.file.filters" endterm="dialogs.preferences.file.filters.title"/>を参照してください。</para>
+
+          <warning>
+            <para>ファイルフィルタを変更した場合は、整合ツールを終了するときに、変更を保存するかどうかを確認するメッセージが表示されます。デフォルトの選択肢は<guibutton>はい</guibutton>です。ユーザレベルのOmegaTのファイルフィルターの設定を編集した場合、保存を必要としない場合もあります。</para>
+          </warning>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>パターン...</term>
+        <listitem>
+          <para>この設定では、原文分節と訳文分節の文章を色付け表示する正規表現のパターンを定義できます。整合ツールは、デフォルトでは<literal>\d+</literal>を使用して数値を色付け表示します。強調表示すると便利な他の要素がテキストに含まれている場合は、<literal></literal>記号を使用して各要素を区切り、それらの要素を含むように正規表現を修正します。</para>
+        </listitem>
+      </varlistentry>      
+    </variablelist>
+
+    <para><guilabel>色づけ</guilabel>設定とダイアログにアクセスして、<guimenu>表示</guimenu>メニューからパターンを修正したり、<guimenu>その他のオプション</guimenu>メニューからオプションを修正したりすることもできます。</para>
+
+    <para>また、<guimenu>ファイル</guimenu>メニューには次のコマンドがあります。</para>
+	
+    <itemizedlist>
+      <listitem>
+        <para><guimenuitem>TMXを保存.</guimenuitem>:この項目は、次の手順が完了するまで淡色表示されます。</para>
+      </listitem>
+	  
+      <listitem>
+        <para><guimenuitem>リセット</guimenuitem>:このコマンドは、すべてのパラメータをデフォルト値に復元します。また、ウィンドウの右下にある<guibutton>リセット</guibutton>をクリックするか、<keycombo><keycap>C</keycap><keycap>S</keycap><keycap>R</keycap></keycombo>を押して呼び出すこともできます。</para>
+      </listitem>
+
+      <listitem>
+        <para><guimenuitem>再読み込み</guimenuitem>:このコマンドは、ディスクからファイルを再ロードします。内容を変更する必要がある場合は、このコマンドを使用して、ファイルを再度解析および整合することができます。</para>
+      </listitem>
+
+      <listitem>
+        <para><guimenuitem>閉じる</guimenuitem>:これは<guilabel>整合</guilabel>ダイアログを閉じます。この手順でキャンセルすると、翻訳メモリファイルにデータを保存せずに整合作業がキャンセルされます。このコマンドは、<keycombo><keycap>C</keycap><keycap>W</keycap></keycombo>を押して呼び出すこともできます。</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>このステップでは、<guimenu>編集</guimenu>メニューはグレー表示されています。</para>
+
+    <para>この手順の結果に問題がなければ、<guibutton>続行</guibutton>ボタンをクリックして次の手順に進みます。</para>
   </section>
 
-  <section>
-    <title>手順2: 手動で修正</title>
+  <section id="windows.aligner.manual.corrections">
+    <title id="windows.aligner.manual.corrections.title">訂正</title>
 
-    <para>自動処理の後、2つのファイルの整合は、通常、手動で修正する必要があります。</para>
+    <para>通常の場合、最初の自動整合プロセスの後に手動調整が必要です。分節を上下に移動して他方の言語の正しい分節と対応関係を整合する作業と、分節を分割または結合する作業を行なっていきます。整合ツールでは、分節の内容を編集することもできます。これは、分節のスペルミスなどのエラーに気付いた場合に便利です。</para>
 
-    <para>翻訳単位は、最後の2列のセルにあります。</para>
+    <para>整合に必要な操作は<guimenu>編集</guimenu>メニューから実行できるほか、対応するショートカットキーを押すことでも利用できます。最も一般的な操作は、メインウィンドウの右側にあるボタンからもアクセスできます。</para>
 
-    <para>2つのセグメントを同じ線上に整合するには:</para>
+    <note>
+      <para>ショートカットキーは、整合ツールを頻繁に使用する場合や、大きなドキュメントで作業する場合に覚えておくと便利です。ショートカットキーを使用すると、操作をすばやく実行できます。</para>
+    </note>
 
-    <orderedlist>
-      <listitem>
-        <para>最初のセグメントを選択します。</para>
-      </listitem>
+    <para>操作を実行するには、該当する分節または連続する分節のブロックを選択します。個々の分節は、マウスまたは矢印キーで選択できます。分節のブロックは、マウスで最初の分節をクリックし、<keycap>Shift</keycap>キーを押しながら最後の分節をクリックすることによって選択できます。</para>
 
-      <listitem>
-        <para>スペースバー(<menuchoice><guimenu>[編集]</guimenu><guimenuitem>[ピンポイント整合を開始]</guimenuitem></menuchoice>のショートカット)を押します。</para>
-      </listitem>
+	<para>または、<keycap>Shift</keycap>を押しながら矢印キーを押して、連続する分節を選択することもできます。使用可能な操作を以下に示します。</para>
 
-      <listitem>
-        <para>最初のセグメントに対応する直線移動のもう一方の列をクリックします。</para>
-      </listitem>
-    </orderedlist>
+    <variablelist>
+      <varlistentry>
+        <term>上へ移動(<keycap>U</keycap>)</term>
+        <listitem>
+          <para>選択した分節、または連続する分節のブロックを1行上に移動します。</para>
+          <para>このコマンドは、メインウィンドウの右側にあるボタンからも使用できます。</para>
+        </listitem>
+      </varlistentry>
 
-    <para>これらの操作をいくつか行った後、[<menuchoice><guimenu>編集</guimenu><guimenuitem>再整合保留中</guimenuitem></menuchoice>]を選択して、他のセグメントの整合を更新します。</para>
+      <varlistentry>
+        <term>下へ移動(<keycap>D</keycap>)</term>
+        <listitem>
+          <para>選択した分節、または連続する分節のブロックを1行下に移動します。</para>
 
-    <para>1つまたは複数のセグメントの位置を個別に変更するには、セグメントを選択し、<userinput>U</userinput>(<guilabel>上へ移動</guilabel>)または<userinput>D</userinput>(<guilabel>下へ移動</guilabel>)を押します。</para>
+          <para>このコマンドは、メインウィンドウの右側にあるボタンからも使用できます。</para>
+        </listitem>
+      </varlistentry>
 
-    <para>翻訳メモリの作成時には、最初の列で[<guilabel>保持</guilabel>]ボックスがオンになっている行だけが含まれます。</para>
+      <varlistentry>
+        <term>分割(<keycap>S</keycap>)</term>
+        <listitem>
+          <para>単一の分節が選択されている場合、このコマンドは<guilabel>文章の分割</guilabel>ダイアログを開きます。マウスまたは矢印キーを使用して文章を分割する位置にカーソルを置き、<guibutton>確定</guibutton>ボタンをクリックするか、<keycap>Enter</keycap>を押します。</para>
 
-    <para>2つの列が十分に整合したら、<guibutton>[TMXを保存...]</guibutton>をクリックして翻訳メモリを作成します。</para>
+          <para>同じ行の別々のセルを占有する2つ以上の分節(<guilabel>採用</guilabel>チェックボックスのない行を含む複数のセル分節)が選択されている場合、このコマンドは選択されたセルを(<guilabel>採用</guilabel>チェックボックスを使用)別々の行に分割します。</para>
+
+		  <para>このコマンドは、メインウィンドウの右側にあるボタンからも使用できます。</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>結合(<keycap>M</keycap>)</term>
+        <listitem>
+          <para>分節が1つだけ選択されている場合は、整合ツールによって次の分節と結合されます。2つ以上の分節が選択されている場合、それらはすべて結合されますが、別のセルに残ります。同じ選択肢でもう一度このコマンドを呼び出すと、選択したすべてのセルの内容が1つのセルに結合されます。</para>
+
+		  <para>このコマンドは、メインウィンドウの右側にあるボタンからも使用できます。</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>編集(<keycap>E</keycap>)</term>
+        <listitem>
+          <para>このコマンドは、単一の分節に対してのみ実行できます。このコマンドを呼び出すと、<guilabel>テキスト編集</guilabel>ダイアログが開き、分節のテキストを変更できます。終了したら、<guibutton>確定</guibutton>ボタンを使用してダイアログを閉じます。このダイアログでは、<keycap>Enter</keycap>は文章に改行を入力します。</para>
+
+		  <para><keycombo><keycap>C</keycap><keycap>Enter</keycap></keycombo>を使用して、マウスを使用せずにそれを閉じます。</para>
+
+		  <para>このコマンドは、メインウィンドウの右側にあるボタンからも使用できます。</para>
+        </listitem>
+      </varlistentry>
+
+	  <varlistentry>
+        <term>確定済みマーク(<keycap>A</keycap>)</term>
+        <listitem>
+          <para>このコマンドを使用して、選択した行または行のブロックの分節の配置が正しいことを確認します。対応する<guilabel>採用</guilabel>カラムが緑色で強調表示されます。</para>
+        </listitem>
+      </varlistentry>
+
+	  <varlistentry>
+        <term>マークはレビューが必要です(<keycap>R</keycap>)</term>
+        <listitem>
+          <para>このコマンドを使用して、分節の配置が疑わしい行または行のブロックを識別します。対応する<guilabel>採用</guilabel>カラムが赤で強調表示されます。</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>クリアマーク(<keycap>C</keycap>)</term>
+        <listitem>
+          <para>このコマンドを使用して、<guilabel>確定済み</guilabel>または<guilabel>要チェック</guilabel>コマンドによって設定された1つまたは複数のマークを削除します。</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>未確定項目を再整合(<keycombo><keycap>C</keycap><keycap>R</keycap></keycombo>)</term>
+        <listitem>
+          <para>確定済みとしてマークされている行がある場合は、このコマンドを使用して残りの行の配置を更新できます。</para>
+        </listitem>
+      </varlistentry>
+
+	  <varlistentry>
+        <term>すべてのチェックを入れる</term>
+        <listitem>
+          <para>このコマンドを使用して、すべての行の<guilabel>確定済み</guilabel>チェックボックスをオンにします。</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>すべてのチェックを外す</term>
+        <listitem>
+          <para>このコマンドを使用して、すべての行の<guilabel>確定済み</guilabel>チェックボックスを外します。</para>
+        </listitem>
+      </varlistentry>
+
+	  <varlistentry>
+        <term>現在のチェックを反転(<keycap>K</keycap>)</term>
+        <listitem>
+          <para>このコマンドを使用して、選択した行または行のブロックの<guilabel>確定済み</guilabel>チェックボックスをオンからオフに、またはその逆に切り替えます。</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>ピンポイント整合を開始(<keycap>Space</keycap>)</term>
+        <listitem>
+          <para>対応するセグメントが数行離れていて、それらをすばやく整列する場合は、このコマンドを使用して最初の分節を選択してから、他の分節の対応するカラムをクリックします。</para>
+		  
+		  <para>矢印キーを使用して、対応する分節の<keycap>Space</keycap>を押すこともできます。</para>
+		  
+          <para>この方法を使用して位置合わせされた分節は、自動的に受け入れられたものとしてマークされ</para>
+
+		  <para>ピンポイント整合コマンドを数回使用した後に、<guimenuitem>未確定項目を再整合</guimenuitem>コマンドを実行すると便利です。</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <para>2つのカラムの整合が完了したら、<guibutton>TMXを保存...</guibutton>ボタンをクリックして翻訳メモリを作成します。</para>
+
+    <note>
+      <para>翻訳メモリの作成時には、最初の列で<guilabel>確定済み</guilabel>ボックスがオンになっている行だけが含まれます。</para>
+    </note>
+
+
+    <para><guibutton>TMXに保存...</guibutton>ボタンに加えて、手動修正ステップの<guilabel>整合</guilabel>ウィンドウの下部には、最初のステップと同じ<guilabel>色付け表示</guilabel>チェックボックスと<guibutton>パターン...</guibutton>ボタンがあります。この設定には、<guimenu>表示</guimenu>メニューからもアクセスできます。</para>
+
+    <warning>
+      <para>ウィンドウの下部には、<guibutton>リセット</guibutton>ボタンもあります。<emphasis role="bold">注意して利用してください!</emphasis>このボタンをクリックすると、すべての変更が破棄され、最初のステップに戻ります。</para>
+    </warning>    
+    
   </section>
 </section>

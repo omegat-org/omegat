@@ -44,9 +44,12 @@ import javax.swing.KeyStroke;
 import javax.swing.text.Caret;
 import javax.swing.text.JTextComponent;
 
+import org.openide.awt.Mnemonics;
+
 import org.omegat.core.Core;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.gui.common.EntryInfoThreadPane;
+import org.omegat.gui.editor.EditorPopups;
 import org.omegat.gui.editor.IPopupMenuConstructor;
 import org.omegat.gui.editor.SegmentBuilder;
 import org.omegat.gui.main.DockableScrollPane;
@@ -93,8 +96,10 @@ public class MultipleTransPane extends EntryInfoThreadPane<List<MultipleTransFou
                     boolean isInActiveTranslation, final SegmentBuilder sb) {
                 if (isInActiveEntry
                         && Core.getProject().getProjectProperties().isSupportDefaultTranslations()) {
-                    JMenuItem miDefault = menu.add(OStrings.getString("MULT_MENU_DEFAULT"));
-                    JMenuItem miMultiple = menu.add(OStrings.getString("MULT_MENU_MULTIPLE"));
+                    JMenuItem miDefault = menu.add(Mnemonics.removeMnemonics(
+                        OStrings.getString("MULT_MENU_DEFAULT")));
+                    JMenuItem miMultiple = menu.add(Mnemonics.removeMnemonics(
+                        OStrings.getString("MULT_MENU_MULTIPLE")));
                     miDefault.setEnabled(!sb.isDefaultTranslation());
                     miMultiple.setEnabled(sb.isDefaultTranslation());
 

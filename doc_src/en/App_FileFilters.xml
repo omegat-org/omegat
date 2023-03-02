@@ -513,7 +513,7 @@
 			  </listitem>
 			</varlistentry>
 			<varlistentry>
-			  <term>Paragraphs ignored when loading (regular expression)</term>
+			  <term>Ignored paragraphs (regular expression)</term>
 			  <listitem>
 				  <para>Any paragraph matching the regular expression
 				  is ignored while loading and is not displayed for

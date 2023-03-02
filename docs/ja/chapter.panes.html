@@ -1,0 +1,1439 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head><meta charset="UTF-8" />
+      <title>ウィンドウ</title>
+      <link href="OmegaT.css" rel="stylesheet" type="text/css" />
+      <meta content="DocBook XSL Stylesheets V1.79.1" name="generator" />
+      <link href="chapter.how.to.html" rel="prev" title="操作方法..." />
+      <link href="chapter.menus.html" rel="next" title="メニュー" />
+   <meta content="width=device-width, initial-scale=1" name="viewport" /><link href="_wh/wh.css" rel="stylesheet" type="text/css" /><script src="_wh/jquery/jquery.min.js" type="text/javascript"></script><script charset="UTF-8" src="_wh/wh.js" type="text/javascript"></script><script charset="UTF-8" defer="defer" src="_wh/search.js" type="text/javascript"></script></head>
+   
+<body>
+    <div id="wh-header">
+    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 5.8.0-取扱説明書</a></div></div>
+
+    <div id="wh-body">
+      <div class="wh-icon-menu" id="wh-menu"></div>
+      <div id="wh-navigation">
+        <div id="wh-navigation-form"><span id="wh-search-group"><span class="wh-icon-search" id="wh-do-search"></span><input id="wh-search-field" type="text" /><span class="wh-icon-cancel" id="wh-cancel-search"></span></span></div>
+        <div id="wh-toc-pane">
+        </div>
+        <div id="wh-search-pane">
+          <div id="wh-search-results">
+          </div>
+        </div>
+      </div>
+      <div id="wh-separator"></div>
+      <div id="wh-content">
+      
+      <header>
+         <div class="navheader">
+            <table style="width: 100%; ">
+               <tr>
+                  <th colspan="3" style="text-align: center; ">ウィンドウ</th>
+               </tr>
+               <tr>
+                  <td style="width: 20%; text-align: left; ">
+                     <a accesskey="p" href="chapter.how.to.html">戻る</a> </td>
+                  <th style="width: 60%; text-align: center; "> </th>
+                  <td style="width: 20%; text-align: right; "> <a accesskey="n" href="chapter.menus.html">次へ</a>
+                  </td>
+               </tr>
+            </table>
+            <hr />
+         </div>
+      </header>
+      <section class="chapter" id="chapter.panes">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title">ウィンドウ</h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <ul class="toc">
+               <li>
+                  <span class="section">
+                     <a href="chapter.panes.html#panes.default.layout">標準レイアウト</a>
+                  </span>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="chapter.panes.html#panes.principles">原則</a>
+                  </span>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="chapter.panes.html#panes.editor">
+                        <span class="guilabel">編集</span>
+                     </a>
+                  </span>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="chapter.panes.html#panes.fuzzy.matches">
+                        <span class="guilabel">参考訳文</span>
+                     </a>
+                  </span>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="chapter.panes.html#panes.glossary">
+                        <span class="guilabel">用語集</span>
+                     </a>
+                  </span>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="chapter.panes.html#panes.dictionary">
+                        <span class="guilabel">辞書</span>
+                     </a>
+                  </span>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="chapter.panes.html#panes.machinetranslation">
+                        <span class="guilabel">機械翻訳</span>
+                     </a>
+                  </span>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="chapter.panes.html#panes.multipletranslations">
+                        <span class="guilabel">複数訳文</span>
+                     </a>
+                  </span>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="chapter.panes.html#panes.notes">
+                        <span class="guilabel">メモ帳</span>
+                     </a>
+                  </span>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="chapter.panes.html#panes.comments">
+                        <span class="guilabel">コメント</span>
+                     </a>
+                  </span>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="chapter.panes.html#panes.segment.properties">
+                        <span class="guilabel">文節属性</span>
+                     </a>
+                  </span>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="chapter.panes.html#panes.statusbar">
+                        <span class="guilabel">ステータスバー</span>
+                     </a>
+                  </span>
+               </li>
+            </ul>
+         </div>
+         <section class="section" id="panes.default.layout">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">標準レイアウト</h2>
+                  </div>
+               </div>
+            </div>
+            <p>OmegaTを初めて開始するとき、メインウィンドウには次の標準レイアウトが表示されます。</p>
+            <div class="figure" id="default.omegat.layout">
+               <div class="figure-title">図2 Mac OSでのデフォルトOmeaTレイアウト</div>
+               <div class="figure-contents">
+                  <div class="mediaobject">
+                     <img alt="Mac OSでのデフォルトOmeaTレイアウト" src="images/defaultOmegaTLayout.png" />
+                  </div>
+               </div>
+            </div>
+            <br class="figure-break" />
+            <div class="orderedlist">
+               <ol class="orderedlist" type="1">
+                  <li class="listitem">
+                     <p>
+                        <a class="link" href="chapter.panes.html#panes.editor" title="編集">
+                           <span class="guilabel">編集</span>
+                        </a>ウィンドウ</p>
+                  </li>
+                  <li class="listitem">
+                     <p>
+                        <a class="link" href="chapter.panes.html#panes.notes" title="メモ帳">
+                           <span class="guilabel">メモ帳</span>
+                        </a>ウィンドウ</p>
+                  </li>
+                  <li class="listitem">
+                     <p>
+                        <a class="link" href="chapter.panes.html#panes.fuzzy.matches" title="参考訳文">
+                           <span class="guilabel">参考訳文</span>
+                        </a>ウィンドウ</p>
+                  </li>
+                  <li class="listitem">
+                     <p>
+                        <a class="link" href="chapter.panes.html#panes.glossary" title="用語集">
+                           <span class="guilabel">用語集</span>
+                        </a>ウィンドウ</p>
+                  </li>
+                  <li class="listitem">
+                     <p>
+                        <a class="link" href="chapter.panes.html#panes.segment.properties" title="文節属性">
+                           <span class="guilabel">文節属性</span>
+                        </a>ウィンドウ</p>
+                  </li>
+                  <li class="listitem">
+                     <p>
+                        <a class="link" href="chapter.panes.html#panes.comments" title="コメント">
+                           <span class="guilabel">コメント</span>
+                        </a>ウィンドウ</p>
+                  </li>
+                  <li class="listitem">
+                     <p>
+                        <a class="link" href="chapter.panes.html#panes.multipletranslations" title="複数訳文">
+                           <span class="guilabel">複数訳文</span>
+                        </a>ウィンドウ</p>
+                  </li>
+                  <li class="listitem">
+                     <p>
+                        <a class="link" href="chapter.panes.html#panes.dictionary" title="辞書">
+                           <span class="guilabel">辞書</span>
+                        </a>ウィンドウと<a class="link" href="chapter.panes.html#panes.machinetranslation" title="機械翻訳">
+                           <span class="guilabel">機械翻訳</span>
+                        </a>ウィンドウはドッキングされています。</p>
+                  </li>
+                  <li class="listitem">
+                     <p>
+                        <a class="link" href="chapter.panes.html#panes.statusbar" title="ステータスバー">
+                           <span class="guilabel">ステータスバー</span>
+                        </a>(右側):プロジェクト情報が表示されます。</p>
+                  </li>
+               </ol>
+            </div>
+            <p>
+               <a class="link" href="chapter.menus.html#menus.view" title="表示">
+                  <span class="guimenu">表示</span>
+               </a>メニューのさまざまなオプションを使用して、さまざまな<a class="link" href="chapter.panes.html" title="ウィンドウ">ウィンドウ</a>を移動し、自身の作業手順に最適なレイアウトになるようにカスタマイズします。</p>
+            <div class="warning">
+               <h3 class="title">警告</h3>
+               <p>ウィンドウレイアウトの再配置中に問題が発生した場合は、<a class="link" href="chapter.menus.html#menus.view" title="表示">
+                     <span class="guimenu">表示</span>
+                  </a>
+                  <a class="link" href="chapter.menus.html#menus.view.restore.main.window">
+                     <span class="guimenuitem">ウインドウを初期位置に復元</span>
+                  </a>を使用します。</p>
+            </div>
+         </section>
+         <section class="section" id="panes.principles">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">原則</h2>
+                  </div>
+               </div>
+            </div>
+            <div class="variablelist">
+               <dl class="variablelist">
+                  <dt id="panes.manipulation">
+                     <span class="term" id="panes.manipulation.title">操作</span>
+                  </dt>
+                  <dd>
+                     <p>メインウィンドウは、本章で説明するウィンドウ、<a class="link" href="chapter.menus.html" title="メニュー">メニュー</a>で説明するメインメニュー、<a class="link" href="chapter.panes.html#panes.statusbar" title="ステータスバー">以下</a>で説明するステータスバーから構成されています。ウィンドウの名前をクリックしたまま新しい位置にドラッグしたり、別のウィンドウとしてドッキング解除することもできます。</p>
+                     <p>各ウィンドウの右上隅には、ウィンドウのタイプとその現在のステータスに応じたアイコンが表示されます。</p>
+                     <div class="table" id="table.pane.widgets">
+                        <div class="table-title">表1 ウィンドウ表示アイコン</div>
+                        <div class="table-contents">
+                           <table style="border-collapse: collapse; border-top: 1px solid ; border-bottom: 1px solid ; border-left: 1px solid ; border-right: 1px solid ; ">
+                              <colgroup>
+                                 <col />
+                                 <col />
+                              </colgroup>
+                              <tbody>
+                                 <tr>
+                                    <td style="border-right: 1px solid ; border-bottom: 1px solid ; ">
+                                       <span class="inlinemediaobject">
+                                          <img src="images/Settings.png" width="60%" />
+                                       </span>
+                                    </td>
+                                    <td style="border-bottom: 1px solid ; ">ウィンドウで使用可能なさまざまな追加<span class="bold">
+                                          <strong>アクション</strong>
+                                       </span>を一覧表示します。</td>
+                                 </tr>
+                                 <tr>
+                                    <td style="border-right: 1px solid ; border-bottom: 1px solid ; ">
+                                       <span class="inlinemediaobject">
+                                          <img src="images/Minimize.png" width="60%" />
+                                       </span>
+                                    </td>
+                                    <td style="border-bottom: 1px solid ; ">ウィンドウを<span class="bold">
+                                          <strong>最小化</strong>
+                                       </span>し、メインウィンドウの底部にタブ化されます。</td>
+                                 </tr>
+                                 <tr>
+                                    <td style="border-right: 1px solid ; border-bottom: 1px solid ; ">
+                                       <span class="inlinemediaobject">
+                                          <img src="images/Maximize.png" width="60%" />
+                                       </span>
+                                    </td>
+                                    <td style="border-bottom: 1px solid ; ">ウィンドウを<span class="bold">
+                                          <strong>最大化</strong>
+                                       </span>します。</td>
+                                 </tr>
+                                 <tr>
+                                    <td style="border-right: 1px solid ; border-bottom: 1px solid ; ">
+                                       <span class="inlinemediaobject">
+                                          <img src="images/Restore.png" width="60%" />
+                                       </span>
+                                    </td>
+                                    <td style="border-bottom: 1px solid ; ">ウィンドウを以前のレイアウトで<span class="bold">
+                                          <strong>復元</strong>
+                                       </span>します。</td>
+                                 </tr>
+                                 <tr>
+                                    <td style="border-right: 1px solid ; border-bottom: 1px solid ; ">
+                                       <span class="inlinemediaobject">
+                                          <img src="images/Undock.png" width="60%" />
+                                       </span>
+                                    </td>
+                                    <td style="border-bottom: 1px solid ; ">ウィンドウをメインウィンドウから<span class="bold">
+                                          <strong>切り離し</strong>
+                                       </span>て、独立したウィンドウとして表示します。</td>
+                                 </tr>
+                                 <tr>
+                                    <td style="border-right: 1px solid ; ">
+                                       <span class="inlinemediaobject">
+                                          <img src="images/Dock.png" width="60%" />
+                                       </span>
+                                    </td>
+                                    <td>分かれたウィンドウをメインウィンドウに<span class="bold">
+                                          <strong>戻し</strong>
+                                       </span>ます 。</td>
+                                 </tr>
+                              </tbody>
+                           </table>
+                        </div>
+                     </div>
+                     <br class="table-break" />
+                     <p>同じ領域に複数ウィンドウをグループ化できます。すると、グループの一番上にウィンドウの名前が付いたタブが表示されます。ウィンドウのサイズを変更するには、ウィンドウ間のセパレータをドラッグします。</p>
+                     <div class="note">
+                        <h3 class="title">注記</h3>
+                        <p>ユーザー・インターフェースに対して行った変更の追跡が失われ、特定のペインが表示されなくなる場合は、 <a class="link" href="chapter.menus.html#menus.view" title="表示">
+                              <span class="guimenu">表示</span>
+                           </a>
+                           <a class="link" href="chapter.menus.html#menus.view.restore.main.window">
+                              <span class="guimenuitem">ウインドウを初期位置に復元</span>
+                           </a> を使用してデフォルトのレイアウトに戻すことができます。</p>
+                     </div>
+                  </dd>
+                  <dt id="panes.context.menus">
+                     <span class="term" id="panes.context.menus.title">コンテキストメニュー</span>
+                  </dt>
+                  <dd>
+                     <p>一部のペインには、コンテキストメニューがあります。このメニューは、OS標準の呼び出し方式か、OmegaTで定義されたショートカットを使用して呼び出すことができます。</p>
+                     <div class="itemizedlist">
+                        <ul class="itemizedlist" style="list-style-type: disc; ">
+                           <li class="listitem">
+                              <p>WindowsとLinux: <span class="keycap">
+                                    <strong>メニュー</strong>
+                                 </span>
+                              </p>
+                           </li>
+                           <li class="listitem">
+                              <p>macOS: <span class="keycap">
+                                    <strong>S</strong>
+                                 </span>+<span class="keycap">
+                                    <strong>Esc</strong>
+                                 </span>
+                              </p>
+                           </li>
+                        </ul>
+                     </div>
+                  </dd>
+                  <dt id="panes.drag.and.drop">
+                     <span class="term" id="panes.drag.and.drop.title">ドラッグ＆ドロップ</span>
+                  </dt>
+                  <dd>
+                     <p>特定のペインでファイルをドラッグアンドドロップすると、次のような結果になります。</p>
+                     <div class="variablelist">
+                        <dl class="variablelist">
+                           <dt>
+                              <span class="term">編集ウィンドウ</span>
+                           </dt>
+                           <dd>
+                              <p>OmegaTプロジェクトファイル(<code class="filename">OmegaT.project</code>)または完全なプロジェクトをここにドロップすると、現在開いているプロジェクトがあれば、それを閉じた後に対応するプロジェクトが開きます。</p>
+                              <p>他のファイルをドロップすると、それらは<code class="filename">原文</code>フォルダーにコピーされます。これは、 <a class="link" href="chapter.windows.and.dialogs.html#windows.source.files.list" title="翻訳対象ファイル一覧">
+                                    <span class="guilabel">翻訳対象ファイル一覧</span>
+                                 </a> ウィンドウにも適用されます。</p>
+                           </dd>
+                           <dt>
+                              <span class="term">参考訳文ウィンドウ</span>
+                           </dt>
+                           <dd>
+                              <p>
+                                 <code class="filename">.tmx</code>ファイルをドロップすると<code class="filename">tm</code>フォルダーにコピーされます。</p>
+                           </dd>
+                           <dt>
+                              <span class="term">用語集ウィンドウ</span>
+                           </dt>
+                           <dd>
+                              <p>用語集として既知の拡張子（<code class="filename">.txt</code>、<code class="filename">.tab</code>など）を持つファイルをこのウィンドウにドロップすると、そのファイルが<code class="filename">用語集</code>フォルダにコピーされます。</p>
+                           </dd>
+                        </dl>
+                     </div>
+                  </dd>
+                  <dt id="panes.notifications">
+                     <span class="term" id="panes.notifications.title">通知</span>
+                  </dt>
+                  <dd>
+                     <p>ウィンドウが最小化されていても、表示コンテンツがある場合、分節に入るときにウィンドウタブを一時的にオレンジ色で強調表示できます。</p>
+                     <p>デフォルトでは、<span class="guilabel">コメント</span>および<span class="guilabel">メモ帳</span>ウィンドウで通知が有効になっています。</p>
+                     <p>通知を有効または無効にするには、</p>
+                     <div class="itemizedlist">
+                        <ul class="itemizedlist" style="list-style-type: disc; ">
+                           <li class="listitem">
+                              <p>ウィンドウに入ります。</p>
+                           </li>
+                           <li class="listitem">
+                              <p>右上の<span class="guilabel">アクション</span>ウィジェットをクリックします。</p>
+                           </li>
+                           <li class="listitem">
+                              <p>
+                                 <span class="guilabel">分節が次の場合に通知する</span>を選択します(通知を有効にするウィンドウによってメニューの順序が異なります)。</p>
+                           </li>
+                        </ul>
+                     </div>
+                     <p>次のウィンドウでは、通知を表示できます。</p>
+                     <div class="itemizedlist">
+                        <ul class="itemizedlist" style="list-style-type: disc; ">
+                           <li class="listitem">
+                              <p>コメント</p>
+                           </li>
+                           <li class="listitem">
+                              <p>辞書</p>
+                           </li>
+                           <li class="listitem">
+                              <p>参考訳文</p>
+                           </li>
+                           <li class="listitem">
+                              <p>用語集</p>
+                           </li>
+                           <li class="listitem">
+                              <p>複数訳文</p>
+                           </li>
+                           <li class="listitem">
+                              <p>メモ帳</p>
+                           </li>
+                           <li class="listitem">
+                              <p>分節属性</p>
+                              <p>
+                                 <span class="guilabel">分節属性</span>ウィンドウでは、各項目の通知設定を行うことができます。</p>
+                              <p>
+                                 <span class="guilabel">表表示</span>では、項目で右クリックして<span class="guilabel">分節が次の場合に通知する</span>を選択します(有効にしたい通知によって選択するメニューの順序が異なります)。</p>
+                              <p>
+                                 <span class="guilabel">リスト表示</span>で通知させたい項目の右端の<span class="guilabel">アクション</span>ウィジェットを右クリックして、<span class="guilabel">分節が次の場合に通知する</span>(通知によって選択するメニューの場所は異なります)。</p>
+                           </li>
+                        </ul>
+                     </div>
+                  </dd>
+               </dl>
+            </div>
+         </section>
+         <section class="section" id="panes.editor">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">
+                        <span class="guilabel">編集</span>
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>翻訳内容を入力、編集する場所です。</p>
+            <p>文章が多数の分節に分割されます。スクロールで文書内を移動でき、どの分節でもダブルクリックすることで編集できます。</p>
+            <div class="example" id="panes.editor.default.editor.writing.space">
+               <div class="example-title">例7 編集ウィンドウのデフォルトでの編集領域</div>
+               <div class="example-contents">
+                  <p>
+		
+                  </p>
+                  <pre class="programlisting">— ¶ —————————————————————
+
+<span class="token">Hide Tags</span>
+|タグを隠す<span class="token">&lt;segment 2148 ¶&gt;</span>
+
+— ¶ —————————————————————
+
+この設定にチェックを入れると、原文分節からすべての整形用のタグを非表示にします。</pre>
+               </div>
+            </div>
+            <br class="example-break" />
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>緑の背景に太字で表示されている最初の行は、翻訳する原文の文章です。</p>
+                  </li>
+                  <li class="listitem">
+                     <p>
+                        <span class="bold">
+                           <strong>移動領域</strong>
+                        </span>は、左側の罫線と右側の分節マーカーの間の2番目の線です。<span class="bold">
+                           <strong>翻訳領域</strong>
+                        </span>は、翻訳を入力する場所です。</p>
+                  </li>
+                  <li class="listitem">
+                     <p>ここの分節マーカーは<code class="literal">&lt;分節2148¶&gt;</code>です。</p>
+                     <p>
+                        <code class="literal">2148</code>はプロジェクト内の分節の番号であり、<code class="literal">¶</code>記号は分節が段落内の最初の分節であることを示します。</p>
+                  </li>
+                  <li class="listitem">
+                     <p>カーソル移動範囲は、デフォルトでは翻訳領域にロックされます。</p>
+                     <p>
+                        <span class="keycap">
+                           <strong>F2</strong>
+                        </span>を使用してロックを解除し、移動領域とウィンドウの他の部分との間で自由に移動できます。</p>
+                  </li>
+                  <li class="listitem">
+                     <p>翻訳領域の下は別の分節です。</p>
+                  </li>
+                  <li class="listitem">
+                     <p>
+                        <a class="link" href="chapter.menus.html#menus.goto" title="移動">
+                           <span class="guimenu">移動</span>
+                        </a>
+                        <a class="link" href="chapter.menus.html#menus.goto.next.untranslated.segment">
+                           <span class="guimenuitem">次の未翻訳分節</span>
+                           <span class="keycap">
+                              <strong>C</strong>
+                           </span>+<span class="keycap">
+                              <strong>U</strong>
+                           </span>
+                        </a>またはその他のナビゲーションコマンドを使用して、次の操作を行います。</p>
+                     <div class="itemizedlist">
+                        <ul class="itemizedlist" style="list-style-type: circle; ">
+                           <li class="listitem">
+                              <p>翻訳領域の内容をプロジェクト翻訳メモリに登録する</p>
+                           </li>
+                           <li class="listitem">
+                              <p>翻訳の次の分節に入ってください。</p>
+                           </li>
+                        </ul>
+                     </div>
+                     <p>詳細については、<a class="link" href="chapter.menus.html#menus.goto" title="移動">
+                           <span class="guimenu">移動</span>
+                        </a>メニューを参照してください。</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="note">
+               <h3 class="title">注記</h3>
+               <p>ワークフローに合わせて編集内容表示を修正します。</p>
+               <p>次のような変更が可能です:</p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>
+                           <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.fonts" title="字体設定">
+                              <span class="guilabel">字体設定</span>
+                           </a>設定に従って字体を変更します。</p>
+                     </li>
+                     <li class="listitem">
+                        <p>
+                           <a class="link" href="chapter.menus.html#menus.view" title="表示">
+                              <span class="guimenu">表示</span>
+                           </a>
+                           <a class="link" href="chapter.menus.html#menus.view.mark.paragraph.delimitations">
+                              <span class="guimenuitem">段落区切りを表示</span>
+                           </a>を使用して段落の区切りを表示または非表示にします。</p>
+                     </li>
+                     <li class="listitem">
+                        <p>
+                           <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.editor.paragraph.delimitation.format">
+                              <code class="option">段落区切り形式</code>
+                           </a>設定で定義されている段落区切りの設定を変更します。</p>
+                     </li>
+                     <li class="listitem">
+                        <p>
+                           <a class="link" href="chapter.menus.html#menus.view" title="表示">
+                              <span class="guimenu">表示</span>
+                           </a>
+                           <a class="link" href="chapter.menus.html#menus.view.modification.info">
+                              <span class="guisubmenu">更新情報を表示</span>
+                           </a>を使って分節の変更情報を表示</p>
+                     </li>
+                     <li class="listitem">
+                        <p>
+                           <a class="link" href="chapter.menus.html#menus.view" title="表示">
+                              <span class="guimenu">表示</span>
+                           </a>
+                           <a class="link" href="chapter.menus.html#menus.view.display.source.segments">
+                              <span class="guimenuitem">原文を表示</span>
+                           </a>を使用して原文分節を表示または非表示にします。</p>
+                     </li>
+                     <li class="listitem">
+                        <p>
+                           <a class="link" href="chapter.menus.html#menus.view" title="表示">
+                              <span class="guimenu">表示</span>
+                           </a>
+                           <a class="link" href="chapter.menus.html#menus.view.mark.translated.segments">
+                              <span class="guimenuitem">翻訳済み分節を色づけ</span>
+                           </a>を使用して訳文分節をハイライト表示します。</p>
+                     </li>
+                     <li class="listitem">
+                        <p>
+                           <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.editor.leave.the.segment.empty">
+                              <code class="option">原文を挿入しない</code>
+                           </a>設定を無効にして、原文を訳文領域に自動挿入します。</p>
+                     </li>
+                     <li class="listitem">
+                        <p>
+                           <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.editor.insert.the.best.fuzzy.match">
+                              <code class="option">最も一致率の高い参考訳文を自動で挿入</code>
+                           </a>設定で定義されたしきい値を超える、参考訳文の候補を挿入します。</p>
+                     </li>
+                     <li class="listitem">
+                        <p>
+                           <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation">
+                              <code class="option">フラグ付き文字列</code>
+                           </a>設定で有効して、翻訳から除外するテキストを定義できます。</p>
+                     </li>
+                  </ul>
+               </div>
+               <p>
+                  <a class="link" href="chapter.menus.html#menus.view" title="表示">
+                     <span class="guimenu">表示</span>
+                  </a>メニューの詳細については、設定-<a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.editor" title="編集">
+                     <span class="guilabel">編集</span>
+                  </a>を参照してください。</p>
+            </div>
+            <div class="variablelist">
+               <dl class="variablelist">
+                  <dt>
+                     <span class="term">空訳文</span>
+                  </dt>
+                  <dd>
+                     <p>翻訳領域を空のままにしておくと、OmegaTは訳文の文書を作成するときに、その分節を未翻訳として扱って元の言語で出力します。</p>
+                  </dd>
+                  <dt>
+                     <span class="term">原文とおなじ訳文</span>
+                  </dt>
+                  <dd>
+                     <p>OmegaT では、生成される訳文が原文と同じにすることもできます。これは商標や固有名詞、第３の言語による章など、翻訳の必要がない部分を残しておきたいときに便利です。</p>
+                  </dd>
+                  <dt>
+                     <span class="term">テキストのドラッグ</span>
+                  </dt>
+                  <dd>
+                     <p>メインウィンドウ内の任意の場所からテキストをドラッグして、訳文領域にドロップすることができます。訳文分節以外からドラッグしたテキストはコピーされ、訳文分節内からドラッグしたテキストは移動します。</p>
+                  </dd>
+                  <dt id="panes.editor.overwriting">
+                     <span class="term" id="panes.editor.overwriting.title">上書き</span>
+                  </dt>
+                  <dd>
+                     <p>デフォルトでは、入力中の方向のカーソルの後にテキストは入力されます。既存の文章を上書きするには、次のキーを使用します。</p>
+                     <div class="itemizedlist">
+                        <ul class="itemizedlist" style="list-style-type: disc; ">
+                           <li class="listitem">
+                              <p>WindowsとLinux: <span class="keycap">
+                                    <strong>INSERT</strong>
+                                 </span>
+                              </p>
+                           </li>
+                           <li class="listitem">
+                              <p>macOS: <span class="keycap">
+                                    <strong>F3</strong>
+                                 </span>
+                              </p>
+                           </li>
+                        </ul>
+                     </div>
+                     <p>
+                        <a class="link" href="chapter.panes.html#panes.statusbar" title="ステータスバー">ステータスバー</a>の右側には、書き込みモード(上書き-<span class="guilabel">OVR</span>または挿入-<span class="guilabel">INS</span>)が表示されます。同じキーで各モードを切り替えることができます。</p>
+                  </dd>
+                  <dt id="panes.editor.cursor.lock">
+                     <span class="term" id="panes.editor.cursor.lock.title">カーソルロック</span>
+                  </dt>
+                  <dd>
+                     <p>カーソル移動範囲は、デフォルトでは翻訳領域にロックされ、矢印キーで原文に移動することはできません。</p>
+                     <p>
+                        <span class="keycap">
+                           <strong>[F2]</strong>
+                        </span>キーを押すとカーソルをロック解除して、キーボードの矢印を使用して、カーソルを原文分節(またはエディタ内の任意の場所)に移動できます。キーボード操作だけで、任意のテキストを選択することができます。</p>
+                     <p>カーソルのステータス(ロック-<span class="guilabel">LCK</span>またはロック解除-<span class="guilabel">UNL</span>)は、<a class="link" href="chapter.panes.html#panes.statusbar" title="ステータスバー">ステータスバー</a>の右側に表示されます。同じキーでロックとロック解除を切り替えることができます。</p>
+                  </dd>
+                  <dt id="panes.editor.context.menu">
+                     <span class="term" id="panes.editor.context.menu.title">コンテキストメニュー</span>
+                  </dt>
+                  <dd>
+                     <p>デフォルトのショートカット:</p>
+                     <div class="itemizedlist">
+                        <ul class="itemizedlist" style="list-style-type: disc; ">
+                           <li class="listitem">
+                              <p>WindowsとLinux: <span class="keycap">
+                                    <strong>メニュー</strong>
+                                 </span>
+                              </p>
+                           </li>
+                           <li class="listitem">
+                              <p>macOS: <span class="keycap">
+                                    <strong>S</strong>
+                                 </span>+<span class="keycap">
+                                    <strong>Esc</strong>
+                                 </span>
+                              </p>
+                           </li>
+                        </ul>
+                     </div>
+                     <p>マウスを右クリックしてメニューを表示することもできます(macOSでは<span class="keycap">
+                           <strong>C</strong>
+                        </span>+<span class="keycap">
+                           <strong>クリック</strong>
+                        </span>)。</p>
+                     <p>編集ウィンドウのコンテキストメニューには、<a class="link" href="chapter.menus.html#menus.edit" title="編集">
+                           <span class="guimenu">編集</span>
+                        </a>メニューから使用できる次のようなさまざまな機能があります。</p>
+                     <div class="itemizedlist">
+                        <ul class="itemizedlist" style="list-style-type: disc; ">
+                           <li class="listitem">
+                              <p>一致した用語集項目とコメント(ツールチップとして表示される場合)。<a class="link" href="chapter.menus.html#menus.view" title="表示">
+                                    <span class="guimenu">表示</span>
+                                 </a>
+                                 <a class="link" href="chapter.menus.html#menus.view.mark.glossary.matches">
+                                    <span class="guimenuitem">用語集の一致をマーク</span>
+                                 </a>を使用して、この機能を有効にします。</p>
+                           </li>
+                           <li class="listitem">
+                              <p>
+                                 <span class="guilabel">切り取り</span>、<span class="guilabel">コピー</span>、<span class="guilabel">貼り付け</span>の機能</p>
+                           </li>
+                           <li class="listitem">
+                              <p>
+                                 <span class="guilabel">分節に移動</span>(ポインタの下の分節にジャンプします)。</p>
+                           </li>
+                           <li class="listitem">
+                              <p>
+                                 <span class="guilabel">辞書の検索</span>(インストールされた辞書で選択した用語を検索するため)。</p>
+                           </li>
+                           <li class="listitem">
+                              <p>
+                                 <span class="guilabel">用語を追加</span>(<a class="link" href="chapter.menus.html#menus.edit" title="編集">
+                                    <span class="guimenu">編集</span>
+                                 </a>
+                                 <a class="link" href="chapter.menus.html#menus.edit.create.glossary.entry">
+                                    <span class="guimenuitem">用語の追加...</span> 
+                                    <span class="keycap">
+                                       <strong>C</strong>
+                                    </span>+<span class="keycap">
+                                       <strong>S</strong>
+                                    </span>+<span class="keycap">
+                                       <strong>G</strong>
+                                    </span>
+	  
+                                 </a>を使用するのと同じ)。</p>
+                           </li>
+                        </ul>
+                     </div>
+                     <p>
+                        <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.external.searches" title="ユーザーレベルの外部検索">
+                           <span class="guilabel">ユーザーレベルの外部検索</span>
+                        </a>環境設定で文章を選択してエントリを定義した場合は、それらもこのメニューに表示されます(ローカル検索と同様)。</p>
+                  </dd>
+                  <dt id="panes.editor.auto.completion.menu">
+                     <span class="term" id="panes.editor.auto.completion.menu.title">入力補完メニュー</span>
+                  </dt>
+                  <dd>
+                     <p>デフォルトのショートカット:</p>
+                     <div class="itemizedlist">
+                        <ul class="itemizedlist" style="list-style-type: disc; ">
+                           <li class="listitem">
+                              <p>WindowsおよびLinuxの場合:<span class="keycap">
+                                    <strong>Control</strong>
+                                 </span>+<span class="keycap">
+                                    <strong>Space</strong>
+                                 </span>
+                              </p>
+                           </li>
+                           <li class="listitem">
+                              <p>macOSの場合: <span class="keycap">
+                                    <strong>Esc</strong>
+                                 </span>
+                              </p>
+                           </li>
+                        </ul>
+                     </div>
+                     <p>このメニューでは、<a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.auto.completion" title="入力補完">
+                           <span class="guilabel">入力補完</span>
+                        </a>設定で設定された自動補完オプションを提供します。</p>
+                  </dd>
+                  <dt id="panes.editor.navigation">
+                     <span class="term" id="panes.editor.navigation.title">ナビゲーション</span>
+                  </dt>
+                  <dd>
+                     <p>
+                        <a class="link" href="chapter.menus.html#menus.goto" title="移動">
+                           <span class="guimenu">移動</span>
+                        </a>
+                        <a class="link" href="chapter.menus.html#menus.goto.notes.pane">
+                           <span class="guimenuitem">メモ帳</span>
+                           <span class="keycap">
+                              <strong>C</strong>
+                           </span>+<span class="keycap">
+                              <strong>A</strong>
+                           </span>+<span class="keycap">
+                              <strong>N</strong>
+                           </span>
+                        </a>を使用するとウィンドウに移動でき、そこでコメントを追加できます。</p>
+                     <p>
+                        <a class="link" href="chapter.menus.html#menus.goto" title="移動">
+                           <span class="guimenu">移動</span>
+                        </a>
+                        <a class="link" href="chapter.menus.html#menus.goto.editor.pane">
+                           <span class="guimenuitem">編集</span>
+                           <span class="keycap">
+                              <strong>C</strong>
+                           </span>+<span class="keycap">
+                              <strong>A</strong>
+                           </span>+<span class="keycap">
+                              <strong>E</strong>
+                           </span>
+                        </a>を使用して編集に戻ります。</p>
+                  </dd>
+               </dl>
+            </div>
+         </section>
+         <section class="section" id="panes.fuzzy.matches">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">
+                        <span class="guilabel">参考訳文</span>
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>参考訳文ウィンドウには、現在翻訳中の分節に最も近い翻訳メモリの分節が表示されます。</p>
+            <p>参考訳文は、プロジェクトの翻訳メモリ時にリアルタイムで作成された内部プロジェクト翻訳と、以前のプロジェクトからインポートした外部メモリまたはサードパーティから受け取った外部メモリの全てから取得されます。詳細については、 <a class="link" href="chapter.how.to.html#how.to.use.tm" title="翻訳メモリを使用する">翻訳メモリを使用する</a>を参照してください。</p>
+            <p>次の分節に移動すると、最初の参考訳文（最も一致率の高いもの）が自動的に選択されます。別の参考訳文を選択するには、<span class="keycap">
+                  <strong>C</strong>
+               </span>+<span class="keycap">
+                  <strong>2、3、4、または5</strong>
+               </span>を押すか、<a class="link" href="chapter.menus.html#menus.edit" title="編集">
+                  <span class="guimenu">編集</span>
+               </a>
+               <a class="link" href="chapter.menus.html#menus.edit.select.match">
+                  <span class="guisubmenu">参考訳文を選択</span>
+               </a>を使用します。</p>
+            <div class="example" id="the.first.match">
+               <div class="example-title">例8 空の分節と最初の2つのマッチ</div>
+               <div class="example-contents">
+                  <p>
+		
+                  </p>
+                  <div class="informaltable" id="table.pane.matches">
+                     <table style="border-collapse: collapse; border-top: 1px solid ; border-bottom: 1px solid ; border-left: 1px solid ; border-right: 1px solid ; ">
+                        <colgroup>
+                           <col />
+                           <col />
+                        </colgroup>
+                        <tbody>
+                           <tr>
+                              <td style="border-right: 1px solid ; ">
+                                 <p>
+				  
+                                 </p>
+                                 <div class="informaltable">
+                                    <table style="border-collapse: collapse; border-top: 1px solid ; border-bottom: 1px solid ; border-left: 1px solid ; border-right: 1px solid ; ">
+                                       <colgroup>
+                                          <col />
+                                       </colgroup>
+                                       <tbody>
+                                          <tr>
+                                             <td>
+							
+                                                <pre class="programlisting">— ¶ —————————————————————
+
+<span class="token">Application Folder</span>
+|<span class="token">&lt;segment 1879 ¶&gt;</span>
+
+— ¶ —————————————————————
+</pre>
+                                             </td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <p>
+				
+                                 </p>
+				
+                              </td>
+                              <td>
+                                 <p>
+				  
+                                 </p>
+                                 <div class="informaltable">
+                                    <table style="border-collapse: collapse; border-top: 1px solid ; border-bottom: 1px solid ; border-left: 1px solid ; border-right: 1px solid ; ">
+                                       <colgroup>
+                                          <col />
+                                       </colgroup>
+                                       <tbody>
+                                          <tr>
+                                             <td>
+							
+                                                <pre class="programlisting">1. <span class="token">Top</span> Folder
+Dossier racine
+&lt;50/50/66% Orphan segments (+1 more)&gt;</pre>
+
+                                                <pre class="programlisting">2. Configuration Folder
+Dossier de configuration
+&lt;50/50/66% &gt;</pre>
+                                             </td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <p>
+				
+                                 </p>
+				
+                              </td>
+                           </tr>
+                        </tbody>
+                     </table>
+                  </div>
+                  <p>
+	  
+                  </p>
+               </div>
+            </div>
+            <br class="example-break" />
+            <p>選択した参考訳文が<span class="bold">
+                  <strong>太字</strong>
+               </span>で強調表示されます。翻訳中の分節から欠落している単語は<span class="bold">
+                  <strong>青</strong>
+               </span>で表示され、隣接する部分は<span class="bold">
+                  <strong>緑</strong>
+               </span>で表示されます(隣接する部分が空白の場合、上記のように、その部分は色付けされません)。</p>
+            <p>参考訳文には、3つのパーセンテージも表示されます。</p>
+            <p>これらのパーセンテージは、順序ごとに次の意味を持ちます。</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>原文にトークナイザー を使う<span class="bold">
+                           <strong>語形変化</strong>
+                        </span> オプションで計算されたパーセンテージで、かつ<span class="bold">
+                           <strong>タグなし、数値なし</strong>
+                        </span>も適用して、一般にもっとも大きな数字になる。</p>
+                  </li>
+                  <li class="listitem">
+                     <p>
+                        <span class="bold">
+                           <strong>語形変化</strong>
+                        </span>を伴わず、<span class="bold">
+                           <strong>タグと数字を無視</strong>
+                        </span>して計算されたパーセンテージ(一般にわずかに低い)</p>
+                  </li>
+                  <li class="listitem">
+                     <p>
+                        <span class="bold">
+                           <strong>タグと数字を含む全文</strong>
+                        </span>で計算されたパーセンテージ(通常は最低)</p>
+                     <div class="note">
+                        <h3 class="title">注記</h3>
+                        <p>分節に数字または記号のみが含まれている場合、この割合は最も高くなります。</p>
+                     </div>
+                  </li>
+               </ul>
+            </div>
+            <p>一致の表示または並べ替えの方法を変更できます。詳細については、設定-<a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.tm.matches" title="参考訳文">
+                  <code class="option">参考訳文</code>
+               </a>を参照してください。</p>
+            <p>
+               <a class="link" href="chapter.menus.html#menus.edit" title="編集">
+                  <span class="guimenu">編集</span>
+               </a>
+               <a class="link" href="chapter.menus.html#menus.edit.replace.with.match.or.selection">
+                  <span class="guimenuitem">参考訳文または選択範囲に置換</span>
+                  <span class="keycap">
+                     <strong>C</strong>
+                  </span>+<span class="keycap">
+                     <strong>R</strong>
+                  </span>
+	  
+               </a>を使用して、訳文領域を参考訳文に置き換えます。または<a class="link" href="chapter.menus.html#menus.edit" title="編集">
+                  <span class="guimenu">編集</span>
+               </a>
+               <a class="link" href="chapter.menus.html#menus.edit.insert.match.or.selection">
+                  <span class="guimenuitem">参考訳文または選択範囲を挿入</span>
+                  <span class="keycap">
+                     <strong>C</strong>
+                  </span>+<span class="keycap">
+                     <strong>I</strong>
+                  </span>
+               </a>を使用して、カーソル位置に挿入します。</p>
+         </section>
+         <section class="section" id="panes.glossary">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">
+                        <span class="guilabel">用語集</span>
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>このウィンドウには、現在の用語集の用語に対応する分節ファイルからの用語が表示されます。用語集ファイルは、プロジェクトの<a class="link" href="chapter.project.folder.html#project.folder.glossary" title="用語集">用語集</a>フォルダーにあります。</p>
+            <p>用語集の原文は「=」記号の前に表示され、訳語はその後に表示されます。見出し語にコメントが含まれている場合は、コメントに番号が付けられ、用語の下の別々の行に表示されます。書き込み可能な用語集で見つかった用語は太字で表示され、他の文章からの用語は通常の用語集として表示されます。</p>
+            <div class="example" id="glossary.matches">
+               <div class="example-title">例9 参考用語</div>
+               <div class="example-contents">
+                  <p>
+		
+                  </p>
+                  <pre class="programlisting">Project = <span class="token">Projet</span>
+1. Projet de traduction
+
+Folder = <span class="token">Dossier</span>
+                  </pre>
+                  <p>
+	  
+                  </p>
+               </div>
+            </div>
+            <br class="example-break" />
+            <p>用語の上にカーソルを置くと、用語集ファイル名がツールチップとして表示されます。</p>
+            <p>用語のコメント領域にはハイパーリンクを含めることができます。ハイパーリンクをクリックすると、さらに参照できます。</p>
+            <p>関連付けられたプログラムで開かれているローカルファイル(<code class="filename">file:///PATH/filename</code>)へのリンク。ウェブのアドレス(<code class="filename">https://...</code>)は、OS標準のブラウザで開きます。</p>
+            <p>用語集ウィンドウで用語を選択して右クリックすると、翻訳文に挿入できます。</p>
+            <p>
+               <a class="link" href="chapter.menus.html#menus.view" title="表示">
+                  <span class="guimenu">表示</span>
+               </a>
+               <a class="link" href="chapter.menus.html#menus.view.mark.glossary.matches">
+                  <span class="guimenuitem">用語集の一致をマーク</span>
+               </a>を使用して、用語集の一致に下線を引きます。</p>
+            <p>次に、原文分節の下線付きの単語を右クリックすると、用語集で使用可能な翻訳を一覧表示するポップアップメニューが開きます。いずれかを選択して、分節の現在のカーソル位置に挿入します。</p>
+            <p>用語集の環境設定を使用して、用語集の表示方法を微調整できます。詳細については、設定-<a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.glossary" title="用語集">
+                  <span class="guilabel">用語集</span>
+               </a>を参照してください。</p>
+            <p>用語集フォルダーの用語集ファイルに対する変更は、OmegaTによって即座に認識され、用語集ウィンドウに表示されます。</p>
+            <p>OmegaTには、プロジェクトごとに1つの書き込み可能な用語集ファイルが含まれます。<a class="link" href="chapter.menus.html#menus.edit" title="編集">
+                  <span class="guimenu">編集</span>
+               </a>
+               <a class="link" href="chapter.menus.html#menus.edit.create.glossary.entry">
+                  <span class="guimenuitem">用語の追加...</span> 
+                  <span class="keycap">
+                     <strong>C</strong>
+                  </span>+<span class="keycap">
+                     <strong>S</strong>
+                  </span>+<span class="keycap">
+                     <strong>G</strong>
+                  </span>
+	  
+               </a>を使用して、そのファイルに用語を追加します。</p>
+            <p>詳細は、付録の <a class="link" href="chapter.appendices.html#app.glossaries" title="用語集">用語集</a> をご覧ください。</p>
+         </section>
+         <section class="section" id="panes.dictionary">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">
+                        <span class="guilabel">辞書</span>
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>このウィンドウには、分節の用語に対応する辞書ファイルからの用語が表示されます。辞書ファイルは、プロジェクトの<a class="link" href="chapter.project.folder.html#project.folder.dictionary" title="辞書">辞書</a>フォルダーにあります。詳細の<a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.dictionary" title="辞書">
+                  <span class="guilabel">辞書</span>
+               </a>環境設定を参照してください。</p>
+         </section>
+         <section class="section" id="panes.machinetranslation">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">
+                        <span class="guilabel">機械翻訳</span>
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>このウィンドウを開くと、有効になっている各機械翻訳エンジンによって生成された分節の訳文候補が表示されます。複数のエンジンからの訳文の提案が利用可能な場合</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>エンジンの名前が訳文の後に表示されます。</p>
+                  </li>
+                  <li class="listitem">
+                     <p>結果はエンジン名のアルファベット順にソートされます。</p>
+                  </li>
+                  <li class="listitem">
+                     <p>現在選択されている対訳が反転表示されます。</p>
+                  </li>
+               </ul>
+            </div>
+            <p>
+               <a class="link" href="chapter.menus.html#menus.edit" title="編集">
+                  <span class="guimenu">編集</span>
+               </a>
+               <a class="link" href="chapter.menus.html#menus.edit.replace.with.mt.title">
+                  <span class="guimenuitem">機械翻訳に置換</span> 
+                  <span class="keycap">
+                     <strong>C</strong>
+                  </span>+<span class="keycap">
+                     <strong>M</strong>
+                  </span>
+	  
+               </a>を使用して、現在の分節の翻訳文を選択した機械翻訳エンジンに置き換えます。</p>
+            <p>選択したエンジン名は、現在の分節の<em class="parameter">
+                  <code>Origin</code>
+               </em>属性に割り当てられます。</p>
+            <p>機械翻訳エンジンに接続エラーまたは認証エラーが発生した場合は、ウィンドウの下部にあるステータスバーに結果メッセージが表示されます。</p>
+            <p>サービスが有効になっていて、資格情報が正しく入力されていることを確認します。必要に応じて、サービスプロバイダに問い合わせてサポートを受ける必要があるかもしれません。。同様に、<code class="literal">翻訳サービス応答を解析できません</code>などのエラーは、システムとプロバイダのサーバとの間に通信の問題がある可能性を示唆しています。</p>
+            <p>詳細については、設定-<a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.mt" title="機械翻訳">
+                  <span class="guilabel">機械翻訳</span>
+               </a>を参照してください。</p>
+         </section>
+         <section class="section" id="panes.multipletranslations">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">
+                        <span class="guilabel">複数訳文</span>
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>同じ内容の原文分節が複数存在し、それぞれの文脈に応じて異なる対訳が必要になることがあります。</p>
+            <p>異なる訳文が必要な分節には、例外訳文を割りあてるために、<a class="link" href="chapter.menus.html#menus.edit" title="編集">
+                  <span class="guimenu">編集</span>
+               </a>
+               <a class="link" href="chapter.menus.html#menus.edit.create.alternative.translation">
+                  <span class="guimenuitem">例外訳文を登録</span>
+               </a>を使うことができます。その後に入力した訳文は、「例外訳文」として扱われます。同じ内容の他の原文に対する既存の訳文には影響しません。</p>
+            <p>
+               <a class="link" href="chapter.menus.html#menus.edit" title="編集">
+                  <span class="guimenu">編集</span>
+               </a>
+               <a class="link" href="chapter.menus.html#menus.edit.use.as.default.translation">
+                  <span class="guimenuitem">基本訳文として使用</span>
+               </a>を使用して、実例で最も一般的または可能性の高い選択肢の1つを基本訳文として定義します。</p>
+         </section>
+         <section class="section" id="panes.notes">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">
+                        <span class="guilabel">メモ帳</span>
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>このウィンドウは、現在アクティブな分節にメモを追加できる<span class="emphasis">
+                  <em>編集可能</em>
+               </span>なスペースです。</p>
+            <p>これにより、後で翻訳に戻って翻訳を確認したり、別の翻訳が正しいことを確認したり、共有プロジェクトで同僚に意見を求めたりできます。</p>
+            <p>
+               <a class="link" href="chapter.menus.html#menus.goto" title="移動">
+                  <span class="guimenu">移動</span>
+               </a>
+               <a class="link" href="chapter.menus.html#menus.goto.next.note">
+                  <span class="guimenuitem">次のメモ</span>
+                  <span class="keycap">
+                     <strong>C</strong>
+                  </span>+<span class="keycap">
+                     <strong>A</strong>
+                  </span>+<span class="keycap">
+                     <strong>N</strong>
+                  </span>
+               </a>および<a class="link" href="chapter.menus.html#menus.goto" title="移動">
+                  <span class="guimenu">移動</span>
+               </a>
+               <a class="link" href="chapter.menus.html#menus.goto.previous.note">
+                  <span class="guimenuitem">前のメモ</span>
+                  <span class="keycap">
+                     <strong>C</strong>
+                  </span>+<span class="keycap">
+                     <strong>A</strong>
+                  </span>+<span class="keycap">
+                     <strong>P</strong>
+                  </span>
+               </a>を使用して、ノートを参照することができます。</p>
+            <p>
+               <a class="link" href="chapter.menus.html#menus.goto" title="移動">
+                  <span class="guimenu">移動</span>
+               </a>
+               <a class="link" href="chapter.menus.html#menus.goto.notes.pane">
+                  <span class="guimenuitem">メモ帳</span>
+                  <span class="keycap">
+                     <strong>C</strong>
+                  </span>+<span class="keycap">
+                     <strong>A</strong>
+                  </span>+<span class="keycap">
+                     <strong>N</strong>
+                  </span>
+               </a>を使用するとウィンドウに移動でき、そこでコメントを追加できます。</p>
+            <p>
+               <a class="link" href="chapter.menus.html#menus.goto" title="移動">
+                  <span class="guimenu">移動</span>
+               </a>
+               <a class="link" href="chapter.menus.html#menus.goto.editor.pane">
+                  <span class="guimenuitem">編集</span>
+                  <span class="keycap">
+                     <strong>C</strong>
+                  </span>+<span class="keycap">
+                     <strong>A</strong>
+                  </span>+<span class="keycap">
+                     <strong>E</strong>
+                  </span>
+               </a>を使用して編集に戻ります。</p>
+            <div class="note">
+               <h3 class="title">注記</h3>
+               <p>メモは、プロジェクトの翻訳メモリに保存されます。これらは訳文ファイルには<span class="emphasis">
+                     <em>保存されません</em>
+                  </span>。</p>
+            </div>
+         </section>
+         <section class="section" id="panes.comments">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">
+                        <span class="guilabel">コメント</span>
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>PO形式などの一部のファイル形式には、翻訳者が翻訳のコンテキストを追加するためのコメントを含めることができます。このようなコメントはここに表示されます。</p>
+            <div class="note">
+               <h3 class="title">注記</h3>
+               <p>
+                  <span class="guilabel">[コメント]</span>ウィンドウは編集<span class="emphasis">
+                     <em>できません</em>
+                  </span>。ファイルに含まれる情報のみが表示されます。</p>
+               <p>
+                  <a class="link" href="chapter.panes.html#panes.notes" title="メモ帳">
+                     <span class="guilabel">メモ帳</span>
+                  </a>ウィンドウを使用して、翻訳に関する独自のコメントを入力します。</p>
+            </div>
+         </section>
+         <section class="section" id="panes.segment.properties">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">
+                        <span class="guilabel">文節属性</span>
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>すべての分節に文節属性があります。このウィンドウに属性が表示されています。</p>
+            <p>一般的な属性は次のとおりです。</p>
+            <div class="variablelist">
+               <dl class="variablelist">
+                  <dt>
+                     <span class="term">重複分節である</span>
+                  </dt>
+                  <dd>
+                     <p>分節が繰り返し登場することを示し、それが最初の実例であるかどうかを指定します。</p>
+                  </dd>
+                  <dt>
+                     <span class="term">ファイル</span>
+                  </dt>
+                  <dd>
+                     <p>分節が含まれているファイルを示します。</p>
+                  </dd>
+               </dl>
+            </div>
+            <div class="note">
+               <h3 class="title">注記</h3>
+               <p>分節属性ウィンドウは編集<span class="emphasis">
+                     <em>できません</em>
+                  </span>。分節に関連する情報のみが表示されます。</p>
+            </div>
+         </section>
+         <section class="section" id="panes.statusbar">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">
+                        <span class="guilabel">ステータスバー</span>
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>メインウィンドウの下部はステータスバーです。</p>
+            <p>ステータスバーの左側には、プロジェクトのアクションやエラーメッセージに関する情報が表示されます。</p>
+            <div class="example" id="panes.statusbar.messages">
+               <div class="example-title">例10 ステータスバーメッセージの例</div>
+               <div class="example-contents">
+                  <p>
+                     <code class="literal">リポジトリ同期中</code>
+                  </p>
+                  <p>→OmegaTはチーム・プロジェクトを開始し、リモートのリポジトリと同期します。</p>
+                  <p>
+                     <code class="literal">前回編集していた分節に移動しています...</code>
+                  </p>
+                  <p>→OmegaTは、最後に編集した分節を最後のセッションから開きます。</p>
+                  <p>
+                     <code class="literal">プロジェクトは午後10:48に自動保存されました</code>
+                  </p>
+                  <p>→OmegaTは最近プロジェクトを保存しました。</p>
+                  <p>
+                     <code class="literal">訳文ファイルの生成を完了</code>
+                  </p>
+                  <p>→ユーザーによってファイルが作成されました。</p>
+               </div>
+            </div>
+            <br class="example-break" />
+            <p>ステータスバーの右側には、カーソルが分節内でロックされているかどうか(<a class="link" href="chapter.panes.html#panes.editor.cursor.lock">カーソルロック</a>設定を参照)、およびカーソルが既存の文章を上書きするかどうか(<a class="link" href="chapter.panes.html#panes.editor.overwriting">上書き</a>設定を参照)が表示されます。また、進捗情報も表示されます。</p>
+            <p>数値をクリックすると、進捗状況が数値またはパーセントで交互に表示されます。</p>
+            <div class="example" id="panes.statusbar.widgets">
+               <div class="example-title">例11 ステータスバーの情報</div>
+               <div class="example-contents">
+                  <p>
+                     <code class="literal">LCK | OVR <span class="token">257/271 (12292/154896,
+	  177692)</span>
+                        <span class="token"> 35/0 </span>
+                     </code>
+                  </p>
+                  <div class="variablelist">
+                     <dl class="variablelist">
+                        <dt>
+                           <span class="term">カーソルの状態</span>
+                        </dt>
+                        <dd>
+                           <p>
+                              <code class="literal">LCK</code>は、カーソルが分節の内側にロックされていることを示します。</p>
+                           <p>
+                              <code class="literal">OVR</code>は、カーソルが既存の文章を上書きすることを示します。</p>
+                        </dd>
+                        <dt>
+                           <span class="term">ファイル内</span>
+                        </dt>
+                        <dd>
+                           <p>
+                              <span class="bold">
+                                 <strong>257</strong>
+                              </span>=翻訳済みの分節の数/<span class="bold">
+                                 <strong>271</strong>
+                              </span>=分節の総数</p>
+                        </dd>
+                        <dt>
+                           <span class="term">プロジェクトの統計</span>
+                        </dt>
+                        <dd>
+                           <p>
+                              <span class="bold">
+                                 <strong>12292</strong>
+                              </span>=未翻訳の分節の数/<span class="bold">
+                                 <strong>154896</strong>
+                              </span>=重複を除く分節の総数<span class="bold">
+                                 <strong>(177692)</strong>
+                              </span>=分節の総数</p>
+                        </dd>
+                        <dt>
+                           <span class="term">分節の統計</span>
+                        </dt>
+                        <dd>
+                           <p>
+                              <span class="bold">
+                                 <strong>35</strong>
+                              </span>= 原文分節の文字数 /<span class="bold">
+                                 <strong>0</strong>
+                              </span> 訳文分節の文字数</p>
+                        </dd>
+                     </dl>
+                  </div>
+               </div>
+            </div>
+            <br class="example-break" />
+            <div class="example" id="panes.statusbar.widgets.percentage">
+               <div class="example-title">例12 ステータスバーの情報、パーセント表示モード</div>
+               <div class="example-contents">
+                  <p>
+                     <code class="literal">UNL | INS <span class="token">94.8% (14 left) / 7.9% (142,604 left),
+	  177,692</span> 
+                        <span class="token">35/0</span>
+                     </code>
+                  </p>
+                  <div class="variablelist">
+                     <dl class="variablelist">
+                        <dt>
+                           <span class="term">カーソルの状態</span>
+                        </dt>
+                        <dd>
+                           <p>
+                              <code class="literal">UNL</code>は、カーソルが分節内でロックされておらず、編集ナビゲーションコマンドを使用して標準ウィンドウ内を移動できることを示しています。</p>
+                           <p>
+                              <code class="literal">INS</code>は、カーソル位置に入力しているテキストを挿入するモードであることを示しています。</p>
+                        </dd>
+                        <dt>
+                           <span class="term">ファイル内</span>
+                        </dt>
+                        <dd>
+                           <p>
+                              <span class="bold">
+                                 <strong>94.8%</strong>
+                              </span> = 翻訳済みの分節のパーセンテージ / <span class="bold">
+                                 <strong>14</strong>
+                              </span> = 未翻訳分節のパーセンテージ</p>
+                        </dd>
+                        <dt>
+                           <span class="term">プロジェクトの統計</span>
+                        </dt>
+                        <dd>
+                           <p>
+                              <span class="bold">
+                                 <strong>7.9%</strong>
+                              </span> = 翻訳済みの分節のパーセンテージ / <span class="bold">
+                                 <strong>142,604</strong>
+                              </span> = 未翻訳分節のパーセンテージ<span class="bold">
+                                 <strong>(177,692)</strong>
+                              </span> = 分節の総数</p>
+                        </dd>
+                        <dt>
+                           <span class="term">分節の統計</span>
+                        </dt>
+                        <dd>
+                           <p>
+                              <span class="bold">
+                                 <strong>35</strong>
+                              </span>= 原文分節の文字数 /<span class="bold">
+                                 <strong>0</strong>
+                              </span> 訳文分節の文字数</p>
+                        </dd>
+                     </dl>
+                  </div>
+               </div>
+            </div>
+            <br class="example-break" />
+         </section>
+      </section>
+      <footer>
+         <div class="navfooter">
+            <hr />
+            <table style="width: 100%; ">
+               <tr>
+                  <td style="width: 40%; text-align: left; ">
+                     <a accesskey="p" href="chapter.how.to.html">戻る</a> </td>
+                  <td style="width: 20%; text-align: center; "> </td>
+                  <td style="width: 40%; text-align: right; "> <a accesskey="n" href="chapter.menus.html">次へ</a>
+                  </td>
+               </tr>
+               <tr>
+                  <td style="width: 40%; text-align: left; vertical-align: top; ">操作方法... </td>
+                  <td style="width: 20%; text-align: center; ">
+                     <a accesskey="h" href="index_.html">ホーム</a>
+                  </td>
+                  <td style="width: 40%; text-align: right; vertical-align: top; "> メニュー</td>
+               </tr>
+            </table>
+         </div>
+      </footer>
+   </div>
+    </div>
+
+    
+  </body></html>

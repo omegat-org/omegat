@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.menus">
+  <title id="chapter.menus.title">Menús</title>
+
+  	<para>L'OmegaT té molt pocs botons i sembla una mica confús, o directament poc amigable, per a les persones acostumades a les interfícies basades en botons. La majoria de les accions es duen a terme amb l'ajuda de dreceres associades a elements del menú.</para>
+
+	<para>Les dreceres són omnipresents en aquest manual i segur que en poc temps recordareu les poques que són útils al llarg d'un dia normal de traducció.</para>
+
+	<para>Des dels menús podeu accedir a la majoria de funcions de l'OmegaT. La majoria dels elements dels menús tenen associada una drecera de teclat.</para>
+
+	<para>Menu items that do not indicate a shortcut do not have one assigned by default. Consulteu l'annex <link linkend="app.shortcuts.customization" endterm="app.shortcuts.customization.title"/> si voleu modificar o afegir dreceres.</para>
+
+  <note><para>Recordatori sobre la descripció de les dreceres de teclat:<table id="menus.shortcut.description">
+      <title id="menus.shortcut.description.title">Identificadors de les tecles modificadores</title>
+
+      <tgroup cols="3">
+        <thead>
+          <row>
+            <entry>Linux/Windows</entry>
+            <entry>Identificador de la tecla</entry>
+            <entry>macOS</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry><keycap>Maj</keycap></entry>
+            <entry><keycap>S</keycap></entry>
+            <entry><keycap>maj</keycap> o <keycap>⇧</keycap></entry>
+          </row>
+
+          <row>
+            <entry><keycap>Ctrl</keycap> o <keycap>Control</keycap></entry>
+            <entry><keycap>C</keycap></entry>
+            <entry><keycap>ordre</keycap> o <keycap>⌘</keycap></entry>
+          </row>
+
+          <row>
+            <entry><keycap>Alt</keycap></entry>
+            <entry><keycap>A</keycap></entry>
+            <entry><keycap>alt / opció</keycap> o <keycap>⌥</keycap></entry>
+          </row>
+
+          <row>
+            <entry/>
+            <entry><keycap>Ctrl</keycap></entry>
+            <entry><keycap>control</keycap> o <keycap>⌃</keycap></entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table></para>
+  </note>
+
+  <xi:include href="Menus_Project.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+  
+  <xi:include href="Menus_Edit.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+  <xi:include href="Menus_GoTo.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+  <xi:include href="Menus_View.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+  <xi:include href="Menus_Tools.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+  <xi:include href="Menus_Options.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+  <xi:include href="Menus_Help.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+</chapter>

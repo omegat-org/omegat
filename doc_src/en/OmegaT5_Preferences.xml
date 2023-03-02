@@ -760,7 +760,7 @@
 		  <warning>
 			<para>For security reasons, <link
 			linkend="dialogs.project.properties.external.searches">local
-			externam searches</link> are disabled by default.</para>
+			external searches</link> are disabled by default.</para>
 		  </warning>
 
 		  <para>Local external search commands are saved in the <link

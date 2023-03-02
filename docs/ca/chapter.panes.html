@@ -1,0 +1,1428 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head><meta charset="UTF-8" />
+      <title>Subfinestres</title>
+      <link href="OmegaT.css" rel="stylesheet" type="text/css" />
+      <meta content="DocBook XSL Stylesheets V1.79.1" name="generator" />
+      <link href="chapter.how.to.html" rel="prev" title="Guies" />
+      <link href="chapter.menus.html" rel="next" title="Menús" />
+   <meta content="width=device-width, initial-scale=1" name="viewport" /><link href="_wh/wh.css" rel="stylesheet" type="text/css" /><script src="_wh/jquery/jquery.min.js" type="text/javascript"></script><script charset="UTF-8" src="_wh/wh.js" type="text/javascript"></script><script charset="UTF-8" defer="defer" src="_wh/search.js" type="text/javascript"></script></head>
+   
+<body>
+    <div id="wh-header">
+    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 5.8.0 - Manual d'usuari</a></div></div>
+
+    <div id="wh-body">
+      <div class="wh-icon-menu" id="wh-menu"></div>
+      <div id="wh-navigation">
+        <div id="wh-navigation-form"><span id="wh-search-group"><span class="wh-icon-search" id="wh-do-search"></span><input id="wh-search-field" type="text" /><span class="wh-icon-cancel" id="wh-cancel-search"></span></span></div>
+        <div id="wh-toc-pane">
+        </div>
+        <div id="wh-search-pane">
+          <div id="wh-search-results">
+          </div>
+        </div>
+      </div>
+      <div id="wh-separator"></div>
+      <div id="wh-content">
+      
+      <header>
+         <div class="navheader">
+            <table style="width: 100%; ">
+               <tr>
+                  <th colspan="3" style="text-align: center; ">Subfinestres</th>
+               </tr>
+               <tr>
+                  <td style="width: 20%; text-align: left; ">
+                     <a accesskey="p" href="chapter.how.to.html">Anterior</a> </td>
+                  <th style="width: 60%; text-align: center; "> </th>
+                  <td style="width: 20%; text-align: right; "> <a accesskey="n" href="chapter.menus.html">Següent</a>
+                  </td>
+               </tr>
+            </table>
+            <hr />
+         </div>
+      </header>
+      <section class="chapter" id="chapter.panes">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title">Subfinestres</h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <ul class="toc">
+               <li>
+                  <span class="section">
+                     <a href="chapter.panes.html#panes.default.layout">Disposició per defecte</a>
+                  </span>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="chapter.panes.html#panes.principles">Principis</a>
+                  </span>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="chapter.panes.html#panes.editor">
+                        <span class="guilabel">Editor</span>
+                     </a>
+                  </span>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="chapter.panes.html#panes.fuzzy.matches">
+                        <span class="guilabel">Coincidències parcials</span>
+                     </a>
+                  </span>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="chapter.panes.html#panes.glossary">
+                        <span class="guilabel">Glossaris</span>
+                     </a>
+                  </span>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="chapter.panes.html#panes.dictionary">
+                        <span class="guilabel">Diccionaris</span>
+                     </a>
+                  </span>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="chapter.panes.html#panes.machinetranslation">
+                        <span class="guilabel">Traducció automàtica</span>
+                     </a>
+                  </span>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="chapter.panes.html#panes.multipletranslations">
+                        <span class="guilabel">Diverses traduccions</span>
+                     </a>
+                  </span>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="chapter.panes.html#panes.notes">
+                        <span class="guilabel">Notes</span>
+                     </a>
+                  </span>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="chapter.panes.html#panes.comments">
+                        <span class="guilabel">Comentaris</span>
+                     </a>
+                  </span>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="chapter.panes.html#panes.segment.properties">
+                        <span class="guilabel">Propietats del segment</span>
+                     </a>
+                  </span>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="chapter.panes.html#panes.statusbar">
+                        <span class="guilabel">Barra d'estat</span>
+                     </a>
+                  </span>
+               </li>
+            </ul>
+         </div>
+         <section class="section" id="panes.default.layout">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">Disposició per defecte</h2>
+                  </div>
+               </div>
+            </div>
+            <p>La primera vegada que inicieu l'OmegaT, la finestra principal mostra la disposició per defecte següent:</p>
+            <div class="figure" id="default.omegat.layout">
+               <div class="figure-title">Figura 2. Disposició per defecte de l'OmegaT en el macOS</div>
+               <div class="figure-contents">
+                  <div class="mediaobject">
+                     <img alt="Disposició per defecte de l'OmegaT en el macOS" src="images/defaultOmegaTLayout.png" />
+                  </div>
+               </div>
+            </div>
+            <br class="figure-break" />
+            <div class="orderedlist">
+               <ol class="orderedlist" type="1">
+                  <li class="listitem">
+                     <p>Subfinestra <a class="link" href="chapter.panes.html#panes.editor" title="Editor">
+                           <span class="guilabel">Editor</span>
+                        </a>
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>Subfinestra <a class="link" href="chapter.panes.html#panes.notes" title="Notes">
+                           <span class="guilabel">Notes</span>
+                        </a>
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>Subfinestra <a class="link" href="chapter.panes.html#panes.fuzzy.matches" title="Coincidències parcials">
+                           <span class="guilabel">Coincidències parcials</span>
+                        </a>
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>Subfinestra <a class="link" href="chapter.panes.html#panes.glossary" title="Glossaris">
+                           <span class="guilabel">Glossaris</span>
+                        </a>
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>Subfinestra <a class="link" href="chapter.panes.html#panes.segment.properties" title="Propietats del segment">
+                           <span class="guilabel">Propietats del segment</span>
+                        </a>
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>Subfinestra <a class="link" href="chapter.panes.html#panes.comments" title="Comentaris">
+                           <span class="guilabel">Comentaris</span>
+                        </a>
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>Subfinestra <a class="link" href="chapter.panes.html#panes.multipletranslations" title="Diverses traduccions">
+                           <span class="guilabel">Diverses traduccions</span>
+                        </a>
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>Subfinestres <a class="link" href="chapter.panes.html#panes.dictionary" title="Diccionaris">
+                           <span class="guilabel">Diccionaris</span>
+                        </a> i <a class="link" href="chapter.panes.html#panes.machinetranslation" title="Traducció automàtica">
+                           <span class="guilabel">Traducció automàtica</span>
+                        </a>, acoblades</p>
+                  </li>
+                  <li class="listitem">
+                     <p>
+                        <a class="link" href="chapter.panes.html#panes.statusbar" title="Barra d'estat">
+                           <span class="guilabel">Barra d'estat</span>
+                        </a> (a la dreta), que conté la informació del projecte</p>
+                  </li>
+               </ol>
+            </div>
+            <p>Utilitzeu les diferents opcions del menú <a class="link" href="chapter.menus.html#menus.view" title="Visualització">
+                  <span class="guimenu">Visualització</span>
+               </a> i desplaceu les <a class="link" href="chapter.panes.html" title="Subfinestres">subfinestres</a> per a obtenir la disposició que s'ajusti millor al vostre flux de treball:</p>
+            <div class="warning">
+               <h3 class="title">Avís</h3>
+               <p>Utilitzeu <a class="link" href="chapter.menus.html#menus.view" title="Visualització">
+                     <span class="guimenu">Visualització</span>
+                  </a>
+                  <a class="link" href="chapter.menus.html#menus.view.restore.main.window">
+                     <span class="guimenuitem">Reinicialitza la finestra principal</span>
+                  </a> si teniu problemes en reordenar la disposició de la finestra.</p>
+            </div>
+         </section>
+         <section class="section" id="panes.principles">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">Principis</h2>
+                  </div>
+               </div>
+            </div>
+            <div class="variablelist">
+               <dl class="variablelist">
+                  <dt id="panes.manipulation">
+                     <span class="term" id="panes.manipulation.title">Manipulació</span>
+                  </dt>
+                  <dd>
+                     <p>La finestra principal està formada per diverses subfinestres, que es descriuen aquí, diferents menús descrits en el capítol <a class="link" href="chapter.menus.html" title="Menús">Menús</a> i una barra d'estat descrita <a class="link" href="chapter.panes.html#panes.statusbar" title="Barra d'estat">a continuació</a>. Podeu fer clic i mantenir premut el nom d'una subfinestra per a arrossegar-la a una posició nova o, fins i tot, desacoblar-la i que sigui una finestra independent.</p>
+                     <p>La cantonada superior dreta de cada subfinestra mostra icones diferents en funció del tipus de subfinestra i de l'estat actual:</p>
+                     <div class="table" id="table.pane.widgets">
+                        <div class="table-title">Taula 1. Ginys de les subfinestres</div>
+                        <div class="table-contents">
+                           <table style="border-collapse: collapse; border-top: 1px solid ; border-bottom: 1px solid ; border-left: 1px solid ; border-right: 1px solid ; ">
+                              <colgroup>
+                                 <col />
+                                 <col />
+                              </colgroup>
+                              <tbody>
+                                 <tr>
+                                    <td style="border-right: 1px solid ; border-bottom: 1px solid ; ">
+                                       <span class="inlinemediaobject">
+                                          <img src="images/Settings.png" width="60%" />
+                                       </span>
+                                    </td>
+                                    <td style="border-bottom: 1px solid ; ">Indica les diferents <span class="bold">
+                                          <strong>accions</strong>
+                                       </span> addicionals disponibles en la subfinestra.</td>
+                                 </tr>
+                                 <tr>
+                                    <td style="border-right: 1px solid ; border-bottom: 1px solid ; ">
+                                       <span class="inlinemediaobject">
+                                          <img src="images/Minimize.png" width="60%" />
+                                       </span>
+                                    </td>
+                                    <td style="border-bottom: 1px solid ; ">
+                                       <span class="bold">
+                                          <strong>Minimitza</strong>
+                                       </span> la subfinestra a una pestanya en la part inferior de la finestra.</td>
+                                 </tr>
+                                 <tr>
+                                    <td style="border-right: 1px solid ; border-bottom: 1px solid ; ">
+                                       <span class="inlinemediaobject">
+                                          <img src="images/Maximize.png" width="60%" />
+                                       </span>
+                                    </td>
+                                    <td style="border-bottom: 1px solid ; ">
+                                       <span class="bold">
+                                          <strong>Maximitza</strong>
+                                       </span> la subfinestra.</td>
+                                 </tr>
+                                 <tr>
+                                    <td style="border-right: 1px solid ; border-bottom: 1px solid ; ">
+                                       <span class="inlinemediaobject">
+                                          <img src="images/Restore.png" width="60%" />
+                                       </span>
+                                    </td>
+                                    <td style="border-bottom: 1px solid ; ">
+                                       <span class="bold">
+                                          <strong>Restaura</strong>
+                                       </span> una subfinestra maximitzada a la disposició anterior.</td>
+                                 </tr>
+                                 <tr>
+                                    <td style="border-right: 1px solid ; border-bottom: 1px solid ; ">
+                                       <span class="inlinemediaobject">
+                                          <img src="images/Undock.png" width="60%" />
+                                       </span>
+                                    </td>
+                                    <td style="border-bottom: 1px solid ; ">
+                                       <span class="bold">
+                                          <strong>Desacobla</strong>
+                                       </span> la subfinestra de la finestra principal.</td>
+                                 </tr>
+                                 <tr>
+                                    <td style="border-right: 1px solid ; ">
+                                       <span class="inlinemediaobject">
+                                          <img src="images/Dock.png" width="60%" />
+                                       </span>
+                                    </td>
+                                    <td>
+                                       <span class="bold">
+                                          <strong>Retorna</strong>
+                                       </span> la subfinestra a la finestra principal.</td>
+                                 </tr>
+                              </tbody>
+                           </table>
+                        </div>
+                     </div>
+                     <br class="table-break" />
+                     <p>Podeu agrupar subfinestres a la mateixa àrea de la finestra. En fer-ho, es mostra una pestanya amb el nom de la subfinestra en la part superior del grup. Podeu canviar la mida de les subfinestres arrossegant els separadors entre elles.</p>
+                     <div class="note">
+                        <h3 class="title">Nota</h3>
+                        <p>Utilitzeu <a class="link" href="chapter.menus.html#menus.view" title="Visualització">
+                              <span class="guimenu">Visualització</span>
+                           </a>
+                           <a class="link" href="chapter.menus.html#menus.view.restore.main.window">
+                              <span class="guimenuitem">Reinicialitza la finestra principal</span>
+                           </a> per a tornar a la disposició per defecte si no recordeu els canvis que heu aplicat a la interfície d'usuari i ja no podeu veure algunes subfinestres.</p>
+                     </div>
+                  </dd>
+                  <dt id="panes.context.menus">
+                     <span class="term" id="panes.context.menus.title">Menús contextuals</span>
+                  </dt>
+                  <dd>
+                     <p>Algunes subfinestres tenen un menú contextual. Podeu obrir aquest menú mitjançant el mètode estàndard del sistema operatiu o amb les dreceres definides per a l'OmegaT:</p>
+                     <div class="itemizedlist">
+                        <ul class="itemizedlist" style="list-style-type: disc; ">
+                           <li class="listitem">
+                              <p>Windows i Linux: <span class="keycap">
+                                    <strong>Menú</strong>
+                                 </span>
+                              </p>
+                           </li>
+                           <li class="listitem">
+                              <p>macOS: <span class="keycap">
+                                    <strong>S</strong>
+                                 </span>+<span class="keycap">
+                                    <strong>Esc</strong>
+                                 </span>
+                              </p>
+                           </li>
+                        </ul>
+                     </div>
+                  </dd>
+                  <dt id="panes.drag.and.drop">
+                     <span class="term" id="panes.drag.and.drop.title">Arrossegar i deixar anar</span>
+                  </dt>
+                  <dd>
+                     <p>Podeu arrossegar i deixar anar fitxers en determinades subfinestres, amb els resultats següents:</p>
+                     <div class="variablelist">
+                        <dl class="variablelist">
+                           <dt>
+                              <span class="term">Subfinestra «Editor»</span>
+                           </dt>
+                           <dd>
+                              <p>Si deixeu anar aquí un fitxer de projecte de l'OmegaT (<code class="filename">omegat.project</code>) o un projecte complet, s'obrirà el projecte corresponent després de tancar el projecte obert actualment, si n'hi ha cap.</p>
+                              <p>Si deixeu anar altres fitxers, es copiaran a la carpeta <code class="filename">source</code>. Això també s'aplica a la finestra <a class="link" href="chapter.windows.and.dialogs.html#windows.source.files.list" title="Fitxers d'origen">
+                                    <span class="guilabel">Fitxers d'origen</span>
+                                 </a>.</p>
+                           </dd>
+                           <dt>
+                              <span class="term">Subfinestra «Coincidències parcials»</span>
+                           </dt>
+                           <dd>
+                              <p>Si deixeu anar aquí fitxers <code class="filename">.tmx</code>, es copiaran a la carpeta <code class="filename">tm</code>.</p>
+                           </dd>
+                           <dt>
+                              <span class="term">Subfinestra «Glossaris»</span>
+                           </dt>
+                           <dd>
+                              <p>Si deixeu anar aquí fitxers amb una extensió de glossari reconeguda (<code class="filename">.txt</code>, <code class="filename">.tab</code>, etc.), es copiaran a la carpeta <code class="filename">glossary</code>.</p>
+                           </dd>
+                        </dl>
+                     </div>
+                  </dd>
+                  <dt id="panes.notifications">
+                     <span class="term" id="panes.notifications.title">Notificacions</span>
+                  </dt>
+                  <dd>
+                     <p>Si una subfinestra està tancada però té contingut per a mostrar, l'OmegaT pot ressaltar temporalment la pestanya de la subfinestra en color carabassa quan accediu al segment.</p>
+                     <p>By default, the <span class="guilabel">Comments</span> and
+		  <span class="guilabel">Notepad</span> panes have notifications enabled.</p>
+                     <p>Per a habilitar o inhabilitar les notificacions:</p>
+                     <div class="itemizedlist">
+                        <ul class="itemizedlist" style="list-style-type: disc; ">
+                           <li class="listitem">
+                              <p>Aneu a la subfinestra.</p>
+                           </li>
+                           <li class="listitem">
+                              <p>Feu clic en el giny <span class="guilabel">Acció</span>de la cantonada superior dreta,</p>
+                           </li>
+                           <li class="listitem">
+                              <p>Seleccioneu <span class="guilabel">Avisa'm quan un segment tingui...</span> («...» depèn de la subfinestra per a la qual habiliteu les notificacions).</p>
+                           </li>
+                        </ul>
+                     </div>
+                     <p>Les subfinestres següents poden proporcionar notificacions:</p>
+                     <div class="itemizedlist">
+                        <ul class="itemizedlist" style="list-style-type: disc; ">
+                           <li class="listitem">
+                              <p>Comentaris</p>
+                           </li>
+                           <li class="listitem">
+                              <p>Diccionaris</p>
+                           </li>
+                           <li class="listitem">
+                              <p>Coincidències parcials</p>
+                           </li>
+                           <li class="listitem">
+                              <p>Glossaris</p>
+                           </li>
+                           <li class="listitem">
+                              <p>Diverses traduccions</p>
+                           </li>
+                           <li class="listitem">
+                              <p>Notes</p>
+                           </li>
+                           <li class="listitem">
+                              <p>Propietats del segment</p>
+                              <p>La subfinestra <span class="guilabel"> Propietats del segment</span> permet configurar les notificacions per a cadascun dels elements.</p>
+                              <p>En la <span class="guilabel">visualització de taula</span>, feu clic dret en l'element i seleccioneu <span class="guilabel">Avisa'm quan un segment tingui...</span> («...» varia en funció de la notificació desitjada).</p>
+                              <p>En la <span class="guilabel">visualització de llista</span>, feu clic dret en el giny <span class="guilabel">Acció</span> de la dreta de la línia de la propietat seleccionada i seleccioneu <span class="guilabel">Avisa'm quan un segment tingui...</span> («...» varia en funció de la notificació desitjada).</p>
+                           </li>
+                        </ul>
+                     </div>
+                  </dd>
+               </dl>
+            </div>
+         </section>
+         <section class="section" id="panes.editor">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">
+                        <span class="guilabel">Editor</span>
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Aquí és on escriviu i editeu les vostres traduccions.</p>
+            <p>El text es divideix en segments numerats. Podeu desplaçar-vos pel document i fer doble clic en qualsevol segment per a obrir-lo i editar-lo.</p>
+            <div class="example" id="panes.editor.default.editor.writing.space">
+               <div class="example-title">Exemple 7. Espai d'escriptura de l'editor per defecte</div>
+               <div class="example-contents">
+                  <p>
+		
+                  </p>
+                  <pre class="programlisting">— ¶ —————————————————————
+
+<span class="token">Hide Tags</span>
+|Dissimuler les balises<span class="token">&lt;segment 2148 ¶&gt;</span>
+
+— ¶ —————————————————————
+
+When enabled, all formatting in the source segments are hidden.</pre>
+               </div>
+            </div>
+            <br class="example-break" />
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>La primera línia, amb caràcters en negreta sobre un fons verd, és el text d'origen per a traduir.</p>
+                  </li>
+                  <li class="listitem">
+                     <p>El <span class="bold">
+                           <strong>camp de traducció</strong>
+                        </span> és la segona línia, entre la vora esquerra i el marcador de segment de la dreta. El <span class="bold">
+                           <strong>camp de traducció</strong>
+                        </span> és on escriviu la traducció.</p>
+                  </li>
+                  <li class="listitem">
+                     <p>Aquí, el marcador de segment és <code class="literal">&lt;segment 2148 ¶&gt;</code>.</p>
+                     <p>
+                        <code class="literal">2148</code> és el número de segment del projecte i el símbol <code class="literal">¶</code> indica que el segment és el primer segment d'un paràgraf.</p>
+                  </li>
+                  <li class="listitem">
+                     <p>Per defecte, el cursor està blocat en el camp de traducció.</p>
+                     <p>Utilitzeu <span class="keycap">
+                           <strong>F2</strong>
+                        </span> per a desblocar-lo i desplaçar-lo lliurement entre el camp de traducció i altres parts de la subfinestra.</p>
+                  </li>
+                  <li class="listitem">
+                     <p>La línia sota del camp de traducció és un segment diferent.</p>
+                  </li>
+                  <li class="listitem">
+                     <p>Utilitzeu <a class="link" href="chapter.menus.html#menus.goto" title="Ves a">
+                           <span class="guimenu">Ves a</span>
+                        </a>
+                        <a class="link" href="chapter.menus.html#menus.goto.next.untranslated.segment">
+                           <span class="guimenuitem">Segment sense traduir següent</span> 
+                           <span class="keycap">
+                              <strong>C</strong>
+                           </span>+<span class="keycap">
+                              <strong>U</strong>
+                           </span>
+                        </a> o altres ordres de navegació per a fer el següent:</p>
+                     <div class="itemizedlist">
+                        <ul class="itemizedlist" style="list-style-type: circle; ">
+                           <li class="listitem">
+                              <p>Enregistrar el contingut del camp de traducció en la memòria de traducció del projecte.</p>
+                           </li>
+                           <li class="listitem">
+                              <p>Accedir el següent per a traduir següent.</p>
+                           </li>
+                        </ul>
+                     </div>
+                     <p>Consulteu el menú <a class="link" href="chapter.menus.html#menus.goto" title="Ves a">
+                           <span class="guimenu">Ves a</span>
+                        </a> per a conèixer més detalls.</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="note">
+               <h3 class="title">Nota</h3>
+               <p>Modifica la visualització de l'editor perquè s'adapti al vostre flux de treball.</p>
+               <p>Les modificacions poden incloure:</p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>Canviar la lletra, com es descriu en la preferència <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.fonts" title="Lletra">
+                              <span class="guilabel">Lletra</span>
+                           </a>.</p>
+                     </li>
+                     <li class="listitem">
+                        <p>Mostrar o ocultar els límits dels paràgrafs amb <a class="link" href="chapter.menus.html#menus.view" title="Visualització">
+                              <span class="guimenu">Visualització</span>
+                           </a>
+                           <a class="link" href="chapter.menus.html#menus.view.mark.paragraph.delimitations">
+                              <span class="guimenuitem">Mostra els límits dels paràgrafs</span>
+                           </a>.</p>
+                     </li>
+                     <li class="listitem">
+                        <p>Canviar el format dels límits dels paràgrafs, que es defineix amb la preferència <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.editor.paragraph.delimitation.format">
+                              <code class="option">Format dels límits dels paràgrafs</code>
+                           </a>.</p>
+                     </li>
+                     <li class="listitem">
+                        <p>Mostrar la informació de modificació dels segments amb <a class="link" href="chapter.menus.html#menus.view" title="Visualització">
+                              <span class="guimenu">Visualització</span>
+                           </a>
+                           <a class="link" href="chapter.menus.html#menus.view.modification.info">
+                              <span class="guisubmenu">Mostra la informació de modificació</span>
+                           </a>.</p>
+                     </li>
+                     <li class="listitem">
+                        <p>Mostrar o ocultar els segments d'origen amb <a class="link" href="chapter.menus.html#menus.view" title="Visualització">
+                              <span class="guimenu">Visualització</span>
+                           </a>
+                           <a class="link" href="chapter.menus.html#menus.view.display.source.segments">
+                              <span class="guimenuitem">Mostra els segments d'origen</span>
+                           </a>.</p>
+                     </li>
+                     <li class="listitem">
+                        <p>Ressaltar els segments traduïts amb <a class="link" href="chapter.menus.html#menus.view" title="Visualització">
+                              <span class="guimenu">Visualització</span>
+                           </a>
+                           <a class="link" href="chapter.menus.html#menus.view.mark.translated.segments">
+                              <span class="guimenuitem">Ressalta els segments traduïts</span>
+                           </a>.</p>
+                     </li>
+                     <li class="listitem">
+                        <p>Inserir automàticament el text d'origen en el camp de traducció inhabilitant la preferència <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.editor.leave.the.segment.empty">
+                              <code class="option">Deixa el segment buit</code>
+                           </a>.</p>
+                     </li>
+                     <li class="listitem">
+                        <p>Inserir la millor coincidència parcial sobre d'un llindar determinat, que podeu ajustar amb la preferència <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.editor.insert.the.best.fuzzy.match">
+                              <code class="option">Insereix la coincidència parcial més similar</code>
+                           </a>.</p>
+                     </li>
+                     <li class="listitem">
+                        <p>Definir el text que no voleu incloure en la traducció, que s'habilita amb la preferència <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation">
+                              <code class="option">Text marcat</code>
+                           </a>.</p>
+                     </li>
+                  </ul>
+               </div>
+               <p>Consulteu les preferències de l'<a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.editor" title="Editor">
+                     <span class="guilabel">Editor</span>
+                  </a> i el menú <a class="link" href="chapter.menus.html#menus.view" title="Visualització">
+                     <span class="guimenu">Visualització</span>
+                  </a> per a conèixer més detalls.</p>
+            </div>
+            <div class="variablelist">
+               <dl class="variablelist">
+                  <dt>
+                     <span class="term">Traduccions buides</span>
+                  </dt>
+                  <dd>
+                     <p>Si deixeu el camp de traducció buit, l'OmegaT tractarà el segment com a no traduït i el mantindrà en la llengua original quan creeu els documents traduïts.</p>
+                  </dd>
+                  <dt>
+                     <span class="term">Traduccions iguals al text d'origen</span>
+                  </dt>
+                  <dd>
+                     <p>L'OmegaT pot emmagatzemar traduccions que siguin idèntiques al text d'origen. Això pot ser útil per a fitxers que contenen marques registrades, noms o altres noms propis, o seccions en una tercera llengua que no cal traduir.</p>
+                  </dd>
+                  <dt>
+                     <span class="term">Arrossegament de text</span>
+                  </dt>
+                  <dd>
+                     <p>És possible arrossegar text des de qualsevol part de la finestra principal i deixar-lo anar en el camp de traducció. El text arrossegat des de fora del camp de traducció es copia, mentre que el text arrossegat des de dins del camp de traducció es desplaça.</p>
+                  </dd>
+                  <dt id="panes.editor.overwriting">
+                     <span class="term" id="panes.editor.overwriting.title">Sobreescriptura</span>
+                  </dt>
+                  <dd>
+                     <p>Per defecte, en escriure text s'insereix el text nou després del cursor en la direcció d'escriptura. Per a sobreescriure el text existent, utilitzeu les tecles següents:</p>
+                     <div class="itemizedlist">
+                        <ul class="itemizedlist" style="list-style-type: disc; ">
+                           <li class="listitem">
+                              <p>Windows i Linux: <span class="keycap">
+                                    <strong>INSERT</strong>
+                                 </span>
+                              </p>
+                           </li>
+                           <li class="listitem">
+                              <p>macOS: <span class="keycap">
+                                    <strong>F3</strong>
+                                 </span>
+                              </p>
+                           </li>
+                        </ul>
+                     </div>
+                     <p>El mode d'escriptura (sobreescriu, <span class="guilabel">SBR</span>, o insereix, <span class="guilabel">INS</span>) es mostra en la part dreta de la <a class="link" href="chapter.panes.html#panes.statusbar" title="Barra d'estat">barra d'estat</a>. La mateixa tecla permet canviar entre cada mode.</p>
+                  </dd>
+                  <dt id="panes.editor.cursor.lock">
+                     <span class="term" id="panes.editor.cursor.lock.title">Blocatge del cursor</span>
+                  </dt>
+                  <dd>
+                     <p>Per defecte, el cursor està blocat en el camp de traducció i les tecles de direcció no es poden utilitzar per a desplaçar-se pel text d'origen.</p>
+                     <p>En prémer <span class="keycap">
+                           <strong>F2</strong>
+                        </span> es desbloca el cursor i és possible utilitzar les tecles de direcció per a desplaçar-se pel text d'origen (o per qualsevol altre lloc de l'editor). Això us permet seleccionar text amb el teclat.</p>
+                     <p>L'estat del cursor (blocat, <span class="guilabel">BLOC</span>, o desblocat, <span class="guilabel">DESBLOC</span>) es mostra en la part dreta de la <a class="link" href="chapter.panes.html#panes.statusbar" title="Barra d'estat">barra d'estat</a>. La mateixa tecla permet blocar i desblocar el cursor.</p>
+                  </dd>
+                  <dt id="panes.editor.context.menu">
+                     <span class="term" id="panes.editor.context.menu.title">Menú contextual</span>
+                  </dt>
+                  <dd>
+                     <p>Drecera per defecte:</p>
+                     <div class="itemizedlist">
+                        <ul class="itemizedlist" style="list-style-type: disc; ">
+                           <li class="listitem">
+                              <p>Windows i Linux: <span class="keycap">
+                                    <strong>Menú</strong>
+                                 </span>
+                              </p>
+                           </li>
+                           <li class="listitem">
+                              <p>macOS: <span class="keycap">
+                                    <strong>S</strong>
+                                 </span>+<span class="keycap">
+                                    <strong>Esc</strong>
+                                 </span>
+                              </p>
+                           </li>
+                        </ul>
+                     </div>
+                     <p>També podeu obrir el menú fent clic dret amb el ratolí (<span class="keycap">
+                           <strong>C</strong>
+                        </span>+<span class="keycap">
+                           <strong>clic</strong>
+                        </span> en el macOS).</p>
+                     <p>El menú contextual de la subfinestra «Editor» ofereix diverses funcions disponibles des del menú <a class="link" href="chapter.menus.html#menus.edit" title="Edita">
+                           <span class="guimenu">Edita</span>
+                        </a>. Les més importants són:</p>
+                     <div class="itemizedlist">
+                        <ul class="itemizedlist" style="list-style-type: disc; ">
+                           <li class="listitem">
+                              <p>Entrades del glossari que coincideixen; si hi ha comentaris, es presenten com a indicador de funció. Utilitzeu <a class="link" href="chapter.menus.html#menus.view" title="Visualització">
+                                    <span class="guimenu">Visualització</span>
+                                 </a>
+                                 <a class="link" href="chapter.menus.html#menus.view.mark.glossary.matches">
+                                    <span class="guimenuitem">Marca les coincidències del glossari</span>
+                                 </a> per a habilitar aquesta característica.</p>
+                           </li>
+                           <li class="listitem">
+                              <p>Funcions <span class="guilabel">Retalla</span>, <span class="guilabel">Copia</span> i <span class="guilabel">Enganxa</span>.</p>
+                           </li>
+                           <li class="listitem">
+                              <p>
+                                 <span class="guilabel">Ves al segment</span> (per a saltar al segment sota el punter).</p>
+                           </li>
+                           <li class="listitem">
+                              <p>
+                                 <span class="guilabel">Cerca en els diccionaris</span> (per a cercar el terme seleccionat en un diccionari instal·lat).</p>
+                           </li>
+                           <li class="listitem">
+                              <p>
+                                 <span class="guilabel">Afegeix una entrada al glossari</span> (equivalent a utilitzar <a class="link" href="chapter.menus.html#menus.edit" title="Edita">
+                                    <span class="guimenu">Edita</span>
+                                 </a>
+                                 <a class="link" href="chapter.menus.html#menus.edit.create.glossary.entry">
+                                    <span class="guimenuitem">Crea una entrada en el glossari...</span> 
+                                    <span class="keycap">
+                                       <strong>C</strong>
+                                    </span>+<span class="keycap">
+                                       <strong>S</strong>
+                                    </span>+<span class="keycap">
+                                       <strong>G</strong>
+                                    </span>
+	  
+                                 </a>).</p>
+                           </li>
+                        </ul>
+                     </div>
+                     <p>Si heu seleccionat text i heu definit entrades en les preferències de <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.external.searches" title="Cerques externes globals">
+                           <span class="guilabel">Cerques externes globals</span>
+                        </a>, també es mostraran en aquest menú (igual que les cerques locals).</p>
+                  </dd>
+                  <dt id="panes.editor.auto.completion.menu">
+                     <span class="term" id="panes.editor.auto.completion.menu.title">Menú d'emplenament automàtic</span>
+                  </dt>
+                  <dd>
+                     <p>Drecera per defecte:</p>
+                     <div class="itemizedlist">
+                        <ul class="itemizedlist" style="list-style-type: disc; ">
+                           <li class="listitem">
+                              <p>Windows i Linux: <span class="keycap">
+                                    <strong>C</strong>
+                                 </span>+<span class="keycap">
+                                    <strong>Espai</strong>
+                                 </span>
+                              </p>
+                           </li>
+                           <li class="listitem">
+                              <p>macOS: <span class="keycap">
+                                    <strong>Esc</strong>
+                                 </span>
+                              </p>
+                           </li>
+                        </ul>
+                     </div>
+                     <p>Aquest menú ofereix les opcions d'emplenament automàtic definides en les preferències de l'<a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.auto.completion" title="Emplenament automàtic">
+                           <span class="guilabel">Emplenament automàtic</span>
+                        </a>.</p>
+                  </dd>
+                  <dt id="panes.editor.navigation">
+                     <span class="term" id="panes.editor.navigation.title">Navegació</span>
+                  </dt>
+                  <dd>
+                     <p>Utilitzeu <a class="link" href="chapter.menus.html#menus.goto" title="Ves a">
+                           <span class="guimenu">Ves a</span>
+                        </a>
+                        <a class="link" href="chapter.menus.html#menus.goto.notes.pane">
+                           <span class="guimenuitem">Notepad</span>
+	  
+                           <span class="keycap">
+                              <strong>C</strong>
+                           </span>+<span class="keycap">
+                              <strong>A</strong>
+                           </span>+<span class="keycap">
+                              <strong>N</strong>
+                           </span>
+                        </a> per a accedir a la subfinestra i afegir o modificar una nota.</p>
+                     <p>Utilitzeu <a class="link" href="chapter.menus.html#menus.goto" title="Ves a">
+                           <span class="guimenu">Ves a</span>
+                        </a>
+                        <a class="link" href="chapter.menus.html#menus.goto.editor.pane">
+                           <span class="guimenuitem">Editor</span>
+      
+                           <span class="keycap">
+                              <strong>C</strong>
+                           </span>+<span class="keycap">
+                              <strong>A</strong>
+                           </span>+<span class="keycap">
+                              <strong>E</strong>
+                           </span>
+                        </a> per a tornar a l'editor.</p>
+                  </dd>
+               </dl>
+            </div>
+         </section>
+         <section class="section" id="panes.fuzzy.matches">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">
+                        <span class="guilabel">Coincidències parcials</span>
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>El visualitzador de coincidències mostra segments de les memòries de traducció que són similars al segment que esteu traduint.</p>
+            <p>Les coincidències provenen tant de la memòria de traducció del projecte interna creada en temps real mentre traduïu el projecte com de les memòries externes que heu importat de projectes anteriors o que heu rebut de tercers. Consulteu la guia <a class="link" href="chapter.how.to.html#how.to.use.tm" title="Ús de memòries de traducció">Ús de memòries de traducció</a> per a conèixer més detalls.</p>
+            <p>Quan accediu a un segment, se selecciona automàticament la primera coincidència parcial (la que té el percentatge de coincidència més alt). Podeu prémer <span class="keycap">
+                  <strong>C</strong>
+               </span>+<span class="keycap">
+                  <strong>2, 3, 4 o 5</strong>
+               </span> o utilitzar <a class="link" href="chapter.menus.html#menus.edit" title="Edita">
+                  <span class="guimenu">Edita</span>
+               </a>
+               <a class="link" href="chapter.menus.html#menus.edit.select.match">
+                  <span class="guisubmenu">Selecciona la coincidència</span>
+               </a> per a seleccionar una coincidència diferent.</p>
+            <div class="example" id="the.first.match">
+               <div class="example-title">Exemple 8. An empty segment and its first two matches</div>
+               <div class="example-contents">
+                  <p>
+		
+                  </p>
+                  <div class="informaltable" id="table.pane.matches">
+                     <table style="border-collapse: collapse; border-top: 1px solid ; border-bottom: 1px solid ; border-left: 1px solid ; border-right: 1px solid ; ">
+                        <colgroup>
+                           <col />
+                           <col />
+                        </colgroup>
+                        <tbody>
+                           <tr>
+                              <td style="border-right: 1px solid ; ">
+                                 <p>
+				  
+                                 </p>
+                                 <div class="informaltable">
+                                    <table style="border-collapse: collapse; border-top: 1px solid ; border-bottom: 1px solid ; border-left: 1px solid ; border-right: 1px solid ; ">
+                                       <colgroup>
+                                          <col />
+                                       </colgroup>
+                                       <tbody>
+                                          <tr>
+                                             <td>
+							
+                                                <pre class="programlisting">— ¶ —————————————————————
+
+<span class="token">Application Folder</span>
+|<span class="token">&lt;segment 1879 ¶&gt;</span>
+
+— ¶ —————————————————————
+</pre>
+                                             </td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <p>
+				
+                                 </p>
+				
+                              </td>
+                              <td>
+                                 <p>
+				  
+                                 </p>
+                                 <div class="informaltable">
+                                    <table style="border-collapse: collapse; border-top: 1px solid ; border-bottom: 1px solid ; border-left: 1px solid ; border-right: 1px solid ; ">
+                                       <colgroup>
+                                          <col />
+                                       </colgroup>
+                                       <tbody>
+                                          <tr>
+                                             <td>
+							
+                                                <pre class="programlisting">1. <span class="token">Top</span> Folder
+Dossier racine
+&lt;50/50/66% Orphan segments (+1 more)&gt;</pre>
+
+                                                <pre class="programlisting">2. Configuration Folder
+Dossier de configuration
+&lt;50/50/66% &gt;</pre>
+                                             </td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <p>
+				
+                                 </p>
+				
+                              </td>
+                           </tr>
+                        </tbody>
+                     </table>
+                  </div>
+                  <p>
+	  
+                  </p>
+               </div>
+            </div>
+            <br class="example-break" />
+            <p>The selected fuzzy match is highlighted in <span class="bold">
+                  <strong>bold</strong>
+               </span>. Words missing from the segment you are
+    translating are shown in <span class="bold">
+                  <strong>blue</strong>
+               </span>, and adjacent
+    parts in <span class="bold">
+                  <strong>green</strong>
+               </span> (when the adjacent part is a
+    space, as above, the part is left uncolored).</p>
+            <p>La coincidència també mostra tres percentatges de coincidència.</p>
+            <p>Aquests percentatges tenen el significat següent, en ordre:</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Percentage calculated <span class="bold">
+                           <strong>with
+        stemming</strong>
+                        </span> based on the source language tokenizer, and
+        <span class="bold">
+                           <strong>ignoring tags and numbers</strong>
+                        </span> (generally
+        the highest).</p>
+                  </li>
+                  <li class="listitem">
+                     <p>Percentage calculated <span class="bold">
+                           <strong>without
+        stemming</strong>
+                        </span>, while still <span class="bold">
+                           <strong>ignoring tags and
+        numbers</strong>
+                        </span> (generally slightly lower).</p>
+                  </li>
+                  <li class="listitem">
+                     <p>Percentage calculated on <span class="bold">
+                           <strong>the entire text,
+        including tags and numbers</strong>
+                        </span> (generally the lowest).</p>
+                     <div class="note">
+                        <h3 class="title">Nota</h3>
+                        <p>If the segment contains only numbers or symbols, this percentage
+		  will be the highest.</p>
+                     </div>
+                  </li>
+               </ul>
+            </div>
+            <p>Podeu canviar com es mostren o s'ordenen les coincidències. Consulteu les preferències de <a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.tm.matches" title="Coincidències de les memòries de traducció">
+                  <code class="option">Coincidències de les memòries de traducció</code>
+               </a> per a conèixer més detalls.</p>
+            <p>Utilitzeu <a class="link" href="chapter.menus.html#menus.edit" title="Edita">
+                  <span class="guimenu">Edita</span>
+               </a>
+               <a class="link" href="chapter.menus.html#menus.edit.replace.with.match.or.selection">
+                  <span class="guimenuitem">Substitueix per la coincidència o la selecció</span> 
+                  <span class="keycap">
+                     <strong>C</strong>
+                  </span>+<span class="keycap">
+                     <strong>R</strong>
+                  </span>
+	  
+               </a> per a substituir el text del camp de traducció per la coincidència, o <a class="link" href="chapter.menus.html#menus.edit" title="Edita">
+                  <span class="guimenu">Edita</span>
+               </a>
+               <a class="link" href="chapter.menus.html#menus.edit.insert.match.or.selection">
+                  <span class="guimenuitem">Insereix la coincidència o la selecció</span> 
+                  <span class="keycap">
+                     <strong>C</strong>
+                  </span>+<span class="keycap">
+                     <strong>I</strong>
+                  </span>
+               </a> per a inserir-lo en la posició del cursor.</p>
+         </section>
+         <section class="section" id="panes.glossary">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">
+                        <span class="guilabel">Glossaris</span>
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>This pane shows terms from your glossary files that correspond to terms in the current segment. Els fitxers de glossari són en la carpeta <a class="link" href="chapter.project.folder.html#project.folder.glossary" title="glossary">glossary</a> del projecte.</p>
+            <p>El terme d'origen es mostra abans del signe «=» i els termes de destinació apareixen després. Si l'entrada conté comentaris, es numeren i es mostren en línies independents sota els termes. Els termes del glossari modificable es mostren en negreta, mentre que els d'altres glossaris es presenten en rodona.</p>
+            <div class="example" id="glossary.matches">
+               <div class="example-title">Exemple 9. Coincidències dels glossaris</div>
+               <div class="example-contents">
+                  <p>
+		
+                  </p>
+                  <pre class="programlisting">Project = <span class="token">Projet</span>
+1. Projet de traduction
+
+Folder = <span class="token">Dossier</span>
+                  </pre>
+                  <p>
+	  
+                  </p>
+               </div>
+            </div>
+            <br class="example-break" />
+            <p>El nom del fitxer de glossari es mostra com a indicador de funció en passar el ratolí sobre els termes.</p>
+            <p>El camp de comentari d'una entrada pot contenir enllaços, en què es pot fer clic per a conèixer més informació.</p>
+            <p>Els enllaços a fitxers locals (<code class="filename">file:///CAMÍ/fitxer</code>) s'obren amb el programa associat. Les adreces web (<code class="filename">https://...</code>) s'obren en el navegador per defecte.</p>
+            <p>You can select a term in the glossaries pane and right click on it to
+    insert it into the translation.</p>
+            <p>Utilitzeu <a class="link" href="chapter.menus.html#menus.view" title="Visualització">
+                  <span class="guimenu">Visualització</span>
+               </a>
+               <a class="link" href="chapter.menus.html#menus.view.mark.glossary.matches">
+                  <span class="guimenuitem">Marca les coincidències del glossari</span>
+               </a> per a subratllar les coincidències del glossari.</p>
+            <p>A continuació, podeu fer clic dret sobre la paraula subratllada en el segment d'origen per a obrir un menú emergent que enumera les traduccions disponibles en els glossaris. Seleccioneu-ne una per a inserir-la en la posició actual del cursor en el segment.</p>
+            <p>Podeu utilitzar les preferències del glossari per a ajustar com es mostren els glossaris. Consulteu les preferències de <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.glossary" title="Glossaris">
+                  <span class="guilabel">Glossaris</span>
+               </a> per a conèixer més detalls.</p>
+            <p>Modifications to any glossary file in the glossary folder are
+    immediately recognized by OmegaT and displayed in the glossaries pane.</p>
+            <p>L'OmegaT inclou un fitxer de glossari modificable per projecte. Utilitzeu <a class="link" href="chapter.menus.html#menus.edit" title="Edita">
+                  <span class="guimenu">Edita</span>
+               </a>
+               <a class="link" href="chapter.menus.html#menus.edit.create.glossary.entry">
+                  <span class="guimenuitem">Crea una entrada en el glossari...</span> 
+                  <span class="keycap">
+                     <strong>C</strong>
+                  </span>+<span class="keycap">
+                     <strong>S</strong>
+                  </span>+<span class="keycap">
+                     <strong>G</strong>
+                  </span>
+	  
+               </a> per a afegir termes al fitxer.</p>
+            <p>Consulteu l'annex <a class="link" href="chapter.appendices.html#app.glossaries" title="Glossaris">Glossaris</a> per a conèixer més detalls.</p>
+         </section>
+         <section class="section" id="panes.dictionary">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">
+                        <span class="guilabel">Diccionaris</span>
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>This pane shows terms from your dictionary files that correspond to terms in the current segment. Els fitxers de diccionari són en la carpeta <a class="link" href="chapter.project.folder.html#project.folder.dictionary" title="dictionary">dictionary</a> del projecte. Consulteu les preferències de <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.dictionary" title="Diccionaris">
+                  <span class="guilabel">Diccionaris</span>
+               </a> per a conèixer més detalls.</p>
+         </section>
+         <section class="section" id="panes.machinetranslation">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">
+                        <span class="guilabel">Traducció automàtica</span>
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>This pane, when opened, shows the suggestions for the current segment produced by each enabled translation engine . Quan hi ha suggeriments disponibles de més d'un motor:</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>El nom del motor apareix després del text traduït.</p>
+                  </li>
+                  <li class="listitem">
+                     <p>Els resultats s'ordenen en ordre alfabètic per nom dels motors.</p>
+                  </li>
+                  <li class="listitem">
+                     <p>Es ressalta la traducció seleccionada actualment.</p>
+                  </li>
+               </ul>
+            </div>
+            <p>Utilitzeu <a class="link" href="chapter.menus.html#menus.edit" title="Edita">
+                  <span class="guimenu">Edita</span>
+               </a>
+               <a class="link" href="chapter.menus.html#menus.edit.replace.with.mt.title">
+                  <span class="guimenuitem">Substitueix per la traducció automàtica</span> 
+                  <span class="keycap">
+                     <strong>C</strong>
+                  </span>+<span class="keycap">
+                     <strong>M</strong>
+                  </span>
+	  
+               </a> per a substituir la traducció del segment actual pel motor de traducció automàtica seleccionat.</p>
+            <p>El nom del motor seleccionat s'assigna a la propietat <em class="parameter">
+                  <code>Origen</code>
+               </em> del segment actual.</p>
+            <p>Si es produeix un error de connexió o autenticació amb un motor de traducció automàtica, la barra d'estat de la part inferior de la finestra mostrarà breument el missatge d'estat.</p>
+            <p>Assegureu-vos que el servei estigui habilitat i que hàgiu introduït les credencials correctament. Si tot és correcte, és possible que hàgiu de contactar amb el proveïdor del servei per a obtenir ajuda. De la mateixa manera, un error com ara <code class="literal">No s'ha pogut processar la resposta del servei de traducció automàtica</code> suggereix que potser hi ha un problema de comunicació entre el sistema i el servidor del proveïdor.</p>
+            <p>Consulteu les preferències de <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.mt" title="Traducció automàtica">
+                  <span class="guilabel">Traducció automàtica</span>
+               </a> per a conèixer més detalls.</p>
+         </section>
+         <section class="section" id="panes.multipletranslations">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">
+                        <span class="guilabel">Diverses traduccions</span>
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Un segment d'origen que apareix en diverses ubicacions del projecte pot requerir diverses traduccions diferents en funció del context.</p>
+            <p>Utilitzeu <a class="link" href="chapter.menus.html#menus.edit" title="Edita">
+                  <span class="guimenu">Edita</span>
+               </a>
+               <a class="link" href="chapter.menus.html#menus.edit.create.alternative.translation">
+                  <span class="guimenuitem">Crea una traducció alternativa</span>
+               </a> per a registrar una traducció alternativa si la traducció actual del segment no és adequada. La traducció indicada es tractarà com una traducció alternativa del segment d'origen.</p>
+            <p>Utilitzeu <a class="link" href="chapter.menus.html#menus.edit" title="Edita">
+                  <span class="guimenu">Edita</span>
+               </a>
+               <a class="link" href="chapter.menus.html#menus.edit.use.as.default.translation">
+                  <span class="guimenuitem">Utilitza com a traducció per defecte</span>
+               </a> per a definir una de les alternatives, la més habitual o probable, per exemple, com a traducció per defecte.</p>
+         </section>
+         <section class="section" id="panes.notes">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">
+                        <span class="guilabel">Notes</span>
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>This pane is an <span class="emphasis">
+                  <em>editable</em>
+               </span> space where you can
+    add notes to the currently active segment.</p>
+            <p>Això us permet tornar més endavant per a revisar la traducció, comprovar que les traduccions alternatives són correctes o, en projectes compartits, demanar a altres membres la seva opinió, per exemple.</p>
+            <p>Utilitzeu <a class="link" href="chapter.menus.html#menus.goto" title="Ves a">
+                  <span class="guimenu">Ves a</span>
+               </a>
+               <a class="link" href="chapter.menus.html#menus.goto.next.note">
+                  <span class="guimenuitem">Next
+      Note</span>
+      
+                  <span class="keycap">
+                     <strong>C</strong>
+                  </span>+<span class="keycap">
+                     <strong>A</strong>
+                  </span>+<span class="keycap">
+                     <strong>N</strong>
+                  </span>
+               </a> i <a class="link" href="chapter.menus.html#menus.goto" title="Ves a">
+                  <span class="guimenu">Ves a</span>
+               </a>
+               <a class="link" href="chapter.menus.html#menus.goto.previous.note">
+                  <span class="guimenuitem">Previous
+      Note</span>
+      
+                  <span class="keycap">
+                     <strong>C</strong>
+                  </span>+<span class="keycap">
+                     <strong>A</strong>
+                  </span>+<span class="keycap">
+                     <strong>P</strong>
+                  </span>
+               </a> per a navegar per les notes.</p>
+            <p>Utilitzeu <a class="link" href="chapter.menus.html#menus.goto" title="Ves a">
+                  <span class="guimenu">Ves a</span>
+               </a>
+               <a class="link" href="chapter.menus.html#menus.goto.notes.pane">
+                  <span class="guimenuitem">Notepad</span>
+	  
+                  <span class="keycap">
+                     <strong>C</strong>
+                  </span>+<span class="keycap">
+                     <strong>A</strong>
+                  </span>+<span class="keycap">
+                     <strong>N</strong>
+                  </span>
+               </a> per a accedir a la subfinestra i afegir o modificar una nota.</p>
+            <p>Utilitzeu <a class="link" href="chapter.menus.html#menus.goto" title="Ves a">
+                  <span class="guimenu">Ves a</span>
+               </a>
+               <a class="link" href="chapter.menus.html#menus.goto.editor.pane">
+                  <span class="guimenuitem">Editor</span>
+      
+                  <span class="keycap">
+                     <strong>C</strong>
+                  </span>+<span class="keycap">
+                     <strong>A</strong>
+                  </span>+<span class="keycap">
+                     <strong>E</strong>
+                  </span>
+               </a> per a tornar a l'editor.</p>
+            <div class="note">
+               <h3 class="title">Nota</h3>
+               <p>Les notes s'emmagatzemen en la memòria de traducció del projecte. <span class="emphasis">
+                     <em>No</em>
+                  </span> s'emmagatzemen en els fitxers traduïts.</p>
+            </div>
+         </section>
+         <section class="section" id="panes.comments">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">
+                        <span class="guilabel">Comentaris</span>
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Alguns formats de fitxer, com el format PO, poden contenir comentaris per al traductor per a donar context a la traducció. Aquests comentaris es mostren aquí.</p>
+            <div class="note">
+               <h3 class="title">Nota</h3>
+               <p>La subfinestra <span class="guilabel">Comentaris</span> 
+                  <span class="emphasis">
+                     <em>no</em>
+                  </span> és editable. Només mostra informació que s'inclou en el fitxer.</p>
+               <p>Utilitzeu la subfinestra <a class="link" href="chapter.panes.html#panes.notes" title="Notes">
+                     <span class="guilabel">Notes</span>
+                  </a> per a indicar els vostres propis comentaris sobre una traducció.</p>
+            </div>
+         </section>
+         <section class="section" id="panes.segment.properties">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">
+                        <span class="guilabel">Propietats del segment</span>
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Tots els segments tenen propietats. Les propietats es mostren en aquesta subfinestra.</p>
+            <p>Algunes propietats habituals són:</p>
+            <div class="variablelist">
+               <dl class="variablelist">
+                  <dt>
+                     <span class="term">És una repetició</span>
+                  </dt>
+                  <dd>
+                     <p>Indica que un segment és un duplicat i especifica si el segment és la primera repetició.</p>
+                  </dd>
+                  <dt>
+                     <span class="term">Fitxer</span>
+                  </dt>
+                  <dd>
+                     <p>Indica el fitxer on s'emmagatzema el segment.</p>
+                  </dd>
+               </dl>
+            </div>
+            <div class="note">
+               <h3 class="title">Nota</h3>
+               <p>La subfinestra «Propietats» <span class="emphasis">
+                     <em>no</em>
+                  </span> és editable. Només mostra informació relacionada amb el segment.</p>
+            </div>
+         </section>
+         <section class="section" id="panes.statusbar">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">
+                        <span class="guilabel">Barra d'estat</span>
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>La part inferior de la finestra principal és la barra d'estat.</p>
+            <p>La part esquerra de la barra d'estat mostra informació sobre les accions del projecte o els missatges d'error.</p>
+            <div class="example" id="panes.statusbar.messages">
+               <div class="example-title">Exemple 10. Exemples de missatges de la barra d'estat</div>
+               <div class="example-contents">
+                  <p>
+                     <code class="literal">Sincronització de dipòsits</code>
+                  </p>
+                  <p>→ L'OmegaT està obrint un projecte en equip i se sincronitza amb el dipòsit remot.</p>
+                  <p>
+                     <code class="literal">S'està saltant al darrer segment editat...</code>
+                  </p>
+                  <p>→ L'OmegaT sobre el darrer segment editat de la darrera sessió.</p>
+                  <p>
+                     <code class="literal">El projecte s'ha desat automàticament a les 22:48.</code>
+                  </p>
+                  <p>→ L'OmegaT ha desat el projecte recentment.</p>
+                  <p>
+                     <code class="literal">S'han creat els fitxers traduïts.</code>
+                  </p>
+                  <p>→ L'usuari ha creat els fitxers.</p>
+               </div>
+            </div>
+            <br class="example-break" />
+            <p>El costat dret de la barra d'estat indica si el cursor està blocat en el segment (consulteu el paràmetre <a class="link" href="chapter.panes.html#panes.editor.cursor.lock">Blocatge del cursor</a>) i si el cursor sobreescriu el text existent (consulteu el paràmetre <a class="link" href="chapter.panes.html#panes.editor.overwriting">Sobreescriptura</a>). També mostra informació del progrés.</p>
+            <p>Feu clic en les figures per a canviar entre la visualització del progrés en xifres o percentatges.</p>
+            <div class="example" id="panes.statusbar.widgets">
+               <div class="example-title">Exemple 11. Informació de la barra d'estat</div>
+               <div class="example-contents">
+                  <p>
+                     <code class="literal">BLOC | SBR <span class="token">257/271 (12292/154896, 177692)</span>
+                        <span class="token"> 35/0 </span>
+                     </code>
+                  </p>
+                  <div class="variablelist">
+                     <dl class="variablelist">
+                        <dt>
+                           <span class="term">Estat del cursor</span>
+                        </dt>
+                        <dd>
+                           <p>
+                              <code class="literal">BLOC</code> indica que el cursor està blocat en el segment.</p>
+                           <p>
+                              <code class="literal">SBR</code> indica que el cursor sobreescriu el text existent.</p>
+                        </dd>
+                        <dt>
+                           <span class="term">En el fitxer</span>
+                        </dt>
+                        <dd>
+                           <p>
+                              <span class="bold">
+                                 <strong>257</strong>
+                              </span> = nombre de segments traduïts / <span class="bold">
+                                 <strong>271</strong>
+                              </span> = nombre total de segments</p>
+                        </dd>
+                        <dt>
+                           <span class="term">En el projecte</span>
+                        </dt>
+                        <dd>
+                           <p>
+                              <span class="bold">
+                                 <strong>12292</strong>
+                              </span> = nombre de segments únics traduïts / <span class="bold">
+                                 <strong>154896</strong>
+                              </span> = nombre total de segments únics, <span class="bold">
+                                 <strong>(177692)</strong>
+                              </span> = nombre total de segments</p>
+                        </dd>
+                        <dt>
+                           <span class="term">En el segment</span>
+                        </dt>
+                        <dd>
+                           <p>
+                              <span class="bold">
+                                 <strong>35</strong>
+                              </span> = nombre de caràcters en el text d'origen / <span class="bold">
+                                 <strong>0</strong>
+                              </span> = nombre de caràcters en el camp de destinació, de moment</p>
+                        </dd>
+                     </dl>
+                  </div>
+               </div>
+            </div>
+            <br class="example-break" />
+            <div class="example" id="panes.statusbar.widgets.percentage">
+               <div class="example-title">Exemple 12. Informació de la barra d'estat, mode percentatge</div>
+               <div class="example-contents">
+                  <p>
+                     <code class="literal">DESBLOC | INS <span class="token">94,8% (14 restants) / 7.9% (142.604 restants), 177.692</span> 
+                        <span class="token">35/0</span>
+                     </code>
+                  </p>
+                  <div class="variablelist">
+                     <dl class="variablelist">
+                        <dt>
+                           <span class="term">Estat del cursor</span>
+                        </dt>
+                        <dd>
+                           <p>
+                              <code class="literal">DESBLOC</code> indica que el cursor no està blocat en el segment i podeu navegar per la finestra de l'editor amb les ordres de navegació estàndard.</p>
+                           <p>
+                              <code class="literal">INS</code> indica que el cursor insereix text.</p>
+                        </dd>
+                        <dt>
+                           <span class="term">En el fitxer</span>
+                        </dt>
+                        <dd>
+                           <p>
+                              <span class="bold">
+                                 <strong>94,8%</strong>
+                              </span> = percentatge de segments traduïts / <span class="bold">
+                                 <strong>14</strong>
+                              </span> = nombre de segments sense traduir</p>
+                        </dd>
+                        <dt>
+                           <span class="term">En el projecte</span>
+                        </dt>
+                        <dd>
+                           <p>
+                              <span class="bold">
+                                 <strong>7,9%</strong>
+                              </span> = percentatge de segments traduïts / <span class="bold">
+                                 <strong>142.604</strong>
+                              </span> = nombre de segments sense traduir, <span class="bold">
+                                 <strong>(177.692)</strong>
+                              </span> = nombre total de segments</p>
+                        </dd>
+                        <dt>
+                           <span class="term">En el segment</span>
+                        </dt>
+                        <dd>
+                           <p>
+                              <span class="bold">
+                                 <strong>35</strong>
+                              </span> = nombre de caràcters en el text d'origen / <span class="bold">
+                                 <strong>0</strong>
+                              </span> = nombre de caràcters en el camp de destinació, de moment</p>
+                        </dd>
+                     </dl>
+                  </div>
+               </div>
+            </div>
+            <br class="example-break" />
+         </section>
+      </section>
+      <footer>
+         <div class="navfooter">
+            <hr />
+            <table style="width: 100%; ">
+               <tr>
+                  <td style="width: 40%; text-align: left; ">
+                     <a accesskey="p" href="chapter.how.to.html">Anterior</a> </td>
+                  <td style="width: 20%; text-align: center; "> </td>
+                  <td style="width: 40%; text-align: right; "> <a accesskey="n" href="chapter.menus.html">Següent</a>
+                  </td>
+               </tr>
+               <tr>
+                  <td style="width: 40%; text-align: left; vertical-align: top; ">Guies </td>
+                  <td style="width: 20%; text-align: center; ">
+                     <a accesskey="h" href="index_.html">Inici</a>
+                  </td>
+                  <td style="width: 40%; text-align: right; vertical-align: top; "> Menús</td>
+               </tr>
+            </table>
+         </div>
+      </footer>
+   </div>
+    </div>
+
+    
+  </body></html>

@@ -1,46 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="menus.help">
-  <title>ヘルプ</title>
+  <title id="menus.help.title"><guimenu>ヘルプ</guimenu></title>
+
+  <para>このメニューでは、OmegaTを最大限に活用するための情報にアクセスできます。</para>
 
   <variablelist>
-    <varlistentry>
-      <term>取扱説明書...</term>
-
+    <varlistentry id="menus.help.user.manual">
+      <term id="menus.help.user.manual.title"><guimenuitem>取扱説明書...</guimenuitem><keycombo><keycap>F1</keycap></keycombo></term>
       <listitem>
         <para>この取扱説明書をデフォルトのブラウザで開きます。</para>
-      </listitem>
+    </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>OmegaT について...</term>
-
+    <varlistentry id="menus.help.about">
+      <term id="menus.help.about.title"><guimenuitem>OmegaT について...</guimenuitem></term>
       <listitem>
         <para>著作権やクレジット、ライセンス情報を表示します。</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>最近の更新履歴...</term>
-
+    <varlistentry id="menus.help.last.changes">
+      <term id="menus.help.last.changes.title"><guimenuitem>最近の更新履歴...</guimenuitem></term>
       <listitem>
         <para>各リリースごとに、新機能や改善、バグ修正などの情報を一覧で表示します。</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>ログ...</term>
-
+    <varlistentry id="menus.help.log">
+      <term id="menus.help.log.title"><guimenuitem>ログ...</guimenuitem></term>
       <listitem>
-        <para>現在のログファイルを表示します。ダイアログのタイトルには、現在使用中のログファイル名（名称は同時に実行中の OmegaT のインスタンス数によって変わります）が表示されます。</para>
+        <para>現在のログファイルを表示します。ダイアログのタイトルには、現在書き込まれているログファイル名（名称は同時に実行中の OmegaT のインスタンス数によって変わります）が表示されます。</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>更新の確認...</term>
-
+    <varlistentry id="menus.help.check.for.updates">
+      <term id="menus.help.check.for.updates.title"><guimenuitem>更新の確認...</guimenuitem></term>
       <listitem>
-        <para>より新しいバージョンのOmegaTがリリースされたかどうかを確認します。</para>
+        <para>新バージョンのOmegaTがあるか確認します。</para>
       </listitem>
     </varlistentry>
   </variablelist>

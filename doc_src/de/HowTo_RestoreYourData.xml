@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="how.to.restore.your.data">
+  <title id="how.to.restore.your.data.title">Probleme beheben</title>
+
+  <warning>
+	<para>OmegaT ist eine robuste und vertrauenswürdige Applikation, trotzdem ist es ratsam, Vorkehrungen zu treffen, um sich vor möglichem Datenverlust zu schützen, was man bei jeder Applikation tun sollte.</para>
+  </warning>
+
+  <section id="how.to.restore.your.data.automatic.backup">
+	<title id="how.to.restore.your.data.automatic.backup.title">Automatische Sicherheitskopien</title>
+
+	<para>OmegaT erstellt Sicherungskopien von Ihren Projekteinstellungen, damit diese im Notfall wiederhergestellt werden können. Einzelheiten finden Sie im Abschnitt <link linkend="project.folder.omegat.project.file" endterm="project.folder.omegat.project.file.title"/>.</para>
+	  
+	<para>OmegaT speichert regelmäßig und automatisch Ihren gesamten Fortschritt in die Datei <link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/> im Ordner <link linkend="project.folder.omegat" endterm="project.folder.omegat.title"/> des Projekts. OmegaT erstellt außerdem regelmäßig Sicherheitskopien von dieser Datei.</para>
+
+	<orderedlist>
+	  <listitem>
+		<para>Wenn Sie ein Projekt öffnen, erstellt OmegaT eine Sicherungskopie von <filename>project_save.tmx</filename> und versieht die Datei mit einem Zeitstempel.</para>
+
+		<para>OmegaT erstellt bis zu zehn von solchen Dateien.</para>
+
+		<note>
+		  <para>Der Dateiname der Sicherungskopie folgt dem Muster <filename>project_save.tmx.YYYYMMDDhhmm.bak</filename>, wobei <code>YYYY</code> das vierstellige Jahr, <code>MM</code> den Monat, <code>DD</code> den Tag des Monats und <code>hh</code> und <code>mm</code> die Stunden und Minuten repräsentieren.</para>
+		</note>
+	  </listitem>
+	  
+	  <listitem>
+		<para>Jedes Mal, wenn die <filename>project_save.tmx</filename>-Datei geändert wird:</para>
+		
+		<itemizedlist>
+		  <listitem>
+			<para>entweder nach dem Speichern der Projektdaten (via <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.save" endterm="menus.project.save.title"/>),</para>
+		  </listitem>
+
+		  <listitem>
+			<para>oder wenn ein regelmäßiges Backup durchgeführt wird (standardmäßig alle 3 Minuten),</para>
+		  </listitem>
+		</itemizedlist>
+
+		<para>erstellt OmegaT eine Sicherungskopie namens <filename>project_save.tmx.bak</filename>.</para>
+
+		<para>Diese Datei ist eine Kopie von <filename>project_save.tmx</filename>, <emphasis>bevor</emphasis> sie geändert wurde.</para>
+	  </listitem>
+
+	  <listitem>
+		<para>Jedes Mal, wenn Sie die Projektdaten speichern (via <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.save" endterm="menus.project.save.title"/>) oder ein regelmäßiges Backup durchgeführt wurde, speichert OmegaT den aktuellen Übersetzungsstand in <filename>project_save.tmx</filename>.</para>
+	  </listitem>
+	</orderedlist>
+
+	<para>Die <filename>project_save.tmx</filename>-Datei enthält immer die aktuellsten Daten.</para>
+
+	<note>
+	  <para>Sie können die Frequenz der regelmäßigen Backups in der <link linkend="dialogs.preferences.saving.and.output" endterm="dialogs.preferences.saving.and.output.title"/>-Einstellung festlegen.</para>
+	</note>
+
+  </section>
+
+  <section id="how.to.restore.your.data.lost.in.translation">
+	<title id="how.to.restore.your.data.lost.in.translation.title">Sie haben Ihre Übersetzung verloren?</title>
+
+	<para>Machen Sie sich keine Sorgen. Sehr wahrscheinlich sind Ihre Übersetzungsdaten in der zuletzt erstellten Sicherungskopie gespeichert, die in der Regel nicht älter als ein paar Minuten ist.</para>
+
+	<para>Gehen Sie wie folgt vor:</para>
+	
+	<orderedlist>
+      <listitem>
+		<para>Schließen Sie das Projekt, um weitere Änderungen am aktuellen Status der Sicherungskopien zu verhindern.</para>
+      </listitem>
+
+      <listitem>
+		<para>Benennen Sie die aktuelle <filename>project_save.tmx</filename>-Datei um (z. B. in <filename>project_save.tmx.tmp</filename>).</para>
+      </listitem>
+
+      <listitem>
+		<para>Wählen Sie die Sicherungskopie der Translation-Memory-Datei aus, die am ehesten die gesuchten Daten enthält.</para>
+      </listitem>
+
+      <listitem>
+		<para>Benennen Sie sie in <filename>project_save.tmx</filename> um.</para>
+      </listitem>
+
+      <listitem>
+		<para>Schließen und öffnen Sie das Projekt wieder.</para>
+      </listitem>
+	</orderedlist>
+
+	<para>Diese Aktion stellt den Zustand Ihrer Übersetzung zu dem Zeitpunkt wieder her, an dem die ausgewählte Sicherungskopie erstellt wurde. Sie können diesen Vorgang bei Bedarf wiederholen, um ältere Zustände zu finden. Achten Sie darauf, die verschiedenen Dateien, die Sie umbenennen, sicher zu speichern, damit sie später wiederverwendet werden können. Denken Sie auch daran, in der Zwischenzeit die Projektkonfiguration nicht zu ändern oder TMX-Dateien hinzuzufügen, um die Ergebnisse nicht zu verfälschen.</para>
+
+	<note>
+	  <para>Seien Sie vorsichtig, wenn Sie während eines laufenden Projekts Änderungen an den Dateien im Quellordner, an den Segmentierungsregeln oder an den Dateifiltern vornehmen. Wenn Sie diese zwischendurch ändern, kann es passieren, dass einige Segmente nicht mehr angezeigt werden oder stattdessen unerwartete neue Segmente auftauchen.</para>
+	</note>
+  </section>
+
+  <section id="how.to.restore.your.data.project.locked">
+	<title id="how.to.restore.your.data.project.locked.title">Ihr Projekt ist gesperrt?</title>
+
+	<para>Ausnahmefälle, wie z. B. wenn Ihr Computer hängen bleibt und sich OmegaT deshalb nicht ordnungsgemäß schließen kann, können dazu führen, dass die <filename>omegat.project</filename>-Datei vom Betriebssystem gesperrt wird und sich nach einem Neustart des Systems nicht mehr öffnen lässt.</para>
+
+	<para>Gehen Sie wie folgt vor:</para>
+
+	<orderedlist>
+      <listitem>
+		<para>Identifizieren Sie den Projektordner, den OmegaT nicht öffnen will, und öffnen Sie ihn in Ihrem Dateimanager. Der Inhalt des Ordners sollte ähnlich strukturiert sein wie ein regulärer <link linkend="chapter.project.folder">Projektordner</link>.</para>
+      </listitem>
+
+	  <listitem>
+		<para>Dieser Ordner sollte sowohl eine <filename>omegat.project</filename>-Datei als auch eine <filename>omegat.project.bak</filename>-Datei enthalten. Stellen Sie sicher, dass die Dateien identisch sind.</para>
+      </listitem>
+
+      <listitem>
+		<para>Benennen Sie die <filename>omegat.project</filename>-Datei um (z. B. in <filename>omegat.project.locked</filename>).</para>
+      </listitem>
+
+      <listitem>
+		<para>Benennen Sie die <filename>omegat.project.bak</filename>-Datei in <filename>omegat.project</filename> um.</para>
+      </listitem>
+
+      <listitem>
+		<para>Öffnen Sie das Projekt.</para>
+      </listitem>
+	</orderedlist>
+
+	<para>Mit dieser Aktion wird das Projekt mit der automatisch erstellten <filename>omegat.project</filename>-Sicherungsdatei geöffnet.</para>
+  </section>
+  
+  <section id="how.to.restore.your.data.project.wont.open">
+	<title id="how.to.restore.your.data.project.wont.open.title">Ihr Projekt lässt sich nicht öffnen?</title>
+
+	<para>Ausnahmefälle, wie z. B. wenn Ihr Computer hängen bleibt und sich OmegaT infolgedessen nicht ordnungsgemäß schließen kann, können dazu führen, dass wichtige Dateien beschädigt werden und sich Ihr Projekt nach einem Systemneustart nicht mehr öffnen lässt.</para>
+
+	<para>Gehen Sie wie folgt vor:</para>
+
+	<orderedlist>
+      <listitem>
+		<para>Erstellen Sie ein neues Projekt mit denselben Einstellungen.</para>
+      </listitem>
+
+	  <listitem>
+		<para>Kopieren Sie den Inhalt der verschiedenen Benutzerordner in die entsprechenden Ordner des neuen Projekts (Quelldateien, zusätzliche Translation-Memory-Dateien, Glossardateien).</para>
+      </listitem>
+
+      <listitem>
+		<para>Wählen Sie im alten Projekt die Translation-Memory-Datei aus (Hauptdatei oder Sicherungskopie), die am ehesten die gesuchten Daten enthält.</para>
+      </listitem>
+
+      <listitem>
+		<para>Benennen Sie sie in <filename>project_save.tmx</filename> um, falls erforderlich.</para>
+      </listitem>
+
+      <listitem>
+		<para>Kopieren Sie sie in den <filename>omegat/</filename>-Ordner Ihres neuen Projekts.</para>
+      </listitem>
+
+      <listitem>
+		<para>Öffnen Sie das neue Projekt.</para>
+      </listitem>
+	</orderedlist>
+
+	<para>Diese Aktion setzt das neue Projekt auf den Stand Ihrer Übersetzung zu dem Zeitpunkt, an dem die ausgewählte projekteigene Translation-Memory-Datei im alten Projekt erstellt wurde.</para>
+  </section>
+
+  <section id="how.to.restore.your.data.translated.file.broken">
+	<title id="how.to.restore.your.data.translated.file.broken.title">Ihre übersetzte Datei lässt sich nicht öffnen?</title>
+
+	<para>Sehr oft enthalten Office-Suite-Dateien Tags, die in die Übersetzung kopiert werden müssen, damit die übersetzte Datei in der ursprünglichen Applikation geöffnet werden kann. In manchen Fällen kann die Datei aufgrund fehlender Tags nicht geöffnet werden.</para>
+	
+	<para>Gehen Sie wie folgt vor:</para>
+
+	<orderedlist>
+      <listitem>
+		<para>Öffnen Sie das Projekt in OmegaT.</para>
+      </listitem>
+
+	  <listitem>
+		<para>Verwenden Sie <link linkend="menus.tools" endterm="menus.tools.title"/><link linkend="menus.tools.check.issues" endterm="menus.tools.check.issues.title"/> und befassen Sie sich mit möglichen <guilabel>Tag-Problemen</guilabel>.</para>
+      </listitem>
+
+      <listitem>
+		<para>Beheben Sie alle Tag-Probleme, die in Ihren Dokumenten gefunden wurden.</para>
+      </listitem>
+
+      <listitem>
+		<para>Verwenden Sie <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.create.translated.documents" endterm="menus.project.create.translated.documents.title"/>, um die Dokumente neu zu erstellen.</para>
+      </listitem>
+
+      <listitem>
+		<para>Öffnen Sie die Dokumente erneut in der ursprünglichen Applikation.</para>
+      </listitem>
+	</orderedlist>
+
+	<para>Diese Aktion behebt alle internen Tag-Probleme, die z. B. dadurch entstanden sind, dass die Tags in OmegaT nicht richtig in die Übersetzung eingefügt wurden.</para>
+  </section>
+
+  <section id="how.to.restore.your.data.omegat.wont.behave">
+	<title id="how.to.restore.your.data.omegat.wont.behave.title">OmegaT verhält sich merkwürdig?</title>
+
+	<para>Irgendwas hat dazu geführt, dass OmegaT sich plötzlich anders verhält. Was auch immer Sie versuchen, es scheint nicht zu klappen. Bevor Sie jemanden um Hilfe bitten, sollten Sie noch einen letzten Versuch unternehmen: Starten Sie OmegaT mit den Standardeinstellungen.</para>
+
+	<para>Gehen Sie wie folgt vor:</para>
+	
+	<orderedlist>
+	  <listitem>
+		<para>Verwenden Sie <link linkend="menus.options" endterm="menus.options.title"/><link linkend="menus.options.access.configuration.folder" endterm="menus.options.access.configuration.folder.title"/>, um auf den Konfigurationsordner zuzugreifen.</para>
+		
+		<note>
+		  <para>Wenn Sie die OmegaT-Menüs nicht verwenden können, lesen Sie bitte <link linkend="configuration.folder" endterm="configuration.folder.title"/>, um den Speicherort des Konfigurationsordners zu finden.</para>
+		</note>
+      </listitem>
+
+      <listitem>
+		<para>Schließen Sie OmegaT.</para>
+      </listitem>
+
+      <listitem>
+		<para>Erstellen Sie eine Sicherungskopie des Inhalts und löschen Sie den ursprünglichen Ordner.</para>
+      </listitem>
+
+      <listitem>
+		<para>Starten Sie OmegaT neu.</para>
+
+		<note>
+		  <para>Wenn OmegaT an diesem Punkt nicht wie erwartet funktioniert, können Sie sich gerne an den Support wenden.</para>
+		</note>
+      </listitem>
+
+      <listitem>
+		<para>Schließen Sie OmegaT.</para>
+      </listitem>
+
+      <listitem>
+		<para>Kopieren Sie <emphasis>eine</emphasis> der alten Dateien in den neuen Konfigurationsordner.</para>
+      </listitem>
+	  
+	  <listitem>
+		<para>Starten Sie OmegaT neu.</para>
+
+		<note>
+		  <para>Wenn OmegaT an diesem Punkt nicht wie erwartet funktioniert, haben Sie die fehlerhafte Datei identifiziert. Entfernen Sie sie aus dem Konfigurationsordner, starten Sie OmegaT neu und setzen Sie Ihre Arbeit fort.</para>
+		</note>
+      </listitem>
+
+	  <listitem>
+		<para>Kehren Sie zu Schritt 5 zurück und fahren Sie fort, bis Sie zufrieden sind.</para>
+      </listitem>
+	</orderedlist>
+  </section>
+
+  <section id="how.to.restore.your.data.summary">
+	<title id="how.to.restore.your.data.summary.title">Übersicht</title>
+
+	<itemizedlist>
+      <listitem>
+		<para>Um den Verlust wichtiger Daten zu vermeiden, sollten Sie regelmäßig Kopien der <filename>/omegat/project_save.tmx</filename>-Datei auf einem Sicherungsmedium erstellen, z. B. einem USB-Stick, einer externen Festplatte, oder einem Cloud-Dienst.</para>
+      </listitem>
+
+      <listitem>
+		<para>Praktizieren Sie regelmäßig &quot;Notfallmaßnahmen&quot;, z. B. die Wiederherstellung von Übersetzungen aus einem Projekt, um sicherzustellen, dass Sie an dem Tag, an dem Sie diese Fähigkeiten benötigen, nicht zu viel Zeit verlieren.</para>
+      </listitem>
+	</itemizedlist>
+  </section>
+</section>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="how.to.translate.other.files">
+  <title id="how.to.translate.other.files.title">他のファイル形式のサポート</title>
+
+  <para>OmegaTのファイルフィルタは、一般的なファイル形式に加え、あまり一般的でないファイル形式に対してもサポートしています。OmegaTでサポートされていないファイル形式の翻訳が必要な場合は、次の4つの方法から対処を選びます。</para>
+
+  <itemizedlist>
+	<listitem>
+	  <para>書式をすでにサポートされている書式に<link linkend="how.to.translate.other.files.associate">関連付け</link>ます。</para>
+	</listitem>
+	
+	<listitem>
+	  <para><link linkend="how.to.translate.other.files.convert">変換</link>: 対応フォーマットに変換します。</para>
+	</listitem>
+
+	<listitem>
+	  <para><link linkend="how.to.translate.other.files.third.party.plugins">拡張</link>： プラグインを用いて対応フォーマットを拡張します。</para>
+	</listitem>
+
+	<listitem>
+	  <para><link linkend="how.to.translate.other.files.develop">開発</link>: 対応するファイルフィルターを開発します。</para>
+	</listitem>
+  </itemizedlist>
+  
+	<section id="how.to.translate.other.files.associate">
+	  <title id="how.to.translate.other.files.associate.title">関連づけ</title>
+
+	  <para>ファイルフィルターは、それぞれ関連付けるファイル拡張子のリストを持っています。翻訳したいファイル形式がサポートのあるファイル形式に構造的に近い場合は、対応するファイルフィルターの拡張子のリストにそのファイル拡張子を追加するか、そのファイルフィルターで受け入れられる拡張子に変更します。詳細については-<link linkend="file.filters" endterm="file.filters.title"/>を参照してください。</para>
+		
+	  <para>また、OmegaTのカスタムタグ機能を使用して書式固有の文字列を登録し、OmegaTに通常のタグと同じように処理させることもできます。詳細については、設定-<link linkend="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags" endterm="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags.title"/>を参照してください。</para>
+	</section>
+	
+	<section id="how.to.translate.other.files.convert">
+	  <title id="how.to.translate.other.files.convert.title">変換</title>
+
+	  <para>そのファイル内のすべての書式が適切に考慮されるようにするには、サポートされている形式にファイルを変換してから、訳文ファイルを元の書式に変換する方が望ましい場合があります。</para>
+
+	  <para>このような「往復可能な」変換は、次のフリーソフトウェアのツールが提供しています。</para>
+	  
+	  <itemizedlist id="how.to.translate.other.files.third.party.utilities">
+		<listitem id="how.to.translate.other.files.third.party.utilities.rainbow">
+		  <para><ulink url="https://okapiframework.org">Okapi Framework</ulink>が提供するRainbow</para>
+
+		  <para>ライセンス: Apache License Version 2.0</para>
+
+		  <para>Okapi Frameworkには、OmegaTがネイティブにサポートしない形式を含めた、複数のファイルフィルタが付属しています。詳細については、<ulink url="https://okapiframework.org/wiki/index.php?title=Filters">ファイルフィルターの一覧</ulink>を参照してください。</para>
+
+		  <para>Rainbowでは、「入力」ファイルとして設定されたすべてのファイルから、XLIFF 1.2準拠のファイルまたはOmegaTプロジェクトを作成できます。RainbowがサポートするファイルはXLIFFに変換され、ソースファイルとして完全なOmegaTプロジェクトに挿入されます。このプロジェクトは、OmegaTですぐに開くことができます。詳細は、<ulink url="https://okapiframework.org/wiki/index.php/Rainbow_TKit_-_OmegaT_Project">Rainbow TKit - OmegaT Project</ulink> を参照してください。</para>
+		</listitem>
+
+		<listitem id="how.to.translate.other.files.third.party.utilities.po4a">
+		  <para><ulink url="https://po4a.org">po4a</ulink></para>
+
+		  <para>サイセンス: GNU General Public License v2</para>
+
+		  <para>po4aは、サイトのフロント・ページにリストされているように、多数のフリー・ソフトウェアの文書ファイル形式をサポートしており、po書式との間の変換ツールを提供しています。詳細は<link linkend="file.filters.po" endterm="file.filters.po.title"/>項をご覧ください。</para>
+		</listitem>
+
+		<listitem>
+		  <para><ulink url="http://docs.translatehouse.org/projects/translate-toolkit/en/latest/index.html">Translate Toolkit</ulink>のコンバータ</para>
+
+		  <para>サイセンス: GNU General Public License v2</para>
+
+		  <para>Translate Toolkitには、po書式との間の変換ツールがいくつか用意されています。詳細については、<ulink url="http://docs.translatehouse.org/projects/translate-toolkit/en/latest/commands/index.html">コンバータ</ulink>を参照してください。</para>
+		</listitem>
+
+		<listitem id="how.to.translate.other.files.third.party.utilities.openxliff">
+		  <para><ulink url="https://maxprograms.com/">Maxprograms</ulink>のOpenXLIFF</para>
+
+		  <para>ライセンス: Eclipse Public License v1.0</para>
+
+		  <para>OpenXLIFFには、OmegaTがネイティブにサポートしない形式を含めた、複数のファイルフィルタが付属しています。詳細については、<ulink url="https://maxprograms.com/products/openxliff.html">OpenXLIFF フィルター</ulink> を参照してください。Maxprograms はまた、<ulink url="https://maxprograms.com/products/xliffmanager.html">XLIFF Manager</ulink>を配布しており、OpenXLIFFフィルターのGUIを提供します。</para>
+
+		  <para>OpenXLIFF は XLIFF 1.2 準拠のファイルを生成します。</para>
+		</listitem>
+	  </itemizedlist>
+	  
+	  <warning>
+		<para>OmegaTのpoサポートは、ほとんどのpoファイルを処理するのに十分に堅牢ですが、OmegaT バージョン 5.7.1 以前の標準XLIFFフィルターは、Rainbow、OpenXLIFF、または他のコンピューター翻訳支援ツールツールで作成されたXLIFFファイルを処理するには不十分です。OmegaTで適切にXLIFFをサポートするには、サードパーティのプラグインを必要とするかもしれません。<link linkend="how.to.translate.other.files.third.party.plugins">以下</link>に詳細を示します。</para>
+	  </warning>
+
+		<para>PDFなどの一部の形式は、「往復の」変換では適切に処理できません。それらは、適切な訳文言語書式を手動で作成するため、基礎となるサポートされた文書形式への中間変換を必要とします。</para>
+		
+		<para>PDFを一般的なオフィス形式に変換するためのオンラインユーティリティやオフラインユーティリティは数多くありますが、変換の際には、適切なPDF変換を作成する前に、対象となる文書に対して手動で大幅な調整を行う必要があります。また、変換後の文書に合わせてPDFを作成することもできます。PDFまたは類似のファイルで作業を開始するときは、書式の要件を理解していることを確認してください。</para>
+	  </section>
+
+	  <section id="how.to.translate.other.files.third.party.plugins">
+		<title id="how.to.translate.other.files.third.party.plugins.title">関連プログラム</title>
+
+		<itemizedlist>
+		  <listitem>
+			<para><ulink url="https://okapiframework.org">Okapi Framework</ulink>が提供するOkapi Filters for OmegaT</para>
+
+			<para>ライセンス: Apache License Version 2.0</para>
+
+			<para>Okapi Frameworkファイルフィルタのすべてが、プラグインに含まれているわけではありません。詳細については、<ulink url="https://okapiframework.org/wiki/index.php/Okapi_Filters_Plugin_for_OmegaT#Filters_Included">利用可能フィルター</ulink> を参照してください。</para>
+
+			<para>このプラグインをインストールすると、追加された形式に直接アクセスできます。また、フィルターで作成されたカスタムRainbowパラメータファイルを関連付けることもできます。注意点は、<link linkend="how.to.translate.other.files.third.party.utilities.rainbow">上と同じ</link>です。</para>
+		  </listitem>
+		</itemizedlist>
+
+		<para>あまり一般的でないフォーマット用の他のプラグインは、OmegaTのwikiにリストされています。<ulink url="https://sourceforge.net/p/omegat/wiki/Plugins/">Plugins</ulink>を参照してください。</para>
+	</section>
+
+	<section id="how.to.translate.other.files.develop">
+	  <title id="how.to.translate.other.files.develop.title">開発</title>
+
+	  <para>OmegaT provides developers with thorough documentation to create file filter plugins. 詳細は、<ulink url="https://omegat.readthedocs.io/en/latest/11.HowToCreateFilterPlugin/">OmegaTのファイルフィルターのプラグインを作成する方法</ulink>を参照してください。</para>
+	</section>
+  </section>

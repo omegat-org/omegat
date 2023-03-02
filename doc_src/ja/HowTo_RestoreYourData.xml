@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="how.to.restore.your.data">
+  <title id="how.to.restore.your.data.title">問題のトラブルシューティング</title>
+
+  <warning>
+	<para>OmegaTは堅牢で信頼できるプログラムですが、それでも、他のプログラムと同様に、使用時にデータ損失を防ぐための予防措置を講じることは賢明です。</para>
+  </warning>
+
+  <section id="how.to.restore.your.data.automatic.backup">
+	<title id="how.to.restore.your.data.automatic.backup.title">自動バックアップ</title>
+
+	<para>OmegaTは、問題が発生した場合にプロジェクト設定を取得できるように、プロジェクト設定のバックアップを作成します。詳細は<link linkend="project.folder.omegat.project.file" endterm="project.folder.omegat.project.file.title"/>項をご覧ください。</para>
+	  
+	<para>OmegaTは、プロジェクトの<link linkend="project.folder.omegat" endterm="project.folder.omegat.title"/>フォルダーにある<link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/>ファイルに、すべての進行状況を定期的かつ自動的に保存します。OmegaTは、そのファイルの定期的なバックアップも作成します。</para>
+
+	<orderedlist>
+	  <listitem>
+		<para>プロジェクトを開くと、OmegaTは<filename>project_save.tmx</filename>をタイムスタンプ付きのバックアップファイルにバックアップします。</para>
+
+		<para>OmegaTはこれらのファイルを10個まで保持しています。</para>
+
+		<note>
+		  <para>バックアップファイル名はパターン<filename>project_save.tmx.YYYYMMDDhhmm.bak</filename>に従います。ここで、<code>YYYY</code>は4桁の年、<code>MM</code>は月、<code>DD</code>は日を表し、<code>hh</code>と<code>mm</code>は時間と分を表します。</para>
+		</note>
+	  </listitem>
+	  
+	  <listitem>
+		<para><filename>project_save.tmx</filename>が変更されるたびに、次のようになります。</para>
+		
+		<itemizedlist>
+		  <listitem>
+			<para>プロジェクトデータを保存した後(<link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.save" endterm="menus.project.save.title"/>を使用)</para>
+		  </listitem>
+
+		  <listitem>
+			<para>または通常のバックアップ(デフォルトではでは3分ごと)を作成する場合</para>
+		  </listitem>
+		</itemizedlist>
+
+		<para>OmegaTは、<filename>project_save.tmx.bak</filename>という名前のバックアップを作成します。</para>
+
+		<para>このファイルは、<emphasis>変更前</emphasis>の<filename>project_save.tmx</filename>のコピーです。</para>
+	  </listitem>
+
+	  <listitem>
+		<para>プロジェクトデータを保存するたびに(<link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.save" endterm="menus.project.save.title"/>を使用)、または通常のバックアップを作成するときに、OmegaTは翻訳の現在の状態を<filename>project_save.tmx</filename>に保存します。</para>
+	  </listitem>
+	</orderedlist>
+
+	<para>ファイル<filename>project_save.tmx</filename>には、常に最新のデータが含まれています。</para>
+
+	<note>
+	  <para>通常のバックアップ保存の頻度は、<link linkend="dialogs.preferences.saving.and.output" endterm="dialogs.preferences.saving.and.output.title"/>設定で制御できます。</para>
+	</note>
+
+  </section>
+
+  <section id="how.to.restore.your.data.lost.in.translation">
+	<title id="how.to.restore.your.data.lost.in.translation.title">翻訳を失くしたの?</title>
+
+	<para>翻訳データを紛失したのではないかと心配していても、おそらく最新のバックアップの翻訳メモリに安全に保存されています。通常、バックアップは数分前のものです。</para>
+
+	<para>次の手順を実行します。</para>
+	
+	<orderedlist>
+      <listitem>
+		<para>プロジェクトを閉じて、バックアップファイルの現在のステータスが変更されないようにします。</para>
+      </listitem>
+
+      <listitem>
+		<para>現在の<filename>project_save.tmx</filename>ファイルの名前を変更します(たとえば、<filename>project_save.tmx.tmp</filename>)。</para>
+      </listitem>
+
+      <listitem>
+		<para>検索するデータが含まれている可能性が最も高いバックアップ翻訳メモリを選択します。</para>
+      </listitem>
+
+      <listitem>
+		<para>名前を<filename>project_save.tmx</filename>に変更します。</para>
+      </listitem>
+
+      <listitem>
+		<para>プロジェクトを再度開きます。</para>
+      </listitem>
+	</orderedlist>
+
+	<para>この操作を行うと、選択したバックアップが作成された時点の変換ステータスが復元されます。古い状況を特定するために、必要に応じてこの操作を繰り返します。最終的な再利用のために、名前を変更するすべての異なるファイルを安全に保存することに注意してください。また、プロジェクトの設定を変更したり、TMXファイルを追加したりしないでください。結果に影響する可能性があります。</para>
+
+	<note>
+	  <para>プロジェクトの途中で、原文フォルダーのファイル、文節化規則、またはフィルターを変更する場合は、特に注意してください。翻訳を開始した後にいずれかを変更すると、一部の分節が表示されなくなったり、予期しない新しい分節が表示されることがあります。</para>
+	</note>
+  </section>
+
+  <section id="how.to.restore.your.data.project.locked">
+	<title id="how.to.restore.your.data.project.locked.title">プロジェクトはロックされていますか?</title>
+
+	<para>まれに、コンピュータがフリーズし、OmegaTを適切に閉じる時間がない場合は、<filename>OmegaT.project</filename>ファイルがオペレーティングシステムによってロックされ、システムを再起動した後に再び開くことができなくなることがあります。</para>
+
+	<para>次の手順を実行します。</para>
+
+	<orderedlist>
+      <listitem>
+		<para>OmegaTが開くことを拒否しているプロジェクトフォルダーを特定し、ファイルマネージャで開きます。フォルダーコンテンツは、標準<link linkend="chapter.project.folder">プロジェクト</link>のフォルダーと同様である必要があります。</para>
+      </listitem>
+
+	  <listitem>
+		<para>フォルダーには、<filename>OmegaT.project</filename>ファイルと<filename>OmegaT.project.bak</filename>ファイルがあります。ファイルが同一であることを確認してください。</para>
+      </listitem>
+
+      <listitem>
+		<para><filename>OmegaT.project</filename>ファイルの名前を変更します(たとえば、<filename>OmegaT.project.locked</filename>に変更します)。</para>
+      </listitem>
+
+      <listitem>
+		<para><filename>OmegaT.project.bak</filename>ファイルの名前を<filename>OmegaT.project</filename>に変更します。</para>
+      </listitem>
+
+      <listitem>
+		<para>プロジェクトを開きます。</para>
+      </listitem>
+	</orderedlist>
+
+	<para>このアクションは、自動的に作成されたバックアップ<filename>OmegaT.project</filename>ファイルでプロジェクトを開きます。</para>
+  </section>
+  
+  <section id="how.to.restore.your.data.project.wont.open">
+	<title id="how.to.restore.your.data.project.wont.open.title">プロジェクトが開かない?</title>
+
+	<para>コンピュータがフリーズし、OmegaTが適切に閉じる時間がないというまれなケースでは、いくつかの重要なファイルが壊れて、マシンを再起動した後にプロジェクトが再び開かないことがあります。</para>
+
+	<para>次の手順を実行します。</para>
+
+	<orderedlist>
+      <listitem>
+		<para>同じ設定で新しいプロジェクトを作成します。</para>
+      </listitem>
+
+	  <listitem>
+		<para>さまざまなユーザーフォルダの内容を、新しいプロジェクト内の対応するフォルダ(ソースファイル、参照翻訳メモリファイル、用語集ファイル)にコピーします。</para>
+      </listitem>
+
+      <listitem>
+		<para>古いプロジェクトで、探しているデータが含まれている可能性が最も高い翻訳メモリ(メインまたはバックアップ)を選択します。</para>
+      </listitem>
+
+      <listitem>
+		<para>名前を<filename>project_save.tmx</filename>に変更します。</para>
+      </listitem>
+
+      <listitem>
+		<para>それを新しいプロジェクトの<filename>omegat/</filename>フォルダーにコピーします。</para>
+      </listitem>
+
+      <listitem>
+		<para>新しいプロジェクトを開きます。</para>
+      </listitem>
+	</orderedlist>
+
+	<para>これで新しいプロジェクトは、古いプロジェクトが選択したプロジェクト翻訳メモリを作成した時点での、翻訳状態になります。</para>
+  </section>
+
+  <section id="how.to.restore.your.data.translated.file.broken">
+	<title id="how.to.restore.your.data.translated.file.broken.title">訳文ファイルが開かないんですか?</title>
+
+	<para>多くの場合、オフィススイートファイルには、元のアプリケーションで訳文ファイルを開くことができるように、翻訳にコピーする必要のあるタグが含まれています。タグがないと、ファイルが開かない場合があります。</para>
+	
+	<para>次の手順を実行します。</para>
+
+	<orderedlist>
+      <listitem>
+		<para>OmegaTでプロジェクトを開きます。</para>
+      </listitem>
+
+	  <listitem>
+		<para><link linkend="menus.tools" endterm="menus.tools.title"/><link linkend="menus.tools.check.issues" endterm="menus.tools.check.issues.title"/>を使用し、<guilabel>タグの問題</guilabel>に焦点を当てます。</para>
+      </listitem>
+
+      <listitem>
+		<para>文書内で見つかったタグの問題をすべて修正します。</para>
+      </listitem>
+
+      <listitem>
+		<para><link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.create.translated.documents" endterm="menus.project.create.translated.documents.title"/>を使用してドキュメントを再作成します。</para>
+      </listitem>
+
+      <listitem>
+		<para>元のアプリケーションでドキュメントを再度開きます。</para>
+      </listitem>
+	</orderedlist>
+
+	<para>これにより、OmegaTに翻訳を入力する際にタグを正しく挿入しなかったことで発生した、タグ一貫性問題が修正されます。</para>
+  </section>
+
+  <section id="how.to.restore.your.data.omegat.wont.behave">
+	<title id="how.to.restore.your.data.omegat.wont.behave.title">OmegaTが動作しない?</title>
+
+	<para>何かが起こり、OmegaTは動作しなくなりました。あなたが何をしようと、あなたはそれを修正できないようです。ヘルプを呼び出す前に、最後にもう1つ試したいことがあります。それは、デフォルト設定でOmegaTを再起動することです。</para>
+
+	<para>次の手順を実行します。</para>
+	
+	<orderedlist>
+	  <listitem>
+		<para><link linkend="menus.options" endterm="menus.options.title"/><link linkend="menus.options.access.configuration.folder" endterm="menus.options.access.configuration.folder.title"/>を使用して、構成フォルダーにアクセスします。</para>
+		
+		<note>
+		  <para>OmegaTのメニューを使用できない場合は、<link linkend="configuration.folder" endterm="configuration.folder.title"/>を参照して設定フォルダの場所を確認してください。</para>
+		</note>
+      </listitem>
+
+      <listitem>
+		<para>OmegaTを閉じます。</para>
+      </listitem>
+
+      <listitem>
+		<para>内容をバックアップして、元のフォルダを削除します。</para>
+      </listitem>
+
+      <listitem>
+		<para>OmegaTを再起動します。</para>
+
+		<note>
+		  <para>この時点でOmegaTが期待通りに動作しない場合は、遠慮なくサポートに連絡してください。</para>
+		</note>
+      </listitem>
+
+      <listitem>
+		<para>OmegaTを閉じます。</para>
+      </listitem>
+
+      <listitem>
+		<para>古いファイルの<emphasis>1つ</emphasis>を新しい設定フォルダにコピーします。</para>
+      </listitem>
+	  
+	  <listitem>
+		<para>OmegaTを再起動します。</para>
+
+		<note>
+		  <para>この時点でOmegaTが期待どおりに動作しない場合は、問題のあるファイルを特定したことになります。構成フォルダから問題のあるファイル削除して、OmegaTを再起動し、次に進みます。</para>
+		</note>
+      </listitem>
+
+	  <listitem>
+		<para>手順5に戻ります。満足できる結果が得られるまで作業を続けます。</para>
+      </listitem>
+	</orderedlist>
+  </section>
+
+  <section id="how.to.restore.your.data.summary">
+	<title id="how.to.restore.your.data.summary.title">まとめ</title>
+
+	<itemizedlist>
+      <listitem>
+		<para>重要なデータの損失を防ぐために、<filename>/OmegaT/project_save.tmx</filename>ファイルの定期的なコピーを、USBキーや外部ハードドライブなどのバックアップ用メディア、またはクラウドサービスに保存してください。</para>
+      </listitem>
+
+      <listitem>
+		<para>プロジェクトから翻訳を復元するなどの「緊急演習」を定期的に練習して、実際に対処が必要な日に、時間を無駄にしないようにしましょう。</para>
+      </listitem>
+	</itemizedlist>
+  </section>
+</section>

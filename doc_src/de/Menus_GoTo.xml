@@ -1,92 +1,165 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="menus.goto">
-  <title>Gehe zu</title>
+  <title id="menus.goto.title"><guimenu>Gehe zu</guimenu></title>
 
-  <para>Dieses Menü zeigt nur Menüpunkte an, wenn ein Projekt geöffnet ist.</para>
+  <para>Über dieses Menü haben Sie Zugriff auf die Befehle zum Navigieren in Segmenten und Fensterbereichen.</para>
+
+  <example id="example.next.untranslated.segment">
+	<title id="example.next.untranslated.segment.title">Tastenkürzelbeschreibungsbeispiel</title>
+	<para>In Windows und Linux: <keycombo><keycap>Strg</keycap><keycap>U</keycap></keycombo></para>
+
+	<para>In macOS: <keycombo><keycap>Command</keycap><keycap>U</keycap></keycombo></para>
+
+	<para><emphasis role="bold">In dieser Bedienungsanleitung:</emphasis> <keycombo><keycap>C</keycap><keycap>U</keycap></keycombo></para>
+  </example>
 
   <variablelist>
-    <varlistentry>
-      <term>Nächstes unübersetztes Segment</term>
+    <varlistentry id="menus.goto.next.untranslated.segment">
+      <term id="menus.goto.next.untranslated.segment.title"><guimenuitem>Nächstes unübersetztes Segment</guimenuitem> <keycombo><keycap>C</keycap><keycap>U</keycap></keycombo></term>
 
       <listitem>
-        <para>Springt zum nächsten Segment, das noch kein äquivalentes Segment im Translation Memory hat.</para>
+        <para>Springt zum nächsten Segment, das keinen Zielspracheneintrag im Translation Memory hat.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Nächstes übersetztes Segment</term>
+    <varlistentry id="menus.goto.next.translated.segment">
+      <term id="menus.goto.next.translated.segment.title"><guimenuitem>Nächstes übersetztes Segment</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>U</keycap></keycombo></term>
 
       <listitem>
         <para>Springt zum nächsten bereits übersetzten Segment und ignoriert unübersetzte Segmente.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Nächstes Segment</term>
+    <varlistentry id="menus.goto.next.segment">
+      <term id="menus.goto.next.segment.title"><guimenuitem>Nächstes Segment</guimenuitem> <keycombo><keycap>C</keycap><keycap>N</keycap></keycombo></term>
 
       <listitem>
-        <para>Springt zum nächsten Segment. Wenn das aktuelle Segment das letzte Segment in einer Datei ist, springt es zum ersten Segment der nächsten Datei.</para>
+		<para>Auch: <keycombo><keycap>Enter</keycap></keycombo></para>
 
-        <para>Hinweis: <keycap>Enter</keycap> kann als alternativer Tastaturkurzbefehl verwendet werden, wenn die Option <link linkend="dialogs.preferences.general.usetabtoadvance">TAB zum Weiterschalten verwenden</link> deaktiviert ist.</para>
+        <para>Springt zum nächsten Segment, oder zum ersten Segment der nächsten Datei, wenn das aktuelle Segment das letzte in der Datei ist.</para>
+
+        <note>
+		  <para>Sie können <keycap>TAB</keycap> als alternatives Tastenkürzel verwenden, indem Sie die <link linkend="dialogs.preferences.general.use.tab.to.advance" endterm="dialogs.preferences.general.use.tab.to.advance.title"/>-Einstellung aktivieren.</para>
+		  
+		  <para>Das ist nützlich für Zeicheneingabesysteme, die <keycap>Enter</keycap> zur Validierung der Eingabe verwenden.</para></note>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Vorheriges Segment</term>
-
+    <varlistentry id="menus.goto.previous.segment">
+      <term id="menus.goto.previous.segment.title"><guimenuitem>Vorheriges Segment</guimenuitem> <keycombo><keycap>C</keycap><keycap>P</keycap></keycombo></term>
       <listitem>
-        <para>Springt zum vorherigen Segment. Wenn das aktuelle Segment das erste Segment in einer Datei ist, springt es zum letzten Segment der vorherigen Datei.</para>
+		<para>Auch: <keycombo><keycap>C</keycap><keycap>Enter</keycap></keycombo></para>
 
-        <para>Hinweis: <keycombo> <keycap>Strg</keycap> <keycap>Enter</keycap> </keycombo> kann als alternativer Tastaturkurzbefehl verwendet werden, wenn die Option <link linkend="dialogs.preferences.general.usetabtoadvance">TAB zum Weiterschalten verwenden</link> deaktiviert ist.</para>
+        <para>Springt zum vorherigen Segment, oder zum letzten Segment der vorherigen Datei, wenn das aktuelle Segment das erste in der Datei ist.</para>
+
+        <note>
+		  <para>Sie können <keycombo><keycap>C</keycap><keycap>TAB</keycap></keycombo> als alternatives Tastenkürzel verwenden, indem Sie die <link linkend="dialogs.preferences.general.use.tab.to.advance" endterm="dialogs.preferences.general.use.tab.to.advance.title"/>-Einstellung aktivieren.</para>
+		  
+		  <para>Das ist nützlich für Zeicheneingabesysteme, die <keycap>Enter</keycap> zur Validierung der Eingabe verwenden.</para>
+		</note>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Segmentnummer...</term>
-
+    <varlistentry id="menus.goto.segment.number">
+      <term id="menus.goto.segment.number.title"><guimenuitem>Segmentnummer...</guimenuitem> <keycombo><keycap>C</keycap><keycap>J</keycap></keycombo></term>
       <listitem>
-        <para>Das Segment wird geöffnet, wenn entweder der Segment-Call-Out oder die Segmentnummer eingegeben wird.</para>
+        <para>Springt zum Segment, dessen Call-Out oder Nummer eingetragen wurde.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Nächste Notiz</term>
-
+    <varlistentry id="menus.goto.next.note">
+      <term id="menus.goto.next.note.title"><guimenuitem>Nächste Notiz</guimenuitem> <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>N</keycap></keycombo></term>
       <listitem>
-        <para>Springt zum nächsten Segment, das mit einer Notiz versehen ist.</para>
+		<para>Springt zum nächsten Segment mit einer Notiz.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Vorherige Notiz</term>
-
+    <varlistentry id="menus.goto.previous.note">
+      <term id="menus.goto.previous.note.title"><guimenuitem>Vorherige Notiz</guimenuitem> <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>P</keycap></keycombo></term>
       <listitem>
-        <para>Springt zum vorherigen Segment, das mit einer Notiz versehen ist.</para>
+		<para>Springt zum vorherigen Segment mit einer Notiz.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Quelle des ausgewählten Matches</term>
+    <varlistentry id="menus.goto.next.unique.segment">
+      <term id="menus.goto.next.unique.segment.title"><guimenuitem>Nächstes einmaliges Segment</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>K</keycap></keycombo></term>
+      <listitem>
+        <para>Springt zum nächsten einmaligen Segment.</para>
+      </listitem>
+    </varlistentry>
 
+    <varlistentry id="menus.goto.source.of.selected.match">
+      <term id="menus.goto.source.of.selected.match.title"><guimenuitem>Quelle des ausgewählten Matches</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>M</keycap></keycombo></term>
       <listitem>
         <para>Springt zum Segment, das dem aktuell ausgewählten Match im <guilabel>Fuzzy-Matches</guilabel>-Bereich entspricht.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Vor im Verlauf...</term>
+	<varlistentry id="menus.goto.auto.populated.segments">
+	  <term id="menus.goto.auto.populated.segments.title"><guisubmenu>Automatisch ausgefüllte Segmente</guisubmenu></term>
+	  <listitem>
+        <para>Navigiert zwischen Segmenten, die automatisch mit exakten Matches aus den Unterordnern <link linkend="project.folder.tm.auto" endterm="project.folder.tm.auto.title"/> und <link linkend="project.folder.tm.enforce.title" endterm="project.folder.tm.enforce.title"/> gefüllt wurden.</para>
 
+		<para>Einzelheiten finden Sie unter <link linkend="how.to.use.tm.reuse.tm" endterm="how.to.use.tm.reuse.tm.title"/>.</para>
+
+		<itemizedlist>
+		  <listitem id="menus.goto.auto.populated.segments.next.auto">
+			<para id="menus.goto.auto.populated.segments.next.auto.title"><guimenuitem>Nächstes Segment von tm/auto/</guimenuitem> <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>,</keycap></keycombo></para>
+
+			<para>Springt zum nächsten Segment, das von <filename>tm/auto/</filename> eingefügt wurde.</para>
+		  </listitem>
+
+		  <listitem id="menus.goto.auto.populated.segments.prev.auto">
+			<para id="menus.goto.auto.populated.segments.prev.auto.title"><guimenuitem>Vorheriges Segment von tm/auto/</guimenuitem> <keycombo><keycap>S</keycap><keycap>C</keycap><keycap>A</keycap><keycap>,</keycap></keycombo></para>
+
+			<para>Springt zum vorherigen Segment, das von <filename>tm/auto/</filename> eingefügt wurde.</para>
+		  </listitem>
+
+		  <listitem id="menus.goto.auto.populated.segments.next.enforce">
+			<para id="menus.goto.auto.populated.segments.next.enforce.title"><guimenuitem>Nächstes Segment von tm/enforce/</guimenuitem> <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>.</keycap></keycombo></para>
+
+			<para>Springt zum nächsten Segment, das von <filename>tm/enforce/</filename> eingefügt wurde.</para>
+		  </listitem>
+
+		  <listitem id="menus.goto.auto.populated.segments.prev.enforce">
+			<para id="menus.goto.auto.populated.segments.prev.enforce.title"><guimenuitem>Vorheriges Segment von tm/enforce/</guimenuitem> <keycombo><keycap>S</keycap><keycap>C</keycap><keycap>A</keycap><keycap>.</keycap></keycombo></para>
+
+			<para>Springt zum vorherigen Segment, das von <filename>tm/enforce/</filename> eingefügt wurde.</para>
+		  </listitem>
+		</itemizedlist>
+	  </listitem>
+	</varlistentry>
+
+    <varlistentry id="menus.goto.back.in.history">
+      <term id="menus.goto.back.in.history.title"><guimenuitem>Zurück im Verlauf</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>P</keycap></keycombo></term>
       <listitem>
-        <para><application>OmegaT</application> merkt sich die zuletzt geöffneten Segmente. Mit diesem Befehl können Sie zum Segment vorspringen, das Sie zuvor mit dem Befehl <guimenuitem>Zurück im Verlauf...</guimenuitem> verlassen haben.</para>
+        <para>OmegaT merkt sich den Verlauf Ihrer Segmentnavigation.</para>
+        <para>Mit diesem Befehl können Sie sich segmentweise zu Segmenten rückwärts bewegen, die Sie zuvor besucht haben.</para>
+      </listitem>
+    </varlistentry>
+    
+    <varlistentry id="menus.goto.forward.in.history">
+      <term id="menus.goto.forward.in.history.title"><guimenuitem>Vor im Verlauf</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>N</keycap></keycombo></term>
+      <listitem>
+        <para>OmegaT merkt sich den Verlauf Ihrer Segmentnavigation.</para>
+
+        <para>Mit diesem Befehl können Sie sich segmentweise zu Segmenten vorwärts bewegen, die Sie zuvor mit dem obigen Befehl <link linkend="menus.goto" endterm="menus.goto.title"/><link linkend="menus.goto.back.in.history" endterm="menus.goto.back.in.history.title"/> besucht haben.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Zurück im Verlauf...</term>
-
+    <varlistentry id="menus.goto.notes.pane">
+      <term id="menus.goto.notes.pane.title"><guimenuitem>Notizblock</guimenuitem> <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>N</keycap></keycombo></term>
       <listitem>
-        <para>Mit diesem Befehl können Sie jeweils ein Segment zurückspringen. Um später zum aktuellen Segment zurückzukehren, verwenden Sie den Befehl <guimenuitem>Vor im Verlauf...</guimenuitem>.</para>
+        <para>Wechselt zum <link linkend="panes.notes" endterm="panes.notes.title"/>, um eine Notiz für das aktive Segment zu schreiben oder zu ändern.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry id="menus.goto.editor.pane">
+      <term id="menus.goto.editor.pane.title"><guimenuitem>Editor</guimenuitem>
+      <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>E</keycap></keycombo></term>
+      <listitem>
+        <para>Wechselt zum <link linkend="panes.editor" endterm="panes.editor.title"/>, um Ihre Übersetzung fortzusetzen.</para>
       </listitem>
     </varlistentry>
   </variablelist>

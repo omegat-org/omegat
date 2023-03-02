@@ -517,89 +517,105 @@ return this;
 })(jQuery);
 var wh = (function () {
 var toc_entries = [
-["\n                        OmegaT のインストールと実行","chapter.installing.and.running.html",[
-["Windows ユーザー","chapter.installing.and.running.html#d0e17",null],
-["Linux（Intel）ユーザー","chapter.installing.and.running.html#Linux.Intel.users",null],
-["macOS ユーザー","chapter.installing.and.running.html#MAC.OSX.users",null],
-["その他のシステム","chapter.installing.and.running.html#other.systems",null],
-["ドラッグ＆ドロップ","chapter.installing.and.running.html#drag.and.drop",null],
-["Java Web Start の使用","chapter.installing.and.running.html#using.Java.Web.Start",null],
-["コマンドラインから OmegaT を起動する","chapter.installing.and.running.html#commandline.launching",null],
-["ソースコードからの OmegaT のビルド","chapter.installing.and.running.html#building.OmegaT.from.source",null]
+["Introduction to OmegaT","chapter.instant.start.guide.html",[
+["原則","chapter.instant.start.guide.html#introduction.omegat.principles",null],
+["本書で使用されている表記規則","chapter.instant.start.guide.html#introduction.how.to.use.the.manual",null],
+["プロジェクトの新規作成","chapter.instant.start.guide.html#introduction.create.and.open.new.project",null],
+["スペルチェック辞書","chapter.instant.start.guide.html#introduction.install.spellchecker.dictionary",null],
+["分節の管理","chapter.instant.start.guide.html#introduction.manage.your.segments",null],
+["どうでしょうか？","chapter.instant.start.guide.html#introduction.make.it.look.good",null],
+["ファイルを翻訳しましょう。","chapter.instant.start.guide.html#introduction.translate.the.segments.one.by.one",null],
+["タグの管理","chapter.instant.start.guide.html#introduction.manage.your.tags",null],
+["翻訳のレビュー","chapter.instant.start.guide.html#introduction.review.the.translation",null],
+["訳文ファイルの生成","chapter.instant.start.guide.html#introduction.generate.the.translated.file",null],
+["プロジェクトを管理する","chapter.instant.start.guide.html#introduction.one.more.thing",null],
+["ショートカットベースのワークフロー","chapter.instant.start.guide.html#app.shortcuts.streamline.workflow",null]
 ]],
-["メニュー","menus.html",[
-["プロジェクト","menus.html#menus.project",null],
-["編集","menus.html#menus.edit",null],
-["移動","menus.html#menus.goto",null],
-["表示","menus.html#menus.view",null],
-["ツール","menus.html#menus.tools",null],
-["設定","menus.html#menus.options",null],
-["ヘルプ","menus.html#menus.help",null]
+["操作方法...","chapter.how.to.html",[
+["問題のトラブルシューティング","chapter.how.to.html#how.to.restore.your.data",null],
+["翻訳メモリを使用する","chapter.how.to.html#how.to.use.tm",null],
+["他のファイル形式のサポート","chapter.how.to.html#how.to.translate.other.files",null],
+["チームプロジェクトを設定する","chapter.how.to.html#how.to.setup.team.project",null],
+["チームプロジェクトを使用する","chapter.how.to.html#how.to.use.team.project",null],
+["OmegaT をインストールする","chapter.how.to.html#how.to.installing.omegat",null],
+["OmegaTの実行","chapter.how.to.html#how.to.running.omegat",null]
 ]],
-["ウィンドウとダイアログ","windows.and.dialogs.html",[
-["プロジェクト設定","windows.and.dialogs.html#dialogs.projectproperties",null],
-["翻訳対象ファイル一覧","windows.and.dialogs.html#windows.projectfiles",null],
-["プロジェクトの検索","windows.and.dialogs.html#windows.textsearch",null],
-["テキストの置換","windows.and.dialogs.html#windows.textreplace",null],
-["整合ツール","windows.and.dialogs.html#windows.aligner",null],
-["スクリプト","windows.and.dialogs.html#windows.scripts",null],
-["一般設定","windows.and.dialogs.html#dialogs.preferences",null]
+["ウィンドウ","chapter.panes.html",[
+["標準レイアウト","chapter.panes.html#panes.default.layout",null],
+["原則","chapter.panes.html#panes.principles",null],
+["\n                              編集\n                           ","chapter.panes.html#panes.editor",null],
+["\n                              参考訳文\n                           ","chapter.panes.html#panes.fuzzy.matches",null],
+["\n                              用語集\n                           ","chapter.panes.html#panes.glossary",null],
+["\n                              辞書\n                           ","chapter.panes.html#panes.dictionary",null],
+["\n                              機械翻訳\n                           ","chapter.panes.html#panes.machinetranslation",null],
+["\n                              複数訳文\n                           ","chapter.panes.html#panes.multipletranslations",null],
+["\n                              メモ帳\n                           ","chapter.panes.html#panes.notes",null],
+["\n                              コメント\n                           ","chapter.panes.html#panes.comments",null],
+["\n                              文節属性\n                           ","chapter.panes.html#panes.segment.properties",null],
+["\n                              ステータスバー\n                           ","chapter.panes.html#panes.statusbar",null]
 ]],
-["ウィンドウ","panes.html",[
-["編集","panes.html#editor.pane",null],
-["参考訳文","panes.html#d0e4310",null],
-["用語集","panes.html#d0e4359",null],
-["辞書","panes.html#d0e4372",null],
-["機械翻訳","panes.html#d0e4380",null],
-["複数訳文","panes.html#d0e4388",null],
-["メモ","panes.html#d0e4399",null],
-["コメント","panes.html#d0e4410",null],
-["ステータスバー","panes.html#d0e4415",null]
+["メニュー","chapter.menus.html",[
+["\n                              プロジェクト\n                           ","chapter.menus.html#menus.project",null],
+["\n                              編集\n                           ","chapter.menus.html#menus.edit",null],
+["\n                              移動\n                           ","chapter.menus.html#menus.goto",null],
+["\n                              表示\n                           ","chapter.menus.html#menus.view",null],
+["\n                              ツール\n                           ","chapter.menus.html#menus.tools",null],
+["\n                              設定\n                           ","chapter.menus.html#menus.options",null],
+["\n                              ヘルプ\n                           ","chapter.menus.html#menus.help",null]
 ]],
-["プロジェクトフォルダー","project.folder.html",[
-["source","project.folder.html#d0e4455",null],
-["target","project.folder.html#d0e4460",null],
-["tm","project.folder.html#d0e4483",null],
-["辞書","project.folder.html#d0e4592",null],
-["用語集","project.folder.html#d0e4600",null],
-["omegat","project.folder.html#folder.omegat",null],
-["omegat.project（ファイル）","project.folder.html#d0e4668",null],
-[".repositories","project.folder.html#d0e4675",null]
+["ウィンドウとダイアログ","chapter.windows.and.dialogs.html",[
+["\n                              プロジェクト設定\n                           ","chapter.windows.and.dialogs.html#dialogs.project.properties",null],
+["\n                              翻訳対象ファイル一覧\n                           ","chapter.windows.and.dialogs.html#windows.source.files.list",null],
+["\n                              プロジェクトの検索\n                           ","chapter.windows.and.dialogs.html#windows.text.search",null],
+["\n                              テキストの置換\n                           ","chapter.windows.and.dialogs.html#windows.text.replace",null],
+["\n                              整合ツール\n                           ","chapter.windows.and.dialogs.html#windows.aligner",null],
+["\n                              スクリプト\n                           ","chapter.windows.and.dialogs.html#windows.scripts",null]
 ]],
-["操作方法...","howtos.html",[
-["チームプロジェクトを設定する","howtos.html#howto.setupteamproject",null],
-["チームプロジェクトを使用する","howtos.html#howto.useteamproject",null],
-["翻訳メモリの再利用","howtos.html#howto.reusetm",null],
-["データを失わないために","howtos.html#howto.preventdataloss",null],
-["PDFファイルの翻訳","howtos.html#howto.translatepdf",null],
-["右から左へ表記する言語","howtos.html#howto.managerighttoleft",null]
+["\n                        環境設定\n                     ","chapter.dialogs.preferences.html",[
+["\n                              一般\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.general",null],
+["\n                              機械翻訳\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.mt",null],
+["\n                              用語集\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.glossary",null],
+["\n                              辞書\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.dictionary",null],
+["\n                              外観\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.appearance",null],
+["\n                              ユーザーレベルファイルフィルタ\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.file.filters",null],
+["\n                              ユーザーレベルの分節化規則\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.segmentation.setup",null],
+["\n                              入力補完\n                           ","chapter.dialogs.preferences.html#dialog.preferences.auto.completion",null],
+["\n                              スペルチェッカー\n                           ","chapter.dialogs.preferences.html#dialog.preferences.spellchecker",null],
+["\n                              LanguageTool\n                           ","chapter.dialogs.preferences.html#dialog.preferences.languagetool.plugin",null],
+["\n                              ユーザーレベルの外部検索\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.external.searches",null],
+["\n                              編集\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.editor",null],
+["\n                              タグ処理\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.tag.processing",null],
+["\n                              チーム\n                           ","chapter.dialogs.preferences.html#dialog.preferences.team",null],
+["\n                              参考訳文\n                           ","chapter.dialogs.preferences.html#dialog.preferences.tm.matches",null],
+["\n                              表示\n                           ","chapter.dialogs.preferences.html#dialog.preferences.view",null],
+["\n                              保存と訳文ファイル生成\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.saving.and.output",null],
+["\n                              プロキシ認証\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.proxy.login",null],
+["\n                              機密データ\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.secure.store",null],
+["\n                              プラグイン\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.plugins",null],
+["\n                              更新\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.updates",null]
 ]],
-["Appendices","appendix.dictionaries.html",[
-["A. 辞書","appendix.dictionaries.html",null],
-["B. 用語集 (Glossaries)","appendix.glossaries.html",[
-["デフォルトの用語集","appendix.glossaries.html#d0e5574",null],
-["使い方","appendix.glossaries.html#d0e5598",null],
-["ファイル形式","appendix.glossaries.html#d0e5648",null],
-["用語集に関するよくある問題","appendix.glossaries.html#d0e5764",null]
+["プロジェクトフォルダー","chapter.project.folder.html",[
+["デフォルトの構造","chapter.project.folder.html#d0e10172",null],
+["最小のコンテンツ","chapter.project.folder.html#d0e10248",null],
+["source","chapter.project.folder.html#project.folder.source",null],
+["target","chapter.project.folder.html#project.folder.target",null],
+["tm","chapter.project.folder.html#project.folder.tm",null],
+["エキスポート先フォルダー","chapter.project.folder.html#project.folder.exported.tm",null],
+["辞書","chapter.project.folder.html#project.folder.dictionary",null],
+["用語集","chapter.project.folder.html#project.folder.glossary",null],
+["omegat","chapter.project.folder.html#project.folder.omegat.folder",null],
+[".repositories","chapter.project.folder.html#project.folder.repositories",null]
 ]],
-["C. 綴り確認","appendix.spellchecker.html",[
-["綴り確認用辞書の組み込み","appendix.spellchecker.html#d0e5814",null],
-["綴り確認用辞書の使用","appendix.spellchecker.html#d0e5862",null],
-["使用時のヒント","appendix.spellchecker.html#hints",null]
-]],
-["D. 正規表現","appendix.regexp.html",[
-["正規表現関連ツールとその使用例","appendix.regexp.html#regex.tools.and.examples.of.use",null]
-]],
-["E. ショートカットのカスタマイズ","appendix.shortcut.custom.html",[
-["ショートカットのカスタマイズ","appendix.shortcut.custom.html#ch04.shortcuts.customization",null],
-["プロジェクトメニュー","appendix.shortcut.custom.html#ch04.shortcuts.ProjectMenu",null],
-["編集メニュー","appendix.shortcut.custom.html#ch04.shortcuts.EditMenu",null],
-["移動メニュー","appendix.shortcut.custom.html#ch04.shortcuts.GoToMenu",null],
-["表示メニュー","appendix.shortcut.custom.html#ch04.shortcuts.ViewMenu",null],
-["ツールメニュー","appendix.shortcut.custom.html#ch04.shortcuts.ToolsMenu",null],
-["設定メニュー","appendix.shortcut.custom.html#ch04.shortcuts.OptionsMenu",null],
-["ヘルプメニュー","appendix.shortcut.custom.html#ch04.shortcuts.HelpMenu",null]
-]]
+["付録","chapter.appendices.html",[
+["ファイルフィルター","chapter.appendices.html#file.filters",null],
+["分節化規則","chapter.appendices.html#app.segmentation",null],
+["正規表現","chapter.appendices.html#app.regex",null],
+["用語集","chapter.appendices.html#app.glossaries",null],
+["方向制御用の書式設定文字","chapter.appendices.html#app.bidi",null],
+["後処理用コマンド：","chapter.appendices.html#post.processing.commands",null],
+["OmegaTのショートカット","chapter.appendices.html#app.shortcuts",null],
+["設定フォルダー","chapter.appendices.html#configuration.folder",null],
+["プログラムフォルダー","chapter.appendices.html#application.folder",null]
 ]]];
 var toc_initiallyCollapsed = false;
 var messages = [
@@ -874,7 +890,7 @@ message = translation[index];
 }
 return message;
 }
-var storageId = "1q1htkuizgoo-1hk8qojkah2bp";
+var storageId = "18hlchqtfy904-1ul49cs8hil5o";
 function storageSet(key, value) {
 window.sessionStorage.setItem(key + storageId, String(value));
 }

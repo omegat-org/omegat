@@ -158,28 +158,14 @@ boulet.offset({top: limite2});
 };
 })(jQuery);
 jQuery.extend({
-highlight: function (node, re, hwRE1, hwRE2, nodeName, className) {
+highlight: function (node, re, nodeName, className) {
 if (node.nodeType === 3) {
 var match = node.data.match(re);
 if (match) {
-var matchIndex = match.index;
-var matchLength = match[0].length;
-if (hwRE1 !== null) {
-var text = match.input;
-var matchHead = text.substring(0, matchIndex).match(hwRE1);
-if (matchHead !== null) {
-matchIndex -= matchHead[1].length;
-}
-var matchTail =
-text.substring(matchIndex + matchLength).match(hwRE2);
-if (matchTail !== null) {
-matchLength += matchTail[1].length;
-}
-}
 var highlight = document.createElement(nodeName || 'span');
 highlight.className = className || 'highlight';
-var wordNode = node.splitText(matchIndex);
-wordNode.splitText(matchLength);
+var wordNode = node.splitText(match.index);
+wordNode.splitText(match[0].length);
 var wordClone = wordNode.cloneNode(true);
 highlight.appendChild(wordClone);
 wordNode.parentNode.replaceChild(highlight, wordNode);
@@ -189,7 +175,7 @@ return 1;
 !/^(script|style|text|tspan|textpath)$|(^svg:)/i.test(node.tagName) && 
 !(node.tagName === nodeName.toUpperCase() && node.className === className)) { 
 for (var i = 0; i < node.childNodes.length; i++) {
-i += jQuery.highlight(node.childNodes[i], re, hwRE1, hwRE2, nodeName, className);
+i += jQuery.highlight(node.childNodes[i], re, nodeName, className);
 }
 }
 return 0;
@@ -205,7 +191,7 @@ parent.normalize();
 }).end();
 };
 jQuery.fn.highlight = function (words, options) {
-var settings = { className: 'highlight', element: 'span', caseSensitive: false, wordsOnly: false, highlightWord: false };
+var settings = { className: 'highlight', element: 'span', caseSensitive: false, wordsOnly: false };
 jQuery.extend(settings, options);
 if (words.constructor === String) {
 words = [words];
@@ -223,16 +209,8 @@ if (settings.wordsOnly) {
 pattern = "\\b" + pattern + "\\b";
 }
 var re = new RegExp(pattern, flag);
-var hwRE1 = null;
-var hwRE2 = null;
-if (settings.highlightWord) {
-try {
-hwRE1 = new RegExp("([\\p{L}\\p{N}_-]+)$", "u");
-hwRE2 = new RegExp("^([\\p{L}\\p{N}_-]+)", "u");
-} catch (ignored) {}
-}
 return this.each(function () {
-jQuery.highlight(this, re, hwRE1, hwRE2, settings.element, settings.className);
+jQuery.highlight(this, re, settings.element, settings.className);
 });
 };
 ;(function ($) {
@@ -306,9 +284,6 @@ tabs.addClass("tabs-tabs");
 tabs.children("li").each(function (itemIndex) {
 $(this).addClass("tabs-tab");
 var links = $(this).children("a[href]");
-links.each(function (i) {
-$(this).attr("draggable", "false");
-});
 $(this).add(links).click(function (event) {
 event.preventDefault();
 event.stopImmediatePropagation();
@@ -543,194 +518,104 @@ return this;
 var wh = (function () {
 var toc_entries = [
 ["Introduction to OmegaT","chapter.instant.start.guide.html",[
-["Principles","chapter.instant.start.guide.html#introduction.omegat.",null],
-["Shortcuts","chapter.instant.start.guide.html#introduction.note.on.shortcuts",null],
-["Create a new project","chapter.instant.start.guide.html#introduction.create.and.open.new.project",null],
-["Manage your segments","chapter.instant.start.guide.html#introduction.manage.your.segments",null],
+["Principles","chapter.instant.start.guide.html#introduction.omegat.principles",null],
+["Conventions used in\n\tthis manual","chapter.instant.start.guide.html#introduction.how.to.use.the.manual",null],
+["Create a new\n    project","chapter.instant.start.guide.html#introduction.create.and.open.new.project",null],
+["Spellchecking\n\tdictionaries","chapter.instant.start.guide.html#introduction.install.spellchecker.dictionary",null],
+["Manage your\n    segments","chapter.instant.start.guide.html#introduction.manage.your.segments",null],
 ["Make it look good!","chapter.instant.start.guide.html#introduction.make.it.look.good",null],
 ["Translate\n    your files","chapter.instant.start.guide.html#introduction.translate.the.segments.one.by.one",null],
 ["Manage your tags","chapter.instant.start.guide.html#introduction.manage.your.tags",null],
-["Review your translation","chapter.instant.start.guide.html#introduction.review.the.translation",null],
-["Create the translated files","chapter.instant.start.guide.html#introduction.generate.the.translated.file",null],
-["Manage your projects","chapter.instant.start.guide.html#introduction.one.more.thing",null]
+["Review your\n    translation","chapter.instant.start.guide.html#introduction.review.the.translation",null],
+["Create the\n    translated files","chapter.instant.start.guide.html#introduction.generate.the.translated.file",null],
+["Manage your projects","chapter.instant.start.guide.html#introduction.one.more.thing",null],
+["A shortcut based\n    workflow","chapter.instant.start.guide.html#app.shortcuts.streamline.workflow",null]
 ]],
-["How To...","how.to.html",[
-["Troubleshoot issues","how.to.html#how.to.restore.your.data",[
-["Automatic\n\tbackups","how.to.html#how.to.restore.your.data.automatic.backup",null],
-["You lost your\n\ttranslation?","how.to.html#how.to.restore.your.data.lost.in.translation",null],
-["Your project won’t open?","how.to.html#how.to.restore.your.data.project.wont.open",null],
-["Your translated file won’t open?","how.to.html#how.to.restore.your.data.translated.file.broken",null],
-["OmegaT won’t behave?","how.to.html#how.to.restore.your.data.omegat.wont.behave",null],
-["Summary","how.to.html#how.to.restore.your.data.summary",null]
+["How To...","chapter.how.to.html",[
+["Troubleshoot issues","chapter.how.to.html#how.to.restore.your.data",null],
+["Use translation memories","chapter.how.to.html#how.to.use.tm",null],
+["Support other formats","chapter.how.to.html#how.to.translate.other.files",null],
+["Set up a team project","chapter.how.to.html#how.to.setup.team.project",null],
+["Use a team project","chapter.how.to.html#how.to.use.team.project",null],
+["Install\n  OmegaT","chapter.how.to.html#how.to.installing.omegat",null],
+["Run OmegaT","chapter.how.to.html#how.to.running.omegat",null]
 ]],
-["Support other formats","how.to.html#how.to.translate.other.files",[
-["Association","how.to.html#d0e782",null],
-["Conversion","how.to.html#d0e793",null],
-["Third-party plugin","how.to.html#d0e866",null],
-["Development","how.to.html#d0e901",null]
+["Panes","chapter.panes.html",[
+["Default layout","chapter.panes.html#panes.default.layout",null],
+["Principles","chapter.panes.html#panes.principles",null],
+["\n                              Editor\n                           ","chapter.panes.html#panes.editor",null],
+["\n                              Fuzzy Matches\n                           ","chapter.panes.html#panes.fuzzy.matches",null],
+["\n                              Glossaries\n                           ","chapter.panes.html#panes.glossary",null],
+["\n                              Dictionaries\n                           ","chapter.panes.html#panes.dictionary",null],
+["\n                              Machine\n    Translations\n                           ","chapter.panes.html#panes.machinetranslation",null],
+["\n                              Multiple\n    Translations\n                           ","chapter.panes.html#panes.multipletranslations",null],
+["\n                              Notepad\n                           ","chapter.panes.html#panes.notes",null],
+["\n                              Comments\n                           ","chapter.panes.html#panes.comments",null],
+["\n                              Segment\n    properties\n                           ","chapter.panes.html#panes.segment.properties",null],
+["\n                              Status bar\n                           ","chapter.panes.html#panes.statusbar",null]
 ]],
-["Use translation memories","how.to.html#how.to.use.tm",[
-["Create your own TMs","how.to.html#how.to.use.tm.create.your.tm",null],
-["Reuse TMs","how.to.html#how.to.use.tm.reuse.tm",null],
-["Share TMs","how.to.html#how.to.tm.share.translation.memories",null],
-["Bridge two\n  languages","how.to.html#how.to.tm.bridge.two.languages",null]
+["Menus","chapter.menus.html",[
+["\n                              Project\n                           ","chapter.menus.html#menus.project",null],
+["\n                              Edit\n                           ","chapter.menus.html#menus.edit",null],
+["\n                              Go To\n                           ","chapter.menus.html#menus.goto",null],
+["\n                              View\n                           ","chapter.menus.html#menus.view",null],
+["\n                              Tools\n                           ","chapter.menus.html#menus.tools",null],
+["\n                              Options\n                           ","chapter.menus.html#menus.options",null],
+["\n                              Help\n                           ","chapter.menus.html#menus.help",null]
 ]],
-["Manage RTL Languages","how.to.html#how.to.manage.right.to.left",[
-["Mixing RTL and LTR","how.to.html#how.to.manage.right.to.left.mixing.rtl.and.ltr",null],
-["Tags in RTL Segments","how.to.html#how.to.manage.right.to.left.omegat.tags.and.rtl",null],
-["Translated Documents","how.to.html#how.to.manage.right.to.left.creating.translated.rtl.documents",null]
+["Windows and Dialogs","chapter.windows.and.dialogs.html",[
+["\n                              Project\n  Properties\n                           ","chapter.windows.and.dialogs.html#dialogs.project.properties",null],
+["\n                              Source\n  Files\n                           ","chapter.windows.and.dialogs.html#windows.source.files.list",null],
+["\n                              Text Search\n                           ","chapter.windows.and.dialogs.html#windows.text.search",null],
+["\n                              Text\n  Replace\n                           ","chapter.windows.and.dialogs.html#windows.text.replace",null],
+["\n                              Align Files\n                           ","chapter.windows.and.dialogs.html#windows.aligner",null],
+["\n                              Scripting\n                           ","chapter.windows.and.dialogs.html#windows.scripts",null]
 ]],
-["Install\n  OmegaT","how.to.html#installing.omegat",[
-["On Windows","how.to.html#installing.omegat.windows",null],
-["On Linux","how.to.html#installing.omegat.linux.intel",null],
-["On macOS","how.to.html#Installing.omegat.macos",null],
-["On other platforms","how.to.html#installing.omegat.other.systems",null],
-["Upgrade","how.to.html#update.and.delete.omegat",null],
-["Delete OmegaT","how.to.html#update.and.delete.omegat.delete",null],
-["Build OmegaT","how.to.html#build.omegat.from.source",null]
+["\n                        Preferences\n                     ","chapter.dialogs.preferences.html",[
+["\n                              General\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.general",null],
+["\n                              Machine Translation\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.mt",null],
+["\n                              Glossaries\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.glossary",null],
+["\n                              Dictionaries\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.dictionary",null],
+["\n                              Appearance\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.appearance",null],
+["\n                              Global File\n\tFilters\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.file.filters",null],
+["\n                              Global\n\tSegmentation Rules\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.segmentation.setup",null],
+["\n                              Auto-Completion\n                           ","chapter.dialogs.preferences.html#dialog.preferences.auto.completion",null],
+["\n                              Spellchecker\n                           ","chapter.dialogs.preferences.html#dialog.preferences.spellchecker",null],
+["\n                              LanguageTool\n                           ","chapter.dialogs.preferences.html#dialog.preferences.languagetool.plugin",null],
+["\n                              Global External\n\tSearches\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.external.searches",null],
+["\n                              Editor\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.editor",null],
+["\n                              Tag Processing\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.tag.processing",null],
+["\n                              Team\n                           ","chapter.dialogs.preferences.html#dialog.preferences.team",null],
+["\n                              TM Matches\n                           ","chapter.dialogs.preferences.html#dialog.preferences.tm.matches",null],
+["\n                              View\n                           ","chapter.dialogs.preferences.html#dialog.preferences.view",null],
+["\n                              Saving and\n\tOutput\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.saving.and.output",null],
+["\n                              Proxy Login\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.proxy.login",null],
+["\n                              Secure store\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.secure.store",null],
+["\n                              Plugins\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.plugins",null],
+["\n                              Updates\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.updates",null]
 ]],
-["Run\n  OmegaT","how.to.html#running.omegat",[
-["On Windows","how.to.html#running.omegat.on.windows",null],
-["On Linux","how.to.html#running.omegat.on.linux",null],
-["On macOS","how.to.html#running.omegat.on.macos",null],
-["On other platforms","how.to.html#running.omegat.on.other.systems",null],
-["Command line launch","how.to.html#launch.with.command.line",null]
+["Project Folder","chapter.project.folder.html",[
+["Default structure","chapter.project.folder.html#d0e10408",null],
+["Minimal contents","chapter.project.folder.html#d0e10486",null],
+["source","chapter.project.folder.html#project.folder.source",null],
+["target","chapter.project.folder.html#project.folder.target",null],
+["tm","chapter.project.folder.html#project.folder.tm",null],
+["exported tms folder","chapter.project.folder.html#project.folder.exported.tm",null],
+["dictionary","chapter.project.folder.html#project.folder.dictionary",null],
+["glossary","chapter.project.folder.html#project.folder.glossary",null],
+["omegat","chapter.project.folder.html#project.folder.omegat.folder",null],
+[".repositories","chapter.project.folder.html#project.folder.repositories",null]
 ]],
-["Set up a team\n  project","how.to.html#how.to.setup.team.project",[
-["Preparations","how.to.html#how.to.setup.team.project.prepare.the.repository",null],
-["Repository mappings","how.to.html#how.to.setup.team.project.mapping.parameters",null],
-["Example\n\tmappings","how.to.html#how.to.setup.team.project.example.mappings",null],
-["Selective sharing","how.to.html#how.to.setup.team.project.selective.sharing",null]
-]],
-["Use a Team Project","how.to.html#how.to.use.team.project",null]
-]],
-["Panes","panes.html",[
-["Principles","panes.html#panes.principles",null],
-["Editor","panes.html#panes.editor",null],
-["Fuzzy Matches","panes.html#panes.fuzzy.matches",null],
-["Glossary","panes.html#panes.glossary",null],
-["Dictionary","panes.html#panes.dictionary",null],
-["Machine Translation","panes.html#panes.machinetranslation",null],
-["Multiple Translations","panes.html#panes.multipletranslations",null],
-["Notes","panes.html#panes.notes",null],
-["Comments","panes.html#panes.comments",null],
-["Segment properties","panes.html#panes.segment.properties",null],
-["Status bar","panes.html#panes.statusbar",null]
-]],
-["Menus","menus.html",[
-["Project","menus.html#menus.project",null],
-["Edit","menus.html#menus.edit",null],
-["Go To","menus.html#menus.goto",null],
-["View","menus.html#menus.view",null],
-["Tools","menus.html#menus.tools",null],
-["Options","menus.html#menus.options",null],
-["Help","menus.html#menus.help",null]
-]],
-["Windows and Dialogs","windows.and.dialogs.html",[
-["Project Properties","windows.and.dialogs.html#dialogs.project.properties",[
-["Languages","windows.and.dialogs.html#dialogs.project.properties.languages",null],
-["Options","windows.and.dialogs.html#dialogs.project.properties.options",null],
-["File locations","windows.and.dialogs.html#dialogs.project.properties.file.locations",null]
-]],
-["Source Files","windows.and.dialogs.html#windows.source.files.list",null],
-["Text Search","windows.and.dialogs.html#windows.text.search",[
-["Search type","windows.and.dialogs.html#windows.text.search.methods",null],
-["Options","windows.and.dialogs.html#windows.text.search.options",null],
-["Results display","windows.and.dialogs.html#windows.text.search.result.display",null],
-["Filter","windows.and.dialogs.html#windows.text.search.filter",null]
-]],
-["Text Replace","windows.and.dialogs.html#windows.text.replace",[
-["Search type","windows.and.dialogs.html#windows.text.replace.methods",null],
-["Options","windows.and.dialogs.html#windows.text.replace.options",null],
-["Results display","windows.and.dialogs.html#windows.text.replace.result.display",null]
-]],
-["Align Files","windows.and.dialogs.html#windows.aligner",[
-["Settings","windows.and.dialogs.html#windows.aligner.adjust",null],
-["Corrections","windows.and.dialogs.html#windows.aligner.manual.corrections",null]
-]],
-["Scripting","windows.and.dialogs.html#windows.scripts",[
-["The script folder","windows.and.dialogs.html#windows.scripts.folder",null],
-["Usage","windows.and.dialogs.html#windows.scripts.usage",null],
-["Distributed scripts","windows.and.dialogs.html#windows.scripts.distribution",null],
-["Languages","windows.and.dialogs.html#windows.scripts.languages",null]
-]]
-]],
-["Project Folder","project.folder.html",[
-["source","project.folder.html#project.folder.source",null],
-["target","project.folder.html#project.folder.target",null],
-["tm","project.folder.html#project.folder.tm",null],
-["exported tms folder","project.folder.html#project.folder.exported.tm",null],
-["dictionary","project.folder.html#project.folder.dictionary",null],
-["glossary","project.folder.html#project.folder.glossary",null],
-["omegat","project.folder.html#project.folder.omegat.folder",null],
-["omegat.project","project.folder.html#project.folder.omegat.project",null],
-[".repositories","project.folder.html#project.folder.repositories",null]
-]],
-["Preferences","dialogs.preferences.html",[
-["General","dialogs.preferences.html#dialogs.preferences.general",null],
-["Machine Translation","dialogs.preferences.html#dialogs.preferences.mt",null],
-["Glossary","dialogs.preferences.html#dialogs.preferences.glossary",null],
-["Dictionary","dialogs.preferences.html#dialogs.preferences.dictionary",null],
-["Appearance","dialogs.preferences.html#dialogs.preferences.appearance",[
-["Font","dialogs.preferences.html#dialogs.preferences.fonts",null],
-["Colors","dialogs.preferences.html#dialogs.preferences.colours",null]
-]],
-["Global File Filters","dialogs.preferences.html#dialogs.preferences.file.filters",null],
-["Global Segmentation Rules","dialogs.preferences.html#dialogs.preferences.segmentation.setup",[
-["Language\n\tsets","dialogs.preferences.html#dialogs.preferences.segmentation.setup.scope",null],
-["Set contents","dialogs.preferences.html#segmentation.rules",null]
-]],
-["Auto-Completion","dialogs.preferences.html#dialog.preferences.auto.completion",null],
-["Spellchecker","dialogs.preferences.html#dialog.preferences.spellchecker",null],
-["LanguageTool","dialogs.preferences.html#dialog.preferences.languagetool.plugin",null],
-["Global External\n  Searches","dialogs.preferences.html#dialogs.preferences.external.searches",null],
-["Editor","dialogs.preferences.html#dialogs.preferences.editor",null],
-["Tag Processing","dialogs.preferences.html#dialogs.preferences.tag.processing",null],
-["Team","dialogs.preferences.html#dialog.preferences.team",null],
-["TM Matches","dialogs.preferences.html#dialog.preferences.tm.matches",null],
-["View","dialogs.preferences.html#dialog.preferences.view",null],
-["Saving and\n  Output","dialogs.preferences.html#dialogs.preferences.saving.and.output",null],
-["Proxy Login","dialogs.preferences.html#dialogs.preferences.proxy.login",null],
-["Secure store","dialogs.preferences.html#dialogs.preferences.secure.store",null],
-["Plugins","dialogs.preferences.html#dialogs.preferences.plugins",null],
-["Updates","dialogs.preferences.html#dialogs.preferences.updates",null]
-]],
-["Appendices","appendices.html",[
-["File Filters","appendices.html#file.filters",[
-["Common preferences","appendices.html#file.filters.general",null],
-["Edit","appendices.html#edit.filter.dialog",null],
-["Options","appendices.html#filters.options",null]
-]],
-["Segmentation","appendices.html#app.segmentation",[
-["Paragraph or\n\tsentence?","appendices.html#dialog.preferences.segmentation.setup.type",null],
-["Global or\n\tlocal?","appendices.html#dialog.preferences.segmentation.setup.scope",null],
-["Rules","appendices.html#dialog.preferences.segmentation.setup.rules.based.segmentation",null]
-]],
-["Regular expressions","appendices.html#app.regex",[
-["The 4 rules","appendices.html#app.regex.four.rules",null],
-["The 12 characters","appendices.html#app.regex.twelve.characters",null],
-["Lots of\n    expressions","appendices.html#app.regex.types.of.expressions",null],
-["More examples","appendices.html#app.regex.more.examples",null],
-["References","appendices.html#app.regex.tools",null]
-]],
-["Glossaries","appendices.html#app.glossaries",[
-["The glossaries folder","appendices.html#glossaries.glossary.folder",null],
-["Project glossary","appendices.html#glossaries.default.glossary",null],
-["File format","appendices.html#glossaries.fileformat",null]
-]],
-["OmegaT Shortcuts","appendices.html#app.shortcuts",[
-["Description","appendices.html#app.shortcuts.description",null],
-["A shortcut based workflow","appendices.html#app.shortcuts.streamline.workflow",null],
-["Customization","appendices.html#app.shortcuts.customization",null],
-["Syntax","appendices.html#app.shortcuts.syntax",null],
-["Lists of functions and codes","appendices.html#app.shortcuts.lists",null]
-]],
-["Configuration Folder","appendices.html#configuration.folder",[
-["Location","appendices.html#configuration.folder.location",null],
-["Default  contents","appendices.html#configuration.folder.default.contents",null],
-["Additional contents","appendices.html#configuration.folder.extra.contents",null]
-]],
-["Application Folder","appendices.html#application.folder",null]
+["Appendices","chapter.appendices.html",[
+["File Filters","chapter.appendices.html#file.filters",null],
+["Segmentation","chapter.appendices.html#app.segmentation",null],
+["Regular expressions","chapter.appendices.html#app.regex",null],
+["Glossaries","chapter.appendices.html#app.glossaries",null],
+["Directional Formatting Characters","chapter.appendices.html#app.bidi",null],
+["Post-Processing Commands","chapter.appendices.html#post.processing.commands",null],
+["OmegaT Shortcuts","chapter.appendices.html#app.shortcuts",null],
+["Configuration Folder","chapter.appendices.html#configuration.folder",null],
+["Application Folder","chapter.appendices.html#application.folder",null]
 ]]];
 var toc_initiallyCollapsed = false;
 var messages = [
@@ -1005,7 +890,7 @@ message = translation[index];
 }
 return message;
 }
-var storageId = "u1wkgydmb8tt-1amhsijiib3uz";
+var storageId = "2rprwaw7hxcg-1boqrcwpu83ix";
 function storageSet(key, value) {
 window.sessionStorage.setItem(key + storageId, String(value));
 }
@@ -1145,7 +1030,6 @@ list.append(item);
 if (href !== null) {
 var link = $("<a></a>");
 link.attr("href", href);
-link.attr("draggable", "false");
 link.html(text);
 item.append(link);
 } else {
@@ -1227,7 +1111,7 @@ clearSearchState();
 }
 function highlightSearchedWords(words) {
 $("#wh-content").highlight(words, 
-{ caseSensitive: false, highlightWord: true,
+{ caseSensitive: false, 
 className: "wh-highlighted" });
 }
 function unhighlightSearchedWords() {
@@ -1386,7 +1270,6 @@ item.addClass("wh-odd-item");
 list.append(item);
 var link = $("<a></a>");
 link.attr("href", wh.search_baseNameList[index]);
-link.attr("draggable", "false");
 link.html(wh.search_titleList[index]);
 item.append(link);
 }

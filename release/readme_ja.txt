@@ -1,14 +1,10 @@
-OmegaT の日本語版は、以下の貢献者によって作成されました：
-・1.4版全体：柳田 ひさし氏 copyright© 2004
-・1.6版 お手軽スタートガイド：可知 豊氏 copyright© 2006
-・1.6版 UI：林 たかゆき氏 copyright© 2006
-・1.6版 readme：中山 嘉孝氏 copyright© 2006
-・1.6版 ユーザーマニュアル：白方 健太郎氏 copyright© 2006
-・1.6版 全体チェック 横田 邦彦氏
-・1.6版 全体チェック エラリー ジャンクリストフ氏
-・1.6版 全体チェック＋差分翻訳 松谷 善久氏
-・1.8/2.0版 お手軽スタートガイド、UI、readme：エラリー ジャンクリストフ氏 copyright© 2009
-・1.8/2.0版 全体チェック 篠原 範子氏
+OmegaT の日本語版は、以下の貢献者によって作成されました(敬称略)：
+copyright  2004 柳田 ひさし
+copyright 2006 可知 豊,林 たかゆき,中山 嘉孝,白方 健太郎,横田 邦彦,松谷 善久
+copyright 2006-2009,2020-2021 エラリー ジャンクリストフ
+copyright 2009 篠原 範子
+copyright 2013-2015 Yu-Tang
+copyright 2020-2023 Hiroshi Miura
 
 
 OmegaT とは？
@@ -69,18 +65,6 @@ OmegaTのインストール (Solaris, FreeBSD, etc.)
 =========================================
 
 アーカイブを任意のフォルダーに配置して、展開してください。これで、OmegaT を起動できるようになります。
-
-
-
-Java Web Startを使ってOmegaT をインストール(全プラットフォーム対象)===========================================================
-
-すでに Java 実行環境があるなら、現バージョンの OmegaT をインストールするひとつの方法として、Java Web Start を使うことができます。
-
-この場合、以下のファイルをダウンロードし、実行してください：
-
-  https://omegat.sourceforge.net/webstart/OmegaT.jnlp
-
-最初の実行時に、お使いのコンピューターに適した実行環境とアプリケーションを自動でインストールします。それ以降の実行時は、オンラインである必要はありません。
 
 
 
@@ -148,12 +132,13 @@ Jean-Christophe Helary (プロジェクトマネージャー)
 現在のチーム:
 (アルファベット順)
 
-- Marco Cevoli (Telegram コミュニティ担当)
-- Jean-Christophe Helary (Twitter コミュニティ担当)
-- Kos Ivantsof (ローカリゼーション担当)
-- Concepción Martin (Facebook コミュニティ担当)
-- Briac Pilpré (ウェブサイト担当)
-- Lucie Vecerova (Facebook コミュニティ担当)
+- Marco Cevoli (Telegram community manager)
+- Jean-Christophe Helary (Twitter community manager)
+- Kos Ivantsov (localisation manager)
+- Concepción Martin (Facebook community manager)
+- Hiroshi Miura (lead developer)
+- Briac Pilpré (webmaster)
+- Lucie Vecerova (Facebook community manager)
 
 コードへの貢献は、/docs/contributors.txtに記載されています。
 

@@ -1,0 +1,1220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd"
+[
+<!ENTITY % manualvariables SYSTEM "manualvariables.mod">
+%manualvariables;
+]>
+<chapter id="chapter.dialogs.preferences">
+  <title id="chapter.dialogs.preferences.title"><guilabel>Preferències</guilabel></title>
+
+  <para>Utilitzeu <link endterm="menus.options.title" linkend="menus.options"/><link endterm="menus.options.preferences.title" linkend="menus.options.preferences"/> per a accedir a aquest quadre de diàleg (menú <literal>OmegaT</literal> en el macOS).</para>
+
+  <para>Utilitzeu el camp de cerca de la part superior de la llista de preferències per a cercar elements específics.</para>
+  
+  <para>Les preferències establertes en aquest quadre diàleg es desen en la <link linkend="configuration.folder">carpeta de configuració</link> per defecte i s'apliquen a tots els projectes de traducció, llevat que hàgiu especificat una carpeta de configuració diferent.</para>
+
+  <note>
+    <para>És possible utilitzar una carpeta de configuració de l'OmegaT diferent per a definir configuracions específiques del projecte. Consulteu la secció <link endterm="launch.with.command.line.title" linkend="launch.with.command.line"/> per a conèixer més detalls. Si especifiqueu una carpeta de configuració, totes les modificacions aplicades en aquest quadre de diàleg s'emmagatzemaran allà.</para>
+  </note>
+
+  <section id="dialogs.preferences.general">
+    <title id="dialogs.preferences.general.title"><guilabel>General</guilabel></title>
+
+    <variablelist>
+      <varlistentry id="dialogs.preferences.general.use.tab.to.advance">
+        <term id="dialogs.preferences.general.use.tab.to.advance.title"><option>Utilitza Tab per a avançar</option></term>
+
+        <listitem>
+		  <para>La tecla per defecte per a validar i sortir d'un segment és <keycap>Retorn</keycap>.</para>
+          <para>Aquesta opció canvia la tecla de validació dels segments a <keycap>Tab</keycap>.</para>
+
+		  <para>Aquesta opció és útil amb alguns sistemes d'entrada de caràcters xinesos, japonesos o coreans.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="dialogs.preferences.general.always.confirm.quit">
+        <term id="dialogs.preferences.general.always.confirm.quit.title"><option>Confirma sempre en sortir</option></term>
+
+        <listitem>
+          <para>El programa demanarà una confirmació abans de sortir.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="dialogs.preferences.general.access.configuration.folder">
+        <term id="dialogs.preferences.general.access.configuration.folder.title"><option>Obre la carpeta de configuració</option></term>
+		<listitem>
+          <para>Obre la carpeta local on s'emmagatzemen els fitxers de configuració de l'OmegaT.</para>
+		  <note>
+			<para>La ubicació depèn del sistema operatiu i de les opcions d'inici. Consulteu l'annex <link linkend="configuration.folder" endterm="configuration.folder.title"/> per a conèixer més detalls.</para>
+		  </note>
+		</listitem>
+      </varlistentry>
+
+	</variablelist>
+  </section>
+
+  <section id="dialogs.preferences.mt">
+    <title id="dialogs.preferences.mt.title"><guilabel>Traducció automàtica</guilabel></title>
+
+    <variablelist>
+      <varlistentry id="dialogs.preferences.mt.automatically.fetch.translations">
+        <term id="dialogs.preferences.mt.automatically.fetch.translations.title"><option>Obtén les traduccions automàticament</option></term>
+
+        <listitem>
+          <para>Si inhabiliteu aquesta opció, els resultats de traducció automàtica només s'obtindran quan utilitzeu <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.replace.with.mt" endterm="menus.edit.replace.with.mt.title"/> en el segment actual. Haureu de tornar a prémer aquesta combinació per a inserir el suggeriment.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="dialogs.preferences.mt.untranslated.segments.only">
+        <term id="dialogs.preferences.mt.untranslated.segments.only.title"><option>Només els segments sense traduir</option></term>
+
+        <listitem>
+          <para>Marqueu aquesta casella per a enviar només els segments sense traduir als serveis de traducció automàtica.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="dialogs.preferences.mt.provider.list">
+        <term id="dialogs.preferences.mt.provider.list.title"><option>Llista de proveïdors</option></term>
+
+        <listitem>
+          <para>En la llista de motors de traducció automàtica disponibles en l'OmegaT, marqueu la casella <guilabel>Habilitat</guilabel> per a cada proveïdor al qual vulgueu accedir. Utilitzeu el botó <guibutton>Configura</guibutton> per a gestionar les credencials d'autenticació del proveïdor.</para>
+
+		  <note>
+			<para>La majoria dels proveïdors requereixen alguna mena de registre abans d'utilitzar els serveis. Assegureu-vos que tingueu les credencials adequades abans d'utilitzar aquesta funció.</para>
+		  </note>
+
+		  <table id="dialogs.preferences.mt.provider.list.configuration">
+			<title id="dialogs.preferences.mt.provider.list.configuration.title"><option>Credencials necessàries</option></title>
+
+			<tgroup align="left" cols="3" rowsep="1">
+			  <colspec align="left" colnum="1"/>
+			  <thead>
+				<row>
+				  <entry>Motor</entry>
+				  <entry>Credencials necessàries</entry>
+				  <entry>Enllaç</entry>
+				</row>
+			  </thead>
+			  <tbody>
+				<row>
+				  <entry>Belazar</entry>
+				  <entry/>
+				  <entry/>
+				</row>
+				<row>
+				  <entry>DeepL</entry>
+				  <entry>Requereix un pla DeepL Pro Advanced, disponible només en alguns països</entry>
+				  <entry><ulink url="https://www.deepl.com/en/pro">https://www.deepl.com/en/pro</ulink></entry>
+				</row>
+				<row>
+				  <entry>MyMemory (traducció automàtica)</entry>
+				  <entry/>
+				  <entry><ulink url="https://mymemory.translated.net/doc/cat.php">https://mymemory.translated.net/</ulink></entry>
+				</row>
+				<row>
+				  <entry>Apertium</entry>
+				  <entry>URL, clau</entry>
+				  <entry><ulink url="http://www.apertium.org">http://www.apertium.org</ulink></entry>
+				</row>
+				<row>
+				  <entry>MyMemory (traducció humana)</entry>
+				  <entry/>
+				  <entry/>
+				</row>
+				<row>
+				  <entry>IBM Watson</entry>
+				  <entry>URL, ID de model, ID d'inici de sessió, contrasenya</entry>
+				  <entry><ulink url="https://www.ibm.com/watson">https://www.ibm.com/watson</ulink></entry>
+				</row>
+				<row>
+				  <entry>Traductor de Google v2</entry>
+				  <entry>Clau de l'API</entry>
+				  <entry><ulink url="https://cloud.google.com/translate/docs/reference/rest/">https://cloud.google.com/translate/</ulink></entry>
+				</row>
+			  </tbody>
+			</tgroup>
+		  </table>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </section>
+
+  <section id="dialogs.preferences.glossary">
+    <title id="dialogs.preferences.glossary.title"><guilabel>Glossaris</guilabel></title>
+
+    <variablelist>
+      <varlistentry id="dialogs.preferences.glossary.display.context.description.for.tbx.glossaries">
+        <term id="dialogs.preferences.glossary.display.context.description.for.tbx.glossaries.title"><option>Display
+        TBX glossaries context description (TBX 2)</option></term>
+
+        <listitem>
+          <para>Desmarqueu aquesta opció si la descripció del context que es mostra per a cada entrada del glossari és innecessària o massa llarga.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="dialogs.preferences.glossary.use.terms.appearing.separately.in.the.source.text">
+        <term id="dialogs.preferences.glossary.use.terms.appearing.separately.in.the.source.text.title"><option>Marca els grups de termes encara que els termes apareguin per separat</option></term>
+
+        <listitem>
+          <para>Quan un terme del glossari és una paraula composta, el terme coincidirà encara que les paraules apareguin per separat en el text d'origen.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="dialogs.preferences.glossary.use.stemming.for.glossary.entries">
+        <term id="dialogs.preferences.glossary.use.stemming.for.glossary.entries.title"><option>Utilitza la lematització</option></term>
+
+        <listitem>
+          <para>L'OmegaT utilitzarà el lematitzador associat per a cercar coincidències.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="dialogs.preferences.glossary.replace.glossary.hits.when.inserting.source.text">
+        <term id="dialogs.preferences.glossary.replace.glossary.hits.when.inserting.source.text.title"><option>Substitueix les coincidències en inserir el text d'origen</option></term>
+        <listitem>
+          <para>Quan utilitzeu</para>
+		  
+		  <itemizedlist>
+			<listitem>
+			  <para><link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.replace.with.source" endterm="menus.edit.replace.with.source.title"/>,</para>
+			</listitem>
+
+			<listitem>
+			  <para><link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.insert.source" endterm="menus.edit.insert.source.title"/>o</para>
+			</listitem>
+
+			<listitem>
+			  <para>la preferència <link linkend="dialogs.preferences.editor.insert.the.source.text" endterm="dialogs.preferences.editor.insert.the.source.text.title"/></para>
+			</listitem>
+		  </itemizedlist>
+
+		  <para>per a inserir el text d'origen en el segment de destinació, les paraules amb una entrada en el glossari se substituiran automàticament per la traducció corresponent.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="dialogs.preferences.glossary.ignore.hits.with.very.different.case">
+        <term id="dialogs.preferences.glossary.ignore.hits.with.very.different.case.title"><option>Ignora les coincidències amb majúscules i minúscules molt diferents (p. ex., «USUARI» i «usuari»)</option></term>
+
+        <listitem>
+          <para>No es mostren les coincidències amb majúscules i minúscules molt diferents.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="dialogs.preferences.glossary.glossary.layout">
+        <term id="dialogs.preferences.glossary.glossary.layout.title"><option>Disposició</option></term>
+
+        <listitem>
+          <para>Select a layout for the glossaries pane contents. Es poden afegir disposicions addicionals com a connectors.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="dialogs.preferences.glossary.merge.alternate.definitions.for.the.same.term">
+        <term id="dialogs.preferences.glossary.merge.alternate.definitions.for.the.same.term.title"><option>Combina les definicions alternatives per al mateix terme</option></term>
+
+        <listitem>
+          <para>Si un element del glossari té diverses definicions, es mostraran en la mateixa línia.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </section>
+
+  <section id="dialogs.preferences.dictionary">
+    <title id="dialogs.preferences.dictionary.title"><guilabel>Diccionaris</guilabel></title>
+
+	<para>Aquestes preferències defineixen com es mostren els continguts de la carpeta <link linkend="project.folder.dictionary" endterm="project.folder.dictionary.title"/> en la subfinestra <link linkend="panes.dictionary" endterm="panes.dictionary.title"/>.</para>
+	
+    <variablelist>
+      <varlistentry id="dialogs.preferences.dictionary.automatically.search.segment">
+        <term id="dialogs.preferences.dictionary.automatically.search.segment.title"><option>Cerca automàticament</option></term>
+
+        <listitem>
+          <para>While the option is disabled, use <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.search.dictionaries" endterm="menus.edit.search.dictionaries.title"/> to search for matches
+          of the selection or of all the terms in the segment source.</para>
+		  <para>When the option is enabled, OmegaT automatically searches in all
+		  the dictionaries for matches of the terms it identified in the
+		  segment, as it enters the segment.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries">
+        <term id="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries.title"><option>Utilitza les coincidències parcials</option></term>
+
+        <listitem>
+          <para>L'OmegaT utilitzarà el lematitzador associat per a cercar coincidències.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="dialogs.preferences.dictionary.use.condensed.view">
+        <term id="dialogs.preferences.dictionary.use.condensed.view.title"><option>Utilitza la visualització compacta</option></term>
+
+        <listitem>
+          <para>Alguns controladors de diccionari proporcionats com a connectors no són compatibles amb aquesta característica.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </section>
+
+  <section id="dialogs.preferences.appearance">
+    <title id="dialogs.preferences.appearance.title"><guilabel>Aparença</guilabel></title>
+
+    <variablelist>
+      <varlistentry id="dialogs.preferences.appearance.theme">
+        <term id="dialogs.preferences.appearance.theme.title"><option>Tema</option></term>
+
+        <listitem>
+          <para>Seleccioneu un tema per a la interfície d'usuari de l'OmegaT.</para>
+
+          <para>Es poden afegir temes addicionals com a connectors. The themes also provide predefined set of default colours.</para>
+
+		  <para>No tots els temes del Java proporcionats de manera nativa són compatibles amb el funcionament de l'OmegaT.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="dialogs.preferences.appearance.restore.main.window">
+        <term id="dialogs.preferences.appearance.restore.main.window.title"><option>Reinicialitza la finestra principal</option></term>
+
+        <listitem>
+          <para>Reinicialitza la disposició de les subfinestres de l'OmegaT a la disposició per defecte.</para>
+
+		  <para>Utilitzeu aquesta característica quan no pugueu reinicialitzar la disposició desitjada després de desacoblar, moure o amagar una o més subfinestres. Podeu utilitzar-la quan les subfinestres no apareguin com esperàveu després d'una actualització de l'OmegaT.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+	
+	<section id="dialogs.preferences.fonts">
+      <title id="dialogs.preferences.fonts.title"><guilabel>Lletra</guilabel></title>
+
+      <para>Seleccioneu la lletra i la mida utilitzades per a mostrar el text en les subfinestres de la finestra principal.</para>
+
+	  <note>
+		<para>L'OmegaT utilitza la mateixa lletra per a les llengües d'origen i de destinació. Si treballeu en un parell de llengües que utilitza sistemes d'escriptura diferents, assegureu-vos de triar una lletra que pugui mostrar correctament les dues llengües. Els caràcters no admesos es mostraran com a quadrats.</para>
+	  </note>
+
+	  <variablelist>
+		<varlistentry>
+		  <term><option>Aplica-ho a les taules (fitxers del projecte, estadístiques, etc.)</option></term>
+		  <listitem>
+			<para>Per defecte, les dades de les taules es mostren amb una lletra monoespaiada que manté les columnes alineades correctament. L'ús d'una lletra proporcional trencarà aquesta disposició.</para>
+		  </listitem>
+		</varlistentry>
+
+		<varlistentry>
+		  <term><option>Apply a different font size to the dictionaries pane</option></term>
+		  <listitem>
+			<para>By default, the dictionaries pane uses the same font size as
+			the main window panes.</para>
+		  </listitem>
+		</varlistentry>
+	  </variablelist>
+	</section>
+
+	<section id="dialogs.preferences.colours">
+      <title id="dialogs.preferences.colours.title"><guilabel>Colors</guilabel></title>
+
+      <para>You can assign different colours for the various parts of the user
+      interface.</para>
+
+      <para>Es poden utilitzar scripts per a establir temes predefinits. L'OmegaT inclou un script anomenat <link linkend="windows.scripts.distribution.switch.colour.theme" endterm="windows.scripts.distribution.switch.colour.theme.title"/> que proporciona un tema fosc per defecte. Consulteu la finestra <link linkend="windows.scripts" endterm="windows.scripts.title"/> per a conèixer més detalls.</para>
+
+	  <note>
+		<para>Automatic dark theme detection is available on Linux systems
+		with the Gnome/GTK look and feel for users who run OmegaT on OpenJDK.
+		This feature depends on Java functionality that is not yet available
+		on other platforms.</para>
+	  </note>
+	</section>
+  </section>
+
+  <section id="dialogs.preferences.file.filters">
+	<title id="dialogs.preferences.file.filters.title"><guilabel>Filtres de fitxers globals</guilabel></title>
+
+	<para>Aquest quadre de diàleg enumera els filtres de fitxers disponibles per als projectes que no utilitzen filtres de fitxers locals.</para>
+
+	<para>El contingut d'aquesta preferència és idèntic al contingut del quadre de diàleg de <link linkend="dialogs.project.properties.filters">filtres de fitxers locals</link>. Consulteu l'annex <link linkend="file.filters" endterm="file.filters.title"/> per a conèixer més detalls.</para>
+
+	<note>
+	  <para>Si s'utilitzen filtres de fitxers locals, modificar els filtres de fitxers globals no tindrà cap efecte en el projecte.</para>
+	</note>
+  </section>
+
+
+  <section id="dialogs.preferences.segmentation.setup">
+	<title id="dialogs.preferences.segmentation.setup.title"><guilabel>Regles de segmentació globals</guilabel></title>
+
+	<para>Consulteu l'annex <link linkend="app.segmentation" endterm="app.segmentation.title"/> per a veure explicacions generals sobre la segmentació (global o local, per paràgrafs o per frases, etc.).</para>
+
+	<warning>
+	  <para>Aquest quadre de diàleg només dona accés a les regles de segmentació globals. Si heu definit regles locals en el quadre de diàleg <link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/>, aquestes modificacions no es tindran en compte.</para>
+	</warning>
+	
+	<section id="dialogs.preferences.segmentation.setup.scope">
+	  <title id="dialogs.preferences.segmentation.setup.scope.title">Conjunts de llengües</title>
+
+	  <para>Només s'apliquen les regles associades als patrons de llengua que corresponen a la llengua d'origen del projecte. Consulteu les propietats del projecte <link linkend="dialogs.project.properties.languages" endterm="dialogs.project.properties.languages.title"/>.</para>
+
+	  <example id="dialogs.preferences.segmentation.setup.scope.example">
+		<title id="dialogs.preferences.segmentation.setup.scope.example.title">Regles per al japonès</title>
+		<para>Per a una traducció del japonès, <emphasis>només</emphasis> es tindrà en compte el conjunt de regles associat al patró <code>JA.*</code> i els conjunts de regles genèrics associats a <code>.*</code>.</para>
+	  </example>
+
+	  <para>Quan feu clic en un patró de llengua en la meitat superior del quadre de diàleg, es mostrarà una llista de regles associades en la meitat inferior del quadre de diàleg.</para>
+
+	  <para>Tots els conjunts de regles de segmentació per a un patró de llengua coincident estan actius i s'apliquen en ordre. Les regles per a les regions lingüístiques específiques s'han de col·locar més amunt que les regles per defecte.</para>
+
+	  <example id="dialogs.preferences.segmentation.setup.scope.cascading.proprieties.example">
+		<title id="dialogs.preferences.segmentation.setup.scope.cascading.proprieties.example.title">Prioritats en cascada</title>
+		<para>Les regles per a <emphasis>FR-CA</emphasis> han d'estar més amunt que les regles per a <emphasis>FR.*</emphasis>, que alhora han d'estar més amunt que les del conjunt genèric <emphasis>.*</emphasis>.</para>
+
+		<para>Així, quan traduïu del francès canadenc, s'aplicaran primer les regles del francès canadenc (si n'hi ha), seguides de les regles del francès i, finalment, les regles genèriques.</para>
+	  </example>
+	  
+	  <para>Per a crear un conjunt de regles nou:</para>
+	  <orderedlist>
+		<listitem>
+		  <para>Feu clic en <guibutton>Afegeix</guibutton>. Apareixerà una línia buida en la part inferior de la taula.</para>
+		</listitem>
+		
+		<listitem>
+		  <para>Canvieu el nom del conjunt de regles i el patró de llengua a l'etiqueta i el patró corresponent desitjats. El patró de llengua és una expressió regular.</para>
+		</listitem>
+
+		<listitem>
+		  <para>Utilitzeu el botó <guibutton>Mou amunt</guibutton> per a establir la prioritat de la regla.</para>
+		</listitem>
+	  </orderedlist>
+	</section>
+
+	<section id="segmentation.rules">
+	  <title id="segmentation.rules.title"><guilabel>Continguts del conjunt</guilabel></title>
+	  <warning>
+		<para>Les regles d'excepció s'han d'indicar <emphasis>per sobre</emphasis> de regles de divisió.</para>
+
+		<para>Quan l'OmegaT llegeix els fitxers, col·loca un marcador no separable en cada ubicació d'excepció. Els llocs que no tinguin aquests marcadors i que coincideixin amb les regles de divisió seran punts de divisió.</para>
+	  </warning>
+	  
+	  <variablelist>
+		<varlistentry id="segmentation.rules.exceptionrule">
+		  <term id="segmentation.rules.exceptionrule.title"><option>Excepcions</option></term>
+
+		  <listitem>
+			<para>Per a definir una regla d'excepció, deixeu la casella de selecció <guilabel>Divisió/excepció</guilabel> sense marcar.</para>
+
+			<para>Especifiqueu combinacions de text que siguin excepcions a una regla de divisió. Per exemple, <emphasis>Mrs. Dalloway</emphasis> no s'ha de dividir en dos segments tot i que una regla de divisió per a <emphasis>punt seguit d'un espai</emphasis> generalment defineix una frase.</para>
+			
+		  </listitem>
+		</varlistentry>
+
+		<varlistentry id="segmentation.rules.breakrule">
+		  <term id="segmentation.rules.breakrule.title"><option>Divisions</option></term>
+
+		  <listitem>
+			<para>Per a definir una regla de divisió, marqueu la casella <guilabel>Divisió/excepció</guilabel>.</para>
+
+			<para>Separa el text d'origen en segments. Per exemple, un <emphasis>punt seguit d'un espai</emphasis> generalment defineix un final de frase en anglès.</para>
+		  </listitem>
+		</varlistentry>
+
+		<varlistentry id="creating.new.rule">
+		  <term id="creating.new.rule.title"><guibutton>Afegeix</guibutton></term>
+		  <listitem>
+			<para>El patró <emphasis role="bold">anterior</emphasis> identifica les parts abans del punt de divisió o excepció.</para>
+
+			<para>El patró <emphasis role="bold">posterior</emphasis> identifica les parts després del punt de divisió o excepció.</para>
+
+			<para>Els patrons <emphasis role="bold">anterior</emphasis> i <emphasis role="bold">posterior</emphasis> són expressions regulars. Consulteu l'annex <link linkend="app.regex" endterm="app.regex.title"/> per a conèixer més detalls.</para>
+		  </listitem>
+		</varlistentry>
+	  </variablelist>
+	  
+	  <para>Les regles existents sempre són un bon punt de partida.</para>
+	</section>
+  </section>
+
+  <section id="dialog.preferences.auto.completion">
+	<title id="dialog.preferences.auto.completion.title"><guilabel>Emplenament automàtic</guilabel></title>
+
+	<para>El menú d'emplenament automàtic està disponible en la subfinestra <link linkend="panes.editor" endterm="panes.editor.title"/>. Consulteu la secció <link linkend="panes.editor.auto.completion.menu" endterm="panes.editor.auto.completion.menu.title"/> per a conèixer més detalls.</para>
+	
+	<para>Feu clic en <guilabel>Glossari</guilabel> per a configurar la visualització de glossari de l'emplenament automàtic.</para>
+
+	<para>Feu clic en <guilabel>Text automàtic</guilabel> per a configurar les opcions del text automàtic i afegir o suprimir entrades.</para>
+
+	<para>Feu clic en <guilabel>Taula de caràcters</guilabel> per a definir les opcions d'emplenament automàtic de la taula de caràcters.</para>
+
+	<para>Feu clic en <guilabel>Habilita l'emplenament a partir de l'historial</guilabel> o <guilabel>Habilita la predicció a partir de l'historial</guilabel> per a definir l'emplenament a partir de l'historial.</para>
+
+	<note>
+	  <para>L'OmegaT no envia <emphasis>mai</emphasis> cap de les dades (historial, etc.) a un servidor extern per a processar-les. Tots els resultats de predicció i emplenament es calculen localment.</para>
+	</note>
+
+	<para>Si l'opció <guilabel>Mostra automàticament els suggeriments rellevants</guilabel> està marcada, l'emplenament automàtic s'inicia automàticament quan escriviu la primera lletra d'una entrada del glossari traduïda o <literal>&lt;</literal> en el cas d'una etiqueta.</para>
+  </section>
+
+  <section id="dialog.preferences.spellchecker">
+	<title id="dialog.preferences.spellchecker.title"><guilabel>Corrector ortogràfic</guilabel></title>
+
+	<para>L'OmegaT té un corrector ortogràfic integrat, però cal que instal·leu diccionaris ortogràfics en funció de les vostres llengües de destinació.</para>
+
+	<warning>
+	  <para>L'OmegaT utilitzarà el diccionari de la llengua que tingui el mateix nom que el codi de la llengua de destinació definit en les propietats del projecte de <link linkend="dialogs.project.properties.languages" endterm="dialogs.project.properties.languages.title"/>. Un diccionari per a <emphasis>FR-FR</emphasis> no comprovarà l'ortografia dels segments de destinació en <emphasis>FR</emphasis>. Si cal, modifiqueu el nom del diccionari o canvieu els paràmetres de llengua del projecte.</para>
+	</warning>
+
+	<variablelist>
+	  <varlistentry id="dialog.preferences.spellchecker.automatic.check">
+		<term id="dialog.preferences.spellchecker.automatic.check.title"><option>Comprova l'ortografia de la traducció</option></term>
+		<listitem>
+		  <para>Habiliteu-ho després d'instal·lar un diccionari de correcció ortogràfica. L'OmegaT subratllarà els errors ortogràfics amb línies ondulades vermelles.</para>
+		  <para>Utilitzeu el <link linkend="panes.editor.context.menu">menú contextual de l'editor</link> per a corregir l'error o seleccionar <guimenuitem>Ignora-ho tot</guimenuitem> o <guimenuitem>Afegeix al diccionari</guimenuitem>. Consulteu <link linkend="project.folder.omegat.spellcheck">fitxers de correcció ortogràfica</link> per a conèixer més detalls.</para>
+		</listitem>
+	  </varlistentry>
+	  
+	  <varlistentry id="dialog.preferences.spellchecker.dictionary.folder">
+		<term id="dialog.preferences.spellchecker.dictionary.folder.title"><option>Ubicació dels diccionaris de correcció ortogràfica</option></term>
+		<listitem>
+		  <para>Carpeta on l'OmegaT instal·larà i cercarà diccionaris ortogràfics. Normalment, és en la carpeta <link linkend="configuration.folder" endterm="configuration.folder.title"/>.</para>
+		</listitem>
+	  </varlistentry>
+	  
+	  <varlistentry id="dialog.preferences.spellchecker.already.installed">
+		<term id="dialog.preferences.spellchecker.already.installed.title"><option>Llengües disponibles</option></term>
+		<listitem>
+		  <para>Llista de diccionaris presents en la carpeta anterior.</para>
+
+		  <para>Si no se'n mostra cap, significa que encara no s'ha instal·lat cap diccionari ortogràfic, o bé que el projecte utilitza una carpeta de configuració específica que encara no conté cap diccionari ortogràfic.</para>
+		</listitem>
+	  </varlistentry>
+	  
+	  <varlistentry id="dialog.preferences.spellchecker.url">
+		<term id="dialog.preferences.spellchecker.url.title"><option>URL dels diccionaris de correcció ortogràfica en línia</option></term>
+		<listitem>
+		  <para>URL per defecte on l'OmegaT cercarà diccionaris per a instal·lar-los.</para>
+
+		  <para>També podeu baixar diccionaris d'altres ubicacions o copiar diccionaris instal·lats localment.</para></listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialog.preferences.spellchecker.install.new">
+		<term id="dialog.preferences.spellchecker.install.new.title"><guibutton>Instal·la una llengua nova...</guibutton></term>
+		<listitem>
+		  <para>Mostra la llista de diccionaris disponibles en l'URL anterior.</para>
+
+		  <warning>
+			<para>Aquesta acció requereix una connexió a Internet.</para>
+		  </warning>
+
+		  <para>Seleccioneu els diccionaris que voleu instal·lar i feu clic en <guibutton>Instal·la</guibutton>. En funció de la connexió a Internet, la instal·lació del diccionari pot tardar una estona.</para>
+		</listitem>
+	  </varlistentry>
+	</variablelist>
+  </section>
+  
+  <section id="dialog.preferences.languagetool.plugin">
+	<title id="dialog.preferences.languagetool.plugin.title"><guilabel>LanguageTool</guilabel></title>
+
+	<variablelist>
+	  <varlistentry id="dialog.preferences.languagetool.plugin.servicetype">
+		<term id="dialog.preferences.languagetool.plugin.servicetype.title"><option>Tipus de servei</option></term>
+
+		<listitem>
+		  <para>Seleccioneu la ubicació del corrector lingüístic.</para>
+
+		  <para>L'ús d'un corrector lingüístic de l'ordinador diferent del que es proporciona amb l'OmegaT us permet personalitzar les regles de correcció.</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialog.preferences.languagetool.plugin.rules">
+		<term id="dialog.preferences.languagetool.plugin.rules.title"><option>Regles</option></term>
+
+		<listitem>
+		  <para>Seleccioneu les regles en funció de si són rellevants per al tipus de text que traduïu.</para>
+		</listitem>
+	  </varlistentry>
+	</variablelist>
+  </section>
+
+  <section id="dialogs.preferences.external.searches">
+	<title id="dialogs.preferences.external.searches.title"><guilabel>Cerques externes globals</guilabel></title>
+	<para>Les cerques externes són cerques web o ordres locals que accepten la cadena seleccionada en l'editor com a paràmetre. Les cerques web s'obren en el navegador per defecte i les ordres són equivalents a elements iniciats en la línia d'ordres.</para>
+
+	<variablelist>
+	  <varlistentry id="dialogs.preferences.external.search.enable.project.specific.commands">
+		<term id="dialogs.preferences.external.search.enable.project.specific.commands.title"><option>Permet les ordres de cerca externa locals</option></term>
+
+		<listitem>
+		  <warning>
+			<para>Per raons de seguretat, les <link linkend="dialogs.project.properties.external.searches">cerques externes locals</link> estan inhabilitades per defecte.</para>
+		  </warning>
+
+		  <para>Les ordres de cerca externa locals es desen en el fitxer <link linkend="project.folder.omegat.filters" endterm="project.folder.omegat.filters.title"/>. Activeu aquesta opció només si confieu en la font del fitxer.</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialogs.preferences.external.search.context.menu.priority">
+		<term id="dialogs.preferences.external.search.context.menu.priority.title"><option>Prioritat en el menú contextual</option></term>
+
+		<listitem>
+		  <para>Aquesta opció us permet canviar l'ordre de les ordres en el <link linkend="panes.editor.context.menu">menú contextual</link> de la subfinestra «Editor». Els valors propers a 100 mostren les ordres en la part superior, mentre que els valors propers a 900 les mostren en la part inferior.</para>
+
+		  <warning>
+			<para>Reinicieu l'OmegaT per a aplicar aquest canvi.</para>
+		  </warning>
+		</listitem>
+	  </varlistentry>
+	  
+	  <varlistentry id="dialogs.preferences.external.search.items">
+		<term id="dialogs.preferences.external.search.items.title"><option>Conjunts</option></term>
+		<listitem>
+		  <para>Cada conjunt representa un grup de cerques web o ordres locals que s'inicien simultàniament.</para>
+
+		  <para>Un conjunt ha de tenir un nom. El nom es mostrarà en la part inferior del menú <link linkend="menus.tools" endterm="menus.tools.title"/>.</para>
+
+		  <para>Si marqueu <guilabel>Mostra en el menú contextual de l'editor</guilabel>, el nom de conjunt també es mostrarà en el <link linkend="panes.editor.context.menu">menú contextual</link> si se selecciona una cadena.</para>
+
+		  <para>Les cerques per URL, així com les ordres, han de contenir la cadena <literal>{target}</literal> perquè s'acceptin. El marcador de posició <literal>{target}</literal> se substituirà per la cadena seleccionada en l'editor.</para>
+
+		  <para>Els URL s'obren amb el navegador web per defecte, un per pestanya.</para>
+
+		  <example id="dialogs.preferences.external.search.items.url.search.example">
+			<title id="dialogs.preferences.external.search.items.url.search.example.title">Exemple de cerca per URL</title>
+			<programlisting>https://duckduckgo.com/?q=%22{target}%22+site%3A.fr+-linguee</programlisting>
+
+			<para>Això obre una cerca del terme {target} a DuckDuckGo amb una sèrie de paràmetres de cerca.</para></example>
+
+			<para>Les ordres s'obren en la línia d'ordres. El <guilabel>delimitador</guilabel>defineix el delimitador entre els paràmetres de l'ordre. El delimitador per defecte és <code>|</code>.</para>
+
+		  <example id="dialogs.preferences.external.search.items.command.example">
+			<title id="dialogs.preferences.external.search.items.command.example.title">Exemple d'ordre</title>
+			<programlisting>/usr/bin/open|dict://{target}</programlisting>
+
+			<para>Això obre l'aplicació de diccionari que implementa el protocol <code>dict</code> en l'ordinador i cerca el terme {target}.</para></example>
+		</listitem>
+	  </varlistentry>
+	</variablelist>
+  </section>
+
+  <section id="dialogs.preferences.editor">
+	<title id="dialogs.preferences.editor.title"><guilabel>Editor</guilabel></title>
+
+	<para>En accedir a un segment buit:</para>
+	<variablelist>
+	  <varlistentry id="dialogs.preferences.editor.insert.the.source.text">
+		<term id="dialogs.preferences.editor.insert.the.source.text.title"><option>Insereix el text d'origen</option></term>
+
+		<listitem>
+		  <para>Utilitzeu aquesta opció temporalment per a parts de la traducció que no requereixin gaire transformació.</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialogs.preferences.editor.leave.the.segment.empty">
+		<term id="dialogs.preferences.editor.leave.the.segment.empty.title"><option>Deixa el segment buit</option></term>
+
+		<listitem>
+		  <para>Podeu introduir la traducció immediatament.</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialogs.preferences.editor.insert.the.best.fuzzy.match">
+		<term id="dialogs.preferences.editor.insert.the.best.fuzzy.match.title"><option>Insereix la coincidència parcial més similar</option></term>
+
+		<listitem>
+		  <para>L'OmegaT insereix la traducció amb el percentatge de coincidència més alt per sobre del valor que definiu en aquest quadre de diàleg.</para>
+
+		  <para>El prefix identifica les traduccions inserides com a coincidències parcials. També podeu registrar el prefix en la preferència <link linkend="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation" endterm="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation.title"/> per a incloure'l en el procés de comprovació d'errors d'etiquetes i assegurar-vos que no l'oblideu en la traducció.</para>
+		</listitem>
+	  </varlistentry>
+	</variablelist>
+	
+	<variablelist>
+	  <varlistentry id="dialogs.preferences.editor.attempt.to.replace.numbers.when.inserting.a.fuzzy.match">
+		<term id="dialogs.preferences.editor.attempt.to.replace.numbers.when.inserting.a.fuzzy.match.title"><option>Intenta substituir les xifres de les coincidències parcials</option></term>
+
+		<listitem>
+		  <para>Quan s'insereix una coincidència parcial, l'OmegaT intenta substituir les xifres de la coincidència parcial per les xifres del text d'origen.</para>
+
+		  <note>
+			<para>Només es tenen en compte els nombres enters i decimals senzills (per exemple, 5.4).</para>
+		  </note>
+
+		  <example id="convert.match.numbers">
+			<title>Conversió de les xifres de les coincidències parcials</title>
+			<para><token>2001</token> en el text d'origen:</para>
+			<para>
+			  <programlisting>[[<token>2001</token>年]]、ドイツの永住権を取得。</programlisting></para>
+			
+			<para><token>2003</token> en la coincidència parcial:</para>
+			<para><programlisting>[[<token>2003</token>年]]、ドイツの永住権を取得。
+[[<token>2003</token>]], elle acquiert la nationalité allemande.</programlisting></para>
+
+			<para>Quan s'insereixi la coincidència, l'OmegaT convertirà <token>2003</token> a <token>2001</token>:</para>
+
+			<para><programlisting>[[<token>2001</token>]], elle acquiert la nationalité allemande.</programlisting></para>
+		  </example>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialogs.preferences.editor.allow.translation.to.be.equal.to.source">
+		<term id="dialogs.preferences.editor.allow.translation.to.be.equal.to.source.title"><option>Permet que la traducció sigui igual que el text d'origen</option></term>
+
+		<listitem>
+		  <para>Una traducció idèntica al text d'origen per defecte no es reconeix com a traducció. L'OmegaT l'esborrarà i comptarà el segment com a no traduït.</para>
+
+		  <para>Utilitzeu aquesta opció per a forçar que l'OmegaT registri aquestes entrades i les compti com a traduïdes.</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialogs.preferences.editor.export.the.segment.to.text.files">
+		<term id="dialogs.preferences.editor.export.the.segment.to.text.files.title"><option>Exporta el segment a un fitxer de text</option></term>
+
+		<listitem>
+		  <para>Quan l'OmegaT accedeix a un segment:</para>
+
+		  <itemizedlist>
+			<listitem>
+			  <para>El contingut de la part d'origen es copia al fitxer <link linkend="configuration.folder.default.contents.script.source" endterm="configuration.folder.default.contents.script.source.title"/>.</para>
+			</listitem>
+			<listitem>
+			  <para>El contingut de la part de destinació (si n'hi ha) es copia al fitxer <link linkend="configuration.folder.default.contents.script.target" endterm="configuration.folder.default.contents.script.target.title"/>.</para>
+			</listitem>
+		  </itemizedlist>
+		  
+		  <para>Tots dos fitxers són en la <link linkend="windows.scripts.folder">carpeta de scripts</link>.</para>
+		  
+		  <note>
+			<para>Aquesta funció no té cap relació amb la funció <link linkend="windows.scripts" endterm="windows.scripts.title"/>.</para>
+		  </note>
+
+		  <para>Els fitxers se sobreescriuen quan l'OmegaT accedeix a segment nou.</para>
+
+		  <para>L'script <link linkend="windows.scripts.distribution.extract.text.content" endterm="windows.scripts.distribution.extract.text.content.title"/> fa una acció similar, però per a tot el projecte alhora. Consulteu la finestra <link linkend="windows.scripts" endterm="windows.scripts.title"/>.</para>
+
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialogs.preferences.editor.go.to.next.untranslated.segment.stops.where.there.is.at.least.one.alternative.translation">
+		<term id="dialogs.preferences.editor.go.to.next.untranslated.segment.stops.where.there.is.at.least.one.alternative.translation.title"><option>Atura't en els segments sense traduir i amb traduccions alternatives</option></term>
+
+		<listitem>
+		  <para><link linkend="menus.goto" endterm="menus.goto.title"/><link linkend="menus.goto.next.untranslated.segment" endterm="menus.goto.next.untranslated.segment.title"/>també s'atura en els segments amb traduccions alternatives.</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialogs.preferences.editor.allow.tag.editing">
+		<term id="dialogs.preferences.editor.allow.tag.editing.title"><option>Permet l'edició de les etiquetes</option></term>
+
+		<listitem>
+		  <para>En general, no s'han de modificar les etiquetes, però és possible quan aquesta opció està habilitada.</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialogs.preferences.editor.validate.tags.when.leaving.a.segment">
+		<term id="dialogs.preferences.editor.validate.tags.when.leaving.a.segment.title"><option>Comprova si hi ha errors en sortir d'un segment</option></term>
+
+		<listitem>
+		  <para>L'OmegaT executa una comprovació d'errors en el segment en sortir-ne. L'opció és equivalent a utilitzar <link linkend="menus.tools" endterm="menus.tools.title"/><link linkend="menus.tools.check.issues" endterm="menus.tools.check.issues.title"/>.</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialogs.preferences.editor.save.auto-populated.status">
+		<term id="dialogs.preferences.editor.save.auto-populated.status.title"><option>Desa l'estat de propagació automàtica</option></term>
+
+		<listitem>
+		  <para>Les memòries de traducció de les carpetes <link linkend="project.folder.tm.auto" endterm="project.folder.tm.auto.title"/> i <link linkend="project.folder.tm.enforce" endterm="project.folder.tm.enforce.title"/> es poden propagar automàticament a la memòria del projecte. Els segments que reben una traducció propagada automàticament d'aquesta manera es poden marcar en la subfinestra <guilabel>Editor</guilabel> mitjançant <link linkend="menus.view" endterm="menus.view.title"/>.<link linkend="menus.view.mark.auto.populated.segments" endterm="menus.view.mark.auto.populated.segments.title"/>.</para>
+
+		  <para>Consulteu la guia <link linkend="how.to.use.tm.reuse.tm" endterm="how.to.use.tm.reuse.tm.title"/> per a conèixer més detalls.</para>
+		</listitem>
+	  </varlistentry>
+
+      <varlistentry id="dialogs.preferences.editor.save.orgin.of.translation">
+		<term id="dialogs.preferences.editor.save.orgin.of.translation.title"><option>Desa la font de la traducció</option></term>
+
+		<listitem>
+          <para>Quan s'habilita la traducció automàtica, l'OmegaT registra el nom del motor utilitzat per a traduir un segment determinat.</para>
+		</listitem>
+      </varlistentry>
+
+	  <varlistentry id="dialogs.preferences.editor.initially.load.this.many.segments">
+		<term id="dialogs.preferences.editor.initially.load.this.many.segments.title"><option>Nombre inicial de segments carregats</option></term>
+
+		<listitem>
+		  <para>Inicialment, l'editor carrega i mostra 2.000 segments, i progressivament en carrega a mesura que us desplaceu amunt o avall. Canvieu aquest número en funció del rendiment de l'ordinador.</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialogs.preferences.editor.paragraph.delimitation.format">
+		<term id="dialogs.preferences.editor.paragraph.delimitation.format.title"><option>Format dels límits dels paràgrafs</option></term>
+
+		<listitem>
+		  <para>Utilitzeu <link linkend="menus.view" endterm="menus.view.title"/><link linkend="menus.view.mark.paragraph.delimitations" endterm="menus.view.mark.paragraph.delimitations.title"/> per a identificar els segments que pertanyen al mateix paràgraf.</para>
+		</listitem>
+	  </varlistentry>
+	</variablelist>
+  </section>
+
+  <section id="dialogs.preferences.tag.processing">
+	<title id="dialogs.preferences.tag.processing.title"><guilabel>Processament d'etiquetes</guilabel></title>
+
+	<variablelist>
+	  <varlistentry id="dialogs.preferences.tag.processing.programming.variables">
+		<term id="dialogs.preferences.tag.processing.programming.variables.title"><option>Comprova les variables de la funció «printf»</option></term>
+		<listitem>
+		  <para>Comprova les variables de «printf» en formats de fitxer diferents del format PO. El filtre del format PO ja tracta les variables marcades amb <literal>%</literal>.</para>
+
+		  <para>Podeu seleccionar:</para>
+		  
+		  <variablelist>
+			<varlistentry>
+			  <term><option>Cap</option></term>
+			  <listitem>
+				<para>No es comprova cap patró de variables.</para>
+			  </listitem>
+			</varlistentry>
+			
+			<varlistentry>
+			  <term><option>Variables senzilles (p. ex., «%s», «%d»)</option></term>
+			  <listitem>
+				<para>Només es comproven els patrons de variables senzills.</para>
+			  </listitem>
+			</varlistentry>
+
+			<varlistentry>
+			  <term><option>Totes les variables (p. ex., «%s», «%-s»)</option></term>
+			  <listitem>
+				<para>Això pot donar lloc a falsos positius en alguns fitxers.</para>
+			  </listitem>
+			</varlistentry>
+		  </variablelist>
+		</listitem>
+	  </varlistentry>
+	  
+	  <varlistentry id="dialogs.preferences.tag.processing.simple.java.messageformat">
+		<term id="dialogs.preferences.tag.processing.simple.java.messageformat.title"><option>Comprova els patrons de MessageFormat del Java senzills</option></term>
+		<listitem>
+		  <para>Comprova els marcadors de posició de MessageFormat del Java en formats de fitxer diferents de paquets del Java. El filtre de paquets del Java ja tracta els marcadors de posició marcats amb <literal>{#}</literal>, on <literal>#</literal> és un nombre.</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialogs.preferences.tag.processing.allow.translated.tags.to.be.in.a.different.order">
+		<term id="dialogs.preferences.tag.processing.allow.translated.tags.to.be.in.a.different.order.title"><option>Permet que les etiquetes del text traduït estiguin en un ordre diferent</option></term>
+		<listitem>
+		  <para>Les etiquetes en un ordre diferent de l'ordre del text original no apareixeran en la llista d'errors d'etiquetes. Consulteu el menú <link linkend="menus.tools" endterm="menus.tools.title"/><link linkend="menus.tools.check.issues" endterm="menus.tools.check.issues.title"/> per a conèixer més detalls.</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialogs.preferences.tag.processing.do.not.allow.creating.translated.documents.with.tag.issues">
+		<term id="dialogs.preferences.tag.processing.do.not.allow.creating.translated.documents.with.tag.issues.title"><option>Impedeix la creació de fitxers traduïts amb problemes d'etiquetes</option></term>
+		<listitem>
+		  <para>Si intenteu crear els fitxers traduïts, l'OmegaT mostrarà el quadre de diàleg d'errors fins que no n'hi hagi. Consulteu el menú <link linkend="menus.tools" endterm="menus.tools.title"/><link linkend="menus.tools.check.issues" endterm="menus.tools.check.issues.title"/> per a conèixer més detalls.</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialogs.preferences.tag.processing.count.protected.text.and.custom.tags.in.statistics">
+		<term id="dialogs.preferences.tag.processing.count.protected.text.and.custom.tags.in.statistics.title"><option>Compta el text marcat i les etiquetes personalitzades en les estadístiques</option></term>
+		<listitem>
+		  <para>A diferència de les etiquetes de l'OmegaT, el text marcat i les etiquetes personalitzades es compten en les estadístiques per defecte. Consulteu el menú <link linkend="menus.tools" endterm="menus.tools.title"/><link linkend="menus.tools.statistics" endterm="menus.tools.statistics.title"/> per a conèixer més detalls.</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags">
+		<term id="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags.title"><option>Etiquetes personalitzades</option></term>
+		<listitem>
+		  <para>Utilitzeu expressions regulars per a definir etiquetes personalitzades. Per a definir una llista d'etiquetes, agrupeu cada etiqueta entre parèntesis i separeu els grups amb <literal>|</literal> (equivalent a «OR» en expressions regulars).</para>
+
+		  <para>Per exemple, utilitzeu <userinput>\d+</userinput> per a tractar tots els dígits com a etiquetes, la qual cosa us permet comprovar que no s'han modificat els nombres per accident en la traducció.</para>
+
+		  <para>De la mateixa manera, utilitzeu <userinput>&lt;/?[^&gt;]+&gt;</userinput> per a assegurar-vos que les etiquetes HTML (o similars) introduïdes en el text d'origen es conserven sense modificacions en la traducció.</para>
+
+		  <para>Utilitzeu parèntesis i <literal>|</literal> perquè l'OmegaT tingui en compte les dues etiquetes: <userinput>(\d+)|(&lt;/?[^&gt;]+&gt;)</userinput>.</para>
+
+		  <para>Consulteu l'annex <link linkend="app.regex" endterm="app.regex.title"/> per a conèixer més detalls.</para>
+		</listitem>
+	  </varlistentry>
+	  
+	  <varlistentry id="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation">
+		<term id="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation.title"><option>Text marcat</option></term>
+		<listitem>
+		  <para>El text del segment de destinació que coincideix amb aquesta expressió es marca de color vermell i s'identifica com a etiqueta supèrflua en la comprovació d'errors. Consulteu el menú <link linkend="menus.tools" endterm="menus.tools.title"/><link linkend="menus.tools.check.issues" endterm="menus.tools.check.issues.title"/> per a conèixer més detalls.</para>
+		</listitem>
+	  </varlistentry>
+	</variablelist>
+  </section>
+
+  <section id="dialog.preferences.team">
+	<title id="dialog.preferences.team.title"><guilabel>Equip</guilabel></title>
+
+	<para>El nom que indiqueu aquí s'adjuntarà a tots els segments que traduïu.</para>
+
+	<variablelist>
+	  <varlistentry id="dialog.preferences.team.title.repository.credentials">
+		<term id="dialog.preferences.team.title.repository.credentials.title"><option>Credencials dels dipòsits</option></term>
+		<listitem>
+		  <para>Llista de projectes per als quals s'han desat detalls d'inici de sessió en l'OmegaT. Suprimiu un projecte d'aquesta llista si voleu que l'OmegaT us demani les credencials la pròxima vegada que hi accediu.</para>
+		</listitem>
+	  </varlistentry>
+	</variablelist>
+  </section>
+
+  <section id="dialog.preferences.tm.matches">
+	<title id="dialog.preferences.tm.matches.title"><option>Coincidències de les memòries de traducció</option></title>
+
+	<variablelist>
+	  <varlistentry id="dialog.preferences.tm.matches.sort.fuzzy.matches.by">
+		<term id="dialog.preferences.tm.matches.sort.fuzzy.matches.by.title"><option>Ordena les coincidències parcials per:</option></term>
+
+		<listitem>
+		  <para>Per defecte, s'utilitza la lematització per a determinar les coincidències més properes que es mostren en la subfinestra <guilabel>Coincidències parcials</guilabel>.</para>
+
+		  <para>Per a obtenir coincidències més literals més properes al 100 %, seleccioneu l'opció <guilabel>Text complet, incloent-hi etiquetes i xifres</guilabel>.</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialog.preferences.tm.matches.minimum.threshold">
+		<term id="dialog.preferences.tm.matches.minimum.threshold.title"><option>Llindar mínim per a mostrar una coincidència parcial</option></term>
+		<listitem>
+		  <para>OmegaT displays the five best fuzzy matches above 30% by
+		  default. You can change that threshold here.</para>
+			<note>
+				<para>Each of the three types of matching percentages presented in the <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/> pane are taken into
+				account to determine whether a match is displayed. Potential
+				matches are rejected if all three percentages are below
+				the threshold.</para>
+			</note>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialog.preferences.tm.matches.displaying.tags.in.non-omegat.tmxs">
+		<term id="dialog.preferences.tm.matches.displaying.tags.in.non-omegat.tmxs.title"><option>Seleccioneu la manera com es mostraran les etiquetes dels fitxers TMX d'altres aplicacions</option></term>
+
+		<listitem>
+		  <para>Determina com tractar les etiquetes dels fitxers TMX generats per altres eines.</para>
+
+		  <para>Podeu triar si les voleu mostrar i si voleu utilitzar la notació XML estàndard per a les etiquetes independents (p. ex., &lt;i/&gt;).</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialog.preferences.tm.matches.other.languages">
+		<term id="dialog.preferences.tm.matches.other.languages.title"><option>Inclou les coincidències en altres llengües</option></term>
+		<listitem>
+		  <para>Els segments amb coincidències en llengües de destinació diferents també es poden mostrar en la subfinestra <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/>. Podeu aplicar una penalització a aquestes coincidències.</para>
+		</listitem>
+	  </varlistentry>
+
+	  
+	  <varlistentry id="dialog.preferences.tm.matches.match.display.template">
+		<term id="dialog.preferences.tm.matches.match.display.template.title"><option>Plantilla de la visualització de coincidències</option></term>
+
+		<listitem>
+		  <para>Canvieu com es mostren les coincidències parcials utilitzant variables preconfigurades:</para>
+
+		  <para>El valor per defecte és el següent:</para>
+		  
+		  <para><programlisting>${id}. ${fuzzyFlag}${sourceText} ${targetText}
+&lt;${score}/${noStemScore}/${adjustedScore}%
+${filePath}&gt;</programlisting></para>
+
+		  <para>Aquesta és una alternativa possible:</para>
+
+		  <para>
+			<programlisting>⥤ ${id}. &lt;${score}/${noStemScore}/${adjustedScore}%&gt; ${fuzzyFlag} ${fileNameOnly}
+[NOU]▷ ${diff}
+			
+[ANTERIOR]◀ ${diffReversed}
+◀ ${targetText}</programlisting></para>
+
+
+		  <para>Les variables de plantilla també estan disponibles des d'un menú desplegable i es poden inserir amb un botó.</para>
+
+		  <table id="table.match.pane.setup" colsep="0" rowsep="0">
+			<title id="table.match.pane.setup.title">Variables de plantilla de coincidències</title>
+
+			<tgroup cols="2" colsep="1" rowsep="1">
+			  <colspec align="left"/>
+			  <colspec align="left"/>
+			  <tbody>
+				<row>
+				  <entry>
+					<literal>${id}</literal>
+				  </entry>
+				  <entry>Número de la coincidència, de l'1 al 5</entry>
+				</row>
+
+				<row>
+				  <entry>
+					<literal>${sourceText}</literal>
+				  </entry>
+				  <entry>Text d'origen de la coincidència</entry>
+				</row>
+
+				<row>
+				  <entry>
+					<literal>${diff}</literal>
+				  </entry>
+				  <entry>Cadena que mostra les diferències entre el text d'origen i la coincidència</entry>
+				</row>
+
+				<row>
+				  <entry>
+					<literal>${diffReversed}</literal>
+				  </entry>
+				  <entry>Igual que ${diff}, però amb les diferències (el que s'ha d'inserir i el que s'ha suprimit) invertides.</entry>
+				</row>
+
+				<row>
+				  <entry>
+					<literal>${targetText}</literal>
+				  </entry>
+				  <entry>Text de destinació de la coincidència</entry>
+				</row>
+
+				<row>
+				  <entry>
+					<literal>${score}</literal>
+				  </entry>
+				  <entry>Percentatge calculat amb l'opció <guilabel>Lematització, sense etiquetes ni xifres</guilabel>.</entry>
+				</row>
+
+				<row>
+				  <entry>
+					<literal>${noStemScore}</literal>
+				  </entry>
+				  <entry>Percentatge calculat amb l'opció <guilabel>Sense etiquetes ni xifres</guilabel>.</entry>
+				</row>
+
+				<row>
+				  <entry>
+					<literal>${adjustedScore}</literal>
+				  </entry>
+				  <entry>Percentatge calculat amb l'opció <guilabel>Text complet, amb etiquetes i xifres</guilabel>.</entry>
+				</row>
+
+				<row>
+				  <entry>
+					<literal>${fileNameOnly}</literal>
+				  </entry>
+				  <entry>Nom del fitxer de la memòria de traducció, sense l'extensió</entry>
+				</row>
+
+				<row>
+				  <entry>
+					<literal>${filePath}</literal>
+				  </entry>
+				  <entry>Camí complet del fitxer de la memòria de traducció</entry>
+				</row>
+
+				<row>
+				  <entry>
+					<literal>${fileShortPath}</literal>
+				  </entry>
+				  <entry>Camí relatiu del fitxer de la memòria de traducció</entry>
+				</row>
+
+				<row>
+				  <entry>
+					<literal>${initialCreationID}</literal>
+				  </entry>
+				  <entry>ID del traductor que ha creat el segment</entry>
+				</row>
+
+				<row>
+				  <entry>
+					<literal>${initialCreationDate}</literal>
+				  </entry>
+				  <entry>Data de creació del segment</entry>
+				</row>
+
+				<row>
+				  <entry>
+					<literal>${changeID}</literal>
+				  </entry>
+				  <entry>ID del traductor que ha modificat el segment per darrera vegada</entry>
+				</row>
+
+				<row>
+				  <entry>
+					<literal>${changeDate}</literal>
+				  </entry>
+				  <entry>Data de la darrera modificació del segment</entry>
+				</row>
+
+				<row>
+				  <entry>
+					<literal>${fuzzyFlag}</literal>
+				  </entry>
+				  <entry>Indica que aquesta coincidència és parcial (actualment només per a traduccions de fitxers PO amb la marca «#fuzzy»).</entry>
+				</row>
+
+				<row>
+				  <entry>
+					<literal>${sourceLanguage}</literal>
+				  </entry>
+				  <entry>Llengua d'origen del segment</entry>
+				</row>
+
+				<row>
+				  <entry>
+					<literal>${targetLanguage}</literal>
+				  </entry>
+				  <entry>Llengua de destinació del segment</entry>
+				</row>
+
+			  </tbody>
+			</tgroup>
+		  </table>
+		</listitem>
+	  </varlistentry>
+	</variablelist>
+  </section>
+
+  <section id="dialog.preferences.view">
+	<title id="dialog.preferences.view.title"><guilabel>Visualització</guilabel></title>
+
+	<variablelist>
+	  <varlistentry id="dialog.preferences.view.display.all.source.segments.in.bold">
+		<term id="dialog.preferences.view.display.all.source.segments.in.bold.title"><option>Mostra tots els segments d'origen en negreta</option></term>
+		<listitem>
+		  <para>Per defecte, només es mostra en negreta el segment actual.</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialog.preferences.view.display.active.source.segment.in.bold">
+		<term id="dialog.preferences.view.display.active.source.segment.in.bold.title"><option>Mostra el segment d'origen actiu en negreta</option></term>
+		<listitem>
+		  <para>Si els segments d'origen es mostren amb gruix normal, podeu utilitzar aquesta opció per a mostrar només el segment d'origen actual en negreta.</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialog.preferences.view.include.the.first.non-unique.segment.when.marking.non.unique.segments">
+		<term id="dialog.preferences.view.include.the.first.non-unique.segment.when.marking.non.unique.segments.title"><option>Marca tots els segments repetits</option></term>
+		<listitem>
+		  <para>Utilitzeu <link linkend="menus.view" endterm="menus.view.title"/><link linkend="menus.view.mark.non.unique.segments" endterm="menus.view.mark.non.unique.segments.title"/> per a marcar el segon segment repetit i els següents. Utilitzeu aquesta opció per a marcar també el primer segment d'aquesta mena.</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialog.preferences.view.simplify.tooltip.on.protected.parts">
+		<term id="dialog.preferences.view.simplify.tooltip.on.protected.parts.title"><option>Simplifica els indicadors de funció de les etiquetes</option></term>
+		<listitem>
+		  <para>Les etiquetes de l'OmegaT són text protegit que representa etiquetes específiques del format del fitxer d'origen. En passar el ratolí per una etiqueta, l'OmegaT mostra un indicador de funció amb el contingut original de l'etiqueta. Si el contingut originalment es trobava entre un parell d'etiquetes, es pot suprimir el parell d'etiquetes de l'indicador de funció perquè sigui més fàcil de llegir.</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialog.preferences.view.use.custom.templates.for.modification.info">
+		<term id="dialog.preferences.view.use.custom.templates.for.modification.info.title"><option>Personalitza la informació de modificació dels segments</option></term>
+		<listitem>
+		  <para>La informació de modificació dels segments es mostra sobre el segment. Els paràmetres per defecte mostren qui ha modificat la traducció per darrera vegada i quan:</para>
+
+		  <example id="dialog.preferences.view.use.custom.templates.for.modification.info.example">
+			<title id="dialog.preferences.view.use.custom.templates.for.modification.info.example.title">Visualització per defecte</title>
+			<para>
+			  <programlisting>Darrera modificació de la traducció: suzume, el 6 d'oct. 2022 a les 14:18:27
+[[チューリッヒ大学]]大学院博士課程修了。
+[[Université de Zurich]] Elle finit sa thèse de doctorat.&lt;segment 0178&gt;</programlisting>
+			</para>
+		  </example>
+
+		  <para>Utilitzeu <link linkend="menus.view" endterm="menus.view.title"/><link linkend="menus.view.modification.info" endterm="menus.view.modification.info.title"/> per a mostrar la informació de modificació dels segments.</para>
+		</listitem>
+	  </varlistentry>
+	  
+	  <varlistentry id="dialog.preferences.view.modification.info.template">
+		<term id="dialog.preferences.view.modification.info.template.title"><option>Plantilla estàndard</option></term>
+		<listitem>
+		  <para>Utilitzeu les variables de plantilla per a adaptar aquesta plantilla a les vostres necessitats.</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialog.preferences.view.modification.info.template.for.segments.without.date">
+		<term id="dialog.preferences.view.modification.info.template.for.segments.without.date.title"><option>Plantilla per als segments sense data</option></term>
+		<listitem>
+		  <para>Utilitzeu les variables de plantilla per a adaptar aquesta plantilla a les vostres necessitats.</para>
+		</listitem>
+	  </varlistentry>
+	</variablelist>
+  </section>
+
+  <section id="dialogs.preferences.saving.and.output">
+	<title id="dialogs.preferences.saving.and.output.title"><guilabel>Desament i sortida</guilabel></title>
+
+	<variablelist>
+	  <varlistentry id="dialog.preferences.saving.and.output.interval">
+		<term id="dialog.preferences.saving.and.output.interval.title"><option>Interval de desament de les dades del projecte</option></term>
+		<listitem>
+		  <para>Permet seleccionar a l'usuari l'interval de desament automàtic de les dades del projecte. Consulteu la secció <link linkend="how.to.restore.your.data.automatic.backup" endterm="how.to.restore.your.data.automatic.backup.title"/> per a conèixer més detalls.</para>
+
+		  <para>Canvieu l'interval per defecte (3 minuts) en funció de les característiques del projecte:</para>
+
+		  <itemizedlist>
+			<listitem>
+			  <para>Intervals curts (mínim de 10 segons) per a projectes sincronitzats en un servidor intern.</para>
+			</listitem>
+
+			<listitem>
+			  <para>Intervals més llargs per a projectes en equip allotjats en servidors externs.</para>
+			</listitem>
+		  </itemizedlist>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialogs.preferences.saving.and.output.external.post-processing.command">
+		<term id="dialogs.preferences.saving.and.output.external.post-processing.command.title"><option>Ordres de postprocessament globals</option></term>
+
+		<listitem>
+		  <para>L'OmegaT pot executar ordres automàticament després d'utilitzar <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.create.translated.documents" endterm="menus.project.create.translated.documents.title"/> o <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.create.current.translated.document" endterm="menus.project.create.current.translated.document.title"/>. Aquí podeu definir aquestes ordres.</para>
+
+		  <para>Les ordres especificades aquí estan disponibles per a tots els projectes que utilitzen la mateixa carpeta de configuració. Es desen en el fitxer <link linkend="configuration.folder.default.contents.omegat.prefs" endterm="configuration.folder.default.contents.omegat.prefs.title"/>.</para>
+
+		  <para>La llista de variables de plantilla us permet accedir a diverses dades del projecte i a variables de sistema. Consulteu la secció <link linkend="post.processing.commands.template.variables" endterm="post.processing.commands.template.variables.title"/> per a conèixer més detalls.</para>
+		  
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialogs.preferences.saving.and.output.also.allow.per.project.external.commands">
+		<term id="dialogs.preferences.saving.and.output.also.allow.per.project.external.commands.title"><option>Permet les ordres de postprocessament locals</option></term>
+
+		<listitem>
+		  <warning>
+			<para>Per raons de seguretat, les <link linkend="dialogs.project.properties.external.processing.command">ordres de postprocessament locals</link> estan inhabilitades per defecte.</para>
+		  </warning>
+
+		  <para>També podeu definir ordres de postprocessament locals disponibles només per a un projecte determinat. Aquestes ordres es defineixen en la finestra <link linkend="dialogs.project.properties.external.processing.command" endterm="dialogs.project.properties.external.processing.command.title"/>.</para>
+
+		  <para>Les ordres de postprocessament locals es desen en el fitxer <link linkend="project.folder.omegat.project.file" endterm="project.folder.omegat.project.file.title"/>. Activeu aquesta opció només si confieu en la font del fitxer.</para>
+
+	  	  <note>
+			<para>Les ordres locals s'executen abans que les ordres globals.</para>
+		  </note>
+
+		</listitem>
+	  </varlistentry>
+	</variablelist>
+  </section>
+
+  <section id="dialogs.preferences.proxy.login">
+	<title id="dialogs.preferences.proxy.login.title"><guilabel>Inici de sessió en el servidor intermediari</guilabel></title>
+
+	<para>Si utilitzeu un servidor intermediari autenticat per a accedir a Internet, introduïu les credencials aquí.</para>
+  </section>
+
+  <section id="dialogs.preferences.secure.store">
+	<title id="dialogs.preferences.secure.store.title"><guilabel>Emmagatzematge segur</guilabel></title>
+
+	<para>Definiu o reinicialitzeu la contrasenya mestra utilitzada per a protegir les credencials d'inici de sessió i les claus d'accés als serveis de traducció automàtica.</para>
+
+	<para>Abans de reinicialitzar la contrasenya mestra, feu sempre una còpia de seguretat d'aquesta informació, perquè se suprimirà i l'haureu de tornar a introduir.</para>
+  </section>
+
+  <section id="dialogs.preferences.plugins">
+	<title id="dialogs.preferences.plugins.title"><guilabel>Connectors</guilabel></title>
+
+	<para>Mostra la llista de tots els connectors instal·lats.</para>
+
+	<para>Plugins are by default installed in the <link linkend="configuration.folder">configuration folder</link>, but can also be
+	installed in the <link linkend="application.folder.plugins" endterm="application.folder.plugins.title"/> folder under the <link linkend="application.folder">application</link> folder.</para>
+
+	<para>Podeu trobar connectors addicionals en el <ulink url="https://sourceforge.net/p/omegat/wiki/Plugins/">lloc de desenvolupament de l'OmegaT</ulink>.</para>
+  </section>
+
+  <section id="dialogs.preferences.updates">
+	<title id="dialogs.preferences.updates.title"><guilabel>Actualitzacions</guilabel></title>
+
+	<para>Utilitzeu aquesta opció per a triar si voleu rebre notificacions automàtiques de les actualitzacions de l'OmegaT.</para>
+
+	<para>Si l'OmegaT detecta una actualització, mostrarà un enllaç a la pàgina de baixada. Consulteu la secció <link linkend="update.and.delete.omegat" endterm="update.and.delete.omegat.title"/> per a conèixer més detalls.</para>
+  </section>
+</chapter>

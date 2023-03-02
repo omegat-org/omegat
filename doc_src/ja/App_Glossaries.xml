@@ -1,129 +1,161 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<appendix id="appendix.glossaries">
-  <title>用語集 (Glossaries)</title>
+<section id="app.glossaries">
+  <title id="app.glossaries.title">用語集</title>
 
-  <para>用語集(Glossaries)は、用語のファイルです。手動で作成および更新することも、他のプロジェクトからインポートすることもできます。</para>
+  <para>用語集は<link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/>フォルダーに保存されている用語を集めたファイルです。</para>
 
-  <para>各プロジェクトは任意の数の用語集を参照用に持つことができますが、1つの用語集(プロジェクトのデフォルト用語集)のみがOmegaTユーザー・インターフェースから直接書き込み可能になります。</para>
+  <para><emphasis>どれか</emphasis>の用語集で一致する、セグメント内のすべての用語が<link linkend="panes.glossary" endterm="panes.glossary.title"/>ウィンドウに表示されます。</para>
 
-  <para>プロジェクト内の用語集の数に関係なく、セグメント内の単語と一致する用語が[用語集]ペインに表示されます。</para>
+  <para>用語集の原文は、複数単語からなる用語であっても大丈夫です。</para>
 
-  <section id="glossaries.defaultglossary">
-    <title>デフォルトの用語集</title>
+  <para>次の2種類の用語集ファイルがあります。</para>
 
-    <para>デフォルトの書き込み可能な用語集は<filename class="directory">/glossary</filename>プロジェクトフォルダにあり、<filename>glossary.txt</filename>という名前が付いています。</para>
+  <variablelist>
+	<varlistentry>
+	  <term>プロジェクトの用語集</term>
+	  <listitem>
+		<para><link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.create.glossary.entry" endterm="menus.edit.create.glossary.entry.title"/>を使用して、この用語集に新しい用語を入力できます。この理由から、<emphasis>書き込み可能</emphasis>用語集と呼ばれています。</para>
+		
+		<para><link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.access.project.contents.title" endterm="menus.project.access.project.contents.title"/>を使用してアクセスできます。テキストエディタで開いて変更することもできます。</para>
 
-    <para>名前と場所はプロジェクトのプロパティダイアログで変更できますが、拡張子は<filename>.txt</filename>または<filename>.utf8</filename>で、場所は<filename class="directory">glossary</filename>プロジェクトフォルダに含まれている必要があります。</para>
+		<para>事前にファイルを準備する必要はありません。</para>
 
-    <para>ファイルは、設定時に存在する必要はありません。最初の用語集エントリを追加するときに作成されます。ファイルがすでに存在する場合は、ファイルの形式または文字セットの確認は行われません。新しいエントリは常にタブ区切り形式で、ファイルはUTF-8エンコーディングで保存されます。</para>
+		<para>これは、最初に項目を用語集に追加するときに、自動的に作成されます。</para>
+
+		<note>
+          <para>既存のファイルを標準用語集として使用することを選択した場合、新しいエントリはすべてタブ区切りの書式で記録され、デフォルトでUTF-8の文字エンコーディングで保存されている必要があります。</para>
+
+		  <para>別のエンコーディングを指定する場合は、次の形式の「magic」コメントを追加します。</para>
+
+		  <simplelist>
+            <member>
+              <code># -*- coding: &lt;charset&gt; -*-</code>,
+            </member>
+          </simplelist>
+		  
+          <para>ここで、<parameter>&lt;charset&gt;</parameter>は通常、<ulink url="http://www.iana.org/assignments/character-sets/character-sets.xhtml">IANA Charset Registry</ulink>にリストされている文字エンコーディングの1つになります。</para>
+		</note>
+	  </listitem>
+	</varlistentry>
+	
+	<varlistentry>
+	  <term>参考用語集</term>
+	  <listitem>
+		<para>OmegaTが認識できるファイル形式の用語集です。プロジェクト用語集のようにOmegaTのGUIインターフェースから変更はできませんが、テキストエディタで編集できます。</para>
+	  </listitem>
+	</varlistentry>
+  </variablelist>
+
+  <note>
+	<para>用語集に変更を加えるとOmegaTは変更を自動的に考慮して、一致する用語を<link linkend="panes.glossary" endterm="panes.glossary.title"/>ウィンドウに表示します。</para>
+  </note>
+
+  <section id="glossaries.glossary.folder">
+    <title id="glossaries.glossary.folder.title">用語集フォルダー</title>
+
+    <para>デフォルトでは、各々のプロジェクトフォルダーには、追加書き込み可能な用語集と参照用語集を保存するための<link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/>フォルダがあります。詳細は、プロジェクト設定の <link linkend="dialogs.project.properties.file.locations.glossaries" endterm="dialogs.project.properties.file.locations.glossaries.title"/> を確認してください。</para>
+
+    <para>すべての用語集は<link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/>フォルダーに保存しなければなりません。フォルダ内のさらにフォルダー内にある用語集も認識されます。</para>
+
+    <para>その参照用語集フォルダー内に、トピック、クライアント、またはワークフローに適したその他の分類別に整理された複数の用語集サブフォルダを作成できます。</para>
+    <para><link linkend="dialogs.project.properties.file.locations.glossaries" endterm="dialogs.project.properties.file.locations.glossaries.title"/>プロジェクト設定で、参照用語集フォルダーの場所を設定できます。プロジェクトのフォルダーの外部に設定して、他のプロジェクトで使用したり、特定のサブフォルダで使用することもできます。</para>
   </section>
 
-  <section id="glossaries.usage">
-    <title>使い方</title>
+  <section id="glossaries.default.glossary">
+    <title id="glossaries.default.glossary.title">プロジェクトの用語集</title>
 
-    <para>既存の用語集を使用するには、プロジェクトの作成後に<filename class="directory">glossary</filename>フォルダに配置します。OmegaTは、プロジェクトを開くと、このフォルダ内の用語集ファイルを自動的に検出します。</para>
+    <para>デフォルトで、書き込み可能なプロジェクト用語集は<link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/>フォルダーにあり、<link linkend="project.folder.glossary.txt" endterm="project.folder.glossary.txt.title"/>と呼ばれています。</para>
 
-    <para>書き込み可能な用語集に新しい用語を追加するには、<guimenuitem>編集</guimenuitem>&gt;<guimenuitem>用語の追加</guimenuitem>(<keycap>Ctrl+Shift+G</keycap>)を使用します。新しく追加された用語はすぐに認識されます。新しい用語を参照用の用語集に追加するには、外部テキストエディタで編集します。追加した用語は、用語集ファイルの変更が保存され次第、認識されます。</para>
-
-    <para>用語集の原文は、複数単語からなる用語であっても大丈夫です。</para>
-
-    <para>用語集の機能は、一致を見つけるために語幹処理(ステミング)を使用します。 OmegaTの一般設定で<guimenuitem>用語集へのステミング(語幹処理)の使用</guimenuitem>を無効化すると、用語を完全一致検索するようになります。</para>
-
-    <para>用語集の原文は「=」記号の前に表示され、訳語はその後に表示されます。コメントは、番号の後に個別の行に表示されます。書き込み可能な用語集からの単語は、太字で表示されます。参照用の用語集からの単語は、通常フォントで表示されます。</para>
-
-    <para>用語集一致の<guimenuitem>オートコンプリート</guimenuitem>コンテキストメニューを表示するには、OS依存キー(macOSの場合は<keycap>エスケープ</keycap>、その他のプラットフォームの場合は<keycap>Ctrl+スペース</keycap>)をクリックします。</para>
-
-    <para>分節の原文部分で一致する用語に下線を付けるには、<guimenuitem>表示</guimenuitem>&gt;<guimenuitem>用語集の一致をマーク</guimenuitem>を使用します。下線の付いた用語を右クリックし訳文を選択し、分節のターゲット部分のカーソル位置に挿入します。</para>
+    <para><link linkend="dialogs.project.properties.file.locations.writable.glossary" endterm="dialogs.project.properties.file.locations.writable.glossary.title"/>ダイアログで名前と場所を変更できますが、<filename>.txt</filename>または<filename>.utf8</filename>拡張子を付けて、<link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/>フォルダーまたはそのサブフォルダーに保存する必要があります。</para>
   </section>
 
   <section id="glossaries.fileformat">
-    <title>ファイル形式</title>
+    <title id="glossaries.fileformat.title">ファイル形式</title>
 
     <para>用語集ファイルは単純なテキストファイルで、３つの列（カラム）からなるリストの形をしています。最初の列は原文で、それ以降はオプションで、２番目の列は訳文の用語、3番目はコメントが入ります。</para>
 
-    <para>平文の用語集には、タブ区切り形式(TSV)ファイルとカンマ区切り形式(CSV)ファイルがあります。3番目に可能なフォーマットは&quot;TBX&quot;(TermBase eXchange)ISO標準です。</para>
+    <para>用語集は、タブ区切り形式(TSV)とカンマ区切り形式(CSV)ファイルにすることも、TermBase eXchange(TBX)形式にすることもできます。</para>
 
-    <para>プロジェクトのデフォルトの書き込み可能な用語集は、常にUTF-8エンコーディングで保存されたTSVファイルです。</para>
+    <para>プロジェクトの書き込み可能な用語集は、UTF-8エンコーディングで保存されたTSVファイルです。ラテン文字のみを使用するユーザーで作成されたファイルは、非アスキー文字またはUTF-8として解釈されるその他の文字を含まない場合、ISO-8859-1として認識され、処理される場合があります。</para>
 
-    <para>用語集は、ファイル拡張子に応じたエンコーディングで読み取られます。</para>
+    <para>参照用用語集の読み取りに使用されるエンコーディングは、ファイル拡張子によって異なります。</para>
 
-    <table xml:id="glossary.extensions">
-      <caption>フォーマット、拡張、および予想されるエンコーディング</caption>
-
+    <table id="glossary.extensions">
+      <title>フォーマット、拡張、および予想されるエンコーディング</title>
+	  <tgroup cols="3">
       <thead>
-        <tr>
-          <td>形式</td> <td>拡張子</td> <td>エンコーディング</td>
-        </tr>
+        <row>
+          <entry>ファイル形式：</entry>
+
+          <entry>拡張子</entry>
+
+          <entry>エンコーディング</entry>
+        </row>
       </thead>
 
       <tbody>
-        <tr> <td>TSV</td> <td> <filename>.txt</filename> </td> <td>UTF-8</td> </tr> <tr> <td>TSV</td> <td> <filename>.utf8</filename> </td> <td>UTF-8</td> </tr> <tr> <td>TSV</td> <td> <filename>.tab</filename> </td> <td>OS のデフォルトエンコーディング</td> </tr> <tr> <td>TSV</td> <td> <filename>.tsv</filename> </td> <td>OS のデフォルトエンコーディング</td> </tr> <tr> <td>CSV</td> <td> <filename>.csv</filename> </td> <td>UTF-8</td> </tr> <tr> <td>TBX</td> <td> <filename>.tbx</filename> </td> <td>UTF-8</td> </tr>
+        <row>
+          <entry>TSV</entry>
+
+          <entry>
+            <filename>.txt</filename>
+          </entry>
+
+          <entry>UTF-8</entry>
+        </row>
+
+        <row>
+          <entry>TSV</entry>
+
+          <entry>
+            <filename>.utf8</filename>
+          </entry>
+
+          <entry>UTF-8</entry>
+        </row>
+
+        <row>
+          <entry>TSV</entry>
+
+          <entry>
+            <filename>.tab</filename>
+          </entry>
+
+          <entry>OSのデフォルトエンコーディング</entry>
+        </row>
+
+        <row>
+          <entry>TSV</entry>
+
+          <entry>
+            <filename>.tsv</filename>
+          </entry>
+
+          <entry>OSのデフォルトエンコーディング</entry>
+        </row>
+
+        <row>
+          <entry>CSV</entry>
+
+          <entry>
+            <filename>.csv</filename>
+          </entry>
+
+          <entry>UTF-8</entry>
+        </row>
+
+        <row>
+          <entry>TBX</entry>
+
+          <entry>
+            <filename>.tbx</filename>
+          </entry>
+
+          <entry>UTF-8</entry>
+        </row>
       </tbody>
+      </tgroup>
     </table>
-
-    <para>用語集は<filename class="directory">glossary</filename>プロジェクトフォルダに配置する必要があります。フォルダ内のさらにフォルダー内にある用語集も認識されます。</para>
   </section>
-
-  <section id="glossaries.commonproblems">
-    <title>用語集に関するよくある問題</title>
-
-    <para><emphasis role="bold">問題：用語が何も表示されません。</emphasis></para>
-
-    <itemizedlist>
-      <listitem>
-        <para><filename class="directory">glossary</filename> フォルダーに用語集ファイルがない</para>
-      </listitem>
-    </itemizedlist>
-
-    <itemizedlist>
-      <listitem>
-        <para>用語集ファイルが空である</para>
-      </listitem>
-    </itemizedlist>
-
-    <itemizedlist>
-      <listitem>
-        <para>項目がタブ文字で区切られていない</para>
-      </listitem>
-    </itemizedlist>
-
-    <itemizedlist>
-      <listitem>
-        <para>用語集ファイルが有効な拡張子（.tab、.utf8、.txt）ではない</para>
-      </listitem>
-    </itemizedlist>
-
-    <itemizedlist>
-      <listitem>
-        <para>原文の項目と「完全に」一致する用語が用語集にない - たとえばその項目が複数形である場合</para>
-      </listitem>
-    </itemizedlist>
-
-    <itemizedlist>
-      <listitem>
-        <para>用語集ファイルが有効な文字エンコーディングで保存されていない</para>
-      </listitem>
-    </itemizedlist>
-
-    <itemizedlist>
-      <listitem>
-        <para>現在の分節に、用語集と一致する用語が１つもない</para>
-      </listitem>
-    </itemizedlist>
-
-    <itemizedlist>
-      <listitem>
-        <para>以上のうち１つまたは複数の原因を解決したものの、プロジェクトを再読み込みしていない</para>
-      </listitem>
-    </itemizedlist>
-
-    <para><emphasis role="bold">問題：用語集ウィンドウの中で、いくつかの文字が適切に表示されない（しかし同じ文字が編集ウィンドウには適切に表示されている）</emphasis></para>
-
-    <itemizedlist>
-      <listitem>
-        <para>拡張子とファイルの文字エンコーディングが一致していない</para>
-      </listitem>
-    </itemizedlist>
-  </section>
-</appendix>
+</section>

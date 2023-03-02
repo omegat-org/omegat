@@ -1,0 +1,895 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.panes">
+  <title id="chapter.panes.title">Subfinestres</title>
+
+  <section id="panes.default.layout">
+	<title id="panes.default.layout.title">Disposició per defecte</title>
+
+	<para>La primera vegada que inicieu l'OmegaT, la finestra principal mostra la disposició per defecte següent:</para>
+
+		<figure id="default.omegat.layout">
+      <title id="default.omegat.layout.title">Disposició per defecte de l'OmegaT en el macOS</title>
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/defaultOmegaTLayout.png"/>
+        </imageobject>
+        <imageobject role="fo">
+          <imagedata fileref="images/defaultOmegaTLayout.png" width="60%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+	<orderedlist>
+	  <listitem>
+		<para>Subfinestra <link linkend="panes.editor" endterm="panes.editor.title"/></para>
+	  </listitem>
+	  <listitem>
+		<para>Subfinestra <link linkend="panes.notes" endterm="panes.notes.title"/></para>
+	  </listitem>
+	  <listitem>
+		<para>Subfinestra <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/></para>
+	  </listitem>
+	  <listitem>
+		<para>Subfinestra <link linkend="panes.glossary" endterm="panes.glossary.title"/></para>
+	  </listitem>
+	  <listitem>
+		<para>Subfinestra <link linkend="panes.segment.properties" endterm="panes.segment.properties.title"/></para>
+	  </listitem>
+	  <listitem>
+		<para>Subfinestra <link linkend="panes.comments" endterm="panes.comments.title"/></para>
+	  </listitem>
+	  <listitem>
+		<para>Subfinestra <link linkend="panes.multipletranslations" endterm="panes.multipletranslations.title"/></para>
+	  </listitem>
+	  <listitem>
+		<para>Subfinestres <link linkend="panes.dictionary" endterm="panes.dictionary.title"/> i <link linkend="panes.machinetranslation" endterm="panes.machinetranslation.title"/>, acoblades</para>
+	  </listitem>
+	  <listitem>
+		<para><link linkend="panes.statusbar" endterm="panes.statusbar.title"/> (a la dreta), que conté la informació del projecte</para>
+	  </listitem>
+	</orderedlist>
+	
+	<para>Utilitzeu les diferents opcions del menú <link linkend="menus.view" endterm="menus.view.title"/> i desplaceu les <link linkend="chapter.panes">subfinestres</link> per a obtenir la disposició que s'ajusti millor al vostre flux de treball:</para>
+
+	<warning>
+	  <para>Utilitzeu <link linkend="menus.view" endterm="menus.view.title"/><link linkend="menus.view.restore.main.window" endterm="menus.view.restore.main.window.title"/> si teniu problemes en reordenar la disposició de la finestra.</para>
+	</warning>
+  </section>
+
+  <section id="panes.principles">
+    <title id="panes.principles.title">Principis</title>
+
+    <variablelist>
+      <varlistentry id="panes.manipulation">
+        <term id="panes.manipulation.title">Manipulació</term>
+
+        <listitem>
+          <para>La finestra principal està formada per diverses subfinestres, que es descriuen aquí, diferents menús descrits en el capítol <link linkend="chapter.menus" endterm="chapter.menus.title"/> i una barra d'estat descrita <link linkend="panes.statusbar">a continuació</link>. Podeu fer clic i mantenir premut el nom d'una subfinestra per a arrossegar-la a una posició nova o, fins i tot, desacoblar-la i que sigui una finestra independent.</para>
+
+          <para>La cantonada superior dreta de cada subfinestra mostra icones diferents en funció del tipus de subfinestra i de l'estat actual:</para>
+
+          <table id="table.pane.widgets">
+            <title id="table.pane.widgets.title">Ginys de les subfinestres</title>
+
+            <tgroup cols="2">
+              <tbody>
+                <row>
+                  <entry><inlinemediaobject>
+                      <imageobject role="html">
+                        <imagedata fileref="images/Settings.png" width="60%"/>
+                      </imageobject>
+
+                      <imageobject role="fo">
+                        <imagedata fileref="images/Settings.png" width="40%"/>
+                      </imageobject>
+                    </inlinemediaobject></entry>
+
+                  <entry>Indica les diferents <emphasis role="bold">accions</emphasis> addicionals disponibles en la subfinestra.</entry>
+                </row>
+
+                <row>
+                  <entry><inlinemediaobject>
+                      <imageobject role="html">
+                        <imagedata fileref="images/Minimize.png" width="60%"/>
+                      </imageobject>
+
+                      <imageobject role="fo">
+                        <imagedata fileref="images/Minimize.png" width="40%"/>
+                      </imageobject>
+                    </inlinemediaobject></entry>
+
+                  <entry><emphasis role="bold">Minimitza</emphasis> la subfinestra a una pestanya en la part inferior de la finestra.</entry>
+                </row>
+
+                <row>
+                  <entry><inlinemediaobject>
+                      <imageobject role="html">
+                        <imagedata fileref="images/Maximize.png" width="60%"/>
+                      </imageobject>
+
+                      <imageobject role="fo">
+                        <imagedata fileref="images/Maximize.png" width="40%"/>
+                      </imageobject>
+                    </inlinemediaobject></entry>
+
+                  <entry><emphasis role="bold">Maximitza</emphasis> la subfinestra.</entry>
+                </row>
+
+                <row>
+                  <entry><inlinemediaobject>
+                      <imageobject role="html">
+                        <imagedata fileref="images/Restore.png" width="60%"/>
+                      </imageobject>
+
+                      <imageobject role="fo">
+                        <imagedata fileref="images/Restore.png" width="40%"/>
+                      </imageobject>
+                    </inlinemediaobject></entry>
+
+                  <entry><emphasis role="bold">Restaura</emphasis> una subfinestra maximitzada a la disposició anterior.</entry>
+                </row>
+
+                <row>
+                  <entry><inlinemediaobject>
+                      <imageobject role="html">
+                        <imagedata fileref="images/Undock.png" width="60%"/>
+                      </imageobject>
+
+                      <imageobject role="fo">
+                        <imagedata fileref="images/Undock.png" width="40%"/>
+                      </imageobject>
+                    </inlinemediaobject></entry>
+
+                  <entry><emphasis role="bold">Desacobla</emphasis> la subfinestra de la finestra principal.</entry>
+                </row>
+
+                <row>
+                  <entry><inlinemediaobject>
+                      <imageobject role="html">
+                        <imagedata fileref="images/Dock.png" width="60%"/>
+                      </imageobject>
+
+                      <imageobject role="fo">
+                        <imagedata fileref="images/Dock.png" width="40%"/>
+                      </imageobject>
+                    </inlinemediaobject></entry>
+
+                  <entry><emphasis role="bold">Retorna</emphasis> la subfinestra a la finestra principal.</entry>
+                </row>
+              </tbody>
+            </tgroup>
+          </table>
+
+          <para>Podeu agrupar subfinestres a la mateixa àrea de la finestra. En fer-ho, es mostra una pestanya amb el nom de la subfinestra en la part superior del grup. Podeu canviar la mida de les subfinestres arrossegant els separadors entre elles.</para>
+
+          <note>
+            <para>Utilitzeu <link endterm="menus.view.title" linkend="menus.view"/><link endterm="menus.view.restore.main.window.title" linkend="menus.view.restore.main.window"/> per a tornar a la disposició per defecte si no recordeu els canvis que heu aplicat a la interfície d'usuari i ja no podeu veure algunes subfinestres.</para>
+          </note>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="panes.context.menus">
+        <term id="panes.context.menus.title">Menús contextuals</term>
+
+        <listitem>
+          <para>Algunes subfinestres tenen un menú contextual. Podeu obrir aquest menú mitjançant el mètode estàndard del sistema operatiu o amb les dreceres definides per a l'OmegaT:<itemizedlist>
+              <listitem>
+                <para>Windows i Linux: <keycap>Menú</keycap></para>
+              </listitem>
+
+              <listitem>
+                <para>macOS: <keycombo> <keycap>S</keycap> <keycap>Esc</keycap> </keycombo></para>
+              </listitem>
+            </itemizedlist></para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="panes.drag.and.drop">
+        <term id="panes.drag.and.drop.title">Arrossegar i deixar anar</term>
+
+        <listitem>
+          <para>Podeu arrossegar i deixar anar fitxers en determinades subfinestres, amb els resultats següents:</para>
+
+          <variablelist>
+            <varlistentry>
+              <term>Subfinestra «Editor»</term>
+
+              <listitem>
+                <para>Si deixeu anar aquí un fitxer de projecte de l'OmegaT (<filename>omegat.project</filename>) o un projecte complet, s'obrirà el projecte corresponent després de tancar el projecte obert actualment, si n'hi ha cap.</para>
+
+                <para>Si deixeu anar altres fitxers, es copiaran a la carpeta <filename class="directory">source</filename>. Això també s'aplica a la finestra <link endterm="windows.source.files.list.title" linkend="windows.source.files.list"/>.</para>
+              </listitem>
+            </varlistentry>
+
+            <varlistentry>
+              <term>Subfinestra «Coincidències parcials»</term>
+
+              <listitem>
+                <para>Si deixeu anar aquí fitxers <filename class="directory">.tmx</filename>, es copiaran a la carpeta <filename>tm</filename>.</para>
+              </listitem>
+            </varlistentry>
+
+            <varlistentry>
+              <term>Subfinestra «Glossaris»</term>
+
+              <listitem>
+                <para>Si deixeu anar aquí fitxers amb una extensió de glossari reconeguda (<filename>.txt</filename>, <filename>.tab</filename>, etc.), es copiaran a la carpeta <filename class="directory">glossary</filename>.</para>
+              </listitem>
+            </varlistentry>
+          </variablelist>
+        </listitem>
+      </varlistentry>
+
+	  <varlistentry id="panes.notifications">
+        <term id="panes.notifications.title">Notificacions</term>
+		
+        <listitem>
+          <para>Si una subfinestra està tancada però té contingut per a mostrar, l'OmegaT pot ressaltar temporalment la pestanya de la subfinestra en color carabassa quan accediu al segment.</para>
+		  
+		  <para>By default, the <guilabel>Comments</guilabel> and
+		  <guilabel>Notepad</guilabel> panes have notifications enabled.</para>
+		  
+		  <para>Per a habilitar o inhabilitar les notificacions:</para>
+		  
+		  <itemizedlist>
+			<listitem>
+			  <para>Aneu a la subfinestra.</para>
+			</listitem>
+
+			<listitem>
+			  <para>Feu clic en el giny <guilabel>Acció</guilabel>de la cantonada superior dreta,</para>
+			</listitem>
+			
+			<listitem>
+			  <para>Seleccioneu <guilabel>Avisa'm quan un segment tingui...</guilabel> («...» depèn de la subfinestra per a la qual habiliteu les notificacions).</para>
+			</listitem>
+		  </itemizedlist>
+
+		  <para>Les subfinestres següents poden proporcionar notificacions:</para>
+
+		  <itemizedlist>
+			<listitem>
+			  <para>Comentaris</para>
+			</listitem>
+
+			<listitem>
+			  <para>Diccionaris</para>
+			</listitem>
+
+			<listitem>
+			  <para>Coincidències parcials</para>
+			</listitem>
+
+			<listitem>
+			  <para>Glossaris</para>
+			</listitem>
+
+			<listitem>
+			  <para>Diverses traduccions</para>
+			</listitem>
+
+			<listitem>
+			  <para>Notes</para>
+			</listitem>
+
+			<listitem>
+			  <para>Propietats del segment</para>
+
+			  <para>La subfinestra <guilabel> Propietats del segment</guilabel> permet configurar les notificacions per a cadascun dels elements.</para>
+
+			  <para>En la <guilabel>visualització de taula</guilabel>, feu clic dret en l'element i seleccioneu <guilabel>Avisa'm quan un segment tingui...</guilabel> («...» varia en funció de la notificació desitjada).</para>
+
+			  <para>En la <guilabel>visualització de llista</guilabel>, feu clic dret en el giny <guilabel>Acció</guilabel> de la dreta de la línia de la propietat seleccionada i seleccioneu <guilabel>Avisa'm quan un segment tingui...</guilabel> («...» varia en funció de la notificació desitjada).</para>
+			</listitem>
+		  </itemizedlist>
+		</listitem>
+	  </varlistentry>
+    </variablelist>
+  </section>
+
+  <section id="panes.editor">
+    <title id="panes.editor.title"><guilabel>Editor</guilabel></title>
+
+    <para>Aquí és on escriviu i editeu les vostres traduccions.</para>
+
+    <para>El text es divideix en segments numerats. Podeu desplaçar-vos pel document i fer doble clic en qualsevol segment per a obrir-lo i editar-lo.</para>
+
+	<example id="panes.editor.default.editor.writing.space">
+	  <title id="panes.editor.default.editor.writing.space.title">Espai d'escriptura de l'editor per defecte</title>
+	  <para>
+		<programlisting>— ¶ —————————————————————
+
+<token>Hide Tags</token>
+|Dissimuler les balises<token>&lt;segment 2148 ¶&gt;</token>
+
+— ¶ —————————————————————
+
+When enabled, all formatting in the source segments are hidden.</programlisting></para>
+	</example>
+
+    <itemizedlist>
+      <listitem>
+        <para>La primera línia, amb caràcters en negreta sobre un fons verd, és el text d'origen per a traduir.</para>
+      </listitem>
+
+      <listitem>
+        <para>El <emphasis role="bold">camp de traducció</emphasis> és la segona línia, entre la vora esquerra i el marcador de segment de la dreta. El <emphasis role="bold">camp de traducció</emphasis> és on escriviu la traducció.</para>
+      </listitem>
+
+      <listitem>
+        <para>Aquí, el marcador de segment és <literal>&lt;segment 2148 ¶&gt;</literal>.</para>
+
+        <para><literal>2148</literal> és el número de segment del projecte i el símbol <literal>¶</literal> indica que el segment és el primer segment d'un paràgraf.</para>
+      </listitem>
+
+      <listitem>
+        <para>Per defecte, el cursor està blocat en el camp de traducció.</para>
+
+        <para>Utilitzeu <keycap>F2</keycap> per a desblocar-lo i desplaçar-lo lliurement entre el camp de traducció i altres parts de la subfinestra.</para>
+      </listitem>
+
+      <listitem>
+        <para>La línia sota del camp de traducció és un segment diferent.</para>
+      </listitem>
+
+      <listitem>
+        <para>Utilitzeu <link linkend="menus.goto" endterm="menus.goto.title"/><link endterm="menus.goto.next.untranslated.segment.title" linkend="menus.goto.next.untranslated.segment"/> o altres ordres de navegació per a fer el següent:</para>
+
+		<itemizedlist>
+          <listitem>
+            <para>Enregistrar el contingut del camp de traducció en la memòria de traducció del projecte.</para>
+          </listitem>
+
+          <listitem>
+            <para>Accedir el següent per a traduir següent.</para>
+          </listitem>
+        </itemizedlist>
+
+		<para>Consulteu el menú <link endterm="menus.goto.title" linkend="menus.goto"/> per a conèixer més detalls.</para>
+      </listitem>
+    </itemizedlist>
+
+    <note>
+      <para>Modifica la visualització de l'editor perquè s'adapti al vostre flux de treball.</para>
+
+	  <!--   <example id="panes.editor.modified.editor.target.field"> -->
+	  <!-- 	<title id="panes.editor.modified.editor.target.field.title">Example of modified -->
+	  <!--         editor writing space</title> -->
+	  <!-- 	<para> -->
+	  <!-- 	  <programlisting>— ¶ ————————————————————— -->
+
+	  <!-- Translation last modified by Didier on Sep 4, 2012 at 9:16:52 PM -->
+	  <!-- <token>Hide Ta&amp;gs</token> -->
+	  <!-- <token>Dissi&amp;muler les balises</token> -->
+
+	  <!-- — ¶ ————————————————————— -->
+
+	  <!-- <token>External Post-processing Command:</token> -->
+	  <!-- <token>[fuzzy]</token>Commande de post-traitement externe<token>&lt;segment 3644 ¶></token> -->
+
+	  <!-- — ¶ —————————————————————</programlisting></para> -->
+	  <!--   </example> -->
+
+	  <para>Les modificacions poden incloure:</para>
+	  
+	  <itemizedlist>
+		<listitem>
+		  <para>Canviar la lletra, com es descriu en la preferència <link endterm="dialogs.preferences.fonts.title" linkend="dialogs.preferences.fonts"/>.</para>
+		</listitem>
+
+		<listitem>
+		  <para>Mostrar o ocultar els límits dels paràgrafs amb <link endterm="menus.view.title" linkend="menus.view"/><link endterm="menus.view.mark.paragraph.delimitations.title" linkend="menus.view.mark.paragraph.delimitations"/>.</para>
+		</listitem>
+
+		<listitem>
+		  <para>Canviar el format dels límits dels paràgrafs, que es defineix amb la preferència <link endterm="dialogs.preferences.editor.paragraph.delimitation.format.title" linkend="dialogs.preferences.editor.paragraph.delimitation.format"/>.</para>
+		</listitem>
+
+		<listitem>
+		  <para>Mostrar la informació de modificació dels segments amb <link endterm="menus.view.title" linkend="menus.view"/><link endterm="menus.view.modification.info.title" linkend="menus.view.modification.info"/>.</para>
+		</listitem>
+
+		<listitem>
+		  <para>Mostrar o ocultar els segments d'origen amb <link endterm="menus.view.title" linkend="menus.view"/><link endterm="menus.view.display.source.segments.title" linkend="menus.view.display.source.segments"/>.</para>
+		</listitem>
+
+		<listitem>
+		  <para>Ressaltar els segments traduïts amb <link endterm="menus.view.title" linkend="menus.view"/><link endterm="menus.view.mark.translated.segments.title" linkend="menus.view.mark.translated.segments"/>.</para>
+		</listitem>
+
+		<listitem>
+		  <para>Inserir automàticament el text d'origen en el camp de traducció inhabilitant la preferència <link endterm="dialogs.preferences.editor.leave.the.segment.empty.title" linkend="dialogs.preferences.editor.leave.the.segment.empty"/>.</para>
+		</listitem>
+
+		<listitem>
+		  <para>Inserir la millor coincidència parcial sobre d'un llindar determinat, que podeu ajustar amb la preferència <link endterm="dialogs.preferences.editor.insert.the.best.fuzzy.match.title" linkend="dialogs.preferences.editor.insert.the.best.fuzzy.match"/>.</para>
+		</listitem>
+
+		<listitem>
+		  <para>Definir el text que no voleu incloure en la traducció, que s'habilita amb la preferència <link endterm="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation.title" linkend="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation"/>.</para>
+		</listitem>
+	  </itemizedlist>
+
+	  <para>Consulteu les preferències de l'<link linkend="dialogs.preferences.editor" endterm="dialogs.preferences.editor.title"/> i el menú <link endterm="menus.view.title" linkend="menus.view"/> per a conèixer més detalls.</para>
+    </note>
+
+    <variablelist>
+      <varlistentry>
+        <term>Traduccions buides</term>
+
+        <listitem>
+          <para>Si deixeu el camp de traducció buit, l'OmegaT tractarà el segment com a no traduït i el mantindrà en la llengua original quan creeu els documents traduïts.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Traduccions iguals al text d'origen</term>
+
+        <listitem>
+          <para>L'OmegaT pot emmagatzemar traduccions que siguin idèntiques al text d'origen. Això pot ser útil per a fitxers que contenen marques registrades, noms o altres noms propis, o seccions en una tercera llengua que no cal traduir.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Arrossegament de text</term>
+
+        <listitem>
+          <para>És possible arrossegar text des de qualsevol part de la finestra principal i deixar-lo anar en el camp de traducció. El text arrossegat des de fora del camp de traducció es copia, mentre que el text arrossegat des de dins del camp de traducció es desplaça.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="panes.editor.overwriting">
+        <term id="panes.editor.overwriting.title">Sobreescriptura</term>
+
+        <listitem>
+          <para>Per defecte, en escriure text s'insereix el text nou després del cursor en la direcció d'escriptura. Per a sobreescriure el text existent, utilitzeu les tecles següents:</para>
+
+		  <itemizedlist>
+            <listitem>
+              <para>Windows i Linux: <keycombo> <keycap>INSERT</keycap> </keycombo></para>
+            </listitem>
+
+            <listitem>
+              <para>macOS: <keycap>F3</keycap></para>
+            </listitem>
+          </itemizedlist>
+
+          <para>El mode d'escriptura (sobreescriu, <guilabel>SBR</guilabel>, o insereix, <guilabel>INS</guilabel>) es mostra en la part dreta de la <link linkend="panes.statusbar">barra d'estat</link>. La mateixa tecla permet canviar entre cada mode.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="panes.editor.cursor.lock">
+        <term id="panes.editor.cursor.lock.title">Blocatge del cursor</term>
+
+        <listitem>
+          <para>Per defecte, el cursor està blocat en el camp de traducció i les tecles de direcció no es poden utilitzar per a desplaçar-se pel text d'origen.</para>
+
+          <para>En prémer <keycap>F2</keycap> es desbloca el cursor i és possible utilitzar les tecles de direcció per a desplaçar-se pel text d'origen (o per qualsevol altre lloc de l'editor). Això us permet seleccionar text amb el teclat.</para>
+
+          <para>L'estat del cursor (blocat, <guilabel>BLOC</guilabel>, o desblocat, <guilabel>DESBLOC</guilabel>) es mostra en la part dreta de la <link linkend="panes.statusbar">barra d'estat</link>. La mateixa tecla permet blocar i desblocar el cursor.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="panes.editor.context.menu">
+        <term id="panes.editor.context.menu.title">Menú contextual</term>
+
+        <listitem>
+          <para>Drecera per defecte:</para>
+
+		  <itemizedlist>
+			<listitem>
+              <para>Windows i Linux: <keycap>Menú</keycap></para>
+			</listitem>
+
+			<listitem>
+              <para>macOS: <keycombo><keycap>S</keycap><keycap>Esc</keycap></keycombo></para>
+			</listitem>
+          </itemizedlist>
+
+		  <para>També podeu obrir el menú fent clic dret amb el ratolí (<keycap>C</keycap>+<keycap>clic</keycap> en el macOS).</para>
+
+          <para>El menú contextual de la subfinestra «Editor» ofereix diverses funcions disponibles des del menú <link endterm="menus.edit.title" linkend="menus.edit"/>. Les més importants són:</para>
+
+		  <itemizedlist>
+			<listitem>
+			  <para>Entrades del glossari que coincideixen; si hi ha comentaris, es presenten com a indicador de funció. Utilitzeu <link endterm="menus.view.title" linkend="menus.view"/><link endterm="menus.view.mark.glossary.matches.title" linkend="menus.view.mark.glossary.matches"/> per a habilitar aquesta característica.</para>
+			</listitem>
+
+			<listitem>
+        <para>Funcions <guilabel>Retalla</guilabel>, <guilabel>Copia</guilabel> i <guilabel>Enganxa</guilabel>.</para>
+      </listitem>
+
+      <listitem>
+        <para><guilabel>Ves al segment</guilabel> (per a saltar al segment sota el punter).</para>
+      </listitem>
+
+      <listitem>
+        <para><guilabel>Cerca en els diccionaris</guilabel> (per a cercar el terme seleccionat en un diccionari instal·lat).</para>
+      </listitem>
+
+      <listitem>
+        <para><guilabel>Afegeix una entrada al glossari</guilabel> (equivalent a utilitzar <link endterm="menus.edit.title" linkend="menus.edit"/><link endterm="menus.edit.create.glossary.entry.title" linkend="menus.edit.create.glossary.entry"/>).</para>
+      </listitem>
+
+      </itemizedlist>
+
+          <para>Si heu seleccionat text i heu definit entrades en les preferències de <link endterm="dialogs.preferences.external.searches.title" linkend="dialogs.preferences.external.searches"/>, també es mostraran en aquest menú (igual que les cerques locals).</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="panes.editor.auto.completion.menu">
+        <term id="panes.editor.auto.completion.menu.title">Menú d'emplenament automàtic</term>
+
+        <listitem>
+          <para>Drecera per defecte:</para>
+		  
+		  <itemizedlist>
+			<listitem>
+              <para>Windows i Linux: <keycombo><keycap>C</keycap><keycap>Espai</keycap></keycombo></para>
+			</listitem>
+
+			<listitem>
+              <para>macOS: <keycap>Esc</keycap></para>
+			</listitem>
+          </itemizedlist>
+		  			
+          <para>Aquest menú ofereix les opcions d'emplenament automàtic definides en les preferències de l'<link endterm="dialog.preferences.auto.completion.title" linkend="dialog.preferences.auto.completion"/>.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="panes.editor.navigation">
+        <term id="panes.editor.navigation.title">Navegació</term>
+        <listitem>
+		  <para>Utilitzeu <link linkend="menus.goto" endterm="menus.goto.title"/><link linkend="menus.goto.notes.pane" endterm="menus.goto.notes.pane.title"/> per a accedir a la subfinestra i afegir o modificar una nota.</para>
+
+		  <para>Utilitzeu <link linkend="menus.goto" endterm="menus.goto.title"/><link linkend="menus.goto.editor.pane" endterm="menus.goto.editor.pane.title"/> per a tornar a l'editor.</para>
+        </listitem>
+	  </varlistentry>
+    </variablelist>
+  </section>
+
+  <section id="panes.fuzzy.matches">
+    <title id="panes.fuzzy.matches.title"><guilabel>Coincidències parcials</guilabel></title>
+
+    <para>El visualitzador de coincidències mostra segments de les memòries de traducció que són similars al segment que esteu traduint.</para>
+
+    <para>Les coincidències provenen tant de la memòria de traducció del projecte interna creada en temps real mentre traduïu el projecte com de les memòries externes que heu importat de projectes anteriors o que heu rebut de tercers. Consulteu la guia <link endterm="how.to.use.tm.title" linkend="how.to.use.tm"/> per a conèixer més detalls.</para>
+
+    <para>Quan accediu a un segment, se selecciona automàticament la primera coincidència parcial (la que té el percentatge de coincidència més alt). Podeu prémer <keycombo><keycap>C</keycap><keycap>2, 3, 4 o 5</keycap> </keycombo> o utilitzar <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.select.match" endterm="menus.edit.select.match.title"/> per a seleccionar una coincidència diferent.</para>
+
+	<example id="the.first.match">
+	  <title id="the.first.match.title">An empty segment and its first two matches</title>
+      <para>
+		<informaltable id="table.pane.matches">
+          <tgroup cols="2">
+            <tbody>
+              <row>
+                <entry><para>
+				  <informaltable>
+					<tgroup cols="1">
+					  <tbody>
+						<row>
+						  <entry>
+							<programlisting>— ¶ —————————————————————
+
+<token>Application Folder</token>
+|<token>&lt;segment 1879 ¶&gt;</token>
+
+— ¶ —————————————————————
+</programlisting></entry>
+						</row>
+					  </tbody>
+					</tgroup>
+				  </informaltable>
+				</para>
+				</entry>
+                <entry><para>
+				  <informaltable>
+					<tgroup cols="1">
+					  <tbody>
+						<row>
+						  <entry>
+							<programlisting>1. <token>Top</token> Folder
+Dossier racine
+&lt;50/50/66% Orphan segments (+1 more)&gt;</programlisting>
+<programlisting>2. Configuration Folder
+Dossier de configuration
+&lt;50/50/66% &gt;</programlisting></entry>
+						</row>
+					  </tbody>
+					</tgroup>
+				  </informaltable>
+				</para>
+				</entry>
+			  </row>
+			</tbody>
+		  </tgroup>
+		</informaltable>
+	  </para>
+	</example>
+
+    <para>The selected fuzzy match is highlighted in <emphasis role="bold">bold</emphasis>. Words missing from the segment you are
+    translating are shown in <emphasis role="bold">blue</emphasis>, and adjacent
+    parts in <emphasis role="bold">green</emphasis> (when the adjacent part is a
+    space, as above, the part is left uncolored).</para>
+
+    <para>La coincidència també mostra tres percentatges de coincidència.</para>
+
+    <para>Aquests percentatges tenen el significat següent, en ordre:</para>
+
+	<itemizedlist>
+      <listitem>
+        <para>Percentage calculated <emphasis role="bold">with
+        stemming</emphasis> based on the source language tokenizer, and
+        <emphasis role="bold">ignoring tags and numbers</emphasis> (generally
+        the highest).</para>
+      </listitem>
+
+      <listitem>
+        <para>Percentage calculated <emphasis role="bold">without
+        stemming</emphasis>, while still <emphasis role="bold">ignoring tags and
+        numbers</emphasis> (generally slightly lower).</para>
+      </listitem>
+
+      <listitem>
+        <para>Percentage calculated on <emphasis role="bold">the entire text,
+        including tags and numbers</emphasis> (generally the lowest).</para>
+		<note>
+		  <para>If the segment contains only numbers or symbols, this percentage
+		  will be the highest.</para>
+		</note>
+      </listitem>
+    </itemizedlist>
+  
+    <para>Podeu canviar com es mostren o s'ordenen les coincidències. Consulteu les preferències de <link endterm="dialog.preferences.tm.matches.title" linkend="dialog.preferences.tm.matches"/> per a conèixer més detalls.</para>
+
+    <para>Utilitzeu <link linkend="menus.edit" endterm="menus.edit.title"/><link endterm="menus.edit.replace.with.match.or.selection.title" linkend="menus.edit.replace.with.match.or.selection"/> per a substituir el text del camp de traducció per la coincidència, o <link linkend="menus.edit" endterm="menus.edit.title"/><link endterm="menus.edit.insert.match.or.selection.title" linkend="menus.edit.insert.match.or.selection"/> per a inserir-lo en la posició del cursor.</para>
+  </section>
+
+  <section id="panes.glossary">
+    <title id="panes.glossary.title"><guilabel>Glossaris</guilabel></title>
+
+    <para>This pane shows terms from your glossary files that correspond to terms in the current segment. Els fitxers de glossari són en la carpeta <link endterm="project.folder.glossary.title" linkend="project.folder.glossary"/> del projecte.</para>
+
+    <para>El terme d'origen es mostra abans del signe «=» i els termes de destinació apareixen després. Si l'entrada conté comentaris, es numeren i es mostren en línies independents sota els termes. Els termes del glossari modificable es mostren en negreta, mentre que els d'altres glossaris es presenten en rodona.</para>
+
+	<example id="glossary.matches">
+	  <title id="glossary.matches.title">Coincidències dels glossaris</title>
+	  <para>
+		<programlisting>Project = <token>Projet</token>
+1. Projet de traduction
+
+Folder = <token>Dossier</token></programlisting>
+	  </para>
+	</example>
+
+    <para>El nom del fitxer de glossari es mostra com a indicador de funció en passar el ratolí sobre els termes.</para>
+
+    <para>El camp de comentari d'una entrada pot contenir enllaços, en què es pot fer clic per a conèixer més informació.</para>
+
+	<para>Els enllaços a fitxers locals (<filename>file:///CAMÍ/fitxer</filename>) s'obren amb el programa associat. Les adreces web (<filename>https://...</filename>) s'obren en el navegador per defecte.</para>
+
+    <para>You can select a term in the glossaries pane and right click on it to
+    insert it into the translation.</para>
+
+    <para>Utilitzeu <link endterm="menus.view.title" linkend="menus.view"/><link endterm="menus.view.mark.glossary.matches.title" linkend="menus.view.mark.glossary.matches"/> per a subratllar les coincidències del glossari.</para>
+
+	<para>A continuació, podeu fer clic dret sobre la paraula subratllada en el segment d'origen per a obrir un menú emergent que enumera les traduccions disponibles en els glossaris. Seleccioneu-ne una per a inserir-la en la posició actual del cursor en el segment.</para>
+
+    <para>Podeu utilitzar les preferències del glossari per a ajustar com es mostren els glossaris. Consulteu les preferències de <link endterm="dialogs.preferences.glossary.title" linkend="dialogs.preferences.glossary"/> per a conèixer més detalls.</para>
+
+    <para>Modifications to any glossary file in the glossary folder are
+    immediately recognized by OmegaT and displayed in the glossaries pane.</para>
+
+    <para>L'OmegaT inclou un fitxer de glossari modificable per projecte. Utilitzeu <link endterm="menus.edit.title" linkend="menus.edit"/><link endterm="menus.edit.create.glossary.entry.title" linkend="menus.edit.create.glossary.entry"/> per a afegir termes al fitxer.</para>
+
+	<para>Consulteu l'annex <link linkend="app.glossaries" endterm="app.glossaries.title"/> per a conèixer més detalls.</para>
+  </section>
+
+  <section id="panes.dictionary">
+    <title id="panes.dictionary.title"><guilabel>Diccionaris</guilabel></title>
+
+	<para>This pane shows terms from your dictionary files that correspond to terms in the current segment. Els fitxers de diccionari són en la carpeta <link linkend="project.folder.dictionary" endterm="project.folder.dictionary.title"/> del projecte. Consulteu les preferències de <link endterm="dialogs.preferences.dictionary.title" linkend="dialogs.preferences.dictionary"/> per a conèixer més detalls.</para>
+  </section>
+  
+  <section id="panes.machinetranslation">
+    <title id="panes.machinetranslation.title"><guilabel>Traducció automàtica</guilabel></title>
+
+    <para>This pane, when opened, shows the suggestions for the current segment produced by each enabled translation engine . Quan hi ha suggeriments disponibles de més d'un motor:</para>
+	
+    <itemizedlist>
+      <listitem>
+        <para>El nom del motor apareix després del text traduït.</para>
+      </listitem>
+
+      <listitem>
+        <para>Els resultats s'ordenen en ordre alfabètic per nom dels motors.</para>
+      </listitem>
+
+      <listitem>
+        <para>Es ressalta la traducció seleccionada actualment.</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Utilitzeu <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.replace.with.mt.title" endterm="menus.edit.replace.with.mt.title"/> per a substituir la traducció del segment actual pel motor de traducció automàtica seleccionat.</para>
+
+    <para>El nom del motor seleccionat s'assigna a la propietat <parameter>Origen</parameter> del segment actual.</para>
+
+	<para>Si es produeix un error de connexió o autenticació amb un motor de traducció automàtica, la barra d'estat de la part inferior de la finestra mostrarà breument el missatge d'estat.</para>
+
+    <para>Assegureu-vos que el servei estigui habilitat i que hàgiu introduït les credencials correctament. Si tot és correcte, és possible que hàgiu de contactar amb el proveïdor del servei per a obtenir ajuda. De la mateixa manera, un error com ara <literal>No s'ha pogut processar la resposta del servei de traducció automàtica</literal> suggereix que potser hi ha un problema de comunicació entre el sistema i el servidor del proveïdor.</para>
+
+	<para>Consulteu les preferències de <link linkend="dialogs.preferences.mt" endterm="dialogs.preferences.mt.title"/> per a conèixer més detalls.</para>
+  </section>
+
+  <section id="panes.multipletranslations">
+    <title id="panes.multipletranslations.title"><guilabel>Diverses traduccions</guilabel></title>
+
+    <para>Un segment d'origen que apareix en diverses ubicacions del projecte pot requerir diverses traduccions diferents en funció del context.</para>
+
+	<para>Utilitzeu <link endterm="menus.edit.title" linkend="menus.edit"/><link endterm="menus.edit.create.alternative.translation.title" linkend="menus.edit.create.alternative.translation"/> per a registrar una traducció alternativa si la traducció actual del segment no és adequada. La traducció indicada es tractarà com una traducció alternativa del segment d'origen.</para>
+
+    <para>Utilitzeu <link endterm="menus.edit.title" linkend="menus.edit"/><link endterm="menus.edit.use.as.default.translation.title" linkend="menus.edit.use.as.default.translation"/> per a definir una de les alternatives, la més habitual o probable, per exemple, com a traducció per defecte.</para>
+  </section>
+
+  <section id="panes.notes">
+    <title id="panes.notes.title"><guilabel>Notes</guilabel></title>
+
+    <para>This pane is an <emphasis>editable</emphasis> space where you can
+    add notes to the currently active segment.</para>
+
+	<para>Això us permet tornar més endavant per a revisar la traducció, comprovar que les traduccions alternatives són correctes o, en projectes compartits, demanar a altres membres la seva opinió, per exemple.</para>
+
+	<para>Utilitzeu <link endterm="menus.goto.title" linkend="menus.goto"/><link endterm="menus.goto.next.note.title" linkend="menus.goto.next.note"/> i <link endterm="menus.goto.title" linkend="menus.goto"/><link endterm="menus.goto.previous.note.title" linkend="menus.goto.previous.note"/> per a navegar per les notes.</para>
+
+	<para>Utilitzeu <link linkend="menus.goto" endterm="menus.goto.title"/><link linkend="menus.goto.notes.pane" endterm="menus.goto.notes.pane.title"/> per a accedir a la subfinestra i afegir o modificar una nota.</para>
+	<para>Utilitzeu <link linkend="menus.goto" endterm="menus.goto.title"/><link linkend="menus.goto.editor.pane" endterm="menus.goto.editor.pane.title"/> per a tornar a l'editor.</para>
+
+	<note>
+	  <para>Les notes s'emmagatzemen en la memòria de traducció del projecte. <emphasis>No</emphasis> s'emmagatzemen en els fitxers traduïts.</para>
+	</note>
+  </section>
+
+  <section id="panes.comments">
+    <title id="panes.comments.title"><guilabel>Comentaris</guilabel></title>
+
+    <para>Alguns formats de fitxer, com el format PO, poden contenir comentaris per al traductor per a donar context a la traducció. Aquests comentaris es mostren aquí.</para>
+
+    <note>
+      <para>La subfinestra <guilabel>Comentaris</guilabel> <emphasis>no</emphasis> és editable. Només mostra informació que s'inclou en el fitxer.</para>
+
+	  <para>Utilitzeu la subfinestra <link endterm="panes.notes.title" linkend="panes.notes"/> per a indicar els vostres propis comentaris sobre una traducció.</para>
+    </note>
+  </section>
+
+  <section id="panes.segment.properties">
+    <title id="panes.segment.properties.title"><guilabel>Propietats del segment</guilabel></title>
+
+    <para>Tots els segments tenen propietats. Les propietats es mostren en aquesta subfinestra.</para>
+	<para>Algunes propietats habituals són:</para>
+	
+	<variablelist>
+	  <varlistentry>
+		<term>És una repetició</term>
+		<listitem>
+		  <para>Indica que un segment és un duplicat i especifica si el segment és la primera repetició.</para>
+		</listitem>
+	  </varlistentry>
+	  <varlistentry>
+		<term>Fitxer</term>
+		<listitem>
+		  <para>Indica el fitxer on s'emmagatzema el segment.</para>
+		</listitem>
+	  </varlistentry>
+	</variablelist>
+
+    <note>
+      <para>La subfinestra «Propietats» <emphasis>no</emphasis> és editable. Només mostra informació relacionada amb el segment.</para>
+    </note>
+  </section>
+
+  <section id="panes.statusbar">
+    <title id="panes.statusbar.title"><guilabel>Barra d'estat</guilabel></title>
+
+    <para>La part inferior de la finestra principal és la barra d'estat.</para>
+
+	<para>La part esquerra de la barra d'estat mostra informació sobre les accions del projecte o els missatges d'error.</para>
+
+	<example id="panes.statusbar.messages">
+      <title id="panes.statusbar.messages.title">Exemples de missatges de la barra d'estat</title>
+	  <para><literal>Sincronització de dipòsits</literal></para>
+
+	  <para>→ L'OmegaT està obrint un projecte en equip i se sincronitza amb el dipòsit remot.</para>
+
+	  <para><literal>S'està saltant al darrer segment editat...</literal></para>
+
+	  <para>→ L'OmegaT sobre el darrer segment editat de la darrera sessió.</para>
+
+	  <para><literal>El projecte s'ha desat automàticament a les 22:48.</literal></para>
+
+	  <para>→ L'OmegaT ha desat el projecte recentment.</para>
+
+	  <para><literal>S'han creat els fitxers traduïts.</literal></para>
+
+	  <para>→ L'usuari ha creat els fitxers.</para>
+	</example>
+
+    <para>El costat dret de la barra d'estat indica si el cursor està blocat en el segment (consulteu el paràmetre <link endterm="panes.editor.cursor.lock.title" linkend="panes.editor.cursor.lock"/>) i si el cursor sobreescriu el text existent (consulteu el paràmetre <link linkend="panes.editor.overwriting" endterm="panes.editor.overwriting.title"/>). També mostra informació del progrés.</para>
+
+    <para>Feu clic en les figures per a canviar entre la visualització del progrés en xifres o percentatges.</para>
+
+	<example id="panes.statusbar.widgets">
+      <title id="panes.statusbar.widgets.title">Informació de la barra d'estat</title>
+	  <para><literal>BLOC | SBR <token>257/271 (12292/154896, 177692)</token><token> 35/0 </token></literal></para>
+
+	  <variablelist>
+		<varlistentry>
+		  <term>Estat del cursor</term>
+		  <listitem>
+			<para><literal>BLOC</literal> indica que el cursor està blocat en el segment.</para>
+
+			<para><literal>SBR</literal> indica que el cursor sobreescriu el text existent.</para>
+		  </listitem>
+		</varlistentry>
+		
+		<varlistentry>
+		  <term>En el fitxer</term>
+		  <listitem>
+			<para><emphasis role="bold">257</emphasis> = nombre de segments traduïts / <emphasis role="bold">271</emphasis> = nombre total de segments</para>
+		  </listitem>
+		</varlistentry>
+
+		<varlistentry>
+		  <term>En el projecte</term>
+		  <listitem>
+			<para><emphasis role="bold">12292</emphasis> = nombre de segments únics traduïts / <emphasis role="bold">154896</emphasis> = nombre total de segments únics, <emphasis role="bold">(177692)</emphasis> = nombre total de segments</para>
+		  </listitem>
+		</varlistentry>
+
+		<varlistentry>
+		  <term>En el segment</term>
+		  <listitem>
+			<para><emphasis role="bold">35</emphasis> = nombre de caràcters en el text d'origen / <emphasis role="bold">0</emphasis> = nombre de caràcters en el camp de destinació, de moment</para>
+		  </listitem>
+		</varlistentry>
+	  </variablelist>
+	</example>
+	
+	<example id="panes.statusbar.widgets.percentage">
+      <title id="panes.statusbar.widgets.percentage.title">Informació de la barra d'estat, mode percentatge</title>
+	  <para><literal>DESBLOC | INS <token>94,8% (14 restants) / 7.9% (142.604 restants), 177.692</token> <token>35/0</token></literal></para>
+	  <variablelist>
+		<varlistentry>
+		  <term>Estat del cursor</term>
+		  <listitem>
+			<para><literal>DESBLOC</literal> indica que el cursor no està blocat en el segment i podeu navegar per la finestra de l'editor amb les ordres de navegació estàndard.</para>
+
+			<para><literal>INS</literal> indica que el cursor insereix text.</para>
+		  </listitem>
+		</varlistentry>
+
+		<varlistentry>
+		  <term>En el fitxer</term>
+		  <listitem>
+			<para><emphasis role="bold">94,8%</emphasis> = percentatge de segments traduïts / <emphasis role="bold">14</emphasis> = nombre de segments sense traduir</para>
+		  </listitem>
+		</varlistentry>
+
+		<varlistentry>
+		  <term>En el projecte</term>
+		  <listitem>
+			<para><emphasis role="bold">7,9%</emphasis> = percentatge de segments traduïts / <emphasis role="bold">142.604</emphasis> = nombre de segments sense traduir, <emphasis role="bold">(177.692)</emphasis> = nombre total de segments</para>
+		  </listitem>
+		</varlistentry>
+
+		<varlistentry>
+		  <term>En el segment</term>
+		  <listitem>
+			<para><emphasis role="bold">35</emphasis> = nombre de caràcters en el text d'origen / <emphasis role="bold">0</emphasis> = nombre de caràcters en el camp de destinació, de moment</para>
+		  </listitem>
+		</varlistentry>
+	  </variablelist>
+	</example>
+  </section>
+</chapter>

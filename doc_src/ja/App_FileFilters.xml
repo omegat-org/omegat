@@ -1,0 +1,712 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd"
+[
+<!ENTITY % manualvariables SYSTEM "manualvariables.mod">
+%manualvariables;
+]>
+<section id="file.filters">
+  <title id="file.filters.title">ファイルフィルター</title>
+
+  <warning>
+	<para>ファイルフィルタは、ローカルで特定のプロジェクトに固有のものか、ユーザーレベルで構成フォルダーを共有するすべてのプロジェクトで使用できるものの二種類あります。</para>
+
+	<para>詳細情報は以下を確認してください。</para>
+	<itemizedlist>
+	  <listitem>
+		<para><link linkend="dialogs.project.properties.filters" endterm="dialogs.project.properties.filters.title"/></para>
+	  </listitem>
+	  <listitem>
+		<para><link linkend="dialogs.preferences.file.filters" endterm="dialogs.preferences.file.filters.title"/></para>
+	  </listitem>
+	  <listitem>
+		<para><link linkend="configuration.folder" endterm="configuration.folder.title"/></para>
+	  </listitem>
+	</itemizedlist>
+  </warning>
+  
+  <para>現在のプロジェクトで使用しているフィルターを太字で示します。</para>
+
+  <para>特定のフィルターに関連付けられているファイルを翻訳しない場合は、そのチェックボックスをオフにして無効にします。これらのコンテンツは翻訳用には表示されません。</para>
+
+  <note>
+	<para>フィルタは、名前または有効かどうかでソートできます。関連するヘッダーをクリックすると、昇順または降順の順序でソートできます。</para>
+  </note>
+
+  <para>フィルター対象とするファイルやエンコーディングを変更する場合は<guibutton>編集...</guibutton>をクリックします。</para>
+
+  <para>一部のフィルタには、設定をさらにカスタマイズするための<guibutton>オプション.</guibutton>ボタンがあります。</para>
+	
+  <para><guibutton>［初期値を復元］</guibutton> をクリックすると、それまでのフィルター設定をリセットし初期設定に戻します。</para>
+
+  <para>変更されたユーザーレベルファイルのフィルター設定は、<link linkend="configuration.folder.extra.contents.filters" endterm="configuration.folder.extra.contents.filters.title"/>の設定フォルダーに保存されます。 <link linkend="configuration.folder" endterm="configuration.folder.title"/> に詳細を示します。このファイルを削除すると、フィルターの環境設定もリセットされます。</para>
+
+  <para>変更されたプロジェクト専用のファイルフィルタ設定は、プロジェクトフォルダーにある<link linkend="configuration.folder.extra.contents.filters" endterm="configuration.folder.extra.contents.filters.title"/>ファイルに保存されます。詳細については-<link linkend="chapter.project.folder" endterm="chapter.project.folder.title"/>を参照してください。このファイルを削除すると、フィルターの環境設定もリセットされ、ユーザレベルのファイルフィルター設定が使用されるようになります。</para>
+
+  <section id="file.filters.general">
+	<title id="file.filters.general.title">共通設定</title>
+	  
+	<variablelist>
+	  <varlistentry>
+		<term>先頭および末尾のタグを非表示にする</term>
+		<listitem>
+		  <para>通常、OmegaTが翻訳済みの分節を正しく再作成するには、先頭タグと末尾タグが必要です。これらを翻訳可能なコンテンツで非表示にすると、誤って削除したり変更したりすることがなくなります。</para>
+
+		  <para>先行タグと後続タグを保持する場合は、それらのタグも訳文に含めるようにしてください。</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry>
+		<term>分節化しないプロジェクトから、先頭と末尾の空白文字を削除</term>
+		<listitem>
+		  <para>デフォルトではOmegaTは、翻訳対象のコンテンツから先頭と末尾の空白文字を削除します。分節化しないプロジェクトでは、この設定を無効にすると、訳文の先頭と末尾の空白文字が編集可能になります。</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry>
+		<term>すべてのタグの空白を維持</term>
+		<listitem>
+		  <para>原文の文書ファイルにレイアウトの制御に使用される空白文字が含まれている場合、必要な空白文字は訳文ファイルでも保持されます。</para>
+		</listitem>
+	  </varlistentry>
+	  <varlistentry>
+		<term>複数訳文の識別時にファイル名情報を無視する</term>
+		<listitem>
+		  <para>ソースファイル名は、例外訳文を特徴付ける要素の1つです。この設定が有効化された場合、前および次の分節や分節識別子のみが、例外訳文を特徴付けるために使用されます。</para>
+
+		  <para>他のファイルにある同じ特徴を持つ分節は、指定されている例外訳文として訳文が生成されます。</para>
+		</listitem>
+	  </varlistentry>
+	</variablelist>
+  </section>
+	
+  <section id="edit.filter.dialog">
+    <title id="edit.filter.dialog.title">編集</title>
+	
+    <para>編集可能なフィールドをダブルクリックして変更を行うか、<guibutton>編集.</guibutton>ボタンをクリックして変更ダイアログにアクセスします。</para>
+
+	<para>フィルターパターンを追加するには、<guibutton>追加...</guibutton>をクリックして、同様のダイアログを開きます。</para>
+
+	<para>どちらのダイアログでも、このフィルターに関連付けられた原文ファイルと訳文ファイルのファイル名パターンをカスタマイズして、それぞれの文字エンコーディングを選択できます。</para>
+
+	<para>ターゲットのファイル名をカスタマイズするには、<guilabel>ファイル名変数</guilabel>ドロップダウンメニューを使用します。</para>
+
+    <section id="source.filetype.and.filename.pattern">
+	  <title id="source.filetype.and.filename.pattern.title">原文ファイル名の構成例</title>
+
+	  <para>OmegaTはファイル拡張子をチェックし、フィルター内の原文ファイル名パターンと照合します。適合したときに、ファイルにフィルターに関連付けます。</para>
+
+	  <para>たとえば、構成例 <literal>*.xhtml</literal> は、拡張子が <filename>xhtml</filename> のあらゆるファイルに一致します。<link linkend="project.folder.source" endterm="project.folder.source.title"/> フォルダーでそのようなファイルが見つかった時に、XHTMLフィルターによって処理されます。</para>
+
+	  <para>そのフィルターに関連づけたいファイルに応じて、ファイル名構成例を変更したり追加したりできます。</para>
+		
+	  <warning>
+		<para>ファイル拡張子をフィルターに関連付けるだけでは、フィルターがファイルを適切に処理することはできません。ファイルの内部構造が、フィルターが対応する仕様と互換である必要があります。<literal>.odt</literal>をXHMTLフィルターに関連付けても、フィルターはLibreOffice Writerファイルの内容を理解できません。</para>
+	  </warning>
+		
+		
+	  <para>原文ファイル名構成例には、ワイルドカード文字を使用できます。<literal>*</literal>文字は0また1文字以上の文字に、<literal>?</literal>は厳密に1文字にマッチします。</para>
+
+	  <para>たとえばテキストフィルターを readme ファイル（<literal>readme, read.me</literal> や <literal>readme.txt</literal>）にも対応させたい場合は、ファイル名構成例に <literal>read*</literal> を指定してください。</para>
+    </section>
+
+    <section id="source.and.target.files.encoding">
+	  <title id="source.and.target.files.encoding.title">原文ファイルと訳文ファイルのエンコーディング</title>
+
+	  <para>ほとんどのファイル形式では、さまざまな文字コードのエンコーディングが利用可能です。デフォルトでは、訳文ファイルのエンコーディングは、原文ファイルと同じになります。</para>
+
+	  <para>原文ファイルと訳文ファイルのエンコーディングを指定する項目では、対応したすべてのエンコーディングをドロップダウンメニューから選択できます。<guilabel>&lt;auto&gt;</guilabel>設定を選択すると、次の基準に基づいて、OmegaTが、エンコーディングを選択します。</para>
+
+	  <itemizedlist>
+        <listitem>
+		  <para>原文ファイルにエンコーディング宣言があれば、それに従います（HTML ファイル、XML ベースのファイルの場合）</para>
+        </listitem>
+	  </itemizedlist>
+
+	  <itemizedlist>
+        <listitem>
+		  <para>いくつかのファイル形式（例えばJava properties ）に対しては、その形式に必須のエンコーディングを設定します。</para>
+        </listitem>
+	  </itemizedlist>
+
+	  <itemizedlist>
+        <listitem>
+		  <para>テキストファイルには、起動オプションで変更されていなければ、OS デフォルトのエンコーディング（たとえば新規インストールの日本語版の Windows 10/11 OSではUTF-8エンコーディグのUnicode、たとえばWindows8.1からアップデートしたWindows10ではCP932エンコーディングのSJIS日本語コード）を使用します。</para>
+        </listitem>
+	  </itemizedlist>
+    </section>
+
+    <section id="target.name">
+	  <title id="target.name.title">訳文ファイル名</title>
+	  
+	  <para><link linkend="project.folder.target" endterm="project.folder.target.title"/>フォルダーのファイルは、同じ名前で作成された場合、作成するたびに上書きされます。</para>
+
+	  <para>OmegaTでは、言語コードやタイムスタンプを追加するなどして、作成したファイルの新しいファイル名を自動的に作成できます。</para>
+
+	  <para>ターゲットファイル名構成例は特別な構文を使用します。最も簡単に変更する方法は、<guilabel>構成例を編集</guilabel>ダイアログを使用することです。このダイアログでは、さまざまな設定ができます。</para>
+
+	  <variablelist>
+        <varlistentry>
+          <term>${filename}</term>
+          <listitem>
+			<para>デフォルトの構成例。拡張子を含むソースファイルの完全なファイル名を表します。このパターンを使用すると、訳文ファイルにソースファイルとまったく同じ名前が割り当てられます。</para>
+          </listitem>
+		</varlistentry>
+
+        <varlistentry>
+          <term>${nameOnly}</term>
+          <listitem>
+			<para>ソースファイルの名前(拡張子なし)</para>
+          </listitem>
+		</varlistentry>
+
+        <varlistentry>
+          <term>${extension} </term>
+          <listitem>
+			<para>原文ファイルの拡張子</para>
+          </listitem>
+		</varlistentry>
+
+        <varlistentry>
+          <term>${targetLocale}</term>
+          <listitem>
+			<para>訳文言語コード+地域コード (xx_YY)</para>
+          </listitem>
+		</varlistentry>
+
+        <varlistentry>
+          <term>${targetLanguage}</term>
+          <listitem>
+			<para>訳文言語コード+地域コード (xx-YY)</para>
+          </listitem>
+		</varlistentry>
+
+        <varlistentry>
+          <term>${targetLanguageCode}</term>
+          <listitem>
+			<para>訳文言語コード (xx)</para>
+          </listitem>
+		</varlistentry>
+
+        <varlistentry>
+          <term>${targetCountryCode}</term>
+          <listitem>
+			<para>訳文地域コード (YY)</para>
+          </listitem>
+		</varlistentry>
+
+        <varlistentry>
+          <term>${timestamp-????}</term>
+          <listitem>
+			<para>ファイルが作成されたシステム時間</para>
+
+			<para>例については、<ulink url="https://docs.oracle.com/javase/8/docs/api/java/text/SimpleDateFormat.html">Oracleのドキュメント</ulink>を参照してください。</para>
+          </listitem>
+		</varlistentry>
+
+        <varlistentry>
+          <term>${system-os-name}</term>
+          <listitem>
+			<para>オペレーティング・システムの名称</para>
+          </listitem>
+		</varlistentry>
+
+        <varlistentry>
+          <term>${system-user-name}</term>
+          <listitem>
+			<para>ユーザーのログイン名</para>
+          </listitem>
+		</varlistentry>
+
+        <varlistentry>
+          <term>${system-host-name}</term>
+          <listitem>
+			<para>システムのホスト名</para>
+          </listitem>
+		</varlistentry>
+
+        <varlistentry>
+          <term>${file-source-encoding}</term>
+          <listitem>
+			<para>原文ファイルのエンコーディング</para>
+		  </listitem>
+		</varlistentry>
+		  
+        <varlistentry>
+          <term>${file-target-encoding}</term>
+          <listitem>
+			<para>訳文ファイルのエンコーディング</para>
+          </listitem>
+		</varlistentry>
+
+        <varlistentry>
+          <term>${targetLocaleLCID}</term>
+          <listitem>
+			<para>訳文ファイルのMicrosoftロケール(xx-yy形式)</para>
+          </listitem>
+		</varlistentry>
+	  </variablelist>
+		
+	  <para><literal>${nameOnly}</literal> と<literal> ${extension}</literal> に関しては、追加の変数を使用できます。</para>
+		
+	  <para>ファイル名に複数のピリオドを利用するなどでファイル名と拡張子があいまいな場合、使用する構成要素を <literal>${nameOnly-</literal><emphasis>番号</emphasis>} と <literal>${extension-</literal>-<emphasis>番号}</emphasis> の形式で、次に示す例のように指定することができます。</para>
+
+	  <example id="target.name.example">
+		<title id="target.name.example.title">訳文ファイル名</title>
+		<para>文書.xx.docxという名前のソースファイルに対して、以下の変数定義を使用すると、次のような結果になります。</para>
+
+		<itemizedlist>
+          <listitem>
+			<para><literal>${nameOnly-0}</literal>: <filename>Document</filename></para>
+          </listitem>
+
+          <listitem>
+			<para><literal>${nameOnly-1}</literal>: <filename>Document.xx</filename></para>
+          </listitem>
+
+          <listitem>
+			<para><literal>${nameOnly-2}</literal>: <filename>Document.xx.docx</filename></para>
+          </listitem>
+
+          <listitem>
+			<para><literal>${extension-0}</literal>: <filename>docx</filename></para>
+          </listitem>
+
+          <listitem>
+			<para><literal>${extension-1}</literal>: <filename>xx.docx</filename></para>
+          </listitem>
+
+          <listitem>
+			<para><literal>${extension-2}</literal>: <filename>Document.xx.docx</filename></para>
+          </listitem>
+		</itemizedlist>
+	  </example>
+    </section>
+  </section>
+	
+  <section id="filters.options">
+    <title id="filters.options.title">設定</title>
+
+    <para>ファイルフィルターは設定を提供しています。設定を変更する場合は、フィルターを選択して<guibutton>設定...</guibutton> を押してください。</para>
+
+	<para>可能な設定は以下の通りです：</para>
+
+	<variablelist>
+	  <varlistentry id="file.filters.text">
+		<term id="file.filters.text.title">テキストファイル</term>
+		<listitem>
+		  <para>
+			<variablelist>
+			  <varlistentry>
+				<term>段落の作成場所:</term>
+				<listitem>
+				  <para>文章ファイルには、一般的な段落マーカーはありません。ここを選択して、テキストファイルから段落に分割する方法を指定します。</para>
+				</listitem>
+			  </varlistentry>
+
+			  <varlistentry>
+				<term>訳文ファイルの行の長さ(0=制限なし)</term>
+				<listitem>
+				  <para>
+					<variablelist>
+					  <varlistentry>
+						<term>行の文字数</term>
+						<listitem>
+						  <para>長い行を改行する前の最大文字数を指定します。0を設定すると、制限なしになります。</para>
+						</listitem>
+					  </varlistentry>
+
+					  <varlistentry>
+						<term>最大行数</term>
+						<listitem>
+						  <para>行を切断して残りを無視するまでの最大文字数を指定します。0を設定すると、制限なしになります。</para>
+						</listitem>
+					  </varlistentry>
+					</variablelist>
+				  </para>
+				</listitem>
+			  </varlistentry>
+			</variablelist>
+		  </para>
+		</listitem>
+	  </varlistentry>
+		
+	  <varlistentry id="file.filter.microsoft">
+		<term id="file.filter.microsoft.title">Microsoft Office Open XML ファイル</term>
+		<listitem>
+		  <warning>
+			<para><code>Microsoft Office Open XML(旧フィルター)</code>は、従前からのOmegaTのフィルターです。以前に、このフィルターで処理したファイルを含むプロジェクトとの互換性の問題を回避するときのみ、利用してください。</para>
+		  </warning>
+
+		  <para>追加して翻訳するXML要素を選ぶことができます。選んだ要素は、翻訳時に個別の分節として表示されます。</para>
+		  <variablelist>
+			<varlistentry>
+			  <term>Word</term>
+			  <listitem>
+				<para>非表示の命令文章、コメント、脚注、文末脚注、フッタ、重複するフォールバック文章、および文書プロジェクト設定。</para>
+			  </listitem>
+			</varlistentry>
+
+			<varlistentry>
+			  <term>Microsoft Excel</term>
+			  <listitem>
+				<para>コメントとシート名。</para>
+			  </listitem>
+			  </varlistentry>
+
+			  <varlistentry>
+				<term>Microsoft PowerPoint</term>
+				<listitem>
+				  <para>スライドのコメント、スライドマスター、スライドレイアウト。</para>
+				</listitem>
+			  </varlistentry>
+
+			  <varlistentry>
+				<term>共通</term>
+				<listitem>
+				  <para>外部リンク、表、ダイアグラム、図、ワードアート</para>
+				</listitem>
+			  </varlistentry>
+			  
+			  <varlistentry>
+				<term>その他の設定：</term>
+				<listitem>
+				  <variablelist>
+					<varlistentry>
+					  <term>タグの集約</term>
+					  <listitem>
+						<para>翻訳対象テキストを含まない連続するタグを１つのタグに集約します。</para>
+					  </listitem>
+					</varlistentry>
+
+					<varlistentry>
+					  <term>すべてのタグの空白を維持</term>
+					  <listitem>
+						<para>チェックが入っていれば、空白文字（半角スペースや改行など）を保持します。たとえそれが文書中で意味が無い場合でも残します。</para>
+					  </listitem>
+					</varlistentry>
+
+					<varlistentry>
+					  <term>ソフト改行（任意指定の行区切り）を段落区切りとみなす</term>
+					  <listitem>
+						<para>ソフトリターンが段落の開始を意図している場合は、この設定を有効にします。</para>
+					  </listitem>
+					</varlistentry>
+				  </variablelist>
+				</listitem>
+			  </varlistentry>
+		  </variablelist>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="file.filters.xhtml">
+		<term id="file.filters.xhtml.title">XHTML ファイル</term>
+		<listitem>
+		  <variablelist>
+			<varlistentry>
+			  <term>以下の属性を翻訳</term>
+			  <listitem>
+				<para>選択した属性を<guilabel>編集</guilabel>ウィンドウで翻訳できる分節として表示できます。</para>
+			  </listitem>
+			</varlistentry>
+			<varlistentry>
+			  <term>以下のタグで分節化</term>
+			  <listitem>
+				<para>HTML の &lt;br&gt; タグがある場所を段落とみなして分節化することができます。</para>
+			  </listitem>
+			</varlistentry>
+			<varlistentry>
+			  <term>読み込み時に無視される段落(正規表現)</term>
+			  <listitem>
+				  <para>正規表現に一致する段落は読み込み時に無視され、翻訳用に表示されません。</para>
+
+				  <para>この設定は、HTMLの一部に翻訳不可能な文章のみの要素を含む場合に便利です。</para>
+			  </listitem>
+			</varlistentry>
+			<varlistentry>
+			  <term>無視された&lt;meta&gt;タグの&quot;content&quot;属性</term>
+			  <listitem>
+				<para>関連する「コンテンツ」属性が変換されない&lt;meta&gt;タグ属性値を定義します。</para>
+
+				<para>引用文記号を追加したり、値をカンマで区切ったりしないでください。</para>
+				
+				<example id="file.filters.xhtml.example">
+				  <title id="file.filters.xhtml.example.title">&lt;meta name=&quot;robots&quot; content=&quot;index, follow&quot;&gt;の内容部分を無視する</title>
+				  <para>このコンテンツを無視するには:</para>
+
+				  <para><code>&lt;meta name=&quot;robots&quot; content=&quot;index,
+				  follow&quot;&gt;</code></para>
+
+				  <para>使う:</para>
+
+				  <para><literal>name=robots</literal></para>					
+				</example>
+			  </listitem>
+			</varlistentry>
+
+			<varlistentry>
+			  <term>無視されるタグ(属性=値)</term>
+			  <listitem>
+				<para>タグを翻訳不可能にする属性値を定義します。</para>
+
+				<para>引用文記号を追加したり、値をカンマで区切ったりしないでください。</para>
+
+				<example id="file.filters.xhtml.ignore.translate.no">
+				  <title id="file.filters.xhtml.ignore.translate.no.title">translate=&quot;no&quot;属性があるタグを無視</title>
+				  <para>このコンテンツを無視するには:</para>
+
+				  <para><code>&lt;span translate=&quot;no&quot;&gt;This content
+				  is not translatable&lt;/span&gt;</code></para>
+
+				  <para> <literal>translate=no</literal>を使用する。</para>
+
+				  <para><code>translate=&quot;no&quot;</code>でマークされたすべてのタグは無視されます。</para>
+				</example>
+			  </listitem>
+			</varlistentry>
+		  </variablelist>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry>
+		<term>HTML ファイル・XHTML ファイル</term>
+		<listitem>
+		  <para>ここでは、XHTMLファイルのオプション(上記参照)で使用できないフィルターについてのみ説明します。</para>
+
+		  <variablelist>
+			<varlistentry>
+			  <term>エンコーディング宣言の変更</term>
+			  <listitem>
+				<para>文書のエンコーディングは通常、&lt;head&gt;要素内にある&lt;meta&gt;要素内で宣言されます。</para>
+
+				<para>原文ファイルと訳文ファイルでは、異なるエンコーディングが必要な場合があります。</para>
+
+				<para>ここで、訳文ファイルの宣言を追加するか変更するかを決定できます。</para>
+				
+				<itemizedlist>
+				  <listitem>
+					<para>通常どおり、フィルター設定において、</para>
+				  </listitem>
+
+				  <listitem>
+					<para>ファイルが既に&lt;head&gt;タグを持っている場合のみ。</para>
+				  </listitem>
+
+				  <listitem>
+					<para>ファイルに、既に宣言されている場合のみ。</para>
+				  </listitem>
+
+				  <listitem>
+					<para>ファイルフィルター設定で指定のエンコーディングを適用して、訳文ファイルを保存します。</para>
+				  </listitem>
+				</itemizedlist>
+			  </listitem>
+			</varlistentry>
+
+			<varlistentry>
+			  <term>訳文ファイルの空白圧縮</term>
+			  <listitem>
+				<para>タグの外側の空白文字は、HTML/XHTMLでは重要ではないと見なされます。</para>
+
+				<para>連続する空白文字がある場合、訳文ファイル生成時に空白文字一つだけに変換します。</para>
+			  </listitem>
+			</varlistentry>
+			<varlistentry>
+			  <term>HTML コメントを削除</term>
+			  <listitem>
+				<para>HTMLファイル中のコメントは、通常開発者むけのものです。この設定を使用して除去します。チェックを外すと、コメントはタグとして表示されます。</para>
+
+				<para>HTMLのコメント中のテキスト ( <literal>&lt;!--</literal> と <literal>--&gt;</literal>の間)は、訳文ファイルにコピーされません。</para>
+			  </listitem>
+			</varlistentry>
+		  </variablelist>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="file.filters.mozilla.ftl">
+		<term id="file.filters.mozilla.ftl.title">Mozilla FTL</term>
+		<listitem>
+		  <variablelist>
+			<varlistentry>
+			  <term>未翻訳分節を訳文ファイルに出力しない</term>
+			  <listitem>
+				<para>翻訳されたファイルに未翻訳コンテンツが含まれていると、互換性の問題が発生することがあります。</para>
+			  </listitem>
+			</varlistentry>
+		  </variablelist>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="file.filters.mozilla.dtd">
+		<term id="file.filters.mozilla.dtd.title">Mozilla DTD</term>
+		<listitem>
+		  <variablelist>
+			<varlistentry>
+			  <term>未翻訳分節を訳文ファイルに出力しない</term>
+			  <listitem>
+				  <para>翻訳されたファイルに未翻訳コンテンツが含まれていると、互換性の問題が発生することがあります。</para>
+			  </listitem>
+			</varlistentry>
+		  </variablelist>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="file.filters.po">
+		<term id="file.filters.po.title">PO ファイル</term>
+		<listitem>
+			<para>フィルターはデフォルトで、printf変数('%s'など)をチェックします。詳細は<link linkend="dialogs.preferences.tag.processing.programming.variables" endterm="dialogs.preferences.tag.processing.programming.variables.title"/>の設定を参照してください。</para>
+
+			<variablelist>
+			  <varlistentry>
+				<term>原文が空の分節を許可</term>
+				<listitem>
+				  <para>訳文の分節が提供されていない場合、常に原文のコンテンツを使用します。未翻訳の分節を空白のままにするには、この設定を使用します。</para>
+				</listitem>
+			  </varlistentry>
+			  
+			  <varlistentry>
+				<term>原文が空の分節を翻訳する</term>
+				<listitem>
+				  <para>空白の原文分節は、原文言語には存在しないが訳文言語で必要な要素のプレースホルダとして機能することがあります。この設定を使用すると、関連付けられたコメントに基づいて訳文を生成します。</para>
+				</listitem>
+			  </varlistentry>
+			  
+			  <varlistentry>
+				<term>PO ヘッダーを無視</term>
+				<listitem>
+				  <para>POヘッダーは、翻訳用には表示されません。</para>
+				</listitem>
+			  </varlistentry>
+
+			  <varlistentry>
+				<term>複数形指定を自動置換</term>
+				<listitem>
+				  <para>PO ファイルのヘッダーにある複数形指定を、訳文言語に合わせて自動変更します。</para>
+				</listitem>
+			  </varlistentry>
+
+			  <varlistentry>
+				<term>ファイル形式：</term>
+				<listitem>
+				  <variablelist>
+					<varlistentry>
+					  <term>通常版</term>
+					  <listitem>
+						<para>PO ファイルは、<literal>msgid</literal>を使用した原文と、<literal>msgstr</literal>に格納された訳文の両方を保持できるファイル形式です。</para>
+					  </listitem>
+					</varlistentry>
+					
+					<varlistentry>
+					  <term>モノリンガル</term>
+					  <listitem>
+						<para>PO ファイルは、<literal>msgid</literal>をIDコードとして使用し、<literal>msgstr</literal>を原文の場所と解釈して、<literal>msgstr</literal>に訳文を上書きします。</para>
+					  </listitem>
+					</varlistentry>
+				  </variablelist>
+				</listitem>
+			  </varlistentry>
+			</variablelist>
+		  </listitem>
+	  </varlistentry>
+
+	  <varlistentry id="file.filters.moodle.php">
+		<term id="file.filters.moodle.php.title">Moodle PHP</term>
+		<listitem>
+		  <variablelist>
+			<varlistentry>
+			  <term>未翻訳分節を訳文ファイルに出力しない</term>
+			  <listitem>
+				<para>翻訳されたファイルに未翻訳コンテンツが含まれていると、互換性の問題が発生することがあります。</para>
+			  </listitem>
+			</varlistentry>
+		  </variablelist>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="file.filter.java.bundle">
+		<term id="file.filter.java.bundle.title">Java リソースバンドル</term>
+		<listitem>
+			<para>デフォルトで、Java の MessageFormat パターン（{0} など）をチェックする。詳細は<link linkend="dialogs.preferences.tag.processing.programming.variables" endterm="dialogs.preferences.tag.processing.programming.variables.title"/>の設定を参照してください。</para>
+
+			<variablelist>
+			  <varlistentry>
+				<term>Java 8と互換のあるエスケープUnicodeリテラルの書き込みを強制する</term>
+				<listitem>
+				  <para>Java 8はISO-8859-1エンコーディングを必要とし、その文字セット以外の文字にはユニコードのエスケープシーケンスによる文字列を使用します。Java 9以降では、UTF-8エンコーディングが必要です。この設定はJava 8との互換性を強制します。</para>
+				</listitem>
+			  </varlistentry>
+
+			  <varlistentry>
+				<term>未翻訳分節を訳文ファイルに出力しない</term>
+				<listitem>
+				  <para>翻訳されたファイルに未翻訳コンテンツが含まれていると、互換性の問題が発生することがあります。</para>
+				</listitem>
+			  </varlistentry>
+
+			  <varlistentry>
+				<term>ユニコードのリテラル表記（\uXXXX）をエスケープ解除しない</term>
+				<listitem>
+				  <para>アプリケーションによっては、一部のUnicodeリテラルを保持する必要があります。この設定ではそれが可能です。</para>
+				</listitem>
+			  </varlistentry>
+			</variablelist>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="file.filters.odf">
+		<term id="file.filters.odf.title">OpenDocument Format (ODF) ファイル</term>
+		<listitem>
+		  <variablelist>
+			<varlistentry>
+			  <term>以下の要素を翻訳</term>
+			  <listitem>
+				<para>Index 項目、ブックマーク、ブックマーク参照、脚注、コメント、プレゼンテーションのノート、リンク（URL）、シート名</para>
+			  </listitem>
+			</varlistentry>
+		  </variablelist>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="file.filters.xliff">
+		<term id="file.filters.xliff.title">XLIFF(従来フィルター)</term>
+		<listitem>
+		  <warning>
+			<para>このフィルターは、従来のOmegaT XLIFFフィルターです。以前に、このフィルターで処理したファイルを含むプロジェクトとの互換性の問題を回避するときのみ、利用してください。</para>
+		  </warning>
+		  
+		  <para>
+			<variablelist>
+			  <varlistentry>
+				<term>OmegaT 2.6 互換モード</term>
+				<listitem>
+				  <para>OmegaT2.6で作成されたXLIFFファイルで作業する必要がある場合は、このOmegaTを有効にします。</para>
+				</listitem>
+			  </varlistentry>
+
+			  <varlistentry>
+				<term>複数訳文における「例外訳文」の識別子</term>
+				<listitem>
+				  <para>ユーザーは、3つのオプション、前の段落と次の段落、&lt;trans unit&gt;ID、または&lt;trans-unit&gt;resname属性(使用可能な場合)から選択できます。使用できない場合は、IDがフォールバックとして使用されます。</para>
+				</listitem>
+			  </varlistentry>
+			  
+			  <varlistentry>
+				<term>タグのショートカット</term>
+				<listitem>
+				  <para>これらの設定は、OmegaTがXLIFFコンテンツからタグを作成する方法を指定しています。</para>
+				</listitem>
+			  </varlistentry>
+
+			  <varlistentry>
+				<term>訳文分節のstatus属性設定</term>
+				<listitem>
+				  <para>チェックすると、XLIFFの&quot;target&quot;要素の&quot;status&quot;属性を「translated」ではなく「needs-review-translation」に変更します。</para>
+				</listitem>
+			  </varlistentry>
+			</variablelist>
+		  </para>
+		</listitem>
+	  </varlistentry>
+
+	</variablelist>
+  </section>
+</section>

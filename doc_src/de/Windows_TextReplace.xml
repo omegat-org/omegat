@@ -1,33 +1,221 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="windows.textreplace">
-  <title>Textersetzung</title>
+<section id="windows.text.replace">
+  <title id="windows.text.replace.title"><guilabel>Textersetzung</guilabel></title>
 
-  <para>Öffnen Sie das Suchen-und-Ersetzen-Fenster mit <keycombo> <keycap>Strg</keycap> <keycap>K</keycap> </keycombo> und geben Sie das Wort oder den Ausdruck, das/den Sie ersetzen möchten, in das Feld <emphasis>Suche nach</emphasis> ein.</para>
+  <para>Verwenden Sie <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.search.and.replace" endterm="menus.edit.search.and.replace.title"/>, um ein neues Ersetzungsfenster zu öffnen, und geben Sie das Wort oder die Wortgruppe, nach dem/der Sie suchen möchten, in das Suchfeld ein.</para>
+  
+  <para>Alternativ können Sie ein Wort oder eine Wortgruppe im <link linkend="panes.editor" endterm="panes.editor.title"/>-, <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/>- oder <link linkend="panes.glossary" endterm="panes.glossary.title"/>-Bereich markieren und <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.search.and.replace" endterm="menus.edit.search.and.replace.title"/> verwenden. Der markierte Text wird automatisch in das Suchfeld eingetragen.</para>
 
-  <para>Klicken Sie dann die Schaltfläche <emphasis>Suchen</emphasis>, um alle entsprechenden Vorkommen anzuzeigen.</para>
+  <para>Sie können mehrere Ersetzungsfenster gleichzeitig offen haben.</para>
 
-  <para>Geben Sie das neue Wort oder die neue Wortgruppe (reguläre Ausdrücke werden nicht unterstützt) in das Feld <emphasis>Ersetzen mit</emphasis> ein und klicken Sie dann auf eine der folgenden Schaltflächen:<itemizedlist>
-      <listitem>
-        <para><emphasis role="bold">Alle ersetzen:</emphasis> Führt eine Ersetzung aller Vorkommen durch (nach Anzeige eines Bestätigungsfensters mit der Anzahl der Vorkommen).</para>
-      </listitem>
-    </itemizedlist><itemizedlist>
-      <listitem>
-        <para><emphasis role="bold">Ersetzen:</emphasis> Führt eine schrittweise Ersetzung mithilfe von Schaltflächen am <emphasis role="bold">oberen Rand des Editorbereichs</emphasis> durch. Klicken Sie auf <emphasis>Nächstes Vorkommen ersetzen</emphasis> oder <emphasis>Überspringen</emphasis> und beenden Sie anschließend die Sitzung mit <emphasis>Beenden</emphasis>.</para>
-      </listitem>
-    </itemizedlist><itemizedlist>
-      <listitem>
-        <para><emphasis role="bold">Schließen:</emphasis> Schließen Sie das Fenster, ohne etwas zu ändern.</para>
-      </listitem>
-    </itemizedlist></para>
+  <para>Klicken Sie auf die Pfeilschaltfläche im Feld <guilabel>Suche nach:</guilabel> oder <guilabel>Ersetzen mit:</guilabel>, um die letzten zehn Einträge anzuzeigen.</para>
 
-  <section>
-    <title>Suchoptionen</title>
+  <para>Geben Sie die Zeichenkette, die Sie als Ersatz für Ihren Suchbegriff einfügen möchten, in das Feld <guilabel>Ersetzen mit:</guilabel> ein und klicken Sie auf <guibutton>Suchen</guibutton>, oder drücken Sie <keycap>Enter</keycap>, wenn sich der Textcursor noch im Feld befindet.</para>
 
-    <para>Die Suchoptionen sind nahezu identisch mit den Optionen des Dialogfensters <link linkend="windows.textsearch">Textsuche</link>.</para>
+  <para>Suchtreffer werden in blauer fetter Schrift dargestellt, und die modifizierten Zeichenketten werden in orange dargestellt, um das Ergebnis der Ersetzung anzuzeigen.</para>
 
-    <para>Mit einer Ausnahme: Aktivieren Sie <emphasis role="bold">Unübersetzt</emphasis>, um Suchen und Ersetzen auch auf Segmente anzuwenden, die noch nicht übersetzt wurden.</para>
 
-    <para>Um dies möglich zu machen (da Suchen und Ersetzen eigentlich nur im Speicher operiert), kopiert OmegaT den Quelltext des Segments in dessen Zieltext, bevor die Ersetzung stattfindet. Wenn für ein bestimmtes Segment keine Ersetzung vorgenommen wird, wird dessen Zieltext &quot;geleert&quot;, soll heißen, das Segment bleibt unübersetzt.</para>
+  <example id="replace.with.allemand">
+	<title id="replace.with.allemand.title">Einen Suchbegriff ersetzen</title>
+	<para>
+	  <programlisting>多和田葉子.UTF8
+-- 148&gt; | language = [[日本語]]・[[ドイツ語]]
+&lt;- | language = [[Japonais]]・[[<token>Alllemand</token>]]
+-&gt; | language = [[Japonais]]・[[<token>Allemand</token>]]
+---------</programlisting></para>
+  </example>
+  
+  <note>
+	<para>Zu diesem Zeitpunkt wurden noch nichts ersetzt.</para>
+  </note>
+
+  <para>Klicken Sie auf eine der folgenden Optionen:</para>
+
+  <itemizedlist>
+    <listitem>
+      <para><guibutton>Alle ersetzen</guibutton>: Ersetzt jedes Vorkommen (nach Anzeige eines Bestätigungsfensters mit der Anzahl der Vorkommen).</para>
+    </listitem>
+
+    <listitem>
+        <para><guibutton>Ersetzungen anzeigen</guibutton> filtert die Einträge im Editor und hebt die Textbereiche hervor, die ersetzt werden sollen.</para>
+		<para>Klicken Sie auf die Schaltfläche <guibutton>Ersetzen und Nächstes finden</guibutton> oder <guibutton>Nächstes finden</guibutton>, oder klicken Sie auf die Schaltfläche <guibutton>Beenden</guibutton>, um den Ersetzungsvorgang zu beenden.</para>
+    </listitem>
+  </itemizedlist>
+
+  <itemizedlist>
+    <listitem>
+      <para><guibutton>Schließen</guibutton>: Schließt das Fenster, ohne Änderungen vorzunehmen.</para>
+    </listitem>
+  </itemizedlist>
+
+  <para>Das Ersetzungsfenster hat seine eigenen Menüs:</para>
+ 
+  <itemizedlist>
+    <listitem>
+      <para><guimenu>Datei</guimenu> &gt; <guimenuitem>Markierten Text suchen</guimenuitem> (<keycombo><keycap>C</keycap><keycap>F</keycap></keycombo>): Fügt den aktuell markierten Text in das Suchfeld ein.</para>
+    </listitem>
+
+    <listitem>
+      <para><guimenu>Datei</guimenu> &gt; <guimenuitem>Schließen</guimenuitem> (<keycombo><keycap>C</keycap><keycap>W</keycap></keycombo>): Schließt das Suchfenster.</para>
+    </listitem>
+
+    <listitem>
+      <para><guimenu>Bearbeiten</guimenu> &gt; <guimenuitem>Quelle einfügen</guimenuitem> (<keycombo><keycap>C</keycap><keycap>S</keycap><keycap>I</keycap></keycombo>): Fügt den Quelltext des aktiven Segments ein.</para>
+    </listitem>
+
+    <listitem>
+      <para><guimenu>Bearbeiten</guimenu> &gt; <guimenuitem>Mit Quelle ersetzen</guimenuitem> (<keycombo><keycap>C</keycap><keycap>S</keycap><keycap>R</keycap></keycombo>): Ersetzt den Inhalt des Suchfelds mit dem Quelltext des aktiven Segments.</para>
+    </listitem>
+
+    <listitem>
+      <para><guimenu>Bearbeiten</guimenu> &gt; <guimenuitem>Glossareintrag erstellen</guimenuitem> (<keycombo><keycap>C</keycap><keycap>S</keycap><keycap>G</keycap></keycombo>): Fügt einen neuen Glossareintrag hinzu. Einzelheiten finden Sie unter <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.create.glossary.entry" endterm="menus.edit.create.glossary.entry.title"/>.</para>
+    </listitem>
+
+    <listitem>
+      <para><guimenu>Bearbeiten</guimenu> &gt; <guimenuitem>Optionen zurücksetzen</guimenuitem>: Setzt die Optionen des Suchfensters auf ihre Standardwerte zurück.</para>
+    </listitem>
+  </itemizedlist>
+
+  <section id="windows.text.replace.methods">
+    <title id="windows.text.replace.methods.title">Suchmethoden</title>
+
+    <para>Verwenden Sie die Radiobuttons, um die Art der Suche auszuwählen.</para>
+
+	<para>Folgende Suchmethoden stehen zur Verfügung:</para>
+
+    <variablelist>
+      <varlistentry id="windows.text.replace.methods.exact">
+        <term id="windows.text.replace.methods.exact.title">Exakte Suche</term>
+        <listitem>
+          <para>Nach einer Zeichenkette suchen, genau wie im Suchfeld angegeben.</para>
+
+		  <para>Das entspricht einer Websuche mit Anführungszeichen.</para>
+
+		  <note>
+			<para>Die Platzhalterzeichen <code>*</code> und <code>?</code> können für die exakte Suche verwendet werden:</para>
+
+			<itemizedlist>
+			  <listitem>
+				<para>'*' findet null oder mehr Zeichen, von der aktuellen Position bis zum Ende eines Wortes. Der Suchbegriff <literal>'run*'</literal> beispielsweise findet <literal>'run'</literal>, <literal>'runs'</literal> und <literal>'running'</literal>.</para>
+			  </listitem>
+
+			  <listitem>
+				<para>'?' findet ein beliebiges Zeichen. <literal>'run?'</literal> beispielsweise findet <literal>'runs'</literal>, aber auch den <literal>'runn'</literal>-Teil von <literal>'running'</literal> oder <literal>'runner'</literal>.</para>
+			  </listitem>
+			</itemizedlist>
+		  </note>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="windows.text.replace.methods.regex">
+        <term id="windows.text.replace.methods.regex.title">Reguläre Ausdrücke</term>
+        <listitem>
+          <para>Die Suchzeichenkette als einen regulären Ausdruck behandeln.</para>
+
+		  <para>Reguläre Ausdrücke sind eine äußerst effiziente Methode, um nach allgemeinen oder komplexen Mustern zu suchen, statt nach exakten Zeichenketten. Einzelheiten finden Sie unter <link linkend="app.regex" endterm="app.regex.title"/>.</para>
+
+		  <note>
+			<para>Das Ersetzungsfeld unterstützt sogenannte Rückreferenzen, die auf die gefundenen Texte von im Suchfeld definierten Gruppen verweisen. Verwenden Sie <code>$n</code> (wobei <code>n</code> eine Ziffer von 1 bis 9 ist) im Ersetzungsfeld, um auf die <code>n-te</code> Gruppe im Suchfeld zu verweisen.</para>
+		  </note>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </section>
+
+  <section id="windows.text.replace.options">
+	<title id="windows.text.replace.options.title">Optionen</title>
+	
+	<variablelist>
+	  <varlistentry>
+		<term>Groß-/Kleinschreibung beachten</term>
+		<listitem>
+		  <para>Zeigt nur Ergebnisse an, die dieselbe Groß-/Kleinschreibung wie die Suchbegriffe aufweisen.</para>
+		</listitem>
+	  </varlistentry>
+	
+	  <varlistentry>
+		<term>Leerzeichen findet nbsp</term>
+		<listitem>
+		  <para>Leerzeichen in Suchbegriffen finden sowohl normale Leerzeichen als auch geschützte Leerzeichen (\u00A).</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry>
+		<term>Unübersetzt</term>
+		<listitem>
+		  <para>Sucht auch in unübersetzten Segmenten.</para>
+		</listitem>
+	  </varlistentry>
+ 
+	  <varlistentry>
+		<term><guibutton>Erweiterte Optionen anzeigen</guibutton></term>
+		<listitem>
+		  <para>Wählen Sie zusätzliche Kriterien aus, wie z. B. die Person, die die Übersetzung erstellt oder geändert hat, das Datum und die Uhrzeit der Übersetzung (Modifikation) oder ob verwaiste Segmente ausgeschlossen werden sollen.</para>
+
+		  <variablelist>
+			<varlistentry>
+			  <term>Zeichen unabhängig von voller/halber Breite</term>
+			  <listitem>
+				<para>Zeigt Ergebnisse an, die sowohl mit den voll- als auch halbbreiten Formen (CJK-Zeichen) der Zeichen in den Suchbegriffen übereinstimmen.</para>
+			  </listitem>
+			</varlistentry>
+		  </variablelist>
+		  <para>Verwenden Sie die Schaltfläche <guibutton>Erweiterte Optionen verstecken</guibutton>, um die zusätzlichen Optionen auszublenden.</para>
+		</listitem>
+	  </varlistentry>
+	</variablelist>
+  </section>
+
+  <section id="windows.text.replace.result.display">
+    <title id="windows.text.replace.result.display.title">Ergebnisanzeige</title>
+
+    <para>Die Suchergebnisse werden entsprechend der Reihenfolge ihres Auftretens im Projekt angezeigt. Bei übersetzten Segmenten wird der Originaltext oberhalb des übersetzten Textes angezeigt. Bei unübersetzten Segmenten wird nur der Quelltext angezeigt.</para>
+
+	<para>Doppelklicken Sie auf ein Segment, um es im <link linkend="panes.editor" endterm="panes.editor.title"/>-Bereich zu öffnen.</para>
+
+    <para>Sie können in der Ergebnisanzeige die folgenden Tastenkürzel verwenden:</para>
+	
+	<variablelist>
+	  <varlistentry>
+		<term><keycombo><keycap>C</keycap><keycap>N</keycap></keycombo></term>
+		<listitem>
+		  <para>Springt zum nächsten Segment</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry>
+		<term><keycombo><keycap>C</keycap><keycap>P</keycap></keycombo></term>
+		<listitem>
+		  <para>Springt zum vorherigen Segment</para>
+		</listitem>
+
+	  </varlistentry>
+
+	  <varlistentry>
+		<term><keycombo><keycap>C</keycap><keycap>J</keycap></keycombo></term>
+		<listitem>
+		  <para>Springt zum aktuellen Segment im Editor</para>
+		</listitem>
+	  </varlistentry>
+	</variablelist>
+
+	<para>Das ausgewählte Segment wird grün hervorgehoben.</para>
+	
+	<variablelist>
+	  <varlistentry>
+		<term>Mit Editor auto-synchronisieren</term>
+		<listitem>
+		  <para>Der <link linkend="panes.editor" endterm="panes.editor.title"/>-Bereich synchronisiert seine Anzeige mit dem ausgewählten Suchergebnis.</para>
+		</listitem>
+	  </varlistentry>
+	  
+	  <varlistentry>
+		<term>Nach Beendigung zurück zum Anfangssegment</term>
+		<listitem>
+		  <para>Wenn Sie die Suchfenster schließen, kehrt der <link linkend="panes.editor" endterm="panes.editor.title"/>-Bereich automatisch zu dem Segment zurück, das er vor dem Start der Suche angezeigt hat.</para>
+		</listitem>
+	  </varlistentry>
+	</variablelist>
   </section>
 </section>

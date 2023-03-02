@@ -1,181 +1,334 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="windows.textsearch">
-  <title>Textsuche</title>
+<section id="windows.text.search">
+  <title id="windows.text.search.title"><guilabel>Textsuche</guilabel></title>
 
-  <para>Öffnen Sie das Suchfenster mit <keycombo> <keycap>Strg</keycap> <keycap>F</keycap> </keycombo> und geben Sie das Wort oder die Wortgruppe, nach dem/der Sie suchen möchten, in das Feld <emphasis>Suche nach</emphasis> ein.</para>
+  <para>Verwenden Sie <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.search.project" endterm="menus.edit.search.project.title"/>, um ein neues Suchfenster zu öffnen, und geben Sie das Wort oder die Wortgruppe, nach dem/der Sie suchen möchten, in das Suchfeld ein.</para>
+  
+  <para>Sie können mehrere Suchfenster gleichzeitig offen haben. Drücken Sie <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>F</keycap></keycombo>, um das aktuellste Suchfenster wiederzuverwenden.</para>
 
-  <para>Alternativ können Sie ein Wort oder eine Wortgruppe im Editor-, Fuzzy-Matches- oder Glossarbereich markieren und <keycombo> <keycap>Strg</keycap> <keycap>F</keycap> </keycombo> drücken. Das Wort oder die Wortgruppe wird automatisch in das Feld <emphasis>Suche nach</emphasis> eingefügt. Sie können mehrere Suchfenster gleichzeitig geöffnet haben, aber es ist ratsam, diese wieder zu schließen, sobald sie nicht mehr benötigt werden, um den Desktop übersichtlich zu halten.</para>
+  <para>Alternativ können Sie ein Wort oder eine Wortgruppe im <link linkend="panes.editor" endterm="panes.editor.title"/>-, <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/>- oder <link linkend="panes.glossary" endterm="panes.glossary.title"/>-Bereich markieren und <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.search.project" endterm="menus.edit.search.project.title"/> verwenden. Der markierte Text wird automatisch in das Suchfeld eingetragen.</para>
 
-  <para>Klicken Sie auf die Pfeilschaltfläche im Feld <emphasis>Suche nach</emphasis>, um die letzten 10 verwendeten Suchbegriffe anzuzeigen.</para>
+
+  <para>Klicken Sie auf die Pfeilschaltfläche im Feld <guilabel>Suche nach:</guilabel>, um die letzten zehn Suchvorgänge anzuzeigen.</para>
+
+  <para>Klicken Sie auf <guibutton>Suchen</guibutton>, oder drücken Sie <keycap>Enter</keycap>, wenn das Suchfeld ausgewählt ist, um die Suche zu starten.</para>
+  
+  <para>Gefundene Elemente werden in fetter blauer Schrift dargestellt.</para>
+
+  <example id="search.for.doitsu">
+	<title id="search.for.doitsu.title">Nach ドイツ suchen</title>
+	<para>
+	  <programlisting>-- 148&gt; | language = [[日本語]]・[[<token>ドイツ</token>語]]
+---------
+-- 177&gt; [[2001年]]、<token>ドイツ</token>の永住権を取得。
+---------</programlisting>
+	</para>
+  </example>
 
   <para>Das Suchfenster hat seine eigenen Menüs:</para>
 
   <itemizedlist>
     <listitem>
-      <para>Datei &gt; Markierten Text suchen (<keycombo> <keycap>Strg</keycap> <keycap>F</keycap> </keycombo>): Setzt den Eingabefokus auf das Suchfeld, fügt den markierten Text ein und markiert den gesamten Inhalt des Felds.</para>
+      <para><guimenu>Datei</guimenu> &gt; <guimenuitem>Markierten Text suchen</guimenuitem> (<keycombo><keycap>C</keycap><keycap>F</keycap></keycombo>): Fügt den aktuell markierten Text in das Suchfeld ein.</para>
     </listitem>
 
     <listitem>
-      <para>Datei &gt; Schließen (<keycombo> <keycap>Strg</keycap> <keycap>W</keycap> </keycombo>): Schließt das Suchfenster (auf dieselbe Weise wie <keycap>Esc</keycap>)</para>
+      <para><guimenu>Datei</guimenu> &gt; <guimenuitem>Schließen</guimenuitem> (<keycombo><keycap>C</keycap><keycap>W</keycap></keycombo>): Schließt das Suchfenster.</para>
     </listitem>
 
     <listitem>
-      <para>Bearbeiten &gt; Quelle einfügen (<keycombo> <keycap>Strg</keycap> <keycap>Umschalt</keycap> <keycap>I</keycap> </keycombo>): Fügt den Quelltext des aktiven Segments in das Suchfeld ein.</para>
+      <para><guimenu>Bearbeiten</guimenu> &gt; <guimenuitem>Quelle einfügen</guimenuitem> (<keycombo><keycap>C</keycap><keycap>S</keycap><keycap>I</keycap></keycombo>): Fügt den Quelltext des aktiven Segments ein.</para>
     </listitem>
 
     <listitem>
-      <para>Bearbeiten &gt; Mit Quelle ersetzen (<keycombo> <keycap>Strg</keycap> <keycap>Umschalt</keycap> <keycap>R</keycap> </keycombo>): Ersetzt den Inhalt des Suchfelds mit dem Quelltext des aktiven Segments.</para>
+      <para><guimenu>Bearbeiten</guimenu> &gt; <guimenuitem>Mit Quelle ersetzen</guimenuitem> (<keycombo><keycap>C</keycap><keycap>S</keycap><keycap>R</keycap></keycombo>): Ersetzt den Inhalt des Suchfelds mit dem Quelltext des aktiven Segments.</para>
     </listitem>
 
     <listitem>
-      <para>Bearbeiten &gt; Glossareintrag erstellen (<keycombo> <keycap>Strg</keycap> <keycap>Umschalt</keycap> <keycap>G</keycap> </keycombo>): Fügt einen neuen Glossareintrag hinzu.</para>
+      <para><guimenu>Bearbeiten</guimenu> &gt; <guimenuitem>Glossareintrag erstellen</guimenuitem> (<keycombo><keycap>C</keycap><keycap>S</keycap><keycap>G</keycap></keycombo>): Fügt einen neuen Glossareintrag hinzu. Einzelheiten finden Sie unter <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.create.glossary.entry" endterm="menus.edit.create.glossary.entry.title"/>.</para>
+    </listitem>
+
+    <listitem>
+      <para><guimenu>Bearbeiten</guimenu> &gt; <guimenuitem>Optionen zurücksetzen</guimenuitem>: Setzt die Optionen des Suchfensters auf ihre Standardwerte zurück.</para>
     </listitem>
   </itemizedlist>
 
-  <section id="using.wild.cards">
-    <title>Platzhalterzeichen verwenden</title>
+  <section id="windows.text.search.methods">
+    <title id="windows.text.search.methods.title">Suchmethoden</title>
 
-    <para>Sowohl bei der exakten Suche als auch bei der Stichwortsuche können die Platzhalterzeichen '*' und '?' verwendet werden. Ihre Bedeutung dürfte den meisten Word-Benutzern vertraut sein:</para>
+    <para>Verwenden Sie die Radiobuttons, um die Art der Suche auszuwählen.</para>
 
-    <itemizedlist>
-      <listitem>
-        <para>'*' findet null oder mehr Zeichen, von der aktuellen Position in einem bestimmten Wort bis zu dessen Ende. Der Suchbegriff <literal>'run*'</literal> beispielsweise würde die Wörter <literal>'run'</literal>, <literal>'runs'</literal> und <literal>'running'</literal> finden.</para>
-      </listitem>
-    </itemizedlist>
-
-    <itemizedlist>
-      <listitem>
-        <para>'?' findet ein beliebiges Zeichen. <literal>'run?'</literal> beispielsweise würde das Wort <literal>'runs'</literal> finden, und <literal>'runn'</literal> im Wort <literal>'running'</literal>.</para>
-      </listitem>
-    </itemizedlist>
-
-    <para>Gefundene Elemente werden in fetter blauer Schrift dargestellt. Beachten Sie, dass '*' und '?' in regulären Ausdrücken eine besondere Bedeutung haben, darum kann die Platzhaltersuche, wie hier beschrieben, nur für die exakte Suche und die Stichwortsuche verwendet werden (siehe unten).</para>
-  </section>
-
-  <section id="search.methoids">
-    <title>Suchmethoden und -optionen</title>
-
-    <para>Wählen Sie die Methode mithilfe der Radiobuttons aus. Folgende Suchmethoden stehen zur Verfügung:</para>
+	<para>Folgende Suchmethoden stehen zur Verfügung:</para>
 
     <variablelist>
-      <varlistentry>
-        <term>Exakte Suche</term>
-
+      <varlistentry id="windows.text.search.methods.exact">
+        <term id="windows.text.search.methods.exact.title">Exakte Suche</term>
         <listitem>
-          <para>Suchen Sie nach Segmenten, die exakt die von Ihnen angegebene Zeichenkette enthalten. Wenn mehrere Wörter angegeben sind, werden sie nur in genau dieser Reihenfolge gefunden. Sucht man zum Beispiel nach <literal>open file</literal>, werden alle Vorkommen der Zeichenkette <emphasis><literal>open file</literal></emphasis> gefunden, aber nicht <emphasis><literal>file opened</literal></emphasis> oder <emphasis><literal>open input file</literal></emphasis>.</para>
+          <para>Nach einer Zeichenkette suchen, genau wie im Suchfeld angegeben.</para>
+
+		  <para>Das entspricht einer Websuche mit Anführungszeichen.</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry>
-        <term>Stichwortsuche</term>
-
+      <varlistentry id="windows.text.search.methods.keyword">
+        <term id="windows.text.search.methods.keyword.title">Stichwortsuche</term>
         <listitem>
-          <para>Suchen Sie nach Segmenten, die alle von Ihnen angegebenen Stichwörter, in beliebiger Reihenfolge, enthalten. Wählen Sie die Stichwortsuche, um nach einer beliebigen Anzahl von einzelnen vollständigen Wörtern in beliebiger Reihenfolge zu suchen. OmegaT zeigt eine Liste mit allen Segmenten an, die die angegebenen Wörter enthalten. Die Stichwortsuche entspricht einer Suche &quot;mit allen Wörtern&quot; in einer Internet-Suchmaschine wie Google (UND-Logik). Sucht man mit der Stichwortsuche zum Beispiel nach <emphasis><literal>open file</literal></emphasis>, werden alle Vorkommen der Zeichenkette <emphasis><literal>open file</literal></emphasis> gefunden, einschließlich <emphasis><literal>file opened</literal>, <literal>open input file</literal>, <literal>file may not be safe to open</literal></emphasis>, usw.</para>
+          <para>Nach Segmenten suchen, die jeden der angegebenen Suchbegriffe, die mit Leerzeichen voneinander getrennt sind, enthalten.</para>
+
+		  <para>Das entspricht einer Websuche ohne Anführungszeichen.</para>
+
+		  <note>
+			<para>Die Platzhalterzeichen <code>*</code> und <code>?</code> können sowohl für die exakte Suche als auch Stichwortsuche verwendet werden:</para>
+
+			<itemizedlist>
+			  <listitem>
+				<para><code>*</code> findet null oder mehr Zeichen, von der aktuellen Position bis zum Ende eines Wortes.</para>
+
+				<para>Der Suchbegriff <literal>run*</literal> beispielsweise findet <literal>run</literal>, <literal>runs</literal> und <literal>running</literal>.</para>
+			  </listitem>
+			</itemizedlist>
+
+			<itemizedlist>
+			  <listitem>
+				<para><code>?</code> findet ein beliebiges Zeichen.</para>
+
+				<para><literal>run?</literal> beispielsweise findet <literal>runs</literal>, aber auch den <literal>runn</literal>-Teil von <literal>running</literal> oder <literal>runner</literal>.</para>
+			  </listitem>
+			</itemizedlist>
+		  </note>
         </listitem>
       </varlistentry>
+	</variablelist>
 
-      <varlistentry>
-        <term><emphasis role="bold">Reguläre Ausdrücke</emphasis></term>
-
+	<variablelist>
+      <varlistentry id="windows.text.search.methods.regex">
+        <term id="windows.text.search.methods.regex.title">Reguläre Ausdrücke</term>
         <listitem>
-          <para>Der Suchbegriff wird als regulärer Ausdruck behandelt. Der Suchbegriff - [a-zA-Z]+[öäüß] - im obigen Beispiel sucht z. B. nach Wörtern im Zieltext des Segments, die Umlaute der deutschen Sprache enthalten. <link linkend="appendix.regexp">Reguläre Ausdrücke</link> sind eine wirkungsvolle Methode, um nach Instanzen einer Zeichenkette zu suchen.</para>
+          <para>Die Suchzeichenkette als einen regulären Ausdruck behandeln.</para>
+		  <para>Reguläre Ausdrücke sind eine äußerst effiziente Methode, um nach allgemeinen oder komplexen Mustern zu suchen, statt nach exakten Zeichenketten. Einzelheiten finden Sie unter <link linkend="app.regex" endterm="app.regex.title"/>.</para>
+
+		  <warning>
+			<para>Die Zeichen <code>*</code> und <code>?</code> haben eine andere Bedeutung in regulären Ausdrücken. Daher gelten die oben genannten Platzhalterzeichen nur für die exakte Suche und die Stichwortsuche.</para>
+		  </warning>
         </listitem>
       </varlistentry>
     </variablelist>
-
-    <para>Zusätzlich zu den obigen Methoden können Sie Folgendes auswählen:</para>
-
-    <itemizedlist>
-      <listitem>
-        <para><emphasis role="bold">Groß-/Kleinschreibung beachten</emphasis>: Es wird genau nach der angegebenen Zeichenkette gesucht; das heißt, dass die Groß- und Kleinschreibung von Bedeutung ist.</para>
-      </listitem>
-
-      <listitem>
-        <para><emphasis role="bold">Leerzeichen findet nbsp</emphasis>: Wenn aktiviert, findet ein im Suchfeld eingegebenes Leerzeichen sowohl ein normales als auch ein geschütztes Leerzeichen (\u00A).</para>
-      </listitem>
-
-      <listitem>
-        <para><emphasis role="bold">In Quelltexten:</emphasis> In den Quelltexten der Segmente suchen.</para>
-      </listitem>
-
-      <listitem>
-        <para><emphasis role="bold">In Übersetzungen:</emphasis> In den Zieltexten der Segmente suchen.</para>
-      </listitem>
-
-      <listitem>
-        <para><emphasis role="bold">In Notizen:</emphasis> In den Notizen der Segmente suchen.</para>
-      </listitem>
-
-      <listitem>
-        <para><emphasis role="bold">In Kommentaren:</emphasis> In den Kommentaren der Segmente suchen.</para>
-      </listitem>
-
-      <listitem>
-        <para><emphasis role="bold">Übersetzt oder unübersetzt:</emphasis> Sowohl in übersetzten als auch in unübersetzten Segmenten suchen.</para>
-      </listitem>
-
-      <listitem>
-        <para><emphasis role="bold">Übersetzt:</emphasis> Nur in übersetzten Segmenten suchen.</para>
-      </listitem>
-
-      <listitem>
-        <para><emphasis role="bold">Unübersetzt:</emphasis> Nur in unübersetzten Segmenten suchen.</para>
-      </listitem>
-
-      <listitem>
-        <para><emphasis role="bold">Zeige: alle gefundenen Segmente:</emphasis> Wenn aktiviert, werden alle Segmente einmalig angezeigt, selbst wenn sie mehrfach im selben Dokument oder in verschiedenen Dokumenten vorhanden sind.</para>
-      </listitem>
-
-      <listitem>
-        <para><emphasis role="bold">Zeige: Dateinamen:</emphasis> Wenn aktiviert, wird der Name der Datei, in der das jeweilige Segment gefunden wurde, über jedem Suchergebnis angezeigt.</para>
-      </listitem>
-
-      <listitem>
-        <para><emphasis role="bold">Suche in Projekt:</emphasis> Aktivieren Sie <emphasis>Speicher</emphasis>, um das Translation Memory des Projekts (die Datei project_save.tmx) in die Suche einzubeziehen. Aktivieren Sie <emphasis>TMs</emphasis>, um die Translation Memories im <filename>tm</filename>-Ordner in die Suche einzubeziehen. Aktivieren Sie <emphasis>Glossare</emphasis>, um die Glossare im <filename>glossary</filename>-Ordner in die Suche einzubeziehen.</para>
-      </listitem>
-
-      <listitem>
-        <para><emphasis role="bold">Suche in Dateien:</emphasis> In einer einzelnen Datei oder einem Ordner, der einen Satz von Dateien enthält, suchen. Beim Durchsuchen von Dateien (im Gegensatz zu Translation Memories) beschränkt OmegaT die Suche auf Dateien in Quelldateiformaten. Obwohl OmegaT also durchaus in der Lage ist, mit <filename>.tmx</filename>-Dateien umzugehen, werden diese nicht in die Suche nach Dateien einbezogen.</para>
-      </listitem>
-    </itemizedlist>
-
-    <para>Wenn Sie auf die Schaltfläche <guibutton>Erweiterte Optionen</guibutton> klicken, können zusätzliche Kriterien (Autor bzw. Übersetzer, Übersetzungsdatum, verwaiste Segmente ausschließen, usw.) aktiviert werden. Wenn die Option <emphasis>Zeichen unabhängig von voller/halber Breite)</emphasis> aktiviert ist, werden bei der Suche nach vollbreiten Formen (chinesische, japanische und koreanische Schriftzeichen) auch halbbreite Zeichen gefunden und umgekehrt.</para>
   </section>
 
-  <section id="search.result.display">
-    <title>Anzeige der Suchergebnisse</title>
+  <section id="windows.text.search.options">
+	<title id="windows.text.search.options.title">Optionen</title>
+	
+	<variablelist>
+	  <varlistentry>
+		<term>Groß-/Kleinschreibung beachten</term>
+		<listitem>
+		  <para>Zeigt nur Ergebnisse an, die dieselbe Groß-/Kleinschreibung wie die Suchbegriffe aufweisen.</para>
+		</listitem>
+	  </varlistentry>
+	  
+	  <varlistentry>
+		<term>Leerzeichen findet nbsp</term>
+		<listitem>
+		  <para>Leerzeichen in Suchbegriffen finden sowohl normale Leerzeichen als auch geschützte Leerzeichen (\u00A).</para>
+		</listitem>
+	  </varlistentry>
 
-    <para>Wenn Sie nach der Eingabe einer Zeichenkette in das Suchfeld auf die Suchen-Schaltfläche klicken, werden alle Segmente im Projekt angezeigt, die die eingegebene Zeichenkette enthalten. Da <application>OmegaT</application> alle identischen Segmente als eine Einheit behandelt, wird nur das erste einmalige Segment angezeigt. Die Segmente werden in der Reihenfolge ihrer Erscheinung innerhalb des Projektes angezeigt. Für übersetzte Segmente wird sowohl der Quell- als auch Zieltext angezeigt, während für unübersetzte Segmente nur der Quelltext angezeigt wird.</para>
+	  <varlistentry>
+		<term>In Quelltexten</term>
+		<listitem>
+		  <para>In den Quelltexten der Segmente suchen.</para>
+		</listitem>
+	  </varlistentry>
 
-    <para>Doppelklicken Sie auf ein Segment, um es im Editor für die Bearbeitung zu öffnen (ein einziger Klick genügt, wenn die Option <emphasis role="bold">Mit Editor auto-synchronisieren</emphasis> aktiviert ist). Sie können dann zum Suchfenster zurückkehren, um das nächste gefundene Segment abzuarbeiten, z. B. um dessen Terminologie zu überprüfen und ggf. zu korrigieren.</para>
+	  <varlistentry>
+		<term>In Übersetzungen</term>
+		<listitem>
+		  <para>In den Zieltexten der Segmente suchen.</para>
+		</listitem>
+	  </varlistentry>
 
-    <para>Im Suchfenster können Sie vordefinierte Tastaturkurzbefehle (<keycombo> <keycap>Strg</keycap> <keycap>N</keycap> </keycombo>, <keycombo> <keycap>Strg</keycap> <keycap>P</keycap> </keycombo>) verwenden, um von einem Segment zum anderen zu wechseln.</para>
+	  <varlistentry>
+		<term>In Notizen</term>
+		<listitem>
+		  <para>In den Notizen der Segmente suchen, sofern vorhanden.</para>
+		</listitem>
+	  </varlistentry>
 
-    <para>Sie können mehrere Suchfenster gleichzeitig geöffnet haben. Sie können ihren Inhalt schnell durch einen Blick auf den Titel erkennen: Er enthält den verwendeten Suchbegriff.</para>
+	  <varlistentry>
+		<term>In Kommentaren</term>
+		<listitem>
+		  <para>In den Kommentaren der Segmente suchen, sofern vorhanden.</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry>
+		<term>Übersetzt oder unübersetzt</term>
+		<listitem>
+		  <para>Sowohl in übersetzten als auch in unübersetzten Segmenten suchen.</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry>
+		<term>Übersetzt</term>
+		<listitem>
+		  <para>Nur in übersetzten Segmenten suchen.</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry>
+		<term>Unübersetzt</term>
+		<listitem>
+		  <para>Nur in unübersetzten Segmenten suchen.</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry>
+		<term>Zeige: alle gefundenen Segmente</term>
+		<listitem>
+		  <para>Jedes Segment wird einzeln angezeigt, auch mehrmalig vorkommende, entweder im selben Dokument oder in einem anderen Dokument des Projekts.</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry>
+		<term>Zeige: Dateinamen</term>
+		<listitem>
+		  <para>Der Name der Datei, in der das jeweilige Segment gefunden wurde, wird über jedem Ergebnis angezeigt.</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry>
+		<term>Suche in: Projekt</term>
+		<listitem>
+		  <para>In den verschiedenen zweisprachigen Ressourcen des Projekts suchen.</para>
+
+		  <para>Wählen Sie den Suchbereich aus:</para>
+		  
+		  <variablelist>
+			<varlistentry>
+			  <term>Speicher</term>
+			  <listitem>
+				<para>Projekteigenen Translation Memory einbeziehen (<link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/>).</para>
+			  </listitem>
+			</varlistentry>
+
+			<varlistentry>
+			  <term>TMs</term>
+			  <listitem>
+				<para>Externe Translation Memories im <link linkend="project.folder.tm" endterm="project.folder.tm.title"/>-Ordner einbeziehen.</para>
+			  </listitem>
+			</varlistentry>
+
+			<varlistentry>
+			  <term>Glossare</term>
+			  <listitem>
+				<para>Die Glossare im <link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/>-Ordner einbeziehen.</para>
+			  </listitem>
+			</varlistentry>
+		  </variablelist>
+		</listitem>
+	  </varlistentry>
+	  
+	  <varlistentry>
+		<term>Suche in: Dateien</term>
+		<listitem>
+		  <para>In Referenzdateien suchen, die nicht in den Projektressourcen enthalten sind.</para>
+
+		  <para>OmegaT kann in jeder Datei suchen, die es als Quelldatei lesen kann. Einzelheiten finden Sie unter <link linkend="file.filters" endterm="file.filters.title"/>.</para>
+
+		  <para>TMX-Dateien sind von der Dateisuche ausgeschlossen, da OmegaT sie nicht als Quelldateiformat erkennt, sondern als Translation Memories behandelt.</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry>
+		<term><guibutton>Erweiterte Optionen anzeigen</guibutton></term>
+		<listitem>
+		  <para>Wählen Sie zusätzliche Kriterien aus, wie z. B. die Person, die die Übersetzung erstellt oder geändert hat, das Datum und die Uhrzeit der Übersetzung (Modifikation) oder ob verwaiste Segmente ausgeschlossen werden sollen.</para>
+
+		  <variablelist>
+			<varlistentry>
+			  <term>Zeichen unabhängig von voller/halber Breite</term>
+			  <listitem>
+				<para>Zeigt Ergebnisse an, die sowohl mit den voll- als auch halbbreiten Formen (CJK-Zeichen) der Zeichen in den Suchbegriffen übereinstimmen.</para>
+			  </listitem>
+			</varlistentry>
+
+			<varlistentry>
+			  <term>Trefferanzahl limitieren auf</term>
+			  <listitem>
+				<para>Begrenzt die Anzahl der Ergebnisse in der Ergebnisanzeige.</para>
+			  </listitem>
+			</varlistentry>
+		  </variablelist>
+
+		  <para>Verwenden Sie die Schaltfläche <guibutton>Erweiterte Optionen verstecken</guibutton>, um die zusätzlichen Optionen auszublenden.</para>
+		</listitem>
+	  </varlistentry>
+	</variablelist>
   </section>
 
-  <section id="search.filter">
-    <title>Segmente im Editor gemäß der aktuellen Suche filtern</title>
+  <section id="windows.text.search.result.display">
+    <title id="windows.text.search.result.display.title">Ergebnisanzeige</title>
 
-    <para>Um die Navigation in den Suchergebnissen zu erleichtern, können Sie die Suche auf den Editor anwenden. Drücken Sie die Schaltfläche <emphasis role="bold">Filtern</emphasis> am unteren Rand des Suchfensters, um die Segmente im Editorbereich auf die Ergebnisse der aktuellen Suche zu beschränken. Sie können die normale Navigation verwenden, um z. B. zum nächsten (unübersetzten) Segment zu wechseln, das den Suchkriterien entspricht.</para>
+    <para>Die Suchergebnisse werden entsprechend der Reihenfolge ihres Auftretens im Projekt angezeigt. Bei übersetzten Segmenten wird der Originaltext oberhalb des übersetzten Textes angezeigt. Bei unübersetzten Segmenten wird nur der Quelltext angezeigt.</para>
 
-    <para>Hinweis:</para>
+    <para>Doppelklicken Sie auf ein Segment, um es im <link linkend="panes.editor" endterm="panes.editor.title"/>-Bereich zu öffnen.</para>
 
-    <itemizedlist>
-      <listitem>
-        <para>Eine Suche kann auf 1000 Elemente begrenzt sein. Wenn Sie also nach einem geläufigen Begriff suchen, zeigt der Editor nicht mehr alle gefundenen Elemente an, sondern nur noch 1000 Elemente.</para>
-      </listitem>
+    <para>Sie können in der Ergebnisanzeige die folgenden Tastenkürzel verwenden:</para>
+	
+	<variablelist>
+	  <varlistentry>
+		<term><keycombo><keycap>C</keycap><keycap>N</keycap></keycombo></term>
+		<listitem>
+		  <para>Springt zum nächsten Segment</para>
+		</listitem>
+	  </varlistentry>
+	  
+	  <varlistentry>
+		<term><keycombo><keycap>C</keycap><keycap>P</keycap></keycombo></term>
+		<listitem>
+		  <para>Springt zum vorherigen Segment</para>
+		</listitem>
+	  </varlistentry>
+	  <varlistentry>
+		<term><keycombo><keycap>C</keycap><keycap>J</keycap></keycombo></term>
+		<listitem>
+		  <para>Springt zum aktuellen Segment im Editor</para>
+		</listitem>
+	  </varlistentry>
+	</variablelist>
+	
+	<para>Das ausgewählte Segment wird grün hervorgehoben:</para>
 
-      <listitem>
-        <para>Es kann vorkommen, dass eine Datei keine übereinstimmenden Elemente enthält und demzufolge leer sein wird.</para>
-      </listitem>
+  	<example id="select.second.match">
+	  <title id="select.second.match.title">Das zweite Ergebnis auswählen</title>
+	  <para>
+		<programlisting>-- 148&gt; | language = [[日本語]]・[[<token>ドイツ</token>語]]
+---------
+<action>-- 177&gt; [[2001年]]、<token>ドイツ</token>の永住権を取得。</action>
+---------</programlisting>
+	  </para>
+	</example>
 
-      <listitem>
-        <para>Wenn eine Suche Duplikate ausschließt, werden diese Duplikate nicht im Editor angezeigt.</para>
-      </listitem>
-    </itemizedlist>
+	<variablelist>
+	  <varlistentry>
+		<term>Mit Editor auto-synchronisieren</term>
+		<listitem>
+		  <para>Der <link linkend="panes.editor" endterm="panes.editor.title"/>-Bereich synchronisiert seine Anzeige mit dem ausgewählten Suchergebnis.</para>
+		</listitem>
+	  </varlistentry>
+	  <varlistentry>
+		<term>Nach Beendigung zurück zum Anfangssegment</term>
+		<listitem>
+		  <para>Wenn Sie die Suchfenster schließen, kehrt der <link linkend="panes.editor" endterm="panes.editor.title"/>-Bereich automatisch zu dem Segment zurück, das er vor dem Start der Suche angezeigt hat.</para>
+		</listitem>
+	  </varlistentry>
+	</variablelist>
+  </section>
+  
+  <section id="windows.text.search.filter">
+    <title id="windows.text.search.filter.title">Filter</title>
 
-    <para>Um den Filter wieder zu entfernen, drücken Sie die Schaltfläche <emphasis role="bold">Filter entfernen</emphasis> oder laden Sie das Projekt neu.</para>
+	<para>Klicken Sie auf die <guibutton>Filter</guibutton>-Schaltfläche, um nur die gefundenen Segmente im <link linkend="panes.editor" endterm="panes.editor.title"/>-Bereich anzuzeigen. Um den Filter wieder zu entfernen, klicken Sie oben im <link linkend="panes.editor" endterm="panes.editor.title"/>-Bereich auf die Schaltfläche <guibutton>Filter entfernen</guibutton> oder laden Sie das Projekt neu.</para>
   </section>
 </section>

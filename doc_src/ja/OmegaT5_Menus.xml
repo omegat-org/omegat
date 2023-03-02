@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.menus">
+  <title id="chapter.menus.title">メニュー</title>
+
+  	<para>OmegaTは、ボタンベースのインターフェースに慣れている人には、完全に駄目とは言わないまでも、少し難しくに見えるかもしれません。ほとんどのアクションは、メニュー項目に関連付けられたショートカットを使用して実行されます。</para>
+
+	<para>このマニュアルには、ショートカットの解説が豊富に用意されているので、通常の翻訳作業に役立つショートカットをすぐに覚えられるはずです。</para>
+
+	<para>OmegaTのほとんどの機能は、メニューからアクセスできます。ほとんどのメニュー項目にキーボードショートカットが割り当てられています。</para>
+
+	<para>デフォルトで割り当てのないメインメニューのほとんどの項目に、新しいショートカットを割り当てることができます。ショートカットを変更または追加する場合は、付録<link linkend="app.shortcuts.customization" endterm="app.shortcuts.customization.title"/>を参照してください。</para>
+
+  <note><para>キーボードショートカットの説明上の注意：<table id="menus.shortcut.description">
+      <title id="menus.shortcut.description.title">修飾キー識別子</title>
+
+      <tgroup cols="3">
+        <thead>
+          <row>
+            <entry>Linux/Windows</entry>
+            <entry>キー識別子</entry>
+            <entry>macOS</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry><keycap>Shift</keycap></entry>
+            <entry><keycap>S</keycap></entry>
+            <entry><keycap>shift</keycap> または <keycap>⇧</keycap></entry>
+          </row>
+
+          <row>
+            <entry><keycap>Ctrl</keycap> or <keycap>Control</keycap></entry>
+            <entry><keycap>C</keycap></entry>
+            <entry><keycap>command</keycap> または <keycap>⌘</keycap></entry>
+          </row>
+
+          <row>
+            <entry><keycap>Alt</keycap></entry>
+            <entry><keycap>A</keycap></entry>
+            <entry><keycap>alt / option</keycap> または <keycap>⌥</keycap></entry>
+          </row>
+
+          <row>
+            <entry/>
+            <entry><keycap>Ctrl</keycap></entry>
+            <entry><keycap>control</keycap> または <keycap>⌃</keycap></entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table></para>
+  </note>
+
+  <xi:include href="Menus_Project.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+  
+  <xi:include href="Menus_Edit.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+  <xi:include href="Menus_GoTo.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+  <xi:include href="Menus_View.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+  <xi:include href="Menus_Tools.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+  <xi:include href="Menus_Options.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+  <xi:include href="Menus_Help.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+</chapter>

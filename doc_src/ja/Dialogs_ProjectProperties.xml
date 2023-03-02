@@ -1,117 +1,415 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="dialogs.projectproperties">
-  <title>プロジェクト設定</title>
+<section id="dialogs.project.properties">
+  <title id="dialogs.project.properties.title"><guilabel>プロジェクト設定</guilabel></title>
 
-  <para>このダイアログボックスにアクセスするには、<menuchoice><guimenuitem>[プロジェクト]</guimenuitem><guimenuitem>[プロジェクト設定...]</guimenuitem></menuchoice>を選択します。</para>
+  <para><link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.properties" endterm="menus.project.properties.title"/> からダイアログを開きます。</para>
+  
+  <para>ダイアログは、新しいプロジェクトを作成するときに最初のプロジェクト設定のために使用されます。また、プロジェクトが作成された後で、修正するためにも使用されます。</para>
 
-  <section>
-    <title>言語設定</title>
+  <para>詳細については-<link linkend="introduction.create.and.open.new.project" endterm="introduction.create.and.open.new.project.title"/>を参照してください。</para>
+  
 
-    <para>原文言語と訳文言語は、リストから選択するか、または直接入力で指定します。もし翻訳途中で言語設定を変更すると、変更前後の言語間で一致が取れなくなり、翻訳メモリが使い物にならなくなることがあるので注意してください。</para>
+  <section id="dialogs.project.properties.languages">
+    <title id="dialogs.project.properties.languages.title"><guilabel>言語設定</guilabel></title>
 
-    <para>トークナイザーは、選択した言語に対応するものが表示されます。</para>
+    <para>ドロップダウンの一覧から原文言語と訳文言語を選択するか、手動で入力します。</para>
+
+	<para>OmegaTは、2文字の言語コードの便利な短い一覧を提供しますが、<ulink url="https://www.rfc-editor.org/rfc/bcp/bcp47.txt">BCP-47</ulink>に準拠する任意のコード(3文字の言語コードを含む)を適切な領域に入力できます。</para>
+	
+	<para>言語コードは、 OmegaTの様々な箇所で使用されています：</para>
+	
+	<itemizedlist>
+	  <listitem>
+		<para> <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/>ウィンドウの結果を取得したり、</para>
+	  </listitem>
+
+	  <listitem>
+		<para><link linkend="dialogs.preferences.segmentation.setup" endterm="dialogs.preferences.segmentation.setup.title"/>設定で定義する分節規則を適用したり、</para>
+	  </listitem>
+
+	  <listitem>
+		<para><link linkend="dialog.preferences.spellchecker" endterm="dialog.preferences.spellchecker.title"/>設定でインストールされるスペルチェッカー用辞書をインストールしたり、</para>
+	  </listitem>
+
+	  <listitem>
+		<para> <link linkend="dialog.preferences.languagetool.plugin" endterm="dialog.preferences.languagetool.plugin.title"/> 設定などで規則集を選択して、文法エラーや綴りの間違いをチェックしたり、</para>
+	  </listitem>
+	</itemizedlist>
+
+	  <para>などなどです。</para>
+
+	<warning>
+	  <para>正しい言語コードを入力し、そのようなコードを必要とする他のすべての場所が、ここで割り当てたものと正確に一致することを確認してください。言語に依存する関数は、言語コード間に不一致がある場合、失敗するか、誤った結果を生成します。</para>
+	</warning>
+
+	  
+      <para>OmegaTは原文言語と訳文言語に対応するトークナイザーを自動的に選択しますが、設定を手動で変更することもできます。トークナイザーは、OmegaTが検索結果を良くするのに重要な働きをしています。</para>
   </section>
 
-  <section>
-    <title>設定</title>
+  <section id="dialogs.project.properties.options">
+    <title id="dialogs.project.properties.options.title"><guilabel>設定</guilabel></title>
 
     <variablelist>
-      <varlistentry>
-        <term>文単位の分節化を有効にする</term>
+      <varlistentry id="dialogs.project.properties.options.segmentation">
+        <term id="dialogs.project.properties.options.segmentation.title"><option>文単位の分節化</option></term>
 
-        <listitem>
-          <para>分節化の設定は、OmegaTによる原文ファイルの取り扱い方法にのみ関係します。原文の分節化は、文単位で行うのが一般的です。したがって通常は、このチェックボックスにチェックを入れておくのがよいでしょう。</para>
+		<listitem>		  
+          <para>文単位の分節化では、原文ファイルが、分節化規則に基づいて分節に分割されます。</para>
 
-          <para>めったにないことですが、段落単位での分節化のような、別の方法が必要とされることもあります。このフラグを変更しても、翻訳メモリにすでに記録された分節は変更されません。たとえば、翻訳の途中で分節化を文単位から段落単位に変更しても、そのプロジェクトの内部翻訳メモリは何も変わりません。OmegaT は段落単位でしか分節化できなかった旧形式の翻訳メモリをアップグレードできますが、その逆はできないのです。ただし OmegaT は、文単位の既存の翻訳を結合して、段落単位の参考訳文を作ることはできます。</para>
+		  <para>段落を分割しない場合は、この設定をオフにします。</para>
 
-          <para>分節化設定を変更した場合、翻訳済みの分節が分割されたり、結合されることがあります。これにより、たとえ分割や結合前の翻訳がまだ翻訳メモリに残っていたとしても、実質的に「未翻訳」の状態に戻ることになります。</para>
+		  <para>デフォルトでは、分節化の設定はユーザーレベルであり、すべてのプロジェクトで共有されます。</para>
+
+		  <para><link linkend="menus.options" endterm="menus.options.title"/><link linkend="menus.options.segmentation" endterm="menus.options.segmentation.title"/>では、ユーザーレベルの分節化規則を変更できます。</para>
+		  
+		  <para> <link linkend="dialogs.project.properties.local.segmentation" endterm="dialogs.project.properties.local.segmentation.title"/>をクリックして、ユーザーレベルの規則のかわりに、特定の分節化規則(プロジェクト専用のルール)を使用することができます。OmegaT を実行する際に、コマンドラインに起動オプションをプロジェクト専用の設定を記述して実行することもできます。</para>
+
+		  <para>詳細は<link linkend="launch.with.command.line" endterm="launch.with.command.line.title"/>項をご覧ください。</para>
+
+		  <note>
+			<para>ローカル規則を使用している場合でも、グローバル規則にアクセスすることはできますが、それらを変更してもプロジェクトには影響しません。</para>
+		  </note>
+		  
+		  <para>翻訳中に分節化規則の設定を変更しても、プロジェクトの翻訳メモリに登録されている分節は変更されません。</para>
+		  
+		  <para>たとえば、翻訳の途中で分節化を<emphasis role="bold">文単位</emphasis>から<emphasis role="bold">段落単位</emphasis>に変更しても、そのプロジェクトの内部翻訳メモリは何も変わりません。OmegaT は段落単位でしか分節化できなかった旧形式の翻訳メモリをアップグレードできますが、その逆はできないのです。ただし OmegaT は、文単位の既存の翻訳を結合して、段落単位の参考訳文を作ることはできます。</para>
+
+		  <para>翻訳中に分節化規則を変更した場合は、新しい分節化規則を有効にするためにプロジェクトを再ロードする必要があります。すると、以前に翻訳済みの一部の分節が分割または結合され、翻訳済みの分節ではなくなります。ただし、元の翻訳はプロジェクトの翻訳メモリ内に残ります。</para>
+
+		  <para>(ユーザレベルまたはプロジェクト専用、段落または文、設定など)分節化の一般的な説明については、付録<link linkend="app.segmentation" endterm="app.segmentation.title"/>を参照してください。</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry>
-        <term>翻訳自動反映</term>
+      <varlistentry id="dialogs.project.properties.local.segmentation">
+        <term id="dialogs.project.properties.local.segmentation.title"><guibutton>プロジェクト専用の分節化規則...</guibutton></term>
 
-        <listitem>
-          <para>同じ内容の分節が何箇所か原文に存在する場合、［翻訳自動反映］チェックボックスにチェックを入れると、最初にその内容を一箇所翻訳した時点で、それが基本訳文に設定され、他の訳文分節にも同じ内容が設定されます。原文が同じでも、文脈によっては他と同じ内容が適さない分節があるかもしれません。その場合はもちろん、後で<guimenuitem>［例外訳文を登録］</guimenuitem>コマンドを使って手修正することができます。［翻訳自動反映］チェックボックスにチェックを入れないと、原文が同じ他の分節は未翻訳のまま残されます。通常の分節と同じように、その分節に移動して都度、翻訳することになります。</para>
+		<listitem>
+		  <para>デフォルトでは、分節化の設定はユーザーレベルであり、すべてのプロジェクトで共有されます。</para>
+		  
+			<para>(<link linkend="menus.options" endterm="menus.options.title"/><link linkend="menus.options.segmentation" endterm="menus.options.segmentation.title"/>を使用して)<link linkend="dialogs.preferences.segmentation.setup" endterm="dialogs.preferences.segmentation.setup.title"/>設定を開いたときに表示される分節化規則は、ユーザーレベルです。</para>
+
+		  <para>プロジェクト専用のルールを作成するには、このボタンを使用します。<option>［分節化規則をプロジェクト専用にする］</option>チェックボックスにチェックを入れてから、分節化規則を必要な状態に変更してください。</para>
+		  
+		  <para>新しい規則集は、プロジェクトと共に<link linkend="project.folder.omegat.folder" endterm="project.folder.omegat.folder.title"/>フォルダーの<link linkend="project.folder.omegat.segmentation" endterm="project.folder.omegat.segmentation.title"/>ファイルに保存されます。またユーザーレベルの分節化規則集には干渉しません。</para>
+		  
+		  <para>プロジェクト専用の分節化規則を削除したい場合は、この設定オプションを無効にするか、このファイルを削除してください。</para>
+
+		  <warning>
+			<para>ローカル規則を使用している場合でも、グローバル規則にアクセスすることはできますが、それらを変更してもプロジェクトには影響しません。</para>
+		  </warning>
+
+		  <para>(ユーザレベルまたはプロジェクト専用、段落または文、設定など)分節化の一般的な説明については、付録<link linkend="app.segmentation" endterm="app.segmentation.title"/>を参照してください。</para>
+        </listitem>
+      </varlistentry>
+	  
+	  
+      <varlistentry id="dialogs.project.properties.auto.propagation">
+        <term id="dialogs.project.properties.auto.propagation.title"><option>翻訳自動反映</option></term>
+
+		<listitem>
+          <para>同じ内容の分節が何箇所か原文に存在する場合、［翻訳自動反映］チェックボックスにチェックを入れると、最初にその内容を一箇所翻訳した時点で、それが基本訳文に設定され、他の訳文分節にも同じ内容が設定されます。</para>
+		  
+		  <para>異なる訳文が必要な分節には、例外訳文を割りあてるために、<link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.create.alternative.translation" endterm="menus.edit.create.alternative.translation.title"/>を使うことができます。</para>
+		  
+		  <para>この設定オプションを有効にしていなければ、すべての分節に異なる訳文を割りあてることができます。</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry>
-        <term>タグを削除</term>
+      <varlistentry id="dialogs.project.properties.hide.tags">
+        <term id="dialogs.project.properties.hide.tags.title"><option>タグを隠す</option></term>
 
-        <listitem>
-          <para>この設定にチェックを入れると、原文分節からすべての整形用のタグを削除します。これはインラインの整形を実際には使わないテキスト（たとえば OCR ソフトが出力した PDF ファイルや、変換精度の低い .odt ファイルや .docx ファイルなど）を扱う場合に役に立ちます。削除されるのはインラインのタグのみです。したがって通常は、訳文ファイルを開くのに特に支障は無いでしょう。非視覚的な整形（OmegaT の編集画面上には表示されません）は、訳文ファイルに引き継がれます。</para>
+		<listitem>
+          <para>タグは一般に、原文の特定のレイアウトまたは修飾属性などを訳文に再現するのに役立ちます。</para>
+
+		  <para>この機能を有効にすると、原文分節のタグが非表示になり、手動でタグを処理する必要がなくなります。</para>
+		  
+		  <para>これはインラインの整形を実際には使わないテキスト（たとえば OCR ソフトが出力した PDF ファイルや、変換精度の低い .odt ファイルや .docx ファイルなど）を扱う場合に役に立ちます。</para>
+
+		  <note>
+			<para>非表示のタグは、単に分節の端に積み重ねられます。通常、これによって訳文ファイルが開くのを防ぐことはできませんが、この機能を使用するときは、次の点に注意してください。</para>
+			<itemizedlist>
+				<listitem>
+					<para>訳文ファイルに太字、斜体、またはその他の文章装飾を手動で適用する必要があります。</para>
+				</listitem>
+				<listitem>
+					<para>単に<application>Microsoft Word</application>(2007以降)の文書でタグの数を減らす必要がある場合は、<link linkend="windows.scripts.distribution.tagwipe" endterm="windows.scripts.distribution.tagwipe.title"/>スクリプトを使用できます。</para>
+					<para>詳細は<link linkend="windows.scripts" endterm="windows.scripts.title"/>項をご覧ください。</para>
+				</listitem>
+			</itemizedlist>
+			</note>
+      </listitem>
+      </varlistentry>
+
+      <varlistentry id="dialogs.project.properties.external.processing.command">
+        <term id="dialogs.project.properties.external.processing.command.title"><option>プロジェクト専用の後処理用コマンド：</option></term>
+
+		<listitem>
+		  <warning>
+			<para>セキュリティ上の理由から、プロジェクト専用の後処理用コマンドはデフォルトで無効になっています。</para>
+
+			<para>詳細については、設定-<link linkend="dialogs.preferences.saving.and.output.also.allow.per.project.external.commands" endterm="dialogs.preferences.saving.and.output.also.allow.per.project.external.commands.title"/>を参照してください。</para>
+		  </warning>
+
+		  <para>OmegaTは、訳文ファイルを生成したあとに自動的にコマンドを実行させることができます。</para>
+
+		  <para>この領域で実行するコマンドを入力します。</para>
+
+		  <para><link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.create.translated.documents" endterm="menus.project.create.translated.documents.title"/>または<link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.create.current.translated.document" endterm="menus.project.create.current.translated.document.title"/>を使用したときに、訳文ファイルを作成してコマンドを起動します。</para>
+
+		  <para>ここで指定したコマンドは、このプロジェクトでのみ有効です。その指定は、 <link linkend="project.folder.omegat.project.file" endterm="project.folder.omegat.project.file.title"/> ファイルに保存されます。あなたがコマンドを信頼しているときのみ、プロジェクト専用の後処理コマンドを有効にしてください。</para>
+		
+		  <para>テンプレート変数により、さまざまなプロジェクトのデータや、システム変数へのアクセスが提供されています。</para>
+
+		  <para>詳細は、付録の <link linkend="post.processing.commands" endterm="post.processing.commands.title"/> をご覧ください。</para>
+
+		  <para>また、同じユーザーレベル設定を共有するすべてのプロジェクトで使用可能なフォルダー後処理コマンドを定義することもできます。そのようなコマンドは<link linkend="dialogs.preferences.saving.and.output.external.post-processing.command" endterm="dialogs.preferences.saving.and.output.external.post-processing.command.title"/>設定でで定義できます。</para>
+
+		  <note>
+			<para>プロジェクト専用の後処理用コマンドは、ユーザーレベルコマンドの前に実行されます。</para>
+		  </note>
         </listitem>
       </varlistentry>
 
-      <varlistentry>
-        <term>後処理用外部コマンド</term>
+      <varlistentry id="dialogs.project.properties.filters">
+        <term id="dialogs.project.properties.filters.title"><guibutton>プロジェクト専用ファイルフィルター</guibutton></term>
 
         <listitem>
-          <para>この欄には、訳文ファイルの生成後に実行したい外部コマンド（たとえば、ファイル名を変更するスクリプトなど）を記述できます。外部コマンドには「パイプ機能」を含めることができません。そのため、スクリプトファイルの単純な呼び出しが推奨されます。</para>
+          <para>デフォルトでは、フィルターの設定はユーザーレベルであり、すべてのプロジェクトで共有されます。これらの設定は、 <link linkend="dialogs.preferences.file.filters" endterm="dialogs.preferences.file.filters.title"/>設定で定義できます。</para>
+
+		  <para>プロジェクト専用のフィルター設定を作成するには、このボタンを使用します。 <option>フィルター設定をプロジェクト専用にする</option>チェックボックスにチェックを入れてから、必要な設定に変更してください。</para>
+
+		  <para>新しいファイルフィルターの設定は、プロジェクトと共に<link linkend="project.folder.omegat.folder" endterm="project.folder.omegat.folder.title"/>フォルダーの<link linkend="project.folder.omegat.filters" endterm="project.folder.omegat.filters.title"/>ファイルに保存されます。これらの設定は、ユーザーレベルファイルのフィルター設定よりも優先されます。</para>
+
+		  <note>
+			<para>プロジェクト専用のファイルフィルターを無効にするには、チェックボックスをオフにするか、そのファイルを削除します。</para>
+		  </note>
+		  
+		  <para>詳細は、付録の <link linkend="file.filters" endterm="file.filters.title"/> をご覧ください。</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry>
-        <term><guibutton>分節化規則...</guibutton></term>
+      <varlistentry id="dialogs.project.properties.repository.mapping">
+        <term id="dialogs.project.properties.repository.mapping.title"><guibutton>リポジトリマッピング...</guibutton></term>
 
         <listitem>
-          <para>分節化規則は、ほとんどの場合、すべてのプロジェクトに共通で適用されます。しかし特定のプロジェクトに特化した分節化規則が必要になることもあるでしょう。その場合は、このボタンを押してダイアログを開き、<guimenuitem>［分節化規則をプロジェクト専用にする］</guimenuitem>チェックボックスにチェックを入れてから、分節化規則を必要な状態に変更してください。新しい規則集は、プロジェクトと共に保存されます。またプログラム共通の分節化規則集には干渉しません。プロジェクト専用の分節化規則を削除したい場合は、チェックボックスのチェックを外してください。分節化規則の詳細については「<link linkend="dialogs.preferences.segmentationsetup">分節化設定</link>」を参照してください。</para>
+          <para>チームプロジェクトで作業する場合、このウィンドウでリモートフォルダとローカルフォルダ間のマッピングを定義できます。</para>
 
-          <para><emphasis>ヒント：</emphasis>プロジェクト専用の分節化規則集は <filename>project/omegat/segmentation.conf</filename> に保存されます。</para>
+		  <para>詳細については、 <link linkend="how.to.setup.team.project" endterm="how.to.setup.team.project.title"/>ハウツー項の<link linkend="how.to.setup.team.project.mapping.parameters" endterm="how.to.setup.team.project.mapping.parameters.title"/>章を参照してください。</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry>
-        <term><guibutton>ファイルフィルター...</guibutton></term>
+      <varlistentry id="dialogs.project.properties.external.searches">
+        <term id="dialogs.project.properties.external.searches.title"><guibutton>プロジェクト専用の外部検索</guibutton></term>
 
         <listitem>
-          <para>前の項と同じように、プロジェクト専用のファイルフィルター設定を作成できます。この設定はプロジェクトと共に保存され、現在のプロジェクトにのみ適用されます。プロジェクト専用のファイルフィルター設定を作成するには、<guibutton>［ファイルフィルター...］ </guibutton>ボタンをクリックし、開いたウィンドウの<guimenuitem>［ファイルフィルター設定をプロジェクト専用にする］</guimenuitem>チェックボックスにチェックを入れてください。これにより、変更されたフィルター設定のコピーがプロジェクトと共に保存されるようにます。プロジェクト専用のファイルフィルター設定を削除するには、チェックボックスのチェックを外してください。<guimenuitem>［設定］→［ファイルフィルター...］</guimenuitem>メニューからユーザーレベルのファイルフィルター設定を変更しても、プロジェクト専用のファイルフィルター設定は変更されないことに注意してください。詳しくは、「 <link linkend="dialogs.preferences.filefilters">ファイルフィルターの設定</link> 」を参照してください。</para>
+          <para>デフォルトでは、外部検索はユーザーレベルであり、すべてのプロジェクトで使用できます。これらの設定は、 <link linkend="dialogs.preferences.external.searches" endterm="dialogs.preferences.external.searches.title"/>設定で定義できます。</para>
 
-          <para><emphasis>ヒント：</emphasis>プロジェクト専用のファイルフィルター設定は <filename>project/omegat/filters.xml</filename> に保存されます。</para>
+		  <para>プロジェクト専用の外部検索を作成するには、このボタンを使用します。</para>
+
+		  <para>新しい外部検索の設定は、プロジェクトと共に<link linkend="project.folder.omegat.folder" endterm="project.folder.omegat.folder.title"/>フォルダーの<link linkend="project.folder.omegat.finder" endterm="project.folder.omegat.finder.title"/>ファイルに保存されます。これらの設定は、ユーザーレベルファイルの外部検索設定よりも優先されます。</para>
+
+		  <para>プロジェクト専用の外部検索を無効にするには、<guibutton>削除</guibutton>をクリックにするか、そのファイルを削除します。</para>
+		  
+		  <para>詳細については、設定-<link linkend="dialogs.preferences.external.searches" endterm="dialogs.preferences.external.searches.title"/>を参照してください。</para>
+
+		  <note>
+			<para>セキュリティ上の理由から、プロジェクトベースの外部検索はデフォルトで無効になっています。有効にするには、<link linkend="dialogs.preferences.external.searches" endterm="dialogs.preferences.external.searches.title"/> 設定の <link linkend="dialogs.preferences.external.search.enable.project.specific.commands" endterm="dialogs.preferences.external.search.enable.project.specific.commands.title"/>でチェックをいれます。</para>
+		  </note>
         </listitem>
       </varlistentry>
-
-      <varlistentry>
-        <term>リポジトリマッピング...</term>
-
-        <listitem>
-          <para>チームプロジェクトで作業する場合、このウィンドウでリモートフォルダとローカルフォルダ間のマッピングを定義できます(具体例は<link linkend="howto.setupteamproject.mappingparameters">ここ</link>を参照)。</para>
-        </listitem>
-      </varlistentry>
-
-      <varlistentry>
-        <term>外部検索...</term>
-
-        <listitem>
-          <para>プロジェクト固有の外部検索リソースを定義します。</para>
-        </listitem>
-      </varlistentry>
-    </variablelist>
+	</variablelist>
   </section>
 
-  <section>
-    <title>ファイル場所設定</title>
+  <section id="dialogs.project.properties.file.locations">
+    <title id="dialogs.project.properties.file.locations.title"><guilabel>ファイル場所設定</guilabel></title>
 
-    <para>ここで、プロジェクトフォルダーの場所を変更することができます。たとえば、原文ファイルフォルダーや、訳文ファイルフォルダーなどです。フォルダー名を直接入力して、そのフォルダーがまだ存在しなければ、OmegaT がそのフォルダーを作成します。プロジェクトフォルダーの場所を変更しても、既存のファイルが古いフォルダーから新しいフォルダーに移動されたりはしませんので、注意してください。</para>
+	<para>OmegaT の翻訳プロジェクトは、複数のフォルダーの様々な資材から構成されています。</para>
 
-    <para><guibutton>［除外...］</guibutton>をクリックして、OmegaTに無視させたいファイルやフォルダーを登録できます。除外登録したファイルやフォルダーは、次のように扱われます。</para>
+	<para>新しいプロジェクトが作成されると、OmegaTは翻訳で使用されるすべての資材を含むプロジェクトフォルダーを提案しますが、その構造は必須ではありません。</para>
 
-    <itemizedlist>
-      <listitem>
-        <para>編集ウィンドウに表示されません</para>
-      </listitem>
+	<para>資材のフォルダは、共有ディスクを含むシステム上の任意の場所に配置できます。</para>
 
-      <listitem>
-        <para>翻訳状況の集計対象になりません</para>
-      </listitem>
+	<para>詳細については-<link linkend="chapter.project.folder" endterm="chapter.project.folder.title"/>を参照してください。</para>
 
-      <listitem>
-        <para>訳文ファイル生成時に、<filename class="directory">訳文ファイル</filename>フォルダーにコピーされません。</para>
-      </listitem>
-    </itemizedlist>
+	<para>フォルダにファイルを追加または削除したり、プロジェクトで使用するフォルダを変更したりすることで、プロジェクトの構造を変更することができます。これは、翻訳中でも可能です。</para>
 
-    <para>除外構成例集ダイアログで、構成例の追加と削除ができます。また既存の構成例を選んで F2 キーを押すと編集もできます。構成例には <ulink url="https://ant.apache.org/manual/dirtasks.html#patterns">Ant 構文</ulink>にのっとったワイルドカード文字も使えます。</para>
+	<para>プロジェクト資材の場所にアクセスするには、 <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.access.project.contents" endterm="menus.project.access.project.contents.title"/>を使用しサブメニューを選択します。</para>
+
+	<variablelist>
+	  <varlistentry id="dialogs.project.properties.file.locations.browse">
+		<term id="dialogs.project.properties.file.locations.browse.title"><guibutton>参照</guibutton></term>
+
+		<listitem>
+		  <para><guibutton>[参照]</guibutton>ボタンは、すべてのユーザー定義プロジェクト資源で使用できます。</para>
+
+		  <note>
+			<para>資材は、OmegaTが作成するデフォルトのプロジェクト・フォルダーに保存されている必要はありません。共有ディスク上のフォルダなど、リソースを格納する任意のフォルダーを選択できます。</para>
+		  </note>
+
+		  <para>ボタンをクリックして、デフォルトの資材フォルダの代わりに使用するフォルダを選択します。</para>
+		</listitem>
+	  </varlistentry>
+	  
+	  <varlistentry id="dialogs.project.properties.file.locations.source.files">
+		<term id="dialogs.project.properties.file.locations.source.files.title"><option>原文ファイルフォルダー</option></term>
+
+		<listitem>
+		  <para>翻訳対象の原文ファイルがこのフォルダにあるとみなします。OmegaTは、すべてのファイルを一度に読み取ろうとし、翻訳可能な内容をエディタに表示します。</para>
+
+		  <para>詳細は<link linkend="project.folder.source" endterm="project.folder.source.title"/>項をご覧ください。</para>
+
+		  <para>フォルダーが空の場合、翻訳可能なコンテンツを含むファイルがない場合、またはOmegaTのファイルフィルターでサポートされているファイルがない場合、OmegaTはフォルダーが空であると通知します。</para>
+
+		  <variablelist>
+			<varlistentry id="dialogs.project.properties.file.locations.exclusions">
+			  <term id="dialogs.project.properties.file.locations.exclusions.title"><guibutton>除外...</guibutton></term>
+
+			  <listitem>
+				<para><guibutton>[除外]</guibutton>をクリックして、OmegaTによって無視されるファイルまたはフォルダを定義します。無視されたファイルまたはフォルダー:</para>
+		  
+				<itemizedlist>
+				  <listitem>
+					<para><link linkend="panes.editor" endterm="panes.editor.title"/>ウィンドウには表示されません。</para>
+				  </listitem>
+
+				  <listitem>
+					<para>翻訳状況の集計対象になりません(<link linkend="menus.tools" endterm="menus.tools.title"/><link linkend="menus.tools.statistics" endterm="menus.tools.statistics.title"/>を使用)</para>
+				  </listitem>
+
+				  <listitem>
+					<para>訳文ファイル生成時に、<link linkend="project.folder.target" endterm="project.folder.target.title"/>フォルダーにコピーされません。</para>
+				  </listitem>
+				</itemizedlist>
+
+				<para>除外構成例集ダイアログで、構成例の追加と削除ができます。また ダブルクリックや構成例を選んで<keycap>F2</keycap> キーを押すと編集もできます。除外定義には <ulink url="https://ant.apache.org/manual/dirtasks.html#patterns">Ant 構文</ulink>が使えます。</para>
+			  </listitem>
+			</varlistentry>
+		  </variablelist>
+		</listitem>
+	  </varlistentry>
+	  
+	  <varlistentry id="dialogs.project.properties.file.locations.translation.memories">
+		<term id="dialogs.project.properties.file.locations.translation.memories.title"><option>翻訳メモリフォルダー</option></term>
+		<listitem>
+		  <para>このフォルダに、翻訳メモリとして利用するファイルが保存されます。すべての辞書ファイルの索引を一度に読み取り、翻訳したい分節に対して比較を行ないます。</para>
+
+		  <para>詳細は<link linkend="project.folder.tm" endterm="project.folder.tm.title"/>項をご覧ください。</para>
+
+		  <para>一致するものが見つかると、<link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/>に表示されます。</para>
+		</listitem>
+	  </varlistentry>
+	  
+	  <varlistentry id="dialogs.project.properties.file.locations.glossaries">
+		<term id="dialogs.project.properties.file.locations.glossaries.title"><option>用語集フォルダー</option></term>
+
+		<listitem>
+		  <para>このフォルダに用語集として利用するファイルを保存します。すべての辞書ファイルの索引を一度に読み取り、翻訳したい分節に対して比較を行ないます。</para>
+
+		  <para>詳細は<link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/>項をご覧ください。</para>
+		  
+		  <para>一致するものが見つかると、<link linkend="panes.glossary" endterm="panes.glossary.title"/>に表示されます。</para>
+
+		  <para>詳細は、付録の <link linkend="app.glossaries" endterm="app.glossaries.title"/> をご覧ください。</para>
+		</listitem>
+	  </varlistentry>
+	  
+	  <varlistentry id="dialogs.project.properties.file.locations.writable.glossary">
+		<term id="dialogs.project.properties.file.locations.writable.glossary.title"><option>書き込み可能な用語集ファイルを開く</option></term>
+
+		<listitem>
+		  <para>書き込み可能な用語集は、<link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.create.glossary.entry" endterm="menus.edit.create.glossary.entry.title"/>コマンドを使用して翻訳されたOmegaT用語をプロジェクトに追加するときに用語集機能が使用するファイルです。</para>
+
+		  <para>このファイルは、最初の用語定義を作成したときに自動的に生成されます。</para>
+
+		  <para>追加された項目は、現在の分節内の用語と一致する場合に自動的に認識され、表示されます。</para>
+
+		  <para>このファイルはプロジェクトの<link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/>フォルダーに<emphasis>必ず存在</emphasis>します。</para>
+		</listitem>
+	  </varlistentry>
+	  
+	  <varlistentry id="dialogs.project.properties.file.locations.dictionaries">
+		<term id="dialogs.project.properties.file.locations.dictionaries.title"><option>辞書フォルダー</option></term>
+
+		<listitem>
+		  <para>このフォルダに辞書として利用するファイルを保存します。すべての辞書ファイルの索引を一度に読み取り、翻訳したい分節に対する検索を行ないます。</para>
+
+		  <para>詳細は<link linkend="project.folder.dictionary" endterm="project.folder.dictionary.title"/>項をご覧ください。</para>
+
+		  <para>一致するものが見つかると、<link linkend="panes.dictionary" endterm="panes.dictionary.title"/>に表示されます。</para>
+		</listitem>
+	  </varlistentry>
+	  
+	  <varlistentry id="dialogs.project.properties.file.locations.translated.files">
+		<term id="dialogs.project.properties.file.locations.translated.files.title"><option>訳文ファイルフォルダー</option></term>
+
+		<listitem>
+		  <para>ここはOmegaTが訳文ファイルを作成するフォルダーです。</para>
+
+		  <para>訳文ファイルは、<link linkend="project.folder.source" endterm="project.folder.source.title"/>フォルダーにあるファイルの翻訳バージョンです。</para>
+
+		  <para>翻訳された分節はその翻訳に置き換えられ、未翻訳分節は元の言語のままになります。</para>
+		
+		  <para>フォルダーの構造は、<link linkend="project.folder.source" endterm="project.folder.source.title"/>フォルダーの構造を反映しています。OmegaTのファイルフィルタでサポートされていないファイルは、変更されずにコピーされます。</para>
+
+		  <para><link linkend="menus.project.create.translated.documents" endterm="menus.project.create.translated.documents.title"/>または<link linkend="menus.project.create.current.translated.document" endterm="menus.project.create.current.translated.document.title"/>を使用して、翻訳されたファイルを作成します。</para>
+
+		  <para>詳細は<link linkend="project.folder.target" endterm="project.folder.target.title"/>項をご覧ください。</para></listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialogs.project.properties.file.locations.exported.tms">
+		<term id="dialogs.project.properties.file.locations.exported.tms.title"><option>翻訳メモリ出力フォルダー：</option></term>
+
+		<listitem>
+		  <para>このフォルダーは、OmegaTが訳文生成の際に、翻訳の現在の状態をTMXファイル形式で出力する場所です。</para>
+
+		  <note>
+			<para>デフォルトでは、そのフォルダーはプロジェクトフォルダーそのものですが、場所を変更して、書き出されたTMファイルを共有しやすくすることができます。</para>
+
+			<para>詳細については、 <link linkend="how.to.tm.share.translation.memories" endterm="how.to.tm.share.translation.memories.title"/>を参照してください。</para>
+		  </note>
+		
+		  <para>TMXファイルには、<link linkend="project.folder.source" endterm="project.folder.source.title"/>フォルダーの現在のコンテンツに対応する分節だけが含まれています。</para>
+
+		  <para><link linkend="menus.project.create.translated.documents" endterm="menus.project.create.translated.documents.title"/>または<link linkend="menus.project.create.current.translated.document" endterm="menus.project.create.current.translated.document.title"/>を使用して、訳文ファイルとTMXファイル出力を作成します。</para>
+
+		  <variablelist>
+			<varlistentry id="dialogs.project.properties.file.locations.tms.to.export">
+			  <term id="dialogs.project.properties.file.locations.tms.to.export.title"><option>エクスポートする翻訳メモリ</option></term>
+			  <listitem>
+				<para>このチェックボックスでは、OmegaTで上記のTMXファイルを作成するときのフォーマットを選択できます。</para>
+
+				<para>詳細については、 <link linkend="how.to.use.tm" endterm="how.to.use.tm.title"/>を参照してください。</para>
+		
+				<variablelist>
+				  <varlistentry>
+					<term><option>OmegaT</option></term>
+					<listitem>
+					  <para>&quot;OmegaT&quot;のTMXには、OmegaTが作成したタグが、OmegaTプロジェクトでしか適切に使用できない形式で含まれています。</para>
+					</listitem>
+				  </varlistentry>
+		  
+				  <varlistentry>
+					<term><option>TMX Level 1</option></term>
+					<listitem>
+					  <para>level1 ファイルには、文書情報のみが含まれます。</para>
+					</listitem>
+				  </varlistentry>
+				
+				  <varlistentry>
+					<term><option>TMX Level 2</option></term>
+					<listitem>
+					  <para>「レベル2」TMXには、他のCATツールと互換性のある方法でカプセル化されたタグとともにテキストデータが含まれています。</para>
+					</listitem>
+				  </varlistentry>
+				</variablelist>
+			  </listitem>
+			</varlistentry>
+		  </variablelist>
+		  
+		  <para>詳細については、<ulink url="https://www.gala-global.org/tmx-14b#SectionIntroduction">TMX 1.4b仕様</ulink>を参照してください。</para>
+		</listitem>
+	  </varlistentry>
+	</variablelist>
   </section>
 </section>

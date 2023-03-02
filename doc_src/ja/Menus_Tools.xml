@@ -1,12 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="menus.tools">
-  <title>ツール</title>
+  <title id="menus.tools.title"><guimenu>ツール</guimenu></title>
+
+  <para>このメニューからは、品質保証チェック、照合レポート、整合ツール、スクリプト編集・実行など、さまざまなツールにアクセスできます。</para>
+
+  <example id="example.check.issues">
+	<title id="example.check.issues.title">ショートカットの説明の例</title>
+	<para>Windows と Linux: <keycombo><keycap>Control</keycap><keycap>Shift</keycap><keycap>V</keycap></keycombo></para>
+
+	<para>macOS: <keycombo><keycap>Shift</keycap><keycap>Command</keycap><keycap>V</keycap></keycombo></para>
+
+	<para><emphasis role="bold">このマニュアルでの表記は: :</emphasis> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>V</keycap></keycombo></para>
+  </example>
 
   <variablelist>
-    <varlistentry>
-      <term>品質チェック...</term>
-
+    <varlistentry id="menus.tools.check.issues">
+      <term id="menus.tools.check.issues.title"><guimenuitem>品質チェック...</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>V</keycap></keycombo></term>
       <listitem>
         <para>すべての自動チェックを一度に実行し、結果をウィンドウに表示する品質保証ツール。</para>
 
@@ -14,27 +24,30 @@
 
         <itemizedlist>
           <listitem>
-            <para><link linkend="dialogs.preferences.tagprocessing">カスタムタグ</link>を含めて欠落したタグまたは置換されたタグ。[<guilabel>タグの問題</guilabel>]オプションは常に選択されています。</para>
+            <para><guilabel>タグの問題</guilabel>(常に選択):カスタムタグやフラグ付き文章を含む、紛失したタグや間違った場所に置かれたタグを検出します。詳細の<link linkend="dialogs.preferences.tag.processing" endterm="dialogs.preferences.tag.processing.title"/>環境設定を参照してください。</para>
+
+			<note>
+			  <para>この設定オプションは常に選択されています。</para>
+			</note>
           </listitem>
 
           <listitem>
-            <para><guilabel>[スペルチェックの問題]</guilabel>(オプション)。スペルチェック辞書がインストールされている場合にのみ機能します。</para>
+            <para><guilabel>スペルチェックの問題</guilabel>(オプション)：スペルミスを検出します。スペルチェック辞書がインストールされている場合にのみ機能します。詳細の<link linkend="dialog.preferences.spellchecker" endterm="dialog.preferences.spellchecker.title"/>環境設定を参照してください。</para>
           </listitem>
 
           <listitem>
-            <para><guilabel>用語の問題</guilabel>(オプション)</para>
+            <para><guilabel>用語の問題</guilabel>(オプション)：適切に翻訳されていない用語の利用を検出します。詳細の<link linkend="dialogs.preferences.glossary" endterm="dialogs.preferences.glossary.title"/>環境設定を参照してください。</para>
           </listitem>
 
-          <listitem>
-            <para><guilabel>LanguageTool問題</guilabel>(オプション)。</para>
+		  <listitem>
+            <para><guilabel>LanguageTool問題</guilabel>(オプション)：文法や入力ミスの問題を検出します。詳細の<link linkend="dialog.preferences.languagetool.plugin" endterm="dialog.preferences.languagetool.plugin.title"/>環境設定を参照してください。</para>
           </listitem>
         </itemizedlist>
 
-        <para>結果ウィンドウは、次の表の形式で表示されます。</para>
-
+        <para>結果は、次のような表形式で表示されます。</para>
         <itemizedlist>
           <listitem>
-            <para>行をダブルクリックすると、対応するセグメントがエディタペインでアクティブになります。</para>
+            <para>行をダブルクリックすると、対応する分節が編集ウィンドウで選択されます。</para>
           </listitem>
 
           <listitem>
@@ -42,93 +55,114 @@
           </listitem>
 
           <listitem>
-            <para>行の上でマウスを選択または移動すると、最後の列にポップアップメニューアイコンが表示され、エラーを修正または無視するためのアクションが示されます。</para>
+            <para>行を選択するか、行の上にマウスを移動すると、最後の段組みにコンテキストメニューアイコンが表示されます。このアイコンをクリックすると、エラーを修正または無視するためのアクションが表示されます。</para>
+
+			<note>
+			  <para>分節を出るたびに問題を強制的にチェックするには、<link linkend="dialogs.preferences.editor.validate.tags.when.leaving.a.segment" endterm="dialogs.preferences.editor.validate.tags.when.leaving.a.segment.title"/>設定を有効にします。</para>
+
+			  <para>タグに課題がある訳文ファイルの作成をブロックするには、<link linkend="dialogs.preferences.tag.processing.do.not.allow.creating.translated.documents.with.tag.issues" endterm="dialogs.preferences.tag.processing.do.not.allow.creating.translated.documents.with.tag.issues.title"/>設定を有効にします。</para>
+			</note>
           </listitem>
         </itemizedlist>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>現在のドキュメントの品質をチェック</term>
-
+    <varlistentry id="menus.tools.check.issues.for.current.document">
+      <term id="menus.tools.check.issues.for.current.document.title"><guimenuitem>現在の文書の品質チェック</guimenuitem></term>
       <listitem>
         <para>上記と同様。ただし、エディタペインに現在表示されているドキュメントのみ。</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>翻訳状況</term>
-
+    <varlistentry id="menus.tools.statistics">
+      <term id="menus.tools.statistics.title"><guimenuitem>翻訳状況</guimenuitem></term>
       <listitem>
-        <para>新しいウィンドウに、プロジェクトの翻訳状況を表示します。これには、プロジェクト全体の翻訳状況と、ファイルごとの翻訳状況が含まれます。</para>
+        <para>新しいウィンドウに、プロジェクト全体の翻訳状況とファイルごとの翻訳状況などのプロジェクトの翻訳状況を表示します。</para>
+
+		<para>データは、プロジェクトの<link linkend="project.folder.omegat.folder" endterm="project.folder.omegat.folder.title"/>フォルダーにある<link linkend="project.folder.project.stats" endterm="project.folder.project.stats.title"/>ファイルに保存されます。</para>
+
+		<note>
+		  <para>ワード数、分節合計、およびその他の項目は、次の要因によって影響を受ける可能性があります。</para>
+		  
+		  <itemizedlist>
+			<listitem>
+			  <para>ファイルフィルター設定:一部のフィルタでは、追加のパーツを変換対象として考慮できます。詳細については、ファイルフィルター<link linkend="filters.options">設定</link>を参照してください。</para>
+			</listitem>
+
+			<listitem>
+			  <para>分節化規則: ルールが異なると、生成される分節の数も異なります。詳細は、付録の <link linkend="app.segmentation" endterm="app.segmentation.title"/> をご覧ください。</para>
+			</listitem>
+
+			<listitem>
+			  <para>タグ:OmegaTのタグは翻訳状況ではカウントされませんが、場合によっては、用語が分割され、OmegaTのカウント方法と不一致が生じることがあります。詳細は<link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/>ダイアログの<link linkend="dialogs.project.properties.hide.tags" endterm="dialogs.project.properties.hide.tags.title"/>設定を見てください。</para>
+			</listitem>
+
+			<listitem>
+			  <para>カスタムタグとフラグ付き文章:OmegaTタグと同様に、翻訳状況ではデフォルトではとしてカウントされませんが、OmegaTに単語としてカウントさせることができます。詳細は<link linkend="dialogs.preferences.tag.processing.count.protected.text.and.custom.tags.in.statistics" endterm="dialogs.preferences.tag.processing.count.protected.text.and.custom.tags.in.statistics.title"/>の設定を参照してください。</para>
+			</listitem>
+		  </itemizedlist>
+		</note>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>参考訳文の一致率</term>
-
+    <varlistentry id="menus.tools.match.statistics">
+      <term id="menus.tools.match.statistics.title"><guimenuitem>参考訳文の一致率</guimenuitem></term>
       <listitem>
         <para>プロジェクトにおける参考訳文の一致率を表示します。これは繰り返し、完全に一致、部分的に一致、一致しないといった基準で分類されており、それぞれについて分節数、単語数、文字数を集計しています。</para>
+
+		<para>データは、プロジェクトの<link linkend="project.folder.omegat.folder" endterm="project.folder.omegat.folder.title"/>フォルダーにある<link linkend="project.folder.omegat.project.stats.match" endterm="project.folder.omegat.project.stats.match.title"/>ファイルに保存されます。</para>
+      </listitem>
+    </varlistentry>
+	
+    <varlistentry id="menus.tools.match.statistics.per.file">
+      <term id="menus.tools.match.statistics.per.file.title"><guimenuitem>参考訳文の一致率（ファイル別）</guimenuitem></term>
+      <listitem>
+        <para>プロジェクトにおける参考訳文の一致率を表示します。これは繰り返し、完全に一致、部分的に一致、一致しないといった基準で分類されており、それぞれについて分節数、単語数、文字数を集計しています。</para>
+
+		<para>データは、プロジェクトの<link linkend="project.folder.omegat.folder" endterm="project.folder.omegat.folder.title"/>フォルダーにある<link linkend="project.folder.omegat.project.stats.match.per.file" endterm="project.folder.omegat.project.stats.match.per.file.title"/>ファイルに保存されます。</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>参考訳文の一致率（ファイル別）</term>
-
+    <varlistentry id="menus.tools.align.files">
+      <term id="menus.tools.align.files.title"><guimenuitem>整合ツール...</guimenuitem></term>
       <listitem>
-        <para>プロジェクトにおける参考訳文の一致率をファイル別に表示します。これは繰り返し、完全に一致、部分的に一致、一致しないといった基準で分類されており、それぞれについて分節数、単語数、文字数を集計しています。</para>
-      </listitem>
-    </varlistentry>
+        <para>整列する2つのファイル(原文ファイルとその訳文ファイル)を選択し、<guibutton>確定</guibutton>をクリックして<link linkend="windows.aligner" endterm="windows.aligner.title"/>ウィンドウを開きます。</para>
 
-    <varlistentry>
-      <term>整合ツール...</term>
-
-      <listitem>
-        <para>整合する2つのファイル(ソースファイルとその変換)を選択し、[OK]をクリックして、<link linkend="windows.aligner"><guilabel>[整合ツール]</guilabel>ウィンドウ</link>を開きます。</para>
-
-        <para>サポートされているファイル形式は、<menuchoice><guimenuitem>[プロジェクト]</guimenuitem><guimenuitem>[プロパティ]</guimenuitem><guimenuitem>[ファイルフィルタ]</guimenuitem></menuchoice>に一覧表示されているファイル形式です。</para>
-
+        <para>サポートされるファイル形式は、プロジェクトの設定によって異なります。詳細は、付録の <link linkend="file.filters" endterm="file.filters.title"/> をご覧ください。</para>
         <para>ソースファイルとターゲットファイルの形式は異なる場合があります(たとえば、<filename>.docx</filename>ファイルは<filename>.pdf</filename>ファイルと整合できます)。</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>スクリプト...</term>
-
+    <varlistentry id="menus.tools.scripting">
+      <term id="menus.tools.scripting.title"><guimenuitem>スクリプト...</guimenuitem></term>
       <listitem>
-        <para><link linkend="windows.scripts"><guilabel>[スクリプト]</guilabel>ウィンドウ</link>を表示します。このウィンドウ上で、スクリプトフォルダーの指定、スクリプトの編集や実行、ショートカットへの関連付けを行えます。</para>
+        <para><link linkend="windows.scripts" endterm="windows.scripts.title"/>ウィンドウを表示します。このウィンドウ上で、スクリプトフォルダーの指定、スクリプトの編集や実行、ショートカットへの関連付けを行えます。</para>
+		<para>この項目の下のメニュー項目に、スクリプト用の12個のスロットが表示されます。割り当てられたスロットをクリックすると、そのスロットに割り当てられたスクリプトが起動します。</para>
+
+		<note>
+		  <para>スクリプトに番号を割り当てるには、次の手順に従います。</para>
+
+          <orderedlist>
+			<listitem>
+              <para>スクリプトウィンドウを開く</para>
+			</listitem>
+
+			<listitem>
+              <para>左側のリストから目的のスクリプトを選択します。</para>
+			</listitem>
+
+			<listitem>
+              <para>ウィンドウの下部で、空き番号を右クリックし、 <guilabel>スクリプトの追加</guilabel> を選択します。</para>
+			</listitem>
+          </orderedlist>
+		</note>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>n - （スクリプト名）</term>
-
+    <varlistentry id="menus.tools.external.search.commands">
+      <term id="menus.tools.external.search.commands.title">外部検索コマンド</term>
       <listitem>
-        <para>番号に関連付けられているスクリプトを起動します。</para>
-
-        <para>スクリプトを番号に関連付ける手順は、次のとおりです:</para>
-
-        <orderedlist>
-          <listitem>
-            <para>スクリプトウィンドウを開く</para>
-          </listitem>
-
-          <listitem>
-            <para>左側のリストから目的のスクリプトを選択します。</para>
-          </listitem>
-
-          <listitem>
-            <para>ウィンドウの下部で、空き番号を右クリックし、 <guilabel>[スクリプトの追加]</guilabel> を選択します。</para>
-          </listitem>
-        </orderedlist>
-      </listitem>
-    </varlistentry>
-
-    <varlistentry>
-      <term>(外部検索コマンド)</term>
-
-      <listitem>
-        <para>外部検索を実行するコマンドが<link linkend="dialogs.preferences.externalsearch">[環境設定]</link>で定義されている場合は、ここに一覧表示され、アクセスできます。</para>
+        <para><link linkend="dialogs.preferences.external.searches" endterm="dialogs.preferences.external.searches.title"/>設定で外部検索を定義した場合に表示され、アクセスできます。</para>
       </listitem>
     </varlistentry>
   </variablelist>

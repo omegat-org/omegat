@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="windows.aligner">
+  <title id="windows.aligner.title"><guilabel>Alineació de fitxers</guilabel></title>
+
+  <para>Utilitzeu <link endterm="menus.tools.title" linkend="menus.tools"/><link endterm="menus.tools.align.files.title" linkend="menus.tools.align.files"/> per a accedir a aquesta eina.</para>
+
+  <para>L'OmegaT també ofereix un mode d'alineació en línia d'ordres per a formats basats en claus. Consulteu l'opció <link linkend="launch.with.command.line.mode.console.align" endterm="launch.with.command.line.mode.console.align.title"/> per a conèixer més detalls.</para>
+
+  <warning>
+    <para>L'alineador no us permet desar la feina durant l'alineació. Per tant, es recomana dividir els fitxers que vulgueu alinear en fitxers més curts que pugueu alinear còmodament en una única sessió. Fer-ho té el benefici afegit de reduir les diferències en l'alineació automàtica inicial, de manera que el pas de correcció manual és més fàcil.</para>
+  </warning>
+
+
+  <para>L'alineació és el procés de crear una memòria de traducció bilingüe a partir d'un parell de documents monolingües ja traduïts. L'alineació del contingut dels fitxers és un procés en quatre passos:</para>
+
+  <orderedlist>
+	<listitem>
+	  <para>Especifiqueu les llengües d'origen i destinació i seleccioneu els dos fitxers que voleu alinear.</para>
+	</listitem>
+
+	<listitem>
+	  <para>L'alineador llegeix els fitxers i intenta fer coincidir els segments que es corresponen entre si en el text original i la traducció.</para>
+	</listitem>
+
+	<listitem>
+	  <para>Reviseu els resultats i feu els ajustos manuals necessaris.</para>
+	</listitem>
+
+	<listitem>
+	  <para>Deseu el resultat en un fitxer TMX.</para>
+	</listitem>
+  </orderedlist>
+
+  <para>L'alineador pot llegir tots els formats de fitxer compatibles amb l'OmegaT.</para>
+  
+  <note>
+    <para>Si teniu un projecte de traducció obert, l'alineador utilitzarà automàticament les llengües i les regles de segmentació específiques del projecte, si n'hi ha.</para>
+  </note>
+
+  <para>Després de seleccionar la llengua i els fitxers, feu clic en el botó <guibutton>D'acord</guibutton> per a obrir la finestra <guilabel>Alineació</guilabel>, que mostra els resultats de l'alineació automàtica.</para>
+
+  <para>La part principal de la finestra es divideix en tres columnes:</para>
+  
+  <itemizedlist>
+    <listitem>
+      <para><guilabel>Conserva</guilabel>: els parells de segments de les files on s'ha marcat aquesta casella es desen en el fitxer de memòria de traducció. Les files sense marcar es descarten.</para>
+    </listitem>
+
+    <listitem>
+      <para><guilabel>Origen</guilabel>: segments del text original.</para>
+    </listitem>
+
+    <listitem>
+      <para><guilabel>Destinació</guilabel>: segments del text traduït.</para>
+    </listitem>
+  </itemizedlist>
+
+  <section id="windows.aligner.adjust">
+    <title id="windows.aligner.adjust.title">Paràmetres</title>
+
+    <para>En aquest pas, la part inferior de la finestra presenta diversos paràmetres i opcions que podeu canviar si creieu que es pot millorar l'alineació inicial. També mostra una <guilabel>puntuació mitjana</guilabel> per al resultat. En general, com més baixa sigui la puntuació, més precisa serà l'alineació. En modificar un paràmetre, es torna a calcular l'alineació immediatament, la qual cosa us permet provar ràpidament diferents combinacions per a obtenir els millors resultats.</para>
+
+    <para>Els paràmetres i opcions disponibles són:</para>
+
+    <variablelist>
+	  <title>Paràmetres</title>
+	  <varlistentry>
+        <term>Mode de comparació</term>
+        <listitem>
+          <itemizedlist>
+            <listitem>
+              <para><guilabel>Per conjunt</guilabel>: aquest mode compara els documents globalment.</para>
+            </listitem>
+
+            <listitem>
+              <para><guilabel>Per processament</guilabel>: aquest mode compara els documents segment per segment. Només es mostra quan està disponible per als fitxers que s'estan alineant.</para>
+            </listitem>
+
+            <listitem>
+              <para><guilabel>ID</guilabel>: aquest mode s'aplica als fitxers formats per entrades de <literal>clau = valor</literal>. Això funciona encara que l'ordre de les claus sigui diferent en cada fitxer i quan els fitxers tenen un nombre diferent d'entrades. Només es mostra quan els dos fitxers seleccionats es reconeixen com a fitxers de clau=valor.</para>
+            </listitem>
+          </itemizedlist>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Algorisme:</term>
+        <listitem>
+          <itemizedlist>
+            <listitem>
+              <para><guilabel>Viterbi</guilabel>: algoritme per defecte utilitzat per a alinear els fitxers.</para>
+            </listitem>
+
+            <listitem>
+              <para><guilabel>Endavant-endarrere</guilabel>: algorisme alternatiu que es pot utilitzar per a alinear els fitxers.</para>
+            </listitem>
+          </itemizedlist>
+
+          <para>No hi ha cap regla ràpida i senzilla sobre quin algorisme triar. Proveu-los tots dos i utilitzeu el que doni un resultat millor per als vostres fitxers.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Calculadora:</term>
+        <listitem>
+          <itemizedlist>
+            <listitem>
+              <para><guilabel>Normal</guilabel>: distribució estadística per defecte utilitzada per a alinear els fitxers.</para>
+            </listitem>
+
+            <listitem>
+              <para><guilabel>Poisson</guilabel>: distribució estadística alternativa que es pot utilitzar per a alinear els fitxers.</para>
+            </listitem>
+          </itemizedlist>
+
+          <para>De la mateixa manera que els algorismes, no hi ha cap regla ràpida i senzilla sobre quina distribució estadística triar. Proveu-los tots dos i utilitzeu el que doni un resultat millor per als vostres fitxers.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Recompte:</term>
+        <listitem>
+          <itemizedlist>
+            <listitem>
+              <para><guilabel>Caràcters</guilabel>: unitat bàsica utilitzada per a determinar la mida dels segments en les llengües que no utilitzen espais per a delimitar les paraules.</para>
+            </listitem>
+
+            <listitem>
+              <para><guilabel>Paraules</guilabel>: unitat bàsica utilitzada per a determinar la mida dels segments en les llengües que utilitzen espais per a delimitar les paraules.</para>
+            </listitem>
+          </itemizedlist>
+
+          <para>L'alineador selecciona automàticament el recompte en funció de les llengües d'origen i destinació dels fitxers que voleu alinear. Per defecte és <guilabel>Caràcters</guilabel> si almenys una de les llengües implicades no delimita les paraules amb espais; en cas contrari, és <guilabel>Paraules</guilabel>. Si treballeu amb un de cada, podeu intentar canviar entre els dos per a veure quin dona millors resultats.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <variablelist>
+	  <title>Opcions</title>
+      <varlistentry>
+        <term>Segment</term>
+        <listitem>
+          <para>L'alineador utilitza la segmentació per frases per defecte. Desmarqueu la casella per a utilitzar la segmentació per paràgrafs. Consulteu les preferències de <link endterm="dialogs.preferences.segmentation.setup.title" linkend="dialogs.preferences.segmentation.setup"/>.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Amaga les etiquetes</term>
+        <listitem>
+          <para>L'alineador inclou les etiquetes dels segments per defecte. Desmarqueu la casella per a aplicar l'opció <link endterm="dialogs.project.properties.hide.tags.title" linkend="dialogs.project.properties.hide.tags"/>.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="windows.aligner.adjust.highlight">
+        <term id="windows.aligner.adjust.highlight.title">Ressalta</term>
+        <listitem>
+		  <para>Desmarqueu la casella per a desactivar el ressaltat.</para>
+
+          <para>L'alineador utilitza l'expressió regular <code>\d+</code> per a ressaltar tots els dígits en els segments d'origen i de destinació.</para>
+		  <para>Podeu modificar l'expressió regular per a afegir parts ressaltades. Consulteu el capítol <link linkend="app.regex" endterm="app.regex.title"/> per a conèixer més detalls.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Regles...</term>
+        <listitem>
+          <para>Si feu clic en aquest botó, podeu editar les regles de segmentació que s'apliquen al projecte. Consulteu l'annex <link linkend="app.segmentation" endterm="app.segmentation.title"/> per a conèixer més detalls.</para>
+
+          <warning>
+            <para>Si modifiqueu les regles de segmentació, se us demanarà si voleu desar els canvis quan tanqueu l'alineador. L'opció per defecte és <guibutton>Sí</guibutton>, que potser no és el que voleu si heu editat les regles de segmentació globals de l'OmegaT.</para>
+          </warning>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Filtres...</term>
+        <listitem>
+          <para>Si feu clic en aquest botó, podeu editar els filtres de fitxers que s'apliquen al projecte. Consulteu les preferències de <link linkend="dialogs.preferences.file.filters" endterm="dialogs.preferences.file.filters.title"/> per a conèixer més detalls.</para>
+
+          <warning>
+            <para>Si modifiqueu els filtres de fitxers, se us demanarà si voleu desar els canvis quan sortiu de l'alineador. L'opció per defecte és <guibutton>Sí</guibutton>, que potser no és el que voleu si heu editat els filtres de fitxers globals de l'OmegaT.</para>
+          </warning>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Patró...</term>
+        <listitem>
+          <para>Aquesta opció us permet indicar una expressió regular per a definir el patró utilitzat per a ressaltar el text en els segments d'origen i de destinació. Per defecte, l'alineador utilitza <literal>\d+</literal> per a ressaltar les xifres. Si els textos contenen altres elements que considereu útils ressaltar, modifiqueu l'expressió regular perquè inclogui aquests elements utilitzant el caràcter <literal>|</literal> per a separar cada element.</para>
+        </listitem>
+      </varlistentry>      
+    </variablelist>
+
+    <para>També podeu accedir a l'opció <guilabel>Ressalta</guilabel> i al quadre diàleg per a modificar el patró des del menú <guimenu>Visualització</guimenu>, i les a la resta d'opcions des del menú <guimenu>Opcions</guimenu>.</para>
+
+    <para>A més, el menú <guimenu>Fitxer</guimenu> proporciona les ordres següents:</para>
+	
+    <itemizedlist>
+      <listitem>
+        <para><guimenuitem>Desa en TMX...</guimenuitem>: aquest element apareix desactivat fins que es completa el pas següent.</para>
+      </listitem>
+	  
+      <listitem>
+        <para><guimenuitem>Reinicialitza</guimenuitem>: aquesta ordre restaura tots els paràmetres al valor per defecte. També podeu accedir-hi fent clic en <guibutton>Reinicialitza</guibutton> en la part inferior dreta de la finestra o prement <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>R</keycap></keycombo>.</para>
+      </listitem>
+
+      <listitem>
+        <para><guimenuitem>Torna a carregar</guimenuitem>: aquesta ordre torna a carregar el fitxer des del disc. Podeu utilitzar aquesta ordre per a analitzar i tornar a alinear els fitxers si n'heu modificat el contingut.</para>
+      </listitem>
+
+      <listitem>
+        <para><guimenuitem>Tanca</guimenuitem>: tanca el quadre de diàleg <guilabel>Alineació</guilabel>. Si ho feu en aquest pas, es cancel·la l'alineació sense desar cap dada en un fitxer de memòria de traducció. També podeu executar aquesta ordre prement <keycombo><keycap>C</keycap><keycap>W</keycap></keycombo>.</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>El menú <guimenu>Edita</guimenu> apareix desactivat en aquest pas.</para>
+
+    <para>Quan estigueu satisfet amb els resultats d'aquest pas, feu clic en el botó <guibutton>Continua</guibutton> per a passar al següent.</para>
+  </section>
+
+  <section id="windows.aligner.manual.corrections">
+    <title id="windows.aligner.manual.corrections.title">Correccions</title>
+
+    <para>Normalment, cal aplicar ajustaments manuals després del procés d'alineació automàtica inicial. Això generalment implica moure segments amunt o avall per a alinear-los amb els segments correctes en l'altra llengua, i també dividir o unir segments. L'alineador també us permet editar el contingut d'un segment, la qual cosa pot ser útil si detecteu errors en un segment, com ara un error ortogràfic.</para>
+
+    <para>Podeu accedir a totes les accions disponibles des del menú <guimenu>Edita</guimenu> o prement la drecera del teclat corresponent. Les accions més habituals també són accessibles amb els botons a la dreta de la subfinestra principal.</para>
+
+    <note>
+      <para>Val la pena recordar les dreceres del teclat si utilitzeu l'alineador sovint o si treballeu amb documents grans, ja que us permeten dur a terme accions molt ràpidament.</para>
+    </note>
+
+    <para>Per a aplicar una acció, seleccioneu el segment o bloc de segments consecutius. Podeu seleccionar segments individualment amb el ratolí o les tecles de direcció. Es poden seleccionar blocs de segments amb el ratolí fent clic en el primer segment i mantenint premuda la tecla <keycap>Maj</keycap> mentre es fa clic en el darrer segment.</para>
+
+	<para>Com a alternativa, podeu prémer les tecles de direcció mentre manteniu premuda la tecla <keycap>Maj</keycap> per a seleccionar segments consecutius. Les accions disponibles es presenten a continuació.</para>
+
+    <variablelist>
+      <varlistentry>
+        <term>Mou amunt (<keycap>U</keycap>)</term>
+        <listitem>
+          <para>Mou el segment o el bloc de segments consecutius seleccionat una fila amunt.</para>
+          <para>Aquesta ordre també està disponible amb el botó a la dreta de la subfinestra principal.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Mou avall (<keycap>D</keycap>)</term>
+        <listitem>
+          <para>Mou el segment o el bloc de segments consecutius seleccionat una fila avall.</para>
+
+          <para>Aquesta ordre també està disponible amb el botó a la dreta de la subfinestra principal.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Divideix (<keycap>S</keycap>)</term>
+        <listitem>
+          <para>Si se selecciona un únic segment, aquesta ordre obre el quadre de diàleg <guilabel>Divisió del text</guilabel>. Utilitzeu el ratolí o les tecles de direcció per a col·locar el cursor en la ubicació on voleu dividir el text i feu clic en el botó <guibutton>D'acord</guibutton> o premeu <keycap>Retorn</keycap>.</para>
+
+          <para>Si se seleccionen dos o més segments que ocupen cel·les independents de la mateixa fila (segments de diverses cel·les sense una casella de selecció <guilabel>Conserva</guilabel>), aquesta ordre tornarà a dividir les cel·les seleccionades en files independents (amb una casella de selecció <guilabel>Conserva</guilabel>).</para>
+
+		  <para>Aquesta ordre també està disponible amb el botó a la dreta de la subfinestra principal.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Uneix (<keycap>M</keycap>)</term>
+        <listitem>
+          <para>Si només se selecciona un segment, l'alineador l'unirà al segment següent. Si se seleccionen dos o més segments, s'uniran tots, però romandran en cel·les independents. Si es torna a executar l'ordre sobre la mateixa selecció, s'uneix el contingut de totes les cel·les seleccionades en una única cel·la.</para>
+
+		  <para>Aquesta ordre també està disponible amb el botó a la dreta de la subfinestra principal.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Edita (<keycap>E</keycap>)</term>
+        <listitem>
+          <para>Aquesta ordre només es pot aplicar en un únic segment. Amb aquesta ordre s'obre el quadre de diàleg <guilabel>Edició del text</guilabel>, que us permet aplicar canvis al text del segment. Utilitzeu el botó <guibutton>D'acord</guibutton> per a tancar el quadre de diàleg quan hàgiu acabat. En aquest quadre de diàleg, la tecla <keycap>Retorn</keycap> afegeix un salt de línia al text.</para>
+
+		  <para>Utilitzeu <keycombo><keycap>C</keycap><keycap>Retorn</keycap></keycombo> per a tancar-lo sense utilitzar el ratolí.</para>
+
+		  <para>Aquesta ordre també està disponible amb el botó a la dreta de la subfinestra principal.</para>
+        </listitem>
+      </varlistentry>
+
+	  <varlistentry>
+        <term>Marca com a «Acceptat» (<keycap>A</keycap>)</term>
+        <listitem>
+          <para>Utilitzeu aquesta ordre per a confirmar que l'alineació dels segments de la fila o del bloc de files seleccionat és correcta. Això ressalta la columna <guilabel>Conserva</guilabel> corresponent de color verd.</para>
+        </listitem>
+      </varlistentry>
+
+	  <varlistentry>
+        <term>Marca com a «Necessita revisió» (<keycap>R</keycap>)</term>
+        <listitem>
+          <para>Utilitzeu aquesta ordre per a identificar una fila o un bloc de files en què l'alineació dels segments és dubtosa. Això ressalta la columna <guilabel>Conserva</guilabel> corresponent de color vermell.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Suprimeix la marca (<keycap>C</keycap>)</term>
+        <listitem>
+          <para>Utilitzeu aquesta ordre per a suprimir una o més marques establertes per les ordres <guilabel>Marca com a «Acceptat»</guilabel> o <guilabel>Marca com a «Necessita revisió»</guilabel>.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Torna a alinear els pendents (<keycombo><keycap>C</keycap><keycap>R</keycap></keycombo>)</term>
+        <listitem>
+          <para>Si s'ha marcat qualsevol fila com a acceptada, utilitzeu aquesta ordre per a actualitzar l'alineació de les files restants.</para>
+        </listitem>
+      </varlistentry>
+
+	  <varlistentry>
+        <term>Conserva'ls tots</term>
+        <listitem>
+          <para>Utilitzeu aquesta ordre per a marcar la casella <guilabel>Conserva</guilabel> per a totes les files.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>No en conservis cap</term>
+        <listitem>
+          <para>Utilitzeu aquesta ordre per a desmarcar la casella <guilabel>Conserva</guilabel> per a totes les files.</para>
+        </listitem>
+      </varlistentry>
+
+	  <varlistentry>
+        <term>Canvia la selecció (<keycap>K</keycap>)</term>
+        <listitem>
+          <para>Utilitzeu aquesta ordre per a canviar la casella de selecció <guilabel>Conserva</guilabel> de la fila o del bloc de files seleccionat de marcada a desmarcada, o viceversa.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Inicia l'alineació per clics (<keycap>Espai</keycap>)</term>
+        <listitem>
+          <para>Si els segments corresponents estan separats per diverses files i voleu alinear-los ràpidament, utilitzeu aquesta ordre per a seleccionar el primer segment i, a continuació, feu clic en el segment corresponent de l'altra columna.</para>
+		  
+		  <para>També podeu utilitzar les tecles de direcció i prémer <keycap>Espai</keycap> en el segment corresponent.</para>
+		  
+          <para>Els segments alineats d'aquesta manera es marquen automàticament com a acceptats.</para>
+
+		  <para>Pot ser útil executar l'ordre <guimenuitem>Torna a alinear els pendents</guimenuitem> després d'utilitzar l'alineació per clics unes quantes vegades.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <para>Després d'acabar l'alineació de les dues columnes, feu clic en el botó <guibutton>Desa en TMX...</guibutton> per a crear la memòria de traducció.</para>
+
+    <note>
+      <para>Només les files amb la casella <guilabel>Conserva</guilabel> marcada en la primera columna es desen en la memòria de traducció.</para>
+    </note>
+
+
+    <para>A més del botó <guibutton>Desa en TMX...</guibutton>, la part inferior de la finestra <guilabel>Alineació</guilabel> en el pas de correcció manual inclou la mateixa casella de selecció <guilabel>Ressalta</guilabel> i el botó <guibutton>Patró...</guibutton> del primer pas. Aquesta opció també és accessible des del menú <guimenu>Visualització</guimenu>.</para>
+
+    <warning>
+      <para>També hi ha un botó <guibutton>Reinicialitza</guibutton> en la part inferior de la finestra. <emphasis role="bold">Aneu amb compte!</emphasis> En fer clic en aquest botó, es descartaran tots els canvis i tornareu al primer pas.</para>
+    </warning>    
+    
+  </section>
+</section>

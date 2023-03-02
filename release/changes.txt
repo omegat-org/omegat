@@ -29,6 +29,9 @@
 
   Implemented requests:
 
+  - Help user to copy error message to clipboard
+  https://sourceforge.net/p/omegat/feature-requests/1683/
+
   - Can share authentication between Git or SVN repositories 
 which are in the same server
   https://sourceforge.net/p/omegat/feature-requests/1670

@@ -75,6 +75,7 @@ import org.omegat.gui.matches.IMatcher;
 import org.omegat.gui.search.SearchWindowController;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
+import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.StaticUIUtils;
 import org.omegat.util.gui.UIDesignManager;
@@ -497,8 +498,12 @@ public class MainWindow extends JFrame implements IMainWindow {
                 pane.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
                 JButton jbutton = new JButton(OStrings.getString("TF_ERROR_COPY_CLIPBOARD"));
                 // Copy to clipboard action
-                jbutton.addActionListener(l -> Toolkit.getDefaultToolkit().getSystemClipboard()
-                        .setContents(new StringSelection(ex.getLocalizedMessage()), null));
+                jbutton.addActionListener(l -> {
+                    String clipboardMsg = String.format("%s%n---%n%s%n", ex.getLocalizedMessage(),
+                            StaticUtils.getSupportInfo());
+                    Toolkit.getDefaultToolkit().getSystemClipboard()
+                            .setContents(new StringSelection(clipboardMsg), null);
+                });
                 jbutton.setAlignmentX(LEFT_ALIGNMENT);
                 pane.add(jbutton);
             }

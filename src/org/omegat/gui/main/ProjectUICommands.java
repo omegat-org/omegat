@@ -606,9 +606,12 @@ public final class ProjectUICommands {
                         throw e;
                     }
                 }
+                // non-exist directories could be created
+                props.autocreateDirectories();
             } else {
                 // not a team project
                 File projectFile = new File(projectRootFolder, OConsts.FILE_PROJECT);
+                props.autocreateDirectories();
                 while (!props.isProjectValid()) {
                     // something wrong with the project.
                     // We display open dialog to fix it.
@@ -625,8 +628,6 @@ public final class ProjectUICommands {
                     needToSaveProperties = true;
                 }
             }
-            // non-exist directories could be created
-            props.autocreateDirectories();
             // Critical section, create backup and save
             // properties.
             final ProjectProperties propsP = props;

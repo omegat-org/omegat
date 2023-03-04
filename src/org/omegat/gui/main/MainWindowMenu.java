@@ -37,6 +37,7 @@
 
 package org.omegat.gui.main;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -212,9 +213,11 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
     @SuppressWarnings("serial")
     // CHECKSTYLE:OFF
     JMenuBar initComponents() {
+        Color foreground = UIManager.getColor("MenuBar.foreground");
+        Color background = UIManager.getColor("MenuBar.background");
         mainMenu = new JMenuBar();
-        mainMenu.setForeground(UIManager.getColor("MenuBar.foreground"));
-        mainMenu.setBackground(UIManager.getColor("MenuBar.background"));
+        mainMenu.setForeground(foreground);
+        mainMenu.setBackground(background);
         mainMenu.add(projectMenu = createMenu("TF_MENU_FILE"));
         mainMenu.add(editMenu = createMenu("TF_MENU_EDIT"));
         mainMenu.add(gotoMenu = createMenu("MW_GOTOMENU"));

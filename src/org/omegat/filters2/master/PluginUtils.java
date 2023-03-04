@@ -33,6 +33,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Method;
+import java.net.JarURLConnection;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.nio.file.Files;
@@ -181,6 +182,10 @@ public final class PluginUtils {
                     }
                 } catch (ClassNotFoundException e) {
                     Log.log(e);
+                } catch (UnsupportedClassVersionError e) {
+                    JarURLConnection connection = (JarURLConnection) mu.openConnection();
+                    URL url = connection.getJarFileURL();
+                    Log.logWarningRB("PLUGIN_JAVA_VERSION_ERROR", url);
                 }
             }
         } catch (IOException ex) {

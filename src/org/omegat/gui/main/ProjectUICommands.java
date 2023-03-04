@@ -609,21 +609,19 @@ public final class ProjectUICommands {
             } else {
                 // not a team project
                 File projectFile = new File(projectRootFolder, OConsts.FILE_PROJECT);
-                if (!props.isProjectValid()) {
-                    do {
-                        // something wrong with the project.
-                        // We display open dialog to fix it.
-                        ProjectPropertiesDialog prj = new ProjectPropertiesDialog(
-                                Core.getMainWindow().getApplicationFrame(), props, projectFile.getAbsolutePath(),
-                                ProjectPropertiesDialog.Mode.RESOLVE_DIRS);
-                        prj.setVisible(true);
-                        props = prj.getResult();
-                        prj.dispose();
-                        if (props == null) {
-                            // user clicks on 'Cancel'
-                            return;
-                        }
-                    } while (!props.isProjectValid());
+                while (!props.isProjectValid()) {
+                    // something wrong with the project.
+                    // We display open dialog to fix it.
+                    ProjectPropertiesDialog prj = new ProjectPropertiesDialog(
+                            Core.getMainWindow().getApplicationFrame(), props, projectFile.getAbsolutePath(),
+                            ProjectPropertiesDialog.Mode.RESOLVE_DIRS);
+                    prj.setVisible(true);
+                    props = prj.getResult();
+                    prj.dispose();
+                    if (props == null) {
+                        // user clicks on 'Cancel'
+                        return;
+                    }
                     needToSaveProperties = true;
                 }
             }
@@ -633,25 +631,28 @@ public final class ProjectUICommands {
             // properties.
             final ProjectProperties propsP = props;
             final boolean finalNeedToSaveProperties = needToSaveProperties;
+            final File finalNewProjectFile = newProjectFile;
             final boolean onlineMode = true;
             Core.executeExclusively(true, () -> {
                 // loading modified new project property
                 boolean succeeded = ProjectFactory.loadProject(propsP, onlineMode);
+                if (!succeeded) {
+                    return;
+                }
                 File projectFile = new File(projectRootFolder, OConsts.FILE_PROJECT);
                 // make backup and save omegat.project file when required
-                if (succeeded && finalNeedToSaveProperties) {
+                if (finalNeedToSaveProperties) {
                     File backup = FileUtil.backupFile(projectFile);
                     FileUtil.removeOldBackups(projectFile, OConsts.MAX_BACKUPS);
                     Log.logWarningRB("PP_REMOTE_PROJECT_CONTENT_OVERRIDES_THE_CURRENT_PROJECT",
                             backup.getName());
                     Core.getProject().saveProjectProperties();
-                } else if (succeeded && FileUtil.getRecentBackup(projectFile) == null) {
+                } else if (FileUtil.getRecentBackup(projectFile) == null) {
                     FileUtil.backupFile(projectFile);
+                } else if (finalNewProjectFile != null) {
+                    FileUtils.deleteQuietly(finalNewProjectFile);
                 }
             });
-            if (newProjectFile != null) {
-                Files.deleteIfExists(newProjectFile.toPath());
-            }
             RecentProjects.add(projectRootFolder.getAbsolutePath());
         } catch (Exception ex) {
             Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
@@ -660,7 +661,7 @@ public final class ProjectUICommands {
     }
 
     /**
-     * Detect whether local `omegat.project` is identical * with remote one.
+     * Detect whether local `omegat.project` is identical with remote one.
      * 
      * @param that
      *            remote omegat.project.

@@ -84,13 +84,9 @@ public final class FileUtil {
      *            target original file name.
      */
     public static File getRecentBackup(final File originalFile) {
-        File[] bakFiles = null;
-        try {
-            bakFiles = originalFile.getParentFile()
-                    .listFiles(f -> !f.isDirectory() && f.getName().startsWith(originalFile.getName())
-                            && f.getName().endsWith(OConsts.BACKUP_EXTENSION));
-        } catch (Exception ignored) {
-        }
+        File[] bakFiles = originalFile.getParentFile()
+                .listFiles(f -> !f.isDirectory() && f.getName().startsWith(originalFile.getName())
+                        && f.getName().endsWith(OConsts.BACKUP_EXTENSION));
         if (bakFiles == null || bakFiles.length == 0) {
             return null;
         }
@@ -130,11 +126,15 @@ public final class FileUtil {
      *            a file to copy as backup file.
      * @return Backup file.
      */
-    public static File backupFile(File original) throws IOException {
+    public static File backupFile(File original) {
         long fileMillis = original.lastModified();
         String str = new SimpleDateFormat("yyyyMMddHHmm").format(new Date(fileMillis));
         File backup = new File(original.getPath() + "." + str + OConsts.BACKUP_EXTENSION);
-        FileUtils.copyFile(original, backup);
+        try {
+            FileUtils.copyFile(original, backup);
+        } catch (IOException ex) {
+            Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_CREATE_BACKUP_FILE", original.getName());
+        }
         return backup;
     }
 

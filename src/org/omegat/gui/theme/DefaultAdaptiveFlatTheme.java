@@ -63,6 +63,11 @@ public class DefaultAdaptiveFlatTheme extends DelegatingLookAndFeel {
     }
 
     @Override
+    public boolean isNativeLookAndFeel() {
+        return false;
+    }
+
+    @Override
     public String getName() {
         return NAME;
     }
@@ -81,16 +86,6 @@ public class DefaultAdaptiveFlatTheme extends DelegatingLookAndFeel {
     public UIDefaults getDefaults() {
         String id = systemLookAndFeel.getID();
         UIDefaults defaults = systemLookAndFeel.getDefaults();
-        /* debug code
-        for (Map.Entry<Object, Object> entry: defaults.entrySet()) {
-            if (entry.getKey() instanceof String) {
-                if (entry.getValue() instanceof Color) {
-                    Log.log(String.format("%s=#%06x", entry.getKey(),
-                            ((Color) entry.getValue()).getRGB() & 0xffffff));
-                }
-            }
-        }
-        */
         if (id.equals("Aqua") && isDarkPreference()) {
             if (UIDesignManager.isDarkTheme(defaults)) {
                 // JDK14 and later support dark mode on Aqua

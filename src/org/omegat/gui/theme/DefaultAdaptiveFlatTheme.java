@@ -25,6 +25,7 @@
 
 package org.omegat.gui.theme;
 
+import java.awt.Color;
 import java.io.IOException;
 
 import javax.swing.LookAndFeel;
@@ -117,6 +118,8 @@ public class DefaultAdaptiveFlatTheme extends DelegatingLookAndFeel {
         // load default colors
         try {
             UIDesignManager.loadDefaultSystemDarkColors(defaults);
+            Color menuColor = defaults.getColor("menu");
+            defaults.put("MenuBar.background", new AdaptiveActiveValue(menuColor));
         } catch (IOException e) {
             Log.log(e);
         }
@@ -128,4 +131,17 @@ public class DefaultAdaptiveFlatTheme extends DelegatingLookAndFeel {
         return defaults;
     }
 
+    private static class AdaptiveActiveValue implements UIDefaults.ActiveValue {
+
+        private final Color color;
+
+        public AdaptiveActiveValue(Color color) {
+            this.color = color;
+        }
+
+        @Override
+        public Object createValue(UIDefaults table) {
+            return color;
+        }
+    }
 }

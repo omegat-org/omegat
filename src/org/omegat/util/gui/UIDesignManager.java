@@ -303,9 +303,6 @@ public final class UIDesignManager {
             loadDefaultAppDarkColors(uiDefaults);
         } else {
             loadDefaultAppLightColors(uiDefaults);
-            Color bg = uiDefaults.getColor("TextArea.background").darker(); // NOI18N
-            Color hilite = new Color(bg.getRed(), bg.getBlue(), bg.getGreen(), 32);
-            uiDefaults.put("OmegaT.alternatingHilite", hilite);
         }
     }
 
@@ -331,5 +328,8 @@ public final class UIDesignManager {
     public static void loadDefaultAppLightColors(UIDefaults uiDefaults) throws IOException {
         ResourcesUtil.getBundleColorProperties("light")
                 .forEach((k, v) -> loadColors(uiDefaults, k.toString(), v.toString()));
+        Color bg = uiDefaults.getColor("TextArea.background").darker(); // NOI18N
+        Color hilite = new Color(bg.getRed(), bg.getBlue(), bg.getGreen(), 32);
+        uiDefaults.put("OmegaT.alternatingHilite", hilite);
     }
 }

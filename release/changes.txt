@@ -2,7 +2,7 @@
  OmegaT 5.8.0
 ----------------------------------------------------------------------
    4 Removed features
-  37 Enhancements
+  39 Enhancements
   45 Bug fixes
   9 Localization updates
 ----------------------------------------------------------------------
@@ -32,9 +32,14 @@
   - Help user to copy error message to clipboard
   https://sourceforge.net/p/omegat/feature-requests/1683/
 
-  - Can share authentication between Git or SVN repositories 
-which are in the same server
+  - New default: Dictionary search should not be automatic
+  https://sourceforge.net/p/omegat/feature-requests/1680/
+  
+  - Share authentication between Git or SVN repositories on the same server
   https://sourceforge.net/p/omegat/feature-requests/1670
+  
+  - Add filter filtres list sorting
+  https://sourceforge.net/p/omegat/feature-requests/1667/
 
   - Integrate the Stax filters to OmegaT
   https://sourceforge.net/p/omegat/feature-requests/1666/

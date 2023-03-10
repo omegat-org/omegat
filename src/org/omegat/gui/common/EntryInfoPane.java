@@ -25,7 +25,6 @@
 
 package org.omegat.gui.common;
 
-import java.awt.Font;
 import java.awt.GraphicsEnvironment;
 import java.awt.Rectangle;
 
@@ -33,7 +32,6 @@ import javax.swing.JTextPane;
 
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
-import org.omegat.core.events.IFontChangedEventListener;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.util.gui.FontFallbackListener;
 import org.omegat.util.gui.StaticUIUtils;
@@ -53,14 +51,10 @@ import org.omegat.util.gui.UIThreadsUtil;
 @SuppressWarnings("serial")
 public abstract class EntryInfoPane<T> extends JTextPane implements IProjectEventListener {
 
-    public EntryInfoPane(final boolean useApplicationFont) {
+    protected EntryInfoPane(final boolean useApplicationFont) {
         if (useApplicationFont) {
             setFont(Core.getMainWindow().getApplicationFont());
-            CoreEvents.registerFontChangedEventListener(new IFontChangedEventListener() {
-                public void onFontChanged(Font newFont) {
-                    setFont(newFont);
-                }
-            });
+            CoreEvents.registerFontChangedEventListener(newFont -> setFont(newFont));
         }
         CoreEvents.registerProjectChangeListener(this);
         if (!GraphicsEnvironment.isHeadless()) {

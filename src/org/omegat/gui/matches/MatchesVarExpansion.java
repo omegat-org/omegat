@@ -45,6 +45,7 @@ import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.matching.DiffDriver;
 import org.omegat.core.matching.DiffDriver.Render;
 import org.omegat.core.matching.DiffDriver.TextRun;
+import org.omegat.util.gui.BiDiUtils;
 import org.omegat.core.matching.NearString;
 import org.omegat.util.OStrings;
 import org.omegat.util.TMXProp;
@@ -116,37 +117,31 @@ public class MatchesVarExpansion extends VarExpansion<NearString> {
     public static final Pattern PATTERN_SINGLE_PROPERTY = Pattern.compile("@\\{(.+?)\\}");
     public static final Pattern PATTERN_PROPERTY_GROUP = Pattern.compile("@\\[(.+?)\\]\\[(.+?)\\]\\[(.+?)\\]");
 
-    private static final Replacer SOURCE_TEXT_REPLACER = new Replacer() {
-        public void replace(Result r, NearString match) {
-            r.sourcePos = r.text.indexOf(VAR_SOURCE_TEXT);
-            r.text = r.text.replace(VAR_SOURCE_TEXT, match.source);
-        }
+    private static final Replacer SOURCE_TEXT_REPLACER = (Result r, NearString match) -> {
+        r.sourcePos = r.text.indexOf(VAR_SOURCE_TEXT);
+        r.text = r.text.replace(VAR_SOURCE_TEXT, match.source);
     };
 
-    private static final Replacer DIFF_REPLACER = new Replacer() {
-        public void replace(Result r, NearString match) {
-            int diffPos = r.text.indexOf(VAR_DIFF);
-            SourceTextEntry ste = Core.getEditor().getCurrentEntry();
-            if (diffPos != -1 && ste != null) {
-                Render diffRender = DiffDriver.render(match.source, ste.getSrcText(), true);
-                r.diffInfo.put(diffPos, diffRender.formatting);
-                if (diffRender.text != null) {
-                    r.text = r.text.replace(VAR_DIFF, diffRender.text);
-                }
+    private static final Replacer DIFF_REPLACER = (Result r, NearString match) -> {
+        int diffPos = r.text.indexOf(VAR_DIFF);
+        SourceTextEntry ste = Core.getEditor().getCurrentEntry();
+        if (diffPos != -1 && ste != null) {
+            Render diffRender = DiffDriver.render(match.source, ste.getSrcText(), true);
+            r.diffInfo.put(diffPos, diffRender.formatting);
+            if (diffRender.text != null) {
+                r.text = r.text.replace(VAR_DIFF, diffRender.text);
             }
         }
     };
 
-    private static final Replacer DIFF_REVERSED_REPLACER = new Replacer() {
-        public void replace(Result r, NearString match) {
-            int diffPos = r.text.indexOf(VAR_DIFF_REVERSED);
-            SourceTextEntry ste = Core.getEditor().getCurrentEntry();
-            if (diffPos != -1 && ste != null) {
-                Render diffRender = DiffDriver.render(ste.getSrcText(), match.source, true);
-                r.diffInfo.put(diffPos, diffRender.formatting);
-                if (diffRender.text != null) {
-                    r.text = r.text.replace(VAR_DIFF_REVERSED, diffRender.text);
-                }
+    private static final Replacer DIFF_REVERSED_REPLACER = (Result r, NearString match) -> {
+        int diffPos = r.text.indexOf(VAR_DIFF_REVERSED);
+        SourceTextEntry ste = Core.getEditor().getCurrentEntry();
+        if (diffPos != -1 && ste != null) {
+            Render diffRender = DiffDriver.render(ste.getSrcText(), match.source, true);
+            r.diffInfo.put(diffPos, diffRender.formatting);
+            if (diffRender.text != null) {
+                r.text = r.text.replace(VAR_DIFF_REVERSED, diffRender.text);
             }
         }
     };
@@ -157,7 +152,7 @@ public class MatchesVarExpansion extends VarExpansion<NearString> {
     public static class Result {
         public String text = null;
         public int sourcePos = -1;
-        public final Map<Integer, List<TextRun>> diffInfo = new HashMap<Integer, List<TextRun>>();
+        public final Map<Integer, List<TextRun>> diffInfo = new HashMap<>();
     }
 
     /** A simple interface for making anonymous functions that perform string replacements. */
@@ -166,9 +161,6 @@ public class MatchesVarExpansion extends VarExpansion<NearString> {
     }
 
     // ------------------------------ non-static part -------------------
-
-    /** A sorted map that ensures styled replacements are performed in the order of appearance. */
-    private Map<Integer, Replacer> styledComponents = new TreeMap<Integer, Replacer>();
 
     public MatchesVarExpansion(String template) {
         super(template);
@@ -194,15 +186,17 @@ public class MatchesVarExpansion extends VarExpansion<NearString> {
             localTemplate = localTemplate.replace(matcher.group(), value == null ? "" : value);
         }
         while ((matcher = PATTERN_PROPERTY_GROUP.matcher(localTemplate)).find()) {
-            String patternStr = matcher.group(1), separator1 = matcher.group(2),
-                    separator2 = matcher.group(3);
+            String patternStr = matcher.group(1);
+            String separator1 = matcher.group(2);
+            String separator2 = matcher.group(3);
             separator1 = separator1.replace("\\n", "\n");
             separator2 = separator2.replace("\\n", "\n");
             Pattern pattern = Pattern.compile(patternStr.replace("*", "(.*)").replace("?", "(.)"));
             StringBuilder res = new StringBuilder();
-            for (TMXProp me : props) {
-                if (pattern.matcher(me.getType().toString()).matches()) {
-                    res.append(me.getType()).append(separator1).append(me.getValue()).append(separator2);
+            for (TMXProp entry : props) {
+                if (pattern.matcher(entry.getType()).matches()) {
+                    res.append(entry.getType()).append(separator1).append(entry.getValue())
+                            .append(separator2);
                 }
             }
             if (res.toString().endsWith(separator2)) {
@@ -214,9 +208,9 @@ public class MatchesVarExpansion extends VarExpansion<NearString> {
     }
 
     private String getPropValue(List<TMXProp> props, String type) {
-        for (TMXProp me : props) {
-            if (type.equals(me.getType())) {
-                return me.getValue();
+        for (TMXProp entry : props) {
+            if (type.equals(entry.getType())) {
+                return entry.getValue();
             }
         }
         return null;
@@ -226,9 +220,10 @@ public class MatchesVarExpansion extends VarExpansion<NearString> {
     public String expandVariables(NearString match) {
         // do not modify template directly, so that we can reuse for another change
         String localTemplate = this.template;
-        localTemplate = localTemplate.replace(VAR_INITIAL_CREATION_ID, match.creator == null ? "" : match.creator);
+        localTemplate = localTemplate.replace(VAR_INITIAL_CREATION_ID,
+                match.creator == null ? "" : match.creator);
         // VAR_CREATION_ID is an alias for VAR_CHANGED_ID, for backwards compatibility.
-        for (String s : new String[] {VAR_CHANGED_ID, VAR_CREATION_ID}) {
+        for (String s : new String[] { VAR_CHANGED_ID, VAR_CREATION_ID }) {
             localTemplate = localTemplate.replace(s, match.changer == null ? "" : match.changer);
         }
         if (match.creationDate > 0) {
@@ -247,16 +242,17 @@ public class MatchesVarExpansion extends VarExpansion<NearString> {
             }
         }
         localTemplate = localTemplate.replace(VAR_SCORE_BASE, Integer.toString(match.scores[0].score));
-        localTemplate = localTemplate.replace(VAR_SCORE_NOSTEM, Integer.toString(match.scores[0].scoreNoStem));
-        localTemplate = localTemplate.replace(VAR_SCORE_ADJUSTED, Integer.toString(match.scores[0].adjustedScore));
-        localTemplate = localTemplate.replace(VAR_TARGET_TEXT, match.translation);
+        localTemplate = localTemplate.replace(VAR_SCORE_NOSTEM,
+                Integer.toString(match.scores[0].scoreNoStem));
+        localTemplate = localTemplate.replace(VAR_SCORE_ADJUSTED,
+                Integer.toString(match.scores[0].adjustedScore));
         localTemplate = localTemplate.replace(VAR_FUZZY_FLAG,
                 match.fuzzyMark ? (OStrings.getString("MATCHES_FUZZY_MARK") + " ") : "");
 
         if (match.props != null) {
             for (TMXProp prop : match.props) {
                 if (prop.getType().equals(ExternalTMFactory.TMXLoader.PROP_SOURCE_LANGUAGE)) {
-                    localTemplate = localTemplate.replace(VAR_SOURCE_LANGUAGE, prop.getValue());            
+                    localTemplate = localTemplate.replace(VAR_SOURCE_LANGUAGE, prop.getValue());
                 } else if (prop.getType().equals(ExternalTMFactory.TMXLoader.PROP_TARGET_LANGUAGE)) {
                     localTemplate = localTemplate.replace(VAR_TARGET_LANGUAGE, prop.getValue());
                 }
@@ -274,29 +270,33 @@ public class MatchesVarExpansion extends VarExpansion<NearString> {
     }
 
     public Result apply(NearString match, int id) {
-        Result r = new Result();
-        styledComponents.clear();
-
+        /**
+         * A sorted map that ensures styled replacements are performed in the
+         * order of appearance.
+         */
+        Map<Integer, Replacer> styledComponents = new TreeMap<>();
+        Result result = new Result();
         // Variables
-        r.text = this.expandVariables(match);
-        r.text = r.text.replace(VAR_ID, Integer.toString(id));
+        result.text = this.expandVariables(match);
+        result.text = result.text.replace(VAR_TARGET_TEXT, match.translation);
+        result.text = result.text.replace(VAR_ID, Integer.toString(id));
 
         // Properties (<prop type='xxx'>value</prop>)
         if (match.props != null) {
-            r.text = expandProperties(r.text, match.props);
+            result.text = expandProperties(result.text, match.props);
         } else {
-            r.text = r.text.replaceAll(PATTERN_SINGLE_PROPERTY.pattern(), "");
-            r.text = r.text.replaceAll(PATTERN_PROPERTY_GROUP.pattern(), "");
+            result.text = result.text.replaceAll(PATTERN_SINGLE_PROPERTY.pattern(), "");
+            result.text = result.text.replaceAll(PATTERN_PROPERTY_GROUP.pattern(), "");
         }
 
-        styledComponents.put(r.text.indexOf(VAR_SOURCE_TEXT), SOURCE_TEXT_REPLACER);
-        styledComponents.put(r.text.indexOf(VAR_DIFF), DIFF_REPLACER);
-        styledComponents.put(r.text.indexOf(VAR_DIFF_REVERSED), DIFF_REVERSED_REPLACER);
+        styledComponents.put(result.text.indexOf(VAR_SOURCE_TEXT), SOURCE_TEXT_REPLACER);
+        styledComponents.put(result.text.indexOf(VAR_DIFF), DIFF_REPLACER);
+        styledComponents.put(result.text.indexOf(VAR_DIFF_REVERSED), DIFF_REVERSED_REPLACER);
 
-        for (Entry<Integer, Replacer> e : styledComponents.entrySet()) {
-            e.getValue().replace(r, match);
+        for (Entry<Integer, Replacer> entry : styledComponents.entrySet()) {
+            entry.getValue().replace(result, match);
         }
 
-        return r;
+        return result;
     }
 }

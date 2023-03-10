@@ -2,6 +2,8 @@ package org.omegat.util;
 
 import org.omegat.core.Core;
 
+import java.awt.ComponentOrientation;
+
 public class BiDiUtils {
 
 	public enum ORIENTATION {
@@ -60,6 +62,46 @@ public class BiDiUtils {
 			currentOrientation = ORIENTATION.DIFFER;
 		}
 		return currentOrientation;
+	}
+
+	/**
+	 * Decide what document orientation should be default for source/target
+	 * languages.
+	 */
+	public static ComponentOrientation getInitialOrientation() {
+		return getOrientation(null);
+	}
+
+	/**
+	 * Decide what document orientation should be default for source/target
+	 * languages.
+	 */
+	public static ComponentOrientation getOrientation(ORIENTATION currentOrientation) {
+
+		ComponentOrientation targetOrientation = null;
+
+		if (currentOrientation == null) {
+			currentOrientation = getOrientationType();
+		}
+
+		switch (currentOrientation) {
+		case ALL_LTR:
+			targetOrientation = ComponentOrientation.LEFT_TO_RIGHT;
+			break;
+		case ALL_RTL:
+			targetOrientation = ComponentOrientation.RIGHT_TO_LEFT;
+			break;
+		case DIFFER:
+			if (isTargetLangRtl()) {
+				// using target lang direction gives better result when user
+				// starts editing.
+				targetOrientation = ComponentOrientation.RIGHT_TO_LEFT;
+			} else {
+				targetOrientation = ComponentOrientation.LEFT_TO_RIGHT;
+			}
+		}
+		// set editor's orientation by target language
+		return targetOrientation;
 	}
 
 	public static String addRtlBidiAround(String string) {

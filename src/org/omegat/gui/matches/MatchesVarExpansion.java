@@ -45,8 +45,8 @@ import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.matching.DiffDriver;
 import org.omegat.core.matching.DiffDriver.Render;
 import org.omegat.core.matching.DiffDriver.TextRun;
-import org.omegat.util.gui.BiDiUtils;
 import org.omegat.core.matching.NearString;
+import org.omegat.util.BiDiUtils;
 import org.omegat.util.OStrings;
 import org.omegat.util.TMXProp;
 import org.omegat.util.VarExpansion;
@@ -120,6 +120,16 @@ public class MatchesVarExpansion extends VarExpansion<NearString> {
     private static final Replacer SOURCE_TEXT_REPLACER = (Result r, NearString match) -> {
         r.sourcePos = r.text.indexOf(VAR_SOURCE_TEXT);
         r.text = r.text.replace(VAR_SOURCE_TEXT, match.source);
+    };
+
+    private static final Replacer RTL_SOURCE_TEXT_REPLACER = (Result r, NearString match) -> {
+        r.sourcePos = r.text.indexOf(VAR_SOURCE_TEXT);
+        r.text = r.text.replace(VAR_SOURCE_TEXT, BiDiUtils.addRtlBidiAround(match.source));
+    };
+
+    private static final Replacer LTR_SOURCE_TEXT_REPLACER = (Result r, NearString match) -> {
+        r.sourcePos = r.text.indexOf(VAR_SOURCE_TEXT);
+        r.text = r.text.replace(VAR_SOURCE_TEXT, BiDiUtils.addLtrBidiAround(match.source));
     };
 
     private static final Replacer DIFF_REPLACER = (Result r, NearString match) -> {
@@ -274,11 +284,26 @@ public class MatchesVarExpansion extends VarExpansion<NearString> {
          * A sorted map that ensures styled replacements are performed in the
          * order of appearance.
          */
-        Map<Integer, Replacer> styledComponents = new TreeMap<>();
+        Map<Integer, Replacer> styledMatch = new TreeMap<>();
         Result result = new Result();
+        BiDiUtils.ORIENTATION orientation = BiDiUtils.getOrientationType();
+        boolean isMixedOrientation = (orientation == BiDiUtils.ORIENTATION.DIFFER);
+        boolean isSourceRtl = false;
+        boolean isTargetRtl = false;
+        if (isMixedOrientation) {
+            isSourceRtl = BiDiUtils.isSourceLangRtl();
+            isTargetRtl = BiDiUtils.isTargetLangRtl();
+        }
+
         // Variables
-        result.text = this.expandVariables(match);
-        result.text = result.text.replace(VAR_TARGET_TEXT, match.translation);
+        result.text = expandVariables(match);
+        if (isMixedOrientation && isTargetRtl) {
+            result.text = result.text.replace(VAR_TARGET_TEXT, BiDiUtils.addRtlBidiAround(match.translation));
+        } else if (isMixedOrientation) {
+            result.text = result.text.replace(VAR_TARGET_TEXT, BiDiUtils.addLtrBidiAround(match.translation));
+        } else {
+            result.text = result.text.replace(VAR_TARGET_TEXT, match.translation);
+        }
         result.text = result.text.replace(VAR_ID, Integer.toString(id));
 
         // Properties (<prop type='xxx'>value</prop>)
@@ -289,11 +314,17 @@ public class MatchesVarExpansion extends VarExpansion<NearString> {
             result.text = result.text.replaceAll(PATTERN_PROPERTY_GROUP.pattern(), "");
         }
 
-        styledComponents.put(result.text.indexOf(VAR_SOURCE_TEXT), SOURCE_TEXT_REPLACER);
-        styledComponents.put(result.text.indexOf(VAR_DIFF), DIFF_REPLACER);
-        styledComponents.put(result.text.indexOf(VAR_DIFF_REVERSED), DIFF_REVERSED_REPLACER);
+        if (isMixedOrientation && isSourceRtl) {
+            styledMatch.put(result.text.indexOf(VAR_SOURCE_TEXT), RTL_SOURCE_TEXT_REPLACER);
+        } else if (isMixedOrientation) {
+            styledMatch.put(result.text.indexOf(VAR_SOURCE_TEXT), LTR_SOURCE_TEXT_REPLACER);
+        } else {
+            styledMatch.put(result.text.indexOf(VAR_SOURCE_TEXT), SOURCE_TEXT_REPLACER);
+        }
+        styledMatch.put(result.text.indexOf(VAR_DIFF), DIFF_REPLACER);
+        styledMatch.put(result.text.indexOf(VAR_DIFF_REVERSED), DIFF_REVERSED_REPLACER);
 
-        for (Entry<Integer, Replacer> entry : styledComponents.entrySet()) {
+        for (Entry<Integer, Replacer> entry : styledMatch.entrySet()) {
             entry.getValue().replace(result, match);
         }
 

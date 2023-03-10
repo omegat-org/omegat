@@ -308,11 +308,16 @@
 	  </varlistentry>
 
 	  <varlistentry>
-		<term><guibutton>Show Advanced Options</guibutton></term>
+		<term><guibutton>TM Search Options</guibutton></term>
 		<listitem>
 		  <para>Select additional criteria such as the person who authored or
 		  changed the translation, the date and time of translation
 		  (modification), or whether to exclude orphan segments.</para>
+
+		  <warning>
+			<para>The TM search options only apply to the main memory and not to
+			the reference memories.</para>
+		  </warning>
 
 		  <variablelist>
 			<varlistentry>

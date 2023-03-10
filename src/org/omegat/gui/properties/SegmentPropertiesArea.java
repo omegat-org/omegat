@@ -63,6 +63,7 @@ import org.omegat.core.events.IEntryEventListener;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.gui.main.DockableScrollPane;
 import org.omegat.gui.main.IMainWindow;
+import org.omegat.util.BiDiUtils;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
@@ -99,6 +100,7 @@ public class SegmentPropertiesArea implements IPaneMenu {
     final DockableScrollPane scrollPane;
 
     private ISegmentPropertiesView viewImpl;
+    private boolean isTargetRtl;
 
     public SegmentPropertiesArea(IMainWindow mw) {
         scrollPane = new DockableScrollPane("SEGMENTPROPERTIES", OStrings.getString("SEGPROP_PANE_TITLE"),
@@ -115,6 +117,7 @@ public class SegmentPropertiesArea implements IPaneMenu {
             @Override
             public void onEntryActivated(SourceTextEntry newEntry) {
                 scrollPane.stopNotifying();
+                initialiseIsTargetLangRtl();
                 setProperties(newEntry);
                 doNotify(getKeysToNotify());
             }
@@ -326,7 +329,7 @@ public class SegmentPropertiesArea implements IPaneMenu {
                 setProperty(KEY_ISDUP, ste.getDuplicate());
             }
             if (ste.getSourceTranslation() != null) {
-                setProperty(KEY_TRANSLATION, ste.getSourceTranslation());
+                setProperty(KEY_TRANSLATION, addBiDiToTranslation(ste.getSourceTranslation()));
                 if (ste.isSourceTranslationFuzzy()) {
                     setProperty(KEY_TRANSLATIONISFUZZY, true);
                 }
@@ -339,6 +342,14 @@ public class SegmentPropertiesArea implements IPaneMenu {
             }
         }
         viewImpl.update();
+    }
+
+    private String addBiDiToTranslation(String translation) {
+        return isTargetRtl ? BiDiUtils.addRtlBidiAround(translation) : translation;
+    }
+
+    private void initialiseIsTargetLangRtl() {
+        isTargetRtl = BiDiUtils.isTargetLangRtl();
     }
 
     private void setKeyProperties(EntryKey key) {

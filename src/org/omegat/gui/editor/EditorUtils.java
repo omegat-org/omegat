@@ -40,6 +40,7 @@ import org.omegat.core.data.SourceTextEntry;
 import org.omegat.gui.editor.IEditor.CHANGE_CASE_TO;
 import org.omegat.gui.glossary.GlossaryEntry;
 import org.omegat.tokenizer.ITokenizer;
+import org.omegat.util.BiDiUtils;
 import org.omegat.util.StringUtil;
 import org.omegat.util.TagUtil;
 import org.omegat.util.TagUtil.Tag;
@@ -408,11 +409,11 @@ public final class EditorUtils {
             if (pos < t.pos) {
                 s.append(text.substring(pos, t.pos));
             }
-            s.append(SegmentBuilder.BIDI_RLM_CHAR);
-            s.append(SegmentBuilder.BIDI_LRM_CHAR);
+            s.append(BiDiUtils.BIDI_RLM_CHAR);
+            s.append(BiDiUtils.BIDI_LRM_CHAR);
             s.append(t.tag);
-            s.append(SegmentBuilder.BIDI_LRM_CHAR);
-            s.append(SegmentBuilder.BIDI_RLM_CHAR);
+            s.append(BiDiUtils.BIDI_LRM_CHAR);
+            s.append(BiDiUtils.BIDI_RLM_CHAR);
             pos = t.pos + t.tag.length();
         }
         if (pos < text.length()) {
@@ -424,12 +425,12 @@ public final class EditorUtils {
     public static boolean hasBidiAroundTag(String text, String tag, int pos) {
         try {
             boolean has = true;
-            if (text.charAt(pos - 1) != SegmentBuilder.BIDI_LRM_CHAR
-                    || text.charAt(pos - 2) != SegmentBuilder.BIDI_RLM_CHAR) {
+            if (text.charAt(pos - 1) != BiDiUtils.BIDI_LRM_CHAR
+                    || text.charAt(pos - 2) != BiDiUtils.BIDI_RLM_CHAR) {
                 has = false;
             }
-            if (text.charAt(pos + tag.length()) != SegmentBuilder.BIDI_LRM_CHAR
-                    || text.charAt(pos + tag.length() + 1) != SegmentBuilder.BIDI_RLM_CHAR) {
+            if (text.charAt(pos + tag.length()) != BiDiUtils.BIDI_LRM_CHAR
+                    || text.charAt(pos + tag.length() + 1) != BiDiUtils.BIDI_RLM_CHAR) {
                 has = false;
             }
             return has;

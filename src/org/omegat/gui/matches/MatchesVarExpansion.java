@@ -46,6 +46,7 @@ import org.omegat.core.matching.DiffDriver;
 import org.omegat.core.matching.DiffDriver.Render;
 import org.omegat.core.matching.DiffDriver.TextRun;
 import org.omegat.core.matching.NearString;
+import org.omegat.util.BiDiUtils;
 import org.omegat.util.OStrings;
 import org.omegat.util.TMXProp;
 import org.omegat.util.VarExpansion;
@@ -123,6 +124,16 @@ public class MatchesVarExpansion extends VarExpansion<NearString> {
         }
     };
 
+    private static final Replacer RTL_SOURCE_TEXT_REPLACER = (Result r, NearString match) -> {
+        r.sourcePos = r.text.indexOf(VAR_SOURCE_TEXT);
+        r.text = r.text.replace(VAR_SOURCE_TEXT, BiDiUtils.addRtlBidiAround(match.source));
+    };
+
+    private static final Replacer LTR_SOURCE_TEXT_REPLACER = (Result r, NearString match) -> {
+        r.sourcePos = r.text.indexOf(VAR_SOURCE_TEXT);
+        r.text = r.text.replace(VAR_SOURCE_TEXT, BiDiUtils.addLtrBidiAround(match.source));
+    };
+
     private static final Replacer DIFF_REVERSED_REPLACER = (r, match) -> {
         int diffPos = r.text.indexOf(VAR_DIFF_REVERSED);
         SourceTextEntry ste = Core.getEditor().getCurrentEntry();
@@ -153,12 +164,6 @@ public class MatchesVarExpansion extends VarExpansion<NearString> {
     }
 
     // ------------------------------ non-static part -------------------
-
-    /**
-     * A sorted map that ensures styled replacements are performed in the order
-     * of appearance.
-     */
-    private Map<Integer, Replacer> styledComponents = new TreeMap<>();
 
     public MatchesVarExpansion(String template) {
         super(template);
@@ -194,9 +199,10 @@ public class MatchesVarExpansion extends VarExpansion<NearString> {
             separator2 = separator2.replace("\\n", "\n");
             Pattern pattern = Pattern.compile(patternStr.replace("*", "(.*)").replace("?", "(.)"));
             StringBuilder res = new StringBuilder();
-            for (TMXProp me : props) {
-                if (pattern.matcher(me.getType()).matches()) {
-                    res.append(me.getType()).append(separator1).append(me.getValue()).append(separator2);
+            for (TMXProp entry : props) {
+                if (pattern.matcher(entry.getType()).matches()) {
+                    res.append(entry.getType()).append(separator1).append(entry.getValue())
+                            .append(separator2);
                 }
             }
             if (res.toString().endsWith(separator2)) {
@@ -249,7 +255,6 @@ public class MatchesVarExpansion extends VarExpansion<NearString> {
                 Integer.toString(match.scores[0].scoreNoStem));
         localTemplate = localTemplate.replace(VAR_SCORE_ADJUSTED,
                 Integer.toString(match.scores[0].adjustedScore));
-        localTemplate = localTemplate.replace(VAR_TARGET_TEXT, match.translation);
         localTemplate = localTemplate.replace(VAR_FUZZY_FLAG,
                 match.fuzzyMark ? (OStrings.getString("MATCHES_FUZZY_MARK") + " ") : "");
 
@@ -274,11 +279,29 @@ public class MatchesVarExpansion extends VarExpansion<NearString> {
     }
 
     public Result apply(NearString match, int id) {
+       /**
+         * A sorted map that ensures styled replacements are performed in the
+         * order of appearance.
+         */
+        Map<Integer, Replacer> styledMatch = new TreeMap<>();
         Result result = new Result();
-        styledComponents.clear();
+        boolean isMixedOrientation = BiDiUtils.isMixedOrientationProject();
+        boolean isSourceRtl = false;
+        boolean isTargetRtl = false;
+        if (isMixedOrientation) {
+            isSourceRtl = BiDiUtils.isSourceLangRtl();
+            isTargetRtl = BiDiUtils.isTargetLangRtl();
+        }
 
         // Variables
-        result.text = this.expandVariables(match);
+        result.text = expandVariables(match);
+        if (isMixedOrientation && isTargetRtl) {
+            result.text = result.text.replace(VAR_TARGET_TEXT, BiDiUtils.addRtlBidiAround(match.translation));
+        } else if (isMixedOrientation) {
+            result.text = result.text.replace(VAR_TARGET_TEXT, BiDiUtils.addLtrBidiAround(match.translation));
+        } else {
+            result.text = result.text.replace(VAR_TARGET_TEXT, match.translation);
+        }
         result.text = result.text.replace(VAR_ID, Integer.toString(id));
 
         // Properties (<prop type='xxx'>value</prop>)
@@ -289,11 +312,17 @@ public class MatchesVarExpansion extends VarExpansion<NearString> {
             result.text = result.text.replaceAll(PATTERN_PROPERTY_GROUP.pattern(), "");
         }
 
-        styledComponents.put(result.text.indexOf(VAR_SOURCE_TEXT), SOURCE_TEXT_REPLACER);
-        styledComponents.put(result.text.indexOf(VAR_DIFF), DIFF_REPLACER);
-        styledComponents.put(result.text.indexOf(VAR_DIFF_REVERSED), DIFF_REVERSED_REPLACER);
+        if (isMixedOrientation && isSourceRtl) {
+            styledMatch.put(result.text.indexOf(VAR_SOURCE_TEXT), RTL_SOURCE_TEXT_REPLACER);
+        } else if (isMixedOrientation) {
+            styledMatch.put(result.text.indexOf(VAR_SOURCE_TEXT), LTR_SOURCE_TEXT_REPLACER);
+        } else {
+            styledMatch.put(result.text.indexOf(VAR_SOURCE_TEXT), SOURCE_TEXT_REPLACER);
+        }
+        styledMatch.put(result.text.indexOf(VAR_DIFF), DIFF_REPLACER);
+        styledMatch.put(result.text.indexOf(VAR_DIFF_REVERSED), DIFF_REVERSED_REPLACER);
 
-        for (Entry<Integer, Replacer> entry : styledComponents.entrySet()) {
+        for (Entry<Integer, Replacer> entry : styledMatch.entrySet()) {
             entry.getValue().replace(result, match);
         }
 

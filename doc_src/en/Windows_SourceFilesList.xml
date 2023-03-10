@@ -87,7 +87,7 @@
 	
 	<varlistentry id="windows.source.files.list.download.page">
 	  <term id="windows.source.files.list.download.page.title"><guibutton>Add
-	  Online MediaWiki Page...</guibutton></term>
+	  MediaWiki Page...</guibutton></term>
 	  <listitem>
 		<para>Asks for the URL of the page and downloads it into the <link
 		linkend="project.folder.source" endterm="project.folder.source.title"/>

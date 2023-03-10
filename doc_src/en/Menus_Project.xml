@@ -124,9 +124,9 @@
 
     <varlistentry id="menus.project.download.mediawiki.page">
       <term id="menus.project.download.mediawiki.page.title"><guimenuitem>Add
-      Online MediaWiki Page...</guimenuitem></term>
+      MediaWiki Page...</guimenuitem></term>
       <listitem>
-		<para>Opens a dialog where you can paste the URL of the Mediawiki page
+		<para>Opens a dialog where you can paste the URL of the MediaWiki page
 		you want to translate. The source data of the page will be copied into
 		the <link linkend="project.folder.source"
 		endterm="project.folder.source.title"/> folder, as a text file with the

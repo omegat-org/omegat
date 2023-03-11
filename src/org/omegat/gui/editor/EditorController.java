@@ -611,37 +611,6 @@ public class EditorController implements IEditor {
     }
 
     /**
-     * Toggle component orientation: LTR, RTL, language dependent.
-     */
-    protected void toggleOrientation() {
-        commitAndDeactivate();
-
-        Document3.ORIENTATION newOrientation = currentOrientation;
-        switch (currentOrientation) {
-        case ALL_LTR:
-            newOrientation = Document3.ORIENTATION.ALL_RTL;
-            break;
-        case ALL_RTL:
-            if (sourceLangIsRTL != targetLangIsRTL || sourceLangIsRTL != Language.localeIsRTL()) {
-                newOrientation = Document3.ORIENTATION.DIFFER;
-            } else {
-                newOrientation = Document3.ORIENTATION.ALL_LTR;
-            }
-            break;
-        case DIFFER:
-            newOrientation = Document3.ORIENTATION.ALL_LTR;
-            break;
-        }
-        LOGGER.info("Switch document orientation from " + currentOrientation + " to " + newOrientation);
-        currentOrientation = newOrientation;
-
-        applyOrientationToEditor();
-
-        loadDocument();
-        activateEntry();
-    }
-
-    /**
      * returns the orientation of the document
      * (so we can decide what way of tag colouring we need;
      * if that has been fixed in an other way, this method can be removed again.).

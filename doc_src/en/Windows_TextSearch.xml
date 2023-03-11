@@ -262,7 +262,7 @@
 		  
 		  <variablelist>
 			<varlistentry>
-			  <term>Memory</term>
+			  <term>Main Memory</term>
 			  <listitem>
 				<para>Include the project memory (<link
 				linkend="project.folder.project.save.tmx"
@@ -271,7 +271,7 @@
 			</varlistentry>
 
 			<varlistentry>
-			  <term>TMs</term>
+			  <term>Reference TMs</term>
 			  <listitem>
 				<para>Include the translation memories located in the <link
 				linkend="project.folder.tm" endterm="project.folder.tm.title"/>

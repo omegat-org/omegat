@@ -50,19 +50,12 @@ import org.omegat.util.gui.Styles;
  */
 @SuppressWarnings("serial")
 public class Document3 extends DefaultStyledDocument {
-    public enum ORIENTATION {
-        /** All text is left-to-right oriented. */
-        ALL_LTR,
-        /** All text is right-to-left oriented. */
-        ALL_RTL,
-        /** different texts/segments have different orientation, depending on language/locale. */
-        DIFFER
-    };
 
     protected final EditorController controller;
 
     /** Position of active translation in text. */
-    Position activeTranslationBeginM1, activeTranslationEndP1;
+    Position activeTranslationBeginM1;
+    Position activeTranslationEndP1;
 
     /**
      * Flag for check internal changes of content, which should be always acceptable.

@@ -588,10 +588,9 @@ public class EditorController implements IEditor {
     }
 
     /**
-     * returns the orientation of the document
-     * (so we can decide what way of tag colouring we need;
-     * if that has been fixed in an other way, this method can be removed again.).
-     * @return
+     * returns the orientation of the document (so we can decide what way of tag
+     * colouring we need; if that has been fixed in an other way, this method
+     * can be removed again.).
      */
     public BiDiUtils.ORIENTATION getOrientation() {
         return currentOrientation;

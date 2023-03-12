@@ -63,6 +63,7 @@ import org.omegat.core.events.IEntryEventListener;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.gui.main.DockableScrollPane;
 import org.omegat.gui.main.IMainWindow;
+import org.omegat.util.BiDiUtils;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
@@ -82,8 +83,6 @@ public class SegmentPropertiesArea implements IPaneMenu {
     private static final String KEY_ID = "id";
     private static final String KEY_TRANSLATION = "translation";
     private static final String KEY_TRANSLATIONISFUZZY = "translationIsFuzzy";
-    // private static final String KEY_NEXT = "next";
-    // private static final String KEY_PREV = "prev";
     private static final String KEY_PATH = "path";
     private static final String KEY_HASNOTE = "hasNote";
     private static final String KEY_HASCOMMENT = "hasComment";
@@ -101,6 +100,7 @@ public class SegmentPropertiesArea implements IPaneMenu {
     final DockableScrollPane scrollPane;
 
     private ISegmentPropertiesView viewImpl;
+    private boolean isTargetRtl;
 
     public SegmentPropertiesArea(IMainWindow mw) {
         scrollPane = new DockableScrollPane("SEGMENTPROPERTIES", OStrings.getString("SEGPROP_PANE_TITLE"),
@@ -117,6 +117,7 @@ public class SegmentPropertiesArea implements IPaneMenu {
             @Override
             public void onEntryActivated(SourceTextEntry newEntry) {
                 scrollPane.stopNotifying();
+                initialiseIsTargetLangRtl();
                 setProperties(newEntry);
                 doNotify(getKeysToNotify());
             }
@@ -193,7 +194,6 @@ public class SegmentPropertiesArea implements IPaneMenu {
     void showContextMenu(Point p) {
         JPopupMenu menu = new JPopupMenu();
         populateLocalContextMenuOptions(menu, p);
-        // populateGlobalContextMenuOptions(menu);
         try {
             menu.show(scrollPane, p.x, p.y);
         } catch (IllegalComponentStateException e) {
@@ -329,7 +329,7 @@ public class SegmentPropertiesArea implements IPaneMenu {
                 setProperty(KEY_ISDUP, ste.getDuplicate());
             }
             if (ste.getSourceTranslation() != null) {
-                setProperty(KEY_TRANSLATION, ste.getSourceTranslation());
+                setProperty(KEY_TRANSLATION, addBiDiToTranslation(ste.getSourceTranslation()));
                 if (ste.isSourceTranslationFuzzy()) {
                     setProperty(KEY_TRANSLATIONISFUZZY, true);
                 }
@@ -344,11 +344,17 @@ public class SegmentPropertiesArea implements IPaneMenu {
         viewImpl.update();
     }
 
+    private String addBiDiToTranslation(String translation) {
+        return isTargetRtl ? BiDiUtils.addRtlBidiAround(translation) : translation;
+    }
+
+    private void initialiseIsTargetLangRtl() {
+        isTargetRtl = BiDiUtils.isTargetLangRtl();
+    }
+
     private void setKeyProperties(EntryKey key) {
         setProperty(KEY_FILE, key.file);
         setProperty(KEY_ID, key.id);
-        // setProperty(KEY_NEXT, key.next);
-        // setProperty(KEY_PREV, key.prev);
         setProperty(KEY_PATH, key.path);
     }
 

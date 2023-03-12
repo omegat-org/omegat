@@ -570,45 +570,21 @@ public class EditorController implements IEditor {
      * Decide what document orientation should be default for source/target languages.
      */
     private void setInitialOrientation() {
-        String sourceLang = Core.getProject().getProjectProperties().getSourceLanguage().getLanguageCode();
-        String targetLang = Core.getProject().getProjectProperties().getTargetLanguage().getLanguageCode();
+        getValuesToDetermineOrientation();
+        applyOrientationToEditor(currentOrientation);
+    }
 
-        sourceLangIsRTL = Language.isRTL(sourceLang);
-        targetLangIsRTL = Language.isRTL(targetLang);
-
-        if (sourceLangIsRTL != targetLangIsRTL || sourceLangIsRTL != Language.localeIsRTL()) {
-            currentOrientation = BiDiUtils.ORIENTATION.DIFFER;
-        } else {
-            if (sourceLangIsRTL) {
-                currentOrientation = BiDiUtils.ORIENTATION.ALL_RTL;
-            } else {
-                currentOrientation = BiDiUtils.ORIENTATION.ALL_LTR;
-            }
-        }
-        applyOrientationToEditor();
+    private void getValuesToDetermineOrientation() {
+        sourceLangIsRTL = BiDiUtils.isSourceLangRtl();
+        targetLangIsRTL = BiDiUtils.isTargetLangRtl();
+        currentOrientation = BiDiUtils.getOrientationType();
     }
 
     /**
      * Define editor's orientation by target language orientation.
      */
-    private void applyOrientationToEditor() {
-        ComponentOrientation targetOrientation = null;
-        switch (currentOrientation) {
-        case ALL_LTR:
-            targetOrientation = ComponentOrientation.LEFT_TO_RIGHT;
-            break;
-        case ALL_RTL:
-            targetOrientation = ComponentOrientation.RIGHT_TO_LEFT;
-            break;
-        case DIFFER:
-            if (targetLangIsRTL) { //using target lang direction gives better result when user starts editing.
-                targetOrientation = ComponentOrientation.RIGHT_TO_LEFT;
-            } else {
-                targetOrientation = ComponentOrientation.LEFT_TO_RIGHT;
-            }
-        }
-        // set editor's orientation by target language
-        editor.setComponentOrientation(targetOrientation);
+    private void applyOrientationToEditor(BiDiUtils.ORIENTATION orientation) {
+        editor.setComponentOrientation(BiDiUtils.getOrientation(orientation));
     }
 
     /**

@@ -74,20 +74,20 @@ public class BiDiUtils {
 	 * languages.
 	 */
 	private static ORIENTATION getOrientationFromProject() {
-		ORIENTATION currentOrientation;
+		ORIENTATION orientation;
 
 		boolean sourceLangIsRTL = isSourceLangRtl();
 		boolean targetLangIsRTL = isTargetLangRtl();
 
 		if (sourceLangIsRTL) {
-			currentOrientation = ORIENTATION.ALL_RTL;
+			orientation = ORIENTATION.ALL_RTL;
 		} else {
-			currentOrientation = ORIENTATION.ALL_LTR;
+			orientation = ORIENTATION.ALL_LTR;
 		}
 		if (sourceLangIsRTL != targetLangIsRTL || sourceLangIsRTL != isLocaleRtl()) {
-			currentOrientation = ORIENTATION.DIFFER;
+			orientation = ORIENTATION.DIFFER;
 		}
-		return currentOrientation;
+		return orientation;
 	}
 
 	/**
@@ -102,15 +102,15 @@ public class BiDiUtils {
 	 * Decide what document orientation should be default for source/target
 	 * languages.
 	 */
-	public static ComponentOrientation getOrientation(ORIENTATION currentOrientation) {
+	public static ComponentOrientation getOrientation(ORIENTATION orientationType) {
 
 		ComponentOrientation targetOrientation = null;
 
-		if (currentOrientation == null) {
-			currentOrientation = getOrientationType();
+		if (orientationType == null) {
+			orientationType = getOrientationType();
 		}
 
-		switch (currentOrientation) {
+		switch (orientationType) {
 		case ALL_LTR:
 			targetOrientation = ComponentOrientation.LEFT_TO_RIGHT;
 			break;

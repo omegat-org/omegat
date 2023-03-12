@@ -27,7 +27,10 @@
 package org.omegat.util;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.After;
 import org.junit.Test;
 
@@ -121,6 +124,13 @@ public class BiDiUtilsTest {
 	}
 
 	@Test
+	public void testGetInitialOrientation_notNull() {
+		Locale.setDefault(RTL_LOCALE);
+		setupRtlToLtrProject();
+		assertNotNull(BiDiUtils.getInitialOrientation());
+	}
+
+	@Test
 	public void testGetOrientation_nullParam_notNull() {
 		Locale.setDefault(RTL_LOCALE);
 		setupRtlToLtrProject();
@@ -153,6 +163,42 @@ public class BiDiUtilsTest {
 		String input = "everything";
 		String output = BiDiUtils.addLtrBidiAround(input);
 		assertEquals("\u202aeverything\u202c", output);
+	}
+
+	@Test
+	public void testIsSourceLangRtl_RtlSource_true() {
+		setupRtlToLtrProject();
+		assertTrue(BiDiUtils.isSourceLangRtl());
+	}
+
+	@Test
+	public void testIsSourceLangRtl_LtrSource_false() {
+		setupLtrToRtlProject();
+		assertFalse(BiDiUtils.isSourceLangRtl());
+	}
+
+	@Test
+	public void testIsTargetLangRtl_RtlTarget_true() {
+		setupLtrToRtlProject();
+		assertTrue(BiDiUtils.isTargetLangRtl());
+	}
+
+	@Test
+	public void testIsTargetLangRtl_LtrTarget_false() {
+		setupRtlToLtrProject();
+		assertFalse(BiDiUtils.isTargetLangRtl());
+	}
+
+	@Test
+	public void testIsLocaleRtl_RtlLocale_true() {
+		Locale.setDefault(RTL_LOCALE);
+		assertTrue(BiDiUtils.isLocaleRtl());
+	}
+
+	@Test
+	public void testIsLocaleRtl_LtrLocale_false() {
+		Locale.setDefault(LTR_LOCALE);
+		assertFalse(BiDiUtils.isLocaleRtl());
 	}
 
 	private void setupAllLtrProject() {

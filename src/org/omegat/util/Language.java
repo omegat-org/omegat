@@ -796,4 +796,12 @@ public class Language implements Comparable<Object> {
                 || "ur".equalsIgnoreCase(language) || "ug".equalsIgnoreCase(language)
                 || "ji".equalsIgnoreCase(language) || "yi".equalsIgnoreCase(language);
     }
+
+    public static String getLowerCaseLanguageFromLocale() {
+        return Locale.getDefault().getLanguage().toLowerCase(Locale.ENGLISH);
+    }
+
+    public static String getUpperCaseCountryFromLocale() {
+        return Locale.getDefault().getCountry().toUpperCase(Locale.ENGLISH);
+    }
 }

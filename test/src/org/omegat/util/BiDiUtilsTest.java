@@ -201,6 +201,18 @@ public class BiDiUtilsTest {
 		assertFalse(BiDiUtils.isLocaleRtl());
 	}
 
+	// public static boolean isLocaleRtl() {
+	// public static boolean isRtl(final String language) {
+	@Test
+	public void testIsRtl_RtlLocale_true() {
+		assertTrue(BiDiUtils.isRtl(RTL_LANGUAGE.getLanguage()));
+	}
+
+	@Test
+	public void testIsRtl_LtrLocale_false() {
+		assertFalse(BiDiUtils.isRtl(LTR_LANGUAGE.getLanguage()));
+	}
+
 	private void setupAllLtrProject() {
 		setupProject(LTR_LANGUAGE, LTR_LANGUAGE);
 	}

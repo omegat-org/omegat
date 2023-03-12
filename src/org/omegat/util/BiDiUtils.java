@@ -27,6 +27,7 @@
 package org.omegat.util;
 
 import java.awt.ComponentOrientation;
+import java.util.Locale;
 
 import org.omegat.core.Core;
 
@@ -130,19 +131,19 @@ public class BiDiUtils {
 	}
 
 	public static String addRtlBidiAround(String string) {
-		return BiDiUtils.BIDI_RLE + string + BiDiUtils.BIDI_PDF;
+		return BIDI_RLE + string + BIDI_PDF;
 	}
 
 	public static String addLtrBidiAround(String string) {
-		return BiDiUtils.BIDI_LRE + string + BiDiUtils.BIDI_PDF;
+		return BIDI_LRE + string + BIDI_PDF;
 	}
 
 	public static boolean isSourceLangRtl() {
-		return Language.isRTL(getSourceLanguage());
+		return isRtl(getSourceLanguage());
 	}
 
 	public static boolean isTargetLangRtl() {
-		return Language.isRTL(getTargetLanguage());
+		return isRtl(getTargetLanguage());
 	}
 
 	public static String getSourceLanguage() {
@@ -153,7 +154,27 @@ public class BiDiUtils {
 		return Core.getProject().getProjectProperties().getTargetLanguage().getLanguageCode();
 	}
 
+	/**
+	 * Check if locale is Right-To-Left oriented.
+	 * 
+	 * @return true if locale is Right-To-Left oriented.
+	 */
 	public static boolean isLocaleRtl() {
-		return Language.localeIsRTL();
+		String language = Language.getLowerCaseLanguageFromLocale();
+		return isRtl(language);
+	}
+
+	/**
+	 * Check if language is Right-To-Left oriented.
+	 *
+	 * @param language
+	 *            ISO-639-2 language code
+	 * @return true if language is RTL
+	 */
+	public static boolean isRtl(final String language) {
+		return "ar".equalsIgnoreCase(language) || "iw".equalsIgnoreCase(language)
+				|| "he".equalsIgnoreCase(language) || "fa".equalsIgnoreCase(language)
+				|| "ur".equalsIgnoreCase(language) || "ug".equalsIgnoreCase(language)
+				|| "ji".equalsIgnoreCase(language) || "yi".equalsIgnoreCase(language);
 	}
 }

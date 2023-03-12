@@ -29,9 +29,11 @@ package org.omegat.util;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertNotNull;
 
 import java.util.Locale;
 
+import org.junit.After;
 import org.junit.Test;
 
 /**
@@ -40,6 +42,15 @@ import org.junit.Test;
  * @author Maxym Mykhalchuk
  */
 public class LanguageTest {
+
+    final Locale LANGUAGE_AND_COUNTRY_LOCALE = new Language("AR-DZ").getLocale();
+    final Locale LANGUAGE_ONLY_LOCALE = new Language("ES").getLocale();
+    final Locale INITIAL_LOCALE = Locale.getDefault();
+
+    @After
+    public void resetInitialLocale() {
+        Locale.setDefault(INITIAL_LOCALE);
+    }
 
     /**
      * Test of getLanguage method, of class org.omegat.util.Language.
@@ -104,4 +115,31 @@ public class LanguageTest {
         assertTrue(Language.verifySingleLangCode("es-419"));
         assertTrue(Language.verifySingleLangCode("ar-AE-x-dubai"));
     }
+
+    @Test
+    public void testGetLowerCaseLanguageFromLocale_languageAndCountryLocale() {
+        Locale.setDefault(LANGUAGE_AND_COUNTRY_LOCALE);
+        assertEquals("ar", Language.getLowerCaseLanguageFromLocale());
+    }
+
+    @Test
+    public void testGetLowerCaseLanguageFromLocale_languageOnlyLocale() {
+        Locale.setDefault(LANGUAGE_ONLY_LOCALE);
+        assertEquals("es", Language.getLowerCaseLanguageFromLocale());
+    }
+
+    @Test
+    public void testGetUpperCaseCountryFromLocale_languageAndCountryLocale() {
+        Locale.setDefault(LANGUAGE_AND_COUNTRY_LOCALE);
+        assertEquals("DZ", Language.getUpperCaseCountryFromLocale());
+    }
+
+    @Test
+    public void testGetUpperCaseCountryFromLocale_languageOnlyLocale() {
+        Locale.setDefault(LANGUAGE_ONLY_LOCALE);
+        String result = Language.getUpperCaseCountryFromLocale();
+        assertNotNull(result);
+        assertEquals("", result);
+    }
+
 }

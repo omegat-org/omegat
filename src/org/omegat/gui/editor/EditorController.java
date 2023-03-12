@@ -2033,8 +2033,8 @@ public class EditorController implements IEditor {
      */
     private String detectFirstStepsLanguage() {
         // Get the system language and country
-        String language = Locale.getDefault().getLanguage().toLowerCase(Locale.ENGLISH);
-        String country = Locale.getDefault().getCountry().toUpperCase(Locale.ENGLISH);
+        String language = Language.getLowerCaseLanguageFromLocale();
+        String country = Language.getUpperCaseCountryFromLocale();
 
         // Check if there's a translation for the full locale (lang + country)
         if (Help.getHelpFileURI(language + "_" + country, OConsts.HELP_FIRST_STEPS) != null) {

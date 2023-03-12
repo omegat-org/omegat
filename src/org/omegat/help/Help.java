@@ -36,10 +36,10 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Paths;
-import java.util.Locale;
 import java.util.Properties;
 import java.util.concurrent.ThreadLocalRandom;
 
+import org.omegat.util.Language;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;
@@ -128,8 +128,8 @@ public final class Help {
      */
     private static String detectHelpLanguage() {
         // Get the system locale (language and country)
-        String language = Locale.getDefault().getLanguage().toLowerCase(Locale.ENGLISH);
-        String country = Locale.getDefault().getCountry().toUpperCase(Locale.ENGLISH);
+        String language = Language.getLowerCaseLanguageFromLocale();
+        String country = Language.getUpperCaseCountryFromLocale();
 
         // Check if there's a translation for the full locale (lang + country)
         String locale = language + "_" + country;

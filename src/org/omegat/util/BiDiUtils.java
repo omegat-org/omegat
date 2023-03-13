@@ -51,22 +51,20 @@ public class BiDiUtils {
     public static final String BIDI_RLM = "\u200f";
     public static final char BIDI_LRM_CHAR = '\u200e';
     public static final char BIDI_RLM_CHAR = '\u200f';
-    // TODO: delete the dagger
-    public static final String UNICODE_DAGGER = "\u2020";
 
     public static ORIENTATION getOrientationType() {
-        ORIENTATION currentOrientation;
+        ORIENTATION orientation;
 
         if (Core.getProject().isProjectLoaded()) {
-            currentOrientation = getOrientationFromProject();
+            orientation = getOrientationFromProject();
         } else if (isLocaleRtl()) {
             // project not loaded, use locale
-            currentOrientation = ORIENTATION.ALL_RTL;
+            orientation = ORIENTATION.ALL_RTL;
         } else {
             // project not loaded, default to LTR
-            currentOrientation = ORIENTATION.ALL_LTR;
+            orientation = ORIENTATION.ALL_LTR;
         }
-        return currentOrientation;
+        return orientation;
     }
 
     /**

@@ -118,10 +118,12 @@ public class SegmentBuilder {
     /**
      * Offset of first c.q. last character in active source text
      */
-    protected int activeTranslationBeginOffset, activeTranslationEndOffset;
+    protected int activeTranslationBeginOffset;
+    protected int activeTranslationEndOffset;
 
     /** Boundary of full entry display. */
-    protected Position beginPosP1, endPosM1;
+    protected Position beginPosP1;
+    protected Position endPosM1;
 
     /** Source start position - for marks. */
     protected Position posSourceBeg;

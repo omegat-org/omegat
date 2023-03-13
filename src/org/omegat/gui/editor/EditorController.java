@@ -1838,8 +1838,8 @@ public class EditorController implements IEditor {
         SegmentBuilder builder = m_docSegList[displayedEntryIndex];
         if (builder.hasRTL && targetLangIsRTL) {
             // add control bidi chars around
-            String t = SegmentBuilder.BIDI_RLM + SegmentBuilder.BIDI_LRM + tag + SegmentBuilder.BIDI_LRM
-                    + SegmentBuilder.BIDI_RLM;
+            String t = BiDiUtils.BIDI_RLM + BiDiUtils.BIDI_LRM + tag + BiDiUtils.BIDI_LRM
+                    + BiDiUtils.BIDI_RLM;
             editor.replaceSelection(t);
         } else {
             // just insert tag

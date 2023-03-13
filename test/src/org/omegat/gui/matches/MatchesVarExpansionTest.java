@@ -23,21 +23,10 @@ import org.omegat.gui.editor.IPopupMenuConstructor;
 import org.omegat.gui.editor.autocompleter.IAutoCompleter;
 import org.omegat.gui.editor.mark.Mark;
 import org.omegat.util.BiDiUtils;
-// import org.omegat.gui.matches.MatchesVarExpansion;
-// import org.omegat.gui.matches.MatchesVarExpansion.Result;
 import org.omegat.util.Language;
 import org.omegat.util.TMXProp;
 
 public class MatchesVarExpansionTest {
-
-    // public NearString(final EntryKey key, final String source, final String
-    // translation, MATCH_SOURCE comesFrom,
-    // final boolean fuzzyMark, final int nearScore, final int nearScoreNoStem,
-    // final int adjustedScore,
-    // final byte[] nearData, final String projName, final String creator, final
-    // long creationDate,
-    // final String changer, final long changedDate, final List<TMXProp> props)
-    // {
 
     final Language LTR_LANGUAGE = new Language("pl");
     final Language RTL_LANGUAGE = new Language("ar");

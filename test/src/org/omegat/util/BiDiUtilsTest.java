@@ -201,8 +201,6 @@ public class BiDiUtilsTest {
 		assertFalse(BiDiUtils.isLocaleRtl());
 	}
 
-	// public static boolean isLocaleRtl() {
-	// public static boolean isRtl(final String language) {
 	@Test
 	public void testIsRtl_RtlLocale_true() {
 		assertTrue(BiDiUtils.isRtl(RTL_LANGUAGE.getLanguage()));
@@ -212,6 +210,32 @@ public class BiDiUtilsTest {
 	public void testIsRtl_LtrLocale_false() {
 		assertFalse(BiDiUtils.isRtl(LTR_LANGUAGE.getLanguage()));
 	}
+
+	@Test
+	public void testIsMixedOrientationProject_orientationAllLtr_false() {
+		Locale.setDefault(LTR_LOCALE);
+		setupProjectNotLoaded();
+		assertEquals(BiDiUtils.ORIENTATION.ALL_LTR, BiDiUtils.getOrientationType());
+		assertFalse(BiDiUtils.isMixedOrientationProject());
+	}
+
+	@Test
+	public void testIsMixedOrientationProject_orientationAllRtl_false() {
+		Locale.setDefault(RTL_LOCALE);
+		setupProjectNotLoaded();
+		assertEquals(BiDiUtils.ORIENTATION.ALL_RTL, BiDiUtils.getOrientationType());
+		assertFalse(BiDiUtils.isMixedOrientationProject());
+	}
+
+	@Test
+	public void testIsMixedOrientationProject_orientationDiffer_true() {
+		Locale.setDefault(RTL_LOCALE);
+		setupAllLtrProject();
+		assertEquals(BiDiUtils.ORIENTATION.DIFFER, BiDiUtils.getOrientationType());
+		assertTrue(BiDiUtils.isMixedOrientationProject());
+	}
+
+	// Helper methods
 
 	private void setupAllLtrProject() {
 		setupProject(LTR_LANGUAGE, LTR_LANGUAGE);

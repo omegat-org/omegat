@@ -286,8 +286,7 @@ public class MatchesVarExpansion extends VarExpansion<NearString> {
          */
         Map<Integer, Replacer> styledMatch = new TreeMap<>();
         Result result = new Result();
-        BiDiUtils.ORIENTATION orientation = BiDiUtils.getOrientationType();
-        boolean isMixedOrientation = (orientation == BiDiUtils.ORIENTATION.DIFFER);
+        boolean isMixedOrientation = BiDiUtils.isMixedOrientationProject();
         boolean isSourceRtl = false;
         boolean isTargetRtl = false;
         if (isMixedOrientation) {

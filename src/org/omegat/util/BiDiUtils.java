@@ -176,4 +176,8 @@ public class BiDiUtils {
                 || "ur".equalsIgnoreCase(language) || "ug".equalsIgnoreCase(language)
                 || "ji".equalsIgnoreCase(language) || "yi".equalsIgnoreCase(language);
     }
+
+    public static boolean isMixedOrientationProject() {
+        return (BiDiUtils.getOrientationType() == BiDiUtils.ORIENTATION.DIFFER);
+    }
 }

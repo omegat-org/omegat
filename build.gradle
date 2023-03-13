@@ -1044,6 +1044,17 @@ task testIntegration(type: JavaExec) {
     systemProperties = System.properties
 }
 
+task testOnJava17(type: Test) {
+    description = 'Run test cases on Java 17'
+    javaLauncher = javaToolchains.launcherFor {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+    if (project.hasProperty('headless')) {
+        systemProperty 'java.awt.headless', 'true'
+    }
+    group = 'verification'
+}
+
 ext.mavenStyleVersion = version.replace('_', '-')
 
 publishing {

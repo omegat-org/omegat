@@ -92,13 +92,13 @@ public class MatchesVarExpansionTest {
 
     final String TEST_TEMPLATE = VAR_ID + ". ... " + VAR_SOURCE_TEXT + "\n" + VAR_TARGET_TEXT
             + "\n" + "<" + VAR_SCORE_BASE + "/" + VAR_SCORE_NOSTEM + "/" + VAR_SCORE_ADJUSTED + "% "
-            + VAR_FILE_PATH + VAR_INITIAL_CREATION_DATE + ">";
+            + VAR_FILE_PATH + ">";
 
     final String BIG_TEMPLATE = VAR_ID + ". " + VAR_PROJECT_SOURCE_LANG + " - " + VAR_FILE_NAME + " "
             + VAR_SOURCE_LANGUAGE + ": "
             + VAR_SOURCE_TEXT + "\n" + VAR_TARGET_LANGUAGE + " " + VAR_TARGET_TEXT + "\n"
             + "<" + VAR_SCORE_BASE + "/" + VAR_SCORE_NOSTEM + "/" + VAR_SCORE_ADJUSTED + "% " + VAR_FILE_PATH
-            + VAR_INITIAL_CREATION_DATE + " by " + VAR_INITIAL_CREATION_ID + " >\n" + VAR_PROJECT_TARGET_LANG;
+            + " by " + VAR_INITIAL_CREATION_ID + " >\n" + VAR_PROJECT_TARGET_LANG;
 
     final String TEST_BIDI_TEMPLATE = VAR_SOURCE_TEXT + " and " + VAR_TARGET_TEXT;
 
@@ -159,7 +159,7 @@ public class MatchesVarExpansionTest {
         Locale.setDefault(LTR_LOCALE);
         setupAllLtrProject();
         MatchesVarExpansion expander = new MatchesVarExpansion(BIG_TEMPLATE);
-        String expected = "2. pl - mock testing project mock source language: mock source text\nmock target language mock target text\n<20/40/60% mock testing project70-01-01 06:33 by mock creator >\npl";
+        String expected = "2. pl - mock testing project mock source language: mock source text\nmock target language mock target text\n<20/40/60% mock testing project by mock creator >\npl";
         String actual = expander.apply(getMockNearString(), 2).text;
         assertEquals(expected, actual);
     }
@@ -169,7 +169,7 @@ public class MatchesVarExpansionTest {
         Locale.setDefault(LTR_LOCALE);
         setupAllLtrProject();
         MatchesVarExpansion expander = new MatchesVarExpansion(TEST_TEMPLATE);
-        String expected = "${id}. ... ${sourceText}\n${targetText}\n<20/40/60% mock testing project70-01-01 06:33>";
+        String expected = "${id}. ... ${sourceText}\n${targetText}\n<20/40/60% mock testing project>";
         String actual = expander.expandVariables(getMockNearString());
         assertEquals(expected, actual);
     }

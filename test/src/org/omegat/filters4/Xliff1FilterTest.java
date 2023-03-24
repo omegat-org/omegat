@@ -61,7 +61,11 @@ public class Xliff1FilterTest extends org.omegat.filters.TestFilterBase {
         });
         System.err.println("Parsing file where trans-unit/@id is missing returns: "
             + exception.getClass() + ": " + exception.getMessage());
-        assertTrue(exception.getMessage().contains("Missing attribute"));
+        // Exception says that attribute 'id' is missing in <trans-unit>
+        // Since it is localized we check for 'id' and <trans-unit>
+        // Note: hope translators will use '{0}' and <{1}>
+        assertTrue(exception.getMessage().contains("'id'"));
+        assertTrue(exception.getMessage().contains("<trans-unit>"));
     }
 
     @Test

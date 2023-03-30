@@ -79,3 +79,7 @@ DeNormalize.java is licensed under the DeNormalize license.
 
 Nashorn javascript engine is distributed under the GNU General Public
 License version 2.0 only with classpath link exception.
+
+newUI.burgerMenu image is distributed under CC-BY-SA 3.0 Unported
+Copyright 2015 Timothy Miller
+(https://www.iconfinder.com/icons/134216/hamburger_lines_menu_icon)

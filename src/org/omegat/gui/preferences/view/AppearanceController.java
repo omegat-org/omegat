@@ -47,6 +47,7 @@ import org.omegat.util.gui.DelegatingComboBoxRenderer;
 public class AppearanceController extends BasePreferencesController {
 
     private AppearancePreferencesPanel panel;
+    private boolean previousFileListDialog;
 
     @Override
     public JComponent getGui() {
@@ -79,27 +80,49 @@ public class AppearanceController extends BasePreferencesController {
             }
         });
         panel.cbThemeSelect.addActionListener(e -> {
-            String selected = panel.cbThemeSelect.getSelectedItem().toString();
-            String current = UIManager.getLookAndFeel().getClass().getName();
-            setRestartRequired(!selected.equals(current));
+            setRestartRequired(isModified());
         });
         // TODO: Properly abstract the restore function
         panel.restoreWindowButton
                 .addActionListener(e -> MainWindowUI.resetDesktopLayout((MainWindow) Core.getMainWindow()));
+        panel.newUICheckBox.addActionListener(actionEvent -> {
+            setRestartRequired(isModified());
+        });
+    }
+
+    private boolean isModified() {
+        boolean changeNewUI = panel.newUICheckBox.isSelected()
+                ^ Preferences.isPreference(Preferences.APPLY_NEW_UI);
+        Object selected = panel.cbThemeSelect.getSelectedItem();
+        if (selected == null) {
+            return changeNewUI;
+        }
+        return !UIManager.getLookAndFeel().getClass().getName().equals(selected.toString()) || changeNewUI;
     }
 
     @Override
     protected void initFromPrefs() {
         panel.cbThemeSelect.setSelectedItem(UIManager.getLookAndFeel().getClass().getName());
+        panel.newUICheckBox.setSelected(Preferences.isPreference(Preferences.APPLY_NEW_UI));
+        previousFileListDialog = Preferences.isPreferenceDefault(Preferences.PROJECT_FILES_SHOW_ON_LOAD,
+                true);
     }
 
     @Override
     public void restoreDefaults() {
         panel.cbThemeSelect.setSelectedItem(Preferences.THEME_CLASS_NAME_DEFAULT);
+        panel.newUICheckBox.setSelected(false);
+        Preferences.setPreference(Preferences.PROJECT_FILES_SHOW_ON_LOAD, previousFileListDialog);
     }
 
     @Override
     public void persist() {
         Preferences.setPreference(Preferences.THEME_CLASS_NAME, panel.cbThemeSelect.getSelectedItem().toString());
+        Preferences.setPreference(Preferences.APPLY_NEW_UI, panel.newUICheckBox.isSelected());
+        if (panel.newUICheckBox.isSelected()) {
+            Preferences.setPreference(Preferences.PROJECT_FILES_SHOW_ON_LOAD, false);
+        } else {
+            Preferences.setPreference(Preferences.PROJECT_FILES_SHOW_ON_LOAD, previousFileListDialog);
+        }
     }
 }

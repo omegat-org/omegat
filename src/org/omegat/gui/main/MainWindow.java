@@ -128,8 +128,8 @@ public class MainWindow extends JFrame implements IMainWindow {
     /** Creates new form MainWindow */
     public MainWindow() throws IOException {
 
-        if (Preferences.isPreference(Preferences.APPLY_NEW_UI)) {
-            menu = new NewMainMenu(this, new MainWindowMenuHandler(this));
+        if (Preferences.isPreference(Preferences.APPLY_BURGER_SELECTOR_UI)) {
+            menu = new MainWindowBurgerAndSelectorMenu(this, new MainWindowMenuHandler(this));
         } else {
             menu = new MainWindowMenu(this, new MainWindowMenuHandler(this));
         }

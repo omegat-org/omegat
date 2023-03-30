@@ -92,7 +92,7 @@ public class AppearanceController extends BasePreferencesController {
 
     private boolean isModified() {
         boolean changeNewUI = panel.newUICheckBox.isSelected()
-                ^ Preferences.isPreference(Preferences.APPLY_NEW_UI);
+                ^ Preferences.isPreference(Preferences.APPLY_BURGER_SELECTOR_UI);
         Object selected = panel.cbThemeSelect.getSelectedItem();
         if (selected == null) {
             return changeNewUI;
@@ -103,7 +103,7 @@ public class AppearanceController extends BasePreferencesController {
     @Override
     protected void initFromPrefs() {
         panel.cbThemeSelect.setSelectedItem(UIManager.getLookAndFeel().getClass().getName());
-        panel.newUICheckBox.setSelected(Preferences.isPreference(Preferences.APPLY_NEW_UI));
+        panel.newUICheckBox.setSelected(Preferences.isPreference(Preferences.APPLY_BURGER_SELECTOR_UI));
         previousFileListDialog = Preferences.isPreferenceDefault(Preferences.PROJECT_FILES_SHOW_ON_LOAD,
                 true);
     }
@@ -118,7 +118,7 @@ public class AppearanceController extends BasePreferencesController {
     @Override
     public void persist() {
         Preferences.setPreference(Preferences.THEME_CLASS_NAME, panel.cbThemeSelect.getSelectedItem().toString());
-        Preferences.setPreference(Preferences.APPLY_NEW_UI, panel.newUICheckBox.isSelected());
+        Preferences.setPreference(Preferences.APPLY_BURGER_SELECTOR_UI, panel.newUICheckBox.isSelected());
         if (panel.newUICheckBox.isSelected()) {
             Preferences.setPreference(Preferences.PROJECT_FILES_SHOW_ON_LOAD, false);
         } else {

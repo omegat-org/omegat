@@ -58,7 +58,8 @@ import org.omegat.util.gui.ResourcesUtil;
  * 
  * @author Hiroshi Miura
  */
-public final class NewMainMenu extends BaseMainWindowMenu implements ActionListener, MenuListener, IMainMenu {
+public final class MainWindowBurgerAndSelectorMenu extends BaseMainWindowMenu
+        implements ActionListener, MenuListener, IMainMenu {
 
     JMenu burgerMenu;
     JComboBox<String> recentProjectCB;
@@ -66,7 +67,7 @@ public final class NewMainMenu extends BaseMainWindowMenu implements ActionListe
     JMenu searchButton;
     JMenu settingsButton;
 
-    public NewMainMenu(final MainWindow mainWindow, final MainWindowMenuHandler mainWindowMenuHandler) {
+    public MainWindowBurgerAndSelectorMenu(MainWindow mainWindow, MainWindowMenuHandler mainWindowMenuHandler) {
         super(mainWindow, mainWindowMenuHandler);
     }
 

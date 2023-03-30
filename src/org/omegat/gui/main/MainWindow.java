@@ -105,7 +105,7 @@ import com.vlsolutions.swing.docking.FloatingDialog;
  */
 @SuppressWarnings("serial")
 public class MainWindow extends JFrame implements IMainWindow {
-    public final MainWindowMenu menu;
+    public final BaseMainWindowMenu menu;
 
     protected ProjectFilesListController projWin;
 
@@ -128,12 +128,14 @@ public class MainWindow extends JFrame implements IMainWindow {
     /** Creates new form MainWindow */
     public MainWindow() throws IOException {
 
-        menu = new MainWindowMenu(this, new MainWindowMenuHandler(this));
-
-        setJMenuBar(menu.initComponents());
-
+        if (Preferences.isPreference(Preferences.APPLY_NEW_UI)) {
+            menu = new NewMainMenu(this, new MainWindowMenuHandler(this));
+        } else {
+            menu = new MainWindowMenu(this, new MainWindowMenuHandler(this));
+        }
+        menu.initComponents();
+        setJMenuBar(menu.mainMenu);
         setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
                 menu.mainWindowMenuHandler.projectExitMenuItemActionPerformed();

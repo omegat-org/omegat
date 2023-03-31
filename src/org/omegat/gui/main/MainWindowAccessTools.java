@@ -4,7 +4,7 @@
  *           glossaries, and translation leveraging into updated projects.
  *
  *  Copyright (C) 2023 Hiroshi Miura.
- *                Home page: http://www.omegat.org/
+ *                Home page: https://www.omegat.org/
  *                Support center: https://omegat.org/support
  *
  *  This file is part of OmegaT.
@@ -20,13 +20,13 @@
  *  GNU General Public License for more details.
  *
  *  You should have received a copy of the GNU General Public License
- *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 package org.omegat.gui.main;
 
+import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.event.ActionListener;
 import java.io.File;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -47,71 +47,59 @@ import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.IProject;
 import org.omegat.core.data.SourceTextEntry;
+import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.core.events.IEntryEventListener;
 import org.omegat.util.OStrings;
 import org.omegat.util.RecentProjects;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.ResourcesUtil;
 
-/**
- * Class for newUI main menu.
- * 
- * @author Hiroshi Miura
- */
-public final class MainWindowBurgerAndSelectorMenu extends BaseMainWindowMenu
-        implements ActionListener, MenuListener, IMainMenu {
+public class MainWindowAccessTools {
 
-    JMenu burgerMenu;
     JComboBox<String> recentProjectCB;
     JComboBox<String> sourceFilesCB;
     JMenu searchButton;
     JMenu settingsButton;
 
-    public MainWindowBurgerAndSelectorMenu(MainWindow mainWindow, MainWindowMenuHandler mainWindowMenuHandler) {
-        super(mainWindow, mainWindowMenuHandler);
+    private final MainWindowMenuHandler mainWindowMenuHandler;
+
+    static MainWindowAccessTools of(Container container, MainWindowMenuHandler mainWindowMenuHandler) {
+        MainWindowAccessTools mainWindowAccessTools = new MainWindowAccessTools(mainWindowMenuHandler);
+        mainWindowAccessTools.initComponents(container);
+        return mainWindowAccessTools;
     }
 
-    @Override
-    void createMenuBar() {
-        // build burger menu
-        burgerMenu = new JMenu();
-        burgerMenu.setIcon(new ImageIcon(ResourcesUtil.getBundledImage("newUI.burgerMenu.png")));
-        burgerMenu.add(projectMenu);
-        burgerMenu.add(editMenu);
-        burgerMenu.add(gotoMenu);
-        burgerMenu.add(viewMenu);
-        burgerMenu.add(toolsMenu);
-        burgerMenu.add(optionsMenu);
-        burgerMenu.add(helpMenu);
-        burgerMenu.add(burgerMenu);
-        mainMenu.add(burgerMenu);
+    MainWindowAccessTools(final MainWindowMenuHandler mainWindowMenuHandler) {
+        this.mainWindowMenuHandler = mainWindowMenuHandler;
+    }
 
+    void initComponents(Container container) {
         JLabel recentLabel = new JLabel(OStrings.getString("TF_MENU_NEWUI_PROJECT_SELECTOR"));
-        mainMenu.add(recentLabel);
+        container.add(recentLabel);
         recentProjectCB = new JComboBox<>();
         recentProjectCB.setModel(new DefaultComboBoxModel<>(getRecentProjectList("").toArray(String[]::new)));
         recentProjectCB.setEnabled(true);
         recentProjectCB.setPreferredSize(new Dimension(300, 20));
         recentProjectCB.setMaximumSize(new Dimension(400, 20));
-        mainMenu.add(recentProjectCB);
+        container.add(recentProjectCB);
 
         JLabel sourceTitle = new JLabel(OStrings.getString("TF_MENU_NEWUI_FILE_SELECTOR"));
-        mainMenu.add(sourceTitle);
+        container.add(sourceTitle);
         sourceFilesCB = new JComboBox<>();
         sourceFilesCB.setModel(new DefaultComboBoxModel<>(new String[0]));
         sourceFilesCB.setEnabled(Core.getProject().isProjectLoaded());
         sourceFilesCB.setPreferredSize(new Dimension(300, 20));
         sourceFilesCB.setMaximumSize(new Dimension(400, 20));
-        mainMenu.add(sourceFilesCB);
+        container.add(sourceFilesCB);
 
         // -- right side
-        mainMenu.add(Box.createGlue());
+        container.add(Box.createGlue());
         searchButton = new JMenu();
         searchButton.setIcon(new ImageIcon(ResourcesUtil.getBundledImage("newUI.search.png")));
-        mainMenu.add(searchButton);
+        container.add(searchButton);
         settingsButton = new JMenu();
         settingsButton.setIcon(new ImageIcon(ResourcesUtil.getBundledImage("newUI.settings.png")));
-        mainMenu.add(settingsButton);
+        container.add(settingsButton);
         searchButton.addMenuListener(new MenuListener() {
             @Override
             public void menuSelected(final MenuEvent menuEvent) {
@@ -140,20 +128,6 @@ public final class MainWindowBurgerAndSelectorMenu extends BaseMainWindowMenu
             public void menuCanceled(final MenuEvent menuEvent) {
             }
         });
-    }
-
-    private List<String> getRecentProjectList(String current) {
-        List<String> recent = new ArrayList<>();
-        recent.add(current);
-        recent.addAll(
-                RecentProjects.getRecentProjects().stream().map(f -> Paths.get(f).getFileName().toString())
-                        .filter(f -> !f.equals(current)).collect(Collectors.toList()));
-        return recent;
-    }
-
-    @Override
-    protected void configureActions() {
-        super.configureActions();
 
         recentProjectCB.addActionListener(actionEvent -> {
             // when select project from the list, we open it.
@@ -200,12 +174,26 @@ public final class MainWindowBurgerAndSelectorMenu extends BaseMainWindowMenu
             }
         });
 
+        CoreEvents.registerApplicationEventListener(new IApplicationEventListener() {
+            public void onApplicationStartup() {
+                onProjectStatusChanged(false);
+            }
+
+            public void onApplicationShutdown() {
+            }
+        });
     }
 
-    @Override
-    protected void onProjectStatusChanged(final boolean isProjectOpened) {
-        super.onProjectStatusChanged(isProjectOpened);
+    private List<String> getRecentProjectList(String current) {
+        List<String> recent = new ArrayList<>();
+        recent.add(current);
+        recent.addAll(
+                RecentProjects.getRecentProjects().stream().map(f -> Paths.get(f).getFileName().toString())
+                        .filter(f -> !f.equals(current)).collect(Collectors.toList()));
+        return recent;
+    }
 
+    private void onProjectStatusChanged(final boolean isProjectOpened) {
         sourceFilesCB.setEnabled(isProjectOpened);
         if (isProjectOpened) {
             List<IProject.FileInfo> projectFiles = Core.getProject().getProjectFiles();

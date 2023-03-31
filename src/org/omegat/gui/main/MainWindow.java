@@ -74,6 +74,7 @@ import org.omegat.gui.filelist.ProjectFilesListController;
 import org.omegat.gui.matches.IMatcher;
 import org.omegat.gui.search.SearchWindowController;
 import org.omegat.util.OStrings;
+import org.omegat.util.Platform;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
@@ -123,17 +124,26 @@ public class MainWindow extends JFrame implements IMainWindow {
     protected JLabel statusLabel;
     protected JLabel lockInsertLabel;
 
+    MainWindowAccessTools mainWindowAccessTools;
+
     protected DockingDesktop desktop;
 
     /** Creates new form MainWindow */
     public MainWindow() throws IOException {
-
-        if (Preferences.isPreference(Preferences.APPLY_BURGER_SELECTOR_UI)) {
-            menu = new MainWindowBurgerAndSelectorMenu(this, new MainWindowMenuHandler(this));
+        MainWindowMenuHandler mainWindowMenuHandler = new MainWindowMenuHandler(this);
+        if (Preferences.isPreference(Preferences.APPLY_BURGER_SELECTOR_UI) && !Platform.isMacOSX()) {
+            menu = new MainWindowBurgerMenu(this, mainWindowMenuHandler);
+            menu.initComponents();
+            mainWindowAccessTools = MainWindowAccessTools.of(menu.mainMenu, mainWindowMenuHandler);
         } else {
-            menu = new MainWindowMenu(this, new MainWindowMenuHandler(this));
+            menu = new MainWindowMenu(this, mainWindowMenuHandler);
+            menu.initComponents();
+            if (Preferences.isPreference(Preferences.APPLY_BURGER_SELECTOR_UI) && Platform.isMacOSX()) {
+                JPanel toolsPanel = new JPanel();
+                mainWindowAccessTools = MainWindowAccessTools.of(toolsPanel, mainWindowMenuHandler);
+                getContentPane().add(toolsPanel, BorderLayout.NORTH);
+            }
         }
-        menu.initComponents();
         setJMenuBar(menu.mainMenu);
         setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {

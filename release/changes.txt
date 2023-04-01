@@ -2,8 +2,8 @@
  OmegaT 5.8.0
 ----------------------------------------------------------------------
    4 Removed features
-  39 Enhancements
-  45 Bug fixes
+  40 Enhancements
+  46 Bug fixes
   9 Localization updates
 ----------------------------------------------------------------------
 5.8.0 vs 5.7.1
@@ -139,6 +139,9 @@
   - Sorting terms alphabetically in glossary pane
   https://sourceforge.net/p/omegat/feature-requests/1241/
 
+  - Rename option in search function
+  https://sourceforge.net/p/omegat/feature-requests/1087/
+
   - Support Git branch in Team Project
   https://sourceforge.net/p/omegat/feature-requests/918/
 
@@ -152,6 +155,9 @@
   https://github.com/omegat-org/omegat/pull/122
 
   Bug fixes:
+
+  - Change key to explicit offline mode cause
+  https://sourceforge.net/p/omegat/bugs/1153
 
   - Wrap long lines in error messages
   https://sourceforge.net/p/omegat/bugs/1145

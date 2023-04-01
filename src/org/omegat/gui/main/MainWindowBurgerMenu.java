@@ -4,7 +4,7 @@
  *           glossaries, and translation leveraging into updated projects.
  *
  *  Copyright (C) 2023 Hiroshi Miura
- *                Home page: http://www.omegat.org/
+ *                Home page: https://www.omegat.org/
  *                Support center: https://omegat.org/support
  *
  *  This file is part of OmegaT.
@@ -20,15 +20,18 @@
  *  GNU General Public License for more details.
  *
  *  You should have received a copy of the GNU General Public License
- *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 package org.omegat.gui.main;
 
 import java.awt.event.ActionListener;
+import java.util.Objects;
 
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JMenu;
+import javax.swing.UIManager;
 import javax.swing.event.MenuListener;
 
 import org.omegat.util.gui.ResourcesUtil;
@@ -51,7 +54,9 @@ public final class MainWindowBurgerMenu extends BaseMainWindowMenu
     void createMenuBar() {
         // build burger menu
         burgerMenu = new JMenu();
-        burgerMenu.setIcon(new ImageIcon(ResourcesUtil.getBundledImage("newUI.burgerMenu.png")));
+        Icon burgerIcon = UIManager.getIcon("OmegaT.newUI.menu.icon");
+        burgerMenu.setIcon(Objects.requireNonNullElseGet(burgerIcon,
+                () -> new ImageIcon(ResourcesUtil.getBundledImage("newUI.burgerMenu.png"))));
         burgerMenu.add(projectMenu);
         burgerMenu.add(editMenu);
         burgerMenu.add(gotoMenu);

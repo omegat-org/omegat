@@ -3,7 +3,7 @@
  *           with fuzzy matching, translation memory, keyword search,
  *           glossaries, and translation leveraging into updated projects.
  *
- *  Copyright (C) 2023 Hiroshi Miura.
+ *  Copyright (C) 2023 Hiroshi Miura
  *                Home page: https://www.omegat.org/
  *                Support center: https://omegat.org/support
  *
@@ -31,17 +31,17 @@ import java.io.File;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javax.swing.Box;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.event.MenuEvent;
-import javax.swing.event.MenuListener;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
 
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
@@ -54,12 +54,15 @@ import org.omegat.util.RecentProjects;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.ResourcesUtil;
 
+/**
+ * @author Hiroshi Miura
+ */
 public class MainWindowAccessTools {
 
     JComboBox<String> recentProjectCB;
     JComboBox<String> sourceFilesCB;
-    JMenu searchButton;
-    JMenu settingsButton;
+    JButton searchButton;
+    JButton settingsButton;
 
     private final MainWindowMenuHandler mainWindowMenuHandler;
 
@@ -87,48 +90,31 @@ public class MainWindowAccessTools {
         container.add(sourceTitle);
         sourceFilesCB = new JComboBox<>();
         sourceFilesCB.setModel(new DefaultComboBoxModel<>(new String[0]));
-        sourceFilesCB.setEnabled(Core.getProject().isProjectLoaded());
+        sourceFilesCB.setEnabled(true);
         sourceFilesCB.setPreferredSize(new Dimension(300, 20));
         sourceFilesCB.setMaximumSize(new Dimension(400, 20));
         container.add(sourceFilesCB);
 
+        searchButton = new JButton("",
+                Objects.requireNonNullElseGet(UIManager.getIcon("OmegaT.newUI.search.icon"),
+                () -> MainMenuIcons.newImageIcon(ResourcesUtil.getBundledImage("newUI.search.png"))));
+        searchButton.setBorderPainted(false);
+        settingsButton = new JButton("",
+                Objects.requireNonNullElseGet(UIManager.getIcon("OmegaT.newUI.settings.icon"),
+                () -> MainMenuIcons.newImageIcon(ResourcesUtil.getBundledImage("newUI.settings.png"))));
+        settingsButton.setBorderPainted(false);
+
         // -- right side
         container.add(Box.createGlue());
-        searchButton = new JMenu();
-        searchButton.setIcon(new ImageIcon(ResourcesUtil.getBundledImage("newUI.search.png")));
         container.add(searchButton);
-        settingsButton = new JMenu();
-        settingsButton.setIcon(new ImageIcon(ResourcesUtil.getBundledImage("newUI.settings.png")));
         container.add(settingsButton);
-        searchButton.addMenuListener(new MenuListener() {
-            @Override
-            public void menuSelected(final MenuEvent menuEvent) {
-                mainWindowMenuHandler.editFindInProjectMenuItemActionPerformed();
-            }
 
-            @Override
-            public void menuDeselected(final MenuEvent menuEvent) {
-            }
-
-            @Override
-            public void menuCanceled(final MenuEvent menuEvent) {
-            }
+        searchButton.addActionListener(actionEvent -> {
+            mainWindowMenuHandler.editFindInProjectMenuItemActionPerformed();
         });
-        settingsButton.addMenuListener(new MenuListener() {
-            @Override
-            public void menuSelected(final MenuEvent menuEvent) {
-                mainWindowMenuHandler.optionsPreferencesMenuItemActionPerformed();
-            }
-
-            @Override
-            public void menuDeselected(final MenuEvent menuEvent) {
-            }
-
-            @Override
-            public void menuCanceled(final MenuEvent menuEvent) {
-            }
+        settingsButton.addActionListener(actionEvent -> {
+            mainWindowMenuHandler.optionsPreferencesMenuItemActionPerformed();
         });
-
         recentProjectCB.addActionListener(actionEvent -> {
             // when select project from the list, we open it.
             String item = recentProjectCB.getSelectedItem().toString();
@@ -194,19 +180,21 @@ public class MainWindowAccessTools {
     }
 
     private void onProjectStatusChanged(final boolean isProjectOpened) {
-        sourceFilesCB.setEnabled(isProjectOpened);
         if (isProjectOpened) {
-            List<IProject.FileInfo> projectFiles = Core.getProject().getProjectFiles();
-            sourceFilesCB.setModel(new DefaultComboBoxModel<>(
-                    projectFiles.stream().map(i -> i.filePath).toArray(String[]::new)));
-            sourceFilesCB.revalidate();
+            SwingUtilities.invokeLater(() -> {
+                List<IProject.FileInfo> projectFiles = Core.getProject().getProjectFiles();
+                sourceFilesCB.setModel(new DefaultComboBoxModel<>(
+                        projectFiles.stream().map(i -> i.filePath).toArray(String[]::new)));
+                sourceFilesCB.revalidate();
 
-            recentProjectCB.setModel(new DefaultComboBoxModel<>(RecentProjects.getRecentProjects().stream()
-                    .map(f -> Paths.get(f).getFileName().toString()).toArray(String[]::new)));
+                recentProjectCB.setModel(new DefaultComboBoxModel<>(RecentProjects.getRecentProjects().stream()
+                        .map(f -> Paths.get(f).getFileName().toString()).toArray(String[]::new)));
+            });
         } else {
             sourceFilesCB.setModel(new DefaultComboBoxModel<>(new String[0]));
-            sourceFilesCB.setEnabled(false);
+            sourceFilesCB.revalidate();
         }
+
     }
 
 }

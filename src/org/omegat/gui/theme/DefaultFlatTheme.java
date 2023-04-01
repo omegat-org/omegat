@@ -251,6 +251,24 @@ public class DefaultFlatTheme extends DelegatingLookAndFeel {
 
             UIManager.put("DragControler.detachCursor", ResourcesUtil.getBundledImage("appbar.fullscreen.png"));
         }
+
+        // Main window newUI icons
+        if (defaults.getBoolean("OmegaT.theme.dark")) {
+            defaults.put("OmegaT.newUI.menu.icon", getIcon("newUI.dark.burgerMenu.png"));
+            defaults.put("OmegaT.newUI.menu.icon@2x", getIcon("newUI.dark.burgerMenu@2x.png"));
+            defaults.put("OmegaT.newUI.search.icon", getIcon("newUI.dark.search.png"));
+            defaults.put("OmegaT.newUI.search.icon@2x", getIcon("newUI.dark.search@2x.png"));
+            defaults.put("OmegaT.newUI.settings.icon", getIcon("newUI.dark.settings.png"));
+            defaults.put("OmegaT.newUI.settings.icon@2x", getIcon("newUI.dark.settings@2x.png"));
+        } else {
+            defaults.put("OmegaT.newUI.menu.icon", getIcon("newUI.burgerMenu.png"));
+            defaults.put("OmegaT.newUI.menu.icon@2x", getIcon("newUI.burgerMenu@2x.png"));
+            defaults.put("OmegaT.newUI.search.icon", getIcon("newUI.search.png"));
+            defaults.put("OmegaT.newUI.search.icon@2x", getIcon("newUI.search@2x.png"));
+            defaults.put("OmegaT.newUI.settings.icon", getIcon("newUI.settings.png"));
+            defaults.put("OmegaT.newUI.settings.icon@2x", getIcon("newUI.settings@2x.png"));
+        }
+
         return defaults;
     }
 

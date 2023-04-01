@@ -314,10 +314,12 @@ public final class UIDesignManager {
             if (Platform.isLinux() && Color.WHITE.equals(uiDefaults.getColor("TextPane.background"))) {
                 uiDefaults.put("TextPane.background", uiDefaults.getColor("List.background"));
             }
+            uiDefaults.put("OmegaT.theme.dark", true);
         } else {
             loadColors(uiDefaults, "light");
             Color bg = uiDefaults.getColor("TextArea.background").darker();  // NOI18N
             hilite = new Color(bg.getRed(), bg.getBlue(), bg.getGreen(), 32);
+            uiDefaults.put("OmegaT.theme.dark", false);
         }
         uiDefaults.put("OmegaT.alternatingHilite", hilite);
     }

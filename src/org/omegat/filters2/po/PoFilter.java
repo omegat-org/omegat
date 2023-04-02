@@ -10,7 +10,7 @@
                2011 Didier Briel
                2013-1014 Alex Buloichik, Enrique Estevez
                2017 Didier Briel
-               Home page: http://www.omegat.org/
+               Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
  This file is part of OmegaT.
@@ -26,7 +26,7 @@
  GNU General Public License for more details.
 
  You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
 package org.omegat.filters2.po;
@@ -67,7 +67,7 @@ import org.omegat.util.TagUtil;
 /**
  * Filter to support po files (in various encodings).
  *
- * Format described on http://www.gnu.org/software/hello/manual/gettext/PO-Files.html
+ * Format described on https://www.gnu.org/software/hello/manual/gettext/PO-Files.html
  *
  * Filter is not thread-safe !
  *

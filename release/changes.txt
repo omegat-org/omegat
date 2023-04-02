@@ -1,9 +1,22 @@
 ----------------------------------------------------------------------
- OmegaT 5.8.0
+ OmegaT 6.0.0
+----------------------------------------------------------------------
+  1 Enhancement
+  0 Bug fixes
+  0 Localisation updates
+----------------------------------------------------------------------
+6.0.0 vs 5.8.0
+
+  Implemented requests:
+
+  - OmegaT 6.0 requires Java 11 to run
+
+----------------------------------------------------------------------
+ OmegaT 5.8.0 (2023-04-01)
 ----------------------------------------------------------------------
    4 Removed features
-  37 Enhancements
-  45 Bug fixes
+  40 Enhancements
+  46 Bug fixes
   9 Localization updates
 ----------------------------------------------------------------------
 5.8.0 vs 5.7.1
@@ -32,9 +45,14 @@
   - Help user to copy error message to clipboard
   https://sourceforge.net/p/omegat/feature-requests/1683/
 
-  - Can share authentication between Git or SVN repositories 
-which are in the same server
+  - New default: Dictionary search should not be automatic
+  https://sourceforge.net/p/omegat/feature-requests/1680/
+
+  - Share authentication between Git or SVN repositories on the same server
   https://sourceforge.net/p/omegat/feature-requests/1670
+
+  - Add filter filtres list sorting
+  https://sourceforge.net/p/omegat/feature-requests/1667/
 
   - Integrate the Stax filters to OmegaT
   https://sourceforge.net/p/omegat/feature-requests/1666/
@@ -134,6 +152,9 @@ which are in the same server
   - Sorting terms alphabetically in glossary pane
   https://sourceforge.net/p/omegat/feature-requests/1241/
 
+  - Rename option in search function
+  https://sourceforge.net/p/omegat/feature-requests/1087/
+
   - Support Git branch in Team Project
   https://sourceforge.net/p/omegat/feature-requests/918/
 
@@ -147,6 +168,9 @@ which are in the same server
   https://github.com/omegat-org/omegat/pull/122
 
   Bug fixes:
+
+  - Change key to explicit offline mode cause
+  https://sourceforge.net/p/omegat/bugs/1153
 
   - Wrap long lines in error messages
   https://sourceforge.net/p/omegat/bugs/1145

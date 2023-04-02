@@ -11,7 +11,7 @@
                2014 Piotr Kulik
                2015 Yu Tang, Aaron Madlon-Kay
                2016 Didier Briel
-               Home page: http://www.omegat.org/
+               Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
  This file is part of OmegaT.
@@ -27,7 +27,7 @@
  GNU General Public License for more details.
 
  You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
 package org.omegat.gui.main;
@@ -482,7 +482,7 @@ public class MainWindow extends JFrame implements IMainWindow {
             jlabel.setAlignmentX(LEFT_ALIGNMENT);
             pane.add(jlabel);
 
-            if (ex != null) {
+            if (ex != null && ex.getLocalizedMessage() != null){
                 pane.add(Box.createRigidArea(new Dimension(0, 5)));
                 JTextArea message = new JTextArea();
                 message.setText(ex.getLocalizedMessage());
@@ -499,7 +499,7 @@ public class MainWindow extends JFrame implements IMainWindow {
                 JButton jbutton = new JButton(OStrings.getString("TF_ERROR_COPY_CLIPBOARD"));
                 // Copy to clipboard action
                 jbutton.addActionListener(l -> {
-                    String clipboardMsg = String.format("%s%n---%n%s%n", ex.getLocalizedMessage(),
+                    String clipboardMsg = String.format("%s%n---%n%s%n---%n%s%n", msg, ex.getLocalizedMessage(),
                             StaticUtils.getSupportInfo());
                     Toolkit.getDefaultToolkit().getSystemClipboard()
                             .setContents(new StringSelection(clipboardMsg), null);

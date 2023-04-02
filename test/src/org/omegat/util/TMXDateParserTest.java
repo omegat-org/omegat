@@ -4,7 +4,7 @@ OmegaT - Computer Assisted Translation (CAT) tool
          glossaries, and translation leveraging into updated projects.
 
 Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
-              Home page: http://www.omegat.org/
+              Home page: https://www.omegat.org/
               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
@@ -20,7 +20,7 @@ Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
  GNU General Public License for more details.
 
  You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 **************************************************************************/
 
 package org.omegat.util;

@@ -149,7 +149,7 @@ public class Searcher {
             // function can be called multiple times after search
             // results preprocess should occur only one time
             m_preprocessResults = false;
-            if (!searchExpression.allResults) {
+            if (!searchExpression.allResults && searchExpression.fileNames) {
                 for (SearchResultEntry entry : m_searchResults) {
                     String key = entry.getSrcText() + entry.getTranslation();
                     if (entry.getEntryNum() == ENTRY_ORIGIN_TRANSLATION_MEMORY) {

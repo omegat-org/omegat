@@ -149,29 +149,30 @@ public class Searcher {
             // function can be called multiple times after search
             // results preprocess should occur only one time
             m_preprocessResults = false;
-            if (!searchExpression.allResults && searchExpression.fileNames) {
+            if (!searchExpression.allResults) {
                 for (SearchResultEntry entry : m_searchResults) {
                     String key = entry.getSrcText() + entry.getTranslation();
                     if (entry.getEntryNum() == ENTRY_ORIGIN_TRANSLATION_MEMORY) {
                         if (m_tmxMap.containsKey(key) && (m_tmxMap.get(key) > 0)) {
-                            String newPreamble = StringUtil.format(OStrings.getString("SW_FILE_AND_NR_OF_MORE"),
-                                    entry.getPreamble(), m_tmxMap.get(key));
-                            entry.setPreamble(newPreamble);
+                            entry.setPreamble(updatePreamble(entry, m_tmxMap.get(key)));
                         }
                     } else if (entry.getEntryNum() > ENTRY_ORIGIN_PROJECT_MEMORY) {
                         // at this stage each PM entry num is increased by 1
                         if (m_entryMap.containsKey(key) && (m_entryMap.get(key) > 0)) {
-                            String newPreamble = StringUtil.isEmpty(entry.getPreamble())
-                                    ? StringUtil.format(OStrings.getString("SW_NR_OF_MORE"), m_entryMap.get(key))
-                                    : StringUtil.format(OStrings.getString("SW_FILE_AND_NR_OF_MORE"),
-                                            entry.getPreamble(), m_entryMap.get(key));
-                            entry.setPreamble(newPreamble);
+                            entry.setPreamble(updatePreamble(entry, m_entryMap.get(key)));
                         }
                     }
                 }
             }
         }
         return m_searchResults;
+    }
+
+    private String updatePreamble(SearchResultEntry entry, int matchNumber) {
+        return StringUtil.isEmpty(entry.getPreamble())
+                ? StringUtil.format(OStrings.getString("SW_NR_MATCHES"), 1 + matchNumber)
+                : StringUtil.format(OStrings.getString("SW_FILE_AND_NR_OF_MORE"),
+                        entry.getPreamble(), matchNumber);
     }
 
     /**

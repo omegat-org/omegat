@@ -2,7 +2,7 @@
  OmegaT 6.0.0
 ----------------------------------------------------------------------
   1 Enhancement
-  0 Bug fixes
+  1 Bug fixes
   0 Localisation updates
 ----------------------------------------------------------------------
 6.0.0 vs 5.8.0
@@ -10,6 +10,11 @@
   Implemented requests:
 
   - OmegaT 6.0 requires Java 11 to run
+
+  Bug fixes:
+
+  - Fixed "null" file names in search results when "Display: file names" checkbox was unchecked
+  https://sourceforge.net/p/omegat/bugs/1154/
 
 ----------------------------------------------------------------------
  OmegaT 5.8.0 (2023-04-01)

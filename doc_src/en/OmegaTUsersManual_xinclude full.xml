@@ -5,7 +5,6 @@
 <book lang="en" id="book.user.manual">
   <bookinfo>
     <title id="book.user.manual.title">OmegaT &vernb; - User Manual</title>
-    <pubdate>@timestamp@</pubdate>
 	<!-- TODO automate date insertion -->
     <abstract>
       <para>This document is the official user manual to OmegaT, the free

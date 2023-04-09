@@ -1,0 +1,34 @@
+steps:
+  - task: DownloadBuildArtifacts@0
+    displayName: 'Download Artifacts from JRE Prep task'
+    inputs:
+      buildType: specific
+      project: 'ecb5bbf0-66ac-433d-bda1-be5bcf90716d'
+      pipeline: 7
+      artifactName: drop
+      downloadPath: '$(System.ArtifactsDirectory)/asset'
+      extractTars: false
+  - task: DownloadSecureFile@1
+    displayName: 'Download secure file'
+    inputs:
+      secureFile: '351b5d1f-5047-4d45-92a4-2384005085f7'
+      retryCount: 5
+  - script: |
+      umask a+w
+      mkdir -p build
+      chmod -R a+w doc_src
+      $(Build.SourcesDirectory)/gradlew -PenvIsCi -PassetDir=$(System.ArtifactsDirectory)/asset/drop -PwinCodesignFile=$(cert.secureFilePath) -PwinCodesignTimestampUrl=http://timestamp.sectigo.com clean build manualPdfs
+    displayName: 'Command Line Script'
+    env:
+      ORG_GRADLE_PROJECT_winCodesignPassword: $(keystorePassword)
+      ORG_GRADLE_PROJECT_jwsStorepass: $(keystorePassword)
+  - task: CopyFiles@2
+    displayName: 'Copy Files to: $(build.artifactstagingdirectory)/done'
+    inputs:
+      SourceFolder: '$(system.defaultworkingdirectory)/build/distributions/'
+      Contents: '*'
+      TargetFolder: '$(build.artifactstagingdirectory)/done'
+  - task: PublishBuildArtifacts@1
+    displayName: 'Publish Artifact: drop'
+    inputs:
+      PathtoPublish: '$(build.artifactstagingdirectory)/done'

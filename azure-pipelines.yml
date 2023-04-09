@@ -1,0 +1,51 @@
+trigger:
+  branches:
+    include:
+      - master
+      - releases/*
+      - refs/tags/v*
+    exclude:
+      - release/*
+      - standard
+
+pr:
+  branches:
+    include:
+      - master
+      - releases/*
+    exclude:
+      - standard
+  paths:
+    exclude:
+      - docs
+      - doc_src
+      - docs_devel
+      - README.md
+
+variables:
+  isMain: $[eq(variables['Build.SourceBranch'], 'refs/heads/master')]
+  isRelease: $[contains(variables['Build.SourceBranch'], 'refs/tags/v']
+
+jobs:
+- job: GitHubCI
+  displayName: GitHub CI (new)
+  pool:
+    vmImage: 'ubuntu-22.04'
+  variables:
+    GRADLE_USER_HOME: '$(Pipeline.Workspace)/.gradle'
+  steps:
+    - template: ci/check_steps.yml
+
+- job: ReleaseBuild
+  displayName: Release build for master and releases/x.x
+  pool:
+    vmImage: 'ubuntu-22.04'
+  dependsOn: GitHubCI
+  condition: and(succeeded(), or(eq(variables.isMain, true), eq(variable.isRelease, true)))
+  variables:
+    GRADLE_USER_HOME: '$(Pipeline.Workspace)/.gradle'
+  env:
+    ORG_GRADLE_PROJECT_winCodesignPassword: $(keystorePassword)
+    ORG_GRADLE_PROJECT_jwsStorepass: $(keystorePassword)
+  steps:
+    - template: ci/release_steps.yml

@@ -272,14 +272,13 @@ ext {
 
     assetDir = findProperty('assetDir') ?: '../'
 
-    // for java11 'OpenJDK11U'
-    macJRE = fileTree(dir: assetDir, include: 'OpenJDK8U-jre_x64_mac_*.tar.gz')
-    // armMacJRE = fileTree(dir: assetDir, include: 'OpenJDK11U-jre_aarch64_mac_*.tar.gz')
+    macJRE = fileTree(dir: assetDir, include: 'OpenJDK11U-jre_x64_mac_*.tar.gz')
+    armMacJRE = fileTree(dir: assetDir, include: 'OpenJDK11U-jre_aarch64_mac_*.tar.gz')
 
-    linux64JRE = fileTree(dir: assetDir, include: 'OpenJDK8U-jre_x64_linux_*.tar.gz')
+    linux64JRE = fileTree(dir: assetDir, include: 'OpenJDK11U-jre_x64_linux_*.tar.gz')
 
-    windowsJRE32 = fileTree(dir: assetDir, include: 'OpenJDK8U-jre_x86-32_windows_*.zip')
-    windowsJRE = fileTree(dir: assetDir, include: 'OpenJDK8U-jre_x64_windows_*.zip')
+    windowsJRE32 = fileTree(dir: assetDir, include: 'OpenJDK11U-jre_x86-32_windows_*.zip')
+    windowsJRE = fileTree(dir: assetDir, include: 'OpenJDK11U-jre_x64_windows_*.zip')
 }
 
 task genDocIndex(type: Copy) {

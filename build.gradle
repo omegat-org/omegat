@@ -370,19 +370,19 @@ distributions {
             from('release/linux-specific') {
                 filter(ReplaceTokens, tokens:
                     [VERSION_NUMBER_SUBST: project.version,
-                     JAR_SUBST: jar.archiveName])
+                     JAR_SUBST: jar.archiveFileName])
                 fileMode 0755
             }
             from('release/win32-specific') {
                 include 'OmegaT.bat'
-                filter(ReplaceTokens, tokens: [JAR_SUBST: jar.archiveName])
+                filter(ReplaceTokens, tokens: [JAR_SUBST: jar.archiveFileName])
             }
             from('lib/licenses') {
                 into 'lib'
             }
             eachFile {
                 // Move main JAR up one level from lib.
-                if (it.name == jar.archiveName) {
+                if (it.name == jar.archiveFileName) {
                     it.relativePath = it.relativePath.parent.parent.append(true, jar.archiveName)
                 }
             }

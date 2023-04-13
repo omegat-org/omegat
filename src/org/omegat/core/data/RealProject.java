@@ -716,7 +716,13 @@ public class RealProject implements IProject {
                 && isOnlineMode) {
             tmxPrepared = null;
             glossaryPrepared = null;
-            // commit translations
+            // Ticket 1690 - build project statistics files
+            // so that contents of these files is up to date with target files sent at same moment
+            StatsResult stat = CalcStandardStatistics.buildProjectStats(this);
+            stat.updateStatisticsInfo(hotStat);
+            String fn = config.getProjectInternal() + OConsts.STATS_FILENAME;
+            Statistics.writeStat(fn, stat.getTextData());
+            // commit translations and statistics
             try {
                 Core.getMainWindow().showStatusMessageRB("TF_COMMIT_TARGET_START");
                 remoteRepositoryProvider.switchAllToLatest();
@@ -724,6 +730,12 @@ public class RealProject implements IProject {
                         null);
                 remoteRepositoryProvider.commitFiles(config.getTargetDir().getUnderRoot(),
                         "Project translation");
+                // Convert stats file name to relative
+                ProjectProperties.ProjectPath path = config.new ProjectPath(true);
+                path.setRelativeOrAbsolute(fn);
+                fn = path.getUnderRoot();
+                remoteRepositoryProvider.copyFilesFromProjectToRepos(fn,null);
+                remoteRepositoryProvider.commitFiles(fn, "Statistics");
                 Core.getMainWindow().showStatusMessageRB("TF_COMMIT_TARGET_DONE");
             } catch (Exception e) {
                 Log.logErrorRB("TF_COMMIT_TARGET_ERROR");

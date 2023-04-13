@@ -42,7 +42,7 @@ version = omtVersion.version + getUpdateSuffix(omtVersion.update)
 java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(javaVersion)
-        vendor = JvmVendorSpec.ADOPTOPENJDK
+        vendor = JvmVendorSpec.ADOPTIUM
     }
     withSourcesJar()
     withJavadocJar()

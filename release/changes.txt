@@ -2,7 +2,7 @@
  OmegaT 6.1.0
 ----------------------------------------------------------------------
   0 Enhancement
-  0 Bug fixes
+  1 Bug fixes
   0 Localisation updates
 ----------------------------------------------------------------------
 6.1.0 vs 6.0.0
@@ -10,6 +10,9 @@
   Implemented requests:
 
   Bug fixes:
+
+  - Backup file does not created in no-team project
+    * https://sourceforge.net/p/omegat/bugs/1159/
 
 ----------------------------------------------------------------------
  OmegaT 6.0.0

@@ -10,7 +10,7 @@
    
 <body>
     <div id="wh-header">
-    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 5.8.0 - User Manual</a></div></div>
+    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 6.0.0 - User Manual</a></div></div>
 
     <div id="wh-body">
       <div class="wh-icon-menu" id="wh-menu"></div>
@@ -1062,65 +1062,110 @@
                </div>
                <p>OmegaT displays fuzzy matches in the <a class="link" href="chapter.panes.html#panes.fuzzy.matches" title="Fuzzy Matches">
                      <span class="guilabel">Fuzzy Matches</span>
-                  </a> pane. Such matches are by default
-  limited to the source and target languages defined in the <a class="link" href="chapter.windows.and.dialogs.html#dialogs.project.properties" title="Project Properties">
+                  </a> pane. By default, those matches are limited to the source and target languages defined in the <a class="link" href="chapter.windows.and.dialogs.html#dialogs.project.properties" title="Project Properties">
                      <span class="guilabel">Project
   Properties</span>
-                  </a> dialog, but you can also add
-  matches in languages that are not the target language. See the <a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.tm.matches.other.languages">
+                  </a> dialog.</p>
+               <p>You can add matches in languages that are not the target language. See
+  the <a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.tm.matches.other.languages">
                      <code class="option">Include
 		matches from other languages</code>
                   </a> preference for
   details.</p>
-               <p>With OmegaT, you can also display a third language <span class="emphasis">
-                     <em>right
-  under</em>
-                  </span> the source segment to use as an alternative language
-  reference for the source text.</p>
+               <p>If you have a TMX that corresponds to your source document and contains its translation to a different language, you can also display that
+  language <span class="emphasis">
+                     <em>right below</em>
+                  </span> the source segment for use as an
+  additional reference language.</p>
+               <p>To achieve this:</p>
+               <div class="orderedlist">
+                  <ol class="orderedlist" type="1">
+                     <li class="listitem">
+                        <p>Copy the translation memory containing the additional reference
+		language into <code class="filename">tmx2source</code> in the
+		<a class="link" href="chapter.project.folder.html#project.folder.tm" title="tm">tm</a>
+		folder.</p>
+                     </li>
+                     <li class="listitem">
+                        <p>Rename the memory file to:
+		</p>
+                        <div class="itemizedlist">
+                           <ul class="itemizedlist" style="list-style-type: disc; ">
+                              <li class="listitem">
+                                 <p>
+			  
+                                    <code class="filename">LL_CC.tmx</code>,
+			</p>
+                              </li>
+                              <li class="listitem">
+                                 <p>
+			  
+                                    <code class="filename">LL-CC.tmx</code>, or
+			</p>
+                              </li>
+                              <li class="listitem">
+                                 <p>
+			  
+                                    <code class="filename">LL.tmx</code>,
+			</p>
+                              </li>
+                           </ul>
+                        </div>
+                        <p>
+		where <span class="emphasis">
+                              <em>LL</em>
+                           </span> is the internal language code of the
+		langage that you want to display as reference, and
+		<span class="emphasis">
+                              <em>CC</em>
+                           </span> is an arbitrary 2-letter code.</p>
+                        <div class="warning">
+                           <h3 class="title">Warning</h3>
+                           <div class="itemizedlist">
+                              <ul class="itemizedlist" style="list-style-type: disc; ">
+                                 <li class="listitem">
+                                    <p>All the letters must be capital letters.</p>
+                                 </li>
+                                 <li class="listitem">
+                                    <p>Only segments that match the source <span class="bold">
+                                          <strong>exactly</strong>
+                                       </span>
+			  displayed.</p>
+                                 </li>
+                              </ul>
+                           </div>
+                        </div>
+                     </li>
+                  </ol>
+               </div>
                <div class="example" id="bridge.english.and.french.with.japanese">
-                  <div class="example-title">Example 6. Bridge English and French with
-	Japanese</div>
+                  <div class="example-title">Example 6. Using a Japanese reference under the
+	English source</div>
                   <div class="example-contents">
+                     <p>If you have a TMX that contains the Japanese translation of an
+	English document you are translating to French, you can use the Japanese
+	translation as an alternative exact reference by displaying it under the
+	English text to translate.</p>
+                     <p>Just put the English-Japanese file in <code class="filename">tm/tmx2source</code> under the name
+	<code class="filename">JA-JP.tmx</code>. OmegaT will now show you the Japanese text
+	corresponding to the English source segment:</p>
                      <p>
 	  
                      </p>
                      <pre class="programlisting">— ¶ —————————————————————
 <span class="token">A whitespace character: [ \t\n\x0B\f\r]
-fr-ZB: Un caractère d'espacement (espace, tabulation, etc.) :  [ \t\n\x0B\f\r]
-ja-RV: 空白文字：[ \t\n\x0B\f\r]</span>
+ja-JP: 空白文字：[ \t\n\x0B\f\r]</span>
 Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 3075 ¶&gt;</span>
 — ¶ —————————————————————</pre>
-                     <p>The first line is the original English, the second an old French version
-with an arbitrary language code, the third the Japanese version with an equally
-arbitrary language code, and the 4th the current translation to French.</p>
+                     <p>The first line is the original English, the second line is the bridge
+language you expect to find useful when you create your translation, and the
+third line is the current translation to French.</p>
                   </div>
                </div>
                <br class="example-break" />
-               <p>To achieve this:</p>
-               <div class="orderedlist">
-                  <ol class="orderedlist" type="1">
-                     <li class="listitem">
-                        <p>Create a folder called <code class="filename">tmx2source</code> in the <a class="link" href="chapter.project.folder.html#project.folder.tm" title="tm">tm</a>
-		folder.</p>
-                     </li>
-                     <li class="listitem">
-                        <p>Copy your “first-third” language translation memory there.</p>
-                     </li>
-                     <li class="listitem">
-                        <p>Rename the memory <code class="filename">LL_CC.tmx</code> or
-		<code class="filename">LL-CC.tmx</code>, where <span class="emphasis">
-                              <em>LL</em>
-                           </span> is the
-		internal code of the language you want to display as reference and
-		<span class="emphasis">
-                              <em>CC</em>
-                           </span> is an arbitrary 2-letter code.</p>
-                     </li>
-                  </ol>
-               </div>
                <div class="note">
                   <h3 class="title">Note</h3>
-                  <p>You can use any number of TMX files containing as many different “bridge” language pairs as you want.</p>
+                  <p>You can use any number of TMX files containing as many different bridge language pairs as you want.</p>
                </div>
             </section>
          </section>
@@ -2016,7 +2061,7 @@ arbitrary language code, and the 4th the current translation to French.</p>
             <div class="variablelist">
                <dl class="variablelist">
                   <dt>
-                     <span class="term">Standard: OmegaT 5.8.0</span>
+                     <span class="term">Standard: OmegaT 6.0.0</span>
                   </dt>
                   <dd>
                      <p>This edition is recommended for everyday use.</p>
@@ -2034,9 +2079,9 @@ arbitrary language code, and the 4th the current translation to French.</p>
             <p>The files are downloadable directly from <a class="ulink" href="https://omegat.org/download" target="_top">https://omegat.org</a>.</p>
             <div class="note">
                <h3 class="title">Note</h3>
-               <p>OmegaT 5.8.0 requires a Java 8 Runtime Environment (JRE) to run.</p>
+               <p>OmegaT 6.0.0 requires a Java 11 Runtime Environment (JRE) to run.</p>
                <p>OmegaT packages are available both in versions bundled with Java, and
-	versions without it. Packages without Java rely on a Java 8 Runtime Environment
+	versions without it. Packages without Java rely on a Java 11 Runtime Environment
 	installed systemwide.</p>
                <p>OmegaT 5.8.0 and later can also run with Java 11 Runtime Environment
 	on any platform.</p>
@@ -2082,7 +2127,7 @@ arbitrary language code, and the 4th the current translation to French.</p>
       <code class="filename">sudo</code> password.</p>
                   <p>The script checks for an existing installation of the same OmegaT
       version in <code class="filename">/opt/omegat/</code>. If there isn’t one, it
-      installs the program in <code class="filename">/opt/omegat/OmegaT_5.8.0</code>
+      installs the program in <code class="filename">/opt/omegat/OmegaT_6.0.0</code>
       and sets it as the default version (in
       <code class="filename">/opt/omegat/OmegaT-default</code>).</p>
                </div>
@@ -2116,7 +2161,7 @@ arbitrary language code, and the 4th the current translation to French.</p>
                   </div>
                </div>
                <p>This information applies to any system for a Java version
-    compatible with Java 8 Runtime Environment is available. That includes the platforms
+    compatible with Java 11 Runtime Environment is available. That includes the platforms
 		described above, as well as platforms for which no specific OmegaT package
 		is provided.</p>
                <p>Download the <span class="emphasis">
@@ -2395,7 +2440,7 @@ arbitrary language code, and the 4th the current translation to French.</p>
 	is installed, you can launch it directly from the command line.  See the <a class="link" href="chapter.how.to.html#launch.with.command.line" title="Command line launch">Command line launch</a> section for details.</p>
                <p>You can create a script that includes the desired command line launch
 	parameters. If <code class="filename">.jar</code> files are properly associated with
-	the Java 8 Runtime Environment and your PATH settings are correct, you can also simply
+	the Java 11 Runtime Environment and your PATH settings are correct, you can also simply
 	click (or double-click) on <code class="filename">OmegaT.jar</code> to launch it
 	directly.</p>
                <p>Consult the documentation for your system for more information.</p>

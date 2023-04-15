@@ -80,8 +80,8 @@ public class SRX implements Serializable {
                 throw new ExceptionInInitializerError(ex.getMessage());
             }
             if (ex.getCause() != null) {
-                throw new ExceptionInInitializerError(ex.getCause().getClass().getName() + ": "
-                        + ex.getCause().getMessage());
+                throw new ExceptionInInitializerError(
+                        ex.getCause().getClass().getName() + ": " + ex.getCause().getMessage());
             }
             throw new ExceptionInInitializerError(ex.getClass().getName());
         }
@@ -106,11 +106,16 @@ public class SRX implements Serializable {
 
     /**
      * Saves segmentation rules into specified directory.
-     * @param srx OmegaT object to be written; if null, means that we want to delete the file
-     * @param outDir where to put the file. The file name is forced to {@link #SRX_SENTSEG} and will be in standard SRX format.
+     * 
+     * @param srx
+     *            OmegaT object to be written; if null, means that we want to
+     *            delete the file
+     * @param outDir
+     *            where to put the file. The file name is forced to
+     *            {@link #SRX_SENTSEG} and will be in standard SRX format.
      */
     public static void saveToSrx(SRX srx, File outDir) throws IOException {
-        File outFile = new File (outDir, SRX_SENTSEG);
+        File outFile = new File(outDir, SRX_SENTSEG);
 
         if (srx == null) {
             outFile.delete();
@@ -141,10 +146,10 @@ public class SRX implements Serializable {
                 jaxbRule.setBreak(rule.isBreakRule() ? "yes" : "no");
                 if (rule.getBeforebreak() != null) {
                     jaxbRule.setBeforebreak(factory.createBeforebreak());
-                    jaxbRule.getBeforebreak().setContent(rule.getBeforebreak());                
+                    jaxbRule.getBeforebreak().setContent(rule.getBeforebreak());
                 }
                 if (rule.getAfterbreak() != null) {
-                    jaxbRule.setAfterbreak(factory.createAfterbreak());                
+                    jaxbRule.setAfterbreak(factory.createAfterbreak());
                     jaxbRule.getAfterbreak().setContent(rule.getAfterbreak());
                 }
             }
@@ -164,8 +169,9 @@ public class SRX implements Serializable {
     }
 
     /**
-     * Loads the local segmentation file. Accepts SRX (default) or old CONF format.
-     * In case you use conf format, rules about old version remain valid.
+     * Loads the local segmentation file. Accepts SRX (default) or old CONF
+     * format. In case you use a conf format, rules about an old version remain
+     * valid.
      **/
     public static SRX loadFromDir(File configDir) {
         File inFile = null;
@@ -174,11 +180,10 @@ public class SRX implements Serializable {
             if (inFile.exists()) {
                 return loadSrxFile(inFile.toURI().toURL());
             }
-        } catch (Exception o2) {
-
+        } catch (Exception ignored) {
         }
 
-        // If file was not present or not readable
+        // If the file was not present or not readable
         inFile = new File(configDir, CONF_SENTSEG);
         if (inFile.exists()) {
             SRX srx = loadConfFile(inFile);
@@ -224,9 +229,8 @@ public class SRX implements Serializable {
 
             // checking the version
             if (CURRENT_VERSION.compareTo(res.getVersion()) > 0) {
-                // yeap, the segmentation config file is of the older version
-
-                // initing defaults
+                // yep, the segmentation config file is of the older version
+                // initializing defaults
                 SRX defaults = SRX.getDefault();
                 // and merging them into loaded rules
                 res = merge(res, defaults);
@@ -247,30 +251,39 @@ public class SRX implements Serializable {
             List<MapRule> newMap = new ArrayList<MapRule>();
             Srx data = (Srx) SRX_JAXB_CONTEXT.createUnmarshaller().unmarshal(rulesUrl);
 
-            // Correction: in SRX, the same "languagerulename" can be used more than once
-            HashMap<String,List<Rule>> mapping = new HashMap<>();
+            // Correction: in SRX, the same "languagerulename" can be used more
+            // than once
+            HashMap<String, List<Rule>> mapping = new HashMap<>();
 
             for (Languagerule rules : data.getBody().getLanguagerules().getLanguagerule()) {
-                List<Rule> rulesList = new ArrayList<Rule>(rules.getRule().size());
+                List<Rule> rulesList = new ArrayList<>(rules.getRule().size());
                 for (gen.core.segmentation.Rule r : rules.getRule()) {
                     boolean isBreak = "yes".equalsIgnoreCase(r.getBreak());
-                    rulesList.add(new Rule(isBreak, r.getBeforebreak().getContent(), r.getAfterbreak()
-                            .getContent()));
+                    rulesList.add(new Rule(isBreak, r.getBeforebreak().getContent(),
+                            r.getAfterbreak().getContent()));
                 }
 
                 mapping.put(rules.getLanguagerulename(), rulesList);
             }
 
             for (Languagemap lm : data.getBody().getMaprules().getLanguagemap()) {
-                newMap.add(new MapRule(lm.getLanguagerulename(), lm.getLanguagepattern(), mapping.get(lm.getLanguagerulename())));
+                newMap.add(new MapRule(lm.getLanguagerulename(), lm.getLanguagepattern(),
+                        mapping.get(lm.getLanguagerulename())));
             }
 
             Log.log("using segmentation rules from " + rulesUrl);
             // set rules only if no errors
             SRX res = new SRX();
             res.setMappingRules(newMap);
-            res.setCascade(! ((data.getHeader() != null) && ("no".equals(data.getHeader().getCascade())))); 	// in OmegaT, defaults to true
-            res.setSegmentSubflows((data.getHeader() != null) && ("yes".equals(data.getHeader().getSegmentsubflows())));	// not really used
+            res.setCascade(!((data.getHeader() != null) && ("no".equals(data.getHeader().getCascade())))); // in
+                                                                                                           // OmegaT,
+                                                                                                           // defaults
+                                                                                                           // to
+                                                                                                           // true
+            res.setSegmentSubflows(
+                    (data.getHeader() != null) && ("yes".equals(data.getHeader().getSegmentsubflows()))); // not
+                                                                                                          // really
+                                                                                                          // used
             return res;
         } catch (Exception ex) {
             Log.log(ex);
@@ -279,8 +292,10 @@ public class SRX implements Serializable {
     }
 
     /**
-     * Does a config file already exists for the project at the given location?
-     * @param configDir the project directory for storage of settings file
+     * Does a config file already exist for the project at the given location?
+     * 
+     * @param configDir
+     *            the project directory for storage of settings file
      */
     public static boolean projectConfigFileExists(String configDir) {
         File configFile = new File(configDir + CONF_SENTSEG);
@@ -387,11 +402,11 @@ public class SRX implements Serializable {
     }
 
     /**
-     * My Own Class to listen to exceptions, occured while loading filters
+     * My Own Class, to listen to exceptions, occurred while loading filters
      * configuration.
      */
     static class MyExceptionListener implements ExceptionListener {
-        private List<Exception> exceptionsList = new ArrayList<Exception>();
+        private List<Exception> exceptionsList = new ArrayList<>();
         private boolean exceptionOccured = false;
 
         public void exceptionThrown(Exception e) {
@@ -441,7 +456,8 @@ public class SRX implements Serializable {
             if (maprule.getCompiledPattern().matcher(srclang.getLanguage()).matches()) {
                 rules.addAll(maprule.getRules());
                 if (!this.cascade) {
-                    break; // non-cascading means: do not search for other patterns
+                    break; // non-cascading means: do not search for other
+                           // patterns
                 }
             }
         }
@@ -449,7 +465,8 @@ public class SRX implements Serializable {
     }
 
     /**
-     * Holds value of property cascade: true, unless we read an SRX where it was set to false.
+     * Holds value of property cascade: true, unless we read an SRX where it was
+     * set to false.
      */
     private boolean cascade = true;
 

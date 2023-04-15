@@ -92,6 +92,11 @@ public abstract class TestCore {
                 return new JMenu();
             }
 
+            @Override
+            public JMenu getHelpMenu() {
+                return new JMenu();
+            }
+
             public void invokeAction(String action, int modifiers) {
             }
         };

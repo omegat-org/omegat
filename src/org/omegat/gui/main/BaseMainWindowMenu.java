@@ -976,6 +976,10 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         return optionsAutoCompleteMenu;
     }
 
+    public JMenu getHelpMenu() {
+        return helpMenu;
+    }
+
     JMenuItem cycleSwitchCaseMenuItem;
     JMenuItem editFindInProjectMenuItem;
     JMenuItem editReplaceInProjectMenuItem;

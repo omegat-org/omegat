@@ -43,7 +43,7 @@ import javax.swing.event.MenuListener;
 
 /**
  * Class for classic main menu.
- * 
+ *
  * @author Hiroshi Miura
  */
 public final class MainWindowMenu extends BaseMainWindowMenu

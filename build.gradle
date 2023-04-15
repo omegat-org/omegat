@@ -825,6 +825,10 @@ allprojects {
     }
 }
 
+sourcesJar {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
 spotbugs {
     reportLevel = 'high'
 }

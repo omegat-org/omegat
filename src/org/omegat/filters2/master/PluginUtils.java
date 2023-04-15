@@ -52,7 +52,6 @@ import java.util.Set;
 import java.util.jar.Attributes;
 import java.util.jar.Manifest;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import org.omegat.CLIParameters;
 import org.omegat.core.Core;
@@ -133,17 +132,30 @@ public final class PluginUtils {
     }
 
     /**
-     * Loads all plugins from main classloader and from /plugins/ dir. We should
-     * load all jars from /plugins/ dir first, because some plugin can use more
-     * than one jar.
+     * Loads all plugins from main classloader and from /plugins/ dir.
+     * <p>
+     * We should load all jars from /plugins/ dir first,
+     * because some plugin can use more than one jar.
+     * There are three different "plugins" directory, and
+     * one development treatment.
+     * <ul>
+     *     <li>(installdir)/core-plugins/  OmegaT genuine sub-component</li>
+     *     <li>(installdir/plugins/  System level 3rd party plugins</li>
+     *     <li>(configdir)/plugins/  User level 3rd party plugins</li>
+     * </ul>
      */
     public static void loadPlugins(final Map<String, String> params) {
-        File pluginsDir = new File(StaticUtils.installDir(), "plugins");
-        File homePluginsDir = new File(StaticUtils.getConfigDir(), "plugins");
+        final List<File> pluginsDirs = new ArrayList<>();
+        pluginsDirs.add(new File(StaticUtils.installDir(), "modules"));
+        pluginsDirs.add(new File(StaticUtils.installDir(), "plugins"));
+        pluginsDirs.add(new File(StaticUtils.getConfigDir(), "plugins"));
+        if (Paths.get(StaticUtils.installDir(), "build").toFile().exists()) {
+            // when developers run on source code tree, add system plugins
+            pluginsDirs.add(Paths.get(StaticUtils.installDir(), "build", "modules").toFile());
+        }
         // list all jars in /plugins/
         FileFilter jarFilter = pathname -> pathname.getName().endsWith(".jar");
-        List<File> fs = Stream.of(pluginsDir, homePluginsDir)
-                .flatMap(dir -> FileUtil.findFiles(dir, jarFilter).stream())
+        List<File> fs = pluginsDirs.stream().flatMap(dir -> FileUtil.findFiles(dir, jarFilter).stream())
                 .collect(Collectors.toList());
         List<URL> urlList = new ArrayList<>();
         for (File f : fs) {

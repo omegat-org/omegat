@@ -380,6 +380,13 @@ distributions {
             from('lib/licenses') {
                 into 'lib'
             }
+            // system core plugins into modules
+            from('releases/modules-specific') {
+                into 'modules'
+            }
+            from(subprojects.collect {it.tasks.withType(Jar)}) {
+                into 'modules'
+            }
             eachFile {
                 // Move main JAR up one level from lib.
                 if (it.name == jar.archiveName) {
@@ -400,6 +407,12 @@ distributions {
             }
             into('lib/provided') {
                 from configurations.runtimeClasspath
+            }
+            into('lib/provided') {
+                // collect subproject runtime dependencies
+                from  {subprojects.findAll { it.getSubprojects().isEmpty()}.
+                        collect { it.configurations.runtimeClasspath }
+                }
             }
         }
         sourceDistZip.archiveFileName = "${applicationName}_${version}${omtVersion.beta}_Source.zip"

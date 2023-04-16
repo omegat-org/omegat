@@ -221,6 +221,7 @@ public class SRX implements Serializable {
         SRX res = new SRX();
         res.setSegmentSubflows("yes".equalsIgnoreCase(srx.getHeader().getSegmentsubflows()));
         res.setCascade("yes".equalsIgnoreCase(srx.getHeader().getCascade()));
+        res.setVersion(srx.getVersion());
         res.setMappingRules(srx.getBody().getMaprules().getLanguagemap()
                 .stream()
                 .map(s -> new MapRule(s, mapping.get(s.getLanguagerulename())))

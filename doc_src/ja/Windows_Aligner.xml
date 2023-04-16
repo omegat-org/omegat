@@ -146,9 +146,9 @@
       </varlistentry>
 
       <varlistentry>
-        <term>タグを隠す</term>
+        <term>タグを削除</term>
         <listitem>
-          <para>整合ツールは、デフォルトでは分節のタグも利用しています。<link endterm="dialogs.project.properties.hide.tags.title" linkend="dialogs.project.properties.hide.tags"/>設定を適用するには、チェックボックスをオフにします。</para>
+          <para>整合ツールは、デフォルトでは分節のタグも利用しています。整合および結果のTMXからすべてのタグを削除するには、このチェックボックスをオフにします。</para>
         </listitem>
       </varlistentry>
 

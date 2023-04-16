@@ -31,6 +31,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
+import gen.core.segmentation.Languagemap;
 import org.omegat.util.StringUtil;
 
 /**
@@ -56,6 +57,12 @@ public class MapRule implements Serializable {
 
     /** Language Name */
     private String languageCode;
+
+    public MapRule(Languagemap languagemap, List<Rule> rules) {
+        this.setLanguage(languagemap.getLanguagerulename());
+        this.setPattern(languagemap.getLanguagepattern());
+        this.setRules(rules);
+    }
 
     /** Returns Language Name (to display it in a dialog). */
     public String getLanguage() {

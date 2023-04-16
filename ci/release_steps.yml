@@ -1,17 +1,19 @@
 steps:
-  - task: DownloadBuildArtifacts@0
+  - task: DownloadBuildArtifacts@1
     displayName: 'Download Artifacts from JRE Prep task'
     inputs:
       buildType: specific
-      project: 'ecb5bbf0-66ac-433d-bda1-be5bcf90716d'
-      pipeline: 7
+      project: 'ecb5bbf0-66ac-433d-bda1-be5bcf90716d'  # point to "https://dev.azure.com/omegat-org/OmegaT"
+      pipeline: 7  # "JRE Prep" pipelines definition
       artifactName: drop
       downloadPath: '$(System.ArtifactsDirectory)/asset'
       extractTars: false
   - task: DownloadSecureFile@1
     displayName: 'Download secure file'
     inputs:
-      secureFile: '351b5d1f-5047-4d45-92a4-2384005085f7'
+      #  the name or unique identifier (GUID) of the secure file
+      # "jean-christophe_helary.pfx": '351b5d1f-5047-4d45-92a4-2384005085f7'
+      secureFile: "hiroshi_miura.pfx"
       retryCount: 5
   - script: |
       umask a+w

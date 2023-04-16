@@ -76,3 +76,6 @@ mALIGNa is distributed under the MIT License (required for Aligner
 tool).
 
 DeNormalize.java is licensed under the DeNormalize license.
+
+Nashorn javascript engine is distributed under the GNU General Public
+License version 2.0 only with classpath link exception.

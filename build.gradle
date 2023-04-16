@@ -366,14 +366,12 @@ distributions {
                 into 'plugins'
             }
             from('release/linux-specific') {
-                filter(ReplaceTokens, tokens:
-                    [VERSION_NUMBER_SUBST: project.version,
-                     JAR_SUBST: jar.archiveFileName])
+                filter(ReplaceTokens, tokens: [VERSION_NUMBER_SUBST: project.version, JAR_SUBST: jar.archiveName])
                 fileMode 0755
             }
             from('release/win32-specific') {
                 include 'OmegaT.bat'
-                filter(ReplaceTokens, tokens: [JAR_SUBST: jar.archiveFileName])
+                filter(ReplaceTokens, tokens: [JAR_SUBST: jar.archiveName])
             }
             from('lib/licenses') {
                 into 'lib'

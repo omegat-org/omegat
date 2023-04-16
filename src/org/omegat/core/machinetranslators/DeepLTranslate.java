@@ -60,6 +60,9 @@ import org.omegat.util.Preferences;
 public class DeepLTranslate extends BaseCachedTranslate {
     protected static final String PROPERTY_API_KEY = "deepl.api.key";
     private String temporaryKey = null;
+
+    private static final String DEEPL_V1_URL = "https://api.deepl.com/v1/translate";
+
     // DO NOT MOVE TO THE V2 API until it becomes available for CAT tool
     // integration.
     //
@@ -73,7 +76,7 @@ public class DeepLTranslate extends BaseCachedTranslate {
     private final static int MAX_TEXT_LENGTH = 5000;
 
     public DeepLTranslate() {
-        deepLUrl = "https://api.deepl.com/v1/translate";
+        deepLUrl = DEEPL_V1_URL;
     }
 
     /**

@@ -27,14 +27,23 @@ package org.omegat.core.segmentation;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import org.junit.Test;
+
+import java.io.File;
+import java.util.List;
 
 /**
  * @author Aaron Madlon-Kay
  */
 public class SRXTest {
+
+    private final File segmentGenerated = new File("test/data/segmentation/generated/");
+    private final File segmentDefault = new File("test/data/segmentation/default/");
 
     @Test
     public void testSRXComparison() {
@@ -53,5 +62,51 @@ public class SRXTest {
         Rule rule = clone.getMappingRules().get(0).getRules().get(0);
         rule.setAfterbreak(rule.getAfterbreak() + "foo");
         assertNotEquals(orig, clone);
+    }
+
+    /**
+     * Test SRX#loadFromDir produce SRX object properly.
+     */
+    @Test
+    public void testSrxReaderDefault() {
+        assertTrue(segmentDefault.exists());
+        SRX srx = SRX.loadFromDir(segmentDefault);
+        assertNotNull(srx);
+        assertTrue(srx.isCascade());
+        List<MapRule> mapRuleList = srx.getMappingRules();
+        assertNotNull(mapRuleList);
+        assertEquals(18, mapRuleList.size());
+        for (MapRule mapRule : mapRuleList) {
+            if (mapRule.getPattern().equals("JA.*")) {
+                assertEquals("Japanese", mapRule.getLanguageCode());
+                // assertEquals("Japanese", mapRule.getLanguage());
+            }
+        }
+        assertEquals("2.0", srx.getVersion());
+        assertTrue(srx.isSegmentSubflows());
+    }
+
+    /**
+     * Test SRX writer/reader.
+     * <p>
+     * try read a segmentation.srx file that is produced by OmegaT when system locale is Japanese.
+     */
+    @Test
+    public void testSrxReaderGenerated() {
+        assertTrue(segmentGenerated.exists());
+        SRX srx = SRX.loadFromDir(segmentGenerated);
+        assertNotNull(srx);
+        List<MapRule> mapRuleList = srx.getMappingRules();
+        assertNotNull(mapRuleList);
+        assertEquals(18, mapRuleList.size());
+        for (MapRule mapRule: mapRuleList) {
+            if (mapRule.getPattern().equals("JA.*")) {
+                assertEquals("Japanese", mapRule.getLanguageCode());
+                assertEquals("\u65E5\u672C\u8A9E", mapRule.getLanguage());
+            }
+        }
+        assertEquals("2.0", srx.getVersion());
+        assertTrue(srx.isCascade());
+        assertTrue(srx.isSegmentSubflows());
     }
 }

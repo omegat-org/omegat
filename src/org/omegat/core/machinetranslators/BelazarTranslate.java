@@ -57,22 +57,37 @@ public class BelazarTranslate extends BaseCachedTranslate {
     public static void unloadPlugins() {
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected String getPreferenceName() {
         return Preferences.ALLOW_BELAZAR_TRANSLATE;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public String getName() {
         return OStrings.getString("MT_ENGINE_BELAZAR");
     }
 
+    /**
+     * Query Belazar translation API and return translation.
+     * 
+     * @param sLang
+     *            source language.
+     * @param tLang
+     *            target language.
+     * @param text
+     *            source text.
+     * @return translation.
+     * @throws Exception
+     *             when communication error.
+     */
     @Override
     protected String translate(Language sLang, Language tLang, String text) throws Exception {
-        String prev = getFromCache(sLang, tLang, text);
-        if (prev != null) {
-            return prev;
-        }
-
         String mode;
         if ("be".equalsIgnoreCase(sLang.getLanguageCode())
                 && "ru".equalsIgnoreCase(tLang.getLanguageCode())) {
@@ -96,16 +111,10 @@ public class BelazarTranslate extends BaseCachedTranslate {
         conn.setUseCaches(false);
         conn.setDoInput(true);
         conn.setDoOutput(true);
-        String result;
         try (OutputStream out = conn.getOutputStream(); InputStream in = conn.getInputStream()) {
             out.write(db);
             out.flush();
-            result = IOUtils.toString(in, CHARSET);
+            return IOUtils.toString(in, CHARSET);
         }
-        if (result == null) {
-            return null;
-        }
-        putToCache(sLang, tLang, text, result);
-        return result;
     }
 }

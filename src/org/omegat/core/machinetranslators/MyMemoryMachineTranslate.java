@@ -70,15 +70,11 @@ public final class MyMemoryMachineTranslate extends AbstractMyMemoryTranslate {
     }
 
     @Override
-    protected String translate(final Language sLang, final Language tLang, final String text) throws Exception {
-        String prev = getFromCache(sLang, tLang, text);
-        if (prev != null) {
-            return prev;
-        }
-        JsonNode jsonResponse;
+    protected String translate(final Language sLang, final Language tLang, final String text)
+            throws Exception {
         try {
             // Get MyMemory response in JSON format
-            jsonResponse = getMyMemoryResponse(sLang, tLang, text);
+            JsonNode jsonResponse = getMyMemoryResponse(sLang, tLang, text);
 
             // Find the best Human translation if no MT translation is provided for
             // this text. If there is a MT translation, it will always take
@@ -100,9 +96,7 @@ public final class MyMemoryMachineTranslate extends AbstractMyMemoryTranslate {
                 bestEntry = mtEntry;
             }
             assert bestEntry != null;
-            String translation = StringEscapeUtils.unescapeHtml4(bestEntry.get("translation").asText());
-            putToCache(sLang, tLang, text, translation);
-            return translation;
+            return StringEscapeUtils.unescapeHtml4(bestEntry.get("translation").asText());
         } catch (IOException e) {
             throw new MachineTranslateError(OStrings.getString("MT_ENGINE_MYMEMOROY_ERROR"), e);
         }

@@ -61,7 +61,7 @@ public class DeepLTranslate extends BaseCachedTranslate {
     protected static final String PROPERTY_API_KEY = "deepl.api.key";
     private String temporaryKey = null;
 
-    private static final String DEEPL_V1_URL = "https://api.deepl.com/v1/translate";
+    protected static final String DEEPL_V1_URL = "https://api.deepl.com/v1/translate";
 
     // DO NOT MOVE TO THE V2 API until it becomes available for CAT tool
     // integration.
@@ -73,6 +73,11 @@ public class DeepLTranslate extends BaseCachedTranslate {
     protected static final String DEEPL_PATH = "/v1/translate";
     protected final String deepLUrl;
 
+    private final static int MAX_TEXT_BYTES = 128 * 1024; // Max limit is 128KiB
+    protected static final String DEEPL_URL = "https://api.deepl.com/v1/translate";
+    // See https://support.deepl.com/hc/en-us/articles/4405712799250-Character-count-for-translation-within
+    // -applications
+    // max application limit is 5000 characters.
     private final static int MAX_TEXT_LENGTH = 5000;
 
     public DeepLTranslate() {
@@ -89,25 +94,29 @@ public class DeepLTranslate extends BaseCachedTranslate {
         temporaryKey = key;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected String getPreferenceName() {
         return Preferences.ALLOW_DEEPL_TRANSLATE;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getName() {
         return OStrings.getString("MT_ENGINE_DEEPL");
     }
 
     @Override
-    protected String translate(Language sLang, Language tLang, String text) throws Exception {
-        String trText = text.length() > MAX_TEXT_LENGTH ? text.substring(0, MAX_TEXT_LENGTH - 3) + "..." :
-                text;
-        String prev = getFromCache(sLang, tLang, trText);
-        if (prev != null) {
-            return prev;
-        }
+    protected int getMaxTextLength() {
+        return MAX_TEXT_LENGTH;
+    }
 
+    @Override
+    protected String translate(Language sLang, Language tLang, String text) throws Exception {
         String apiKey = getCredential(PROPERTY_API_KEY);
         if (apiKey == null || apiKey.isEmpty()) {
             if (temporaryKey == null) {
@@ -121,7 +130,7 @@ public class DeepLTranslate extends BaseCachedTranslate {
         // No check is done, but only "EN", "DE", "FR", "ES", "IT", "NL", "PL"
         // are supported right now.
 
-        params.put("text", trText);
+        params.put("text", text);
         params.put("source_lang", sLang.getLanguageCode().toUpperCase());
         params.put("target_lang", tLang.getLanguageCode().toUpperCase());
         params.put("tag_handling", "xml");
@@ -145,9 +154,7 @@ public class DeepLTranslate extends BaseCachedTranslate {
             return null;
         }
         tr = unescapeHTML(tr);
-        tr = cleanSpacesAroundTags(tr, trText);
-        putToCache(sLang, tLang, trText, tr);
-        return tr;
+        return cleanSpacesAroundTags(tr, text);
     }
 
     /**
@@ -184,6 +191,11 @@ public class DeepLTranslate extends BaseCachedTranslate {
         throw new MachineTranslateError(OStrings.getString("MT_JSON_ERROR"));
     }
 
+    /**
+     * Engine is configurable.
+     *
+     * @return true
+     */
     @Override
     public boolean isConfigurable() {
         return true;

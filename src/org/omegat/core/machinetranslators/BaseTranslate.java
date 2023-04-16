@@ -27,6 +27,7 @@
 
 package org.omegat.core.machinetranslators;
 
+import java.nio.charset.StandardCharsets;
 import java.util.regex.Matcher;
 
 import javax.swing.JCheckBoxMenuItem;
@@ -50,6 +51,9 @@ import org.omegat.util.Preferences;
  * @author Hiroshi Miura
  */
 public abstract class BaseTranslate implements IMachineTranslation {
+
+    private static final String FILLER = "...";
+    private static final int FILLER_LEN = FILLER.length();
 
     protected boolean enabled;
     protected IMTGlossarySupplier glossarySupplier;
@@ -103,7 +107,7 @@ public abstract class BaseTranslate implements IMachineTranslation {
     @Override
     public String getTranslation(Language sLang, Language tLang, String text) throws Exception {
         if (enabled) {
-            return translate(sLang, tLang, text);
+            return translate(sLang, tLang, getTruncateText(text));
         } else {
             return null;
         }
@@ -125,7 +129,7 @@ public abstract class BaseTranslate implements IMachineTranslation {
      * Attempt to clean spaces added around tags by machine translators. Do it
      * by comparing spaces between the source text and the machine translated
      * text.
-     *
+     * 
      * @param machineText
      *            The text returned by the machine translator
      * @param sourceText
@@ -170,6 +174,7 @@ public abstract class BaseTranslate implements IMachineTranslation {
      * {@link org.omegat.core.machinetranslators.BaseCachedTranslate} class
      * instead.
      * </p>
+     * 
      * @param sLang
      *            Source langauge.
      * @param tLang
@@ -178,7 +183,7 @@ public abstract class BaseTranslate implements IMachineTranslation {
      *            source text.
      * @return translated text if exists in cache, otherwise null.
      */
-    // @Deprecated(since="6.1")
+    @Deprecated(since="6.1")
     protected String getFromCache(Language sLang, Language tLang, String text) {
         return null;
     }
@@ -188,11 +193,12 @@ public abstract class BaseTranslate implements IMachineTranslation {
      * <p>
      * {@link org.omegat.core.machinetranslators.BaseTranslate} class do
      * nothing. When connector want to use cache layer, it can inherit
-     * {@link org.omegat.core.machinetranslators.BaseCachedTranslate} class
-     * and implement
+     * {@link org.omegat.core.machinetranslators.BaseCachedTranslate} class and
+     * implement
      * {@link org.omegat.core.machinetranslators.BaseCachedTranslate#translate}
      * method.
      * </p>
+     * 
      * @param sLang
      *            source langauge.
      * @param tLang
@@ -203,7 +209,7 @@ public abstract class BaseTranslate implements IMachineTranslation {
      *            translation.
      * @return given translation.
      */
-    // @Deprecated(since="6.1")
+    @Deprecated(since="6.1")
     protected String putToCache(Language sLang, Language tLang, String text, String result) {
         return result;
     }
@@ -214,8 +220,8 @@ public abstract class BaseTranslate implements IMachineTranslation {
      * {@link org.omegat.core.machinetranslators.BaseTranslate} class do
      * nothing. When connector want to use cache layer, it can use
      * {@link org.omegat.core.machinetranslators.BaseCachedTranslate} class
-     * instead.
-     * You can all it when you want to clear cache; ex. change server config.
+     * instead. You can all it when you want to clear cache; ex. change server
+     * config.
      * </p>
      */
     protected void clearCache() {
@@ -243,6 +249,7 @@ public abstract class BaseTranslate implements IMachineTranslation {
      * and, if <code>temporary</code> is <code>false</code>, in the program's
      * persistent preferences encoded in Base64. Retrieve a credential with
      * {@link #getCredential(String)}.
+     * 
      * @param id
      *            ID or key of the credential to store
      * @param value
@@ -261,6 +268,7 @@ public abstract class BaseTranslate implements IMachineTranslation {
      * the definition in {@link #setCredential(String, String, boolean)}. The
      * result will be <code>false</code> if the credential is not stored at all,
      * or if it is stored permanently.
+     * 
      * @param id
      *            ID or key of credential
      * @return <code>true</code> only if the credential is stored temporarily
@@ -269,6 +277,62 @@ public abstract class BaseTranslate implements IMachineTranslation {
      */
     protected boolean isCredentialStoredTemporarily(String id) {
         return !CredentialsManager.getInstance().isStored(id) && !System.getProperty(id, "").isEmpty();
+    }
+
+    /**
+     * Give maximum limit of text bytes which API accepted. 0 means no limit.
+     * 
+     * @return max bytes.
+     */
+    protected int getMaxTextBytes() {
+        return 0;
+    }
+
+    /**
+     * Give maximum limit of text codepoints which API accepted. 0 means no
+     * limit.
+     * 
+     * @return max codepoints.
+     */
+    protected int getMaxTextLength() {
+        return 0;
+    }
+
+    /**
+     * Get truncated text into maximum text length that MT engine API allowed.
+     * 
+     * @param text
+     *            original source text.
+     * @return truncated text.
+     */
+    protected String getTruncateText(String text) {
+        if (getMaxTextBytes() <= 0) {
+            return text;
+        }
+        if (getMaxTextLength() <= 0) {
+            return text;
+        }
+        String result;
+        if (getMaxTextBytes() > 0) {
+            int bytesLength = getTextBytes(text);
+            if (bytesLength <= getMaxTextBytes()) {
+                return text;
+            }
+            final int overflow = bytesLength - getMaxTextBytes();
+            int ind = text.length() - (overflow >> 2) - FILLER_LEN;
+            int start = text.length() - overflow + FILLER_LEN;
+            do {
+                result = text.substring(0, ind) + FILLER;
+                ind--;
+            } while (ind > start && getTextBytes(result) > getMaxTextBytes());
+        } else {
+            result = text.substring(0, getMaxTextLength() - FILLER_LEN) + FILLER;
+        }
+        return result;
+    }
+
+    private int getTextBytes(String text) {
+        return text.getBytes(StandardCharsets.UTF_8).length;
     }
 
     /** Convert entities to character. Ex: "&#39;" to "'". */

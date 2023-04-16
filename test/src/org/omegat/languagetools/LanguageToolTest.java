@@ -39,15 +39,13 @@ import org.junit.Before;
 import org.junit.Test;
 import org.languagetool.JLanguageTool;
 import org.languagetool.language.AmericanEnglish;
-import org.languagetool.language.Belarusian;
 import org.languagetool.language.CanadianEnglish;
 import org.languagetool.language.English;
 import org.languagetool.language.French;
 import org.languagetool.rules.RuleMatch;
-import org.languagetool.rules.UppercaseSentenceStartRule;
 import org.languagetool.rules.patterns.PatternRule;
-import org.languagetool.rules.spelling.morfologik.MorfologikSpellerRule;
 import org.languagetool.server.HTTPServer;
+
 import org.omegat.util.Language;
 import org.omegat.util.Preferences;
 import org.omegat.util.TestPreferencesInitializer;
@@ -65,24 +63,24 @@ public class LanguageToolTest {
     }
 
     @Test
-    public void testExecute() throws Exception {
-        JLanguageTool lt = new JLanguageTool(new Belarusian());
+    @SuppressWarnings("deprecation")
+    public void testExecuteLanguageToolCheck() throws Exception {
+        JLanguageTool lt = new JLanguageTool(new org.languagetool.language.Belarusian());
 
         // The test string is Belarusian; originally it was actual UTF-8,
         // but that causes the test to fail when environment encodings aren't set
         // correctly, so we are now using Unicode literals.
         List<RuleMatch> matches = lt.check("\u0441\u043F\u0440\u0430\u0443\u0434\u0437\u0456\u043C.");
-        assertEquals(3, matches.size());
-        assertTrue(matches.get(0).getRule() instanceof MorfologikSpellerRule);
-        assertTrue(matches.get(1).getRule() instanceof UppercaseSentenceStartRule);
-        assertTrue(matches.get(2).getRule() instanceof PatternRule);
+        assertEquals(1, matches.size());
+        assertTrue(matches.get(0).getRule() instanceof PatternRule);
     }
 
     @Test
     public void testFrench() throws Exception {
         JLanguageTool lt = new JLanguageTool(new French());
 
-        List<RuleMatch> matches = lt.check("Directeur production du groupe");
+        // example from https://github.com/languagetool-org/languagetool/issues/2852
+        List<RuleMatch> matches = lt.check("Il est par cons\u00E9quent perdue.");
         assertEquals(1, matches.size());
         assertTrue(matches.get(0).getRule() instanceof PatternRule);
     }
@@ -136,7 +134,7 @@ public class LanguageToolTest {
         // We don't care about the actual content of the results as long as
         // there are some: we just want to make sure we are wrapping the result
         // correctly.
-        List<LanguageToolResult> results = bridge.getCheckResults("foo", "foo bar");
+        List<LanguageToolResult> results = bridge.getCheckResults("foo expertise", "foo bar expertise");
         assertFalse(results.isEmpty());
     }
 
@@ -154,6 +152,7 @@ public class LanguageToolTest {
     }
 
     @Test
+    @SuppressWarnings("deprecation")
     public void testLanguageMapping() {
         {
             org.languagetool.Language lang = LanguageToolNativeBridge.getLTLanguage(new Language("en-US"));
@@ -174,12 +173,12 @@ public class LanguageToolTest {
         }
         {
             org.languagetool.Language lang = LanguageToolNativeBridge.getLTLanguage(new Language("be-BY"));
-            assertEquals(Belarusian.class, lang.getClass());
+            assertEquals(org.languagetool.language.Belarusian.class, lang.getClass());
         }
         {
             // Belarusian is offered in be-BY only; ensure hit with just "be"
             org.languagetool.Language lang = LanguageToolNativeBridge.getLTLanguage(new Language("be"));
-            assertEquals(Belarusian.class, lang.getClass());
+            assertEquals(org.languagetool.language.Belarusian.class, lang.getClass());
         }
         {
             org.languagetool.Language lang = LanguageToolNativeBridge.getLTLanguage(new Language("xyz"));

@@ -51,6 +51,7 @@ import org.omegat.util.PatternConsts;
  *
  * @author Maxym Mykhalchuk
  */
+@Deprecated
 public class XMLReader extends Reader {
     /** Inner reader */
     private BufferedReader reader;

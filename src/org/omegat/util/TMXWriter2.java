@@ -30,10 +30,10 @@ package org.omegat.util;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -66,7 +66,7 @@ public class TMXWriter2 implements AutoCloseable {
 
     public static final String PROP_ID = "id";
 
-    private static final XMLOutputFactory FACTORY;
+    private final XMLOutputFactory factory;
 
     private final OutputStream out;
     private final XMLStreamWriter xml;
@@ -76,33 +76,37 @@ public class TMXWriter2 implements AutoCloseable {
     private final boolean forceValidTMX;
 
     /**
-     * DateFormat with format YYYYMMDDThhmmssZ able to display a date in UTC time.
+     * DateFormat with format YYYYMMDDThhmmssZ able to display a date in UTC
+     * time.
      *
      * SimpleDateFormat IS NOT THREAD SAFE !!!
      */
     private final SimpleDateFormat tmxDateFormat;
 
-    static {
-        FACTORY = XMLOutputFactory.newInstance();
-    }
-
     /**
      *
-     * @param file to write TMX entries.
-     * @param sourceLanguage language of source.
-     * @param targetLanguage language of target.
-     * @param sentenceSegmentingEnabled true when sentence segmenting enabled, otherwise false.
+     * @param file
+     *            to write TMX entries.
+     * @param sourceLanguage
+     *            language of source.
+     * @param targetLanguage
+     *            language of target.
+     * @param sentenceSegmentingEnabled
+     *            true when sentence segmenting enabled, otherwise false.
      * @param levelTwo
-     *            When true, the tmx is made compatible with level 2 (TMX version 1.4)
-     * @throws Exception when error occurred.
+     *            When true, the tmx is made compatible with level 2 (TMX
+     *            version 1.4)
+     * @throws Exception
+     *             when error occurred.
      */
     public TMXWriter2(final File file, final Language sourceLanguage, final Language targetLanguage,
             boolean sentenceSegmentingEnabled, boolean levelTwo, boolean forceValidTMX) throws Exception {
         this.levelTwo = levelTwo;
         this.forceValidTMX = forceValidTMX;
+        factory = XMLOutputFactory.newInstance();
 
-        out = new BufferedOutputStream(new FileOutputStream(file));
-        xml = FACTORY.createXMLStreamWriter(out, StandardCharsets.UTF_8.name());
+        out = new BufferedOutputStream(Files.newOutputStream(file.toPath()));
+        xml = factory.createXMLStreamWriter(out, StandardCharsets.UTF_8.name());
 
         xml.writeStartDocument(StandardCharsets.UTF_8.name(), "1.0");
         xml.writeCharacters(lineSeparator);
@@ -156,10 +160,14 @@ public class TMXWriter2 implements AutoCloseable {
 
     /**
      * Write entries.
-     * @param entries Map of SourceTextEntry and TMXEntry to output.
-     * @throws Exception when i/o error or XMLStream error happened.
+     * 
+     * @param entries
+     *            Map of SourceTextEntry and TMXEntry to output.
+     * @throws Exception
+     *             when i/o error or XMLStream error happened.
      */
-    public void writeEntries(final Map<EntryKey, ? extends ITMXEntry> entries, boolean addProp) throws Exception {
+    public void writeEntries(final Map<EntryKey, ? extends ITMXEntry> entries, boolean addProp)
+            throws Exception {
         List<String> propList = new ArrayList<>();
         for (Map.Entry<EntryKey, ? extends ITMXEntry> en : entries.entrySet()) {
             EntryKey k = en.getKey();
@@ -179,15 +187,17 @@ public class TMXWriter2 implements AutoCloseable {
     /**
      * Write one entry.
      *
-     * @param source source text to write.
-     * @param translation translation text to write.
-     * @param entry that has interface ITMXEntry.
+     * @param source
+     *            source text to write.
+     * @param translation
+     *            translation text to write.
+     * @param entry
+     *            that has interface ITMXEntry.
      * @param propValues
      *            pairs with property name and values
      */
     public void writeEntry(final String source, final String translation, final ITMXEntry entry,
-                           final List<String> propValues)
-            throws Exception {
+            final List<String> propValues) throws Exception {
         writeEntry(source, translation, entry.getNote(), entry.getCreator(), entry.getCreationDate(),
                 entry.getChanger(), entry.getChangeDate(), propValues);
     }
@@ -428,7 +438,9 @@ public class TMXWriter2 implements AutoCloseable {
 
     /**
      * Replaces \n with platform specific end of lines
-     * @param text The string to be converted
+     * 
+     * @param text
+     *            The string to be converted
      * @return The converted string
      */
     private String platformLineSeparator(String text) {

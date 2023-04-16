@@ -50,11 +50,12 @@ import gen.core.filters.Filters;
 /**
  * Class to load & save global OmegaT preferences.
  * <p>
- * Initially this class was implemented with static members and methods directly implementing the interface, backed by
- * XML storage. However this was bad for testing and extensibility, or allowing different persistence formats.
+ * Initially this class was implemented with static members and methods directly
+ * implementing the interface, backed by XML storage. However, this was bad for
+ * testing and extensibility, or allowing different persistence formats.
  * <p>
- * This class's static methods remain for compatibility, but now they wrap a singleton instance of a concrete
- * implementation of {@link IPreferences}.
+ * This class's static methods remain for compatibility, but now they wrap a
+ * singleton instance of a concrete implementation of {@link IPreferences}.
  *
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
@@ -91,7 +92,9 @@ public final class Preferences {
 
     /** Whether to automatically perform MT requests on entering segment */
     public static final String MT_AUTO_FETCH = "mt_auto_fetch";
-    /** Whether to restrict automatic MT requests to only untranslated segments */
+    /**
+     * Whether to restrict automatic MT requests to only untranslated segments
+     */
     public static final String MT_ONLY_UNTRANSLATED = "mt_only_untranslated";
 
     public static final String GLOSSARY_TBX_DISPLAY_CONTEXT = "glossary_tbx_display_context";
@@ -119,7 +122,8 @@ public final class Preferences {
     public static final String PROJECT_FILES_WINDOW_GEOMETRY_PREFIX = "project_files_window";
     // Using the main font for the Project Files window
     public static final String PROJECT_FILES_USE_FONT = "project_files_use_font";
-    // Determines whether or not the Project Files window is shown on project load.
+    // Determines whether or not the Project Files window is shown on project
+    // load.
     // Currently not exposed in UI.
     public static final String PROJECT_FILES_SHOW_ON_LOAD = "project_files_show_on_load";
 
@@ -187,8 +191,8 @@ public final class Preferences {
     public static final String ALLOW_YANDEX_CLOUD_TRANSLATE = "allow_yandex_cloud_translate";
 
     /**
-     * Mark glossary matches. This feature used to be called "TransTips", and the prefs key remains unchanged for
-     * backwards-compatibility.
+     * Mark glossary matches. This feature used to be called "TransTips", and
+     * the prefs key remains unchanged for backwards-compatibility.
      */
     public static final String MARK_GLOSSARY_MATCHES = "transtips";
 
@@ -234,8 +238,8 @@ public final class Preferences {
     public static final int BEST_MATCH_MINIMAL_SIMILARITY_DEFAULT = 100;
 
     /**
-     * When a fuzzy match is displayed from a memory belonging to a language other than the target language, a penalty
-     * is applied.
+     * When a fuzzy match is displayed from a memory belonging to a language
+     * other than the target language, a penalty is applied.
      */
     public static final String PENALTY_FOR_FOREIGN_MATCHES = "penalty_foreign_matches";
     public static final int PENALTY_FOR_FOREIGN_MATCHES_DEFAULT = 30;
@@ -245,10 +249,13 @@ public final class Preferences {
     /** Workflow Option: Export current segment */
     public static final String EXPORT_CURRENT_SEGMENT = "wf_exportCurrentSegment";
     /**
-     * Workflow Option: Go To Next Untranslated Segment stops when there is at least one alternative translation
+     * Workflow Option: Go To Next Untranslated Segment stops when there is at
+     * least one alternative translation
      */
     public static final String STOP_ON_ALTERNATIVE_TRANSLATION = "wf_stopOnAlternativeTranslation";
-    /** Workflow Option: Attempt to convert numbers when inserting a fuzzy match */
+    /**
+     * Workflow Option: Attempt to convert numbers when inserting a fuzzy match
+     */
     public static final String CONVERT_NUMBERS = "wf_convertNumbers";
     /** Workflow Option: Save auto-populated status */
     public static final String SAVE_AUTO_STATUS = "save_auto_status";
@@ -269,7 +276,10 @@ public final class Preferences {
     public static final String CHECK_JAVA_PATTERN_TAGS = "tagValidation_javaMessageFormatSimplePatternCheck";
     /** Tag Validation Option: check user defined tags according to regexp. */
     public static final String CHECK_CUSTOM_PATTERN = "tagValidation_customPattern";
-    /** Tag Validation Option: check target for text that should have been removed according to regexp. */
+    /**
+     * Tag Validation Option: check target for text that should have been
+     * removed according to regexp.
+     */
     public static final String CHECK_REMOVE_PATTERN = "tagValidation_removePattern";
 
     /** Tag Validation Option: allow tag editing in editor. */
@@ -357,7 +367,10 @@ public final class Preferences {
     public static final String EXT_TMX_MATCH_TEMPLATE = "ext_tmx_match_template";
     /** External TMX options: Fuzzy match sort key **/
     public static final String EXT_TMX_SORT_KEY = "ext_tmx_sort_key";
-    /** External TMX options: Whether to show fuzzy matches from foreign (non-target language) matches. */
+    /**
+     * External TMX options: Whether to show fuzzy matches from foreign
+     * (non-target language) matches.
+     */
     public static final String EXT_TMX_KEEP_FOREIGN_MATCH = "keep_foreign_matches";
     /** External TMX options: Fuzzy Threshold **/
     public static final String EXT_TMX_FUZZY_MATCH_THRESHOLD = "ext_tmx_fuzzy_match_threshold";
@@ -524,7 +537,8 @@ public final class Preferences {
      * If the key is not found return false
      *
      * @param key
-     *            key of the key to look up, usually a static string from this class
+     *            key of the key to look up, usually a static string from this
+     *            class
      * @return true if preferences exists
      */
     public static boolean existsPreference(String key) {
@@ -615,9 +629,12 @@ public final class Preferences {
      */
     public static void setPreference(String name, Object value) {
         Object oldValue = preferences.setPreference(name, value);
-        // Manually compare retrieved new value to old value and check before firing.
-        // This is because the preferences store may only store the serialized (string) value
-        // so the regular equality check within PropertyChangeSupport will always fail
+        // Manually compare retrieved new value to old value and check before
+        // firing.
+        // This is because the preferences store may only store the serialized
+        // (string) value
+        // so the regular equality check within PropertyChangeSupport will
+        // always fail
         // (e.g. when value is Boolean but oldValue is "true"/"false").
         Object storedNewValue = preferences.getPreference(name);
         if (!Objects.equals(oldValue, storedNewValue)) {
@@ -628,9 +645,10 @@ public final class Preferences {
     /**
      * Register to receive notifications when preferences change.
      * <p>
-     * Note: The value returned by {@code PropertyChangeEvent#getNewValue()} will be of the "correct" type (Integer,
-     * Boolean, Enum, etc.) but the value returned by {@code PropertyChangeEvent#getOldValue()} will be the String
-     * equivalent for storing in XML.
+     * Note: The value returned by {@code PropertyChangeEvent#getNewValue()}
+     * will be of the "correct" type (Integer, Boolean, Enum, etc.) but the
+     * value returned by {@code PropertyChangeEvent#getOldValue()} will be the
+     * String equivalent for storing in XML.
      *
      * @param listener
      */
@@ -641,8 +659,9 @@ public final class Preferences {
     /**
      * Register to receive notifications when the specified preference changes.
      * <p>
-     * Note: The value returned by {@code getNewValue()} will be of the "correct" type (Integer, Boolean, Enum, etc.)
-     * but the value returned by {@code getOldValue()} will be the String equivalent for storing in XML.
+     * Note: The value returned by {@code getNewValue()} will be of the
+     * "correct" type (Integer, Boolean, Enum, etc.) but the value returned by
+     * {@code getOldValue()} will be the String equivalent for storing in XML.
      *
      * @param listener
      */
@@ -660,7 +679,8 @@ public final class Preferences {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-        // Must manually check for equality (see FiltersUtil.filtersEqual() Javadoc)
+        // Must manually check for equality (see FiltersUtil.filtersEqual()
+        // Javadoc)
         if (!FiltersUtil.filtersEqual(oldValue, newFilters)) {
             PROP_CHANGE_SUPPORT.firePropertyChange(Preferences.PROPERTY_FILTERS, oldValue, newFilters);
         }
@@ -794,7 +814,8 @@ public final class Preferences {
         if (prefsFile.exists()) {
             return prefsFile;
         }
-        // If user prefs don't exist, fall back to defaults (possibly) bundled with OmegaT.
+        // If user prefs don't exist, fall back to defaults (possibly) bundled
+        // with OmegaT.
         prefsFile = new File(StaticUtils.installDir(), FILE_PREFERENCES);
         if (prefsFile.exists()) {
             return prefsFile;

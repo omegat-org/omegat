@@ -28,7 +28,10 @@
 package org.omegat.core.segmentation;
 
 import java.beans.ExceptionListener;
+import java.beans.XMLDecoder;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -176,7 +179,8 @@ public class SRX implements Serializable {
     }
 
     /**
-     * Loads segmentation rules from an XML file.
+     * Loads segmentation rules from an XML file. If there's an error loading a
+     * file, it calls <code>getDefault</code>.
      * <p>
      * Since 1.6.0 RC8 it also checks if the version of segmentation rules saved
      * is older than that of the current OmegaT, and tries to merge the two sets
@@ -185,18 +189,39 @@ public class SRX implements Serializable {
     private static SRX loadConfFile(File configFile) {
         SRX res;
         try {
-            res = mapper.readValue(configFile, SRX.class);
-        } catch (IOException ex) {
-            Log.logErrorRB("CORE_SRX_EXC_LOADING_SEG_RULES", "");
-            return SRX.getDefault();
+            SRX.MyExceptionListener myel = new SRX.MyExceptionListener();
+            try (XMLDecoder xmldec = new XMLDecoder(new FileInputStream(configFile), null, myel)) {
+                res = (SRX) xmldec.readObject();
+            }
+
+            if (myel.isExceptionOccured()) {
+                StringBuilder sb = new StringBuilder();
+                for (Exception ex : myel.getExceptionsList()) {
+                    sb.append("    ");
+                    sb.append(ex);
+                    sb.append("\n");
+                }
+                Log.logErrorRB("CORE_SRX_EXC_LOADING_SEG_RULES", sb.toString());
+                return SRX.getDefault();
+            }
+
+            // checking the version
+            if (CURRENT_VERSION.compareTo(res.getVersion()) > 0) {
+                // yeap, the segmentation config file is of the older version
+
+                // initing defaults
+                SRX defaults = SRX.getDefault();
+                // and merging them into loaded rules
+                res = merge(res, defaults);
+            }
+            Log.log("using segmentation rules from " + configFile);
+        } catch (Exception e) {
+            // silently ignoring FNF
+            if (!(e instanceof FileNotFoundException)) {
+                Log.log(e);
+            }
+            res = SRX.getDefault();
         }
-        // checking the version
-        if (CURRENT_VERSION.compareTo(res.getVersion()) > 0) {
-            // the segmentation config file is of the older version
-            // merging defaults into loaded rules
-            res = merge(res, SRX.getDefault());
-        }
-        Log.log("using segmentation rules from " + configFile);
         return res;
     }
 
@@ -338,6 +363,34 @@ public class SRX implements Serializable {
             }
         }
         return null;
+    }
+
+    /**
+     * My Own Class to listen to exceptions, occured while loading filters
+     * configuration.
+     */
+    static class MyExceptionListener implements ExceptionListener {
+        private List<Exception> exceptionsList = new ArrayList<Exception>();
+        private boolean exceptionOccured = false;
+
+        public void exceptionThrown(Exception e) {
+            exceptionOccured = true;
+            exceptionsList.add(e);
+        }
+
+        /**
+         * Returns whether any exceptions occured.
+         */
+        public boolean isExceptionOccured() {
+            return exceptionOccured;
+        }
+
+        /**
+         * Returns the list of occured exceptions.
+         */
+        public List<Exception> getExceptionsList() {
+            return exceptionsList;
+        }
     }
 
     // Patterns

@@ -94,7 +94,7 @@ public class SRXTest {
         for (MapRule mapRule : mapRuleList) {
             if (mapRule.getPattern().equals("JA.*")) {
                 assertEquals(LanguageCodes.JAPANESE_CODE, mapRule.getLanguageCode());
-                assertEquals(OStrings.getString(LanguageCodes.JAPANESE_KEY), mapRule.getLanguage());
+                assertEquals(OStrings.getString(LanguageCodes.JAPANESE_KEY), mapRule.getLanguageName());
             }
         }
         assertEquals("2.0", srx.getVersion());
@@ -144,7 +144,7 @@ public class SRXTest {
         for (MapRule mapRule: mapRuleList) {
             if (mapRule.getPattern().equals("JA.*")) {
                 assertEquals(LanguageCodes.JAPANESE_CODE, mapRule.getLanguageCode());
-                assertEquals(OStrings.getString(LanguageCodes.JAPANESE_KEY), mapRule.getLanguage());
+                assertEquals(OStrings.getString(LanguageCodes.JAPANESE_KEY), mapRule.getLanguageName());
             }
         }
         assertEquals("2.0", srx1.getVersion());

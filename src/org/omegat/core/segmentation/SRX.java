@@ -28,10 +28,7 @@
 package org.omegat.core.segmentation;
 
 import java.beans.ExceptionListener;
-import java.beans.XMLDecoder;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -44,11 +41,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.xml.stream.XMLInputFactory;
-
 import com.fasterxml.jackson.databind.DatabindException;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-import gen.core.segmentation.Languagerules;
 import org.omegat.util.JaxbXmlMapper;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
@@ -57,9 +51,6 @@ import gen.core.segmentation.Languagemap;
 import gen.core.segmentation.Languagerule;
 import gen.core.segmentation.ObjectFactory;
 import gen.core.segmentation.Srx;
-
-import javax.xml.stream.XMLStreamException;
-import javax.xml.stream.XMLStreamReader;
 
 /**
  * The class with all the segmentation data possible -- rules, languages, etc.
@@ -76,7 +67,6 @@ public class SRX implements Serializable {
     public static final String SRX_SENTSEG = "segmentation.srx";
 
     private static final XmlMapper mapper = JaxbXmlMapper.getXmlMapper();
-    private static final XMLInputFactory xmlInputFactory = XMLInputFactory.newInstance();
 
     /**
      * Creates an empty SRX, without any rules.
@@ -88,7 +78,7 @@ public class SRX implements Serializable {
 
     public SRX copy() {
         SRX result = new SRX();
-        result.mappingRules = new ArrayList<MapRule>(mappingRules.size());
+        result.mappingRules = new ArrayList<>(mappingRules.size());
         for (MapRule rule : mappingRules) {
             result.mappingRules.add(rule.copy());
         }
@@ -154,7 +144,7 @@ public class SRX implements Serializable {
      * In case you use conf format, rules about old version remain valid.
      **/
     public static SRX loadFromDir(File configDir) {
-        File inFile = null;
+        File inFile;
         try {
             inFile = new File(configDir, SRX_SENTSEG);
             if (inFile.exists()) {
@@ -192,39 +182,18 @@ public class SRX implements Serializable {
     private static SRX loadConfFile(File configFile) {
         SRX res;
         try {
-            MyExceptionListener myel = new MyExceptionListener();
-            try (XMLDecoder xmldec = new XMLDecoder(new FileInputStream(configFile), null, myel)) {
-                res = (SRX) xmldec.readObject();
-            }
-
-            if (myel.isExceptionOccured()) {
-                StringBuilder sb = new StringBuilder();
-                for (Exception ex : myel.getExceptionsList()) {
-                    sb.append("    ");
-                    sb.append(ex);
-                    sb.append("\n");
-                }
-                Log.logErrorRB("CORE_SRX_EXC_LOADING_SEG_RULES", sb.toString());
-                return SRX.getDefault();
-            }
-
-            // checking the version
-            if (CURRENT_VERSION.compareTo(res.getVersion()) > 0) {
-                // yeap, the segmentation config file is of the older version
-
-                // initing defaults
-                SRX defaults = SRX.getDefault();
-                // and merging them into loaded rules
-                res = merge(res, defaults);
-            }
-            Log.log("using segmentation rules from " + configFile);
-        } catch (Exception e) {
-            // silently ignoring FNF
-            if (!(e instanceof FileNotFoundException)) {
-                Log.log(e);
-            }
-            res = SRX.getDefault();
+            res = mapper.readValue(configFile, SRX.class);
+        } catch (IOException ex) {
+            Log.logErrorRB("CORE_SRX_EXC_LOADING_SEG_RULES", "");
+            return SRX.getDefault();
         }
+        // checking the version
+        if (CURRENT_VERSION.compareTo(res.getVersion()) > 0) {
+            // the segmentation config file is of the older version
+            // merging defaults into loaded rules
+            res = merge(res, SRX.getDefault());
+        }
+        Log.log("using segmentation rules from " + configFile);
         return res;
     }
 
@@ -269,8 +238,8 @@ public class SRX implements Serializable {
     }
 
     /** Merges two sets of segmentation rules together. */
-    private static SRX merge(SRX current, SRX defaults) {
-        current = upgrade(current, defaults);
+    private static SRX merge(final SRX current, final SRX defaults) {
+        SRX merged = upgrade(current, defaults);
 
         int defaultMapRulesN = defaults.getMappingRules().size();
         for (int i = 0; i < defaultMapRulesN; i++) {
@@ -278,10 +247,10 @@ public class SRX implements Serializable {
             String dcode = dmaprule.getLanguageCode();
             // trying to find
             boolean found = false;
-            int currentMapRulesN = current.getMappingRules().size();
+            int currentMapRulesN = merged.getMappingRules().size();
             MapRule cmaprule = null;
             for (int j = 0; j < currentMapRulesN; j++) {
-                cmaprule = current.getMappingRules().get(j);
+                cmaprule = merged.getMappingRules().get(j);
                 String ccode = cmaprule.getLanguageCode();
                 if (dcode.equals(ccode)) {
                     found = true;
@@ -317,17 +286,17 @@ public class SRX implements Serializable {
                 // just adding before the default rules
                 int englishN = currentMapRulesN;
                 for (int j = 0; j < currentMapRulesN; j++) {
-                    cmaprule = current.getMappingRules().get(j);
+                    cmaprule = merged.getMappingRules().get(j);
                     String cpattern = cmaprule.getPattern();
                     if (DEFAULT_RULES_PATTERN.equals(cpattern)) {
                         englishN = j;
                         break;
                     }
                 }
-                current.getMappingRules().add(englishN, dmaprule);
+                merged.getMappingRules().add(englishN, dmaprule);
             }
         }
-        return current;
+        return merged;
     }
 
     /** Implements some upgrade heuristics. */

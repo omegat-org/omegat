@@ -26,15 +26,18 @@
 package org.omegat.core.segmentation;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 import org.junit.Test;
+import org.omegat.util.OStrings;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.List;
 
 /**
@@ -42,8 +45,9 @@ import java.util.List;
  */
 public class SRXTest {
 
-    private final File segmentGenerated = new File("test/data/segmentation/generated/");
     private final File segmentDefault = new File("test/data/segmentation/default/");
+    private final File segmentConf = new File("test/data/segmentation/migrate/");
+    private final File segmentSrx = new File(segmentConf, "segmentation.srx");
 
     @Test
     public void testSRXComparison() {
@@ -78,8 +82,8 @@ public class SRXTest {
         assertEquals(18, mapRuleList.size());
         for (MapRule mapRule : mapRuleList) {
             if (mapRule.getPattern().equals("JA.*")) {
-                assertEquals("Japanese", mapRule.getLanguageCode());
-                // assertEquals("Japanese", mapRule.getLanguage());
+                assertEquals(LanguageCodes.JAPANESE_KEY, mapRule.getLanguageCode());
+                assertEquals(OStrings.getString(LanguageCodes.JAPANESE_KEY), mapRule.getLanguage());
             }
         }
         assertEquals("2.0", srx.getVersion());
@@ -92,21 +96,31 @@ public class SRXTest {
      * try read a segmentation.srx file that is produced by OmegaT when system locale is Japanese.
      */
     @Test
-    public void testSrxReaderGenerated() {
-        assertTrue(segmentGenerated.exists());
-        SRX srx = SRX.loadFromDir(segmentGenerated);
-        assertNotNull(srx);
-        List<MapRule> mapRuleList = srx.getMappingRules();
+    public void testSrxMigration() throws IOException {
+        assertTrue(segmentConf.exists());
+        assertFalse(segmentSrx.exists());
+        // load from conf file
+        SRX srxOrig = SRX.loadFromDir(segmentConf);
+        assertNotNull(srxOrig);
+        List<MapRule> mapRuleList = srxOrig.getMappingRules();
+        assertNotNull(mapRuleList);
+        assertEquals(18, mapRuleList.size());
+        // load from srx file
+        assertTrue(segmentSrx.exists());
+        SRX srx1 = SRX.loadFromDir(segmentConf);
+        assertNotNull(srx1);
+        mapRuleList = srx1.getMappingRules();
         assertNotNull(mapRuleList);
         assertEquals(18, mapRuleList.size());
         for (MapRule mapRule: mapRuleList) {
             if (mapRule.getPattern().equals("JA.*")) {
-                assertEquals("Japanese", mapRule.getLanguageCode());
-                assertEquals("\u65E5\u672C\u8A9E", mapRule.getLanguage());
+                assertEquals(LanguageCodes.JAPANESE_KEY, mapRule.getLanguageCode());
+                assertEquals(OStrings.getString(LanguageCodes.JAPANESE_KEY), mapRule.getLanguage());
             }
         }
-        assertEquals("2.0", srx.getVersion());
-        assertTrue(srx.isCascade());
-        assertTrue(srx.isSegmentSubflows());
+        assertEquals("2.0", srx1.getVersion());
+        assertTrue(srx1.isCascade());
+        assertTrue(srx1.isSegmentSubflows());
+        Files.deleteIfExists(segmentSrx.toPath());
     }
 }

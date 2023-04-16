@@ -183,7 +183,7 @@ public abstract class BaseTranslate implements IMachineTranslation {
      *            source text.
      * @return translated text if exists in cache, otherwise null.
      */
-    // @Deprecated(since="6.1")
+    @Deprecated(since="6.1")
     protected String getFromCache(Language sLang, Language tLang, String text) {
         return null;
     }
@@ -209,7 +209,7 @@ public abstract class BaseTranslate implements IMachineTranslation {
      *            translation.
      * @return given translation.
      */
-    // @Deprecated(since="6.1")
+    @Deprecated(since="6.1")
     protected String putToCache(Language sLang, Language tLang, String text, String result) {
         return result;
     }

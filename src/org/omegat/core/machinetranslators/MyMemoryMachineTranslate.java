@@ -96,9 +96,7 @@ public final class MyMemoryMachineTranslate extends AbstractMyMemoryTranslate {
                 bestEntry = mtEntry;
             }
             assert bestEntry != null;
-            String translation = StringEscapeUtils.unescapeHtml4(bestEntry.get("translation").asText());
-            putToCache(sLang, tLang, text, translation);
-            return translation;
+            return StringEscapeUtils.unescapeHtml4(bestEntry.get("translation").asText());
         } catch (IOException e) {
             throw new MachineTranslateError(OStrings.getString("MT_ENGINE_MYMEMOROY_ERROR"), e);
         }

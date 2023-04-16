@@ -34,7 +34,7 @@ jobs:
   variables:
     GRADLE_USER_HOME: '$(Pipeline.Workspace)/.gradle'
   steps:
-    - template: ci/check_steps.yml
+    - template: ci/azure-pipelines/check_steps.yml
 
 - job: ReleaseBuild
   displayName: Release build for master and releases/x.x
@@ -48,4 +48,4 @@ jobs:
     ORG_GRADLE_PROJECT_winCodesignPassword: $(keystorePassword)
     ORG_GRADLE_PROJECT_jwsStorepass: $(keystorePassword)
   steps:
-    - template: ci/release_steps.yml
+    - template: ci/azure-pipelines/release_steps.yml

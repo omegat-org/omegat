@@ -770,7 +770,7 @@ ext.makeWinTask = { args ->
             exec {
                 // You'd think we could just set the PATH, but there be dragons here
                 // https://github.com/palantir/gradle-docker/issues/162
-                def exe = exePresent('iscc') ?  'iscc' : file('release/ci/iscc')
+                def exe = exePresent('iscc') ?  'iscc' : file('ci/iscc')
                 commandLine exe, "${destinationDir}/OmegaT.iss"
             }
             ant.move file: "${destinationDir}/${installerBasename}.exe",
@@ -794,7 +794,7 @@ ext.makeWinTask = { args ->
             exec {
                 // You'd think we could just set the PATH, but there be dragons here
                 // https://github.com/palantir/gradle-docker/issues/162
-                def exe = exePresent('osslsigncode') ? 'osslsigncode' : file('release/ci/osslsigncode')
+                def exe = exePresent('osslsigncode') ? 'osslsigncode' : file('ci/osslsigncode')
                 commandLine exe, 'sign',
                     '-pkcs12', project.property('winCodesignFile'),
                     '-pass', project.property('winCodesignPassword'),

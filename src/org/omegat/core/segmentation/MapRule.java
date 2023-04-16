@@ -28,10 +28,12 @@ package org.omegat.core.segmentation;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
 import gen.core.segmentation.Languagemap;
+import org.omegat.util.Log;
 import org.omegat.util.StringUtil;
 
 /**
@@ -50,7 +52,7 @@ public class MapRule implements Serializable {
 
     /** creates an initialized MapRule */
     public MapRule(String language, String pattern, List<Rule> rules) {
-        this.setLanguage(language);
+        this.setLanguageCode(language);
         this.setPattern(pattern);
         this.setRules(rules);
     }
@@ -59,20 +61,29 @@ public class MapRule implements Serializable {
     private String languageCode;
 
     public MapRule(Languagemap languagemap, List<Rule> rules) {
-        this.setLanguage(languagemap.getLanguagerulename());
+        this.setLanguageCode(languagemap.getLanguagerulename());
         this.setPattern(languagemap.getLanguagepattern());
         this.setRules(rules);
     }
 
     /** Returns Language Name (to display it in a dialog). */
-    public String getLanguage() {
+    public String getLanguageName() {
         String res = LanguageCodes.getLanguageName(languageCode);
         return StringUtil.isEmpty(res) ? languageCode : res;
     }
 
-    /** Sets Language Name */
-    public void setLanguage(String language) {
-        this.languageCode = language;
+    /** Sets Language Code */
+    public void setLanguageCode(String code) {
+        if (!LanguageCodes.isLanguageCodeKnown(code)) {
+            String alt = LanguageCodes.getLanguageCodeByName(code);
+            if (alt != null) {
+                languageCode = alt;
+                return;
+            } else {
+                Log.logWarningRB("CORE_SRX_RULES_UNKNOWN_LANGUAGE_CODE", code);
+            }
+        }
+        languageCode = code;
     }
 
     /** Returns Language Code for programmatic usage. */
@@ -139,17 +150,17 @@ public class MapRule implements Serializable {
         }
         MapRule that = (MapRule) obj;
         return this.getPattern().equals(that.getPattern())
-                && this.getLanguage().equals(that.getLanguage())
+                && this.getLanguageCode().equals(that.getLanguageCode())
                 && this.getRules().equals(that.getRules());
     }
 
     /** Returns a hash code value for the object. */
     public int hashCode() {
-        return this.getPattern().hashCode() + this.getLanguage().hashCode() + this.getRules().hashCode();
+        return this.getPattern().hashCode() + this.getLanguageCode().hashCode() + this.getRules().hashCode();
     }
 
     /** Returns a string representation of the MapRule for debugging purposes. */
     public String toString() {
-        return getLanguage() + " (" + getPattern() + ") " + getRules().toString();
+        return getLanguageCode() + " (" + getPattern() + ") " + getRules().toString();
     }
 }

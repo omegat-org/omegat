@@ -32,6 +32,7 @@ import java.util.regex.PatternSyntaxException;
 
 import javax.swing.table.AbstractTableModel;
 
+import org.omegat.core.segmentation.LanguageCodes;
 import org.omegat.core.segmentation.MapRule;
 import org.omegat.core.segmentation.Rule;
 import org.omegat.core.segmentation.SRX;
@@ -57,7 +58,7 @@ public class MappingRulesModel extends AbstractTableModel {
         MapRule maprule = srx.getMappingRules().get(rowIndex);
         switch (columnIndex) {
         case 0:
-            return maprule.getLanguage();
+            return maprule.getLanguageCode();
         case 1:
             return maprule.getPattern();
         }
@@ -89,7 +90,13 @@ public class MappingRulesModel extends AbstractTableModel {
         MapRule maprule = srx.getMappingRules().get(rowIndex);
         switch (columnIndex) {
         case 0:
-            maprule.setLanguage((String) aValue);
+            String target = (String) aValue;
+            String code = LanguageCodes.getLanguageCodeByName(target);
+            if (code != null) {
+                maprule.setLanguageCode(code);
+            } else {
+                maprule.setLanguageCode(target);
+            }
             break;
         case 1:
             try {

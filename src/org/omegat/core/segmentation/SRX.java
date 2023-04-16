@@ -110,11 +110,11 @@ public class SRX implements Serializable {
         jaxbObject.getBody().setLanguagerules(factory.createLanguagerules());
         for (MapRule mr : srx.getMappingRules()) {
             Languagemap map = new Languagemap();
-            map.setLanguagerulename(mr.getLanguage());
+            map.setLanguagerulename(mr.getLanguageCode());
             map.setLanguagepattern(mr.getPattern());
             jaxbObject.getBody().getMaprules().getLanguagemap().add(map);
             Languagerule lr = new Languagerule();
-            lr.setLanguagerulename(mr.getLanguage());
+            lr.setLanguagerulename(mr.getLanguageCode());
             jaxbObject.getBody().getLanguagerules().getLanguagerule().add(lr);
             for (Rule rule : mr.getRules()) {
                 gen.core.segmentation.Rule jaxbRule = factory.createRule();
@@ -150,8 +150,7 @@ public class SRX implements Serializable {
             if (inFile.exists()) {
                 return loadSrxFile(inFile.toURI());
             }
-        } catch (Exception o2) {
-
+        } catch (Exception ignored) {
         }
 
         // If file was not present or not readable
@@ -172,8 +171,7 @@ public class SRX implements Serializable {
     }
 
     /**
-     * Loads segmentation rules from an XML file. If there's an error loading a
-     * file, it calls <code>getDefaultFromJar</code>.
+     * Loads segmentation rules from an XML file.
      * <p>
      * Since 1.6.0 RC8 it also checks if the version of segmentation rules saved
      * is older than that of the current OmegaT, and tries to merge the two sets
@@ -309,7 +307,7 @@ public class SRX implements Serializable {
             for (int i = 0; i < current.getMappingRules().size(); i++) {
                 MapRule maprule = current.getMappingRules().get(i);
                 if (def.equals(maprule.getLanguageCode())) {
-                    maprule.setLanguage(LanguageCodes.DEFAULT_CODE);
+                    maprule.setLanguageCode(LanguageCodes.DEFAULT_CODE);
                     maprule.getRules().removeAll(getRulesForLanguage(defaults, LanguageCodes.ENGLISH_CODE));
                     maprule.getRules().removeAll(getRulesForLanguage(defaults, LanguageCodes.F_TEXT_CODE));
                     maprule.getRules().removeAll(getRulesForLanguage(defaults, LanguageCodes.F_HTML_CODE));
@@ -337,34 +335,6 @@ public class SRX implements Serializable {
         return null;
     }
 
-    /**
-     * My Own Class to listen to exceptions, occured while loading filters
-     * configuration.
-     */
-    static class MyExceptionListener implements ExceptionListener {
-        private List<Exception> exceptionsList = new ArrayList<Exception>();
-        private boolean exceptionOccured = false;
-
-        public void exceptionThrown(Exception e) {
-            exceptionOccured = true;
-            exceptionsList.add(e);
-        }
-
-        /**
-         * Returns whether any exceptions occured.
-         */
-        public boolean isExceptionOccured() {
-            return exceptionOccured;
-        }
-
-        /**
-         * Returns the list of occured exceptions.
-         */
-        public List<Exception> getExceptionsList() {
-            return exceptionsList;
-        }
-    }
-
     // Patterns
     private static final String DEFAULT_RULES_PATTERN = ".*";
 
@@ -383,7 +353,7 @@ public class SRX implements Serializable {
     /**
      * Finds the rules for a certain language.
      * <p>
-     * Usually (if the user didn't screw up the setup) there're a default
+     * Usually (if the user didn't screw up the setup) there are default
      * segmentation rules, so it's a good idea to rely on this method always
      * returning at least some rules.
      * <p>
@@ -391,7 +361,7 @@ public class SRX implements Serializable {
      * rules.
      */
     public List<Rule> lookupRulesForLanguage(Language srclang) {
-        List<Rule> rules = new ArrayList<Rule>();
+        List<Rule> rules = new ArrayList<>();
         for (int i = 0; i < getMappingRules().size(); i++) {
             MapRule maprule = getMappingRules().get(i);
             if (maprule.getCompiledPattern().matcher(srclang.getLanguage()).matches()) {

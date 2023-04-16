@@ -78,11 +78,16 @@ public class SRX implements Serializable {
 
     public SRX copy() {
         SRX result = new SRX();
+        result.setVersion(version);
+        result.setCascade(cascade);
+        result.setSegmentSubflows(segmentSubflows);
+        result.setIncludeIsolatedTags(includeIsolatedTags);
+        result.setIncludeStartingTags(includeStartingTags);
+        result.setIncludeEndingTags(includeEndingTags);
         result.mappingRules = new ArrayList<>(mappingRules.size());
         for (MapRule rule : mappingRules) {
             result.mappingRules.add(rule.copy());
-        }
-        return result;
+        }        return result;
     }
 
     /**

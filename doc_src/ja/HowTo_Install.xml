@@ -11,7 +11,7 @@
 
   <variablelist>
 	<varlistentry>
-	  <term>標準版: OmegaT 5.8.0</term>
+	  <term>標準版:OmegaT 6.0.0</term>
 	  <listitem>
 		<para>デイリーユースにおすすめのエディションです。</para>
 	  </listitem>
@@ -27,9 +27,9 @@
   <para>ファイルは<ulink url="https://omegat.org/download">https://omegat.org</ulink>から直接ダウンロードできます。</para>
 
   <note>
-	<para>OmegaT 5.8.0 の実行には、Java 8 Runtime Environment（JRE) が必要です。</para>
+	<para>OmegaT 6.0.0 の実行には、Java 11 Runtime Environment（JRE) が必要です。</para>
 
-	<para>OmeaTパッケージは、Javaにバンドルされているバージョンとバンドルされていないバージョンの両方で利用できます。Javaを含まないパッケージは、システム全体にインストールされたJava 8 Runtime Environmentに依存します。</para>
+	<para>OmeaTパッケージは、Javaにバンドルされているバージョンとバンドルされていないバージョンの両方で利用できます。Javaを含まないパッケージは、システム全体にインストールされたJava 11 Runtime Environmentに依存します。</para>
 
 	<para>OmegaT 5.8.0以降では、すべてのプラットフォームでJava 11 Runtime Environmentもサポートしています。</para>
 
@@ -59,7 +59,7 @@
 
       <para>スクリプトを実行するには、<filename>sudo</filename>パスワードを入力する必要があります。</para>
 
-      <para>このスクリプトは、<filename>/opt/OmegaT/</filename>にある同じバージョンのOmegaTの既存のインストールをチェックします。存在しない場合は、<filename>/opt/omegat/OmegaT_5.8.0</filename>にプログラムをインストールし、デフォルトバージョンとして設定します(<filename>/opt/omegat/OmegaT-default</filename>)。</para>
+      <para>このスクリプトは、<filename>/opt/OmegaT/</filename>にある同じバージョンのOmegaTの既存のインストールをチェックします。存在しない場合は、<filename>/opt/omegat/OmegaT_6.0.0</filename>にプログラムをインストールし、デフォルトバージョンとして設定します(<filename>/opt/omegat/OmegaT-default</filename>)。</para>
 	</note>
 
     <para>解凍またはインストールが完了したら、ダウンロードしたファイルは不要になったため削除できます。</para>
@@ -78,7 +78,7 @@
   <section id="installing.omegat.other.systems">
     <title id="installing.omegat.other.systems.title">その他のシステム</title>
 
-    <para>この情報は、Java 8 Runtime Environmentと互換性のあるJavaバージョンを持つすべてのシステムに適用されます。これには、上記のプラットフォームだけでなく、特定のパッケージが提供されていないプラットフォームも含まれます。</para>
+    <para>この情報は、Java 11 Runtime Environmentと互換性のあるJavaバージョンを持つすべてのシステムに適用されます。これには、上記のプラットフォームだけでなく、特定のパッケージが提供されていないプラットフォームも含まれます。</para>
 
     <para><emphasis>クロスプラットフォーム(JRE無し)</emphasis>バージョンをダウンロードします。</para>
 

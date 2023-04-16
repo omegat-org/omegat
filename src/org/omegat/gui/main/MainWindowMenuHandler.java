@@ -79,7 +79,7 @@ import org.omegat.gui.search.SearchWindowController;
 import org.omegat.gui.segmentation.SegmentationCustomizerController;
 import org.omegat.gui.stat.StatisticsWindow;
 import org.omegat.help.Help;
-import org.omegat.util.Java8Compat;
+import org.omegat.util.Java11Compat;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
@@ -326,7 +326,7 @@ public final class MainWindowMenuHandler {
             return;
         }
         File toOpen = new File(root, path);
-        if ((modifier & Java8Compat.getMenuShortcutKeyMaskEx()) != 0) {
+        if ((modifier & Java11Compat.getMenuShortcutKeyMaskEx()) != 0) {
             toOpen = toOpen.getParentFile();
         }
         openFile(toOpen);
@@ -342,7 +342,7 @@ public final class MainWindowMenuHandler {
             return;
         }
         File toOpen = new File(root, path);
-        if ((modifier & Java8Compat.getMenuShortcutKeyMaskEx()) != 0) {
+        if ((modifier & Java11Compat.getMenuShortcutKeyMaskEx()) != 0) {
             toOpen = toOpen.getParentFile();
         }
         openFile(toOpen);
@@ -357,7 +357,7 @@ public final class MainWindowMenuHandler {
             return;
         }
         File toOpen = new File(path);
-        if ((modifier & Java8Compat.getMenuShortcutKeyMaskEx()) != 0) {
+        if ((modifier & Java11Compat.getMenuShortcutKeyMaskEx()) != 0) {
             toOpen = toOpen.getParentFile();
         }
         openFile(toOpen);

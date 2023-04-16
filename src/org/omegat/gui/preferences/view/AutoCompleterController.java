@@ -32,7 +32,7 @@ import javax.swing.KeyStroke;
 
 import org.omegat.core.Core;
 import org.omegat.gui.preferences.BasePreferencesController;
-import org.omegat.util.Java8Compat;
+import org.omegat.util.Java11Compat;
 import org.omegat.util.OStrings;
 import org.omegat.util.Platform;
 import org.omegat.util.Preferences;
@@ -61,7 +61,7 @@ public class AutoCompleterController extends BasePreferencesController {
 
     private void initGui() {
         panel = new AutoCompleterPreferencesPanel();
-        int mask = Java8Compat.getMenuShortcutKeyMaskEx();
+        int mask = Java11Compat.getMenuShortcutKeyMaskEx();
         KeyStroke left = KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, mask);
         KeyStroke right = KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, mask);
         panel.switchWithLRCheckBox.setText(OStrings.getString("PREFS_AUTOCOMPLETE_SWITCH_VIEWS_LR",

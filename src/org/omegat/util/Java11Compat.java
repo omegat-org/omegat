@@ -25,21 +25,31 @@
 
 package org.omegat.util;
 
+import javax.swing.plaf.TextUI;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.JTextComponent;
+import javax.swing.text.Position;
+import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 
-@SuppressWarnings("deprecation")
-public class Java8Compat {
+/**
+ * Compatibility class for java 11 and later.
+ * All deprecated java library class and methods which OmegaT depends on
+ * that are managed in the compatibility class.
+ */
+public class Java11Compat {
 
     public static int getMenuShortcutKeyMaskEx() {
-        int mask = Toolkit.getDefaultToolkit().getMenuShortcutKeyMask();
-        switch (mask) {
-        case KeyEvent.CTRL_MASK:
-            return KeyEvent.CTRL_DOWN_MASK;
-        case KeyEvent.META_MASK:
-            return KeyEvent.META_DOWN_MASK;
-        default:
-            return mask;
-        }
+        // getMenuShortcutKeyMaskEx() is introduced in Java10
+        return Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx();
+    }
+
+    public static Rectangle modelToView(JTextComponent comp, int pos) throws BadLocationException {
+        return comp.modelToView2D(pos).getBounds();
+    }
+
+    public static Rectangle modelToView(TextUI ui, JTextComponent comp, int pos) throws BadLocationException {
+        return ui.modelToView2D(comp, pos, Position.Bias.Forward).getBounds();
     }
 }

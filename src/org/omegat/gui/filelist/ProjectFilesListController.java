@@ -98,7 +98,7 @@ import org.omegat.core.events.IEntryEventListener;
 import org.omegat.core.statistics.StatisticsInfo;
 import org.omegat.gui.main.MainWindow;
 import org.omegat.gui.main.ProjectUICommands;
-import org.omegat.util.Java8Compat;
+import org.omegat.util.Java11Compat;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
@@ -391,7 +391,7 @@ public class ProjectFilesListController {
         }
         JMenuItem item = menu.add(defaultTitle);
         item.addActionListener(e -> {
-            boolean openParent = (e.getModifiers() & Java8Compat.getMenuShortcutKeyMaskEx()) != 0;
+            boolean openParent = (e.getModifiers() & Java11Compat.getMenuShortcutKeyMaskEx()) != 0;
             Stream<File> stream;
             if (openParent) {
                 stream = files.stream().map(File::getParentFile).distinct().filter(File::isDirectory);
@@ -413,14 +413,14 @@ public class ProjectFilesListController {
             }
             @Override
             public void menuKeyReleased(MenuKeyEvent e) {
-                if ((e.getModifiersEx() & Java8Compat.getMenuShortcutKeyMaskEx()) != 0
+                if ((e.getModifiersEx() & Java11Compat.getMenuShortcutKeyMaskEx()) != 0
                         || e.getKeyCode() == KeyEvent.VK_META || e.getKeyCode() == KeyEvent.VK_CONTROL) {
                     setText(defaultTitle);
                 }
             }
             @Override
             public void menuKeyPressed(MenuKeyEvent e) {
-                if ((e.getModifiersEx() & Java8Compat.getMenuShortcutKeyMaskEx()) != 0) {
+                if ((e.getModifiersEx() & Java11Compat.getMenuShortcutKeyMaskEx()) != 0) {
                     setText(modTitle);
                 }
             }

@@ -103,7 +103,7 @@ import org.omegat.gui.align.MutableBead.Status;
 import org.omegat.gui.filters2.FiltersCustomizer;
 import org.omegat.gui.main.ProjectUICommands;
 import org.omegat.gui.segmentation.SegmentationCustomizer;
-import org.omegat.util.Java8Compat;
+import org.omegat.util.Java11Compat;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
@@ -301,7 +301,7 @@ public class AlignPanelController {
                 boolean up = e.getSource().equals(panel.moveUpButton)
                         || e.getSource().equals(frame.moveUpItem);
                 BeadTableModel model = (BeadTableModel) panel.table.getModel();
-                if ((e.getModifiers() & Java8Compat.getMenuShortcutKeyMaskEx()) != 0) {
+                if ((e.getModifiers() & Java11Compat.getMenuShortcutKeyMaskEx()) != 0) {
                     int trgRow = up ? model.prevBeadFromRow(rows[0])
                             : model.nextBeadFromRow(rows[rows.length - 1]);
                     moveRows(rows, col, trgRow);
@@ -572,13 +572,13 @@ public class AlignPanelController {
         });
 
         frame.resetItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R,
-                Java8Compat.getMenuShortcutKeyMaskEx() | KeyEvent.SHIFT_DOWN_MASK));
+                Java11Compat.getMenuShortcutKeyMaskEx() | KeyEvent.SHIFT_DOWN_MASK));
         frame.realignPendingItem.setAccelerator(
-                KeyStroke.getKeyStroke(KeyEvent.VK_R, Java8Compat.getMenuShortcutKeyMaskEx()));
+                KeyStroke.getKeyStroke(KeyEvent.VK_R, Java11Compat.getMenuShortcutKeyMaskEx()));
         frame.saveItem.setAccelerator(
-                KeyStroke.getKeyStroke(KeyEvent.VK_S, Java8Compat.getMenuShortcutKeyMaskEx()));
+                KeyStroke.getKeyStroke(KeyEvent.VK_S, Java11Compat.getMenuShortcutKeyMaskEx()));
         frame.closeItem.setAccelerator(
-                KeyStroke.getKeyStroke(KeyEvent.VK_W, Java8Compat.getMenuShortcutKeyMaskEx()));
+                KeyStroke.getKeyStroke(KeyEvent.VK_W, Java11Compat.getMenuShortcutKeyMaskEx()));
 
         // emacs-like keys for table navigation
         // See javax.swing.plaf.BasicTableUI.Actions for supported action names.

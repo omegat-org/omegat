@@ -127,7 +127,7 @@ import org.omegat.gui.preferences.view.UserPassController;
 import org.omegat.gui.preferences.view.VersionCheckPreferencesController;
 import org.omegat.gui.preferences.view.ViewOptionsController;
 import org.omegat.gui.segmentation.SegmentationCustomizerController;
-import org.omegat.util.Java8Compat;
+import org.omegat.util.Java11Compat;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
@@ -312,7 +312,7 @@ public class PreferencesWindowController implements FurtherActionListener {
             }
         });
         KeyStroke searchKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_F,
-                Java8Compat.getMenuShortcutKeyMaskEx());
+                Java11Compat.getMenuShortcutKeyMaskEx());
         inputMap.put(searchKeyStroke, ACTION_KEY_NEW_SEARCH);
         actionMap.put(ACTION_KEY_CLEAR_OR_CLOSE, new AbstractAction() {
             @Override

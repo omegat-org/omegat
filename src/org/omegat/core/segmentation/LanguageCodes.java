@@ -84,7 +84,7 @@ public final class LanguageCodes {
     public static final String F_HTML_KEY = "CORE_SRX_RULES_FORMATTING_HTML";
 
     /** A Map from language codes to language keys. */
-    private static Map<String, String> codeKeyHash = new HashMap<String, String>();
+    private static Map<String, String> codeKeyHash = new HashMap<>();
 
     static {
         codeKeyHash.put(CATALAN_CODE, CATALAN_KEY);
@@ -119,5 +119,18 @@ public final class LanguageCodes {
         }
         String key = codeKeyHash.get(code);
         return OStrings.getString(key);
+    }
+
+    public static boolean isLanguageCodeKnown(String code) {
+        return codeKeyHash.containsKey(code);
+    }
+
+    public static String getLanguageCodeByName(String name) {
+        for (Map.Entry<String, String> entry: codeKeyHash.entrySet()) {
+            if (OStrings.getString(entry.getValue()).equals(name)) {
+                return entry.getKey();
+            }
+        }
+        return null;
     }
 }

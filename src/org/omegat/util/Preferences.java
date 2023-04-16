@@ -694,9 +694,9 @@ public final class Preferences {
         SRX oldValue = srx;
         srx = newSrx;
 
-        File srxFile = new File(StaticUtils.getConfigDir() + SRX.CONF_SENTSEG);
+        File srxDir = new File(StaticUtils.getConfigDir());
         try {
-            SRX.saveTo(srx, srxFile);
+            SRX.saveToSrx(srx, srxDir);	// save to segmentation.srx in the given directory
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -783,8 +783,8 @@ public final class Preferences {
         }
         didInitSegmentation = true;
 
-        File srxFile = new File(StaticUtils.getConfigDir(), SRX.CONF_SENTSEG);
-        SRX s = SRX.loadSRX(srxFile);
+        File srxDir = new File(StaticUtils.getConfigDir());
+        SRX s = SRX.loadFromDir(srxDir); // may read SRX or CONF
         if (s == null) {
             s = SRX.getDefault();
         }

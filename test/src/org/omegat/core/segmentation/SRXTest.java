@@ -32,22 +32,27 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertTrue;
 
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
 import org.junit.Test;
 import org.omegat.util.OStrings;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * @author Aaron Madlon-Kay
  */
 public class SRXTest {
 
-    private final File segmentDefault = new File("test/data/segmentation/default/");
-    private final File segmentConf = new File("test/data/segmentation/migrate/");
-    private final File segmentSrx = new File(segmentConf, "segmentation.srx");
+    private static final File segmentDefault = new File("test/data/segmentation/default/");
+    private static final String segmentConfBase = "test/data/segmentation/migrate/";
 
     @Test
     public void testSRXComparison() {
@@ -70,6 +75,12 @@ public class SRXTest {
 
     /**
      * Test SRX#loadFromDir produce SRX object properly.
+     * <p>
+     * MapRule#getLanguageCode should return Language Code
+     * defined in LanguageCode class.
+     * MapRule#getLanguage should return a localized name of language.
+     * The test here check both values.
+     * OmegaT 6.0 and before,
      */
     @Test
     public void testSrxReaderDefault() {
@@ -82,7 +93,7 @@ public class SRXTest {
         assertEquals(18, mapRuleList.size());
         for (MapRule mapRule : mapRuleList) {
             if (mapRule.getPattern().equals("JA.*")) {
-                assertEquals(LanguageCodes.JAPANESE_KEY, mapRule.getLanguageCode());
+                assertEquals(LanguageCodes.JAPANESE_CODE, mapRule.getLanguageCode());
                 assertEquals(OStrings.getString(LanguageCodes.JAPANESE_KEY), mapRule.getLanguage());
             }
         }
@@ -93,11 +104,29 @@ public class SRXTest {
     /**
      * Test SRX writer/reader.
      * <p>
-     * try read a segmentation.srx file that is produced by OmegaT when system locale is Japanese.
+     * Previous versions has a bug when saving segmentation.conf file.
+     * It is better to save language property using language code
+     * defined in LanguageCode class.
+     * Unfortunately OmegaT 6.0 and before produce a localized
+     * language name for the property.
+     * The test case here trys reading a segmentation.conf file
+     * that is produced by OmegaT in English environment
+     * and Japanese environment.
      */
     @Test
     public void testSrxMigration() throws IOException {
-        assertTrue(segmentConf.exists());
+        File segmentConf;
+        Path segmentSrxPath;
+        if (Locale.getDefault().getLanguage().equalsIgnoreCase("ja")) {
+            segmentConf = Paths.get(segmentConfBase, "locale_ja").toFile();
+            segmentSrxPath = Paths.get(segmentConfBase, "locale_ja", "segmentation.srx");
+        } else {
+            segmentConf = Paths.get(segmentConfBase, "locale_en").toFile();
+            segmentSrxPath = Paths.get(segmentConfBase, "locale_en", "segmentation.srx");
+        }
+        Files.deleteIfExists(segmentSrxPath);
+        //
+        File segmentSrx = segmentSrxPath.toFile();
         assertFalse(segmentSrx.exists());
         // load from conf file
         SRX srxOrig = SRX.loadFromDir(segmentConf);
@@ -114,13 +143,24 @@ public class SRXTest {
         assertEquals(18, mapRuleList.size());
         for (MapRule mapRule: mapRuleList) {
             if (mapRule.getPattern().equals("JA.*")) {
-                assertEquals(LanguageCodes.JAPANESE_KEY, mapRule.getLanguageCode());
+                assertEquals(LanguageCodes.JAPANESE_CODE, mapRule.getLanguageCode());
                 assertEquals(OStrings.getString(LanguageCodes.JAPANESE_KEY), mapRule.getLanguage());
             }
         }
         assertEquals("2.0", srx1.getVersion());
         assertTrue(srx1.isCascade());
         assertTrue(srx1.isSegmentSubflows());
-        Files.deleteIfExists(segmentSrx.toPath());
+        Files.deleteIfExists(segmentSrxPath);
+    }
+
+    @AfterClass
+    public static void tearDownClass() throws IOException {
+        Path segmentSrxPath;
+        if (Locale.getDefault().getLanguage().equalsIgnoreCase("ja")) {
+            segmentSrxPath = Paths.get(segmentConfBase, "locale_ja", "segmentation.srx");
+        } else {
+            segmentSrxPath = Paths.get(segmentConfBase, "locale_en", "segmentation.srx");
+        }
+        Files.deleteIfExists(segmentSrxPath);
     }
 }

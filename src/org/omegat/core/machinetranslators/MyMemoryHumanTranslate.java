@@ -29,6 +29,8 @@
 
 package org.omegat.core.machinetranslators;
 
+import java.io.IOException;
+
 import com.fasterxml.jackson.databind.JsonNode;
 
 import org.omegat.util.Language;
@@ -43,6 +45,13 @@ import org.omegat.util.Preferences;
  * @author Hiroshi Miura
  */
 public final class MyMemoryHumanTranslate extends AbstractMyMemoryTranslate {
+
+    public MyMemoryHumanTranslate(final String url) {
+        super(url);
+    }
+
+    public MyMemoryHumanTranslate() {
+    }
 
     @Override
     protected String getPreferenceName() {
@@ -68,13 +77,20 @@ public final class MyMemoryHumanTranslate extends AbstractMyMemoryTranslate {
         }
 
         JsonNode jsonResponse;
+        try {
+            // Get MyMemory response in JSON format
+            jsonResponse = getMyMemoryResponse(sLang, tLang, text);
 
-        // Get MyMemory response in JSON format
-        jsonResponse = getMyMemoryResponse(sLang, tLang, text);
-
-        // responseData/translatedText contains the best match.
-        String translation = jsonResponse.get("responseData").get("translatedText").asText();
-        putToCache(sLang, tLang, text, translation);
-        return translation;
+            // responseData/translatedText contains the best match.
+            JsonNode responseData = jsonResponse.get("responseData");
+            if (responseData != null) {
+                String translation = responseData.get("translatedText").asText();
+                putToCache(sLang, tLang, text, translation);
+                return translation;
+            }
+        } catch (IOException e) {
+            throw new MachineTranslateError("MT_ENGINE_MYMEMORY_ERROR", e);
+        }
+        throw new MachineTranslateError("MT_ENGINE_MYMEMORY_ERROR");
     }
 }

@@ -62,8 +62,25 @@ import org.omegat.util.Preferences;
 public class Google2Translate extends BaseCachedTranslate {
     protected static final String PROPERTY_PREMIUM_KEY = "google.api.premium";
     protected static final String PROPERTY_API_KEY = "google.api.key";
-    protected static final String GT_URL = "https://translation.googleapis.com/language/translate/v2";
+    protected static final String GT_DEFAULT_URL = "https://translation.googleapis.com";
+    protected static final String GT_PATH = "/language/translate/v2";
+    private String googleTranslateUrl;
+    private String temporaryKey;
     private static final int MAX_TEXT_LENGTH = 5000;
+
+    public Google2Translate() {
+        googleTranslateUrl = GT_DEFAULT_URL + GT_PATH;
+    }
+
+    /**
+     * Constructor for test.
+     * @param baseUrl custom url.
+     * @param key temprary key.
+     */
+    public Google2Translate(String baseUrl, String key) {
+        googleTranslateUrl = baseUrl + GT_PATH;
+        temporaryKey = key;
+    }
 
     /**
      * Return GOOGLE2 preference constant.
@@ -117,9 +134,11 @@ public class Google2Translate extends BaseCachedTranslate {
         }
 
         String googleKey = getCredential(PROPERTY_API_KEY);
-
         if (googleKey == null || googleKey.isEmpty()) {
-            throw new MachineTranslateError(OStrings.getString("GOOGLE_API_KEY_NOTFOUND"));
+            if (temporaryKey == null) {
+                throw new MachineTranslateError(OStrings.getString("GOOGLE_API_KEY_NOTFOUND"));
+            }
+            googleKey = temporaryKey;
         }
 
         Map<String, String> params = new TreeMap<String, String>();
@@ -141,7 +160,7 @@ public class Google2Translate extends BaseCachedTranslate {
         Map<String, String> headers = new TreeMap<String, String>();
         headers.put("X-HTTP-Method-Override", "GET");
 
-        String v = HttpConnectionUtils.post(GT_URL, params, headers);
+        String v = HttpConnectionUtils.post(googleTranslateUrl, params, headers);
         String tr = getJsonResults(v);
         if (tr == null) {
             return null;
@@ -159,7 +178,6 @@ public class Google2Translate extends BaseCachedTranslate {
      *            response string.
      * @return translation text.
      */
-    @SuppressWarnings("unchecked")
     protected String getJsonResults(String json) throws MachineTranslateError {
         ObjectMapper mapper = new ObjectMapper();
         try {
@@ -172,7 +190,8 @@ public class Google2Translate extends BaseCachedTranslate {
             Log.logErrorRB(e, "MT_JSON_ERROR");
             throw new MachineTranslateError(OStrings.getString("MT_JSON_ERROR"));
         }
-        return null;
+        Log.logErrorRB( "MT_JSON_ERROR");
+        throw new MachineTranslateError(OStrings.getString("MT_JSON_ERROR"));
     }
 
     /**

@@ -118,11 +118,11 @@ public class SRX implements Serializable {
         jaxbObject.getBody().setLanguagerules(factory.createLanguagerules());
         for (MapRule mr : srx.getMappingRules()) {
             Languagemap map = new Languagemap();
-            map.setLanguagerulename(mr.getLanguageCode());
+            map.setLanguagerulename(mr.getLanguage());
             map.setLanguagepattern(mr.getPattern());
             jaxbObject.getBody().getMaprules().getLanguagemap().add(map);
             Languagerule lr = new Languagerule();
-            lr.setLanguagerulename(mr.getLanguageCode());
+            lr.setLanguagerulename(mr.getLanguage());
             jaxbObject.getBody().getLanguagerules().getLanguagerule().add(lr);
             for (Rule rule : mr.getRules()) {
                 gen.core.segmentation.Rule jaxbRule = factory.createRule();
@@ -273,14 +273,14 @@ public class SRX implements Serializable {
         int defaultMapRulesN = defaults.getMappingRules().size();
         for (int i = 0; i < defaultMapRulesN; i++) {
             MapRule dmaprule = defaults.getMappingRules().get(i);
-            String dcode = dmaprule.getLanguageCode();
+            String dcode = dmaprule.getLanguage();
             // trying to find
             boolean found = false;
             int currentMapRulesN = merged.getMappingRules().size();
             MapRule cmaprule = null;
             for (int j = 0; j < currentMapRulesN; j++) {
                 cmaprule = merged.getMappingRules().get(j);
-                String ccode = cmaprule.getLanguageCode();
+                String ccode = cmaprule.getLanguage();
                 if (dcode.equals(ccode)) {
                     found = true;
                     break;
@@ -336,8 +336,8 @@ public class SRX implements Serializable {
             String def = "Default (English)";
             for (int i = 0; i < current.getMappingRules().size(); i++) {
                 MapRule maprule = current.getMappingRules().get(i);
-                if (def.equals(maprule.getLanguageCode())) {
-                    maprule.setLanguageCode(LanguageCodes.DEFAULT_CODE);
+                if (def.equals(maprule.getLanguage())) {
+                    maprule.setLanguage(LanguageCodes.DEFAULT_CODE);
                     maprule.getRules().removeAll(getRulesForLanguage(defaults, LanguageCodes.ENGLISH_CODE));
                     maprule.getRules().removeAll(getRulesForLanguage(defaults, LanguageCodes.F_TEXT_CODE));
                     maprule.getRules().removeAll(getRulesForLanguage(defaults, LanguageCodes.F_HTML_CODE));
@@ -358,7 +358,7 @@ public class SRX implements Serializable {
      */
     private static List<Rule> getRulesForLanguage(final SRX source, String langName) {
         for (MapRule mr : source.getMappingRules()) {
-            if (langName.equals(mr.getLanguageCode())) {
+            if (langName.equals(mr.getLanguage())) {
                 return mr.getRules();
             }
         }

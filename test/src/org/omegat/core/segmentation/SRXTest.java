@@ -32,9 +32,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertTrue;
 
-import org.junit.After;
 import org.junit.AfterClass;
-import org.junit.Before;
 import org.junit.Test;
 import org.omegat.util.OStrings;
 
@@ -93,7 +91,7 @@ public class SRXTest {
         assertEquals(18, mapRuleList.size());
         for (MapRule mapRule : mapRuleList) {
             if (mapRule.getPattern().equals("JA.*")) {
-                assertEquals(LanguageCodes.JAPANESE_CODE, mapRule.getLanguageCode());
+                assertEquals(LanguageCodes.JAPANESE_CODE, mapRule.getLanguage());
                 assertEquals(OStrings.getString(LanguageCodes.JAPANESE_KEY), mapRule.getLanguageName());
             }
         }
@@ -143,14 +141,13 @@ public class SRXTest {
         assertEquals(18, mapRuleList.size());
         for (MapRule mapRule: mapRuleList) {
             if (mapRule.getPattern().equals("JA.*")) {
-                assertEquals(LanguageCodes.JAPANESE_CODE, mapRule.getLanguageCode());
+                assertEquals(LanguageCodes.JAPANESE_CODE, mapRule.getLanguage());
                 assertEquals(OStrings.getString(LanguageCodes.JAPANESE_KEY), mapRule.getLanguageName());
             }
         }
         assertEquals("2.0", srx1.getVersion());
         assertTrue(srx1.isCascade());
         assertTrue(srx1.isSegmentSubflows());
-        Files.deleteIfExists(segmentSrxPath);
     }
 
     @AfterClass

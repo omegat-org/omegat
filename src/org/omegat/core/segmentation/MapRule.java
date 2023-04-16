@@ -28,7 +28,6 @@ package org.omegat.core.segmentation;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
@@ -52,7 +51,7 @@ public class MapRule implements Serializable {
 
     /** creates an initialized MapRule */
     public MapRule(String language, String pattern, List<Rule> rules) {
-        this.setLanguageCode(language);
+        this.setLanguage(language);
         this.setPattern(pattern);
         this.setRules(rules);
     }
@@ -61,7 +60,7 @@ public class MapRule implements Serializable {
     private String languageCode;
 
     public MapRule(Languagemap languagemap, List<Rule> rules) {
-        this.setLanguageCode(languagemap.getLanguagerulename());
+        this.setLanguage(languagemap.getLanguagerulename());
         this.setPattern(languagemap.getLanguagepattern());
         this.setRules(rules);
     }
@@ -73,7 +72,7 @@ public class MapRule implements Serializable {
     }
 
     /** Sets Language Code */
-    public void setLanguageCode(String code) {
+    public void setLanguage(String code) {
         if (!LanguageCodes.isLanguageCodeKnown(code)) {
             String alt = LanguageCodes.getLanguageCodeByName(code);
             if (alt != null) {
@@ -87,7 +86,7 @@ public class MapRule implements Serializable {
     }
 
     /** Returns Language Code for programmatic usage. */
-    public String getLanguageCode() {
+    public String getLanguage() {
         return languageCode;
     }
 
@@ -150,17 +149,17 @@ public class MapRule implements Serializable {
         }
         MapRule that = (MapRule) obj;
         return this.getPattern().equals(that.getPattern())
-                && this.getLanguageCode().equals(that.getLanguageCode())
+                && this.getLanguage().equals(that.getLanguage())
                 && this.getRules().equals(that.getRules());
     }
 
     /** Returns a hash code value for the object. */
     public int hashCode() {
-        return this.getPattern().hashCode() + this.getLanguageCode().hashCode() + this.getRules().hashCode();
+        return this.getPattern().hashCode() + this.getLanguage().hashCode() + this.getRules().hashCode();
     }
 
     /** Returns a string representation of the MapRule for debugging purposes. */
     public String toString() {
-        return getLanguageCode() + " (" + getPattern() + ") " + getRules().toString();
+        return getLanguage() + " (" + getPattern() + ") " + getRules().toString();
     }
 }

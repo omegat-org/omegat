@@ -58,7 +58,7 @@ public class MappingRulesModel extends AbstractTableModel {
         MapRule maprule = srx.getMappingRules().get(rowIndex);
         switch (columnIndex) {
         case 0:
-            return maprule.getLanguageCode();
+            return maprule.getLanguage();
         case 1:
             return maprule.getPattern();
         }
@@ -93,9 +93,9 @@ public class MappingRulesModel extends AbstractTableModel {
             String target = (String) aValue;
             String code = LanguageCodes.getLanguageCodeByName(target);
             if (code != null) {
-                maprule.setLanguageCode(code);
+                maprule.setLanguage(code);
             } else {
-                maprule.setLanguageCode(target);
+                maprule.setLanguage(target);
             }
             break;
         case 1:

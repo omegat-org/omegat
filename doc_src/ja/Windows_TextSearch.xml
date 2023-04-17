@@ -209,21 +209,21 @@
 		  
 		  <variablelist>
 			<varlistentry>
-			  <term>内部メモリ</term>
+			  <term>メインメモリ</term>
 			  <listitem>
 				<para>プロジェクトの内部メモリ(<link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/>)を含めます。</para>
 			  </listitem>
 			</varlistentry>
 
 			<varlistentry>
-			  <term>翻訳メモリ</term>
+			  <term>参照TM</term>
 			  <listitem>
 				<para><link linkend="project.folder.tm" endterm="project.folder.tm.title"/>フォルダーにある翻訳メモリを含めます。</para>
 			  </listitem>
 			</varlistentry>
 
 			<varlistentry>
-			  <term>用語集</term>
+			  <term>用語集 ファイル</term>
 			  <listitem>
 				<para><link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/>フォルダーにある用語集を含めます。</para>
 			  </listitem>
@@ -244,9 +244,13 @@
 	  </varlistentry>
 
 	  <varlistentry>
-		<term><guibutton>詳細設定を表示する</guibutton></term>
+		<term><guibutton>参考訳文の設定</guibutton></term>
 		<listitem>
 		  <para>翻訳を作成または変更したユーザー、翻訳(変更)の日時、現在の原文に存在しない分節を除外するかどうかなどの追加の検索条件を選択します。</para>
+
+		  <warning>
+			<para>参考訳文の設定は、メインメモリのみに適用され、参照用の翻訳メモリには適用されません。</para>
+		  </warning>
 
 		  <variablelist>
 			<varlistentry>

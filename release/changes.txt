@@ -1,18 +1,54 @@
 ----------------------------------------------------------------------
  OmegaT 6.1.0
 ----------------------------------------------------------------------
-  0 Enhancement
-  1 Bug fixes
-  0 Localisation updates
+  7 Enhancement
+  5 Bug fixes
+  1 Localisation updates
 ----------------------------------------------------------------------
 6.1.0 vs 6.0.0
 
   Implemented requests:
 
+  - Add nashorn javascript engine[Java 17 compatibility]
+  https://sourceforge.net/p/omegat/feature-requests/1525/
+
+  - Use Jackson library as XML parser
+  https://sourceforge.net/p/omegat/feature-requests/1582/
+
+  - Improve TBX parsing
+  https://sourceforge.net/p/omegat/feature-requests/1268/
+
+  - Support SRX format
+
+  - Build System: update gradle verison to 7.5.1
+  https://sourceforge.net/p/omegat/feature-requests/1691/
+
+  - Upgrade to LanguageTool 3.6
+  https://sourceforge.net/p/omegat/feature-requests/1299/
+
+  - Team feature: SSH support id_ecdsa and id_ed25519 for default key
+  https://sourceforge.net/p/omegat/feature-requests/1598/
+
   Bug fixes:
 
+  - SRX conf file is produced with localized name of language
+  https://sourceforge.net/p/omegat/bugs/1160/
+
   - Backup file does not created in no-team project
-    * https://sourceforge.net/p/omegat/bugs/1159/
+  https://sourceforge.net/p/omegat/bugs/1159/
+
+  - Fixed "null" file names in search results when "Display: file names" checkbox was unchecked
+  https://sourceforge.net/p/omegat/bugs/1154/
+
+  - MT engines show JSON parser error as translated text
+  https://sourceforge.net/p/omegat/bugs/1141
+
+  - OpenSSH new key format and ECDSA/ED25519 keys
+  https://sourceforge.net/p/omegat/bugs/1107/
+
+Localization Updates:
+
+  - Japanese localization updated to 6.0 (UI, documentation)
 
 ----------------------------------------------------------------------
  OmegaT 6.0.0

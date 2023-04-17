@@ -741,6 +741,10 @@ pre {
     margin: 1.1em 0;
 }
 
+strong.userinput {    
+    font-style: italic;    
+}
+
 
 /**********************/
 /* List bullets, etc. */

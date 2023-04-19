@@ -1,5 +1,5 @@
-import org.apache.tools.ant.filters.ReplaceTokens
 import org.apache.tools.ant.filters.FixCrLfFilter
+import org.apache.tools.ant.filters.ReplaceTokens
 
 plugins {
     id 'application'
@@ -46,6 +46,46 @@ java {
     }
     withSourcesJar()
     withJavadocJar()
+}
+
+allprojects {
+    javadoc {
+        failOnError = false
+        (options as StandardJavadocDocletOptions).addBooleanOption("Xdoclint:none", true)
+        (options as StandardJavadocDocletOptions).addStringOption("Xmaxwarns", "1")
+    }
+    tasks.withType(JavaCompile) {
+        options.compilerArgs.addAll '-Xlint', '-Werror'
+    }
+}
+
+sourcesJar {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
+spotbugs {
+    reportLevel = 'high'
+}
+
+tasks.findAll { it.name =~ /^spotbugs.*/ }.each {
+    it.reports {
+        xml.enabled = envIsCi
+        html.enabled = !envIsCi
+    }
+}
+
+checkstyle {
+    toolVersion = '8.45.1'
+}
+checkstyleMain.exclude '**/gen/**'
+
+spotless {
+    enforceCheck false
+    java {
+        targetExclude 'src/gen/**'
+        eclipse().configFile 'docs_devel/docs/assets/eclipse-formatting.xml'
+        removeUnusedImports()
+    }
 }
 
 sourceSets {
@@ -193,12 +233,12 @@ dependencies {
         implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.13.4"
         implementation 'com.fasterxml.jackson.module:jackson-module-jaxb-annotations:2.14.0'
 
-
         implementation("com.github.ben-manes.caffeine:caffeine:2.9.3") {
             attributes {
                 attribute(Bundling.BUNDLING_ATTRIBUTE, project.objects.named(Bundling.class, Bundling.EXTERNAL))
             }
         }
+
         implementation("com.github.ben-manes.caffeine:jcache:2.9.3") {
             exclude module: 'caffeine'
             attributes {
@@ -855,46 +895,6 @@ task genMac {
                            role: 'none')
             plistentry(key: 'JVMRuntime', value: 'jre.bundle')
         }
-    }
-}
-
-allprojects {
-    javadoc {
-        failOnError = false
-        (options as StandardJavadocDocletOptions).addBooleanOption("Xdoclint:none", true)
-        (options as StandardJavadocDocletOptions).addStringOption("Xmaxwarns", "1")
-    }
-    tasks.withType(JavaCompile) {
-       options.compilerArgs.addAll '-Xlint', '-Werror'
-    }
-}
-
-sourcesJar {
-    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-}
-
-spotbugs {
-    reportLevel = 'high'
-}
-
-tasks.findAll { it.name =~ /^spotbugs.*/ }.each {
-    it.reports {
-        xml.enabled = envIsCi
-        html.enabled = !envIsCi
-    }
-}
-
-checkstyle {
-    toolVersion = '8.45.1'
-}
-checkstyleMain.exclude '**/gen/**'
-
-spotless {
-    enforceCheck false
-    java {
-        targetExclude 'src/gen/**'
-        eclipse().configFile 'docs_devel/docs/assets/eclipse-formatting.xml'
-        removeUnusedImports()
     }
 }
 

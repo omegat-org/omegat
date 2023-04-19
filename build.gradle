@@ -22,11 +22,9 @@ applicationName = 'OmegaT'
 mainClassName = 'org.omegat.Main'
 
 ext {
-    javaVersion = '11'
     omtVersion = loadProperties(file('src/org/omegat/Version.properties'))
     omtFlavor = omtVersion.beta.empty ? 'standard' : 'latest'
     omtWebsite = 'https://omegat.org'
-    envIsCi = project.hasProperty('envIsCi')
     localPropsFile = file('local.properties')
     if (localPropsFile.file) {
         loadProperties(localPropsFile).each { k, v ->
@@ -40,51 +38,63 @@ ext {
 version = omtVersion.version + getUpdateSuffix(omtVersion.update)
 
 java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(javaVersion)
-        vendor = JvmVendorSpec.ADOPTIUM
-    }
     withSourcesJar()
     withJavadocJar()
 }
 
 allprojects {
+    def javaVersion = 11;
+    def envIsCi = project.hasProperty('envIsCi') as Boolean
+
+    apply plugin: 'checkstyle'
+    apply plugin: 'java-library'
+    apply plugin: 'eclipse'
+    apply plugin: 'com.github.spotbugs'
+    apply plugin: 'com.diffplug.spotless'
+
+    java {
+        toolchain {
+            languageVersion = JavaLanguageVersion.of(javaVersion)
+            vendor = JvmVendorSpec.ADOPTIUM
+        }
+    }
+
     javadoc {
         failOnError = false
         (options as StandardJavadocDocletOptions).addBooleanOption("Xdoclint:none", true)
         (options as StandardJavadocDocletOptions).addStringOption("Xmaxwarns", "1")
     }
     tasks.withType(JavaCompile) {
-        options.compilerArgs.addAll '-Xlint', '-Werror'
+       options.compilerArgs.addAll '-Xlint', '-Werror'
     }
-}
 
-sourcesJar {
-    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-}
-
-spotbugs {
-    reportLevel = 'high'
-}
-
-tasks.findAll { it.name =~ /^spotbugs.*/ }.each {
-    it.reports {
-        xml.enabled = envIsCi
-        html.enabled = !envIsCi
+    sourcesJar {
+        duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     }
-}
 
-checkstyle {
-    toolVersion = '8.45.1'
-}
-checkstyleMain.exclude '**/gen/**'
+    spotbugs {
+        reportLevel = 'high'
+    }
 
-spotless {
-    enforceCheck false
-    java {
-        targetExclude 'src/gen/**'
-        eclipse().configFile 'docs_devel/docs/assets/eclipse-formatting.xml'
-        removeUnusedImports()
+    tasks.findAll { it.name =~ /^spotbugs.*/ }.each {
+        it.reports {
+            xml.required = envIsCi
+            html.required = !envIsCi
+        }
+    }
+
+    checkstyle {
+        toolVersion = '8.45.1'
+    }
+    checkstyleMain.exclude '**/gen/**'
+
+    spotless {
+        enforceCheck false
+        java {
+            targetExclude 'src/gen/**'
+            eclipse().configFile 'docs_devel/docs/assets/eclipse-formatting.xml'
+            removeUnusedImports()
+        }
     }
 }
 

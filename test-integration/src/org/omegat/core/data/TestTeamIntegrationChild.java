@@ -548,6 +548,11 @@ public final class TestTeamIntegrationChild {
                 return null;
             }
 
+            @Override
+            public JMenu getHelpMenu() {
+                return null;
+            }
+
             public void invokeAction(String action, int modifiers) {
             }
         };

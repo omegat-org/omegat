@@ -1,6 +1,14 @@
 site_name: OmegaT developer Documentaion
 markdown_extensions:
   - tables
+  - def_list
+  - footnotes
+  - pymdownx.mark
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.superfences
+
 theme:
   name: material
   features:

@@ -1,5 +1,5 @@
-import org.apache.tools.ant.filters.ReplaceTokens
 import org.apache.tools.ant.filters.FixCrLfFilter
+import org.apache.tools.ant.filters.ReplaceTokens
 
 plugins {
     id 'application'
@@ -22,11 +22,9 @@ applicationName = 'OmegaT'
 mainClassName = 'org.omegat.Main'
 
 ext {
-    javaVersion = '11'
     omtVersion = loadProperties(file('src/org/omegat/Version.properties'))
     omtFlavor = omtVersion.beta.empty ? 'standard' : 'latest'
     omtWebsite = 'https://omegat.org'
-    envIsCi = project.hasProperty('envIsCi')
     localPropsFile = file('local.properties')
     if (localPropsFile.file) {
         loadProperties(localPropsFile).each { k, v ->
@@ -40,12 +38,64 @@ ext {
 version = omtVersion.version + getUpdateSuffix(omtVersion.update)
 
 java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(javaVersion)
-        vendor = JvmVendorSpec.ADOPTIUM
-    }
     withSourcesJar()
     withJavadocJar()
+}
+
+allprojects {
+    def javaVersion = 11;
+    def envIsCi = project.hasProperty('envIsCi') as Boolean
+
+    apply plugin: 'checkstyle'
+    apply plugin: 'java-library'
+    apply plugin: 'eclipse'
+    apply plugin: 'com.github.spotbugs'
+    apply plugin: 'com.diffplug.spotless'
+
+    java {
+        toolchain {
+            languageVersion = JavaLanguageVersion.of(javaVersion)
+            vendor = JvmVendorSpec.ADOPTIUM
+        }
+    }
+
+    javadoc {
+        failOnError = false
+        (options as StandardJavadocDocletOptions).addBooleanOption("Xdoclint:none", true)
+        (options as StandardJavadocDocletOptions).addStringOption("Xmaxwarns", "1")
+    }
+    tasks.withType(JavaCompile) {
+       options.compilerArgs.addAll '-Xlint', '-Werror'
+    }
+
+    sourcesJar {
+        duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    }
+
+    spotbugs {
+        reportLevel = 'high'
+    }
+
+    tasks.findAll { it.name =~ /^spotbugs.*/ }.each {
+        it.reports {
+            xml.required = envIsCi
+            html.required = !envIsCi
+        }
+    }
+
+    checkstyle {
+        toolVersion = '8.45.1'
+    }
+    checkstyleMain.exclude '**/gen/**'
+
+    spotless {
+        enforceCheck false
+        java {
+            targetExclude 'src/gen/**'
+            eclipse().configFile 'docs_devel/docs/assets/eclipse-formatting.xml'
+            removeUnusedImports()
+        }
+    }
 }
 
 sourceSets {
@@ -193,12 +243,12 @@ dependencies {
         implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.13.4"
         implementation 'com.fasterxml.jackson.module:jackson-module-jaxb-annotations:2.14.0'
 
-
         implementation("com.github.ben-manes.caffeine:caffeine:2.9.3") {
             attributes {
                 attribute(Bundling.BUNDLING_ATTRIBUTE, project.objects.named(Bundling.class, Bundling.EXTERNAL))
             }
         }
+
         implementation("com.github.ben-manes.caffeine:jcache:2.9.3") {
             exclude module: 'caffeine'
             attributes {
@@ -206,6 +256,9 @@ dependencies {
             }
         }
 
+        // dependencies in submodules, you should put it as compileOnly in subprojects
+        runtimeOnly "tokyo.northside:tipoftheday:0.4.0"
+        runtimeOnly "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.13.4"
     }
 
     // Test dependencies
@@ -380,6 +433,13 @@ distributions {
             from('lib/licenses') {
                 into 'lib'
             }
+            // system core plugins into modules
+            from('releases/modules-specific') {
+                into 'modules'
+            }
+            from(subprojects.collect {it.tasks.withType(Jar)}) {
+                into 'modules'
+            }
             eachFile {
                 // Move main JAR up one level from lib.
                 if (it.name == jar.archiveName) {
@@ -395,11 +455,18 @@ distributions {
             from(rootDir) {
                 include 'config/**', 'docs/**', 'images/**', 'lib/**', 'release/**',
                     'src/**', 'test/**', 'doc_src/**', 'docs_devel/**', 'scripts/**',
-                    'gradle/**', 'gradlew*', '*.gradle', 'README.md', '*.properties'
+                    'gradle/**', 'gradlew*', '*.gradle', 'README.md', '*.properties',
+                    'tipoftheday/**'
                 exclude '**/build/**', 'doc_src/**/pdf/**', 'local.properties'
             }
             into('lib/provided') {
                 from configurations.runtimeClasspath
+            }
+            into('lib/provided') {
+                // collect subproject runtime dependencies
+                from  {subprojects.findAll { it.getSubprojects().isEmpty()}.
+                        collect { it.configurations.runtimeClasspath }
+                }
             }
         }
         sourceDistZip.archiveFileName = "${applicationName}_${version}${omtVersion.beta}_Source.zip"
@@ -845,46 +912,6 @@ task genMac {
     }
 }
 
-allprojects {
-    javadoc {
-        failOnError = false
-        (options as StandardJavadocDocletOptions).addBooleanOption("Xdoclint:none", true)
-        (options as StandardJavadocDocletOptions).addStringOption("Xmaxwarns", "1")
-    }
-    tasks.withType(JavaCompile) {
-       options.compilerArgs.addAll '-Xlint', '-Werror'
-    }
-}
-
-sourcesJar {
-    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-}
-
-spotbugs {
-    reportLevel = 'high'
-}
-
-tasks.findAll { it.name =~ /^spotbugs.*/ }.each {
-    it.reports {
-        xml.enabled = envIsCi
-        html.enabled = !envIsCi
-    }
-}
-
-checkstyle {
-    toolVersion = '8.45.1'
-}
-checkstyleMain.exclude '**/gen/**'
-
-spotless {
-    enforceCheck false
-    java {
-        targetExclude 'src/gen/**'
-        eclipse().configFile 'docs_devel/docs/assets/eclipse-formatting.xml'
-        removeUnusedImports()
-    }
-}
-
 task changedOnBranch {
     description = 'List files that have been modified on this git branch.'
     group = 'omegat workflow'
@@ -1204,6 +1231,10 @@ mkdocs {
     sourcesDir = 'docs_devel'
 }
 
-// Allow setting the max heap size for the run task from the command line, e.g.
-// `gradle -PrunMaxHeapSize=1024M run`
-run.maxHeapSize = findProperty('runMaxHeapSize')
+tasks.withType(JavaExec).configureEach {
+    // Allow setting the max heap size for the run task from the command line, e.g.
+    // `gradle -PrunMaxHeapSize=1024M run`
+    maxHeapSize = findProperty('runMaxHeapSize')
+    // Ask modules to be up-to-date before run task executed
+    dependsOn subprojects.tasks.jar
+}

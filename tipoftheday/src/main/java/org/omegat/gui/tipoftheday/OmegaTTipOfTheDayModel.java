@@ -25,18 +25,11 @@
 
 package org.omegat.gui.tipoftheday;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
@@ -46,13 +39,11 @@ import tokyo.northside.swing.tips.Tip;
 import tokyo.northside.swing.tips.TipOfTheDayModel;
 
 import org.omegat.util.Log;
-import org.omegat.util.StaticUtils;
 
 public class OmegaTTipOfTheDayModel implements TipOfTheDayModel {
 
-    private final String indexYaml = "tips.yaml";
     private final List<Tip> tips;
-    private ObjectMapper mapper;
+    private final ObjectMapper mapper;
 
     public OmegaTTipOfTheDayModel() {
         tips = new ArrayList<>();
@@ -72,18 +63,23 @@ public class OmegaTTipOfTheDayModel implements TipOfTheDayModel {
     }
 
     private void initTips() {
-        try (InputStream is = getIndexStream(indexYaml)) {
+        try (InputStream is = TipOfTheDayUtils.getIndexStream(TipOfTheDayController.INDEX_YAML)) {
+            if (is == null) {
+                return;
+            }
             Records data = mapper.readValue(is, Records.class);
             if (data != null) {
-                data.tips.stream().forEach(tip -> addIfExist(tip.name, tip.file));
+                data.tips.forEach(this::addIfExist);
             }
         } catch (IOException e) {
             Log.log(e);
         }
     }
 
-    private void addIfExist(String title, String filename) {
-        URI uri = getTipsFileURI(filename);
+    private void addIfExist(TipRecord tip) {
+        String title = tip.name;
+        String filename = tip.file;
+        URI uri = TipOfTheDayUtils.getTipsFileURI(filename);
         if (uri == null) {
             Log.logWarningRB("TIPOFTHEDAY_FILE_NOT_FOUND", filename);
             return;
@@ -93,50 +89,6 @@ public class OmegaTTipOfTheDayModel implements TipOfTheDayModel {
         } catch (IOException e) {
             Log.logWarningRB("TIPOFTHEDAY_FILE_LOAD_EXCEPTION", e);
         }
-    }
-
-    private static URI getTipsFileURI(String filename) {
-        return getTipsFileURI(filename, getLocale());
-    }
-
-    private static String getLocale() {
-        // Get the system locale (language and country)
-        String language = Locale.getDefault().getLanguage().toLowerCase(Locale.ENGLISH);
-        String country = Locale.getDefault().getCountry().toUpperCase(Locale.ENGLISH);
-        String lang;
-        if (language.equals("zh") || country.equals("BR")) {
-            lang = language + "_" + country;
-        } else {
-            lang = language;
-        }
-        return lang;
-    }
-
-    private static URI getTipsFileURI(String filename, String lang) {
-        String installDir = StaticUtils.installDir();
-        File file = Paths.get(installDir, "docs", "tips", lang, filename).toFile();
-        if (file.isFile()) {
-            return file.toURI();
-        }
-        // find in classpath
-        URL url = OmegaTTipOfTheDayModel.class.getResource("/tips/" + lang + '/' + filename);
-        if (url != null) {
-            try {
-                return url.toURI();
-            } catch (URISyntaxException ignored) {
-            }
-        }
-        return null;
-    }
-
-    private static InputStream getIndexStream(String filename) throws IOException {
-        String lang = getLocale();
-        String installDir = StaticUtils.installDir();
-        Path path = Paths.get(installDir, "docs", "tips", lang, filename);
-        if (path.toFile().isFile()) {
-            return Files.newInputStream(path);
-        }
-        return OmegaTTipOfTheDayModel.class.getResourceAsStream("/tips/" + lang + '/' + filename);
     }
 
     public static class Records {

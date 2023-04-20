@@ -45,6 +45,7 @@ import org.omegat.util.Preferences;
 
 public final class TipOfTheDayController {
 
+    static final String INDEX_YAML = "tips.yaml";
     private static final String TIPOFTHEDAY_SHOW_ON_STARTUP = "tipoftheday_show_on_startup";
     private static final String TIPOFTHEDAY_CURRENT_TIP = "tipoftheday_current_tip";
 
@@ -52,11 +53,24 @@ public final class TipOfTheDayController {
         CoreEvents.registerApplicationEventListener(new IApplicationEventListener() {
             @Override
             public void onApplicationStartup() {
+                if (TipOfTheDayUtils.hasIndex()) {
+                    initUI();
+                    initMenu();
+                    SwingUtilities.invokeLater(() -> {
+                        TipOfTheDayController.start(false);
+                    });
+                }
+            }
+
+            private void initUI() {
                 ResourceBundle bundle = ResourceBundle.getBundle("org.omegat.gui.resources.TipOfTheDay");
                 for (Enumeration<String> keys = bundle.getKeys(); keys.hasMoreElements();) {
                     String key = keys.nextElement();
                     UIManager.getDefaults().put(key, bundle.getObject(key));
                 }
+            }
+
+            private void initMenu() {
                 JMenuItem totdMenu = new JMenuItem();
                 totdMenu.setText(UIManager.getDefaults().getString("TipOfTheDay.menuItemText"));
                 totdMenu.setToolTipText(UIManager.getDefaults().getString("TipOfTheDay.menuToolTipText"));
@@ -64,9 +78,6 @@ public final class TipOfTheDayController {
                 totdMenu.addActionListener(actionEvent -> TipOfTheDayController.start(true));
                 JMenu helpMenu = Core.getMainWindow().getMainMenu().getHelpMenu();
                 helpMenu.insert(totdMenu, 3);
-                SwingUtilities.invokeLater(() -> {
-                    TipOfTheDayController.start(false);
-                });
             }
 
             @Override

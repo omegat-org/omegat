@@ -37,11 +37,13 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PushbackInputStream;
+import java.lang.reflect.Field;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Predicate;
@@ -591,5 +593,22 @@ public final class StaticUtils {
     /** Convert bytes into Megabytes */
     public static int getMB(long bytes) {
         return (int)(bytes >> 20);
+    }
+
+    /**
+     * Get fields declared in the class and its super classes.
+     * {@see https://stackoverflow.com/questions/1667854/copy-all-values-from-fields-in-one-class-to-another-through-reflection/35103361#35103361}
+     * 
+     * @param aClass
+     *            target model class.
+     * @return list of fields.
+     */
+    public static List<Field> getAllModelFields(Class<?> aClass) {
+        List<Field> fields = new ArrayList<>();
+        do {
+            Collections.addAll(fields, aClass.getDeclaredFields());
+            aClass = aClass.getSuperclass();
+        } while (aClass != null);
+        return fields;
     }
 } // StaticUtils

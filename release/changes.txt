@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 6.1.0
 ----------------------------------------------------------------------
-  14 Enhancement
+  15 Enhancement
   21 Bug fixes
 ----------------------------------------------------------------------
 6.1.0 vs 6.0.0
@@ -22,6 +22,9 @@
 
   - Generate JSON format stastics file when save
   https://sourceforge.net/p/omegat/feature-requests/1695/
+
+  - Generate and compile TXT and JSON file when committing target files
+  https://sourceforge.net/p/omegat/feature-requests/1690/
 
   - Build System: update gradle verison to 7.5.1
   https://sourceforge.net/p/omegat/feature-requests/1691/

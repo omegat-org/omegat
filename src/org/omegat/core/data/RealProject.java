@@ -722,6 +722,7 @@ public class RealProject implements IProject {
             stat.updateStatisticsInfo(hotStat);
             String fn = config.getProjectInternal() + OConsts.STATS_FILENAME;
             Statistics.writeStat(fn, stat.getTextData());
+            Statistics.writeStat(fn.replace(".txt",".json"), stat.getJsonData());
             // commit translations and statistics
             try {
                 Core.getMainWindow().showStatusMessageRB("TF_COMMIT_TARGET_START");
@@ -735,6 +736,7 @@ public class RealProject implements IProject {
                 path.setRelativeOrAbsolute(fn);
                 fn = path.getUnderRoot();
                 remoteRepositoryProvider.copyFilesFromProjectToRepos(fn,null);
+                remoteRepositoryProvider.copyFilesFromProjectToRepos(fn.replace(".txt",".json"),null);
                 remoteRepositoryProvider.commitFiles(fn, "Statistics");
                 Core.getMainWindow().showStatusMessageRB("TF_COMMIT_TARGET_DONE");
             } catch (Exception e) {

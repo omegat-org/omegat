@@ -22,15 +22,34 @@ pr:
       - docs_devel
       - README.md
 
+schedules:
+  - cron: '0 12 * * 0'
+    displayName: Weekly Sunday run
+    branches:
+      include:
+        - master
+    paths:
+      include:
+       - ci/azure-pipelines/*
+
 variables:
   isMain: $[eq(variables['Build.SourceBranch'], 'refs/heads/master')]
   isRelease: $[contains(variables['Build.SourceBranch'], 'refs/tags/v']
 
 jobs:
+- job: JRE Prep2
+  displayName: JRE preparation
+  pool:
+    vmImage: 'ubuntu-22.04'
+  condition: eq(variables['Build.Reason'], 'Schedule')
+  steps:
+    - template: ci/azure-pipelines/jre_prep.yml
+
 - job: GitHubCI
   displayName: GitHub CI (new)
   pool:
     vmImage: 'ubuntu-22.04'
+  condition: ne(variables['Build.Reason'], 'Schedule')
   variables:
     GRADLE_USER_HOME: '$(Pipeline.Workspace)/.gradle'
   steps:
@@ -41,7 +60,7 @@ jobs:
   pool:
     vmImage: 'ubuntu-22.04'
   dependsOn: GitHubCI
-  condition: and(succeeded(), or(eq(variables.isMain, true), eq(variable.isRelease, true)))
+  condition: and(succeeded(), or(eq(variables.isMain, true), eq(variable.isRelease, true)), ne(variables['Build.Reason'], 'Schedule'))
   variables:
     GRADLE_USER_HOME: '$(Pipeline.Workspace)/.gradle'
   steps:

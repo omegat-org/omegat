@@ -44,8 +44,5 @@ jobs:
   condition: and(succeeded(), or(eq(variables.isMain, true), eq(variable.isRelease, true)))
   variables:
     GRADLE_USER_HOME: '$(Pipeline.Workspace)/.gradle'
-  env:
-    ORG_GRADLE_PROJECT_winCodesignPassword: $(keystorePassword)
-    ORG_GRADLE_PROJECT_jwsStorepass: $(keystorePassword)
   steps:
     - template: ci/azure-pipelines/release_steps.yml

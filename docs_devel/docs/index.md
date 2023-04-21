@@ -57,4 +57,6 @@
 ## Other information
 
 * [Release procedure](90.ReleaseProcedure.md)
+* [Code Signing How-to](92.CodeSigning.md)
+* [Building installer](93.BuildingInstallerPackage.md)
 * [Appendix](91.appendix.md)

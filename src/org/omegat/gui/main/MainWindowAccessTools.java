@@ -28,6 +28,7 @@ package org.omegat.gui.main;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.io.File;
+import java.nio.CharBuffer;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
@@ -59,12 +60,15 @@ import org.omegat.util.gui.ResourcesUtil;
  */
 public class MainWindowAccessTools {
 
+    private static final int FILE_SELECTOR_WIDTH = 48;
+
     JComboBox<String> recentProjectCB;
     JComboBox<SourceFileInfo> sourceFilesCB;
     JButton searchButton;
     JButton settingsButton;
 
     private final List<SourceFileInfo> projectFiles = new ArrayList<>();
+    private SourceComboBoxModel sourceComboBoxModel;
 
     private final MainWindowMenuHandler mainWindowMenuHandler;
 
@@ -91,9 +95,10 @@ public class MainWindowAccessTools {
         JLabel sourceTitle = new JLabel(OStrings.getString("TF_MENU_NEWUI_FILE_SELECTOR"));
         container.add(sourceTitle);
         sourceFilesCB = new JComboBox<>();
-        sourceFilesCB.setModel(new DefaultComboBoxModel<>(projectFiles.toArray(new SourceFileInfo[0])));
+        sourceComboBoxModel = new SourceComboBoxModel(projectFiles);
+        sourceFilesCB.setModel(sourceComboBoxModel);
         sourceFilesCB.setEnabled(true);
-        sourceFilesCB.setPreferredSize(new Dimension(300, 20));
+        sourceFilesCB.setPreferredSize(new Dimension(320, 20));
         sourceFilesCB.setMaximumSize(new Dimension(400, 20));
         container.add(sourceFilesCB);
 
@@ -173,7 +178,7 @@ public class MainWindowAccessTools {
                         .map(f -> Paths.get(f).getFileName().toString()).toArray(String[]::new)));
             });
         } else {
-            sourceFilesCB.setModel(new DefaultComboBoxModel<>(new SourceFileInfo[0]));
+            sourceComboBoxModel.clear();
             sourceFilesCB.revalidate();
         }
     }
@@ -193,23 +198,48 @@ public class MainWindowAccessTools {
                     .collect(Collectors.toList());
         }
         projectFiles.addAll(files);
-        sourceFilesCB.setModel(new DefaultComboBoxModel<>(projectFiles.toArray(new SourceFileInfo[0])));
+        sourceComboBoxModel.addAll(projectFiles);
         sourceFilesCB.revalidate();
     }
 
-    static class SourceFileInfo extends IProject.FileInfo {
+    /**
+     * Creates a string of NBSP that is 'spaces' spaces long.
+     *
+     * @param spaces The number of spaces to add to the string.
+     */
+    private static String spaces(int spaces) {
+      return CharBuffer.allocate(spaces).toString().replace('\0', (char) 160);
+    }
+
+    static class SourceFileInfo {
+
+        private final String filePath;
+        private final int segments;
 
         public SourceFileInfo(final String activeFileName) {
             filePath = Paths.get(activeFileName).getFileName().toString();
+            segments =
+                    Core.getProject().getProjectFiles().stream()
+                            .filter(fi -> Paths.get(fi.filePath).getFileName().toString().equals(this.filePath))
+                            .map(fi -> fi.entries.size())
+                            .findFirst()
+                            .orElse(0);
         }
 
         public SourceFileInfo(final IProject.FileInfo f) {
             filePath = Paths.get(f.filePath).getFileName().toString();
+            segments = f.entries.size();
         }
 
         @Override
         public String toString() {
-            return filePath;
+            int numSpaceCh = FILE_SELECTOR_WIDTH - Integer.toString(segments).length() - filePath.length() - 1;
+            if (numSpaceCh < 0) {
+                return String.format("%s%s %d", filePath.substring(0, filePath.length() - numSpaceCh - 2),
+                        "...", segments);
+            }
+            return String.format("%s%s %d", filePath, spaces(numSpaceCh), segments);
+
         }
 
         public int getModelRow() {
@@ -225,4 +255,17 @@ public class MainWindowAccessTools {
         }
     }
 
+    @SuppressWarnings("serial")
+    static class SourceComboBoxModel extends DefaultComboBoxModel<SourceFileInfo> {
+
+        public SourceComboBoxModel(final List<SourceFileInfo> items) {
+            super(items.toArray(new SourceFileInfo[0]));
+        }
+
+        public void clear() {
+            for (int i = getSize(); i > 0 ; i--) {
+                removeElementAt(i - 1);
+            }
+        }
+    }
 }

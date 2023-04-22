@@ -16,6 +16,7 @@ steps:
           curl -L -O "$url"
         done
   - task: PublishBuildArtifacts@1
-    displayName: 'Publish Artifact: drop'
+    displayName: 'Publish Artifact: jre'
     inputs:
       PathtoPublish: dist
+      artifactName: jre

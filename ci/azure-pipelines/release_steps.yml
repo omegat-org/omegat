@@ -1,11 +1,9 @@
 steps:
   - task: DownloadBuildArtifacts@1
-    displayName: 'Download Artifacts from JRE Prep task'
+    displayName: 'Download Artifacts from JRE Prep job'
     inputs:
-      buildType: specific
-      project: 'ecb5bbf0-66ac-433d-bda1-be5bcf90716d'  # point to "https://dev.azure.com/omegat-org/OmegaT"
-      pipeline: 7  # "JRE Prep" pipelines definition
-      artifactName: drop
+      buildType: 'current'
+      artifactName: jre
       downloadPath: '$(System.ArtifactsDirectory)/asset'
       extractTars: false
   - script: |

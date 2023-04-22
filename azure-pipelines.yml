@@ -22,36 +22,14 @@ pr:
       - docs_devel
       - README.md
 
-schedules:
-  - cron: '0 12 * * 0'
-    displayName: Weekly Sunday run
-    branches:
-      include:
-        - master
-
 variables:
   isMain: $[eq(variables['Build.SourceBranch'], 'refs/heads/master')]
   isRelease: $[contains(variables['Build.SourceBranch'], 'refs/tags/v')]
+  isJRE8: $[contains(variables['Build.SourceBranch'], 'refs/tags/v5')]
 
 jobs:
-- job: JRE11_Prep
-  displayName: JRE preparation
-  pool:
-    vmImage: 'ubuntu-22.04'
-  condition: eq(variables['Build.Reason'], 'Schedule')
-  steps:
-    - template: ci/azure-pipelines/jre_prep.yml
-
-- job: JRE8_Prep
-  displayName: JRE preparation
-  pool:
-    vmImage: 'ubuntu-22.04'
-  condition: eq(variables['Build.Reason'], 'Schedule')
-  steps:
-    - template: ci/azure-pipelines/jre8_prep.yml
-
 - job: GitHubCI
-  displayName: GitHub CI (new)
+  displayName: CI Check for master, releases/* and Pull-Requests
   pool:
     vmImage: 'ubuntu-22.04'
   condition: ne(variables['Build.Reason'], 'Schedule')
@@ -60,12 +38,29 @@ jobs:
   steps:
     - template: ci/azure-pipelines/check_steps.yml
 
+# We run JRE preparation for Release build
+- job: JRE_Prep
+  displayName: JRE 11 preparation for publish
+  pool:
+    vmImage: 'ubuntu-22.04'
+  condition: and(succeeded(), eq(variables.isJRE8, false), eq(variables.isRelease, true))
+  steps:
+    - template: ci/azure-pipelines/jre_prep.yml
+- job: JRE8_Prep
+  displayName: JRE 8 preparation for publish
+  pool:
+    vmImage: 'ubuntu-22.04'
+  condition: and(succeeded(), eq(variables.isJRE8, true), eq(variables.isRelease, true))
+  steps:
+    - template: ci/azure-pipelines/jre8_prep.yml
+
+# Release build will run on the main and/or release branch, except for Pull-Request
 - job: ReleaseBuild
-  displayName: Release build for master and releases/x.x
+  displayName: Build for master nightly, and release
   pool:
     vmImage: 'ubuntu-22.04'
   dependsOn: GitHubCI
-  condition: and(succeeded(), or(eq(variables.isMain, true), eq(variables.isRelease, true)), ne(variables['Build.Reason'], 'Schedule'))
+  condition: and(succeeded(), or(eq(variables.isMain, true), eq(variables.isRelease, true)))
   variables:
     GRADLE_USER_HOME: '$(Pipeline.Workspace)/.gradle'
   steps:

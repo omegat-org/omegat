@@ -28,9 +28,6 @@ schedules:
     branches:
       include:
         - master
-    paths:
-      include:
-       - ci/azure-pipelines/*
 
 variables:
   isMain: $[eq(variables['Build.SourceBranch'], 'refs/heads/master')]

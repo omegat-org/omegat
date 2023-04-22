@@ -1,0 +1,26 @@
+steps:
+  - task: DownloadBuildArtifacts@1
+    displayName: 'Download Artifacts from JRE Prep task'
+    inputs:
+      buildType: specific
+      project: 'ecb5bbf0-66ac-433d-bda1-be5bcf90716d'  # point to "https://dev.azure.com/omegat-org/OmegaT"
+      pipeline: 7  # "JRE Prep" pipelines definition
+      artifactName: drop
+      downloadPath: '$(System.ArtifactsDirectory)/asset'
+      extractTars: false
+  - script: |
+      umask a+w
+      mkdir -p build
+      chmod -R a+w doc_src
+      $(Build.SourcesDirectory)/gradlew -PenvIsCi -PassetDir=$(System.ArtifactsDirectory)/asset/drop clean build manualPdfs
+    displayName: 'Command Line Script'
+  - task: CopyFiles@2
+    displayName: 'Copy Files to: $(build.artifactstagingdirectory)/done'
+    inputs:
+      SourceFolder: '$(system.defaultworkingdirectory)/build/distributions/'
+      Contents: '*'
+      TargetFolder: '$(build.artifactstagingdirectory)/done'
+  - task: PublishBuildArtifacts@1
+    displayName: 'Publish Artifact: drop'
+    inputs:
+      PathtoPublish: '$(build.artifactstagingdirectory)/done'

@@ -209,21 +209,22 @@
 		  
 		  <variablelist>
 			<varlistentry>
-			  <term>メインメモリ</term>
+			  <term>内部メモリ</term>
 			  <listitem>
 				<para>プロジェクトの内部メモリ(<link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/>)を含めます。</para>
 			  </listitem>
 			</varlistentry>
 
 			<varlistentry>
-			  <term>参照TM</term>
+			  <term>参照用メモリ</term>
 			  <listitem>
-				<para><link linkend="project.folder.tm" endterm="project.folder.tm.title"/>フォルダーにある翻訳メモリを含めます。</para>
+				<para><link linkend="project.folder.tm" endterm="project.folder.tm.title"/>フォルダーにある翻訳メモリを参照用に含めます。
+				</para>
 			  </listitem>
 			</varlistentry>
 
 			<varlistentry>
-			  <term>用語集 ファイル</term>
+			  <term>用語集</term>
 			  <listitem>
 				<para><link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/>フォルダーにある用語集を含めます。</para>
 			  </listitem>

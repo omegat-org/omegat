@@ -77,7 +77,8 @@
 	  </listitem>
 
 	  <listitem>
-		<para>参照翻訳として、OmegaTはTMXファイルではないバイリンガル文書もサポートしています。OmegaTがサポートするファイル形式は、OmegaTがソースファイルとして受け入れるすべてのバイリンガル形式です。</para>
+		<para>参照用の翻訳として、OmegaTはTMXファイルではないバイリンガル文書もサポートしています。OmegaTがサポートするファイル形式は、OmegaT
+			がソースファイルとして受け入れるすべてのバイリンガル形式です。</para>
 
 		<itemizedlist>
 		  <listitem>

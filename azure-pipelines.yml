@@ -65,7 +65,7 @@ jobs:
   pool:
     vmImage: 'ubuntu-22.04'
   dependsOn: GitHubCI
-  condition: and(succeeded(), or(eq(variables.isMain, true), eq(variable.isRelease, true)), ne(variables['Build.Reason'], 'Schedule'))
+  condition: and(succeeded(), or(eq(variables.isMain, true), eq(variables.isRelease, true)), ne(variables['Build.Reason'], 'Schedule'))
   variables:
     GRADLE_USER_HOME: '$(Pipeline.Workspace)/.gradle'
   steps:

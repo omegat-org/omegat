@@ -26,6 +26,7 @@ variables:
   isMain: $[eq(variables['Build.SourceBranch'], 'refs/heads/master')]
   isRelease: $[contains(variables['Build.SourceBranch'], 'refs/tags/v')]
   isJRE8: $[contains(variables['Build.SourceBranch'], 'refs/tags/v5')]
+  GRADLE_USER_HOME: '$(Pipeline.Workspace)/.gradle'
 
 stages:
 - stage: Check
@@ -35,8 +36,6 @@ stages:
     pool:
       vmImage: 'ubuntu-22.04'
     condition: ne(variables['Build.Reason'], 'Schedule')
-    variables:
-      GRADLE_USER_HOME: '$(Pipeline.Workspace)/.gradle'
     steps:
       - template: ci/azure-pipelines/check_steps.yml
 
@@ -45,26 +44,10 @@ stages:
   dependsOn: Check
   condition: and(succeeded(), or(eq(variables.isMain, true), eq(variables.isRelease, true)))
   jobs:
-  - job: JRE_Prep
-    displayName: JRE 11 preparation for publish
-    condition: ne(variables.isJRE8, true)
-    pool:
-      vmImage: 'ubuntu-22.04'
-    steps:
-      - template: ci/azure-pipelines/jre_prep.yml
-  - job: JRE8_Prep
-    displayName: JRE 8 preparation for publish
-    condition: eq(variables.isJRE8, true)
-    pool:
-      vmImage: 'ubuntu-22.04'
-    steps:
-      - template: ci/azure-pipelines/jre8_prep.yml
   - job: ReleaseBuild
     displayName: Build for master nightly, and release
     pool:
       vmImage: 'ubuntu-22.04'
     condition: succeeded()
-    variables:
-      GRADLE_USER_HOME: '$(Pipeline.Workspace)/.gradle'
     steps:
       - template: ci/azure-pipelines/release_steps.yml

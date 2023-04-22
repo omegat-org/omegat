@@ -1,17 +1,41 @@
 steps:
-  - task: DownloadBuildArtifacts@1
-    displayName: 'Download Artifacts from JRE Prep job'
+  - task: Bash@3
+    displayName: 'Download JRE'
     inputs:
-      buildType: 'current'
-      artifactName: jre
-      downloadPath: '$(System.ArtifactsDirectory)/asset'
-      extractTars: false
+      targetType: 'inline'
+      script: |
+        mkdir -p $(System.ArtifactsDirectory)/asset
+        cd $(System.ArtifactsDirectory)/asset || exit 1
+        if [ "$(isJRE8)" == "true" ]; then
+          jres=(
+              https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u362-b09/OpenJDK8U-jre_x64_linux_hotspot_8u362b09.tar.gz
+              https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u362-b09/OpenJDK8U-jre_x64_mac_hotspot_8u362b09.tar.gz
+              https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u362-b09/OpenJDK8U-jre_x86-32_windows_hotspot_8u362b09.zip
+              https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u362-b09/OpenJDK8U-jre_x64_windows_hotspot_8u362b09.zip
+          )
+        else
+          jres=(
+              https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.18%2B10/OpenJDK11U-jre_aarch64_mac_hotspot_11.0.18_10.tar.gz
+              https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.18%2B10/OpenJDK11U-jre_arm_linux_hotspot_11.0.18_10.tar.gz
+              https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.18%2B10/OpenJDK11U-jre_x64_linux_hotspot_11.0.18_10.tar.gz
+              https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.18%2B10/OpenJDK11U-jre_x64_mac_hotspot_11.0.18_10.tar.gz
+              https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.18%2B10/OpenJDK11U-jre_x64_windows_hotspot_11.0.18_10.zip
+              https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.18%2B10/OpenJDK11U-jre_x86-32_windows_hotspot_11.0.18_10.zip
+          )
+        fi
+        for url in "${jres[@]}"; do
+          curl -L -O "$url"
+        done
   - script: |
       umask a+w
       mkdir -p build
       chmod -R a+w doc_src
-      $(Build.SourcesDirectory)/gradlew -PenvIsCi -PassetDir=$(System.ArtifactsDirectory)/asset/drop clean build manualPdfs
+      $(Build.SourcesDirectory)/gradlew -PenvIsCi -PassetDir=$(System.ArtifactsDirectory)/asset clean build manualPdfs
     displayName: 'Command Line Script'
+  - script: |   
+      # stop the Gradle daemon to ensure no files are left open (impacting the save cache operation later)
+      ./gradlew --stop
+    displayName: Gradlew stop
   - task: CopyFiles@2
     displayName: 'Copy Files to: $(build.artifactstagingdirectory)/done'
     inputs:

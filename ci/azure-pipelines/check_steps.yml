@@ -8,18 +8,18 @@ steps:
       umask a+w
       mkdir -p build
       chmod -R a+w doc_src
-      $(Build.SourcesDirectory)/gradlew --build-cache -PenvIsCi clean build
-    displayName: 'Run Gradle clean and Gradle build'
+      $(Build.SourcesDirectory)/gradlew --build-cache -PenvIsCi clean check
+    displayName: 'Run Gradle clean and Gradle check'
   - task: PublishTestResults@2
     displayName: 'Publish Test Results build/reports/**/*.xml'
     inputs:
       testResultsFiles: 'build/reports/**/*.xml'
-  - task: CopyFiles@2
-    displayName: 'Copy Files to: $(build.artifactstagingdirectory)'
-    inputs:
-      SourceFolder: '$(system.defaultworkingdirectory)/build/distributions'
-      TargetFolder: '$(build.artifactstagingdirectory)'
-  - task: PublishBuildArtifacts@1
-    displayName: 'Publish Artifact: drop'
-    inputs:
-      PathtoPublish: '$(build.artifactstagingdirectory)'
+#  - task: CopyFiles@2
+#    displayName: 'Copy Files to: $(build.artifactstagingdirectory)'
+#    inputs:
+#      SourceFolder: '$(system.defaultworkingdirectory)/build/distributions'
+#      TargetFolder: '$(build.artifactstagingdirectory)'
+#  - task: PublishBuildArtifacts@1
+#    displayName: 'Publish Artifact: drop'
+#    inputs:
+#      PathtoPublish: '$(build.artifactstagingdirectory)'

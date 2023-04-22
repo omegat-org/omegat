@@ -34,7 +34,7 @@ variables:
   isRelease: $[contains(variables['Build.SourceBranch'], 'refs/tags/v')]
 
 jobs:
-- job: JRE 11 Prep
+- job: JRE11_Prep
   displayName: JRE preparation
   pool:
     vmImage: 'ubuntu-22.04'
@@ -42,7 +42,7 @@ jobs:
   steps:
     - template: ci/azure-pipelines/jre_prep.yml
 
-- job: JRE 8 Prep
+- job: JRE8_Prep
   displayName: JRE preparation
   pool:
     vmImage: 'ubuntu-22.04'

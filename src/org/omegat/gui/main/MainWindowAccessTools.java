@@ -30,7 +30,7 @@ import java.awt.Dimension;
 import java.io.File;
 import java.nio.CharBuffer;
 import java.nio.file.Paths;
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -47,8 +47,6 @@ import javax.swing.UIManager;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.IProject;
-import org.omegat.core.data.SourceTextEntry;
-import org.omegat.core.events.IEntryEventListener;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.util.OStrings;
 import org.omegat.util.RecentProjects;
@@ -60,14 +58,12 @@ import org.omegat.util.gui.ResourcesUtil;
  */
 public class MainWindowAccessTools {
 
-    private static final int FILE_SELECTOR_WIDTH = 48;
-
     JComboBox<String> recentProjectCB;
     JComboBox<SourceFileInfo> sourceFilesCB;
     JButton searchButton;
     JButton settingsButton;
 
-    private final List<SourceFileInfo> projectFiles = new ArrayList<>();
+    private ProjectComboBoxModel projectComboBoxModel;
     private SourceComboBoxModel sourceComboBoxModel;
 
     private final MainWindowMenuHandler mainWindowMenuHandler;
@@ -86,7 +82,8 @@ public class MainWindowAccessTools {
         JLabel recentLabel = new JLabel(OStrings.getString("TF_MENU_NEWUI_PROJECT_SELECTOR"));
         container.add(recentLabel);
         recentProjectCB = new JComboBox<>();
-        recentProjectCB.setModel(new DefaultComboBoxModel<>(getRecentProjectList("").toArray(String[]::new)));
+        projectComboBoxModel = new ProjectComboBoxModel();
+        recentProjectCB.setModel(projectComboBoxModel);
         recentProjectCB.setEnabled(true);
         recentProjectCB.setPreferredSize(new Dimension(300, 20));
         recentProjectCB.setMaximumSize(new Dimension(400, 20));
@@ -95,7 +92,7 @@ public class MainWindowAccessTools {
         JLabel sourceTitle = new JLabel(OStrings.getString("TF_MENU_NEWUI_FILE_SELECTOR"));
         container.add(sourceTitle);
         sourceFilesCB = new JComboBox<>();
-        sourceComboBoxModel = new SourceComboBoxModel(projectFiles);
+        sourceComboBoxModel = new SourceComboBoxModel(Collections.emptyList());
         sourceFilesCB.setModel(sourceComboBoxModel);
         sourceFilesCB.setEnabled(true);
         sourceFilesCB.setPreferredSize(new Dimension(320, 20));
@@ -128,26 +125,22 @@ public class MainWindowAccessTools {
             if (item == null || StringUtil.isEmpty(item.toString())) {
                 return;
             }
-            recentProjectCB
-                    .setModel(new DefaultComboBoxModel<>(getRecentProjectList(item.toString()).toArray(String[]::new)));
             Optional<String> targetProject = RecentProjects.getRecentProjects().stream()
                     .filter(f -> Paths.get(f).getFileName().toString().equals(item)).findFirst();
-            targetProject.ifPresent(s -> ProjectUICommands.projectOpen(new File(s), true));
-        });
-
-        CoreEvents.registerEntryEventListener(new IEntryEventListener() {
-            @Override
-            public void onNewFile(final String activeFileName) {
-                updateProjectFiles(activeFileName);
-            }
-
-            @Override
-            public void onEntryActivated(final SourceTextEntry newEntry) {
-            }
+            targetProject.ifPresent(s -> {
+                // clear file list at first.
+                sourceComboBoxModel.clear();
+                sourceFilesCB.revalidate();
+                ProjectUICommands.projectOpen(new File(s), true);
+            });
         });
 
         sourceFilesCB.addActionListener(actionEvent -> {
-            int modelRow = ((SourceFileInfo) sourceFilesCB.getModel().getSelectedItem()).getModelRow();
+            final Object selected = sourceComboBoxModel.getSelectedItem();
+            if (selected == null) {
+                return;
+            }
+            int modelRow = ((SourceFileInfo) selected).getModelRow();
             if (modelRow >= 0) {
                 Core.getEditor().gotoFile(modelRow);
                 Core.getEditor().requestFocus();
@@ -161,45 +154,37 @@ public class MainWindowAccessTools {
         });
     }
 
-    private List<String> getRecentProjectList(String current) {
-        List<String> recent = new ArrayList<>();
-        recent.add(current);
-        recent.addAll(
-                RecentProjects.getRecentProjects().stream().map(f -> Paths.get(f).getFileName().toString())
-                        .filter(f -> !f.equals(current)).collect(Collectors.toList()));
-        return recent;
-    }
 
     private void onProjectStatusChanged(final boolean isProjectOpened) {
         if (isProjectOpened) {
             SwingUtilities.invokeLater(() -> {
                 updateProjectFiles(null);
-                recentProjectCB.setModel(new DefaultComboBoxModel<>(RecentProjects.getRecentProjects().stream()
-                        .map(f -> Paths.get(f).getFileName().toString()).toArray(String[]::new)));
+                projectComboBoxModel.update();
+                sourceFilesCB.revalidate();
             });
         } else {
-            sourceComboBoxModel.clear();
-            sourceFilesCB.revalidate();
+            SwingUtilities.invokeLater(() -> {
+                sourceComboBoxModel.clear();
+                sourceFilesCB.revalidate();
+            });
         }
     }
 
     private synchronized void updateProjectFiles(String activeFileName) {
-        projectFiles.clear();
+        sourceComboBoxModel.clear();
         final List<SourceFileInfo> files;
         if (activeFileName != null) {
-            projectFiles.add(new SourceFileInfo(activeFileName));
-            files = Core.getProject().getProjectFiles().stream()
+            sourceComboBoxModel.addElement(new SourceFileInfo(activeFileName));
+            Core.getProject().getProjectFiles().stream()
                     .filter(f -> !f.filePath.equals(activeFileName))
                     .map(SourceFileInfo::new)
-                    .collect(Collectors.toList());
+                    .forEach(it -> sourceComboBoxModel.addElement(it));
         } else {
             files = Core.getProject().getProjectFiles().stream()
                     .map(SourceFileInfo::new)
                     .collect(Collectors.toList());
+            sourceComboBoxModel.addAll(files);
         }
-        projectFiles.addAll(files);
-        sourceComboBoxModel.addAll(projectFiles);
-        sourceFilesCB.revalidate();
     }
 
     /**
@@ -212,6 +197,8 @@ public class MainWindowAccessTools {
     }
 
     static class SourceFileInfo {
+
+        private static final int FILE_SELECTOR_WIDTH = 48;
 
         private final String filePath;
         private final int segments;
@@ -255,16 +242,49 @@ public class MainWindowAccessTools {
         }
     }
 
+    /**
+     * ComboBoxModel for project access tool.
+     */
+    @SuppressWarnings("serial")
+    static class ProjectComboBoxModel extends DefaultComboBoxModel<String> {
+
+        public ProjectComboBoxModel() {
+            super(RecentProjects.getRecentProjects()
+                    .stream()
+                    .map(f -> Paths.get(f).getFileName().toString())
+                    .toArray(String[]::new));
+        }
+
+        public void update() {
+            final List<String> recentProjects = RecentProjects.getRecentProjects();
+            if (recentProjects.size() > getSize()) {
+                // when a new project is added to the list
+                recentProjects.stream()
+                        .map(f -> Paths.get(f).getFileName().toString())
+                        .filter(p -> getIndexOf(p) < 0)  // when new project
+                        .forEach(this::addElement);
+            }
+        }
+    }
+
+    /**
+     * CombBoxModel for file access tool.
+     */
     @SuppressWarnings("serial")
     static class SourceComboBoxModel extends DefaultComboBoxModel<SourceFileInfo> {
 
+        /**
+         * Constructor.
+         * @param items default lists of SourceFileInfo.
+         */
         public SourceComboBoxModel(final List<SourceFileInfo> items) {
             super(items.toArray(new SourceFileInfo[0]));
         }
 
         public void clear() {
-            for (int i = getSize(); i > 0 ; i--) {
-                removeElementAt(i - 1);
+            int sizeOfElements = getSize();
+            for (int i = 0 ; i < sizeOfElements ; i++) {
+                removeElementAt(0);
             }
         }
     }

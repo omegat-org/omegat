@@ -31,7 +31,7 @@ schedules:
 
 variables:
   isMain: $[eq(variables['Build.SourceBranch'], 'refs/heads/master')]
-  isRelease: $[contains(variables['Build.SourceBranch'], 'refs/tags/v']
+  isRelease: $[contains(variables['Build.SourceBranch'], 'refs/tags/v')]
 
 jobs:
 - job: JRE 11 Prep

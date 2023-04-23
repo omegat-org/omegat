@@ -73,9 +73,11 @@ import org.omegat.core.Core;
 import org.omegat.core.data.CommandVarExpansion;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.segmentation.SRX;
+/*
 import org.omegat.externalfinder.ExternalFinder;
 import org.omegat.externalfinder.gui.ExternalFinderCustomizer;
 import org.omegat.externalfinder.item.ExternalFinderConfiguration;
+*/
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.filters2.FiltersCustomizer;
@@ -151,7 +153,7 @@ public class ProjectPropertiesDialog extends JDialog {
     private Filters filters;
 
     /** Project ExternalFinder config */
-    private ExternalFinderConfiguration externalFinderConfig;
+    // XXX: private ExternalFinderConfiguration externalFinderConfig;
 
     private List<String> srcExcludes = new ArrayList<>();
 
@@ -174,7 +176,7 @@ public class ProjectPropertiesDialog extends JDialog {
         this.dialogType = dialogTypeValue;
         this.filters = projectProperties.getProjectFilters();
         srcExcludes.addAll(projectProperties.getSourceRootExcludes());
-        externalFinderConfig = ExternalFinder.getProjectConfig();
+        // XXX: externalFinderConfig = ExternalFinder.getProjectConfig();
 
         Border emptyBorder = new EmptyBorder(2, 0, 2, 0);
         Box centerBox = new ScrollableBox(BoxLayout.Y_AXIS);
@@ -716,6 +718,7 @@ public class ProjectPropertiesDialog extends JDialog {
                 }
             }
         });
+/*
 
         externalFinderButton.addActionListener(e -> {
             ExternalFinderCustomizer dlg = new ExternalFinderCustomizer(true, externalFinderConfig);
@@ -723,6 +726,7 @@ public class ProjectPropertiesDialog extends JDialog {
                 externalFinderConfig = dlg.getResult();
             }
         });
+*/
 
         StaticUIUtils.setEscapeAction(this, new AbstractAction() {
             @Override
@@ -1188,7 +1192,7 @@ public class ProjectPropertiesDialog extends JDialog {
         projectProperties.getSourceRootExcludes().clear();
         projectProperties.getSourceRootExcludes().addAll(srcExcludes);
 
-        ExternalFinder.setProjectConfig(externalFinderConfig);
+        // XXX: ExternalFinder.setProjectConfig(externalFinderConfig);
 
         dialogCancelled = false;
         setVisible(false);

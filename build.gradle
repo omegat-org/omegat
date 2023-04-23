@@ -4,6 +4,7 @@ import org.apache.tools.ant.filters.ReplaceTokens
 plugins {
     id 'application'
     id 'java-library'
+    id 'java-test-fixtures'
     id 'maven-publish'
     id 'signing'
     id 'eclipse'
@@ -114,6 +115,11 @@ sourceSets {
         resources {
             srcDir 'test/src'
             srcDir 'test/data'
+        }
+    }
+    testFixtures {
+        java {
+            srcDir 'test/fixtures'
         }
     }
     testIntegration {
@@ -276,6 +282,10 @@ dependencies {
     // http connection tests
     testImplementation 'com.github.tomakehurst:wiremock-jre8-standalone:2.35.0'
 
+    testFixturesApi 'junit:junit:4.13.2'
+    testFixturesImplementation sourceSets.main.output
+    testFixturesImplementation 'commons-io:commons-io:2.11.0'
+
     // JAXB codegen only
     jaxb 'com.sun.xml.bind:jaxb-xjc:2.3.4'
 
@@ -309,7 +319,6 @@ jar {
             }
         }
         pluginAttr('Dictionary driver[bundle]', 'org/omegat/core/dictionaries/', 'dictionary', desc.dictionary)
-        pluginAttr('MT connector[bundle]', 'org/omegat/core/machinetranslators/', 'machinetranslator', desc.machinetranslator)
         pluginAttr('File filters[bundle]', 'org/omegat/filters2/', 'filter', desc.filters2)
         pluginAttr('XML filters[bundle]', 'org/omegat/filters3/', 'filter', desc.filters3)
         pluginAttr('New XML filters[bundle]', 'org/omegat/filters4/', 'filter', desc.filters4)
@@ -317,7 +326,6 @@ jar {
         pluginAttr('Themes [bundle]', 'org/omegat/gui/theme/', 'theme', desc.theme)
         pluginAttr('Scripting engine', 'org/omegat/gui/script/', 'miscellaneous', desc.script)
         pluginAttr('GUI extensions', 'org/omegat/util/gui/', 'miscellaneous', desc.guiutil)
-        pluginAttr('Local external search', 'org/omegat/externalfinder/', 'miscellaneous', desc.externalfinder)
     }
     // Don't include extra stuff like version number in JAR name
     archiveFileName = "${archiveBaseName.get()}.${archiveExtension.get()}"

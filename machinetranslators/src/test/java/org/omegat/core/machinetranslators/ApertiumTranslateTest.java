@@ -1,10 +1,9 @@
 /*
- * *************************************************************************
  *  OmegaT - Computer Assisted Translation (CAT) tool
  *           with fuzzy matching, translation memory, keyword search,
  *           glossaries, and translation leveraging into updated projects.
  *
- *  Copyright (C) 2021 Hiroshi Miura.
+ *  Copyright (C) 2023 Hiroshi Miura.
  *                Home page: https://www.omegat.org/
  *                Support center: https://omegat.org/support
  *
@@ -22,20 +21,18 @@
  *
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
- *  *************************************************************************
- *
  */
 
 package org.omegat.core.machinetranslators;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import com.github.tomakehurst.wiremock.client.WireMock;
 import com.github.tomakehurst.wiremock.matching.StringValuePattern;
-import org.junit.Assert;
 import org.junit.Test;
 
 import org.omegat.util.Language;
@@ -109,7 +106,7 @@ public class ApertiumTranslateTest extends TestMachineTranslatorBase {
                 )
         );
         ApertiumTranslate apertiumTranslate = new ApertiumTranslate();
-        Assert.assertThrows(MachineTranslateError.class, () -> {
+        assertThrows(MachineTranslateError.class, () -> {
             apertiumTranslate.translate(new Language("EN"), new Language("ES"), "This    works well?");
         });
     }

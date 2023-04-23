@@ -1,0 +1,53 @@
+trigger:
+  branches:
+    include:
+      - master
+      - releases/*
+      - refs/tags/v*
+    exclude:
+      - release/*
+      - standard
+
+pr:
+  branches:
+    include:
+      - master
+      - releases/*
+    exclude:
+      - standard
+  paths:
+    exclude:
+      - docs
+      - doc_src
+      - docs_devel
+      - README.md
+
+variables:
+  isMain: $[eq(variables['Build.SourceBranch'], 'refs/heads/master')]
+  isRelease: $[contains(variables['Build.SourceBranch'], 'refs/tags/v')]
+  isJRE8: $[contains(variables['Build.SourceBranch'], 'refs/tags/v5')]
+  GRADLE_USER_HOME: '$(Pipeline.Workspace)/.gradle'
+
+stages:
+- stage: Check
+  jobs:
+  - job: GitHubCI
+    displayName: CI Check for master, releases/* and Pull-Requests
+    pool:
+      vmImage: 'ubuntu-22.04'
+    condition: ne(variables['Build.Reason'], 'Schedule')
+    steps:
+      - template: ci/azure-pipelines/check_steps.yml
+
+# Release build will run on the main and/or release branch, except for Pull-Request
+- stage: Release
+  dependsOn: Check
+  condition: and(succeeded(), or(eq(variables.isMain, true), eq(variables.isRelease, true)))
+  jobs:
+  - job: ReleaseBuild
+    displayName: Build for master nightly, and release
+    pool:
+      vmImage: 'ubuntu-22.04'
+    condition: succeeded()
+    steps:
+      - template: ci/azure-pipelines/release_steps.yml

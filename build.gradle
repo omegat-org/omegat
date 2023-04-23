@@ -198,9 +198,9 @@ dependencies {
         // Lucene for tokenizers
         implementation "org.apache.lucene:lucene-core:${luceneVersion}"
         implementation "org.apache.lucene:lucene-analyzers-common:${luceneVersion}"
-        implementation "org.apache.lucene:lucene-analyzers-kuromoji:${luceneVersion}"
-        implementation "org.apache.lucene:lucene-analyzers-smartcn:${luceneVersion}"
-        implementation "org.apache.lucene:lucene-analyzers-stempel:${luceneVersion}"
+        runtimeOnly  "org.apache.lucene:lucene-analyzers-kuromoji:${luceneVersion}"
+        runtimeOnly "org.apache.lucene:lucene-analyzers-smartcn:${luceneVersion}"
+        runtimeOnly "org.apache.lucene:lucene-analyzers-stempel:${luceneVersion}"
 
         // Team project server support
         implementation 'org.eclipse.jgit:org.eclipse.jgit:6.5.0.202303070854-r'

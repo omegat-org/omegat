@@ -49,7 +49,8 @@ public class ExternalFinderTest extends TestCore {
     @Before
     public void preUp() throws Exception {
         File configDir = new File(StaticUtils.getConfigDir());
-        File[] config = new File[]{new File(new File("test/data/externalfinder/"), FINDER_XML)};
+        File[] config =
+                new File[]{new File(ExternalFinderTest.class.getClassLoader().getResource(FINDER_XML).getFile())};
         FileUtil.copyFilesTo(configDir, config, null);
     }
 

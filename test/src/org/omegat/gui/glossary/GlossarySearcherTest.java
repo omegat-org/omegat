@@ -34,15 +34,16 @@ import java.util.Collections;
 import java.util.List;
 
 import org.junit.Test;
+
 import org.omegat.core.Core;
 import org.omegat.core.TestCore;
 import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.NotLoadedProject;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.SourceTextEntry;
+import org.omegat.tokenizer.DefaultTokenizer;
 import org.omegat.tokenizer.ITokenizer;
 import org.omegat.tokenizer.LuceneEnglishTokenizer;
-import org.omegat.tokenizer.LuceneJapaneseTokenizer;
 import org.omegat.util.Language;
 
 /**
@@ -80,7 +81,7 @@ public class GlossarySearcherTest extends TestCore {
         String sourceText = "\u5834\u6240";
         String translationText = "translation";
         String commentText = "comment";
-        ITokenizer tok = new LuceneJapaneseTokenizer();
+        ITokenizer tok = new DefaultTokenizer();
         Language language = new Language("ja");
         setupProject(language);
         List<GlossaryEntry> entries = Arrays.asList(new GlossaryEntry(sourceText, translationText, commentText, true, "origin"));
@@ -96,7 +97,7 @@ public class GlossarySearcherTest extends TestCore {
         String sourceText = "\u5834\u6240";
         Language language = new Language("ja");
         setupProject(language);
-        ITokenizer tok = new LuceneJapaneseTokenizer();
+        ITokenizer tok = new DefaultTokenizer();
         List<GlossaryEntry> entries = Arrays.asList( new GlossaryEntry("\u5857\u5E03", "wrong", "", true, "origin"));
         List<GlossaryEntry> result = glossarySearcherCommon(sourceText, tok, language, entries);
         assertEquals(0, result.size());
@@ -106,7 +107,7 @@ public class GlossarySearcherTest extends TestCore {
     public void testGlossarySearcherJapaneseLongText() {
         Language language = new Language("ja");
         setupProject(language);
-        ITokenizer tok = new LuceneJapaneseTokenizer();
+        ITokenizer tok = new DefaultTokenizer();
         List<GlossaryEntry> entries = Arrays.asList(
                 new GlossaryEntry("\u307E\u3050\u308D", "tuna", "", true, ""),
                 new GlossaryEntry("\u7FFB\u8A33", "translation", "", true, ""),

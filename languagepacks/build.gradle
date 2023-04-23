@@ -1,0 +1,71 @@
+/**
+ * Language packs.
+ */
+
+plugins {
+    id 'java-library'
+}
+
+ext {
+    providedLibsDir = file('lib/provided')
+    languageToolVersion = '5.7'
+    luceneVersion = '5.5.5'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compileOnly(project.rootProject)
+    // Libs are provided in the "source" distribution only
+    if (providedLibsDir.directory) {
+        compileOnly fileTree(dir: providedLibsDir, include: '**/*.jar')
+    } else {
+        compileOnly 'commons-io:commons-io:2.11.0'
+        compileOnly 'org.apache.commons:commons-text:1.9'
+
+        // LanguageTool
+        compileOnly("org.languagetool:languagetool-core:${languageToolVersion}") {
+            exclude module: 'guava'
+        }
+        // Exclicitly specify guava dependency for `jre` version rather than `-android`
+        compileOnly 'com.google.guava:guava:31.0.1-jre'
+
+        // Lucene for tokenizers
+        compileOnly "org.apache.lucene:lucene-core:${luceneVersion}"
+        compileOnly "org.apache.lucene:lucene-analyzers-common:${luceneVersion}"
+        compileOnly "org.apache.lucene:lucene-analyzers-kuromoji:${luceneVersion}"
+        compileOnly "org.apache.lucene:lucene-analyzers-smartcn:${luceneVersion}"
+        compileOnly "org.apache.lucene:lucene-analyzers-stempel:${luceneVersion}"
+
+    }
+    // Test dependencies
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation(testFixtures(project.rootProject))
+    testImplementation 'org.apache.commons:commons-lang3:3.11'
+    testImplementation 'org.xmlunit:xmlunit-legacy:2.8.3'
+    testImplementation("org.languagetool:languagetool-server:${languageToolVersion}") {
+        exclude group: 'org.slf4j'
+    }
+    testRuntimeOnly "org.slf4j:slf4j-jdk14:1.7.32"
+}
+
+jar {
+    archiveAppendix.set("omegat")
+    destinationDirectory.set(new File(rootProject.buildDir, "modules"))
+    def pluginProp = loadProperties(file('plugin.properties'))
+    manifest {
+        attributes('License': 'GNU Public License version 3 or later',
+                'Implementation-Version': project.version,
+                'OmegaT-Plugins': pluginProp.Classes,
+                'Plugin-Author': pluginProp.Author,
+                'Plugin-Link': pluginProp.Link,
+                'Plugin-Version': project.version,
+                'Plugin-Name': pluginProp.Name,
+                'Plugin-Category': pluginProp.Category,
+                'Plugin-Description': pluginProp.Description
+        )
+    }
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+}

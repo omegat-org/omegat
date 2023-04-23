@@ -30,9 +30,10 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 
 import org.junit.Test;
+
 import org.omegat.core.TestCore;
+import org.omegat.tokenizer.DefaultTokenizer;
 import org.omegat.tokenizer.ITokenizer;
-import org.omegat.tokenizer.LuceneJapaneseTokenizer;
 import org.omegat.util.Token;
 
 public class TokenTest extends TestCore {
@@ -45,7 +46,7 @@ public class TokenTest extends TestCore {
      */
     @Test
     public void testGlossaryTokenEqualityEnglish() {
-        ITokenizer tok = new LuceneJapaneseTokenizer();
+        ITokenizer tok = new DefaultTokenizer();
         String str = "source and target";
         String glos = "target";
         Token[] strTokens = tok.tokenizeWords(str, ITokenizer.StemmingMode.GLOSSARY);
@@ -63,7 +64,7 @@ public class TokenTest extends TestCore {
      */
     @Test(expected = AssertionError.class)
     public void testGlossaryTokenEqualityJapanese() {
-        ITokenizer tok = new LuceneJapaneseTokenizer();
+        ITokenizer tok = new DefaultTokenizer();
         String str = "\u5834\u6240";
         String glos = "\u5857\u5E03";
         Token[] strTokens = tok.tokenizeWords(str, ITokenizer.StemmingMode.GLOSSARY);

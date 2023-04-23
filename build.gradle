@@ -323,7 +323,7 @@ jar {
         pluginAttr('File filters[bundle]', 'org/omegat/filters2/', 'filter', desc.filters2)
         pluginAttr('XML filters[bundle]', 'org/omegat/filters3/', 'filter', desc.filters3)
         pluginAttr('New XML filters[bundle]', 'org/omegat/filters4/', 'filter', desc.filters4)
-        pluginAttr('Tokenizers[bundle]', 'org/omegat/tokenizer/', 'tokenizer', desc.tokenizer)
+        pluginAttr('Default Tokenizer', 'org/omegat/tokenizer/', 'tokenizer', desc.tokenizer)
         pluginAttr('Themes [bundle]', 'org/omegat/gui/theme/', 'theme', desc.theme)
         pluginAttr('Scripting engine', 'org/omegat/gui/script/', 'miscellaneous', desc.script)
         pluginAttr('GUI extensions', 'org/omegat/util/gui/', 'miscellaneous', desc.guiutil)

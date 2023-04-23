@@ -1,4 +1,20 @@
 ----------------------------------------------------------------------
+ OmegaT 5.8.1 (2023-04-23)
+----------------------------------------------------------------------
+  0 Removed features
+  0 Enhancements
+  2 Bug fixes
+  0 Localization updates
+----------------------------------------------------------------------
+5.8.1 vs 5.8.0
+
+  Bug fixes:
+
+  - OmegaT does not create a backup of project file when standalone project.
+
+  - Failure of javadoc build. We suppress doclint errors for maven publish.
+
+----------------------------------------------------------------------
  OmegaT 5.8.0 (2023-04-01)
 ----------------------------------------------------------------------
    4 Removed features

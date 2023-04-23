@@ -819,6 +819,8 @@ task genMac {
 allprojects {
     javadoc {
         failOnError = false
+        (options as StandardJavadocDocletOptions).addBooleanOption("Xdoclint:none", true)
+        (options as StandardJavadocDocletOptions).addStringOption("Xmaxwarns", "1")
     }
     tasks.withType(JavaCompile) {
        options.compilerArgs.addAll '-Xlint', '-Werror'

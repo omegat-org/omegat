@@ -10,7 +10,7 @@
    
 <body>
     <div id="wh-header">
-    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 5.8.0-取扱説明書</a></div></div>
+    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 6.0.0-取扱説明書</a></div></div>
 
     <div id="wh-body">
       <div class="wh-icon-menu" id="wh-menu"></div>
@@ -693,6 +693,27 @@
                            <a class="link" href="chapter.menus.html#menus.goto.auto.populated.segments">
                               <span class="guisubmenu">自動生成分節</span>
                            </a>にあるナビゲーションメニューを使用して、自動的に挿入された分節にナビゲートします。</p>
+                     </li>
+                     <li class="listitem">
+                        <p>参照用の翻訳として、OmegaTはTMXファイルではないバイリンガル文書もサポートしています。OmegaTがサポートするファイル形式は、OmegaT
+			がソースファイルとして受け入れるすべてのバイリンガル形式です。</p>
+                        <div class="itemizedlist">
+                           <ul class="itemizedlist" style="list-style-type: circle; ">
+                              <li class="listitem">
+                                 <p>PO ファイル</p>
+                              </li>
+                              <li class="listitem">
+                                 <p>TXMLファイル</p>
+                              </li>
+                              <li class="listitem">
+                                 <p>XLIFFファイル</p>
+                              </li>
+                              <li class="listitem">
+                                 <p>SDLXLIFFファイル</p>
+                              </li>
+                           </ul>
+                        </div>
+                        <p>このようなファイルは、プロジェクトの<a class="link" href="chapter.project.folder.html#project.folder.tm" title="tm">tm</a>フォルダーまたはそのサブフォルダの1つに追加できます。変換されたデータは、照合のためにすぐに使用できます。</p>
                      </li>
                   </ul>
                </div>
@@ -1453,7 +1474,7 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                                     </li>
                                     <li class="listitem">
                                        <p>
-                                          <code class="filename">OmegaT.project</code>のリモート版とローカル版の間に競合があり、OmegaTによってローカル側が更新された場合に、OmegaTは<code class="filename">OmegaT.project.YYYYMMDDhhmm.bak</code>というバックアップファイルを作成します。バックアップファイルは少なくとも10回分保持され、古いバックアップは自動的に削除されます。</p>
+                                          <code class="filename">OmegaT.project</code>のリモート版とローカル版の間に競合があり、OmegaTによってローカル側が更新された場合に、OmegaTは<code class="filename">OmegaT.project.YYYYMMDDhhmm.bak</code>というバックアップファイルを作成します。OmegaTでは最大10個のバックアップファイルが作成され、古いバックアップは自動的に順に削除されます。</p>
                                     </li>
                                  </ul>
                               </div>
@@ -1532,7 +1553,7 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
             <div class="variablelist">
                <dl class="variablelist">
                   <dt>
-                     <span class="term">標準版: OmegaT 5.8.0</span>
+                     <span class="term">標準版:OmegaT 6.0.0</span>
                   </dt>
                   <dd>
                      <p>デイリーユースにおすすめのエディションです。</p>
@@ -1548,8 +1569,8 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
             <p>ファイルは<a class="ulink" href="https://omegat.org/download" target="_top">https://omegat.org</a>から直接ダウンロードできます。</p>
             <div class="note">
                <h3 class="title">注記</h3>
-               <p>OmegaT 5.8.0 の実行には、Java 8 Runtime Environment（JRE) が必要です。</p>
-               <p>OmeaTパッケージは、Javaにバンドルされているバージョンとバンドルされていないバージョンの両方で利用できます。Javaを含まないパッケージは、システム全体にインストールされたJava 8 Runtime Environmentに依存します。</p>
+               <p>OmegaT 6.0.0 の実行には、Java 11 Runtime Environment（JRE) が必要です。</p>
+               <p>OmeaTパッケージは、Javaにバンドルされているバージョンとバンドルされていないバージョンの両方で利用できます。Javaを含まないパッケージは、システム全体にインストールされたJava 11 Runtime Environmentに依存します。</p>
                <p>OmegaT 5.8.0以降では、すべてのプラットフォームでJava 11 Runtime Environmentもサポートしています。</p>
                <p>OmegaTチームはEclipse FoundationのAdoptium Projectが提供するJavaランタイムEclipse Temurinを推奨していますが、Java 8互換のランタイム環境であればどれでも動作するはずです。 <a class="ulink" href="https://projects.eclipse.org/projects/adoptium.temurin" target="_top">The Eclipse Temurin™ project</a>を参照。</p>
                <p>IBMは<a class="ulink" href="https://developer.ibm.com/languages/java/semeru-runtimes/downloads/" target="_top">https://developer.ibm.com/languages/java/semeru-runtimes/downloads/</a>でLinux PowerPC 用のJREを提供しています。</p>
@@ -1579,7 +1600,7 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                   <h3 class="title">注記</h3>
                   <p>使用可能なファイルからOmegaTを直接実行することもできますが、そこにある<code class="filename">linux-install.sh</code>スクリプトを実行して、OmegaTをより適切な場所にインストールすることもできます。</p>
                   <p>スクリプトを実行するには、<code class="filename">sudo</code>パスワードを入力する必要があります。</p>
-                  <p>このスクリプトは、<code class="filename">/opt/OmegaT/</code>にある同じバージョンのOmegaTの既存のインストールをチェックします。存在しない場合は、<code class="filename">/opt/omegat/OmegaT_5.8.0</code>にプログラムをインストールし、デフォルトバージョンとして設定します(<code class="filename">/opt/omegat/OmegaT-default</code>)。</p>
+                  <p>このスクリプトは、<code class="filename">/opt/OmegaT/</code>にある同じバージョンのOmegaTの既存のインストールをチェックします。存在しない場合は、<code class="filename">/opt/omegat/OmegaT_6.0.0</code>にプログラムをインストールし、デフォルトバージョンとして設定します(<code class="filename">/opt/omegat/OmegaT-default</code>)。</p>
                </div>
                <p>解凍またはインストールが完了したら、ダウンロードしたファイルは不要になったため削除できます。</p>
             </section>
@@ -1603,7 +1624,7 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                      </div>
                   </div>
                </div>
-               <p>この情報は、Java 8 Runtime Environmentと互換性のあるJavaバージョンを持つすべてのシステムに適用されます。これには、上記のプラットフォームだけでなく、特定のパッケージが提供されていないプラットフォームも含まれます。</p>
+               <p>この情報は、Java 11 Runtime Environmentと互換性のあるJavaバージョンを持つすべてのシステムに適用されます。これには、上記のプラットフォームだけでなく、特定のパッケージが提供されていないプラットフォームも含まれます。</p>
                <p>
                   <span class="emphasis">
                      <em>クロスプラットフォーム(JRE無し)</em>
@@ -1804,7 +1825,7 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                   </div>
                </div>
                <p>方法はシステムによって異なりますが、一般的に、OmegaTをインストールすると、コマンドラインから直接起動できます。詳細は<a class="link" href="chapter.how.to.html#launch.with.command.line" title="コマンドライン起動">コマンドライン起動</a>項をご覧ください。</p>
-               <p>必要なコマンドライン起動パラメータを含むスクリプトを作成できます。<code class="filename">.jar</code>ファイルがJava 8 Runtime Environmentに正しく関連付けられ、PATH設定が正しい場合は、<code class="filename">OmegaT.jar</code>をクリック(またはダブルクリック)して直接起動することもできます。</p>
+               <p>必要なコマンドライン起動パラメータを含むスクリプトを作成できます。<code class="filename">.jar</code>ファイルがJava 11 Runtime Environmentに正しく関連付けられ、PATH設定が正しい場合は、<code class="filename">OmegaT.jar</code>をクリック(またはダブルクリック)して直接起動することもできます。</p>
                <p>詳細については、システムのマニュアル文書を参照してください。</p>
             </section>
             <section class="section" id="launch.with.command.line">

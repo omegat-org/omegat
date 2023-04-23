@@ -109,7 +109,7 @@
               </listitem>
 
               <listitem>
-                <para><filename>OmegaT.project</filename>のリモート版とローカル版の間に競合があり、OmegaTによってローカル側が更新された場合に、OmegaTは<filename>OmegaT.project.YYYYMMDDhhmm.bak</filename>というバックアップファイルを作成します。バックアップファイルは少なくとも10回分保持され、古いバックアップは自動的に削除されます。</para>
+                <para><filename>OmegaT.project</filename>のリモート版とローカル版の間に競合があり、OmegaTによってローカル側が更新された場合に、OmegaTは<filename>OmegaT.project.YYYYMMDDhhmm.bak</filename>というバックアップファイルを作成します。OmegaTでは最大10個のバックアップファイルが作成され、古いバックアップは自動的に順に削除されます。</para>
               </listitem>
             </itemizedlist>
 		  </listitem>

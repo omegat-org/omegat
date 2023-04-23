@@ -6,8 +6,8 @@
 ]>
 <book lang="ja" id="book.user.manual">
   <bookinfo>
-    <title id="book.user.manual.title">OmegaT 5.8.0-取扱説明書</title>
-    <pubdate>@timestamp@</pubdate>
+    <title id="book.user.manual.title">OmegaT 6.0.0-取扱説明書</title>
+    <!-- <pubdate>@timestamp@</pubdate> -->
 	<!-- TODO automate date insertion -->
     <abstract>
       <para>この文書は 、自由に使用できるコンピューター翻訳支援ツールである、OmegaTの公式な取扱説明書です。</para>
@@ -38,18 +38,18 @@
   
   <xi:include href="Introduction.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
-  <xi:include href="OmegaT5_HowTo.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+  <xi:include href="OmegaT_HowTo.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
-  <xi:include href="OmegaT5_EditorsPanes.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+  <xi:include href="OmegaT_EditorsPanes.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
-  <xi:include href="OmegaT5_Menus.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+  <xi:include href="OmegaT_Menus.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
-  <xi:include href="OmegaT5_WindowsAndDialogs.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+  <xi:include href="OmegaT_WindowsAndDialogs.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
-  <xi:include href="OmegaT5_Preferences.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+  <xi:include href="OmegaT_Preferences.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
-  <xi:include href="OmegaT5_ProjectFolder.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+  <xi:include href="OmegaT_ProjectFolder.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
-  <xi:include href="OmegaT5_Appendices.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+  <xi:include href="OmegaT_Appendices.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 	           
 </book>

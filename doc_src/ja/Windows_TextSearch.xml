@@ -216,9 +216,10 @@
 			</varlistentry>
 
 			<varlistentry>
-			  <term>翻訳メモリ</term>
+			  <term>参照用メモリ</term>
 			  <listitem>
-				<para><link linkend="project.folder.tm" endterm="project.folder.tm.title"/>フォルダーにある翻訳メモリを含めます。</para>
+				<para><link linkend="project.folder.tm" endterm="project.folder.tm.title"/>フォルダーにある翻訳メモリを参照用に含めます。
+				</para>
 			  </listitem>
 			</varlistentry>
 
@@ -244,9 +245,13 @@
 	  </varlistentry>
 
 	  <varlistentry>
-		<term><guibutton>詳細設定を表示する</guibutton></term>
+		<term><guibutton>参考訳文の設定</guibutton></term>
 		<listitem>
 		  <para>翻訳を作成または変更したユーザー、翻訳(変更)の日時、現在の原文に存在しない分節を除外するかどうかなどの追加の検索条件を選択します。</para>
+
+		  <warning>
+			<para>参考訳文の設定は、メインメモリのみに適用され、参照用の翻訳メモリには適用されません。</para>
+		  </warning>
 
 		  <variablelist>
 			<varlistentry>

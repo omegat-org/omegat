@@ -54,7 +54,7 @@
 	</varlistentry>
 	
 	<varlistentry id="windows.source.files.list.download.page">
-	  <term id="windows.source.files.list.download.page.title"><guibutton>MediaWiki からの原文ファイル追加...</guibutton></term>
+	  <term id="windows.source.files.list.download.page.title"><guibutton>MediaWiki からの原文ファイル追加</guibutton></term>
 	  <listitem>
 		<para>ページのURLを要求し、<link linkend="project.folder.source" endterm="project.folder.source.title"/>フォルダーにダウンロードします。</para>
 	  </listitem>

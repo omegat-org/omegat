@@ -68,7 +68,7 @@
     <varlistentry id="menus.project.save">
       <term id="menus.project.save.title"><guimenuitem>保存</guimenuitem><keycombo><keycap>C</keycap><keycap>S</keycap></keycombo></term>
       <listitem>
-        <para>プロジェクトの翻訳メモリ(<link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/>)を保存します。</para>
+        <para>プロジェクトの翻訳メモリ(<link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/>)を保存し、チームプロジェクトを同期します。</para>
 		<para>OmegaT はデフォルトで 10 分ごとに翻訳を自動保存します。プロジェクトを閉じる時や、OmegaT の終了時も同様です。詳細は<link linkend="dialog.preferences.saving.and.output.interval" endterm="dialog.preferences.saving.and.output.interval.title"/>の設定を参照してください。</para>
       </listitem>
     </varlistentry>
@@ -81,7 +81,7 @@
     </varlistentry>
 
     <varlistentry id="menus.project.download.mediawiki.page">
-      <term id="menus.project.download.mediawiki.page.title"><guimenuitem>MediaWiki からの原文ファイル追加...</guimenuitem></term>
+      <term id="menus.project.download.mediawiki.page.title"><guimenuitem>MediaWiki からの原文ファイル追加</guimenuitem></term>
       <listitem>
 		<para>貼り付けしたいMediawikiページのURLを翻訳できるダイアログを開きます。Wikiページのソースデータは、<filename>.utf8</filename>拡張子を持つテキストファイルとして、<link linkend="project.folder.source" endterm="project.folder.source.title"/>フォルダーにコピーされます。</para>
       </listitem>
@@ -108,6 +108,7 @@
       <listitem>
         <para>翻訳結果に基づいて訳文ファイルを作成します。訳文ファイルは、<link linkend="project.folder.target" endterm="project.folder.target.title"/> フォルダーに保存されます。</para>
 		<note><para>タグに問題がある訳文ファイルの作成をブロックすることも可能です。詳細は<link linkend="dialogs.preferences.tag.processing.do.not.allow.creating.translated.documents.with.tag.issues" endterm="dialogs.preferences.tag.processing.do.not.allow.creating.translated.documents.with.tag.issues.title"/>の設定を参照してください。</para></note>
+		<para>訳文ファイルを作成するたびに、OmegaTはプロジェクトを保存し(上記の<link linkend="menus.project.save" endterm="menus.project.save.title"/>メニュー項目を参照)、現在の原文ファイルセットの翻訳済の分節の翻訳メモリを作成します。</para>
       </listitem>
     </varlistentry>
 
@@ -115,8 +116,7 @@
       <term id="menus.project.create.current.translated.document.title"><guimenuitem>現在の訳文ファイルを作成</guimenuitem><keycombo><keycap>C</keycap><keycap>S</keycap><keycap>D</keycap></keycombo></term>
       <listitem>
         <para>翻訳中の現在の文書に対応する訳文ファイルを生成します。結果のファイルは<link linkend="project.folder.target" endterm="project.folder.target.title"/>フォルダーに配置されます。</para>
-		<para>
-		</para>				
+		<para>現在の訳文ファイルを作成するたびに、OmegaTはプロジェクトを保存し(上記の<link linkend="menus.project.save" endterm="menus.project.save.title"/>メニュー項目を参照)、現在の原文ファイルセットの翻訳済の分節を含む翻訳メモリを作成します。</para>
       </listitem>
     </varlistentry>
 

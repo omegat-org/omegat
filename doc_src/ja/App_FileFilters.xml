@@ -199,7 +199,7 @@
           <listitem>
 			<para>ファイルが作成されたシステム時間</para>
 
-			<para>例については、<ulink url="https://docs.oracle.com/javase/8/docs/api/java/text/SimpleDateFormat.html">Oracleのドキュメント</ulink>を参照してください。</para>
+			<para>例については、<ulink url="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/text/SimpleDateFormat.html">Oracleのドキュメント</ulink>を参照してください。</para>
           </listitem>
 		</varlistentry>
 
@@ -415,7 +415,7 @@
 			  </listitem>
 			</varlistentry>
 			<varlistentry>
-			  <term>読み込み時に無視される段落(正規表現)</term>
+			  <term>無視された段落(正規表現)</term>
 			  <listitem>
 				  <para>正規表現に一致する段落は読み込み時に無視され、翻訳用に表示されません。</para>
 

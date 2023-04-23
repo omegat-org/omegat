@@ -281,6 +281,8 @@ dependencies {
     // Test dependencies
 
     testFixturesApi 'junit:junit:4.13.2'
+    // for http connection test
+    testFixturesApi 'com.github.tomakehurst:wiremock-jre8:2.35.0'
     testFixturesImplementation 'commons-io:commons-io:2.11.0'
 
     testImplementation 'org.xmlunit:xmlunit-legacy:2.8.3'
@@ -294,8 +296,6 @@ dependencies {
     }
     testRuntimeOnly "org.languagetool:language-pl:${languageToolVersion}"
     testRuntimeOnly "org.slf4j:slf4j-jdk14:1.7.32"
-    // http connection tests
-    testImplementation 'com.github.tomakehurst:wiremock-jre8-standalone:2.35.0'
 
     // JAXB codegen only
     jaxb 'com.sun.xml.bind:jaxb-xjc:2.3.4'
@@ -332,7 +332,6 @@ jar {
             }
         }
         pluginAttr('Dictionary driver[bundle]', 'org/omegat/core/dictionaries/', 'dictionary', desc.dictionary)
-        pluginAttr('MT connector[bundle]', 'org/omegat/core/machinetranslators/', 'machinetranslator', desc.machinetranslator)
         pluginAttr('File filters[bundle]', 'org/omegat/filters2/', 'filter', desc.filters2)
         pluginAttr('XML filters[bundle]', 'org/omegat/filters3/', 'filter', desc.filters3)
         pluginAttr('New XML filters[bundle]', 'org/omegat/filters4/', 'filter', desc.filters4)

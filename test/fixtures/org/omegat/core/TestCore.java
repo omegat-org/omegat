@@ -35,9 +35,13 @@ import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 
+import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
+import com.github.tomakehurst.wiremock.junit.WireMockRule;
 import org.apache.commons.io.FileUtils;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
+
 import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.NotLoadedProject;
 import org.omegat.core.data.SourceTextEntry;
@@ -556,6 +560,9 @@ public abstract class TestCore {
             }
         });
     }
+    @Rule
+    public WireMockRule wireMockRule =
+            new WireMockRule(WireMockConfiguration.wireMockConfig().dynamicPort().dynamicHttpsPort());
 
     @After
     public final void tearDownCore() throws Exception {

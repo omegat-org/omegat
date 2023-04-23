@@ -1037,7 +1037,7 @@
                   <dt id="windows.source.files.list.download.page">
                      <span class="term" id="windows.source.files.list.download.page.title">
                         <span class="guibutton">Add
-	  Online MediaWiki Page...</span>
+	  MediaWiki Page...</span>
                      </span>
                   </dt>
                   <dd>
@@ -1057,7 +1057,7 @@
                </a>
                <a class="link" href="chapter.menus.html#menus.project.download.mediawiki.page">
                   <span class="guimenuitem">Add
-      Online MediaWiki Page...</span>
+      MediaWiki Page...</span>
                </a> menu items.</p>
             <div class="note">
                <h3 class="title">Note</h3>
@@ -1399,13 +1399,13 @@
                         <div class="variablelist">
                            <dl class="variablelist">
                               <dt>
-                                 <span class="term">Memory</span>
+                                 <span class="term">Main Memory</span>
                               </dt>
                               <dd>
                                  <p>Include the project memory (<a class="link" href="chapter.project.folder.html#project.folder.project.save.tmx">project_save.tmx</a>).</p>
                               </dd>
                               <dt>
-                                 <span class="term">TMs</span>
+                                 <span class="term">Reference TMs</span>
                               </dt>
                               <dd>
                                  <p>Include the translation memories located in the <a class="link" href="chapter.project.folder.html#project.folder.tm" title="tm">tm</a>
@@ -1434,13 +1434,18 @@
                      </dd>
                      <dt>
                         <span class="term">
-                           <span class="guibutton">Show Advanced Options</span>
+                           <span class="guibutton">TM Search Options</span>
                         </span>
                      </dt>
                      <dd>
                         <p>Select additional criteria such as the person who authored or
 		  changed the translation, the date and time of translation
 		  (modification), or whether to exclude orphan segments.</p>
+                        <div class="warning">
+                           <h3 class="title">Warning</h3>
+                           <p>The TM search options only apply to the main memory and not to
+			the reference memories.</p>
+                        </div>
                         <div class="variablelist">
                            <dl class="variablelist">
                               <dt>
@@ -2194,14 +2199,12 @@
                            </a> preferences.</p>
                      </dd>
                      <dt>
-                        <span class="term">Hide Tags</span>
+                        <span class="term">Remove Tags</span>
                      </dt>
                      <dd>
                         <p>The aligner includes tags in the segments by default. Uncheck
-          the check box to apply the <a class="link" href="chapter.windows.and.dialogs.html#dialogs.project.properties.hide.tags">
-                              <code class="option">Hide
-        tags</code>
-                           </a> option.</p>
+          the check box to remove all tags from the alignment and the resulting
+	  TMX.</p>
                      </dd>
                      <dt id="windows.aligner.adjust.highlight">
                         <span class="term" id="windows.aligner.adjust.highlight.title">Highlight</span>

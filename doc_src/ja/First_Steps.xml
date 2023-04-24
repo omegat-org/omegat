@@ -5,7 +5,7 @@
 %manualvariables;
 ]>
 <article lang="ja" id="first.steps">
-  <title>OmegaT &vernb;</title>
+  <title>OmegaT</title>
   <section>
 	<title id="first-steps">最初の一歩</title>
 	<para>取扱説明書を開くには、 <keycap>F1</keycap> キーを押すか、 <guimenu>&gt; ヘルプ</guimenu>メニューにアクセスします。取扱説明書には、OmegaTの徹底入門が含まれています。最低限の構成でOmegaTを使いはじめるには、次のようにします。<orderedlist id="first-step-list">

@@ -3,7 +3,7 @@
 "../../../docbook-xml-4.5/docbookx.dtd"
 [<!ENTITY % manualvariables SYSTEM "manualvariables.mod"> %manualvariables;]>
 <article lang="en" id="first.steps">
-  <title>OmegaT &vernb;</title>
+  <title>OmegaT</title>
   <section>
 	<title id="first-steps">First steps</title>
 	<para>Hit <keycap>F1</keycap> or access the <guimenu>> Help</guimenu> menu

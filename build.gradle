@@ -4,6 +4,7 @@ import org.apache.tools.ant.filters.ReplaceTokens
 plugins {
     id 'application'
     id 'java-library'
+    id 'java-test-fixtures'
     id 'maven-publish'
     id 'signing'
     id 'eclipse'
@@ -114,6 +115,11 @@ sourceSets {
         resources {
             srcDir 'test/src'
             srcDir 'test/data'
+        }
+    }
+    testFixtures {
+        java {
+            srcDir 'test/fixtures'
         }
     }
     testIntegration {
@@ -276,10 +282,15 @@ dependencies {
     // http connection tests
     testImplementation 'com.github.tomakehurst:wiremock-jre8-standalone:2.35.0'
 
+    testFixturesApi 'junit:junit:4.13.2'
+    testFixturesImplementation sourceSets.main.output
+    testFixturesImplementation 'commons-io:commons-io:2.11.0'
+
     // JAXB codegen only
     jaxb 'com.sun.xml.bind:jaxb-xjc:2.3.4'
 
     testIntegrationImplementation sourceSets.main.output, sourceSets.test.output
+    testIntegrationImplementation(testFixtures(project.rootProject))
 }
 
 jar {

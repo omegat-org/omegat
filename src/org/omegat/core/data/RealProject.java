@@ -61,6 +61,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import javax.xml.stream.XMLStreamException;
+
 import org.madlonkay.supertmxmerge.StmProperties;
 import org.madlonkay.supertmxmerge.SuperTmxMerge;
 import org.xml.sax.SAXParseException;
@@ -334,7 +336,7 @@ public class RealProject implements IProject {
         Log.logInfoRB("LOG_DATAENGINE_LOAD_START");
         UIThreadsUtil.mustNotBeSwingThread();
 
-        // load new project
+        // load a new project
         try {
             if (!lockProject()) {
                 throw new KnownException("PROJECT_LOCKED");
@@ -368,7 +370,7 @@ public class RealProject implements IProject {
 
             loadFilterSettings();
             loadSegmentationSettings();
-            loadTranslations(); // load projectsave.tmx
+            loadTranslations(); // load project_save.tmx
             loadSourceFiles();
 
             // This MUST happen after calling loadTranslations()
@@ -377,8 +379,8 @@ public class RealProject implements IProject {
                 rebaseAndCommitProject(true);
             }
 
-            // after loadSourcefiles, the entries are filled. The list can now
-            // (and only now) be readonly.
+            // After `#loadSourcefiles`, the entries are filled. The list can now
+            // (and only now) be read only.
             allProjectEntries = Collections.unmodifiableList(allProjectEntries);
             // and now we can set the importHandler, used by loadTM
             importHandler = new ImportFromAutoTMX(this, allProjectEntries);
@@ -424,6 +426,13 @@ public class RealProject implements IProject {
             Core.getMainWindow().showErrorDialogRB("TF_ERROR", "OUT_OF_MEMORY", memory);
             // Just quit, we can't help it anyway
             System.exit(0);
+        } catch (XMLStreamException e) {
+            // omegat.project file corrupted.
+            Log.logErrorRB(e, "TF_LOAD_ERROR_PARSER_EXCEPTION");
+            Core.getMainWindow().displayErrorRB(e, "TF_LOAD_ERROR_PARSER_EXCEPTION");
+            if (!loaded) {
+                unlockProject();;
+            }
         } catch (Throwable e) {
             Log.logErrorRB(e, "TF_LOAD_ERROR");
             Core.getMainWindow().displayErrorRB(e, "TF_LOAD_ERROR");

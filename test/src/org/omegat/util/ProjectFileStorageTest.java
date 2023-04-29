@@ -363,6 +363,14 @@ public class ProjectFileStorageTest {
     }
 
     @Test
+    public void testProjectFileWithEntities() throws Exception {
+        File projFile = new File(PROJECT_DIR, "entities.project");
+        Omegat omt = ProjectFileStorage.parseProjectFile(projFile);
+        assertEquals("translation_fr-ZZ_check", omt.getProject().getTargetDir());
+        assertEquals("fr-ZZ", omt.getProject().getTargetLang());
+    }
+
+    @Test
     public void testMissingDirs() throws Exception {
         // Older project files can be missing path definitions, in which case
         // we should fall back to the default values.

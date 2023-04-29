@@ -25,8 +25,11 @@
 
 package org.omegat.util;
 
+import javax.xml.stream.XMLInputFactory;
+
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.xml.JacksonXmlModule;
+import com.fasterxml.jackson.dataformat.xml.XmlFactory;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
 import com.fasterxml.jackson.module.jaxb.JaxbAnnotationModule;
@@ -41,7 +44,10 @@ public final class JaxbXmlMapper {
     static {
         JacksonXmlModule xmlModule = new JacksonXmlModule();
         xmlModule.setDefaultUseWrapper(false);
-        mapper = new XmlMapper(xmlModule);
+        XmlFactory xmlFactory = new XmlFactory();
+        XMLInputFactory xmlIn = xmlFactory.getXMLInputFactory();
+        xmlIn.setProperty(XMLInputFactory.SUPPORT_DTD, Boolean.TRUE);
+        mapper = new XmlMapper(xmlFactory, xmlModule);
         mapper.registerModule(new JaxbAnnotationModule());
         mapper.configure(ToXmlGenerator.Feature.WRITE_XML_DECLARATION, true);
         mapper.enable(SerializationFeature.INDENT_OUTPUT);

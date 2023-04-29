@@ -31,6 +31,9 @@
 
   Bug fixes:
 
+  - Project not loaded if it contains DTD internal entities
+  https://sourceforge.net/p/omegat/bugs/1163/
+
   - SRX conf file is produced with localized name of language
   https://sourceforge.net/p/omegat/bugs/1160/
 

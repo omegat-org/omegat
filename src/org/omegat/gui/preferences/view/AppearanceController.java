@@ -33,11 +33,14 @@ import javax.swing.JComponent;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 
+import org.openide.awt.Mnemonics;
+
 import org.omegat.core.Core;
 import org.omegat.gui.main.MainWindow;
 import org.omegat.gui.main.MainWindowUI;
 import org.omegat.gui.preferences.BasePreferencesController;
 import org.omegat.util.OStrings;
+import org.omegat.util.Platform;
 import org.omegat.util.Preferences;
 import org.omegat.util.gui.DelegatingComboBoxRenderer;
 
@@ -65,7 +68,14 @@ public class AppearanceController extends BasePreferencesController {
 
     private void initGui() {
         panel = new AppearancePreferencesPanel();
-        String[] lafs = Arrays.asList(UIManager.getInstalledLookAndFeels()).stream().map(LookAndFeelInfo::getClassName)
+        if (Platform.isMacOSX()) {
+            Mnemonics.setLocalizedText(panel.newUICheckBox, OStrings.getString(
+                    "PREFS_APPEARANCE_QUICK_ACCESS_TOOLBAR_MACOS"));
+        } else {
+            Mnemonics.setLocalizedText(panel.newUICheckBox, OStrings.getString("PREFS_APPEARANCE_SMART_MENU"));
+        }
+        String[] lafs = Arrays.asList(UIManager.getInstalledLookAndFeels()).stream()
+                .map(LookAndFeelInfo::getClassName)
                 .toArray(String[]::new);
         panel.cbThemeSelect.setModel(new DefaultComboBoxModel<>(lafs));
         panel.cbThemeSelect.setRenderer(new DelegatingComboBoxRenderer<String, String>() {

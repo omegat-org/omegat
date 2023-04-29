@@ -257,7 +257,7 @@ dependencies {
         }
 
         // dependencies in submodules, you should put it as compileOnly in subprojects
-        runtimeOnly "tokyo.northside:tipoftheday:0.4.0"
+        runtimeOnly "tokyo.northside:tipoftheday:0.4.1"
         runtimeOnly "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.13.4"
     }
 

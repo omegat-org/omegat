@@ -27,7 +27,7 @@ dependencies {
         compileOnly fileTree(dir: providedLibsDir, include: '**/*.jar')
     } else {
         // runtime dependencies should be in main project
-        compileOnly "tokyo.northside:tipoftheday:0.4.0"
+        compileOnly "tokyo.northside:tipoftheday:0.4.1"
         compileOnly "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.13.4"
     }
 }

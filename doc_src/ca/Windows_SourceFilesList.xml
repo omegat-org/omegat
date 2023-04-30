@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="windows.source.files.list">
+  <title id="windows.source.files.list.title"><guilabel>Fitxers d'origen</guilabel></title>
+
+  <para>Aquesta finestra es mostra automàticament quan l'OmegaT carrega un projecte i en qualsevol moment amb <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.source.files.list" endterm="menus.project.source.files.list.title"/>.</para>
+
+  <para>La finestra mostra la informació següent:</para>
+
+  <itemizedlist>
+    <listitem>
+      <para>En el títol de la finestra: nombre total de fitxers traduïbles en el projecte.</para>
+
+	  <para>Són els fitxers presents en la carpeta <link linkend="project.folder.source" endterm="project.folder.source.title"/> en un format que l'OmegaT pot reconèixer.</para>
+    </listitem>
+
+    <listitem>
+      <para>Com a llista: tots els fitxers traduïbles del projecte.</para>
+
+	  <para>En fer clic en qualsevol fitxer, s'obre la subfinestra <link linkend="panes.editor" endterm="panes.editor.title"/> per a la traducció.</para>
+    </listitem>
+
+    <listitem>
+      <para>Cada entrada de fitxer inclou el nom, el tipus de filtre de fitxers, la codificació i el nombre de segments que conté.</para>
+    </listitem>
+
+    <listitem>
+      <para>En la part inferior es mostren el nombre total de segments, el nombre de segments únics en tot el projecte i el nombre de segments únics ja traduïts.</para>
+    </listitem>
+  </itemizedlist>
+
+  <para>Si escriviu qualsevol text, s'obrirà un camp <guilabel>Filtre</guilabel> en la part inferior de la finestra, on es poden introduir parts dels noms dels fitxers. Podeu utilitzar les fletxes per a seleccionar un fitxer i prémer <keycap>Retorn</keycap> per a obrir-lo per a traduir-lo.</para>
+
+  <note>
+	<para>Els noms dels fitxers (en la primera columna) es poden ordenar alfabèticament fent clic en la capçalera. Podeu canviar la posició d'un nom de fitxer seleccionant-lo i fent clic en un dels botons <guibutton>Mou...</guibutton> de la dreta.</para>
+  </note>
+
+  <para>Si feu clic dret en un nom de fitxer, s'obre un menú emergent que us permet obrir el fitxer d'origen i, si existeix, el fitxer de destinació.</para>
+
+  <para>El nombre de segments <emphasis role="bold">únics</emphasis> es calcula restant el nombre de segments repetits del nombre total de segments.</para>
+
+  <para>La diferència entre «Nombre de segments» i «Nombre de segments únics» proporciona una idea aproximada del nombre de repeticions en el text. Utilitzeu <link linkend="menus.tools" endterm="menus.tools.title"/><link linkend="menus.tools.statistics" endterm="menus.tools.statistics.title"/> per a obtenir més informació.</para>
+
+  <para>Modificar les regles de segmentació pot alterar el nombre de segments i segments únics. De totes maneres, normalment hauríeu d'evitar-ho quan hàgiu començat a traduir el projecte. Consulteu l'annex <link linkend="app.segmentation" endterm="app.segmentation.title"/> per a conèixer més detalls.</para>
+
+  <para>Els botons de la part inferior es poden utilitzar per a afegir fitxers al projecte:</para>
+  
+  <variablelist>
+	<varlistentry id="windows.source.files.list.copy.files">
+	  <term id="windows.source.files.list.copy.files.title"><guibutton>Afegeix fitxers...</guibutton></term>
+	<listitem>
+	  <para>Copia els fitxers seleccionats a la carpeta <link linkend="project.folder.source" endterm="project.folder.source.title"/> i torna a carregar el projecte per a tenir en compte els fitxers nous.</para>
+	</listitem>
+	</varlistentry>
+	
+	<varlistentry id="windows.source.files.list.download.page">
+	  <term id="windows.source.files.list.download.page.title"><guibutton>Afegeix una pàgina del MediaWiki en línia...</guibutton></term>
+	  <listitem>
+		<para>Demana l'URL de la pàgina i la baixa a la carpeta <link linkend="project.folder.source" endterm="project.folder.source.title"/>.</para>
+	  </listitem>
+	</varlistentry>
+  </variablelist>
+  
+  <para>Les dues accions són equivalents a utilitzar els elements del menú <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.copy.files.to.source.folder" endterm="menus.project.copy.files.to.source.folder.title"/> i <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.download.mediawiki.page" endterm="menus.project.download.mediawiki.page.title"/>.</para>
+  
+  <note>
+	<para>Podeu editar manualment el fitxer de configuració <link linkend="configuration.folder.default.contents.omegat.prefs" endterm="configuration.folder.default.contents.omegat.prefs.title"/> per a impedir que la finestra amb la llista de fitxers d'origen s'obri automàticament en carregar un projecte.</para>
+  </note>
+</section>

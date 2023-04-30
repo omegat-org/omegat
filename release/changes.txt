@@ -1,9 +1,82 @@
 ----------------------------------------------------------------------
- OmegaT 5.8.0
+ OmegaT 6.1.0
+----------------------------------------------------------------------
+  7 Enhancement
+  5 Bug fixes
+  1 Localisation updates
+----------------------------------------------------------------------
+6.1.0 vs 6.0.0
+
+  Implemented requests:
+
+  - Add nashorn javascript engine[Java 17 compatibility]
+  https://sourceforge.net/p/omegat/feature-requests/1525/
+
+  - Use Jackson library as XML parser
+  https://sourceforge.net/p/omegat/feature-requests/1582/
+
+  - Improve TBX parsing
+  https://sourceforge.net/p/omegat/feature-requests/1268/
+
+  - Support SRX format
+
+  - Build System: update gradle verison to 7.5.1
+  https://sourceforge.net/p/omegat/feature-requests/1691/
+
+  - Upgrade to LanguageTool 3.6
+  https://sourceforge.net/p/omegat/feature-requests/1299/
+
+  - Team feature: SSH support id_ecdsa and id_ed25519 for default key
+  https://sourceforge.net/p/omegat/feature-requests/1598/
+
+  Bug fixes:
+
+  - Project not loaded if it contains DTD internal entities
+  https://sourceforge.net/p/omegat/bugs/1163/
+
+  - SRX conf file is produced with localized name of language
+  https://sourceforge.net/p/omegat/bugs/1160/
+
+  - Backup file does not created in no-team project
+  https://sourceforge.net/p/omegat/bugs/1159/
+
+  - Fixed "null" file names in search results when "Display: file names" checkbox was unchecked
+  https://sourceforge.net/p/omegat/bugs/1154/
+
+  - MT engines show JSON parser error as translated text
+  https://sourceforge.net/p/omegat/bugs/1141
+
+  - OpenSSH new key format and ECDSA/ED25519 keys
+  https://sourceforge.net/p/omegat/bugs/1107/
+
+Localization Updates:
+
+  - Japanese localization updated to 6.0 (UI, documentation)
+
+----------------------------------------------------------------------
+ OmegaT 6.0.0
+----------------------------------------------------------------------
+  1 Enhancement
+  1 Bug fixes
+  0 Localisation updates
+----------------------------------------------------------------------
+6.0.0 vs 5.8.0
+
+  Implemented requests:
+
+  - OmegaT 6.0 requires Java 11 to run
+
+  Bug fixes:
+
+  - Fixed "null" file names in search results when "Display: file names" checkbox was unchecked
+  https://sourceforge.net/p/omegat/bugs/1154/
+
+----------------------------------------------------------------------
+ OmegaT 5.8.0 (2023-04-01)
 ----------------------------------------------------------------------
    4 Removed features
-  36 Enhancements
-  44 Bug fixes
+  40 Enhancements
+  46 Bug fixes
   9 Localization updates
 ----------------------------------------------------------------------
 5.8.0 vs 5.7.1
@@ -29,9 +102,17 @@
 
   Implemented requests:
 
-  - Can share authentication between Git or SVN repositories 
-which are in the same server
+  - Help user to copy error message to clipboard
+  https://sourceforge.net/p/omegat/feature-requests/1683/
+
+  - New default: Dictionary search should not be automatic
+  https://sourceforge.net/p/omegat/feature-requests/1680/
+
+  - Share authentication between Git or SVN repositories on the same server
   https://sourceforge.net/p/omegat/feature-requests/1670
+
+  - Add filter filtres list sorting
+  https://sourceforge.net/p/omegat/feature-requests/1667/
 
   - Integrate the Stax filters to OmegaT
   https://sourceforge.net/p/omegat/feature-requests/1666/
@@ -131,6 +212,9 @@ which are in the same server
   - Sorting terms alphabetically in glossary pane
   https://sourceforge.net/p/omegat/feature-requests/1241/
 
+  - Rename option in search function
+  https://sourceforge.net/p/omegat/feature-requests/1087/
+
   - Support Git branch in Team Project
   https://sourceforge.net/p/omegat/feature-requests/918/
 
@@ -144,6 +228,12 @@ which are in the same server
   https://github.com/omegat-org/omegat/pull/122
 
   Bug fixes:
+
+  - Change key to explicit offline mode cause
+  https://sourceforge.net/p/omegat/bugs/1153
+
+  - Wrap long lines in error messages
+  https://sourceforge.net/p/omegat/bugs/1145
 
   - Color the fuzzy matches from /tm/mt
   https://sourceforge.net/p/omegat/bugs/1144
@@ -282,7 +372,7 @@ which are in the same server
 
   - Belarusian localization updated to 5.8 (UI, readme)
   - Brazilian Portuguese localization updated to 5.8 (UI)
-  - Catalan localization updated to 5.8 (UI, readme)
+  - Catalan localization updated to 5.8 (UI, readme, documentation)
   - Corsican localization updated to 5.8 (UI, readme)
   - Dutch localization updated to 5.8 (UI)
   - German localization updated to 5.8 (UI, readme)

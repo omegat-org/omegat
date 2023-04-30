@@ -6,7 +6,7 @@
  Copyright (C) 2012 Alex Buloichik
                2014 Alex Buloichik, Aaron Madlon-Kay
                2022 Hiroshi Miura
-               Home page: http://www.omegat.org/
+               Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
  This file is part of OmegaT.
@@ -22,7 +22,7 @@
  GNU General Public License for more details.
 
  You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
 package org.omegat.core.team2.impl;
@@ -40,10 +40,9 @@ import java.util.stream.StreamSupport;
 
 import javax.xml.namespace.QName;
 
-import org.eclipse.jgit.api.CheckoutCommand;
+import org.apache.sshd.client.SshClient;
 import org.eclipse.jgit.api.CloneCommand;
 import org.eclipse.jgit.api.CommitCommand;
-import org.eclipse.jgit.api.CreateBranchCommand;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.LsRemoteCommand;
 import org.eclipse.jgit.api.ResetCommand.ResetType;
@@ -70,9 +69,14 @@ import org.eclipse.jgit.transport.CredentialsProvider;
 import org.eclipse.jgit.transport.PushResult;
 import org.eclipse.jgit.transport.RemoteRefUpdate;
 import org.eclipse.jgit.transport.RemoteRefUpdate.Status;
+import org.eclipse.jgit.transport.SshSessionFactory;
+import org.eclipse.jgit.transport.sshd.JGitKeyCache;
+import org.eclipse.jgit.transport.sshd.SshdSessionFactory;
+import org.eclipse.jgit.transport.sshd.SshdSessionFactoryBuilder;
 import org.eclipse.jgit.treewalk.AbstractTreeIterator;
 import org.eclipse.jgit.treewalk.CanonicalTreeParser;
 import org.eclipse.jgit.treewalk.FileTreeIterator;
+import org.eclipse.jgit.util.FS;
 
 import org.omegat.core.team2.IRemoteRepository2;
 import org.omegat.core.team2.ProjectTeamSettings;
@@ -90,9 +94,11 @@ import gen.core.project.RepositoryDefinition;
 public class GITRemoteRepository2 implements IRemoteRepository2 {
     private static final Logger LOGGER = Logger.getLogger(GITRemoteRepository2.class.getName());
 
+    // allow override default remote name and branch name.
     protected static final String DEFAULT_LOCAL_BRANCH = "master";
     protected static final String REMOTE = Constants.DEFAULT_REMOTE_NAME;
 
+    // allow override timeout.
     protected static final int TIMEOUT = 30; // seconds
 
     String repositoryURL;
@@ -105,9 +111,33 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
     ProjectTeamSettings projectTeamSettings;
 
     static {
-        CredentialsProvider.setDefault(new GITCredentialsProvider());
+        installSshSessionFactory();
+        GITCredentialsProvider.install();
     }
 
+    private static void installSshSessionFactory() {
+        // SSH directories
+        // Linux/macOS: ~/.ssh
+        // C:\Windows\System32\OpenSSH.exe: %USERPROFILE%\.ssh
+        SshdSessionFactory sshdSessionFactory = new SshdSessionFactoryBuilder()
+                .setPreferredAuthentications("publickey,keyboard-interactive")
+                .setHomeDirectory(FS.detect().userHome())
+                .setSshDirectory(new File(FS.detect().userHome(), ".ssh")).build(new JGitKeyCache());
+        SshSessionFactory.setInstance(sshdSessionFactory);
+    }
+
+    /**
+     * Initialize remote repository access credentials.
+     * 
+     * @param repo
+     *            repository description instance
+     * @param dir
+     *            directory for store files
+     * @param teamSettings
+     *            team settings.
+     * @throws Exception
+     *             when error happened.
+     */
     @Override
     public void init(RepositoryDefinition repo, File dir, ProjectTeamSettings teamSettings) throws Exception {
         repositoryURL = repo.getUrl();
@@ -119,65 +149,59 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
         String predefinedFingerprint = repo.getOtherAttributes().get(new QName("gitFingerprint"));
         ((GITCredentialsProvider) CredentialsProvider.getDefault()).setPredefinedCredentials(repositoryURL,
                 predefinedUser, predefinedPass, predefinedFingerprint);
-        ((GITCredentialsProvider) CredentialsProvider.getDefault()).setTeamSettings(teamSettings);
 
-        File gitDir = new File(localDirectory, ".git");
-        if (gitDir.exists() && gitDir.isDirectory()) {
-            // already cloned
-            repository = Git.open(localDirectory).getRepository();
-            String defaultBranch = getDefaultBranchName(repository);
-            branch = repo.getBranch() == null? defaultBranch : repo.getBranch();
-            trackBranch = !(branch.equals(defaultBranch));
-            if (trackBranch) {
-                repository.resolve(branch);
+        SshClient client = SshClient.setUpDefaultClient();
+        try {
+            client.start();
+            File gitDir = new File(localDirectory, ".git");
+            if (gitDir.exists() && gitDir.isDirectory()) {
+                // already cloned
+                repository = Git.open(localDirectory).getRepository();
+                configRepo();
+                try (Git git = new Git(repository)) {
+                    git.submoduleInit().call();
+                    git.submoduleUpdate().setTimeout(TIMEOUT).call();
+                }
+            } else {
+                Log.logInfoRB("GIT_START", "clone");
+                CloneCommand c = Git.cloneRepository();
+                c.setURI(repositoryURL);
+                c.setDirectory(localDirectory);
+                c.setTimeout(TIMEOUT);
+                try {
+                    c.call();
+                } catch (InvalidRemoteException e) {
+                    if (localDirectory.exists()) {
+                        deleteDirectory(localDirectory);
+                    }
+                    Throwable cause = e.getCause();
+                    if (cause instanceof org.eclipse.jgit.errors.NoRemoteRepositoryException) {
+                        BadRepositoryException bre = new BadRepositoryException(cause.getLocalizedMessage());
+                        bre.initCause(e);
+                        throw bre;
+                    }
+                    throw e;
+                }
+                repository = Git.open(localDirectory).getRepository();
+                try (Git git = new Git(repository)) {
+                    git.submoduleInit().call();
+                    git.submoduleUpdate().setTimeout(TIMEOUT).call();
+                }
+                configRepo();
+                Log.logInfoRB("GIT_FINISH", "clone");
             }
-            configRepo();
+
+            // cleanup repository
             try (Git git = new Git(repository)) {
-                git.submoduleInit().call();
-                git.submoduleUpdate().setTimeout(TIMEOUT).call();
+                git.reset().setMode(ResetType.HARD).call();
             }
-        } else {
-            Log.logInfoRB("GIT_START", "clone");
-            CloneCommand c = Git.cloneRepository();
-            c.setURI(repositoryURL);
-            c.setDirectory(localDirectory);
-            c.setTimeout(TIMEOUT);
-            try {
-                c.call();
-            } catch (InvalidRemoteException e) {
-                if (localDirectory.exists()) {
-                    deleteDirectory(localDirectory);
-                }
-                Throwable cause = e.getCause();
-                if (cause instanceof org.eclipse.jgit.errors.NoRemoteRepositoryException) {
-                    BadRepositoryException bre = new BadRepositoryException(cause.getLocalizedMessage());
-                    bre.initCause(e);
-                    throw bre;
-                }
-                throw e;
-            }
-	    repository = Git.open(localDirectory).getRepository();
-    	    String defaultBranch = getDefaultBranchName(repository);
-	    branch = repo.getBranch() == null? defaultBranch : repo.getBranch();
-	    trackBranch = !(branch.equals(defaultBranch));
-	    try (Git git = new Git(repository)) {
-	        if (trackBranch) {
-	    	    git.branchCreate().setName(branch)
-			.setUpstreamMode(CreateBranchCommand.SetupUpstreamMode.TRACK)
-			.setStartPoint(String.join("/", REMOTE, branch))
-			.call();
-		    CheckoutCommand checkout = git.checkout();
-		    checkout.setName(branch);
-		    checkout.call();
-	        }
-	        git.submoduleInit().call();
-	        git.submoduleUpdate().setTimeout(TIMEOUT).call();
-	    }
             configRepo();
             Log.logInfoRB("GIT_FINISH", "clone");
+        } finally {
+            client.stop();
         }
 
-        String signingkey  = repository.getConfig().getString("user", null, "signingkey");
+        String signingkey = repository.getConfig().getString("user", null, "signingkey");
         if (!StringUtil.isEmpty(signingkey)) {
             GpgSigner.setDefault(new GITExternalGpgSigner());
         }
@@ -196,7 +220,8 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
         // To do auto converting, we need to change a setting:
         if ("\r\n".equals(System.lineSeparator())) {
             // on windows machines, convert text files to CRLF
-            config.setBoolean(ConfigConstants.CONFIG_CORE_SECTION, null, ConfigConstants.CONFIG_KEY_AUTOCRLF, true);
+            config.setBoolean(ConfigConstants.CONFIG_CORE_SECTION, null, ConfigConstants.CONFIG_KEY_AUTOCRLF,
+                    true);
         } else {
             // on Linux/Mac machines (using LF), don't convert text files
             // but use input format, unchanged.
@@ -208,11 +233,21 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
         }
 
         // Perform GC synchronously to avoid locking issues
-        config.setBoolean(ConfigConstants.CONFIG_GC_SECTION, null, ConfigConstants.CONFIG_KEY_AUTODETACH, false);
+        config.setBoolean(ConfigConstants.CONFIG_GC_SECTION, null, ConfigConstants.CONFIG_KEY_AUTODETACH,
+                false);
 
         config.save();
     }
 
+    /**
+     * Get version string.
+     * 
+     * @param file
+     *            target file to check.
+     * @return version string when file exists, otherwise null.
+     * @throws IOException
+     *             when error occurred.
+     */
     @Override
     public String getFileVersion(String file) throws IOException {
         File f = new File(localDirectory, file);
@@ -222,6 +257,13 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
         return getCurrentVersion();
     }
 
+    /**
+     * Get current version of repository.
+     * 
+     * @return version string.
+     * @throws IOException
+     *             when error occurred.
+     */
     protected String getCurrentVersion() throws IOException {
         try (RevWalk walk = new RevWalk(repository)) {
             RevCommit headCommit = walk.lookupCommit(repository.resolve("HEAD"));
@@ -229,6 +271,14 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
         }
     }
 
+    /**
+     * Switch to git version specified.
+     * 
+     * @param version
+     *            version string to switch.
+     * @throws Exception
+     *             when error occurred.
+     */
     @Override
     public void switchToVersion(String version) throws Exception {
         try (Git git = new Git(repository)) {
@@ -248,6 +298,15 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
         }
     }
 
+    /**
+     * Add directory/file to commit.
+     * 
+     * @param path
+     *            The relative path of the item from the root of the repo
+     *            (should not start with a <code>/</code>)
+     * @throws Exception
+     *             when error occurred.
+     */
     @Override
     public void addForCommit(String path) throws Exception {
         Log.logInfoRB("GIT_START", "addForCommit");
@@ -260,6 +319,15 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
         }
     }
 
+    /**
+     * Add path to be deleted.
+     * 
+     * @param path
+     *            The relative path of the item from the root of the repo
+     *            (should not start with a <code>/</code>)
+     * @throws Exception
+     *             when error occurred.
+     */
     @Override
     public void addForDeletion(String path) throws Exception {
         Log.logInfoRB("GIT_START", "addForDelete");
@@ -272,11 +340,23 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
         }
     }
 
+    /**
+     * Getter for local directory.
+     * 
+     * @return local directory file object.
+     */
     @Override
     public File getLocalDirectory() {
         return localDirectory;
     }
 
+    /**
+     * Get recently deleted files.
+     * 
+     * @return Array of paths of deleted files.
+     * @throws Exception
+     *             when error occurred.
+     */
     @Override
     public String[] getRecentlyDeletedFiles() throws Exception {
         final ArrayList<String> deleted = new ArrayList<>();
@@ -292,13 +372,15 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
             sinceRevision = ObjectId.fromString(sinceRevisionString);
         }
 
-        Git git = new Git(repository);
-        AbstractTreeIterator startTreeIterator = getTreeIterator(git, sinceRevision);
-        AbstractTreeIterator headTreeIterator = new FileTreeIterator(git.getRepository());
-        List<DiffEntry> diffEntries = git.diff().setOldTree(startTreeIterator).setNewTree(headTreeIterator).call();
-        for (DiffEntry diffEntry : diffEntries) {
-            if (diffEntry.getChangeType().equals(DiffEntry.ChangeType.DELETE)) {
-                deleted.add(diffEntry.getOldPath().replace('/', File.separatorChar));
+        try (Git git = new Git(repository)) {
+            AbstractTreeIterator startTreeIterator = getTreeIterator(git, sinceRevision);
+            AbstractTreeIterator headTreeIterator = new FileTreeIterator(git.getRepository());
+            List<DiffEntry> diffEntries = git.diff().setOldTree(startTreeIterator)
+                    .setNewTree(headTreeIterator).call();
+            for (DiffEntry diffEntry : diffEntries) {
+                if (diffEntry.getChangeType().equals(DiffEntry.ChangeType.DELETE)) {
+                    deleted.add(diffEntry.getOldPath().replace('/', File.separatorChar));
+                }
             }
         }
 
@@ -318,6 +400,23 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
         }
     }
 
+    /**
+     * Commit files in the current stack.
+     * 
+     * @param onVersions
+     *            if a version defined, then commit must be just after this
+     *            version. Otherwise, (if a remote repository was updated after
+     *            rebase), commit shouldn't be processed and should return null.
+     *            If a version is null, then commit can be after any version,
+     *            i.e. a previous version shouldn't be checked. It can be
+     *            several versions defined since the glossary will be committed
+     *            after project_save.tmx.
+     * @param comment
+     *            comment for commit
+     * @return resulted commit name.
+     * @throws Exception
+     *             when error occurred.
+     */
     @Override
     public String commit(String[] onVersions, String comment) throws Exception {
         if (onVersions != null) {
@@ -355,7 +454,7 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
         try (Git git = new Git(repository)) {
             CommitCommand commitCommand = git.commit();
             commitCommand.setMessage(comment);
-            commitCommand.setSign(null);  // read from git config
+            commitCommand.setSign(null); // read from git config
             RevCommit commit = commitCommand.call();
             Iterable<PushResult> results = git.push().setTimeout(TIMEOUT).setRemote(REMOTE)
                     .add(getDefaultBranchName(repository)).call();
@@ -391,7 +490,8 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
         }
     }
 
-    private static AbstractTreeIterator prepareTreeParser(Repository repository, ObjectId objId) throws Exception {
+    private static AbstractTreeIterator prepareTreeParser(Repository repository, ObjectId objId)
+            throws Exception {
         // from the commit we can build the tree which allows us to construct
         // the TreeParser
         try (RevWalk walk = new RevWalk(repository)) {
@@ -404,6 +504,13 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
         }
     }
 
+    /**
+     * Delete target directory.
+     * 
+     * @param path
+     *            to be deleted.
+     * @return true when succeeded, otherwise false.
+     */
     public static boolean deleteDirectory(File path) {
         if (path.exists()) {
             File[] files = path.listFiles();
@@ -420,8 +527,11 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
 
     /**
      * Retrieve default branch name from repository.
-     * @param repository target repository.
-     * @return default branch name, ordinary "main" (recent popular) or "master" (old default)
+     * 
+     * @param repository
+     *            target repository.
+     * @return default branch name, ordinary "main" (recent popular) or "master"
+     *         (old default)
      */
     public static String getDefaultBranchName(final Repository repository) {
         try {
@@ -456,18 +566,20 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
     }
 
     /**
-     * Determines whether or not the supplied URL represents a valid Git repository.
+     * Determines whether the supplied URL represents a valid Git repository.
      *
      * <p>
      * Does the equivalent of <code>git ls-remote <i>url</i></code>.
      *
      * @param url
      *            URL of supposed remote repository
-     * @return true if repository appears to be valid, false otherwise
+     * @return true if the repository appears to be valid, false otherwise
      */
     public static boolean isGitRepository(String url) {
         // Heuristics to save some waiting time
+        SshClient client = SshClient.setUpDefaultClient();
         try {
+            client.start();
             Collection<Ref> result = new LsRemoteCommand(null).setRemote(url).setTimeout(TIMEOUT).call();
             return !result.isEmpty();
         } catch (TransportException ex) {
@@ -476,8 +588,11 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
                     || message.contains("Too many authentication failures")
                     || message.contains("Authentication is required");
         } catch (GitAPIException | JGitInternalException ex) {
-            // JGitInternalException happens if the URL is a Subversion URL like svn://...
+            // JGitInternalException happens if the URL is a Subversion URL like
+            // svn://...
             return false;
+        } finally {
+            client.stop();
         }
     }
 }

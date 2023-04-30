@@ -11,7 +11,7 @@
                2014 Piotr Kulik
                2015 Yu Tang, Aaron Madlon-Kay
                2016 Didier Briel
-               Home page: http://www.omegat.org/
+               Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
  This file is part of OmegaT.
@@ -27,17 +27,20 @@
  GNU General Public License for more details.
 
  You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
 package org.omegat.gui.main;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Frame;
 import java.awt.HeadlessException;
+import java.awt.Toolkit;
 import java.awt.Window;
+import java.awt.datatransfer.StringSelection;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
@@ -45,9 +48,17 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 import javax.swing.WindowConstants;
@@ -63,7 +74,9 @@ import org.omegat.gui.filelist.ProjectFilesListController;
 import org.omegat.gui.matches.IMatcher;
 import org.omegat.gui.search.SearchWindowController;
 import org.omegat.util.OStrings;
+import org.omegat.util.Platform;
 import org.omegat.util.Preferences;
+import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.StaticUIUtils;
 import org.omegat.util.gui.UIDesignManager;
@@ -93,7 +106,7 @@ import com.vlsolutions.swing.docking.FloatingDialog;
  */
 @SuppressWarnings("serial")
 public class MainWindow extends JFrame implements IMainWindow {
-    public final MainWindowMenu menu;
+    public final BaseMainWindowMenu menu;
 
     protected ProjectFilesListController projWin;
 
@@ -111,17 +124,28 @@ public class MainWindow extends JFrame implements IMainWindow {
     protected JLabel statusLabel;
     protected JLabel lockInsertLabel;
 
+    MainWindowAccessTools mainWindowAccessTools;
+
     protected DockingDesktop desktop;
 
     /** Creates new form MainWindow */
     public MainWindow() throws IOException {
-
-        menu = new MainWindowMenu(this, new MainWindowMenuHandler(this));
-
-        setJMenuBar(menu.initComponents());
-
+        MainWindowMenuHandler mainWindowMenuHandler = new MainWindowMenuHandler(this);
+        if (Preferences.isPreference(Preferences.APPLY_BURGER_SELECTOR_UI) && !Platform.isMacOSX()) {
+            menu = new MainWindowBurgerMenu(this, mainWindowMenuHandler);
+            menu.initComponents();
+            mainWindowAccessTools = MainWindowAccessTools.of(menu.mainMenu, mainWindowMenuHandler);
+        } else {
+            menu = new MainWindowMenu(this, mainWindowMenuHandler);
+            menu.initComponents();
+            if (Preferences.isPreference(Preferences.APPLY_BURGER_SELECTOR_UI) && Platform.isMacOSX()) {
+                JPanel toolsPanel = new JPanel();
+                mainWindowAccessTools = MainWindowAccessTools.of(toolsPanel, mainWindowMenuHandler);
+                getContentPane().add(toolsPanel, BorderLayout.NORTH);
+            }
+        }
+        setJMenuBar(menu.mainMenu);
         setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
                 menu.mainWindowMenuHandler.projectExitMenuItemActionPerformed();
@@ -461,11 +485,42 @@ public class MainWindow extends JFrame implements IMainWindow {
             }
 
             statusLabel.setText(msg);
-            String fulltext = msg;
-            if (ex != null) {
-                fulltext += "\n" + ex.toString();
+
+            JPanel pane = new JPanel();
+            pane.setLayout(new BoxLayout(pane, BoxLayout.PAGE_AXIS));
+            pane.setSize(new Dimension(900, 400));
+
+            JLabel jlabel = new JLabel(msg);
+            jlabel.setAlignmentX(LEFT_ALIGNMENT);
+            pane.add(jlabel);
+
+            if (ex != null && ex.getLocalizedMessage() != null){
+                pane.add(Box.createRigidArea(new Dimension(0, 5)));
+                JTextArea message = new JTextArea();
+                message.setText(ex.getLocalizedMessage());
+                message.setLineWrap(true);
+                message.setEditable(false);
+                JScrollPane jScrollPane = new JScrollPane(message,
+                        ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
+                        ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+                jScrollPane.setAlignmentX(LEFT_ALIGNMENT);
+                jScrollPane.setPreferredSize(new Dimension(800, 200));
+                jScrollPane.getVerticalScrollBar().setValue(0);
+                pane.add(jScrollPane);
+                pane.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+                JButton jbutton = new JButton(OStrings.getString("TF_ERROR_COPY_CLIPBOARD"));
+                // Copy to clipboard action
+                jbutton.addActionListener(l -> {
+                    String clipboardMsg = String.format("%s%n---%n%s%n---%n%s%n", msg, ex.getLocalizedMessage(),
+                            StaticUtils.getSupportInfo());
+                    Toolkit.getDefaultToolkit().getSystemClipboard()
+                            .setContents(new StringSelection(clipboardMsg), null);
+                });
+                jbutton.setAlignmentX(LEFT_ALIGNMENT);
+                pane.add(jbutton);
             }
-            JOptionPane.showMessageDialog(MainWindow.this, fulltext, OStrings.getString("TF_ERROR"),
+
+            JOptionPane.showMessageDialog(MainWindow.this, pane, OStrings.getString("TF_ERROR"),
                     JOptionPane.ERROR_MESSAGE);
         });
     }

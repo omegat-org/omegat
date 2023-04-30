@@ -8,7 +8,7 @@
                2015 Didier Briel
                2017 Briac Pilpre
                2021 Hiroshi Miura
-               Home page: http://www.omegat.org/
+               Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
  This file is part of OmegaT.
@@ -24,10 +24,12 @@
  GNU General Public License for more details.
 
  You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
 package org.omegat.core.machinetranslators;
+
+import java.io.IOException;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
@@ -43,6 +45,13 @@ import org.omegat.util.Preferences;
  * @author Hiroshi Miura
  */
 public final class MyMemoryHumanTranslate extends AbstractMyMemoryTranslate {
+
+    public MyMemoryHumanTranslate(final String url) {
+        super(url);
+    }
+
+    public MyMemoryHumanTranslate() {
+    }
 
     @Override
     protected String getPreferenceName() {
@@ -62,19 +71,17 @@ public final class MyMemoryHumanTranslate extends AbstractMyMemoryTranslate {
     @SuppressWarnings("unchecked")
     @Override
     protected String translate(final Language sLang, final Language tLang, final String text) throws Exception {
-        String prev = getFromCache(sLang, tLang, text);
-        if (prev != null) {
-            return prev;
+        try {
+            // Get MyMemory response in JSON format
+            JsonNode jsonResponse = getMyMemoryResponse(sLang, tLang, text);
+            // responseData/translatedText contains the best match.
+            JsonNode responseData = jsonResponse.get("responseData");
+            if (responseData != null) {
+                return responseData.get("translatedText").asText();
+            }
+        } catch (IOException e) {
+            throw new MachineTranslateError("MT_ENGINE_MYMEMORY_ERROR", e);
         }
-
-        JsonNode jsonResponse;
-
-        // Get MyMemory response in JSON format
-        jsonResponse = getMyMemoryResponse(sLang, tLang, text);
-
-        // responseData/translatedText contains the best match.
-        String translation = jsonResponse.get("responseData").get("translatedText").asText();
-        putToCache(sLang, tLang, text, translation);
-        return translation;
+        throw new MachineTranslateError("MT_ENGINE_MYMEMORY_ERROR");
     }
 }

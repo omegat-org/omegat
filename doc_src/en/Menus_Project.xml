@@ -100,7 +100,8 @@
       <listitem>
         <para>Saves the project translation memory (<link
         linkend="project.folder.project.save.tmx"
-        endterm="project.folder.project.save.tmx.title"/>).</para>
+        endterm="project.folder.project.save.tmx.title"/>) and synchronizes team
+        projects.</para>
 		<para>OmegaT automatically saves translations every three minutes as well as
 		when you close the project or quit the program. See the <link
 		linkend="dialog.preferences.saving.and.output.interval"
@@ -123,9 +124,9 @@
 
     <varlistentry id="menus.project.download.mediawiki.page">
       <term id="menus.project.download.mediawiki.page.title"><guimenuitem>Add
-      Online MediaWiki Page...</guimenuitem></term>
+      MediaWiki Page...</guimenuitem></term>
       <listitem>
-		<para>Opens a dialog where you can paste the URL of the Mediawiki page
+		<para>Opens a dialog where you can paste the URL of the MediaWiki page
 		you want to translate. The source data of the page will be copied into
 		the <link linkend="project.folder.source"
 		endterm="project.folder.source.title"/> folder, as a text file with the
@@ -175,6 +176,11 @@
 		linkend="dialogs.preferences.tag.processing.do.not.allow.creating.translated.documents.with.tag.issues"
 		endterm="dialogs.preferences.tag.processing.do.not.allow.creating.translated.documents.with.tag.issues.title"/>
 		preference for details.</para></note>
+		<para>Every time you create translated files, OmegaT saves the project
+		(see the <link linkend="menus.project.save"
+		endterm="menus.project.save.title"/> menu item above) and creates
+		reference memories that include the translated segments of the current
+		source file set.</para>
       </listitem>
     </varlistentry>
 
@@ -188,8 +194,11 @@
         being translated. The resulting file is located in the <link
         linkend="project.folder.target" endterm="project.folder.target.title"/>
         folder.</para>
-		<para>
-		</para>				
+		<para>Every time you create the current translated file, OmegaT saves
+		the project (see the <link linkend="menus.project.save"
+		endterm="menus.project.save.title"/> menu item above) and creates
+		reference memories that include the translated segments of the current
+		source file set.</para>
       </listitem>
     </varlistentry>
 

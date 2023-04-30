@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="how.to.use.team.project">
+  <title id="how.to.use.team.project.title">Use a team project</title>
+
+  <para>Els projectes en equip utilitzen mecanismes de sincronització entre els membres del projecte.</para>
+
+  <para>Quan s'instal·la un projecte en equip de l'OmegaT en un servidor, l'administrador envia als membres la informació que necessiten per a accedir-hi: un URL que indica la ubicació del projecte, o un fitxer <filename>omegat.project</filename>.</para>
+
+  <para>Una vegada baixat el projecte, s'instal·la localment i només cal obrir-lo localment per a sincronitzar-lo amb el servidor.</para>
+
+  <para>Les credencials del dipòsit s'emmagatzemen en el fitxer <link linkend="configuration.folder.extra.contents.repositories" endterm="configuration.folder.extra.contents.repositories.title"/> i es poden suprimir des de les preferències de <link linkend="dialog.preferences.team.title.repository.credentials" endterm="dialog.preferences.team.title.repository.credentials.title"/>.</para>
+
+  <para>Com que, per defecte, el projecte se sincronitza cada 3 minuts, de vegades els membres del projecte traduiran o modificaran un segment traduït per un altre membre, però que encara no s'havia sincronitzat. Quan això succeeix, els membres han de seleccionar la traducció adequada.</para>
+
+  <para>Els membres poden traduir i revisar els fitxers per torns. The Search function allows them to filter the Editor pane on contents translated by a given person, or on contents translated after or before a given time, for example.</para>
+  
+  <variablelist>
+    <varlistentry>
+      <term>Baixada del projecte</term>
+      <listitem>
+		<orderedlist>
+		  <listitem>
+			<para>Des d'un URL</para>
+
+			<para>Utilitzeu <link endterm="menus.project.title" linkend="menus.project"/><link endterm="menus.project.download.team.project.title" linkend="menus.project.download.team.project"/> per a mostrar el quadre de diàleg <guilabel>Baixada d'un projecte en equip</guilabel>.</para>
+
+			<para>Indiqueu l'URL proporcionat l'administrador del projecte en equip en el camp <guilabel>URL del dipòsit:</guilabel> de la part superior del quadre de diàleg, i indiqueu una carpeta per al projecte en el camp <guilabel>Carpeta de projecte local nova</guilabel>. Deixeu marcada l'opció <guilabel>Branca per defecte</guilabel>, excepte si l'administrador del projecte us ha donat instruccions per a utilitzar una branca personalitzada.</para>
+		  </listitem>
+
+		  <listitem>
+			<para>Des d'un fitxer <filename>omegat.project</filename></para>
+
+			<para>Copieu el fitxer <filename>omegat.project</filename> a una carpeta buida i obriu-la amb l'OmegaT. El projecte es baixarà automàticament a la carpeta que contingui aquest fitxer.</para>
+		  </listitem>
+		</orderedlist>
+
+		<note>
+		  <para>Els servidors generalment utilitzen dos tipus principals d'autenticació: <emphasis>nom d'usuari/contrasenya</emphasis> o <emphasis>SSH</emphasis>.</para>
+
+		  <para>Si el servidor depèn de l'autenticació amb nom d'usuari/contrasenya, l'OmegaT us presentarà un quadre de diàleg <guilabel>Autenticació</guilabel> perquè indiqueu el nom d'usuari i la contrasenya quan baixeu el projecte per primera vegada, o més endavant. L'OmegaT recordarà les credencials per a aquest projecte específic, tret que les suprimiu explícitament. Consulteu les preferències de <link linkend="dialog.preferences.team.title.repository.credentials" endterm="dialog.preferences.team.title.repository.credentials.title"/> per a conèixer més detalls.</para>
+
+		  <para>Si el servidor utilitza l'autenticació SSH, assegureu-vos d'actualitzar la configuració de l'SSH per a incloure aquest servidor abans d'intentar baixar el projecte; en cas contrari, obtindreu un error d'autenticació i el projecte no es carregarà.</para>
+
+		  <para>If you use multiple projects on the same server, credentials
+		  will only be asked once for that server.</para>
+		</note>
+	  </listitem>
+	</varlistentry>
+
+    <varlistentry>
+      <term>Sincronització</term>
+
+      <listitem>
+        <para>La sincronització del projecte incorpora les traduccions de tots els membres de l'equip a les còpies locals del projecte. Només se sincronitza el contingut dels dos fitxers següents:</para>
+
+		<itemizedlist>
+          <listitem>
+			<para><filename>project_save.tmx</filename></para>
+          </listitem>
+
+          <listitem>
+			<para><filename>glossary.txt</filename></para>
+          </listitem>
+        </itemizedlist>
+
+        <para>Durant la sincronització, la resta de fitxers locals se sobreescriuen amb les versions del servidor remot, excepte el fitxer<filename>omegat.project</filename> (consulteu l'apartat següent).</para>
+
+        <para>L'OmegaT sincronitza un projecte en equip quan s'obre, es torna a carregar, es tanca o es desa. Això vol dir que la funció de desament automàtic també sincronitza periòdicament les versions locals amb la versió del servidor segons l'interval especificat en la preferència <link endterm="dialog.preferences.saving.and.output.interval.title" linkend="dialog.preferences.saving.and.output.interval"/>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Configuració del projecte en equip</term>
+
+      <listitem>
+        <para>Com en els projectes locals normals, la configuració del projecte en equip es defineix segons el contingut del fitxer <filename>omegat.project</filename> i l'ús opcional de fitxers especials per a filtres o regles de segmentació específics del projecte.</para>
+
+        <para>La primera vegada que es baixa el projecte, l'OmegaT recupera el fitxer <filename>omegat.project</filename> del servidor. Aquest fitxer defineix els paràmetres següents:</para>
+
+        <itemizedlist>
+          <listitem>
+            <para><emphasis>Configuració del projecte bàsica:</emphasis> llengües d'origen i destinació, lematitzadors i jerarquia de la carpeta del projecte.</para>
+
+			<para>En un projecte en equip, els paràmetres de configuració bàsics del projecte local sempre se substitueixen per la configuració del servidor definida originalment per l'administrador del projecte.</para>
+          </listitem>
+
+          <listitem>
+            <para><emphasis>Assignacions de dipòsits</emphasis></para>
+
+            <para>Consulteu la guia <link linkend="how.to.setup.team.project.mapping.parameters" endterm="how.to.setup.team.project.mapping.parameters.title"/> per a conèixer més detalls.</para>
+
+            <itemizedlist>
+              <listitem>
+                <para>Si no s'han definit assignacions personalitzades per al projecte remot, però s'han personalitzat les assignacions locals, els paràmetres locals es conserven sense afectar els paràmetres del servidor.</para>
+              </listitem>
+
+              <listitem>
+                <para>Si el projecte remot conté assignacions personalitzades, però el projecte local no, s'apliquen les assignacions del servidor al projecte local.</para>
+              </listitem>
+
+              <listitem>
+                <para>Si el projecte remot especifica un protocol d'URL i el baixeu mitjançant un protocol diferent, es conservarà la configuració local.</para>
+
+                <para>Per exemple, molts serveis d'allotjament permeten l'accés al mateix dipòsit utilitzant el protocol SSH+Git o https. L'OmegaT respectarà la selecció de protocol local.</para>
+              </listitem>
+
+              <listitem>
+                <para>Si primer baixeu el projecte remot mitjançant un fitxer <filename>omegat.project</filename> proporcionat per l'administrador del projecte, l'OmegaT utilitzarà les assignacions en aquest fitxer, si n'hi ha.</para>
+              </listitem>
+
+              <listitem>
+                <para>Si hi ha un conflicte entre les versions remotes i locals del fitxer <filename>omegat.project</filename> i se sobreescriu la versió local, l'OmegaT crea un fitxer de còpia de seguretat anomenat <filename>omegat.project.AAAAMMDDhhmm.bak</filename>. Els fitxers de còpia de seguretat es conserven durant un mínim de deu dies i les còpies de seguretat més antigues se suprimeixen automàticament.</para>
+              </listitem>
+            </itemizedlist>
+		  </listitem>
+		</itemizedlist>
+
+        <warning>
+          <para>Recordeu que qualsevol modificació dels fitxers de configuració del projecte locals se sobreescriurà per les versions del servidor quan se sincronitzi el projecte.</para>
+        </warning>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Fitxers d'origen</term>
+
+      <listitem>
+        <warning>
+		  <para>Només l'administrador del projecte hauria d'utilitzar <link endterm="menus.project.title" linkend="menus.project"/><link endterm="menus.project.commit.source.files.title" linkend="menus.project.commit.source.files"/>.</para>
+		</warning>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Fitxers de destinació</term>
+
+      <listitem>
+        <para>Després de generar els fitxers de destinació, utilitzeu <link endterm="menus.project.title" linkend="menus.project"/><link endterm="menus.project.commit.target.files.title" linkend="menus.project.commit.target.files"/> per a afegir-los al servidor, si l'administrador del projecte us ho ha demanat.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Supressió de fitxers</term>
+
+      <listitem>
+        <para>Els fitxers d'un projecte en equip no es poden suprimir de l'OmegaT ni del sistema de fitxers local. Es restauraran la pròxima vegada que se sincronitzi el projecte. Aquesta tasca normalment la duu a terme l'administrador del projecte.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Treball fora de línia</term>
+
+      <listitem>
+        <para>Podeu obrir un projecte en equip i treballar-hi fora de línia. Tots els canvis se sincronitzaran la pròxima vegada que hi hagi una connexió disponible.</para>
+
+        <para>Hi ha dues maneres de treballar fora de línia:</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>Desconnecteu-vos de la xarxa abans d'obrir el projecte.</para>
+          </listitem>
+
+          <listitem>
+            <para>Obriu el projecte des de la línia d'ordres amb l'opció <parameter>--no-team</parameter>. Consulteu la secció <link linkend="launch.with.command.line" endterm="launch.with.command.line.title"/> per a conèixer més detalls.</para>
+          </listitem>
+        </itemizedlist>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</section>

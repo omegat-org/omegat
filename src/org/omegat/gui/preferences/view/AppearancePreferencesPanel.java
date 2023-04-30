@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2016 Aaron Madlon-Kay
-               Home page: http://www.omegat.org/
+               Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
  This file is part of OmegaT.
@@ -20,7 +20,7 @@
  GNU General Public License for more details.
 
  You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
 package org.omegat.gui.preferences.view;
@@ -51,6 +51,7 @@ public class AppearancePreferencesPanel extends JPanel {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         cbThemeSelect = new javax.swing.JComboBox<>();
+        newUICheckBox = new javax.swing.JCheckBox();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 8), new java.awt.Dimension(0, 8), new java.awt.Dimension(32767, 8));
         restoreWindowButton = new javax.swing.JButton();
 
@@ -69,6 +70,10 @@ public class AppearancePreferencesPanel extends JPanel {
         jPanel1.add(cbThemeSelect, java.awt.BorderLayout.CENTER);
 
         add(jPanel1);
+
+        org.openide.awt.Mnemonics.setLocalizedText(newUICheckBox, "Apply newUI(Experimental)");
+        newUICheckBox.setActionCommand("newUI");
+        add(newUICheckBox);
         add(filler1);
 
         org.openide.awt.Mnemonics.setLocalizedText(restoreWindowButton, OStrings.getString("MW_OPTIONSMENU_RESTORE_GUI")); // NOI18N
@@ -80,6 +85,7 @@ public class AppearancePreferencesPanel extends JPanel {
     private javax.swing.Box.Filler filler1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    javax.swing.JCheckBox newUICheckBox;
     javax.swing.JButton restoreWindowButton;
     // End of variables declaration//GEN-END:variables
 }

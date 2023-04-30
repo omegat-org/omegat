@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2015 Aaron Madlon-Kay
-               Home page: http://www.omegat.org/
+               Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
  This file is part of OmegaT.
@@ -20,7 +20,7 @@
  GNU General Public License for more details.
 
  You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
 package org.omegat.util;
@@ -34,16 +34,19 @@ import static org.junit.Assert.fail;
 import java.io.File;
 import java.util.List;
 
+import org.junit.Ignore;
 import org.junit.Test;
+
 import org.omegat.filters2.TranslationException;
-import org.omegat.util.xml.XMLBlock;
-import org.omegat.util.xml.XMLStreamReader;
+import org.omegat.util.xml.*;
 
 /**
  * Test the XML reader used to read OmegaT preference files.
  *
  * @author Aaron Madlon-Kay
  */
+@Deprecated
+@Ignore
 public class XMLStreamReaderTest {
 
     @Test

@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2015 Chihiro Hio, Aaron Madlon-Kay
-               Home page: http://www.omegat.org/
+               Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
  This file is part of OmegaT.
@@ -20,7 +20,7 @@
  GNU General Public License for more details.
 
  You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 package org.omegat.util.gui;
 
@@ -50,7 +50,6 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 
-import org.omegat.util.Java8Compat;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 
@@ -119,7 +118,7 @@ public final class JTextPaneLinkifier {
             if (e.getButton() == MouseEvent.BUTTON1) {
                 final StyledDocument doc = jTextPane.getStyledDocument();
                 final Element characterElement = doc
-                        .getCharacterElement(Java8Compat.viewToModel(jTextPane, e.getPoint()));
+                        .getCharacterElement(jTextPane.viewToModel2D(e.getPoint()));
                 final AttributeSet as = characterElement.getAttributes();
                 final Object attr = as.getAttribute(ATTR_LINK);
                 if (attr instanceof IAttributeAction) {
@@ -133,7 +132,7 @@ public final class JTextPaneLinkifier {
         @Override
         public void mouseMoved(final MouseEvent e) {
             final StyledDocument doc = jTextPane.getStyledDocument();
-            final Element characterElement = doc.getCharacterElement(Java8Compat.viewToModel(jTextPane, e.getPoint()));
+            final Element characterElement = doc.getCharacterElement(jTextPane.viewToModel2D(e.getPoint()));
             final AttributeSet as = characterElement.getAttributes();
             final Object attr = as.getAttribute(ATTR_LINK);
             if (attr instanceof IAttributeAction) {

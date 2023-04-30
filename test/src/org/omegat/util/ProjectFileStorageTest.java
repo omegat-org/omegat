@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2016 Aaron Madlon-Kay
-               Home page: http://www.omegat.org/
+               Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
  This file is part of OmegaT.
@@ -20,7 +20,7 @@
  GNU General Public License for more details.
 
  You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
 package org.omegat.util;
@@ -360,6 +360,14 @@ public class ProjectFileStorageTest {
         assertEquals(ProjectFileStorage.normalizeSlashes(glosDir.getPath()), outOmt.getProject().getGlossaryDir());
         assertEquals(ProjectFileStorage.normalizeSlashes(tmDir.getPath()), outOmt.getProject().getTmDir());
         assertEquals(ProjectFileStorage.normalizeSlashes(exportTmDir.getPath()), outOmt.getProject().getExportTmDir());
+    }
+
+    @Test
+    public void testProjectFileWithEntities() throws Exception {
+        File projFile = new File(PROJECT_DIR, "entities.project");
+        Omegat omt = ProjectFileStorage.parseProjectFile(projFile);
+        assertEquals("translation_fr-ZZ_check", omt.getProject().getTargetDir());
+        assertEquals("fr-ZZ", omt.getProject().getTargetLang());
     }
 
     @Test

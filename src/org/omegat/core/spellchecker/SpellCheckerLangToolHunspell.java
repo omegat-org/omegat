@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2016 Aaron Madlon-Kay
-               Home page: http://www.omegat.org/
+               Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
  This file is part of OmegaT.
@@ -20,18 +20,17 @@
  GNU General Public License for more details.
 
  You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
 package org.omegat.core.spellchecker;
 
-import java.io.UnsupportedEncodingException;
-import java.nio.charset.CharacterCodingException;
-import java.util.Collections;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import org.languagetool.rules.spelling.hunspell.Hunspell;
-import org.omegat.util.Log;
+import org.languagetool.rules.spelling.hunspell.HunspellDictionary;
 
 /**
  * A thin wrapper around the LanguageTool Hunspell implementation (which itself
@@ -41,40 +40,33 @@ import org.omegat.util.Log;
  */
 public class SpellCheckerLangToolHunspell implements ISpellCheckerProvider {
 
-    private final String dictBasename;
-    private final Hunspell.Dictionary dict;
+    private final HunspellDictionary dict;
 
-    public SpellCheckerLangToolHunspell(String dictBasename) throws Throwable {
-        this.dictBasename = dictBasename;
-        this.dict = Hunspell.getInstance().getDictionary(dictBasename);
+    public SpellCheckerLangToolHunspell(File dictName, File affixName) {
+        this.dict = Hunspell.getDictionary(dictName.toPath(), affixName.toPath());
     }
 
     @Override
     public boolean isCorrect(String word) {
-        return !dict.misspelled(word);
+        return dict.spell(word);
     }
 
     @Override
     public List<String> suggest(String word) {
-        try {
-            return dict.suggest(word);
-        } catch (CharacterCodingException e) {
-            return Collections.emptyList();
-        }
+        return dict.suggest(word);
     }
 
     @Override
     public void learnWord(String word) {
-        try {
-            dict.addWord(word);
-        } catch (UnsupportedEncodingException e) {
-            Log.log(e);
-        }
+        dict.add(word);
     }
 
     @Override
     public void destroy() {
-        dict.destroy();
-        Hunspell.getInstance().destroyDictionary(dictBasename);
+        try {
+            dict.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

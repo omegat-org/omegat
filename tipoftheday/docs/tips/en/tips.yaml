@@ -1,0 +1,10 @@
+---
+tips:
+- file: shortcut_help.html
+  name: Call manuals
+- file: shortcut_note.html
+  name: Shortcut to note
+- file: automatic_backup.html
+  name: Automatic backup
+- file: project_folders.html
+  name: Project folders

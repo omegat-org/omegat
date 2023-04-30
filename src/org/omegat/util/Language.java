@@ -9,7 +9,7 @@
                2012 Guido Leenders
                2016 Aaron Madlon-Kay
                2019 Briac Pilpre
-               Home page: http://www.omegat.org/
+               Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
  This file is part of OmegaT.
@@ -25,7 +25,7 @@
  GNU General Public License for more details.
 
  You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
 package org.omegat.util;
@@ -108,11 +108,31 @@ public class Language implements Comparable<Object> {
         }
     }
 
+    private final static String ZA_IN_ZH= "\u58EE\u8BED";
+    private final static String SD_IN_ZH= "\u4FE1\u5FB7\u6587";
+    private final static String SD_IN_IN_ZH= "\u4FE1\u5FB7\u6587(\u5370\u5EA6)";
+    private final static String SD_PK_IN_ZH= "\u4FE1\u5FB7\u6587(\u5DF4\u57FA\u65AF\u5766)";
+
     /**
      * Returns a name for the language that is appropriate for display to the
      * user.
      */
     public String getDisplayName() {
+        if (Platform.getJavaVersion() == 8) {
+            // work around for java 8 JRE localization bug
+            // see https://github.com/OmegaT-L10N/zh_CN/issues/5
+            if (Locale.getDefault().equals(Locale.SIMPLIFIED_CHINESE)) {
+                if (this.equals(new Language("ZA"))) {
+                    return ZA_IN_ZH;
+                } else if (this.equals(new Language("SD"))) {
+                    return SD_IN_ZH;
+                } else if (locale.equals(new Locale("sd", "IN"))) {
+                    return SD_IN_IN_ZH;
+                } else if (locale.equals(new Locale("sd", "PK"))) {
+                    return SD_PK_IN_ZH;
+                }
+            }
+        }
         return locale.getDisplayName();
     }
 

@@ -15,7 +15,7 @@
                2015 Aaron Madlon-Kay, Yu Tang
                2016 Didier Briel
                2019 Thomas Cordonnier, Briac Pilpre
-               Home page: http://www.omegat.org/
+               Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
  This file is part of OmegaT.
@@ -31,7 +31,7 @@
  GNU General Public License for more details.
 
  You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
 package org.omegat.gui.editor;
@@ -50,6 +50,7 @@ import java.awt.event.AdjustmentEvent;
 import java.awt.event.AdjustmentListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.awt.geom.Rectangle2D;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
@@ -109,7 +110,6 @@ import org.omegat.gui.main.MainWindow;
 import org.omegat.gui.main.MainWindowUI;
 import org.omegat.gui.main.ProjectUICommands;
 import org.omegat.help.Help;
-import org.omegat.util.Java8Compat;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
@@ -308,7 +308,7 @@ public class EditorController implements IEditor {
             int unitsPerSeg = (bar.getMaximum() - bar.getMinimum()) / (lastLoaded - firstLoaded + 1);
             if (firstLoaded > 0 && scrollPercent <= PAGE_LOAD_THRESHOLD) {
                 int docSize = editor.getDocument().getLength();
-                int visiblePos = Java8Compat.viewToModel(editor, scrollPane.getViewport().getViewPosition());
+                int visiblePos = editor.viewToModel2D(scrollPane.getViewport().getViewPosition());
                 // Try to load enough segments to restore scrollbar value to
                 // the range (PAGE_LOAD_THRESHOLD, 1 - PAGE_LOAD_THRESHOLD).
                 // Formula is obtained by solving the following equations for loadCount:
@@ -325,7 +325,7 @@ public class EditorController implements IEditor {
                 int sizeDelta = editor.getDocument().getLength() - docSize;
                 try {
                     scrollPane.getViewport()
-                            .setViewPosition(Java8Compat.modelToView(editor, visiblePos + sizeDelta).getLocation());
+                            .setViewPosition(editor.modelToView2D(visiblePos + sizeDelta).getBounds().getLocation());
                 } catch (BadLocationException ex) {
                     Log.log(ex);
                 }
@@ -988,20 +988,20 @@ public class EditorController implements IEditor {
         if (index < 0 || index >= m_docSegList.length) {
             return null;
         }
-        Rectangle result = null;
         try {
             SegmentBuilder sb = m_docSegList[index];
             if (sb.hasBeenCreated()) {
-                Rectangle start = Java8Compat.modelToView(editor, sb.getStartPosition());
-                Rectangle end = Java8Compat.modelToView(editor, sb.getEndPosition());
+                Rectangle2D start = editor.modelToView2D(sb.getStartPosition());
+                Rectangle2D end = editor.modelToView2D(sb.getEndPosition());
                 if (start != null && end != null) {
-                    result = start.union(end);
+                    Rectangle2D.union(start, end, start);
+                    return start.getBounds();
                 }
             }
         } catch (BadLocationException ex) {
             Log.log(ex);
         }
-        return result;
+        return null;
     }
 
     /**
@@ -2264,7 +2264,8 @@ public class EditorController implements IEditor {
                         continue;
                     }
                     try {
-                        Point location = Java8Compat.modelToView(editor, sb.getStartPosition()).getLocation();
+                        Point location =
+                                editor.modelToView2D(sb.getStartPosition()).getBounds().getLocation();
                         if (viewRect.contains(location)) { // location is viewable
                             int segmentNo = sb.segmentNumberInProject;
                             location.translate(0, -viewPosition.y); // adjust to vertically view position

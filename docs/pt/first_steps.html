@@ -1,0 +1,158 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Aprenda a usar o OmegaT em 5 minutos!</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="chapter">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h2 class="title"><a name="chapter.instant.start.guide"></a>Aprenda a usar o OmegaT em 5 minutos!
+                  </h2>
+               </div>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="create.and.open.new.project"></a>Configurar um novo projecto<a class="indexterm" name="d0e7"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p><em><span class="remark">Nota:</span></em> num Mac Apple, usar a tecla <span class="keycap"><strong>Command</strong></span> em vez da tecla <span class="keycap"><strong>Control</strong></span>.
+            </p><a class="indexterm" name="d0e22"></a><p>Para começar a utilizar o OmegaT, crie primeiro um projecto que gravará todos os seus ficheiros, tais como o seu ficheiro-fonte,
+               memórias de tradução, glossários e, eventualmente, o seu ficheiro traduzido. No menu <span class="guimenu">Projecto</span>, seleccione <span class="guimenuitem">Novo...</span> e escreva um nome para o seu projecto. Lembre-se onde está a criar o projecto, porque terá de regressar ao mesmo mais tarde.
+            </p>
+            <p>Após dar um nome ao seu projecto, será aberto o diálogo <span class="guilabel">Criar novo projecto</span>. Ao cimo desse diálogo, seleccione o idioma do seu ficheiro-fonte, o idioma que o seu ficheiro traduzido terá e clique em
+               <span class="guibutton">Aceitar</span> para continuar.
+            </p>
+            <p>Se estiver interessado noutras definições deste diálogo, pode regressar ao mesmo em qualquer altura, premindo <span class="keycap"><strong>Ctrl+E.</strong></span></p>
+            <p>A seguir, abre-se o diálogo <span class="guilabel">Ficheiros do projecto</span>. Clique em <span class="guibutton">Copiar ficheiros para a pasta-fonte...</span> para seleccionar os seus ficheiros-fonte. O OmegaT vai então copiar os ficheiros seleccionados para a sub-pasta <code class="filename">/source/</code> do seu projecto recentemente criado. Após os ficheiros-fonte terem sido carregados no <span class="guilabel">Editor</span>, pode fechar o diálogo <span class="guilabel"> Ficheiros do projecto</span>.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="translate.the.segments.one.by.one"></a>Traduza o ficheiro
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>O OmegaT mostra um segmento de cada vez para que possa traduzir. Após ter traduzido cada segmento, prima <span class="keycap"><strong>Ctrl+U</strong></span> para passar ao próximo segmento não traduzido (ou <span class="keycap"><strong>Ctrl+Shift+U</strong></span> para passar ao próximo segmento traduzido). Sempre que quiser ver como será a sua tradução no seu formato final, prima <span class="keycap"><strong>Ctrl+D</strong></span> para gerar os documentos traduzidos, que serão criados na sub-pasta <code class="filename">/target/</code> da pasta do seu projecto. Durante a tradução, utilize os menus <span class="guimenu">Editar</span> e <span class="guimenu">Ir para</span> para executar várias funções úteis.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e88"></a>Valide as suas etiquetas
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Se os seus ficheiros-fonte são ficheiros formatados, por exemplo Microsoft Word, LibreOffice Writer ou HTML, o OmegaT converterá
+               a formatação em etiquetas que rodeiam o texto que traduz. Muitas vezes os documentos também terão etiquetas que nada têm a
+               ver com formatação, mas que também são importantes nos ficheiros de origem (e nos ficheiros traduzidos). Uma frase-fonte pode
+               parecer-se com:
+            </p>
+            <div class="mediaobject" align="justify"><img src="images/InstantGuide_1.png" align="justify"></div>
+            <p>
+               
+            </p>
+            <p>O OmegaT, contudo, mostrará esta frase da seguinte forma:</p>
+            <div class="mediaobject" align="justify"><img src="images/InstantGuide_2.png" align="justify"></div>
+            <p>
+               
+            </p>
+            <p>As etiquetas no OmegaT são cinzentas, pelo que são fáceis de reconhecer. Estão protegidas, de modo que não pode modificar
+               o seu conteúdo, mas pode apagá-las, inseri-las à mão ou movê-las na frase-alvo. Contudo, se cometer erros ao digitar as etiquetas
+               de formatação, os seus ficheiros traduzidos podem não conseguir abrir. Portanto, prima <span class="keycap"><strong>Ctrl+Shift+V</strong></span> antes de gerar os seus ficheiros traduzidos, para verificar se as suas etiquetas estão correctas.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e112"></a>Gere o ficheiro traduzido
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Depois de se certificar de que não existem erros de etiqueta na sua tradução, prima <span class="keycap"><strong>Ctrl+D</strong></span> para gerar os ficheiros de destino, que serão criados na sub-pasta <code class="filename">/target/</code> da pasta do seu projecto.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e123"></a>Mais algumas coisas para recordar
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Se um ficheiro não for carregado no painel <span class="guilabel">Editor</span>, então pode ser que esteja num formato que não funciona no OmegaT. Ver <span class="guimenuitem">Opções</span> → <span class="guimenuitem">Preferências...</span> → <span class="guimenuitem">Filtros de ficheiro</span> para uma lista de formatos de ficheiro que o OmegaT pode tratar.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Pode criar um novo projecto para cada novo trabalho, e pode adicionar novos ficheiros-fonte a um projecto em qualquer altura.</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Para se lembrar das configurações iniciais do projecto, abra o diálogo de propriedades do projecto, premindo <span class="keycap"><strong>Ctrl+E</strong></span>. Para ver uma lista de ficheiros no projecto, abra o diálogo <span class="guilabel">Ficheiros do projecto</span>, premindo <span class="keycap"><strong>Ctrl+L</strong></span>.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>No final da sua tradução, o OmegaT exporta três memórias de tradução chamadas <code class="filename">level1</code>, <code class="filename">level2</code> e <code class="filename">omegat</code> para a pasta do seu projecto. As memórias <code class="filename"> level1</code> e <code class="filename">level2</code> podem ser partilhadas com utilizadores de outros programas de tradução. A memória denominada <code class="filename">omegat</code> pode ser utilizada pelo próprio OmegaT, em projectos futuros que criar. Se colocar esses ficheiros de memória de tradução
+                        na sub-pasta <code class="filename">/tm/</code> de um projecto, o OmegaT procurá-los-á automaticamente por segmentos semelhantes, chamados "correspondências aproximadas".
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Pode adicionar um novo termo ao glossário premindo <span class="keycap"><strong>Ctrl+Shift+G</strong></span>, ou copiar glossários existentes para a sub-pasta <code class="filename">/glossary/</code> da pasta do seu projecto e o OmegaT procurará automaticamente as palavras neles contidas.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>É frequentemente útil procurar palavras e frases no texto original e na sua tradução, por isso prima <span class="keycap"><strong>Ctrl+F</strong></span> para abrir o diálogo <span class="guilabel">Procura de texto</span> em qualquer altura.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Para uma introdução mais abrangente ver <a class="ulink" href="https://omegat.org/files/OmegaT_for_Beginners.pdf" target="_top">OmegaT para principiantes</a> no sítio web do OmegaT. Se precisar de assistência com qualquer aspecto do OmegaT, sinta-se à vontade para se juntar ao grupo
+                        de utilizadores do <a class="ulink" href="https://omegat.org/support" target="_top">OmegaT.</a></p>
+                  </li>
+               </ul>
+            </div>
+         </div>
+      </div>
+   </body>
+</html>

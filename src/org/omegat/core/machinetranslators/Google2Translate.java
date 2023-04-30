@@ -8,7 +8,7 @@
                2013 Didier Briel
                2016 Aaron Madlon-Kay
                2021,2023 Hiroshi Miura
-               Home page: http://www.omegat.org/
+               Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
  This file is part of OmegaT.
@@ -24,13 +24,12 @@
  GNU General Public License for more details.
 
  You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
 package org.omegat.core.machinetranslators;
 
 import java.awt.Window;
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -62,8 +61,29 @@ import org.omegat.util.Preferences;
 public class Google2Translate extends BaseCachedTranslate {
     protected static final String PROPERTY_PREMIUM_KEY = "google.api.premium";
     protected static final String PROPERTY_API_KEY = "google.api.key";
-    protected static final String GT_URL = "https://translation.googleapis.com/language/translate/v2";
+    /**
+     * {@see https://cloud.google.com/translate/quotas}
+     */
+    protected static final String GT_DEFAULT_URL = "https://translation.googleapis.com";
+    protected static final String GT_PATH = "/language/translate/v2";
+    private String googleTranslateUrl;
+    private String temporaryKey;
     private static final int MAX_TEXT_LENGTH = 5000;
+    private static final int MAX_TEXT_LENGTH_PREMIUM = 30000;
+
+    public Google2Translate() {
+        googleTranslateUrl = GT_DEFAULT_URL + GT_PATH;
+    }
+
+    /**
+     * Constructor for test.
+     * @param baseUrl custom url.
+     * @param key temprary key.
+     */
+    public Google2Translate(String baseUrl, String key) {
+        googleTranslateUrl = baseUrl + GT_PATH;
+        temporaryKey = key;
+    }
 
     /**
      * Return GOOGLE2 preference constant.
@@ -85,6 +105,13 @@ public class Google2Translate extends BaseCachedTranslate {
         return OStrings.getString("MT_ENGINE_GOOGLE2");
     }
 
+    protected int getMaxTextLength() {
+        if (isPremium()) {
+            return MAX_TEXT_LENGTH_PREMIUM;
+        }
+        return MAX_TEXT_LENGTH;
+    }
+
     /**
      * Query Google Translate API and return translation text.
      *
@@ -99,14 +126,7 @@ public class Google2Translate extends BaseCachedTranslate {
      *             when error occurred.
      */
     @Override
-    protected String translate(Language sLang, Language tLang, String text) throws MachineTranslateError, IOException {
-        String trText = text.length() > MAX_TEXT_LENGTH ? text.substring(0, MAX_TEXT_LENGTH - 3) + "..." : text;
-
-        String prev = getFromCache(sLang, tLang, trText);
-        if (prev != null) {
-            return prev;
-        }
-
+    protected String translate(Language sLang, Language tLang, String text) throws Exception {
         String targetLang = tLang.getLanguageCode();
         // Differentiate in target between simplified and traditional Chinese
         if (tLang.getLanguage().compareToIgnoreCase("zh-cn") == 0
@@ -117,9 +137,11 @@ public class Google2Translate extends BaseCachedTranslate {
         }
 
         String googleKey = getCredential(PROPERTY_API_KEY);
-
         if (googleKey == null || googleKey.isEmpty()) {
-            throw new MachineTranslateError(OStrings.getString("GOOGLE_API_KEY_NOTFOUND"));
+            if (temporaryKey == null) {
+                throw new MachineTranslateError(OStrings.getString("GOOGLE_API_KEY_NOTFOUND"));
+            }
+            googleKey = temporaryKey;
         }
 
         Map<String, String> params = new TreeMap<String, String>();
@@ -131,25 +153,24 @@ public class Google2Translate extends BaseCachedTranslate {
         params.put("key", googleKey);
         params.put("source", sLang.getLanguageCode());
         params.put("target", targetLang);
-        params.put("q", trText);
+        params.put("q", text);
         // The 'text' format mangles the tags, whereas the 'html' encodes some
-        // characters as entities. Since it's more reliable to convert the
-        // entities back, we are using 'html' and convert the text with the
-        // unescapeHTML() method.
+        // characters
+        // as entities. Since it's more reliable to convert the entities back,
+        // we are
+        // using 'html' and convert the text with the unescapeHTML() method.
         params.put("format", "html");
 
         Map<String, String> headers = new TreeMap<String, String>();
         headers.put("X-HTTP-Method-Override", "GET");
 
-        String v = HttpConnectionUtils.post(GT_URL, params, headers);
+        String v = HttpConnectionUtils.post(googleTranslateUrl, params, headers);
         String tr = getJsonResults(v);
         if (tr == null) {
             return null;
         }
         tr = unescapeHTML(tr);
-        tr = cleanSpacesAroundTags(tr, trText);
-        putToCache(sLang, tLang, trText, tr);
-        return tr;
+        return cleanSpacesAroundTags(tr, text);
     }
 
     /**
@@ -159,7 +180,6 @@ public class Google2Translate extends BaseCachedTranslate {
      *            response string.
      * @return translation text.
      */
-    @SuppressWarnings("unchecked")
     protected String getJsonResults(String json) throws MachineTranslateError {
         ObjectMapper mapper = new ObjectMapper();
         try {
@@ -172,7 +192,8 @@ public class Google2Translate extends BaseCachedTranslate {
             Log.logErrorRB(e, "MT_JSON_ERROR");
             throw new MachineTranslateError(OStrings.getString("MT_JSON_ERROR"));
         }
-        return null;
+        Log.logErrorRB( "MT_JSON_ERROR");
+        throw new MachineTranslateError(OStrings.getString("MT_JSON_ERROR"));
     }
 
     /**

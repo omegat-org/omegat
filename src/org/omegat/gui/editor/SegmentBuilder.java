@@ -9,7 +9,7 @@
                2015 Aaron Madlon-Kay
                2019 Briac Pilpre
                2022 Thomas Cordonnier
-               Home page: http://www.omegat.org/
+               Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
  This file is part of OmegaT.
@@ -25,7 +25,7 @@
  GNU General Public License for more details.
 
  You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
 package org.omegat.gui.editor;
@@ -293,7 +293,8 @@ public class SegmentBuilder {
                 //translation exist
                 translationText = trans.translation;
             } else {
-                boolean insertSource = Preferences.isPreferenceDefault(Preferences.DONT_INSERT_SOURCE_TEXT,
+                // Double negation - insertSource = true if Preferences.DONT_INSERT_SOURCE_TEXT = false
+                boolean insertSource = !Preferences.isPreferenceDefault(Preferences.DONT_INSERT_SOURCE_TEXT,
                         DONT_INSERT_SOURCE_TEXT_DEFAULT);
                 if (controller.entriesFilter != null && controller.entriesFilter.isSourceAsEmptyTranslation()) {
                     insertSource = true;

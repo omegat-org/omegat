@@ -10,6 +10,7 @@
 * [How to build OmegaT](02.HowToBuild.md)
 * [Git workflow](03.GitWorkFlows.md)
 * [Coding styles](30.CodingStyles.md)
+* [Source tree](04.SourceTree.md)
 
 ## How to create plugin
 
@@ -56,4 +57,6 @@
 ## Other information
 
 * [Release procedure](90.ReleaseProcedure.md)
+* [Code Signing How-to](92.CodeSigning.md)
+* [Building installer](93.BuildingInstallerPackage.md)
 * [Appendix](91.appendix.md)

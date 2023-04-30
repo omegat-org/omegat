@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
-               Home page: http://www.omegat.org/
+               Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
  This file is part of OmegaT.
@@ -20,7 +20,7 @@
  GNU General Public License for more details.
 
  You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
 package org.omegat.core.segmentation;
@@ -47,6 +47,16 @@ public class Rule implements Serializable {
         setBreakRule(breakRule);
         setBeforebreak(beforebreak);
         setAfterbreak(afterbreak);
+    }
+
+    public Rule(gen.core.segmentation.Rule s) {
+        setBreakRule("yes".equalsIgnoreCase(s.getBreak()));
+        if (s.getBeforebreak() != null) {
+            setBeforebreak(s.getBeforebreak().getContent());
+        }
+        if (s.getAfterbreak() != null) {
+            setAfterbreak(s.getAfterbreak().getContent());
+        }
     }
 
     public Rule copy() {

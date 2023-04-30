@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="menus.options">
+  <title id="menus.options.title"><guimenu>Opcions</guimenu></title>
+
+  <para>Aquest menú proporciona un accés ràpid a diverses funcions freqüents.</para>
+  
+  <variablelist>
+    <varlistentry id="menus.options.preferences">
+      <term id="menus.options.preferences.title"><guimenuitem>Preferències...</guimenuitem></term>
+      <listitem>
+        <para>Obre el quadre de diàleg <link linkend="chapter.dialogs.preferences" endterm="chapter.dialogs.preferences.title"/>.</para>
+
+		<note>
+		  <para>En el macOS, aquest element del menú es troba en el menú <guimenu>OmegaT</guimenu>.</para>
+		</note>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry id="menus.options.mt">
+      <term id="menus.options.mt.title"><guisubmenu>Traducció automàtica</guisubmenu></term>
+      <listitem>
+		<itemizedlist>
+		  <listitem>
+			<para><link linkend="dialogs.preferences.mt.automatically.fetch.translations" endterm="dialogs.preferences.mt.automatically.fetch.translations.title"/></para>
+		  </listitem>
+		</itemizedlist>
+
+		<para>Us permet activar o desactivar els motors de traducció automàtica disponibles.</para>
+
+        <para>Si se seleccionen diversos motors de traducció, també podeu utilitzar <keycombo><keycap>C</keycap><keycap>M</keycap></keycombo> per a canviar de motor i inserir el resultat de l'últim motor seleccionat. Consulteu les preferències de <link linkend="dialogs.preferences.mt" endterm="dialogs.preferences.mt.title"/> per a conèixer més detalls.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry id="menus.options.glossary">
+      <term id="menus.options.glossary.title"><guisubmenu>Glossari</guisubmenu></term>
+      <listitem>
+		<itemizedlist>
+		  <listitem>
+			<para><link linkend="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries" endterm="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries.title"/></para>
+		  </listitem>
+		</itemizedlist>
+
+        <para>Us permet activar o desactivar les coincidències parcials per a les coincidències del glossari.</para>
+
+		<para>Consulteu les preferències de <link linkend="dialogs.preferences.glossary" endterm="dialogs.preferences.glossary.title"/> per a conèixer més detalls.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry id="menus.options.dictionary">
+      <term id="menus.options.dictionary.title"><guisubmenu>Diccionari</guisubmenu></term>
+      <listitem>
+		<itemizedlist>
+		  <listitem>
+			<para><link linkend="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries" endterm="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries.title"/></para>
+		  </listitem>
+		</itemizedlist>
+
+        <para>Us permet activar o desactivar les coincidències parcials per a les coincidències del diccionari.</para>
+
+		<para>Consulteu les preferències de <link linkend="dialogs.preferences.dictionary" endterm="dialogs.preferences.dictionary.title"/> per a conèixer més detalls.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry id="menus.options.autocompletion">
+      <term id="menus.options.autocompletion.title"><guisubmenu>Emplenament automàtic</guisubmenu></term>
+      <listitem>
+		<para>Seleccioneu les diferents opcions per a activar-les o desactivar-les. Consulteu les preferències de <link linkend="dialog.preferences.auto.completion" endterm="dialog.preferences.auto.completion.title"/> per a conèixer més detalls.</para>
+	  </listitem>
+    </varlistentry>
+
+    <varlistentry id="menus.options.file.filters">
+      <term id="menus.options.file.filters.title"><guimenuitem>Filtres de fitxers globals...</guimenuitem></term>
+      <listitem>
+        <para>Obre les preferències de <link linkend="dialogs.preferences.file.filters" endterm="dialogs.preferences.file.filters.title"/>.</para>
+
+        <para>Utilitzeu <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.properties" endterm="menus.project.properties.title"/> per a accedir a les preferències dels filtres de fitxers locals.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry id="menus.options.segmentation">
+      <term id="menus.options.segmentation.title"><guimenuitem>Regles de segmentació globals...</guimenuitem></term>
+      <listitem>
+        <para>Obre les preferències de <link linkend="dialogs.preferences.segmentation.setup" endterm="dialogs.preferences.segmentation.setup.title"/>.</para>
+
+        <para>Utilitzeu <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.properties" endterm="menus.project.properties.title"/> per a accedir a les preferències de les regles de segmentació locals.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry id="menus.options.editor">
+      <term id="menus.options.editor.title"><guimenuitem>Editor...</guimenuitem></term>
+      <listitem>
+        <para>Obre les preferències de <link linkend="dialogs.preferences.editor" endterm="dialogs.preferences.editor.title"/>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry id="menus.options.access.configuration.folder">
+      <term id="menus.options.access.configuration.folder.title"><guimenuitem>Obre la carpeta de configuració</guimenuitem></term>
+      <listitem>
+        <para>Obre la carpeta local on s'emmagatzemen els fitxers de configuració de l'OmegaT.</para>
+
+		<note>
+		  <para>La ubicació depèn del sistema operatiu i de les opcions d'inici. Consulteu l'annex <link linkend="configuration.folder" endterm="configuration.folder.title"/> per a conèixer més detalls.</para>
+		</note>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</section>

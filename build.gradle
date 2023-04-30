@@ -1,5 +1,5 @@
-import org.apache.tools.ant.filters.ReplaceTokens
 import org.apache.tools.ant.filters.FixCrLfFilter
+import org.apache.tools.ant.filters.ReplaceTokens
 
 plugins {
     id 'application'
@@ -22,11 +22,9 @@ applicationName = 'OmegaT'
 mainClassName = 'org.omegat.Main'
 
 ext {
-    javaVersion = '1.8'
     omtVersion = loadProperties(file('src/org/omegat/Version.properties'))
     omtFlavor = omtVersion.beta.empty ? 'standard' : 'latest'
     omtWebsite = 'https://omegat.org'
-    envIsCi = project.hasProperty('envIsCi')
     localPropsFile = file('local.properties')
     if (localPropsFile.file) {
         loadProperties(localPropsFile).each { k, v ->
@@ -37,14 +35,67 @@ ext {
     }
 }
 
-sourceCompatibility = javaVersion
-targetCompatibility = javaVersion
-
 version = omtVersion.version + getUpdateSuffix(omtVersion.update)
 
 java {
     withSourcesJar()
     withJavadocJar()
+}
+
+allprojects {
+    def javaVersion = 11;
+    def envIsCi = project.hasProperty('envIsCi') as Boolean
+
+    apply plugin: 'checkstyle'
+    apply plugin: 'java-library'
+    apply plugin: 'eclipse'
+    apply plugin: 'com.github.spotbugs'
+    apply plugin: 'com.diffplug.spotless'
+
+    java {
+        toolchain {
+            languageVersion = JavaLanguageVersion.of(javaVersion)
+            vendor = JvmVendorSpec.ADOPTIUM
+        }
+    }
+
+    javadoc {
+        failOnError = false
+        (options as StandardJavadocDocletOptions).addBooleanOption("Xdoclint:none", true)
+        (options as StandardJavadocDocletOptions).addStringOption("Xmaxwarns", "1")
+    }
+    tasks.withType(JavaCompile) {
+       options.compilerArgs.addAll '-Xlint', '-Werror'
+    }
+
+    sourcesJar {
+        duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    }
+
+    spotbugs {
+        reportLevel = 'high'
+    }
+
+    tasks.findAll { it.name =~ /^spotbugs.*/ }.each {
+        it.reports {
+            xml.required = envIsCi
+            html.required = !envIsCi
+        }
+    }
+
+    checkstyle {
+        toolVersion = '8.45.1'
+    }
+    checkstyleMain.exclude '**/gen/**'
+
+    spotless {
+        enforceCheck false
+        java {
+            targetExclude 'src/gen/**'
+            eclipse().configFile 'docs_devel/docs/assets/eclipse-formatting.xml'
+            removeUnusedImports()
+        }
+    }
 }
 
 sourceSets {
@@ -77,21 +128,16 @@ repositories {
 }
 
 configurations {
-    all {
-        // Temporary exclusion; see https://sourceforge.net/p/omegat/bugs/813/
-        exclude group: 'org.apache.lucene', module: 'lucene-core'
-    }
+    all
     [testRuntime, testCompile]*.exclude group: 'org.languagetool', module: 'language-all'
-
     testIntegrationImplementation.extendsFrom implementation
-
     jaxb
 }
 
 ext {
     providedLibsDir = file('lib/provided')
-    languageToolVersion = '3.5'
-    luceneVersion = '5.2.1'
+    languageToolVersion = '5.7'
+    luceneVersion = '5.5.5'
 }
 
 dependencies {
@@ -100,13 +146,11 @@ dependencies {
         implementation fileTree(dir: providedLibsDir, include: '**/*.jar')
     } else {
         implementation 'commons-io:commons-io:2.11.0'
-        implementation 'commons-lang:commons-lang:2.6'
+        implementation 'org.apache.commons:commons-lang3:3.11'
+        runtimeOnly 'org.slf4j:slf4j-jdk14:1.7.32'
 
         // macOS integration
         implementation 'org.madlonkay:desktopsupport:0.6.0'
-
-        api 'javax.xml.bind:jaxb-api:2.3.1'
-        implementation 'com.sun.xml.bind:jaxb-impl:2.3.4'
 
         // Data: inline data URL handler
         implementation 'tokyo.northside:url-protocol-handler:0.1.4'
@@ -130,41 +174,41 @@ dependencies {
         runtimeOnly 'org.slf4j:slf4j-jdk14:1.7.32' // needed by vldocking
         implementation 'org.omegat:htmlparser:1.6-20230203'
         implementation 'org.omegat:gnudiff4j:1.15'
-        implementation 'org.omegat:lib-mnemonics:1.0'
+        implementation 'org.omegat:lib-mnemonics:1.1'
         implementation 'org.omegat:jmyspell-core:1.0.0-beta-2'
 
         // LanguageTool
-        implementation "org.languagetool:languagetool-core:${languageToolVersion}"
+        implementation("org.languagetool:languagetool-core:${languageToolVersion}") {
+            exclude module: 'guava'
+        }
+        // Exclicitly specify guava dependency for `jre` version rather than `-android`
+        implementation 'com.google.guava:guava:31.0.1-jre'
         runtimeOnly("org.languagetool:language-all:${languageToolVersion}") {
             // Temporary exclusion; see https://sourceforge.net/p/omegat/bugs/814/
             exclude module: 'lucene-gosen-ipadic'
         }
         runtimeOnly 'org.omegat.lucene:lucene-gosen:5.0.0:ipadic'
-        runtimeOnly 'org.languagetool:hunspell-native-libs:2.9'
 
         // Lucene for tokenizers
-        // Temporary use of custom lucene-core; see https://sourceforge.net/p/omegat/bugs/813/
-        implementation "org.omegat.lucene:lucene-core:${luceneVersion}-1"
+        implementation "org.apache.lucene:lucene-core:${luceneVersion}"
         implementation "org.apache.lucene:lucene-analyzers-common:${luceneVersion}"
         implementation "org.apache.lucene:lucene-analyzers-kuromoji:${luceneVersion}"
         implementation "org.apache.lucene:lucene-analyzers-smartcn:${luceneVersion}"
         implementation "org.apache.lucene:lucene-analyzers-stempel:${luceneVersion}"
 
         // Team project server support
-        implementation 'org.eclipse.jgit:org.eclipse.jgit:5.13.1.202206130422-r'
-        // Original JSch is unmaintained and dead, so we use forked version, mwiede/jsch
-        // to fix BUGS#1075, and to support elliptic curve ciphers and improved ssh agent
-        implementation 'com.github.mwiede:jsch:0.2.3'
-        // https://mvnrepository.com/artifact/org.eclipse.jgit/org.eclipse.jgit.ssh.jsch
-        implementation ('org.eclipse.jgit:org.eclipse.jgit.ssh.jsch:5.13.1.202206130422-r') {
-            exclude module: 'jsch'
-        }
-        // For ed25519 and ecdsa support of jsch, java16+ or BC
-        implementation 'org.bouncycastle:bcprov-jdk15on:1.69'
-        // For ssh agent support of jsch, Java16+ or junixsocket
-        implementation 'com.kohlschutter.junixsocket:junixsocket-core:2.4.0'
+        implementation 'org.eclipse.jgit:org.eclipse.jgit:6.5.0.202303070854-r'
+        implementation 'org.eclipse.jgit:org.eclipse.jgit.ssh.apache:6.5.0.202303070854-r'
+        implementation 'org.eclipse.jgit:org.eclipse.jgit.ssh.apache.agent:6.5.0.202303070854-r'
+        implementation 'org.apache.sshd:sshd-git:2.9.2'
+        // For ed25519 and ecdsa support of ssh, java16+ or BC
+        implementation 'org.bouncycastle:bcprov-jdk15on:1.70'
+        implementation 'org.bouncycastle:bcpg-jdk15on:1.70'
+        implementation 'org.bouncycastle:bcpkix-jdk15on:1.70'
+        implementation 'net.i2p.crypto:eddsa:0.3.0'
         // For gpg signing
-        implementation 'org.eclipse.jgit:org.eclipse.jgit.gpg.bc:5.11.1.202105131744-r'
+        implementation 'org.eclipse.jgit:org.eclipse.jgit.gpg.bc:6.5.0.202303070854-r'
+
         // For subversion
         implementation 'org.tmatesoft.svnkit:svnkit:1.10.9'
 
@@ -182,6 +226,9 @@ dependencies {
         runtimeOnly 'org.codehaus.groovy:groovy-dateutil:3.0.9'
         runtimeOnly 'org.apache.ivy:ivy:2.5.1'
 
+        // Javascript used for scripts
+        implementation 'org.openjdk.nashorn:nashorn-core:15.4'
+
         // Script editor
         implementation 'com.fifesoft:rsyntaxtextarea:3.2.0'
         implementation 'com.fifesoft:rstaui:3.2.0'
@@ -193,12 +240,15 @@ dependencies {
         // JSON parser
         implementation "com.fasterxml.jackson.core:jackson-core:2.13.4"
         implementation "com.fasterxml.jackson.core:jackson-databind:2.13.4.2"
+        implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.13.4"
+        implementation 'com.fasterxml.jackson.module:jackson-module-jaxb-annotations:2.14.0'
 
         implementation("com.github.ben-manes.caffeine:caffeine:2.9.3") {
             attributes {
                 attribute(Bundling.BUNDLING_ATTRIBUTE, project.objects.named(Bundling.class, Bundling.EXTERNAL))
             }
         }
+
         implementation("com.github.ben-manes.caffeine:jcache:2.9.3") {
             exclude module: 'caffeine'
             attributes {
@@ -206,6 +256,9 @@ dependencies {
             }
         }
 
+        // dependencies in submodules, you should put it as compileOnly in subprojects
+        runtimeOnly "tokyo.northside:tipoftheday:0.4.1"
+        runtimeOnly "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.13.4"
     }
 
     // Test dependencies
@@ -219,6 +272,9 @@ dependencies {
         testImplementation "org.languagetool:language-${it}:${languageToolVersion}"
     }
     testRuntimeOnly "org.languagetool:language-pl:${languageToolVersion}"
+    testRuntimeOnly "org.slf4j:slf4j-jdk14:1.7.32"
+    // http connection tests
+    testImplementation 'com.github.tomakehurst:wiremock-jre8-standalone:2.35.0'
 
     // JAXB codegen only
     jaxb 'com.sun.xml.bind:jaxb-xjc:2.3.4'
@@ -272,12 +328,13 @@ ext {
 
     assetDir = findProperty('assetDir') ?: '../'
 
-    macJRE = fileTree(dir: assetDir, include: '*-jre_x64_mac_*.tar.gz')
+    macJRE = fileTree(dir: assetDir, include: 'OpenJDK11U-jre_x64_mac_*.tar.gz')
+    armMacJRE = fileTree(dir: assetDir, include: 'OpenJDK11U-jre_aarch64_mac_*.tar.gz')
 
-    linux64JRE = fileTree(dir: assetDir, include: '*-jre_x64_linux_*.tar.gz')
+    linux64JRE = fileTree(dir: assetDir, include: 'OpenJDK11U-jre_x64_linux_*.tar.gz')
 
-    windowsJRE = fileTree(dir: assetDir, include: '*-jre_x86-32_windows_*.zip')
-    windowsJRE64 = fileTree(dir: assetDir, include: '*-jre_x64_windows_*.zip')
+    windowsJRE32 = fileTree(dir: assetDir, include: 'OpenJDK11U-jre_x86-32_windows_*.zip')
+    windowsJRE = fileTree(dir: assetDir, include: 'OpenJDK11U-jre_x64_windows_*.zip')
 }
 
 task genDocIndex(type: Copy) {
@@ -366,9 +423,7 @@ distributions {
                 into 'plugins'
             }
             from('release/linux-specific') {
-                filter(ReplaceTokens, tokens:
-                    [VERSION_NUMBER_SUBST: project.version,
-                     JAR_SUBST: jar.archiveName])
+                filter(ReplaceTokens, tokens: [VERSION_NUMBER_SUBST: project.version, JAR_SUBST: jar.archiveName])
                 fileMode 0755
             }
             from('release/win32-specific') {
@@ -377,6 +432,13 @@ distributions {
             }
             from('lib/licenses') {
                 into 'lib'
+            }
+            // system core plugins into modules
+            from('releases/modules-specific') {
+                into 'modules'
+            }
+            from(subprojects.collect {it.tasks.withType(Jar)}) {
+                into 'modules'
             }
             eachFile {
                 // Move main JAR up one level from lib.
@@ -393,11 +455,18 @@ distributions {
             from(rootDir) {
                 include 'config/**', 'docs/**', 'images/**', 'lib/**', 'release/**',
                     'src/**', 'test/**', 'doc_src/**', 'docs_devel/**', 'scripts/**',
-                    'gradle/**', 'gradlew*', '*.gradle', 'README.md', '*.properties'
+                    'gradle/**', 'gradlew*', '*.gradle', 'README.md', '*.properties',
+                    'tipoftheday/**'
                 exclude '**/build/**', 'doc_src/**/pdf/**', 'local.properties'
             }
             into('lib/provided') {
                 from configurations.runtimeClasspath
+            }
+            into('lib/provided') {
+                // collect subproject runtime dependencies
+                from  {subprojects.findAll { it.getSubprojects().isEmpty()}.
+                        collect { it.configurations.runtimeClasspath }
+                }
             }
         }
         sourceDistZip.archiveFileName = "${applicationName}_${version}${omtVersion.beta}_Source.zip"
@@ -457,7 +526,10 @@ installMacDist {
 }
 
 def hunspellJar = configurations.runtimeClasspath.files.find {
-    it.name.startsWith('hunspell-native-libs')
+    it.name.startsWith('hunspell')
+}
+def bridjJar = configurations.runtimeClasspath.files.find {
+    it.name.startsWith('bridj')
 }
 
 task hunspellJarSignedContents(type: Sync) {
@@ -479,10 +551,33 @@ task hunspellJarSignedContents(type: Sync) {
         }
     }
 }
+task bridjJarSignedContents(type: Sync) {
+    onlyIf {
+        // Set this in e.g. local.properties
+        condition(project.hasProperty('macCodesignIdentity'), 'Code signing property not set')
+    }
+    from zipTree(bridjJar)
+    destinationDir = file("$buildDir/bridj")
+    doLast {
+        def jnilibs = fileTree(dir: destinationDir, include: '**/*.jnilib').files
+        exec {
+            commandLine('codesign', '--deep', '--force',
+                        '--sign', project.property('macCodesignIdentity'),
+                        '--timestamp',
+                        '--options', 'runtime',
+                        '--entitlements', file('release/mac-specific/java.entitlements'),
+                        *jnilibs.toList())
+        }
+    }
+}
 
 task hunspellSignedJar(type: Jar) {
     from hunspellJarSignedContents.outputs
     archiveFileName = hunspellJar.name
+}
+task bridjSignedJar(type: Jar) {
+    from bridjJarSignedContents.outputs
+    archiveFileName = bridjJar.name
 }
 
 task installMacSignedDist(type: Sync) {
@@ -494,6 +589,9 @@ task installMacSignedDist(type: Sync) {
     with distributions.mac.contents
     duplicatesStrategy = DuplicatesStrategy.INCLUDE
     from(hunspellSignedJar.outputs) {
+        into 'OmegaT.app/Contents/Java/lib'
+    }
+    from(bridjSignedJar.outputs) {
         into 'OmegaT.app/Contents/Java/lib'
     }
     destinationDir = file("${buildDir}/install/${applicationName}-macSigned")
@@ -672,7 +770,7 @@ ext.makeWinTask = { args ->
             exec {
                 // You'd think we could just set the PATH, but there be dragons here
                 // https://github.com/palantir/gradle-docker/issues/162
-                def exe = exePresent('iscc') ?  'iscc' : file('release/ci/iscc')
+                def exe = exePresent('iscc') ?  'iscc' : file('ci/iscc')
                 commandLine exe, "${destinationDir}/OmegaT.iss"
             }
             ant.move file: "${destinationDir}/${installerBasename}.exe",
@@ -696,7 +794,7 @@ ext.makeWinTask = { args ->
             exec {
                 // You'd think we could just set the PATH, but there be dragons here
                 // https://github.com/palantir/gradle-docker/issues/162
-                def exe = exePresent('osslsigncode') ? 'osslsigncode' : file('release/ci/osslsigncode')
+                def exe = exePresent('osslsigncode') ? 'osslsigncode' : file('ci/osslsigncode')
                 commandLine exe, 'sign',
                     '-pkcs12', project.property('winCodesignFile'),
                     '-pass', project.property('winCodesignPassword'),
@@ -714,8 +812,8 @@ ext.makeWinTask = { args ->
     win.dependsOn args.name, signedTaskName
 }
 makeWinTask(name: 'winNoJRE', suffix: 'Windows_without_JRE')
-makeWinTask(name: 'winJRE', suffix: 'Windows', jrePath: windowsJRE)
-makeWinTask(name: 'winJRE64', suffix: 'Windows_64', jrePath: windowsJRE64, arch: 'x64')
+makeWinTask(name: 'winJRE', suffix: 'Windows', jrePath: windowsJRE32)
+makeWinTask(name: 'winJRE64', suffix: 'Windows_64', jrePath: windowsJRE, arch: 'x64')
 
 // Disable .tar distributions for everyone but Linux
 tasks.findAll { it.name =~ /[dD]istTar$/ && !it.name.contains('linux') }.each { it.enabled = false }
@@ -814,40 +912,6 @@ task genMac {
     }
 }
 
-allprojects {
-    javadoc {
-        failOnError = false
-    }
-    tasks.withType(JavaCompile) {
-       options.compilerArgs.addAll '-Xlint', '-Werror'
-    }
-}
-
-spotbugs {
-    reportLevel = 'high'
-}
-
-tasks.findAll { it.name =~ /^spotbugs.*/ }.each {
-    it.reports {
-        xml.enabled = envIsCi
-        html.enabled = !envIsCi
-    }
-}
-
-checkstyle {
-    toolVersion = '8.45.1'
-}
-checkstyleMain.exclude '**/gen/**'
-
-spotless {
-    enforceCheck false
-    java {
-        targetExclude 'src/gen/**'
-        eclipse().configFile 'docs_devel/docs/assets/eclipse-formatting.xml'
-        removeUnusedImports()
-    }
-}
-
 task changedOnBranch {
     description = 'List files that have been modified on this git branch.'
     group = 'omegat workflow'
@@ -894,7 +958,8 @@ tasks.jacocoTestCoverageVerification {
         rule {
             element = 'CLASS'
             includes = ['org.omegat.core.machinetranslators.*', 'org.omegat.core.dictionaries.*']
-            excludes = ['**.*.1', '**.*.2', '**.*.3']  // ignore inner classes
+            excludes = ['**.*.1', '**.*.2', '**.*.3',  // ignore inner classes
+                    'org.omegat.core.machinetranslators.MachineTranslators']  // simple plugin reg.
             limit { minimum = 0.20 }
         }
         rule {
@@ -1014,6 +1079,16 @@ task debug(type: JavaExec) {
     debug true
 }
 
+task runOnJava17(type: JavaExec) {
+    description = 'Launch app on Java 17'
+    javaLauncher = javaToolchains.launcherFor {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+    mainClass = application.mainClass
+    classpath = sourceSets.main.runtimeClasspath
+    group = 'application'
+}
+
 // E.g. when doing `build`, run checks before making distfiles
 assemble.mustRunAfter check
 
@@ -1030,6 +1105,17 @@ task testIntegration(type: JavaExec) {
     mainClass = 'org.omegat.core.data.TestTeamIntegration'
     classpath = sourceSets.testIntegration.runtimeClasspath
     systemProperties = System.properties
+}
+
+task testOnJava17(type: Test) {
+    description = 'Run test cases on Java 17'
+    javaLauncher = javaToolchains.launcherFor {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+    if (project.hasProperty('headless')) {
+        systemProperty 'java.awt.headless', 'true'
+    }
+    group = 'verification'
 }
 
 ext.mavenStyleVersion = version.replace('_', '-')
@@ -1145,6 +1231,10 @@ mkdocs {
     sourcesDir = 'docs_devel'
 }
 
-// Allow setting the max heap size for the run task from the command line, e.g.
-// `gradle -PrunMaxHeapSize=1024M run`
-run.maxHeapSize = findProperty('runMaxHeapSize')
+tasks.withType(JavaExec).configureEach {
+    // Allow setting the max heap size for the run task from the command line, e.g.
+    // `gradle -PrunMaxHeapSize=1024M run`
+    maxHeapSize = findProperty('runMaxHeapSize')
+    // Ask modules to be up-to-date before run task executed
+    dependsOn subprojects.tasks.jar
+}

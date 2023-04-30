@@ -1,0 +1,1119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd"
+[
+<!ENTITY % manualvariables SYSTEM "manualvariables.mod">
+%manualvariables;
+]>
+<section id="app.regex">
+  <title id="app.regex.title">Expressions regulars</title>
+
+  <para>Aquest annex va destinat als usuaris interessats a explorar una manera potent de millorar la productivitat. Tot i que tenen un aspecte complex i intimiden, fins i tot les expressions regulars més senzilles (sovint abreujades com a <emphasis>regex</emphasis> o <emphasis>regexp</emphasis>) són extremadament útils, no només en l'OmegaT, sinó en moltes altres aplicacions que potser utilitzeu cada dia, amb algunes variacions.</para>
+
+  <para>Només es tracten els fonaments més útils per als traductors. La secció <link linkend="app.regex.tools" endterm="app.regex.tools.title"/> del final d'aquest annex proporciona alguns punts de partida per a explorar usos avançats o complexos més enllà de l'abast d'aquest manual. Si necessiteu ajuda per a un cas concret, també podeu preguntar-ho en els diferents canals d'assistència.</para>
+  
+  <para>Les expressions regulars utilitzen una combinació de lletres, dígits i símbols (coneguts col·lectivament com a <emphasis>caràcters</emphasis>) per a definir una <emphasis>expressió</emphasis> que representa un patró de text específic.</para>
+
+  <para>Aquí en teniu alguns exemples.</para>
+  
+  <variablelist>
+    <varlistentry>
+      <term>[0-9]</term>
+      <listitem><para>Qualsevol dígit de 0 a 9.</para>
+      </listitem>
+    </varlistentry>
+
+	<varlistentry>
+      <term>\w+</term>
+      <listitem><para>Representa un o més &quot;caràcters de paraules&quot;, és a dir, lletres de l'alfabet, dígits i símbols de subratllat.</para>
+      </listitem>
+    </varlistentry>
+
+	<varlistentry>
+      <term>\h?</term>
+      <listitem><para>Representa zero o un caràcter horitzontal d'espai en blanc (això inclou espais normals i no separables i les tabulacions, però no els caràcters de salt de línia, que pertanyen a la categoria d'«espais en blanc verticals»: \v).</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>    
+  
+  <para>Moltes funcions de l'OmegaT es basen en expressions regulars o les ofereixen com a opció:</para>
+
+  <variablelist>
+    <varlistentry>
+      <term>Cerques</term>
+      <listitem>
+        <para>Les cerques de l'OmegaT inclouen una opció <link linkend="windows.text.search.methods.regex" endterm="windows.text.search.methods.regex.title"/> que permet fer cerques molt potents en els vostres fitxers.</para>
+
+        <para>La mateixa opció del quadre diàleg <link linkend="windows.text.replace" endterm="windows.text.replace.title"/> permet aplicar expressions regulars tant a la cerca com al text substituït.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Etiquetes personalitzades</term>
+      <listitem>
+        <para>Les etiquetes personalitzades són etiquetes definides amb expressions regulars que es tracten exactament com etiquetes natives de l'OmegaT. Consulteu les preferències de <link linkend="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags" endterm="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags.title"/> per a conèixer més detalls.</para>
+
+		<para>Utilitzeu el caràcter <code>|</code> (OR) per a separar definicions d'etiquetes individuals.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Text marcat</term>
+      <listitem>
+        <para>La preferència <link linkend="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation" endterm="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation.title"/> us permet definir cadenes que l'OmegaT marcarà en vermell per defecte i que tractarà com a etiquetes supèrflues per a la validació.</para>
+
+		<para>Utilitzeu el caràcter <code>|</code> (OR) per a separar definicions de fragments individuals.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Ressaltat de text en les alineacions</term>
+      <listitem>
+        <para>Els indicadors visuals poden ajudar a verificar que l'alineació és correcta. El paràmetre <link linkend="windows.aligner.adjust.highlight" endterm="windows.aligner.adjust.highlight.title"/> permet definir cadenes que l'OmegaT ressaltarà en els fitxers alineats.</para>
+
+		<para>Utilitzeu el caràcter <code>|</code> (OR) per a separar expressions individuals.</para>
+      </listitem>
+    </varlistentry>	
+
+    <varlistentry>
+      <term>Segmentació</term>
+      <listitem>
+        <para>Les regles de segmentació i els patrons de llengua es defineixen amb expressions regulars. Les podeu modificar lliurement per a millorar la segmentació d'un fitxer o podeu afegir regles generals addicionals. Consulteu l'annex <link linkend="app.segmentation" endterm="app.segmentation.title"/> per a conèixer més detalls.</para>
+
+        <para>Les regles de segmentació o excepció defineixen la posició en un segment on es farà (o no) una divisió. Es requereixen dues expressions regulars per a definir aquesta posició: una expressió «anterior» per a definir el patró de text davant del qual s'ha d'aplicar la regla, i una expressió «posterior» per a definir el patró de text després d'aquesta posició.</para>
+
+		<para>En un projecte s'aplicarà un patró de llengua que coincideixi amb la llengua d'origen del projecte.</para>
+	  </listitem>
+    </varlistentry>
+  </variablelist>
+
+  <section id="app.regex.four.rules">
+    <title id="app.regex.four.rules.title">Les 4 normes</title>
+
+    <para>Les expressions regulars s'utilitzen per a cercar text, incloent-hi caràcters que no són visibles en la pantalla o quan s'imprimeixen, com ara espais, tabulacions o salts de línia. Qualsevol expressió <emphasis>coincideix</emphasis> o <emphasis><emphasis role="bold">no</emphasis> coincideix</emphasis> amb una paraula, una frase o una altra seqüència de text.</para>
+    
+    <para>Tots i cadascun dels caràcters de l'expressió són rellevants quan es determina una coincidència.</para>
+    <para>Hi ha diversos caràcters o combinacions de caràcters amb un significat especial en una expressió regular.</para>
+    
+    <warning>
+      <para>Les expressions regulars només coincideixen amb text. No poden coincidir amb format com ara la <emphasis>negreta</emphasis>, la <emphasis>cursiva</emphasis> o altres <emphasis>efectes d'estil</emphasis>.</para>
+    </warning>
+
+    <para>Hi ha quatre normes que cal tenir en compte.</para>
+
+    <variablelist>
+      <varlistentry>
+        <term>La majoria de caràcters coincideixen amb ells mateixos</term>
+        <listitem>
+          <para>La majoria de caràcters d'una expressió regular simplement <emphasis>se cerquen a ells mateixos</emphasis> en la seqüència de text.</para>
+
+		  <para>Per exemple, les set lletres que formen la paraula «<emphasis>exemple</emphasis>» senzillament indiquen a la funció de cerca que coincideixi exactament amb aquestes lletres, en aquest ordre. En resum, la cerca només cerca la paraula «<emphasis>exemple</emphasis>».</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Les lletres de l'alfabet precedides per una barra inclinada inversa (<literal>\</literal>) prenen un significat especial</term>
+        <listitem>
+          <para>A diferència d'una lletra sola, que simplement es representa a ella mateixa com s'ha indicat anteriorment, una lletra precedida per <literal>\</literal> té una funció especial en una expressió regular.</para>
+
+		  <para>Per exemple, <emphasis>r</emphasis> és només un caràcter normal, però si s'afegeix <literal>\</literal> davant perquè sigui <literal>\r</literal>, es converteix en una combinació especial que coincideix amb el <emphasis>caràcter de retorn de carro</emphasis>. De la mateixa manera, <literal>\R</literal> coincideix amb <emphasis>qualsevol caràcter de salt de línia</emphasis>.</para>
+		  
+          <note>
+            <para>Només les lletres <emphasis>i j l m o</emphasis> i <emphasis>y</emphasis>, tant en minúscules com en majúscules, no tenen cap significat especial quan van precedides per una barra inversa. Aquest manual només descriu un petit subconjunt de lletres que prenen un significat especial.</para>
+
+			<para>Consulteu els llocs de la secció <link linkend="app.regex.tools" endterm="app.regex.tools.title"/> més endavant per a obtenir informació sobre les combinacions que no es tracten aquí.</para>
+          </note>
+        </listitem>
+      </varlistentry>
+        
+      <varlistentry>
+      <term>Hi ha dotze caràcters amb un significat especial per defecte</term>
+        <listitem>
+          <para>Aquest significat especial l'ha d'anul·lar un altre caràcter perquè coincideixi amb el caràcter en si.</para>
+
+          <para>La llista completa de caràcters es presenta <link linkend="app.regex.twelve.characters">a continuació</link>. Un exemple és <literal>.</literal>: per si sol, té el significat especial de <emphasis>qualsevol caràcter únic</emphasis>.</para>
+
+		  <para>Per a cercar un punt normal, aquest significat s'ha de cancel·lar utilitzant <literal>\</literal> per a crear l'expressió <literal>\.</literal>, que només coincideix amb un punt.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>El caràcter <literal>\</literal> is és un caràcter molt especial</term>
+        <listitem>
+          <para>Com s'ha indicat anteriorment, el caràcter <literal>\</literal> per defecte té el significat especial d'anul·lar o activar el significat especial d'altres caràcters. No té cap efecte si es col·loca davant d'un caràcter sense significat especial (per defecte o per addició).</para>
+
+          <para>El caràcter <literal>\</literal> pot anul·lar el seu propi significat especial si es dobla en la forma <literal>\\</literal>, que simplement coincideix amb el caràcter de <emphasis>barra inclinada inversa</emphasis>.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </section>
+
+  <section id="app.regex.twelve.characters">
+    <title id="app.regex.twelve.characters.title">Els 12 caràcters</title>
+  
+    <para>Els dotze caràcters especials són la <emphasis>barra inclinada inversa</emphasis> <literal>\</literal>, el <emphasis>circumflex</emphasis> <literal>^</literal>, el <emphasis>signe del dòlar</emphasis> <literal>$</literal>, el <emphasis>punt</emphasis><emphasis></emphasis> <literal>.</literal>, la <emphasis>pleca</emphasis> (o <emphasis>barra vertical</emphasis>) <literal>|</literal>, el <emphasis>signe d'interrogació</emphasis> <literal>?</literal>, l'<emphasis>asterisc</emphasis> (o <emphasis>estrella</emphasis>) <literal>*</literal>, el <emphasis>signe de suma</emphasis> <literal>+</literal>, el <emphasis>parèntesi d'obertura</emphasis> <literal>(</literal>, el <emphasis>parèntesi de tancament</emphasis> <literal>)</literal>, el <emphasis>claudàtor d'obertura</emphasis> <literal>[</literal> i la <emphasis>clau d'obertura</emphasis> <literal>{</literal>.</para>
+
+    <para>A continuació es descriu breument cada caràcter amb exemples d'expressions regulars que en depenen, i també amb exemples de text amb què coincideixen o no.</para>
+    
+      <variablelist>
+        <varlistentry>
+          <term>BARRA INCLINADA INVERSA: <literal>\</literal></term>
+          <listitem>
+            <para>Aquest caràcter anul·la o activa el significat especial del caràcter següent.</para>
+            
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry/>
+                    <entry><literal>0\.[0-9]</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>Coincideix</entry>
+                    <entry>
+                      <para>Un nombre entre <emphasis>0.0</emphasis> i <emphasis>0.9</emphasis>, o només la part <emphasis>0.5</emphasis> final en nombres com 10.5 o 560.5.</para>
+
+                      <para><literal>\.</literal> anul·la el significat de &quot;qualsevol caràcter&quot; del punt per a coincidir amb el punt decimal, mentre que <literal>\d</literal> converteix la lletra «d» minúscula en una expressió que coincideix amb qualsevol dígit entre 0 i 9.</para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>No coincideix</entry>
+                    <entry>
+                      <para>Seqüències com ara 0,1, 0-3 o els tres primers caràcters de 0x002E, que coincidirien si l'expressió fos simplement <literal>0.[0-9]</literal>, sense la barra inclinada inversa abans del punt.</para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>CIRCUMFLEX: <literal></literal>^</term>
+          <listitem>
+            <para>Quan és el primer caràcter de l'expressió, el caràcter <emphasis>circumflex</emphasis> coincideix amb el començament d'una línia.</para>
+
+            <para>Quan és el primer caràcter d'una <link linkend="app.regex.types.of.expressions.classes">classe de caràcters entre claudàtor</link>, coincideix amb tots els caràcters que no formen part de la classe.</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry/>
+                    <entry>
+                      <orderedlist>
+                        <listitem>
+                          <para><literal>^A</literal></para>
+                        </listitem>
+        
+                        <listitem>
+                          <para>[^abc]</para>
+                        </listitem>
+                      </orderedlist>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>Coincideix</entry>
+                    <entry>
+                      <orderedlist>
+                        <listitem>
+                          <para>La lletra «A» majúscula de la frase «A vegades somnio viatges llargs però emocionants».</para>
+                        </listitem>
+
+                        <listitem>
+                          <para>Qualsevol caràcter que <emphasis>no</emphasis> sigui «a», «b» ni «c». En la paraula &quot;caoba&quot;, per exemple, només coincideix la «o».</para>
+                        </listitem>
+                      </orderedlist>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>No coincideix</entry>
+                    <entry>
+                      <orderedlist>
+                        <listitem>
+                          <para>La lletra «A» majúscula de la frase següent: «El meu amic escriu un llibre titulat <emphasis>Amors llunyans</emphasis>».</para>
+                        </listitem>
+                      
+                        <listitem>
+                          <para>Les lletres «a», «b» o «c» minúscula de la paraula «caoba».</para>
+                        </listitem>
+                      </orderedlist>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>SIGNE DEL DÒLAR: <literal>$</literal></term>
+          <listitem>
+            <para>Quan és el darrer caràcter d'una expressió, el signe del <emphasis>dòlar</emphasis> coincideix amb la fi d'una línia.</para>
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry/>
+                    <entry><literal>^\w+:$</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>Coincideix</entry>
+                    <entry>
+                      <para>Una línia formada per una sola paraula i que acaba amb dos punts:</para>
+                      <para><emphasis>Preguntes:</emphasis></para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>No coincideix</entry>
+                    <entry>
+                      <para>Una línia formada per una sola paraula, però que no acaba amb dos punts:</para>
+                      <para><emphasis>Preguntes?</emphasis></para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>PUNT: <literal>.</literal></term>
+          <listitem>
+            <para>Coincideix amb qualsevol caràcter.</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry/>
+                    <entry><literal>s.l</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>Coincideix</entry>
+                    <entry>
+                      <para>Qualsevol combinació de tres lletres que comenci per «s» i acabi amb «l»: «<emphasis>sol</emphasis>», «<emphasis>sal</emphasis>» o fins i tot combinacions sense sentit com «<emphasis>sul</emphasis>», «<emphasis>szl</emphasis>» o «<emphasis>srl</emphasis>».</para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>No coincideix</entry>
+                    <entry>
+                      <para>Combinacions que contenen tres lletres que comencen per «s» i acaben amb «l», però dividides en més d'una línia.</para>
+                      <para>Quina és la lletra que falta?</para>
+                        <simplelist>
+                          <member><literal>s</literal></member>
+                          <member><literal/></member>
+                          <member><literal>l</literal></member>
+                        </simplelist>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>PLECA: <literal>|</literal></term>
+          <listitem>
+            <para>Aquest caràcter funciona com un operador «OR» i coincideix amb qualsevol de les expressions anteriors o posteriors.</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry/>
+                    <entry><literal>^Un|^El</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>Coincideix</entry>
+                    <entry>
+                      <para>Les paraules «Un» o «El» inicials en frases com ara:<simplelist>
+                          <member>«Un segle de vida...»</member>
+                          <member>«El concert dels meus somnis...»</member>
+                        </simplelist>
+                      </para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>No coincideix</entry>
+                    <entry>
+                      <para>Les paraules «Un» o «El» inicials en frases com ara:<simplelist>
+                          <member>«Un llibre titulat <emphasis>Un heroi oblidat</emphasis>.»</member>
+                          <member>«Treballa en el restaurant <emphasis>El panxacontent</emphasis>.»</member>
+                        </simplelist>
+                      </para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>SIGNE D'INTERROGACIÓ: <literal>?</literal></term>
+          <listitem>
+            <para>Aquest caràcter especifica que el caràcter o expressió precedent ha de coincidir zero o una vegada.</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry/>
+                    <entry>
+                      <literal>un?␣</literal> («␣» representa un espai)</entry>
+                  </row>
+
+                  <row>
+                    <entry>Coincideix</entry>
+                    <entry>
+                      <para>Les paraules «un» o «una» de les frases següents:<simplelist>
+                          <member>«Tinc una pregunta».</member>
+                          <member>«Conec un doctor excel·lent».</member>
+                        </simplelist>
+                      </para>
+                      
+                      <para>També trobarà les lletres «un» d'«algun» en una frase com ara «Teniu algun dubte?» o «una» com a part de «lluna» en «Avui hi ha lluna plena».</para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>No coincideix</entry>
+                    <entry>
+                      <para>Ni «un» ni «una» en la frase següent:<simplelist>
+                          <member>L'article indefinit: «un» (o «una»).</member>
+                        </simplelist>
+                      </para>
+                      <para>No van seguits per un espai.</para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>ASTERISC: <literal>*</literal></term>
+          <listitem>
+            <para>Aquest caràcter especifica que el caràcter o expressió precedent ha de coincidir zero o més vegades.</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry/>
+                    <entry><literal>cant\w*</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>Coincideix</entry>
+                    <entry>
+                      <para>La paraula «cant», així com «cant», «cantant», «cantaire», la part «cant» de les paraules «vacant» i «Alacant» i qualsevol altra paraula o seqüència de caràcters que contingui «cant» seguit de zero o més «<emphasis>caràcters de paraula</emphasis>». Aquests caràcters inclouen els dígits i el subratllat, de manera que la part anterior a «@» en una adreça electrònica com «cantaires_123@exemple.org» també coincideix.</para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>No coincideix</entry>
+                    <entry>
+                      <para>La frase sencera en «cantem i ballem» o «cantaires-dansaires», perquè <literal>\w</literal> no inclou els espais en blanc ni els guionets. Només coincideix la part «cant» d'aquestes expressions.</para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>SIGNE DE SUMA: <literal>+</literal></term>
+          <listitem>
+            <para>Aquest caràcter especifica que el caràcter o expressió precedent ha de coincidir una o més vegades.</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry/>
+                    <entry><literal>\d+.d</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>Coincideix</entry>
+                    <entry>
+                      <para>Nombres com ara «1.5», «23.2» o «5235.8» amb un únic decimal i qualsevol nombre de dígits abans del punt decimal.</para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>No coincideix</entry>
+                    <entry>
+                      <para>El valor complet de nombres com ara «5,235.8» o «21,571.9». Només coincidirà la part posterior al separador de milers.</para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>PARÈNTESI D'OBERTURA: <literal>(</literal></term>
+
+          <listitem>
+            <para>Aquest caràcter inicia un <emphasis>grup</emphasis>, que és un conjunt de caràcters tractats com una sola unitat. Els grups estan numerats i el contingut s'emmagatzema en la memòria. Es poden reutilitzar més endavant en l'expressió de cerca utilitzant <literal>\<option>n</option></literal>, on <option>n</option> és el número del grup.</para>
+
+            <note>
+              <para>El contingut del grup també es pot utilitzar en el <link linkend="windows.text.replace">text de substitució</link>. Utilitzeu <literal>$<option>n</option></literal>, on <option>n</option> és el número del grup definit en la cerca.</para>
+            </note>
+
+            <para>Sempre s'utilitzen parèntesis en parells d'obertura i tancament. Si intenteu utilitzar només els parèntesis d'obertura o tancament sols, es produirà un error.</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry/>
+                    <entry><literal>(\b\w+\b)\h\1\b</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>Coincideix</entry>
+                    <entry>
+                      <para>Paraules duplicades separades per un espai, com ara «una» en la frase següent:</para>
+
+					  <para>«He comprat una una poma».</para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>No coincideix</entry>
+                    <entry>
+                      <para>La part «això, això» en la frase següent:</para>
+
+					  <para>«Però això, això és increïble». El primer «això» va seguit d'una coma i un espai, no només un espai.</para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>PARÈNTESI DE TANCAMENT: <literal>)</literal></term>
+
+          <listitem>
+            <para>Aquest caràcter tanca un grup. És especial perquè no es pot utilitzar mai per si sol. Ha d'anar precedit per <literal>\</literal> si necessiteu que coincideixi el caràcter de parèntesi de tancament.</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry/>
+                    <entry><literal>^\d+\)</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>Coincideix</entry>
+                    <entry>
+                      <para>El número de seqüència (incloent-hi el parèntesi) del començament de cada línia en una llista com la següent:</para>
+
+                      <simplelist>
+                        <member>1) Pomes</member>
+                        <member>2) Taronges</member>
+                        <member>3) Peres</member>
+                      </simplelist>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>No coincideix</entry>
+                    <entry>
+                      <para>Números de seqüència que no són al principi d'una línia.</para>
+
+                      <para>Seguiu aquests passos:</para>
+                      <simplelist>
+                        <member>Pas 1) Preparació</member>
+                        <member>Pas 2) ...</member>
+                      </simplelist>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>CLAUDÀTOR D'OBERTURA: <literal>[</literal></term>
+
+          <listitem>
+            <para>Aquest caràcter s'ha d'aparellar amb el claudàtor de tancament per a crear un conjunt de caràcters individuals que representi cadascun una coincidència potencial vàlida.</para>
+
+            <para>Només el claudàtor d'obertura és especial i ha d'anar precedit per una barra inclinada inversa per a cercar el caràcter de claudàtor. Si només voleu que coincideixi el claudàtor de tancament, no cal que vagi precedit per una barra inclinada inversa. (Podeu afegir-la, però no tindrà cap efecte en l'expressió ni en el resultat).</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry/>
+                    <entry><literal>li[cs]en[cs]e</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>Coincideix</entry>
+                    <entry>
+                      <para>Les paraules correctes «licence» i «license» i les formes incorrectes possibles «lisence» i «lisense».</para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>No coincideix</entry>
+                    <entry>
+                      <para>Formes incorrectes més estranyes com ara «licensse» o «lissense».</para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>CLAU D'OBERTURA: <literal>{</literal></term>
+
+          <listitem>
+            <para>Aquest caràcter s'ha d'aparellar amb la clau de tancament per a indicar un <emphasis>nombre exacte</emphasis>, <emphasis>mínim</emphasis>, <emphasis>màxim</emphasis> o <emphasis>interval</emphasis> que especifiqui quantes repeticions del caràcter o grup anterior han de coincidir.</para>
+
+            <para>Només la clau d'obertura és especial i ha d'anar precedida per una barra inclinada inversa per a cercar el caràcter de clau. Si només voleu que coincideixi la clau de tancament, no cal indicar una barra inclinada inversa davant. (Podeu afegir-la, però no tindrà cap efecte en l'expressió ni en el resultat).</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry/>
+                    <entry><literal>\d{4}/\d{1,3}</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>Coincideix</entry>
+                    <entry>
+                      <para>Codis com «1234/5», «1472/69» o «9513/842» formats per quatre dígits, una barra inclinada i d'un a tres dígits més.</para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>No coincideix</entry>
+                    <entry>
+                      <para>Codis com ara «123/45», «1472/6985» o «95133/15746».</para>
+                      <para><emphasis role="bold">Atenció:</emphasis> Encara que els dos darrers codis anteriors no coincideixin completament, l'expressió retornarà la porció «<emphasis>1472/698</emphasis>» de «1472/6985» i la porció «<emphasis>5133/157</emphasis>» de «95133/15746».</para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+  </section>
+
+  <section id="app.regex.types.of.expressions">
+    <title id="app.regex.types.of.expressions.title">Moltes expressions</title>
+
+    <para>Aquesta secció presenta diversos tipus d'expressions regulars, de més senzilles a més complexes.</para>
+      
+    <note>
+      <para>Recordeu que la majoria dels caràcters <emphasis>alfabètics</emphasis> precedits per <literal>\</literal> es converteixen en una expressió que representa <emphasis>no el caràcter en si, sinó el seu significat especial associat</emphasis>.</para>
+    </note>
+
+    <section id="app.regex.types.of.expressions.simple.expressions">
+      <title id="app.regex.types.of.expressions.simple.expressions.title">Expressions senzilles</title>
+      <para>L'expressió regular més senzilla està formada per un sol caràcter o una combinació de <literal>\</literal> i un caràcter que constitueixi una unitat amb un sol significat.</para>
+      
+      <table id="app.regex.characters">
+        <title id="app.regex.characters.title">Caràcters</title>
+
+        <tgroup align="left" cols="2" rowsep="1">
+          <colspec align="left" colnum="1"/>
+
+          <thead>
+            <row>
+              <entry align="left">Expressió</entry>
+              <entry align="left">Coincidència</entry>
+            </row>
+          </thead>
+
+          <tbody>
+            <row>
+              <entry><literal>x</literal></entry>
+              <entry>
+                <para>Caràcter «x» pròpiament.</para>
+                <para>La majoria de caràcters coincideixen amb ells mateixos.</para>
+              </entry>
+            </row>
+
+            <row>
+              <entry><literal>\t</literal></entry>
+              <entry>
+                <para>Caràcter de tabulació, no la lletra «t».</para>
+			  </entry>
+            </row>
+
+            <row>
+              <entry><literal>\n</literal></entry>
+              <entry>Caràcter de línia nova (salt de línia), no la lletra «n».</entry>
+            </row>
+
+            <row>
+              <entry><literal>\r</literal></entry>
+              <entry>
+                <para>Caràcter de retorn de carro, no la lletra «r».</para>
+                <para>De manera similar, <literal>\R</literal> és qualsevol caràcter de salt de línia.</para>
+			  </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+
+    <section id="app.regex.types.of.expressions.case">
+      <title id="app.regex.types.of.expressions.case.title">Majúscules</title>
+
+      
+      <para>Les cerques normals de l'OmegaT no distingeixen entre majúscules i minúscules per defecte: coincideixen tant amb majúscules com amb minúscules, excepte si habiliteu l'opció <link linkend="windows.text.search.options" endterm="windows.text.search.options.title"/>. Si l'habiliteu, tota l'expressió de cerca distingeix entre majúscules i minúscules.</para>
+
+      <para>En canvi, les expressions regulars distingeixen entre majúscules i minúscules per defecte. Això significa que una cerca amb expressions regulars d'«OmegaT», per exemple, no coincidirà amb «omegat». Això no obstant, les expressions regulars també proporcionen modificadors especials per a especificar la distinció entre majúscules i minúscules dins l'expressió:</para>
+
+      <variablelist>
+        <varlistentry>
+          <term><literal>(?i)</literal></term>
+          <listitem>
+            <para>Fa que la part de l'expressió a la dreta del modificador no distingeixi entre majúscules i minúscules.</para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term><literal>(?-i)</literal></term>
+          <listitem>
+            <para>Fa que la part de l'expressió a la dreta del modificador distingeixi entre majúscules i minúscules.</para>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+	  
+      <para>Podeu aprofitar-ho per a controlar amb precisió la distinció entre majúscules i minúscules en les cerques. Suposem, per exemple, que voleu trobar exemples d'«OmegaT» i «omegat», però no «OMEGAT». Podeu fer-ho amb l'expressió següent: <literal>(?i)o</literal><literal>(?-i)mega</literal> <literal>(?i)t</literal>, que representa una «o» sense distinció entre majúscules i minúscules, seguida de «mega» amb distinció i «t» sense distinció.</para>
+    </section>
+
+    <section id="app.regex.types.of.expressions.classes">
+      <title id="app.regex.types.of.expressions.classes.title">Classes</title>
+
+      <para>Les expressions regulars us permeten crear conjunts de caràcters coneguts com a <emphasis>classes</emphasis>. Les cerques coincidiran amb qualsevol dels caràcters del conjunt.</para>
+
+	  <para>Les classes es defineixen indicant ells caràcters desitjats entre claudàtors i es poden especificar indicant cada caràcter individual que voleu incloure o un interval de caràcters. Per exemple, podeu crear la classe <literal>[£€$]</literal> per a trobar qualsevol d'aquests tres símbols de moneda en el text, o [1-3] per a trobar el número 1, 2 o 3.</para>
+
+      <note>
+        <para>Dins d'una classe, només són especials la barra inclinada inversa (<literal>\</literal>), el circumflex (<literal></literal>), el claudàtor de tancament (<literal>]</literal>) i el guionet (<literal>-</literal>). La resta dels dotze caràcters són normals i no han d'anar precedits per una barra inclinada inversa si voleu cercar-los.</para>
+
+		<para>Podeu cercar qualsevol dels quatre caràcters especials de les classes com a caràcters normals indicant una barra inclinada inversa davant. També podeu cercar el circumflex, el claudàtor de tancament i el guionet col·locant-los en una posició que no activi el seu significat especial: en qualsevol posició excepte just després del claudàtor d'obertura per al circumflex, immediatament després del claudàtor d'obertura o del circumflex que el segueix per al claudàtor de tancament, i just després del claudàtor d'obertura o just abans del claudàtor de tancament per al guionet.</para>
+      </note>
+
+	  <para>Molts conjunts utilitzats amb freqüència tenen una forma abreujada formada per una barra inclinada inversa seguida d'una lletra de l'alfabet. Per exemple, <literal>\d</literal> és una abreviatura de <literal>[0-9]</literal>, que coincideix amb qualsevol dígit entre 0 i 9. En molts casos, la lletra majúscula corresponent s'utilitza per a negar la classe: <literal>\D</literal> coincideix amb qualsevol caràcter que <emphasis role="bold">no</emphasis> sigui un dígit.</para>
+      <para>La taula següent proporciona alguns exemples addicionals. Aquestes classes no representen mai només la lletra real utilitzada per a formar l'abreviatura.</para>
+      
+      <table id="app.regex.classes">
+        <title id="app.regex.classes.title">Exemples de classes</title>
+
+        <tgroup align="left" cols="2" rowsep="1">
+          <colspec align="left" colnum="1"/>
+
+          <thead>
+            <row>
+              <entry align="left">Expressió</entry>
+              <entry align="left">Coincidència</entry>
+            </row>
+          </thead>
+
+          <tbody>
+            
+            <row>
+              <entry><literal>[abc]</literal></entry>
+              <entry>
+                <para>La lletra «a», «b» o «c».</para>
+
+				<para>Una classe senzilla consisteix en qualsevol nombre de caràcters entre <literal>[</literal> i <literal>]</literal>.</para>
+              </entry>
+            </row>
+            
+            <row>
+              <entry><literal>[C-X]</literal></entry>
+              <entry>
+                <para>Un caràcter en l'interval de lletres de la «C» a la «X».</para>
+
+				<para>Un interval es defineix amb el primer caràcter d'una sèrie, un guionet i el darrer caràcter de la sèrie. Podeu definir qualsevol nombre d'intervals: <literal>[a-zA-Z0-9]</literal> significa qualsevol caràcter en minúscula entre «a» i «z», qualsevol caràcter en majúscula entre «A» i «Z» o qualsevol dígit entre «0» i «9». Un guionet fora de la sèrie és només un guionet: <literal>[a-z-]</literal> significa qualsevol caràcter en minúscula entre «a» i «z» o el caràcter de guionet.</para>
+              </entry>
+            </row>
+            
+            <row>
+              <entry><literal>[^\n\r\t]</literal></entry>
+              <entry>
+                <para>Qualsevol caràcter <emphasis>excepte</emphasis> un salt de línia, un retorn de carro o una tabulació.</para>
+
+                <para>El circumflex immediatament després del claudàtor d'obertura exclou la resta dels caràcters de la classe.</para>
+              </entry>
+            </row>
+
+            <row>
+              <entry><literal>\w</literal></entry>
+              <entry>
+                <para>Un caràcter de paraula, definit generalment com a <literal>[A-Za-z0-9_]</literal>.</para>
+
+                <para><literal>\W</literal> és qualsevol caràcter que <emphasis role="bold">no</emphasis> sigui un caràcter de paraula (<literal>[^\w]</literal>).</para>
+              </entry>
+            </row>
+
+            <row>
+              <entry><literal>\s</literal></entry>
+              <entry>
+                <para>Caràcter d'espai en blanc, incloent-hi els caràcters d'espai i tabulació, així com els salts de línia.</para>
+
+                <para><literal>\S</literal> és qualsevol caràcter que <emphasis role="bold">no</emphasis> sigui un caràcter d'espai en blanc (<literal>[^\s]</literal>).</para>
+              </entry>
+            </row>
+
+            <row>
+              <entry>
+				<literal>\h</literal> i <literal>\v</literal>
+			  </entry>
+
+              <entry>
+				<para>Espai en blanc horitzontal i vertical (generalment, <literal>\s</literal>).</para>
+
+				<para><literal>\H</literal> és qualsevol caràcter que <emphasis role="bold">no</emphasis> sigui un espai en blanc horitzontal i <literal>\V</literal> representa qualsevol caràcter que <emphasis role="bold">no</emphasis> sigui un espai en blanc vertical (<literal>[^\h]</literal> i <literal>[^\v]</literal>, respectivament).</para>
+			  </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+      
+      <para>Les expressions regulars no es limiten als caràcters alfanumèrics. Inclouen tot el joc de caràcters d'Unicode. Utilitzeu blocs, sistemes d'escriptura i categories d'Unicode per a especificar classes de caràcters fora de l'interval de caràcters alfanumèrics. En la taula següent es presenten alguns exemples.</para>
+
+      <para>Consulteu també <ulink url="https://www.regular-expressions.info/unicode.html">Unicode Regular Expressions</ulink> per a veure una explicació exhaustiva d'expressions regulars amb Unicode.</para>
+
+      <table id="app.regex.unicode.blocks">
+        <title id="app.regex.unicode.blocks.title">Blocs, sistemes d'escriptura i categories d'Unicode</title>
+        
+        <tgroup align="left" cols="2" rowsep="1">
+          <colspec align="left" colnum="1"/>
+          <thead>
+            <row>
+              <entry align="left">Expressió</entry>
+              <entry align="left">Coincidència</entry>
+            </row>
+          </thead>
+          
+          <tbody>
+            <row>
+              <entry><literal>\p{InGreek}</literal></entry>
+              <entry>
+                <para>Caràcter en el bloc Greek (<ulink url="https://unicode.org/reports/tr18/#Blocks">bloc d'Unicode</ulink>)</para>
+				
+                <para><literal>\P{InGreek}</literal> és qualsevol caràcter que <emphasis role="bold">no</emphasis> sigui en el bloc Greek.</para>
+              </entry>
+            </row>
+          
+            <row>
+              <entry><literal>\p{IsHan}</literal></entry>
+              <entry>
+                <para>Logograma (caràcter <emphasis>Han</emphasis>/<emphasis>kanji</emphasis>/<emphasis>hanja</emphasis>) de les llengües CJK (<ulink url="https://unicode.org/reports/tr18/#Script_Property">sistema d'escriptura d'Unicode</ulink>)</para>
+              </entry>
+            </row>
+          
+            <row>
+              <entry><literal>\p{Lu}</literal></entry>
+              <entry>
+                <para>Lletra en majúscula (<ulink url="https://unicode.org/reports/tr18/#General_Category_Property">categoria d'Unicode</ulink>)</para>
+              </entry>
+            </row>
+          
+            <row>
+              <entry><literal>\p{Sc}</literal></entry>
+              <entry>
+                <para>Símbol de moneda, que també és una <ulink url="https://unicode.org/reports/tr18/#General_Category_Property">categoria d'Unicode</ulink>.</para>
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+
+    <section id="app.regex.more.advanced.expressions">
+      <title id="app.regex.more.advanced.expressions.title">Expressions més avançades</title>
+      
+      <para>Algunes expressions especifiquen una posició en comptes d'un caràcter. Indiquen en quina posició del text cal cercar la coincidència, però no inclouen cap caràcter en la coincidència. La taula següent indica alguns dels exemples més habituals. Consulteu els llocs de la secció <link linkend="app.regex.tools" endterm="app.regex.tools.title"/> per a conèixer més informació.</para>
+
+      <table id="app.regex.boundary.matchers">
+        <title id="app.regex.boundary.matchers.title">Expressions que marquen una posició</title>
+      
+        <tgroup align="left" cols="2" rowsep="1">
+          <colspec align="left" colnum="1"/>
+
+          <thead>
+            <row>
+              <entry align="left">Expressió</entry>
+              <entry align="left">Coincidència</entry>
+            </row>
+          </thead>
+          
+          <tbody>
+            <row>
+              <entry><literal>^</literal></entry>
+              <entry>
+                <para>Inici d'una línia</para>
+              </entry>
+            </row>
+        
+            <row>
+              <entry><literal>$</literal></entry>
+              <entry>
+                <para>Fi d'una línia</para>
+              </entry>
+            </row>
+        
+            <row>
+              <entry><literal>\b</literal></entry>
+              <entry>
+                <para>Límit de paraula</para>
+              </entry>
+            </row>
+        
+            <row>
+              <entry><literal>\B</literal></entry>
+              <entry>
+                <para>Caràcter que <emphasis>no</emphasis> és un límit de paraula</para>
+              </entry>
+            </row>
+        
+            <row>
+              <entry><literal>(?=u)</literal></entry>
+              <entry>
+                <para>Caràcter seguit de «u».</para>
+				
+                <para>Per exemple, <literal>q(?=u)</literal> coincideix amb la lletra «q» quan va seguida d'una «u». Per tant, coincideix amb la «q» de «quinoa» o «aquàtic», però <emphasis>no</emphasis> la de «qaf» o «Iraq».</para>
+              </entry>
+            </row>
+        
+            <row>
+              <entry><literal>(?!u)</literal></entry>
+              <entry>
+                <para>Un caràcter <emphasis>no</emphasis> seguit per la lletra «u».</para>
+				
+                <para>Per exemple, <literal>q(?!u)</literal> coincideix amb la lletra «q» quan <emphasis>no</emphasis> va seguit per una «u». Per tant, coincideix amb la «q» de «qaf» o «Iraq», però <emphasis>no</emphasis> la de «quinoa» o «aquàtic».</para>
+              </entry>
+            </row>
+            
+            <row>
+              <entry><literal>(?&lt;=q)</literal></entry>
+              <entry>
+                <para>Un caràcter precedit per la lletra «q».</para>
+				
+                <para>Per exemple, <literal>(?&lt;=q)u</literal> coincideix amb la lletra «u» si ve després de «q». Per tant, coincideix amb la «u» de «què», però no amb la de «pruna».</para>
+              </entry>
+            </row>
+        
+            <row>
+              <entry><literal>(?&lt;!q)</literal></entry>
+              <entry>
+                <para>Un caràcter <emphasis>no</emphasis> precedit per la lletra «q».</para>
+				
+                <para>Per exemple, <literal>(?&lt;!q)u</literal> coincideix amb la lletra «u» si <emphasis>no</emphasis> ve després de «q». Per tant, coincideix amb la «u» de «pruna», però <emphasis>no</emphasis> amb la de «què».</para>
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>  
+  </section>
+
+  <section id="app.regex.more.examples">
+    <title id="app.regex.more.examples.title">Més exemples</title>
+
+    <para>Aquesta secció presenta alguns exemples que demostren com es poden combinar les diferents expressions descrites anteriorment per a fer cerques potents en l'OmegaT.</para>
+    
+    <table id="regex.examples">
+      <title id="regex.examples.title">Exemples d'expressions regulars que utilitzen les expressions anteriors</title>
+
+      <tgroup align="left" cols="2" rowsep="1">
+        <colspec align="left" colnum="1"/>
+
+        <thead>
+          <row>
+            <entry>Expressió</entry>
+            <entry>Finalitat</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry><literal>(\b\w+\b)\h\1\b</literal></entry>
+            <entry>
+              <para>Cercar paraules duplicades.</para>
+            </entry>
+          </row>
+
+          <row>
+            <entry><literal>,\h[\h(\w+\.\w+)\w,'ʼ&quot;“”-]+[\.,]</literal></entry>
+            <entry>
+              <para>Cercar frases que comencen per una coma seguida d'un caràcter d'espai en blanc, contenen una o més paraules (incloent-hi paraules en cometes, contraccions i noms de fitxer amb una extensió) i acaben amb una coma o un punt.</para>
+            </entry>
+          </row>
+
+          <row>
+            <entry><literal>\. \h+$</literal></entry>
+            <entry>
+              <para>Cercar un espai en blanc addicional després del punt de final de línia.</para>
+            </entry>
+          </row>
+
+          <row>
+            <entry><literal>\h+el\h+[aeiou]</literal></entry>
+            <entry>
+              <para>Cercar les paraules que comencen per vocal després de l'article «el» en comptes de «l'».</para>
+            </entry>
+          </row>
+
+          <row>
+            <entry><literal>\h+l'\h+[^aeiou]</literal></entry>
+            <entry>
+              <para>Cas contrari de l'exemple anterior. Cercar les paraules que comencen per consonant després de l'article «l'» en comptes d'«el».</para>
+            </entry>
+          </row>
+
+          <row>
+            <entry><literal>\d{4}([/\.-]\d{1,2}){2}</literal></entry>
+            <entry>
+              <para>Cercar dates numèriques en l'ordre d'any, mes i dia amb el mes i el dia separats per una barra inclinada un punt o un guionet, com ara:</para>
+			  
+                <itemizedlist>
+                  <listitem>
+                    <para>2002/11/8</para>
+                  </listitem>
+                  <listitem>
+                    <para>1969.7.20</para>
+                  </listitem>
+                  <listitem>
+                    <para>2022-10-31</para>
+                  </listitem>
+                </itemizedlist>
+
+				<note>
+                  <para>Aquesta expressió troba números i patrons de separació que coincideixen amb possibles dates, però no els valida. També trobarà patrons com «5136/36/71».</para>
+				</note>
+            </entry>
+          </row>
+
+          <row>
+            <entry><literal>\.[A-Z]</literal></entry>
+            <entry>
+              <para>Cercar un punt seguit per una lletra en majúscula. És útil per a cercar possibles espais que falten entre el punt i l'inici d'una frase nova.</para>
+            </entry>
+          </row>
+
+          <row>
+            <entry><literal>\bés\b</literal></entry>
+            <entry>
+              <para>Cercar «és» com a paraula completa en una frase, sense que coincideixi amb «només», «procés» o, fins i tot, «És».</para>
+            </entry>
+          </row>
+
+          <row>
+            <entry><literal>[\w\.-]+@[\w\.-]+</literal></entry>
+            <entry>
+              <para>Cercar una adreça electrònica. Pot ser que aquesta expressió senzilla no cobreixi tots els formats d'adreça electrònica vàlids possibles.</para>
+            </entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+
+  <section id="app.regex.tools">
+    <title id="app.regex.tools.title">Referències</title>
+
+    <para>Tot i que l'OmegaT no presenta colors atractius per a les expressions regulars, podeu practicar molt amb la finestra <link linkend="windows.text.search" endterm="windows.text.search.title"/>, ja que l'OmegaT sí que n'acoloreix els resultats.</para>
+    
+    <para>A continuació es presenten alguns recursos addicionals.</para>
+
+    <para>La referència tècnica del Java és útil com a referència canònica.<variablelist>
+        <varlistentry id="app.regex.java">
+          <term id="app.regex.java.title"><ulink url="https://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html">Documentació d'expressions regulars del Java</ulink></term>
+          <listitem>
+            <para>Referència oficial per a les expressions regulars utilitzades en el Java.</para>
+          </listitem>
+        </varlistentry>
+      </variablelist>Si voleu aprendre més sobre l'ús d'expressions regulars, els dos llocs següents han demostrat ser molt útils.<variablelist>
+        <varlistentry id="app.regex.tools.regex101">
+          <term id="app.regex.tools.regex101.title"><ulink url="https://regex101.com">https://regex101.com</ulink></term>
+          <listitem>
+            <para>Eina de coincidència d'expressions regulars que us permet indicar el text que voleu cercar i les expressions regulars que voleu provar.</para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry id="app.regex.tools.regular.expression.info">
+          <term id="app.regex.tools.regular.expression.info.title"><ulink url="https://www.regular-expressions.info">https://www.regular-expressions.info</ulink></term>
+          <listitem>
+            <para>Un dels tutorials d'expressions regulars més complets, de referència a Internet.</para>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+
+      <note>
+        <para>L'OmegaT no contribueix a cap dels dos llocs. Si trobeu altres referències interessants, en qualsevol llengua, a l'equip de l'OmegaT ens encantaria conèixer-les.</para>
+      </note>
+    </para>
+  </section>
+</section>

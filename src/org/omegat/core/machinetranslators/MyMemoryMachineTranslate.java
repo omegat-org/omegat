@@ -8,7 +8,7 @@
                2015 Didier Briel
                2017 Briac Pilpre
                2021 Hiroshi Miura
-               Home page: http://www.omegat.org/
+               Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
  This file is part of OmegaT.
@@ -24,13 +24,15 @@
  GNU General Public License for more details.
 
  You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
 package org.omegat.core.machinetranslators;
 
+import java.io.IOException;
+
 import com.fasterxml.jackson.databind.JsonNode;
-import org.apache.commons.lang.StringEscapeUtils;
+import org.apache.commons.text.StringEscapeUtils;
 
 import org.omegat.util.Language;
 import org.omegat.util.OStrings;
@@ -44,6 +46,14 @@ import org.omegat.util.Preferences;
  * @author Hiroshi Miura
  */
 public final class MyMemoryMachineTranslate extends AbstractMyMemoryTranslate {
+
+    public MyMemoryMachineTranslate(final String url) {
+        super(url);
+    }
+
+    public MyMemoryMachineTranslate() {
+    }
+
     @Override
     protected String getPreferenceName() {
         return Preferences.ALLOW_MYMEMORY_MACHINE_TRANSLATE;
@@ -60,38 +70,35 @@ public final class MyMemoryMachineTranslate extends AbstractMyMemoryTranslate {
     }
 
     @Override
-    protected String translate(final Language sLang, final Language tLang, final String text) throws Exception {
-        String prev = getFromCache(sLang, tLang, text);
-        if (prev != null) {
-            return prev;
-        }
-        JsonNode jsonResponse;
+    protected String translate(final Language sLang, final Language tLang, final String text)
+            throws Exception {
+        try {
+            // Get MyMemory response in JSON format
+            JsonNode jsonResponse = getMyMemoryResponse(sLang, tLang, text);
 
-        // Get MyMemory response in JSON format
-        jsonResponse = getMyMemoryResponse(sLang, tLang, text);
+            // Find the best Human translation if no MT translation is provided for
+            // this text. If there is a MT translation, it will always take
+            // precedence.
+            double bestScore = 0d;
+            JsonNode bestEntry = null;
+            JsonNode mtEntry = null;
 
-        // Find the best Human translation if no MT translation is provided for
-        // this text. If there is a MT translation, it will always take
-        // precedence.
-        double bestScore = 0d;
-        JsonNode bestEntry = null;
-        JsonNode mtEntry = null;
-
-        JsonNode entries = jsonResponse.get("matches");
-        for (JsonNode entry : entries) {
-            if ("MT!".equals(entry.get("created-by").asText())) {
-                mtEntry = entry;
-            } else if (entry.get("match").asDouble() > bestScore) {
-                bestEntry = entry;
-                bestScore = entry.get("match").asDouble();
+            JsonNode entries = jsonResponse.get("matches");
+            for (JsonNode entry : entries) {
+                if ("MT!".equals(entry.get("created-by").asText())) {
+                    mtEntry = entry;
+                } else if (entry.get("match").asDouble() > bestScore) {
+                    bestEntry = entry;
+                    bestScore = entry.get("match").asDouble();
+                }
             }
+            if (mtEntry != null) {
+                bestEntry = mtEntry;
+            }
+            assert bestEntry != null;
+            return StringEscapeUtils.unescapeHtml4(bestEntry.get("translation").asText());
+        } catch (IOException e) {
+            throw new MachineTranslateError(OStrings.getString("MT_ENGINE_MYMEMOROY_ERROR"), e);
         }
-        if (mtEntry != null) {
-            bestEntry = mtEntry;
-        }
-        assert bestEntry != null;
-        String translation = StringEscapeUtils.unescapeHtml(bestEntry.get("translation").asText());
-        putToCache(sLang, tLang, text, translation);
-        return translation;
     }
 }

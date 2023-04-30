@@ -9,7 +9,7 @@
                2014 Alex Buloichik, Aaron Madlon-Kay
                2015-2016 Aaron Madlon-Kay
                2020 Briac Pilpre
-               Home page: http://www.omegat.org/
+               Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
  This file is part of OmegaT.
@@ -25,7 +25,7 @@
  GNU General Public License for more details.
 
  You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
 package org.omegat.util;
@@ -84,14 +84,10 @@ public final class FileUtil {
      *            target original file name.
      */
     public static File getRecentBackup(final File originalFile) {
-        File[] bakFiles = null;
-        try {
-            bakFiles = originalFile.getParentFile()
-                    .listFiles(f -> !f.isDirectory() && f.getName().startsWith(originalFile.getName())
-                            && f.getName().endsWith(OConsts.BACKUP_EXTENSION));
-        } catch (Exception ignored) {
-        }
-        if (bakFiles == null) {
+        File[] bakFiles = originalFile.getParentFile()
+                .listFiles(f -> !f.isDirectory() && f.getName().startsWith(originalFile.getName())
+                        && f.getName().endsWith(OConsts.BACKUP_EXTENSION));
+        if (bakFiles == null || bakFiles.length == 0) {
             return null;
         }
         Arrays.sort(bakFiles, (f1, f2) -> Long.compare(f2.lastModified(), f1.lastModified()));
@@ -130,11 +126,15 @@ public final class FileUtil {
      *            a file to copy as backup file.
      * @return Backup file.
      */
-    public static File backupFile(File original) throws IOException {
+    public static File backupFile(File original) {
         long fileMillis = original.lastModified();
         String str = new SimpleDateFormat("yyyyMMddHHmm").format(new Date(fileMillis));
         File backup = new File(original.getPath() + "." + str + OConsts.BACKUP_EXTENSION);
-        FileUtils.copyFile(original, backup);
+        try {
+            FileUtils.copyFile(original, backup);
+        } catch (IOException ex) {
+            Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_CREATE_BACKUP_FILE", original.getName());
+        }
         return backup;
     }
 

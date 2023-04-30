@@ -9,7 +9,7 @@
                2012 Didier Briel
                2016 Aaron Madlon-Kay
                2019 Briac Pilpre
-               Home page: http://www.omegat.org/
+               Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
  This file is part of OmegaT.
@@ -25,7 +25,7 @@
  GNU General Public License for more details.
 
  You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
 package org.omegat.gui.preferences.view;
@@ -73,7 +73,8 @@ public class EditingBehaviorController extends BasePreferencesController {
 
     @Override
     protected void initFromPrefs() {
-        boolean prefInsertSource = Preferences.isPreferenceDefault(Preferences.DONT_INSERT_SOURCE_TEXT, SegmentBuilder.DONT_INSERT_SOURCE_TEXT_DEFAULT);
+        // Double negation? then prefInsertSource is the contrary of Preferences.DONT_INSERT_SOURCE_TEXT 
+        boolean prefInsertSource = !Preferences.isPreferenceDefault(Preferences.DONT_INSERT_SOURCE_TEXT, SegmentBuilder.DONT_INSERT_SOURCE_TEXT_DEFAULT);
         panel.defaultRadio.setSelected(prefInsertSource);
         panel.leaveEmptyRadio.setSelected(!prefInsertSource);
 
@@ -104,8 +105,8 @@ public class EditingBehaviorController extends BasePreferencesController {
 
     @Override
     public void restoreDefaults() {
-        panel.defaultRadio.setSelected(SegmentBuilder.DONT_INSERT_SOURCE_TEXT_DEFAULT);
-        panel.leaveEmptyRadio.setSelected(!SegmentBuilder.DONT_INSERT_SOURCE_TEXT_DEFAULT);
+        panel.defaultRadio.setSelected(!SegmentBuilder.DONT_INSERT_SOURCE_TEXT_DEFAULT);
+        panel.leaveEmptyRadio.setSelected(SegmentBuilder.DONT_INSERT_SOURCE_TEXT_DEFAULT);
 
         panel.insertFuzzyCheckBox.setSelected(true);
         panel.similaritySpinner.setValue(Preferences.BEST_MATCH_MINIMAL_SIMILARITY_DEFAULT);
@@ -134,7 +135,7 @@ public class EditingBehaviorController extends BasePreferencesController {
 
     @Override
     public void persist() {
-        Preferences.setPreference(Preferences.DONT_INSERT_SOURCE_TEXT, panel.defaultRadio.isSelected());
+        Preferences.setPreference(Preferences.DONT_INSERT_SOURCE_TEXT, panel.leaveEmptyRadio.isSelected());
 
         Preferences.setPreference(Preferences.BEST_MATCH_INSERT, panel.insertFuzzyCheckBox.isSelected());
         if (panel.insertFuzzyCheckBox.isSelected()) {

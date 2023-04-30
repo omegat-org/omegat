@@ -5,7 +5,7 @@
 
  Copyright (C) 2010 Alex Buloichik
                2023 Hiroshi Miura
-               Home page: http://www.omegat.org/
+               Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
  This file is part of OmegaT.
@@ -21,7 +21,7 @@
  GNU General Public License for more details.
 
  You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
 package org.omegat.core.machinetranslators;
@@ -57,22 +57,37 @@ public class BelazarTranslate extends BaseCachedTranslate {
     public static void unloadPlugins() {
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected String getPreferenceName() {
         return Preferences.ALLOW_BELAZAR_TRANSLATE;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public String getName() {
         return OStrings.getString("MT_ENGINE_BELAZAR");
     }
 
+    /**
+     * Query Belazar translation API and return translation.
+     * 
+     * @param sLang
+     *            source language.
+     * @param tLang
+     *            target language.
+     * @param text
+     *            source text.
+     * @return translation.
+     * @throws Exception
+     *             when communication error.
+     */
     @Override
     protected String translate(Language sLang, Language tLang, String text) throws Exception {
-        String prev = getFromCache(sLang, tLang, text);
-        if (prev != null) {
-            return prev;
-        }
-
         String mode;
         if ("be".equalsIgnoreCase(sLang.getLanguageCode())
                 && "ru".equalsIgnoreCase(tLang.getLanguageCode())) {
@@ -96,16 +111,10 @@ public class BelazarTranslate extends BaseCachedTranslate {
         conn.setUseCaches(false);
         conn.setDoInput(true);
         conn.setDoOutput(true);
-        String result;
         try (OutputStream out = conn.getOutputStream(); InputStream in = conn.getInputStream()) {
             out.write(db);
             out.flush();
-            result = IOUtils.toString(in, CHARSET);
+            return IOUtils.toString(in, CHARSET);
         }
-        if (result == null) {
-            return null;
-        }
-        putToCache(sLang, tLang, text, result);
-        return result;
     }
 }

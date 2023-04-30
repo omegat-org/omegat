@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="how.to.use.tm">
+  <title id="how.to.use.tm.title">Translation Memories (TM) verwenden</title>
+
+  <para>Beim Erstellen eines neuen Projekts wird eine leere Translation-Memory-Datei namens <link linkend="project.folder.project.save.tmx.title" endterm="project.folder.project.save.tmx.title"/> im Ordner <link linkend="project.folder.omegat" endterm="project.folder.omegat.title"/> erstellt. Diese Datei wird im Laufe der Übersetzung nach und nach gefüllt.</para>
+
+	<para>Vorhandene Übersetzungen werden verwendet, um den Übersetzungsprozess zu beschleunigen.</para>
+
+	<itemizedlist>
+	  <listitem>
+		<para>Wenn ein bestimmter Satz bereits einmal übersetzt wurde, muss er nicht erneut übersetzt werden. Siehe die Projekteigenschaft <link linkend="dialogs.project.properties.auto.propagation" endterm="dialogs.project.properties.auto.propagation.title"/> für weitere Informationen.</para>
+	  </listitem>
+
+	  <listitem>
+		<para>Wenn eine alte Übersetzung dem Inhalt des von Ihnen zu übersetzenden Segments ähnlich ist, können Sie sie in Ihrer Übersetzung wiederverwenden. Siehe den <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/>-Bereich für weitere Informationen.</para>
+	  </listitem>
+
+	  <listitem>
+		<para>Sie können auch externe Translation Memories verwenden, indem Sie sie im Ordner <link linkend="project.folder.tm" endterm="project.folder.tm.title"/> Ihres Projekts ablegen.</para>
+	  </listitem>
+	</itemizedlist>
+
+  <section id="how.to.use.tm.create.your.tm">
+	<title id="how.to.use.tm.create.your.tm.title">Eigene TMs erstellen</title>
+	
+	<para>Wenn Sie <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.create.translated.documents" endterm="menus.project.create.translated.documents.title"/> zum Erstellen der Zieldokumente für ein Projekt verwenden, erzeugt OmegaT außerdem drei Translation Memories, die den aktuellen Übersetzungsstand der Dateien im Quellordner widerspiegeln. Siehe die Projekteigenschaft <link linkend="dialogs.project.properties.file.locations.exported.tms" endterm="dialogs.project.properties.file.locations.exported.tms.title"/> für weitere Informationen.</para>
+
+	<para>Jede der drei Dateien repräsentiert einen zweisprachigen Export des aktuellen Inhalts Ihrer Übersetzung. Deren Inhalt stammt aus dem globalen Projektspeicher (die <link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/>-Datei), ist aber <emphasis>streng auf das beschränkt</emphasis>, was Sie bisher übersetzt haben.</para>
+
+	<para>Sie können auch das Tool <link linkend="menus.tools" endterm="menus.tools.title"/><link linkend="menus.tools.align.files" endterm="menus.tools.align.files.title"/> verwenden, um ein TMX anhand von zwei Dateien in einem von OmegaT unterstützten Format zu erstellen.</para>
+  </section>
+
+  <section id="how.to.use.tm.reuse.tm">
+	<title id="how.to.use.tm.reuse.tm.title">TMs wiederverwenden</title>
+	
+	<para>Um Translation Memories aus einem früheren Projekt wiederzuverwenden, haben Sie zwei Möglichkeiten:</para>
+
+	<itemizedlist>
+	  <listitem>
+		<para>Öffnen Sie das alte Projekt und legen Sie die neuen Quelldateien in dessen <link linkend="project.folder.source" endterm="project.folder.source.title"/>-Ordner ab.</para>
+		
+		<note>
+		  <para>Das ist der einfachste Weg, um an der neuen Version eines bereits übersetzten Dokuments zu arbeiten.</para>
+		</note>
+
+		<para>Nach dem erneuten Laden des alten Projekts wird dessen Translation Memory auf die neuen Quelldateien angewendet. Identische Segmente werden automatisch übersetzt. Ähnliche Segmente werden mit Matches aus dem Translation Memory des Projekts versehen, während Sie sie eintragen.</para>
+
+	  </listitem>
+	  
+	  <listitem>
+		<para>Alternativ können Sie die Translation Memories des alten Projekts in den <link linkend="project.folder.tm" endterm="project.folder.tm.title"/>-Ordner des neuen Projekts ablegen.</para>
+
+		<note>
+		  <para>Das ist die bevorzugte Methode, wenn Sie Ihre Übersetzung von Grund auf neu beginnen wollen.</para>
+		</note>
+
+		<para>Je nachdem, wie zuverlässig der Translation Memory ist, können Sie ihn in einem der folgenden Unterordner ablegen:</para>
+
+		<itemizedlist>
+		  <listitem>
+			<para><link linkend="project.folder.tm.enforce" endterm="project.folder.tm.enforce.title"/>,</para>
+		  </listitem>
+		  <listitem>
+			<para><link linkend="project.folder.tm.auto" endterm="project.folder.tm.auto.title"/>,</para>
+		  </listitem>
+		  <listitem>
+			<para><link linkend="project.folder.tm.penalty" endterm="project.folder.tm.penalty.title"/>,</para>
+		  </listitem>
+		</itemizedlist>
+
+		<para>Exakte Matches aus den Unterordnern <link linkend="project.folder.tm.enforce" endterm="project.folder.tm.enforce.title"/> und <link linkend="project.folder.tm.auto" endterm="project.folder.tm.auto.title"/> werden automatisch in die Übersetzung eingefügt, ohne das Präfix, das OmegaT einfügt, wenn es Matches über einem bestimmten Schwellenwert einfügt. Siehe die <link linkend="dialogs.preferences.editor.insert.the.best.fuzzy.match" endterm="dialogs.preferences.editor.insert.the.best.fuzzy.match.title"/>-Einstellung für weitere Informationen.</para>
+
+		<para>Aktivieren Sie die Option <link linkend="dialogs.preferences.editor.save.auto-populated.status" endterm="dialogs.preferences.editor.save.auto-populated.status.title"/>, um OmegaT daran zu erinnern, dass die eingefügten Matches aus diesen Ordnern stammen.</para>
+
+		<para>Verwenden Sie die Navigationsbefehle im <link linkend="menus.goto" endterm="menus.goto.title"/><link linkend="menus.goto.auto.populated.segments" endterm="menus.goto.auto.populated.segments.title"/>-Menü, um zu einem automatisch ausgefüllten Segment zu navigieren.</para>
+	  </listitem>
+	</itemizedlist>
+	
+    <section id="how.to.tm.read.and.write">
+      <title id="how.to.tm.read.and.write.title">TMs von anderen Tools lesen</title>
+
+      <para>OmegaT kann TMX-standardkonforme Memories lesen, die von anderen Tools erstellt wurden.</para>
+
+      <para>Einige Tools erzeugen unter Umständen ungültige TMX-Dateien. Sie müssen diese korrigieren, wenn Sie sie als externe Translation Memories verwenden wollen, da OmegaT sonst einen Fehler meldet und diese nicht laden kann. Die Fehlerbehebung sollte in der Regel kein Problem darstellen, und die von OmegaT angezeigte Fehlermeldung wird Ihnen helfen, den Fehler zu finden. Sie können auch die Benutzergruppe um Rat fragen, wenn Sie Probleme haben.</para>
+	</section>
+
+	<section id="how.to.use.tm.store.your.tm">
+	  <title id="how.to.use.tm.store.your.tm.title">TMs verwalten</title>
+
+	  <para>Vielleicht möchten Sie Translation Memories in separaten Ordnern nach Kunden oder Fachgebiet aufbewahren, um sie bei Bedarf schnell wiederverwenden zu können. Sie können einen beliebigen beschreibbaren Ordner anstelle des projekteigenen <link linkend="project.folder.tm" endterm="project.folder.tm.title"/>-Ordners verwenden. Siehe den Abschnitt <link linkend="dialogs.project.properties.file.locations" endterm="dialogs.project.properties.file.locations.title"/> des Projekteigenschaften-Dialogfensters.</para>
+	</section>
+  
+	<section id="how.to.tm.creating.a.tm.for.selected.documents">
+      <title id="how.to.tm.creating.a.tm.for.selected.documents.title">TM für bestimmte Dokumente erstellen</title>
+
+      <para>Wenn Sie eine TMX-Datei mit anderen Übersetzern teilen müssen, die nur den Text für bestimmte Dateien enthält und andere Inhalte ausschließt, gehen Sie wie folgt vor:</para>
+
+      <itemizedlist>
+		<listitem>
+          <para>Kopieren Sie nur die Dokumente, deren Inhalt Sie in den <filename class="directory">source</filename>-Ordner Ihres Projekts aufnehmen möchten.</para>
+		</listitem>
+		
+		<listitem>
+          <para>Öffnen Sie das Projekt.</para>
+		</listitem>
+
+		<listitem>
+		  <para>Verwenden Sie <link linkend="menus.goto" endterm="menus.goto.title"/><link linkend="menus.goto.next.untranslated.segment" endterm="menus.goto.next.untranslated.segment.title"/>, um alle unübersetzten Segmente zu finden (und sie ggf. zu übersetzen).</para>
+		</listitem>
+
+		<listitem>
+		  <para>Verwenden Sie <link linkend="menus.tools" endterm="menus.tools.title"/><link linkend="menus.tools.check.issues" endterm="menus.tools.check.issues.title"/>, um mögliche Probleme zu untersuchen.</para>
+		</listitem>
+
+		<listitem>
+		  <para>Verwenden Sie <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.create.translated.documents" endterm="menus.project.create.translated.documents.title"/>, um die TMX-Dateien zu erstellen, die dem aktuellen Inhalt entsprechen.</para>
+		</listitem>
+      </itemizedlist>
+
+      <para>Die TMX-Dateien im Ordner für exportierte Translation Memories enthalten jetzt nur noch den Originaltext und den übersetzten Text aus den Dateien, die Sie in den Quellordner kopiert haben (im ausgewählten Sprachenpaar). Siehe die Projekteigenschaft <link linkend="dialogs.project.properties.file.locations.exported.tms" endterm="dialogs.project.properties.file.locations.exported.tms.title"/> für weitere Informationen.</para>
+  </section>
+</section>
+
+<section id="how.to.tm.share.translation.memories">
+  <title id="how.to.tm.share.translation.memories.title">TMs teilen</title>
+
+  <para>Bei großen Aufträgen, an denen ein Team von Übersetzern beteiligt ist, ist es für alle Beteiligten einfacher, Translation Memories gemeinsam zu nutzen, anstatt lokale Versionen hin und her zu schicken.</para>
+
+  <para>Es gibt zwei Möglichkeiten, Translation Memories gemeinsam zu nutzen:</para>
+
+  <variablelist>
+	<varlistentry>
+	  <term>Der &quot;gut genug&quot;-Weg</term>
+	  <listitem>
+		
+		<para>Sie den Abschnitt <link linkend="how.to.use.tm.create.your.tm" endterm="how.to.use.tm.create.your.tm.title"/> oben.</para>
+
+		<para>Wenn Sie die TMX-Datei in einen Ordner auf einer gemeinsam genutzten Festplatte schreiben, können Sie Ihren Partner bitten, diesen Ordner als <link linkend="project.folder.tm" endterm="project.folder.tm.title"/>-Ordner für die aktuelle Übersetzung zuzuweisen.</para>
+
+		<para>Umgekehrt können Sie Ihren Partner bitten, die TMX-Dateien des Projekts in einen Ordner auf einer gemeinsam genutzten Festplatte zu schreiben, den Sie als Ihren <link linkend="project.folder.tm" endterm="project.folder.tm.title"/>-Ordner für die aktuelle Übersetzung zuweisen werden.</para>
+
+		<para>OmegaT erkennt Änderungen an TMX-Dateien sofort. Wenn also eine Seite eine solche TMX-Datei mit <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.create.translated.documents" endterm="menus.project.create.translated.documents.title"/> erstellt oder ändert, braucht die andere Seite nichts zu tun, damit diese TMX-Datei lokal erkannt wird.</para>
+
+		<para>Diese Methode eignet sich auch für die gemeinsame Nutzung von Glossaren, wobei das beschreibbare Projektglossar (mit einem anderen Namen als dem Standardnamen, um ein Überschreiben der Datei zu vermeiden) in einem gemeinsam genutzten Glossarordner abgelegt ist. Einzelheiten finden Sie unter <link linkend="app.glossaries" endterm="app.glossaries.title"/>.</para>
+
+		<note>
+		  <para>Diese Methode der gemeinsamen Nutzung funktioniert gut, wenn die Zeitspanne zwischen den TMX-Aktualisierungen nicht wichtig ist, z. B. wenn ein Übersetzer einige Male am Tag Daten an einen Prüfer sendet.</para>
+		</note>
+	  </listitem>
+	</varlistentry>
+	
+	<varlistentry>
+	  <term>Der technische Ansatz</term>
+	  <listitem>
+		<para>OmegaT verwendet kollaborative Versionskontrollsysteme zur gemeinsamen Nutzung von Daten.</para>
+
+		<para>Solche Systeme können kostenlos verwendet, installiert und verwaltet werden und sind in der Welt der Computerentwicklung weit verbreitet, was sie extrem robust macht.</para>
+
+		<para>Einzelheiten finden Sie unter <link linkend="how.to.setup.team.project" endterm="how.to.setup.team.project.title"/>.</para>
+	  </listitem>
+	</varlistentry>
+  </variablelist>
+  <warning>
+	<para>Seien Sie vorsichtig, wenn Sie ein komplettes Projekt in einem Dateifreigabesystem wie DropBox oder OneCloud ablegen.</para>
+	<para><emphasis>Solche Systeme sind nicht dafür ausgelegt, die internen Änderungen einer bestimmten Datei nachzuvollziehen.</emphasis></para>
+	<para>Ein OmegaT-Projekt ist eine komplexe Sammlung von Dateien. Solche Systeme stellen Ihnen nicht immer die aktuellste Version Ihrer Daten zur Verfügung, können einige Dateien ohne ersichtlichen Grund sperren und sogar projektbezogene Teamdateien beschädigen.</para>
+	<para>Stellen Sie sicher, dass Sie Ihr Projektlayout ausreichend getestet und eine separate Datensicherung eingerichtet haben, bevor Sie Daten in einem solchen System teilen.</para>
+  </warning>
+</section>
+
+<section id="how.to.tm.bridge.two.languages">
+  <title id="how.to.tm.bridge.two.languages.title">Zwei Sprachen überbrücken</title>
+
+  <para>OmegaT zeigt Fuzzy Matches im <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/>-Fenster an. Solche Matches sind standardmäßig auf der im <link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/>-Dialogfenster definierten Quell- und Zielsprache beschränkt, aber Sie können auch Matches in Sprachen hinzufügen, die nicht die Zielsprache sind. Siehe die <link linkend="dialog.preferences.tm.matches.other.languages" endterm="dialog.preferences.tm.matches.other.languages.title"/>-Einstellung für weitere Informationen.</para>
+
+  <para>Mit OmegaT können Sie auch eine dritte Sprache <emphasis>direkt unter</emphasis> dem Quelltext anzeigen, um sie als dritte Sprachreferenz zu verwenden.</para>
+
+  <example id="bridge.english.and.french.with.japanese">
+	<title id="replace.with.allemand.title">Englisch und Französisch mit Japanisch überbrücken</title>
+	<para>
+	  <programlisting>— ¶ —————————————————————
+<token>A whitespace character: [ \t\n\x0B\f\r]
+fr-ZB: Un caractère d'espacement (espace, tabulation, etc.) :  [ \t\n\x0B\f\r]
+ja-RV: 空白文字：[ \t\n\x0B\f\r]</token>
+Un caractère d'espacement : [ \t\n\r\f\x0B]<token>&lt;segment 3075 ¶&gt;</token>
+— ¶ —————————————————————</programlisting></para>
+<para>Die erste Zeile ist das Original-Englisch, die zweite eine alte französische Version mit einem beliebigen Sprachcode, die dritte die japanische Version mit einem ebenso beliebigen Sprachcode und die vierte die aktuelle Übersetzung ins Französische.</para>
+  </example>
+  
+    <para>Um das zu erreichen:</para>
+
+	<orderedlist>
+	  <listitem>
+		<para>Erstellen Sie einen Ordner namens <filename class="directory">tmx2source</filename> im Ordner <link linkend="project.folder.tm" endterm="project.folder.tm.title"/>.</para>
+	  </listitem>
+
+	  <listitem>
+		<para>Kopieren Sie Ihren Translation Memory für die &quot;erste-dritte&quot; Sprache dorthin.</para>
+	  </listitem>
+
+	  <listitem>
+		<para>Benennen Sie den Memory in <filename>LL_CC.tmx</filename> oder <filename>LL-CC.tmx</filename> um, wobei <emphasis>LL</emphasis> der interne Code der Sprache ist, die als Referenz angezeigt werden soll, und <emphasis>CC</emphasis> ein beliebiger zweistelliger Code aus Buchstaben ist.</para>
+	  </listitem>
+	</orderedlist>
+	
+    <note>
+	  <para>Sie können eine beliebige Anzahl von TMX-Dateien verwenden, die beliebig viele verschiedene &quot;Brückensprachpaare&quot; enthalten.</para>	  
+	</note>
+  </section>
+</section>

@@ -5,7 +5,7 @@
 
  Copyright (C) 2013 Zoltan Bartko, Aaron Madlon-Kay
                2014-2015 Aaron Madlon-Kay
-               Home page: http://www.omegat.org/
+               Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
  This file is part of OmegaT.
@@ -21,7 +21,7 @@
  GNU General Public License for more details.
 
  You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
 package org.omegat.gui.editor.autocompleter;
@@ -43,6 +43,7 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 import javax.swing.text.BadLocationException;
+import javax.swing.text.Position;
 
 import org.omegat.gui.editor.EditorTextArea3;
 import org.omegat.gui.editor.TagAutoCompleterView;
@@ -51,7 +52,6 @@ import org.omegat.gui.editor.chartable.CharTableAutoCompleterView;
 import org.omegat.gui.editor.history.HistoryCompleter;
 import org.omegat.gui.editor.history.HistoryPredictor;
 import org.omegat.gui.glossary.GlossaryAutoCompleterView;
-import org.omegat.util.Java8Compat;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
@@ -243,8 +243,9 @@ public class AutoCompleter implements IAutoCompleter {
         int fontSize = editor.getFont().getSize();
         try {
             int pos = Math.min(editor.getCaret().getDot(), editor.getCaret().getMark());
-            x = Java8Compat.modelToView(editor.getUI(), editor, pos).x;
-            y = Java8Compat.modelToView(editor.getUI(), editor, editor.getCaret().getDot()).y + fontSize;
+            x = editor.getUI().modelToView2D(editor, pos, Position.Bias.Forward).getBounds().x;;
+            y = editor.getUI().modelToView2D(editor, editor.getCaret().getDot(),
+                    Position.Bias.Forward).getBounds().y + fontSize;
         } catch (BadLocationException e) {
             // this should never happen!!!
             Log.log(e);

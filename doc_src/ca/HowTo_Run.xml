@@ -1,0 +1,511 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd"
+[
+<!ENTITY % manualvariables SYSTEM "manualvariables.mod">
+%manualvariables;
+]>
+<section id="how.to.running.omegat">
+  <title id="how.to.running.omegat.title">Execució de l'OmegaT</title>
+
+  <section id="running.omegat.on.windows">
+	<title id="running.omegat.on.windows.title">Windows</title>
+	
+	<para>La manera més senzilla d'iniciar l'OmegaT és executar el programa <filename>OmegaT.exe</filename>. Les opcions per a iniciar el programa es llegiran del fitxer <filename>OmegaT.l4J.ini</filename>, que resideix en la mateixa carpeta que el fitxer exe i que podeu editar per a reflectir la vostra configuració. L'exemple següent per al fitxer INI reserva 1 GB de memòria i sol·licita el francès com a llengua d'usuari i el Canadà com a país:</para>
+
+	<programlisting># Configuració d'execució del programa OmegaT.exe
+	# Per a utilitzar un paràmetre, elimineu el caràcter«#» abans de «-»
+	# Memòria
+	-Xmx1024M
+	# Llengua
+	-Duser.language=FR
+	# País
+	-Duser.country=CA</programlisting>
+
+
+	<para>Consell: si l'OmegaT funciona lentament en sessions d'escriptori remot amb el Windows, podeu utilitzar aquesta opció:</para>
+
+	<programlisting>-Dsun.java2d.noddraw=false</programlisting>
+  </section>
+
+  <section id="running.omegat.on.linux">
+	<title id="running.omegat.on.linux.title">Linux</title>
+
+	<para>Podeu iniciar l'OmegaT des de la línia d'ordres amb un script que inclou opcions d'inici. Consulteu la secció <link endterm="launch.with.command.line.title" linkend="launch.with.command.line"/> per a conèixer més detalls.</para>
+
+	<para>També podeu fer clic en el fitxer <filename>OmegaT.jar</filename> per a iniciar-lo directament si l'extensió <filename>.jar</filename> està associada amb l'iniciador del Java del sistema.</para>
+
+	<para>El paquet també proporciona l'script del Kaptain <filename>omegat.kaptn</filename>, que pot ser útil per als usuaris del KDE, així com un script del Bash anomenat <filename>OmegaTl</filename> que inicia automàticament l'ordre <application>java</application> adequada per a executar l'OmegaT.</para>
+  </section>
+
+  <section id="running.omegat.on.macos">
+	<title id="running.omegat.on.macos.title">macOS</title>
+
+	<para>Feu doble clic en el fitxer <filename>OmegaT.app</filename> o feu clic en la ubicació del dock.</para>
+
+	<para>El fitxer <filename>OmegaT.app</filename> inclou un executable <filename>OmegaT</filename> en la carpeta <filename>OmegaT.app/Contents/MacOS/</filename> que també podeu utilitzar per a iniciar diverses instàncies del programa <filename>OmegaT.app</filename>.</para>
+
+	<para>També inclou un fitxer genèric <filename>OmegaT.jar</filename> en la carpeta <filename>OmegaT.app/Contents/MacOS/Java/</filename> que podeu utilitzar per a iniciar l'OmegaT des de la línia d'ordres. Consulteu la secció <link endterm="launch.with.command.line.title" linkend="launch.with.command.line"/> per a conèixer més detalls.</para>
+
+	<para>You can modify the behaviour of OmegaT.app by editing the
+	<filename>Configuration.properties</filename> (OmegaT configuration) as well
+	as the <filename>Info.plist</filename> (Java configuration) files located
+	inside the OmegaT.app package.</para>
+
+	<para>El fitxer <filename>Configuration.properties</filename> es troba en la carpeta <filename>Contents/Resources/</filename>.</para>
+	<para>El fitxer <filename>Info.plist</filename> es troba en la carpeta <filename>Contents/</filename>.</para>
+
+	<note>
+	  <para>Per a accedir als fitxers de l'interior del paquet <filename>OmegaT.app</filename>, feu clic amb el botó dret en <filename>OmegaT.app</filename> i seleccioneu &quot;Mostra el contingut del paquet&quot;.</para>
+
+	  <para>També podeu utilitzar el programa <filename>OmegaT.app</filename> directament per a iniciar l'OmegaT des del terminal. Consulteu la secció <link linkend="launch.with.command.line.omegat.terminal.command.syntax" endterm="launch.with.command.line.omegat.terminal.command.syntax.title"/> a continuació per a conèixer més detalls.</para>
+	</note>
+
+	<para>Utilitzeu el vostre editor de text preferit per a modificar els fitxers.</para>
+
+	<variablelist>
+	  <varlistentry>
+		<term>Configuration.properties</term>
+
+		<listitem>
+		  <para>Per a les opcions predefinides, suprimiu el símbol <literal>#</literal> abans d'un paràmetre per a habilitar-lo. Per exemple, <literal>user.language=ja</literal> (sense <literal>#</literal>) iniciarà l'OmegaT amb la interfície d'usuari en japonès.</para>
+		</listitem>
+	  </varlistentry>
+	  <varlistentry>
+		<term>Info.plist</term>
+
+		<listitem>
+		  <para>Per exemple, per a canviar la quantitat de memòria disponible, suprimiu el comentari de la línia</para>
+
+		  <para><literal>&lt;!-- &lt;string&gt;-Xmx6g&lt;/string&gt;
+		  --&gt;</literal></para>
+		  <para>suprimint els marcadors <literal>&lt;!--</literal> i <literal>--&gt;</literal>.</para>
+
+		  <para>Això iniciarà l'OmegaT amb 6 GB de memòria; canvieu el valor <literal>6g</literal> a la quantitat desitjada.</para>
+		</listitem>
+	  </varlistentry>
+	</variablelist>
+	
+	<note>
+	  <para>El fitxer <filename>OmegaT.app</filename> pot fer ús dels serveis del macOS. També podeu utilitzar AppleScript, l'Automator o dreceres per a crear serveis o scripts que automatitzin accions freqüents.</para>
+	</note>
+  </section>
+
+  <section id="running.omegat.on.other.systems">
+	<title id="running.omegat.on.other.systems.title">Altres plataformes</title>
+
+	<para>Els mètodes varien d'un sistema a un altre, però, en general, una vegada instal·lat l'OmegaT, es pot iniciar directament des de la línia d'ordres. Consulteu la secció <link endterm="launch.with.command.line.title" linkend="launch.with.command.line"/> per a conèixer més detalls.</para>
+
+	<para>Podeu crear un script que inclogui els paràmetres d'inici de la línia d'ordres que vulgueu. Si els fitxers <filename>.jar</filename> estan associats correctament al Java 8 Runtime Environment i els paràmetres del PATH són correctes, també podeu simplement fer clic (o doble clic) en el fitxer <filename>OmegaT.jar</filename> per a iniciar-lo directament.</para>
+
+	<para>Consulteu la documentació del sistema per a conèixer més informació.</para>
+  </section>
+  
+  <section id="launch.with.command.line">
+	<title id="launch.with.command.line.title">Inici des de la línia d'ordres</title>
+
+	<para>Using the command line allows you to set various options that control or modify the behaviour of the application. També podeu definir i desar els conjunts d'opcions en scripts que podeu utilitzar per a iniciar l'OmegaT amb una finalitat concreta.</para>
+
+	<para>Si inicieu l'OmegaT des de la línia d'ordres, també es crea una instància nova de l'OmegaT cada vegada. D'aquesta manera, podeu utilitzar diversos projectes alhora, cadascun amb paràmetres propis.</para>
+
+	<section id="launch.with.command.line.tutorial">
+	  <title id="launch.with.command.line.tutorial.title">Informació general simplificada</title>
+
+	  <para>Abans que les interfícies gràfiques fossin habituals, els usuaris interaccionaven amb els ordinadors a través d'una interfície de línia d'ordres (CLI), que requereix escriure ordres per a donar instruccions a l'ordinador. En els sistemes moderns, s'accedeix a la CLI a través d'una aplicació generalment anomenada «terminal» o «console». Per a simplificar-ho, aquest manual s'hi refereix com a terminal.</para>
+	  
+	  <para>En el Windows, podeu utilitzar la <application>Línia d'ordres</application> o el <application>Powershell</application> com a terminal. Tots dos estan disponibles en la carpeta <guilabel>Eines del sistema</guilabel> del <guilabel>Menú Inicia</guilabel>.</para>
+
+	  <para>L'equivalent del macOS és l'aplicació <application>Terminal</application> situada en la carpeta principal <filename>Utilitats</filename> de la carpeta principal <filename>Aplicacions</filename>.</para>
+
+	  <para>En el Linux, hauríeu de trobar l'aplicació de terminal per defecte de la vostra distribució en el menú d'aplicacions o un dels submenús.</para>
+
+	  <para>En el terminal s'escriuen ordres i els paràmetres associats per a executar tasques. Això fa que sigui fàcil fer certes tasques que serien difícils mitjançant una interfície gràfica.</para>
+
+	  <note>
+		<para>La sintaxi utilitzada per a especificar la ubicació d'una aplicació o carpeta depèn de la plataforma. En el Windows, s'utilitza el caràcter <code>\</code> per a separar noms de carpetes i fitxers, mentre que el macOS i el Linux utilitzen <code>/</code> amb la mateixa funció.</para>
+
+		<para>Aquí teniu les ubicacions per defecte del fitxer OmegaT.jar per a cada plataforma principal:</para>
+		
+		<variablelist>
+		  <varlistentry id="launch.with.command.line.windows">
+			<term id="launch.with.command.line.windows.title">Windows</term>
+			<listitem>
+			  <para><filename>C:\Program Files\OmegaT\OmegaT.jar</filename></para>
+			</listitem>
+		  </varlistentry>
+		  <varlistentry id="launch.with.command.line.macos">
+			<term id="launch.with.command.line.macos.title">macOS</term>
+			<listitem>
+			  <para><filename>/Applications/OmegaT.app/Contents/Java/OmegaT.jar</filename></para>
+			</listitem>
+		  </varlistentry>
+		  <varlistentry id="launch.with.command.line.linux">
+			<term id="launch.with.command.line.linux.title">Linux</term>
+			<listitem>
+			  <para><filename>/opt/omegat/OmegaT.jar</filename></para>
+
+			  <para>(Això pot variar en funció de la distribució).</para>
+			</listitem>
+		  </varlistentry>
+		</variablelist>
+		
+		<para>Aquesta ubicació es presenta com a <filename>camí/a/OmegaT.jar</filename> en aquest capítol. Substituïu-la per la ubicació real del fitxer en el sistema.</para>
+	  </note>	
+	</section>
+
+	<section id="launch.with.command.line.omegat.terminal.command.syntax">
+	  <title id="launch.with.command.line.omegat.terminal.command.syntax.title">Sintaxi de les ordres</title>
+
+	  <para>La sintaxi per a iniciar l'OmegaT des del terminal és:<programlisting>java -jar &lt;paràmetres del Java&gt; camí/a/OmegaT.jar &lt;opcions de l'OmegaT&gt; </programlisting></para>
+
+	  <note>
+		<para>En el macOS, també és possible utilitzar <filename>OmegaT.app</filename> directament en el terminal; en aquest cas, no es poden afegir paràmetres del Java:<programlisting>open camí/a/OmegaT.app
+		-n --args &lt;opcions de l'OmegaT&gt;</programlisting>on <userinput>-n</userinput> s'utilitza per a crear una instància nova de l'OmegaT.</para>
+	  </note>
+
+	  <variablelist>
+		<varlistentry id="launch.with.command.line.java.jar">
+		  <term id="launch.with.command.line.java.jar.title"><option>java -jar</option></term>
+		  <listitem>
+			<para>Aquesta ordre indica a la màquina virtual del Java que executi un paquet jar.</para>
+		  </listitem>
+		</varlistentry>
+
+		<varlistentry id="launch.with.command.line.intro.java.parameters">
+		  <term id="launch.with.command.line.intro.java.parameters.title"><option>&lt;paràmetres del Java&gt;</option></term>
+		  <listitem>
+			<para>Paràmetres opcionals acceptats per l'ordre <command>java</command>. Els paràmetres rellevants per a executar l'OmegaT es descriuen <link linkend="launch.with.command.line.java.parameters">a continuació</link>.</para>
+		  </listitem>					
+		</varlistentry>
+
+		<varlistentry id="launch.with.command.line.intro.omegat.jar">
+		  <term id="launch.with.command.line.intro.omegat.jar.title"><option>camí/al/fitxer/OmegaT.jar</option></term>
+		  <listitem>
+			<para>Ubicació de l'executable del Java de l'OmegaT.</para>	  
+		  </listitem>
+		</varlistentry>
+
+		<varlistentry id="launch.with.command.line.intro.omegat.options">
+		  <term id="launch.with.command.line.intro.omegat.options.title"><emphasis><option>&lt;opcions de l'OmegaT&gt;</option></emphasis></term>
+		  <listitem>
+			<para>Les opcions específiques de l'OmegaT es descriuen <link linkend="launch.with.command.line.omegat.options">més endavant en aquesta secció</link>.</para>
+		  </listitem>					
+		</varlistentry>
+	  </variablelist>
+	</section>
+
+	<section id="launch.with.command.line.java.parameters">
+	  <title id="launch.with.command.line.java.parameters.title">Paràmetres del Java</title>
+
+	  <para>La llista següent presenta paràmetres per a l'ordre <command>java</command> que poden ser útils quan es treballa amb l'OmegaT.</para>
+	  
+	  <variablelist>
+		<varlistentry id="launch.with.command.line.user.interface.language">
+		  <term id="launch.with.command.line.user.interface.language.title">Llengua de la interfície d'usuari</term>
+
+		  <listitem>
+			<para><option>-Duser.language=LL</option></para>
+
+			<para>Substituïu <code>LL</code> pel codi de llengua de dues lletres que vulgueu de la llista <ulink url="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes">ISO 639.1</ulink>.</para>
+
+			<para>L'ús d'aquest paràmetre inicia l'OmegaT amb la interfície d'usuari en la llengua especificada, si està disponible (fins i tot parcialment). Si la llengua no està disponible, per defecte l'OmegaT s'inicia en anglès encara que el sistema utilitzi una llengua per defecte diferent.</para>
+		  </listitem>
+		</varlistentry>
+
+		<varlistentry id="launch.with.command.line.user.country">
+		  <term id="launch.with.command.line.user.country.title">País de l'usuari</term>
+		  <listitem>
+			<para><option>-Duser.country=CC</option></para>
+
+			<para>Substituïu <code>CC</code> pel codi de país de dues lletres que vulgueu de la llista <ulink url="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</ulink>.</para>
+
+			<para>Aquest paràmetre es combina amb el paràmetre de llengua de la interfície d'usuari anterior per a especificar una variant regional. Si aquesta variant no està disponible, la interfície d'usuari segueix la mateixa prioritat anterior.</para>
+		  </listitem>
+		</varlistentry>
+
+		<varlistentry id="launch.with.command.line.maximum.memory.assignment">
+		  <term id="launch.with.command.line.maximum.memory.assignment.title">Assignació màxima de memòria</term>
+		  <listitem>
+			<para><option>-XmxMIDA</option></para>
+
+			<para>Substituïu<code>MIDA</code> per un nombre que sigui un múltiple de 1024 seguit de <code>k</code> per a kilobytes, <code>m</code> per a megabytes o <code>g</code> per a gigabytes. El nombre ha de correspondre a almenys 2 MB.</para>
+		  </listitem>
+		</varlistentry>
+
+		<varlistentry id="launch.with.command.line.proxy.host.ip.address">
+		  <term id="launch.with.command.line.proxy.host.ip.address.title">Adreça IP del servidor intermediari</term>
+		  <listitem>
+			<para><option>-Dhttp.proxyHost=&lt;IP del servidor intermediari&gt;</option></para>
+
+			<para>Substituïu <code>&lt;IP del servidor intermediari</code> per l'adreça IP del servidor intermediari, si el vostre sistema n'utilitza un.</para>
+		  </listitem>
+		</varlistentry>
+
+		<varlistentry id="launch.with.command.line.proxy.host.port.number">
+		  <term id="launch.with.command.line.proxy.host.port.number.title">Número de port del servidor intermediari</term>
+		  <listitem>
+			<para><option>-Dhttp.proxyPort=&lt;número de port&gt;</option></para>
+
+			<para>Substituïu <option>&lt;número de port</option> pel número de port que utilitza el sistema per a accedir al servidor intermediari.</para>
+		  </listitem>
+		</varlistentry>
+	  </variablelist>
+	</section>
+
+	<section id="launch.with.command.line.omegat.options">
+	  <title id="launch.with.command.line.omegat.options.title">Opcions de l'OmegaT</title>
+
+	  <para>També podeu obtenir una llista d'aquestes opcions en el terminal amb l'ordre <command>java -jar OmegaT.jar --help</command>. S'inicia la GUI de l'OmegaT si no s'especifica cap opció.</para>
+
+	  <variablelist>
+		<varlistentry id="launch.with.command.line.general.options.">
+		  <term id="launch.with.command.line.general.options.title">Opcions generals:</term>
+		  <listitem>
+			<variablelist>
+			  <varlistentry id="launch.with.command.line.h.help">
+				<term id="launch.with.command.line.h.help.title"><option>-h</option>,
+				<option>--help</option></term>
+				<listitem>
+				  <para>Mostra informació sobre l'ús.</para>
+				</listitem>
+			  </varlistentry>
+			  <varlistentry id="launch.with.command.line.path.to.an.omegat.project">
+				<term id="launch.with.command.line.path.to.an.omegat.project.title"><emphasis>camí a un projecte de l'OmegaT</emphasis></term>
+				<listitem>
+				  <para>Inicia la GUI i carrega el projecte especificat.</para>
+				</listitem>
+			  </varlistentry>
+			  <varlistentry id="launch.with.command.line.remote.project.">
+				<term id="launch.with.command.line.remote.project.title"><option>--remote-project</option> <emphasis>&lt;camí a un fitxer de projecte de l'OmegaT&gt;</emphasis></term>
+				<listitem>
+				  <para>Baixa el projecte de l'OmegaT des de l'URL especificat en <emphasis>&lt;camí a un fitxer de projecte de l'OmegaT&gt;</emphasis> i el carrega.</para>
+				</listitem>
+			  </varlistentry>
+			  <varlistentry id="launch.with.command.line.no.team">
+				<term id="launch.with.command.line.no.team.title"><option>--no-team</option></term>
+				<listitem>
+				  <para>Inhabilita la funcionalitat de projecte en equip. Utilitzeu aquesta opció si voleu evitar que l'OmegaT sincronitzi el contingut del projecte.</para>
+				</listitem>
+			  </varlistentry>
+			  <varlistentry id="launch.with.command.line.team.init">
+				<term id="launch.with.command.line.team.init.title"><option>team
+				init <emphasis>SL</emphasis>
+				<emphasis>TL</emphasis></option></term>
+				<listitem>
+				  <para>Inicialitza un projecte en equip amb <emphasis>SL</emphasis> i <emphasis>TL</emphasis> com a codis de llengua de dues lletres d'origen i destinació, respectivament.</para>
+				</listitem>
+			  </varlistentry>
+			  <varlistentry id="launch.with.command.line.disable.project.locking">
+				<term id="launch.with.command.line.disable.project.locking.title"><option>--disable-project-locking</option></term>
+				<listitem>
+				  <para>No bloquis el fitxer omegat.project.</para>
+
+				  <para>En algunes plataformes, el fitxer omegat.project està blocat per defecte i es produeix un error si s'intenta obrir un projecte que ja està obert en una altra instància de l'OmegaT. Aquesta opció evita aquest error.</para>
+				</listitem>
+			  </varlistentry>
+			  <varlistentry id="launch.with.command.line.disable.location.save">
+				<term id="launch.with.command.line.disable.location.save.title"><option>--disable-location-save</option></term>
+				<listitem>
+				  <para>No recordis la darrera carpeta oberta en el selector de fitxers.</para>
+				</listitem>
+			  </varlistentry>
+			  <varlistentry id="launch.with.command.line.itokenizer.lt.classname.gt.">
+				<term id="launch.with.command.line.itokenizer.lt.classname.gt.title"><option>--ITokenizer=&lt;nom de la classe&gt;</option></term>
+				<term><option>--ITokenizerTarget=&lt;nom de la classe&gt;</option></term>
+				<listitem>
+				  <para>Especifica un lematitzador en la llengua d'origen o de destinació (l'ús d0aquesta opció substitueix els paràmetres del projecte). Consulteu OmegaT.jar/META-INF/MANIFEST.MF per a conèixer els valors vàlids.</para>
+				</listitem>
+			  </varlistentry>
+			  <varlistentry id="launch.with.command.line.config.dir.">
+				<term id="launch.with.command.line.config.dir.title"><option>--config-dir=<emphasis>&lt;camí&gt;</emphasis></option></term>
+				<listitem>
+				  <para>Carpeta utilitzada per a llegir i escriure els fitxers de configuració de l'OmegaT. Consulteu el capítol <link endterm="configuration.folder.title" linkend="configuration.folder"/> per a conèixer més detalls.</para>
+				</listitem>
+			  </varlistentry>
+			  <varlistentry id="launch.with.command.line.config.file.">
+				<term id="launch.with.command.line.config.file.title"><option>--config-file=<emphasis>&lt;camí&gt;</emphasis></option></term>
+				<listitem>
+				  <para>Fitxer escrit en el format .properties del Java utilitzat per a especificar un lot d'opcions de la línia d'ordres.</para>
+
+				  <para>Les opcions es presenten com una llista de parells <parameter>clau=valor</parameter>. Es poden utilitzar tant paràmetres del Java com opcions de l'OmegaT.</para>
+				  <note>
+					<para>Suprimiu l'opció <code>-D</code> o <code>-X</code> inicial per a utilitzar paràmetres del Java</para>
+
+					<programlisting>user.language=fr
+config-dir=&quot;camí/a/una/carpeta/de/configuració&quot;</programlisting>
+				  </note>
+
+				  <para>Gairebé tots els paràmetres presentats en aquesta secció es poden utilitzar en un fitxer de configuració. L'excepció notable és <code>remote-project</code>.</para>
+
+				  <para>És possible combinar <code>--config-file</code> amb altres opcions de la línia d'ordres compatibles amb iniciar la GUI. En aquests casos, les opcions definides en el fitxer de configuració tenen prioritat sobre qualsevol opció amb funcionalitat duplicada que també s'hagi indicat en la línia d'ordres.</para>
+				</listitem>
+			  </varlistentry>
+
+			  <varlistentry id="launch.with.command.line.resource.bundle.">
+				<term id="launch.with.command.line.resource.bundle.title"><option>--resource-bundle=<emphasis>&lt;camí&gt;</emphasis></option></term>
+				<listitem>
+				  <para>Fitxer .properties del Java que voleu utilitzar per al text de la interfície.</para>
+				</listitem>
+			  </varlistentry>
+
+			  <varlistentry id="launch.with.command.line.mode.console.translate.console.pseudotranslatetmx.console.align.">
+				<term id="launch.with.command.line.mode.console.translate.console.pseudotranslatetmx.console.align.title"><option>--mode=[nom del mode de consola]</option></term>
+				<listitem>
+				  <para>Permet especificar un mode diferent de la GUI per defecte. Estan disponibles les opcions següents:</para>
+
+				  <variablelist>
+					<varlistentry id="launch.with.command.line.mode.console.translate">
+					  <term id="launch.with.command.line.mode.console.translate.title"><option>--mode=console-translate</option></term>
+					  <listitem>
+						<para>En aquest mode, l'OmegaT intenta traduir els fitxers de la carpeta d'origen amb les memòries de traducció disponibles.</para>
+
+						<para>Això és útil si s'executa l'OmegaT en un servidor i s'afegeixen automàticament fitxers TMX a un projecte.</para>
+						  
+						<variablelist>
+						  <varlistentry id="launch.with.command.line.source.pattern.lt.pattern.gt.">
+							<term id="launch.with.command.line.source.pattern.lt.pattern.gt.title"><option>--source-pattern=&lt;patró&gt;</option></term>
+							<listitem>
+							  <para>Llista d'expressions regulars que defineixen els fitxers d'origen permesos que s'han de processar. Recordeu que, en les expressions regulars, el punt i la barra inclinada inversa s'han d'escapar: <code>\.</code> i <code>\\</code>.</para>
+
+							  <para>Aquí teniu alguns exemples habituals:</para>
+							  
+							  <variablelist>
+								<varlistentry id="launch.with.command.line.html">
+								  <term id="launch.with.command.line.html.title"><option>.*\.html</option></term>
+								  <listitem>
+									<para>Tradueix tots els fitxers HTML.</para>
+								  </listitem>
+								</varlistentry>
+								<varlistentry id="launch.with.command.line.test.html">
+								  <term id="launch.with.command.line.test.html.title"><option>prova\.html</option></term>
+								  <listitem>
+									<para>Tradueix només el fitxer <filename>test.html</filename> de la carpeta arrel de fitxers d'origen. S'ignorarà qualsevol fitxer que també s'anomeni «test.html» en altres subcarpetes.</para>
+								  </listitem>
+								</varlistentry>
+
+								<varlistentry id="launch.with.command.line.dir.test.html">
+								  <term id="launch.with.command.line.dir.test.html.title"><option>dir-10\\prova\.html</option></term>
+								  <listitem>
+									<para>Tradueix només el fitxer <filename>test.html</filename> de la carpeta <filename class="directory">dir-10</filename>.</para>
+								  </listitem>
+								</varlistentry>
+							  </variablelist>
+
+							  <para>Consulteu l'annex <link linkend="app.regex" endterm="app.regex.title"/> per a conèixer més detalls.</para>
+							</listitem>
+						  </varlistentry>
+						</variablelist>
+					  </listitem>
+					</varlistentry>
+
+					<varlistentry id="launch.with.command.line.mode.console.pseudotranslatetmx">
+					  <term id="launch.with.command.line.mode.console.pseudotranslatetmx.title"><option>--mode=console-createpseudotranslatetmx</option></term>
+					  <listitem>
+						<para>En aquest mode, l'OmegaT crearà un TMX per a tot el projecte utilitzant només els fitxers d'origen.</para>
+						
+						<para>Especifiqueu el fitxer TMX que s'ha de crear amb:</para>
+						
+						<variablelist>
+						  <varlistentry id="launch.with.command.line.pseudotranslatetmx.">
+							<term id="launch.with.command.line.pseudotranslatetmx.title"><option>--pseudotranslatetmx=<emphasis>&lt;camí&gt;</emphasis></option></term>
+							<listitem>
+							  <para>Fitxer TMX pseudotraduït de sortida.</para>
+							</listitem>
+						  </varlistentry>
+
+						  <varlistentry id="launch.with.command.line.pseudotranslatetype.equal.empty.">
+							<term id="launch.with.command.line.pseudotranslatetype.equal.empty.title"><option>--pseudotranslatetype=[equal|empty]</option></term>
+							<listitem>
+							  <para>Contingut que voleu incloure en el fitxer TMX pseudotraduït.</para>
+							</listitem>
+						  </varlistentry>
+						</variablelist>
+					  </listitem>
+					</varlistentry>
+					
+					<varlistentry id="launch.with.command.line.mode.console.align">
+					  <term id="launch.with.command.line.mode.console.align.title"><option>--mode=console-align <emphasis>--alignDir=&lt;camí&gt;</emphasis></option></term>
+					  <listitem>
+						<para>En aquest mode, l'OmegaT alinearà els fitxers de la carpeta «/source» del projecte amb els de la ubicació especificada amb el paràmetre <emphasis>--alignDir</emphasis>.</para>
+
+						<para>El fitxer TMX resultant es desa en la carpeta «/omegat» amb el nom «align.tmx». Els tipus de fitxers que es poden alinear depenen de si el filtre de fitxers és compatible amb l'alineació. Alguns dels filtres compatibles són: fitxers de llengua ILIAS, paquets de recursos del Java(TM), text clau=valor, CSV de llengua del Magento CE, MoodlePHP, DTD de Mozilla, FTL de Mozilla, PO, RC, subtítols SubRip i recursos del Windows.</para>
+
+						<para>El paràmetre <emphasis>--alignDir</emphasis> s'utilitza per a especificar la ubicació de les dades en la llengua de destinació, que ha de ser una carpeta que contingui els fitxers traduïts.</para>
+
+						<para>Aquesta carpeta ha de contenir una traducció en la llengua de destinació del projecte. Per exemple, si el projecte és EN a FR, la carpeta ha de contenir un paquet que acabi amb _fr. El fitxer TMX resultant es desa en la carpeta «/omegat» amb el nom «align.tmx».</para>
+					  </listitem>
+					</varlistentry>
+
+					<varlistentry id="launch.with.command.line.mode.console.stats">
+					  <term id="launch.with.command.line.mode.console.stats.title"><option>--mode=console-stats <emphasis>&lt;camí&gt;</emphasis></option></term>
+					  <listitem>
+						<variablelist>
+						  <varlistentry id="launch.with.command.line.console.stats.output.file">
+							<term id="launch.with.command.line.console.stats.output.file.title"><option>--output-file=[fitxer de sortida d'estadístiques]</option></term>
+							<listitem>
+							  <para>El resultat es desa en aquest fitxer o es mostra en la sortida estàndard si no existeix. Sense <emphasis>--stats-type</emphasis>, es detecta el format a partir de l'extensió del fitxer. Per defecte, la sortida és XML.</para>
+							</listitem>
+						  </varlistentry>
+							
+						  <varlistentry id="launch.with.command.line.console.stats.output.format">
+							<term id="launch.with.command.line.console.stats.output.format.title"><option>--stats-type=[xml|text][txt][json]]]</option></term>
+							<listitem>
+							  <para>Requereix <emphasis>--output-file</emphasis>. Especifica el format de sortida.</para>
+							</listitem>
+						  </varlistentry>
+						</variablelist>
+						  
+						<para>Les dades són les mateixes que quan s'utilitza <link linkend="menus.tools" endterm="menus.tools.title"/><link linkend="menus.tools.statistics" endterm="menus.tools.statistics.title"/>.</para>
+					  </listitem>
+					</varlistentry>
+				  </variablelist>												
+				</listitem>								
+			  </varlistentry>
+			</variablelist>
+		  </listitem>
+		</varlistentry>
+		  
+		<varlistentry id="launch.with.command.line.non.gui.mode.options.">
+		  <term id="launch.with.command.line.non.gui.mode.options.title">Opcions del mode sense GUI:</term>
+		  <listitem>
+			<variablelist>
+			  <varlistentry id="launch.with.command.line.quiet">
+				<term id="launch.with.command.line.quiet.title"><option>--quiet</option></term>
+				<listitem>
+				  <para>Minimitza la sortida mostrada en la línia d'ordres.</para>
+				</listitem>
+			  </varlistentry>
+				
+			  <varlistentry id="launch.with.command.line.script.">
+				<term id="launch.with.command.line.script.title"><option>--script=<emphasis>&lt;camí&gt;</emphasis></option></term>
+				<listitem>
+				  <para>Fitxer de script que s'ha d'executar quan s'activi un esdeveniment del projecte.</para>
+				</listitem>
+			  </varlistentry>
+
+			  <varlistentry id="launch.with.command.line.tag.validation.abort.warn.">
+				<term id="launch.with.command.line.tag.validation.abort.warn.title"><option>--tag-validation=[abort|warn]</option></term>
+				<listitem>
+				  <para>Comprova els errors d'etiquetes.</para>
+				  
+				  <itemizedlist>
+					<listitem>
+					  <para>Abort: surt amb un error si hi ha problemes d'etiquetes.</para>
+					</listitem>
+
+					<listitem>
+					  <para>Warn: mostra els avisos sense sortir si hi ha problemes d'etiquetes.</para>
+					</listitem>											
+				  </itemizedlist>
+
+				  <note>
+					<para>Els informes sobre els problemes d'etiquetes es mostren en la finestra del terminal.</para>
+				  </note>
+				</listitem>
+			  </varlistentry>
+			</variablelist>
+		  </listitem>
+		</varlistentry>
+	  </variablelist>
+	</section>
+  </section>
+</section>

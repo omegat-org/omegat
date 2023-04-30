@@ -9,7 +9,7 @@
                2016 Aaron Madlon-Kay
                2020 Lev Abashkin
                2023 Hiroshi Miura
-               Home page: http://www.omegat.org/
+               Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
  This file is part of OmegaT.
@@ -25,7 +25,7 @@
  GNU General Public License for more details.
 
  You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
 package org.omegat.core.machinetranslators;
@@ -75,6 +75,9 @@ public class YandexCloudTranslate extends BaseCachedTranslate {
     private static final String PROPERTY_KEEP_TAGS = "yandex.cloud.keep-tags";
 
     private static final int MAX_GLOSSARY_TERMS = 50;
+
+    // API limit
+    // see https://cloud.yandex.com/en/docs/translate/concepts/limits
     private static final int MAX_TEXT_LENGTH = 10000;
     private static final int IAM_TOKEN_TTL_SECONDS = 3600; // Recommended value
 
@@ -96,15 +99,13 @@ public class YandexCloudTranslate extends BaseCachedTranslate {
     }
 
     @Override
+    protected int getMaxTextLength() {
+        return MAX_TEXT_LENGTH;
+    }
+
+    @Override
     protected String translate(final Language sLang, final Language tLang, final String text)
             throws Exception {
-        String trText = text.length() > MAX_TEXT_LENGTH ? text.substring(0, MAX_TEXT_LENGTH - 3) + "..."
-                : text;
-        String prev = getFromCache(sLang, tLang, trText);
-        if (prev != null) {
-            return prev;
-        }
-
         String oAuthToken = getCredential(PROPERTY_OAUTH_TOKEN);
         if (oAuthToken == null || oAuthToken.isEmpty()) {
             throw new Exception(OStrings.getString("MT_ENGINE_YANDEX_CLOUD_OAUTH_TOKEN_NOT_FOUND"));
@@ -120,7 +121,7 @@ public class YandexCloudTranslate extends BaseCachedTranslate {
             throw new Exception(IAMErrorMessage);
         }
 
-        String request = createJsonRequest(sLang, tLang, trText, folderId);
+        String request = createJsonRequest(sLang, tLang, text, folderId);
 
         Map<String, String> headers = new TreeMap<>();
         headers.put("Authorization", "Bearer " + IAMToken);
@@ -132,9 +133,9 @@ public class YandexCloudTranslate extends BaseCachedTranslate {
             String errorMessage = extractErrorMessage(e.body);
             if (errorMessage == null) {
                 errorMessage = OStrings.getString("MT_ENGINE_YANDEX_CLOUD_BAD_TRANSLATE_RESPONSE");
-                throw new Exception(errorMessage);
+                throw new MachineTranslateError(errorMessage);
             }
-            throw e;
+            throw new MachineTranslateError(e.getMessage());
         }
         if (response == null) {
             return null;
@@ -143,9 +144,7 @@ public class YandexCloudTranslate extends BaseCachedTranslate {
         if (tr == null) {
             return null;
         }
-        tr = cleanSpacesAroundTags(tr, trText);
-        putToCache(sLang, tLang, trText, tr);
-        return tr;
+        return cleanSpacesAroundTags(tr, text);
     }
 
     @Override
@@ -232,7 +231,7 @@ public class YandexCloudTranslate extends BaseCachedTranslate {
     }
 
     @SuppressWarnings("unchecked")
-    protected String extractTranslation(final String json) {
+    protected String extractTranslation(final String json) throws MachineTranslateError {
         JsonNode rootNode;
         ObjectMapper mapper = new ObjectMapper();
         try {
@@ -240,13 +239,14 @@ public class YandexCloudTranslate extends BaseCachedTranslate {
             return rootNode.get("translations").get(0).get("text").asText();
         } catch (Exception e) {
             Log.logErrorRB(e, "MT_JSON_ERROR");
-            return OStrings.getString("MT_ENGINE_YANDEX_CLOUD_BAD_TRANSLATE_RESPONSE");
+            throw new MachineTranslateError(OStrings.getString(
+                    "MT_ENGINE_YANDEX_CLOUD_BAD_TRANSLATE_RESPONSE"));
         }
     }
 
     @SuppressWarnings("unchecked")
     private String getIAMToken(final String oAuthToken) {
-        if (System.currentTimeMillis() - lastIAMTokenTime > IAM_TOKEN_TTL_SECONDS * 1000) {
+        if (System.currentTimeMillis() - lastIAMTokenTime > IAM_TOKEN_TTL_SECONDS * 1_000) {
 
             String request = "{\"yandexPassportOauthToken\":\"" + oAuthToken + "\"}";
             String response;

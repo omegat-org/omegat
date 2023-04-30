@@ -10,7 +10,7 @@
                2009-2010 Alex Buloichik
                2014 Yu Tang
                2015 Aaron Madlon-Kay
-               Home page: http://www.omegat.org/
+               Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
  This file is part of OmegaT.
@@ -26,7 +26,7 @@
  GNU General Public License for more details.
 
  You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
 package org.omegat.util.gui;
@@ -314,10 +314,12 @@ public final class UIDesignManager {
             if (Platform.isLinux() && Color.WHITE.equals(uiDefaults.getColor("TextPane.background"))) {
                 uiDefaults.put("TextPane.background", uiDefaults.getColor("List.background"));
             }
+            uiDefaults.put("OmegaT.theme.dark", true);
         } else {
             loadColors(uiDefaults, "light");
             Color bg = uiDefaults.getColor("TextArea.background").darker();  // NOI18N
             hilite = new Color(bg.getRed(), bg.getBlue(), bg.getGreen(), 32);
+            uiDefaults.put("OmegaT.theme.dark", false);
         }
         uiDefaults.put("OmegaT.alternatingHilite", hilite);
     }

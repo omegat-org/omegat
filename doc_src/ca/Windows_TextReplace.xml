@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="windows.text.replace">
+  <title id="windows.text.replace.title"><guilabel>Substitució de text</guilabel></title>
+
+  <para>Utilitzeu <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.search.and.replace" endterm="menus.edit.search.and.replace.title"/> per a obrir una finestra de substitució nova i indiqueu la paraula o frase que voleu cercar en el camp de cerca.</para>
+  
+  <para>Com a alternativa, seleccioneu una paraula o frase en la subfinestra <link linkend="panes.editor" endterm="panes.editor.title"/>, <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/>, o <link linkend="panes.glossary" endterm="panes.glossary.title"/> i utilitzeu <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.search.and.replace" endterm="menus.edit.search.and.replace.title"/>. La selecció s'introdueix automàticament en el camp de cerca.</para>
+
+  <para>Podeu tenir obertes diverses finestres de substitució alhora.</para>
+
+  <para>Feu clic en la fletxa desplegable del quadre <guilabel>Cerca</guilabel> o <guilabel>Substitueix per:</guilabel> per a accedir als darrers deu elements.</para>
+
+  <para>Indiqueu la cadena que voleu inserir per a substituir el terme de cerca en el camp <guilabel>Substitueix-ho per:</guilabel> i feu clic en <guibutton>Cerca</guibutton> o premeu <keycap>Retorn</keycap> si el cursor encara és en el camp.</para>
+
+  <para>Les coincidències de cerca es mostren amb caràcters blaus en negreta, i les cadenes modificades apareixen en taronja per a mostrar el resultat de la substitució.</para>
+
+
+  <example id="replace.with.allemand">
+	<title id="replace.with.allemand.title">Substitució d'un terme</title>
+	<para>
+	  <programlisting>多和田葉子.UTF8
+-- 148&gt; | language = [[日本語]]・[[ドイツ語]]
+&lt;- | language = [[Japonais]]・[[<token>Alllemand</token>]]
+-&gt; | language = [[Japonais]]・[[<token>Allemand</token>]]
+---------</programlisting></para>
+  </example>
+  
+  <note>
+	<para>En aquesta fase encara no s'ha fet cap substitució.</para>
+  </note>
+
+  <para>Feu clic en una de les opcions següents:</para>
+
+  <itemizedlist>
+    <listitem>
+      <para><guibutton>Substitueix-ho tot</guibutton>: substitueix tots els resultats (després de mostrar una finestra de confirmació que indica el nombre de resultats).</para>
+    </listitem>
+
+    <listitem>
+        <para><guibutton>Show replacements</guibutton> filters the entries in
+        the Editor and highlight the parts that will be replaced.</para>
+		<para>Click the <guibutton>Replace and Find Next</guibutton> or
+		<guibutton>Find Next</guibutton> button, and click the
+		<guibutton>Finish</guibutton> button to end the replacement
+		operation.</para>
+    </listitem>
+  </itemizedlist>
+
+  <itemizedlist>
+    <listitem>
+      <para><guibutton>Tanca:</guibutton> tanca la finestra sense aplicar cap canvi.</para>
+    </listitem>
+  </itemizedlist>
+
+  <para>La finestra de substitució té els seus menús propis:</para>
+ 
+  <itemizedlist>
+    <listitem>
+      <para><guimenu>Fitxer</guimenu> &gt; <guimenuitem>Cerca la selecció</guimenuitem> (<keycombo><keycap>C</keycap><keycap>F</keycap></keycombo>): s'insereix la selecció actual en el camp de cerca.</para>
+    </listitem>
+
+    <listitem>
+      <para><guimenu>Fitxer</guimenu> &gt; <guimenuitem>Tanca</guimenuitem> (<keycombo><keycap>C</keycap><keycap>W</keycap></keycombo>): tanca la finestra de cerca.</para>
+    </listitem>
+
+    <listitem>
+      <para><guimenu>Edita</guimenu> &gt; <guimenuitem>Insereix el text d'origen</guimenuitem> (<keycombo><keycap>C</keycap><keycap>S</keycap><keycap>I</keycap></keycombo>): insereix el contingut del segment d'origen actual.</para>
+    </listitem>
+
+    <listitem>
+      <para><guimenu>Edita</guimenu> &gt; <guimenuitem>Substitueix pel text d'origen</guimenuitem> (<keycombo><keycap>C</keycap><keycap>S</keycap><keycap>R</keycap></keycombo>): substitueix el contingut del camp de cerca pel del segment d'origen actual.</para>
+    </listitem>
+
+    <listitem>
+      <para><guimenu>Edita</guimenu> &gt; <guimenuitem>Crea una entrada en el glossari</guimenuitem> (<keycombo><keycap>C</keycap><keycap>S</keycap><keycap>G</keycap></keycombo>): afegeix un terme al glossari. Consulteu <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.create.glossary.entry" endterm="menus.edit.create.glossary.entry.title"/> per a conèixer més detalls.</para>
+    </listitem>
+
+    <listitem>
+      <para><guimenu>Edita</guimenu> &gt; <guimenuitem>Reinicialitza les opcions</guimenuitem>: reinicialitza les opcions de la finestra de cerca.</para>
+    </listitem>
+  </itemizedlist>
+
+  <section id="windows.text.replace.methods">
+    <title id="windows.text.replace.methods.title">Tipus de cerca</title>
+
+    <para>Utilitzeu els botons d'opció per a seleccionar el tipus de cerca.</para>
+
+	<para>Estan disponibles els tipus de cerca següents:</para>
+
+    <variablelist>
+      <varlistentry id="windows.text.replace.methods.exact">
+        <term id="windows.text.replace.methods.exact.title">Cerca exacta</term>
+        <listitem>
+          <para>Cerca la cadena exactament tal com s'ha introduït en el camp de cerca.</para>
+
+		  <para>És equivalent a una cerca web entre cometes.</para>
+
+		  <note>
+			<para>Els caràcters <code>*</code> i <code>?</code> es poden utilitzar en les cerques exactes.</para>
+
+			<itemizedlist>
+			  <listitem>
+				<para>* coincideix amb zero o més caràcters, des de la posició actual fins al final d'una paraula. El terme de cerca <literal>«cant*»</literal>, per exemple, coincideix amb <literal>«cant»</literal>, <literal>«cantem»</literal> i <literal>«cantant»</literal>.</para>
+			  </listitem>
+
+			  <listitem>
+				<para>«?» coincideix amb qualsevol caràcter individual. Per exemple, <literal>corre?</literal> coincideix amb <literal>correm</literal> i amb la part <literal>corren</literal> de <literal>corrent</literal> o <literal>corrents</literal>.</para>
+			  </listitem>
+			</itemizedlist>
+		  </note>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="windows.text.replace.methods.regex">
+        <term id="windows.text.replace.methods.regex.title">Expressions regulars</term>
+        <listitem>
+          <para>Tracta la cadena de cerca com a expressió regular.</para>
+
+		  <para>Les expressions regulars són una manera molt potent de cercar patrons generals o complexos en comptes de cadenes exactes. Consulteu l'annex <link linkend="app.regex" endterm="app.regex.title"/> per a conèixer més detalls.</para>
+
+		  <note>
+			<para>La cadena de substitució admet referències a grups definits en la cadena de cerca. Utilitzeu <code>$n</code> (indicant un dígit de l'1 al 9 en comptes d'<code>n</code>) en el camp de substitució per a fer referència al grup núm. <code>n</code> del camp de cerca.</para>
+		  </note>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </section>
+
+  <section id="windows.text.replace.options">
+	<title id="windows.text.replace.options.title">Opcions</title>
+	
+	<variablelist>
+	  <varlistentry>
+		<term>Distingeix entre majúscules i minúscules</term>
+		<listitem>
+		  <para>Retorna només els resultats amb la mateixa lletra que els termes de cerca.</para>
+		</listitem>
+	  </varlistentry>
+	
+	  <varlistentry>
+		<term>Espais no separables</term>
+		<listitem>
+		  <para>Els caràcters d'espai en els termes de cerca coincidiran tant amb un espai normal com amb un caràcter d'espai no separable (\u00A).</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry>
+		<term>Sense traduir</term>
+		<listitem>
+		  <para>Cerca també en els segments sense traduir.</para>
+		</listitem>
+	  </varlistentry>
+ 
+	  <varlistentry>
+		<term><guibutton>Mostra les opcions avançades</guibutton></term>
+		<listitem>
+		  <para>Seleccioneu criteris addicionals, com ara la persona que ha traduït o modificat un segment, la data i l'hora de la traducció (modificació), o si s'han d'excloure els segments orfes.</para>
+
+		  <variablelist>
+			<varlistentry>
+			  <term>No distingeixis entre els caràcters d'amplada completa i mitja</term>
+			  <listitem>
+				<para>Retorna els resultats que coincideixen tant amb les formes d'amplada completa com mitjana (caràcters CJK) dels caràcters en els termes de cerca.</para>
+			  </listitem>
+			</varlistentry>
+		  </variablelist>
+		  <para>Utilitzeu el botó <guibutton>Amaga les opcions avançades</guibutton> per a deixar de mostrar les opcions avançades.</para>
+		</listitem>
+	  </varlistentry>
+	</variablelist>
+  </section>
+
+  <section id="windows.text.replace.result.display">
+    <title id="windows.text.replace.result.display.title">Visualització dels resultats</title>
+
+    <para>Les coincidències es mostren en ordre d'aparició en el projecte. Per als segments traduïts, es mostra el text original sobre el text traduït. Només es mostra el text d'origen per als segments sense traduir.</para>
+
+	<para>Feu doble clic en un segment per a obrir-lo en la subfinestra <link linkend="panes.editor" endterm="panes.editor.title"/>.</para>
+
+    <para>Podeu utilitzar les dreceres següents en els resultats de la cerca:</para>
+	
+	<variablelist>
+	  <varlistentry>
+		<term><keycombo><keycap>C</keycap><keycap>N</keycap></keycombo></term>
+		<listitem>
+		  <para>Es desplaça al segment següent.</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry>
+		<term><keycombo><keycap>C</keycap><keycap>P</keycap></keycombo></term>
+		<listitem>
+		  <para>Es desplaça al segment anterior.</para>
+		</listitem>
+
+	  </varlistentry>
+
+	  <varlistentry>
+		<term><keycombo><keycap>C</keycap><keycap>J</keycap></keycombo></term>
+		<listitem>
+		  <para>Salta al segment actual en l'editor.</para>
+		</listitem>
+	  </varlistentry>
+	</variablelist>
+
+	<para>El segment seleccionat es ressalta en verd.</para>
+	
+	<variablelist>
+	  <varlistentry>
+		<term>Sincronitza automàticament l'editor</term>
+		<listitem>
+		  <para>La subfinestra <link linkend="panes.editor" endterm="panes.editor.title"/>se sincronitza amb la selecció en els resultats de la cerca.</para>
+		</listitem>
+	  </varlistentry>
+	  
+	  <varlistentry>
+		<term>Torna al segment inicial després de tancar la finestra</term>
+		<listitem>
+		  <para>Quan tanqueu les finestres de cerca, la subfinestra <link linkend="panes.editor" endterm="panes.editor.title"/> torna automàticament al segment que es mostrava abans d'iniciar la cerca.</para>
+		</listitem>
+	  </varlistentry>
+	</variablelist>
+  </section>
+</section>

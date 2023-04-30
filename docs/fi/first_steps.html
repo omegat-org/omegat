@@ -1,0 +1,159 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Opi käyttämään OmegaT:tä 5 minuutissa!</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="chapter">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h2 class="title"><a name="chapter.instant.start.guide"></a>Opi käyttämään OmegaT:tä 5 minuutissa!
+                  </h2>
+               </div>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="create.and.open.new.project"></a>Määritä uuden projektin asetukset<a class="indexterm" name="d0e7"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p><em><span class="remark">Huom.:</span></em> Jos käytät Applen Mac-konetta, käytä <span class="keycap"><strong>Komento (cmd) ⌘</strong></span>-näppäintä <span class="keycap"><strong>Control</strong></span>-näppäimen sijaan.
+            </p><a class="indexterm" name="d0e22"></a><p>Ensimmäisellä OmegaT-käyttökerralla sinun on luotava projekti, jossa on kaikki tarvitsemasi tiedostot kuten lähdetiedostot,
+               käännösmuistit, sanastota ja lopulta myös kääntämäsi tiedosto. Mene valikkoon <span class="guimenu">Projekti</span>, valitse <span class="guimenuitem">Uusi…</span> ja kirjoita projektisi nimi. Muista, mihin sijaintiin olet luomassa projektia, sillä sinun on palattava sinne myöhemmin uudelleen.
+            </p>
+            <p>Kun olet antanut projektille nimen, näytölle avautuu valintaikkuna <span class="guilabel">Luo uusi projekti</span>. Valitse lähdetiedoston ja tulevan käännetyn tiedoston kielet ikkunan yläosassa ja jatka napsauttamalla <span class="guibutton">OK</span>-painiketta.
+            </p>
+            <p>Pääset milloin tahansa takaisin tähän valintaikkunaan ja sen asetuksiin painamalla näppäinyhdistelmää <span class="keycap"><strong>Ctrl+E</strong></span>.
+            </p>
+            <p>Seuraavaksi näytölle avautuu valintaikkuna <span class="guilabel">Projektin tiedostot</span>. Napsauta painiketta <span class="guibutton">Kopioi tiedostoja lähdekansioon…</span>, niin pääset valitsemaan käännettävät lähdetiedostosi. OmegaT kopioi valitsemasi tiedostot vasta luomasi projektin <code class="filename">/source/</code>-alikansioon. Kun lähdetiedostot ovat latautuneet, ne näkyvät <span class="guilabel">Editori</span>-ruudussa, ja voit sulkea <span class="guilabel">Projektin tiedostot</span>-ikkunan.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="translate.the.segments.one.by.one"></a>Käännä tiedosto
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Käännä tiedosto segmentti kerrallaan OmegaT:ssä. Siirry seuraavaan kääntämättömään segmenttiin näppäinyhdistelmällä <span class="keycap"><strong>Ctrl+U</strong></span>. Seuraavaan käännettyyn segmenttiin pääset näppäinyhdistelmällä <span class="keycap"><strong>Ctrl+vaihto+U</strong></span>. Luo käännetyt asiakirjat näppäinyhdistelmällä <span class="keycap"><strong>Ctrl+D</strong></span>. Voit käyttää sitä aina kun haluat nähdä, miltä käännöksesi näyttää lopullisessa muodossaan. OmegaT luo käännetyt asiakirjat
+               projektin <code class="filename">/target/</code>-alikansioon. Käännöstyön aikana löydät monia hyödyllisiä toimintoja <span class="guimenu">Muokkaa</span>- ja <span class="guimenu">Siirry</span>-valikoista.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e89"></a>Tarkista tägit
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Jos lähdetiedostosi ovat esim. Microsoft Word-, LibreOffice Writer- tai HTML-tiedostoja, jotka sisältävät muotoiluja, OmegaT
+               muuttaa muotoilut tägeiksi, jotka ympäröivät käännettyä tekstiä. Asiakirjoissa on myös tägejä, jotka eivät mitenkään liity
+               tekstimuotoiluun, mutta joita tarvitaan lähdetiedostoissa (ja siis myös kohdetiedostoissa). Lähdesegmentti voi näyttää tältä:
+            </p>
+            <div class="mediaobject" align="justify"><img src="images/InstantGuide_1.png" align="justify"></div>
+            <p>
+               
+            </p>
+            <p>OmegaT esittää kuitenkin segmentin tällaisena:</p>
+            <div class="mediaobject" align="justify"><img src="images/InstantGuide_2.png" align="justify"></div>
+            <p>
+               
+            </p>
+            <p>OmegaT-tägit on helppo tunnistaa, sillä ne näkyvät harmaina. Tägit ovat suojeltuja, joten et voi muokata niiden sisältöä.
+               Voit kuitenkin poistaa tägejä, kirjoittaa niitä käsin ja siirtää niiden paikkaa kohdesegmentissä. Mikäli kuitenkin kirjoitit
+               muotoilutägin väärin, käännöstiedostoja ei välttämättä saa avattua. Siksi sinun kannattaa tarkistää tägien oikeellisuus ennen
+               kuin luot käännetyt tiedostot. Tee se painamalla <span class="keycap"><strong>Ctrl+vaihto+V</strong></span>.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e113"></a>Luo käännetty tiedosto
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Kun olet varma siitä, että käännöksessäsi ei ole tägivirheitä, luo käännetyt tiedostot näppäinyhdistelmällä <span class="keycap"><strong>Ctrl+D</strong></span>. OmegaT luo tiedostot projektikansion <code class="filename">/target/</code>-alikansioon.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e124"></a>Pari muuta muistettavaa seikkaa
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Jos tiedosto ei lataudu näkyville <span class="guilabel">Editori</span>-ruutuun, voi olla, että tiedostomuoto ei toimi OmegaT:ssä. Kohdasta <span class="guimenuitem">Valinnat</span> → <span class="guimenuitem">Asetukset…</span> → <span class="guimenuitem">Tiedostosuodattimet</span> löydät luettelon tiedostomuodoista, joita OmegaT pystyy käsittelemään.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Voit luoda jokaiselle käännöstyölle uuden projektin, ja voit lisätä projektiin uusia lähdetiedostoja milloin tahansa.</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Näppäinyhdistelmä <span class="keycap"><strong>Ctrl+E</strong></span> avaa projektin ominaisuuksien valintaikkunan, josta löydät projektin alkuasetukset painamalla. Näppäinyhdistelmä <span class="keycap"><strong>Ctrl+L</strong></span> avaa <span class="guilabel">Projektin tiedostot</span>-valintaikkunan, josta näet luettelon projektin tiedostoista.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Kun käännöstyö on valmis, OmegaT luo projektikansioon kolme käännösmuistitiedostoa, <code class="filename">level1</code>, <code class="filename">level2</code> ja <code class="filename">omegat</code>. Kaksi ensimmäistä käännösmuistia, <code class="filename">level1</code> ja <code class="filename">level2</code>, sopivat käytettäviksi muissa käännösohjelmissa. Käännösmuisti <code class="filename">omegat</code> taas sopii OmegaT:n käyttöön. Voit käyttää sitä esimerkiksi tulevissa projekteissa. Jos sijoitat tällaisen käännösmuistin
+                        projektin <code class="filename">/tm/</code>-alikansioon, OmegaT etsii siitä automaattisesti samankaltaisia segmenttejä, niin sanottuja sumeita osumia.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Voit lisätä uuden termin sanastoon painamalla näppäinyhdistelmää <span class="keycap"><strong>Ctrl+vaihto+G</strong></span> tai kopioimalla olemassa olevia sanastoja projektin <code class="filename">/glossary/</code>-alikansioon. Tällöin OmegaT etsii automaattisesti sanoja niistä.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Voit milloin tahansa etsiä sanoja ja lausekkeita lähdetekstistä ja käännöksestä painamalla näppäinyhdistelmää <span class="keycap"><strong>Ctrl+F</strong></span>. Tämä avaa <span class="guilabel">Tekstihaku</span>-valintaikkunan.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Tarkemman esittelyn <a class="ulink" href="https://omegat.org/files/OmegaT_for_Beginners.pdf" target="_top">OmegaT for beginners</a> löydät OmegaT-verkkosivustolta Jos tarvitset apua mihin tahansa OmegaT-seikkaan liittyen, liity vain reippaasti <a class="ulink" href="https://omegat.org/support" target="_top">OmegaT-käyttäjäryhmään</a>.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+         </div>
+      </div>
+   </body>
+</html>

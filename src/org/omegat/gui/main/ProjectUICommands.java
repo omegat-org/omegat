@@ -13,7 +13,7 @@
                2017 Didier Briel
                2021 ISHIKAWA,chiaki
                2022 Hiroshi Miura
-               Home page: http://www.omegat.org/
+               Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
  This file is part of OmegaT.
@@ -29,7 +29,7 @@
  GNU General Public License for more details.
 
  You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
 package org.omegat.gui.main;
@@ -50,7 +50,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.EqualsBuilder;
 
 import org.omegat.CLIParameters;
 import org.omegat.convert.ConvertProject;
@@ -505,20 +505,23 @@ public final class ProjectUICommands {
     private static void projectOpenImpl(File projectRootFolder) {
         IMainWindow mainWindow = Core.getMainWindow();
         try {
-            File newProjectFile = null;
             // open LOCAL copy of "omegat.project"
             ProjectProperties props = checkProjectProperties(projectRootFolder);
+            // When failed to load, we try with backup file
             if (props == null) {
-                // try with backup file
-                newProjectFile = FileUtil
+                File backupProjectFile = FileUtil
                         .getRecentBackup(new File(projectRootFolder.getAbsoluteFile(), OConsts.FILE_PROJECT));
-                if (newProjectFile == null) {
+                if (backupProjectFile == null) {
                     throw new KnownException("PROJECT_INVALID");
                 }
                 props = ProjectFileStorage.loadPropertiesFile(projectRootFolder.getAbsoluteFile(),
-                        newProjectFile);
+                        backupProjectFile);
             }
             boolean needToSaveProperties = false;
+            // newProjectFile represent a `omegat.project.NEW` file.
+            // It is created when modification of
+            // properties in remote.
+            File newProjectFile = null;
             if (props.hasRepositories()) {
                 /* <p>
                  * Every time we reopen the project, we copy omegat.project from
@@ -603,15 +606,15 @@ public final class ProjectUICommands {
                         throw e;
                     }
                 }
-                // team project - non-exist directories could be created from
-                // repo
+                // non-exist directories could be created
                 props.autocreateDirectories();
             } else {
-                // not a team project - ask for non-exist directories
+                // not a team project
                 File projectFile = new File(projectRootFolder, OConsts.FILE_PROJECT);
+                props.autocreateDirectories();
                 while (!props.isProjectValid()) {
-                    // something wrong with the project - display open dialog to
-                    // fix it
+                    // something wrong with the project.
+                    // We display open dialog to fix it.
                     ProjectPropertiesDialog prj = new ProjectPropertiesDialog(
                             Core.getMainWindow().getApplicationFrame(), props, projectFile.getAbsolutePath(),
                             ProjectPropertiesDialog.Mode.RESOLVE_DIRS);
@@ -622,28 +625,33 @@ public final class ProjectUICommands {
                         // user clicks on 'Cancel'
                         return;
                     }
+                    needToSaveProperties = true;
                 }
-                needToSaveProperties = true;
             }
+            // Critical section, create backup and save
+            // properties.
             final ProjectProperties propsP = props;
-            final File finalNewProjectFile = newProjectFile;
             final boolean finalNeedToSaveProperties = needToSaveProperties;
+            final File finalNewProjectFile = newProjectFile;
+            final boolean onlineMode = true;
             Core.executeExclusively(true, () -> {
                 // loading modified new project property
-                boolean succeeded = ProjectFactory.loadProject(propsP, true);
-                // make backup and save omegat.project file when required
-                if (finalNewProjectFile != null) {
-                    if (succeeded && finalNeedToSaveProperties) {
-                        File projectFile = new File(projectRootFolder, OConsts.FILE_PROJECT);
-                        File backup = FileUtil.backupFile(projectFile);
-                        FileUtil.removeOldBackups(projectFile, OConsts.MAX_BACKUPS);
-                        Log.logWarningRB("PP_REMOTE_PROJECT_CONTENT_OVERRIDES_THE_CURRENT_PROJECT",
-                                backup.getName());
-                    }
-                    Files.deleteIfExists(finalNewProjectFile.toPath());
+                boolean succeeded = ProjectFactory.loadProject(propsP, onlineMode);
+                if (!succeeded) {
+                    return;
                 }
-                if (succeeded && finalNeedToSaveProperties) {
+                File projectFile = new File(projectRootFolder, OConsts.FILE_PROJECT);
+                // make backup and save omegat.project file when required
+                if (finalNeedToSaveProperties) {
+                    File backup = FileUtil.backupFile(projectFile);
+                    FileUtil.removeOldBackups(projectFile, OConsts.MAX_BACKUPS);
+                    Log.logWarningRB("PP_REMOTE_PROJECT_CONTENT_OVERRIDES_THE_CURRENT_PROJECT",
+                            backup.getName());
                     Core.getProject().saveProjectProperties();
+                } else if (FileUtil.getRecentBackup(projectFile) == null) {
+                    FileUtil.backupFile(projectFile);
+                } else if (finalNewProjectFile != null) {
+                    FileUtils.deleteQuietly(finalNewProjectFile);
                 }
             });
             RecentProjects.add(projectRootFolder.getAbsolutePath());
@@ -654,7 +662,7 @@ public final class ProjectUICommands {
     }
 
     /**
-     * Detect whether local omegat.project is identical with remote one.
+     * Detect whether local `omegat.project` is identical with remote one.
      * 
      * @param that
      *            remote omegat.project.

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="post.processing.commands">
+  <title id="post.processing.commands.title">Nachbearbeitungsbefehle</title>
+
+  <para>Siehe die Projekteigenschaft <link linkend="dialogs.project.properties.external.processing.command" endterm="dialogs.project.properties.external.processing.command.title"/> für projektspezifische Befehle.</para>
+
+  <para>Siehe die Einstellung <link linkend="dialogs.preferences.saving.and.output.external.post-processing.command" endterm="dialogs.preferences.saving.and.output.external.post-processing.command.title"/> für globale Befehle.</para>
+	
+
+  <section id="post.processing.commands.template.variables">
+    <title id="post.processing.commands.template.variables.title">Variablen</title>
+    <para>Der Befehl wird an die Java-Laufzeitausführung als Zeichenkette übergeben, wobei die Variablen in ihre Werte aufgelöst werden. Alle Argumente sollten in Anführungszeichen gesetzt werden, z. B. <literal>&quot;${fileName}&quot;</literal>.</para>
+
+    <para>Die folgenden Variablen sind immer verfügbar. Die anderen Einträge in der Variablenliste sind Umgebungsvariablen Ihres Systems.</para>
+	
+    <table id="post.processing.commands.template.variables.table">
+      <title id="post.processing.commands.template.variables.table.title">Variablen</title>
+      <tgroup cols="2" colsep="1">
+        <colspec align="left" colname="1" colnum="1"/>
+        <colspec align="left" colname="2" colnum="2"/>
+        <thead>
+          <row>
+            <entry>Variablenname</entry>
+            <entry>Wert</entry>
+          </row>
+        </thead>
+
+        <tbody>
+		  <row>
+			<entry>${projectName}</entry>
+			<entry>Der Name des Projektverzeichnisses</entry>
+		  </row>
+		  <row>
+			<entry>${projectRoot}</entry>
+			<entry>Vollständiger Pfad des Projektordners</entry>
+		  </row>
+		  <row>
+			<entry>${sourceRoot}</entry>
+			<entry>Vollständiger Pfad des Quellordners</entry>
+		  </row>
+		  <row>
+			<entry>${targetRoot}</entry>
+			<entry>Vollständiger Pfad des Zielordners</entry>
+		  </row>
+		  <row>
+			<entry>${glossaryRoot}</entry>
+			<entry>Vollständiger Pfad des Glossarordners</entry>
+		  </row>
+		  <row>
+			<entry>${tmRoot}</entry>
+			<entry>Vollständiger Pfad des TM-Root-Ordners</entry>
+		  </row>
+		  <row>
+			<entry>${tmAutoRoot}</entry>
+			<entry>Vollständiger Pfad des TM-Auto-Ordners</entry>
+		  </row>
+		  <row>
+			<entry>${dictRoot}</entry>
+			<entry>Vollständiger Pfad des Wörterbuchordners</entry>
+		  </row>
+		  <row>
+			<entry>${tmOtherLangRoot}</entry>
+			<entry>TM Root + tmx2source (Einzelheiten finden Sie unter <link linkend="how.to.tm.bridge.two.languages" endterm="how.to.tm.bridge.two.languages.title"/>.)</entry>
+		  </row>
+		  <row>
+			<entry>${sourceLang}</entry>
+			<entry>Quellsprache</entry>
+		  </row>
+		  <row>
+			<entry>${targetLang}</entry>
+			<entry>Zielsprache</entry>
+		  </row>
+		  <row>
+			<entry>${filePath}</entry>
+			<entry>Vollständiger Pfad der Quelldatei</entry>
+		  </row>
+		  <row>
+			<entry>${fileShortPath}</entry>
+			<entry>Name der Quelldatei relativ zum angegebenen Stammverzeichnis</entry>
+		  </row>
+		  <row>
+			<entry>${fileName}</entry>
+			<entry>Vollständiger Name der Quelldatei</entry>
+		  </row>
+		  <row>
+			<entry>${fileNameOnly}</entry>
+			<entry>Name der Quelldatei ohne Endung</entry>
+		  </row>
+		  <row>
+			<entry>${fileExtension}</entry>
+			<entry>Endung der Quelldatei ohne Punkt</entry>
+		  </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+  
+  <section id="post.processing.commands.user.defined.scripts">
+    <title id="post.processing.commands.user.defined.scripts.title">Benutzerdefinierte Skripte</title>
+    <para>Zusätzlich zu einem regulären Befehl können Sie auch ein Skript aufrufen. Führen Sie nur Nachbearbeitungsskripte aus, die aus vertrauenswürdigen Quellen stammen. Aus Sicherheitsgründen sind lokale Nachbearbeitungsbefehle standardmäßig deaktiviert.</para>
+    <para>Die Variablen können sowohl mit regulären Befehlen als auch mit benutzerdefinierten Skripten verwendet werden. Möglicherweise müssen Sie einen absoluten Pfad für Ihr Skript verwenden. Der PATH, den OmegaT verwendet, ist möglicherweise nicht derselbe wie der PATH des aktuellen Benutzers.</para>
+    <para>STDOUT und STDERR werden in die <link linkend="configuration.folder.default.contents.logs.title">omegat.log</link>-Datei geschrieben. Der Exitcode und STDERR oder das letzte STDOUT werden in der Statusleiste angezeigt.</para>
+  </section>
+
+  <section id="post.processing.commands.linux.and.macos">
+    <title id="post.processing.commands.linux.and.macos.title">Linux und macOS</title>
+    <para>Sie sollten ein Shebang verwenden, z. B. <literal>#! /bin/bash</literal> oder <literal>#! /usr/bin/env python3</literal>. Und das Skript muss ausführbar sein. Die Verkettung von Befehlen mit <literal>&amp;&amp;</literal> oder <literal>||</literal> oder Pipes <literal>|</literal> wird hier nicht funktionieren.</para>
+  </section>
+  
+  <example id="post.processing.commands.example">
+	  <title id="post.processing.commands.example.title">Einfache Beispiele für Nachbearbeitungsbefehle:</title>
+	  <variablelist>
+		<varlistentry>
+		  <term>Den Zielordner in Linux öffnen</term>
+		  <listitem>
+			<programlisting>xdg-open ${targetRoot}</programlisting>
+		  </listitem>
+		</varlistentry>
+		<varlistentry>
+		  <term>Den Zielordner in macOS öffnen</term>
+		  <listitem>
+			<programlisting>open ${targetRoot}</programlisting>
+		  </listitem>
+		</varlistentry>
+
+		<varlistentry>
+		  <term>Den Zielordner via Windows Powershell öffnen</term>
+		  <listitem>
+			<programlisting>Invoke-Item ${targetRoot}</programlisting>
+		  </listitem>
+		</varlistentry>
+	  </variablelist>
+	</example>
+  </section>

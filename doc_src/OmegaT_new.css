@@ -227,6 +227,7 @@ hr {
 hr {
     height: 1px;
     border-style: none;
+    background-color: var(--accent-line);
 }
 
 blockquote {
@@ -297,8 +298,6 @@ a {
 	text-decoration-style: dotted;
 	text-decoration-thickness: 1px;
 	text-decoration-color: var(--panes-color);
-/* 
- */
 }
 
 a.ulink::after {
@@ -683,9 +682,6 @@ h2:has(a[href="chapter.appendices.html"]) ~ ul {
 /* Various font, colors and box settings */
 /*****************************************/
 
-hr {
-    background-color: var(--accent-line);
-}
 
 /* 
 code.filename {
@@ -738,13 +734,16 @@ dfn {
 }
 
 pre {
-    var(--normal-background)-space: pre;
+    white-space: pre;
     background-color: var(--insert-background);
     border: 1px dotted var(--main-color);
     padding: 0.5em;
     margin: 1.1em 0;
 }
 
+strong.userinput {    
+    font-style: italic;    
+}
 
 /**********************/
 /* List bullets, etc. */

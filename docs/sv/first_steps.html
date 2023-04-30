@@ -1,0 +1,158 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Lär dig använda OmegaT på 5 minuter!</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="chapter">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h2 class="title"><a name="chapter.instant.start.guide"></a>Lär dig använda OmegaT på 5 minuter!
+                  </h2>
+               </div>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="create.and.open.new.project"></a>Skapa ett nytt projekt<a class="indexterm" name="d0e7"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p><em><span class="remark">Obs:</span></em> På en Apple Mac, använd <span class="keycap"><strong>Kommando</strong></span>-tangenten istället för <span class="keycap"><strong>Ctrl</strong></span>-tangenten.
+            </p><a class="indexterm" name="d0e22"></a><p>När du ska använda OmegaT, skapar du först ett projekt som kommer att innehålla alla dina filer, såsom källfilen, översättningsminnen,
+               gloslistor och till slut din översatta fil. Gå till <span class="guimenu">Projekt</span>menyn, välj <span class="guimenuitem">Nytt…</span> och skriv in ett namn för ditt projekt. Kom ihåg var du skapar projektet, för du kommer att behöva återvända till det senare.
+            </p>
+            <p>När du gett projektet ett namn, kommer dialogen <span class="guilabel">Skapa nytt projekt</span> att öppnas. Överst i dialogen väljer du källfilens språk och det språk din översatta fil kommer att ha, och klickar <span class="guibutton">OK</span> för att fortsätta.
+            </p>
+            <p>Om du behöver komma åt andra inställningar i denna dialog, kan du återvända till den när som helst genom att trycka <span class="keycap"><strong>CTRL&nbsp;+&nbsp;E</strong></span>-
+            </p>
+            <p>Därefter öppnas dialogen <span class="guilabel">Projektfiler</span>. Klicka på <span class="guibutton">Kopiera filer till källfilsmappen…</span> för att välja dina källfiler. OmegaT kommer sedan att kopiera de markerade filerna till undermappen <code class="filename">/source/</code> i ditt nyligen skapade projekt. Efter att källfilerna har lästs in i <span class="guilabel">Redigeringsfönstret</span>, kan du stänga dialogen <span class="guilabel">Projektfiler</span>.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="translate.the.segments.one.by.one"></a>Översätt filen
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>OmegaT öppnar upp ett segment åt gången, som du ska översätta. Efter att du har översatt ett segment trycker du <span class="keycap"><strong>CTRL&nbsp;+&nbsp;U</strong></span> för att gå till nästa ej översatta segment (eller <span class="keycap"><strong>CTRL+SHIFT&nbsp;+&nbsp;U</strong></span> för att gå till nästa översatta segment). När du vill se hur din översättning kommer att se ut i sitt slutliga format, tryck
+               <span class="keycap"><strong>CTRL&nbsp;+&nbsp;D</strong></span> för att skapa de översatta filerna, vilka kommer att skapas i undermappen <code class="filename">/target/</code> i din projektmapp. När du översätter ska du använda menyerna <span class="guimenu">Redigera</span> och <span class="guimenu">Gå till</span> för att utföra olika användbara funktioner.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e89"></a>Validera dina taggar
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Om dina källfiler är formaterade filer, t.ex. Microsoft Word, LibreOffice Writer eller HTML, kommer OmegaT att konvertera
+               formateringen till taggar som omger texten du översätter. Dokument innehåller också ofta taggar som inte har något med formatering
+               att göra, men som ändå är viktiga i källdokument (och i de översatta filerna). En mening i källtexten kan se ut så här:
+            </p>
+            <div class="mediaobject" align="justify"><img src="images/InstantGuide_1.png" align="justify"></div>
+            <p>
+               
+            </p>
+            <p>OmegaT kommer däremot att visa meningen på följande sätt:</p>
+            <div class="mediaobject" align="justify"><img src="images/InstantGuide_2.png" align="justify"></div>
+            <p>
+               
+            </p>
+            <p>Taggarna i OmegaT är utgråade, så de är lätta att känna igen. De är skyddade så att du inte kan ändra deras innehåll, men
+               du kan radera dem, skriva in dem för hand eller flytta runt dem i målsegmentet. Men om du gjorde några misstag när du skrev
+               in formateringstaggarna, kan det bli så att dina översatta filer inte går att öppna. Därför ska du trycka <span class="keycap"><strong>CTRL&nbsp;+&nbsp;SHIFT&nbsp;+&nbsp;V</strong></span> innan du skapar dina översatta filer, för att validera att dina taggar är korrekta.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e113"></a>Skapa den översatta filen
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>När du sett till att det inte finns några taggfel i din översättning, tryck <span class="keycap"><strong>CTRL&nbsp;+&nbsp;D</strong></span> för att skapa målfilerna, vilka kommer att skapas i undermappen <code class="filename">/target/</code> i din projektmapp.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e124"></a>Några ytterligare saker att komma ihåg
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Om en fil inte läses in i <span class="guilabel">Redigeringsfönstret</span>, kan det bero på att den är i ett format som inte stöds av OmegaT. Se <a class="link" href="#">Filfilter</a> för en lista med filformat som OmegaT kan hantera.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Du kan skapa ett nytt projekt för varje nytt jobb, och du kan när som helst lägga till ytterligare filer till ett projekt.</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>För att friska upp minnet när det gäller projektets startinställningar, öppna dialogen projektinställningar genom att trycka
+                        <span class="keycap"><strong>CTRL&nbsp;+&nbsp;E</strong></span>. För att se en lista med filerna i projektet, öppna dialogen <span class="guilabel">Projektfiler</span> genom att trycka <span class="keycap"><strong>CTRL&nbsp;+&nbsp;L</strong></span>.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>När du är färdig med översättningen exporterar OmegaT tre översättningsminnen med namnen <code class="filename">level1</code>, <code class="filename">level2</code> och <code class="filename">omegat</code> till din projektmapp. <code class="filename">level1</code>- och <code class="filename">level2</code>-minnena kan delas med användare som använder andra översättningsprogram. Det minne som heter <code class="filename">omegat</code> kan användas av OmegaT självt, i framtida projekt som du skapar. Om du placerar sådana översättningsminnesfiler i undermappen
+                        <code class="filename">/tm/</code> till ett projekt, kommer OmegaT att automatiskt genomsöka dem för liknande segment, så kallade "suddiga matchningar".
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Du kan lägga till en ny term till gloslistan genom att trycka <span class="keycap"><strong>CTRL&nbsp;+&nbsp;SHIFT&nbsp;+&nbsp;G</strong></span>, eller kopiera existerande gloslistor till undermappen <code class="filename">/glossary/</code> i din projektmapp, så kommer OmegaT automatiskt att slå upp ord i dem.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Det är ofta användbart att söka efter ord och fraser i källtexten och i din översättning, så när som helst kan du trycka <span class="keycap"><strong>CTRL&nbsp;+&nbsp;F</strong></span> för att öppna dialogen <span class="guilabel">Textsökning</span>.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>För en mer uttömmande introduktion, se <a class="ulink" href="https://omegat.org/files/OmegaT_for_Beginners.pdf" target="_top">OmegaT för nybörjare</a> på OmegaT webbplats. Om du behöver hjälp med någon aspekt av OmegaT är du välkommen att gå med i <a class="ulink" href="https://omegat.org/support" target="_top">OmegaT:s användargrupp.</a></p>
+                  </li>
+               </ul>
+            </div>
+         </div>
+      </div>
+   </body>
+</html>

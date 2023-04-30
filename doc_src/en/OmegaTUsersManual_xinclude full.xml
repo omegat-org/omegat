@@ -5,7 +5,7 @@
 <book lang="en" id="book.user.manual">
   <bookinfo>
     <title id="book.user.manual.title">OmegaT &vernb; - User Manual</title>
-    <pubdate>@timestamp@</pubdate>
+    <!-- <pubdate>@timestamp@</pubdate> -->
 	<!-- TODO automate date insertion -->
     <abstract>
       <para>This document is the official user manual to OmegaT, the free
@@ -46,25 +46,25 @@
   <xi:include href="Introduction.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
-  <xi:include href="OmegaT5_HowTo.xml"
+  <xi:include href="OmegaT_HowTo.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
-  <xi:include href="OmegaT5_EditorsPanes.xml"
+  <xi:include href="OmegaT_EditorsPanes.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
-  <xi:include href="OmegaT5_Menus.xml"
+  <xi:include href="OmegaT_Menus.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
-  <xi:include href="OmegaT5_WindowsAndDialogs.xml"
+  <xi:include href="OmegaT_WindowsAndDialogs.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
-  <xi:include href="OmegaT5_Preferences.xml"
+  <xi:include href="OmegaT_Preferences.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
-  <xi:include href="OmegaT5_ProjectFolder.xml"
+  <xi:include href="OmegaT_ProjectFolder.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
-  <xi:include href="OmegaT5_Appendices.xml"
+  <xi:include href="OmegaT_Appendices.xml"
 	         xmlns:xi="http://www.w3.org/2001/XInclude"/>
 	           
 </book>

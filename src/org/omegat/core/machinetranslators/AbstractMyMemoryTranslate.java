@@ -9,7 +9,7 @@
                2015 Didier Briel
                2017 Briac Pilpre
                2023 Hiroshi Miura
-               Home page: http://www.omegat.org/
+               Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
  This file is part of OmegaT.
@@ -25,12 +25,13 @@
  GNU General Public License for more details.
 
  You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
 package org.omegat.core.machinetranslators;
 
 import java.awt.Window;
+import java.io.IOException;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -51,9 +52,19 @@ import org.omegat.util.OStrings;
  */
 public abstract class AbstractMyMemoryTranslate extends BaseCachedTranslate {
 
-    private static final String MYMEMORY_API_EMAIL = "mymemory.api.email";
-    private static final String MYMEMORY_API_KEY = "mymemory.api.key";
-    private static final String GT_URL = "https://mymemory.translated.net/api/get";
+    protected static final String MYMEMORY_API_EMAIL = "mymemory.api.email";
+    protected static final String MYMEMORY_API_KEY = "mymemory.api.key";
+    private static final String DEFAULT_GT_URL = "https://mymemory.translated.net/api/get";
+
+    private String gtURL;
+
+    public AbstractMyMemoryTranslate(String url) {
+        gtURL = url;
+    }
+
+    public AbstractMyMemoryTranslate() {
+        gtURL = DEFAULT_GT_URL;
+    }
 
     @Override
     protected abstract String getPreferenceName();
@@ -79,13 +90,13 @@ public abstract class AbstractMyMemoryTranslate extends BaseCachedTranslate {
      * Query MyMemory API and return parsed JsonNode object.
      */
     @SuppressWarnings("unchecked")
-    protected JsonNode getMyMemoryResponse(Language sLang, Language tLang, String text) throws Exception {
+    protected JsonNode getMyMemoryResponse(Language sLang, Language tLang, String text) throws IOException {
 
         String targetLang = tLang.getLocaleLCID();
         String sourceLang = sLang.getLocaleLCID();
 
-        String apiKey = getCredential(MYMEMORY_API_KEY);
-        String email = getCredential(MYMEMORY_API_EMAIL);
+        String apiKey = System.getProperty(MYMEMORY_API_KEY, getCredential(MYMEMORY_API_KEY));
+        String email = System.getProperty(MYMEMORY_API_EMAIL, getCredential(MYMEMORY_API_EMAIL));
 
         Map<String, String> params = new TreeMap<>();
 
@@ -125,7 +136,7 @@ public abstract class AbstractMyMemoryTranslate extends BaseCachedTranslate {
 
         // Get the results from MyMemory
         ObjectMapper mapper = new ObjectMapper();
-        String response = HttpConnectionUtils.get(GT_URL, params, headers);
+        String response = HttpConnectionUtils.get(gtURL, params, headers);
         return mapper.readTree(response);
     }
 

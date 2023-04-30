@@ -10,7 +10,7 @@
    
 <body>
     <div id="wh-header">
-    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 5.8.0 - User Manual</a></div></div>
+    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 6.1.0 - User Manual</a></div></div>
 
     <div id="wh-body">
       <div class="wh-icon-menu" id="wh-menu"></div>
@@ -380,7 +380,8 @@
                      </span>
                   </dt>
                   <dd>
-                     <p>Saves the project translation memory (<a class="link" href="chapter.project.folder.html#project.folder.project.save.tmx">project_save.tmx</a>).</p>
+                     <p>Saves the project translation memory (<a class="link" href="chapter.project.folder.html#project.folder.project.save.tmx">project_save.tmx</a>) and synchronizes team
+        projects.</p>
                      <p>OmegaT automatically saves translations every three minutes as well as
 		when you close the project or quit the program. See the <a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.saving.and.output.interval">
                            <code class="option">Project
@@ -402,11 +403,11 @@
                   <dt id="menus.project.download.mediawiki.page">
                      <span class="term" id="menus.project.download.mediawiki.page.title">
                         <span class="guimenuitem">Add
-      Online MediaWiki Page...</span>
+      MediaWiki Page...</span>
                      </span>
                   </dt>
                   <dd>
-                     <p>Opens a dialog where you can paste the URL of the Mediawiki page
+                     <p>Opens a dialog where you can paste the URL of the MediaWiki page
 		you want to translate. The source data of the page will be copied into
 		the <a class="link" href="chapter.project.folder.html#project.folder.source" title="source">source</a> folder, as a text file with the
 		<code class="filename">.utf8</code> extension.</p>
@@ -471,6 +472,18 @@
                            </a>
 		preference for details.</p>
                      </div>
+                     <p>Every time you create translated files, OmegaT saves the project
+		(see the <a class="link" href="chapter.menus.html#menus.project.save">
+                           <span class="guimenuitem">Save</span>
+	  
+                           <span class="keycap">
+                              <strong>C</strong>
+                           </span>+<span class="keycap">
+                              <strong>S</strong>
+                           </span>
+                        </a> menu item above) and creates
+		reference memories that include the translated segments of the current
+		source file set.</p>
                   </dd>
                   <dt id="menus.project.create.current.translated.document">
                      <span class="term" id="menus.project.create.current.translated.document.title">
@@ -490,9 +503,18 @@
                      <p>Creates the target file corresponding to source file currently
         being translated. The resulting file is located in the <a class="link" href="chapter.project.folder.html#project.folder.target" title="target">target</a>
         folder.</p>
-                     <p>
-		
-                     </p>
+                     <p>Every time you create the current translated file, OmegaT saves
+		the project (see the <a class="link" href="chapter.menus.html#menus.project.save">
+                           <span class="guimenuitem">Save</span>
+	  
+                           <span class="keycap">
+                              <strong>C</strong>
+                           </span>+<span class="keycap">
+                              <strong>S</strong>
+                           </span>
+                        </a> menu item above) and creates
+		reference memories that include the translated segments of the current
+		source file set.</p>
                   </dd>
                   <dt id="menus.project.open.med.project">
                      <span class="term" id="menus.project.open.med.project.title">

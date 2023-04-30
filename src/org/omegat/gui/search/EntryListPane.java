@@ -8,7 +8,7 @@
                2010 Alex Buloichik, Didier Briel
                2014 Piotr Kulik
                2015 Yu Tang
-               Home page: http://www.omegat.org/
+               Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
  This file is part of OmegaT.
@@ -24,12 +24,11 @@
  GNU General Public License for more details.
 
  You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
 package org.omegat.gui.search;
 
-import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
@@ -37,6 +36,7 @@ import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -582,8 +582,8 @@ class EntryListPane extends JTextPane {
                 beginPos = offsetList.get(index - 1) + ENTRY_SEPARATOR.length();
                 int endPos = offsetList.get(index);
                 try {
-                    Rectangle endRect = Java8Compat.modelToView(EntryListPane.this, endPos);
-                    scrollRectToVisible(endRect);
+                    Rectangle2D endRect = EntryListPane.this.modelToView2D(endPos);
+                    scrollRectToVisible(endRect.getBounds());
                 } catch (BadLocationException ex) {
                     // Eat exception silently
                 }

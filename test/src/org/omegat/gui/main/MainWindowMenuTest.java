@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2008 Alex Buloichik
-               Home page: http://www.omegat.org/
+               Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
  This file is part of OmegaT.
@@ -20,7 +20,7 @@
  GNU General Public License for more details.
 
  You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
 package org.omegat.gui.main;
@@ -39,6 +39,7 @@ import javax.swing.JMenuItem;
 
 import org.junit.Test;
 import org.omegat.core.TestCore;
+import org.omegat.util.StaticUtils;
 
 /**
  * @author Alex Buloichik
@@ -68,7 +69,7 @@ public class MainWindowMenuTest extends TestCore {
             }
         }
 
-        for (Field f : MainWindowMenu.class.getDeclaredFields()) {
+        for (Field f : StaticUtils.getAllModelFields(MainWindowMenu.class)) {
             if (JMenuItem.class.isAssignableFrom(f.getType()) && f.getType() != JMenu.class) {
                 count++;
                 String actionMethodName = f.getName() + "ActionPerformed";

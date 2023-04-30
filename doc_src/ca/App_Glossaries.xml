@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="app.glossaries">
+  <title id="app.glossaries.title">Glossaris</title>
+
+  <para>Els glossaris són fitxers de terminologia emmagatzemats en la carpeta <link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/>.</para>
+
+  <para>Tots els termes d'un segment amb una coincidència en <emphasis>qualsevol</emphasis> dels glossaris es mostraran en la subfinestra <link linkend="panes.glossary" endterm="panes.glossary.title"/>.</para>
+
+  <para>Els termes d'origen poden ser expressions de diverses paraules.</para>
+
+  <para>Hi ha dos tipus de fitxers de glossari:</para>
+
+  <variablelist>
+	<varlistentry>
+	  <term>Glossari del projecte</term>
+	  <listitem>
+		<para>Utilitzeu <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.create.glossary.entry" endterm="menus.edit.create.glossary.entry.title"/> per a afegir termes nous a aquest glossari. S'anomena glossari <emphasis>modificable</emphasis> per aquesta raó.</para>
+		
+		<para>Utilitzeu <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.access.project.contents.title" endterm="menus.project.access.project.contents.title"/> per a accedir-hi directament. També podeu obrir-lo en un editor de text i modificar-lo.</para>
+
+		<para>No cal preparar el fitxer per endavant.</para>
+
+		<para>Es crearà la primera vegada que afegiu una entrada al glossari.</para>
+
+		<note>
+          <para>Si trieu utilitzar un fitxer existent com a glossari per defecte, totes les entrades noves es registraran en el format separat per tabulacions i es desaran en UTF-8 per defecte.</para>
+
+		  <para>Si voleu especificar una codificació diferent, podeu afegir un comentari «màgic» com el següent:</para>
+
+		  <simplelist>
+            <member>
+              <code># -*- coding: &lt;joc de caràcters&gt; -*-</code>,</member>
+          </simplelist>
+		  
+          <para>on <parameter>&lt;joc de caràcters&gt;</parameter> és, normalment, un dels jocs de caràcters del <ulink url="http://www.iana.org/assignments/character-sets/character-sets.xhtml">Registre de jocs de caràcters de la IANA</ulink>.</para>
+		</note>
+	  </listitem>
+	</varlistentry>
+	
+	<varlistentry>
+	  <term>Glossaris de referència</term>
+	  <listitem>
+		<para>Són fitxers de terminologia en un format reconegut per l'OmegaT. No es poden modificar des de la interfície de l'OmegaT com el glossari del projecte, però els podeu editar en un editor de text.</para>
+	  </listitem>
+	</varlistentry>
+  </variablelist>
+
+  <note>
+	<para>L'OmegaT reconeix immediatament les modificacions en qualsevol glossari i es mostren en la subfinestra <link linkend="panes.glossary" endterm="panes.glossary.title"/>.</para>
+  </note>
+
+  <section id="glossaries.glossary.folder">
+    <title id="glossaries.glossary.folder.title">Carpeta dels glossaris</title>
+
+    <para>Per defecte, cada projecte conté una carpeta <link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/> per a emmagatzemar el glossari modificable i qualsevol glossari de referència que vulgueu afegir al projecte. Consulteu la propietat del projecte <link linkend="dialogs.project.properties.file.locations.glossaries" endterm="dialogs.project.properties.file.locations.glossaries.title"/> per a conèixer més detalls.</para>
+
+    <para>Tots els glossaris han de ser en la carpeta <link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/>. També es reconeixen glossaris en subcarpetes.</para>
+
+    <para>Dins d'aquesta carpeta de glossaris de referència, es poden crear diverses subcarpetes de terminologia organitzades per tema, per client o per qualsevol altra categoria que s'adapti al vostre flux de treball.</para>
+    <para>Utilitzeu la propietat del projecte <link linkend="dialogs.project.properties.file.locations.glossaries" endterm="dialogs.project.properties.file.locations.glossaries.title"/> per a definir la ubicació de la carpeta de glossaris de referència. Aquesta carpeta pot ser externa al projecte, la qual cosa us permet utilitzar la carpeta o una de les subcarpetes específiques en altres projectes.</para>
+  </section>
+
+  <section id="glossaries.default.glossary">
+    <title id="glossaries.default.glossary.title">Glossari del projecte</title>
+
+    <para>El glossari modificable del projecte es troba per defecte en la carpeta <link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/> i s'anomena <link linkend="project.folder.glossary.txt" endterm="project.folder.glossary.txt.title"/>.</para>
+
+    <para>Podeu canviar-ne el nom i la ubicació en el quadre de diàleg <link linkend="dialogs.project.properties.file.locations.writable.glossary" endterm="dialogs.project.properties.file.locations.writable.glossary.title"/>, però heu de donar-li l'extensió <filename>.txt</filename> o <filename>.utf8</filename>, i emmagatzemar-lo en la carpeta <link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/> o en una de les seves subcarpetes.</para>
+  </section>
+
+  <section id="glossaries.fileformat">
+    <title id="glossaries.fileformat.title">Format dels fitxers</title>
+
+    <para>Els fitxers de glossari de l'OmegaT són fitxers de text sense format que contenen llistes de tres columnes; el terme d'origen en la primera columna, un terme de destinació opcional en la segona columna i un comentari opcional en la tercera columna.</para>
+
+    <para>Glossaries can be “tab-separated values” (TSV) or “comma-separated
+    values” (CSV) files or can also use the TermBase eXchange (TBX 2)
+    format.</para>
+
+    <para>El glossari modificable creat per al projecte per l'OmegaT serà un fitxer TSV desat en UTF-8. Els fitxers creats per l'usuari que només utilitzen caràcters llatins es poden reconèixer i tractar com a ISO-8859-1 si no contenen caràcters no ASCII ni altres caràcters interpretats com a UTF-8.</para>
+
+    <para>La codificació utilitzada per a llegir els glossaris de referència depèn de l'extensió del fitxer:</para>
+
+    <table id="glossary.extensions">
+      <title>Format, extensions i codificació esperada</title>
+	  <tgroup cols="3">
+      <thead>
+        <row>
+          <entry>Format</entry>
+
+          <entry>Extensió</entry>
+
+          <entry>Codificació</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>TSV</entry>
+
+          <entry>
+            <filename>.txt</filename>
+          </entry>
+
+          <entry>UTF-8</entry>
+        </row>
+
+        <row>
+          <entry>TSV</entry>
+
+          <entry>
+            <filename>.utf8</filename>
+          </entry>
+
+          <entry>UTF-8</entry>
+        </row>
+
+        <row>
+          <entry>TSV</entry>
+
+          <entry>
+            <filename>.tab</filename>
+          </entry>
+
+          <entry>Codificació per defecte de l'SO</entry>
+        </row>
+
+        <row>
+          <entry>TSV</entry>
+
+          <entry>
+            <filename>.tsv</filename>
+          </entry>
+
+          <entry>Codificació per defecte de l'SO</entry>
+        </row>
+
+        <row>
+          <entry>CSV</entry>
+
+          <entry>
+            <filename>.csv</filename>
+          </entry>
+
+          <entry>UTF-8</entry>
+        </row>
+
+        <row>
+          <entry>TBX</entry>
+
+          <entry>
+            <filename>.tbx</filename>
+          </entry>
+
+          <entry>UTF-8</entry>
+        </row>
+      </tbody>
+      </tgroup>
+    </table>
+  </section>
+</section>

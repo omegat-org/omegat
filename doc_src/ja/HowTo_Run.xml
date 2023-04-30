@@ -91,7 +91,7 @@
 
 	<para>方法はシステムによって異なりますが、一般的に、OmegaTをインストールすると、コマンドラインから直接起動できます。詳細は<link endterm="launch.with.command.line.title" linkend="launch.with.command.line"/>項をご覧ください。</para>
 
-	<para>必要なコマンドライン起動パラメータを含むスクリプトを作成できます。<filename>.jar</filename>ファイルがJava 8 Runtime Environmentに正しく関連付けられ、PATH設定が正しい場合は、<filename>OmegaT.jar</filename>をクリック(またはダブルクリック)して直接起動することもできます。</para>
+	<para>必要なコマンドライン起動パラメータを含むスクリプトを作成できます。<filename>.jar</filename>ファイルがJava 11 Runtime Environmentに正しく関連付けられ、PATH設定が正しい場合は、<filename>OmegaT.jar</filename>をクリック(またはダブルクリック)して直接起動することもできます。</para>
 
 	<para>詳細については、システムのマニュアル文書を参照してください。</para>
   </section>

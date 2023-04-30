@@ -76,3 +76,18 @@ mALIGNa is distributed under the MIT License (required for Aligner
 tool).
 
 DeNormalize.java is licensed under the DeNormalize license.
+
+TipOfTheDay library is distributed under the GNU Lesser General Public
+License 2.1 or later.
+
+SwingBox, cssbox4, and jstyleparser are distributed under the GNU
+Lesser General Public License 3.0 or later.
+
+JSoup is distributed under the MIT License.
+
+Nashorn javascript engine is distributed under the GNU General Public
+License version 2.0 only with classpath link exception.
+
+newUI.burgerMenu image is distributed under CC-BY-SA 3.0 Unported
+Copyright 2015 Timothy Miller
+(https://www.iconfinder.com/icons/134216/hamburger_lines_menu_icon)

@@ -6,7 +6,7 @@
  Copyright (C) 2010-2015 Alex Buloichik
                2013 Didier Briel
                2022,2023 Hiroshi Miura
-               Home page: http://www.omegat.org/
+               Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
  This file is part of OmegaT.
@@ -22,7 +22,7 @@
  GNU General Public License for more details.
 
  You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
 package org.omegat.core.machinetranslators;
@@ -115,7 +115,8 @@ public abstract class BaseCachedTranslate extends BaseTranslate implements IMach
     @Override
     public final String getTranslation(Language sLang, Language tLang, String text) throws Exception {
         if (enabled) {
-            return translate(sLang, tLang, text);
+            String trText = getTruncateText(text);
+            return putCache(sLang, tLang, trText, translate(sLang, tLang, trText));
         } else {
             return null;
         }
@@ -127,7 +128,7 @@ public abstract class BaseCachedTranslate extends BaseTranslate implements IMach
     @Override
     public final String getCachedTranslation(Language sLang, Language tLang, String text) {
         if (enabled) {
-            return getCache(sLang, tLang, text);
+            return getCache(sLang, tLang, getTruncateText(text));
         } else {
             return null;
         }
@@ -136,7 +137,6 @@ public abstract class BaseCachedTranslate extends BaseTranslate implements IMach
     protected abstract String getPreferenceName();
 
     protected abstract String translate(Language sLang, Language tLang, String text) throws Exception;
-
 
     private String getCache(Language sLang, Language tLang, String text) {
         return cache.get(sLang + "/" + tLang + "/" + text);
@@ -153,7 +153,7 @@ public abstract class BaseCachedTranslate extends BaseTranslate implements IMach
      * {@inheritDoc}
      */
     @Override
-    // @Deprecated(since="6.1")
+    @Deprecated
     protected String getFromCache(Language sLang, Language tLang, String text) {
         return getCache(sLang, tLang, text);
     }
@@ -162,7 +162,7 @@ public abstract class BaseCachedTranslate extends BaseTranslate implements IMach
      * {@inheritDoc}
      */
     @Override
-    // @Deprecated(since="6.1")
+    @Deprecated
     protected String putToCache(Language sLang, Language tLang, String text, String result) {
         return putCache(sLang, tLang, text, result);
     }

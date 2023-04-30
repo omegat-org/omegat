@@ -1,191 +1,345 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="menus.edit">
-  <title>Bearbeiten</title>
+  <title id="menus.edit.title"><guimenu>Bearbeiten</guimenu></title>
 
-  <para>Dieses Menü zeigt nur Menüpunkte an, wenn ein Projekt geöffnet ist.</para>
+  <para>Über dieses Menü haben Sie Zugriff auf die Befehle zum Bearbeiten von Segmenten.</para>
+
+  <example id="example.undo.last.action">
+	<title id="example.undo.last.action.title">Tastenkürzelbeschreibungsbeispiel</title>
+	<para>In Windows und Linux: <keycombo><keycap>Strg</keycap><keycap>Z</keycap></keycombo></para>
+
+	<para>In macOS: <keycombo><keycap>Command</keycap><keycap>Z</keycap></keycombo></para>
+
+	<para><emphasis role="bold">In dieser Bedienungsanleitung:</emphasis> <keycombo><keycap>C</keycap><keycap>Z</keycap></keycombo></para>
+  </example>
 
   <variablelist>
-    <varlistentry>
-      <term><guimenuitem>Letzte Aktion rückgängig machen</guimenuitem></term>
-
+    <varlistentry id="menus.edit.undo.last.action">
+      <term id="menus.edit.undo.last.action.title"><guimenuitem>Letzte Aktion rückgängig machen</guimenuitem> <keycombo><keycap>C</keycap><keycap>Z</keycap></keycombo></term>
       <listitem>
-        <para>Stellt den Zustand wieder her, wie er vor der letzten Bearbeitungsaktion war. Dieser Befehl funktioniert nicht mehr, sobald das geänderte Segment validiert wurde.</para>
+        <para>Macht die Änderungen rückgängig, die am aktiven Segment vorgenommen wurden. Beim Verlassen des Segments geht der Änderungsverlauf verloren.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Letzte Aktion wiederholen</term>
-
+    <varlistentry id="menus.edit.redo.last.action">
+      <term id="menus.edit.redo.last.action.title"><guimenuitem>Letzte Aktion wiederholen</guimenuitem> <keycombo><keycap>C</keycap><keycap>Y</keycap></keycombo>
+	  </term>
       <listitem>
-        <para>Stellt den Zustand wieder her, wie er vor dem Rückgängigmachen der letzten Bearbeitungsaktion war. Dieser Befehl funktioniert nicht mehr, sobald das geänderte Segment validiert wurde.</para>
+        <para>Wendet die Änderungen erneut an, die beim aktiven Segment rückgängig gemacht wurden. Beim Verlassen des Segments geht der Änderungsverlauf verloren.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Mit Match oder Auswahl ersetzen</term>
-
+    <varlistentry id="menus.edit.replace.with.match.or.selection">
+      <term id="menus.edit.replace.with.match.or.selection.title"><guimenuitem>Mit Match oder Auswahl ersetzen</guimenuitem> <keycombo><keycap>C</keycap><keycap>R</keycap></keycombo>
+	  </term>
       <listitem>
-        <para>Ersetzt den gesamten Zieltext mit dem aktuell ausgewählten Fuzzy Match (standardmäßig ist der erste Match ausgewählt).</para>
+        <para>Ersetzt den Zieltext mit dem aktuell ausgewählten Fuzzy Match (standardmäßig der erste Match) oder mit dem markierten Text im <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/>-Bereich.</para>
 
-        <para>Wenn ein Teil des Textes innerhalb des Fuzzy Matches markiert ist, wird nur diese Auswahl den gesamten Zieltext ersetzen.</para>
+        <para>Der markierte Text hat Vorrang vor dem ausgewählten Match.</para>
+
+		<para>Siehe den <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/>-Bereich für weitere Informationen.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Match oder Auswahl einfügen</term>
-
+    <varlistentry id="menus.edit.insert.match.or.selection">
+      <term id="menus.edit.insert.match.or.selection.title"><guimenuitem>Match oder Auswahl einfügen</guimenuitem> <keycombo><keycap>C</keycap><keycap>I</keycap></keycombo></term>
       <listitem>
-        <para>Fügt den aktuell ausgewählten Fuzzy Match an der Position des Textcursors ein. Wenn ein Teil des Zieltextes markiert wurde, wird nur der markierte Teil überschrieben.</para>
+        <para>Fügt den aktuell ausgewählten Fuzzy Match oder den im <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/>-Bereich markierten Text an der Position des Textcursors ein. Wenn ein Teil des Zieltextes markiert wurde, wird nur dieser Teil überschrieben.</para>
 
-        <para>Wenn ein Teil des Textes innerhalb des Fuzzy Matches markiert ist, wird nur diese Auswahl an der Position des Textcursors eingefügt.</para>
+        <para>Der markierte Text hat Vorrang vor dem ausgewählten Match.</para>
+
+		<para>Siehe den <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/>-Bereich für weitere Informationen.</para>
+	  </listitem>
+    </varlistentry>
+
+    <varlistentry id="menus.edit.replace.with.source">
+      <term id="menus.edit.replace.with.source.title"><guimenuitem>Mit Quelle ersetzen</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>R</keycap></keycombo>
+	  </term>
+      <listitem>
+        <para>Ersetzt den gesamten Zieltext mit dem Quelltext innerhalb des aktiven Segments.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Mit maschineller Übersetzung ersetzen</term>
-
+    <varlistentry id="menus.edit.insert.source">
+      <term id="menus.edit.insert.source.title"><guimenuitem>Quelle einfügen</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>I</keycap></keycombo>
+	  </term>
       <listitem>
-        <para>Ersetzt den Zieltext mit der Übersetzung, die vom ausgewählten maschinellen Übersetzungsdienst bereitgestellt wird. Es wird keine Aktion durchgeführt, wenn kein maschineller Übersetzungsdienst aktiviert wurde (unter <menuchoice> <guimenu>Optionen</guimenu> <guimenuitem>Maschinelle Übersetzung</guimenuitem> </menuchoice>).</para>
+        <para>Fügt den Quelltext des aktiven Segments an der Position des Textcursors ein. Wenn ein Teil des Zieltextes markiert wurde, wird nur dieser Teil überschrieben.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Mit Quelle ersetzen</term>
-
+    <varlistentry id="menus.edit.select.source.text">
+      <term id="menus.edit.select.source.text.title"><guimenuitem>Quelltext markieren</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>A</keycap></keycombo>
+	  </term>
       <listitem>
-        <para>Ersetzt den gesamten Zieltext mit dem Quelltext.</para>
+        <para>Markiert den Quelltext.</para>
+
+		<para>Die Auswahl kann direkt in OmegaT für <link linkend="windows.text.search">interne Suchvorgänge</link>, <link linkend="windows.text.replace">Ersetzungen</link>, <link linkend="menus.edit.create.glossary.entry">Eintragen von Glossarbegriffen</link>, <link linkend="dialogs.preferences.external.searches">externe Suchvorgänge</link> usw. verwendet werden. Einmal in die Zwischenablage des Betriebssystems kopiert, kann es auch für die Websuche und andere Zwecke verwendet werden.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Quelle einfügen</term>
-
+    <varlistentry id="menus.edit.replace.with.mt">
+      <term id="menus.edit.replace.with.mt.title"><guimenuitem>Mit maschineller Übersetzung ersetzen</guimenuitem> <keycombo><keycap>C</keycap><keycap>M</keycap></keycombo>
+	  </term>
       <listitem>
-        <para>Fügt den Quelltext an der Position des Textcursors ein.</para>
+        <para>Ersetzt den Zieltext mit der Übersetzung, die vom ausgewählten maschinellen Übersetzungsdienst bereitgestellt wird.</para>
+		<para>Wenn die <link linkend="dialogs.preferences.mt.automatically.fetch.translations" endterm="dialogs.preferences.mt.automatically.fetch.translations.title"/>-Einstellung deaktiviert ist, verwenden Sie diese Aktion das erste Mal, um die Übersetzung zu holen, und ein zweites Mal, um sie einzufügen.</para>
+		
+		<para>Es wird keine Aktion durchgeführt, wenn kein maschineller Übersetzungsdienst im <link linkend="menus.options" endterm="menus.options.title"/><link linkend="menus.options.mt" endterm="menus.options.mt.title"/>-Menü aktiviert wurde. Siehe die <link linkend="dialogs.preferences.mt" endterm="dialogs.preferences.mt.title"/>-Einstellungen für weitere Informationen.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Fehlende Tags aus Quelle einfügen</term>
-
+    <varlistentry id="menus.edit.insert.missing.source.tag">
+      <term id="menus.edit.insert.missing.source.tag.title"><guimenuitem>Fehlende Tags aus Quelle einfügen</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>T</keycap></keycombo>
+	  </term>
       <listitem>
-        <para>Fügt fehlende Tags aus dem Quelltext an der Position des Textcursors ein.</para>
+        <para>Fügt die restlichen fehlenden Tags aus dem Quelltext an der Position des Textcursors ein.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Nächstes fehlendes Tag einfügen</term>
-
+    <varlistentry id="menus.edit.insert.next.missing.tag">
+      <term id="menus.edit.insert.next.missing.tag.title"><guimenuitem>Nächstes fehlendes Tag einfügen</guimenuitem> <keycombo><keycap>C</keycap><keycap>T</keycap></keycombo>
+	  </term>
       <listitem>
-        <para>Fügt nur eines der fehlenden Tags an der Position des Textcursors ein.</para>
+        <para>Fügt das nächste fehlende Tag an der Position des Textcursors ein.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Auswahl exportieren</term>
-
+    <varlistentry id="menus.edit.export.selection">
+      <term id="menus.edit.export.selection.title"><guimenuitem>Auswahl exportieren</guimenuitem> <keycombo><keycap>C</keycap><keycap>C</keycap><keycap>S</keycap></keycombo>
+	  </term>
       <listitem>
-        <para>Exportiert die aktuelle Auswahl in eine Textdatei, damit sie extern verarbeitet werden kann. Wenn kein Text markiert wurde, wird der aktuelle Quelltext in diese Datei geschrieben. Wenn der Benutzer <application>OmegaT</application> beendet, wird diese Datei nicht geleert, was dem üblichen Verhalten einer Zwischenablage entspricht. Die exportierten Inhalte werden in die Datei <filename>selection.txt</filename> kopiert, die sich im Benutzerordner von OmegaT befindet.</para>
+        <para>Exportiert die aktuelle Auswahl in eine Textdatei, damit sie extern verarbeitet werden kann. Wenn kein Text markiert wurde, wird der aktuelle Quelltext in diese Datei geschrieben. Um mit dem üblichen Verhalten einer Zwischenablage konsistent zu bleiben, wird diese Datei nicht geleert, wenn der Nutzer OmegaT beendet. Die exportierten Inhalte werden in die <link linkend="configuration.folder.default.contents.script.selection.title" endterm="configuration.folder.default.contents.script.selection.title"/>-Datei im <link linkend="configuration.folder">Konfigurationsordner</link> kopiert.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Glossareintrag erstellen</term>
-
+    <varlistentry id="menus.edit.create.glossary.entry">
+      <term id="menus.edit.create.glossary.entry.title"><guimenuitem>Glossareintrag erstellen...</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>G</keycap></keycombo>
+	  </term>
       <listitem>
-        <para>Ermöglicht dem Benutzer, einen Eintrag in der beschreibbaren Glossardatei zu erstellen.</para>
+        <para>Ermöglicht dem Benutzer, einen Eintrag im beschreibbaren Projektglossar (die <link linkend="project.folder.glossary.txt" endterm="project.folder.glossary.txt.title"/>-Datei) zu erstellen.</para>
 
-        <para>Wenn Sie einen Text (in einem beliebigen Fensterbereich) markieren, bevor Sie <keycombo> <keycap>Strg</keycap> <keycap>Umschalt</keycap> <keycap>G</keycap> </keycombo> drücken, wird der Text standardmäßig in das Feld <guilabel>Quellbegriff</guilabel> eingefügt.</para>
+		<para>Es gibt zwei Möglichkeiten, diese Funktion zu nutzen.</para>
 
-        <para>Dies gilt auch für die Felder <guimenuitem>Zielbegriff</guimenuitem> und <guimenuitem>Kommentar</guimenuitem>, wenn ein neuer Text markiert und erneut <keycombo> <keycap>Strg</keycap> <keycap>Umschalt</keycap> <keycap>G</keycap> </keycombo> gedrückt wird.</para>
+		<itemizedlist>
+		  <listitem>
+			<para>Die erste Möglichkeit ist, das Dialogfenster aufzurufen und dann die verschiedenen Felder manuell auszufüllen.</para>
+		  </listitem>
+
+		  <listitem>
+			<para>Die zweite Möglichkeit ist, Texte in einem der OmegaT-Bereiche zu markieren und das Dialogfenster nach jeder Markierung aufzurufen, damit OmegaT sie automatisch in die verschiedenen Felder einträgt:</para>
+			
+			<orderedlist>
+			  <listitem>
+				<para>Markieren Sie einen Text in einem beliebigen Fensterbereich</para>
+			  </listitem>
+
+			  <listitem>
+				<para>Drücken Sie <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>G</keycap></keycombo></para>
+				
+				<para>Der markierte Text wird in das <guilabel>Quellbegriff</guilabel>-Feld eingetragen.</para>
+			  </listitem>
+
+			  <listitem>
+				<para>Markieren Sie einen Text in einem beliebigen Fensterbereich</para>
+			  </listitem>
+
+			  <listitem>
+				<para>Drücken Sie <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>G</keycap></keycombo></para>
+
+				<para>Der markierte Text wird in das <guilabel>Zielbegriff</guilabel>-Feld eingetragen.</para>
+			  </listitem>
+
+			  <listitem>
+				<para>[Optional] Markieren Sie einen Text in einem beliebigen Fensterbereich</para>
+			  </listitem>
+
+			  <listitem>
+				<para>[Optional] Drücken Sie <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>G</keycap></keycombo></para>
+
+				<para>Der markierte Text wird in das <guilabel>Kommentar</guilabel>-Feld eingetragen.</para>
+			  </listitem>
+
+			  <listitem>
+				<para>Drücken Sie <keycap>Enter</keycap> oder klicken Sie auf <guibutton>OK</guibutton></para>
+			  </listitem>
+			</orderedlist>
+		  </listitem>
+		</itemizedlist>
+	  </listitem>
+    </varlistentry>
+
+    <varlistentry id="menus.edit.search.project">
+      <term id="menus.edit.search.project.title"><guimenuitem>Suchen...</guimenuitem> <keycombo><keycap>C</keycap><keycap>F</keycap></keycombo>
+	  </term>
+      <listitem>
+        <para>Öffnet ein neues <link linkend="windows.text.search" endterm="windows.text.search.title"/>-Fenster.</para>
+
+        <para>Wenn Sie einen Text (in einem beliebigen Fensterbereich) markieren, bevor Sie die Funktion aufrufen, wird der Text standardmäßig in das Feld <guilabel>Suche nach:</guilabel> eingefügt.</para>
+
+		<para>Die Tastenkombination <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>F</keycap></keycombo> verwendet das zuletzt geöffnete Suchfenster wieder, anstatt ein neues zu öffnen.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Projekt durchsuchen...</term>
-
+    <varlistentry id="menus.edit.search.and.replace">
+      <term id="menus.edit.search.and.replace.title"><guimenuitem>Ersetzen...</guimenuitem> <keycombo><keycap>C</keycap><keycap>K</keycap></keycombo>
+	  </term>
       <listitem>
-        <para>Öffnet ein neues <link linkend="windows.textsearch">Suchfenster</link>.</para>
+        <para>Öffnet ein neues <link linkend="windows.text.replace" endterm="windows.text.replace.title"/>-Fenster.</para>
 
-        <para>Wenn Sie einen Text (in einem beliebigen Fensterbereich) markieren, bevor Sie <keycombo> <keycap>Strg</keycap> <keycap>F</keycap> </keycombo> drücken, wird der Text standardmäßig in das Feld <guilabel>Suche nach</guilabel> eingefügt.</para>
-
-        <para>Wenn Sie <keycombo> <keycap>Strg</keycap> <keycap>Umschalt</keycap> <keycap>F</keycap> </keycombo> drücken, wird das bereits geöffnete Suchfenster wieder in den Vordergrund gerückt (statt ein neues Fenster zu öffnen).</para>
+        <para>Wenn Sie einen Text (in einem beliebigen Fensterbereich) markieren, bevor Sie die Funktion aufrufen, wird der Text standardmäßig in das Feld <guilabel>Suche nach:</guilabel> eingefügt.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Suchen und Ersetzen...</term>
-
+    <varlistentry id="menus.edit.search.dictionaries">
+      <term id="menus.edit.search.dictionaries.title"><guimenuitem>Wörterbücher durchsuchen</guimenuitem> <keycombo><keycap>A</keycap><keycap>S</keycap><keycap>D</keycap></keycombo>
+	  </term>
       <listitem>
-        <para>Öffnet ein neues <link linkend="windows.textreplace">Suchen-und-Ersetzen-Fenster</link>.</para>
-
-        <para>Wenn Sie einen Text (in einem beliebigen Fensterbereich) markieren, bevor Sie <keycombo> <keycap>Strg</keycap> <keycap>K</keycap> </keycombo> drücken, wird der Text standardmäßig in das Feld <guilabel>Suche nach</guilabel> eingefügt.</para>
+        <para>Wenn die <link linkend="dialogs.preferences.dictionary.automatically.search.segment" endterm="dialogs.preferences.dictionary.automatically.search.segment.title"/>-Einstellung deaktiviert ist, können Sie mit diesem Befehl nach dem markierten Wort oder nach allen Segmentbegriffen in den Wörterbüchern suchen.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Wörterbücher durchsuchen</term>
-
+    <varlistentry id="menus.edit.switch.case">
+      <term id="menus.edit.switch.case.title"><guisubmenu>Groß-/Kleinschreibung ändern</guisubmenu></term>
       <listitem>
-        <para>Wenn die <link linkend="dialogs.preferences.dictionary">automatische Suche in Wörterbüchern</link> deaktiviert ist, können Sie mit diesem Befehl das markierte Wort in den Wörterbüchern suchen.</para>
-      </listitem>
-    </varlistentry>
+        <para>Ändert die Groß-/Kleinschreibung des markierten Textes im Zieltext auf die ausgewählte Option, oder schaltet durch die Optionen. Wenn kein Text markiert ist, wird OmegaT die Groß-/Kleinschreibung des Wortes ändern, das mit dem Zeichen unmittelbar rechts vom Textcursor beginnt.</para>
 
-    <varlistentry>
-      <term>Groß-/Kleinschreibung ändern</term>
+		<itemizedlist>
+		  <listitem>
+			<para><guimenuitem>Kleinschreibung</guimenuitem></para>
 
+			<para>Alle Buchstaben klein</para>
+		  </listitem>
+
+		  <listitem>
+			<para><guimenuitem>Großschreibung</guimenuitem></para>
+
+			<para>Alle Buchstaben groß</para>
+		  </listitem>
+
+		  <listitem>
+			<para><guimenuitem>Titelschreibung</guimenuitem></para>
+
+			<para>Alle Wörter beginnen mit einem Großbuchstaben</para>
+		  </listitem>
+
+		  <listitem>
+			<para><guimenuitem>Satzschreibung</guimenuitem></para>
+			<para>Erster Buchstabe eines Satzes groß, alle anderen Buchstaben des Satzes klein.</para>
+		  </listitem>
+
+		  <listitem>
+			<para><guimenuitem>Durchschalten</guimenuitem> <keycombo><keycap>S</keycap><keycap>F3</keycap></keycombo></para>
+			<warning>
+			  <para>In macOS aktiviert die <keycombo><keycap>F3</keycap></keycombo>-Taste den <emphasis role="bold">Überschreibmodus</emphasis> im Editor. Einzelheiten finden Sie unter <link linkend="panes.editor.overwriting" endterm="panes.editor.overwriting.title"/>.</para>
+			</warning>
+		  </listitem>
+		</itemizedlist>
+	  </listitem>
+	</varlistentry>
+
+	<varlistentry id="menus.edit.select.match">
+      <term id="menus.edit.select.match.title"><guisubmenu>Match auswählen</guisubmenu></term>
       <listitem>
-        <para>Ändert die Groß-/Kleinschreibung des markierten Textes im Zieltext auf die ausgewählte Option (Kleinschreibung, Großschreibung, Titelschreibung oder Satzschreibung). Anmerkung des Übersetzers: Kleinschreibung = alle Buchstaben klein, Großschreibung = alle Buchstaben groß, Titelschreibung = alle Wörter beginnen mit einem Großbuchstaben, Satzschreibung = erster Buchstabe eines Satzes groß, alle anderen Buchstaben des Satzes klein. Benutzen Sie <keycombo> <keycap>Umschalt</keycap> <keycap>F3</keycap> </keycombo>, um zwischen den vier Alternativen durchzuschalten. Wenn kein Text markiert ist, wird <application>OmegaT</application> die Groß-/Kleinschreibung des Wortes ändern, das den Buchstaben rechts neben dem Textcursor enthält.</para>
+		<para>Wählt den vorherigen, den nächsten oder den <varname>n</varname>-ten gefundenen Match im Fuzzy-Matches-Bereich aus, um ihn in das Segment einzufügen oder um das Segment zu ersetzen.</para>
+		
+		<itemizedlist>
+		  <listitem>
+			<para><guimenuitem>Vorherigen Match auswählen</guimenuitem> <keycombo><keycap>A</keycap><keycap>↑</keycap></keycombo></para>
+		  </listitem>
+
+		  <listitem>
+			<para><guimenuitem>Nächsten Match auswählen</guimenuitem> <keycombo><keycap>A</keycap><keycap>↓</keycap></keycombo></para>
+		  </listitem>
+
+		  <listitem>
+			<para><guimenuitem>Match #1 auswählen</guimenuitem> <keycombo><keycap>C</keycap><keycap>1</keycap></keycombo></para>
+		  </listitem>
+		  
+		  <listitem>
+			<para><guimenuitem>Match #2 auswählen</guimenuitem> <keycombo><keycap>C</keycap><keycap>2</keycap></keycombo></para>
+		  </listitem>
+		  <listitem>
+			<para><guimenuitem>Match #3 auswählen</guimenuitem> <keycombo><keycap>C</keycap><keycap>3</keycap></keycombo></para>
+		  </listitem>
+
+		  <listitem>
+			<para><guimenuitem>Match #4 auswählen</guimenuitem> <keycombo><keycap>C</keycap><keycap>4</keycap></keycombo></para>
+		  </listitem>
+
+		  <listitem>
+			<para><guimenuitem>Match #5 auswählen</guimenuitem> <keycombo><keycap>C</keycap><keycap>5</keycap></keycombo></para>
+		  </listitem>
+		</itemizedlist>
       </listitem>
-    </varlistentry>
+	</varlistentry>
 
-    <varlistentry>
-      <term>Match auswählen</term>
+	<varlistentry id="menus.edit.insert.unicode.control.character">
+      <term id="menus.edit.insert.unicode.control.character.title"><guisubmenu>BiDi-Steuerzeichen einfügen</guisubmenu></term>
+	  <listitem>
+		<para>Fügt das ausgewählte bidirektionale Unicode-Formatierungszeichen ein. Einzelheiten finden Sie unter <ulink url="https://www.unicode.org/reports/tr9/#Directional_Formatting_Characters">Unicode Bidirectional Algorithm</ulink>.</para>
 
+		<itemizedlist>
+		  <listitem>
+			<para><guimenuitem>Links-nach-Rechts-Markierung (LRM U+200E)</guimenuitem></para>
+		  </listitem>
+		
+		  <listitem>
+			<para><guimenuitem>Rechts-nach-Links-Markierung (RLM U+200F)</guimenuitem></para>
+		  </listitem>
+		  
+		  <listitem>
+			<para><guimenuitem>Links-nach-Rechts-Einbettung (LRE U+202A)</guimenuitem></para>
+		  </listitem>
+		  
+		  <listitem>
+			<para><guimenuitem>Rechts-nach-Links-Einbettung (RLE U+202B)</guimenuitem></para>
+		  </listitem>
+		  
+		  <listitem>
+			<para><guimenuitem>Einbettung beenden (PDF U+202C)</guimenuitem></para>
+		  </listitem>
+		</itemizedlist>
+		<para>Verwenden Sie <link linkend="menus.view" endterm="menus.view.title"/><link linkend="menus.view.mark.bidirectional.algorithm.control.character" endterm="menus.view.mark.bidirectional.algorithm.control.character.title"/>, um die Zeichen leichter manipulieren zu können. Einzelheiten finden Sie unter <link linkend="app.bidi" endterm="app.bidi.title"/>.</para>
+
+      </listitem>
+	</varlistentry>
+
+	<varlistentry id="menus.edit.use.as.default.translation">
+      <term id="menus.edit.use.as.default.translation.title"><guimenuitem>Als Standardübersetzung verwenden</guimenuitem></term>
       <listitem>
-        <para>Wählt den vorherigen, den nächsten oder den n-ten gefundenen Match im Fuzzy-Matches-Bereich aus, um ihn in das Segment einzufügen oder um das Segment zu ersetzen.</para>
+		<para>Wenn mehrere alternative Übersetzungen für das aktive Segment verfügbar sind, können Sie die ausgewählte Alternative als Standardübersetzung kennzeichnen. Der Menüpunkt ist ausgegraut, wenn nur eine Übersetzung vorhanden ist.</para>
       </listitem>
-    </varlistentry>
+	</varlistentry>
 
-    <varlistentry>
-      <term>Als Standardübersetzung verwenden</term>
-
+	<varlistentry id="menus.edit.create.alternative.translation">
+      <term id="menus.edit.create.alternative.translation.title"><guimenuitem>Alternative Übersetzung erstellen</guimenuitem></term>
       <listitem>
-        <para>Wenn mehrere alternative Übersetzungen für das aktive Segment verfügbar sind, können Sie die ausgewählte Alternative als Standardübersetzung kennzeichnen. Der Menüpunkt ist ausgegraut, wenn nur eine Übersetzung vorhanden ist.</para>
+		<para>Segmente, die ein und dasselbe Segment sind, können je nach Kontext verschiedene Übersetzungen erfordern. Wenn die derzeitige Übersetzung nicht zutrifft, wählen Sie diesen Menüpunkt aus und geben Sie die alternative Übersetzung ein.</para>
       </listitem>
-    </varlistentry>
+	</varlistentry>
 
-    <varlistentry>
-      <term>Alternative Übersetzung erstellen</term>
-
+	<varlistentry id="menus.edit.remove.translation">
+      <term id="menus.edit.remove.translation.title"><guimenuitem>Übersetzung entfernen</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>X</keycap></keycombo></term>
       <listitem>
-        <para>Das ein und dasselbe Segment kann, je nach Kontext, verschiedene Übersetzungen erfordern. Wählen Sie diesen Menüpunkt aus, falls die derzeitige Übersetzung nicht zutrifft, und geben Sie die alternative Übersetzung ein.</para>
+		<para>Löscht die aktuelle Übersetzung und kennzeichnet das Segment als unübersetzt.</para>
       </listitem>
-    </varlistentry>
+	</varlistentry>
 
-    <varlistentry>
-      <term>Übersetzung entfernen</term>
-
+	<varlistentry id="menus.edit.set.empty.translation">
+      <term id="menus.edit.set.empty.translation.title"><guimenuitem>Leere Übersetzung setzen</guimenuitem></term>
       <listitem>
-        <para>Löscht die Übersetzung und kennzeichnet das Segment als unübersetzt.</para>
+		<para>Definiert die Übersetzung als leer. Das Zieldokument enthält nichts für dieses Segment, während der Editor es mit dem Identifikator <literal>&lt;LEER&gt;</literal> kennzeichnet.</para>
       </listitem>
-    </varlistentry>
+	</varlistentry>
 
-    <varlistentry>
-      <term>Leere Übersetzung setzen</term>
-
+	<varlistentry id="menus.edit.register.identical.translation">
+      <term id="menus.edit.register.identical.translation.title"><guimenuitem>Als identische Übersetzung kennzeichnen</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>S</keycap></keycombo>
+	  </term>
       <listitem>
-        <para>Definiert die Übersetzung als leer. Für dieses Segment wird im Zieldokument nichts angezeigt. Im Editor wird die Übersetzung als &lt;LEER&gt; angezeigt.</para>
+		<para>Verwenden Sie diesen Befehl, um eine Übersetzung mit dem Kennzeichen zu versehen, dass sie identisch mit der Quelle ist, sogar wenn die <link linkend="dialogs.preferences.editor.allow.translation.to.be.equal.to.source" endterm="dialogs.preferences.editor.allow.translation.to.be.equal.to.source.title"/>-Einstellung deaktiviert ist.</para>
       </listitem>
-    </varlistentry>
-
-    <varlistentry>
-      <term>Als identische Übersetzung kennzeichnen</term>
-
-      <listitem>
-        <para>Verwenden Sie diesen Befehl, um die Übersetzung mit dem Kennzeichen zu versehen, dass sie identisch mit der Quelle ist, sogar wenn die Option <link linkend="dialogs.preferences.editor.allowtranslationtobeequaltosource"><guilabel>Übersetzung und Quelle dürfen identisch sein</guilabel></link> deaktiviert ist.</para>
-      </listitem>
-    </varlistentry>
+	</varlistentry>
   </variablelist>
 </section>

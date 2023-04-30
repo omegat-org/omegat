@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
-               Home page: http://www.omegat.org/
+               Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
  This file is part of OmegaT.
@@ -20,7 +20,7 @@
  GNU General Public License for more details.
 
  You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
 package org.omegat.core.segmentation;
@@ -31,6 +31,8 @@ import java.util.List;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
+import gen.core.segmentation.Languagemap;
+import org.omegat.util.Log;
 import org.omegat.util.StringUtil;
 
 /**
@@ -57,19 +59,34 @@ public class MapRule implements Serializable {
     /** Language Name */
     private String languageCode;
 
+    public MapRule(Languagemap languagemap, List<Rule> rules) {
+        this.setLanguage(languagemap.getLanguagerulename());
+        this.setPattern(languagemap.getLanguagepattern());
+        this.setRules(rules);
+    }
+
     /** Returns Language Name (to display it in a dialog). */
-    public String getLanguage() {
+    public String getLanguageName() {
         String res = LanguageCodes.getLanguageName(languageCode);
         return StringUtil.isEmpty(res) ? languageCode : res;
     }
 
-    /** Sets Language Name */
-    public void setLanguage(String language) {
-        this.languageCode = language;
+    /** Sets Language Code */
+    public void setLanguage(String code) {
+        if (!LanguageCodes.isLanguageCodeKnown(code)) {
+            String alt = LanguageCodes.getLanguageCodeByName(code);
+            if (alt != null) {
+                languageCode = alt;
+                return;
+            } else {
+                Log.logWarningRB("CORE_SRX_RULES_UNKNOWN_LANGUAGE_CODE", code);
+            }
+        }
+        languageCode = code;
     }
 
     /** Returns Language Code for programmatic usage. */
-    public String getLanguageCode() {
+    public String getLanguage() {
         return languageCode;
     }
 

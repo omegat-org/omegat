@@ -400,7 +400,7 @@
 			  <varlistentry id="launch.with.command.line.remote.project.">
 				<term
 				id="launch.with.command.line.remote.project.title"><option>--remote-project</option>
-				<emphasis>&lt;path-to-omegat-project-file&gt;</emphasis></term>
+				<userinput>&lt;path-to-omegat-project-file&gt;</userinput></term>
 				<listitem>
 				  <para>Download the OmegaT project from the URL specified in
 				  <emphasis>&lt;path-to-omegat-project-file&gt;</emphasis>, and
@@ -417,12 +417,12 @@
 			  </varlistentry>
 			  <varlistentry id="launch.with.command.line.team.init">
 				<term id="launch.with.command.line.team.init.title"><option>team
-				init <emphasis>SL</emphasis>
-				<emphasis>TL</emphasis></option></term>
+				init</option> <userinput>SL</userinput>
+				<userinput>TL</userinput></term>
 				<listitem>
 				  <para>Initialize a team project using <emphasis>SL</emphasis>
 				  and <emphasis>TL</emphasis> as the source and target
-				  two-letter language codes, respectively. </para>
+				  two-letter language codes, respectively.</para>
 				</listitem>
 			  </varlistentry>
 			  <varlistentry id="launch.with.command.line.disable.project.locking">
@@ -447,8 +447,8 @@
 			  </varlistentry>
 			  <varlistentry id="launch.with.command.line.itokenizer.lt.classname.gt.">
 				<term
-				id="launch.with.command.line.itokenizer.lt.classname.gt.title"><option>--ITokenizer=&lt;classname&gt;</option></term>
-				<term><option>--ITokenizerTarget=&lt;classname&gt;</option></term>
+				id="launch.with.command.line.itokenizer.lt.classname.gt.title"><option>--ITokenizer=</option><userinput>&lt;classname&gt;</userinput></term>
+				<term><option>--ITokenizerTarget=</option><userinput>&lt;classname&gt;</userinput></term>
 				<listitem>
 				  <para>Specify a source- or target-language tokenizer (using
 				  this option overrides project settings). See
@@ -457,7 +457,7 @@
 			  </varlistentry>
 			  <varlistentry id="launch.with.command.line.config.dir.">
 				<term
-					id="launch.with.command.line.config.dir.title"><option>--config-dir=<emphasis>&lt;path&gt;</emphasis></option></term>
+					id="launch.with.command.line.config.dir.title"><option>--config-dir=</option><userinput>&lt;path&gt;</userinput></term>
 				<listitem>
 				  <para>The folder used to read and write OmegaT configuration
 				  files. See the <link endterm="configuration.folder.title"
@@ -465,7 +465,7 @@
 				</listitem>
 			  </varlistentry>
 			  <varlistentry id="launch.with.command.line.config.file.">
-				<term id="launch.with.command.line.config.file.title"><option>--config-file=<emphasis>&lt;path&gt;</emphasis></option></term>
+				<term id="launch.with.command.line.config.file.title"><option>--config-file=</option><userinput>&lt;path&gt;</userinput></term>
 				<listitem>
 				  <para>A file written in the Java .properties format used to
 				  specify a batch of command line options.</para>
@@ -495,7 +495,7 @@ config-dir="path/to/new/configdir"</programlisting>
 
 			  <varlistentry id="launch.with.command.line.resource.bundle.">
 				<term
-				id="launch.with.command.line.resource.bundle.title"><option>--resource-bundle=<emphasis>&lt;path&gt;</emphasis></option></term>
+				id="launch.with.command.line.resource.bundle.title"><option>--resource-bundle=</option><userinput>&lt;path&gt;</userinput></term>
 				<listitem>
 				  <para>A Java .properties file to use for interface
 				  text.</para>
@@ -505,7 +505,7 @@ config-dir="path/to/new/configdir"</programlisting>
 			  <varlistentry id="launch.with.command.line.mode.console.translate.console.pseudotranslatetmx.console.align.">
 				<term
 				id="launch.with.command.line.mode.console.translate.console.pseudotranslatetmx.console.align.title"><option>--mode=[console
-				mode name]</option></term>
+				mode name]</option> <userinput>&lt;project path&gt;</userinput> <userinput>&lt;mode option&gt;</userinput></term>
 				<listitem>
 				  <para>Specify a mode other than the GUI default. The following
 				  options are available:</para>
@@ -513,7 +513,7 @@ config-dir="path/to/new/configdir"</programlisting>
 				  <variablelist>
 					<varlistentry id="launch.with.command.line.mode.console.translate">
 					  <term
-						  id="launch.with.command.line.mode.console.translate.title"><option>--mode=console-translate</option></term>
+						  id="launch.with.command.line.mode.console.translate.title"><option>--mode=console-translate</option> <userinput>&lt;project path&gt;</userinput></term>
 					  <listitem>
 						<para>In this mode, OmegaT attempts to translate the
 						files in the source folder with the available
@@ -524,7 +524,7 @@ config-dir="path/to/new/configdir"</programlisting>
 						  
 						<variablelist>
 						  <varlistentry id="launch.with.command.line.source.pattern.lt.pattern.gt.">
-							<term id="launch.with.command.line.source.pattern.lt.pattern.gt.title"><option>--source-pattern=&lt;pattern&gt;</option></term>
+							<term id="launch.with.command.line.source.pattern.lt.pattern.gt.title"><option>--source-pattern=</option><userinput>&lt;pattern&gt;</userinput></term>
 							<listitem>
 							  <para>A whitelist of regular expressions defining
 							  the source files to process. Remember that in
@@ -576,18 +576,18 @@ config-dir="path/to/new/configdir"</programlisting>
 
 					<varlistentry id="launch.with.command.line.mode.console.pseudotranslatetmx">
 					  <term
-						  id="launch.with.command.line.mode.console.pseudotranslatetmx.title"><option>--mode=console-createpseudotranslatetmx</option></term>
+					  id="launch.with.command.line.mode.console.pseudotranslatetmx.title"><option>--mode=console-createpseudotranslatetmx</option>
+							<userinput>&lt;project path&gt;</userinput></term>
 					  <listitem>
 						<para>In this mode OmegaT will create a TMX for the
 						whole project using only the source files.</para>
 						
-						<para>Specify the
-						TMX file to be created with:</para>
+						<para>Specify the TMX file to create with:</para>
 						
 						<variablelist>
 						  <varlistentry id="launch.with.command.line.pseudotranslatetmx.">
 							<term
-								id="launch.with.command.line.pseudotranslatetmx.title"><option>--pseudotranslatetmx=<emphasis>&lt;path&gt;</emphasis></option></term>
+								id="launch.with.command.line.pseudotranslatetmx.title"><option>--pseudotranslatetmx=</option><userinput>&lt;path&gt;</userinput></term>
 							<listitem>
 							  <para>The output pseudotranslated TMX file.</para>
 							</listitem>
@@ -607,44 +607,45 @@ config-dir="path/to/new/configdir"</programlisting>
 					
 					<varlistentry id="launch.with.command.line.mode.console.align">
 					  <term
-						  id="launch.with.command.line.mode.console.align.title"><option>--mode=console-align
-					  <emphasis>--alignDir=&lt;path&gt;</emphasis></option></term>
-					  <listitem>
+					  id="launch.with.command.line.mode.console.align.title"><option>--mode=console-align</option> 
+					  <userinput>&lt;project path&gt;</userinput></term>
+						<listitem>
 						<para>In this mode, OmegaT will align the files in the
 						/source folder of the project with those at the location
 						specified by the <emphasis>--alignDir</emphasis>
-						parameter.</para>
+						parameter below.</para>
+						
+						<variablelist>
+							<varlistentry>
+								<term><option>--alignDir=</option><userinput>&lt;project path&gt;</userinput></term>
+								<listitem>
+									<para>The path containing the files translated in the target language.</para>
 
-						<para>The resulting TMX file is saved in the /omegat
-						folder as align.tmx. The file types that can be aligned
-						depend on whether the alignment is supported by the file
-						filter. Supported filters include: ILIAS Language File,
-						Java(TM) Resource Bundles, Key=Value Text, Magento CE
+									<para>That folder must contain a translation in the target language of the project. For instance, if
+									the project is EN-to-FR, the specified folder must contain a bundle ending with <filename>_fr</filename>.</para>
+								</listitem>
+							</varlistentry>							
+						</variablelist>
+
+						<para>The resulting TMX file is saved in the <filename role="directory">omegat/</filename>
+						folder as <filename>align.tmx</filename> The file types that
+						can be aligned depend on whether the alignment is supported
+						by the file filter. Supported filters include: ILIAS Language
+						File, Java(TM) Resource Bundles, Key=Value Text, Magento CE
 						Locale CSV, MoodlePHP, Mozilla DTD, Mozilla FTL, PO, RC,
 						SubRip Subtitles, and Windows Resources.</para>
-
-						<para>The <emphasis>--alignDir</emphasis> parameter is
-						used to specify the location of the data in the target
-						language, which must be a folder containing the
-						translated files.</para>
-
-						<para>That folder must contain a translation in the
-						target language of the project. For instance, if the
-						project is EN-to-FR, the folder must contain a bundle
-						ending with _fr. The resulting TMX file is saved in the
-						/omegat folder as align.tmx.</para>
 					  </listitem>
 					</varlistentry>
 
 					<varlistentry id="launch.with.command.line.mode.console.stats">
 					  <term
-						  id="launch.with.command.line.mode.console.stats.title"><option>--mode=console-stats
-					  <emphasis>&lt;path&gt;</emphasis></option></term>
+						  id="launch.with.command.line.mode.console.stats.title"><option>--mode=console-stats</option> 
+					  <userinput>&lt;project path&gt;</userinput></term>
 					  <listitem>
 						<variablelist>
 						  <varlistentry id="launch.with.command.line.console.stats.output.file">
 							<term
-							id="launch.with.command.line.console.stats.output.file.title"><option>--output-file=[stats-output-file]</option></term>
+							id="launch.with.command.line.console.stats.output.file.title"><option>--output-file=</option><userinput>[stats-output-file]</userinput></term>
 							<listitem>
 							  <para>Prints to that file, or to standard output
 							  if absent. Without
@@ -692,7 +693,7 @@ config-dir="path/to/new/configdir"</programlisting>
 				
 			  <varlistentry id="launch.with.command.line.script.">
 				<term
-					id="launch.with.command.line.script.title"><option>--script=<emphasis>&lt;path&gt;</emphasis></option></term>
+					id="launch.with.command.line.script.title"><option>--script=</option><userinput>&lt;path&gt;</userinput></term>
 				<listitem>
 				  <para>A script file to run when a project event is
 				  triggered.</para>

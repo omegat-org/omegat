@@ -10,7 +10,7 @@
    
 <body>
     <div id="wh-header">
-    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 5.8.0-取扱説明書</a></div></div>
+    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 6.0.0-取扱説明書</a></div></div>
 
     <div id="wh-body">
       <div class="wh-icon-menu" id="wh-menu"></div>
@@ -349,7 +349,7 @@
                      </span>
                   </dt>
                   <dd>
-                     <p>プロジェクトの翻訳メモリ(<a class="link" href="chapter.project.folder.html#project.folder.project.save.tmx">project_save.tmx</a>)を保存します。</p>
+                     <p>プロジェクトの翻訳メモリ(<a class="link" href="chapter.project.folder.html#project.folder.project.save.tmx">project_save.tmx</a>)を保存し、チームプロジェクトを同期します。</p>
                      <p>OmegaT はデフォルトで 10 分ごとに翻訳を自動保存します。プロジェクトを閉じる時や、OmegaT の終了時も同様です。詳細は<a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.saving.and.output.interval">
                            <code class="option">プロジェクト保存間隔</code>
                         </a>の設定を参照してください。</p>
@@ -364,7 +364,7 @@
                   </dd>
                   <dt id="menus.project.download.mediawiki.page">
                      <span class="term" id="menus.project.download.mediawiki.page.title">
-                        <span class="guimenuitem">MediaWiki からの原文ファイル追加...</span>
+                        <span class="guimenuitem">MediaWiki からの原文ファイル追加</span>
                      </span>
                   </dt>
                   <dd>
@@ -416,6 +416,14 @@
                               <code class="option">タグに課題がある訳文ファイルの作成をブロックする</code>
                            </a>の設定を参照してください。</p>
                      </div>
+                     <p>訳文ファイルを作成するたびに、OmegaTはプロジェクトを保存し(上記の<a class="link" href="chapter.menus.html#menus.project.save">
+                           <span class="guimenuitem">保存</span>
+                           <span class="keycap">
+                              <strong>C</strong>
+                           </span>+<span class="keycap">
+                              <strong>S</strong>
+                           </span>
+                        </a>メニュー項目を参照)、現在の原文ファイルセットの翻訳済の分節の翻訳メモリを作成します。</p>
                   </dd>
                   <dt id="menus.project.create.current.translated.document">
                      <span class="term" id="menus.project.create.current.translated.document.title">
@@ -431,9 +439,14 @@
                   </dt>
                   <dd>
                      <p>翻訳中の現在の文書に対応する訳文ファイルを生成します。結果のファイルは<a class="link" href="chapter.project.folder.html#project.folder.target" title="target">target</a>フォルダーに配置されます。</p>
-                     <p>
-		
-                     </p>
+                     <p>現在の訳文ファイルを作成するたびに、OmegaTはプロジェクトを保存し(上記の<a class="link" href="chapter.menus.html#menus.project.save">
+                           <span class="guimenuitem">保存</span>
+                           <span class="keycap">
+                              <strong>C</strong>
+                           </span>+<span class="keycap">
+                              <strong>S</strong>
+                           </span>
+                        </a>メニュー項目を参照)、現在の原文ファイルセットの翻訳済の分節を含む翻訳メモリを作成します。</p>
                   </dd>
                   <dt id="menus.project.open.med.project">
                      <span class="term" id="menus.project.open.med.project.title">

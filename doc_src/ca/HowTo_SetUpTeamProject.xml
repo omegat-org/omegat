@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="how.to.setup.team.project">
+  <title id="how.to.setup.team.project.title">Configuració d'un projecte en equip</title>
+
+  <para>La gestió d'un projecte en equip requereix un cert coneixement dels sistemes de control de versions <emphasis>SVN</emphasis> o <emphasis>Git</emphasis> (<emphasis>VCS</emphasis> al llarg d'aquesta secció).</para>
+
+  <para>Com que hi ha molta informació disponible sobre aquests temes, aquest manual es limita a descriure el seu ús en el context d'un projecte en equip de l'OmegaT.</para>
+
+  <note>
+	<para>Un projecte en equip de l'OmegaT sincronitza la memòria de traducció del projecte <link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/> i el glossari modificable del projecte <link linkend="project.folder.glossary.txt" endterm="project.folder.glossary.txt.title"/> entre el servidor d'allotjament i tots els membres participants de l'equip, i gestiona tots els possibles conflictes.</para>
+  </note>
+
+  <section id="how.to.setup.team.project.prepare.the.repository">
+    <title id="how.to.setup.team.project.prepare.the.repository.title">Preparació</title>
+
+	<para>Aquests són els passos per a crear un projecte en equip:</para>
+
+	<orderedlist>
+      <listitem id="how.to.setup.team.project.create.empty.repository">
+		<para id="how.to.setup.team.project.create.empty.repository.title">Creació d'un dipòsit buit en el servidor d'allotjament del VCS</para>
+
+		<para>Això normalment es pot fer a través d'una interfície web, una aplicació gràfica o la línia d'ordres. Consulteu la documentació del servidor o del servei d'allotjament per a conèixer més detalls.</para>
+	  </listitem>
+
+	  <listitem id="how.to.setup.team.project.clone.locally">
+		<para id="how.to.setup.team.project.clone.locally.title">Ús del VCS local per a crear una còpia local (clonació)</para>
+
+		<note>
+		  <para>Aquesta versió local conté la còpia del projecte de l'OmegaT per al <emphasis>gestor del projecte</emphasis>. Utilitzeu-la per a aplicar modificacions que afectin tot l'equip.</para>
+		</note>
+
+		<para>El dipòsit local s'utilitza per a afegir el projecte inicial al servidor, i també es pot utilitzar per a tasques de manteniment, com ara la supressió de fitxers, que no es poden fer directament des de l'OmegaT.</para>
+		<para>Us recomanem que eviteu utilitzar aquesta carpeta per a tasques de traducció. Si heu de fer tasques de traducció o revisió en aquest projecte, utilitzeu l'OmegaT per a baixar una còpia independent del projecte en equip i treballeu des d'allà. Consulteu la guia <link linkend="how.to.use.team.project" endterm="how.to.use.team.project.title"/> per a conèixer més detalls.</para>
+	  </listitem>
+
+	  <listitem id="how.to.setup.team.project.fill.local.clone">
+		<para id="how.to.setup.team.project.fill.local.clone.title">Emplenament de la còpia local buida amb un projecte de l'OmegaT real</para>
+		<itemizedlist>
+		  <listitem>
+			<para>Creeu l'estructura del projecte</para>
+
+			<para>Si esteu creant un projecte nou buit, podeu seguir el <link linkend="introduction.create.and.open.new.project">procediment amb la GUI</link> o crear-lo directament des de la línia d'ordres: <command>java -jar OmegaT.jar team init &lt;llengua d'origen&gt; &lt;llengua de destinació&gt;</command></para>
+
+			<para>Aquesta ordre també registra automàticament el projecte en el sistema de control de versions.</para>
+		  </listitem>
+		  <listitem>
+			<para>Trieu els paràmetres adequats</para>
+
+			<para>Apliqueu els canvis necessaris a les propietats del projecte en aquesta fase, incloent-hi els filtres de fitxers o els paràmetres de segmentació locals. Consulteu el quadre de diàleg <link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/> per a conèixer més detalls.</para>
+		  </listitem>
+
+		  <listitem>
+			<para>Afegiu els fitxers necessaris</para>
+
+			<para>De la mateixa manera, afegiu qualsevol llista rellevant de fitxers de correcció ortogràfica que vulgueu posar a disposició de totes les persones que treballin en el projecte. Consulteu l'apartat sobre <link linkend="project.folder.omegat.spellcheck">fitxers de correcció ortogràfica</link> per a conèixer més detalls.</para>
+
+			<para>Si esteu convertint un projecte existent, assegureu-vos que suprimiu qualsevol fitxer del projecte que no necessiteu ni vulgueu pujar al servidor abans de continuar amb el pas següent.</para>
+
+			<para>Copieu els fitxers per a traduir a la carpeta «source/» i utilitzeu un client de l'SVN o el Git, o bé la línia d'ordres, per a afegir-los i publicar-los en el dipòsit. Utilitzeu <link endterm="menus.project.title" linkend="menus.project"/><link linkend="menus.project.commit.source.files" endterm="menus.project.commit.source.files.title"/> per a afegir fitxers des de l'OmegaT.</para>
+
+			<para>Heu d'utilitzar un client de l'SVN o el Git, o bé la línia d'ordres, per a afegir i publicar diccionaris, glossaris, memòries de traducció o altres fitxers que vulgueu incloure en el projecte.</para>
+
+			<para>Aquest pas es pot fer abans de registrar i publicar el projecte per primera vegada, i també es pot utilitzar per a afegir fitxers nous o actualitzar els existents després de crear el projecte.</para>
+		  </listitem>
+		</itemizedlist>
+
+		<note>
+          <para>En els projectes en equip que utilitzen una assignació senzilla entre el dipòsit local i el dipòsit remot (el comportament per defecte), <emphasis role="bold">i només en aquests projectes</emphasis>, els fitxers d'origen i destinació es poden modificar localment i pujar al servidor utilitzant <link linkend="menus.project" endterm="menus.project.title"/><link endterm="menus.project.commit.source.files.title" linkend="menus.project.commit.source.files"/> i <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.commit.target.files" endterm="menus.project.commit.target.files.title"/>.</para>
+
+          <para>L'administrador del projecte en equip ha d'utilitzar el VCS local per a <emphasis role="bold">modificar</emphasis> o <emphasis role="bold">suprimir</emphasis> aquests fitxers. Alguns connectors poden facilitar aquesta tasca. Consulteu la preferència <link linkend="dialogs.preferences.plugins" endterm="dialogs.preferences.plugins.title"/> per a conèixer més detalls.</para>
+		</note>
+	  </listitem>
+
+	  <listitem id="how.to.setup.team.project.register">
+		<para id="how.to.setup.team.project.register.title">Registre dels fitxers del projecte amb el VCS local</para>
+
+		<para>Si heu creat el projecte des de la GUI, haureu d'afegir-lo explícitament al sistema de control de versions (<command>add</command> tant a l'SVN com al Git).</para>
+	  </listitem>
+
+	  <listitem id="how.to.setup.team.project.push">
+		<para id="how.to.setup.team.project.push.title">Publicació dels fitxers registrats en el servidor d'allotjament</para>
+
+		<para>Finalment, publiqueu el projecte en el servidor remot (<command>commit</command> en l'SVN; <command>commit</command> i <command>push</command> en el Git).</para>
+	  </listitem>
+
+	  <listitem id="how.to.setup.team.project.give.access.rights">
+		<para id="how.to.setup.team.project.give.access.rights.title">Activació dels drets d'accés de l'equip</para>
+
+		<note>
+		  <para>If you use multiple projects on the same server, credentials
+		  will only be asked once for that server.</para>
+		</note>
+
+		<para>Quan el projecte estigui a punt i s'hagi pujat al servidor, l'administrador del projecte en equip ha de configurar l'accés per als traductors. L'accés a un projecte en equip requereix la informació següent:</para>
+
+		<orderedlist>
+          <listitem>
+			<para>Projectes en un servei d'allotjament</para>
+
+			<para>Els traductors hauran de crear un compte per al servei i enviar el seu nom d'usuari a l'administrador del projecte en equip.</para>
+
+			<para>A continuació, l'administrador concedirà accés d'escriptura al dipòsit a aquests comptes.</para>
+          </listitem>
+
+          <listitem>
+			<para>Projectes en un servidor autoallotjat</para>
+
+			<para>Si el servidor està autoallotjat i no ofereix un mètode perquè els traductors registrin un compte pel seu compte, l'administrador del projecte en equip ha de crear comptes amb accés d'escriptura per als traductors.</para>
+
+			<para>Després de crear els comptes, l'administrador ha d'enviar als traductors les credencials individuals.</para>
+          </listitem>
+		</orderedlist>	  
+	  </listitem>
+
+	  <listitem id="how.to.setup.team.project.have.members.download">
+		<para id="how.to.setup.team.project.have.members.download.title">Baixada del projecte amb l'OmegaT per part de l'equip</para>
+
+		<para>Els administradors tenen dues opcions per a enviar la ubicació del projecte als traductors:</para>
+
+		<orderedlist>
+          <listitem>
+			<para>Enviar un URL i demanar als traductors que utilitzin <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.download.team.project" endterm="menus.project.download.team.project.title"/> per a crear una còpia local del projecte en el sistema.</para>
+          </listitem>
+
+          <listitem>
+			<para>Enviar un fitxer <filename>omegat.project</filename> que contingui l'URL del projecte i demanar els traductors que el copiïn a una carpeta buida i l'obrin amb l'OmegaT. Això pot ser útil si el projecte està configurat per a utilitzar <link linkend="how.to.setup.team.project.mapping.parameters">assignacions</link> diferents per a cada traductor.</para>
+          </listitem>
+		</orderedlist>
+
+		<para>Després que l'administrador del projecte en equip confirmi que un traductor ha pogut obrir el projecte en equip, és bona idea assegurar-se que les <link linkend="menus.tools.statistics">estadístiques del projecte</link> siguin les mateixes tant per a l'administrador (en el servidor) com per al traductor (localment).</para>
+
+		<para>Si no coincideixen, assegureu-vos que els fitxers <filename>filters.xml</filename> i <filename>segmentation.conf</filename> s'hagin compartit correctament.</para>
+	  </listitem>
+
+	  <listitem id="how.to.setup.team.project.download.if.needed">
+		<para id="how.to.setup.team.project.download.if.needed.title">En cas que calgui treballar en el projecte, baixada del projecte a una ubicació local diferent de la ubicació del projecte en equip local</para>
+	  </listitem>
+
+	  <listitem id="how.to.setup.team.project.translate">
+		<para id="how.to.setup.team.project.translate.title">Treball en el projecte amb l'equip</para>
+	  </listitem>
+	</orderedlist>
+  </section>
+
+  <section id="how.to.setup.team.project.mapping.parameters">
+	<title id="how.to.setup.team.project.mapping.parameters.title">Assignacions de dipòsits</title>
+
+	<para>És possible assignar diverses ubicacions remotes a fitxers locals a través de la interfície d'usuari de l'OmegaT utilitzant <link linkend="dialogs.project.properties.repository.mapping.title" endterm="dialogs.project.properties.repository.mapping.title"/> en el quadre de diàleg <link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/>, o bé editant el fitxer <link linkend="project.folder.omegat.project.file.title" endterm="project.folder.omegat.project.file.title"/>. Tot i que la característica d'assignació està destinada principalment a recopilar fitxers d'origen de llocs diferents, també es pot utilitzar per a altres tipus de fitxers.</para>
+
+	<para>A continuació es presenta una llista dels paràmetres d'assignació i també es proporcionen exemples d'ús en la secció següent.</para>
+
+	<variablelist>
+      <varlistentry>
+		<term>repository type</term>
+		<listitem>
+          <para>Pot ser <emphasis>http</emphasis> (que inclou https), <emphasis>svn</emphasis>, <emphasis>git</emphasis> o <emphasis>fitxer</emphasis>.</para>
+		</listitem>
+      </varlistentry>
+
+      <varlistentry>
+		<term>repository url</term>
+		<listitem>
+          <para>Ubicació o carpeta remota dels fitxers per a traduir.</para>
+		</listitem>
+      </varlistentry>
+
+      <varlistentry>
+		<term>mapping local</term>
+		<listitem>
+          <para>Nom de la carpeta o del fitxer local, relatiu a l'arrel del projecte de l'OmegaT.</para>
+		</listitem>
+      </varlistentry>
+
+      <varlistentry>
+		<term>mapping repository</term>
+		<listitem>
+          <para>Nom de la carpeta o del fitxer remot, relatiu a l'URL del dipòsit.</para>
+		</listitem>
+      </varlistentry>
+
+      <varlistentry>
+		<term>excludes</term>
+		<listitem>
+          <para>Utilitzeu comodins (seguint l'estil de l'Apache Ant: *, ?, **) per a afegir patrons per a fitxers que no voleu que formin part de l'assignació. Utilitzeu un punt i coma per a separar patrons diferents.</para>
+          <para>Exemple: <userinput>**/carpetaexclosa/**;*.txt</userinput> exclou els fitxers que tenen /carpetaexclosa/ en el camí, i també els fitxers amb l'extensió <filename>.txt</filename>.</para>
+		</listitem>
+      </varlistentry>
+
+      <varlistentry>
+		<term>includes</term>
+		<listitem>
+          <para>Igual que l'anterior, però per als fitxers que voleu que formin part de l'assignació. Com que els fitxers s'inclouen per defecte llevat que s'excloguin específicament, aquesta opció només és necessària per a especificar excepcions d'un patró d'exclusió.</para>
+          <para>Exemple: <userinput>**/*.docx</userinput> per a afegir tots els fitxers .docx en el projecte, encara que es trobin en una carpeta exclosa.</para>
+		</listitem>
+      </varlistentry>
+	</variablelist>
+  </section>
+
+  <section id="how.to.setup.team.project.example.mappings">
+	<title id="how.to.setup.team.project.example.mappings.title">Exemple d'assignacions</title>
+
+	<para>Assignació de projecte per defecte:<programlisting>&lt;repository type=&quot;svn&quot; url=&quot;https://dipòsit_d'un_projecte_en_equip_de_l'OmegaT&quot;&gt;
+	&lt;mapping local=&quot;&quot; repository=&quot;&quot;/&gt;
+&lt;/repository&gt;</programlisting></para>
+
+	<para>Tots els continguts de l'URL <filename>https://dipòsit_d'un_projecte_en_equip_de_l'OmegaT</filename> s'assignen al projecte local de l'OmegaT</para>
+
+	<para>Assignació per a projectes en una subcarpeta del dipòsit:<programlisting>&lt;repository type=&quot;svn&quot; url=&quot;https://dipòsit_de_tots_els_projectes_en_equip_de_l'OmegaT&quot;&gt;
+	&lt;mapping local=&quot;&quot; repository=&quot;Projecte_En-US_DE&quot;/&gt;
+&lt;/repository&gt;</programlisting></para>
+
+	<para>Tots els continguts de l'URL <filename>https://dipòsit_de_tots_els_projectes_en_equip_de_l'OmegaT/Projecte_En-US_DE</filename> s'assignen al projecte local de l'OmegaT</para>
+
+	<para>Mapatge de fitxers d'origen addicionals d'un repositori remot, amb filtres:<programlisting>&lt;repository type=&quot;svn&quot; url=&quot;https://dipòsit_de_tots_els_fitxers_d'origen_del_projecte_en_equip_de_l'OmegaT&quot;&gt;
+	&lt;mapping local=&quot;source/subdir&quot; repository=&quot;&quot;&gt;
+	    &lt;excludes&gt;**/*.bak&lt;/excludes&gt;
+    	&lt;includes&gt;readme.bak&lt;/includes&gt;
+	&lt;/mapping&gt;
+&lt;/repository&gt;</programlisting></para>
+
+	<para>Tots els continguts de l'URL <filename>https://dipòsit_de_tots_els_fitxers_d'origen_del_projecte_en_equip_de_l'OmegaT</filename> s'assignen a la carpeta de fitxers d'origen del projecte de l'OmegaT, excepte els fitxers amb una extensió <filename>.bak</filename>. Ara bé, també s'inclou el fitxer <filename>readme.bak</filename>.</para>
+
+	<para>Assignació de fitxers d'origen addicionals des d'Internet:<programlisting>&lt;repository type=&quot;http&quot; url=&quot;https://github.com/omegat-org/omegat/raw/master/&quot;&gt;
+	&lt;mapping local=&quot;source/Bundle.properties&quot; repository=&quot;src/org/omegat/Bundle.properties&quot;/&gt;
+&lt;/repository&gt;</programlisting></para>
+
+	<para>El fitxer remot <filename>https://github.com/omegat-org/omegat/raw/master/src/org/omegat/Bundle.properties</filename> s'assigna al fitxer local <filename>source/Bundle.properties</filename>.</para>
+
+	<para>Assignació amb canvi de nom:<programlisting>&lt;repository type=&quot;http&quot; url=&quot;https://github.com/omegat-org/omegat/raw/master/&quot;&gt;
+	&lt;mapping local=&quot;source/readme_tr.txt&quot; repository=&quot;release/readme.txt&quot;/&gt;
+&lt;/repository&gt;</programlisting></para>
+
+	<para>El fitxer remot <filename>https://github.com/omegat-org/omegat/raw/master/release/readme.txt</filename> s'assigna al fitxer local <filename>source/readme_tr.txt</filename>.</para>
+
+	<para>Això permet canviar el nom del fitxer per a traduir.</para>
+
+	<para>Assignació de fitxers locals:<programlisting>&lt;repository type=&quot;file&quot; url=&quot;/home/usuari/fitxers&quot;&gt;
+	&lt;mapping local=&quot;source/fitxer.txt&quot; repository=&quot;primer/fitxer.txt&quot;/&gt;
+	&lt;mapping local=&quot;source/fitxer2.txt&quot; repository=&quot;segon/fitxer.txt&quot;/&gt;
+&lt;/repository&gt;</programlisting></para>
+
+	<para>El fitxer local <filename>/home/usuari/fitxers/primer/fitxer.txt</filename> està assignat al fitxer local <filename>source/fitxer.txt</filename> i <filename>/home/usuari/fitxers/segon/fitxer.txt</filename> està assignat al fitxer local <filename>source/fitxer2&gt;txt</filename>.</para>
+
+	<warning>
+      <para>El projecte no es carregarà si no existeix un fitxer especificat en una assignació.</para>
+	</warning>
+
+	<para>Podeu afegir tantes assignacions com vulgueu, però una de les assignacions ha d'incloure el fitxer <filename>omegat.project</filename>.</para>
+
+  </section>
+  <section id="how.to.setup.team.project.selective.sharing">
+	<title id="how.to.setup.team.project.selective.sharing.title">Ús compartit selectiu</title>
+
+	<para>El procés anterior descriu el cas més habitual, en què l'administrador del projecte en equip té tot el control del projecte i tots els fitxers (i estadístiques) són idèntics en totes les instàncies del projecte, tant en el servidor com en els sistemes locals dels traductors.</para>
+
+	<para>També és possible utilitzar una configuració de projecte en equip en què diversos traductors comparteixin el fitxer <filename>project.save.tmx</filename> i només un subconjunt de la resta de fitxers.</para>
+
+	<para>El procediment bàsic és essencialment el mateix, excepte que l'administrador del projecte en equip no afegeix tots els fitxers al projecte amb control de versions del servidor. Els fitxers restants els copien els mateixos traductors o es defineixen assignacions que sincronitzen fitxers d'altres ubicacions.</para>
+  </section>
+</section>

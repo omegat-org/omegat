@@ -75,6 +75,27 @@
 
 		<para><link linkend="menus.goto" endterm="menus.goto.title"/><link linkend="menus.goto.auto.populated.segments" endterm="menus.goto.auto.populated.segments.title"/>にあるナビゲーションメニューを使用して、自動的に挿入された分節にナビゲートします。</para>
 	  </listitem>
+
+	  <listitem>
+		<para>参照翻訳として、OmegaTはTMXファイルではないバイリンガル文書もサポートしています。OmegaTがサポートするファイル形式は、OmegaTがソースファイルとして受け入れるすべてのバイリンガル形式です。</para>
+
+		<itemizedlist>
+		  <listitem>
+			<para>PO ファイル</para>
+		  </listitem>
+		  <listitem>
+			<para>TXMLファイル</para>
+		  </listitem>
+		  <listitem>
+			<para>XLIFFファイル</para>
+		  </listitem>
+		  <listitem>
+			<para>SDLXLIFFファイル</para>
+		  </listitem>
+		</itemizedlist>
+
+	  <para>このようなファイルは、プロジェクトの<link linkend="project.folder.tm" endterm="project.folder.tm.title"/>フォルダーまたはそのサブフォルダの1つに追加できます。変換されたデータは、照合のためにすぐに使用できます。</para>
+	  </listitem>
 	</itemizedlist>
 	
     <section id="how.to.tm.read.and.write">

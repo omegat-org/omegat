@@ -9,7 +9,8 @@
                2014 Aaron Madlon-Kay, Alex Buloichik
                2015 Aaron Madlon-Kay
                2017 Didier Briel
-               Home page: http://www.omegat.org/
+               2018 Thomas Cordonnier
+               Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
  This file is part of OmegaT.
@@ -25,7 +26,7 @@
  GNU General Public License for more details.
 
  You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
 package org.omegat.core.data;
@@ -64,6 +65,7 @@ import gen.core.project.RepositoryMapping;
  * @author Aaron Madlon-Kay
  * @author Yu Tang
  * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Thomas Cordonnier
  */
 public class ProjectProperties {
 
@@ -497,7 +499,7 @@ public class ProjectProperties {
      * Loads segmentation.conf if found in the /omegat folder of the project
      */
     public void loadProjectSRX() {
-        this.projectSRX = SRX.loadSRX(new File(getProjectInternal(), SRX.CONF_SENTSEG));
+        this.projectSRX = SRX.loadFromDir(new File(getProjectInternal()));
     }
 
     public Filters getProjectFilters() {

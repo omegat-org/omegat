@@ -123,7 +123,7 @@ public final class Statistics {
      * Write text to file.
      *
      * @param filename
-     * @param data
+     * @param text
      */
     public static void writeStat(String filename, String text) {
         try (OutputStreamWriter out = new OutputStreamWriter(new FileOutputStream(filename),

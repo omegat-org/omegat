@@ -61,6 +61,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import javax.xml.stream.XMLStreamException;
+
 import org.madlonkay.supertmxmerge.StmProperties;
 import org.madlonkay.supertmxmerge.SuperTmxMerge;
 import org.xml.sax.SAXParseException;
@@ -334,7 +336,7 @@ public class RealProject implements IProject {
         Log.logInfoRB("LOG_DATAENGINE_LOAD_START");
         UIThreadsUtil.mustNotBeSwingThread();
 
-        // load new project
+        // load a new project
         try {
             if (!lockProject()) {
                 throw new KnownException("PROJECT_LOCKED");
@@ -368,17 +370,28 @@ public class RealProject implements IProject {
 
             loadFilterSettings();
             loadSegmentationSettings();
-            loadTranslations(); // load projectsave.tmx
-            loadSourceFiles();
+            try {
+                loadTranslations(); // load project_save.tmx
+                loadSourceFiles();
 
-            // This MUST happen after calling loadTranslations()
-            if (remoteRepositoryProvider != null && isOnlineMode) {
-                Core.getMainWindow().showStatusMessageRB("TEAM_REBASE_AND_COMMIT");
-                rebaseAndCommitProject(true);
+                // This MUST happen after calling loadTranslations()
+                if (remoteRepositoryProvider != null && isOnlineMode) {
+                    Core.getMainWindow().showStatusMessageRB("TEAM_REBASE_AND_COMMIT");
+                    rebaseAndCommitProject(true);
+                }
+            } catch (XMLStreamException e) {
+                // omegat.project file corrupted.
+                Log.logErrorRB(e, "TF_LOAD_ERROR_PARSER_EXCEPTION");
+                Core.getMainWindow().displayErrorRB(e, "TF_LOAD_ERROR_PARSER_EXCEPTION");
+                if (!loaded) {
+                    unlockProject();
+                }
+                Log.logInfoRB("LOG_DATAENGINE_LOAD_END");
+                return;
             }
 
-            // after loadSourcefiles, the entries are filled. The list can now
-            // (and only now) be readonly.
+            // After `#loadSourcefiles`, the entries are filled. The list can
+            // now (and only now) be read only.
             allProjectEntries = Collections.unmodifiableList(allProjectEntries);
             // and now we can set the importHandler, used by loadTM
             importHandler = new ImportFromAutoTMX(this, allProjectEntries);
@@ -424,6 +437,12 @@ public class RealProject implements IProject {
             Core.getMainWindow().showErrorDialogRB("TF_ERROR", "OUT_OF_MEMORY", memory);
             // Just quit, we can't help it anyway
             System.exit(0);
+        } catch (IOException ioe) {
+            Log.logErrorRB(ioe, "TF_LOAD_ERROR_FILE_ACCESS");
+            Core.getMainWindow().displayErrorRB(ioe, "TF_LOAD_ERROR_FILE_ACCESS");
+            if (!loaded) {
+                unlockProject();
+            }
         } catch (Throwable e) {
             Log.logErrorRB(e, "TF_LOAD_ERROR");
             Core.getMainWindow().displayErrorRB(e, "TF_LOAD_ERROR");
@@ -1177,7 +1196,7 @@ public class RealProject implements IProject {
     /**
      * Load source files for project.
      */
-    private void loadSourceFiles() throws Exception {
+    private void loadSourceFiles() throws IOException {
         long st = System.currentTimeMillis();
         FilterMaster fm = Core.getFilterMaster();
 

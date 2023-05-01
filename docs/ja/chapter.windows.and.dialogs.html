@@ -10,7 +10,7 @@
    
 <body>
     <div id="wh-header">
-    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 5.8.0-取扱説明書</a></div></div>
+    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 6.0.0-取扱説明書</a></div></div>
 
     <div id="wh-body">
       <div class="wh-icon-menu" id="wh-menu"></div>
@@ -818,7 +818,7 @@
                   </dd>
                   <dt id="windows.source.files.list.download.page">
                      <span class="term" id="windows.source.files.list.download.page.title">
-                        <span class="guibutton">MediaWiki からの原文ファイル追加...</span>
+                        <span class="guibutton">MediaWiki からの原文ファイル追加</span>
                      </span>
                   </dt>
                   <dd>
@@ -835,7 +835,7 @@
                   <span class="guimenu">プロジェクト</span>
                </a>
                <a class="link" href="chapter.menus.html#menus.project.download.mediawiki.page">
-                  <span class="guimenuitem">MediaWiki からの原文ファイル追加...</span>
+                  <span class="guimenuitem">MediaWiki からの原文ファイル追加</span>
                </a>メニュー項目を使用するのと同じです。</p>
             <div class="note">
                <h3 class="title">注記</h3>
@@ -1137,20 +1137,20 @@
                         <div class="variablelist">
                            <dl class="variablelist">
                               <dt>
-                                 <span class="term">内部メモリ</span>
+                                 <span class="term">メインメモリ</span>
                               </dt>
                               <dd>
                                  <p>プロジェクトの内部メモリ(<a class="link" href="chapter.project.folder.html#project.folder.project.save.tmx">project_save.tmx</a>)を含めます。</p>
                               </dd>
                               <dt>
-                                 <span class="term">翻訳メモリ</span>
+                                 <span class="term">参照TM</span>
                               </dt>
                               <dd>
                                  <p>
                                     <a class="link" href="chapter.project.folder.html#project.folder.tm" title="tm">tm</a>フォルダーにある翻訳メモリを含めます。</p>
                               </dd>
                               <dt>
-                                 <span class="term">用語集</span>
+                                 <span class="term">用語集 ファイル</span>
                               </dt>
                               <dd>
                                  <p>
@@ -1169,11 +1169,15 @@
                      </dd>
                      <dt>
                         <span class="term">
-                           <span class="guibutton">詳細設定を表示する</span>
+                           <span class="guibutton">参考訳文の設定</span>
                         </span>
                      </dt>
                      <dd>
                         <p>翻訳を作成または変更したユーザー、翻訳(変更)の日時、現在の原文に存在しない分節を除外するかどうかなどの追加の検索条件を選択します。</p>
+                        <div class="warning">
+                           <h3 class="title">警告</h3>
+                           <p>参考訳文の設定は、メインメモリのみに適用され、参照用の翻訳メモリには適用されません。</p>
+                        </div>
                         <div class="variablelist">
                            <dl class="variablelist">
                               <dt>
@@ -1808,12 +1812,10 @@
                            </a>を参照してください。</p>
                      </dd>
                      <dt>
-                        <span class="term">タグを隠す</span>
+                        <span class="term">タグを削除</span>
                      </dt>
                      <dd>
-                        <p>整合ツールは、デフォルトでは分節のタグも利用しています。<a class="link" href="chapter.windows.and.dialogs.html#dialogs.project.properties.hide.tags">
-                              <code class="option">タグを隠す</code>
-                           </a>設定を適用するには、チェックボックスをオフにします。</p>
+                        <p>整合ツールは、デフォルトでは分節のタグも利用しています。整合および結果のTMXからすべてのタグを削除するには、このチェックボックスをオフにします。</p>
                      </dd>
                      <dt id="windows.aligner.adjust.highlight">
                         <span class="term" id="windows.aligner.adjust.highlight.title">ハイライト</span>

@@ -35,6 +35,7 @@ import org.omegat.util.OConsts;
  *
  * @author Keith Godfrey
  */
+@Deprecated
 public class XMLBlock {
     public XMLBlock() {
         reset();

@@ -33,7 +33,7 @@ import java.util.regex.Matcher;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.Highlighter.HighlightPainter;
 
-import org.apache.commons.lang.StringEscapeUtils;
+import org.apache.commons.text.StringEscapeUtils;
 import org.omegat.core.Core;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.data.SourceTextEntry;
@@ -130,7 +130,7 @@ public class ProtectedPartsMarker implements IMarker {
             // See if the tooltip contains an equiv-text attribute. If so, use just the value.
             m = PatternConsts.EQUIV_TEXT_ATTRIBUTE_DECOMPILE.matcher(s);
             if (m.find()) {
-                s = StringEscapeUtils.unescapeHtml(m.group(1));
+                s = StringEscapeUtils.unescapeHtml4(m.group(1));
             }
         }
         // standalone tag

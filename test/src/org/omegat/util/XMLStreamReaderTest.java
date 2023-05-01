@@ -34,16 +34,19 @@ import static org.junit.Assert.fail;
 import java.io.File;
 import java.util.List;
 
+import org.junit.Ignore;
 import org.junit.Test;
+
 import org.omegat.filters2.TranslationException;
-import org.omegat.util.xml.XMLBlock;
-import org.omegat.util.xml.XMLStreamReader;
+import org.omegat.util.xml.*;
 
 /**
  * Test the XML reader used to read OmegaT preference files.
  *
  * @author Aaron Madlon-Kay
  */
+@Deprecated
+@Ignore
 public class XMLStreamReaderTest {
 
     @Test

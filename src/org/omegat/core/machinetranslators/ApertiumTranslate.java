@@ -40,6 +40,7 @@ import javax.swing.JCheckBox;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -67,6 +68,7 @@ public class ApertiumTranslate extends BaseCachedTranslate {
     protected static final String APERTIUM_SERVER_URL_FORMAT = "%s/translate?q=%s&markUnknown=%s&langpair=%s|%s&key=%s";
     // Specific OmegaT key
     protected static final String APERTIUM_SERVER_KEY_DEFAULT = "bwuxb5jS+VwSJ8mLz1qMfmMrDGA";
+    private ObjectMapper mapper = new ObjectMapper();
 
     @Override
     protected String getPreferenceName() {
@@ -109,13 +111,6 @@ public class ApertiumTranslate extends BaseCachedTranslate {
 
     @Override
     protected String translate(Language sLang, Language tLang, String text) throws Exception {
-        String prev = getFromCache(sLang, tLang, text);
-        if (prev != null) {
-            return prev;
-        }
-
-        String trText = text;
-
         String sourceLang = apertiumCode(sLang);
         String targetLang = apertiumCode(tLang);
 
@@ -127,7 +122,7 @@ public class ApertiumTranslate extends BaseCachedTranslate {
             apiKey = APERTIUM_SERVER_KEY_DEFAULT;
         }
         String markUnknownVal = useMarkUnknown() ? "yes" : "no";
-        String url = String.format(APERTIUM_SERVER_URL_FORMAT, server, URLEncoder.encode(trText, "UTF-8"),
+        String url = String.format(APERTIUM_SERVER_URL_FORMAT, server, URLEncoder.encode(text, "UTF-8"),
                 markUnknownVal, sourceLang, targetLang, apiKey);
         String v;
         try {
@@ -137,10 +132,7 @@ public class ApertiumTranslate extends BaseCachedTranslate {
             throw new Exception(OStrings.getString("APERTIUM_CUSTOM_SERVER_NOTFOUND"));
         }
 
-        String tr = getJsonResults(v);
-
-        putToCache(sLang, tLang, trText, tr);
-        return tr;
+        return getJsonResults(v);
     }
 
     /**
@@ -152,12 +144,11 @@ public class ApertiumTranslate extends BaseCachedTranslate {
      *         error message when parse failed.
      */
     @SuppressWarnings("unchecked")
-    protected String getJsonResults(String json) {
-        ObjectMapper mapper = new ObjectMapper();
+    protected String getJsonResults(String json) throws Exception {
         try {
             JsonNode rootNode = mapper.readTree(json);
             if (!rootNode.has("responseStatus")) {
-                return OStrings.getString("APERTIUM_CUSTOM_SERVER_INVALID");
+                throw new MachineTranslateError(OStrings.getString("APERTIUM_CUSTOM_SERVER_INVALID"));
             }
             int code = rootNode.get("responseStatus").asInt();
             if (code == HTTP_OK) {
@@ -166,13 +157,13 @@ public class ApertiumTranslate extends BaseCachedTranslate {
                     return tr;
                 }
             }
-            // Returns an error message if there's no translatedText or if there
-            // was a problem
+            // throw exception if there's no translatedText or if there was
+            // a problem
             String details = rootNode.get("responseDetails").asText();
-            return StringUtil.format(OStrings.getString("APERTIUM_ERROR"), code, details);
-        } catch (Exception e) {
+            throw new MachineTranslateError(StringUtil.format(OStrings.getString("APERTIUM_ERROR"), code, details));
+        } catch (JsonParseException e) {
             Log.logErrorRB(e, "MT_JSON_ERROR");
-            return OStrings.getString("MT_JSON_ERROR");
+            throw new MachineTranslateError(OStrings.getString("MT_JSON_ERROR"));
         }
     }
 
@@ -198,9 +189,8 @@ public class ApertiumTranslate extends BaseCachedTranslate {
      * Get the custom server URL.
      */
     private String getCustomServerUrl() {
-        String value = System.getProperty(PROPERTY_APERTIUM_SERVER_URL,
+        return System.getProperty(PROPERTY_APERTIUM_SERVER_URL,
                 Preferences.getPreference(PROPERTY_APERTIUM_SERVER_URL));
-        return value;
     }
 
     /**

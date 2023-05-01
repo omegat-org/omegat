@@ -30,6 +30,7 @@ package org.omegat.util.xml;
  *
  * @author Keith Godfrey
  */
+@Deprecated
 public class XMLAttribute {
     public XMLAttribute(String n, String v) {
         name = n;

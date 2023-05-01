@@ -9,6 +9,7 @@
                2014 Aaron Madlon-Kay, Alex Buloichik
                2015 Aaron Madlon-Kay
                2017 Didier Briel
+               2018 Thomas Cordonnier
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -64,6 +65,7 @@ import gen.core.project.RepositoryMapping;
  * @author Aaron Madlon-Kay
  * @author Yu Tang
  * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Thomas Cordonnier
  */
 public class ProjectProperties {
 
@@ -497,7 +499,7 @@ public class ProjectProperties {
      * Loads segmentation.conf if found in the /omegat folder of the project
      */
     public void loadProjectSRX() {
-        this.projectSRX = SRX.loadSRX(new File(getProjectInternal(), SRX.CONF_SENTSEG));
+        this.projectSRX = SRX.loadFromDir(new File(getProjectInternal()));
     }
 
     public Filters getProjectFilters() {

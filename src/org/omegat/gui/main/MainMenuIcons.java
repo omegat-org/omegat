@@ -30,6 +30,7 @@ import java.awt.Component;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.Toolkit;
@@ -37,6 +38,7 @@ import java.awt.font.GlyphVector;
 import java.util.Map;
 
 import javax.swing.Icon;
+import javax.swing.ImageIcon;
 
 import org.omegat.util.Log;
 
@@ -124,6 +126,28 @@ public final class MainMenuIcons {
                     g2.setColor(color);
                 }
                 g2.fillRect(x, y, getIconWidth(), getIconHeight());
+            }
+        };
+    }
+
+    /**
+     * Create icon with an image fit with menu items.
+     */
+    static Icon newImageIcon(final Image image) {
+        return new ImageIcon() {
+            @Override
+            public synchronized void paintIcon(Component c, Graphics g, int x, int y) {
+                super.paintIcon(c, g, x, y);
+            }
+
+            @Override
+            public int getIconWidth() {
+                return ICON_SIZE;
+            }
+
+            @Override
+            public int getIconHeight() {
+                return getIconWidth();
             }
         };
     }

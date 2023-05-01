@@ -72,6 +72,9 @@ public class IBMWatsonTranslate extends BaseCachedTranslate {
 
     protected static final String WATSON_URL = "https://gateway.watsonplatform.net/language-translator/api/v3/translate";
     protected static final String WATSON_VERSION = "2018-05-01";
+    // API limit: 50 KB (51,200 bytes) of text
+    // See https://cloud.ibm.com/apidocs/language-translator#translate
+    private static final int MAX_BYTES_TEXT = 51200;
 
     @Override
     protected String getPreferenceName() {
@@ -84,18 +87,17 @@ public class IBMWatsonTranslate extends BaseCachedTranslate {
     }
 
     @Override
-    protected String translate(Language sLang, Language tLang, String text) throws Exception {
-        String trText = text.length() > 5000 ? text.substring(0, 4997) + "..." : text;
-        String prev = getFromCache(sLang, tLang, trText);
-        if (prev != null) {
-            return prev;
-        }
+    protected int getMaxTextBytes() {
+        return MAX_BYTES_TEXT;
+    }
 
+    @Override
+    protected String translate(Language sLang, Language tLang, String text) throws Exception {
         String apiLogin = getCredential(PROPERTY_LOGIN);
         String apiPassword = getCredential(PROPERTY_PASSWORD);
 
         if (apiLogin == null || apiLogin.isEmpty()) {
-            throw new Exception(OStrings.getString("IBMWATSON_API_KEY_NOTFOUND"));
+            throw new MachineTranslateError(OStrings.getString("IBMWATSON_API_KEY_NOTFOUND"));
         }
 
         // If the instance uses IAM authentication
@@ -108,7 +110,7 @@ public class IBMWatsonTranslate extends BaseCachedTranslate {
             apiPassword = apiLogin;
             apiLogin = "apikey";
         }
-        String json = createJsonRequest(sLang, tLang, trText);
+        String json = createJsonRequest(sLang, tLang, text);
 
         Map<String, String> headers = new TreeMap<>();
 
@@ -133,9 +135,7 @@ public class IBMWatsonTranslate extends BaseCachedTranslate {
             return null;
         }
         tr = unescapeHTML(tr);
-        tr = cleanSpacesAroundTags(tr, trText);
-        putToCache(sLang, tLang, trText, tr);
-        return tr;
+        return cleanSpacesAroundTags(tr, text);
     }
 
     private String getModelId() {
@@ -167,28 +167,37 @@ public class IBMWatsonTranslate extends BaseCachedTranslate {
     }
 
     /**
-     * Parse Watson response and return translated text.sed
-     * 
+     * Parse Watson response and return translated text.
+     *
      * @param json
      *            response.
      * @return translated text.
      */
     @SuppressWarnings("unchecked")
-    protected String getJsonResults(String json) {
+    protected String getJsonResults(String json) throws Exception {
         ObjectMapper mapper = new ObjectMapper();
+        JsonNode rootNode;
         try {
-            JsonNode rootNode = mapper.readTree(json);
-            JsonNode translations = rootNode.get("translations");
-            if (translations.has(0)) {
-                return translations.get(0).get("translation").asText();
-            }
+            rootNode = mapper.readTree(json);
         } catch (Exception e) {
             Log.logErrorRB(e, "MT_JSON_ERROR");
-            return OStrings.getString("MT_JSON_ERROR");
+            throw new MachineTranslateError(OStrings.getString("MT_JSON_ERROR"));
         }
-        return null;
+        JsonNode translations = rootNode.get("translations");
+        if (translations != null && translations.has(0)) {
+            if (translations.get(0) != null && translations.get(0).get("translation") != null) {
+                return translations.get(0).get("translation").asText();
+            }
+        }
+        Log.logErrorRB( "MT_JSON_ERROR");
+        throw new MachineTranslateError(OStrings.getString("MT_JSON_ERROR"));
     }
 
+    /**
+     * Engine is configurable.
+     *
+     * @return true
+     */
     @Override
     public boolean isConfigurable() {
         return true;

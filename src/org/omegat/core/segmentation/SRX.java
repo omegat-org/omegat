@@ -5,6 +5,7 @@
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2008 Alex Buloichik
+               2018 Thomas Cordonnier
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -28,26 +29,30 @@ package org.omegat.core.segmentation;
 
 import java.beans.ExceptionListener;
 import java.beans.XMLDecoder;
-import java.beans.XMLEncoder;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
-import java.net.URL;
+import java.net.URI;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-
+import com.fasterxml.jackson.databind.DatabindException;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import org.omegat.util.JaxbXmlMapper;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
-import org.omegat.util.OStrings;
 
 import gen.core.segmentation.Languagemap;
 import gen.core.segmentation.Languagerule;
+import gen.core.segmentation.ObjectFactory;
 import gen.core.segmentation.Srx;
 
 /**
@@ -55,42 +60,16 @@ import gen.core.segmentation.Srx;
  * It loads and saves its data from/to SRX file.
  *
  * @author Maxym Mykhalchuk
+ * @author Thomas Cordonnier
  */
 public class SRX implements Serializable {
 
     private static final long serialVersionUID = 2182125877925944613L;
 
     public static final String CONF_SENTSEG = "segmentation.conf";
+    public static final String SRX_SENTSEG = "segmentation.srx";
 
-    /** Context for JAXB rules processing. */
-    protected static final JAXBContext SRX_JAXB_CONTEXT;
-
-    static {
-        try {
-            SRX_JAXB_CONTEXT = JAXBContext.newInstance(Srx.class);
-        } catch (LinkageError ex) {
-            throw new ExceptionInInitializerError(OStrings.getString("STARTUP_JAXB_LINKAGE_ERROR"));
-        } catch (JAXBException ex) {
-            if (ex.getMessage() != null) {
-                throw new ExceptionInInitializerError(ex.getMessage());
-            }
-            if (ex.getCause() != null) {
-                throw new ExceptionInInitializerError(ex.getCause().getClass().getName() + ": "
-                        + ex.getCause().getMessage());
-            }
-            throw new ExceptionInInitializerError(ex.getClass().getName());
-        }
-    }
-
-    /**
-     * Initializes SRX rules to defaults.
-     */
-    private void init() {
-        this.mappingRules = new ArrayList<MapRule>();
-        this.includeEndingTags = true;
-        this.segmentSubflows = true;
-        initDefaults();
-    }
+    private static final XmlMapper mapper = JaxbXmlMapper.getXmlMapper();
 
     /**
      * Creates an empty SRX, without any rules.
@@ -102,52 +81,118 @@ public class SRX implements Serializable {
 
     public SRX copy() {
         SRX result = new SRX();
-        result.mappingRules = new ArrayList<MapRule>(mappingRules.size());
+        result.setVersion(version);
+        result.setCascade(cascade);
+        result.setSegmentSubflows(segmentSubflows);
+        result.setIncludeIsolatedTags(includeIsolatedTags);
+        result.setIncludeStartingTags(includeStartingTags);
+        result.setIncludeEndingTags(includeEndingTags);
+        result.mappingRules = new ArrayList<>(mappingRules.size());
         for (MapRule rule : mappingRules) {
             result.mappingRules.add(rule.copy());
-        }
-        return result;
+        }        return result;
     }
 
     /**
-     * Saves segmentation rules into specified file.
+     * Saves segmentation rules into specified directory.
+     * @param srx OmegaT object to be written; if null, means that we want to delete the file
+     * @param outDir where to put the file. The file name is forced to {@link #SRX_SENTSEG} and will be in standard SRX format.
      */
-    public static void saveTo(SRX srx, File outFile) throws IOException {
+    public static void saveToSrx(SRX srx, File outDir) throws IOException {
+        File outFile = new File (outDir, SRX_SENTSEG);
+
         if (srx == null) {
             outFile.delete();
+            new File(outDir, CONF_SENTSEG).delete();
             return;
         }
-        try {
-            srx.setVersion(CURRENT_VERSION);
-            XMLEncoder xmlenc = new XMLEncoder(new FileOutputStream(outFile));
-            xmlenc.writeObject(srx);
-            xmlenc.close();
-        } catch (IOException ioe) {
-            Log.logErrorRB("CORE_SRX_ERROR_SAVING_SEGMENTATION_CONFIG");
-            Log.log(ioe);
-            throw ioe;
+
+        ObjectFactory factory = new ObjectFactory();
+        Srx jaxbObject = factory.createSrx();
+        jaxbObject.setVersion("2.0");
+        jaxbObject.setHeader(factory.createHeader());
+        jaxbObject.getHeader().setSegmentsubflows(srx.segmentSubflows ? "yes" : "no");
+        jaxbObject.getHeader().setCascade(srx.cascade ? "yes" : "no");
+        jaxbObject.setBody(factory.createBody());
+        jaxbObject.getBody().setMaprules(factory.createMaprules());
+        jaxbObject.getBody().setLanguagerules(factory.createLanguagerules());
+        for (MapRule mr : srx.getMappingRules()) {
+            Languagemap map = new Languagemap();
+            map.setLanguagerulename(mr.getLanguage());
+            map.setLanguagepattern(mr.getPattern());
+            jaxbObject.getBody().getMaprules().getLanguagemap().add(map);
+            Languagerule lr = new Languagerule();
+            lr.setLanguagerulename(mr.getLanguage());
+            jaxbObject.getBody().getLanguagerules().getLanguagerule().add(lr);
+            for (Rule rule : mr.getRules()) {
+                gen.core.segmentation.Rule jaxbRule = factory.createRule();
+                lr.getRule().add(jaxbRule);
+                jaxbRule.setBreak(rule.isBreakRule() ? "yes" : "no");
+                if (rule.getBeforebreak() != null) {
+                    jaxbRule.setBeforebreak(factory.createBeforebreak());
+                    jaxbRule.getBeforebreak().setContent(rule.getBeforebreak());                
+                }
+                if (rule.getAfterbreak() != null) {
+                    jaxbRule.setAfterbreak(factory.createAfterbreak());                
+                    jaxbRule.getAfterbreak().setContent(rule.getAfterbreak());
+                }
+            }
         }
+
+        try (FileOutputStream fos = new FileOutputStream(outFile)) {
+            mapper.writerWithDefaultPrettyPrinter().writeValue(fos, jaxbObject);
+        } catch (DatabindException e) {
+            Log.logErrorRB("CORE_SRX_ERROR_SAVING_SEGMENTATION_CONFIG");
+            throw new IOException(e);
+        }
+    }
+
+    /**
+     * Loads the local segmentation file. Accepts SRX (default) or old CONF format.
+     * In case you use conf format, rules about old version remain valid.
+     **/
+    public static SRX loadFromDir(File configDir) {
+        File inFile;
+        try {
+            inFile = new File(configDir, SRX_SENTSEG);
+            if (inFile.exists()) {
+                return loadSrxFile(inFile.toURI());
+            }
+        } catch (Exception ignored) {
+        }
+
+        // If file was not present or not readable
+        inFile = new File(configDir, CONF_SENTSEG);
+        if (inFile.exists()) {
+            SRX srx = loadConfFile(inFile);
+            try {
+                saveToSrx(srx, configDir);
+            } catch (Exception o3) {
+                Log.log(o3); // detail why conversion failed, but continue
+            }
+            return srx;
+        }
+
+        // If none of the files (conf and srx) are present,
+        // return null to mimic behavior of previous method
+        return null;
     }
 
     /**
      * Loads segmentation rules from an XML file. If there's an error loading a
-     * file, it calls <code>initDefaults</code>.
+     * file, it calls <code>getDefault</code>.
      * <p>
      * Since 1.6.0 RC8 it also checks if the version of segmentation rules saved
      * is older than that of the current OmegaT, and tries to merge the two sets
      * of rules.
      */
-    public static SRX loadSRX(File configFile) {
-        if (!configFile.exists()) {
-            return null;
-        }
+    private static SRX loadConfFile(File configFile) {
         SRX res;
         try {
-
-            MyExceptionListener myel = new MyExceptionListener();
-            XMLDecoder xmldec = new XMLDecoder(new FileInputStream(configFile), null, myel);
-            res = (SRX) xmldec.readObject();
-            xmldec.close();
+            SRX.MyExceptionListener myel = new SRX.MyExceptionListener();
+            try (XMLDecoder xmldec = new XMLDecoder(new FileInputStream(configFile), null, myel)) {
+                res = (SRX) xmldec.readObject();
+            }
 
             if (myel.isExceptionOccured()) {
                 StringBuilder sb = new StringBuilder();
@@ -157,9 +202,7 @@ public class SRX implements Serializable {
                     sb.append("\n");
                 }
                 Log.logErrorRB("CORE_SRX_EXC_LOADING_SEG_RULES", sb.toString());
-                res = new SRX();
-                res.initDefaults();
-                return res;
+                return SRX.getDefault();
             }
 
             // checking the version
@@ -167,19 +210,50 @@ public class SRX implements Serializable {
                 // yeap, the segmentation config file is of the older version
 
                 // initing defaults
-                SRX defaults = new SRX();
-                defaults.initDefaults();
+                SRX defaults = SRX.getDefault();
                 // and merging them into loaded rules
                 res = merge(res, defaults);
             }
+            Log.log("using segmentation rules from " + configFile);
         } catch (Exception e) {
             // silently ignoring FNF
             if (!(e instanceof FileNotFoundException)) {
                 Log.log(e);
             }
-            res = new SRX();
-            res.initDefaults();
+            res = SRX.getDefault();
         }
+        return res;
+    }
+
+    private static SRX loadSrxFile(URI rulesUri) {
+        try (InputStream inputStream = Files.newInputStream(Paths.get(rulesUri))) {
+            return loadSrxInputStream(inputStream);
+        } catch (Exception e) {
+            Log.log(e);
+        }
+        return null;
+    }
+
+    private static SRX loadSrxInputStream(InputStream io) throws IOException {
+        Srx srx = mapper.readValue(io, Srx.class);
+        HashMap<String, List<Rule>> mapping = new HashMap<>();
+        List<Languagerule> languageRuleList = srx.getBody().getLanguagerules().getLanguagerule();
+        for (Languagerule languagerule: languageRuleList) {
+            mapping.put(
+                    languagerule.getLanguagerulename(),
+                    languagerule.getRule()
+                            .stream()
+                            .map(Rule::new)
+                            .collect(Collectors.toList()));
+        }
+        SRX res = new SRX();
+        res.setSegmentSubflows(!"no".equalsIgnoreCase(srx.getHeader().getSegmentsubflows()));
+        res.setCascade(!"no".equalsIgnoreCase(srx.getHeader().getCascade()));
+        res.setVersion(srx.getVersion());
+        res.setMappingRules(srx.getBody().getMaprules().getLanguagemap()
+                .stream()
+                .map(s -> new MapRule(s, mapping.get(s.getLanguagerulename())))
+                .collect(Collectors.toList()));
         return res;
     }
 
@@ -193,20 +267,20 @@ public class SRX implements Serializable {
     }
 
     /** Merges two sets of segmentation rules together. */
-    private static SRX merge(SRX current, SRX defaults) {
-        current = upgrade(current, defaults);
+    private static SRX merge(final SRX current, final SRX defaults) {
+        SRX merged = upgrade(current, defaults);
 
         int defaultMapRulesN = defaults.getMappingRules().size();
         for (int i = 0; i < defaultMapRulesN; i++) {
             MapRule dmaprule = defaults.getMappingRules().get(i);
-            String dcode = dmaprule.getLanguageCode();
+            String dcode = dmaprule.getLanguage();
             // trying to find
             boolean found = false;
-            int currentMapRulesN = current.getMappingRules().size();
+            int currentMapRulesN = merged.getMappingRules().size();
             MapRule cmaprule = null;
             for (int j = 0; j < currentMapRulesN; j++) {
-                cmaprule = current.getMappingRules().get(j);
-                String ccode = cmaprule.getLanguageCode();
+                cmaprule = merged.getMappingRules().get(j);
+                String ccode = cmaprule.getLanguage();
                 if (dcode.equals(ccode)) {
                     found = true;
                     break;
@@ -241,17 +315,17 @@ public class SRX implements Serializable {
                 // just adding before the default rules
                 int englishN = currentMapRulesN;
                 for (int j = 0; j < currentMapRulesN; j++) {
-                    cmaprule = current.getMappingRules().get(j);
+                    cmaprule = merged.getMappingRules().get(j);
                     String cpattern = cmaprule.getPattern();
                     if (DEFAULT_RULES_PATTERN.equals(cpattern)) {
                         englishN = j;
                         break;
                     }
                 }
-                current.getMappingRules().add(englishN, dmaprule);
+                merged.getMappingRules().add(englishN, dmaprule);
             }
         }
-        return current;
+        return merged;
     }
 
     /** Implements some upgrade heuristics. */
@@ -262,7 +336,7 @@ public class SRX implements Serializable {
             String def = "Default (English)";
             for (int i = 0; i < current.getMappingRules().size(); i++) {
                 MapRule maprule = current.getMappingRules().get(i);
-                if (def.equals(maprule.getLanguageCode())) {
+                if (def.equals(maprule.getLanguage())) {
                     maprule.setLanguage(LanguageCodes.DEFAULT_CODE);
                     maprule.getRules().removeAll(getRulesForLanguage(defaults, LanguageCodes.ENGLISH_CODE));
                     maprule.getRules().removeAll(getRulesForLanguage(defaults, LanguageCodes.F_TEXT_CODE));
@@ -284,7 +358,7 @@ public class SRX implements Serializable {
      */
     private static List<Rule> getRulesForLanguage(final SRX source, String langName) {
         for (MapRule mr : source.getMappingRules()) {
-            if (langName.equals(mr.getLanguageCode())) {
+            if (langName.equals(mr.getLanguage())) {
                 return mr.getRules();
             }
         }
@@ -322,51 +396,22 @@ public class SRX implements Serializable {
     // Patterns
     private static final String DEFAULT_RULES_PATTERN = ".*";
 
-    /**
-     * Initializes default rules.
-     */
-    private void initDefaults() {
-        try {
-            List<MapRule> newMap = new ArrayList<MapRule>();
-            URL rulesUrl = this.getClass().getResource("defaultRules.srx");
-            Srx data = (Srx) SRX_JAXB_CONTEXT.createUnmarshaller().unmarshal(rulesUrl);
-
-            for (Languagerule rules : data.getBody().getLanguagerules().getLanguagerule()) {
-
-                String lang = rules.getLanguagerulename();
-                String pattern = DEFAULT_RULES_PATTERN;
-                for (Languagemap lm : data.getBody().getMaprules().getLanguagemap()) {
-                    if (lm.getLanguagerulename().equals(rules.getLanguagerulename())) {
-                        pattern = lm.getLanguagepattern();
-                        break;
-                    }
-                }
-                List<Rule> rulesList = new ArrayList<Rule>(rules.getRule().size());
-                for (gen.core.segmentation.Rule r : rules.getRule()) {
-                    boolean isBreak = "yes".equalsIgnoreCase(r.getBreak());
-                    rulesList.add(new Rule(isBreak, r.getBeforebreak().getContent(), r.getAfterbreak()
-                            .getContent()));
-                }
-
-                newMap.add(new MapRule(lang, pattern, rulesList));
-            }
-            // set rules only if no errors
-            getMappingRules().addAll(newMap);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
-
     public static SRX getDefault() {
-        SRX srx = new SRX();
-        srx.init();
-        return srx;
+        try {
+            SRX srx = loadSrxInputStream(SRX.class.getResourceAsStream("defaultRules.srx"));
+            srx.includeEndingTags = true;
+            srx.segmentSubflows = true;
+            return srx;
+        } catch (IOException e) {
+            Log.log(e);
+            throw new RuntimeException("Unrecoverable error occurred!");
+        }
     }
 
     /**
      * Finds the rules for a certain language.
      * <p>
-     * Usually (if the user didn't screw up the setup) there're a default
+     * Usually (if the user didn't screw up the setup) there are default
      * segmentation rules, so it's a good idea to rely on this method always
      * returning at least some rules.
      * <p>
@@ -374,14 +419,41 @@ public class SRX implements Serializable {
      * rules.
      */
     public List<Rule> lookupRulesForLanguage(Language srclang) {
-        List<Rule> rules = new ArrayList<Rule>();
+        List<Rule> rules = new ArrayList<>();
         for (int i = 0; i < getMappingRules().size(); i++) {
             MapRule maprule = getMappingRules().get(i);
             if (maprule.getCompiledPattern().matcher(srclang.getLanguage()).matches()) {
                 rules.addAll(maprule.getRules());
+                if (!this.cascade) {
+                    break; // non-cascading means: do not search for other patterns
+                }
             }
         }
         return rules;
+    }
+
+    /**
+     * Holds value of property cascade: true, unless we read an SRX where it was set to false.
+     */
+    private boolean cascade = true;
+
+    /**
+     * Getter for property cascade.
+     *
+     * @return Value of property cascade.
+     */
+    public boolean isCascade() {
+        return this.cascade;
+    }
+
+    /**
+     * Setter for property cascade.
+     *
+     * @param cascade
+     *            New value of property cascade.
+     */
+    public void setCascade(boolean cascade) {
+        this.cascade = cascade;
     }
 
     /**

@@ -47,11 +47,9 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.regex.Pattern;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
-
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import org.apache.commons.io.FileUtils;
+
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.IAlignCallback;
@@ -60,6 +58,7 @@ import org.omegat.filters2.IParseCallback;
 import org.omegat.filters2.ITranslateCallback;
 import org.omegat.filters2.Instance;
 import org.omegat.filters2.TranslationException;
+import org.omegat.util.JaxbXmlMapper;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
@@ -88,8 +87,6 @@ public class FilterMaster {
     /** name of the filter configuration file */
     public static final String FILE_FILTERS = "filters.xml";
 
-    private static final JAXBContext CONFIG_CTX;
-
     /**
      * There was no version of file filters support (1.4.5 Beta 1 -- 1.6.0
      * RC12).
@@ -108,14 +105,6 @@ public class FilterMaster {
 
     /** Classes of all filters. */
     static List<Class<?>> filtersClasses = Collections.emptyList();
-
-    static {
-        try {
-            CONFIG_CTX = JAXBContext.newInstance(Filters.class);
-        } catch (Exception ex) {
-            throw new ExceptionInInitializerError(ex);
-        }
-    }
 
     public static void setFilterClasses(List<Class<?>> classes) {
         filtersClasses = new ArrayList<>(classes);
@@ -446,8 +435,8 @@ public class FilterMaster {
         }
         Filters result;
         try {
-            Unmarshaller unm = CONFIG_CTX.createUnmarshaller();
-            result = (Filters) unm.unmarshal(configFile);
+            XmlMapper mapper = JaxbXmlMapper.getXmlMapper();
+            result = mapper.readValue(configFile, Filters.class);
         } catch (Exception e) {
             Log.logErrorRB("FILTERMASTER_ERROR_LOADING_FILTERS_CONFIG");
             Log.log(e);
@@ -468,13 +457,12 @@ public class FilterMaster {
      */
     public static void saveConfig(Filters config, File configFile) throws IOException {
         if (config == null) {
-            configFile.delete();
+            boolean ignored = configFile.delete();
             return;
         }
         try {
-            Marshaller m = CONFIG_CTX.createMarshaller();
-            m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-            m.marshal(config, configFile);
+            XmlMapper mapper = JaxbXmlMapper.getXmlMapper();
+            mapper.writerWithDefaultPrettyPrinter().writeValue(configFile, config);
         } catch (Exception e) {
             Log.logErrorRB("FILTERMASTER_ERROR_SAVING_FILTERS_CONFIG");
             Log.log(e);
@@ -517,7 +505,7 @@ public class FilterMaster {
 
     /**
      * Calculate the target path corresponding to the given source file.
-     * 
+     *
      * @param sourceDir
      *            Path to the project's <code>source</code> dir
      * @param srcRelPath
@@ -736,7 +724,7 @@ public class FilterMaster {
     /**
      * Clone one filter's config for editing.
      *
-     * @param f
+     * @param filter
      *            one filter's config
      * @return new config instance
      */
@@ -759,8 +747,8 @@ public class FilterMaster {
     /**
      * Clone one filter's instance config for editing.
      *
-     * @param f
-     *            new filter's instance config
+     * @param files
+     *            new filter's instance config file
      * @return new config instance
      */
     private static Files cloneFiles(Files files) {
@@ -786,7 +774,7 @@ public class FilterMaster {
         }
         Filter fc = new Filter();
         fc.setClassName(f.getClass().getName());
-        fc.setEnabled(f.isEnabledInDefault());
+        fc.setEnabled(true);
         for (Instance ins : f.getDefaultInstances()) {
             Files ff = new Files();
             ff.setSourceEncoding(ins.getSourceEncoding());

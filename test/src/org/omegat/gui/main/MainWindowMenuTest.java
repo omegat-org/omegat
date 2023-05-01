@@ -39,6 +39,7 @@ import javax.swing.JMenuItem;
 
 import org.junit.Test;
 import org.omegat.core.TestCore;
+import org.omegat.util.StaticUtils;
 
 /**
  * @author Alex Buloichik
@@ -68,7 +69,7 @@ public class MainWindowMenuTest extends TestCore {
             }
         }
 
-        for (Field f : MainWindowMenu.class.getDeclaredFields()) {
+        for (Field f : StaticUtils.getAllModelFields(MainWindowMenu.class)) {
             if (JMenuItem.class.isAssignableFrom(f.getType()) && f.getType() != JMenu.class) {
                 count++;
                 String actionMethodName = f.getName() + "ActionPerformed";

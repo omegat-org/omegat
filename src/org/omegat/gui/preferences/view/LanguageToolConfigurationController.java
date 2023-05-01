@@ -73,6 +73,8 @@ import org.languagetool.rules.CategoryId;
 import org.languagetool.rules.Rule;
 import org.languagetool.rules.RuleMatch;
 import org.languagetool.tools.Tools;
+import org.xml.sax.SAXException;
+
 import org.omegat.core.Core;
 import org.omegat.gui.preferences.BasePreferencesController;
 import org.omegat.languagetools.LanguageToolPrefs;
@@ -81,7 +83,6 @@ import org.omegat.languagetools.LanguageToolWrapper.BridgeType;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.StringUtil;
-import org.xml.sax.SAXException;
 
 /**
  * @author Panagiotis Minos
@@ -539,10 +540,6 @@ public class LanguageToolConfigurationController extends BasePreferencesControll
             throw new UnsupportedOperationException();
         }
 
-        @Override
-        public void reset() {
-            throw new UnsupportedOperationException();
-        }
     }
 
     /**

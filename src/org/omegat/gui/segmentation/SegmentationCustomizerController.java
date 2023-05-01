@@ -33,6 +33,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 import org.omegat.core.Core;
+import org.omegat.core.segmentation.LanguageCodes;
 import org.omegat.core.segmentation.MapRule;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.core.segmentation.Segmenter;
@@ -226,8 +227,9 @@ public class SegmentationCustomizerController extends BasePreferencesController 
             commitTableEdits();
             MappingRulesModel model = (MappingRulesModel) panel.mapTable.getModel();
             String set = model.getValueAt(panel.mapTable.getSelectedRow(), 0).toString();
+            String setName = LanguageCodes.getLanguageName(set);
             String title = OStrings.getString("CONFIRM_DIALOG_TITLE");
-            String message = StringUtil.format(OStrings.getString("SEG_CONFIRM_REMOVE_SENTSEG_SET"), set);
+            String message = StringUtil.format(OStrings.getString("SEG_CONFIRM_REMOVE_SENTSEG_SET"), setName);
             if (JOptionPane.showConfirmDialog(panel, message, title,
                     JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 model.removeRow(panel.mapTable.getSelectedRow());

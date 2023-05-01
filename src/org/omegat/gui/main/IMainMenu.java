@@ -49,5 +49,7 @@ public interface IMainMenu {
 
     JMenu getAutoCompletionMenu();
 
+    JMenu getHelpMenu();
+
     void invokeAction(String action, int modifiers);
 }

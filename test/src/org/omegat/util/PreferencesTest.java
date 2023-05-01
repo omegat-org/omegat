@@ -62,8 +62,8 @@ public class PreferencesTest {
     }
 
     /**
-     * Test that if an error is encountered when loading the
-     * preferences file, the original file is backed up.
+     * Test that if an error is encountered when loading the preferences file,
+     * the original file is backed up.
      */
     @Test
     public void testPreferencesBackup() throws Exception {

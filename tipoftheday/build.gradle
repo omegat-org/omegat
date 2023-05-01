@@ -1,0 +1,52 @@
+/**
+ * "Tip Of The Day" feature
+ */
+
+plugins {
+    id 'java-library'
+}
+
+sourceSets {
+    java {
+        main {
+            resources {
+                srcDirs=['docs', 'src/main/resources']
+            }
+        }
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compileOnly(project.rootProject)
+    // Libs are provided in the "source" distribution only
+    if (providedLibsDir.directory) {
+        compileOnly fileTree(dir: providedLibsDir, include: '**/*.jar')
+    } else {
+        // runtime dependencies should be in main project
+        compileOnly "tokyo.northside:tipoftheday:0.4.1"
+        compileOnly "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.13.4"
+    }
+}
+
+jar {
+    archiveAppendix.set("omegat")
+    destinationDirectory.set(new File(rootProject.buildDir, "modules"))
+    def pluginProp = loadProperties(file('plugin.properties'))
+    manifest {
+        attributes('License': 'GNU Public License version 3 or later',
+                'Implementation-Version': project.version,
+                'OmegaT-Plugins': pluginProp.Class,
+                'Plugin-Author': pluginProp.Author,
+                'Plugin-Link': pluginProp.Link,
+                'Plugin-Version': project.version,
+                'Plugin-Name': pluginProp.Name,
+                'Plugin-Category': pluginProp.Category,
+                'Plugin-Description': pluginProp.Description
+        )
+    }
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+}

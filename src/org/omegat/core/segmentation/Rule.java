@@ -49,6 +49,16 @@ public class Rule implements Serializable {
         setAfterbreak(afterbreak);
     }
 
+    public Rule(gen.core.segmentation.Rule s) {
+        setBreakRule("yes".equalsIgnoreCase(s.getBreak()));
+        if (s.getBeforebreak() != null) {
+            setBeforebreak(s.getBeforebreak().getContent());
+        }
+        if (s.getAfterbreak() != null) {
+            setAfterbreak(s.getAfterbreak().getContent());
+        }
+    }
+
     public Rule copy() {
         Rule result = new Rule();
         result.breakRule = breakRule;

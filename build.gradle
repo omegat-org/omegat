@@ -210,7 +210,7 @@ dependencies {
         implementation 'org.eclipse.jgit:org.eclipse.jgit.gpg.bc:6.5.0.202303070854-r'
 
         // For subversion
-        implementation 'org.tmatesoft.svnkit:svnkit:1.10.9'
+        implementation 'org.tmatesoft.svnkit:svnkit:1.10.11'
 
         // Team project conflict resolution
         implementation 'org.madlonkay:supertmxmerge:2.0.3'

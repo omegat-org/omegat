@@ -28,8 +28,8 @@ package org.omegat.languagetools;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 import java.util.Collections;
 import java.util.List;
@@ -99,14 +99,10 @@ public class LanguageToolTest {
         try {
             server.run();
 
-            try {
-                new LanguageToolNetworkBridge(SOURCE_LANG, TARGET_LANG, "http://localhost:8081");
-                fail("URL not specifying API v2 should fail due to XML response instead of JSON");
-                // TODO: LanguageTool will drop XML entirely in version 3.6; this
-                // test might need to be adjusted then.
-            } catch (Exception e) {
-                // OK
-            }
+            assertThrows("URL not specifying API actions should fail due to missing argument.",
+                    java.lang.Exception.class,
+                    () -> new LanguageToolNetworkBridge(SOURCE_LANG, TARGET_LANG, "http://localhost:8081")
+            );
 
             ILanguageToolBridge bridge = new LanguageToolNetworkBridge(SOURCE_LANG, TARGET_LANG,
                     "http://localhost:8081/v2/check");

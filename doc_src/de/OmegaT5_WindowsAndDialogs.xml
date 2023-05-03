@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.windows.and.dialogs">
+  <title id="chapter.windows.and.dialogs.title">Fenster und Dialogfenster</title>
+  
+  <para>Ein <emphasis>Fenster</emphasis> kann parallel zum Editor offen sein und lässt Sie mit beiden interagieren.</para>
+  <para>Ein <emphasis>Dialogfenster</emphasis> verlangt eine Aktion von Ihnen und muss geschlossen werden, bevor Sie mit dem Übersetzen weitermachen können.</para>
+
+  <xi:include href="Dialogs_ProjectProperties.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+  <xi:include href="Windows_SourceFilesList.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+  <xi:include href="Windows_TextSearch.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+  <xi:include href="Windows_TextReplace.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+  <xi:include href="Windows_Aligner.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+  <xi:include href="Windows_Scripts.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+</chapter>

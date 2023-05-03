@@ -11,7 +11,7 @@
                2014 Yu Tang
                2015 Aaron Madlon-Kay
                2021 Hiroshi Miura
-               Home page: http://www.omegat.org/
+               Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
  This file is part of OmegaT.
@@ -27,7 +27,7 @@
  GNU General Public License for more details.
 
  You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 package org.omegat.gui.theme;
 
@@ -251,6 +251,24 @@ public class DefaultFlatTheme extends DelegatingLookAndFeel {
 
             UIManager.put("DragControler.detachCursor", ResourcesUtil.getBundledImage("appbar.fullscreen.png"));
         }
+
+        // Main window newUI icons
+        if (defaults.getBoolean("OmegaT.theme.dark")) {
+            defaults.put("OmegaT.newUI.menu.icon", getIcon("newUI.dark.burgerMenu.png"));
+            defaults.put("OmegaT.newUI.menu.icon@2x", getIcon("newUI.dark.burgerMenu@2x.png"));
+            defaults.put("OmegaT.newUI.search.icon", getIcon("newUI.dark.search.png"));
+            defaults.put("OmegaT.newUI.search.icon@2x", getIcon("newUI.dark.search@2x.png"));
+            defaults.put("OmegaT.newUI.settings.icon", getIcon("newUI.dark.settings.png"));
+            defaults.put("OmegaT.newUI.settings.icon@2x", getIcon("newUI.dark.settings@2x.png"));
+        } else {
+            defaults.put("OmegaT.newUI.menu.icon", getIcon("newUI.burgerMenu.png"));
+            defaults.put("OmegaT.newUI.menu.icon@2x", getIcon("newUI.burgerMenu@2x.png"));
+            defaults.put("OmegaT.newUI.search.icon", getIcon("newUI.search.png"));
+            defaults.put("OmegaT.newUI.search.icon@2x", getIcon("newUI.search@2x.png"));
+            defaults.put("OmegaT.newUI.settings.icon", getIcon("newUI.settings.png"));
+            defaults.put("OmegaT.newUI.settings.icon@2x", getIcon("newUI.settings@2x.png"));
+        }
+
         return defaults;
     }
 

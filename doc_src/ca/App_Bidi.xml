@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="app.bidi">
+  <title id="app.bidi.title">Caràcters de format direccional</title>
+
+  <para>Els caràcters de control bidireccional estan disponibles en el menú <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.insert.unicode.control.character" endterm="menus.edit.insert.unicode.control.character.title"/>. Es poden utilitzar per a:</para>
+
+  <itemizedlist>
+	<listitem>
+	  <para>Inserir un caràcter invisible amb direccionalitat forta per a forçar una posició específica per a un caràcter amb direccionalitat dèbil o neutral.</para>
+	</listitem>
+	<listitem>
+	  <para>Crear una secció de text en la direcció contrària a la del segment.</para>
+	</listitem>
+  </itemizedlist>
+  
+  <para>Aquests caràcters de control canvien la direcció però són invisibles. Utilitzeu <link linkend="menus.view" endterm="menus.view.title"/><link linkend="menus.view.mark.bidirectional.algorithm.control.character" endterm="menus.view.mark.bidirectional.algorithm.control.character.title"/> per a mostrar una indicació visual de la posició.</para>
+
+  <section id="app.bidi.marks">
+	<title id="app.bidi.marks.title">Marques</title>
+
+	<para>Per a canviar la posició d'un caràcter amb direccionalitat feble o neutral (com els signes de puntuació), inseriu un caràcter LRM o RLM a continuació, en funció de la direccionalitat del segment:</para>
+
+	<itemizedlist>
+	  <listitem>
+		<para>Inseriu un caràcter LRM després d'un caràcter amb direccionalitat feble que s'ha d'escriure d'esquerra a dreta en un segment de dreta a esquerra (p. ex., un fragment en anglès en un text en àrab).</para>
+	  </listitem>
+	  <listitem>
+		<para>Inseriu un caràcter RLM després d'un caràcter amb direccionalitat feble que s'ha d'escriure de dreta a esquerra en un segment d'esquerra a dreta (p. ex., un fragment en àrab en un text en anglès).</para>
+	  </listitem>
+	</itemizedlist>
+  </section>
+
+  <section id="app.bidi.embeddings">
+	<title id="app.bidi.embeddings.title">Incrustacions</title>
+
+	<para>Les incrustacions es poden utilitzar per a crear un fragment més llarg de text (de diverses paraules i espais) que s'hagi d'escriure en la direcció contrària a la del segment. Podeu crear dos tipus d'incrustacions en funció de la direccionalitat del segment:</para>
+
+	<itemizedlist>
+	  <listitem>
+		<para>Per a crear una incrustació d'esquerra a dreta en un segment de dreta a esquerra, inseriu un caràcter d'incrustació d'esquerra a dreta (LRE), escriviu o inseriu el text d'esquerra a dreta i, a continuació, inseriu el caràcter de fi del format direccional (PDF).</para>
+	  </listitem>
+	  <listitem>
+		<para>Per a crear una incrustació de dreta a esquerra en un segment d'esquerra a dreta, inseriu un caràcter d'incrustació de dreta a esquerra (RLE), escriviu o inseriu el text de dreta a esquerra i, a continuació, inseriu el caràcter de fi del format direccional (PDF).</para>
+	  </listitem>
+	</itemizedlist>
+  </section>
+</section>

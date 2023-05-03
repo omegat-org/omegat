@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
    <head><meta charset="UTF-8" />
       <title>Παράρτημα C. Ομαδικά έργα του OmegaT</title>
-      <link href="OmegaT_webhelp.css" rel="stylesheet" type="text/css" />
+      <link href="OmegaT.css" rel="stylesheet" type="text/css" />
       <meta content="DocBook XSL Stylesheets V1.79.1" name="generator" />
       <link href="appendix.keyboard.html" rel="prev" title="Παράρτημα B. Συντμεύσεις πληκτρολογίου στο πρόγραμμα επεξεργασίας (editor)" />
       <link href="appendix.TokenizerPlugin.inOmegaT.html" rel="next" title="Παράρτημα D. Πρόσθετο Σύστημα δημιουργίας λεκτικών μονάδων (Tokenizer plugin)" />
@@ -10,7 +10,7 @@
    
 <body>
     <div id="wh-header">
-    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT - Εγχειρίδιο χρήστη</a></div></div>
+    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 2.9.9 - Εγχειρίδιο χρήστη</a></div></div>
 
     <div id="wh-body">
       <div class="wh-icon-menu" id="wh-menu"></div>
@@ -47,7 +47,7 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h1 class="title">Παράρτημα C. Ομαδικά έργα του OmegaT<a class="indexterm" id="d0e10176"></a>
+                  <h1 class="title">Παράρτημα C. Ομαδικά έργα του OmegaT<a class="indexterm" id="d0e9675"></a>
                   </h1>
                </div>
             </div>
@@ -56,34 +56,34 @@
             <ul class="toc">
                <li>
                   <span class="section">
-                     <a href="appendix.TeamProjects.html#d0e10183">Έλεγχος έκδοσης (Version control) - Εισαγωγή</a>
+                     <a href="appendix.TeamProjects.html#d0e9682">Έλεγχος έκδοσης (Version control) - Εισαγωγή</a>
                   </span>
                </li>
                <li>
                   <span class="section">
-                     <a href="appendix.TeamProjects.html#d0e10254">Διαμοιρασμός ενός έργου με τη χρήση SVN</a>
+                     <a href="appendix.TeamProjects.html#d0e9753">Διαμοιρασμός ενός έργου με τη χρήση SVN</a>
                   </span>
                   <ul>
                      <li>
                         <span class="section">
-                           <a href="appendix.TeamProjects.html#d0e10275">Δημιουργία αποθετηρίου</a>
+                           <a href="appendix.TeamProjects.html#d0e9774">Δημιουργία αποθετηρίου</a>
                         </span>
                      </li>
                      <li>
                         <span class="section">
-                           <a href="appendix.TeamProjects.html#d0e10335">Εισαγωγή του έργου στο αποθετήριο SVN - Windows</a>
+                           <a href="appendix.TeamProjects.html#d0e9834">Εισαγωγή του έργου στο αποθετήριο SVN - Windows</a>
                         </span>
                      </li>
                   </ul>
                </li>
                <li>
                   <span class="section">
-                     <a href="appendix.TeamProjects.html#d0e10472">Χρήση Ομαδικού έργου στο OmegaT</a>
+                     <a href="appendix.TeamProjects.html#d0e9971">Χρήση Ομαδικού έργου στο OmegaT</a>
                   </span>
                </li>
             </ul>
          </div>
-         <section class="section" id="d0e10183">
+         <section class="section" id="d0e9682">
             <div class="titlepage">
                <div>
                   <div>
@@ -159,22 +159,22 @@
                </ul>
             </div>
          </section>
-         <section class="section" id="d0e10254">
+         <section class="section" id="d0e9753">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both">Διαμοιρασμός ενός έργου με τη χρήση SVN<a class="indexterm" id="d0e10257"></a>
+                     <h2 class="title" style="clear: both">Διαμοιρασμός ενός έργου με τη χρήση SVN<a class="indexterm" id="d0e9756"></a>
                      </h2>
                   </div>
                </div>
             </div>
             <p>Υπάρχουν δύο τρόποι για να τρέχετε έναν διακομιστή SVN: μπορείτε να εγκαταστήσετε το SVN στον δικό σασς διακομιστή, ή μπορείτε να χρησιμοποιήσετε μια φιλοξενούμενη υπηρεσία (hosted service). Όταν χρησιμοποιείτε μία εξωτερική υπηρεσία, πρέπει να συνηδοτηποιήσετε τις ενδεχόμενες συνέπειες, από άποψη εμπιστευτικότητας, αφού φορτώνετε το αρχικό έγγραφο σε έναν διακομιστή εκτός του δικού σας άμεσου ελέγχου. Εναλλακτικά, προς αποφυγή αυτού του θέματος, μπορείτε να στήσετε έναν ιδιωτικό διακομιστή SVN, π.χ. αν ήδη έχετε έναν διακομιστή Apache που περιλαμβάνει το εν λόγω λογισμικό (π.χ. VisualSVN).</p>
             <p>Όταν ο διακομιστής SVN θα είναι διαθέσιμος, οι διαχειριστές του έργου πρέπει να εγκαταστήσουν τοπικά έναν πελάτη SVN, για να μπορούν να διαχειρίζονται τα περιεχόμενα του έργου στους δικούς τους υπολογιστές. Για τα Windows συστήνουμε το <a class="ulink" href="http://tortoisesvn.net/" target="_top">TortoiseSVN</a>. Για τα Mac μπορείτε να κατεβάσετε τον πελάτη, παρεμπιπτόντως από το <a class="ulink" href="https://sourceforge.net/projects/macsvn/" target="_top">SourceForge</a>, Για το Linux βλέπε <a class="ulink" href="http://www.yolinux.com/TUTORIALS/Subversion.html" target="_top">Subversion Commands and Scripts</a>.</p>
-            <section class="section" id="d0e10275">
+            <section class="section" id="d0e9774">
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title">Δημιουργία αποθετηρίου<a class="indexterm" id="d0e10278"></a>
+                        <h3 class="title">Δημιουργία αποθετηρίου<a class="indexterm" id="d0e9777"></a>
                         </h3>
                      </div>
                   </div>
@@ -204,7 +204,7 @@
                <p>Μπορείτε να διαχειρίζεσθε τα έργα, σύμφωνα με το στυλ ανάπτυξης και τις ανάγκες σας. Αντίστοιχα με αυτό που ισχύει για τα έργα του OmegaT, πρέπει να έχετε χωριστά αποθετήρια για τα διαφορετικά ζεύγη γλωσσών. Μέσα σε ένα δεδομέν ζεύγος γλωσσών, είναι προτιμώτερο να διατηρείτε διαφορετικά θέματα και/ή πελάτες, και ως διαφορετικά αποθετήρια. Η εναλλακτική είναι να έχετε ένα ενιαίο αποθετήριο με υποκαταλόγους <code class="literal">Project1</code>, <code class="literal">Project2</code>, κπ., και να διαμοιράζεσθε το κοινό υλικό μέσω κοινών καταλόγων <code class="literal">tm</code>, <code class="literal">γλωσσαρίου</code> και <code class="literal">λεξικού</code>.</p>
                <p>Για το παράδειγμα που δείχνουμε εδώ, κλίναμε υπέρ του ενός ενιαίου έργου OmegaT - ένα ενιαίο αποθετήριο, για λόγους απλότητας.</p>
             </section>
-            <section class="section" id="d0e10335">
+            <section class="section" id="d0e9834">
                <div class="titlepage">
                   <div>
                      <div>
@@ -283,7 +283,7 @@
                </div>
             </section>
          </section>
-         <section class="section" id="d0e10472">
+         <section class="section" id="d0e9971">
             <div class="titlepage">
                <div>
                   <div>

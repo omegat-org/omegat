@@ -1,129 +1,160 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<appendix id="appendix.glossaries">
-  <title>Glossare</title>
+<section id="app.glossaries">
+  <title id="app.glossaries.title">Glossare</title>
 
-  <para>Glossare sind Terminologiedateien. Sie können manuell erstellt und aktualisiert oder aus anderen Projekten importiert werden.</para>
+  <para>Glossare sind Terminologiedateien, die im <link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/>-Ordner aufbewahrt werden.</para>
 
-  <para>Ein Projekt kann eine beliebige Anzahl von Referenzglossaren haben, allerdings ist nur ein Glossar, das Standardglossar des Projekts, direkt über die OmegaT-Benutzeroberfläche beschreibbar.</para>
+  <para>Alle Begriffe in einem Segment, die in <emphasis>irgendeinem</emphasis> der Glossare übereinstimmen, werden im <link linkend="panes.glossary" endterm="panes.glossary.title"/>-Bereich angezeigt.</para>
 
-  <para>Wenn OmegaT Glossarbegriffe im Segment findet, werden diese im Glossarbereich angezeigt.</para>
+  <para>Quellbegriffe können aus mehreren Wörtern bestehen.</para>
 
-  <section>
-    <title>Standardglossar</title>
+  <para>Es gibt zwei Arten von Glossardateien:</para>
 
-    <para>Das beschreibbare Standardglossar befindet sich im Projektordner <filename>/glossary</filename> und heißt <filename>glossary.txt</filename>.</para>
+  <variablelist>
+	<varlistentry>
+	  <term>Das Projektglossar</term>
+	  <listitem>
+		<para>Verwenden Sie <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.create.glossary.entry" endterm="menus.edit.create.glossary.entry.title"/>, um neue Begriffe in dieses Glossar einzutragen. Deshalb wird es auch als <emphasis>beschreibbares</emphasis> Glossar bezeichnet.</para>
+		
+		<para>Verwenden Sie <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.access.project.contents.title" endterm="menus.project.access.project.contents.title"/>, um direkt darauf zuzugreifen. Sie können es dann in einem Texteditor öffnen und ändern.</para>
 
-    <para>Den Namen und Speicherort können Sie im Dialogfenster &quot;Projekteigenschaften&quot; ändern. Beachten Sie jedoch, dass der Dateiname mit <filename>.txt</filename> oder <filename>.utf8</filename> enden muss und dass der Speicherort im Projektordner <filename>/glossary</filename> sein muss.</para>
+		<para>Sie müssen die Datei nicht vorab vorbereiten.</para>
 
-    <para>Die angegebene Datei muss nicht unbedingt vorhanden sein - sie wird automatisch erstellt, sobald der erste Glossareintrag hinzugefügt wird. Wenn die Datei bereits vorhanden ist, wird das Format oder die Kodierung der Datei nicht auf Richtigkeit überprüft: Die neuen Einträge werden immer im tabulatorgetrennten Format sein und die Datei wird in der UTF-8-Kodierung gespeichert.</para>
+		<para>Sie wird erstellt, wenn Sie das erste Mal einen Eintrag zum Glossar hinzufügen.</para>
+
+		<note>
+          <para>Wenn Sie eine vorhandene Datei als Standardglossar verwenden, werden alle neuen Einträge standardmäßig im tabulatorgetrennten Format und in UTF-8 gespeichert.</para>
+
+		  <para>Wenn Sie eine andere Kodierung angeben möchten, können Sie einen &quot;magischen&quot; Kommentar hinzufügen, der die folgende Form hat:</para>
+
+		  <simplelist>
+            <member>
+              <code># -*- coding: &lt;Zeichensatz&gt; -*-</code>,</member>
+          </simplelist>
+		  
+          <para>wobei <parameter>&lt;Zeichensatz&gt;</parameter> in der Regel einer der Zeichensätze ist, die in <ulink url="http://www.iana.org/assignments/character-sets/character-sets.xhtml">IANA Charset Registry</ulink> aufgelistet sind.</para>
+		</note>
+	  </listitem>
+	</varlistentry>
+	
+	<varlistentry>
+	  <term>Referenzglossare</term>
+	  <listitem>
+		<para>Referenzglossare sind Terminologiedateien in einem von OmegaT erkannten Format. Sie können diese nicht über die Benutzeroberfläche von OmegaT ändern, wie es beim projekteigenen Glossar der Fall ist, aber Sie können stattdessen einen Texteditor verwenden.</para>
+	  </listitem>
+	</varlistentry>
+  </variablelist>
+
+  <note>
+	<para>Änderungen an einer beliebigen Glossardatei werden von OmegaT sofort erkannt und im <link linkend="panes.glossary" endterm="panes.glossary.title"/>-Bereich angezeigt.</para>
+  </note>
+
+  <section id="glossaries.glossary.folder">
+    <title id="glossaries.glossary.folder.title">Ordner für Glossardateien</title>
+
+    <para>Standardmäßig enthält jedes Projekt einen <link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/>-Ordner, wo das beschreibbare Glossar aufbewahrt wird, sowie alle Referenzglossare, die Sie dem Projekt hinzufügen möchten. Siehe die Projekteigenschaft <link linkend="dialogs.project.properties.file.locations.glossaries" endterm="dialogs.project.properties.file.locations.glossaries.title"/> für weitere Informationen.</para>
+
+    <para>Alle Glossare müssen sich im <link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/>-Ordner befinden. Glossare in Unterordnern werden ebenfalls erkannt.</para>
+
+    <para>Innerhalb dieses Ordners können Sie mehrere Terminologie-Unterordner erstellen, die nach Thema, Kunde oder einer anderen Kategorie passend zu Ihrem Workflow geordnet sind.</para>
+    <para>Verwenden Sie die Projekteigenschaft <link linkend="dialogs.project.properties.file.locations.glossaries" endterm="dialogs.project.properties.file.locations.glossaries.title"/>, um den Speicherort des Ordners für Glossardateien zu ändern. Dieser Ordner kann außerhalb des Projekts festgelegt werden, so dass Sie ihn oder einen der spezifischen Unterordner in anderen Projekten verwenden können.</para>
   </section>
 
-  <section>
-    <title>Verwendung</title>
+  <section id="glossaries.default.glossary">
+    <title id="glossaries.default.glossary.title">Projekteigenes Glossar</title>
 
-    <para>Um ein vorhandenes Glossar zu verwenden, platzieren Sie es einfach nach dem Erstellen des Projekts in den Ordner <filename>/glossary</filename>. <application>OmegaT</application> erkennt automatisch die Glossardateien in diesem Ordner, wenn ein Projekt geöffnet wird.</para>
+    <para>Das beschreibbare Glossar des Projekts befindet sich standardmäßig im <link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/>-Ordner und heißt <link linkend="project.folder.glossary.txt" endterm="project.folder.glossary.txt.title"/>.</para>
 
-    <para>Um einen neuen Begriff in das beschreibbare Glossar einzufügen, verwenden Sie <guimenuitem>Bearbeiten</guimenuitem> &gt; <guimenuitem>Glossareintrag erstellen</guimenuitem> (<keycap>Strg+Umschalt+G</keycap>). Neu hinzugefügte Begriffe werden sofort erkannt. Um neue Begriffe in einen Referenzglossar einzufügen, öffnen Sie die entsprechende Datei in einem externen Texteditor. Neu hinzugefügte Begriffe werden erkannt, sobald die Änderungen gespeichert wurden.</para>
-
-    <para>Der Quellbegriff kann aus mehreren Wörtern bestehen.</para>
-
-    <para>Die Glossarfunktion verwendet Stammformreduktion, um Übereinstimmungen zu finden. Deaktivieren Sie <guimenuitem>Stammformreduktion für Glossareinträge verwenden</guimenuitem> in den globalen Einstellungen von OmegaT, um nur exakte Übereinstimmungen für einen Begriff zu finden.</para>
-
-    <para>Der Quellbegriff wird vor dem &quot; = &quot;-Zeichen angezeigt, während die Zielbegriffe nach diesem Zeichen erfolgen. Kommentare werden nach einer Nummer und jeweils in einer eigenen Zeile angezeigt. Begriffe aus dem beschreibbaren Projektglossar werden fett dargestellt. Begriffe aus den Referenzglossaren werden normal dargestellt.</para>
-
-    <para>Um das <guimenuitem>Autovervollständigung</guimenuitem>-Kontextmenü für die Glossar-Matches anzuzeigen, drücken Sie die OS-abhängige Taste (<keycap>Esc</keycap> für macOS, <keycap>Strg+Leertaste</keycap> für die anderen Plattformen).</para>
-
-    <para>Um übereinstimmende Begriffe im Quelltext des Segments zu unterstreichen, verwenden Sie <guimenuitem>Ansicht</guimenuitem> &gt; <guimenuitem>Glossar-Matches hervorheben</guimenuitem>. Rechtsklicken Sie auf den unterstrichenen Begriff und wählen Sie einen Zielbegriff aus, um ihn an der Position des Textcursors im Zieltext des Segments einzufügen.</para>
+    <para>Sie können den Namen und den Speicherort im Dialogfenster <link linkend="dialogs.project.properties.file.locations.writable.glossary" endterm="dialogs.project.properties.file.locations.writable.glossary.title"/> ändern, aber Sie müssen der Datei die Endung <filename>.txt</filename> oder <filename>.utf8</filename> geben und sie in den <link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/>-Ordner oder in einen seiner Unterordner ablegen.</para>
   </section>
 
-  <section>
-    <title>Dateiformat</title>
+  <section id="glossaries.fileformat">
+    <title id="glossaries.fileformat.title">Dateiformat</title>
 
     <para>OmegaT-Glossardateien sind reine Textdateien, die aus drei Spalten bestehen. In der ersten Spalte steht der Quellbegriff, in der zweiten Spalte ein optionaler Zielbegriff und in der dritten Spalte ein optionaler Kommentar.</para>
 
-    <para>Nur-Text-Glossare können Dateien sein, deren Werte via Tabulatorzeichen getrennt sind (&quot;tab separated values&quot; oder kurz TSV) oder via Komma getrennt sind (&quot;comma separated values&quot; oder kurz CSV). Ein drittes mögliches Format ist der ISO-Standard &quot;TBX&quot; (TermBase eXchange).</para>
+    <para>Glossare können Dateien mit tabulatorgetrennten Werten (TSV) oder kommagetrennten Werten (CSV) sein oder auch das TermBase-eXchange-Format (TBX 2) verwenden.</para>
 
-    <para>Das beschreibbare Standardglossar des Projekts ist immer eine TSV-Datei, die in der UTF-8-Kodierung gespeichert ist.</para>
+    <para>Ein beschreibbares Glossar, das von OmegaT für das Projekt erstellt wird, wird als UTF-8-kodierte TSV-Datei gespeichert. Benutzerdefinierte Dateien, die nur lateinische Zeichen verwenden, werden eventuell erkannt und als ISO-8859-1 behandelt, wenn sie keine ASCII-fremden Zeichen oder andere Zeichen enthalten, die als UTF-8 interpretiert werden.</para>
 
-    <para>Glossare werden in einer Kodierung gelesen, die von der Dateiendung abhängt:</para>
+    <para>Die Kodierung, die zum Lesen von Referenzglossaren verwendet wird, hängt von deren Dateiendung ab:</para>
 
-    <table xml:id="glossary.extensions">
-      <caption>Format, Endungen und erwartete Kodierung</caption>
-
+    <table id="glossary.extensions">
+      <title>Format, Endungen und erwartete Kodierung</title>
+	  <tgroup cols="3">
       <thead>
-        <tr>
-          <td>Format</td> <td>Endung</td> <td>Kodierung</td>
-        </tr>
+        <row>
+          <entry>Format</entry>
+
+          <entry>Endung</entry>
+
+          <entry>Kodierung</entry>
+        </row>
       </thead>
 
       <tbody>
-        <tr> <td>TSV</td> <td> <filename>.txt</filename> </td> <td>UTF-8</td> </tr> <tr> <td>TSV</td> <td> <filename>.utf8</filename> </td> <td>UTF-8</td> </tr> <tr> <td>TSV</td> <td> <filename>.tab</filename> </td> <td>OS-abhängige Standardkodierung</td> </tr> <tr> <td>TSV</td> <td> <filename>.tsv</filename> </td> <td>OS-abhängige Standardkodierung</td> </tr> <tr> <td>CSV</td> <td> <filename>.csv</filename> </td> <td>UTF-8</td> </tr> <tr> <td>TBX</td> <td> <filename>.tbx</filename> </td> <td>UTF-8</td> </tr>
+        <row>
+          <entry>TSV</entry>
+
+          <entry>
+            <filename>.txt</filename>
+          </entry>
+
+          <entry>UTF-8</entry>
+        </row>
+
+        <row>
+          <entry>TSV</entry>
+
+          <entry>
+            <filename>.utf8</filename>
+          </entry>
+
+          <entry>UTF-8</entry>
+        </row>
+
+        <row>
+          <entry>TSV</entry>
+
+          <entry>
+            <filename>.tab</filename>
+          </entry>
+
+          <entry>Standardkodierung des Betriebssystems</entry>
+        </row>
+
+        <row>
+          <entry>TSV</entry>
+
+          <entry>
+            <filename>.tsv</filename>
+          </entry>
+
+          <entry>Standardkodierung des Betriebssystems</entry>
+        </row>
+
+        <row>
+          <entry>CSV</entry>
+
+          <entry>
+            <filename>.csv</filename>
+          </entry>
+
+          <entry>UTF-8</entry>
+        </row>
+
+        <row>
+          <entry>TBX</entry>
+
+          <entry>
+            <filename>.tbx</filename>
+          </entry>
+
+          <entry>UTF-8</entry>
+        </row>
       </tbody>
+      </tgroup>
     </table>
-
-    <para>Glossare müssen sich im Projektordner <filename>/glossary</filename> befinden. Glossare, die sich in tiefer liegenden Ordnern befinden, werden ebenfalls erkannt.</para>
   </section>
-
-  <section>
-    <title>Allgemeine Probleme mit Glossaren</title>
-
-    <para><emphasis role="bold">Problem: Es werden keine Glossarbegriffe angezeigt - mögliche Gründe:</emphasis></para>
-
-    <itemizedlist>
-      <listitem>
-        <para>Es wurde keine Glossardatei im Ordner &quot;glossary&quot; gefunden.</para>
-      </listitem>
-    </itemizedlist>
-
-    <itemizedlist>
-      <listitem>
-        <para>Die Glossardatei ist leer.</para>
-      </listitem>
-    </itemizedlist>
-
-    <itemizedlist>
-      <listitem>
-        <para>Die Elemente wurden nicht mit einem Tabulatorzeichen getrennt.</para>
-      </listitem>
-    </itemizedlist>
-
-    <itemizedlist>
-      <listitem>
-        <para>Die Glossardatei hat nicht die korrekte Endung (.tab, .utf8 oder .txt).</para>
-      </listitem>
-    </itemizedlist>
-
-    <itemizedlist>
-      <listitem>
-        <para>Es gibt keine EXAKTE Übereinstimmung zwischen den Einträgen im Glossar und im Quelltext des Dokumentes - z. B. bei Pluralformen.</para>
-      </listitem>
-    </itemizedlist>
-
-    <itemizedlist>
-      <listitem>
-        <para>Die Glossardatei hat nicht die korrekte Kodierung.</para>
-      </listitem>
-    </itemizedlist>
-
-    <itemizedlist>
-      <listitem>
-        <para>Es gibt keine Begriffe im aktuellen Segment, die mit Begriffen aus dem Glossar übereinstimmen.</para>
-      </listitem>
-    </itemizedlist>
-
-    <itemizedlist>
-      <listitem>
-        <para>Eines oder mehrere der oben genannten Probleme wurden möglicherweise behoben, aber das Projekt wurde nicht neu geladen.</para>
-      </listitem>
-    </itemizedlist>
-
-    <para><emphasis role="bold">Problem: Im Glossarbereich werden einige Zeichen nicht korrekt dargestellt</emphasis></para>
-
-    <itemizedlist>
-      <listitem>
-        <para>...aber dieselben Zeichen werden im Editorbereich korrekt dargestellt: Die Dateiendung und die Dateikodierung stimmen nicht überein.</para>
-      </listitem>
-    </itemizedlist>
-  </section>
-</appendix>
+</section>

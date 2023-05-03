@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2012 Alex Buloichik
-               Home page: http://www.omegat.org/
+               Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
  This file is part of OmegaT.
@@ -20,7 +20,7 @@
  GNU General Public License for more details.
 
  You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
 package org.omegat.core.data;
@@ -67,6 +67,9 @@ public class RealProjectTest {
 
     @After
     public final void tearDown() throws Exception {
+        if (project != null) {
+            project.unlockProject();
+        }
         FileUtils.deleteDirectory(tempDir.toFile());
     }
 
@@ -150,7 +153,8 @@ public class RealProjectTest {
         project.importTranslationsFromSources();
         checkNoDefault("List of sections in %s");
         EntryKey entryKey = new EntryKey("test", "List of sections in %s", "id1", null, null, null);
-        assertEquals("Translation imported, but shouldn't", tmx.getMultipleTranslation(entryKey).translation, "exist");
+        assertEquals("Translation imported, but shouldn't", tmx.getMultipleTranslation(entryKey).translation,
+                "exist");
     }
 
     private void createProject(boolean supportDefaultTranslations) throws Exception {
@@ -165,7 +169,8 @@ public class RealProjectTest {
         tmx = project.getTMX();
     }
 
-    private void addSTE(IProject.FileInfo fi, String id, String source, String translation, boolean translationFuzzy) {
+    private void addSTE(IProject.FileInfo fi, String id, String source, String translation,
+            boolean translationFuzzy) {
         EntryKey key = new EntryKey("test", source, id, null, null, null);
         SourceTextEntry ste = new SourceTextEntry(key, fi.entries.size() + 1, null, translation,
                 new ArrayList<ProtectedPart>());
@@ -206,14 +211,15 @@ public class RealProjectTest {
         EntryKey key = new EntryKey("test", source, id, null, null, null);
         TMXEntry tr = tmx.getMultipleTranslation(key);
         assertNotNull("Alternative translation of '" + source + "' (id='" + id + "') not imported", tr);
-        assertEquals("Alternative translation of '" + source + "' (id='" + id + "') imported wrong", tr.translation,
-                translation);
+        assertEquals("Alternative translation of '" + source + "' (id='" + id + "') imported wrong",
+                tr.translation, translation);
     }
 
     private void checkNoAlternative(String id, String source) {
         EntryKey key = new EntryKey("test", source, id, null, null, null);
         TMXEntry tr = tmx.getMultipleTranslation(key);
-        assertNull("Alternative translation of '" + source + "' (id='" + id + "') imported, but shouldn't", tr);
+        assertNull("Alternative translation of '" + source + "' (id='" + id + "') imported, but shouldn't",
+                tr);
     }
 
     @Test
@@ -231,7 +237,8 @@ public class RealProjectTest {
         addSTE(fi, "id1", source, translation, false);
         project.importTranslationsFromSources();
         EntryKey key = new EntryKey("test", source, "id1", null, null, null);
-        SourceTextEntry ste = new SourceTextEntry(key, fi.entries.size() , null, translation, new ArrayList<>());
+        SourceTextEntry ste = new SourceTextEntry(key, fi.entries.size(), null, translation,
+                new ArrayList<>());
         TMXEntry entry = project.getTranslationInfo(ste);
         assertEquals(source, entry.source);
         assertEquals(translation, entry.translation);
@@ -273,7 +280,8 @@ public class RealProjectTest {
 
     private SourceTextEntry setDefault2(final String source, final String translation) {
         EntryKey key = new EntryKey("test", source, null, null, null, null);
-        SourceTextEntry ste = new SourceTextEntry(key, fi.entries.size() , null, translation, new ArrayList<>());
+        SourceTextEntry ste = new SourceTextEntry(key, fi.entries.size(), null, translation,
+                new ArrayList<>());
         project.setTranslation(ste, getPrepareTMXEntry(source, translation), true, null);
         return ste;
     }

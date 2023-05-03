@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="app.segmentation">
+  <title id="app.segmentation.title">分節化規則</title>
+
+  <section id="dialog.preferences.segmentation.setup.type">
+	<title id="dialog.preferences.segmentation.setup.type.title">Paragraph or
+	sentence?</title>
+	
+	<para>翻訳メモリツールは、分節と呼ばれるテキスト単位で処理を行います。訳文を入力すると、原文分節を含むテキストがその翻訳結果とともにプロジェクトのメモリに保存され、その後、プロジェクト内の他の原文セグメントとの一致の判定に使用されます。</para>
+
+	<para><link linkend="dialogs.project.properties.options.segmentation" endterm="dialogs.project.properties.options.segmentation.title"/>プロジェクト設定を使用して、分節化のタイプを選択します。</para>
+
+	<para>分節は、デフォルトではファイル形式自体によって定義される<emphasis role="bold">段落</emphasis>になります。</para>
+	
+	<para>文書に<emphasis role="bold">文</emphasis>の分節化を使用しないということは、<emphasis>段落</emphasis>の分節化を使用することと同じことになります。その場合、各段落(元の文書形式で定義されている)は1つの分節として表示され、翻訳者はその分節内の文を自由に再編成できます。</para>
+	
+	<para><emphasis>段落単位の分節化</emphasis>は、文芸的または創造的なテキストに適しています。一般的に、翻訳メモリの一致がそれほど重要でない文書にも適しています。</para>
+
+	<para><emphasis>文単位の分節化</emphasis>は、原文の言語を構成する要素を定義する規則(<emphasis>分節化規則</emphasis>と呼ばれる)に依存しています。この設定は、技術文書や法律文書など、反復または類似の文が多い文書に適しています。</para>
+
+	<variablelist>
+	  <varlistentry id="dialogs.preferences.segmentation.setup.structure.level.segmentation">
+		<term id="dialogs.preferences.segmentation.setup.structure.level.segmentation.title">段落単位の分節化</term>
+
+		<listitem>
+		  <para>OmegaTは段落単位の分節化を行うため、まずテキストを構文解析します。このプロセスでは、原文ファイルの構造に依存して分節を生成します。</para>
+
+		  <para>たとえばテキストファイルでは、改行や空の行で分節化されたり、まったく分節化されないこともあります。フォーマット(ODF、HTML、またはその他のドキュメント)を含むファイルは、ブロックレベル(段落)タグで分割されます。XHTML や HTML ファイルでは、オブジェクトの属性も翻訳の対象になることがあります。このような場合は、属性値だけを別の文として取り出します。</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialogs.preferences.segmentation.rules.sentence.level.segmentation">
+        <term id="dialogs.preferences.segmentation.rules.sentence.level.segmentation.title">文単位の分節化</term>
+
+        <listitem>
+		  <para>原文ファイルを構造単位に分割した後、OmegaTはさらに分節に分割します。</para>
+
+		  <para>分節化は、文字単位でテキストに沿ってカーソルを移動するプロセスとして視覚化できます。</para>
+
+		  <para>カーソルが次の文字に移動するたびにOmegaTは、</para>
+		  
+		  <itemizedlist>
+			<listitem>
+			  <para>その場所の前のテキストは、<emphasis role="bold">Before</emphasis>ルールに対応します。</para>
+			</listitem>
+			
+			<listitem>
+			  <para>その場所の後のテキストは、関連する<emphasis role="bold">After</emphasis>ルールに対応します。</para>
+			</listitem>
+		  </itemizedlist>
+
+		  <para>位置が両方の規則に一致する場合、規則の定義内容に応じて、その位置が分節化または非分節化の場所と見なされます。</para>
+        </listitem>
+	  </varlistentry>
+    </variablelist>
+  </section>
+  
+  <section id="dialog.preferences.segmentation.setup.scope">
+	<title id="dialog.preferences.segmentation.setup.scope.title">ユーザーレベルか、プロジェクトのローカルルールか?</title>
+
+	<note>
+	  <para>同じメカニズムとダイアログを使用して、ユーザーレベルおよびローカルの分節化規則を定義します。</para>
+	</note>
+
+	<para>デフォルトでは、分節化の設定はグローバルであり、すべてのプロジェクトで共有されます。</para>
+
+	<para>プロジェクト設定の<link linkend="dialogs.project.properties.local.segmentation" endterm="dialogs.project.properties.local.segmentation.title"/>を使用して、現在のプロジェクトの分節化ルールのスコープを制限します。</para>
+
+	<para>コマンドラインからOmegaTを起動しても、同様の結果が得られます。詳細については、 <link linkend="launch.with.command.line" endterm="launch.with.command.line.title"/>を参照してください。</para>
+	
+	<para>ローカル規則を使用している場合でも、グローバル規則にアクセスすることはできますが、それらを変更してもプロジェクトには影響しません。</para>
+  </section>
+
+
+  <section id="dialog.preferences.segmentation.setup.rules.based.segmentation">
+	<title id="dialog.preferences.segmentation.setup.rules.based.segmentation.title">規則</title>
+	<para>OmegaTには事前定義された分節化規則が用意されており、翻訳者は正規表現を使用して規則を変更できます。詳細は、付録の <link linkend="app.regex" endterm="app.regex.title"/> をご覧ください。</para>
+
+	<para>規則は次のように機能することに注意してください。OmegaTは規則が一致した場所にマーカーを設定します。そして、その後の規則がその場所を無視するようにします。これが、例外規則が分節化規則よりも前になければならない理由です。</para>
+	
+	<warning>
+	  <para>翻訳中に分節化規則を変更した場合は、新しい分節化規則を有効にするためにプロジェクトを再ロードする必要があります。すると、以前に翻訳済みの一部の分節が分割または結合され、翻訳済みの分節と見なされなくなります。ただし、元の翻訳結果はプロジェクトの翻訳メモリ内に残ります。</para>
+	</warning>
+
+	<table id="segmentation.simple.examples">
+	  <title id="segmentation.simple.examples.title">簡単な設定例</title>
+      <tgroup cols="5">
+		<colspec align="left" colnum="1"/>
+		<colspec align="left" colnum="2"/>
+		<colspec align="center" colnum="3"/>
+		<colspec align="center" colnum="4"/>
+		<colspec align="left" colnum="5"/>
+		<thead>
+          <row>
+			<entry>分類</entry>
+			<entry>目的</entry>
+			<entry align="center">前方の正規表現</entry>
+			<entry align="center">後方の正規表現</entry>
+			<entry>説明</entry>
+          </row>
+		</thead>
+		<tbody>
+		  <row>
+			<entry>例外ルール、チェックボックスがオフ、リストの上位</entry>
+			<entry>Ms.の後に分節化しない</entry>
+			<entry align="center">Ms\.</entry>
+			<entry align="center">\s</entry>
+			<entry>Msの後にピリオドと空白が続きます。</entry>
+		  </row>
+		  <row>
+			<entry>例外ルール、チェックボックスがオフ、リストの上位</entry>
+			<entry>分節を表さない改行のあるExcelセル</entry>
+			<entry align="center">\n</entry>
+			<entry align="center"></entry>
+			<entry>改行、その後に任意の文字。</entry>
+		  </row>
+		  <row>
+			<entry>リストの下にあるチェックボックスをオンにした分節規則</entry>
+			<entry>新しい分節は、ピリオドの後にスペース、タブ、またはその他の空白が続いた後に開始します。</entry>
+			<entry align="center">\.</entry>
+			<entry align="center">\s</entry>
+			<entry>空白が後に続くピリオド</entry>
+		  </row>
+		  <row>
+			<entry>リストの下にあるチェックボックスをオンにした分節規則</entry>
+			<entry>「。」の後に新しい分節を開始します。</entry>
+			<entry align="center">。</entry>
+			<entry align="center"/>
+			<entry><literal>後方の正規表現</literal>領域は空でもかまいません。</entry>
+		  </row>
+		</tbody>
+	  </tgroup>
+	</table>
+  </section>
+</section>

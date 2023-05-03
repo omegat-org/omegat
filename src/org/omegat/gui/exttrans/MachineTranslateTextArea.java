@@ -9,7 +9,7 @@
                2015 Aaron Madlon-Kay
                2018 Thomas Cordonnier
                2022 Hiroshi Miura
-               Home page: http://www.omegat.org/
+               Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
  This file is part of OmegaT.
@@ -25,7 +25,7 @@
  GNU General Public License for more details.
 
  You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
 package org.omegat.gui.exttrans;
@@ -51,6 +51,7 @@ import org.omegat.core.Core;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
+import org.omegat.core.machinetranslators.MachineTranslateError;
 import org.omegat.core.machinetranslators.MachineTranslators;
 import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.common.EntryInfoSearchThread;
@@ -273,10 +274,13 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
             }
             try {
                 return translator.getTranslation(source, target, src);
-            } catch (Exception e) {
+            } catch (MachineTranslateError e) {
                 Log.log(e);
                 Core.getMainWindow()
                         .showTimedStatusMessageRB("MT_ENGINE_ERROR", translator.getName(), e.getLocalizedMessage());
+                return null;
+            } catch (Exception e) {
+                Log.logErrorRB(e, "MT_ENGINE_EXCEPTION");
                 return null;
             }
         }

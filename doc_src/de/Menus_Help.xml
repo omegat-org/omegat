@@ -1,46 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="menus.help">
-  <title>Hilfe</title>
+  <title id="menus.help.title"><guimenu>Hilfe</guimenu></title>
+
+  <para>Über dieses Menü erhalten Sie Zugriff auf Informationen, die Ihnen helfen, OmegaT zu meistern.</para>
 
   <variablelist>
-    <varlistentry>
-      <term>Bedienungsanleitung...</term>
-
+    <varlistentry id="menus.help.user.manual">
+      <term id="menus.help.user.manual.title"><guimenuitem>Bedienungsanleitung...</guimenuitem> <keycombo><keycap>F1</keycap></keycombo></term>
       <listitem>
         <para>Öffnet diese Bedienungsanleitung im Standardbrowser.</para>
-      </listitem>
+    </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Über...</term>
-
+    <varlistentry id="menus.help.about">
+      <term id="menus.help.about.title"><guimenuitem>Über...</guimenuitem></term>
       <listitem>
         <para>Zeigt Copyright, Credits und Lizenzinformationen an.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Letzte Änderungen...</term>
-
+    <varlistentry id="menus.help.last.changes">
+      <term id="menus.help.last.changes.title"><guimenuitem>Letzte Änderungen...</guimenuitem></term>
       <listitem>
         <para>Zeigt die Liste mit neuen Features, Verbesserungen und Fehlerbehebungen an, die mit jeder neuen Version einhergehen.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Log...</term>
-
+    <varlistentry id="menus.help.log">
+      <term id="menus.help.log.title"><guimenuitem>Log...</guimenuitem></term>
       <listitem>
-        <para>Zeigt die aktuelle Log-Datei an. Der Titel des Dialogfensters spiegelt die tatsächlich verwendete Datei wider (abhängig davon, wie viele Instanzen von OmegaT gleichzeitig ausgeführt werden).</para>
+        <para>Zeigt die aktuelle Log-Datei an. Der Titel des Dialogfensters spiegelt die aktuell verwendete Datei wider (abhängig von der Anzahl der gleichzeitig laufenden OmegaT-Instanzen).</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Nach Updates suchen...</term>
-
+    <varlistentry id="menus.help.check.for.updates">
+      <term id="menus.help.check.for.updates.title"><guimenuitem>Nach Updates suchen...</guimenuitem></term>
       <listitem>
-        <para>Überprüft, ob eine neuere Version von <application>OmegaT</application> veröffentlicht wurde.</para>
+        <para>Überprüft, ob eine neuere Version von OmegaT verfügbar ist.</para>
       </listitem>
     </varlistentry>
   </variablelist>

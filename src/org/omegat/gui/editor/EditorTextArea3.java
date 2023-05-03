@@ -9,7 +9,7 @@
                2013 Zoltan Bartko
                2014 Aaron Madlon-Kay
                2015 Yu Tang
-               Home page: http://www.omegat.org/
+               Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
  This file is part of OmegaT.
@@ -25,7 +25,7 @@
  GNU General Public License for more details.
 
  You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
 package org.omegat.gui.editor;
@@ -67,7 +67,6 @@ import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.gui.editor.autocompleter.AutoCompleter;
 import org.omegat.gui.shortcuts.PropertiesShortcuts;
-import org.omegat.util.Java8Compat;
 import org.omegat.util.OStrings;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.StaticUIUtils;
@@ -233,7 +232,7 @@ public class EditorTextArea3 extends JEditorPane {
 
             // Handle double-click
             if (e.getButton() == MouseEvent.BUTTON1 && e.getClickCount() == 2) {
-                int mousepos = Java8Compat.viewToModel(EditorTextArea3.this, e.getPoint());
+                int mousepos = EditorTextArea3.this.viewToModel2D(e.getPoint());
                 boolean changed = controller.goToSegmentAtLocation(getCaretPosition());
                 if (!changed) {
                     if (selectTag(mousepos)) {
@@ -258,7 +257,7 @@ public class EditorTextArea3 extends JEditorPane {
         }
 
         private void doPopup(Point p) {
-            int mousepos = Java8Compat.viewToModel(EditorTextArea3.this, p);
+            int mousepos = EditorTextArea3.this.viewToModel2D(p);
             JPopupMenu popup = makePopupMenu(mousepos);
             if (popup.getComponentCount() > 0) {
                 popup.show(EditorTextArea3.this, p.x, p.y);
@@ -497,7 +496,7 @@ public class EditorTextArea3 extends JEditorPane {
             // otherwise half of the caret is shown.
             try {
                 OvertypeCaret caret = (OvertypeCaret) getCaret();
-                Rectangle r = Java8Compat.modelToView(this, caret.getDot());
+                Rectangle r = modelToView2D(caret.getDot()).getBounds();
                 caret.damage(r);
             } catch (BadLocationException e) {
                 e.printStackTrace();
@@ -771,7 +770,7 @@ public class EditorTextArea3 extends JEditorPane {
 
     @Override
     public String getToolTipText(MouseEvent event) {
-        int pos = Java8Compat.viewToModel(EditorTextArea3.this, event.getPoint());
+        int pos = EditorTextArea3.this.viewToModel2D(event.getPoint());
         int s = controller.getSegmentIndexAtLocation(pos);
         return s < 0 ? null : controller.markerController.getToolTips(s, pos);
     }

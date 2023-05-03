@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2016 Aaron Madlon-Kay
-               Home page: http://www.omegat.org/
+               Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
  This file is part of OmegaT.
@@ -20,7 +20,7 @@
  GNU General Public License for more details.
 
  You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
 package org.omegat.gui.preferences.view;
@@ -60,7 +60,7 @@ public class DictionaryPreferencesController extends BasePreferencesController {
     protected void initFromPrefs() {
         panel.fuzzyMatchingCheckBox.setSelected(Preferences.isPreference(Preferences.DICTIONARY_FUZZY_MATCHING));
         panel.autoCheckSegmentsCheckBox.setSelected(Preferences.isPreferenceDefault(Preferences.DICTIONARY_AUTO_SEARCH,
-                true));
+                false));
         panel.condensedViewCheckBox.setSelected(Preferences.isPreferenceDefault(Preferences.DICTIONARY_CONDENSED_VIEW,
                 false));
     }
@@ -68,7 +68,7 @@ public class DictionaryPreferencesController extends BasePreferencesController {
     @Override
     public void restoreDefaults() {
         panel.fuzzyMatchingCheckBox.setSelected(false);
-        panel.autoCheckSegmentsCheckBox.setSelected(true);
+        panel.autoCheckSegmentsCheckBox.setSelected(false);
         panel.condensedViewCheckBox.setSelected(false);
     }
 

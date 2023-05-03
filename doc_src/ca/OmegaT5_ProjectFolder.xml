@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.project.folder">
+  <title id="chapter.project.folder.title">Carpeta del projecte</title>
+
+  <section>
+	<title>Estructura per defecte</title>
+	<para>Un projecte de l'OmegaT està format per un conjunt de carpetes i fitxers que contenen tots els recursos que s'utilitzen per a traduir.</para>
+
+	<para>Per defecte, un projecte de nova creació conté tots els recursos necessaris dins de la carpeta i aquests recursos tenen els noms per defecte següents.</para>
+
+	<itemizedlist>
+	  <listitem>
+		<para><link linkend="project.folder.source" endterm="project.folder.source.title"/>conté els fitxers d'origen.</para>
+	  </listitem>
+
+	  <listitem>
+		<para><link linkend="project.folder.target" endterm="project.folder.target.title"/>és la ubicació on es creen els fitxers de destinació.</para>
+	  </listitem>
+
+	  <listitem>
+		<para><link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/>conté els glossaris.</para>
+	  </listitem>
+
+	  <listitem>
+		<para><link linkend="project.folder.glossary.txt" endterm="project.folder.glossary.txt.title"/>és el glossari modificable del projecte.</para>
+	  </listitem>
+
+	  <listitem>
+		<para><link linkend="project.folder.tm" endterm="project.folder.tm.title"/>conté les memòries de traducció de referència.</para>
+	  </listitem>
+
+	  <listitem>
+		<para><link linkend="project.folder.dictionary" endterm="project.folder.dictionary.title"/>conté els diccionaris de referència.</para>
+	  </listitem>
+	</itemizedlist>
+
+	<para>Utilitzeu <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.access.project.contents" endterm="menus.project.access.project.contents.title"/> per a accedir a la carpeta del projecte i a les subcarpetes.</para>
+
+	<para>Utilitzeu <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.properties" endterm="menus.project.properties.title"/> per a assignar fàcilment ubicacions diferents de les per defecte als diferents recursos, quan creeu el projecte o més endavant.</para>
+
+	<para>Per exemple, podeu fer el següent:</para>
+
+	<itemizedlist>
+	  <listitem>
+		<para>Crear els fitxers traduïts en una carpeta compartida fora de la carpeta del projecte, en una ubicació fàcilment accessible per al revisor.</para>
+	  </listitem>
+
+	  <listitem>
+		<para>Utilitzar una carpeta de glossaris d'un projecte independent però relacionat.</para>
+	  </listitem>
+
+	  <listitem>
+		<para>Utilitzar una carpeta de memòries de traducció de referència que hàgiu configurat per a projectes relacionats.</para>
+	  </listitem>
+	</itemizedlist>
+	
+	<para>En crear un projecte, rep una jerarquia principal, però l'estructura final no és fixa. Sempre podeu suprimir o afegir fitxers i carpetes al projecte.</para>
+
+	<note>
+	  <para>També podeu crear projectes de l'OmegaT manualment o amb scripts copiant un conjunt de fitxers preescrits a una carpeta nova:</para>
+	  
+	  <itemizedlist>
+		<listitem>
+		  <para>L'OmegaT reconeixerà qualsevol carpeta que contingui un fitxer <filename>omegat.project</filename> com a projecte de traducció (fins i tot si necessita ajustaments manuals).</para>
+		</listitem>
+
+		<listitem>
+		  <para>Si la carpeta és un dipòsit buit i el fitxer <filename>omegat.project</filename> conté informació d'un dipòsit remot, l'OmegaT reconeixerà el projecte com a projecte en equip:</para>
+		  
+		  <programlisting>...
+    &lt;external_command&gt;&lt;/external_command&gt;
+    &lt;repositories&gt;
+        &lt;repository type=&quot;git&quot; url=&quot;https://URL/DEL/DIPÒSIT/DEL/PROJECTE/REMOT&quot;&gt;
+            &lt;mapping local=&quot;/&quot; repository=&quot;/&quot;/&gt;
+        &lt;/repository&gt;
+    &lt;/repositories&gt;
+&lt;/project&gt;
+		  </programlisting>
+
+		  <para>Consulteu la guia <link linkend="how.to.setup.team.project" endterm="how.to.setup.team.project.title"/> per a conèixer més detalls.</para>
+		</listitem>
+	  </itemizedlist>
+	</note>
+  </section>
+
+  <section>
+	<title>Contingut mínim</title>
+
+	<para>Un projecte és una carpeta que conté, com a mínim, el següent:</para>
+	
+	<variablelist>
+	  <varlistentry id="project.folder.omegat">
+		<term id="project.folder.omegat.title">omegat</term>
+		<listitem>
+		  <para>Aquesta és la carpeta del projecte que sempre conté el fitxer <link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/>, la memòria de traducció del projecte, i <link linkend="project.folder.project.stats" endterm="project.folder.project.stats.title"/>, el fitxer d'estadístiques del projecte.</para>
+
+		  <para>Al llarg de la traducció s'afegiran altres fitxers.</para>
+
+		  <para>Consulteu-ne més detalls <link linkend="project.folder.omegat.folder">a continuació</link>.</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="project.folder.omegat.project.file">
+		<term id="project.folder.omegat.project.file.title">omegat.project</term>
+		<listitem>
+		  <para>Aquest fitxer conté els paràmetres del projecte definits en les <link linkend="dialogs.project.properties">propietats del projecte</link>, com ara les llengües d'origen i de destinació, els lematitzadors corresponents i el tipus de segmentació.</para>
+		  
+		  <para>També fa la funció de <emphasis>llibreta d'adreces</emphasis> i especifica on són els recursos del projecte.</para>
+
+		  <para>L'OmegaT també crea una còpia de seguretat del fitxer (<filename>omegat.project.bak</filename>) i l'utilitzarà automàticament per a recuperar els paràmetres del projecte si cal.</para>
+		</listitem>
+	  </varlistentry>
+	</variablelist>
+  </section>
+  
+  <section id="project.folder.source">
+    <title id="project.folder.source.title">source</title>
+    <para>La carpeta «source» conté els fitxers per a traduir.</para>
+
+	<para>Utilitzeu <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.copy.files.to.source.folder" endterm="menus.project.copy.files.to.source.folder.title"/> o deixeu anar fitxers en la subfinestra <link linkend="panes.editor" endterm="panes.editor.title"/> per a afegir-los sempre que vulgueu.</para>
+
+	<para>El contingut dels fitxers en un format compatible amb l'OmegaT es mostrarà en la subfinestra <link linkend="panes.editor" endterm="panes.editor.title"/> perquè el traduïu.</para>
+
+	<para>Podeu afegir carpetes o suprimir fitxers amb el gestor de fitxers.</para>
+
+	<para>Si el vostre projecte de traducció comprèn diverses carpetes i voleu treballar en una carpeta alhora, utilitzeu <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.properties" endterm="menus.project.properties.title"/> per a accedir a les propietats del projecte i canviar la <link linkend="dialogs.project.properties.file.locations.source.files">carpeta de fitxers d'origen</link> assignada com vulgueu.</para>
+  </section>
+
+  <section id="project.folder.target">
+    <title id="project.folder.target.title">target</title>
+    <para>Inicialment, aquesta carpeta està buida.</para>
+
+	<para>S'emplenarà amb els fitxers traduïts cada vegada que utilitzeu <link linkend="menus.project.create.translated.documents" endterm="menus.project.create.translated.documents.title"/> o <link linkend="menus.project.create.current.translated.document" endterm="menus.project.create.current.translated.document.title"/>.</para>
+
+	<para>Aquí es creen els fitxers traduïts corresponents al contingut de la carpeta <link linkend="project.folder.source" endterm="project.folder.source.title"/>, s'hagin traduït completament o no, seguint la mateixa jerarquia que en la carpeta «source».</para>
+
+	<para>Els fitxers creats aquí reflectiran l'estat actual de la traducció. Els segments sense traduir romandran en la llengua d'origen.</para>
+  </section>
+
+  <section id="project.folder.tm">
+    <title id="project.folder.tm.title">tm</title>
+    <para>Aquesta carpeta pot contenir qualsevol nombre de fitxers de referència bilingües (fitxers TMX, però també qualsevol fitxer en un format bilingüe compatible amb l'OmegaT, com ara fitxers PO) i els fitxers TMX també es poden comprimir en format GZIP.</para>
+	
+	<para>Es pot configurar l'OmegaT perquè insereixi les coincidències automàticament. Per a recordar-vos que l'OmegaT ha inserit una coincidència i no ho heu fet vós, l'OmegaT afegeix el prefix definit en la preferència <link linkend="dialogs.preferences.editor.insert.the.best.fuzzy.match" endterm="dialogs.preferences.editor.insert.the.best.fuzzy.match.title"/>.</para>
+	
+    <para>Les coincidències de les memòries de referència es mostren en la subfinestra <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/>, igual que les coincidències del fitxer <link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/>, la memòria de traducció del projecte.</para>
+
+	<para>Aquestes coincidències es limiten per defecte a les llengües d'origen i de destinació definides en el quadre de diàleg <link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/>, però també podeu afegir coincidències en llengües que no siguin la llengua de destinació. Consulteu les preferències de <link linkend="dialog.preferences.tm.matches.other.languages" endterm="dialog.preferences.tm.matches.other.languages.title"/> per a conèixer més detalls.</para>
+
+	<para>La carpeta pot contenir qualsevol nombre de subcarpetes, incloent-hi algunes amb funcions especials:</para>
+
+	<variablelist>
+      <varlistentry id="project.folder.tm.auto">
+		<term id="project.folder.tm.auto.title">tm/auto</term>
+		<listitem>
+		  <para>Aquesta carpeta està pensada per a fitxers de referència fiables que poden emplenar automàticament exactament els segments que són coincidències exactes i que encara no s'han traduït.</para>
+
+		  <para>Les traduccions dels fitxers TMX d'aquesta carpeta s'insereixen automàticament en els segments coincidents sense el prefix automàtic, de manera que no cal confirmar aquests segments.</para>
+
+		  <para>Les traduccions que provenen d'aquesta carpeta es consideren <emphasis>tan</emphasis> fiables com la memòria del projecte.</para>
+
+		  <note>
+			<para>Habiliteu l'opció <link linkend="dialogs.preferences.editor.save.auto-populated.status" endterm="dialogs.preferences.editor.save.auto-populated.status.title"/> perquè l'OmegaT recordi que les coincidències inserides provenien d'aquestes carpetes.</para>
+		  </note>
+
+		<orderedlist>
+			<listitem>
+			  <para>Copieu les memòries corresponents a la carpeta <filename class="directory">tm/auto</filename>.</para>
+			</listitem>
+			
+			<listitem>
+			  <para>Obriu el projecte. Veureu que els segments idèntics als segments d'origen d'aquestes memòries ja s'han emplenat. Utilitzeu <link linkend="menus.view" endterm="menus.view.title"/><link linkend="menus.view.mark.auto.populated.segments" endterm="menus.view.mark.auto.populated.segments.title"/> per a ressaltar-los.</para>
+			</listitem>
+
+			<listitem>
+			  <para>Feu un canvi menor en qualsevol part del projecte i deseu-lo. Això afegirà les traduccions carregades des de la carpeta «tm/auto» a la memòria de traducció del projecte.</para>
+			</listitem>
+		  </orderedlist>
+
+		  <para>Utilitzeu els menús de navegació de <link linkend="menus.goto" endterm="menus.goto.title"/><link linkend="menus.goto.auto.populated.segments" endterm="menus.goto.auto.populated.segments.title"/> per a navegar als segments inserits.</para>
+				
+		  <warning>
+			<para>Si suprimiu un fitxer TMX de la carpeta <filename class="directory">tm/auto</filename> abans del pas 3, el contingut no es conservarà.</para>
+		  </warning>
+		</listitem>
+	  </varlistentry>
+
+      <varlistentry id="project.folder.tm.enforce">
+		<term id="project.folder.tm.enforce.title">tm/enforce</term>
+		<listitem>
+		  <para>Aquesta carpeta està destinada a fitxers de referència fiables que també es vol que sobreescriguin automàticament els continguts traduïts prèviament.</para>
+
+		  <para>Les traduccions dels fitxers TMX d'aquesta carpeta s'insereixen automàticament en els segments coincidents sense el prefix de coincidència parcial, de manera que no cal confirmar aquests segments.</para>
+
+		  <para>Les traduccions procedents d'aquesta carpeta es consideren <emphasis>més</emphasis> fiables que la memòria del projecte actual.</para>
+
+		  <para>Si no teniu cap dubte que un fitxer TMX determinat conté traduccions més precises que el fitxer <filename>project_save.tmx</filename> en si, copieu aquest TMX a la carpeta <filename class="directory">tm/enforce</filename> per a sobreescriure les traduccions existents incondicionalment.</para>
+
+		  <note>
+			<para>Habiliteu l'opció <link linkend="dialogs.preferences.editor.save.auto-populated.status" endterm="dialogs.preferences.editor.save.auto-populated.status.title"/> perquè l'OmegaT recordi que les coincidències inserides provenien d'aquestes carpetes.</para>
+		  </note>
+
+		  <orderedlist>
+			<listitem>
+			  <para>Copieu les memòries corresponents a la carpeta <filename class="directory">tm/enforce</filename>.</para>
+			</listitem>
+
+			<listitem>
+			  <para>Obriu el projecte. Veureu que els segments idèntics als segments d'origen d'aquestes memòries ja s'han emplenat.</para>
+			</listitem>
+			
+			<listitem>
+			  <para>Feu un canvi menor en qualsevol part del projecte i deseu-lo. Això actualitza la memòria de traducció del projecte.</para>
+			</listitem>
+
+			<listitem>
+			  <para>Preneu una decisió sobre la immutabilitat dels segments forçats:</para>
+			  
+			  <itemizedlist>
+				<listitem>
+				  <para>Si <emphasis>no cal</emphasis> que siguin immutables per a impedir més canvis, suprimiu el fitxer TMX de <filename class="directory">tm/enforce</filename>.</para>
+				</listitem>
+
+				<listitem>
+				  <para>Si <emphasis>cal</emphasis> que siguin immutables per a impedir més canvis, deixeu el fitxer TMX en la carpeta <filename class="directory">tm/enforce</filename>. Qualsevol modificació dels segments que provenen d'aquestes memòries <emphasis>no</emphasis> es tindrà en compte.</para>
+				</listitem>
+			  </itemizedlist>
+			</listitem>
+		  </orderedlist>
+
+		  <para>Utilitzeu els menús de navegació de <link linkend="menus.goto" endterm="menus.goto.title"/><link linkend="menus.goto.auto.populated.segments" endterm="menus.goto.auto.populated.segments.title"/> per a navegar als segments inserits.</para>
+
+		  <warning>
+			<para>Si suprimiu un fitxer TMX de la carpeta <filename class="directory">tm/enforce</filename> abans del pas 3, no es conservarà cap de les traduccions forçades.</para>
+		  </warning>
+		</listitem>
+	  </varlistentry>
+
+      <varlistentry id="project.folder.tm.mt">
+		<term id="project.folder.tm.mt.title">tm/mt</term>
+		<listitem>
+		  <para>When a match is inserted from a TMX contained in this folder, the
+		  background colour of the active segment changes to red.</para>
+
+		  <para>The background colour is restored to normal when you leave the
+		  segment or when you modify the segment.</para>
+		</listitem>
+	  </varlistentry>
+	  
+      <varlistentry id="project.folder.tm.penalty">
+		<term id="project.folder.tm.penalty.title">tm/penalty-xxx</term>
+		<listitem>
+		  <para><literal>xxx</literal> és un nombre del 0 al 100 que actuarà com una penalització restada del percentatge de coincidència dels segments d'aquesta carpeta.</para>
+
+		  <para>Per exemple, una coincidència del 100% en un fitxer TMX emmagatzemat en una carpeta anomenada <filename class="directory">penalty-30</filename> esdevé una coincidència del 70%. La penalització s'aplica als tres percentatges de les coincidències. Les puntuacions de 75, 80 i 90 d'una coincidència es redueixen a 45, 50 i 60.</para>
+		</listitem>
+	  </varlistentry>
+
+      <varlistentry id="project.folder.tm.tmx2source">
+		<term id="project.folder.tm.tmx2source.title">tm/tmx2source</term>
+		<listitem>
+		  <para>Podeu mostrar una tercera llengua <emphasis>directament sota</emphasis> el segment d'origen com a referència en una tercera llengua. Consulteu la guia <link linkend="how.to.tm.bridge.two.languages" endterm="how.to.tm.bridge.two.languages.title"/> per a conèixer més detalls.</para>
+		</listitem>
+	  </varlistentry>
+	</variablelist>
+
+	<note>
+	  <para>Podeu combinar carpetes per a crear funcions noves. Per exemple, una carpeta de penalització del 10% dins de la carpeta de traducció automàtica (<filename>tm/mt/penalty-010</filename>) no generarà mai coincidències del 100% que d'una altra manera l'OmegaT podria inserir automàticament, i sempre definirà un fons vermell per a la coincidència quan s'insereixi.</para>
+	</note>
+  </section>
+
+  <section id="project.folder.exported.tm">
+	<title id="project.folder.exported.tm.title">carpeta de memòries de traducció exportades</title>
+	<para>Per defecte, és la carpeta del projecte en si, però podeu canviar-ne la ubicació perquè sigui més pràctic compartir els fitxers de memòries de traducció exportats. Consulteu la guia <link linkend="how.to.tm.share.translation.memories" endterm="how.to.tm.share.translation.memories.title"/> per a conèixer més detalls.</para>
+  </section>
+
+  <section id="project.folder.dictionary">
+    <title id="project.folder.dictionary.title">dictionary</title>
+    <para>Aquesta carpeta està inicialment buida i s'utilitza per a emmagatzemar qualsevol diccionari que afegiu al projecte.</para>
+
+	<para>Els termes del diccionari que coincideixen amb parts del segment es mostren en la subfinestra <link linkend="panes.dictionary" endterm="panes.dictionary.title"/>. Consulteu les preferències de <link linkend="dialogs.preferences.dictionary" endterm="dialogs.preferences.dictionary.title"/> per a conèixer més detalls.</para>
+
+    <para>L'OmegaT admet diccionaris en el format StarDict o Lingvo DSL. Podeu trobar alguns diccionaris en la <ulink url="https://sourceforge.net/p/omegat/wiki/Reference%20Material/">Wiki de l'OmegaT</ulink>.</para>
+
+	<para>Per a instal·lar diccionaris:</para>
+
+    <orderedlist>
+      <listitem>
+        <para>Baixeu el fitxer; hauria de ser un arxiu tarball (extensió <filename>tar.bz</filename> o <filename>tar.bz2</filename>).</para>
+      </listitem>
+	  
+      <listitem>
+        <para>Extreu-ne el contingut en aquesta carpeta. Hi hauria d'haver tres fitxers per diccionari, amb les extensions <filename>dz</filename>, <filename>idx</filename> i <filename>ifo</filename>.</para>
+      </listitem>
+    </orderedlist>
+
+	<para>Si voleu suprimir paraules de les coincidències potencials del diccionari, afegiu un fitxer <filename>ignore.txt</filename> codificat en UTF-8 a la carpeta. El fitxer ha de tenir una paraula per línia. L'OmegaT ignorarà totes les paraules d'aquesta llista.</para>
+  </section>
+
+  <section id="project.folder.glossary">
+    <title id="project.folder.glossary.title">glossary</title>
+    <para>Inicialment, aquesta carpeta està buida. S'utilitza per a emmagatzemar el glossari modificable per defecte i qualsevol altre glossari que utilitzeu en el projecte.</para>
+
+	<para>Els termes dels glossaris que coincideixen amb parts del segment es mostren en la subfinestra <link linkend="panes.glossary" endterm="panes.glossary.title"/>. Consulteu l'annex <link linkend="app.glossaries" endterm="app.glossaries.title"/> per a conèixer més detalls.</para>
+
+	<variablelist>
+      <varlistentry id="project.folder.glossary.txt">
+        <term id="project.folder.glossary.txt.title">glossary.txt</term>
+        <listitem>
+          <para>Aquest és el glossari modificable del projecte. Es crea la primera vegada que utilitzeu <link linkend="menus.edit.create.glossary.entry" endterm="menus.edit.create.glossary.entry.title"/>.</para>
+
+		  <para>Podeu accedir-hi amb <link linkend="menus.project.access.project.contents.title" endterm="menus.project.access.project.contents.title"/>, obrir-lo en un editor de text i modificar-lo. Quan deseu les modificacions, es tindran en compte en l'OmegaT.</para>
+        </listitem>
+      </varlistentry>
+	</variablelist>
+  </section>
+
+  <section id="project.folder.omegat.folder">
+    <title id="project.folder.omegat.folder.title">omegat</title>
+    <para>La carpeta <filename class="directory">omegat</filename> conté, com a mínim, els fitxers <link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/> i <link linkend="project.folder.project.stats" endterm="project.folder.project.stats.title"/>. També pot incloure altres fitxers.</para>
+
+    <variablelist>
+      <varlistentry id="project.folder.project.save.tmx">
+        <term id="project.folder.project.save.tmx.title">project_save.tmx</term>
+        <listitem>
+          <para>Aquest és el fitxer més important del projecte. Quan creeu un projecte nou, el fitxer està buit i s'emplena gradualment amb les traduccions del text dels fitxers de la carpeta <link linkend="project.folder.source" endterm="project.folder.source.title"/>.</para>
+
+		  <para>Constitueix la memòria de traducció de treball del projecte.</para>
+
+		  <para>L'OmegaT fa còpies de seguretat periòdiques d'aquest fitxer. Consulteu la guia <link linkend="how.to.restore.your.data" endterm="how.to.restore.your.data.title"/> per a conèixer més detalls.</para>
+		</listitem>
+      </varlistentry>
+	  
+	  <varlistentry id="project.folder.project.save.tmx.bak">
+		<term id="project.folder.project.save.tmx.bak.title">project_save.tmx.bak</term>
+		<listitem>
+		  <para>Aquest fitxer és una còpia de seguretat de <filename>project_save.tmx</filename> i es recrea automàticament cada vegada que es modifica <filename>project_save.tmx</filename>, ja sigui després d'utilitzar <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.save" endterm="menus.project.save.title"/> o com a còpia de seguretat periòdica cada 3 minuts per defecte. Consulteu la preferència <link linkend="dialog.preferences.saving.and.output.interval" endterm="dialog.preferences.saving.and.output.interval.title"/> per a conèixer més detalls.</para>
+		</listitem>
+	  </varlistentry>
+	  
+	  <varlistentry id="project.folder.project.save.tmx.timestamp.bak">
+		<term id="project.folder.project.save.tmx.timestamp.bak.title">project_save.tmx.marcatemporal.bak</term>
+		<listitem>
+		  <para>Cada vegada que es carrega un projecte, l'OmegaT crea una còpia de seguretat del fitxer <filename>project_save.tmx</filename> amb el nom <filename>project_save.tmx.[marca de temps].bak</filename>. L'OmegaT conserva un màxim de10 d'aquests fitxers.</para>
+		</listitem>
+	  </varlistentry>
+
+      <varlistentry id="project.folder.project.stats">
+        <term id="project.folder.project.stats.title">project_stats.txt</term>
+        <listitem>
+          <para>Aquest és el fitxer d'estadístiques per a tot el projecte. S'actualitza cada vegada que es torna a carregar el projecte.</para>
+
+		  <para>Utilitzeu <link linkend="menus.tools" endterm="menus.tools.title"/><link linkend="menus.tools.statistics" endterm="menus.tools.statistics.title"/> per a actualitzar-lo.</para>
+        </listitem>
+      </varlistentry>
+	  
+      <varlistentry id="project.folder.omegat.project.stats.match">
+        <term id="project.folder.omegat.project.stats.match.title">project_stats_match.txt</term>
+        <listitem>
+          <para>Aquest fitxer conté les estadístiques de coincidències del projecte més recents. Utilitzeu <link linkend="menus.tools" endterm="menus.tools.title"/><link linkend="menus.tools.match.statistics" endterm="menus.tools.match.statistics.title"/> per a generar-lo.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="project.folder.omegat.project.stats.match.per.file">
+        <term id="project.folder.omegat.project.stats.match.per.file.title">project_stats_match_per_file.txt</term>
+        <listitem>
+          <para>Aquest fitxer conté les estadístiques de coincidències del projecte per fitxer més recents. Utilitzeu <link linkend="menus.tools" endterm="menus.tools.title"/><link linkend="menus.tools.match.statistics.per.file" endterm="menus.tools.match.statistics.per.file.title"/> per a generar-lo.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="       project.folder.omegat.spellcheck">
+        <term id="project.folder.omegat.ignored.words.title">ignored_words.txt</term>
+        <term id="project.folder.omegat.learned.words">learned_words.txt</term>
+        <listitem>
+          <para>Aquests fitxers els crea i utilitza el corrector ortogràfic. Podeu afegir termes a la subfinestra <link linkend="panes.editor" endterm="panes.editor.title"/> fent clic dret sobre una paraula marcada com a incorrecta i seleccionant <guimenuitem>Ignora-ho tot</guimenuitem> (per a les paraules que vulgueu ometre durant la correcció ortogràfica) o <guimenuitem>Afegeix al diccionari</guimenuitem> (per a les paraules que vulgueu acceptar com a correctes), respectivament, en el <link linkend="panes.editor.context.menu">menú contextual</link>. Consulteu les preferències de <link linkend="dialog.preferences.spellchecker" endterm="dialog.preferences.spellchecker.title"/> per a conèixer més detalls.</para>
+
+		  <para>Si ja teniu una llista de paraules que voleu que el corrector ortogràfic ignori o accepti, només cal que les deseu en fitxers de text amb els noms corresponents i copieu els fitxers a la carpeta <link linkend="project.folder.omegat.folder" endterm="project.folder.omegat.folder.title"/> del projecte actual.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="project.folder.omegat.segmentation">
+        <term id="project.folder.omegat.segmentation.title">segmentation.conf</term>
+        <listitem>
+          <para>Aquest fitxer conté les regles de segmentació específiques del projecte.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="project.folder.omegat.filters">
+        <term id="project.folder.omegat.filters.title">filters.xml</term>
+        <listitem>
+          <para>Aquest fitxer conté els filtres de fitxers específics del projecte.</para>
+        </listitem>
+      </varlistentry>
+	  
+      <varlistentry id="project.folder.omegat.uiLayout">
+        <term id="project.folder.omegat.uiLayout.title">uiLayout.xml</term>
+        <listitem>
+          <para>Aquest fitxer conté la configuració de la GUI específica del projecte.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="project.folder.omegat.finder">
+        <term id="project.folder.omegat.finder.title">finder.xml</term>
+        <listitem>
+          <para>Aquest fitxer conté les cerques externes específiques del projecte.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="project.folder.omegat.file.order">
+        <term id="project.folder.omegat.file.order.title">files_order.txt</term>
+        <listitem>
+          <para>Aquest fitxer es crea si canvieu manualment l'ordre dels fitxers de la finestra <link linkend="windows.source.files.list" endterm="windows.source.files.list.title"/>.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="project.folder.omegat.last.entry">
+        <term id="project.folder.omegat.last.entry.title">last_entry.properties</term>
+        <listitem>
+          <para>Aquest fitxer conserva un registre del darrer segment visitat, incloent-hi el número, el contingut del text d'origen, el nom del fitxer i la data, de manera que podeu tornar-hi quan torneu a carregar el projecte.</para>
+        </listitem>
+      </varlistentry>	  
+    </variablelist>
+  </section>
+
+  <section id="project.folder.repositories">
+    <title id="project.folder.repositories.title">.repositories</title>
+    <para>En un projecte en equip, aquesta carpeta conté una còpia amb versions de l'estructura de carpetes del projecte enllaçada directament amb el servidor remot.</para>
+
+    <para>Podeu fer canvis en els fitxers remots (com ara suprimir-los o substituir-los) fent canvis en aquesta carpeta i utilitzant un client del Git o SVN per a sincronitzar-los amb el servidor remot. Consulteu la guia <link linkend="how.to.setup.team.project" endterm="how.to.setup.team.project.title"/> per a conèixer més detalls.</para>
+
+    <para>En alguns sistemes operatius, aquesta carpeta està oculta per defecte. Activeu l'opció per a mostrar els fitxers ocults del sistema perquè sigui visible.</para>
+  </section>
+</chapter>

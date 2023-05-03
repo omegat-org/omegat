@@ -9,7 +9,7 @@
                2012 Didier Briel
                2016 Aaron Madlon-Kay
                2019 Briac Pilpre
-               Home page: http://www.omegat.org/
+               Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
  This file is part of OmegaT.
@@ -25,13 +25,14 @@
  GNU General Public License for more details.
 
  You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
 package org.omegat.gui.preferences.view;
 
 import javax.swing.JComponent;
 
+import org.omegat.gui.editor.SegmentBuilder;
 import org.omegat.gui.preferences.BasePreferencesController;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
@@ -72,10 +73,12 @@ public class EditingBehaviorController extends BasePreferencesController {
 
     @Override
     protected void initFromPrefs() {
-        panel.defaultRadio.setSelected(!Preferences.isPreference(Preferences.DONT_INSERT_SOURCE_TEXT));
-        panel.leaveEmptyRadio.setSelected(Preferences.isPreference(Preferences.DONT_INSERT_SOURCE_TEXT));
+        // Double negation? then prefInsertSource is the contrary of Preferences.DONT_INSERT_SOURCE_TEXT 
+        boolean prefInsertSource = !Preferences.isPreferenceDefault(Preferences.DONT_INSERT_SOURCE_TEXT, SegmentBuilder.DONT_INSERT_SOURCE_TEXT_DEFAULT);
+        panel.defaultRadio.setSelected(prefInsertSource);
+        panel.leaveEmptyRadio.setSelected(!prefInsertSource);
 
-        panel.insertFuzzyCheckBox.setSelected(Preferences.isPreference(Preferences.BEST_MATCH_INSERT));
+        panel.insertFuzzyCheckBox.setSelected(Preferences.isPreferenceDefault(Preferences.BEST_MATCH_INSERT, true));
         panel.similaritySpinner.setValue(Preferences.getPreferenceDefault(Preferences.BEST_MATCH_MINIMAL_SIMILARITY,
                 Preferences.BEST_MATCH_MINIMAL_SIMILARITY_DEFAULT));
         if (!Preferences.existsPreference(Preferences.BEST_MATCH_EXPLANATORY_TEXT)) {
@@ -84,11 +87,11 @@ public class EditingBehaviorController extends BasePreferencesController {
             panel.prefixText.setText(Preferences.getPreference(Preferences.BEST_MATCH_EXPLANATORY_TEXT));
         }
 
-        panel.allowTranslationEqualToSource.setSelected(Preferences.isPreference(Preferences.ALLOW_TRANS_EQUAL_TO_SRC));
+        panel.allowTranslationEqualToSource.setSelected(Preferences.isPreferenceDefault(Preferences.ALLOW_TRANS_EQUAL_TO_SRC, true));
         panel.exportCurrentSegment.setSelected(Preferences.isPreference(Preferences.EXPORT_CURRENT_SEGMENT));
         panel.stopOnAlternativeTranslation
                 .setSelected(Preferences.isPreference(Preferences.STOP_ON_ALTERNATIVE_TRANSLATION));
-        panel.convertNumbers.setSelected(Preferences.isPreference(Preferences.CONVERT_NUMBERS));
+        panel.convertNumbers.setSelected(Preferences.isPreferenceDefault(Preferences.CONVERT_NUMBERS, true));
         panel.allowTagEditing.setSelected(Preferences.isPreference(Preferences.ALLOW_TAG_EDITING));
         panel.tagValidateOnLeave.setSelected(Preferences.isPreference(Preferences.TAG_VALIDATE_ON_LEAVE));
         panel.cbSaveAutoStatus.setSelected(Preferences.isPreference(Preferences.SAVE_AUTO_STATUS));
@@ -102,17 +105,17 @@ public class EditingBehaviorController extends BasePreferencesController {
 
     @Override
     public void restoreDefaults() {
-        panel.defaultRadio.setSelected(true);
-        panel.leaveEmptyRadio.setSelected(false);
+        panel.defaultRadio.setSelected(!SegmentBuilder.DONT_INSERT_SOURCE_TEXT_DEFAULT);
+        panel.leaveEmptyRadio.setSelected(SegmentBuilder.DONT_INSERT_SOURCE_TEXT_DEFAULT);
 
-        panel.insertFuzzyCheckBox.setSelected(false);
+        panel.insertFuzzyCheckBox.setSelected(true);
         panel.similaritySpinner.setValue(Preferences.BEST_MATCH_MINIMAL_SIMILARITY_DEFAULT);
         panel.prefixText.setText(OStrings.getString("WF_DEFAULT_PREFIX"));
 
-        panel.allowTranslationEqualToSource.setSelected(false);
+        panel.allowTranslationEqualToSource.setSelected(true);
         panel.exportCurrentSegment.setSelected(false);
         panel.stopOnAlternativeTranslation.setSelected(false);
-        panel.convertNumbers.setSelected(false);
+        panel.convertNumbers.setSelected(true);
         panel.allowTagEditing.setSelected(false);
         panel.tagValidateOnLeave.setSelected(false);
         panel.cbSaveAutoStatus.setSelected(false);

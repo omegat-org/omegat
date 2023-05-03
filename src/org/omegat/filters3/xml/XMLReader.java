@@ -5,7 +5,7 @@
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2008 Didier Briel
-               Home page: http://www.omegat.org/
+               Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
  This file is part of OmegaT.
@@ -21,7 +21,7 @@
  GNU General Public License for more details.
 
  You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
 package org.omegat.filters3.xml;
@@ -79,6 +79,17 @@ public class XMLReader extends Reader {
     /**
      * Creates a new instance of XMLReader. If encoding cannot be detected,
      * falls back to default UTF-8.
+     * 
+     * @param fileName
+     *            - the file to read
+     */
+    public XMLReader(InputStream is) throws IOException {
+        reader = createReader(is, encoding);
+    }
+
+    /**
+     * Creates a new instance of XMLReader. If encoding cannot be detected,
+     * falls back to default UTF-8.
      *
      * @param fileName
      *            - the file to read
@@ -98,7 +109,7 @@ public class XMLReader extends Reader {
      *            The encoding to use if we can't autodetect.
      */
     public XMLReader(File file, String encoding) throws IOException {
-        reader = createReader(file, encoding);
+        reader = createReader(new FileInputStream(file), encoding);
     }
 
     /**
@@ -116,9 +127,9 @@ public class XMLReader extends Reader {
      * <p>
      * Note that we cannot detect UTF-16 encoding, if there's no BOM!
      */
-    private BufferedReader createReader(File file, String defaultEncoding) throws IOException {
+    private BufferedReader createReader(InputStream in, String defaultEncoding) throws IOException {
         // BOM detection
-        BufferedInputStream is = new BufferedInputStream(new FileInputStream(file));
+        BufferedInputStream is = new BufferedInputStream(in);
 
         is.mark(OConsts.READ_AHEAD_LIMIT);
 

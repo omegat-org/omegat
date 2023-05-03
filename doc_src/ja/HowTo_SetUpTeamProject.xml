@@ -1,257 +1,260 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="howto.setupteamproject">
-  <title>チームプロジェクトを設定する</title>
+<section id="how.to.setup.team.project">
+  <title id="how.to.setup.team.project.title">チームプロジェクトを設定する</title>
 
-  <para>チームプロジェクトをセットアップするには、サーバーと SVN または Git バージョン管理システムに関する知識が必要です。したがって、プロジェクトマネージャ、プロジェクトリーダー、またはローカリゼーションエンジニアが実施する必要があります。</para>
+  <para>チームプロジェクトを管理するには、<emphasis>SVN</emphasis>または<emphasis>Git</emphasis>バージョン管理システム(Virsion Control System、 以降<emphasis>VCS</emphasis>と呼ぶ)の知識が必要です。</para>
 
-  <para>SVN や Git についての情報は、簡単に入手できるため、ここでの作業方法は説明しませんが、 OmegaT がどのように機能するかについてのみ説明しています。</para>
+  <para>これらのトピックに関する情報は容易に入手できるため、この取扱説明書では、OmegaTのチームプロジェクトのコンテキストでの使用についてのみ説明します。</para>
 
-  <section>
-    <title>ステップ 1: サーバー上に空のプロジェクトを作成する</title>
+  <note>
+	<para>OmegaTチームプロジェクトは、プロジェクト翻訳メモリ<link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/>とプロジェクト書き込み可能用語集<link linkend="project.folder.glossary.txt" endterm="project.folder.glossary.txt.title"/>を、ホストサーバとすべての参加チームメンバー間で同期し、それらの間で発生する可能性のあるすべての競合を管理します。</para>
+  </note>
 
-    <para><emphasis role="bold">サーバー上に空のプロジェクトを作成します</emphasis></para>
+  <section id="how.to.setup.team.project.prepare.the.repository">
+    <title id="how.to.setup.team.project.prepare.the.repository.title">準備作業</title>
 
-    <orderedlist>
-      <listitem>
-        <para>翻訳者がアクセスできるサーバー上に SVN リポジトリーまたは Git リポジトリーを作成します。</para>
-      </listitem>
+	<para>チームプロジェクトを設定する手順を示します。</para>
 
-      <listitem>
-        <para>リポジトリーのローカル・コピーを作成します (SVNは<command>チェックアウト</command> 、 Gitでは <command>clone</command> を使用 ) 。</para>
-      </listitem>
+	<orderedlist>
+      <listitem id="how.to.setup.team.project.create.empty.repository">
+		<para id="how.to.setup.team.project.create.empty.repository.title">VCSサーバ上に空のプロジェクトを作成します</para>
 
-      <listitem>
-        <para>ローカルリポジトリー内に新しい空の OmegaT プロジェクトを作成します。これには2つの方法があります。</para>
+		<para>これは通常、Webインターフェース、グラフィカルプログラム、またはコマンドラインを使用して実行できます。詳細については、サーバまたはホスティングサービスのマニュアルを参照してください。</para>
+	  </listitem>
 
-        <itemizedlist>
+	  <listitem id="how.to.setup.team.project.clone.locally">
+		<para id="how.to.setup.team.project.clone.locally.title">ローカルのVCSを使用してワーキングディレクトリ(クローン)を作成します。</para>
+
+		<note>
+		  <para><emphasis>プロジェクトマネージャ</emphasis>用のOmegaTプロジェクトのコピーがこのローカルのディレクトリにあります。チーム全体に影響する変更を行う場合に使用します。</para>
+		</note>
+
+		<para>ローカルリポジトリは、最初のプロジェクトをサーバに追加するために使用されます。また、OmegaT内で直接実行できないファイルの削除などのメンテナンスタスクにも使用できます。</para>
+		<para>このフォルダーを翻訳作業に使用しないことをお勧めします。そのプロジェクトで翻訳やレビュー作業も行う必要がある場合は、チームプロジェクト管理用と別に、OmegaTを使用して翻訳作業用のプロジェクトをダウンロードします。詳細については、 <link linkend="how.to.use.team.project" endterm="how.to.use.team.project.title"/>を参照してください。</para>
+	  </listitem>
+
+	  <listitem id="how.to.setup.team.project.fill.local.clone">
+		<para id="how.to.setup.team.project.fill.local.clone.title">空のローカルコピーを実際のOmegaTプロジェクトで埋める</para>
+		<itemizedlist>
+		  <listitem>
+			<para>プロジェクト構造を作成する</para>
+
+			<para>新しい空のプロジェクトを作成する場合は、<link linkend="introduction.create.and.open.new.project">GUI手順</link>に従うか、コマンドラインから直接作成することができます。 <command>java -jar OmegaT.jar team init &lt;source language&gt; &lt;target language&gt;</command></para>
+
+			<para>また、このコマンドはプロジェクトをバージョン管理システムに自動的に登録します。</para>
+		  </listitem>
+		  <listitem>
+			<para>適切な設定を選択します。</para>
+
+			<para>この段階で、ローカルのフィルタ設定や分節化設定など、プロジェクト設定に必要な変更を加えます。詳細については、<link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/>ウインドウを参照してください。</para>
+		  </listitem>
+
+		  <listitem>
+			<para>必要なファイルを追加します。</para>
+
+			<para>同様に、プロジェクトで作業しているすべての人が使用できるようにするスペルチェッカーファイルの関連リストを追加します。詳細については、<link linkend="project.folder.omegat.spellcheck">スペルチェッカーファイル</link>を参照してください。</para>
+
+			<para>既存のプロジェクトを変換する場合は、次の手順に進む前に、プロジェクト内の不要なファイルや、サーバにアップロードしたくないファイルを、すべて削除してください。</para>
+
+			<para>原文フォルダーにファイルをコピーし、SVNまたはGitクライアント、またはコマンドラインを使用して、それらをリポジトリに追加して共有します。<link endterm="menus.project.title" linkend="menus.project"/><link linkend="menus.project.commit.source.files" endterm="menus.project.commit.source.files.title"/> を使用して、OmegaTからファイルを追加します。</para>
+
+			<para>プロジェクトに含める辞書、用語集、翻訳メモリ、その他のファイルを追加して公開するには、SVNまたはGitクライアントかコマンドを使用する必要があります。</para>
+
+			<para>この手順は、プロジェクトを初めて登録して共有する前に実行できます。また、プロジェクトの作成後に新しいファイルを追加したり、既存のファイルを更新したりする場合にも使用できます。</para>
+		  </listitem>
+		</itemizedlist>
+
+		<note>
+          <para>ローカルリポジトリとリモートリポジトリ(デフォルトの)間の単純なマッピングを使用するチームプロジェクトで、かつ、<emphasis role="bold">このプロジェクトに閉じて</emphasis>いる場合は、原文ファイルと訳文ファイルをローカルで変更して、<link linkend="menus.project" endterm="menus.project.title"/><link endterm="menus.project.commit.source.files.title" linkend="menus.project.commit.source.files"/>コマンドや<link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.commit.target.files" endterm="menus.project.commit.target.files.title"/>コマンドを使用して、サーバにアップロードできます。</para>
+
+          <para>チームプロジェクト管理者は、ローカルVCSを使用して、これらのファイルを<emphasis role="bold">変更</emphasis>または<emphasis role="bold">削除</emphasis>する必要があります。この作業を支援するプラグインもあります。詳細は<link linkend="dialogs.preferences.plugins" endterm="dialogs.preferences.plugins.title"/>の設定を参照してください。</para>
+		</note>
+	  </listitem>
+
+	  <listitem id="how.to.setup.team.project.register">
+		<para id="how.to.setup.team.project.register.title">プロジェクトファイルをローカルVCSに登録します。</para>
+
+		<para>GUIからプロジェクトを作成した場合は、バージョン管理システムに明示的に追加する必要があります(SVNとGitの両方で<command>add</command>)。</para>
+	  </listitem>
+
+	  <listitem id="how.to.setup.team.project.push">
+		<para id="how.to.setup.team.project.push.title">登録したファイルをホストサーバに配置する</para>
+
+		<para>最後に、プロジェクトをリモートサーバに送信します(SVNでは<command>commit</command>、Gitでは<command>commit</command>と<command>push</command>)。</para>
+	  </listitem>
+
+	  <listitem id="how.to.setup.team.project.give.access.rights">
+		<para id="how.to.setup.team.project.give.access.rights.title">チームにアクセス権を付与する</para>
+
+		<note>
+		  <para>同じサーバで複数のプロジェクトを使用する場合、資格情報はそのサーバに対して1回だけ要求されます。</para>
+		</note>
+
+		<para>プロジェクトが準備され、サーバにアップロードされた後、チームプロジェクト管理者は翻訳者へのアクセス権を設定する必要があります。チームプロジェクトにアクセスするには、次の情報が必要です。</para>
+
+		<orderedlist>
           <listitem>
-            <para><menuchoice>
-                <guimenuitem>プロジェクト</guimenuitem> <guimenuitem>新規...</guimenuitem>
-              </menuchoice></para>
+			<para>ホスティングサービス上のプロジェクト</para>
+
+			<para>翻訳者はサービス用のアカウントを作成し、チームプロジェクト管理者にユーザー名を送信する必要があります。</para>
+
+			<para>管理者は、これらのアカウントにリポジトリへの書き込みアクセス権を付与します。</para>
           </listitem>
 
           <listitem>
-            <para>コマンドライン: <command>java -jar OmegaT.jar team init [原文言語] [訳文言語]</command></para>
+			<para>自前サーバでのプロジェクト</para>
+
+			<para>翻訳者が自分でアカウントを登録することができない自前サーバの場合、チームプロジェクト管理者は、翻訳者の書き込みアクセス権を持つアカウントを作成する必要があります。</para>
+
+			<para>アカウントを作成した後、管理者は翻訳者に個々の資格情報を送信する必要があります。</para>
           </listitem>
-        </itemizedlist>
-      </listitem>
+		</orderedlist>	  
+	  </listitem>
 
-      <listitem>
-        <para>新規 OmegaT プロジェクトをバージョン管理システムに追加します ( SVN および Gitを使用して<command>追加</command> ) 。</para>
+	  <listitem id="how.to.setup.team.project.have.members.download">
+		<para id="how.to.setup.team.project.have.members.download.title">OmegaTからプロジェクトをダウンロードしてもらう</para>
 
-        <para>注: 手順3でコマンドラインを使用してプロジェクトを作成した場合、この手順はプログラムによって既に実行されています。</para>
-      </listitem>
+		<para>管理者が、プロジェクトの場所を翻訳者に共有するには、おおきく2つの方法があります。</para>
 
-      <listitem>
-        <para>サーバー上で新しい OmegaT プロジェクトを共有します (SVNでは<command>commit</command>、 gitでは<command>commit</command> に続いて<command>push</command> ) 。</para>
-      </listitem>
-    </orderedlist>
+		<orderedlist>
+          <listitem>
+			<para>URLを送信し、<link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.download.team.project" endterm="menus.project.download.team.project.title"/>を使用してプロジェクトのローカルコピーを作成するように翻訳者に依頼します。</para>
+          </listitem>
 
-    <para><emphasis role="bold">特定の引数</emphasis></para>
+          <listitem>
+			<para>プロジェクトURLを含む<filename>omegat.project</filename>ファイルを送信し、翻訳者に空のフォルダーにコピーしてOmegaTで開いてもらいます。これは、プロジェクトが翻訳者ごとに異なる<link linkend="how.to.setup.team.project.mapping.parameters">マッピング</link>を使用するように設定されている場合に便利です。</para>
+          </listitem>
+		</orderedlist>
 
-    <para>プロジェクトで特定のフィルタと分節化パラメータを使用する場合は、<filename>filters.xml</filename>ファイルと<filename>segmentation.conf</filename>ファイルの両方をバージョン管理システムに追加し、サーバ上でパブリッシュする必要があります。</para>
+		<para>チームプロジェクト管理者が翻訳者がチームプロジェクトを開くことができたことを確認した後、<link linkend="menus.tools.statistics">プロジェクト翻訳状況</link>が管理者(サーバ上)と翻訳者(ローカル)の両方で同じであることを確認することをお勧めします。</para>
+
+		<para>これらが一致しない場合は、<filename>filters.xml</filename>ファイルと<filename>segmentation.conf</filename>ファイルが正しく共有されていることを確認してください。</para>
+	  </listitem>
+
+	  <listitem id="how.to.setup.team.project.download.if.needed">
+		<para id="how.to.setup.team.project.download.if.needed.title">プロジェクトで作業する必要がある場合は、ローカルチームプロジェクトの場所とは異なるローカルの場所にプロジェクトを自分でダウンロードします。</para>
+	  </listitem>
+
+	  <listitem id="how.to.setup.team.project.translate">
+		<para id="how.to.setup.team.project.translate.title">これで、チームと一緒にプロジェクトで作業することもできます。</para>
+	  </listitem>
+	</orderedlist>
   </section>
 
-  <section>
-    <title>ステップ2:翻訳するファイルと他のリソースを追加する</title>
+  <section id="how.to.setup.team.project.mapping.parameters">
+	<title id="how.to.setup.team.project.mapping.parameters.title">リポジトリマッピング</title>
 
-    <para>SVNまたはGitクライアントを使用して、翻訳するファイルを追加します。</para>
+	<para><link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/>ダイアログの<link linkend="dialogs.project.properties.repository.mapping.title" endterm="dialogs.project.properties.repository.mapping.title"/>を使用して、または<link linkend="project.folder.omegat.project.file.title" endterm="project.folder.omegat.project.file.title"/>ファイルを編集することによって、OmegaTユーザーインターフェースを介してさまざまなリモートロケーションをローカルファイルにマッピングすることができます。マッピング機能は、主に異なる場所から原文ファイルを収集することを目的としていますが、他のタイプのファイルにも使用できます。</para>
 
-    <para>これは、 OmegaT 内で行うこともできます。</para>
+	<para>マッピングパラメータのリストを以下に示します。これらの使用例は次の項で説明します。</para>
 
-    <orderedlist>
-      <listitem>
-        <para>ファイルを<filename>source</filename>フォルダにコピーします。</para>
-      </listitem>
-
-      <listitem>
-        <para> <menuchoice> <guimenuitem>プロジェクト</guimenuitem> <guimenuitem>原文ファイルをコミット</guimenuitem> </menuchoice>を使用します</para>
-      </listitem>
-    </orderedlist>
-
-    <para>他のリソース(辞書、TMX、または用語集)を追加するには、SVNまたはGitクライアントを使用します。</para>
-
-    <para><emphasis role="bold">ファイルを削除する</emphasis>には、SVNまたはGitクライアントを使用します。</para>
-
-    <para>翻訳時に OmegaT によって変更されるファイルは 2 つだけであることに注意して</para>
-
-    <itemizedlist>
-      <listitem>
-        <para><filename>omegat/project_save.tmx</filename></para>
-      </listitem>
-
-      <listitem>
-        <para><filename>glossary/glossary.txt</filename></para>
-      </listitem>
-    </itemizedlist>
-
-    <para>その他のファイルはすべて読み取り専用です。翻訳者これらを変更しようとすると、プロジェクトを開いたり、閉じたり、保存または再ロードするたびに、元の状態に戻ります。</para>
-  </section>
-
-  <section>
-    <title>ステップ3:翻訳者に招待を送信する</title>
-
-    <para>プロジェクトがサーバ上で設定されると、プロジェクトマネージャは翻訳者に対して、次の2つの方法のいずれかで作業するように依頼できます。</para>
-
-    <itemizedlist>
-      <listitem>
-        <para>プロジェクトの URL を送信し、翻訳者に <menuchoice> <guimenuitem>「プロジェクト」</guimenuitem> <guimenuitem>「チーム・プロジェクトのダウンロード」</guimenuitem> </menuchoice>を使用してローカル・コピーを作成するように依頼します。</para>
-      </listitem>
-
-      <listitem>
-        <para>URLへの参照を含む<filename>omegat.project</filename>ファイルを送信し、それを専用フォルダにコピーしてOmegaTで開くよう翻訳者に依頼します。</para>
-
-        <para>URL への参照は以下のように指定されます ( Git リポジトリーへの参照 ) 。</para>
-
-        <programlisting>&lt;repositories&gt;
- &lt;repository type=&quot;git&quot; url=&quot;https://repo_for_OmegaT_team_project.git&quot;&gt;
-  &lt;mapping local=&quot;&quot; repository=&quot;&quot;/&gt;
- &lt;/repository&gt;
-&lt;/repositories&gt;</programlisting>
-      </listitem>
-    </itemizedlist>
-
-    <para>どちらの場合も、プロジェクト・マネージャーは、リポジトリーにアクセスする翻訳者の ID とパスワードを通知する必要があります</para>
-
-    <para><emphasis role="bold">翻訳情報のチェック</emphasis></para>
-
-    <para>プロジェクトマネージャは、参加した翻訳者と連絡して、翻訳情報が両側(サーバ側と翻訳者側)で同一になっているか確認する必要があります。</para>
-
-    <para>違いがある場合は、<filename>filters.xml</filename>ファイルと<filename>segmentation.conf</filename>ファイルがバージョン管理されていることを確認します。</para>
-  </section>
-
-  <section>
-    <title>特殊なケース:選択的な共有</title>
-
-    <para>上記のプロセスでは、プロジェクトマネージャがプロジェクトを完全に制御し、ファイル(および翻訳状況)が両方の側(サーバ側と通訳者側)で同一である通常のケースについて説明しています。</para>
-
-    <para>OmegaTチームプロジェクトは、複数の翻訳者がproject_save.tmxファイルを共有しますが、(ソース)ファイルの(すべて)は共有しない、異なる方法で設定することもできます。</para>
-
-    <para>この場合も手順は同じですが、プロジェクトマネージャはプロジェクトに(すべての)ファイルをバージョン管理に追加するわけではありません。代わりに、翻訳者はファイル自体をコピーするか、マッピングを追加して他の場所からファイルを同期します。</para>
-
-      <para>マッピングは、UI: <menuchoice><guimenuitem>プロジェクト</guimenuitem><guimenuitem>プロジェクト設定</guimenuitem><guimenuitem>リポジトリマッピング</guimenuitem></menuchoice>で追加するか、<filename>omegat.project</filename>を直接編集して変更できます。</para>
-  </section>
-
-  <section id="howto.setupteamproject.mappingparameters">
-    <title>マッピングパラメータ</title>
-
-    <variablelist>
+	<variablelist>
       <varlistentry>
-        <term>リポジトリの種類</term>
-
-        <listitem>
-          <para>http(httpsを含む)、svn、git、fileのいずれかです。</para>
-        </listitem>
+		<term>リポジトリの種類</term>
+		<listitem>
+          <para><emphasis>http</emphasis>(httpsを含む)、<emphasis>svn</emphasis>、<emphasis>git</emphasis>、<emphasis>file</emphasis>のいずれかです。</para>
+		</listitem>
       </varlistentry>
 
       <varlistentry>
-        <term>リポジトリURL</term>
-
-        <listitem>
-          <para>翻訳するファイルのリモート・ロケーションまたはディレクトリー。</para>
-        </listitem>
+		<term>リポジトリURL</term>
+		<listitem>
+          <para>翻訳するファイルのリモートの場所またはフォルダー</para>
+		</listitem>
       </varlistentry>
 
       <varlistentry>
-        <term>ローカルマッピング</term>
-
-        <listitem>
+		<term>ローカルマッピング</term>
+		<listitem>
           <para>OmegaTプロジェクトのルートを基準とした、ローカルフォルダまたはファイルの名前。</para>
-        </listitem>
+		</listitem>
       </varlistentry>
 
       <varlistentry>
-        <term>マッピングリポジトリ</term>
-
-        <listitem>
+		<term>マッピングリポジトリ</term>
+		<listitem>
           <para>リポジトリのURLを基準にしたリモートフォルダまたはファイルの名前。</para>
-        </listitem>
+		</listitem>
       </varlistentry>
 
       <varlistentry>
-        <term>excludes</term>
-
-        <listitem>
-          <para>ワイルドカード(Apache Antスタイル):*,?,**を使用してパターンを追加します。異なるパターンはセミコロンで区切ります。</para>
-
-          <para>例:<userinput>**/excludedfolder/**;*.txt</userinput>は、パスに/excludedfolder/が含まれるファイルと拡張子.txtのファイルを除外します。</para>
-        </listitem>
+		<term>excludes</term>
+		<listitem>
+          <para>マッピングに含めるべきでないファイルのパターンを追加するには、ワイルドカード(Apache Antスタイルの*、?、**に従う)を使用します。異なるパターンを区切るには、セミコロンを使用します。</para>
+          <para>例:<userinput>**/excludedfolder/**;*.txt</userinput>は、パスに/excludedfolder/が含まれるファイルと、<filename>.txt</filename>拡張子のファイルを除外します。</para>
+		</listitem>
       </varlistentry>
 
       <varlistentry>
-        <term>includes</term>
-
-        <listitem>
-          <para>同上</para>
-
-          <para>例:<userinput>**/*.docx</userinput>:すべての.docxファイルを、除外されたフォルダ内であっても、プロジェクト内の場所にかかわらず追加します。</para>
-
-          <para>既定では、除外されていないすべてのファイルが含まれます。これを指定する必要があるのは、一部の除外を上書きする場合だけです。</para>
-        </listitem>
+		<term>includes</term>
+		<listitem>
+          <para>上記と同様ですが、マッピングに含める必要があるファイルの場合に使用します。ファイルは特に除外されない限りデフォルトではに含まれるため、この設定は除外パターンの例外を指定するためだけに必要です。</para>
+          <para>例:<userinput>**/*.docx</userinput>は、除外されたフォルダーにある場合でも、すべての.docxファイルをプロジェクトに追加します。</para>
+		</listitem>
       </varlistentry>
-    </variablelist>
+	</variablelist>
   </section>
 
-  <section>
-    <title>マッピングの例</title>
+  <section id="how.to.setup.team.project.example.mappings">
+	<title id="how.to.setup.team.project.example.mappings.title">マッピングの例</title>
 
-    <para>既定のプロジェクトマッピング:<programlisting>&lt;repositories&gt;
- &lt;repository type=&quot;svn&quot; url=&quot;https://repo_for_OmegaT_team_project&quot;&gt;
-  &lt;mapping local=&quot;&quot; repository=&quot;&quot;/&gt;
- &lt;/repository&gt;
-&lt;/repositories&gt;</programlisting></para>
-
-    <para><filename>https://repo_for_OmegaT_team_project</filename>のすべての内容がローカルのOmegaTプロジェクトにマップされます。</para>
-
-    <para>リポジトリのサブディレクトリにあるプロジェクトのマッピング:<programlisting>&lt;repositories&gt;
- &lt;repository type=&quot;svn&quot; url=&quot;https://repo_for_All_OmegaT_team_projects&quot;&gt;
-  &lt;mapping local=&quot;&quot; repository=&quot;En-US_DE_project&quot;/&gt;
- &lt;/repository&gt;
-&lt;/repositories&gt;</programlisting></para>
-
-    <para><filename>https://repo_for_All_OmegaT_team_projects/En-US_DE_project</filename>のすべての内容は、ローカルのOmegaTプロジェクトにマップされます。</para>
-
-    <para>フィルタを使用した、リモート・リポジトリからの追加ソースのマッピング:<programlisting>
-&lt;repositories&gt;
- &lt;repository type=&quot;svn&quot; url=&quot;https://repo_for_All_OmegaT_team_project_sources&quot;&gt;
-  &lt;mapping local=&quot;source/subdir&quot; repository=&quot;&quot;&gt;
-   &lt;excludes&gt;**/*.bak&lt;/excludes&gt;
-   &lt;includes&gt;readme.bak&lt;/includes&gt;
-  &lt;/mapping&gt;
- &lt;/repository&gt;
-&lt;/repositories&gt;</programlisting></para>
-
-    <para><filename>https://repo_for_All_OmegaT_team_project_sources</filename>のすべての内容は、readme.bak以外のすべての*.bakファイルを除き、ローカルのOmegaTプロジェクトのsourceフォルダにマップされます。</para>
-
-    <para><programlisting>Webからの追加ソース・ファイルのマッピング:&lt;repository type=&quot;http&quot; url=&quot;https://github.com/omegat-org/omegat/raw/master/&quot;&gt;
- &lt;mapping local=&quot;source/Bundle.properties&quot; repository=&quot;src/org/omegat/Bundle.properties&quot;/&gt;
+	<para>既定のプロジェクトマッピング:<programlisting>&lt;repository type=&quot;svn&quot; url=&quot;https://repo_for_OmegaT_team_project&quot;&gt;
+	&lt;mapping local=&quot;&quot; repository=&quot;&quot;/&gt;
 &lt;/repository&gt;</programlisting></para>
 
-    <para>リモート・ファイル<filename>https://github.com/omegat-org/omegat/raw/master/src/org/omegat/Bundle.properties</filename>は、ローカル・ファイル<filename>source/Bundle.properties</filename>にマップされます。</para>
+	<para><filename>https://repo_for_OmegaT_team_project</filename>のすべての内容がローカルのOmegaTプロジェクトにマップされます。</para>
 
-    <para>名前変更つきのマッピング:<programlisting>&lt;repository type=&quot;http&quot; url=&quot;https://github.com/omegat-org/omegat/raw/master/&quot;&gt;
- &lt;mapping local=&quot;source/readme_tr.txt&quot; repository=&quot;release/readme.txt&quot;/&gt;
+	<para>リポジトリのサブフォルダーにあるプロジェクトのマッピング:<programlisting>&lt;repository type=&quot;svn&quot; url=&quot;https://repo_for_All_OmegaT_team_projects&quot;&gt;
+	&lt;mapping local=&quot;&quot; repository=&quot;En-US_DE_project&quot;/&gt;
 &lt;/repository&gt;</programlisting></para>
 
-    <para>リモートファイル<filename>https://github.com/omegat-org/omegat/raw/master/release/readme.txt</filename>は、ローカルファイル<filename>source/readme_tr.txt</filename>にマップされます。</para>
+	<para><filename>https://repo_for_All_OmegaT_team_projects/En-US_DE_project</filename>のすべての内容は、ローカルのOmegaTプロジェクトにマップされます。</para>
 
-    <para>これにより、翻訳するファイルの名前を変更できます。</para>
-
-    <para>ローカルファイルマッピング:<programlisting>&lt;repository type=&quot;file&quot; url=&quot;/home/me/myfiles&quot;&gt;
- &lt;mapping local=&quot;source/file.txt&quot; repository=&quot;my/file.txt&quot;/&gt;
- &lt;mapping local=&quot;source/file2.txt&quot; repository=&quot;some/file.txt&quot;/&gt;
+	<para>フィルタを使用した、リモートリポジトリからの追加原文のマッピング:<programlisting>&lt;repository type=&quot;svn&quot; url=&quot;https://repo_for_All_OmegaT_team_project_sources&quot;&gt;
+	&lt;mapping local=&quot;source/subdir&quot; repository=&quot;&quot;&gt;
+	    &lt;excludes&gt;**/*.bak&lt;/excludes&gt;
+    	&lt;includes&gt;readme.bak&lt;/includes&gt;
+	&lt;/mapping&gt;
 &lt;/repository&gt;</programlisting></para>
 
-    <para>ローカルファイル<filename>/home/me/myfiles/my/file.txt</filename>はローカルファイル<filename>source/file.txt</filename>にマップされ、<filename>/home/me/myfiles/some/file.txt</filename>はローカルファイル<filename>source/file2.txt</filename>にマップされます。</para>
+	<para><filename>https://repo_for_All_OmegaT_team_project_sources</filename>のすべては、<filename>.bak</filename>拡張子のファイルを除いて、ローカルOmegaTプロジェクトの原文フォルダーにマップされます。However, the <filename>readme.bak</filename> is also included.</para>
 
-    <para>警告:ファイルが存在しない場合、プロジェクトはロードされません。</para>
-    <para>必要な数のマッピングを追加できますが、チームプロジェクトのコンテキストでのみ追加できます。つまり、マッピングの1つにomegat.projectが含まれます。この機能は原文ファイルの収集を目的としていますが、原文ファイルに制限されていません。</para>
+	<para>Webからの追加ソース・ファイルのマッピング:<programlisting>&lt;repository type=&quot;http&quot; url=&quot;https://github.com/omegat-org/omegat/raw/master/&quot;&gt;
+	&lt;mapping local=&quot;source/Bundle.properties&quot; repository=&quot;src/org/omegat/Bundle.properties&quot;/&gt;
+&lt;/repository&gt;</programlisting></para>
+
+	<para>リモート・ファイル<filename>https://github.com/omegat-org/omegat/raw/master/src/org/omegat/Bundle.properties</filename>は、ローカル・ファイル<filename>source/Bundle.properties</filename>にマップされます。</para>
+
+	<para>名前変更つきのマッピング:<programlisting>&lt;repository type=&quot;http&quot; url=&quot;https://github.com/omegat-org/omegat/raw/master/&quot;&gt;
+	&lt;mapping local=&quot;source/readme_tr.txt&quot; repository=&quot;release/readme.txt&quot;/&gt;
+&lt;/repository&gt;</programlisting></para>
+
+	<para>リモートファイル<filename>https://github.com/omegat-org/omegat/raw/master/release/readme.txt</filename>は、ローカルファイル<filename>source/readme_tr.txt</filename>にマップされます。</para>
+
+	<para>This makes it possible to rename the file to translate.</para>
+
+	<para>ローカルファイルマッピング:<programlisting>&lt;repository type=&quot;file&quot; url=&quot;/home/me/myfiles&quot;&gt;
+	&lt;mapping local=&quot;source/file.txt&quot; repository=&quot;my/file.txt&quot;/&gt;
+	&lt;mapping local=&quot;source/file2.txt&quot; repository=&quot;some/file.txt&quot;/&gt;
+&lt;/repository&gt;</programlisting></para>
+
+	<para>ローカルファイル<filename>/home/me/myfiles/my/file.txt</filename>はローカルファイル<filename>source/file.txt</filename>にマップされ、<filename>/home/me/myfiles/some/file.txt</filename>はローカルファイル<filename>source/file2.txt</filename>にマップされます。</para>
+
+	<warning>
+      <para>マッピングで指定されたファイルが存在しない場合、プロジェクトは読み込みしません。</para>
+	</warning>
+
+	<para>マッピングは必要な数だけ追加できますが、マッピングの1つには<filename>omegat.project</filename>ファイルが含まれている必要があります。</para>
+
   </section>
-  <section>
-    <title>omegat.projectおよびマッピングに関する注意</title>
-    <para>新しいプロジェクトを作成してリポジトリにコミットすると、<filename>omegat.project</filename>ファイルにはマッピングが含まれません。プロジェクトをダウンロードすると、プロジェクトはローカルでチームプロジェクトに変換され、既定のマッピングが追加されます。</para>
-    <para>リポジトリ内のomegat.projectファイルは自動的に変更されず、マッピングも含まれないことに注意してください。プロジェクトをロードすると、リポジトリ内のすべての変更がローカルプロジェクトにコピーされます。これには、プロジェクト設定のある<filename>omegat.project</filename>ファイルも含まれます。ファイルにマッピングが含まれていない場合は、既存のローカルマッピングだけが再適用されます。プロジェクトに対するその他のすべてのローカル変更が元に戻されます。ファイルにマッピングが含まれている場合、マッピングに対するローカルの変更は失われます。</para>
-  </section>
+  <section id="how.to.setup.team.project.selective.sharing">
+	<title id="how.to.setup.team.project.selective.sharing.title">選択的な共有</title>
 
+	<para>上記のプロセスでは、プロジェクトマネージャがプロジェクトを完全に制御し、ファイル(および翻訳状況)が両方の側(サーバ側と通訳者側)で同一である通常のケースについて説明しています。</para>
+
+	<para>OmegaTチームプロジェクトは、複数の翻訳者が<filename>project_save.tmx</filename>ファイルを共有しますが、(ソース)ファイルの(すべて)は共有しない、異なる方法で設定することもできます。</para>
+
+	<para>この場合も手順は同じですが、プロジェクト管理者はプロジェクトに(すべての)ファイルをバージョン管理に追加するわけではありません。代わりに、翻訳者はファイル自体をコピーするか、マッピングを追加して他の場所からファイルを同期します。</para>
+  </section>
 </section>

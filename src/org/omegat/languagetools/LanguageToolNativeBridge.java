@@ -6,7 +6,7 @@
  Copyright (C) 2010-2013 Alex Buloichik
                2015 Aaron Madlon-Kay
                2016 Lev Abashkin
-               Home page: http://www.omegat.org/
+               Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
  This file is part of OmegaT.
@@ -22,7 +22,7 @@
  GNU General Public License for more details.
 
  You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 package org.omegat.languagetools;
 
@@ -53,9 +53,9 @@ public class LanguageToolNativeBridge extends BaseLanguageToolBridge {
         sourceLtLang = getLTLanguage(sourceLang);
         targetLtLang = getLTLanguage(targetLang);
         Log.log("Selected LanguageTool source language: "
-                + (sourceLtLang == null ? null : sourceLtLang.getShortNameWithCountryAndVariant()));
+                + (sourceLtLang == null ? null : sourceLtLang.getShortCodeWithCountryAndVariant()));
         Log.log("Selected LanguageTool target language: "
-                + (targetLtLang == null ? null : targetLtLang.getShortNameWithCountryAndVariant()));
+                + (targetLtLang == null ? null : targetLtLang.getShortCodeWithCountryAndVariant()));
         sourceLt = ThreadLocal.withInitial(
                 () -> sourceLtLang == null ? null : new JLanguageTool(sourceLtLang));
         targetLt = ThreadLocal.withInitial(
@@ -91,7 +91,7 @@ public class LanguageToolNativeBridge extends BaseLanguageToolBridge {
         return ThreadLocal.withInitial(() -> {
             JLanguageTool lt = new JLanguageTool(lang);
             Tools.selectRules(lt, disabledCategories, Collections.emptySet(), disabledRules, enabledRules,
-                    false);
+                    false, false);
             return lt;
         });
     }
@@ -134,7 +134,7 @@ public class LanguageToolNativeBridge extends BaseLanguageToolBridge {
         String omLang = lang.getLanguageCode();
         String omCountry = lang.getCountryCode();
         for (Language ltLang : ltLangs) {
-            if (omLang.equalsIgnoreCase(ltLang.getShortName())) {
+            if (omLang.equalsIgnoreCase(ltLang.getShortCode())) {
                 List<String> countries = Arrays.asList(ltLang.getCountries());
                 if (countries.contains(omCountry)) {
                     return ltLang;
@@ -144,7 +144,7 @@ public class LanguageToolNativeBridge extends BaseLanguageToolBridge {
 
         // Search for just xx match
         for (Language ltLang : ltLangs) {
-            if (omLang.equalsIgnoreCase(ltLang.getShortName()) && ltLang.hasVariant()) {
+            if (omLang.equalsIgnoreCase(ltLang.getShortCode()) && ltLang.hasVariant()) {
                 Language defaultVariant = ltLang.getDefaultLanguageVariant();
                 if (defaultVariant != null) {
                     return ltLang;
@@ -152,7 +152,7 @@ public class LanguageToolNativeBridge extends BaseLanguageToolBridge {
             }
         }
         for (Language ltLang : ltLangs) {
-            if (omLang.equalsIgnoreCase(ltLang.getShortName()) && !ltLang.hasVariant()) {
+            if (omLang.equalsIgnoreCase(ltLang.getShortCode()) && !ltLang.hasVariant()) {
                 return ltLang;
             }
         }

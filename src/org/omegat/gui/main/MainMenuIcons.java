@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2015 Aaron Madlon-Kay
-               Home page: http://www.omegat.org/
+               Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
  This file is part of OmegaT.
@@ -20,7 +20,7 @@
  GNU General Public License for more details.
 
  You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
 package org.omegat.gui.main;
@@ -30,6 +30,7 @@ import java.awt.Component;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.Toolkit;
@@ -37,6 +38,7 @@ import java.awt.font.GlyphVector;
 import java.util.Map;
 
 import javax.swing.Icon;
+import javax.swing.ImageIcon;
 
 import org.omegat.util.Log;
 
@@ -124,6 +126,28 @@ public final class MainMenuIcons {
                     g2.setColor(color);
                 }
                 g2.fillRect(x, y, getIconWidth(), getIconHeight());
+            }
+        };
+    }
+
+    /**
+     * Create icon with an image fit with menu items.
+     */
+    static Icon newImageIcon(final Image image) {
+        return new ImageIcon() {
+            @Override
+            public synchronized void paintIcon(Component c, Graphics g, int x, int y) {
+                super.paintIcon(c, g, x, y);
+            }
+
+            @Override
+            public int getIconWidth() {
+                return ICON_SIZE;
+            }
+
+            @Override
+            public int getIconHeight() {
+                return getIconWidth();
             }
         };
     }

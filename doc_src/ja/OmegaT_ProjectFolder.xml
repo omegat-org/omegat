@@ -1,0 +1,432 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.project.folder">
+  <title id="chapter.project.folder.title">プロジェクトフォルダー</title>
+
+  <section>
+	<title>デフォルトの構造</title>
+	<para>OmegaTプロジェクトは、一連のフォルダーからなり、翻訳に使用する資材からなるファイルが格納されます。</para>
+
+	<para>デフォルトでは、新規に作成されるプロジェクトフォルダーには、すべての資材が格納されます。これらのファイルやフォルダーには、次のデフォルトの名前がつけられます。</para>
+
+	<itemizedlist>
+	  <listitem>
+		<para><link linkend="project.folder.source" endterm="project.folder.source.title"/>原文ファイルが格納される</para>
+	  </listitem>
+
+	  <listitem>
+		<para><link linkend="project.folder.target" endterm="project.folder.target.title"/>訳文ファイルが作成される</para>
+	  </listitem>
+
+	  <listitem>
+		<para><link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/>用語集が格納される</para>
+	  </listitem>
+
+	  <listitem>
+		<para><link linkend="project.folder.glossary.txt" endterm="project.folder.glossary.txt.title"/>プロジェクトの書き込み可能な用語集です</para>
+	  </listitem>
+
+	  <listitem>
+		<para><link linkend="project.folder.tm" endterm="project.folder.tm.title"/>参照翻訳メモリがはいる</para>
+	  </listitem>
+
+	  <listitem>
+		<para><link linkend="project.folder.dictionary" endterm="project.folder.dictionary.title"/>参考にする辞書がはいる</para>
+	  </listitem>
+	</itemizedlist>
+
+	<para><link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.access.project.contents" endterm="menus.project.access.project.contents.title"/>を使用して、プロジェクトのフォルダーやそのサブフォルダーにアクセスできます。</para>
+
+	<para><link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.properties" endterm="menus.project.properties.title"/>を使用すると、プロジェクトの作成時または後で、標準以外の場所のさまざまな翻訳資材を簡単に割り当てることができます。</para>
+
+	<para>たとえば、次の操作を実行できます。</para>
+
+	<itemizedlist>
+	  <listitem>
+		<para>訳文ファイルを、プロジェクトフォルダー外の共有フォルダーで、レビュー担当者が簡単にアクセスできる場所に作成します。</para>
+	  </listitem>
+
+	  <listitem>
+		<para>関連する別のプロジェクトの用語集フォルダーを使用したり、</para>
+	  </listitem>
+
+	  <listitem>
+		<para>関連プロジェクト用に設定した参照翻訳メモリフォルダーなどを使用できます。</para>
+	  </listitem>
+	</itemizedlist>
+	
+	<para>プロジェクトを作成すると本的なフォルダー構成が作られますが、その構成は固定ではありません。ファイルやフォルダは、いつでもプロジェクトから削除したり、プロジェクトに追加することができます。</para>
+
+	<note>
+	  <para>OmegaTプロジェクトは、手動またはスクリプトを使用して、事前に作成された一連のファイルを新しいフォルダーにコピーすることによって作成することもできます。</para>
+	  
+	  <itemizedlist>
+		<listitem>
+		  <para>後で手動調整が必要になるにしても、有効な<filename>omegat.project</filename>ファイルを含む任意のフォルダーは、OmegaTは翻訳プロジェクトとして認識します。</para>
+		</listitem>
+
+		<listitem>
+		  <para>フォルダーが空のリポジトリで、<filename>OmegaT.project</filename>ファイルにリモートリポジトリ情報が含まれている場合には、OmegaTはチームプロジェクトとして認識します。</para>
+		  
+		  <programlisting>...
+    &lt;external_command&gt;&lt;/external_command&gt;
+    &lt;repositories&gt;
+        &lt;repository type=&quot;git&quot; url=&quot;https://URL/OF/THE/REMOTE/PROJECT/REPOSITORY&quot;&gt;
+            &lt;mapping local=&quot;/&quot; repository=&quot;/&quot;/&gt;
+        &lt;/repository&gt;
+    &lt;/repositories&gt;
+&lt;/project&gt;
+		  </programlisting>
+
+		  <para>詳細については、 <link linkend="how.to.setup.team.project" endterm="how.to.setup.team.project.title"/>を参照してください。</para>
+		</listitem>
+	  </itemizedlist>
+	</note>
+  </section>
+
+  <section>
+	<title>最小のコンテンツ</title>
+
+	<para>プロジェクトは、最小限では、次を含みます。</para>
+	
+	<variablelist>
+	  <varlistentry id="project.folder.omegat">
+		<term id="project.folder.omegat.title">omegat</term>
+		<listitem>
+		  <para>常に<link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/>(プロジェクトフォルダー)と<link linkend="project.folder.project.stats" endterm="project.folder.project.stats.title"/>(プロジェクトの翻訳メモリデータファイル)を含むプロジェクト翻訳状況を保存しています。</para>
+
+		  <para>その他のファイルは、翻訳の過程で追加されます。</para>
+
+		  <para><link linkend="project.folder.omegat.folder">以下に詳細</link>を示します。</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="project.folder.omegat.project.file">
+		<term id="project.folder.omegat.project.file.title">omegat.project</term>
+		<listitem>
+		  <para>このファイルには、<link linkend="dialogs.project.properties">プロジェクト設定</link>で定義されたプロジェクトのパラメータが含まれています。たとえば、原文言語と訳文言語、それぞれのトークナイザ、分節化のタイプなどです。</para>
+		  
+		  <para>また、プロジェクトリソースの場所を指定する<emphasis>アドレス帳</emphasis>としても機能します。</para>
+
+		  <para>OmegaTはまた、そのファイルのバックアップ(<filename>OmegaT.project.YYYYMMDD.bak</filename>)を作成し、必要に応じて自動的にそれを使用してプロジェクト設定を復元します。</para>
+		</listitem>
+	  </varlistentry>
+	</variablelist>
+  </section>
+  
+  <section id="project.folder.source">
+    <title id="project.folder.source.title">source</title>
+    <para>原文フォルダーには、翻訳するファイルが含まれています。</para>
+
+	<para><link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.copy.files.to.source.folder" endterm="menus.project.copy.files.to.source.folder.title"/>を使用するか、<link linkend="panes.editor" endterm="panes.editor.title"/>ウィンドウにファイルをドロップして、必要なときにいつでもファイルを追加できます。</para>
+
+	<para>OmegaTがサポートする形式のファイルの内容は、翻訳作業ができるように<link linkend="panes.editor" endterm="panes.editor.title"/>ウィンドウに表示されます。</para>
+
+	<para>ファイルマネージャを使用して、フォルダの追加やファイルの削除を行うこともできます。</para>
+
+	<para>翻訳プロジェクトに多数のフォルダが含まれていて、一度に1つのフォルダーで作業したい場合は、<link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.properties" endterm="menus.project.properties.title"/>を使用してプロジェクトプロジェクト設定にアクセスし、割り当てられた<link linkend="dialogs.project.properties.file.locations.source.files">ソースフォルダー</link>を必要に応じて変更します。</para>
+  </section>
+
+  <section id="project.folder.target">
+    <title id="project.folder.target.title">target</title>
+    <para>このフォルダーは、最初は空の状態です。</para>
+
+	<para><link linkend="menus.project.create.translated.documents" endterm="menus.project.create.translated.documents.title"/>または<link linkend="menus.project.create.current.translated.document" endterm="menus.project.create.current.translated.document.title"/>を使用するたびに、訳文ファイルが生成されます。</para>
+
+	<para><link linkend="project.folder.source" endterm="project.folder.source.title"/>フォルダーのコンテンツに対応する訳文ファイルは、翻訳が完了しているかどうかに関わらず、原文フォルダーと同じフォルダー構造を使用して作成されます。</para>
+
+	<para>ここで作成されるファイルには、現在の翻訳状態が反映されます。未翻訳分節は、原文言語のままになります。</para>
+  </section>
+
+  <section id="project.folder.tm">
+    <title id="project.folder.tm.title">tm</title>
+    <para>このフォルダーには、任意の数のバイリンガル参照文書(TMXファイルだけでなく、POファイルなど、OmegaTがサポートするバイリンガル形式の任意のファイル)を含めることができ、TMXファイルはgzip書式で圧縮することもできます。</para>
+	
+	<para>OmegaTは、自動訳文挿入するように指示されます。OmegaTが自動訳文挿入しており、自身でおこなったのでは無いことを記録するため、<link linkend="dialogs.preferences.editor.insert.the.best.fuzzy.match" endterm="dialogs.preferences.editor.insert.the.best.fuzzy.match.title"/>設定で接頭語を追加させることもできます。</para>
+	
+    <para>参照メモリからの一致は、プロジェクトの翻訳メモリである<link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/>からと同様に<link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/>ウィンドウに参考訳文として表示されます。</para>
+
+	<para>このような検索結果は、デフォルトでは<link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/>で定義された原文言語と訳文言語に限定された訳文候補になりますが、プロジェクトの訳文言語以外の言語での表示を追加することもできます。詳細の<link linkend="dialog.preferences.tm.matches.other.languages" endterm="dialog.preferences.tm.matches.other.languages.title"/>環境設定を参照してください。</para>
+
+	<para>フォルダーには、次のような特別な機能を持つサブフォルダを含め、任意の数のサブフォルダを含めることができます。</para>
+
+	<variablelist>
+      <varlistentry id="project.folder.tm.auto">
+		<term id="project.folder.tm.auto.title">tm/auto</term>
+		<listitem>
+		  <para>完全に一致した場合に未翻訳分節を自動的に入力することができる、信頼性の高い参照ファイルが入ります。</para>
+
+		  <para>このフォルダーに配置されたTMXファイルからの翻訳は、自動の接頭辞なしで一致する分節に自動的に挿入されるため、これらの分節を確認する必要はありません。</para>
+
+		  <para>このフォルダーからの訳文は、プロジェクトメモリと<emphasis>同じ</emphasis>信頼性があると見なされます。</para>
+
+		  <note>
+			<para><link linkend="dialogs.preferences.editor.save.auto-populated.status" endterm="dialogs.preferences.editor.save.auto-populated.status.title"/>設定を有効にして、挿入された一致がこのフォルダーからのものであることをOmegaTに記憶させます。</para>
+		  </note>
+
+		<orderedlist>
+			<listitem>
+			  <para>該当するメモリを<filename class="directory">tm/auto</filename>フォルダーに配置します。</para>
+			</listitem>
+			
+			<listitem>
+			  <para>プロジェクトを開きます。これらのメモリ内の原文分節と同一の分節がすでに入力されていることがわかります。<link linkend="menus.view" endterm="menus.view.title"/><link linkend="menus.view.mark.auto.populated.segments" endterm="menus.view.mark.auto.populated.segments.title"/>を使用して色付け表示します。</para>
+			</listitem>
+
+			<listitem>
+			  <para>プロジェクト内の任意の場所で小さな変更を行い、保存します。tm/autoフォルダーからロードされた訳文がプロジェクト翻訳メモリに追加されます。</para>
+			</listitem>
+		  </orderedlist>
+
+		  <para><link linkend="menus.goto" endterm="menus.goto.title"/><link linkend="menus.goto.auto.populated.segments" endterm="menus.goto.auto.populated.segments.title"/>のナビゲーションメニューを使用して、挿入された分節に移動します。</para>
+				
+		  <warning>
+			<para>ステップ3の前に<filename class="directory">tm/auto</filename>からTMXファイルを削除すると、その内容は保持されません。</para>
+		  </warning>
+		</listitem>
+	  </varlistentry>
+
+      <varlistentry id="project.folder.tm.enforce">
+		<term id="project.folder.tm.enforce.title">tm/enforce</term>
+		<listitem>
+		  <para>以前に翻訳された内容を自動的に上書きすることを目的とした、信頼性の高い参照ファイル用です。</para>
+
+		  <para>このフォルダーに配置されたTMXファイルからの訳文は、訳文の接頭辞のなしに、一致する分節に自動的に挿入されるため、これらの分節を確認する必要はありません。</para>
+
+		  <para>このフォルダーからの翻訳は、現在のプロジェクトの翻訳メモリよりも<emphasis>さらに</emphasis>信頼性が高いと考えられます。</para>
+
+		  <para> <filename>project_save.tmx</filename> よりも優先度が高いことが明らかな TMX がある場合は、そのファイルを <filename class="directory">tm/enforce</filename> に配置してください。そこからの分節は、既存の翻訳を無条件に上書きします。</para>
+
+		  <note>
+			<para><link linkend="dialogs.preferences.editor.save.auto-populated.status" endterm="dialogs.preferences.editor.save.auto-populated.status.title"/>設定を有効にして、挿入された一致がこのフォルダーからのものであることをOmegaTに記憶させます。</para>
+		  </note>
+
+		  <orderedlist>
+			<listitem>
+			  <para>該当するメモリを<filename class="directory">tm/enforce</filename>フォルダーに配置します。</para>
+			</listitem>
+
+			<listitem>
+			  <para>プロジェクトを開きます。これらのメモリ内の原文分節と同一の分節がすでに入力されていることがわかります。</para>
+			</listitem>
+			
+			<listitem>
+			  <para>プロジェクト内の任意の場所で小さな変更を行い、保存します。プロジェクトの翻訳メモリが更新されました。</para>
+			</listitem>
+
+			<listitem>
+			  <para>強制する分節の不変性について決定します。</para>
+			  
+			  <itemizedlist>
+				<listitem>
+				  <para>それ以上変更されないようにする<emphasis>必要がない</emphasis>場合は、<filename class="directory">tm/enforce</filename>からTMXを削除します。</para>
+				</listitem>
+
+				<listitem>
+				  <para>それ以上変更されないようにする<emphasis>必要がある</emphasis>場合は、<filename class="directory">tm/enforce</filename>にTMXを残します。これらのメモリからの分節への変更は<emphasis>考慮されません</emphasis>。</para>
+				</listitem>
+			  </itemizedlist>
+			</listitem>
+		  </orderedlist>
+
+		  <para><link linkend="menus.goto" endterm="menus.goto.title"/><link linkend="menus.goto.auto.populated.segments" endterm="menus.goto.auto.populated.segments.title"/>のナビゲーションメニューを使用して、挿入された分節に移動します。</para>
+
+		  <warning>
+			<para>ステップ3の前に<filename class="directory">tm/enforce</filename>からTMXファイルを削除すると、その強制される訳文は保持されません。</para>
+		  </warning>
+		</listitem>
+	  </varlistentry>
+
+      <varlistentry id="project.folder.tm.mt">
+		<term id="project.folder.tm.mt.title">tm/mt</term>
+		<listitem>
+		  <para>このフォルダーに含まれるTMXから訳文が挿入されると、アクティブな分節の背景色が赤に変わります。</para>
+
+		  <para>分節を離れるとき、または分節を修正したときに、背景色は通常色に戻ります。</para>
+		</listitem>
+	  </varlistentry>
+	  
+      <varlistentry id="project.folder.tm.penalty">
+		<term id="project.folder.tm.penalty.title">tm/penalty-xxx</term>
+		<listitem>
+		  <para><literal>xxx</literal>は、このフォルダーからの分節の一致パーセンテージから差し引かれるペナルティとして機能する0～100の数値です。</para>
+
+		  <para>例えば、<filename class="directory">penalty-30</filename>と名づけたフォルダーに保存されてたTMXからの100%一致は、70%一致になります。このペナルティは、参考訳文候補に併記される３種類の一致率すべてに適用されます。一致率 75、80、90 の場合は、45、50、60 に引き下げられます。</para>
+		</listitem>
+	  </varlistentry>
+
+      <varlistentry id="project.folder.tm.tmx2source">
+		<term id="project.folder.tm.tmx2source.title">tm/tmx2source</term>
+		<listitem>
+		  <para>原文分節の<emphasis>右</emphasis>に第3の言語の内容を表示して、原文文章の代替言語の参照として使用することもできます。詳細は、 <link linkend="how.to.tm.bridge.two.languages" endterm="how.to.tm.bridge.two.languages.title"/> のハウツー項を参照してください。</para>
+		</listitem>
+	  </varlistentry>
+	</variablelist>
+
+	<note>
+	  <para>フォルダ名を結合して新しい機能性を作成できます。例えば、機械翻訳フォルダー内の10%のペナルティフォルダー:<filename>tm/mt/penalty-010</filename>は、OmegaTによって自動的に挿入される可能性のある100%の一致を生成することはなく、かつ、一致が挿入されるたびに常に赤い背景を設定します。</para>
+	</note>
+  </section>
+
+  <section id="project.folder.exported.tm">
+	<title id="project.folder.exported.tm.title">エキスポート先フォルダー</title>
+	<para>デフォルトでは、そのフォルダーはプロジェクトフォルダーそのものですが、場所を変更して、書き出されたTMファイルを共有しやすくすることができます。詳細については、 <link linkend="how.to.tm.share.translation.memories" endterm="how.to.tm.share.translation.memories.title"/>を参照してください。</para>
+  </section>
+
+  <section id="project.folder.dictionary">
+    <title id="project.folder.dictionary.title">辞書</title>
+    <para>このフォルダーは最初は空で、プロジェクトに追加する辞書を格納するために使用されます。</para>
+
+	<para>分節の用語の一部に一致する辞書の項目が、<link linkend="panes.dictionary" endterm="panes.dictionary.title"/>ウィンドウに表示されます。詳細の<link linkend="dialogs.preferences.dictionary" endterm="dialogs.preferences.dictionary.title"/>環境設定を参照してください。</para>
+
+    <para>OmegaTは、StarDict 形式および Lingvo DSL 形式の辞書に対応しています。<ulink url="https://sourceforge.net/p/omegat/wiki/Reference%20Material/">OmegaTウィキ</ulink>で公開されている辞書を探すこともできます。</para>
+
+	<para>辞書をインストールするには:</para>
+
+    <orderedlist>
+      <listitem>
+        <para>ファイルをダウンロードします。これは TARアーカイブ (拡張子 <filename>tar.bz</filename> または <filename>tar.bz2</filename>) をダウンロードする必要があります。</para>
+      </listitem>
+	  
+      <listitem>
+        <para>その中身をこのフォルダーに展開します展開すると、拡張子が <filename>dz</filename>, <filename>idx</filename>, <filename>ifo</filename>の３つのファイルができるはずです。</para>
+      </listitem>
+    </orderedlist>
+
+	<para>辞書で検索したくない単語を指定する場合は、UTF-8でエンコードされた<filename>ignore.txt</filename>ファイルをフォルダーに追加します。ファイルには1行に1語が必要です。OmegaTはリストに含まれる単語を無視します。</para>
+  </section>
+
+  <section id="project.folder.glossary">
+    <title id="project.folder.glossary.title">用語集</title>
+    <para>このフォルダーは、最初は空の状態です。プロジェクトで利用する標準の追加書き込み可能な用語集と参照用語集を格納するために使用されます。</para>
+
+	<para>分節の用語の一部に一致する用語集の項目が、<link linkend="panes.glossary" endterm="panes.glossary.title"/>ウィンドウに表示されます。詳細は、付録の <link linkend="app.glossaries" endterm="app.glossaries.title"/> をご覧ください。</para>
+
+	<variablelist>
+      <varlistentry id="project.folder.glossary.txt">
+        <term id="project.folder.glossary.txt.title">glossary.txt</term>
+        <listitem>
+          <para>プロジェクトの書き込み可能な用語集です最初に<link linkend="menus.edit.create.glossary.entry" endterm="menus.edit.create.glossary.entry.title"/>を利用したときに、自動的に作成されます。</para>
+
+		  <para><link linkend="menus.project.access.project.contents.title" endterm="menus.project.access.project.contents.title"/>でアクセスして、テキストエディタで開いて変更することもできます。用語集に加えた変更を保存すると、OmegaTはそれを利用するようになります。</para>
+        </listitem>
+      </varlistentry>
+	</variablelist>
+  </section>
+
+  <section id="project.folder.omegat.folder">
+    <title id="project.folder.omegat.folder.title">omegat</title>
+    <para><filename class="directory">OmegaT</filename>フォルダーには、少なくとも<link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/>ファイルと<link linkend="project.folder.project.stats" endterm="project.folder.project.stats.title"/>ファイルが含まれています。他の複数のファイルが含まれている場合もあります。</para>
+
+    <variablelist>
+      <varlistentry id="project.folder.project.save.tmx">
+        <term id="project.folder.project.save.tmx.title">project_save.tmx</term>
+        <listitem>
+          <para>これは、プロジェクトで最も重要なファイルです。プロジェクトを最初に作成したときは、空の翻訳メモリですが、徐々に翻訳作業したテキストによって、<link linkend="project.folder.source" endterm="project.folder.source.title"/>フォルダーのファイルがうめられていきます。</para>
+
+		  <para>これが、プロジェクトの作業用の翻訳メモリになります。</para>
+
+		  <para>OmegaTはそのファイルを定期的にバックアップしています。詳細については、 <link linkend="how.to.restore.your.data" endterm="how.to.restore.your.data.title"/>を参照してください。</para>
+		</listitem>
+      </varlistentry>
+	  
+	  <varlistentry id="project.folder.project.save.tmx.bak">
+		<term id="project.folder.project.save.tmx.bak.title">project_save.tmx.bak</term>
+		<listitem>
+		  <para><filename>project_save.tmx</filename>のバックアップであり、<filename>project_save.tmx</filename>が変更される毎に作成されます。<link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.save" endterm="menus.project.save.title"/>を利用した後や、デフォルトで3分ごと に通常のバックアップが作成されます。詳細は<link linkend="dialog.preferences.saving.and.output.interval" endterm="dialog.preferences.saving.and.output.interval.title"/>の設定を参照してください。</para>
+		</listitem>
+	  </varlistentry>
+	  
+	  <varlistentry id="project.folder.project.save.tmx.timestamp.bak">
+		<term id="project.folder.project.save.tmx.timestamp.bak.title">project_save.tmx.timestamp.bak</term>
+		<listitem>
+		  <para>プロジェクトが読み込まれるたびに、OmegaTは<filename>project_save.tmx</filename>のバックアップを<filename>project_save.tmx.[タイムスタンプ].bak</filename>という名前で作成します。OmegaTはこれらのファイルを10個まで保持しています。</para>
+		</listitem>
+	  </varlistentry>
+
+      <varlistentry id="project.folder.project.stats">
+        <term id="project.folder.project.stats.title">project_stats.txt</term>
+        <listitem>
+          <para>プロジェクト全体の翻訳状況ファイルです。プロジェクトを再ロードするたびに更新されます。</para>
+
+		  <para><link linkend="menus.tools" endterm="menus.tools.title"/><link linkend="menus.tools.statistics" endterm="menus.tools.statistics.title"/>を使用して更新します。</para>
+        </listitem>
+      </varlistentry>
+	  
+      <varlistentry id="project.folder.omegat.project.stats.match">
+        <term id="project.folder.omegat.project.stats.match.title">project_stats_match.txt</term>
+        <listitem>
+          <para>最新のプロジェクトの参考訳文の一致の統計が含まれています。<link linkend="menus.tools" endterm="menus.tools.title"/><link linkend="menus.tools.match.statistics" endterm="menus.tools.match.statistics.title"/>を使用して生成します。</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="project.folder.omegat.project.stats.match.per.file">
+        <term id="project.folder.omegat.project.stats.match.per.file.title">project_stats_match_per_file.txt</term>
+        <listitem>
+          <para>最新のプロジェクトの参考訳文の一致のファイル毎の統計が含まれています。<link linkend="menus.tools" endterm="menus.tools.title"/><link linkend="menus.tools.match.statistics.per.file" endterm="menus.tools.match.statistics.per.file.title"/>を使用して生成します。</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="       project.folder.omegat.spellcheck">
+        <term id="project.folder.omegat.ignored.words.title">ignored_words.txt</term>
+        <term id="project.folder.omegat.learned.words">learned_words.txt</term>
+        <listitem>
+          <para>これらのファイルは、スペルチェッカーによって作成および使用されます。<link linkend="panes.editor" endterm="panes.editor.title"/>ウィンドウに用語を追加するには、正しくないとマークされた単語を右クリックし、<link linkend="panes.editor.context.menu">コンテキストメニュー</link>から<guimenuitem>[すべて無視]</guimenuitem>(スペルチェック中にスキップする単語の場合)または<guimenuitem>[辞書に追加]</guimenuitem>(正しいと受け入れる単語の場合)をそれぞれ選択します。詳細の<link linkend="dialog.preferences.spellchecker" endterm="dialog.preferences.spellchecker.title"/>環境設定を参照してください。</para>
+
+		  <para>すでに修正済で、綴り確認機能に無視させるか学習させる単語は、対応する名前で文書ファイルに入力して、<link linkend="project.folder.omegat.folder" endterm="project.folder.omegat.folder.title"/> フォルダーに保存しておきます。</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="project.folder.omegat.segmentation">
+        <term id="project.folder.omegat.segmentation.title">segmentation.conf</term>
+        <listitem>
+          <para>このファイルには、プロジェクト固有の分節化規則が含まれています。</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="project.folder.omegat.filters">
+        <term id="project.folder.omegat.filters.title">filters.xml</term>
+        <listitem>
+          <para>このファイルには、プロジェクト固有のファイルフィルター設定が含まれています。</para>
+        </listitem>
+      </varlistentry>
+	  
+      <varlistentry id="project.folder.omegat.uiLayout">
+        <term id="project.folder.omegat.uiLayout.title">uiLayout.xml</term>
+        <listitem>
+          <para>このファイルには、プロジェクト固有のGUI設定が含まれています。</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="project.folder.omegat.finder">
+        <term id="project.folder.omegat.finder.title">finder.xml</term>
+        <listitem>
+          <para>このファイルには、プロジェクト固有の外部検索が含まれています。</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="project.folder.omegat.file.order">
+        <term id="project.folder.omegat.file.order.title">files_order.txt</term>
+        <listitem>
+          <para>このファイルは、<link linkend="windows.source.files.list" endterm="windows.source.files.list.title"/>ウィンドウのファイルの順序を手動で変更した場合に作成されます。</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="project.folder.omegat.last.entry">
+        <term id="project.folder.omegat.last.entry.title">last_entry.properties</term>
+        <listitem>
+          <para>このファイルには、最後に訪問した分節の番号、ソースの内容、ファイル名、および日付が記録されるので、プロジェクトを再読み込み/再起動するときに、作業中のファイルに戻ることができます。</para>
+        </listitem>
+      </varlistentry>	  
+    </variablelist>
+  </section>
+
+  <section id="project.folder.repositories">
+    <title id="project.folder.repositories.title">.repositories</title>
+    <para>チームプロジェクトの場合、このフォルダには、リモートサーバーに直接リンクされたプロジェクトツリー構造のバージョン管理されたコピーが含まれます。</para>
+
+    <para>このフォルダーで変更を行い、GitまたはSVNクライアントを使用してリモートサーバと同期することで、リモートファイルに変更(削除や置換など)を加えることができます。詳細については、 <link linkend="how.to.setup.team.project" endterm="how.to.setup.team.project.title"/>を参照してください。</para>
+
+    <para>一部のオペレーティングシステムでは、このフォルダは既定で表示されません。システム内の隠しファイルを表示するには、設定をオンにします。</para>
+  </section>
+</chapter>

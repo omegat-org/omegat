@@ -1,0 +1,883 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.panes">
+  <title id="chapter.panes.title">ウィンドウ</title>
+
+  <section id="panes.default.layout">
+	<title id="panes.default.layout.title">標準レイアウト</title>
+
+	<para>OmegaTを初めて開始するとき、メインウィンドウには次の標準レイアウトが表示されます。</para>
+
+		<figure id="default.omegat.layout">
+      <title id="default.omegat.layout.title">Mac OSでのデフォルトOmeaTレイアウト</title>
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/defaultOmegaTLayout.png"/>
+        </imageobject>
+        <imageobject role="fo">
+          <imagedata fileref="images/defaultOmegaTLayout.png" width="60%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+	<orderedlist>
+	  <listitem>
+		<para><link linkend="panes.editor" endterm="panes.editor.title"/>ウィンドウ</para>
+	  </listitem>
+	  <listitem>
+		<para><link linkend="panes.notes" endterm="panes.notes.title"/>ウィンドウ</para>
+	  </listitem>
+	  <listitem>
+		<para><link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/>ウィンドウ</para>
+	  </listitem>
+	  <listitem>
+		<para><link linkend="panes.glossary" endterm="panes.glossary.title"/>ウィンドウ</para>
+	  </listitem>
+	  <listitem>
+		<para><link linkend="panes.segment.properties" endterm="panes.segment.properties.title"/>ウィンドウ</para>
+	  </listitem>
+	  <listitem>
+		<para><link linkend="panes.comments" endterm="panes.comments.title"/>ウィンドウ</para>
+	  </listitem>
+	  <listitem>
+		<para><link linkend="panes.multipletranslations" endterm="panes.multipletranslations.title"/>ウィンドウ</para>
+	  </listitem>
+	  <listitem>
+		<para><link linkend="panes.dictionary" endterm="panes.dictionary.title"/>ウィンドウと<link linkend="panes.machinetranslation" endterm="panes.machinetranslation.title"/>ウィンドウはドッキングされています。</para>
+	  </listitem>
+	  <listitem>
+		<para><link linkend="panes.statusbar" endterm="panes.statusbar.title"/>(右側):プロジェクト情報が表示されます。</para>
+	  </listitem>
+	</orderedlist>
+	
+	<para><link linkend="menus.view" endterm="menus.view.title"/>メニューのさまざまなオプションを使用して、さまざまな<link linkend="chapter.panes">ウィンドウ</link>を移動し、自身の作業手順に最適なレイアウトになるようにカスタマイズします。</para>
+
+	<warning>
+	  <para>ウィンドウレイアウトの再配置中に問題が発生した場合は、<link linkend="menus.view" endterm="menus.view.title"/><link linkend="menus.view.restore.main.window" endterm="menus.view.restore.main.window.title"/>を使用します。</para>
+	</warning>
+  </section>
+
+  <section id="panes.principles">
+    <title id="panes.principles.title">原則</title>
+
+    <variablelist>
+      <varlistentry id="panes.manipulation">
+        <term id="panes.manipulation.title">操作</term>
+
+        <listitem>
+          <para>メインウィンドウは、本章で説明するウィンドウ、<link linkend="chapter.menus" endterm="chapter.menus.title"/>で説明するメインメニュー、<link linkend="panes.statusbar">以下</link>で説明するステータスバーから構成されています。ウィンドウの名前をクリックしたまま新しい位置にドラッグしたり、別のウィンドウとしてドッキング解除することもできます。</para>
+
+          <para>各ウィンドウの右上隅には、ウィンドウのタイプとその現在のステータスに応じたアイコンが表示されます。</para>
+
+          <table id="table.pane.widgets">
+            <title id="table.pane.widgets.title">ウィンドウ表示アイコン</title>
+
+            <tgroup cols="2">
+              <tbody>
+                <row>
+                  <entry><inlinemediaobject>
+                      <imageobject role="html">
+                        <imagedata fileref="images/Settings.png" width="60%"/>
+                      </imageobject>
+
+                      <imageobject role="fo">
+                        <imagedata fileref="images/Settings.png" width="40%"/>
+                      </imageobject>
+                    </inlinemediaobject></entry>
+
+                  <entry>ウィンドウで使用可能なさまざまな追加<emphasis role="bold">アクション</emphasis>を一覧表示します。</entry>
+                </row>
+
+                <row>
+                  <entry><inlinemediaobject>
+                      <imageobject role="html">
+                        <imagedata fileref="images/Minimize.png" width="60%"/>
+                      </imageobject>
+
+                      <imageobject role="fo">
+                        <imagedata fileref="images/Minimize.png" width="40%"/>
+                      </imageobject>
+                    </inlinemediaobject></entry>
+
+                  <entry>ウィンドウを<emphasis role="bold">最小化</emphasis>し、メインウィンドウの底部にタブ化されます。</entry>
+                </row>
+
+                <row>
+                  <entry><inlinemediaobject>
+                      <imageobject role="html">
+                        <imagedata fileref="images/Maximize.png" width="60%"/>
+                      </imageobject>
+
+                      <imageobject role="fo">
+                        <imagedata fileref="images/Maximize.png" width="40%"/>
+                      </imageobject>
+                    </inlinemediaobject></entry>
+
+                  <entry>ウィンドウを<emphasis role="bold">最大化</emphasis>します。</entry>
+                </row>
+
+                <row>
+                  <entry><inlinemediaobject>
+                      <imageobject role="html">
+                        <imagedata fileref="images/Restore.png" width="60%"/>
+                      </imageobject>
+
+                      <imageobject role="fo">
+                        <imagedata fileref="images/Restore.png" width="40%"/>
+                      </imageobject>
+                    </inlinemediaobject></entry>
+
+                  <entry>ウィンドウを以前のレイアウトで<emphasis role="bold">復元</emphasis>します。</entry>
+                </row>
+
+                <row>
+                  <entry><inlinemediaobject>
+                      <imageobject role="html">
+                        <imagedata fileref="images/Undock.png" width="60%"/>
+                      </imageobject>
+
+                      <imageobject role="fo">
+                        <imagedata fileref="images/Undock.png" width="40%"/>
+                      </imageobject>
+                    </inlinemediaobject></entry>
+
+                  <entry>ウィンドウをメインウィンドウから<emphasis role="bold">切り離し</emphasis>て、独立したウィンドウとして表示します。</entry>
+                </row>
+
+                <row>
+                  <entry><inlinemediaobject>
+                      <imageobject role="html">
+                        <imagedata fileref="images/Dock.png" width="60%"/>
+                      </imageobject>
+
+                      <imageobject role="fo">
+                        <imagedata fileref="images/Dock.png" width="40%"/>
+                      </imageobject>
+                    </inlinemediaobject></entry>
+
+                  <entry>分かれたウィンドウをメインウィンドウに<emphasis role="bold">戻し</emphasis>ます 。</entry>
+                </row>
+              </tbody>
+            </tgroup>
+          </table>
+
+          <para>同じ領域に複数ウィンドウをグループ化できます。すると、グループの一番上にウィンドウの名前が付いたタブが表示されます。ウィンドウのサイズを変更するには、ウィンドウ間のセパレータをドラッグします。</para>
+
+          <note>
+            <para>ユーザー・インターフェースに対して行った変更の追跡が失われ、特定のペインが表示されなくなる場合は、 <link endterm="menus.view.title" linkend="menus.view"/><link endterm="menus.view.restore.main.window.title" linkend="menus.view.restore.main.window"/> を使用してデフォルトのレイアウトに戻すことができます。</para>
+          </note>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="panes.context.menus">
+        <term id="panes.context.menus.title">コンテキストメニュー</term>
+
+        <listitem>
+          <para>一部のペインには、コンテキストメニューがあります。このメニューは、OS標準の呼び出し方式か、OmegaTで定義されたショートカットを使用して呼び出すことができます。<itemizedlist>
+              <listitem>
+                <para>WindowsとLinux: <keycap>メニュー</keycap></para>
+              </listitem>
+
+              <listitem>
+                <para>macOS: <keycombo><keycap>S</keycap><keycap>Esc</keycap></keycombo></para>
+              </listitem>
+            </itemizedlist></para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="panes.drag.and.drop">
+        <term id="panes.drag.and.drop.title">ドラッグ＆ドロップ</term>
+
+        <listitem>
+          <para>特定のペインでファイルをドラッグアンドドロップすると、次のような結果になります。</para>
+
+          <variablelist>
+            <varlistentry>
+              <term>編集ウィンドウ</term>
+
+              <listitem>
+                <para>OmegaTプロジェクトファイル(<filename>OmegaT.project</filename>)または完全なプロジェクトをここにドロップすると、現在開いているプロジェクトがあれば、それを閉じた後に対応するプロジェクトが開きます。</para>
+
+                <para>他のファイルをドロップすると、それらは<filename class="directory">原文</filename>フォルダーにコピーされます。これは、 <link endterm="windows.source.files.list.title" linkend="windows.source.files.list"/> ウィンドウにも適用されます。</para>
+              </listitem>
+            </varlistentry>
+
+            <varlistentry>
+              <term>参考訳文ウィンドウ</term>
+
+              <listitem>
+                <para><filename class="directory">.tmx</filename>ファイルをドロップすると<filename>tm</filename>フォルダーにコピーされます。</para>
+              </listitem>
+            </varlistentry>
+
+            <varlistentry>
+              <term>用語集ウィンドウ</term>
+
+              <listitem>
+                <para>用語集として既知の拡張子（<filename>.txt</filename>、<filename>.tab</filename>など）を持つファイルをこのウィンドウにドロップすると、そのファイルが<filename class="directory">用語集</filename>フォルダにコピーされます。</para>
+              </listitem>
+            </varlistentry>
+          </variablelist>
+        </listitem>
+      </varlistentry>
+
+	  <varlistentry id="panes.notifications">
+        <term id="panes.notifications.title">通知</term>
+		
+        <listitem>
+          <para>ウィンドウが最小化されていても、表示コンテンツがある場合、分節に入るときにウィンドウタブを一時的にオレンジ色で強調表示できます。</para>
+		  
+		  <para>デフォルトでは、<guilabel>コメント</guilabel>および<guilabel>メモ帳</guilabel>ウィンドウで通知が有効になっています。</para>
+		  
+		  <para>通知を有効または無効にするには、</para>
+		  
+		  <itemizedlist>
+			<listitem>
+			  <para>ウィンドウに入ります。</para>
+			</listitem>
+
+			<listitem>
+			  <para>右上の<guilabel>アクション</guilabel>ウィジェットをクリックします。</para>
+			</listitem>
+			
+			<listitem>
+			  <para><guilabel>分節が次の場合に通知する</guilabel>を選択します(通知を有効にするウィンドウによってメニューの順序が異なります)。</para>
+			</listitem>
+		  </itemizedlist>
+
+		  <para>次のウィンドウでは、通知を表示できます。</para>
+
+		  <itemizedlist>
+			<listitem>
+			  <para>コメント</para>
+			</listitem>
+
+			<listitem>
+			  <para>辞書</para>
+			</listitem>
+
+			<listitem>
+			  <para>参考訳文</para>
+			</listitem>
+
+			<listitem>
+			  <para>用語集</para>
+			</listitem>
+
+			<listitem>
+			  <para>複数訳文</para>
+			</listitem>
+
+			<listitem>
+			  <para>メモ帳</para>
+			</listitem>
+
+			<listitem>
+			  <para>分節属性</para>
+
+			  <para><guilabel>分節属性</guilabel>ウィンドウでは、各項目の通知設定を行うことができます。</para>
+
+			  <para><guilabel>表表示</guilabel>では、項目で右クリックして<guilabel>分節が次の場合に通知する</guilabel>を選択します(有効にしたい通知によって選択するメニューの順序が異なります)。</para>
+
+			  <para><guilabel>リスト表示</guilabel>で通知させたい項目の右端の<guilabel>アクション</guilabel>ウィジェットを右クリックして、<guilabel>分節が次の場合に通知する</guilabel>(通知によって選択するメニューの場所は異なります)。</para>
+			</listitem>
+		  </itemizedlist>
+		</listitem>
+	  </varlistentry>
+    </variablelist>
+  </section>
+
+  <section id="panes.editor">
+    <title id="panes.editor.title"><guilabel>編集</guilabel></title>
+
+    <para>翻訳内容を入力、編集する場所です。</para>
+
+    <para>文章が多数の分節に分割されます。スクロールで文書内を移動でき、どの分節でもダブルクリックすることで編集できます。</para>
+
+	<example id="panes.editor.default.editor.writing.space">
+	  <title id="panes.editor.default.editor.writing.space.title">編集ウィンドウのデフォルトでの編集領域</title>
+	  <para>
+		<programlisting>— ¶ —————————————————————
+
+<token>Hide Tags</token>
+|タグを隠す<token>&lt;segment 2148 ¶&gt;</token>
+
+— ¶ —————————————————————
+
+この設定にチェックを入れると、原文分節からすべての整形用のタグを非表示にします。</programlisting></para>
+	</example>
+
+    <itemizedlist>
+      <listitem>
+        <para>緑の背景に太字で表示されている最初の行は、翻訳する原文の文章です。</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">移動領域</emphasis>は、左側の罫線と右側の分節マーカーの間の2番目の線です。<emphasis role="bold">翻訳領域</emphasis>は、翻訳を入力する場所です。</para>
+      </listitem>
+
+      <listitem>
+        <para>ここの分節マーカーは<literal>&lt;分節2148¶&gt;</literal>です。</para>
+
+        <para><literal>2148</literal>はプロジェクト内の分節の番号であり、<literal>¶</literal>記号は分節が段落内の最初の分節であることを示します。</para>
+      </listitem>
+
+      <listitem>
+        <para>カーソル移動範囲は、デフォルトでは翻訳領域にロックされます。</para>
+
+        <para><keycap>F2</keycap>を使用してロックを解除し、移動領域とウィンドウの他の部分との間で自由に移動できます。</para>
+      </listitem>
+
+      <listitem>
+        <para>翻訳領域の下は別の分節です。</para>
+      </listitem>
+
+      <listitem>
+        <para><link linkend="menus.goto" endterm="menus.goto.title"/><link endterm="menus.goto.next.untranslated.segment.title" linkend="menus.goto.next.untranslated.segment"/>またはその他のナビゲーションコマンドを使用して、次の操作を行います。</para>
+
+		<itemizedlist>
+          <listitem>
+            <para>翻訳領域の内容をプロジェクト翻訳メモリに登録する</para>
+          </listitem>
+
+          <listitem>
+            <para>翻訳の次の分節に入ってください。</para>
+          </listitem>
+        </itemizedlist>
+
+		<para>詳細については、<link endterm="menus.goto.title" linkend="menus.goto"/>メニューを参照してください。</para>
+      </listitem>
+    </itemizedlist>
+
+    <note>
+      <para>ワークフローに合わせて編集内容表示を修正します。</para>
+
+	  <!--   <example id="panes.editor.modified.editor.target.field"> -->
+	  <!-- 	<title id="panes.editor.modified.editor.target.field.title">Example of modified -->
+	  <!--         editor writing space</title> -->
+	  <!-- 	<para> -->
+	  <!-- 	  <programlisting>— ¶ ————————————————————— -->
+
+	  <!-- Translation last modified by Didier on Sep 4, 2012 at 9:16:52 PM -->
+	  <!-- <token>Hide Ta&amp;gs</token> -->
+	  <!-- <token>Dissi&amp;muler les balises</token> -->
+
+	  <!-- — ¶ ————————————————————— -->
+
+	  <!-- <token>External Post-processing Command:</token> -->
+	  <!-- <token>[fuzzy]</token>Commande de post-traitement externe<token>&lt;segment 3644 ¶></token> -->
+
+	  <!-- — ¶ —————————————————————</programlisting></para> -->
+	  <!--   </example> -->
+
+	  <para>次のような変更が可能です:</para>
+	  
+	  <itemizedlist>
+		<listitem>
+		  <para><link endterm="dialogs.preferences.fonts.title" linkend="dialogs.preferences.fonts"/>設定に従って字体を変更します。</para>
+		</listitem>
+
+		<listitem>
+		  <para><link endterm="menus.view.title" linkend="menus.view"/><link endterm="menus.view.mark.paragraph.delimitations.title" linkend="menus.view.mark.paragraph.delimitations"/>を使用して段落の区切りを表示または非表示にします。</para>
+		</listitem>
+
+		<listitem>
+		  <para><link endterm="dialogs.preferences.editor.paragraph.delimitation.format.title" linkend="dialogs.preferences.editor.paragraph.delimitation.format"/>設定で定義されている段落区切りの設定を変更します。</para>
+		</listitem>
+
+		<listitem>
+		  <para><link endterm="menus.view.title" linkend="menus.view"/><link endterm="menus.view.modification.info.title" linkend="menus.view.modification.info"/>を使って分節の変更情報を表示</para>
+		</listitem>
+
+		<listitem>
+		  <para><link endterm="menus.view.title" linkend="menus.view"/><link endterm="menus.view.display.source.segments.title" linkend="menus.view.display.source.segments"/>を使用して原文分節を表示または非表示にします。</para>
+		</listitem>
+
+		<listitem>
+		  <para><link endterm="menus.view.title" linkend="menus.view"/><link endterm="menus.view.mark.translated.segments.title" linkend="menus.view.mark.translated.segments"/>を使用して訳文分節をハイライト表示します。</para>
+		</listitem>
+
+		<listitem>
+		  <para><link endterm="dialogs.preferences.editor.leave.the.segment.empty.title" linkend="dialogs.preferences.editor.leave.the.segment.empty"/>設定を無効にして、原文を訳文領域に自動挿入します。</para>
+		</listitem>
+
+		<listitem>
+		  <para><link endterm="dialogs.preferences.editor.insert.the.best.fuzzy.match.title" linkend="dialogs.preferences.editor.insert.the.best.fuzzy.match"/>設定で定義されたしきい値を超える、参考訳文の候補を挿入します。</para>
+		</listitem>
+
+		<listitem>
+		  <para><link endterm="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation.title" linkend="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation"/>設定で有効して、翻訳から除外するテキストを定義できます。</para>
+		</listitem>
+	  </itemizedlist>
+
+	  <para><link endterm="menus.view.title" linkend="menus.view"/>メニューの詳細については、設定-<link linkend="dialogs.preferences.editor" endterm="dialogs.preferences.editor.title"/>を参照してください。</para>
+    </note>
+
+    <variablelist>
+      <varlistentry>
+        <term>空訳文</term>
+
+        <listitem>
+          <para>翻訳領域を空のままにしておくと、OmegaTは訳文の文書を作成するときに、その分節を未翻訳として扱って元の言語で出力します。</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>原文とおなじ訳文</term>
+
+        <listitem>
+          <para>OmegaT では、生成される訳文が原文と同じにすることもできます。これは商標や固有名詞、第３の言語による章など、翻訳の必要がない部分を残しておきたいときに便利です。</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>テキストのドラッグ</term>
+
+        <listitem>
+          <para>メインウィンドウ内の任意の場所からテキストをドラッグして、訳文領域にドロップすることができます。訳文分節以外からドラッグしたテキストはコピーされ、訳文分節内からドラッグしたテキストは移動します。</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="panes.editor.overwriting">
+        <term id="panes.editor.overwriting.title">上書き</term>
+
+        <listitem>
+          <para>デフォルトでは、入力中の方向のカーソルの後にテキストは入力されます。既存の文章を上書きするには、次のキーを使用します。</para>
+
+		  <itemizedlist>
+            <listitem>
+              <para>WindowsとLinux: <keycombo><keycap>INSERT</keycap></keycombo></para>
+            </listitem>
+
+            <listitem>
+              <para>macOS: <keycap>F3</keycap></para>
+            </listitem>
+          </itemizedlist>
+
+          <para><link linkend="panes.statusbar">ステータスバー</link>の右側には、書き込みモード(上書き-<guilabel>OVR</guilabel>または挿入-<guilabel>INS</guilabel>)が表示されます。同じキーで各モードを切り替えることができます。</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="panes.editor.cursor.lock">
+        <term id="panes.editor.cursor.lock.title">カーソルロック</term>
+
+        <listitem>
+          <para>カーソル移動範囲は、デフォルトでは翻訳領域にロックされ、矢印キーで原文に移動することはできません。</para>
+
+          <para><keycap>[F2]</keycap>キーを押すとカーソルをロック解除して、キーボードの矢印を使用して、カーソルを原文分節(またはエディタ内の任意の場所)に移動できます。キーボード操作だけで、任意のテキストを選択することができます。</para>
+
+          <para>カーソルのステータス(ロック-<guilabel>LCK</guilabel>またはロック解除-<guilabel>UNL</guilabel>)は、<link linkend="panes.statusbar">ステータスバー</link>の右側に表示されます。同じキーでロックとロック解除を切り替えることができます。</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="panes.editor.context.menu">
+        <term id="panes.editor.context.menu.title">コンテキストメニュー</term>
+
+        <listitem>
+          <para>デフォルトのショートカット:</para>
+
+		  <itemizedlist>
+			<listitem>
+              <para>WindowsとLinux: <keycap>メニュー</keycap></para>
+			</listitem>
+
+			<listitem>
+              <para>macOS: <keycombo><keycap>S</keycap><keycap>Esc</keycap></keycombo></para>
+			</listitem>
+          </itemizedlist>
+
+		  <para>マウスを右クリックしてメニューを表示することもできます(macOSでは<keycap>C</keycap>+<keycap>クリック</keycap>)。</para>
+
+          <para>編集ウィンドウのコンテキストメニューには、<link endterm="menus.edit.title" linkend="menus.edit"/>メニューから使用できる次のようなさまざまな機能があります。</para>
+
+		  <itemizedlist>
+			<listitem>
+			  <para>一致した用語集項目とコメント(ツールチップとして表示される場合)。<link endterm="menus.view.title" linkend="menus.view"/><link endterm="menus.view.mark.glossary.matches.title" linkend="menus.view.mark.glossary.matches"/>を使用して、この機能を有効にします。</para>
+			</listitem>
+
+			<listitem>
+        <para><guilabel>切り取り</guilabel>、<guilabel>コピー</guilabel>、<guilabel>貼り付け</guilabel>の機能</para>
+      </listitem>
+
+      <listitem>
+        <para><guilabel>分節に移動</guilabel>(ポインタの下の分節にジャンプします)。</para>
+      </listitem>
+
+      <listitem>
+        <para><guilabel>辞書の検索</guilabel>(インストールされた辞書で選択した用語を検索するため)。</para>
+      </listitem>
+
+      <listitem>
+        <para><guilabel>用語を追加</guilabel>(<link endterm="menus.edit.title" linkend="menus.edit"/><link endterm="menus.edit.create.glossary.entry.title" linkend="menus.edit.create.glossary.entry"/>を使用するのと同じ)。</para>
+      </listitem>
+
+      </itemizedlist>
+
+          <para><link endterm="dialogs.preferences.external.searches.title" linkend="dialogs.preferences.external.searches"/>環境設定で文章を選択してエントリを定義した場合は、それらもこのメニューに表示されます(ローカル検索と同様)。</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="panes.editor.auto.completion.menu">
+        <term id="panes.editor.auto.completion.menu.title">入力補完メニュー</term>
+
+        <listitem>
+          <para>デフォルトのショートカット:</para>
+		  
+		  <itemizedlist>
+			<listitem>
+              <para>WindowsおよびLinuxの場合:<keycombo><keycap>Control</keycap><keycap>Space</keycap></keycombo></para>
+			</listitem>
+
+			<listitem>
+              <para>macOSの場合: <keycap>Esc</keycap></para>
+			</listitem>
+          </itemizedlist>
+		  			
+          <para>このメニューでは、<link endterm="dialog.preferences.auto.completion.title" linkend="dialog.preferences.auto.completion"/>設定で設定された自動補完オプションを提供します。</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="panes.editor.navigation">
+        <term id="panes.editor.navigation.title">ナビゲーション</term>
+        <listitem>
+		  <para><link linkend="menus.goto" endterm="menus.goto.title"/><link linkend="menus.goto.notes.pane" endterm="menus.goto.notes.pane.title"/>を使用するとウィンドウに移動でき、そこでコメントを追加できます。</para>
+
+		  <para><link linkend="menus.goto" endterm="menus.goto.title"/><link linkend="menus.goto.editor.pane" endterm="menus.goto.editor.pane.title"/>を使用して編集に戻ります。</para>
+        </listitem>
+	  </varlistentry>
+    </variablelist>
+  </section>
+
+  <section id="panes.fuzzy.matches">
+    <title id="panes.fuzzy.matches.title"><guilabel>参考訳文</guilabel></title>
+
+    <para>参考訳文ウィンドウには、現在翻訳中の分節に最も近い翻訳メモリの分節が表示されます。</para>
+
+    <para>参考訳文は、プロジェクトの翻訳メモリ時にリアルタイムで作成された内部プロジェクト翻訳と、以前のプロジェクトからインポートした外部メモリまたはサードパーティから受け取った外部メモリの全てから取得されます。詳細については、 <link endterm="how.to.use.tm.title" linkend="how.to.use.tm"/>を参照してください。</para>
+
+    <para>次の分節に移動すると、最初の参考訳文（最も一致率の高いもの）が自動的に選択されます。別の参考訳文を選択するには、<keycombo><keycap>C</keycap><keycap>2、3、4、または5</keycap></keycombo>を押すか、<link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.select.match" endterm="menus.edit.select.match.title"/>を使用します。</para>
+
+	<example id="the.first.match">
+	  <title id="the.first.match.title">空の分節と最初の2つのマッチ</title>
+      <para>
+		<informaltable id="table.pane.matches">
+          <tgroup cols="2">
+            <tbody>
+              <row>
+                <entry><para>
+				  <informaltable>
+					<tgroup cols="1">
+					  <tbody>
+						<row>
+						  <entry>
+							<programlisting>— ¶ —————————————————————
+
+<token>Application Folder</token>
+|<token>&lt;segment 1879 ¶&gt;</token>
+
+— ¶ —————————————————————
+</programlisting></entry>
+						</row>
+					  </tbody>
+					</tgroup>
+				  </informaltable>
+				</para>
+				</entry>
+                <entry><para>
+				  <informaltable>
+					<tgroup cols="1">
+					  <tbody>
+						<row>
+						  <entry>
+							<programlisting>1. <token>Top</token> Folder
+Dossier racine
+&lt;50/50/66% Orphan segments (+1 more)&gt;</programlisting>
+<programlisting>2. Configuration Folder
+Dossier de configuration
+&lt;50/50/66% &gt;</programlisting></entry>
+						</row>
+					  </tbody>
+					</tgroup>
+				  </informaltable>
+				</para>
+				</entry>
+			  </row>
+			</tbody>
+		  </tgroup>
+		</informaltable>
+	  </para>
+	</example>
+
+    <para>選択した参考訳文が<emphasis role="bold">太字</emphasis>で強調表示されます。翻訳中の分節から欠落している単語は<emphasis role="bold">青</emphasis>で表示され、隣接する部分は<emphasis role="bold">緑</emphasis>で表示されます(隣接する部分が空白の場合、上記のように、その部分は色付けされません)。</para>
+
+    <para>参考訳文には、3つのパーセンテージも表示されます。</para>
+
+    <para>これらのパーセンテージは、順序ごとに次の意味を持ちます。</para>
+
+	<itemizedlist>
+      <listitem>
+        <para>原文にトークナイザー を使う<emphasis role="bold">語形変化</emphasis> オプションで計算されたパーセンテージで、かつ<emphasis role="bold">タグなし、数値なし</emphasis>も適用して、一般にもっとも大きな数字になる。</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">語形変化</emphasis>を伴わず、<emphasis role="bold">タグと数字を無視</emphasis>して計算されたパーセンテージ(一般にわずかに低い)</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">タグと数字を含む全文</emphasis>で計算されたパーセンテージ(通常は最低)</para>
+		<note>
+		  <para>分節に数字または記号のみが含まれている場合、この割合は最も高くなります。</para>
+		</note>
+      </listitem>
+    </itemizedlist>
+  
+    <para>一致の表示または並べ替えの方法を変更できます。詳細については、設定-<link endterm="dialog.preferences.tm.matches.title" linkend="dialog.preferences.tm.matches"/>を参照してください。</para>
+
+    <para><link linkend="menus.edit" endterm="menus.edit.title"/><link endterm="menus.edit.replace.with.match.or.selection.title" linkend="menus.edit.replace.with.match.or.selection"/>を使用して、訳文領域を参考訳文に置き換えます。または<link linkend="menus.edit" endterm="menus.edit.title"/><link endterm="menus.edit.insert.match.or.selection.title" linkend="menus.edit.insert.match.or.selection"/>を使用して、カーソル位置に挿入します。</para>
+  </section>
+
+  <section id="panes.glossary">
+    <title id="panes.glossary.title"><guilabel>用語集</guilabel></title>
+
+    <para>このウィンドウには、現在の用語集の用語に対応する分節ファイルからの用語が表示されます。用語集ファイルは、プロジェクトの<link endterm="project.folder.glossary.title" linkend="project.folder.glossary"/>フォルダーにあります。</para>
+
+    <para>用語集の原文は「=」記号の前に表示され、訳語はその後に表示されます。見出し語にコメントが含まれている場合は、コメントに番号が付けられ、用語の下の別々の行に表示されます。書き込み可能な用語集で見つかった用語は太字で表示され、他の文章からの用語は通常の用語集として表示されます。</para>
+
+	<example id="glossary.matches">
+	  <title id="glossary.matches.title">参考用語</title>
+	  <para>
+		<programlisting>Project = <token>Projet</token>
+1. Projet de traduction
+
+Folder = <token>Dossier</token></programlisting>
+	  </para>
+	</example>
+
+    <para>用語の上にカーソルを置くと、用語集ファイル名がツールチップとして表示されます。</para>
+
+    <para>用語のコメント領域にはハイパーリンクを含めることができます。ハイパーリンクをクリックすると、さらに参照できます。</para>
+
+	<para>関連付けられたプログラムで開かれているローカルファイル(<filename>file:///PATH/filename</filename>)へのリンク。ウェブのアドレス(<filename>https://...</filename>)は、OS標準のブラウザで開きます。</para>
+
+    <para>用語集ウィンドウで用語を選択して右クリックすると、翻訳文に挿入できます。</para>
+
+    <para><link endterm="menus.view.title" linkend="menus.view"/><link endterm="menus.view.mark.glossary.matches.title" linkend="menus.view.mark.glossary.matches"/>を使用して、用語集の一致に下線を引きます。</para>
+
+	<para>次に、原文分節の下線付きの単語を右クリックすると、用語集で使用可能な翻訳を一覧表示するポップアップメニューが開きます。いずれかを選択して、分節の現在のカーソル位置に挿入します。</para>
+
+    <para>用語集の環境設定を使用して、用語集の表示方法を微調整できます。詳細については、設定-<link endterm="dialogs.preferences.glossary.title" linkend="dialogs.preferences.glossary"/>を参照してください。</para>
+
+    <para>用語集フォルダーの用語集ファイルに対する変更は、OmegaTによって即座に認識され、用語集ウィンドウに表示されます。</para>
+
+    <para>OmegaTには、プロジェクトごとに1つの書き込み可能な用語集ファイルが含まれます。<link endterm="menus.edit.title" linkend="menus.edit"/><link endterm="menus.edit.create.glossary.entry.title" linkend="menus.edit.create.glossary.entry"/>を使用して、そのファイルに用語を追加します。</para>
+
+	<para>詳細は、付録の <link linkend="app.glossaries" endterm="app.glossaries.title"/> をご覧ください。</para>
+  </section>
+
+  <section id="panes.dictionary">
+    <title id="panes.dictionary.title"><guilabel>辞書</guilabel></title>
+
+	<para>このウィンドウには、分節の用語に対応する辞書ファイルからの用語が表示されます。辞書ファイルは、プロジェクトの<link linkend="project.folder.dictionary" endterm="project.folder.dictionary.title"/>フォルダーにあります。詳細の<link endterm="dialogs.preferences.dictionary.title" linkend="dialogs.preferences.dictionary"/>環境設定を参照してください。</para>
+  </section>
+  
+  <section id="panes.machinetranslation">
+    <title id="panes.machinetranslation.title"><guilabel>機械翻訳</guilabel></title>
+
+    <para>このウィンドウを開くと、有効になっている各機械翻訳エンジンによって生成された分節の訳文候補が表示されます。複数のエンジンからの訳文の提案が利用可能な場合</para>
+	
+    <itemizedlist>
+      <listitem>
+        <para>エンジンの名前が訳文の後に表示されます。</para>
+      </listitem>
+
+      <listitem>
+        <para>結果はエンジン名のアルファベット順にソートされます。</para>
+      </listitem>
+
+      <listitem>
+        <para>現在選択されている対訳が反転表示されます。</para>
+      </listitem>
+    </itemizedlist>
+
+    <para><link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.replace.with.mt.title" endterm="menus.edit.replace.with.mt.title"/>を使用して、現在の分節の翻訳文を選択した機械翻訳エンジンに置き換えます。</para>
+
+    <para>選択したエンジン名は、現在の分節の<parameter>Origin</parameter>属性に割り当てられます。</para>
+
+	<para>機械翻訳エンジンに接続エラーまたは認証エラーが発生した場合は、ウィンドウの下部にあるステータスバーに結果メッセージが表示されます。</para>
+
+    <para>サービスが有効になっていて、資格情報が正しく入力されていることを確認します。必要に応じて、サービスプロバイダに問い合わせてサポートを受ける必要があるかもしれません。。同様に、<literal>翻訳サービス応答を解析できません</literal>などのエラーは、システムとプロバイダのサーバとの間に通信の問題がある可能性を示唆しています。</para>
+
+	<para>詳細については、設定-<link linkend="dialogs.preferences.mt" endterm="dialogs.preferences.mt.title"/>を参照してください。</para>
+  </section>
+
+  <section id="panes.multipletranslations">
+    <title id="panes.multipletranslations.title"><guilabel>複数訳文</guilabel></title>
+
+    <para>同じ内容の原文分節が複数存在し、それぞれの文脈に応じて異なる対訳が必要になることがあります。</para>
+
+	<para>異なる訳文が必要な分節には、例外訳文を割りあてるために、<link endterm="menus.edit.title" linkend="menus.edit"/><link endterm="menus.edit.create.alternative.translation.title" linkend="menus.edit.create.alternative.translation"/>を使うことができます。その後に入力した訳文は、「例外訳文」として扱われます。同じ内容の他の原文に対する既存の訳文には影響しません。</para>
+
+    <para><link endterm="menus.edit.title" linkend="menus.edit"/><link endterm="menus.edit.use.as.default.translation.title" linkend="menus.edit.use.as.default.translation"/>を使用して、実例で最も一般的または可能性の高い選択肢の1つを基本訳文として定義します。</para>
+  </section>
+
+  <section id="panes.notes">
+    <title id="panes.notes.title"><guilabel>メモ帳</guilabel></title>
+
+    <para>このウィンドウは、現在アクティブな分節にメモを追加できる<emphasis>編集可能</emphasis>なスペースです。</para>
+
+	<para>これにより、後で翻訳に戻って翻訳を確認したり、別の翻訳が正しいことを確認したり、共有プロジェクトで同僚に意見を求めたりできます。</para>
+
+	<para><link endterm="menus.goto.title" linkend="menus.goto"/><link endterm="menus.goto.next.note.title" linkend="menus.goto.next.note"/>および<link endterm="menus.goto.title" linkend="menus.goto"/><link endterm="menus.goto.previous.note.title" linkend="menus.goto.previous.note"/>を使用して、ノートを参照することができます。</para>
+
+	<para><link linkend="menus.goto" endterm="menus.goto.title"/><link linkend="menus.goto.notes.pane" endterm="menus.goto.notes.pane.title"/>を使用するとウィンドウに移動でき、そこでコメントを追加できます。</para>
+	<para><link linkend="menus.goto" endterm="menus.goto.title"/><link linkend="menus.goto.editor.pane" endterm="menus.goto.editor.pane.title"/>を使用して編集に戻ります。</para>
+
+	<note>
+	  <para>メモは、プロジェクトの翻訳メモリに保存されます。これらは訳文ファイルには<emphasis>保存されません</emphasis>。</para>
+	</note>
+  </section>
+
+  <section id="panes.comments">
+    <title id="panes.comments.title"><guilabel>コメント</guilabel></title>
+
+    <para>PO形式などの一部のファイル形式には、翻訳者が翻訳のコンテキストを追加するためのコメントを含めることができます。このようなコメントはここに表示されます。</para>
+
+    <note>
+      <para><guilabel>[コメント]</guilabel>ウィンドウは編集<emphasis>できません</emphasis>。ファイルに含まれる情報のみが表示されます。</para>
+
+	  <para><link endterm="panes.notes.title" linkend="panes.notes"/>ウィンドウを使用して、翻訳に関する独自のコメントを入力します。</para>
+    </note>
+  </section>
+
+  <section id="panes.segment.properties">
+    <title id="panes.segment.properties.title"><guilabel>文節属性</guilabel></title>
+
+    <para>すべての分節に文節属性があります。このウィンドウに属性が表示されています。</para>
+	<para>一般的な属性は次のとおりです。</para>
+	
+	<variablelist>
+	  <varlistentry>
+		<term>重複分節である</term>
+		<listitem>
+		  <para>分節が繰り返し登場することを示し、それが最初の実例であるかどうかを指定します。</para>
+		</listitem>
+	  </varlistentry>
+	  <varlistentry>
+		<term>ファイル</term>
+		<listitem>
+		  <para>分節が含まれているファイルを示します。</para>
+		</listitem>
+	  </varlistentry>
+	</variablelist>
+
+    <note>
+      <para>分節属性ウィンドウは編集<emphasis>できません</emphasis>。分節に関連する情報のみが表示されます。</para>
+    </note>
+  </section>
+
+  <section id="panes.statusbar">
+    <title id="panes.statusbar.title"><guilabel>ステータスバー</guilabel></title>
+
+    <para>メインウィンドウの下部はステータスバーです。</para>
+
+	<para>ステータスバーの左側には、プロジェクトのアクションやエラーメッセージに関する情報が表示されます。</para>
+
+	<example id="panes.statusbar.messages">
+      <title id="panes.statusbar.messages.title">ステータスバーメッセージの例</title>
+	  <para><literal>リポジトリ同期中</literal></para>
+
+	  <para>→OmegaTはチーム・プロジェクトを開始し、リモートのリポジトリと同期します。</para>
+
+	  <para><literal>前回編集していた分節に移動しています...</literal></para>
+
+	  <para>→OmegaTは、最後に編集した分節を最後のセッションから開きます。</para>
+
+	  <para><literal>プロジェクトは午後10:48に自動保存されました</literal></para>
+
+	  <para>→OmegaTは最近プロジェクトを保存しました。</para>
+
+	  <para><literal>訳文ファイルの生成を完了</literal></para>
+
+	  <para>→ユーザーによってファイルが作成されました。</para>
+	</example>
+
+    <para>ステータスバーの右側には、カーソルが分節内でロックされているかどうか(<link endterm="panes.editor.cursor.lock.title" linkend="panes.editor.cursor.lock"/>設定を参照)、およびカーソルが既存の文章を上書きするかどうか(<link linkend="panes.editor.overwriting" endterm="panes.editor.overwriting.title"/>設定を参照)が表示されます。また、進捗情報も表示されます。</para>
+
+    <para>数値をクリックすると、進捗状況が数値またはパーセントで交互に表示されます。</para>
+
+	<example id="panes.statusbar.widgets">
+      <title id="panes.statusbar.widgets.title">ステータスバーの情報</title>
+	  <para><literal>LCK | OVR <token>257/271 (12292/154896,
+	  177692)</token><token> 35/0 </token></literal></para>
+
+	  <variablelist>
+		<varlistentry>
+		  <term>カーソルの状態</term>
+		  <listitem>
+			<para><literal>LCK</literal>は、カーソルが分節の内側にロックされていることを示します。</para>
+
+			<para><literal>OVR</literal>は、カーソルが既存の文章を上書きすることを示します。</para>
+		  </listitem>
+		</varlistentry>
+		
+		<varlistentry>
+		  <term>ファイル内</term>
+		  <listitem>
+			<para><emphasis role="bold">257</emphasis>=翻訳済みの分節の数/<emphasis role="bold">271</emphasis>=分節の総数</para>
+		  </listitem>
+		</varlistentry>
+
+		<varlistentry>
+		  <term>プロジェクトの統計</term>
+		  <listitem>
+			<para><emphasis role="bold">12292</emphasis>=未翻訳の分節の数/<emphasis role="bold">154896</emphasis>=重複を除く分節の総数<emphasis role="bold">(177692)</emphasis>=分節の総数</para>
+		  </listitem>
+		</varlistentry>
+
+		<varlistentry>
+		  <term>分節の統計</term>
+		  <listitem>
+			<para><emphasis role="bold">35</emphasis>= 原文分節の文字数 /<emphasis role="bold">0</emphasis> 訳文分節の文字数</para>
+		  </listitem>
+		</varlistentry>
+	  </variablelist>
+	</example>
+	
+	<example id="panes.statusbar.widgets.percentage">
+      <title id="panes.statusbar.widgets.percentage.title">ステータスバーの情報、パーセント表示モード</title>
+	  <para><literal>UNL | INS <token>94.8% (14 left) / 7.9% (142,604 left),
+	  177,692</token> <token>35/0</token></literal></para>
+	  <variablelist>
+		<varlistentry>
+		  <term>カーソルの状態</term>
+		  <listitem>
+			<para><literal>UNL</literal>は、カーソルが分節内でロックされておらず、編集ナビゲーションコマンドを使用して標準ウィンドウ内を移動できることを示しています。</para>
+
+			<para><literal>INS</literal>は、カーソル位置に入力しているテキストを挿入するモードであることを示しています。</para>
+		  </listitem>
+		</varlistentry>
+
+		<varlistentry>
+		  <term>ファイル内</term>
+		  <listitem>
+			<para><emphasis role="bold">94.8%</emphasis> = 翻訳済みの分節のパーセンテージ / <emphasis role="bold">14</emphasis> = 未翻訳分節のパーセンテージ</para>
+		  </listitem>
+		</varlistentry>
+
+		<varlistentry>
+		  <term>プロジェクトの統計</term>
+		  <listitem>
+			<para><emphasis role="bold">7.9%</emphasis> = 翻訳済みの分節のパーセンテージ / <emphasis role="bold">142,604</emphasis> = 未翻訳分節のパーセンテージ<emphasis role="bold">(177,692)</emphasis> = 分節の総数</para>
+		  </listitem>
+		</varlistentry>
+
+		<varlistentry>
+		  <term>分節の統計</term>
+		  <listitem>
+			<para><emphasis role="bold">35</emphasis>= 原文分節の文字数 /<emphasis role="bold">0</emphasis> 訳文分節の文字数</para>
+		  </listitem>
+		</varlistentry>
+	  </variablelist>
+	</example>
+  </section>
+</chapter>

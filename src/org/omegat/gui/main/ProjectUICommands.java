@@ -13,7 +13,7 @@
                2017 Didier Briel
                2021 ISHIKAWA,chiaki
                2022 Hiroshi Miura
-               Home page: http://www.omegat.org/
+               Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
  This file is part of OmegaT.
@@ -29,7 +29,7 @@
  GNU General Public License for more details.
 
  You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
 package org.omegat.gui.main;
@@ -39,8 +39,6 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -52,7 +50,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.EqualsBuilder;
 
 import org.omegat.CLIParameters;
 import org.omegat.convert.ConvertProject;
@@ -131,11 +129,10 @@ public final class ProjectUICommands {
 
                 // ask about new project properties
                 ProjectProperties props = new ProjectProperties(dir);
-                props.setSourceLanguage(Preferences.getPreferenceDefault(Preferences.SOURCE_LOCALE, "EN-US"));
-                props.setTargetLanguage(Preferences.getPreferenceDefault(Preferences.TARGET_LOCALE, "EN-GB"));
+                props.setSourceLanguage(Preferences.getPreferenceDefault(Preferences.SOURCE_LOCALE, "AR-LB"));
+                props.setTargetLanguage(Preferences.getPreferenceDefault(Preferences.TARGET_LOCALE, "UK-UA"));
                 ProjectPropertiesDialog newProjDialog = new ProjectPropertiesDialog(
-                        Core.getMainWindow().getApplicationFrame(),
-                        props, dir.getAbsolutePath(),
+                        Core.getMainWindow().getApplicationFrame(), props, dir.getAbsolutePath(),
                         ProjectPropertiesDialog.Mode.NEW_PROJECT);
                 newProjDialog.setVisible(true);
                 newProjDialog.dispose();
@@ -262,7 +259,8 @@ public final class ProjectUICommands {
         }
         // add .zip extension if there is no
         final File med = ndm.getSelectedFile().getName().toLowerCase(Locale.ENGLISH).endsWith(".zip")
-                ? ndm.getSelectedFile() : new File(ndm.getSelectedFile().getAbsolutePath() + ".zip");
+                ? ndm.getSelectedFile()
+                : new File(ndm.getSelectedFile().getAbsolutePath() + ".zip");
 
         new SwingWorker<Void, Void>() {
             protected Void doInBackground() throws Exception {
@@ -312,6 +310,7 @@ public final class ProjectUICommands {
             File projectRoot;
             IMainWindow mainWindow;
             Cursor oldCursor;
+
             protected Void doInBackground() throws Exception {
                 mainWindow = Core.getMainWindow();
                 mainWindow.showStatusMessageRB(null);
@@ -346,21 +345,26 @@ public final class ProjectUICommands {
                 }
 
                 ProjectProperties props = ProjectFileStorage.loadProjectProperties(projectRoot);
-                if (props.getRepositories() == null) { // We assume it's a project with no repository mapping,
-                    props.setRepositories(repos);      // so we add root repository mapping
+                if (props.getRepositories() == null) {
+                    // We assume it's a project with no repository mapping,
+                    // so we add root repository mapping
+                    props.setRepositories(repos);
                 } else {
                     RepositoryDefinition remoteRepo = getRootGitRepositoryMapping(props.getRepositories());
                     if (isRepositoryEquals(remoteRepo, repo)) {
-                        // when remote repository config is different with opening url, respect local one
+                        // when remote repository config is different with
+                        // opening url, respect local one
                         setRootGitRepositoryMapping(props.getRepositories(), repo);
                     }
                 }
-                // We write in all cases, because we might have added default excludes, for instance
+                // We write in all cases, because we might have added default
+                // excludes, for instance
                 ProjectFileStorage.writeProjectFile(props);
                 mainWindow.setCursor(oldCursor);
-                oldCursor=null;
+                oldCursor = null;
                 return null;
             }
+
             @Override
             protected void done() {
                 Core.getMainWindow().showProgressMessage(" ");
@@ -377,7 +381,8 @@ public final class ProjectUICommands {
                 } catch (Exception ex) {
                     Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_DOWNLOAD_TEAM_PROJECT");
                     Core.getMainWindow().displayErrorRB(ex, "PP_ERROR_UNABLE_TO_DOWNLOAD_TEAM_PROJECT");
-                    if (oldCursor != null) mainWindow.setCursor(oldCursor);
+                    if (oldCursor != null)
+                        mainWindow.setCursor(oldCursor);
                 }
             }
         }.execute();
@@ -387,14 +392,16 @@ public final class ProjectUICommands {
      * Open project. Does nothing if there is already a project open.
      * Convenience method for {@link #projectOpen(File, boolean)}.
      *
-     * @param projectDirectory Open project stored in projectDirectory
+     * @param projectDirectory
+     *            Open project stored in projectDirectory
      */
     public static void projectOpen(File projectDirectory) {
         projectOpen(projectDirectory, false);
     }
 
     /**
-     * Open project. Does nothing if a project is already open and closeCurrent is false.
+     * Open project. Does nothing if a project is already open and closeCurrent
+     * is false.
      *
      * @param projectDirectory
      *            project directory or null if user must choose it
@@ -433,30 +440,7 @@ public final class ProjectUICommands {
                 mainWindow.setCursor(hourglassCursor);
 
                 if (convertOldProjectIfNeed(projectRootFolder)) {
-                    ProjectProperties props = checkProjectProperties(projectRootFolder);
-                    if (props == null) {
-                        // try with backup file
-                        try {
-                            Files.copy(Paths.get(projectRootFolder.getAbsoluteFile() + File.separator
-                                + OConsts.FILE_PROJECT + OConsts.BACKUP_EXTENSION),
-                                Paths.get(projectRootFolder.getAbsoluteFile() + File.separator + OConsts.FILE_PROJECT),
-                                StandardCopyOption.REPLACE_EXISTING);
-                            props = ProjectFileStorage.loadProjectProperties(projectRootFolder.getAbsoluteFile());
-                        } catch (Exception ex) {
-                            Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
-                            Core.getMainWindow().displayErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
-                            mainWindow.setCursor(oldCursor);
-                            return null;
-                        }
-                    }
-                    projectOpenImpl(projectRootFolder, props);
-                    try {
-                        Files.copy(Paths.get(projectRootFolder.getAbsoluteFile() + File.separator + OConsts.FILE_PROJECT),
-                            Paths.get(projectRootFolder.getAbsoluteFile() + File.separator + OConsts.FILE_PROJECT + OConsts.BACKUP_EXTENSION),
-                            StandardCopyOption.REPLACE_EXISTING);
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
+                    projectOpenImpl(projectRootFolder);
                 }
 
                 mainWindow.setCursor(oldCursor);
@@ -480,10 +464,10 @@ public final class ProjectUICommands {
         if (projectDirectory == null) {
             // select existing project file - open it
             OmegaTFileChooser pfc = new OpenProjectFileChooser();
-            if (OmegaTFileChooser.APPROVE_OPTION != pfc.showOpenDialog(Core.getMainWindow()
-                    .getApplicationFrame())) {
+            if (OmegaTFileChooser.APPROVE_OPTION != pfc
+                    .showOpenDialog(Core.getMainWindow().getApplicationFrame())) {
                 return null;
-            }
+             }
             projectRootFolder = pfc.getSelectedFile();
         } else {
             projectRootFolder = projectDirectory;
@@ -493,7 +477,7 @@ public final class ProjectUICommands {
 
     private static boolean convertOldProjectIfNeed(File projectRootFolder) {
         try {
-            // convert old projects if need
+            // convert old projects if needed
             ConvertProject.convert(projectRootFolder);
         } catch (Exception ex) {
             Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_CONVERT_PROJECT");
@@ -508,7 +492,8 @@ public final class ProjectUICommands {
         ProjectProperties props;
         try {
             props = ProjectFileStorage.loadProjectProperties(projectRootFolder.getAbsoluteFile());
-            // Here, 'props' is the current project setting read from local copy of omegat.project
+            // Here, 'props' is the current project setting read from local copy
+            // of omegat.project
         } catch (Exception ex) {
             Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE_BACK");
             Core.getMainWindow().displayErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE_BACK");
@@ -517,34 +502,67 @@ public final class ProjectUICommands {
         return props;
     }
 
-    private static void projectOpenImpl(File projectRootFolder, ProjectProperties props) {
+    private static void projectOpenImpl(File projectRootFolder) {
         IMainWindow mainWindow = Core.getMainWindow();
         try {
             // open LOCAL copy of "omegat.project"
-            File projectFile = new File(projectRootFolder, OConsts.FILE_PROJECT);
+            ProjectProperties props = checkProjectProperties(projectRootFolder);
+            // When failed to load, we try with backup file
+            if (props == null) {
+                File backupProjectFile = FileUtil
+                        .getRecentBackup(new File(projectRootFolder.getAbsoluteFile(), OConsts.FILE_PROJECT));
+                if (backupProjectFile == null) {
+                    throw new KnownException("PROJECT_INVALID");
+                }
+                props = ProjectFileStorage.loadPropertiesFile(projectRootFolder.getAbsoluteFile(),
+                        backupProjectFile);
+            }
             boolean needToSaveProperties = false;
+            // newProjectFile represent a `omegat.project.NEW` file.
+            // It is created when modification of
+            // properties in remote.
             File newProjectFile = null;
-            if (props.hasRepositories()) {  /* This a remote project
-                 Every time we reopen the project, we copy omegat.project from the remote project,
-                 We take following strategy and procedure to open the project.
-                 1. When opening a teamwork project as local only non-teamwork by passing 'no-team' to
-                 command line, skip teamwork treatment.
-                 2. Save the currently effective repository mapping from LOCAL to variable 'repos'.
-                 3. Update project.properties from REMOTE copy of omegat.project that has postfix .NEW
-                    by calling loadPropertiesFile(... ) with "omegat.project.NEW".
-                    It respects a local root repository URL than remote mapping configuration
-                 4. Handles mappings of four cases.
-                     a. no mapping
-                     b. no remote mapping, there are local mapping(s)
-                        the locally defined mapping(s) are merged into local omegat.project.
-                     c. remote mapping, no local mapping(s)
-                     d. remote and local mappings
-                        Local mapping changes are overwritten except for root repository mapping.
-                 5.  We save the original project file with as omegat.project.timestamp.bak
-                 @note: We may want to make sure that the remote props.GetRepositories match
-                  the previous current setup, but this does not seem to be the intention of
-                  the current mapping usage.
-                */
+            if (props.hasRepositories()) {
+                /* <p>
+                 * Every time we reopen the project, we copy omegat.project from
+                 * the remote project, We take following strategy and procedure
+                 * to open the project.
+                 *
+                 *   1. When opening a teamwork project as local only
+                 *      non-teamwork by passing 'no-team' to command line, skip
+                 *      teamwork treatment.
+                 *
+                 *   2. Save the currently effective repository mapping from
+                 *      LOCAL to variable 'repos'.
+                 *
+                 *   3. Update project.properties from REMOTE copy of
+                 *      omegat.project that has postfix .NEW by calling
+                 *      loadPropertiesFile(... ) with "omegat.project.NEW".
+                 *      It respects a local root repository URL than remote
+                 *      mapping configuration
+                 *
+                 *   4. Handles mappings of four cases.
+                 *
+                 *      a. no mapping
+                 *
+                 *      b. no remote mapping, there are local mapping(s)
+                 *         the locally defined mapping(s) are merged into
+                 *         local omegat.project.
+                 *
+                 *      c. remote mapping, no local mapping(s)
+                 *
+                 *      d. remote and local mappings
+                 *         Local mapping changes are overwritten except
+                 *         for root repository mapping.
+                 *
+                 *   5. We save the original project file with as
+                 *      omegat.project.timestamp.bak
+                 *
+                 * @note: We may want to make sure that the remote
+                 * props.GetRepositories match the previous current setup, but
+                 * this does not seem to be the intention of the current
+                 * mapping usage.
+                 */
                 if (!Core.getParams().containsKey(CLIParameters.NO_TEAM)) {
                     ProjectProperties localProps = props;
                     List<RepositoryDefinition> localRepos = props.getRepositories();
@@ -553,46 +571,52 @@ public final class ProjectUICommands {
                         RemoteRepositoryProvider remoteRepositoryProvider = new RemoteRepositoryProvider(
                                 props.getProjectRootDir(), props.getRepositories(), props);
                         remoteRepositoryProvider.switchToVersion(OConsts.FILE_PROJECT, null);
-                        remoteRepositoryProvider.copyFilesFromReposToProject(OConsts.FILE_PROJECT,
-                                 ".NEW", false);
+                        remoteRepositoryProvider.copyFilesFromReposToProject(OConsts.FILE_PROJECT, ".NEW",
+                                false);
                         newProjectFile = new File(projectRootFolder.getAbsoluteFile(),
                                 OConsts.FILE_PROJECT + ".NEW");
                         props = ProjectFileStorage.loadPropertiesFile(projectRootFolder.getAbsoluteFile(),
                                 new File(projectRootFolder.getAbsoluteFile(), OConsts.FILE_PROJECT + ".NEW"));
-                        // Here, 'props' is the REMOTE project setting read from the remote omegat.project
-                        if (props.getRepositories() == null) {  // We have a project without mapping
+                        // Here, 'props' is the REMOTE project setting read from
+                        // the remote omegat.project
+                        if (props.getRepositories() == null) {
+                            // We have a project without mapping
+                            // So we restore the mapping we just lost
                             Log.logInfoRB("TF_REMOTE_PROJECT_LACKS_GIT_SETTING");
-                            props.setRepositories(localRepos); // So we restore the mapping we just lost
+                            props.setRepositories(localRepos);
                         } else {
                             // use mapping from remote configuration but
-                            // override repository URL when project URL is git type
-                            // when there is difference between local and remote config.
-                            RepositoryDefinition localRootRepository =
-                                    getRootGitRepositoryMapping(localRepos);
-                            RepositoryDefinition newRepository =
-                                    getRootGitRepositoryMapping(props.getRepositories());
+                            // override repository URL when project URL is git
+                            // type when there is difference between local and
+                            // remote config.
+                            RepositoryDefinition localRootRepository = getRootGitRepositoryMapping(
+                                    localRepos);
+                            RepositoryDefinition newRepository = getRootGitRepositoryMapping(
+                                    props.getRepositories());
                             if (!isRepositoryEquals(localRootRepository, newRepository)) {
-                                setRootGitRepositoryMapping(props.getRepositories(),
-                                        localRootRepository);
+                                setRootGitRepositoryMapping(props.getRepositories(), localRootRepository);
                             }
                         }
-                        needToSaveProperties = !isIdenticalOmegatProjectProperties(props,localProps);
+                        needToSaveProperties = !isIdenticalOmegatProjectProperties(props, localProps);
                     } catch (IRemoteRepository2.NetworkException ignore) {
-                        // Do nothing. Network errors are handled in RealProject.
+                        // Do nothing. Network errors are handled in
+                        // RealProject.
                     } catch (Exception e) {
                         Log.logErrorRB(e, "TF_PROJECT_PROPERTIES_ERROR");
                         throw e;
                     }
                 }
-                // team project - non-exist directories could be created from repo
+                // non-exist directories could be created
                 props.autocreateDirectories();
             } else {
-                // not a team project - ask for non-exist directories
+                // not a team project
+                File projectFile = new File(projectRootFolder, OConsts.FILE_PROJECT);
+                props.autocreateDirectories();
                 while (!props.isProjectValid()) {
-                    // something wrong with the project - display open dialog to fix it
+                    // something wrong with the project.
+                    // We display open dialog to fix it.
                     ProjectPropertiesDialog prj = new ProjectPropertiesDialog(
-                            Core.getMainWindow().getApplicationFrame(), props,
-                            projectFile.getAbsolutePath(),
+                            Core.getMainWindow().getApplicationFrame(), props, projectFile.getAbsolutePath(),
                             ProjectPropertiesDialog.Mode.RESOLVE_DIRS);
                     prj.setVisible(true);
                     props = prj.getResult();
@@ -601,27 +625,33 @@ public final class ProjectUICommands {
                         // user clicks on 'Cancel'
                         return;
                     }
+                    needToSaveProperties = true;
                 }
-                needToSaveProperties = true;
             }
+            // Critical section, create backup and save
+            // properties.
             final ProjectProperties propsP = props;
-            final File finalNewProjectFile = newProjectFile;
             final boolean finalNeedToSaveProperties = needToSaveProperties;
+            final File finalNewProjectFile = newProjectFile;
+            final boolean onlineMode = true;
             Core.executeExclusively(true, () -> {
                 // loading modified new project property
-                boolean succeeded = ProjectFactory.loadProject(propsP, true);
-                // make backup and save omegat.project file when required
-                if (finalNewProjectFile != null) {
-                    if (succeeded && finalNeedToSaveProperties) {
-                        File backup = FileUtil.backupFile(projectFile);
-                        FileUtil.removeOldBackups(projectFile, OConsts.MAX_BACKUPS);
-                        Log.logWarningRB("PP_REMOTE_PROJECT_CONTENT_OVERRIDES_THE_CURRENT_PROJECT",
-                                backup.getName());
-                    }
-                    Files.deleteIfExists(finalNewProjectFile.toPath());
+                boolean succeeded = ProjectFactory.loadProject(propsP, onlineMode);
+                if (!succeeded) {
+                    return;
                 }
-                if (succeeded && finalNeedToSaveProperties) {
+                File projectFile = new File(projectRootFolder, OConsts.FILE_PROJECT);
+                // make backup and save omegat.project file when required
+                if (finalNeedToSaveProperties) {
+                    File backup = FileUtil.backupFile(projectFile);
+                    FileUtil.removeOldBackups(projectFile, OConsts.MAX_BACKUPS);
+                    Log.logWarningRB("PP_REMOTE_PROJECT_CONTENT_OVERRIDES_THE_CURRENT_PROJECT",
+                            backup.getName());
                     Core.getProject().saveProjectProperties();
+                } else if (FileUtil.getRecentBackup(projectFile) == null) {
+                    FileUtil.backupFile(projectFile);
+                } else if (finalNewProjectFile != null) {
+                    FileUtils.deleteQuietly(finalNewProjectFile);
                 }
             });
             RecentProjects.add(projectRootFolder.getAbsolutePath());
@@ -632,9 +662,12 @@ public final class ProjectUICommands {
     }
 
     /**
-     * Detect whether local omegat.project is identical with remote one.
-     * @param that remote omegat.project.
-     * @param my local omegat.project.
+     * Detect whether local `omegat.project` is identical with remote one.
+     * 
+     * @param that
+     *            remote omegat.project.
+     * @param my
+     *            local omegat.project.
      * @return true if identical, otherwise false.
      */
     private static boolean isIdenticalOmegatProjectProperties(ProjectProperties that, ProjectProperties my) {
@@ -656,22 +689,22 @@ public final class ProjectUICommands {
             if (!new EqualsBuilder()
                     .append(my.getRepositories().get(i).getType(), that.getRepositories().get(i).getType())
                     .append(my.getRepositories().get(i).getUrl(), that.getRepositories().get(i).getUrl())
-                    .append(my.getRepositories().get(i).getBranch(), that.getRepositories().get(i).getBranch())
+                    .append(my.getRepositories().get(i).getBranch(),
+                            that.getRepositories().get(i).getBranch())
                     .append(my.getRepositories().get(i).getMapping().size(),
                             that.getRepositories().get(i).getMapping().size())
                     .isEquals()) {
                 return false;
             }
-            if (my.getRepositories().get(i).getMapping().size() != that.getRepositories().get(i).getMapping().size()) {
+            if (my.getRepositories().get(i).getMapping().size() != that.getRepositories().get(i).getMapping()
+                    .size()) {
                 return false;
             }
-            for (int j = 0; j < my.getRepositories().get(i).getMapping().size(); j ++) {
+            for (int j = 0; j < my.getRepositories().get(i).getMapping().size(); j++) {
                 RepositoryMapping thisMap = my.getRepositories().get(i).getMapping().get(j);
                 RepositoryMapping thatMap = that.getRepositories().get(i).getMapping().get(j);
-                if (!new EqualsBuilder()
-                        .append(thisMap.getLocal(), thatMap.getLocal())
-                        .append(thisMap.getRepository(), thatMap.getRepository())
-                        .isEquals()) {
+                if (!new EqualsBuilder().append(thisMap.getLocal(), thatMap.getLocal())
+                        .append(thisMap.getRepository(), thatMap.getRepository()).isEquals()) {
                     return false;
                 }
             }
@@ -683,25 +716,29 @@ public final class ProjectUICommands {
                 .append(my.getProjectName(), that.getProjectName())
                 .append(my.getSourceLanguage().getLocaleCode(), that.getSourceLanguage().getLocaleCode())
                 .append(my.getTargetLanguage().getLocaleCode(), that.getTargetLanguage().getLocaleCode())
-                .append(my.getSourceTokenizer().getCanonicalName(), that.getSourceTokenizer().getCanonicalName())
-                .append(my.getTargetTokenizer().getCanonicalName(), that.getTargetTokenizer().getCanonicalName())
+                .append(my.getSourceTokenizer().getCanonicalName(),
+                        that.getSourceTokenizer().getCanonicalName())
+                .append(my.getTargetTokenizer().getCanonicalName(),
+                        that.getTargetTokenizer().getCanonicalName())
                 .append(my.getExportTmLevels(), that.getExportTmLevels())
                 .append(my.getExternalCommand(), that.getExternalCommand())
                 .append(my.getProjectRootDir(), that.getProjectRootDir())
                 .append(my.getSourceDir().getUnderRoot(), that.getSourceDir().getUnderRoot())
                 .append(my.getTargetDir().getUnderRoot(), that.getTargetDir().getUnderRoot())
                 .append(my.getGlossaryDir().getUnderRoot(), that.getGlossaryDir().getUnderRoot())
-                .append(my.getWritableGlossaryFile().getUnderRoot(), that.getWritableGlossaryFile().getUnderRoot())
+                .append(my.getWritableGlossaryFile().getUnderRoot(),
+                        that.getWritableGlossaryFile().getUnderRoot())
                 .append(my.getTmDir().getUnderRoot(), that.getTmDir().getUnderRoot())
                 .append(my.getExportTMRoot(), that.getExportTMRoot())
-                .append(my.getDictRoot(), that.getDictRoot())
-                .isEquals();
+                .append(my.getDictRoot(), that.getDictRoot()).isEquals();
     }
 
     private static RepositoryDefinition getRootGitRepositoryMapping(List<RepositoryDefinition> repos) {
         RepositoryDefinition repositoryDefinition = null;
         for (RepositoryDefinition definition : repos) {
-            if (definition.getMapping().get(0).getLocal().equals("/") && definition.getMapping().get(0).getRepository().equals("/") && definition.getType().equals("git")) {
+            if (definition.getMapping().get(0).getLocal().equals("/")
+                    && definition.getMapping().get(0).getRepository().equals("/")
+                    && definition.getType().equals("git")) {
                 repositoryDefinition = definition;
                 break;
             }
@@ -710,7 +747,7 @@ public final class ProjectUICommands {
     }
 
     private static void setRootGitRepositoryMapping(List<RepositoryDefinition> repos,
-                                                    RepositoryDefinition repositoryDefinition) {
+            RepositoryDefinition repositoryDefinition) {
         if (repositoryDefinition == null) {
             return;
         }
@@ -727,11 +764,8 @@ public final class ProjectUICommands {
         if (a == null || b == null) {
             return false;
         }
-        return new EqualsBuilder()
-                .append(a.getType(), b.getType())
-                .append(a.getUrl(), b.getUrl())
-                .append(a.getBranch(), b.getBranch())
-                .isEquals();
+        return new EqualsBuilder().append(a.getType(), b.getType()).append(a.getUrl(), b.getUrl())
+                .append(a.getBranch(), b.getBranch()).isEquals();
     }
 
     /**
@@ -750,11 +784,10 @@ public final class ProjectUICommands {
         }
     }
 
-
     /**
      * Project reload.
      * <p>
-     *     When select Project>Reload jump to here.
+     * When select Project>Reload jump to here.
      */
     public static void projectReload() {
         UIThreadsUtil.mustBeSwingThread();
@@ -776,11 +809,9 @@ public final class ProjectUICommands {
     /**
      * Reload project from remote repository.
      * <p>
-     *     When the project is a team project,
-     *     it reloads `omegat.project` from remote project
-     *     and open the project from start.
-     *     When the project is local project, it acts as
-     *     same as just reload.
+     * When the project is a team project, it reloads `omegat.project` from
+     * remote project and open the project from start. When the project is local
+     * project, it acts as same as just reload.
      */
     private static void projectReloadRemote() {
         ProjectProperties props = Core.getProject().getProjectProperties();
@@ -799,8 +830,8 @@ public final class ProjectUICommands {
     /**
      * Reload local project files.
      * <p>
-     *     This does not reload remote project when team mode.
-     *     It is useful when user added source files in local.
+     * This does not reload remote project when team mode. It is useful when
+     * user added source files in local.
      *
      */
     private static void projectReloadLocal() {
@@ -843,8 +874,8 @@ public final class ProjectUICommands {
     /**
      * Save project.
      * <p>
-     *     When the project is a team project, it also commit files and
-     *     push to remote.
+     * When the project is a team project, it also commit files and push to
+     * remote.
      */
     public static void projectSave() {
         UIThreadsUtil.mustBeSwingThread();
@@ -885,7 +916,7 @@ public final class ProjectUICommands {
     /**
      * Close project.
      * <p>
-     *     When the project is a team project, it commits and push first.
+     * When the project is a team project, it commits and push first.
      */
     public static void projectClose() {
         UIThreadsUtil.mustBeSwingThread();
@@ -921,7 +952,8 @@ public final class ProjectUICommands {
                 Core.getMainWindow().showProgressMessage(
                         Preferences.getPreferenceEnumDefault(Preferences.SB_PROGRESS_MODE,
                                 MainWindowUI.StatusBarMode.DEFAULT) == MainWindowUI.StatusBarMode.DEFAULT
-                        ? OStrings.getString("MW_PROGRESS_DEFAULT") : OStrings.getProgressBarDefaultPrecentageText());
+                                        ? OStrings.getString("MW_PROGRESS_DEFAULT")
+                                        : OStrings.getProgressBarDefaultPrecentageText());
 
                 return null;
             }
@@ -932,7 +964,8 @@ public final class ProjectUICommands {
                 } catch (Exception ex) {
                     processSwingWorkerException(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
                 }
-                // Restore global prefs in case project had project-specific ones
+                // Restore global prefs in case project had project-specific
+                // ones
                 Core.setFilterMaster(new FilterMaster(Preferences.getFilters()));
                 Core.setSegmenter(new Segmenter(Preferences.getSRX()));
             }
@@ -1134,7 +1167,9 @@ public final class ProjectUICommands {
 
     /**
      * Open remote project specified by url.
-     * @param url remote project repository.
+     * 
+     * @param url
+     *            remote project repository.
      */
     public static void projectRemote(String url) {
         File projectDir;
@@ -1165,9 +1200,11 @@ public final class ProjectUICommands {
     }
 
     /**
-     * Copy the specified files to the specified destination. The project will be reloaded afterward.
+     * Copy the specified files to the specified destination. The project will
+     * be reloaded afterward.
      * <p>
-     * Convenience method for {@link #projectImportFiles(String, File[], boolean)}.
+     * Convenience method for
+     * {@link #projectImportFiles(String, File[], boolean)}.
      *
      * @param destination
      *            The path to copy the files to
@@ -1179,15 +1216,17 @@ public final class ProjectUICommands {
     }
 
     /**
-     * Copy the specified files to the specified destination, then reload if indicated. Note that a modal
-     * dialog will be shown if any of the specified files would be overwritten.
+     * Copy the specified files to the specified destination, then reload if
+     * indicated. Note that a modal dialog will be shown if any of the specified
+     * files would be overwritten.
      *
      * @param destination
      *            The path to copy the files to
      * @param toImport
      *            Files to copy to destination path
      * @param doReload
-     *            If true, the project will be reloaded after the files are successfully copied
+     *            If true, the project will be reloaded after the files are
+     *            successfully copied
      */
     public static void projectImportFiles(String destination, File[] toImport, boolean doReload) {
         UIThreadsUtil.mustBeSwingThread();
@@ -1261,11 +1300,12 @@ public final class ProjectUICommands {
      */
     public static void doWikiImport() {
         String remoteUrl = JOptionPane.showInputDialog(Core.getMainWindow().getApplicationFrame(),
-                OStrings.getString("TF_WIKI_IMPORT_PROMPT"),
-                OStrings.getString("TF_WIKI_IMPORT_TITLE"), JOptionPane.WARNING_MESSAGE);
+                OStrings.getString("TF_WIKI_IMPORT_PROMPT"), OStrings.getString("TF_WIKI_IMPORT_TITLE"),
+                JOptionPane.WARNING_MESSAGE);
         String projectsource = Core.getProject().getProjectProperties().getSourceRoot();
         if (remoteUrl == null || remoteUrl.trim().isEmpty()) {
-            // [1762625] Only try to get MediaWiki page if a string has been entered
+            // [1762625] Only try to get MediaWiki page if a string has been
+            // entered
             return;
         }
         try {
@@ -1284,7 +1324,8 @@ public final class ProjectUICommands {
             return false;
         }
         Path path = dir.toPath();
-        // Use NIO methods because File.canRead/canWrite give incorrect responses on Windows
+        // Use NIO methods because File.canRead/canWrite give incorrect
+        // responses on Windows
         if (!Files.isWritable(path) || !Files.isReadable(path)) {
             Log.logErrorRB("CT_ERROR_PROJECT_DIR_PERMISSIONS", path);
             Core.getMainWindow().displayWarningRB("CT_ERROR_CREATING_PROJECT");

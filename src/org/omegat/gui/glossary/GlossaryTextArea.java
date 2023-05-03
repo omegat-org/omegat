@@ -10,7 +10,7 @@
                2012 Jean-Christophe Helary
                2013 Aaron Madlon-Kay, Alex Buloichik
                2015 Yu Tang, Aaron Madlon-Kay
-               Home page: http://www.omegat.org/
+               Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
  This file is part of OmegaT.
@@ -26,7 +26,7 @@
  GNU General Public License for more details.
 
  You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
 package org.omegat.gui.glossary;
@@ -73,7 +73,6 @@ import org.omegat.gui.editor.EditorUtils;
 import org.omegat.gui.main.DockableScrollPane;
 import org.omegat.gui.main.IMainWindow;
 import org.omegat.gui.shortcuts.PropertiesShortcuts;
-import org.omegat.util.Java8Compat;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
@@ -237,7 +236,7 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
     @Override
     public String getToolTipText(MouseEvent event) {
         StyledDocument doc = getStyledDocument();
-        Element elem = doc.getCharacterElement(Java8Compat.viewToModel(this, event.getPoint()));
+        Element elem = doc.getCharacterElement(viewToModel2D(event.getPoint()));
         AttributeSet as = elem.getAttributes();
         Object attr = as.getAttribute(TooltipAttribute.ATTRIBUTE_KEY);
         if (attr instanceof TooltipAttribute) {

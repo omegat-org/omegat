@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="app.bidi">
+  <title id="app.bidi.title">Direktionale Formatierungszeichen</title>
+
+  <para>BiDi-Steuerzeichen sind über <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.insert.unicode.control.character" endterm="menus.edit.insert.unicode.control.character.title"/> zugänglich. Diese können verwendet werden, um:</para>
+
+  <itemizedlist>
+	<listitem>
+	  <para>Ein unsichtbares Zeichen mit einer starken Direktionalität einzufügen, um eine bestimmte Position für ein Zeichen mit schwacher oder neutraler Direktionalität zu erzwingen.</para>
+	</listitem>
+	<listitem>
+	  <para>Einen Textabschnitt zu erstellen, der in die entgegengesetzte Richtung des Abschnitts fließt.</para>
+	</listitem>
+  </itemizedlist>
+  
+  <para>Diese Steuerzeichen ändern die Richtung, sind aber unsichtbar. Mit <link linkend="menus.view" endterm="menus.view.title"/><link linkend="menus.view.mark.bidirectional.algorithm.control.character" endterm="menus.view.mark.bidirectional.algorithm.control.character.title"/> können Sie deren Position sichtbar machen.</para>
+
+  <section id="app.bidi.marks">
+	<title id="app.bidi.marks.title">Markierungen</title>
+
+	<para>Um die Position eines Zeichens mit schwacher oder neutraler Direktionalität (z. B. Interpunktionszeichen) zu ändern, fügen Sie je nach der Direktionalität des Segments ein LRM- oder RLM-Zeichen nach dem Zeichen ein:</para>
+
+	<itemizedlist>
+	  <listitem>
+		<para>Fügen Sie eine LRM nach einem Zeichen mit schwacher Direktionalität ein, das von links nach rechts in einem Rechts-nach-Links-Segment verlaufen muss (z. B. ein englischer Auszug in einem arabischen Text).</para>
+	  </listitem>
+	  <listitem>
+		<para>Fügen Sie eine RLM nach einem Zeichen mit schwacher Direktionalität ein, das von rechts nach links in einem Links-nach-Rechts-Segment verlaufen muss (z. B. ein arabischer Auszug in einem englischen Text).</para>
+	  </listitem>
+	</itemizedlist>
+  </section>
+
+  <section id="app.bidi.embeddings">
+	<title id="app.bidi.embeddings.title">Einbettungen</title>
+
+	<para>Einbettungen können verwendet werden, um einen längeren Textabschnitt (mit mehreren Wörtern und Leerzeichen) zu erstellen, der in die entgegengesetzte Richtung des Segments fließen muss. Sie können je nach Direktionalität des Segments zwei Arten von Einbettungen erstellen:</para>
+
+	<itemizedlist>
+	  <listitem>
+		<para>Um eine Links-nach-Rechts-Einbettung in einem Rechts-nach-Links-Segment zu erstellen, fügen Sie ein Links-nach-Rechts-Einbettungszeichen (LRE) ein, geben oder fügen Sie den Links-nach-Rechts-Text ein, und fügen Sie dann das Einbettung-beenden-Zeichen (&quot;pop directional formatting&quot; oder kurz PDF) ein.</para>
+	  </listitem>
+	  <listitem>
+		<para>Um eine Rechts-nach-Links-Einbettung in einem Links-nach-Rechts-Segment zu erstellen, fügen Sie ein Rechts-nach-Links-Einbettungszeichen (RLE) ein, geben oder fügen Sie den Rechts-nach-Links-Text ein, und fügen Sie dann das Einbettung-beenden-Zeichen (&quot;pop directional formatting&quot; oder kurz PDF) ein.</para>
+	  </listitem>
+	</itemizedlist>
+  </section>
+</section>

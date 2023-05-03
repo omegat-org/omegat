@@ -1,42 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<book lang="de">
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd"
+[
+<!ENTITY % manualvariables SYSTEM "manualvariables.mod">
+%manualvariables;
+]>
+<book lang="de" id="book.user.manual">
   <bookinfo>
-    <title>OmegaT 4.2 - Benutzerhandbuch</title>
-
-    <author>
-      <firstname>OmegaT-Team</firstname>
-    </author>
-
-    <pubdate/>
-
+    <title id="book.user.manual.title">OmegaT 5.8.0 - Bedienungsanleitung</title>
+    <pubdate>@timestamp@</pubdate>
+	<!-- TODO automate date insertion -->
     <abstract>
-      <para>Dieses Dokument ist das offizielle Benutzerhandbuch zu OmegaT, dem kostenlosen Tool für computergestützte Übersetzung. Es enthält zudem Installationsanweisungen.</para>
+      <para>Dieses Dokument ist die offizielle Bedienungsanleitung für OmegaT, dem kostenlosen Tool für computergestützte Übersetzung.</para>
+
+	  <para>Der Hauptzweck von OmegaT besteht darin, Ihnen auf möglichst zuverlässige Weise Zugang zu Ihren Übersetzungsressourcen zu verschaffen, damit Sie eine gute Übersetzung so schnell wie möglich erstellen können.</para>
+
+	  <para>OmegaT wird unter den Bedingungen der <emphasis>GNU General Public License, Version 3.0</emphasis> verteilt. Die Lizenz gewährt Ihnen die folgenden Freiheiten:<itemizedlist id="freedoms.list">
+		<listitem>
+		  <para>Die Freiheit, die Software für beliebige Zwecke zu nutzen.</para>
+		</listitem>
+
+		<listitem>
+		  <para>Die Freiheit, die Funktionsweise von OmegaT zu analysieren und es so zu verändern, dass es nach Ihren Wünschen läuft.</para>
+		</listitem>
+
+		<listitem>
+		  <para>Die Freiheit, Kopien weiterzugeben, damit Sie anderen helfen können.</para>
+		</listitem>
+
+		<listitem>
+		  <para>Die Freiheit, Kopien der von Ihnen geänderten Versionen an andere weiterzugeben.</para>
+		</listitem>
+	  </itemizedlist>
+	  </para>
     </abstract>
   </bookinfo>
 
-  <xi:include href="InstallingAndRunning.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+  
+  <xi:include href="Introduction.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
-  <xi:include href="OmegaT4_Menus.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+  <xi:include href="OmegaT5_HowTo.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
-  <xi:include href="OmegaT4_WindowsAndDialogs.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+  <xi:include href="OmegaT5_EditorsPanes.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
-  <xi:include href="OmegaT4_EditorsPanes.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+  <xi:include href="OmegaT5_Menus.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
-  <xi:include href="OmegaT4_ProjectFolder.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+  <xi:include href="OmegaT5_WindowsAndDialogs.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
-  <xi:include href="OmegaT4_HowTo.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+  <xi:include href="OmegaT5_Preferences.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
-<!--   <xi:include href="OmegaT4_Troubleshooting.xml"
-              xmlns:xi="http://www.w3.org/2001/XInclude"/> -->
+  <xi:include href="OmegaT5_ProjectFolder.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
-  <xi:include href="App_Dictionaries.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-
-  <xi:include href="App_Glossaries.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-
-   <xi:include href="App_Spellchecker.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-
-  <xi:include href="App_Regexp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-
-  <xi:include href="App_ShortCutCustomization.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+  <xi:include href="OmegaT5_Appendices.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+	           
 </book>

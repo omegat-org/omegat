@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2014 Alex Buloichik
-               Home page: http://www.omegat.org/
+               Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
  This file is part of OmegaT.
@@ -20,7 +20,7 @@
  GNU General Public License for more details.
 
  You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
 package org.omegat.core.data;
@@ -366,6 +366,18 @@ public final class TestTeamIntegrationChild {
         public void prevEntry() {
         }
 
+        public void nextXAutoEntry() {
+        }
+
+        public void prevXAutoEntry() {
+        }
+
+        public void nextXEnforcedEntry() {
+        }
+
+        public void prevXEnforcedEntry() {
+        }
+
         public void nextUntranslatedEntry() {
         }
 
@@ -533,6 +545,11 @@ public final class TestTeamIntegrationChild {
             }
 
             public JMenu getAutoCompletionMenu() {
+                return null;
+            }
+
+            @Override
+            public JMenu getHelpMenu() {
                 return null;
             }
 

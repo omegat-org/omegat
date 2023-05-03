@@ -1,0 +1,554 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd"
+[
+<!ENTITY % manualvariables SYSTEM "manualvariables.mod">
+%manualvariables;
+]>
+<chapter id="chapter.instant.start.guide">
+  <title id="chapter.instant.start.guide.title">Introducció a l'OmegaT</title>
+  
+  <section id="introduction.omegat.principles">
+	<title id="introduction.omegat.principles.title">Principis</title>
+
+    <para>Us donem la benvinguda a l'OmegaT, una eina de traducció assistida per ordinador (TAO) que ofereix una gran flexibilitat, rendiment i robustesa, així com característiques més avançades que les dels productes comercials, fins i tot per a principiants de la traducció.</para>
+
+	<section id="introduction.omegat.principles.translation.project">
+      <title id="introduction.omegat.principles.translation.project.title">Projecte de traducció</title>
+
+      <para>Un projecte de traducció de l'OmegaT consisteix en una sèrie de recursos emmagatzemats en carpetes independents, un fitxer <link linkend="project.folder.omegat.project.file"><filename>omegat.project</filename></link> que emmagatzema la ubicació de tots els recursos i un fitxer de memòria de traducció <link linkend="project.folder.project.save.tmx"><filename>project_save.tmx</filename></link> que emmagatzema totes les traduccions fetes durant la traducció del projecte.</para>
+
+      <para>Els traductors poden modificar fàcilment el contingut o la ubicació d'aquests recursos en qualsevol moment durant la traducció.</para>
+
+      <para>Per defecte, els recursos inclouen la memòria de traducció del projecte, que es crea automàticament després de la creació del projecte, i els fitxers per a traduir. També poden incloure memòries de traducció de referència, glossaris i altres fitxers de referència.</para>
+
+      <para>Consulteu el capítol <link linkend="chapter.project.folder" endterm="chapter.project.folder.title"/> per a conèixer més detalls.</para>
+    </section>
+
+	<section id="introduction.omegat.principles.translation.memories">
+      <title id="introduction.omegat.principles.translation.memories.title">Memòries de traducció</title>
+
+      <para>Els traductors no han de <emphasis>crear</emphasis> una memòria de traducció ni <emphasis>associar-ne</emphasis> una a un projecte nou. L'OmegaT se n'encarrega <emphasis>automàticament</emphasis>.</para>
+
+      <para>Els traductors poden reutilitzar fàcilment la memòria de traducció d'un projecte existent; només cal afegir els fitxers de traducció nous al projecte existent, o bé copiar una memòria de traducció existent a un projecte nou.</para>
+
+      <para>No hi ha límit en el nombre de memòries de traducció que es poden utilitzar com a referència en un projecte de traducció i l'OmegaT facilita molt l'assignació de diferents nivells de prioritat a aquestes memòries addicionals.</para>
+
+      <para>Consulteu la guia <link linkend="how.to.use.tm" endterm="how.to.use.tm.title"/> per a conèixer més detalls.</para>
+	</section>
+
+	<section id="introduction.omegat.principles.collaboration">
+      <title id="introduction.omegat.principles.collaboration.title">Col·laboració</title>
+
+      <para>Uns paràmetres senzills permeten als traductors compartir fàcilment els recursos i treballar conjuntament en un projecte.</para>
+
+      <para>La funcionalitat de treball en equip ofereix una robustesa de grau industrial i flexibilitat per a sincronitzar els recursos del projecte entre els membres de l'equip, alhora que permet resoldre fàcilment els conflictes entre diferents traduccions.</para>
+
+      <para>Consulteu la guia <link linkend="how.to.tm.share.translation.memories" endterm="how.to.tm.share.translation.memories.title"/> per a conèixer més detalls.</para>
+	</section>
+
+	<section id="introduction.omegat.principles.made.for.translators">
+      <title id="introduction.omegat.principles.made.for.translators.title">Dissenyat per a traductors</title>
+
+	  <para>L'OmegaT està dissenyat no només per a facilitar el procés de traducció, sinó també per a assegurar que el traductor no hagi de preocupar-se per perdre dades.</para>
+
+	  <note>
+		<para>Encara no heu utilitzat l'OmegaT, però recordeu les vegades que traduíeu en el processador de textos i un error de l'ordinador va esborrar la traducció del llibre en què havíeu treballat durant els darrers sis mesos, o l'informe amb un termini de lliurament d'una hora.</para>
+
+		<para>Us plantegeu utilitzar l'OmegaT, però...</para>
+
+		<para>Com pot ajudar l'OmegaT en situacions així?</para>
+
+		<para>No us preocupeu. El disseny robust de l'OmegaT fa que sigui <emphasis>extremadament</emphasis> poc probable que perdeu més d'uns pocs minuts de feina.</para>
+
+		<para>Fins i tot si sembla que tot estigui molt trencat, no patiu. Només cal que seguiu els passos senzills que es descriuen en la guia <link linkend="how.to.restore.your.data" endterm="how.to.restore.your.data.title"/>.</para>
+	  </note>
+
+	  <para>A més, abans que hàgiu de seguir aquests passos, l'OmegaT us permetrà centrar-vos en la traducció en si i esperem que també us ajudi a convertir-vos en un millor traductor.</para>
+
+	  <para>Si necessiteu ajuda amb qualsevol aspecte de l'OmegaT, no dubteu a unir-vos als <ulink url="https://omegat.org/support">grups d'usuaris de l'OmegaT</ulink>.</para>
+
+	</section>
+  </section>
+
+  <section id="introduction.how.to.use.the.manual">
+	<title id="introduction.how.to.use.the.manual.title">Convencions utilitzades en aquest manual</title>
+	<para>Aquesta secció presenta les convencions utilitzades per a distingir els elements de la interfície d'usuari de l'OmegaT en aquest manual. Es mostren de manera que es faciliti la identificació de la seva funció. L'acció associada a un element també suggereix la funció en cas que la manera de mostrar-ho no transmeti les diferències visuals: <emphasis>utilitzeu</emphasis> un element del menú o <emphasis>feu clic</emphasis> en un botó.</para>
+
+	<para>De la mateixa manera, els enllaços a les diverses parts del manual es mostren de manera que sigui més fàcil identificar la funció de l'element enllaçat.</para>
+
+	<variablelist>
+	  <varlistentry>
+		<term>Menu items with a default shortcut</term>
+		<listitem>
+		  <para>Utilitzeu <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.new" endterm="menus.project.new.title"/>.</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry>
+		<term>Menu items with no default shortcut</term>
+		<listitem>
+		  <para>Utilitzeu <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.copy.files.to.source.folder" endterm="menus.project.copy.files.to.source.folder.title"/>.</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry>
+		<term>Botons</term>
+		<listitem>
+		  <para>Feu clic en <link linkend="windows.source.files.list.copy.files" endterm="windows.source.files.list.copy.files.title"/>.</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry>
+		<term>Subfinestres, finestres i quadres de diàleg</term>
+		<listitem>
+		  <para>La subfinestra <link linkend="panes.editor" endterm="panes.editor.title"/>.</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry>
+		<term>Fitxers i carpetes</term>
+		<listitem>
+		  <para>El fitxer <link linkend="project.folder.omegat.project.file"><filename>omegat.project</filename></link>.</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry>
+		<term>Paràmetres de les preferències i propietats del projecte</term>
+		<listitem>
+		  <para>El paràmetre <link endterm="dialogs.preferences.fonts.title" linkend="dialogs.preferences.fonts"/>.</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry>
+		<term>Capítols, guies i annexos</term>
+		<listitem>
+		  <para>El capítol <link linkend="chapter.project.folder" endterm="chapter.project.folder.title"/>.</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry>
+		<term>Enllaços a recursos externs</term>
+		<listitem>
+		  <para>La <ulink url="https://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html">Documentació d'expressions regulars del Java</ulink>.</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry>
+		<term>Dreceres</term>
+		<listitem>
+		  <para>Per a evitar la duplicació de les descripcions de les dreceres, utilitzem lletres individuals com a identificador comú per als modificadors. Consulteu el capítol <link linkend="chapter.menus" endterm="chapter.menus.title"/> per a conèixer més detalls.</para>
+
+		  <example id="example.introduction.note.on.shortcuts">
+			<title id="example.introduction.note.on.shortcuts.title">Les tecles modificadores s'identifiquen amb una sola lletra.</title>
+
+			<para>Windows i Linux: <keycombo><keycap>Control</keycap><keycap>E</keycap></keycombo></para>
+
+			<para>macOS: <keycombo><keycap>Ordre</keycap><keycap>E</keycap></keycombo></para>
+
+			<para><emphasis role="bold">Aquest manual:</emphasis> <keycombo><keycap>C</keycap><keycap>E</keycap></keycombo></para>
+		  </example>
+		</listitem>
+	  </varlistentry>
+	</variablelist>
+  </section>
+
+  <section id="introduction.create.and.open.new.project">
+    <title id="introduction.create.and.open.new.project.title">Creació d'un projecte</title>
+
+	<warning>
+	  <para>Si encara no heu instal·lat l'OmegaT, consulteu la guia <link linkend="how.to.installing.omegat" endterm="how.to.installing.omegat.title"/>.</para>
+
+	  <para>Per a aprendre a iniciar l'OmegaT, consulteu la guia <link linkend="how.to.running.omegat" endterm="how.to.running.omegat.title"/>.</para>
+	</warning>
+
+
+	<para>Per a començar a utilitzar l'OmegaT, primer cal crear un projecte que contingui tots els fitxers.</para>
+
+	<para>Utilitzeu <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.new" endterm="menus.project.new.title"/>, seleccioneu una carpeta buida o creeu-ne una de nova amb el nom del projecte.</para>
+
+    <para>An OmegaT project is simply a set of folders that holds
+    all your default resources.</para>
+
+    <para>El quadre de diàleg <link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/> s'obre després de donar un nom al projecte.</para>
+
+	<para>In that dialog, select or enter the languages of your source and
+	translated files, set the various options, and click on <guibutton>OK</guibutton>
+	to continue.</para>
+
+	<para>OmegaT provides a convenient short list of two-letter language
+	codes, but you can type any code that conforms to <ulink url="https://www.rfc-editor.org/rfc/bcp/bcp47.txt">BCP-47</ulink>
+	(including the three-letter language codes) into the appropriate
+	field.</para>
+
+	<warning>
+	  <para>Make sure that you enter the correct languages and that all other locations requiring a language code match the code you assign here. Consulteu la secció <link linkend="dialogs.project.properties.languages" endterm="dialogs.project.properties.languages.title"/> per a conèixer més detalls.</para>
+	</warning>
+	
+    <para>Utilitzeu <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.properties" endterm="menus.project.properties.title"/> per a tornar a aquest quadre de diàleg després de crear el projecte.</para>
+
+	<note>
+	  <para>Podeu modificar l'estructura d'un projecte en qualsevol moment després de començar a traduir. En el quadre diàleg, només cal indicar a l'OmegaT quines noves carpetes de recursos s'han d'utilitzar. A continuació, senzillament us demanarà que torneu a carregar el projecte i es començaran a utilitzar les ubicacions noves.</para>
+	</note>
+	
+    <para>A continuació, s'obre el quadre de diàleg <link linkend="windows.source.files.list" endterm="windows.source.files.list.title"/>.</para>
+
+	<para>Feu clic en <link linkend="windows.source.files.list.copy.files" endterm="windows.source.files.list.copy.files.title"/> o <link linkend="windows.source.files.list.download.page" endterm="windows.source.files.list.download.page.title"/> i afegiu fitxers d'origen.</para>
+
+	<para>Utilitzeu <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.access.project.contents" endterm="menus.project.access.project.contents.title"/> si no recordeu on és el projecte.</para>
+
+	<para>Si no veieu el contingut d'un fitxer en la subfinestra <link linkend="panes.editor" endterm="panes.editor.title"/>, és possible que el fitxer estigui buit o que tingui un format no compatible amb l'OmegaT. Utilitzeu <link linkend="menus.options" endterm="menus.options.title"/><link linkend="menus.options.file.filters" endterm="menus.options.file.filters.title"/> per a obrir la llista de formats de fitxer compatibles. Si el format del fitxer apareix en la llista, utilitzeu connectors de tercers o convertiu el fitxer en un format compatible. Consulteu la guia <link linkend="how.to.translate.other.files" endterm="how.to.translate.other.files.title"/> per a conèixer més detalls.</para>
+  </section>
+
+  <section id="introduction.install.spellchecker.dictionary">
+	<title id="introduction.install.spellchecker.dictionary.title">Spellchecking
+	dictionaries</title>
+
+	<para>Omegat provides a spellchecking system, but does not come with the
+	dictionaries required to actually spellcheck your translations.
+	You need to install the dictionaries you need yourself.</para>
+
+	<para>Use the <link linkend="dialog.preferences.spellchecker" endterm="dialog.preferences.spellchecker.title"/> section in the general
+	<link linkend="chapter.dialogs.preferences" endterm="chapter.dialogs.preferences.title"/> dialog to access the
+	spellchecking preferences.</para>
+
+	<orderedlist>
+	  <listitem>
+		<para>Click on the <link linkend="dialog.preferences.spellchecker.install.new" endterm="dialog.preferences.spellchecker.install.new.title"/> button to
+		display a list of dictionaries available at the URL in the <guilabel>URL of
+		downloadable spellchecking dictionaries</guilabel> field above that
+		button.</para>
+	  </listitem>
+	  <listitem>
+		<para>Select as many dictionaries as you want and click the
+		<guibutton>Install</guibutton> button. OmegaT will download them
+		and copy them to the spellchecking dictionaries location specified
+		at the top of the dialog (the
+		<link linkend="configuration.folder">configuration</link>
+		folder by default). This operation may take some time.</para>
+	  </listitem>
+	  <listitem>
+		<para>Click the <guibutton>Close</guibutton> button. OmegaT will
+		display a list of the installed dictionaries.</para>
+	  </listitem>
+	</orderedlist>
+
+	<warning>
+	  <para>OmegaT does not recognize languages automatically, and only uses
+	  a dictionary if its name matches the target language code.</para>
+
+	  <example>
+		<title>Project target language code and spellchecking dictionary
+		name</title>
+		<para>If the project target language is <emphasis role="bold">fr</emphasis> and the dictionary name is <emphasis role="bold">fr_fr</emphasis> or <emphasis role="bold">fr-fr</emphasis>,
+		you can either:</para>
+
+		<itemizedlist>
+		  <listitem>
+			<para>use <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.properties" endterm="menus.project.properties.title"/> to change the project
+			target language to <emphasis role="bold">fr-fr</emphasis>, or</para>
+		  </listitem>
+		  <listitem>
+			<para>use <link linkend="menus.options" endterm="menus.options.title"/><link linkend="menus.options.access.configuration.folder" endterm="menus.options.access.configuration.folder.title"/> to access
+			the <link linkend="configuration.folder">configuration</link> folder
+			and change the dictionary file names to <emphasis role="bold">fr</emphasis>.</para>
+		  </listitem>
+		</itemizedlist>
+	  </example>
+	</warning>
+  </section>
+
+  <section id="introduction.manage.your.segments">
+    <title id="introduction.manage.your.segments.title">Gestió dels segments</title>
+
+	<para>El paràmetre per defecte per a un projecte de traducció és crear <emphasis>frases</emphasis> dividint els <emphasis>blocs de paràgrafs</emphasis> del fitxer. Consulteu la propietat del projecte <link linkend="dialogs.project.properties.options.segmentation" endterm="dialogs.project.properties.options.segmentation.title"/> per a conèixer més detalls.</para>
+	
+	<para>Els segments dins dels paràgrafs es poden segmentar més, o bé no segmentar-se (combinar-se). Afegiu una regla de segmentació per a segmentar-los més, o bé una regla d'excepció per a combinar-los amb la part de la qual s'han dividit. Consulteu l'annex <link linkend="app.segmentation" endterm="app.segmentation.title"/> per a conèixer més detalls.</para>
+
+	<note>
+	  <para>El caràcter d'espai estàndard s'utilitza sovint com a límit de segment. Podeu seguir els passos següents per a combinar dues seccions de text separades per un caràcter d'espai:</para>
+	  
+	  <orderedlist>
+		<listitem>
+		  <para>Aneu al fitxer d'origen amb <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.access.project.contents" endterm="menus.project.access.project.contents.title"/>.</para>
+		</listitem>
+		
+		<listitem>
+		  <para>Cerqueu la ubicació de l'espai.</para>
+		</listitem>
+
+		<listitem>
+		  <para>Substituïu-lo per un espai no separable.</para>
+		</listitem>
+
+		<listitem>
+		  <para>Deseu el fitxer.</para>
+		</listitem>
+
+		<listitem>
+		  <para>Torneu a l'OmegaT i utilitzeu <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.reload" endterm="menus.project.reload.title"/> perquè l'OmegaT reconegui el canvi.</para>
+		</listitem>
+	  </orderedlist>
+	</note>
+  </section>
+
+  <section id="introduction.make.it.look.good">
+	<title id="introduction.make.it.look.good.title">Millora de l'aspecte del programa perquè sigui atractiu!</title>
+	<para>Quan hàgiu acabat els passos anteriors, els fitxers d'origen apareixeran en l'OmegaT en una disposició similar a la següent:</para>
+
+	<figure id="default.omegat.layout">
+      <title id="default.omegat.layout.title">Disposició per defecte de l'OmegaT en el macOS</title>
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/defaultOmegaTLayout.png"/>
+        </imageobject>
+        <imageobject role="fo">
+          <imagedata fileref="images/defaultOmegaTLayout.png" width="60%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+	<orderedlist>
+	  <listitem>
+		<para>Subfinestra <link linkend="panes.editor" endterm="panes.editor.title"/></para>
+	  </listitem>
+	  <listitem>
+		<para>Subfinestra <link linkend="panes.notes" endterm="panes.notes.title"/></para>
+	  </listitem>
+	  <listitem>
+		<para>Subfinestra <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/></para>
+	  </listitem>
+	  <listitem>
+		<para>Subfinestra <link linkend="panes.glossary" endterm="panes.glossary.title"/></para>
+	  </listitem>
+	  <listitem>
+		<para>Subfinestra <link linkend="panes.segment.properties" endterm="panes.segment.properties.title"/></para>
+	  </listitem>
+	  <listitem>
+		<para>Subfinestra <link linkend="panes.comments" endterm="panes.comments.title"/></para>
+	  </listitem>
+	  <listitem>
+		<para>Subfinestra <link linkend="panes.multipletranslations" endterm="panes.multipletranslations.title"/></para>
+	  </listitem>
+	  <listitem>
+		<para>Subfinestres <link linkend="panes.dictionary" endterm="panes.dictionary.title"/> i <link linkend="panes.machinetranslation" endterm="panes.machinetranslation.title"/>, acoblades</para>
+	  </listitem>
+	  <listitem>
+		<para><link linkend="panes.statusbar" endterm="panes.statusbar.title"/> (a la dreta), que conté la informació del projecte</para>
+	  </listitem>
+	</orderedlist>
+	
+	<para>Utilitzeu les diferents opcions del menú <link linkend="menus.view" endterm="menus.view.title"/> i desplaceu les <link linkend="chapter.panes">subfinestres</link> per a obtenir la disposició que s'ajusti millor al vostre flux de treball:</para>
+	
+  </section>
+
+  <section id="introduction.translate.the.segments.one.by.one">
+    <title id="introduction.translate.the.segments.one.by.one.title">Traducció dels fitxers</title>
+
+    <para>La subfinestra <link linkend="panes.editor" endterm="panes.editor.title"/> és on escriviu la traducció.</para>
+
+	<note>
+	  <para>Per a veure l'eficiència que podeu aconseguir amb les dreceres, consulteu la secció <link linkend="app.shortcuts.streamline.workflow" endterm="app.shortcuts.streamline.workflow.title"/>.</para>
+	</note>
+	
+	<para>Després d'escriure la traducció d'un segment, utilitzeu <link linkend="menus.goto" endterm="menus.goto.title"/><link linkend="menus.goto.next.untranslated.segment" endterm="menus.goto.next.untranslated.segment.title"/> per a desplaçar-vos al segment sense traduir següent.</para>
+
+	<para>Quan abandoneu el segment, la traducció s'emmagatzema automàticament en el fitxer <link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/> i s'utilitzarà com a referència per a la resta de la traducció.</para>
+
+	<para>Consulteu el menú <link linkend="menus.goto" endterm="menus.goto.title"/> per a conèixer més opcions de navegació.</para>
+
+	<note>
+	  <para>L'OmegaT no assigna diferents estats als segments traduïts. Un segment pot estar traduït o sense traduir.</para>
+
+	  <para>Si necessiteu un procés de revisió específic, teniu aquestes opcions, per exemple:</para>
+
+	  <itemizedlist>
+		<listitem>
+		  <para>Afegiu recordatoris a la subfinestra <link linkend="panes.notes" endterm="panes.notes.title"/> per als segments problemàtics.</para>
+
+		  <para>Use <link linkend="menus.goto" endterm="menus.goto.title"/><link linkend="menus.goto.notes.pane" endterm="menus.goto.notes.pane.title"/> to enter the Notepad and
+		  add your remark.</para>
+
+		  <para>Use <link linkend="menus.goto" endterm="menus.goto.title"/><link linkend="menus.goto.editor.pane" endterm="menus.goto.editor.pane.title"/> to return to the Editor and
+		  resume your translation.</para>
+		</listitem>
+
+		<listitem>
+		  <para>Useu <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.search.project" endterm="menus.edit.search.project.title"/> per a filtrar els segments segons uns criteris que hàgiu establert i reviseu només aquests segments.</para>
+		</listitem>
+	  </itemizedlist>
+	</note>
+	
+	<para>Utilitzeu <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.create.glossary.entry" endterm="menus.edit.create.glossary.entry.title"/> per a afegir termes al glossari.</para>
+
+	<para>Utilitzeu <link linkend="menus.view" endterm="menus.view.title"/><link linkend="menus.view.mark.glossary.matches" endterm="menus.view.mark.glossary.matches.title"/> i les preferències de <link linkend="dialog.preferences.auto.completion" endterm="dialog.preferences.auto.completion.title"/> per a gestionar les coincidències del glossari.</para>
+
+	<para>Quan accediu a un segment amb termes que coincideixen amb les entrades dels glossaris, els termes i les traduccions corresponents es mostren en la subfinestra <link linkend="panes.glossary" endterm="panes.glossary.title"/>.</para>
+	
+	<para>Quan accediu a un segment que coincideix amb part del contingut de les memòries de traducció del projecte, l'OmegaT mostra les coincidències en la subfinestra <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/>.</para>
+
+	<para>Utilitzeu el menú <link linkend="menus.edit" endterm="menus.edit.title"/> per a gestionar les coincidències de les memòries de traducció i accedir altres funcions útils.</para>
+
+	<para>La funció <link linkend="menus.edit.search.project" endterm="menus.edit.search.project.title"/> us permet cercar termes, fragments de frases i més en tot el projecte, mitjançant cerques exactes, per paraules clau o amb expressions regulars. També podeu restringir l'àmbit de la cerca segons informació com l'autor o la data.</para>
+
+	<para>També podeu centrar-vos només en els resultats filtrant-los en l'editor. Consulteu la secció <link linkend="windows.text.search" endterm="windows.text.search.title"/> per a conèixer més detalls.</para>
+
+	<para>Podeu substituir termes amb la funció <link linkend="menus.edit.search.and.replace" endterm="menus.edit.search.and.replace.title"/> mitjançant un quadre de diàleg similar. Consulteu la secció <link linkend="windows.text.replace" endterm="windows.text.replace.title"/> per a conèixer més detalls.</para>
+
+	<para>Podeu deixar notes per a ús propi o per a altres membres de l'equip en la subfinestra <link linkend="panes.notes" endterm="panes.notes.title"/> mentre traduïu i tornar als segments amb notes amb <link linkend="menus.goto.next.note" endterm="menus.goto.next.note.title"/> o <link linkend="menus.goto.previous.note" endterm="menus.goto.previous.note.title"/> en el menú <link linkend="menus.goto" endterm="menus.goto.title"/>, o des de la finestra <link linkend="windows.text.search" endterm="windows.text.search.title"/>.</para>
+
+	<para>El <link linkend="panes.editor.context.menu" endterm="panes.editor.context.menu.title"/> proporciona un accés fàcil a diverses funcions freqüents. També teniu disponible el <link linkend="panes.editor.auto.completion.menu" endterm="panes.editor.auto.completion.menu.title"/> en la subfinestra «Editor».</para>
+  </section>
+  
+  <section id="introduction.manage.your.tags">
+    <title id="introduction.manage.your.tags.title">Gestió de les etiquetes</title>
+
+    <para>Si els documents que traduïu utilitzen negreta, cursiva o altres elements decoratius, l'OmegaT els convertirà en etiquetes al voltant del text decorat. Aquesta mena de fitxers inclouen els fitxers del LibreOffice, fitxers HTML, fitxers del Microsoft Office, etc. Els documents sovint també contenen etiquetes que no tenen res a veure amb les decoracions, però que també són importants en els fitxers d'origen (i, per tant, en els fitxers traduïts).</para>
+
+	<para>Una frase pot tenir aquest aspecte en l'aplicació original:</para>
+    
+	<example id="example.source.segment.with.decorations">
+	  <title id="example.source.segment.with.decorations.title">Frase amb format decoratiu</title>
+	  <para>L'OmegaT és un programa <emphasis role="bold">fàcil d'utilitzar</emphasis> per a traductors <emphasis>entusiastes</emphasis>.</para>
+	</example>
+
+    <para>Ara bé, en funció del format original, l'OmegaT mostrarà aquesta frase d'una manera semblant a la següent:</para>
+
+	<example id="example.how.decorations.are.displayed">
+	  <title id="example.how.decorations.are.displayed.title">Com es mostren les decoracions en l'OmegaT</title>
+	  <para>L'OmegaT és un programa <code role="tag">&lt;t0/&gt;</code>fàcil d'utilitzar<code role="tag">&lt;t1/&gt;</code> per a traductors <code role="tag">&lt;t2/&gt;</code>entusiastes<code role="tag">&lt;t3/&gt;</code>.</para>
+    </example>
+
+	<note>
+	  <para>Els diversos paràmetres relacionats amb les etiquetes poden ser molt útils per a gestionar correctament les etiquetes dels fitxers. Consulteu les opcions i els scripts següents per a conèixer més detalls:</para>
+	  <itemizedlist>
+		<listitem>
+		  <para><link linkend="dialogs.project.properties.hide.tags" endterm="dialogs.project.properties.hide.tags.title"/></para>
+		</listitem>
+		<listitem>
+		  <para><link linkend="dialogs.preferences.tag.processing" endterm="dialogs.preferences.tag.processing.title"/></para>
+		</listitem>
+		<listitem>
+		  <para><link linkend="windows.scripts.distribution.tagwipe" endterm="windows.scripts.distribution.tagwipe.title"/></para>
+		</listitem>
+		<listitem>
+		  <para><link linkend="windows.scripts.distribution.adapt.standard.tags" endterm="windows.scripts.distribution.adapt.standard.tags.title"/></para>
+		</listitem>
+		<listitem>
+		  <para><link linkend="windows.scripts.distribution.strip.tags" endterm="windows.scripts.distribution.strip.tags.title"/></para>
+		</listitem>
+		<listitem>
+		  <para><link linkend="windows.scripts.distribution.tag.free.match" endterm="windows.scripts.distribution.tag.free.match.title"/></para>
+		</listitem>
+	  </itemizedlist>
+	</note>
+	
+    <para>Les etiquetes es mostren en color gris en l'OmegaT, de manera que són fàcils de reconèixer. Estan protegides per a evitar que en modifiqueu el contingut, però podeu suprimir-les, introduir-les a mà o desplaçar-les en la frase traduïda.</para>
+	<para>Utilitzeu <link linkend="menus.edit" endterm="menus.edit.title"/> <link linkend="menus.edit.insert.missing.source.tag" endterm="menus.edit.insert.missing.source.tag.title"/> i <link linkend="menus.edit.insert.next.missing.tag" endterm="menus.edit.insert.next.missing.tag.title"/> per a inserir etiquetes en la posició del cursor.</para>
+
+	<para>Podeu definir etiquetes personalitzades que es gestionaran de la mateixa manera. Consulteu la secció <link linkend="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags" endterm="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags.title"/> per a conèixer més detalls.</para>
+
+	<para>També podeu definir cadenes perquè l'OmegaT us avisi si les deixeu en una traducció. Consulteu la secció <link linkend="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation" endterm="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation.title"/> per a conèixer més detalls.</para>
+
+	<para>Si cometeu errors en gestionar les etiquetes, és possible que els fitxers traduïts no es puguin obrir. Utilitzeu <link linkend="menus.tools" endterm="menus.tools.title"/><link linkend="menus.tools.check.issues" endterm="menus.tools.check.issues.title"/> per a comprovar les etiquetes abans de generar els fitxers traduïts.</para>
+
+	<warning>
+	  <para>Si un fitxer no es pot obrir amb el LibreOffice, el Word o una altra aplicació, sovint és a causa d'un error de gestió de les etiquetes amb l'OmegaT. Torneu a l'OmegaT, comproveu si hi ha errors d'etiquetes en el fitxer i torneu a crear el fitxer traduït.</para>
+	</warning>
+  </section>
+
+  <section id="introduction.review.the.translation">
+    <title id="introduction.review.the.translation.title">Revisió de la traducció</title>
+
+	<para>No dubteu a modificar la disposició de les <link linkend="chapter.panes" endterm="chapter.panes.title"/> i les opcions de <link linkend="menus.view" endterm="menus.view.title"/> quan reviseu la traducció.</para>
+
+	<para>Utilitzeu l'opció <link linkend="menus.tools.check.issues" endterm="menus.tools.check.issues.title"/> per a aplicar diverses comprovacions en el contingut de la traducció.</para>
+  </section>
+  
+  <section id="introduction.generate.the.translated.file">
+    <title id="introduction.generate.the.translated.file.title">Creació dels fitxers traduïts</title>
+
+	<para>Sempre que vulgueu veure com serà la traducció en el format final, utilitzeu <link linkend="menus.project" endterm="menus.project.title"/> <link linkend="menus.project.create.translated.documents" endterm="menus.project.create.translated.documents.title"/>.</para>
+
+	<warning>
+	  <para>Cada vegada que creeu els fitxers traduïts, se sobreescriu qualsevol fitxer amb el mateix nom creat anteriorment. Canvieu el nom dels fitxers si voleu impedir que se sobreescriguin després de crear-los. Podeu automatitzar els canvis de nom dels fitxers utilitzant l'opció <link linkend="edit.filter.dialog" endterm="edit.filter.dialog.title"/> per al filtre de fitxers.</para>
+	
+	  <para>Les traduccions <emphasis>sempre</emphasis> s'emmagatzemen en el fitxer <link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/>, que és la memòria de traducció del projecte, en la carpeta <link linkend="project.folder.omegat" endterm="project.folder.omegat.title"/> del projecte.</para>
+
+	  <para>Suprimir el contingut de la carpeta <link linkend="project.folder.target" endterm="project.folder.target.title"/> no tindrà <emphasis>mai</emphasis> cap impacte en el contingut de les traduccions.</para>
+	</warning>
+
+	<para>Els documents es creen en la carpeta <link linkend="project.folder.target" endterm="project.folder.target.title"/> del projecte. El procés sobreescriu els fitxers creats anteriorment, excepte si n'heu canviat el nom.</para>
+
+	<para>Una vegada creats els fitxers traduïts, podeu obrir-los amb l'aplicació original per a comprovar-ne el contingut i, si cal, modificar-los. Aquestes modificacions externes <emphasis>no</emphasis> es veuran reflectides en l'OmegaT.</para>
+
+	<para>Les modificacions externes a l'OmegaT es poden tornar a introduir a l'OmegaT (i a la memòria de traducció del projecte, per a mantenir-la al dia) introduint-les manualment en els segments pertinents, o bé alineant el fitxer original i el fitxer traduït final per a crear un fitxer de memòria de traducció (TMX) nou per a la carpeta <link linkend="project.folder.tm.enforce" endterm="project.folder.tm.enforce.title"/>del projecte. Consulteu la secció <link linkend="windows.aligner" endterm="windows.aligner.title"/> per a conèixer més detalls.</para>
+  </section>
+
+  <section id="introduction.one.more.thing">
+    <title id="introduction.one.more.thing.title">Gestió de projectes</title>
+
+    <itemizedlist>
+      <listitem>
+        <para>Els projectes de traducció només són carpetes que contenen fitxers. Podeu crear un projecte nou per a cada tasca nova o bé podeu afegir fitxers d'origen nous a un projecte existent en qualsevol moment.</para>
+      </listitem>
+
+      <listitem>
+        <para>Podeu accedir als paràmetres del projecte i modificar-los amb <link linkend="menus.project" endterm="menus.project.title"/> <link linkend="menus.project.properties" endterm="menus.project.properties.title"/>. Per a veure la llista de fitxers del projecte, utilitzeu <link linkend="menus.project.source.files.list" endterm="menus.project.source.files.list.title"/> des del mateix menú. Podeu accedir al contingut de tots els recursos en qualsevol moment amb l'opció <link linkend="menus.project.access.project.contents" endterm="menus.project.access.project.contents.title"/>.</para>
+      </listitem>
+
+      <listitem>
+        <para>Cada vegada que creeu els fitxers traduïts (consulteu l'apartat <link linkend="introduction.generate.the.translated.file" endterm="introduction.generate.the.translated.file.title"/>, més amunt), l'OmegaT crea tres memòries de traducció que contenen l'estat de la traducció dels fitxers que hi ha actualment en la carpeta <link linkend="project.folder.source" endterm="project.folder.source.title"/>. Consulteu la secció <link linkend="dialogs.project.properties.file.locations.exported.tms" endterm="dialogs.project.properties.file.locations.exported.tms.title"/> per a conèixer més detalls.</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+
+  <section id="app.shortcuts.streamline.workflow">
+    <title id="app.shortcuts.streamline.workflow.title">Flux de treball basat en dreceres</title>
+
+    <para>Recordar les principals dreceres d'edició i navegació (o <link linkend="app.shortcuts.customization">modificar-les per a adaptar-les a les vostres necessitats</link>) us pot ajudar a simplificar la feina.</para>
+    <para>Això s'il·lustra millor amb un exemple:</para>
+
+    <example id="example.shortcuts.streamline.workflow">
+      <title id="example.shortcuts.streamline.workflow.title">Ús de dreceres per a simplificar el procés de traducció</title>
+
+      <para>Imagineu que us encarreguen traduir una versió actualitzada d'un manual d'una feina anterior. Consulteu la guia <link linkend="how.to.use.tm.reuse.tm" endterm="how.to.use.tm.reuse.tm.title"/> per a conèixer més detalls.</para>
+        
+      <para>Atès que les primeres pàgines no han canviat, trobeu la pantalla plena de segments ja traduïts a partir de la memòria de la feina anterior en obrir el projecte.</para>
+
+	  <para>En lloc de desplaçar-vos tediosament fins que trobeu el primer segment per a traduir, ràpidament premeu <keycombo><keycap>C</keycap><keycap>U</keycap></keycombo> per a <link linkend="menus.goto.next.untranslated.segment">passar directament a l'acció</link> i començar a traduir. (I torneu a fer-ho cada vegada que arribeu a una secció extensa sense canvis).</para>
+
+      <para>Uns quants segments més endavant, trobeu un terme que hauríeu d'afegir al glossari. En comptes d'utilitzar el ratolí, desbloqueu el cursor amb <link linkend="panes.editor.cursor.lock"><keycap>F2</keycap></link>, utilitzeu les tecles de direcció i les dreceres del sistema estàndard per a navegar fins al terme i seleccionar-lo i premeu <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>G</keycap></keycombo> per a <link linkend="menus.edit.create.glossary.entry">obrir el quadre de diàleg d'entrada del glossari</link> i afegir terme d'origen. You then switch back to the editor, lock the cursor again with <link linkend="panes.editor.cursor.lock"><keycap>F2</keycap></link> and repeat the process to enter the target term.</para>
+
+	  <para>Heu habilitat l'<link linkend="dialog.preferences.auto.completion">emplenament automàtic</link> per a mostrar automàticament no només les prediccions de l'historial, sinó també els termes dels glossaris i cadenes curtes predefinides, que es poden introduir fàcilment amb les fletxes de navegació.</para>
+		
+      <para>Arribeu a una secció revisada del text on la subfinestra <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/> mostra una sèrie de segments similars de la feina anterior.</para>
+
+	  <para>Després de prémer ràpidament <keycombo><keycap>C</keycap><keycap>I</keycap></keycombo> per a inserir la coincidència, apliqueu els canvis necessaris per a ajustar el text.</para>
+
+	  <para>Això continua; ocasionalment, utilitza la seqüència <keycombo><keycap>C</keycap><keycap>2</keycap></keycombo> (o un número diferent) seguida de <keycombo><keycap>C</keycap><keycap>I</keycap></keycombo> quan una de les coincidències de 2 a 5 és més adequada.</para>
+
+	  <para>Some segments will require further modification later on, so you use
+	  <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>9</keycap></keycombo>
+	  to enter the Notepad pane, leave yourself a note and come back to the Editor
+	  pane with
+	  <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>0</keycap></keycombo>.</para>
+	  
+	  <para>Quan arribeu al final de la secció, també heu utilitzat <keycombo><keycap>C</keycap><keycap>R</keycap></keycombo> una o dues vegades per a substituir les coincidències parcials introduïdes automàticament a partir de la traducció anterior per coincidències millors d'algun segment anterior de la secció actual.</para>
+
+      <para>Més endavant, se us acut una manera millor de formular una expressió difícil que havíeu trobat abans; la seleccioneu en el text d'origen i premeu <keycombo><keycap>C</keycap><keycap>F</keycap></keycombo> <link linkend="windows.text.search">per a cercar-la</link> i <keycombo><keycap>C</keycap><keycap>J</keycap></keycombo> per a saltar immediatament al segment des del quadre de diàleg de cerca.</para>
+
+	  <para>Com que l'OmegaT ha enregistrat l'historial de navegació, només cal que utilitzeu <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>J</keycap></keycombo> per a continuar immediatament on ho havíeu deixat.</para>
+
+	  <para>Ara decidiu revisar els segments amb notes. Utilitzeu <keycombo><keycap>C</keycap><keycap>F</keycap></keycombo> per a cercar-los i en la finestra de cerca utilitzeu <keycombo><keycap>C</keycap><keycap>N</keycap></keycombo> i <keycombo><keycap>C</keycap><keycap>P</keycap></keycombo> per a navegar pels resultats. OmegaT synchronizes the Editor contents with the selected result, so you can edit the segments right away.</para>
+        
+      <para>Hora de descansar. Mentre assaboriu un cafè, reflexioneu sobre la facilitat amb què heu pogut utilitzar les funcions de l'OmegaT en comparació amb quan tot just començàveu i dedicàveu molt de temps a fer clic en els menús.</para>
+
+      <para>El flux de treball més fàcil, al seu torn, us ha permès centrar-vos millor en la traducció en si.</para>
+        
+      <para>Alhora, us heu adonat que durant la sessió heu utilitzat el menú <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.create.alternative.translation" endterm="menus.edit.create.alternative.translation.title"/> i les tecles de direcció diverses vegades, i decidiu <link linkend="example.shortcut.addition">afegir una drecera nova</link> per a simplificar també aquesta part del procés.</para>
+	  
+    </example>
+    
+    <para>Dedicar temps a aprendre les dreceres per a les funcions que utilitzeu sovint segur que valdrà la pena.</para>
+  </section>  
+</chapter>

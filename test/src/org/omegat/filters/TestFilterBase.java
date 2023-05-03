@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2008 Alex Buloichik
-               Home page: http://www.omegat.org/
+               Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
  This file is part of OmegaT.
@@ -20,7 +20,7 @@
  GNU General Public License for more details.
 
  You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
 package org.omegat.filters;
@@ -423,12 +423,12 @@ public abstract class TestFilterBase extends TestCore {
     }
 
     protected static class ParsedEntry {
-        String id;
-        String source;
-        String translation;
-        boolean isFuzzy;
-        String[] props;
-        String path;
+        public String id;
+        public String source;
+        public String translation;
+        public boolean isFuzzy;
+        public String[] props;
+        public String path;
     }
 
     protected TestFileInfo loadSourceFiles(IFilter filter, String file, Map<String, String> filterOptions)

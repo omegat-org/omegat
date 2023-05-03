@@ -6,7 +6,7 @@
  Copyright (C) 2007 Zoltan Bartko, Alex Buloichik
                2009 Didier Briel
                2015 Aaron Madlon-Kay
-               Home page: http://www.omegat.org/
+               Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
  This file is part of OmegaT.
@@ -22,7 +22,7 @@
  GNU General Public License for more details.
 
  You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
 package org.omegat.core.spellchecker;
@@ -153,7 +153,6 @@ public class SpellChecker implements ISpellChecker {
         String dictionaryDir = Preferences.getPreferenceDefault(Preferences.SPELLCHECKER_DICTIONARY_DIRECTORY,
                 DEFAULT_DICTIONARY_DIR.getPath());
 
-        File dictBasename = new File(dictionaryDir, language);
         File affixName = new File(dictionaryDir, language + OConsts.SC_AFFIX_EXTENSION);
         File dictionaryName = new File(dictionaryDir, language + OConsts.SC_DICTIONARY_EXTENSION);
 
@@ -173,7 +172,7 @@ public class SpellChecker implements ISpellChecker {
         }
 
         try {
-            ISpellCheckerProvider result = new SpellCheckerLangToolHunspell(dictBasename.getPath());
+            ISpellCheckerProvider result = new SpellCheckerLangToolHunspell(dictionaryName, affixName);
             Log.log("Initialized LanguageTool Hunspell spell checker for language '" + language
                     + "' dictionary " + dictionaryName);
             return Optional.of(result);

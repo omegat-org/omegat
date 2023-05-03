@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2016 Aaron Madlon-Kay
-               Home page: http://www.omegat.org/
+               Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
  This file is part of OmegaT.
@@ -20,7 +20,7 @@
  GNU General Public License for more details.
 
  You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
 package org.omegat;
@@ -38,18 +38,23 @@ import org.apache.commons.io.FileUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.util.OConsts;
 import org.omegat.util.ProjectFileStorage;
+import org.omegat.util.TestPreferencesInitializer;
 
 public class MainTest {
 
     private static Path tmpDir;
+    private static String configDir;
 
     @Before
     public final void setUp() throws Exception {
         tmpDir = Files.createTempDirectory("omegat");
         assertTrue(tmpDir.toFile().isDirectory());
+        configDir = Files.createDirectory(tmpDir.resolve(".omegat")).toString();
+        TestPreferencesInitializer.init(configDir);
     }
 
     @After
@@ -60,6 +65,7 @@ public class MainTest {
 
     @Test
     public void testConsoleTranslate() throws Exception {
+
         // Create project properties
         ProjectProperties props = new ProjectProperties(tmpDir.toFile());
         // Create project internal directories
@@ -74,7 +80,8 @@ public class MainTest {
         Path srcFile = tmpDir.resolve(OConsts.DEFAULT_SOURCE).resolve(fileName);
         Files.write(srcFile, fileContent);
 
-        Main.main(new String[] { "--mode=console-translate", tmpDir.toString() });
+        Main.main(new String[] {String.format("--config-dir=%s", configDir), "--mode=console-translate",
+                tmpDir.toString() });
 
         Path trgFile = tmpDir.resolve(OConsts.DEFAULT_TARGET).resolve(fileName);
         assertTrue(trgFile.toFile().isFile());

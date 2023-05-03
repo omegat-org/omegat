@@ -4,7 +4,7 @@
  glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2018 Lev Abashkin
- Home page: http://www.omegat.org/
+ Home page: https://www.omegat.org/
  Support center: https://omegat.org/support
 
  This file is part of OmegaT.
@@ -20,16 +20,19 @@
  GNU General Public License for more details.
 
  You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
 package org.omegat.gui.dictionaries;
 
 import org.omegat.core.Core;
 import org.omegat.core.data.SourceTextEntry;
+import org.omegat.gui.editor.EditorPopups;
 import org.omegat.gui.editor.IPopupMenuConstructor;
 import org.omegat.gui.editor.SegmentBuilder;
 import org.omegat.util.OStrings;
+
+import org.openide.awt.Mnemonics;
 
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
@@ -50,7 +53,7 @@ public class DictionaryPopup implements IPopupMenuConstructor {
         }
 
         JMenuItem searchMenuItem = new JMenuItem();
-        searchMenuItem.setText(OStrings.getString("TF_MENU_EDIT_SEARCH_DICTIONARY"));
+        searchMenuItem.setText(Mnemonics.removeMnemonics(OStrings.getString("TF_MENU_EDIT_SEARCH_DICTIONARY")));
         searchMenuItem.addActionListener(e -> Core.getDictionaries().searchText(searchedText));
         menu.add(searchMenuItem);
         menu.addSeparator();

@@ -9,7 +9,8 @@
                2014 Aaron Madlon-Kay, Alex Buloichik
                2015 Aaron Madlon-Kay
                2017 Didier Briel
-               Home page: http://www.omegat.org/
+               2018 Thomas Cordonnier
+               Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
  This file is part of OmegaT.
@@ -25,7 +26,7 @@
  GNU General Public License for more details.
 
  You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
 package org.omegat.core.data;
@@ -64,6 +65,7 @@ import gen.core.project.RepositoryMapping;
  * @author Aaron Madlon-Kay
  * @author Yu Tang
  * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Thomas Cordonnier
  */
 public class ProjectProperties {
 
@@ -112,8 +114,8 @@ public class ProjectProperties {
         setSupportDefaultTranslations(true);
         setRemoveTags(false);
 
-        setSourceLanguage("EN-US");
-        setTargetLanguage("EN-GB");
+        setSourceLanguage("AR-LB");
+        setTargetLanguage("UK-UA");
 
         loadProjectSRX();
         loadProjectFilters();
@@ -219,7 +221,22 @@ public class ProjectProperties {
     public String getTMAutoRoot() {
         return tmDir.getAsString() + OConsts.AUTO_TM + '/';
     }
-
+    
+    /** Returns The Translation Memory (TMX) Files Directory for automatically enforced files. */
+    public String getTMEnforceRoot() {
+        return tmDir.getAsString() + OConsts.AUTO_ENFORCE_TM + '/';
+    }
+    
+    /** Returns The Translation Memory (TMX) Files Directory for machine translation files. */
+    public String getTMMTRoot() {
+        return tmDir.getAsString() + OConsts.MT_TM + '/';
+    }
+    
+    /** Returns The Translation Memory (TMX) Files Directory for files with penalties. */
+    public String getTMPenaltyRoot() {
+        return tmDir.getAsString() + OConsts.PENALTY_TM + '/';
+    }
+    
     public ProjectPath getDictDir() {
         return dictDir;
     }
@@ -482,7 +499,7 @@ public class ProjectProperties {
      * Loads segmentation.conf if found in the /omegat folder of the project
      */
     public void loadProjectSRX() {
-        this.projectSRX = SRX.loadSRX(new File(getProjectInternal(), SRX.CONF_SENTSEG));
+        this.projectSRX = SRX.loadFromDir(new File(getProjectInternal()));
     }
 
     public Filters getProjectFilters() {

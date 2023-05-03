@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="dialogs.project.properties">
+  <title id="dialogs.project.properties.title"><guilabel>Propietats del projecte</guilabel></title>
+
+  <para>Utilitzeu <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.properties" endterm="menus.project.properties.title"/> per a obrir el quadre de diàleg.</para>
+  
+  <para>Aquest quadre de diàleg s'utilitza per a definir les propietats inicials del projecte en crear-ne un de nou o per a modificar-les més tard, quan ja s'ha creat el projecte.</para>
+
+  <para>Consulteu el capítol <link linkend="introduction.create.and.open.new.project" endterm="introduction.create.and.open.new.project.title"/> per a conèixer més detalls.</para>
+  
+
+  <section id="dialogs.project.properties.languages">
+    <title id="dialogs.project.properties.languages.title"><guilabel>Llengües</guilabel></title>
+
+    <para>Select the source and target languages from the drop-down list,
+    or enter them manually.</para>
+
+	<para>OmegaT provides a convenient short list of two-letter language
+	codes, but you can type any code that conforms to <ulink url="https://www.rfc-editor.org/rfc/bcp/bcp47.txt">BCP-47</ulink>
+	(including the three-letter language codes) into the appropriate
+	field.</para>
+	
+	<para>Els codis de llengua s'utilitzen en diverses parts de l'OmegaT amb diverses finalitats:</para>
+	
+	<itemizedlist>
+	  <listitem>
+		<para>Obtenir resultats en la subfinestra <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/>.</para>
+	  </listitem>
+
+	  <listitem>
+		<para>Aplicar les regles de segmentació definides en les preferències de <link linkend="dialogs.preferences.segmentation.setup" endterm="dialogs.preferences.segmentation.setup.title"/>.</para>
+	  </listitem>
+
+	  <listitem>
+		<para>Cercar errors ortogràfics a partir dels diccionaris instal·lats en les preferències de <link linkend="dialog.preferences.spellchecker" endterm="dialog.preferences.spellchecker.title"/>.</para>
+	  </listitem>
+
+	  <listitem>
+		<para>Cercar errors gramaticals i tipogràfics a partir de les regles establertes en les preferències del <link linkend="dialog.preferences.languagetool.plugin" endterm="dialog.preferences.languagetool.plugin.title"/>, etc.</para>
+	  </listitem>
+	</itemizedlist>
+
+	  <para>Altres funcions.</para>
+
+	<warning>
+	  <para>Make sure you enter the correct language codes and that
+	  all other locations requiring such a code match the one you
+	  assign here exactly. Functions that depend on a language either
+	  fail or produce incorrect results if there is a mismatch between
+	  the language codes.</para>
+	</warning>
+
+	  
+      <para>L'OmegaT selecciona automàticament els lematitzadors que corresponen a les llengües d'origen i de destinació, però podeu modificar els paràmetres manualment. Els lematitzadors permeten que l'OmegaT proporcioni millors coincidències.</para>
+  </section>
+
+  <section id="dialogs.project.properties.options">
+    <title id="dialogs.project.properties.options.title"><guilabel>Opcions</guilabel></title>
+
+    <variablelist>
+      <varlistentry id="dialogs.project.properties.options.segmentation">
+        <term id="dialogs.project.properties.options.segmentation.title"><option>Habilita la segmentació per frases</option></term>
+
+		<listitem>		  
+          <para>La segmentació per frases divideix els paràgrafs o altres blocs de text dels fitxers d'origen en segments segons les regles de segmentació.</para>
+
+		  <para>Inhabiliteu aquesta opció si preferiu no segmentar els paràgrafs.</para>
+
+		  <para>Per defecte, les regles de segmentació són globals i s'apliquen a tots els projectes.</para>
+
+		  <para>Utilitzeu <link linkend="menus.options" endterm="menus.options.title"/><link linkend="menus.options.segmentation" endterm="menus.options.segmentation.title"/> per a accedir a les regles de segmentació globals.</para>
+		  
+		  <para>Feu clic en <link linkend="dialogs.project.properties.local.segmentation" endterm="dialogs.project.properties.local.segmentation.title"/> per a utilitzar les regles de segmentació específiques del projecte (regles locals) i no les regles globals. També podeu iniciar l'OmegaT des de la línia d'ordres amb un paràmetre de configuració específica del projecte per a aconseguir un resultat similar.</para>
+
+		  <para>Consulteu la secció <link linkend="launch.with.command.line" endterm="launch.with.command.line.title"/> per a conèixer més detalls.</para>
+
+		  <note>
+			<para>Si utilitzeu regles locals, encara podreu accedir a les regles globals, però modificar-les no tindrà cap efecte en el projecte.</para>
+		  </note>
+		  
+		  <para>Canviar els paràmetres de les regles de segmentació durant una traducció no modifica els segments registrats en la memòria de traducció del projecte.</para>
+		  
+		  <para>Canviar de la segmentació per <emphasis role="bold">frases</emphasis> a la segmentació per <emphasis role="bold">paràgrafs</emphasis> a mitja traducció pot forçar l'OmegaT a actualitzar les memòries de traducció antigues que no utilitzen la segmentació per frases, però no a l'inrevés. Això no obstant, l'OmegaT intentarà crear coincidències parcials per als paràgrafs combinant les traduccions de frases existents.</para>
+
+		  <para>Si canvieu la segmentació durant la traducció, haureu de tornar a carregar el projecte perquè la nova segmentació tingui efecte. Això dividirà o fusionarà alguns segments que ja s'havien traduït, que deixaran de considerar-se traduïts. Malgrat tot, la traducció original es conservarà en la memòria del projecte.</para>
+
+		  <para>Consulteu l'annex <link linkend="app.segmentation" endterm="app.segmentation.title"/> per a veure explicacions generals sobre la segmentació (global o local, per paràgrafs o per frases, paràmetres, etc.).</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="dialogs.project.properties.local.segmentation">
+        <term id="dialogs.project.properties.local.segmentation.title"><guibutton>Regles de segmentació locals...</guibutton></term>
+
+		<listitem>
+		  <para>Per defecte, les regles de segmentació són globals i s'apliquen a tots els projectes.</para>
+		  
+			<para>Les regles de segmentació que veieu quan obriu les preferències de <link linkend="dialogs.preferences.segmentation.setup" endterm="dialogs.preferences.segmentation.setup.title"/> (utilitzeu <link linkend="menus.options" endterm="menus.options.title"/><link linkend="menus.options.segmentation" endterm="menus.options.segmentation.title"/>) són regles globals.</para>
+
+		  <para>Utilitzeu aquest botó per a crear regles locals específiques del vostre projecte. Marqueu la casella <option>Utilitza regles de segmentació locals</option> i ajusteu les regles de segmentació com vulgueu.</para>
+		  
+		  <para>El projecte emmagatzemarà el nou conjunt de regles en el fitxer <link linkend="project.folder.omegat.segmentation" endterm="project.folder.omegat.segmentation.title"/> de la carpeta <link linkend="project.folder.omegat.folder" endterm="project.folder.omegat.folder.title"/>. Aquestes regles substituiran les regles de segmentació globals.</para>
+		  
+		  <para>Per a inhabilitar les regles de segmentació locals, inhabiliteu aquesta opció o suprimiu el fitxer.</para>
+
+		  <warning>
+			<para>Si utilitzeu regles locals, encara podreu accedir a les regles globals, però modificar-les no tindrà cap efecte en el projecte.</para>
+		  </warning>
+
+		  <para>Consulteu l'annex <link linkend="app.segmentation" endterm="app.segmentation.title"/> per a veure explicacions generals sobre la segmentació (global o local, per paràgrafs o per frases, paràmetres, etc.).</para>
+        </listitem>
+      </varlistentry>
+	  
+	  
+      <varlistentry id="dialogs.project.properties.auto.propagation">
+        <term id="dialogs.project.properties.auto.propagation.title"><option>Propaga les traduccions automàticament</option></term>
+
+		<listitem>
+          <para>Si hi ha segments repetits en els documents d'origen i marqueu aquesta opció, es definirà el primer segment traduït com a traducció per defecte i s'utilitzarà automàticament el mateix text de destinació en els segments repetits restants.</para>
+		  
+		  <para>Utilitzeu <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.create.alternative.translation" endterm="menus.edit.create.alternative.translation.title"/> per a assignar una traducció alternativa als segments que requereixen una traducció diferent.</para>
+		  
+		  <para>Si no activeu aquesta opció, es pot assignar una traducció diferent a tots els segments, encara que estiguin duplicats en el projecte.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="dialogs.project.properties.hide.tags">
+        <term id="dialogs.project.properties.hide.tags.title"><option>Hide
+        tags</option></term>
+
+		<listitem>
+          <para>Les etiquetes són útils generalment per a reproduir disposicions o característiques específiques del text d'origen en el text traduït.</para>
+
+		  <para>Activating this function hides the tags in the source
+		  segments, freeing you from the need to handle them manually.</para>
+		  
+		  <para>Això és especialment útil per a tractar textos on la formatació en línia no és gaire útil (per exemple, fitxers PDF amb OCR, o fitxers .odt o .docx mal convertits).</para>
+
+		  <note>
+			<para>Hidden tags are simply stacked at the end of the segment. Although
+			this does not normally prevent the translated file from opening, keep the
+			following points in mind when using this function:</para>
+			<itemizedlist>
+				<listitem>
+					<para>You will have to manually apply bold, italics, or other text
+					decorations in the translated file.</para>
+				</listitem>
+				<listitem>
+					<para>If you simply want to reduce the number of tags in a
+					<application>Microsoft Word</application> (2007 and later) document,
+					you can use the <link linkend="windows.scripts.distribution.tagwipe" endterm="windows.scripts.distribution.tagwipe.title"/> script.</para>
+					<para>Consulteu la secció <link linkend="windows.scripts" endterm="windows.scripts.title"/> per a conèixer més detalls.</para>
+				</listitem>
+			</itemizedlist>
+			</note>
+      </listitem>
+      </varlistentry>
+
+      <varlistentry id="dialogs.project.properties.external.processing.command">
+        <term id="dialogs.project.properties.external.processing.command.title"><option>Ordres de postprocessament locals</option></term>
+
+		<listitem>
+		  <warning>
+			<para>Per raons de seguretat, les ordres de postprocessament locals estan inhabilitades per defecte.</para>
+
+			<para>Consulteu les preferències de <link linkend="dialogs.preferences.saving.and.output.also.allow.per.project.external.commands" endterm="dialogs.preferences.saving.and.output.also.allow.per.project.external.commands.title"/> per a conèixer més detalls.</para>
+		  </warning>
+
+		  <para>L'OmegaT pot executar ordres automàticament després que s'hagin creat els fitxers de destinació.</para>
+
+		  <para>Indiqueu les ordres que vulgueu executar en aquest camp.</para>
+
+		  <para>Utilitzeu <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.create.translated.documents" endterm="menus.project.create.translated.documents.title"/> o <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.create.current.translated.document" endterm="menus.project.create.current.translated.document.title"/> per a crear els fitxers de destinació i executar l'ordre.</para>
+
+		  <para>Les ordres especificades aquí només estan disponibles per a aquest projecte. Es desen en el fitxer <link linkend="project.folder.omegat.project.file" endterm="project.folder.omegat.project.file.title"/>. Habiliteu les ordres de postprocessament locals només si confieu en la font del fitxer.</para>
+		
+		  <para>La llista de variables de plantilla us permet accedir a diverses dades del projecte i a variables de sistema.</para>
+
+		  <para>Consulteu l'annex <link linkend="post.processing.commands" endterm="post.processing.commands.title"/> per a conèixer més detalls.</para>
+
+		  <para>També podeu definir ordres de postprocessament globals disponibles per a tots els projectes que comparteixen la mateixa carpeta de configuració. Aquestes ordres es defineixen en la preferència <link linkend="dialogs.preferences.saving.and.output.external.post-processing.command" endterm="dialogs.preferences.saving.and.output.external.post-processing.command.title"/>.</para>
+
+		  <note>
+			<para>Les ordres locals s'executen abans que les ordres globals.</para>
+		  </note>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="dialogs.project.properties.filters">
+        <term id="dialogs.project.properties.filters.title"><guibutton>Filtres de fitxers locals...</guibutton></term>
+
+        <listitem>
+          <para>Per defecte, els paràmetres dels filtres de fitxers són globals i es comparteixen entre tots els projectes. Es troben en les preferències de <link linkend="dialogs.preferences.file.filters" endterm="dialogs.preferences.file.filters.title"/>.</para>
+
+		  <para>Utilitzeu aquest botó per a crear filtres de fitxers locals específics per al projecte. Marqueu la casella <option>Utilitza paràmetres de filtres locals</option> i ajusteu els paràmetres com vulgueu.</para>
+
+		  <para>El projecte emmagatzemarà el nou conjunt de filtres de fitxers en el fitxer <link linkend="project.folder.omegat.filters" endterm="project.folder.omegat.filters.title"/> de la carpeta <link linkend="project.folder.omegat.folder" endterm="project.folder.omegat.folder.title"/>. Aquests paràmetres substituiran els paràmetres dels filtres de fitxers globals.</para>
+
+		  <note>
+			<para>Per a inhabilitar els filtres de fitxers específics del projecte, desmarqueu la casella o suprimiu el fitxer.</para>
+		  </note>
+		  
+		  <para>Consulteu l'annex <link linkend="file.filters" endterm="file.filters.title"/> per a conèixer més detalls.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="dialogs.project.properties.repository.mapping">
+        <term id="dialogs.project.properties.repository.mapping.title"><guibutton>Assignació de dipòsits...</guibutton></term>
+
+        <listitem>
+          <para>Quan treballeu en un projecte en equip, aquesta finestra us permet definir l'assignació entre les carpetes remotes i locals.</para>
+
+		  <para>Consulteu la secció <link linkend="how.to.setup.team.project.mapping.parameters" endterm="how.to.setup.team.project.mapping.parameters.title"/> de la guia <link linkend="how.to.setup.team.project" endterm="how.to.setup.team.project.title"/> per a conèixer més detalls.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="dialogs.project.properties.external.searches">
+        <term id="dialogs.project.properties.external.searches.title"><guibutton>Cerques externes locals</guibutton></term>
+
+        <listitem>
+          <para>Per defecte, les cerques externes són globals i es comparteixen entre tots els projectes. Es defineixen en les preferències de <link linkend="dialogs.preferences.external.searches" endterm="dialogs.preferences.external.searches.title"/>.</para>
+
+		  <para>Utilitzeu aquest botó per a crear cerques externes locals específiques del projecte i ajusteu els paràmetres com vulgueu.</para>
+
+		  <para>El projecte emmagatzemarà el nou conjunt de cerques externes en el fitxer <link linkend="project.folder.omegat.finder" endterm="project.folder.omegat.finder.title"/> de la carpeta <link linkend="project.folder.omegat.folder" endterm="project.folder.omegat.folder.title"/>. Aquests paràmetres substituiran els paràmetres de cerques externes globals.</para>
+
+		  <para>Per a suprimir les cerques externes específiques del projecte, feu clic en el botó <guibutton>Suprimeix</guibutton> o suprimiu el fitxer.</para>
+		  
+		  <para>Consulteu les preferències de <link linkend="dialogs.preferences.external.searches" endterm="dialogs.preferences.external.searches.title"/> per a conèixer més detalls.</para>
+
+		  <note>
+			<para>Per raons de seguretat, les cerques externes locals estan inhabilitades per defecte. Per a habilitar-les, marqueu <link linkend="dialogs.preferences.external.search.enable.project.specific.commands" endterm="dialogs.preferences.external.search.enable.project.specific.commands.title"/> en les preferències de <link linkend="dialogs.preferences.external.searches" endterm="dialogs.preferences.external.searches.title"/>.</para>
+		  </note>
+        </listitem>
+      </varlistentry>
+	</variablelist>
+  </section>
+
+  <section id="dialogs.project.properties.file.locations">
+    <title id="dialogs.project.properties.file.locations.title"><guilabel>Ubicacions dels fitxers</guilabel></title>
+
+	<para>Un projecte de traducció de l'OmegaT està format per diversos recursos en carpetes independents.</para>
+
+	<para>Quan es crea un projecte, l'OmegaT proposa crear una estructura de carpetes del projecte per defecte que conté tots els recursos utilitzats en la traducció, però aquesta estructura no és obligatòria.</para>
+
+	<para>Les carpetes de recursos poden ser en qualsevol lloc del sistema, fins i tot en discs compartits.</para>
+
+	<para>Consulteu el capítol <link linkend="chapter.project.folder" endterm="chapter.project.folder.title"/> per a conèixer més detalls.</para>
+
+	<para>Podeu modificar l'estructura del projecte afegint o suprimint fitxers de les carpetes o, fins i tot, canviant les carpetes que utilitza el projecte en qualsevol moment, fins i tot durant la traducció.</para>
+
+	<para>Utilitzeu <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.access.project.contents" endterm="menus.project.access.project.contents.title"/> i els submenús per a accedir a totes les ubicacions de recursos del projecte.</para>
+
+	<variablelist>
+	  <varlistentry id="dialogs.project.properties.file.locations.browse">
+		<term id="dialogs.project.properties.file.locations.browse.title"><guibutton>Navega</guibutton></term>
+
+		<listitem>
+		  <para>El botó <guibutton>Navega</guibutton> està disponible per a tots els recursos del projecte definits per l'usuari.</para>
+
+		  <note>
+			<para>No cal que els recursos estiguin emmagatzemats en la carpeta del projecte per defecte que crea l'OmegaT. Podeu seleccionar qualsevol carpeta que vulgueu que contingui els recursos, fins i tot carpetes en discs compartits.</para>
+		  </note>
+
+		  <para>Feu clic en el botó per a seleccionar la carpeta que voleu utilitzar en comptes de la carpeta de recursos per defecte.</para>
+		</listitem>
+	  </varlistentry>
+	  
+	  <varlistentry id="dialogs.project.properties.file.locations.source.files">
+		<term id="dialogs.project.properties.file.locations.source.files.title"><option>Carpeta dels fitxers d'origen</option></term>
+
+		<listitem>
+		  <para>Aquesta carpeta conté els fitxers que voleu traduir. L'OmegaT intenta llegir tots els fitxers alhora i mostra el contingut traduïble que hi troba en l'editor.</para>
+
+		  <para>Consulteu la secció <link linkend="project.folder.source" endterm="project.folder.source.title"/> per a conèixer més detalls.</para>
+
+		  <para>Si la carpeta està buida, si cap dels fitxers inclou contingut traduïble o si no hi ha cap fitxer compatible amb els filtres de fitxers de l'OmegaT, l'OmegaT us indicarà que la carpeta està buida.</para>
+
+		  <variablelist>
+			<varlistentry id="dialogs.project.properties.file.locations.exclusions">
+			  <term id="dialogs.project.properties.file.locations.exclusions.title"><guibutton>Exclusions...</guibutton></term>
+
+			  <listitem>
+				<para>Feu clic en el botó <guibutton>Exclusions...</guibutton> per a definir els fitxers o carpetes voleu que l'OmegaT ignori. Un fitxer o carpeta ignorat:</para>
+		  
+				<itemizedlist>
+				  <listitem>
+					<para>No es mostra en la subfinestra <link linkend="panes.editor" endterm="panes.editor.title"/>.</para>
+				  </listitem>
+
+				  <listitem>
+					<para>No es té en compte en els informes d'estadístiques (com ara l'ordre <link linkend="menus.tools" endterm="menus.tools.title"/><link linkend="menus.tools.statistics" endterm="menus.tools.statistics.title"/>).</para>
+				  </listitem>
+
+				  <listitem>
+					<para>No es copia a la carpeta <link linkend="project.folder.target" endterm="project.folder.target.title"/> quan es creen els fitxers traduïts.</para>
+				  </listitem>
+				</itemizedlist>
+
+				<para>El quadre de diàleg Patrons d'exclusió us permet afegir o suprimir un patró o editar-ne un, fent-hi doble clic o bé seleccionant-lo i prement <keycap>F2</keycap>. Utilitzeu la <ulink url="https://ant.apache.org/manual/dirtasks.html#patterns">sintaxi de l'Apache Ant</ulink> per a definir les exclusions.</para>
+			  </listitem>
+			</varlistentry>
+		  </variablelist>
+		</listitem>
+	  </varlistentry>
+	  
+	  <varlistentry id="dialogs.project.properties.file.locations.translation.memories">
+		<term id="dialogs.project.properties.file.locations.translation.memories.title"><option>Carpeta de les memòries de traducció</option></term>
+		<listitem>
+		  <para>Aquesta carpeta conté els fitxers que voleu utilitzar com a memòries de traducció de referència. L'OmegaT intenta llegir tots els fitxers alhora i en compara el contingut amb el segment que esteu traduint.</para>
+
+		  <para>Consulteu la secció <link linkend="project.folder.tm" endterm="project.folder.tm.title"/> per a conèixer més detalls.</para>
+
+		  <para>Si es troben coincidències, es mostraran en la subfinestra <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/>.</para>
+		</listitem>
+	  </varlistentry>
+	  
+	  <varlistentry id="dialogs.project.properties.file.locations.glossaries">
+		<term id="dialogs.project.properties.file.locations.glossaries.title"><option>Carpeta dels fitxers de glossari</option></term>
+
+		<listitem>
+		  <para>Aquesta carpeta conté els fitxers que voleu utilitzar com a glossaris de referència. L'OmegaT intenta llegir tots els fitxers alhora i en compara el contingut amb el segment que esteu traduint.</para>
+
+		  <para>Consulteu la secció <link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/> per a conèixer més detalls.</para>
+		  
+		  <para>Si es troben coincidències, es mostraran en la subfinestra <link linkend="panes.glossary" endterm="panes.glossary.title"/>.</para>
+
+		  <para>Consulteu l'annex <link linkend="app.glossaries" endterm="app.glossaries.title"/> per a conèixer més detalls.</para>
+		</listitem>
+	  </varlistentry>
+	  
+	  <varlistentry id="dialogs.project.properties.file.locations.writable.glossary">
+		<term id="dialogs.project.properties.file.locations.writable.glossary.title"><option>Fitxer de glossari modificable</option></term>
+
+		<listitem>
+		  <para>El glossari modificable és el fitxer que l'OmegaT utilitza quan afegiu termes del glossari traduïts al projecte amb l'ordre <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.create.glossary.entry" endterm="menus.edit.create.glossary.entry.title"/>.</para>
+
+		  <para>Es crea automàticament la primera vegada que s'afegeix un terme.</para>
+
+		  <para>Les entrades que s'acaben d'afegir es reconeixen i es mostren automàticament si coincideixen amb els termes del segment actual.</para>
+
+		  <para>Aquest fitxer <emphasis>sempre</emphasis> és en la carpeta <link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/>.</para>
+		</listitem>
+	  </varlistentry>
+	  
+	  <varlistentry id="dialogs.project.properties.file.locations.dictionaries">
+		<term id="dialogs.project.properties.file.locations.dictionaries.title"><option>Carpeta dels diccionaris</option></term>
+
+		<listitem>
+		  <para>Aquesta carpeta conté els fitxers que voleu utilitzar com a diccionaris de referència. L'OmegaT intentarà llegir tots els fitxers alhora i cercarà les coincidències de contingut amb el segment que esteu traduint.</para>
+
+		  <para>Consulteu la secció <link linkend="project.folder.dictionary" endterm="project.folder.dictionary.title"/> per a conèixer més detalls.</para>
+
+		  <para>Si es troben coincidències, es mostraran en la subfinestra <link linkend="panes.dictionary" endterm="panes.dictionary.title"/>.</para>
+		</listitem>
+	  </varlistentry>
+	  
+	  <varlistentry id="dialogs.project.properties.file.locations.translated.files">
+		<term id="dialogs.project.properties.file.locations.translated.files.title"><option>Carpeta dels fitxers traduïts</option></term>
+
+		<listitem>
+		  <para>Aquesta és la carpeta on l'OmegaT crea els fitxers traduïts.</para>
+
+		  <para>Els fitxers traduïts són les versions traduïdes dels fitxers de la carpeta <link linkend="project.folder.source" endterm="project.folder.source.title"/>.</para>
+
+		  <para>Els segments traduïts se substitueixen per la traducció i els segments sense traduir romanen en la llengua d'origen.</para>
+		
+		  <para>L'estructura de carpetes és idèntica a la de la carpeta <link linkend="project.folder.source" endterm="project.folder.source.title"/>. Els fitxers no compatibles amb els filtres de fitxers de l'OmegaT es copien sense modificacions.</para>
+
+		  <para>Utilitzeu <link linkend="menus.project.create.translated.documents" endterm="menus.project.create.translated.documents.title"/> o <link linkend="menus.project.create.current.translated.document" endterm="menus.project.create.current.translated.document.title"/> per a crear els fitxers traduïts.</para>
+
+		  <para>Consulteu la secció <link linkend="project.folder.target" endterm="project.folder.target.title"/> per a conèixer més detalls.</para></listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialogs.project.properties.file.locations.exported.tms">
+		<term id="dialogs.project.properties.file.locations.exported.tms.title"><option>Carpeta de les memòries de traducció exportades</option></term>
+
+		<listitem>
+		  <para>Aquesta és la carpeta on l'OmegaT copia l'estat actual de la traducció en forma de fitxers TMX quan creeu els fitxers traduïts.</para>
+
+		  <note>
+			<para>Per defecte, és la carpeta del projecte en si, però podeu canviar-ne la ubicació perquè sigui més pràctic compartir els fitxers de memòries de traducció exportats.</para>
+
+			<para>Consulteu la guia <link linkend="how.to.tm.share.translation.memories" endterm="how.to.tm.share.translation.memories.title"/> per a conèixer més detalls.</para>
+		  </note>
+		
+		  <para>Els fitxers TMX només contenen els segments dels fitxers emmagatzemats actualment en la carpeta <link linkend="project.folder.source" endterm="project.folder.source.title"/>.</para>
+
+		  <para>Utilitzeu <link linkend="menus.project.create.translated.documents" endterm="menus.project.create.translated.documents.title"/> o <link linkend="menus.project.create.current.translated.document" endterm="menus.project.create.current.translated.document.title"/> per a crear els fitxers traduïts i els fitxers TMX exportats.</para>
+
+		  <variablelist>
+			<varlistentry id="dialogs.project.properties.file.locations.tms.to.export">
+			  <term id="dialogs.project.properties.file.locations.tms.to.export.title"><option>Memòries de traducció que s'exportaran</option></term>
+			  <listitem>
+				<para>Aquesta casella de selecció us permet triar en quins formats voleu que l'OmegaT creï els fitxers TMX anteriors.</para>
+
+				<para>Consulteu la guia <link linkend="how.to.use.tm" endterm="how.to.use.tm.title"/> per a conèixer més detalls.</para>
+		
+				<variablelist>
+				  <varlistentry>
+					<term><option>OmegaT</option></term>
+					<listitem>
+					  <para>Un fitxer TMX de l'«OmegaT» conté les etiquetes que ha creat l'OmegaT en un format que només pot utilitzar correctament un projecte de l'OmegaT.</para>
+					</listitem>
+				  </varlistentry>
+		  
+				  <varlistentry>
+					<term><option>TMX de nivell 1</option></term>
+					<listitem>
+					  <para>Un fitxer TMX de «nivell 1» suprimeix tota la informació de les etiquetes i només conté dades textuals.</para>
+					</listitem>
+				  </varlistentry>
+				
+				  <varlistentry>
+					<term><option>TMX de nivell 2</option></term>
+					<listitem>
+					  <para>Un fitxer TMX de «nivell 2» conté dades textuals juntament amb etiquetes encapsulades en un format compatible amb altres eines de TAO.</para>
+					</listitem>
+				  </varlistentry>
+				</variablelist>
+			  </listitem>
+			</varlistentry>
+		  </variablelist>
+		  
+		  <para>Consulteu la <ulink url="https://www.gala-global.org/tmx-14b#SectionIntroduction">Especificació del format TMX 1.4b</ulink> per a conèixer més detalls.</para>
+		</listitem>
+	  </varlistentry>
+	</variablelist>
+  </section>
+</section>

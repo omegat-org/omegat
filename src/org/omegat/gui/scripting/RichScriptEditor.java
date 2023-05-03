@@ -7,7 +7,7 @@
                2013 Alex Buloichik
                2014 Briac Pilpre (briacp@gmail.com), Yu Tang
                2015 Yu Tang, Aaron Madlon-Kay
-               Home page: http://www.omegat.org/
+               Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
  This file is part of OmegaT.
@@ -23,7 +23,7 @@
  GNU General Public License for more details.
 
  You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 package org.omegat.gui.scripting;
 
@@ -202,7 +202,7 @@ public class RichScriptEditor extends AbstractScriptEditor implements SearchList
 
         item = new JMenuItem();
         Mnemonics.setLocalizedText(item, OStrings.getString("SCW_MENU_REPLACE"));
-        item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_H, Java8Compat.getMenuShortcutKeyMaskEx()));
+        item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_G, Java8Compat.getMenuShortcutKeyMaskEx()));
         item.addActionListener(new ShowReplaceDialogAction());
         menu.add(item);
 
@@ -219,7 +219,7 @@ public class RichScriptEditor extends AbstractScriptEditor implements SearchList
         Action a = m_csp.addBottomComponent(ks, m_findToolBar);
         a.putValue(Action.NAME, OStrings.getString("SCW_MENU_SHOW_FIND_BAR"));
         menu.add(new JMenuItem(a));
-        ks = KeyStroke.getKeyStroke(KeyEvent.VK_H, metaShiftMask);
+        ks = KeyStroke.getKeyStroke(KeyEvent.VK_G, metaShiftMask);
         a = m_csp.addBottomComponent(ks, m_replaceToolBar);
         a.putValue(Action.NAME, OStrings.getString("SCW_MENU_SHOW_REPLACE_BAR"));
         menu.add(new JMenuItem(a));

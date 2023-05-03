@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="how.to.use.tm">
+  <title id="how.to.use.tm.title">Ús de memòries de traducció</title>
+
+  <para>Quan es crea un projecte, inclou una memòria de traducció del projecte buida, el fitxer <link linkend="project.folder.project.save.tmx.title" endterm="project.folder.project.save.tmx.title"/>, en la carpeta <link linkend="project.folder.omegat" endterm="project.folder.omegat.title"/>. Aquesta memòria es va emplenant gradualment a mesura que avanceu la traducció.</para>
+
+	<para>Les traduccions existents s'utilitzen per a accelerar el procés de traducció.</para>
+
+	<itemizedlist>
+	  <listitem>
+		<para>Si una frase ja s'ha traduït una vegada, no cal tornar a traduir-la. Consulteu la propietat del projecte <link linkend="dialogs.project.properties.auto.propagation" endterm="dialogs.project.properties.auto.propagation.title"/>.</para>
+	  </listitem>
+
+	  <listitem>
+		<para>Si una traducció anterior és similar al contingut del segment que esteu traduint, podeu reutilitzar-la en la traducció. Consulteu la subfinestra <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/> per a conèixer més detalls.</para>
+	  </listitem>
+
+	  <listitem>
+		<para>També podeu utilitzar memòries de traducció de referència si les copieu a la carpeta <link linkend="project.folder.tm" endterm="project.folder.tm.title"/> del projecte.</para>
+	  </listitem>
+	</itemizedlist>
+
+  <section id="how.to.use.tm.create.your.tm">
+	<title id="how.to.use.tm.create.your.tm.title">Creació de les vostres pròpies memòries de traducció</title>
+	
+	<para>Quan utilitzeu <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.create.translated.documents" endterm="menus.project.create.translated.documents.title"/> per a crear els fitxers de destinació per a un projecte, l'OmegaT també genera tres memòries de traducció que reflecteixen l'estat actual de la traducció dels fitxers de la carpeta «source». Consulteu la propietat del projecte <link linkend="dialogs.project.properties.file.locations.exported.tms" endterm="dialogs.project.properties.file.locations.exported.tms.title"/> per a conèixer més detalls.</para>
+
+	<para>Cadascun dels tres fitxers és una exportació bilingüe del contingut actual de la traducció. El contingut prové de la memòria del projecte global (fitxer <link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/>), però <emphasis>es limita estrictament</emphasis> al que heu traduït fins al moment.</para>
+
+	<para>També podeu utilitzar l'eina <link linkend="menus.tools" endterm="menus.tools.title"/><link linkend="menus.tools.align.files" endterm="menus.tools.align.files.title"/> per a crear un fitxer TMX a partir de dos fitxers en un format compatible amb l'OmegaT.</para>
+  </section>
+
+  <section id="how.to.use.tm.reuse.tm">
+	<title id="how.to.use.tm.reuse.tm.title">Reutilització de memòries de traducció</title>
+	
+	<para>Teniu dues opcions per a reutilitzar les memòries de traducció d'un projecte anterior:</para>
+
+	<itemizedlist>
+	  <listitem>
+		<para>Obriu el projecte anterior i copieu els nous fitxers d'origen a la carpeta <link linkend="project.folder.source" endterm="project.folder.source.title"/>.</para>
+		
+		<note>
+		  <para>Aquesta és la manera més fàcil de treballar en una versió nova d'un fitxer ja traduït.</para>
+		</note>
+
+		<para>Després de tornar a carregar el projecte, la memòria de traducció s'aplicarà als nous fitxers d'origen. Els segments idèntics es traduiran de manera automàtica. Els segments similars tindran coincidències de la memòria de traducció del projecte quan hi accediu.</para>
+
+	  </listitem>
+	  
+	  <listitem>
+		<para>Com a alternativa, copieu les memòries de referència del projecte anterior a la carpeta <link linkend="project.folder.tm" endterm="project.folder.tm.title"/> del projecte nou.</para>
+
+		<note>
+		  <para>Aquest és el mètode preferit si voleu iniciar la traducció des de zero.</para>
+		</note>
+
+		<para>En funció de la fiabilitat de la memòria, preferireu copiar-la en una o altra de les subcarpetes següents:</para>
+
+		<itemizedlist>
+		  <listitem>
+			<para><link linkend="project.folder.tm.enforce" endterm="project.folder.tm.enforce.title"/>,</para>
+		  </listitem>
+		  <listitem>
+			<para><link linkend="project.folder.tm.auto" endterm="project.folder.tm.auto.title"/>,</para>
+		  </listitem>
+		  <listitem>
+			<para><link linkend="project.folder.tm.penalty" endterm="project.folder.tm.penalty.title"/>,</para>
+		  </listitem>
+		</itemizedlist>
+
+		<para>Les coincidències exactes de les subcarpetes <link linkend="project.folder.tm.enforce" endterm="project.folder.tm.enforce.title"/> i <link linkend="project.folder.tm.auto" endterm="project.folder.tm.auto.title"/> s'inseriran automàticament en la traducció, sense el prefix que l'OmegaT afegeix quan insereix coincidències per sobre d'un llindar. Consulteu la preferència <link linkend="dialogs.preferences.editor.insert.the.best.fuzzy.match" endterm="dialogs.preferences.editor.insert.the.best.fuzzy.match.title"/> per a conèixer més detalls.</para>
+
+		<para>Habiliteu l'opció <link linkend="dialogs.preferences.editor.save.auto-populated.status" endterm="dialogs.preferences.editor.save.auto-populated.status.title"/> perquè l'OmegaT recordi que les coincidències inserides provenien d'aquestes carpetes.</para>
+
+		<para>Utilitzeu els menús de navegació de <link linkend="menus.goto" endterm="menus.goto.title"/><link linkend="menus.goto.auto.populated.segments" endterm="menus.goto.auto.populated.segments.title"/> per a navegar a un segment inserit automàticament.</para>
+	  </listitem>
+	</itemizedlist>
+	
+    <section id="how.to.tm.read.and.write">
+      <title id="how.to.tm.read.and.write.title">Lectura de memòries de traducció d'altres eines</title>
+
+      <para>L'OmegaT pot llegir memòries que segueixin l'estàndard TMX generades per altres eines.</para>
+
+      <para>Algunes eines generen fitxers TMX no vàlids en determinades condicions. Els haureu de corregir si els voleu utilitzar com a memòries de referència; en cas contrari, l'OmegaT indicarà que s'ha produït un error i no els podrà carregar. En general, les correccions són senzilles i el missatge d'error proporcionat per l'OmegaT us ajudarà a identificar el problema. També podeu demanar consell al grup d'usuaris si teniu problemes.</para>
+	</section>
+
+	<section id="how.to.use.tm.store.your.tm">
+	  <title id="how.to.use.tm.store.your.tm.title">Gestió de les memòries de traducció</title>
+
+	  <para>És possible que vulgueu emmagatzemar les memòries de traducció en carpetes independents, per client o per especialitat, per a reutilitzar-les ràpidament quan calgui. Es pot utilitzar qualsevol carpeta modificable en comptes de la carpeta <link linkend="project.folder.tm" endterm="project.folder.tm.title"/> del projecte. Consulteu la secció <link linkend="dialogs.project.properties.file.locations" endterm="dialogs.project.properties.file.locations.title"/> del quadre de diàleg de propietats del projecte.</para>
+	</section>
+  
+	<section id="how.to.tm.creating.a.tm.for.selected.documents">
+      <title id="how.to.tm.creating.a.tm.for.selected.documents.title">Creació d'una memòria de traducció específica d'un conjunt de documents</title>
+
+      <para>En situacions en què calgui compartir un fitxer TMX que contingui només el text d'uns fitxers específics i exclogui la resta de contingut, seguiu el procediment següent:</para>
+
+      <itemizedlist>
+		<listitem>
+          <para>Copieu només els documents amb contingut que vulgueu incloure a la carpeta <filename class="directory">source</filename> del projecte.</para>
+		</listitem>
+		
+		<listitem>
+          <para>Obriu el projecte.</para>
+		</listitem>
+
+		<listitem>
+		  <para>Utilitzeu <link linkend="menus.goto" endterm="menus.goto.title"/><link linkend="menus.goto.next.untranslated.segment" endterm="menus.goto.next.untranslated.segment.title"/> per a cercar qualsevol segment sense traduir (i traduir-lo, si cal).</para>
+		</listitem>
+
+		<listitem>
+		  <para>Utilitzeu <link linkend="menus.tools" endterm="menus.tools.title"/><link linkend="menus.tools.check.issues" endterm="menus.tools.check.issues.title"/> per a comprovar si hi ha errors.</para>
+		</listitem>
+
+		<listitem>
+		  <para>Utilitzeu <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.create.translated.documents" endterm="menus.project.create.translated.documents.title"/> per a crear els fitxers TMX corresponents al contingut actual.</para>
+		</listitem>
+      </itemizedlist>
+
+      <para>Els fitxers TMX de la carpeta de memòries de traducció exportades ara contenen només el text original i traduït, en el parell de llengües seleccionat, dels fitxers que heu copiat a la carpeta «source». Consulteu la propietat del projecte <link linkend="dialogs.project.properties.file.locations.exported.tms" endterm="dialogs.project.properties.file.locations.exported.tms.title"/> per a conèixer més detalls.</para>
+  </section>
+</section>
+
+<section id="how.to.tm.share.translation.memories">
+  <title id="how.to.tm.share.translation.memories.title">Ús compartit de memòries de traducció</title>
+
+  <para>En el cas de grans projectes que impliquin un equip de traductors, és més fàcil que tothom que hi estigui implicat comparteixi unes memòries de traducció comunes en comptes d'enviar-se versions locals constantment.</para>
+
+  <para>Hi ha dues maneres de compartir memòries de traducció:</para>
+
+  <variablelist>
+	<varlistentry>
+	  <term>Mètode «prou bo»</term>
+	  <listitem>
+		
+		<para>Consulteu la secció <link linkend="how.to.use.tm.create.your.tm" endterm="how.to.use.tm.create.your.tm.title"/> anterior.</para>
+
+		<para>Si deseu el fitxer TMX en una carpeta en un disc compartit, podeu demanar a l'altra persona que assigni aquesta carpeta com a carpeta <link linkend="project.folder.tm" endterm="project.folder.tm.title"/> per a la traducció actual.</para>
+
+		<para>De la mateixa manera, podeu demanar-li que desi els fitxers TMX del projecte en una carpeta en un disc compartit que assignareu com a carpeta <link linkend="project.folder.tm" endterm="project.folder.tm.title"/> per a la traducció actual.</para>
+
+		<para>L'OmegaT reconeix al moment les modificacions dels fitxers TMX. Per tant, cada vegada que un usuari creï o modifiqui un fitxer TMX mitjançant <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.create.translated.documents" endterm="menus.project.create.translated.documents.title"/>, l'altre usuari no haurà de fer res perquè el fitxer TMX es reconegui localment.</para>
+
+		<para>Aquest enfocament també funciona per a compartir glossaris. En aquest cas, el glossari modificable del projecte (amb un nom diferent del nom per defecte per a evitar sobreescriure el fitxer) es troba en una carpeta de glossari compartida. Consulteu l'annex <link linkend="app.glossaries" endterm="app.glossaries.title"/> per a conèixer més detalls.</para>
+
+		<note>
+		  <para>Aquest mètode d'ús compartit funciona bé quan el retard entre les actualitzacions dels fitxers TMX no és important: per exemple, quan un traductor envia les dades a un revisor unes poques vegades al dia.</para>
+		</note>
+	  </listitem>
+	</varlistentry>
+	
+	<varlistentry>
+	  <term>Mètode tècnic</term>
+	  <listitem>
+		<para>L'OmegaT utilitza sistemes de control de versions col·laboratius per a compartir dades.</para>
+
+		<para>Aquesta mena de sistemes es poden utilitzar, instal·lar i administrar de manera gratuïta i tenen un ús molt estès en el món del desenvolupament informàtic, per la qual cosa són extremadament robustos.</para>
+
+		<para>Consulteu la guia <link linkend="how.to.setup.team.project" endterm="how.to.setup.team.project.title"/> per a conèixer més detalls.</para>
+	  </listitem>
+	</varlistentry>
+  </variablelist>
+  <warning>
+	<para>Be cautious when you put a whole project in a file-sharing system like
+	DropBox, OneCloud and the likes.</para>
+	<para><emphasis>Such systems are not designed to keep track of the internal
+	modifications of a given file.</emphasis></para>
+	<para>An OmegaT project is a complex set of files. Such systems will not
+	always be able to provide you with the most recent version of your data, may
+	even lock some files for no obvious reasons and can even corrupt team
+	project related files.</para>
+	<para>Make sure that you have properly tested your project layout and set up
+	a separate data backup before sharing data in such a system.</para>
+  </warning>
+</section>
+
+<section id="how.to.tm.bridge.two.languages">
+  <title id="how.to.tm.bridge.two.languages.title">Traduccions de referència</title>
+
+  <para>L'OmegaT mostra les coincidències parcials en la subfinestra <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/>. Per defecte, aquestes coincidències es limiten a les llengües d'origen i de destinació definides en el quadre de diàleg <link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/>, però també podeu afegir coincidències en llengües que no siguin la llengua de destinació. Consulteu la preferència <link linkend="dialog.preferences.tm.matches.other.languages" endterm="dialog.preferences.tm.matches.other.languages.title"/> per a conèixer més detalls.</para>
+
+  <para>Amb l'OmegaT, també podeu mostrar una tercera llengua <emphasis>just a sota</emphasis> del segment d'origen per a utilitzar-la com a referència alternativa per al text d'origen.</para>
+
+  <example id="bridge.english.and.french.with.japanese">
+	<title id="replace.with.allemand.title">Traducció de l'anglès al francès amb referència en japonès</title>
+	<para>
+	  <programlisting>— ¶ —————————————————————
+<token>A whitespace character: [ \t\n\x0B\f\r]
+fr-ZB: Un caractère d'espacement (espace, tabulation, etc.) :  [ \t\n\x0B\f\r]
+ja-RV: 空白文字：[ \t\n\x0B\f\r]</token>
+Un caractère d'espacement : [ \t\n\r\f\x0B]<token>&lt;segment 3075 ¶&gt;</token>
+— ¶ —————————————————————</programlisting></para>
+<para>La primera línia és el text original en anglès, la segona és una versió anterior en francès amb un codi de llengua arbitrari, la tercera és la versió en japonès amb un altre codi de llengua arbitrari i la quarta és la traducció actual al francès.</para>
+  </example>
+  
+    <para>Per a aconseguir això:</para>
+
+	<orderedlist>
+	  <listitem>
+		<para>Creeu una carpeta anomenada <filename class="directory">tmx2source</filename> en la carpeta <link linkend="project.folder.tm" endterm="project.folder.tm.title"/>.</para>
+	  </listitem>
+
+	  <listitem>
+		<para>Copieu-hi la memòria de traducció entre la llengua d'origen del projecte i la llengua de referència.</para>
+	  </listitem>
+
+	  <listitem>
+		<para>Canvieu el nom de la memòria a <filename>LL_CC.tmx</filename> o <filename>LL-CC.tmx</filename>. <emphasis>LL</emphasis> és el codi de llengua intern que voleu mostrar com a referència i <emphasis>CC</emphasis> és un codi arbitrari de dues lletres.</para>
+	  </listitem>
+	</orderedlist>
+	
+    <note>
+	  <para>Podeu utilitzar qualsevol nombre de fitxers TMX en tants parells de llengües diferents com vulgueu com a llengües de «referència».</para>	  
+	</note>
+  </section>
+</section>

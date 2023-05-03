@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="configuration.folder">
+  <title id="configuration.folder.title">設定フォルダー</title>
+  <para>設定フォルダーには、OmegaT設定の大部分が格納されます。</para>
+  
+  <para><link linkend="menus.options" endterm="menus.options.title"/><link linkend="menus.options.access.configuration.folder" endterm="menus.options.access.configuration.folder.title"/>を使用してアクセスします。</para>
+
+  <section id="configuration.folder.location">
+    <title id="configuration.folder.location.title">場所</title>	
+	<para>標準設定フォルダーの場所はシステムによって異なります(<emphasis>~</emphasis>の文字はホームディレクトリを表します)。<variablelist>
+	  <varlistentry><term>Linux</term><listitem><para><filename>~/.omegat</filename></para></listitem></varlistentry>
+	  <varlistentry><term>macOS</term><listitem><para><filename>~/Library/Preferences/OmegaT</filename></para></listitem></varlistentry>
+	  <varlistentry><term>Windows</term><listitem><para><filename>~\AppData\Roaming\OmegaT</filename></para></listitem></varlistentry>
+	</variablelist></para>
+
+	<note>
+	  <para>コマンドラインから起動する場合には、標準以外のOmegaT設定フォルダーを指定できます。詳細については、 <link endterm="launch.with.command.line.title" linkend="launch.with.command.line"/>を参照してください。</para>
+
+	  <para>変更された環境設定は、プロジェクトで使用される構成フォルダーに保存されます。デフォルトの設定フォルダーを使用しない場合には、<link linkend="chapter.dialogs.preferences">環境設定</link>で行われた変更はすべて指定された設定フォルダーに保存されます。そのため、デフォルトの設定フォルダーで作業を再開しても反映されません。</para>
+	</note>
+  </section>
+  
+  <section id="configuration.folder.default.contents">
+    <title id="configuration.folder.default.contents.title">デフォルトで保存されるファイル</title>
+	<variablelist>
+	  <varlistentry id="configuration.folder.default.contents.omegat.prefs">
+		<term id="configuration.folder.default.contents.omegat.prefs.title">omegat.prefs</term>
+		<listitem>
+		  <para>このファイルには、ユーザーの重要な環境設定が保存されます。</para>
+
+		  <para>環境設定では、ユーザーインターフェースに対応する設定が無いものがあります。それらの設定は、直接編集して反映させます。</para>
+		  
+		  <example id="no.source.file.display">
+			<title id="no.source.file.display.title">翻訳対象ファイル一覧を自動表示しない</title>
+			<para>プロジェクトを開いたときに、翻訳対象ファイル一覧ウィンドウを自動的に開かないようにするには、<token>&lt;project_files_show_on_load&gt;</token>を検索して、<token>true</token>を<token>false</token>に置き換える編集をします。</para>
+
+			<para><programlisting>&lt;project_files_show_on_load&gt;<token>false</token>&lt;/project_files_show_on_load&gt;</programlisting></para>
+		  </example>
+		  
+		  <note>
+			<para>この設定は、現在手動で編集しなければなりません。</para>
+		  </note>
+		</listitem>
+	  </varlistentry>
+	  
+	  <varlistentry id="configuration.folder.default.contents.uilayout">
+		<term id="configuration.folder.default.contents.uilayout.title">uiLayout.xml</term>
+		<listitem>
+		  <para>このファイルでは、OmegaTの画面レイアウトが保存されています。</para>
+		</listitem>
+	  </varlistentry>
+	  
+	  <varlistentry id="configuration.folder.default.contents.logs">
+		<term id="configuration.folder.default.contents.logs.title">logs/</term>
+		<listitem>
+		  <para>このフォルダーには、たくさんのログファイルが保存されています。最重要なのは、 <filename>OmegaT.log</filename>です。</para>
+
+		  <para>これらのファイルには、様々な内部の状態が記録されており、OmegaT実行中のプログラム内のイベントメッセージが記録されています。もしOmegaTの動作がおかしいときは、サポートのコミュニティに報告するときに、このファイルを添付するようにしてください。</para>
+
+		  <para><link linkend="menus.help" endterm="menus.help.title"/><link linkend="menus.help.log" endterm="menus.help.log.title"/>を使用して、このファイルを閲覧できます。</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="configuration.folder.default.contents.script">
+		<term id="configuration.folder.default.contents.script.title">script/</term>
+		<listitem>
+		  <para>スクリプト機能を使用する場合、このフォルダーに最大で3つのテキストファイルが保存されます：</para>
+
+		  <variablelist>
+			<varlistentry id="configuration.folder.default.contents.script.selection">
+			  <term id="configuration.folder.default.contents.script.selection.title">selection.txt</term>
+			  <listitem>
+				<para><link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.export.selection" endterm="menus.edit.export.selection.title"/>を使用したときに、画面で選択されているテキストが格納されます。ファイル内のテキストは、スクリプト機能が呼び出されるたびに置き換えられます。</para>
+			  </listitem>
+			</varlistentry>
+		  
+			<varlistentry id="configuration.folder.default.contents.script.source">
+			  <term id="configuration.folder.default.contents.script.source.title">source.txt</term>
+			  <listitem>
+				<para><link linkend="dialogs.preferences.editor.export.the.segment.to.text.files" endterm="dialogs.preferences.editor.export.the.segment.to.text.files.title"/>設定が有効になると、編集中の分節の<emphasis>原文テキスト</emphasis>がこのファイルに入ります。ファイル内のテキストは、次の分節に移動するたびに置き換えられます。</para>
+			  </listitem>
+			</varlistentry>
+
+			<varlistentry id="configuration.folder.default.contents.script.target">
+			  <term id="configuration.folder.default.contents.script.target.title">target.txt</term>
+			  <listitem>
+				<para><link linkend="dialogs.preferences.editor.export.the.segment.to.text.files" endterm="dialogs.preferences.editor.export.the.segment.to.text.files.title"/>設定が有効になると、編集中の分節の<emphasis>訳文テキスト</emphasis>がこのファイルに入ります。ファイル内のテキストは、次の分節に移動するたびに置き換えられます。</para>
+			  </listitem>
+			</varlistentry>
+		  </variablelist>
+
+		  <para>これらの3つのファイルをとおして、シェルスクリプトなどのローカルプログラムで自動処理するときに、OmegaTのコンテンツに簡単にアクセスできるようになります。</para>
+		</listitem>
+	  </varlistentry>
+	</variablelist>
+  </section>
+  
+  <section id="configuration.folder.extra.contents">
+    <title id="configuration.folder.extra.contents.title">その他のファイルたち</title>
+
+	<variablelist>
+	  <varlistentry id="configuration.folder.extra.contents.editorshortcuts">
+		<term id="configuration.folder.extra.contents.editorshortcuts.title">EditorShortcuts.properties</term>
+		<listitem>
+		  <para>これは、編集ウィンドウのショートカットをカスタマイズするためのパラメータのファイルです。詳細は、付録の <link linkend="app.shortcuts.customization" endterm="app.shortcuts.customization.title"/> をご覧ください。</para>
+		</listitem>
+	  </varlistentry>
+	
+	  <varlistentry id="configuration.folder.extra.contents.maninmenushortcut">
+		<term id="configuration.folder.extra.contents.maninmenushortcut.title">MainMenuShortcuts.properties</term>
+		<listitem>
+		  <para>これは、ユーザインタフェースのショートカットを変更するパラメータのファイルです。詳細は、付録の <link linkend="app.shortcuts.customization" endterm="app.shortcuts.customization.title"/> をご覧ください。</para>
+		</listitem>
+	  </varlistentry>
+	
+	  <varlistentry id="configuration.folder.extra.contents.filters">
+		<term id="configuration.folder.extra.contents.filters.title">filters.xml</term>
+		<listitem>
+		  <para>これは、ファイル種別ごとのフィルター設定が保存されるファイルです。詳細については、設定-<link linkend="dialogs.preferences.file.filters" endterm="dialogs.preferences.file.filters.title"/>を参照してください。</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="configuration.folder.extra.contents.finder">
+		<term id="configuration.folder.extra.contents.finder.title">finder.xml</term>
+		<listitem>
+		  <para>これは、外部検索の設定パラメータが保存されるファイルです。詳細については、設定-<link linkend="dialogs.preferences.external.searches" endterm="dialogs.preferences.external.searches.title"/>を参照してください。</para>
+		</listitem>
+	</varlistentry>
+	
+	<varlistentry id="configuration.folder.extra.contents.omegat.autotext">
+	  <term id="configuration.folder.extra.contents.omegat.autotext.title">omegat.autotext</term>
+	  <listitem>
+		<para>これは、自動テキスト置換の設定パラメータが保存されるファイルです。詳細については、設定-<link linkend="dialog.preferences.auto.completion" endterm="dialog.preferences.auto.completion.title"/>を参照してください。</para>
+	  </listitem>
+	</varlistentry>
+
+	<varlistentry id="configuration.folder.extra.contents.repositories">
+	  <term id="configuration.folder.extra.contents.repositories.title">repositories.properties</term>
+	  <listitem>
+		<para>これは、チームプロジェクトのリポジトリーのログイン情報が保存されるファイルです。<warning><para>このファイルは、暗号化されていません。</para></warning>詳細については、 <link linkend="how.to.setup.team.project" endterm="how.to.setup.team.project.title"/>を参照してください。</para>
+	  </listitem>
+	</varlistentry>
+
+	<varlistentry id="configuration.folder.extra.contents.segmentation">
+	  <term id="configuration.folder.extra.contents.segmentation.title">segmentation.conf</term>
+	  <listitem>
+		<para>これは、分節化ルールをカスタマイズするためのファイルです。詳細については、設定-<link linkend="dialogs.preferences.segmentation.setup" endterm="dialogs.preferences.segmentation.setup.title"/>を参照してください。</para>
+	  </listitem>
+	</varlistentry>
+	
+	<varlistentry id="configuration.folder.extra.contents.plugin">
+	  <term id="configuration.folder.extra.contents.plugin.title">plugins/</term>
+	  <listitem>
+		<para>このフォルダは、OmegaTのプラグインをインストールするための標準フォルダーです。詳細は<link linkend="dialogs.preferences.plugins" endterm="dialogs.preferences.plugins.title"/>の設定を参照してください。</para>
+		<para>プログラムの<link linkend="application.folder.plugins" endterm="application.folder.plugins.title"/>フォルダーにプラグインをインストールすることもできます。</para>
+	  </listitem>
+	</varlistentry>
+
+	<varlistentry id="configuration.folder.extra.contents.spelling">
+	  <term id="configuration.folder.extra.contents.spelling.title">spelling/</term>
+	  <listitem>
+		<para>このフォルダには、綴り確認用の辞書が格納されます。詳細については、設定-<link linkend="dialog.preferences.spellchecker" endterm="dialog.preferences.spellchecker.title"/>を参照してください。</para>
+	  </listitem>
+	</varlistentry>
+	</variablelist>
+  </section>
+</section>

@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2016 Aaron Madlon-Kay
-               Home page: http://www.omegat.org/
+               Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
  This file is part of OmegaT.
@@ -20,7 +20,7 @@
  GNU General Public License for more details.
 
  You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
 package org.omegat.gui.preferences.view;
@@ -59,15 +59,15 @@ public class HistoryAutoCompleterOptionsController extends BasePreferencesContro
     @Override
     protected void initFromPrefs() {
         panel.historyCompletionCheckBox
-                .setSelected(Preferences.isPreference(Preferences.AC_HISTORY_COMPLETION_ENABLED));
+                .setSelected(Preferences.isPreferenceDefault(Preferences.AC_HISTORY_COMPLETION_ENABLED, true));
         panel.historyPredictionCheckBox
-                .setSelected(Preferences.isPreference(Preferences.AC_HISTORY_PREDICTION_ENABLED));
+                .setSelected(Preferences.isPreferenceDefault(Preferences.AC_HISTORY_PREDICTION_ENABLED, true));
     }
 
     @Override
     public void restoreDefaults() {
-        panel.historyCompletionCheckBox.setSelected(false);
-        panel.historyPredictionCheckBox.setSelected(false);
+        panel.historyCompletionCheckBox.setSelected(true);
+        panel.historyPredictionCheckBox.setSelected(true);
     }
 
     @Override

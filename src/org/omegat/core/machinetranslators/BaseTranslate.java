@@ -5,8 +5,8 @@
 
  Copyright (C) 2010-2015 Alex Buloichik
                2013 Didier Briel
-               2022 Hiroshi Miura
-               Home page: http://www.omegat.org/
+               2022,2023 Hiroshi Miura
+               Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
  This file is part of OmegaT.
@@ -22,16 +22,13 @@
  GNU General Public License for more details.
 
  You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
 package org.omegat.core.machinetranslators;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.nio.charset.StandardCharsets;
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javax.swing.JCheckBoxMenuItem;
 
@@ -41,6 +38,7 @@ import org.omegat.core.Core;
 import org.omegat.gui.exttrans.IMTGlossarySupplier;
 import org.omegat.gui.exttrans.IMachineTranslation;
 import org.omegat.util.CredentialsManager;
+import org.omegat.util.HTMLUtils;
 import org.omegat.util.Language;
 import org.omegat.util.PatternConsts;
 import org.omegat.util.Preferences;
@@ -54,16 +52,11 @@ import org.omegat.util.Preferences;
  */
 public abstract class BaseTranslate implements IMachineTranslation {
 
+    private static final String FILLER = "...";
+    private static final int FILLER_LEN = FILLER.length();
+
     protected boolean enabled;
     protected IMTGlossarySupplier glossarySupplier;
-
-    protected static final Pattern RE_HTML  = Pattern.compile("&#([0-9]+);");
-
-    /**
-     * Machine translation implementation can use this cache for skip requests twice. Cache will not be
-     * cleared during OmegaT work, but it's okay - nobody will work weeks without exit.
-     */
-    private final Map<String, String> cache = Collections.synchronizedMap(new HashMap<String, String>());
 
     public BaseTranslate() {
         // Options menu item
@@ -72,7 +65,9 @@ public abstract class BaseTranslate implements IMachineTranslation {
         menuItem.addActionListener(e -> setEnabled(menuItem.isSelected()));
         enabled = Preferences.isPreference(getPreferenceName());
         menuItem.setState(enabled);
-        Core.getMainWindow().getMainMenu().getMachineTranslationMenu().add(menuItem);
+        if (Core.getMainWindow() != null) { // can be null in unit test
+            Core.getMainWindow().getMainMenu().getMachineTranslationMenu().add(menuItem);
+        }
         // Preferences listener
         Preferences.addPropertyChangeListener(getPreferenceName(), e -> {
             boolean newValue = (Boolean) e.getNewValue();
@@ -81,38 +76,49 @@ public abstract class BaseTranslate implements IMachineTranslation {
         });
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isEnabled() {
         return enabled;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
         Preferences.setPreference(getPreferenceName(), enabled);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setGlossarySupplier(IMTGlossarySupplier glossarySupplier) {
         this.glossarySupplier = glossarySupplier;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getTranslation(Language sLang, Language tLang, String text) throws Exception {
         if (enabled) {
-            return translate(sLang, tLang, text);
+            return translate(sLang, tLang, getTruncateText(text));
         } else {
             return null;
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getCachedTranslation(Language sLang, Language tLang, String text) {
-        if (enabled) {
-            return getFromCache(sLang, tLang, text);
-        } else {
-            return null;
-        }
+        return null;
     }
 
     protected abstract String getPreferenceName();
@@ -120,11 +126,15 @@ public abstract class BaseTranslate implements IMachineTranslation {
     protected abstract String translate(Language sLang, Language tLang, String text) throws Exception;
 
     /**
-     * Attempt to clean spaces added around tags by machine translators. Do it by comparing spaces between the source
-     * text and the machine translated text.
-     * @param machineText The text returned by the machine translator
-     * @param sourceText The original source segment
-     * @return
+     * Attempt to clean spaces added around tags by machine translators. Do it
+     * by comparing spaces between the source text and the machine translated
+     * text.
+     * 
+     * @param machineText
+     *            The text returned by the machine translator
+     * @param sourceText
+     *            The original source segment
+     * @return replaced text
      */
     protected String cleanSpacesAroundTags(String machineText, String sourceText) {
 
@@ -132,7 +142,10 @@ public abstract class BaseTranslate implements IMachineTranslation {
         Matcher tag = PatternConsts.OMEGAT_TAG_SPACE.matcher(machineText);
         while (tag.find()) {
             String searchTag = tag.group();
-            if (sourceText.indexOf(searchTag) == -1) { // The tag didn't appear with a trailing space in the source text
+            if (!sourceText.contains(searchTag)) {
+                // The tag didn't appear
+                // with a trailing space
+                // in the source text
                 String replacement = searchTag.substring(0, searchTag.length() - 1);
                 machineText = machineText.replace(searchTag, replacement);
             }
@@ -142,33 +155,82 @@ public abstract class BaseTranslate implements IMachineTranslation {
         tag = PatternConsts.SPACE_OMEGAT_TAG.matcher(machineText);
         while (tag.find()) {
             String searchTag = tag.group();
-            if (sourceText.indexOf(searchTag) == -1) { // The tag didn't appear with a leading space in the source text
-                String replacement = searchTag.substring(1, searchTag.length());
+            if (!sourceText.contains(searchTag)) {
+                // The tag didn't appear
+                // with a leading space
+                // in the source text
+                String replacement = searchTag.substring(1);
                 machineText = machineText.replace(searchTag, replacement);
             }
         }
         return machineText;
     }
 
+    /**
+     * Get translation from cache.
+     * <p>
+     * {@link org.omegat.core.machinetranslators.BaseTranslate} class always
+     * return null. When connector want to use cache layer, it can use
+     * {@link org.omegat.core.machinetranslators.BaseCachedTranslate} class
+     * instead.
+     * </p>
+     * 
+     * @param sLang
+     *            Source langauge.
+     * @param tLang
+     *            Target language.
+     * @param text
+     *            source text.
+     * @return translated text if exists in cache, otherwise null.
+     */
+    @Deprecated(since="6.1")
     protected String getFromCache(Language sLang, Language tLang, String text) {
-        return cache.get(sLang + "/" + tLang + "/" + text);
+        return null;
     }
 
+    /**
+     * Put translation to cache.
+     * <p>
+     * {@link org.omegat.core.machinetranslators.BaseTranslate} class do
+     * nothing. When connector want to use cache layer, it can inherit
+     * {@link org.omegat.core.machinetranslators.BaseCachedTranslate} class and
+     * implement
+     * {@link org.omegat.core.machinetranslators.BaseCachedTranslate#translate}
+     * method.
+     * </p>
+     * 
+     * @param sLang
+     *            source langauge.
+     * @param tLang
+     *            target language.
+     * @param text
+     *            source text.
+     * @param result
+     *            translation.
+     * @return given translation.
+     */
+    @Deprecated(since="6.1")
     protected String putToCache(Language sLang, Language tLang, String text, String result) {
-        return cache.put(sLang + "/" + tLang + "/" + text, result);
+        return result;
     }
 
     /**
      * Clear the machine translation cache.
+     * <p>
+     * {@link org.omegat.core.machinetranslators.BaseTranslate} class do
+     * nothing. When connector want to use cache layer, it can use
+     * {@link org.omegat.core.machinetranslators.BaseCachedTranslate} class
+     * instead. You can all it when you want to clear cache; ex. change server
+     * config.
+     * </p>
      */
     protected void clearCache() {
-        cache.clear();
     }
 
     /**
-     * Retrieve a credential with the given ID. First checks temporary system properties, then falls back to
-     * the program's persistent preferences. Store a credential with
-     * {@link #setCredential(String, String, boolean)}.
+     * Retrieve a credential with the given ID. First checks temporary system
+     * properties, then falls back to the program's persistent preferences.
+     * Store a credential with {@link #setCredential(String, String, boolean)}.
      *
      * @param id
      *            ID or key of the credential to retrieve
@@ -183,16 +245,18 @@ public abstract class BaseTranslate implements IMachineTranslation {
     }
 
     /**
-     * Store a credential. Credentials are stored in temporary system properties and, if
-     * <code>temporary</code> is <code>false</code>, in the program's persistent preferences encoded in
-     * Base64. Retrieve a credential with {@link #getCredential(String)}.
-     *
+     * Store a credential. Credentials are stored in temporary system properties
+     * and, if <code>temporary</code> is <code>false</code>, in the program's
+     * persistent preferences encoded in Base64. Retrieve a credential with
+     * {@link #getCredential(String)}.
+     * 
      * @param id
      *            ID or key of the credential to store
      * @param value
      *            value of the credential to store
      * @param temporary
-     *            if <code>false</code>, encode with Base64 and store in persistent preferences as well
+     *            if <code>false</code>, encode with Base64 and store in
+     *            persistent preferences as well
      */
     protected void setCredential(String id, String value, boolean temporary) {
         System.setProperty(id, value);
@@ -200,10 +264,11 @@ public abstract class BaseTranslate implements IMachineTranslation {
     }
 
     /**
-     * Determine whether a credential has been stored "temporarily" according to the definition in
-     * {@link #setCredential(String, String, boolean)}. The result will be <code>false</code> if the
-     * credential is not stored at all, or if it is stored permanently.
-     *
+     * Determine whether a credential has been stored "temporarily" according to
+     * the definition in {@link #setCredential(String, String, boolean)}. The
+     * result will be <code>false</code> if the credential is not stored at all,
+     * or if it is stored permanently.
+     * 
      * @param id
      *            ID or key of credential
      * @return <code>true</code> only if the credential is stored temporarily
@@ -214,22 +279,64 @@ public abstract class BaseTranslate implements IMachineTranslation {
         return !CredentialsManager.getInstance().isStored(id) && !System.getProperty(id, "").isEmpty();
     }
 
+    /**
+     * Give maximum limit of text bytes which API accepted. 0 means no limit.
+     * 
+     * @return max bytes.
+     */
+    protected int getMaxTextBytes() {
+        return 0;
+    }
+
+    /**
+     * Give maximum limit of text codepoints which API accepted. 0 means no
+     * limit.
+     * 
+     * @return max codepoints.
+     */
+    protected int getMaxTextLength() {
+        return 0;
+    }
+
+    /**
+     * Get truncated text into maximum text length that MT engine API allowed.
+     * 
+     * @param text
+     *            original source text.
+     * @return truncated text.
+     */
+    protected String getTruncateText(String text) {
+        if (getMaxTextBytes() <= 0) {
+            return text;
+        }
+        if (getMaxTextLength() <= 0) {
+            return text;
+        }
+        String result;
+        if (getMaxTextBytes() > 0) {
+            int bytesLength = getTextBytes(text);
+            if (bytesLength <= getMaxTextBytes()) {
+                return text;
+            }
+            final int overflow = bytesLength - getMaxTextBytes();
+            int ind = text.length() - (overflow >> 2) - FILLER_LEN;
+            int start = text.length() - overflow + FILLER_LEN;
+            do {
+                result = text.substring(0, ind) + FILLER;
+                ind--;
+            } while (ind > start && getTextBytes(result) > getMaxTextBytes());
+        } else {
+            result = text.substring(0, getMaxTextLength() - FILLER_LEN) + FILLER;
+        }
+        return result;
+    }
+
+    private int getTextBytes(String text) {
+        return text.getBytes(StandardCharsets.UTF_8).length;
+    }
 
     /** Convert entities to character. Ex: "&#39;" to "'". */
     protected static String unescapeHTML(String text) {
-
-        text = text.replace("&quot;", "\"")
-                .replace("&gt;", ">")
-                .replace("&lt;", "<")
-                .replace("&amp;", "&");
-
-        Matcher m = RE_HTML.matcher(text);
-        while (m.find()) {
-            String g = m.group();
-            int codePoint = Integer.parseInt(m.group(1));
-            String cpString = String.valueOf(Character.toChars(codePoint));
-            text = text.replace(g, cpString);
-        }
-        return text;
+        return HTMLUtils.entitiesToChars(text);
     }
 }

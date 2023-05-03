@@ -5,7 +5,7 @@
 
  Copyright (C) 2016 Aaron Madlon-Kay
                2022 Hiroshi Miura
-               Home page: http://www.omegat.org/
+               Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
  This file is part of OmegaT.
@@ -21,7 +21,7 @@
  GNU General Public License for more details.
 
  You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
 package org.omegat.gui.preferences.view;
@@ -30,11 +30,17 @@ import java.awt.Dimension;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.List;
 import java.net.URL;
 
 import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.RowSorter;
+import javax.swing.SortOrder;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.table.TableRowSorter;
@@ -161,7 +167,6 @@ public class PluginsPreferencesController extends BasePreferencesController {
         panel.tablePluginsInfo.getSelectionModel().addListSelectionListener(this::selectRowAction);
         panel.tablePluginsInfo.setPreferredScrollableViewportSize(panel.tablePluginsInfo.getPreferredSize());
         TableColumnSizer.autoSize(panel.tablePluginsInfo, 0, true);
-
         panel.browsePluginsButton.addActionListener(e -> {
             try {
                 DesktopWrapper.browse(URI.create(PLUGINS_WIKI_URL));

@@ -11,7 +11,7 @@
                2014 Alex Buloichik, Piotr Kulik, Aaron Madlon-Kay
                2015 Aaron Madlon-Kay
                2017-2022 Thomas Cordonnier
-               Home page: http://www.omegat.org/
+               Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
  This file is part of OmegaT.
@@ -27,7 +27,7 @@
  GNU General Public License for more details.
 
  You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
 package org.omegat.core.search;
@@ -154,24 +154,25 @@ public class Searcher {
                     String key = entry.getSrcText() + entry.getTranslation();
                     if (entry.getEntryNum() == ENTRY_ORIGIN_TRANSLATION_MEMORY) {
                         if (m_tmxMap.containsKey(key) && (m_tmxMap.get(key) > 0)) {
-                            String newPreamble = StringUtil.format(OStrings.getString("SW_FILE_AND_NR_OF_MORE"),
-                                    entry.getPreamble(), m_tmxMap.get(key));
-                            entry.setPreamble(newPreamble);
+                            entry.setPreamble(updatePreamble(entry, m_tmxMap.get(key)));
                         }
                     } else if (entry.getEntryNum() > ENTRY_ORIGIN_PROJECT_MEMORY) {
                         // at this stage each PM entry num is increased by 1
                         if (m_entryMap.containsKey(key) && (m_entryMap.get(key) > 0)) {
-                            String newPreamble = StringUtil.isEmpty(entry.getPreamble())
-                                    ? StringUtil.format(OStrings.getString("SW_NR_OF_MORE"), m_entryMap.get(key))
-                                    : StringUtil.format(OStrings.getString("SW_FILE_AND_NR_OF_MORE"),
-                                            entry.getPreamble(), m_entryMap.get(key));
-                            entry.setPreamble(newPreamble);
+                            entry.setPreamble(updatePreamble(entry, m_entryMap.get(key)));
                         }
                     }
                 }
             }
         }
         return m_searchResults;
+    }
+
+    private String updatePreamble(SearchResultEntry entry, int matchNumber) {
+        return StringUtil.isEmpty(entry.getPreamble())
+                ? StringUtil.format(OStrings.getString("SW_NR_MATCHES"), 1 + matchNumber)
+                : StringUtil.format(OStrings.getString("SW_FILE_AND_NR_OF_MORE"),
+                        entry.getPreamble(), matchNumber);
     }
 
     /**

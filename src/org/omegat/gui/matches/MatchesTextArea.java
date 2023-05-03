@@ -10,7 +10,7 @@
                2013 Zoltan Bartko, Aaron Madlon-Kay
                2014 Aaron Madlon-Kay
                2015 Yu Tang
-               Home page: http://www.omegat.org/
+               Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
  This file is part of OmegaT.
@@ -26,7 +26,7 @@
  GNU General Public License for more details.
 
  You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
 package org.omegat.gui.matches;
@@ -62,6 +62,7 @@ import javax.swing.text.Caret;
 import javax.swing.text.StyledDocument;
 
 import org.omegat.core.Core;
+import org.omegat.core.data.DataUtils;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.StringData;
 import org.omegat.core.data.TMXEntry;
@@ -76,7 +77,6 @@ import org.omegat.gui.preferences.PreferencesWindowController;
 import org.omegat.gui.preferences.view.TMMatchesPreferencesController;
 import org.omegat.gui.shortcuts.PropertiesShortcuts;
 import org.omegat.tokenizer.ITokenizer;
-import org.omegat.util.Java8Compat;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
@@ -150,18 +150,22 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
             public String getImportDestination() {
                 return Core.getProject().getProjectProperties().getTMRoot();
             }
+
             @Override
             public boolean acceptFile(File pathname) {
                 return pathname.getName().toLowerCase(Locale.ENGLISH).endsWith(OConsts.TMX_EXTENSION);
             }
+
             @Override
             public String getOverlayMessage() {
                 return OStrings.getString("DND_ADD_TM_FILE");
             }
+
             @Override
             public boolean canAcceptDrop() {
                 return Core.getProject().isProjectLoaded();
             }
+
             @Override
             public Component getComponentToOverlay() {
                 return scrollPane;
@@ -198,7 +202,8 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
             scrollPane.notify(true);
         }
 
-        NearString.SORT_KEY key = Preferences.getPreferenceEnumDefault(Preferences.EXT_TMX_SORT_KEY, SORT_KEY.SCORE);
+        NearString.SORT_KEY key = Preferences.getPreferenceEnumDefault(Preferences.EXT_TMX_SORT_KEY,
+                SORT_KEY.SCORE);
         newMatches.sort(Comparator.comparing(ns -> ns.scores[0], new ScoresComparator(key).reversed()));
 
         matches.addAll(newMatches);
@@ -278,20 +283,21 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
         return substituteNumbers(source, sourceMatch, targetMatch, sourceTok, targetTok);
     }
 
-    static String substituteNumbers(String source, String sourceMatch, String targetMatch, ITokenizer sourceTok,
-            ITokenizer targetTok) {
+    static String substituteNumbers(String source, String sourceMatch, String targetMatch,
+            ITokenizer sourceTok, ITokenizer targetTok) {
 
         List<String> sourceMatchNumbers = Stream.of(sourceTok.tokenizeVerbatimToStrings(sourceMatch))
                 .filter(MatchesTextArea::isNumber).collect(Collectors.toList());
 
         String[] targetTokens = targetTok.tokenizeVerbatimToStrings(targetMatch);
-        List<String> targetMatchNumbers = Stream.of(targetTokens)
-                .filter(MatchesTextArea::isNumber).collect(Collectors.toList());
+        List<String> targetMatchNumbers = Stream.of(targetTokens).filter(MatchesTextArea::isNumber)
+                .collect(Collectors.toList());
 
         List<String> sourceNumbers = Stream.of(sourceTok.tokenizeVerbatimToStrings(source))
                 .filter(MatchesTextArea::isNumber).collect(Collectors.toList());
 
-        if (sourceMatchNumbers.size() != sourceNumbers.size() || sourceMatchNumbers.size() != targetMatchNumbers.size()
+        if (sourceMatchNumbers.size() != sourceNumbers.size()
+                || sourceMatchNumbers.size() != targetMatchNumbers.size()
                 || !new HashSet<>(sourceMatchNumbers).equals(new HashSet<>(targetMatchNumbers))) {
             return targetMatch;
         }
@@ -397,10 +403,15 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
 
                     String translation = thebest.translation;
                     if (Preferences.isPreference(Preferences.CONVERT_NUMBERS)) {
-                        translation =
-                            substituteNumbers(currentEntry.getSrcText(), thebest.source, thebest.translation);
+                        translation = substituteNumbers(currentEntry.getSrcText(), thebest.source,
+                                thebest.translation);
                     }
-                    Core.getEditor().replaceEditText(prefix + translation, "TM: auto");
+
+                    if (DataUtils.isFromMTMemory(thebest)) {
+                        Core.getEditor().replaceEditTextAndMark(prefix + translation, "TM:[tm/mt]");
+                    } else {
+                        Core.getEditor().replaceEditText(prefix + translation, "TM: auto");
+                    }
                 }
             }
         }
@@ -463,18 +474,16 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
                         int tokstart = delimiters.get(i) + diffPos + r.start;
                         switch (r.type) {
                         case DELETE:
-                            doc.setCharacterAttributes(
-                                tokstart,
-                                r.length,
-                                i == activeMatch ? ATTRIBUTES_DELETED_ACTIVE : ATTRIBUTES_DELETED_INACTIVE,
-                                false);
+                            doc.setCharacterAttributes(tokstart, r.length,
+                                    i == activeMatch ? ATTRIBUTES_DELETED_ACTIVE
+                                            : ATTRIBUTES_DELETED_INACTIVE,
+                                    false);
                             break;
                         case INSERT:
-                            doc.setCharacterAttributes(
-                                tokstart,
-                                r.length,
-                                i == activeMatch ? ATTRIBUTES_INSERTED_ACTIVE : ATTRIBUTES_INSERTED_INACTIVE,
-                                false);
+                            doc.setCharacterAttributes(tokstart, r.length,
+                                    i == activeMatch ? ATTRIBUTES_INSERTED_ACTIVE
+                                            : ATTRIBUTES_INSERTED_INACTIVE,
+                                    false);
                             break;
                         case NOCHANGE:
                             // Nothing
@@ -537,7 +546,7 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
             int clickedItem = -1;
 
             // where did we click?
-            int mousepos = Java8Compat.viewToModel(MatchesTextArea.this, p);
+            int mousepos = MatchesTextArea.this.viewToModel2D(p);
 
             for (int i = 0; i < delimiters.size() - 1; i++) {
                 int start = delimiters.get(i);
@@ -666,7 +675,8 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
     public void populatePaneMenu(JPopupMenu menu) {
         populateContextMenu(menu, activeMatch);
         menu.addSeparator();
-        final JMenuItem notify = new JCheckBoxMenuItem(OStrings.getString("GUI_MATCHWINDOW_SETTINGS_NOTIFICATIONS"));
+        final JMenuItem notify = new JCheckBoxMenuItem(
+                OStrings.getString("GUI_MATCHWINDOW_SETTINGS_NOTIFICATIONS"));
         notify.setSelected(Preferences.isPreference(Preferences.NOTIFY_FUZZY_MATCHES));
         notify.addActionListener(
                 e -> Preferences.setPreference(Preferences.NOTIFY_FUZZY_MATCHES, notify.isSelected()));

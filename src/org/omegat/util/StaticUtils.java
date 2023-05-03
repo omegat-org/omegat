@@ -10,7 +10,7 @@
                2013 Aaron Madlon-Kay, Zoltan Bartko, Didier Briel, Alex Buloichik
                2014 Aaron Madlon-Kay, Alex Buloichik
                2015 Aaron Madlon-Kay
-               Home page: http://www.omegat.org/
+               Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
  This file is part of OmegaT.
@@ -26,7 +26,7 @@
  GNU General Public License for more details.
 
  You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
 package org.omegat.util;
@@ -37,11 +37,13 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PushbackInputStream;
+import java.lang.reflect.Field;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Predicate;
@@ -579,4 +581,34 @@ public final class StaticUtils {
         return true;
     }
 
+    public static String getSupportInfo() {
+        Runtime runtime = Runtime.getRuntime();
+        String memory = String.format("%dMiB total / %dMiB free / %dMiB max",
+                getMB(runtime.totalMemory()), getMB(runtime.freeMemory()), getMB(runtime.maxMemory()));
+        return String.format("Version: %s%nPlatform: %s %s%nJava: %s %s%nMemory: %s",
+                OStrings.getNameAndVersion(), System.getProperty("os.name"), System.getProperty("os.version"),
+                System.getProperty("java.version"), System.getProperty("os.arch"), memory);
+    }
+
+    /** Convert bytes into Megabytes */
+    public static int getMB(long bytes) {
+        return (int)(bytes >> 20);
+    }
+
+    /**
+     * Get fields declared in the class and its super classes.
+     * {@see https://stackoverflow.com/questions/1667854/copy-all-values-from-fields-in-one-class-to-another-through-reflection/35103361#35103361}
+     * 
+     * @param aClass
+     *            target model class.
+     * @return list of fields.
+     */
+    public static List<Field> getAllModelFields(Class<?> aClass) {
+        List<Field> fields = new ArrayList<>();
+        do {
+            Collections.addAll(fields, aClass.getDeclaredFields());
+            aClass = aClass.getSuperclass();
+        } while (aClass != null);
+        return fields;
+    }
 } // StaticUtils

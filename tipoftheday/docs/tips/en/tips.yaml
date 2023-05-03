@@ -1,0 +1,16 @@
+---
+tips:
+- file: shortcut_help.html
+  name: Call user manual
+- file: shortcut_note.html
+  name: Shortcut to notepad
+- file: automatic_backup.html
+  name: Automatic backup
+- file: project_folders.html
+  name: Project folders
+- file: project_folder_tm_auto.html
+  name: tm/auto folder
+- file: howto_download_dictionary.html
+  name: How to download dictionary
+- file: change_theme.html
+  name: OmegaT themes

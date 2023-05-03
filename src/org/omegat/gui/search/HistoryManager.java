@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2014 Aaron Madlon-Kay
-               Home page: http://www.omegat.org/
+               Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
  This file is part of OmegaT.
@@ -20,7 +20,7 @@
  GNU General Public License for more details.
 
  You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
 package org.omegat.gui.search;
@@ -42,7 +42,7 @@ public final class HistoryManager {
     private static final int MAX_ITEMS;
 
     static {
-        MAX_ITEMS = Preferences.getPreferenceDefault(Preferences.SEARCHWINDOW_HISTORY_SIZE, 10);
+        MAX_ITEMS = Preferences.getPreferenceDefault(Preferences.SEARCHWINDOW_HISTORY_SIZE, 50);
         SEARCH_ITEMS = new ArrayList<String>(MAX_ITEMS);
         REPLACE_ITEMS = new ArrayList<String>(MAX_ITEMS);
         for (int i = 0; i < MAX_ITEMS; i++) {

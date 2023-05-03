@@ -5,7 +5,7 @@
 
  Copyright (C) 2010 Alex Buloichik
                2015 Aaron Madlon-Kay
-               Home page: http://www.omegat.org/
+               Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
  This file is part of OmegaT.
@@ -21,7 +21,7 @@
  GNU General Public License for more details.
 
  You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
 package org.omegat.gui.exttrans;
@@ -44,7 +44,7 @@ public interface IMachineTranslation {
     String getName();
 
     /**
-     * Determine whether or not the MT provider has been enabled by the user.
+     * Determine whether the MT provider has been enabled by the user.
      */
     boolean isEnabled();
 
@@ -55,17 +55,17 @@ public interface IMachineTranslation {
         // Nothing
     }
 
-	/**
-	 * Set a glossary supplier to provide relevant glossary terms if desired. The
-	 * terms are provided as a map with keys being the source terms and values being
-	 * the target terms.
-	 *
-	 * @param glossarySupplier
-	 */
-	default void setGlossarySupplier(IMTGlossarySupplier glossarySupplier) {
-		Logger.getLogger(IMachineTranslation.class.getName())
-				.warning("IMachineTranslation.setGlossaryProvider default (empty) implementation called");
-	}
+    /**
+     * Set a glossary supplier to provide relevant glossary terms if desired.
+     * The terms are provided as a map with keys being the source terms and
+     * values being the target terms.
+     *
+     * @param glossarySupplier
+     */
+    default void setGlossarySupplier(IMTGlossarySupplier glossarySupplier) {
+        Logger.getLogger(IMachineTranslation.class.getName())
+                .warning("IMachineTranslation.setGlossaryProvider default (empty) implementation called");
+    }
 
     /**
      * Translate.

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd"
+[
+<!ENTITY % manualvariables SYSTEM "manualvariables.mod">
+%manualvariables;
+]>
+<book lang="ca" id="book.user.manual">
+  <bookinfo>
+    <title id="book.user.manual.title">OmegaT 5.8.0 - Manual d'usuari</title>
+    <pubdate>@timestamp@</pubdate>
+	<!-- TODO automate date insertion -->
+    <abstract>
+      <para>Aquest document és el manual d'usuari oficial de l'OmegaT, l'eina lliure de traducció assistida per ordinador.</para>
+
+	  <para>OmegaT's main purpose is to help you create a good translation the
+	  fastest possible by giving you access to your translation ressources in
+	  the most reliable way possible.</para>
+
+	  <para>OmegaT is distributed under the terms of the <emphasis>GNU General Public License, version 3.0</emphasis>. La llicència us concedeix les llibertats següents:<itemizedlist id="freedoms.list">
+		<listitem>
+		  <para>Llibertat d'executar l'OmegaT amb qualsevol finalitat</para>
+		</listitem>
+
+		<listitem>
+		  <para>Llibertat d'estudiar el funcionament de l'OmegaT i modificar-lo perquè funcioni com vulgueu</para>
+		</listitem>
+
+		<listitem>
+		  <para>Llibertat de distribuir còpies per a ajudar altres persones</para>
+		</listitem>
+
+		<listitem>
+		  <para>Llibertat de distribuir còpies de les versions modificades a altres persones</para>
+		</listitem>
+	  </itemizedlist>
+	  </para>
+    </abstract>
+  </bookinfo>
+
+  
+  <xi:include href="Introduction.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+  <xi:include href="OmegaT5_HowTo.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+  <xi:include href="OmegaT5_EditorsPanes.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+  <xi:include href="OmegaT5_Menus.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+  <xi:include href="OmegaT5_WindowsAndDialogs.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+  <xi:include href="OmegaT5_Preferences.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+  <xi:include href="OmegaT5_ProjectFolder.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+  <xi:include href="OmegaT5_Appendices.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+	           
+</book>

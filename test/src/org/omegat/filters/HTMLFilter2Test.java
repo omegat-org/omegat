@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2008 Alex Buloichik
-               Home page: http://www.omegat.org/
+               Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
  This file is part of OmegaT.
@@ -20,7 +20,7 @@
  GNU General Public License for more details.
 
  You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
 package org.omegat.filters;
@@ -55,10 +55,53 @@ public class HTMLFilter2Test extends TestFilterBase {
     }
 
     @Test
+    public void testIgnoreCommentParse() throws Exception {
+        Map<String, String> options = new HashMap<>();
+        options.put(HTMLOptions.OPTION_REMOVE_COMMENTS, "true");
+        List<String> entries = parse(new HTMLFilter2(), "test/data/filters/html/file-HTMLFilter2-ignored-comments-no-break-SF610.html", options);
+        assertEquals(3, entries.size());
+        assertEquals("en", entries.get(0));
+        assertEquals("This is the first line.", entries.get(1));
+        assertEquals("This is the second line.", entries.get(2));
+    }
+
+    @Test
+    public void testParseAllBlockElements() throws Exception {
+        List<String> entries = parse(new HTMLFilter2(),
+                "test/data/filters/html/file-HTMLFilter2-all-block-elements.html");
+        assertEquals(49, entries.size());
+    }
+    
+    @Test
+    public void testParseRegression() throws Exception {
+        List<String> entries = parse(new HTMLFilter2(),
+                "test/data/filters/html/file-HTMLFilter2-recurse-bugfix-SF205.html");
+        assertEquals(3, entries.size());
+        entries = parse(new HTMLFilter2(),
+                "test/data/filters/html/file-HTMLFilter2-tag-dropping-bugfix-SF609.html");
+        assertEquals(1, entries.size());
+        entries = parse(new HTMLFilter2(),
+                "test/data/filters/html/file-HTMLFilter2-tag-dropping-bugfix-SF613.html");
+        assertEquals(2, entries.size());
+        entries = parse(new HTMLFilter2(),
+                "test/data/filters/html/file-HTMLFilter2-tag-dropping-bugfix-SF873.html");
+        assertEquals(3, entries.size());
+        entries = parse(new HTMLFilter2(),
+                "test/data/filters/html/file-HTMLFilter2-OmegaT.html");
+        assertEquals(165, entries.size());
+    }
+
+    @Test
     public void testTranslate() throws Exception {
         HTMLFilter2 filter = new HTMLFilter2();
         translateText(filter, "test/data/filters/html/file-HTMLFilter2.html");
         translateText(filter, "test/data/filters/html/file-HTMLFilter2-SMP.html");
+        translateText(filter, "test/data/filters/html/file-HTMLFilter2-all-block-elements.html");
+        translateText(filter, "test/data/filters/html/file-HTMLFilter2-recurse-bugfix-SF205.html");
+        translateText(filter, "test/data/filters/html/file-HTMLFilter2-tag-dropping-bugfix-SF609.html");
+        translateText(filter, "test/data/filters/html/file-HTMLFilter2-tag-dropping-bugfix-SF613.html");
+        translateText(filter, "test/data/filters/html/file-HTMLFilter2-tag-dropping-bugfix-SF873.html");
+        translateText(filter, "test/data/filters/html/file-HTMLFilter2-OmegaT.html");
     }
 
     @Test
@@ -136,6 +179,7 @@ public class HTMLFilter2Test extends TestFilterBase {
 
         testExtractedSTEForLayoutTest(config);
     }
+
     @Test
     public void testLayoutPreserveWhitespace() throws Exception {
         boolean preserveSpacesOrig = Core.getFilterMaster().getConfig().isPreserveSpaces();
@@ -150,14 +194,14 @@ public class HTMLFilter2Test extends TestFilterBase {
     private void testExtractedSTEForLayoutTest(Map<String, String> filterOptions) throws Exception {
         String filename = "test/data/filters/html/file-HTMLFilter2-layout.html";
         IProject.FileInfo fi = loadSourceFiles(new HTMLFilter2(), filename, filterOptions);
-        int i=0;
+        int i = 0;
         assertEquals("test", fi.entries.get(i++).getSrcText());
         assertEquals("ltr", fi.entries.get(i++).getSrcText());
         assertEquals("test spaces", fi.entries.get(i++).getSrcText());
         assertEquals("test spaces", fi.entries.get(i++).getSrcText());
         assertEquals("outoftags", fi.entries.get(i++).getSrcText());
         assertEquals("This <b0>is bold</b0>!", fi.entries.get(i++).getSrcText());
-        //empty segments are skipped
+        // empty segments are skipped
         assertEquals("formatted\n    text", fi.entries.get(i++).getSrcText());
         assertEquals("a", fi.entries.get(i++).getSrcText());
         assertEquals(i, fi.entries.size());
@@ -167,8 +211,8 @@ public class HTMLFilter2Test extends TestFilterBase {
     public void testAddCharsetHeaderWhenNoHeader() throws Exception {
         Map<String, String> config = new HashMap<>();
         config.put(HTMLOptions.OPTION_REWRITE_ENCODING, "ALWAYS");
-        String noHeaderFile="test/data/filters/html/file-HTMLFilter2.html";
-        String addedHeaderFile="test/data/filters/html/file-HTMLFilter2-added-charset.html";
+        String noHeaderFile = "test/data/filters/html/file-HTMLFilter2.html";
+        String addedHeaderFile = "test/data/filters/html/file-HTMLFilter2-added-charset.html";
         translate(new HTMLFilter2(), noHeaderFile, config);
         compareBinary(new File(addedHeaderFile), outFile);
 
@@ -185,8 +229,8 @@ public class HTMLFilter2Test extends TestFilterBase {
     public void testAddCharsetHeaderWhenExistingHeader() throws Exception {
         Map<String, String> config = new HashMap<>();
         config.put(HTMLOptions.OPTION_REWRITE_ENCODING, "ALWAYS");
-        String noHeaderFile="test/data/filters/html/file-HTMLFilter2-headernocharset.html";
-        String addedHeaderFile="test/data/filters/html/file-HTMLFilter2-added-charset.html";
+        String noHeaderFile = "test/data/filters/html/file-HTMLFilter2-headernocharset.html";
+        String addedHeaderFile = "test/data/filters/html/file-HTMLFilter2-added-charset.html";
         translate(new HTMLFilter2(), noHeaderFile, config);
         compareBinary(new File(addedHeaderFile), outFile);
 
@@ -203,8 +247,8 @@ public class HTMLFilter2Test extends TestFilterBase {
     public void testAddCharsetHeaderWhenExistingMeta() throws Exception {
         Map<String, String> config = new HashMap<>();
         config.put(HTMLOptions.OPTION_REWRITE_ENCODING, "ALWAYS");
-        String noHeaderFile="test/data/filters/html/file-HTMLFilter2-headerdifferentcharset.html";
-        String addedHeaderFile="test/data/filters/html/file-HTMLFilter2-added-charset.html";
+        String noHeaderFile = "test/data/filters/html/file-HTMLFilter2-headerdifferentcharset.html";
+        String addedHeaderFile = "test/data/filters/html/file-HTMLFilter2-added-charset.html";
         translate(new HTMLFilter2(), noHeaderFile, config);
         compareBinary(new File(addedHeaderFile), outFile);
 
@@ -221,8 +265,8 @@ public class HTMLFilter2Test extends TestFilterBase {
     public void testAddCharsetHeaderHtml5WhenExistingMeta() throws Exception {
         Map<String, String> config = new HashMap<>();
         config.put(HTMLOptions.OPTION_REWRITE_ENCODING, "ALWAYS");
-        String noHeaderFile="test/data/filters/html/file-HTMLFilter2-HTML5-headerdifferentcharset.html";
-        String addedHeaderFile="test/data/filters/html/file-HTMLFilter2-HTML5-added-charset.html";
+        String noHeaderFile = "test/data/filters/html/file-HTMLFilter2-HTML5-headerdifferentcharset.html";
+        String addedHeaderFile = "test/data/filters/html/file-HTMLFilter2-HTML5-added-charset.html";
         translate(new HTMLFilter2(), noHeaderFile, config);
         compareBinary(new File(addedHeaderFile), outFile);
 

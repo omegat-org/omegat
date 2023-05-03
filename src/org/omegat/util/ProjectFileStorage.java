@@ -10,7 +10,7 @@
                2013 Aaron Madlon-Kay, Guido Leenders
                2014 Aaron Madlon-Kay, Alex Buloichik
                2015 Aaron Madlon-Kay
-               Home page: http://www.omegat.org/
+               Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
  This file is part of OmegaT.
@@ -26,22 +26,19 @@
  GNU General Public License for more details.
 
  You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
 package org.omegat.util;
 
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Marshaller;
-
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.master.PluginUtils;
@@ -71,29 +68,23 @@ public final class ProjectFileStorage {
      */
     public static final String DEFAULT_FOLDER_MARKER = "__DEFAULT__";
 
-    private static final JAXBContext CONTEXT;
-    static {
-        try {
-            CONTEXT = JAXBContext.newInstance(Omegat.class);
-        } catch (Exception ex) {
-            throw new ExceptionInInitializerError(ex);
-        }
-    }
-
     public static Omegat parseProjectFile(File file) throws Exception {
         return parseProjectFile(FileUtils.readFileToByteArray(file));
     }
 
     public static Omegat parseProjectFile(byte[] projectFile) throws Exception {
-        return (Omegat) CONTEXT.createUnmarshaller().unmarshal(new ByteArrayInputStream(projectFile));
+        XmlMapper mapper = JaxbXmlMapper.getXmlMapper();
+        return mapper.readValue(projectFile, Omegat.class);
     }
 
     /**
-     * Load the project properties file for the project at the specified directory. The properties file is
-     * assumed to exist at the root of the project and have the default name, {@link OConsts#FILE_PROJECT}.
-     * This is a convenience method for {@link #loadPropertiesFile(File, File)}.
+     * Load the project properties file for the project at the specified
+     * directory. The properties file is assumed to exist at the root of the
+     * project and have the default name, {@link OConsts#FILE_PROJECT}. This is
+     * a convenience method for {@link #loadPropertiesFile(File, File)}.
      * <p>
-     * If the supplied {@link File} is not a directory, an {@link IllegalArgumentException} will be thrown.
+     * If the supplied {@link File} is not a directory, an
+     * {@link IllegalArgumentException} will be thrown.
      *
      * @param projectDir
      *            The directory of the project
@@ -105,10 +96,11 @@ public final class ProjectFileStorage {
     }
 
     /**
-     * Load the specified project properties file for the project at the specified directory.
+     * Load the specified project properties file for the project at the
+     * specified directory.
      * <p>
-     * If <code>projectDir</code> is not a directory or <code>projectFile</code> is not a file, an
-     * {@link IllegalArgumentException} will be thrown.
+     * If <code>projectDir</code> is not a directory or <code>projectFile</code>
+     * is not a file, an {@link IllegalArgumentException} will be thrown.
      *
      * @param projectDir
      *            The directory of the project
@@ -119,7 +111,7 @@ public final class ProjectFileStorage {
      */
     public static ProjectProperties loadPropertiesFile(File projectDir, File projectFile) throws Exception {
         if (!projectFile.isFile()) {
-            throw new IllegalArgumentException("Project file "+projectFile+" was not a file");
+            throw new IllegalArgumentException("Project file " + projectFile + " was not a file");
         }
         Omegat om = parseProjectFile(projectFile);
         return loadPropertiesFile(projectDir, om);
@@ -132,10 +124,10 @@ public final class ProjectFileStorage {
 
         ProjectProperties result = new ProjectProperties(projectDir);
 
-        if (!OConsts.PROJ_CUR_VERSION.equals(om.getProject().getVersion())) {
-            throw new TranslationException(StringUtil.format(
-                    OStrings.getString("PFR_ERROR_UNSUPPORTED_PROJECT_VERSION"),
-                    om.getProject().getVersion()));
+        String curVersion = om.getProject().getVersion();
+        if (!OConsts.PROJ_CUR_VERSION.equals(curVersion)) {
+            throw new TranslationException(StringUtil
+                    .format(OStrings.getString("PFR_ERROR_UNSUPPORTED_PROJECT_VERSION"), curVersion));
         }
 
         result.setTargetRoot(normalizeLoadedPath(om.getProject().getTargetDir(), OConsts.DEFAULT_TARGET));
@@ -148,10 +140,13 @@ public final class ProjectFileStorage {
             result.getSourceRootExcludes().addAll(ProjectProperties.getDefaultExcludes());
         }
         result.setTMRoot(normalizeLoadedPath(om.getProject().getTmDir(), OConsts.DEFAULT_TM));
-        result.setExportTMRoot(normalizeLoadedPath(om.getProject().getExportTmDir(), OConsts.DEFAULT_EXPORT_TM));
-        result.setExportTmLevels(normalizeLoadedExportTmLevels(om.getProject().getExportTmLevels(), OConsts.DEFAULT_EXPORT_TM_LEVELS));
+        result.setExportTMRoot(
+                normalizeLoadedPath(om.getProject().getExportTmDir(), OConsts.DEFAULT_EXPORT_TM));
+        result.setExportTmLevels(normalizeLoadedExportTmLevels(om.getProject().getExportTmLevels(),
+                OConsts.DEFAULT_EXPORT_TM_LEVELS));
 
-        result.setGlossaryRoot(normalizeLoadedPath(om.getProject().getGlossaryDir(), OConsts.DEFAULT_GLOSSARY));
+        result.setGlossaryRoot(
+                normalizeLoadedPath(om.getProject().getGlossaryDir(), OConsts.DEFAULT_GLOSSARY));
 
         // Compute glossary file location
         String glossaryFile = om.getProject().getGlossaryFile();
@@ -165,8 +160,7 @@ public final class ProjectFileStorage {
         }
         result.setWriteableGlossary(glossaryFile);
 
-        result.setDictRoot(normalizeLoadedPath(om.getProject().getDictionaryDir(),
-                OConsts.DEFAULT_DICT));
+        result.setDictRoot(normalizeLoadedPath(om.getProject().getDictionaryDir(), OConsts.DEFAULT_DICT));
 
         result.setSourceLanguage(om.getProject().getSourceLang());
         result.setTargetLanguage(om.getProject().getTargetLang());
@@ -210,7 +204,8 @@ public final class ProjectFileStorage {
         om.getProject().getSourceDirExcludes().getMask().addAll(props.getSourceRootExcludes());
         om.getProject().setTargetDir(getPathForStoring(root, props.getTargetRoot(), OConsts.DEFAULT_TARGET));
         om.getProject().setTmDir(getPathForStoring(root, props.getTMRoot(), OConsts.DEFAULT_TM));
-        om.getProject().setExportTmDir(getPathForStoring(root, props.getExportTMRoot(), OConsts.DEFAULT_EXPORT_TM));
+        om.getProject()
+                .setExportTmDir(getPathForStoring(root, props.getExportTMRoot(), OConsts.DEFAULT_EXPORT_TM));
         om.getProject().setExportTmLevels(String.join(" ", props.getExportTmLevels()));
         String glossaryDir = getPathForStoring(root, props.getGlossaryRoot(), OConsts.DEFAULT_GLOSSARY);
         om.getProject().setGlossaryDir(glossaryDir);
@@ -238,9 +233,8 @@ public final class ProjectFileStorage {
             om.getProject().getRepositories().getRepository().addAll(props.getRepositories());
         }
 
-        Marshaller m = CONTEXT.createMarshaller();
-        m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-        m.marshal(om, outFile);
+        XmlMapper mapper = JaxbXmlMapper.getXmlMapper();
+        mapper.writeValue(outFile, om);
     }
 
     private static String normalizeLoadedPath(String path, String defaultValue) {
@@ -300,7 +294,8 @@ public final class ProjectFileStorage {
             // Path.normalize() will resolve any remaining "../"
             Path absPath = Paths.get(absolutePath).normalize();
             String rel = Paths.get(root).relativize(absPath).toString();
-            if (StringUtils.countMatches(rel, ".." + File.separatorChar) <= OConsts.MAX_PARENT_DIRECTORIES_ABS2REL) {
+            if (StringUtils.countMatches(rel,
+                    ".." + File.separatorChar) <= OConsts.MAX_PARENT_DIRECTORIES_ABS2REL) {
                 // Use the relativized path as it is "near" enough.
                 result = rel;
             } else {
@@ -314,9 +309,11 @@ public final class ProjectFileStorage {
 
     /**
      * Load a tokenizer class from its canonical name.
-     * @param className Name of tokenizer class
-     * @return Class object of specified tokenizer, or of fallback tokenizer
-     * if the specified one could not be loaded for whatever reason.
+     *
+     * @param className
+     *            Name of tokenizer class
+     * @return Class object of specified tokenizer, or of fallback tokenizer if
+     *         the specified one could not be loaded for whatever reason.
      */
     private static Class<?> loadTokenizer(String className, Language fallback) {
         if (!StringUtil.isEmpty(className)) {

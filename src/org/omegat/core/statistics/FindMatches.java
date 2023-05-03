@@ -7,7 +7,7 @@
                2008 Alex Buloichik
                2012 Thomas Cordonnier, Martin Fleurke
                2013 Aaron Madlon-Kay, Alex Buloichik
-               Home page: http://www.omegat.org/
+               Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
  This file is part of OmegaT.
@@ -23,7 +23,7 @@
  GNU General Public License for more details.
 
  You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
 package org.omegat.core.statistics;
@@ -402,6 +402,11 @@ public class FindMatches {
             return;
         }
 
+        if (similarityStem < fuzzyMatchThreshold && similarityNoStem < fuzzyMatchThreshold
+                && simAdjusted < fuzzyMatchThreshold) {
+            return;
+        }
+
         addNearString(key, source, translation, comesFrom, fuzzy, similarityStem, similarityNoStem,
                 simAdjusted, null, tmxName, creator, creationDate, changer, changedDate, props);
     }
@@ -419,9 +424,6 @@ public class FindMatches {
      * @return true if we have chance
      */
     protected boolean haveChanceToAdd(final int simStem, final int simNoStem, final int simExactly) {
-        if (simStem < fuzzyMatchThreshold && simNoStem < fuzzyMatchThreshold) {
-            return false;
-        }
         if (result.size() < maxCount) {
             return true;
         }

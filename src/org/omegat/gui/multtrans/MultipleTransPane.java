@@ -6,7 +6,7 @@
  Copyright (C) 2011 Alex Buloichik
                2012 Jean-Christophe Helary
                2014 Aaron Madlon-Kay
-               Home page: http://www.omegat.org/
+               Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
  This file is part of OmegaT.
@@ -22,7 +22,7 @@
  GNU General Public License for more details.
 
  You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 package org.omegat.gui.multtrans;
 
@@ -44,15 +44,17 @@ import javax.swing.KeyStroke;
 import javax.swing.text.Caret;
 import javax.swing.text.JTextComponent;
 
+import org.openide.awt.Mnemonics;
+
 import org.omegat.core.Core;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.gui.common.EntryInfoThreadPane;
+import org.omegat.gui.editor.EditorPopups;
 import org.omegat.gui.editor.IPopupMenuConstructor;
 import org.omegat.gui.editor.SegmentBuilder;
 import org.omegat.gui.main.DockableScrollPane;
 import org.omegat.gui.main.IMainWindow;
 import org.omegat.gui.shortcuts.PropertiesShortcuts;
-import org.omegat.util.Java8Compat;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
@@ -93,8 +95,10 @@ public class MultipleTransPane extends EntryInfoThreadPane<List<MultipleTransFou
                     boolean isInActiveTranslation, final SegmentBuilder sb) {
                 if (isInActiveEntry
                         && Core.getProject().getProjectProperties().isSupportDefaultTranslations()) {
-                    JMenuItem miDefault = menu.add(OStrings.getString("MULT_MENU_DEFAULT"));
-                    JMenuItem miMultiple = menu.add(OStrings.getString("MULT_MENU_MULTIPLE"));
+                    JMenuItem miDefault = menu.add(Mnemonics.removeMnemonics(
+                        OStrings.getString("MULT_MENU_DEFAULT")));
+                    JMenuItem miMultiple = menu.add(Mnemonics.removeMnemonics(
+                        OStrings.getString("MULT_MENU_MULTIPLE")));
                     miDefault.setEnabled(!sb.isDefaultTranslation());
                     miMultiple.setEnabled(sb.isDefaultTranslation());
 
@@ -222,7 +226,7 @@ public class MultipleTransPane extends EntryInfoThreadPane<List<MultipleTransFou
                 return;
             }
             JPopupMenu popup = new JPopupMenu();
-            populateContextMenu(popup, Java8Compat.viewToModel(MultipleTransPane.this, p));
+            populateContextMenu(popup, MultipleTransPane.this.viewToModel2D(p));
             popup.show(MultipleTransPane.this, p.x, p.y);
         }
     };
@@ -278,7 +282,7 @@ public class MultipleTransPane extends EntryInfoThreadPane<List<MultipleTransFou
             JPopupMenu popup = new JPopupMenu();
             Caret caret = getCaret();
             Point p = caret == null ? getMousePosition() : caret.getMagicCaretPosition();
-            populateContextMenu(popup, Java8Compat.viewToModel(MultipleTransPane.this, p));
+            populateContextMenu(popup, MultipleTransPane.this.viewToModel2D(p));
             popup.show(this, (int) p.getX(), (int) p.getY());
             e.consume();
         }

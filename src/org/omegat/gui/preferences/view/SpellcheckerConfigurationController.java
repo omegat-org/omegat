@@ -8,7 +8,7 @@
                2012 Martin Fleurke, Didier Briel
                2015 Aaron Madlon-Kay
                2016 Aaron Madlon-Kay
-               Home page: http://www.omegat.org/
+               Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
  This file is part of OmegaT.
@@ -24,7 +24,7 @@
  GNU General Public License for more details.
 
  You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
 package org.omegat.gui.preferences.view;
@@ -276,7 +276,7 @@ public class SpellcheckerConfigurationController extends BasePreferencesControll
 
     @Override
     protected void initFromPrefs() {
-        panel.autoSpellcheckCheckBox.setSelected(Preferences.isPreference(Preferences.ALLOW_AUTO_SPELLCHECKING));
+        panel.autoSpellcheckCheckBox.setSelected(Preferences.isPreferenceDefault(Preferences.ALLOW_AUTO_SPELLCHECKING, true));
         // initialize things from the preferences
         updateDetailPanel();
         String dictionaryUrl = Preferences.getPreference(Preferences.SPELLCHECKER_DICTIONARY_URL);
@@ -303,7 +303,7 @@ public class SpellcheckerConfigurationController extends BasePreferencesControll
 
     @Override
     public void restoreDefaults() {
-        panel.autoSpellcheckCheckBox.setSelected(false);
+        panel.autoSpellcheckCheckBox.setSelected(true);
         panel.dictionaryUrlTextField.setText(DICT_URL);
         directoryChanged();
         listSelectionChanged();

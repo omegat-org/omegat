@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2015-2016 Aaron Madlon-Kay
-               Home page: http://www.omegat.org/
+               Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
  This file is part of OmegaT.
@@ -20,7 +20,7 @@
  GNU General Public License for more details.
 
  You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 **************************************************************************/
 
 package org.omegat.util;
@@ -37,6 +37,7 @@ import java.nio.file.Files;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.omegat.filters.TestFilterBase;
@@ -51,7 +52,7 @@ public class PreferencesTest {
 
     @Before
     public final void setUp() throws Exception {
-        tmpDir = Files.createTempDirectory("oemgat").toFile();
+        tmpDir = Files.createTempDirectory("omegat").toFile();
         assertTrue(tmpDir.isDirectory());
     }
 
@@ -61,8 +62,8 @@ public class PreferencesTest {
     }
 
     /**
-     * Test that if an error is encountered when loading the
-     * preferences file, the original file is backed up.
+     * Test that if an error is encountered when loading the preferences file,
+     * the original file is backed up.
      */
     @Test
     public void testPreferencesBackup() throws Exception {
@@ -77,7 +78,9 @@ public class PreferencesTest {
         assertFalse(out.checkError());
 
         // Load bad prefs file.
+        Log.log("---------It will show a parser error. This is intended----------------");
         new PreferencesImpl(new PreferencesXML(prefsFile, null));
+        Log.log("-----------------------------------------------------------------Done.");
 
         // The actual backup file will have a timestamp in the filename,
         // so we have to loop through looking for it.
@@ -186,4 +189,18 @@ public class PreferencesTest {
         assertEquals("", prefs.getPreference(null));
         assertEquals("", prefs.getPreference(""));
     }
+
+    @Test
+    public void testLoadingUserPreferencesXML() {
+        File loadFile = new File("test/data/preferences/omegat.prefs.xml");
+        File saveFile = new File(tmpDir, "omegat-save.prefs");
+        Preferences.IPreferences preferences = new PreferencesImpl(new PreferencesXML(loadFile, saveFile));
+        Assert.assertEquals("14", preferences.getPreference(Preferences.TF_SRC_FONT_SIZE));
+        preferences.setPreference(Preferences.TF_SRC_FONT_SIZE, "12");
+        preferences.save();
+        Preferences.IPreferences savedPreferences = new PreferencesImpl(new PreferencesXML(saveFile,
+                null));
+        Assert.assertEquals("12", savedPreferences.getPreference(Preferences.TF_SRC_FONT_SIZE));
+    }
+
 }

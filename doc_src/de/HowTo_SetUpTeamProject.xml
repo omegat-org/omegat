@@ -1,257 +1,260 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="howto.setupteamproject">
-  <title>Ein Teamprojekt einrichten</title>
+<section id="how.to.setup.team.project">
+  <title id="how.to.setup.team.project.title">Ein Teamprojekt einrichten</title>
 
-  <para>Das Einrichten eines Teamprojekts erfordert einige Kenntnisse über Server und Versionsverwaltungssysteme wie SVN oder Git. Es sollte daher von einem Projektmanager, einem Projektleiter oder einem Localization Engineer durchgeführt werden.</para>
+  <para>Die Verwaltung eines Teamprojekts erfordert einige Kenntnisse über das Versionskontrollsystem <emphasis>SVN</emphasis> oder <emphasis>Git</emphasis> (<emphasis>VKS</emphasis> im weiteren Verlauf dieses Abschnitts).</para>
 
-  <para>Da zahlreiche Informationen über SVN und Git einfach zu finden sind, werden wir hier nicht ihre Funktionsweise beschreiben, sondern nur, wie OmegaT mit ihnen arbeitet.</para>
+  <para>Da Informationen zu diesen Themen bereits ausreichend vorhanden sind, beschränkt sich diese Dokumentation auf ihre Verwendung innerhalb eines OmegaT-Team-Projekts.</para>
 
-  <section>
-    <title>Schritt 1: Erstellen Sie ein leeres Projekt auf einem Server</title>
+  <note>
+	<para>Ein OmegaT-Teamprojekt synchronisiert den projektbezogenen Translation Memory <link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/> und das projektbezogene beschreibbare Glossar <link linkend="project.folder.glossary.txt" endterm="project.folder.glossary.txt.title"/> zwischen dem Hosting-Server und allen beteiligten Teammitgliedern, und verwaltet alle möglichen Konflikte zwischen ihnen.</para>
+  </note>
 
-    <para><emphasis role="bold">Erstellung eines leeren Projekts auf einem Server</emphasis></para>
+  <section id="how.to.setup.team.project.prepare.the.repository">
+    <title id="how.to.setup.team.project.prepare.the.repository.title">Vorbereitungen</title>
 
-    <orderedlist>
-      <listitem>
-        <para>Erstellen Sie ein SVN- oder Git-Repository auf einem Server, auf den die Übersetzer zugreifen können.</para>
-      </listitem>
+	<para>Ein Teamprojekt kann wie folgt eingerichtet werden:</para>
 
-      <listitem>
-        <para>Erstellen Sie eine lokale Kopie des Repository (<command>check out</command> bei SVN, <command>clone</command> bei Git).</para>
-      </listitem>
+	<orderedlist>
+      <listitem id="how.to.setup.team.project.create.empty.repository">
+		<para id="how.to.setup.team.project.create.empty.repository.title">Erstellen Sie ein leeres Repository auf Ihrem VKS-Hosting-Server</para>
 
-      <listitem>
-        <para>Erstellen Sie ein neues, leeres OmegaT-Projekt im lokalen Repository. Dies kann auf zwei Arten geschehen:</para>
+		<para>Diese können normalerweise über ein Web-Interface, eine GUI-Applikation oder die Befehlszeile erfolgen. Weitere Informationen finden Sie in der Dokumentation Ihres Servers oder Hosting-Dienstes.</para>
+	  </listitem>
 
-        <itemizedlist>
+	  <listitem id="how.to.setup.team.project.clone.locally">
+		<para id="how.to.setup.team.project.clone.locally.title">Verwenden Sie das lokale VKS, um eine lokale Kopie (Klon) zu erstellen</para>
+
+		<note>
+		  <para>Diese lokale Version enthält Ihre <emphasis>Projektmanager</emphasis>-Kopie des OmegaT-Projekts. Verwenden Sie sie, um Änderungen vorzunehmen, die das gesamte Team betreffen.</para>
+		</note>
+
+		<para>Das lokale Repository wird verwendet, um das initiale Projekt zum Server hinzuzufügen. Es kann auch verwendet werden, um Wartungsarbeiten durchzuführen (z. B. Dateien löschen), die mit OmegaT selbst nicht möglich sind.</para>
+		<para>Wir raten Ihnen, diesen Ordner nicht für Übersetzungsarbeiten zu verwenden. Wenn Sie an diesem Projekt Übersetzungs- oder Korrekturarbeiten durchführen müssen, sollten Sie mit OmegaT eine separate Kopie des Teamprojekts herunterladen und von dort aus arbeiten. Einzelheiten finden Sie unter <link linkend="how.to.use.team.project" endterm="how.to.use.team.project.title"/>.</para>
+	  </listitem>
+
+	  <listitem id="how.to.setup.team.project.fill.local.clone">
+		<para id="how.to.setup.team.project.fill.local.clone.title">Füllen Sie die leere lokale Kopie mit einem reellen OmegaT-Projekt</para>
+		<itemizedlist>
+		  <listitem>
+			<para>Erstellen Sie die Projektstruktur</para>
+
+			<para>Wenn Sie ein neues, leeres Projekt erstellen, können Sie entweder der <link linkend="introduction.create.and.open.new.project">GUI-Prozedur</link> folgen oder das Projekt direkt über die Befehlszeile erstellen: <command>java -jar OmegaT.jar team init &lt;Quellsprache&gt; &lt;Zielsprache&gt;</command></para>
+
+			<para>Dieser Befehl bewirkt zudem, dass das Projekt automatisch im Versionskontrollsystem registriert wird.</para>
+		  </listitem>
+		  <listitem>
+			<para>Passen Sie die Einstellungen an</para>
+
+			<para>Führen Sie in diesem Stadium alle notwendigen Änderungen an den Projekteigenschaften durch, einschließlich lokaler Dateifilter oder Segmentierungseinstellungen. Siehe das <link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/>-Dialogfenster für weitere Informationen.</para>
+		  </listitem>
+
+		  <listitem>
+			<para>Fügen Sie alle notwendigen Dateien hinzu</para>
+
+			<para>Fügen Sie auch alle relevanten Listen von Rechtschreibprüfungsdateien hinzu, die Sie allen Projektmitarbeitern zur Verfügung stellen wollen. Einzelheiten finden Sie unter <link linkend="project.folder.omegat.spellcheck">Rechtschreibprüfungsdateien</link>.</para>
+
+			<para>Wenn Sie ein bestehendes Projekt konvertieren, stellen Sie sicher, dass Sie alle Dateien im Projekt löschen, die Sie nicht benötigen oder auf den Server hochladen möchten, bevor Sie mit dem nächsten Schritt fortfahren.</para>
+
+			<para>Kopieren Sie die zu übersetzenden Dateien in den Quellordner, und verwenden Sie Ihren SVN- oder Git-Client oder die Befehlszeile, um sie dem Repository hinzuzufügen und zu veröffentlichen. Verwenden Sie <link endterm="menus.project.title" linkend="menus.project"/><link linkend="menus.project.commit.source.files" endterm="menus.project.commit.source.files.title"/>, um Dateien über OmegaT hinzuzufügen.</para>
+
+			<para>Sie müssen Ihren SVN- oder Git-Client oder die Befehlszeile verwenden, um Wörterbücher, Glossare, Translation Memories oder andere Dateien, die im Projekt enthalten sein sollen, hinzuzufügen und zu veröffentlichen.</para>
+
+			<para>Dieser Schritt kann durchgeführt werden, bevor das Projekt zum ersten Mal registriert und veröffentlicht wird. Dieser Schritt kann auch verwendet werden, um neue Dateien hinzuzufügen oder bestehende Dateien nach der Erstellung des Projekts zu aktualisieren.</para>
+		  </listitem>
+		</itemizedlist>
+
+		<note>
+          <para>In Teamprojekten, die eine einfache Zuordnung zwischen dem lokalen Repository und dem Remote-Repository verwenden (die Standardeinstellung), können die Quell- und Zieldateien lokal geändert und mittels <link linkend="menus.project" endterm="menus.project.title"/><link endterm="menus.project.commit.source.files.title" linkend="menus.project.commit.source.files"/> und <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.commit.target.files" endterm="menus.project.commit.target.files.title"/> auf den Server hochgeladen werden, <emphasis role="bold">was wohlgemerkt nur in solchen Projekten funktioniert</emphasis>.</para>
+
+          <para>Der Teamprojektadministrator muss das lokale VKS verwenden, um diese Dateien <emphasis role="bold">zu ändern</emphasis> oder <emphasis role="bold">zu löschen</emphasis>. Einige Plugins können diese Arbeit erleichtern. Siehe die <link linkend="dialogs.preferences.plugins" endterm="dialogs.preferences.plugins.title"/>-Einstellung für weitere Informationen.</para>
+		</note>
+	  </listitem>
+
+	  <listitem id="how.to.setup.team.project.register">
+		<para id="how.to.setup.team.project.register.title">Registrieren Sie die Projektdateien im lokalen VKS</para>
+
+		<para>Wenn Sie das Projekt über die grafische Benutzeroberfläche erstellt haben, müssen Sie es anschließend explizit zum Versionskontrollsystem hinzufügen (<command>add</command> in SVN und Git).</para>
+	  </listitem>
+
+	  <listitem id="how.to.setup.team.project.push">
+		<para id="how.to.setup.team.project.push.title">Legen Sie die registrierten Dateien auf dem Hosting-Server ab</para>
+
+		<para>Veröffentlichen Sie schließlich Ihr Projekt auf dem Remote-Server (<command>commit</command> in SVN, <command>commit</command> und <command>push</command> in Git).</para>
+	  </listitem>
+
+	  <listitem id="how.to.setup.team.project.give.access.rights">
+		<para id="how.to.setup.team.project.give.access.rights.title">Geben Sie Ihrem Team Zugriffsrechte</para>
+
+		<note>
+		  <para>Wenn Sie mehrere Projekte auf demselben Server verwenden, müssen Sie Ihre Anmeldedaten nur einmal für diesen Server eingeben.</para>
+		</note>
+
+		<para>Nachdem das Projekt erstellt und auf den Server hochgeladen wurde, muss der Teamprojektadministrator den Zugang für die Übersetzer einrichten. Für den Zugriff auf ein Teamprojekt sind die folgenden Informationen erforderlich:</para>
+
+		<orderedlist>
           <listitem>
-            <para><menuchoice>
-                <guimenuitem>Projekt</guimenuitem> <guimenuitem>Neu...</guimenuitem>
-              </menuchoice></para>
+			<para>Projekte auf einem Hosting-Dienst</para>
+
+			<para>Die Übersetzer müssen ein Konto für den Dienst einrichten und ihren Benutzernamen an den Teamprojektadministrator senden.</para>
+
+			<para>Der Administrator gewährt diesen Konten dann Schreibzugriff auf das Repository.</para>
           </listitem>
 
           <listitem>
-            <para>mit der Befehlszeile: <command>java -jar OmegaT.jar team init [lang1] [lang2]</command></para>
+			<para>Projekte auf einem selbst gehosteten Server</para>
+
+			<para>Wenn es sich um einen selbst gehosteten Server handelt, auf dem die Übersetzer keine Möglichkeit zur Registrierung haben, muss der Teamprojektadministrator für jeden Übersetzer ein Konto mit Schreibrechten einrichten.</para>
+
+			<para>Nach dem Erstellen der Konten muss der Administrator den Übersetzern ihre individuellen Anmeldedaten übermitteln.</para>
           </listitem>
-        </itemizedlist>
-      </listitem>
+		</orderedlist>	  
+	  </listitem>
 
-      <listitem>
-        <para>Fügen Sie das neue OmegaT-Projekt dem Versionierungssystem hinzu (<command>add</command> mit SVN und Git)</para>
+	  <listitem id="how.to.setup.team.project.have.members.download">
+		<para id="how.to.setup.team.project.have.members.download.title">Bringen Sie alle dazu, das Projekt über OmegaT herunterzuladen</para>
 
-        <para>Hinweis: Wenn das Projekt mit der Befehlszeile aus Schritt 3 erstellt wurde, ist dieser Schritt bereits vom Programm vorgenommen worden.</para>
-      </listitem>
+		<para>Administratoren haben zwei Möglichkeiten, den Standort des Projekts an die Übersetzer zu übermitteln:</para>
 
-      <listitem>
-        <para>Veröffentlichen Sie das neue OmegaT-Projekt auf dem Server (<command>commit</command> mit SVN, <command>commit</command> gefolgt von <command>push</command> mit Git).</para>
-      </listitem>
-    </orderedlist>
+		<orderedlist>
+          <listitem>
+			<para>Senden Sie eine URL und bitten Sie die Übersetzer, mittels <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.download.team.project" endterm="menus.project.download.team.project.title"/> eine lokale Kopie des Projekts auf ihrem eigenen System zu erstellen.</para>
+          </listitem>
 
-    <para><emphasis role="bold">Spezielle Parameter</emphasis></para>
+          <listitem>
+			<para>Senden Sie eine <filename>omegat.project</filename>-Datei, die die Projekt-URL enthält, und lassen Sie die Übersetzer diese in einen leeren Ordner kopieren und in OmegaT öffnen. Das ist nützlich, wenn das Projekt so eingerichtet ist, dass für jeden Übersetzer unterschiedliche <link linkend="how.to.setup.team.project.mapping.parameters">Zuordnungen</link> verwendet werden.</para>
+          </listitem>
+		</orderedlist>
 
-    <para>Wenn das Projekt bestimmte Filter und Segmentierungsparameter verwendet, müssen sowohl die <filename>filters.xml</filename>- als auch die <filename>segmentation.conf</filename>-Datei zum Versionierungssystem hinzugefügt und auf dem Server veröffentlicht werden.</para>
+		<para>Nachdem der Teamprojektadministrator sicherstellen konnte, dass ein Übersetzer das Teamprojekt öffnen kann, ist es ratsam, sich zu vergewissern, dass die <link linkend="menus.tools.statistics">Projektstatistiken</link> sowohl für den Administrator (auf dem Server) als auch für den Übersetzer (lokal) identisch sind.</para>
+
+		<para>Wenn sie nicht übereinstimmen, vergewissern Sie sich, dass die Dateien <filename>filters.xml</filename> und <filename>segmentation.conf</filename> ordnungsgemäß freigegeben sind.</para>
+	  </listitem>
+
+	  <listitem id="how.to.setup.team.project.download.if.needed">
+		<para id="how.to.setup.team.project.download.if.needed.title">Wenn Sie ebenfalls an dem Projekt arbeiten müssen, laden und speichern Sie das Projekt an einem anderen Speicherort als dem des lokalen Teamprojekts</para>
+	  </listitem>
+
+	  <listitem id="how.to.setup.team.project.translate">
+		<para id="how.to.setup.team.project.translate.title">Sie können nun auch mit dem Team an dem Projekt arbeiten</para>
+	  </listitem>
+	</orderedlist>
   </section>
 
-  <section>
-    <title>Schritt 2: Zu übersetzende Dateien und andere Ressourcen hinzufügen</title>
+  <section id="how.to.setup.team.project.mapping.parameters">
+	<title id="how.to.setup.team.project.mapping.parameters.title">Repository-Zuordnungen</title>
 
-    <para>Verwenden Sie ein SVN- oder Git-Programm, um die zu übersetzenden Dateien hinzuzufügen.</para>
+	<para>Es ist möglich, verschiedene Remote-Speicherorte den lokalen Dateien zuzuordnen (über die OmegaT-Benutzeroberfläche mit <link linkend="dialogs.project.properties.repository.mapping.title" endterm="dialogs.project.properties.repository.mapping.title"/> im <link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/>-Dialogfenster oder durch Bearbeiten der <link linkend="project.folder.omegat.project.file.title" endterm="project.folder.omegat.project.file.title"/>-Datei). Obwohl die Zuordnungsfunktion in erster Linie für das Sammeln von Quelldateien aus verschiedenen Speicherorten gedacht ist, kann sie auch für andere Arten von Dateien verwendet werden.</para>
 
-    <para>Dies kann auch innerhalb von OmegaT erfolgen:</para>
+	<para>Nachfolgend sehen Sie eine Liste von Zuordnungsparametern. Im nächsten Abschnitt finden Sie Anwendungsbeispiele.</para>
 
-    <orderedlist>
-      <listitem>
-        <para>Kopieren Sie die Dateien in den Ordner <filename>/source</filename></para>
-      </listitem>
-
-      <listitem>
-        <para>Verwenden Sie <menuchoice> <guimenuitem>Projekt</guimenuitem> <guimenuitem>Quelldateien committen</guimenuitem> </menuchoice></para>
-      </listitem>
-    </orderedlist>
-
-    <para>Um andere Ressourcen (Wörterbücher, TMX-Dateien oder Glossare) hinzuzufügen, verwenden Sie ein SVN- oder Git-Programm.</para>
-
-    <para>Um <emphasis role="bold">Dateien zu löschen</emphasis>, verwenden Sie ein SVN- oder Git-Programm.</para>
-
-    <para>Beachten Sie, dass nur zwei Dateien von OmegaT während der Übersetzung geändert werden:</para>
-
-    <itemizedlist>
-      <listitem>
-        <para><filename>omegat/project_save.tmx</filename></para>
-      </listitem>
-
-      <listitem>
-        <para><filename>glossary/glossary.txt</filename></para>
-      </listitem>
-    </itemizedlist>
-
-    <para>Alle anderen Dateien sind schreibgeschützt. Wenn der Übersetzer versucht, sie zu ändern, werden sie in ihren ursprünglichen Zustand zurückversetzt, sobald das Projekt geöffnet, geschlossen, gespeichert oder neu geladen wird.</para>
-  </section>
-
-  <section>
-    <title>Schritt 3: Senden Sie eine Einladung an den Übersetzer</title>
-
-    <para>Sobald das Projekt auf dem Server eingerichtet ist, kann der Projektmanager den Übersetzer auf zwei verschiedene Arten am Projekt teilnehmen lassen:</para>
-
-    <itemizedlist>
-      <listitem>
-        <para>Senden Sie die URL des Projekts und bitten Sie den Übersetzer, eine lokale Kopie mit <menuchoice> <guimenuitem>Projekt</guimenuitem> <guimenuitem>Teamprojekt herunterladen</guimenuitem> </menuchoice> zu erstellen.</para>
-      </listitem>
-
-      <listitem>
-        <para>Senden Sie eine <filename>omegat.project</filename>-Datei, die einen Verweis auf die URL enthält, und bitten Sie den Übersetzer, sie in einen speziellen Ordner zu kopieren und mit OmegaT zu öffnen.</para>
-
-        <para>Der Verweis auf die URL wird wie folgt angegeben (hier auf ein Git-Repository):</para>
-
-        <programlisting>&lt;repositories&gt;
- &lt;repository type=&quot;git&quot; url=&quot;https://repo_for_OmegaT_team_project.git&quot;&gt;
-  &lt;mapping local=&quot;&quot; repository=&quot;&quot;/&gt;
- &lt;/repository&gt;
-&lt;/repositories&gt;</programlisting>
-      </listitem>
-    </itemizedlist>
-
-    <para>In beiden Fällen muss der Projektmanager dem Übersetzer seine ID und sein Passwort für den Zugriff auf das Repository mitteilen.</para>
-
-    <para><emphasis role="bold">Statistiken überprüfen</emphasis></para>
-
-    <para>Der Projektmanager sollte mit dem Übersetzer überprüfen, ob die Statistiken auf beiden Seiten (Serverseite und Übersetzerseite) identisch sind.</para>
-
-    <para>Wenn es Unterschiede gibt, prüfen Sie, ob die Dateien <filename>filters.xml</filename> und <filename>segmentation.conf</filename> der Versionsverwaltung unterliegen.</para>
-  </section>
-
-  <section>
-    <title>Sonderfall: Selektive Zugriffsberechtigung</title>
-
-    <para>Der obige Ablauf beschreibt den üblichen Fall, bei dem der Projektmanager die volle Kontrolle über das Projekt haben möchte und bei dem die Dateien (und die Statistiken) auf beiden Seiten (Serverseite und Übersetzerseite) identisch sind.</para>
-
-    <para>OmegaT-Teamprojekte können auch anders eingerichtet werden, bei denen sich mehrere Übersetzer die Datei project_save.tmx teilen, aber nicht die (gesamten) (Quell-)dateien.</para>
-
-    <para>In diesem Fall ist die Vorgehensweise die gleiche, aber der Projektmanager fügt nicht die (gesamten) Dateien zum versionsverwalteten Projekt hinzu. Stattdessen kopieren die Übersetzer die Dateien selbst oder fügen Zuordnungen hinzu, um Dateien von anderen Standorten zu synchronisieren.</para>
-
-      <para>Die Zuordnungen können über <menuchoice> <guimenuitem>Projekt</guimenuitem> <guimenuitem>Eigenschaften</guimenuitem> <guimenuitem>Repository-Zuordnung</guimenuitem> </menuchoice> oder durch Bearbeiten von <filename>omegat.project</filename> hinzugefügt werden.</para>
-  </section>
-
-  <section id="howto.setupteamproject.mappingparameters">
-    <title>Zuordnungsparameter</title>
-
-    <variablelist>
+	<variablelist>
       <varlistentry>
-        <term>Repository-Typ</term>
-
-        <listitem>
-          <para>Dies kann entweder http (was https einschließt), svn, git oder file sein.</para>
-        </listitem>
+		<term>repository type</term>
+		<listitem>
+          <para>Dies kann entweder <emphasis>http</emphasis> (was https einschließt), <emphasis>svn</emphasis>, <emphasis>git</emphasis> oder <emphasis>file</emphasis> sein.</para>
+		</listitem>
       </varlistentry>
 
       <varlistentry>
-        <term>Repository-URL</term>
-
-        <listitem>
-          <para>Remote-Standort oder Verzeichnis der zu übersetzenden Dateien.</para>
-        </listitem>
+		<term>repository url</term>
+		<listitem>
+          <para>Remote-Standort oder Ordner der zu übersetzenden Dateien.</para>
+		</listitem>
       </varlistentry>
 
       <varlistentry>
-        <term>Zuordnung lokal</term>
-
-        <listitem>
+		<term>mapping local</term>
+		<listitem>
           <para>Name des lokalen Ordners oder der lokalen Datei, relativ zum Root-Verzeichnis des OmegaT-Projekts.</para>
-        </listitem>
+		</listitem>
       </varlistentry>
 
       <varlistentry>
-        <term>Zuordnung Repository</term>
-
-        <listitem>
+		<term>mapping repository</term>
+		<listitem>
           <para>Name des Remote-Ordners oder der Remote-Datei, relativ zur Repository-URL.</para>
-        </listitem>
+		</listitem>
       </varlistentry>
 
       <varlistentry>
-        <term>Ausschlüsse</term>
-
-        <listitem>
-          <para>Fügen Sie Muster mit Platzhaltern hinzu (im Stil von Apache Ant): *, ?, **. Trennen Sie verschiedene Muster mit einem Semikolon.</para>
-
-          <para>Beispiel: <userinput>**/excludedfolder/**;*.txt</userinput> schließt Dateien aus, die /excludedfolder/ im Pfad haben, und Dateien mit der .txt-Endung.</para>
-        </listitem>
+		<term>excludes</term>
+		<listitem>
+          <para>Verwenden Sie Platzhalter (im Apache-Ant-Stil: *, ?, **), um Muster für Dateien hinzuzufügen, die nicht Teil der Zuordnung sein sollen. Verwenden Sie ein Semikolon, um verschiedene Muster voneinander zu trennen.</para>
+          <para>Beispiel: <userinput>**/excludedfolder/**;*.txt</userinput> schließt Dateien aus, die /excludedfolder/ im Pfad haben, sowie Dateien mit der <filename>.txt</filename>-Endung.</para>
+		</listitem>
       </varlistentry>
 
       <varlistentry>
-        <term>Einschlüsse</term>
-
-        <listitem>
-          <para>Wie oben.</para>
-
-          <para>Beispiel: <userinput>**/*.docx</userinput>, um alle .docx-Dateien hinzuzufügen, egal wo sie sich im Projekt befinden, auch in ausgeschlossenen Ordnern</para>
-
-          <para>Standardmäßig werden alle Dateien, die nicht ausgeschlossen sind, eingeschlossen. Sie benötigen dies nur, um einige Ausschlüsse zu überschreiben.</para>
-        </listitem>
+		<term>includes</term>
+		<listitem>
+          <para>Wie oben, aber für Dateien, die Teil der Zuordnung sein sollen. Da Dateien standardmäßig eingeschlossen werden, wenn sie nicht ausdrücklich ausgeschlossen werden, ist diese Option nur erforderlich, um Ausnahmen für ein Ausschlussmuster anzugeben.</para>
+          <para>Beispiel: <userinput>**/*.docx</userinput>, um alle .docx-Dateien in das Projekt aufzunehmen, auch wenn sie in einem ausgeschlossenen Ordner enthalten sind.</para>
+		</listitem>
       </varlistentry>
-    </variablelist>
+	</variablelist>
   </section>
 
-  <section>
-    <title>Beispielzuordnungen</title>
+  <section id="how.to.setup.team.project.example.mappings">
+	<title id="how.to.setup.team.project.example.mappings.title">Beispielzuordnungen</title>
 
-    <para>Standard-Projektzuordnung:<programlisting>&lt;repositories&gt;
- &lt;repository type=&quot;svn&quot; url=&quot;https://repo_for_OmegaT_team_project&quot;&gt;
-  &lt;mapping local=&quot;&quot; repository=&quot;&quot;/&gt;
- &lt;/repository&gt;
-&lt;/repositories&gt;</programlisting></para>
-
-    <para>Alle Inhalte von <filename>https://repo_for_OmegaT_team_project</filename> sind dem lokalen OmegaT-Projekt zugeordnet</para>
-
-    <para>Zuordnung für Projekte in einem Unterverzeichnis des Repository:<programlisting>&lt;repositories&gt;
- &lt;repository type=&quot;svn&quot; url=&quot;https://repo_for_All_OmegaT_team_projects&quot;&gt;
-  &lt;mapping local=&quot;&quot; repository=&quot;En-US_DE_project&quot;/&gt;
- &lt;/repository&gt;
-&lt;/repositories&gt;</programlisting></para>
-
-    <para>Alle Inhalte von <filename>https://repo_for_All_OmegaT_team_projects/En-US_DE_project</filename> sind dem lokalen OmegaT-Projekt zugeordnet.</para>
-
-    <para>Zuordnung für zusätzliche Quellen aus dem Remote-Repository, mit Filtern:<programlisting>
-&lt;repositories&gt;
- &lt;repository type=&quot;svn&quot; url=&quot;https://repo_for_All_OmegaT_team_project_sources&quot;&gt;
-  &lt;mapping local=&quot;source/subdir&quot; repository=&quot;&quot;&gt;
-   &lt;excludes&gt;**/*.bak&lt;/excludes&gt;
-   &lt;includes&gt;readme.bak&lt;/includes&gt;
-  &lt;/mapping&gt;
- &lt;/repository&gt;
-&lt;/repositories&gt;</programlisting></para>
-
-    <para>Alle Inhalte von <filename>https://repo_for_All_OmegaT_team_project_sources</filename> sind dem lokalen OmegaT-Projekt-Quellordner zugeordnet, mit Ausnahme aller *.bak-Dateien außer readme.bak.</para>
-
-    <para><programlisting>Zuordnung für zusätzliche Quelldateien aus dem Internet: &lt;repository type=&quot;http&quot; url=&quot;https://github.com/omegat-org/omegat/raw/master/&quot;&gt;
- &lt;mapping local=&quot;source/Bundle.properties&quot; repository=&quot;src/org/omegat/Bundle.properties&quot;/&gt;
+	<para>Standard-Projektzuordnung:<programlisting>&lt;repository type=&quot;svn&quot; url=&quot;https://repo_for_OmegaT_team_project&quot;&gt;
+	&lt;mapping local=&quot;&quot; repository=&quot;&quot;/&gt;
 &lt;/repository&gt;</programlisting></para>
 
-    <para>Die Remote-Datei <filename>https://github.com/omegat-org/omegat/raw/master/src/org/omegat/Bundle.properties</filename> ist der lokalen Datei <filename>source/Bundle.properties</filename> zugeordnet.</para>
+	<para>Alle Inhalte von <filename>https://repo_for_OmegaT_team_project</filename> sind dem lokalen OmegaT-Projekt zugeordnet</para>
 
-    <para>Zuordnung mit Umbenennung:<programlisting>&lt;repository type=&quot;http&quot; url=&quot;https://github.com/omegat-org/omegat/raw/master/&quot;&gt;
- &lt;mapping local=&quot;source/readme_tr.txt&quot; repository=&quot;release/readme.txt&quot;/&gt;
+	<para>Zuordnung für Projekte in einem Unterordner des Repository:<programlisting>&lt;repository type=&quot;svn&quot; url=&quot;https://repo_for_All_OmegaT_team_projects&quot;&gt;
+	&lt;mapping local=&quot;&quot; repository=&quot;En-US_DE_project&quot;/&gt;
 &lt;/repository&gt;</programlisting></para>
 
-    <para>Die Remote-Datei <filename>https://github.com/omegat-org/omegat/raw/master/release/readme.txt</filename> ist der lokalen Datei <filename>source/readme_tr.txt</filename> zugeordnet.</para>
+	<para>Alle Inhalte von <filename>https://repo_for_All_OmegaT_team_projects/En-US_DE_project</filename> sind dem lokalen OmegaT-Projekt zugeordnet.</para>
 
-    <para>Dies macht es möglich, die zu übersetzende Datei umzubenennen.</para>
-
-    <para>Zuordnung einer lokalen Datei:<programlisting>&lt;repository type=&quot;file&quot; url=&quot;/home/me/myfiles&quot;&gt;
- &lt;mapping local=&quot;source/file.txt&quot; repository=&quot;my/file.txt&quot;/&gt;
- &lt;mapping local=&quot;source/file2.txt&quot; repository=&quot;some/file.txt&quot;/&gt;
+	<para>Zuordnung für zusätzliche Quellen aus einem Remote-Repository, mit Filtern:<programlisting>&lt;repository type=&quot;svn&quot; url=&quot;https://repo_for_All_OmegaT_team_project_sources&quot;&gt;
+	&lt;mapping local=&quot;source/subdir&quot; repository=&quot;&quot;&gt;
+	    &lt;excludes&gt;**/*.bak&lt;/excludes&gt;
+    	&lt;includes&gt;readme.bak&lt;/includes&gt;
+	&lt;/mapping&gt;
 &lt;/repository&gt;</programlisting></para>
 
-    <para>Die lokale Datei <filename>/home/me/myfiles/my/file.txt</filename> ist der lokalen Datei <filename>source/file.txt</filename> zugeordnet und <filename>/home/me/myfiles/some/file.txt</filename> ist der lokalen Datei <filename>source/file2.txt</filename> zugeordnet.</para>
+	<para>Alles in <filename>https://repo_for_All_OmegaT_team_project_sources</filename> ist dem lokalen OmegaT-Projekt-Quellordner zugeordnet, außer Dateien mit der <filename>.bak</filename>-Endung. Allerdings wird auch die <filename>readme.bak</filename>-Datei eingeschlossen.</para>
 
-    <para>Warnung: Wenn eine Datei nicht existiert, wird das Projekt nicht geladen.</para>
-    <para>Sie können beliebig viele Zuordnungen hinzufügen, aber nur im Kontext eines Teamprojekts; das heißt, eine der Zuordnungen beinhaltet omegat.project. Dieses Feature ist eigentlich für das Zusammentragen von Quelldateien gedacht, aber es ist nicht auf Quelldateien beschränkt.</para>
+	<para>Zuordnung für zusätzliche Quelldateien aus dem Web:<programlisting>&lt;repository type=&quot;http&quot; url=&quot;https://github.com/omegat-org/omegat/raw/master/&quot;&gt;
+	&lt;mapping local=&quot;source/Bundle.properties&quot; repository=&quot;src/org/omegat/Bundle.properties&quot;/&gt;
+&lt;/repository&gt;</programlisting></para>
+
+	<para>Die Remote-Datei <filename>https://github.com/omegat-org/omegat/raw/master/src/org/omegat/Bundle.properties</filename> ist der lokalen Datei <filename>source/Bundle.properties</filename> zugeordnet.</para>
+
+	<para>Zuordnung mit Umbenennung:<programlisting>&lt;repository type=&quot;http&quot; url=&quot;https://github.com/omegat-org/omegat/raw/master/&quot;&gt;
+	&lt;mapping local=&quot;source/readme_tr.txt&quot; repository=&quot;release/readme.txt&quot;/&gt;
+&lt;/repository&gt;</programlisting></para>
+
+	<para>Die Remote-Datei <filename>https://github.com/omegat-org/omegat/raw/master/release/readme.txt</filename> ist der lokalen Datei <filename>source/readme_tr.txt</filename> zugeordnet.</para>
+
+	<para>Dies macht es möglich, die zu übersetzende Datei umzubenennen.</para>
+
+	<para>Zuordnung einer lokalen Datei:<programlisting>&lt;repository type=&quot;file&quot; url=&quot;/home/me/myfiles&quot;&gt;
+	&lt;mapping local=&quot;source/file.txt&quot; repository=&quot;my/file.txt&quot;/&gt;
+	&lt;mapping local=&quot;source/file2.txt&quot; repository=&quot;some/file.txt&quot;/&gt;
+&lt;/repository&gt;</programlisting></para>
+
+	<para>Die lokale Datei <filename>/home/me/myfiles/my/file.txt</filename> ist der lokalen Datei <filename>source/file.txt</filename> zugeordnet und <filename>/home/me/myfiles/some/file.txt</filename> ist der lokalen Datei <filename>source/file2.txt</filename> zugeordnet.</para>
+
+	<warning>
+      <para>Das Projekt wird nicht geladen, wenn eine Datei, die in einer Zuordnung angegeben ist, nicht existiert.</para>
+	</warning>
+
+	<para>Sie können beliebig viele Zuordnungen hinzufügen, aber eine der Zuordnungen muss die <filename>omegat.project</filename>-Datei einschließen.</para>
+
   </section>
-  <section>
-    <title>Hinweis zu omegat.project und Zuordnungen</title>
-    <para>Wenn Sie ein neues Projekt erstellen und dieses an ein Repository committen, enthält die <filename>omegat.project</filename>-Datei keine Zuordnungen. Wenn Sie das Projekt herunterladen, wird das Projekt lokal in ein Teamprojekt umgewandelt und eine Standardzuordnung hinzugefügt.</para>
-    <para>Beachten Sie, dass die Datei omegat.project im Repository nicht automatisch geändert wird und nach wie vor nicht die Zuordnungen enthält. Wenn Sie ein Projekt laden, werden alle Änderungen im Repository in das lokale Projekt kopiert, einschließlich der <filename>omegat.project</filename>-Datei mit den Projekteinstellungen. Wenn die Datei keine Zuordnungen enthält, werden die vorhandenen lokalen Zuordnungen wieder angewendet, und nur diese. Alle anderen lokalen Änderungen am Projekt werden rückgängig gemacht. Wenn die Datei Zuordnungen enthält, werden lokale Änderungen an Zuordnungen verworfen.</para>
-  </section>
+  <section id="how.to.setup.team.project.selective.sharing">
+	<title id="how.to.setup.team.project.selective.sharing.title">Selektive Freigabe</title>
 
+	<para>Die oben beschriebene Prozedur beschreibt das gängigste Szenario, wo der Teamprojektadministrator die volle Kontrolle über das Projekt hat und alle Dateien (und Statistiken) in sämtlichen Instanzen des Projekts identisch sind, sowohl auf dem Server als auch auf den lokalen Systemen der Übersetzer.</para>
+
+	<para>Es ist auch möglich, ein Teamprojekt zu konfigurieren, wo sich mehrere Übersetzer die <filename>project_save.tmx</filename>-Datei und nur eine Teilmenge der anderen Dateien teilen.</para>
+
+	<para>Die Prozedur ist grundsätzlich dieselbe, nur dass der Teamprojektadministrator nicht jede Datei zum versionskontrollierten Projekt auf dem Server hinzufügt. Die restlichen Dateien werden entweder von den Übersetzern selbst kopiert, oder es werden Zuordnungen definiert, die Dateien aus anderen Speicherorten synchronisieren.</para>
+  </section>
 </section>

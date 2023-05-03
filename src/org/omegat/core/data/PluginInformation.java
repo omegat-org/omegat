@@ -28,6 +28,7 @@ package org.omegat.core.data;
 
 import java.io.File;
 import java.net.URL;
+import java.util.Map;
 import java.util.Properties;
 import java.util.jar.Attributes;
 import java.util.jar.Manifest;
@@ -386,6 +387,16 @@ public class PluginInformation {
                 }
             }
             return null;
+        }
+
+        public static PluginInformation fromMap(Map<String, String> attr) {
+            PluginUtils.PluginType cate = PluginUtils.PluginType.getTypeByValue(attr.get("Category"));
+            return new PluginInformation(attr.get("Class-Name"), attr.get("Name"), attr.get("Version"),
+                    attr.get("Author"), attr.getOrDefault("Description", ""), cate,
+                    attr.getOrDefault("Link", ""), null, Status.UNINSTALLED,
+                    attr.get("Plugin-Download-Url"), attr.get("Plugin-Jar-Filename"),
+                    attr.get("Plugin-Sha256Sum"));
+
         }
     }
 }

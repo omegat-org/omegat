@@ -25,23 +25,22 @@
 
 package org.omegat.util;
 
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.module.ModuleDescriptor.Version;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.function.Predicate;
@@ -50,6 +49,8 @@ import java.util.jar.Manifest;
 
 import javax.swing.JOptionPane;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.io.FileUtils;
 
 import org.omegat.core.Core;
@@ -69,7 +70,8 @@ public final class PluginInstaller {
     private static final String PLUGIN_VERSION = "Plugin-Version";
     private static final String PLUGIN_TYPE = "OmegaT-Plugin";
     private static final String LIST_URL =
-            "https://github.com/omegat-org/omegat-plugins/releases/download/continuous-release/plugins.MF";
+            "https://github.com/omegat-org/omegat-plugins/releases/download/continuous-release/plugins.json";
+    private final ObjectMapper mapper = new ObjectMapper();
 
     private List<PluginInformation> pluginInformationList;
 
@@ -301,44 +303,35 @@ public final class PluginInstaller {
     }
 
     /**
-     * Download plugin list from github repository.
+     * Download the plugin database from GitHub repository.
      * @return set of PluginInformation
      */
     private List<PluginInformation> getPluginsList() {
-        List<PluginInformation> pluginInfo = new ArrayList<>();
-        String raw_value;
+        Map<String, Map<String, String>> tmp = new HashMap<>();
         try {
-            raw_value = HttpConnectionUtils.getURL(new URL(LIST_URL));
-            Scanner scanner = new Scanner(raw_value);
-            StringBuilder sb = new StringBuilder();
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                if (!line.equals("")) {
-                    sb.append(line).append("\n");
+            List<Map<String, String>> db = mapper.readValue(new URL(LIST_URL), new TypeReference<>(){});
+            for (Map<String, String> record : db) {
+                String id = record.get("ID");
+                if (!tmp.containsKey(id)) {
+                    tmp.put(id, record);
                 } else {
-                    try {
-                        Manifest m = new Manifest(new ByteArrayInputStream(sb.toString().getBytes(StandardCharsets.UTF_8)));
-                        String pluginClasses = m.getMainAttributes().getValue("OmegaT-Plugins");
-                        if (pluginClasses == null) {
-                            continue;
-                        }
-                        for (String clazz : pluginClasses.split("\\s+")) {
-                            if (clazz.trim().isEmpty()) {
-                                continue;
-                            }
-                            pluginInfo.add(PluginInformation.Builder.fromManifest(clazz, m, null,
-                                PluginInformation.Status.UNINSTALLED));
-                        }
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                    if (compareVersion(record.get("Version"), tmp.get(id).get("Version")) > 0) {
+                        tmp.put(id, record);
                     }
-                    sb = new StringBuilder();
                 }
             }
-            scanner.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+        List<PluginInformation> pluginInfo = new ArrayList<>();
+        for (Map.Entry<String, Map<String, String>> entry: tmp.entrySet()) {
+            PluginInformation info = PluginInformation.Builder.fromMap(entry.getValue());
+            pluginInfo.add(info);
         }
         return pluginInfo;
+    }
+
+    private int compareVersion(String a, String b) {
+        return Version.parse(a).compareTo(Version.parse(b));
     }
 }

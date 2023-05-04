@@ -291,7 +291,6 @@ jar {
                    'OmegaT-Plugin': 'true',
                    'OmegaT-Plugins': omtPlugins.plugin,
                    'Plugin-Author': 'OmegaT team',
-                   'Plugin-Link': 'https://omegat.org',
                    'Plugin-Version': project.version,
                    'Main-Class': mainClassName,
                    'Class-Path': configurations.runtimeClasspath.collect { "lib/${it.name}" }.join(' '))

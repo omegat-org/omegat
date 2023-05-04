@@ -30,17 +30,11 @@ import java.awt.Dimension;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.URI;
-import java.util.ArrayList;
-import java.util.List;
 import java.net.URL;
 
 import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import javax.swing.RowSorter;
-import javax.swing.SortOrder;
-import javax.swing.table.TableModel;
-import javax.swing.table.TableRowSorter;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.table.TableRowSorter;
@@ -65,7 +59,6 @@ public class PluginsPreferencesController extends BasePreferencesController {
      public static final String PLUGINS_WIKI_URL = "https://sourceforge.net/p/omegat/wiki/Plugins/";
     private PluginsPreferencesPanel panel;
     private PluginDetailsPane pluginDetailsPane;
-    private PluginDetailHeader pluginDetailHeader;
 
     /**
      * Format plugin information for details pane of UI.
@@ -74,18 +67,20 @@ public class PluginsPreferencesController extends BasePreferencesController {
      */
     private static String formatDetailText(PluginInformation info) {
         StringBuilder sb = new StringBuilder();
+        sb.append("<h1>").append(info.getName()).append("</h1>");
         sb.append("<h4>Author: ");
         if (info.getAuthor() != null) {
-            sb.append(info.getAuthor()).append("<br/>\n");
+            sb.append(info.getAuthor()).append("<br/>");
         } else {
-            sb.append("Unknown<br/>\n");
+            sb.append("Unknown<br/>");
         }
         if (info.getVersion() != null) {
-            sb.append("Version: ").append(info.getVersion()).append("<br/>\n");
+            sb.append("Version: ").append(info.getVersion()).append("<br/>");
         }
-        sb.append("</h4>\n");
+        sb.append(info.getCategory());
+        sb.append("</h4>");
         if (info.getDescription() != null) {
-            sb.append("<p>").append(info.getDescription()).append("</p>\n");
+            sb.append("<p>").append(info.getDescription()).append("</p>");
         }
         if (info.getLink() != null) {
             sb.append("<br/><div><a href=\"").append(info.getLink()).append("\">Plugin homepage</a></div>");
@@ -110,25 +105,23 @@ public class PluginsPreferencesController extends BasePreferencesController {
         } else {
             PluginInfoTableModel model = (PluginInfoTableModel) panel.tablePluginsInfo.getModel();
             PluginInformation info = model.getItemAt(rowIndex);
-            pluginDetailHeader.labelPluginName.setText(info.getName());
-            pluginDetailHeader.labelCategory.setText(info.getCategory().getTypeValue());
-            for(ActionListener act : pluginDetailHeader.installButton.getActionListeners()) {
-                pluginDetailHeader.installButton.removeActionListener(act);
+            for(ActionListener act : panel.installButton.getActionListeners()) {
+                panel.installButton.removeActionListener(act);
             }
-            pluginDetailHeader.installButton.setEnabled(true);
+            panel.installButton.setEnabled(true);
             if (info.getStatus().equals(PluginInformation.Status.UNINSTALLED)) {
-                pluginDetailHeader.installButton.setText(OStrings.getString("PREFS_PLUGINS_INSTALL"));
+                panel.installButton.setText(OStrings.getString("PREFS_PLUGINS_INSTALL"));
             } else if (info.getStatus().equals(PluginInformation.Status.UPGRADABLE)) {
-                pluginDetailHeader.installButton.setText(OStrings.getString("PREFS_PLUGINS_UPGRADE"));
+                panel.installButton.setText(OStrings.getString("PREFS_PLUGINS_UPGRADE"));
             } else if (info.getStatus().equals(PluginInformation.Status.BUNDLED)) {
-                pluginDetailHeader.installButton.setText(OStrings.getString("PREFS_PLUGINS_BUNDLED"));
-                pluginDetailHeader.installButton.setEnabled(false);
+                panel.installButton.setText(OStrings.getString("PREFS_PLUGINS_BUNDLED"));
+                panel.installButton.setEnabled(false);
             } else {
-                pluginDetailHeader.installButton.setText(OStrings.getString("PREFS_PLUGINS_UPTODATE"));
-                pluginDetailHeader.installButton.setEnabled(false);
+                panel.installButton.setText(OStrings.getString("PREFS_PLUGINS_UPTODATE"));
+                panel.installButton.setEnabled(false);
             }
-            pluginDetailHeader.installButton.addActionListener(e -> {
-                pluginDetailHeader.installButton.setEnabled(false);
+            panel.installButton.addActionListener(e -> {
+                panel.installButton.setEnabled(false);
                 try {
                     URL downloadUrl = new URL(info.getRemoteJarFileUrl());
                     String jarFilename = info.getJarFilename();
@@ -136,7 +129,7 @@ public class PluginsPreferencesController extends BasePreferencesController {
                     PluginDownloadThread downloadThread = new PluginDownloadThread(downloadUrl, sha256sum, jarFilename);
                     downloadThread.start();
                 } catch (IOException ex) {
-                    Log.log(ex);
+                    Log.logErrorRB(ex, "PREFS_PLUGINS_DOWNLOAD_ERROR", info.getName());
                 }
                 setRestartRequired(true);
             });
@@ -154,9 +147,7 @@ public class PluginsPreferencesController extends BasePreferencesController {
         panel.tablePluginsInfo.setAutoCreateRowSorter(true);
         panel.tablePluginsInfo.getColumnModel().getColumn(PluginInfoTableModel.COLUMN_NAME).setPreferredWidth(100);
         panel.tablePluginsInfo.getColumnModel().getColumn(PluginInfoTableModel.COLUMN_VERSION).setPreferredWidth(50);
-        pluginDetailHeader = new PluginDetailHeader();
         pluginDetailsPane = new PluginDetailsPane();
-        panel.panelPluginDetails.add(pluginDetailHeader);
         panel.panelPluginDetails.add(pluginDetailsPane);
         panel.scrollTable.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         panel.scrollTable.getViewport().setViewSize(new Dimension(250, 350));
@@ -167,6 +158,7 @@ public class PluginsPreferencesController extends BasePreferencesController {
         panel.tablePluginsInfo.getSelectionModel().addListSelectionListener(this::selectRowAction);
         panel.tablePluginsInfo.setPreferredScrollableViewportSize(panel.tablePluginsInfo.getPreferredSize());
         TableColumnSizer.autoSize(panel.tablePluginsInfo, 0, true);
+        panel.installButton.setEnabled(false);
         panel.browsePluginsButton.addActionListener(e -> {
             try {
                 DesktopWrapper.browse(URI.create(PLUGINS_WIKI_URL));
@@ -189,6 +181,7 @@ public class PluginsPreferencesController extends BasePreferencesController {
 
     @Override
     protected void initFromPrefs() {
+        panel.tablePluginsInfo.changeSelection(0, 0, false, false);
     }
 
     @Override

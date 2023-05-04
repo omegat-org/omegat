@@ -338,7 +338,7 @@ public class PluginInformation {
          */
         public static PluginInformation fromProperties(String className, Properties props,
                                                        final String key, final URL mu, final Status status) {
-            return new PluginInformation(className, key, OStrings.getSimpleVersion(), AUTHOR,
+            return new PluginInformation(className, findName(className), OStrings.getSimpleVersion(), AUTHOR,
                     props.getProperty(String.format("plugin.desc.%s", key)),
                     PluginUtils.PluginType.getTypeByValue(key), LINK, mu, status,
                     null, null, null);
@@ -358,6 +358,10 @@ public class PluginInformation {
             if (name != null) {
                 return name;
             }
+            return findName(className);
+        }
+
+        private static String findName(String className) {
             return className.substring(className.lastIndexOf(".") + 1);
         }
 

@@ -57,6 +57,7 @@ public class PluginsPreferencesPanel extends JPanel {
         jPanel2 = new javax.swing.JPanel();
         browsePluginsButton = new javax.swing.JButton();
         installFromDiskButton = new javax.swing.JButton();
+        installButton = new javax.swing.JButton();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
         setMinimumSize(new java.awt.Dimension(250, 200));
@@ -91,11 +92,15 @@ public class PluginsPreferencesPanel extends JPanel {
         org.openide.awt.Mnemonics.setLocalizedText(installFromDiskButton, OStrings.getString("PREFS_PLUGINS_INSTALL_FROM_DISK")); // NOI18N
         jPanel2.add(installFromDiskButton);
 
+        org.openide.awt.Mnemonics.setLocalizedText(installButton, OStrings.getString("PREFS_PLUGINS_INSTALL")); // NOI18N
+        jPanel2.add(installButton);
+
         add(jPanel2);
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     javax.swing.JButton browsePluginsButton;
+    javax.swing.JButton installButton;
     javax.swing.JButton installFromDiskButton;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

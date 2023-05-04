@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2021 Hiroshi Miura
+ Copyright (C) 2021,2023 Hiroshi Miura
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -30,12 +30,12 @@ package org.omegat.gui.preferences.view;
  * @author Hiroshi Miura
  */
 @SuppressWarnings("serial")
-public class PluginDetailHeader extends javax.swing.JPanel {
+public class PluginInfomationWidget extends javax.swing.JPanel {
 
     /**
      * Creates new form PluginDetailHeader
      */
-    public PluginDetailHeader() {
+    public PluginInfomationWidget() {
         initComponents();
     }
 
@@ -48,35 +48,18 @@ public class PluginDetailHeader extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel2 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
-        labelCategory = new javax.swing.JLabel();
-        installButton = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         labelPluginName = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        labelAuthor = new javax.swing.JLabel();
+        labelVersion = new javax.swing.JLabel();
+        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
+        labelCategory = new javax.swing.JLabel();
 
         setMaximumSize(new java.awt.Dimension(32876, 64));
         setMinimumSize(new java.awt.Dimension(100, 64));
         setPreferredSize(new java.awt.Dimension(100, 64));
-        setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.LINE_AXIS));
-
-        jPanel2.setPreferredSize(new java.awt.Dimension(400, 56));
-        jPanel2.setLayout(new javax.swing.BoxLayout(jPanel2, javax.swing.BoxLayout.PAGE_AXIS));
-
-        jPanel3.setMaximumSize(new java.awt.Dimension(32767, 32));
-        jPanel3.setMinimumSize(new java.awt.Dimension(100, 32));
-        jPanel3.setPreferredSize(new java.awt.Dimension(100, 32));
-        java.awt.FlowLayout flowLayout1 = new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT);
-        flowLayout1.setAlignOnBaseline(true);
-        jPanel3.setLayout(flowLayout1);
-
-        labelCategory.setText("category");
-        jPanel3.add(labelCategory);
-
-        installButton.setText("Install");
-        jPanel3.add(installButton);
-
-        jPanel2.add(jPanel3);
+        setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.PAGE_AXIS));
 
         jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
@@ -84,18 +67,31 @@ public class PluginDetailHeader extends javax.swing.JPanel {
         labelPluginName.setText("Name");
         jPanel1.add(labelPluginName);
 
-        jPanel2.add(jPanel1);
+        add(jPanel1);
 
-        add(jPanel2);
+        jPanel3.setLayout(new javax.swing.BoxLayout(jPanel3, javax.swing.BoxLayout.LINE_AXIS));
+
+        labelAuthor.setText("author");
+        jPanel3.add(labelAuthor);
+
+        labelVersion.setText("version");
+        jPanel3.add(labelVersion);
+        jPanel3.add(filler1);
+
+        labelCategory.setText("category");
+        jPanel3.add(labelCategory);
+
+        add(jPanel3);
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    javax.swing.JButton installButton;
+    private javax.swing.Box.Filler filler1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    javax.swing.JLabel labelAuthor;
     javax.swing.JLabel labelCategory;
     javax.swing.JLabel labelPluginName;
+    javax.swing.JLabel labelVersion;
     // End of variables declaration//GEN-END:variables
 }

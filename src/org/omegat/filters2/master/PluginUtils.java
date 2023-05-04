@@ -214,7 +214,7 @@ public final class PluginUtils {
                         }
                     }
                 } else {
-                    // load from plugins property list
+                    // load from "Plugins.properties"
                     Properties props = new Properties();
                     try (FileInputStream fis = new FileInputStream(PLUGINS_LIST_FILE)) {
                         props.load(fis);

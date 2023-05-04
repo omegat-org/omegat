@@ -850,7 +850,7 @@
 			  <varlistentry>
 				<term>Tag shortcuts</term>
 				<listitem>
-				  <para>These option specify the way OmegaT creates tags from
+				  <para>These options specify the way OmegaT creates tags from
 				  the XLIFF contents.</para>
 				</listitem>
 			  </varlistentry>

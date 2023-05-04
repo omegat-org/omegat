@@ -81,28 +81,20 @@ public class PluginInfoTableModel extends DefaultTableModel {
         Object returnValue;
 
         switch (column) {
-        case COLUMN_NAME:
-            returnValue = plugin.getName();
-            break;
-        case COLUMN_VERSION:
-            returnValue = plugin.getVersion();
-            break;
-        case COLUMN_CATEGORY:
-            returnValue = plugin.getCategory();
-            break;
-        case COLUMN_STAT:
-            if (plugin.getStatus() == PluginInformation.Status.INSTALLED) {
-                returnValue = OStrings.getString("PREFS_PLUGINS_UPTODATE");
-            } else if (plugin.getStatus() == PluginInformation.Status.UPGRADABLE) {
-                returnValue = OStrings.getString("PREFS_PLUGINS_UPGRADABLE");
-            } else if (plugin.getStatus() == PluginInformation.Status.BUNDLED) {
-                returnValue = OStrings.getString("PREFS_PLUGINS_BUNDLED");
-            } else {
-                returnValue = OStrings.getString("PREFS_PLUGINS_NEW");
-            }
-            break;
-        default:
-            throw new IllegalArgumentException("Invalid column index");
+            case COLUMN_NAME:
+                returnValue = plugin.getName();
+                break;
+            case COLUMN_VERSION:
+                returnValue = plugin.getVersion();
+                break;
+            case COLUMN_CATEGORY:
+                returnValue = plugin.getCategory();
+                break;
+            case COLUMN_STAT:
+                returnValue = plugin.getStatus().getLocalizedValue();
+                break;
+            default:
+                throw new IllegalArgumentException("Invalid column index");
         }
 
         return returnValue;

@@ -41,6 +41,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.List;
@@ -122,6 +123,13 @@ public final class PluginUtils {
             }
             return UNKNOWN;
         }
+
+        @Override
+        public String toString() {
+            return getTypeValue();
+        }
+
+        public static Comparator<PluginType> ascComparator = (t1, t2) -> t1.typeValue.compareTo(t2.typeValue);
     }
 
     private static final List<Class<?>> LOADED_PLUGINS = new ArrayList<>();

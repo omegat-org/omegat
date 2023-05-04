@@ -42,11 +42,13 @@ import javax.swing.table.TableRowSorter;
 import org.omegat.core.Core;
 import org.omegat.core.data.PluginInformation;
 import org.omegat.core.threads.PluginDownloadThread;
+import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.dialogs.ChoosePluginFile;
 import org.omegat.gui.preferences.BasePreferencesController;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.PluginInstaller;
+import org.omegat.util.gui.DataTableStyling;
 import org.omegat.util.gui.DesktopWrapper;
 import org.omegat.util.gui.TableColumnSizer;
 
@@ -98,13 +100,13 @@ public class PluginsPreferencesController extends BasePreferencesController {
     }
 
     final void selectRowAction(ListSelectionEvent evt) {
-        int rowIndex = panel.tablePluginsInfo.convertRowIndexToModel(
-                panel.tablePluginsInfo.getSelectedRow());
+        int rowIndex = panel.tablePluginsInfo.getSelectedRow();
         if (rowIndex == -1) {
             pluginDetailsPane.setText("");
         } else {
+            int index = panel.tablePluginsInfo.convertRowIndexToModel(rowIndex);
             PluginInfoTableModel model = (PluginInfoTableModel) panel.tablePluginsInfo.getModel();
-            PluginInformation info = model.getItemAt(rowIndex);
+            PluginInformation info = model.getItemAt(index);
             for(ActionListener act : panel.installButton.getActionListeners()) {
                 panel.installButton.removeActionListener(act);
             }
@@ -113,11 +115,8 @@ public class PluginsPreferencesController extends BasePreferencesController {
                 panel.installButton.setText(OStrings.getString("PREFS_PLUGINS_INSTALL"));
             } else if (info.getStatus().equals(PluginInformation.Status.UPGRADABLE)) {
                 panel.installButton.setText(OStrings.getString("PREFS_PLUGINS_UPGRADE"));
-            } else if (info.getStatus().equals(PluginInformation.Status.BUNDLED)) {
-                panel.installButton.setText(OStrings.getString("PREFS_PLUGINS_BUNDLED"));
-                panel.installButton.setEnabled(false);
             } else {
-                panel.installButton.setText(OStrings.getString("PREFS_PLUGINS_UPTODATE"));
+                panel.installButton.setText("-");
                 panel.installButton.setEnabled(false);
             }
             panel.installButton.addActionListener(e -> {
@@ -133,7 +132,7 @@ public class PluginsPreferencesController extends BasePreferencesController {
                 }
                 setRestartRequired(true);
             });
-            pluginDetailsPane.setText(formatDetailText(model.getItemAt(rowIndex)));
+            pluginDetailsPane.setText(formatDetailText(model.getItemAt(index)));
         }
     }
 
@@ -144,20 +143,26 @@ public class PluginsPreferencesController extends BasePreferencesController {
 
     private void initGui() {
         panel = new PluginsPreferencesPanel();
-        panel.tablePluginsInfo.setAutoCreateRowSorter(true);
+        PluginInfoTableModel model = new PluginInfoTableModel();
+        panel.tablePluginsInfo.setModel(model);
+        TableRowSorter<PluginInfoTableModel> sorter = new TableRowSorter<>(model);
+        // sorter.setComparator(0, PluginInformation.Status.ascComparator);
+        sorter.setComparator(1, PluginUtils.PluginType.ascComparator);
+        panel.tablePluginsInfo.setRowSorter(sorter);
         panel.tablePluginsInfo.getColumnModel().getColumn(PluginInfoTableModel.COLUMN_NAME).setPreferredWidth(100);
         panel.tablePluginsInfo.getColumnModel().getColumn(PluginInfoTableModel.COLUMN_VERSION).setPreferredWidth(50);
-        pluginDetailsPane = new PluginDetailsPane();
-        panel.panelPluginDetails.add(pluginDetailsPane);
+
         panel.scrollTable.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         panel.scrollTable.getViewport().setViewSize(new Dimension(250, 350));
 
-        PluginInfoTableModel model = (PluginInfoTableModel) panel.tablePluginsInfo.getModel();
-        TableRowSorter<PluginInfoTableModel> sorter = new TableRowSorter<>(model);
-        panel.tablePluginsInfo.setRowSorter(sorter);
         panel.tablePluginsInfo.getSelectionModel().addListSelectionListener(this::selectRowAction);
         panel.tablePluginsInfo.setPreferredScrollableViewportSize(panel.tablePluginsInfo.getPreferredSize());
+        DataTableStyling.applyFont(panel.tablePluginsInfo, Core.getMainWindow().getApplicationFont());
         TableColumnSizer.autoSize(panel.tablePluginsInfo, 0, true);
+
+        pluginDetailsPane = new PluginDetailsPane();
+        panel.panelPluginDetails.add(pluginDetailsPane);
+
         panel.installButton.setEnabled(false);
         panel.browsePluginsButton.addActionListener(e -> {
             try {

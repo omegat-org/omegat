@@ -28,6 +28,7 @@ package org.omegat.core.data;
 
 import java.io.File;
 import java.net.URL;
+import java.util.Comparator;
 import java.util.Map;
 import java.util.Properties;
 import java.util.jar.Attributes;
@@ -44,11 +45,37 @@ import org.omegat.util.OStrings;
 public class PluginInformation {
 
     public enum Status {
-        INSTALLED,
-        BUNDLED,
-        NEW,
-        UPGRADABLE,
-        UNINSTALLED,
+        INSTALLED("installed"),
+        BUNDLED("bundled"),
+        NEW("new"),
+        UPGRADABLE("upgradable"),
+        UNINSTALLED("uninstalled");
+
+        private String value;
+
+        Status(String value) {
+            this.value = value;
+        }
+
+        public String getLocalizedValue() {
+            switch(this) {
+                case UNINSTALLED:
+                    return OStrings.getString("PLUGIN_STATUS_UNINSTALLED");
+                case UPGRADABLE:
+                    return OStrings.getString("PLUGIN_STATUS_UPGRADABLE");
+                case BUNDLED:
+                    return OStrings.getString("PLUGIN_STATUS_BUNDLED");
+                case NEW:
+                    return OStrings.getString("PLUGIN_STATUS_NEW");
+                case INSTALLED:
+                    return OStrings.getString("PLUGIN_STATUS_INSTALLED");
+                default:
+                    return "Unknown";
+            }
+
+        }
+
+        public static Comparator<Status> ascComparator = (s1, s2) -> s1.value.compareTo(s2.value);
     }
 
     private final String className;

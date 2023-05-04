@@ -69,8 +69,7 @@ public final class PluginInstaller {
     private static final String PLUGIN_NAME = "Plugin-Name";
     private static final String PLUGIN_VERSION = "Plugin-Version";
     private static final String PLUGIN_TYPE = "OmegaT-Plugin";
-    private static final String LIST_URL =
-            "https://github.com/omegat-org/omegat-plugins/releases/download/continuous-release/plugins.json";
+    private static final String LIST_URL = "https://omegat.sourceforge.io/plugins/plugins.json";
     private final ObjectMapper mapper = new ObjectMapper();
 
     private List<PluginInformation> pluginInformationList;

@@ -42,7 +42,6 @@ import javax.swing.table.TableRowSorter;
 import org.omegat.core.Core;
 import org.omegat.core.data.PluginInformation;
 import org.omegat.core.threads.PluginDownloadThread;
-import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.dialogs.ChoosePluginFile;
 import org.omegat.gui.preferences.BasePreferencesController;
 import org.omegat.util.Log;
@@ -147,7 +146,7 @@ public class PluginsPreferencesController extends BasePreferencesController {
         panel.tablePluginsInfo.setModel(model);
         TableRowSorter<PluginInfoTableModel> sorter = new TableRowSorter<>(model);
         // sorter.setComparator(0, PluginInformation.Status.ascComparator);
-        sorter.setComparator(1, PluginUtils.PluginType.ascComparator);
+        // sorter.setComparator(1, PluginUtils.PluginType.ascComparator);
         panel.tablePluginsInfo.setRowSorter(sorter);
         panel.tablePluginsInfo.getColumnModel().getColumn(PluginInfoTableModel.COLUMN_NAME).setPreferredWidth(100);
         panel.tablePluginsInfo.getColumnModel().getColumn(PluginInfoTableModel.COLUMN_VERSION).setPreferredWidth(50);

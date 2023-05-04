@@ -88,7 +88,7 @@ public class PluginInfoTableModel extends DefaultTableModel {
                 returnValue = plugin.getVersion();
                 break;
             case COLUMN_CATEGORY:
-                returnValue = plugin.getCategory();
+                returnValue = plugin.getCategory().getLocalizedValue();
                 break;
             case COLUMN_STAT:
                 returnValue = plugin.getStatus().getLocalizedValue();

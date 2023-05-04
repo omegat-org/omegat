@@ -129,6 +129,32 @@ public final class PluginUtils {
             return getTypeValue();
         }
 
+        public String getLocalizedValue() {
+            switch(this) {
+                case BASE:
+                    return OStrings.getString("PLUGIN_TYPE_BASE");
+                case THEME:
+                    return OStrings.getString("PLUGIN_TYPE_THEME");
+                case FILTER:
+                    return OStrings.getString("PLUGIN_TYPE_FILTER");
+                case MISCELLANEOUS:
+                    return OStrings.getString("PLUGIN_TYPE_MISC");
+                case MARKER:
+                    return OStrings.getString("PLUGIN_TYPE_MARKER");
+                case GLOSSARY:
+                    return OStrings.getString("PLUGIN_TYPE_GLOSSARY");
+                case TOKENIZER:
+                    return OStrings.getString("PLUGIN_TYPE_TOKENIZER");
+                case DICTIONARY:
+                    return OStrings.getString("PLUGIN_TYPE_DICTIONARY");
+                case MACHINETRANSLATOR:
+                    return OStrings.getString("PLUGIN_TYPE_MACHINETRANSLATOR");
+                case UNKNOWN:
+                default:
+                    return OStrings.getString("PLUGIN_TYPE_UNKNOWN");
+            }
+        }
+
         public static Comparator<PluginType> ascComparator = (t1, t2) -> t1.typeValue.compareTo(t2.typeValue);
     }
 

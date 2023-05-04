@@ -1,2 +1,3 @@
 rootProject.name = 'OmegaT'
-include("tipoftheday")
+include("misc-modules:html-media-support",
+        "tipoftheday")

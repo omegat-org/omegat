@@ -1,0 +1,37 @@
+plugins {
+    id 'java-library'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compileOnly(project.rootProject)
+    // Libs are provided in the "source" distribution only
+    if (providedLibsDir.directory) {
+        compileOnly fileTree(dir: providedLibsDir, include: '**/*.jar')
+    } else {
+        // Data: inline data URL handler
+        compileOnly 'tokyo.northside:url-protocol-handler:0.1.4'
+        // runtime dependencies should be in main project
+    }
+}
+
+jar {
+    archiveAppendix.set("omegat")
+    destinationDirectory.set(new File(rootProject.buildDir, "modules"))
+    def pluginProp = loadProperties(file('plugin.properties'))
+    manifest {
+        attributes('License': 'GNU Public License version 3 or later',
+                'Implementation-Version': pluginProp.Version,
+                'OmegaT-Plugins': pluginProp.Class,
+                'Plugin-Author': pluginProp.Author,
+                'Plugin-Version': pluginProp.Version,
+                'Plugin-Name': pluginProp.Name,
+                'Plugin-Category': pluginProp.Category,
+                'Plugin-Description': pluginProp.Description
+        )
+    }
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+}

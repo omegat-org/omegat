@@ -98,8 +98,8 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
             parserFactory.setFeature("http://xml.org/sax/features/external-parameter-entities", false);
             // as well, per Timothy Morgan's 2014 paper: "XML Schema, DTD, and Entity Attacks"
             parserFactory.setXIncludeAware(false);
-        } catch (Exception ex) {
-            Log.log(ex.getMessage());
+        } catch (ParserConfigurationException | SAXNotRecognizedException | SAXNotSupportedException ex) {
+            Log.logErrorRB(ex, "XML_FILTER_ERROR", ex.getMessage());
         }
         this.dialect = dialect;
     }

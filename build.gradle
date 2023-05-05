@@ -540,14 +540,14 @@ task hunspellJarSignedContents(type: Sync) {
     from zipTree(hunspellJar)
     destinationDir = file("$buildDir/hunspell")
     doLast {
-        def jnilibs = fileTree(dir: destinationDir, include: '**/*.jnilib').files
+        def dylibs = fileTree(dir: destinationDir, include: '**/*.dylib').files
         exec {
             commandLine('codesign', '--deep', '--force',
                         '--sign', project.property('macCodesignIdentity'),
                         '--timestamp',
                         '--options', 'runtime',
                         '--entitlements', file('release/mac-specific/java.entitlements'),
-                        *jnilibs.toList())
+                        *dylibs.toList())
         }
     }
 }
@@ -559,14 +559,14 @@ task bridjJarSignedContents(type: Sync) {
     from zipTree(bridjJar)
     destinationDir = file("$buildDir/bridj")
     doLast {
-        def jnilibs = fileTree(dir: destinationDir, include: '**/*.jnilib').files
+        def dylibs = fileTree(dir: destinationDir, include: '**/*.dylib').files
         exec {
             commandLine('codesign', '--deep', '--force',
                         '--sign', project.property('macCodesignIdentity'),
                         '--timestamp',
                         '--options', 'runtime',
                         '--entitlements', file('release/mac-specific/java.entitlements'),
-                        *jnilibs.toList())
+                        *dylibs.toList())
         }
     }
 }

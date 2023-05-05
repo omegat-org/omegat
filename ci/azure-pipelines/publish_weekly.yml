@@ -1,0 +1,18 @@
+parameters:
+  - name: omegatVersion
+    default: ''
+
+steps:
+  - task: DownloadPipelineArtifact@2
+    displayName: 'Download Artifact: drop'
+    inputs:
+      targetPath: $(Pipeline.Workspace)/drop
+  - task: Bash@3
+    displayName: 📂 SFTP upload to sourceforge file management
+    inputs:
+      targetType: 'inline'
+      script: |
+        echo "Push OmegaT ${{ parameters.omegatVersion }} files to SourceForge file manager"
+        ls drop/*
+        echo "put $(Pipeline.Workspace)/drop/* /home/frs/project/omegat/Weekly" > sftp.cmd
+        SSHPASS=$(SOURCEFORGE_FILE_PASS) sshpass -e sftp -oBatchMode=no -b sftp.cmd -oStrictHostKeyChecking=no $(SOURCEFORGE_FILE_USER)@frs.sourceforge.net

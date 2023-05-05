@@ -1238,3 +1238,7 @@ tasks.withType(JavaExec).configureEach {
     // Ask modules to be up-to-date before run task executed
     dependsOn subprojects.tasks.jar
 }
+
+task printVersion {
+    println project.version
+}

@@ -81,13 +81,16 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
         try {
             // We validate XML in default
             parserFactory.setFeature("http://xml.org/sax/features/validation", true);
-            // When driver writer want not to validate please override and set features false.
-            // ex. setSAXFeature("http://xml.org/sax/features/validation", false);
+            // When a driver writer wants not to validate, please override and
+            // set features false.
+            // ex. setSAXFeature("http://xml.org/sax/features/validation",
+            // false);
 
             // Protecting from a XXE attack.
 
             // "Feature for Secure Processing (FSP)" is the central mechanism to
-            // help safeguard XML processing. It instructs XML processors, such as parsers,
+            // help safeguard XML processing. It instructs XML processors, such
+            // as parsers,
             // validators, and transformers, to try and process XML securely.
             parserFactory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
             // Avoid internet connection to validate with external DTD.
@@ -96,7 +99,8 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
             parserFactory.setFeature("http://xml.org/sax/features/external-general-entities", false);
             // Disable external parameter entities
             parserFactory.setFeature("http://xml.org/sax/features/external-parameter-entities", false);
-            // as well, per Timothy Morgan's 2014 paper: "XML Schema, DTD, and Entity Attacks"
+            // as well, per Timothy Morgan's 2014 paper: "XML Schema, DTD, and
+            // Entity Attacks"
             parserFactory.setXIncludeAware(false);
         } catch (ParserConfigurationException | SAXNotRecognizedException | SAXNotSupportedException ex) {
             Log.logErrorRB(ex, "XML_FILTER_ERROR", ex.getMessage());
@@ -109,8 +113,8 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
         return dialect;
     }
 
-    protected void setSAXFeature(String feature, boolean b) throws SAXNotSupportedException,
-            SAXNotRecognizedException, ParserConfigurationException {
+    protected void setSAXFeature(String feature, boolean b)
+            throws SAXNotSupportedException, SAXNotRecognizedException, ParserConfigurationException {
         parserFactory.setFeature(feature, b);
     }
 

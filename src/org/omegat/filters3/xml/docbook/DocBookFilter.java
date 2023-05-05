@@ -62,7 +62,8 @@ public class DocBookFilter extends XMLFilter {
             setSAXFeature("http://xml.org/sax/features/external-general-entities", true);
             // XXX: we should take care of external entities
             setSAXFeature("http://xml.org/sax/features/external-parameter-entities", true);
-        } catch (SAXNotSupportedException | SAXNotRecognizedException | ParserConfigurationException ignored) {
+        } catch (SAXNotSupportedException | SAXNotRecognizedException
+                | ParserConfigurationException ignored) {
         }
     }
 

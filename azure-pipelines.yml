@@ -46,14 +46,14 @@ stages:
     displayName: CI Check for master, releases/* and Pull-Requests
     pool:
       vmImage: 'ubuntu-22.04'
-    condition: ne(variables['Build.Reason'], 'Schedule')
+    condition:
     steps:
       - template: ci/azure-pipelines/check_steps.yml
 
 # Build steps will run on the main and/or release branch, except for Pull-Request
 - stage: Weekly
   dependsOn: Check
-  condition: and(succeeded(), or(eq(variables.isMain, true), eq(variables.isReleasesBranch, true)))
+  condition: and(succeeded(), eq(variables['Build.Reason'], 'Schedule'))
   jobs:
   - job: WeeklyBuild
     displayName: Build for master weekly

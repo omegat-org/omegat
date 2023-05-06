@@ -45,7 +45,7 @@ import org.omegat.core.data.ProjectProperties;
  * @author Maxym Mykhalchuk
  *
  */
-@Deprecated
+@Deprecated(forRemoval = true, since = "5.8")
 public final class TMXWriter {
 
     private TMXWriter() {

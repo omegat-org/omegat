@@ -62,6 +62,15 @@ public final class MemoryUtils {
     }
 
     /**
+     * getMemory which is free by jvm.
+     *
+     * @return free memory size
+     */
+    public static long getMemoryFree() {
+        return Runtime.getRuntime().freeMemory();
+    }
+
+    /**
      * Get memory allocated by jvm.
      *
      * @return memory size

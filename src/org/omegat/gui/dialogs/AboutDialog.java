@@ -37,6 +37,7 @@ import javax.swing.JDialog;
 
 import org.apache.commons.io.IOUtils;
 import org.omegat.help.Help;
+import org.omegat.util.MemoryUtils;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Platform;
@@ -72,9 +73,9 @@ public class AboutDialog extends JDialog {
 
         versionLabel.setText(getVersionString());
 
-        Object[] args = { StaticUtils.getMB(Runtime.getRuntime().totalMemory()),
-                StaticUtils.getMB(Runtime.getRuntime().freeMemory()),
-                StaticUtils.getMB(Runtime.getRuntime().maxMemory())};
+        Object[] args = { StaticUtils.getMB(MemoryUtils.getMemoryAllocated()),
+                StaticUtils.getMB(MemoryUtils.getMemoryFree()),
+                StaticUtils.getMB(MemoryUtils.getMemoryLimit())};
         String memoryUsage = StringUtil.format(OStrings.getString("MEMORY_USAGE"), args);
         memoryusage.setText(memoryUsage);
 

@@ -64,6 +64,15 @@ public final class MemoryUtils {
     /**
      * getMemory which is free by jvm.
      *
+     * @return free memory size in MB.
+     */
+    public static long getMemoryFreeMB() {
+        return StaticUtils.getMB(Runtime.getRuntime().freeMemory());
+    }
+
+    /**
+     * getMemory which is free by jvm.
+     *
      * @return free memory size
      */
     public static long getMemoryFree() {
@@ -73,10 +82,28 @@ public final class MemoryUtils {
     /**
      * Get memory allocated by jvm.
      *
+     * @return memory size in MB.
+     */
+    public static int getMemoryAllocatedMB() {
+        return StaticUtils.getMB(getMemoryAllocated());
+    }
+
+    /**
+     * Get memory allocated by jvm.
+     *
      * @return memory size
      */
     public static long getMemoryAllocated() {
         return Runtime.getRuntime().totalMemory();
+    }
+
+    /**
+     * Get maximum memory which can be allocated by jvm.
+     *
+     * @return memory size in MB.
+     */
+    public static long getMemoryLimitMB() {
+        return StaticUtils.getMB(Runtime.getRuntime().maxMemory());
     }
 
     /**

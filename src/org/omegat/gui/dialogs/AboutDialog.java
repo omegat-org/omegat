@@ -73,10 +73,8 @@ public class AboutDialog extends JDialog {
 
         versionLabel.setText(getVersionString());
 
-        Object[] args = { StaticUtils.getMB(MemoryUtils.getMemoryAllocated()),
-                StaticUtils.getMB(MemoryUtils.getMemoryFree()),
-                StaticUtils.getMB(MemoryUtils.getMemoryLimit())};
-        String memoryUsage = StringUtil.format(OStrings.getString("MEMORY_USAGE"), args);
+        String memoryUsage = StringUtil.format(OStrings.getString("MEMORY_USAGE"),
+                MemoryUtils.getMemoryAllocatedMB(), MemoryUtils.getMemoryFreeMB(), MemoryUtils.getMemoryLimitMB());
         memoryusage.setText(memoryUsage);
 
         String javaVersion = StringUtil.format(OStrings.getString("JAVA_VERSION"),

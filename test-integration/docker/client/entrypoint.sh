@@ -1,9 +1,10 @@
-# /**************************************************************************
+#!/usr/bin/env bash
+#
 #  OmegaT - Computer Assisted Translation (CAT) tool
 #           with fuzzy matching, translation memory, keyword search,
 #           glossaries, and translation leveraging into updated projects.
 #
-#  Copyright (C) 2022 Hiroshi Miura
+#  Copyright (C) 2023 Hiroshi Miura.
 #                Home page: https://www.omegat.org/
 #                Support center: https://omegat.org/support
 #
@@ -21,17 +22,26 @@
 #
 #  You should have received a copy of the GNU General Public License
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
-#  **************************************************************************/
 #
 
-FROM debian:bullseye-slim
-RUN apt-get -y update && apt-get upgrade -y && apt-get install -y openssh-client git openjdk-11-jdk inotify-tools curl subversion
-RUN adduser --disabled-password --gecos "" --home /home/omegat --shell /bin/bash omegat && mkdir -p /home/omegat/.ssh \
-    && touch /home/omegat/.ssh/known_hosts && chmod 600 /home/omegat/.ssh/known_hosts
-COPY ssh_config /home/omegat/.ssh/config
-COPY entrypoint.sh /usr/local/bin/
-RUN chown -R omegat /home/omegat && chmod 755 /usr/local/bin/entrypoint.sh
+[ -f /keys/id_rsa ] || inotifywait -e attrib /keys
 
-USER omegat
+cp /keys/id_rsa /home/omegat/.ssh/id_rsa
+chown omegat.omegat /home/omegat/.ssh/id_rsa
+chmod 600 /home/omegat/.ssh/id_rsa
 
-ENTRYPOINT /usr/local/bin/entrypoint.sh
+
+if [[ "${TYPE}" == "SVN" ]]; then
+  export REPO=http://server/svn/omegat-test.svn REPO2=http://server/svn/omegat-test.svn
+elif [[ "${TYPE}" == "SSH" ]]; then
+  export REPO=svn+ssh://git@server/home/git/omegat-test.svn REPO2=svn+ssh://git@server/home/git/omegat-test.svn
+elif [[ "${TYPE}" == "GIT" ]]; then
+  export REPO=git@server:omegat-test.git REPO2=https://git:gitpass@server/omegat-test.git
+  git config --global user.name example
+  git config --global user.email git@example.com
+  git config --global http.sslVerify false
+fi
+
+cd /code
+./gradlew testIntegration -Domegat.test.duration=${DURATION} -Domegat.test.repo=${REPO} \
+       -Domegat.test.repo.alt=${REPO2} -Domegat.test.map.repo=http://server/ -Domegat.test.map.file=README

@@ -1,9 +1,10 @@
-# /**************************************************************************
+#!/usr/bin/env bash
+#
 #  OmegaT - Computer Assisted Translation (CAT) tool
 #           with fuzzy matching, translation memory, keyword search,
 #           glossaries, and translation leveraging into updated projects.
 #
-#  Copyright (C) 2022 Hiroshi Miura
+#  Copyright (C) 2023 Hiroshi Miura.
 #                Home page: https://www.omegat.org/
 #                Support center: https://omegat.org/support
 #
@@ -21,17 +22,10 @@
 #
 #  You should have received a copy of the GNU General Public License
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
-#  **************************************************************************/
 #
 
-FROM debian:bullseye-slim
-RUN apt-get -y update && apt-get upgrade -y && apt-get install -y openssh-client git openjdk-11-jdk inotify-tools curl subversion
-RUN adduser --disabled-password --gecos "" --home /home/omegat --shell /bin/bash omegat && mkdir -p /home/omegat/.ssh \
-    && touch /home/omegat/.ssh/known_hosts && chmod 600 /home/omegat/.ssh/known_hosts
-COPY ssh_config /home/omegat/.ssh/config
-COPY entrypoint.sh /usr/local/bin/
-RUN chown -R omegat /home/omegat && chmod 755 /usr/local/bin/entrypoint.sh
-
-USER omegat
-
-ENTRYPOINT /usr/local/bin/entrypoint.sh
+ssh-keygen -q -t rsa -m PEM -b 4096 -N '' -f /tmp/id_rsa && ssh-keygen -A
+install -m 666 /tmp/id_rsa /tmp/id_rsa.pub /keys/
+cat /keys/id_rsa.pub >> /home/git/.ssh/authorized_keys
+echo "start servers"
+exec /usr/bin/supervisord

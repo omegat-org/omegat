@@ -158,8 +158,7 @@ public final class MemoryUtils {
                     if (!fc.isPrimitive()) {
                         boolean canAccesible = f.trySetAccessible();
                         if (canAccesible) {
-                            Object v = f.get(obj);
-                            result += calcObjectSize(v);
+                            result += calcObjectSize(f.get(obj));
                         }
                     }
                 }

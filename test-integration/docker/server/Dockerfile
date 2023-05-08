@@ -27,12 +27,14 @@ FROM debian:bullseye-slim
 RUN apt-get -y update && apt-get -y upgrade \
     && apt-get install -y openssh-server git inotify-tools apache2 apache2-utils supervisor apache2-suexec-pristine subversion libapache2-mod-svn \
     && adduser --system --group --shell /bin/bash git && (echo 'git:gitpass' | chpasswd) && mkdir -p /home/git/.ssh && chmod 700 /home/git/.ssh \
-    && a2dissite 000-default default-ssl && a2enmod ssl cgi env alias suexec && htpasswd -b -c /home/git/htpasswd git gitpass \
+    && a2dissite 000-default default-ssl && a2enmod ssl cgi env alias suexec dav dav_fs dav_lock \
+    && htpasswd -b -c /home/git/htpasswd git gitpass \
     && mkdir -p /var/lock/apache2 /var/run/apache2 /var/run/sshd /var/log/supervisor \
     && mkdir -p /var/www/git /var/www/html /var/www/svn/repos && echo "AcceptEnv LANG LC_* GIT_PROTOCOL" >> /etc/ssh/sshd_config
 COPY git-http.conf /etc/apache2/sites-enabled/
 COPY svn-http.conf /etc/apache2/sites-enabled/
 COPY svn-access /var/www/svn/
+COPY svn-htpasswd /var/www/svn/
 COPY supervisord.conf /etc/supervisor/conf.d/
 COPY git-http-backend-wrapper.cgi /var/www/git/
 COPY entrypoint.sh /usr/local/bin/

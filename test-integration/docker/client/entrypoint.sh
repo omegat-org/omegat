@@ -32,7 +32,7 @@ chmod 600 /home/omegat/.ssh/id_rsa
 
 
 if [[ "${TYPE}" == "SVN" ]]; then
-  export REPO=http://server/svn/omegat-test.svn
+  export REPO=http://git:gitpass@server/svn/omegat-test.svn
   export REPO2=http://git:gitpass@server/svn/omegat-test.svn
 elif [[ "${TYPE}" == "SSH" ]]; then
   export REPO=svn+ssh://server/home/git/omegat-test.svn

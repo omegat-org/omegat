@@ -163,7 +163,11 @@ dependencies {
 
         // Dictionary
         implementation 'com.github.takawitter:trie4j:0.9.8'
-        implementation 'io.github.eb4j:dsl4j:0.5.3'
+        implementation('io.github.eb4j:dsl4j:0.5.3') {
+            exclude module: 'annotations'
+        }
+        // Explicit specification of annotations version
+        implementation 'org.jetbrains:annotations:23.0.0'
         implementation 'tokyo.northside:stardict4j:0.5.0'
 
         // Encoding detections
@@ -180,12 +184,14 @@ dependencies {
         // LanguageTool
         implementation("org.languagetool:languagetool-core:${languageToolVersion}") {
             exclude module: 'guava'
+            exclude module: 'jackson-databind'
+            exclude group: 'org.jetbrains'
         }
-        // Exclicitly specify guava dependency for `jre` version rather than `-android`
+        // Explicitly specify guava dependency for `jre` version rather than `-android`
         implementation 'com.google.guava:guava:31.0.1-jre'
         runtimeOnly("org.languagetool:language-all:${languageToolVersion}") {
             // Temporary exclusion; see https://sourceforge.net/p/omegat/bugs/814/
-            exclude module: 'lucene-gosen-ipadic'
+            exclude module: 'lucene-gosen'
         }
         runtimeOnly 'org.omegat.lucene:lucene-gosen:5.0.0:ipadic'
 
@@ -200,11 +206,10 @@ dependencies {
         implementation 'org.eclipse.jgit:org.eclipse.jgit:6.5.0.202303070854-r'
         implementation 'org.eclipse.jgit:org.eclipse.jgit.ssh.apache:6.5.0.202303070854-r'
         implementation 'org.eclipse.jgit:org.eclipse.jgit.ssh.apache.agent:6.5.0.202303070854-r'
-        implementation 'org.apache.sshd:sshd-git:2.9.2'
         // For ed25519 and ecdsa support of ssh, java16+ or BC
-        implementation 'org.bouncycastle:bcprov-jdk15on:1.70'
-        implementation 'org.bouncycastle:bcpg-jdk15on:1.70'
-        implementation 'org.bouncycastle:bcpkix-jdk15on:1.70'
+        implementation 'org.bouncycastle:bcprov-jdk18on:1.72'
+        implementation 'org.bouncycastle:bcpg-jdk18on:1.72'
+        implementation 'org.bouncycastle:bcpkix-jdk18on:1.72'
         implementation 'net.i2p.crypto:eddsa:0.3.0'
         // For gpg signing
         implementation 'org.eclipse.jgit:org.eclipse.jgit.gpg.bc:6.5.0.202303070854-r'
@@ -220,10 +225,10 @@ dependencies {
 
         // Groovy used for scripts - needed at implementation for GroovyClassLoader modifications
         // Ivy is needed to handle Grape/@Grab dependencies
-        runtimeOnly('org.codehaus.groovy:groovy-all:3.0.9@pom') {
+        runtimeOnly('org.apache.groovy:groovy-all:4.0.11@pom') {
             transitive = true
         }
-        runtimeOnly 'org.codehaus.groovy:groovy-dateutil:3.0.9'
+        runtimeOnly 'org.apache.groovy:groovy-dateutil:4.0.11'
         runtimeOnly 'org.apache.ivy:ivy:2.5.1'
 
         // Javascript used for scripts
@@ -238,10 +243,10 @@ dependencies {
         implementation 'com.fifesoft:autocomplete:3.2.0'
 
         // JSON parser
-        implementation "com.fasterxml.jackson.core:jackson-core:2.13.4"
-        implementation "com.fasterxml.jackson.core:jackson-databind:2.13.4.2"
-        implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.13.4"
-        implementation 'com.fasterxml.jackson.module:jackson-module-jaxb-annotations:2.14.0'
+        implementation "com.fasterxml.jackson.core:jackson-core:2.14.2"
+        implementation "com.fasterxml.jackson.core:jackson-databind:2.14.2"
+        implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.14.2"
+        implementation 'com.fasterxml.jackson.module:jackson-module-jaxb-annotations:2.14.2'
 
         implementation("com.github.ben-manes.caffeine:caffeine:2.9.3") {
             attributes {
@@ -258,7 +263,7 @@ dependencies {
 
         // dependencies in submodules, you should put it as compileOnly in subprojects
         runtimeOnly "tokyo.northside:tipoftheday:0.4.1"
-        runtimeOnly "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.13.4"
+        runtimeOnly "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.14.2"
     }
 
     // Test dependencies

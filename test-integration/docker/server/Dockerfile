@@ -27,15 +27,19 @@ FROM debian:bullseye-slim
 RUN apt-get -y update && apt-get -y upgrade \
     && apt-get install -y openssh-server git inotify-tools apache2 apache2-utils supervisor apache2-suexec-pristine subversion libapache2-mod-svn \
     && adduser --system --group --shell /bin/bash git && (echo 'git:gitpass' | chpasswd) && mkdir -p /home/git/.ssh && chmod 700 /home/git/.ssh \
-    && a2dissite 000-default default-ssl && a2enmod ssl cgi env alias suexec && htpasswd -b -c /home/git/htpasswd git gitpass \
+    && a2dissite 000-default default-ssl && a2enmod ssl cgi env alias suexec dav dav_fs dav_lock \
+    && htpasswd -b -c /home/git/htpasswd git gitpass \
     && mkdir -p /var/lock/apache2 /var/run/apache2 /var/run/sshd /var/log/supervisor \
     && mkdir -p /var/www/git /var/www/html /var/www/svn/repos && echo "AcceptEnv LANG LC_* GIT_PROTOCOL" >> /etc/ssh/sshd_config
 COPY git-http.conf /etc/apache2/sites-enabled/
 COPY svn-http.conf /etc/apache2/sites-enabled/
 COPY svn-access /var/www/svn/
+COPY svn-htpasswd /var/www/svn/
 COPY supervisord.conf /etc/supervisor/conf.d/
 COPY git-http-backend-wrapper.cgi /var/www/git/
+COPY entrypoint.sh /usr/local/bin/
 RUN chmod 755 /var/www/git/git-http-backend-wrapper.cgi \
+    && chmod 755 /usr/local/bin/entrypoint.sh \
     && touch /home/git/.ssh/authorized_keys && chmod 600 /home/git/.ssh/authorized_keys \
     && mkdir -p /tmp/template && echo "source content" > /tmp/template/README && mkdir -p /home/git/svn \
     && (cd /var/www/svn/repos && svnadmin create omegat-test.svn && svn import /tmp/template file:///var/www/svn/repos/omegat-test.svn/trunk/ -m first ) \
@@ -48,7 +52,4 @@ RUN chmod 755 /var/www/git/git-http-backend-wrapper.cgi \
     && chown -R git.git /home/git /var/www/git
 
 EXPOSE 22 80 443
-CMD ssh-keygen -q -t rsa -m PEM -b 4096 -N '' -f /tmp/id_rsa && ssh-keygen -A \
- && install -m 666 /tmp/id_rsa /tmp/id_rsa.pub /keys/ \
- && cat /keys/id_rsa.pub >> /home/git/.ssh/authorized_keys \
- && echo "start servers" && exec /usr/bin/supervisord
+ENTRYPOINT /usr/local/bin/entrypoint.sh

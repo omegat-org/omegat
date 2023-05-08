@@ -280,6 +280,7 @@ dependencies {
     jaxb 'com.sun.xml.bind:jaxb-xjc:2.3.4'
 
     testIntegrationImplementation sourceSets.main.output, sourceSets.test.output
+    testIntegrationRuntimeOnly "org.slf4j:slf4j-jdk14:1.7.32"
 }
 
 jar {

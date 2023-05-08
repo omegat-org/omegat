@@ -80,8 +80,8 @@
 	<filename>Contents/</filename> folder.</para>
 
 	<note>
-	  <para>To access the files inside the <filename>OmegaT.app</filename>,
-	  package right-click on <filename>OmegaT.app</filename> and select “Show 
+	  <para>To access the files inside the <filename>OmegaT.app</filename>
+	  package, right-click on <filename>OmegaT.app</filename> and select “Show 
 	  Package Contents”.</para>
 
 	  <para>It is also possible to use <filename>OmegaT.app</filename> itself to

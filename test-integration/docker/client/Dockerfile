@@ -30,7 +30,8 @@ RUN adduser --disabled-password --gecos "" --home /home/omegat --shell /bin/bash
     && touch /home/omegat/.ssh/known_hosts && chmod 600 /home/omegat/.ssh/known_hosts
 COPY ssh_config /home/omegat/.ssh/config
 COPY entrypoint.sh /usr/local/bin/
-RUN chown -R omegat /home/omegat && chmod 755 /usr/local/bin/entrypoint.sh
+RUN chown -R omegat /home/omegat && chmod 755 /usr/local/bin/entrypoint.sh && chmod 700 /home/omegat/.ssh \
+    && chmod 600 /home/omegat/.ssh/config
 
 USER omegat
 

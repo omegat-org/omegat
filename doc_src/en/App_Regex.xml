@@ -173,7 +173,7 @@
       </varlistentry>
 
       <varlistentry>
-        <term>Letters of the alphabet preceded by a backslash
+        <term>Digits and letters of the alphabet preceded by a backslash
         (<literal>\</literal>) take on a special meaning</term>
         <listitem>
           <para>Unlike a letter on its own, which simply represents itself as

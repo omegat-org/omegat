@@ -68,7 +68,7 @@
     <varlistentry id="menus.project.save">
       <term id="menus.project.save.title"><guimenuitem>Speichern</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap></keycombo></term>
       <listitem>
-        <para>Speichert den projekteigenen Translation Memory (<link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/>).</para>
+        <para>Speichert den projekteigenen Translation Memory (<link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/>) und synchronisiert Teamprojekte.</para>
 		<para>OmegaT speichert Übersetzungen automatisch alle drei Minuten, und wenn Sie das Projekt schließen oder das Programm beenden. Siehe die <link linkend="dialog.preferences.saving.and.output.interval" endterm="dialog.preferences.saving.and.output.interval.title"/>-Einstellung für weitere Informationen.</para>
       </listitem>
     </varlistentry>
@@ -81,7 +81,7 @@
     </varlistentry>
 
     <varlistentry id="menus.project.download.mediawiki.page">
-      <term id="menus.project.download.mediawiki.page.title"><guimenuitem>Online-MediaWiki-Seite hinzufügen...</guimenuitem></term>
+      <term id="menus.project.download.mediawiki.page.title"><guimenuitem>MediaWiki-Seite hinzufügen...</guimenuitem></term>
       <listitem>
 		<para>Öffnet ein Dialogfenster, das Sie nutzen können, um die URL der MediaWiki-Seite einzufügen, die Sie übersetzen möchten. Die Quelldaten der Seite werden in den Ordner <link linkend="project.folder.source" endterm="project.folder.source.title"/> kopiert, und zwar als Textdatei mit der Endung <filename>.utf8</filename>.</para>
       </listitem>
@@ -108,6 +108,7 @@
       <listitem>
         <para>Erstellt die Zieldateien basierend auf Ihrer Übersetzung. Die erstellten Zieldateien befinden sich im Ordner <link linkend="project.folder.target" endterm="project.folder.target.title"/>.</para>
 		<note><para>Sie können die Erstellung von Zieldateien verhindern, wenn Tag-Probleme gefunden werden. Siehe die <link linkend="dialogs.preferences.tag.processing.do.not.allow.creating.translated.documents.with.tag.issues" endterm="dialogs.preferences.tag.processing.do.not.allow.creating.translated.documents.with.tag.issues.title"/>-Einstellung für weitere Informationen.</para></note>
+		<para>Jedes Mal, wenn Sie die übersetzten Dateien erstellen, speichert OmegaT das Projekt (siehe den Menüpunkt <link linkend="menus.project.save" endterm="menus.project.save.title"/> oben) und erstellt Referenz-Memories, die die übersetzten Segmente des aktuellen Quelldatei-Sets enthalten.</para>
       </listitem>
     </varlistentry>
 
@@ -115,8 +116,7 @@
       <term id="menus.project.create.current.translated.document.title"><guimenuitem>Aktuell übersetzte Datei erstellen</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>D</keycap></keycombo></term>
       <listitem>
         <para>Erstellt die Zieldatei, die der gerade übersetzten Quelldatei entspricht. Die erstellte Zieldatei befinden sich im Ordner <link linkend="project.folder.target" endterm="project.folder.target.title"/>.</para>
-		<para>
-		</para>				
+		<para>Jedes Mal, wenn Sie die aktuelle übersetzte Datei erstellen, speichert OmegaT das Projekt (siehe den Menüpunkt <link linkend="menus.project.save" endterm="menus.project.save.title"/> oben) und erstellt Referenz-Memories, die die übersetzten Segmente des aktuellen Quelldatei-Sets enthalten.</para>
       </listitem>
     </varlistentry>
 

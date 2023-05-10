@@ -206,14 +206,14 @@
 		  
 		  <variablelist>
 			<varlistentry>
-			  <term>Speicher</term>
+			  <term>Haupt-Memory</term>
 			  <listitem>
 				<para>Projekteigenen Translation Memory einbeziehen (<link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/>).</para>
 			  </listitem>
 			</varlistentry>
 
 			<varlistentry>
-			  <term>TMs</term>
+			  <term>Referenz-TMs</term>
 			  <listitem>
 				<para>Externe Translation Memories im <link linkend="project.folder.tm" endterm="project.folder.tm.title"/>-Ordner einbeziehen.</para>
 			  </listitem>
@@ -241,9 +241,13 @@
 	  </varlistentry>
 
 	  <varlistentry>
-		<term><guibutton>Erweiterte Optionen anzeigen</guibutton></term>
+		<term><guibutton>TM-Suchoptionen</guibutton></term>
 		<listitem>
 		  <para>Wählen Sie zusätzliche Kriterien aus, wie z. B. die Person, die die Übersetzung erstellt oder geändert hat, das Datum und die Uhrzeit der Übersetzung (Modifikation) oder ob verwaiste Segmente ausgeschlossen werden sollen.</para>
+
+		  <warning>
+			<para>Die TM-Suchoptionen beziehen sich nur auf den Haupt-Memory, nicht auf die Referenz-Memories.</para>
+		  </warning>
 
 		  <variablelist>
 			<varlistentry>

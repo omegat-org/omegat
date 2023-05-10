@@ -123,7 +123,7 @@
 		  </listitem>
 
 		  <listitem id="menus.goto.auto.populated.segments.prev.enforce">
-			<para id="menus.goto.auto.populated.segments.prev.enforce.title"><guimenuitem>Vorheriges Segment von tm/enforce/</guimenuitem> <keycombo><keycap>S</keycap><keycap>C</keycap><keycap>A</keycap><keycap>.</keycap></keycombo></para>
+			<para id="menus.goto.auto.populated.segments.prev.enforce.title"><guimenuitem>Vorheriges Segment von tm/enforce/</guimenuitem> <keycombo><keycap>S</keycap><keycap>C</keycap><keycap>A</keycap><keycap>,</keycap></keycombo></para>
 
 			<para>Springt zum vorherigen Segment, das von <filename>tm/enforce/</filename> eingefügt wurde.</para>
 		  </listitem>

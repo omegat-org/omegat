@@ -109,7 +109,7 @@
               </listitem>
 
               <listitem>
-                <para>Wenn es einen Konflikt zwischen der Lokal- und Remote-Version der <filename>omegat.project</filename>-Datei gibt und die lokale Version überschrieben wird, erstellt OmegaT eine Sicherungskopie namens <filename>omegat.project.YYYYMMDDhhmm.bak</filename>. Die Sicherungskopien werden mindestens zehn Tage lang aufbewahrt, und ältere Sicherungskopien werden automatisch gelöscht.</para>
+                <para>Wenn es einen Konflikt zwischen der Lokal- und Remote-Version der <filename>omegat.project</filename>-Datei gibt und die lokale Version überschrieben wird, erstellt OmegaT eine Sicherungskopie namens <filename>omegat.project.YYYYMMDDhhmm.bak</filename>. OmegaT erstellt bis zu zehn Sicherungskopien. Ältere Sicherungskopien werden wiederum automatisch gelöscht.</para>
               </listitem>
             </itemizedlist>
 		  </listitem>

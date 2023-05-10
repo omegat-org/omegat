@@ -146,9 +146,9 @@
       </varlistentry>
 
       <varlistentry>
-        <term>Tags verstecken</term>
+        <term>Tags entfernen</term>
         <listitem>
-          <para>Der Aligner fügt standardmäßig Tags in die Segmente ein. Entfernen Sie das Häkchen, um die Option <link endterm="dialogs.project.properties.hide.tags.title" linkend="dialogs.project.properties.hide.tags"/> anzuwenden.</para>
+          <para>Der Aligner fügt standardmäßig Tags in die Segmente ein. Entfernen Sie das Häkchen, um alle Tags beim Ausrichten und in der resultierenden TMX-Datei zu entfernen.</para>
         </listitem>
       </varlistentry>
 

@@ -49,7 +49,7 @@
 	  </listitem>
 	  
 	  <listitem>
-		<para>Alternativ können Sie die Translation Memories des alten Projekts in den <link linkend="project.folder.tm" endterm="project.folder.tm.title"/>-Ordner des neuen Projekts ablegen.</para>
+		<para>Alternativ können Sie die Referenz-Memories des alten Projekts in den <link linkend="project.folder.tm" endterm="project.folder.tm.title"/>-Ordner des neuen Projekts ablegen.</para>
 
 		<note>
 		  <para>Das ist die bevorzugte Methode, wenn Sie Ihre Übersetzung von Grund auf neu beginnen wollen.</para>
@@ -75,6 +75,27 @@
 
 		<para>Verwenden Sie die Navigationsbefehle im <link linkend="menus.goto" endterm="menus.goto.title"/><link linkend="menus.goto.auto.populated.segments" endterm="menus.goto.auto.populated.segments.title"/>-Menü, um zu einem automatisch ausgefüllten Segment zu navigieren.</para>
 	  </listitem>
+
+	  <listitem>
+		<para>Als Referenzübersetzungen unterstützt OmegaT auch zweisprachige Dokumente, die keine TMX-Dateien sind. Die von OmegaT unterstützten Dateiformate sind alle zweisprachigen Formate, die OmegaT als Quelldateien akzeptiert:</para>
+
+		<itemizedlist>
+		  <listitem>
+			<para>PO-Dateien</para>
+		  </listitem>
+		  <listitem>
+			<para>TXML-Dateien</para>
+		  </listitem>
+		  <listitem>
+			<para>XLIFF-Dateien</para>
+		  </listitem>
+		  <listitem>
+			<para>SDLXLIFF-Dateien</para>
+		  </listitem>
+		</itemizedlist>
+
+	  <para>Sie können solche Dateien im <link linkend="project.folder.tm" endterm="project.folder.tm.title"/>-Ordner Ihres Projekts oder in einem seiner Unterordner ablegen. Anschließend stehen die übersetzten Daten sofort für Matching-Zwecke zur Verfügung.</para>
+	  </listitem>
 	</itemizedlist>
 	
     <section id="how.to.tm.read.and.write">
@@ -82,7 +103,7 @@
 
       <para>OmegaT kann TMX-standardkonforme Memories lesen, die von anderen Tools erstellt wurden.</para>
 
-      <para>Einige Tools erzeugen unter Umständen ungültige TMX-Dateien. Sie müssen diese korrigieren, wenn Sie sie als externe Translation Memories verwenden wollen, da OmegaT sonst einen Fehler meldet und diese nicht laden kann. Die Fehlerbehebung sollte in der Regel kein Problem darstellen, und die von OmegaT angezeigte Fehlermeldung wird Ihnen helfen, den Fehler zu finden. Sie können auch die Benutzergruppe um Rat fragen, wenn Sie Probleme haben.</para>
+      <para>Einige Tools erzeugen unter Umständen ungültige TMX-Dateien. Sie müssen diese korrigieren, wenn Sie sie als Referenz-Memories verwenden wollen, da OmegaT sonst einen Fehler meldet und diese nicht laden kann. Die Fehlerbehebung sollte in der Regel kein Problem darstellen, und die von OmegaT angezeigte Fehlermeldung wird Ihnen helfen, den Fehler zu finden. Sie können auch die Benutzergruppe um Rat fragen, wenn Sie Probleme haben.</para>
 	</section>
 
 	<section id="how.to.use.tm.store.your.tm">
@@ -172,40 +193,64 @@
 <section id="how.to.tm.bridge.two.languages">
   <title id="how.to.tm.bridge.two.languages.title">Zwei Sprachen überbrücken</title>
 
-  <para>OmegaT zeigt Fuzzy Matches im <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/>-Fenster an. Solche Matches sind standardmäßig auf der im <link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/>-Dialogfenster definierten Quell- und Zielsprache beschränkt, aber Sie können auch Matches in Sprachen hinzufügen, die nicht die Zielsprache sind. Siehe die <link linkend="dialog.preferences.tm.matches.other.languages" endterm="dialog.preferences.tm.matches.other.languages.title"/>-Einstellung für weitere Informationen.</para>
+  <para>OmegaT zeigt Fuzzy Matches im <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/>-Fenster an. Standardmäßig sind diese Matches auf die Quell- und Zielsprache beschränkt, die im <link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/>-Dialogfenster definiert sind.</para>
 
-  <para>Mit OmegaT können Sie auch eine dritte Sprache <emphasis>direkt unter</emphasis> dem Quelltext anzeigen, um sie als dritte Sprachreferenz zu verwenden.</para>
+  <para>Sie können Matches in anderen Sprachen als der Zielsprache hinzufügen. Siehe die <link linkend="dialog.preferences.tm.matches.other.languages" endterm="dialog.preferences.tm.matches.other.languages.title"/>-Einstellung für weitere Informationen.</para>
 
-  <example id="bridge.english.and.french.with.japanese">
-	<title id="replace.with.allemand.title">Englisch und Französisch mit Japanisch überbrücken</title>
-	<para>
-	  <programlisting>— ¶ —————————————————————
-<token>A whitespace character: [ \t\n\x0B\f\r]
-fr-ZB: Un caractère d'espacement (espace, tabulation, etc.) :  [ \t\n\x0B\f\r]
-ja-RV: 空白文字：[ \t\n\x0B\f\r]</token>
-Un caractère d'espacement : [ \t\n\r\f\x0B]<token>&lt;segment 3075 ¶&gt;</token>
-— ¶ —————————————————————</programlisting></para>
-<para>Die erste Zeile ist das Original-Englisch, die zweite eine alte französische Version mit einem beliebigen Sprachcode, die dritte die japanische Version mit einem ebenso beliebigen Sprachcode und die vierte die aktuelle Übersetzung ins Französische.</para>
-  </example>
-  
-    <para>Um das zu erreichen:</para>
+  <para>Wenn Sie eine TMX-Datei haben, die Ihrem Quelldokument entspricht und eine Übersetzung in eine andere Sprache enthält, können Sie diese Sprache auch <emphasis>direkt unter</emphasis> dem Quellsegment anzeigen lassen, um sie als zusätzliche Referenzsprache zu verwenden.</para>
+
+  <para>Um das zu erreichen:</para>
 
 	<orderedlist>
 	  <listitem>
-		<para>Erstellen Sie einen Ordner namens <filename class="directory">tmx2source</filename> im Ordner <link linkend="project.folder.tm" endterm="project.folder.tm.title"/>.</para>
+		<para>Kopieren Sie den Translation Memory, der die zusätzliche Referenzsprache enthält, nach <filename class="directory">tmx2source</filename> im <link linkend="project.folder.tm" endterm="project.folder.tm.title"/>-Ordner.</para>
 	  </listitem>
 
 	  <listitem>
-		<para>Kopieren Sie Ihren Translation Memory für die &quot;erste-dritte&quot; Sprache dorthin.</para>
-	  </listitem>
-
-	  <listitem>
-		<para>Benennen Sie den Memory in <filename>LL_CC.tmx</filename> oder <filename>LL-CC.tmx</filename> um, wobei <emphasis>LL</emphasis> der interne Code der Sprache ist, die als Referenz angezeigt werden soll, und <emphasis>CC</emphasis> ein beliebiger zweistelliger Code aus Buchstaben ist.</para>
+		<para>Benennen Sie die TM-Datei um in:<itemizedlist>
+		  <listitem>
+			<para>
+			  <filename>LL_CC.tmx</filename>,
+			</para>
+		  </listitem>
+		  <listitem>
+			<para>
+			  <filename>LL-CC.tmx</filename> oder</para>
+		  </listitem>
+		  <listitem>
+			<para>
+			  <filename>LL.tmx</filename>,
+			</para>
+		  </listitem>
+		</itemizedlist>wobei <emphasis>LL</emphasis> der interne Sprachcode der Sprache ist, die als Referenz angezeigt werden soll, und <emphasis>CC</emphasis> ein beliebiger Code aus zwei Buchstaben ist.</para>
+		<warning>
+		  <itemizedlist>
+			<listitem>
+			  <para>Alle Buchstaben müssen Großbuchstaben sein.</para>
+			</listitem>
+			<listitem>
+			  <para>Es werden nur Segmente angezeigt, die <emphasis role="bold">genau</emphasis> mit der Quelle übereinstimmen.</para>
+			</listitem>
+		  </itemizedlist>
+		</warning>
 	  </listitem>
 	</orderedlist>
-	
+
+  <example id="bridge.english.and.french.with.japanese">
+	<title id="replace.with.allemand.title">Eine japanische Referenz unter der englischen Quelle verwenden</title>
+	<para>Wenn Sie eine TMX-Datei haben, die die japanische Übersetzung eines englischen Dokuments enthält, das Sie ins Französische übersetzen, können Sie die japanische Übersetzung als alternative exakte Referenz unter dem zu übersetzenden englischen Text anzeigen lassen.</para>
+	<para>Kopieren oder verschieben Sie die englisch-japanische Datei nach <filename class="directory">tm/tmx2source</filename> und benennen Sie sie in <filename>JA-JP.tmx</filename> um. OmegaT zeigt Ihnen nun den japanischen Text an, der dem englischen Quellsegment entspricht:</para>
+	<para>
+	  <programlisting>— ¶ —————————————————————
+<token>A whitespace character: [ \t\n\x0B\f\r]
+ja-JP: 空白文字：[ \t\n\x0B\f\r]</token>
+Un caractère d'espacement : [ \t\n\r\f\x0B]<token>&lt;Segment 3075 ¶&gt;</token>
+— ¶ —————————————————————</programlisting></para>
+<para>Die erste Zeile ist das originale Englisch, die zweite Zeile ist die Brückensprache, die Ihnen bei der Übersetzung helfen soll, und die dritte Zeile ist die aktuelle Übersetzung ins Französische.</para>
+  </example>
+  
     <note>
-	  <para>Sie können eine beliebige Anzahl von TMX-Dateien verwenden, die beliebig viele verschiedene &quot;Brückensprachpaare&quot; enthalten.</para>	  
+	  <para>Sie können eine beliebige Anzahl von TMX-Dateien verwenden, die beliebig viele verschiedene Brückensprachpaare enthalten.</para>	  
 	</note>
   </section>
 </section>

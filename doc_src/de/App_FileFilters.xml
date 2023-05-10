@@ -199,7 +199,7 @@
           <listitem>
 			<para>Systemzeit, als die Datei erstellt wurde</para>
 
-			<para>Beispiele dafür finden Sie in der <ulink url="https://docs.oracle.com/javase/8/docs/api/java/text/SimpleDateFormat.html">Oracle-Dokumentation</ulink>.</para>
+			<para>Beispiele dafür finden Sie in der <ulink url="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/text/SimpleDateFormat.html">Oracle-Dokumentation</ulink>.</para>
           </listitem>
 		</varlistentry>
 
@@ -415,7 +415,7 @@
 			  </listitem>
 			</varlistentry>
 			<varlistentry>
-			  <term>Ignorierte Absätze beim Laden (regulärer Ausdruck)</term>
+			  <term>Ignorierte Absätze (regulärer Ausdruck)</term>
 			  <listitem>
 				  <para>Beim Laden werden alle Absätze, die dem regulären Ausdruck entsprechen, ignoriert und nicht zum Übersetzen angeboten.</para>
 
@@ -691,7 +691,7 @@
 			  <varlistentry>
 				<term>Tag-Kürzel</term>
 				<listitem>
-				  <para>Diese Option bestimmt, wie OmegaT die Tags aus den XLIFF-Inhalten erzeugt.</para>
+				  <para>Diese Optionen bestimmen, wie OmegaT die Tags aus den XLIFF-Inhalten erzeugt.</para>
 				</listitem>
 			  </varlistentry>
 

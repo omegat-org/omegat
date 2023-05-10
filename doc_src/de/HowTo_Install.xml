@@ -27,9 +27,9 @@
   <para>Die Dateien können direkt von <ulink url="https://omegat.org/download">https://omegat.org</ulink> heruntergeladen werden.</para>
 
   <note>
-	<para>Für die Ausführung von OmegaT 5.8.0 ist eine Java 8 Runtime Environment (JRE) erforderlich.</para>
+	<para>Für die Ausführung von OmegaT 6.1.0 ist eine Java 11 Runtime Environment (JRE) erforderlich.</para>
 
-	<para>OmegaT-Pakete gibt es sowohl in Versionen, die mit Java gebündelt sind, als auch in Versionen ohne Java. Pakete ohne Java setzen eine systemweit installierte Java 8 Runtime Environment voraus.</para>
+	<para>OmegaT-Pakete gibt es sowohl in Versionen, die mit Java gebündelt sind, als auch in Versionen ohne Java. Pakete ohne Java setzen eine systemweit installierte Java 11 Runtime Environment voraus.</para>
 
 	<para>OmegaT 5.8.0 und höher können auch mit Java 11 Runtime Environment auf beliebigen Plattformen ausgeführt werden.</para>
 
@@ -59,7 +59,7 @@
 
       <para>Die Ausführung des Skripts erfordert die Eingabe Ihres <filename>sudo</filename>-Passworts.</para>
 
-      <para>Das Skript sucht nach einer bestehenden Installation der gleichen OmegaT-Version in <filename>/opt/omegat/</filename>. Wenn es keine gibt, wird das Programm in <filename>/opt/omegat/OmegaT_5.8.0</filename> installiert und als Standardversion (in <filename>/opt/omegat/OmegaT-default</filename>) festgelegt.</para>
+      <para>Das Skript sucht nach einer bestehenden Installation der gleichen OmegaT-Version in <filename>/opt/omegat/</filename>. Wenn es keine gibt, wird das Programm in <filename>/opt/omegat/OmegaT_6.1.0</filename> installiert und als Standardversion (in <filename>/opt/omegat/OmegaT-default</filename>) festgelegt.</para>
 	</note>
 
     <para>Nach dem Entpacken oder Installieren können Sie die nicht mehr benötigte heruntergeladene Datei löschen.</para>
@@ -78,7 +78,7 @@
   <section id="installing.omegat.other.systems">
     <title id="installing.omegat.other.systems.title">In anderen Plattformen</title>
 
-    <para>Diese Information gilt für jedes System, für das eine Java-Version verfügbar ist, die mit der Java 8 Runtime Environment kompatibel ist. Dazu gehören die oben beschriebenen Plattformen sowie Plattformen, für die kein eigenes OmegaT-Paket bereitgestellt wird.</para>
+    <para>Diese Information gilt für jedes System, für das eine Java-Version verfügbar ist, die mit der Java 11 Runtime Environment kompatibel ist. Dazu gehören die oben beschriebenen Plattformen sowie Plattformen, für die kein eigenes OmegaT-Paket bereitgestellt wird.</para>
 
     <para>Laden Sie die Version <emphasis>Plattformübergreifend ohne JRE</emphasis> herunter.</para>
 

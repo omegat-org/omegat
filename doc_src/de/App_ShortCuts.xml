@@ -689,7 +689,7 @@
       </table>
 
       <table id="app.shortcuts.lists.function.codes.goto.menu.table">
-        <title id="app.shortcuts.lists.function.codes.goto.menu.table.title">Gehe zu Menü</title>
+        <title id="app.shortcuts.lists.function.codes.goto.menu.table.title">Gehe zu-Menü</title>
 
         <tgroup cols="4" colsep="1">
           <colspec align="left" colname="1" colnum="1"/>
@@ -1255,7 +1255,7 @@
               <entry>Vorheriges Token überspringen</entry>
               <entry>editorSkipPrevToken</entry>
               <entry>ctrl LEFT</entry>
-              <entry>alt RIGHT</entry>
+              <entry>alt LEFT</entry>
             </row>
 
             <row>

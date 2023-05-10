@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 #
 #  OmegaT - Computer Assisted Translation (CAT) tool
 #           with fuzzy matching, translation memory, keyword search,
@@ -23,26 +23,5 @@
 #  You should have received a copy of the GNU General Public License
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
-
-[ -f /keys/id_rsa ] || inotifywait -e attrib /keys
-
-cp /keys/id_rsa /home/omegat/.ssh/id_rsa
-chown omegat.omegat /home/omegat/.ssh/id_rsa
-chmod 600 /home/omegat/.ssh/id_rsa
-
-if [[ "${TYPE}" == "SVN" ]]; then
-  export REPO=http://svn:svnpass@server/svn/omegat-test.svn
-  export REPO2=svn+ssh://svn:svnpass@server/omegat-test.svn
-elif [[ "${TYPE}" == "GIT" ]]; then
-  export REPO=git@server:omegat-test.git
-  export REPO2=https://git:gitpass@server/omegat-test.git
-  git config --global user.name example
-  git config --global user.email git@example.com
-  git config --global http.sslVerify false
-fi
-
-ssh-keyscan -H server > /home/omegat/.ssh/known_hosts
-
-cd /code
-/opt/gradle-7.5.1/bin/gradle testIntegration -Domegat.test.duration=${DURATION} -Domegat.test.repo=${REPO} \
-       -Domegat.test.repo.alt=${REPO2} -Domegat.test.map.repo=http://server/ -Domegat.test.map.file=README
+umask 0002
+exec /usr/bin/svnserve $@

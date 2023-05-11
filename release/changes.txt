@@ -2,7 +2,7 @@
  OmegaT 6.1.0
 ----------------------------------------------------------------------
   7 Enhancement
-  5 Bug fixes
+  7 Bug fixes
   1 Localisation updates
 ----------------------------------------------------------------------
 6.1.0 vs 6.0.0
@@ -30,6 +30,9 @@
   https://sourceforge.net/p/omegat/feature-requests/1598/
 
   Bug fixes:
+  
+  - Error when trying to backup the project file on Windows
+  https://sourceforge.net/p/omegat/bugs/1166/
 
   - Project not loaded if it contains DTD internal entities
   https://sourceforge.net/p/omegat/bugs/1163/

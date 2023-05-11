@@ -39,7 +39,9 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.ExecutionException;
@@ -51,7 +53,6 @@ import javax.swing.SwingWorker;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.builder.EqualsBuilder;
-
 import org.omegat.CLIParameters;
 import org.omegat.convert.ConvertProject;
 import org.omegat.core.Core;
@@ -649,7 +650,11 @@ public final class ProjectUICommands {
                             backup.getName());
                     Core.getProject().saveProjectProperties();
                 } else if (FileUtil.getRecentBackup(projectFile) == null) {
-                    FileUtil.backupFile(projectFile);
+                    File backup = new File(projectRootFolder,
+                            String.format("%s.%s%s", OConsts.FILE_PROJECT,
+                                    new SimpleDateFormat("yyyyMMddHHmm").format(new Date(projectFile.lastModified())),
+                                    OConsts.BACKUP_EXTENSION));
+                    ProjectFileStorage.writeProjectFile(backup, propsP);
                 } else if (finalNewProjectFile != null) {
                     FileUtils.deleteQuietly(finalNewProjectFile);
                 }

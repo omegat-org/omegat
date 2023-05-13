@@ -192,7 +192,7 @@ dependencies {
         implementation 'com.google.guava:guava:31.0.1-jre'
         runtimeOnly("org.languagetool:language-all:${languageToolVersion}") {
             // Temporary exclusion; see https://sourceforge.net/p/omegat/bugs/814/
-            exclude module: 'lucene-gosen'
+            exclude module: 'lucene-gosen-ipadic'
         }
         runtimeOnly 'org.omegat.lucene:lucene-gosen:5.0.0:ipadic'
 

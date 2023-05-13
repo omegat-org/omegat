@@ -60,7 +60,8 @@ public class FilterMasterTest {
     public final void setUpCore() throws Exception {
         tempFilter = Files.createTempFile(FilterMaster.FILE_FILTERS, null).toFile();
 
-        FilterMaster.setFilterClasses(Arrays.asList(new Class[] { org.omegat.filters3.xml.xhtml.XHTMLFilter.class }));
+        FilterMaster.setFilterClasses(
+                Arrays.asList(new Class[] { org.omegat.filters3.xml.xhtml.XHTMLFilter.class }));
     }
 
     @After
@@ -108,7 +109,8 @@ public class FilterMasterTest {
         assertTrue("Temp filters.xml file not created", tempFilter.exists());
 
         Filters loadedFilters = FilterMaster.loadConfig(tempFilter);
-        assertEquals("More than one filter found in serialized filters", 1, loadedFilters.getFilters().size());
+        assertEquals("More than one filter found in serialized filters", 1,
+                loadedFilters.getFilters().size());
         fm = new FilterMaster(loadedFilters);
         loadFile(fm);
 
@@ -123,20 +125,21 @@ public class FilterMasterTest {
                 new IParseCallback() {
 
                     @Override
-                    public void addEntryWithProperties(String id, String source, String translation, boolean isFuzzy,
-                            String[] props, String path, IFilter filter, List<ProtectedPart> protectedParts) {
+                    public void addEntryWithProperties(String id, String source, String translation,
+                            boolean isFuzzy, String[] props, String path, IFilter filter,
+                            List<ProtectedPart> protectedParts) {
                         /* empty */
                     }
 
                     @Override
-                    public void addEntry(String id, String source, String translation, boolean isFuzzy, String comment,
-                            String path, IFilter filter, List<ProtectedPart> protectedParts) {
+                    public void addEntry(String id, String source, String translation, boolean isFuzzy,
+                            String comment, String path, IFilter filter, List<ProtectedPart> protectedParts) {
                         /* empty */
                     }
 
                     @Override
-                    public void addEntry(String id, String source, String translation, boolean isFuzzy, String comment,
-                            IFilter filter) {
+                    public void addEntry(String id, String source, String translation, boolean isFuzzy,
+                            String comment, IFilter filter) {
                         /* empty */
                     }
 

@@ -272,6 +272,7 @@ dependencies {
     testImplementation 'org.xmlunit:xmlunit-legacy:2.8.3'
     testImplementation("org.languagetool:languagetool-server:${languageToolVersion}") {
         exclude group: 'org.slf4j'
+        exclude group: 'ch.qos.logback'
     }
     // LanguageTool unit tests exercise these languages
     ['be', 'en', 'fr'].each {

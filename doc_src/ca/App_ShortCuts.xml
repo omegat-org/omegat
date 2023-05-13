@@ -69,7 +69,7 @@
   <section id="app.shortcuts.customization">
     <title id="app.shortcuts.customization.title">Personalització</title>
 
-    <para>OmegaT assigns shortcuts to most of the functions available in the <link linkend="menus.project" endterm="menus.project.title"/>, <link linkend="menus.edit" endterm="menus.edit.title"/>, and <link linkend="menus.goto" endterm="menus.goto.title"/> menus and to a number of functions in the <link linkend="panes.editor" endterm="panes.editor.title"/> pane. També podeu afegir o modificar les dreceres per a la majoria de funcions.</para>
+    <para>L'OmegaT assigna dreceres a la majoria de les funcions disponibles en els menús <link linkend="menus.project" endterm="menus.project.title"/>, <link linkend="menus.edit" endterm="menus.edit.title"/> i <link linkend="menus.goto" endterm="menus.goto.title"/> i a diverses funcions de la subfinestra <link linkend="panes.editor" endterm="panes.editor.title"/>. També podeu afegir o modificar les dreceres per a la majoria de funcions.</para>
 
 	<para>Per a fer-ho, cal posar el fitxer de definició de dreceres corresponent en la carpeta de configuració de l'OmegaT. Consulteu l'annex <link endterm="configuration.folder.title" linkend="configuration.folder"/> per a conèixer més detalls.</para>
 
@@ -813,7 +813,7 @@
             </row>
 
             <row>
-              <entry>Subfinestra «Notes»</entry>
+              <entry>Subfinestra «Bloc de notes»</entry>
               <entry>gotoNotesPanelMenuItem</entry>
               <entry>ctrl alt 9</entry>
               <entry>meta alt 9</entry>
@@ -1255,7 +1255,7 @@
               <entry>Omet la paraula anterior</entry>
               <entry>editorSkipPrevToken</entry>
               <entry>ctrl LEFT</entry>
-              <entry>alt RIGHT</entry>
+              <entry>alt LEFT</entry>
             </row>
 
             <row>

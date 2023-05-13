@@ -54,7 +54,7 @@
 	</varlistentry>
 	
 	<varlistentry id="windows.source.files.list.download.page">
-	  <term id="windows.source.files.list.download.page.title"><guibutton>Afegeix una pàgina del MediaWiki en línia...</guibutton></term>
+	  <term id="windows.source.files.list.download.page.title"><guibutton>Baixa una pàgina del MediaWiki...</guibutton></term>
 	  <listitem>
 		<para>Demana l'URL de la pàgina i la baixa a la carpeta <link linkend="project.folder.source" endterm="project.folder.source.title"/>.</para>
 	  </listitem>

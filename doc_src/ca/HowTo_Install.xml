@@ -11,7 +11,7 @@
 
   <variablelist>
 	<varlistentry>
-	  <term>Estàndard: OmegaT 5.8.0</term>
+	  <term>Estàndard: OmegaT 6.1.0</term>
 	  <listitem>
 		<para>Es recomana aquesta versió per a l'ús diari.</para>
 	  </listitem>
@@ -27,9 +27,9 @@
   <para>Els fitxers es poden baixar directament des del lloc web <ulink url="https://omegat.org/download">https://omegat.org</ulink>.</para>
 
   <note>
-	<para>L'OmegaT 5.8.0 requereix el Java 8 Runtime Environment (JRE) per a executar-se.</para>
+	<para>L'OmegaT 6.1.0 requereix el Java 11 Runtime Environment (JRE) per a executar-se.</para>
 
-	<para>Els paquets de l'OmegaT estan disponibles tant en versions empaquetades amb el Java, com en versions sense el Java. Els paquets sense el Java depenen d'una instal·lació del Java 8 Runtime Environment en el sistema.</para>
+	<para>Els paquets de l'OmegaT estan disponibles tant en versions empaquetades amb el Java, com en versions sense el Java. Els paquets sense el Java depenen d'una instal·lació del Java 11 Runtime Environment en el sistema.</para>
 
 	<para>L'OmegaT 5.8.0 i les versions posteriors també es poden executar amb el Java 11 Runtime Environment en qualsevol plataforma.</para>
 
@@ -59,7 +59,7 @@
 
       <para>En executar l'script haureu d'introduir la contrasenya de <filename>sudo</filename>.</para>
 
-      <para>L'script comprova si hi ha una instal·lació existent de la mateixa versió de l'OmegaT en la carpeta <filename>/opt/omegat/</filename>. Si no n'hi ha cap, instal·la el programa en la carpeta <filename>/opt/omegat/OmegaT_5.8.0</filename> i l'estableix com a versió per defecte (en la carpeta <filename>/opt/omegat/OmegaT-default</filename>).</para>
+      <para>L'script comprova si hi ha una instal·lació existent de la mateixa versió de l'OmegaT en la carpeta <filename>/opt/omegat/</filename>. Si no n'hi ha cap, instal·la el programa en la carpeta <filename>/opt/omegat/OmegaT_6.1.0</filename> i l'estableix com a versió per defecte (en la carpeta <filename>/opt/omegat/OmegaT-default</filename>).</para>
 	</note>
 
     <para>Després de desempaquetar el fitxer o quan s'hagi completat la instal·lació, podeu suprimir el fitxer baixat, que ja no és necessari.</para>
@@ -78,7 +78,7 @@
   <section id="installing.omegat.other.systems">
     <title id="installing.omegat.other.systems.title">Altres plataformes</title>
 
-    <para>Aquesta informació s'aplica a qualsevol sistema amb una versió del Java compatible amb el Java 8 Runtime Environment. Això inclou les plataformes descrites anteriorment i també les plataformes per a les quals no es proporcionen paquets de l'OmegaT específics.</para>
+    <para>Aquesta informació s'aplica a qualsevol sistema amb una versió del Java compatible amb el Java 11 Runtime Environment. Això inclou les plataformes descrites anteriorment i també les plataformes per a les quals no es proporcionen paquets de l'OmegaT específics.</para>
 
     <para>Baixeu la versió <emphasis>Multiplataforma sense el JRE</emphasis>.</para>
 

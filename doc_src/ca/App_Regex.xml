@@ -111,7 +111,7 @@
       </varlistentry>
 
       <varlistentry>
-        <term>Les lletres de l'alfabet precedides per una barra inclinada inversa (<literal>\</literal>) prenen un significat especial</term>
+        <term>Els dígits i les lletres de l'alfabet precedits per una barra inclinada inversa (<literal>\</literal>) prenen un significat especial</term>
         <listitem>
           <para>A diferència d'una lletra sola, que simplement es representa a ella mateixa com s'ha indicat anteriorment, una lletra precedida per <literal>\</literal> té una funció especial en una expressió regular.</para>
 
@@ -1090,7 +1090,7 @@
 
     <para>La referència tècnica del Java és útil com a referència canònica.<variablelist>
         <varlistentry id="app.regex.java">
-          <term id="app.regex.java.title"><ulink url="https://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html">Documentació d'expressions regulars del Java</ulink></term>
+          <term id="app.regex.java.title"><ulink url="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/regex/Pattern.html">Documentació d'expressions regulars del Java</ulink></term>
           <listitem>
             <para>Referència oficial per a les expressions regulars utilitzades en el Java.</para>
           </listitem>

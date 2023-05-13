@@ -5,8 +5,7 @@
 
   <para>Aquest menú us permet seleccionar la informació que voleu que mostri l'OmegaT.</para>
 
-  <para>All the colours indicated in the descriptions can be modified in the
-  <link linkend="dialogs.preferences.colours" endterm="dialogs.preferences.colours.title"/> preference.</para>
+  <para>Tots els colors indicats en les descripcions es poden modificar amb la preferència <link linkend="dialogs.preferences.colours" endterm="dialogs.preferences.colours.title"/>.</para>
 
   <variablelist>
     <varlistentry id="menus.view.mark.translated.segments">
@@ -76,8 +75,7 @@
     <varlistentry id="menus.view.mark.auto.populated.segments">
       <term id="menus.view.mark.auto.populated.segments.title"><guimenuitem>Ressalta els segments propagats automàticament</guimenuitem></term>
       <listitem>
-        <para>If checked, segments that have been auto-populated are
-        highlighted in various colours.</para>
+        <para>Si es marca, els segments propagats automàticament es ressalten amb diversos colors.</para>
 
 		<para>Consulteu les preferències de <link linkend="dialogs.preferences.editor.save.auto-populated.status" endterm="dialogs.preferences.editor.save.auto-populated.status.title"/> per a conèixer més detalls.</para>
       </listitem>

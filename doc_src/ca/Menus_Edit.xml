@@ -110,7 +110,7 @@
       <term id="menus.edit.export.selection.title"><guimenuitem>Exporta la selecció</guimenuitem> <keycombo><keycap>C</keycap><keycap>C</keycap><keycap>S</keycap></keycombo>
 	  </term>
       <listitem>
-        <para>Exporta la selecció actual a un fitxer de text per al processament. Si no s'ha seleccionat cap text, s'escriu el segment d'origen actual en aquest fitxer. To remain consistent with usual clipboard behaviour this file is not emptied when the user exits OmegaT. Els continguts exportats es copien al fitxer <link linkend="configuration.folder.default.contents.script.selection.title" endterm="configuration.folder.default.contents.script.selection.title"/> de la carpeta de <link linkend="configuration.folder">configuració</link>.</para>
+        <para>Exporta la selecció actual a un fitxer de text per al processament. Si no s'ha seleccionat cap text, s'escriu el segment d'origen actual en aquest fitxer. Per a mantenir la coherència amb el comportament habitual del porta-retalls, no es buida aquest fitxer quan l'usuari surt de l'OmegaT. Els continguts exportats es copien al fitxer <link linkend="configuration.folder.default.contents.script.selection.title" endterm="configuration.folder.default.contents.script.selection.title"/> de la carpeta de <link linkend="configuration.folder">configuració</link>.</para>
       </listitem>
     </varlistentry>
 
@@ -193,13 +193,10 @@
     </varlistentry>
 
     <varlistentry id="menus.edit.search.dictionaries">
-      <term id="menus.edit.search.dictionaries.title"><guimenuitem>Search Dictionaries</guimenuitem>
-	  <keycombo><keycap>A</keycap><keycap>S</keycap><keycap>D</keycap></keycombo>
+      <term id="menus.edit.search.dictionaries.title"><guimenuitem>Cerca en els diccionaris</guimenuitem> <keycombo><keycap>A</keycap><keycap>S</keycap><keycap>D</keycap></keycombo>
 	  </term>
       <listitem>
-        <para>If the <link linkend="dialogs.preferences.dictionary.automatically.search.segment" endterm="dialogs.preferences.dictionary.automatically.search.segment.title"/>
-        preference is disabled, this function allows you to search for the
-        selected word or for the whole segment terms in the dictionaries.</para>
+        <para>Si la preferència <link linkend="dialogs.preferences.dictionary.automatically.search.segment" endterm="dialogs.preferences.dictionary.automatically.search.segment.title"/> està inhabilitada, aquesta funció us permet cercar la paraula seleccionada o tots els termes del segment en els diccionaris.</para>
       </listitem>
     </varlistentry>
 
@@ -235,9 +232,7 @@
 		  <listitem>
 			<para><guimenuitem>Cíclic</guimenuitem> <keycombo><keycap>S</keycap><keycap>F3</keycap></keycombo></para>
 			<warning>
-			  <para>On macOS, the <keycombo><keycap>F3</keycap></keycombo> key 
-			  enables the <emphasis role="bold">overwrite</emphasis> mode in the
-			  editor. See <link linkend="panes.editor.overwriting" endterm="panes.editor.overwriting.title"/> for details.</para>
+			  <para>En el macOS, la tecla <keycombo><keycap>F3</keycap></keycombo> habilita el mode de <emphasis role="bold">sobreescriptura</emphasis> de l'editor. Consulteu <link linkend="panes.editor.overwriting" endterm="panes.editor.overwriting.title"/> per a conèixer més detalls.</para>
 			</warning>
 		  </listitem>
 		</itemizedlist>

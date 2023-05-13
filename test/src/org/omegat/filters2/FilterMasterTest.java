@@ -61,7 +61,7 @@ public class FilterMasterTest {
         tempFilter = Files.createTempFile(FilterMaster.FILE_FILTERS, null).toFile();
 
         FilterMaster.setFilterClasses(
-                Arrays.asList(new Class[] { org.omegat.filters3.xml.xhtml.XHTMLFilter.class }));
+                Arrays.asList(new Class<?>[] { org.omegat.filters3.xml.xhtml.XHTMLFilter.class }));
     }
 
     @After

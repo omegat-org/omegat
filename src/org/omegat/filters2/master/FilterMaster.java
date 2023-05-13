@@ -794,8 +794,11 @@ public class FilterMaster {
      * @return options for filter usage
      */
     public static Map<String, String> forFilter(List<Option> options) {
-        final Map<String, String> result = new TreeMap<String, String>();
+        final Map<String, String> result = new TreeMap<>();
         for (Option opt : options) {
+            if (opt.getName() == null) {
+                continue;
+            }
             result.put(opt.getName(), opt.getValue());
         }
         return result;
@@ -812,6 +815,9 @@ public class FilterMaster {
     public static void setOptions(Filter f, Map<String, String> newOptions) {
         f.getOption().clear();
         for (Map.Entry<String, String> en : newOptions.entrySet()) {
+            if (en.getKey() == null) {
+                continue;
+            }
             Filter.Option opt = new Filter.Option();
             opt.setName(en.getKey());
             opt.setValue(en.getValue());

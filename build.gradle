@@ -425,19 +425,26 @@ distributions {
             from('release') {
                 exclude 'contributors.txt', 'libraries.txt'
                 include '*.txt', '*.html'
-                filter(ReplaceTokens, tokens: [TRANSLATION_NOTICE: ''])
+                filter(ReplaceTokens, tokens: [
+                        TRANSLATION_NOTICE: ''
+                ])
                 filter(FixCrLfFilter, eol: FixCrLfFilter.CrLf.newInstance('crlf'))
             }
             from('release/plugins-specific') {
                 into 'plugins'
             }
             from('release/linux-specific') {
-                filter(ReplaceTokens, tokens: [VERSION_NUMBER_SUBST: project.version, JAR_SUBST: jar.archiveName])
+                filter ReplaceTokens, tokens: [
+                        VERSION_NUMBER_SUBST: project.version,
+                        JAR_SUBST           : jar.archiveFileName.toString()
+                ]
                 fileMode 0755
             }
             from('release/win32-specific') {
                 include 'OmegaT.bat'
-                filter(ReplaceTokens, tokens: [JAR_SUBST: jar.archiveName])
+                filter(ReplaceTokens, tokens: [
+                        JAR_SUBST           : jar.archiveFileName.toString()
+                ])
             }
             from('lib/licenses') {
                 into 'lib'
@@ -451,8 +458,8 @@ distributions {
             }
             eachFile {
                 // Move main JAR up one level from lib.
-                if (it.name == jar.archiveName) {
-                    it.relativePath = it.relativePath.parent.parent.append(true, jar.archiveName)
+                if (it.name == jar.archiveFileName.toString()) {
+                    it.relativePath = it.relativePath.parent.parent.append(true, jar.archiveFileName.toString())
                 }
             }
         }
@@ -1250,4 +1257,8 @@ tasks.withType(JavaExec).configureEach {
 
 task printVersion {
     println project.version
+}
+
+tasks.withType(Zip).configureEach {
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
 }

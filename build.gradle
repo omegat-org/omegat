@@ -14,6 +14,7 @@ plugins {
     id 'com.diffplug.spotless' version '6.0.0'
     id 'com.github.ben-manes.versions' version '0.39.0'
     id 'ru.vyarus.mkdocs' version '3.0.0'
+    id 'org.kordamp.gradle.jdeprscan' version '0.11.0'
 }
 
 apply from: 'gradle/utils.gradle'

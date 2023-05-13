@@ -35,6 +35,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.nio.charset.Charset;
 import java.nio.file.FileVisitOption;
 import java.nio.file.Files;
@@ -52,6 +53,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.BiPredicate;
@@ -472,8 +474,17 @@ public final class FileUtil {
             return p.toFile().isFile()
                     && FileUtil.checkFileInclude(root.relativize(p).toString(), includeMasks, excludeMasks);
         };
-        try (Stream<Path> stream = Files.find(root, Integer.MAX_VALUE, pred, FileVisitOption.FOLLOW_LINKS)) {
-            return stream.map(p -> root.relativize(p).toString().replace('\\', '/'))
+        int maxDepth = Integer.MAX_VALUE;
+        try (Stream<Path> stream = Files.find(root, maxDepth, pred, FileVisitOption.FOLLOW_LINKS)) {
+            return stream.map(p -> {
+                        try {
+                            return root.relativize(p).toString().replace('\\', '/');
+                        } catch (UncheckedIOException e) {
+                            Log.logErrorRB(e, "TF_LOAD_WARN_SOURCE_LOOP_EXCEPTION", p);
+                            return null;
+                        }
+                    })
+                    .takeWhile(Objects::nonNull)
                     .sorted(StreamUtil.localeComparator(Function.identity())).collect(Collectors.toList());
         }
     }

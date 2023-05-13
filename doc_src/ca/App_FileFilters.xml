@@ -199,7 +199,7 @@
           <listitem>
 			<para>Hora del sistema en crear el fitxer</para>
 
-			<para>Consulteu la <ulink url="https://docs.oracle.com/javase/8/docs/api/java/text/SimpleDateFormat.html">Documentació d'Oracle</ulink> per a veure exemples.</para>
+			<para>Consulteu la <ulink url="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/text/SimpleDateFormat.html">Documentació d'Oracle</ulink> per a veure exemples.</para>
           </listitem>
 		</varlistentry>
 
@@ -415,7 +415,7 @@
 			  </listitem>
 			</varlistentry>
 			<varlistentry>
-			  <term>Paràgrafs ignorats en carregar (expressió regular)</term>
+			  <term>Paràgrafs ignorats (expressió regular)</term>
 			  <listitem>
 				  <para>En carregar el fitxer, qualsevol paràgraf que coincideixi amb l'expressió regular s'ignorarà i no es mostrarà per a la traducció.</para>
 
@@ -512,11 +512,9 @@
 			<varlistentry>
 			  <term>Suprimeix els comentaris HTML</term>
 			  <listitem>
-				<para>Els comentaris d'un fitxer HTML generalment s'adrecen als desenvolupadors. Utilitzeu aquesta opció per a suprimir-los. If unchecked, the comments are displayed as tags.</para>
+				<para>Els comentaris d'un fitxer HTML generalment s'adrecen als desenvolupadors. Utilitzeu aquesta opció per a suprimir-los. Si no la marqueu, els comentaris es mostren com a etiquetes.</para>
 
-				<para>Text in HTML comments (between <literal>&lt;!--</literal>
-				and <literal>--&gt;</literal>) are not copied into the
-				translated document.</para>
+				<para>El text en els comentaris HTML (entre <literal>&lt;!--</literal> i <literal>--&gt;</literal>) no es copia al fitxer traduït.</para>
 			  </listitem>
 			</varlistentry>
 		  </variablelist>
@@ -530,8 +528,7 @@
 			<varlistentry>
 			  <term>Suprimeix les cadenes sense traduir en els fitxers de destinació</term>
 			  <listitem>
-				<para>Having untranslated contents in the translated files
-				sometimes creates compatibility issues.</para>
+				<para>Deixar contingut sense traduir en els fitxers traduïts de vegades crea problemes de compatibilitat.</para>
 			  </listitem>
 			</varlistentry>
 		  </variablelist>
@@ -545,8 +542,7 @@
 			<varlistentry>
 			  <term>Suprimeix les cadenes sense traduir en els fitxers de destinació</term>
 			  <listitem>
-				  <para>Having untranslated contents in the translated files
-				  sometimes creates compatibility issues.</para>
+				  <para>Deixar contingut sense traduir en els fitxers traduïts de vegades crea problemes de compatibilitat.</para>
 			  </listitem>
 			</varlistentry>
 		  </variablelist>
@@ -695,7 +691,7 @@
 			  <varlistentry>
 				<term>Dreceres d'etiquetes</term>
 				<listitem>
-				  <para>Aquesta opció especifica la manera en què l'OmegaT crea les etiquetes a partir del contingut del fitxer XLIFF.</para>
+				  <para>Aquestes opcions especifiquen la manera en què l'OmegaT crea les etiquetes a partir del contingut del fitxer XLIFF.</para>
 				</listitem>
 			  </varlistentry>
 

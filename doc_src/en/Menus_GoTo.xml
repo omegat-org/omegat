@@ -183,8 +183,8 @@
 
 		  <listitem id="menus.goto.auto.populated.segments.prev.enforce">
 			<para
-			id="menus.goto.auto.populated.segments.prev.enforce.title"><guimenuitem>Next
-			Segment from tm/auto/</guimenuitem>
+			id="menus.goto.auto.populated.segments.prev.enforce.title"><guimenuitem>Previous
+			Segment from tm/enforce/</guimenuitem>
 			<keycombo><keycap>S</keycap><keycap>C</keycap><keycap>A</keycap><keycap>.</keycap></keycombo></para>
 
 			<para>Moves to the previous segment inserted from

@@ -174,7 +174,7 @@
 		  </row>
 		  <row>
 			<entry>Break rule, box checked, lower in the list</entry>
-			<entry>Start a new segment start after a period followed by a
+			<entry>Start a new segment after a period followed by a
 			space, tab, or other whitespace.</entry>
 			<entry align="center">\.</entry>
 			<entry align="center">\s</entry>

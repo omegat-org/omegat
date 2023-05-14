@@ -33,28 +33,40 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.StringReader;
 import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import org.apache.commons.io.FileUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.filters2.master.FilterMaster;
-import org.omegat.util.JaxbXmlMapper;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 
 import gen.core.filters.Filter.Option;
 import gen.core.filters.Filters;
 
 public class FilterMasterTest {
     private File tempFilter;
+    private static final JAXBContext CONFIG_CTX;
+
+    static {
+        try {
+            CONFIG_CTX = JAXBContext.newInstance(Filters.class);
+        } catch (Exception ex) {
+            throw new ExceptionInInitializerError(ex);
+        }
+    }
 
     @Before
     public final void setUpCore() throws Exception {
@@ -70,7 +82,7 @@ public class FilterMasterTest {
     }
 
     @Test
-    public void deserializeEmptyOption() throws JsonMappingException, JsonProcessingException {
+    public void deserializeEmptyOption() throws JsonMappingException, JsonProcessingException, JAXBException {
         String filters = "<?xml version='1.0' encoding='UTF-8'?>" + //
                 "<filters removeTags='true' removeSpacesNonseg='true' preserveSpaces='false' ignoreFileContext='false'>"
                 + //
@@ -82,8 +94,8 @@ public class FilterMasterTest {
                 "  </filter>" + //
                 "</filters>";
 
-        XmlMapper mapper = JaxbXmlMapper.getXmlMapper();
-        Filters filtersConfig = mapper.readValue(filters, Filters.class);
+        Unmarshaller unm = CONFIG_CTX.createUnmarshaller();
+        Filters filtersConfig = (Filters) unm.unmarshal(new StringReader(filters));
 
         List<Option> option = filtersConfig.getFilters().get(0).getOption();
         assertFalse("Desierialized <option/> is empty", option.isEmpty());

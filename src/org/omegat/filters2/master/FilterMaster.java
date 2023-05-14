@@ -47,7 +47,11 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.regex.Pattern;
 
+import com.fasterxml.jackson.databind.MapperFeature;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
+import com.fasterxml.jackson.module.jaxb.JaxbAnnotationModule;
 import org.apache.commons.io.FileUtils;
 
 import org.omegat.filters2.AbstractFilter;
@@ -58,7 +62,6 @@ import org.omegat.filters2.IParseCallback;
 import org.omegat.filters2.ITranslateCallback;
 import org.omegat.filters2.Instance;
 import org.omegat.filters2.TranslationException;
-import org.omegat.util.JaxbXmlMapper;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
@@ -87,6 +90,8 @@ public class FilterMaster {
     /** name of the filter configuration file */
     public static final String FILE_FILTERS = "filters.xml";
 
+    private static final XmlMapper mapper;
+
     /**
      * There was no version of file filters support (1.4.5 Beta 1 -- 1.6.0
      * RC12).
@@ -110,11 +115,22 @@ public class FilterMaster {
         filtersClasses = new ArrayList<>(classes);
     }
 
+    static {
+        mapper = XmlMapper.xmlBuilder()
+                .defaultUseWrapper(false)
+                .enable(MapperFeature.USE_WRAPPER_NAME_AS_PROPERTY_NAME)
+                .build();
+        mapper.registerModule(new JaxbAnnotationModule());
+        mapper.configure(ToXmlGenerator.Feature.WRITE_XML_DECLARATION, true);
+        mapper.enable(SerializationFeature.INDENT_OUTPUT);
+    }
+
     /**
      * Create a new FilterMaster.
      */
     public FilterMaster(Filters config) {
         this.config = config;
+
     }
 
     public Filters getConfig() {
@@ -435,7 +451,6 @@ public class FilterMaster {
         }
         Filters result;
         try {
-            XmlMapper mapper = JaxbXmlMapper.getXmlMapper();
             result = mapper.readValue(configFile, Filters.class);
         } catch (Exception e) {
             Log.logErrorRB("FILTERMASTER_ERROR_LOADING_FILTERS_CONFIG");
@@ -461,7 +476,6 @@ public class FilterMaster {
             return;
         }
         try {
-            XmlMapper mapper = JaxbXmlMapper.getXmlMapper();
             mapper.writerWithDefaultPrettyPrinter().writeValue(configFile, config);
         } catch (Exception e) {
             Log.logErrorRB("FILTERMASTER_ERROR_SAVING_FILTERS_CONFIG");

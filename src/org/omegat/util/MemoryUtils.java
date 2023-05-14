@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2010 Alex Buloichik
+               2023 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -43,13 +44,13 @@ public final class MemoryUtils {
     }
 
     /** JVM architecture. */
-    protected static final boolean IS64 = !"32".equals(System.getProperty("sun.arch.data.model"));
+    private static final boolean IS64 = !"32".equals(System.getProperty("sun.arch.data.model"));
 
     /** Object footprint - 16 for 64bit, 8 for 32 bit. */
-    protected static final int SZ_OBJFOOT = IS64 ? 16 : 8;
+    private static final int SZ_OBJFOOT = IS64 ? 16 : 8;
 
     /** Link to object - 8 for 64bit, 4 for 32bit. */
-    protected static final int SZ_OBJLINK = IS64 ? 8 : 4;
+    private static final int SZ_OBJLINK = IS64 ? 8 : 4;
 
     /**
      * Get memory which used by jvm.
@@ -61,12 +62,48 @@ public final class MemoryUtils {
     }
 
     /**
+     * getMemory which is free by jvm.
+     *
+     * @return free memory size in MB.
+     */
+    public static long getMemoryFreeMB() {
+        return StaticUtils.getMB(Runtime.getRuntime().freeMemory());
+    }
+
+    /**
+     * getMemory which is free by jvm.
+     *
+     * @return free memory size
+     */
+    public static long getMemoryFree() {
+        return Runtime.getRuntime().freeMemory();
+    }
+
+    /**
+     * Get memory allocated by jvm.
+     *
+     * @return memory size in MB.
+     */
+    public static int getMemoryAllocatedMB() {
+        return StaticUtils.getMB(getMemoryAllocated());
+    }
+
+    /**
      * Get memory allocated by jvm.
      *
      * @return memory size
      */
     public static long getMemoryAllocated() {
         return Runtime.getRuntime().totalMemory();
+    }
+
+    /**
+     * Get maximum memory which can be allocated by jvm.
+     *
+     * @return memory size in MB.
+     */
+    public static long getMemoryLimitMB() {
+        return StaticUtils.getMB(Runtime.getRuntime().maxMemory());
     }
 
     /**
@@ -84,7 +121,6 @@ public final class MemoryUtils {
      * @param obj
      *            object
      * @return memory size, or -1 if size is unknown
-     * @throws Exception
      */
     public static long calcObjectSize(Object obj) {
         if (obj == null) {
@@ -112,8 +148,7 @@ public final class MemoryUtils {
             } else {
                 result = SZ_OBJFOOT;
                 Field[] fields = oc.getDeclaredFields();
-                for (int i = 0; i < fields.length; i++) {
-                    Field f = fields[i];
+                for (Field f : fields) {
                     if (Modifier.isStatic(f.getModifiers())) {
                         continue; // static fields doesn't use memory
                     }
@@ -121,17 +156,10 @@ public final class MemoryUtils {
                     Class<?> fc = f.getType();
                     result += getSimpleTypeSize(fc);
                     if (!fc.isPrimitive()) {
-                        @SuppressWarnings("deprecation")
-                        boolean achanged = !f.isAccessible();
-                        if (achanged) {
-                            f.setAccessible(true);
+                        boolean canAccesible = f.trySetAccessible();
+                        if (canAccesible) {
+                            result += calcObjectSize(f.get(obj));
                         }
-                        Object v = f.get(obj);
-                        if (achanged) {
-                            f.setAccessible(false);
-                        }
-
-                        result += calcObjectSize(v);
                     }
                 }
             }
@@ -149,7 +177,7 @@ public final class MemoryUtils {
      *            simple type class
      * @return memory size
      */
-    protected static long getSimpleTypeSize(Class<?> oc) {
+    private static long getSimpleTypeSize(Class<?> oc) {
         long result;
         if (oc == byte.class) {
             result = 1; // 1 byte for byte

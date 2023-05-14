@@ -47,6 +47,17 @@ import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.LogCommand;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
+import org.tmatesoft.svn.core.ISVNLogEntryHandler;
+import org.tmatesoft.svn.core.SVNDepth;
+import org.tmatesoft.svn.core.SVNException;
+import org.tmatesoft.svn.core.SVNLogEntry;
+import org.tmatesoft.svn.core.SVNURL;
+import org.tmatesoft.svn.core.auth.ISVNAuthenticationManager;
+import org.tmatesoft.svn.core.wc.ISVNOptions;
+import org.tmatesoft.svn.core.wc.SVNClientManager;
+import org.tmatesoft.svn.core.wc.SVNRevision;
+import org.tmatesoft.svn.core.wc.SVNWCUtil;
+
 import org.omegat.core.Core;
 import org.omegat.core.data.ProjectTMX.CheckOrphanedCallback;
 import org.omegat.core.segmentation.SRX;
@@ -58,16 +69,6 @@ import org.omegat.util.Language;
 import org.omegat.util.ProjectFileStorage;
 import org.omegat.util.TMXWriter2;
 import org.omegat.util.TestPreferencesInitializer;
-import org.tmatesoft.svn.core.ISVNLogEntryHandler;
-import org.tmatesoft.svn.core.SVNDepth;
-import org.tmatesoft.svn.core.SVNException;
-import org.tmatesoft.svn.core.SVNLogEntry;
-import org.tmatesoft.svn.core.SVNURL;
-import org.tmatesoft.svn.core.auth.ISVNAuthenticationManager;
-import org.tmatesoft.svn.core.wc.ISVNOptions;
-import org.tmatesoft.svn.core.wc.SVNClientManager;
-import org.tmatesoft.svn.core.wc.SVNRevision;
-import org.tmatesoft.svn.core.wc.SVNWCUtil;
 
 import gen.core.project.RepositoryDefinition;
 import gen.core.project.RepositoryMapping;
@@ -119,7 +120,8 @@ public final class TestTeamIntegration {
     private TestTeamIntegration() {
     }
 
-    private final static Pattern URL_PATTERN = Pattern.compile("http(s)?://(?<username>.+?)(:(?<password>.+?))?@.+");
+    private final static Pattern URL_PATTERN = Pattern.compile("(http(s)?|svn(\\+ssh)?)"
+            + "://(?<username>.+?)(:(?<password>.+?))?@.+");
 
     static final String DIR = "/tmp/teamtest";
     static final List<String> REPO = new ArrayList<>();
@@ -333,6 +335,19 @@ public final class TestTeamIntegration {
                 String password = matcher.group("password");
                 if (!StringUtils.isEmpty(password)) {
                     def.getOtherAttributes().put(new QName("gitPassword"), password);
+                }
+            }
+        }
+        if (type.equals("svn") && repoUrl.contains("@")) {
+            Matcher matcher = URL_PATTERN.matcher(repoUrl);
+            if (matcher.find()) {
+                String username = matcher.group("username");
+                if (!StringUtils.isEmpty(username)) {
+                    def.getOtherAttributes().put(new QName("svnUsername"), username);
+                }
+                String password = matcher.group("password");
+                if (!StringUtils.isEmpty(password)) {
+                    def.getOtherAttributes().put(new QName("svnPassword"), password);
                 }
             }
         }

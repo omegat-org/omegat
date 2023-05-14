@@ -46,7 +46,8 @@ import org.omegat.util.StringUtil;
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
  */
-@Deprecated
+@Deprecated(forRemoval = true, since = "5.8")
+@SuppressWarnings("removal")
 public class XMLStreamReader implements Closeable {
     private DefaultEntityFilter entityFilter;
 

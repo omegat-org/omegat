@@ -169,6 +169,10 @@ public class TMXReader2 {
                     break;
                 }
             }
+        } catch (XMLStreamException ex) {
+            Log.logErrorRB(ex, "TMXR_ERROR_XML_STREAM_ERROR", file.getAbsolutePath());
+            throw ex;
+        } catch (IOException e) {
         } finally {
             if (xml != null) {
                 xml.close();
@@ -694,8 +698,7 @@ public class TMXReader2 {
     };
 
     public static final XMLResolver TMX_DTD_RESOLVER_2 = new XMLResolver() {
-        public Object resolveEntity(String publicId, String systemId,
-                String baseURI, String namespace) throws XMLStreamException {
+        public Object resolveEntity(String publicId, String systemId, String baseURI, String namespace) {
             if (systemId.endsWith("tmx11.dtd")) {
                 return TMXReader2.class.getResourceAsStream("/schemas/tmx11.dtd");
             } else if (systemId.endsWith("tmx14.dtd")) {

@@ -36,7 +36,7 @@ import java.util.HashMap;
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
  */
-@Deprecated
+@Deprecated(forRemoval = true, since = "5.8")
 public class DefaultEntityFilter {
 
     private static final HashMap<Integer, String> CHAR_MAP;

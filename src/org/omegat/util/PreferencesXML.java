@@ -174,11 +174,15 @@ public class PreferencesXML implements IPrefsPersistence {
         /**
          * Custom serialize method for preference values.
          *
-         * @param preference Value to serialize; can <b>not</b> be null.
-         * @param gen Generator used to output resulting Json content
-         * @param provider Provider that can be used to get serializers for
-         *   serializing Objects value contains, if any.
-         * @throws IOException when write error.
+         * @param preference
+         *            Value to serialize; can <b>not</b> be null.
+         * @param gen
+         *            Generator used to output resulting Json content
+         * @param provider
+         *            Provider that can be used to get serializers for
+         *            serializing Objects value contains, if any.
+         * @throws IOException
+         *             when write error.
          */
         @Override
         public void serialize(final Preference preference, final JsonGenerator gen,

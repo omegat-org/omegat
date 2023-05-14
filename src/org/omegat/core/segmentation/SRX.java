@@ -75,10 +75,8 @@ public class SRX implements Serializable {
     private static final XmlMapper mapper;
 
     static {
-        mapper = XmlMapper.xmlBuilder()
-                .defaultUseWrapper(false)
-                .enable(MapperFeature.USE_WRAPPER_NAME_AS_PROPERTY_NAME)
-                .build();
+        mapper = XmlMapper.xmlBuilder().defaultUseWrapper(false)
+                .enable(MapperFeature.USE_WRAPPER_NAME_AS_PROPERTY_NAME).build();
         mapper.registerModule(new JaxbAnnotationModule());
         mapper.configure(ToXmlGenerator.Feature.WRITE_XML_DECLARATION, true);
         mapper.enable(SerializationFeature.INDENT_OUTPUT);
@@ -103,16 +101,22 @@ public class SRX implements Serializable {
         result.mappingRules = new ArrayList<>(mappingRules.size());
         for (MapRule rule : mappingRules) {
             result.mappingRules.add(rule.copy());
-        }        return result;
+        }
+        return result;
     }
 
     /**
      * Saves segmentation rules into specified directory.
-     * @param srx OmegaT object to be written; if null, means that we want to delete the file
-     * @param outDir where to put the file. The file name is forced to {@link #SRX_SENTSEG} and will be in standard SRX format.
+     * 
+     * @param srx
+     *            OmegaT object to be written; if null, means that we want to
+     *            delete the file
+     * @param outDir
+     *            where to put the file. The file name is forced to
+     *            {@link #SRX_SENTSEG} and will be in standard SRX format.
      */
     public static void saveToSrx(SRX srx, File outDir) throws IOException {
-        File outFile = new File (outDir, SRX_SENTSEG);
+        File outFile = new File(outDir, SRX_SENTSEG);
 
         if (srx == null) {
             outFile.delete();
@@ -143,10 +147,10 @@ public class SRX implements Serializable {
                 jaxbRule.setBreak(rule.isBreakRule() ? "yes" : "no");
                 if (rule.getBeforebreak() != null) {
                     jaxbRule.setBeforebreak(factory.createBeforebreak());
-                    jaxbRule.getBeforebreak().setContent(rule.getBeforebreak());                
+                    jaxbRule.getBeforebreak().setContent(rule.getBeforebreak());
                 }
                 if (rule.getAfterbreak() != null) {
-                    jaxbRule.setAfterbreak(factory.createAfterbreak());                
+                    jaxbRule.setAfterbreak(factory.createAfterbreak());
                     jaxbRule.getAfterbreak().setContent(rule.getAfterbreak());
                 }
             }
@@ -158,22 +162,12 @@ public class SRX implements Serializable {
             Log.logErrorRB("CORE_SRX_ERROR_SAVING_SEGMENTATION_CONFIG");
             throw new IOException(e);
         }
-        /*
-        try {
-            srx.setVersion(CURRENT_VERSION);
-            XMLEncoder xmlenc = new XMLEncoder(new FileOutputStream(outFile));
-            xmlenc.writeObject(srx);
-            xmlenc.close();
-        } catch (IOException e) {
-            Log.logErrorRB("CORE_SRX_ERROR_SAVING_SEGMENTATION_CONFIG");
-            throw new IOException(e);
-        }
-        */
     }
 
     /**
-     * Loads the local segmentation file. Accepts SRX (default) or old CONF format.
-     * In case you use conf format, rules about old version remain valid.
+     * Loads the local segmentation file. Accepts SRX (default) or old CONF
+     * format. In case you use conf format, rules about old version remain
+     * valid.
      **/
     public static SRX loadFromDir(File configDir) {
         File inFile;
@@ -259,37 +253,27 @@ public class SRX implements Serializable {
     }
 
     private static SRX loadSrxInputStream(InputStream io) throws IOException {
-        /*
-        MyExceptionListener myel = new MyExceptionListener();
-        XMLDecoder xmldec = new XMLDecoder(io, null, myel);
-        Srx srx = (Srx) xmldec.readObject();
-        xmldec.close();
-        */
         Srx srx = mapper.readValue(io, Srx.class);
         HashMap<String, List<Rule>> mapping = new HashMap<>();
         List<Languagerule> languageRuleList = srx.getBody().getLanguagerules().getLanguagerule();
-        for (Languagerule languagerule: languageRuleList) {
-            mapping.put(
-                    languagerule.getLanguagerulename(),
-                    languagerule.getRule()
-                            .stream()
-                            .map(Rule::new)
-                            .collect(Collectors.toList()));
+        for (Languagerule languagerule : languageRuleList) {
+            mapping.put(languagerule.getLanguagerulename(),
+                    languagerule.getRule().stream().map(Rule::new).collect(Collectors.toList()));
         }
         SRX res = new SRX();
         res.setSegmentSubflows(!"no".equalsIgnoreCase(srx.getHeader().getSegmentsubflows()));
         res.setCascade(!"no".equalsIgnoreCase(srx.getHeader().getCascade()));
         res.setVersion(srx.getVersion());
-        res.setMappingRules(srx.getBody().getMaprules().getLanguagemap()
-                .stream()
-                .map(s -> new MapRule(s, mapping.get(s.getLanguagerulename())))
-                .collect(Collectors.toList()));
+        res.setMappingRules(srx.getBody().getMaprules().getLanguagemap().stream()
+                .map(s -> new MapRule(s, mapping.get(s.getLanguagerulename()))).collect(Collectors.toList()));
         return res;
     }
 
     /**
      * Does a config file already exists for the project at the given location?
-     * @param configDir the project directory for storage of settings file
+     * 
+     * @param configDir
+     *            the project directory for storage of settings file
      */
     public static boolean projectConfigFileExists(String configDir) {
         File configFile = new File(configDir + CONF_SENTSEG);
@@ -455,7 +439,8 @@ public class SRX implements Serializable {
             if (maprule.getCompiledPattern().matcher(srclang.getLanguage()).matches()) {
                 rules.addAll(maprule.getRules());
                 if (!this.cascade) {
-                    break; // non-cascading means: do not search for other patterns
+                    break; // non-cascading means: do not search for other
+                           // patterns
                 }
             }
         }
@@ -463,7 +448,8 @@ public class SRX implements Serializable {
     }
 
     /**
-     * Holds value of property cascade: true, unless we read an SRX where it was set to false.
+     * Holds value of property cascade: true, unless we read an SRX where it was
+     * set to false.
      */
     private boolean cascade = true;
 

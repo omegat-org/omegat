@@ -89,11 +89,13 @@ public final class ProjectFileStorage {
     }
 
     /**
-     * Load the project properties file for the project at the specified directory. The properties file is
-     * assumed to exist at the root of the project and have the default name, {@link OConsts#FILE_PROJECT}.
-     * This is a convenience method for {@link #loadPropertiesFile(File, File)}.
+     * Load the project properties file for the project at the specified
+     * directory. The properties file is assumed to exist at the root of the
+     * project and have the default name, {@link OConsts#FILE_PROJECT}. This is
+     * a convenience method for {@link #loadPropertiesFile(File, File)}.
      * <p>
-     * If the supplied {@link File} is not a directory, an {@link IllegalArgumentException} will be thrown.
+     * If the supplied {@link File} is not a directory, an
+     * {@link IllegalArgumentException} will be thrown.
      *
      * @param projectDir
      *            The directory of the project
@@ -105,10 +107,11 @@ public final class ProjectFileStorage {
     }
 
     /**
-     * Load the specified project properties file for the project at the specified directory.
+     * Load the specified project properties file for the project at the
+     * specified directory.
      * <p>
-     * If <code>projectDir</code> is not a directory or <code>projectFile</code> is not a file, an
-     * {@link IllegalArgumentException} will be thrown.
+     * If <code>projectDir</code> is not a directory or <code>projectFile</code>
+     * is not a file, an {@link IllegalArgumentException} will be thrown.
      *
      * @param projectDir
      *            The directory of the project
@@ -119,7 +122,7 @@ public final class ProjectFileStorage {
      */
     public static ProjectProperties loadPropertiesFile(File projectDir, File projectFile) throws Exception {
         if (!projectFile.isFile()) {
-            throw new IllegalArgumentException("Project file "+projectFile+" was not a file");
+            throw new IllegalArgumentException("Project file " + projectFile + " was not a file");
         }
         Omegat om = parseProjectFile(projectFile);
         return loadPropertiesFile(projectDir, om);
@@ -133,9 +136,9 @@ public final class ProjectFileStorage {
         ProjectProperties result = new ProjectProperties(projectDir);
 
         if (!OConsts.PROJ_CUR_VERSION.equals(om.getProject().getVersion())) {
-            throw new TranslationException(StringUtil.format(
-                    OStrings.getString("PFR_ERROR_UNSUPPORTED_PROJECT_VERSION"),
-                    om.getProject().getVersion()));
+            throw new TranslationException(
+                    StringUtil.format(OStrings.getString("PFR_ERROR_UNSUPPORTED_PROJECT_VERSION"),
+                            om.getProject().getVersion()));
         }
 
         result.setTargetRoot(normalizeLoadedPath(om.getProject().getTargetDir(), OConsts.DEFAULT_TARGET));
@@ -148,10 +151,13 @@ public final class ProjectFileStorage {
             result.getSourceRootExcludes().addAll(ProjectProperties.getDefaultExcludes());
         }
         result.setTMRoot(normalizeLoadedPath(om.getProject().getTmDir(), OConsts.DEFAULT_TM));
-        result.setExportTMRoot(normalizeLoadedPath(om.getProject().getExportTmDir(), OConsts.DEFAULT_EXPORT_TM));
-        result.setExportTmLevels(normalizeLoadedExportTmLevels(om.getProject().getExportTmLevels(), OConsts.DEFAULT_EXPORT_TM_LEVELS));
+        result.setExportTMRoot(
+                normalizeLoadedPath(om.getProject().getExportTmDir(), OConsts.DEFAULT_EXPORT_TM));
+        result.setExportTmLevels(normalizeLoadedExportTmLevels(om.getProject().getExportTmLevels(),
+                OConsts.DEFAULT_EXPORT_TM_LEVELS));
 
-        result.setGlossaryRoot(normalizeLoadedPath(om.getProject().getGlossaryDir(), OConsts.DEFAULT_GLOSSARY));
+        result.setGlossaryRoot(
+                normalizeLoadedPath(om.getProject().getGlossaryDir(), OConsts.DEFAULT_GLOSSARY));
 
         // Compute glossary file location
         String glossaryFile = om.getProject().getGlossaryFile();
@@ -165,8 +171,7 @@ public final class ProjectFileStorage {
         }
         result.setWriteableGlossary(glossaryFile);
 
-        result.setDictRoot(normalizeLoadedPath(om.getProject().getDictionaryDir(),
-                OConsts.DEFAULT_DICT));
+        result.setDictRoot(normalizeLoadedPath(om.getProject().getDictionaryDir(), OConsts.DEFAULT_DICT));
 
         result.setSourceLanguage(om.getProject().getSourceLang());
         result.setTargetLanguage(om.getProject().getTargetLang());
@@ -210,7 +215,8 @@ public final class ProjectFileStorage {
         om.getProject().getSourceDirExcludes().getMask().addAll(props.getSourceRootExcludes());
         om.getProject().setTargetDir(getPathForStoring(root, props.getTargetRoot(), OConsts.DEFAULT_TARGET));
         om.getProject().setTmDir(getPathForStoring(root, props.getTMRoot(), OConsts.DEFAULT_TM));
-        om.getProject().setExportTmDir(getPathForStoring(root, props.getExportTMRoot(), OConsts.DEFAULT_EXPORT_TM));
+        om.getProject()
+                .setExportTmDir(getPathForStoring(root, props.getExportTMRoot(), OConsts.DEFAULT_EXPORT_TM));
         om.getProject().setExportTmLevels(String.join(" ", props.getExportTmLevels()));
         String glossaryDir = getPathForStoring(root, props.getGlossaryRoot(), OConsts.DEFAULT_GLOSSARY);
         om.getProject().setGlossaryDir(glossaryDir);
@@ -300,7 +306,8 @@ public final class ProjectFileStorage {
             // Path.normalize() will resolve any remaining "../"
             Path absPath = Paths.get(absolutePath).normalize();
             String rel = Paths.get(root).relativize(absPath).toString();
-            if (StringUtils.countMatches(rel, ".." + File.separatorChar) <= OConsts.MAX_PARENT_DIRECTORIES_ABS2REL) {
+            if (StringUtils.countMatches(rel,
+                    ".." + File.separatorChar) <= OConsts.MAX_PARENT_DIRECTORIES_ABS2REL) {
                 // Use the relativized path as it is "near" enough.
                 result = rel;
             } else {
@@ -314,9 +321,11 @@ public final class ProjectFileStorage {
 
     /**
      * Load a tokenizer class from its canonical name.
-     * @param className Name of tokenizer class
-     * @return Class object of specified tokenizer, or of fallback tokenizer
-     * if the specified one could not be loaded for whatever reason.
+     * 
+     * @param className
+     *            Name of tokenizer class
+     * @return Class object of specified tokenizer, or of fallback tokenizer if
+     *         the specified one could not be loaded for whatever reason.
      */
     private static Class<?> loadTokenizer(String className, Language fallback) {
         if (!StringUtil.isEmpty(className)) {

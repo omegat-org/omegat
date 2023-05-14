@@ -90,8 +90,6 @@ public class FilterMaster {
     /** name of the filter configuration file */
     public static final String FILE_FILTERS = "filters.xml";
 
-    private static final XmlMapper mapper;
-
     /**
      * There was no version of file filters support (1.4.5 Beta 1 -- 1.6.0
      * RC12).
@@ -108,21 +106,21 @@ public class FilterMaster {
     /** Filters config stored in XML file. */
     private final Filters config;
 
+    private static final XmlMapper mapper;
+
     /** Classes of all filters. */
     static List<Class<?>> filtersClasses = Collections.emptyList();
 
-    public static void setFilterClasses(List<Class<?>> classes) {
-        filtersClasses = new ArrayList<>(classes);
-    }
-
     static {
-        mapper = XmlMapper.xmlBuilder()
-                .defaultUseWrapper(false)
-                .enable(MapperFeature.USE_WRAPPER_NAME_AS_PROPERTY_NAME)
-                .build();
+        mapper = XmlMapper.xmlBuilder().defaultUseWrapper(false)
+                .enable(MapperFeature.USE_WRAPPER_NAME_AS_PROPERTY_NAME).build();
         mapper.registerModule(new JaxbAnnotationModule());
         mapper.configure(ToXmlGenerator.Feature.WRITE_XML_DECLARATION, true);
         mapper.enable(SerializationFeature.INDENT_OUTPUT);
+    }
+
+    public static void setFilterClasses(List<Class<?>> classes) {
+        filtersClasses = new ArrayList<>(classes);
     }
 
     /**
@@ -130,7 +128,6 @@ public class FilterMaster {
      */
     public FilterMaster(Filters config) {
         this.config = config;
-
     }
 
     public Filters getConfig() {
@@ -138,7 +135,7 @@ public class FilterMaster {
     }
 
     /**
-     * Adds new filters(which was not exist in config yet) into config.
+     * Adds new filters (which do not exist in config yet) into config.
      */
     private static boolean addNewFiltersToConfig(final Filters conf) {
         boolean result = false;
@@ -146,7 +143,7 @@ public class FilterMaster {
             boolean found = false;
             for (Filter fc : conf.getFilters()) {
                 if (fclass.getName().equals(fc.getClassName())) {
-                    // filter already exist in config
+                    // filter already exists in config
                     found = true;
                     break;
                 }

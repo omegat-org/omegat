@@ -42,8 +42,6 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import org.apache.commons.io.FileUtils;
 import org.junit.After;
 import org.junit.Before;
@@ -82,7 +80,7 @@ public class FilterMasterTest {
     }
 
     @Test
-    public void deserializeEmptyOption() throws JsonMappingException, JsonProcessingException, JAXBException {
+    public void deserializeEmptyOption() throws JAXBException {
         String filters = "<?xml version='1.0' encoding='UTF-8'?>" + //
                 "<filters removeTags='true' removeSpacesNonseg='true' preserveSpaces='false' ignoreFileContext='false'>"
                 + //

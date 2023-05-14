@@ -127,15 +127,25 @@ public final class FileUtil {
      * @return Backup file.
      */
     public static File backupFile(File original) {
-        long fileMillis = original.lastModified();
-        String str = new SimpleDateFormat("yyyyMMddHHmm").format(new Date(fileMillis));
-        File backup = new File(original.getPath() + "." + str + OConsts.BACKUP_EXTENSION);
+        File backup = new File(original.getParentFile(), getBackupFilename(original));
         try {
             FileUtils.copyFile(original, backup);
         } catch (IOException ex) {
             Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_CREATE_BACKUP_FILE", original.getName());
         }
         return backup;
+    }
+
+    /**
+     * Generates a name for the file to be backuped, in the form of <code>[original_name].yyyyMMddHHmm.bak</code>.
+     * 
+     * @param original the file to be backuped
+     * @return the name of the backuped file
+     */
+    public static String getBackupFilename(File original) {
+        return String.format("%s.%s%s", original.getName(),
+                new SimpleDateFormat("yyyyMMddHHmm").format(new Date(original.lastModified())),
+                OConsts.BACKUP_EXTENSION);
     }
 
     /**

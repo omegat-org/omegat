@@ -529,4 +529,17 @@ public class FileUtilTest {
         assertEquals(Arrays.asList("My Awesome Glossary"),
                 FileUtil.getUniqueNames(Arrays.asList("My Awesome Glossary")));
     }
+
+    @Test
+    public void testBackupFilename() throws IOException {
+        File tempDir = Files.createTempDirectory("omegat").toFile();
+        assertTrue(tempDir.isDirectory());
+
+        File original = new File("backup.test");
+        original.createNewFile();
+        original.setLastModified(1684085727566l);
+        assertEquals("backup.test.202305141935.bak", FileUtil.getBackupFilename(original));
+
+        safeDeleteDirectory(tempDir);
+    }
 }

@@ -119,6 +119,14 @@ public class FilterMaster {
         mapper.enable(SerializationFeature.INDENT_OUTPUT);
     }
 
+    /**
+     * Method for test.
+     * @return xmlMapper object.
+     */
+    protected static XmlMapper getMapper() {
+        return mapper;
+    }
+
     public static void setFilterClasses(List<Class<?>> classes) {
         filtersClasses = new ArrayList<>(classes);
     }

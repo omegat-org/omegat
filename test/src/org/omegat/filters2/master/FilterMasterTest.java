@@ -23,7 +23,7 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
-package org.omegat.filters2;
+package org.omegat.filters2.master;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -42,6 +42,8 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import org.apache.commons.io.FileUtils;
 import org.junit.After;
 import org.junit.Before;
@@ -49,7 +51,10 @@ import org.junit.Test;
 
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.ProtectedPart;
-import org.omegat.filters2.master.FilterMaster;
+import org.omegat.filters2.FilterContext;
+import org.omegat.filters2.IFilter;
+import org.omegat.filters2.IParseCallback;
+import org.omegat.filters2.TranslationException;
 
 import gen.core.filters.Filter.Option;
 import gen.core.filters.Filters;
@@ -80,7 +85,7 @@ public class FilterMasterTest {
     }
 
     @Test
-    public void deserializeEmptyOption() throws JAXBException {
+    public void deserializeEmptyOption() throws JAXBException, JsonProcessingException {
         String filters = "<?xml version='1.0' encoding='UTF-8'?>" + //
                 "<filters removeTags='true' removeSpacesNonseg='true' preserveSpaces='false' ignoreFileContext='false'>"
                 + //
@@ -92,12 +97,18 @@ public class FilterMasterTest {
                 "  </filter>" + //
                 "</filters>";
 
+        // Check equality between jaxb unmarshaller and xml mapper
         Unmarshaller unm = CONFIG_CTX.createUnmarshaller();
         Filters filtersConfig = (Filters) unm.unmarshal(new StringReader(filters));
-
         List<Option> option = filtersConfig.getFilters().get(0).getOption();
         assertFalse("Desierialized <option/> is empty", option.isEmpty());
         assertNull(option.get(0).getName());
+
+        XmlMapper mapper = FilterMaster.getMapper();
+        Filters filtersConfig2 = mapper.readValue(filters, Filters.class);
+        List<Option> option2 = filtersConfig2.getFilters().get(0).getOption();
+        assertFalse("Desierialized <option/> is empty", option2.isEmpty());
+        assertNull(option2.get(0).getName());
     }
 
     @Test

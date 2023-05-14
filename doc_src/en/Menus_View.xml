@@ -182,10 +182,10 @@
     </varlistentry>
 	
 	<varlistentry id="menus.view.restore.main.window">
-      <term id="menus.view.restore.main.window.title"><guimenuitem>Restore Main
+      <term id="menus.view.restore.main.window.title"><guimenuitem>Restore OmegaT
       Window</guimenuitem></term>
       <listitem>
-        <para>Restores the OmegaT main window layout to its default
+        <para>Restores the OmegaT window layout to its default
         values.</para>
 
 		<note>

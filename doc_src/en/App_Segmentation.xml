@@ -13,10 +13,10 @@
 	with its translation in the project memory, and subsequently used to match
 	other source segments in the project.</para>
 
-	<para>Use the <link
+	<para>To specify the type of segmentation, use the  <link
 	linkend="dialogs.project.properties.options.segmentation"
 	endterm="dialogs.project.properties.options.segmentation.title"/> project
-	property to select the type of segmentation.</para>
+	property.</para>
 
 	<para>Segments are by default <emphasis role="bold">paragraphs</emphasis>
 	defined by the file format itself.</para>

@@ -380,7 +380,7 @@
 			</listitem>
 			<listitem>
 			  <para>Only segments that match the source <emphasis
-			  role="bold">exactly</emphasis> will be displayed.</para>
+			  role="bold">exactly</emphasis> are displayed.</para>
 			</listitem>
 		  </itemizedlist>
 		</warning>

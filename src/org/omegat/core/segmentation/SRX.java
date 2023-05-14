@@ -45,8 +45,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.databind.DatabindException;
+import com.fasterxml.jackson.databind.MapperFeature;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-import org.omegat.util.JaxbXmlMapper;
+import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
+import com.fasterxml.jackson.module.jaxb.JaxbAnnotationModule;
+
 import org.omegat.util.Language;
 import org.omegat.util.Log;
 
@@ -68,8 +72,17 @@ public class SRX implements Serializable {
 
     public static final String CONF_SENTSEG = "segmentation.conf";
     public static final String SRX_SENTSEG = "segmentation.srx";
+    private static final XmlMapper mapper;
 
-    private static final XmlMapper mapper = JaxbXmlMapper.getXmlMapper();
+    static {
+        mapper = XmlMapper.xmlBuilder()
+                .defaultUseWrapper(false)
+                .enable(MapperFeature.USE_WRAPPER_NAME_AS_PROPERTY_NAME)
+                .build();
+        mapper.registerModule(new JaxbAnnotationModule());
+        mapper.configure(ToXmlGenerator.Feature.WRITE_XML_DECLARATION, true);
+        mapper.enable(SerializationFeature.INDENT_OUTPUT);
+    }
 
     /**
      * Creates an empty SRX, without any rules.
@@ -145,6 +158,17 @@ public class SRX implements Serializable {
             Log.logErrorRB("CORE_SRX_ERROR_SAVING_SEGMENTATION_CONFIG");
             throw new IOException(e);
         }
+        /*
+        try {
+            srx.setVersion(CURRENT_VERSION);
+            XMLEncoder xmlenc = new XMLEncoder(new FileOutputStream(outFile));
+            xmlenc.writeObject(srx);
+            xmlenc.close();
+        } catch (IOException e) {
+            Log.logErrorRB("CORE_SRX_ERROR_SAVING_SEGMENTATION_CONFIG");
+            throw new IOException(e);
+        }
+        */
     }
 
     /**
@@ -235,6 +259,12 @@ public class SRX implements Serializable {
     }
 
     private static SRX loadSrxInputStream(InputStream io) throws IOException {
+        /*
+        MyExceptionListener myel = new MyExceptionListener();
+        XMLDecoder xmldec = new XMLDecoder(io, null, myel);
+        Srx srx = (Srx) xmldec.readObject();
+        xmldec.close();
+        */
         Srx srx = mapper.readValue(io, Srx.class);
         HashMap<String, List<Rule>> mapping = new HashMap<>();
         List<Languagerule> languageRuleList = srx.getBody().getLanguagerules().getLanguagerule();

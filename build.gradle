@@ -153,6 +153,9 @@ dependencies {
         // macOS integration
         implementation 'org.madlonkay:desktopsupport:0.6.0'
 
+        implementation 'javax.xml.bind:jaxb-api:2.3.1'
+        runtimeOnly 'com.sun.xml.bind:jaxb-impl:2.3.4'
+
         // Data: inline data URL handler
         implementation 'tokyo.northside:url-protocol-handler:0.1.4'
 

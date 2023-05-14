@@ -53,6 +53,7 @@ import java.util.TreeMap;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
@@ -71,7 +72,9 @@ public class PreferencesXML implements IPrefsPersistence {
     public PreferencesXML(File loadFile, File saveFile) {
         this.loadFile = loadFile;
         this.saveFile = saveFile;
-        mapper = JaxbXmlMapper.getXmlMapper();
+        mapper = new XmlMapper();
+        mapper.configure(ToXmlGenerator.Feature.WRITE_XML_DECLARATION, true);
+        mapper.enable(SerializationFeature.INDENT_OUTPUT);
     }
 
     @Override

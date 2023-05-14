@@ -44,9 +44,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.xml.stream.XMLInputFactory;
+
 import com.fasterxml.jackson.databind.DatabindException;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.dataformat.xml.XmlFactory;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
 import com.fasterxml.jackson.module.jaxb.JaxbAnnotationModule;
@@ -75,7 +78,15 @@ public class SRX implements Serializable {
     private static final XmlMapper mapper;
 
     static {
-        mapper = XmlMapper.xmlBuilder().defaultUseWrapper(false)
+        final XMLInputFactory xmlInputFactory = XMLInputFactory.newInstance();
+        // You should NOT use XMLInputFactor.getXMLInputFactory
+        // that returns system default object.
+        // Modifying a global object leads breakage of SuperTMXMerge
+        // library.
+        // https://sourceforge.net/p/omegat/bugs/1170/
+        xmlInputFactory.setProperty(XMLInputFactory.SUPPORT_DTD, Boolean.TRUE);
+        XmlFactory xmlFactory = new XmlFactory(xmlInputFactory);
+        mapper = XmlMapper.builder(xmlFactory).defaultUseWrapper(false)
                 .enable(MapperFeature.USE_WRAPPER_NAME_AS_PROPERTY_NAME).build();
         mapper.registerModule(new JaxbAnnotationModule());
         mapper.configure(ToXmlGenerator.Feature.WRITE_XML_DECLARATION, true);

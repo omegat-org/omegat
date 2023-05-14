@@ -1,3 +1,4 @@
+The @language@ version of OmegaT has been translated by:
 @TRANSLATION_NOTICE@
 
 
@@ -151,6 +152,7 @@ Current team:
 - Concepción Martin (Facebook community manager)
 - Hiroshi Miura (lead developer)
 - Briac Pilpré (webmaster)
+- Philippe Tourigny (documentation manager)
 - Lucie Vecerova (Facebook community manager)
 
 Contributions to the code are documented in /docs/contributors.txt.

@@ -535,7 +535,7 @@ public class FileUtilTest {
         File tempDir = Files.createTempDirectory("omegat").toFile();
         assertTrue(tempDir.isDirectory());
 
-        File original = new File("backup.test");
+        File original = new File(tempDir, "backup.test");
         original.createNewFile();
         original.setLastModified(1684085727566l);
         assertEquals("backup.test.202305141935.bak", FileUtil.getBackupFilename(original));

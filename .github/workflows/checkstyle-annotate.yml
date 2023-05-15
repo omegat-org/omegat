@@ -10,7 +10,7 @@ jobs:
     - uses: actions/setup-java@v2.4.0
       with:
         distribution: 'temurin'
-        java-version: '8'
+        java-version: '11'
     - uses: kiancross/checkstyle-annotations-action@v1
     - name: run checkstyle
       uses: gradle/gradle-build-action@v2.1.2

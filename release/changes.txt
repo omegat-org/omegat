@@ -156,9 +156,9 @@
 
   Bug fixes:
 
-  - OmegaT does not create a backup of project file when standalone project.
+  - OmegaT does not create a backup of the project file for standalone projects.
 
-  - Failure of javadoc build. We suppress doclint errors for maven publish.
+  -Javadoc build failure. Suppress doclint errors for Maven publishing.
 
   - Change key to explicit offline mode cause
   https://sourceforge.net/p/omegat/bugs/1153

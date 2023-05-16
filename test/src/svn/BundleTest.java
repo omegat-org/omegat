@@ -47,8 +47,10 @@ import java.util.UUID;
 import java.util.function.BiConsumer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Stream;
 
 import org.junit.Test;
+
 import org.omegat.Main;
 import org.omegat.util.EncodingDetector;
 import org.omegat.util.Language;
@@ -176,8 +178,7 @@ public class BundleTest {
     }
 
     /**
-     * Process the text content of all .java files under /src. Will blow up if
-     * any are not US-ASCII.
+     * Process the text content of all .java files under /src.
      *
      * @param consumer
      *            A function that accepts the file path and content
@@ -185,24 +186,27 @@ public class BundleTest {
      *             from Files.find()
      */
     public static void processSourceContent(BiConsumer<Path, CharSequence> consumer) throws IOException {
-        CharsetDecoder decoder = StandardCharsets.US_ASCII.newDecoder();
+        CharsetDecoder decoder = StandardCharsets.UTF_8.newDecoder();
         decoder.onMalformedInput(CodingErrorAction.REPORT);
         decoder.onUnmappableCharacter(CodingErrorAction.REPORT);
         for (String root : new String[] { "src", "test", "test-integration" }) {
             Path rootPath = Paths.get(".", root);
             assertTrue(rootPath.toFile().isDirectory());
-            Files.find(rootPath, 100,
-                    (path, attrs) -> attrs.isRegularFile() && path.toString().endsWith(".java")).forEach(p -> {
-                        try {
-                            byte[] bytes = Files.readAllBytes(p);
-                            CharBuffer chars = decoder.decode(ByteBuffer.wrap(bytes));
-                            consumer.accept(p, chars);
-                        } catch (MalformedInputException ex) {
-                            throw new RuntimeException("File contains non-ASCII characters: " + p, ex);
-                        } catch (IOException ex) {
-                            throw new RuntimeException(p.toString(), ex);
-                        }
-                    });
+            try (Stream<Path> files = Files.find(rootPath, 100,
+                    (path, attrs) -> attrs.isRegularFile() && path.toString().endsWith(".java"))) {
+                files.forEach(p -> {
+                    try {
+                        byte[] bytes = Files.readAllBytes(p);
+                        CharBuffer chars = decoder.decode(ByteBuffer.wrap(bytes));
+                        consumer.accept(p, chars);
+                    } catch (MalformedInputException ex) {
+                        throw new RuntimeException("File contains a bad character sequence for UTF-8: " + p,
+                                ex);
+                    } catch (IOException ex) {
+                        throw new RuntimeException(p.toString(), ex);
+                    }
+                });
+            }
         }
     }
 }

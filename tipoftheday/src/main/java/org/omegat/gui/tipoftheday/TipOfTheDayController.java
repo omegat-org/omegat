@@ -25,13 +25,16 @@
 
 package org.omegat.gui.tipoftheday;
 
-import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import java.util.Enumeration;
 import java.util.ResourceBundle;
 
+import javax.swing.AbstractAction;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JMenuItem;
+import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
@@ -116,23 +119,46 @@ public final class TipOfTheDayController {
         }
         totd.setCurrentTip(currentTip);
 
-        TipOfTheDay.ShowOnStartupChoice choice = new TipOfTheDay.ShowOnStartupChoice() {
-            @Override
-            public void setShowingOnStartup(boolean showOnStartup) {
-                Preferences.setPreference(TIPOFTHEDAY_SHOW_ON_STARTUP, showOnStartup);
-            }
 
-            @Override
-            public boolean isShowingOnStartup() {
-                return Preferences.isPreferenceDefault(TIPOFTHEDAY_SHOW_ON_STARTUP, true);
-            }
-        };
         JFrame mainFrame = Core.getMainWindow().getApplicationFrame();
-        JDialog dialog = totd.getUI().createDialog(mainFrame, choice);
-        dialog.setPreferredSize(new Dimension(900, 450));
-        dialog.pack();
+        TipOfTheDayDialog dialog = new TipOfTheDayDialog(mainFrame,
+                UIManager.getString("TipOfTheDay.dialogTitle"), totd);
+
+        dialog.showOnCB.setSelected(Preferences.isPreferenceDefault(TIPOFTHEDAY_SHOW_ON_STARTUP, true));
+        dialog.previousTipButton.addActionListener(e -> totd.previousTip());
+        dialog.nextTipButton.addActionListener(e -> totd.nextTip());
+        dialog.closeButton.addActionListener(actionEvent -> close(dialog));
+
+        totd.getActionMap().put("close", new CloseAction(dialog));
+
+        // set keymap for actions of TipOfTheDay
+        totd.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0), "previousTip");
+        totd.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0), "nextTip");
+        totd.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "close");
+
         dialog.setVisible(true);
-        dialog.dispose();
         Preferences.setPreference(TIPOFTHEDAY_CURRENT_TIP, totd.getCurrentTip());
+        Preferences.setPreference(TIPOFTHEDAY_SHOW_ON_STARTUP, dialog.showOnCB.isSelected());
+        close(dialog);
+    }
+
+    private static void close(JDialog dialog) {
+        if (dialog.isDisplayable()) {
+            dialog.dispose();
+        }
+    }
+
+    @SuppressWarnings("serial")
+    private static class CloseAction extends AbstractAction {
+        JDialog dialog;
+
+        CloseAction(JDialog dialog) {
+            this.dialog = dialog;
+        }
+
+        @Override
+        public void actionPerformed(final ActionEvent e) {
+            close(dialog);
+        }
     }
 }

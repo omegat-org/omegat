@@ -379,8 +379,8 @@
 			  <para>All the letters must be capital letters.</para>
 			</listitem>
 			<listitem>
-			  <para>Only segments that match the source <emphasis role="bold">exactly</emphasis>
-			  displayed.</para>
+			  <para>Only segments that match the source <emphasis
+			  role="bold">exactly</emphasis> are displayed.</para>
 			</listitem>
 		  </itemizedlist>
 		</warning>

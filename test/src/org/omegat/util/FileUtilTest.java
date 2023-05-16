@@ -62,14 +62,20 @@ public class FileUtilTest {
 
     private File base;
 
+    private String oldTz;
+
     @Before
     public final void setUp() throws Exception {
+        oldTz = System.setProperty("user.timezone", "UTC");
         base = Files.createTempDirectory("omegat").toFile();
     }
 
     @After
     public final void tearDown() throws Exception {
         safeDeleteDirectory(base);
+        if (oldTz != null) {
+            System.setProperty("user.timezone", oldTz);
+        }
     }
 
     private void safeDeleteDirectory(File file) {
@@ -528,5 +534,21 @@ public class FileUtilTest {
         // Non-path
         assertEquals(Arrays.asList("My Awesome Glossary"),
                 FileUtil.getUniqueNames(Arrays.asList("My Awesome Glossary")));
+    }
+
+    @Test
+    public void testBackupFilename() throws IOException {
+        File tempDir = Files.createTempDirectory("omegat").toFile();
+        assertTrue(tempDir.isDirectory());
+
+        File original = new File(tempDir, "backup.test");
+        original.createNewFile();
+        original.setLastModified(1684085727566l);
+
+        assertTrue(original.exists());
+        assertEquals(1684085727566l, original.lastModified());
+        assertEquals("backup.test.202305141735.bak", FileUtil.getBackupFilename(original));
+
+        safeDeleteDirectory(tempDir);
     }
 }

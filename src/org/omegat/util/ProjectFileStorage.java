@@ -189,10 +189,16 @@ public final class ProjectFileStorage {
     }
 
     /**
-     * Saves project file to disk.
+     * Saves project file to disk to default `omegat.project` file.
      */
     public static void writeProjectFile(ProjectProperties props) throws Exception {
-        File outFile = new File(props.getProjectRoot(), OConsts.FILE_PROJECT);
+        writeProjectFile(new File(props.getProjectRoot(), OConsts.FILE_PROJECT), props);
+    }
+
+    /**
+     * Saves project file to disk.
+     */
+    public static void writeProjectFile(File outFile, ProjectProperties props) throws Exception {
         String root = outFile.getAbsoluteFile().getParent();
 
         Omegat om = new Omegat();

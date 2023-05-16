@@ -446,9 +446,9 @@ distributions {
             from('releases/modules-specific') {
                 into 'modules'
             }
-            from(subprojects.collect {it.tasks.withType(Jar)}) {
+            /*from(subprojects.collect {it.tasks.withType(Jar)}) {
                 into 'modules'
-            }
+            }*/
             eachFile {
                 // Move main JAR up one level from lib.
                 if (it.name == jar.archiveName) {

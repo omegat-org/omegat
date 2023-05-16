@@ -51,7 +51,6 @@ public class AppearancePreferencesPanel extends JPanel {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         cbThemeSelect = new javax.swing.JComboBox<>();
-        newUICheckBox = new javax.swing.JCheckBox();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 8), new java.awt.Dimension(0, 8), new java.awt.Dimension(32767, 8));
         restoreWindowButton = new javax.swing.JButton();
 
@@ -70,10 +69,6 @@ public class AppearancePreferencesPanel extends JPanel {
         jPanel1.add(cbThemeSelect, java.awt.BorderLayout.CENTER);
 
         add(jPanel1);
-
-        org.openide.awt.Mnemonics.setLocalizedText(newUICheckBox, "Apply newUI(Experimental)");
-        newUICheckBox.setActionCommand("newUI");
-        add(newUICheckBox);
         add(filler1);
 
         org.openide.awt.Mnemonics.setLocalizedText(restoreWindowButton, OStrings.getString("MW_OPTIONSMENU_RESTORE_GUI")); // NOI18N
@@ -85,7 +80,6 @@ public class AppearancePreferencesPanel extends JPanel {
     private javax.swing.Box.Filler filler1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
-    javax.swing.JCheckBox newUICheckBox;
     javax.swing.JButton restoreWindowButton;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,25 +1,9 @@
-----------------------------------------------------------------------
- OmegaT 5.8.1
-----------------------------------------------------------------------
-  0 Removed features
-  0 Enhancements
-  2 Bug fixes
-  0 Localization updates
-----------------------------------------------------------------------
-5.8.1 vs 5.8.0
-
-  Bug fixes:
-
-  - OmegaT does not create a backup of project file when standalone project.
-
-  - Failure of javadoc build. We suppress doclint errors for maven publish.
-
-----------------------------------------------------------------------
- OmegaT 5.8.0 (2023-04-01)
+---------------------------------------------------------------------
+ OmegaT 5.8.0 (2023-05-xx)
 ----------------------------------------------------------------------
    4 Removed features
   40 Enhancements
-  46 Bug fixes
+  48 Bug fixes
   9 Localization updates
 ----------------------------------------------------------------------
 5.8.0 vs 5.7.1
@@ -171,6 +155,10 @@
   https://github.com/omegat-org/omegat/pull/122
 
   Bug fixes:
+
+  - OmegaT does not create a backup of the project file for standalone projects.
+
+  -Javadoc build failure. Suppress doclint errors for Maven publishing.
 
   - Change key to explicit offline mode cause
   https://sourceforge.net/p/omegat/bugs/1153

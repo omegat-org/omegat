@@ -20,8 +20,7 @@
 
   <variablelist>
     <varlistentry id="menus.edit.undo.last.action">
-      <term id="menus.edit.undo.last.action.title"><guimenuitem>Undo Last
-      Action</guimenuitem>
+      <term id="menus.edit.undo.last.action.title"><guimenuitem>Undo</guimenuitem>
       <keycombo><keycap>C</keycap><keycap>Z</keycap></keycombo></term>
       <listitem>
         <para>Cancels modifications made to the segment while it is
@@ -30,7 +29,7 @@
     </varlistentry>
 
     <varlistentry id="menus.edit.redo.last.action">
-      <term id="menus.edit.redo.last.action.title"><guimenuitem>Redo Last Action</guimenuitem>
+      <term id="menus.edit.redo.last.action.title"><guimenuitem>Redo</guimenuitem>
 	  <keycombo><keycap>C</keycap><keycap>Y</keycap></keycombo>
 	  </term>
       <listitem>
@@ -136,7 +135,7 @@
     </varlistentry>
 
     <varlistentry id="menus.edit.insert.missing.source.tag">
-      <term id="menus.edit.insert.missing.source.tag.title"><guimenuitem>Insert Missing Source Tags</guimenuitem>
+      <term id="menus.edit.insert.missing.source.tag.title"><guimenuitem>Insert Missing Tags</guimenuitem>
 	  <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>T</keycap></keycombo>
 	  </term>
       <listitem>
@@ -156,7 +155,7 @@
 
     <varlistentry id="menus.edit.export.selection">
       <term id="menus.edit.export.selection.title"><guimenuitem>Export Selection</guimenuitem>
-	  <keycombo><keycap>C</keycap><keycap>C</keycap><keycap>S</keycap></keycombo>
+	  <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>C</keycap></keycombo>
 	  </term>
       <listitem>
         <para>Exports the current selection to a text file for processing. If no

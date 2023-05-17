@@ -1,92 +1,164 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="menus.goto">
-  <title>Atteindre</title>
+  <title id="menus.goto.title"><guimenu>Atteindre</guimenu></title>
 
-  <para>Ce menu n'est disponible que lorsqu'un projet est ouvert.</para>
+  <para>Ce menu vous permet d’accéder aux commandes de navigation des segments et des volets.</para>
+
+  <example id="example.next.untranslated.segment">
+	<title id="example.next.untranslated.segment.title">Exemple de description de raccourci</title>
+	<para>Sur Windows et Linux : <keycombo><keycap>Ctrl</keycap><keycap>U</keycap></keycombo></para>
+
+	<para>Sur macOS : <keycombo><keycap>commande</keycap><keycap>U</keycap></keycombo></para>
+
+	<para><emphasis role="bold">Dans ce manuel : </emphasis><keycombo><keycap>C</keycap><keycap>U</keycap></keycombo></para>
+  </example>
 
   <variablelist>
-    <varlistentry>
-      <term>Segment non traduit suivant</term>
+    <varlistentry id="menus.goto.next.untranslated.segment">
+      <term id="menus.goto.next.untranslated.segment.title"><guimenuitem>Segment non traduit suivant</guimenuitem> <keycombo><keycap>C</keycap><keycap>U</keycap></keycombo></term>
 
       <listitem>
-        <para>Passe au segment suivant qui n'a pas d'équivalent dans la mémoire de traduction.</para>
+        <para>Passe au segment suivant qui n’a pas d’entrée pour la langue cible dans la mémoire de traduction.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Segment traduit suivant</term>
+    <varlistentry id="menus.goto.next.translated.segment">
+      <term id="menus.goto.next.translated.segment.title"><guimenuitem>Segment traduit suivant</guimenuitem> <keycombo><keycap>C</keycap><keycap>Maj</keycap><keycap>U</keycap></keycombo></term>
 
       <listitem>
         <para>Se déplace au prochain segment déjà traduit, ignorant les segments non traduits.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Segment suivant</term>
+    <varlistentry id="menus.goto.next.segment">
+      <term id="menus.goto.next.segment.title"><guimenuitem>Segment suivant</guimenuitem> <keycombo><keycap>C</keycap><keycap>N</keycap></keycombo></term>
 
       <listitem>
-        <para>Passe au segment suivant. Si le segment en cours est le dernier segment d'un fichier, on passe au premier segment du fichier suivant.</para>
+		<para>Ou : <keycombo><keycap>Entrée</keycap></keycombo></para>
 
-        <para>Note : La touche <keycap>Entrée</keycap> est un autre raccourci si l'option <link linkend="dialogs.preferences.general.usetabtoadvance">Utiliser la touche TAB pour valider</link> n'est pas sélectionnée.</para>
+        <para>Passe au segment suivant, ou au premier segment du fichier suivant si le segment actuel est le dernier du fichier.</para>
+
+        <note>
+		  <para>Vous pouvez utiliser la touche <keycap>TAB</keycap> en tant que raccourci alternatif en activant la préférence <link linkend="dialogs.preferences.general.use.tab.to.advance" endterm="dialogs.preferences.general.use.tab.to.advance.title"/>.</para>
+		  
+		  <para>Cette option peut être utile avec des systèmes de saisie de caractères qui utilisent la touche <keycap>Entrée</keycap> pour valider la saisie.</para></note>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Segment précédent</term>
-
+    <varlistentry id="menus.goto.previous.segment">
+      <term id="menus.goto.previous.segment.title"><guimenuitem>Segment précédent</guimenuitem> <keycombo><keycap>C</keycap><keycap>P</keycap></keycombo></term>
       <listitem>
-        <para>Revient au segment précédent. Si le segment en cours est le premier segment d'un fichier, on passe au dernier segment du fichier précédent.</para>
+		<para>Ou : <keycombo><keycap>C</keycap><keycap>Entrée</keycap></keycombo></para>
 
-        <para>Note : La combinaison <keycombo><keycap>Ctrl</keycap> <keycap>Entrée</keycap> </keycombo>est un autre raccourci si l'option <link linkend="dialogs.preferences.general.usetabtoadvance">Utiliser la touche TAB pour valider</link> n'est pas sélectionnée.</para>
+        <para>Retourne au segment précédent, ou au dernier segment de fichier précédent si le segment actuel est le premier du fichier.</para>
+
+        <note>
+		  <para>Vous pouvez utiliser <keycombo><keycap>C</keycap><keycap>TAB</keycap></keycombo> en tant que raccourci alternatif en activant la préférence <link linkend="dialogs.preferences.general.use.tab.to.advance" endterm="dialogs.preferences.general.use.tab.to.advance.title"/>.</para>
+		  
+		  <para>Cette option peut être utile avec des systèmes de saisie de caractères qui utilisent la touche <keycap>Entrée</keycap> pour valider la saisie.</para>
+		</note>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Segment numéro...</term>
-
+    <varlistentry id="menus.goto.segment.number">
+      <term id="menus.goto.segment.number.title"><guimenuitem>Segment numéro...</guimenuitem> <keycombo><keycap>C</keycap><keycap>J</keycap></keycombo></term>
       <listitem>
-        <para>Le segment s'ouvre lorsque son numéro de segment est saisi ou que son raccourci est entré.</para>
+        <para>Se rend au segment dont le numéro ou le raccourci est entré.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Note suivante</term>
-
+    <varlistentry id="menus.goto.next.note">
+      <term id="menus.goto.next.note.title"><guimenuitem>Note suivante</guimenuitem> <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>N</keycap></keycombo></term>
       <listitem>
-        <para>Le segment suivant possédant une note rattachée s'ouvre.</para>
+		<para>Passe au segment suivant avec une note.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Note précédente</term>
-
+    <varlistentry id="menus.goto.previous.note">
+      <term id="menus.goto.previous.note.title"><guimenuitem>Note précédente</guimenuitem> <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>P</keycap></keycombo></term>
       <listitem>
-        <para>Le segment précédent possédant une note rattachée s'ouvre.</para>
+		<para>Retourne au segment précédent avec une note.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Source de la correspondance sélectionnée</term>
-
+    <varlistentry id="menus.goto.next.unique.segment">
+      <term id="menus.goto.next.unique.segment.title"><guimenuitem>Segment unique suivant</guimenuitem> <keycombo><keycap>C</keycap><keycap>Maj</keycap><keycap>K</keycap></keycombo></term>
       <listitem>
-        <para>Se déplace au segment qui correspond à la correspondance sélectionnée actuellement dans l'onglet des <guilabel>Correspondances</guilabel>.</para>
+        <para>Passe au prochain segment unique.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Segment suivant dans l'historique...</term>
-
+    <varlistentry id="menus.goto.source.of.selected.match">
+      <term id="menus.goto.source.of.selected.match.title"><guimenuitem>Source de la correspondance sélectionnée</guimenuitem> <keycombo><keycap>C</keycap><keycap>Maj</keycap><keycap>M</keycap></keycombo></term>
       <listitem>
-        <para><application>OmegaT</application> se souvient des segments déjà parcourus. Cette commande vous permet de retourner au segment que vous aviez auparavant quitté en utilisant la commande<guimenuitem>Segment précédent dans l'historique...</guimenuitem>.</para>
+        <para>Passe au segment qui correspond a la correspondance sélectionnée dans le volet <guilabel>Correspondances</guilabel>.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Segment précédent dans l'historique...</term>
+	<varlistentry id="menus.goto.auto.populated.segments">
+	  <term id="menus.goto.auto.populated.segments.title"><guisubmenu>Segments auto-traduits</guisubmenu></term>
+	  <listitem>
+        <para>Navigue entre les segments automatiquement remplis par des correspondances exactes provenant des sous-dossiers <link linkend="project.folder.tm.auto" endterm="project.folder.tm.auto.title"/> et <link linkend="project.folder.tm.enforce.title" endterm="project.folder.tm.enforce.title"/>.</para>
 
+		<para>Voir le guide pratique <link linkend="how.to.use.tm.reuse.tm" endterm="how.to.use.tm.reuse.tm.title"/> pour en savoir plus.</para>
+
+		<itemizedlist>
+		  <listitem id="menus.goto.auto.populated.segments.next.auto">
+			<para id="menus.goto.auto.populated.segments.next.auto.title"><guimenuitem>Segment suivant venant de tm/auto/</guimenuitem> <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>,</keycap></keycombo></para>
+
+			<para>Passe au segment suivant inséré à partir de <filename>tm/auto/</filename>.</para>
+		  </listitem>
+
+		  <listitem id="menus.goto.auto.populated.segments.prev.auto">
+			<para id="menus.goto.auto.populated.segments.prev.auto.title"><guimenuitem>Segment précédent venant de tm/auto/</guimenuitem> <keycombo><keycap>Maj</keycap><keycap>C</keycap><keycap>A</keycap><keycap>,</keycap></keycombo></para>
+
+			<para>Retourne au segment précédent inséré à partir de <filename>tm/auto/</filename>.</para>
+		  </listitem>
+
+		  <listitem id="menus.goto.auto.populated.segments.next.enforce">
+			<para id="menus.goto.auto.populated.segments.next.enforce.title"><guimenuitem>Segment suivant venant de tm/enforce/</guimenuitem> <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>.</keycap></keycombo></para>
+
+			<para>Passe au segment suivant inséré à partir de <filename>tm/enforce/</filename>.</para>
+		  </listitem>
+
+		  <listitem id="menus.goto.auto.populated.segments.prev.enforce">
+			<para id="menus.goto.auto.populated.segments.prev.enforce.title"><guimenuitem>Segment précédent venant de tm/enforce/</guimenuitem> <keycombo><keycap>Maj</keycap><keycap>C</keycap><keycap>A</keycap><keycap>,</keycap></keycombo></para>
+
+			<para>Retourne au segment précédent inséré à partir de <filename>tm/enforce/</filename>.</para>
+		  </listitem>
+		</itemizedlist>
+	  </listitem>
+	</varlistentry>
+
+    <varlistentry id="menus.goto.back.in.history">
+      <term id="menus.goto.back.in.history.title"><guimenuitem>Segment précédent dans l’historique</guimenuitem> <keycombo><keycap>C</keycap><keycap>Maj</keycap><keycap>P</keycap></keycombo></term>
       <listitem>
-        <para>Cette commande vous permet de retourner un segment en arrière dans l'historique. Vous pourrez retrouver le segment que vous avez quitté en utilisant la commande <guimenuitem>Segment suivant dans l'historique...</guimenuitem> ci-dessus.</para>
+        <para>OmegaT garde en mémoire votre historique de navigation de segments.</para>
+        <para>Cette commande vous permet de revenir à des segments que vous avez déjà parcourus, un segment à la fois.</para>
+      </listitem>
+    </varlistentry>
+    
+    <varlistentry id="menus.goto.forward.in.history">
+      <term id="menus.goto.forward.in.history.title"><guimenuitem>Segment suivant dans l’historique</guimenuitem> <keycombo><keycap>C</keycap><keycap>Maj</keycap><keycap>N</keycap></keycombo></term>
+      <listitem>
+        <para>OmegaT garde en mémoire votre historique de navigation de segments.</para>
+
+        <para>Cette commande vous permet d’avancer d’un segment à la fois à des segments que vous avez déjà parcourus avec la commande <link linkend="menus.goto" endterm="menus.goto.title"/><link linkend="menus.goto.back.in.history" endterm="menus.goto.back.in.history.title"/> ci-dessus.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry id="menus.goto.notes.pane">
+      <term id="menus.goto.notes.pane.title"><guimenuitem>Bloc-note</guimenuitem> <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>N</keycap></keycombo></term>
+      <listitem>
+        <para>Utilisez la fenêtre <link linkend="panes.notes" endterm="panes.notes.title"/> pour écrire ou modifier une note associée au segment actuel.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry id="menus.goto.editor.pane">
+      <term id="menus.goto.editor.pane.title"><guimenuitem>Éditeur</guimenuitem> <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>E</keycap></keycombo></term>
+      <listitem>
+        <para>Utilisez la fenêtre <link linkend="panes.editor" endterm="panes.editor.title"/> pour poursuivre votre traduction.</para>
       </listitem>
     </varlistentry>
   </variablelist>

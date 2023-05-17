@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="post.processing.commands">
+  <title id="post.processing.commands.title">Commandes de post-traitement</title>
+
+  <para>Voir la propriété du projet <link linkend="dialogs.project.properties.external.processing.command" endterm="dialogs.project.properties.external.processing.command.title"/> pour les commandes spécifiques au projet.</para>
+
+  <para>Voir le paramètre <link linkend="dialogs.preferences.saving.and.output.external.post-processing.command" endterm="dialogs.preferences.saving.and.output.external.post-processing.command.title"/> pour les commandes globales.</para>
+	
+
+  <section id="post.processing.commands.template.variables">
+    <title id="post.processing.commands.template.variables.title">Variables de modèle  </title>
+    <para>La commande est transmise à l’exécution Java sous la forme d’une chaîne de caractères avec les valeurs du modèle développées. Tous les arguments doivent être cités, par exemple <literal>« ${fileName}  »</literal>.</para>
+
+    <para>Les variables suivantes sont toujours disponibles. Les autres éléments de la liste des modèles sont des variables d’environnement de votre système.</para>
+	
+    <table id="post.processing.commands.template.variables.table">
+      <title id="post.processing.commands.template.variables.table.title">Variables de modèle  </title>
+      <tgroup cols="2" colsep="1">
+        <colspec align="left" colname="1" colnum="1"/>
+        <colspec align="left" colname="2" colnum="2"/>
+        <thead>
+          <row>
+            <entry>Nom de la variable</entry>
+            <entry>Valeur</entry>
+          </row>
+        </thead>
+
+        <tbody>
+		  <row>
+			<entry>${projectName}</entry>
+			<entry>Le nom du dossier du projet</entry>
+		  </row>
+		  <row>
+			<entry>${projectRoot}</entry>
+			<entry>Chemin complet vers le dossier du projet</entry>
+		  </row>
+		  <row>
+			<entry>${sourceRoot}</entry>
+			<entry>Chemin complet vers le dossier source</entry>
+		  </row>
+		  <row>
+			<entry>${targetRoot}</entry>
+			<entry>Chemin complet vers le dossier cible</entry>
+		  </row>
+		  <row>
+			<entry>${glossaryRoot}</entry>
+			<entry>Chemin complet vers le dossier du glossaire</entry>
+		  </row>
+		  <row>
+			<entry>${tmRoot}</entry>
+			<entry>Chemin complet vers le dossier racine de la mémoire de traduction</entry>
+		  </row>
+		  <row>
+			<entry>${tmAutoRoot}</entry>
+			<entry>Chemin complet vers le dossier automatique de mémoire de traduction</entry>
+		  </row>
+		  <row>
+			<entry>${dictRoot}</entry>
+			<entry>Chemin complet vers le dossier du dictionnaire</entry>
+		  </row>
+		  <row>
+			<entry>${tmOtherLangRoot}</entry>
+			<entry>Racine de la mémoire de traduction + tmx2source (Voir le guide pratique <link linkend="how.to.tm.bridge.two.languages" endterm="how.to.tm.bridge.two.languages.title"/> pour en savoir plus).</entry>
+		  </row>
+		  <row>
+			<entry>${sourceLang}</entry>
+			<entry>Langue source</entry>
+		  </row>
+		  <row>
+			<entry>${targetLang}</entry>
+			<entry>Langue cible</entry>
+		  </row>
+		  <row>
+			<entry>${filePath}</entry>
+			<entry>Chemin complet du fichier source</entry>
+		  </row>
+		  <row>
+			<entry>${fileShortPath}</entry>
+			<entry>Nom du fichier source relatif à la racine donnée</entry>
+		  </row>
+		  <row>
+			<entry>${fileName}</entry>
+			<entry>Nom complet du fichier source</entry>
+		  </row>
+		  <row>
+			<entry>${fileNameOnly}</entry>
+			<entry>Le nom du fichier source, sans l’extension</entry>
+		  </row>
+		  <row>
+			<entry>${fileExtension}</entry>
+			<entry>Extension du fichier source sans point</entry>
+		  </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+  
+  <section id="post.processing.commands.user.defined.scripts">
+    <title id="post.processing.commands.user.defined.scripts.title">Script local</title>
+    <para>En plus d’une commande normale, vous pouvez faire appel à un script. N’exécutez jamais de scripts de post-traitement à partir de sources non fiables. Pour des raisons de sécurité, les commandes locales de post-traitement sont désactivées par défaut.</para>
+    <para>Les variables de modèle peuvent être utilisées à la fois avec les commandes normales et les scripts personnalisés. Il vous faudra peut-être utiliser un chemin d’accès absolu pour votre script. Le chemin utilisé par OmegaT peut être différent du vôtre.</para>
+    <para>STDOUT et STDERR sont écrits dans le fichier <link linkend="configuration.folder.default.contents.logs.title">omegat.log</link>. Le code de sortie et STDERR ou le dernier STDOUT apparaissent dans la barre d’état.</para>
+  </section>
+
+  <section id="post.processing.commands.linux.and.macos">
+    <title id="post.processing.commands.linux.and.macos.title">Linux et macOS</title>
+    <para>Vous devez utiliser un shebang, par exemple <literal># ! /bin/bash</literal> ou <literal>#! /usr/bin/env python3</literal>. Le script doit être exécutable. Enchaîner des commandes avec <literal>&amp;&amp;</literal> ou <literal>||</literal> ou des barres verticales <literal>|</literal> ne fonctionnera pas ici.</para>
+  </section>
+  
+  <example id="post.processing.commands.example">
+	  <title id="post.processing.commands.example.title">Exemple simple de commande de post-traitement :</title>
+	  <variablelist>
+		<varlistentry>
+		  <term>Ouvrir le dossier cible sous Linux</term>
+		  <listitem>
+			<programlisting>xdg-open ${targetRoot}</programlisting>
+		  </listitem>
+		</varlistentry>
+		<varlistentry>
+		  <term>Ouvrir le dossier cible sous macOS</term>
+		  <listitem>
+			<programlisting>open ${targetRoot}</programlisting>
+		  </listitem>
+		</varlistentry>
+
+		<varlistentry>
+		  <term>Ouvrir le dossier cible dans Windows Powershell</term>
+		  <listitem>
+			<programlisting>Invoke-Item ${targetRoot}</programlisting>
+		  </listitem>
+		</varlistentry>
+	  </variablelist>
+	</example>
+  </section>

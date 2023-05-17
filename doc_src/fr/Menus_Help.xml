@@ -1,46 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="menus.help">
-  <title>Aide</title>
+  <title id="menus.help.title"><guimenu>Aide</guimenu></title>
+
+  <para>Ce menu vous permet d’accéder aux informations qui vous aideront à tirer le meilleur parti d’OmegaT.</para>
 
   <variablelist>
-    <varlistentry>
-      <term>Guide de l'utilisateur...</term>
-
+    <varlistentry id="menus.help.user.manual">
+      <term id="menus.help.user.manual.title"><guimenuitem>Manuel d’utilisation...</guimenuitem> <keycombo><keycap>F1</keycap></keycombo></term>
       <listitem>
         <para>Ouvre ce manuel dans le navigateur par défaut.</para>
-      </listitem>
+    </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>À propos...</term>
-
+    <varlistentry id="menus.help.about">
+      <term id="menus.help.about.title"><guimenuitem>À propos...</guimenuitem></term>
       <listitem>
         <para>Affiche le copyright, les crédits et les informations sur la licence.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Dernières modifications...</term>
-
+    <varlistentry id="menus.help.last.changes">
+      <term id="menus.help.last.changes.title"><guimenuitem>Dernières modifications...</guimenuitem></term>
       <listitem>
-        <para>Affiche la liste des nouvelles fonctionnalités, des améliorations et des corrections de bogue pour chaque version.</para>
+        <para>Affiche la liste des nouvelles fonctionnalités, des améliorations et des corrections de bogues pour chaque version.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Journal...</term>
-
+    <varlistentry id="menus.help.log">
+      <term id="menus.help.log.title"><guimenuitem>Journal...</guimenuitem></term>
       <listitem>
-        <para>Affiche le fichier journal actuel. Le titre du dialogue reflète le fichier réellement utilisé (qui dépend du nombre d'instances d'OmegaT actuellement en cours d'exécution).</para>
+        <para>Affiche le fichier journal actuel. Le titre de la boîte de dialogue reflète le fichier actuellement utilisé (ce qui dépend du nombre d’instances d’OmegaT en cours d’exécution simultanée).</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Rechercher des mises à jour...</term>
-
+    <varlistentry id="menus.help.check.for.updates">
+      <term id="menus.help.check.for.updates.title"><guimenuitem>Rechercher des mises à jour...</guimenuitem></term>
       <listitem>
-        <para>Vérifie si une version plus récente d'<application>OmegaT</application> est disponible.</para>
+        <para>Vérifie si une version plus récente d’OmegaT est disponible.</para>
       </listitem>
     </varlistentry>
   </variablelist>

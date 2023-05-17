@@ -1,0 +1,522 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd"
+[
+<!ENTITY % manualvariables SYSTEM "manualvariables.mod">
+%manualvariables;
+]>
+<chapter id="chapter.instant.start.guide">
+  <title id="chapter.instant.start.guide.title">Introduction à OmegaT</title>
+  
+  <section id="introduction.omegat.principles">
+	<title id="introduction.omegat.principles.title">Les principes</title>
+
+    <para>Bienvenue sur OmegaT, un outil de traduction assistée par ordinateur (TAO) offrant une grande flexibilité, des performances et une robustesse exceptionnelles, ainsi que des fonctionnalités dépassant celles proposées par les offres commerciales, même pour les traductaires débutants.</para>
+
+	<section id="introduction.omegat.principles.translation.project">
+      <title id="introduction.omegat.principles.translation.project.title">Projet de traduction</title>
+
+      <para>Un projet de traduction OmegaT est constitué de plusieurs ressources stockées dans différents dossiers, ainsi que de deux fichiers : un fichier <link linkend="project.folder.omegat.project.file"><filename>omegat.project</filename></link> qui indique où se trouvent toutes les ressources, et un fichier de mémoire de traduction <link linkend="project.folder.project.save.tmx"><filename>project_save.tmx</filename></link> qui contient toutes les traductions effectuées pendant le travail sur ce projet.</para>
+
+      <para>Les traductaires peuvent facilement modifier le contenu ou l’emplacement de ces ressources à n’importe quel moment pendant la traduction.</para>
+
+      <para>Les ressources comprennent par défaut la mémoire de traduction du projet, qui est automatiquement créée lors de la création du projet, et des fichiers à traduire. Elles peuvent également inclure des mémoires de traduction de référence, des glossaires et d’autres fichiers de référence.</para>
+
+      <para>Voir le chapitre <link linkend="chapter.project.folder" endterm="chapter.project.folder.title"/> pour en savoir plus.</para>
+    </section>
+
+	<section id="introduction.omegat.principles.translation.memories">
+      <title id="introduction.omegat.principles.translation.memories.title">Mémoires de traduction</title>
+
+      <para>Il n’est pas nécessaire pour les traductaires de <emphasis>créer</emphasis> une mémoire de traduction ou d’en <emphasis>associer</emphasis> une à un nouveau projet. OmegaT le fait <emphasis>automatiquement</emphasis>.</para>
+
+      <para>Les traductaires peuvent facilement réutiliser la mémoire de traduction (MT) d’un projet existant en ajoutant simplement de nouveaux fichiers à un projet existant ou en copiant une MT existante dans un nouveau projet.</para>
+
+      <para>Dans un projet de traduction, il est possible d’utiliser un nombre illimité de mémoires de traduction comme référence. OmegaT permet d’associer facilement différents niveaux de priorité à ces mémoires supplémentaires.</para>
+
+      <para>Voir le guide pratique <link linkend="how.to.use.tm" endterm="how.to.use.tm.title"/> pour en savoir plus.</para>
+	</section>
+
+	<section id="introduction.omegat.principles.collaboration">
+      <title id="introduction.omegat.principles.collaboration.title">Collaboration</title>
+
+      <para>Les traductaires peuvent facilement partager des ressources et travailler à plusieurs sur un projet en utilisant des paramètres simples.</para>
+
+      <para>La fonctionnalité permettant le travail en équipe offre une robustesse de niveau professionnel et la flexibilité nécessaire pour synchroniser les ressources du projet entre les membres de l’équipe, tout en permettant de résoudre facilement les conflits entre les différentes traductions.</para>
+
+      <para>Voir le guide pratique <link linkend="how.to.tm.share.translation.memories" endterm="how.to.tm.share.translation.memories.title"/> pour en savoir plus.</para>
+	</section>
+
+	<section id="introduction.omegat.principles.made.for.translators">
+      <title id="introduction.omegat.principles.made.for.translators.title">Conçu pour les traductaires</title>
+
+	  <para>OmegaT est conçu non seulement pour faciliter le processus de traduction, mais aussi pour que les traductaires n’aient pas à s’inquiéter de la perte de données.</para>
+
+	  <note>
+		<para>Vous n’avez pas encore utilisé OmegaT, mais vous vous souvenez des fois où vous traduisiez dans votre traitement de texte et où un problème informatique a fait disparaître la traduction du livre sur lequel vous travailliez depuis six mois, ou le rapport que vous deviez rendre dans une heure.</para>
+
+		<para>Vous envisagez d’utiliser OmegaT, mais...</para>
+
+		<para>Comment OmegaT peut-il aider à éviter de tels problèmes  ?</para>
+
+		<para>Pas de panique. Grâce à la conception robuste d’OmegaT, il est <emphasis>très peu</emphasis> probable que vous ayez perdu plus de quelques minutes de travail.</para>
+
+		<para>Même si la situation semble très dégradée, ne paniquez pas. Il suffit de suivre les instructions décrites dans le guide pratique <link linkend="how.to.restore.your.data" endterm="how.to.restore.your.data.title"/>.</para>
+	  </note>
+
+	  <para>Avant de suivre ces étapes, OmegaT vous permettra de vous concentrer sur votre travail de traduction et vous aidera, autant que possible, à améliorer vos compétences en traduction.</para>
+
+	  <para>Si vous avez besoin d’aide concernant tout élément d’OmegaT, n’hésitez pas à rejoindre les <ulink url="https://omegat.org/support">groupes de soutien d’OmegaT.</ulink></para>
+
+	</section>
+  </section>
+
+  <section id="introduction.how.to.use.the.manual">
+	<title id="introduction.how.to.use.the.manual.title">Conventions utilisées dans ce manuel</title>
+	<para>Cette section présente les conventions utilisées pour identifier les éléments de l’interface graphique d’OmegaT dans ce manuel. Ils sont présentés de manière à faciliter l’identification de leur fonction. L’action associée à un élément indique également sa fonction au cas où l’affichage ne permettrait pas de mettre en évidence les différences visuelles : <emphasis>utiliser</emphasis> un élément de menu, ou <emphasis>cliquer</emphasis> sur un bouton.</para>
+
+	<para>De même, les liens vers les différentes parties du manuel sont présentés de manière à identifier plus facilement la fonction de l’élément lié.</para>
+
+	<variablelist>
+	  <varlistentry>
+		<term>Éléments du menu avec un raccourci par défaut</term>
+		<listitem>
+		  <para>Utilisez <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.new" endterm="menus.project.new.title"/>.</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry>
+		<term>Éléments du menu sans raccourci par défaut</term>
+		<listitem>
+		  <para>Utilisez <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.copy.files.to.source.folder" endterm="menus.project.copy.files.to.source.folder.title"/>.</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry>
+		<term>Boutons</term>
+		<listitem>
+		  <para>Cliquez sur <link linkend="windows.source.files.list.copy.files" endterm="windows.source.files.list.copy.files.title"/>.</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry>
+		<term>Volets, fenêtres et boîtes de dialogue</term>
+		<listitem>
+		  <para>Le volet <link linkend="panes.editor" endterm="panes.editor.title"/>.</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry>
+		<term>Dossiers et fichiers</term>
+		<listitem>
+		  <para>Le fichier <link linkend="project.folder.omegat.project.file"><filename>omegat.project</filename></link>.</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry>
+		<term>Paramètres de préférences et propriétés du projet</term>
+		<listitem>
+		  <para>La préférence de <link endterm="dialogs.preferences.fonts.title" linkend="dialogs.preferences.fonts"/></para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry>
+		<term>Chapitres, guides pratiques et annexes</term>
+		<listitem>
+		  <para>Le chapitre <link linkend="chapter.project.folder" endterm="chapter.project.folder.title"/>.</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry>
+		<term>Liens vers les ressources externes</term>
+		<listitem>
+		  <para>La <ulink url="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/regex/Pattern.html">Documentation Regex Java</ulink>.</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry>
+		<term>Raccourcis</term>
+		<listitem>
+		  <para>Pour éviter de répéter les descriptions des raccourcis, nous utilisons des lettres simples comme identifiant commun pour les modificateurs. Voir le chapitre <link linkend="chapter.menus" endterm="chapter.menus.title"/> pour en savoir plus.</para>
+
+		  <example id="example.introduction.note.on.shortcuts">
+			<title id="example.introduction.note.on.shortcuts.title">Les modificateurs de touches sont identifiés par une seule lettre.</title>
+
+			<para>Sous Windows et Linux : <keycombo><keycap>Contrôle</keycap><keycap>E</keycap></keycombo></para>
+
+			<para>Sous macOS : <keycombo><keycap>commande</keycap><keycap>E</keycap></keycombo></para>
+
+			<para><emphasis role="bold">Dans ce manuel  :</emphasis><keycombo><keycap>C</keycap><keycap>E</keycap></keycombo></para>
+		  </example>
+		</listitem>
+	  </varlistentry>
+	</variablelist>
+  </section>
+
+  <section id="introduction.create.and.open.new.project">
+    <title id="introduction.create.and.open.new.project.title">Créer un nouveau projet</title>
+
+	<warning>
+	  <para>Si vous n’avez pas encore installé OmegaT, consultez le guide pratique <link linkend="how.to.installing.omegat" endterm="how.to.installing.omegat.title"/>.</para>
+
+	  <para>Pour apprendre à lancer d’OmegaT, consultez le guide pratique <link linkend="how.to.running.omegat" endterm="how.to.running.omegat.title"/>.</para>
+	</warning>
+
+
+	<para>Pour commencer à utiliser OmegaT, vous devez d’abord créer un projet qui contiendra tous vos fichiers.</para>
+
+	<para>Utilisez <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.new" endterm="menus.project.new.title"/> et sélectionnez un dossier vide ou créez-en un nouveau avec le nom de votre projet.</para>
+
+    <para>Un projet OmegaT est simplement un ensemble de dossiers contenant toutes les ressources par défaut.</para>
+
+    <para>La boîte de dialogue <link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/> s’ouvre une fois que vous avez nommé votre projet.</para>
+
+	<para>Dans cette boîte de dialogue, sélectionnez ou saisissez les langues de vos fichiers source et à traduire, définissez les différentes options et cliquez sur <guibutton>OK</guibutton> pour continuer.</para>
+
+	<para>OmegaT fournit une liste brève et pratique de codes de langue à deux lettres, mais vous pouvez saisir n’importe quel code conforme au <ulink url="https://www.rfc-editor.org/rfc/bcp/bcp47.txt">BCP-47</ulink> (y compris les codes de langue à trois lettres) dans le champ de saisie.</para>
+
+	<warning>
+	  <para>Assurez-vous de saisir les bonnes langues et que tous les autres emplacements nécessitant un code de langue correspondent au code que vous indiquez ici. Voir la section <link linkend="dialogs.project.properties.languages" endterm="dialogs.project.properties.languages.title"/> pour en savoir plus.</para>
+	</warning>
+	
+    <para>Utilisez <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.properties" endterm="menus.project.properties.title"/> pour revenir à cette boîte de dialogue après avoir créé le projet.</para>
+
+	<note>
+	  <para>Vous pouvez modifier la structure d’un projet à tout moment après avoir commencé à traduire. Dans la boîte de dialogue, il suffit d’indiquer à OmegaT les nouveaux dossiers de ressources à utiliser. Il vous demandera alors de recharger le projet et commencera à utiliser les nouveaux emplacements.</para>
+	</note>
+	
+    <para>Ensuite, la boîte de dialogue <link linkend="windows.source.files.list" endterm="windows.source.files.list.title"/> s’ouvre.</para>
+
+	<para>Cliquez sur <link linkend="windows.source.files.list.copy.files" endterm="windows.source.files.list.copy.files.title"/> ou <link linkend="windows.source.files.list.download.page" endterm="windows.source.files.list.download.page.title"/> et ajoutez les fichiers source.</para>
+
+	<para>Utilisez <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.access.project.contents" endterm="menus.project.access.project.contents.title"/> si vous ne vous souvenez pas de l’emplacement de votre projet.</para>
+
+	<para>Si vous ne voyez pas le contenu d’un fichier dans le volet <link linkend="panes.editor" endterm="panes.editor.title"/>, le fichier est peut-être vide ou dans un format qui n’est pas pris en charge par OmegaT. Utilisez <link linkend="menus.options" endterm="menus.options.title"/><link linkend="menus.options.file.filters" endterm="menus.options.file.filters.title"/> pour afficher la liste des formats de fichiers pris en charge. Si le format de votre fichier n’est pas répertorié, utilisez des extensions tierces ou convertissez le fichier dans un format pris en charge. Voir le guide pratique <link linkend="how.to.translate.other.files" endterm="how.to.translate.other.files.title"/> pour en savoir plus.</para>
+  </section>
+
+  <section id="introduction.install.spellchecker.dictionary">
+	<title id="introduction.install.spellchecker.dictionary.title">Dictionnaires de vérification orthographique</title>
+
+	<para>Omegat fournit un système de vérification orthographique, mais il n’inclut pas les dictionnaires nécessaires pour vérifier l’orthographe de vos traductions. Vous devez installer les dictionnaires dont vous avez besoin vous-même.</para>
+
+	<para>Utilisez la section <link linkend="dialog.preferences.spellchecker" endterm="dialog.preferences.spellchecker.title"/> du dialogue général <link linkend="chapter.dialogs.preferences" endterm="chapter.dialogs.preferences.title"/> pour accéder aux préférences de vérification orthographique.</para>
+
+	<orderedlist>
+	  <listitem>
+		<para>Cliquez sur le bouton <link linkend="dialog.preferences.spellchecker.install.new" endterm="dialog.preferences.spellchecker.install.new.title"/> pour afficher la liste des dictionnaires disponibles à l’URL indiquée dans le champ <guilabel>URL des dictionnaires de vérification orthographique téléchargeables</guilabel> situé au-dessus de ce bouton.</para>
+	  </listitem>
+	  <listitem>
+		<para>Sélectionnez autant de dictionnaires que vous le souhaitez et cliquez sur le bouton <guibutton>Installer</guibutton>. OmegaT les téléchargera et les copiera dans l’emplacement des dictionnaires de vérification orthographique spécifié en haut de la boîte de dialogue (le dossier <link linkend="configuration.folder">configuration</link> par défaut). Cette étape peut prendre un certain temps.</para>
+	  </listitem>
+	  <listitem>
+		<para>Cliquez sur le bouton <guibutton>Fermer</guibutton>. OmegaT affichera une liste des dictionnaires installés.</para>
+	  </listitem>
+	</orderedlist>
+
+	<warning>
+	  <para>OmegaT ne reconnaît pas les langues automatiquement et n’utilise un dictionnaire que si son nom correspond au code de la langue cible.</para>
+
+	  <example>
+		<title>Code de la langue cible du projet et nom du dictionnaire de vérification orthographique</title>
+		<para>Si la langue cible du projet est <emphasis role="bold">fr</emphasis> et que le nom du dictionnaire est <emphasis role="bold">fr_fr</emphasis> ou <emphasis role="bold">fr-fr</emphasis>, vous pouvez soit :</para>
+
+		<itemizedlist>
+		  <listitem>
+			<para>utiliser <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.properties" endterm="menus.project.properties.title"/> pour changer la langue cible du projet en <emphasis role="bold">fr-fr</emphasis>, ou</para>
+		  </listitem>
+		  <listitem>
+			<para>utiliser <link linkend="menus.options" endterm="menus.options.title"/><link linkend="menus.options.access.configuration.folder" endterm="menus.options.access.configuration.folder.title"/> pour accéder au dossier <link linkend="configuration.folder">configuration</link> et changer les noms des fichiers du dictionnaire en <emphasis role="bold">fr</emphasis>.</para>
+		  </listitem>
+		</itemizedlist>
+	  </example>
+	</warning>
+  </section>
+
+  <section id="introduction.manage.your.segments">
+    <title id="introduction.manage.your.segments.title">Gérer vos segments</title>
+
+	<para>Le paramètre par défaut d’un projet de traduction consiste à créer des <emphasis>phrases</emphasis> en divisant les <emphasis>blocs de paragraphes</emphasis> trouvés dans le document. Voir la propriété du projet <link linkend="dialogs.project.properties.options.segmentation" endterm="dialogs.project.properties.options.segmentation.title"/> pour en savoir plus.</para>
+	
+	<para>Les segments d’un paragraphe peuvent être segmentés davantage ou « non segmentés  » (fusionnés). Ajoutez une règle de segmentation pour les segmenter davantage, ou une règle d’exception pour les fusionner avec la partie dont ils ont été séparés. Voir l’annexe <link linkend="app.segmentation" endterm="app.segmentation.title"/> pour en savoir plus.</para>
+
+	<note>
+	  <para>Le caractère espace standard est souvent utilisé comme limite de segment. Vous pouvez suivre les étapes ci-dessous pour fusionner deux sections de texte séparées par un caractère espace :</para>
+	  
+	  <orderedlist>
+		<listitem>
+		  <para>Accédez au fichier source avec <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.access.project.contents" endterm="menus.project.access.project.contents.title"/>.</para>
+		</listitem>
+		
+		<listitem>
+		  <para>Trouvez l’emplacement de cette espace.</para>
+		</listitem>
+
+		<listitem>
+		  <para>Remplacez-la par une espace insécable.</para>
+		</listitem>
+
+		<listitem>
+		  <para>Enregistrez le fichier.</para>
+		</listitem>
+
+		<listitem>
+		  <para>Retournez sur OmegaT et utilisez <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.reload" endterm="menus.project.reload.title"/> pour qu’OmegaT reconnaisse le changement.</para>
+		</listitem>
+	  </orderedlist>
+	</note>
+  </section>
+
+  <section id="introduction.make.it.look.good">
+	<title id="introduction.make.it.look.good.title">Pour le plaisir des yeux !</title>
+	<para>Une fois que tout cela est fait, les fichiers sources apparaissent dans OmegaT comme ceci :</para>
+
+	<figure id="default.omegat.layout">
+      <title id="default.omegat.layout.title">Présentation par défaut d’OmegaT sur macOS</title>
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/defaultOmegaTLayout.png"/>
+        </imageobject>
+        <imageobject role="fo">
+          <imagedata fileref="images/defaultOmegaTLayout.png" width="60%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+	<orderedlist>
+	  <listitem>
+		<para>Le volet <link linkend="panes.editor" endterm="panes.editor.title"/></para>
+	  </listitem>
+	  <listitem>
+		<para>Le volet <link linkend="panes.notes" endterm="panes.notes.title"/></para>
+	  </listitem>
+	  <listitem>
+		<para>Le volet <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/></para>
+	  </listitem>
+	  <listitem>
+		<para>Le volet <link linkend="panes.glossary" endterm="panes.glossary.title"/></para>
+	  </listitem>
+	  <listitem>
+		<para>Le volet <link linkend="panes.segment.properties" endterm="panes.segment.properties.title"/></para>
+	  </listitem>
+	  <listitem>
+		<para>Le volet <link linkend="panes.comments" endterm="panes.comments.title"/></para>
+	  </listitem>
+	  <listitem>
+		<para>Le volet <link linkend="panes.multipletranslations" endterm="panes.multipletranslations.title"/></para>
+	  </listitem>
+	  <listitem>
+		<para>Les volets <link linkend="panes.dictionary" endterm="panes.dictionary.title"/> et <link linkend="panes.machinetranslation" endterm="panes.machinetranslation.title"/> sont ancrés</para>
+	  </listitem>
+	  <listitem>
+		<para>La <link linkend="panes.statusbar" endterm="panes.statusbar.title"/> (à droite), contenant des informations sur le projet</para>
+	  </listitem>
+	</orderedlist>
+	
+	<para>Utilisez les différentes options du menu <link linkend="menus.view" endterm="menus.view.title"/> et déplacez les différents <link linkend="chapter.panes">volets</link> pour obtenir la présentation qui vous convient le mieux.</para>
+	
+  </section>
+
+  <section id="introduction.translate.the.segments.one.by.one">
+    <title id="introduction.translate.the.segments.one.by.one.title">Traduire vos fichiers</title>
+
+    <para>Saissisez votre traduction dans le volet <link linkend="panes.editor" endterm="panes.editor.title"/>.</para>
+
+	<note>
+	  <para>Pour découvrir à quel point vous pouvez être efficace avec les raccourcis, consultez la section <link linkend="app.shortcuts.streamline.workflow" endterm="app.shortcuts.streamline.workflow.title"/>.</para>
+	</note>
+	
+	<para>Après avoir saisi la traduction d’un segment, utilisez <link linkend="menus.goto" endterm="menus.goto.title"/><link linkend="menus.goto.next.untranslated.segment" endterm="menus.goto.next.untranslated.segment.title"/> pour passer au segment suivant non traduit.</para>
+
+	<para>Lorsque vous quittez le segment, sa traduction est automatiquement enregistrée dans le fichier <link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/> et servira de référence pour le reste de votre traduction.</para>
+
+	<para>Voir le menu <link linkend="menus.goto" endterm="menus.goto.title"/> pour plus d’options de navigation.</para>
+
+	<note>
+	  <para>OmegaT n’associe pas aux segments traduits des statuts différents. Soit un segment est traduit, soit il ne l’est pas.</para>
+
+	  <para>Si vous avez besoin d’un processus de révison spécifique, vous pouvez par exemple :</para>
+
+	  <itemizedlist>
+		<listitem>
+		  <para>Ajouter des rappels dans le volet <link linkend="panes.notes" endterm="panes.notes.title"/> pour les segments problématiques</para>
+
+		  <para>Utilisez <link linkend="menus.goto" endterm="menus.goto.title"/><link linkend="menus.goto.notes.pane" endterm="menus.goto.notes.pane.title"/> pour entrer dans le Bloc-note et ajouter votre remarque.</para>
+
+		  <para>Utilisez <link linkend="menus.goto" endterm="menus.goto.title"/><link linkend="menus.goto.editor.pane" endterm="menus.goto.editor.pane.title"/> pour revenir à l’Éditeur et reprendre votre traduction.</para>
+		</listitem>
+
+		<listitem>
+		  <para>Utilisez <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.search.project" endterm="menus.edit.search.project.title"/> pour filtrer les segments sur la base des critères que vous avez définis, et n’examinez que ceux-là.</para>
+		</listitem>
+	  </itemizedlist>
+	</note>
+	
+	<para>Utilisez <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.create.glossary.entry" endterm="menus.edit.create.glossary.entry.title"/> pour ajouter des termes à votre glossaire.</para>
+
+	<para>Utilisez les préférences <link linkend="menus.view" endterm="menus.view.title"/><link linkend="menus.view.mark.glossary.matches" endterm="menus.view.mark.glossary.matches.title"/> et <link linkend="dialog.preferences.auto.completion" endterm="dialog.preferences.auto.completion.title"/> pour gérer les correspondances avec le glossaire.</para>
+
+	<para>Lorsque vous saisissez un segment contenant des termes qui correspondent à des entrées de vos glossaires, ces termes et leurs traductions sont affichés dans le volet <link linkend="panes.glossary" endterm="panes.glossary.title"/>.</para>
+	
+	<para>Lorsque vous saisissez un segment qui correspond à une partie du contenu des mémoires de traduction du projet, OmegaT affiche les correspondances dans le volet <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/>.</para>
+
+	<para>Le menu <link linkend="menus.edit" endterm="menus.edit.title"/> permet de gérer les correspondances de la mémoire de traduction et d’exécuter d’autres fonctions utiles.</para>
+
+	<para>La fonction <link linkend="menus.edit.search.project" endterm="menus.edit.search.project.title"/> vous permet de rechercher des termes, des morceaux de phrases, etc. dans l’ensemble du projet, en utilisant des recherches exactes, par mots-clés ou par expressions régulières. Vous pouvez également restreindre le champ de la recherche en fonction d’informations telles que l’auteur ou la date.</para>
+
+	<para>Vous pouvez également vous concentrer uniquement sur les résultats en les filtrant dans l’Éditeur. Voir la section <link linkend="windows.text.search" endterm="windows.text.search.title"/> pour en savoir plus.</para>
+
+	<para>Vous pouvez remplacer des termes avec la fonction <link linkend="menus.edit.search.and.replace" endterm="menus.edit.search.and.replace.title"/> en utilisant une boîte de dialogue similaire. Voir la section <link linkend="windows.text.replace" endterm="windows.text.replace.title"/> pour en savoir plus.</para>
+
+	<para>Vous pouvez laisser des notes à vous-même ou aux membres de l’équipe dans le volet <link linkend="panes.notes" endterm="panes.notes.title"/> pendant que vous traduisez, et revenir aux segments annotés avec <link linkend="menus.goto.next.note" endterm="menus.goto.next.note.title"/> ou <link linkend="menus.goto.previous.note" endterm="menus.goto.previous.note.title"/> dans le menu <link linkend="menus.goto" endterm="menus.goto.title"/>, ou à partir de la fenêtre <link linkend="windows.text.search" endterm="windows.text.search.title"/>.</para>
+
+	<para>La touche <link linkend="panes.editor.context.menu" endterm="panes.editor.context.menu.title"/> permet d’accéder facilement à diverses fonctions fréquemment utilisées. Le <link linkend="panes.editor.auto.completion.menu" endterm="panes.editor.auto.completion.menu.title"/> est également disponible dans le volet de l’Éditeur.</para>
+  </section>
+  
+  <section id="introduction.manage.your.tags">
+    <title id="introduction.manage.your.tags.title">Gérer vos balises</title>
+
+    <para>Si les documents que vous traduisez utilisent du gras, de l’italique ou d’autres éléments décoratifs, OmegaT convertit ces éléments en balises qui entourent le texte décoré. Ces fichiers comprennent par exemple les fichiers LibreOffice, les fichiers HTML et les fichiers Microsoft Office. Les documents contiennent souvent aussi des balises qui n’ont rien à voir avec les décorations, mais qui sont néanmoins importantes dans les fichiers sources (et, par conséquent, dans les fichiers traduits).</para>
+
+	<para>Voici à quoi peut ressembler une phrase dans son format d’origine :</para>
+    
+	<example id="example.source.segment.with.decorations">
+	  <title id="example.source.segment.with.decorations.title">Phrase avec une mise en forme décorative</title>
+	  <para>OmegaT est un programme <emphasis role="bold">facile à utiliser</emphasis> pour les traductaires <emphasis>sagaces</emphasis>.</para>
+	</example>
+
+    <para>Cependant, selon le format d’origine, OmegaT présentera cette phrase de manière similaire à ceci :</para>
+
+	<example id="example.how.decorations.are.displayed">
+	  <title id="example.how.decorations.are.displayed.title">Affichage des décorations dans OmegaT</title>
+	  <para>OmegaT est un programme <code role="tag">&lt;t0/&gt;</code>facile à utiliser<code role="tag">&lt;t1/&gt;</code> pour les traducteurs <code role="tag">&lt;t2/&gt;</code>sagaces<code role="tag">&lt;t3/&gt;</code>.</para>
+    </example>
+
+	<note>
+	  <para>Les différents paramètres liés aux balises peuvent être très utiles pour gérer correctement les balises dans un document. Pour en savoir plus, consultez les options et les scripts suivants :</para>
+	  <itemizedlist>
+		<listitem>
+		  <para><link linkend="dialogs.project.properties.hide.tags" endterm="dialogs.project.properties.hide.tags.title"/></para>
+		</listitem>
+		<listitem>
+		  <para><link linkend="dialogs.preferences.tag.processing" endterm="dialogs.preferences.tag.processing.title"/></para>
+		</listitem>
+		<listitem>
+		  <para><link linkend="windows.scripts.distribution.tagwipe" endterm="windows.scripts.distribution.tagwipe.title"/></para>
+		</listitem>
+		<listitem>
+		  <para><link linkend="windows.scripts.distribution.adapt.standard.tags" endterm="windows.scripts.distribution.adapt.standard.tags.title"/></para>
+		</listitem>
+		<listitem>
+		  <para><link linkend="windows.scripts.distribution.strip.tags" endterm="windows.scripts.distribution.strip.tags.title"/></para>
+		</listitem>
+		<listitem>
+		  <para><link linkend="windows.scripts.distribution.tag.free.match" endterm="windows.scripts.distribution.tag.free.match.title"/></para>
+		</listitem>
+	  </itemizedlist>
+	</note>
+	
+    <para>Les balises dans OmegaT sont grisées, ce qui permet de les reconnaître facilement. Elles sont protégées pour vous empêcher de modifier leur contenu, mais vous pouvez les supprimer, les saisir à la main ou les déplacer dans la phrase cible.</para>
+	<para>Utilisez <link linkend="menus.edit" endterm="menus.edit.title"/> <link linkend="menus.edit.insert.missing.source.tag" endterm="menus.edit.insert.missing.source.tag.title"/> et <link linkend="menus.edit.insert.next.missing.tag" endterm="menus.edit.insert.next.missing.tag.title"/> pour insérer les balises à l’emplacement indiqué par le curseur.</para>
+
+	<para>Vous pouvez définir des balises personnalisées qui seront gérées de la même manière. Voir la section <link linkend="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags" endterm="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags.title"/> pour en savoir plus.</para>
+
+	<para>Vous pouvez également définir des chaînes de caractères qu’OmegaT devrait vous signaler si vous les laissez dans une traduction. Voir la section <link linkend="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation" endterm="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation.title"/> pour en savoir plus.</para>
+
+	<para>Si vous faites des erreurs lors de la gestion des balises, vos fichiers traduits risquent de ne pas s’ouvrir. Utilisez <link linkend="menus.tools" endterm="menus.tools.title"/> <link linkend="menus.tools.check.issues" endterm="menus.tools.check.issues.title"/> pour vérifier vos balises avant de générer vos fichiers traduits.</para>
+
+	<warning>
+	  <para>Si un fichier refuse de s’ouvrir dans LibreOffice, Word ou une autre application, cela est souvent dû à des erreurs dans la gestion des balises OmegaT. Retournez sur OmegaT, vérifiez que votre document ne contient pas de problèmes de balises et recréez le fichier traduit.</para>
+	</warning>
+  </section>
+
+  <section id="introduction.review.the.translation">
+    <title id="introduction.review.the.translation.title">Réviser votre traduction</title>
+
+	<para>N’hésitez pas à modifier la présentation des <link linkend="chapter.panes" endterm="chapter.panes.title"/> et les options <link linkend="menus.view" endterm="menus.view.title"/> lors de la révision de la traduction.</para>
+
+	<para>Utilisez l’option <link linkend="menus.tools.check.issues" endterm="menus.tools.check.issues.title"/> pour effectuer divers contrôles sur le contenu de votre traduction.</para>
+  </section>
+  
+  <section id="introduction.generate.the.translated.file">
+    <title id="introduction.generate.the.translated.file.title">Créer les fichiers traduits</title>
+
+	<para>Pour voir à quoi ressemblera votre traduction dans son format final, utilisez <link linkend="menus.project" endterm="menus.project.title"/> <link linkend="menus.project.create.translated.documents" endterm="menus.project.create.translated.documents.title"/>.</para>
+
+	<warning>
+	  <para>Chaque fois que vous créez des fichiers traduits, tous les fichiers créés précédemment et portant le même nom sont écrasés. Pour éviter que les fichiers que vous créez ne soient écrasés, renommez-les. Vous pouvez automatiser les changements de nom de fichier en utilisant l’option <link linkend="edit.filter.dialog" endterm="edit.filter.dialog.title"/> pour le filtre de fichier.</para>
+	
+	  <para>Vos traductions sont <emphasis>toujours</emphasis> stockées dans le fichier <link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/>, qui est la mémoire de traduction du projet, situé dans le dossier <link linkend="project.folder.omegat" endterm="project.folder.omegat.title"/> de votre projet.</para>
+
+	  <para>La suppression du contenu du dossier <link linkend="project.folder.target" endterm="project.folder.target.title"/> n’impacte <emphasis>jamais</emphasis> le contenu de vos traductions.</para>
+	</warning>
+
+	<para>Les documents sont créés dans le dossier <link linkend="project.folder.target" endterm="project.folder.target.title"/> de votre projet. Les fichiers créés auparavant sont écrasés par le processus, sauf si vous les avez renommés...</para>
+
+	<para>Une fois les fichiers traduits créés, vous pouvez les ouvrir dans leur application d’origine pour vérifier leur contenu et les modifier. Ces modifications externes ne seront <emphasis>pas</emphasis> reflétées dans OmegaT.</para>
+
+	<para>Les modifications effectuées en dehors d’OmegaT peuvent être réinsérées dans OmegaT (et donc dans la mémoire de traduction du projet, pour la maintenir à jour). Soit en les introduisant manuellement dans les segments concernés, soit en alignant le fichier original et le fichier final traduit pour créer un nouveau fichier de mémoire de traduction (TMX) qui sera placé dans le dossier <link linkend="project.folder.tm.enforce" endterm="project.folder.tm.enforce.title"/> du dossier de votre projet. Voir la section <link linkend="windows.aligner" endterm="windows.aligner.title"/> pour en savoir plus.</para>
+  </section>
+
+  <section id="introduction.one.more.thing">
+    <title id="introduction.one.more.thing.title">Gérer vos projets</title>
+
+    <itemizedlist>
+      <listitem>
+        <para>Les projets de traduction ne sont que des dossiers contenant des fichiers. Vous pouvez créer un nouveau projet pour chaque nouveau travail ou ajouter de nouveaux fichiers sources à un projet existant à tout moment.</para>
+      </listitem>
+
+      <listitem>
+        <para>Vous pouvez accéder aux paramètres du projet et les modifier en utilisant <link linkend="menus.project" endterm="menus.project.title"/> <link linkend="menus.project.properties" endterm="menus.project.properties.title"/>. Pour voir la liste des fichiers du projet, utilisez <link linkend="menus.project.source.files.list" endterm="menus.project.source.files.list.title"/> à partir du même menu. Vous pouvez accéder au contenu de toutes les ressources à tout moment avec l’option <link linkend="menus.project.access.project.contents" endterm="menus.project.access.project.contents.title"/>.</para>
+      </listitem>
+
+      <listitem>
+        <para>Chaque fois que vous créez des fichiers traduits (voir <link linkend="introduction.generate.the.translated.file" endterm="introduction.generate.the.translated.file.title"/>, ci-dessus), OmegaT crée trois mémoires de traduction qui contiennent l’état de la traduction des fichiers se trouvant actuellement dans le dossier <link linkend="project.folder.source" endterm="project.folder.source.title"/>. Voir la section <link linkend="dialogs.project.properties.file.locations.exported.tms" endterm="dialogs.project.properties.file.locations.exported.tms.title"/> pour en savoir plus.</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+
+  <section id="app.shortcuts.streamline.workflow">
+    <title id="app.shortcuts.streamline.workflow.title">Fluidifier le travail grâce aux raccourcis</title>
+
+    <para>Vous pouvez fluidifier votre travail en gardant à l’esprit les principaux raccourcis d’édition et de navigation (ou en les <link linkend="app.shortcuts.customization">modifiant en fonction de vos besoins</link>).</para>
+    <para>Un exemple illustre mieux ce point :</para>
+
+    <example id="example.shortcuts.streamline.workflow">
+      <title id="example.shortcuts.streamline.workflow.title">Utiliser des raccourcis pour fluidifier le processus de traduction</title>
+
+      <para>Imaginez que vous soyez chargé de traduire une version actualisée d’un manuel rédigé dans le cadre d’un précédent emploi. Voir le guide pratique <link linkend="how.to.use.tm.reuse.tm" endterm="how.to.use.tm.reuse.tm.title"/> pour en savoir plus.</para>
+        
+      <para>Puisque les premières pages n’ont pas été modifiées, lorsque vous ouvrez le projet, vous êtes face à un écran rempli de segments déjà traduits à partir de la mémoire du travail précédent.</para>
+
+	  <para>Plutôt que de faire défiler les pages jusqu’à ce que vous trouviez le premier segment à traduire, vous appuyez rapidement sur <keycombo><keycap>C</keycap><keycap>U</keycap></keycombo> pour <link linkend="menus.goto.next.untranslated.segment">se mettre immédiatement à l’œuvre</link> et commencer à traduire. (Et répétez l’opération chaque fois que vous atteignez une partie inchangée).</para>
+
+      <para>Quelques segments plus tard, vous tombez sur un terme que vous devriez ajouter au glossaire. Au lieu de prendre la souris, vous déverrouillez le curseur avec <link linkend="panes.editor.cursor.lock"><keycap>F2</keycap></link>, en utilisant les touches du curseur et les raccourcis standard du système pour naviguer jusqu’au terme et le sélectionner. Puis appuyez sur <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>G</keycap></keycombo> pour afficher <link linkend="menus.edit.create.glossary.entry">la boîte de dialogue de saisie du glossaire</link> et y insérer le terme source. Ensuite, vous retournez à l’éditeur, vous verrouillez à nouveau le curseur avec <link linkend="panes.editor.cursor.lock"><keycap>F2</keycap></link> et vous répétez le même processus pour saisir le terme cible.</para>
+
+	  <para>Vous avez activé la <link linkend="dialog.preferences.auto.completion">saisie automatique</link> pour afficher automatiquement non seulement les prédictions de l’historique, mais aussi les termes du glossaire et les chaînes de caractères courtes prédéfinies, qui peuvent être saisies à l’aide d’une simple flèche de navigation.</para>
+		
+      <para>Vous arrivez ensuite à une partie révisée du texte où le volet <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/> affiche un certain nombre de segments similaires tirés du travail précédent.</para>
+
+	  <para>Après avoir rapidement appuyé sur <keycombo><keycap>C</keycap><keycap>I</keycap></keycombo> pour insérer la correspondance, vous effectuez les modifications nécessaires pour correspondre au texte révisé.</para>
+
+	  <para>L’opération se poursuit avec parfois la combinaison <keycombo><keycap>C</keycap><keycap>2</keycap></keycombo> (ou un autre chiffre) suivie de <keycombo><keycap>C</keycap><keycap>I</keycap></keycombo> lorsque l’une des correspondances de 2 à 5 est plus appropriée.</para>
+
+	  <para>Certains segments devront être modifiés ultérieurement, vous utilisez donc <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>9</keycap></keycombo> pour entrer dans le volet Bloc-note, vous laissez une note et revenez dans le volet Éditeur avec <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>0</keycap></keycombo>.</para>
+	  
+	  <para>Lorsque vous arrivez à la fin de la partie, vous avez également utilisé <keycombo><keycap>C</keycap><keycap>R</keycap></keycombo> une ou deux fois pour remplacer des correspondances déjà saisies automatiquement dans la traduction précédente par de meilleures correspondances trouvées précédemment dans la partie traitée.</para>
+
+      <para>Plus tard, vous trouvez une meilleure façon de formuler une expression quelque peu épineuse rencontrée plus tôt, vous la sélectionnez donc dans le texte source, vous appuyez sur <keycombo><keycap>C</keycap><keycap>F</keycap></keycombo> <link linkend="windows.text.search">pour la trouver</link>, puis vous utilisez <keycombo><keycap>C</keycap><keycap>J</keycap></keycombo> pour passer immédiatement à ce segment à partir de la boîte de dialogue de recherche.</para>
+
+	  <para>Puisque OmegaT a enregistré votre historique de navigation, il vous suffit d’utiliser <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>J</keycap></keycombo> pour reprendre immédiatement là où vous vous étiez arrêté.</para>
+
+	  <para>Vous décidez à présent de réviser les segments annotés. Vous utilisez <keycombo><keycap>C</keycap><keycap>F</keycap></keycombo> pour les trouver et, dans la fenêtre de recherche, vous utilisez <keycombo><keycap>C</keycap><keycap>N</keycap></keycombo> et <keycombo><keycap>C</keycap><keycap>P</keycap></keycombo> pour parcourir les résultats. OmegaT synchronise le contenu de l’Éditeur avec le résultat sélectionné, ce qui vous permet d’éditer les segments immédiatement.</para>
+        
+      <para>Il est temps de faire une pause. Tout en dégustant votre café, vous réfléchissez à la facilité avec laquelle vous avez pu utiliser les différentes fonctions d’OmegaT par rapport à l’époque où vous veniez de commencer, lorsque vous passiez beaucoup de temps à parcourir les menus.</para>
+
+      <para>La fluidité du travail vous a permis de mieux vous concentrer sur la traduction elle-même.</para>
+        
+      <para>En même temps, vous vous rendez compte que pendant votre session, vous avez utilisé le menu <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.create.alternative.translation" endterm="menus.edit.create.alternative.translation.title"/> et les touches du curseur à plusieurs reprises, et vous décidez <link linkend="example.shortcut.addition">d’ajouter un nouveau raccourci</link> pour faciliter cette partie du processus également.</para>
+	  
+    </example>
+    
+    <para>Apprendre les raccourcis des fonctions que vous utilisez souvent en vaut la peine.</para>
+  </section>  
+</chapter>

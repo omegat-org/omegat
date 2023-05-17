@@ -22,7 +22,7 @@
    4 Removed features
   40 Enhancements
   46 Bug fixes
-  9 Localization updates
+  10 Localization updates
 ----------------------------------------------------------------------
 5.8.0 vs 5.7.1
 
@@ -320,7 +320,8 @@
   - Catalan localization updated to 5.8 (UI, readme, documentation)
   - Corsican localization updated to 5.8 (UI, readme)
   - Dutch localization updated to 5.8 (UI)
-  - German localization updated to 5.8 (UI, readme)
+  - French localization updated to 5.8 (UI, readme, documentation)
+  - German localization updated to 5.8 (UI, readme, documentation)
   - Japanese localization updated to 5.8 (UI, readme, documentation)
   - Simplified Chinese localization updated to 5.8 (UI, readme)
   - Ukrainian localization updated to 5.8 (UI, readme)

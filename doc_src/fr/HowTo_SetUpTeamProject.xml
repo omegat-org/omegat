@@ -1,257 +1,260 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="howto.setupteamproject">
-  <title>Préparation d'un projet en équipe</title>
+<section id="how.to.setup.team.project">
+  <title id="how.to.setup.team.project.title">Préparation d’un projet en équipe</title>
 
-  <para>La préparation d'un projet en équipe demande quelques connaissances sur les serveurs et sur les systèmes de gestion de version SVN ou Git. La préparation doit donc être effectuées par un gestionnaire de projet, un chef de projet ou un ingénieur en localisation.</para>
+  <para>La gestion d’un projet en équipe demande une certaine maîtrise de l’un ou l’autre des logiciels de gestion de version : <emphasis>SVN</emphasis> ou <emphasis>Git</emphasis>.</para>
 
-  <para>Les informations sur SVN et Git sont facilement disponibles et nous ne décrirons pas leur fonctionnement général ici, mais seulement la manière dont OmegaT intéragit avec eux.</para>
+  <para>Étant donné que les informations sur ces sujets sont faciles à trouver, ce manuel se limite à décrire leur utilisation dans le contexte d’un projet en équipe OmegaT.</para>
 
-  <section>
-    <title>Étape 1 : créer un projet vide sur un serveur</title>
+  <note>
+	<para>Un projet en équipe OmegaT synchronise la mémoire de traduction du projet <link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/> et le glossaire modifiable du projet <link linkend="project.folder.glossary.txt" endterm="project.folder.glossary.txt.title"/> entre le serveur d’hébergement et tous les membres de l’équipe. Le projet en équipe gère aussi tous les conflits possibles entre eux.</para>
+  </note>
 
-    <para><emphasis role="bold">créer un projet vide sur un serveur</emphasis></para>
+  <section id="how.to.setup.team.project.prepare.the.repository">
+    <title id="how.to.setup.team.project.prepare.the.repository.title">Préparations</title>
 
-    <orderedlist>
-      <listitem>
-        <para>créer un dépôt SVN ou Git sur un serveur qui sera accessible aux traducteurs.</para>
-      </listitem>
+	<para>Voici les étapes à suivre afin de mettre en place un projet en équipe :</para>
 
-      <listitem>
-        <para>créer une copie locale du dépôt (<command>checkout</command> avec SVN, <command>clone</command> avec Git).</para>
-      </listitem>
+	<orderedlist>
+      <listitem id="how.to.setup.team.project.create.empty.repository">
+		<para id="how.to.setup.team.project.create.empty.repository.title">Créez un dépôt vide sur votre serveur d’hébergement du logiciel de gestion de version</para>
 
-      <listitem>
-        <para>créer un nouveau projet OmegaT vide dans le dépôt local. On peut faire ceci de deux manières :</para>
+		<para>Cela peut normalement se faire par l’intermédiaire d’une interface web, d’une application graphique, ou en ligne de commande. Consultez la documentation de votre serveur ou de votre service d’hébergement pour en savoir plus.</para>
+	  </listitem>
 
-        <itemizedlist>
+	  <listitem id="how.to.setup.team.project.clone.locally">
+		<para id="how.to.setup.team.project.clone.locally.title">Utilisez le logiciel de gestion de version local pour créer une copie locale (clone).</para>
+
+		<note>
+		  <para>Cette version locale contient votre copie du projet OmegaT qui servira de <emphasis>gestionnaire de projet</emphasis>. Utilisez-la pour effectuer des modifications qui se répercutent sur l’ensemble de l’équipe.</para>
+		</note>
+
+		<para>Le dépôt local est utilisé pour ajouter le projet initial au serveur, et peut aussi servir à effectuer des tâches de maintenance qui ne peuvent pas être réalisées directement dans OmegaT, comme la suppression de fichiers.</para>
+		<para>Nous vous recommandons d’éviter d’utiliser ce dossier pour des tâches de traduction. Si vous avez besoin d’effectuer des traductions ou des tâches de révisions sur ce projet, utilisez OmegaT pour télécharger une copie séparée du projet en équipe et travaillez à partir de celle-ci. Voir le guide pratique <link linkend="how.to.use.team.project" endterm="how.to.use.team.project.title"/> pour en savoir plus.</para>
+	  </listitem>
+
+	  <listitem id="how.to.setup.team.project.fill.local.clone">
+		<para id="how.to.setup.team.project.fill.local.clone.title">Remplissez la copie locale vide avec un vrai projet OmegaT.</para>
+		<itemizedlist>
+		  <listitem>
+			<para>Créez la structure du projet</para>
+
+			<para>Si vous créez un nouveau projet vide, vous pouvez suivre la <link linkend="introduction.create.and.open.new.project">procédure via interface graphique</link>, ou directement le créer avec la commande : <command>java -jar OmegaT.jar team init &lt;langue source&gt; &lt;langue cible&gt;</command></para>
+
+			<para>Cette commande permet aussi d’enregistrer automatiquement le projet dans le logiciel de gestion de version.</para>
+		  </listitem>
+		  <listitem>
+			<para>Choisissez les paramètres appropriés</para>
+
+			<para>Apportez les changements nécessaires aux propriétés du projet à ce stade, filtres de fichiers locaux et paramètres de segmentation inclus. Voir la boîte de dialogue <link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/> pour en savoir plus.</para>
+		  </listitem>
+
+		  <listitem>
+			<para>Ajoutez les fichiers nécessaires</para>
+
+			<para>Ajoutez également toute liste de fichiers de vérification orthographique pertinente que vous souhaitez mettre à la disposition de toutes les personnes qui travaillent sur le projet. Voir <link linkend="project.folder.omegat.spellcheck">fichiers de vérification orthographique</link> pour en savoir plus.</para>
+
+			<para>Si vous convertissez un projet existant, veillez à supprimer tous les fichiers du projet dont vous n’avez pas besoin ou que vous ne souhaitez pas envoyer au serveur avant de passer à la prochaine étape.</para>
+
+			<para>Copiez les fichiers à traduire dans le dossier source/ et utilisez votre client SVN ou Git, ou une ligne de commande, pour les ajouter et les publier dans le dépôt. Utilisez <link endterm="menus.project.title" linkend="menus.project"/><link linkend="menus.project.commit.source.files" endterm="menus.project.commit.source.files.title"/> pour ajouter les fichiers à partir d’OmegaT.</para>
+
+			<para>Vous devez utiliser votre client SVN ou Git, ou la ligne de commande, pour ajouter et publier tout dictionnaire, glossaire, mémoire de traduction, ou autre fichier que vous souhaitez inclure dans le projet.</para>
+
+			<para>Cette étape peut être réalisée avant d’enregistrer et de publier le projet pour la première fois, et peut aussi être utilisée pour ajouter de nouveaux fichiers, ou même mettre à jour les fichiers existants après la création du projet.</para>
+		  </listitem>
+		</itemizedlist>
+
+		<note>
+          <para>Dans les projets en équipe qui utilisent une simple mise en correspondance entre le dépôt local et le dépôt distant (par défaut), <emphasis role="bold">et seulement dans ces projets</emphasis>, les fichiers source et cible peuvent être modifiés localement et envoyés vers le serveur en utilisant <link linkend="menus.project" endterm="menus.project.title"/><link endterm="menus.project.commit.source.files.title" linkend="menus.project.commit.source.files"/> et <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.commit.target.files" endterm="menus.project.commit.target.files.title"/>.</para>
+
+          <para>L’administrateur du projet en équipe doit utiliser le logiciel de gestion de version local pour <emphasis role="bold">modifier</emphasis> ou <emphasis role="bold">supprimer</emphasis> ces fichiers. Certaines extensions peuvent faciliter cette tâche. Voir le paramètre <link linkend="dialogs.preferences.plugins" endterm="dialogs.preferences.plugins.title"/> pour en savoir plus.</para>
+		</note>
+	  </listitem>
+
+	  <listitem id="how.to.setup.team.project.register">
+		<para id="how.to.setup.team.project.register.title">Enregistrez les fichiers du projet dans le logiciel de gestion de version local</para>
+
+		<para>Si vous avez créé le projet à partir de l’interface graphique, vous devrez alors explicitement l’ajouter au logiciel de gestion de version (<command>add</command> dans SVN et Git).</para>
+	  </listitem>
+
+	  <listitem id="how.to.setup.team.project.push">
+		<para id="how.to.setup.team.project.push.title">Placez les fichiers enregistrés dans le serveur d’hébergement</para>
+
+		<para>Enfin, publiez votre projet sur le serveur distant (<command>commit</command> sur SVN, <command>commit</command> et <command>push</command> sur Git).</para>
+	  </listitem>
+
+	  <listitem id="how.to.setup.team.project.give.access.rights">
+		<para id="how.to.setup.team.project.give.access.rights.title">Donnez les droits d’accès à votre équipe.</para>
+
+		<note>
+		  <para>Si vous utilisez plusieurs projets sur un même serveur, les informations d’identification ne seront demandées qu’une fois pour ce serveur.</para>
+		</note>
+
+		<para>Une fois le projet prêt et téléchargé sur le serveur, l’administrateur du projet en équipe doit configurer l’accès des membres de l’équipe de traduction. L’accès à un projet en équipe nécessite les informations suivantes :</para>
+
+		<orderedlist>
           <listitem>
-            <para><menuchoice>
-                <guimenuitem>Projet</guimenuitem> <guimenuitem>Nouveau...</guimenuitem>
-              </menuchoice></para>
+			<para>Projets sur un service d’hébergement</para>
+
+			<para>Les membres de l’équipe de traduction doivent créer un compte pour ce service et envoyer leur identifiant à l’administrateur du projet en équipe.</para>
+
+			<para>L’administrateur va alors accorder à ces comptes un accès en écriture au dépôt.</para>
           </listitem>
 
           <listitem>
-            <para>à la ligne de commande : <command>java -jar OmegaT.jar team init [lang1] [lang2]</command></para>
+			<para>Projets sur un serveur auto-hébergé</para>
+
+			<para>Si le serveur est auto-hébergé et ne permet pas aux membres de l’équipe d’ouvrir un compte directement, l’administrateur du projet en équipe devra créer des comptes avec un accès en écriture pour les membres.</para>
+
+			<para>Après avoir créé les comptes, l’administrateur doit envoyer aux membres leurs identifiants individuels.</para>
           </listitem>
-        </itemizedlist>
-      </listitem>
+		</orderedlist>	  
+	  </listitem>
 
-      <listitem>
-        <para>Ajouter le nouveau projet OmegaT au système de contrôle de version (<command>add</command> avec SVN et Git)</para>
+	  <listitem id="how.to.setup.team.project.have.members.download">
+		<para id="how.to.setup.team.project.have.members.download.title">Demandez à tout le monde de télécharger le projet à partir d’OmegaT</para>
 
-        <para>Note : si le projet a été créé à la ligne de commande à l'étape 3, ceci a déjà été accompli par le programme.</para>
-      </listitem>
+		<para>Les administrateurs ont deux options pour envoyer l’emplacement du projet aux membres :</para>
 
-      <listitem>
-        <para>Publier le nouveau projet OmegaT sur le serveur (<command>commit</command> avec SVN, <command>commit</command> suivi de <command>push</command> avec Git).</para>
-      </listitem>
-    </orderedlist>
+		<orderedlist>
+          <listitem>
+			<para>Envoyer l’URL et demander aux membres d’utiliser <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.download.team.project" endterm="menus.project.download.team.project.title"/> pour créer une copie locale du projet sur leur propre système.</para>
+          </listitem>
 
-    <para><emphasis role="bold">Paramètres spécifiques</emphasis></para>
+          <listitem>
+			<para>Envoyer un fichier <filename>omegat.project</filename> qui contient l’URL du projet, et ensuite demander aux membres de le copier dans un dossier vide et l’ouvrir dans OmegaT. Cette option peut être utile si le projet est paramétré pour utiliser des <link linkend="how.to.setup.team.project.mapping.parameters">mises en correspondance</link> différentes pour chaque membre.</para>
+          </listitem>
+		</orderedlist>
 
-    <para>Si le project utilise des filtres ou paramètres de segmentation spécifiques, les fichiers <filename>filters.xml</filename> et <filename>segmentation.conf</filename> doivent être ajoutés au système de gestion de version et êtres publiés sur le serveur.</para>
+		<para>Une fois que l’administrateur du projet en équipe a confirmé que les membres ont réussi à ouvrir le projet en équipe, il est préférable de veiller à ce que les <link linkend="menus.tools.statistics">statistiques du projet</link> sont les mêmes pour l’administrateur (sur le serveur) et pour les membres (localement).</para>
+
+		<para>Si elles ne correspondent pas, vérifiez que les fichiers <filename>filters.xml</filename> et <filename>segmentation.conf</filename> sont partagés correctement.</para>
+	  </listitem>
+
+	  <listitem id="how.to.setup.team.project.download.if.needed">
+		<para id="how.to.setup.team.project.download.if.needed.title">Si vous devez aussi travailler sur le projet, téléchargez le projet vous-même dans un emplacement local différent de celui du projet en équipe local.</para>
+	  </listitem>
+
+	  <listitem id="how.to.setup.team.project.translate">
+		<para id="how.to.setup.team.project.translate.title">Vous pouvez maintenant travailler sur le projet avec votre équipe.</para>
+	  </listitem>
+	</orderedlist>
   </section>
 
-  <section>
-    <title>Étape 2 : Ajouter les fichiers à traduire et autres ressources</title>
+  <section id="how.to.setup.team.project.mapping.parameters">
+	<title id="how.to.setup.team.project.mapping.parameters.title">Mise en correspondance des dépôts</title>
 
-    <para>Utiliser un client SVN ou Git pour ajouter les fichiers à traduire.</para>
+	<para>Il est possible de mettre en correspondance différents emplacements distants avec des fichiers locaux via l’interface d’OmegaT en utilisant l’élément <link linkend="dialogs.project.properties.repository.mapping.title" endterm="dialogs.project.properties.repository.mapping.title"/> dans la boîte de dialogue <link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/>, ou en modifiant le fichier <link linkend="project.folder.omegat.project.file.title" endterm="project.folder.omegat.project.file.title"/>. Bien que la fonctionnalité de mise en correspondance soit d’abord conçue pour rassembler les fichiers source provenant de différents emplacements, elle peut aussi être utilisée pour d’autres types de fichiers.</para>
 
-    <para>On peut faire ceci depuis OmegaT :</para>
+	<para>Une liste des paramètres de mise en correspondance est présentée ci-dessous, avec des exemples de leur utilisation dans la section suivante.</para>
 
-    <orderedlist>
-      <listitem>
-        <para>copier les fichiers dans le dossier <filename>./source</filename></para>
-      </listitem>
-
-      <listitem>
-        <para>utiliser <menuchoice> <guimenuitem>Projet</guimenuitem> <guimenuitem>Envoyer les fichiers source</guimenuitem> </menuchoice></para>
-      </listitem>
-    </orderedlist>
-
-    <para>Pour ajouter d'autres ressources (dictionaires, TMXs, glossaires), utiliser un client SVN ou Git.</para>
-
-    <para>Pour <emphasis role="bold">effacer des fichiers</emphasis>, utiliser un client SVN ou Git.</para>
-
-    <para>Remarquez que seulement deux fichiers sont modifiés par OmegaT pendant la traduction :</para>
-
-    <itemizedlist>
-      <listitem>
-        <para><filename>omegat/project_save.tmx</filename></para>
-      </listitem>
-
-      <listitem>
-        <para><filename>glossary/glossary.txt</filename></para>
-      </listitem>
-    </itemizedlist>
-
-    <para>Tous les autres fichiers sont en lecture seule. Si le traducteur tente de les modifier, ils seront remis dans leur état initial à chaque fois que le projet est ouvert, fermé, enregistré ou rechargé.</para>
-  </section>
-
-  <section>
-    <title>Étape 3 : Envoyer une invitation aux traducteurs</title>
-
-    <para>Une fois le projet installé sur le serveur, le gestionnaire de projet peut inviter les traducteurs à collaborer de deux manières différentes :</para>
-
-    <itemizedlist>
-      <listitem>
-        <para>en envoyant l'URL du projet et en demandant au traducteur de créer une copie locale avec <menuchoice><guimenuitem>Projet</guimenuitem> <guimenuitem>Télécharger un projet en équipe...</guimenuitem></menuchoice>.</para>
-      </listitem>
-
-      <listitem>
-        <para>en envoyant un fichier <filename>omegat.projet</filename> qui contient une référence à l'URL et en demandant au traducteur de la copier dans un dossier spécifique pour ouvrir celui-ci dans OmegaT.</para>
-
-        <para>La référence à l'URL est spécifiée de la manière suivante (il s'agit ici d'un dépôt Git) </para>
-
-        <programlisting>&lt;repositories&gt;
- &lt;repository type=&quot;git&quot; url=&quot;https://dépôt_du_projet_OmegaT_en_équipe.git&quot;&gt;
-  &lt;mapping local=&quot;&quot; repository=&quot;&quot;/&gt;
- &lt;/repository&gt;
-&lt;/repositories&gt;</programlisting>
-      </listitem>
-    </itemizedlist>
-
-    <para>Dans les deux cas, le gestionnaire de projet doit envoyer au traducteur sont identifiant et son mot de passe pour avoir accès au dépôt.</para>
-
-    <para><emphasis role="bold">Vérification des statistiques</emphasis></para>
-
-    <para>Le gestionnaire de project doit s'assurer avec le traducteur que les statistiques sont identiques des deux côtés (côté serveur et côté traducteur).</para>
-
-    <para>S'il existe des différences, il faut vérifier si les fichiers <filename>filters.xml</filename> et <filename>segmentation.conf</filename> sont inclus dans le contrôle de version.</para>
-  </section>
-
-  <section>
-    <title>Cas spécial : partage sélectif</title>
-
-    <para>Le processus ci-dessus décrit le cas type, quand le gestionnaire de project veut avoir le contrôle total sur le projet et où les fichiers (et les statistiques) sont identiques du côté du serveur et du côté du traducteur.</para>
-
-    <para>Les projects OmegaT peuvent également être paramétrés de manière différente pour que les participants partagent le fichier project_save.tmx mais pas (tous) les autres fichiers (source).</para>
-
-    <para>Dans ce cas, la procédure est la même mais le gestionnaire de project n'ajoute pas (tous) les fichiers au projet sous contrôle de version. À la place, les traducteurs vont copier eux-mêmes les fichiers, ou ajouter des mappages pour synchroniser les fichiers à partir d'autres emplacements.</para>
-
-      <para>Les mises en correspondances peuvent être ajoutées en modifiant <filename>omegat.project</filename> où par l'intermédiaire de l'interface utilisateurs : <menuchoice> <guimenuitem>Projet</guimenuitem> <guimenuitem>Propriétés...</guimenuitem> <guimenuitem>Mappage des dépôts</guimenuitem> </menuchoice>.</para>
-  </section>
-
-  <section id="howto.setupteamproject.mappingparameters">
-    <title>Paramètres de mappage</title>
-
-    <variablelist>
+	<variablelist>
       <varlistentry>
-        <term>repository type</term>
-
-        <listitem>
-          <para>Http (qui inclut https), svn, git ou file.</para>
-        </listitem>
+		<term>repository type</term>
+		<listitem>
+          <para>Il peut s’agir de <emphasis>http</emphasis> (ce qui inclut https), <emphasis>svn</emphasis>, <emphasis>git</emphasis>, ou <emphasis>file</emphasis>.</para>
+		</listitem>
       </varlistentry>
 
       <varlistentry>
-        <term>repository url</term>
-
-        <listitem>
-          <para>Emplacement distant ou dossier des fichiers à traduire.</para>
-        </listitem>
+		<term>repository url</term>
+		<listitem>
+          <para>Emplacement ou dossier distant des fichiers à traduire.</para>
+		</listitem>
       </varlistentry>
 
       <varlistentry>
-        <term>mapping local</term>
-
-        <listitem>
+		<term>mapping local</term>
+		<listitem>
           <para>Nom du dossier ou fichier local, par rapport à la racine du projet OmegaT.</para>
-        </listitem>
+		</listitem>
       </varlistentry>
 
       <varlistentry>
-        <term>mapping repository</term>
-
-        <listitem>
-          <para>Non du dossier ou fichier distant, par rapport à l'URL du dépôt.</para>
-        </listitem>
+		<term>mapping repository</term>
+		<listitem>
+          <para>Nom du dossier ou fichier distant, par rapport à l’URL du dépôt.</para>
+		</listitem>
       </varlistentry>
 
       <varlistentry>
-        <term>excludes</term>
-
-        <listitem>
-          <para>Masques consitués de jokers (style Apache Ant) : *, ?, **. Séparer les différents masques à l'aide d'un point-virgule.</para>
-
-          <para>Exemple : <userinput>**/fichiers_exclus/**;*.txt</userinput> exclus les fichiers qui ont /fichiers_exclus/ dans leur chemin ainsi que les fichiers avec l'extension .txt.</para>
-        </listitem>
+		<term>excludes</term>
+		<listitem>
+          <para>Utilisez des caractères joker (suivant le style Apache Ant : *,?,**) pour ajouter des masques pour les fichiers qui doivent être exclus de la mise en correspondance. Utilisez un point-virgule pour séparer différents masques.</para>
+          <para>Par exemple, le masque <userinput>**/dossier_exclu/**;*.txt</userinput> exclut les fichiers dont le chemin contient /dossier_exclu/, ainsi que les fichiers avec l’extension <filename>.txt</filename>.</para>
+		</listitem>
       </varlistentry>
 
       <varlistentry>
-        <term>includes</term>
-
-        <listitem>
-          <para>Comme ci-dessus.</para>
-
-          <para>Exemple : <userinput>**/*.docx</userinput> pour ajouter tous les fichiers .docx, où qu'ils soient placés dans le projet, même dans les dossiers exclus.</para>
-
-          <para>Par défaut, tous les fichiers qui ne sont pas exclus sont inclus. L'inclusion n'est nécessaire que lorsque vous souhaitez créer des dérogations à certaines exclusions.</para>
-        </listitem>
+		<term>includes</term>
+		<listitem>
+          <para>Même chose que précédemment, mais pour les fichiers qui doivent faire partie de la mise en correspondance. Vu que les fichiers sont inclus par défaut à moins d’être exclus expressément, cette option n’est nécessaire que pour spécifier les exceptions à un masque d’exclusion.</para>
+          <para>Par exemple, le masque <userinput>**/*.docx</userinput> ajoute tous les fichiers .docx au projet, même s’ils se trouvent dans un dossier exclu.</para>
+		</listitem>
       </varlistentry>
-    </variablelist>
+	</variablelist>
   </section>
 
-  <section>
-    <title>Exemples de mappages</title>
+  <section id="how.to.setup.team.project.example.mappings">
+	<title id="how.to.setup.team.project.example.mappings.title">Exemples de mises en correspondance</title>
 
-    <para>Mappage par défaut du projet :<programlisting>&lt;repositories&gt;
- &lt;repository type=&quot;svn&quot; url=&quot;https://dépôt_du_projet_OmegaT_en_équipe&quot;&gt;
-  &lt;mapping local=&quot;&quot; repository=&quot;&quot;/&gt;
- &lt;/repository&gt;
-&lt;/repositories&gt;</programlisting></para>
-
-    <para>La totalité du contenu du <filename>https://dépôt_du_projet_OmegaT_en_équipe</filename> est mise en correspondance avec le projet OmegaT local.</para>
-
-    <para>Mise en correspondance de projets dans un sous-dossier du dépôt :<programlisting>&lt;repositories&gt;
- &lt;repository type=&quot;svn&quot; url=&quot;https://dépôt_de_tous_les_projets_OmegaT_en_équipe&quot;&gt;
-  &lt;mapping local=&quot;&quot; repository=&quot;Projet_En-US_FR&quot;/&gt;
- &lt;/repository&gt;
-&lt;/repositories&gt;</programlisting></para>
-
-    <para>La totalité du contenu du <filename>https://dépôt_de_tous_les_projets_OmegaT_en_équipe/Projet_En-US_FR</filename> est mise en correspondance avec le projet OmegaT local.</para>
-
-    <para>Mise en correspondance de sources supplémentaires en provenance de dépiots distants, avec des filtres :<programlisting>
-&lt;repositories&gt;
- &lt;repository type=&quot;svn&quot; url=&quot;https://dépôt_des_sources_de_tous_les_projets_OmegaT_en_équipe&quot;&gt;
-  &lt;mapping local=&quot;source/subdir&quot; repository=&quot;&quot;&gt;
-   &lt;excludes&gt;**/*.bak&lt;/excludes&gt;
-   &lt;includes&gt;readme.bak&lt;/includes&gt;
-  &lt;/mapping&gt;
- &lt;/repository&gt;
-&lt;/repositories&gt;</programlisting></para>
-
-    <para>La totalité du contenu du <filename>https://dépôt_des_sources_de_tous_les_projets_OmegaT_en_équipe</filename> est mise en correspondance avec le dossier source du projet OmegaT local, à l'exception des fichiers *.bak, sauf le fichier readme.bak.</para>
-
-    <para><programlisting>Mappage de fichiers source supplémentaires à partir du Web : &lt;repository type=&quot;http&quot; url=&quot;https://github.com/omegat-org/omegat/raw/master/&quot;&gt;
- &lt;mapping local=&quot;source/Bundle.properties&quot; repository=&quot;src/org/omegat/Bundle.properties&quot;/&gt;
+	<para>Mise en correspondance par défaut du projet :<programlisting>&lt;repository type=&quot;svn&quot; url=&quot;https://dépôt_du_projet_OmegaT_en_équipe&quot;&gt;
+	&lt;mapping local=&quot;&quot; repository=&quot;&quot;/&gt;
 &lt;/repository&gt;</programlisting></para>
 
-    <para>Le fichier distant <filename>https://github.com/omegat-org/omegat/raw/master/src/org/omegat/Bundle.properties</filename> est mise en correspondance avec le fichier local <filename>source/Bundle.properties</filename>.</para>
+	<para>La totalité du contenu du <filename>https://dépôt_du_projet_OmegaT_en_équipe</filename> est mise en correspondance avec le projet OmegaT local.</para>
 
-    <para>Mise en correspondance et renommage :<programlisting>&lt;repository type=&quot;http&quot; url=&quot;https://github.com/omegat-org/omegat/raw/master/&quot;&gt;
- &lt;mapping local=&quot;source/readme_tr.txt&quot; repository=&quot;release/readme.txt&quot;/&gt;
+	<para>Mise en correspondance pour des projets dans le sous-dossier d’un dépôt :<programlisting>&lt;repository type=&quot;svn&quot; url=&quot;https://dépôt_de_tous_les_projets_OmegaT_en_équipe&quot;&gt;
+	&lt;mapping local=&quot;&quot; repository=&quot;EN-US_FR_project&quot;/&gt;
 &lt;/repository&gt;</programlisting></para>
 
-    <para>Le fichier distant <filename>https://github.com/omegat-org/omegat/raw/master/release/readme.txt</filename> est mis en correspondance avec le fichier local <filename>source/readme_tr.txt</filename>.</para>
+	<para>La totalité du contenu du <filename>https://dépôt_de_tous_les_projets_OmegaT_en_équipe/Projet_En-US_FR</filename> est mise en correspondance avec le projet OmegaT local.</para>
 
-    <para>Ceci permet le renommage du fichier à traduire.</para>
-
-    <para>Mise en correspondance d'un fichier local :<programlisting>&lt;repository type=&quot;file&quot; url=&quot;/utilisateurs/moi/mesfichiers&quot;&gt;
- &lt;mapping local=&quot;source/fichier.txt&quot; repository=&quot;mon/fichier.txt&quot;/&gt;
- &lt;mapping local=&quot;source/fichier2.txt&quot; repository=&quot;un_autre/fichier.txt&quot;/&gt;
+	<para>Mise en correspondance de sources supplémentaires en provenance de dépôts distants, avec des filtres :<programlisting>&lt;repository type=&quot;svn&quot; url=&quot;https://dépôt_de_toutes_les_sources_des_projets_OmegaT_en_équipe&quot;&gt;
+	&lt;mapping local=&quot;source/subdir&quot; repository=&quot;&quot;&gt;
+	    &lt;excludes&gt;**/*.bak&lt;/excludes&gt;
+    	&lt;includes&gt;readme.bak&lt;/includes&gt;
+	&lt;/mapping&gt;
 &lt;/repository&gt;</programlisting></para>
 
-    <para>Le fichier local <filename>/utilisateurs/moi/mesfichiers/mon/fichier.txt</filename> est mis en correspondance avec le fichier local <filename>source/fichier.txt</filename> et <filename>/utilisateurs/moi/mesfichiers/un_autre/fichier.txt</filename> est mis en correspondance avec le fichier local <filename>source/fichier2.txt</filename>.</para>
+	<para>La totalité du contenu du <filename>https://dépôt_de_toutes_les_sources_des_projets_OmegaT_en_équipe</filename> est mise en correspondance avec le dossier source du projet OmegaT, à l’exception des fichiers portant l’extension <filename>.bak</filename>. Cependant, le fichier <filename>readme.bak</filename> est aussi inclus.</para>
 
-    <para>Avertissement : si un fichier n'existe pas le projet ne sera pas chargé.</para>
-    <para>Vous pouvez ajouter autant de correspondances que vous le souhaitez, mais exclusivement dans le contexte d'un projet en équipe, c'est-à-dire qu'une des correspondances doit inclure omegat.project. Cette fonction est conçue pour rassembler les fichiers source mais n'est pas limitée aux fichiers source.</para>
+	<para>Mise en correspondance de sources supplémentaires provenant du web :<programlisting>&lt;repository type=&quot;http&quot; url=&quot;https://github.com/omegat-org/omegat/raw/master/&quot;&gt;
+	&lt;mapping local=&quot;source/Bundle.properties&quot; repository=&quot;src/org/omegat/Bundle.properties&quot;/&gt;
+&lt;/repository&gt;</programlisting></para>
+
+	<para>Le fichier distant <filename>https://github.com/omegat-org/omegat/raw/master/src/org/omegat/Bundle.properties</filename> est mis en correspondance avec le fichier local <filename>source/Bundle.properties</filename>.</para>
+
+	<para>Mise en correspondance avec renommage :<programlisting>&lt;repository type=&quot;http&quot; url=&quot;https://github.com/omegat-org/omegat/raw/master/&quot;&gt;
+	&lt;mapping local=&quot;source/readme_fr.txt&quot; repository=&quot;release/readme.txt&quot;/&gt;
+&lt;/repository&gt;</programlisting></para>
+
+	<para>Le fichier distant <filename>https://github.com/omegat-org/omegat/raw/master/release/readme.txt</filename> est mis en correspondance avec le fichier local <filename>source/readme_tr.txt</filename>.</para>
+
+	<para>Ceci permet de renommer le fichier à traduire.</para>
+
+	<para>Mise en correspondance d’un fichier local :<programlisting>&lt;repository type=&quot;file&quot; url=&quot;/dossier/de/mes/fichiers&quot;&gt;
+	&lt;mapping local=&quot;source/file.txt&quot; repository=&quot;mon/fichier.txt&quot;/&gt;
+	&lt;mapping local=&quot;source/file2.txt&quot; repository=&quot;un/autre/fichier.txt&quot;/&gt;
+&lt;/repository&gt;</programlisting></para>
+
+	<para>Le fichier local <filename>/dossiers/de/mes/fichiers/mon/fichier.txt</filename> est mis en correspondance avec le fichier local <filename>source/fichier.txt</filename> et <filename>/dossiers/de/mes/fichiers/un/autre/fichier.txt</filename> est mis en correspondance avec le fichier local <filename>source/fichier2.txt</filename>.</para>
+
+	<warning>
+      <para>Le projet ne se charge pas si un fichier spécifié dans une mise en correspondance n’existe pas.</para>
+	</warning>
+
+	<para>Vous pouvez ajouter autant de mises en correspondance que vous le souhaitez, mais l’une d’elles doit contenir le fichier <filename>omegat.project</filename>.</para>
+
   </section>
-  <section>
-    <title>Note au sujet d'omegat.project et des correspondances</title>
-    <para>Quand vous créez un nouveau projet et que vous l'envoyer à un dépôt, le fichier <filename>omegat.project</filename> ne contient aucune mise en correspondance. Quand vous téléchargez le projet, celui-ci est converti en projet en équipe localement et une mise en correspondance par défaut est ajoutée.</para>
-    <para>Remarquez que le fichier omegat.project dans ce dépôt n'a pas été modifié de manière automatique et qu'il ne contient toujours pas les mises en correspondance. Lorsque vous chargez un project, toutes les modifications du dépôt sont copiées dans le projet local, à l'inclusion du fichier <filename>omegat.project</filename> qui contient les paramètres du projet. Si le fichier ne contient pas de mises en correspondance, les correspondances locales existantes sont appliquées de nouveau et seulement celles-ci. Toutes les autres modifications locales du projet sont annulées. Si le fichier contient des mises en correspondance, les modifications locales sont perdues.</para>
-  </section>
+  <section id="how.to.setup.team.project.selective.sharing">
+	<title id="how.to.setup.team.project.selective.sharing.title">Partage sélectif</title>
 
+	<para>Le processus ci-dessus décrit le scénario le plus courant, dans lequel l’administrateur du projet en équipe a le contrôle total sur le projet et où tous les fichiers (et statistiques) sont identiques sur toutes les instances du projet, aussi bien sur le serveur que sur les systèmes locaux des membres de l’équipe.</para>
+
+	<para>Il est également possible d’utiliser une configuration de projet en équipe dans laquelle plusieurs membres partagent le fichier <filename>project_save.tmx</filename>, et seulement un sous-ensemble d’autres fichiers.</para>
+
+	<para>La procédure de base est essentiellement la même, sauf que l’administrateur du projet en équipe n’ajoute pas chaque fichier au projet géré par version sur le serveur. Les fichiers restants sont copiés par les membres, ou bien des mises en correspondance permettant de synchroniser des fichiers à partir d’autres emplacements sont définies.</para>
+  </section>
 </section>

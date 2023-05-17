@@ -1,134 +1,168 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="menus.tools">
-  <title>Outils</title>
+  <title id="menus.tools.title"><guimenu>Outils</guimenu></title>
+
+  <para>Ce menu vous permet d’accéder à certains outils comme la validation d’assurance qualité, les statistiques de correspondances, l’aligneur, et les scripts.</para>
+
+  <example id="example.check.issues">
+	<title id="example.check.issues.title">Exemple de description de raccourci</title>
+	<para>Sur Windows et Linux : <keycombo><keycap>Ctrl</keycap><keycap>Maj</keycap><keycap>V</keycap></keycombo></para>
+
+	<para>Sur macOS : <keycombo><keycap>Maj</keycap><keycap>commande</keycap><keycap>V</keycap></keycombo></para>
+
+	<para><emphasis role="bold">Dans ce manuel :</emphasis> <keycombo><keycap>C</keycap><keycap>Maj</keycap><keycap>V</keycap></keycombo></para>
+  </example>
 
   <variablelist>
-    <varlistentry>
-      <term>Afficher les erreurs...</term>
-
+    <varlistentry id="menus.tools.check.issues">
+      <term id="menus.tools.check.issues.title"><guimenuitem>Afficher les erreurs...</guimenuitem> <keycombo><keycap>C</keycap><keycap>Maj</keycap><keycap>V</keycap></keycombo></term>
       <listitem>
-        <para>Outils d'assurance de qualité qui effectue toutes les vérifications automatiques en une fois et affiche les résultats dans une fenêtre.</para>
+        <para>L’outil d’assurance de qualité effectue toutes les vérifications automatiques en une fois et affiche les résultats dans une fenêtre.</para>
 
-        <para>Il détecte quatre types de problèmes :</para>
+        <para>Quatre types de problèmes peuvent être détectés :</para>
 
         <itemizedlist>
           <listitem>
-            <para>les balises manquantes ou mal placées, y compris les <link linkend="dialogs.preferences.tagprocessing">balises personnalisées</link>. L'option <guilabel>Problèmes de balises</guilabel> est toujours sélectionnée.</para>
+            <para><guilabel>Problèmes de balises</guilabel> (toujours activée) : détecte les balises manquantes ou mal placées, y compris les balises personnalisées et le texte protégé. Voir les préférences <link linkend="dialogs.preferences.tag.processing" endterm="dialogs.preferences.tag.processing.title"/> pour en savoir plus.</para>
+
+			<note>
+			  <para>Cette option est toujours activée.</para>
+			</note>
           </listitem>
 
           <listitem>
-            <para><guilabel>Erreurs d'orthographe</guilabel> (optionnel) Fonctionne seulement si un dictionnaire orthographique est installé.</para>
+            <para><guilabel>Erreurs d’orthographe</guilabel> (optionnelle) : détecte les fautes d’orthographe. Fonctionne seulement si un dictionnaire orthographique est installé. Voir les préférences <link linkend="dialog.preferences.spellchecker" endterm="dialog.preferences.spellchecker.title"/> pour en savoir plus.</para>
           </listitem>
 
           <listitem>
-            <para><guilabel>Problèmes de terminologie</guilabel> (optionnel).</para>
+            <para><guilabel>Problèmes de terminologie</guilabel> (optionnelle) : détecte tous les éléments de glossaires qui ne sont pas traduits correctement. Voir les préférences <link linkend="dialogs.preferences.glossary" endterm="dialogs.preferences.glossary.title"/> pour en savoir plus.</para>
           </listitem>
 
-          <listitem>
-            <para><guilabel>Erreurs LanguageTool</guilabel> (optionnel)</para>
+		  <listitem>
+            <para><guilabel>Erreurs LanguageTool</guilabel> (optionnelle) : détecte les problèmes grammaticaux ou typographiques Voir les préférences <link linkend="dialog.preferences.languagetool.plugin" endterm="dialog.preferences.languagetool.plugin.title"/> pour en savoir plus.</para>
           </listitem>
         </itemizedlist>
 
-        <para>La fenêtre de résultats est disposée sous forme de table dans laquelle :</para>
-
+        <para>Les résultats sont disposés sous la forme d’un tableau dans lequel :</para>
         <itemizedlist>
           <listitem>
-            <para>un double-clic sur une ligne active le segment correspondant dans le volet Éditeur.</para>
+            <para>Double-cliquer sur une ligne active le segment correspondant dans le volet Éditeur.</para>
           </listitem>
 
           <listitem>
-            <para>cliquer sur un en-tête de colonne modifie l'ordre de tri de la colonne,</para>
+            <para>Cliquer sur un en-tête de colonne modifie l’ordre de tri de la colonne.</para>
           </listitem>
 
           <listitem>
-            <para>sélectionner ou déplacer la souris sur une ligne va afficher une icône à son extrémité droite de la ligne qui propose un menu déroulant où l'on peut choisir de corriger ou d'ignorer les erreurs.</para>
+            <para>Sélectionner ou déplacer la souris sur une ligne va afficher une icône de menu contextuel à l’extrémité droite de la ligne. Cliquer sur cette icône va vous présenter les actions disponibles pour corriger ou ignorer l’erreur.</para>
+
+			<note>
+			  <para>Pour forcer la vérification orthographique à chaque fois que vous quittez un segment, activez la préférence <link linkend="dialogs.preferences.editor.validate.tags.when.leaving.a.segment" endterm="dialogs.preferences.editor.validate.tags.when.leaving.a.segment.title"/>.</para>
+
+			  <para>Pour empêcher la création de fichiers traduits s’il y a des problèmes de balises, activez la préférence <link linkend="dialogs.preferences.tag.processing.do.not.allow.creating.translated.documents.with.tag.issues" endterm="dialogs.preferences.tag.processing.do.not.allow.creating.translated.documents.with.tag.issues.title"/>.</para>
+			</note>
           </listitem>
         </itemizedlist>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Afficher les erreurs pour le document actuel</term>
-
+    <varlistentry id="menus.tools.check.issues.for.current.document">
+      <term id="menus.tools.check.issues.for.current.document.title"><guimenuitem>Afficher les erreurs pour le document actuel</guimenuitem></term>
       <listitem>
         <para>Comme ci-dessus, mais seulement pour le document actif dans le volet Éditeur.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Statistiques</term>
-
+    <varlistentry id="menus.tools.statistics">
+      <term id="menus.tools.statistics.title"><guimenuitem>Statistiques</guimenuitem></term>
       <listitem>
-        <para>Ouvre une nouvelle fenêtre et affiche les statistiques du projet, c.-à-d. les totaux du projet et les totaux de chaque fichier du projet.</para>
+        <para>Ouvre une nouvelle fenêtre et affiche les statistiques du projet telles que le nombre de mots ou les totaux des segments, ainsi que les totaux de chaque fichier du projet.</para>
+
+		<para>Les données sont enregistrées dans le fichier <link linkend="project.folder.project.stats" endterm="project.folder.project.stats.title"/> qui est situé dans le dossier <link linkend="project.folder.omegat.folder" endterm="project.folder.omegat.folder.title"/> du projet.</para>
+
+		<note>
+		  <para>Le nombre de mots, le total des segments, et d’autres éléments peuvent être influencés par les facteurs suivants :</para>
+		  
+		  <itemizedlist>
+			<listitem>
+			  <para>Les paramètres de filtres de fichiers : certains filtres permettent à des parties supplémentaires d’être prises en compte pour la traduction. Voir les <link linkend="filters.options">options</link> de filtre de fichier pour en savoir plus.</para>
+			</listitem>
+
+			<listitem>
+			  <para>Règles de segmentation : différentes règles vont générer un différent nombre de segments. Voir l’annexe <link linkend="app.segmentation" endterm="app.segmentation.title"/> pour en savoir plus.</para>
+			</listitem>
+
+			<listitem>
+			  <para>Balises : Les balises OmegaT ne sont jamais comptées dans les statistiques, mais dans certains elles peuvent diviser des termes et créer des divergences dans la façon dont OmegaT les comptabilise. Voir le paramètre <link linkend="dialogs.project.properties.hide.tags" endterm="dialogs.project.properties.hide.tags.title"/> dans la boîte de dialogue <link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/> pour en savoir plus.</para>
+			</listitem>
+
+			<listitem>
+			  <para>Balises personnalisées et texte protégé : comme les balises OmegaT, ils ne sont pas comptés par défaut dans les statistiques, mais vous pouvez demander a OmegaT de les compter comme des mots. Voir le paramètre <link linkend="dialogs.preferences.tag.processing.count.protected.text.and.custom.tags.in.statistics" endterm="dialogs.preferences.tag.processing.count.protected.text.and.custom.tags.in.statistics.title"/> pour en savoir plus.</para>
+			</listitem>
+		  </itemizedlist>
+		</note>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Statistiques des correspondances</term>
-
+    <varlistentry id="menus.tools.match.statistics">
+      <term id="menus.tools.match.statistics.title"><guimenuitem>Statistiques des correspondances</guimenuitem></term>
       <listitem>
-        <para>Affiche les Statistiques des correspondances du projet : le nombre de répétitions, de correspondances exactes, de correspondances partielles et d'absences de correspondances pour les segments, les mots et les caractères.</para>
+        <para>Montre les statistiques des correspondances du projet, c’est-à-dire le nombre de répétitions, de correspondances exactes, de correspondances partielles, et d’absences de correspondances pour les segments, les mots, et les caractères.</para>
+
+		<para>Les données sont enregistrées dans le fichier <link linkend="project.folder.omegat.project.stats.match" endterm="project.folder.omegat.project.stats.match.title"/> qui est situé dans le dossier <link linkend="project.folder.omegat.folder" endterm="project.folder.omegat.folder.title"/> du projet.</para>
+      </listitem>
+    </varlistentry>
+	
+    <varlistentry id="menus.tools.match.statistics.per.file">
+      <term id="menus.tools.match.statistics.per.file.title"><guimenuitem>Statistiques des correspondances par fichier</guimenuitem></term>
+      <listitem>
+        <para>Montre les statistiques des correspondances du projet individuelles pour chaque fichier du projet, c’est-à-dire le nombre de répétitions, de correspondances exactes, de correspondances partielles, et d’absences de correspondances pour les segments, les mots, et les caractères.</para>
+
+		<para>Les données sont enregistrées dans le fichier <link linkend="project.folder.omegat.project.stats.match.per.file" endterm="project.folder.omegat.project.stats.match.per.file.title"/> qui est situé dans le dossier <link linkend="project.folder.omegat.folder" endterm="project.folder.omegat.folder.title"/> du projet.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Statistiques des correspondances par fichier</term>
-
+    <varlistentry id="menus.tools.align.files">
+      <term id="menus.tools.align.files.title"><guimenuitem>Aligner les fichiers…</guimenuitem></term>
       <listitem>
-        <para>Affiche les Statistiques des correspondances pour chaque fichier du projet : le nombre de répétitions, de correspondances exactes, de correspondances partielles et d'absences de correspondances pour les segments, les mots et les caractères.</para>
-      </listitem>
-    </varlistentry>
+        <para>Sélectionner les deux fichiers à aligner (le fichier source et sa traduction) et cliquer sur <guibutton>OK</guibutton> pour ouvrir la fenêtre <link linkend="windows.aligner" endterm="windows.aligner.title"/>.</para>
 
-    <varlistentry>
-      <term>Align Files…</term>
-
-      <listitem>
-        <para>Sélectionnez les deux fichiers à aligner (le fichier source et sa traduction) et cliquez sur OK pour ouvrir la <link linkend="windows.aligner">fenêtre <guilabel>Outil d'alignement</guilabel></link>.</para>
-
-        <para>Les formats pris en charge sont ceux qui sont affichés dans <menuchoice><guimenuitem>Projet</guimenuitem> <guimenuitem>Propriétés</guimenuitem> <guimenuitem>Filtres de fichiers</guimenuitem></menuchoice>.</para>
-
+        <para>Les formats de fichiers pris en charge dépendent des paramètres de votre projet. Voir l’annexe <link linkend="file.filters" endterm="file.filters.title"/> pour en savoir plus.</para>
         <para>Les fichiers source et cible peuvent être dans des formats différents, (par exemple, un fichier <filename>.docx</filename> peut être aligné avec un fichier <filename>.pdf</filename>).</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Scripts...</term>
-
+    <varlistentry id="menus.tools.scripting">
+      <term id="menus.tools.scripting.title"><guimenuitem>Scripts...</guimenuitem></term>
       <listitem>
-        <para>Ouvre la <link linkend="windows.scripts">fenêtre de <guilabel>Scripts</guilabel></link> où l'emplacement des scripts peut être spécifié et où des scripts peuvent être exécutés, écrits et associés à un raccourci clavier.</para>
+        <para>Ouvre la fenêtre <link linkend="windows.scripts" endterm="windows.scripts.title"/>, qui vous permet de définir l’emplacement où les scripts se trouvent, ainsi que d’écrire et d’exécuter des scripts, et leur assigner un raccourci.</para>
+		<para>La liste sous cet élément affiche 12 emplacements potentiels pour des scripts. Cliquer sur un emplacement assigné permet de lancer le script assigné à cet emplacement.</para>
+
+		<note>
+		  <para>Pour assigner un numéro à un script :</para>
+
+          <orderedlist>
+			<listitem>
+              <para>Ouvrez la fenêtre des scripts</para>
+			</listitem>
+
+			<listitem>
+              <para>Sélectionnez le script à associer dans la liste à gauche</para>
+			</listitem>
+
+			<listitem>
+              <para>Faites un clic-droit sur un numéro libre au bas de la fenêtre et choisissez <guilabel>Ajouter le script</guilabel>.</para>
+			</listitem>
+          </orderedlist>
+		</note>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>n - (nom du script)</term>
-
+    <varlistentry id="menus.tools.external.search.commands">
+      <term id="menus.tools.external.search.commands.title">Commandes de recherches externes</term>
       <listitem>
-        <para>Lance les scripts qui ont été associés à un numéro.</para>
-
-        <para>Pour associer un script à un numéro :</para>
-
-        <orderedlist>
-          <listitem>
-            <para>Ouvrez la fenêtre des scripts</para>
-          </listitem>
-
-          <listitem>
-            <para>Sélectionnez le script à associer dans la liste à gauche</para>
-          </listitem>
-
-          <listitem>
-            <para>Faites un clic-droit sur un numéro libre au bas de la fenêtre et choisissez <guilabel>Ajouter le script</guilabel>.</para>
-          </listitem>
-        </orderedlist>
-      </listitem>
-    </varlistentry>
-
-    <varlistentry>
-      <term>(commandes pour recherches externes)</term>
-
-      <listitem>
-        <para>Si des commandes pour effectuer des recherches externes ont été définies dans les <link linkend="dialogs.preferences.externalsearch">préférences</link>, elles sont listées et accessibles ici.</para>
+        <para>Si vous avez défini des recherches externes dans les paramètres <link linkend="dialogs.preferences.external.searches" endterm="dialogs.preferences.external.searches.title"/>, ils sont listés et accessibles ici.</para>
       </listitem>
     </varlistentry>
   </variablelist>

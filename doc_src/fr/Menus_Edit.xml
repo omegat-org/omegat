@@ -1,191 +1,345 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="menus.edit">
-  <title>Edition</title>
+  <title id="menus.edit.title"><guimenu>Édition</guimenu></title>
 
-  <para>Ce menu n'est disponible que lorsqu'un projet est ouvert.</para>
+  <para>Ce menu vous permet d’accéder aux commandes d’édition de segments.</para>
+
+  <example id="example.undo.last.action">
+	<title id="example.undo.last.action.title">Exemple de description de raccourci</title>
+	<para>Sur Windows et Linux : <keycombo><keycap>Ctrl</keycap><keycap>Z</keycap></keycombo></para>
+
+	<para>Sur macOS : <keycombo><keycap>commande</keycap><keycap>Z</keycap></keycombo></para>
+
+	<para><emphasis role="bold">Dans ce manuel :</emphasis> <keycombo><keycap>C</keycap><keycap>Z</keycap></keycombo></para>
+  </example>
 
   <variablelist>
-    <varlistentry>
-      <term><guimenuitem>Annuler la dernière action</guimenuitem></term>
-
+    <varlistentry id="menus.edit.undo.last.action">
+      <term id="menus.edit.undo.last.action.title"><guimenuitem>Annuler</guimenuitem> <keycombo><keycap>C</keycap><keycap>Z</keycap></keycombo></term>
       <listitem>
-        <para>Restaure le projet pour le rendre tel qu'il était avant la dernière action d'édition effectuée. Cette option ne marche que tant que le segment n'a pas été validé.</para>
+        <para>Annule une modification apportée au segment actuel. L’historique des modifications est perdu lorsque l’on quitte le segment.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Rétablir la dernière action</term>
-
+    <varlistentry id="menus.edit.redo.last.action">
+      <term id="menus.edit.redo.last.action.title"><guimenuitem>Rétablir</guimenuitem> <keycombo><keycap>C</keycap><keycap>Y</keycap></keycombo>
+	  </term>
       <listitem>
-        <para>Restaure le projet pour le rendre tel qu'il était avant que la dernière action d'édition effectuée n'ait été annulée. Cette option ne marche que tant que le segment n'a pas été validé.</para>
+        <para>Rétablit une modification du segment actuel qui a été annulée. L’historique des modifications est perdu lorsque l’on quitte le segment.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Remplacer par la correspondance ou la sélection</term>
-
+    <varlistentry id="menus.edit.replace.with.match.or.selection">
+      <term id="menus.edit.replace.with.match.or.selection.title"><guimenuitem>Remplacer par la correspondance ou la sélection</guimenuitem> <keycombo><keycap>C</keycap><keycap>R</keycap></keycombo>
+	  </term>
       <listitem>
-        <para>Remplace le segment cible complet par la correspondance sélectionnée (par défaut, c'est la première correspondance qui est sélectionnée).</para>
+        <para>Remplace le segment cible par la correspondance partielle sélectionnée (la première correspondance par défaut) ou par le texte sélectionné dans le volet <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/>.</para>
 
-        <para>Si une partie du texte est sélectionnée dans la correspondance partielle, seule cette sélection remplacera l'ensemble du segment cible.</para>
+        <para>Le texte sélectionné a la priorité sur la correspondance sélectionnée.</para>
+
+		<para>Voir la description du volet <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/> pour en savoir plus.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Insérer la correspondance ou la sélection</term>
-
+    <varlistentry id="menus.edit.insert.match.or.selection">
+      <term id="menus.edit.insert.match.or.selection.title"><guimenuitem>Insérer la correspondance ou la sélection</guimenuitem><keycombo><keycap>C</keycap><keycap>I</keycap></keycombo></term>
       <listitem>
-        <para>Insère la correspondance sélectionnée à l'endroit où se trouve le curseur. Si une partie du segment cible a été sélectionnée, cette fonction remplace la partie sélectionnée par la correspondance.</para>
+        <para>Insère la correspondance partielle sélectionnée ou le texte sélectionné dans le volet <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/> à l’emplacement où se trouve le curseur. Si une partie du segment cible est sélectionnée, cette partie sera remplacée.</para>
 
-        <para>Si une partie du texte est sélectionnée dans la correspondance partielle, seule cette sélection sera insérée à la position du curseur.</para>
+        <para>Le texte sélectionné à la priorité sur la correspondance sélectionnée.</para>
+
+		<para>Voir la description du volet <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/> pour en savoir plus.</para>
+	  </listitem>
+    </varlistentry>
+
+    <varlistentry id="menus.edit.replace.with.source">
+      <term id="menus.edit.replace.with.source.title"><guimenuitem>Remplacer par la source</guimenuitem> <keycombo><keycap>C</keycap><keycap>Maj</keycap><keycap>R</keycap></keycombo>
+	  </term>
+      <listitem>
+        <para>Remplace l’ensemble du segment cible par le segment source.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Remplacer par une traduction automatique</term>
-
+    <varlistentry id="menus.edit.insert.source">
+      <term id="menus.edit.insert.source.title"><guimenuitem>Insérer le texte source</guimenuitem> <keycombo><keycap>C</keycap><keycap>Maj</keycap><keycap>I</keycap></keycombo>
+	  </term>
       <listitem>
-        <para>Remplace le segment cible par une traduction automatique fournie par le service de traduction automatique que vous avez choisi. Ne produit aucun effet si aucun service de traduction automatique n'a été activé (dans <menuchoice><guimenu>Options</guimenu> <guimenuitem>Traduction automatique</guimenuitem></menuchoice>).</para>
+        <para>Insère le segment source à l’emplacement où se trouve le curseur. Si une partie du segment cible est sélectionnée, cette partie sera remplacée.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Remplacer par la source</term>
-
+    <varlistentry id="menus.edit.select.source.text">
+      <term id="menus.edit.select.source.text.title"><guimenuitem>Sélectionner le texte source</guimenuitem> <keycombo><keycap>C</keycap><keycap>Maj</keycap><keycap>A</keycap></keycombo>
+	  </term>
       <listitem>
-        <para>Remplace le segment cible complet par la source.</para>
+        <para>Sélectionne le texte source.</para>
+
+		<para>La sélection peut être utilisée directement dans OmegaT pour des <link linkend="windows.text.search">recherches internes</link>, pour effectuer des <link linkend="windows.text.replace">remplacements</link>, pour <link linkend="menus.edit.create.glossary.entry">entrer des termes de glossaires</link>, pour des <link linkend="dialogs.preferences.external.searches">recherches externes</link>, etc. Une fois la sélection copiée dans le presse-papier de votre système d’exploitation, elle peut aussi être utilisée dans des recherches internet ou ailleurs.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Insérer le texte source</term>
-
+    <varlistentry id="menus.edit.replace.with.mt">
+      <term id="menus.edit.replace.with.mt.title"><guimenuitem>Remplacer par une traduction automatique</guimenuitem> <keycombo><keycap>C</keycap><keycap>M</keycap></keycombo>
+	  </term>
       <listitem>
-        <para>Insère la source à l’endroit où se trouve le curseur.</para>
+        <para>Remplace le segment cible par une traduction automatique fournie par le service de traduction automatique que vous avez choisi.</para>
+		<para>Si la préférence <link linkend="dialogs.preferences.mt.automatically.fetch.translations" endterm="dialogs.preferences.mt.automatically.fetch.translations.title"/> est désactivée, utilisez cette option une fois pour récupérer la traduction, et une seconde fois pour l’insérer.</para>
+		
+		<para>Rien ne se passe si aucun service de traduction automatique n’a été activé dans le menu <link linkend="menus.options" endterm="menus.options.title"/><link linkend="menus.options.mt" endterm="menus.options.mt.title"/>. Voir les préférences <link linkend="dialogs.preferences.mt" endterm="dialogs.preferences.mt.title"/> pour en savoir plus.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Insérer les balises source manquantes</term>
-
+    <varlistentry id="menus.edit.insert.missing.source.tag">
+      <term id="menus.edit.insert.missing.source.tag.title"><guimenuitem>Insérer les balises manquantes</guimenuitem> <keycombo><keycap>C</keycap><keycap>Maj</keycap><keycap>T</keycap></keycombo>
+	  </term>
       <listitem>
-        <para>Insère les balises source (si elles étaient manquantes) à l'endroit où se trouve le curseur.</para>
+        <para>Insère les balises sources manquantes à l’emplacement où se trouve le curseur.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Insérer la prochaine balise manquante</term>
-
+    <varlistentry id="menus.edit.insert.next.missing.tag">
+      <term id="menus.edit.insert.next.missing.tag.title"><guimenuitem>Insérer la prochaine balise manquante</guimenuitem> <keycombo><keycap>C</keycap><keycap>T</keycap></keycombo>
+	  </term>
       <listitem>
-        <para>N'insère qu'une balise (parmi les manquantes) à l'endroit où se trouve le curseur.</para>
+        <para>Insère la prochaine balise manquante à l’emplacement où se trouve le curseur.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Exporter la sélection</term>
-
+    <varlistentry id="menus.edit.export.selection">
+      <term id="menus.edit.export.selection.title"><guimenuitem>Exporter la sélection</guimenuitem> <keycombo><keycap>C</keycap><keycap>Maj</keycap><keycap>C</keycap></keycombo>
+	  </term>
       <listitem>
-        <para>Exporte la sélection en cours vers un fichier texte pour la traiter. Si aucun texte n'a été sélectionné, c'est le segment source en cours qui sera envoyé vers ce fichier. Lorsque vous quittez <application>OmegaT</application>, ce fichier n'est pas vidé, de façon à assurer une cohérence avec le comportement habituel du presse-papier. Le contenu exporté est copié dans le fichier <filename>selection.txt</filename> situé dans le dossier de fichiers des préférences utilisateur.</para>
+        <para>Exporte la sélection en cours vers un fichier texte pour la traiter. Si aucun texte n’a été sélectionné, c’est le segment source en cours qui sera envoyé vers ce fichier. Pour rester cohérent avec le comportement habituel du presse-papier, ce fichier n’est pas vidé lorsque vous quittez OmegaT. Le contenu exporté est copié dans le fichier <link linkend="configuration.folder.default.contents.script.selection.title" endterm="configuration.folder.default.contents.script.selection.title"/> situé dans le dossier <link linkend="configuration.folder">configuration</link>.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Créer une entrée de glossaire</term>
-
+    <varlistentry id="menus.edit.create.glossary.entry">
+      <term id="menus.edit.create.glossary.entry.title"><guimenuitem>Créer une entrée de glossaire...</guimenuitem> <keycombo><keycap>C</keycap><keycap>Maj</keycap><keycap>G</keycap></keycombo>
+	  </term>
       <listitem>
-        <para>Permet à l'utilisateur de créer une entrée dans le fichier glossaire par défaut.</para>
+        <para>Permet de créer une entrée dans le glossaire modifiable du projet (le fichier <link linkend="project.folder.glossary.txt" endterm="project.folder.glossary.txt.title"/>).</para>
 
-        <para>Si vous sélectionnez du texte (dans n'importe quel volet) avant d'appuyer sur <keycombo> <keycap>Ctrl</keycap> <keycap>Maj</keycap> <keycap>G</keycap> </keycombo>, le texte sera collé par défaut dans le champ <guilabel>Terme source</guilabel>.</para>
+		<para>Il existe deux manières d’utiliser cette fonction.</para>
 
-        <para>Ceci s'applique également aux champs <guimenuitem>Terme cible</guimenuitem> et <guimenuitem>Commentaire</guimenuitem> si de nouvelles sélections sont faites et si vous appuyez de nouveau sur <keycombo> <keycap>Ctrl</keycap> <keycap>Shift</keycap> <keycap>G</keycap> </keycombo>.</para>
+		<itemizedlist>
+		  <listitem>
+			<para>La première consiste à ouvrir la boîte de dialogue et ensuite manuellement remplir les différents champs.</para>
+		  </listitem>
+
+		  <listitem>
+			<para>La seconde consiste à sélectionner les termes dans un des volets d’OmegaT et ensuite lancer la boîte de dialogue après chaque sélection pour qu’OmegaT les entre automatiquement dans les différents champs :</para>
+			
+			<orderedlist>
+			  <listitem>
+				<para>Sélectionnez une chaîne de texte dans n’importe quel volet</para>
+			  </listitem>
+
+			  <listitem>
+				<para>Appuyez sur <keycombo><keycap>C</keycap><keycap>Maj</keycap><keycap>G</keycap></keycombo></para>
+				
+				<para>La sélection est insérée dans le champ <guilabel>Terme source</guilabel>.</para>
+			  </listitem>
+
+			  <listitem>
+				<para>Sélectionnez une chaîne de texte dans n’importe quel volet</para>
+			  </listitem>
+
+			  <listitem>
+				<para>Appuyez sur <keycombo><keycap>C</keycap><keycap>Maj</keycap><keycap>G</keycap></keycombo></para>
+
+				<para>La sélection est insérée dans le champ <guilabel>Terme cible</guilabel>.</para>
+			  </listitem>
+
+			  <listitem>
+				<para>[Facultatif] Sélectionnez une chaîne de texte dans n’importe quel volet</para>
+			  </listitem>
+
+			  <listitem>
+				<para>[Facultatif] Appuyez sur <keycombo><keycap>C</keycap><keycap>Maj</keycap><keycap>G</keycap></keycombo></para>
+
+				<para>La sélection est insérée dans le champ <guilabel>Commentaire</guilabel>.</para>
+			  </listitem>
+
+			  <listitem>
+				<para>Appuyez sur la touche <keycap>Entrée</keycap> ou cliquez sur <guibutton>OK</guibutton></para>
+			  </listitem>
+			</orderedlist>
+		  </listitem>
+		</itemizedlist>
+	  </listitem>
+    </varlistentry>
+
+    <varlistentry id="menus.edit.search.project">
+      <term id="menus.edit.search.project.title"><guimenuitem>Rechercher...</guimenuitem> <keycombo><keycap>C</keycap><keycap>F</keycap></keycombo>
+	  </term>
+      <listitem>
+        <para>Ouvre une nouvelle fenêtre de <link linkend="windows.text.search" endterm="windows.text.search.title"/>.</para>
+
+        <para>Si vous sélectionnez une chaîne de texte (dans n’importe quel volet) avant d’ouvrir la fenêtre, le texte sera inséré par défaut dans le champ <guilabel>Rechercher :</guilabel>.</para>
+
+		<para>La combinaison de touches <keycombo><keycap>C</keycap><keycap>Maj</keycap><keycap>F</keycap></keycombo> réutilise la fenêtre de recherche la plus récente encore ouverte au lieu d’en ouvrir une nouvelle.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Rechercher dans le projet...</term>
-
+    <varlistentry id="menus.edit.search.and.replace">
+      <term id="menus.edit.search.and.replace.title"><guimenuitem>Remplacer...</guimenuitem> <keycombo><keycap>C</keycap><keycap>K</keycap></keycombo>
+	  </term>
       <listitem>
-        <para>Ouvre une nouvelle fenêtre de <link linkend="windows.textsearch">Recherche textuelle</link>.</para>
+        <para>Ouvre une nouvelle fenêtre de <link linkend="windows.text.replace" endterm="windows.text.replace.title"/>.</para>
 
-        <para>Si vous sélectionnez du texte (dans n'importe quel volet) avant d'appuyer sur <keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo>, le texte sera collé par défaut dans le champ <guilabel>Recherche</guilabel>.</para>
-
-        <para>Un appui sur <keycombo> <keycap>Ctrl</keycap> <keycap>Maj</keycap> <keycap>F</keycap> </keycombo> affiche la dernière fenêtre de recherche ouverte (au lieu d'en ouvrir une nouvelle).</para>
+        <para>Si vous sélectionnez une chaîne de texte (dans n’importe quel volet) avant d’ouvrir la fenêtre, le texte sera inséré par défaut dans le champ <guilabel>Rechercher :</guilabel>.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Rechercher et rem&amp;placer...</term>
-
+    <varlistentry id="menus.edit.search.dictionaries">
+      <term id="menus.edit.search.dictionaries.title"><guimenuitem>Rechercher dans les dictionnaires</guimenuitem> <keycombo><keycap>A</keycap><keycap>Maj</keycap><keycap>D</keycap></keycombo>
+	  </term>
       <listitem>
-        <para>Ouvre une nouvelle <link linkend="windows.textreplace">fenêtre de Recherche et remplacement</link>.</para>
-
-        <para>Si vous sélectionnez du texte (dans n'importe quel volet) avant d'appuyer sur <keycombo> <keycap>Ctrl</keycap> <keycap>K</keycap> </keycombo>, le texte sera collé par défaut dans le champ <guilabel>Recherche</guilabel>.</para>
+        <para>Si la préférence <link linkend="dialogs.preferences.dictionary.automatically.search.segment" endterm="dialogs.preferences.dictionary.automatically.search.segment.title"/> est désactivée, cette fonction vous permet de rechercher le mot sélectionné ou l’ensemble des termes du segment dans les dictionnaires.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Rechercher dans les dictionnaires</term>
-
+    <varlistentry id="menus.edit.switch.case">
+      <term id="menus.edit.switch.case.title"><guisubmenu>Basculer la casse en</guisubmenu></term>
       <listitem>
-        <para>Dans le cas où la <link linkend="dialogs.preferences.dictionary">recherche automatique dans les dictionnaires</link> est désactivée, cette fonction permet de rechercher un mot dans les dictionnaires, après l'avoir sélectionné.</para>
-      </listitem>
-    </varlistentry>
+        <para>Change la casse du texte sélectionné dans le segment cible en fonction de l’option sélectionnée, ou fait défiler les options. Si aucun texte n’est sélectionné, OmegaT sélectionne le mot qui commence par le caractère se trouvant immédiatement à la droite du curseur.</para>
 
-    <varlistentry>
-      <term>Basculer la casse en</term>
+		<itemizedlist>
+		  <listitem>
+			<para><guimenuitem>minuscules</guimenuitem></para>
 
+			<para>toutes les lettres en minuscules</para>
+		  </listitem>
+
+		  <listitem>
+			<para><guimenuitem>MAJUSCULES</guimenuitem></para>
+
+			<para>TOUTES LES LETTRES EN MAJUSCULES</para>
+		  </listitem>
+
+		  <listitem>
+			<para><guimenuitem>Casse de Titre</guimenuitem></para>
+
+			<para>Presque toutes les Lettres en Minuscules</para>
+		  </listitem>
+
+		  <listitem>
+			<para><guimenuitem>Casse de phrase</guimenuitem></para>
+			<para>Uniquement la première lettre en majuscule.</para>
+		  </listitem>
+
+		  <listitem>
+			<para><guimenuitem>Parcourir</guimenuitem> <keycombo><keycap>Maj</keycap><keycap>F3</keycap></keycombo></para>
+			<warning>
+			  <para>Sur macOS, la touche <keycombo><keycap>F3</keycap></keycombo> active le mode <emphasis role="bold">remplacement</emphasis> dans l’éditeur. Voir <link linkend="panes.editor.overwriting" endterm="panes.editor.overwriting.title"/> pour en savoir plus.</para>
+			</warning>
+		  </listitem>
+		</itemizedlist>
+	  </listitem>
+	</varlistentry>
+
+	<varlistentry id="menus.edit.select.match">
+      <term id="menus.edit.select.match.title"><guisubmenu>Choisir une correspondance</guisubmenu></term>
       <listitem>
-        <para>Change la casse du texte sélectionné dans le segment cible en fonction de l'option sélectionnée (Minuscule, Majuscule, 1ère lettre des mots en majuscule ou Phrase). Utilisez <keycombo> <keycap>Maj+</keycap><keycap>F3</keycap> </keycombo> pour passer d'une option à l'autre. Si aucun texte n'est sélectionné, <application>OmegaT</application> sélectionne le mot qui contient la lettre se trouvant immédiatement à la droite du curseur.</para>
+		<para>Sélectionne la correspondance partielle précédente, suivante, ou <varname>n</varname>ième affichée dans la fenêtre des correspondances pour vous permettre d’effectuer un remplacement ou une insertion dans le segment.</para>
+		
+		<itemizedlist>
+		  <listitem>
+			<para><guimenuitem>Choisir la correspondance précédente</guimenuitem> <keycombo><keycap>A</keycap><keycap>↑</keycap></keycombo></para>
+		  </listitem>
+
+		  <listitem>
+			<para><guimenuitem>Choisir la correspondance suivante</guimenuitem> <keycombo><keycap>A</keycap><keycap>↓</keycap></keycombo></para>
+		  </listitem>
+
+		  <listitem>
+			<para><guimenuitem>Choisir la correspondance #1</guimenuitem> <keycombo><keycap>C</keycap><keycap>1</keycap></keycombo></para>
+		  </listitem>
+		  
+		  <listitem>
+			<para><guimenuitem>Choisir la correspondance #2</guimenuitem> <keycombo><keycap>C</keycap><keycap>2</keycap></keycombo></para>
+		  </listitem>
+		  <listitem>
+			<para><guimenuitem>Choisir la correspondance #3</guimenuitem> <keycombo><keycap>C</keycap><keycap>3</keycap></keycombo></para>
+		  </listitem>
+
+		  <listitem>
+			<para><guimenuitem>Choisir la correspondance #4</guimenuitem> <keycombo><keycap>C</keycap><keycap>4</keycap></keycombo></para>
+		  </listitem>
+
+		  <listitem>
+			<para><guimenuitem>Choisir la correspondance #5</guimenuitem> <keycombo><keycap>C</keycap><keycap>5</keycap></keycombo></para>
+		  </listitem>
+		</itemizedlist>
       </listitem>
-    </varlistentry>
+	</varlistentry>
 
-    <varlistentry>
-      <term>Choisir la correspondance</term>
+	<varlistentry id="menus.edit.insert.unicode.control.character">
+      <term id="menus.edit.insert.unicode.control.character.title"><guisubmenu>Insérer un caractère de contrôle Unicode</guisubmenu></term>
+	  <listitem>
+		<para>Insère le caractère de contrôle directionnel Unicode sélectionné. Voir <ulink url="https://www.unicode.org/reports/tr9/#Directional_Formatting_Characters">Algorithme bidirectionnel Unicode</ulink> pour en savoir plus.</para>
 
+		<itemizedlist>
+		  <listitem>
+			<para><guimenuitem>Marque de gauche à droite (LRM U+200E)</guimenuitem></para>
+		  </listitem>
+		
+		  <listitem>
+			<para><guimenuitem>Marque de droite à gauche (RLM U+200F)</guimenuitem></para>
+		  </listitem>
+		  
+		  <listitem>
+			<para><guimenuitem>Début de l’imbrication de gauche à droite (LRE U+202A)</guimenuitem></para>
+		  </listitem>
+		  
+		  <listitem>
+			<para><guimenuitem>Début de l’imbrication de droite à gauche (RLE U+202B)</guimenuitem></para>
+		  </listitem>
+		  
+		  <listitem>
+			<para><guimenuitem>Fin de formatage directionnel (PDF U+202C)</guimenuitem></para>
+		  </listitem>
+		</itemizedlist>
+		<para>Utilisez <link linkend="menus.view" endterm="menus.view.title"/><link linkend="menus.view.mark.bidirectional.algorithm.control.character" endterm="menus.view.mark.bidirectional.algorithm.control.character.title"/> pour afficher les caractères afin de faciliter la manipulation. Voir <link linkend="app.bidi" endterm="app.bidi.title"/> pour en savoir plus.</para>
+
+      </listitem>
+	</varlistentry>
+
+	<varlistentry id="menus.edit.use.as.default.translation">
+      <term id="menus.edit.use.as.default.translation.title"><guimenuitem>Utiliser comme traduction par défaut</guimenuitem></term>
       <listitem>
-        <para>Sélectionne la correspondance précédente, suivante ou nième affichée dans la fenêtre des Correspondances pour vous permettre d'effectuer un remplacement ou une insertion dans le segment.</para>
+		<para>S’il existe plusieurs traductions possibles pour le segment actuel, vous pouvez définir la traduction choisie comme étant la traduction par défaut. S’il n’y a qu’une traduction possible, l’entrée sera grisée.</para>
       </listitem>
-    </varlistentry>
+	</varlistentry>
 
-    <varlistentry>
-      <term>Utiliser comme traduction par défaut</term>
-
+	<varlistentry id="menus.edit.create.alternative.translation">
+      <term id="menus.edit.create.alternative.translation.title"><guimenuitem>Créer une traduction alternative</guimenuitem></term>
       <listitem>
-        <para>S'il existe plusieurs traductions possibles pour le segment en cours, vous pouvez définir la traduction choisie comme étant la traduction par défaut. S'il n'y a qu'une traduction possible, l'entrée sera grisée.</para>
+		<para>Deux segments parfaitement identiques peuvent, en fonction du contexte, avoir deux traductions différentes. Si la traduction actuelle ne convient pas, sélectionnez cet élément de menu et entrez la traduction alternative.</para>
       </listitem>
-    </varlistentry>
+	</varlistentry>
 
-    <varlistentry>
-      <term>Créer une traduction alternative</term>
-
+	<varlistentry id="menus.edit.remove.translation">
+      <term id="menus.edit.remove.translation.title"><guimenuitem>Supprimer la traduction</guimenuitem> <keycombo><keycap>C</keycap><keycap>Maj</keycap><keycap>X</keycap></keycombo></term>
       <listitem>
-        <para>Deux segments parfaitement identiques peuvent, en fonction du contexte, avoir deux traductions différentes. Sélectionnez cet élément de menu si la traduction actuelle ne s'applique pas et saisissez la nouvelle traduction</para>
+		<para>Supprime la traduction actuelle et définit le segment comme non traduit.</para>
       </listitem>
-    </varlistentry>
+	</varlistentry>
 
-    <varlistentry>
-      <term>Supprimer la traduction</term>
-
+	<varlistentry id="menus.edit.set.empty.translation">
+      <term id="menus.edit.set.empty.translation.title"><guimenuitem>Enregistrer une traduction vide</guimenuitem></term>
       <listitem>
-        <para>Supprime la traduction et définit le segment comme non traduit.</para>
+		<para>Définit la traduction comme vide. Le document cible ne contiendra rien pour ce segment, tandis que l’Éditeur le marquera avec l’identifiant <literal>&lt;VIDE&gt;</literal>.</para>
       </listitem>
-    </varlistentry>
+	</varlistentry>
 
-    <varlistentry>
-      <term>Enregistrer une traduction vide</term>
-
+	<varlistentry id="menus.edit.register.identical.translation">
+      <term id="menus.edit.register.identical.translation.title"><guimenuitem>Enregistrer une traduction identique à la source</guimenuitem> <keycombo><keycap>C</keycap><keycap>Maj</keycap><keycap>S</keycap></keycombo>
+	  </term>
       <listitem>
-        <para>Définit la traduction comme étant vide. Dans le document cible, rien n'apparaîtra pour ce segment. Dans l'Éditeur, la traduction est affichée sous la forme &lt;VIDE&gt;</para>
+		<para>Utilisez cette option pour enregistrer une traduction identique à la source, même si la préférence <link linkend="dialogs.preferences.editor.allow.translation.to.be.equal.to.source" endterm="dialogs.preferences.editor.allow.translation.to.be.equal.to.source.title"/> n’est pas activée.</para>
       </listitem>
-    </varlistentry>
-
-    <varlistentry>
-      <term>Enregistrer une traduction identique à la source</term>
-
-      <listitem>
-        <para>Utilisez cette commande pour enregistrer une traduction identique à la source, même si <link linkend="dialogs.preferences.editor.allowtranslationtobeequaltosource"><guilabel>Autoriser une traduction identique à la source</guilabel></link> n'est pas cochée.</para>
-      </listitem>
-    </varlistentry>
+	</varlistentry>
   </variablelist>
 </section>

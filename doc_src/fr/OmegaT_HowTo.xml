@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.how.to">
+  <title id="chapter.how.to.title">Guides pratiques</title>
+
+  <xi:include href="HowTo_RestoreYourData.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+  <xi:include href="HowTo_UseTM.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+  <xi:include href="HowTo_TranslateOtherFiles.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+  <xi:include href="HowTo_SetUpTeamProject.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+  <xi:include href="HowTo_UseTeamProject.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+  <xi:include href="HowTo_Install.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+  <xi:include href="HowTo_Run.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+  
+</chapter>

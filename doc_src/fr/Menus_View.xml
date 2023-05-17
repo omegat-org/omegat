@@ -1,103 +1,131 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="menus.view">
-  <title>Affichage</title>
+  <title id="menus.view.title"><guimenu>Affichage</guimenu></title>
+
+  <para>Ce menu vous permet de sélectionner les informations affichées par OmegaT.</para>
+
+  <para>Toutes les couleurs indiquées dans les descriptions peuvent être modifiées dans les préférences de <link linkend="dialogs.preferences.colours" endterm="dialogs.preferences.colours.title"/>.</para>
 
   <variablelist>
-    <varlistentry>
-      <term>Marquer les segments traduits</term>
-
+    <varlistentry id="menus.view.mark.translated.segments">
+      <term id="menus.view.mark.translated.segments.title"><guimenuitem>Surligner les segments traduits</guimenuitem></term>
       <listitem>
-        <para>S'il est coché, les segments déjà traduits seront surlignés en jaune.</para>
+        <para>Surligne les segments déjà traduits en jaune.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Marquer les segments non traduits</term>
-
+    <varlistentry id="menus.view.mark.untranslated.segments">
+      <term id="menus.view.mark.untranslated.segments.title"><guimenuitem>Surligner les segments non traduits</guimenuitem></term>
       <listitem>
-        <para>S'il est coché, les segments non traduits seront surlignés en violet.</para>
+        <para>Surligne les segments non traduits en violet.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Marquer les délimitations de &amp;paragraphes</term>
-
+    <varlistentry id="menus.view.mark.paragraph.delimitations">
+      <term id="menus.view.mark.paragraph.delimitations.title"><guimenuitem>Afficher les délimitations de paragraphes</guimenuitem></term>
       <listitem>
-        <para>Si coché, les différents paragraphes du document source sont séparés visuellement.</para>
+        <para>Les différents paragraphes du document source sont séparés visuellement. Vous pouvez modifier la forme de la délimitation de paragraphe dans le paramètre <link linkend="dialogs.preferences.editor.paragraph.delimitation.format" endterm="dialogs.preferences.editor.paragraph.delimitation.format.title"/>.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Afficher les segments sources</term>
-
+    <varlistentry id="menus.view.display.source.segments">
+      <term id="menus.view.display.source.segments.title"><guimenuitem>Afficher les segments sources</guimenuitem></term>
       <listitem>
-        <para>S'il est coché, les segments source seront affichés et surlignés en vert. Par défaut, les segments source ne sont pas affichés.</para>
+        <para>Affiche tous les segments source et les surligne en vert. Par défaut, seul le segment source du segment actuel est affiché.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Marquer les segments non uniques</term>
-
+    <varlistentry id="menus.view.mark.non.unique.segments">
+      <term id="menus.view.mark.non.unique.segments.title"><guimenuitem>Surligner les segments non uniques</guimenuitem></term>
       <listitem>
-        <para>S'il est coché, les segments non uniques seront écrits en gris clair.</para>
+        <para>Surligne les segments non uniques en gris pâle.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Marquer les segments annotés</term>
-
+    <varlistentry id="menus.view.mark.segments.with.notes">
+      <term id="menus.view.mark.segments.with.notes.title"><guimenuitem>Surligner les segments avec notes</guimenuitem></term>
       <listitem>
-        <para>S'il est coché, les segments annotés seront surlignés en cyan. Ce marquage a la priorité sur <guimenuitem>Marquer les segments traduits</guimenuitem> et <guimenuitem>Marquer les segments non traduits</guimenuitem>.</para>
+        <para>Surligne les segments qui contiennent une note en cyan. Cette fonction à la priorité sur les fonctions <guimenuitem>Surligner les segments traduits</guimenuitem> et <guimenuitem>Surligner les segments non traduits</guimenuitem>.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Marquer les espaces insécables</term>
-
+    <varlistentry id="menus.view.mark.non.breakable.space">
+      <term id="menus.view.mark.non.breakable.space.title"><guimenuitem>Afficher les espaces insécables</guimenuitem></term>
       <listitem>
-        <para>S'il est coché, les espaces insécables seront signalés par un fond gris.</para>
+        <para>Affiche les espaces insécables avec un fond gris.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Marquer les caractères d'espacement</term>
-
+    <varlistentry id="menus.view.mark.white.space">
+      <term id="menus.view.mark.white.space.title"><guimenuitem>Afficher les caractères d’espacement</guimenuitem></term>
       <listitem>
-        <para>S'il est coché, les caractères d'espacement seront affichés avec un petit point.</para>
+        <para>Affiche les caractères d’espacement avec un petit point.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Marquer les caractères de contrôle de bidirectionnalité</term>
-
+    <varlistentry id="menus.view.mark.bidirectional.algorithm.control.character">
+      <term id="menus.view.mark.bidirectional.algorithm.control.character.title"><guimenuitem>Afficher les caractères de contrôle Bidi</guimenuitem></term>
       <listitem>
-        <para>Cette option affiche les <ulink url="http://www.w3.org/International/questions/qa-bidi-controls">caractères de contrôle de bidirectionnalité</ulink></para>
+        <para>Affiche les caractères de formatage directionnel Unicode. Voir <ulink url="https://www.unicode.org/reports/tr9/">Algorithme bidirectionnel Unicode</ulink> pour en savoir plus.</para>
+		<para>Utilisez la fonction <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.insert.unicode.control.character" endterm="menus.edit.insert.unicode.control.character.title"/> pour insérer une sélection de caractères directement depuis l’interface d’OmegaT. Voir <link linkend="app.bidi" endterm="app.bidi.title"/> pour en savoir plus.</para>
+	  </listitem>
+    </varlistentry>
+
+    <varlistentry id="menus.view.mark.auto.populated.segments">
+      <term id="menus.view.mark.auto.populated.segments.title"><guimenuitem>Surligner les segments auto-traduits</guimenuitem></term>
+      <listitem>
+        <para>Surligne les segments traduits automatiquement en différentes couleurs.</para>
+
+		<para>Voir le paramètre <link linkend="dialogs.preferences.editor.save.auto-populated.status" endterm="dialogs.preferences.editor.save.auto-populated.status.title"/> pour en savoir plus.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Marquer les segments traduits à partir du dossier auto</term>
-
+    <varlistentry id="menus.view.mark.glossary.matches">
+      <term id="menus.view.mark.glossary.matches.title"><guimenuitem>Souligner les correspondances de glossaire</guimenuitem></term>
       <listitem>
-        <para>Si cochée, l'arrière-plan de tous les segments où le segment cible a été rempli automatiquement (à partir des TMX placées dans <filename>/tm/auto</filename>, par exemple) sont affichés en couleur. Les couleurs sont affichées si l'option <link linkend="dialogs.preferences.editor.saveautopopulatedstatus"><guimenuitem>Enregistrer l'état des traductions issues du dossier auto</guimenuitem></link> est cochée. Les traductions habituelles insérées depuis le dossier auto sont affichées en orange. D'autres traductions, identifiées spécifiquement dans la TMX, peuvent être affichées avec différentes couleurs. Pour les détails techniques, consultez la <ulink url="http://sourceforge.net/p/omegat/feature-requests/963/">demande d'amélioration</ulink>.</para>
+        <para>Souligne les termes source qui ont une correspondance dans les glossaires. Passer le curseur de la souris sur un terme souligné permet d’afficher le terme cible correspondant. Faire un clic-droit sur un terme souligné affiche le terme cible correspondant, qui peut être sélectionné et inséré a la position du curseur dans le texte cible.</para>
+	  </listitem>
+    </varlistentry>
+
+    <varlistentry id="menus.view.mark.language.checker">
+      <term id="menus.view.mark.language.checker.title"><guimenuitem>Souligner les problèmes du vérificateur linguistique.</guimenuitem></term>
+      <listitem>
+        <para>Souligne les erreurs trouvées par LanguageTool dans les segments cibles. Voir le paramètre <link linkend="dialog.preferences.languagetool.plugin" endterm="dialog.preferences.languagetool.plugin.title"/> pour en savoir plus.</para>
+	  </listitem>
+    </varlistentry>
+	
+    <varlistentry id="menus.view.aggressive.font.fallback">
+      <term id="menus.view.aggressive.font.fallback.title"><guimenuitem>Utilisation intensive des polices de repli</guimenuitem></term>
+      <listitem>
+        <para>Utilisez cette fonction si OmegaT n’affiche pas correctement certains glyphes (même si les polices contenant les glyphes en question sont installées dans votre machine).</para>
+
+		<note>
+		  <para>Sur Windows, ce mécanisme manuel de polices de repli peut interférer avec la police de repli standard, provoquant ainsi une substitution de polices non souhaitée. Pour cette raison, il est désactivé par défaut.</para>
+		</note>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Utilisation intensive des polices de repli</term>
-
+    <varlistentry id="menus.view.modification.info">
+      <term id="menus.view.modification.info.title"><guisubmenu>Afficher les informations de modification</guisubmenu></term>
       <listitem>
-        <para>Cochez cette option si <application>OmegaT</application> n'affiche par certains glyphes correctement (même si les polices contenant les glyphes appropriés sont installées sur votre machine). Note : sous Windows, ce mécanisme manuel de polices de repli peut interférer avec la méthode de repli standard, provoquant ainsi une substitution de polices non souhaitée. Pour cette raison, il est désactivé par défaut.</para>
+        <para>Affiche l’heure et l’auteur de la dernière modification apportée à un segment.</para>
+		
+		<para>Par défaut, la fonction est réglée sur <guimenuitem>Segment actuel</guimenuitem> mais elle peut aussi être réglée sur <guimenuitem>Tous les segments</guimenuitem> ou <guimenuitem>Aucun</guimenuitem>.</para>
+
+		<para>Vous pouvez modifier les informations affichées. Voir le paramètre <link linkend="dialog.preferences.view.use.custom.templates.for.modification.info" endterm="dialog.preferences.view.use.custom.templates.for.modification.info.title"/> pour en savoir plus.</para>
       </listitem>
     </varlistentry>
-
-    <varlistentry>
-      <term>Informations de modification</term>
-
+	
+	<varlistentry id="menus.view.restore.main.window">
+      <term id="menus.view.restore.main.window.title"><guimenuitem>Réinitialiser la fenêtre d’OmegaT</guimenuitem></term>
       <listitem>
-        <para>Choisir l'option <guimenuitem>Afficher pour le segment actuel</guimenuitem> permettra d'afficher la date et l'auteur de la dernière modification subie par le segment en cours. Choisir l'option <guimenuitem>Afficher pour tous les segments</guimenuitem> permettra d'afficher ces informations pour tous les segments simultanément. Choisir <guimenuitem>Ne rien afficher</guimenuitem> désactive cette option.</para>
-      </listitem>
+        <para>Rétablit la disposition par défaut des fenêtres d’OmegaT.</para>
+
+		<note>
+		  <para>Utilisez cette fonction si vous rencontrez des problèmes lors de la réorganisation de la disposition des fenêtres.</para>
+		</note>
+	  </listitem>
     </varlistentry>
   </variablelist>
 </section>

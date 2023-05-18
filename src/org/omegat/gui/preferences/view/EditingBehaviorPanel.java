@@ -9,7 +9,7 @@
                2012 Didier Briel
                2016 Aaron Madlon-Kay
                2019 Briac Pilpre
-	       2022 Hiroshi Miura
+               2022 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 

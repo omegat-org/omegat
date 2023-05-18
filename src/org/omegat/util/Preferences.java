@@ -697,7 +697,7 @@ public final class Preferences {
 
         File srxDir = new File(StaticUtils.getConfigDir());
         try {
-            SRX.saveToSrx(srx, srxDir);	// save to segmentation.srx in the given directory
+            SRX.saveToSrx(srx, srxDir); // save to segmentation.srx in the given directory
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -741,11 +741,14 @@ public final class Preferences {
      * <li>user filter settings
      * <li>user segmentation settings
      * </ul>
-     * from existing files in {@link StaticUtils#getConfigDir()} (and others for general prefs; see
-     * {@link #getPreferencesFile()}) and set things up to create them via {@link #save()} if they don't yet exist.
+     * from existing files in {@link StaticUtils#getConfigDir()} (and others
+     * for general prefs; see {@link #getPreferencesFile()}) and set things up
+     * to create them via {@link #save()} if they don't yet exist.
      * <p>
-     * When the preferences system is required but actual user preferences shouldn't be loaded or altered (testing
-     * scenarios), use {@link TestPreferencesInitializer} methods or be sure to set the config dir with
+     * When the preferences system is required but actual user preferences
+     * shouldn't be loaded or altered (testing scenarios),
+     * use {@link org.omegat.util.TestPreferencesInitializer} methods or be sure
+     * to set the config dir with
      * {@link RuntimePreferences#setConfigDir(String)} before calling this method.
      */
     public static synchronized void init() {

@@ -28,5 +28,5 @@ package org.omegat.gui.exttrans;
 import java.util.Map;
 
 public interface IMTGlossarySupplier {
-	Map<String, String> get();
+    Map<String, String> get();
 }

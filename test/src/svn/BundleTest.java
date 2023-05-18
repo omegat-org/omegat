@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2015 Aaron Madlon-Kay
+               2023 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -65,8 +66,10 @@ import org.omegat.util.OStrings;
 public class BundleTest {
 
     /**
-     * Ensure that all UI string bundles have either US-ASCII encoding or ISO-8859-1 encoding. The spec requires the
-     * latter, but ISO-8859-1 is a superset of ASCII so ASCII is also acceptable (and is widely used in practice).
+     * Ensure that all UI string bundles have either US-ASCII encoding or
+     * ISO-8859-1 encoding. The spec requires the latter, but ISO-8859-1 is a
+     * superset of ASCII, so ASCII is also acceptable (and is widely used in
+     * practice).
      *
      * @see <a href=
      *      "https://docs.oracle.com/javase/8/docs/api/java/util/PropertyResourceBundle.html">PropertyResourceBundle</a>
@@ -98,10 +101,10 @@ public class BundleTest {
 
     @Test
     public void testBundleLoading() {
-        // We must set the default locale to English first because we provide our
-        // English bundle as the empty-locale default. If we don't do so, the
-        // English bundle will never be tested in the case that the "default default"
-        // is a language we provide a bundle for.
+        // We must set the default locale to English first because we provide
+        // our English bundle as the empty-locale default. If we don't do so,
+        // the English bundle will never be tested in the case that the
+        // "default" is a language we provide a bundle for.
         Locale.setDefault(Locale.ENGLISH);
 
         for (Language lang : Language.getLanguages()) {
@@ -186,15 +189,17 @@ public class BundleTest {
         Files.write(p, Collections.singletonList(badChars), StandardCharsets.UTF_8, StandardOpenOption.WRITE);
         CharsetDecoder decoder = StandardCharsets.UTF_8.newDecoder();
         try {
-            checkFileContent(p, decoder, (path, chars) -> {});
+            checkFileContent(p, decoder, (path, chars) -> {
+            });
         } catch (Exception e) {
             throw new Exception(e);
         }
     }
 
     /**
-     * Process the text content of all .java files under /src.
-     * Also check DIRECTIONALITY_LEFT_TO_RIGHT_OVERRIDE for security reason.
+     * Process the text content of all .java files under /src. Also check
+     * DIRECTIONALITY_LEFT_TO_RIGHT_OVERRIDE for security reasons.
+     * And check invisible space character.
      *
      * @param consumer
      *            A function that accepts the file path and content
@@ -222,15 +227,20 @@ public class BundleTest {
     }
 
     public static void checkFileContent(Path p, CharsetDecoder decoder,
-                                        BiConsumer<Path, CharSequence> consumer) throws Exception {
+            BiConsumer<Path, CharSequence> consumer) throws Exception {
         try {
             byte[] bytes = Files.readAllBytes(p);
             CharBuffer chars = decoder.decode(ByteBuffer.wrap(bytes));
-            for (int i =0; i < chars.limit(); i++) {
+            for (int i = 0; i < chars.limit(); i++) {
                 int c = chars.charAt(i);
                 if (c == 0x202e) {
                     // found Right-to-left-override: unicode 202e
                     throw new Exception("File contains Right-to-Left-Override (RLTO) character: " + p);
+                }
+                if (c == 0x0009 || c == 0x00a0 || c == 0x00ad || c == 0x034f || c == 0x061c
+                        || c >= 0x2000 && c < 0x200b || c == 0x2028 || c >= 0x205f && c <= 0x206f
+                        || c == 0x2800 || c == 0x3000 || c == 0x3164) {
+                    throw new Exception("File contains invisible character: " + p);
                 }
             }
             chars.clear();

@@ -1,6 +1,7 @@
 Lev Abashkin
 Zoltan Bartko
 Volker Berlin
+Vincent Bidaux
 Stéphane Bonhomme
 Didier Briel
 Kim Bruning
@@ -41,7 +42,10 @@ Nick Pizzigati
 Tiago Saboga
 Andrzej Sawuła
 Benjamin Siband
+Vito Smolej
+Kerry Swatridge
 Yu Tang
+Philippe Tourigny
 Rashid Umarov
 Kevin Brubeck Unhammer
 Antonio Vilei

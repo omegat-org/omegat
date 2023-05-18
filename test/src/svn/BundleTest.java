@@ -39,6 +39,8 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.util.Collections;
 import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.Properties;
@@ -177,8 +179,22 @@ public class BundleTest {
         }
     }
 
+    @Test(expected = Exception.class)
+    public void testDetectRTLO() throws Exception {
+        String badChars = "photo_high_re\u202Egnp.js";
+        Path p = Files.createTempFile("omegat", ".txt");
+        Files.write(p, Collections.singletonList(badChars), StandardCharsets.UTF_8, StandardOpenOption.WRITE);
+        CharsetDecoder decoder = StandardCharsets.UTF_8.newDecoder();
+        try {
+            checkFileContent(p, decoder, (path, chars) -> {});
+        } catch (Exception e) {
+            throw new Exception(e);
+        }
+    }
+
     /**
      * Process the text content of all .java files under /src.
+     * Also check DIRECTIONALITY_LEFT_TO_RIGHT_OVERRIDE for security reason.
      *
      * @param consumer
      *            A function that accepts the file path and content
@@ -196,17 +212,33 @@ public class BundleTest {
                     (path, attrs) -> attrs.isRegularFile() && path.toString().endsWith(".java"))) {
                 files.forEach(p -> {
                     try {
-                        byte[] bytes = Files.readAllBytes(p);
-                        CharBuffer chars = decoder.decode(ByteBuffer.wrap(bytes));
-                        consumer.accept(p, chars);
-                    } catch (MalformedInputException ex) {
-                        throw new RuntimeException("File contains a bad character sequence for UTF-8: " + p,
-                                ex);
-                    } catch (IOException ex) {
-                        throw new RuntimeException(p.toString(), ex);
+                        checkFileContent(p, decoder, consumer);
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
                     }
                 });
             }
+        }
+    }
+
+    public static void checkFileContent(Path p, CharsetDecoder decoder,
+                                        BiConsumer<Path, CharSequence> consumer) throws Exception {
+        try {
+            byte[] bytes = Files.readAllBytes(p);
+            CharBuffer chars = decoder.decode(ByteBuffer.wrap(bytes));
+            for (int i =0; i < chars.limit(); i++) {
+                int c = chars.charAt(i);
+                if (c == 0x202e) {
+                    // found Right-to-left-override: unicode 202e
+                    throw new Exception("File contains Right-to-Left-Override (RLTO) character: " + p);
+                }
+            }
+            chars.clear();
+            consumer.accept(p, chars);
+        } catch (MalformedInputException ex) {
+            throw new Exception("File contains a bad character sequence for UTF-8: " + p, ex);
+        } catch (IOException ex) {
+            throw new Exception(p.toString(), ex);
         }
     }
 }

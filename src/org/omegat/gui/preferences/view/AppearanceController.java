@@ -85,11 +85,20 @@ public class AppearanceController extends BasePreferencesController {
         // TODO: Properly abstract the restore function
         panel.restoreWindowButton
                 .addActionListener(e -> MainWindowUI.resetDesktopLayout((MainWindow) Core.getMainWindow()));
-        panel.newUICheckBox.addActionListener(actionEvent -> {
+        /*panel.newUICheckBox.addActionListener(actionEvent -> {
             setRestartRequired(isModified());
-        });
+        });*/
     }
 
+    private boolean isModified() {
+        Object selected = panel.cbThemeSelect.getSelectedItem();
+        if (selected != null) {
+            return !UIManager.getLookAndFeel().getClass().getName().equals(selected.toString());
+        }
+        return false;
+    }
+
+/*
     private boolean isModified() {
         boolean changeNewUI = panel.newUICheckBox.isSelected()
                 ^ Preferences.isPreference(Preferences.APPLY_BURGER_SELECTOR_UI);
@@ -99,11 +108,12 @@ public class AppearanceController extends BasePreferencesController {
         }
         return !UIManager.getLookAndFeel().getClass().getName().equals(selected.toString()) || changeNewUI;
     }
+*/
 
     @Override
     protected void initFromPrefs() {
         panel.cbThemeSelect.setSelectedItem(UIManager.getLookAndFeel().getClass().getName());
-        panel.newUICheckBox.setSelected(Preferences.isPreference(Preferences.APPLY_BURGER_SELECTOR_UI));
+        // panel.newUICheckBox.setSelected(Preferences.isPreference(Preferences.APPLY_BURGER_SELECTOR_UI));
         previousFileListDialog = Preferences.isPreferenceDefault(Preferences.PROJECT_FILES_SHOW_ON_LOAD,
                 true);
     }
@@ -111,18 +121,19 @@ public class AppearanceController extends BasePreferencesController {
     @Override
     public void restoreDefaults() {
         panel.cbThemeSelect.setSelectedItem(Preferences.THEME_CLASS_NAME_DEFAULT);
-        panel.newUICheckBox.setSelected(false);
+        // panel.newUICheckBox.setSelected(false);
         Preferences.setPreference(Preferences.PROJECT_FILES_SHOW_ON_LOAD, previousFileListDialog);
     }
 
     @Override
     public void persist() {
         Preferences.setPreference(Preferences.THEME_CLASS_NAME, panel.cbThemeSelect.getSelectedItem().toString());
+/*
         Preferences.setPreference(Preferences.APPLY_BURGER_SELECTOR_UI, panel.newUICheckBox.isSelected());
         if (panel.newUICheckBox.isSelected()) {
             Preferences.setPreference(Preferences.PROJECT_FILES_SHOW_ON_LOAD, false);
         } else {
             Preferences.setPreference(Preferences.PROJECT_FILES_SHOW_ON_LOAD, previousFileListDialog);
-        }
+        }*/
     }
 }

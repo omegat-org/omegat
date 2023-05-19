@@ -1,33 +1,221 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="windows.textreplace">
-  <title>Remplacement de texte</title>
+<section id="windows.text.replace">
+  <title id="windows.text.replace.title"><guilabel>Remplacement de texte</guilabel></title>
 
-  <para>Ouvrez la fenêtre de Recherche et remplacement avec <keycombo> <keycap>Ctrl</keycap> <keycap>K</keycap> </keycombo> et entrez le mot ou l'expression que vous voulez remplacer dans la case <emphasis>Rechercher</emphasis>.</para>
+  <para>Utilisez <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.search.and.replace" endterm="menus.edit.search.and.replace.title"/> pour ouvrir une nouvelle fenêtre de remplacement de texte et saisissez le mot ou la phrase que vous souhaitez consulter dans le champ de recherche.</para>
+  
+  <para>Vous pouvez également sélectionner un mot ou une phrase dans le volet <link linkend="panes.editor" endterm="panes.editor.title"/>, <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/> ou <link linkend="panes.glossary" endterm="panes.glossary.title"/> et utiliser <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.search.and.replace" endterm="menus.edit.search.and.replace.title"/>. La sélection sera automatiquement entrée dans le champ de recherche.</para>
 
-  <para>Cliquez ensuite sur le bouton <emphasis>Rechercher</emphasis> pour afficher toutes les occurrences correspondantes.</para>
+  <para>Vous pouvez ouvrir plusieurs fenêtres de remplacement de texte en même temps.</para>
 
-  <para>Entrez le nouveau mot ou groupe de mots (les expressions régulières ne sont pas prises en charge) dans la case <emphasis>Remplacer par</emphasis>, puis cliquez sur l'une des options suivantes :<itemizedlist>
-      <listitem>
-        <para><emphasis role="bold">Remplacer tout :</emphasis> effectue le remplacement de toutes les occurrences (après l'affichage d'une fenêtre de confirmation où le nombre d'occurrences est affiché).</para>
-      </listitem>
-    </itemizedlist><itemizedlist>
-      <listitem>
-        <para><emphasis role="bold">Remplacer :</emphasis> effectue les remplacements les uns après les autres, à l'aide de boutons dans l'<emphasis role="bold">en-tête de l'Éditeur</emphasis>. Cliquez sur <emphasis>Remplacer suivant</emphasis> ou <emphasis>Ignorer</emphasis>, puis mettez un terme à la session de remplacement avec <emphasis>Terminer</emphasis>.</para>
-      </listitem>
-    </itemizedlist><itemizedlist>
-      <listitem>
-        <para><emphasis role="bold">Fermer :</emphasis> ferme la fenêtre sans aucune modification.</para>
-      </listitem>
-    </itemizedlist></para>
+  <para>Cliquez sur les flèches du menu déroulant des champs <guilabel>Rechercher :</guilabel> ou <guilabel>Remplacer par :</guilabel> pour accéder aux dix dernières saisies.</para>
 
-  <section>
-    <title>Options de recherche</title>
+  <para>Saisissez la chaîne de caractères que vous souhaitez insérer pour remplacer votre terme de recherche dans le champ <guilabel>Remplacer par :</guilabel> et cliquez sur <guibutton>Recherche</guibutton>, ou appuyez sur <keycap>Entrée</keycap> si le curseur se trouve toujours dans le champ.</para>
 
-    <para>Les options de recherche sont similaires à celles affichées dans la <link linkend="windows.textsearch">fenêtre de Recherche</link>.</para>
+  <para>Les résultats de la recherche sont affichés en caractères bleus gras et les chaînes modifiées sont affichées en orange pour indiquer le résultat du remplacement.</para>
 
-    <para>Exceptée celle-ci : cochez<emphasis role="bold">Non traduits</emphasis> pour effectuer une recherche et remplacement également sur les segments qui ne sont pas encore traduits.</para>
 
-    <para>Pour rendre cela possible (bien que la recherche et remplacement ne fonctionne qu'en mémoire), OmegaT copiera le segment source dans le segment cible avant que l'opération de remplacement ne survienne. Si aucun remplacement n'est effectué dans un segment donné, le segment cible sera « vidé », c'est-à-dire qu'il restera non traduit.</para>
+  <example id="replace.with.allemand">
+	<title id="replace.with.allemand.title">Remplacer un terme</title>
+	<para>
+	  <programlisting>多和田葉子.UTF8
+-- 148&gt; | language = [[日本語]]・[[ドイツ語]]
+&lt;- | language = [[Japonais]]・[[<token>Alllemand</token>]]
+-&gt; | language = [[Japonais]]・[[<token>Allemand</token>]]
+---------</programlisting></para>
+  </example>
+  
+  <note>
+	<para>Ici, aucun remplacement n’a encore été effectué.</para>
+  </note>
+
+  <para>Cliquez sur l’une des options suivantes :</para>
+
+  <itemizedlist>
+    <listitem>
+      <para><guibutton>Remplacer tout</guibutton> : remplace chaque occurrence (après l’affichage d’une fenêtre de confirmation indiquant le nombre d’occurrences).</para>
+    </listitem>
+
+    <listitem>
+        <para><guibutton>Remplacer</guibutton> filtre les entrées dans l’éditeur et surligne les parties qui seront remplacées.</para>
+		<para>Cliquez sur le bouton <guibutton>Remplacer suivant</guibutton> ou <guibutton>Ignorer</guibutton>, puis cliquez sur le bouton <guibutton>Terminer</guibutton> pour finir l’opération de remplacement.</para>
+    </listitem>
+  </itemizedlist>
+
+  <itemizedlist>
+    <listitem>
+      <para><guibutton>Fermer</guibutton> : fermer la fenêtre sans apporter de modifications.</para>
+    </listitem>
+  </itemizedlist>
+
+  <para>La fenêtre de remplacement de texte dispose de ses propres menus :</para>
+ 
+  <itemizedlist>
+    <listitem>
+      <para><guimenu>Fichier</guimenu> &gt; <guimenuitem>Rechercher la sélection</guimenuitem> (<keycombo><keycap>C</keycap><keycap>F</keycap></keycombo>) : la sélection actuelle est insérée dans le champ de recherche.</para>
+    </listitem>
+
+    <listitem>
+      <para><guimenu>Fichier</guimenu> &gt; <guimenuitem>Fermer</guimenuitem> (<keycombo><keycap>C</keycap><keycap>W</keycap></keycombo>) : ferme la fenêtre de recherche.</para>
+    </listitem>
+
+    <listitem>
+      <para><guimenu>Édition</guimenu> &gt; <guimenuitem>Insérer le texte source</guimenuitem> (<keycombo><keycap>C</keycap><keycap>Maj</keycap><keycap>I</keycap></keycombo>) : insère le contenu du segment source actuel.</para>
+    </listitem>
+
+    <listitem>
+      <para><guimenu>Édition</guimenu> &gt; <guimenuitem>Remplacer par la source</guimenuitem> (<keycombo><keycap>C</keycap><keycap>Maj</keycap><keycap>R</keycap></keycombo>) : remplace le contenu du champ de recherche par celui du segment source actuel.</para>
+    </listitem>
+
+    <listitem>
+      <para><guimenu>Édition</guimenu> &gt; <guimenuitem>Créer une entrée de glossaire</guimenuitem> (<keycombo><keycap>C</keycap><keycap>Maj</keycap><keycap>G</keycap></keycombo>) : ajoute un nouvel élément de glossaire Voir <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.create.glossary.entry" endterm="menus.edit.create.glossary.entry.title"/> pour en savoir plus.</para>
+    </listitem>
+
+    <listitem>
+      <para><guimenu>Édition</guimenu> &gt; <guimenuitem>Réinitialiser les options</guimenuitem> : réinitialise les options de la fenêtre de recherche textuelle.</para>
+    </listitem>
+  </itemizedlist>
+
+  <section id="windows.text.replace.methods">
+    <title id="windows.text.replace.methods.title">Type de recherche</title>
+
+    <para>Utiliser les boutons radio pour sélectionner le type de recherche.</para>
+
+	<para>Les types de recherches suivants sont disponibles :</para>
+
+    <variablelist>
+      <varlistentry id="windows.text.replace.methods.exact">
+        <term id="windows.text.replace.methods.exact.title">Recherche exacte</term>
+        <listitem>
+          <para>Recherche la chaîne de caractères telle qu’elle a été saisie dans le champ de recherche.</para>
+
+		  <para>Il s’agit de l’équivalent d’une recherche web entre guillemets.</para>
+
+		  <note>
+			<para>Les caractères génériques <code>*</code> et <code>?</code> peuvent être utilisés dans les recherches exactes :</para>
+
+			<itemizedlist>
+			  <listitem>
+				<para>Le caractère « *  » correspond à zéro ou plusieurs caractères, partant de sa position actuelle jusqu’à la fin du mot. Le terme recherché <literal>« jour*  »</literal>, par exemple, correspond à <literal>« jour  »</literal>, <literal>«jours  »</literal> et <literal>«journée  »</literal>.</para>
+			  </listitem>
+
+			  <listitem>
+				<para>« ? » correspond à n’importe quel caractère unique. Par exemple, <literal>« feu?  »</literal> correspond au mot <literal>« feux  »</literal>, mais aussi à la partie <literal>« feuille  »</literal> des mots <literal>« feuilleton  »</literal> ou <literal>« feuilleter  »</literal>.</para>
+			  </listitem>
+			</itemizedlist>
+		  </note>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="windows.text.replace.methods.regex">
+        <term id="windows.text.replace.methods.regex.title">Expressions régulières</term>
+        <listitem>
+          <para>Considérez la chaîne de caractères recherchée comme une expression régulière.</para>
+
+		  <para>Les expressions régulières sont un moyen très efficace de rechercher des motifs généraux ou complexes plutôt que des chaînes de caractères exactes. Voir l’annexe <link linkend="app.regex" endterm="app.regex.title"/> pour en savoir plus.</para>
+
+		  <note>
+			<para>La chaîne de caractères de remplacement prend en charge les références aux groupes définis dans la chaîne de caractères de recherche. Utilisez <code>$n</code> (où <code>n</code> est un chiffre de 1 à 9) dans le champ de remplacement pour faire référence au <code>nième</code> groupe dans le champ de recherche.</para>
+		  </note>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </section>
+
+  <section id="windows.text.replace.options">
+	<title id="windows.text.replace.options.title">Options</title>
+	
+	<variablelist>
+	  <varlistentry>
+		<term>Respecter la casse</term>
+		<listitem>
+		  <para>Seuls les résultats dont la casse est identique à celle des termes de la recherche sont affichés.</para>
+		</listitem>
+	  </varlistentry>
+	
+	  <varlistentry>
+		<term>L’espace comprend l’espace insécable</term>
+		<listitem>
+		  <para>Les caractères d’espacement correspondent aux espaces normaux et aux espaces insécables (\u00A).</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry>
+		<term>Non traduits</term>
+		<listitem>
+		  <para>Recherche également dans les segments non traduits.</para>
+		</listitem>
+	  </varlistentry>
+ 
+	  <varlistentry>
+		<term><guibutton>Afficher les options avancées</guibutton></term>
+		<listitem>
+		  <para>Permet de choisir des critères supplémentaires tels que la personne qui a écrit ou modifié la traduction, la date et l’heure de la traduction (modification), ou si les segments orphelins doivent être exclus.</para>
+
+		  <variablelist>
+			<varlistentry>
+			  <term>Ignorer la différence entre pleine et demi-largeur de caractère</term>
+			  <listitem>
+				<para>Affiche les résultats qui correspondent à la fois aux formes pleine et demi-largeur (caractères CJC) des caractères dans les termes recherchés.</para>
+			  </listitem>
+			</varlistentry>
+		  </variablelist>
+		  <para>Utiliser le bouton <guibutton>Masquer les options avancées</guibutton> pour cacher les options avancées.</para>
+		</listitem>
+	  </varlistentry>
+	</variablelist>
+  </section>
+
+  <section id="windows.text.replace.result.display">
+    <title id="windows.text.replace.result.display.title">Affichage des résultats</title>
+
+    <para>Les correspondances sont affichées dans l’ordre de leur apparition dans le projet. Pour les segments traduits, le texte original est affiché au-dessus du texte traduit. Seul le texte source est affiché pour les segments non traduits.</para>
+
+	<para>Double-cliquer sur un segment pour l’ouvrir dans le volet <link linkend="panes.editor" endterm="panes.editor.title"/>.</para>
+
+    <para>Vous pouvez utiliser les raccourcis suivants dans les résultats de la recherche :</para>
+	
+	<variablelist>
+	  <varlistentry>
+		<term><keycombo><keycap>C</keycap><keycap>N</keycap></keycombo></term>
+		<listitem>
+		  <para>Passer au segment suivant</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry>
+		<term><keycombo><keycap>C</keycap><keycap>P</keycap></keycombo></term>
+		<listitem>
+		  <para>Retourner au segment précédent</para>
+		</listitem>
+
+	  </varlistentry>
+
+	  <varlistentry>
+		<term><keycombo><keycap>C</keycap><keycap>J</keycap></keycombo></term>
+		<listitem>
+		  <para>Atteindre le segment actuel dans l’éditeur.</para>
+		</listitem>
+	  </varlistentry>
+	</variablelist>
+
+	<para>Le segment choisi est surligné en vert.</para>
+	
+	<variablelist>
+	  <varlistentry>
+		<term>Synchronisation automatique avec l’éditeur</term>
+		<listitem>
+		  <para>Le volet <link linkend="panes.editor" endterm="panes.editor.title"/> synchronise son affichage avec la sélection dans les résultats de recherche.</para>
+		</listitem>
+	  </varlistentry>
+	  
+	  <varlistentry>
+		<term>Revenir au segment initial à la fermeture de la fenêtre</term>
+		<listitem>
+		  <para>Lors de la fermeture de la fenêtre de recherche textuelle, le volet <link linkend="panes.editor" endterm="panes.editor.title"/> retourne automatiquement au segment affiché avant le début de la recherche.</para>
+		</listitem>
+	  </varlistentry>
+	</variablelist>
   </section>
 </section>

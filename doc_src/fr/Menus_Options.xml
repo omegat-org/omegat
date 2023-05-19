@@ -1,92 +1,107 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="menus.options">
-  <title>Options</title>
+  <title id="menus.options.title"><guimenu>Options</guimenu></title>
 
+  <para>Ce menu vous permet d’accéder rapidement à quelques paramètres fréquemment utilisés.</para>
+  
   <variablelist>
-    <varlistentry>
-      <term>Préférences...</term>
-
+    <varlistentry id="menus.options.preferences">
+      <term id="menus.options.preferences.title"><guimenuitem>Préférences...</guimenuitem></term>
       <listitem>
-        <para>Ouvre le dialogue des <link linkend="dialogs.preferences">préférences</link>.</para>
+        <para>Ouvre la boîte de dialogue <link linkend="chapter.dialogs.preferences" endterm="chapter.dialogs.preferences.title"/>.</para>
+
+		<note>
+		  <para>Sur macOS, cet élément de menu se trouve dans le menu <guimenu>OmegaT</guimenu>.</para>
+		</note>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Traduction automatique</term>
-
+    <varlistentry id="menus.options.mt">
+      <term id="menus.options.mt.title"><guisubmenu>Traduction automatique</guisubmenu></term>
       <listitem>
-        <para>Vous permet d'activer/de désactiver les outils de traduction automatique proposés.</para>
+		<itemizedlist>
+		  <listitem>
+			<para><link linkend="dialogs.preferences.mt.automatically.fetch.translations" endterm="dialogs.preferences.mt.automatically.fetch.translations.title"/></para>
+		  </listitem>
+		</itemizedlist>
 
-        <para>Si plusiers moteurs de traduction sont slélectionnés, <keycombo><keycap>Ctrl</keycap><keycap>M</keycap></keycombo> est également utilisé pour passer de l'un à l'autre et insérer le moteur sélectionné en dernier.</para>
+		<para>Permet d’activer ou de désactiver les moteurs de traduction automatique disponibles.</para>
+
+        <para>Si plusieurs moteurs de traductions sont sélectionnés, vous pouvez aussi utiliser <keycombo><keycap>C</keycap><keycap>M</keycap></keycombo> pour passer de l’un à l’autre et insérer le dernier moteur sélectionné. Voir les préférences <link linkend="dialogs.preferences.mt" endterm="dialogs.preferences.mt.title"/> pour en savoir plus.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Glossaires</term>
-
+    <varlistentry id="menus.options.glossary">
+      <term id="menus.options.glossary.title"><guisubmenu>Glossaires</guisubmenu></term>
       <listitem>
-        <para>Sélectionner <guimenuitem>Recherche de terminologie TAAS</guimenuitem> pour activer cette recherche.</para>
+		<itemizedlist>
+		  <listitem>
+			<para><link linkend="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries" endterm="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries.title"/></para>
+		  </listitem>
+		</itemizedlist>
+
+        <para>Permet d’activer ou de désactiver les correspondances partielles pour les entrées de glossaire.</para>
+
+		<para>Voir le paramètre <link linkend="dialogs.preferences.glossary" endterm="dialogs.preferences.glossary.title"/> pour en savoir plus.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Dictionnaires</term>
-
+    <varlistentry id="menus.options.dictionary">
+      <term id="menus.options.dictionary.title"><guisubmenu>Dictionnaires</guisubmenu></term>
       <listitem>
-        <para>Cocher l'option <guimenuitem>Use Fuzzy Matching for Dictionary Entries</guimenuitem> pour que les dictionnaires affichent les mots qui ont la même racine.</para>
+		<itemizedlist>
+		  <listitem>
+			<para><link linkend="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries" endterm="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries.title"/></para>
+		  </listitem>
+		</itemizedlist>
+
+        <para>Permet d’activer ou de désactiver les correspondances partielles pour les entrées de dictionnaire.</para>
+
+		<para>Voir le paramètre <link linkend="dialogs.preferences.dictionary" endterm="dialogs.preferences.dictionary.title"/> pour en savoir plus.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Saisie automatique</term>
-
+    <varlistentry id="menus.options.autocompletion">
+      <term id="menus.options.autocompletion.title"><guisubmenu>Saisie automatique</guisubmenu></term>
       <listitem>
-        <para>Si l'option <guimenuitem>Afficher automatiquement les suggestions pertinentes</guimenuitem> est cochée, la saisie automatique s'ouvre autoamtiquement en tapant les premières lettres de la traduction d'une entrée de glossaire ou un entrant « &lt; » dans le cas des balises.</para>
+		<para>Sélectionner les différentes options pour les activer ou les désactiver Voir le paramètre <link linkend="dialog.preferences.auto.completion" endterm="dialog.preferences.auto.completion.title"/> pour en savoir plus.</para>
+	  </listitem>
+    </varlistentry>
 
-        <para>Cocher <guimenuitem>History Completion</guimenuitem> pour afficher des suggestions de mots dès que leurs premières lettres sont saisies.</para>
+    <varlistentry id="menus.options.file.filters">
+      <term id="menus.options.file.filters.title"><guimenuitem>Filtres de fichiers généraux...</guimenuitem></term>
+      <listitem>
+        <para>Ouvre les préférences de <link linkend="dialogs.preferences.file.filters" endterm="dialogs.preferences.file.filters.title"/>.</para>
 
-        <para>Cocher <guimenuitem>History Prediction</guimenuitem> pour afficher des suggestions de mots qui viennent habituellement en seconde position d'un couple de mots, dès que le premier mot est saisi.</para>
+        <para>Utiliser <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.properties" endterm="menus.project.properties.title"/> pour accéder aux préférences de filtres de fichiers locales.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Filtres de fichiers...</term>
-
+    <varlistentry id="menus.options.segmentation">
+      <term id="menus.options.segmentation.title"><guimenuitem>Règles de segmentation générales...</guimenuitem></term>
       <listitem>
-        <para>Ouvre l'option <link linkend="dialogs.preferences.filefilters">Filtres de fichiers</link> dans le dialogue des préférences.</para>
+        <para>Ouvre les préférences de <link linkend="dialogs.preferences.segmentation.setup" endterm="dialogs.preferences.segmentation.setup.title"/>.</para>
 
-        <para>Ces paramètres s'appliquent au niveau global, à tous les projets.</para>
+        <para>Utiliser <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.properties" endterm="menus.project.properties.title"/> pour accéder aux préférences de règles de segmentation locales.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Segmentation...</term>
-
+    <varlistentry id="menus.options.editor">
+      <term id="menus.options.editor.title"><guimenuitem>Éditeur...</guimenuitem></term>
       <listitem>
-        <para>Ouvre l'option <link linkend="dialogs.preferences.segmentationsetup">Configuration de la segmentation</link> dans le dialogue des préférences.</para>
-
-        <para>Ces paramètres s'appliquent au niveau global, à tous les projets.</para>
-
+        <para>Ouvre les préférences de <link linkend="dialogs.preferences.editor" endterm="dialogs.preferences.editor.title"/>.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Éditeur...</term>
-
+    <varlistentry id="menus.options.access.configuration.folder">
+      <term id="menus.options.access.configuration.folder.title"><guimenuitem>Accéder au dossier de configuration</guimenuitem></term>
       <listitem>
-        <para>Ouvre l'option <link linkend="dialogs.preferences.editor">Éditeur</link> dans le dialogue des préférences.</para>
+        <para>Ouvrir le dossier local où sont stockés les fichiers de configuration d’OmegaT.</para>
 
-        <para>Ces paramètres s'appliquent au niveau global, à tous les projets.</para>
-
-      </listitem>
-    </varlistentry>
-
-    <varlistentry>
-      <term>Accéder au dossier de configuration</term>
-
-      <listitem>
-        <para>Ouvre le dossier local où les fichiers de configuration d'OmegaT sont stockées (son emplacement dépend du système d'exploitation).</para>
+		<note>
+		  <para>L’emplacement dépend du système d’exploitation et des options de lancement. Voir l’annexe <link linkend="configuration.folder" endterm="configuration.folder.title"/> pour en savoir plus.</para>
+		</note>
       </listitem>
     </varlistentry>
   </variablelist>

@@ -1,71 +1,170 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="howto.useteamproject">
-  <title>Utiliser un projet en équipe</title>
+<section id="how.to.use.team.project">
+  <title id="how.to.use.team.project.title">Utiliser un projet en équipe</title>
 
-  <para>Les projets en équipe doivent d'abord être <link linkend="howto.setupteamproject">installés</link> sur un serveur.</para>
+  <para>Les projets en équipe emploient des mécanismes de synchronisation entre les membres du projet.</para>
 
-  <para>Pour utiliser un projet en équipe pour la première fois, suivez les instructions données par le gestionnaire de projet.</para>
+  <para>Lorsque le projet en équipe OmegaT est installé sur un serveur, l’administrateur envoie aux membres les informations nécessaires pour y accéder ; soit une URL qui indique l’emplacement du projet, soit un fichier <filename>omegat.project</filename>.</para>
 
-  <para>Une fois le projet ouvert, la traduction se passe de la même manière que pour un projet simple à l'exception des points suivants.</para>
+  <para>Une fois le projet téléchargé, il est installé localement et il suffit de l’ouvrir localement pour le synchroniser avec le serveur.</para>
 
-  <para><emphasis role="bold">Sauvegarde automatique</emphasis></para>
+  <para>Les identifiants de dépôt sont entreposés dans le fichier <link linkend="configuration.folder.extra.contents.repositories" endterm="configuration.folder.extra.contents.repositories.title"/> et peuvent être effacés à partir des préférences <link linkend="dialog.preferences.team.title.repository.credentials" endterm="dialog.preferences.team.title.repository.credentials.title"/>.</para>
 
-  <para>Le projet local est synchronisé par défaut toutes les 3 minutes avec le dépôt distant pour que le gestionnaire du projet et les autres traducteurs puissent voir et utiliser les traductions ajoutées pendant cette période.</para>
+  <para>Puisque la synchronisation se fait par défaut toutes les trois minutes, il arrive que des membres du projet traduisent ou modifient un segment qui a déjà été traduit par un autre membre, mais qui n’a pas encore été synchronisé. Dans une telle situation, les membres devront choisir la traduction appropriée.</para>
 
-  <para>L'intervalle de 3 minutes peut ietre modifié dans <link linkend="dialogs.preferences.savingandoutput"><menuchoice> <guimenuitem>Options</guimenuitem><guimenuitem>Préférences </guimenuitem> <guimenuitem>Enregistrement et exécution</guimenuitem> </menuchoice></link>.</para>
-
-  <para><emphasis role="bold">Fichiers synchronisés</emphasis></para>
-
-  <para>Quand un projet est sauvegardé automatiquement, mais également quand il est ouvert, fermé et rechargé, seulement deux fichiers sont en fait synchronisés :</para>
-
-  <itemizedlist>
-    <listitem>
-      <para><filename>omegat/project_save.tmx</filename></para>
-    </listitem>
-
-    <listitem>
-      <para><filename>glossary/glossary.txt</filename></para>
-    </listitem>
-  </itemizedlist>
-
-  <para>Tous les autres fichiers seront remplacés par les fichiers dans le dépôt distant.</para>
-
-  <para><emphasis role="bold">Ajouter de nouveaux fichiers source</emphasis></para>
-
-  <para>Pour ajouter de nouveaux fichiers source :</para>
-
-  <para><orderedlist>
+  <para>Les membres peuvent se relayer afin de traduire et réviser les fichiers. La fonction de Recherche leur permet de filtrer le volet Éditeur pour afficher le contenu traduit par une personne spécifique, ou pour afficher le contenu traduit après ou avant une date spécifique, par exemple.</para>
+  
+  <variablelist>
+    <varlistentry>
+      <term>Télécharger le projet</term>
       <listitem>
-        <para>copier les fichiers dans le dossier <filename>./source</filename></para>
-      </listitem>
+		<orderedlist>
+		  <listitem>
+			<para>Depuis une URL</para>
+
+			<para>Utilisez <link endterm="menus.project.title" linkend="menus.project"/><link endterm="menus.project.download.team.project.title" linkend="menus.project.download.team.project"/> pour afficher la boîte de dialogue <guilabel>Télécharger projet en équipe</guilabel>.</para>
+
+			<para>Entrez l’URL fournie par l’administrateur du projet en équipe dans le champ <guilabel>URL du dépôt</guilabel>en haut de la boîte de dialogue, et sélectionnez un dossier pour le projet dans le champ <guilabel>Nouveau dossier du projet local</guilabel>. Laissez l’option <guilabel>Branche par défaut</guilabel> cochée sauf si l’administrateur du projet a fourni des instructions pour utiliser une branche personnalisée.</para>
+		  </listitem>
+
+		  <listitem>
+			<para>Depuis un fichier <filename>omegat.project</filename></para>
+
+			<para>Mettez le fichier <filename>omegat.project</filename> dans un dossier vide, et ouvrez-le dans OmegaT. Le projet sera automatiquement téléchargé dans le dossier contenant ce fichier.</para>
+		  </listitem>
+		</orderedlist>
+
+		<note>
+		  <para>Les serveurs utilisent généralement deux types d’authentification principaux : la saisie d’un <emphasis>identifiant/mot de passe</emphasis> ou <emphasis>SSH</emphasis>.</para>
+
+		  <para>Si le serveur recourt à une authentification par identifiant/mot de passe, OmegaT vous présentera une boîte de dialogue <guilabel>Authentification</guilabel> afin d’entrer votre identifiant et votre mot de passe, soit lors du téléchargement initial du projet, soit plus tard dans le processus. OmegaT se souviendra alors de vos informations d’identification pour ce projet spécifique sauf si vous les supprimez formellement. Voir les préférences <link linkend="dialog.preferences.team.title.repository.credentials" endterm="dialog.preferences.team.title.repository.credentials.title"/> pour en savoir plus.</para>
+
+		  <para>Si le serveur utilise une authentification SSH, veillez à mettre à jour votre configuration SSH afin d’inclure ce serveur avant d’essayer de télécharger le projet, sinon vous rencontrerez une erreur d’authentification et le chargement du projet échouera.</para>
+
+		  <para>Si vous utilisez plusieurs projets sur un même serveur, les informations d’identification ne seront demandées qu’une fois pour ce serveur.</para>
+		</note>
+	  </listitem>
+	</varlistentry>
+
+    <varlistentry>
+      <term>Synchronisation</term>
 
       <listitem>
-        <para>utiliser <menuchoice> <guimenuitem>Projet</guimenuitem> <guimenuitem>Envoyer les fichiers source</guimenuitem> </menuchoice></para>
+        <para>La synchronisation du projet intègre les traductions effectuées par tous les membres de l’équipe dans les copies locales du projet. Seul le contenu des deux fichiers suivants est synchronisé :</para>
+
+		<itemizedlist>
+          <listitem>
+			<para><filename>project.save</filename></para>
+          </listitem>
+
+          <listitem>
+			<para><filename>glossary.txt</filename></para>
+          </listitem>
+        </itemizedlist>
+
+        <para>Pendant la synchronisation, tous les autres fichiers locaux sont remplacés par les versions du serveur distant, à l’exception de <filename>omegat.project</filename> (voir ci-dessous).</para>
+
+        <para>OmegaT synchronise un projet en équipe lorsqu’il est ouvert, rechargé, fermé ou enregistré. Cela signifie que la fonctionnalité d’enregistrement automatique synchronise aussi régulièrement les versions locales avec la version sur le serveur aux intervalles spécifiés dans la préférence <link endterm="dialog.preferences.saving.and.output.interval.title" linkend="dialog.preferences.saving.and.output.interval"/>.</para>
       </listitem>
-    </orderedlist>Les fichiers source existants peuvent être modifiés mais l'ajout au dépôt doit être effectué avant une sauvegarde automatique ou avant que le projet soit rechargé ou fermé.</para>
+    </varlistentry>
 
-  <para><emphasis role="bold">Effacer des fichiers source</emphasis></para>
+    <varlistentry>
+      <term>Configuration du projet en équipe</term>
 
-  <para>Les fichiers doivent être effacés par le gestionnaire de projet.</para>
+      <listitem>
+        <para>Comme pour les projets locaux classiques, la configuration du projet en équipe est définie par le contenu du fichier <filename>omegat.project</filename> et par l’utilisation facultative de fichiers spéciaux pour les filtres ou les règles de segmentation spécifiques au projet.</para>
 
-  <para><emphasis role="bold">Modifier les rêgles de segmentation ou les filtres de fichiers</emphasis></para>
+        <para>Lors du premier téléchargement du projet, OmegaT récupère le fichier <filename>omegat.project</filename> à partir du serveur. Ce fichier définit les paramètres suivants :</para>
 
-  <para>Les paramètres du projet doivent être modifiés par le gestionnaire du projet.</para>
+        <itemizedlist>
+          <listitem>
+            <para><emphasis>Configuration de base du projet :</emphasis> la source et les langues, les lemmatiseurs, la hiérarchie des dossiers du projet.</para>
 
-  <para><emphasis role="bold">Travailler hors connexion</emphasis></para>
+			<para>Dans un projet en équipe, les paramètres de configuration de base du projet local sont toujours remplacés par la configuration présente sur le serveur, définie à l’origine par l’administrateur du projet.</para>
+          </listitem>
 
-  <para>Un projet en équipe peut être ouvert et sa traduction peut être effectuée hors connexion. Toutes les modifications seront synchronisées lorsque la connexion sera de nouveau disponible.</para>
+          <listitem>
+            <para><emphasis>Mise en correspondance des dépôts</emphasis></para>
 
-  <para>Travailler hors connexion :</para>
+            <para>Voir le guide pratique <link linkend="how.to.setup.team.project.mapping.parameters" endterm="how.to.setup.team.project.mapping.parameters.title"/> pour en savoir plus.</para>
 
-  <itemizedlist>
-    <listitem>
-      <para>Déconnectez-vous du réseau avant l'ouverture du projet,</para>
-    </listitem>
+            <itemizedlist>
+              <listitem>
+                <para>Si aucune mise en correspondance personnalisée n’a été définie pour le projet distant, mais que les mises en correspondance locales ont été personnalisées, les paramètres locaux sont conservés sans affecter les paramètres du serveur.</para>
+              </listitem>
 
-    <listitem>
-      <para>ou bien ouvrez le projet à la ligne de commande à l'aide de l'option <command>--no-teams</command>.</para>
-    </listitem>
-  </itemizedlist>
+              <listitem>
+                <para>Si le projet distant contient des mises en correspondance personnalisées, mais que le projet local n’en contient pas, les mises en correspondance du serveur sont appliquées au projet local.</para>
+              </listitem>
+
+              <listitem>
+                <para>Si le projet distant précise un protocole URL et que vous le téléchargez en utilisant un protocole différent, votre configuration locale sera conservée.</para>
+
+                <para>Par exemple, de nombreux services d’hébergement permettent l’accès au même dépôt en utilisant soit le protocole SSH + Git soit le protocole https. OmegaT se conforme au choix du protocole local.</para>
+              </listitem>
+
+              <listitem>
+                <para>Si vous téléchargez d’abord le projet distant en utilisant un fichier <filename>omegat.project</filename> fourni par l’administrateur du projet, OmegaT utilisera les mises en correspondance de ce fichier, le cas échéant.</para>
+              </listitem>
+
+              <listitem>
+                <para>S’il y a un conflit entre la version locale et la version distante du fichier <filename>omegat.project</filename>, et que la version locale est remplacée, OmegaT crée un fichier de sauvegarde appelé <filename>omegat.project.AAAAMMJJhhmm.bak</filename>. OmegaT peut créer jusqu’à dix fichiers de sauvegarde, et supprime automatiquement les sauvegardes les plus anciennes l’une après l’autre.</para>
+              </listitem>
+            </itemizedlist>
+		  </listitem>
+		</itemizedlist>
+
+        <warning>
+          <para>N’oubliez pas que les modifications apportées localement aux fichiers de configuration du projet sont remplacées par les versions du serveur dès que le projet est synchronisé.</para>
+        </warning>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Fichiers source</term>
+
+      <listitem>
+        <warning>
+		  <para>Seul l’administrateur du projet devrait utiliser le menu <link endterm="menus.project.title" linkend="menus.project"/><link endterm="menus.project.commit.source.files.title" linkend="menus.project.commit.source.files"/>.</para>
+		</warning>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Fichiers cible</term>
+
+      <listitem>
+        <para>Après avoir généré les fichiers cible, utilisez le menu <link endterm="menus.project.title" linkend="menus.project"/><link endterm="menus.project.commit.target.files.title" linkend="menus.project.commit.target.files"/> pour les ajouter au serveur, si l’administrateur du projet vous a demandé de le faire.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Supprimer des fichiers</term>
+
+      <listitem>
+        <para>Les fichiers d’un projet en équipe ne peuvent pas être supprimés à partir d’OmegaT ou du système de fichiers local. Ils seront restaurés lors de la prochaine synchronisation du projet. Cette tâche est normalement effectuée par l’administrateur du projet.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Travailler hors connexion</term>
+
+      <listitem>
+        <para>Vous pouvez ouvrir un projet en équipe et travailler dessus hors ligne. Toutes les modifications seront synchronisées dès qu’une connexion sera disponible.</para>
+
+        <para>Il y a deux manières de travailler hors ligne :</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>Déconnectez-vous du réseau avant d’ouvrir le projet.</para>
+          </listitem>
+
+          <listitem>
+            <para>Ouvrez le projet en ligne de commande à l’aide de l’option <parameter>--no-team</parameter>. Voir la section <link linkend="launch.with.command.line" endterm="launch.with.command.line.title"/> pour en savoir plus.</para>
+          </listitem>
+        </itemizedlist>
+      </listitem>
+    </varlistentry>
+  </variablelist>
 </section>

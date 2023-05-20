@@ -39,10 +39,12 @@ package org.omegat.core.data;
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.io.UncheckedIOException;
 import java.io.Writer;
 import java.nio.channels.FileChannel;
 import java.nio.channels.FileLock;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.FileSystemLoopException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -369,12 +371,28 @@ public class RealProject implements IProject {
             loadFilterSettings();
             loadSegmentationSettings();
             loadTranslations(); // load projectsave.tmx
-            loadSourceFiles();
 
             // This MUST happen after calling loadTranslations()
             if (remoteRepositoryProvider != null && isOnlineMode) {
                 Core.getMainWindow().showStatusMessageRB("TEAM_REBASE_AND_COMMIT");
                 rebaseAndCommitProject(true);
+            }
+            try {
+                loadSourceFiles();
+            } catch (UncheckedIOException e) {
+                if (e.getCause() != null && e.getCause() instanceof FileSystemLoopException) {
+                    // source file folder has a looped symbolic links
+                    Log.logErrorRB(e.getCause(), "TF_LOAD_ERROR_SOURCE_LOOP_EXCEPTION");
+                    Core.getMainWindow().displayErrorRB(e.getCause(), "TF_LOAD_ERROR_SOURCE_LOOP_EXCEPTION");
+                } else {
+                    Log.logErrorRB(e, "TF_LOAD_ERROR_FILE_ACCESS");
+                    Core.getMainWindow().displayErrorRB(e, "TF_LOAD_ERROR_FILE_ACCESS");
+                }
+                if (!loaded) {
+                    unlockProject();
+                }
+                Log.logInfoRB("LOG_DATAENGINE_LOAD_END");
+                return;
             }
 
             // after loadSourcefiles, the entries are filled. The list can now

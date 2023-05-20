@@ -31,17 +31,23 @@
 
 package org.omegat.util;
 
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Marshaller;
+import javax.xml.stream.XMLInputFactory;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.MapperFeature;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.dataformat.xml.XmlFactory;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
+import com.fasterxml.jackson.module.jaxb.JaxbAnnotationModule;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
+
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.master.PluginUtils;
@@ -63,6 +69,25 @@ import gen.core.project.Project.Repositories;
  */
 public final class ProjectFileStorage {
 
+    private static final XmlMapper mapper;
+
+    static {
+        final XMLInputFactory xmlInputFactory = XMLInputFactory.newInstance();
+        // You should NOT use XMLInputFactor.getXMLInputFactory
+        // that returns system default object.
+        // Modifying a global object leads breakage of SuperTMXMerge
+        // library.
+        // https://sourceforge.net/p/omegat/bugs/1170/
+        xmlInputFactory.setProperty(XMLInputFactory.SUPPORT_DTD, Boolean.TRUE);
+        XmlFactory xmlFactory = new XmlFactory(xmlInputFactory);
+        mapper = XmlMapper.builder(xmlFactory).defaultUseWrapper(false)
+                .enable(MapperFeature.USE_WRAPPER_NAME_AS_PROPERTY_NAME).build();
+        mapper.registerModule(new JaxbAnnotationModule());
+        mapper.configure(ToXmlGenerator.Feature.WRITE_XML_DECLARATION, true);
+        mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+        mapper.enable(SerializationFeature.INDENT_OUTPUT);
+    }
+
     private ProjectFileStorage() {
     }
 
@@ -71,21 +96,12 @@ public final class ProjectFileStorage {
      */
     public static final String DEFAULT_FOLDER_MARKER = "__DEFAULT__";
 
-    private static final JAXBContext CONTEXT;
-    static {
-        try {
-            CONTEXT = JAXBContext.newInstance(Omegat.class);
-        } catch (Exception ex) {
-            throw new ExceptionInInitializerError(ex);
-        }
-    }
-
     public static Omegat parseProjectFile(File file) throws Exception {
         return parseProjectFile(FileUtils.readFileToByteArray(file));
     }
 
     public static Omegat parseProjectFile(byte[] projectFile) throws Exception {
-        return (Omegat) CONTEXT.createUnmarshaller().unmarshal(new ByteArrayInputStream(projectFile));
+        return mapper.readValue(projectFile, Omegat.class);
     }
 
     /**
@@ -244,9 +260,7 @@ public final class ProjectFileStorage {
             om.getProject().getRepositories().getRepository().addAll(props.getRepositories());
         }
 
-        Marshaller m = CONTEXT.createMarshaller();
-        m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-        m.marshal(om, outFile);
+        mapper.writeValue(outFile, om);
     }
 
     private static String normalizeLoadedPath(String path, String defaultValue) {

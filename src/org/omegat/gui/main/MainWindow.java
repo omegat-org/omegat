@@ -45,6 +45,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -432,7 +433,7 @@ public class MainWindow extends JFrame implements IMainWindow {
     // /////////////////////////////////////////////////////////////
     // display oriented code
 
-    private JLabel lastDialogText;
+    private JPanel lastDialogText;
     private String lastDialogKey;
 
     /**
@@ -462,7 +463,12 @@ public class MainWindow extends JFrame implements IMainWindow {
                 }
             }
 
-            lastDialogText = new JLabel(msg);
+            lastDialogText = new JPanel();
+            lastDialogText.setLayout(new BoxLayout(lastDialogText, BoxLayout.PAGE_AXIS));
+            String[] messages = msg.split("\\n");
+            Arrays.stream(messages).forEach(m -> {
+                lastDialogText.add(new JLabel(m));
+            });
             lastDialogKey = warningKey;
 
             statusLabel.setText(msg);

@@ -374,6 +374,7 @@ public class RealProject implements IProject {
             loadSegmentationSettings();
             try {
                 loadTranslations(); // load project_save.tmx
+                loadSourceFiles();
 
                 // This MUST happen after calling loadTranslations()
                 if (remoteRepositoryProvider != null && isOnlineMode) {
@@ -389,25 +390,6 @@ public class RealProject implements IProject {
                 }
                 Log.logInfoRB("LOG_DATAENGINE_LOAD_END");
                 return;
-            }
-
-            try {
-                loadSourceFiles();
-            } catch (UncheckedIOException e) {
-                if (e.getCause() != null && e.getCause() instanceof FileSystemLoopException) {
-                    // source file folder has a looped symbolic links
-                    Log.logErrorRB(e.getCause(), "TF_LOAD_ERROR_SOURCE_LOOP_EXCEPTION");
-                    Core.getMainWindow().displayErrorRB(e.getCause(), "TF_LOAD_ERROR_SOURCE_LOOP_EXCEPTION");
-                } else {
-                    Log.logErrorRB(e, "TF_LOAD_ERROR_FILE_ACCESS");
-                    Core.getMainWindow().displayErrorRB(e, "TF_LOAD_ERROR_FILE_ACCESS");
-                }
-                if (!loaded) {
-                    unlockProject();
-                }
-                Log.logInfoRB("LOG_DATAENGINE_LOAD_END");
-                return;
-
             }
 
             // After `#loadSourcefiles`, the entries are filled. The list can

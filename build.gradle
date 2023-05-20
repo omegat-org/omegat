@@ -154,7 +154,7 @@ dependencies {
         // macOS integration
         implementation 'org.madlonkay:desktopsupport:0.6.0'
 
-        // jaxb
+        // stax
         implementation 'org.codehaus.woodstox:stax2-api:4.2.1'
         runtimeOnly 'com.fasterxml.woodstox:woodstox-core:6.5.0'
 

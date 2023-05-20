@@ -46,6 +46,7 @@ import java.util.stream.Collectors;
 
 import javax.xml.stream.XMLInputFactory;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.DatabindException;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -90,6 +91,7 @@ public class SRX implements Serializable {
                 .enable(MapperFeature.USE_WRAPPER_NAME_AS_PROPERTY_NAME).build();
         mapper.registerModule(new JaxbAnnotationModule());
         mapper.configure(ToXmlGenerator.Feature.WRITE_XML_DECLARATION, true);
+        mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
         mapper.enable(SerializationFeature.INDENT_OUTPUT);
     }
 

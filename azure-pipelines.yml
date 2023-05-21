@@ -53,7 +53,7 @@ stages:
 # Build steps will run on the main and/or release branch, except for Pull-Request
 - stage: Weekly
   dependsOn: Check
-  condition: and(succeeded(), eq(variables['Build.Reason'], 'Schedule'))
+  condition: and(succeeded(), or(eq(variables['Build.Reason'], 'Schedule'), eq(variables['Build.Reason'], 'Manual')))
   jobs:
   - job: WeeklyBuild
     displayName: Build for master weekly

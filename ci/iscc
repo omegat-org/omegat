@@ -12,4 +12,4 @@ bindpaths() {
     done
 }
 
-exec docker run --rm -i -v "$PWD":/work $(bindpaths "$@") amake/innosetup:innosetup6 $(relpaths "$@")
+exec docker run --rm -i -v "$PWD":/work $(bindpaths "$@") omegat/innosetup:innosetup6 $(relpaths "$@")

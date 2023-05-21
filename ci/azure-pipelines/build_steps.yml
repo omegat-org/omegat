@@ -30,19 +30,14 @@ steps:
       umask a+w
       mkdir -p build
       chmod -R a+w doc_src
-      $(Build.SourcesDirectory)/gradlew -PenvIsCi -PassetDir=$(System.ArtifactsDirectory)/asset clean build manualPdfs
-    displayName: 'Command Line Script'
-  - script: |   
+      $(Build.SourcesDirectory)/gradlew -PenvIsCi -PassetDir=$(System.ArtifactsDirectory)/asset clean build
+    displayName: 'Build distribution packages and docs'
+  - script: |
       # stop the Gradle daemon to ensure no files are left open (impacting the save cache operation later)
       ./gradlew --stop
     displayName: Gradlew stop
-  - task: CopyFiles@2
-    displayName: 'Copy Files to: $(build.artifactstagingdirectory)/done'
-    inputs:
-      SourceFolder: '$(system.defaultworkingdirectory)/build/distributions/'
-      Contents: '*'
-      TargetFolder: '$(build.artifactstagingdirectory)/done'
-  - task: PublishBuildArtifacts@1
+  - task: PublishPipelineArtifact@1
     displayName: 'Publish Artifact: drop'
     inputs:
-      PathtoPublish: '$(build.artifactstagingdirectory)/done'
+      targetPath: '$(system.defaultworkingdirectory)/build/distributions/'
+      artifactName: 'drop'

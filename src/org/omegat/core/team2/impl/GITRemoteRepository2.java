@@ -82,11 +82,13 @@ import org.eclipse.jgit.util.FS;
 
 import org.omegat.core.team2.IRemoteRepository2;
 import org.omegat.core.team2.ProjectTeamSettings;
+import org.omegat.core.team2.RemoteRepositoryFactory;
 import org.omegat.util.Log;
 import org.omegat.util.StringUtil;
 
 import gen.core.project.RepositoryDefinition;
 import tokyo.northside.logging.ILogger;
+import tokyo.northside.logging.LoggerFactory;
 
 /**
  * GIT repository connection implementation.
@@ -95,7 +97,7 @@ import tokyo.northside.logging.ILogger;
  * @author Aaron Madlon-Kay
  */
 public class GITRemoteRepository2 implements IRemoteRepository2 {
-    private static final ILogger LOGGER = Log.getLogger(GITRemoteRepository2.class);
+    private static final ILogger LOGGER = LoggerFactory.getLogger(GITRemoteRepository2.class);
     private static final String GIT_START_MSG = "Git '{}' execution start";
     private static final String GIT_NO_CHANGES_MSG = "Git '{}' did nothing because there were no changes";
 
@@ -115,9 +117,19 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
 
     ProjectTeamSettings projectTeamSettings;
 
-    static {
+    /**
+     * Plugin loader.
+     */
+    public static void loadPlugins() {
+        RemoteRepositoryFactory.addRepositoryConnector("git", GITRemoteRepository2.class);
         installSshSessionFactory();
         GITCredentialsProvider.install();
+    }
+
+    /**
+     * Plugin unloader.
+     */
+    public static void unloadPlugins() {
     }
 
     private static void installSshSessionFactory() {
@@ -325,7 +337,7 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
             git.add().addFilepattern(path).call();
             LOGGER.atInfo().setMessageRB("GIT_FINISH").addArgument("addForCommit").log();
         } catch (Exception ex) {
-            Log.logErrorRB("GIT_ERROR", "addForCommit", ex.getMessage());
+            LOGGER.atError().logRB("GIT_ERROR", "addForCommit", ex.getMessage());
             throw ex;
         }
     }
@@ -347,7 +359,7 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
             LOGGER.atInfo().setMessageRB("GIT_FINISH").addArgument("addForDelete")
                     .log();
         } catch (Exception ex) {
-            Log.logErrorRB("GIT_ERROR", "addForDelete", ex.getMessage());
+            LOGGER.atError().logRB("GIT_ERROR", "addForDelete", ex.getMessage());
             throw ex;
         }
     }

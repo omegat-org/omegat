@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2014 Alex Buloichik
+               2023 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -25,10 +26,12 @@
 
 package org.omegat.core.team2;
 
-import org.omegat.core.team2.impl.FileRepository;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.omegat.core.team2.impl.GITRemoteRepository2;
-import org.omegat.core.team2.impl.HTTPRemoteRepository;
 import org.omegat.core.team2.impl.SVNRemoteRepository2;
+import org.omegat.util.Log;
 
 /**
  * Factory for create remote repository provider.
@@ -37,25 +40,35 @@ import org.omegat.core.team2.impl.SVNRemoteRepository2;
  */
 public final class RemoteRepositoryFactory {
 
+    private static final Map<String, Class<? extends IRemoteRepository2>> repositoryConnectors =
+            new HashMap<>();
+
+    /**
+     * Register team repository connector.
+     * @param type of repository, such as "svn", "git" etc.
+     * @param clazz connector class.
+     */
+    public static void addRepositoryConnector(String type, Class<? extends IRemoteRepository2> clazz) {
+        repositoryConnectors.put(type, clazz);
+    }
+
     private RemoteRepositoryFactory() {
     }
 
     public static IRemoteRepository2 create(String type) {
-        if ("svn".equals(type)) {
-            return new SVNRemoteRepository2();
-        } else if ("git".equals(type)) {
-            return new GITRemoteRepository2();
-        } else if ("http".equals(type)) {
-            return new HTTPRemoteRepository();
-        } else if ("file".equals(type)) {
-            return new FileRepository();
-        } else {
+        if (!repositoryConnectors.containsKey(type)) {
             throw new RuntimeException("Unknown repository type: " + type);
+        }
+        try {
+            return repositoryConnectors.get(type).getDeclaredConstructor().newInstance();
+        } catch (Exception e) {
+            Log.log(e);
+            throw new RuntimeException("Failed to instantiate repository connector: " + type);
         }
     }
 
     /**
-     * Tries to detect repository type. Used for migrate old projects only.
+     * Tries to detect a repository type. Used for migrate old projects only.
      */
     public static String detectRepositoryType(String url) {
         if (url.startsWith("svn")) {

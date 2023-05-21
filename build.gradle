@@ -362,6 +362,7 @@ jar {
         pluginAttr('Scripting engine', 'org/omegat/gui/script/', 'miscellaneous', desc.script)
         pluginAttr('GUI extensions', 'org/omegat/util/gui/', 'miscellaneous', desc.guiutil)
         pluginAttr('Local external search', 'org/omegat/externalfinder/', 'miscellaneous', desc.externalfinder)
+        pluginAttr('Repository connector', 'org/omegat/core/team2/impl/', 'repository', desc.repository)
     }
     // Don't include extra stuff like version number in JAR name
     archiveFileName.set("${archiveBaseName.get()}.${archiveExtension.get()}")

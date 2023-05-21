@@ -27,9 +27,9 @@ steps:
           curl -L -O "$url"
         done
   - script: |
-      umask a+w
-      mkdir -p build
-      chmod -R a+w build
+      umask 0000
+      mkdir -p build/innosetup/winJRE build/innosetup/winJRE64
+      chmod 777 build/innosetup/winJRE build/innosetup/winJRE64
       chmod -R a+w doc_src
       $(Build.SourcesDirectory)/gradlew -PenvIsCi -PassetDir=$(System.ArtifactsDirectory)/asset build manualPdfs
     displayName: 'Build distribution packages and docs'

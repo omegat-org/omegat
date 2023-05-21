@@ -821,8 +821,8 @@ ext.makeWinTask = { args ->
     win.dependsOn args.name, signedTaskName
 }
 makeWinTask(name: 'winNoJRE', suffix: 'Windows_without_JRE')
-makeWinTask(name: 'winJRE', suffix: 'Windows', jrePath: windowsJRE32)
 makeWinTask(name: 'winJRE64', suffix: 'Windows_64', jrePath: windowsJRE, arch: 'x64')
+makeWinTask(name: 'winJRE', suffix: 'Windows', jrePath: windowsJRE32)
 
 // Disable .tar distributions for everyone but Linux
 tasks.findAll { it.name =~ /[dD]istTar$/ && !it.name.contains('linux') }.each { it.enabled = false }

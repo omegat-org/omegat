@@ -8,11 +8,13 @@ steps:
     inputs:
       targetPath: $(Pipeline.Workspace)
   - task: Bash@3
-    displayName: 📂 SFTP upload to sourceforge file management
+    displayName: 📂 SCP upload to sourceforge file management
     inputs:
       targetType: 'inline'
       script: |
-        echo "lcd $(Pipeline.Workspace)/drop" > sftp.cmd
-        echo "cd /home/frs/project/omegat/OmegaT\\ -\\ Latest/OmegaT\\ ${{ parameters.omegatVersion }}/" >> sftp.cmd
-        echo "put -r . >> sftp.cmd
-        SSHPASS=$(SOURCEFORGE_FILE_PASS) sshpass -e sftp -oBatchMode=no -b sftp.cmd -oStrictHostKeyChecking=no $(SOURCEFORGE_FILE_USER)@frs.sourceforge.net
+        srcdir=$(Pipeline.Workspace)/drop
+        dest=$(SOURCEFORGE_FILE_USER)@frs.sourceforge.net
+        destdir="/home/frs/project/omegat/OmegaT\\ -\\ Latest/OmegaT\\ ${{ parameters.omegatVersion }}/"
+        echo "mkdir $destdir" | SSHPASS=$(SOURCEFORGE_FILE_PASS) sshpass -e sftp -v $dest || true
+        SSHPASS=$(SOURCEFORGE_FILE_PASS) sshpass -e scp -v -oStrictHostKeyChecking=no $srcdir/* "$dest:$destdir"
+

@@ -41,6 +41,7 @@ variables:
 
 stages:
 - stage: Check
+  condition: not(or(eq(variables['Build.Reason'], 'Schedule'), eq(variables['Build.Reason'], 'Manual')))
   jobs:
   - job: GitHubCI
     displayName: CI Check for master, releases/* and Pull-Requests
@@ -53,12 +54,12 @@ stages:
 # Build steps will run on the main and/or release branch, except for Pull-Request
 - stage: Weekly
   dependsOn: Check
-  condition: and(succeeded(), or(eq(variables['Build.Reason'], 'Schedule'), eq(variables['Build.Reason'], 'Manual')))
+  condition: or(eq(variables['Build.Reason'], 'Schedule'), eq(variables['Build.Reason'], 'Manual'))
   jobs:
   - job: WeeklyBuild
     displayName: Build for master weekly
     pool:
-      vmImage: 'ubuntu-20.04'
+      vmImage: 'ubuntu-22.04'
     steps:
       - script: |
           version=$(./gradlew -qq printVersion | head -n -1 )
@@ -75,7 +76,7 @@ stages:
   jobs:
   - job: ReleaseBuild
     pool:
-      vmImage: 'ubuntu-20.04'
+      vmImage: 'ubuntu-22.04'
     steps:
       - script: |
           version=$(./gradlew -qq printVersion | head -n -1 )

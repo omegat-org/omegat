@@ -760,6 +760,11 @@ ext.makeWinTask = { args ->
         }
         doFirst {
             delete "$destinationDir/jre"
+            if (!exePresent('iscc')) {
+                exec {
+                    executable "ci/buildiscon.sh"
+                }
+            }
         }
         doLast {
             project.copy {

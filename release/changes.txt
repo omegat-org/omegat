@@ -30,7 +30,10 @@
   https://sourceforge.net/p/omegat/feature-requests/1598/
 
   Bug fixes:
-  
+ 
+  - The COMPILE event is fired after the target commit
+  https://sourceforge.net/p/omegat/bugs/1176/
+
   - Error when trying to backup the project file on Windows
   https://sourceforge.net/p/omegat/bugs/1166/
 

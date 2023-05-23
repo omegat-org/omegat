@@ -301,7 +301,7 @@ public class SegmentBuilder {
             posSourceLength = sourceText.length();
 
             if (trans.isTranslated()) {
-                // translation exist
+                // translation exists
                 translationText = trans.translation;
             } else {
                 // Double negation - insertSource = true if

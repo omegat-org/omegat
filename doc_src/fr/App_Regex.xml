@@ -1,0 +1,1119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd"
+[
+<!ENTITY % manualvariables SYSTEM "manualvariables.mod">
+%manualvariables;
+]>
+<section id="app.regex">
+  <title id="app.regex.title">Expressions régulières</title>
+
+  <para>Cette annexe s’adresse aux utilisatrices qui souhaitent explorer une technique puissante pour améliorer leur productivité. Souvent perçues comme étant intimidantes et complexes, même les expressions régulières les plus simples (souvent abrégées <emphasis>regex</emphasis> ou <emphasis>regexp</emphasis>) sont extrêmement utiles, non seulement dans OmegaT mais également dans beaucoup d’autres applications utilisées au quotidien, avec quelques variations.</para>
+
+  <para>Nous n’abordons ici que les notions de bases les plus utiles aux traductaires. La section <link linkend="app.regex.tools" endterm="app.regex.tools.title"/> à la fin de cette annexe propose des points de départ pour explorer des usages avancés ou complexes qui dépassent l’étendue de ce guide. Si vous avez besoin d’aide pour des cas spécifiques, n’hésitez pas à poser vos questions dans les différents canaux d’aide.</para>
+  
+  <para>Les expressions régulières utilisent des combinaisons de lettre, chiffres et symboles (qu’on appellera ici <emphasis>caractères</emphasis>) pour définir une <emphasis>expression</emphasis> qui représente un motif textuel particulier.</para>
+
+  <para>Voici quelques exemples.</para>
+  
+  <variablelist>
+    <varlistentry>
+      <term>[0-9]</term>
+      <listitem><para>Un chiffre de 0 à 9.</para>
+      </listitem>
+    </varlistentry>
+
+	<varlistentry>
+      <term>\w+</term>
+      <listitem><para>Un « caractère de mot » ou plus, c’est-à-dire une lettre de l’alphabet non accentuée, un chiffre ou le symbole « _ ».</para>
+      </listitem>
+    </varlistentry>
+
+	<varlistentry>
+      <term>\h?</term>
+      <listitem><para>Représente zéro ou un caractère d’espacement (cela inclut les espaces régulières et insécables ainsi que les tabulations, mais pas les caractères de saut de ligne, qui appartiennent à la catégorie des « caractère d’espacement verticaux  » : \v.)</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>    
+  
+  <para>De nombreuses fonctions d’OmegaT dépendent des expressions régulières ou les proposent en option :</para>
+
+  <variablelist>
+    <varlistentry>
+      <term>Recherches</term>
+      <listitem>
+        <para>Les recherches incluent une option <link linkend="windows.text.search.methods.regex" endterm="windows.text.search.methods.regex.title"/> qui vous permet d’effectuer des recherches extrêmement puissantes dans vos fichiers.</para>
+
+        <para>La même option dans la boîte de dialogue <link linkend="windows.text.replace" endterm="windows.text.replace.title"/> vous permet d’appliquer des expressions régulières à la fois au texte recherché et au texte remplacé.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Balises personnalisées</term>
+      <listitem>
+        <para>Les balises personnalisées sont des balises définies avec des expressions régulières qui sont traitées exactement comme les balises natives d’OmegaT. Voir le paramètre <link linkend="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags" endterm="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags.title"/> pour en savoir plus.</para>
+
+		<para>Utilisez le caractère <code>|</code> (OU) pour séparer les définitions de balises individuelles.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Texte protégé</term>
+      <listitem>
+        <para>Le paramètre <link linkend="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation" endterm="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation.title"/> vous permet de définir une chaîne de caractères qu’OmegaT colorera en rouge par défaut et traitera comme une balise superflue.</para>
+
+		<para>Utilisez le caractère <code>|</code> (OU) pour séparer les définitions de fragments individuels.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Surlignage du texte dans les alignements</term>
+      <listitem>
+        <para>Des repères visuels peuvent aider à vérifier que votre alignement est correct. Le paramètre <link linkend="windows.aligner.adjust.highlight" endterm="windows.aligner.adjust.highlight.title"/> permet de définir les chaînes de caractères qu’OmegaT surlignera dans les documents alignés.</para>
+
+		<para>Utilisez le caractère <code>|</code> (OU) pour séparer les expressions individuelles.</para>
+      </listitem>
+    </varlistentry>	
+
+    <varlistentry>
+      <term>Segmentation</term>
+      <listitem>
+        <para>Les règles de segmentation et les masques de langage sont définis à l’aide d’expressions régulières. Vous pouvez les modifier librement pour améliorer la segmentation d’un document ou ajouter des règles générales supplémentaires. Voir l’annexe <link linkend="app.segmentation" endterm="app.segmentation.title"/> pour en savoir plus.</para>
+
+        <para>Les règles de segmentation ou d’exception définissent la position dans un segment dans lequel un fractionnement sera effectué ou non. Deux expressions régulières sont nécessaires pour définir cette position : une expression &quot;avant&quot; pour définir le masque de texte situé avant l’endroit où la règle doit s’appliquer, et une expression &quot;après&quot; pour définir le modèle de texte situé après cette position.</para>
+
+		<para>Un masque de langue qui correspond à la langue source du projet s’appliquera à ce projet.</para>
+	  </listitem>
+    </varlistentry>
+  </variablelist>
+
+  <section id="app.regex.four.rules">
+    <title id="app.regex.four.rules.title">Les 4 règles</title>
+
+    <para>Les expressions régulières sont utilisées pour rechercher du texte, y compris des caractères qui ne sont pas visibles à l’écran ou à l’impression, comme les espaces, les tabulations ou les sauts de ligne. Toute expression donnée soit <emphasis>correspond</emphasis>, soit <emphasis>ne <emphasis role="bold">correspond</emphasis> pas</emphasis> à un mot, une phrase ou une autre séquence textuelle.</para>
+    
+    <para>Chaque caractère de l’expression a son importance pour déterminer une correspondance.</para>
+    <para>Certains caractères ou combinaisons de caractères ont une signification particulière dans une expression régulière.</para>
+    
+    <warning>
+      <para>Les expressions régulières ne correspondent qu’à du texte. Elles ne peuvent pas correspondre à des décorations telles que <emphasis>gras</emphasis>, <emphasis>italique</emphasis>, ou d’autres <emphasis>effets stylistiques</emphasis>.</para>
+    </warning>
+
+    <para>Il y a quatre règles à retenir.</para>
+
+    <variablelist>
+      <varlistentry>
+        <term>La plupart des caractères correspondent simplement à eux-mêmes</term>
+        <listitem>
+          <para>La plupart des caractères d’une expression régulière vont simplement <emphasis>se chercher eux-mêmes</emphasis> dans la séquence textuelle.</para>
+
+		  <para>Par exemple, les sept lettres qui composent le mot « <emphasis>exemple</emphasis>  » indiquent à la fonction de recherche de trouver exactement ces lettres, dans cet ordre. La fonction de recherche a pour but de trouver le mot « <emphasis>exemple</emphasis>  ». Autrement dit, elle ne recherche que ce terme précis.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Les caractères alphanumériques précédés d’une barre oblique inverse (<literal>\</literal>) prennent une signification particulière.</term>
+        <listitem>
+          <para>Contrairement à une lettre seule, qui se représente simplement comme indiqué ci-dessus, une lettre précédée d’une <literal>\</literal> a une fonction particulière dans une expression régulière.</para>
+
+		  <para>Par exemple, <emphasis>r</emphasis> est juste un caractère normal mais le fait de le précéder d’une <literal>\</literal> pour en faire <literal>\r</literal> le transforme en une combinaison spéciale qui correspond à un <emphasis>caractère retour chariot</emphasis>. De même, <literal>\R</literal> correspond à <emphasis>tout caractère de saut de ligne</emphasis>.</para>
+		  
+          <note>
+            <para>Seules les lettres <emphasis>i j l m o</emphasis>, et <emphasis>y</emphasis>, en minuscules et en majuscules, n’ont pas de signification particulière lorsqu’elles sont précédées d’une barre oblique inversée. Ce manuel ne décrit qu’un petit sous-ensemble de lettres qui ont une signification particulière.</para>
+
+			<para>Consultez les sites de la section <link linkend="app.regex.tools" endterm="app.regex.tools.title"/> ci-dessous pour en savoir plus sur les combinaisons qui ne sont pas abordées ici.</para>
+          </note>
+        </listitem>
+      </varlistentry>
+        
+      <varlistentry>
+      <term>Douze caractères ont une signification particulière par défaut</term>
+        <listitem>
+          <para>Cette signification doit être annulée par un autre caractère pour correspondre au caractère lui-même.</para>
+
+          <para>La liste complète de ces caractères est <link linkend="app.regex.twelve.characters">ci-dessous</link>. Par exemple, <literal>.</literal> : lorsqu’il est utilisé seul, il a une signification particulière qui permet de correspondre à<emphasis>tout caractère unique</emphasis>.</para>
+
+		  <para>Pour trouver un point normal, il faut annuler ce sens en utilisant le <literal>\</literal>, pour faire l’expression <literal>\.</literal>, qui correspond juste à un point.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Le caractère <literal>\</literal> est un caractère très particulier</term>
+        <listitem>
+          <para>Comme indiqué ci-dessus, le caractère <literal>\</literal> a par défaut un sens particulier. Il peut annuler ou activer la signification spéciale des autres caractères. Il n’a aucun effet s’il est placé devant un caractère sans signification particulière (que ce soit par défaut ou par ajout).</para>
+
+          <para>Le <literal>\</literal> peut annuler sa propre signification spéciale en se doublant pour former <literal>\\</literal>, qui correspond au caractère de la <emphasis>barre oblique inversée</emphasis>.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </section>
+
+  <section id="app.regex.twelve.characters">
+    <title id="app.regex.twelve.characters.title">Les 12 caractères</title>
+  
+    <para>Les douze caractères particuliers sont la <emphasis>barre oblique inversée</emphasis> <literal>\</literal>, le <emphasis>caret</emphasis> <literal>^</literal>, le <emphasis>symbole dollar</emphasis> <literal>$</literal>, le <emphasis>point</emphasis> <literal>.</literal>, la <emphasis>barre verticale</emphasis> (ou <emphasis>symbole de « pipe  »</emphasis>) <literal>|</literal>, le <emphasis>point d’interrogation</emphasis> <literal> ? </literal>, l’<emphasis>astérisque</emphasis> (ou <emphasis>étoile</emphasis>) <literal>*</literal>, le <emphasis>signe plus</emphasis> <literal>+</literal>, la <emphasis>parenthèse</emphasis> ouvrante <literal>(</literal>, la <emphasis>parenthèse</emphasis> fermante, <literal>)</literal>, le <emphasis>crochet</emphasis> ouvrant <literal>[</literal>, et l’<emphasis>accolade</emphasis> <literal>{</literal> ouvrante.</para>
+
+    <para>Chaque caractère est brièvement décrit ci-dessous, avec des exemples d’expressions régulières qui utilisent ce caractère, ainsi que du texte auquel elles correspondent ou non.</para>
+    
+      <variablelist>
+        <varlistentry>
+          <term>La BARRE OBLIQUE INVERSÉE : <literal>\</literal></term>
+          <listitem>
+            <para>Ce caractère annule ou active la signification particulière du caractère suivant.</para>
+            
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry/>
+                    <entry><literal>0\.[0-9]</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>Correspond à</entry>
+                    <entry>
+                      <para>Un nombre entre <emphasis>0,0</emphasis> et <emphasis>0,9</emphasis>, ou juste le dernier <emphasis>0,5</emphasis> dans des nombres comme 10,5 ou 560,5.</para>
+
+                      <para>Le <literal>\.</literal> annule la signification « tout caractère  » du point pour correspondre au point décimal, tandis que le <literal>\d</literal> transforme la lettre « d » minuscule en une expression qui correspond à tout chiffre entre 0 et 9.</para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>Ne correspond pas à</entry>
+                    <entry>
+                      <para>Des séquences telles que 0,1, 0-3, ou les trois premiers caractères de 0x002E, qui seraient trouvées si l’expression était juste <literal>0.[0-9]</literal>, sans barre oblique inverse avant le point</para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>Le CARET <literal>^</literal></term>
+          <listitem>
+            <para>Lorsqu’il est le premier caractère de l’expression, le caractère <emphasis>caret</emphasis> correspond au début d’une ligne.</para>
+
+            <para>Lorsqu’il est le premier caractère d’une <link linkend="app.regex.types.of.expressions.classes">classe de caractères entre crochets</link>, il correspond à tous les caractères qui ne font pas partie de cette classe.</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry/>
+                    <entry>
+                      <orderedlist>
+                        <listitem>
+                          <para><literal>^A</literal></para>
+                        </listitem>
+        
+                        <listitem>
+                          <para>[^abc]</para>
+                        </listitem>
+                      </orderedlist>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>Correspond à</entry>
+                    <entry>
+                      <orderedlist>
+                        <listitem>
+                          <para>Le « A » majuscule dans la phrase suivante : « Au-dessus des étangs, au-dessus des vallées ».</para>
+                        </listitem>
+
+                        <listitem>
+                          <para>Tout caractère qui n’est <emphasis>pas</emphasis> « a », « b », ou « c  ». Dans le mot « banc », par exemple, seul le « n » correspond.</para>
+                        </listitem>
+                      </orderedlist>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>Ne correspond pas à</entry>
+                    <entry>
+                      <orderedlist>
+                        <listitem>
+                          <para>Le « A » majuscule dans la phrase suivante : « Baudelaire a écrit : <emphasis>« Au-dessus des étangs, au-dessus des vallées »</emphasis> ».</para>
+                        </listitem>
+                      
+                        <listitem>
+                          <para>Le « a », « b », ou « c » minuscule dans le mot « banc ».</para>
+                        </listitem>
+                      </orderedlist>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>Le SYMBOLE DOLLAR : <literal>$</literal></term>
+          <listitem>
+            <para>Lorsqu’il est le dernier caractère d’une expression, le symbole <emphasis>dollar</emphasis> correspond à la fin d’une ligne.</para>
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry/>
+                    <entry><literal>^\w+:$</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>Correspond à</entry>
+                    <entry>
+                      <para>Une ligne qui se compose d’un seul mot et se termine par deux-points :</para>
+                      <para><emphasis>Questions :</emphasis></para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>Ne correspond pas à</entry>
+                    <entry>
+                      <para>Une ligne qui se compose d’un seul mot, mais qui ne se termine pas par deux-points :</para>
+                      <para><emphasis>Questions ?</emphasis></para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>Le POINT : <literal>.</literal></term>
+          <listitem>
+            <para>Correspond à tout caractère unique.</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry/>
+                    <entry><literal>d.s</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>Correspond à</entry>
+                    <entry>
+                      <para>Toute combinaison de trois lettres commençant par « d » et finissant par « s » : « <emphasis>des</emphasis> », « <emphasis>dis</emphasis> », « <emphasis>dos</emphasis> », ou même des combinaisons qui n’ont pas de sens, comme « <emphasis>dzs</emphasis> » ou « <emphasis>dqs</emphasis> ».</para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>Ne correspond pas à</entry>
+                    <entry>
+                      <para>Des combinaisons contenant trois lettres qui commencent par « d » et se terminent par « s », mais qui sont réparties sur plus d’une ligne.</para>
+                      <para>Quelle est la lettre manquante ?</para>
+                        <simplelist>
+                          <member><literal>d</literal></member>
+                          <member><literal/></member>
+                          <member><literal>s</literal></member>
+                        </simplelist>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>La BARRE VERTICALE : <literal>|</literal></term>
+          <listitem>
+            <para>Ce caractère fonctionne comme un &quot;OU&quot;, permettant de choisir une des expressions qui le précèdent ou le suivent.</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry/>
+                    <entry><literal>^Une|^La</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>Correspond à</entry>
+                    <entry>
+                      <para>Le premier mot « Une » ou « La » dans des phrases telles que :<simplelist>
+                          <member>« Une pomme par jour... »</member>
+                          <member>« La prunelle de mes yeux... »</member>
+                        </simplelist>
+                      </para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>Ne correspond pas à</entry>
+                    <entry>
+                      <para>Le premier mot « Une » ou « La » dans des phrases telles que :<simplelist>
+                          <member>« Un récit intitulé <emphasis>Une Héroïne Inconnue</emphasis>. »</member>
+                          <member>« Il travaille pour le journal <emphasis>La Provence</emphasis>. »</member>
+                        </simplelist>
+                      </para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>Le POINT D’INTERROGATION : <literal>?</literal></term>
+          <listitem>
+            <para>Ce caractère indique que le caractère ou l’expression qui le précède doit correspondre zéro ou une fois.</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry/>
+                    <entry>
+                      <literal>est?␣</literal> ( sachant que &quot;␣&quot; représente une espace unique).</entry>
+                  </row>
+
+                  <row>
+                    <entry>Correspond à</entry>
+                    <entry>
+                      <para>Soit le « est » ou le « es » dans :<simplelist>
+                          <member>« C’est une bonne question. »</member>
+                          <member>« Tu es un excellent médecin. »</member>
+                        </simplelist>
+                      </para>
+                      
+                      <para>Il trouvera également le « est » final de « Bucarest » dans une phrase telle que « Elles vont à Bucarest », ou le « es » final de « Naples » dans « À Naples on trouve la meilleure pizza. »</para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>Ne correspond pas à</entry>
+                    <entry>
+                      <para>Ni le « est » ni le « es » dans :<simplelist>
+                          <member>Le verbe être : « est » (ou « es »).</member>
+                        </simplelist>
+                      </para>
+                      <para>Il n’est pas suivi d’une espace.</para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>L’ASTÉRISQUE : <literal>*</literal></term>
+          <listitem>
+            <para>Ce caractère indique que zéro ou plusieurs occurrences du caractère ou de l’expression qui le précède doivent être recherchées.</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry/>
+                    <entry><literal>jour\w*</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>Correspond à</entry>
+                    <entry>
+                      <para>Le mot « jour », ainsi que « Joure », « journée », « journalier », « jours » dans « toujours » ou « séjours », et tout autre mot ou suite de caractères contenant « jour » suivi de zéro ou plus « <emphasis>caractères de mot</emphasis> » (qui incluent les chiffres et le trait bas, de sorte que la partie précédant le « @ » dans une adresse de courriel telle que jour_123@example.email.org soit également une correspondance).</para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>Ne correspond pas à</entry>
+                    <entry>
+                      <para>L’expression complète dans « contre-jour » ou « aujourd’hui », car le trait d’union et l’apostrophe ne sont pas inclus dans <literal>\w</literal>. Seule la première occurrence du mot « jour » dans ces phrases correspond.</para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>Le signe PLUS : <literal>+</literal></term>
+          <listitem>
+            <para>Ce caractère indique qu’une ou plusieurs occurrences du caractère ou de l’expression qui le précède doivent correspondre.</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry/>
+                    <entry><literal>\d+.d</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>Correspond à</entry>
+                    <entry>
+                      <para>Des nombres tels que « 1,5 », « 23,2 » ou « 5235,8    » avec une seule décimale et un nombre quelconque de chiffres avant la décimale.</para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>Ne correspond pas à</entry>
+                    <entry>
+                      <para>La valeur entière de nombres tels que « 5 235,8 » ou « 21 571,9 ». Seule la partie du texte située après le séparateur de milliers correspondra.</para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>La PARENTHÈSE OUVRANTE : <literal>(</literal></term>
+
+          <listitem>
+            <para>Ce caractère commence un <emphasis>groupe</emphasis>, qui est un ensemble de caractères traités comme une seule unité. Les groupes sont numérotés, et leur contenu est stocké dans la mémoire. Ils peuvent être réutilisés ultérieurement dans l’expression de recherche en utilisant <literal>\<option>n</option></literal>, où <option>n</option> est le numéro du groupe.</para>
+
+            <note>
+              <para>Le contenu du groupe peut également être utilisé dans le <link linkend="windows.text.replace">texte de remplacement</link>. Utilisez <literal>$<option>n</option></literal>, où <option>n</option> est le numéro du groupe défini dans la recherche.</para>
+            </note>
+
+            <para>Les parenthèses sont toujours utilisées par paires (ouverture et fermeture). Si vous essayez d’utiliser uniquement la parenthèse ouvrante ou fermante, une erreur se produira</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry/>
+                    <entry><literal>(\b\w+\b)\h\1\b</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>Correspond à</entry>
+                    <entry>
+                      <para>Des mots doublés séparés par une espace, comme le terme « une » consécutif dans la phrase suivante :</para>
+
+					  <para>« J’ai acheté une une pomme. »</para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>Ne correspond pas à</entry>
+                    <entry>
+                      <para>Le « ça, ça » dans la phrase suivante :</para>
+
+					  <para>« Mais ça, ça dépasse les limites », car le premier « ça » est suivi à la fois d’une virgule et d’une espace et non d’une simple espace.</para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>La PARENTHÈSE FERMANTE : <literal>)</literal></term>
+
+          <listitem>
+            <para>Ce caractère clôt un groupe. Il est spécial, car il ne peut jamais être utilisé seul. Il doit être précédé de <literal>\</literal> si vous devez faire correspondre le caractère de la parenthèse fermante à lui-même.</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry/>
+                    <entry><literal>^\d+\)</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>Correspond à</entry>
+                    <entry>
+                      <para>Le nombre séquentiel (y compris les parenthèses) au début de chaque ligne dans une liste comme :</para>
+
+                      <simplelist>
+                        <member>1) Pommes</member>
+                        <member>2) Oranges</member>
+                        <member>3) Poires</member>
+                      </simplelist>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>Ne correspond pas à</entry>
+                    <entry>
+                      <para>Les nombres séquentiels qui ne sont pas au début d’une ligne.</para>
+
+                      <para>Procédez comme suit :</para>
+                      <simplelist>
+                        <member>Étape 1) Préparation</member>
+                        <member>Étape 2) ...</member>
+                      </simplelist>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>Le CROCHET OUVRANT : <literal>[</literal></term>
+
+          <listitem>
+            <para>Ce caractère doit être associé au crochet fermant pour contenir un ensemble de caractères individuels qui représentent chacun une correspondance potentielle valide.</para>
+
+            <para>Seule la parenthèse ouvrante est spéciale et doit être précédée d’une barre oblique inverse pour rechercher le caractère de crochet lui-même. Si vous souhaitez uniquement faire correspondre le crochet fermant tel quel, vous n’avez pas besoin de le faire précéder d’une barre oblique inverse. (Vous pouvez toujours l’ajouter, mais cela n’aura aucun effet sur l’expression ou le résultat).</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry/>
+                    <entry><literal>li[cs]en[cs]e</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>Correspond à</entry>
+                    <entry>
+                      <para>Les orthographes correctes de « licence » et « license », ainsi que les éventuelles fautes d’orthographe « lisence » et « lisense »</para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>Ne correspond pas à</entry>
+                    <entry>
+                      <para>Des fautes d’orthographe plus flagrantes comme « licensse » ou « lissense ».</para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>L’ACCOLADE OUVRANTE : <literal>{</literal></term>
+
+          <listitem>
+            <para>Ce caractère doit être associé à l’accolade fermante pour contenir un <emphasis>nombre exact</emphasis>, <emphasis>minimum</emphasis>, <emphasis>maximum</emphasis>, ou <emphasis>gamme</emphasis> précisant combien d’occurrences du caractère ou du groupe précédent doivent être correspondantes.</para>
+
+            <para>Seule l’accolade ouvrante est spéciale et doit être précédée d’une barre oblique inverse pour rechercher le caractère d’accolade lui-même. Si vous souhaitez uniquement faire correspondre l’accolade fermante en tant que telle, vous n’avez pas besoin de la faire précéder d’une barre oblique inverse. (Vous pouvez toujours l’ajouter, mais cela n’aura aucun effet sur l’expression ou le résultat).</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry/>
+                    <entry><literal>\d{4}/\d{1,3}</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>Correspond à</entry>
+                    <entry>
+                      <para>Les codes tels que « 1234/5 », « 1472/69 » ou « 9513/842 » sont composés de quatre chiffres, d’une barre oblique et d’un ou trois chiffres supplémentaires.</para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>Ne correspond pas à</entry>
+                    <entry>
+                      <para>Les codes tels que « 123/45 », « 1472/6985 », ou « 95133/15746 ».</para>
+                      <para><emphasis role="bold">Attention :</emphasis> Bien que les deux derniers codes ci-dessus ne soient pas complètement correspondants, l’expression donnera la partie « <emphasis>1472/698</emphasis> » de « 1472/6985 », ainsi que la partie « <emphasis>5133/157</emphasis> » de « 95133/15746 ».</para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+  </section>
+
+  <section id="app.regex.types.of.expressions">
+    <title id="app.regex.types.of.expressions.title">De nombreuses expressions</title>
+
+    <para>Cette partie présente différents types d’expressions régulières, allant des plus simples aux plus complexes.</para>
+      
+    <note>
+      <para>Rappelez-vous que la plupart des <emphasis>caractères alphabétiques</emphasis> précédés d’un <literal>\</literal> se transforment en une expression qui représente <emphasis>non pas le caractère lui-même, mais la signification particulière qui lui est associée</emphasis>.</para>
+    </note>
+
+    <section id="app.regex.types.of.expressions.simple.expressions">
+      <title id="app.regex.types.of.expressions.simple.expressions.title">Les expressions simples</title>
+      <para>L’expression régulière la plus simple consiste en un seul caractère, ou en la combinaison d’une <literal>\</literal> et d’un caractère constituant une unité avec une seule signification.</para>
+      
+      <table id="app.regex.characters">
+        <title id="app.regex.characters.title">Caractères</title>
+
+        <tgroup align="left" cols="2" rowsep="1">
+          <colspec align="left" colnum="1"/>
+
+          <thead>
+            <row>
+              <entry align="left">Expression</entry>
+              <entry align="left">Correspond à</entry>
+            </row>
+          </thead>
+
+          <tbody>
+            <row>
+              <entry><literal>x</literal></entry>
+              <entry>
+                <para>Le caractère « x » lui-même</para>
+                <para>La plupart des caractères correspondent à eux-mêmes.</para>
+              </entry>
+            </row>
+
+            <row>
+              <entry><literal>\t</literal></entry>
+              <entry>
+                <para>La tabulation, et non la lettre « t ».</para>
+			  </entry>
+            </row>
+
+            <row>
+              <entry><literal>\n</literal></entry>
+              <entry>Le caractère passage à la ligne (ajout de ligne), et non la lettre « n ».</entry>
+            </row>
+
+            <row>
+              <entry><literal>\r</literal></entry>
+              <entry>
+                <para>Le caractère retour de chariot, et non la lettre « r ».</para>
+                <para>de même, <literal>\R</literal> est n’importe quel caractère de saut de ligne.</para>
+			  </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+
+    <section id="app.regex.types.of.expressions.case">
+      <title id="app.regex.types.of.expressions.case.title">Casse</title>
+
+      
+      <para>Les recherches ordinaires d’OmegaT sont insensibles à la casse par défaut : elles correspondent à la fois aux caractères en majuscules et en minuscules, sauf si vous choisissez d’activer l’option <link linkend="windows.text.search.options" endterm="windows.text.search.options.title"/>. Dans ce cas, l’ensemble de l’expression de recherche sera sensible la casse.</para>
+
+      <para>En revanche, les Expressions régulières sont sensibles à la casse par défaut. Cela signifie qu’une expression régulière recherchant « OmegaT », par exemple, ne correspondra pas à « omegat ». Cependant, il est possible de définir la sensibilité à la casse au sein de l’expression régulière en utilisant des modificateurs spéciaux :</para>
+
+      <variablelist>
+        <varlistentry>
+          <term><literal>(?i)</literal></term>
+          <listitem>
+            <para>Rend la partie de l’expression située à droite du modificateur insensible à la casse.</para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term><literal>(?-i)</literal></term>
+          <listitem>
+            <para>Rend la partie de l’expression située à droite du modificateur sensible à la casse.</para>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+	  
+      <para>Vous pouvez en profiter pour contrôler avec précision la sensibilité à la casse dans les recherches. Par exemple, supposons que vous souhaitiez trouver des exemples de « OmegaT » et de « omegat », mais pas de « OMEGAT ». Vous pouvez utiliser l’expression suivante : <literal>(?i)o</literal><literal>(?-i)mega</literal> <literal>(?i)t</literal>, qui correspond à un « o » insensible à la casse, suivi d’un « mega » sensible à la casse, suivi d’un « t » insensible à la casse.</para>
+    </section>
+
+    <section id="app.regex.types.of.expressions.classes">
+      <title id="app.regex.types.of.expressions.classes.title">Classes</title>
+
+      <para>Les expressions régulières permettent de créer des ensembles de caractères, appelés <emphasis>classes</emphasis>. Les recherches correspondront à n’importe quel caractère de l’ensemble.</para>
+
+	  <para>Les classes sont définies en mettant les caractères souhaités entre crochets et peuvent être précisées soit en énumérant chaque caractère individuel à inclure, soit en définissant une gamme de caractères. Par exemple, vous pourriez créer la classe <literal>[£€$]</literal> pour trouver n’importe lequel de ces trois symboles monétaires dans le texte, ou [1-3] pour trouver le chiffre 1, 2 ou 3.</para>
+
+      <note>
+        <para>À l’intérieur d’une classe, seuls la barre oblique inverse (<literal>\</literal>), le caret (<literal>^</literal>), le crochet fermant (<literal>]</literal>) et le trait d’union (<literal>-</literal>) sont spéciaux. Les douze autres caractères sont normaux et ne nécessitent pas de barre oblique inverse pour être recherchés comme tels.</para>
+
+		<para>Vous pouvez rechercher n’importe lequel des quatre caractères spéciaux de la classe comme des caractères normaux en les faisant précéder d’une barre oblique inverse. Il est possible de rechercher le caret, le crochet fermant et le trait d’union en les positionnant à un endroit qui n’active pas leur signification particulière. Pour cela, il faut les placer n’importe où sauf juste après le crochet ouvrant pour le caret, immédiatement après le crochet ouvrant ou le caret qui le suit pour le crochet fermant, et juste après le crochet ouvrant ou juste avant le crochet fermant pour le trait d’union.</para>
+      </note>
+
+	  <para>De nombreux ensembles fréquemment utilisés ont une forme abrégée consistant en une barre oblique inverse suivie d’une lettre de l’alphabet. Par exemple, <literal>\d</literal> est une abréviation de <literal>[0-9]</literal>, qui correspond à n’importe quel chiffre entre 0 et 9. Dans de nombreux cas, la majuscule correspondante est utilisée pour annuler la classe : <literal>\D</literal> correspond à tout caractère qui n’est <emphasis role="bold">pas</emphasis> un chiffre.</para>
+      <para>Le tableau ci-dessous fournit plusieurs exemples supplémentaires. Ces classes ne représentent pas uniquement la lettre utilisée pour former l’abréviation.</para>
+      
+      <table id="app.regex.classes">
+        <title id="app.regex.classes.title">Exemples de classes</title>
+
+        <tgroup align="left" cols="2" rowsep="1">
+          <colspec align="left" colnum="1"/>
+
+          <thead>
+            <row>
+              <entry align="left">Expression</entry>
+              <entry align="left">Correspond à</entry>
+            </row>
+          </thead>
+
+          <tbody>
+            
+            <row>
+              <entry><literal>[abc]</literal></entry>
+              <entry>
+                <para>Les lettres « a », « b », ou « c ».</para>
+
+				<para>Une classe simple est constituée d’un nombre quelconque de caractères encadrés par <literal>[</literal> et <literal>]</literal>.</para>
+              </entry>
+            </row>
+            
+            <row>
+              <entry><literal>[C-X]</literal></entry>
+              <entry>
+                <para>Un caractère dans la gamme de lettres allant de « C » à « X ».</para>
+
+				<para>Une gamme est définie par le premier caractère d’une série, suivi d’un trait d’union, suivi du dernier caractère de la série. Il est possible de définir un nombre quelconque de gammes : <literal>[a-zA-Z0-9]</literal> désigne tout caractère minuscule de « a » à « z », ou tout caractère majuscule de « A » à « Z », ou tout chiffre de « 0 » à « 9 ». Un trait d’union placé en dehors de la série ne représente qu’un trait d’union : <literal>[a-z-]</literal> signifie tout caractère minuscule de « a » à « z », ou le caractère trait d’union lui-même.</para>
+              </entry>
+            </row>
+            
+            <row>
+              <entry><literal>[^\n\r\t]</literal></entry>
+              <entry>
+                <para>Tout caractère <emphasis>sauf</emphasis> une nouvelle ligne, un retour chariot ou une tabulation.</para>
+
+                <para>Le caret placé immédiatement après le crochet ouvrant exclut le reste des caractères de la classe.</para>
+              </entry>
+            </row>
+
+            <row>
+              <entry><literal>\w</literal></entry>
+              <entry>
+                <para>Un caractère de mot, généralement défini comme <literal>[A-Za-z0-9_]</literal>.</para>
+
+                <para><literal>\W</literal> est tout caractère qui n’est <emphasis role="bold">pas</emphasis> un caractère de mot (<literal>[^\w]</literal>).</para>
+              </entry>
+            </row>
+
+            <row>
+              <entry><literal>\s</literal></entry>
+              <entry>
+                <para>Un caractère d’espacement, y compris les caractères espace et tabulation, ainsi que les retours à la ligne.</para>
+
+                <para><literal>\S</literal> est tout caractère qui n’est <emphasis role="bold">pas</emphasis> un caractère d’espacement (<literal>[^\s]</literal>).</para>
+              </entry>
+            </row>
+
+            <row>
+              <entry>
+				<literal>\h</literal> et <literal>\v</literal>
+			  </entry>
+
+              <entry>
+				<para>Caractère d’espacement horizontaux et verticaux (on les préfère généralement à <literal>\s</literal>).</para>
+
+				<para><literal>\H </literal> est tout caractère qui n’est <emphasis role="bold">pas</emphasis> un caractère d’espacement horizontal, et <literal>\V</literal> tout caractère qui n’est <emphasis role="bold">pas</emphasis> un caractère d’espacement vertical (respectivement <literal>[^\h]</literal> et <literal>[^\v]</literal>).</para>
+			  </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+      
+      <para>Les expressions régulières ne sont pas limitées aux caractères alphanumériques. Elles comprennent l’ensemble des caractères Unicode. Utilisez les blocs, les scripts et les catégories Unicode pour spécifier des classes de caractères en dehors de la gamme des caractères alphanumériques. Quelques exemples sont présentés dans le tableau ci-dessous.</para>
+
+      <para>Consultez également le document <ulink url="https://www.regular-expressions.info/unicode.html">Unicode Regular Expressions</ulink> pour vous familiariser avec les expressions régulières Unicode.</para>
+
+      <table id="app.regex.unicode.blocks">
+        <title id="app.regex.unicode.blocks.title">Blocs, scripts et catégories Unicode</title>
+        
+        <tgroup align="left" cols="2" rowsep="1">
+          <colspec align="left" colnum="1"/>
+          <thead>
+            <row>
+              <entry align="left">Expression</entry>
+              <entry align="left">Correspond à</entry>
+            </row>
+          </thead>
+          
+          <tbody>
+            <row>
+              <entry><literal>\p{InGreek}</literal></entry>
+              <entry>
+                <para>Un caractère du bloc grec (<ulink url="https://unicode.org/reports/tr18/#Blocks">bloc Unicode</ulink>)</para>
+				
+                <para><literal>\P{InGreek}</literal> est tout caractère qui n’est <emphasis role="bold">pas</emphasis> dans le bloc grec.</para>
+              </entry>
+            </row>
+          
+            <row>
+              <entry><literal>\p{IsHan}</literal></entry>
+              <entry>
+                <para>Un logogramme (caractère <emphasis>Han</emphasis>/<emphasis>kanji</emphasis>/<emphasis>hanja</emphasis>) présent dans les langues CJC (<ulink url="https://unicode.org/reports/tr18/#Script_Property">script Unicode</ulink>).</para>
+              </entry>
+            </row>
+          
+            <row>
+              <entry><literal>\p{Lu}</literal></entry>
+              <entry>
+                <para>Une lettre majuscule (<ulink url="https://unicode.org/reports/tr18/#General_Category_Property">catégorie Unicode</ulink>)</para>
+              </entry>
+            </row>
+          
+            <row>
+              <entry><literal>\p{Sc}</literal></entry>
+              <entry>
+                <para>Un symbole monétaire, qui est également une <ulink url="https://unicode.org/reports/tr18/#General_Category_Property">catégorie Unicode</ulink>.</para>
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+
+    <section id="app.regex.more.advanced.expressions">
+      <title id="app.regex.more.advanced.expressions.title">Expressions plus avancées</title>
+      
+      <para>Certaines expressions précisent un emplacement plutôt qu’un caractère. Elles indiquent où la correspondance doit être recherchée dans le texte, mais n’incluent aucun caractère dans cette correspondance. Le tableau ci-dessous énumère les exemples les plus communs. Consultez les sites de la section <link linkend="app.regex.tools" endterm="app.regex.tools.title"/> pour plus d’informations.</para>
+
+      <table id="app.regex.boundary.matchers">
+        <title id="app.regex.boundary.matchers.title">Expressions qui indiquent un emplacement</title>
+      
+        <tgroup align="left" cols="2" rowsep="1">
+          <colspec align="left" colnum="1"/>
+
+          <thead>
+            <row>
+              <entry align="left">Expression</entry>
+              <entry align="left">Correspond à</entry>
+            </row>
+          </thead>
+          
+          <tbody>
+            <row>
+              <entry><literal>^</literal></entry>
+              <entry>
+                <para>Début de ligne</para>
+              </entry>
+            </row>
+        
+            <row>
+              <entry><literal>$</literal></entry>
+              <entry>
+                <para>Fin de ligne</para>
+              </entry>
+            </row>
+        
+            <row>
+              <entry><literal>\b</literal></entry>
+              <entry>
+                <para>Extrémité de mot</para>
+              </entry>
+            </row>
+        
+            <row>
+              <entry><literal>\B</literal></entry>
+              <entry>
+                <para><emphasis>Ne correspond pas à</emphasis> une limite de mot</para>
+              </entry>
+            </row>
+        
+            <row>
+              <entry><literal>(?=u)</literal></entry>
+              <entry>
+                <para>Un caractère suivi d’un « u ».</para>
+				
+                <para>Par exemple, <literal>q(?=u)</literal> correspond à la lettre « q » lorsqu’elle est suivie d’un « u ». Elle correspond donc au « q » de « équité » ou « question », mais <emphasis>pas</emphasis> à celui de « qigong » ou « Iraq ».</para>
+              </entry>
+            </row>
+        
+            <row>
+              <entry><literal>(?!u)</literal></entry>
+              <entry>
+                <para>Un caractère qui n’est <emphasis>pas</emphasis> suivi de la lettre « u ».</para>
+				
+                <para>Par exemple, <literal>q(?!u)</literal> correspond à la lettre « q » lorsqu’elle n’est <emphasis>pas</emphasis> suivie d’un « u ». Elle correspond donc au « q » de « qigong » ou « Iraq », mais <emphasis>pas</emphasis> à celui de « équité » ou « question ».</para>
+              </entry>
+            </row>
+            
+            <row>
+              <entry><literal>(?&lt;=q)</literal></entry>
+              <entry>
+                <para>Un caractère précédé de la lettre « q ».</para>
+				
+                <para>Par exemple, <literal>(?&lt;=q)u</literal> correspond à la lettre « u » si elle est située après « q ». Elle correspond donc au « u » de « quel », mais pas à celui de « sur ».</para>
+              </entry>
+            </row>
+        
+            <row>
+              <entry><literal>(?&lt;!q)</literal></entry>
+              <entry>
+                <para>Un caractère qui n’est <emphasis>pas</emphasis> précédé de la lettre « q ».</para>
+				
+                <para>Par exemple, <literal>(?&lt;!q)u</literal> correspond à la lettre « u » si elle n’est <emphasis>pas</emphasis> après « q ». Elle correspond donc au « u » de « sur », mais <emphasis>pas</emphasis> à celui de « équité ».</para>
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>  
+  </section>
+
+  <section id="app.regex.more.examples">
+    <title id="app.regex.more.examples.title">Plus d’exemples</title>
+
+    <para>Cette section présente quelques exemples démontrant comment les différentes expressions décrites ci-dessus peuvent être combinées pour effectuer des recherches efficaces dans OmegaT.</para>
+    
+    <table id="regex.examples">
+      <title id="regex.examples.title">Exemples d’expressions régulières utilisant les expressions présentées ci-dessus</title>
+
+      <tgroup align="left" cols="2" rowsep="1">
+        <colspec align="left" colnum="1"/>
+
+        <thead>
+          <row>
+            <entry>Expression</entry>
+            <entry>Objectif</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry><literal>(\b\w+\b)\h\1\b</literal></entry>
+            <entry>
+              <para>Trouver des doublons.</para>
+            </entry>
+          </row>
+
+          <row>
+            <entry><literal>,\h[\h(\w+\.\w+)\w,'ʼ&quot;“”-]+[\.,]</literal></entry>
+            <entry>
+              <para>Trouver les parties commençant par une virgule suivie d’un caractère d’espacement, contenant un ou plusieurs mots (y compris les mots entre guillemets, les contractions et les noms de fichiers avec une extension) et se terminant par une virgule ou un point.</para>
+            </entry>
+          </row>
+
+          <row>
+            <entry><literal>\. \h+$</literal></entry>
+            <entry>
+              <para>Trouver les caractères d’espacement supplémentaires après le point à la fin d’une ligne.</para>
+            </entry>
+          </row>
+
+          <row>
+            <entry><literal>\h+a\h+[aeiou]</literal></entry>
+            <entry>
+              <para>Trouver des mots commençant par une voyelle et placés après l’article « a  » plutôt que « an  ».</para>
+            </entry>
+          </row>
+
+          <row>
+            <entry><literal>\h+an\h+[^aeiou]</literal></entry>
+            <entry>
+              <para>Le contraire de l’exemple précédent. Trouver des mots commençant par une consonne et placés après « an  » plutôt que « a  ».</para>
+            </entry>
+          </row>
+
+          <row>
+            <entry><literal>\d{4}([/\.-]\d{1,2}){2}</literal></entry>
+            <entry>
+              <para>Trouver des dates en chaîne numérique dans un format année, mois et jour. Le mois et le jour sont séparés par une barre oblique, un point ou un trait d’union, par exemple :</para>
+			  
+                <itemizedlist>
+                  <listitem>
+                    <para>2002/11/8</para>
+                  </listitem>
+                  <listitem>
+                    <para>1969.7.20</para>
+                  </listitem>
+                  <listitem>
+                    <para>2022-10-31</para>
+                  </listitem>
+                </itemizedlist>
+
+				<note>
+                  <para>Cette expression trouve des combinaisons de nombres et de séparateurs correspondant à des dates possibles, mais ne les valide pas. Elle trouvera également des combinaisons telles que « 5136/36/71  ».</para>
+				</note>
+            </entry>
+          </row>
+
+          <row>
+            <entry><literal>\.[A-Z]</literal></entry>
+            <entry>
+              <para>Trouver un point suivi d’une majuscule. Utile pour trouver d’éventuels espaces manquants entre le point et le début d’une nouvelle phrase</para>
+            </entry>
+          </row>
+
+          <row>
+            <entry><literal>\ben\b</literal></entry>
+            <entry>
+              <para>Trouvez « en  » en tant que mot entier dans une phrase, sans faire correspondre « entro  », « cent’anni  », ou même « En  ».</para>
+            </entry>
+          </row>
+
+          <row>
+            <entry><literal>[\w\.-]+@[\w\.-]+</literal></entry>
+            <entry>
+              <para>Trouver une adresse de courriel. Cette expression simple risque de ne pas englober tous les formats possibles et valides d’adresses de courriel.</para>
+            </entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+
+  <section id="app.regex.tools">
+    <title id="app.regex.tools.title">Références</title>
+
+    <para>Bien qu’OmegaT n’offre pas de couleurs extravagantes pour vos expressions régulières, vous pouvez vous exercer en utilisant la fenêtre <link linkend="windows.text.search" endterm="windows.text.search.title"/> car OmegaT colore les résultats de la recherche.</para>
+    
+    <para>Quelques ressources supplémentaires sont présentées ci-dessous.</para>
+
+    <para>La référence technique Java est utile en tant que référence de base.<variablelist>
+        <varlistentry id="app.regex.java">
+          <term id="app.regex.java.title"><ulink url="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/regex/Pattern.html">Documentation Regex Java</ulink></term>
+          <listitem>
+            <para>La référence officielle pour les expressions régulières utilisées en Java.</para>
+          </listitem>
+        </varlistentry>
+      </variablelist>Si vous souhaitez en savoir plus sur l’utilisation des expressions régulières, nous vous recommandons les deux sites ci-dessous.<variablelist>
+        <varlistentry id="app.regex.tools.regex101">
+          <term id="app.regex.tools.regex101.title"><ulink url="https://regex101.com">https://regex101.com</ulink></term>
+          <listitem>
+            <para>Un outil de correspondance d’expressions régulières en ligne qui vous permet de saisir le texte que vous recherchez et les expressions régulières que vous voulez tester.</para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry id="app.regex.tools.regular.expression.info">
+          <term id="app.regex.tools.regular.expression.info.title"><ulink url="https://www.regular-expressions.info">https://www.regular-expressions.info</ulink></term>
+          <listitem>
+            <para>L’un des tutoriels et références les plus complets sur le web en ce qui concerne les expressions régulières.</para>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+
+      <note>
+        <para>OmegaT ne soutient en aucune façon ces sites. Si vous trouvez d’autres références intéressantes - dans n’importe quelle langue - l’équipe d’OmegaT serait ravie de les découvrir.</para>
+      </note>
+    </para>
+  </section>
+</section>

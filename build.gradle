@@ -193,7 +193,7 @@ dependencies {
         implementation 'com.google.guava:guava:31.0.1-jre'
         runtimeOnly("org.languagetool:language-all:${languageToolVersion}") {
             // Temporary exclusion; see https://sourceforge.net/p/omegat/bugs/814/
-            exclude module: 'lucene-gosen'
+            exclude module: 'lucene-gosen-ipadic'
         }
         runtimeOnly 'org.omegat.lucene:lucene-gosen:5.0.0:ipadic'
 
@@ -446,9 +446,9 @@ distributions {
             from('releases/modules-specific') {
                 into 'modules'
             }
-            from(subprojects.collect {it.tasks.withType(Jar)}) {
+            /*from(subprojects.collect {it.tasks.withType(Jar)}) {
                 into 'modules'
-            }
+            }*/
             eachFile {
                 // Move main JAR up one level from lib.
                 if (it.name == jar.archiveName) {
@@ -821,8 +821,8 @@ ext.makeWinTask = { args ->
     win.dependsOn args.name, signedTaskName
 }
 makeWinTask(name: 'winNoJRE', suffix: 'Windows_without_JRE')
-makeWinTask(name: 'winJRE', suffix: 'Windows', jrePath: windowsJRE32)
 makeWinTask(name: 'winJRE64', suffix: 'Windows_64', jrePath: windowsJRE, arch: 'x64')
+makeWinTask(name: 'winJRE', suffix: 'Windows', jrePath: windowsJRE32)
 
 // Disable .tar distributions for everyone but Linux
 tasks.findAll { it.name =~ /[dD]istTar$/ && !it.name.contains('linux') }.each { it.enabled = false }

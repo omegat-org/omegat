@@ -30,8 +30,8 @@ steps:
       umask a+w
       mkdir -p build
       chmod -R a+w doc_src
-      $(Build.SourcesDirectory)/gradlew -PenvIsCi -PassetDir=$(System.ArtifactsDirectory)/asset clean build manualPdfs
-    displayName: 'Command Line Script'
+      $(Build.SourcesDirectory)/gradlew -PenvIsCi -PassetDir=$(System.ArtifactsDirectory)/asset clean build
+    displayName: 'Build distribution packages and docs'
   - script: |
       # stop the Gradle daemon to ensure no files are left open (impacting the save cache operation later)
       ./gradlew --stop

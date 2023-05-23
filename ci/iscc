@@ -12,4 +12,15 @@ bindpaths() {
     done
 }
 
-exec docker run --rm -i -v "$PWD":/work $(bindpaths "$@") amake/innosetup:innosetup6 $(relpaths "$@")
+cat << __EOF__ | docker build -t omegat/innosetup:innosetup6 - || true
+FROM docker.io/amake/innosetup
+USER root
+ENV HOME /home/xclient
+ENV WINEPREFIX /home/xclient/.wine
+ENV WINEARCH win32
+RUN chown -R root /home
+WORKDIR /work
+ENTRYPOINT ["iscc"]
+__EOF__
+
+exec docker run --rm -i -v "$PWD":/work $(bindpaths "$@") omegat/innosetup:innosetup6 $(relpaths "$@")

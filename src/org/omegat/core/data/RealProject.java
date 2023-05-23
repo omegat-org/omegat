@@ -1053,7 +1053,6 @@ public class RealProject implements IProject {
         if (processGlossary) {
             final String glossaryPath = config.getWritableGlossaryFile().getUnderRoot();
             final File glossaryFile = config.getWritableGlossaryFile().getAsFile();
-            new File(config.getProjectRootDir(), glossaryPath);
             if (glossaryPath != null && remoteRepositoryProvider.isUnderMapping(glossaryPath)) {
                 final List<GlossaryEntry> glossaryEntries;
                 if (glossaryFile.exists()) {

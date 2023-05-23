@@ -23,7 +23,7 @@ pr:
       - README.md
 
 schedules:
-  - cron: '0 3 * * 6'
+  - cron: '0 12 * * 6'
     displayName: Weekly saturday build
     branches:
       include:
@@ -41,6 +41,7 @@ variables:
 
 stages:
 - stage: Check
+  condition: not(or(eq(variables['Build.Reason'], 'Schedule'), eq(variables['Build.Reason'], 'Manual')))
   jobs:
   - job: GitHubCI
     displayName: CI Check for master, releases/* and Pull-Requests
@@ -53,7 +54,7 @@ stages:
 # Build steps will run on the main and/or release branch, except for Pull-Request
 - stage: Weekly
   dependsOn: Check
-  condition: and(succeeded(), eq(variables['Build.Reason'], 'Schedule'))
+  condition: or(eq(variables['Build.Reason'], 'Schedule'), eq(variables['Build.Reason'], 'Manual'))
   jobs:
   - job: WeeklyBuild
     displayName: Build for master weekly

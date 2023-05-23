@@ -709,7 +709,7 @@ public class RealProject implements IProject {
 
         // COMPILE event is fired before committing translated files to remote
         // repository to be able to modify the resulting files before sending them to
-        // the repository (#1176)
+        // the repository (BUGS#1176)
         CoreEvents.fireProjectChange(IProjectEventListener.PROJECT_CHANGE_TYPE.COMPILE);
 
         if (remoteRepositoryProvider != null && config.getTargetDir().isUnderRoot() && commitTargetFiles

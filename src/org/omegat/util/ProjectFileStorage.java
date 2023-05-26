@@ -36,9 +36,18 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
+import javax.xml.stream.XMLInputFactory;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.MapperFeature;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.dataformat.xml.XmlFactory;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
+import com.fasterxml.jackson.module.jaxb.JaxbAnnotationModule;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
+
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.master.PluginUtils;
@@ -60,6 +69,25 @@ import gen.core.project.Project.Repositories;
  */
 public final class ProjectFileStorage {
 
+    private static final XmlMapper mapper;
+
+    static {
+        final XMLInputFactory xmlInputFactory = XMLInputFactory.newInstance();
+        // You should NOT use XMLInputFactor.getXMLInputFactory
+        // that returns system default object.
+        // Modifying a global object leads breakage of SuperTMXMerge
+        // library.
+        // https://sourceforge.net/p/omegat/bugs/1170/
+        xmlInputFactory.setProperty(XMLInputFactory.SUPPORT_DTD, Boolean.TRUE);
+        XmlFactory xmlFactory = new XmlFactory(xmlInputFactory);
+        mapper = XmlMapper.builder(xmlFactory).defaultUseWrapper(false)
+                .enable(MapperFeature.USE_WRAPPER_NAME_AS_PROPERTY_NAME).build();
+        mapper.registerModule(new JaxbAnnotationModule());
+        mapper.configure(ToXmlGenerator.Feature.WRITE_XML_DECLARATION, true);
+        mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+        mapper.enable(SerializationFeature.INDENT_OUTPUT);
+    }
+
     private ProjectFileStorage() {
     }
 
@@ -73,7 +101,6 @@ public final class ProjectFileStorage {
     }
 
     public static Omegat parseProjectFile(byte[] projectFile) throws Exception {
-        XmlMapper mapper = JaxbXmlMapper.getXmlMapper();
         return mapper.readValue(projectFile, Omegat.class);
     }
 
@@ -124,10 +151,10 @@ public final class ProjectFileStorage {
 
         ProjectProperties result = new ProjectProperties(projectDir);
 
-        String curVersion = om.getProject().getVersion();
-        if (!OConsts.PROJ_CUR_VERSION.equals(curVersion)) {
-            throw new TranslationException(StringUtil
-                    .format(OStrings.getString("PFR_ERROR_UNSUPPORTED_PROJECT_VERSION"), curVersion));
+        if (!OConsts.PROJ_CUR_VERSION.equals(om.getProject().getVersion())) {
+            throw new TranslationException(
+                    StringUtil.format(OStrings.getString("PFR_ERROR_UNSUPPORTED_PROJECT_VERSION"),
+                            om.getProject().getVersion()));
         }
 
         result.setTargetRoot(normalizeLoadedPath(om.getProject().getTargetDir(), OConsts.DEFAULT_TARGET));
@@ -210,8 +237,8 @@ public final class ProjectFileStorage {
         om.getProject().getSourceDirExcludes().getMask().addAll(props.getSourceRootExcludes());
         om.getProject().setTargetDir(getPathForStoring(root, props.getTargetRoot(), OConsts.DEFAULT_TARGET));
         om.getProject().setTmDir(getPathForStoring(root, props.getTMRoot(), OConsts.DEFAULT_TM));
-        om.getProject()
-                .setExportTmDir(getPathForStoring(root, props.getExportTMRoot(), OConsts.DEFAULT_EXPORT_TM));
+        om.getProject().setExportTmDir(
+                getPathForStoring(root, props.getExportTMRoot(), OConsts.DEFAULT_EXPORT_TM));
         om.getProject().setExportTmLevels(String.join(" ", props.getExportTmLevels()));
         String glossaryDir = getPathForStoring(root, props.getGlossaryRoot(), OConsts.DEFAULT_GLOSSARY);
         om.getProject().setGlossaryDir(glossaryDir);
@@ -239,7 +266,6 @@ public final class ProjectFileStorage {
             om.getProject().getRepositories().getRepository().addAll(props.getRepositories());
         }
 
-        XmlMapper mapper = JaxbXmlMapper.getXmlMapper();
         mapper.writeValue(outFile, om);
     }
 

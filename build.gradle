@@ -333,7 +333,7 @@ jar {
         pluginAttr('Local external search', 'org/omegat/externalfinder/', 'miscellaneous', desc.externalfinder)
     }
     // Don't include extra stuff like version number in JAR name
-    archiveFileName = "${archiveBaseName.get()}.${archiveExtension.get()}"
+    archiveFileName.set("${archiveBaseName.get()}.${archiveExtension.get()}")
 }
 
 ext {
@@ -440,14 +440,14 @@ distributions {
             from('release/linux-specific') {
                 filter ReplaceTokens, tokens: [
                         VERSION_NUMBER_SUBST: project.version,
-                        JAR_SUBST           : jar.archiveFileName.toString()
+                        JAR_SUBST           : jar.archiveFileName.get()
                 ]
                 fileMode 0755
             }
             from('release/win32-specific') {
                 include 'OmegaT.bat'
                 filter(ReplaceTokens, tokens: [
-                        JAR_SUBST           : jar.archiveFileName.toString()
+                        JAR_SUBST           : jar.archiveFileName.get()
                 ])
             }
             from('lib/licenses') {
@@ -462,12 +462,13 @@ distributions {
             }*/
             eachFile {
                 // Move main JAR up one level from lib.
-                if (it.name == jar.archiveFileName.toString()) {
-                    it.relativePath = it.relativePath.parent.parent.append(true, jar.archiveFileName.toString())
+                def omegatJarFilename = jar.archiveFileName.get()
+                if (it.name == omegatJarFilename) {
+                    it.relativePath = it.relativePath.parent.parent.append(true, omegatJarFilename)
                 }
             }
         }
-        distZip.archiveFileName = "${applicationName}_${version}${omtVersion.beta}_Without_JRE.zip"
+        distZip.archiveFileName.set("${applicationName}_${version}${omtVersion.beta}_Without_JRE.zip")
     }
 
     source {
@@ -489,7 +490,7 @@ distributions {
                 }
             }
         }
-        sourceDistZip.archiveFileName = "${applicationName}_${version}${omtVersion.beta}_Source.zip"
+        sourceDistZip.archiveFileName.set("${applicationName}_${version}${omtVersion.beta}_Source.zip")
     }
 
     mac {
@@ -593,11 +594,11 @@ task bridjJarSignedContents(type: Sync) {
 
 task hunspellSignedJar(type: Jar) {
     from hunspellJarSignedContents.outputs
-    archiveFileName = hunspellJar.name
+    archiveFileName.set(hunspellJar.name)
 }
 task bridjSignedJar(type: Jar) {
     from bridjJarSignedContents.outputs
-    archiveFileName = bridjJar.name
+    archiveFileName.set(bridjJar.name)
 }
 
 task installMacSignedDist(type: Sync) {
@@ -634,7 +635,7 @@ macDistZip {
     onlyIf {
         condition(!macJRE.empty, 'JRE not found')
     }
-    archiveFileName = "${applicationName}_${project.version}${omtVersion.beta}_Mac.zip"
+    archiveFileName.set("${applicationName}_${project.version}${omtVersion.beta}_Mac.zip")
 }
 
 task macSignedDistZip(type: Zip) {
@@ -642,7 +643,7 @@ task macSignedDistZip(type: Zip) {
     from(installMacSignedDist.outputs) {
         into zipRoot
     }
-    archiveFileName = "${zipRoot}.zip"
+    archiveFileName.set("${zipRoot}.zip")
 }
 
 task macNotarize {
@@ -675,7 +676,7 @@ task macStapledNotarizedDistZip(type: Zip) {
             commandLine 'xcrun', 'stapler', 'staple', app
         }
     }
-    archiveFileName = "${zipRoot}.zip"
+    archiveFileName.set("${zipRoot}.zip")
 }
 
 task mac(dependsOn: [macDistZip, macNotarize]) {
@@ -695,7 +696,7 @@ linux64DistTar {
     doFirst {
         delete "$destinationDirectory/jre"
     }
-    archiveFileName = "${applicationName}_${project.version}${omtVersion.beta}_Linux_64.tar.bz2"
+    archiveFileName.set("${applicationName}_${project.version}${omtVersion.beta}_Linux_64.tar.bz2")
     compression = Compression.BZIP2
     archiveExtension = 'tar.bz2'
 }

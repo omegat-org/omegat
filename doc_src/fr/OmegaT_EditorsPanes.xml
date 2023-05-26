@@ -799,7 +799,7 @@ Folder = <token>Dossier</token></programlisting>
 
 	  <para><literal>Les fichiers traduits sont créés</literal></para>
 
-	  <para>→ Les fichiers ont été créés par l’utilisateur.</para>
+	  <para>→ Les fichiers ont été créés par OmegaT et sont disponible dans le dossier des fichiers traduits.</para>
 	</example>
 
     <para>La partie droite de la barre d’état indique si le curseur est bloqué dans le segment (voir le paramètre <link endterm="panes.editor.cursor.lock.title" linkend="panes.editor.cursor.lock"/>) et si le curseur écrase le texte existant (voir le paramètre <link linkend="panes.editor.overwriting" endterm="panes.editor.overwriting.title"/>). Il affiche également des informations sur la progression.</para>

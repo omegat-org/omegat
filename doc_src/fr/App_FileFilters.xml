@@ -513,7 +513,7 @@
 			<varlistentry>
 			  <term>Supprimer les commentaires HTML</term>
 			  <listitem>
-				<para>Les commentaires dans un fichier HTML sont généralement destinés aux développeurs. Utilisez cette option pour les supprimer. Si l’option n’est pas cochée, les commentaires seront affichés sous la forme de balises.</para>
+				<para>Les commentaires dans un fichier HTML sont généralement destinés au développement. Utilisez cette option pour les supprimer. Si l’option n’est pas cochée, les commentaires seront affichés sous la forme de balises.</para>
 
 				<para>Les textes en commentaire HTML (entre <literal>&lt;!--</literal> et <literal>--&gt;</literal>) ne sont pas copiés dans le document traduit.</para>
 			  </listitem>

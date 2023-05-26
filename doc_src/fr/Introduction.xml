@@ -387,7 +387,7 @@
 
 	<example id="example.how.decorations.are.displayed">
 	  <title id="example.how.decorations.are.displayed.title">Affichage des décorations dans OmegaT</title>
-	  <para>OmegaT est un programme <code role="tag">&lt;t0/&gt;</code>facile à utiliser<code role="tag">&lt;t1/&gt;</code> pour les traducteurs <code role="tag">&lt;t2/&gt;</code>sagaces<code role="tag">&lt;t3/&gt;</code>.</para>
+	  <para>OmegaT est un programme <code role="tag">&lt;t0/&gt;</code>facile à utiliser<code role="tag">&lt;t1/&gt;</code> pour les traductaires <code role="tag">&lt;t2/&gt;</code>sagaces<code role="tag">&lt;t3/&gt;</code>.</para>
     </example>
 
 	<note>

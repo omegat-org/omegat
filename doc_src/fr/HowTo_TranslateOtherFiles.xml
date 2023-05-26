@@ -106,6 +106,6 @@
 	<section id="how.to.translate.other.files.develop">
 	  <title id="how.to.translate.other.files.develop.title">Développement</title>
 
-	  <para>OmegaT fournit aux développeurs une documentation complète pour créer des extensions de filtres de fichiers. Voir <ulink url="https://omegat.readthedocs.io/en/latest/11.HowToCreateFilterPlugin/">How to create a file filter plugin for OmegaT</ulink> pour en savoir plus.</para>
+	  <para>OmegaT fournit une documentation complète pour créer des extensions de filtres de fichiers. Voir <ulink url="https://omegat.readthedocs.io/en/latest/11.HowToCreateFilterPlugin/">How to create a file filter plugin for OmegaT</ulink> pour en savoir plus.</para>
 	</section>
   </section>

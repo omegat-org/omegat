@@ -3,17 +3,13 @@ parameters:
     default: ''
 
 steps:
-  - task: DownloadPipelineArtifact@2
-    displayName: 'Download Artifact: drop'
-    inputs:
-      targetPath: $(Pipeline.Workspace)
   - task: Bash@3
     displayName: 📂 SCP upload to sourceforge file management
     inputs:
       targetType: 'inline'
       script: |
         echo "Push OmegaT ${{ parameters.omegatVersion }} files to SourceForge file manager"
-        srcdir=$(Pipeline.Workspace)/drop
+        srcdir=$(system.defaultworkingdirectory)/build/distributions/
         dest=$(SOURCEFORGE_FILE_USER)@frs.sourceforge.net
         destdir=/home/frs/project/omegat/Weekly
         echo "mkdir $destdir" | SSHPASS=$(SOURCEFORGE_FILE_PASS) sshpass -e sftp -v $dest || true

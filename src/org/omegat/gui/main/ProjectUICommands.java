@@ -349,11 +349,11 @@ public final class ProjectUICommands {
                     // so we add root repository mapping
                     props.setRepositories(repos);
                 } else {
-                    RepositoryDefinition remoteRepo = getRootGitRepositoryMapping(props.getRepositories());
-                    if (isRepositoryEquals(remoteRepo, repo)) {
+                    RepositoryDefinition remoteRepo = getRootRepositoryMapping(props.getRepositories());
+                    if (!isRepositoryEquals(remoteRepo, repo)) {
                         // when remote repository config is different with
                         // opening url, respect local one
-                        setRootGitRepositoryMapping(props.getRepositories(), repo);
+                        setRootRepositoryMapping(props.getRepositories(), repo);
                     }
                 }
                 // We write in all cases, because we might have added default
@@ -579,19 +579,18 @@ public final class ProjectUICommands {
                         if (props.getRepositories() == null) {
                             // We have a project without mapping
                             // So we restore the mapping we just lost
-                            Log.logInfoRB("TF_REMOTE_PROJECT_LACKS_GIT_SETTING");
+                            Log.logInfoRB("TF_REMOTE_PROJECT_LACKS_REPOSITORY_SETTING");
                             props.setRepositories(localRepos);
                         } else {
                             // use mapping from remote configuration but
-                            // override repository URL when project URL is git
-                            // type when there is difference between local and
-                            // remote config.
-                            RepositoryDefinition localRootRepository = getRootGitRepositoryMapping(
+                            // override repository URL when there is difference
+                            // between local and remote config.
+                            RepositoryDefinition localRootRepository = getRootRepositoryMapping(
                                     localRepos);
-                            RepositoryDefinition newRepository = getRootGitRepositoryMapping(
+                            RepositoryDefinition newRepository = getRootRepositoryMapping(
                                     props.getRepositories());
                             if (!isRepositoryEquals(localRootRepository, newRepository)) {
-                                setRootGitRepositoryMapping(props.getRepositories(), localRootRepository);
+                                setRootRepositoryMapping(props.getRepositories(), localRootRepository);
                             }
                         }
                         needToSaveProperties = !isIdenticalOmegatProjectProperties(props, localProps);
@@ -731,12 +730,11 @@ public final class ProjectUICommands {
                 .append(my.getDictRoot(), that.getDictRoot()).isEquals();
     }
 
-    private static RepositoryDefinition getRootGitRepositoryMapping(List<RepositoryDefinition> repos) {
+    private static RepositoryDefinition getRootRepositoryMapping(List<RepositoryDefinition> repos) {
         RepositoryDefinition repositoryDefinition = null;
         for (RepositoryDefinition definition : repos) {
             if (definition.getMapping().get(0).getLocal().equals("/")
-                    && definition.getMapping().get(0).getRepository().equals("/")
-                    && definition.getType().equals("git")) {
+                    && definition.getMapping().get(0).getRepository().equals("/")) {
                 repositoryDefinition = definition;
                 break;
             }
@@ -744,12 +742,12 @@ public final class ProjectUICommands {
         return repositoryDefinition;
     }
 
-    private static void setRootGitRepositoryMapping(List<RepositoryDefinition> repos,
-            RepositoryDefinition repositoryDefinition) {
+    private static void setRootRepositoryMapping(List<RepositoryDefinition> repos,
+                                                 RepositoryDefinition repositoryDefinition) {
         if (repositoryDefinition == null) {
             return;
         }
-        RepositoryDefinition originalRepositoryDefinition = getRootGitRepositoryMapping(repos);
+        RepositoryDefinition originalRepositoryDefinition = getRootRepositoryMapping(repos);
         if (originalRepositoryDefinition == null) {
             return;
         }

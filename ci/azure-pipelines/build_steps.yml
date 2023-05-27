@@ -36,8 +36,3 @@ steps:
       # stop the Gradle daemon to ensure no files are left open (impacting the save cache operation later)
       ./gradlew --stop
     displayName: Gradlew stop
-  - task: PublishPipelineArtifact@1
-    displayName: 'Publish Artifact: drop'
-    inputs:
-      targetPath: '$(system.defaultworkingdirectory)/build/distributions/'
-      artifactName: 'drop'

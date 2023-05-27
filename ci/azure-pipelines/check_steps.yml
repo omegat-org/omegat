@@ -14,12 +14,3 @@ steps:
     displayName: 'Publish Test Results build/reports/**/*.xml'
     inputs:
       testResultsFiles: 'build/reports/**/*.xml'
-#  - task: CopyFiles@2
-#    displayName: 'Copy Files to: $(build.artifactstagingdirectory)'
-#    inputs:
-#      SourceFolder: '$(system.defaultworkingdirectory)/build/distributions'
-#      TargetFolder: '$(build.artifactstagingdirectory)'
-#  - task: PublishBuildArtifacts@1
-#    displayName: 'Publish Artifact: drop'
-#    inputs:
-#      PathtoPublish: '$(build.artifactstagingdirectory)'

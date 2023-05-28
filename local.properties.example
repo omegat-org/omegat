@@ -1,5 +1,12 @@
 ## Windows code signing
-winCodesignFile=
+# ex.
+# pkcs11engine=/usr/lib/x86_64-linux-gnu/engines-3/pkcs11.so
+# pkcs11module=/usr/lib/libcrypto3PKCS.so
+# winCodesignTimestampUrl=http://time.certum.pl/
+# winCodesignCert=/home/user/a-provided-certification.pem
+#
+pkcs11module=
+winCodesignCert=
 winCodesignPassword=
 winCodesignTimestampUrl=
 
@@ -8,28 +15,6 @@ macCodesignIdentity=
 
 ## Mac notarization
 macNotarizationUsername=
-
-## Java Web Start code signing
-# Base URL for all Web Start files
-jwsCodebase=
-# Setup key information for signing jar
-# - keystore:  keystore file
-# - storetype: the type of keystore; specify 'pkcs12' if not default ('jks')
-# - alias:     alias of private key in keystore file
-# - storepass: password for access to keystore
-# - keypass:   password for private key (comment out when equal to storepass)
-#
-# You can create a key for testing by command:
-#  keytool -genkey -alias <alias> -keystore <keystore>
-# e.g.,
-#  keytool -genkey -alias webstart -keystore OmegaT.keystore
-#jwsKeystore=
-#jwsStoretype=
-#jwsAlias=
-#jwsStorepass=
-#jwsKeypass=
-# URL for timestamp. See: https://ant.apache.org/manual/Tasks/signjar.html
-#jwsTsaurl=
 
 ## Sonatype OSSRH publishing (synced to Maven Central)
 ossrhUser=
@@ -46,6 +31,10 @@ signing.keyId=
 signing.password=
 # Exported as e.g. `gpg --export-secret-keys > secring.gpg`
 signing.secretKeyRingFile=
+
+## example with GnuPG
+#signing.gnupg.keyName=<KeyHashHex>
+#signing.gnupg.executable=gpg
 
 ## SourceForge web
 sourceforgeWebUser=

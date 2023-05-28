@@ -54,6 +54,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.Set;
+import java.util.TimeZone;
 import java.util.function.BiPredicate;
 import java.util.function.Function;
 import java.util.regex.Matcher;
@@ -143,9 +144,10 @@ public final class FileUtil {
      * @return the name of the backuped file
      */
     public static String getBackupFilename(File original) {
+        final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmm");
+        dateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
         return String.format("%s.%s%s", original.getName(),
-                new SimpleDateFormat("yyyyMMddHHmm").format(new Date(original.lastModified())),
-                OConsts.BACKUP_EXTENSION);
+                dateFormat.format(new Date(original.lastModified())), OConsts.BACKUP_EXTENSION);
     }
 
     /**

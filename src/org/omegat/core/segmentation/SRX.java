@@ -92,6 +92,7 @@ public class SRX implements Serializable {
         mapper.registerModule(new JaxbAnnotationModule());
         mapper.configure(ToXmlGenerator.Feature.WRITE_XML_DECLARATION, true);
         mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+        mapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
         mapper.enable(SerializationFeature.INDENT_OUTPUT);
     }
 

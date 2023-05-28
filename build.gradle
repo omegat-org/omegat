@@ -804,21 +804,6 @@ ext.makeWinTask = { args ->
     def signedTaskName = "${args.name}Signed"
     def signedExe = "${distsDir}/${installerBasename}_Signed.exe"
     task(type: Exec, signedTaskName) {
-        onlyIf {
-            // Set these in e.g. local.properties
-            def props = ['winCodesignCert', 'winCodesignPassword']
-            conditions([props.every { project.hasProperty(it) }, 'Code signing properties not set'],
-                       [file(installerExe).file, 'Unsigned installer not built'],
-                       [exePresent('osslsigncode'), 'osslsigncode not installed'])
-        }
-        def pkcs11module = project.hasProperty('pkcs11module')? project.property('pkcs11module') :
-                '/usr/lib/x86_64-linux-gnu/pkcs11/opensc-pkcs11.so'
-        def pkcs11time = project.hasProperty('winCodesignTimestampUrl')? project.property('winCodesignTimestampUrl') :
-                'http://time.certum.pl/'
-        def pkcs11cert = project.hasProperty('winCodesignCert')? project.property('winCodesignCert') : ''
-        def pkcs11pass = project.hasProperty('winCodesignPassword')? project.property('winCodesignPassword') : ''
-        inputs.file installerExe
-        outputs.file signedExe
         // You'd think we could just set the PATH, but there be dragons here
         // https://github.com/palantir/gradle-docker/issues/162
         // Starting from Nov 2022, certification provider force to use HSM to
@@ -828,16 +813,34 @@ ext.makeWinTask = { args ->
         // Common Criteria EAL 4+, or equivalent.
         // #1179 build/release: Windows binary signature with PKCS#11 HSM
         // https://sourceforge.net/p/omegat/bugs/1179/
-        commandLine(['osslsigncode', 'sign',
-              '-pkcs11module', pkcs11module,
-              '-certs', pkcs11cert,
-              '-pass', pkcs11pass,
-              '-t', pkcs11time,
-              '-n', applicationName,
-              '-i', omtWebsite,
-              '-h', 'sha256',
-              '-in', installerExe.toString(),
-              '-out', signedExe.toString()])
+        // requires osslsigncode version 2.5 or later.
+        onlyIf {
+            // Set these in e.g. local.properties
+            def props = ['pkcs11module', 'winCodesignPassword']
+            conditions([props.every { project.hasProperty(it) }, 'Code signing properties not set'],
+                       [file(installerExe).file, 'Unsigned installer not built'],
+                       [exePresent('osslsigncode'), 'osslsigncode not installed'])
+        }
+        inputs.file installerExe
+        outputs.file signedExe
+        def commandArgs = ['osslsigncode', 'sign', '-pkcs11module', project.hasProperty('pkcs11module')?
+                project.property('pkcs11module') : 'dummy(it should specified)']
+        if (project.hasProperty('winCodesignCert')) {
+            commandArgs.addAll('-certs', project.property('winCodesignCert'))
+        }
+        if (project.hasProperty('pkcs11cert')) {
+            commandArgs.addAll('-pkcs11cert', project.property('pkcs11cert'))
+        }
+        if (project.hasProperty('winCodesignPassword')) {
+            commandArgs.addAll('-pass', project.property('winCodesignPassword'))
+        }
+        commandArgs.addAll(
+                '-t', project.hasProperty('winCodesignTimestampUrl')? project.property('winCodesignTimestampUrl') :
+                        'http://time.certum.pl/',
+                '-n', applicationName, '-i', omtWebsite, '-h', 'sha256',
+                '-in', installerExe.toString(),
+                '-out', signedExe.toString())
+        commandLine(commandArgs)
         dependsOn args.name
     }
     assemble.dependsOn args.name, signedTaskName

@@ -2,12 +2,16 @@
 # ex.
 # pkcs11engine=/usr/lib/x86_64-linux-gnu/engines-3/pkcs11.so
 # pkcs11module=/usr/lib/libcrypto3PKCS.so
+# pkcs11cert='pkcs11:type=cert'
 # winCodesignTimestampUrl=http://time.certum.pl/
 # winCodesignCert=/home/user/a-provided-certification.pem
 #
+# mandatory
 pkcs11module=
-winCodesignCert=
 winCodesignPassword=
+# optional
+pkcs11cert=
+winCodesignCert=
 winCodesignTimestampUrl=
 
 ## Mac code signing

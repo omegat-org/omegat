@@ -815,8 +815,8 @@ ext.makeWinTask = { args ->
                 '/usr/lib/x86_64-linux-gnu/pkcs11/opensc-pkcs11.so'
         def pkcs11time = project.hasProperty('winCodesignTimestampUrl')? project.property('winCodesignTimestampUrl') :
                 'http://time.certum.pl/'
-        def pkcs11cert = project.hasProperty('winCodesignCert')? project.property('winCodesignCert') : null
-        def pkcs11pass = project.hasProperty('winCodesignPassword')? project.property('winCodesignPassword') : null
+        def pkcs11cert = project.hasProperty('winCodesignCert')? project.property('winCodesignCert') : ''
+        def pkcs11pass = project.hasProperty('winCodesignPassword')? project.property('winCodesignPassword') : ''
         inputs.file installerExe
         outputs.file signedExe
         // You'd think we could just set the PATH, but there be dragons here

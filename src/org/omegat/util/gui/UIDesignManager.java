@@ -36,6 +36,8 @@ import java.awt.Container;
 import java.awt.Font;
 import java.awt.Image;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPopupMenu;
@@ -45,6 +47,8 @@ import javax.swing.UIDefaults;
 import javax.swing.UIManager;
 import javax.swing.plaf.ColorUIResource;
 
+import org.omegat.gui.main.BaseMainWindowMenu;
+import org.omegat.gui.preferences.IMenuPreferece;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Platform;
@@ -73,7 +77,44 @@ import com.vlsolutions.swing.docking.ui.DockingUISettings;
  */
 public final class UIDesignManager {
 
+    public static final String menuClassID = "OmegaTMainWindowMenu";
+    public static final String toolbarClassID = "OmegaTMainWindowToolbar";
+
+    private static final List<IMenuPreferece> menuPreferences = new ArrayList<>();
+
     private UIDesignManager() {
+    }
+
+    public static void addMenuUIPreference(IMenuPreferece menuUIPreference) {
+        menuPreferences.add(menuUIPreference);
+    }
+
+    public static List<IMenuPreferece> getMenuUIPreferences() {
+        return menuPreferences;
+    }
+
+    private static void setMenuUI(String menuUIPrefClassName, ClassLoader classLoader) {
+        try {
+            Class<?> prefClazz = classLoader.loadClass(menuUIPrefClassName);
+            if (prefClazz != null) {
+                Object o = prefClazz.getDeclaredConstructor().newInstance();
+                if (o instanceof IMenuPreferece) {
+                    IMenuPreferece pref = (IMenuPreferece) o;
+                    String menuUIClassName = pref.getMenuUIClassName();
+                    Class<?> clazz =classLoader.loadClass(menuUIClassName);
+                    if (BaseMainWindowMenu.class.isAssignableFrom(clazz)) {
+                        UIManager.put(menuClassID, clazz);
+                    }
+                    String toolbarClassName = pref.getToolbarClassName();
+                    if (toolbarClassName != null) {
+                        Class<?> toolclazz = classLoader.loadClass(toolbarClassName);
+                        UIManager.put(toolbarClassID, toolclazz);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            Log.log(e);
+        }
     }
 
     public static void setTheme(String lafClassName, ClassLoader classLoader) {
@@ -99,6 +140,11 @@ public final class UIDesignManager {
         // Set Look And Feel
         String theme = Preferences.getPreferenceDefault(Preferences.THEME_CLASS_NAME, Preferences.THEME_CLASS_NAME_DEFAULT);
         setTheme(theme, mainClassLoader);
+
+        String menuUI = Preferences.getPreference(Preferences.MENUUI_CLASS_NAME);
+        if (menuUI != null) {
+            setMenuUI(menuUI, mainClassLoader);
+        }
 
         if (UIManager.getColor("OmegaT.source") == null) {
             // Theme apparently did not load default colors so we do so now

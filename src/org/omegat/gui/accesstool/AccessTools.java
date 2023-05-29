@@ -23,13 +23,15 @@
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package org.omegat.gui.main;
+package org.omegat.gui.accesstool;
 
-import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.io.File;
-import java.nio.CharBuffer;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -41,63 +43,80 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
-import org.omegat.core.data.IProject;
 import org.omegat.core.events.IProjectEventListener;
+import org.omegat.gui.main.MainMenuIcons;
+import org.omegat.gui.main.MainWindow;
+import org.omegat.gui.main.MainWindowMenuHandler;
+import org.omegat.gui.main.ProjectUICommands;
 import org.omegat.util.OStrings;
 import org.omegat.util.RecentProjects;
-import org.omegat.util.StringUtil;
 import org.omegat.util.gui.ResourcesUtil;
 
 /**
  * @author Hiroshi Miura
  */
-public class MainWindowAccessTools {
+@SuppressWarnings("serial")
+public class AccessTools extends JPanel {
 
-    JComboBox<String> recentProjectCB;
-    JComboBox<SourceFileInfo> sourceFilesCB;
+    JComboBox<URI> recentProjectCB;
+    JComboBox<ProjectFileInformation> sourceFilesCB;
     JButton searchButton;
     JButton settingsButton;
 
     private ProjectComboBoxModel projectComboBoxModel;
     private SourceComboBoxModel sourceComboBoxModel;
-
     private final MainWindowMenuHandler mainWindowMenuHandler;
+    private final static int MAX_PATH_LENGTH_SHOWN = 25;
+    private final static float CHECKBOX_HEIGHT_RATIO = 1.8f;
 
-    static MainWindowAccessTools of(Container container, MainWindowMenuHandler mainWindowMenuHandler) {
-        MainWindowAccessTools mainWindowAccessTools = new MainWindowAccessTools(mainWindowMenuHandler);
-        mainWindowAccessTools.initComponents(container);
-        return mainWindowAccessTools;
-    }
-
-    MainWindowAccessTools(final MainWindowMenuHandler mainWindowMenuHandler) {
+    public AccessTools(final MainWindow mainWindow,
+                       final MainWindowMenuHandler mainWindowMenuHandler) {
         this.mainWindowMenuHandler = mainWindowMenuHandler;
+        initComponents();
     }
 
-    void initComponents(Container container) {
+    public void initComponents() {
+        setLayout(new FlowLayout(FlowLayout.LEFT));
         JLabel recentLabel = new JLabel(OStrings.getString("TF_MENU_NEWUI_PROJECT_SELECTOR"));
-        container.add(recentLabel);
+        add(recentLabel);
         recentProjectCB = new JComboBox<>();
-        projectComboBoxModel = new ProjectComboBoxModel();
+        int fontHeight = recentProjectCB.getFont().getSize();
+        int cbHeight = (int)(CHECKBOX_HEIGHT_RATIO * fontHeight);
+        int cbWidth = fontHeight * MAX_PATH_LENGTH_SHOWN;
+        recentProjectCB.setRenderer(new NameAndPathComboBoxRenderer());
+        recentProjectCB.setUI(new ToolbarComboboxUI());
+        List<URI> projectList = new ArrayList<>();
+        try {
+            projectList.add(new URI("omegat", "new", null));
+            projectList.add(new URI("omegat", "open", null));
+            projectList.add(new URI("omegat", "team", null));
+        } catch (URISyntaxException ignored) {
+        }
+        RecentProjects.getRecentProjects().stream().map(f -> Paths.get(f).toUri()).forEach(projectList::add);
+        projectComboBoxModel = new ProjectComboBoxModel(projectList);
         recentProjectCB.setModel(projectComboBoxModel);
         recentProjectCB.setEnabled(true);
-        recentProjectCB.setPreferredSize(new Dimension(300, 20));
-        recentProjectCB.setMaximumSize(new Dimension(400, 20));
-        container.add(recentProjectCB);
+        recentProjectCB.setPreferredSize(new Dimension(cbWidth, cbHeight));
+        recentProjectCB.setMaximumSize(new Dimension(cbWidth, cbHeight));
+        add(recentProjectCB);
 
         JLabel sourceTitle = new JLabel(OStrings.getString("TF_MENU_NEWUI_FILE_SELECTOR"));
-        container.add(sourceTitle);
+        add(sourceTitle);
         sourceFilesCB = new JComboBox<>();
         sourceComboBoxModel = new SourceComboBoxModel(Collections.emptyList());
+        sourceFilesCB.setUI(new ToolbarComboboxUI());
         sourceFilesCB.setModel(sourceComboBoxModel);
+        sourceFilesCB.setRenderer(new ProjectFileRenderer());
         sourceFilesCB.setEnabled(true);
-        sourceFilesCB.setPreferredSize(new Dimension(320, 20));
-        sourceFilesCB.setMaximumSize(new Dimension(400, 20));
-        container.add(sourceFilesCB);
+        sourceFilesCB.setPreferredSize(new Dimension(cbWidth, cbHeight));
+        sourceFilesCB.setMaximumSize(new Dimension(cbWidth, cbHeight));
+        add(sourceFilesCB);
 
         searchButton = new JButton("",
                 Objects.requireNonNullElseGet(UIManager.getIcon("OmegaT.newUI.search.icon"),
@@ -109,9 +128,9 @@ public class MainWindowAccessTools {
         settingsButton.setBorderPainted(false);
 
         // -- right side
-        container.add(Box.createGlue());
-        container.add(searchButton);
-        container.add(settingsButton);
+        add(Box.createGlue());
+        add(searchButton);
+        add(settingsButton);
 
         searchButton.addActionListener(actionEvent -> {
             mainWindowMenuHandler.editFindInProjectMenuItemActionPerformed();
@@ -122,17 +141,36 @@ public class MainWindowAccessTools {
         recentProjectCB.addActionListener(actionEvent -> {
             // when select a project from the list, we open it.
             final Object item = recentProjectCB.getSelectedItem();
-            if (item == null || StringUtil.isEmpty(item.toString())) {
+            if (item == null) {
                 return;
             }
-            Optional<String> targetProject = RecentProjects.getRecentProjects().stream()
-                    .filter(f -> Paths.get(f).getFileName().toString().equals(item)).findFirst();
-            targetProject.ifPresent(s -> {
-                // clear file list at first.
-                sourceComboBoxModel.clear();
-                sourceFilesCB.revalidate();
-                ProjectUICommands.projectOpen(new File(s), true);
-            });
+            if (item instanceof URI) {
+                URI projectUri = (URI)item;
+                if (projectUri.getScheme().equals("omegat")) {
+                    switch (projectUri.getSchemeSpecificPart()) {
+                        case "new":
+                            mainWindowMenuHandler.projectNewMenuItemActionPerformed();
+                            break;
+                        case "open":
+                            mainWindowMenuHandler.projectOpenMenuItemActionPerformed();
+                            break;
+                        case "team":
+                            mainWindowMenuHandler.projectTeamNewMenuItemActionPerformed();
+                            break;
+                        default:
+                            break;
+                    }
+                } else {
+                    Optional<String> targetProject = RecentProjects.getRecentProjects().stream()
+                            .filter(f -> Paths.get(f).toUri().equals(projectUri)).findFirst();
+                    targetProject.ifPresent(s -> {
+                        // clear file list at first.
+                        sourceComboBoxModel.clear();
+                        sourceFilesCB.revalidate();
+                        ProjectUICommands.projectOpen(new File(s), true);
+                    });
+                }
+            }
         });
 
         sourceFilesCB.addActionListener(actionEvent -> {
@@ -140,7 +178,7 @@ public class MainWindowAccessTools {
             if (selected == null) {
                 return;
             }
-            int modelRow = ((SourceFileInfo) selected).getModelRow();
+            int modelRow = ((ProjectFileInformation) selected).getModelRow();
             if (modelRow >= 0) {
                 Core.getEditor().gotoFile(modelRow);
                 Core.getEditor().requestFocus();
@@ -172,73 +210,18 @@ public class MainWindowAccessTools {
 
     private synchronized void updateProjectFiles(String activeFileName) {
         sourceComboBoxModel.clear();
-        final List<SourceFileInfo> files;
+        final List<ProjectFileInformation> files;
         if (activeFileName != null) {
-            sourceComboBoxModel.addElement(new SourceFileInfo(activeFileName));
+            sourceComboBoxModel.addElement(new ProjectFileInformation(activeFileName));
             Core.getProject().getProjectFiles().stream()
                     .filter(f -> !f.filePath.equals(activeFileName))
-                    .map(SourceFileInfo::new)
+                    .map(ProjectFileInformation::new)
                     .forEach(it -> sourceComboBoxModel.addElement(it));
         } else {
             files = Core.getProject().getProjectFiles().stream()
-                    .map(SourceFileInfo::new)
+                    .map(ProjectFileInformation::new)
                     .collect(Collectors.toList());
             sourceComboBoxModel.addAll(files);
-        }
-    }
-
-    /**
-     * Creates a string of NBSP that is 'spaces' spaces long.
-     *
-     * @param spaces The number of spaces to add to the string.
-     */
-    private static String spaces(int spaces) {
-      return CharBuffer.allocate(spaces).toString().replace('\0', (char) 160);
-    }
-
-    static class SourceFileInfo {
-
-        private static final int FILE_SELECTOR_WIDTH = 48;
-
-        private final String filePath;
-        private final int segments;
-
-        public SourceFileInfo(final String activeFileName) {
-            filePath = Paths.get(activeFileName).getFileName().toString();
-            segments =
-                    Core.getProject().getProjectFiles().stream()
-                            .filter(fi -> Paths.get(fi.filePath).getFileName().toString().equals(this.filePath))
-                            .map(fi -> fi.entries.size())
-                            .findFirst()
-                            .orElse(0);
-        }
-
-        public SourceFileInfo(final IProject.FileInfo f) {
-            filePath = Paths.get(f.filePath).getFileName().toString();
-            segments = f.entries.size();
-        }
-
-        @Override
-        public String toString() {
-            int numSpaceCh = FILE_SELECTOR_WIDTH - Integer.toString(segments).length() - filePath.length() - 1;
-            if (numSpaceCh < 0) {
-                return String.format("%s%s %d", filePath.substring(0, filePath.length() - numSpaceCh - 2),
-                        "...", segments);
-            }
-            return String.format("%s%s %d", filePath, spaces(numSpaceCh), segments);
-
-        }
-
-        public int getModelRow() {
-            int modelRow = -1;
-            List<IProject.FileInfo> projectFiles = Core.getProject().getProjectFiles();
-            for (int i = 0; i < projectFiles.size(); i++) {
-                if (Paths.get(projectFiles.get(i).filePath).getFileName().toString().equals(this.filePath)) {
-                    modelRow = i;
-                    break;
-                }
-            }
-            return modelRow;
         }
     }
 
@@ -246,13 +229,10 @@ public class MainWindowAccessTools {
      * ComboBoxModel for project access tool.
      */
     @SuppressWarnings("serial")
-    static class ProjectComboBoxModel extends DefaultComboBoxModel<String> {
+    static class ProjectComboBoxModel extends DefaultComboBoxModel<URI> {
 
-        public ProjectComboBoxModel() {
-            super(RecentProjects.getRecentProjects()
-                    .stream()
-                    .map(f -> Paths.get(f).getFileName().toString())
-                    .toArray(String[]::new));
+        public ProjectComboBoxModel(List<URI> list) {
+            super(list.toArray(URI[]::new));
         }
 
         public void update() {
@@ -260,7 +240,7 @@ public class MainWindowAccessTools {
             if (recentProjects.size() > getSize()) {
                 // when a new project is added to the list
                 recentProjects.stream()
-                        .map(f -> Paths.get(f).getFileName().toString())
+                        .map(f -> Paths.get(f).toUri())
                         .filter(p -> getIndexOf(p) < 0)  // when new project
                         .forEach(this::addElement);
             }
@@ -271,14 +251,14 @@ public class MainWindowAccessTools {
      * CombBoxModel for file access tool.
      */
     @SuppressWarnings("serial")
-    static class SourceComboBoxModel extends DefaultComboBoxModel<SourceFileInfo> {
+    static class SourceComboBoxModel extends DefaultComboBoxModel<ProjectFileInformation> {
 
         /**
          * Constructor.
          * @param items default lists of SourceFileInfo.
          */
-        public SourceComboBoxModel(final List<SourceFileInfo> items) {
-            super(items.toArray(new SourceFileInfo[0]));
+        public SourceComboBoxModel(final List<ProjectFileInformation> items) {
+            super(items.toArray(new ProjectFileInformation[0]));
         }
 
         public void clear() {

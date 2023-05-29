@@ -6,7 +6,7 @@
   <section id="panes.default.layout">
 	<title id="panes.default.layout.title">Présentation par défaut</title>
 
-	<para>Lorsque vous lancez OmegaT pour la première fois, la fenêtre principale affiche la présentation par défaut suivante :</para>
+	<para>Lorsque vous lancez OmegaT pour la première fois, la fenêtre principale affiche par défaut la présentation suivante :</para>
 
 		<figure id="default.omegat.layout">
       <title id="default.omegat.layout.title">Présentation par défaut d’OmegaT sur macOS</title>
@@ -67,7 +67,7 @@
         <listitem>
           <para>La fenêtre principale est composée de différents volets décrits ici, différents menus décrits dans le chapitre <link linkend="chapter.menus" endterm="chapter.menus.title"/>, et une barre d’état décrite <link linkend="panes.statusbar">plus bas</link>. Vous pouvez cliquer et maintenir le nom d’un volet pour le faire glisser vers une nouvelle position, ou même le détacher en tant que fenêtre distincte.</para>
 
-          <para>Le coin supérieur droit de chaque volet affiche différentes icônes en fonction du type de volet et de son état actuel :</para>
+          <para>Le coin supérieur droit de chaque volet affiche différentes icônes en fonction du type de volet et de son état actuel :</para>
 
           <table id="table.pane.widgets">
             <title id="table.pane.widgets.title">Éléments graphiques des volets</title>
@@ -127,7 +127,7 @@
                       </imageobject>
                     </inlinemediaobject></entry>
 
-                  <entry><emphasis role="bold">Rétablit</emphasis> la taille d’un volet agrandit à sa disposition précédente.</entry>
+                  <entry><emphasis role="bold">Rétablit</emphasis> la taille d’un volet agrandi à sa disposition précédente.</entry>
                 </row>
 
                 <row>
@@ -161,7 +161,7 @@
             </tgroup>
           </table>
 
-          <para>Vous pouvez regrouper des volets dans la même zone de la fenêtre. Les volets se présenteront alors sous la même zone mais sous des onglets différents portant le nom du volet. Les volets peuvent être redimensionnés en faisant glisser les séparateurs entre eux.</para>
+          <para>Vous pouvez regrouper des volets dans la même zone de la fenêtre. Les volets se présenteront alors sous la même zone, mais sous des onglets différents portant le nom du volet. Les volets peuvent être redimensionnés en faisant glisser les séparateurs entre eux.</para>
 
           <note>
             <para>Utiliser <link endterm="menus.view.title" linkend="menus.view"/><link endterm="menus.view.restore.main.window.title" linkend="menus.view.restore.main.window"/> pour rétablir la présentation par défaut si vous perdez notion des modifications apportées à l’interface graphique et que vous ne pouvez plus voir certains volets.</para>
@@ -225,7 +225,7 @@
         <term id="panes.notifications.title">Notifications</term>
 		
         <listitem>
-          <para>Si un volet est fermé mais que son contenu doit être affiché, OmegaT peut temporairement surligner l’onglet du volet en orange lorsque vous entrez dans le segment.</para>
+          <para>Si un volet est fermé, mais que son contenu doit être affiché, OmegaT peut temporairement surligner l’onglet du volet en orange lorsque vous entrez dans le segment.</para>
 		  
 		  <para>Les notifications sont activées par défaut dans les volets <guilabel>Commentaires</guilabel> et <guilabel>Bloc-note</guilabel>.</para>
 		  
@@ -642,7 +642,7 @@ Dossier de configuration
 
     <para>Ce volet affiche les termes de vos fichiers de glossaire qui correspondent aux termes du segment en cours. Les fichiers de glossaire sont situés dans le dossier <link endterm="project.folder.glossary.title" linkend="project.folder.glossary"/> du projet.</para>
 
-    <para>Le terme source est affiché avant le signe « =  » et les termes cibles après. Si la saisie contient des commentaires, ceux-ci sont numérotés et affichés sur des lignes séparées sous les termes. Les termes figurant dans le glossaire modifiable sont affichés en gras, tandis que ceux provenant d’autres glossaires sont présentés sous forme de texte normal.</para>
+    <para>Le terme source est affiché avant le signe « = » et les termes cibles après. Si la saisie contient des commentaires, ceux-ci sont numérotés et affichés sur des lignes séparées sous les termes. Les termes figurant dans le glossaire modifiable sont affichés en gras, tandis que ceux provenant d’autres glossaires sont présentés sous forme de texte normal.</para>
 
 	<example id="glossary.matches">
 	  <title id="glossary.matches.title">Correspondances de glossaire</title>
@@ -754,7 +754,7 @@ Folder = <token>Dossier</token></programlisting>
     <title id="panes.segment.properties.title"><guilabel>Propriétés du segment</guilabel></title>
 
     <para>Tous les segments ont des propriétés. Les propriétés sont affichées dans ce volet.</para>
-	<para>Les propriétés les plus courantes sont les suivantes:</para>
+	<para>Les propriétés les plus courantes sont les suivantes :</para>
 	
 	<variablelist>
 	  <varlistentry>
@@ -799,7 +799,7 @@ Folder = <token>Dossier</token></programlisting>
 
 	  <para><literal>Les fichiers traduits sont créés</literal></para>
 
-	  <para>→ Les fichiers ont été créés par OmegaT et sont disponible dans le dossier des fichiers traduits.</para>
+	  <para>→ Les fichiers ont été créés par OmegaT et sont disponibles dans le dossier des fichiers traduits.</para>
 	</example>
 
     <para>La partie droite de la barre d’état indique si le curseur est bloqué dans le segment (voir le paramètre <link endterm="panes.editor.cursor.lock.title" linkend="panes.editor.cursor.lock"/>) et si le curseur écrase le texte existant (voir le paramètre <link linkend="panes.editor.overwriting" endterm="panes.editor.overwriting.title"/>). Il affiche également des informations sur la progression.</para>
@@ -845,7 +845,7 @@ Folder = <token>Dossier</token></programlisting>
 	
 	<example id="panes.statusbar.widgets.percentage">
       <title id="panes.statusbar.widgets.percentage.title">Informations de la barre d’état, mode pourcentage</title>
-	  <para><literal>LIB | INS <token>94.8% (14 gauche) / 7.9% (142,604 gauche), 177,692</token> <token>35/0</token></literal></para>
+	  <para><literal>LIB | INS <token>94.8% (encore 14) / 7.9% (encore 142,604), 177,692</token> <token>35/0</token></literal></para>
 	  <variablelist>
 		<varlistentry>
 		  <term>État du curseur</term>

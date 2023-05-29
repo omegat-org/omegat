@@ -6,6 +6,7 @@
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2008 Didier Briel
                2016 Aaron Madlon-Kay
+               2023 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -37,6 +38,8 @@ import org.omegat.gui.preferences.BasePreferencesController;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
+import org.omegat.util.gui.FontUtil;
+import org.omegat.util.gui.UIScale;
 
 /**
  * @author Maxym Mykhalchuk
@@ -65,8 +68,8 @@ public class FontSelectionController extends BasePreferencesController {
     private void initGui() {
         panel = new FontSelectionPanel();
         panel.fontComboBox.setModel(new DefaultComboBoxModel<>(StaticUtils.getFontNames()));
-        panel.fontComboBox.addActionListener(e -> panel.previewTextArea.setFont(getSelectedFont()));
-        panel.sizeSpinner.addChangeListener(e -> panel.previewTextArea.setFont(getSelectedFont()));
+        panel.fontComboBox.addActionListener(e -> panel.previewTextArea.setFont(getScaledSelectedFont()));
+        panel.sizeSpinner.addChangeListener(e -> panel.previewTextArea.setFont(getScaledSelectedFont()));
         panel.applyToDictionaryPaneCheckBox.addChangeListener(e -> {
             if (panel.applyToDictionaryPaneCheckBox.isSelected()) {
                 panel.sizeDictionarySpinner.setValue(panel.sizeSpinner.getValue());
@@ -79,12 +82,10 @@ public class FontSelectionController extends BasePreferencesController {
 
     @Override
     protected void initFromPrefs() {
-        String fontName = Preferences.getPreferenceDefault(Preferences.TF_SRC_FONT_NAME, Preferences.TF_FONT_DEFAULT);
-        int fontSize = Preferences.getPreferenceDefault(Preferences.TF_SRC_FONT_SIZE, Preferences.TF_FONT_SIZE_DEFAULT);
-        oldFont = new Font(fontName, Font.PLAIN, fontSize);
-        panel.previewTextArea.setFont(oldFont);
+        oldFont = FontUtil.getFont();
         panel.fontComboBox.setSelectedItem(oldFont.getName());
-        panel.sizeSpinner.setValue(oldFont.getSize());
+        panel.sizeSpinner.setValue(UIScale.unscale(oldFont.getSize()));
+        panel.previewTextArea.setFont(getScaledSelectedFont());
         int dictionaryFontSize = Preferences.getPreferenceDefault(Preferences.TF_DICTIONARY_FONT_SIZE,
                 oldFont.getSize());
         panel.sizeDictionarySpinner.setValue(dictionaryFontSize);
@@ -99,11 +100,12 @@ public class FontSelectionController extends BasePreferencesController {
 
     @Override
     public void restoreDefaults() {
-        oldFont = new Font(Preferences.TF_FONT_DEFAULT, Font.PLAIN, Preferences.TF_FONT_SIZE_DEFAULT);
-        panel.previewTextArea.setFont(oldFont);
+        oldFont = FontUtil.getDefaultFont();
+        int fontSize = UIScale.unscale(oldFont.getSize());
         panel.fontComboBox.setSelectedItem(oldFont.getName());
-        panel.sizeSpinner.setValue(oldFont.getSize());
-        panel.sizeDictionarySpinner.setValue(oldFont.getSize());
+        panel.sizeSpinner.setValue(fontSize);
+        panel.previewTextArea.setFont(getScaledSelectedFont());
+        panel.sizeDictionarySpinner.setValue(fontSize);
         panel.applyToProjectFilesCheckBox.setSelected(false);
         panel.applyToDictionaryPaneCheckBox.setSelected(true);
         panel.sizeDictionarySpinner.setEnabled(false);
@@ -114,12 +116,18 @@ public class FontSelectionController extends BasePreferencesController {
                 ((Number) panel.sizeSpinner.getValue()).intValue());
     }
 
+    private Font getScaledSelectedFont() {
+        return new Font((String) panel.fontComboBox.getSelectedItem(), Font.PLAIN,
+                UIScale.scale(((Number) panel.sizeSpinner.getValue()).intValue()));
+    }
+
     @Override
     public void persist() {
         boolean applyToProjFiles = panel.applyToProjectFilesCheckBox.isSelected();
         boolean applyToDicitonaryPane = panel.applyToDictionaryPaneCheckBox.isSelected();
         Font newFont = getSelectedFont();
-        if (!newFont.equals(oldFont)
+        Font newScaledFont = getScaledSelectedFont();
+        if (!newScaledFont.equals(oldFont)
                 || applyToProjFiles != Preferences.isPreference(Preferences.PROJECT_FILES_USE_FONT)
                 || applyToDicitonaryPane != Preferences.isPreference(Preferences.DICTIONARY_USE_FONT)) {
             Preferences.setPreference(Preferences.PROJECT_FILES_USE_FONT, applyToProjFiles);
@@ -131,7 +139,7 @@ public class FontSelectionController extends BasePreferencesController {
             } else {
                 Preferences.setPreference(Preferences.TF_DICTIONARY_FONT_SIZE, panel.sizeDictionarySpinner.getValue());
             }
-            CoreEvents.fireFontChanged(newFont);
+            CoreEvents.fireFontChanged(newScaledFont);
         }
     }
 }

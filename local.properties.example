@@ -1,9 +1,16 @@
 ## Windows code signing
 # ex.
 # pkcs11engine=/usr/lib/x86_64-linux-gnu/engines-3/pkcs11.so
+#
+## when using Certum
 # pkcs11module=/usr/lib/libcrypto3PKCS.so
-# pkcs11cert='pkcs11:type=cert'
+## when using Safenet e-token/Digicert
+## see https://www.digicert.com/StaticFiles/SAC_10_7_Linux_GA.zip
+# pkcs11module=/usr/lib64/libeToken.so
+#
 # winCodesignTimestampUrl=http://time.certum.pl/
+# winCodesignTimestampUrl=http://timestamp.digicert.com
+# pkcs11cert='pkcs11:type=cert'
 # winCodesignCert=/home/user/a-provided-certification.pem
 #
 # mandatory

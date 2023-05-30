@@ -118,7 +118,7 @@ public class Language implements Comparable<Object> {
      * user.
      */
     public String getDisplayName() {
-        if (Platform.getJavaVersion() == 8) {
+        if (!SystemInfo.isJava_9_orLater) {
             // work around for java 8 JRE localization bug
             // see https://github.com/OmegaT-L10N/zh_CN/issues/5
             if (Locale.getDefault().equals(Locale.SIMPLIFIED_CHINESE)) {

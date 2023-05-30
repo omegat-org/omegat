@@ -73,46 +73,25 @@ public final class Platform {
         return osType;
     }
 
-    public static boolean isWebStart() {
-        return System.getProperty("javawebstart.version") != null;
-    }
-
     /**
      * Returns true if running on Mac OS X
      */
     public static boolean isMacOSX() {
-        OsType os = getOsType();
-        return os == OsType.MAC32 || os == OsType.MAC64;
+        return SystemInfo.isMacOS;
     }
 
     /**
      * Returns true if running on Linux
      */
     public static boolean isLinux() {
-        OsType os = getOsType();
-        return os == OsType.LINUX32 || os == OsType.LINUX64;
+        return SystemInfo.isLinux;
     }
 
     /**
      * Returns true if the JVM (NOT the OS) is 64-bit
      */
     public static boolean is64Bit() {
-        String osArch = System.getProperty("os.arch");
-        if (osArch != null) {
-            return osArch.contains("64");
-        }
-        return false;
+        return SystemInfo.isAARCH64 || SystemInfo.isX86_64;
     }
 
-    public static int getJavaVersion() {
-        String[] versionElements = System.getProperty("java.version").split("\\.");
-        int discard = Integer.parseInt(versionElements[0]);
-        int version;
-        if (discard == 1) {
-            version = Integer.parseInt(versionElements[1]);
-        } else {
-            version = discard;
-        }
-        return version;
-    }
 }

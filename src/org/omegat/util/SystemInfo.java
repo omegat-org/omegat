@@ -63,15 +63,8 @@ public class SystemInfo {
     // UI toolkits
     public static final boolean isKDE;
 
-    // other
-    public static final boolean isProjector;
-    public static final boolean isWebswing;
-    public static final boolean isWinPE;
-
     // features
     public static final boolean isMacFullWindowContentSupported;
-
-    protected static long winOsBuildNumber = Integer.MIN_VALUE;
 
     static {
         // platforms
@@ -110,11 +103,6 @@ public class SystemInfo {
         // UI toolkits
         isKDE = (isLinux && System.getenv("KDE_FULL_SESSION") != null);
 
-        // other
-        isProjector = Boolean.getBoolean("org.jetbrains.projector.server.enable");
-        isWebswing = (System.getProperty("webswing.rootDir") != null);
-        isWinPE = isWindows && "X:\\Windows\\System32".equalsIgnoreCase(System.getProperty("user.dir"));
-
         // features
         // available since Java 12; backported to Java 11.0.8 and 8u292
         isMacFullWindowContentSupported = isMacOS && (javaVersion >= toVersion(11, 0, 8, 0)
@@ -131,7 +119,6 @@ public class SystemInfo {
         boolean isWin_11_orLater = false;
         try {
             isWin_11_orLater = isWindows_10_orLater && scanWindowsVersion(osName) >= toVersion(11, 0, 0, 0);
-                    // || (JnaLoader.isLoaded() && getWinOSBuildNumber() >= 22000));
         } catch (Throwable ex) {
             // catch to avoid that application can not start if a native library
             // is not up-to-date
@@ -144,19 +131,6 @@ public class SystemInfo {
         final String leading = "windows ";
         return scanVersion(osName.startsWith(leading) ? osName.substring(leading.length()) : osName);
     }
-
-    /*
-    private static long getWinOSBuildNumber() {
-        if (winOsBuildNumber < 0) {
-            Kernel32 kernel32 = Kernel32.INSTANCE;
-            WinNT.OSVERSIONINFOEX ex = new WinNT.OSVERSIONINFOEX();
-            if (kernel32.GetVersionEx(ex)) {
-                winOsBuildNumber = ex.getBuildNumber();
-            }
-        }
-        return winOsBuildNumber;
-    }
-    */
 
     private static long scanVersion(String version) {
         int major = 1;

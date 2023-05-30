@@ -161,13 +161,10 @@ public final class UIScale {
         if (font == null)
             font = UIManager.getFont("Label.font");
 
-        setUserScaleFactor(computeFontScaleFactor(font), true);
+        setUserScaleFactor(computeFontScaleFactor(font));
     }
 
-    /**
-     * For internal use only.
-     */
-    protected static float computeFontScaleFactor(Font font) {
+    private static float computeFontScaleFactor(Font font) {
         if (SystemInfo.isWindows) {
             // Special handling for Windows to be compatible with OS scaling,
             // which distinguish between "screen scaling" and "text scaling".
@@ -187,21 +184,12 @@ public final class UIScale {
                     // Do not apply own scaling if the JRE scales using a
                     // Windows screen scale factor.
                     // If a user increases font size in Windows 10 settings,
-                    // desktop property
-                    // "win.messagebox.font" is changed, and we uses the larger
-                    // font.
+                    // desktop property "win.messagebox.font" is changed,
+                    // and we use the larger font.
                     return 1;
                 }
             }
-
-            // If the font was explicitly set from an outside (is not a
-            // UIResource),
-            // or was set in properties files (is a UIResource),
-            // use it to a compute scale factor. This allows applications to
-            // use custom fonts (e.g., that the user can change in UI) and
-            // get scaling if a larger font size is used.
         }
-
         return computeScaleFactor(font);
     }
 
@@ -229,17 +217,13 @@ public final class UIScale {
         return font.getSize() / fontSizeDivider;
     }
 
-    /**
-     * Sets the user scale factor.
-     */
-    private static void setUserScaleFactor(float scaleFactor, boolean normalize) {
-        if (normalize) {
-            if (scaleFactor < 1f) {
-                // round small scale factor to 1/10
-                scaleFactor = Math.round(scaleFactor * 10f) / 10f;
-            } else if (scaleFactor > 1f)
-                // round scale factor to 1/4
-                scaleFactor = Math.round(scaleFactor * 4f) / 4f;
+    private static void setUserScaleFactor(float scaleFactor) {
+        if (scaleFactor < 1f) {
+            // round small scale factor to 1/10
+            scaleFactor = Math.round(scaleFactor * 10f) / 10f;
+        } else if (scaleFactor > 1f) {
+            // round scale factor to 1/4
+            scaleFactor = Math.round(scaleFactor * 4f) / 4f;
         }
 
         // minimum scale factor

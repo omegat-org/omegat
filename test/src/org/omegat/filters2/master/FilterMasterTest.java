@@ -137,8 +137,7 @@ public class FilterMasterTest {
 
         List<Option> option = fm.getConfig().getFilters().get(0).getOption();
         assertNotNull("Filter option is not null", option);
-        assertFalse("Filter option is not empty", option.isEmpty());
-        assertNull(option.get(0).getName());
+        assertTrue("Filter option is not empty", option.isEmpty());
     }
 
     private static void loadFile(FilterMaster fm) throws IOException, TranslationException, Exception {

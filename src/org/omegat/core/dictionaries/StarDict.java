@@ -35,6 +35,10 @@ import java.util.Locale;
 import java.util.stream.Collectors;
 
 import io.github.eb4j.stardict.StarDictDictionary;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
@@ -48,9 +52,10 @@ import org.omegat.util.Preferences;
  * StarDict format described on
  * https://github.com/huzheng001/stardict-3/blob/master/dict/doc/StarDictFileFormat
  * <p>
- * A StarDict dictionary plugin uses stardict4j access library.
- * Every dictionary consists of these files:
- * <ol><li>somedict.ifo
+ * A StarDict dictionary plugin uses stardict4j access library. Every dictionary
+ * consists of these files:
+ * <ol>
+ * <li>somedict.ifo
  * <li>somedict.idx or somedict.idx.gz
  * <li>somedict.dict or somedict.dict.dz
  * <li>somedict.syn (optional)
@@ -115,7 +120,7 @@ public class StarDict implements IDictionaryFactory {
 
         StarDictDict(final File file, Language language) throws Exception {
             dictionary = StarDictDictionary.loadDictionary(file, 1_000, Duration.ofMinutes(30));
-            // Max cache size  to 1,000 items and expiry to 30 min.
+            // Max cache size to 1,000 items and expiry to 30 min.
             this.language = language;
         }
 
@@ -125,9 +130,7 @@ public class StarDict implements IDictionaryFactory {
             if (result.isEmpty()) {
                 result = dictionary.readArticles(word.toLowerCase(language.getLocale()));
             }
-            return result.stream()
-                    .filter(StarDictDict::useEntry)
-                    .map(StarDictDict::convertEntry)
+            return result.stream().filter(StarDictDict::useEntry).map(StarDictDict::convertEntry)
                     .collect(Collectors.toList());
         }
 
@@ -140,44 +143,60 @@ public class StarDict implements IDictionaryFactory {
             if (result.isEmpty()) {
                 result = dictionary.readArticlesPredictive(word.toLowerCase(language.getLocale()));
             }
-            return result.stream()
-                    .filter(StarDictDict::useEntry)
-                    .map(StarDictDict::convertEntry)
+            return result.stream().filter(StarDictDict::useEntry).map(StarDictDict::convertEntry)
                     .collect(Collectors.toList());
         }
 
         private static boolean useEntry(StarDictDictionary.Entry entry) {
             StarDictDictionary.EntryType type = entry.getType();
-            return type == StarDictDictionary.EntryType.MEAN
-                    || type == StarDictDictionary.EntryType.PHONETIC
-                    || type == StarDictDictionary.EntryType.HTML;
+            return type == StarDictDictionary.EntryType.MEAN || type == StarDictDictionary.EntryType.PHONETIC
+                    || type == StarDictDictionary.EntryType.HTML || type == StarDictDictionary.EntryType.XDXF;
         }
 
         private static DictionaryEntry convertEntry(StarDictDictionary.Entry entry) {
             boolean condensed = Preferences.isPreferenceDefault(Preferences.DICTIONARY_CONDENSED_VIEW, false);
             StringBuilder sb = new StringBuilder();
             if (entry.getType().equals(StarDictDictionary.EntryType.MEAN)) {
-                    String[] lines = entry.getArticle().split("\n");
-                    if (condensed) {
-                        for (int i = 0; i < lines.length; i++) {
-                            if (i > 0) {
-                                sb.append("<span class=\"paragraph-start\">&nbsp;\u00b6</span><span>");
-                            } else {
-                                sb.append("<span>");
-                            }
-                            sb.append(lines[i]).append("</span>");
+                String[] lines = entry.getArticle().split("\n");
+                if (condensed) {
+                    for (int i = 0; i < lines.length; i++) {
+                        if (i > 0) {
+                            sb.append("<span class=\"paragraph-start\">&nbsp;\u00b6</span><span>");
+                        } else {
+                            sb.append("<span>");
                         }
-                    } else {
-                        for (String line : lines) {
-                            sb.append("<div>").append(line).append("</div>");
-                        }
+                        sb.append(lines[i]).append("</span>");
                     }
+                } else {
+                    for (String line : lines) {
+                        sb.append("<div>").append(line).append("</div>");
+                    }
+                }
             } else if (entry.getType().equals(StarDictDictionary.EntryType.PHONETIC)) {
                 sb.append("<span>(").append(entry.getArticle()).append(")</span>");
             } else if (entry.getType().equals(StarDictDictionary.EntryType.HTML)) {
                 sb.append(entry.getArticle());
+            } else if (entry.getType().equals(StarDictDictionary.EntryType.XDXF)) {
+                sb.append(convertXdxfMarkupToDictionaryHtml(entry.getArticle()));
             }
             return new DictionaryEntry(entry.getWord(), sb.toString());
+        }
+
+        private static String convertXdxfMarkupToDictionaryHtml(String xdxfData) {
+            String word = null;
+            StringBuilder definitions = new StringBuilder();
+
+            Document document = Jsoup.parse(xdxfData);
+            Elements definitionElements = document.select("def");
+            if (definitionElements.size() > 0) {
+                for (Element definitionElement : definitionElements) {
+                    definitions.append("<div class=\"article\">").append(definitionElement.text())
+                            .append("</div>");
+                }
+            } else {
+                definitions.append("<div class=\"article\">").append(document.body().text()).append("</div>");
+            }
+            return definitions.toString();
         }
     }
 }

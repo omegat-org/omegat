@@ -175,6 +175,7 @@ dependencies {
         // Explicit specification of annotations version
         implementation 'org.jetbrains:annotations:23.0.0'
         implementation 'tokyo.northside:stardict4j:0.5.0'
+        implementation 'org.jsoup:jsoup:1.15.3'
 
         // Encoding detections
         implementation 'com.github.albfernandez:juniversalchardet:2.4.0'

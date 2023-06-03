@@ -38,6 +38,8 @@ import io.github.eb4j.stardict.StarDictDictionary;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.safety.Cleaner;
+import org.jsoup.safety.Safelist;
 import org.jsoup.select.Elements;
 
 import org.omegat.core.Core;
@@ -153,6 +155,9 @@ public class StarDict implements IDictionaryFactory {
                     || type == StarDictDictionary.EntryType.HTML || type == StarDictDictionary.EntryType.XDXF;
         }
 
+        private static final String CONDENSED_SPAN = "<span class=\"paragraph-start\">&nbsp;"
+                + "\u00b6</span><span>";
+
         private static DictionaryEntry convertEntry(StarDictDictionary.Entry entry) {
             boolean condensed = Preferences.isPreferenceDefault(Preferences.DICTIONARY_CONDENSED_VIEW, false);
             StringBuilder sb = new StringBuilder();
@@ -161,7 +166,7 @@ public class StarDict implements IDictionaryFactory {
                 if (condensed) {
                     for (int i = 0; i < lines.length; i++) {
                         if (i > 0) {
-                            sb.append("<span class=\"paragraph-start\">&nbsp;\u00b6</span><span>");
+                            sb.append(CONDENSED_SPAN);
                         } else {
                             sb.append("<span>");
                         }
@@ -177,26 +182,62 @@ public class StarDict implements IDictionaryFactory {
             } else if (entry.getType().equals(StarDictDictionary.EntryType.HTML)) {
                 sb.append(entry.getArticle());
             } else if (entry.getType().equals(StarDictDictionary.EntryType.XDXF)) {
-                sb.append(convertXdxfMarkupToDictionaryHtml(entry.getArticle()));
+                Document document = Jsoup.parse(entry.getArticle());
+                // Process XDXF specific tags
+                document.select("k").remove();
+                Elements c = document.select("c");
+                for (Element e : c) {
+                    String color = e.attr("c");
+                    e.tagName("span");
+                    e.removeAttr("c");
+                    e.attr("style", "color: " + color + ";");
+                }
+                Elements su = document.select("su");
+                su.tagName("div");
+                su.attr("class", "details");
+                Elements ex = document.select("ex");
+                ex.tagName("span");
+                ex.attr("style", "color: blue;");
+                Elements co = document.select("co");
+                co.tagName("span");
+                co.attr("style", "color: gray;");
+                Safelist safelist = new Safelist()
+                        .addTags("sup", "sub", "i", "b", "tt", "big", "small", "span");
+                safelist.addAttributes("span", "style");
+                if (!condensed) {
+                    safelist.addTags("blockquote");
+                    Cleaner cleaner = new Cleaner(safelist);
+                    document = cleaner.clean(document);
+                    Elements q = document.select("blockquote");
+                    q.attr("style", "display: block;margin-left: 20px;");
+                    Elements definitionElements = document.select("def");
+                    if (definitionElements.size() > 0) {
+                        definitionElements.forEach(
+                                e -> sb.append("<div>").append(e.html()).append("</div>"));
+                    } else {
+                        sb.append("<div>").append(document.body().html()).append("</div>");
+                    }
+                } else {
+                    document.select("k").remove();
+                    document.select("su").remove();
+                    Cleaner cleaner = new Cleaner(safelist);
+                    document = cleaner.clean(document);
+                    Elements definitionElements = document.select("def");
+                    if (definitionElements.size() > 0) {
+                        for (int i = 0; i < definitionElements.size(); i++) {
+                            if (i > 0) {
+                                sb.append(CONDENSED_SPAN);
+                            } else {
+                                sb.append("<span>");
+                            }
+                            sb.append(definitionElements.get(i).html()).append("</span>");
+                        }
+                    } else {
+                        sb.append("<span>").append(document.body().html()).append("</span>");
+                    }
+                }
             }
             return new DictionaryEntry(entry.getWord(), sb.toString());
-        }
-
-        private static String convertXdxfMarkupToDictionaryHtml(String xdxfData) {
-            String word = null;
-            StringBuilder definitions = new StringBuilder();
-
-            Document document = Jsoup.parse(xdxfData);
-            Elements definitionElements = document.select("def");
-            if (definitionElements.size() > 0) {
-                for (Element definitionElement : definitionElements) {
-                    definitions.append("<div class=\"article\">").append(definitionElement.text())
-                            .append("</div>");
-                }
-            } else {
-                definitions.append("<div class=\"article\">").append(document.body().text()).append("</div>");
-            }
-            return definitions.toString();
         }
     }
 }

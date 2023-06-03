@@ -121,6 +121,7 @@ dependencies {
         implementation 'com.github.takawitter:trie4j:0.9.8'
         implementation 'io.github.eb4j:dsl4j:0.5.3'
         implementation 'tokyo.northside:stardict4j:0.5.0'
+        implementation 'org.jsoup:jsoup:1.15.3'
 
         // Encoding detections
         implementation 'com.github.albfernandez:juniversalchardet:2.4.0'

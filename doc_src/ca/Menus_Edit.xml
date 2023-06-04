@@ -16,14 +16,14 @@
 
   <variablelist>
     <varlistentry id="menus.edit.undo.last.action">
-      <term id="menus.edit.undo.last.action.title"><guimenuitem>Desfés la darrera acció</guimenuitem> <keycombo><keycap>C</keycap><keycap>Z</keycap></keycombo></term>
+      <term id="menus.edit.undo.last.action.title"><guimenuitem>Desfés</guimenuitem> <keycombo><keycap>C</keycap><keycap>Z</keycap></keycombo></term>
       <listitem>
         <para>Cancel·la les modificacions aplicades al segment actiu. L'historial de modificacions es perd en sortir del segment.</para>
       </listitem>
     </varlistentry>
 
     <varlistentry id="menus.edit.redo.last.action">
-      <term id="menus.edit.redo.last.action.title"><guimenuitem>Refés la darrera acció</guimenuitem> <keycombo><keycap>C</keycap><keycap>Y</keycap></keycombo>
+      <term id="menus.edit.redo.last.action.title"><guimenuitem>Refés</guimenuitem> <keycombo><keycap>C</keycap><keycap>Y</keycap></keycombo>
 	  </term>
       <listitem>
         <para>Torna a aplicar les modificacions cancel·lades amb el segment actiu. L'historial de modificacions es perd en sortir del segment.</para>
@@ -91,7 +91,7 @@
     </varlistentry>
 
     <varlistentry id="menus.edit.insert.missing.source.tag">
-      <term id="menus.edit.insert.missing.source.tag.title"><guimenuitem>Insereix les etiquetes del text d'origen que falten</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>T</keycap></keycombo>
+      <term id="menus.edit.insert.missing.source.tag.title"><guimenuitem>Insereix les etiquetes que falten</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>T</keycap></keycombo>
 	  </term>
       <listitem>
         <para>Insereix les etiquetes del text d'origen que falten en la posició del cursor.</para>
@@ -107,7 +107,7 @@
     </varlistentry>
 
     <varlistentry id="menus.edit.export.selection">
-      <term id="menus.edit.export.selection.title"><guimenuitem>Exporta la selecció</guimenuitem> <keycombo><keycap>C</keycap><keycap>C</keycap><keycap>S</keycap></keycombo>
+      <term id="menus.edit.export.selection.title"><guimenuitem>Exporta la selecció</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>C</keycap></keycombo>
 	  </term>
       <listitem>
         <para>Exporta la selecció actual a un fitxer de text per al processament. Si no s'ha seleccionat cap text, s'escriu el segment d'origen actual en aquest fitxer. Per a mantenir la coherència amb el comportament habitual del porta-retalls, no es buida aquest fitxer quan l'usuari surt de l'OmegaT. Els continguts exportats es copien al fitxer <link linkend="configuration.folder.default.contents.script.selection.title" endterm="configuration.folder.default.contents.script.selection.title"/> de la carpeta de <link linkend="configuration.folder">configuració</link>.</para>

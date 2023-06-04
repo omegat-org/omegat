@@ -304,7 +304,7 @@
 
   Localization Updates:
 
-  - Belarusian localization updated to 5.8 (UI, readme)
+  - Belarusian localization updated to 5.8 (UI, readme, Instant Start)
   - Brazilian Portuguese localization updated to 5.8 (UI)
   - Catalan localization updated to 5.8 (UI, readme, documentation)
   - Corsican localization updated to 5.8 (UI, readme)

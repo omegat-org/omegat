@@ -118,9 +118,9 @@
     </varlistentry>
 	
 	<varlistentry id="menus.view.restore.main.window">
-      <term id="menus.view.restore.main.window.title"><guimenuitem>Reinicialitza la finestra principal</guimenuitem></term>
+      <term id="menus.view.restore.main.window.title"><guimenuitem>Reinicialitza la finestra de l'OmegaT</guimenuitem></term>
       <listitem>
-        <para>Reinicialitza la disposició de la finestra principal de l'OmegaT als valors per defecte.</para>
+        <para>Reinicialitza la disposició de la finestra de l'OmegaT als valors per defecte.</para>
 
 		<note>
 		  <para>Utilitzeu aquesta funció quan tingueu problemes en reordenar la disposició de la finestra.</para>

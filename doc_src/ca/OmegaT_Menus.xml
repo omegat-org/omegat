@@ -9,7 +9,7 @@
 
 	<para>Des dels menús podeu accedir a la majoria de funcions de l'OmegaT. La majoria dels elements dels menús tenen associada una drecera de teclat.</para>
 
-	<para>Menu items that do not indicate a shortcut do not have one assigned by default. Consulteu l'annex <link linkend="app.shortcuts.customization" endterm="app.shortcuts.customization.title"/> si voleu modificar o afegir dreceres.</para>
+	<para>Els elements dels menús que no indiquen una drecera no en tenen cap d'assignada per defecte. Consulteu l'annex <link linkend="app.shortcuts.customization" endterm="app.shortcuts.customization.title"/> si voleu modificar o afegir dreceres.</para>
 
   <note><para>Recordatori sobre la descripció de les dreceres de teclat:<table id="menus.shortcut.description">
       <title id="menus.shortcut.description.title">Identificadors de les tecles modificadores</title>

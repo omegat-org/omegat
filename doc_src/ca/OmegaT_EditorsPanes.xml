@@ -227,8 +227,7 @@
         <listitem>
           <para>Si una subfinestra està tancada però té contingut per a mostrar, l'OmegaT pot ressaltar temporalment la pestanya de la subfinestra en color carabassa quan accediu al segment.</para>
 		  
-		  <para>By default, the <guilabel>Comments</guilabel> and
-		  <guilabel>Notepad</guilabel> panes have notifications enabled.</para>
+		  <para>Per defecte, les subfinestres <guilabel>Comentaris</guilabel> i <guilabel>Bloc de notes</guilabel> tenen les notificacions habilitades.</para>
 		  
 		  <para>Per a habilitar o inhabilitar les notificacions:</para>
 		  
@@ -270,7 +269,7 @@
 			</listitem>
 
 			<listitem>
-			  <para>Notes</para>
+			  <para>Bloc de notes</para>
 			</listitem>
 
 			<listitem>
@@ -559,7 +558,7 @@ When enabled, all formatting in the source segments are hidden.</programlisting>
     <para>Quan accediu a un segment, se selecciona automàticament la primera coincidència parcial (la que té el percentatge de coincidència més alt). Podeu prémer <keycombo><keycap>C</keycap><keycap>2, 3, 4 o 5</keycap> </keycombo> o utilitzar <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.select.match" endterm="menus.edit.select.match.title"/> per a seleccionar una coincidència diferent.</para>
 
 	<example id="the.first.match">
-	  <title id="the.first.match.title">An empty segment and its first two matches</title>
+	  <title id="the.first.match.title">Segment buit i les dues primeres coincidències</title>
       <para>
 		<informaltable id="table.pane.matches">
           <tgroup cols="2">
@@ -592,7 +591,7 @@ When enabled, all formatting in the source segments are hidden.</programlisting>
 						  <entry>
 							<programlisting>1. <token>Top</token> Folder
 Dossier racine
-&lt;50/50/66% Orphan segments (+1 more)&gt;</programlisting>
+&lt;50/50/66% Segments orfes (i 1 més)&gt;</programlisting>
 <programlisting>2. Configuration Folder
 Dossier de configuration
 &lt;50/50/66% &gt;</programlisting></entry>
@@ -609,10 +608,7 @@ Dossier de configuration
 	  </para>
 	</example>
 
-    <para>The selected fuzzy match is highlighted in <emphasis role="bold">bold</emphasis>. Words missing from the segment you are
-    translating are shown in <emphasis role="bold">blue</emphasis>, and adjacent
-    parts in <emphasis role="bold">green</emphasis> (when the adjacent part is a
-    space, as above, the part is left uncolored).</para>
+    <para>La coincidència parcial seleccionada es ressalta en <emphasis role="bold">negreta</emphasis>. Les paraules que falten en el segment que traduïu es mostren de color <emphasis role="bold">blau</emphasis>, i les parts adjacents apareixen en color <emphasis role="bold">verd</emphasis> (quan la part adjacent és un espai, com en el cas anterior, no es mostra cap color).</para>
 
     <para>La coincidència també mostra tres percentatges de coincidència.</para>
 
@@ -620,24 +616,17 @@ Dossier de configuration
 
 	<itemizedlist>
       <listitem>
-        <para>Percentage calculated <emphasis role="bold">with
-        stemming</emphasis> based on the source language tokenizer, and
-        <emphasis role="bold">ignoring tags and numbers</emphasis> (generally
-        the highest).</para>
+        <para>Percentatge calculat <emphasis role="bold">amb lematització</emphasis> a partir del lematitzador de la llengua d'origen i <emphasis role="bold">ignorant les etiquetes i les xifres</emphasis> (generalment és el més alt).</para>
       </listitem>
 
       <listitem>
-        <para>Percentage calculated <emphasis role="bold">without
-        stemming</emphasis>, while still <emphasis role="bold">ignoring tags and
-        numbers</emphasis> (generally slightly lower).</para>
+        <para>Percentatge calculat <emphasis role="bold">sense lematització</emphasis>, <emphasis role="bold">ignorant les etiquetes i les xifres</emphasis> (generalment és una mica més baix).</para>
       </listitem>
 
       <listitem>
-        <para>Percentage calculated on <emphasis role="bold">the entire text,
-        including tags and numbers</emphasis> (generally the lowest).</para>
+        <para>Percentatge calculat en <emphasis role="bold">tot el text, incloent-hi les etiquetes i les xifres</emphasis> (generalment és el més baix).</para>
 		<note>
-		  <para>If the segment contains only numbers or symbols, this percentage
-		  will be the highest.</para>
+		  <para>Si el segment només conté xifres o símbols, aquest percentatge serà el més alt.</para>
 		</note>
       </listitem>
     </itemizedlist>
@@ -650,7 +639,7 @@ Dossier de configuration
   <section id="panes.glossary">
     <title id="panes.glossary.title"><guilabel>Glossaris</guilabel></title>
 
-    <para>This pane shows terms from your glossary files that correspond to terms in the current segment. Els fitxers de glossari són en la carpeta <link endterm="project.folder.glossary.title" linkend="project.folder.glossary"/> del projecte.</para>
+    <para>Aquesta subfinestra mostra els termes dels fitxers de glossari que corresponen als termes del segment actual. Els fitxers de glossari són en la carpeta <link endterm="project.folder.glossary.title" linkend="project.folder.glossary"/> del projecte.</para>
 
     <para>El terme d'origen es mostra abans del signe «=» i els termes de destinació apareixen després. Si l'entrada conté comentaris, es numeren i es mostren en línies independents sota els termes. Els termes del glossari modificable es mostren en negreta, mentre que els d'altres glossaris es presenten en rodona.</para>
 
@@ -670,8 +659,7 @@ Folder = <token>Dossier</token></programlisting>
 
 	<para>Els enllaços a fitxers locals (<filename>file:///CAMÍ/fitxer</filename>) s'obren amb el programa associat. Les adreces web (<filename>https://...</filename>) s'obren en el navegador per defecte.</para>
 
-    <para>You can select a term in the glossaries pane and right click on it to
-    insert it into the translation.</para>
+    <para>Podeu seleccionar un terme en la subfinestra «Glossari» i fer-hi clic dret per a inserir-lo en la traducció.</para>
 
     <para>Utilitzeu <link endterm="menus.view.title" linkend="menus.view"/><link endterm="menus.view.mark.glossary.matches.title" linkend="menus.view.mark.glossary.matches"/> per a subratllar les coincidències del glossari.</para>
 
@@ -679,8 +667,7 @@ Folder = <token>Dossier</token></programlisting>
 
     <para>Podeu utilitzar les preferències del glossari per a ajustar com es mostren els glossaris. Consulteu les preferències de <link endterm="dialogs.preferences.glossary.title" linkend="dialogs.preferences.glossary"/> per a conèixer més detalls.</para>
 
-    <para>Modifications to any glossary file in the glossary folder are
-    immediately recognized by OmegaT and displayed in the glossaries pane.</para>
+    <para>L'OmegaT reconeix immediatament les modificacions en qualsevol glossari de la carpeta de glossaris i es mostren en la subfinestra «Glossari».</para>
 
     <para>L'OmegaT inclou un fitxer de glossari modificable per projecte. Utilitzeu <link endterm="menus.edit.title" linkend="menus.edit"/><link endterm="menus.edit.create.glossary.entry.title" linkend="menus.edit.create.glossary.entry"/> per a afegir termes al fitxer.</para>
 
@@ -690,13 +677,13 @@ Folder = <token>Dossier</token></programlisting>
   <section id="panes.dictionary">
     <title id="panes.dictionary.title"><guilabel>Diccionaris</guilabel></title>
 
-	<para>This pane shows terms from your dictionary files that correspond to terms in the current segment. Els fitxers de diccionari són en la carpeta <link linkend="project.folder.dictionary" endterm="project.folder.dictionary.title"/> del projecte. Consulteu les preferències de <link endterm="dialogs.preferences.dictionary.title" linkend="dialogs.preferences.dictionary"/> per a conèixer més detalls.</para>
+	<para>Aquesta subfinestra mostra els termes dels fitxers de diccionari que corresponen als termes del segment actual. Els fitxers de diccionari són en la carpeta <link linkend="project.folder.dictionary" endterm="project.folder.dictionary.title"/> del projecte. Consulteu les preferències de <link endterm="dialogs.preferences.dictionary.title" linkend="dialogs.preferences.dictionary"/> per a conèixer més detalls.</para>
   </section>
   
   <section id="panes.machinetranslation">
     <title id="panes.machinetranslation.title"><guilabel>Traducció automàtica</guilabel></title>
 
-    <para>This pane, when opened, shows the suggestions for the current segment produced by each enabled translation engine . Quan hi ha suggeriments disponibles de més d'un motor:</para>
+    <para>Aquesta finestra, quan s'obre, conté els suggeriments per al segment actual produïts per un o més motors de traducció automàtica habilitats. Quan hi ha suggeriments disponibles de més d'un motor:</para>
 	
     <itemizedlist>
       <listitem>
@@ -734,10 +721,9 @@ Folder = <token>Dossier</token></programlisting>
   </section>
 
   <section id="panes.notes">
-    <title id="panes.notes.title"><guilabel>Notes</guilabel></title>
+    <title id="panes.notes.title"><guilabel>Bloc de notes</guilabel></title>
 
-    <para>This pane is an <emphasis>editable</emphasis> space where you can
-    add notes to the currently active segment.</para>
+    <para>Aquesta subfinestra és un espai <emphasis>editable</emphasis> on podeu afegir notes al segment actiu.</para>
 
 	<para>Això us permet tornar més endavant per a revisar la traducció, comprovar que les traduccions alternatives són correctes o, en projectes compartits, demanar a altres membres la seva opinió, per exemple.</para>
 

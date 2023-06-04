@@ -204,6 +204,38 @@ public class StarDict implements IDictionaryFactory {
                 Safelist safelist = new Safelist()
                         .addTags("sup", "sub", "i", "b", "tt", "big", "small", "span");
                 safelist.addAttributes("span", "style");
+                Elements kref = document.select("kref");
+                kref.tagName("span");
+                kref.attr("style", "font-style: italic;");
+                kref.removeAttr("idref");
+                Elements iref = document.select("iref");
+                iref.tagName("a");
+                Elements rref = document.select("rref");
+                for (Element e: rref) {
+                    String type = e.attr("type");
+                    if (type.isEmpty()) {
+                        e.remove();
+                        continue;
+                    }
+                    String resource = e.attr("lctn");
+                    e.removeAttr("lctn");
+                    if (type.startsWith("audio")) {
+                        e.tagName("a");
+                        e.removeAttr("start");
+                        e.removeAttr("size");
+                        e.attr("href", resource);
+                        e.text("Play");
+                    } else if (type.startsWith("image")) {
+                        e.tagName("img");
+                        e.attr("src", resource);
+                    } else if (type.startsWith("video")) {
+                        e.tagName("video");
+                        e.appendChild(new Element("source").attr("src", resource).attr("type", type));
+                        e.removeAttr("type");
+                    } else {
+                        e.remove();
+                    }
+                }
                 if (!condensed) {
                     safelist.addTags("blockquote");
                     Cleaner cleaner = new Cleaner(safelist);

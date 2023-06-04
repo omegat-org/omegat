@@ -308,7 +308,7 @@
   - Brazilian Portuguese localization updated to 5.8 (UI)
   - Catalan localization updated to 5.8 (UI, readme, documentation)
   - Corsican localization updated to 5.8 (UI, readme)
-  - Dutch localization updated to 5.8 (UI)
+  - Dutch localization updated to 5.8 (UI, readme)
   - French localization updated to 5.8 (UI, readme, documentation)
   - German localization updated to 5.8 (UI, readme, documentation)
   - Italian localization updated to 5.8 (UI, readme)

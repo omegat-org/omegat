@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
   1 Enhancement
   1 Bug fixes
-  2 Localisation updates
+  3 Localisation updates
 ----------------------------------------------------------------------
 6.0.0 vs 5.8.0
 
@@ -15,6 +15,12 @@
 
   - Fixed "null" file names in search results when "Display: file names" checkbox was unchecked
   https://sourceforge.net/p/omegat/bugs/1154/
+
+  Localization Updates:
+
+  - Belarusian localization updated to 6.0 (UI, readme, Instant Start)
+  - Catalan localization updated to 6.0 (UI, readme, documentation)
+  - Corsican localization updated to 6.0 (UI, readme)
 
 ----------------------------------------------------------------------
  OmegaT 5.8.0 (2023-04-01)
@@ -315,16 +321,16 @@
 
   Localization Updates:
 
-  - Belarusian localization updated to 6.0 (UI, readme, Instant Start)
-#  - Brazilian Portuguese localization updated to 5.8 (UI)
-  - Catalan localization updated to 6.0 (UI, readme, documentation)
-#  - Corsican localization updated to 5.8 (UI, readme)
-#  - Dutch localization updated to 5.8 (UI)
-#  - French localization updated to 5.8 (UI, readme, documentation)
-#  - German localization updated to 5.8 (UI, readme, documentation)
-#  - Japanese localization updated to 5.8 (UI, readme, documentation)
-#  - Simplified Chinese localization updated to 5.8 (UI, readme)
-#  - Ukrainian localization updated to 5.8 (UI, readme)
+  - Belarusian localization updated to 5.8 (UI, readme, Instant Start)
+  - Brazilian Portuguese localization updated to 5.8 (UI)
+  - Catalan localization updated to 5.8 (UI, readme, documentation)
+  - Corsican localization updated to 5.8 (UI, readme)
+  - Dutch localization updated to 5.8 (UI)
+  - French localization updated to 5.8 (UI, readme, documentation)
+  - German localization updated to 5.8 (UI, readme, documentation)
+  - Japanese localization updated to 5.8 (UI, readme, documentation)
+  - Simplified Chinese localization updated to 5.8 (UI, readme)
+  - Ukrainian localization updated to 5.8 (UI, readme)
 
 ----------------------------------------------------------------------
 OmegaT 5.7.1 (2022-03-19)

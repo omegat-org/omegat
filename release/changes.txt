@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
   1 Enhancement
   1 Bug fixes
-  0 Localisation updates
+  1 Localisation updates
 ----------------------------------------------------------------------
 6.0.0 vs 5.8.0
 
@@ -315,7 +315,7 @@
 
   Localization Updates:
 
-  - Belarusian localization updated to 5.8 (UI, readme)
+  - Belarusian localization updated to 6.0 (UI, readme, Instant Start)
   - Brazilian Portuguese localization updated to 5.8 (UI)
   - Catalan localization updated to 5.8 (UI, readme, documentation)
   - Corsican localization updated to 5.8 (UI, readme)

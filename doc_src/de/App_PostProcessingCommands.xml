@@ -97,7 +97,7 @@
   </section>
   
   <section id="post.processing.commands.user.defined.scripts">
-    <title id="post.processing.commands.user.defined.scripts.title">Benutzerdefinierte Skripte</title>
+    <title id="post.processing.commands.user.defined.scripts.title">Lokale Skripte</title>
     <para>Zusätzlich zu einem regulären Befehl können Sie auch ein Skript aufrufen. Führen Sie nur Nachbearbeitungsskripte aus, die aus vertrauenswürdigen Quellen stammen. Aus Sicherheitsgründen sind lokale Nachbearbeitungsbefehle standardmäßig deaktiviert.</para>
     <para>Die Variablen können sowohl mit regulären Befehlen als auch mit benutzerdefinierten Skripten verwendet werden. Möglicherweise müssen Sie einen absoluten Pfad für Ihr Skript verwenden. Der PATH, den OmegaT verwendet, ist möglicherweise nicht derselbe wie der PATH des aktuellen Benutzers.</para>
     <para>STDOUT und STDERR werden in die <link linkend="configuration.folder.default.contents.logs.title">omegat.log</link>-Datei geschrieben. Der Exitcode und STDERR oder das letzte STDOUT werden in der Statusleiste angezeigt.</para>

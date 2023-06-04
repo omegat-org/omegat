@@ -294,16 +294,6 @@
             </row>
 
             <row>
-              <entry>Dateien hinzufügen...</entry>
-              <entry>projectImportMenuItem</entry>
-            </row>
-
-            <row>
-              <entry>MediaWiki-Seite hinzufügen...</entry>
-              <entry>projectWikiImportMenuItem</entry>
-            </row>
-
-            <row>
               <entry>Neu laden</entry>
               <entry>projectReloadMenuItem</entry>
               <entry namest="3" nameend="4">F5</entry>
@@ -321,6 +311,16 @@
               <entry>projectSaveMenuItem</entry>
               <entry>ctrl S</entry>
               <entry>meta S</entry>
+            </row>
+
+            <row>
+              <entry>Dateien hinzufügen...</entry>
+              <entry>projectImportMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>MediaWiki-Seite hinzufügen...</entry>
+              <entry>projectWikiImportMenuItem</entry>
             </row>
 
             <row>
@@ -345,6 +345,16 @@
               <entry>projectSingleCompileMenuItem</entry>
               <entry>ctrl shift D</entry>
               <entry>meta shift D</entry>
+            </row>
+
+            <row>
+              <entry>MED-Projekt öffnen...</entry>
+              <entry>projectMedOpenMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>MED-Projekt erstellen</entry>
+              <entry>projectMedCreateMenuItem</entry>
             </row>
 
             <row>
@@ -446,14 +456,14 @@
 
           <tbody>
             <row>
-              <entry>Letzte Aktion rückgängig machen</entry>
+              <entry>Rückgängig machen</entry>
               <entry>editUndoMenuItem</entry>
               <entry>ctrl Z</entry>
               <entry>meta Z</entry>
             </row>
 
             <row>
-              <entry>Letzte Aktion wiederholen</entry>
+              <entry>Wiederholen</entry>
               <entry>editRedoMenuItem</entry>
               <entry>ctrl Y</entry>
               <entry>meta Y</entry>
@@ -471,13 +481,6 @@
               <entry>editInsertTranslationMenuItem</entry>
               <entry>ctrl I</entry>
               <entry>meta I</entry>
-            </row>
-
-            <row>
-              <entry>Mit maschineller Übersetzung ersetzen</entry>
-              <entry>editOverwriteMachineTranslationMenuItem</entry>
-              <entry>ctrl M</entry>
-              <entry>meta M</entry>
             </row>
 
             <row>
@@ -502,7 +505,14 @@
             </row>
 
             <row>
-              <entry>Fehlende Tags aus Quelle einfügen</entry>
+              <entry>Mit maschineller Übersetzung ersetzen</entry>
+              <entry>editOverwriteMachineTranslationMenuItem</entry>
+              <entry>ctrl M</entry>
+              <entry>meta M</entry>
+            </row>
+
+            <row>
+              <entry>Fehlende Tags einfügen</entry>
               <entry>editTagPainterMenuItem</entry>
               <entry>ctrl shift T</entry>
               <entry>meta shift T</entry>
@@ -530,7 +540,7 @@
             </row>
 
             <row>
-              <entry>Projekt durchsuchen...</entry>
+              <entry>Suchen...</entry>
               <entry>editFindInProjectMenuItem</entry>
               <entry>ctrl F</entry>
               <entry>meta F</entry>
@@ -544,7 +554,7 @@
             </row>
 
             <row>
-              <entry>Suchen und Ersetzen...</entry>
+              <entry>Ersetzen...</entry>
               <entry>editReplaceInProjectMenuItem</entry>
               <entry>ctrl K</entry>
               <entry>meta K</entry>
@@ -583,49 +593,49 @@
             </row>
 
             <row>
-              <entry>Vorherigen Match auswählen</entry>
+              <entry>Match auswählen → Vorherigen Match auswählen</entry>
               <entry>editSelectFuzzyPrevMenuItem</entry>
               <entry>ctrl UP</entry>
               <entry>meta UP</entry>
             </row>
 
             <row>
-              <entry>Nächsten Match auswählen</entry>
+              <entry>Match auswählen → Nächsten Match auswählen</entry>
               <entry>editSelectFuzzyNextMenuItem</entry>
               <entry>ctrl DOWN</entry>
               <entry>meta DOWN</entry>
             </row>
 
             <row>
-              <entry>Match #1 auswählen</entry>
+              <entry>Match auswählen → Match #1 auswählen</entry>
               <entry>editSelectFuzzy1MenuItem</entry>
               <entry>ctrl 1</entry>
               <entry>meta 1</entry>
             </row>
 
             <row>
-              <entry>Match #2 auswählen</entry>
+              <entry>Match auswählen → Match #2 auswählen</entry>
               <entry>editSelectFuzzy2MenuItem</entry>
               <entry>ctrl 2</entry>
               <entry>meta 2</entry>
             </row>
 
             <row>
-              <entry>Match #3 auswählen</entry>
+              <entry>Match auswählen → Match #3 auswählen</entry>
               <entry>editSelectFuzzy3MenuItem</entry>
               <entry>ctrl 3</entry>
               <entry>meta 3</entry>
             </row>
 
             <row>
-              <entry>Match #4 auswählen</entry>
+              <entry>Match auswählen → Match #4 auswählen</entry>
               <entry>editSelectFuzzy4MenuItem</entry>
               <entry>ctrl 4</entry>
               <entry>meta 4</entry>
             </row>
 
             <row>
-              <entry>Match #5 auswählen</entry>
+              <entry>Match auswählen → Match #5 auswählen</entry>
               <entry>editSelectFuzzy5MenuItem</entry>
               <entry>ctrl 5</entry>
               <entry>meta 5</entry>
@@ -771,38 +781,31 @@
             </row>
 
             <row>
-              <entry>Nächstes Segment von tm/auto/</entry>
+              <entry>Automatisch ausgefüllte Segmente → Nächstes Segment von tm/auto/</entry>
               <entry>gotoNextXAutoMenuItem</entry>
               <entry>ctrl alt COMMA</entry>
               <entry>meta alt COMMA</entry>
             </row>
 
             <row>
-              <entry>Vorheriges Segment von tm/auto/</entry>
+              <entry>Automatisch ausgefüllte Segmente → Vorheriges Segment von tm/auto/</entry>
               <entry>gotoPrevXAutoMenuItem</entry>
               <entry>ctrl alt shift COMMA</entry>
               <entry>meta alt shift COMMA</entry>
             </row>
 
             <row>
-              <entry>Nächstes Segment von tm/enforce/</entry>
+              <entry>Automatisch ausgefüllte Segmente → Nächstes Segment von tm/enforce/</entry>
               <entry>gotoNextXEnforcedMenuItem</entry>
               <entry>ctrl alt PERIOD</entry>
               <entry>meta alt PERIOD</entry>
             </row>
 
             <row>
-              <entry>Vorheriges Segment von tm/enforce/</entry>
+              <entry>Automatisch ausgefüllte Segmente → Vorheriges Segment von tm/enforce/</entry>
               <entry>gotoPrevXEnforcedMenuItem</entry>
               <entry>ctrl alt shift PERIOD</entry>
               <entry>meta alt shift PERIOD</entry>
-            </row>
-
-            <row>
-              <entry>Vor im Verlauf</entry>
-              <entry>gotoHistoryForwardMenuItem</entry>
-              <entry>ctrl shift N</entry>
-              <entry>meta shift N</entry>
             </row>
 
             <row>
@@ -813,14 +816,21 @@
             </row>
 
             <row>
-              <entry>Notizenbereich</entry>
+              <entry>Vor im Verlauf</entry>
+              <entry>gotoHistoryForwardMenuItem</entry>
+              <entry>ctrl shift N</entry>
+              <entry>meta shift N</entry>
+            </row>
+
+            <row>
+              <entry>Notizblock</entry>
               <entry>gotoNotesPanelMenuItem</entry>
               <entry>ctrl alt 9</entry>
               <entry>meta alt 9</entry>
             </row>
 
             <row>
-              <entry>Editorbereich</entry>
+              <entry>Editor</entry>
               <entry>gotoEditorPanelMenuItem</entry>
               <entry>ctrl alt 0</entry>
               <entry>meta alt 0</entry>
@@ -860,7 +870,7 @@
             </row>
 
             <row>
-              <entry>Absatzbegrenzungen hervorheben</entry>
+              <entry>Absatzbegrenzungen anzeigen</entry>
               <entry>viewMarkParagraphStartCheckBoxMenuItem</entry>
             </row>
 
@@ -870,7 +880,7 @@
             </row>
 
             <row>
-              <entry>Alle mehrmaligen Segmente hervorheben</entry>
+              <entry>Mehrmalige Segmente hervorheben</entry>
               <entry>viewMarkNonUniqueSegmentsCheckBoxMenuItem</entry>
             </row>
 
@@ -880,17 +890,17 @@
             </row>
 
             <row>
-              <entry>Geschützte Leerzeichen hervorheben</entry>
+              <entry>Geschützte Leerzeichen anzeigen</entry>
               <entry>viewMarkNBSPCheckBoxMenuItem</entry>
             </row>
 
             <row>
-              <entry>Leerraum hervorheben</entry>
+              <entry>Leerraum anzeigen</entry>
               <entry>viewMarkWhitespaceCheckBoxMenuItem</entry>
             </row>
 
             <row>
-              <entry>BiDi-Steuerzeichen hervorheben</entry>
+              <entry>BiDi-Steuerzeichen anzeigen</entry>
               <entry>viewMarkBidiCheckBoxMenuItem</entry>
             </row>
 
@@ -905,28 +915,33 @@
             </row>
 
             <row>
-              <entry>LanguageTool</entry>
+              <entry>LanguageTool-Probleme hervorheben</entry>
               <entry>viewMarkLanguageCheckerCheckBoxMenuItem</entry>
             </row>
 
             <row>
-              <entry>Aggressiver Font-Fallback</entry>
+              <entry>Aggressiven Font-Fallback nutzen</entry>
               <entry>viewMarkFontFallbackCheckBoxMenuItem</entry>
             </row>
 
             <row>
-              <entry>Modifikationsinfo → Keine anzeigen</entry>
+              <entry>Modifikationsinfo anzeigen → Keine</entry>
               <entry>viewDisplayModificationInfoNoneRadioButtonMenuItem</entry>
             </row>
 
             <row>
-              <entry>Modifikationsinfo → Nur für aktives Segment anzeigen</entry>
+              <entry>Modifikationsinfo anzeigen → Nur für aktives Segment</entry>
               <entry>viewDisplayModificationInfoSelectedRadioButtonMenuItem</entry>
             </row>
 
             <row>
-              <entry>Modifikationsinfo → Für alle Segmente anzeigen</entry>
+              <entry>Modifikationsinfo anzeigen → Für alle Segmente</entry>
               <entry>viewDisplayModificationInfoAllRadioButtonMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>OmegaT-Fenster wiederherstellen</entry>
+              <entry>viewRestoreGUIMenuItem</entry>
             </row>
           </tbody>
         </tgroup>
@@ -959,7 +974,7 @@
             </row>
 
             <row>
-              <entry>Probleme im aktuellen Dokument untersuchen</entry>
+              <entry>Probleme in aktueller Datei untersuchen</entry>
               <entry>toolsCheckIssuesCurrentFileMenuItem</entry>
             </row>
 
@@ -1022,12 +1037,12 @@
             </row>
 
             <row>
-              <entry>Glossar → Fuzzy-Matching für Glossareinträge benutzen</entry>
+              <entry>Glossare → Fuzzy-Matching benutzen</entry>
               <entry>optionsGlossaryFuzzyMatchingCheckBoxMenuItem</entry>
             </row>
 
             <row>
-              <entry>Wörterbuch → Fuzzy-Matching für Wörterbucheinträge benutzen</entry>
+              <entry>Wörterbücher → Fuzzy-Matching benutzen</entry>
               <entry>optionsDictionaryFuzzyMatchingCheckBoxMenuItem</entry>
             </row>
 
@@ -1047,12 +1062,12 @@
             </row>
 
             <row>
-              <entry>Dateifilter...</entry>
+              <entry>Globale Dateifilter...</entry>
               <entry>optionsSetupFileFiltersMenuItem</entry>
             </row>
 
             <row>
-              <entry>Segmentierung...</entry>
+              <entry>Globale Segmentierungsregeln...</entry>
               <entry>optionsSentsegMenuItem</entry>
             </row>
 
@@ -1062,7 +1077,7 @@
             </row>
 
             <row>
-              <entry>Konfigurationsordner öffnen</entry>
+              <entry>Konfigurationsordner öffnen...</entry>
               <entry>optionsAccessConfigDirMenuItem</entry>
             </row>
           </tbody>

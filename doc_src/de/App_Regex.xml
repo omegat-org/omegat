@@ -41,7 +41,7 @@
     <varlistentry>
       <term>Suche</term>
       <listitem>
-        <para>Die Suche in OmegaT bietet die Option <link linkend="windows.text.search.methods.regex" endterm="windows.text.search.methods.regex.title"/>, mit der Sie Ihre Dateien mit hoher Effizienz durchsuchen können.</para>
+        <para>Die Suche bietet die Option <link linkend="windows.text.search.methods.regex" endterm="windows.text.search.methods.regex.title"/>, mit der Sie Ihre Dateien mit hoher Effizienz durchsuchen können.</para>
 
         <para>Das Dialogfenster <link linkend="windows.text.replace" endterm="windows.text.replace.title"/> besitzt dieselbe Option, mit der Sie reguläre Ausdrücke sowohl auf den gesuchten als auch auf den ersetzten Text anwenden können.</para>
       </listitem>

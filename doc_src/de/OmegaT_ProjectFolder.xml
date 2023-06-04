@@ -144,7 +144,7 @@
 	
 	<para>OmegaT kann angewiesen werden, Matches automatisch einzufügen. Um Sie daran zu erinnern, dass ein Match von OmegaT und nicht von Ihnen eingefügt wurde, fügt OmegaT ein Präfix hinzu, das in der <link linkend="dialogs.preferences.editor.insert.the.best.fuzzy.match" endterm="dialogs.preferences.editor.insert.the.best.fuzzy.match.title"/>-Einstellung festgelegt werden kann.</para>
 	
-    <para>Matches aus den externen Translation Memories werden im <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/>-Bereich angezeigt, zusätzlich zu den Matches aus <link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/>, dem projekteigenen Translation Memory.</para>
+    <para>Matches aus den Referenz-Memories werden im <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/>-Bereich angezeigt, zusätzlich zu den Matches aus <link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/>, dem projekteigenen Translation Memory.</para>
 
 	<para>Solche Matches sind standardmäßig auf der im <link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/>-Dialogfenster definierten Quell- und Zielsprache beschränkt, aber Sie können auch Matches in Sprachen hinzufügen, die nicht die Zielsprache sind. Siehe die <link linkend="dialog.preferences.tm.matches.other.languages" endterm="dialog.preferences.tm.matches.other.languages.title"/>-Einstellungen für weitere Informationen.</para>
 

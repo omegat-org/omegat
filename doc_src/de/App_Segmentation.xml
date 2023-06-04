@@ -8,7 +8,7 @@
 	
 	<para>Translation-Memory-Tools arbeiten mit Texteinheiten, die als Segmente bezeichnet werden. Nachdem eine Übersetzung eingegeben wurde, wird das Segment, das den Quelltext enthält, zusammen mit seiner Übersetzung in den Translation Memory des Projekts gespeichert und anschließend mit anderen Quelltexten im Projekt abgeglichen.</para>
 
-	<para>Verwenden Sie die Projekteigenschaft <link linkend="dialogs.project.properties.options.segmentation" endterm="dialogs.project.properties.options.segmentation.title"/>, um die Art der Segmentierung auszuwählen.</para>
+	<para>Um die Art der Segmentierung anzugeben, verwenden Sie die Projekteigenschaft <link linkend="dialogs.project.properties.options.segmentation" endterm="dialogs.project.properties.options.segmentation.title"/>.</para>
 
 	<para>Segmente sind standardmäßig <emphasis role="bold">Absätze</emphasis>, die vom Dateiformat selbst vorgegeben werden.</para>
 	

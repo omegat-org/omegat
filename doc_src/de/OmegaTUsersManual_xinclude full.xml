@@ -7,6 +7,19 @@
 <book lang="de" id="book.user.manual">
   <bookinfo>
     <title id="book.user.manual.title">OmegaT 6.1.0 - Bedienungsanleitung</title>
+
+	<!-- Copyright 2002-2023
+		 - Vincent Bidaux
+		 - Didier Briel
+		 - Jean-Christophe Helary
+		 - Aaron Madlon-Kay
+		 - Maxym Mychalchuk
+		 - Marc Prior
+		 - Vito Smolej
+		 - Kerry Swatridge
+		 - Philippe Tourigny
+	-->
+
     <!-- <pubdate>@timestamp@</pubdate> -->
 	<!-- TODO automate date insertion -->
     <abstract>

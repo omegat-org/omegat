@@ -1,4 +1,5 @@
-Stu ducumentu, è soprattuttu a prima versione d’OmegaT in lingua corsa, sò stati tradutti da Patriccollu di Santa Maria è Sichè, diritti di copia, copyright © 2020-2022.
+A versione @language@ d’OmegaT hè stata tradutta da :
+Patriccollu di Santa Maria è Sichè
 
 
 Cosa hè OmegaT ?
@@ -128,6 +129,7 @@ A squadra attuale hè :
 - Concepción Martin (rispunsevule di cumunità Facebook)
 - Hiroshi Miura (sviluppatore principale)
 - Briac Pilpré (webmaestru)
+- Philippe Tourigny (rispunsevule di a documentazione)
 - Lucie Vecerova (rispunsevule di cumunità Facebook)
 
 E cuntribuzioni à u codice sò ducumentate in /docs/contributors.txt.

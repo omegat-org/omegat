@@ -23,7 +23,7 @@
   - Corsican localization updated to 6.0 (UI, readme)
   - Dutch localization updated to 6.0 (UI, readme)
   - French localization updated to 6.0 (UI, readme, documentation)
-  - Finnish localization updated to 6.0 (UI)
+  - Finnish localization updated to 6.0 (UI, readme)
   - German localization updated to 6.0 (UI, readme, documentation)
   - Italian localization updated to 6.0 (UI, readme)
   - Ukrainian localization updated to 6.0 (UI, readme)

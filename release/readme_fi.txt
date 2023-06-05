@@ -1,4 +1,5 @@
-Kääntäjä: Pia Vinkki © 2019
+OmegaT:n on suomentanut
+Pia Vinkki, FLOSSLATION Oy Ab
 
 
 Mikä OmegaT on?
@@ -66,21 +67,6 @@ OmegaT:n asentaminen (Solaris, FreeBSD jne.)
 
 Siirrä arkisto johonkin sopivaan kansioon ja pura se. OmegaT on valmis
 käynnistettäväksi.
-
-
-
-OmegatT:n asentaminen Java Web Startin avulla (kaikki käyttöjärjestelmät)
-=========================================================================
-
-Jos järjestelmääsi on jo asennettu Java, voit asentaa OmegaT:n Java Web Startin
-avulla.
-
-Lataa tällöin seuraava tiedosto ja suorita se:
-
-  https://omegat.sourceforge.net/webstart/OmegaT.jnlp
-
-Tämä asentaa ohjelman ensimmäisen käytön yhteydessä sopivan ympäristön
-sekä koneellesi että ohjelmaa varten. Myöhemmin ohjelmaa ei tarvitse käyttää verkkotilassa.
 
 
 
@@ -156,17 +142,18 @@ Käyttöön antajat
 
 OmegaT:n alkuperäinen kehittäjä on Keith Godfrey.
 
-OmegaT-projektinvetäjä on Aaron Madlon-Kay.
+Jean-Christophe Helary on OmegaT-projektin päällikkö.
 
 Nykyinen tiimi
 (aakkosjärjestyksessä):
 
-- Vincent Bidaux (dokumentaatiokoordinaattori)
 - Marco Cevoli (Telegram-yhteisön koordinaattori)
 - Jean-Christophe Helary (Twitter-yhteisön koordinaattori)
-- Kos Ivantsof (lokalisaatiokoordinaattori)
+- Kos Ivantsov (lokalisointivastaava)
 - Concepción Martin (Facebook-yhteisön koordinaattori)
+- Hiroshi Miura (pääkehittäjä)
 - Briac Pilpré (sivustovastaava)
+- Philippe Tourigny (dokumentaatiovastaava)
 - Lucie Vecerova (Facebook-yhteisön koordinaattori)
 
 Kaikki, jotka ovat antaneet koodia käyttöön, on kerrottu tiedostossa /docs/contributors.txt.
@@ -174,17 +161,18 @@ Kaikki, jotka ovat antaneet koodia käyttöön, on kerrottu tiedostossa /docs/co
 Aikaisempia koodintuottajia ovat:
 (aakkosjärjestyksessä)
 
-- Anthony Baldwin (lokalisointikoordinaattori)
-- Didier Briel (projektinvetäjä)
-- Alex Buloichik (pääkehittäjä)
-- Sabine Cretella
-- Dmitri Gabinski
-- Jean-Christophe Helary (tukiryhmän omistaja, lokalisointikoordinaattori)
-- Maxym Mykhalchuk (pääkehittäjä)
-- Samuel Murray
-- Henry Pijffers (jakelukoordinaattori)
-- Marc Prior (projektikoordinaattori, sivustovastaava)
-- Vito Smolej (dokumentaatiovastaava)
+– Anthony Baldwin (lokalisointikoordinaattori)
+– Vincent Bidaux (dokumentaatiovastaava)
+– Didier Briel (projektipäällikkö)
+– Alex Buloichik (pääkehittäjä)
+– Sabine Cretella
+– Dmitri Gabinski
+– Aaron Madlon-Kay (projektipäällikkö)
+– Maxym Mykhalchuk (pääkehittäjä)
+– Samuel Murray
+– Henry Pijffers (jakelukoordinaattori)
+– Marc Prior (projektin apukoordinaattori, sivustovastaava)
+– Vito Smolej (dokumentaatiovastaava)
 
 ja monet, monet muut auttavaiset ihmiset
 

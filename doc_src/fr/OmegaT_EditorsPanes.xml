@@ -682,7 +682,7 @@ Folder = <token>Dossier</token></programlisting>
   </section>
   
   <section id="panes.machinetranslation">
-    <title id="panes.machinetranslation.title"><guilabel>Traduction automatique</guilabel></title>
+    <title id="panes.machinetranslation.title"><guilabel>Traductions automatiques</guilabel></title>
 
     <para>Ce volet, lorsqu’il est ouvert, affiche les suggestions pour le segment en cours produites par chaque moteur de traduction activé. Lorsque des suggestions provenant de plusieurs moteurs sont disponibles, le nom du moteur apparaît après le texte traduit,</para>
 	

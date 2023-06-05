@@ -318,7 +318,7 @@
                      <p>Recharge le projet pour prendre en compte les changements extérieurs affectant les fichiers sources et les paramètres du projet.</p>
                      <div class="note">
                         <h3 class="title">Note</h3>
-                        <p>Les nouvelles mémoires de traduction placées dans le dossier <a class="link" href="chapter.project.folder.html#project.folder.tm" title="tm">tm</a> pendant la traduction sont automatiquement prises en compte dès que le curseur bouge d’un segment à un autre. De la même manière, le contenu du dossier <a class="link" href="chapter.project.folder.html#project.folder.glossary" title="Glossaire">Glossaire</a> est automatiquement reconnu et ne nécessite pas de recharger le projet.</p>
+                        <p>Les nouvelles mémoires de traduction placées dans le dossier <a class="link" href="chapter.project.folder.html#project.folder.tm" title="tm">tm</a> pendant la traduction sont automatiquement prises en compte dès que le curseur bouge d’un segment à un autre. De la même manière, le contenu du dossier <a class="link" href="chapter.project.folder.html#project.folder.glossary" title="glossary">glossary</a> est automatiquement reconnu et ne nécessite pas de recharger le projet.</p>
                      </div>
                      <p>Lorsqu’un projet en équipe est rechargé, OmegaT recharge les propriétés distantes, plutôt que locales.</p>
                   </dd>
@@ -521,7 +521,7 @@
                            </dd>
                            <dt>
                               <span class="term">
-                                 <a class="link" href="chapter.project.folder.html#project.folder.dictionary" title="Dictionnaire">
+                                 <a class="link" href="chapter.project.folder.html#project.folder.dictionary" title="dictionary">
                                     <span class="guimenuitem">Dictionnaires</span>
                                  </a>
                               </span>
@@ -531,7 +531,7 @@
                            </dd>
                            <dt>
                               <span class="term">
-                                 <a class="link" href="chapter.project.folder.html#project.folder.glossary" title="Glossaire">
+                                 <a class="link" href="chapter.project.folder.html#project.folder.glossary" title="glossary">
                                     <span class="guimenuitem">Glossaires</span>
                                  </a>
                               </span>
@@ -562,7 +562,7 @@
                            <dt>
                               <span class="term">
                                  <a class="link" href="chapter.project.folder.html#project.folder.tm" title="tm">
-                                    <span class="guimenuitem">MT</span>
+                                    <span class="guimenuitem">Mémoires de traduction</span>
                                  </a>
                               </span>
                            </dt>
@@ -572,7 +572,7 @@
                            <dt>
                               <span class="term">
                                  <a class="link" href="chapter.project.folder.html#project.folder.exported.tm" title="dossier des mémoires de traduction exportées">
-                                    <span class="guimenuitem">MT exportées</span>
+                                    <span class="guimenuitem">Mémoires exportées</span>
                                  </a>
                               </span>
                            </dt>
@@ -603,7 +603,7 @@
                               </span>
                            </dt>
                            <dd>
-                              <p>Le glossaire modifiable est situé dans le dossier <a class="link" href="chapter.project.folder.html#project.folder.glossary" title="Glossaire">Glossaire</a>.</p>
+                              <p>Le glossaire modifiable est situé dans le dossier <a class="link" href="chapter.project.folder.html#project.folder.glossary" title="glossary">glossary</a>.</p>
                               <p>Ouvre le fichier, s’il existe, dans l’application associée.</p>
                            </dd>
                         </dl>
@@ -1645,11 +1645,11 @@
                   </dd>
                   <dt id="menus.view.mark.non.unique.segments">
                      <span class="term" id="menus.view.mark.non.unique.segments.title">
-                        <span class="guimenuitem">Surligner les segments non uniques</span>
+                        <span class="guimenuitem">Colorer les segments répétés</span>
                      </span>
                   </dt>
                   <dd>
-                     <p>Surligne les segments non uniques en gris pâle.</p>
+                     <p>Colore les segments répétés en gris pâle.</p>
                   </dd>
                   <dt id="menus.view.mark.segments.with.notes">
                      <span class="term" id="menus.view.mark.segments.with.notes.title">
@@ -1710,7 +1710,7 @@
                   </dd>
                   <dt id="menus.view.mark.language.checker">
                      <span class="term" id="menus.view.mark.language.checker.title">
-                        <span class="guimenuitem">Souligner les problèmes du vérificateur linguistique.</span>
+                        <span class="guimenuitem">Souligner les problèmes du vérificateur linguistique</span>
                      </span>
                   </dt>
                   <dd>
@@ -1823,7 +1823,7 @@
                         <ul class="itemizedlist" style="list-style-type: disc; ">
                            <li class="listitem">
                               <p>
-                                 <span class="guilabel">Problèmes de balises</span> (toujours activée) : détecte les balises manquantes ou mal placées, y compris les balises personnalisées et le texte protégé. Voir les préférences <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.tag.processing" title="Traitement des balises">
+                                 <span class="guilabel">Problèmes de balises</span> (toujours activée) : détecte les balises manquantes ou mal placées, y compris les balises personnalisées et les textes signalés. Voir les préférences <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.tag.processing" title="Traitement des balises">
                                     <span class="guilabel">Traitement des balises</span>
                                  </a> pour en savoir plus.</p>
                               <div class="note">
@@ -1910,8 +1910,8 @@
                                     </a> pour en savoir plus.</p>
                               </li>
                               <li class="listitem">
-                                 <p>Balises personnalisées et texte protégé : comme les balises OmegaT, ils ne sont pas comptés par défaut dans les statistiques, mais vous pouvez demander a OmegaT de les compter comme des mots. Voir le paramètre <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.tag.processing.count.protected.text.and.custom.tags.in.statistics">
-                                       <code class="option">Compter le texte protégé et les balises personnalisées dans les statistiques.</code>
+                                 <p>Balises personnalisées et textes signalés : comme les balises OmegaT, ils ne sont pas comptés par défaut dans les statistiques, mais vous pouvez demander a OmegaT de les compter comme des mots. Voir le paramètre <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.tag.processing.count.protected.text.and.custom.tags.in.statistics">
+                                       <code class="option">Compter les textes signalés et les balises personnalisées dans les statistiques</code>
                                     </a> pour en savoir plus.</p>
                               </li>
                            </ul>
@@ -2051,7 +2051,7 @@
                            <li class="listitem">
                               <p>
                                  <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries">
-                                    <code class="option">Utiliser la correspondance partielle</code>
+                                    <code class="option">Utiliser la lemmatisation</code>
                                  </a>
                               </p>
                            </li>
@@ -2073,7 +2073,7 @@
                            <li class="listitem">
                               <p>
                                  <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries">
-                                    <code class="option">Utiliser la correspondance partielle</code>
+                                    <code class="option">Utiliser la lemmatisation</code>
                                  </a>
                               </p>
                            </li>

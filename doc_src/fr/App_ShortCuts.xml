@@ -880,7 +880,7 @@
             </row>
 
             <row>
-              <entry>Surligner les segments non uniques</entry>
+              <entry>Colorer les segments répétés</entry>
               <entry>viewMarkNonUniqueSegmentsCheckBoxMenuItem</entry>
             </row>
 

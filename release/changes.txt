@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
   1 Enhancement
   1 Bug fixes
-  8 Localisation updates
+  9 Localisation updates
 ----------------------------------------------------------------------
 6.0.0 vs 5.8.0
 
@@ -22,6 +22,7 @@
   - Catalan localization updated to 6.0 (UI, readme, documentation)
   - Corsican localization updated to 6.0 (UI, readme)
   - Dutch localization updated to 6.0 (UI, readme)
+  - French localization updated to 6.0 (UI, readme, documentation)
   - Finnish localization updated to 6.0 (UI)
   - German localization updated to 6.0 (UI, readme, documentation)
   - Italian localization updated to 6.0 (UI, readme)

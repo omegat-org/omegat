@@ -11,7 +11,7 @@
 
   <variablelist>
 	<varlistentry>
-	  <term>Version standard : OmegaT 6.1.0</term>
+	  <term>Version standard : OmegaT 6.0</term>
 	  <listitem>
 		<para>Cette version est recommandée pour un usage quotidien.</para>
 	  </listitem>
@@ -27,7 +27,7 @@
   <para>Les fichiers sont téléchargeables directement à partir de <ulink url="https://omegat.org/fr/download">https://omegat.org/fr</ulink>.</para>
 
   <note>
-	<para>Java 11 Runtime Environment (JRE) est nécessaire à l’exécution d’OmegaT 6.1.0.</para>
+	<para>Java 11 Runtime Environment (JRE) est nécessaire à l’exécution d’OmegaT 6.0.</para>
 
 	<para>Les paquets d’OmegaT sont disponibles à la fois dans des versions avec Java, et dans des versions sans. Les paquets sans Java nécessitent l’installation d’un environnement d’exécution Java 11 sur l’ensemble du système.</para>
 
@@ -59,7 +59,7 @@
 
       <para>L’exécution du script vous demandera d’entrer votre mot de passe <filename>sudo</filename>.</para>
 
-      <para>Le script vérifie si la même version d’OmegaT est déjà installée dans le dossier <filename>/opt/omegat/</filename> et, dans le cas contraire, installe le programme dans <filename>/opt/omegat/OmegaT_6.1.0</filename> en le définissant comme version par défaut (dans <filename>/opt/omegat/OmegaT-default</filename>).</para>
+      <para>Le script vérifie si la même version d’OmegaT est déjà installée dans le dossier <filename>/opt/omegat/</filename> et, dans le cas contraire, installe le programme dans <filename>/opt/omegat/OmegaT_6.0</filename> en le définissant comme version par défaut (dans <filename>/opt/omegat/OmegaT-default</filename>).</para>
 	</note>
 
     <para>Une fois la décompression ou l’installation terminée, vous pouvez supprimer le fichier téléchargé car il n’est plus utile.</para>

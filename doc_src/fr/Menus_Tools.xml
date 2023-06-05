@@ -24,7 +24,7 @@
 
         <itemizedlist>
           <listitem>
-            <para><guilabel>Problèmes de balises</guilabel> (toujours activée) : détecte les balises manquantes ou mal placées, y compris les balises personnalisées et le texte protégé. Voir les préférences <link linkend="dialogs.preferences.tag.processing" endterm="dialogs.preferences.tag.processing.title"/> pour en savoir plus.</para>
+            <para><guilabel>Problèmes de balises</guilabel> (toujours activée) : détecte les balises manquantes ou mal placées, y compris les balises personnalisées et les textes signalés. Voir les préférences <link linkend="dialogs.preferences.tag.processing" endterm="dialogs.preferences.tag.processing.title"/> pour en savoir plus.</para>
 
 			<note>
 			  <para>Cette option est toujours activée.</para>
@@ -98,7 +98,7 @@
 			</listitem>
 
 			<listitem>
-			  <para>Balises personnalisées et texte protégé : comme les balises OmegaT, ils ne sont pas comptés par défaut dans les statistiques, mais vous pouvez demander a OmegaT de les compter comme des mots. Voir le paramètre <link linkend="dialogs.preferences.tag.processing.count.protected.text.and.custom.tags.in.statistics" endterm="dialogs.preferences.tag.processing.count.protected.text.and.custom.tags.in.statistics.title"/> pour en savoir plus.</para>
+			  <para>Balises personnalisées et textes signalés : comme les balises OmegaT, ils ne sont pas comptés par défaut dans les statistiques, mais vous pouvez demander a OmegaT de les compter comme des mots. Voir le paramètre <link linkend="dialogs.preferences.tag.processing.count.protected.text.and.custom.tags.in.statistics" endterm="dialogs.preferences.tag.processing.count.protected.text.and.custom.tags.in.statistics.title"/> pour en savoir plus.</para>
 			</listitem>
 		  </itemizedlist>
 		</note>

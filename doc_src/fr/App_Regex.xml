@@ -57,7 +57,7 @@
     </varlistentry>
 
     <varlistentry>
-      <term>Texte protégé</term>
+      <term>Texte signalé</term>
       <listitem>
         <para>Le paramètre <link linkend="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation" endterm="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation.title"/> vous permet de définir une chaîne de caractères qu’OmegaT colorera en rouge par défaut et traitera comme une balise superflue.</para>
 
@@ -310,7 +310,7 @@
                   <row>
                     <entry>Correspond à</entry>
                     <entry>
-                      <para>Toute combinaison de trois lettres commençant par « d » et finissant par « s » : « <emphasis>des</emphasis> », « <emphasis>dis</emphasis> », « <emphasis>dos</emphasis> », ou même des combinaisons qui n’ont pas de sens, comme « <emphasis>dzs</emphasis> » ou « <emphasis>dqs</emphasis> ».</para>
+                      <para>Toute combinaison de trois lettres commençant par « d » et finissant par « s » : « <emphasis>des</emphasis> », « <emphasis>dis</emphasis> », « <emphasis>dos</emphasis> », ou même des combinaisons qui n’ont pas de sens, comme « <emphasis>dzs</emphasis> » ou « <emphasis>dqs</emphasis> ».</para>
                     </entry>
                   </row>
 
@@ -351,7 +351,7 @@
                   <row>
                     <entry>Correspond à</entry>
                     <entry>
-                      <para>Le premier mot « Une » ou « La » dans des phrases telles que :<simplelist>
+                      <para>Le premier mot « Une » ou « La » dans des phrases telles que : <simplelist>
                           <member>« Une pomme par jour... »</member>
                           <member>« La prunelle de mes yeux... »</member>
                         </simplelist>
@@ -362,7 +362,7 @@
                   <row>
                     <entry>Ne correspond pas à</entry>
                     <entry>
-                      <para>Le premier mot « Une » ou « La » dans des phrases telles que :<simplelist>
+                      <para>Le premier mot « Une » ou « La » dans des phrases telles que : <simplelist>
                           <member>« Un récit intitulé <emphasis>Une Héroïne Inconnue</emphasis>. »</member>
                           <member>« Il travaille pour le journal <emphasis>La Provence</emphasis>. »</member>
                         </simplelist>
@@ -395,7 +395,7 @@
                   <row>
                     <entry>Correspond à</entry>
                     <entry>
-                      <para>Soit le « est » ou le « es » dans :<simplelist>
+                      <para>Soit le « est » ou le « es » dans : <simplelist>
                           <member>« C’est une bonne question. »</member>
                           <member>« Tu es un excellent médecin. »</member>
                         </simplelist>
@@ -408,7 +408,7 @@
                   <row>
                     <entry>Ne correspond pas à</entry>
                     <entry>
-                      <para>Ni le « est » ni le « es » dans :<simplelist>
+                      <para>Ni le « est » ni le « es » dans : <simplelist>
                           <member>Le verbe être : « est » (ou « es »).</member>
                         </simplelist>
                       </para>
@@ -1088,15 +1088,12 @@
     
     <para>Quelques ressources supplémentaires sont présentées ci-dessous.</para>
 
-    <para>La référence technique Java est utile en tant que référence de base.<variablelist>
-        <varlistentry id="app.regex.java">
+    <para>La référence technique Java est utile en tant que référence de base. <variablelist> <varlistentry id="app.regex.java">
           <term id="app.regex.java.title"><ulink url="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/regex/Pattern.html">Documentation Regex Java</ulink></term>
           <listitem>
             <para>La référence officielle pour les expressions régulières utilisées en Java.</para>
           </listitem>
-        </varlistentry>
-      </variablelist>Si vous souhaitez en savoir plus sur l’utilisation des expressions régulières, nous vous recommandons les deux sites ci-dessous.<variablelist>
-        <varlistentry id="app.regex.tools.regex101">
+        </varlistentry> </variablelist> Si vous souhaitez en savoir plus sur l’utilisation des expressions régulières, nous vous recommandons les deux sites ci-dessous. <variablelist> <varlistentry id="app.regex.tools.regex101">
           <term id="app.regex.tools.regex101.title"><ulink url="https://regex101.com">https://regex101.com</ulink></term>
           <listitem>
             <para>Un outil de correspondance d’expressions régulières en ligne qui vous permet de saisir le texte que vous recherchez et les expressions régulières que vous voulez tester.</para>

@@ -1561,7 +1561,7 @@ Un caractère d’espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 
             <div class="variablelist">
                <dl class="variablelist">
                   <dt>
-                     <span class="term">Version standard : OmegaT 6.1.0</span>
+                     <span class="term">Version standard : OmegaT 6.0</span>
                   </dt>
                   <dd>
                      <p>Cette version est recommandée pour un usage quotidien.</p>
@@ -1577,7 +1577,7 @@ Un caractère d’espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 
             <p>Les fichiers sont téléchargeables directement à partir de <a class="ulink" href="https://omegat.org/fr/download" target="_top">https://omegat.org/fr</a>.</p>
             <div class="note">
                <h3 class="title">Note</h3>
-               <p>Java 11 Runtime Environment (JRE) est nécessaire à l’exécution d’OmegaT 6.1.0.</p>
+               <p>Java 11 Runtime Environment (JRE) est nécessaire à l’exécution d’OmegaT 6.0.</p>
                <p>Les paquets d’OmegaT sont disponibles à la fois dans des versions avec Java, et dans des versions sans. Les paquets sans Java nécessitent l’installation d’un environnement d’exécution Java 11 sur l’ensemble du système.</p>
                <p>OmegaT 5.8.0 et les versions ultérieures peuvent aussi fonctionner avec l’environnement d’exécution Java 11 sur n’importe quelle plateforme.</p>
                <p>Pour des raisons de licence, l’équipe d’OmegaT recommande l’environnement d’exécution Eclipse Temurin Java fourni avec le projet Adoptium de la Fondation Eclipse, mais n’importe quel environnement d’exécution compatible avec Java 8 devrait fonctionner. Voir <a class="ulink" href="https://projects.eclipse.org/projects/adoptium.temurin" target="_top">Le projet Eclipse Temurin™</a>.</p>
@@ -1608,7 +1608,7 @@ Un caractère d’espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 
                   <h3 class="title">Note</h3>
                   <p>Bien qu’il soit possible de lancer OmegaT directement à partir des fichiers disponibles, vous pouvez aussi exécuter le script <code class="filename">linux-install.sh</code> qui s’y trouve pour installer OmegaT dans un emplacement plus approprié.</p>
                   <p>L’exécution du script vous demandera d’entrer votre mot de passe <code class="filename">sudo</code>.</p>
-                  <p>Le script vérifie si la même version d’OmegaT est déjà installée dans le dossier <code class="filename">/opt/omegat/</code> et, dans le cas contraire, installe le programme dans <code class="filename">/opt/omegat/OmegaT_6.1.0</code> en le définissant comme version par défaut (dans <code class="filename">/opt/omegat/OmegaT-default</code>).</p>
+                  <p>Le script vérifie si la même version d’OmegaT est déjà installée dans le dossier <code class="filename">/opt/omegat/</code> et, dans le cas contraire, installe le programme dans <code class="filename">/opt/omegat/OmegaT_5.8</code> en le définissant comme version par défaut (dans <code class="filename">/opt/omegat/OmegaT-default</code>).</p>
                </div>
                <p>Une fois la décompression ou l’installation terminée, vous pouvez supprimer le fichier téléchargé car il n’est plus utile.</p>
             </section>
@@ -1923,11 +1923,11 @@ Un caractère d’espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 
                         <dd>
                            <p>Les paramètres optionnels acceptés par la commande <span class="command">
                                  <strong>java</strong>
-                              </span>. Les paramètres utiles au fonctionnement d’OmegaT sont décrits <a class="link" href="chapter.how.to.html#launch.with.command.line.java.parameters" title="Paramètres java">ci-dessous</a>.</p>
+                              </span>. Les paramètres relatifs au lancement OmegaT sont décrits <a class="link" href="chapter.how.to.html#launch.with.command.line.java.parameters" title="Paramètres java">ci-dessous</a>.</p>
                         </dd>
                         <dt id="launch.with.command.line.intro.omegat.jar">
                            <span class="term" id="launch.with.command.line.intro.omegat.jar.title">
-                              <code class="option">chemin/à/OmegaT.jar</code>
+                              <code class="option">chemin/vers/OmegaT.jar</code>
                            </span>
                         </dt>
                         <dd>
@@ -2208,7 +2208,7 @@ config-dir=&quot;chemin/vers/nouveau/configdir&quot;</pre>
                                                          <dl class="variablelist">
                                                             <dt id="launch.with.command.line.html">
                                                                <span class="term" id="launch.with.command.line.html.title">
-                                                                  <code class="option">. *\.html</code>
+                                                                  <code class="option">.*\.html</code>
                                                                </span>
                                                             </dt>
                                                             <dd>

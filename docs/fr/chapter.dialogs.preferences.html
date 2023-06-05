@@ -388,7 +388,7 @@
                                     <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Apertium</td>
                                     <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">URL, Touche clavier</td>
                                     <td style="text-align: left; border-bottom: 1px solid ; ">
-                                       <a class="ulink" href="https://www.apertium.org/index.fra.html#?dir=fra-epo&amp;q=" target="_top">https://www.apertium.org/index.fra.html#?dir=fra-epo&amp;q=</a>
+                                       <a class="ulink" href="https://www.apertium.org/index.fra.html#?dir=fra-epo&amp;q=" target="_top">https://www.apertium.org/index.fra.html#?dir=fra-epo&amp;amp;q=</a>
                                     </td>
                                  </tr>
                                  <tr>
@@ -496,7 +496,7 @@
                                        <strong>I</strong>
                                     </span>
 	  
-                                 </a> or</p>
+                                 </a> ou</p>
                            </li>
                            <li class="listitem">
                               <p>la préférence <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.editor.insert.the.source.text">
@@ -544,7 +544,7 @@
                   </div>
                </div>
             </div>
-            <p>Les préférences définissent ici la manière dont le contenu du dossier <a class="link" href="chapter.project.folder.html#project.folder.dictionary" title="Dictionnaire">Dictionnaire</a> est affiché dans le volet <a class="link" href="chapter.panes.html#panes.dictionary" title="Dictionnaires">
+            <p>Les préférences définissent ici la manière dont le contenu du dossier <a class="link" href="chapter.project.folder.html#project.folder.dictionary" title="dictionary">dictionary</a> est affiché dans le volet <a class="link" href="chapter.panes.html#panes.dictionary" title="Dictionnaires">
                   <span class="guilabel">Dictionnaires</span>
                </a>.</p>
             <div class="variablelist">
@@ -573,7 +573,7 @@
                   </dd>
                   <dt id="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries">
                      <span class="term" id="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries.title">
-                        <code class="option">Utiliser la correspondance partielle</code>
+                        <code class="option">Utiliser la lemmatisation</code>
                      </span>
                   </dt>
                   <dd>
@@ -581,7 +581,7 @@
                   </dd>
                   <dt id="dialogs.preferences.dictionary.use.condensed.view">
                      <span class="term" id="dialogs.preferences.dictionary.use.condensed.view.title">
-                        <code class="option">Utiliser la vue condensée</code>
+                        <code class="option">Vue condensée</code>
                      </span>
                   </dt>
                   <dd>
@@ -614,7 +614,7 @@
                   </dd>
                   <dt id="dialogs.preferences.appearance.restore.main.window">
                      <span class="term" id="dialogs.preferences.appearance.restore.main.window.title">
-                        <code class="option">Réinitialiser la fenêtre principale</code>
+                        <code class="option">Réinitialiser la fenêtre d’OmegaT</code>
                      </span>
                   </dt>
                   <dd>
@@ -804,7 +804,7 @@
                         </span>
                      </dt>
                      <dd>
-                        <p>Pour définir une règle de segmentation, cochez la case <span class="guilabel">Segmentation/Exception</span>.</p>
+                        <p>Pour définir une règle de segmentation, cochez la case <span class="guilabel">Segmentation</span>.</p>
                         <p>Sépare le texte source en segments. Par exemple, un <span class="emphasis">
                               <em>point suivi d’une espace</em>
                            </span> définit généralement une fin de phrase en anglais.</p>
@@ -908,7 +908,7 @@
                   </dd>
                   <dt id="dialog.preferences.spellchecker.url">
                      <span class="term" id="dialog.preferences.spellchecker.url.title">
-                        <code class="option">URL des dictionnaires de vérification orthographique téléchargeables</code>
+                        <code class="option">URL des dictionnaires orthographiques téléchargeables :</code>
                      </span>
                   </dt>
                   <dd>
@@ -1006,11 +1006,11 @@
                      </span>
                   </dt>
                   <dd>
-                     <p>Chaque ensemble représente un groupe de recherches sur le web ou de commandes locales lancées simultanément.</p>
-                     <p>Un nom doit être attribué à un ensemble. Le nom apparaitra à la fin du menu <a class="link" href="chapter.menus.html#menus.tools" title="Outils">
+                     <p>Chaque configuration représente un groupe de recherches sur le web ou de commandes locales lancées simultanément.</p>
+                     <p>Chaque configuration doit être nommée. Le nom apparaîtra à la fin du menu <a class="link" href="chapter.menus.html#menus.tools" title="Outils">
                            <span class="guimenu">Outils</span>
                         </a>.</p>
-                     <p>Si vous cochez la case <span class="guilabel">Afficher dans le menu contextuel de l’Éditeur</span>, le nom de l’ensemble sera également affiché dans le <a class="link" href="chapter.panes.html#panes.editor.context.menu">menu contextuel</a> si une chaîne de caractères est sélectionnée.</p>
+                     <p>Si vous cochez la case <span class="guilabel">Afficher dans le menu contextuel de l’Éditeur</span>, le nom de la configuration sera également affiché dans le <a class="link" href="chapter.panes.html#panes.editor.context.menu">menu contextuel</a> si une chaîne de caractères est sélectionnée.</p>
                      <p>Les recherches par URL ainsi que les commandes doivent contenir la chaîne <code class="literal">{target}</code> pour être acceptées. Le caractère générique <code class="literal">{target}</code> sera remplacé par la chaîne sélectionnée dans l’Éditeur.</p>
                      <p>Les URL sont ouvertes avec le navigateur web par défaut, un par onglet.</p>
                      <div class="example" id="dialogs.preferences.external.search.items.url.search.example">
@@ -1025,8 +1025,8 @@
                      <div class="example" id="dialogs.preferences.external.search.items.command.example">
                         <div class="example-title">Exemple 23. Exemple de commande</div>
                         <div class="example-contents">
-                           <pre class="programlisting">/usr/bin/open|dict://{target}</pre>
-                           <p>Cela ouvre l’application du dictionnaire qui met en œuvre le protocole <code class="code">dict</code> sur votre ordinateur, à la recherche du terme {target}.</p>
+                           <pre class="programlisting">/usr/bin/open|dict://{terme}</pre>
+                           <p>Cela ouvre l’application du dictionnaire qui met en œuvre le protocole <code class="code">dict</code> sur votre ordinateur, à la recherche du terme {terme}.</p>
                         </div>
                      </div>
                      <br class="example-break" />
@@ -1071,7 +1071,7 @@
                   <dd>
                      <p>OmegaT insère la traduction dont le pourcentage de correspondance est le plus élevé par rapport à la valeur définie dans cette boîte de dialogue.</p>
                      <p>Le préfixe identifie les traductions insérées en tant que correspondances partielles. Vous pouvez également enregistrer le préfixe dans la préférence <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation">
-                           <code class="option">Texte protégé</code>
+                           <code class="option">Texte signalé</code>
                         </a> pour l’inclure dans le processus de vérification des balises et vous assurer de ne pas l’oublier dans votre traduction.</p>
                   </dd>
                </dl>
@@ -1168,7 +1168,7 @@
                            </span>+<span class="keycap">
                               <strong>U</strong>
                            </span>
-                        </a>s’arrête également sur les segments comportant des traductions alternatives.</p>
+                        </a> s’arrête également sur les segments comportant des traductions alternatives.</p>
                   </dd>
                   <dt id="dialogs.preferences.editor.allow.tag.editing">
                      <span class="term" id="dialogs.preferences.editor.allow.tag.editing.title">
@@ -1349,11 +1349,11 @@
                   </dd>
                   <dt id="dialogs.preferences.tag.processing.count.protected.text.and.custom.tags.in.statistics">
                      <span class="term" id="dialogs.preferences.tag.processing.count.protected.text.and.custom.tags.in.statistics.title">
-                        <code class="option">Compter le texte protégé et les balises personnalisées dans les statistiques.</code>
+                        <code class="option">Compter les textes signalés et les balises personnalisées dans les statistiques</code>
                      </span>
                   </dt>
                   <dd>
-                     <p>Contrairement aux balises d’OmegaT, les textes protégés et les balises personnalisées sont par défaut pris en compte dans les statistiques. Voir le menu <a class="link" href="chapter.menus.html#menus.tools" title="Outils">
+                     <p>Contrairement aux balises d’OmegaT, les textes signalés et les balises personnalisées sont par défaut pris en compte dans les statistiques. Voir le menu <a class="link" href="chapter.menus.html#menus.tools" title="Outils">
                            <span class="guimenu">Outils</span>
                         </a>
                         <a class="link" href="chapter.menus.html#menus.tools.statistics">
@@ -1380,7 +1380,7 @@
                   </dd>
                   <dt id="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation">
                      <span class="term" id="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation.title">
-                        <code class="option">Texte protégé</code>
+                        <code class="option">Texte signalé</code>
                      </span>
                   </dt>
                   <dd>
@@ -1649,7 +1649,7 @@ ${filePath}&gt;</pre>
                                  <tr>
                                     <td style="text-align: left; border-right: 1px solid ; ">
 					
-                                       <code class="literal">$(targetLanguage)</code>
+                                       <code class="literal">${targetLanguage}</code>
 				  
                                     </td>
                                     <td style="text-align: left; ">La langue cible du segment.</td>
@@ -1693,7 +1693,7 @@ ${filePath}&gt;</pre>
                   </dd>
                   <dt id="dialog.preferences.view.include.the.first.non-unique.segment.when.marking.non.unique.segments">
                      <span class="term" id="dialog.preferences.view.include.the.first.non-unique.segment.when.marking.non.unique.segments.title">
-                        <code class="option">Marquer tous les segments répétés</code>
+                        <code class="option">Colorer tous les segments répétés</code>
                      </span>
                   </dt>
                   <dd>
@@ -1701,8 +1701,8 @@ ${filePath}&gt;</pre>
                            <span class="guimenu">Affichage</span>
                         </a>
                         <a class="link" href="chapter.menus.html#menus.view.mark.non.unique.segments">
-                           <span class="guimenuitem">Surligner les segments non uniques</span>
-                        </a> pour marquer la deuxième copie et les copies suivantes d’un segment répété. Utilisez cette option pour marquer également la première copie du segment.
+                           <span class="guimenuitem">Colorer les segments répétés</span>
+                        </a> pour colorer la deuxième copie et les copies suivantes d’un segment répété. Utilisez cette option pour colorer également la première copie du segment.
 </p>
                   </dd>
                   <dt id="dialog.preferences.view.simplify.tooltip.on.protected.parts">

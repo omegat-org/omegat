@@ -252,7 +252,7 @@
 	  </varlistentry>
 	  
 	  <varlistentry id="dialogs.project.properties.file.locations.source.files">
-		<term id="dialogs.project.properties.file.locations.source.files.title"><option>Dossier des fichiers sources</option></term>
+		<term id="dialogs.project.properties.file.locations.source.files.title"><option>Dossier des fichiers à traduire </option></term>
 
 		<listitem>
 		  <para>Ce dossier contient les fichiers à traduire. OmegaT tente de lire tous les fichiers à la fois et affiche dans l’éditeur les contenus traduisibles qu’il trouve.</para>
@@ -315,7 +315,7 @@
 	  </varlistentry>
 	  
 	  <varlistentry id="dialogs.project.properties.file.locations.writable.glossary">
-		<term id="dialogs.project.properties.file.locations.writable.glossary.title"><option>Glossaire modifiable</option></term>
+		<term id="dialogs.project.properties.file.locations.writable.glossary.title"><option>Glossaire modifiable </option></term>
 
 		<listitem>
 		  <para>Le glossaire modifiable est le fichier qu’OmegaT utilise lorsque vous ajoutez des termes traduits dans votre projet à l’aide de la commande <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.create.glossary.entry" endterm="menus.edit.create.glossary.entry.title"/>.</para>
@@ -329,7 +329,7 @@
 	  </varlistentry>
 	  
 	  <varlistentry id="dialogs.project.properties.file.locations.dictionaries">
-		<term id="dialogs.project.properties.file.locations.dictionaries.title"><option>Dossier des dictionnaires :</option></term>
+		<term id="dialogs.project.properties.file.locations.dictionaries.title"><option>Dossier des dictionnaires</option></term>
 
 		<listitem>
 		  <para>Ce dossier contient les fichiers que vous souhaitez utiliser comme glossaires de référence. OmegaT essaie de lire tous les fichiers à la fois et de faire correspondre leur contenu au segment en cours de traduction.</para>
@@ -375,7 +375,7 @@
 
 		  <variablelist>
 			<varlistentry id="dialogs.project.properties.file.locations.tms.to.export">
-			  <term id="dialogs.project.properties.file.locations.tms.to.export.title"><option>Mémoires de traduction à exporter</option></term>
+			  <term id="dialogs.project.properties.file.locations.tms.to.export.title"><option>Mémoires de traduction à exporter </option></term>
 			  <listitem>
 				<para>Cette case à cocher vous permet de choisir les formats dans lesquels OmegaT doit créer les fichiers TMX ci-dessus.</para>
 

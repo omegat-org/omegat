@@ -37,9 +37,9 @@
     </varlistentry>
 
     <varlistentry id="menus.view.mark.non.unique.segments">
-      <term id="menus.view.mark.non.unique.segments.title"><guimenuitem>Surligner les segments non uniques</guimenuitem></term>
+      <term id="menus.view.mark.non.unique.segments.title"><guimenuitem>Colorer les segments répétés</guimenuitem></term>
       <listitem>
-        <para>Surligne les segments non uniques en gris pâle.</para>
+        <para>Colore les segments répétés en gris pâle.</para>
       </listitem>
     </varlistentry>
 
@@ -89,7 +89,7 @@
     </varlistentry>
 
     <varlistentry id="menus.view.mark.language.checker">
-      <term id="menus.view.mark.language.checker.title"><guimenuitem>Souligner les problèmes du vérificateur linguistique.</guimenuitem></term>
+      <term id="menus.view.mark.language.checker.title"><guimenuitem>Souligner les problèmes du vérificateur linguistique</guimenuitem></term>
       <listitem>
         <para>Souligne les erreurs trouvées par LanguageTool dans les segments cibles. Voir le paramètre <link linkend="dialog.preferences.languagetool.plugin" endterm="dialog.preferences.languagetool.plugin.title"/> pour en savoir plus.</para>
 	  </listitem>

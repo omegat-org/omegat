@@ -1,4 +1,6 @@
-© Fabio Caldas, Sheila Gomes, Carol Vignolis et el.
+A versão em português brasileiro do OmegaT foi traduzida por:
+Caroline Cristine Aguiar, Eduardo Martins, etnunes, Fabio M Caldas, FranciscoValdezgb, Gabrielly Rossi,  Gabs C., Grégory Rodrigues Teixeira, Isabella Ramos, Juliana Pavão, lucy17, marciacg, michaeleulalio, michelnegrao,
+mrochadesousa, realnunes e Sheila Gomes
 
 
 O que é OmegaT?
@@ -56,20 +58,7 @@ Coloque o arquivo em qualquer pasta adequada e descompacte-o. O OmegaT está, en
 
 
 
-Usando o Java Web Start para instalar o OmegaT (todas as plataformas)
-=====================================================================
-
-Se você já instalou o Java em seu sistema, uma forma de instalar o OmegaT é usar Java Web Start.
-
-Para isso, baixe e rode o seguinte arquivo:
-
-  https://omegat.sourceforge.net/webstart/OmegaT.jnlp
-
-Isso vai instalar o ambiente correto para seu computador e para a ferramenta em si na primeira vez que ela for rodada. Para outras chamadas do programa não é preciso estar on-line.
-
-
-
-Launching OmegaT (Windows)
+Iniciando o OmegaT (Windows)
 ==========================
 
 Se, durante a instalação, você criou um atalho no desktop, dê duplo clique nesse atalho.
@@ -130,17 +119,19 @@ Contribuidores
 
 OmegaT originou-se do trabalho de Keith Godfrey.
 
-Aaron Madlon-Kay é o gerente de projeto do OmegaT
+Jean-Christophe Helary é o gerente de projetos da OmegaT.
 
 Equipe atual:
 (por ordem alfabética)
 
-- Vincent Bidaux (gerente de documentação)
-- Marco Cevoli (gerente de comunidade no Telegram)
-- Jean-Christophe Helary (gerente de comunidade no Twitter) - Kos Ivantsof (gerente de localização)
-- Concepción Martin (gerente de comunidade no Facebook)
+- Marco Cevoli (gerente de comunidade do Telegram)
+- Jean-Christophe Helary (gerente da comunidade do Twitter)
+- Kos Ivantsov (gerente de localização)
+- Concepción Martin (gerente da comunidade do Facebook)
+- Hiroshi Miura (desenvolvedor líder)
 - Briac Pilpré (webmaster)
-- Lucie Vecerova (gerente de comunidade no Facebook)
+- Philippe Tourigny (gerente de documentação)
+- Lucie Vecerova (gerente da comunidade do Facebook)
 
 As contribuições ao código estão documentadas em /docs/contributors.txt.
 
@@ -148,15 +139,16 @@ Contribuidores anteriores:
 (ordem alfabética)
 
 - Anthony Baldwin (gerente de localização)
-- Didier Briel (gerente de projetos)
-- Alex Buloichik (desenvolvedor chefe)
+- Vincent Bidaux (gerente de documentação)
+- Didier Briel (gerente de projeto)
+- Alex Buloichik (desenvolvedor líder)
 - Sabine Cretella
 - Dmitri Gabinski
-- Jean-Christophe Helary (proprietário do grupo de apoio e gerente de localização)
-- Maxym Mykhalchuk (desenvolvedor chefe)
+- Aaron Madlon-Kay (gerente de projeto)
+- Maxym Mykhalchuk (desenvolvedor líder)
 - Samuel Murray
 - Henry Pijffers (gerente de lançamento)
-- Marc Prior (coordenador de projeto e webmaster)
+- Marc Prior (coordenador do projeto, webmaster)
 - Vito Smolej (gerente de documentação)
 
 e muitos outros colaboradores prestativos

@@ -12,7 +12,7 @@
 	  <varlistentry>
 		<term>Windows</term>
 		<listitem>
-		  <para><filename>C:\Program Files\OmegaT\</filename></para>
+		  <para><filename>C:\Programmes\OmegaT\</filename></para>
 		</listitem>
 	  </varlistentry>
 	  
@@ -93,8 +93,7 @@
 	<varlistentry id="application.folder.docs">
 	  <term id="application.folder.docs.title">docs/</term>
 	  <listitem>
-		<para>Le dossier qui contient la documentation.<variablelist>
-		  <varlistentry id="application.folder.docs.contributors">
+		<para>Le dossier qui contient la documentation. <variablelist> <varlistentry id="application.folder.docs.contributors">
 			<term id="application.folder.docs.contributors.title">contributors.txt</term>
 			<listitem>
 			  <para>La liste des contributeurs individuels.</para>

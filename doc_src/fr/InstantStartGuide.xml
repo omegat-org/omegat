@@ -4,7 +4,7 @@
   <title>Apprendre à utiliser OmegaT en 5 minutes !</title>
 
   <section id="create.and.open.new.project">
-    <title>Préparation d’un nouveau projet<indexterm class="singular">
+    <title>Préparation d’un nouveau projet <indexterm class="singular">
         <primary>Projet</primary> <secondary>Créer / ouvrir</secondary>
       </indexterm></title>
 
@@ -32,24 +32,10 @@
   <section>
     <title>Validation des balises</title>
 
-    <para>Si vos fichiers sources sont des fichiers formatés, par exemple au format Microsoft Word, LibreOffice Writer ou HTML, OmegaT convertit le formatage en balises qui encadrent le texte que vous traduisez. Souvent, les documents contiennent également un certain nombre de balises essentielles sans rapport direct avec le formatage mais qui sont importantes dans les fichiers sources (ainsi que dans les fichiers traduits). Une phrase peut se présenter comme ceci :<mediaobject>
-      <imageobject role="html">
-        <imagedata align="justify" fileref="images/InstantGuide_1.png"/>
-      </imageobject>
-      <imageobject role="fo">
-        <imagedata align="justify" fileref="images/InstantGuide_1.png" width="40%"/>
-      </imageobject>
-    </mediaobject>
+    <para>Si vos fichiers sources sont des fichiers formatés, par exemple au format Microsoft Word, LibreOffice Writer ou HTML, OmegaT convertit le formatage en balises qui encadrent le texte que vous traduisez. Souvent, les documents contiennent également un certain nombre de balises essentielles sans rapport direct avec le formatage mais qui sont importantes dans les fichiers sources (ainsi que dans les fichiers traduits). Une phrase peut se présenter comme ceci : <mediaobject> <imageobject role="html"> <imagedata align="justify" fileref="images/InstantGuide_1.png"/> </imageobject> <imageobject role="fo"> <imagedata align="justify" fileref="images/InstantGuide_1.png" width="40%"/> </imageobject> </mediaobject>
     </para>
 
-    <para>Et OmegaT va la représenter de la manière suivante :<mediaobject>
-      <imageobject role="html">
-        <imagedata align="justify" fileref="images/InstantGuide_2.png"/>
-      </imageobject>
-      <imageobject role="fo">
-        <imagedata align="justify" fileref="images/InstantGuide_2.png" width="45%"/>
-      </imageobject>
-    </mediaobject>
+    <para>Et OmegaT va la représenter de la manière suivante : <mediaobject> <imageobject role="html"> <imagedata align="justify" fileref="images/InstantGuide_2.png"/> </imageobject> <imageobject role="fo"> <imagedata align="justify" fileref="images/InstantGuide_2.png" width="45%"/> </imageobject> </mediaobject>
     </para>
     
     <para>Les balises dans OmegaT sont grisées pour être facilement reconnaissables. Elles sont protégées pour que vous ne puissiez pas modifier leur contenu mais vous pouvez les supprimer, les entrer manuellement ou les déplacer dans la phrase cible. Toutefois, si vous avez fait des erreurs en saisissant les balises de formatage, l’ouverture des fichiers traduits pourra échouer. Par conséquent, assurez-vous que vos balises sont correctes et validez-les avant de générer les fichiers traduits (raccourci clavier <keycombo><keycap>Ctrl</keycap><keycap>Maj</keycap><keycap>V</keycap></keycombo>).</para>

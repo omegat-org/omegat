@@ -197,14 +197,14 @@
 		  </varlistentry>
 
 		  <varlistentry>
-			<term><link linkend="project.folder.tm"><guimenuitem>MT</guimenuitem></link></term>
+			<term><link linkend="project.folder.tm"><guimenuitem>Mémoires de traduction</guimenuitem></link></term>
 			<listitem>
 			  <para>Ouvre le dossier dans votre gestionnaire de fichiers par défaut.</para>
 			</listitem>
 		  </varlistentry>
 		  
 		  <varlistentry>
-			<term><link linkend="project.folder.exported.tm"><guimenuitem>MT exportées</guimenuitem></link></term>
+			<term><link linkend="project.folder.exported.tm"><guimenuitem>Mémoires exportées</guimenuitem></link></term>
 			<listitem>
 			  <para>Ouvre le dossier dans votre gestionnaire de fichiers par défaut.</para>
 			</listitem>

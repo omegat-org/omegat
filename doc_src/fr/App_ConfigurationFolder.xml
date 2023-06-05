@@ -8,8 +8,7 @@
 
   <section id="configuration.folder.location">
     <title id="configuration.folder.location.title">Emplacement</title>	
-	<para>L’emplacement du dossier de configuration par défaut varie selon le système (le caractère <emphasis>~</emphasis> représente votre dossier local)  :<variablelist>
-	  <varlistentry><term>Linux</term><listitem><para><filename>~/.omegat</filename></para></listitem></varlistentry>
+	<para>L’emplacement du dossier de configuration par défaut varie selon le système (le caractère <emphasis>~</emphasis> représente votre dossier local)  : <variablelist> <varlistentry><term>Linux</term><listitem><para><filename>~/.omegat</filename></para></listitem></varlistentry>
 	  <varlistentry><term>macOS</term><listitem><para><filename>~/Library/Preferences/OmegaT</filename></para></listitem></varlistentry>
 	  <varlistentry><term>Windows</term><listitem><para><filename>~\AppData\Roaming\OmegaT</filename></para></listitem></varlistentry>
 	</variablelist></para>

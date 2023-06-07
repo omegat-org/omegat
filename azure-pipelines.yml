@@ -57,10 +57,12 @@ stages:
   jobs:
   - job: runTest
     displayName: integration test
+    pool:
+      vmImage: 'ubuntu-22.04'
     steps:
       - script: |
-          mkdir -p .gradle build
-          chmod a+w .gradle build
+          umask a+w
+          mkdir -p .gradle build tipoftheday/build
           docker-compose up --abort-on-container-exit --exit-code-from client
         env:
           DURATION: 600
@@ -70,7 +72,6 @@ stages:
   # Weekly release steps will be triggerred after integration-test succeeded.
 - stage: Weekly
   dependsOn: IntegrationTest
-  condition: succeeded()
   jobs:
   - job: WeeklyBuild
     displayName: Build for master weekly

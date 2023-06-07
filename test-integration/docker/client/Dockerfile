@@ -25,13 +25,15 @@
 #
 
 FROM debian:bullseye-slim
-RUN apt-get -y update && apt-get upgrade -y && apt-get install -y openssh-client git openjdk-11-jdk inotify-tools curl subversion
+RUN apt-get -y update && apt-get upgrade -y && apt-get install -y openssh-client git openjdk-11-jdk inotify-tools \
+    curl subversion unzip
 RUN adduser --disabled-password --gecos "" --home /home/omegat --shell /bin/bash omegat && mkdir -p /home/omegat/.ssh \
     && touch /home/omegat/.ssh/known_hosts && chmod 600 /home/omegat/.ssh/known_hosts
 COPY ssh_config /home/omegat/.ssh/config
 COPY entrypoint.sh /usr/local/bin/
 RUN chown -R omegat /home/omegat && chmod 755 /usr/local/bin/entrypoint.sh && chmod 700 /home/omegat/.ssh \
     && chmod 600 /home/omegat/.ssh/config
+RUN (cd /opt && curl -LO https://services.gradle.org/distributions/gradle-7.5.1-bin.zip && unzip gradle-7.5.1-bin.zip )
 
 USER omegat
 

@@ -1,5 +1,2 @@
-Host server
- Hostname server
- User git
- IdentityFile ~/.ssh/id_rsa
- StrictHostKeyChecking no
+Host *
+  StrictHostKeyChecking no

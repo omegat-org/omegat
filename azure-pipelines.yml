@@ -51,10 +51,26 @@ stages:
     steps:
       - template: ci/azure-pipelines/check_steps.yml
 
-# Build steps will run on the main and/or release branch, except for Pull-Request
-- stage: Weekly
-  dependsOn: Check
+  # Integration test will be triggerred by schedule on main and/or releases/* branch.
+- stage: IntegrationTest
   condition: or(eq(variables['Build.Reason'], 'Schedule'), eq(variables['Build.Reason'], 'Manual'))
+  jobs:
+  - job: runTest
+    displayName: integration test
+    steps:
+      - script: |
+          mkdir -p .gradle build
+          chmod a+w .gradle build
+          docker-compose up --abort-on-container-exit --exit-code-from client
+        env:
+          DURATION: 600
+          TYPE: GIT
+        displayName: 'Run Integration-Test(GIT)'
+
+  # Weekly release steps will be triggerred after integration-test succeeded.
+- stage: Weekly
+  dependsOn: IntegrationTest
+  condition: succeeded()
   jobs:
   - job: WeeklyBuild
     displayName: Build for master weekly
@@ -69,7 +85,7 @@ stages:
         parameters:
           omegatVersion: $(version)
 
-# Weekly release steps will be triggerred by schedule on main and/or releases/* branch.
+  # Release steps will run on the main and/or release branch with tags.
 - stage: Release
   dependsOn: Check
   condition: and(succeeded(), eq(variables.isRelease, true))
@@ -85,4 +101,3 @@ stages:
       - template: ci/azure-pipelines/publish_release.yml
         parameters:
           omegatVersion: $(version)
-

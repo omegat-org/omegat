@@ -44,5 +44,5 @@ fi
 ssh-keyscan -H server > /home/omegat/.ssh/known_hosts
 
 cd /code
-/opt/gradle-7.5.1/bin/gradle testIntegration -Domegat.test.duration=${DURATION} -Domegat.test.repo=${REPO} \
+/opt/gradle-7.5.1/bin/gradle testIntegration clean -Domegat.test.duration=${DURATION} -Domegat.test.repo=${REPO} \
        -Domegat.test.repo.alt=${REPO2} -Domegat.test.map.repo=http://server/ -Domegat.test.map.file=README

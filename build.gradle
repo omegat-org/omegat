@@ -791,6 +791,9 @@ ext.makeWinTask = { args ->
                 filteringCharset = 'UTF-8'
             }
             exec {
+                commandLine 'chmod', '-R', 'a+w', 'build'
+            }
+            exec {
                 // You'd think we could just set the PATH, but there be dragons here
                 // https://github.com/palantir/gradle-docker/issues/162
                 def exe = exePresent('iscc') ?  'iscc' : file('ci/iscc')

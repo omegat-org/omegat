@@ -749,7 +749,13 @@ public final class ProjectUICommands {
         }
         RepositoryDefinition originalRepositoryDefinition = getRootRepositoryMapping(repos);
         if (originalRepositoryDefinition == null) {
-            return;
+            originalRepositoryDefinition = new RepositoryDefinition();
+        }
+        if (originalRepositoryDefinition.getMapping().size() == 0) {
+            RepositoryMapping mapping = new RepositoryMapping();
+            mapping.setLocal("/");
+            mapping.setRepository("/");
+            originalRepositoryDefinition.getMapping().add(mapping);
         }
         originalRepositoryDefinition.setType(repositoryDefinition.getType());
         originalRepositoryDefinition.setUrl(repositoryDefinition.getUrl());

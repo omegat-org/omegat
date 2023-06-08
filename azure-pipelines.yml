@@ -72,6 +72,7 @@ stages:
   # Weekly release steps will be triggerred after integration-test succeeded.
 - stage: Weekly
   dependsOn: IntegrationTest
+  conditions: and(succeeded(), or(eq(variables['Build.Reason'], 'Schedule'), eq(variables['Build.Reason'], 'Manual')))
   jobs:
   - job: WeeklyBuild
     displayName: Build for master weekly

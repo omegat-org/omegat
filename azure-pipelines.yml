@@ -51,28 +51,9 @@ stages:
     steps:
       - template: ci/azure-pipelines/check_steps.yml
 
-  # Integration test will be triggerred by schedule on main and/or releases/* branch.
-- stage: IntegrationTest
-  condition: or(eq(variables['Build.Reason'], 'Schedule'), eq(variables['Build.Reason'], 'Manual'))
-  jobs:
-  - job: runTest
-    displayName: integration test
-    pool:
-      vmImage: 'ubuntu-22.04'
-    steps:
-      - script: |
-          umask a+w
-          mkdir -p .gradle build tipoftheday/build
-          docker-compose up --abort-on-container-exit --exit-code-from client
-        env:
-          DURATION: 600
-          TYPE: GIT
-        displayName: 'Run Integration-Test(GIT)'
-
   # Weekly release steps will be triggerred after integration-test succeeded.
 - stage: Weekly
-  dependsOn: IntegrationTest
-  conditions: and(succeeded(), or(eq(variables['Build.Reason'], 'Schedule'), eq(variables['Build.Reason'], 'Manual')))
+  condition: or(eq(variables['Build.Reason'], 'Schedule'), eq(variables['Build.Reason'], 'Manual'))
   jobs:
   - job: WeeklyBuild
     displayName: Build for master weekly
@@ -82,6 +63,10 @@ stages:
       - script: |
           version=$(./gradlew -qq printVersion | head -n -1 )
           echo "##vso[task.setvariable variable=version]$version"
+      - template: ci/azure-pipelines/integ_test_steps.yml
+        parameters:
+          testType: 'GIT'
+          duration: 600
       - template: ci/azure-pipelines/build_steps.yml
       - template: ci/azure-pipelines/publish_weekly.yml
         parameters:

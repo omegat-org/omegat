@@ -422,7 +422,7 @@ distributions {
             }
             into('OmegaT.app/Contents/Java') {
                 with main.contents
-                exclude '*.sh', '*.kaptn', 'OmegaT', 'OmegaT.bat'
+                exclude '*.sh', '*.kaptn', 'OmegaT', 'OmegaT.bat', 'omegat.desktop'
             }
             if (!macJRE.empty) {
                 from(tarTree(macJRE.singleFile)) {

@@ -486,7 +486,7 @@ public final class ProjectUICommands {
         return true;
     }
 
-    private static ProjectProperties checkProjectProperties(File projectRootFolder) {
+    static ProjectProperties checkProjectProperties(File projectRootFolder) {
         // check if project okay
         ProjectProperties props;
         try {
@@ -667,7 +667,7 @@ public final class ProjectUICommands {
      *            local omegat.project.
      * @return true if identical, otherwise false.
      */
-    private static boolean isIdenticalOmegatProjectProperties(ProjectProperties that, ProjectProperties my) {
+    static boolean isIdenticalOmegatProjectProperties(ProjectProperties that, ProjectProperties my) {
         if (my == that) {
             return true;
         }
@@ -730,7 +730,7 @@ public final class ProjectUICommands {
                 .append(my.getDictRoot(), that.getDictRoot()).isEquals();
     }
 
-    private static RepositoryDefinition getRootRepositoryMapping(List<RepositoryDefinition> repos) {
+    static RepositoryDefinition getRootRepositoryMapping(List<RepositoryDefinition> repos) {
         RepositoryDefinition repositoryDefinition = null;
         for (RepositoryDefinition definition : repos) {
             if (definition.getMapping().get(0).getLocal().equals("/")
@@ -742,8 +742,8 @@ public final class ProjectUICommands {
         return repositoryDefinition;
     }
 
-    private static void setRootRepositoryMapping(List<RepositoryDefinition> repos,
-                                                 RepositoryDefinition repositoryDefinition) {
+    static void setRootRepositoryMapping(List<RepositoryDefinition> repos,
+                                         RepositoryDefinition repositoryDefinition) {
         if (repositoryDefinition == null) {
             return;
         }
@@ -762,7 +762,7 @@ public final class ProjectUICommands {
         originalRepositoryDefinition.setBranch(repositoryDefinition.getBranch());
     }
 
-    private static boolean isRepositoryEquals(RepositoryDefinition a, RepositoryDefinition b) {
+    static boolean isRepositoryEquals(RepositoryDefinition a, RepositoryDefinition b) {
         if (a == null || b == null) {
             return false;
         }

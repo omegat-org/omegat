@@ -120,8 +120,9 @@ public final class UIScale {
     private static boolean initialized;
 
     private static void initialize() {
-        if (initialized)
+        if (initialized) {
             return;
+        }
         initialized = true;
 
         // listener to update a scale factor if LaF changed, "defaultFont" or
@@ -232,8 +233,9 @@ public final class UIScale {
         float oldScaleFactor = UIScale.scaleFactor;
         UIScale.scaleFactor = scaleFactor;
 
-        if (changeSupport != null)
+        if (changeSupport != null) {
             changeSupport.firePropertyChange("userScaleFactor", oldScaleFactor, scaleFactor);
+        }
     }
 
     /**

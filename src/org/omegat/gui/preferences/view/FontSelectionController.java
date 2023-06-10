@@ -101,7 +101,7 @@ public class FontSelectionController extends BasePreferencesController {
     @Override
     public void restoreDefaults() {
         oldFont = FontUtil.getDefaultFont();
-        int fontSize = UIScale.unscale(oldFont.getSize());
+        int fontSize = oldFont.getSize();
         panel.fontComboBox.setSelectedItem(oldFont.getName());
         panel.sizeSpinner.setValue(fontSize);
         panel.previewTextArea.setFont(getScaledSelectedFont());

@@ -84,7 +84,7 @@ public final class ProjectFileStorage {
                 .enable(MapperFeature.USE_WRAPPER_NAME_AS_PROPERTY_NAME).build();
         mapper.registerModule(new JaxbAnnotationModule());
         mapper.configure(ToXmlGenerator.Feature.WRITE_XML_DECLARATION, true);
-        mapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
+        mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
         mapper.enable(SerializationFeature.INDENT_OUTPUT);
     }
 

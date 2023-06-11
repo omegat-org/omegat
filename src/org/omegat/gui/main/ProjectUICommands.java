@@ -581,7 +581,13 @@ public final class ProjectUICommands {
                             // We have a project without mapping
                             // So we restore the mapping we just lost
                             Log.logInfoRB("TF_REMOTE_PROJECT_LACKS_REPOSITORY_SETTING");
-                            props.setRepositories(localRepos);
+                            if (localRepos.size() == 1) {
+                                setRootRepositoryMapping(localRepos, localRepos.get(0));
+                                props.setRepositories(localRepos);
+                            } else if (localRepos.size() > 1) {
+                                setRootRepositoryMapping(localRepos, getRootRepositoryMapping(localRepos));
+                                props.setRepositories(localRepos);
+                            }
                         } else {
                             // use mapping from remote configuration but
                             // override repository URL when there is difference
@@ -733,8 +739,10 @@ public final class ProjectUICommands {
     static RepositoryDefinition getRootRepositoryMapping(List<RepositoryDefinition> repos) {
         RepositoryDefinition repositoryDefinition = null;
         for (RepositoryDefinition definition : repos) {
-            if (definition.getMapping().get(0).getLocal().equals("/")
-                    && definition.getMapping().get(0).getRepository().equals("/")) {
+            if ((definition.getMapping().get(0).getLocal().equals("/")
+                    || definition.getMapping().get(0).getLocal().equals(""))
+                    && (definition.getMapping().get(0).getRepository().equals("/")
+                            || definition.getMapping().get(0).getRepository().equals(""))) {
                 repositoryDefinition = definition;
                 break;
             }
@@ -756,6 +764,7 @@ public final class ProjectUICommands {
         originalRepositoryDefinition.setBranch(repositoryDefinition.getBranch());
         if (hasRepositoryDefinitionEmptyMapping(originalRepositoryDefinition)) {
             RepositoryMapping mapping = new RepositoryMapping();
+            originalRepositoryDefinition.getMapping().clear();
             mapping.setLocal("/");
             mapping.setRepository("/");
             originalRepositoryDefinition.getMapping().add(mapping);
@@ -772,10 +781,8 @@ public final class ProjectUICommands {
 
     static boolean hasRepositoryDefinitionEmptyMapping(RepositoryDefinition def) {
         return def.getMapping() == null || def.getMapping().size() == 0
-                || def.getMapping().get(0).getLocal() == null
-                || def.getMapping().get(0).getRepository() == null
-                || def.getMapping().get(0).getLocal().isEmpty()
-                || def.getMapping().get(0).getRepository().isEmpty();
+                || StringUtil.isEmpty(def.getMapping().get(0).getLocal())
+                || StringUtil.isEmpty(def.getMapping().get(0).getRepository());
     }
 
     /**

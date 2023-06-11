@@ -237,8 +237,8 @@ public final class ProjectFileStorage {
         om.getProject().getSourceDirExcludes().getMask().addAll(props.getSourceRootExcludes());
         om.getProject().setTargetDir(getPathForStoring(root, props.getTargetRoot(), OConsts.DEFAULT_TARGET));
         om.getProject().setTmDir(getPathForStoring(root, props.getTMRoot(), OConsts.DEFAULT_TM));
-        om.getProject().setExportTmDir(
-                getPathForStoring(root, props.getExportTMRoot(), OConsts.DEFAULT_EXPORT_TM));
+        om.getProject()
+                .setExportTmDir(getPathForStoring(root, props.getExportTMRoot(), OConsts.DEFAULT_EXPORT_TM));
         om.getProject().setExportTmLevels(String.join(" ", props.getExportTmLevels()));
         String glossaryDir = getPathForStoring(root, props.getGlossaryRoot(), OConsts.DEFAULT_GLOSSARY);
         om.getProject().setGlossaryDir(glossaryDir);

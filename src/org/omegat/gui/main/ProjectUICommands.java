@@ -12,7 +12,7 @@
                2016 Alex Buloichik             
                2017 Didier Briel
                2021 ISHIKAWA,chiaki
-               2022 Hiroshi Miura
+               2022,2023 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -350,7 +350,8 @@ public final class ProjectUICommands {
                     props.setRepositories(repos);
                 } else {
                     RepositoryDefinition remoteRepo = getRootRepositoryMapping(props.getRepositories());
-                    if (!isRepositoryEquals(remoteRepo, repo)) {
+                    if (!isRepositoryEquals(remoteRepo, repo)
+                            || hasRepositoryDefinitionEmptyMapping(remoteRepo)) {
                         // when remote repository config is different with
                         // opening url, respect local one
                         setRootRepositoryMapping(props.getRepositories(), repo);
@@ -585,8 +586,7 @@ public final class ProjectUICommands {
                             // use mapping from remote configuration but
                             // override repository URL when there is difference
                             // between local and remote config.
-                            RepositoryDefinition localRootRepository = getRootRepositoryMapping(
-                                    localRepos);
+                            RepositoryDefinition localRootRepository = getRootRepositoryMapping(localRepos);
                             RepositoryDefinition newRepository = getRootRepositoryMapping(
                                     props.getRepositories());
                             if (!isRepositoryEquals(localRootRepository, newRepository)) {
@@ -743,7 +743,7 @@ public final class ProjectUICommands {
     }
 
     static void setRootRepositoryMapping(List<RepositoryDefinition> repos,
-                                         RepositoryDefinition repositoryDefinition) {
+            RepositoryDefinition repositoryDefinition) {
         if (repositoryDefinition == null) {
             return;
         }
@@ -751,15 +751,15 @@ public final class ProjectUICommands {
         if (originalRepositoryDefinition == null) {
             originalRepositoryDefinition = new RepositoryDefinition();
         }
-        if (originalRepositoryDefinition.getMapping().size() == 0) {
+        originalRepositoryDefinition.setType(repositoryDefinition.getType());
+        originalRepositoryDefinition.setUrl(repositoryDefinition.getUrl());
+        originalRepositoryDefinition.setBranch(repositoryDefinition.getBranch());
+        if (hasRepositoryDefinitionEmptyMapping(originalRepositoryDefinition)) {
             RepositoryMapping mapping = new RepositoryMapping();
             mapping.setLocal("/");
             mapping.setRepository("/");
             originalRepositoryDefinition.getMapping().add(mapping);
         }
-        originalRepositoryDefinition.setType(repositoryDefinition.getType());
-        originalRepositoryDefinition.setUrl(repositoryDefinition.getUrl());
-        originalRepositoryDefinition.setBranch(repositoryDefinition.getBranch());
     }
 
     static boolean isRepositoryEquals(RepositoryDefinition a, RepositoryDefinition b) {
@@ -768,6 +768,14 @@ public final class ProjectUICommands {
         }
         return new EqualsBuilder().append(a.getType(), b.getType()).append(a.getUrl(), b.getUrl())
                 .append(a.getBranch(), b.getBranch()).isEquals();
+    }
+
+    static boolean hasRepositoryDefinitionEmptyMapping(RepositoryDefinition def) {
+        return def.getMapping() == null || def.getMapping().size() == 0
+                || def.getMapping().get(0).getLocal() == null
+                || def.getMapping().get(0).getRepository() == null
+                || def.getMapping().get(0).getLocal().isEmpty()
+                || def.getMapping().get(0).getRepository().isEmpty();
     }
 
     /**

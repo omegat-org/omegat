@@ -50,9 +50,10 @@ public class ProjectUICommandsTest extends TestCore {
     @Test
     public void testIsIdenticalOmegatProjectProperties0() throws Exception {
         final File projectRootFolder = new File("test/data/gui/main/omegat-l10n-ja");
-        ProjectProperties props = ProjectFileStorage.loadProjectProperties(projectRootFolder.getAbsoluteFile());
-        ProjectProperties another =
-                ProjectFileStorage.loadProjectProperties(projectRootFolder.getAbsoluteFile());
+        ProjectProperties props = ProjectFileStorage
+                .loadProjectProperties(projectRootFolder.getAbsoluteFile());
+        ProjectProperties another = ProjectFileStorage
+                .loadProjectProperties(projectRootFolder.getAbsoluteFile());
         assertTrue(ProjectUICommands.isIdenticalOmegatProjectProperties(props, another));
         another.setExportTmLevels(false, false, false);
         assertFalse(ProjectUICommands.isIdenticalOmegatProjectProperties(props, another));
@@ -114,6 +115,27 @@ public class ProjectUICommandsTest extends TestCore {
         assertFalse(ProjectUICommands.isRepositoryEquals(repo, def));
         // XXX: isRepositoryEquals ignores difference in mapping
         assertTrue(ProjectUICommands.isRepositoryEquals(repo, repo));
+    }
+
+    @Test
+    public void testHasRepositoryDefinitionEmptyMapping() {
+        RepositoryDefinition repoOk = createRootDef();
+        RepositoryDefinition repoNg = new RepositoryDefinition();
+        repoNg.setBranch("main");
+        repoNg.setType("git");
+        repoNg.setUrl("https://github.com/omegat-L10N/ja.git");
+        assertFalse(ProjectUICommands.hasRepositoryDefinitionEmptyMapping(repoOk));
+        assertTrue(ProjectUICommands.hasRepositoryDefinitionEmptyMapping(repoNg));
+        //
+        RepositoryDefinition repoEmpty = new RepositoryDefinition();
+        repoEmpty.setBranch("main");
+        repoEmpty.setType("git");
+        repoEmpty.setUrl("https://github.com/omegat-L10N/ja.git");
+        RepositoryMapping mapping = new RepositoryMapping();
+        mapping.setRepository(null);
+        mapping.setLocal(null);
+        repoEmpty.getMapping().add(mapping);
+        assertTrue(ProjectUICommands.hasRepositoryDefinitionEmptyMapping(repoEmpty));
     }
 
     private RepositoryDefinition createRootDef() {

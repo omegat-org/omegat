@@ -120,21 +120,6 @@ public class Language implements Comparable<Object> {
      * user.
      */
     public String getDisplayName() {
-        if (!SystemInfo.isJava_9_orLater) {
-            // work around for java 8 JRE localization bug
-            // see https://github.com/OmegaT-L10N/zh_CN/issues/5
-            if (Locale.getDefault().equals(Locale.SIMPLIFIED_CHINESE)) {
-                if (this.equals(new Language("ZA"))) {
-                    return ZA_IN_ZH;
-                } else if (this.equals(new Language("SD"))) {
-                    return SD_IN_ZH;
-                } else if (locale.equals(new Locale("sd", "IN"))) {
-                    return SD_IN_IN_ZH;
-                } else if (locale.equals(new Locale("sd", "PK"))) {
-                    return SD_PK_IN_ZH;
-                }
-            }
-        }
         return locale.getDisplayName();
     }
 

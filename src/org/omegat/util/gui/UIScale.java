@@ -43,7 +43,7 @@ import javax.swing.plaf.DimensionUIResource;
 import javax.swing.plaf.InsetsUIResource;
 import javax.swing.plaf.UIResource;
 
-import org.omegat.util.SystemInfo;
+import org.omegat.util.Platform;
 
 /**
  * This class handles scaling in Swing UIs. It computes a user scaling factor
@@ -166,7 +166,7 @@ public final class UIScale {
     }
 
     private static float computeFontScaleFactor(Font font) {
-        if (SystemInfo.isWindows) {
+        if (Platform.isWindows) {
             // Special handling for Windows to be compatible with OS scaling,
             // which distinguish between "screen scaling" and "text scaling".
             // - Windows "screen scaling" scales everything (text, icon, gaps,
@@ -198,7 +198,7 @@ public final class UIScale {
         // default font size
         float fontSizeDivider = 12f;
 
-        if (SystemInfo.isWindows) {
+        if (Platform.isWindows) {
             // Windows LaF uses Tahoma font rather than the actual Windows
             // system font (Segoe UI),
             // and its size is always ca. 10% smaller than the actual system
@@ -206,13 +206,13 @@ public final class UIScale {
             // Tahoma 11 is used at 100%
             if ("Tahoma".equals(font.getFamily()))
                 fontSizeDivider = 11f;
-        } else if (SystemInfo.isMacOS) {
+        } else if (Platform.isMacOS) {
             // the default font size on macOS is 13
             fontSizeDivider = 13f;
-        } else if (SystemInfo.isLinux) {
+        } else if (Platform.isLinux) {
             // the default font size for Unity and Gnome is 15 and for KDE it is
             // 13
-            fontSizeDivider = SystemInfo.isKDE ? 13f : 15f;
+            fontSizeDivider = Platform.isKDE ? 13f : 15f;
         }
 
         return font.getSize() / fontSizeDivider;

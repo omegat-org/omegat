@@ -52,7 +52,6 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 import org.apache.commons.io.FileUtils;
-import org.omegat.util.Platform.OsType;
 
 /**
  * Static functions taken from CommandThread to reduce file size.
@@ -202,7 +201,6 @@ public final class StaticUtils {
             return configDir;
         }
 
-        OsType os = Platform.getOsType(); // name of operating system
         String home; // user home directory
 
         // get os and user home properties
@@ -226,14 +224,14 @@ public final class StaticUtils {
 
         // if os or user home is null or empty, we cannot reliably determine
         // the config dir, so we use the current working dir (= empty string)
-        if (os == null || StringUtil.isEmpty(home)) {
+        if (StringUtil.isEmpty(home)) {
             // set the config dir to the current working dir
             configDir = new File(".").getAbsolutePath() + File.separator;
             return configDir;
         }
 
         // check for Windows versions
-        if (os == OsType.WIN32 || os == OsType.WIN64) {
+        if (Platform.isWindows) {
             String appData = null;
 
             // We do not use %APPDATA%
@@ -263,7 +261,7 @@ public final class StaticUtils {
             }
         // Check for UNIX varieties
         // Solaris is generally detected as SunOS
-        } else if (os == OsType.LINUX32 || os == OsType.LINUX64 || os == OsType.OTHER) {
+        } else if (Platform.isLinux()) {
             // set the config dir to the user's home dir + "/.omegat/", so it's
             // hidden
             configDir = home + UNIX_CONFIG_DIR;

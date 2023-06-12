@@ -299,19 +299,14 @@ public final class FileUtil {
     public static String computeRelativePath(File rootDir, File file) throws IOException {
         String rootAbs = rootDir.getAbsolutePath().replace('\\', '/') + '/';
         String fileAbs = file.getAbsolutePath().replace('\\', '/');
-
-        switch (Platform.getOsType()) {
-        case WIN32:
-        case WIN64:
+        if (Platform.isWindows) {
             if (!fileAbs.toUpperCase().startsWith(rootAbs.toUpperCase())) {
                 throw new IOException("File '" + file + "' is not under dir '" + rootDir + "'");
             }
-            break;
-        default:
+        } else {
             if (!fileAbs.startsWith(rootAbs)) {
                 throw new IOException("File '" + file + "' is not under dir '" + rootDir + "'");
             }
-            break;
         }
         return fileAbs.substring(rootAbs.length());
     }
@@ -449,11 +444,11 @@ public final class FileUtil {
      * required for conversion like 'C:\zzz' into '/zzz' for be real absolute in
      * Linux.
      */
-    public static String absoluteForSystem(String path, Platform.OsType currentOsType) {
+    public static String absoluteForSystem(String path) {
         path = path.replace('\\', '/');
         Matcher m = RE_ABSOLUTE_WINDOWS.matcher(path);
         if (m.matches()) {
-            if (currentOsType != Platform.OsType.WIN32 && currentOsType != Platform.OsType.WIN64) {
+            if (!Platform.isWindows) {
                 // Windows' absolute file on non-Windows system
                 return m.group(1);
             }

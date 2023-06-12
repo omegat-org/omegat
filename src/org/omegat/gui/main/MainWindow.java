@@ -190,8 +190,9 @@ public class MainWindow extends JFrame implements IMainWindow {
         });
 
         UIScale.addPropertyChangeListener(evt -> CoreEvents.fireFontChanged(FontUtil.getFont()));
-        CoreEvents.registerFontChangedEventListener( newFont -> font = (newFont instanceof FontUIResource)?
-                (FontUIResource) newFont : new FontUIResource(newFont));
+        CoreEvents.registerFontChangedEventListener(
+                newFont -> font = (newFont instanceof FontUIResource) ? (FontUIResource) newFont
+                        : new FontUIResource(newFont));
 
         MainWindowUI.handlePerProjectLayouts(this);
 

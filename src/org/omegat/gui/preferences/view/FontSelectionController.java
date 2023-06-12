@@ -89,9 +89,10 @@ public class FontSelectionController extends BasePreferencesController {
         int dictionaryFontSize = Preferences.getPreferenceDefault(Preferences.TF_DICTIONARY_FONT_SIZE,
                 oldFont.getSize());
         panel.sizeDictionarySpinner.setValue(dictionaryFontSize);
-        panel.applyToProjectFilesCheckBox.setSelected(Preferences.isPreference(Preferences.PROJECT_FILES_USE_FONT));
-        panel.applyToDictionaryPaneCheckBox.setSelected(
-                Preferences.isPreferenceDefault(Preferences.DICTIONARY_USE_FONT, true));
+        panel.applyToProjectFilesCheckBox
+                .setSelected(Preferences.isPreference(Preferences.PROJECT_FILES_USE_FONT));
+        panel.applyToDictionaryPaneCheckBox
+                .setSelected(Preferences.isPreferenceDefault(Preferences.DICTIONARY_USE_FONT, true));
         if (panel.applyToDictionaryPaneCheckBox.isSelected()) {
             panel.sizeDictionarySpinner.setValue(panel.sizeSpinner.getValue());
             panel.sizeDictionarySpinner.setEnabled(false);
@@ -137,7 +138,8 @@ public class FontSelectionController extends BasePreferencesController {
             if (applyToDicitonaryPane) {
                 Preferences.setPreference(Preferences.TF_DICTIONARY_FONT_SIZE, newFont.getSize());
             } else {
-                Preferences.setPreference(Preferences.TF_DICTIONARY_FONT_SIZE, panel.sizeDictionarySpinner.getValue());
+                Preferences.setPreference(Preferences.TF_DICTIONARY_FONT_SIZE,
+                        panel.sizeDictionarySpinner.getValue());
             }
             CoreEvents.fireFontChanged(newScaledFont);
         }

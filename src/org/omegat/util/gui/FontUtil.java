@@ -43,6 +43,7 @@ public final class FontUtil {
 
     /**
      * Get default font.
+     * 
      * @return default font as FontUIResource.
      */
     public static FontUIResource getFont() {
@@ -62,7 +63,8 @@ public final class FontUtil {
     private static FontUIResource createCompositeFont(String family, int style, int size) {
         // using StyleContext.getFont() here because it uses
         // sun.font.FontUtilities.getCompositeFontUIResource()
-        // and creates a composite font that is able to display all Unicode characters
+        // and creates a composite font that is able to display all Unicode
+        // characters
         Font font = StyleContext.getDefaultStyleContext().getFont(family, style, size);
         return (font instanceof FontUIResource) ? (FontUIResource) font : new FontUIResource(font);
     }

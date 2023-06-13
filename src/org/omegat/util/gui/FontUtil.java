@@ -35,32 +35,42 @@ import org.omegat.util.Preferences;
 
 public final class FontUtil {
 
+    private FontUtil() {
+    }
+
+    /**
+     * Get default unscaled font.
+     * @return default font.
+     */
     public static FontUIResource getDefaultFont() {
         int fontSize = Preferences.getPreferenceDefault(Preferences.TF_SRC_FONT_SIZE,
                 Preferences.TF_FONT_SIZE_DEFAULT);
         return createCompositeFont(Preferences.TF_FONT_DEFAULT, Font.PLAIN, fontSize);
     }
 
-    /**
-     * Get default font.
-     * 
-     * @return default font as FontUIResource.
-     */
-    public static FontUIResource getFont() {
-        FontUIResource font;
-
-        String fontName = Preferences.getPreferenceDefault(Preferences.TF_SRC_FONT_NAME, null);
-        if (fontName != null) {
-            int fontSize = UIScale.scale(Preferences.getPreferenceDefault(Preferences.TF_SRC_FONT_SIZE,
-                    Preferences.TF_FONT_SIZE_DEFAULT));
-            font = new FontUIResource(new Font(fontName, Font.PLAIN, fontSize));
-        } else {
-            font = getDefaultFont();
-        }
-        return font;
+    public static String getConfiguredFontName() {
+        return Preferences.getPreferenceDefault(Preferences.TF_SRC_FONT_NAME, Preferences.TF_FONT_DEFAULT);
     }
 
-    private static FontUIResource createCompositeFont(String family, int style, int size) {
+    /**
+     * Get default font scaled.
+     *
+     * @return default scaled font as FontUIResource.
+     */
+    public static FontUIResource getScaledFont() {
+        return getFont(UIScale.scale(getConfiguredFontSize()));
+    }
+
+    private static FontUIResource getFont(int fontSize) {
+        String fontName = Preferences.getPreferenceDefault(Preferences.TF_SRC_FONT_NAME, Preferences.TF_FONT_DEFAULT);
+        return createCompositeFont(fontName, Font.PLAIN, fontSize);
+    }
+
+    public static int getConfiguredFontSize() {
+        return Preferences.getPreferenceDefault(Preferences.TF_SRC_FONT_SIZE, Preferences.TF_FONT_SIZE_DEFAULT);
+    }
+
+    public static FontUIResource createCompositeFont(String family, int style, int size) {
         // using StyleContext.getFont() here because it uses
         // sun.font.FontUtilities.getCompositeFontUIResource()
         // and creates a composite font that is able to display all Unicode

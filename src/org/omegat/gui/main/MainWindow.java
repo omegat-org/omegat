@@ -161,7 +161,7 @@ public class MainWindow extends JFrame implements IMainWindow {
             }
         });
 
-        font = FontUtil.getFont();
+        font = FontUtil.getScaledFont();
 
         MainWindowUI.createMainComponents(this, font);
 
@@ -189,7 +189,7 @@ public class MainWindow extends JFrame implements IMainWindow {
             }
         });
 
-        UIScale.addPropertyChangeListener(evt -> CoreEvents.fireFontChanged(FontUtil.getFont()));
+        UIScale.addPropertyChangeListener(evt -> CoreEvents.fireFontChanged(FontUtil.getScaledFont()));
         CoreEvents.registerFontChangedEventListener(
                 newFont -> font = (newFont instanceof FontUIResource) ? (FontUIResource) newFont
                         : new FontUIResource(newFont));

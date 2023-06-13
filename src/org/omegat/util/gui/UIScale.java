@@ -191,6 +191,18 @@ public final class UIScale {
                 }
             }
         }
+        if (Platform.isLinux && !isSystemScaling()) {
+            // see class com.sun.java.swing.plaf.gtk.PangoFonts background
+            // information
+            Object value = Toolkit.getDefaultToolkit().getDesktopProperty("gnome.Xft/DPI");
+            if (value instanceof Integer) {
+                int dpi = (Integer) value / 1024;
+                if (dpi < 96) {
+                    return 1;
+                }
+                return (float) (dpi / 96.0);
+            }
+        }
         return computeScaleFactor(font);
     }
 
@@ -236,6 +248,14 @@ public final class UIScale {
         if (changeSupport != null) {
             changeSupport.firePropertyChange("userScaleFactor", oldScaleFactor, scaleFactor);
         }
+    }
+
+    /**
+     * Get scale factor.
+     * @return float number.
+     */
+    public static float getScaleFactor() {
+        return scaleFactor;
     }
 
     /**

@@ -465,13 +465,14 @@ public class MainWindow extends JFrame implements IMainWindow {
 
             lastDialogText = new JPanel();
             lastDialogText.setLayout(new BoxLayout(lastDialogText, BoxLayout.PAGE_AXIS));
+            lastDialogText.setBorder(BorderFactory.createEmptyBorder());
             String[] messages = msg.split("\\n");
             Arrays.stream(messages).forEach(m -> {
                 lastDialogText.add(new JLabel(m));
             });
             lastDialogKey = warningKey;
 
-            statusLabel.setText(msg);
+            statusLabel.setText(messages[0]);
 
             JOptionPane.showMessageDialog(MainWindow.this, lastDialogText, OStrings.getString("TF_WARNING"),
                     JOptionPane.WARNING_MESSAGE);
@@ -490,13 +491,11 @@ public class MainWindow extends JFrame implements IMainWindow {
                 msg = OStrings.getString(errorKey);
             }
 
-            statusLabel.setText(msg);
-
+            String[] messages = msg.split("\\n");
+            statusLabel.setText(messages[0]);
             JPanel pane = new JPanel();
             pane.setLayout(new BoxLayout(pane, BoxLayout.PAGE_AXIS));
             pane.setSize(new Dimension(900, 400));
-
-            String[] messages = msg.split("\\n");
             Arrays.stream(messages).forEach(m -> {
                 JLabel jlabel = new JLabel(m);
                 jlabel.setAlignmentX(LEFT_ALIGNMENT);
@@ -506,6 +505,7 @@ public class MainWindow extends JFrame implements IMainWindow {
             if (ex != null && ex.getLocalizedMessage() != null){
                 pane.add(Box.createRigidArea(new Dimension(0, 5)));
                 JTextArea message = new JTextArea();
+                message.setBorder(BorderFactory.createEmptyBorder());
                 message.setText(ex.getLocalizedMessage());
                 message.setLineWrap(true);
                 message.setEditable(false);

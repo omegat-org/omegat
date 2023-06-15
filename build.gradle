@@ -1108,13 +1108,16 @@ instantStartXmls.each { xml ->
     instantStartGuides.dependsOn taskName
 }
 
-
+tasks.getByName("run") {
+    jvmArgs(["--add-opens", "java.desktop/sun.awt.X11=ALL-UNNAMED"])
+}
 
 task debug(type: JavaExec) {
     description = 'Launch app for debugging.' // Special debug task for NetBeans
     group = 'application'
     mainClass = mainClassName
     classpath = sourceSets.main.runtimeClasspath
+    jvmArgs(["--illegal-access=warn"])
     debug true
 }
 
@@ -1125,6 +1128,7 @@ task runOnJava17(type: JavaExec) {
     }
     mainClass = application.mainClass
     classpath = sourceSets.main.runtimeClasspath
+    jvmArgs(["--add-opens", "java.desktop/sun.awt.X11=ALL-UNNAMED"])
     group = 'application'
 }
 

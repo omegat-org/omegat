@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
   1 Enhancement
   1 Bug fixes
-  10 Localisation updates
+  11 Localisation updates
 ----------------------------------------------------------------------
 6.0.0 vs 5.8.0
 
@@ -27,6 +27,7 @@
   - Finnish localization updated to 6.0 (UI, readme)
   - German localization updated to 6.0 (UI, readme, documentation)
   - Italian localization updated to 6.0 (UI, readme)
+  - Japanese localization updated to 6.0 (UI, documentation)
   - Ukrainian localization updated to 6.0 (UI, readme)
 
 ---------------------------------------------------------------------
@@ -332,12 +333,14 @@
   Localization Updates:
 
   - Belarusian localization updated to 5.8 (UI, readme, Instant Start)
-  - Brazilian Portuguese localization updated to 5.8 (UI)
+  - Brazilian Portuguese localization updated to 5.8 (UI, readme)
   - Catalan localization updated to 5.8 (UI, readme, documentation)
   - Corsican localization updated to 5.8 (UI, readme)
-  - Dutch localization updated to 5.8 (UI)
+  - Dutch localization updated to 5.8 (UI, readme)
+  - Finnish localization updated to 5.8 (UI, readme)
   - French localization updated to 5.8 (UI, readme, documentation)
   - German localization updated to 5.8 (UI, readme, documentation)
+  - Italian localization updated to 5.8 (UI, readme)
   - Japanese localization updated to 5.8 (UI, readme, documentation)
   - Simplified Chinese localization updated to 5.8 (UI, readme)
   - Ukrainian localization updated to 5.8 (UI, readme)

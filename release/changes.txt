@@ -60,7 +60,7 @@ Localization Updates:
   - Japanese localization updated to 6.0 (UI, documentation)
 
 ----------------------------------------------------------------------
- OmegaT 6.0.0
+ OmegaT 6.0.0 (2023-06-19)
 ----------------------------------------------------------------------
   1 Enhancement
   1 Bug fixes
@@ -77,13 +77,13 @@ Localization Updates:
   - Fixed "null" file names in search results when "Display: file names" checkbox was unchecked
   https://sourceforge.net/p/omegat/bugs/1154/
 
-----------------------------------------------------------------------
- OmegaT 5.8.0 (2023-04-01)
+---------------------------------------------------------------------
+ OmegaT 5.8.0 (2023-06-19)
 ----------------------------------------------------------------------
    4 Removed features
-  40 Enhancements
-  46 Bug fixes
-  9 Localization updates
+  41 Enhancements
+  49 Bug fixes
+  12 Localization updates
 ----------------------------------------------------------------------
 5.8.0 vs 5.7.1
 
@@ -107,6 +107,9 @@ Localization Updates:
   See Azure Translate V2/V3 Plugin project: https://github.com/omegat-org/azure-translate-plugin
 
   Implemented requests:
+
+  - Improve macOS integration
+  https://sourceforge.net/p/omegat/feature-requests/1702/
 
   - Help user to copy error message to clipboard
   https://sourceforge.net/p/omegat/feature-requests/1683/

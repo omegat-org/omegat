@@ -1,8 +1,8 @@
 ---------------------------------------------------------------------
- OmegaT 5.8.0 (2023-05-xx)
+ OmegaT 5.8.0 (2023-06-19)
 ----------------------------------------------------------------------
    4 Removed features
-  40 Enhancements
+  41 Enhancements
   49 Bug fixes
   12 Localization updates
 ----------------------------------------------------------------------
@@ -28,6 +28,9 @@
   See Azure Translate V2/V3 Plugin project: https://github.com/omegat-org/azure-translate-plugin
 
   Implemented requests:
+
+  - Improve macOS integration
+  https://sourceforge.net/p/omegat/feature-requests/1702/
 
   - Help user to copy error message to clipboard
   https://sourceforge.net/p/omegat/feature-requests/1683/

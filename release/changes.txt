@@ -3,7 +3,6 @@
 ----------------------------------------------------------------------
   7 Enhancement
   7 Bug fixes
-  1 Localisation updates
 ----------------------------------------------------------------------
 6.1.0 vs 6.0.0
 
@@ -55,16 +54,12 @@
   - OpenSSH new key format and ECDSA/ED25519 keys
   https://sourceforge.net/p/omegat/bugs/1107/
 
-Localization Updates:
-
-  - Japanese localization updated to 6.0 (UI, documentation)
-
 ----------------------------------------------------------------------
  OmegaT 6.0.0 (2023-06-19)
 ----------------------------------------------------------------------
   1 Enhancement
   1 Bug fixes
-  0 Localisation updates
+  11 Localisation updates
 ----------------------------------------------------------------------
 6.0.0 vs 5.8.0
 
@@ -76,6 +71,20 @@ Localization Updates:
 
   - Fixed "null" file names in search results when "Display: file names" checkbox was unchecked
   https://sourceforge.net/p/omegat/bugs/1154/
+
+  Localization Updates:
+
+  - Belarusian localization updated to 6.0 (UI, readme, Instant Start)
+  - Brazilian Portuguese localization updated to 6.0 (UI, readme)
+  - Catalan localization updated to 6.0 (UI, readme, documentation)
+  - Corsican localization updated to 6.0 (UI, readme)
+  - Dutch localization updated to 6.0 (UI, readme)
+  - French localization updated to 6.0 (UI, readme, documentation)
+  - Finnish localization updated to 6.0 (UI, readme)
+  - German localization updated to 6.0 (UI, readme, documentation)
+  - Italian localization updated to 6.0 (UI, readme)
+  - Japanese localization updated to 6.0 (UI, documentation)
+  - Ukrainian localization updated to 6.0 (UI, readme)
 
 ---------------------------------------------------------------------
  OmegaT 5.8.0 (2023-06-19)
@@ -379,12 +388,15 @@ Localization Updates:
 
   Localization Updates:
 
-  - Belarusian localization updated to 5.8 (UI, readme)
-  - Brazilian Portuguese localization updated to 5.8 (UI)
+  - Belarusian localization updated to 5.8 (UI, readme, Instant Start)
+  - Brazilian Portuguese localization updated to 5.8 (UI, readme)
   - Catalan localization updated to 5.8 (UI, readme, documentation)
   - Corsican localization updated to 5.8 (UI, readme)
-  - Dutch localization updated to 5.8 (UI)
-  - German localization updated to 5.8 (UI, readme)
+  - Dutch localization updated to 5.8 (UI, readme)
+  - Finnish localization updated to 5.8 (UI, readme)
+  - French localization updated to 5.8 (UI, readme, documentation)
+  - German localization updated to 5.8 (UI, readme, documentation)
+  - Italian localization updated to 5.8 (UI, readme)
   - Japanese localization updated to 5.8 (UI, readme, documentation)
   - Simplified Chinese localization updated to 5.8 (UI, readme)
   - Ukrainian localization updated to 5.8 (UI, readme)

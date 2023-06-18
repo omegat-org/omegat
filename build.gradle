@@ -774,6 +774,10 @@ ext.makeWinTask = { args ->
         doFirst {
             delete "$destinationDir/jre"
             delete installerExe
+            exec {
+                commandLine 'chmod', '-R', 'a+w', 'build'
+                ignoreExitValue true
+            }
         }
         doLast {
             project.copy {
@@ -789,9 +793,6 @@ ext.makeWinTask = { args ->
                 ])
                 filter(FixCrLfFilter,  eol: FixCrLfFilter.CrLf.newInstance('crlf'))
                 filteringCharset = 'UTF-8'
-            }
-            exec {
-                commandLine 'chmod', '-R', 'a+w', 'build'
             }
             exec {
                 // You'd think we could just set the PATH, but there be dragons here

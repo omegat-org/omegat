@@ -89,6 +89,7 @@ public class EditOptionsDialog extends javax.swing.JDialog {
         ignoreTagsTF.setText(options.getIgnoreTags());
         removeCommentsCB.setSelected(options.getRemoveComments());
         compressWhitespaceCB.setSelected(options.getCompressWhitespace());
+        preserveControlEntitiesCB.setSelected(options.getPreserveEntities());
 
         StaticUIUtils.setEscapeAction(this, new AbstractAction() {
             @Override
@@ -148,6 +149,7 @@ public class EditOptionsDialog extends javax.swing.JDialog {
         ignoreTagsTF = new javax.swing.JTextField();
         compressWhitespaceCB = new javax.swing.JCheckBox();
         removeCommentsCB = new javax.swing.JCheckBox();
+        preserveControlEntitiesCB = new javax.swing.JCheckBox();
 
         setTitle(OStrings.getString("HTML_Filter_Options")); // NOI18N
         setResizable(false);
@@ -251,6 +253,9 @@ public class EditOptionsDialog extends javax.swing.JDialog {
         org.openide.awt.Mnemonics.setLocalizedText(removeCommentsCB, OStrings.getString("HTML_REMOVE_COMMENTS")); // NOI18N
         jPanel1.add(removeCommentsCB);
 
+        org.openide.awt.Mnemonics.setLocalizedText(preserveControlEntitiesCB, OStrings.getString("HTML_PRESERVE_HTML_ENTITIES")); // NOI18N
+        jPanel1.add(preserveControlEntitiesCB);
+
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
         pack();
@@ -301,6 +306,7 @@ public class EditOptionsDialog extends javax.swing.JDialog {
         options.setParagraphOnBr(paragraphOnBrCB.isSelected());
         options.setCompressWhitespace(compressWhitespaceCB.isSelected());
         options.setRemoveComments(removeCommentsCB.isSelected());
+        options.setPreserveEntites(preserveControlEntitiesCB.isSelected());
         options.setSkipRegExp(skipRegExpTF.getText());
         options.setSkipMeta(skipMetaTF.getText());
         options.setIgnoreTags(ignoreTagsTF.getText());
@@ -342,6 +348,7 @@ public class EditOptionsDialog extends javax.swing.JDialog {
     private javax.swing.JRadioButton neverRB;
     private javax.swing.JButton okButton;
     private javax.swing.JCheckBox paragraphOnBrCB;
+    private javax.swing.JCheckBox preserveControlEntitiesCB;
     private javax.swing.JCheckBox removeCommentsCB;
     private javax.swing.JTextField skipMetaTF;
     private javax.swing.JTextField skipRegExpTF;

@@ -97,6 +97,7 @@ public class HTMLOptions extends AbstractOptions {
     public static final String OPTION_IGNORE_TAGS = "ignoreTags";
     public static final String OPTION_REMOVE_COMMENTS = "removeComments";
     public static final String OPTION_COMPRESS_WHITESPACE = "compressWhitespace";
+    public static final String OPTION_PRESERVE_ENTITIES = "preserveEntities";
 
     public HTMLOptions(Map<String, String> options) {
         super(options);
@@ -297,6 +298,20 @@ public class HTMLOptions extends AbstractOptions {
      */
     public void setCompressWhitespace(boolean compressWhitespace) {
         setBoolean(OPTION_COMPRESS_WHITESPACE, compressWhitespace);
+    }
+
+    /**
+     * @return whether preserve HTML entities of control characters.
+     */
+    public boolean getPreserveEntities() {
+        return getBoolean(OPTION_PRESERVE_ENTITIES, false);
+    }
+
+    /**
+     * Set whether preserve HTML entities.
+     */
+    public void setPreserveEntites(boolean preserveEntites) {
+        setBoolean(OPTION_PRESERVE_ENTITIES, preserveEntites);
     }
 
 }

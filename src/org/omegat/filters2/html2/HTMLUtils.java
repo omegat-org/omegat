@@ -33,7 +33,7 @@ package org.omegat.filters2.html2;
 
 import java.util.Collection;
 
-@Deprecated
+@Deprecated(since = "5.8", forRemoval = true)
 public final class HTMLUtils {
 
     private HTMLUtils() {

@@ -472,13 +472,13 @@ public final class FileUtil {
         Path root = rootDir.toPath();
         Pattern[] includeMasks = FileUtil.compileFileMasks(includes);
         Pattern[] excludeMasks = FileUtil.compileFileMasks(excludes);
-        BiPredicate<Path, BasicFileAttributes> pred = (p, attr) -> p.toFile().isFile()
+        BiPredicate<Path, BasicFileAttributes> pred = (p, attr) -> attr.isRegularFile()
                 && FileUtil.checkFileInclude(root.relativize(p).toString(), includeMasks, excludeMasks);
         int maxDepth = Integer.MAX_VALUE;
+        List<String> result = new ArrayList<>();
         try (Stream<Path> stream = Files.find(root, maxDepth, pred, FileVisitOption.FOLLOW_LINKS)) {
-            List<String> result = new ArrayList<>();
             try {
-                stream.forEach(p -> result.add(root.relativize(p).toString().replace('\\', '/')));
+                stream.forEachOrdered(p -> result.add(root.relativize(p).toString().replace('\\', '/')));
             } catch (UncheckedIOException e) {
                 IOException ioe = e.getCause();
                 if (ioe instanceof FileSystemLoopException) {
@@ -494,9 +494,9 @@ public final class FileUtil {
                     throw ioe; // propagate to caller
                 }
             }
-            Collections.sort(result);
-            return result;
         }
+        Collections.sort(result);
+        return result;
     }
 
     public static boolean checkFileInclude(String filePath, Pattern[] includes, Pattern[] excludes) {

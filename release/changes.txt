@@ -2,7 +2,7 @@
  OmegaT 6.1.0
 ----------------------------------------------------------------------
   7 Enhancement
-  14 Bug fixes
+  16 Bug fixes
 ----------------------------------------------------------------------
 6.1.0 vs 6.0.0
 
@@ -40,16 +40,22 @@
   https://sourceforge.net/p/omegat/bugs/1179/
 
   - Team(git): when connecting new server, connection failed
-  https://sourceforge.net/p/omegat/bugs/1177
+  https://sourceforge.net/p/omegat/bugs/1177/
 
   - The COMPILE event is fired after the target commit
   https://sourceforge.net/p/omegat/bugs/1176/
+
+  - Team project failed to merge changes with TMXMerge
+  https://sourceforge.net/p/omegat/bugs/1170/
+
+  - Useless warning log from CSS parser library
+  https://sourceforge.net/p/omegat/bugs/1169/
 
   - Error when trying to backup the project file on Windows
   https://sourceforge.net/p/omegat/bugs/1166/
 
   - Docker setup of Integration test is not working for Subversion
-  https://sourceforge.net/p/omegat/bugs/1165
+  https://sourceforge.net/p/omegat/bugs/1165/
 
   - Project not loaded if it contains DTD internal entities
   https://sourceforge.net/p/omegat/bugs/1163/
@@ -64,7 +70,7 @@
   https://sourceforge.net/p/omegat/bugs/1154/
 
   - MT engines show JSON parser error as translated text
-  https://sourceforge.net/p/omegat/bugs/1141
+  https://sourceforge.net/p/omegat/bugs/1141/
 
   - OpenSSH new key format and ECDSA/ED25519 keys
   https://sourceforge.net/p/omegat/bugs/1107/

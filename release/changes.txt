@@ -2,7 +2,7 @@
  OmegaT 6.1.0
 ----------------------------------------------------------------------
   7 Enhancement
-  7 Bug fixes
+  13 Bug fixes
 ----------------------------------------------------------------------
 6.1.0 vs 6.0.0
 
@@ -29,12 +29,24 @@
   https://sourceforge.net/p/omegat/feature-requests/1598/
 
   Bug fixes:
- 
+
+  - Languagetool crashes when reloading the project
+  https://sourceforge.net/p/omegat/bugs/1182/
+
+  - Stardict dictionary displays apostrophe as html entity code
+  https://sourceforge.net/p/omegat/bugs/1181/
+
+  - build/release: Windows binary signature with PKCS#11 HSM
+  https://sourceforge.net/p/omegat/bugs/1179/
+
   - The COMPILE event is fired after the target commit
   https://sourceforge.net/p/omegat/bugs/1176/
 
   - Error when trying to backup the project file on Windows
   https://sourceforge.net/p/omegat/bugs/1166/
+
+  - Docker setup of Integration test is not working for Subversion
+  https://sourceforge.net/p/omegat/bugs/1165
 
   - Project not loaded if it contains DTD internal entities
   https://sourceforge.net/p/omegat/bugs/1163/
@@ -53,6 +65,9 @@
 
   - OpenSSH new key format and ECDSA/ED25519 keys
   https://sourceforge.net/p/omegat/bugs/1107/
+
+  - Lucene 5.2 does not work under WebStart
+  https://sourceforge.net/p/omegat/bugs/813/
 
 ----------------------------------------------------------------------
  OmegaT 6.0.0 (2023-06-19)

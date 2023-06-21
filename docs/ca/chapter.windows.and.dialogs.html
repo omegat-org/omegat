@@ -10,7 +10,7 @@
    
 <body>
     <div id="wh-header">
-    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 5.8.0 - Manual d'usuari</a></div></div>
+    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 6.1.0 - Manual d'usuari</a></div></div>
 
     <div id="wh-body">
       <div class="wh-icon-menu" id="wh-menu"></div>
@@ -232,12 +232,8 @@
                      </div>
                   </div>
                </div>
-               <p>Select the source and target languages from the drop-down list,
-    or enter them manually.</p>
-               <p>OmegaT provides a convenient short list of two-letter language
-	codes, but you can type any code that conforms to <a class="ulink" href="https://www.rfc-editor.org/rfc/bcp/bcp47.txt" target="_top">BCP-47</a>
-	(including the three-letter language codes) into the appropriate
-	field.</p>
+               <p>Seleccioneu les llengües d'origen i de destinació en la llista desplegable o indiqueu-les manualment.</p>
+               <p>L'OmegaT proporciona una breu llista pràctica de codis de llengua de dues lletres, però podeu indicar qualsevol codi que s'ajusti al <a class="ulink" href="https://www.rfc-editor.org/rfc/bcp/bcp47.txt" target="_top">BCP-47</a> (incloent-hi codis de llengua de tres lletres) en el camp corresponent.</p>
                <p>Els codis de llengua s'utilitzen en diverses parts de l'OmegaT amb diverses finalitats:</p>
                <div class="itemizedlist">
                   <ul class="itemizedlist" style="list-style-type: disc; ">
@@ -266,11 +262,7 @@
                <p>Altres funcions.</p>
                <div class="warning">
                   <h3 class="title">Avís</h3>
-                  <p>Make sure you enter the correct language codes and that
-	  all other locations requiring such a code match the one you
-	  assign here exactly. Functions that depend on a language either
-	  fail or produce incorrect results if there is a mismatch between
-	  the language codes.</p>
+                  <p>Assegureu-vos que indiqueu els codis de llengua correctes i que els codis que indiqueu en qualsevol altre lloc coincideixin exactament amb els que indiqueu aquí. Les funcions que depenen d'una llengua poden no funcionar o produir resultats incorrectes si els codis de llengua no coincideixen.</p>
                </div>
                <p>L'OmegaT selecciona automàticament els lematitzadors que corresponen a les llengües d'origen i de destinació, però podeu modificar els paràmetres manualment. Els lematitzadors permeten que l'OmegaT proporcioni millors coincidències.</p>
             </section>
@@ -359,30 +351,23 @@
                      </dd>
                      <dt id="dialogs.project.properties.hide.tags">
                         <span class="term" id="dialogs.project.properties.hide.tags.title">
-                           <code class="option">Hide
-        tags</code>
+                           <code class="option">Amaga les etiquetes</code>
                         </span>
                      </dt>
                      <dd>
                         <p>Les etiquetes són útils generalment per a reproduir disposicions o característiques específiques del text d'origen en el text traduït.</p>
-                        <p>Activating this function hides the tags in the source
-		  segments, freeing you from the need to handle them manually.</p>
+                        <p>Si habiliteu aquesta funció, s'amaguen les etiquetes dels segments d'origen, la qual cosa us permet no haver de tractar-les manualment.</p>
                         <p>Això és especialment útil per a tractar textos on la formatació en línia no és gaire útil (per exemple, fitxers PDF amb OCR, o fitxers .odt o .docx mal convertits).</p>
                         <div class="note">
                            <h3 class="title">Nota</h3>
-                           <p>Hidden tags are simply stacked at the end of the segment. Although
-			this does not normally prevent the translated file from opening, keep the
-			following points in mind when using this function:</p>
+                           <p>Les etiquetes amagades senzillament s'acumulen al final del segment. Tot i que això normalment no impedeix l'obertura del fitxer traduït, tingueu present el següent quan utilitzeu aquesta funció:</p>
                            <div class="itemizedlist">
                               <ul class="itemizedlist" style="list-style-type: disc; ">
                                  <li class="listitem">
-                                    <p>You will have to manually apply bold, italics, or other text
-					decorations in the translated file.</p>
+                                    <p>Haureu d'aplicar manualment la negreta, la cursiva i altres opcions de format del text en el fitxer traduït.</p>
                                  </li>
                                  <li class="listitem">
-                                    <p>If you simply want to reduce the number of tags in a
-					<span class="application">Microsoft Word</span> (2007 and later) document,
-					you can use the <a class="link" href="chapter.windows.and.dialogs.html#windows.scripts.distribution.tagwipe">Neteja les etiquetes</a> script.</p>
+                                    <p>Si només voleu reduir el nombre d'etiquetes en un document del <span class="application">Microsoft Word</span> (2007 o posterior), podeu utilitzar l'script <a class="link" href="chapter.windows.and.dialogs.html#windows.scripts.distribution.tagwipe">Neteja les etiquetes</a>.</p>
                                     <p>Consulteu la secció <a class="link" href="chapter.windows.and.dialogs.html#windows.scripts" title="Scripts">
                                           <span class="guilabel">Scripts</span>
                                        </a> per a conèixer més detalls.</p>
@@ -816,7 +801,7 @@
                   </dd>
                   <dt id="windows.source.files.list.download.page">
                      <span class="term" id="windows.source.files.list.download.page.title">
-                        <span class="guibutton">Afegeix una pàgina del MediaWiki en línia...</span>
+                        <span class="guibutton">Baixa una pàgina del MediaWiki...</span>
                      </span>
                   </dt>
                   <dd>
@@ -833,7 +818,7 @@
                   <span class="guimenu">Projecte</span>
                </a>
                <a class="link" href="chapter.menus.html#menus.project.download.mediawiki.page">
-                  <span class="guimenuitem">Afegeix una pàgina del MediaWiki en línia...</span>
+                  <span class="guimenuitem">Baixa una pàgina del MediaWiki...</span>
                </a>.</p>
             <div class="note">
                <h3 class="title">Nota</h3>
@@ -1127,13 +1112,13 @@
                         <div class="variablelist">
                            <dl class="variablelist">
                               <dt>
-                                 <span class="term">Memòria</span>
+                                 <span class="term">Memòria principal</span>
                               </dt>
                               <dd>
                                  <p>Inclou la memòria del projecte (<a class="link" href="chapter.project.folder.html#project.folder.project.save.tmx">project_save.tmx</a>)</p>
                               </dd>
                               <dt>
-                                 <span class="term">Memòries de traducció</span>
+                                 <span class="term">Memòries de referència</span>
                               </dt>
                               <dd>
                                  <p>Inclou les memòries de traducció de la carpeta <a class="link" href="chapter.project.folder.html#project.folder.tm" title="tm">tm</a>.</p>
@@ -1157,11 +1142,15 @@
                      </dd>
                      <dt>
                         <span class="term">
-                           <span class="guibutton">Mostra les opcions avançades</span>
+                           <span class="guibutton">Opcions de cerca en la memòria de traducció</span>
                         </span>
                      </dt>
                      <dd>
                         <p>Seleccioneu criteris addicionals, com ara la persona que ha traduït o modificat un segment, la data i l'hora de la traducció (modificació), o si s'han d'excloure els segments orfes.</p>
+                        <div class="warning">
+                           <h3 class="title">Avís</h3>
+                           <p>Les opcions de cerca en la memòria de traducció només s'apliquen a la memòria principal i no a les memòries de referència.</p>
+                        </div>
                         <div class="variablelist">
                            <dl class="variablelist">
                               <dt>
@@ -1362,12 +1351,8 @@
                   </li>
                   <li class="listitem">
                      <p>
-                        <span class="guibutton">Show replacements</span> filters the entries in
-        the Editor and highlight the parts that will be replaced.</p>
-                     <p>Click the <span class="guibutton">Replace and Find Next</span> or
-		<span class="guibutton">Find Next</span> button, and click the
-		<span class="guibutton">Finish</span> button to end the replacement
-		operation.</p>
+                        <span class="guibutton">Mostra les substitucions</span> filtra les entrades en la subfinestra «Editor» i ressalta les parts que se substituiran.</p>
+                     <p>Feu clic en el botó <span class="guibutton">Substitueix i cerca el següent</span> o <span class="guibutton">Cerca el següent</span> i feu clic en el botó <span class="guibutton">Finalitza</span> per a finalitzar l'operació de substitució.</p>
                   </li>
                </ul>
             </div>
@@ -1637,10 +1622,10 @@
                   <span class="guimenuitem">Alinea fitxers...</span>
                </a> per a accedir a aquesta eina.</p>
             <p>L'OmegaT també ofereix un mode d'alineació en línia d'ordres per a formats basats en claus. Consulteu l'opció <a class="link" href="chapter.how.to.html#launch.with.command.line.mode.console.align">
-                  <code class="option">--mode=console-align <span class="emphasis">
-                        <em>--alignDir=&lt;camí&gt;</em>
-                     </span>
-                  </code>
+                  <code class="option">--mode=console-align</code> 
+                  <strong class="userinput">
+                     <code>&lt;camí del projecte&gt;</code>
+                  </strong>
                </a> per a conèixer més detalls.</p>
             <div class="warning">
                <h3 class="title">Avís</h3>
@@ -1788,13 +1773,10 @@
                            </a>.</p>
                      </dd>
                      <dt>
-                        <span class="term">Amaga les etiquetes</span>
+                        <span class="term">Suprimeix les etiquetes</span>
                      </dt>
                      <dd>
-                        <p>L'alineador inclou les etiquetes dels segments per defecte. Desmarqueu la casella per a aplicar l'opció <a class="link" href="chapter.windows.and.dialogs.html#dialogs.project.properties.hide.tags">
-                              <code class="option">Hide
-        tags</code>
-                           </a>.</p>
+                        <p>L'alineador inclou les etiquetes dels segments per defecte. No marqueu la casella per a suprimir totes les etiquetes de l'alineació i del fitxer TMX resultant.</p>
                      </dd>
                      <dt id="windows.aligner.adjust.highlight">
                         <span class="term" id="windows.aligner.adjust.highlight.title">Ressalta</span>

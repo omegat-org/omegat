@@ -10,7 +10,7 @@
    
 <body>
     <div id="wh-header">
-    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 5.8.0 - Manual d'usuari</a></div></div>
+    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 6.1.0 - Manual d'usuari</a></div></div>
 
     <div id="wh-body">
       <div class="wh-icon-menu" id="wh-menu"></div>
@@ -433,8 +433,7 @@
                <dl class="variablelist">
                   <dt id="dialogs.preferences.glossary.display.context.description.for.tbx.glossaries">
                      <span class="term" id="dialogs.preferences.glossary.display.context.description.for.tbx.glossaries.title">
-                        <code class="option">Display
-        TBX glossaries context description (TBX 2)</code>
+                        <code class="option">Mostra la descripció de context dels glossaris (TBX 2)</code>
                      </span>
                   </dt>
                   <dd>
@@ -523,7 +522,7 @@
                      </span>
                   </dt>
                   <dd>
-                     <p>Select a layout for the glossaries pane contents. Es poden afegir disposicions addicionals com a connectors.</p>
+                     <p>Seleccioneu una disposició per al contingut de la subfinestra «Glossari». Es poden afegir disposicions addicionals com a connectors.</p>
                   </dd>
                   <dt id="dialogs.preferences.glossary.merge.alternate.definitions.for.the.same.term">
                      <span class="term" id="dialogs.preferences.glossary.merge.alternate.definitions.for.the.same.term.title">
@@ -557,12 +556,11 @@
                      </span>
                   </dt>
                   <dd>
-                     <p>While the option is disabled, use <a class="link" href="chapter.menus.html#menus.edit" title="Edita">
+                     <p>Amb l'opció inhabilitada, utilitzeu <a class="link" href="chapter.menus.html#menus.edit" title="Edita">
                            <span class="guimenu">Edita</span>
                         </a>
                         <a class="link" href="chapter.menus.html#menus.edit.search.dictionaries">
-                           <span class="guimenuitem">Search Dictionaries</span>
-	  
+                           <span class="guimenuitem">Cerca en els diccionaris</span> 
                            <span class="keycap">
                               <strong>A</strong>
                            </span>+<span class="keycap">
@@ -571,11 +569,8 @@
                               <strong>D</strong>
                            </span>
 	  
-                        </a> to search for matches
-          of the selection or of all the terms in the segment source.</p>
-                     <p>When the option is enabled, OmegaT automatically searches in all
-		  the dictionaries for matches of the terms it identified in the
-		  segment, as it enters the segment.</p>
+                        </a> per a cercar coincidències de la selecció o de tots els termes del segment d'origen.</p>
+                     <p>Quan l'opció està habilitada, l'OmegaT cerca automàticament coincidències dels termes identificats en el segment en tots els diccionaris quan s'accedeix al segment.</p>
                   </dd>
                   <dt id="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries">
                      <span class="term" id="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries.title">
@@ -615,7 +610,7 @@
                   </dt>
                   <dd>
                      <p>Seleccioneu un tema per a la interfície d'usuari de l'OmegaT.</p>
-                     <p>Es poden afegir temes addicionals com a connectors. The themes also provide predefined set of default colours.</p>
+                     <p>Es poden afegir temes addicionals com a connectors. Els temes també proporcionen un conjunt predefinit de colors per defecte.</p>
                      <p>No tots els temes del Java proporcionats de manera nativa són compatibles amb el funcionament de l'OmegaT.</p>
                   </dd>
                   <dt id="dialogs.preferences.appearance.restore.main.window">
@@ -656,12 +651,11 @@
                      </dd>
                      <dt>
                         <span class="term">
-                           <code class="option">Apply a different font size to the dictionaries pane</code>
+                           <code class="option">Aplica una mida de lletra diferent a la subfinestra «Diccionari»</code>
                         </span>
                      </dt>
                      <dd>
-                        <p>By default, the dictionaries pane uses the same font size as
-			the main window panes.</p>
+                        <p>Per defecte, la subfinestra «Diccionari» utilitza la mateixa mida de lletra que les subfinestres de la finestra principal.</p>
                      </dd>
                   </dl>
                </div>
@@ -676,17 +670,13 @@
                      </div>
                   </div>
                </div>
-               <p>You can assign different colours for the various parts of the user
-      interface.</p>
+               <p>Podeu assignar colors diferents a les diverses parts de la interfície d'usuari.</p>
                <p>Es poden utilitzar scripts per a establir temes predefinits. L'OmegaT inclou un script anomenat <a class="link" href="chapter.windows.and.dialogs.html#windows.scripts.distribution.switch.colour.theme">Canvia el tema de color</a> que proporciona un tema fosc per defecte. Consulteu la finestra <a class="link" href="chapter.windows.and.dialogs.html#windows.scripts" title="Scripts">
                      <span class="guilabel">Scripts</span>
                   </a> per a conèixer més detalls.</p>
                <div class="note">
                   <h3 class="title">Nota</h3>
-                  <p>Automatic dark theme detection is available on Linux systems
-		with the Gnome/GTK look and feel for users who run OmegaT on OpenJDK.
-		This feature depends on Java functionality that is not yet available
-		on other platforms.</p>
+                  <p>La detecció automàtica de tema fosc està disponible en sistemes Linux amb l'aparença del GNOME/GTK per als usuaris que executen l'OmegaT amb l'OpenJDK. Aquesta característica depèn d'una funcionalitat del Java que encarà no està disponible en altres plataformes.</p>
                </div>
             </section>
          </section>
@@ -1449,16 +1439,12 @@
                      </span>
                   </dt>
                   <dd>
-                     <p>OmegaT displays the five best fuzzy matches above 30% by
-		  default. You can change that threshold here.</p>
+                     <p>Per defecte, l'OmegaT mostra les cinc millors coincidències parcials per sobre del 30 %. Aquí podeu canviar el llindar.</p>
                      <div class="note">
                         <h3 class="title">Nota</h3>
-                        <p>Each of the three types of matching percentages presented in the <a class="link" href="chapter.panes.html#panes.fuzzy.matches" title="Coincidències parcials">
+                        <p>Cadascun dels tres tipus de percentatges de coincidència indicats en la subfinestra <a class="link" href="chapter.panes.html#panes.fuzzy.matches" title="Coincidències parcials">
                               <span class="guilabel">Coincidències parcials</span>
-                           </a> pane are taken into
-				account to determine whether a match is displayed. Potential
-				matches are rejected if all three percentages are below
-				the threshold.</p>
+                           </a> es tenen en compte per a determinar si una coincidència es mostra o no. Es rebutgen les possibles coincidències si els tres percentatges són inferiors al llindar.</p>
                      </div>
                   </dd>
                   <dt id="dialog.preferences.tm.matches.displaying.tags.in.non-omegat.tmxs">
@@ -1881,8 +1867,7 @@ ${filePath}&gt;</pre>
                </div>
             </div>
             <p>Mostra la llista de tots els connectors instal·lats.</p>
-            <p>Plugins are by default installed in the <a class="link" href="chapter.appendices.html#configuration.folder" title="Carpeta de configuració">configuration folder</a>, but can also be
-	installed in the <a class="link" href="chapter.appendices.html#application.folder.plugins">plugins/</a> folder under the <a class="link" href="chapter.appendices.html#application.folder" title="Carpeta de l'aplicació">application</a> folder.</p>
+            <p>Per defecte, els connectors s'instal·len en la <a class="link" href="chapter.appendices.html#configuration.folder" title="Carpeta de configuració">carpeta de configuració</a>, però també es poden instal·lar en la carpeta <a class="link" href="chapter.appendices.html#application.folder.plugins">plugins/</a> de la carpeta de l'<a class="link" href="chapter.appendices.html#application.folder" title="Carpeta de l'aplicació">aplicació</a>.</p>
             <p>Podeu trobar connectors addicionals en el <a class="ulink" href="https://sourceforge.net/p/omegat/wiki/Plugins/" target="_top">lloc de desenvolupament de l'OmegaT</a>.</p>
          </section>
          <section class="section" id="dialogs.preferences.updates">

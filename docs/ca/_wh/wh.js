@@ -521,7 +521,7 @@ var toc_entries = [
 ["Principis","chapter.instant.start.guide.html#introduction.omegat.principles",null],
 ["Convencions utilitzades en aquest manual","chapter.instant.start.guide.html#introduction.how.to.use.the.manual",null],
 ["Creació d\'un projecte","chapter.instant.start.guide.html#introduction.create.and.open.new.project",null],
-["Spellchecking\n\tdictionaries","chapter.instant.start.guide.html#introduction.install.spellchecker.dictionary",null],
+["Diccionaris de correcció ortogràfica","chapter.instant.start.guide.html#introduction.install.spellchecker.dictionary",null],
 ["Gestió dels segments","chapter.instant.start.guide.html#introduction.manage.your.segments",null],
 ["Millora de l\'aspecte del programa perquè sigui atractiu!","chapter.instant.start.guide.html#introduction.make.it.look.good",null],
 ["Traducció dels fitxers","chapter.instant.start.guide.html#introduction.translate.the.segments.one.by.one",null],
@@ -536,7 +536,7 @@ var toc_entries = [
 ["Ús de memòries de traducció","chapter.how.to.html#how.to.use.tm",null],
 ["Compatibilitat amb altres formats","chapter.how.to.html#how.to.translate.other.files",null],
 ["Configuració d\'un projecte en equip","chapter.how.to.html#how.to.setup.team.project",null],
-["Use a team project","chapter.how.to.html#how.to.use.team.project",null],
+["Ús d\'un projecte en equip","chapter.how.to.html#how.to.use.team.project",null],
 ["Instal·lació de l\'OmegaT","chapter.how.to.html#how.to.installing.omegat",null],
 ["Execució de l\'OmegaT","chapter.how.to.html#how.to.running.omegat",null]
 ]],
@@ -549,7 +549,7 @@ var toc_entries = [
 ["\n                              Diccionaris\n                           ","chapter.panes.html#panes.dictionary",null],
 ["\n                              Traducció automàtica\n                           ","chapter.panes.html#panes.machinetranslation",null],
 ["\n                              Diverses traduccions\n                           ","chapter.panes.html#panes.multipletranslations",null],
-["\n                              Notes\n                           ","chapter.panes.html#panes.notes",null],
+["\n                              Bloc de notes\n                           ","chapter.panes.html#panes.notes",null],
 ["\n                              Comentaris\n                           ","chapter.panes.html#panes.comments",null],
 ["\n                              Propietats del segment\n                           ","chapter.panes.html#panes.segment.properties",null],
 ["\n                              Barra d\'estat\n                           ","chapter.panes.html#panes.statusbar",null]
@@ -595,8 +595,8 @@ var toc_entries = [
 ["\n                              Actualitzacions\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.updates",null]
 ]],
 ["Carpeta del projecte","chapter.project.folder.html",[
-["Estructura per defecte","chapter.project.folder.html#d0e10393",null],
-["Contingut mínim","chapter.project.folder.html#d0e10471",null],
+["Estructura per defecte","chapter.project.folder.html#d0e10487",null],
+["Contingut mínim","chapter.project.folder.html#d0e10565",null],
 ["source","chapter.project.folder.html#project.folder.source",null],
 ["target","chapter.project.folder.html#project.folder.target",null],
 ["tm","chapter.project.folder.html#project.folder.tm",null],
@@ -890,7 +890,7 @@ message = translation[index];
 }
 return message;
 }
-var storageId = "-klasl29ay399-1ec4md7afiirq";
+var storageId = "-1y033usyohoay-1inwjufe1b414";
 function storageSet(key, value) {
 window.sessionStorage.setItem(key + storageId, String(value));
 }

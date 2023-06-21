@@ -10,7 +10,7 @@
    
 <body>
     <div id="wh-header">
-    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 5.8.0 - Bedienungsanleitung</a></div></div>
+    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 6.1.0 - Bedienungsanleitung</a></div></div>
 
     <div id="wh-body">
       <div class="wh-icon-menu" id="wh-menu"></div>
@@ -348,7 +348,7 @@
                      </span>
                   </dt>
                   <dd>
-                     <p>Speichert den projekteigenen Translation Memory (<a class="link" href="chapter.project.folder.html#project.folder.project.save.tmx">project_save.tmx</a>).</p>
+                     <p>Speichert den projekteigenen Translation Memory (<a class="link" href="chapter.project.folder.html#project.folder.project.save.tmx">project_save.tmx</a>) und synchronisiert Teamprojekte.</p>
                      <p>OmegaT speichert Übersetzungen automatisch alle drei Minuten, und wenn Sie das Projekt schließen oder das Programm beenden. Siehe die <a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.saving.and.output.interval">
                            <code class="option">Projektdaten-Speicherintervall</code>
                         </a>-Einstellung für weitere Informationen.</p>
@@ -363,7 +363,7 @@
                   </dd>
                   <dt id="menus.project.download.mediawiki.page">
                      <span class="term" id="menus.project.download.mediawiki.page.title">
-                        <span class="guimenuitem">Online-MediaWiki-Seite hinzufügen...</span>
+                        <span class="guimenuitem">MediaWiki-Seite hinzufügen...</span>
                      </span>
                   </dt>
                   <dd>
@@ -415,6 +415,14 @@
                               <code class="option">Erstellen von übersetzten Dateien mit Tag-Problemen blockieren</code>
                            </a>-Einstellung für weitere Informationen.</p>
                      </div>
+                     <p>Jedes Mal, wenn Sie die übersetzten Dateien erstellen, speichert OmegaT das Projekt (siehe den Menüpunkt <a class="link" href="chapter.menus.html#menus.project.save">
+                           <span class="guimenuitem">Speichern</span> 
+                           <span class="keycap">
+                              <strong>C</strong>
+                           </span>+<span class="keycap">
+                              <strong>S</strong>
+                           </span>
+                        </a> oben) und erstellt Referenz-Memories, die die übersetzten Segmente des aktuellen Quelldatei-Sets enthalten.</p>
                   </dd>
                   <dt id="menus.project.create.current.translated.document">
                      <span class="term" id="menus.project.create.current.translated.document.title">
@@ -430,9 +438,14 @@
                   </dt>
                   <dd>
                      <p>Erstellt die Zieldatei, die der gerade übersetzten Quelldatei entspricht. Die erstellte Zieldatei befinden sich im Ordner <a class="link" href="chapter.project.folder.html#project.folder.target" title="target">target</a>.</p>
-                     <p>
-		
-                     </p>
+                     <p>Jedes Mal, wenn Sie die aktuelle übersetzte Datei erstellen, speichert OmegaT das Projekt (siehe den Menüpunkt <a class="link" href="chapter.menus.html#menus.project.save">
+                           <span class="guimenuitem">Speichern</span> 
+                           <span class="keycap">
+                              <strong>C</strong>
+                           </span>+<span class="keycap">
+                              <strong>S</strong>
+                           </span>
+                        </a> oben) und erstellt Referenz-Memories, die die übersetzten Segmente des aktuellen Quelldatei-Sets enthalten.</p>
                   </dd>
                   <dt id="menus.project.open.med.project">
                      <span class="term" id="menus.project.open.med.project.title">
@@ -667,7 +680,7 @@
                <dl class="variablelist">
                   <dt id="menus.edit.undo.last.action">
                      <span class="term" id="menus.edit.undo.last.action.title">
-                        <span class="guimenuitem">Letzte Aktion rückgängig machen</span> 
+                        <span class="guimenuitem">Rückgängig machen</span> 
                         <span class="keycap">
                            <strong>C</strong>
                         </span>+<span class="keycap">
@@ -680,7 +693,7 @@
                   </dd>
                   <dt id="menus.edit.redo.last.action">
                      <span class="term" id="menus.edit.redo.last.action.title">
-                        <span class="guimenuitem">Letzte Aktion wiederholen</span> 
+                        <span class="guimenuitem">Wiederholen</span> 
                         <span class="keycap">
                            <strong>C</strong>
                         </span>+<span class="keycap">
@@ -807,7 +820,7 @@
                   </dd>
                   <dt id="menus.edit.insert.missing.source.tag">
                      <span class="term" id="menus.edit.insert.missing.source.tag.title">
-                        <span class="guimenuitem">Fehlende Tags aus Quelle einfügen</span> 
+                        <span class="guimenuitem">Fehlende Tags einfügen</span> 
                         <span class="keycap">
                            <strong>C</strong>
                         </span>+<span class="keycap">
@@ -841,9 +854,9 @@
                         <span class="keycap">
                            <strong>C</strong>
                         </span>+<span class="keycap">
-                           <strong>C</strong>
-                        </span>+<span class="keycap">
                            <strong>S</strong>
+                        </span>+<span class="keycap">
+                           <strong>C</strong>
                         </span>
 	  
                      </span>
@@ -1491,7 +1504,7 @@
                                  </span>+<span class="keycap">
                                     <strong>A</strong>
                                  </span>+<span class="keycap">
-                                    <strong>.</strong>
+                                    <strong>,</strong>
                                  </span>
                               </p>
                               <p>Springt zum vorherigen Segment, das von <code class="filename">tm/enforce/</code> eingefügt wurde.</p>
@@ -1732,11 +1745,11 @@
                   </dd>
                   <dt id="menus.view.restore.main.window">
                      <span class="term" id="menus.view.restore.main.window.title">
-                        <span class="guimenuitem">Hauptfenster wiederherstellen</span>
+                        <span class="guimenuitem">OmegaT-Fenster wiederherstellen</span>
                      </span>
                   </dt>
                   <dd>
-                     <p>Setzt das Layout des OmegaT-Hauptfensters auf seine Standardwerte zurück.</p>
+                     <p>Setzt das Layout des OmegaT-Fensters auf seine Standardwerte zurück.</p>
                      <div class="note">
                         <h3 class="title">Anmerkung</h3>
                         <p>Verwenden Sie diese Funktion, wenn Sie bei der Neuanordnung des Fensterlayouts auf Probleme stoßen.</p>

@@ -10,7 +10,7 @@
    
 <body>
     <div id="wh-header">
-    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 5.8.0 - Bedienungsanleitung</a></div></div>
+    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 6.1.0 - Bedienungsanleitung</a></div></div>
 
     <div id="wh-body">
       <div class="wh-icon-menu" id="wh-menu"></div>
@@ -648,7 +648,7 @@
                         <p>Nach dem erneuten Laden des alten Projekts wird dessen Translation Memory auf die neuen Quelldateien angewendet. Identische Segmente werden automatisch übersetzt. Ähnliche Segmente werden mit Matches aus dem Translation Memory des Projekts versehen, während Sie sie eintragen.</p>
                      </li>
                      <li class="listitem">
-                        <p>Alternativ können Sie die Translation Memories des alten Projekts in den <a class="link" href="chapter.project.folder.html#project.folder.tm" title="tm">tm</a>-Ordner des neuen Projekts ablegen.</p>
+                        <p>Alternativ können Sie die Referenz-Memories des alten Projekts in den <a class="link" href="chapter.project.folder.html#project.folder.tm" title="tm">tm</a>-Ordner des neuen Projekts ablegen.</p>
                         <div class="note">
                            <h3 class="title">Anmerkung</h3>
                            <p>Das ist die bevorzugte Methode, wenn Sie Ihre Übersetzung von Grund auf neu beginnen wollen.</p>
@@ -683,6 +683,26 @@
                               <span class="guisubmenu">Automatisch ausgefüllte Segmente</span>
                            </a>-Menü, um zu einem automatisch ausgefüllten Segment zu navigieren.</p>
                      </li>
+                     <li class="listitem">
+                        <p>Als Referenzübersetzungen unterstützt OmegaT auch zweisprachige Dokumente, die keine TMX-Dateien sind. Die von OmegaT unterstützten Dateiformate sind alle zweisprachigen Formate, die OmegaT als Quelldateien akzeptiert:</p>
+                        <div class="itemizedlist">
+                           <ul class="itemizedlist" style="list-style-type: circle; ">
+                              <li class="listitem">
+                                 <p>PO-Dateien</p>
+                              </li>
+                              <li class="listitem">
+                                 <p>TXML-Dateien</p>
+                              </li>
+                              <li class="listitem">
+                                 <p>XLIFF-Dateien</p>
+                              </li>
+                              <li class="listitem">
+                                 <p>SDLXLIFF-Dateien</p>
+                              </li>
+                           </ul>
+                        </div>
+                        <p>Sie können solche Dateien im <a class="link" href="chapter.project.folder.html#project.folder.tm" title="tm">tm</a>-Ordner Ihres Projekts oder in einem seiner Unterordner ablegen. Anschließend stehen die übersetzten Daten sofort für Matching-Zwecke zur Verfügung.</p>
+                     </li>
                   </ul>
                </div>
                <section class="section" id="how.to.tm.read.and.write">
@@ -694,7 +714,7 @@
                      </div>
                   </div>
                   <p>OmegaT kann TMX-standardkonforme Memories lesen, die von anderen Tools erstellt wurden.</p>
-                  <p>Einige Tools erzeugen unter Umständen ungültige TMX-Dateien. Sie müssen diese korrigieren, wenn Sie sie als externe Translation Memories verwenden wollen, da OmegaT sonst einen Fehler meldet und diese nicht laden kann. Die Fehlerbehebung sollte in der Regel kein Problem darstellen, und die von OmegaT angezeigte Fehlermeldung wird Ihnen helfen, den Fehler zu finden. Sie können auch die Benutzergruppe um Rat fragen, wenn Sie Probleme haben.</p>
+                  <p>Einige Tools erzeugen unter Umständen ungültige TMX-Dateien. Sie müssen diese korrigieren, wenn Sie sie als Referenz-Memories verwenden wollen, da OmegaT sonst einen Fehler meldet und diese nicht laden kann. Die Fehlerbehebung sollte in der Regel kein Problem darstellen, und die von OmegaT angezeigte Fehlermeldung wird Ihnen helfen, den Fehler zu finden. Sie können auch die Benutzergruppe um Rat fragen, wenn Sie Probleme haben.</p>
                </section>
                <section class="section" id="how.to.use.tm.store.your.tm">
                   <div class="titlepage">
@@ -841,51 +861,87 @@
                </div>
                <p>OmegaT zeigt Fuzzy Matches im <a class="link" href="chapter.panes.html#panes.fuzzy.matches" title="Fuzzy Matches">
                      <span class="guilabel">Fuzzy Matches</span>
-                  </a>-Fenster an. Solche Matches sind standardmäßig auf der im <a class="link" href="chapter.windows.and.dialogs.html#dialogs.project.properties" title="Projekteigenschaften">
+                  </a>-Fenster an. Standardmäßig sind diese Matches auf die Quell- und Zielsprache beschränkt, die im <a class="link" href="chapter.windows.and.dialogs.html#dialogs.project.properties" title="Projekteigenschaften">
                      <span class="guilabel">Projekteigenschaften</span>
-                  </a>-Dialogfenster definierten Quell- und Zielsprache beschränkt, aber Sie können auch Matches in Sprachen hinzufügen, die nicht die Zielsprache sind. Siehe die <a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.tm.matches.other.languages">
+                  </a>-Dialogfenster definiert sind.</p>
+               <p>Sie können Matches in anderen Sprachen als der Zielsprache hinzufügen. Siehe die <a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.tm.matches.other.languages">
                      <code class="option">Matches aus anderen Sprachen einbeziehen</code>
                   </a>-Einstellung für weitere Informationen.</p>
-               <p>Mit OmegaT können Sie auch eine dritte Sprache <span class="emphasis">
+               <p>Wenn Sie eine TMX-Datei haben, die Ihrem Quelldokument entspricht und eine Übersetzung in eine andere Sprache enthält, können Sie diese Sprache auch <span class="emphasis">
                      <em>direkt unter</em>
-                  </span> dem Quelltext anzeigen, um sie als dritte Sprachreferenz zu verwenden.</p>
+                  </span> dem Quellsegment anzeigen lassen, um sie als zusätzliche Referenzsprache zu verwenden.</p>
+               <p>Um das zu erreichen:</p>
+               <div class="orderedlist">
+                  <ol class="orderedlist" type="1">
+                     <li class="listitem">
+                        <p>Kopieren Sie den Translation Memory, der die zusätzliche Referenzsprache enthält, nach <code class="filename">tmx2source</code> im <a class="link" href="chapter.project.folder.html#project.folder.tm" title="tm">tm</a>-Ordner.</p>
+                     </li>
+                     <li class="listitem">
+                        <p>Benennen Sie die TM-Datei um in:</p>
+                        <div class="itemizedlist">
+                           <ul class="itemizedlist" style="list-style-type: disc; ">
+                              <li class="listitem">
+                                 <p>
+			  
+                                    <code class="filename">LL_CC.tmx</code>,
+			</p>
+                              </li>
+                              <li class="listitem">
+                                 <p>
+			  
+                                    <code class="filename">LL-CC.tmx</code> oder</p>
+                              </li>
+                              <li class="listitem">
+                                 <p>
+			  
+                                    <code class="filename">LL.tmx</code>,
+			</p>
+                              </li>
+                           </ul>
+                        </div>
+                        <p>wobei <span class="emphasis">
+                              <em>LL</em>
+                           </span> der interne Sprachcode der Sprache ist, die als Referenz angezeigt werden soll, und <span class="emphasis">
+                              <em>CC</em>
+                           </span> ein beliebiger Code aus zwei Buchstaben ist.</p>
+                        <div class="warning">
+                           <h3 class="title">Warnung</h3>
+                           <div class="itemizedlist">
+                              <ul class="itemizedlist" style="list-style-type: disc; ">
+                                 <li class="listitem">
+                                    <p>Alle Buchstaben müssen Großbuchstaben sein.</p>
+                                 </li>
+                                 <li class="listitem">
+                                    <p>Es werden nur Segmente angezeigt, die <span class="bold">
+                                          <strong>genau</strong>
+                                       </span> mit der Quelle übereinstimmen.</p>
+                                 </li>
+                              </ul>
+                           </div>
+                        </div>
+                     </li>
+                  </ol>
+               </div>
                <div class="example" id="bridge.english.and.french.with.japanese">
-                  <div class="example-title">Beispiel 6. Englisch und Französisch mit Japanisch überbrücken</div>
+                  <div class="example-title">Beispiel 6. Eine japanische Referenz unter der englischen Quelle verwenden</div>
                   <div class="example-contents">
+                     <p>Wenn Sie eine TMX-Datei haben, die die japanische Übersetzung eines englischen Dokuments enthält, das Sie ins Französische übersetzen, können Sie die japanische Übersetzung als alternative exakte Referenz unter dem zu übersetzenden englischen Text anzeigen lassen.</p>
+                     <p>Kopieren oder verschieben Sie die englisch-japanische Datei nach <code class="filename">tm/tmx2source</code> und benennen Sie sie in <code class="filename">JA-JP.tmx</code> um. OmegaT zeigt Ihnen nun den japanischen Text an, der dem englischen Quellsegment entspricht:</p>
                      <p>
 	  
                      </p>
                      <pre class="programlisting">— ¶ —————————————————————
 <span class="token">A whitespace character: [ \t\n\x0B\f\r]
-fr-ZB: Un caractère d'espacement (espace, tabulation, etc.) :  [ \t\n\x0B\f\r]
-ja-RV: 空白文字：[ \t\n\x0B\f\r]</span>
-Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 3075 ¶&gt;</span>
+ja-JP: 空白文字：[ \t\n\x0B\f\r]</span>
+Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;Segment 3075 ¶&gt;</span>
 — ¶ —————————————————————</pre>
-                     <p>Die erste Zeile ist das Original-Englisch, die zweite eine alte französische Version mit einem beliebigen Sprachcode, die dritte die japanische Version mit einem ebenso beliebigen Sprachcode und die vierte die aktuelle Übersetzung ins Französische.</p>
+                     <p>Die erste Zeile ist das originale Englisch, die zweite Zeile ist die Brückensprache, die Ihnen bei der Übersetzung helfen soll, und die dritte Zeile ist die aktuelle Übersetzung ins Französische.</p>
                   </div>
                </div>
                <br class="example-break" />
-               <p>Um das zu erreichen:</p>
-               <div class="orderedlist">
-                  <ol class="orderedlist" type="1">
-                     <li class="listitem">
-                        <p>Erstellen Sie einen Ordner namens <code class="filename">tmx2source</code> im Ordner <a class="link" href="chapter.project.folder.html#project.folder.tm" title="tm">tm</a>.</p>
-                     </li>
-                     <li class="listitem">
-                        <p>Kopieren Sie Ihren Translation Memory für die &quot;erste-dritte&quot; Sprache dorthin.</p>
-                     </li>
-                     <li class="listitem">
-                        <p>Benennen Sie den Memory in <code class="filename">LL_CC.tmx</code> oder <code class="filename">LL-CC.tmx</code> um, wobei <span class="emphasis">
-                              <em>LL</em>
-                           </span> der interne Code der Sprache ist, die als Referenz angezeigt werden soll, und <span class="emphasis">
-                              <em>CC</em>
-                           </span> ein beliebiger zweistelliger Code aus Buchstaben ist.</p>
-                     </li>
-                  </ol>
-               </div>
                <div class="note">
                   <h3 class="title">Anmerkung</h3>
-                  <p>Sie können eine beliebige Anzahl von TMX-Dateien verwenden, die beliebig viele verschiedene &quot;Brückensprachpaare&quot; enthalten.</p>
+                  <p>Sie können eine beliebige Anzahl von TMX-Dateien verwenden, die beliebig viele verschiedene Brückensprachpaare enthalten.</p>
                </div>
             </section>
          </section>
@@ -1429,7 +1485,7 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                                        <p>Wenn Sie das Remote-Projekt zunächst mit einer vom Projektadministrator bereitgestellten <code class="filename">omegat.project</code>-Datei herunterladen, verwendet OmegaT die Zuordnungen in dieser Datei, sofern vorhanden.</p>
                                     </li>
                                     <li class="listitem">
-                                       <p>Wenn es einen Konflikt zwischen der Lokal- und Remote-Version der <code class="filename">omegat.project</code>-Datei gibt und die lokale Version überschrieben wird, erstellt OmegaT eine Sicherungskopie namens <code class="filename">omegat.project.YYYYMMDDhhmm.bak</code>. Die Sicherungskopien werden mindestens zehn Tage lang aufbewahrt, und ältere Sicherungskopien werden automatisch gelöscht.</p>
+                                       <p>Wenn es einen Konflikt zwischen der Lokal- und Remote-Version der <code class="filename">omegat.project</code>-Datei gibt und die lokale Version überschrieben wird, erstellt OmegaT eine Sicherungskopie namens <code class="filename">omegat.project.YYYYMMDDhhmm.bak</code>. OmegaT erstellt bis zu zehn Sicherungskopien. Ältere Sicherungskopien werden wiederum automatisch gelöscht.</p>
                                     </li>
                                  </ul>
                               </div>
@@ -1506,7 +1562,7 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
             <div class="variablelist">
                <dl class="variablelist">
                   <dt>
-                     <span class="term">Standard: OmegaT 5.8.0</span>
+                     <span class="term">Standard: OmegaT 6.1.0</span>
                   </dt>
                   <dd>
                      <p>Diese Variante wird für den täglichen Gebrauch empfohlen.</p>
@@ -1522,8 +1578,8 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
             <p>Die Dateien können direkt von <a class="ulink" href="https://omegat.org/download" target="_top">https://omegat.org</a> heruntergeladen werden.</p>
             <div class="note">
                <h3 class="title">Anmerkung</h3>
-               <p>Für die Ausführung von OmegaT 5.8.0 ist eine Java 8 Runtime Environment (JRE) erforderlich.</p>
-               <p>OmegaT-Pakete gibt es sowohl in Versionen, die mit Java gebündelt sind, als auch in Versionen ohne Java. Pakete ohne Java setzen eine systemweit installierte Java 8 Runtime Environment voraus.</p>
+               <p>Für die Ausführung von OmegaT 6.1.0 ist eine Java 11 Runtime Environment (JRE) erforderlich.</p>
+               <p>OmegaT-Pakete gibt es sowohl in Versionen, die mit Java gebündelt sind, als auch in Versionen ohne Java. Pakete ohne Java setzen eine systemweit installierte Java 11 Runtime Environment voraus.</p>
                <p>OmegaT 5.8.0 und höher können auch mit Java 11 Runtime Environment auf beliebigen Plattformen ausgeführt werden.</p>
                <p>Aus lizenzrechtlichen Gründen empfiehlt das OmegaT-Team die Java-Laufzeitumgebung Eclipse Temurin, die vom Adoptium-Projekt der Eclipse Foundation bereitgestellt wird, allerdings sollten auch andere Laufzeitumgebungen funktionieren, die mit Java 8 kompatibel sind. Siehe <a class="ulink" href="https://projects.eclipse.org/projects/adoptium.temurin" target="_top">Eclipse Temurin™</a>.</p>
                <p>IBM stellt JREs für Linux PowerPC unter <a class="ulink" href="https://developer.ibm.com/languages/java/semeru-runtimes/downloads/" target="_top">https://developer.ibm.com/languages/java/semeru-runtimes/downloads/</a> zur Verfügung.</p>
@@ -1553,7 +1609,7 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                   <h3 class="title">Anmerkung</h3>
                   <p>Obwohl Sie OmegaT direkt über die verfügbaren Dateien starten können, haben Sie auch die Möglichkeit, das dort befindliche Skript <code class="filename">linux-install.sh</code> auszuführen, um OmegaT woandershin zu installieren.</p>
                   <p>Die Ausführung des Skripts erfordert die Eingabe Ihres <code class="filename">sudo</code>-Passworts.</p>
-                  <p>Das Skript sucht nach einer bestehenden Installation der gleichen OmegaT-Version in <code class="filename">/opt/omegat/</code>. Wenn es keine gibt, wird das Programm in <code class="filename">/opt/omegat/OmegaT_5.8.0</code> installiert und als Standardversion (in <code class="filename">/opt/omegat/OmegaT-default</code>) festgelegt.</p>
+                  <p>Das Skript sucht nach einer bestehenden Installation der gleichen OmegaT-Version in <code class="filename">/opt/omegat/</code>. Wenn es keine gibt, wird das Programm in <code class="filename">/opt/omegat/OmegaT_6.1.0</code> installiert und als Standardversion (in <code class="filename">/opt/omegat/OmegaT-default</code>) festgelegt.</p>
                </div>
                <p>Nach dem Entpacken oder Installieren können Sie die nicht mehr benötigte heruntergeladene Datei löschen.</p>
             </section>
@@ -1577,7 +1633,7 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                      </div>
                   </div>
                </div>
-               <p>Diese Information gilt für jedes System, für das eine Java-Version verfügbar ist, die mit der Java 8 Runtime Environment kompatibel ist. Dazu gehören die oben beschriebenen Plattformen sowie Plattformen, für die kein eigenes OmegaT-Paket bereitgestellt wird.</p>
+               <p>Diese Information gilt für jedes System, für das eine Java-Version verfügbar ist, die mit der Java 11 Runtime Environment kompatibel ist. Dazu gehören die oben beschriebenen Plattformen sowie Plattformen, für die kein eigenes OmegaT-Paket bereitgestellt wird.</p>
                <p>Laden Sie die Version <span class="emphasis">
                      <em>Plattformübergreifend ohne JRE</em>
                   </span> herunter.</p>
@@ -1708,7 +1764,7 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                   </div>
                </div>
                <p>Sie können OmegaT über die Befehlszeile mit einem Skript starten, das Startoptionen enthält. Einzelheiten finden Sie im Abschnitt <a class="link" href="chapter.how.to.html#launch.with.command.line" title="Start über die Befehlszeile">Start über die Befehlszeile</a>.</p>
-               <p>Sie können auch auf <code class="filename">OmegaT.jar</code> klicken, um es direkt zu starten, sofern die <code class="filename">.jar</code>-Erweiterung mit dem Java-Launcher des Systems verknüpft ist.</p>
+               <p>Sie können auch auf <code class="filename">OmegaT.jar</code> doppelklicken, um es direkt zu starten, sofern die <code class="filename">.jar</code>-Erweiterung mit dem Java-Launcher des Systems verknüpft ist.</p>
                <p>Das Paket enthält auch ein <code class="filename">omegat.kaptn</code>-Kaptain-Skript, das für KDE-Nutzer nützlich sein könnte, sowie ein <code class="filename">OmegaT</code>-Bash-Skript, das automatisch den entsprechenden <span class="application">java</span>-Befehl zur Ausführung von OmegaT startet.</p>
             </section>
             <section class="section" id="running.omegat.on.macos">
@@ -1769,7 +1825,7 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                   </div>
                </div>
                <p>Die Methoden variieren je nach System, aber in der Regel können Sie OmegaT, sobald es installiert ist, direkt über die Befehlszeile starten. Einzelheiten finden Sie im Abschnitt <a class="link" href="chapter.how.to.html#launch.with.command.line" title="Start über die Befehlszeile">Start über die Befehlszeile</a>.</p>
-               <p>Sie können ein Skript erstellen, das die gewünschten Startparameter für die Befehlszeile enthält. Wenn <code class="filename">.jar</code>-Dateien ordnungsgemäß mit der Java 8 Runtime Environment verknüpft sind und Ihre PATH-Einstellungen korrekt sind, können Sie auch einfach auf <code class="filename">OmegaT.jar</code> klicken (oder doppelklicken), um es direkt zu starten.</p>
+               <p>Sie können ein Skript erstellen, das die gewünschten Startparameter für die Befehlszeile enthält. Wenn <code class="filename">.jar</code>-Dateien ordnungsgemäß mit der Java 11 Runtime Environment verknüpft sind und Ihre PATH-Einstellungen korrekt sind, können Sie auch einfach auf <code class="filename">OmegaT.jar</code> klicken (oder doppelklicken), um es direkt zu starten.</p>
                <p>Weitere Informationen finden Sie in der Dokumentation zu Ihrem System.</p>
             </section>
             <section class="section" id="launch.with.command.line">
@@ -1997,9 +2053,9 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                                  <dt id="launch.with.command.line.remote.project.">
                                     <span class="term" id="launch.with.command.line.remote.project.title">
                                        <code class="option">--remote-project</code> 
-                                       <span class="emphasis">
-                                          <em>&lt;Pfad-zur-OmegaT-Projektdatei&gt;</em>
-                                       </span>
+                                       <strong class="userinput">
+                                          <code>&lt;Pfad-zur-OmegaT-Projektdatei&gt;</code>
+                                       </strong>
                                     </span>
                                  </dt>
                                  <dd>
@@ -2017,13 +2073,13 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                                  </dd>
                                  <dt id="launch.with.command.line.team.init">
                                     <span class="term" id="launch.with.command.line.team.init.title">
-                                       <code class="option">team init <span class="emphasis">
-                                             <em>QS</em>
-                                          </span> 
-                                          <span class="emphasis">
-                                             <em>ZS</em>
-                                          </span>
-                                       </code>
+                                       <code class="option">team init</code> 
+                                       <strong class="userinput">
+                                          <code>QS</code>
+                                       </strong> 
+                                       <strong class="userinput">
+                                          <code>ZS</code>
+                                       </strong>
                                     </span>
                                  </dt>
                                  <dd>
@@ -2052,9 +2108,15 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                                  </dd>
                                  <dt id="launch.with.command.line.itokenizer.lt.classname.gt.">
                                     <span class="term" id="launch.with.command.line.itokenizer.lt.classname.gt.title">
-                                       <code class="option">--ITokenizer=&lt;Klassenname&gt;</code>, </span>
+                                       <code class="option">--ITokenizer=</code>
+                                       <strong class="userinput">
+                                          <code>&lt;Klassenname&gt;</code>
+                                       </strong>, </span>
                                     <span class="term">
-                                       <code class="option">--ITokenizerTarget=&lt;Klassenname&gt;</code>
+                                       <code class="option">--ITokenizerTarget=</code>
+                                       <strong class="userinput">
+                                          <code>&lt;Klassenname&gt;</code>
+                                       </strong>
                                     </span>
                                  </dt>
                                  <dd>
@@ -2062,10 +2124,10 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                                  </dd>
                                  <dt id="launch.with.command.line.config.dir.">
                                     <span class="term" id="launch.with.command.line.config.dir.title">
-                                       <code class="option">--config-dir=<span class="emphasis">
-                                             <em>&lt;Pfad&gt;</em>
-                                          </span>
-                                       </code>
+                                       <code class="option">--config-dir=</code>
+                                       <strong class="userinput">
+                                          <code>&lt;Pfad&gt;</code>
+                                       </strong>
                                     </span>
                                  </dt>
                                  <dd>
@@ -2073,10 +2135,10 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                                  </dd>
                                  <dt id="launch.with.command.line.config.file.">
                                     <span class="term" id="launch.with.command.line.config.file.title">
-                                       <code class="option">--config-file=<span class="emphasis">
-                                             <em>&lt;Pfad&gt;</em>
-                                          </span>
-                                       </code>
+                                       <code class="option">--config-file=</code>
+                                       <strong class="userinput">
+                                          <code>&lt;Pfad&gt;</code>
+                                       </strong>
                                     </span>
                                  </dt>
                                  <dd>
@@ -2095,10 +2157,10 @@ config-dir=&quot;Pfad/zum/neuen/Konfigordner&quot;</pre>
                                  </dd>
                                  <dt id="launch.with.command.line.resource.bundle.">
                                     <span class="term" id="launch.with.command.line.resource.bundle.title">
-                                       <code class="option">--resource-bundle=<span class="emphasis">
-                                             <em>&lt;Pfad&gt;</em>
-                                          </span>
-                                       </code>
+                                       <code class="option">--resource-bundle=</code>
+                                       <strong class="userinput">
+                                          <code>&lt;Pfad&gt;</code>
+                                       </strong>
                                     </span>
                                  </dt>
                                  <dd>
@@ -2106,7 +2168,13 @@ config-dir=&quot;Pfad/zum/neuen/Konfigordner&quot;</pre>
                                  </dd>
                                  <dt id="launch.with.command.line.mode.console.translate.console.pseudotranslatetmx.console.align.">
                                     <span class="term" id="launch.with.command.line.mode.console.translate.console.pseudotranslatetmx.console.align.title">
-                                       <code class="option">--mode=[Konsolenmodusname]</code>
+                                       <code class="option">--mode=[Konsolenmodusname]</code> 
+                                       <strong class="userinput">
+                                          <code>&lt;Projektpfad&gt;</code>
+                                       </strong> 
+                                       <strong class="userinput">
+                                          <code>&lt;Modusoption&gt;</code>
+                                       </strong>
                                     </span>
                                  </dt>
                                  <dd>
@@ -2115,7 +2183,10 @@ config-dir=&quot;Pfad/zum/neuen/Konfigordner&quot;</pre>
                                        <dl class="variablelist">
                                           <dt id="launch.with.command.line.mode.console.translate">
                                              <span class="term" id="launch.with.command.line.mode.console.translate.title">
-                                                <code class="option">--mode=console-translate</code>
+                                                <code class="option">--mode=console-translate</code> 
+                                                <strong class="userinput">
+                                                   <code>&lt;Projektpfad&gt;</code>
+                                                </strong>
                                              </span>
                                           </dt>
                                           <dd>
@@ -2125,7 +2196,10 @@ config-dir=&quot;Pfad/zum/neuen/Konfigordner&quot;</pre>
                                                 <dl class="variablelist">
                                                    <dt id="launch.with.command.line.source.pattern.lt.pattern.gt.">
                                                       <span class="term" id="launch.with.command.line.source.pattern.lt.pattern.gt.title">
-                                                         <code class="option">--source-pattern=&lt;Muster&gt;</code>
+                                                         <code class="option">--source-pattern=</code>
+                                                         <strong class="userinput">
+                                                            <code>&lt;Muster&gt;</code>
+                                                         </strong>
                                                       </span>
                                                    </dt>
                                                    <dd>
@@ -2166,7 +2240,10 @@ config-dir=&quot;Pfad/zum/neuen/Konfigordner&quot;</pre>
                                           </dd>
                                           <dt id="launch.with.command.line.mode.console.pseudotranslatetmx">
                                              <span class="term" id="launch.with.command.line.mode.console.pseudotranslatetmx.title">
-                                                <code class="option">--mode=console-createpseudotranslatetmx</code>
+                                                <code class="option">--mode=console-createpseudotranslatetmx</code> 
+                                                <strong class="userinput">
+                                                   <code>&lt;Projektpfad&gt;</code>
+                                                </strong>
                                              </span>
                                           </dt>
                                           <dd>
@@ -2176,10 +2253,10 @@ config-dir=&quot;Pfad/zum/neuen/Konfigordner&quot;</pre>
                                                 <dl class="variablelist">
                                                    <dt id="launch.with.command.line.pseudotranslatetmx.">
                                                       <span class="term" id="launch.with.command.line.pseudotranslatetmx.title">
-                                                         <code class="option">--pseudotranslatetmx=<span class="emphasis">
-                                                               <em>&lt;Pfad&gt;</em>
-                                                            </span>
-                                                         </code>
+                                                         <code class="option">--pseudotranslatetmx=</code>
+                                                         <strong class="userinput">
+                                                            <code>&lt;Pfad&gt;</code>
+                                                         </strong>
                                                       </span>
                                                    </dt>
                                                    <dd>
@@ -2198,28 +2275,40 @@ config-dir=&quot;Pfad/zum/neuen/Konfigordner&quot;</pre>
                                           </dd>
                                           <dt id="launch.with.command.line.mode.console.align">
                                              <span class="term" id="launch.with.command.line.mode.console.align.title">
-                                                <code class="option">--mode=console-align <span class="emphasis">
-                                                      <em>--alignDir=&lt;Pfad&gt;</em>
-                                                   </span>
-                                                </code>
+                                                <code class="option">--mode=console-align</code> 
+                                                <strong class="userinput">
+                                                   <code>&lt;Projektpfad&gt;</code>
+                                                </strong>
                                              </span>
                                           </dt>
                                           <dd>
-                                             <p>In diesem Modus wird OmegaT die Dateien im Quellordner des Projekts an denen im via <span class="emphasis">
+                                             <p>In diesem Modus wird OmegaT die Dateien im /source-Ordner des Projekts an die Dateien im Speicherort, angegeben durch den Parameter <span class="emphasis">
                                                    <em>--alignDir</em>
-                                                </span> angegebenen Speicherort ausrichten.</p>
-                                             <p>Die daraus resultierende TMX-Datei wird im OmegaT-Ordner als align.tmx gespeichert. Welche Dateitypen ausgerichtet werden können, hängt davon ab, ob die Ausrichtung vom Dateifilter unterstützt wird. Zu den unterstützten Filtern gehören: ILIAS Language File, Java(TM) Resource Bundles, Schlüssel=Wert-Text, Magento CE Locale CSV, MoodlePHP, Mozilla DTD, Mozilla FTL, PO, RC, SubRip Subtitles und Windows Resources.</p>
-                                             <p>Der <span class="emphasis">
-                                                   <em>--alignDir</em>
-                                                </span>-Parameter wird verwendet, um den Speicherort der Daten in der Zielsprache anzugeben, also einen Ordner, der die übersetzten Dateien enthält.</p>
-                                             <p>Der Ordner muss eine Übersetzung in der Zielsprache des Projekts enthalten. Wenn es sich beispielsweise um ein EN-nach-FR-Projekt handelt, muss der Ordner ein Bundle enthalten, das mit _fr endet. Die daraus resultierende TMX-Datei wird im OmegaT-Ordner als align.tmx gespeichert.</p>
+                                                </span> unten, ausrichten.</p>
+                                             <div class="variablelist">
+                                                <dl class="variablelist">
+                                                   <dt>
+                                                      <span class="term">
+                                                         <code class="option">--alignDir=</code>
+                                                         <strong class="userinput">
+                                                            <code>&lt;Projektpfad&gt;</code>
+                                                         </strong>
+                                                      </span>
+                                                   </dt>
+                                                   <dd>
+                                                      <p>Der Pfad mit den Dateien, die in die Zielsprache übersetzt wurden.</p>
+                                                      <p>Der Ordner muss eine Übersetzung in der Zielsprache des Projekts enthalten. Wenn es sich beispielsweise um ein EN-nach-FR-Projekt handelt, muss der angegebene Ordner ein Bundle enthalten, das mit <code class="filename">_fr</code> endet.</p>
+                                                   </dd>
+                                                </dl>
+                                             </div>
+                                             <p>Die resultierende TMX-Datei wird im <code class="filename">omegat/</code>-Ordner unter <code class="filename">align.tmx</code> gespeichert. Welche Dateitypen ausgerichtet werden können, hängt davon ab, ob die Ausrichtung vom Dateifilter unterstützt wird. Zu den unterstützten Filtern gehören: ILIAS Language File, Java(TM) Resource Bundles, Schlüssel=Wert-Text, Magento CE Locale CSV, MoodlePHP, Mozilla DTD, Mozilla FTL, PO, RC, SubRip Subtitles und Windows Resources.</p>
                                           </dd>
                                           <dt id="launch.with.command.line.mode.console.stats">
                                              <span class="term" id="launch.with.command.line.mode.console.stats.title">
-                                                <code class="option">--mode=console-stats <span class="emphasis">
-                                                      <em>&lt;Pfad&gt;</em>
-                                                   </span>
-                                                </code>
+                                                <code class="option">--mode=console-stats</code> 
+                                                <strong class="userinput">
+                                                   <code>&lt;Projektpfad&gt;</code>
+                                                </strong>
                                              </span>
                                           </dt>
                                           <dd>
@@ -2227,7 +2316,10 @@ config-dir=&quot;Pfad/zum/neuen/Konfigordner&quot;</pre>
                                                 <dl class="variablelist">
                                                    <dt id="launch.with.command.line.console.stats.output.file">
                                                       <span class="term" id="launch.with.command.line.console.stats.output.file.title">
-                                                         <code class="option">--output-file=[Stats-Ausgabedatei]</code>
+                                                         <code class="option">--output-file=</code>
+                                                         <strong class="userinput">
+                                                            <code>[Stats-Ausgabedatei]</code>
+                                                         </strong>
                                                       </span>
                                                    </dt>
                                                    <dd>
@@ -2276,10 +2368,10 @@ config-dir=&quot;Pfad/zum/neuen/Konfigordner&quot;</pre>
                                  </dd>
                                  <dt id="launch.with.command.line.script.">
                                     <span class="term" id="launch.with.command.line.script.title">
-                                       <code class="option">--script=<span class="emphasis">
-                                             <em>&lt;Pfad&gt;</em>
-                                          </span>
-                                       </code>
+                                       <code class="option">--script=</code>
+                                       <strong class="userinput">
+                                          <code>&lt;Pfad&gt;</code>
+                                       </strong>
                                     </span>
                                  </dt>
                                  <dd>

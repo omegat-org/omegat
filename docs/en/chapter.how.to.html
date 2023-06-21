@@ -1129,8 +1129,7 @@
                                  <li class="listitem">
                                     <p>Only segments that match the source <span class="bold">
                                           <strong>exactly</strong>
-                                       </span>
-			  displayed.</p>
+                                       </span> are displayed.</p>
                                  </li>
                               </ul>
                            </div>
@@ -1910,7 +1909,7 @@ third line is the current translation to French.</p>
                   </dt>
                   <dd>
                      <p>As in regular local projects, the configuration of the team
-        project is defined by the contents <code class="filename">omegat.project</code>
+        project is defined by the contents of the <code class="filename">omegat.project</code>
         file and the optional use of special files for project-specific
         filters or segmentation rules.</p>
                      <p>The first time the project is downloaded, OmegaT retrieves the
@@ -1966,7 +1965,7 @@ third line is the current translation to French.</p>
                                     </li>
                                     <li class="listitem">
                                        <p>If there is a conflict between the remote and local
-                versions of the <code class="filename">omegat.project</code> and the
+                versions of the <code class="filename">omegat.project</code> file and the
                 local version is overwritten, OmegaT creates a backup file
                 called <code class="filename">omegat.project.YYYYMMDDhhmm.bak</code>.
                 OmegaT creates up to ten backup files, and older backups
@@ -2028,7 +2027,7 @@ third line is the current translation to French.</p>
                   <dd>
                      <p>You can open a team project and work on it offline. All changes
         will be synchronized the next time a connection is available.</p>
-                     <p>There are two ways work offline:</p>
+                     <p>There are two ways to work offline:</p>
                      <div class="itemizedlist">
                         <ul class="itemizedlist" style="list-style-type: disc; ">
                            <li class="listitem">
@@ -2347,7 +2346,7 @@ third line is the current translation to French.</p>
                </div>
                <p>You can launch OmegaT from the command line with a script that
 	includes start-up options. See the <a class="link" href="chapter.how.to.html#launch.with.command.line" title="Command line launch">Command line launch</a> section for details.</p>
-               <p>You can also click on <code class="filename">OmegaT.jar</code> to launch it
+               <p>You can also double-click on <code class="filename">OmegaT.jar</code> to launch it
 	directly if the <code class="filename">.jar</code> extension is associated with the
 	system Java launcher.</p>
                <p>The package also provides the <code class="filename">omegat.kaptn</code> Kaptain
@@ -2383,8 +2382,8 @@ third line is the current translation to French.</p>
 	<code class="filename">Contents/</code> folder.</p>
                <div class="note">
                   <h3 class="title">Note</h3>
-                  <p>To access the files inside the <code class="filename">OmegaT.app</code>,
-	  package right-click on <code class="filename">OmegaT.app</code> and select “Show 
+                  <p>To access the files inside the <code class="filename">OmegaT.app</code>
+	  package, right-click on <code class="filename">OmegaT.app</code> and select “Show 
 	  Package Contents”.</p>
                   <p>It is also possible to use <code class="filename">OmegaT.app</code> itself to
 	  launch OmegaT from the terminal. See the <a class="link" href="chapter.how.to.html#launch.with.command.line.omegat.terminal.command.syntax" title="Command syntax">Command
@@ -2901,7 +2900,7 @@ config-dir=&quot;path/to/new/configdir&quot;</pre>
                                                       </span>
                                                    </dt>
                                                    <dd>
-                                                      <p>A whitelist of regular expressions defining
+                                                      <p>An allowlist of regular expressions defining
 							  the source files to process. Remember that in
 							  regular expressions, the period and backslash
 							  character must be escaped: <code class="code">\.</code> and

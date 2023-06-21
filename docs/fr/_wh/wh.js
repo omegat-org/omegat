@@ -158,28 +158,14 @@ boulet.offset({top: limite2});
 };
 })(jQuery);
 jQuery.extend({
-highlight: function (node, re, hwRE1, hwRE2, nodeName, className) {
+highlight: function (node, re, nodeName, className) {
 if (node.nodeType === 3) {
 var match = node.data.match(re);
 if (match) {
-var matchIndex = match.index;
-var matchLength = match[0].length;
-if (hwRE1 !== null) {
-var text = match.input;
-var matchHead = text.substring(0, matchIndex).match(hwRE1);
-if (matchHead !== null) {
-matchIndex -= matchHead[1].length;
-}
-var matchTail =
-text.substring(matchIndex + matchLength).match(hwRE2);
-if (matchTail !== null) {
-matchLength += matchTail[1].length;
-}
-}
 var highlight = document.createElement(nodeName || 'span');
 highlight.className = className || 'highlight';
-var wordNode = node.splitText(matchIndex);
-wordNode.splitText(matchLength);
+var wordNode = node.splitText(match.index);
+wordNode.splitText(match[0].length);
 var wordClone = wordNode.cloneNode(true);
 highlight.appendChild(wordClone);
 wordNode.parentNode.replaceChild(highlight, wordNode);
@@ -189,7 +175,7 @@ return 1;
 !/^(script|style|text|tspan|textpath)$|(^svg:)/i.test(node.tagName) && 
 !(node.tagName === nodeName.toUpperCase() && node.className === className)) { 
 for (var i = 0; i < node.childNodes.length; i++) {
-i += jQuery.highlight(node.childNodes[i], re, hwRE1, hwRE2, nodeName, className);
+i += jQuery.highlight(node.childNodes[i], re, nodeName, className);
 }
 }
 return 0;
@@ -205,7 +191,7 @@ parent.normalize();
 }).end();
 };
 jQuery.fn.highlight = function (words, options) {
-var settings = { className: 'highlight', element: 'span', caseSensitive: false, wordsOnly: false, highlightWord: false };
+var settings = { className: 'highlight', element: 'span', caseSensitive: false, wordsOnly: false };
 jQuery.extend(settings, options);
 if (words.constructor === String) {
 words = [words];
@@ -223,16 +209,8 @@ if (settings.wordsOnly) {
 pattern = "\\b" + pattern + "\\b";
 }
 var re = new RegExp(pattern, flag);
-var hwRE1 = null;
-var hwRE2 = null;
-if (settings.highlightWord) {
-try {
-hwRE1 = new RegExp("([\\p{L}\\p{N}_-]+)$", "u");
-hwRE2 = new RegExp("^([\\p{L}\\p{N}_-]+)", "u");
-} catch (ignored) {}
-}
 return this.each(function () {
-jQuery.highlight(this, re, hwRE1, hwRE2, settings.element, settings.className);
+jQuery.highlight(this, re, settings.element, settings.className);
 });
 };
 ;(function ($) {
@@ -306,9 +284,6 @@ tabs.addClass("tabs-tabs");
 tabs.children("li").each(function (itemIndex) {
 $(this).addClass("tabs-tab");
 var links = $(this).children("a[href]");
-links.each(function (i) {
-$(this).attr("draggable", "false");
-});
 $(this).add(links).click(function (event) {
 event.preventDefault();
 event.stopImmediatePropagation();
@@ -915,7 +890,7 @@ message = translation[index];
 }
 return message;
 }
-var storageId = "viqlo77wjzr1-1ji9mfj16ogou";
+var storageId = "fcux2tp1a92z-1st886jn79hcz";
 function storageSet(key, value) {
 window.sessionStorage.setItem(key + storageId, String(value));
 }
@@ -1055,7 +1030,6 @@ list.append(item);
 if (href !== null) {
 var link = $("<a></a>");
 link.attr("href", href);
-link.attr("draggable", "false");
 link.html(text);
 item.append(link);
 } else {
@@ -1137,7 +1111,7 @@ clearSearchState();
 }
 function highlightSearchedWords(words) {
 $("#wh-content").highlight(words, 
-{ caseSensitive: false, highlightWord: true,
+{ caseSensitive: false, 
 className: "wh-highlighted" });
 }
 function unhighlightSearchedWords() {
@@ -1296,7 +1270,6 @@ item.addClass("wh-odd-item");
 list.append(item);
 var link = $("<a></a>");
 link.attr("href", wh.search_baseNameList[index]);
-link.attr("draggable", "false");
 link.html(wh.search_titleList[index]);
 item.append(link);
 }

@@ -10,7 +10,7 @@
    
 <body>
     <div id="wh-header">
-    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 5.8.0 - Bedienungsanleitung</a></div></div>
+    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 6.1.0 - Bedienungsanleitung</a></div></div>
 
     <div id="wh-body">
       <div class="wh-icon-menu" id="wh-menu"></div>
@@ -801,7 +801,7 @@
                   </dd>
                   <dt id="windows.source.files.list.download.page">
                      <span class="term" id="windows.source.files.list.download.page.title">
-                        <span class="guibutton">Online-MediaWiki-Seite hinzufügen...</span>
+                        <span class="guibutton">MediaWiki-Seite hinzufügen...</span>
                      </span>
                   </dt>
                   <dd>
@@ -818,7 +818,7 @@
                   <span class="guimenu">Projekt</span>
                </a>
                <a class="link" href="chapter.menus.html#menus.project.download.mediawiki.page">
-                  <span class="guimenuitem">Online-MediaWiki-Seite hinzufügen...</span>
+                  <span class="guimenuitem">MediaWiki-Seite hinzufügen...</span>
                </a> verwenden.</p>
             <div class="note">
                <h3 class="title">Anmerkung</h3>
@@ -1113,13 +1113,13 @@
                         <div class="variablelist">
                            <dl class="variablelist">
                               <dt>
-                                 <span class="term">Speicher</span>
+                                 <span class="term">Haupt-Memory</span>
                               </dt>
                               <dd>
                                  <p>Projekteigenen Translation Memory einbeziehen (<a class="link" href="chapter.project.folder.html#project.folder.project.save.tmx">project_save.tmx</a>).</p>
                               </dd>
                               <dt>
-                                 <span class="term">TMs</span>
+                                 <span class="term">Referenz-TMs</span>
                               </dt>
                               <dd>
                                  <p>Externe Translation Memories im <a class="link" href="chapter.project.folder.html#project.folder.tm" title="tm">tm</a>-Ordner einbeziehen.</p>
@@ -1143,11 +1143,15 @@
                      </dd>
                      <dt>
                         <span class="term">
-                           <span class="guibutton">Erweiterte Optionen anzeigen</span>
+                           <span class="guibutton">TM-Suchoptionen</span>
                         </span>
                      </dt>
                      <dd>
                         <p>Wählen Sie zusätzliche Kriterien aus, wie z. B. die Person, die die Übersetzung erstellt oder geändert hat, das Datum und die Uhrzeit der Übersetzung (Modifikation) oder ob verwaiste Segmente ausgeschlossen werden sollen.</p>
+                        <div class="warning">
+                           <h3 class="title">Warnung</h3>
+                           <p>Die TM-Suchoptionen beziehen sich nur auf den Haupt-Memory, nicht auf die Referenz-Memories.</p>
+                        </div>
                         <div class="variablelist">
                            <dl class="variablelist">
                               <dt>
@@ -1619,10 +1623,10 @@
                   <span class="guimenuitem">Dateien ausrichten...</span>
                </a>, um auf dieses Tool zuzugreifen.</p>
             <p>OmegaT bietet auch einen befehlszeilenbasierten Ausrichtungsmodus für schlüsselbasierte Formate. Siehe die <a class="link" href="chapter.how.to.html#launch.with.command.line.mode.console.align">
-                  <code class="option">--mode=console-align <span class="emphasis">
-                        <em>--alignDir=&lt;Pfad&gt;</em>
-                     </span>
-                  </code>
+                  <code class="option">--mode=console-align</code> 
+                  <strong class="userinput">
+                     <code>&lt;Projektpfad&gt;</code>
+                  </strong>
                </a>-Option für weitere Informationen.</p>
             <div class="warning">
                <h3 class="title">Warnung</h3>
@@ -1770,12 +1774,10 @@
                            </a>-Einstellungen.</p>
                      </dd>
                      <dt>
-                        <span class="term">Tags verstecken</span>
+                        <span class="term">Tags entfernen</span>
                      </dt>
                      <dd>
-                        <p>Der Aligner fügt standardmäßig Tags in die Segmente ein. Entfernen Sie das Häkchen, um die Option <a class="link" href="chapter.windows.and.dialogs.html#dialogs.project.properties.hide.tags">
-                              <code class="option">Tags verstecken</code>
-                           </a> anzuwenden.</p>
+                        <p>Der Aligner fügt standardmäßig Tags in die Segmente ein. Entfernen Sie das Häkchen, um alle Tags beim Ausrichten und in der resultierenden TMX-Datei zu entfernen.</p>
                      </dd>
                      <dt id="windows.aligner.adjust.highlight">
                         <span class="term" id="windows.aligner.adjust.highlight.title">Hervorheben</span>

@@ -9,7 +9,7 @@
    
 <body>
     <div id="wh-header">
-    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 5.8.0 - Manual d'usuari</a></div></div>
+    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 6.1.0 - Manual d'usuari</a></div></div>
 
     <div id="wh-body">
       <div class="wh-icon-menu" id="wh-menu"></div>
@@ -178,7 +178,7 @@
                      </li>
                      <li>
                         <span class="section">
-                           <a href="chapter.appendices.html#post.processing.commands.user.defined.scripts">Scripts definits per l'usuari</a>
+                           <a href="chapter.appendices.html#post.processing.commands.user.defined.scripts">Scripts locals</a>
                         </span>
                      </li>
                      <li>
@@ -452,7 +452,7 @@
                         </dt>
                         <dd>
                            <p>Hora del sistema en crear el fitxer</p>
-                           <p>Consulteu la <a class="ulink" href="https://docs.oracle.com/javase/8/docs/api/java/text/SimpleDateFormat.html" target="_top">Documentació d'Oracle</a> per a veure exemples.</p>
+                           <p>Consulteu la <a class="ulink" href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/text/SimpleDateFormat.html" target="_top">Documentació d'Oracle</a> per a veure exemples.</p>
                         </dd>
                         <dt>
                            <span class="term">${system-os-name}</span>
@@ -687,7 +687,7 @@
                                  <p>L'etiqueta HTML &lt;br&gt; constituirà un salt de paràgraf per a la segmentació.</p>
                               </dd>
                               <dt>
-                                 <span class="term">Paràgrafs ignorats en carregar (expressió regular)</span>
+                                 <span class="term">Paràgrafs ignorats (expressió regular)</span>
                               </dt>
                               <dd>
                                  <p>En carregar el fitxer, qualsevol paràgraf que coincideixi amb l'expressió regular s'ignorarà i no es mostrarà per a la traducció.</p>
@@ -779,10 +779,8 @@
                                  <span class="term">Suprimeix els comentaris HTML</span>
                               </dt>
                               <dd>
-                                 <p>Els comentaris d'un fitxer HTML generalment s'adrecen als desenvolupadors. Utilitzeu aquesta opció per a suprimir-los. If unchecked, the comments are displayed as tags.</p>
-                                 <p>Text in HTML comments (between <code class="literal">&lt;!--</code>
-				and <code class="literal">--&gt;</code>) are not copied into the
-				translated document.</p>
+                                 <p>Els comentaris d'un fitxer HTML generalment s'adrecen als desenvolupadors. Utilitzeu aquesta opció per a suprimir-los. Si no la marqueu, els comentaris es mostren com a etiquetes.</p>
+                                 <p>El text en els comentaris HTML (entre <code class="literal">&lt;!--</code> i <code class="literal">--&gt;</code>) no es copia al fitxer traduït.</p>
                               </dd>
                            </dl>
                         </div>
@@ -797,8 +795,7 @@
                                  <span class="term">Suprimeix les cadenes sense traduir en els fitxers de destinació</span>
                               </dt>
                               <dd>
-                                 <p>Having untranslated contents in the translated files
-				sometimes creates compatibility issues.</p>
+                                 <p>Deixar contingut sense traduir en els fitxers traduïts de vegades crea problemes de compatibilitat.</p>
                               </dd>
                            </dl>
                         </div>
@@ -813,8 +810,7 @@
                                  <span class="term">Suprimeix les cadenes sense traduir en els fitxers de destinació</span>
                               </dt>
                               <dd>
-                                 <p>Having untranslated contents in the translated files
-				  sometimes creates compatibility issues.</p>
+                                 <p>Deixar contingut sense traduir en els fitxers traduïts de vegades crea problemes de compatibilitat.</p>
                               </dd>
                            </dl>
                         </div>
@@ -967,7 +963,7 @@
                                  <span class="term">Dreceres d'etiquetes</span>
                               </dt>
                               <dd>
-                                 <p>Aquesta opció especifica la manera en què l'OmegaT crea les etiquetes a partir del contingut del fitxer XLIFF.</p>
+                                 <p>Aquestes opcions especifiquen la manera en què l'OmegaT crea les etiquetes a partir del contingut del fitxer XLIFF.</p>
                               </dd>
                               <dt>
                                  <span class="term">Estat del segment de destinació</span>
@@ -1002,9 +998,9 @@
                   </div>
                </div>
                <p>Les eines de traducció assistida per ordinador funcionen amb unitats textuals anomenades segments. Quan s'introdueix una traducció, el segment que conté el text d'origen s'emmagatzema en la memòria del projecte, juntament amb la traducció i, posteriorment, s'utilitza per a les coincidències amb altres segments d'origen del projecte.</p>
-               <p>Utilitzeu la propietat del projecte <a class="link" href="chapter.windows.and.dialogs.html#dialogs.project.properties.options.segmentation">
+               <p>Per a especificar el tipus de segmentació, utilitzeu la propietat del projecte <a class="link" href="chapter.windows.and.dialogs.html#dialogs.project.properties.options.segmentation">
                      <code class="option">Habilita la segmentació per frases</code>
-                  </a> per a seleccionar el tipus de segmentació.</p>
+                  </a>.</p>
                <p>Per defecte, els segments són <span class="bold">
                      <strong>paràgrafs</strong>
                   </span> definits pel format del fitxer.</p>
@@ -1194,7 +1190,7 @@
                      <span class="term">Cerques</span>
                   </dt>
                   <dd>
-                     <p>Les cerques de l'OmegaT inclouen una opció <a class="link" href="chapter.windows.and.dialogs.html#windows.text.search.methods.regex">Expressions regulars</a> que permet fer cerques molt potents en els vostres fitxers.</p>
+                     <p>Les cerques inclouen una opció <a class="link" href="chapter.windows.and.dialogs.html#windows.text.search.methods.regex">Expressions regulars</a> que permet fer cerques molt potents en els vostres fitxers.</p>
                      <p>La mateixa opció del quadre diàleg <a class="link" href="chapter.windows.and.dialogs.html#windows.text.replace" title="Substitució de text">
                            <span class="guilabel">Substitució de text</span>
                         </a> permet aplicar expressions regulars tant a la cerca com al text substituït.</p>
@@ -1279,7 +1275,7 @@
                            </span>».</p>
                      </dd>
                      <dt>
-                        <span class="term">Les lletres de l'alfabet precedides per una barra inclinada inversa (<code class="literal">\</code>) prenen un significat especial</span>
+                        <span class="term">Els dígits i les lletres de l'alfabet precedits per una barra inclinada inversa (<code class="literal">\</code>) prenen un significat especial</span>
                      </dt>
                      <dd>
                         <p>A diferència d'una lletra sola, que simplement es representa a ella mateixa com s'ha indicat anteriorment, una lletra precedida per <code class="literal">\</code> té una funció especial en una expressió regular.</p>
@@ -2675,7 +2671,7 @@
                   <dl class="variablelist">
                      <dt id="app.regex.java">
                         <span class="term" id="app.regex.java.title">
-                           <a class="ulink" href="https://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html" target="_top">Documentació d'expressions regulars del Java</a>
+                           <a class="ulink" href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/regex/Pattern.html" target="_top">Documentació d'expressions regulars del Java</a>
                         </span>
                      </dt>
                      <dd>
@@ -2832,9 +2828,7 @@
                   </div>
                </div>
                <p>Els fitxers de glossari de l'OmegaT són fitxers de text sense format que contenen llistes de tres columnes; el terme d'origen en la primera columna, un terme de destinació opcional en la segona columna i un comentari opcional en la tercera columna.</p>
-               <p>Glossaries can be “tab-separated values” (TSV) or “comma-separated
-    values” (CSV) files or can also use the TermBase eXchange (TBX 2)
-    format.</p>
+               <p>Els glossaris poden ser fitxers de «valors separats per tabulacions» (TSV) o «valors separats per comes» (CSV), o bé poden utilitzar el format TermBase eXchange (TBX 2).</p>
                <p>El glossari modificable creat per al projecte per l'OmegaT serà un fitxer TSV desat en UTF-8. Els fitxers creats per l'usuari que només utilitzen caràcters llatins es poden reconèixer i tractar com a ISO-8859-1 si no contenen caràcters no ASCII ni altres caràcters interpretats com a UTF-8.</p>
                <p>La codificació utilitzada per a llegir els glossaris de referència depèn de l'extensió del fitxer:</p>
                <div class="table" id="glossary.extensions">
@@ -3099,7 +3093,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title">Scripts definits per l'usuari</h3>
+                        <h3 class="title">Scripts locals</h3>
                      </div>
                   </div>
                </div>
@@ -3304,15 +3298,15 @@
                      </div>
                   </div>
                </div>
-               <p>OmegaT assigns shortcuts to most of the functions available in the <a class="link" href="chapter.menus.html#menus.project" title="Projecte">
+               <p>L'OmegaT assigna dreceres a la majoria de les funcions disponibles en els menús <a class="link" href="chapter.menus.html#menus.project" title="Projecte">
                      <span class="guimenu">Projecte</span>
                   </a>, <a class="link" href="chapter.menus.html#menus.edit" title="Edita">
                      <span class="guimenu">Edita</span>
-                  </a>, and <a class="link" href="chapter.menus.html#menus.goto" title="Ves a">
+                  </a> i <a class="link" href="chapter.menus.html#menus.goto" title="Ves a">
                      <span class="guimenu">Ves a</span>
-                  </a> menus and to a number of functions in the <a class="link" href="chapter.panes.html#panes.editor" title="Editor">
+                  </a> i a diverses funcions de la subfinestra <a class="link" href="chapter.panes.html#panes.editor" title="Editor">
                      <span class="guilabel">Editor</span>
-                  </a> pane. També podeu afegir o modificar les dreceres per a la majoria de funcions.</p>
+                  </a>. També podeu afegir o modificar les dreceres per a la majoria de funcions.</p>
                <p>Per a fer-ho, cal posar el fitxer de definició de dreceres corresponent en la carpeta de configuració de l'OmegaT. Consulteu l'annex <a class="link" href="chapter.appendices.html#configuration.folder" title="Carpeta de configuració">Carpeta de configuració</a> per a conèixer més detalls.</p>
                <p>Hi ha dos fitxers de definició de dreceres.</p>
                <div class="variablelist">
@@ -3578,18 +3572,6 @@
                                  <td class="auto-generated" style="border-bottom: 1px solid ; "> </td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Afegeix fitxers...</td>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">projectImportMenuItem</td>
-                                 <td class="auto-generated" style="border-right: 1px solid ; border-bottom: 1px solid ; "> </td>
-                                 <td class="auto-generated" style="border-bottom: 1px solid ; "> </td>
-                              </tr>
-                              <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Baixa una pàgina del MediaWiki...</td>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">projectWikiImportMenuItem</td>
-                                 <td class="auto-generated" style="border-right: 1px solid ; border-bottom: 1px solid ; "> </td>
-                                 <td class="auto-generated" style="border-bottom: 1px solid ; "> </td>
-                              </tr>
-                              <tr>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Torna a carregar</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">projectReloadMenuItem</td>
                                  <td colspan="2" style="text-align: center; border-bottom: 1px solid ; ">F5</td>
@@ -3605,6 +3587,18 @@
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">projectSaveMenuItem</td>
                                  <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">ctrl S</td>
                                  <td style="text-align: center; border-bottom: 1px solid ; ">meta S</td>
+                              </tr>
+                              <tr>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Afegeix fitxers...</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">projectImportMenuItem</td>
+                                 <td class="auto-generated" style="border-right: 1px solid ; border-bottom: 1px solid ; "> </td>
+                                 <td class="auto-generated" style="border-bottom: 1px solid ; "> </td>
+                              </tr>
+                              <tr>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Baixa una pàgina del MediaWiki...</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">projectWikiImportMenuItem</td>
+                                 <td class="auto-generated" style="border-right: 1px solid ; border-bottom: 1px solid ; "> </td>
+                                 <td class="auto-generated" style="border-bottom: 1px solid ; "> </td>
                               </tr>
                               <tr>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Publica els fitxers d'origen</td>
@@ -3629,6 +3623,18 @@
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">projectSingleCompileMenuItem</td>
                                  <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">ctrl shift D</td>
                                  <td style="text-align: center; border-bottom: 1px solid ; ">meta shift D</td>
+                              </tr>
+                              <tr>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Obre un projecte MED...</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">projectMedOpenMenuItem</td>
+                                 <td class="auto-generated" style="border-right: 1px solid ; border-bottom: 1px solid ; "> </td>
+                                 <td class="auto-generated" style="border-bottom: 1px solid ; "> </td>
+                              </tr>
+                              <tr>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Crea un projecte MED</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">projectMedCreateMenuItem</td>
+                                 <td class="auto-generated" style="border-right: 1px solid ; border-bottom: 1px solid ; "> </td>
+                                 <td class="auto-generated" style="border-bottom: 1px solid ; "> </td>
                               </tr>
                               <tr>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Propietats…</td>
@@ -3739,13 +3745,13 @@
                            </thead>
                            <tbody>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Desfés la darrera acció</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Desfés</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">editUndoMenuItem</td>
                                  <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">ctrl Z</td>
                                  <td style="text-align: center; border-bottom: 1px solid ; ">meta Z</td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Refés la darrera acció</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Refés</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">editRedoMenuItem</td>
                                  <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">ctrl Y</td>
                                  <td style="text-align: center; border-bottom: 1px solid ; ">meta Y</td>
@@ -3761,12 +3767,6 @@
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">editInsertTranslationMenuItem</td>
                                  <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">ctrl I</td>
                                  <td style="text-align: center; border-bottom: 1px solid ; ">meta I</td>
-                              </tr>
-                              <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Substitueix per la traducció automàtica</td>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">editOverwriteMachineTranslationMenuItem</td>
-                                 <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">ctrl M</td>
-                                 <td style="text-align: center; border-bottom: 1px solid ; ">meta M</td>
                               </tr>
                               <tr>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Substitueix pel text d'origen</td>
@@ -3787,7 +3787,13 @@
                                  <td style="text-align: center; border-bottom: 1px solid ; ">meta shift A</td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Insereix les etiquetes que falten del text d'origen</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Substitueix per la traducció automàtica</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">editOverwriteMachineTranslationMenuItem</td>
+                                 <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">ctrl M</td>
+                                 <td style="text-align: center; border-bottom: 1px solid ; ">meta M</td>
+                              </tr>
+                              <tr>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Insereix les etiquetes que falten</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">editTagPainterMenuItem</td>
                                  <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">ctrl shift T</td>
                                  <td style="text-align: center; border-bottom: 1px solid ; ">meta shift T</td>
@@ -3811,7 +3817,7 @@
                                  <td style="text-align: center; border-bottom: 1px solid ; ">meta shift G</td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Cerca en el projecte...</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Cerca...</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">editFindInProjectMenuItem</td>
                                  <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">ctrl F</td>
                                  <td style="text-align: center; border-bottom: 1px solid ; ">meta F</td>
@@ -3823,7 +3829,7 @@
                                  <td style="text-align: center; border-bottom: 1px solid ; ">meta shift F</td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Cerca i substitueix...</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Substitueix...</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">editReplaceInProjectMenuItem</td>
                                  <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">ctrl K</td>
                                  <td style="text-align: center; border-bottom: 1px solid ; ">meta K</td>
@@ -3834,19 +3840,19 @@
                                  <td colspan="2" style="text-align: center; border-bottom: 1px solid ; ">alt shift D</td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Canvia les majúscules i minúscules a/Minúscules</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Canvia les majúscules i minúscules a/minúscules</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">lowerCaseMenuItem</td>
                                  <td class="auto-generated" style="border-right: 1px solid ; border-bottom: 1px solid ; "> </td>
                                  <td class="auto-generated" style="border-bottom: 1px solid ; "> </td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Canvia les majúscules i minúscules a/Majúscules</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Canvia les majúscules i minúscules a/MAJÚSCULES</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">upperCaseMenuItem</td>
                                  <td class="auto-generated" style="border-right: 1px solid ; border-bottom: 1px solid ; "> </td>
                                  <td class="auto-generated" style="border-bottom: 1px solid ; "> </td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Canvia les majúscules i minúscules a/Cada paraula en majúscula inicial</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Canvia les majúscules i minúscules a/Cada Paraula En Majúscula Inicial</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">titleCaseMenuItem</td>
                                  <td class="auto-generated" style="border-right: 1px solid ; border-bottom: 1px solid ; "> </td>
                                  <td class="auto-generated" style="border-bottom: 1px solid ; "> </td>
@@ -3863,43 +3869,43 @@
                                  <td colspan="2" style="text-align: center; border-bottom: 1px solid ; ">shift F3</td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Selecciona la coincidència anterior</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Selecciona la coincidència/Selecciona la coincidència anterior</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">editSelectFuzzyPrevMenuItem</td>
                                  <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">ctrl UP</td>
                                  <td style="text-align: center; border-bottom: 1px solid ; ">meta UP</td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Selecciona la coincidència següent</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Selecciona la coincidència/Selecciona la coincidència següent</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">editSelectFuzzyNextMenuItem</td>
                                  <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">ctrl DOWN</td>
                                  <td style="text-align: center; border-bottom: 1px solid ; ">meta DOWN</td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Selecciona la coincidència núm. 1</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Selecciona la coincidència/Selecciona la coincidència núm. 1</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">editSelectFuzzy1MenuItem</td>
                                  <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">ctrl 1</td>
                                  <td style="text-align: center; border-bottom: 1px solid ; ">meta 1</td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Selecciona la coincidència núm. 2</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Selecciona la coincidència/Selecciona la coincidència núm. 2</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">editSelectFuzzy2MenuItem</td>
                                  <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">ctrl 2</td>
                                  <td style="text-align: center; border-bottom: 1px solid ; ">meta 2</td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Selecciona la coincidència núm. 3</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Selecciona la coincidència/Selecciona la coincidència núm. 3</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">editSelectFuzzy3MenuItem</td>
                                  <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">ctrl 3</td>
                                  <td style="text-align: center; border-bottom: 1px solid ; ">meta 3</td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Selecciona la coincidència núm. 4</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Selecciona la coincidència/Selecciona la coincidència núm. 4</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">editSelectFuzzy4MenuItem</td>
                                  <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">ctrl 4</td>
                                  <td style="text-align: center; border-bottom: 1px solid ; ">meta 4</td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Selecciona la coincidència núm. 5</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Selecciona la coincidència/Selecciona la coincidència núm. 5</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">editSelectFuzzy5MenuItem</td>
                                  <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">ctrl 5</td>
                                  <td style="text-align: center; border-bottom: 1px solid ; ">meta 5</td>
@@ -3970,7 +3976,7 @@
                   </div>
                   <br class="table-break" />
                   <div class="table" id="app.shortcuts.lists.function.codes.goto.menu.table">
-                     <div class="table-title">Taula 16. Menú Ves a</div>
+                     <div class="table-title">Taula 16. Ves al menú</div>
                      <div class="table-contents">
                         <table style="border-collapse: collapse; border-top: 1px solid ; border-bottom: 1px solid ; border-left: 1px solid ; border-right: 1px solid ; ">
                            <colgroup>
@@ -4043,34 +4049,28 @@
                                  <td style="text-align: center; border-bottom: 1px solid ; ">meta shift M</td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Segment de tm/auto/ següent</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Segments emplenats automàticament/Segment de tm/auto/ següent</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">gotoNextXAutoMenuItem</td>
                                  <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">ctrl alt COMMA</td>
                                  <td style="text-align: center; border-bottom: 1px solid ; ">meta alt COMMA</td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Segment de tm/auto/ anterior</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Segments emplenats automàticament/Segment de tm/auto/ anterior</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">gotoPrevXAutoMenuItem</td>
                                  <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">ctrl alt shift COMMA</td>
                                  <td style="text-align: center; border-bottom: 1px solid ; ">meta alt shift COMMA</td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Segment de tm/enforce/ següent</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Segments emplenats automàticament/Segment de tm/enforce/ següent</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">gotoNextXEnforcedMenuItem</td>
                                  <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">ctrl alt PERIOD</td>
                                  <td style="text-align: center; border-bottom: 1px solid ; ">meta alt PERIOD</td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Segment de tm/enforce/ anterior</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Segments emplenats automàticament/Segment de tm/enforce/ anterior</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">gotoPrevXEnforcedMenuItem</td>
                                  <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">ctrl alt shift PERIOD</td>
                                  <td style="text-align: center; border-bottom: 1px solid ; ">meta alt shift PERIOD</td>
-                              </tr>
-                              <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Endavant en l'historial</td>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">gotoHistoryForwardMenuItem</td>
-                                 <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">ctrl shift N</td>
-                                 <td style="text-align: center; border-bottom: 1px solid ; ">meta shift N</td>
                               </tr>
                               <tr>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Enrere en l'historial</td>
@@ -4079,13 +4079,19 @@
                                  <td style="text-align: center; border-bottom: 1px solid ; ">meta shift P</td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Subfinestra «Notes»</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Endavant en l'historial</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">gotoHistoryForwardMenuItem</td>
+                                 <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">ctrl shift N</td>
+                                 <td style="text-align: center; border-bottom: 1px solid ; ">meta shift N</td>
+                              </tr>
+                              <tr>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Bloc de notes</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">gotoNotesPanelMenuItem</td>
                                  <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">ctrl alt 9</td>
                                  <td style="text-align: center; border-bottom: 1px solid ; ">meta alt 9</td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; ">Subfinestra «Editor»</td>
+                                 <td style="text-align: left; border-right: 1px solid ; ">Editor</td>
                                  <td style="text-align: left; border-right: 1px solid ; ">gotoEditorPanelMenuItem</td>
                                  <td style="text-align: center; border-right: 1px solid ; ">ctrl alt 0</td>
                                  <td style="text-align: center; ">meta alt 0</td>
@@ -4115,19 +4121,19 @@
                            </thead>
                            <tbody>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Marca els segments traduïts</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Ressalta els segments traduïts</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">viewMarkTranslatedSegmentsCheckBoxMenuItem</td>
                                  <td class="auto-generated" style="border-right: 1px solid ; border-bottom: 1px solid ; "> </td>
                                  <td class="auto-generated" style="border-bottom: 1px solid ; "> </td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Marca els segments sense traduir</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Ressalta els segments sense traduir</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">viewMarkUntranslatedSegmentsCheckBoxMenuItem</td>
                                  <td class="auto-generated" style="border-right: 1px solid ; border-bottom: 1px solid ; "> </td>
                                  <td class="auto-generated" style="border-bottom: 1px solid ; "> </td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Marca els límits dels paràgrafs</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Mostra els límits dels paràgrafs</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">viewMarkParagraphStartCheckBoxMenuItem</td>
                                  <td class="auto-generated" style="border-right: 1px solid ; border-bottom: 1px solid ; "> </td>
                                  <td class="auto-generated" style="border-bottom: 1px solid ; "> </td>
@@ -4139,37 +4145,37 @@
                                  <td class="auto-generated" style="border-bottom: 1px solid ; "> </td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Marca els segments repetits</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Ressalta els segments repetits</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">viewMarkNonUniqueSegmentsCheckBoxMenuItem</td>
                                  <td class="auto-generated" style="border-right: 1px solid ; border-bottom: 1px solid ; "> </td>
                                  <td class="auto-generated" style="border-bottom: 1px solid ; "> </td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Marca els segments amb notes</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Ressalta els segments amb notes</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">viewMarkNotedSegmentsCheckBoxMenuItem</td>
                                  <td class="auto-generated" style="border-right: 1px solid ; border-bottom: 1px solid ; "> </td>
                                  <td class="auto-generated" style="border-bottom: 1px solid ; "> </td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Marca els espais no separables</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Mostra els espais no separables</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">viewMarkNBSPCheckBoxMenuItem</td>
                                  <td class="auto-generated" style="border-right: 1px solid ; border-bottom: 1px solid ; "> </td>
                                  <td class="auto-generated" style="border-bottom: 1px solid ; "> </td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Marca els espais en blanc</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Mostra els espais en blanc</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">viewMarkWhitespaceCheckBoxMenuItem</td>
                                  <td class="auto-generated" style="border-right: 1px solid ; border-bottom: 1px solid ; "> </td>
                                  <td class="auto-generated" style="border-bottom: 1px solid ; "> </td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Marca els caràcters de control d'algorisme bidireccional</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Mostra els caràcters de control bidireccional</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">viewMarkBidiCheckBoxMenuItem</td>
                                  <td class="auto-generated" style="border-right: 1px solid ; border-bottom: 1px solid ; "> </td>
                                  <td class="auto-generated" style="border-bottom: 1px solid ; "> </td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Marca els segments propagats automàticament</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Ressalta els segments propagats automàticament</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">viewMarkAutoPopulatedCheckBoxMenuItem</td>
                                  <td class="auto-generated" style="border-right: 1px solid ; border-bottom: 1px solid ; "> </td>
                                  <td class="auto-generated" style="border-bottom: 1px solid ; "> </td>
@@ -4181,32 +4187,38 @@
                                  <td class="auto-generated" style="border-bottom: 1px solid ; "> </td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Corrector lingüístic</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Marca els errors del corrector lingüístic</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">viewMarkLanguageCheckerCheckBoxMenuItem</td>
                                  <td class="auto-generated" style="border-right: 1px solid ; border-bottom: 1px solid ; "> </td>
                                  <td class="auto-generated" style="border-bottom: 1px solid ; "> </td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Substitució de font forçada</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Utilitza la substitució de font forçada</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">viewMarkFontFallbackCheckBoxMenuItem</td>
                                  <td class="auto-generated" style="border-right: 1px solid ; border-bottom: 1px solid ; "> </td>
                                  <td class="auto-generated" style="border-bottom: 1px solid ; "> </td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Informació de modificació/No la mostris</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Mostra la informació de modificació/Cap</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">viewDisplayModificationInfoNoneRadioButtonMenuItem</td>
                                  <td class="auto-generated" style="border-right: 1px solid ; border-bottom: 1px solid ; "> </td>
                                  <td class="auto-generated" style="border-bottom: 1px solid ; "> </td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Informació de modificació/Mostra-la per al segment actual</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Mostra la informació de modificació/Segment actual</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">viewDisplayModificationInfoSelectedRadioButtonMenuItem</td>
                                  <td class="auto-generated" style="border-right: 1px solid ; border-bottom: 1px solid ; "> </td>
                                  <td class="auto-generated" style="border-bottom: 1px solid ; "> </td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; ">Informació de modificació/Mostra-la per a tots els segments</td>
-                                 <td style="text-align: left; border-right: 1px solid ; ">viewDisplayModificationInfoAllRadioButtonMenuItem</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Mostra la informació de modificació/Tots els segments</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">viewDisplayModificationInfoAllRadioButtonMenuItem</td>
+                                 <td class="auto-generated" style="border-right: 1px solid ; border-bottom: 1px solid ; "> </td>
+                                 <td class="auto-generated" style="border-bottom: 1px solid ; "> </td>
+                              </tr>
+                              <tr>
+                                 <td style="text-align: left; border-right: 1px solid ; ">Reinicialitza la finestra de l'OmegaT</td>
+                                 <td style="text-align: left; border-right: 1px solid ; ">viewRestoreGUIMenuItem</td>
                                  <td class="auto-generated" style="border-right: 1px solid ; "> </td>
                                  <td class="auto-generated"> </td>
                               </tr>
@@ -4241,7 +4253,7 @@
                                  <td style="text-align: center; border-bottom: 1px solid ; ">meta shift V</td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Comprova si hi ha errors en el document actual</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Comprova si hi ha errors en el fitxer actual</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">toolsCheckIssuesCurrentFileMenuItem</td>
                                  <td class="auto-generated" style="border-right: 1px solid ; border-bottom: 1px solid ; "> </td>
                                  <td class="auto-generated" style="border-bottom: 1px solid ; "> </td>
@@ -4316,13 +4328,13 @@
                                  <td class="auto-generated" style="border-bottom: 1px solid ; "> </td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Glossari/Utilitza les coincidències parcials per a les entrades del glossari</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Glossaris/Utilitza les coincidències parcials</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">optionsGlossaryFuzzyMatchingCheckBoxMenuItem</td>
                                  <td class="auto-generated" style="border-right: 1px solid ; border-bottom: 1px solid ; "> </td>
                                  <td class="auto-generated" style="border-bottom: 1px solid ; "> </td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Diccionari/Utilitza les coincidències parcials per a les entrades del diccionari</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Diccionaris/Utilitza les coincidències parcials</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">optionsDictionaryFuzzyMatchingCheckBoxMenuItem</td>
                                  <td class="auto-generated" style="border-right: 1px solid ; border-bottom: 1px solid ; "> </td>
                                  <td class="auto-generated" style="border-bottom: 1px solid ; "> </td>
@@ -4346,13 +4358,13 @@
                                  <td class="auto-generated" style="border-bottom: 1px solid ; "> </td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Filtres de fitxers...</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Filtres de fitxers globals...</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">optionsSetupFileFiltersMenuItem</td>
                                  <td class="auto-generated" style="border-right: 1px solid ; border-bottom: 1px solid ; "> </td>
                                  <td class="auto-generated" style="border-bottom: 1px solid ; "> </td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Segmentació...</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Regles de segmentació globals...</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">optionsSentsegMenuItem</td>
                                  <td class="auto-generated" style="border-right: 1px solid ; border-bottom: 1px solid ; "> </td>
                                  <td class="auto-generated" style="border-bottom: 1px solid ; "> </td>
@@ -4364,7 +4376,7 @@
                                  <td class="auto-generated" style="border-bottom: 1px solid ; "> </td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; ">Obre la carpeta de configuració</td>
+                                 <td style="text-align: left; border-right: 1px solid ; ">Obre la carpeta de configuració...</td>
                                  <td style="text-align: left; border-right: 1px solid ; ">optionsAccessConfigDirMenuItem</td>
                                  <td class="auto-generated" style="border-right: 1px solid ; "> </td>
                                  <td class="auto-generated"> </td>
@@ -4558,7 +4570,7 @@
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Omet la paraula anterior</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">editorSkipPrevToken</td>
                                  <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">ctrl LEFT</td>
-                                 <td style="text-align: center; border-bottom: 1px solid ; ">alt RIGHT</td>
+                                 <td style="text-align: center; border-bottom: 1px solid ; ">alt LEFT</td>
                               </tr>
                               <tr>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Omet la paraula següent amb selecció</td>
@@ -4847,9 +4859,9 @@
                                        <span class="keycap">
                                           <strong>C</strong>
                                        </span>+<span class="keycap">
-                                          <strong>C</strong>
-                                       </span>+<span class="keycap">
                                           <strong>S</strong>
+                                       </span>+<span class="keycap">
+                                          <strong>C</strong>
                                        </span>
 	  
                                     </a>. El text del fitxer se substitueix cada vegada que es crida aquesta funció.</p>

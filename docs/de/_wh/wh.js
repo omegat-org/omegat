@@ -595,8 +595,8 @@ var toc_entries = [
 ["\n                              Updates\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.updates",null]
 ]],
 ["Projektordner","chapter.project.folder.html",[
-["Standardstruktur","chapter.project.folder.html#d0e10406",null],
-["Mindestinhalt","chapter.project.folder.html#d0e10484",null],
+["Standardstruktur","chapter.project.folder.html#d0e10504",null],
+["Mindestinhalt","chapter.project.folder.html#d0e10582",null],
 ["source","chapter.project.folder.html#project.folder.source",null],
 ["target","chapter.project.folder.html#project.folder.target",null],
 ["tm","chapter.project.folder.html#project.folder.tm",null],
@@ -890,7 +890,7 @@ message = translation[index];
 }
 return message;
 }
-var storageId = "-lcsdt0z3jvyv-1mc3787ilzcka";
+var storageId = "-e7mij6lnlz8p-1lz0kxu9ycdfk";
 function storageSet(key, value) {
 window.sessionStorage.setItem(key + storageId, String(value));
 }

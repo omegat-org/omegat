@@ -9,7 +9,7 @@
    
 <body>
     <div id="wh-header">
-    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 5.8.0 - Bedienungsanleitung</a></div></div>
+    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 6.1.0 - Bedienungsanleitung</a></div></div>
 
     <div id="wh-body">
       <div class="wh-icon-menu" id="wh-menu"></div>
@@ -178,7 +178,7 @@
                      </li>
                      <li>
                         <span class="section">
-                           <a href="chapter.appendices.html#post.processing.commands.user.defined.scripts">Benutzerdefinierte Skripte</a>
+                           <a href="chapter.appendices.html#post.processing.commands.user.defined.scripts">Lokale Skripte</a>
                         </span>
                      </li>
                      <li>
@@ -452,7 +452,7 @@
                         </dt>
                         <dd>
                            <p>Systemzeit, als die Datei erstellt wurde</p>
-                           <p>Beispiele dafür finden Sie in der <a class="ulink" href="https://docs.oracle.com/javase/8/docs/api/java/text/SimpleDateFormat.html" target="_top">Oracle-Dokumentation</a>.</p>
+                           <p>Beispiele dafür finden Sie in der <a class="ulink" href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/text/SimpleDateFormat.html" target="_top">Oracle-Dokumentation</a>.</p>
                         </dd>
                         <dt>
                            <span class="term">${system-os-name}</span>
@@ -685,7 +685,7 @@
                                  <p>Das HTML-Tag &lt;br&gt; wird als Absatzumbruch für die Segmentierung verwendet.</p>
                               </dd>
                               <dt>
-                                 <span class="term">Ignorierte Absätze beim Laden (regulärer Ausdruck)</span>
+                                 <span class="term">Ignorierte Absätze (regulärer Ausdruck)</span>
                               </dt>
                               <dd>
                                  <p>Beim Laden werden alle Absätze, die dem regulären Ausdruck entsprechen, ignoriert und nicht zum Übersetzen angeboten.</p>
@@ -959,7 +959,7 @@
                                  <span class="term">Tag-Kürzel</span>
                               </dt>
                               <dd>
-                                 <p>Diese Option bestimmt, wie OmegaT die Tags aus den XLIFF-Inhalten erzeugt.</p>
+                                 <p>Diese Optionen bestimmen, wie OmegaT die Tags aus den XLIFF-Inhalten erzeugt.</p>
                               </dd>
                               <dt>
                                  <span class="term">Zieltextstatus</span>
@@ -994,9 +994,9 @@
                   </div>
                </div>
                <p>Translation-Memory-Tools arbeiten mit Texteinheiten, die als Segmente bezeichnet werden. Nachdem eine Übersetzung eingegeben wurde, wird das Segment, das den Quelltext enthält, zusammen mit seiner Übersetzung in den Translation Memory des Projekts gespeichert und anschließend mit anderen Quelltexten im Projekt abgeglichen.</p>
-               <p>Verwenden Sie die Projekteigenschaft <a class="link" href="chapter.windows.and.dialogs.html#dialogs.project.properties.options.segmentation">
+               <p>Um die Art der Segmentierung anzugeben, verwenden Sie die Projekteigenschaft <a class="link" href="chapter.windows.and.dialogs.html#dialogs.project.properties.options.segmentation">
                      <code class="option">Segmentierung auf Satzebene</code>
-                  </a>, um die Art der Segmentierung auszuwählen.</p>
+                  </a>.</p>
                <p>Segmente sind standardmäßig <span class="bold">
                      <strong>Absätze</strong>
                   </span>, die vom Dateiformat selbst vorgegeben werden.</p>
@@ -1188,7 +1188,7 @@
                      <span class="term">Suche</span>
                   </dt>
                   <dd>
-                     <p>Die Suche in OmegaT bietet die Option <a class="link" href="chapter.windows.and.dialogs.html#windows.text.search.methods.regex">Reguläre Ausdrücke</a>, mit der Sie Ihre Dateien mit hoher Effizienz durchsuchen können.</p>
+                     <p>Die Suche bietet die Option <a class="link" href="chapter.windows.and.dialogs.html#windows.text.search.methods.regex">Reguläre Ausdrücke</a>, mit der Sie Ihre Dateien mit hoher Effizienz durchsuchen können.</p>
                      <p>Das Dialogfenster <a class="link" href="chapter.windows.and.dialogs.html#windows.text.replace" title="Textersetzung">
                            <span class="guilabel">Textersetzung</span>
                         </a> besitzt dieselbe Option, mit der Sie reguläre Ausdrücke sowohl auf den gesuchten als auch auf den ersetzten Text anwenden können.</p>
@@ -1273,7 +1273,7 @@
                            </span>&quot; gesucht.</p>
                      </dd>
                      <dt>
-                        <span class="term">Buchstaben mit einem umgekehrten Schrägstrich (<code class="literal">\</code>) davor haben eine besondere Bedeutung</span>
+                        <span class="term">Ziffern und Buchstaben mit einem umgekehrten Schrägstrich (<code class="literal">\</code>) davor haben eine besondere Bedeutung</span>
                      </dt>
                      <dd>
                         <p>Im Gegensatz zu einem einzelnen Buchstaben, der wie oben erwähnt einfach nur sich selbst repräsentiert, hat ein Buchstabe, dem ein <code class="literal">\</code> vorangestellt ist, eine spezielle Funktion in einem regulären Ausdruck.</p>
@@ -2677,7 +2677,7 @@
                   <dl class="variablelist">
                      <dt id="app.regex.java">
                         <span class="term" id="app.regex.java.title">
-                           <a class="ulink" href="https://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html" target="_top">Java-Regex-Dokumentation</a>
+                           <a class="ulink" href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/regex/Pattern.html" target="_top">Java-Regex-Dokumentation</a>
                         </span>
                      </dt>
                      <dd>
@@ -3099,7 +3099,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title">Benutzerdefinierte Skripte</h3>
+                        <h3 class="title">Lokale Skripte</h3>
                      </div>
                   </div>
                </div>
@@ -3579,18 +3579,6 @@
                                  <td class="auto-generated" style="border-bottom: 1px solid ; "> </td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Dateien hinzufügen...</td>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">projectImportMenuItem</td>
-                                 <td class="auto-generated" style="border-right: 1px solid ; border-bottom: 1px solid ; "> </td>
-                                 <td class="auto-generated" style="border-bottom: 1px solid ; "> </td>
-                              </tr>
-                              <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">MediaWiki-Seite hinzufügen...</td>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">projectWikiImportMenuItem</td>
-                                 <td class="auto-generated" style="border-right: 1px solid ; border-bottom: 1px solid ; "> </td>
-                                 <td class="auto-generated" style="border-bottom: 1px solid ; "> </td>
-                              </tr>
-                              <tr>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Neu laden</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">projectReloadMenuItem</td>
                                  <td colspan="2" style="text-align: center; border-bottom: 1px solid ; ">F5</td>
@@ -3606,6 +3594,18 @@
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">projectSaveMenuItem</td>
                                  <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">ctrl S</td>
                                  <td style="text-align: center; border-bottom: 1px solid ; ">meta S</td>
+                              </tr>
+                              <tr>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Dateien hinzufügen...</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">projectImportMenuItem</td>
+                                 <td class="auto-generated" style="border-right: 1px solid ; border-bottom: 1px solid ; "> </td>
+                                 <td class="auto-generated" style="border-bottom: 1px solid ; "> </td>
+                              </tr>
+                              <tr>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">MediaWiki-Seite hinzufügen...</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">projectWikiImportMenuItem</td>
+                                 <td class="auto-generated" style="border-right: 1px solid ; border-bottom: 1px solid ; "> </td>
+                                 <td class="auto-generated" style="border-bottom: 1px solid ; "> </td>
                               </tr>
                               <tr>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Quelldateien committen</td>
@@ -3630,6 +3630,18 @@
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">projectSingleCompileMenuItem</td>
                                  <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">ctrl shift D</td>
                                  <td style="text-align: center; border-bottom: 1px solid ; ">meta shift D</td>
+                              </tr>
+                              <tr>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">MED-Projekt öffnen...</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">projectMedOpenMenuItem</td>
+                                 <td class="auto-generated" style="border-right: 1px solid ; border-bottom: 1px solid ; "> </td>
+                                 <td class="auto-generated" style="border-bottom: 1px solid ; "> </td>
+                              </tr>
+                              <tr>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">MED-Projekt erstellen</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">projectMedCreateMenuItem</td>
+                                 <td class="auto-generated" style="border-right: 1px solid ; border-bottom: 1px solid ; "> </td>
+                                 <td class="auto-generated" style="border-bottom: 1px solid ; "> </td>
                               </tr>
                               <tr>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Eigenschaften...</td>
@@ -3740,13 +3752,13 @@
                            </thead>
                            <tbody>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Letzte Aktion rückgängig machen</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Rückgängig machen</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">editUndoMenuItem</td>
                                  <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">ctrl Z</td>
                                  <td style="text-align: center; border-bottom: 1px solid ; ">meta Z</td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Letzte Aktion wiederholen</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Wiederholen</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">editRedoMenuItem</td>
                                  <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">ctrl Y</td>
                                  <td style="text-align: center; border-bottom: 1px solid ; ">meta Y</td>
@@ -3762,12 +3774,6 @@
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">editInsertTranslationMenuItem</td>
                                  <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">ctrl I</td>
                                  <td style="text-align: center; border-bottom: 1px solid ; ">meta I</td>
-                              </tr>
-                              <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Mit maschineller Übersetzung ersetzen</td>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">editOverwriteMachineTranslationMenuItem</td>
-                                 <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">ctrl M</td>
-                                 <td style="text-align: center; border-bottom: 1px solid ; ">meta M</td>
                               </tr>
                               <tr>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Mit Quelle ersetzen</td>
@@ -3788,7 +3794,13 @@
                                  <td style="text-align: center; border-bottom: 1px solid ; ">meta shift A</td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Fehlende Tags aus Quelle einfügen</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Mit maschineller Übersetzung ersetzen</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">editOverwriteMachineTranslationMenuItem</td>
+                                 <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">ctrl M</td>
+                                 <td style="text-align: center; border-bottom: 1px solid ; ">meta M</td>
+                              </tr>
+                              <tr>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Fehlende Tags einfügen</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">editTagPainterMenuItem</td>
                                  <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">ctrl shift T</td>
                                  <td style="text-align: center; border-bottom: 1px solid ; ">meta shift T</td>
@@ -3812,7 +3824,7 @@
                                  <td style="text-align: center; border-bottom: 1px solid ; ">meta shift G</td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Projekt durchsuchen...</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Suchen...</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">editFindInProjectMenuItem</td>
                                  <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">ctrl F</td>
                                  <td style="text-align: center; border-bottom: 1px solid ; ">meta F</td>
@@ -3824,7 +3836,7 @@
                                  <td style="text-align: center; border-bottom: 1px solid ; ">meta shift F</td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Suchen und Ersetzen...</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Ersetzen...</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">editReplaceInProjectMenuItem</td>
                                  <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">ctrl K</td>
                                  <td style="text-align: center; border-bottom: 1px solid ; ">meta K</td>
@@ -3864,43 +3876,43 @@
                                  <td colspan="2" style="text-align: center; border-bottom: 1px solid ; ">shift F3</td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Vorherigen Match auswählen</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Match auswählen → Vorherigen Match auswählen</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">editSelectFuzzyPrevMenuItem</td>
                                  <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">ctrl UP</td>
                                  <td style="text-align: center; border-bottom: 1px solid ; ">meta UP</td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Nächsten Match auswählen</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Match auswählen → Nächsten Match auswählen</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">editSelectFuzzyNextMenuItem</td>
                                  <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">ctrl DOWN</td>
                                  <td style="text-align: center; border-bottom: 1px solid ; ">meta DOWN</td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Match #1 auswählen</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Match auswählen → Match #1 auswählen</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">editSelectFuzzy1MenuItem</td>
                                  <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">ctrl 1</td>
                                  <td style="text-align: center; border-bottom: 1px solid ; ">meta 1</td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Match #2 auswählen</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Match auswählen → Match #2 auswählen</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">editSelectFuzzy2MenuItem</td>
                                  <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">ctrl 2</td>
                                  <td style="text-align: center; border-bottom: 1px solid ; ">meta 2</td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Match #3 auswählen</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Match auswählen → Match #3 auswählen</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">editSelectFuzzy3MenuItem</td>
                                  <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">ctrl 3</td>
                                  <td style="text-align: center; border-bottom: 1px solid ; ">meta 3</td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Match #4 auswählen</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Match auswählen → Match #4 auswählen</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">editSelectFuzzy4MenuItem</td>
                                  <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">ctrl 4</td>
                                  <td style="text-align: center; border-bottom: 1px solid ; ">meta 4</td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Match #5 auswählen</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Match auswählen → Match #5 auswählen</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">editSelectFuzzy5MenuItem</td>
                                  <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">ctrl 5</td>
                                  <td style="text-align: center; border-bottom: 1px solid ; ">meta 5</td>
@@ -3971,7 +3983,7 @@
                   </div>
                   <br class="table-break" />
                   <div class="table" id="app.shortcuts.lists.function.codes.goto.menu.table">
-                     <div class="table-title">Tabelle 16. Gehe zu Menü</div>
+                     <div class="table-title">Tabelle 16. Gehe zu-Menü</div>
                      <div class="table-contents">
                         <table style="border-collapse: collapse; border-top: 1px solid ; border-bottom: 1px solid ; border-left: 1px solid ; border-right: 1px solid ; ">
                            <colgroup>
@@ -4044,34 +4056,28 @@
                                  <td style="text-align: center; border-bottom: 1px solid ; ">meta shift M</td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Nächstes Segment von tm/auto/</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Automatisch ausgefüllte Segmente → Nächstes Segment von tm/auto/</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">gotoNextXAutoMenuItem</td>
                                  <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">ctrl alt COMMA</td>
                                  <td style="text-align: center; border-bottom: 1px solid ; ">meta alt COMMA</td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Vorheriges Segment von tm/auto/</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Automatisch ausgefüllte Segmente → Vorheriges Segment von tm/auto/</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">gotoPrevXAutoMenuItem</td>
                                  <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">ctrl alt shift COMMA</td>
                                  <td style="text-align: center; border-bottom: 1px solid ; ">meta alt shift COMMA</td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Nächstes Segment von tm/enforce/</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Automatisch ausgefüllte Segmente → Nächstes Segment von tm/enforce/</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">gotoNextXEnforcedMenuItem</td>
                                  <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">ctrl alt PERIOD</td>
                                  <td style="text-align: center; border-bottom: 1px solid ; ">meta alt PERIOD</td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Vorheriges Segment von tm/enforce/</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Automatisch ausgefüllte Segmente → Vorheriges Segment von tm/enforce/</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">gotoPrevXEnforcedMenuItem</td>
                                  <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">ctrl alt shift PERIOD</td>
                                  <td style="text-align: center; border-bottom: 1px solid ; ">meta alt shift PERIOD</td>
-                              </tr>
-                              <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Vor im Verlauf</td>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">gotoHistoryForwardMenuItem</td>
-                                 <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">ctrl shift N</td>
-                                 <td style="text-align: center; border-bottom: 1px solid ; ">meta shift N</td>
                               </tr>
                               <tr>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Zurück im Verlauf</td>
@@ -4080,13 +4086,19 @@
                                  <td style="text-align: center; border-bottom: 1px solid ; ">meta shift P</td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Notizenbereich</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Vor im Verlauf</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">gotoHistoryForwardMenuItem</td>
+                                 <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">ctrl shift N</td>
+                                 <td style="text-align: center; border-bottom: 1px solid ; ">meta shift N</td>
+                              </tr>
+                              <tr>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Notizblock</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">gotoNotesPanelMenuItem</td>
                                  <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">ctrl alt 9</td>
                                  <td style="text-align: center; border-bottom: 1px solid ; ">meta alt 9</td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; ">Editorbereich</td>
+                                 <td style="text-align: left; border-right: 1px solid ; ">Editor</td>
                                  <td style="text-align: left; border-right: 1px solid ; ">gotoEditorPanelMenuItem</td>
                                  <td style="text-align: center; border-right: 1px solid ; ">ctrl alt 0</td>
                                  <td style="text-align: center; ">meta alt 0</td>
@@ -4128,7 +4140,7 @@
                                  <td class="auto-generated" style="border-bottom: 1px solid ; "> </td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Absatzbegrenzungen hervorheben</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Absatzbegrenzungen anzeigen</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">viewMarkParagraphStartCheckBoxMenuItem</td>
                                  <td class="auto-generated" style="border-right: 1px solid ; border-bottom: 1px solid ; "> </td>
                                  <td class="auto-generated" style="border-bottom: 1px solid ; "> </td>
@@ -4140,7 +4152,7 @@
                                  <td class="auto-generated" style="border-bottom: 1px solid ; "> </td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Alle mehrmaligen Segmente hervorheben</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Mehrmalige Segmente hervorheben</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">viewMarkNonUniqueSegmentsCheckBoxMenuItem</td>
                                  <td class="auto-generated" style="border-right: 1px solid ; border-bottom: 1px solid ; "> </td>
                                  <td class="auto-generated" style="border-bottom: 1px solid ; "> </td>
@@ -4152,19 +4164,19 @@
                                  <td class="auto-generated" style="border-bottom: 1px solid ; "> </td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Geschützte Leerzeichen hervorheben</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Geschützte Leerzeichen anzeigen</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">viewMarkNBSPCheckBoxMenuItem</td>
                                  <td class="auto-generated" style="border-right: 1px solid ; border-bottom: 1px solid ; "> </td>
                                  <td class="auto-generated" style="border-bottom: 1px solid ; "> </td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Leerraum hervorheben</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Leerraum anzeigen</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">viewMarkWhitespaceCheckBoxMenuItem</td>
                                  <td class="auto-generated" style="border-right: 1px solid ; border-bottom: 1px solid ; "> </td>
                                  <td class="auto-generated" style="border-bottom: 1px solid ; "> </td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">BiDi-Steuerzeichen hervorheben</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">BiDi-Steuerzeichen anzeigen</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">viewMarkBidiCheckBoxMenuItem</td>
                                  <td class="auto-generated" style="border-right: 1px solid ; border-bottom: 1px solid ; "> </td>
                                  <td class="auto-generated" style="border-bottom: 1px solid ; "> </td>
@@ -4182,32 +4194,38 @@
                                  <td class="auto-generated" style="border-bottom: 1px solid ; "> </td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">LanguageTool</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">LanguageTool-Probleme hervorheben</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">viewMarkLanguageCheckerCheckBoxMenuItem</td>
                                  <td class="auto-generated" style="border-right: 1px solid ; border-bottom: 1px solid ; "> </td>
                                  <td class="auto-generated" style="border-bottom: 1px solid ; "> </td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Aggressiver Font-Fallback</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Aggressiven Font-Fallback nutzen</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">viewMarkFontFallbackCheckBoxMenuItem</td>
                                  <td class="auto-generated" style="border-right: 1px solid ; border-bottom: 1px solid ; "> </td>
                                  <td class="auto-generated" style="border-bottom: 1px solid ; "> </td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Modifikationsinfo → Keine anzeigen</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Modifikationsinfo anzeigen → Keine</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">viewDisplayModificationInfoNoneRadioButtonMenuItem</td>
                                  <td class="auto-generated" style="border-right: 1px solid ; border-bottom: 1px solid ; "> </td>
                                  <td class="auto-generated" style="border-bottom: 1px solid ; "> </td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Modifikationsinfo → Nur für aktives Segment anzeigen</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Modifikationsinfo anzeigen → Nur für aktives Segment</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">viewDisplayModificationInfoSelectedRadioButtonMenuItem</td>
                                  <td class="auto-generated" style="border-right: 1px solid ; border-bottom: 1px solid ; "> </td>
                                  <td class="auto-generated" style="border-bottom: 1px solid ; "> </td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; ">Modifikationsinfo → Für alle Segmente anzeigen</td>
-                                 <td style="text-align: left; border-right: 1px solid ; ">viewDisplayModificationInfoAllRadioButtonMenuItem</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Modifikationsinfo anzeigen → Für alle Segmente</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">viewDisplayModificationInfoAllRadioButtonMenuItem</td>
+                                 <td class="auto-generated" style="border-right: 1px solid ; border-bottom: 1px solid ; "> </td>
+                                 <td class="auto-generated" style="border-bottom: 1px solid ; "> </td>
+                              </tr>
+                              <tr>
+                                 <td style="text-align: left; border-right: 1px solid ; ">OmegaT-Fenster wiederherstellen</td>
+                                 <td style="text-align: left; border-right: 1px solid ; ">viewRestoreGUIMenuItem</td>
                                  <td class="auto-generated" style="border-right: 1px solid ; "> </td>
                                  <td class="auto-generated"> </td>
                               </tr>
@@ -4242,7 +4260,7 @@
                                  <td style="text-align: center; border-bottom: 1px solid ; ">meta shift V</td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Probleme im aktuellen Dokument untersuchen</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Probleme in aktueller Datei untersuchen</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">toolsCheckIssuesCurrentFileMenuItem</td>
                                  <td class="auto-generated" style="border-right: 1px solid ; border-bottom: 1px solid ; "> </td>
                                  <td class="auto-generated" style="border-bottom: 1px solid ; "> </td>
@@ -4317,13 +4335,13 @@
                                  <td class="auto-generated" style="border-bottom: 1px solid ; "> </td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Glossar → Fuzzy-Matching für Glossareinträge benutzen</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Glossare → Fuzzy-Matching benutzen</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">optionsGlossaryFuzzyMatchingCheckBoxMenuItem</td>
                                  <td class="auto-generated" style="border-right: 1px solid ; border-bottom: 1px solid ; "> </td>
                                  <td class="auto-generated" style="border-bottom: 1px solid ; "> </td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Wörterbuch → Fuzzy-Matching für Wörterbucheinträge benutzen</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Wörterbücher → Fuzzy-Matching benutzen</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">optionsDictionaryFuzzyMatchingCheckBoxMenuItem</td>
                                  <td class="auto-generated" style="border-right: 1px solid ; border-bottom: 1px solid ; "> </td>
                                  <td class="auto-generated" style="border-bottom: 1px solid ; "> </td>
@@ -4347,13 +4365,13 @@
                                  <td class="auto-generated" style="border-bottom: 1px solid ; "> </td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Dateifilter...</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Globale Dateifilter...</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">optionsSetupFileFiltersMenuItem</td>
                                  <td class="auto-generated" style="border-right: 1px solid ; border-bottom: 1px solid ; "> </td>
                                  <td class="auto-generated" style="border-bottom: 1px solid ; "> </td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Segmentierung...</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Globale Segmentierungsregeln...</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">optionsSentsegMenuItem</td>
                                  <td class="auto-generated" style="border-right: 1px solid ; border-bottom: 1px solid ; "> </td>
                                  <td class="auto-generated" style="border-bottom: 1px solid ; "> </td>
@@ -4365,7 +4383,7 @@
                                  <td class="auto-generated" style="border-bottom: 1px solid ; "> </td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; ">Konfigurationsordner öffnen</td>
+                                 <td style="text-align: left; border-right: 1px solid ; ">Konfigurationsordner öffnen...</td>
                                  <td style="text-align: left; border-right: 1px solid ; ">optionsAccessConfigDirMenuItem</td>
                                  <td class="auto-generated" style="border-right: 1px solid ; "> </td>
                                  <td class="auto-generated"> </td>
@@ -4559,7 +4577,7 @@
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Vorheriges Token überspringen</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">editorSkipPrevToken</td>
                                  <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">ctrl LEFT</td>
-                                 <td style="text-align: center; border-bottom: 1px solid ; ">alt RIGHT</td>
+                                 <td style="text-align: center; border-bottom: 1px solid ; ">alt LEFT</td>
                               </tr>
                               <tr>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Nächstes Token mit Markierung überspringen</td>
@@ -4848,9 +4866,9 @@
                                        <span class="keycap">
                                           <strong>C</strong>
                                        </span>+<span class="keycap">
-                                          <strong>C</strong>
-                                       </span>+<span class="keycap">
                                           <strong>S</strong>
+                                       </span>+<span class="keycap">
+                                          <strong>C</strong>
                                        </span>
 	  
                                     </a> verwendet wird. Der Text in der Datei wird jedes Mal ersetzt, wenn diese Funktion aufgerufen wird.</p>

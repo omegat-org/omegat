@@ -10,7 +10,7 @@
    
 <body>
     <div id="wh-header">
-    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 5.8.0 - Manual d'usuari</a></div></div>
+    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 6.1.0 - Manual d'usuari</a></div></div>
 
     <div id="wh-body">
       <div class="wh-icon-menu" id="wh-menu"></div>
@@ -108,7 +108,7 @@
                <li>
                   <span class="section">
                      <a href="chapter.panes.html#panes.notes">
-                        <span class="guilabel">Notes</span>
+                        <span class="guilabel">Bloc de notes</span>
                      </a>
                   </span>
                </li>
@@ -162,8 +162,8 @@
                      </p>
                   </li>
                   <li class="listitem">
-                     <p>Subfinestra <a class="link" href="chapter.panes.html#panes.notes" title="Notes">
-                           <span class="guilabel">Notes</span>
+                     <p>Subfinestra <a class="link" href="chapter.panes.html#panes.notes" title="Bloc de notes">
+                           <span class="guilabel">Bloc de notes</span>
                         </a>
                      </p>
                   </li>
@@ -221,7 +221,7 @@
                      <span class="guimenu">Visualització</span>
                   </a>
                   <a class="link" href="chapter.menus.html#menus.view.restore.main.window">
-                     <span class="guimenuitem">Reinicialitza la finestra principal</span>
+                     <span class="guimenuitem">Reinicialitza la finestra de l'OmegaT</span>
                   </a> si teniu problemes en reordenar la disposició de la finestra.</p>
             </div>
          </section>
@@ -327,7 +327,7 @@
                               <span class="guimenu">Visualització</span>
                            </a>
                            <a class="link" href="chapter.menus.html#menus.view.restore.main.window">
-                              <span class="guimenuitem">Reinicialitza la finestra principal</span>
+                              <span class="guimenuitem">Reinicialitza la finestra de l'OmegaT</span>
                            </a> per a tornar a la disposició per defecte si no recordeu els canvis que heu aplicat a la interfície d'usuari i ja no podeu veure algunes subfinestres.</p>
                      </div>
                   </dd>
@@ -391,8 +391,7 @@
                   </dt>
                   <dd>
                      <p>Si una subfinestra està tancada però té contingut per a mostrar, l'OmegaT pot ressaltar temporalment la pestanya de la subfinestra en color carabassa quan accediu al segment.</p>
-                     <p>By default, the <span class="guilabel">Comments</span> and
-		  <span class="guilabel">Notepad</span> panes have notifications enabled.</p>
+                     <p>Per defecte, les subfinestres <span class="guilabel">Comentaris</span> i <span class="guilabel">Bloc de notes</span> tenen les notificacions habilitades.</p>
                      <p>Per a habilitar o inhabilitar les notificacions:</p>
                      <div class="itemizedlist">
                         <ul class="itemizedlist" style="list-style-type: disc; ">
@@ -426,7 +425,7 @@
                               <p>Diverses traduccions</p>
                            </li>
                            <li class="listitem">
-                              <p>Notes</p>
+                              <p>Bloc de notes</p>
                            </li>
                            <li class="listitem">
                               <p>Propietats del segment</p>
@@ -757,8 +756,7 @@ When enabled, all formatting in the source segments are hidden.</pre>
                            <span class="guimenu">Ves a</span>
                         </a>
                         <a class="link" href="chapter.menus.html#menus.goto.notes.pane">
-                           <span class="guimenuitem">Notepad</span>
-	  
+                           <span class="guimenuitem">Bloc de notes</span> 
                            <span class="keycap">
                               <strong>C</strong>
                            </span>+<span class="keycap">
@@ -808,7 +806,7 @@ When enabled, all formatting in the source segments are hidden.</pre>
                   <span class="guisubmenu">Selecciona la coincidència</span>
                </a> per a seleccionar una coincidència diferent.</p>
             <div class="example" id="the.first.match">
-               <div class="example-title">Exemple 8. An empty segment and its first two matches</div>
+               <div class="example-title">Exemple 8. Segment buit i les dues primeres coincidències</div>
                <div class="example-contents">
                   <p>
 		
@@ -866,7 +864,7 @@ When enabled, all formatting in the source segments are hidden.</pre>
 							
                                                 <pre class="programlisting">1. <span class="token">Top</span> Folder
 Dossier racine
-&lt;50/50/66% Orphan segments (+1 more)&gt;</pre>
+&lt;50/50/66% Segments orfes (i 1 més)&gt;</pre>
 
                                                 <pre class="programlisting">2. Configuration Folder
 Dossier de configuration
@@ -891,48 +889,38 @@ Dossier de configuration
                </div>
             </div>
             <br class="example-break" />
-            <p>The selected fuzzy match is highlighted in <span class="bold">
-                  <strong>bold</strong>
-               </span>. Words missing from the segment you are
-    translating are shown in <span class="bold">
-                  <strong>blue</strong>
-               </span>, and adjacent
-    parts in <span class="bold">
-                  <strong>green</strong>
-               </span> (when the adjacent part is a
-    space, as above, the part is left uncolored).</p>
+            <p>La coincidència parcial seleccionada es ressalta en <span class="bold">
+                  <strong>negreta</strong>
+               </span>. Les paraules que falten en el segment que traduïu es mostren de color <span class="bold">
+                  <strong>blau</strong>
+               </span>, i les parts adjacents apareixen en color <span class="bold">
+                  <strong>verd</strong>
+               </span> (quan la part adjacent és un espai, com en el cas anterior, no es mostra cap color).</p>
             <p>La coincidència també mostra tres percentatges de coincidència.</p>
             <p>Aquests percentatges tenen el significat següent, en ordre:</p>
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p>Percentage calculated <span class="bold">
-                           <strong>with
-        stemming</strong>
-                        </span> based on the source language tokenizer, and
-        <span class="bold">
-                           <strong>ignoring tags and numbers</strong>
-                        </span> (generally
-        the highest).</p>
+                     <p>Percentatge calculat <span class="bold">
+                           <strong>amb lematització</strong>
+                        </span> a partir del lematitzador de la llengua d'origen i <span class="bold">
+                           <strong>ignorant les etiquetes i les xifres</strong>
+                        </span> (generalment és el més alt).</p>
                   </li>
                   <li class="listitem">
-                     <p>Percentage calculated <span class="bold">
-                           <strong>without
-        stemming</strong>
-                        </span>, while still <span class="bold">
-                           <strong>ignoring tags and
-        numbers</strong>
-                        </span> (generally slightly lower).</p>
+                     <p>Percentatge calculat <span class="bold">
+                           <strong>sense lematització</strong>
+                        </span>, <span class="bold">
+                           <strong>ignorant les etiquetes i les xifres</strong>
+                        </span> (generalment és una mica més baix).</p>
                   </li>
                   <li class="listitem">
-                     <p>Percentage calculated on <span class="bold">
-                           <strong>the entire text,
-        including tags and numbers</strong>
-                        </span> (generally the lowest).</p>
+                     <p>Percentatge calculat en <span class="bold">
+                           <strong>tot el text, incloent-hi les etiquetes i les xifres</strong>
+                        </span> (generalment és el més baix).</p>
                      <div class="note">
                         <h3 class="title">Nota</h3>
-                        <p>If the segment contains only numbers or symbols, this percentage
-		  will be the highest.</p>
+                        <p>Si el segment només conté xifres o símbols, aquest percentatge serà el més alt.</p>
                      </div>
                   </li>
                </ul>
@@ -973,7 +961,7 @@ Dossier de configuration
                   </div>
                </div>
             </div>
-            <p>This pane shows terms from your glossary files that correspond to terms in the current segment. Els fitxers de glossari són en la carpeta <a class="link" href="chapter.project.folder.html#project.folder.glossary" title="glossary">glossary</a> del projecte.</p>
+            <p>Aquesta subfinestra mostra els termes dels fitxers de glossari que corresponen als termes del segment actual. Els fitxers de glossari són en la carpeta <a class="link" href="chapter.project.folder.html#project.folder.glossary" title="glossary">glossary</a> del projecte.</p>
             <p>El terme d'origen es mostra abans del signe «=» i els termes de destinació apareixen després. Si l'entrada conté comentaris, es numeren i es mostren en línies independents sota els termes. Els termes del glossari modificable es mostren en negreta, mentre que els d'altres glossaris es presenten en rodona.</p>
             <div class="example" id="glossary.matches">
                <div class="example-title">Exemple 9. Coincidències dels glossaris</div>
@@ -995,8 +983,7 @@ Folder = <span class="token">Dossier</span>
             <p>El nom del fitxer de glossari es mostra com a indicador de funció en passar el ratolí sobre els termes.</p>
             <p>El camp de comentari d'una entrada pot contenir enllaços, en què es pot fer clic per a conèixer més informació.</p>
             <p>Els enllaços a fitxers locals (<code class="filename">file:///CAMÍ/fitxer</code>) s'obren amb el programa associat. Les adreces web (<code class="filename">https://...</code>) s'obren en el navegador per defecte.</p>
-            <p>You can select a term in the glossaries pane and right click on it to
-    insert it into the translation.</p>
+            <p>Podeu seleccionar un terme en la subfinestra «Glossari» i fer-hi clic dret per a inserir-lo en la traducció.</p>
             <p>Utilitzeu <a class="link" href="chapter.menus.html#menus.view" title="Visualització">
                   <span class="guimenu">Visualització</span>
                </a>
@@ -1007,8 +994,7 @@ Folder = <span class="token">Dossier</span>
             <p>Podeu utilitzar les preferències del glossari per a ajustar com es mostren els glossaris. Consulteu les preferències de <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.glossary" title="Glossaris">
                   <span class="guilabel">Glossaris</span>
                </a> per a conèixer més detalls.</p>
-            <p>Modifications to any glossary file in the glossary folder are
-    immediately recognized by OmegaT and displayed in the glossaries pane.</p>
+            <p>L'OmegaT reconeix immediatament les modificacions en qualsevol glossari de la carpeta de glossaris i es mostren en la subfinestra «Glossari».</p>
             <p>L'OmegaT inclou un fitxer de glossari modificable per projecte. Utilitzeu <a class="link" href="chapter.menus.html#menus.edit" title="Edita">
                   <span class="guimenu">Edita</span>
                </a>
@@ -1035,7 +1021,7 @@ Folder = <span class="token">Dossier</span>
                   </div>
                </div>
             </div>
-            <p>This pane shows terms from your dictionary files that correspond to terms in the current segment. Els fitxers de diccionari són en la carpeta <a class="link" href="chapter.project.folder.html#project.folder.dictionary" title="dictionary">dictionary</a> del projecte. Consulteu les preferències de <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.dictionary" title="Diccionaris">
+            <p>Aquesta subfinestra mostra els termes dels fitxers de diccionari que corresponen als termes del segment actual. Els fitxers de diccionari són en la carpeta <a class="link" href="chapter.project.folder.html#project.folder.dictionary" title="dictionary">dictionary</a> del projecte. Consulteu les preferències de <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.dictionary" title="Diccionaris">
                   <span class="guilabel">Diccionaris</span>
                </a> per a conèixer més detalls.</p>
          </section>
@@ -1049,7 +1035,7 @@ Folder = <span class="token">Dossier</span>
                   </div>
                </div>
             </div>
-            <p>This pane, when opened, shows the suggestions for the current segment produced by each enabled translation engine . Quan hi ha suggeriments disponibles de més d'un motor:</p>
+            <p>Aquesta finestra, quan s'obre, conté els suggeriments per al segment actual produïts per un o més motors de traducció automàtica habilitats. Quan hi ha suggeriments disponibles de més d'un motor:</p>
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
@@ -1113,23 +1099,20 @@ Folder = <span class="token">Dossier</span>
                <div>
                   <div>
                      <h2 class="title" style="clear: both">
-                        <span class="guilabel">Notes</span>
+                        <span class="guilabel">Bloc de notes</span>
                      </h2>
                   </div>
                </div>
             </div>
-            <p>This pane is an <span class="emphasis">
+            <p>Aquesta subfinestra és un espai <span class="emphasis">
                   <em>editable</em>
-               </span> space where you can
-    add notes to the currently active segment.</p>
+               </span> on podeu afegir notes al segment actiu.</p>
             <p>Això us permet tornar més endavant per a revisar la traducció, comprovar que les traduccions alternatives són correctes o, en projectes compartits, demanar a altres membres la seva opinió, per exemple.</p>
             <p>Utilitzeu <a class="link" href="chapter.menus.html#menus.goto" title="Ves a">
                   <span class="guimenu">Ves a</span>
                </a>
                <a class="link" href="chapter.menus.html#menus.goto.next.note">
-                  <span class="guimenuitem">Next
-      Note</span>
-      
+                  <span class="guimenuitem">Nota següent</span> 
                   <span class="keycap">
                      <strong>C</strong>
                   </span>+<span class="keycap">
@@ -1141,9 +1124,7 @@ Folder = <span class="token">Dossier</span>
                   <span class="guimenu">Ves a</span>
                </a>
                <a class="link" href="chapter.menus.html#menus.goto.previous.note">
-                  <span class="guimenuitem">Previous
-      Note</span>
-      
+                  <span class="guimenuitem">Nota anterior</span> 
                   <span class="keycap">
                      <strong>C</strong>
                   </span>+<span class="keycap">
@@ -1156,8 +1137,7 @@ Folder = <span class="token">Dossier</span>
                   <span class="guimenu">Ves a</span>
                </a>
                <a class="link" href="chapter.menus.html#menus.goto.notes.pane">
-                  <span class="guimenuitem">Notepad</span>
-	  
+                  <span class="guimenuitem">Bloc de notes</span> 
                   <span class="keycap">
                      <strong>C</strong>
                   </span>+<span class="keycap">
@@ -1204,8 +1184,8 @@ Folder = <span class="token">Dossier</span>
                   <span class="emphasis">
                      <em>no</em>
                   </span> és editable. Només mostra informació que s'inclou en el fitxer.</p>
-               <p>Utilitzeu la subfinestra <a class="link" href="chapter.panes.html#panes.notes" title="Notes">
-                     <span class="guilabel">Notes</span>
+               <p>Utilitzeu la subfinestra <a class="link" href="chapter.panes.html#panes.notes" title="Bloc de notes">
+                     <span class="guilabel">Bloc de notes</span>
                   </a> per a indicar els vostres propis comentaris sobre una traducció.</p>
             </div>
          </section>

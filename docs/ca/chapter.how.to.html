@@ -10,7 +10,7 @@
    
 <body>
     <div id="wh-header">
-    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 5.8.0 - Manual d'usuari</a></div></div>
+    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 6.1.0 - Manual d'usuari</a></div></div>
 
     <div id="wh-body">
       <div class="wh-icon-menu" id="wh-menu"></div>
@@ -70,8 +70,7 @@
                      </li>
                      <li>
                         <span class="section">
-                           <a href="chapter.how.to.html#how.to.restore.your.data.project.locked">Your project is
-	locked?</a>
+                           <a href="chapter.how.to.html#how.to.restore.your.data.project.locked">El projecte està blocat?</a>
                         </span>
                      </li>
                      <li>
@@ -179,7 +178,7 @@
                </li>
                <li>
                   <span class="section">
-                     <a href="chapter.how.to.html#how.to.use.team.project">Use a team project</a>
+                     <a href="chapter.how.to.html#how.to.use.team.project">Ús d'un projecte en equip</a>
                   </span>
                </li>
                <li>
@@ -380,45 +379,32 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title">Your project is
-	locked?</h3>
+                        <h3 class="title">El projecte està blocat?</h3>
                      </div>
                   </div>
                </div>
-               <p>In the rare case where your computer freezes and OmegaT does not have
-	time to close properly, the <code class="filename">omegat.project</code> file can be
-	locked by the operating system and keep you from reopening after you reboot
-	your system.</p>
+               <p>En casos poc habituals en què l'ordinador es bloqui i l'OmegaT no tingui temps de tancar-se correctament, el sistema operatiu pot blocar el fitxer <code class="filename">omegat.project</code> i impedir que es pugui tornar a obrir després de reiniciar l'ordinador.</p>
                <p>Seguiu els passos següents:</p>
                <div class="orderedlist">
                   <ol class="orderedlist" type="1">
                      <li class="listitem">
-                        <p>Identify the project folder that OmegaT refuses to open and open
-		it in your file manager. The folder contents should be similar to a
-		standard <a class="link" href="chapter.project.folder.html" title="Carpeta del projecte">project</a>
-		folder.</p>
+                        <p>Identifiqueu la carpeta del projecte que l'OmegaT no pot obrir i obriu-la en el gestor de fitxers. El contingut de la carpeta hauria de ser similar a una carpeta de <a class="link" href="chapter.project.folder.html" title="Carpeta del projecte">projecte</a> estàndard.</p>
                      </li>
                      <li class="listitem">
-                        <p>In the folder, you should find a
-		<code class="filename">omegat.project</code> file as well as a
-		<code class="filename">omegat.project.bak</code> file. Make sure that the files
-		are identical.</p>
+                        <p>En la carpeta trobareu un fitxer <code class="filename">omegat.project</code> i un fitxer <code class="filename">omegat.project.bak</code>. Assegureu-vos que els fitxers siguin idèntics.</p>
                      </li>
                      <li class="listitem">
-                        <p>Rename the <code class="filename">omegat.project</code> file (to
-		<code class="filename">omegat.project.locked</code> for example).</p>
+                        <p>Canvieu el nom del fitxer <code class="filename">omegat.project</code> (a <code class="filename">omegat.project.locked</code>, per exemple).</p>
                      </li>
                      <li class="listitem">
-                        <p>Rename the <code class="filename">omegat.project.bak</code> file to
-		<code class="filename">omegat.project</code>.</p>
+                        <p>Canvieu el nom del fitxer <code class="filename">omegat.project.bak</code> a <code class="filename">omegat.project</code>.</p>
                      </li>
                      <li class="listitem">
                         <p>Obriu el projecte.</p>
                      </li>
                   </ol>
                </div>
-               <p>This action will open the project with the automatically created
-	backup <code class="filename">omegat.project</code> file.</p>
+               <p>Aquesta acció obrirà el projecte amb el fitxer de còpia de seguretat <code class="filename">omegat.project</code> creat automàticament.</p>
             </section>
             <section class="section" id="how.to.restore.your.data.project.wont.open">
                <div class="titlepage">
@@ -698,6 +684,26 @@
                               <span class="guisubmenu">Segments propagats automàticament</span>
                            </a> per a navegar a un segment inserit automàticament.</p>
                      </li>
+                     <li class="listitem">
+                        <p>Com a traduccions de referència, l'OmegaT també admet fitxers bilingües que no són fitxers TMX. Els formats de fitxer admesos per l'OmegaT són tots els formats bilingües que s'accepten com a fitxers d'origen:</p>
+                        <div class="itemizedlist">
+                           <ul class="itemizedlist" style="list-style-type: circle; ">
+                              <li class="listitem">
+                                 <p>Fitxers PO</p>
+                              </li>
+                              <li class="listitem">
+                                 <p>Fitxers TXML</p>
+                              </li>
+                              <li class="listitem">
+                                 <p>Fitxers XLIFF</p>
+                              </li>
+                              <li class="listitem">
+                                 <p>Fitxers SDLXLIFF</p>
+                              </li>
+                           </ul>
+                        </div>
+                        <p>Podeu afegir aquests fitxers a la carpeta <a class="link" href="chapter.project.folder.html#project.folder.tm" title="tm">tm</a> del projecte o una de les subcarpetes i les dades traduïdes estaran disponibles immediatament com a coincidències.</p>
+                     </li>
                   </ul>
                </div>
                <section class="section" id="how.to.tm.read.and.write">
@@ -836,20 +842,14 @@
                </div>
                <div class="warning">
                   <h3 class="title">Avís</h3>
-                  <p>Be cautious when you put a whole project in a file-sharing system like
-	DropBox, OneCloud and the likes.</p>
+                  <p>Aneu amb compte quan copieu un projecte sencer en un sistema d'ús compartit de fitxers com Dropbox, OneCloud i similars.</p>
                   <p>
                      <span class="emphasis">
-                        <em>Such systems are not designed to keep track of the internal
-	modifications of a given file.</em>
+                        <em>Aquests sistemes no estan preparats per a seguir les modificacions internes dels fitxers.</em>
                      </span>
                   </p>
-                  <p>An OmegaT project is a complex set of files. Such systems will not
-	always be able to provide you with the most recent version of your data, may
-	even lock some files for no obvious reasons and can even corrupt team
-	project related files.</p>
-                  <p>Make sure that you have properly tested your project layout and set up
-	a separate data backup before sharing data in such a system.</p>
+                  <p>Un projecte de l'OmegaT és un conjunt complex de fitxers. Aquests sistemes no sempre podran proporcionar-vos la versió més recent de les dades, poden blocar alguns fitxers sense raons aparents i, fins i tot, poden malmetre fitxers relacionats amb els projectes en equip.</p>
+                  <p>Assegureu-vos de provar a fons l'estructura del projecte i prepareu una còpia de seguretat de les dades a banda abans de compartir dades en un d'aquests sistemes.</p>
                </div>
             </section>
             <section class="section" id="how.to.tm.bridge.two.languages">
@@ -864,46 +864,84 @@
                      <span class="guilabel">Coincidències parcials</span>
                   </a>. Per defecte, aquestes coincidències es limiten a les llengües d'origen i de destinació definides en el quadre de diàleg <a class="link" href="chapter.windows.and.dialogs.html#dialogs.project.properties" title="Propietats del projecte">
                      <span class="guilabel">Propietats del projecte</span>
-                  </a>, però també podeu afegir coincidències en llengües que no siguin la llengua de destinació. Consulteu la preferència <a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.tm.matches.other.languages">
+                  </a>.</p>
+               <p>Podeu afegir coincidències en llengües que no siguin la llengua de destinació. Consulteu les preferències de <a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.tm.matches.other.languages">
                      <code class="option">Inclou les coincidències en altres llengües</code>
                   </a> per a conèixer més detalls.</p>
-               <p>Amb l'OmegaT, també podeu mostrar una tercera llengua <span class="emphasis">
+               <p>Si teniu un fitxer TMX corresponent al fitxer d'origen que conté la traducció a una llengua diferent, també podeu mostrar la llengua <span class="emphasis">
                      <em>just a sota</em>
-                  </span> del segment d'origen per a utilitzar-la com a referència alternativa per al text d'origen.</p>
+                  </span> del segment d'origen com a referència en una altra llengua.</p>
+               <p>Per a aconseguir això:</p>
+               <div class="orderedlist">
+                  <ol class="orderedlist" type="1">
+                     <li class="listitem">
+                        <p>Copieu la memòria de traducció que conté la referència en una altra llengua en una carpeta amb el nom <code class="filename">tmx2source</code> en la carpeta <a class="link" href="chapter.project.folder.html#project.folder.tm" title="tm">tm</a>.</p>
+                     </li>
+                     <li class="listitem">
+                        <p>Canvieu el nom del fitxer de la memòria a una de les opcions següents:</p>
+                        <div class="itemizedlist">
+                           <ul class="itemizedlist" style="list-style-type: disc; ">
+                              <li class="listitem">
+                                 <p>
+			  
+                                    <code class="filename">LL_CC.tmx</code>
+                                 </p>
+                              </li>
+                              <li class="listitem">
+                                 <p>
+			  
+                                    <code class="filename">LL-CC.tmx</code>
+                                 </p>
+                              </li>
+                              <li class="listitem">
+                                 <p>
+			  
+                                    <code class="filename">LL.tmx</code>
+                                 </p>
+                              </li>
+                           </ul>
+                        </div>
+                        <p>
+                           <span class="emphasis">
+                              <em>LL</em>
+                           </span> és el codi de llengua intern de la llengua que voleu mostrar com a referència i <span class="emphasis">
+                              <em>CC</em>
+                           </span> és un codi arbitrari de dues lletres.</p>
+                        <div class="warning">
+                           <h3 class="title">Avís</h3>
+                           <div class="itemizedlist">
+                              <ul class="itemizedlist" style="list-style-type: disc; ">
+                                 <li class="listitem">
+                                    <p>Totes les lletres han d'anar en majúscula.</p>
+                                 </li>
+                                 <li class="listitem">
+                                    <p>Només es mostren els segments que són una coincidència <span class="bold">
+                                          <strong>exacta</strong>
+                                       </span> amb el text d'origen.</p>
+                                 </li>
+                              </ul>
+                           </div>
+                        </div>
+                     </li>
+                  </ol>
+               </div>
                <div class="example" id="bridge.english.and.french.with.japanese">
-                  <div class="example-title">Exemple 6. Traducció de l'anglès al francès amb referència en japonès</div>
+                  <div class="example-title">Exemple 6. Ús d'una referència en japonès sota el text d'origen en anglès</div>
                   <div class="example-contents">
+                     <p>Si teniu un fitxer TMX que conté una traducció al japonès d'un fitxer en anglès que traduïu al francès, podeu utilitzar la traducció en japonès com a referència exacta alternativa mostrant-la sota el text en anglès que voleu traduir.</p>
+                     <p>Només cal que copieu el fitxer anglès-japonès a la carpeta <code class="filename">tm/tmx2source</code> amb el nom <code class="filename">JA-JP.tmx</code>. L'OmegaT ara us mostrarà el text en japonès corresponent al segment d'origen en anglès:</p>
                      <p>
 	  
                      </p>
                      <pre class="programlisting">— ¶ —————————————————————
 <span class="token">A whitespace character: [ \t\n\x0B\f\r]
-fr-ZB: Un caractère d'espacement (espace, tabulation, etc.) :  [ \t\n\x0B\f\r]
-ja-RV: 空白文字：[ \t\n\x0B\f\r]</span>
+ja-JP: 空白文字：[ \t\n\x0B\f\r]</span>
 Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 3075 ¶&gt;</span>
 — ¶ —————————————————————</pre>
-                     <p>La primera línia és el text original en anglès, la segona és una versió anterior en francès amb un codi de llengua arbitrari, la tercera és la versió en japonès amb un altre codi de llengua arbitrari i la quarta és la traducció actual al francès.</p>
+                     <p>La primera línia és el text original en anglès, la segona és la llengua de referència que penseu que us pot resultar útil per a la traducció i la tercera és la traducció actual al francès.</p>
                   </div>
                </div>
                <br class="example-break" />
-               <p>Per a aconseguir això:</p>
-               <div class="orderedlist">
-                  <ol class="orderedlist" type="1">
-                     <li class="listitem">
-                        <p>Creeu una carpeta anomenada <code class="filename">tmx2source</code> en la carpeta <a class="link" href="chapter.project.folder.html#project.folder.tm" title="tm">tm</a>.</p>
-                     </li>
-                     <li class="listitem">
-                        <p>Copieu-hi la memòria de traducció entre la llengua d'origen del projecte i la llengua de referència.</p>
-                     </li>
-                     <li class="listitem">
-                        <p>Canvieu el nom de la memòria a <code class="filename">LL_CC.tmx</code> o <code class="filename">LL-CC.tmx</code>. <span class="emphasis">
-                              <em>LL</em>
-                           </span> és el codi de llengua intern que voleu mostrar com a referència i <span class="emphasis">
-                              <em>CC</em>
-                           </span> és un codi arbitrari de dues lletres.</p>
-                     </li>
-                  </ol>
-               </div>
                <div class="note">
                   <h3 class="title">Nota</h3>
                   <p>Podeu utilitzar qualsevol nombre de fitxers TMX en tants parells de llengües diferents com vulgueu com a llengües de «referència».</p>
@@ -1076,7 +1114,7 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                               </span>. Utilitzeu-la per a aplicar modificacions que afectin tot l'equip.</p>
                         </div>
                         <p>El dipòsit local s'utilitza per a afegir el projecte inicial al servidor, i també es pot utilitzar per a tasques de manteniment, com ara la supressió de fitxers, que no es poden fer directament des de l'OmegaT.</p>
-                        <p>Us recomanem que eviteu utilitzar aquesta carpeta per a tasques de traducció. Si heu de fer tasques de traducció o revisió en aquest projecte, utilitzeu l'OmegaT per a baixar una còpia independent del projecte en equip i treballeu des d'allà. Consulteu la guia <a class="link" href="chapter.how.to.html#how.to.use.team.project" title="Use a team project">Use a team project</a> per a conèixer més detalls.</p>
+                        <p>Us recomanem que eviteu utilitzar aquesta carpeta per a tasques de traducció. Si heu de fer tasques de traducció o revisió en aquest projecte, utilitzeu l'OmegaT per a baixar una còpia independent del projecte en equip i treballeu des d'allà. Consulteu la guia <a class="link" href="chapter.how.to.html#how.to.use.team.project" title="Ús d'un projecte en equip">Ús d'un projecte en equip</a> per a conèixer més detalls.</p>
                      </li>
                      <li class="listitem" id="how.to.setup.team.project.fill.local.clone">
                         <p id="how.to.setup.team.project.fill.local.clone.title">Emplenament de la còpia local buida amb un projecte de l'OmegaT real</p>
@@ -1155,8 +1193,7 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                         <p id="how.to.setup.team.project.give.access.rights.title">Activació dels drets d'accés de l'equip</p>
                         <div class="note">
                            <h3 class="title">Nota</h3>
-                           <p>If you use multiple projects on the same server, credentials
-		  will only be asked once for that server.</p>
+                           <p>Si utilitzeu diversos projectes en el mateix servidor, només es demanaran les credencials del servidor una vegada.</p>
                         </div>
                         <p>Quan el projecte estigui a punt i s'hagi pujat al servidor, l'administrador del projecte en equip ha de configurar l'accés per als traductors. L'accés a un projecte en equip requereix la informació següent:</p>
                         <div class="orderedlist">
@@ -1339,7 +1376,7 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both">Use a team project</h2>
+                     <h2 class="title" style="clear: both">Ús d'un projecte en equip</h2>
                   </div>
                </div>
             </div>
@@ -1350,7 +1387,7 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                   <code class="option">Credencials dels dipòsits</code>
                </a>.</p>
             <p>Com que, per defecte, el projecte se sincronitza cada 3 minuts, de vegades els membres del projecte traduiran o modificaran un segment traduït per un altre membre, però que encara no s'havia sincronitzat. Quan això succeeix, els membres han de seleccionar la traducció adequada.</p>
-            <p>Els membres poden traduir i revisar els fitxers per torns. The Search function allows them to filter the Editor pane on contents translated by a given person, or on contents translated after or before a given time, for example.</p>
+            <p>Els membres poden traduir i revisar els fitxers per torns. La funció de cerca els permet filtrar la subfinestra «Editor» segons el contingut traduït per una persona determinada o segons el contingut traduït després o abans d'un moment determinat, per exemple.</p>
             <div class="variablelist">
                <dl class="variablelist">
                   <dt>
@@ -1387,8 +1424,7 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                               <code class="option">Credencials dels dipòsits</code>
                            </a> per a conèixer més detalls.</p>
                         <p>Si el servidor utilitza l'autenticació SSH, assegureu-vos d'actualitzar la configuració de l'SSH per a incloure aquest servidor abans d'intentar baixar el projecte; en cas contrari, obtindreu un error d'autenticació i el projecte no es carregarà.</p>
-                        <p>If you use multiple projects on the same server, credentials
-		  will only be asked once for that server.</p>
+                        <p>Si utilitzeu diversos projectes en el mateix servidor, només es demanaran les credencials del servidor una vegada.</p>
                      </div>
                   </dd>
                   <dt>
@@ -1453,7 +1489,7 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                                        <p>Si primer baixeu el projecte remot mitjançant un fitxer <code class="filename">omegat.project</code> proporcionat per l'administrador del projecte, l'OmegaT utilitzarà les assignacions en aquest fitxer, si n'hi ha.</p>
                                     </li>
                                     <li class="listitem">
-                                       <p>Si hi ha un conflicte entre les versions remotes i locals del fitxer <code class="filename">omegat.project</code> i se sobreescriu la versió local, l'OmegaT crea un fitxer de còpia de seguretat anomenat <code class="filename">omegat.project.AAAAMMDDhhmm.bak</code>. Els fitxers de còpia de seguretat es conserven durant un mínim de deu dies i les còpies de seguretat més antigues se suprimeixen automàticament.</p>
+                                       <p>Si hi ha un conflicte entre les versions remotes i locals del fitxer <code class="filename">omegat.project</code> i se sobreescriu la versió local, l'OmegaT crea un fitxer de còpia de seguretat anomenat <code class="filename">omegat.project.AAAAMMDDhhmm.bak</code>. L'OmegaT crea un màxim de deu fitxers de còpia de seguretat i les còpies més antigues se suprimeixen en ordre.</p>
                                     </li>
                                  </ul>
                               </div>
@@ -1530,7 +1566,7 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
             <div class="variablelist">
                <dl class="variablelist">
                   <dt>
-                     <span class="term">Estàndard: OmegaT 5.8.0</span>
+                     <span class="term">Estàndard: OmegaT 6.1.0</span>
                   </dt>
                   <dd>
                      <p>Es recomana aquesta versió per a l'ús diari.</p>
@@ -1546,8 +1582,8 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
             <p>Els fitxers es poden baixar directament des del lloc web <a class="ulink" href="https://omegat.org/download" target="_top">https://omegat.org</a>.</p>
             <div class="note">
                <h3 class="title">Nota</h3>
-               <p>L'OmegaT 5.8.0 requereix el Java 8 Runtime Environment (JRE) per a executar-se.</p>
-               <p>Els paquets de l'OmegaT estan disponibles tant en versions empaquetades amb el Java, com en versions sense el Java. Els paquets sense el Java depenen d'una instal·lació del Java 8 Runtime Environment en el sistema.</p>
+               <p>L'OmegaT 6.1.0 requereix el Java 11 Runtime Environment (JRE) per a executar-se.</p>
+               <p>Els paquets de l'OmegaT estan disponibles tant en versions empaquetades amb el Java, com en versions sense el Java. Els paquets sense el Java depenen d'una instal·lació del Java 11 Runtime Environment en el sistema.</p>
                <p>L'OmegaT 5.8.0 i les versions posteriors també es poden executar amb el Java 11 Runtime Environment en qualsevol plataforma.</p>
                <p>Per qüestions de llicències, l'equip de l'OmegaT recomana l'entorn d'execució del Java Eclipse Temurin proporcionat pel Projecte Adoptium de la Fundació Eclipse, però qualsevol entorn d'execució compatible amb el Java 8 hauria de funcionar. Consulteu <a class="ulink" href="https://projects.eclipse.org/projects/adoptium.temurin" target="_top">Projecte Eclipse Temurin™</a>.</p>
                <p>IBM proporciona JRE per a PowerPC amb Linux en la pàgina <a class="ulink" href="https://developer.ibm.com/languages/java/semeru-runtimes/downloads/" target="_top">https://developer.ibm.com/languages/java/semeru-runtimes/downloads/</a>.</p>
@@ -1577,7 +1613,7 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                   <h3 class="title">Nota</h3>
                   <p>Tot i que podeu executar l'OmegaT directament des dels fitxers disponibles, també podeu executar l'script <code class="filename">linux-install.sh</code> per a instal·lar l'OmegaT en una ubicació més adequada.</p>
                   <p>En executar l'script haureu d'introduir la contrasenya de <code class="filename">sudo</code>.</p>
-                  <p>L'script comprova si hi ha una instal·lació existent de la mateixa versió de l'OmegaT en la carpeta <code class="filename">/opt/omegat/</code>. Si no n'hi ha cap, instal·la el programa en la carpeta <code class="filename">/opt/omegat/OmegaT_5.8.0</code> i l'estableix com a versió per defecte (en la carpeta <code class="filename">/opt/omegat/OmegaT-default</code>).</p>
+                  <p>L'script comprova si hi ha una instal·lació existent de la mateixa versió de l'OmegaT en la carpeta <code class="filename">/opt/omegat/</code>. Si no n'hi ha cap, instal·la el programa en la carpeta <code class="filename">/opt/omegat/OmegaT_6.1.0</code> i l'estableix com a versió per defecte (en la carpeta <code class="filename">/opt/omegat/OmegaT-default</code>).</p>
                </div>
                <p>Després de desempaquetar el fitxer o quan s'hagi completat la instal·lació, podeu suprimir el fitxer baixat, que ja no és necessari.</p>
             </section>
@@ -1601,7 +1637,7 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                      </div>
                   </div>
                </div>
-               <p>Aquesta informació s'aplica a qualsevol sistema amb una versió del Java compatible amb el Java 8 Runtime Environment. Això inclou les plataformes descrites anteriorment i també les plataformes per a les quals no es proporcionen paquets de l'OmegaT específics.</p>
+               <p>Aquesta informació s'aplica a qualsevol sistema amb una versió del Java compatible amb el Java 11 Runtime Environment. Això inclou les plataformes descrites anteriorment i també les plataformes per a les quals no es proporcionen paquets de l'OmegaT específics.</p>
                <p>Baixeu la versió <span class="emphasis">
                      <em>Multiplataforma sense el JRE</em>
                   </span>.</p>
@@ -1733,7 +1769,7 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                   </div>
                </div>
                <p>Podeu iniciar l'OmegaT des de la línia d'ordres amb un script que inclou opcions d'inici. Consulteu la secció <a class="link" href="chapter.how.to.html#launch.with.command.line" title="Inici des de la línia d'ordres">Inici des de la línia d'ordres</a> per a conèixer més detalls.</p>
-               <p>També podeu fer clic en el fitxer <code class="filename">OmegaT.jar</code> per a iniciar-lo directament si l'extensió <code class="filename">.jar</code> està associada amb l'iniciador del Java del sistema.</p>
+               <p>També podeu fer doble clic en el fitxer <code class="filename">OmegaT.jar</code> per a iniciar-lo directament si l'extensió <code class="filename">.jar</code> està associada amb l'iniciador del Java del sistema.</p>
                <p>El paquet també proporciona l'script del Kaptain <code class="filename">omegat.kaptn</code>, que pot ser útil per als usuaris del KDE, així com un script del Bash anomenat <code class="filename">OmegaTl</code> que inicia automàticament l'ordre <span class="application">java</span> adequada per a executar l'OmegaT.</p>
             </section>
             <section class="section" id="running.omegat.on.macos">
@@ -1747,10 +1783,7 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                <p>Feu doble clic en el fitxer <code class="filename">OmegaT.app</code> o feu clic en la ubicació del dock.</p>
                <p>El fitxer <code class="filename">OmegaT.app</code> inclou un executable <code class="filename">OmegaT</code> en la carpeta <code class="filename">OmegaT.app/Contents/MacOS/</code> que també podeu utilitzar per a iniciar diverses instàncies del programa <code class="filename">OmegaT.app</code>.</p>
                <p>També inclou un fitxer genèric <code class="filename">OmegaT.jar</code> en la carpeta <code class="filename">OmegaT.app/Contents/MacOS/Java/</code> que podeu utilitzar per a iniciar l'OmegaT des de la línia d'ordres. Consulteu la secció <a class="link" href="chapter.how.to.html#launch.with.command.line" title="Inici des de la línia d'ordres">Inici des de la línia d'ordres</a> per a conèixer més detalls.</p>
-               <p>You can modify the behaviour of OmegaT.app by editing the
-	<code class="filename">Configuration.properties</code> (OmegaT configuration) as well
-	as the <code class="filename">Info.plist</code> (Java configuration) files located
-	inside the OmegaT.app package.</p>
+               <p>Podeu modificar el comportament del programa OmegaT.app editant els fitxers <code class="filename">Configuration.properties</code> (configuració de l'OmegaT) i <code class="filename">Info.plist</code> (configuració del Java) de l'interior del paquet OmegaT.app.</p>
                <p>El fitxer <code class="filename">Configuration.properties</code> es troba en la carpeta <code class="filename">Contents/Resources/</code>.</p>
                <p>El fitxer <code class="filename">Info.plist</code> es troba en la carpeta <code class="filename">Contents/</code>.</p>
                <div class="note">
@@ -1795,7 +1828,7 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                   </div>
                </div>
                <p>Els mètodes varien d'un sistema a un altre, però, en general, una vegada instal·lat l'OmegaT, es pot iniciar directament des de la línia d'ordres. Consulteu la secció <a class="link" href="chapter.how.to.html#launch.with.command.line" title="Inici des de la línia d'ordres">Inici des de la línia d'ordres</a> per a conèixer més detalls.</p>
-               <p>Podeu crear un script que inclogui els paràmetres d'inici de la línia d'ordres que vulgueu. Si els fitxers <code class="filename">.jar</code> estan associats correctament al Java 8 Runtime Environment i els paràmetres del PATH són correctes, també podeu simplement fer clic (o doble clic) en el fitxer <code class="filename">OmegaT.jar</code> per a iniciar-lo directament.</p>
+               <p>Podeu crear un script que inclogui els paràmetres d'inici de la línia d'ordres que vulgueu. Si els fitxers <code class="filename">.jar</code> estan associats correctament al Java 11 Runtime Environment i els paràmetres del PATH són correctes, també podeu simplement fer clic (o doble clic) en el fitxer <code class="filename">OmegaT.jar</code> per a iniciar-lo directament.</p>
                <p>Consulteu la documentació del sistema per a conèixer més informació.</p>
             </section>
             <section class="section" id="launch.with.command.line">
@@ -1806,7 +1839,7 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                      </div>
                   </div>
                </div>
-               <p>Using the command line allows you to set various options that control or modify the behaviour of the application. També podeu definir i desar els conjunts d'opcions en scripts que podeu utilitzar per a iniciar l'OmegaT amb una finalitat concreta.</p>
+               <p>L'ús de la línia d'ordres permet establir diverses opcions que controlen o modifiquen el comportament de l'aplicació. També podeu definir i desar els conjunts d'opcions en scripts que podeu utilitzar per a iniciar l'OmegaT amb una finalitat concreta.</p>
                <p>Si inicieu l'OmegaT des de la línia d'ordres, també es crea una instància nova de l'OmegaT cada vegada. D'aquesta manera, podeu utilitzar diversos projectes alhora, cadascun amb paràmetres propis.</p>
                <section class="section" id="launch.with.command.line.tutorial">
                   <div class="titlepage">
@@ -2023,9 +2056,9 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                                  <dt id="launch.with.command.line.remote.project.">
                                     <span class="term" id="launch.with.command.line.remote.project.title">
                                        <code class="option">--remote-project</code> 
-                                       <span class="emphasis">
-                                          <em>&lt;camí a un fitxer de projecte de l'OmegaT&gt;</em>
-                                       </span>
+                                       <strong class="userinput">
+                                          <code>&lt;camí a un fitxer de projecte de l'OmegaT&gt;</code>
+                                       </strong>
                                     </span>
                                  </dt>
                                  <dd>
@@ -2044,14 +2077,14 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                                  <dt id="launch.with.command.line.team.init">
                                     <span class="term" id="launch.with.command.line.team.init.title">
                                        <code class="option">team
-				init <span class="emphasis">
-                                             <em>SL</em>
-                                          </span>
+				init</code> 
+                                       <strong class="userinput">
+                                          <code>SL</code>
+                                       </strong>
 				
-                                          <span class="emphasis">
-                                             <em>TL</em>
-                                          </span>
-                                       </code>
+                                       <strong class="userinput">
+                                          <code>TL</code>
+                                       </strong>
                                     </span>
                                  </dt>
                                  <dd>
@@ -2080,9 +2113,15 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                                  </dd>
                                  <dt id="launch.with.command.line.itokenizer.lt.classname.gt.">
                                     <span class="term" id="launch.with.command.line.itokenizer.lt.classname.gt.title">
-                                       <code class="option">--ITokenizer=&lt;nom de la classe&gt;</code>, </span>
+                                       <code class="option">--ITokenizer=</code>
+                                       <strong class="userinput">
+                                          <code>&lt;nom de la classe&gt;</code>
+                                       </strong>, </span>
                                     <span class="term">
-                                       <code class="option">--ITokenizerTarget=&lt;nom de la classe&gt;</code>
+                                       <code class="option">--ITokenizerTarget=</code>
+                                       <strong class="userinput">
+                                          <code>&lt;nom de la classe&gt;</code>
+                                       </strong>
                                     </span>
                                  </dt>
                                  <dd>
@@ -2090,10 +2129,10 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                                  </dd>
                                  <dt id="launch.with.command.line.config.dir.">
                                     <span class="term" id="launch.with.command.line.config.dir.title">
-                                       <code class="option">--config-dir=<span class="emphasis">
-                                             <em>&lt;camí&gt;</em>
-                                          </span>
-                                       </code>
+                                       <code class="option">--config-dir=</code>
+                                       <strong class="userinput">
+                                          <code>&lt;camí&gt;</code>
+                                       </strong>
                                     </span>
                                  </dt>
                                  <dd>
@@ -2101,10 +2140,10 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                                  </dd>
                                  <dt id="launch.with.command.line.config.file.">
                                     <span class="term" id="launch.with.command.line.config.file.title">
-                                       <code class="option">--config-file=<span class="emphasis">
-                                             <em>&lt;camí&gt;</em>
-                                          </span>
-                                       </code>
+                                       <code class="option">--config-file=</code>
+                                       <strong class="userinput">
+                                          <code>&lt;camí&gt;</code>
+                                       </strong>
                                     </span>
                                  </dt>
                                  <dd>
@@ -2123,10 +2162,10 @@ config-dir=&quot;camí/a/una/carpeta/de/configuració&quot;</pre>
                                  </dd>
                                  <dt id="launch.with.command.line.resource.bundle.">
                                     <span class="term" id="launch.with.command.line.resource.bundle.title">
-                                       <code class="option">--resource-bundle=<span class="emphasis">
-                                             <em>&lt;camí&gt;</em>
-                                          </span>
-                                       </code>
+                                       <code class="option">--resource-bundle=</code>
+                                       <strong class="userinput">
+                                          <code>&lt;camí&gt;</code>
+                                       </strong>
                                     </span>
                                  </dt>
                                  <dd>
@@ -2134,7 +2173,13 @@ config-dir=&quot;camí/a/una/carpeta/de/configuració&quot;</pre>
                                  </dd>
                                  <dt id="launch.with.command.line.mode.console.translate.console.pseudotranslatetmx.console.align.">
                                     <span class="term" id="launch.with.command.line.mode.console.translate.console.pseudotranslatetmx.console.align.title">
-                                       <code class="option">--mode=[nom del mode de consola]</code>
+                                       <code class="option">--mode=[nom del mode de consola]</code> 
+                                       <strong class="userinput">
+                                          <code>&lt;camí del projecte&gt;</code>
+                                       </strong> 
+                                       <strong class="userinput">
+                                          <code>&lt;opcions del mode&gt;</code>
+                                       </strong>
                                     </span>
                                  </dt>
                                  <dd>
@@ -2143,7 +2188,10 @@ config-dir=&quot;camí/a/una/carpeta/de/configuració&quot;</pre>
                                        <dl class="variablelist">
                                           <dt id="launch.with.command.line.mode.console.translate">
                                              <span class="term" id="launch.with.command.line.mode.console.translate.title">
-                                                <code class="option">--mode=console-translate</code>
+                                                <code class="option">--mode=console-translate</code> 
+                                                <strong class="userinput">
+                                                   <code>&lt;camí del projecte&gt;</code>
+                                                </strong>
                                              </span>
                                           </dt>
                                           <dd>
@@ -2153,7 +2201,10 @@ config-dir=&quot;camí/a/una/carpeta/de/configuració&quot;</pre>
                                                 <dl class="variablelist">
                                                    <dt id="launch.with.command.line.source.pattern.lt.pattern.gt.">
                                                       <span class="term" id="launch.with.command.line.source.pattern.lt.pattern.gt.title">
-                                                         <code class="option">--source-pattern=&lt;patró&gt;</code>
+                                                         <code class="option">--source-pattern=</code>
+                                                         <strong class="userinput">
+                                                            <code>&lt;patró&gt;</code>
+                                                         </strong>
                                                       </span>
                                                    </dt>
                                                    <dd>
@@ -2194,7 +2245,10 @@ config-dir=&quot;camí/a/una/carpeta/de/configuració&quot;</pre>
                                           </dd>
                                           <dt id="launch.with.command.line.mode.console.pseudotranslatetmx">
                                              <span class="term" id="launch.with.command.line.mode.console.pseudotranslatetmx.title">
-                                                <code class="option">--mode=console-createpseudotranslatetmx</code>
+                                                <code class="option">--mode=console-createpseudotranslatetmx</code> 
+                                                <strong class="userinput">
+                                                   <code>&lt;camí del projecte&gt;</code>
+                                                </strong>
                                              </span>
                                           </dt>
                                           <dd>
@@ -2204,10 +2258,10 @@ config-dir=&quot;camí/a/una/carpeta/de/configuració&quot;</pre>
                                                 <dl class="variablelist">
                                                    <dt id="launch.with.command.line.pseudotranslatetmx.">
                                                       <span class="term" id="launch.with.command.line.pseudotranslatetmx.title">
-                                                         <code class="option">--pseudotranslatetmx=<span class="emphasis">
-                                                               <em>&lt;camí&gt;</em>
-                                                            </span>
-                                                         </code>
+                                                         <code class="option">--pseudotranslatetmx=</code>
+                                                         <strong class="userinput">
+                                                            <code>&lt;camí&gt;</code>
+                                                         </strong>
                                                       </span>
                                                    </dt>
                                                    <dd>
@@ -2226,28 +2280,40 @@ config-dir=&quot;camí/a/una/carpeta/de/configuració&quot;</pre>
                                           </dd>
                                           <dt id="launch.with.command.line.mode.console.align">
                                              <span class="term" id="launch.with.command.line.mode.console.align.title">
-                                                <code class="option">--mode=console-align <span class="emphasis">
-                                                      <em>--alignDir=&lt;camí&gt;</em>
-                                                   </span>
-                                                </code>
+                                                <code class="option">--mode=console-align</code> 
+                                                <strong class="userinput">
+                                                   <code>&lt;camí del projecte&gt;</code>
+                                                </strong>
                                              </span>
                                           </dt>
                                           <dd>
                                              <p>En aquest mode, l'OmegaT alinearà els fitxers de la carpeta «/source» del projecte amb els de la ubicació especificada amb el paràmetre <span class="emphasis">
                                                    <em>--alignDir</em>
-                                                </span>.</p>
-                                             <p>El fitxer TMX resultant es desa en la carpeta «/omegat» amb el nom «align.tmx». Els tipus de fitxers que es poden alinear depenen de si el filtre de fitxers és compatible amb l'alineació. Alguns dels filtres compatibles són: fitxers de llengua ILIAS, paquets de recursos del Java(TM), text clau=valor, CSV de llengua del Magento CE, MoodlePHP, DTD de Mozilla, FTL de Mozilla, PO, RC, subtítols SubRip i recursos del Windows.</p>
-                                             <p>El paràmetre <span class="emphasis">
-                                                   <em>--alignDir</em>
-                                                </span> s'utilitza per a especificar la ubicació de les dades en la llengua de destinació, que ha de ser una carpeta que contingui els fitxers traduïts.</p>
-                                             <p>Aquesta carpeta ha de contenir una traducció en la llengua de destinació del projecte. Per exemple, si el projecte és EN a FR, la carpeta ha de contenir un paquet que acabi amb _fr. El fitxer TMX resultant es desa en la carpeta «/omegat» amb el nom «align.tmx».</p>
+                                                </span> a continuació.</p>
+                                             <div class="variablelist">
+                                                <dl class="variablelist">
+                                                   <dt>
+                                                      <span class="term">
+                                                         <code class="option">--alignDir=</code>
+                                                         <strong class="userinput">
+                                                            <code>&lt;camí del projecte&gt;</code>
+                                                         </strong>
+                                                      </span>
+                                                   </dt>
+                                                   <dd>
+                                                      <p>Camí que conté els fitxers traduïts en la llengua de destinació.</p>
+                                                      <p>Aquesta carpeta ha de contenir una traducció en la llengua de destinació del projecte. Per exemple, si el projecte és EN a FR, la carpeta ha de contenir un paquet que acabi amb <code class="filename">_fr</code>.</p>
+                                                   </dd>
+                                                </dl>
+                                             </div>
+                                             <p>El fitxer TMX resultant es desa en la carpeta <code class="filename">omegat/</code> amb el nom <code class="filename">align.tmx</code>. Els tipus de fitxers que es poden alinear depenen de si el filtre de fitxers és compatible amb l'alineació. Alguns dels filtres compatibles són: fitxers de llengua ILIAS, paquets de recursos del Java(TM), text clau=valor, CSV de llengua del Magento CE, MoodlePHP, DTD de Mozilla, FTL de Mozilla, PO, RC, subtítols SubRip i recursos del Windows.</p>
                                           </dd>
                                           <dt id="launch.with.command.line.mode.console.stats">
                                              <span class="term" id="launch.with.command.line.mode.console.stats.title">
-                                                <code class="option">--mode=console-stats <span class="emphasis">
-                                                      <em>&lt;camí&gt;</em>
-                                                   </span>
-                                                </code>
+                                                <code class="option">--mode=console-stats</code> 
+                                                <strong class="userinput">
+                                                   <code>&lt;camí del projecte&gt;</code>
+                                                </strong>
                                              </span>
                                           </dt>
                                           <dd>
@@ -2255,7 +2321,10 @@ config-dir=&quot;camí/a/una/carpeta/de/configuració&quot;</pre>
                                                 <dl class="variablelist">
                                                    <dt id="launch.with.command.line.console.stats.output.file">
                                                       <span class="term" id="launch.with.command.line.console.stats.output.file.title">
-                                                         <code class="option">--output-file=[fitxer de sortida d'estadístiques]</code>
+                                                         <code class="option">--output-file=</code>
+                                                         <strong class="userinput">
+                                                            <code>[fitxer de sortida d'estadístiques]</code>
+                                                         </strong>
                                                       </span>
                                                    </dt>
                                                    <dd>
@@ -2304,10 +2373,10 @@ config-dir=&quot;camí/a/una/carpeta/de/configuració&quot;</pre>
                                  </dd>
                                  <dt id="launch.with.command.line.script.">
                                     <span class="term" id="launch.with.command.line.script.title">
-                                       <code class="option">--script=<span class="emphasis">
-                                             <em>&lt;camí&gt;</em>
-                                          </span>
-                                       </code>
+                                       <code class="option">--script=</code>
+                                       <strong class="userinput">
+                                          <code>&lt;camí&gt;</code>
+                                       </strong>
                                     </span>
                                  </dt>
                                  <dd>

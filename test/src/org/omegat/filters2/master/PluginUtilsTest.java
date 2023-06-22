@@ -50,8 +50,8 @@ public class PluginUtilsTest {
         pluginsDirs.add(new File("test/data/plugin/jar"));
 
         // list all jars in /plugins/
-        List<URL> urlList = pluginsDirs.stream()
-                .flatMap(dir -> FileUtil.findFiles(dir, pathname -> pathname.getName().endsWith(".jar")).stream())
+        List<URL> urlList = pluginsDirs.stream().flatMap(
+                dir -> FileUtil.findFiles(dir, pathname -> pathname.getName().endsWith(".jar")).stream())
                 .map(f -> {
                     try {
                         return f.toURI().toURL();

@@ -85,19 +85,30 @@ public final class PluginUtils {
     public enum PluginType {
         /** File filters that provide IFilter API. */
         FILTER("filter"),
-        /** Tokenizers, currently bundled and it is for backward compatibility.  */
+        /**
+         * Tokenizers, currently bundled and it is for backward compatibility.
+         */
         TOKENIZER("tokenizer"),
         /** Markers, that provide IMaker, mostly bundled. */
         MARKER("marker"),
-        /** Machine Translator service connectors, that provide IMachineTranslation API. */
+        /**
+         * Machine Translator service connectors, that provide
+         * IMachineTranslation API.
+         */
         MACHINETRANSLATOR("machinetranslator"),
         /** A plugin that change base of OmegaT system, not recommended. */
         BASE("base"),
         /** Glosary, that provide IGlossary API. */
         GLOSSARY("glossary"),
-        /** Dictionary files/services connectors, that provide IDictionary and/or IDictionaryFactory API. */
+        /**
+         * Dictionary files/services connectors, that provide IDictionary and/or
+         * IDictionaryFactory API.
+         */
         DICTIONARY("dictionary"),
-        /** theme, that register Swing Look-and-Feel with OmegaT properties into UIManager. */
+        /**
+         * theme, that register Swing Look-and-Feel with OmegaT properties into
+         * UIManager.
+         */
         THEME("theme"),
         /** Misc plugins, such as GUI extension like web browser spport. */
         MISCELLANEOUS("miscellaneous"),
@@ -137,14 +148,13 @@ public final class PluginUtils {
     /**
      * Loads all plugins from main classloader and from /plugins/ dir.
      * <p>
-     * We should load all jars from /plugins/ dir first,
-     * because some plugin can use more than one jar.
-     * There are three different "plugins" directory, and
+     * We should load all jars from /plugins/ dir first, because some plugin can
+     * use more than one jar. There are three different "plugins" directory, and
      * one development treatment.
      * <ul>
-     *     <li>(installdir)/core-plugins/  OmegaT genuine sub-component</li>
-     *     <li>(installdir/plugins/  System level 3rd party plugins</li>
-     *     <li>(configdir)/plugins/  User level 3rd party plugins</li>
+     * <li>(installdir)/core-plugins/ OmegaT genuine sub-component</li>
+     * <li>(installdir/plugins/ System level 3rd party plugins</li>
+     * <li>(configdir)/plugins/ User level 3rd party plugins</li>
      * </ul>
      */
     public static void loadPlugins(final Map<String, String> params) {
@@ -243,13 +253,14 @@ public final class PluginUtils {
     }
 
     /**
-     * This method removes older plugin versions from the list to load. The plugins
-     * must have the same name, have the same number of version components (we can't
-     * compare <code>x.y.z</code> with <code>y.z</code>). Also the qualifier (ie.
-     * anything after the "-" in the version number) is discarded for the
-     * comparison.
+     * This method removes older plugin versions from the list to load. The
+     * plugins must have the same name, have the same number of version
+     * components (we can't compare <code>x.y.z</code> with <code>y.z</code>).
+     * Also the qualifier (ie. anything after the "-" in the version number) is
+     * discarded for the comparison.
      *
-     * @param urlList List of jar found in the plugins/ directory
+     * @param urlList
+     *            List of jar found in the plugins/ directory
      */
     protected static void checkForLatestPluginVersion(List<URL> urlList) {
         List<URL> jarToRemove = new ArrayList<>();
@@ -262,9 +273,11 @@ public final class PluginUtils {
                 Manifest mf = jarStream.getManifest();
                 String pluginClass = mf.getMainAttributes().getValue("OmegaT-Plugins");
                 String oldPluginClass = mf.getMainAttributes().getValue("OmegaT-Plugin");
-                
-                // if the jar doesn't look like an OmegaT plugin (it doesn't contain any
-                // /Omegat-Plugins?/ attribute, we don't need to compare versions.
+
+                // if the jar doesn't look like an OmegaT plugin (it doesn't
+                // contain any "Omegat-Plugins?" attribute, we don't need to
+                // compare
+                // versions.
                 if ((oldPluginClass == null && pluginClass == null)
                         || (pluginClass != null && pluginClass.indexOf('.') < 0)) {
                     continue;
@@ -276,20 +289,24 @@ public final class PluginUtils {
                 String pluginName = pluginInfo.getName();
                 if (pluginVersions.containsKey(pluginName)) {
                     PluginInformation previousPlugin = pluginVersions.get(pluginName);
-                    // We get rid of versions qualifiers (x.y.z-beta) and we assume dots are used to
+                    // We get rid of versions qualifiers (x.y.z-beta) and we
+                    // assume dots are used to
                     // separate version components
                     String previousVersion = previousPlugin.getVersion().replaceAll("-.*", "");
                     String pluginVersion = pluginInfo.getVersion().replaceAll("-.*", "");
 
                     int isOlder = VersionChecker.compareVersions(previousVersion, "0", pluginVersion, "0");
                     if (isOlder < 0) {
-                        Log.logWarningRB("PLUGIN_EXCLUDE_OLD_VERSION", pluginName, previousPlugin.getVersion(), pluginInfo.getVersion());
+                        Log.logWarningRB("PLUGIN_EXCLUDE_OLD_VERSION", pluginName,
+                                previousPlugin.getVersion(), pluginInfo.getVersion());
                         jarToRemove.add(previousPlugin.getUrl());
                     } else if (isOlder == 0) {
-                        Log.logWarningRB("PLUGIN_EXCLUDE_SIMILAR_VERSION", pluginName, previousPlugin.getVersion(), pluginInfo.getVersion());
+                        Log.logWarningRB("PLUGIN_EXCLUDE_SIMILAR_VERSION", pluginName,
+                                previousPlugin.getVersion(), pluginInfo.getVersion());
                         jarToRemove.add(previousPlugin.getUrl());
                     } else {
-                        Log.logWarningRB("PLUGIN_EXCLUDE_OLD_VERSION", pluginName, pluginInfo.getVersion(), previousPlugin.getVersion());
+                        Log.logWarningRB("PLUGIN_EXCLUDE_OLD_VERSION", pluginName, pluginInfo.getVersion(),
+                                previousPlugin.getVersion());
                         jarToRemove.add(pluginInfo.getUrl());
 
                     }
@@ -436,13 +453,13 @@ public final class PluginUtils {
                 }
                 if (loadClass(clazz, classLoader)) {
                     if (mu == null) {
-                        PLUGIN_INFORMATIONS.add(PluginInformation.Builder
-                                .fromManifest(clazz, m, null, PluginInformation.Status.BUNDLED));
+                        PLUGIN_INFORMATIONS.add(PluginInformation.Builder.fromManifest(clazz, m, null,
+                                PluginInformation.Status.BUNDLED));
                     } else {
-                        PLUGIN_INFORMATIONS.add(PluginInformation.Builder
-                                .fromManifest(clazz, m, mu, PluginInformation.Status.INSTALLED));
+                        PLUGIN_INFORMATIONS.add(PluginInformation.Builder.fromManifest(clazz, m, mu,
+                                PluginInformation.Status.INSTALLED));
                     }
-               }
+                }
             }
         }
         loadFromManifestOld(m, classLoader);
@@ -459,15 +476,15 @@ public final class PluginUtils {
             if (key.equals("plugin")) {
                 for (String clazz : classes) {
                     if (loadClass(clazz, classLoader)) {
-                        PLUGIN_INFORMATIONS.add(PluginInformation.Builder
-                                .fromProperties(clazz, props, key, null, PluginInformation.Status.BUNDLED));
+                        PLUGIN_INFORMATIONS.add(PluginInformation.Builder.fromProperties(clazz, props, key,
+                                null, PluginInformation.Status.BUNDLED));
                     }
                 }
             } else {
                 for (String clazz : classes) {
                     if (loadClassOld(key, clazz, classLoader)) {
-                        PLUGIN_INFORMATIONS.add(PluginInformation.Builder
-                                .fromProperties(clazz, props, key, null, PluginInformation.Status.BUNDLED));
+                        PLUGIN_INFORMATIONS.add(PluginInformation.Builder.fromProperties(clazz, props, key,
+                                null, PluginInformation.Status.BUNDLED));
                     }
                 }
             }
@@ -524,8 +541,8 @@ public final class PluginUtils {
                 continue;
             }
             if (loadClassOld(sType, key, classLoader)) {
-                PLUGIN_INFORMATIONS.add(PluginInformation.Builder
-                        .fromManifest(key, m, null, PluginInformation.Status.BUNDLED));
+                PLUGIN_INFORMATIONS.add(PluginInformation.Builder.fromManifest(key, m, null,
+                        PluginInformation.Status.BUNDLED));
             }
         }
     }

@@ -28,6 +28,9 @@
   - Team feature: SSH support id_ecdsa and id_ed25519 for default key
   https://sourceforge.net/p/omegat/feature-requests/1598/
 
+  - If multiple versions of the same plugin are present, only the latest is loaded
+  https://sourceforge.net/p/omegat/feature-requests/1519/
+
   Bug fixes:
 
   - Languagetool crashes when reloading the project

@@ -300,18 +300,21 @@ public final class PluginUtils {
                         Log.logWarningRB("PLUGIN_EXCLUDE_OLD_VERSION", pluginName,
                                 previousPlugin.getVersion(), pluginInfo.getVersion());
                         jarToRemove.add(previousPlugin.getUrl());
+                        pluginVersions.put(pluginName, pluginInfo);
                     } else if (isOlder == 0) {
                         Log.logWarningRB("PLUGIN_EXCLUDE_SIMILAR_VERSION", pluginName,
                                 previousPlugin.getVersion(), pluginInfo.getVersion());
                         jarToRemove.add(previousPlugin.getUrl());
+                        pluginVersions.put(pluginName, pluginInfo);
                     } else {
                         Log.logWarningRB("PLUGIN_EXCLUDE_OLD_VERSION", pluginName, pluginInfo.getVersion(),
                                 previousPlugin.getVersion());
                         jarToRemove.add(pluginInfo.getUrl());
-
+                        pluginVersions.put(pluginName, previousPlugin);
                     }
+                } else {
+                    pluginVersions.put(pluginName, pluginInfo);
                 }
-                pluginVersions.put(pluginName, pluginInfo);
 
             } catch (IOException ex) {
                 Log.log(ex);

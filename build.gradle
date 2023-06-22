@@ -637,6 +637,7 @@ macDistZip {
         condition(!macJRE.empty, 'JRE not found')
     }
     archiveFileName.set("${applicationName}_${project.version}${omtVersion.beta}_Mac.zip")
+    group = 'omegat distribution'
 }
 
 task macSignedDistZip(type: Zip) {
@@ -645,6 +646,7 @@ task macSignedDistZip(type: Zip) {
         into zipRoot
     }
     archiveFileName.set("${zipRoot}.zip")
+    group = 'omegat distribution'
 }
 
 task macNotarize {
@@ -664,6 +666,7 @@ task macNotarize {
                 '--file', inputs.files.singleFile
         }
     }
+    group = 'omegat distribution'
 }
 
 task macStapledNotarizedDistZip(type: Zip) {
@@ -678,16 +681,17 @@ task macStapledNotarizedDistZip(type: Zip) {
         }
     }
     archiveFileName.set("${zipRoot}.zip")
+    group = 'omegat distribution'
 }
 
 task mac(dependsOn: [macDistZip, macNotarize]) {
     description = 'Build the Mac distributions.'
-    group = 'distribution'
+    group = 'omegat distribution'
 }
 
 task linux(dependsOn: [linux64DistTar]) {
     description = 'Build the Linux distributions.'
-    group = 'distribution'
+    group = 'omegat distribution'
 }
 
 linux64DistTar {
@@ -742,7 +746,7 @@ ext.getInnoSetupCustomMessages = {
 
 task win {
     description = 'Build the Windows distributions.'
-    group = 'distribution'
+    group = 'omegat distribution'
 }
 
 ext.makeWinTask = { args ->
@@ -809,6 +813,7 @@ ext.makeWinTask = { args ->
     def signedTaskName = "${args.name}Signed"
     def signedExe = "${distsDir}/${installerBasename}_Signed.exe"
     task(type: Exec, signedTaskName) {
+        group = 'omegat distribution'
         // You'd think we could just set the PATH, but there be dragons here
         // https://github.com/palantir/gradle-docker/issues/162
         // Starting from Nov 2022, certification provider force to use HSM to
@@ -954,7 +959,6 @@ task genMac {
 
 task changedOnBranch {
     description = 'List files that have been modified on this git branch.'
-    group = 'omegat workflow'
     doLast {
         ext.files = project.files(gitModifiedFiles())
         ext.files.each { println(it) }
@@ -1017,12 +1021,10 @@ tasks.jacocoTestCoverageVerification {
 
 task manualPdfs {
     description = 'Build PDF manuals for all languages. Requires Docker.'
-    group = 'omegat workflow'
 }
 
 task manualHtmls {
     description = 'Build HTML manuals for all languages. Requires Docker.'
-    group = 'omegat workflow'
 }
 
 ext.manualIndexXmls = fileTree(dir: 'doc_src', include: '**/OmegaTUsersManual_xinclude full.xml')
@@ -1062,16 +1064,14 @@ manualIndexXmls.each { xml ->
 
 task instantStartGuides {
     description = 'Build Instant Start guides for all languages. Requires Docker.'
-    group = 'omegat workflow'
 }
 
 task firstSteps {
     description = 'Build First Step pages for all languages. Requires Docker.'
-    group = 'omegat workflow'
 }
 
 task updateManuals {
-    group = 'omegat workflow'
+    group = 'omegat release'
     description = 'Update Instant Start guides and HTML manuals.'
     dependsOn manualHtmls, firstSteps, instantStartGuides
     finalizedBy genDocIndex
@@ -1230,6 +1230,7 @@ ext.publishAtomically = { args ->
     task("publish${args.name.capitalize()}") {
         description = "Copy ${args.name} to SourceForge web."
         dependsOn args.sourceTask
+        group = 'omegat release'
         doLast {
             ssh.run {
                 session(remotes.sourceforgeWeb) {
@@ -1259,7 +1260,7 @@ publishAtomically(name: 'javadoc', sourceTask: javadoc)
 
 task publishVersion {
     description = 'Update the version considered current by the version check.'
-    group = 'omegat workflow'
+    group = 'omegat release'
     doLast {
         ssh.run {
             session(remotes.sourceforgeWeb) {

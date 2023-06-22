@@ -14,7 +14,7 @@ steps:
       script: |
         srcdir=$(Pipeline.Workspace)/drop
         dest=$(SOURCEFORGE_FILE_USER)@frs.sourceforge.net
-        destdir="/home/frs/project/omegat/OmegaT\\ -\\ Latest/OmegaT\\ ${{ parameters.omegatVersion }}/"
+        destdir="/home/frs/project/omegat/OmegaT\\ -\\ Standard/OmegaT\\ ${{ parameters.omegatVersion }}/"
         echo "mkdir $destdir" | SSHPASS=$(SOURCEFORGE_FILE_PASS) sshpass -e sftp -v $dest || true
         SSHPASS=$(SOURCEFORGE_FILE_PASS) sshpass -e scp -v -oStrictHostKeyChecking=no $srcdir/* "$dest:$destdir"
 

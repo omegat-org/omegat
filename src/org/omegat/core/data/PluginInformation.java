@@ -229,10 +229,9 @@ public class PluginInformation {
         public static PluginInformation fromManifest(final String className, final Manifest manifest,
                                                      final URL mu, final Status status) {
             Attributes targetAttrs = new Attributes(manifest.getMainAttributes());
-            String packageName = className.substring(0, className.lastIndexOf(".") + 1)
-                    .replaceAll("\\.", "/");
-            // package section
-            String targetPackage;
+            String packageName = className == null ? "" : className.substring(0, className.lastIndexOf(".") + 1)
+                    .replace(".", "/");
+
             int i = 0;
             while (i < packageName.length()) {
                 i = packageName.indexOf("/", i) + 1;
@@ -291,7 +290,8 @@ public class PluginInformation {
             if (name != null) {
                 return name;
             }
-            return className.substring(className.lastIndexOf(".") + 1);
+
+            return className == null ? "" : className.substring(className.lastIndexOf(".") + 1);
         }
 
         private static String findVersion(Attributes attrs) {

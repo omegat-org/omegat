@@ -29,7 +29,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,18 +49,12 @@ public class PluginUtilsTest {
         pluginsDirs.add(new File("test/data/plugin/jar"));
 
         // list all jars in /plugins/
-        List<URL> urlList = pluginsDirs.stream().flatMap(
+        List<File> fileList = pluginsDirs.stream().flatMap(
                 dir -> FileUtil.findFiles(dir, pathname -> pathname.getName().endsWith(".jar")).stream())
-                .map(f -> {
-                    try {
-                        return f.toURI().toURL();
-                    } catch (MalformedURLException e) {
-                        return null;
-                    }
-                }).sorted((o1, o2) -> o1.toString().compareTo(o2.toString())).collect(Collectors.toList());
+                .collect(Collectors.toList());
 
-        assertEquals(5, urlList.size());
-        PluginUtils.checkForLatestPluginVersion(urlList);
+        assertEquals(5, fileList.size());
+        List<URL> urlList = PluginUtils.populatePluginUrlList(pluginsDirs);
         assertEquals(2, urlList.size());
 
         assertTrue(urlList.get(0).getFile().endsWith("anotherPlugin-0.3.1.jar"));

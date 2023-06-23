@@ -166,22 +166,8 @@ public final class PluginUtils {
             // when developers run on source code tree, add system plugins
             pluginsDirs.add(Paths.get(StaticUtils.installDir(), "build", "modules").toFile());
         }
-        // list all jars in /plugins/
-        FileFilter jarFilter = pathname -> pathname.getName().endsWith(".jar");
-        List<File> fs = pluginsDirs.stream().flatMap(dir -> FileUtil.findFiles(dir, jarFilter).stream())
-                .collect(Collectors.toList());
-        List<URL> urlList = new ArrayList<>();
-        for (File f : fs) {
-            try {
-                URL url = f.toURI().toURL();
-                urlList.add(url);
-                Log.logInfoRB("PLUGIN_LOAD_JAR", url.toString());
-            } catch (IOException ex) {
-                Log.log(ex);
-            }
-        }
 
-        checkForLatestPluginVersion(urlList);
+        List<URL> urlList = populatePluginUrlList(pluginsDirs);
 
         boolean foundMain = false;
         // look on all manifests
@@ -253,16 +239,32 @@ public final class PluginUtils {
     }
 
     /**
-     * This method removes older plugin versions from the list to load. The
-     * plugins must have the same name, have the same number of version
-     * components (we can't compare <code>x.y.z</code> with <code>y.z</code>).
-     * Also the qualifier (ie. anything after the "-" in the version number) is
-     * discarded for the comparison.
+     * This method create a list of plugins to load. It tries to onky take the
+     * most recent version of plugins. To differenciate between different
+     * versions, the plugins must have the same name, have the same number of
+     * version components (we can't compare <code>x.y.z</code> with
+     * <code>y.z</code>). Also the qualifier (ie. anything after the "-" in the
+     * version number) is discarded for the comparison.
      *
-     * @param urlList
-     *            List of jar found in the plugins/ directory
+     * @param pluginsDirs
+     *            List of directories where plugins can be loaded
      */
-    protected static void checkForLatestPluginVersion(List<URL> urlList) {
+    protected static List<URL> populatePluginUrlList(List<File> pluginsDirs) {
+        // list all jars in /plugins/
+        FileFilter jarFilter = pathname -> pathname.getName().endsWith(".jar");
+        List<File> fs = pluginsDirs.stream().flatMap(dir -> FileUtil.findFiles(dir, jarFilter).stream())
+                .collect(Collectors.toList());
+        List<URL> urlList = new ArrayList<>();
+        for (File f : fs) {
+            try {
+                URL url = f.toURI().toURL();
+                urlList.add(url);
+                Log.logInfoRB("PLUGIN_LOAD_JAR", url.toString());
+            } catch (IOException ex) {
+                Log.log(ex);
+            }
+        }
+
         List<URL> jarToRemove = new ArrayList<>();
 
         Map<String, PluginInformation> pluginVersions = new HashMap<>();
@@ -325,6 +327,8 @@ public final class PluginUtils {
             Log.logWarningRB("PLUGIN_EXCLUSION_MESSAGE", jarToRemove);
             urlList.removeAll(jarToRemove);
         }
+
+        return urlList;
     }
 
     public static List<Class<?>> getFilterClasses() {

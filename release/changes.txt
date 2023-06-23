@@ -1,12 +1,15 @@
 ----------------------------------------------------------------------
  OmegaT 6.1.0
 ----------------------------------------------------------------------
-  7 Enhancement
+  8 Enhancement
   16 Bug fixes
 ----------------------------------------------------------------------
 6.1.0 vs 6.0.0
 
   Implemented requests:
+
+  - Better error message for omegat.project failure
+  https://sourceforge.net/p/omegat/feature-requests/1696/
 
   - Add nashorn javascript engine[Java 17 compatibility]
   https://sourceforge.net/p/omegat/feature-requests/1525/

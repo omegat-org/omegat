@@ -13,4 +13,4 @@ bindpaths() {
 }
 
 umask a+w
-exec docker container run --rm -i -v "$PWD":/work $(bindpaths "$@") amake/innosetup:innosetup6 $(relpaths "$@")
+exec docker run --rm -i -v "$PWD":/work $(bindpaths "$@") amake/innosetup:innosetup6 $(relpaths "$@")

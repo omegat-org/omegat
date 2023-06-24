@@ -48,8 +48,9 @@ public class XMLText extends Text {
     }
 
     /**
-     * Returns the text in its original form as it was in original document.
-     * E.g. for <code>Rock&Roll</code> should return <code>Rock&amp;Roll</code>.
+     * Returns the text in its original form as it was in an original document.
+     * E.g. for <code>Rock&amp;Roll</code> should return
+     * <code>Rock&amp;Roll</code>.
      */
     public String toOriginal() {
         if (inCDATA) {

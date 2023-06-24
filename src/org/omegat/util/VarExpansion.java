@@ -82,21 +82,25 @@ public abstract class VarExpansion<Param> {
         if (Core.getProject().isProjectLoaded()) {
             ProjectProperties prop = Core.getProject().getProjectProperties();
             template = template.replace(VAR_PROJECT_TARGET_LANG, prop.getTargetLanguage().getLanguage());
-            template = template.replace(VAR_PROJECT_TARGET_LANG_CODE, prop.getTargetLanguage().getLanguageCode());
+            template = template.replace(VAR_PROJECT_TARGET_LANG_CODE,
+                    prop.getTargetLanguage().getLanguageCode());
             template = template.replace(VAR_PROJECT_SOURCE_LANG, prop.getSourceLanguage().getLanguage());
-            template = template.replace(VAR_PROJECT_SOURCE_LANG_CODE, prop.getSourceLanguage().getLanguageCode());
+            template = template.replace(VAR_PROJECT_SOURCE_LANG_CODE,
+                    prop.getSourceLanguage().getLanguageCode());
         }
 
         this.template = template;
     }
 
-   // ------------------------------ functions -------------------
+    // ------------------------------ functions -------------------
 
     /**
      * Replace bundle entries with their translation <br>
-     * Format : #{BUNDLE_ENTRY_NAME}[param0][param1][param2]...
-     * (parameters can contain expanded variables but not with [ or ])
-     * @param localTemplate  Initial template.
+     * Format : #{BUNDLE_ENTRY_NAME}[param0][param1][param2]... (parameters can
+     * contain expanded variables but not with [ or ])
+     * 
+     * @param localTemplate
+     *            Initial template.
      * @return Expanded template
      */
     protected static String expandBundleEntries(String localTemplate) {
@@ -125,16 +129,22 @@ public abstract class VarExpansion<Param> {
      * <li>${fileShortPath} = file path relative to given root
      * <li>${fileName} = full file name (w/o path but with extension)
      * <li>${fileNameOnly} = file name without extension
-     * <li>${fileNameOnly-1}, ${fileNameOnly-2}, ... = filename with 1, 2, ... extensions
+     * <li>${fileNameOnly-1}, ${fileNameOnly-2}, ... = filename with 1, 2, ...
+     * extensions
      * <li>${fileExtension} = all extensions after '.'
-     * <li>${fileExtension-1}, ${fileExtension-2}, ... = ${fileExtension} after removing 1, 2, ... extensions
+     * <li>${fileExtension-1}, ${fileExtension-2}, ... = ${fileExtension} after
+     * removing 1, 2, ... extensions
      * </ul>
      *
      * @param localTemplate
-     *            initial template. If null, use instance's template but does not modify it
-     * @param filePath
+     *            initial template. If null, use instance's template but does
+     *            not modify it
+     * @param filePaths
      *            path used by variable ${fileShortPath}
-     * @return Copy of the template with mentioned variables expanded. Other variables remain unchanged
+     * @param baseDir
+     *            base directory to expand against
+     * @return Copy of the template with mentioned variables expanded. Other
+     *         variables remain unchanged
      */
     public String expandFileNames(String localTemplate, String[] filePaths, String baseDir) {
         if (localTemplate == null) {
@@ -144,14 +154,18 @@ public abstract class VarExpansion<Param> {
         String numHint = "";
         if (filePaths.length > 1) {
             numHint = filePath.equals("") ? OStrings.getString("MATCHES_THIS_PROJECT") : "";
-            numHint += " " + StringUtil.format(OStrings.getString("MATCHES_MULTI_FILE_HINT"), filePaths.length - 1);
+            numHint += " "
+                    + StringUtil.format(OStrings.getString("MATCHES_MULTI_FILE_HINT"), filePaths.length - 1);
         }
-        localTemplate = localTemplate.replace(VAR_FILE_PATH, CommandVarExpansion.fixSeparatorChar(filePath + numHint));
+        localTemplate = localTemplate.replace(VAR_FILE_PATH,
+                CommandVarExpansion.fixSeparatorChar(filePath + numHint));
         try {
             filePath = Paths.get(baseDir).relativize(Paths.get(filePath)).toString();
         } catch (IllegalArgumentException ex) {
         }
-        localTemplate = localTemplate.replace(VAR_FILE_SHORT_PATH, filePath + numHint); // path without TMRoot
+        localTemplate = localTemplate.replace(VAR_FILE_SHORT_PATH, filePath + numHint); // path
+                                                                                        // without
+                                                                                        // TMRoot
         if (filePath.contains(File.separator)) {
             filePath = filePath.substring(filePath.lastIndexOf(File.separator) + 1);
         }
@@ -163,15 +177,18 @@ public abstract class VarExpansion<Param> {
             localTemplate = localTemplate.replace(VAR_FILE_NAME_ONLY, nameOnlyBuf.toString());
             localTemplate = localTemplate.replace(VAR_FILE_EXTENSION, extensionBuf.toString());
             for (int i = 0; i < splitName.length; i++) {
-                localTemplate = localTemplate.replaceAll("\\$\\{fileNameOnly-" + i + "\\}", nameOnlyBuf.toString());
-                localTemplate = localTemplate.replaceAll("\\$\\{fileExtension-" + i + "\\}", extensionBuf.toString());
+                localTemplate = localTemplate.replaceAll("\\$\\{fileNameOnly-" + i + "\\}",
+                        nameOnlyBuf.toString());
+                localTemplate = localTemplate.replaceAll("\\$\\{fileExtension-" + i + "\\}",
+                        extensionBuf.toString());
                 if (i + 1 < splitName.length) {
                     nameOnlyBuf.append(".").append(splitName[i + 1]);
                     extensionBuf.insert(0, splitName[splitName.length - i - 2] + '.');
                 }
             }
         }
-        // prevent unexpanded fileName variables in case the file has less extensions than expected
+        // prevent unexpanded fileName variables in case the file has less
+        // extensions than expected
         localTemplate = localTemplate.replaceAll("\\$\\{fileNameOnly(-\\d+)?\\}", filePath);
         localTemplate = localTemplate.replaceAll("\\$\\{fileExtension(-\\d+)?\\}", "");
         return localTemplate;

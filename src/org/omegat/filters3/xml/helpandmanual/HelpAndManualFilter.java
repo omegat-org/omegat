@@ -31,7 +31,7 @@ import org.omegat.filters3.xml.XMLFilter;
 import org.omegat.util.OStrings;
 
 /**
- * Filter for Help & Manual files.
+ * Filter for Help &amp; Manual files.
  *
  * @author Guido Leenders
  */
@@ -77,7 +77,7 @@ public class HelpAndManualFilter extends XMLFilter {
     }
 
     /**
-     * Yes, Help & Manual may be written out in a variety of encodings.
+     * Yes, Help &amp; Manual may be written out in a variety of encodings.
      *
      * @return <code>true</code>
      */

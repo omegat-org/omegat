@@ -35,7 +35,7 @@ import org.omegat.gui.exttrans.IMachineTranslation;
  * A class for aggregating machine translation connectors. Old-style plugins
  * ("OmegaT-Plugin: machinetranslator") are added here by the
  * MachineTranslateTextArea and so should not add themselves manually. New-style
- * plugins ("OmegaT-Plugins: &lt;classname>") should add themselves with
+ * plugins ("OmegaT-Plugins: &lt;classname&gt;") should add themselves with
  * {@link #add(IMachineTranslation)} in the loadPlugins() method.
  *
  * @author Aaron Madlon-Kay

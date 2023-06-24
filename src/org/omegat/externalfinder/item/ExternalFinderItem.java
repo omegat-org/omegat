@@ -40,8 +40,8 @@ import org.omegat.util.OStrings;
  * In the original plugin, the character <code>_</code> in the name was used to
  * indicate a mnemonic; upon setting the name the mnemonic character was
  * extracted and the <code>_</code> removed. We now do not modify the name, and
- * we leave mnemonic setting up to the Mnemonics library so <code>&</code> is
- * the character to use.
+ * we leave mnemonic setting up to the Mnemonics library so <code>&amp;</code>
+ * is the character to use.
  */
 public final class ExternalFinderItem {
 
@@ -84,7 +84,8 @@ public final class ExternalFinderItem {
     private ExternalFinderItem(Builder builder) {
         this.name = builder.name;
         this.urls = builder.urls.isEmpty() ? Collections.emptyList() : new ArrayList<>(builder.urls);
-        this.commands = builder.commands.isEmpty() ? Collections.emptyList() : new ArrayList<>(builder.commands);
+        this.commands = builder.commands.isEmpty() ? Collections.emptyList()
+                : new ArrayList<>(builder.commands);
         this.keystroke = builder.keystroke;
         this.nopopup = builder.nopopup;
         this.scope = builder.scope;
@@ -238,8 +239,8 @@ public final class ExternalFinderItem {
         }
 
         /**
-         * Optionally prepend <code>&</code> to a character to set a mnemonic
-         * for use in menus.
+         * Optionally prepend <code>&amp;</code> to a character to set a
+         * mnemonic for use in menus.
          */
         public Builder setName(String name) {
             this.name = name;

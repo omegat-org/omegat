@@ -46,10 +46,12 @@ public final class VersionChecker {
     // that can't be used with standard JRE restrictions:
     // https://sourceforge.net/p/forge/site-support/14321/
     //
-    // - Prior to Java 8u151 you had to install the JCE Unlimited Strength Jurisdiction Policy Files:
+    // - Prior to Java 8u151 you had to install the JCE Unlimited Strength
+    // Jurisdiction Policy Files:
     // http://www.oracle.com/technetwork/java/javase/downloads/jce8-download-2133166.html
     //
-    // - As of Java 8u151 you can set `crypto.policy=unlimited` in java.security, however this
+    // - As of Java 8u151 you can set `crypto.policy=unlimited` in
+    // java.security, however this
     // is still too cumbersome for general use
     //
     // - As of Java 8u162, unlimited crypto is the default
@@ -103,7 +105,8 @@ public final class VersionChecker {
 
     private int compareVersions(boolean force) throws Exception {
         fetch(force);
-        // Don't compare REVISION because it is not always consistent across release binaries
+        // Don't compare REVISION because it is not always consistent across
+        // release binaries
         return compareVersions(OStrings.VERSION, OStrings.UPDATE, mProps.getProperty("version"),
                 mProps.getProperty("update"));
     }
@@ -112,7 +115,8 @@ public final class VersionChecker {
      * Check if OmegaT is up to date.
      *
      * @param force
-     *            If true, fetch the latest data from the server even if the current data is not stale yet
+     *            If true, fetch the latest data from the server even if the
+     *            current data is not stale yet
      * @throws Exception
      */
     public boolean isUpToDate(boolean force) throws Exception {
@@ -132,12 +136,18 @@ public final class VersionChecker {
 
     /**
      * Compares OmegaT version numbers.
-     * @param version1 e.g. "5.4.0"
-     * @param update1 e.g. "0"
-     * @param version2 e.g. "3.0.6"
-     * @param update2  "1"
-     * @return the value 0 if version1 update1 == version2 update2; a value less than 0 if version1 update1 < version2 update2;
-     *         and a value greater than 0 if version1 update1 > version2 update2
+     * 
+     * @param version1
+     *            e.g. "5.4.0"
+     * @param update1
+     *            e.g. "0"
+     * @param version2
+     *            e.g. "3.0.6"
+     * @param update2
+     *            "1"
+     * @return value 0 if version1 update1 == version2 update2; value less than
+     *         0 if version1 update1 &lt; version2 update2; and value greater
+     *         than 0 if version1 update1 &gt; version2 update2
      */
     public static int compareVersions(String version1, String update1, String version2, String update2) {
         return compare(getVersionNumbers(version1, update1), getVersionNumbers(version2, update2));
@@ -149,7 +159,8 @@ public final class VersionChecker {
             result.add(Integer.parseInt(n));
         }
         result.add(Integer.parseInt(update));
-        // Don't include REVISION because it is not always consistent across release binaries
+        // Don't include REVISION because it is not always consistent across
+        // release binaries
         return result;
     }
 

@@ -54,28 +54,29 @@ public interface IParseCallback {
      *            path of segment
      * @param filter
      *            filter which produces entry
-     * @param protectedParts (since 3.0.6)
-     *            protected parts
+     * @param protectedParts
+     *            (since 3.0.6) protected parts
      */
     void addEntryWithProperties(String id, String source, String translation, boolean isFuzzy, String[] props,
             String path, IFilter filter, List<ProtectedPart> protectedParts);
 
     /**
-     * Read entry from source file, with single "comment" property. Convenience method for
+     * Read entry from source file, with single "comment" property. Convenience
+     * method for
      * {@link #addEntryWithProperties(String, String, String, boolean, String[], String, IFilter, List)}.
      */
     void addEntry(String id, String source, String translation, boolean isFuzzy, String comment, String path,
             IFilter filter, List<ProtectedPart> protectedParts);
 
     /**
-     * Old call without path, for compatibility with OmegaT < 2.5.0
+     * Old call without path, for compatibility with OmegaT &lt; 2.5.0
      */
     void addEntry(String id, String source, String translation, boolean isFuzzy, String comment,
             IFilter filter);
 
     /**
-     * This method can be called from any filter on the end of file processing. It links prev/next segments
-     * for multiple translations.
+     * This method can be called from any filter on the end of file processing.
+     * It links prev/next segments for multiple translations.
      */
     void linkPrevNextSegments();
 }

@@ -174,16 +174,27 @@ public class SegmentBuilder {
     }
 
     /**
-     * Create element for one segment.
+     * Create an element for one segment.
      *
-     * @param doc
-     *            document
-     * @return OmElementSegment
+     * @param isActive
+     *            flag to indicate activeness
+     * @param trans
+     *            translation entry
      */
     public void createSegmentElement(final boolean isActive, TMXEntry trans) {
         createSegmentElement(isActive, doc.getLength(), trans, trans.defaultTranslation);
     }
 
+    /**
+     * Create an element for one segment.
+     *
+     * @param isActive
+     *            flag to indicate activeness
+     * @param trans
+     *            translation entry
+     * @param defaultTranslation
+     *            flag to indicate it is a default translation
+     */
     public void createSegmentElement(final boolean isActive, TMXEntry trans,
             final boolean defaultTranslation) {
         createSegmentElement(isActive, doc.getLength(), trans, defaultTranslation);

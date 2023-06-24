@@ -70,17 +70,19 @@ import org.omegat.util.TagUtil;
  * @author Didier Briel
  * @author Aaron Madlon-Kay
  *
- * Option to remove untranslated segments in the target files
- * Code adapted from the file: MozillaDTDFilter.java
- * Support for encoding outside the ASCII encoding. The management depends of the user.
- * The user have to choose the encoding of the file, source and target.
- * The default is ASCII, which corresponds to the standard behaviour: in that case, any character above 127 is encoded
- * according to the specifications of the bundle files. If another character set is chosen, no encoding takes place
- * and it's up to the user to select a charset compatible with the characters used.
- * "auto" for the target encoding is considered as being ASCII.
+ *         Option to remove untranslated segments in the target files Code
+ *         adapted from the file: MozillaDTDFilter.java Support for encoding
+ *         outside the ASCII encoding. The management depends of the user. The
+ *         user have to choose the encoding of the file, source and target. The
+ *         default is ASCII, which corresponds to the standard behaviour: in
+ *         that case, any character above 127 is encoded according to the
+ *         specifications of the bundle files. If another character set is
+ *         chosen, no encoding takes place and it's up to the user to select a
+ *         charset compatible with the characters used. "auto" for the target
+ *         encoding is considered as being ASCII.
  *
- * Support for the comments into the Comments panel (localization notes).
- * Optionally can leave Unicode literals (\\uXXXX) unescaped.
+ *         Support for the comments into the Comments panel (localization
+ *         notes). Optionally can leave Unicode literals (\\uXXXX) unescaped.
  */
 public class ResourceBundleFilter extends AbstractFilter {
 
@@ -139,28 +141,28 @@ public class ResourceBundleFilter extends AbstractFilter {
     /**
      * The source default encoding is UTF-8.
      * <p>
-     *     From Java 9 onward, properties are saved in UTF-8.
+     * From Java 9 onward, properties are saved in UTF-8.
      * </p>
-    */
+     */
     @Override
     public Instance[] getDefaultInstances() {
-        return new Instance[] { new Instance("*.properties", DEFAULT_SOURCE_ENCODING,
-                DEFAULT_TARGET_ENCODING, TFP_NAMEONLY + "_"
-                + TFP_TARGET_LOCALE + "." + TFP_EXTENSION) };
+        return new Instance[] { new Instance("*.properties", DEFAULT_SOURCE_ENCODING, DEFAULT_TARGET_ENCODING,
+                TFP_NAMEONLY + "_" + TFP_TARGET_LOCALE + "." + TFP_EXTENSION) };
     }
 
     /**
      * Creates a reader of an input file.
      * <p>
-     *     Override because of keep buggy behavior in OmegaT 5.7.1 or before.
-     *     It set default encoding US-ASCII but Java standard InputStreamReader
-     *     class wrongly accept non-ASCII characters as-is.
+     * Override because of keep buggy behavior in OmegaT 5.7.1 or before. It set
+     * default encoding US-ASCII but Java standard InputStreamReader class
+     * wrongly accept non-ASCII characters as-is.
      * </p>
      *
      * @param inFile
      *            The source file.
      * @param inEncoding
-     *            Encoding of the input file, if the filter supports it. Otherwise null.
+     *            Encoding of the input file, if the filter supports it.
+     *            Otherwise null.
      * @return The reader for the source file
      * @throws IOException
      *             If any I/O Error occurs upon reader creation
@@ -180,7 +182,7 @@ public class ResourceBundleFilter extends AbstractFilter {
      * Creating an output stream to save a localized resource bundle.
      * <p>
      * NOTE: the name of localized resource bundle is different from the name of
-     * original one. e.g. "Bundle.properties" -> Russian =
+     * original one. e.g. "Bundle.properties" -&gt; Russian =
      * "Bundle_ru.properties"
      */
     @Override
@@ -245,11 +247,13 @@ public class ResourceBundleFilter extends AbstractFilter {
                     try {
                         cp = Integer.parseInt(uStr, 16);
                         if (!Character.isValidCodePoint(cp)) {
-                            throw new TranslationException(OStrings.getString("RBFH_ERROR_ILLEGAL_U_SEQUENCE"));
+                            throw new TranslationException(
+                                    OStrings.getString("RBFH_ERROR_ILLEGAL_U_SEQUENCE"));
                         }
                         i = uEnd - Character.charCount(cp);
                     } catch (NumberFormatException ex) {
-                        throw new TranslationException(OStrings.getString("RBFH_ERROR_ILLEGAL_U_SEQUENCE"), ex);
+                        throw new TranslationException(OStrings.getString("RBFH_ERROR_ILLEGAL_U_SEQUENCE"),
+                                ex);
                     }
                 }
             }
@@ -268,7 +272,8 @@ public class ResourceBundleFilter extends AbstractFilter {
      *
      * @param text
      *            Text to convert.
-     * @param mode Is the string part of a key, a value or a comment?
+     * @param mode
+     *            Is the string part of a key, a value or a comment?
      * @return The ascii string
      */
     private String toAscii(String text, EscapeMode mode) {
@@ -349,7 +354,8 @@ public class ResourceBundleFilter extends AbstractFilter {
                 if (dontUnescapeULiterals && containsUEscapeAt(string, i)) {
                     // Don't remove \ before \\uXXXX if we are not unescaping
                 } else if (string.codePointCount(i, len) > 1) {
-                    // Fix for [ 1812183 ] Properties: space before "=" shouldn't
+                    // Fix for [ 1812183 ] Properties: space before "="
+                    // shouldn't
                     // be part of the key, contributed by Arno Peters
                     i += Character.charCount(cp);
                     cp = string.codePointAt(i);
@@ -378,7 +384,8 @@ public class ResourceBundleFilter extends AbstractFilter {
                 && "true".equalsIgnoreCase(processOptions.get(OPTION_DONT_UNESCAPE_U_LITERALS));
 
         if (processOptions != null) {
-                forceTargetEscape = !"false".equalsIgnoreCase(processOptions.get(OPTION_FORCE_JAVA8_LITERALS_ESCAPE));
+            forceTargetEscape = !"false"
+                    .equalsIgnoreCase(processOptions.get(OPTION_FORCE_JAVA8_LITERALS_ESCAPE));
         }
 
         String raw;
@@ -477,7 +484,8 @@ public class ResourceBundleFilter extends AbstractFilter {
                         noi18n = false;
                     } else {
                         value = value.replaceAll("\\n\\n", "\n \n");
-                        // If there is a comment, show it into the Comments panel
+                        // If there is a comment, show it into the Comments
+                        // panel
                         String trans = process(key, value, comments);
                         // Delete the comments
                         comments = null;
@@ -497,7 +505,8 @@ public class ResourceBundleFilter extends AbstractFilter {
                             outfile.write(toAscii(key, EscapeMode.KEY));
                             outfile.write(equals);
                             outfile.write(trans);
-                            outfile.write(lbpr.getLinebreak()); // fix for bug 1462566
+                            outfile.write(lbpr.getLinebreak()); // fix for bug
+                                                                // 1462566
                         }
                     }
                 }
@@ -522,7 +531,8 @@ public class ResourceBundleFilter extends AbstractFilter {
                 if (cp == '=' || cp == ':') {
                     return i;
                 } else if (cp == ' ' || cp == '\t') {
-                    for (int cp2, j = str.offsetByCodePoints(i, 1); j < str.length(); j += Character.charCount(cp2)) {
+                    for (int cp2, j = str.offsetByCodePoints(i, 1); j < str.length(); j += Character
+                            .charCount(cp2)) {
                         cp2 = str.codePointAt(j);
                         if (cp2 == ':' || cp2 == '=') {
                             return j;
@@ -540,7 +550,8 @@ public class ResourceBundleFilter extends AbstractFilter {
     }
 
     // Support to show the comments (localization notes) into the Comments panel
-    // Added the c parameter, of type String, which is the comment showed in the interface
+    // Added the c parameter, of type String, which is the comment showed in the
+    // interface
     protected String process(String key, String value, String c) {
         if (entryParseCallback != null) {
             List<ProtectedPart> protectedParts = TagUtil.applyCustomProtectedParts(value,
@@ -558,7 +569,7 @@ public class ResourceBundleFilter extends AbstractFilter {
 
     @Override
     protected void alignFile(BufferedReader sourceFile, BufferedReader translatedFile, FilterContext fc,
-                             String sourcePath) throws Exception {
+            String sourcePath) throws Exception {
         Map<String, String> source = new HashMap<>();
         Map<String, String> translated = new HashMap<>();
 

@@ -48,7 +48,7 @@ import org.omegat.filters2.master.FiltersUtil;
 import gen.core.filters.Filters;
 
 /**
- * Class to load & save global OmegaT preferences.
+ * Class to load &amp; save global OmegaT preferences.
  * <p>
  * Initially this class was implemented with static members and methods directly
  * implementing the interface, backed by XML storage. However, this was bad for
@@ -233,7 +233,8 @@ public final class Preferences {
     /** Workflow Option: Minimal Similarity Of the Best Fuzzy Match to insert */
     public static final String BEST_MATCH_MINIMAL_SIMILARITY = "wf_minimalSimilarity";
     /**
-     * Default Value of Workflow Option: Minimal Similarity Of the Best Fuzzy Match to insert
+     * Default Value of Workflow Option: Minimal Similarity Of the Best Fuzzy
+     * Match to insert
      */
     public static final int BEST_MATCH_MINIMAL_SIMILARITY_DEFAULT = 100;
 
@@ -410,7 +411,8 @@ public final class Preferences {
     public static final String ALLOW_PROJECT_EXTERN_CMD = "allow_project_extern_cmd";
 
     /**
-     * Version of file filters. Unfortunately cannot put it into filters itself for backwards compatibility reasons.
+     * Version of file filters. Unfortunately cannot put it into filters itself
+     * for backwards compatibility reasons.
      */
     public static final String FILTERS_VERSION = "filters_version";
 
@@ -427,8 +429,8 @@ public final class Preferences {
     public static final boolean STAT_COUNTING_CUSTOM_TAGS_DEFAULT = true;
 
     /**
-     * Prefix for keys used to record default tokenizer behavior settings. Prepend to the full name of the tokenizer,
-     * e.g.
+     * Prefix for keys used to record default tokenizer behavior settings.
+     * Prepend to the full name of the tokenizer, e.g.
      *
      * <code>TOK_BEHAVIOR_PREFIX + tokenizer.class.getName()</code> to obtain
      * <code>tokenizer_behavior_org.omegat.tokenizer.LuceneXXTokenizer</code>
@@ -520,12 +522,14 @@ public final class Preferences {
     }
 
     /**
-     * Returns the defaultValue of some preference out of OmegaT's preferences file.
+     * Returns the defaultValue of some preference out of OmegaT's preferences
+     * file.
      * <p>
      * If the key is not found, returns the empty string.
      *
      * @param key
-     *            key of the key to look up, usually a static string from this class
+     *            key of the key to look up, usually a static string from this
+     *            class
      * @return preference defaultValue as a string
      */
     public static String getPreference(String key) {
@@ -549,8 +553,8 @@ public final class Preferences {
     /**
      * Returns the boolean defaultValue of some preference.
      * <p>
-     * Returns true if the preference exists and is equal to "true", false otherwise (no such preference, or it's equal
-     * to "false", etc).
+     * Returns true if the preference exists and is equal to "true", false
+     * otherwise (no such preference, or it's equal to "false", etc).
      *
      * @param key
      *            preference key, usually a static string from this class
@@ -561,12 +565,15 @@ public final class Preferences {
     }
 
     /**
-     * Returns the boolean value of some preference out of OmegaT's preferences file, if it exists.
+     * Returns the boolean value of some preference out of OmegaT's preferences
+     * file, if it exists.
      * <p>
-     * If the key is not found, returns the default value provided and sets the preference to the default value.
+     * If the key is not found, returns the default value provided and sets the
+     * preference to the default value.
      *
      * @param key
-     *            name of the key to look up, usually a static string from this class
+     *            name of the key to look up, usually a static string from this
+     *            class
      * @param defaultValue
      *            default value for the key
      * @return preference value as an boolean
@@ -576,12 +583,15 @@ public final class Preferences {
     }
 
     /**
-     * Returns the value of some preference out of OmegaT's preferences file, if it exists.
+     * Returns the value of some preference out of OmegaT's preferences file, if
+     * it exists.
      * <p>
-     * If the key is not found, returns the default value provided and sets the preference to the default value.
+     * If the key is not found, returns the default value provided and sets the
+     * preference to the default value.
      *
      * @param key
-     *            name of the key to look up, usually a static string from this class
+     *            name of the key to look up, usually a static string from this
+     *            class
      * @param defaultValue
      *            default value for the key
      * @return preference value as a string
@@ -591,12 +601,15 @@ public final class Preferences {
     }
 
     /**
-     * Returns the value of some preference out of OmegaT's preferences file, if it exists.
+     * Returns the value of some preference out of OmegaT's preferences file, if
+     * it exists.
      * <p>
-     * If the key is not found, returns the default value provided and sets the preference to the default value.
+     * If the key is not found, returns the default value provided and sets the
+     * preference to the default value.
      *
      * @param key
-     *            name of the key to look up, usually a static string from this class
+     *            name of the key to look up, usually a static string from this
+     *            class
      * @param defaultValue
      *            default value for the key
      * @return preference value as enum
@@ -606,12 +619,15 @@ public final class Preferences {
     }
 
     /**
-     * Returns the integer value of some preference out of OmegaT's preferences file, if it exists.
+     * Returns the integer value of some preference out of OmegaT's preferences
+     * file, if it exists.
      * <p>
-     * If the key is not found, returns the default value provided and sets the preference to the default value.
+     * If the key is not found, returns the default value provided and sets the
+     * preference to the default value.
      *
      * @param key
-     *            name of the key to look up, usually a static string from this class
+     *            name of the key to look up, usually a static string from this
+     *            class
      * @param defaultValue
      *            default value for the key
      * @return preference value as an integer
@@ -621,7 +637,8 @@ public final class Preferences {
     }
 
     /**
-     * Sets the value of some preference. The value will be persisted to disk as XML, serialized via value.toString().
+     * Sets the value of some preference. The value will be persisted to disk as
+     * XML, serialized via value.toString().
      *
      * @param name
      *            preference key name, usually Preferences.PREF_...
@@ -697,7 +714,8 @@ public final class Preferences {
 
         File srxDir = new File(StaticUtils.getConfigDir());
         try {
-            SRX.saveToSrx(srx, srxDir); // save to segmentation.srx in the given directory
+            SRX.saveToSrx(srx, srxDir); // save to segmentation.srx in the given
+                                        // directory
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -741,15 +759,15 @@ public final class Preferences {
      * <li>user filter settings
      * <li>user segmentation settings
      * </ul>
-     * from existing files in {@link StaticUtils#getConfigDir()} (and others
-     * for general prefs; see {@link #getPreferencesFile()}) and set things up
-     * to create them via {@link #save()} if they don't yet exist.
+     * from existing files in {@link StaticUtils#getConfigDir()} (and others for
+     * general prefs; see {@link #getPreferencesFile()}) and set things up to
+     * create them via {@link #save()} if they don't yet exist.
      * <p>
      * When the preferences system is required but actual user preferences
-     * shouldn't be loaded or altered (testing scenarios),
-     * use {@link org.omegat.util.TestPreferencesInitializer} methods or be sure
-     * to set the config dir with
-     * {@link RuntimePreferences#setConfigDir(String)} before calling this method.
+     * shouldn't be loaded or altered (testing scenarios), use
+     * {@link org.omegat.util.TestPreferencesInitializer} methods or be sure to
+     * set the config dir with {@link RuntimePreferences#setConfigDir(String)}
+     * before calling this method.
      */
     public static synchronized void init() {
         if (didInit) {

@@ -67,7 +67,6 @@ allprojects {
             addStringOption('locale', 'en_US')
             addStringOption('bottom', '<span>Copyright 2000-2023, OmegaT project and contributors</span>')
             addStringOption('encoding', 'UTF-8')
-            addStringOption("Xmaxwarns", "1")
             addBooleanOption("Xdoclint:none", true)
             addBooleanOption('html5', true)
             addBooleanOption('frames', false)

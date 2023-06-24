@@ -36,7 +36,6 @@ import java.util.Locale;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
 import org.omegat.core.Core;
 import org.omegat.core.TestCoreInitializer;
 import org.omegat.core.data.EntryKey;
@@ -50,6 +49,7 @@ import org.omegat.gui.editor.IEditorSettings;
 import org.omegat.gui.editor.IPopupMenuConstructor;
 import org.omegat.gui.editor.autocompleter.IAutoCompleter;
 import org.omegat.gui.editor.mark.Mark;
+import org.omegat.util.BiDiUtils;
 import org.omegat.util.Language;
 import org.omegat.util.TMXProp;
 
@@ -129,6 +129,28 @@ public class MatchesVarExpansionTest {
         setupAllLtrProject();
         MatchesVarExpansion expander = new MatchesVarExpansion(TEST_BIDI_TEMPLATE);
         String expected = "mock source text and mock target text";
+        String actual = expander.apply(getMockNearString(), 2).text;
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testApplyBiDiReplacers_rtlToLtr() {
+        Locale.setDefault(RTL_LOCALE);
+        setupRtlToLtrProject();
+        MatchesVarExpansion expander = new MatchesVarExpansion(TEST_BIDI_TEMPLATE);
+        String expected = BiDiUtils.BIDI_RLE + "mock source text" + BiDiUtils.BIDI_PDF + " and "
+                + BiDiUtils.BIDI_LRE + "mock target text" + BiDiUtils.BIDI_PDF;
+        String actual = expander.apply(getMockNearString(), 2).text;
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testApplyBiDiReplacers_ltrToRtl() {
+        Locale.setDefault(LTR_LOCALE);
+        setupLtrToRtlProject();
+        MatchesVarExpansion expander = new MatchesVarExpansion(TEST_BIDI_TEMPLATE);
+        String expected = BiDiUtils.BIDI_LRE + "mock source text" + BiDiUtils.BIDI_PDF + " and "
+                + BiDiUtils.BIDI_RLE + "mock target text" + BiDiUtils.BIDI_PDF;
         String actual = expander.apply(getMockNearString(), 2).text;
         assertEquals(expected, actual);
     }

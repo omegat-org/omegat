@@ -129,7 +129,8 @@ public class SegmentBuilder {
     protected int activeTranslationEndOffset;
 
     /** Boundary of full entry display. */
-    protected Position beginPosP1, endPosM1;
+    protected Position beginPosP1;
+    protected Position endPosM1;
 
     /** Source start position - for marks. */
     protected Position posSourceBeg;
@@ -696,7 +697,7 @@ public class SegmentBuilder {
 
     /**
      * Inserts the texts and formats the text
-     * 
+     *
      * @param text
      *            source or translation text
      * @param isSource
@@ -742,7 +743,7 @@ public class SegmentBuilder {
     /**
      * Writes (if necessary) an RTL or LTR marker. Use it before writing text in
      * some language.
-     * 
+     *
      * @param isRTL
      *            is the language that has to be written a right-to-left
      *            language?
@@ -757,7 +758,7 @@ public class SegmentBuilder {
     /**
      * Writes (if necessary) an end-of-embedding marker. Use it after writing
      * text in some language.
-     * 
+     *
      * @throws BadLocationException
      */
     private void insertDirectionEndEmbedding() throws BadLocationException {

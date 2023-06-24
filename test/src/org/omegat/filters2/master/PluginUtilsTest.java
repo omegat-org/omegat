@@ -57,8 +57,14 @@ public class PluginUtilsTest {
         List<URL> urlList = PluginUtils.populatePluginUrlList(pluginsDirs);
         assertEquals(2, urlList.size());
 
-        assertTrue(urlList.get(0).getFile().endsWith("anotherPlugin-0.3.1.jar"));
-        assertTrue(urlList.get(1).getFile().endsWith("testPlugin-1.13-1.45.0.jar"));
+        final Set<String> expected = new HashSet<>();
+        expected.add("anotherPlugin-0.3.1.jar");
+        expected.add("testPlugin-1.13-1.45.0.jar");
+        final List<String> result = urlList
+                .stream()
+                .map(url -> Paths.get(url.getPath()).getFileName().toString())
+                .collect(Collectors.toList());
+        assertTrue(result.containsAll(expected));
     }
 
 }

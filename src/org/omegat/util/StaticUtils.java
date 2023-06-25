@@ -151,11 +151,14 @@ public final class StaticUtils {
                 if (sourceUri.getScheme().equals("file")) {
                     File uriFile = Paths.get(sourceUri).toFile();
                     // If running from a JAR, get the enclosing folder
-                    // (the JAR is assumed to be at the installation root)
-                    if (uriFile.getName().endsWith(".jar")) {
+                    // (the JAR is assumed to be at the installation root,
+                    //  and there is also "readme.txt" file).
+                    if (uriFile.getName().endsWith(".jar") && new File(uriFile.getParentFile(),
+                            "readme.txt").exists()) {
                         file = uriFile.getParentFile();
                     } else {
                         // Running from an IDE or build tool; use CWD.
+                        // Sometimes running from build/libs/OmegaT.jar
                     }
                 } else {
                     // Running from Java WebStart; use CWD.

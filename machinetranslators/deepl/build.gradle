@@ -1,0 +1,47 @@
+/**
+ * DeepL translator connector.
+ */
+
+plugins {
+    id 'java-library'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compileOnly(project.rootProject)
+    // Libs are provided in the "source" distribution only
+    if (providedLibsDir.directory) {
+        compileOnly fileTree(dir: providedLibsDir, include: '**/*.jar')
+    } else {
+        compileOnly 'commons-io:commons-io:2.11.0'
+        compileOnly 'org.apache.commons:commons-text:1.9'
+        // JSON parser
+        compileOnly "com.fasterxml.jackson.core:jackson-core:2.13.4"
+        compileOnly "com.fasterxml.jackson.core:jackson-databind:2.13.4.2"
+    }
+    // Test dependencies
+    testImplementation(testFixtures(project.rootProject))
+    testImplementation "com.fasterxml.jackson.core:jackson-core:2.13.4"
+    testImplementation "com.fasterxml.jackson.core:jackson-databind:2.13.4.2"
+}
+
+jar {
+    archiveAppendix.set("connector")
+    destinationDirectory.set(new File(rootProject.buildDir, "modules"))
+    def pluginProp = loadProperties(file('plugin.properties'))
+    manifest {
+        attributes('License': 'GNU Public License version 3 or later',
+                'Implementation-Version': pluginProp.Version,
+                'OmegaT-Plugins': pluginProp.Class,
+                'Plugin-Author': pluginProp.Author,
+                'Plugin-Version': pluginProp.Version,
+                'Plugin-Name': pluginProp.Name,
+                'Plugin-Category': pluginProp.Category,
+                'Plugin-Description': pluginProp.Description
+        )
+    }
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+}

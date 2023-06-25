@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 6.1.0
 ----------------------------------------------------------------------
-  11 Enhancement
+  12 Enhancement
   18 Bug fixes
 ----------------------------------------------------------------------
 6.1.0 vs 6.0.0
@@ -29,11 +29,14 @@
   - Add nashorn javascript engine[Java 17 compatibility]
   https://sourceforge.net/p/omegat/feature-requests/1525/
 
-  - Upgrade to LanguageTool 3.6
-  https://sourceforge.net/p/omegat/feature-requests/1299/
-
   - Use repository mappings in a local project
   https://sourceforge.net/p/omegat/feature-requests/1448/
+
+  - Remove "Restore defaults" button where it has no function
+  https://sourceforge.net/p/omegat/feature-requests/1364/
+
+  - Upgrade to LanguageTool 3.6
+  https://sourceforge.net/p/omegat/feature-requests/1299/
 
   - Improve TBX parsing
   https://sourceforge.net/p/omegat/feature-requests/1268/
@@ -68,7 +71,7 @@
   https://sourceforge.net/p/omegat/bugs/1169/
 
   - OmegaT cannot load a project and error dialog with FileSystemLoopException
-  https://sourceforge.net/p/omegat/bugs/1168
+  https://sourceforge.net/p/omegat/bugs/1168/
 
   - Error when trying to backup the project file on Windows
   https://sourceforge.net/p/omegat/bugs/1166/

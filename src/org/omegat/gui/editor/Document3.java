@@ -6,6 +6,7 @@
  Copyright (C) 2009 Alex Buloichik
                2013 Aaron Madlon-Kay, Zoltan Bartko
                2015 Aaron Madlon-Kay
+               2023 Damien Rembert
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -55,43 +56,55 @@ public class Document3 extends DefaultStyledDocument {
         ALL_LTR,
         /** All text is right-to-left oriented. */
         ALL_RTL,
-        /** different texts/segments have different orientation, depending on language/locale. */
+        /**
+         * different texts/segments have different orientation, depending on
+         * language/locale.
+         */
         DIFFER
     };
 
     protected final EditorController controller;
 
     /** Position of active translation in text. */
-    Position activeTranslationBeginM1, activeTranslationEndP1;
+    Position activeTranslationBeginM1;
+    Position activeTranslationEndP1;
 
     /**
-     * Flag for check internal changes of content, which should be always acceptable.
+     * Flag for check internal changes of content, which should be always
+     * acceptable.
      * <p>
-     * Note that there is a concurrency bug with the AquaCaret class (part of the OS X native LAF) whereby
-     * <i>insertion</i> into the Document while the doc is visible can cause the caret to try to update itself while the
-     * doc internals are inconsistent, leading to exceptions whenever any visual update of the Editor is performed (the
-     * Editor becomes unusable).
+     * Note that there is a concurrency bug with the AquaCaret class (part of
+     * the OS X native LAF) whereby <i>insertion</i> into the Document while the
+     * doc is visible can cause the caret to try to update itself while the doc
+     * internals are inconsistent, leading to exceptions whenever any visual
+     * update of the Editor is performed (the Editor becomes unusable).
      * <p>
-     * This bug is very old (reported as early as February 2006) and appears to not have been addressed even in December
-     * 2015 in Java 1.8.0_66), though it is very hard to reproduce (it appears to be a concurrency issue that only
-     * manifests itself under certain circumstances).
+     * This bug is very old (reported as early as February 2006) and appears to
+     * not have been addressed even in December 2015 in Java 1.8.0_66), though
+     * it is very hard to reproduce (it appears to be a concurrency issue that
+     * only manifests itself under certain circumstances).
      * <p>
-     * There is a chance that the "real" bug is in the way we are manipulating the JEditorPane and/or the underlying
-     * document, but it is unclear what the correct solution would be.
+     * There is a chance that the "real" bug is in the way we are manipulating
+     * the JEditorPane and/or the underlying document, but it is unclear what
+     * the correct solution would be.
      * <p>
-     * As a workaround, when setting this flag to true, if the changes are to include insertions or deletions of text in
-     * the document, you must also disable the editor's caret updates temporarily (e.g. with
-     * {@code StaticUIUtils#setCaretUpdateEnabled()}). After the document changes are complete and you have set this
-     * flag back to false, caret update can be re-enabled.
+     * As a workaround, when setting this flag to true, if the changes are to
+     * include insertions or deletions of text in the document, you must also
+     * disable the editor's caret updates temporarily (e.g. with
+     * {@code StaticUIUtils#setCaretUpdateEnabled()}). After the document
+     * changes are complete and you have set this flag back to false, caret
+     * update can be re-enabled.
      *
-     * @see <a href="https://sourceforge.net/p/omegat/bugs/162/">Initial ticket</a>
-     * @see <a href="https://sourceforge.net/p/omegat/bugs/529/">Later, more specific ticket</a>
+     * @see <a href="https://sourceforge.net/p/omegat/bugs/162/">Initial
+     *      ticket</a>
+     * @see <a href="https://sourceforge.net/p/omegat/bugs/529/">Later, more
+     *      specific ticket</a>
      */
     protected boolean trustedChangesInProgress = false;
 
     /**
-     * Flag to indicate that text is currently being composed (should
-     * not be considered to have been input yet) by an IME.
+     * Flag to indicate that text is currently being composed (should not be
+     * considered to have been input yet) by an IME.
      */
     protected boolean textBeingComposed = false;
 
@@ -188,8 +201,8 @@ public class Document3 extends DefaultStyledDocument {
             for (int par = parBeg; par <= parEnd; par++) {
                 Element el = root.getElement(par);
                 MutableAttributeSet attr = (MutableAttributeSet) el.getAttributes();
-                attr.addAttribute(StyleConstants.Alignment, isRightAlignment ? StyleConstants.ALIGN_RIGHT
-                        : StyleConstants.ALIGN_LEFT);
+                attr.addAttribute(StyleConstants.Alignment,
+                        isRightAlignment ? StyleConstants.ALIGN_RIGHT : StyleConstants.ALIGN_LEFT);
             }
 
             changes.end();

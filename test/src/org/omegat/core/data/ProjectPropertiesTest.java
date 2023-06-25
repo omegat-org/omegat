@@ -53,9 +53,7 @@ public class ProjectPropertiesTest {
     public void test1() {
         ProjectProperties p = new ProjectProperties();
         p.setProjectRoot("/tmp");
-        switch (Platform.getOsType()) {
-        case WIN32:
-        case WIN64:
+        if (Platform.isWindows) {
             p.getSourceDir().setRelativeOrAbsolute("C:\\dir");
             assertEquals("C:/dir/", p.getSourceDir().getAsString());
             assertFalse(p.getSourceDir().isUnderRoot());
@@ -67,9 +65,7 @@ public class ProjectPropertiesTest {
             assertEquals("C:/some/dir/1/", p.getSourceDir().getAsString());
             assertTrue(p.getSourceDir().isUnderRoot());
             assertEquals("dir/1/", p.getSourceDir().getUnderRoot());
-
-            break;
-        default:
+        } else {
             p.getSourceDir().setRelativeOrAbsolute("/dir");
             assertEquals("/dir/", p.getSourceDir().getAsString());
             assertFalse(p.getSourceDir().isUnderRoot());
@@ -81,8 +77,6 @@ public class ProjectPropertiesTest {
             assertEquals("/some/dir/1/", p.getSourceDir().getAsString());
             assertTrue(p.getSourceDir().isUnderRoot());
             assertEquals("dir/1/", p.getSourceDir().getUnderRoot());
-
-            break;
         }
     }
 

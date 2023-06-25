@@ -526,7 +526,7 @@ config-dir="path/to/new/configdir"</programlisting>
 						  <varlistentry id="launch.with.command.line.source.pattern.lt.pattern.gt.">
 							<term id="launch.with.command.line.source.pattern.lt.pattern.gt.title"><option>--source-pattern=</option><userinput>&lt;pattern&gt;</userinput></term>
 							<listitem>
-							  <para>A whitelist of regular expressions defining
+							  <para>An allowlist of regular expressions defining
 							  the source files to process. Remember that in
 							  regular expressions, the period and backslash
 							  character must be escaped: <code>\.</code> and

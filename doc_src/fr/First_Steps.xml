@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd"
+[
+<!ENTITY % manualvariables SYSTEM "manualvariables.mod">
+%manualvariables;
+]>
+<article lang="fr" id="first.steps">
+  <title>OmegaT</title>
+  <section>
+	<title id="first-steps">Premiers pas</title>
+	<para>Appuyer sur la touche <keycap>F1</keycap> ou accéder au menu <guimenu>Aide</guimenu> pour ouvrir le manuel d’utilisation. Ce manuel fournit une introduction complète à OmegaT. Pour utiliser OmegaT avec des paramètres simplifiés, procédez comme suit :<orderedlist id="first-step-list">
+	  <listitem>
+		<para>Dans le menu <guimenu>Projet</guimenu>, sélectionnez <guimenuitem>Nouveau...</guimenuitem> pour créer un nouveau projet.</para>
+	  </listitem>
+	  <listitem>
+		<para>Indiquez la langue du fichier source ainsi que la langue de traduction. Cliquez sur <guibutton>OK</guibutton>.</para>
+
+		<para>→ OmegaT créera un ensemble de dossiers contenant vos fichiers. Il créera également une mémoire de traduction vide qu’il remplira en arrière-plan, un segment à la fois, au fur et à mesure de votre traduction. Les correspondances pour cette mémoire apparaîtront éventuellement dans le volet <guilabel>Correspondances</guilabel>.</para>
+	  </listitem>
+	  <listitem>
+		<para>Cliquez sur <guibutton>Ajouter des fichiers...</guibutton> et ajoutez les fichiers que vous souhaitez traduire. Fermez la fenêtre.</para>
+
+		<para>→ OmegaT copiera les fichiers sélectionnés dans le projet créé lors de l’étape précédente. Ils sont affichés segment par segment pour que vous puissiez les traduire.</para>
+	  </listitem>
+	  <listitem>
+		<para>Saisissez la traduction du premier segment. Appuyez sur <keycap>Entrée</keycap>.</para>
+
+		<para>→ OmegaT enregistre ce segment dans la mémoire de traduction du projet et déplace le curseur vers le segment suivant.</para>
+	  </listitem>
+
+	  <listitem>
+		<para>Pour créer le document traduit, allez dans <guimenu>&gt;Projet</guimenu><guimenuitem>&gt;Créer les documents traduits</guimenuitem>.</para>
+
+		<para>→ OmegaT conservera les fichiers traduits dans le dossier <guilabel>cible</guilabel> du projet créé lors de la première étape. Pour accéder aux fichiers, utilisez <guimenu>&gt;Projet</guimenu> <guisubmenu>&gt;Accéder au contenu du projet</guisubmenu>.</para>
+	  </listitem>
+
+	  <listitem>
+		<para>Pour en savoir plus, consultez le manuel d’utilisation.</para>
+	  </listitem>
+	</orderedlist>
+	</para>
+  </section>
+
+  <section>
+	<title id="freedoms">Libertés d’utilisation et de modification</title>
+	<para>OmegaT est un logiciel gratuit de traduction assistée par ordinateur (TAO) destiné aux traductaires professionnels. Ce logiciel est distribué selon les termes de la <emphasis>version 3.0 de la Licence Publique Générale GNU</emphasis>. Consultez <guimenu>&gt; Aide</guimenu> <guimenu>&gt; À propos</guimenu>. La licence vous accorde les libertés suivantes :<itemizedlist id="freedoms.list">
+	  <listitem>
+		<para>La liberté d’exploiter OmegaT comme vous le souhaitez et dans n’importe quel but.</para>
+	  </listitem>
+
+	  <listitem>
+		<para>La liberté d’étudier le fonctionnement d’OmegaT et de le modifier comme vous le souhaitez.</para>
+	  </listitem>
+
+	  <listitem>
+		<para>La liberté de redistribuer des copies pour aider les autres.</para>
+	  </listitem>
+
+	  <listitem>
+		<para>La liberté de distribuer des copies de vos versions modifiées aux autres.</para>
+	  </listitem>
+	</itemizedlist>
+	</para>
+  </section>
+</article>

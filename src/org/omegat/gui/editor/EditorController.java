@@ -174,8 +174,10 @@ public class EditorController implements IEditor {
     /** Class for process marks for editor. */
     protected MarkerController markerController;
 
-    private String introPaneTitle, emptyProjectPaneTitle;
-    private JTextPane introPane, emptyProjectPane;
+    private String introPaneTitle;
+    private String emptyProjectPaneTitle;
+    private JTextPane introPane;
+    private JTextPane emptyProjectPane;
     protected final MainWindow mw;
 
     /** Currently displayed segments info. */
@@ -187,7 +189,8 @@ public class EditorController implements IEditor {
     protected Timer lazyLoadTimer = new Timer(200, null);
 
     /** Current displayed file. */
-    protected int displayedFileIndex, previousDisplayedFileIndex;
+    protected int displayedFileIndex;
+    protected int previousDisplayedFileIndex;
     /**
      * Current active segment in current file, if there are segments in file (can be fale if filter active!)
      */
@@ -205,7 +208,8 @@ public class EditorController implements IEditor {
     };
 
     Document3.ORIENTATION currentOrientation;
-    protected boolean sourceLangIsRTL, targetLangIsRTL;
+    protected boolean sourceLangIsRTL;
+    protected boolean targetLangIsRTL;
 
     volatile IEditorFilter entriesFilter;
     private Component entriesFilterControlComponent;
@@ -376,26 +380,23 @@ public class EditorController implements IEditor {
         }
     }
 
-    private final AdjustmentListener scrollListener = new AdjustmentListener() {
-        @Override
-        public void adjustmentValueChanged(AdjustmentEvent e) {
-            if (m_docSegList == null) {
-                return;
-            }
+    private final AdjustmentListener scrollListener = (AdjustmentEvent e) -> {
+        if (m_docSegList == null) {
+            return;
+        }
 
-            if (e.getValueIsAdjusting()) {
-                return;
-            }
+        if (e.getValueIsAdjusting()) {
+            return;
+        }
 
-            if (lazyLoadTimer.isRunning()) {
-                return;
-            }
+        if (lazyLoadTimer.isRunning()) {
+            return;
+        }
 
-            double pos = e.getValue() / (double) scrollPane.getVerticalScrollBar().getMaximum();
+        double pos = e.getValue() / (double) scrollPane.getVerticalScrollBar().getMaximum();
 
-            if (pos <= PAGE_LOAD_THRESHOLD || pos >= 1.0 - PAGE_LOAD_THRESHOLD) {
-                lazyLoadTimer.restart();
-            }
+        if (pos <= PAGE_LOAD_THRESHOLD || pos >= 1.0 - PAGE_LOAD_THRESHOLD) {
+            lazyLoadTimer.restart();
         }
     };
 
@@ -512,12 +513,7 @@ public class EditorController implements IEditor {
         private boolean handleDroppedProject(final File projDir) {
             // Opening/closing might take a long time for team projects.
             // Invoke later so we can return successfully right away.
-            SwingUtilities.invokeLater(new Runnable() {
-                @Override
-                public void run() {
-                    ProjectUICommands.projectOpen(projDir, true);
-                }
-            });
+            SwingUtilities.invokeLater(() -> ProjectUICommands.projectOpen(projDir, true));
             return true;
         }
 
@@ -527,13 +523,9 @@ public class EditorController implements IEditor {
             }
             // The import might take a long time if there are collision dialogs.
             // Invoke later so we can return successfully right away.
-            SwingUtilities.invokeLater(new Runnable() {
-                @Override
-                public void run() {
-                    ProjectUICommands.projectImportFiles(Core.getProject().getProjectProperties().getSourceRoot(),
-                            files.toArray(new File[files.size()]));
-                }
-            });
+            SwingUtilities.invokeLater(() -> ProjectUICommands.projectImportFiles(
+                    Core.getProject().getProjectProperties().getSourceRoot(),
+                    files.toArray(new File[files.size()])));
             return true;
         }
 
@@ -616,37 +608,6 @@ public class EditorController implements IEditor {
         }
         // set editor's orientation by target language
         editor.setComponentOrientation(targetOrientation);
-    }
-
-    /**
-     * Toggle component orientation: LTR, RTL, language dependent.
-     */
-    protected void toggleOrientation() {
-        commitAndDeactivate();
-
-        Document3.ORIENTATION newOrientation = currentOrientation;
-        switch (currentOrientation) {
-        case ALL_LTR:
-            newOrientation = Document3.ORIENTATION.ALL_RTL;
-            break;
-        case ALL_RTL:
-            if (sourceLangIsRTL != targetLangIsRTL || sourceLangIsRTL != Language.localeIsRTL()) {
-                newOrientation = Document3.ORIENTATION.DIFFER;
-            } else {
-                newOrientation = Document3.ORIENTATION.ALL_LTR;
-            }
-            break;
-        case DIFFER:
-            newOrientation = Document3.ORIENTATION.ALL_LTR;
-            break;
-        }
-        LOGGER.info("Switch document orientation from " + currentOrientation + " to " + newOrientation);
-        currentOrientation = newOrientation;
-
-        applyOrientationToEditor();
-
-        loadDocument();
-        activateEntry();
     }
 
     /**
@@ -743,7 +704,7 @@ public class EditorController implements IEditor {
         Document3 doc = new Document3(this);
 
         // Create all SegmentBuilders now...
-        ArrayList<SegmentBuilder> tmpSegList = new ArrayList<SegmentBuilder>(file.entries.size());
+        ArrayList<SegmentBuilder> tmpSegList = new ArrayList<>(file.entries.size());
         for (SourceTextEntry ste : file.entries) {
             if (entriesFilter == null || entriesFilter.allowed(ste)) {
                 SegmentBuilder sb = new SegmentBuilder(this, doc, settings, ste, ste.entryNum(), hasRTL);
@@ -1290,8 +1251,7 @@ public class EditorController implements IEditor {
         if (Core.getProject().isTeamSyncPrepared()) {
             try {
                 Core.executeExclusively(false, Core.getProject()::teamSync);
-            } catch (InterruptedException ex) {
-            } catch (TimeoutException ex) {
+            } catch (InterruptedException | TimeoutException ex) {
             } catch (Exception ex) {
                 throw new RuntimeException(ex);
             }
@@ -2014,7 +1974,6 @@ public class EditorController implements IEditor {
                 introPane.setPage(uri.toURL());
             }
         } catch (IOException e) {
-            // editorScroller.setViewportView(editor);
         }
 
         emptyProjectPaneTitle = OStrings.getString("TF_INTRO_EMPTYPROJECT_FILENAME");
@@ -2033,8 +1992,8 @@ public class EditorController implements IEditor {
      */
     private String detectFirstStepsLanguage() {
         // Get the system language and country
-        String language = Locale.getDefault().getLanguage().toLowerCase(Locale.ENGLISH);
-        String country = Locale.getDefault().getCountry().toUpperCase(Locale.ENGLISH);
+        String language = Language.getLowerCaseLanguageFromLocale();
+        String country = Language.getUpperCaseCountryFromLocale();
 
         // Check if there's a translation for the full locale (lang + country)
         if (Help.getHelpFileURI(language + "_" + country, OConsts.HELP_FIRST_STEPS) != null) {

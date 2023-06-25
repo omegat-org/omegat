@@ -57,6 +57,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.Set;
+import java.util.TimeZone;
 import java.util.function.BiPredicate;
 import java.util.function.Function;
 import java.util.regex.Matcher;
@@ -131,15 +132,26 @@ public final class FileUtil {
      * @return Backup file.
      */
     public static File backupFile(File original) {
-        long fileMillis = original.lastModified();
-        String str = new SimpleDateFormat("yyyyMMddHHmm").format(new Date(fileMillis));
-        File backup = new File(original.getPath() + "." + str + OConsts.BACKUP_EXTENSION);
+        File backup = new File(original.getParentFile(), getBackupFilename(original));
         try {
             FileUtils.copyFile(original, backup);
         } catch (IOException ex) {
             Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_CREATE_BACKUP_FILE", original.getName());
         }
         return backup;
+    }
+
+    /**
+     * Generates a name for the file to be backuped, in the form of <code>[original_name].yyyyMMddHHmm.bak</code>.
+     * 
+     * @param original the file to be backuped
+     * @return the name of the backuped file
+     */
+    public static String getBackupFilename(File original) {
+        final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmm");
+        dateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
+        return String.format("%s.%s%s", original.getName(),
+                dateFormat.format(new Date(original.lastModified())), OConsts.BACKUP_EXTENSION);
     }
 
     /**
@@ -291,19 +303,14 @@ public final class FileUtil {
     public static String computeRelativePath(File rootDir, File file) throws IOException {
         String rootAbs = rootDir.getAbsolutePath().replace('\\', '/') + '/';
         String fileAbs = file.getAbsolutePath().replace('\\', '/');
-
-        switch (Platform.getOsType()) {
-        case WIN32:
-        case WIN64:
+        if (Platform.isWindows) {
             if (!fileAbs.toUpperCase().startsWith(rootAbs.toUpperCase())) {
                 throw new IOException("File '" + file + "' is not under dir '" + rootDir + "'");
             }
-            break;
-        default:
+        } else {
             if (!fileAbs.startsWith(rootAbs)) {
                 throw new IOException("File '" + file + "' is not under dir '" + rootDir + "'");
             }
-            break;
         }
         return fileAbs.substring(rootAbs.length());
     }
@@ -441,11 +448,11 @@ public final class FileUtil {
      * required for conversion like 'C:\zzz' into '/zzz' for be real absolute in
      * Linux.
      */
-    public static String absoluteForSystem(String path, Platform.OsType currentOsType) {
+    public static String absoluteForSystem(String path) {
         path = path.replace('\\', '/');
         Matcher m = RE_ABSOLUTE_WINDOWS.matcher(path);
         if (m.matches()) {
-            if (currentOsType != Platform.OsType.WIN32 && currentOsType != Platform.OsType.WIN64) {
+            if (!Platform.isWindows) {
                 // Windows' absolute file on non-Windows system
                 return m.group(1);
             }

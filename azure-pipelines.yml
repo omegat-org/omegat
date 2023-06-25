@@ -23,7 +23,7 @@ pr:
       - README.md
 
 schedules:
-  - cron: '0 3 * * 6'
+  - cron: '0 12 * * 6'
     displayName: Weekly saturday build
     branches:
       include:
@@ -35,12 +35,13 @@ variables:
   isMain: $[eq(variables['Build.SourceBranch'], 'refs/heads/master')]
   isReleasesBranch: $[contains(variables['Build.SourceBranch'], 'refs/heads/releases/')]
   isRelease: $[contains(variables['Build.SourceBranch'], 'refs/tags/v')]
-  isJRE8: $[contains(variables['Build.SourceBranch'], 'refs/tags/v5')]
+  isJRE11: $[contains(variables['Build.SourceBranch'], 'refs/tags/v6')]
   isSchedule: $[eq(variables['Build.Reason'], 'Schedule')]
   GRADLE_USER_HOME: '$(Pipeline.Workspace)/.gradle'
 
 stages:
 - stage: Check
+  condition: not(or(eq(variables['Build.Reason'], 'Schedule'), eq(variables['Build.Reason'], 'Manual')))
   jobs:
   - job: GitHubCI
     displayName: CI Check for master, releases/* and Pull-Requests
@@ -50,10 +51,9 @@ stages:
     steps:
       - template: ci/azure-pipelines/check_steps.yml
 
-# Build steps will run on the main and/or release branch, except for Pull-Request
+  # Weekly release steps will be triggerred after integration-test succeeded.
 - stage: Weekly
-  dependsOn: Check
-  condition: and(succeeded(), eq(variables['Build.Reason'], 'Schedule'))
+  condition: or(eq(variables['Build.Reason'], 'Schedule'), eq(variables['Build.Reason'], 'Manual'))
   jobs:
   - job: WeeklyBuild
     displayName: Build for master weekly
@@ -63,12 +63,16 @@ stages:
       - script: |
           version=$(./gradlew -qq printVersion | head -n -1 )
           echo "##vso[task.setvariable variable=version]$version"
+      - template: ci/azure-pipelines/integ_test_steps.yml
+        parameters:
+          testType: 'GIT'
+          duration: 600
       - template: ci/azure-pipelines/build_steps.yml
       - template: ci/azure-pipelines/publish_weekly.yml
         parameters:
           omegatVersion: $(version)
 
-# Weekly release steps will be triggerred by schedule on main and/or releases/* branch.
+  # Release steps will run on the main and/or release branch with tags.
 - stage: Release
   dependsOn: Check
   condition: and(succeeded(), eq(variables.isRelease, true))
@@ -84,4 +88,3 @@ stages:
       - template: ci/azure-pipelines/publish_release.yml
         parameters:
           omegatVersion: $(version)
-

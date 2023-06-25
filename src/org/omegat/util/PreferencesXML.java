@@ -38,11 +38,9 @@ package org.omegat.util;
 
 import static org.omegat.util.PreferencesImpl.IPrefsPersistence;
 
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -52,7 +50,9 @@ import java.util.TreeMap;
 
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
@@ -71,7 +71,10 @@ public class PreferencesXML implements IPrefsPersistence {
     public PreferencesXML(File loadFile, File saveFile) {
         this.loadFile = loadFile;
         this.saveFile = saveFile;
-        mapper = JaxbXmlMapper.getXmlMapper();
+        mapper = new XmlMapper();
+        mapper.configure(ToXmlGenerator.Feature.WRITE_XML_DECLARATION, true);
+        mapper.enable(SerializationFeature.INDENT_OUTPUT);
+        mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
     }
 
     @Override
@@ -90,8 +93,10 @@ public class PreferencesXML implements IPrefsPersistence {
     private void loadXml(InputStream is, List<String> keys, List<String> values) throws IOException {
         OmegaT rootComponent = mapper.readValue(is, OmegaT.class);
         rootComponent.preference.getRows().forEach((key, value) -> {
-            keys.add(key);
-            values.add(value);
+            if (value != null) {
+                keys.add(key);
+                values.add(value);
+            }
         });
     }
 
@@ -99,12 +104,11 @@ public class PreferencesXML implements IPrefsPersistence {
     public void save(final List<String> keys, final List<String> values) throws Exception {
         OmegaT rootComponent = new OmegaT();
         for (int i = 0; i < keys.size(); i++) {
-            rootComponent.preference.put(keys.get(i), values.get(i));
+            if (values.get(i) != null) {
+                rootComponent.preference.put(keys.get(i), values.get(i));
+            }
         }
-        String xmlString = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(rootComponent);
-        try (BufferedWriter writer = Files.newBufferedWriter(saveFile.toPath(), StandardCharsets.UTF_8)) {
-            writer.write(xmlString);
-        }
+        mapper.writeValue(saveFile, rootComponent);
     }
 
     private static void makeBackup(File file) {
@@ -171,11 +175,15 @@ public class PreferencesXML implements IPrefsPersistence {
         /**
          * Custom serialize method for preference values.
          *
-         * @param preference Value to serialize; can <b>not</b> be null.
-         * @param gen Generator used to output resulting Json content
-         * @param provider Provider that can be used to get serializers for
-         *   serializing Objects value contains, if any.
-         * @throws IOException when write error.
+         * @param preference
+         *            Value to serialize; can <b>not</b> be null.
+         * @param gen
+         *            Generator used to output resulting Json content
+         * @param provider
+         *            Provider that can be used to get serializers for
+         *            serializing Objects value contains, if any.
+         * @throws IOException
+         *            when write error.
          */
         @Override
         public void serialize(final Preference preference, final JsonGenerator gen,

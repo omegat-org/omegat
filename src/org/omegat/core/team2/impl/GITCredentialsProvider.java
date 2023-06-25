@@ -252,7 +252,8 @@ public class GITCredentialsProvider extends CredentialsProvider {
                 String promptedFingerprint = extractFingerprint(promptText);
                 if (promptedFingerprint == null) {
                     throw new UnsupportedCredentialItem(uri,
-                            String.format("Wrong fingerprint pattern: %s", promptText));
+                            String.format("Unknown pattern to ask acceptance of host key fingerprint "
+                                    + "\n%s", promptText));
                 }
                 if (predefinedFingerprint != null) {
                     ((CredentialItem.YesNoType) item)
@@ -266,8 +267,7 @@ public class GITCredentialsProvider extends CredentialsProvider {
                 askYesNo(item, promptText, uri, promptedFingerprint);
                 continue;
             } else if (item instanceof CredentialItem.InformationalMessage) {
-                Log.logInfoRB("GIT_CREDENTIAL_MESSAGE", item.getPromptText());
-                Core.getMainWindow().showTimedStatusMessageRB("GIT_CREDENTIAL_MESSAGE", item.getPromptText());
+                sb.append(item.getPromptText()).append("\n");
                 continue;
             }
             throw new UnsupportedCredentialItem(uri, item.getClass().getName() + ":" + item.getPromptText());

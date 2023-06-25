@@ -25,11 +25,12 @@
 
 package org.omegat.core.statistics;
 
+import javax.xml.bind.annotation.XmlAttribute;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.data.SourceTextEntry;
-
-import javax.xml.bind.annotation.XmlAttribute;
 
 /**
  * Bean for store counts in statistics.
@@ -38,10 +39,10 @@ import javax.xml.bind.annotation.XmlAttribute;
  * <ol>
  * <li>All protected parts(including tags, placeholders, protected text and
  * related tags) are not counted in the word count (default). For example:
- * "&lt;i1>", "&lt;m0>Acme&lt;/m0>" will produce 0 words.
+ * "&lt;i1&gt; "&lt;m0&gt;&lt;/m0&gt; will produce 0 words.
  *
  * <li>Protected texts are counted, but related tags are not counted in the word
- * count. For example: "&lt;i1>" - 0 words, "&lt;m0>Acme&lt;/m0>" - 1 word.
+ * count. For example: "&lt;i1&gt; - 0 words, "&lt;m0&gt;&lt;/m0&gt; - 1 word.
  * </ol>
  * The mode is stored in the
  * {@link StatisticsSettings#isCountingProtectedText()} property.
@@ -51,19 +52,19 @@ import javax.xml.bind.annotation.XmlAttribute;
 public class StatCount {
 
     @JsonProperty("segments")
-    @XmlAttribute(name="segments")
+    @XmlAttribute(name = "segments")
     public int segments;
     @JsonProperty("words")
-    @XmlAttribute(name="words")
+    @XmlAttribute(name = "words")
     public int words;
     @JsonProperty("characters-without-spaces")
-    @XmlAttribute(name="characters-without-spaces")
+    @XmlAttribute(name = "characters-without-spaces")
     public int charsWithoutSpaces;
     @JsonProperty("characters")
-    @XmlAttribute(name="characters")
+    @XmlAttribute(name = "characters")
     public int charsWithSpaces;
     @JsonProperty("files")
-    @XmlAttribute(name="files")
+    @XmlAttribute(name = "files")
     public int files;
 
     /**

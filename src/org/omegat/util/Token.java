@@ -35,7 +35,7 @@ import java.util.regex.Pattern;
  * the characters position in the char array due existence of multi-char
  * characters.
  * <p>
- * Since 1.6 strips '&' in given token text.
+ * Since 1.6 strips '&amp;' in given token text.
  *
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
@@ -133,8 +133,8 @@ public class Token {
     }
 
     /**
-     * Get the strings represented by the provided tokens, from the original string
-     * they were produced from. For debugging purposes.
+     * Get the strings represented by the provided tokens, from the original
+     * string they were produced from. For debugging purposes.
      */
     public static String[] getTextsFromString(Token[] tokens, String string) {
         String[] result = new String[tokens.length];

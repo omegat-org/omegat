@@ -1,190 +1,260 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="menus.project">
-  <title>Projet</title>
+  <title id="menus.project.title"><guimenu>Projet</guimenu></title>
+  <para>Ce menu vous permet d’accéder aux commandes de gestion de projet.</para>
 
+  <example id="example.new.project.shortcut">
+	<title id="example.new.project.shortcut.title">Exemple de description de raccourci</title>
+	<para>Sur Windows et Linux : <keycombo><keycap>Ctrl</keycap><keycap>Maj</keycap><keycap>N</keycap></keycombo>
+	</para>
+
+	<para>Sous macOS : <keycombo><keycap>Maj</keycap><keycap>commande</keycap><keycap>N</keycap></keycombo>
+	</para>
+
+	<para><emphasis role="bold">Dans ce manuel :</emphasis> <keycombo><keycap>C</keycap><keycap>Maj</keycap><keycap>N</keycap></keycombo>
+	</para>
+  </example>
+  
   <variablelist>
-    <varlistentry>
-      <term><guimenuitem>Nouveau...</guimenuitem></term>
-
+    <varlistentry id="menus.project.new">
+      <term id="menus.project.new.title"><guimenuitem>Nouveau</guimenuitem> <keycombo><keycap>C</keycap><keycap>Maj</keycap><keycap>N</keycap></keycombo>
+	  </term>
       <listitem>
-        <para>Crée et ouvre un nouveau projet.</para>
+        <para>Crée et ouvre un nouveau projet. Voir la section <link linkend="introduction.create.and.open.new.project" endterm="introduction.create.and.open.new.project.title"/> pour en savoir plus.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term><guimenuitem>Télécharger projet en équipe...</guimenuitem></term>
-
+    <varlistentry id="menus.project.download.team.project">
+      <term id="menus.project.download.team.project.title"><guimenuitem>Télécharger projet en équipe...</guimenuitem></term>
       <listitem>
-        <para>Crée une copie locale d'un projet distant OmegaT. Voir <link linkend="howto.useteamproject">Utiliser un projet en équipe</link> pour en savoir plus.</para>
+        <para>Crée une copie locale d’un projet distant OmegaT. Voir le guide pratique <link linkend="how.to.use.team.project" endterm="how.to.use.team.project.title"/> pour en savoir plus.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Ouvrir...</term>
-
+    <varlistentry id="menus.project.open">
+      <term id="menus.project.open.title"><guimenuitem>Ouvrir...</guimenuitem> <keycombo><keycap>C</keycap><keycap>O</keycap></keycombo></term>
       <listitem>
         <para>Ouvre un projet pré-existant.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Ou&amp;vrir un projet récent</term>
-
+    <varlistentry id="menus.project.open.recent">
+      <term id="menus.project.open.recent.title"><guimenuitem>Ouvert récemment...</guimenuitem></term>
       <listitem>
-        <para>Donner accès au dix derniers projets modifiés. Cliquer sur l'un d'entre eux enregistrera le projet actuel, le fermera ou ouvrira l'autre projet.</para>
+        <para>Donne accès aux dix derniers projets modifiés. Cliquer sur l’un d’entre eux enregistrera votre projet actuel, le fermera et ouvrira le projet sélectionné.</para>
+        <para>Utiliser la fonction <guimenuitem>Effacer le menu</guimenuitem> pour supprimer la liste des projets récents.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Copier des fichiers dans le dossier source</term>
-
-      <listitem>
-        <para>Copie les fichiers sélectionnés dans le dossier <filename>source</filename> et recharge le projet pour charger les nouveaux fichiers.</para>
-      </listitem>
-    </varlistentry>
-
-    <varlistentry>
-      <term>Télécharger une page MediaWiki...</term>
-
-      <listitem>
-        <para>Pour traduire le contenu d'une page Wikipédia (par exemple) :</para>
-
-        <orderedlist>
-          <listitem>
-            <para>Cliquer sur l'onglet <guilabel>Edit</guilabel> de la page Wikipédia.</para>
-          </listitem>
-
-          <listitem>
-            <para>Copier l'url de la page (se terminant par <guilabel>action=edit</guilabel>) et la coller dans <application>OmegaT</application>.</para>
-          </listitem>
-        </orderedlist>
-
-        <para>Ensuite, pour intégrer la traduction dans Wikipédia :</para>
-
-        <orderedlist>
-          <listitem>
-            <para>Ouvrir le fichier <filename>.UTF8</filename> généré dans <filename>./target</filename></para>
-          </listitem>
-
-          <listitem>
-            <para>Copier le texte, puis le coller dans la version traduite de la page Wikipédia.</para>
-          </listitem>
-        </orderedlist>
-      </listitem>
-    </varlistentry>
-
-    <varlistentry>
-      <term>Recharger</term>
-
+    <varlistentry id="menus.project.reload">
+      <term id="menus.project.reload.title"><guimenuitem>Recharger</guimenuitem> <keycombo><keycap>F5</keycap></keycombo></term>
       <listitem>
         <para>Recharge le projet pour prendre en compte les changements extérieurs affectant les fichiers sources et les paramètres du projet.</para>
-
-        <para>La prise en compte de nouvelles mémoires de traduction (placées dans <filename>/tm</filename>) en cours de traduction s'effectue automatiquement, dès que le curseur change de segment.</para>
+        <note>
+		  <para>Les nouvelles mémoires de traduction placées dans le dossier <link linkend="project.folder.tm" endterm="project.folder.tm.title"/> pendant la traduction sont automatiquement prises en compte dès que le curseur bouge d’un segment à un autre. De la même manière, le contenu du dossier <link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/> est automatiquement reconnu et ne nécessite pas de recharger le projet.</para>
+		</note>
+		<para>Lorsqu’un projet en équipe est rechargé, OmegaT recharge les propriétés distantes, plutôt que locales.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Fermer</term>
-
+    <varlistentry id="menus.project.close">
+      <term id="menus.project.close.title"><guimenuitem>Fermer</guimenuitem> <keycombo><keycap>C</keycap><keycap>Maj</keycap><keycap>W</keycap></keycombo></term>
       <listitem>
-        <para>Enregistre la traduction et ferme le projet.</para>
+        <para>Enregistre la mémoire de traduction du projet (<link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/>) et ferme le projet.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Enregistrer</term>
-
+    <varlistentry id="menus.project.save">
+      <term id="menus.project.save.title"><guimenuitem>Enregistrer</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap></keycombo></term>
       <listitem>
-        <para>Enregistre la mémoire de traduction interne sur le disque dur. OmegaT enregistre automatiquement vos traductions toutes les 3 minutes ainsi que lorsque vous fermez le projet ou quittez OmegaT.</para>
-
-        <para>L'intervalle de 3 minutes peut ietre modifié dans <link linkend="dialogs.preferences.savingandoutput"><menuchoice> <guimenuitem>Options</guimenuitem><guimenuitem>Préférences </guimenuitem> <guimenuitem>Enregistrement et exécution</guimenuitem> </menuchoice></link>.</para>
+        <para>Enregistre la mémoire de traduction du projet (<link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/>) et synchronise les projets en équipe.</para>
+		<para>OmegaT enregistre automatiquement les traductions toutes les trois minutes, ainsi que lorsque vous fermez le projet ou quittez le logiciel. Voir le paramètre <link linkend="dialog.preferences.saving.and.output.interval" endterm="dialog.preferences.saving.and.output.interval.title"/> pour en savoir plus.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Envoyer les fichiers source</term>
-
+    <varlistentry id="menus.project.copy.files.to.source.folder">
+      <term id="menus.project.copy.files.to.source.folder.title"><guimenuitem>Ajouter des fichiers...</guimenuitem></term>
       <listitem>
-        <para>Envoie au dépôt les fichiers qui ont été ajoutés ou modifiés localement dans le dossier <filename>source</filename>.</para>
-
-        <para>Cette fonction est spécifique aux projets en équipe.</para>
+        <para>Copie les fichiers sélectionnés au dossier <link linkend="project.folder.source" endterm="project.folder.source.title"/> et recharge le projet pour prendre en compte les nouveaux fichiers.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Envoyer les fichiers cible</term>
-
+    <varlistentry id="menus.project.download.mediawiki.page">
+      <term id="menus.project.download.mediawiki.page.title"><guimenuitem>Ajouter une page MediaWiki...</guimenuitem></term>
       <listitem>
-        <para>Envoie au dépôt les fichiers qui ont été créés localement dans le dossier <filename>target</filename>.</para>
-
-        <para>Cette fonction est spécifique aux projets en équipe.</para>
+		<para>Ouvre une boîte de dialogue où vous pouvez coller l’URL de la page MediaWiki que vous souhaitez traduire. Les données source de la page seront copiées dans le dossier <link linkend="project.folder.source" endterm="project.folder.source.title"/>, en tant que fichier texte, avec l’extension <filename>.utf8</filename>.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Créer les documents traduits</term>
-
+    <varlistentry id="menus.project.commit.source.files">
+      <term id="menus.project.commit.source.files.title"><guimenuitem>Envoyer les fichiers source</guimenuitem></term>
       <listitem>
-        <para>Crée les documents cible sur la base de votre traduction. Les documents cibles créés se trouvent dans le dossier <filename>target</filename> (cible).</para>
+        <warning><para>Cette fonction est spécifique aux projets en équipe. <emphasis>Seul le responsable du projet en équipe devrait utiliser cette fonction</emphasis>. Voir le guide pratique <link linkend="how.to.use.team.project" endterm="how.to.use.team.project.title"/> pour en savoir plus.</para></warning>
+        <para>Envoie les fichiers ajoutés ou modifiés localement à partir du dossier <filename class="directory">source</filename> au dépôt du projet en équipe.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Créer le document actuel traduit</term>
-
+    <varlistentry id="menus.project.commit.target.files">
+      <term id="menus.project.commit.target.files.title"><guimenuitem>Envoyer les fichiers cible</guimenuitem></term>
       <listitem>
-        <para>Crée le document cible correspondant au document actuel traduit.</para>
+        <warning><para>Cette fonction est spécifique aux projets en équipe. <emphasis>N’utilisez cette fonction que si le responsable du projet en équipe vous l’a demandé</emphasis>. Voir le guide pratique <link linkend="how.to.use.team.project" endterm="how.to.use.team.project.title"/> pour en savoir plus.</para></warning>
+        <para>Envoie les fichiers traduits créés localement à partir du dossier <link linkend="project.folder.target" endterm="project.folder.target.title"/> au dépôt du projet en équipe.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Ouvrir projet MED...</term>
-
+    <varlistentry id="menus.project.create.translated.documents">
+      <term id="menus.project.create.translated.documents.title"><guimenuitem>Créer les documents traduits</guimenuitem> <keycombo><keycap>C</keycap><keycap>D</keycap></keycombo></term>
       <listitem>
-        <para>Ouvre un projet empaqueté au format MED définit par la direction générale de la traduction de l'Union européenne.</para>
+        <para>Crée les fichiers cible sur la base de votre traduction. Les fichiers cible créés sont situés dans le dossier <link linkend="project.folder.target" endterm="project.folder.target.title"/>.</para>
+		<note><para>Vous pouvez empêcher la création de fichiers cibles s’il y a des problèmes de balises. Voir le paramètre <link linkend="dialogs.preferences.tag.processing.do.not.allow.creating.translated.documents.with.tag.issues" endterm="dialogs.preferences.tag.processing.do.not.allow.creating.translated.documents.with.tag.issues.title"/> pour en savoir plus.</para></note>
+		<para>Chaque fois que vous créez des fichiers traduits, OmegaT enregistre le projet (voir l’élément de menu <link linkend="menus.project.save" endterm="menus.project.save.title"/> plus haut) et crée des mémoires de traduction de référence qui contiennent les segments traduits de l’ensemble de fichiers source actuel.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Créer projet MED...</term>
+    <varlistentry id="menus.project.create.current.translated.document">
+      <term id="menus.project.create.current.translated.document.title"><guimenuitem>Créer le document actuel traduit</guimenuitem> <keycombo><keycap>C</keycap><keycap>Maj</keycap><keycap>D</keycap></keycombo></term>
+      <listitem>
+        <para>Crée le fichier cible qui correspond au fichier source actuellement en traduction. Le fichier créé se trouve dans le dossier <link linkend="project.folder.target" endterm="project.folder.target.title"/>.</para>
+		<para>Chaque fois que vous créez le fichier actuel traduit, OmegaT enregistre le projet (voir l’élément de menu <link linkend="menus.project.save" endterm="menus.project.save.title"/> plus haut) et crée des mémoires de traduction de référence qui contiennent les segments traduits de l’ensemble de fichiers source actuel.</para>
+      </listitem>
+    </varlistentry>
 
+    <varlistentry id="menus.project.open.med.project">
+      <term id="menus.project.open.med.project.title"><guimenuitem>Ouvrir un projet MED...</guimenuitem></term>
+	  <!-- TODO add link to a format description -->
+      <listitem>
+        <para>Ouvre un projet empaqueté au format MED définit par la direction générale de la traduction de l’Union européenne.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry id="menus.project.create.med.project">
+      <term id="menus.project.create.med.project.title"><guimenuitem>Créer projet MED...</guimenuitem></term>
+	  <!-- TODO add link to a format description -->
       <listitem>
         <para>Permet de transformer le projet en paquet MED.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Propriétés...</term>
-
+    <varlistentry id="menus.project.properties">
+      <term id="menus.project.properties.title"><guimenuitem>Propriétés...</guimenuitem> <keycombo><keycap>C</keycap><keycap>E</keycap></keycombo></term>
       <listitem>
-        <para>Affiche la boite de dialogue <link linkend="dialogs.projectproperties">Modifier le projet</link> qui permet de modifier les langues du projet et les emplacements des dossiers.</para>
+        <para>Affiche la boîte de dialogue <link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/> pour modifier les langues du projet les emplacements des dossiers.</para>
+		<para>
+		</para>		
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Fichiers du projet...</term>
-
+    <varlistentry id="menus.project.source.files.list">
+      <term id="menus.project.source.files.list.title"><guimenuitem>Fichiers du projet...</guimenuitem> <keycombo><keycap>C</keycap><keycap>L</keycap></keycombo></term>
       <listitem>
-        <para>Ouvre la fenêtre <link linkend="windows.projectfiles">Fichiers du projet</link>.</para>
+        <para>Ouvre la fenêtre <link linkend="windows.source.files.list" endterm="windows.source.files.list.title"/>.</para>
+		<para>
+		</para>				
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Accéder au contenu du projet</term>
-
+    <varlistentry id="menus.project.access.project.contents">
+      <term id="menus.project.access.project.contents.title"><guisubmenu>Accéder au contenu du projet</guisubmenu></term>
       <listitem>
-        <para>Donne accès aux dossiers du projet</para>
+        <para>Donne accès aux différents dossiers du projet. Voir la chapitre <link linkend="chapter.project.folder" endterm="chapter.project.folder.title"/> pour en savoir plus.</para>
+        <para>De plus, il y a trois entrées de menu qui ouvrent directement les fichiers source ou cible actuels, ou le glossaire modifiable. Les fichiers sont ouverts dans l’application par défaut définie par le système d’exploitation. Les options sont grisées si les fichiers n’existent pas.</para>
 
-        <para>De plus, deux entrées de menu permettent d'ouvrir directement les documents source et cible actuels ainsi que le glossaire en écriture. Les documents sont ouverts par l'application choisie par le système d'exploitation. Si les documents ne sont pas disponibles, l'entrée est grisée.</para>
+		<variablelist>
+		  <varlistentry>
+			<term><link linkend="chapter.project.folder"><guimenuitem>Racine du projet</guimenuitem></link></term>
+			<listitem>
+			  <para>Ouvre le dossier dans votre gestionnaire de fichiers par défaut.</para>
+			</listitem>
+		  </varlistentry>
+
+		  <varlistentry>
+			<term><link linkend="project.folder.dictionary"><guimenuitem>Dictionnaires</guimenuitem></link></term>
+			<listitem>
+			  <para>Ouvre le dossier dans votre gestionnaire de fichiers par défaut.</para>
+			</listitem>
+		  </varlistentry>
+
+		  <varlistentry>
+			<term><link linkend="project.folder.glossary"><guimenuitem>Glossaires</guimenuitem></link></term>
+			<listitem>
+			  <para>Ouvre le dossier dans votre gestionnaire de fichiers par défaut.</para>
+			</listitem>
+		  </varlistentry>
+
+		  <varlistentry>
+			<term><link linkend="project.folder.source"><guimenuitem>Fichiers source</guimenuitem></link></term>
+			<listitem>
+			  <para>Ouvre le dossier dans votre gestionnaire de fichiers par défaut.</para>
+			</listitem>
+		  </varlistentry>
+
+		  <varlistentry>
+			<term><link linkend="project.folder.target"><guimenuitem>Fichiers cible</guimenuitem></link></term>
+			<listitem>
+			  <para>Ouvre le dossier dans votre gestionnaire de fichiers par défaut.</para>
+			</listitem>
+		  </varlistentry>
+
+		  <varlistentry>
+			<term><link linkend="project.folder.tm"><guimenuitem>Mémoires de traduction</guimenuitem></link></term>
+			<listitem>
+			  <para>Ouvre le dossier dans votre gestionnaire de fichiers par défaut.</para>
+			</listitem>
+		  </varlistentry>
+		  
+		  <varlistentry>
+			<term><link linkend="project.folder.exported.tm"><guimenuitem>Mémoires exportées</guimenuitem></link></term>
+			<listitem>
+			  <para>Ouvre le dossier dans votre gestionnaire de fichiers par défaut.</para>
+			</listitem>
+		  </varlistentry>
+
+		  <varlistentry>
+			<term><guimenuitem>Fichier source actuel</guimenuitem></term>
+			<listitem>
+			  <para>Le fichier source actuel est situé dans le dossier <link linkend="project.folder.source" endterm="project.folder.source.title"/>.</para>
+
+			  <para>Ouvre le fichier dans l’application associée.</para>
+			</listitem>
+		  </varlistentry>
+
+		  <varlistentry>
+			<term><guimenuitem>Fichier cible actuel</guimenuitem></term>
+			<listitem>
+			  <para>Le fichier cible actuel est situé dans le dossier <link linkend="project.folder.target" endterm="project.folder.target.title"/>.</para>
+
+			  <para>Ouvre le fichier, s’il existe, dans l’application associée.</para>
+			</listitem>
+		  </varlistentry>
+
+		  <varlistentry>
+			<term><guimenuitem>Glossaire modifiable</guimenuitem></term>
+			<listitem>
+			  <para>Le glossaire modifiable est situé dans le dossier <link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/>.</para>
+
+			  <para>Ouvre le fichier, s’il existe, dans l’application associée.</para>
+			</listitem>
+		  </varlistentry>
+		</variablelist>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Quitter</term>
-
+    <varlistentry id="menus.project.restart">
+      <term id="menus.project.restart.title"><guimenuitem>Redémarrer</guimenuitem></term>
       <listitem>
-        <para>Enregistre le projet et ferme <application>OmegaT</application>. Si le projet n'a pas encore été enregistré, il vous sera demandé de confirmer manuellement si vous voulez quitter.</para>
+        <para>Enregistre le projet et redémarre OmegaT. Il vous est demandé de confirmer si vous souhaitez réellement quitter si vous n’avez pas encore enregistré votre projet.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry id="menus.project.quit">
+      <term id="menus.project.quit.title"><guimenuitem>Quitter</guimenuitem> <keycombo><keycap>C</keycap><keycap>Q</keycap></keycombo></term>
+      <listitem>
+        <para>Enregistre le projet et ferme OmegaT. Il vous est demandé de confirmer si vous souhaitez réellement quitter si vous n’avez pas encore enregistré votre projet.</para>
+
+		<note>
+		  <para>Sur macOS, cet élément de menu se trouve dans le menu <guimenu>OmegaT</guimenu>.</para>
+		</note>
       </listitem>
     </varlistentry>
   </variablelist>

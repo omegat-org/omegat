@@ -80,8 +80,8 @@ public class XMLReader extends Reader {
      * Creates a new instance of XMLReader. If encoding cannot be detected,
      * falls back to default UTF-8.
      * 
-     * @param fileName
-     *            - the file to read
+     * @param is
+     *            the InputStream instance to read
      */
     public XMLReader(InputStream is) throws IOException {
         reader = createReader(is, encoding);
@@ -91,7 +91,7 @@ public class XMLReader extends Reader {
      * Creates a new instance of XMLReader. If encoding cannot be detected,
      * falls back to default UTF-8.
      *
-     * @param fileName
+     * @param file
      *            - the file to read
      */
     public XMLReader(File file) throws IOException {
@@ -103,7 +103,7 @@ public class XMLReader extends Reader {
      * falls back to supplied <code>encoding</code>, or (if supplied null, or
      * supplied encoding is not supported by JVM) falls back to UTF-8.
      *
-     * @param fileName
+     * @param file
      *            The file to read.
      * @param encoding
      *            The encoding to use if we can't autodetect.

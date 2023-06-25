@@ -1,2 +1,9 @@
 rootProject.name = 'OmegaT'
-include("tipoftheday")
+include("machinetranslators:apertium",
+        "machinetranslators:belazar",
+        "machinetranslators:deepl",
+        "machinetranslators:google",
+        "machinetranslators:ibmwatson",
+        "machinetranslators:mymemory",
+        "machinetranslators:yandex",
+        "tipoftheday")

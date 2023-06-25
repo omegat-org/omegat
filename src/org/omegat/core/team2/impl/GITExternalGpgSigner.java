@@ -61,11 +61,10 @@ import org.omegat.util.Platform;
 public class GITExternalGpgSigner extends GpgSigner {
 
     // A GPG environment variable name. We remove this environment variable when calling gpg.
-	private static final String PINENTRY_USER_DATA = "PINENTRY_USER_DATA";
+    private static final String PINENTRY_USER_DATA = "PINENTRY_USER_DATA";
 
     // For sanity checking the returned signature.
-	private static final byte[] SIGNATURE_START = "-----BEGIN PGP SIGNATURE-----"
-			.getBytes(StandardCharsets.US_ASCII);
+    private static final byte[] SIGNATURE_START = "-----BEGIN PGP SIGNATURE-----".getBytes(StandardCharsets.US_ASCII);
     private static final PathScanner FROM_PATH = new PathScanner();
 
     // error message keys
@@ -82,7 +81,7 @@ public class GITExternalGpgSigner extends GpgSigner {
     private static final String ExternalGpgSigner_gpgNotFound = "GPG_EXTERNAL_SIGNER_GPG_NOT_FOUND";
 
     private interface ResultHandler {
-		void accept(TemporaryBuffer b) throws IOException, CanceledException;
+        void accept(TemporaryBuffer b) throws IOException, CanceledException;
     }
 
     private static void runProcess(final ProcessBuilder process, final InputStream in,

@@ -47,63 +47,63 @@ import gen.core.project.RepositoryDefinition;
 @RunWith(Parameterized.class)
 public class SVNRemoteRepository2IT extends AbstractRemoteRepository2IT {
 
-	String svnSubPath;
-	SVNURL tgtURL;
+    String svnSubPath;
+    SVNURL tgtURL;
 
-	@Parameterized.Parameters
-	public static Collection<String> subPath() {
-		return Arrays.asList("", "/asubrepo");
-	}
-
-	public SVNRemoteRepository2IT(String subPath) {
-		this.svnSubPath = subPath;
-	}
-
-	@Override
-	void prepareLocalRepo() throws Exception {
-		SVNRepositoryFactoryImpl.setup();
-		tgtURL = SVNRepositoryFactory.createLocalRepository( tempRepoDir.toFile(), true , false );
-		prepareFilesInLocalRepository(tgtURL.toString());
-	}
-
-	private void prepareFilesInLocalRepository(String url) throws Exception {
-		Path tempSVNClientDir = Files.createTempDirectory("omegat-team-svnc");
-
-		SVNRemoteRepository2 rr2 = new SVNRemoteRepository2();
-
-		RepositoryDefinition repositoryDefinition = new RepositoryDefinition();
-		repositoryDefinition.setType("SVN");
-		repositoryDefinition.setUrl(url);
-
-		ProjectTeamSettings projectTeamSettings = new ProjectTeamSettings(tempSVNClientDir.toFile());
-
-		File svnCheckoutDir = new File(tempSVNClientDir.toFile(), "mysvnrepo");
-		rr2.init(repositoryDefinition, svnCheckoutDir, projectTeamSettings);
-		rr2.switchToVersion(null);
-
-		String newFile = createFileInSubdir(svnCheckoutDir, "asubrepo");
-		rr2.addForCommit(newFile);
-		rr2.commit(null, "init");
-
-		FileUtils.deleteDirectory(tempSVNClientDir.toFile());
-	}
-
-	@Override
-	IRemoteRepository2 getRr2() {
-		return new SVNRemoteRepository2();
-	}
-
-	@Override
-	void configureRepositoryDefinition() {
-		repositoryDefinition.setType("SVN");
-		repositoryDefinition.setUrl(tgtURL.toString() + svnSubPath);
-	}
-
-    void assertFileOrDirDeleted(String dir, String fileInDir, String actual) {
-	    assertEquals("the directory itself is deleted", dir, actual);
+    @Parameterized.Parameters
+    public static Collection<String> subPath() {
+        return Arrays.asList("", "/asubrepo");
     }
 
-	String toRr2Notation(String file) {
-		return file;
-	}
+    public SVNRemoteRepository2IT(String subPath) {
+        this.svnSubPath = subPath;
+    }
+
+    @Override
+    void prepareLocalRepo() throws Exception {
+        SVNRepositoryFactoryImpl.setup();
+        tgtURL = SVNRepositoryFactory.createLocalRepository( tempRepoDir.toFile(), true , false );
+        prepareFilesInLocalRepository(tgtURL.toString());
+    }
+
+    private void prepareFilesInLocalRepository(String url) throws Exception {
+        Path tempSVNClientDir = Files.createTempDirectory("omegat-team-svnc");
+
+        SVNRemoteRepository2 rr2 = new SVNRemoteRepository2();
+
+        RepositoryDefinition repositoryDefinition = new RepositoryDefinition();
+        repositoryDefinition.setType("SVN");
+        repositoryDefinition.setUrl(url);
+
+        ProjectTeamSettings projectTeamSettings = new ProjectTeamSettings(tempSVNClientDir.toFile());
+
+        File svnCheckoutDir = new File(tempSVNClientDir.toFile(), "mysvnrepo");
+        rr2.init(repositoryDefinition, svnCheckoutDir, projectTeamSettings);
+        rr2.switchToVersion(null);
+
+        String newFile = createFileInSubdir(svnCheckoutDir, "asubrepo");
+        rr2.addForCommit(newFile);
+        rr2.commit(null, "init");
+
+        FileUtils.deleteDirectory(tempSVNClientDir.toFile());
+    }
+
+    @Override
+    IRemoteRepository2 getRr2() {
+        return new SVNRemoteRepository2();
+    }
+
+    @Override
+    void configureRepositoryDefinition() {
+        repositoryDefinition.setType("SVN");
+        repositoryDefinition.setUrl(tgtURL.toString() + svnSubPath);
+    }
+
+    void assertFileOrDirDeleted(String dir, String fileInDir, String actual) {
+        assertEquals("the directory itself is deleted", dir, actual);
+    }
+
+    String toRr2Notation(String file) {
+        return file;
+    }
 }

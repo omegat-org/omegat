@@ -111,7 +111,7 @@
   </section>
   
   <section id="post.processing.commands.user.defined.scripts">
-    <title id="post.processing.commands.user.defined.scripts.title">User Defined
+    <title id="post.processing.commands.user.defined.scripts.title">Local
     Scripts</title>
     <para>
       In addition to a regular command, you can call a script. Never run

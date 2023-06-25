@@ -9,7 +9,7 @@
 #                Support center: https://omegat.org/support
 #
 #  This file is part of OmegaT.
-https://dev.azure.com/omegat-org/ecb5bbf0-66ac-433d-bda1-be5bcf90716d/_apis/build/builds/5871/logs/11#
+#
 #  OmegaT is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
 #  the Free Software Foundation, either version 3 of the License, or

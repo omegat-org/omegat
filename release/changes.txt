@@ -1,12 +1,18 @@
 ----------------------------------------------------------------------
  OmegaT 6.1.0
 ----------------------------------------------------------------------
-  9 Enhancement
-  16 Bug fixes
+  11 Enhancement
+  18 Bug fixes
 ----------------------------------------------------------------------
 6.1.0 vs 6.0.0
 
   Implemented requests:
+
+  - Team: SVN support svn+ssh protocol with key authentication
+  https://sourceforge.net/p/omegat/feature-requests/1700/
+
+  - Team: SVN: Replacing trilead-ssh2 with Apache sshd
+  https://sourceforge.net/p/omegat/feature-requests/1699/
 
   - Better error message for omegat.project failure
   https://sourceforge.net/p/omegat/feature-requests/1696/
@@ -43,6 +49,9 @@
   - Stardict dictionary displays apostrophe as html entity code
   https://sourceforge.net/p/omegat/bugs/1181/
 
+  - #1180 Font does not scale on HiDPI display on Linux
+  https://sourceforge.net/p/omegat/bugs/1180/
+
   - build/release: Windows binary signature with PKCS#11 HSM
   https://sourceforge.net/p/omegat/bugs/1179/
 
@@ -57,6 +66,9 @@
 
   - Useless warning log from CSS parser library
   https://sourceforge.net/p/omegat/bugs/1169/
+
+  - OmegaT cannot load a project and error dialog with FileSystemLoopException
+  https://sourceforge.net/p/omegat/bugs/1168
 
   - Error when trying to backup the project file on Windows
   https://sourceforge.net/p/omegat/bugs/1166/

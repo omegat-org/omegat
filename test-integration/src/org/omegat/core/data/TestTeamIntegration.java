@@ -496,7 +496,7 @@ public final class TestTeamIntegration {
             String predefinedUser = def.getOtherAttributes().get(new QName("svnUsername"));
             String predefinedPass = def.getOtherAttributes().get(new QName("svnPassword"));
             ISVNOptions options = SVNWCUtil.createDefaultOptions(true);
-            ISVNAuthenticationManager authManager = new SVNAuthenticationManager(url, predefinedUser,
+            ISVNAuthenticationManager authManager = new SVNAuthenticationManager(def, predefinedUser,
                     predefinedPass, null);
             ourClientManager = SVNClientManager.newInstance(options, authManager);
         }

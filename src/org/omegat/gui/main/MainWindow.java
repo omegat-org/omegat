@@ -45,6 +45,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -432,7 +433,7 @@ public class MainWindow extends JFrame implements IMainWindow {
     // /////////////////////////////////////////////////////////////
     // display oriented code
 
-    private JLabel lastDialogText;
+    private JPanel lastDialogText;
     private String lastDialogKey;
 
     /**
@@ -462,10 +463,16 @@ public class MainWindow extends JFrame implements IMainWindow {
                 }
             }
 
-            lastDialogText = new JLabel(msg);
+            lastDialogText = new JPanel();
+            lastDialogText.setLayout(new BoxLayout(lastDialogText, BoxLayout.PAGE_AXIS));
+            lastDialogText.setBorder(BorderFactory.createEmptyBorder());
+            String[] messages = msg.split("\\n");
+            Arrays.stream(messages).forEach(m -> {
+                lastDialogText.add(new JLabel(m));
+            });
             lastDialogKey = warningKey;
 
-            statusLabel.setText(msg);
+            statusLabel.setText(messages[0]);
 
             JOptionPane.showMessageDialog(MainWindow.this, lastDialogText, OStrings.getString("TF_WARNING"),
                     JOptionPane.WARNING_MESSAGE);
@@ -484,19 +491,21 @@ public class MainWindow extends JFrame implements IMainWindow {
                 msg = OStrings.getString(errorKey);
             }
 
-            statusLabel.setText(msg);
-
+            String[] messages = msg.split("\\n");
+            statusLabel.setText(messages[0]);
             JPanel pane = new JPanel();
             pane.setLayout(new BoxLayout(pane, BoxLayout.PAGE_AXIS));
             pane.setSize(new Dimension(900, 400));
+            Arrays.stream(messages).forEach(m -> {
+                JLabel jlabel = new JLabel(m);
+                jlabel.setAlignmentX(LEFT_ALIGNMENT);
+                pane.add(jlabel);
+            });
 
-            JLabel jlabel = new JLabel(msg);
-            jlabel.setAlignmentX(LEFT_ALIGNMENT);
-            pane.add(jlabel);
-
-            if (ex != null && ex.getLocalizedMessage() != null){
+            if (ex != null && ex.getLocalizedMessage() != null) {
                 pane.add(Box.createRigidArea(new Dimension(0, 5)));
                 JTextArea message = new JTextArea();
+                message.setBorder(BorderFactory.createEmptyBorder());
                 message.setText(ex.getLocalizedMessage());
                 message.setLineWrap(true);
                 message.setEditable(false);
@@ -511,8 +520,8 @@ public class MainWindow extends JFrame implements IMainWindow {
                 JButton jbutton = new JButton(OStrings.getString("TF_ERROR_COPY_CLIPBOARD"));
                 // Copy to clipboard action
                 jbutton.addActionListener(l -> {
-                    String clipboardMsg = String.format("%s%n---%n%s%n---%n%s%n", msg, ex.getLocalizedMessage(),
-                            StaticUtils.getSupportInfo());
+                    String clipboardMsg = String.format("%s%n---%n%s%n---%n%s%n", msg,
+                            ex.getLocalizedMessage(), StaticUtils.getSupportInfo());
                     Toolkit.getDefaultToolkit().getSystemClipboard()
                             .setContents(new StringSelection(clipboardMsg), null);
                 });

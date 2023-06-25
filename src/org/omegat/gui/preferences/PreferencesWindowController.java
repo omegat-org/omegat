@@ -476,6 +476,7 @@ public class PreferencesWindowController implements FurtherActionListener {
         innerPanel.innerViewHolder.add(newView.getGui(), BorderLayout.CENTER);
         innerPanel.selectedPrefsScrollPane.setViewportView(innerPanel.viewHolder);
         currentView = newView;
+        innerPanel.resetButton.setEnabled(currentView.canRestoreDefaults());
         SwingUtilities.invokeLater(() -> {
             adjustSize();
             searchCurrentView();

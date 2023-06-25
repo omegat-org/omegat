@@ -11,6 +11,7 @@
                2014 Piotr Kulik
                2015 Yu Tang, Aaron Madlon-Kay
                2016 Didier Briel
+               2023 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -63,6 +64,7 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 import javax.swing.WindowConstants;
+import javax.swing.plaf.FontUIResource;
 import javax.swing.text.JTextComponent;
 
 import org.omegat.core.Core;
@@ -79,8 +81,10 @@ import org.omegat.util.Platform;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
+import org.omegat.util.gui.FontUtil;
 import org.omegat.util.gui.StaticUIUtils;
 import org.omegat.util.gui.UIDesignManager;
+import org.omegat.util.gui.UIScale;
 import org.omegat.util.gui.UIThreadsUtil;
 
 import com.vlsolutions.swing.docking.Dockable;
@@ -115,7 +119,7 @@ public class MainWindow extends JFrame implements IMainWindow {
      * The font for main window (source and target text) and for match and
      * glossary windows
      */
-    private Font font;
+    private FontUIResource font;
 
     /** Set of all open search windows. */
     private final List<SearchWindowController> searches = new ArrayList<>();
@@ -158,12 +162,7 @@ public class MainWindow extends JFrame implements IMainWindow {
             }
         });
 
-        // load default font from preferences
-        String fontName = Preferences.getPreferenceDefault(Preferences.TF_SRC_FONT_NAME,
-                Preferences.TF_FONT_DEFAULT);
-        int fontSize = Preferences.getPreferenceDefault(Preferences.TF_SRC_FONT_SIZE,
-                Preferences.TF_FONT_SIZE_DEFAULT);
-        font = new Font(fontName, Font.PLAIN, fontSize);
+        font = FontUtil.getScaledFont();
 
         MainWindowUI.createMainComponents(this, font);
 
@@ -191,7 +190,10 @@ public class MainWindow extends JFrame implements IMainWindow {
             }
         });
 
-        CoreEvents.registerFontChangedEventListener(newFont -> font = newFont);
+        UIScale.addPropertyChangeListener(evt -> CoreEvents.fireFontChanged(FontUtil.getScaledFont()));
+        CoreEvents.registerFontChangedEventListener(
+                newFont -> font = (newFont instanceof FontUIResource) ? (FontUIResource) newFont
+                        : new FontUIResource(newFont));
 
         MainWindowUI.handlePerProjectLayouts(this);
 

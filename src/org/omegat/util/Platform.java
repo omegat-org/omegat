@@ -5,6 +5,8 @@
 
  Copyright (C) 2007 - Zoltan Bartko - bartkozoltan@bartkozoltan.com
                2011 Alex Buloichik
+               2019 FormDev Software GmbH
+               2023 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -26,13 +28,18 @@
 
 package org.omegat.util;
 
+import java.util.Locale;
+import java.util.StringTokenizer;
+
 /**
  * A class to retrieve some platform information.
  *
  * @author Zoltan Bartko bartkozoltan@bartkozoltan.com
  * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Hiroshi Miura
  */
 public final class Platform {
+
     public enum OsType {
         // os.arch=amd64, os.name=Linux, os.version=3.0.0-12-generic
         LINUX64,
@@ -50,19 +57,69 @@ public final class Platform {
         OTHER
     }
 
+    // platforms
+    public static final boolean isWindows;
+    public static final boolean isMacOS;
+    public static final boolean isLinux;
+    // OS versions
+    public static final long osVersion;
+    public static final boolean isWindows_10_orLater;
+    public static final boolean isWindows_11_orLater;
+    public static final boolean isMacOS_10_11_ElCapitan_orLater;
+    public static final boolean isMacOS_10_14_Mojave_orLater;
+    public static final boolean isMacOS_10_15_Catalina_orLater;
+    // OS architecture
+    public static final boolean isX86;
+    public static final boolean isX86_64;
+    public static final boolean isAARCH64;
+    // Java versions
+    public static final long javaVersion;
+    public static final boolean isJava_11_orLater;
+    public static final boolean isJava_17_orLater;
+    // UI toolkits
+    public static final boolean isKDE;
+
     private static OsType osType = OsType.OTHER;
 
     static {
-        String osName = System.getProperty("os.name");
-        if (osName != null && System.getProperty("os.arch") != null) {
-            boolean is64 = is64Bit();
-            if (osName.startsWith("Linux")) {
-                osType = is64 ? OsType.LINUX64 : OsType.LINUX32;
-            } else if (osName.contains("OS X")) {
-                osType = is64 ? OsType.MAC64 : OsType.MAC32;
-            } else if (osName.startsWith("Windows")) {
-                osType = is64 ? OsType.WIN64 : OsType.WIN32;
-            }
+        // platforms
+        String osName = System.getProperty("os.name").toLowerCase(Locale.ENGLISH);
+        isWindows = osName.startsWith("windows");
+        isMacOS = osName.startsWith("mac");
+        isLinux = osName.startsWith("linux");
+
+        // OS versions
+        osVersion = scanVersion(System.getProperty("os.version"));
+        isWindows_10_orLater = (isWindows && osVersion >= toVersion(10, 0, 0, 0));
+        isMacOS_10_11_ElCapitan_orLater = (isMacOS && osVersion >= toVersion(10, 11, 0, 0));
+        isMacOS_10_14_Mojave_orLater = (isMacOS && osVersion >= toVersion(10, 14, 0, 0));
+        isMacOS_10_15_Catalina_orLater = (isMacOS && osVersion >= toVersion(10, 15, 0, 0));
+
+        // OS architecture
+        String osArch = System.getProperty("os.arch");
+        isX86 = osArch.equals("x86");
+        isX86_64 = osArch.equals("amd64") || osArch.equals("x86_64");
+        isAARCH64 = osArch.equals("aarch64");
+
+        // Java versions
+        javaVersion = scanVersion(System.getProperty("java.version"));
+        isJava_11_orLater = (javaVersion >= toVersion(11, 0, 0, 0));
+        isJava_17_orLater = (javaVersion >= toVersion(17, 0, 0, 0));
+
+        // UI toolkits
+        isKDE = (isLinux && System.getenv("KDE_FULL_SESSION") != null);
+
+        // Windows 11 detection is implemented in Java 8u321, 11.0.14, 17.0.2
+        // and 18 (or later).
+        // (see https://bugs.openjdk.java.net/browse/JDK-8274840)
+        isWindows_11_orLater = isWindows_10_orLater && scanWindowsVersion(osName) >= toVersion(11, 0, 0, 0);
+        //
+        if (isLinux) {
+            osType = is64Bit() ? OsType.LINUX64 : OsType.LINUX32;
+        } else if (isMacOS) {
+            osType = is64Bit() ? OsType.MAC64 : OsType.MAC32;
+        } else if (isWindows) {
+            osType = is64Bit() ? OsType.WIN64 : OsType.WIN32;
         }
     }
 
@@ -73,46 +130,52 @@ public final class Platform {
         return osType;
     }
 
-    public static boolean isWebStart() {
-        return System.getProperty("javawebstart.version") != null;
-    }
-
     /**
      * Returns true if running on Mac OS X
      */
     public static boolean isMacOSX() {
-        OsType os = getOsType();
-        return os == OsType.MAC32 || os == OsType.MAC64;
+        return isMacOS;
     }
 
     /**
      * Returns true if running on Linux
      */
     public static boolean isLinux() {
-        OsType os = getOsType();
-        return os == OsType.LINUX32 || os == OsType.LINUX64;
+        return isLinux;
     }
 
     /**
      * Returns true if the JVM (NOT the OS) is 64-bit
      */
     public static boolean is64Bit() {
-        String osArch = System.getProperty("os.arch");
-        if (osArch != null) {
-            return osArch.contains("64");
-        }
-        return false;
+        return isAARCH64 || isX86_64;
     }
 
-    public static int getJavaVersion() {
-        String[] versionElements = System.getProperty("java.version").split("\\.");
-        int discard = Integer.parseInt(versionElements[0]);
-        int version;
-        if (discard == 1) {
-            version = Integer.parseInt(versionElements[1]);
-        } else {
-            version = discard;
-        }
-        return version;
+    private static long scanWindowsVersion(String osName) {
+        final String leading = "windows ";
+        return scanVersion(osName.startsWith(leading) ? osName.substring(leading.length()) : osName);
     }
+
+    private static long scanVersion(String version) {
+        int major = 1;
+        int minor = 0;
+        int micro = 0;
+        int patch = 0;
+        try {
+            StringTokenizer st = new StringTokenizer(version, "._-+");
+            major = Integer.parseInt(st.nextToken());
+            minor = Integer.parseInt(st.nextToken());
+            micro = Integer.parseInt(st.nextToken());
+            patch = Integer.parseInt(st.nextToken());
+        } catch (Exception ex) {
+            // ignore
+        }
+
+        return toVersion(major, minor, micro, patch);
+    }
+
+    private static long toVersion(int major, int minor, int micro, int patch) {
+        return ((long) major << 48) + ((long) minor << 32) + ((long) micro << 16) + patch;
+    }
+
 }

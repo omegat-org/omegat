@@ -25,7 +25,6 @@
 
 package org.omegat.gui.common;
 
-import java.awt.Font;
 import java.awt.GraphicsEnvironment;
 import java.awt.Rectangle;
 
@@ -33,7 +32,6 @@ import javax.swing.JTextPane;
 
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
-import org.omegat.core.events.IFontChangedEventListener;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.util.gui.FontFallbackListener;
 import org.omegat.util.gui.StaticUIUtils;
@@ -41,8 +39,8 @@ import org.omegat.util.gui.Styles;
 import org.omegat.util.gui.UIThreadsUtil;
 
 /**
- * Base class for show information about currently selected entry. It can be used for glossaries, dictionaries
- * and other panes.
+ * Base class for show information about currently selected entry. It can be
+ * used for glossaries, dictionaries and other panes.
  *
  * If you need long search operation, use EntryInfoThreadPane instead.
  *
@@ -56,11 +54,7 @@ public abstract class EntryInfoPane<T> extends JTextPane implements IProjectEven
     public EntryInfoPane(final boolean useApplicationFont) {
         if (useApplicationFont) {
             setFont(Core.getMainWindow().getApplicationFont());
-            CoreEvents.registerFontChangedEventListener(new IFontChangedEventListener() {
-                public void onFontChanged(Font newFont) {
-                    setFont(newFont);
-                }
-            });
+            CoreEvents.registerFontChangedEventListener(this::setFont);
         }
         CoreEvents.registerProjectChangeListener(this);
         if (!GraphicsEnvironment.isHeadless()) {

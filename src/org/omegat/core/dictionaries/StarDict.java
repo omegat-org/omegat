@@ -35,6 +35,12 @@ import java.util.Locale;
 import java.util.stream.Collectors;
 
 import io.github.eb4j.stardict.StarDictDictionary;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.safety.Cleaner;
+import org.jsoup.safety.Safelist;
+import org.jsoup.select.Elements;
 
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
@@ -48,9 +54,10 @@ import org.omegat.util.Preferences;
  * StarDict format described on
  * https://github.com/huzheng001/stardict-3/blob/master/dict/doc/StarDictFileFormat
  * <p>
- * A StarDict dictionary plugin uses stardict4j access library.
- * Every dictionary consists of these files:
- * <ol><li>somedict.ifo
+ * A StarDict dictionary plugin uses stardict4j access library. Every dictionary
+ * consists of these files:
+ * <ol>
+ * <li>somedict.ifo
  * <li>somedict.idx or somedict.idx.gz
  * <li>somedict.dict or somedict.dict.dz
  * <li>somedict.syn (optional)
@@ -115,7 +122,7 @@ public class StarDict implements IDictionaryFactory {
 
         StarDictDict(final File file, Language language) throws Exception {
             dictionary = StarDictDictionary.loadDictionary(file, 1_000, Duration.ofMinutes(30));
-            // Max cache size  to 1,000 items and expiry to 30 min.
+            // Max cache size to 1,000 items and expiry to 30 min.
             this.language = language;
         }
 
@@ -125,9 +132,7 @@ public class StarDict implements IDictionaryFactory {
             if (result.isEmpty()) {
                 result = dictionary.readArticles(word.toLowerCase(language.getLocale()));
             }
-            return result.stream()
-                    .filter(StarDictDict::useEntry)
-                    .map(StarDictDict::convertEntry)
+            return result.stream().filter(StarDictDict::useEntry).map(StarDictDict::convertEntry)
                     .collect(Collectors.toList());
         }
 
@@ -140,42 +145,129 @@ public class StarDict implements IDictionaryFactory {
             if (result.isEmpty()) {
                 result = dictionary.readArticlesPredictive(word.toLowerCase(language.getLocale()));
             }
-            return result.stream()
-                    .filter(StarDictDict::useEntry)
-                    .map(StarDictDict::convertEntry)
+            return result.stream().filter(StarDictDict::useEntry).map(StarDictDict::convertEntry)
                     .collect(Collectors.toList());
         }
 
         private static boolean useEntry(StarDictDictionary.Entry entry) {
             StarDictDictionary.EntryType type = entry.getType();
-            return type == StarDictDictionary.EntryType.MEAN
-                    || type == StarDictDictionary.EntryType.PHONETIC
-                    || type == StarDictDictionary.EntryType.HTML;
+            return type == StarDictDictionary.EntryType.MEAN || type == StarDictDictionary.EntryType.PHONETIC
+                    || type == StarDictDictionary.EntryType.HTML || type == StarDictDictionary.EntryType.XDXF;
         }
+
+        private static final String CONDENSED_SPAN = "<span class=\"paragraph-start\">&nbsp;"
+                + "\u00b6</span><span>";
 
         private static DictionaryEntry convertEntry(StarDictDictionary.Entry entry) {
             boolean condensed = Preferences.isPreferenceDefault(Preferences.DICTIONARY_CONDENSED_VIEW, false);
             StringBuilder sb = new StringBuilder();
             if (entry.getType().equals(StarDictDictionary.EntryType.MEAN)) {
-                    String[] lines = entry.getArticle().split("\n");
-                    if (condensed) {
-                        for (int i = 0; i < lines.length; i++) {
-                            if (i > 0) {
-                                sb.append("<span class=\"paragraph-start\">&nbsp;\u00b6</span><span>");
-                            } else {
-                                sb.append("<span>");
-                            }
-                            sb.append(lines[i]).append("</span>");
+                String[] lines = entry.getArticle().split("\n");
+                if (condensed) {
+                    for (int i = 0; i < lines.length; i++) {
+                        if (i > 0) {
+                            sb.append(CONDENSED_SPAN);
+                        } else {
+                            sb.append("<span>");
                         }
-                    } else {
-                        for (String line : lines) {
-                            sb.append("<div>").append(line).append("</div>");
-                        }
+                        sb.append(lines[i]).append("</span>");
                     }
+                } else {
+                    for (String line : lines) {
+                        sb.append("<div>").append(line).append("</div>");
+                    }
+                }
             } else if (entry.getType().equals(StarDictDictionary.EntryType.PHONETIC)) {
                 sb.append("<span>(").append(entry.getArticle()).append(")</span>");
             } else if (entry.getType().equals(StarDictDictionary.EntryType.HTML)) {
                 sb.append(entry.getArticle());
+            } else if (entry.getType().equals(StarDictDictionary.EntryType.XDXF)) {
+                Document document = Jsoup.parse(entry.getArticle());
+                // Process XDXF specific tags
+                document.select("k").remove();
+                Elements c = document.select("c");
+                for (Element e : c) {
+                    String color = e.attr("c");
+                    e.tagName("span");
+                    e.removeAttr("c");
+                    e.attr("style", "color: " + color + ";");
+                }
+                Elements su = document.select("su");
+                su.tagName("div");
+                su.attr("class", "details");
+                Elements ex = document.select("ex");
+                ex.tagName("span");
+                ex.attr("style", "color: blue;");
+                Elements co = document.select("co");
+                co.tagName("span");
+                co.attr("style", "color: gray;");
+                Safelist safelist = new Safelist()
+                        .addTags("sup", "sub", "i", "b", "tt", "big", "small", "span");
+                safelist.addAttributes("span", "style");
+                Elements kref = document.select("kref");
+                kref.tagName("span");
+                kref.attr("style", "font-style: italic;");
+                kref.removeAttr("idref");
+                Elements iref = document.select("iref");
+                iref.tagName("a");
+                Elements rref = document.select("rref");
+                for (Element e: rref) {
+                    String type = e.attr("type");
+                    if (type.isEmpty()) {
+                        e.remove();
+                        continue;
+                    }
+                    String resource = e.attr("lctn");
+                    e.removeAttr("lctn");
+                    if (type.startsWith("audio")) {
+                        e.tagName("a");
+                        e.removeAttr("start");
+                        e.removeAttr("size");
+                        e.attr("href", resource);
+                        e.text("Play");
+                    } else if (type.startsWith("image")) {
+                        e.tagName("img");
+                        e.attr("src", resource);
+                    } else if (type.startsWith("video")) {
+                        e.tagName("video");
+                        e.appendChild(new Element("source").attr("src", resource).attr("type", type));
+                        e.removeAttr("type");
+                    } else {
+                        e.remove();
+                    }
+                }
+                if (!condensed) {
+                    safelist.addTags("blockquote");
+                    Cleaner cleaner = new Cleaner(safelist);
+                    document = cleaner.clean(document);
+                    Elements q = document.select("blockquote");
+                    q.attr("style", "display: block;margin-left: 20px;");
+                    Elements definitionElements = document.select("def");
+                    if (definitionElements.size() > 0) {
+                        definitionElements.forEach(
+                                e -> sb.append("<div>").append(e.html()).append("</div>"));
+                    } else {
+                        sb.append("<div>").append(document.body().html()).append("</div>");
+                    }
+                } else {
+                    document.select("k").remove();
+                    document.select("su").remove();
+                    Cleaner cleaner = new Cleaner(safelist);
+                    document = cleaner.clean(document);
+                    Elements definitionElements = document.select("def");
+                    if (definitionElements.size() > 0) {
+                        for (int i = 0; i < definitionElements.size(); i++) {
+                            if (i > 0) {
+                                sb.append(CONDENSED_SPAN);
+                            } else {
+                                sb.append("<span>");
+                            }
+                            sb.append(definitionElements.get(i).html()).append("</span>");
+                        }
+                    } else {
+                        sb.append("<span>").append(document.body().html()).append("</span>");
+                    }
+                }
             }
             return new DictionaryEntry(entry.getWord(), sb.toString());
         }

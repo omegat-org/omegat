@@ -9,7 +9,7 @@
 #                Support center: https://omegat.org/support
 #
 #  This file is part of OmegaT.
-#
+https://dev.azure.com/omegat-org/ecb5bbf0-66ac-433d-bda1-be5bcf90716d/_apis/build/builds/5871/logs/11#
 #  OmegaT is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
 #  the Free Software Foundation, either version 3 of the License, or
@@ -30,13 +30,9 @@ cp /keys/id_rsa /home/omegat/.ssh/id_rsa
 chown omegat.omegat /home/omegat/.ssh/id_rsa
 chmod 600 /home/omegat/.ssh/id_rsa
 
-
 if [[ "${TYPE}" == "SVN" ]]; then
-  export REPO=http://git:gitpass@server/svn/omegat-test.svn
-  export REPO2=http://git:gitpass@server/svn/omegat-test.svn
-elif [[ "${TYPE}" == "SSH" ]]; then
-  export REPO=svn+ssh://server/home/git/omegat-test.svn
-  export REPO2=svn+ssh://server/home/git/omegat-test.svn
+  export REPO=http://svn:svnpass@server/svn/omegat-test.svn
+  export REPO2=svn+ssh://svn:svnpass@server/omegat-test.svn
 elif [[ "${TYPE}" == "GIT" ]]; then
   export REPO=git@server:omegat-test.git
   export REPO2=https://git:gitpass@server/omegat-test.git
@@ -45,6 +41,13 @@ elif [[ "${TYPE}" == "GIT" ]]; then
   git config --global http.sslVerify false
 fi
 
+ssh-keyscan -H server > /home/omegat/.ssh/known_hosts
+
 cd /code
-./gradlew testIntegration -Domegat.test.duration=${DURATION} -Domegat.test.repo=${REPO} \
+umask a+w
+/opt/gradle-7.5.1/bin/gradle testIntegration -Domegat.test.duration=${DURATION} -Domegat.test.repo=${REPO} \
        -Domegat.test.repo.alt=${REPO2} -Domegat.test.map.repo=http://server/ -Domegat.test.map.file=README
+result=$?
+chmod -R a+w .gradle || true
+find * -name build -type d -exec chmod -R a+w {} \; || true
+exit $result

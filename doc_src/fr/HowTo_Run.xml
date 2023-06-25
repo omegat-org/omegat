@@ -170,12 +170,12 @@
 		<varlistentry id="launch.with.command.line.intro.java.parameters">
 		  <term id="launch.with.command.line.intro.java.parameters.title"><option>&lt;paramètres java&gt;</option></term>
 		  <listitem>
-			<para>Les paramètres optionnels acceptés par la commande <command>java</command>. Les paramètres utiles au fonctionnement d’OmegaT sont décrits <link linkend="launch.with.command.line.java.parameters">ci-dessous</link>.</para>
+			<para>Les paramètres optionnels acceptés par la commande <command>java</command>. Les paramètres relatifs au lancement OmegaT sont décrits <link linkend="launch.with.command.line.java.parameters">ci-dessous</link>.</para>
 		  </listitem>					
 		</varlistentry>
 
 		<varlistentry id="launch.with.command.line.intro.omegat.jar">
-		  <term id="launch.with.command.line.intro.omegat.jar.title"><option>chemin/à/OmegaT.jar</option></term>
+		  <term id="launch.with.command.line.intro.omegat.jar.title"><option>chemin/vers/OmegaT.jar</option></term>
 		  <listitem>
 			<para>L’emplacement de l’exécutable java OmegaT.</para>	  
 		  </listitem>
@@ -365,7 +365,7 @@ config-dir=&quot;chemin/vers/nouveau/configdir&quot;</programlisting>
 							  
 							  <variablelist>
 								<varlistentry id="launch.with.command.line.html">
-								  <term id="launch.with.command.line.html.title"><option>. *\.html</option></term>
+								  <term id="launch.with.command.line.html.title"><option>.*\.html</option></term>
 								  <listitem>
 									<para>Traduire tous les fichiers HTML.</para>
 								  </listitem>

@@ -114,7 +114,7 @@
 				<row>
 				  <entry>Apertium</entry>
 				  <entry>URL, Touche clavier</entry>
-				  <entry><ulink url="https://www.apertium.org/index.fra.html#?dir=fra-epo&amp;q=">https://www.apertium.org/index.fra.html#?dir=fra-epo&amp;q=</ulink></entry>
+				  <entry><ulink url="https://www.apertium.org/index.fra.html#?dir=fra-epo&amp;q=">https://www.apertium.org/index.fra.html#?dir=fra-epo&amp;amp;q=</ulink></entry>
 				</row>
 				<row>
 				  <entry>MyMemory (traduction humaine)</entry>
@@ -178,7 +178,7 @@
 			</listitem>
 
 			<listitem>
-			  <para><link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.insert.source" endterm="menus.edit.insert.source.title"/> or</para>
+			  <para><link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.insert.source" endterm="menus.edit.insert.source.title"/> ou</para>
 			</listitem>
 
 			<listitem>
@@ -232,7 +232,7 @@
       </varlistentry>
 
       <varlistentry id="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries">
-        <term id="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries.title"><option>Utiliser la correspondance partielle</option></term>
+        <term id="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries.title"><option>Utiliser la lemmatisation</option></term>
 
         <listitem>
           <para>OmegaT utilisera le lemmatiseur associé pour trouver des correspondances.</para>
@@ -240,7 +240,7 @@
       </varlistentry>
 
       <varlistentry id="dialogs.preferences.dictionary.use.condensed.view">
-        <term id="dialogs.preferences.dictionary.use.condensed.view.title"><option>Utiliser la vue condensée</option></term>
+        <term id="dialogs.preferences.dictionary.use.condensed.view.title"><option>Vue condensée</option></term>
 
         <listitem>
           <para>Certains pilotes de dictionnaires fournis sous forme de modules d’extension ne prennent pas en charge cette fonctionnalité.</para>
@@ -266,7 +266,7 @@
       </varlistentry>
 
       <varlistentry id="dialogs.preferences.appearance.restore.main.window">
-        <term id="dialogs.preferences.appearance.restore.main.window.title"><option>Réinitialiser la fenêtre principale</option></term>
+        <term id="dialogs.preferences.appearance.restore.main.window.title"><option>Réinitialiser la fenêtre d’OmegaT</option></term>
 
         <listitem>
           <para>Rétablit la disposition par défaut des fenêtres d’OmegaT.
@@ -400,7 +400,7 @@
 		  <term id="segmentation.rules.breakrule.title"><option>Segmentations</option></term>
 
 		  <listitem>
-			<para>Pour définir une règle de segmentation, cochez la case <guilabel>Segmentation/Exception</guilabel>.</para>
+			<para>Pour définir une règle de segmentation, cochez la case <guilabel>Segmentation</guilabel>.</para>
 
 			<para>Sépare le texte source en segments. Par exemple, un <emphasis>point suivi d’une espace</emphasis> définit généralement une fin de phrase en anglais.</para>
 		  </listitem>
@@ -477,7 +477,7 @@
 	  </varlistentry>
 	  
 	  <varlistentry id="dialog.preferences.spellchecker.url">
-		<term id="dialog.preferences.spellchecker.url.title"><option>URL des dictionnaires de vérification orthographique téléchargeables</option></term>
+		<term id="dialog.preferences.spellchecker.url.title"><option>URL des dictionnaires orthographiques téléchargeables :</option></term>
 		<listitem>
 		  <para>L’URL par défaut où OmegaT cherchera les dictionnaires à installer.</para>
 
@@ -555,11 +555,11 @@
 	  <varlistentry id="dialogs.preferences.external.search.items">
 		<term id="dialogs.preferences.external.search.items.title"><option>Configurations</option></term>
 		<listitem>
-		  <para>Chaque ensemble représente un groupe de recherches sur le web ou de commandes locales lancées simultanément.</para>
+		  <para>Chaque configuration représente un groupe de recherches sur le web ou de commandes locales lancées simultanément.</para>
 
-		  <para>Un nom doit être attribué à un ensemble. Le nom apparaitra à la fin du menu <link linkend="menus.tools" endterm="menus.tools.title"/>.</para>
+		  <para>Chaque configuration doit être nommée. Le nom apparaîtra à la fin du menu <link linkend="menus.tools" endterm="menus.tools.title"/>.</para>
 
-		  <para>Si vous cochez la case <guilabel>Afficher dans le menu contextuel de l’Éditeur</guilabel>, le nom de l’ensemble sera également affiché dans le <link linkend="panes.editor.context.menu">menu contextuel</link> si une chaîne de caractères est sélectionnée.</para>
+		  <para>Si vous cochez la case <guilabel>Afficher dans le menu contextuel de l’Éditeur</guilabel>, le nom de la configuration sera également affiché dans le <link linkend="panes.editor.context.menu">menu contextuel</link> si une chaîne de caractères est sélectionnée.</para>
 
 		  <para>Les recherches par URL ainsi que les commandes doivent contenir la chaîne <literal>{target}</literal> pour être acceptées. Le caractère générique <literal>{target}</literal> sera remplacé par la chaîne sélectionnée dans l’Éditeur.</para>
 
@@ -575,9 +575,9 @@
 
 		  <example id="dialogs.preferences.external.search.items.command.example">
 			<title id="dialogs.preferences.external.search.items.command.example.title">Exemple de commande</title>
-			<programlisting>/usr/bin/open|dict://{target}</programlisting>
+			<programlisting>/usr/bin/open|dict://{terme}</programlisting>
 
-			<para>Cela ouvre l’application du dictionnaire qui met en œuvre le protocole <code>dict</code> sur votre ordinateur, à la recherche du terme {target}.</para></example>
+			<para>Cela ouvre l’application du dictionnaire qui met en œuvre le protocole <code>dict</code> sur votre ordinateur, à la recherche du terme {terme}.</para></example>
 		</listitem>
 	  </varlistentry>
 	</variablelist>
@@ -690,7 +690,7 @@
 		<term id="dialogs.preferences.editor.go.to.next.untranslated.segment.stops.where.there.is.at.least.one.alternative.translation.title"><option>Arrêt sur les traductions non traduites et alternatives</option></term>
 
 		<listitem>
-		  <para><link linkend="menus.goto" endterm="menus.goto.title"/><link linkend="menus.goto.next.untranslated.segment" endterm="menus.goto.next.untranslated.segment.title"/>s’arrête également sur les segments comportant des traductions alternatives.</para>
+		  <para><link linkend="menus.goto" endterm="menus.goto.title"/><link linkend="menus.goto.next.untranslated.segment" endterm="menus.goto.next.untranslated.segment.title"/> s’arrête également sur les segments comportant des traductions alternatives.</para>
 		</listitem>
 	  </varlistentry>
 
@@ -811,9 +811,9 @@
 	  </varlistentry>
 
 	  <varlistentry id="dialogs.preferences.tag.processing.count.protected.text.and.custom.tags.in.statistics">
-		<term id="dialogs.preferences.tag.processing.count.protected.text.and.custom.tags.in.statistics.title"><option>Compter le texte protégé et les balises personnalisées dans les statistiques.</option></term>
+		<term id="dialogs.preferences.tag.processing.count.protected.text.and.custom.tags.in.statistics.title"><option>Compter les textes signalés et les balises personnalisées dans les statistiques</option></term>
 		<listitem>
-		  <para>Contrairement aux balises d’OmegaT, les textes protégés et les balises personnalisées sont par défaut pris en compte dans les statistiques. Voir le menu <link linkend="menus.tools" endterm="menus.tools.title"/><link linkend="menus.tools.statistics" endterm="menus.tools.statistics.title"/> pour plus de détails.</para>
+		  <para>Contrairement aux balises d’OmegaT, les textes signalés et les balises personnalisées sont par défaut pris en compte dans les statistiques. Voir le menu <link linkend="menus.tools" endterm="menus.tools.title"/><link linkend="menus.tools.statistics" endterm="menus.tools.statistics.title"/> pour plus de détails.</para>
 		</listitem>
 	  </varlistentry>
 
@@ -833,7 +833,7 @@
 	  </varlistentry>
 	  
 	  <varlistentry id="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation">
-		<term id="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation.title"><option>Texte protégé</option></term>
+		<term id="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation.title"><option>Texte signalé</option></term>
 		<listitem>
 		  <para>Le texte dans le segment cible qui correspond à cette expression est coloré en rouge et est identifié comme étant une balise superflue dans le cadre de l’affichage des erreurs. Voir le menu <link linkend="menus.tools" endterm="menus.tools.title"/><link linkend="menus.tools.check.issues" endterm="menus.tools.check.issues.title"/> pour plus de détails.</para>
 		</listitem>
@@ -1051,7 +1051,7 @@ ${filePath}&gt;</programlisting></para>
 
 				<row>
 				  <entry>
-					<literal>$(targetLanguage)</literal>
+					<literal>${targetLanguage}</literal>
 				  </entry>
 				  <entry>La langue cible du segment.</entry>
 				</row>
@@ -1083,9 +1083,9 @@ ${filePath}&gt;</programlisting></para>
 	  </varlistentry>
 
 	  <varlistentry id="dialog.preferences.view.include.the.first.non-unique.segment.when.marking.non.unique.segments">
-		<term id="dialog.preferences.view.include.the.first.non-unique.segment.when.marking.non.unique.segments.title"><option>Marquer tous les segments répétés</option></term>
+		<term id="dialog.preferences.view.include.the.first.non-unique.segment.when.marking.non.unique.segments.title"><option>Colorer tous les segments répétés</option></term>
 		<listitem>
-		  <para>Utilisez <link linkend="menus.view" endterm="menus.view.title"/><link linkend="menus.view.mark.non.unique.segments" endterm="menus.view.mark.non.unique.segments.title"/> pour marquer la deuxième copie et les copies suivantes d’un segment répété. Utilisez cette option pour marquer également la première copie du segment.
+		  <para>Utilisez <link linkend="menus.view" endterm="menus.view.title"/><link linkend="menus.view.mark.non.unique.segments" endterm="menus.view.mark.non.unique.segments.title"/> pour colorer la deuxième copie et les copies suivantes d’un segment répété. Utilisez cette option pour colorer également la première copie du segment.
 </para>
 		</listitem>
 	  </varlistentry>

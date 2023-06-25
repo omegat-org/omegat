@@ -9,6 +9,7 @@
                2012 Guido Leenders
                2016 Aaron Madlon-Kay
                2019 Briac Pilpre
+               2023 Damien Remert
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -784,5 +785,13 @@ public class Language implements Comparable<Object> {
                 || "he".equalsIgnoreCase(language) || "fa".equalsIgnoreCase(language)
                 || "ur".equalsIgnoreCase(language) || "ug".equalsIgnoreCase(language)
                 || "ji".equalsIgnoreCase(language) || "yi".equalsIgnoreCase(language);
+    }
+
+    public static String getLowerCaseLanguageFromLocale() {
+        return Locale.getDefault().getLanguage().toLowerCase(Locale.ENGLISH);
+    }
+
+    public static String getUpperCaseCountryFromLocale() {
+        return Locale.getDefault().getCountry().toUpperCase(Locale.ENGLISH);
     }
 }

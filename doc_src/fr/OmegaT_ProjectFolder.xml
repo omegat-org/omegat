@@ -11,27 +11,27 @@
 
 	<itemizedlist>
 	  <listitem>
-		<para><link linkend="project.folder.source" endterm="project.folder.source.title"/>contient les fichiers source</para>
+		<para><link linkend="project.folder.source" endterm="project.folder.source.title"/> contient les fichiers source</para>
 	  </listitem>
 
 	  <listitem>
-		<para><link linkend="project.folder.target" endterm="project.folder.target.title"/>est l’emplacement où les fichiers cibles sont créés</para>
+		<para><link linkend="project.folder.target" endterm="project.folder.target.title"/> est l’emplacement où les fichiers cibles sont créés</para>
 	  </listitem>
 
 	  <listitem>
-		<para><link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/>contient les glossaires</para>
+		<para><link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/> contient les glossaires</para>
 	  </listitem>
 
 	  <listitem>
-		<para><link linkend="project.folder.glossary.txt" endterm="project.folder.glossary.txt.title"/>est le glossaire modifiable du projet</para>
+		<para><link linkend="project.folder.glossary.txt" endterm="project.folder.glossary.txt.title"/> est le glossaire modifiable du projet</para>
 	  </listitem>
 
 	  <listitem>
-		<para><link linkend="project.folder.tm" endterm="project.folder.tm.title"/>contient les mémoires de traduction de référence</para>
+		<para><link linkend="project.folder.tm" endterm="project.folder.tm.title"/> contient les mémoires de traduction de référence</para>
 	  </listitem>
 
 	  <listitem>
-		<para><link linkend="project.folder.dictionary" endterm="project.folder.dictionary.title"/>contient les dictionnaires de référence</para>
+		<para><link linkend="project.folder.dictionary" endterm="project.folder.dictionary.title"/> contient les dictionnaires de référence</para>
 	  </listitem>
 	</itemizedlist>
 
@@ -277,7 +277,7 @@
   </section>
 
   <section id="project.folder.dictionary">
-    <title id="project.folder.dictionary.title">Dictionnaire</title>
+    <title id="project.folder.dictionary.title">dictionary</title>
     <para>Ce dossier est initialement vide et sert à stocker tous les dictionnaires que vous ajoutez au projet.</para>
 
 	<para>Les termes du dictionnaire qui correspondent à des parties du segment sont affichés dans le volet <link linkend="panes.dictionary" endterm="panes.dictionary.title"/>. Voir les préférences <link linkend="dialogs.preferences.dictionary" endterm="dialogs.preferences.dictionary.title"/> pour en savoir plus.</para>
@@ -301,7 +301,7 @@
   </section>
 
   <section id="project.folder.glossary">
-    <title id="project.folder.glossary.title">Glossaire</title>
+    <title id="project.folder.glossary.title">glossary</title>
     <para>À l’origine, ce dossier est vide. Il est utilisé pour stocker le glossaire modifiable par défaut et tout autre glossaire utilisé dans le projet.</para>
 
 	<para>Les termes du glossaire qui correspondent à des parties du segment sont affichés dans le volet <link linkend="panes.glossary" endterm="panes.glossary.title"/>. Voir l’annexe <link linkend="app.glossaries" endterm="app.glossaries.title"/> pour en savoir plus.</para>

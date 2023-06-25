@@ -1,0 +1,22 @@
+parameters:
+  - name: testType
+    default: 'GIT'
+  - name: duration
+    default: 600
+
+steps:
+  - task: Cache@2
+    displayName: 'Cache Gradle'
+    inputs:
+      key: 'gradle | $(Agent.OS) | $(Build.SourcesDirectory)/build.gradle'
+      path: '$(GRADLE_USER_HOME)'
+  - script: |
+      echo "Run ${{ parameters.testType }} integration test"
+      umask a+w
+      mkdir -p .gradle build tipoftheday/build
+      chmod -R a+w .
+      docker-compose up --abort-on-container-exit --exit-code-from client
+    env:
+      DURATION: ${{ parameters.duration }}
+      TYPE: ${{ parameters.testType }}
+    displayName: 'Run Integration-Test(GIT)'

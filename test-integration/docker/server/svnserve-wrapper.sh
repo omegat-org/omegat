@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 #
 #  OmegaT - Computer Assisted Translation (CAT) tool
 #           with fuzzy matching, translation memory, keyword search,
@@ -23,9 +23,5 @@
 #  You should have received a copy of the GNU General Public License
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
-
-ssh-keygen -q -t rsa -m PEM -b 4096 -N '' -f /tmp/id_rsa && ssh-keygen -A
-install -m 666 /tmp/id_rsa /tmp/id_rsa.pub /keys/
-cat /keys/id_rsa.pub >> /home/git/.ssh/authorized_keys
-echo "start servers"
-exec /usr/bin/supervisord -c /root/supervisord.conf
+umask 0002
+exec /usr/bin/svnserve $@

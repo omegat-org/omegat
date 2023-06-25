@@ -319,11 +319,11 @@ public final class Main {
         try {
             if (cls.getName().equals("sun.awt.X11.XToolkit")) {
                 Field field = cls.getDeclaredField("awtAppClassName");
-                field.setAccessible(true);
-                field.set(toolkit, "OmegaT");
+                if (field.trySetAccessible()) {
+                    field.set(toolkit, "OmegaT");
+                }
             }
-        } catch (Exception e) {
-            // do nothing
+        } catch (Exception ignored) {
         }
 
         System.setProperty("swing.aatext", "true");

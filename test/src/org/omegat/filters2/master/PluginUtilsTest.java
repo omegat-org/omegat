@@ -60,10 +60,8 @@ public class PluginUtilsTest {
         final Set<String> expected = new HashSet<>();
         expected.add("anotherPlugin-0.3.1.jar");
         expected.add("testPlugin-1.13-1.45.0.jar");
-        final List<String> result = urlList
-                .stream()
-                .map(url -> Paths.get(url.getPath()).getFileName().toString())
-                .collect(Collectors.toList());
+        final List<String> result = urlList.stream()
+                .map(url -> Paths.get(url.getPath()).getFileName().toString()).collect(Collectors.toList());
         assertTrue(result.containsAll(expected));
     }
 

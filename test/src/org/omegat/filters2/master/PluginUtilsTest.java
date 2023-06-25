@@ -29,9 +29,12 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.xml.bind.JAXBException;
@@ -44,9 +47,12 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 public class PluginUtilsTest {
 
     @Test
-    public void testLoadLatestPluginVersionOnly() throws JsonProcessingException, JAXBException {
+    public void testLoadLatestPluginVersionOnly()
+            throws JsonProcessingException, JAXBException, MalformedURLException {
         final List<File> pluginsDirs = new ArrayList<>();
-        pluginsDirs.add(new File("test/data/plugin/jar"));
+        File testDataDir = new File("test/data/plugin/jar");
+        URL testDataDirURL = testDataDir.toURI().toURL();
+        pluginsDirs.add(testDataDir);
 
         // list all jars in /plugins/
         List<File> fileList = pluginsDirs.stream().flatMap(
@@ -57,12 +63,10 @@ public class PluginUtilsTest {
         List<URL> urlList = PluginUtils.populatePluginUrlList(pluginsDirs);
         assertEquals(2, urlList.size());
 
-        final Set<String> expected = new HashSet<>();
-        expected.add("anotherPlugin-0.3.1.jar");
-        expected.add("testPlugin-1.13-1.45.0.jar");
-        final List<String> result = urlList.stream()
-                .map(url -> Paths.get(url.getPath()).getFileName().toString()).collect(Collectors.toList());
-        assertTrue(result.containsAll(expected));
+        final Set<URL> expected = new HashSet<>();
+        expected.add(new URL(testDataDirURL, "anotherPlugin-0.3.1.jar"));
+        expected.add(new URL(testDataDirURL, "testPlugin-1.13-1.45.0.jar"));
+        assertTrue(urlList.containsAll(expected));
     }
 
 }

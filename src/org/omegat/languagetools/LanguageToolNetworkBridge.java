@@ -72,8 +72,6 @@ public class LanguageToolNetworkBridge extends BaseLanguageToolBridge {
      *
      * @param url
      *            URL of remote LanguageTool server
-     * @return new LanguageToolNetworkBridge instance
-     * @throws java.lang.Exception
      */
     public LanguageToolNetworkBridge(Language sourceLang, Language targetLang, String url) throws Exception {
         // Try to connect URL
@@ -96,7 +94,8 @@ public class LanguageToolNetworkBridge extends BaseLanguageToolBridge {
      * @return new LanguageToolNetworkBridge instance
      * @throws java.lang.Exception
      */
-    public LanguageToolNetworkBridge(Language sourceLang, Language targetLang, String path, int port) throws Exception {
+    public LanguageToolNetworkBridge(Language sourceLang, Language targetLang, String path, int port)
+            throws Exception {
         // Remember port
         localPort = port;
 
@@ -116,8 +115,8 @@ public class LanguageToolNetworkBridge extends BaseLanguageToolBridge {
             throw new Exception();
         }
         // Run the server
-        ProcessBuilder pb = new ProcessBuilder("java", "-cp", serverJar.getAbsolutePath(), SERVER_CLASS_NAME, "--port",
-                Integer.toString(port));
+        ProcessBuilder pb = new ProcessBuilder("java", "-cp", serverJar.getAbsolutePath(), SERVER_CLASS_NAME,
+                "--port", Integer.toString(port));
         pb.redirectErrorStream(true);
         server = pb.start();
 
@@ -199,8 +198,8 @@ public class LanguageToolNetworkBridge extends BaseLanguageToolBridge {
     }
 
     @Override
-    public void applyRuleFilters(Set<String> disabledCategories,
-            Set<String> disabledRules, Set<String> enabledRules) {
+    public void applyRuleFilters(Set<String> disabledCategories, Set<String> disabledRules,
+            Set<String> enabledRules) {
         this.disabledCategories = String.join(",", disabledCategories);
         this.disabledRules = String.join(",", disabledRules);
         this.enabledRules = String.join(",", enabledRules);
@@ -208,7 +207,8 @@ public class LanguageToolNetworkBridge extends BaseLanguageToolBridge {
 
     @Override
     @SuppressWarnings("unchecked")
-    protected List<LanguageToolResult> getCheckResultsImpl(String sourceText, String translationText) throws Exception {
+    protected List<LanguageToolResult> getCheckResultsImpl(String sourceText, String translationText)
+            throws Exception {
         if (targetLang == null) {
             return Collections.emptyList();
         }
@@ -255,7 +255,8 @@ public class LanguageToolNetworkBridge extends BaseLanguageToolBridge {
 
     @SuppressWarnings("unchecked")
     protected JsonNode getSupportedLanguages() throws Exception {
-        // This is a really stupid way to get the /languages endpoint URL, but it'll do for now.
+        // This is a really stupid way to get the /languages endpoint URL, but
+        // it'll do for now.
         String langsUrl = serverUrl.replace(CHECK_PATH, LANGS_PATH);
 
         URL url = new URL(langsUrl);
@@ -287,8 +288,8 @@ public class LanguageToolNetworkBridge extends BaseLanguageToolBridge {
     }
 
     /**
-     * Replace double quotes with <suggestion></suggestion> tags
-     * in error message to imitate native LanguageTool behavior
+     * Replace double quotes with <suggestion></suggestion> tags in error
+     * message to imitate native LanguageTool behavior
      */
     static String addSuggestionTags(String str) {
         return str.replaceAll("^([^:]+:\\s?)\"([^']+)\"", "$1<suggestion>$2</suggestion>");
@@ -297,16 +298,16 @@ public class LanguageToolNetworkBridge extends BaseLanguageToolBridge {
     /**
      * Construct POST request data
      */
-    static String buildPostData(String sourceLang, String targetLang, String sourceText,
-            String targetText, String disabledCategories, String disabledRules, String enabledRules)
+    static String buildPostData(String sourceLang, String targetLang, String sourceText, String targetText,
+            String disabledCategories, String disabledRules, String enabledRules)
             throws UnsupportedEncodingException {
         String encoding = "UTF-8";
         StringBuilder result = new StringBuilder();
         result.append("text=").append(URLEncoder.encode(targetText, encoding)).append("&language=")
                 .append(URLEncoder.encode(targetLang, encoding));
         if (sourceText != null && sourceLang != null) {
-            result.append("&srctext=").append(URLEncoder.encode(sourceText, encoding)).append("&motherTongue=")
-                    .append(URLEncoder.encode(sourceLang, encoding));
+            result.append("&srctext=").append(URLEncoder.encode(sourceText, encoding))
+                    .append("&motherTongue=").append(URLEncoder.encode(sourceLang, encoding));
         }
         if (disabledCategories != null) {
             result.append("&disabledCategories=").append(URLEncoder.encode(disabledCategories, encoding));
@@ -366,7 +367,8 @@ public class LanguageToolNetworkBridge extends BaseLanguageToolBridge {
      *            The raw response objects from {@link #getSupportedLanguages()}
      * @param desiredLang
      *            The language to match
-     * @return The best-matching language, or null if no languages matched at all
+     * @return The best-matching language, or null if no languages matched at
+     *         all
      */
     @SuppressWarnings("unchecked")
     static Language negotiateLanguage(JsonNode serverLangs, Language desiredLang) {
@@ -380,7 +382,7 @@ public class LanguageToolNetworkBridge extends BaseLanguageToolBridge {
 
         // Search for just xx match
         String omLang = desiredLang.getLanguageCode();
-        for (JsonNode lang: serverLangs) {
+        for (JsonNode lang : serverLangs) {
             if (omLang.equalsIgnoreCase(lang.get("longCode").asText())) {
                 return new Language(desiredLang.getLanguageCode());
             }

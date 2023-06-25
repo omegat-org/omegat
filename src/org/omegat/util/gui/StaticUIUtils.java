@@ -99,8 +99,8 @@ public final class StaticUIUtils {
     }
 
     /**
-     * Make a dialog closeable by pressing the Esc key.
-     * {@link JFrame#dispose()} will be called.
+     * Make a dialog closeable by pressing the Esc key. {@link JFrame#dispose()}
+     * will be called.
      *
      * @param frame
      */
@@ -159,13 +159,16 @@ public final class StaticUIUtils {
     }
 
     /**
-     * Truncate the supplied text so that it fits within the width (minus margin)
-     * of the supplied component. Truncation is achieved by replacing a chunk from
-     * the center of the string with an ellipsis.
+     * Truncate the supplied text so that it fits within the width (minus
+     * margin) of the supplied component. Truncation is achieved by replacing a
+     * chunk from the center of the string with an ellipsis.
      *
-     * @param text Text to truncate
-     * @param comp Component to fit text into
-     * @param margin Additional space to leave empty
+     * @param text
+     *            Text to truncate
+     * @param comp
+     *            Component to fit text into
+     * @param margin
+     *            Additional space to leave empty
      * @return A truncated string
      */
     public static String truncateToFit(String text, JComponent comp, int margin) {
@@ -196,7 +199,8 @@ public final class StaticUIUtils {
         int chompStart = middle, chompEnd = middle;
         String chomp = null;
 
-        // Calculate size when removing progressively larger chunks from the middle
+        // Calculate size when removing progressively larger chunks from the
+        // middle
         while (true) {
             if (chompStart == 0 || chompEnd == text.length()) {
                 break;
@@ -211,16 +215,16 @@ public final class StaticUIUtils {
         }
 
         if (chomp != null) {
-            text = text.substring(0, chompStart) + StringUtil.TRUNCATE_CHAR + text.substring(chompEnd, text.length());
+            text = text.substring(0, chompStart) + StringUtil.TRUNCATE_CHAR
+                    + text.substring(chompEnd, text.length());
         }
         return text;
     }
 
     public static void forwardMouseWheelEvent(Component target, MouseWheelEvent evt) {
-        Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(
-                new MouseWheelEvent(target, evt.getID(), evt.getWhen(),
-                        evt.getModifiersEx(), evt.getX(), evt.getY(),
-                        evt.getClickCount(), evt.isPopupTrigger(),
+        Toolkit.getDefaultToolkit().getSystemEventQueue()
+                .postEvent(new MouseWheelEvent(target, evt.getID(), evt.getWhen(), evt.getModifiersEx(),
+                        evt.getX(), evt.getY(), evt.getClickCount(), evt.isPopupTrigger(),
                         evt.getScrollType(), evt.getScrollAmount(), evt.getWheelRotation()));
     }
 
@@ -245,8 +249,8 @@ public final class StaticUIUtils {
     public static void setCaretUpdateEnabled(JTextComponent comp, boolean updateEnabled) {
         Caret caret = comp.getCaret();
         if (caret instanceof DefaultCaret) {
-            ((DefaultCaret) caret).setUpdatePolicy(updateEnabled ? DefaultCaret.UPDATE_WHEN_ON_EDT
-                    : DefaultCaret.NEVER_UPDATE);
+            ((DefaultCaret) caret).setUpdatePolicy(
+                    updateEnabled ? DefaultCaret.UPDATE_WHEN_ON_EDT : DefaultCaret.NEVER_UPDATE);
         }
     }
 
@@ -278,7 +282,8 @@ public final class StaticUIUtils {
      */
     public static int correctFrameWidth(int width) {
         if (Platform.isMacOSX() && System.getProperty("java.version").startsWith("1.8")) {
-            int screenWidth = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds().width;
+            int screenWidth = GraphicsEnvironment.getLocalGraphicsEnvironment()
+                    .getMaximumWindowBounds().width;
             // 50 is a magic number. Can be as low as 11 (tested on OS X
             // 10.10.2, Java 1.8.0_31).
             width = Math.min(width, screenWidth - 50);
@@ -381,13 +386,13 @@ public final class StaticUIUtils {
      * adjustment.
      * <p>
      * The adjustment is added to each of the base color's RGB values and
-     * rebounds from the boundaries [0, 255]. E.g. 250 + 4 -> 254 but 250 + 11
-     * -> 249, and 5 - 4 -> 1 but 5 - 11 -> 6.
+     * rebounds from the boundaries [0, 255]. E.g. 250 + 4 -&gt; 254 but 250 +
+     * 11 -&gt; 249, and 5 - 4 -&gt; 1 but 5 - 11 -&gt; 6.
      */
     public static Color getHighlightColor(Color base, int adjustment) {
         return new Color(reboundClamp(0, 255, base.getRed() + adjustment),
-                reboundClamp(0, 255, base.getGreen() + adjustment), reboundClamp(0, 255, base.getBlue() + adjustment),
-                base.getAlpha());
+                reboundClamp(0, 255, base.getGreen() + adjustment),
+                reboundClamp(0, 255, base.getBlue() + adjustment), base.getAlpha());
     }
 
     /**
@@ -432,8 +437,7 @@ public final class StaticUIUtils {
         comp.getDocument().addUndoableEditListener(manager);
 
         // Handle undo (Ctrl/Cmd+Z);
-        KeyStroke undo = KeyStroke.getKeyStroke(KeyEvent.VK_Z, Java8Compat.getMenuShortcutKeyMaskEx(),
-                false);
+        KeyStroke undo = KeyStroke.getKeyStroke(KeyEvent.VK_Z, Java8Compat.getMenuShortcutKeyMaskEx(), false);
         Action undoAction = new AbstractAction() {
             public void actionPerformed(ActionEvent e) {
                 if (manager.canUndo()) {
@@ -445,8 +449,7 @@ public final class StaticUIUtils {
         comp.getActionMap().put("UNDO", undoAction);
 
         // Handle redo (Ctrl/Cmd+Y);
-        KeyStroke redo = KeyStroke.getKeyStroke(KeyEvent.VK_Y, Java8Compat.getMenuShortcutKeyMaskEx(),
-                false);
+        KeyStroke redo = KeyStroke.getKeyStroke(KeyEvent.VK_Y, Java8Compat.getMenuShortcutKeyMaskEx(), false);
         Action redoAction = new AbstractAction() {
             public void actionPerformed(ActionEvent e) {
                 if (manager.canRedo()) {

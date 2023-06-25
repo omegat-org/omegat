@@ -92,11 +92,11 @@ public final class StaticUtils {
     private static final String SCRIPT_DIR = "script";
 
     /**
-     * Char which should be used instead protected parts. It should be non-letter char, to be able to have
-     * correct words counter.
+     * Char which should be used instead protected parts. It should be
+     * non-letter char, to be able to have correct words counter.
      *
-     * This char can be placed around protected text for separate words inside protected text and words
-     * outside if there are no spaces between they.
+     * This char can be placed around protected text for separate words inside
+     * protected text and words outside if there are no spaces between they.
      */
     public static final char TAG_REPLACEMENT_CHAR = '\b';
     public static final String TAG_REPLACEMENT = "\b";
@@ -177,8 +177,10 @@ public final class StaticUtils {
      * is being determined, an empty string will be returned, resulting in the
      * current working directory being used.
      *
-     * <ul><li>Windows XP: &lt;Documents and Settings>\&lt;User name>\Application Data\OmegaT
-     * <li>Windows Vista: User\&lt;User name>\AppData\Roaming
+     * <ul>
+     * <li>Windows XP: &lt;Documents and Settings&gt;\&lt;User
+     * name&gt;\Application Data\OmegaT
+     * <li>Windows Vista: User\&lt;User name&gt;\AppData\Roaming
      * <li>Linux: ~/.omegat
      * <li>Solaris/SunOS: ~/.omegat
      * <li>FreeBSD: ~/.omegat
@@ -237,7 +239,8 @@ public final class StaticUtils {
             String appData = null;
 
             // We do not use %APPDATA%
-            // Trying first Vista/7, because "Application Data" exists also as virtual folder,
+            // Trying first Vista/7, because "Application Data" exists also as
+            // virtual folder,
             // so we would not be able to differentiate with 2000/XP otherwise
             File appDataFile = new File(home, "AppData\\Roaming");
             if (appDataFile.exists()) {
@@ -261,18 +264,18 @@ public final class StaticUtils {
                 // C:\Documents and Settings\<User>\OmegaT
                 configDir = home + WINDOWS_CONFIG_DIR;
             }
-        // Check for UNIX varieties
-        // Solaris is generally detected as SunOS
+            // Check for UNIX varieties
+            // Solaris is generally detected as SunOS
         } else if (os == OsType.LINUX32 || os == OsType.LINUX64 || os == OsType.OTHER) {
             // set the config dir to the user's home dir + "/.omegat/", so it's
             // hidden
             configDir = home + UNIX_CONFIG_DIR;
-        // check for Mac OS X
+            // check for Mac OS X
         } else if (Platform.isMacOSX()) {
             // set the config dir to the user's home dir +
             // "/Library/Preferences/OmegaT/"
             configDir = home + OSX_CONFIG_DIR;
-        // other OSes / default
+            // other OSes / default
         } else {
             // use the user's home directory by default
             configDir = home + File.separator;
@@ -445,8 +448,9 @@ public final class StaticUtils {
 
     /**
      * Download a file to memory.
-     * @Deprecated
-     * This method is replaced to HttpConnectionUtils.getURL(url, timeout)
+     * 
+     * @Deprecated This method is replaced to HttpConnectionUtils.getURL(url,
+     *             timeout)
      */
     @Deprecated
     public static String downloadFileToString(URL url, int timeout) throws IOException {
@@ -454,14 +458,16 @@ public final class StaticUtils {
     }
 
     /**
-     * Extracts files from an InputStream representing a zip archive to the specified destination path.
+     * Extracts files from an InputStream representing a zip archive to the
+     * specified destination path.
      *
      * @param in
      *            InputStream representing a zip archive
      * @param destination
      *            Path where archive entries will be saved
      * @param filenameFilter
-     *            Filter for entry names. Return false to skip extracting an entry
+     *            Filter for entry names. Return false to skip extracting an
+     *            entry
      * @return List of extracted entry names
      * @throws IOException
      */
@@ -492,9 +498,11 @@ public final class StaticUtils {
     }
 
     /**
-     * Parse a command line string into arguments, interpreting
-     * double and single quotes as Bash does.
-     * @param cmd Command string
+     * Parse a command line string into arguments, interpreting double and
+     * single quotes as Bash does.
+     * 
+     * @param cmd
+     *            Command string
      * @return Array of arguments
      */
     public static String[] parseCLICommand(String cmd) {
@@ -562,7 +570,8 @@ public final class StaticUtils {
      *            The containing array
      * @param offset
      *            The offset of {@code haystack} at which to start checking
-     * @return Whether or not {@code haystack} contains {@code needles} at {@code offset}
+     * @return Whether or not {@code haystack} contains {@code needles} at
+     *         {@code offset}
      * @throws ArrayIndexOutOfBoundsException
      *             If {@code offset} is not a valid index in {@code haystack}
      */
@@ -583,8 +592,8 @@ public final class StaticUtils {
 
     public static String getSupportInfo() {
         Runtime runtime = Runtime.getRuntime();
-        String memory = String.format("%dMiB total / %dMiB free / %dMiB max",
-                getMB(runtime.totalMemory()), getMB(runtime.freeMemory()), getMB(runtime.maxMemory()));
+        String memory = String.format("%dMiB total / %dMiB free / %dMiB max", getMB(runtime.totalMemory()),
+                getMB(runtime.freeMemory()), getMB(runtime.maxMemory()));
         return String.format("Version: %s%nPlatform: %s %s%nJava: %s %s%nMemory: %s",
                 OStrings.getNameAndVersion(), System.getProperty("os.name"), System.getProperty("os.version"),
                 System.getProperty("java.version"), System.getProperty("os.arch"), memory);
@@ -592,7 +601,7 @@ public final class StaticUtils {
 
     /** Convert bytes into Megabytes */
     public static int getMB(long bytes) {
-        return (int)(bytes >> 20);
+        return (int) (bytes >> 20);
     }
 
     /**

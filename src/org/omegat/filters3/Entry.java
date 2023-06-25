@@ -101,7 +101,9 @@ public class Entry {
 
     private Text textInstance = null;
 
-    /** Returns an instance of {@link Text} class used to populate this entry. */
+    /**
+     * Returns an instance of {@link Text} class used to populate this entry.
+     */
     private Text getTextInstance() {
         detectAndEnumerateTags();
         return textInstance;
@@ -214,7 +216,8 @@ public class Entry {
             }
         }
 
-        // if content-based tag is inside text, then expand text into paired content-based tag
+        // if content-based tag is inside text, then expand text into paired
+        // content-based tag
         for (int i = textStart; i <= textEnd; i++) {
             Element elem = get(i);
             if (elem instanceof XMLContentBasedTag) {
@@ -232,8 +235,8 @@ public class Entry {
                             XMLContentBasedTag tag2 = (XMLContentBasedTag) get(j);
                             if (tag2.getTag().equals("bpt") || tag2.getTag().equals("ept")) {
                                 // find id of paired tag
-                                String id2 = StringUtil.nvl(tag2.getAttribute("rid"),
-                                        tag2.getAttribute("id"), tag2.getAttribute("i"));
+                                String id2 = StringUtil.nvl(tag2.getAttribute("rid"), tag2.getAttribute("id"),
+                                        tag2.getAttribute("i"));
                                 if (id.equals(id2)) {
                                     textStart = j;
                                 }
@@ -246,8 +249,8 @@ public class Entry {
                             XMLContentBasedTag tag2 = (XMLContentBasedTag) get(j);
                             if (tag2.getTag().equals("bpt") || tag2.getTag().equals("ept")) {
                                 // find id of paired tag
-                                String id2 = StringUtil.nvl(tag2.getAttribute("rid"),
-                                        tag2.getAttribute("id"), tag2.getAttribute("i"));
+                                String id2 = StringUtil.nvl(tag2.getAttribute("rid"), tag2.getAttribute("id"),
+                                        tag2.getAttribute("i"));
                                 if (id.equals(id2)) {
                                     textEnd = j;
                                 }
@@ -350,7 +353,7 @@ public class Entry {
 
         boolean removeTags;
         if (handler.getContext().isRemoveAllTags()) { // If Remove Tags is on,
-            removeTags = true;                        // Remove leading and trailing tags must be on
+            removeTags = true; // Remove leading and trailing tags must be on
         } else {
             removeTags = Core.getFilterMaster().getConfig().isRemoveTags();
         }
@@ -437,7 +440,8 @@ public class Entry {
                             }
                         }
                     }
-                    if (tag.getIndex() < 0) { // ending tag without a starting one
+                    if (tag.getIndex() < 0) { // ending tag without a starting
+                                              // one
                         tag.setIndex(n);
                         n++;
                     }
@@ -457,7 +461,8 @@ public class Entry {
      * @param xmlDialect
      *            dialect for processing shortcuts
      */
-    public String sourceToShortcut(boolean tagsAggregation, XMLDialect xmlDialect, List<ProtectedPart> protectedParts) {
+    public String sourceToShortcut(boolean tagsAggregation, XMLDialect xmlDialect,
+            List<ProtectedPart> protectedParts) {
         if (tagsAggregation != this.tagsAggregationEnabled) {
             this.tagsAggregationEnabled = tagsAggregation;
             // Each change to tags aggregation setting resets detected tags
@@ -465,7 +470,8 @@ public class Entry {
         }
 
         if (getFirstGood() <= getLastGood()) {
-            return xmlDialect.constructShortcuts(elements.subList(getFirstGood(), getLastGood() + 1), protectedParts);
+            return xmlDialect.constructShortcuts(elements.subList(getFirstGood(), getLastGood() + 1),
+                    protectedParts);
         } else {
             return "";
         }
@@ -511,7 +517,7 @@ public class Entry {
 
     /**
      * Sets the translation of the shortcut string returned by
-     * {@link #toShortcut()}. Before setting translation checks whether the
+     * {@link Tag#toShortcut}. Before setting translation checks whether the
      * translation contains all the same tags in weakly correct order:
      * <ul>
      * <li>All the tags present in source must be present in translation. For
@@ -547,7 +553,8 @@ public class Entry {
      * the same tags in weakly correct order. See
      * {@link #setTranslation(String, XMLDialect, List)} for details.
      */
-    private void checkAndRecoverTags(String translation, List<ProtectedPart> protectedParts) throws TranslationException {
+    private void checkAndRecoverTags(String translation, List<ProtectedPart> protectedParts)
+            throws TranslationException {
         translatedEntry = new Entry(xmlDialect, handler);
 
         // /////////////////////////////////////////////////////////////////////

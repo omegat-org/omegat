@@ -48,7 +48,8 @@ public class SearchResultEntry {
      *            Note text of the corresponding entry within a project
      */
     public SearchResultEntry(int num, String preamble, String srcPrefix, String src, String target,
-            String note, String properties, SearchMatch[] srcMatch, SearchMatch[] targetMatch, SearchMatch[] noteMatch, SearchMatch[] propertiesMatch) {
+            String note, String properties, SearchMatch[] srcMatch, SearchMatch[] targetMatch,
+            SearchMatch[] noteMatch, SearchMatch[] propertiesMatch) {
         m_num = num;
         m_preamble = preamble;
         m_srcPrefix = srcPrefix;
@@ -64,8 +65,8 @@ public class SearchResultEntry {
 
     /**
      * Returns the number of the corresponding entry within a project. The
-     * returned value is > 0 if the entry belongs to one of the source files of
-     * the project; it is -1 if the entry doesn't belong to any of the source
+     * returned value is &gt; 0 if the entry belongs to one of the source files
+     * of the project; it is -1 if the entry doesn't belong to any of the source
      * files (the entry is stored in the TM or we are searching in a given
      * directory)
      */
@@ -120,7 +121,6 @@ public class SearchResultEntry {
     public SearchMatch[] getPropertiesMatch() {
         return m_propertiesMatch;
     }
-
 
     private int m_num;
     private String m_preamble;

@@ -50,13 +50,14 @@ import org.omegat.util.OConsts;
 /**
  * Thread for calculate standard statistics.
  *
- * Calculation requires two different tags stripping: one for calculate unique and remaining, and second for
- * calculate number of words and chars.
+ * Calculation requires two different tags stripping: one for calculate unique
+ * and remaining, and second for calculate number of words and chars.
  *
- * Number of words/chars calculation requires to just strip all tags, protected parts, placeholders(see StatCount.java).
+ * Number of words/chars calculation requires to just strip all tags, protected
+ * parts, placeholders(see StatCount.java).
  *
- * Calculation of unique and remaining also requires to just strip all tags, protected parts, placeholders for
- * standard calculation.
+ * Calculation of unique and remaining also requires to just strip all tags,
+ * protected parts, placeholders for standard calculation.
  *
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Arno Peters
@@ -96,7 +97,7 @@ public class CalcStandardStatistics extends LongProcessThread {
     }
 
     /**
-     * Builds a file with statistic info about the project. The total word &
+     * Builds a file with statistic info about the project. The total word &mp;
      * character count of the project, the total number of unique segments, plus
      * the details for each file.
      */
@@ -126,7 +127,10 @@ public class CalcStandardStatistics extends LongProcessThread {
         Set<String> filesUnique = new HashSet<String>();
         Set<String> filesRemainingUnique = new HashSet<String>();
         for (Map.Entry<String, SourceTextEntry> en : uniqueSegment.entrySet()) {
-            /* Number of words and chars calculated without all tags and protected parts. */
+            /*
+             * Number of words and chars calculated without all tags and
+             * protected parts.
+             */
             StatCount count = new StatCount(en.getValue());
 
             // add to unique
@@ -155,7 +159,10 @@ public class CalcStandardStatistics extends LongProcessThread {
                     src = src.replace(pp.getTextInSourceSegment(), pp.getReplacementUniquenessCalculation());
                 }
 
-                /* Number of words and chars calculated without all tags and protected parts. */
+                /*
+                 * Number of words and chars calculated without all tags and
+                 * protected parts.
+                 */
                 StatCount count = new StatCount(ste);
 
                 // add to total

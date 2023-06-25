@@ -59,14 +59,14 @@ public abstract class OutOfTurnTag extends Tag {
      * be implemented by the decendant.
      * <p>
      * E.g. for OpenDocument footnote (out of turn tag "text:note-body") <code>
-     * &lt;text:note-body>&lt;text:p text:style-name="Endnote"&gt;The endnote
+     * &lt;text:note-body&gt;&lt;text:p text:style-name="Endnote"&gt;The endnote
      * appears at the end of the document in OO but in the middle of
-     * the segment in OmegaT.&lt;/text:p>&lt;/text:note-body&gt;
+     * the segment in OmegaT.&lt;/text:p&gt;&lt;/text:note-body&gt;
      * </code> this method should return the same if not translated, namely
      * <code>
-     * &lt;text:note-body>&lt;text:p text:style-name="Endnote"&gt;The endnote
+     * &lt;text:note-body&gt;&lt;text:p text:style-name="Endnote"&gt;The endnote
      * appears at the end of the document in OO but in the middle of
-     * the segment in OmegaT.&lt;/text:p>&lt;/text:note-body&gt;
+     * the segment in OmegaT.&lt;/text:p&gt;&lt;/text:note-body&gt;
      * </code>.
      */
     public abstract String toOriginal();

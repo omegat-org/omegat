@@ -30,6 +30,8 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -48,7 +50,7 @@ public class PluginUtilsTest {
 
     @Test
     public void testLoadLatestPluginVersionOnly()
-            throws JsonProcessingException, JAXBException, MalformedURLException {
+            throws JsonProcessingException, JAXBException, MalformedURLException, URISyntaxException {
         final List<File> pluginsDirs = new ArrayList<>();
         File testDataDir = new File("test/data/plugin/jar");
         URL testDataDirURL = testDataDir.toURI().toURL();
@@ -63,10 +65,16 @@ public class PluginUtilsTest {
         List<URL> urlList = PluginUtils.populatePluginUrlList(pluginsDirs);
         assertEquals(2, urlList.size());
 
-        final Set<URL> expected = new HashSet<>();
-        expected.add(new URL(testDataDirURL, "anotherPlugin-0.3.1.jar"));
-        expected.add(new URL(testDataDirURL, "testPlugin-1.13-1.45.0.jar"));
-        assertTrue(urlList.containsAll(expected));
+        final Set<URI> expected = new HashSet<>();
+        expected.add(new URL(testDataDirURL, "anotherPlugin-0.3.1.jar").toURI());
+        expected.add(new URL(testDataDirURL, "testPlugin-1.13-1.45.0.jar").toURI());
+        assertTrue(urlList.stream().map(u -> {
+            try {
+                return u.toURI();
+            } catch (URISyntaxException e) {
+                return null;
+            }
+        }).collect(Collectors.toList()).containsAll(expected));
     }
 
 }

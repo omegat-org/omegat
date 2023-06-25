@@ -785,7 +785,7 @@ public final class ProjectUICommands {
     /**
      * Project reload.
      * <p>
-     * When select Project>Reload jump to here.
+     * When select Project&gt;Reload jump to here.
      */
     public static void projectReload() {
         UIThreadsUtil.mustBeSwingThread();

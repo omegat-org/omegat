@@ -35,7 +35,7 @@ variables:
   isMain: $[eq(variables['Build.SourceBranch'], 'refs/heads/master')]
   isReleasesBranch: $[contains(variables['Build.SourceBranch'], 'refs/heads/releases/')]
   isRelease: $[contains(variables['Build.SourceBranch'], 'refs/tags/v')]
-  isJRE8: $[contains(variables['Build.SourceBranch'], 'refs/tags/v5')]
+  isJRE11: $[contains(variables['Build.SourceBranch'], 'refs/tags/v6')]
   isSchedule: $[eq(variables['Build.Reason'], 'Schedule')]
   GRADLE_USER_HOME: '$(Pipeline.Workspace)/.gradle'
 

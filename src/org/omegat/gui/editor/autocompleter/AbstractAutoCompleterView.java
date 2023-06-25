@@ -38,6 +38,7 @@ import org.omegat.util.Language;
 
 /**
  * An abstract auto-completer view.
+ * 
  * @author bartkoz
  * @author Aaron Madlon-Kay
  */
@@ -55,7 +56,9 @@ public abstract class AbstractAutoCompleterView {
 
     /**
      * Creates a new auto-completer view.
-     * @param name the name of this view
+     * 
+     * @param name
+     *            the name of this view
      */
     public AbstractAutoCompleterView(String name) {
         this.name = name;
@@ -70,6 +73,7 @@ public abstract class AbstractAutoCompleterView {
 
     /**
      * Set the AutoCompleter that this view belongs to.
+     * 
      * @param completer
      */
     public void setParent(AutoCompleter completer) {
@@ -77,9 +81,8 @@ public abstract class AbstractAutoCompleterView {
     }
 
     /**
-     * Return the tokenizer for use with the view.
-     * Custom views should override this if they have special
-     * tokenization needs.
+     * Return the tokenizer for use with the view. Custom views should override
+     * this if they have special tokenization needs.
      */
     public ITokenizer getTokenizer() {
         return Core.getProject().getTargetTokenizer();
@@ -94,53 +97,58 @@ public abstract class AbstractAutoCompleterView {
 
     /**
      * Process the autocompletion keys
-     * @param e the key event to process
+     * 
+     * @param e
+     *            the key event to process
      * @return true if a key has been processed, false if otherwise.
      */
     public abstract boolean processKeys(KeyEvent e);
 
     /**
      * return the size of the data list / array.
+     * 
      * @return
      */
     public abstract int getRowCount();
 
     /**
      * get the preferred height of the component
+     * 
      * @return
      */
     public abstract int getPreferredHeight();
 
     /**
      * get the preferred width of the component
+     * 
      * @return
      */
     public abstract int getPreferredWidth();
 
     /**
      * get the selected value
+     * 
      * @return
      */
     public abstract AutoCompleterItem getSelectedValue();
 
     /**
      * Update the view data
-     * @return true if any update has been done.
      */
     public abstract void updateViewData();
 
     /**
-     * Obtain the content to put in the autocompleter popup.
-     * The view should also do any other preparation necessary for
-     * display.
+     * Obtain the content to put in the autocompleter popup. The view should
+     * also do any other preparation necessary for display.
      *
      * @return the component to show in the autocompleter popup
      */
     public abstract Component getViewContent();
 
     /**
-     * Return a modified row count. The basic implementation. Override this in the
-     * different view types.
+     * Return a modified row count. The basic implementation. Override this in
+     * the different view types.
+     * 
      * @return a modified row count.
      */
     protected int getModifiedRowCount() {
@@ -156,10 +164,12 @@ public abstract class AbstractAutoCompleterView {
     public abstract boolean shouldPopUp();
 
     /**
-     * Indicates whether or not the AutoCompleter should close by default when the
-     * user confirms a selection. Override and return false to keep the popup open.
+     * Indicates whether or not the AutoCompleter should close by default when
+     * the user confirms a selection. Override and return false to keep the
+     * popup open.
      *
-     * @return Whether or not the AutoCompleter popup should close upon selection
+     * @return Whether or not the AutoCompleter popup should close upon
+     *         selection
      */
     public boolean shouldCloseOnSelection() {
         return true;
@@ -177,8 +187,9 @@ public abstract class AbstractAutoCompleterView {
     }
 
     /**
-     * Indicates whether the view should be considered "on" or "off". When off, the view will not be shown in
-     * any circumstances (whether automatically or manually).
+     * Indicates whether the view should be considered "on" or "off". When off,
+     * the view will not be shown in any circumstances (whether automatically or
+     * manually).
      *
      * @return
      */

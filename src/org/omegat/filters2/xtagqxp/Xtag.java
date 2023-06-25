@@ -101,8 +101,8 @@ public class Xtag implements Element {
 
     /**
      * Returns shortcut string representation of the element. If the shortcut is
-     * < or >, return the character rather than a tag E.g. for &lt;strong&gt;
-     * tag should return &lt;s3&gt;.
+     * &lt; or &gt;, return the character rather than a tag E.g. for
+     * &lt;strong&gt; tag should return &lt;s3&gt;.
      */
     public String toShortcut() {
         StringBuilder buf = new StringBuilder();

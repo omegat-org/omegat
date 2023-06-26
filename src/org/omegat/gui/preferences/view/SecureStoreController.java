@@ -107,4 +107,9 @@ public class SecureStoreController extends BasePreferencesController {
     @Override
     public void persist() {
     }
+
+    @Override
+    public boolean canRestoreDefaults() {
+        return false;
+    }
 }

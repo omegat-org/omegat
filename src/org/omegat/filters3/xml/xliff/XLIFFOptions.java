@@ -40,10 +40,11 @@ import org.omegat.filters2.AbstractOptions;
  * <ul>
  * <li>[] Compatibility with 2.6
  * <li>[x]Previous and next paragraphs
- * <li>[]&lt;trans-unit&gt;> ID
+ * <li>[]&lt;trans-unit&gt;&gt; ID
  * <li>[]Force shortcut to "f" for &lt;it pos="end&gt; tags
  * <li>[]Ignore type and ctype attributes when building &lt;ph&gt; tag shortcuts
- * <li>[]Ignore type and ctype attributes when building &lt;bpt&gt;/&lt;ept&gt; tag shortcuts
+ * <li>[]Ignore type and ctype attributes when building &lt;bpt&gt;/&lt;ept&gt;
+ * tag shortcuts
  * </ul>
  *
  * @author Didier Briel
@@ -91,48 +92,48 @@ public class XLIFFOptions extends AbstractOptions {
     }
 
     /**
-     * Return whether the shortcut should be set to "f" for
-     * &lt;it pos="end&gt; tags
+     * Return whether the shortcut should be set to "f" for &lt;it pos="end&gt;
+     * tags
      */
     public boolean getForceShortcutToF() {
         return getBoolean(OPTION_FORCE_SHORTCUT_2_F, false);
     }
 
     /**
-     * Set whether the shortcut should be set to "f" for
-     * &lt;it pos="end&gt; tags
+     * Set whether the shortcut should be set to "f" for &lt;it pos="end&gt;
+     * tags
      */
     public void setForceShortcutToF(boolean forceshortcut2f) {
         setBoolean(OPTION_FORCE_SHORTCUT_2_F, forceshortcut2f);
     }
 
     /**
-     * Return whether the type and ctype attributes of
-     * &lt;ph&gt; tag should be ignored when building shortcuts
+     * Return whether the type and ctype attributes of &lt;ph&gt; tag should be
+     * ignored when building shortcuts
      */
     public boolean getIgnoreTypeForPhTags() {
         return getBoolean(OPTION_IGNORE_TYPE_4_PH_TAGS, false);
     }
 
     /**
-     * Set whether the type and ctype attributes of
-     * &lt;ph&gt; tag should be ignored when building shortcuts
+     * Set whether the type and ctype attributes of &lt;ph&gt; tag should be
+     * ignored when building shortcuts
      */
     public void setIgnoreTypeForPhTags(boolean ignoreTypeForPhTags) {
         setBoolean(OPTION_IGNORE_TYPE_4_PH_TAGS, ignoreTypeForPhTags);
     }
 
     /**
-     * Return whether the type and ctype attributes of
-     * &lt;bpt&gt;/&lt;ept&gt; tags should be ignored when building shortcuts
+     * Return whether the type and ctype attributes of &lt;bpt&gt;/&lt;ept&gt;
+     * tags should be ignored when building shortcuts
      */
     public boolean getIgnoreTypeForBptTags() {
         return getBoolean(OPTION_IGNORE_TYPE_4_BPT_TAGS, false);
     }
 
     /**
-     * Set whether the type and ctype attributes of
-     * &lt;bpt&gt;/&lt;ept&gt; tags should be ignored when building shortcuts
+     * Set whether the type and ctype attributes of &lt;bpt&gt;/&lt;ept&gt; tags
+     * should be ignored when building shortcuts
      */
     public void setIgnoreTypeForBptTags(boolean ignoreTypeForBptTags) {
         setBoolean(OPTION_IGNORE_TYPE_4_BPT_TAGS, ignoreTypeForBptTags);
@@ -140,9 +141,11 @@ public class XLIFFOptions extends AbstractOptions {
 
     /**
      * Return how the ID for alternative translations should be taken:
-     * <ul><li>previous and next paragraph ({@link ID_TYPE#CONTEXT}, default)</li>
+     * <ul>
+     * <li>previous and next paragraph ({@link ID_TYPE#CONTEXT}, default)</li>
      * <li>the &lt;trans-unit&gt; id ({@link ID_TYPE#ELEMENT_ID})</li>
-     * <li>the &lt;trans-unit&gt; resname attribute ({@link ID_TYPE#RESNAME_ATTR})</li>
+     * <li>the &lt;trans-unit&gt; resname attribute
+     * ({@link ID_TYPE#RESNAME_ATTR})</li>
      * </ul>
      */
     public ID_TYPE getAltTransIDType() {
@@ -155,9 +158,11 @@ public class XLIFFOptions extends AbstractOptions {
 
     /**
      * Set how the ID for alternative translations should be taken:
-     * <ul><li>previous and next paragraph ({@link ID_TYPE#CONTEXT}, default)</li>
+     * <ul>
+     * <li>previous and next paragraph ({@link ID_TYPE#CONTEXT}, default)</li>
      * <li>the &lt;trans-unit&gt; id ({@link ID_TYPE#ELEMENT_ID})</li>
-     * <li>the &lt;trans-unit&gt; resname attribute ({@link ID_TYPE#RESNAME_ATTR})</li>
+     * <li>the &lt;trans-unit&gt; resname attribute
+     * ({@link ID_TYPE#RESNAME_ATTR})</li>
      * </ul>
      */
     public void setAltTransIDType(ID_TYPE idType) {
@@ -165,14 +170,16 @@ public class XLIFFOptions extends AbstractOptions {
     }
 
     /**
-     * Return whether transit to state="needs-review-translation" instead of "translated"
+     * Return whether transit to state="needs-review-translation" instead of
+     * "translated"
      */
-    public boolean getChangeStateToNeedsReviewTranslation(){
+    public boolean getChangeStateToNeedsReviewTranslation() {
         return getBoolean(OPTION_CHANGE_TARGET_STATE_NEEDS_REVIEW_T9N, false);
     }
 
     /**
-     * Set behavior flag whether change to state="needs-review-translation" instead of "translated"
+     * Set behavior flag whether change to state="needs-review-translation"
+     * instead of "translated"
      */
     public void setStateToReview(final boolean stateToReview) {
         setBoolean(OPTION_CHANGE_TARGET_STATE_NEEDS_REVIEW_T9N, stateToReview);

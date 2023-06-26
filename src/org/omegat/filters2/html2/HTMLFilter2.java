@@ -100,8 +100,8 @@ public class HTMLFilter2 extends AbstractFilter {
      * @see HTMLReader
      */
     @Override
-    public BufferedReader createReader(File infile, String encoding) throws UnsupportedEncodingException,
-            IOException {
+    public BufferedReader createReader(File infile, String encoding)
+            throws UnsupportedEncodingException, IOException {
         HTMLReader hreader = new HTMLReader(infile.getAbsolutePath(), encoding);
         sourceEncoding = hreader.getEncoding();
         return new BufferedReader(hreader);
@@ -114,8 +114,8 @@ public class HTMLFilter2 extends AbstractFilter {
      * @see HTMLWriter
      */
     @Override
-    public BufferedWriter createWriter(File outfile, String encoding) throws UnsupportedEncodingException,
-            IOException {
+    public BufferedWriter createWriter(File outfile, String encoding)
+            throws UnsupportedEncodingException, IOException {
         HTMLWriter hwriter;
         HTMLOptions options = new HTMLOptions(processOptions);
         if (encoding == null) {
@@ -246,8 +246,10 @@ public class HTMLFilter2 extends AbstractFilter {
     /**
      * (X)HTML Filter shows a <b>modal</b> dialog to edit its own options.
      *
-     * @param currentOptions
-     *                       Current options to edit.
+     * @param parent
+     *            parent window
+     * @param config
+     *            Current options to edit.
      * @return Updated filter options if user confirmed the changes, and current
      *         options otherwise.
      */

@@ -51,15 +51,17 @@ import org.omegat.util.Log;
  */
 public class SearchThread extends LongProcessThread {
     /**
-     * Starts a new search. To search current project only, set rootDir to null.
+     * Starts a new search. To search a current project only, set rootDir to
+     * null.
+     * <p>
+     * The main loop (in the run method) waits for the variable m_searching to
+     * be set to true. This variable is set to true in this function on
+     * successful setting of the search parameters.
      *
      * @param window
      *            search window for display results
-     * @param expression
+     * @param searcher
      *            search expression
-     * @internal The main loop (in the run method) waits for the variable
-     *           m_searching to be set to true. This variable is set to true in
-     *           this function on successful setting of the search parameters.
      */
     public SearchThread(SearchWindowController window, Searcher searcher) {
         this.window = window;

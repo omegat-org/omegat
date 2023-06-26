@@ -277,6 +277,7 @@ public class OpenXMLOptions extends AbstractOptions {
 
     /**
      * Returns whether Slide Links should be translated.
+     * 
      * @return the state of OPTION_TRANSLATE_SLIDE_LINKS
      * @deprecated use getTranslateLinks()
      */
@@ -287,7 +288,9 @@ public class OpenXMLOptions extends AbstractOptions {
 
     /**
      * Sets whether Slide Links should be translated.
-     * @param translateSlideLinks The option to translate external links
+     * 
+     * @param translateSlideLinks
+     *            The option to translate external links
      * @deprecated use setTranslateLinks(boolean)
      */
     @Deprecated
@@ -297,6 +300,7 @@ public class OpenXMLOptions extends AbstractOptions {
 
     /**
      * Returns whether Slide Links should be translated.
+     * 
      * @return the state of OPTION_TRANSLATE_SLIDE_LINKS
      */
     public boolean getTranslateLinks() {
@@ -305,7 +309,9 @@ public class OpenXMLOptions extends AbstractOptions {
 
     /**
      * Sets whether Slide Links should be translated.
-     * @param translateSlideLinks The option to translate external links
+     * 
+     * @param translateLinks
+     *            The option to translate external links
      */
     public void setTranslateLinks(boolean translateLinks) {
         setBoolean(OPTION_TRANSLATE_SLIDE_LINKS, translateLinks);
@@ -369,6 +375,7 @@ public class OpenXMLOptions extends AbstractOptions {
 
     /**
      * Returns whether spaces should be preserved for all tags
+     * 
      * @return the state of OPTION_PRESERVE_SPACES
      */
     public boolean getSpacePreserving() {
@@ -377,7 +384,9 @@ public class OpenXMLOptions extends AbstractOptions {
 
     /**
      * Sets whether spaces should be preserved for all tags
-     * @param onOff The option for space preserving
+     * 
+     * @param onOff
+     *            The option for space preserving
      */
     public void setSpacePreserving(boolean onOff) {
         setBoolean(OPTION_PRESERVE_SPACES, onOff);
@@ -385,6 +394,7 @@ public class OpenXMLOptions extends AbstractOptions {
 
     /**
      * Returns whether a new paragraph should be created on "w:br"
+     * 
      * @return the state of OPTION_BREAK_ON_BR
      */
     public boolean getBreakOnBr() {
@@ -393,7 +403,9 @@ public class OpenXMLOptions extends AbstractOptions {
 
     /**
      * Sets whether a new paragraph should be created on "w:br"
-     * @param breakOnBr The option whether to break or not
+     * 
+     * @param breakOnBr
+     *            The option whether to break or not
      */
     public void setBreakOnBr(boolean breakOnBr) {
         setBoolean(OPTION_BREAK_ON_BR, breakOnBr);
@@ -401,6 +413,7 @@ public class OpenXMLOptions extends AbstractOptions {
 
     /**
      * Returns whether Word document properties should be translated
+     * 
      * @return the state of OPTION_DOCUMENT_PROPERTIES
      */
     public boolean getTranslateDocumentProperties() {
@@ -409,7 +422,9 @@ public class OpenXMLOptions extends AbstractOptions {
 
     /**
      * Sets whether Word document properties should be translated
-     * @param translateDocumentProperties The option whether to translate document properties or not
+     * 
+     * @param translateDocumentProperties
+     *            The option whether to translate document properties or not
      */
     public void setTranslateDocumentProperties(boolean translateDocumentProperties) {
         setBoolean(OPTION_DOCUMENT_PROPERTIES, translateDocumentProperties);

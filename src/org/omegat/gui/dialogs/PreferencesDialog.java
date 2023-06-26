@@ -89,6 +89,7 @@ public class PreferencesDialog {
         });
         panel.cancelButton.addActionListener(e -> StaticUIUtils.closeWindowByEvent(dialog));
         panel.undoButton.addActionListener(e -> undoCurrentView());
+        panel.resetButton.setEnabled(view.canRestoreDefaults());
         panel.resetButton.addActionListener(e -> resetCurrentView());
 
         dialog.addWindowListener(new WindowAdapter() {

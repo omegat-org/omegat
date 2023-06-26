@@ -7,4 +7,4 @@ JAVA="java"
 BUNDLED_JAVA="${REALOMEGATPATH}/jre/bin/java"
 [ -f "${BUNDLED_JAVA}" ] && JAVA="${BUNDLED_JAVA}"
 
-"${JAVA}" -jar -Xmx1024M "${REALOMEGATPATH}/@JAR_SUBST@" "$@"
+"${JAVA}" -jar -Xmx1024M --add-opens java.desktop/sun.awt.X11=ALL-UNNAMED "${REALOMEGATPATH}/@JAR_SUBST@" "$@"

@@ -11,6 +11,7 @@
                2014 Piotr Kulik
                2015 Yu Tang, Aaron Madlon-Kay
                2016 Didier Briel
+               2023 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -45,6 +46,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -62,6 +64,7 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 import javax.swing.WindowConstants;
+import javax.swing.plaf.FontUIResource;
 import javax.swing.text.JTextComponent;
 
 import org.omegat.core.Core;
@@ -78,8 +81,10 @@ import org.omegat.util.Platform;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
+import org.omegat.util.gui.FontUtil;
 import org.omegat.util.gui.StaticUIUtils;
 import org.omegat.util.gui.UIDesignManager;
+import org.omegat.util.gui.UIScale;
 import org.omegat.util.gui.UIThreadsUtil;
 
 import com.vlsolutions.swing.docking.Dockable;
@@ -114,7 +119,7 @@ public class MainWindow extends JFrame implements IMainWindow {
      * The font for main window (source and target text) and for match and
      * glossary windows
      */
-    private Font font;
+    private FontUIResource font;
 
     /** Set of all open search windows. */
     private final List<SearchWindowController> searches = new ArrayList<>();
@@ -157,12 +162,7 @@ public class MainWindow extends JFrame implements IMainWindow {
             }
         });
 
-        // load default font from preferences
-        String fontName = Preferences.getPreferenceDefault(Preferences.TF_SRC_FONT_NAME,
-                Preferences.TF_FONT_DEFAULT);
-        int fontSize = Preferences.getPreferenceDefault(Preferences.TF_SRC_FONT_SIZE,
-                Preferences.TF_FONT_SIZE_DEFAULT);
-        font = new Font(fontName, Font.PLAIN, fontSize);
+        font = FontUtil.getScaledFont();
 
         MainWindowUI.createMainComponents(this, font);
 
@@ -190,7 +190,10 @@ public class MainWindow extends JFrame implements IMainWindow {
             }
         });
 
-        CoreEvents.registerFontChangedEventListener(newFont -> font = newFont);
+        UIScale.addPropertyChangeListener(evt -> CoreEvents.fireFontChanged(FontUtil.getScaledFont()));
+        CoreEvents.registerFontChangedEventListener(
+                newFont -> font = (newFont instanceof FontUIResource) ? (FontUIResource) newFont
+                        : new FontUIResource(newFont));
 
         MainWindowUI.handlePerProjectLayouts(this);
 
@@ -432,7 +435,7 @@ public class MainWindow extends JFrame implements IMainWindow {
     // /////////////////////////////////////////////////////////////
     // display oriented code
 
-    private JLabel lastDialogText;
+    private JPanel lastDialogText;
     private String lastDialogKey;
 
     /**
@@ -462,10 +465,16 @@ public class MainWindow extends JFrame implements IMainWindow {
                 }
             }
 
-            lastDialogText = new JLabel(msg);
+            lastDialogText = new JPanel();
+            lastDialogText.setLayout(new BoxLayout(lastDialogText, BoxLayout.PAGE_AXIS));
+            lastDialogText.setBorder(BorderFactory.createEmptyBorder());
+            String[] messages = msg.split("\\n");
+            Arrays.stream(messages).forEach(m -> {
+                lastDialogText.add(new JLabel(m));
+            });
             lastDialogKey = warningKey;
 
-            statusLabel.setText(msg);
+            statusLabel.setText(messages[0]);
 
             JOptionPane.showMessageDialog(MainWindow.this, lastDialogText, OStrings.getString("TF_WARNING"),
                     JOptionPane.WARNING_MESSAGE);
@@ -484,19 +493,21 @@ public class MainWindow extends JFrame implements IMainWindow {
                 msg = OStrings.getString(errorKey);
             }
 
-            statusLabel.setText(msg);
-
+            String[] messages = msg.split("\\n");
+            statusLabel.setText(messages[0]);
             JPanel pane = new JPanel();
             pane.setLayout(new BoxLayout(pane, BoxLayout.PAGE_AXIS));
             pane.setSize(new Dimension(900, 400));
+            Arrays.stream(messages).forEach(m -> {
+                JLabel jlabel = new JLabel(m);
+                jlabel.setAlignmentX(LEFT_ALIGNMENT);
+                pane.add(jlabel);
+            });
 
-            JLabel jlabel = new JLabel(msg);
-            jlabel.setAlignmentX(LEFT_ALIGNMENT);
-            pane.add(jlabel);
-
-            if (ex != null && ex.getLocalizedMessage() != null){
+            if (ex != null && ex.getLocalizedMessage() != null) {
                 pane.add(Box.createRigidArea(new Dimension(0, 5)));
                 JTextArea message = new JTextArea();
+                message.setBorder(BorderFactory.createEmptyBorder());
                 message.setText(ex.getLocalizedMessage());
                 message.setLineWrap(true);
                 message.setEditable(false);
@@ -511,8 +522,8 @@ public class MainWindow extends JFrame implements IMainWindow {
                 JButton jbutton = new JButton(OStrings.getString("TF_ERROR_COPY_CLIPBOARD"));
                 // Copy to clipboard action
                 jbutton.addActionListener(l -> {
-                    String clipboardMsg = String.format("%s%n---%n%s%n---%n%s%n", msg, ex.getLocalizedMessage(),
-                            StaticUtils.getSupportInfo());
+                    String clipboardMsg = String.format("%s%n---%n%s%n---%n%s%n", msg,
+                            ex.getLocalizedMessage(), StaticUtils.getSupportInfo());
                     Toolkit.getDefaultToolkit().getSystemClipboard()
                             .setContents(new StringSelection(clipboardMsg), null);
                 });

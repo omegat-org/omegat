@@ -125,10 +125,12 @@ public class SegmentBuilder {
     /**
      * Offset of first c.q. last character in active source text
      */
-    protected int activeTranslationBeginOffset, activeTranslationEndOffset;
+    protected int activeTranslationBeginOffset;
+    protected int activeTranslationEndOffset;
 
     /** Boundary of full entry display. */
-    protected Position beginPosP1, endPosM1;
+    protected Position beginPosP1;
+    protected Position endPosM1;
 
     /** Source start position - for marks. */
     protected Position posSourceBeg;
@@ -174,16 +176,27 @@ public class SegmentBuilder {
     }
 
     /**
-     * Create element for one segment.
+     * Create an element for one segment.
      *
-     * @param doc
-     *            document
-     * @return OmElementSegment
+     * @param isActive
+     *            flag to indicate activeness
+     * @param trans
+     *            translation entry
      */
     public void createSegmentElement(final boolean isActive, TMXEntry trans) {
         createSegmentElement(isActive, doc.getLength(), trans, trans.defaultTranslation);
     }
 
+    /**
+     * Create an element for one segment.
+     *
+     * @param isActive
+     *            flag to indicate activeness
+     * @param trans
+     *            translation entry
+     * @param defaultTranslation
+     *            flag to indicate it is a default translation
+     */
     public void createSegmentElement(final boolean isActive, TMXEntry trans,
             final boolean defaultTranslation) {
         createSegmentElement(isActive, doc.getLength(), trans, defaultTranslation);
@@ -695,7 +708,7 @@ public class SegmentBuilder {
 
     /**
      * Inserts the texts and formats the text
-     * 
+     *
      * @param text
      *            source or translation text
      * @param isSource
@@ -741,7 +754,7 @@ public class SegmentBuilder {
     /**
      * Writes (if necessary) an RTL or LTR marker. Use it before writing text in
      * some language.
-     * 
+     *
      * @param isRTL
      *            is the language that has to be written a right-to-left
      *            language?
@@ -756,7 +769,7 @@ public class SegmentBuilder {
     /**
      * Writes (if necessary) an end-of-embedding marker. Use it after writing
      * text in some language.
-     * 
+     *
      * @throws BadLocationException
      */
     private void insertDirectionEndEmbedding() throws BadLocationException {

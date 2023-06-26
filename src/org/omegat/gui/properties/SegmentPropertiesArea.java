@@ -82,8 +82,6 @@ public class SegmentPropertiesArea implements IPaneMenu {
     private static final String KEY_ID = "id";
     private static final String KEY_TRANSLATION = "translation";
     private static final String KEY_TRANSLATIONISFUZZY = "translationIsFuzzy";
-    // private static final String KEY_NEXT = "next";
-    // private static final String KEY_PREV = "prev";
     private static final String KEY_PATH = "path";
     private static final String KEY_HASNOTE = "hasNote";
     private static final String KEY_HASCOMMENT = "hasComment";
@@ -193,7 +191,6 @@ public class SegmentPropertiesArea implements IPaneMenu {
     void showContextMenu(Point p) {
         JPopupMenu menu = new JPopupMenu();
         populateLocalContextMenuOptions(menu, p);
-        // populateGlobalContextMenuOptions(menu);
         try {
             menu.show(scrollPane, p.x, p.y);
         } catch (IllegalComponentStateException e) {
@@ -347,8 +344,6 @@ public class SegmentPropertiesArea implements IPaneMenu {
     private void setKeyProperties(EntryKey key) {
         setProperty(KEY_FILE, key.file);
         setProperty(KEY_ID, key.id);
-        // setProperty(KEY_NEXT, key.next);
-        // setProperty(KEY_PREV, key.prev);
         setProperty(KEY_PATH, key.path);
     }
 

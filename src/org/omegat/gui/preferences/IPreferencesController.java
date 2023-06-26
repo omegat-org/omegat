@@ -119,4 +119,11 @@ public interface IPreferencesController {
      * Restore preferences controlled by this view to their default state.
      */
     void restoreDefaults();
+
+    /**
+     * Whether supporting `restoreDefaults` feature.
+     */
+    default boolean canRestoreDefaults() {
+        return true;
+    }
 }

@@ -152,9 +152,9 @@ public final class TagUtil {
     /**
      * Indicates the type of a tag, e.g.:
      * <ul>
-     * <li>&lt;foo> = START</li>
-     * <li>&lt;/foo> = END</li>
-     * <li>&lt;bar/> = SINGLE</li>
+     * <li>&lt;foo&gt; = START</li>
+     * <li>&lt;/foo&gt; = END</li>
+     * <li>&lt;bar/&gt; = SINGLE</li>
      * </ul>
      */
     public enum TagType {
@@ -163,7 +163,8 @@ public final class TagUtil {
 
     /**
      * A tuple containing
-     * <ul><li>A tag's name</li>
+     * <ul>
+     * <li>A tag's name</li>
      * <li>The tag's {@link TagType} type</li>
      * </ul>
      */
@@ -222,7 +223,8 @@ public final class TagUtil {
             if (i + 1 < tags.size()) {
                 Tag next = tags.get(i + 1);
                 String pair = tag.getPairedTag();
-                if (next.tag.equals(pair) || (tag.getType() == TagType.SINGLE && next.getType() == TagType.SINGLE)) {
+                if (next.tag.equals(pair)
+                        || (tag.getType() == TagType.SINGLE && next.getType() == TagType.SINGLE)) {
                     // Insert sentinel to allow cursor relocating.
                     result.add(tag.tag + TAG_SEPARATOR_SENTINEL + next.tag);
                 }
@@ -266,8 +268,10 @@ public final class TagUtil {
         }
 
         List<Tag> tags = new ArrayList<Tag>();
-        // Put string in temporary buffer and replace tags with spaces as we find them.
-        // This ensures that we don't find identical tags multiple times unless they are
+        // Put string in temporary buffer and replace tags with spaces as we
+        // find them.
+        // This ensures that we don't find identical tags multiple times unless
+        // they are
         // actually present multiple times.
         StringBuilder sb = new StringBuilder(str);
         while (true) {
@@ -290,10 +294,10 @@ public final class TagUtil {
     }
 
     /*
-     * Builds a list of format tags that are not in the source segment, and hence not
-     * in protected parts.
+     * Builds a list of format tags that are not in the source segment, and
+     * hence not in protected parts.
      *
-    */
+     */
     public static void addExtraTags(List<Tag> resultList, List<Tag> srcTags, String str) {
 
         StringBuilder sb = new StringBuilder(str);
@@ -315,6 +319,7 @@ public final class TagUtil {
 
     /**
      * Check whether a tag belongs to a list of tags
+     * 
      * @param tags
      * @param tag
      * @return true or false
@@ -340,6 +345,7 @@ public final class TagUtil {
     /**
      * Builds a list of format tags within the supplied string. Format tags are
      * OmegaT style tags: &lt;xx02&gt; or &lt;/yy01&gt;.
+     * 
      * @return a string containing the tags
      */
     public static String buildTagListForRemove(String str) {
@@ -354,7 +360,9 @@ public final class TagUtil {
 
     /**
      * Find the first tag in a segment
-     * @param str A segment
+     * 
+     * @param str
+     *            A segment
      * @return the first tag in the segment, or null if there are no tags
      */
     public static String getFirstTag(String str) {
@@ -367,17 +375,18 @@ public final class TagUtil {
     }
 
     /**
-     * Find some protected parts according to the given regular expression. E.g. printf variables, java
-     * MessageFormat patterns, user defined custom tags.
+     * Find some protected parts according to the given regular expression. E.g.
+     * printf variables, java MessageFormat patterns, user defined custom tags.
      *
-     * These protected parts shouldn't affect statistic but just be displayed in gray in editor and take part
-     * in tag validation.
+     * These protected parts shouldn't affect statistic but just be displayed in
+     * gray in editor and take part in tag validation.
      */
-    public static List<ProtectedPart> applyCustomProtectedParts(String source,
-            Pattern protectedPartsPatterns, List<ProtectedPart> protectedParts) {
+    public static List<ProtectedPart> applyCustomProtectedParts(String source, Pattern protectedPartsPatterns,
+            List<ProtectedPart> protectedParts) {
         List<ProtectedPart> result;
         if (protectedParts != null) {
-            // Remove already defined protected parts first to prevent intersection
+            // Remove already defined protected parts first to prevent
+            // intersection
             for (ProtectedPart pp : protectedParts) {
                 source = source.replace(pp.getTextInSourceSegment(), StaticUtils.TAG_REPLACEMENT);
             }

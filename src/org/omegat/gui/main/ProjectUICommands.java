@@ -521,7 +521,7 @@ public final class ProjectUICommands {
             // It is created when modification of
             // properties in remote.
             File newProjectFile = null;
-            if (props.hasRepositories()) {
+            if (props.isTeamProject()) {
                 /*
                  * <p> Every time we reopen the project, we copy omegat.project
                  * from the remote project, We take following strategy and
@@ -785,7 +785,7 @@ public final class ProjectUICommands {
     /**
      * Project reload.
      * <p>
-     * When select Project>Reload jump to here.
+     * When select Project&gt;Reload jump to here.
      */
     public static void projectReload() {
         UIThreadsUtil.mustBeSwingThread();

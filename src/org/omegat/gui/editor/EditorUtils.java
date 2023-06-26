@@ -144,8 +144,8 @@ public final class EditorUtils {
 
     /**
      * Change the case of the input string to the indicated case. When toWhat is
-     * {@link CHANGE_CASE_TO#CYCLE} the result will be UPPER > LOWER > SENTENCE
-     * > TITLE > UPPER.
+     * {@link CHANGE_CASE_TO#CYCLE} the result will be UPPER &gt; LOWER &gt;
+     * SENTENCE &gt; TITLE &gt; UPPER.
      * <p>
      * This is a convenience method for
      * {@link #doChangeCase(String, CHANGE_CASE_TO, Locale, ITokenizer)}. The
@@ -166,8 +166,8 @@ public final class EditorUtils {
 
     /**
      * Change the case of the input string to the indicated case. When toWhat is
-     * {@link CHANGE_CASE_TO#CYCLE} the result will be UPPER > LOWER > SENTENCE
-     * > TITLE > UPPER.
+     * {@link CHANGE_CASE_TO#CYCLE} the result will be UPPER &gt; LOWER &gt;
+     * SENTENCE &gt; TITLE &gt; UPPER.
      *
      * @param input
      *            The string to change
@@ -179,7 +179,8 @@ public final class EditorUtils {
      *            A tokenizer for the input string language
      * @return The modified string
      */
-    public static String doChangeCase(String input, CHANGE_CASE_TO toWhat, Locale locale, ITokenizer tokenizer) {
+    public static String doChangeCase(String input, CHANGE_CASE_TO toWhat, Locale locale,
+            ITokenizer tokenizer) {
         // tokenize the selection
         Token[] tokenList = tokenizer.tokenizeVerbatim(input);
 
@@ -251,8 +252,8 @@ public final class EditorUtils {
             }
 
             // replace this token
-            buffer.replace(token.getOffset() + lengthIncrement, token.getLength() + token.getOffset() + lengthIncrement,
-                    result);
+            buffer.replace(token.getOffset() + lengthIncrement,
+                    token.getLength() + token.getOffset() + lengthIncrement, result);
 
             lengthIncrement += result.length() - token.getLength();
         }
@@ -272,7 +273,8 @@ public final class EditorUtils {
         return Character.isLetter(token.codePointAt(0));
     }
 
-    private static CHANGE_CASE_TO determineTargetCase(int lower, int upper, int title, int mixed, int ambiguous) {
+    private static CHANGE_CASE_TO determineTargetCase(int lower, int upper, int title, int mixed,
+            int ambiguous) {
         int presentCaseTypes = 0;
         if (lower > 0) {
             presentCaseTypes++;
@@ -308,43 +310,53 @@ public final class EditorUtils {
         }
 
         if (ambiguous > 0) {
-            // If we only have ambiguous tokens then we must go to lower so that we
-            // get binary upper/lower switching instead of trinary upper/lower/title.
+            // If we only have ambiguous tokens then we must go to lower so that
+            // we
+            // get binary upper/lower switching instead of trinary
+            // upper/lower/title.
             return CHANGE_CASE_TO.LOWER;
         }
 
-        // This should only happen if no cases are present, so it doesn't even matter.
+        // This should only happen if no cases are present, so it doesn't even
+        // matter.
         return CHANGE_CASE_TO.UPPER;
     }
 
     /**
-     * Convenience method for {@link #replaceGlossaryEntries(String, List, Locale, ITokenizer)}. Glossary entries are
-     * retrieved from {@code GlossaryManager}; the locale and tokenizer are taken from the project's current values for
-     * the source language.
+     * Convenience method for
+     * {@link #replaceGlossaryEntries(String, List, Locale, ITokenizer)}.
+     * Glossary entries are retrieved from {@code GlossaryManager}; the locale
+     * and tokenizer are taken from the project's current values for the source
+     * language.
      *
      * @param text
-     *            Text in which to replace glossary hits. Assumed to be in the project's source language.
+     *            Text in which to replace glossary hits. Assumed to be in the
+     *            project's source language.
      * @return Text with source glossary terms replaced with target terms
      */
     public static String replaceGlossaryEntries(String text) {
         Locale locale = Core.getProject().getProjectProperties().getSourceLanguage().getLocale();
         ITokenizer tokenizer = Core.getProject().getSourceTokenizer();
-        return replaceGlossaryEntries(text, Core.getGlossaryManager().getGlossaryEntries(text),
-                locale, tokenizer);
+        return replaceGlossaryEntries(text, Core.getGlossaryManager().getGlossaryEntries(text), locale,
+                tokenizer);
     }
 
     /**
-     * Given a list of glossary entries, replace any instances of the source term appearing in the given text with the
-     * target term. When there are multiple target terms, the first one is used.
+     * Given a list of glossary entries, replace any instances of the source
+     * term appearing in the given text with the target term. When there are
+     * multiple target terms, the first one is used.
      *
      * @param text
-     *            Text in which to replace glossary hits (assumed to be in the project's source language)
+     *            Text in which to replace glossary hits (assumed to be in the
+     *            project's source language)
      * @param entries
      *            List of glossary entries
      * @param locale
-     *            Locale with which to perform capitalization matching (assumed to be source locale)
+     *            Locale with which to perform capitalization matching (assumed
+     *            to be source locale)
      * @param tokenizer
-     *            Tokenizer with which to split text (assumed to be project's source tokenizer)
+     *            Tokenizer with which to a split text (assumed to be project's
+     *            source tokenizer)
      * @return Text with source glossary terms replaced with target terms
      */
     public static String replaceGlossaryEntries(String text, List<GlossaryEntry> entries, Locale locale,
@@ -362,7 +374,8 @@ public final class EditorUtils {
                 if (tokensPresentAt(needle, haystack, i, true)) {
                     String toAppend = e.getLocText();
                     if (!tokensPresentAt(needle, haystack, i, false)) {
-                        // If the source tokens don't have matching case, fix the replacement's case to match
+                        // If the source tokens don't have matching case, fix
+                        // the replacement's case to match
                         toAppend = StringUtil.matchCapitalization(toAppend, tok, locale);
                     }
                     sb.append(toAppend);
@@ -378,7 +391,8 @@ public final class EditorUtils {
         return sb.toString();
     }
 
-    private static boolean tokensPresentAt(String[] needle, String[] haystack, int offset, boolean ignoreCase) {
+    private static boolean tokensPresentAt(String[] needle, String[] haystack, int offset,
+            boolean ignoreCase) {
         if (offset < 0 || offset + needle.length > haystack.length) {
             return false;
         }
@@ -434,7 +448,8 @@ public final class EditorUtils {
             }
             return has;
         } catch (StringIndexOutOfBoundsException ex) {
-            // before or after known string - don't have bidi chars around this tag
+            // before or after known string - don't have bidi chars around this
+            // tag
             return false;
         }
     }

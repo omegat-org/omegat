@@ -227,13 +227,13 @@ public class FileUtilTest {
     }
 
     @Test
-    public void testAbsoluteForSystem() throws Exception {
-        assertEquals("C:/zzz", FileUtil.absoluteForSystem("C:\\zzz", Platform.OsType.WIN64));
-        assertEquals("/zzz", FileUtil.absoluteForSystem("C:\\zzz", Platform.OsType.LINUX64));
-        assertEquals("/zzz", FileUtil.absoluteForSystem("C:\\zzz", Platform.OsType.MAC64));
-        assertEquals("/zzz", FileUtil.absoluteForSystem("\\zzz", Platform.OsType.WIN64));
-        assertEquals("/zzz", FileUtil.absoluteForSystem("\\zzz", Platform.OsType.LINUX64));
-        assertEquals("/zzz", FileUtil.absoluteForSystem("\\zzz", Platform.OsType.MAC64));
+    public void testAbsoluteForSystem() {
+        if (Platform.isWindows) {
+            assertEquals("C:/zzz", FileUtil.absoluteForSystem("C:\\zzz"));
+        } else {
+            assertEquals("/zzz", FileUtil.absoluteForSystem("C:\\zzz"));
+        }
+        assertEquals("/zzz", FileUtil.absoluteForSystem("\\zzz"));
     }
 
     @Test

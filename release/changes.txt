@@ -44,6 +44,9 @@
   - Support SRX format
 
 
+  - If multiple versions of the same plugin are present, only the latest is loaded
+  https://sourceforge.net/p/omegat/feature-requests/1519/
+
   Bug fixes:
 
   - Languagetool crashes when reloading the project

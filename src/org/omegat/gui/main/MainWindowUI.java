@@ -321,7 +321,7 @@ public final class MainWindowUI {
     /**
      * Load the main window layout from the specified file. Will reset to defaults if an error occurs.
      */
-    private static void loadScreenLayout(MainWindow mainWindow, File uiLayoutFile) {
+    public static void loadScreenLayout(MainWindow mainWindow, File uiLayoutFile) {
         try (InputStream in = new FileInputStream(uiLayoutFile)) {
             mainWindow.desktop.readXML(in);
         } catch (Exception ex) {

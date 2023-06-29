@@ -76,10 +76,6 @@
 		</listitem>
 	  </itemizedlist>
 	  
-	  <warning>
-		<para>Die po-Unterstützung von OmegaT ist robust genug, um die meisten po-Dateien abzudecken, aber der Standard-XLIFF-Filter von OmegaT reicht nicht aus, um XLIFF-Dateien zu unterstützen, die von Rainbow, OpenXLIFF oder anderen CAT-Tools erstellt wurden. Eine ordnungsgemäße XLIFF-Unterstützung in OmegaT kann nur durch Plugins von Drittanbietern erreicht werden. Siehe <link linkend="how.to.translate.other.files.third.party.plugins">unten</link>.</para>
-	  </warning>
-
 		<para>Einige Formate, wie z. B. PDF, können nicht ordnungsgemäß durch Hin-und-Her-Konvertierungen verarbeitet werden. Diese müssen zunächst in ein unterstütztes Format konvertiert werden, das als Grundlage für die manuelle Erstellung eines geeigneten Dokuments in der Zielsprache dient.</para>
 		
 		<para>Es gibt eine Reihe von Online- oder Offline-Dienstprogrammen, die PDF in gängige Office-Formate konvertieren, allerdings erfordert die Konvertierung immer umfassende manuelle Anpassungen des Zieldokuments, bevor daraus ein ordentliches PDF-Dokument wird. Machen Sie sich zuerst mit den Formatanforderungen vertraut, bevor Sie mit der Arbeit an einer PDF-Datei oder Ähnlichem beginnen.</para>

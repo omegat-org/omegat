@@ -1042,7 +1042,13 @@ public class RealProject implements IProject {
                         public void rebaseAndSave(File out) throws Exception {
                             mergeTMX(baseTMX, headTMX, commitDetails);
 
+                            ProjectTMX newTMX = new ProjectTMX(config.getSourceLanguage(), config.getTargetLanguage(),
+                                    config.isSentenceSegmentingEnabled(),
+                                    new File(config.getProjectInternalDir(), OConsts.STATUS_EXTENSION), null);
+                            projectTMX.replaceContent(newTMX);
+
                             projectTMX.exportTMX(config, out, false, false, true);
+
                         }
 
                         @Override
@@ -1055,13 +1061,6 @@ public class RealProject implements IProject {
                             return TMXReader2.detectCharset(file);
                         }
                     });
-            if (projectTMX != null) {
-                // it can be not loaded yet
-                ProjectTMX newTMX = new ProjectTMX(config.getSourceLanguage(), config.getTargetLanguage(),
-                        config.isSentenceSegmentingEnabled(),
-                        new File(config.getProjectInternalDir(), OConsts.STATUS_EXTENSION), null);
-                projectTMX.replaceContent(newTMX);
-            }
         }
 
         if (processGlossary) {

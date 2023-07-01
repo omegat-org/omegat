@@ -434,6 +434,18 @@
 		context, require different translations. If the current translation does
 		not apply, select this menu item and enter the alternative
 		translation.</para>
+		<warning>
+		<para>OmegaT differentiates between identical segments using either
+		  an internal identifier provided by the file type, or by referring to
+		  their preceding and following segments. In such cases, alternative
+		  translations relies on the identical segments having different preceding
+		  or following segments. If the identical segments also have identical
+		  preceding and following segments, you will not be able to translate them
+		  differently and make one of them an alternative translation in OmegaT.</para>
+		<para>You can work around this issue by introducing a small change to one
+		  of the preceding or following segments in the source file to distinguish
+		  between the various instances of the same preceding or following segment.</para>
+		</warning>
       </listitem>
 	</varlistentry>
 

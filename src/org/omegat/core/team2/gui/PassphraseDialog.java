@@ -174,7 +174,7 @@ public class PassphraseDialog extends JDialog {
     }
 
     public String getPassword() {
-        return Arrays.toString(passwordField.getPassword());
+        return new String(passwordField.getPassword());
     }
 
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {

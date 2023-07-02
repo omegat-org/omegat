@@ -221,6 +221,7 @@ public class GITCredentialsProvider extends CredentialsProvider {
         // get saved
         Credentials credentials = loadCredentials(uri);
         StringBuilder sb = new StringBuilder();
+        boolean askKeyPassphrase = (uri.getScheme() == null);
         // theoretically, username can be unknown, but in practice it is always
         // set, so not requested.
         for (CredentialItem item : items) {
@@ -240,13 +241,13 @@ public class GITCredentialsProvider extends CredentialsProvider {
                     continue;
                 }
                 if (credentials.password == null) {
-                    credentials = askCredentials(uri, credentials, credentials.username != null, sb.toString());
+                    credentials = askCredentials(uri, credentials, askKeyPassphrase, sb.toString());
                     sb = new StringBuilder();
                 }
                 ((CredentialItem.Password) item).setValue(credentials.password.toCharArray());
                 continue;
             } else if (item instanceof CredentialItem.StringType) {
-                if (!item.getPromptText().equals(PASSWORD_PROMPT)) {
+                if (!item.getPromptText().equals(PASSWORD_PROMPT) || !isPassphraseQuery(item.getPromptText())) {
                     Log.log("Git: Ignore credentials query: " + item.getPromptText());
                     continue;
                 }
@@ -255,7 +256,7 @@ public class GITCredentialsProvider extends CredentialsProvider {
                     continue;
                 }
                 if (credentials.password == null) {
-                    credentials = askCredentials(uri, credentials, true, null);
+                    credentials = askCredentials(uri, credentials, askKeyPassphrase, null);
                 }
                 ((CredentialItem.StringType) item).setValue(credentials.password);
                 continue;
@@ -409,6 +410,7 @@ public class GITCredentialsProvider extends CredentialsProvider {
                         credentials.password == null ? "TEAM_PASSPHRASE_FIRST" : "TEAM_PASSPHRASE_WRONG",
                         uri.toString()));
             } else {
+                // asked password
                 passphraseDialog.setTitleDesc(OStrings.getString(
                         credentials.password == null ? "TEAM_PASS_FIRST" : "TEAM_PASS_WRONG",
                         uri.toString()));
@@ -522,6 +524,17 @@ public class GITCredentialsProvider extends CredentialsProvider {
             }
         }
         return null;
+    }
+
+    private boolean isPassphraseQuery(String promptText) {
+        Matcher passphraseMatcher;
+        for (Pattern p : PASSPHRASE_REGEX) {
+            passphraseMatcher = p.matcher(promptText);
+            if (passphraseMatcher.find()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**

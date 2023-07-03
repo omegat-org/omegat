@@ -76,10 +76,6 @@
 		</listitem>
 	  </itemizedlist>
 	  
-	  <warning>
-		<para>La compatibilitat de l'OmegaT amb el format PO és prou robusta per a tractar la majoria de fitxers PO, però el filtre XLIFF per defecte de l'OmegaT no és suficient per a tractar els fitxers XLIFF creats pel Rainbow, l'OpenXLIFF o altres eines de TAO. La compatibilitat adequada de l'OmegaT amb els fitxers XLIFF només es pot aconseguir mitjançant connectors de tercers. Consulteu <link linkend="how.to.translate.other.files.third.party.plugins">l'apartat següent</link>.</para>
-	  </warning>
-
 		<para>Alguns formats, com el PDF, no es poden tractar correctament amb conversions bidireccionals. Requereixen una conversió intermèdia a un format compatible, que s'utilitza com a base per a crear manualment un document adequat en la llengua de destinació.</para>
 		
 		<para>Trobareu diverses eines en línia o fora de línia que ofereixen una conversió de PDF a formats d'ofimàtica habituals, però la conversió sempre requerirà moltes modificacions manuals en el document de destinació per a produir un document PDF adequat. Assegureu-vos que enteneu els requisits de format quan comenceu a treballar en un fitxer PDF o similar.</para>

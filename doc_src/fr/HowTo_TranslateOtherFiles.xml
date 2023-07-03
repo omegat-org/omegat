@@ -76,10 +76,6 @@
 		</listitem>
 	  </itemizedlist>
 	  
-	  <warning>
-		<para>OmegaT prend en charge la plupart des fichiers po, mais le filtre XLIFF par défaut d’OmegaT n’est pas suffisant pour prendre en charge les fichiers XLIFF créés par Rainbow, OpenXLIFF ou d’autres outils de TAO. La prise en charge adéquate de XLIFF dans OmegaT ne peut être obtenue que par des extensions tierces. Voir <link linkend="how.to.translate.other.files.third.party.plugins">ci-dessous</link>.</para>
-	  </warning>
-
 		<para>Certains formats, comme le PDF, ne peuvent pas être correctement traités par des conversions « aller-retour ». Il faut alors effectuer une conversion intermédiaire vers un format pris en charge, qui servira de base pour créer manuellement un document adéquat dans la langue cible.</para>
 		
 		<para>Il existe plusieurs solutions en ligne ou hors ligne permettant de convertir des fichiers PDF en formats de bureautique courants. Toutefois, la conversion nécessitera toujours d’importants ajustements manuels du document cible avant de pouvoir produire un document PDF convenable. Assurez-vous d’avoir une bonne connaissance des exigences en matière de format lorsque vous commencez à travailler sur un fichier PDF ou sur un fichier similaire.</para>

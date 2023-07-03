@@ -118,15 +118,6 @@
 		</listitem>
 	  </itemizedlist>
 	  
-	  <warning>
-		<para>OmegaT's po support is robust enough to handle most po files, but
-		OmegaT's default XLIFF filter is not sufficient to support XLIFF
-		files created by Rainbow, OpenXLIFF or other CAT tools. Proper XLIFF
-		support in OmegaT can only be obtained thought third-party plugins. See
-		<link
-		linkend="how.to.translate.other.files.third.party.plugins">below</link>.</para>
-	  </warning>
-
 		<para>Some formats, like PDF, cannot be properly handled through “round
 		trip” conversions. They require an intermediate conversion to a supported
 		format that serves as a base to manually create a proper target language

@@ -1,0 +1,43 @@
+steps:
+  - task: Bash@3
+    displayName: 'Download JRE'
+    inputs:
+      targetType: 'inline'
+      script: |
+        mkdir -p $(System.ArtifactsDirectory)/asset
+        cd $(System.ArtifactsDirectory)/asset || exit 1
+        if [ "$(isJRE8)" == "true" ]; then
+          jres=(
+              https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u362-b09/OpenJDK8U-jre_x64_linux_hotspot_8u362b09.tar.gz
+              https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u362-b09/OpenJDK8U-jre_x64_mac_hotspot_8u362b09.tar.gz
+              https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u362-b09/OpenJDK8U-jre_x86-32_windows_hotspot_8u362b09.zip
+              https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u362-b09/OpenJDK8U-jre_x64_windows_hotspot_8u362b09.zip
+          )
+        else
+          jres=(
+              https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.19%2B7/OpenJDK11U-jre_aarch64_mac_hotspot_11.0.19_7.tar.gz
+              https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.19%2B7/OpenJDK11U-jre_arm_linux_hotspot_11.0.19_7.tar.gz
+              https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.19%2B7/OpenJDK11U-jre_x64_linux_hotspot_11.0.19_7.tar.gz
+              https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.19%2B7/OpenJDK11U-jre_x64_mac_hotspot_11.0.19_7.tar.gz
+              https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.19%2B7/OpenJDK11U-jre_x64_windows_hotspot_11.0.19_7.zip
+              https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.19%2B7/OpenJDK11U-jre_x86-32_windows_hotspot_11.0.19_7.zip
+          )
+        fi
+        for url in "${jres[@]}"; do
+          curl -L -O "$url"
+        done
+  - script: |
+      umask a+w
+      mkdir -p build
+      chmod -R a+w doc_src
+      $(Build.SourcesDirectory)/gradlew -PenvIsCi -PassetDir=$(System.ArtifactsDirectory)/asset clean build
+    displayName: 'Build distribution packages and docs'
+  - script: |
+      # stop the Gradle daemon to ensure no files are left open (impacting the save cache operation later)
+      ./gradlew --stop
+    displayName: Gradlew stop
+  - task: PublishPipelineArtifact@1
+    displayName: 'Publish Artifact: drop'
+    inputs:
+      targetPath: '$(system.defaultworkingdirectory)/build/distributions/'
+      artifactName: 'drop'

@@ -77,8 +77,6 @@ public class ProjectFileStorageTest {
     @After
     public final void tearDown() throws Exception {
         FileUtils.deleteDirectory(tempDir);
-        XMLUnit.setControlEntityResolver(null);
-        XMLUnit.setTestEntityResolver(null);
     }
 
     @Test

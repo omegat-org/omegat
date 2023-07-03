@@ -71,8 +71,6 @@ public class ProjectFileStorageTest {
         XMLUnit.setIgnoreWhitespace(true);
         XMLUnit.setIgnoreAttributeOrder(true);
         XMLUnit.setIgnoreComments(true);
-        // XMLUnit.setControlEntityResolver(null);
-        // XMLUnit.setTestEntityResolver(null);
 
     }
 

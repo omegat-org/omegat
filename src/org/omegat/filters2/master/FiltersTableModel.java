@@ -28,8 +28,6 @@ package org.omegat.filters2.master;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
 
 import javax.swing.table.AbstractTableModel;
 
@@ -49,19 +47,17 @@ import gen.core.filters.Filters;
 @SuppressWarnings("serial")
 public class FiltersTableModel extends AbstractTableModel {
 
-    private final List<Filter> filters;
-
-    private final Map<String, String> filterNames = new TreeMap<String, String>();
+    private final List<FilterData> filters = new ArrayList<>();
 
     public FiltersTableModel(final Filters config) {
-        filters = new ArrayList<Filter>();
         // add only exist filters
         for (Filter f : config.getFilters()) {
             IFilter fi = FilterMaster.getFilterInstance(f.getClassName());
             if (fi != null) {
                 // filter exist
-                filters.add(f);
-                filterNames.put(f.getClassName(), fi.getFileFormatName());
+                String key = f.getClassName();
+                FilterData data = new FilterData(key, fi.getFileFormatName(), f);
+                filters.add(data);
             }
         }
     }
@@ -100,22 +96,20 @@ public class FiltersTableModel extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Filter filter = filters.get(rowIndex);
         switch (columnIndex) {
         case 0:
-            return filterNames.get(filter.getClassName());
+            return filters.get(rowIndex).filterName;
         case 1:
-            return filter.isEnabled();
+            return filters.get(rowIndex).filter.isEnabled();
         }
         return null;
     }
 
     @Override
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-        Filter filter = filters.get(rowIndex);
         switch (columnIndex) {
         case 1:
-            filter.setEnabled(((Boolean) aValue).booleanValue());
+            filters.get(rowIndex).filter.setEnabled((Boolean) aValue);
             break;
         default:
             throw new IllegalArgumentException(OStrings.getString("FILTERS_ERROR_COLUMN_INDEX_NOT_1"));
@@ -134,6 +128,33 @@ public class FiltersTableModel extends AbstractTableModel {
     }
 
     public Filter getFilterAtRow(int row) {
-        return filters.get(row);
+        return filters.get(row).filter;
+    }
+
+    public void setFilter(Filter filter) {
+        String key = filter.getClassName();
+        IFilter fi = FilterMaster.getFilterInstance(key);
+        if (fi != null) {
+            FilterData oldData =
+                    filters.stream().filter(data -> data.className.equals(key)).findFirst().orElse(null);
+            if (oldData != null) {
+                filters.set(filters.indexOf(oldData), new FilterData(key, fi.getFileFormatName(), filter));
+            }
+        }
+    }
+
+    /**
+     * POJO for filter list.
+     */
+    static class FilterData {
+        public String className;
+        public String filterName;
+        public Filter filter;
+
+        public FilterData(final String className, final String filterName, final Filter filter) {
+            this.className = className;
+            this.filterName = filterName;
+            this.filter = filter;
+        }
     }
 }

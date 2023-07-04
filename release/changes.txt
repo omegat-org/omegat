@@ -10,6 +10,9 @@
   - Dictionary displays apostrophe as html entitty code
   https://sourceforge.net/p/omegat/bugs/1181
 
+  - Content of notes elements are not displayed correctly with Xliff filter
+  https://sourceforge.net/p/omegat/bugs/1192/
+
 ----------------------------------------------------------------------
  OmegaT 6.0.0 (2023-06-22)
 ----------------------------------------------------------------------

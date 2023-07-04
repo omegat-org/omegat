@@ -39,12 +39,10 @@ package org.omegat.core.data;
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
-import java.io.UncheckedIOException;
 import java.io.Writer;
 import java.nio.channels.FileChannel;
 import java.nio.channels.FileLock;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.FileSystemLoopException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -410,8 +408,7 @@ public class RealProject implements IProject {
             // build word count
             StatsResult stat = CalcStandardStatistics.buildProjectStats(this);
             stat.updateStatisticsInfo(hotStat);
-            String fn = config.getProjectInternal() + OConsts.STATS_FILENAME;
-            Statistics.writeStat(fn, stat.getTextData());
+            Statistics.writeStat(config.getProjectInternal(), stat);
 
             loaded = true;
 
@@ -858,8 +855,7 @@ public class RealProject implements IProject {
                 // update statistics
                 StatsResult stat = CalcStandardStatistics.buildProjectStats(this);
                 stat.updateStatisticsInfo(hotStat);
-                String fn = config.getProjectInternal() + OConsts.STATS_FILENAME;
-                Statistics.writeStat(fn, stat.getTextData());
+                Statistics.writeStat(config.getProjectInternal(), stat);
             } finally {
                 Core.getMainWindow().getMainMenu().getProjectMenu().setEnabled(true);
             }

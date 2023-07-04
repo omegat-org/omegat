@@ -75,6 +75,7 @@ import org.omegat.core.data.RealProject;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.statistics.CalcStandardStatistics;
+import org.omegat.core.statistics.StatOutputFormat;
 import org.omegat.core.statistics.StatsResult;
 import org.omegat.core.tagvalidation.ErrorReport;
 import org.omegat.core.team2.TeamTool;
@@ -417,33 +418,38 @@ public final class Main {
         }
 
         String outputFilename = PARAMS.get(CLIParameters.STATS_OUTPUT);
-        String statsMode;
+        StatOutputFormat statsMode;
         if (PARAMS.containsKey(CLIParameters.STATS_MODE)) {
-            statsMode = PARAMS.get(CLIParameters.STATS_MODE);
+            statsMode = StatOutputFormat.getValue(PARAMS.get(CLIParameters.STATS_MODE));
         } else {
             // when no stats type specified, try to detect from file extension, otherwise XML.
-            if (outputFilename.endsWith(".json") || outputFilename.endsWith(".JSON")) {
-                statsMode = "JSON";
-            } else if (outputFilename.endsWith(".xml") || outputFilename.endsWith(".XML")) {
-                statsMode = "XML";
-            } else if (outputFilename.endsWith(".txt") || outputFilename.endsWith(".TXT")) {
-                statsMode = "TXT";
+            if (outputFilename.toLowerCase().endsWith(StatOutputFormat.JSON.getFileExtension())) {
+                statsMode = StatOutputFormat.JSON;
+            } else if (outputFilename.toLowerCase().endsWith(StatOutputFormat.XML.getFileExtension())) {
+                statsMode = StatOutputFormat.XML;
+            } else if (outputFilename.toLowerCase().endsWith(StatOutputFormat.TEXT.getFileExtension())) {
+                statsMode = StatOutputFormat.TEXT;
             } else {
-                statsMode = "XML";
+                statsMode = StatOutputFormat.XML;
             }
         }
         try (OutputStreamWriter writer = new OutputStreamWriter(
                 Files.newOutputStream(Paths.get(FileUtil.expandTildeHomeDir(outputFilename)),
                         CREATE, TRUNCATE_EXISTING, WRITE),
                 StandardCharsets.UTF_8)) {
-            if ("TXT".equalsIgnoreCase(statsMode) || "text".equalsIgnoreCase(statsMode)) {
+            switch (statsMode) {
+            case TEXT:
                 writer.write(projectStats.getTextData());
-            } else if ("JSON".equalsIgnoreCase(statsMode)) {
+                break;
+            case JSON:
                 writer.write(projectStats.getJsonData());
-            } else if ("XML".equalsIgnoreCase(statsMode)){
+                break;
+            case XML:
                 writer.write(projectStats.getXmlData());
-            } else {
+                break;
+            default:
                 Log.log("Specified UNKNOWN file type for statistics. aborted.");
+                break;
             }
         } catch (NoSuchFileException nsfe) {
             Log.log("Got directory/file open error. Does specified directory exist?");

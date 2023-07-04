@@ -28,9 +28,13 @@
 
 package org.omegat.gui.preferences.view;
 
+import java.awt.BorderLayout;
+
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import org.omegat.core.statistics.StatOutputFormat;
 import org.omegat.util.OStrings;
 
 /**
@@ -77,6 +81,16 @@ public class SaveOptionsPanel extends JPanel {
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
         setLayout(new java.awt.BorderLayout());
+        
+        jPanelStats = new JPanel();
+        add(jPanelStats, BorderLayout.SOUTH);
+        jPanelStats.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 10, 0));
+        jPanelStats.setLayout(new BorderLayout(0, 0));
+        statsOutputLabel = new JLabel(OStrings.getString("SAVE_DIALOG_STATS_OUTPUT_FORMAT")); // NOI18N
+        jPanelStats.add(statsOutputLabel, BorderLayout.NORTH);
+        statsOutputCombo = new JComboBox<>();
+        statsOutputCombo.setModel(StatOutputFormat.getComboBoxModel());
+        jPanelStats.add(statsOutputCombo, BorderLayout.SOUTH);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 10, 0));
         jPanel1.setLayout(new java.awt.BorderLayout());
@@ -205,5 +219,8 @@ public class SaveOptionsPanel extends JPanel {
     javax.swing.JSpinner secondsSpinner;
     private javax.swing.JLabel variablesLabel;
     javax.swing.JComboBox<String> variablesList;
+    private JPanel jPanelStats;
+    private JLabel statsOutputLabel;
+    JComboBox<StatOutputFormat> statsOutputCombo;
     // End of variables declaration//GEN-END:variables
 }

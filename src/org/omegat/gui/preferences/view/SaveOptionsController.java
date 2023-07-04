@@ -34,6 +34,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComponent;
 
 import org.omegat.core.data.CommandVarExpansion;
+import org.omegat.core.statistics.StatOutputFormat;
 import org.omegat.gui.preferences.BasePreferencesController;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
@@ -81,6 +82,9 @@ public class SaveOptionsController extends BasePreferencesController {
 
         panel.variablesList
                 .setModel(new DefaultComboBoxModel<>(new Vector<>(CommandVarExpansion.getCommandVariables())));
+
+        StatOutputFormat outputFormat = Preferences.getPreferenceEnumDefault(Preferences.STATS_OUTPUT_FORMAT, StatOutputFormat.JSON);
+        panel.statsOutputCombo.getModel().setSelectedItem(outputFormat);
     }
 
     @Override
@@ -90,6 +94,7 @@ public class SaveOptionsController extends BasePreferencesController {
 
         panel.externalCommandTextArea.setText("");
         panel.allowProjectCmdCheckBox.setSelected(false);
+        panel.statsOutputCombo.getModel().setSelectedItem(StatOutputFormat.JSON);
     }
 
     @Override
@@ -119,5 +124,7 @@ public class SaveOptionsController extends BasePreferencesController {
 
         Preferences.setPreference(Preferences.EXTERNAL_COMMAND, panel.externalCommandTextArea.getText());
         Preferences.setPreference(Preferences.ALLOW_PROJECT_EXTERN_CMD, panel.allowProjectCmdCheckBox.isSelected());
+        Preferences.setPreference(Preferences.STATS_OUTPUT_FORMAT,
+                ((StatOutputFormat) panel.statsOutputCombo.getModel().getSelectedItem()).name());
     }
 }

@@ -93,8 +93,6 @@ public abstract class TestCore {
                     toolsMenu.add(new JMenuItem("toolsShowStatisticsMatchesPerFileMenuItem"));
                     toolsMenu.addSeparator();
                     toolsMenu.add(new JMenuItem("toolsAlignFilesMenuItem"));
-                    // extension point
-                    toolsMenu.addSeparator();
                 }
                 return toolsMenu;
             }
@@ -151,10 +149,9 @@ public abstract class TestCore {
                     optionsMenu.add(new JMenuItem("SetupFileFilters"));
                     optionsMenu.add(new JMenuItem("Sentseg"));
                     optionsMenu.add(new JMenuItem("Workflow"));
-                    // extension point
-                    optionsMenu.addSeparator();
                     optionsMenu.addSeparator();
                     optionsMenu.add(new JMenuItem("AccessConfigDir"));
+                    optionsMenu.addSeparator();
                 }
                 return optionsMenu;
             }
@@ -223,8 +220,6 @@ public abstract class TestCore {
                     gotoMenu.addSeparator();
                     gotoMenu.add(new JMenuItem("gotoNotesPanelMenuItem"));
                     gotoMenu.add(new JMenuItem("gotoEditorPanelMenuItem"));
-                    // extension point
-                    gotoMenu.addSeparator();
                 }
                 return gotoMenu;
             }

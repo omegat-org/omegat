@@ -218,8 +218,7 @@ public class MainWindowMenuTest extends TestCore {
         assertNull(optionsMenu.getItem(n + 8)); // separator
         assertEquals("ext 3", optionsMenu.getItem(n + 9).getText());
         assertEquals("ext 4", optionsMenu.getItem(n + 10).getText());
-        assertNull(optionsMenu.getItem(n + 11)); // separator
-        assertEquals("AccessConfigDir", optionsMenu.getItem(n + 12).getText());
+        assertEquals("AccessConfigDir", optionsMenu.getItem(n + 11).getText());
     }
 
     /**
@@ -233,12 +232,11 @@ public class MainWindowMenuTest extends TestCore {
         MenuExtender.addMenuItem(MenuKey.GOTO, menuItem1);
         MenuExtender.addMenuItem(MenuKey.GOTO, menuItem2);
         JMenu gotoMenu = Core.getMainWindow().getMainMenu().getMenu(MenuKey.GOTO);
-        assertEquals(20, gotoMenu.getItemCount());
+        assertEquals(19, gotoMenu.getItemCount());
         assertEquals("gotoNextUntranslatedMenuItem", gotoMenu.getItem(0).getText());
         assertNull(gotoMenu.getItem(9)); // separator
-        assertNull(gotoMenu.getItem(17)); // separator
-        assertEquals("ext 1", gotoMenu.getItem(18).getText());
-        assertEquals("ext 2", gotoMenu.getItem(19).getText());
+        assertEquals("ext 1", gotoMenu.getItem(17).getText());
+        assertEquals("ext 2", gotoMenu.getItem(18).getText());
     }
 
     @Test
@@ -246,26 +244,24 @@ public class MainWindowMenuTest extends TestCore {
         JMenu toolsMenu = Core.getMainWindow().getMainMenu().getMenu(MenuKey.TOOLS);
         assertEquals(-1, MenuKey.TOOLS.getPosition());
         // create pager page
-        assertEquals(8, toolsMenu.getItemCount());
+        assertEquals(7, toolsMenu.getItemCount());
         // add items through pager
         List<Component> newMenuItems = new ArrayList<>(addMenuItemsToPager(MenuKey.TOOLS));
-        assertEquals(19, toolsMenu.getItemCount());
+        assertEquals(18, toolsMenu.getItemCount());
         // check consistency
-        assertNull(toolsMenu.getItem(7)); // separator
-        assertEquals("ext 1", toolsMenu.getItem(8).getText());
-        assertEquals("ext 10", toolsMenu.getItem(17).getText());
-        JMenuItem lastItem = toolsMenu.getItem(18);
+        assertEquals("ext 1", toolsMenu.getItem(7).getText());
+        assertEquals("ext 10", toolsMenu.getItem(16).getText());
+        JMenuItem lastItem = toolsMenu.getItem(17);
         assertEquals(OStrings.getString("MW_MORE_SUBMENU"), lastItem.getText());
         // add more menu item
         JMenuItem menuItem13 = new JMenuItem("ext 13");
         MenuExtender.addMenuItem(MenuKey.TOOLS, menuItem13);
-        assertEquals(20, toolsMenu.getItemCount());
+        assertEquals(19, toolsMenu.getItemCount());
         // removal of menu items from pager
         MenuExtender.removeMenuItems(MenuKey.TOOLS, newMenuItems);
-        assertNull(toolsMenu.getItem(7)); // separator
         // The last item is one added at above.
-        assertEquals(9, toolsMenu.getItemCount());
-        assertEquals("ext 13", toolsMenu.getItem(8).getText());
+        assertEquals(8, toolsMenu.getItemCount());
+        assertEquals("ext 13", toolsMenu.getItem(7).getText());
     }
 
     private List<JMenuItem> addMenuItemsToPager(MenuKey target) {

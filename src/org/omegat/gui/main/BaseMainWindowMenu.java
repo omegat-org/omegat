@@ -517,7 +517,6 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         editMenu.add(editRegisterUntranslatedMenuItem);
         editMenu.add(editRegisterEmptyMenuItem);
         editMenu.add(editRegisterIdenticalMenuItem);
-        // extension point
         editMenu.addSeparator();
 
         switchCaseSubMenu.add(lowerCaseMenuItem);
@@ -548,8 +547,6 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         gotoMenu.addSeparator();
         gotoMenu.add(gotoNotesPanelMenuItem);
         gotoMenu.add(gotoEditorPanelMenuItem);
-        // extension point
-        gotoMenu.addSeparator();
 
         viewMenu.add(viewMarkTranslatedSegmentsCheckBoxMenuItem);
         viewMenu.add(viewMarkUntranslatedSegmentsCheckBoxMenuItem);
@@ -569,8 +566,6 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         viewModificationInfoMenu.add(viewDisplayModificationInfoNoneRadioButtonMenuItem);
         viewModificationInfoMenu.add(viewDisplayModificationInfoSelectedRadioButtonMenuItem);
         viewModificationInfoMenu.add(viewDisplayModificationInfoAllRadioButtonMenuItem);
-        // extension point
-        viewMenu.addSeparator();
         viewMenu.addSeparator();
         viewMenu.add(viewRestoreGUIMenuItem);
 
@@ -581,8 +576,6 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         toolsMenu.add(toolsShowStatisticsMatchesPerFileMenuItem);
         toolsMenu.addSeparator();
         toolsMenu.add(toolsAlignFilesMenuItem);
-        // extension point
-        toolsMenu.addSeparator();
 
         if (!Platform.isMacOSX()) {
             optionsMenu.add(optionsPreferencesMenuItem);
@@ -611,14 +604,12 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         optionsMenu.add(optionsSetupFileFiltersMenuItem);
         optionsMenu.add(optionsSentsegMenuItem);
         optionsMenu.add(optionsWorkflowMenuItem);
-        // extension point
-        optionsMenu.addSeparator();
         optionsMenu.addSeparator();
         optionsMenu.add(optionsAccessConfigDirMenuItem);
+        optionsMenu.addSeparator();
 
         helpMenu.add(helpContentsMenuItem);
         helpMenu.add(helpAboutMenuItem);
-        // extension point
         helpMenu.add(helpLastChangesMenuItem);
         helpMenu.add(helpLogMenuItem);
         helpMenu.add(helpUpdateCheckMenuItem);

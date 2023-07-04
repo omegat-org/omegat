@@ -2,8 +2,13 @@
  OmegaT 6.0.1
 ----------------------------------------------------------------------
   0 Enhancement
-  0 Bug fixes
+  1 Bug fixes
 ----------------------------------------------------------------------
+
+  Bug fixes:
+
+  - Dictionary displays apostrophe as html entitty code
+  https://sourceforge.net/p/omegat/bugs/1181
 
 ----------------------------------------------------------------------
  OmegaT 6.0.0 (2023-06-22)

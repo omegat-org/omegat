@@ -349,11 +349,11 @@ public final class ProjectUICommands {
                     // so we add root repository mapping
                     props.setRepositories(repos);
                 } else {
-                    RepositoryDefinition remoteRepo = getRootGitRepositoryMapping(props.getRepositories());
+                    RepositoryDefinition remoteRepo = getRootRepositoryMapping(props.getRepositories());
                     if (isRepositoryEquals(remoteRepo, repo)) {
                         // when remote repository config is different with
                         // opening url, respect local one
-                        setRootGitRepositoryMapping(props.getRepositories(), repo);
+                        setRootRepositoryMapping(props.getRepositories(), repo);
                     }
                 }
                 // We write in all cases, because we might have added default
@@ -486,7 +486,7 @@ public final class ProjectUICommands {
         return true;
     }
 
-    private static ProjectProperties checkProjectProperties(File projectRootFolder) {
+    static ProjectProperties checkProjectProperties(File projectRootFolder) {
         // check if project okay
         ProjectProperties props;
         try {
@@ -583,15 +583,15 @@ public final class ProjectUICommands {
                             props.setRepositories(localRepos);
                         } else {
                             // use mapping from remote configuration but
-                            // override repository URL when project URL is git
-                            // type when there is difference between local and
-                            // remote config.
-                            RepositoryDefinition localRootRepository = getRootGitRepositoryMapping(
-                                    localRepos);
-                            RepositoryDefinition newRepository = getRootGitRepositoryMapping(
-                                    props.getRepositories());
+                            // override repository URL when there is difference
+                            // between local and remote config.
+                            // git type: it can be https or git+ssh
+                            // svn type: it can be https or svn+ssh
+                            final List<RepositoryDefinition> remoteRepos = props.getRepositories();
+                            RepositoryDefinition localRootRepository = getRootRepositoryMapping(localRepos);
+                            RepositoryDefinition newRepository = getRootRepositoryMapping(remoteRepos);
                             if (!isRepositoryEquals(localRootRepository, newRepository)) {
-                                setRootGitRepositoryMapping(props.getRepositories(), localRootRepository);
+                                setRootRepositoryMapping(remoteRepos, localRootRepository);
                             }
                         }
                         needToSaveProperties = !isIdenticalOmegatProjectProperties(props, localProps);
@@ -668,7 +668,7 @@ public final class ProjectUICommands {
      *            local omegat.project.
      * @return true if identical, otherwise false.
      */
-    private static boolean isIdenticalOmegatProjectProperties(ProjectProperties that, ProjectProperties my) {
+    static boolean isIdenticalOmegatProjectProperties(ProjectProperties that, ProjectProperties my) {
         if (my == that) {
             return true;
         }
@@ -731,12 +731,11 @@ public final class ProjectUICommands {
                 .append(my.getDictRoot(), that.getDictRoot()).isEquals();
     }
 
-    private static RepositoryDefinition getRootGitRepositoryMapping(List<RepositoryDefinition> repos) {
+    static RepositoryDefinition getRootRepositoryMapping(List<RepositoryDefinition> repos) {
         RepositoryDefinition repositoryDefinition = null;
         for (RepositoryDefinition definition : repos) {
             if (definition.getMapping().get(0).getLocal().equals("/")
-                    && definition.getMapping().get(0).getRepository().equals("/")
-                    && definition.getType().equals("git")) {
+                    && definition.getMapping().get(0).getRepository().equals("/")) {
                 repositoryDefinition = definition;
                 break;
             }
@@ -744,12 +743,12 @@ public final class ProjectUICommands {
         return repositoryDefinition;
     }
 
-    private static void setRootGitRepositoryMapping(List<RepositoryDefinition> repos,
+    static void setRootRepositoryMapping(List<RepositoryDefinition> repos,
             RepositoryDefinition repositoryDefinition) {
         if (repositoryDefinition == null) {
             return;
         }
-        RepositoryDefinition originalRepositoryDefinition = getRootGitRepositoryMapping(repos);
+        RepositoryDefinition originalRepositoryDefinition = getRootRepositoryMapping(repos);
         if (originalRepositoryDefinition == null) {
             return;
         }
@@ -758,7 +757,7 @@ public final class ProjectUICommands {
         originalRepositoryDefinition.setBranch(repositoryDefinition.getBranch());
     }
 
-    private static boolean isRepositoryEquals(RepositoryDefinition a, RepositoryDefinition b) {
+    static boolean isRepositoryEquals(RepositoryDefinition a, RepositoryDefinition b) {
         if (a == null || b == null) {
             return false;
         }

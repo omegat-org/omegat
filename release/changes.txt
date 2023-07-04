@@ -159,6 +159,9 @@
 
   Bug fixes:
 
+  - Content of notes elements are not displayed correctly with Xliff filter
+  https://sourceforge.net/p/omegat/bugs/1192/
+
   - Fixed "null" file names in search results when "Display: file names" checkbox was unchecked
   https://sourceforge.net/p/omegat/bugs/1154/
 

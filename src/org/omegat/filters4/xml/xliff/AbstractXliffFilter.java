@@ -25,26 +25,27 @@
 
 package org.omegat.filters4.xml.xliff;
 
-import java.util.List;
-import java.util.LinkedList;
 import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 import java.util.Stack;
-import java.util.regex.Pattern;
+import java.util.TreeMap;
 import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.xml.namespace.QName;
-import javax.xml.stream.XMLStreamWriter;
+import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamException;
-import javax.xml.stream.events.StartElement;
-import javax.xml.stream.events.Characters;
-import javax.xml.stream.events.XMLEvent;
+import javax.xml.stream.XMLStreamWriter;
 import javax.xml.stream.events.Attribute;
+import javax.xml.stream.events.Characters;
+import javax.xml.stream.events.StartElement;
+import javax.xml.stream.events.XMLEvent;
 
-import org.omegat.filters4.xml.AbstractXmlFilter;
-import org.omegat.filters2.Instance;
 import org.omegat.filters2.FilterContext;
+import org.omegat.filters2.Instance;
+import org.omegat.filters4.xml.AbstractXmlFilter;
 
 /**
  * Filter for support Xliff files as bilingual.
@@ -137,7 +138,7 @@ abstract class AbstractXliffFilter extends AbstractXmlFilter {
             List<XMLEvent> unitTarget, String notePattern) {
         String src = buildTags(unitSource, false);
         String tra = null;
-        if (unitTarget != null && unitTarget.size() > 0) {
+        if (unitTarget != null && !unitTarget.isEmpty()) {
             tra = buildTags(unitTarget, true);
         }
         if (isToIgnore(src, tra)) {
@@ -145,17 +146,19 @@ abstract class AbstractXliffFilter extends AbstractXmlFilter {
         }
         if (entryParseCallback != null) {
             StringBuffer noteStr = null;
-            if (notePattern != null && note != null && note.size() > 0) {
+            if (notePattern != null && note != null && !note.isEmpty()) {
                 noteStr = new StringBuffer();
                 for (XMLEvent ev : note) {
-                    noteStr.append(ev.toString());
+                    String noteContent = ev.getEventType() == XMLStreamConstants.CHARACTERS
+                            ? ((Characters) ev).getData()
+                            : ev.toString();
+                    noteStr.append(noteContent);
                 }
             }
             if (notePattern != null && !".*".equals(notePattern)) {
                 StringBuffer subNoteBuf = noteStr;
                 if (subNoteBuf != null) {
                     subNoteBuf = new StringBuffer();
-                    String noteStrStr = noteStr.toString();
                     Matcher noteMatch = Pattern.compile(notePattern).matcher(noteStr.toString());
                     while (noteMatch.find()) {
                         if (noteMatch.group(1).equals(entryId.substring(entryId.lastIndexOf("/") + 1))) {
@@ -168,11 +171,11 @@ abstract class AbstractXliffFilter extends AbstractXmlFilter {
                 }
                 noteStr = subNoteBuf;
             }
-            entryParseCallback.addEntry(entryId, src.toString(), tra, false,
+            entryParseCallback.addEntry(entryId, src, tra, false,
                     noteStr == null ? null : noteStr.toString(), path, this, buildProtectedParts(src));
         }
         if (entryAlignCallback != null) {
-            entryAlignCallback.addTranslation(entryId, src.toString(), tra.toString(), false, path, this);
+            entryAlignCallback.addTranslation(entryId, src, tra, false, path, this);
         }
     }
 

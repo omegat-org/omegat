@@ -47,6 +47,7 @@ import org.omegat.core.data.ProjectTMX;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
 import org.omegat.gui.editor.MarkerController.MarkInfo;
+import org.omegat.util.BiDiUtils;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
@@ -366,7 +367,7 @@ public class SegmentBuilder {
 
     /**
      * Create method for inactive segment.
-     * 
+     *
      * @param trans
      *            TMX entry with translation
      * @throws BadLocationException
@@ -540,7 +541,7 @@ public class SegmentBuilder {
      */
     private void addOtherLanguagePart(String text, Language language) throws BadLocationException {
         int prevOffset = offset;
-        boolean rtl = Language.isRTL(language.getLanguageCode());
+        boolean rtl = BiDiUtils.isRtl(language.getLanguageCode());
         insertDirectionEmbedding(false);
         AttributeSet normal = attrs(true, false, false, false);
         insert(language.getLanguage() + ": ", normal);
@@ -588,7 +589,7 @@ public class SegmentBuilder {
         }
 
         int prevOffset = offset;
-        boolean rtl = Language.localeIsRTL();
+        boolean rtl = BiDiUtils.isLocaleRtl();
         insertDirectionEmbedding(rtl);
         AttributeSet attrs = settings.getModificationInfoAttributeSet();
         insert(text, attrs);
@@ -624,7 +625,7 @@ public class SegmentBuilder {
         insertDirectionMarker(rtl);
 
         // the marker itself is in user language
-        insertDirectionEmbedding(Language.localeIsRTL());
+        insertDirectionEmbedding(BiDiUtils.isLocaleRtl());
         AttributeSet attrSegmentMark = settings.getSegmentMarkerAttributeSet();
         insert(createSegmentMarkText(), attrSegmentMark);
         insertDirectionEndEmbedding();
@@ -781,7 +782,7 @@ public class SegmentBuilder {
     /**
      * Writes (if necessary) an RTL or LTR marker. Use it before writing text in
      * some language.
-     * 
+     *
      * @param isRTL
      *            is the language that has to be written a right-to-left
      *            language?

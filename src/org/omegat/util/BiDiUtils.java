@@ -31,6 +31,9 @@ import java.awt.ComponentOrientation;
 
 import org.omegat.core.Core;
 
+/**
+ * @author Damien Rembert
+ */
 public class BiDiUtils {
 
     public enum ORIENTATION {

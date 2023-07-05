@@ -707,7 +707,8 @@ public class RealProject implements IProject {
         }
 
         // COMPILE event is fired before committing translated files to remote
-        // repository to be able to modify the resulting files before sending them to
+        // repository to be able to modify the resulting files before sending
+        // them to
         // the repository (BUGS#1176)
         CoreEvents.fireProjectChange(IProjectEventListener.PROJECT_CHANGE_TYPE.COMPILE);
 
@@ -1027,8 +1028,8 @@ public class RealProject implements IProject {
                         public void rebaseAndSave(File out) throws Exception {
                             mergeTMX(baseTMX, headTMX, commitDetails);
 
-                            ProjectTMX newTMX = new ProjectTMX(config.getSourceLanguage(), config.getTargetLanguage(),
-                                    config.isSentenceSegmentingEnabled(),
+                            ProjectTMX newTMX = new ProjectTMX(config.getSourceLanguage(),
+                                    config.getTargetLanguage(), config.isSentenceSegmentingEnabled(),
                                     new File(config.getProjectInternalDir(), OConsts.STATUS_EXTENSION), null);
                             projectTMX.replaceContent(newTMX);
 

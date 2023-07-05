@@ -65,8 +65,8 @@ public class SaveOptionsController extends BasePreferencesController {
     private void initGui() {
         panel = new SaveOptionsPanel();
 
-        panel.insertButton.addActionListener(
-                e -> panel.externalCommandTextArea.replaceSelection(panel.variablesList.getSelectedItem().toString()));
+        panel.insertButton.addActionListener(e -> panel.externalCommandTextArea
+                .replaceSelection(panel.variablesList.getSelectedItem().toString()));
     }
 
     @Override
@@ -78,12 +78,14 @@ public class SaveOptionsController extends BasePreferencesController {
         panel.secondsSpinner.setValue(saveInterval % 60);
 
         panel.externalCommandTextArea.setText(Preferences.getPreference(Preferences.EXTERNAL_COMMAND));
-        panel.allowProjectCmdCheckBox.setSelected(Preferences.isPreference(Preferences.ALLOW_PROJECT_EXTERN_CMD));
+        panel.allowProjectCmdCheckBox
+                .setSelected(Preferences.isPreference(Preferences.ALLOW_PROJECT_EXTERN_CMD));
 
-        panel.variablesList
-                .setModel(new DefaultComboBoxModel<>(new Vector<>(CommandVarExpansion.getCommandVariables())));
+        panel.variablesList.setModel(
+                new DefaultComboBoxModel<>(new Vector<>(CommandVarExpansion.getCommandVariables())));
 
-        StatOutputFormat outputFormat = Preferences.getPreferenceEnumDefault(Preferences.STATS_OUTPUT_FORMAT, StatOutputFormat.JSON);
+        StatOutputFormat outputFormat = Preferences.getPreferenceEnumDefault(Preferences.STATS_OUTPUT_FORMAT,
+                StatOutputFormat.JSON);
         panel.statsOutputCombo.getModel().setSelectedItem(outputFormat);
     }
 
@@ -123,7 +125,8 @@ public class SaveOptionsController extends BasePreferencesController {
         Preferences.setPreference(Preferences.AUTO_SAVE_INTERVAL, saveInterval);
 
         Preferences.setPreference(Preferences.EXTERNAL_COMMAND, panel.externalCommandTextArea.getText());
-        Preferences.setPreference(Preferences.ALLOW_PROJECT_EXTERN_CMD, panel.allowProjectCmdCheckBox.isSelected());
+        Preferences.setPreference(Preferences.ALLOW_PROJECT_EXTERN_CMD,
+                panel.allowProjectCmdCheckBox.isSelected());
         Preferences.setPreference(Preferences.STATS_OUTPUT_FORMAT,
                 ((StatOutputFormat) panel.statsOutputCombo.getModel().getSelectedItem()).name());
     }

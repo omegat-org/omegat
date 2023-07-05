@@ -128,10 +128,10 @@ public final class Main {
     protected static CLIParameters.RUN_MODE runMode = CLIParameters.RUN_MODE.GUI;
 
     public static void main(String[] args) {
-        if (args.length > 0 && (CLIParameters.HELP_SHORT.equals(args[0])
-                || CLIParameters.HELP.equals(args[0]))) {
-            System.out.println(StringUtil.format(OStrings.getString("COMMAND_LINE_HELP"),
-                    OStrings.getNameAndVersion()));
+        if (args.length > 0
+                && (CLIParameters.HELP_SHORT.equals(args[0]) || CLIParameters.HELP.equals(args[0]))) {
+            System.out.println(
+                    StringUtil.format(OStrings.getString("COMMAND_LINE_HELP"), OStrings.getNameAndVersion()));
             System.exit(0);
         }
 
@@ -272,7 +272,8 @@ public final class Main {
         System.out.println("Reading config from " + path);
         try (FileInputStream in = new FileInputStream(configFile)) {
             PropertyResourceBundle config = new PropertyResourceBundle(in);
-            // Put config properties into System properties and into OmegaT params.
+            // Put config properties into System properties and into OmegaT
+            // params.
             for (String key : config.keySet()) {
                 String value = config.getString(key);
                 System.setProperty(key, value);
@@ -301,7 +302,8 @@ public final class Main {
      */
     protected static int runGUI() {
         ClassLoader cl = ClassLoader.getSystemClassLoader();
-        MainClassLoader mainClassLoader = (cl instanceof MainClassLoader) ? (MainClassLoader) cl : new MainClassLoader(cl);
+        MainClassLoader mainClassLoader = (cl instanceof MainClassLoader) ? (MainClassLoader) cl
+                : new MainClassLoader(cl);
         PluginUtils.getThemePluginJars().forEach(mainClassLoader::add);
         UIManager.put("ClassLoader", mainClassLoader);
 
@@ -395,11 +397,11 @@ public final class Main {
     /**
      * Displays or writes project statistics.
      * <p>
-     *     takes two optional arguments
+     * takes two optional arguments
      * <code>[--output-file=(file path) [--stats-type=[XML|JSON|TEXT]]]</code>
-     * when omitted, display stats text(localized).
-     * When file I/O error occurred, especially when parent directory does not exist
-     * warns it and return 1.
+     * when omitted, display stats text(localized). When file I/O error
+     * occurred, especially when parent directory does not exist warns it and
+     * return 1.
      */
     private static int runConsoleStats() throws Exception {
         Log.log("Console project stats mode");
@@ -422,7 +424,8 @@ public final class Main {
         if (PARAMS.containsKey(CLIParameters.STATS_MODE)) {
             statsMode = StatOutputFormat.getValue(PARAMS.get(CLIParameters.STATS_MODE));
         } else {
-            // when no stats type specified, try to detect from file extension, otherwise XML.
+            // when no stats type specified, try to detect from file extension,
+            // otherwise XML.
             if (outputFilename.toLowerCase().endsWith(StatOutputFormat.JSON.getFileExtension())) {
                 statsMode = StatOutputFormat.JSON;
             } else if (outputFilename.toLowerCase().endsWith(StatOutputFormat.XML.getFileExtension())) {
@@ -434,8 +437,8 @@ public final class Main {
             }
         }
         try (OutputStreamWriter writer = new OutputStreamWriter(
-                Files.newOutputStream(Paths.get(FileUtil.expandTildeHomeDir(outputFilename)),
-                        CREATE, TRUNCATE_EXISTING, WRITE),
+                Files.newOutputStream(Paths.get(FileUtil.expandTildeHomeDir(outputFilename)), CREATE,
+                        TRUNCATE_EXISTING, WRITE),
                 StandardCharsets.UTF_8)) {
             switch (statsMode) {
             case TEXT:
@@ -493,7 +496,7 @@ public final class Main {
             }
             break;
         default:
-            //do not validate tags = default
+            // do not validate tags = default
         }
     }
 
@@ -531,16 +534,16 @@ public final class Main {
         }
 
         // Write OmegaT-project-compatible TMX:
-        try (TMXWriter2 wr = new TMXWriter2(new File(fname), config.getSourceLanguage(), config.getTargetLanguage(),
-                config.isSentenceSegmentingEnabled(), false, false)) {
+        try (TMXWriter2 wr = new TMXWriter2(new File(fname), config.getSourceLanguage(),
+                config.getTargetLanguage(), config.isSentenceSegmentingEnabled(), false, false)) {
             for (SourceTextEntry ste : entries) {
                 switch (pseudoTranslateType) {
-                    case EQUAL:
-                        wr.writeEntry(ste.getSrcText(), ste.getSrcText(), null, null, 0, null, 0, null);
-                        break;
-                    case EMPTY:
-                        wr.writeEntry(ste.getSrcText(), "", null, null, 0, null, 0, null);
-                        break;
+                case EQUAL:
+                    wr.writeEntry(ste.getSrcText(), ste.getSrcText(), null, null, 0, null, 0, null);
+                    break;
+                case EMPTY:
+                    wr.writeEntry(ste.getSrcText(), "", null, null, 0, null, 0, null);
+                    break;
                 }
             }
         } catch (IOException e) {
@@ -579,8 +582,8 @@ public final class Main {
         String tmxFile = p.getProjectProperties().getProjectInternal() + "align.tmx";
         ProjectProperties config = p.getProjectProperties();
         boolean alt = !config.isSupportDefaultTranslations();
-        try (TMXWriter2 wr = new TMXWriter2(new File(tmxFile), config.getSourceLanguage(), config.getTargetLanguage(),
-                config.isSentenceSegmentingEnabled(), alt, alt)) {
+        try (TMXWriter2 wr = new TMXWriter2(new File(tmxFile), config.getSourceLanguage(),
+                config.getTargetLanguage(), config.isSentenceSegmentingEnabled(), alt, alt)) {
             wr.writeEntries(p.align(config, new File(FileUtil.expandTildeHomeDir(dir))), alt);
         }
         p.closeProject();

@@ -145,7 +145,8 @@ public final class Statistics {
      * @param result
      */
     public static void writeStat(String dir, StatsResult result) {
-        writeStat(dir, result, Preferences.getPreferenceEnumDefault(Preferences.STATS_OUTPUT_FORMAT, StatOutputFormat.JSON));
+        writeStat(dir, result,
+                Preferences.getPreferenceEnumDefault(Preferences.STATS_OUTPUT_FORMAT, StatOutputFormat.JSON));
     }
 
     /**

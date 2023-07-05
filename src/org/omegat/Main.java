@@ -422,7 +422,7 @@ public final class Main {
         String outputFilename = PARAMS.get(CLIParameters.STATS_OUTPUT);
         StatOutputFormat statsMode;
         if (PARAMS.containsKey(CLIParameters.STATS_MODE)) {
-            statsMode = StatOutputFormat.getValue(PARAMS.get(CLIParameters.STATS_MODE));
+            statsMode = StatOutputFormat.parse(PARAMS.get(CLIParameters.STATS_MODE));
         } else {
             // when no stats type specified, try to detect from file extension,
             // otherwise XML.

@@ -25,9 +25,6 @@
 
 package org.omegat.core.statistics;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.swing.ComboBoxModel;
 import javax.swing.event.ListDataListener;
 
@@ -36,7 +33,6 @@ import org.omegat.util.OStrings;
 public enum StatOutputFormat {
     TEXT(".txt"), XML(".xml"), JSON(".json");
 
-    private static Map<String, StatOutputFormat> valueMap = null;
     private String fileExtension;
 
     StatOutputFormat(String fileExtension) {
@@ -47,14 +43,22 @@ public enum StatOutputFormat {
         return fileExtension;
     }
 
-    public static StatOutputFormat getValue(String format) {
-        if (valueMap == null) {
-            valueMap = new HashMap<>();
-            for (StatOutputFormat day : values()) {
-                valueMap.put(day.toString(), day);
+    public static StatOutputFormat parse(String code) {
+        if (code == null || code.trim().isEmpty()) {
+            return null;
+        }
+
+        for (StatOutputFormat mp : StatOutputFormat.values()) {
+            if (code.equalsIgnoreCase(mp.name())) {
+                return mp;
             }
         }
-        return valueMap.get(format.toUpperCase());
+        return null;
+    }
+
+    @Override
+    public String toString() {
+        return OStrings.getString("STATS_FORMAT_" + name());
     }
 
     public static ComboBoxModel<StatOutputFormat> getComboBoxModel() {
@@ -93,8 +97,4 @@ public enum StatOutputFormat {
         };
     }
 
-    @Override
-    public String toString() {
-        return OStrings.getString("STATS_FORMAT_" + name());
-    }
 }

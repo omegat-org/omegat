@@ -34,10 +34,10 @@ import javax.swing.text.AttributeSet;
 import javax.swing.text.Highlighter.HighlightPainter;
 
 import org.apache.commons.text.StringEscapeUtils;
+
 import org.omegat.core.Core;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.data.SourceTextEntry;
-import org.omegat.gui.editor.Document3;
 import org.omegat.gui.editor.EditorController;
 import org.omegat.util.PatternConsts;
 import org.omegat.util.Preferences;
@@ -60,7 +60,7 @@ public class ProtectedPartsMarker implements IMarker {
             throws Exception {
         HighlightPainter painter;
         AttributeSet attrs;
-        if (((EditorController) Core.getEditor()).getOrientation() == Document3.ORIENTATION.ALL_LTR) {
+        if (((EditorController) Core.getEditor()).isOrientationAllLtr()) {
             attrs = ATTRIBUTES_LTR;
             painter = null;
         } else {

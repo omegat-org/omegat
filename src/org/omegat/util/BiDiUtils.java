@@ -30,8 +30,6 @@ package org.omegat.util;
 import java.awt.ComponentOrientation;
 
 import org.omegat.core.Core;
-import org.omegat.gui.editor.Document3;
-import org.omegat.gui.editor.EditorController;
 
 public class BiDiUtils {
 
@@ -179,10 +177,6 @@ public class BiDiUtils {
     }
 
     public static boolean isMixedOrientationProject() {
-        return (BiDiUtils.getOrientationType() == BiDiUtils.ORIENTATION.DIFFER);
-    }
-
-    public static boolean isOrientationAllLtr() {
-        return ((EditorController) Core.getEditor()).getOrientation() == Document3.ORIENTATION.ALL_LTR;
+        return (BiDiUtils.getOrientationType() == ORIENTATION.DIFFER);
     }
 }

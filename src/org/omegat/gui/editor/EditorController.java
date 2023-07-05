@@ -110,6 +110,7 @@ import org.omegat.gui.main.MainWindow;
 import org.omegat.gui.main.MainWindowUI;
 import org.omegat.gui.main.ProjectUICommands;
 import org.omegat.help.Help;
+import org.omegat.util.BiDiUtils;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
@@ -207,7 +208,7 @@ public class EditorController implements IEditor {
         INTRO, EMPTY_PROJECT, FIRST_ENTRY, NO_CHANGE
     };
 
-    Document3.ORIENTATION currentOrientation;
+    BiDiUtils.ORIENTATION currentOrientation;
     protected boolean sourceLangIsRTL;
     protected boolean targetLangIsRTL;
 
@@ -576,12 +577,12 @@ public class EditorController implements IEditor {
         targetLangIsRTL = Language.isRTL(targetLang);
 
         if (sourceLangIsRTL != targetLangIsRTL || sourceLangIsRTL != Language.localeIsRTL()) {
-            currentOrientation = Document3.ORIENTATION.DIFFER;
+            currentOrientation = BiDiUtils.ORIENTATION.DIFFER;
         } else {
             if (sourceLangIsRTL) {
-                currentOrientation = Document3.ORIENTATION.ALL_RTL;
+                currentOrientation = BiDiUtils.ORIENTATION.ALL_RTL;
             } else {
-                currentOrientation = Document3.ORIENTATION.ALL_LTR;
+                currentOrientation = BiDiUtils.ORIENTATION.ALL_LTR;
             }
         }
         applyOrientationToEditor();
@@ -611,13 +612,11 @@ public class EditorController implements IEditor {
     }
 
     /**
-     * returns the orientation of the document
-     * (so we can decide what way of tag colouring we need;
-     * if that has been fixed in an other way, this method can be removed again.).
-     * @return
+     * The orientation of the document is all LtR.
+     * @return true when the orientation is all RtL. otherwise false.
      */
-    public Document3.ORIENTATION getOrientation() {
-        return currentOrientation;
+    public boolean isOrientationAllLtr() {
+        return currentOrientation.equals(BiDiUtils.ORIENTATION.ALL_LTR);
     }
 
     /**
@@ -695,7 +694,7 @@ public class EditorController implements IEditor {
 
         // check if RTL support required for document
         boolean hasRTL = sourceLangIsRTL || targetLangIsRTL || Language.localeIsRTL()
-                || currentOrientation != Document3.ORIENTATION.ALL_LTR;
+                || currentOrientation != BiDiUtils.ORIENTATION.ALL_LTR;
         Map<Language, ProjectTMX> otherLanguageTMs = Core.getProject().getOtherTargetLanguageTMs();
         for (Map.Entry<Language, ProjectTMX> entry : otherLanguageTMs.entrySet()) {
             hasRTL = hasRTL || Language.isRTL(entry.getKey().getLanguageCode().toLowerCase(Locale.ENGLISH));

@@ -25,22 +25,33 @@
 
 package org.omegat.core.statistics;
 
-import javax.swing.ComboBoxModel;
-import javax.swing.event.ListDataListener;
-
 import org.omegat.util.OStrings;
 
 public enum StatOutputFormat {
-    TEXT(".txt"), XML(".xml"), JSON(".json");
+    TEXT(1, ".txt"), XML(2, ".xml"), JSON(4, ".json");
 
     private String fileExtension;
+    private int id;
 
-    StatOutputFormat(String fileExtension) {
+    StatOutputFormat(int id, String fileExtension) {
+        this.id = id;
         this.fileExtension = fileExtension;
     }
 
     public String getFileExtension() {
         return fileExtension;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public static int getDefaultFormats() {
+        return TEXT.id | JSON.id;
+    }
+
+    public boolean isSelected(int outputFormats) {
+        return (outputFormats & id) != 0;
     }
 
     public static StatOutputFormat parse(String code) {
@@ -59,42 +70,6 @@ public enum StatOutputFormat {
     @Override
     public String toString() {
         return OStrings.getString("STATS_FORMAT_" + name());
-    }
-
-    public static ComboBoxModel<StatOutputFormat> getComboBoxModel() {
-        return new ComboBoxModel<>() {
-            private StatOutputFormat selectedObject;
-
-            @Override
-            public int getSize() {
-                return StatOutputFormat.values().length;
-            }
-
-            @Override
-            public StatOutputFormat getElementAt(int index) {
-                return StatOutputFormat.values()[index];
-            }
-
-            @Override
-            public void addListDataListener(ListDataListener l) {
-                /* empty */
-            }
-
-            @Override
-            public void removeListDataListener(ListDataListener l) {
-                /* empty */
-            }
-
-            @Override
-            public void setSelectedItem(Object anItem) {
-                selectedObject = (StatOutputFormat) anItem;
-            }
-
-            @Override
-            public StatOutputFormat getSelectedItem() {
-                return selectedObject;
-            }
-        };
     }
 
 }

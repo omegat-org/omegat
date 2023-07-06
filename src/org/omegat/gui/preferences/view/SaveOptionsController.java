@@ -84,9 +84,11 @@ public class SaveOptionsController extends BasePreferencesController {
         panel.variablesList.setModel(
                 new DefaultComboBoxModel<>(new Vector<>(CommandVarExpansion.getCommandVariables())));
 
-        StatOutputFormat outputFormat = Preferences.getPreferenceEnumDefault(Preferences.STATS_OUTPUT_FORMAT,
-                StatOutputFormat.JSON);
-        panel.statsOutputCombo.getModel().setSelectedItem(outputFormat);
+        int outputFormats = Preferences.getPreferenceDefault(Preferences.STATS_OUTPUT_FORMAT,
+                StatOutputFormat.JSON.getId() | StatOutputFormat.TEXT.getId());
+        panel.textOutputCheckBox.setSelected(StatOutputFormat.TEXT.isSelected(outputFormats));
+        panel.jsonOutputCheckBox.setSelected(StatOutputFormat.JSON.isSelected(outputFormats));
+        panel.xmlOutputCheckBox.setSelected(StatOutputFormat.XML.isSelected(outputFormats));
     }
 
     @Override
@@ -96,7 +98,11 @@ public class SaveOptionsController extends BasePreferencesController {
 
         panel.externalCommandTextArea.setText("");
         panel.allowProjectCmdCheckBox.setSelected(false);
-        panel.statsOutputCombo.getModel().setSelectedItem(StatOutputFormat.JSON);
+
+        int outputFormats = StatOutputFormat.JSON.getDefaultFormats();
+        panel.textOutputCheckBox.setSelected(StatOutputFormat.TEXT.isSelected(outputFormats));
+        panel.jsonOutputCheckBox.setSelected(StatOutputFormat.JSON.isSelected(outputFormats));
+        panel.xmlOutputCheckBox.setSelected(StatOutputFormat.XML.isSelected(outputFormats));
     }
 
     @Override
@@ -127,7 +133,11 @@ public class SaveOptionsController extends BasePreferencesController {
         Preferences.setPreference(Preferences.EXTERNAL_COMMAND, panel.externalCommandTextArea.getText());
         Preferences.setPreference(Preferences.ALLOW_PROJECT_EXTERN_CMD,
                 panel.allowProjectCmdCheckBox.isSelected());
-        Preferences.setPreference(Preferences.STATS_OUTPUT_FORMAT,
-                ((StatOutputFormat) panel.statsOutputCombo.getModel().getSelectedItem()).name());
+
+        int outputFormats = 0;
+        outputFormats |= panel.textOutputCheckBox.isSelected() ? StatOutputFormat.TEXT.getId() : 0;
+        outputFormats |= panel.jsonOutputCheckBox.isSelected() ? StatOutputFormat.JSON.getId() : 0;
+        outputFormats |= panel.xmlOutputCheckBox.isSelected() ? StatOutputFormat.XML.getId() : 0;
+        Preferences.setPreference(Preferences.STATS_OUTPUT_FORMAT, outputFormats);
     }
 }

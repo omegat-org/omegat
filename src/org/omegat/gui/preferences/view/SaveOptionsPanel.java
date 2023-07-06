@@ -28,13 +28,10 @@
 
 package org.omegat.gui.preferences.view;
 
-import java.awt.BorderLayout;
-
-import javax.swing.JComboBox;
+import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import org.omegat.core.statistics.StatOutputFormat;
 import org.omegat.util.OStrings;
 
 /**
@@ -79,19 +76,15 @@ public class SaveOptionsPanel extends JPanel {
         variablesList = new javax.swing.JComboBox<>();
         insertButton = new javax.swing.JButton();
         allowProjectCmdCheckBox = new javax.swing.JCheckBox();
+        jPanelStats = new javax.swing.JPanel();
+        textOutputCheckBox = new javax.swing.JCheckBox();
+        jsonOutputCheckBox = new javax.swing.JCheckBox();
+        xmlOutputCheckBox = new javax.swing.JCheckBox();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
         setLayout(new java.awt.BorderLayout());
 
-        jPanelStats = new JPanel();
-        add(jPanelStats, BorderLayout.SOUTH);
-        jPanelStats.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 10, 0));
-        jPanelStats.setLayout(new BorderLayout(0, 0));
-        statsOutputLabel = new JLabel(OStrings.getString("SAVE_DIALOG_STATS_OUTPUT_FORMAT")); // NOI18N
-        jPanelStats.add(statsOutputLabel, BorderLayout.NORTH);
-        statsOutputCombo = new JComboBox<>();
-        statsOutputCombo.setModel(StatOutputFormat.getComboBoxModel());
-        jPanelStats.add(statsOutputCombo, BorderLayout.SOUTH);
+        add(jPanel1);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 10, 0));
         jPanel1.setLayout(new java.awt.BorderLayout());
@@ -197,6 +190,22 @@ public class SaveOptionsPanel extends JPanel {
         jPanel2.add(allowProjectCmdCheckBox, java.awt.BorderLayout.SOUTH);
 
         add(jPanel2, java.awt.BorderLayout.CENTER);
+
+        jPanelStats.setBorder(javax.swing.BorderFactory
+                .createTitledBorder(OStrings.getString("SAVE_DIALOG_STATS_OUTPUT_FORMAT"))); // NOI18N
+        jPanelStats.setAlignmentY(0.0F);
+        jPanelStats.setLayout(new javax.swing.BoxLayout(jPanelStats, javax.swing.BoxLayout.PAGE_AXIS));
+
+        org.openide.awt.Mnemonics.setLocalizedText(textOutputCheckBox,
+                OStrings.getString("STATS_FORMAT_TEXT")); // NOI18N
+        jPanelStats.add(textOutputCheckBox);
+        org.openide.awt.Mnemonics.setLocalizedText(jsonOutputCheckBox,
+                OStrings.getString("STATS_FORMAT_JSON")); // NOI18N
+        jPanelStats.add(jsonOutputCheckBox);
+        org.openide.awt.Mnemonics.setLocalizedText(xmlOutputCheckBox, OStrings.getString("STATS_FORMAT_XML")); // NOI18N
+        jPanelStats.add(xmlOutputCheckBox);
+        add(jPanelStats);
+
     }// </editor-fold>//GEN-END:initComponents
 
     private void insertButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_insertButtonActionPerformed
@@ -224,7 +233,8 @@ public class SaveOptionsPanel extends JPanel {
     private javax.swing.JLabel variablesLabel;
     javax.swing.JComboBox<String> variablesList;
     private JPanel jPanelStats;
-    private JLabel statsOutputLabel;
-    JComboBox<StatOutputFormat> statsOutputCombo;
+    JCheckBox jsonOutputCheckBox;
+    JCheckBox xmlOutputCheckBox;
+    JCheckBox textOutputCheckBox;
     // End of variables declaration//GEN-END:variables
 }

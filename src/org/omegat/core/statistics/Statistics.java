@@ -145,8 +145,13 @@ public final class Statistics {
      * @param result
      */
     public static void writeStat(String dir, StatsResult result) {
-        writeStat(dir, result,
-                Preferences.getPreferenceEnumDefault(Preferences.STATS_OUTPUT_FORMAT, StatOutputFormat.JSON));
+        int outputFormats = Preferences.getPreferenceDefault(Preferences.STATS_OUTPUT_FORMAT,
+                StatOutputFormat.getDefaultFormats());
+        for (StatOutputFormat format : StatOutputFormat.values()) {
+            if (format.isSelected(outputFormats)) {
+                writeStat(dir, result, format);
+            }
+        }
     }
 
     /**
@@ -173,7 +178,6 @@ public final class Statistics {
                 out.write(result.getJsonData());
                 break;
             }
-
         } catch (Exception ex) {
             Log.log(ex);
         }

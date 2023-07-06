@@ -131,9 +131,10 @@ public final class OConsts {
     public static final String EXT_TBX = ".tbx";
 
     /**
-     * The name of the file with project statistics: segments, words, chars count.
+     * The name of the file with project statistics: segments, words, chars count. The extension
+     * is added with the appropriate output format.
      */
-    public static final String STATS_FILENAME = "project_stats.txt";
+    public static final String STATS_FILENAME = "project_stats";
 
     /** The name of the file with project match statistics. */
     public static final String STATS_MATCH_FILENAME = "project_stats_match.txt";

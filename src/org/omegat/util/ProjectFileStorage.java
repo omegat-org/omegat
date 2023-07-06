@@ -32,15 +32,24 @@
 package org.omegat.util;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Map;
 
+import javax.xml.namespace.QName;
 import javax.xml.stream.XMLInputFactory;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.SerializerProvider;
+import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.fasterxml.jackson.databind.ser.std.StdSerializer;
+import com.fasterxml.jackson.databind.type.MapType;
+import com.fasterxml.jackson.databind.type.TypeFactory;
 import com.fasterxml.jackson.dataformat.xml.XmlFactory;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
@@ -56,6 +65,7 @@ import gen.core.project.Masks;
 import gen.core.project.Omegat;
 import gen.core.project.Project;
 import gen.core.project.Project.Repositories;
+import gen.core.project.RepositoryDefinition;
 
 /**
  * Class that reads and saves project definition file.
@@ -83,6 +93,12 @@ public final class ProjectFileStorage {
         mapper = XmlMapper.builder(xmlFactory).defaultUseWrapper(false)
                 .enable(MapperFeature.USE_WRAPPER_NAME_AS_PROPERTY_NAME).build();
         mapper.registerModule(new JaxbAnnotationModule());
+        SimpleModule module = new SimpleModule();
+        TypeFactory typeFactory = mapper.getTypeFactory();
+        final RepositoryDefinition def = new RepositoryDefinition();
+        module.addSerializer(new ProjectOtherAttributesSerializer(typeFactory
+                .constructMapType(def.getOtherAttributes().getClass(), QName.class, String.class)));
+        mapper.registerModule(module);
         mapper.configure(ToXmlGenerator.Feature.WRITE_XML_DECLARATION, true);
         mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
         mapper.enable(SerializationFeature.INDENT_OUTPUT);
@@ -237,8 +253,8 @@ public final class ProjectFileStorage {
         om.getProject().getSourceDirExcludes().getMask().addAll(props.getSourceRootExcludes());
         om.getProject().setTargetDir(getPathForStoring(root, props.getTargetRoot(), OConsts.DEFAULT_TARGET));
         om.getProject().setTmDir(getPathForStoring(root, props.getTMRoot(), OConsts.DEFAULT_TM));
-        om.getProject().setExportTmDir(
-                getPathForStoring(root, props.getExportTMRoot(), OConsts.DEFAULT_EXPORT_TM));
+        om.getProject()
+                .setExportTmDir(getPathForStoring(root, props.getExportTMRoot(), OConsts.DEFAULT_EXPORT_TM));
         om.getProject().setExportTmLevels(String.join(" ", props.getExportTmLevels()));
         String glossaryDir = getPathForStoring(root, props.getGlossaryRoot(), OConsts.DEFAULT_GLOSSARY);
         om.getProject().setGlossaryDir(glossaryDir);
@@ -372,5 +388,29 @@ public final class ProjectFileStorage {
             path = path.substring(0, path.length() - 1);
         }
         return path;
+    }
+
+    @SuppressWarnings("serial")
+    protected static class ProjectOtherAttributesSerializer extends StdSerializer<Map<QName, String>> {
+
+        protected ProjectOtherAttributesSerializer(MapType type) {
+            super(type);
+        }
+
+        @Override
+        public void serialize(final Map<QName, String> value, final JsonGenerator gen,
+                final SerializerProvider provider) throws IOException {
+            if (value.size() > 0) {
+                gen.writeStartObject();
+                for (Map.Entry<QName, String> item : value.entrySet()) {
+                    if (item.getValue() == null) {
+                        continue;
+                    }
+                    gen.writeFieldName(item.getKey().getLocalPart());
+                    gen.writeString(item.getValue());
+                }
+                gen.writeEndObject();
+            }
+        }
     }
 }

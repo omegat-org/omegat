@@ -99,7 +99,7 @@ public class SaveOptionsController extends BasePreferencesController {
         panel.externalCommandTextArea.setText("");
         panel.allowProjectCmdCheckBox.setSelected(false);
 
-        int outputFormats = StatOutputFormat.JSON.getDefaultFormats();
+        int outputFormats = StatOutputFormat.getDefaultFormats();
         panel.textOutputCheckBox.setSelected(StatOutputFormat.TEXT.isSelected(outputFormats));
         panel.jsonOutputCheckBox.setSelected(StatOutputFormat.JSON.isSelected(outputFormats));
         panel.xmlOutputCheckBox.setSelected(StatOutputFormat.XML.isSelected(outputFormats));

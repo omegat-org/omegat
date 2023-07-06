@@ -54,6 +54,7 @@ import org.omegat.gui.main.MainMenuIcons;
 import org.omegat.gui.main.MainWindow;
 import org.omegat.gui.main.MainWindowMenuHandler;
 import org.omegat.gui.main.ProjectUICommands;
+import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.RecentProjects;
 import org.omegat.util.gui.ResourcesUtil;
@@ -89,7 +90,8 @@ public class AccessTools extends JPanel {
         int fontHeight = recentProjectCB.getFont().getSize();
         int cbHeight = (int)(CHECKBOX_HEIGHT_RATIO * fontHeight);
         int cbWidth = fontHeight * MAX_PATH_LENGTH_SHOWN;
-        recentProjectCB.setRenderer(new NameAndPathComboBoxRenderer());
+        final NameAndPathComboBoxRenderer recentProjectRenderer = new NameAndPathComboBoxRenderer();
+        recentProjectCB.setRenderer(recentProjectRenderer);
         recentProjectCB.setUI(new ToolbarComboboxUI());
         List<URI> projectList = new ArrayList<>();
         try {
@@ -98,7 +100,11 @@ public class AccessTools extends JPanel {
             projectList.add(new URI("omegat", "team", null));
         } catch (URISyntaxException ignored) {
         }
-        RecentProjects.getRecentProjects().stream().map(f -> Paths.get(f).toUri()).forEach(projectList::add);
+        RecentProjects.getRecentProjects().stream()
+                .map(f -> Paths.get(f).toAbsolutePath().toUri())
+                .filter(AccessTools::checkProjectFolder)
+                .distinct()
+                .forEach(projectList::add);
         projectComboBoxModel = new ProjectComboBoxModel(projectList);
         recentProjectCB.setModel(projectComboBoxModel);
         recentProjectCB.setEnabled(true);
@@ -225,6 +231,15 @@ public class AccessTools extends JPanel {
         }
     }
 
+    private static boolean checkProjectFolder(URI project) {
+        File f = Paths.get(project).toFile();
+        if (!f.isDirectory()) {
+            return false;
+        }
+        File projectFile = new File(f, OConsts.FILE_PROJECT);
+        return projectFile.exists() && projectFile.canWrite();
+    }
+
     /**
      * ComboBoxModel for project access tool.
      */
@@ -240,7 +255,9 @@ public class AccessTools extends JPanel {
             if (recentProjects.size() > getSize()) {
                 // when a new project is added to the list
                 recentProjects.stream()
-                        .map(f -> Paths.get(f).toUri())
+                        .map(f -> Paths.get(f).toAbsolutePath().toUri())
+                        .filter(AccessTools::checkProjectFolder)
+                        .distinct()
                         .filter(p -> getIndexOf(p) < 0)  // when new project
                         .forEach(this::addElement);
             }

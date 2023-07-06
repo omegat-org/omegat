@@ -38,6 +38,7 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.ListCellRenderer;
+import javax.swing.UIManager;
 
 import org.openide.awt.Mnemonics;
 
@@ -45,7 +46,12 @@ import org.omegat.util.OStrings;
 
 public class NameAndPathComboBoxRenderer implements ListCellRenderer<URI> {
 
+    private final Color projectFilesCurrentFileBackground;
+    private final Color projectFilesCurrentFileForeground;
+
     public NameAndPathComboBoxRenderer() {
+        projectFilesCurrentFileBackground = UIManager.getColor("OmegaT.projectFilesCurrentFileBackground");
+        projectFilesCurrentFileForeground = UIManager.getColor("OmegaT.projectFilesCurrentFileForeground");
     }
 
     @Override
@@ -65,36 +71,40 @@ public class NameAndPathComboBoxRenderer implements ListCellRenderer<URI> {
                     switch (uri.getSchemeSpecificPart()) {
                         case "new":
                             setComponent(panel, Mnemonics.removeMnemonics(OStrings.getString(
-                                    "TF_MENU_FILE_CREATE")));
+                                    "TF_MENU_FILE_CREATE")), isSelected);
                             break;
                         case "open":
                             setComponent(panel, Mnemonics.removeMnemonics(OStrings.getString(
-                                    "TF_MENU_FILE_OPEN")));
+                                    "TF_MENU_FILE_OPEN")), isSelected);
                             break;
                         case "team":
                             setComponent(panel, Mnemonics.removeMnemonics(OStrings.getString(
-                                    "TF_MENU_FILE_TEAM_CREATE")));
+                                    "TF_MENU_FILE_TEAM_CREATE")), isSelected);
                             break;
                         default:
                             panel.add(new JLabel(""));
                     }
                 } else {
-                    setComponent(panel, Path.of(uri));
+                    setComponent(panel, Path.of(uri), isSelected);
                 }
             }
         }
         return panel;
     }
 
-    private void setComponent(JPanel panel, String command) {
+    private void setComponent(JPanel panel, String command, boolean isSelected) {
         panel.setBorder(BorderFactory.createEmptyBorder(1, 1, 10, 1));
         panel.setOpaque(false);
         panel.setLayout(new BorderLayout());
         JLabel commandName = new JLabel(command);
         panel.add(commandName, BorderLayout.CENTER);
+        if (isSelected) {
+            panel.setBackground(projectFilesCurrentFileBackground);
+            panel.setForeground(projectFilesCurrentFileForeground);
+        }
     }
 
-    private void setComponent(JPanel panel, Path path) {
+    private void setComponent(JPanel panel, Path path, boolean isSelected) {
         panel.setBorder(BorderFactory.createEmptyBorder(1, 1, 10, 1));
         panel.setOpaque(false);
         panel.setLayout(new BorderLayout());
@@ -105,6 +115,10 @@ public class NameAndPathComboBoxRenderer implements ListCellRenderer<URI> {
         projectPathLabel.setForeground(Color.GRAY);
         panel.add(projectName, BorderLayout.CENTER);
         panel.add(projectPathLabel, BorderLayout.SOUTH);
+        if (isSelected) {
+            panel.setBackground(projectFilesCurrentFileBackground);
+            panel.setForeground(projectFilesCurrentFileForeground);
+        }
     }
 
     private String getProjectName(Path path) {

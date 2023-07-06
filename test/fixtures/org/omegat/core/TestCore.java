@@ -180,6 +180,8 @@ public abstract class TestCore {
             @Override
             public JMenu getMenu(final MenuExtender.MenuKey marker) {
                 switch (marker) {
+                case PROJECT:
+                    return getProjectMenu();
                 case HELP:
                     return getHelpMenu();
                 case OPTIONS:
@@ -188,6 +190,10 @@ public abstract class TestCore {
                     return getGotoMenu();
                 case TOOLS:
                     return getToolsMenu();
+                case EDIT:
+                    return new JMenu();
+                case VIEW:
+                    return new JMenu();
                 default:
                     return new JMenu();
                 }

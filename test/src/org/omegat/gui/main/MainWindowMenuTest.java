@@ -107,13 +107,27 @@ public class MainWindowMenuTest extends TestCore {
     public void testMenuPositions() {
         TestMainMenu testMenu = new TestMainMenu();
         testMenu.initComponents();
-        assertEquals(getLocalizedText("MW_PROJECTMENU_EDIT"),
-                getExtensionPointItem(testMenu, MenuKey.PROJECT).getText());
+        assertEquals(getLocalizedText("MW_PROJECTMENU_EDIT"), getExtensionPointItem(testMenu,
+                MenuKey.PROJECT).getText());
+        assertEquals(getLocalizedText("TF_MENU_EDIT_IDENTICAL_TRANSLATION"), getExtensionPointItem(testMenu,
+                MenuKey.EDIT).getText());
+        assertEquals(getLocalizedText("MW_VIEW_MENU_MODIFICATION_INFO"), getExtensionPointItem(testMenu,
+                MenuKey.VIEW).getText());
+        assertEquals(getLocalizedText("TF_MENU_GOTO_EDITOR_PANEL"), getExtensionPointItem(testMenu,
+                MenuKey.GOTO).getText());
+        assertEquals(getLocalizedText("MW_OPTIONSMENU_ACCESS_CONFIG_DIR"), getExtensionPointItem(testMenu,
+                MenuKey.OPTIONS).getText());
+        assertEquals(getLocalizedText("TF_MENU_HELP_LOG"), getExtensionPointItem(testMenu,
+                MenuKey.HELP).getText());
         assertEquals(-1, MenuKey.EDIT.getPosition());
     }
 
     private JMenuItem getExtensionPointItem(TestMainMenu menu, MenuKey key) {
-        return menu.getMenu(key).getItem(key.getPosition());
+        if (key.getPosition() == -1) {
+            return menu.getMenu(key).getItem(menu.getMenu(key).getItemCount() - 1);
+        } else {
+            return menu.getMenu(key).getItem(key.getPosition());
+        }
     }
 
     private String getLocalizedText(final String key) {

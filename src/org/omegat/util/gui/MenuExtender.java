@@ -42,7 +42,7 @@ public final class MenuExtender {
         /**
          * Project menu.
          */
-        PROJECT("project", 22),
+        PROJECT("project", 21),
         /**
          * Edit menu.
          */

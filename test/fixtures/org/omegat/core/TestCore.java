@@ -119,8 +119,6 @@ public abstract class TestCore {
                     projectMenu.addSeparator();
                     projectMenu.add(new JMenuItem("MedOpen"));
                     projectMenu.add(new JMenuItem("MedCreate"));
-                    // extension point
-                    projectMenu.addSeparator();
                     projectMenu.addSeparator();
                     projectMenu.add(new JMenuItem("ProjectEdit"));
                     projectMenu.add(new JMenuItem("ViewFIleList"));
@@ -190,12 +188,6 @@ public abstract class TestCore {
                     return getGotoMenu();
                 case TOOLS:
                     return getToolsMenu();
-                case OPTIONSMACHINETRANSLATE:
-                    return getMachineTranslationMenu();
-                case OPTIONSGLOSSARY:
-                    return getGlossaryMenu();
-                case OPTIONSAUTOCOMPLETE:
-                    return getAutoCompletionMenu();
                 default:
                     return new JMenu();
                 }

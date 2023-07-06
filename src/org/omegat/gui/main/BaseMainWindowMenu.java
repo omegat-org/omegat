@@ -441,8 +441,6 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         projectMenu.addSeparator();
         projectMenu.add(projectMedOpenMenuItem);
         projectMenu.add(projectMedCreateMenuItem);
-        // extension point
-        projectMenu.addSeparator();
         projectMenu.addSeparator();
         projectMenu.add(projectEditMenuItem);
         projectMenu.add(viewFileListMenuItem);
@@ -515,7 +513,6 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         editMenu.add(editRegisterUntranslatedMenuItem);
         editMenu.add(editRegisterEmptyMenuItem);
         editMenu.add(editRegisterIdenticalMenuItem);
-        editMenu.addSeparator();
 
         switchCaseSubMenu.add(lowerCaseMenuItem);
         switchCaseSubMenu.add(upperCaseMenuItem);

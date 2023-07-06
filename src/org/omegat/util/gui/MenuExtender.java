@@ -66,51 +66,7 @@ public final class MenuExtender {
         /**
          * Help menu.
          */
-        HELP("help", 3),
-        /**
-         * Open recent pop-up menu in Project menu.
-         */
-        PROJECTOPENRECENT("projectOpenRecent", 0),
-        /**
-         * Access project files submenu in Project menu.
-         */
-        PROJECTACCESSPROJECTFILES("projectAccessProjectFiles", 0),
-        /**
-         * Switch case submenu in edit menu.
-         */
-        SWITCHCASE("switchCase", 0),
-        /**
-         * Select fuzzy submenu in edit menu.
-         */
-        SELECTFUZZY("selectFuzzy", 0),
-        /**
-         * Insert chars submenu in edit menu.
-         */
-        INSERTCHARS("insertChars", 0),
-        /**
-         * Goto entry submenu in goto menu.
-         */
-        GOTOENTRY("gotoEntry", 0),
-        /**
-         * Modifiction infomation submenu in view menu.
-         */
-        VIEWMODIFICTIONINFO("viewModifictionInfo", 0),
-        /**
-         * machine translate submenu in options menu.
-         */
-        OPTIONSMACHINETRANSLATE("optionsMachineTranslate", 0),
-        /**
-         * Dictionary submenu in options menu.
-         */
-        OPTIONSDICTIONARY("optionsDictionary", 0),
-        /**
-         * Glossary submenu in options menu.
-         */
-        OPTIONSGLOSSARY("optionsGlossary", 0),
-        /**
-         * auto complete submenu in options menu.
-         */
-        OPTIONSAUTOCOMPLETE("optionsAutoComplete", 0);
+        HELP("help", 3);
 
         private final String value;
         private final int position;

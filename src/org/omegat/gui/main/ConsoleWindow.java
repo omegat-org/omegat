@@ -138,12 +138,10 @@ public class ConsoleWindow implements IMainWindow {
         throw new NoSuchMethodError("Invalid call of ConsoleWindow");
     }
 
-    @Override
     public DockingDesktop getDesktop() {
         return null;
     }
 
-    @Override
     public Cursor getCursor() {
         return Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR);
     }

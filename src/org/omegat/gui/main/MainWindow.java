@@ -82,7 +82,6 @@ import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.FontUtil;
-import org.omegat.util.gui.MenuExtender;
 import org.omegat.util.gui.StaticUIUtils;
 import org.omegat.util.gui.UIDesignManager;
 import org.omegat.util.gui.UIScale;
@@ -183,10 +182,8 @@ public class MainWindow extends JFrame implements IMainWindow {
         CoreEvents.registerApplicationEventListener(new IApplicationEventListener() {
             public void onApplicationStartup() {
                 MainWindowUI.initializeScreenLayout(MainWindow.this);
-                // Remove all duplicated separators from all menus
-                for (final MenuExtender.MenuKey key : MenuExtender.MenuKey.values()) {
-                    UIDesignManager.removeUnusedMenuSeparators(menu.getMenu(key).getPopupMenu());
-                }
+
+                UIDesignManager.removeUnusedMenuSeparators(menu.getOptionsMenu().getPopupMenu());
             }
 
             public void onApplicationShutdown() {
@@ -234,7 +231,6 @@ public class MainWindow extends JFrame implements IMainWindow {
     /**
      * {@inheritDoc}
      */
-    @Override
     public IMainMenu getMainMenu() {
         return menu;
     }

@@ -197,13 +197,13 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
     abstract void createMenuBar();
 
     protected void createComponents() {
-        projectMenu = createMenu(MenuExtender.MenuKey.PROJECT, "TF_MENU_FILE");
-        editMenu = createMenu(MenuExtender.MenuKey.EDIT, "TF_MENU_EDIT");
-        gotoMenu = createMenu(MenuExtender.MenuKey.GOTO, "MW_GOTOMENU");
-        viewMenu = createMenu(MenuExtender.MenuKey.VIEW, "MW_VIEW_MENU");
-        toolsMenu = createMenu(MenuExtender.MenuKey.TOOLS, "TF_MENU_TOOLS");
-        optionsMenu = createMenu(MenuExtender.MenuKey.OPTIONS, "MW_OPTIONSMENU");
-        helpMenu = createMenu(MenuExtender.MenuKey.HELP, "TF_MENU_HELP");
+        projectMenu = createMenu("TF_MENU_FILE", MenuExtender.MenuKey.PROJECT);
+        editMenu = createMenu("TF_MENU_EDIT", MenuExtender.MenuKey.EDIT);
+        gotoMenu = createMenu("MW_GOTOMENU", MenuExtender.MenuKey.GOTO);
+        viewMenu = createMenu("MW_VIEW_MENU", MenuExtender.MenuKey.VIEW);
+        toolsMenu = createMenu("TF_MENU_TOOLS", MenuExtender.MenuKey.TOOLS);
+        optionsMenu = createMenu("MW_OPTIONSMENU", MenuExtender.MenuKey.OPTIONS);
+        helpMenu = createMenu("TF_MENU_HELP", MenuExtender.MenuKey.HELP);
 
         projectNewMenuItem = createMenuItem("TF_MENU_FILE_CREATE");
         projectTeamNewMenuItem = createMenuItem("TF_MENU_FILE_TEAM_CREATE");
@@ -739,14 +739,16 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
      * @return menu instance
      */
     protected JMenu createMenu(String titleKey) {
-        return createMenu(null, titleKey);
+        return createMenu(titleKey, null);
     }
 
-    protected JMenu createMenu(MenuExtender.MenuKey menuKey, String titleKey) {
+    protected JMenu createMenu(String titleKey, MenuExtender.MenuKey menuKey) {
         JMenu result = new JMenu();
         Mnemonics.setLocalizedText(result, OStrings.getString(titleKey));
         result.addMenuListener(this);
-        menus.put(menuKey, result);
+        if (menuKey != null) {
+            menus.put(menuKey, result);
+        }
         return result;
     }
 

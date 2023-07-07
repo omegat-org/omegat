@@ -46,10 +46,12 @@ import org.omegat.util.OStrings;
 
 public class NameAndPathComboBoxRenderer implements ListCellRenderer<URI> {
 
+    private final String defaultMessage;
     private final Color projectFilesCurrentFileBackground;
     private final Color projectFilesCurrentFileForeground;
 
     public NameAndPathComboBoxRenderer() {
+        defaultMessage = Mnemonics.removeMnemonics(OStrings.getString("TF_MENU_NEWUI_PROJECT_SELECTOR"));
         projectFilesCurrentFileBackground = UIManager.getColor("OmegaT.projectFilesCurrentFileBackground");
         projectFilesCurrentFileForeground = UIManager.getColor("OmegaT.projectFilesCurrentFileForeground");
     }
@@ -63,7 +65,7 @@ public class NameAndPathComboBoxRenderer implements ListCellRenderer<URI> {
                 JLabel label = new JLabel(getProjectName(Path.of(uri)));
                 panel.add(label);
             } else {
-                panel.add(new JLabel(""));
+                panel.add(new JLabel(defaultMessage));
             }
         } else {
             if (uri != null) {

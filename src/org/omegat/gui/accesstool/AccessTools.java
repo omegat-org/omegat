@@ -35,7 +35,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javax.swing.Box;
@@ -66,6 +65,7 @@ import org.omegat.util.gui.ResourcesUtil;
 public class AccessTools extends JPanel {
 
     JComboBox<URI> recentProjectCB;
+    JButton goButton;
     JComboBox<ProjectFileInformation> sourceFilesCB;
     JButton searchButton;
     JButton settingsButton;
@@ -73,6 +73,9 @@ public class AccessTools extends JPanel {
     private ProjectComboBoxModel projectComboBoxModel;
     private SourceComboBoxModel sourceComboBoxModel;
     private final MainWindowMenuHandler mainWindowMenuHandler;
+
+    private URI selectedProject = null;
+
     private final static int MAX_PATH_LENGTH_SHOWN = 25;
     private final static float CHECKBOX_HEIGHT_RATIO = 1.8f;
 
@@ -84,8 +87,6 @@ public class AccessTools extends JPanel {
 
     public void initComponents() {
         setLayout(new FlowLayout(FlowLayout.LEFT));
-        JLabel recentLabel = new JLabel(OStrings.getString("TF_MENU_NEWUI_PROJECT_SELECTOR"));
-        add(recentLabel);
         recentProjectCB = new JComboBox<>();
         int fontHeight = recentProjectCB.getFont().getSize();
         int cbHeight = (int)(CHECKBOX_HEIGHT_RATIO * fontHeight);
@@ -111,6 +112,8 @@ public class AccessTools extends JPanel {
         recentProjectCB.setPreferredSize(new Dimension(cbWidth, cbHeight));
         recentProjectCB.setMaximumSize(new Dimension(cbWidth, cbHeight));
         add(recentProjectCB);
+        goButton = new JButton(OStrings.getString("TF_MENU_NEWUI_PROJECT_GO"));
+        add(goButton);
 
         JLabel sourceTitle = new JLabel(OStrings.getString("TF_MENU_NEWUI_FILE_SELECTOR"));
         add(sourceTitle);
@@ -167,15 +170,18 @@ public class AccessTools extends JPanel {
                             break;
                     }
                 } else {
-                    Optional<String> targetProject = RecentProjects.getRecentProjects().stream()
-                            .filter(f -> Paths.get(f).toUri().equals(projectUri)).findFirst();
-                    targetProject.ifPresent(s -> {
-                        // clear file list at first.
-                        sourceComboBoxModel.clear();
-                        sourceFilesCB.revalidate();
-                        ProjectUICommands.projectOpen(new File(s), true);
-                    });
+                    selectedProject = RecentProjects.getRecentProjects().stream()
+                            .map(f -> Paths.get(f).toAbsolutePath().toUri())
+                            .filter(uri -> uri.equals(projectUri))
+                            .findFirst()
+                            .orElse(null);
                 }
+            }
+        });
+
+        goButton.addActionListener(actionEvent -> {
+            if (selectedProject != null) {
+                openSelectedProject(selectedProject);
             }
         });
 
@@ -198,6 +204,12 @@ public class AccessTools extends JPanel {
         });
     }
 
+    private void openSelectedProject(URI uri) {
+        // clear file list at first.
+        sourceComboBoxModel.clear();
+        sourceFilesCB.revalidate();
+        ProjectUICommands.projectOpen(new File(uri), true);
+    }
 
     private void onProjectStatusChanged(final boolean isProjectOpened) {
         if (isProjectOpened) {

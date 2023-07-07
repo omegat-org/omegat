@@ -195,4 +195,9 @@ public class PluginsPreferencesController extends BasePreferencesController {
     @Override
     public void persist() {
     }
+
+    @Override
+    public boolean canRestoreDefaults() {
+        return false;
+    }
 }

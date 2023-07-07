@@ -9,6 +9,7 @@
                2012 Guido Leenders
                2016 Aaron Madlon-Kay
                2019 Briac Pilpre
+               2023 Damien Remert
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -41,8 +42,8 @@ import java.util.regex.Matcher;
  * adhere to ISO standard LL-CC.
  * <p>
  * This class tries to follow
- * <a href="https://www.gala-global.org/tmx-14b#xml:lang">TMX
- * Specification on languages</a>, which is based on
+ * <a href="https://www.gala-global.org/tmx-14b#xml:lang">TMX Specification on
+ * languages</a>, which is based on
  * <a href="http://www.ietf.org/rfc/rfc3066.txt">RFC 3066</a>, i.e.
  * <ul>
  * <li>Language is composed from 1-8 alpha (A-Za-z) chars, then "-", then 1-8
@@ -75,10 +76,12 @@ public class Language implements Comparable<Object> {
      * or "XX-YY", where XX is a language code composed from 1-8 alpha (A-Za-z)
      * chars, and YY is a country ISO code composed from 1-8 alpha/digit
      * (A-Za-z0-9) chars.<br>
-     * The form xx-xxxx-xx is also accepted, where "xxxx" is a 4 alpha characters script as defined in
-     * <a href="http://unicode.org/iso15924/iso15924-codes.html">ISO 15924</a>. E.g., sr-Latn-RS,
-     * which represents Serbian ('sr') written using Latin script ('Latn') as used in Serbia ('RS').
-     * This form is described in <a href="http://www.rfc-editor.org/rfc/bcp/bcp47.txt">BCP47</a>.
+     * The form xx-xxxx-xx is also accepted, where "xxxx" is a 4 alpha
+     * characters script as defined in
+     * <a href="http://unicode.org/iso15924/iso15924-codes.html">ISO 15924</a>.
+     * E.g., sr-Latn-RS, which represents Serbian ('sr') written using Latin
+     * script ('Latn') as used in Serbia ('RS'). This form is described in
+     * <a href="http://www.rfc-editor.org/rfc/bcp/bcp47.txt">BCP47</a>.
      */
     public Language(String str) {
         if (str == null) {
@@ -108,31 +111,16 @@ public class Language implements Comparable<Object> {
         }
     }
 
-    private final static String ZA_IN_ZH= "\u58EE\u8BED";
-    private final static String SD_IN_ZH= "\u4FE1\u5FB7\u6587";
-    private final static String SD_IN_IN_ZH= "\u4FE1\u5FB7\u6587(\u5370\u5EA6)";
-    private final static String SD_PK_IN_ZH= "\u4FE1\u5FB7\u6587(\u5DF4\u57FA\u65AF\u5766)";
+    private final static String ZA_IN_ZH = "\u58EE\u8BED";
+    private final static String SD_IN_ZH = "\u4FE1\u5FB7\u6587";
+    private final static String SD_IN_IN_ZH = "\u4FE1\u5FB7\u6587(\u5370\u5EA6)";
+    private final static String SD_PK_IN_ZH = "\u4FE1\u5FB7\u6587(\u5DF4\u57FA\u65AF\u5766)";
 
     /**
      * Returns a name for the language that is appropriate for display to the
      * user.
      */
     public String getDisplayName() {
-        if (Platform.getJavaVersion() == 8) {
-            // work around for java 8 JRE localization bug
-            // see https://github.com/OmegaT-L10N/zh_CN/issues/5
-            if (Locale.getDefault().equals(Locale.SIMPLIFIED_CHINESE)) {
-                if (this.equals(new Language("ZA"))) {
-                    return ZA_IN_ZH;
-                } else if (this.equals(new Language("SD"))) {
-                    return SD_IN_ZH;
-                } else if (locale.equals(new Locale("sd", "IN"))) {
-                    return SD_IN_IN_ZH;
-                } else if (locale.equals(new Locale("sd", "PK"))) {
-                    return SD_PK_IN_ZH;
-                }
-            }
-        }
         return locale.getDisplayName();
     }
 
@@ -158,10 +146,12 @@ public class Language implements Comparable<Object> {
         if (locale == null) {
             return "";
         } else {
-            // Patch Java locale, to return correct locales instead of obsolete codes
+            // Patch Java locale, to return correct locales instead of obsolete
+            // codes
             String returnString = locale.toString();
             if (returnString.length() < 2) {
-                return returnString; // We cannot test a locale of less than 2 characters
+                return returnString; // We cannot test a locale of less than 2
+                                     // characters
             }
             if (returnString.substring(0, 2).equalsIgnoreCase("in")) {
                 returnString = "id" + returnString.substring(2);
@@ -735,8 +725,7 @@ public class Language implements Comparable<Object> {
             }
             int sepOffset = code.offsetByCodePoints(0, 2 + shift);
             int sep = code.codePointAt(sepOffset);
-            return verifyLangCode(code.substring(0, sepOffset))
-                    && (sep == '-' || sep == '_')
+            return verifyLangCode(code.substring(0, sepOffset)) && (sep == '-' || sep == '_')
                     && verifyLangCode(code.substring(code.offsetByCodePoints(sepOffset, 1),
                             code.offsetByCodePoints(sepOffset, 3)));
         }
@@ -744,8 +733,8 @@ public class Language implements Comparable<Object> {
     }
 
     /**
-     * Returns true if two languages have the same language code (eg. fr-FR / fr-CA;
-     * es-419/es-BO).
+     * Returns true if two languages have the same language code (eg. fr-FR /
+     * fr-CA; es-419/es-BO).
      */
     public boolean isSameLanguage(Language target) {
         return this.getLanguageCode().equalsIgnoreCase(target.getLanguageCode());
@@ -756,8 +745,8 @@ public class Language implements Comparable<Object> {
     }
 
     /**
-     * Returns true if two languages have the same language and country (eg. fr-FR /
-     * fr-FR).
+     * Returns true if two languages have the same language and country (eg.
+     * fr-FR / fr-FR).
      * 
      * Note that it is slightly different than <code>Language.equals()</code>
      * because of the possible use of BCP47 tags (eg. en-GB-x-ulster /
@@ -776,6 +765,7 @@ public class Language implements Comparable<Object> {
 
     /**
      * Check if locale is Right-To-Left oriented.
+     * 
      * @return true if locale is Right-To-Left oriented.
      */
     public static boolean localeIsRTL() {
@@ -795,5 +785,13 @@ public class Language implements Comparable<Object> {
                 || "he".equalsIgnoreCase(language) || "fa".equalsIgnoreCase(language)
                 || "ur".equalsIgnoreCase(language) || "ug".equalsIgnoreCase(language)
                 || "ji".equalsIgnoreCase(language) || "yi".equalsIgnoreCase(language);
+    }
+
+    public static String getLowerCaseLanguageFromLocale() {
+        return Locale.getDefault().getLanguage().toLowerCase(Locale.ENGLISH);
+    }
+
+    public static String getUpperCaseCountryFromLocale() {
+        return Locale.getDefault().getCountry().toUpperCase(Locale.ENGLISH);
     }
 }

@@ -126,7 +126,7 @@
 
       <listitem>
         <para>As in regular local projects, the configuration of the team
-        project is defined by the contents <filename>omegat.project</filename>
+        project is defined by the contents of the <filename>omegat.project</filename>
         file and the optional use of special files for project-specific
         filters or segmentation rules.</para>
 
@@ -185,7 +185,7 @@
 
               <listitem>
                 <para>If there is a conflict between the remote and local
-                versions of the <filename>omegat.project</filename> and the
+                versions of the <filename>omegat.project</filename> file and the
                 local version is overwritten, OmegaT creates a backup file
                 called <filename>omegat.project.YYYYMMDDhhmm.bak</filename>.
                 OmegaT creates up to ten backup files, and older backups
@@ -247,7 +247,7 @@
         <para>You can open a team project and work on it offline. All changes
         will be synchronized the next time a connection is available.</para>
 
-        <para>There are two ways work offline:</para>
+        <para>There are two ways to work offline:</para>
 
         <itemizedlist>
           <listitem>

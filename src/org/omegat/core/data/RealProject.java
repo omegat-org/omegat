@@ -39,10 +39,12 @@ package org.omegat.core.data;
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.io.UncheckedIOException;
 import java.io.Writer;
 import java.nio.channels.FileChannel;
 import java.nio.channels.FileLock;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.FileSystemLoopException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -706,6 +708,12 @@ public class RealProject implements IProject {
                 numberOfCompiled++;
             }
         }
+
+        // COMPILE event is fired before committing translated files to remote
+        // repository to be able to modify the resulting files before sending them to
+        // the repository (BUGS#1176)
+        CoreEvents.fireProjectChange(IProjectEventListener.PROJECT_CHANGE_TYPE.COMPILE);
+
         if (remoteRepositoryProvider != null && config.getTargetDir().isUnderRoot() && commitTargetFiles
                 && isOnlineMode) {
             tmxPrepared = null;
@@ -732,10 +740,7 @@ public class RealProject implements IProject {
             Core.getMainWindow().showStatusMessageRB("CT_COMPILE_DONE_MX");
         }
 
-        CoreEvents.fireProjectChange(IProjectEventListener.PROJECT_CHANGE_TYPE.COMPILE);
-
         if (doPostProcessing) {
-
             // Kill any processes still not complete
             flushProcessCache();
 
@@ -1025,7 +1030,14 @@ public class RealProject implements IProject {
                         @Override
                         public void rebaseAndSave(File out) throws Exception {
                             mergeTMX(baseTMX, headTMX, commitDetails);
+
+                            ProjectTMX newTMX = new ProjectTMX(config.getSourceLanguage(), config.getTargetLanguage(),
+                                    config.isSentenceSegmentingEnabled(),
+                                    new File(config.getProjectInternalDir(), OConsts.STATUS_EXTENSION), null);
+                            projectTMX.replaceContent(newTMX);
+
                             projectTMX.exportTMX(config, out, false, false, true);
+
                         }
 
                         @Override
@@ -1038,19 +1050,11 @@ public class RealProject implements IProject {
                             return TMXReader2.detectCharset(file);
                         }
                     });
-            if (projectTMX != null) {
-                // it can be not loaded yet
-                ProjectTMX newTMX = new ProjectTMX(config.getSourceLanguage(), config.getTargetLanguage(),
-                        config.isSentenceSegmentingEnabled(),
-                        new File(config.getProjectInternalDir(), OConsts.STATUS_EXTENSION), null);
-                projectTMX.replaceContent(newTMX);
-            }
         }
 
         if (processGlossary) {
             final String glossaryPath = config.getWritableGlossaryFile().getUnderRoot();
             final File glossaryFile = config.getWritableGlossaryFile().getAsFile();
-            new File(config.getProjectRootDir(), glossaryPath);
             if (glossaryPath != null && remoteRepositoryProvider.isUnderMapping(glossaryPath)) {
                 final List<GlossaryEntry> glossaryEntries;
                 if (glossaryFile.exists()) {

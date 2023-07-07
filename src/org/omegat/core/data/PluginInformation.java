@@ -39,6 +39,7 @@ import org.omegat.util.OStrings;
 
 /**
  * Plugin information POJO data class.
+ * 
  * @author Briac Pilpre
  * @author Hiroshi Miura
  */
@@ -93,10 +94,10 @@ public class PluginInformation {
     private final String sha256Sum;
 
 
-    /* The class is recommended to build from builder. */
-    private PluginInformation(String className, String name, String version, String author, String description,
-                             PluginUtils.PluginType category, String link, URL url, Status status,
-                              String remoteJarFileUrl, String jarFilename, String sha256Sum) {
+    /* The class is recommend to build from builder. */
+    private PluginInformation(String className, String name, String version, String author,
+            String description, PluginUtils.PluginType category, String link, URL url, Status status,
+            String remoteJarFileUrl, String jarFilename, String sha256Sum) {
         this.className = className;
         this.name = name;
         this.version = version;
@@ -168,7 +169,8 @@ public class PluginInformation {
     }
 
     /**
-     * @return true if plugin is bundled with OmegaT distribution, otherwise false when 3rd party plugin
+     * @return true if plugin is bundled with OmegaT distribution, otherwise
+     *         false when 3rd party plugin
      */
     public final boolean isBundled() {
         return status == Status.BUNDLED;
@@ -201,13 +203,14 @@ public class PluginInformation {
     public String toString() {
         StringBuilder builder = new StringBuilder();
         builder.append("PluginInformation [className=").append(className).append(", name=").append(name)
-                .append(", version=").append(version).append(", author=").append(author).append(", description=")
-                .append(description).append("]");
+                .append(", version=").append(version).append(", author=").append(author)
+                .append(", description=").append(description).append("]");
         return builder.toString();
     }
 
     /**
      * It is identical if status is differed.
+     * 
      * @return hashCode of plugin
      */
     @Override
@@ -290,19 +293,23 @@ public class PluginInformation {
 
         /**
          * Build PluginInformation from Manifest attributes.
-         * @param className Plugin class name.
-         * @param manifest metadata of plugin.
-         * @param mu URL of manifest
-         * @param status Plugin status, bundled or installed
+         * 
+         * @param className
+         *            Plugin class name.
+         * @param manifest
+         *            metadata of plugin.
+         * @param mu
+         *            URL of manifest
+         * @param status
+         *            Plugin status, bundled or installed
          * @return PluginInformation object.
          */
         public static PluginInformation fromManifest(final String className, final Manifest manifest,
-                                                     final URL mu, final Status status) {
+                final URL mu, final Status status) {
             Attributes targetAttrs = new Attributes(manifest.getMainAttributes());
-            String packageName = className.substring(0, className.lastIndexOf(".") + 1)
-                    .replaceAll("\\.", "/");
-            // package section
-            String targetPackage;
+            String packageName = className == null ? ""
+                    : className.substring(0, className.lastIndexOf(".") + 1).replace(".", "/");
+
             int i = 0;
             while (i < packageName.length()) {
                 i = packageName.indexOf("/", i) + 1;
@@ -354,18 +361,24 @@ public class PluginInformation {
         /**
          * Build PluginInformation from properties.
          * <p>
-         *     This builder is useful when OmegaT run from Gradle build system.
+         * This builder is useful when OmegaT run from Gradle build system.
          * </p>
-         * @param className Plugin class name.
-         * @param props plugin properties bundled with OmegaT.
-         * @param key plugin type string.
-         * @param mu URL of property
-         * @param status Plugin status, bundled or installed
+         * 
+         * @param className
+         *            Plugin class name.
+         * @param props
+         *            plugin properties bundled with OmegaT.
+         * @param key
+         *            plugin type string.
+         * @param mu
+         *            URL of property
+         * @param status
+         *            Plugin status, bundled or installed
          * @return PluginInformation object.
          */
-        public static PluginInformation fromProperties(String className, Properties props,
-                                                       final String key, final URL mu, final Status status) {
-            return new PluginInformation(className, findName(className), OStrings.getSimpleVersion(), AUTHOR,
+        public static PluginInformation fromProperties(String className, Properties props, final String key,
+                final URL mu, final Status status) {
+            return new PluginInformation(className, key, OStrings.getSimpleVersion(), AUTHOR,
                     props.getProperty(String.format("plugin.desc.%s", key)),
                     PluginUtils.PluginType.getTypeByValue(key), LINK, mu, status,
                     null, null, null);
@@ -389,7 +402,7 @@ public class PluginInformation {
         }
 
         private static String findName(String className) {
-            return className.substring(className.lastIndexOf(".") + 1);
+            return className == null ? "" : className.substring(className.lastIndexOf(".") + 1);
         }
 
         private static String findVersion(Attributes attrs) {

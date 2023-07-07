@@ -1,35 +1,86 @@
 ----------------------------------------------------------------------
  OmegaT 6.1.0
 ----------------------------------------------------------------------
-  7 Enhancement
-  5 Bug fixes
-  1 Localisation updates
+  12 Enhancement
+  18 Bug fixes
 ----------------------------------------------------------------------
 6.1.0 vs 6.0.0
 
   Implemented requests:
 
-  - Add nashorn javascript engine[Java 17 compatibility]
-  https://sourceforge.net/p/omegat/feature-requests/1525/
+  - Team: SVN support svn+ssh protocol with key authentication
+  https://sourceforge.net/p/omegat/feature-requests/1700/
+
+  - Team: SVN: Replacing trilead-ssh2 with Apache sshd
+  https://sourceforge.net/p/omegat/feature-requests/1699/
+
+  - Better error message for omegat.project failure
+  https://sourceforge.net/p/omegat/feature-requests/1696/
+
+  - Build System: update gradle verison to 7.5.1
+  https://sourceforge.net/p/omegat/feature-requests/1691/
+
+  - Team feature: SSH support id_ecdsa and id_ed25519 for default key
+  https://sourceforge.net/p/omegat/feature-requests/1598/
 
   - Use Jackson library as XML parser
   https://sourceforge.net/p/omegat/feature-requests/1582/
+
+  - Add nashorn javascript engine[Java 17 compatibility]
+  https://sourceforge.net/p/omegat/feature-requests/1525/
+
+  - Use repository mappings in a local project
+  https://sourceforge.net/p/omegat/feature-requests/1448/
+
+  - Remove "Restore defaults" button where it has no function
+  https://sourceforge.net/p/omegat/feature-requests/1364/
+
+  - Upgrade to LanguageTool 3.6
+  https://sourceforge.net/p/omegat/feature-requests/1299/
 
   - Improve TBX parsing
   https://sourceforge.net/p/omegat/feature-requests/1268/
 
   - Support SRX format
 
-  - Build System: update gradle verison to 7.5.1
-  https://sourceforge.net/p/omegat/feature-requests/1691/
 
-  - Upgrade to LanguageTool 3.6
-  https://sourceforge.net/p/omegat/feature-requests/1299/
-
-  - Team feature: SSH support id_ecdsa and id_ed25519 for default key
-  https://sourceforge.net/p/omegat/feature-requests/1598/
+  - If multiple versions of the same plugin are present, only the latest is loaded
+  https://sourceforge.net/p/omegat/feature-requests/1519/
 
   Bug fixes:
+
+  - Languagetool crashes when reloading the project
+  https://sourceforge.net/p/omegat/bugs/1182/
+
+  - Stardict dictionary displays apostrophe as html entity code
+  https://sourceforge.net/p/omegat/bugs/1181/
+
+  - #1180 Font does not scale on HiDPI display on Linux
+  https://sourceforge.net/p/omegat/bugs/1180/
+
+  - build/release: Windows binary signature with PKCS#11 HSM
+  https://sourceforge.net/p/omegat/bugs/1179/
+
+  - Team project failed to merge changes with TMXMerge
+  https://sourceforge.net/p/omegat/bugs/1170/
+
+  - Team(git): when connecting new server, connection failed
+  https://sourceforge.net/p/omegat/bugs/1177/
+
+  - The COMPILE event is fired after the target commit
+  https://sourceforge.net/p/omegat/bugs/1176/
+
+  - Useless warning log from CSS parser library
+  https://sourceforge.net/p/omegat/bugs/1169/
+
+  - OmegaT cannot load a project and error dialog with FileSystemLoopException
+  https://sourceforge.net/p/omegat/bugs/1168/
+
+  - Error when trying to backup the project file on Windows
+  https://sourceforge.net/p/omegat/bugs/1166/
+
+  - Docker setup of Integration test is not working for Subversion
+  https://sourceforge.net/p/omegat/bugs/1165/
 
   - Project not loaded if it contains DTD internal entities
   https://sourceforge.net/p/omegat/bugs/1163/
@@ -44,21 +95,23 @@
   https://sourceforge.net/p/omegat/bugs/1154/
 
   - MT engines show JSON parser error as translated text
-  https://sourceforge.net/p/omegat/bugs/1141
+  https://sourceforge.net/p/omegat/bugs/1141/
 
   - OpenSSH new key format and ECDSA/ED25519 keys
   https://sourceforge.net/p/omegat/bugs/1107/
 
-Localization Updates:
+  - Lucene 5.2 does not work under WebStart
+  https://sourceforge.net/p/omegat/bugs/813/
 
-  - Japanese localization updated to 6.0 (UI, documentation)
+  - Content of notes elements are not displayed correctly with Xliff filter
+  https://sourceforge.net/p/omegat/bugs/1192/
 
 ----------------------------------------------------------------------
- OmegaT 6.0.0
+ OmegaT 6.0.0 (2023-06-19)
 ----------------------------------------------------------------------
   1 Enhancement
   1 Bug fixes
-  0 Localisation updates
+  11 Localisation updates
 ----------------------------------------------------------------------
 6.0.0 vs 5.8.0
 
@@ -71,13 +124,27 @@ Localization Updates:
   - Fixed "null" file names in search results when "Display: file names" checkbox was unchecked
   https://sourceforge.net/p/omegat/bugs/1154/
 
-----------------------------------------------------------------------
- OmegaT 5.8.0 (2023-04-01)
+  Localization Updates:
+
+  - Belarusian localization updated to 6.0 (UI, readme, Instant Start)
+  - Brazilian Portuguese localization updated to 6.0 (UI, readme)
+  - Catalan localization updated to 6.0 (UI, readme, documentation)
+  - Corsican localization updated to 6.0 (UI, readme)
+  - Dutch localization updated to 6.0 (UI, readme)
+  - French localization updated to 6.0 (UI, readme, documentation)
+  - Finnish localization updated to 6.0 (UI, readme)
+  - German localization updated to 6.0 (UI, readme, documentation)
+  - Italian localization updated to 6.0 (UI, readme)
+  - Japanese localization updated to 6.0 (UI, documentation)
+  - Ukrainian localization updated to 6.0 (UI, readme)
+
+---------------------------------------------------------------------
+ OmegaT 5.8.0 (2023-06-19)
 ----------------------------------------------------------------------
    4 Removed features
-  40 Enhancements
-  46 Bug fixes
-  9 Localization updates
+  41 Enhancements
+  49 Bug fixes
+  12 Localization updates
 ----------------------------------------------------------------------
 5.8.0 vs 5.7.1
 
@@ -101,6 +168,9 @@ Localization Updates:
   See Azure Translate V2/V3 Plugin project: https://github.com/omegat-org/azure-translate-plugin
 
   Implemented requests:
+
+  - Improve macOS integration
+  https://sourceforge.net/p/omegat/feature-requests/1702/
 
   - Help user to copy error message to clipboard
   https://sourceforge.net/p/omegat/feature-requests/1683/
@@ -370,12 +440,15 @@ Localization Updates:
 
   Localization Updates:
 
-  - Belarusian localization updated to 5.8 (UI, readme)
-  - Brazilian Portuguese localization updated to 5.8 (UI)
+  - Belarusian localization updated to 5.8 (UI, readme, Instant Start)
+  - Brazilian Portuguese localization updated to 5.8 (UI, readme)
   - Catalan localization updated to 5.8 (UI, readme, documentation)
   - Corsican localization updated to 5.8 (UI, readme)
-  - Dutch localization updated to 5.8 (UI)
-  - German localization updated to 5.8 (UI, readme)
+  - Dutch localization updated to 5.8 (UI, readme)
+  - Finnish localization updated to 5.8 (UI, readme)
+  - French localization updated to 5.8 (UI, readme, documentation)
+  - German localization updated to 5.8 (UI, readme, documentation)
+  - Italian localization updated to 5.8 (UI, readme)
   - Japanese localization updated to 5.8 (UI, readme, documentation)
   - Simplified Chinese localization updated to 5.8 (UI, readme)
   - Ukrainian localization updated to 5.8 (UI, readme)

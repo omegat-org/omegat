@@ -47,6 +47,7 @@ import org.omegat.util.xml.*;
  */
 @Deprecated
 @Ignore
+@SuppressWarnings("removal")
 public class XMLStreamReaderTest {
 
     @Test

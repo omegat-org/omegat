@@ -42,7 +42,7 @@
 	endterm="launch.with.command.line.title"
 	linkend="launch.with.command.line"/> section for details.</para>
 
-	<para>You can also click on <filename>OmegaT.jar</filename> to launch it
+	<para>You can also double-click on <filename>OmegaT.jar</filename> to launch it
 	directly if the <filename>.jar</filename> extension is associated with the
 	system Java launcher.</para>
 
@@ -80,8 +80,8 @@
 	<filename>Contents/</filename> folder.</para>
 
 	<note>
-	  <para>To access the files inside the <filename>OmegaT.app</filename>,
-	  package right-click on <filename>OmegaT.app</filename> and select “Show 
+	  <para>To access the files inside the <filename>OmegaT.app</filename>
+	  package, right-click on <filename>OmegaT.app</filename> and select “Show 
 	  Package Contents”.</para>
 
 	  <para>It is also possible to use <filename>OmegaT.app</filename> itself to
@@ -526,7 +526,7 @@ config-dir="path/to/new/configdir"</programlisting>
 						  <varlistentry id="launch.with.command.line.source.pattern.lt.pattern.gt.">
 							<term id="launch.with.command.line.source.pattern.lt.pattern.gt.title"><option>--source-pattern=</option><userinput>&lt;pattern&gt;</userinput></term>
 							<listitem>
-							  <para>A whitelist of regular expressions defining
+							  <para>An allowlist of regular expressions defining
 							  the source files to process. Remember that in
 							  regular expressions, the period and backslash
 							  character must be escaped: <code>\.</code> and

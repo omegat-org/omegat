@@ -35,7 +35,8 @@ import org.omegat.util.OConsts;
  *
  * @author Keith Godfrey
  */
-@Deprecated
+@Deprecated(forRemoval = true, since = "5.8")
+@SuppressWarnings("removal")
 public class XMLBlock {
     public XMLBlock() {
         reset();

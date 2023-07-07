@@ -47,6 +47,16 @@ import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.LogCommand;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
+import org.tmatesoft.svn.core.ISVNLogEntryHandler;
+import org.tmatesoft.svn.core.SVNDepth;
+import org.tmatesoft.svn.core.SVNException;
+import org.tmatesoft.svn.core.SVNLogEntry;
+import org.tmatesoft.svn.core.auth.ISVNAuthenticationManager;
+import org.tmatesoft.svn.core.wc.ISVNOptions;
+import org.tmatesoft.svn.core.wc.SVNClientManager;
+import org.tmatesoft.svn.core.wc.SVNRevision;
+import org.tmatesoft.svn.core.wc.SVNWCUtil;
+
 import org.omegat.core.Core;
 import org.omegat.core.data.ProjectTMX.CheckOrphanedCallback;
 import org.omegat.core.segmentation.SRX;
@@ -58,16 +68,6 @@ import org.omegat.util.Language;
 import org.omegat.util.ProjectFileStorage;
 import org.omegat.util.TMXWriter2;
 import org.omegat.util.TestPreferencesInitializer;
-import org.tmatesoft.svn.core.ISVNLogEntryHandler;
-import org.tmatesoft.svn.core.SVNDepth;
-import org.tmatesoft.svn.core.SVNException;
-import org.tmatesoft.svn.core.SVNLogEntry;
-import org.tmatesoft.svn.core.SVNURL;
-import org.tmatesoft.svn.core.auth.ISVNAuthenticationManager;
-import org.tmatesoft.svn.core.wc.ISVNOptions;
-import org.tmatesoft.svn.core.wc.SVNClientManager;
-import org.tmatesoft.svn.core.wc.SVNRevision;
-import org.tmatesoft.svn.core.wc.SVNWCUtil;
 
 import gen.core.project.RepositoryDefinition;
 import gen.core.project.RepositoryMapping;
@@ -119,7 +119,8 @@ public final class TestTeamIntegration {
     private TestTeamIntegration() {
     }
 
-    private final static Pattern URL_PATTERN = Pattern.compile("http(s)?://(?<username>.+?)(:(?<password>.+?))?@.+");
+    private final static Pattern URL_PATTERN = Pattern
+            .compile("(http(s)?|svn(\\+ssh)?)" + "://(?<username>.+?)(:(?<password>.+?))?@.+");
 
     static final String DIR = "/tmp/teamtest";
     static final List<String> REPO = new ArrayList<>();
@@ -153,7 +154,8 @@ public final class TestTeamIntegration {
 
         Run[] runs = new Run[THREADS.length];
         for (int i = 0; i < THREADS.length; i++) {
-            runs[i] = new Run(THREADS[i], new File(DIR, THREADS[i]), MAX_DELAY_SECONDS, REPO.get(i % REPO.size()));
+            runs[i] = new Run(THREADS[i], new File(DIR, THREADS[i]), MAX_DELAY_SECONDS,
+                    REPO.get(i % REPO.size()));
         }
         for (int i = 0; i < THREADS.length; i++) {
             runs[i].start();
@@ -212,8 +214,8 @@ public final class TestTeamIntegration {
         int tmxCount = 0;
         for (String rev : repo.listRevisions(startVersion)) {
             repo.checkout(rev);
-            tmx = new ProjectTMX(SRC_LANG, TRG_LANG, false, new File(repo.getDir(), "omegat/project_save.tmx"),
-                    checkOrphanedCallback);
+            tmx = new ProjectTMX(SRC_LANG, TRG_LANG, false,
+                    new File(repo.getDir(), "omegat/project_save.tmx"), checkOrphanedCallback);
 
             for (String th : data.keySet()) {
                 TMXEntry en = tmx.getDefaultTranslation(th);
@@ -336,6 +338,19 @@ public final class TestTeamIntegration {
                 }
             }
         }
+        if (type.equals("svn") && repoUrl.contains("@")) {
+            Matcher matcher = URL_PATTERN.matcher(repoUrl);
+            if (matcher.find()) {
+                String username = matcher.group("username");
+                if (!StringUtils.isEmpty(username)) {
+                    def.getOtherAttributes().put(new QName("svnUsername"), username);
+                }
+                String password = matcher.group("password");
+                if (!StringUtils.isEmpty(password)) {
+                    def.getOtherAttributes().put(new QName("svnPassword"), password);
+                }
+            }
+        }
         def.setUrl(repoUrl);
         m.setLocal(local);
         m.setRepository(remote);
@@ -348,11 +363,9 @@ public final class TestTeamIntegration {
     }
 
     static Team createRepo2(String url, File dir) throws Exception {
-        File repoDir = Stream.of(Objects.requireNonNull(new File(dir,
-                        RemoteRepositoryProvider.REPO_SUBDIR).listFiles()))
-                .filter(File::isDirectory)
-                .filter(TestTeamIntegration::isProjectDir)
-                .findFirst().get();
+        File repoDir = Stream
+                .of(Objects.requireNonNull(new File(dir, RemoteRepositoryProvider.REPO_SUBDIR).listFiles()))
+                .filter(File::isDirectory).filter(TestTeamIntegration::isProjectDir).findFirst().get();
         if (url.startsWith("git") || url.endsWith(".git")) {
             return new GitTeam(repoDir);
         } else if (url.startsWith("svn") || url.startsWith("http") || url.endsWith(".svn")) {
@@ -374,18 +387,17 @@ public final class TestTeamIntegration {
         Run(String source, File dir, int delay, final String repo) throws Exception {
             this.source = source;
             String cp = ManagementFactory.getRuntimeMXBean().getClassPath();
-            FileUtils.copyFile(new File(DIR + "/repo/omegat.project"), new File(DIR + "/" + source
-                    + "/omegat.project"));
-            if (! new File(DIR + "/" + source + "/omegat/").mkdirs()) {
+            FileUtils.copyFile(new File(DIR + "/repo/omegat.project"),
+                    new File(DIR + "/" + source + "/omegat.project"));
+            if (!new File(DIR + "/" + source + "/omegat/").mkdirs()) {
                 throw new Exception("Impossible to create test dir");
             }
 
             System.err.println("Execute: " + source + " " + (PROCESS_SECONDS * 1000) + " "
                     + dir.getAbsolutePath() + " " + repo + " " + delay + " " + SEG_COUNT);
             ProcessBuilder pb = new ProcessBuilder("java", "-Duser.name=" + source, "-cp", cp,
-                    TestTeamIntegrationChild.class.getName(), source,
-                    Long.toString(PROCESS_SECONDS * 1000L), dir.getAbsolutePath(), repo,
-                    Integer.toString(delay), Integer.toString(SEG_COUNT));
+                    TestTeamIntegrationChild.class.getName(), source, Long.toString(PROCESS_SECONDS * 1000L),
+                    dir.getAbsolutePath(), repo, Integer.toString(delay), Integer.toString(SEG_COUNT));
             pb.inheritIO();
             p = pb.start();
         }
@@ -480,20 +492,12 @@ public final class TestTeamIntegration {
 
         public SvnTeam(File dir, String url) throws Exception {
             this.dir = dir;
-            String predefinedUser = null;
-            String predefinedPass = null;
-            String userInfo = SVNURL.parseURIEncoded(url).getUserInfo();
-            if (userInfo != null) {
-                int inx = userInfo.indexOf(":");
-                if (inx > 0) {
-                    predefinedUser = userInfo.substring(0, inx);
-                    predefinedPass = userInfo.substring(inx + 1);
-                } else {
-                    predefinedUser = userInfo;
-                }
-            }
+            RepositoryDefinition def = getDef(url, "svn", "/", "/");
+            String predefinedUser = def.getOtherAttributes().get(new QName("svnUsername"));
+            String predefinedPass = def.getOtherAttributes().get(new QName("svnPassword"));
             ISVNOptions options = SVNWCUtil.createDefaultOptions(true);
-            ISVNAuthenticationManager authManager = new SVNAuthenticationManager(url, predefinedUser, predefinedPass, null);
+            ISVNAuthenticationManager authManager = new SVNAuthenticationManager(def, predefinedUser,
+                    predefinedPass, null);
             ourClientManager = SVNClientManager.newInstance(options, authManager);
         }
 

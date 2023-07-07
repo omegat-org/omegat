@@ -91,11 +91,10 @@ public class DokuWikiFilter extends AbstractFilter {
      * {@inheritDoc} Syntax see at http://www.dokuwiki.org/syntax
      */
     @Override
-    public void processFile(BufferedReader reader, BufferedWriter outfile, FilterContext fc) throws IOException {
-        LinebreakPreservingReader lbpr = new LinebreakPreservingReader(reader); // fix
-                                                                                // for
-                                                                                // bug
-                                                                                // 1462566
+    public void processFile(BufferedReader reader, BufferedWriter outfile, FilterContext fc)
+            throws IOException {
+        LinebreakPreservingReader lbpr = new LinebreakPreservingReader(reader);
+        // fix for bug 1462566
         String line;
         StringBuilder text = new StringBuilder();
 
@@ -122,7 +121,7 @@ public class DokuWikiFilter extends AbstractFilter {
                 continue;
             }
 
-            // list like "  * Abc" or "  - Abc"
+            // list like " * Abc" or " - Abc"
             if (line.startsWith("  *") || line.startsWith("  -")) {
                 writeTranslate(outfile, text, lbpr);
                 outfile.write(line.substring(0, 3));

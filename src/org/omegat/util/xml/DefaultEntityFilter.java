@@ -30,13 +30,13 @@ import java.util.HashMap;
 /**
  * Entity filter for XML.
  * <p>
- * Does XML Entity -> Symbol conversion on source file read and Symbol -> XML
- * Entity conversion on translation write.
+ * Does XML Entity -&gt; Symbol conversion on source file read and Symbol -&gt;
+ * XML Entity conversion on translation write.
  *
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
  */
-@Deprecated
+@Deprecated(forRemoval = true, since = "5.8")
 public class DefaultEntityFilter {
 
     private static final HashMap<Integer, String> CHAR_MAP;

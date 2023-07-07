@@ -156,8 +156,8 @@ public interface IFilter {
             ITranslateCallback callback) throws Exception;
 
     /**
-     * Align source and translated files. NB: this is not used for Tools->align
-     * files..., but for aligning in console mode
+     * Align a source and translated files. NB: this is not used for
+     * Tools-&gt;align files..., but for aligning in console mode
      *
      * @param inFile
      *            source file
@@ -169,7 +169,6 @@ public interface IFilter {
      *            processing context
      * @param callback
      *            callback for store aligned data
-     * @throws Exception
      */
     void alignFile(File inFile, File outFile, Map<String, String> config, FilterContext context,
             IAlignCallback callback) throws Exception;

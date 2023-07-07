@@ -46,7 +46,7 @@ import org.omegat.util.Preferences;
 public final class TipOfTheDayController {
 
     static final String INDEX_YAML = "tips.yaml";
-    private static final String TIPOFTHEDAY_SHOW_ON_STARTUP = "tipoftheday_show_on_startup";
+    private static final String TIPOFTHEDAY_SHOW_ON_STARTUP = "tipoftheday_show_on_start";
     private static final String TIPOFTHEDAY_CURRENT_TIP = "tipoftheday_current_tip";
 
     public static void loadPlugins() {
@@ -55,7 +55,8 @@ public final class TipOfTheDayController {
             public void onApplicationStartup() {
                 if (TipOfTheDayUtils.hasIndex()) {
                     initUI();
-                    initMenu();
+                    // FIXME: disable temporary for 6.1 release
+                    // initMenu();
                     SwingUtilities.invokeLater(() -> {
                         TipOfTheDayController.start(false);
                     });
@@ -96,7 +97,8 @@ public final class TipOfTheDayController {
         if (force) {
             showComponent();
         }
-        if (Preferences.isPreferenceDefault(TIPOFTHEDAY_SHOW_ON_STARTUP, true)) {
+        // FIXME: temporary default to be false in 6.1 development.
+        if (Preferences.isPreferenceDefault(TIPOFTHEDAY_SHOW_ON_STARTUP, false)) {
             showComponent();
         }
     }

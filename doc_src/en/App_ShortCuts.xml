@@ -395,16 +395,6 @@
             </row>
 
             <row>
-              <entry>Add Files...</entry>
-              <entry>projectImportMenuItem</entry>
-            </row>
-
-            <row>
-              <entry>Add MediaWiki Page...</entry>
-              <entry>projectWikiImportMenuItem</entry>
-            </row>
-
-            <row>
               <entry>Reload</entry>
               <entry>projectReloadMenuItem</entry>
               <entry namest="3" nameend="4">F5</entry>
@@ -422,6 +412,16 @@
               <entry>projectSaveMenuItem</entry>
               <entry>ctrl S</entry>
               <entry>meta S</entry>
+            </row>
+
+            <row>
+              <entry>Add Files...</entry>
+              <entry>projectImportMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Add MediaWiki Page...</entry>
+              <entry>projectWikiImportMenuItem</entry>
             </row>
 
             <row>
@@ -446,6 +446,16 @@
               <entry>projectSingleCompileMenuItem</entry>
               <entry>ctrl shift D</entry>
               <entry>meta shift D</entry>
+            </row>
+
+            <row>
+              <entry>Open MED Project...</entry>
+              <entry>projectMedOpenMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Create MED Project</entry>
+              <entry>projectMedCreateMenuItem</entry>
             </row>
 
             <row>
@@ -549,14 +559,14 @@
 
           <tbody>
             <row>
-              <entry>Undo Last Action</entry>
+              <entry>Undo</entry>
               <entry>editUndoMenuItem</entry>
               <entry>ctrl Z</entry>
               <entry>meta Z</entry>
             </row>
 
             <row>
-              <entry>Redo Last Action</entry>
+              <entry>Redo</entry>
               <entry>editRedoMenuItem</entry>
               <entry>ctrl Y</entry>
               <entry>meta Y</entry>
@@ -574,13 +584,6 @@
               <entry>editInsertTranslationMenuItem</entry>
               <entry>ctrl I</entry>
               <entry>meta I</entry>
-            </row>
-
-            <row>
-              <entry>Replace with Machine Translation</entry>
-              <entry>editOverwriteMachineTranslationMenuItem</entry>
-              <entry>ctrl M</entry>
-              <entry>meta M</entry>
             </row>
 
             <row>
@@ -605,7 +608,14 @@
             </row>
 
             <row>
-              <entry>Insert Missing Source Tags</entry>
+              <entry>Replace with Machine Translation</entry>
+              <entry>editOverwriteMachineTranslationMenuItem</entry>
+              <entry>ctrl M</entry>
+              <entry>meta M</entry>
+            </row>
+
+            <row>
+              <entry>Insert Missing Tags</entry>
               <entry>editTagPainterMenuItem</entry>
               <entry>ctrl shift T</entry>
               <entry>meta shift T</entry>
@@ -633,7 +643,7 @@
             </row>
 
             <row>
-              <entry>Search Project...</entry>
+              <entry>Search...</entry>
               <entry>editFindInProjectMenuItem</entry>
               <entry>ctrl F</entry>
               <entry>meta F</entry>
@@ -647,7 +657,7 @@
             </row>
 
             <row>
-              <entry>Search and Replace...</entry>
+              <entry>Replace...</entry>
               <entry>editReplaceInProjectMenuItem</entry>
               <entry>ctrl K</entry>
               <entry>meta K</entry>
@@ -660,75 +670,75 @@
             </row>
 
             <row>
-              <entry>Switch Case To/Lower Case</entry>
+              <entry>Switch Case to/lower case</entry>
               <entry>lowerCaseMenuItem</entry>
             </row>
 
             <row>
-              <entry>Switch Case To/Upper Case</entry>
+              <entry>Switch Case to/UPPER CASE</entry>
               <entry>upperCaseMenuItem</entry>
             </row>
 
             <row>
-              <entry>Switch Case To/Title Case</entry>
+              <entry>Switch Case to/Title Case</entry>
               <entry>titleCaseMenuItem</entry>
             </row>
 
             <row>
-              <entry>Switch Case To/Sentence Case</entry>
+              <entry>Switch Case to/Sentence case</entry>
               <entry>sentenceCaseMenuItem</entry>
             </row>
 
             <row>
-              <entry>Switch Case To/Cycle</entry>
+              <entry>Switch Case to/Cycle</entry>
               <entry>cycleSwitchCaseMenuItem</entry>
               <entry namest="3" nameend="4">shift F3</entry>
             </row>
 
             <row>
-              <entry>Select Previous Match</entry>
+              <entry>Select Match/Select Previous Match</entry>
               <entry>editSelectFuzzyPrevMenuItem</entry>
               <entry>ctrl UP</entry>
               <entry>meta UP</entry>
             </row>
 
             <row>
-              <entry>Select Next Match</entry>
+              <entry>Select Match/Select Next Match</entry>
               <entry>editSelectFuzzyNextMenuItem</entry>
               <entry>ctrl DOWN</entry>
               <entry>meta DOWN</entry>
             </row>
 
             <row>
-              <entry>Select Match #1</entry>
+              <entry>Select Match/Select Match #1</entry>
               <entry>editSelectFuzzy1MenuItem</entry>
               <entry>ctrl 1</entry>
               <entry>meta 1</entry>
             </row>
 
             <row>
-              <entry>Select Match #2</entry>
+              <entry>Select Match/Select Match #2</entry>
               <entry>editSelectFuzzy2MenuItem</entry>
               <entry>ctrl 2</entry>
               <entry>meta 2</entry>
             </row>
 
             <row>
-              <entry>Select Match #3</entry>
+              <entry>Select Match/Select Match #3</entry>
               <entry>editSelectFuzzy3MenuItem</entry>
               <entry>ctrl 3</entry>
               <entry>meta 3</entry>
             </row>
 
             <row>
-              <entry>Select Match #4</entry>
+              <entry>Select Match/Select Match #4</entry>
               <entry>editSelectFuzzy4MenuItem</entry>
               <entry>ctrl 4</entry>
               <entry>meta 4</entry>
             </row>
 
             <row>
-              <entry>Select Match #5</entry>
+              <entry>Select Match/Select Match #5</entry>
               <entry>editSelectFuzzy5MenuItem</entry>
               <entry>ctrl 5</entry>
               <entry>meta 5</entry>
@@ -775,14 +785,14 @@
             </row>
 
             <row>
-              <entry>Remove translation</entry>
+              <entry>Remove Translation</entry>
               <entry>editRegisterUntranslatedMenuItem</entry>
               <entry>ctrl shift X</entry>
               <entry>meta shift X</entry>
             </row>
 
             <row>
-              <entry>Set empty translation</entry>
+              <entry>Set Empty Translation</entry>
               <entry>editRegisterEmptyMenuItem</entry>
             </row>
 
@@ -798,7 +808,7 @@
 
       <table id="app.shortcuts.lists.function.codes.goto.menu.table">
         <title
-        id="app.shortcuts.lists.function.codes.goto.menu.table.title">GoTo
+        id="app.shortcuts.lists.function.codes.goto.menu.table.title">Go To
         Menu</title>
 
         <tgroup cols="4" colsep="1">
@@ -881,38 +891,31 @@
             </row>
 
             <row>
-              <entry>Next Segment from tm/auto/</entry>
+              <entry>Autopopulated Segments/Next Segment from tm/auto/</entry>
               <entry>gotoNextXAutoMenuItem</entry>
               <entry>ctrl alt COMMA</entry>
               <entry>meta alt COMMA</entry>
             </row>
 
             <row>
-              <entry>Previous Segment from tm/auto/</entry>
+              <entry>Autopopulated Segments/Previous Segment from tm/auto/</entry>
               <entry>gotoPrevXAutoMenuItem</entry>
               <entry>ctrl alt shift COMMA</entry>
               <entry>meta alt shift COMMA</entry>
             </row>
 
             <row>
-              <entry>Next Segment from tm/enforce/</entry>
+              <entry>Autopopulated Segments/Next Segment from tm/enforce/</entry>
               <entry>gotoNextXEnforcedMenuItem</entry>
               <entry>ctrl alt PERIOD</entry>
               <entry>meta alt PERIOD</entry>
             </row>
 
             <row>
-              <entry>Previous Segment from tm/enforce/</entry>
+              <entry>Autopopulated Segments/Previous Segment from tm/enforce/</entry>
               <entry>gotoPrevXEnforcedMenuItem</entry>
               <entry>ctrl alt shift PERIOD</entry>
               <entry>meta alt shift PERIOD</entry>
-            </row>
-
-            <row>
-              <entry>Forward in History</entry>
-              <entry>gotoHistoryForwardMenuItem</entry>
-              <entry>ctrl shift N</entry>
-              <entry>meta shift N</entry>
             </row>
 
             <row>
@@ -923,14 +926,21 @@
             </row>
 
             <row>
-              <entry>Notes Pane</entry>
+              <entry>Forward in History</entry>
+              <entry>gotoHistoryForwardMenuItem</entry>
+              <entry>ctrl shift N</entry>
+              <entry>meta shift N</entry>
+            </row>
+
+            <row>
+              <entry>Notepad</entry>
               <entry>gotoNotesPanelMenuItem</entry>
               <entry>ctrl alt 9</entry>
               <entry>meta alt 9</entry>
             </row>
 
             <row>
-              <entry>Editor Pane</entry>
+              <entry>Editor</entry>
               <entry>gotoEditorPanelMenuItem</entry>
               <entry>ctrl alt 0</entry>
               <entry>meta alt 0</entry>
@@ -962,17 +972,17 @@
 
           <tbody>
             <row>
-              <entry>Mark Translated Segments</entry>
+              <entry>Highlight Translated Segments</entry>
               <entry>viewMarkTranslatedSegmentsCheckBoxMenuItem</entry>
             </row>
 
             <row>
-              <entry>Mark Untranslated Segments</entry>
+              <entry>Highlight Untranslated Segments</entry>
               <entry>viewMarkUntranslatedSegmentsCheckBoxMenuItem</entry>
             </row>
 
             <row>
-              <entry>Mark Paragraph Delimitations</entry>
+              <entry>Display Paragraph Delimitations</entry>
               <entry>viewMarkParagraphStartCheckBoxMenuItem</entry>
             </row>
 
@@ -982,32 +992,32 @@
             </row>
 
             <row>
-              <entry>Mark Repeated Segments</entry>
+              <entry>Highlight Repeated Segments</entry>
               <entry>viewMarkNonUniqueSegmentsCheckBoxMenuItem</entry>
             </row>
 
             <row>
-              <entry>Mark Segments with Notes</entry>
+              <entry>Highlight Segments with Notes</entry>
               <entry>viewMarkNotedSegmentsCheckBoxMenuItem</entry>
             </row>
 
             <row>
-              <entry>Mark Non-Breakable Spaces</entry>
+              <entry>Display Non-Breakable Spaces</entry>
               <entry>viewMarkNBSPCheckBoxMenuItem</entry>
             </row>
 
             <row>
-              <entry>Mark Whitespace</entry>
+              <entry>Display Whitespace</entry>
               <entry>viewMarkWhitespaceCheckBoxMenuItem</entry>
             </row>
 
             <row>
-              <entry>Mark Bidirectional Algorithm Control Characters</entry>
+              <entry>Display Bidirectional Algorithm Control Characters</entry>
               <entry>viewMarkBidiCheckBoxMenuItem</entry>
             </row>
 
             <row>
-              <entry>Mark Auto-Populated Segments</entry>
+              <entry>Highlight Auto-Populated Segments</entry>
               <entry>viewMarkAutoPopulatedCheckBoxMenuItem</entry>
             </row>
 
@@ -1017,28 +1027,33 @@
             </row>
 
             <row>
-              <entry>Language Checker</entry>
+              <entry>Mark Language Checker Issues</entry>
               <entry>viewMarkLanguageCheckerCheckBoxMenuItem</entry>
             </row>
 
             <row>
-              <entry>Aggressive Font Fallback</entry>
+              <entry>Use Aggressive Font Fallback</entry>
               <entry>viewMarkFontFallbackCheckBoxMenuItem</entry>
             </row>
 
             <row>
-              <entry>Modification Info/Display None</entry>
+              <entry>Display Modification Info/None</entry>
               <entry>viewDisplayModificationInfoNoneRadioButtonMenuItem</entry>
             </row>
 
             <row>
-              <entry>Modification Info/Display for Current Segment</entry>
+              <entry>Display Modification Info/for Current Segment</entry>
               <entry>viewDisplayModificationInfoSelectedRadioButtonMenuItem</entry>
             </row>
 
             <row>
-              <entry>Modification Info/Display All</entry>
+              <entry>Display Modification Info/for All Segments</entry>
               <entry>viewDisplayModificationInfoAllRadioButtonMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Restore OmegaT Window</entry>
+              <entry>viewRestoreGUIMenuItem</entry>
             </row>
           </tbody>
         </tgroup>
@@ -1073,7 +1088,7 @@
             </row>
 
             <row>
-              <entry>Check Issues for Current Document</entry>
+              <entry>Check Issues for Current File</entry>
               <entry>toolsCheckIssuesCurrentFileMenuItem</entry>
             </row>
 
@@ -1135,44 +1150,43 @@
             </row>
 
             <row>
-              <entry>Machine Translate/Automatically Fetch Translations</entry>
+              <entry>Machine Translation/Automatically Fetch Translations</entry>
               <entry>optionsMTAutoFetchCheckboxMenuItem</entry>
             </row>
 
             <row>
-              <entry>Glossary/Use Fuzzy Matching for Glossary Entries</entry>
+              <entry>Glossaries/Use Fuzzy Matching</entry>
               <entry>optionsGlossaryFuzzyMatchingCheckBoxMenuItem</entry>
             </row>
 
             <row>
-              <entry>Dictionary/Use Fuzzy Matching for Dictionary
-              Entries</entry>
+              <entry>Dictionaries/Use Fuzzy Matching</entry>
               <entry>optionsDictionaryFuzzyMatchingCheckBoxMenuItem</entry>
             </row>
 
             <row>
-              <entry>Auto-completion/Show Relevant Suggestions
+              <entry>Auto-Completion/Show Relevant Suggestions
               Automatically</entry>
               <entry>optionsAutoCompleteShowAutomaticallyItem</entry>
             </row>
 
             <row>
-              <entry>Auto-completion/History Completion</entry>
+              <entry>Auto-Completion/History Completion</entry>
               <entry>optionsAutoCompleteHistoryCompletionMenuItem</entry>
             </row>
 
             <row>
-              <entry>Auto-completion/History Prediction</entry>
+              <entry>Auto-Completion/History Prediction</entry>
               <entry>optionsAutoCompleteHistoryPredictionMenuItem</entry>
             </row>
 
             <row>
-              <entry>File Filters...</entry>
+              <entry>Global File Filters...</entry>
               <entry>optionsSetupFileFiltersMenuItem</entry>
             </row>
 
             <row>
-              <entry>Segmentation...</entry>
+              <entry>GLobal Segmentation Rules...</entry>
               <entry>optionsSentsegMenuItem</entry>
             </row>
 
@@ -1182,7 +1196,7 @@
             </row>
 
             <row>
-              <entry>Access Configuration Folder</entry>
+              <entry>Access Configuration Folder...</entry>
               <entry>optionsAccessConfigDirMenuItem</entry>
             </row>
           </tbody>
@@ -1382,7 +1396,7 @@
               <entry>Skip Previous Token</entry>
               <entry>editorSkipPrevToken</entry>
               <entry>ctrl LEFT</entry>
-              <entry>alt RIGHT</entry>
+              <entry>alt LEFT</entry>
             </row>
 
             <row>

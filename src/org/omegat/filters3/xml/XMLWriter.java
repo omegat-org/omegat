@@ -66,10 +66,12 @@ public class XMLWriter extends Writer {
     /**
      * Creates new XMLWriter.
      *
-     * @param fileName
+     * @param file
      *            file name to write to
      * @param encoding
      *            encoding to write a file in
+     * @param eol
+     *            End-Of-Line character
      */
     public XMLWriter(File file, String encoding, String eol)
             throws FileNotFoundException, UnsupportedEncodingException {
@@ -93,7 +95,9 @@ public class XMLWriter extends Writer {
         this.eol = eol;
     }
 
-    /** The minimal size of already written HTML that will be appended headers */
+    /**
+     * The minimal size of already written HTML that will be appended headers
+     */
     private static final int MIN_HEADERED_BUFFER_SIZE = 4096;
 
     /** The maximal size of a buffer before flush */

@@ -64,11 +64,13 @@ public class InlineTagHandler {
     }
 
     /**
-     * Handle "bpt" tag start for TMX. OmegaT internal tag number
-     * will be based off the x attr (if provided).
+     * Handle "bpt" tag start for TMX. OmegaT internal tag number will be based
+     * off the x attr (if provided).
      *
-     * @param i TMX i attribute value
-     * @param x TMX x attribute value (can be null)
+     * @param i
+     *            TMX i attribute value
+     * @param x
+     *            TMX x attribute value (can be null)
      */
     public void startBPT(String i, String x) {
         if (i == null) {
@@ -81,7 +83,8 @@ public class InlineTagHandler {
     }
 
     /**
-     * Handle "it" tag start for TMX. OmegaT internal tag number will be based off the x attr (if provided).
+     * Handle "it" tag start for TMX. OmegaT internal tag number will be based
+     * off the x attr (if provided).
      *
      * @param x
      *            TMX x attribute value (can be null)
@@ -91,10 +94,9 @@ public class InlineTagHandler {
     }
 
     /**
-     * Handle "ph" tag start for TMX. OmegaT internal tag number will be based off the x attr (if provided).
+     * Handle "ph" tag start for TMX. OmegaT internal tag number will be based
+     * off the x attr (if provided).
      *
-     * @param i
-     *            TMX i attribute value
      * @param x
      *            TMX x attribute value (can be null)
      */
@@ -103,10 +105,9 @@ public class InlineTagHandler {
     }
 
     /**
-     * Handle "bpt" tag start. Identifier will be first non-null
-     * attribute in provided attributes. OmegaT internal tag number
-     * will be its index in the list of tags in the segment (starting
-     * with 0).
+     * Handle "bpt" tag start. Identifier will be first non-null attribute in
+     * provided attributes. OmegaT internal tag number will be its index in the
+     * list of tags in the segment (starting with 0).
      *
      * @param attributeValues
      *            attributes to identify pairs
@@ -302,7 +303,8 @@ public class InlineTagHandler {
     }
 
     /**
-     * Returns whether the current tag is externally matched (has a TMX "x" attribute)
+     * Returns whether the current tag is externally matched (has a TMX "x"
+     * attribute)
      */
     public boolean getIsExternallyMatched() {
         return (currentI != null && pairTagsExternalMatch.containsKey(currentI)) || currentX != null;

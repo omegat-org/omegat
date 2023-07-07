@@ -136,7 +136,7 @@ public class FindMatchesTest {
         Core.setSegmenter(new Segmenter(new SRX()));
         IStopped iStopped = () -> false;
         FindMatches finder = new FindMatches(project, OConsts.MAX_NEAR_STRINGS, true, false);
-	// Search source "XXx" in en-US
+        // Search source "XXx" in en-US
         List<NearString> result = finder.search("XXX", true, true, iStopped);
         // There should be three entries.
         assertEquals("XXx", result.get(0).source);  // should be en-US.

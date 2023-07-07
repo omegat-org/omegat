@@ -54,16 +54,15 @@ public class AutotextTableModel extends AbstractTableModel {
     }
 
     /**
-     * Store the data to the specified autotext list. All items, where the target is not empty are stored.
-     * @param autotext the target list
+     * Store the data to the specified autotext list. All items, where the
+     * target is not empty are stored.
      */
     public List<AutotextItem> getData() {
         return data.stream().filter(item -> !StringUtil.isEmpty(item.target)).collect(Collectors.toList());
     }
 
     private String[] columnNames = { OStrings.getString("AC_AUTOTEXT_ABBREVIATION"),
-        OStrings.getString("AC_AUTOTEXT_TEXT"),
-        OStrings.getString("AC_AUTOTEXT_COMMENT") };
+            OStrings.getString("AC_AUTOTEXT_TEXT"), OStrings.getString("AC_AUTOTEXT_COMMENT") };
 
     @Override
     public int getRowCount() {
@@ -91,7 +90,7 @@ public class AutotextTableModel extends AbstractTableModel {
 
     @Override
     public String getColumnName(int col) {
-      return columnNames[col];
+        return columnNames[col];
     }
 
     @Override
@@ -112,8 +111,11 @@ public class AutotextTableModel extends AbstractTableModel {
 
     /**
      * add a new row.
-     * @param item what to add
-     * @param position at which position
+     * 
+     * @param item
+     *            what to add
+     * @param position
+     *            at which position
      */
     public int addRow(AutotextItem item, int position) {
         int newPosition = position == -1 ? data.size() : position;
@@ -124,7 +126,9 @@ public class AutotextTableModel extends AbstractTableModel {
 
     /**
      * remove a row.
-     * @param position where from
+     * 
+     * @param position
+     *            where from
      */
     public void removeRow(int position) {
         data.remove(position);

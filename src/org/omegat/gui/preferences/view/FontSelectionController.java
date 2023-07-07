@@ -6,6 +6,7 @@
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2008 Didier Briel
                2016 Aaron Madlon-Kay
+               2023 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -31,12 +32,15 @@ import java.awt.Font;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComponent;
+import javax.swing.plaf.FontUIResource;
 
 import org.omegat.core.CoreEvents;
 import org.omegat.gui.preferences.BasePreferencesController;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
+import org.omegat.util.gui.FontUtil;
+import org.omegat.util.gui.UIScale;
 
 /**
  * @author Maxym Mykhalchuk
@@ -46,7 +50,6 @@ import org.omegat.util.StaticUtils;
 public class FontSelectionController extends BasePreferencesController {
 
     private FontSelectionPanel panel;
-    private Font oldFont;
 
     @Override
     public JComponent getGui() {
@@ -79,18 +82,18 @@ public class FontSelectionController extends BasePreferencesController {
 
     @Override
     protected void initFromPrefs() {
-        String fontName = Preferences.getPreferenceDefault(Preferences.TF_SRC_FONT_NAME, Preferences.TF_FONT_DEFAULT);
-        int fontSize = Preferences.getPreferenceDefault(Preferences.TF_SRC_FONT_SIZE, Preferences.TF_FONT_SIZE_DEFAULT);
-        oldFont = new Font(fontName, Font.PLAIN, fontSize);
-        panel.previewTextArea.setFont(oldFont);
-        panel.fontComboBox.setSelectedItem(oldFont.getName());
-        panel.sizeSpinner.setValue(oldFont.getSize());
+        String configuredFontName = FontUtil.getConfiguredFontName();
+        int confguredFontSize = FontUtil.getConfiguredFontSize();
+        panel.fontComboBox.setSelectedItem(configuredFontName);
+        panel.sizeSpinner.setValue(confguredFontSize);
+        panel.previewTextArea.setFont(getSelectedFont());
         int dictionaryFontSize = Preferences.getPreferenceDefault(Preferences.TF_DICTIONARY_FONT_SIZE,
-                oldFont.getSize());
+                confguredFontSize);
         panel.sizeDictionarySpinner.setValue(dictionaryFontSize);
-        panel.applyToProjectFilesCheckBox.setSelected(Preferences.isPreference(Preferences.PROJECT_FILES_USE_FONT));
-        panel.applyToDictionaryPaneCheckBox.setSelected(
-                Preferences.isPreferenceDefault(Preferences.DICTIONARY_USE_FONT, true));
+        panel.applyToProjectFilesCheckBox
+                .setSelected(Preferences.isPreference(Preferences.PROJECT_FILES_USE_FONT));
+        panel.applyToDictionaryPaneCheckBox
+                .setSelected(Preferences.isPreferenceDefault(Preferences.DICTIONARY_USE_FONT, true));
         if (panel.applyToDictionaryPaneCheckBox.isSelected()) {
             panel.sizeDictionarySpinner.setValue(panel.sizeSpinner.getValue());
             panel.sizeDictionarySpinner.setEnabled(false);
@@ -99,39 +102,47 @@ public class FontSelectionController extends BasePreferencesController {
 
     @Override
     public void restoreDefaults() {
-        oldFont = new Font(Preferences.TF_FONT_DEFAULT, Font.PLAIN, Preferences.TF_FONT_SIZE_DEFAULT);
-        panel.previewTextArea.setFont(oldFont);
+        Font oldFont = FontUtil.getDefaultFont();
+        int fontSize = oldFont.getSize();
         panel.fontComboBox.setSelectedItem(oldFont.getName());
-        panel.sizeSpinner.setValue(oldFont.getSize());
-        panel.sizeDictionarySpinner.setValue(oldFont.getSize());
+        panel.sizeSpinner.setValue(fontSize);
+        panel.previewTextArea.setFont(getSelectedFont());
+        panel.sizeDictionarySpinner.setValue(fontSize);
         panel.applyToProjectFilesCheckBox.setSelected(false);
         panel.applyToDictionaryPaneCheckBox.setSelected(true);
         panel.sizeDictionarySpinner.setEnabled(false);
     }
 
-    private Font getSelectedFont() {
-        return new Font((String) panel.fontComboBox.getSelectedItem(), Font.PLAIN,
-                ((Number) panel.sizeSpinner.getValue()).intValue());
+    /**
+     * Create scaled composite font.
+     * @return
+     */
+    private FontUIResource getSelectedFont() {
+        return FontUtil.createCompositeFont((String) panel.fontComboBox.getSelectedItem(), Font.PLAIN,
+                UIScale.scale(((Number) panel.sizeSpinner.getValue()).intValue()));
     }
 
     @Override
     public void persist() {
         boolean applyToProjFiles = panel.applyToProjectFilesCheckBox.isSelected();
         boolean applyToDicitonaryPane = panel.applyToDictionaryPaneCheckBox.isSelected();
-        Font newFont = getSelectedFont();
-        if (!newFont.equals(oldFont)
+        String newFontName = (String) panel.fontComboBox.getSelectedItem();
+        int newFontSize = ((Number) panel.sizeSpinner.getValue()).intValue();
+        if (!FontUtil.getConfiguredFontName().equals(newFontName)
+                || newFontSize != FontUtil.getConfiguredFontSize()
                 || applyToProjFiles != Preferences.isPreference(Preferences.PROJECT_FILES_USE_FONT)
                 || applyToDicitonaryPane != Preferences.isPreference(Preferences.DICTIONARY_USE_FONT)) {
             Preferences.setPreference(Preferences.PROJECT_FILES_USE_FONT, applyToProjFiles);
-            Preferences.setPreference(Preferences.TF_SRC_FONT_NAME, newFont.getName());
-            Preferences.setPreference(Preferences.TF_SRC_FONT_SIZE, newFont.getSize());
+            Preferences.setPreference(Preferences.TF_SRC_FONT_NAME, newFontName);
             Preferences.setPreference(Preferences.DICTIONARY_USE_FONT, applyToDicitonaryPane);
+            Preferences.setPreference(Preferences.TF_SRC_FONT_SIZE, newFontSize);
             if (applyToDicitonaryPane) {
-                Preferences.setPreference(Preferences.TF_DICTIONARY_FONT_SIZE, newFont.getSize());
+                Preferences.setPreference(Preferences.TF_DICTIONARY_FONT_SIZE, newFontSize);
             } else {
-                Preferences.setPreference(Preferences.TF_DICTIONARY_FONT_SIZE, panel.sizeDictionarySpinner.getValue());
+                Preferences.setPreference(Preferences.TF_DICTIONARY_FONT_SIZE,
+                        panel.sizeDictionarySpinner.getValue());
             }
-            CoreEvents.fireFontChanged(newFont);
+            CoreEvents.fireFontChanged(getSelectedFont());
         }
     }
 }

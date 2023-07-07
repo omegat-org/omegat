@@ -35,7 +35,10 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.nio.charset.Charset;
+import java.nio.file.AccessDeniedException;
+import java.nio.file.FileSystemLoopException;
 import java.nio.file.FileVisitOption;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -54,6 +57,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.Set;
+import java.util.TimeZone;
 import java.util.function.BiPredicate;
 import java.util.function.Function;
 import java.util.regex.Matcher;
@@ -63,6 +67,7 @@ import java.util.stream.Stream;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
+import org.omegat.core.Core;
 
 /**
  * Files processing utilities.
@@ -127,15 +132,26 @@ public final class FileUtil {
      * @return Backup file.
      */
     public static File backupFile(File original) {
-        long fileMillis = original.lastModified();
-        String str = new SimpleDateFormat("yyyyMMddHHmm").format(new Date(fileMillis));
-        File backup = new File(original.getPath() + "." + str + OConsts.BACKUP_EXTENSION);
+        File backup = new File(original.getParentFile(), getBackupFilename(original));
         try {
             FileUtils.copyFile(original, backup);
         } catch (IOException ex) {
             Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_CREATE_BACKUP_FILE", original.getName());
         }
         return backup;
+    }
+
+    /**
+     * Generates a name for the file to be backuped, in the form of <code>[original_name].yyyyMMddHHmm.bak</code>.
+     * 
+     * @param original the file to be backuped
+     * @return the name of the backuped file
+     */
+    public static String getBackupFilename(File original) {
+        final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmm");
+        dateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
+        return String.format("%s.%s%s", original.getName(),
+                dateFormat.format(new Date(original.lastModified())), OConsts.BACKUP_EXTENSION);
     }
 
     /**
@@ -287,19 +303,14 @@ public final class FileUtil {
     public static String computeRelativePath(File rootDir, File file) throws IOException {
         String rootAbs = rootDir.getAbsolutePath().replace('\\', '/') + '/';
         String fileAbs = file.getAbsolutePath().replace('\\', '/');
-
-        switch (Platform.getOsType()) {
-        case WIN32:
-        case WIN64:
+        if (Platform.isWindows) {
             if (!fileAbs.toUpperCase().startsWith(rootAbs.toUpperCase())) {
                 throw new IOException("File '" + file + "' is not under dir '" + rootDir + "'");
             }
-            break;
-        default:
+        } else {
             if (!fileAbs.startsWith(rootAbs)) {
                 throw new IOException("File '" + file + "' is not under dir '" + rootDir + "'");
             }
-            break;
         }
         return fileAbs.substring(rootAbs.length());
     }
@@ -437,11 +448,11 @@ public final class FileUtil {
      * required for conversion like 'C:\zzz' into '/zzz' for be real absolute in
      * Linux.
      */
-    public static String absoluteForSystem(String path, Platform.OsType currentOsType) {
+    public static String absoluteForSystem(String path) {
         path = path.replace('\\', '/');
         Matcher m = RE_ABSOLUTE_WINDOWS.matcher(path);
         if (m.matches()) {
-            if (currentOsType != Platform.OsType.WIN32 && currentOsType != Platform.OsType.WIN64) {
+            if (!Platform.isWindows) {
                 // Windows' absolute file on non-Windows system
                 return m.group(1);
             }
@@ -468,14 +479,31 @@ public final class FileUtil {
         Path root = rootDir.toPath();
         Pattern[] includeMasks = FileUtil.compileFileMasks(includes);
         Pattern[] excludeMasks = FileUtil.compileFileMasks(excludes);
-        BiPredicate<Path, BasicFileAttributes> pred = (p, attr) -> {
-            return p.toFile().isFile()
-                    && FileUtil.checkFileInclude(root.relativize(p).toString(), includeMasks, excludeMasks);
-        };
-        try (Stream<Path> stream = Files.find(root, Integer.MAX_VALUE, pred, FileVisitOption.FOLLOW_LINKS)) {
-            return stream.map(p -> root.relativize(p).toString().replace('\\', '/'))
-                    .sorted(StreamUtil.localeComparator(Function.identity())).collect(Collectors.toList());
+        BiPredicate<Path, BasicFileAttributes> pred = (p, attr) -> attr.isRegularFile()
+                && FileUtil.checkFileInclude(root.relativize(p).toString(), includeMasks, excludeMasks);
+        int maxDepth = Integer.MAX_VALUE;
+        List<String> result = new ArrayList<>();
+        try (Stream<Path> stream = Files.find(root, maxDepth, pred, FileVisitOption.FOLLOW_LINKS)) {
+            try {
+                stream.forEachOrdered(p -> result.add(root.relativize(p).toString().replace('\\', '/')));
+            } catch (UncheckedIOException e) {
+                IOException ioe = e.getCause();
+                if (ioe instanceof FileSystemLoopException) {
+                    // source file folder has a looped symbolic links
+                    String p = ((FileSystemLoopException) ioe).getFile();
+                    Core.getMainWindow().displayWarningRB("TF_LOAD_WARN_SOURCE_LOOP_EXCEPTION",null, p);
+                    Log.logWarningRB("TF_LOAD_WARN_SOURCE_LOOP_EXCEPTION", p);
+                } else if (ioe instanceof AccessDeniedException) {
+                    String p = ((AccessDeniedException) ioe).getFile();
+                    Core.getMainWindow().displayWarningRB("TF_LOAD_WARN_FILE_ACCESS", p);
+                    Log.logWarningRB("TF_LOAD_WARN_FILE_ACCESS", p);
+                } else {
+                    throw ioe; // propagate to caller
+                }
+            }
         }
+        Collections.sort(result);
+        return result;
     }
 
     public static boolean checkFileInclude(String filePath, Pattern[] includes, Pattern[] excludes) {

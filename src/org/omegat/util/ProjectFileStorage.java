@@ -32,13 +32,31 @@
 package org.omegat.util;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Map;
 
+import javax.xml.namespace.QName;
+import javax.xml.stream.XMLInputFactory;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.databind.MapperFeature;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.SerializerProvider;
+import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.fasterxml.jackson.databind.ser.std.StdSerializer;
+import com.fasterxml.jackson.databind.type.MapType;
+import com.fasterxml.jackson.databind.type.TypeFactory;
+import com.fasterxml.jackson.dataformat.xml.XmlFactory;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
+import com.fasterxml.jackson.module.jaxb.JaxbAnnotationModule;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
+
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.master.PluginUtils;
@@ -47,6 +65,7 @@ import gen.core.project.Masks;
 import gen.core.project.Omegat;
 import gen.core.project.Project;
 import gen.core.project.Project.Repositories;
+import gen.core.project.RepositoryDefinition;
 
 /**
  * Class that reads and saves project definition file.
@@ -59,6 +78,31 @@ import gen.core.project.Project.Repositories;
  * @author Guido Leenders
  */
 public final class ProjectFileStorage {
+
+    private static final XmlMapper mapper;
+
+    static {
+        final XMLInputFactory xmlInputFactory = XMLInputFactory.newInstance();
+        // You should NOT use XMLInputFactor.getXMLInputFactory
+        // that returns system default object.
+        // Modifying a global object leads breakage of SuperTMXMerge
+        // library.
+        // https://sourceforge.net/p/omegat/bugs/1170/
+        xmlInputFactory.setProperty(XMLInputFactory.SUPPORT_DTD, Boolean.TRUE);
+        XmlFactory xmlFactory = new XmlFactory(xmlInputFactory);
+        mapper = XmlMapper.builder(xmlFactory).defaultUseWrapper(false)
+                .enable(MapperFeature.USE_WRAPPER_NAME_AS_PROPERTY_NAME).build();
+        mapper.registerModule(new JaxbAnnotationModule());
+        SimpleModule module = new SimpleModule();
+        TypeFactory typeFactory = mapper.getTypeFactory();
+        final RepositoryDefinition def = new RepositoryDefinition();
+        module.addSerializer(new ProjectOtherAttributesSerializer(typeFactory
+                .constructMapType(def.getOtherAttributes().getClass(), QName.class, String.class)));
+        mapper.registerModule(module);
+        mapper.configure(ToXmlGenerator.Feature.WRITE_XML_DECLARATION, true);
+        mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+        mapper.enable(SerializationFeature.INDENT_OUTPUT);
+    }
 
     private ProjectFileStorage() {
     }
@@ -73,7 +117,6 @@ public final class ProjectFileStorage {
     }
 
     public static Omegat parseProjectFile(byte[] projectFile) throws Exception {
-        XmlMapper mapper = JaxbXmlMapper.getXmlMapper();
         return mapper.readValue(projectFile, Omegat.class);
     }
 
@@ -124,10 +167,10 @@ public final class ProjectFileStorage {
 
         ProjectProperties result = new ProjectProperties(projectDir);
 
-        String curVersion = om.getProject().getVersion();
-        if (!OConsts.PROJ_CUR_VERSION.equals(curVersion)) {
-            throw new TranslationException(StringUtil
-                    .format(OStrings.getString("PFR_ERROR_UNSUPPORTED_PROJECT_VERSION"), curVersion));
+        if (!OConsts.PROJ_CUR_VERSION.equals(om.getProject().getVersion())) {
+            throw new TranslationException(
+                    StringUtil.format(OStrings.getString("PFR_ERROR_UNSUPPORTED_PROJECT_VERSION"),
+                            om.getProject().getVersion()));
         }
 
         result.setTargetRoot(normalizeLoadedPath(om.getProject().getTargetDir(), OConsts.DEFAULT_TARGET));
@@ -189,10 +232,16 @@ public final class ProjectFileStorage {
     }
 
     /**
-     * Saves project file to disk.
+     * Saves project file to disk to default `omegat.project` file.
      */
     public static void writeProjectFile(ProjectProperties props) throws Exception {
-        File outFile = new File(props.getProjectRoot(), OConsts.FILE_PROJECT);
+        writeProjectFile(new File(props.getProjectRoot(), OConsts.FILE_PROJECT), props);
+    }
+
+    /**
+     * Saves project file to disk.
+     */
+    public static void writeProjectFile(File outFile, ProjectProperties props) throws Exception {
         String root = outFile.getAbsoluteFile().getParent();
 
         Omegat om = new Omegat();
@@ -233,7 +282,6 @@ public final class ProjectFileStorage {
             om.getProject().getRepositories().getRepository().addAll(props.getRepositories());
         }
 
-        XmlMapper mapper = JaxbXmlMapper.getXmlMapper();
         mapper.writeValue(outFile, om);
     }
 
@@ -340,5 +388,29 @@ public final class ProjectFileStorage {
             path = path.substring(0, path.length() - 1);
         }
         return path;
+    }
+
+    @SuppressWarnings("serial")
+    protected static class ProjectOtherAttributesSerializer extends StdSerializer<Map<QName, String>> {
+
+        protected ProjectOtherAttributesSerializer(MapType type) {
+            super(type);
+        }
+
+        @Override
+        public void serialize(final Map<QName, String> value, final JsonGenerator gen,
+                final SerializerProvider provider) throws IOException {
+            if (value.size() > 0) {
+                gen.writeStartObject();
+                for (Map.Entry<QName, String> item : value.entrySet()) {
+                    if (item.getValue() == null) {
+                        continue;
+                    }
+                    gen.writeFieldName(item.getKey().getLocalPart());
+                    gen.writeString(item.getValue());
+                }
+                gen.writeEndObject();
+            }
+        }
     }
 }

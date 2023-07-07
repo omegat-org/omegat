@@ -29,7 +29,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-import org.languagetool.rules.spelling.hunspell.Hunspell;
+import org.languagetool.rules.spelling.hunspell.DumontsHunspellDictionary;
 import org.languagetool.rules.spelling.hunspell.HunspellDictionary;
 
 /**
@@ -43,7 +43,7 @@ public class SpellCheckerLangToolHunspell implements ISpellCheckerProvider {
     private final HunspellDictionary dict;
 
     public SpellCheckerLangToolHunspell(File dictName, File affixName) {
-        this.dict = Hunspell.getDictionary(dictName.toPath(), affixName.toPath());
+        this.dict = new DumontsHunspellDictionary(dictName.toPath(), affixName.toPath());
     }
 
     @Override

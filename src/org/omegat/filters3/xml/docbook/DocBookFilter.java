@@ -28,6 +28,11 @@ package org.omegat.filters3.xml.docbook;
 
 import java.io.BufferedReader;
 
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.xml.sax.SAXNotRecognizedException;
+import org.xml.sax.SAXNotSupportedException;
+
 import org.omegat.filters2.Instance;
 import org.omegat.filters3.xml.XMLDialect;
 import org.omegat.filters3.xml.XMLFilter;
@@ -48,6 +53,18 @@ public class DocBookFilter extends XMLFilter {
      */
     public DocBookFilter() {
         super(new DocBookDialect());
+        try {
+            // DocBook filter requires to validate docbook external DTD.
+            // The filter requires internet access.
+            // XXX: this is vulnerable for XXE attack.
+            setSAXFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", true);
+            // XXX: we should take care of external entities
+            setSAXFeature("http://xml.org/sax/features/external-general-entities", true);
+            // XXX: we should take care of external entities
+            setSAXFeature("http://xml.org/sax/features/external-parameter-entities", true);
+        } catch (SAXNotSupportedException | SAXNotRecognizedException
+                | ParserConfigurationException ignored) {
+        }
     }
 
     /**

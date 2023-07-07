@@ -57,11 +57,13 @@ import org.omegat.util.gui.StaticUIUtils;
 import org.omegat.util.gui.UIThreadsUtil;
 
 /**
- * Class for store information about displayed segment, and for show segment in editor.
+ * Class for store information about displayed segment, and for show segment in
+ * editor.
  *
  * RTL and Bidirectional support: see good description at
- * http://www.iamcal.com/understanding-bidirectional-text/. Java support of RTL/bidi depends on supported
- * Unicode version. You can usually find supported Unicode version in the Character class comments.
+ * http://www.iamcal.com/understanding-bidirectional-text/. Java support of
+ * RTL/bidi depends on supported Unicode version. You can usually find supported
+ * Unicode version in the Character class comments.
  *
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Didier Briel
@@ -76,8 +78,9 @@ public class SegmentBuilder {
     public static final String SEGMENT_SPELL_CHECK = "SEGMENT_SPELL_CHECK";
     private static final DecimalFormat NUMBER_FORMAT = new DecimalFormat("0000");
 
-    // false: insert source text / true: leave the segment empty
-    public static final boolean DONT_INSERT_SOURCE_TEXT_DEFAULT = false;
+    // synonym used until OmegaT 5.7 = leave segment empty
+    // true = do NOT insert (take care of double negation!)
+    public static final boolean DONT_INSERT_SOURCE_TEXT_DEFAULT = true;
 
     private static final String BIDI_LRE = "\u202a";
     private static final String BIDI_RLE = "\u202b";
@@ -98,9 +101,14 @@ public class SegmentBuilder {
      * time when entry drawn, and when user edits it (for active entry).
      */
     private volatile long displayVersion;
-    /** Source text of entry with internal bidi chars, or null if not displayed. */
+    /**
+     * Source text of entry with internal bidi chars, or null if not displayed.
+     */
     private String sourceText;
-    /** Translation text of entry with internal bidi chars, or null if not displayed. */
+    /**
+     * Translation text of entry with internal bidi chars, or null if not
+     * displayed.
+     */
     private String translationText;
     /** True if entry is active. */
     private boolean active;
@@ -117,10 +125,12 @@ public class SegmentBuilder {
     /**
      * Offset of first c.q. last character in active source text
      */
-    protected int activeTranslationBeginOffset, activeTranslationEndOffset;
+    protected int activeTranslationBeginOffset;
+    protected int activeTranslationEndOffset;
 
     /** Boundary of full entry display. */
-    protected Position beginPosP1, endPosM1;
+    protected Position beginPosP1;
+    protected Position endPosM1;
 
     /** Source start position - for marks. */
     protected Position posSourceBeg;
@@ -129,7 +139,7 @@ public class SegmentBuilder {
     protected Position posTranslationBeg;
     protected int posTranslationLength;
 
-    /** current offset in document to insert new stuff*/
+    /** current offset in document to insert new stuff */
     protected int offset;
 
     /**
@@ -146,8 +156,9 @@ public class SegmentBuilder {
      */
     protected final boolean hasRTL;
 
-    public SegmentBuilder(final EditorController controller, final Document3 doc, final EditorSettings settings,
-            final SourceTextEntry ste, final int segmentNumberInProject, final boolean hasRTL) {
+    public SegmentBuilder(final EditorController controller, final Document3 doc,
+            final EditorSettings settings, final SourceTextEntry ste, final int segmentNumberInProject,
+            final boolean hasRTL) {
         this.controller = controller;
         this.doc = doc;
         this.settings = settings;
@@ -165,17 +176,29 @@ public class SegmentBuilder {
     }
 
     /**
-     * Create element for one segment.
+     * Create an element for one segment.
      *
-     * @param doc
-     *            document
-     * @return OmElementSegment
+     * @param isActive
+     *            flag to indicate activeness
+     * @param trans
+     *            translation entry
      */
     public void createSegmentElement(final boolean isActive, TMXEntry trans) {
         createSegmentElement(isActive, doc.getLength(), trans, trans.defaultTranslation);
     }
 
-    public void createSegmentElement(final boolean isActive, TMXEntry trans, final boolean defaultTranslation) {
+    /**
+     * Create an element for one segment.
+     *
+     * @param isActive
+     *            flag to indicate activeness
+     * @param trans
+     *            translation entry
+     * @param defaultTranslation
+     *            flag to indicate it is a default translation
+     */
+    public void createSegmentElement(final boolean isActive, TMXEntry trans,
+            final boolean defaultTranslation) {
         createSegmentElement(isActive, doc.getLength(), trans, defaultTranslation);
     }
 
@@ -183,7 +206,8 @@ public class SegmentBuilder {
         createSegmentElement(isActive, 0, trans, trans.defaultTranslation);
     }
 
-    public void createSegmentElement(final boolean isActive, int initialOffset, TMXEntry trans, final boolean defaultTranslation) {
+    public void createSegmentElement(final boolean isActive, int initialOffset, TMXEntry trans,
+            final boolean defaultTranslation) {
         UIThreadsUtil.mustBeSwingThread();
 
         displayVersion = globalVersions.incrementAndGet();
@@ -266,8 +290,8 @@ public class SegmentBuilder {
     private void createActiveSegmentElement(TMXEntry trans) throws BadLocationException {
         try {
             if (EditorSettings.DISPLAY_MODIFICATION_INFO_ALL.equals(settings.getDisplayModificationInfo())
-                    || EditorSettings.DISPLAY_MODIFICATION_INFO_SELECTED.equals(settings
-                            .getDisplayModificationInfo())) {
+                    || EditorSettings.DISPLAY_MODIFICATION_INFO_SELECTED
+                            .equals(settings.getDisplayModificationInfo())) {
                 addModificationInfoPart(trans);
             }
 
@@ -290,13 +314,15 @@ public class SegmentBuilder {
             posSourceLength = sourceText.length();
 
             if (trans.isTranslated()) {
-                //translation exist
+                // translation exists
                 translationText = trans.translation;
             } else {
-                // Double negation - insertSource = true if Preferences.DONT_INSERT_SOURCE_TEXT = false
+                // Double negation - insertSource = true if
+                // Preferences.DONT_INSERT_SOURCE_TEXT = false
                 boolean insertSource = !Preferences.isPreferenceDefault(Preferences.DONT_INSERT_SOURCE_TEXT,
                         DONT_INSERT_SOURCE_TEXT_DEFAULT);
-                if (controller.entriesFilter != null && controller.entriesFilter.isSourceAsEmptyTranslation()) {
+                if (controller.entriesFilter != null
+                        && controller.entriesFilter.isSourceAsEmptyTranslation()) {
                     insertSource = true;
                 }
                 if (insertSource) {
@@ -340,7 +366,9 @@ public class SegmentBuilder {
 
     /**
      * Create method for inactive segment.
-     * @param trans TMX entry with translation
+     * 
+     * @param trans
+     *            TMX entry with translation
      * @throws BadLocationException
      */
     private void createInactiveSegmentElement(TMXEntry trans) throws BadLocationException {
@@ -400,12 +428,18 @@ public class SegmentBuilder {
         return active;
     }
 
-    /** Get source text of entry with internal bidi chars, or null if not displayed. */
+    /**
+     * Get source text of entry with internal bidi chars, or null if not
+     * displayed.
+     */
     public String getSourceText() {
         return sourceText;
     }
 
-    /** Get translation text of entry with internal bidi chars, or null if not displayed. */
+    /**
+     * Get translation text of entry with internal bidi chars, or null if not
+     * displayed.
+     */
     public String getTranslationText() {
         return translationText;
     }
@@ -480,13 +514,13 @@ public class SegmentBuilder {
     /**
      * Add inactive segment part, without segment begin/end marks.
      *
-     * @param isSource is text the source text (true) or translation text (false)
+     * @param isSource
+     *            is text the source text (true) or translation text (false)
      * @param text
      *            segment part text
      * @throws BadLocationException
      */
-    private String addInactiveSegPart(boolean isSource, String text)
-            throws BadLocationException {
+    private String addInactiveSegPart(boolean isSource, String text) throws BadLocationException {
         int prevOffset = offset;
         boolean rtl = isSource ? controller.sourceLangIsRTL : controller.targetLangIsRTL;
         insertDirectionEmbedding(rtl);
@@ -500,11 +534,11 @@ public class SegmentBuilder {
     /**
      * Add inactive segment part, without segment begin/end marks.
      *
-     * @param text other language translation text
+     * @param text
+     *            other language translation text
      * @throws BadLocationException
      */
-    private void addOtherLanguagePart(String text, Language language)
-            throws BadLocationException {
+    private void addOtherLanguagePart(String text, Language language) throws BadLocationException {
         int prevOffset = offset;
         boolean rtl = Language.isRTL(language.getLanguageCode());
         insertDirectionEmbedding(false);
@@ -534,7 +568,7 @@ public class SegmentBuilder {
         }
         String text;
         if (Preferences.isPreference(Preferences.VIEW_OPTION_TEMPLATE_ACTIVE)) {
-             text = ModificationInfoManager.apply(trans);
+            text = ModificationInfoManager.apply(trans);
         } else {
             String author = (trans.changer == null ? OStrings.getString("TF_CUR_SEGMENT_UNKNOWN_AUTHOR")
                     : trans.changer);
@@ -573,7 +607,7 @@ public class SegmentBuilder {
     private String addActiveSegPart(String text) throws BadLocationException {
         int prevOffset = offset;
 
-        //write translation part
+        // write translation part
         boolean rtl = controller.targetLangIsRTL;
 
         insertDirectionEmbedding(rtl);
@@ -584,17 +618,19 @@ public class SegmentBuilder {
 
         insertDirectionEndEmbedding();
 
-        //write segment marker
-        //we want the marker AFTER the translated text, so use same direction as target text.
+        // write segment marker
+        // we want the marker AFTER the translated text, so use same direction
+        // as target text.
         insertDirectionMarker(rtl);
 
-        //the marker itself is in user language
+        // the marker itself is in user language
         insertDirectionEmbedding(Language.localeIsRTL());
         AttributeSet attrSegmentMark = settings.getSegmentMarkerAttributeSet();
         insert(createSegmentMarkText(), attrSegmentMark);
         insertDirectionEndEmbedding();
 
-        //we want the marker AFTER the translated text, so embed in same direction as target text.
+        // we want the marker AFTER the translated text, so embed in same
+        // direction as target text.
         insertDirectionMarker(rtl);
 
         insert("\n", null);
@@ -621,13 +657,12 @@ public class SegmentBuilder {
     private String createSegmentMarkText() {
         String text = OConsts.SEGMENT_MARKER_STRING;
 
-        //replace placeholder with actual segment number
+        // replace placeholder with actual segment number
         if (text.contains("0000")) {
             String replacement = NUMBER_FORMAT.format(segmentNumberInProject);
             if (Preferences.isPreference(Preferences.MARK_NON_UNIQUE_SEGMENTS)
                     && ste.getDuplicate() != SourceTextEntry.DUPLICATE.NONE) {
-                replacement = StringUtil.format(OStrings.getString("SW_FILE_AND_NR_OF_MORE"),
-                        replacement,
+                replacement = StringUtil.format(OStrings.getString("SW_FILE_AND_NR_OF_MORE"), replacement,
                         ste.getNumberOfDuplicates());
             }
             text = text.replace("0000", replacement);
@@ -658,8 +693,8 @@ public class SegmentBuilder {
      * @param isSource
      *            is it a source segment or a target segment
      * @param isPlaceholder
-     *            is it for a placeholder (OmegaT tag or sprintf-variable etc.) or regular text inside the
-     *            segment?
+     *            is it for a placeholder (OmegaT tag or sprintf-variable etc.)
+     *            or regular text inside the segment?
      * @param isRemoveText
      *            is it text that should be removed in the translation?
      * @param isNBSP
@@ -673,8 +708,11 @@ public class SegmentBuilder {
 
     /**
      * Inserts the texts and formats the text
-     * @param text source or translation text
-     * @param isSource true if it is a source text, false if it is a translation
+     *
+     * @param text
+     *            source or translation text
+     * @param isSource
+     *            true if it is a source text, false if it is a translation
      * @throws BadLocationException
      */
     private String insertTextWithTags(String text, boolean isSource) throws BadLocationException {
@@ -714,8 +752,12 @@ public class SegmentBuilder {
     }
 
     /**
-     * Writes (if necessary) an RTL or LTR marker. Use it before writing text in some language.
-     * @param isRTL is the language that has to be written a right-to-left language?
+     * Writes (if necessary) an RTL or LTR marker. Use it before writing text in
+     * some language.
+     *
+     * @param isRTL
+     *            is the language that has to be written a right-to-left
+     *            language?
      * @throws BadLocationException
      */
     private void insertDirectionEmbedding(boolean isRTL) throws BadLocationException {
@@ -725,7 +767,9 @@ public class SegmentBuilder {
     }
 
     /**
-     * Writes (if necessary) an end-of-embedding marker. Use it after writing text in some language.
+     * Writes (if necessary) an end-of-embedding marker. Use it after writing
+     * text in some language.
+     *
      * @throws BadLocationException
      */
     private void insertDirectionEndEmbedding() throws BadLocationException {
@@ -735,8 +779,12 @@ public class SegmentBuilder {
     }
 
     /**
-     * Writes (if necessary) an RTL or LTR marker. Use it before writing text in some language.
-     * @param isRTL is the language that has to be written a right-to-left language?
+     * Writes (if necessary) an RTL or LTR marker. Use it before writing text in
+     * some language.
+     * 
+     * @param isRTL
+     *            is the language that has to be written a right-to-left
+     *            language?
      * @throws BadLocationException
      */
     private void insertDirectionMarker(boolean isRTL) throws BadLocationException {

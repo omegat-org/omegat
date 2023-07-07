@@ -37,7 +37,7 @@ import org.omegat.filters3.Attributes;
 import org.omegat.filters3.xml.DefaultXMLDialect;
 
 /**
- * This class specifies the Help&Manual XML Dialect.
+ * This class specifies the Help&amp;Manual XML Dialect.
  *
  * @author Guido Leenders
  * @author Didier Briel
@@ -54,8 +54,8 @@ public class HelpAndManualDialect extends DefaultXMLDialect {
     public HelpAndManualDialect() {
         defineConstraint(CONSTRAINT_ROOT, HAM_ROOT_TAG);
 
-        defineParagraphTags(new String[] { "caption", "config-value", "variable", "para", "title", "keyword",
-                "li", });
+        defineParagraphTags(
+                new String[] { "caption", "config-value", "variable", "para", "title", "keyword", "li", });
 
         defineShortcut("link", "li");
 
@@ -69,7 +69,7 @@ public class HelpAndManualDialect extends DefaultXMLDialect {
     }
 
     /**
-     * In the Help&Manual filter, content should be translated in the
+     * In the Help&amp;Manual filter, content should be translated in the
      * following condition: The pair attribute-value should not have been
      * declared as untranslatable in the options
      *
@@ -77,7 +77,7 @@ public class HelpAndManualDialect extends DefaultXMLDialect {
      *            An XML tag
      * @param atts
      *            The attributes associated with the tag
-     *@return <code>false</code> if the content of this tag should be
+     * @return <code>false</code> if the content of this tag should be
      *         translated, <code>true</code> otherwise
      */
     @Override

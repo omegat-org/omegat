@@ -51,7 +51,6 @@ import javax.swing.SwingWorker;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.builder.EqualsBuilder;
-
 import org.omegat.CLIParameters;
 import org.omegat.convert.ConvertProject;
 import org.omegat.core.Core;
@@ -350,11 +349,11 @@ public final class ProjectUICommands {
                     // so we add root repository mapping
                     props.setRepositories(repos);
                 } else {
-                    RepositoryDefinition remoteRepo = getRootGitRepositoryMapping(props.getRepositories());
+                    RepositoryDefinition remoteRepo = getRootRepositoryMapping(props.getRepositories());
                     if (isRepositoryEquals(remoteRepo, repo)) {
                         // when remote repository config is different with
                         // opening url, respect local one
-                        setRootGitRepositoryMapping(props.getRepositories(), repo);
+                        setRootRepositoryMapping(props.getRepositories(), repo);
                     }
                 }
                 // We write in all cases, because we might have added default
@@ -467,7 +466,7 @@ public final class ProjectUICommands {
             if (OmegaTFileChooser.APPROVE_OPTION != pfc
                     .showOpenDialog(Core.getMainWindow().getApplicationFrame())) {
                 return null;
-             }
+            }
             projectRootFolder = pfc.getSelectedFile();
         } else {
             projectRootFolder = projectDirectory;
@@ -487,7 +486,7 @@ public final class ProjectUICommands {
         return true;
     }
 
-    private static ProjectProperties checkProjectProperties(File projectRootFolder) {
+    static ProjectProperties checkProjectProperties(File projectRootFolder) {
         // check if project okay
         ProjectProperties props;
         try {
@@ -522,46 +521,44 @@ public final class ProjectUICommands {
             // It is created when modification of
             // properties in remote.
             File newProjectFile = null;
-            if (props.hasRepositories()) {
-                /* <p>
-                 * Every time we reopen the project, we copy omegat.project from
-                 * the remote project, We take following strategy and procedure
-                 * to open the project.
+            if (props.isTeamProject()) {
+                /*
+                 * <p> Every time we reopen the project, we copy omegat.project
+                 * from the remote project, We take following strategy and
+                 * procedure to open the project.
                  *
-                 *   1. When opening a teamwork project as local only
-                 *      non-teamwork by passing 'no-team' to command line, skip
-                 *      teamwork treatment.
+                 * 1. When opening a teamwork project as local only non-teamwork
+                 * by passing 'no-team' to command line, skip teamwork
+                 * treatment.
                  *
-                 *   2. Save the currently effective repository mapping from
-                 *      LOCAL to variable 'repos'.
+                 * 2. Save the currently effective repository mapping from LOCAL
+                 * to variable 'repos'.
                  *
-                 *   3. Update project.properties from REMOTE copy of
-                 *      omegat.project that has postfix .NEW by calling
-                 *      loadPropertiesFile(... ) with "omegat.project.NEW".
-                 *      It respects a local root repository URL than remote
-                 *      mapping configuration
+                 * 3. Update project.properties from REMOTE copy of
+                 * omegat.project that has postfix .NEW by calling
+                 * loadPropertiesFile(... ) with "omegat.project.NEW". It
+                 * respects a local root repository URL than remote mapping
+                 * configuration
                  *
-                 *   4. Handles mappings of four cases.
+                 * 4. Handles mappings of four cases.
                  *
-                 *      a. no mapping
+                 * a. no mapping
                  *
-                 *      b. no remote mapping, there are local mapping(s)
-                 *         the locally defined mapping(s) are merged into
-                 *         local omegat.project.
+                 * b. no remote mapping, there are local mapping(s) the locally
+                 * defined mapping(s) are merged into local omegat.project.
                  *
-                 *      c. remote mapping, no local mapping(s)
+                 * c. remote mapping, no local mapping(s)
                  *
-                 *      d. remote and local mappings
-                 *         Local mapping changes are overwritten except
-                 *         for root repository mapping.
+                 * d. remote and local mappings Local mapping changes are
+                 * overwritten except for root repository mapping.
                  *
-                 *   5. We save the original project file with as
-                 *      omegat.project.timestamp.bak
+                 * 5. We save the original project file with as
+                 * omegat.project.timestamp.bak
                  *
                  * @note: We may want to make sure that the remote
                  * props.GetRepositories match the previous current setup, but
-                 * this does not seem to be the intention of the current
-                 * mapping usage.
+                 * this does not seem to be the intention of the current mapping
+                 * usage.
                  */
                 if (!Core.getParams().containsKey(CLIParameters.NO_TEAM)) {
                     ProjectProperties localProps = props;
@@ -586,15 +583,15 @@ public final class ProjectUICommands {
                             props.setRepositories(localRepos);
                         } else {
                             // use mapping from remote configuration but
-                            // override repository URL when project URL is git
-                            // type when there is difference between local and
-                            // remote config.
-                            RepositoryDefinition localRootRepository = getRootGitRepositoryMapping(
-                                    localRepos);
-                            RepositoryDefinition newRepository = getRootGitRepositoryMapping(
-                                    props.getRepositories());
+                            // override repository URL when there is difference
+                            // between local and remote config.
+                            // git type: it can be https or git+ssh
+                            // svn type: it can be https or svn+ssh
+                            final List<RepositoryDefinition> remoteRepos = props.getRepositories();
+                            RepositoryDefinition localRootRepository = getRootRepositoryMapping(localRepos);
+                            RepositoryDefinition newRepository = getRootRepositoryMapping(remoteRepos);
                             if (!isRepositoryEquals(localRootRepository, newRepository)) {
-                                setRootGitRepositoryMapping(props.getRepositories(), localRootRepository);
+                                setRootRepositoryMapping(remoteRepos, localRootRepository);
                             }
                         }
                         needToSaveProperties = !isIdenticalOmegatProjectProperties(props, localProps);
@@ -649,7 +646,8 @@ public final class ProjectUICommands {
                             backup.getName());
                     Core.getProject().saveProjectProperties();
                 } else if (FileUtil.getRecentBackup(projectFile) == null) {
-                    FileUtil.backupFile(projectFile);
+                    File backup = new File(projectRootFolder, FileUtil.getBackupFilename(projectFile));
+                    ProjectFileStorage.writeProjectFile(backup, propsP);
                 } else if (finalNewProjectFile != null) {
                     FileUtils.deleteQuietly(finalNewProjectFile);
                 }
@@ -670,7 +668,7 @@ public final class ProjectUICommands {
      *            local omegat.project.
      * @return true if identical, otherwise false.
      */
-    private static boolean isIdenticalOmegatProjectProperties(ProjectProperties that, ProjectProperties my) {
+    static boolean isIdenticalOmegatProjectProperties(ProjectProperties that, ProjectProperties my) {
         if (my == that) {
             return true;
         }
@@ -733,12 +731,11 @@ public final class ProjectUICommands {
                 .append(my.getDictRoot(), that.getDictRoot()).isEquals();
     }
 
-    private static RepositoryDefinition getRootGitRepositoryMapping(List<RepositoryDefinition> repos) {
+    static RepositoryDefinition getRootRepositoryMapping(List<RepositoryDefinition> repos) {
         RepositoryDefinition repositoryDefinition = null;
         for (RepositoryDefinition definition : repos) {
             if (definition.getMapping().get(0).getLocal().equals("/")
-                    && definition.getMapping().get(0).getRepository().equals("/")
-                    && definition.getType().equals("git")) {
+                    && definition.getMapping().get(0).getRepository().equals("/")) {
                 repositoryDefinition = definition;
                 break;
             }
@@ -746,12 +743,12 @@ public final class ProjectUICommands {
         return repositoryDefinition;
     }
 
-    private static void setRootGitRepositoryMapping(List<RepositoryDefinition> repos,
+    static void setRootRepositoryMapping(List<RepositoryDefinition> repos,
             RepositoryDefinition repositoryDefinition) {
         if (repositoryDefinition == null) {
             return;
         }
-        RepositoryDefinition originalRepositoryDefinition = getRootGitRepositoryMapping(repos);
+        RepositoryDefinition originalRepositoryDefinition = getRootRepositoryMapping(repos);
         if (originalRepositoryDefinition == null) {
             return;
         }
@@ -760,7 +757,7 @@ public final class ProjectUICommands {
         originalRepositoryDefinition.setBranch(repositoryDefinition.getBranch());
     }
 
-    private static boolean isRepositoryEquals(RepositoryDefinition a, RepositoryDefinition b) {
+    static boolean isRepositoryEquals(RepositoryDefinition a, RepositoryDefinition b) {
         if (a == null || b == null) {
             return false;
         }
@@ -787,7 +784,7 @@ public final class ProjectUICommands {
     /**
      * Project reload.
      * <p>
-     * When select Project>Reload jump to here.
+     * When select Project&gt;Reload jump to here.
      */
     public static void projectReload() {
         UIThreadsUtil.mustBeSwingThread();

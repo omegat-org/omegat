@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="app.segmentation">
+  <title id="app.segmentation.title">Segmentation</title>
+
+  <section id="dialog.preferences.segmentation.setup.type">
+	<title id="dialog.preferences.segmentation.setup.type.title">Paragraphe ou phrase ?</title>
+	
+	<para>Les outils à mémoire de traduction travaillent avec des unités textuelles appelées segments. Lorsqu’une traduction est saisie, le segment contenant le texte source est conservé avec sa traduction dans la mémoire du projet, et est subséquemment utilisé pour correspondre avec d’autres segments source dans le projet.</para>
+
+	<para>Pour spécifier le type de segmentation, utilisez la propriété du projet <link linkend="dialogs.project.properties.options.segmentation" endterm="dialogs.project.properties.options.segmentation.title"/>.</para>
+
+	<para>Les segments sont par défaut des <emphasis role="bold">paragraphes</emphasis> définis par le format de fichier lui-même.</para>
+	
+	<para>Ne pas utiliser la segmentation par <emphasis role="bold">phrases</emphasis> sur un fichier équivaut à utiliser une segmentation par <emphasis>paragraphes</emphasis>. Dans ce cas, chaque paragraphe (comme défini dans le format du document original) est affiché comme un unique segment, et vous êtes libre de réorganiser les phrases comprises dans le segment lors de la traduction.</para>
+	
+	<para>La <emphasis>segmentation par paragraphes</emphasis> est plus efficace avec des textes littéraires ou créatifs, mais aussi, plus généralement, avec des documents où les correspondances de mémoire de traduction sont moins importantes.</para>
+
+	<para>La <emphasis>segmentation par phrases</emphasis> repose sur certaines règles (appelées <emphasis>règles de segmentation</emphasis>) qui définissent ce qui constitue une phrase dans la langue source. Ce paramètre est plus efficace avec les documents contenant des répétitions ou des phrases similaires, tels que des documents techniques ou juridiques.</para>
+
+	<variablelist>
+	  <varlistentry id="dialogs.preferences.segmentation.setup.structure.level.segmentation">
+		<term id="dialogs.preferences.segmentation.setup.structure.level.segmentation.title">Segmentation au niveau des paragraphes</term>
+
+		<listitem>
+		  <para>OmegaT effectue d’abord une analyse du texte pour procéder à une segmentation au niveau des paragraphes. Ce processus repose uniquement sur la structure du fichier source pour produire les segments.</para>
+
+		  <para>Par exemple, les fichiers texte peuvent être segmentés au niveau des sauts de lignes, des lignes vides, ou pas du tout. Les fichiers contenant des formatages (documents ODF, HTML, etc.) sont divisés en fonction des balises délimitant des blocs (paragraphes). Les attributs traduisibles des balises présents dans les fichiers XHTML ou HTML peuvent être extraits en tant que « paragraphes  » séparés.</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialogs.preferences.segmentation.rules.sentence.level.segmentation">
+        <term id="dialogs.preferences.segmentation.rules.sentence.level.segmentation.title">Segmentation au niveau des phrases</term>
+
+        <listitem>
+		  <para>Après avoir segmenté le fichier source en unités structurelles, OmegaT divise davantage ces unités en segments.</para>
+
+		  <para>Vous pouvez visualiser la segmentation comme le processus qui consiste à bouger le curseur le long du texte, un caractère à la fois, en recherchant la position où une rupture se produira, ou la position où une rupture n’est pas autorisée.</para>
+
+		  <para>Chaque fois que le curseur passe au caractère suivant, OmegaT vérifie :</para>
+		  
+		  <itemizedlist>
+			<listitem>
+			  <para>si le texte situé avant l’emplacement correspond à une règle d’<emphasis role="bold">Avant</emphasis>,</para>
+			</listitem>
+			
+			<listitem>
+			  <para>et si le texte après l’emplacement correspond à la règle d’<emphasis role="bold">Après</emphasis> associée.</para>
+			</listitem>
+		  </itemizedlist>
+
+		  <para>Si l’emplacement correspond aux deux règles, il sera considéré comme une rupture ou non, en fonction de ce que la règle a défini.</para>
+        </listitem>
+	  </varlistentry>
+    </variablelist>
+  </section>
+  
+  <section id="dialog.preferences.segmentation.setup.scope">
+	<title id="dialog.preferences.segmentation.setup.scope.title">Globales ou locales ?</title>
+
+	<note>
+	  <para>Les mêmes mécanismes et boîtes de dialogue sont utilisés pour définir les règles globales et locales de segmentation.</para>
+	</note>
+
+	<para>Par défaut, les paramètres de segmentation sont globaux, locaux et partagés par tous les projets.</para>
+
+	<para>Utilisez les propriétés de projet <link linkend="dialogs.project.properties.local.segmentation" endterm="dialogs.project.properties.local.segmentation.title"/> pour limiter la portée des règles de segmentation au projet en cours.</para>
+
+	<para>Vous pouvez atteindre un résultat similaire en ouvrant OmegaT à partir de la ligne de commande. Voir le guide pratique <link linkend="launch.with.command.line" endterm="launch.with.command.line.title"/> pour en savoir plus.</para>
+	
+	<para>Si vous utilisez les règles locales, vous pouvez toujours accéder aux règles générales, toutefois leur modification n’affectera pas votre projet.</para>
+  </section>
+
+
+  <section id="dialog.preferences.segmentation.setup.rules.based.segmentation">
+	<title id="dialog.preferences.segmentation.setup.rules.based.segmentation.title">Règles</title>
+	<para>OmegaT fournit des règles prédéfinies de segmentation, et vous pouvez utiliser des expressions régulières pour les modifier. Voir l’annexe <link linkend="app.regex" endterm="app.regex.title"/> pour en savoir plus.</para>
+
+	<para>Pour rappel, les règles fonctionnent de la manière suivante : lorsqu’une règle correspond, OmegaT place un marqueur à l’emplacement de la correspondance afin que les règles suivantes ignorent cet emplacement. C’est la raison pour laquelle les règles d’exception doivent être appliquées avant les règles de segmentation.</para>
+	
+	<warning>
+	  <para>Si vous changez la segmentation pendant la traduction, vous devrez recharger le projet afin que celle-ci soit prise en compte. Ce procédé va diviser ou fusionner certains segments précédemment traduits, qui ne seront donc plus considérés comme traduits. Néanmoins, leur traduction originale sera toujours dans la mémoire du projet.</para>
+	</warning>
+
+	<table id="segmentation.simple.examples">
+	  <title id="segmentation.simple.examples.title">Quelques exemples simples</title>
+      <tgroup cols="5">
+		<colspec align="left" colnum="1"/>
+		<colspec align="left" colnum="2"/>
+		<colspec align="center" colnum="3"/>
+		<colspec align="center" colnum="4"/>
+		<colspec align="left" colnum="5"/>
+		<thead>
+          <row>
+			<entry>Catégorie</entry>
+			<entry>Intention</entry>
+			<entry align="center">Avant</entry>
+			<entry align="center">Après</entry>
+			<entry>Explication</entry>
+          </row>
+		</thead>
+		<tbody>
+		  <row>
+			<entry>Règle d’exception, case non cochée, plus haut dans la liste</entry>
+			<entry>Ne pas segmenter après Ms.</entry>
+			<entry align="center">M\.</entry>
+			<entry align="center">\s</entry>
+			<entry>Ms, suivi d’un point, suivi d’un caractère d’espacement.</entry>
+		  </row>
+		  <row>
+			<entry>Règle d’exception, case non cochée, plus haut dans la liste</entry>
+			<entry>Cellules Excel avec des sauts de ligne qui ne représentent pas des segments.</entry>
+			<entry align="center">\n</entry>
+			<entry align="center">.</entry>
+			<entry>Saut de ligne, suivi de n’importe quoi.</entry>
+		  </row>
+		  <row>
+			<entry>Règle de segmentation, case cochée, plus bas sur la liste</entry>
+			<entry>Commencer un nouveau segment après un point suivi d’une espace, une tabulation, ou autre caractère d’espacement.</entry>
+			<entry align="center">\.</entry>
+			<entry align="center">\s</entry>
+			<entry>Un point, suivi d’un caractère d’espacement.</entry>
+		  </row>
+		  <row>
+			<entry>Règle de segmentation, case cochée, plus bas sur la liste</entry>
+			<entry>Commencer un nouveau segment après « 。» (point japonais).</entry>
+			<entry align="center">。</entry>
+			<entry align="center"/>
+			<entry>Remarquez que le champ <literal>Après</literal> peut être vide.</entry>
+		  </row>
+		</tbody>
+	  </tgroup>
+	</table>
+  </section>
+</section>

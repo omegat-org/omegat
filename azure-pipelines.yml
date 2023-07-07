@@ -22,32 +22,69 @@ pr:
       - docs_devel
       - README.md
 
+schedules:
+  - cron: '0 12 * * 6'
+    displayName: Weekly saturday build
+    branches:
+      include:
+        - master
+        - releases/*
+    always: true
+
 variables:
   isMain: $[eq(variables['Build.SourceBranch'], 'refs/heads/master')]
+  isReleasesBranch: $[contains(variables['Build.SourceBranch'], 'refs/heads/releases/')]
   isRelease: $[contains(variables['Build.SourceBranch'], 'refs/tags/v')]
-  isJRE8: $[contains(variables['Build.SourceBranch'], 'refs/tags/v5')]
+  isJRE11: $[contains(variables['Build.SourceBranch'], 'refs/tags/v6')]
+  isSchedule: $[eq(variables['Build.Reason'], 'Schedule')]
   GRADLE_USER_HOME: '$(Pipeline.Workspace)/.gradle'
 
 stages:
 - stage: Check
+  condition: not(or(eq(variables['Build.Reason'], 'Schedule'), eq(variables['Build.Reason'], 'Manual')))
   jobs:
   - job: GitHubCI
     displayName: CI Check for master, releases/* and Pull-Requests
     pool:
       vmImage: 'ubuntu-22.04'
-    condition: ne(variables['Build.Reason'], 'Schedule')
+    condition:
     steps:
       - template: ci/azure-pipelines/check_steps.yml
 
-# Release build will run on the main and/or release branch, except for Pull-Request
-- stage: Release
-  dependsOn: Check
-  condition: and(succeeded(), or(eq(variables.isMain, true), eq(variables.isRelease, true)))
+  # Weekly release steps will be triggerred after integration-test succeeded.
+- stage: Weekly
+  condition: or(eq(variables['Build.Reason'], 'Schedule'), eq(variables['Build.Reason'], 'Manual'))
   jobs:
-  - job: ReleaseBuild
-    displayName: Build for master nightly, and release
+  - job: WeeklyBuild
+    displayName: Build for master weekly
     pool:
       vmImage: 'ubuntu-22.04'
-    condition: succeeded()
     steps:
-      - template: ci/azure-pipelines/release_steps.yml
+      - script: |
+          version=$(./gradlew -qq printVersion | head -n -1 )
+          echo "##vso[task.setvariable variable=version]$version"
+      - template: ci/azure-pipelines/integ_test_steps.yml
+        parameters:
+          testType: 'GIT'
+          duration: 600
+      - template: ci/azure-pipelines/build_steps.yml
+      - template: ci/azure-pipelines/publish_weekly.yml
+        parameters:
+          omegatVersion: $(version)
+
+  # Release steps will run on the main and/or release branch with tags.
+- stage: Release
+  dependsOn: Check
+  condition: and(succeeded(), eq(variables.isRelease, true))
+  jobs:
+  - job: ReleaseBuild
+    pool:
+      vmImage: 'ubuntu-22.04'
+    steps:
+      - script: |
+          version=$(./gradlew -qq printVersion | head -n -1 )
+          echo "##vso[task.setvariable variable=version]$version"
+      - template: ci/azure-pipelines/build_steps.yml
+      - template: ci/azure-pipelines/publish_release.yml
+        parameters:
+          omegatVersion: $(version)

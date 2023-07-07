@@ -35,17 +35,29 @@ import java.util.logging.Logger;
 
 import javax.xml.namespace.QName;
 
-import org.omegat.core.team2.IRemoteRepository2;
-import org.omegat.core.team2.ProjectTeamSettings;
-import org.omegat.util.Log;
-import org.tmatesoft.svn.core.*;
+import org.tmatesoft.svn.core.ISVNLogEntryHandler;
+import org.tmatesoft.svn.core.SVNAuthenticationException;
+import org.tmatesoft.svn.core.SVNCommitInfo;
+import org.tmatesoft.svn.core.SVNDepth;
+import org.tmatesoft.svn.core.SVNErrorCode;
+import org.tmatesoft.svn.core.SVNException;
+import org.tmatesoft.svn.core.SVNLogEntry;
+import org.tmatesoft.svn.core.SVNLogEntryPath;
+import org.tmatesoft.svn.core.SVNURL;
 import org.tmatesoft.svn.core.auth.ISVNAuthenticationManager;
 import org.tmatesoft.svn.core.internal.util.SVNEncodingUtil;
+import org.tmatesoft.svn.core.internal.wc17.SVNWCContext;
+import org.tmatesoft.svn.core.wc.DefaultSVNRepositoryPool;
 import org.tmatesoft.svn.core.wc.ISVNOptions;
 import org.tmatesoft.svn.core.wc.SVNClientManager;
 import org.tmatesoft.svn.core.wc.SVNInfo;
 import org.tmatesoft.svn.core.wc.SVNRevision;
 import org.tmatesoft.svn.core.wc.SVNWCUtil;
+import org.tmatesoft.svn.core.wc2.SvnOperationFactory;
+
+import org.omegat.core.team2.IRemoteRepository2;
+import org.omegat.core.team2.ProjectTeamSettings;
+import org.omegat.util.Log;
 
 import gen.core.project.RepositoryDefinition;
 
@@ -59,10 +71,23 @@ import gen.core.project.RepositoryDefinition;
 public class SVNRemoteRepository2 implements IRemoteRepository2 {
     private static final Logger LOGGER = Logger.getLogger(SVNRemoteRepository2.class.getName());
 
+    // System property to indicate backend.
+    // {@see https://support.tmatesoft.com/t/replacing-trilead-ssh2-with-apache-sshd/2778/3}
+    private static final String SVNKIT_SSH_CLIENT = "svnkit.ssh.client";
+    private static final String APACHE = "apache";
+
     RepositoryDefinition config;
     File baseDirectory;
     SVNClientManager ourClientManager;
     ProjectTeamSettings projectTeamSettings;
+
+    /**
+     * Constructor of SVN remote repository.
+     */
+    public SVNRemoteRepository2() {
+        // Specify MINA-SSHD for transport.
+        System.setProperty(SVNKIT_SSH_CLIENT, APACHE);
+    }
 
     @Override
     public void init(RepositoryDefinition repo, File dir, ProjectTeamSettings teamSettings) throws Exception {
@@ -77,12 +102,17 @@ public class SVNRemoteRepository2 implements IRemoteRepository2 {
         }
 
         ISVNOptions options = SVNWCUtil.createDefaultOptions(true);
-        ISVNAuthenticationManager authManager = new SVNAuthenticationManager(repo.getUrl(), predefinedUser,
+        ISVNAuthenticationManager authManager = new SVNAuthenticationManager(repo, predefinedUser,
                 predefinedPass, teamSettings);
-        ourClientManager = SVNClientManager.newInstance(options, authManager);
+        SVNWCContext svnwcContext = new SVNWCContext(options, null);
+        SvnOperationFactory svnOperationFactory = new SvnOperationFactory(svnwcContext);
+        svnOperationFactory.setAuthenticationManager(authManager);
+        svnOperationFactory.setRepositoryPool(new DefaultSVNRepositoryPool(authManager, options));
+        ourClientManager = SVNClientManager.newInstance(svnOperationFactory);
         if (baseDirectory.exists()) {
             ourClientManager.getWCClient().doCleanup(baseDirectory);
-            ourClientManager.getWCClient().doRevert(new File[] { baseDirectory }, SVNDepth.fromRecurse(true), null);
+            ourClientManager.getWCClient().doRevert(new File[] { baseDirectory }, SVNDepth.fromRecurse(true),
+                    null);
         }
     }
 
@@ -93,8 +123,8 @@ public class SVNRemoteRepository2 implements IRemoteRepository2 {
             return null;
         }
         SVNInfo info = ourClientManager.getWCClient().doInfo(f, SVNRevision.BASE);
-        Log.logDebug(LOGGER, "SVN committed revision for file {0} is {1}", file, info.getCommittedRevision()
-                .getNumber());
+        Log.logDebug(LOGGER, "SVN committed revision for file {0} is {1}", file,
+                info.getCommittedRevision().getNumber());
 
         return Long.toString(info.getCommittedRevision().getNumber());
     }
@@ -112,8 +142,8 @@ public class SVNRemoteRepository2 implements IRemoteRepository2 {
         }
 
         try {
-            ourClientManager.getUpdateClient().doCheckout(url, baseDirectory, SVNRevision.HEAD,
-                    toRev, SVNDepth.INFINITY, false);
+            ourClientManager.getUpdateClient().doCheckout(url, baseDirectory, SVNRevision.HEAD, toRev,
+                    SVNDepth.INFINITY, false);
             Log.logInfoRB("SVN_FINISH", "checkout");
         } catch (Exception ex) {
             Log.logErrorRB("SVN_ERROR", "checkout", ex.getMessage());
@@ -146,10 +176,10 @@ public class SVNRemoteRepository2 implements IRemoteRepository2 {
         final SVNInfo info = ourClientManager.getWCClient().doInfo(baseDirectory, SVNRevision.HEAD);
         SVNRevision currentRevision = info.getRevision();
 
-        String settingKey = "lastDeleteCheckForName"+baseDirectory.getName();
+        String settingKey = "lastDeleteCheckForName" + baseDirectory.getName();
         String sinceRevisionString = projectTeamSettings.get(settingKey);
         SVNRevision sinceRevision;
-        if (sinceRevisionString==null) {
+        if (sinceRevisionString == null) {
             sinceRevision = currentRevision;
         } else {
             sinceRevision = SVNRevision.parse(sinceRevisionString);
@@ -157,37 +187,43 @@ public class SVNRemoteRepository2 implements IRemoteRepository2 {
 
         final String repoPath = info.getPath();
         try {
-            ourClientManager.getLogClient().doLog(new File[] { baseDirectory },
-                    sinceRevision,
-                    currentRevision,
-                    false,
-                    true, //to get the list of files changed/deleted
-                    1000000,
-                    new ISVNLogEntryHandler() {
-                public void handleLogEntry(SVNLogEntry en) throws SVNException {
-                    if (en.getRevision() == sinceRevision.getNumber()) {
-                        return;
-                    }
-                    Map<String, SVNLogEntryPath> changedPaths = en.getChangedPaths();
-                    for (Map.Entry<String, SVNLogEntryPath> entry : changedPaths.entrySet()) {
-                        SVNLogEntryPath path = entry.getValue();
+            ourClientManager.getLogClient().doLog(new File[] { baseDirectory }, sinceRevision,
+                    currentRevision, false, true,
+                    // to get the list of files changed/deleted
+                    1000000, new ISVNLogEntryHandler() {
+                        public void handleLogEntry(SVNLogEntry en) throws SVNException {
+                            if (en.getRevision() == sinceRevision.getNumber()) {
+                                return;
+                            }
+                            Map<String, SVNLogEntryPath> changedPaths = en.getChangedPaths();
+                            for (Map.Entry<String, SVNLogEntryPath> entry : changedPaths.entrySet()) {
+                                SVNLogEntryPath path = entry.getValue();
 
-                        String filePath = path.getPath(); //eg /remotedir/my/file; repoPath = remotedir. To strip /remotedir/, add 2 for the slashes. But if remoteDir is empty, then only 1 slash to be removed.
-                        if ("".equals(repoPath)) {
-                            filePath = filePath.substring(1);
-                        } else {
-                            filePath = filePath.substring(repoPath.length()+2);
-                        }
-                        filePath = filePath.replace('/', File.separatorChar); //filepath is always using '/', but on windows we want to return path with backslashes
+                                String filePath = path.getPath();
+                                // eg /remotedir/my/file;
+                                // repoPath = remotedir. To strip /remotedir/,
+                                // add 2 for the slashes.
+                                // But if remoteDir is empty, then only
+                                // 1 slash to be removed.
+                                if ("".equals(repoPath)) {
+                                    filePath = filePath.substring(1);
+                                } else {
+                                    filePath = filePath.substring(repoPath.length() + 2);
+                                }
+                                filePath = filePath.replace('/', File.separatorChar);
+                                // filepath is always using '/', but on windows
+                                // we want to return path with backslashes
 
-                        if (path.getType() == 'D') {
-                            deleted.add(filePath);
-                        } else if (path.getType() == 'A') {
-                            deleted.remove(filePath); //added after it has been deleted. Don't delete any more!
+                                if (path.getType() == 'D') {
+                                    deleted.add(filePath);
+                                } else if (path.getType() == 'A') {
+                                    deleted.remove(filePath);
+                                    // added after it has been deleted. Don't
+                                    // delete any more!
+                                }
+                            }
                         }
-                    }
-                }}
-                );
+                    });
         } catch (SVNException e) {
             e.printStackTrace();
         }
@@ -201,7 +237,7 @@ public class SVNRemoteRepository2 implements IRemoteRepository2 {
     @Override
     public String commit(String[] onVersions, String comment) throws Exception {
         Log.logInfoRB("SVN_START", "commit");
-        File[] forCommit = new File[]{baseDirectory};
+        File[] forCommit = new File[] { baseDirectory };
 
         try {
             SVNCommitInfo info = ourClientManager.getCommitClient().doCommit(forCommit, false, comment, null,
@@ -214,11 +250,13 @@ public class SVNRemoteRepository2 implements IRemoteRepository2 {
             Log.logInfoRB("SVN_FINISH", "commit");
             return Long.toString(info.getNewRevision());
         } catch (SVNException ex) {
-            if (Arrays.asList(SVNErrorCode.FS_TXN_OUT_OF_DATE, SVNErrorCode.WC_NOT_UP_TO_DATE, SVNErrorCode.FS_CONFLICT)
-                    .contains(ex.getErrorMessage().getErrorCode())) {
-                // Somebody else committed changes - it's normal. Will upload on next save.
+            if (Arrays.asList(SVNErrorCode.FS_TXN_OUT_OF_DATE, SVNErrorCode.WC_NOT_UP_TO_DATE,
+                    SVNErrorCode.FS_CONFLICT).contains(ex.getErrorMessage().getErrorCode())) {
+                // Somebody else committed changes - it's normal. Will upload on
+                // next save.
                 Log.logWarningRB("SVN_CONFLICT");
-                ourClientManager.getWCClient().doRevert(new File[] { baseDirectory }, SVNDepth.fromRecurse(true), null);
+                ourClientManager.getWCClient().doRevert(new File[] { baseDirectory },
+                        SVNDepth.fromRecurse(true), null);
                 return null;
             } else {
                 Log.logErrorRB("SVN_ERROR", "commit", ex.getMessage());
@@ -241,15 +279,16 @@ public class SVNRemoteRepository2 implements IRemoteRepository2 {
                 throw new NetworkException(se);
             }
 
-            if (Arrays.asList(SVNErrorCode.RA_SVN_IO_ERROR, SVNErrorCode.RA_SVN_CONNECTION_CLOSED).
-                    contains(se.getErrorMessage().getErrorCode())) {
+            if (Arrays.asList(SVNErrorCode.RA_SVN_IO_ERROR, SVNErrorCode.RA_SVN_CONNECTION_CLOSED)
+                    .contains(se.getErrorMessage().getErrorCode())) {
                 throw new NetworkException(se);
             }
         }
     }
 
     /**
-     * Determines whether or not the supplied URL represents a valid Subversion repository.
+     * Determines whether or not the supplied URL represents a valid Subversion
+     * repository.
      *
      * <p>
      * Does the equivalent of <code>svn info <i>url</i></code>.
@@ -267,10 +306,10 @@ public class SVNRemoteRepository2 implements IRemoteRepository2 {
                     (ISVNAuthenticationManager) null);
 
             ourClientManager.getWCClient().doInfo(SVNURL.parseURIEncoded(SVNEncodingUtil.autoURIEncode(url)),
-                    SVNRevision.HEAD,
-                    SVNRevision.HEAD);
+                    SVNRevision.HEAD, SVNRevision.HEAD);
         } catch (SVNAuthenticationException ex) {
-            // TODO: Non-SVN URLs such as below give a false positive with this heuristic:
+            // TODO: Non-SVN URLs such as below give a false positive with this
+            // heuristic:
             // https://twitter.com/amadlonkay/status/699716236372889600
             return true;
         } catch (SVNException ex) {

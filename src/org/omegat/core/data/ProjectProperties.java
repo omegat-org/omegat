@@ -672,8 +672,8 @@ public class ProjectProperties {
                     }
                 }
             } else {
-                fs = new File(FileUtil.absoluteForSystem(path, Platform.getOsType()));
-                // probably relative ?
+                fs = new File(FileUtil.absoluteForSystem(path));
+                // probably relative?
                 try {
                     String p = FileUtil.computeRelativePath(projectRootDir, fs);
                     if (!p.contains("..")) {

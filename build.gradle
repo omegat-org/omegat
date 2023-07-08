@@ -15,7 +15,7 @@ plugins {
     id 'com.diffplug.spotless' version '6.0.0'
     id 'com.github.ben-manes.versions' version '0.39.0'
     id 'ru.vyarus.mkdocs' version '3.0.0'
-    id 'org.kordamp.gradle.jdeprscan' version '0.11.0'
+    id 'edu.sc.seis.launch4j' version '3.0.3'
 }
 
 apply from: 'gradle/utils.gradle'
@@ -368,6 +368,11 @@ ext {
     windowsJRE = fileTree(dir: assetDir, include: 'OpenJDK11U-jre_x64_windows_*.zip')
 }
 
+launch4j {
+    xmlFileName = "${projectDir}/release/win32-specific/L4j_OMT.xml"
+    icon = "${projectDir}/images/OmegaT.ico"
+}
+
 task genDocIndex(type: Copy) {
     description = 'Generate the docs index file'
     def docPropsFiles = fileTree(dir: 'docs', include: '*/version*.properties').findAll {
@@ -538,6 +543,15 @@ distributions {
                         replaceRelativePathSegment(it, /jdk.*-jre/, 'jre.bundle')
                     }
                 }
+            }
+        }
+    }
+
+    win {
+        contents {
+            with main.contents
+            from('build/launch4j') {
+                include '*.exe'
             }
         }
     }
@@ -773,9 +787,10 @@ ext.makeWinTask = { args ->
     task(type: Sync, args.name) {
         description = "Create a Windows installer for ${args.name} distro. " +
             'Requires Inno Setup (http://www.jrsoftware.org/isinfo.php).'
-        with distributions.main.contents
+        with distributions.win.contents
+        dependsOn createAllExecutables
         from ('release/win32-specific') {
-            include 'OmegaT.exe', 'OmegaT.l4J.ini'
+            include 'OmegaT.l4J.ini'
         }
         if (args.jrePath && !args.jrePath.empty) {
             from (zipTree(args.jrePath.singleFile)) {
@@ -795,9 +810,12 @@ ext.makeWinTask = { args ->
         doFirst {
             delete "$destinationDir/jre"
             delete installerExe
-            exec {
-                commandLine 'chmod', '-R', 'a+w', 'build'
-                ignoreExitValue true
+            project.copy {
+                from 'build'
+                into 'build'
+                include 'innosetup/**/*'
+                dirMode 0777
+                fileMode 0666
             }
         }
         doLast {

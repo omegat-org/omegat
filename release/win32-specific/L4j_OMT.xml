@@ -16,11 +16,9 @@
   <icon>../../images/OmegaT.ico</icon>
   <jre>
     <path>jre</path>
-    <bundledJre64Bit>false</bundledJre64Bit>
-    <bundledJreAsFallback>false</bundledJreAsFallback>
-    <minVersion>1.8.0</minVersion>
+    <minVersion>11</minVersion>
     <maxVersion></maxVersion>
     <jdkPreference>jreOnly</jdkPreference>
-    <runtimeBits>64/32</runtimeBits>
+    <requires64Bit>false</requires64Bit>
   </jre>
 </launch4jConfig>

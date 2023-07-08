@@ -1,6 +1,7 @@
 Lev Abashkin
 Zoltan Bartko
 Volker Berlin
+Vincent Bidaux
 Stéphane Bonhomme
 Didier Briel
 Kim Bruning
@@ -13,6 +14,7 @@ Enrique Estévez Fernández
 Martin Fleurke
 Wildrich Fourie
 Dmitri Gabinski
+Keith Godfrey
 Tony Graham
 Phillip Hall
 Jean-Christophe Helary
@@ -24,7 +26,6 @@ Chiaki Ishikawa
 Hans-Peter Jacobs
 Kyle Katarn
 Piotr Kulik
-Ibai Lakunza Velasco
 Guido Leenders
 Aaron Madlon-Kay
 Fabián Mandelbaum
@@ -38,12 +39,18 @@ Arno Peters
 Henry Pijffers
 Briac Pilpré
 Nick Pizzigati
+Marc Prior
+Damien Rembert
 Tiago Saboga
 Andrzej Sawuła
 Benjamin Siband
+Vito Smolej
+Kerry Swatridge
 Yu Tang
+Philippe Tourigny
 Rashid Umarov
 Kevin Brubeck Unhammer
+Ibai Lakunza Velasco
 Antonio Vilei
 Ilia Vinogradov
 Martin Wunderlich

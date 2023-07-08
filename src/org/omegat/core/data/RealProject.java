@@ -39,12 +39,10 @@ package org.omegat.core.data;
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
-import java.io.UncheckedIOException;
 import java.io.Writer;
 import java.nio.channels.FileChannel;
 import java.nio.channels.FileLock;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.FileSystemLoopException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -410,8 +408,7 @@ public class RealProject implements IProject {
             // build word count
             StatsResult stat = CalcStandardStatistics.buildProjectStats(this);
             stat.updateStatisticsInfo(hotStat);
-            String fn = config.getProjectInternal() + OConsts.STATS_FILENAME;
-            Statistics.writeStat(fn, stat.getTextData());
+            Statistics.writeStat(config.getProjectInternal(), stat);
 
             loaded = true;
 
@@ -710,7 +707,8 @@ public class RealProject implements IProject {
         }
 
         // COMPILE event is fired before committing translated files to remote
-        // repository to be able to modify the resulting files before sending them to
+        // repository to be able to modify the resulting files before sending
+        // them to
         // the repository (BUGS#1176)
         CoreEvents.fireProjectChange(IProjectEventListener.PROJECT_CHANGE_TYPE.COMPILE);
 
@@ -858,8 +856,7 @@ public class RealProject implements IProject {
                 // update statistics
                 StatsResult stat = CalcStandardStatistics.buildProjectStats(this);
                 stat.updateStatisticsInfo(hotStat);
-                String fn = config.getProjectInternal() + OConsts.STATS_FILENAME;
-                Statistics.writeStat(fn, stat.getTextData());
+                Statistics.writeStat(config.getProjectInternal(), stat);
             } finally {
                 Core.getMainWindow().getMainMenu().getProjectMenu().setEnabled(true);
             }
@@ -1031,8 +1028,8 @@ public class RealProject implements IProject {
                         public void rebaseAndSave(File out) throws Exception {
                             mergeTMX(baseTMX, headTMX, commitDetails);
 
-                            ProjectTMX newTMX = new ProjectTMX(config.getSourceLanguage(), config.getTargetLanguage(),
-                                    config.isSentenceSegmentingEnabled(),
+                            ProjectTMX newTMX = new ProjectTMX(config.getSourceLanguage(),
+                                    config.getTargetLanguage(), config.isSentenceSegmentingEnabled(),
                                     new File(config.getProjectInternalDir(), OConsts.STATUS_EXTENSION), null);
                             projectTMX.replaceContent(newTMX);
 

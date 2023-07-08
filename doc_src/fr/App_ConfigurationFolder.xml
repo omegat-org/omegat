@@ -16,7 +16,7 @@
 	<note>
 	  <para>Vous pouvez préciser un dossier de configuration autre que celui défini par défaut lorsque vous démarrez OmegaT à partir de la ligne de commande. Voir le guide pratique <link endterm="launch.with.command.line.title" linkend="launch.with.command.line"/> pour en savoir plus.</para>
 
-	  <para>Les préférences modifiées sont stockées dans le dossier de configuration du projet. Les modifications apportées dans les <link linkend="chapter.dialogs.preferences">préférences</link> seront stockées dans le dossier de configuration précisé et n’apparaîtront pas lorsque vous reprendrez le travail avec le dossier de configuration par défaut.</para>
+	  <para>Les préférences modifiées sont stockées dans le dossier de configuration du projet. Les modifications apportées dans les <link linkend="chapter.dialogs.preferences">préférences</link> seront stockées dans le dossier de configuration précisé et n’apparaitront pas lorsque vous reprendrez le travail avec le dossier de configuration par défaut.</para>
 	</note>
   </section>
   
@@ -151,8 +151,8 @@
 	<varlistentry id="configuration.folder.extra.contents.plugin">
 	  <term id="configuration.folder.extra.contents.plugin.title">plugins/</term>
 	  <listitem>
-		<para>Ce dossier fournit l’emplacement standard pour les plugins d’extension d’OmegaT installés manuellement. Voir le paramètre <link linkend="dialogs.preferences.plugins" endterm="dialogs.preferences.plugins.title"/> pour en savoir plus.</para>
-		<para>Il est également possible d’installer des plugins dans le dossier de l’application <link linkend="application.folder.plugins" endterm="application.folder.plugins.title"/>.</para>
+		<para>Ce dossier fournit l’emplacement standard pour les plug-ins d’extension d’OmegaT installés manuellement. Voir le paramètre <link linkend="dialogs.preferences.plugins" endterm="dialogs.preferences.plugins.title"/> pour en savoir plus.</para>
+		<para>Il est également possible d’installer des plug-ins dans le dossier de l’application <link linkend="application.folder.plugins" endterm="application.folder.plugins.title"/>.</para>
 	  </listitem>
 	</varlistentry>
 

@@ -2,7 +2,7 @@
  OmegaT 6.1.0
 ----------------------------------------------------------------------
   12 Enhancement
-  18 Bug fixes
+  20 Bug fixes
 ----------------------------------------------------------------------
 6.1.0 vs 6.0.0
 
@@ -61,14 +61,20 @@
   - build/release: Windows binary signature with PKCS#11 HSM
   https://sourceforge.net/p/omegat/bugs/1179/
 
-  - Team project failed to merge changes with TMXMerge
-  https://sourceforge.net/p/omegat/bugs/1170/
-
   - Team(git): when connecting new server, connection failed
   https://sourceforge.net/p/omegat/bugs/1177/
 
   - The COMPILE event is fired after the target commit
   https://sourceforge.net/p/omegat/bugs/1176/
+
+  - Passphrase for SSH key is stored with key= null://null:-1
+  https://sourceforge.net/p/omegat/bugs/1174/
+
+  - OmegaT ask passphrase to connect git+ssh server but dialog label is user/pass
+  https://sourceforge.net/p/omegat/bugs/1173/
+
+  - Team project failed to merge changes with TMXMerge
+  https://sourceforge.net/p/omegat/bugs/1170/
 
   - Useless warning log from CSS parser library
   https://sourceforge.net/p/omegat/bugs/1169/

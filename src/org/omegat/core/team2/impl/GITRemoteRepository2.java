@@ -66,10 +66,13 @@ import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.revwalk.RevTree;
 import org.eclipse.jgit.revwalk.RevWalk;
 import org.eclipse.jgit.transport.CredentialsProvider;
+import org.eclipse.jgit.transport.HttpTransport;
 import org.eclipse.jgit.transport.PushResult;
 import org.eclipse.jgit.transport.RemoteRefUpdate;
 import org.eclipse.jgit.transport.RemoteRefUpdate.Status;
 import org.eclipse.jgit.transport.SshSessionFactory;
+import org.eclipse.jgit.transport.http.HttpConnectionFactory;
+import org.eclipse.jgit.transport.http.apache.HttpClientConnectionFactory;
 import org.eclipse.jgit.transport.sshd.JGitKeyCache;
 import org.eclipse.jgit.transport.sshd.SshdSessionFactory;
 import org.eclipse.jgit.transport.sshd.SshdSessionFactoryBuilder;
@@ -124,6 +127,11 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
                 .setHomeDirectory(FS.detect().userHome())
                 .setSshDirectory(new File(FS.detect().userHome(), ".ssh")).build(new JGitKeyCache());
         SshSessionFactory.setInstance(sshdSessionFactory);
+        String useApache = System.getProperty("omegat.apache.http");
+        if (useApache != null && useApache.equalsIgnoreCase("true")) {
+            HttpConnectionFactory httpConnectionFactory = new HttpClientConnectionFactory();
+            HttpTransport.setConnectionFactory(httpConnectionFactory);
+        }
     }
 
     /**

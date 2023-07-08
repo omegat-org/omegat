@@ -154,6 +154,7 @@ ext {
     providedLibsDir = file('lib/provided')
     languageToolVersion = '5.7'
     luceneVersion = '5.5.5'
+    jgitVersion = '6.6.0.202305301015-r'
 }
 
 dependencies {
@@ -224,16 +225,17 @@ dependencies {
         implementation "org.apache.lucene:lucene-analyzers-stempel:${luceneVersion}"
 
         // Team project server support
-        implementation 'org.eclipse.jgit:org.eclipse.jgit:6.5.0.202303070854-r'
-        implementation 'org.eclipse.jgit:org.eclipse.jgit.ssh.apache:6.5.0.202303070854-r'
-        implementation 'org.eclipse.jgit:org.eclipse.jgit.ssh.apache.agent:6.5.0.202303070854-r'
+        implementation "org.eclipse.jgit:org.eclipse.jgit:${jgitVersion}"
+        implementation "org.eclipse.jgit:org.eclipse.jgit.ssh.apache:${jgitVersion}"
+        implementation "org.eclipse.jgit:org.eclipse.jgit.ssh.apache.agent:${jgitVersion}"
+        implementation "org.eclipse.jgit:org.eclipse.jgit.http.apache:${jgitVersion}"
         // For ed25519 and ecdsa support of ssh, java16+ or BC
         implementation 'org.bouncycastle:bcprov-jdk18on:1.72'
         implementation 'org.bouncycastle:bcpg-jdk18on:1.72'
         implementation 'org.bouncycastle:bcpkix-jdk18on:1.72'
         implementation 'net.i2p.crypto:eddsa:0.3.0'
         // For gpg signing
-        implementation 'org.eclipse.jgit:org.eclipse.jgit.gpg.bc:6.5.0.202303070854-r'
+        implementation "org.eclipse.jgit:org.eclipse.jgit.gpg.bc:${jgitVersion}"
 
         // For subversion
         implementation 'org.tmatesoft.svnkit:svnkit:1.10.11'

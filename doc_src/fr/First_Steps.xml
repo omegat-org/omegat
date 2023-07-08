@@ -10,15 +10,15 @@
 	<title id="first-steps">Premiers pas</title>
 	<para>Appuyer sur la touche <keycap>F1</keycap> ou accéder au menu <guimenu>Aide</guimenu> pour ouvrir le manuel d’utilisation. Ce manuel fournit une introduction complète à OmegaT. Pour utiliser OmegaT avec des paramètres simplifiés, procédez comme suit :<orderedlist id="first-step-list">
 	  <listitem>
-		<para>Dans le menu <guimenu>Projet</guimenu>, sélectionnez <guimenuitem>Nouveau...</guimenuitem> pour créer un nouveau projet.</para>
+		<para>Dans le menu <guimenu>Projet</guimenu>, sélectionnez <guimenuitem>Nouveau…</guimenuitem> pour créer un nouveau projet.</para>
 	  </listitem>
 	  <listitem>
 		<para>Indiquez la langue du fichier source ainsi que la langue de traduction. Cliquez sur <guibutton>OK</guibutton>.</para>
 
-		<para>→ OmegaT créera un ensemble de dossiers contenant vos fichiers. Il créera également une mémoire de traduction vide qu’il remplira en arrière-plan, un segment à la fois, au fur et à mesure de votre traduction. Les correspondances pour cette mémoire apparaîtront éventuellement dans le volet <guilabel>Correspondances</guilabel>.</para>
+		<para>→ OmegaT créera un ensemble de dossiers contenant vos fichiers. Il créera également une mémoire de traduction vide qu’il remplira en arrière-plan, un segment à la fois, au fur et à mesure de votre traduction. Les correspondances pour cette mémoire apparaitront éventuellement dans le volet <guilabel>Correspondances</guilabel>.</para>
 	  </listitem>
 	  <listitem>
-		<para>Cliquez sur <guibutton>Ajouter des fichiers...</guibutton> et ajoutez les fichiers que vous souhaitez traduire. Fermez la fenêtre.</para>
+		<para>Cliquez sur <guibutton>Ajouter des fichiers…</guibutton> et ajoutez les fichiers que vous souhaitez traduire. Fermez la fenêtre.</para>
 
 		<para>→ OmegaT copiera les fichiers sélectionnés dans le projet créé lors de l’étape précédente. Ils sont affichés segment par segment pour que vous puissiez les traduire.</para>
 	  </listitem>

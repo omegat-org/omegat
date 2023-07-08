@@ -29,13 +29,13 @@
     </listitem>
   </itemizedlist>
 
-  <para>En saisissant du texte, vous ouvrez un champ <guilabel>Filtre</guilabel> en bas de la fenêtre dans lequel les noms de fichiers peuvent être saisies. Vous pouvez utiliser les flèches pour sélectionner un fichier et appuyer sur <keycap>Entrée</keycap> pour l’ouvrir afin de le traduire.</para>
+  <para>En tapant du texte, un champ <guilabel>Filtre</guilabel> s'ouvre en bas de la fenêtre dans lequel les noms de fichiers peuvent être saisis. Vous pouvez utiliser les flèches pour sélectionner un fichier et appuyer sur <keycap>Entrée</keycap> pour l’ouvrir afin de le traduire.</para>
 
   <note>
-	<para>Les noms de fichiers (première colonne) peuvent être triés par ordre alphabétique en cliquant sur l’en-tête. Vous pouvez modifier la position d’un fichier en le sélectionnant et en cliquant sur l’un des boutons <guibutton>Glisser...</guibutton> à droite.</para>
+	<para>Les noms de fichiers (première colonne) peuvent être triés par ordre alphabétique en cliquant sur l’entête. Vous pouvez modifier la position d’un fichier en le sélectionnant et en cliquant sur l’un des boutons <guibutton>Glisser…</guibutton> à droite.</para>
   </note>
 
-  <para>Un clic droit sur un nom de fichier fait apparaître un menu contextuel qui vous permet d’ouvrir le fichier source ou le fichier cible (s’il existe).</para>
+  <para>Un clic droit sur un nom de fichier fait apparaitre un menu contextuel qui vous permet d’ouvrir le fichier source ou le fichier cible (s’il existe).</para>
 
   <para>Le nombre de segments <emphasis role="bold">Uniques</emphasis> est calculé en retirant le nombre de segments répétés du nombre total de segments.</para>
 
@@ -47,14 +47,14 @@
   
   <variablelist>
 	<varlistentry id="windows.source.files.list.copy.files">
-	  <term id="windows.source.files.list.copy.files.title"><guibutton>Ajouter des fichiers...</guibutton></term>
+	  <term id="windows.source.files.list.copy.files.title"><guibutton>Ajouter des fichiers…</guibutton></term>
 	<listitem>
 	  <para>Copie les fichiers sélectionnés au dossier <link linkend="project.folder.source" endterm="project.folder.source.title"/> et recharge le projet pour prendre en compte les nouveaux fichiers.</para>
 	</listitem>
 	</varlistentry>
 	
 	<varlistentry id="windows.source.files.list.download.page">
-	  <term id="windows.source.files.list.download.page.title"><guibutton>Ajouter une page MediaWiki...</guibutton></term>
+	  <term id="windows.source.files.list.download.page.title"><guibutton>Ajouter une page MediaWiki…</guibutton></term>
 	  <listitem>
 		<para>Demande la saisie l’URL d’une page et la télécharge dans le dossier <link linkend="project.folder.source" endterm="project.folder.source.title"/>.</para>
 	  </listitem>

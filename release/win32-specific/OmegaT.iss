@@ -23,6 +23,7 @@ ArchitecturesInstallIn64BitMode=@ARCHITECTURE_SUBST@
 Source: "docs\*"; DestDir: "{app}\docs"; Flags: recursesubdirs
 Source: "images\*"; DestDir: "{app}\images"; Flags: recursesubdirs
 Source: "lib\*"; DestDir: "{app}\lib"; Flags: recursesubdirs
+Source: "modules\*"; DestDir: "{app}\modules"; Flags: recursesubdirs
 Source: "plugins\*"; DestDir: "{app}\plugins"; Flags: recursesubdirs
 Source: "scripts\*"; DestDir: "{app}\scripts"; Flags: recursesubdirs
 Source: "OmegaT.exe"; DestDir: "{app}"
@@ -205,8 +206,10 @@ function PrepareToInstall(var NeedsRestart: Boolean): String;
 begin
   if not DelTreeIfPresent(ExpandConstant('{app}/lib')) then
     Result := 'Failed to remove existing ' + ExpandConstant('{app}/lib') + ' directory'
-  else if not  DelTreeIfPresent(ExpandConstant('{app}/jre')) then
+  else if not DelTreeIfPresent(ExpandConstant('{app}/jre')) then
     Result := 'Failed to remove existing ' + ExpandConstant('{app}/jre') + ' directory'
+  else if not DelTreeIfPresent(ExpandConstant('{app}/modules')) then
+    Result := 'Failed to remove existing ' + ExpandConstant('{app}/modules') + ' directory'
   else
     Result := '';
 end;

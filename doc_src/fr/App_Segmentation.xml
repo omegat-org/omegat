@@ -59,10 +59,10 @@
 	<title id="dialog.preferences.segmentation.setup.scope.title">Globales ou locales ?</title>
 
 	<note>
-	  <para>Les mêmes mécanismes et boîtes de dialogue sont utilisés pour définir les règles globales et locales de segmentation.</para>
+	  <para>Les mêmes mécanismes et boites de dialogue sont utilisés pour définir les règles globales et locales de segmentation.</para>
 	</note>
 
-	<para>Par défaut, les paramètres de segmentation sont globaux, locaux et partagés par tous les projets.</para>
+	<para>Par défaut, les paramètres de segmentation sont globaux et partagés par tous les projets.</para>
 
 	<para>Utilisez les propriétés de projet <link linkend="dialogs.project.properties.local.segmentation" endterm="dialogs.project.properties.local.segmentation.title"/> pour limiter la portée des règles de segmentation au projet en cours.</para>
 

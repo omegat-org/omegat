@@ -23,9 +23,9 @@
 		  <listitem>
 			<para>Depuis une URL</para>
 
-			<para>Utilisez <link endterm="menus.project.title" linkend="menus.project"/><link endterm="menus.project.download.team.project.title" linkend="menus.project.download.team.project"/> pour afficher la boîte de dialogue <guilabel>Télécharger projet en équipe</guilabel>.</para>
+			<para>Utilisez <link endterm="menus.project.title" linkend="menus.project"/><link endterm="menus.project.download.team.project.title" linkend="menus.project.download.team.project"/> pour afficher la boite de dialogue <guilabel>Télécharger projet en équipe</guilabel>.</para>
 
-			<para>Entrez l’URL fournie par l’administrateur du projet en équipe dans le champ <guilabel>URL du dépôt</guilabel>en haut de la boîte de dialogue, et sélectionnez un dossier pour le projet dans le champ <guilabel>Nouveau dossier du projet local</guilabel>. Laissez l’option <guilabel>Branche par défaut</guilabel> cochée sauf si l’administrateur du projet a fourni des instructions pour utiliser une branche personnalisée.</para>
+			<para>Entrez l’URL fournie par l’administrateur du projet en équipe dans le champ <guilabel>URL du dépôt</guilabel> en haut de la boite de dialogue et sélectionnez un dossier pour le projet dans le champ <guilabel>Nouveau dossier du projet local</guilabel>. Laissez l’option <guilabel>Branche par défaut</guilabel> cochée sauf si l’administrateur du projet a fourni des instructions pour utiliser une branche spécifique.</para>
 		  </listitem>
 
 		  <listitem>
@@ -38,7 +38,7 @@
 		<note>
 		  <para>Les serveurs utilisent généralement deux types d’authentification principaux : la saisie d’un <emphasis>identifiant/mot de passe</emphasis> ou <emphasis>SSH</emphasis>.</para>
 
-		  <para>Si le serveur recourt à une authentification par identifiant/mot de passe, OmegaT vous présentera une boîte de dialogue <guilabel>Authentification</guilabel> afin d’entrer votre identifiant et votre mot de passe, soit lors du téléchargement initial du projet, soit plus tard dans le processus. OmegaT se souviendra alors de vos informations d’identification pour ce projet spécifique sauf si vous les supprimez formellement. Voir les préférences <link linkend="dialog.preferences.team.title.repository.credentials" endterm="dialog.preferences.team.title.repository.credentials.title"/> pour en savoir plus.</para>
+		  <para>Si le serveur recourt à une authentification par identifiant/mot de passe, OmegaT vous présentera une boite de dialogue <guilabel>Authentification</guilabel> afin d’entrer votre identifiant et votre mot de passe, soit lors du téléchargement initial du projet, soit plus tard dans le processus. OmegaT se souviendra alors de vos informations d’identification pour ce projet spécifique sauf si vous les supprimez formellement. Voir les préférences <link linkend="dialog.preferences.team.title.repository.credentials" endterm="dialog.preferences.team.title.repository.credentials.title"/> pour en savoir plus.</para>
 
 		  <para>Si le serveur utilise une authentification SSH, veillez à mettre à jour votre configuration SSH afin d’inclure ce serveur avant d’essayer de télécharger le projet, sinon vous rencontrerez une erreur d’authentification et le chargement du projet échouera.</para>
 

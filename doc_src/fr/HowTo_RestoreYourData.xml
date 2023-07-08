@@ -44,7 +44,7 @@
 	  </listitem>
 
 	  <listitem>
-		<para>Chaque fois que vous enregistrez les données du projet (en utilisant <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.save" endterm="menus.project.save.title"/>), ou lors d’une sauvegarde régulière, OmegaT enregistre l’état le plus récent de la traduction dans <filename>project_save.tmx</filename>.</para>
+		<para>Chaque fois que vous sauvegardez les données du projet (en utilisant <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.save" endterm="menus.project.save.title"/>), ou lors d'une sauvegarde régulière, OmegaT enregistre l'état actuel de la traduction dans <filename>project_save.tmx</filename>.</para>
 	  </listitem>
 	</orderedlist>
 
@@ -57,9 +57,9 @@
   </section>
 
   <section id="how.to.restore.your.data.lost.in.translation">
-	<title id="how.to.restore.your.data.lost.in.translation.title">Vous avez perdu votre traduction</title>
+	<title id="how.to.restore.your.data.lost.in.translation.title">Vous avez perdu votre traduction ?</title>
 
-	<para>Même si vous craignez d’avoir perdu des données de traduction, elles sont sûrement stockées en toute sécurité dans la mémoire de sauvegarde la plus récente, qui n’a généralement pas plus de quelques minutes.</para>
+	<para>Même si vous craignez d’avoir perdu des données de traduction, elles sont surement stockées en toute sécurité dans la mémoire de sauvegarde la plus récente, qui n’a généralement pas plus de quelques minutes.</para>
 
 	<para>Procédez comme suit :</para>
 	
@@ -81,19 +81,19 @@
       </listitem>
 
       <listitem>
-		<para>Rouvrez le projet.</para>
+		<para>Ouvrez le projet à nouveau.</para>
       </listitem>
 	</orderedlist>
 
-	<para>Cette procédure permet de restaurer la traduction dans l’état dans lequel elle se trouvait au moment où la sauvegarde choisie a été créée. Vous pouvez répéter cette opération autant de fois que nécessaire pour trouver des sauvegardes plus anciennes. Pensez à conserver en lieu sûr tous les différents fichiers que vous renommez pour éventuellement les réutiliser. N’oubliez pas qu’il ne faut pas modifier la configuration du projet ou ajouter des fichiers TMX entre-temps, car ces actions peuvent créer des obstacles à l’aboutissement de la procédure.</para>
+	<para>Cette procédure permet de restaurer la traduction dans l’état dans lequel elle se trouvait au moment où la sauvegarde choisie a été créée. Vous pouvez répéter cette opération autant de fois que nécessaire pour trouver des sauvegardes plus anciennes. Pensez à conserver en lieu sûr tous les différents fichiers que vous renommez pour éventuellement les réutiliser. N’oubliez pas qu’il ne faut pas modifier la configuration du projet ou ajouter des fichiers TMX entretemps, car ces actions peuvent créer des obstacles à l’aboutissement de la procédure.</para>
 
 	<note>
-	  <para>La prudence est de mise si vous voulez modifier les fichiers du dossier source, les règles de segmentation ou les filtres de fichiers au cours d’un projet. Modifier l’un de ces éléments après avoir commencé votre traduction peut provoquer la disparition ou l’apparition inopinées de certains segments.</para>
+	  <para>La prudence est de mise si vous voulez modifier les fichiers du dossier source, les règles de segmentation ou les filtres de fichiers au cours d’un projet. Modifier l’un de ces éléments après avoir commencé votre traduction peut provoquer la disparition ou l’apparition inopinée de certains segments.</para>
 	</note>
   </section>
 
   <section id="how.to.restore.your.data.project.locked">
-	<title id="how.to.restore.your.data.project.locked.title">Votre projet est verrouillé</title>
+	<title id="how.to.restore.your.data.project.locked.title">Votre projet est verrouillé ?</title>
 
 	<para>Dans le cas exceptionnel où votre ordinateur plante et où OmegaT n’a pas eu le temps de se fermer correctement, le système d’exploitation peut verrouiller le fichier <filename>omegat.project</filename> et vous empêcher de le rouvrir après le redémarrage de l’ordinateur.</para>
 
@@ -125,7 +125,7 @@
   </section>
   
   <section id="how.to.restore.your.data.project.wont.open">
-	<title id="how.to.restore.your.data.project.wont.open.title">Votre projet ne s’ouvre pas</title>
+	<title id="how.to.restore.your.data.project.wont.open.title">Votre projet ne s'ouvre pas ?</title>
 
 	<para>Dans le cas exceptionnel où votre ordinateur plante et où OmegaT n’a pas eu le temps de se fermer correctement, certains fichiers importants peuvent être corrompus et empêcher la réouverture du projet après le redémarrage de votre système.</para>
 
@@ -161,7 +161,7 @@
   </section>
 
   <section id="how.to.restore.your.data.translated.file.broken">
-	<title id="how.to.restore.your.data.translated.file.broken.title">Votre fichier traduit ne s’ouvre pas</title>
+	<title id="how.to.restore.your.data.translated.file.broken.title">Votre fichier traduit ne s'ouvre pas ?</title>
 
 	<para>Très souvent, les fichiers de suites bureautiques contiennent des balises qui doivent être copiées dans la traduction pour que le fichier traduit puisse être ouvert dans l’application d’origine. Dans certains cas, les balises manquantes empêchent l’ouverture du fichier.</para>
 	
@@ -193,7 +193,7 @@
   </section>
 
   <section id="how.to.restore.your.data.omegat.wont.behave">
-	<title id="how.to.restore.your.data.omegat.wont.behave.title">OmegaT ne fonctionne pas correctement</title>
+	<title id="how.to.restore.your.data.omegat.wont.behave.title">OmegaT ne fonctionne pas correctement ?</title>
 
 	<para>Quelque chose s’est produit et OmegaT ne fonctionne plus correctement. Vous avez tout essayé et ne parvenez pas à résoudre le problème. Avant d’appeler à l’aide, tentez une dernière manipulation : redémarrez OmegaT avec les paramètres par défaut.</para>
 
@@ -204,7 +204,7 @@
 		<para>Utilisez <link linkend="menus.options" endterm="menus.options.title"/><link linkend="menus.options.access.configuration.folder" endterm="menus.options.access.configuration.folder.title"/> pour accéder au dossier de configuration.</para>
 		
 		<note>
-		  <para>Si vous ne pouvez pas entrer dans les menus d’OmegaT, consultez le chapitre <link linkend="configuration.folder" endterm="configuration.folder.title"/> pour connaître l’emplacement du dossier de configuration.</para>
+		  <para>Si vous ne pouvez pas entrer dans les menus d’OmegaT, consultez le chapitre <link linkend="configuration.folder" endterm="configuration.folder.title"/> pour connaitre l’emplacement du dossier de configuration.</para>
 		</note>
       </listitem>
 
@@ -255,7 +255,7 @@
       </listitem>
 
       <listitem>
-		<para>Entraînez-vous régulièrement à appliquer des « mesures d’urgence  » telles que la récupération de traductions d’un projet, de manière à éviter de perdre trop de temps le jour où vous aurez besoin de ces compétences.</para>
+		<para>Entrainez-vous régulièrement à appliquer des « mesures d’urgence  » telles que la récupération de traductions d’un projet, de manière à éviter de perdre trop de temps le jour où vous aurez besoin de ces compétences.</para>
       </listitem>
 	</itemizedlist>
   </section>

@@ -16,7 +16,7 @@
 
   <variablelist>
     <varlistentry id="menus.tools.check.issues">
-      <term id="menus.tools.check.issues.title"><guimenuitem>Afficher les erreurs...</guimenuitem> <keycombo><keycap>C</keycap><keycap>Maj</keycap><keycap>V</keycap></keycombo></term>
+      <term id="menus.tools.check.issues.title"><guimenuitem>Afficher les erreurs…</guimenuitem> <keycombo><keycap>C</keycap><keycap>Maj</keycap><keycap>V</keycap></keycombo></term>
       <listitem>
         <para>L’outil d’assurance de qualité effectue toutes les vérifications automatiques en une fois et affiche les résultats dans une fenêtre.</para>
 
@@ -51,7 +51,7 @@
           </listitem>
 
           <listitem>
-            <para>Cliquer sur un en-tête de colonne modifie l’ordre de tri de la colonne.</para>
+            <para>Cliquer sur un entête de colonne modifie l’ordre de tri de la colonne.</para>
           </listitem>
 
           <listitem>
@@ -94,11 +94,11 @@
 			</listitem>
 
 			<listitem>
-			  <para>Balises : Les balises OmegaT ne sont jamais comptées dans les statistiques, mais dans certains elles peuvent diviser des termes et créer des divergences dans la façon dont OmegaT les comptabilise. Voir le paramètre <link linkend="dialogs.project.properties.hide.tags" endterm="dialogs.project.properties.hide.tags.title"/> dans la boîte de dialogue <link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/> pour en savoir plus.</para>
+			  <para>Balises : Les balises OmegaT ne sont jamais comptées dans les statistiques, mais dans certains elles peuvent diviser des termes et créer des divergences dans la façon dont OmegaT les comptabilise. Voir le paramètre <link linkend="dialogs.project.properties.hide.tags" endterm="dialogs.project.properties.hide.tags.title"/> dans la boite de dialogue <link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/> pour en savoir plus.</para>
 			</listitem>
 
 			<listitem>
-			  <para>Balises personnalisées et textes signalés : comme les balises OmegaT, ils ne sont pas comptés par défaut dans les statistiques, mais vous pouvez demander a OmegaT de les compter comme des mots. Voir le paramètre <link linkend="dialogs.preferences.tag.processing.count.protected.text.and.custom.tags.in.statistics" endterm="dialogs.preferences.tag.processing.count.protected.text.and.custom.tags.in.statistics.title"/> pour en savoir plus.</para>
+			  <para>Balises personnalisées et textes signalés : comme les balises OmegaT, ils ne sont pas comptés par défaut dans les statistiques, mais vous pouvez demander à OmegaT de les compter comme des mots. Voir le paramètre <link linkend="dialogs.preferences.tag.processing.count.protected.text.and.custom.tags.in.statistics" endterm="dialogs.preferences.tag.processing.count.protected.text.and.custom.tags.in.statistics.title"/> pour en savoir plus.</para>
 			</listitem>
 		  </itemizedlist>
 		</note>
@@ -129,12 +129,12 @@
         <para>Sélectionner les deux fichiers à aligner (le fichier source et sa traduction) et cliquer sur <guibutton>OK</guibutton> pour ouvrir la fenêtre <link linkend="windows.aligner" endterm="windows.aligner.title"/>.</para>
 
         <para>Les formats de fichiers pris en charge dépendent des paramètres de votre projet. Voir l’annexe <link linkend="file.filters" endterm="file.filters.title"/> pour en savoir plus.</para>
-        <para>Les fichiers source et cible peuvent être dans des formats différents, (par exemple, un fichier <filename>.docx</filename> peut être aligné avec un fichier <filename>.pdf</filename>).</para>
+        <para>Les fichiers source et cible peuvent être dans des formats différents (par exemple, un fichier <filename>.docx</filename> peut être aligné avec un fichier <filename>.pdf</filename>).</para>
       </listitem>
     </varlistentry>
 
     <varlistentry id="menus.tools.scripting">
-      <term id="menus.tools.scripting.title"><guimenuitem>Scripts...</guimenuitem></term>
+      <term id="menus.tools.scripting.title"><guimenuitem>Scripts…</guimenuitem></term>
       <listitem>
         <para>Ouvre la fenêtre <link linkend="windows.scripts" endterm="windows.scripts.title"/>, qui vous permet de définir l’emplacement où les scripts se trouvent, ainsi que d’écrire et d’exécuter des scripts, et leur assigner un raccourci.</para>
 		<para>La liste sous cet élément affiche 12 emplacements potentiels pour des scripts. Cliquer sur un emplacement assigné permet de lancer le script assigné à cet emplacement.</para>
@@ -152,7 +152,7 @@
 			</listitem>
 
 			<listitem>
-              <para>Faites un clic-droit sur un numéro libre au bas de la fenêtre et choisissez <guilabel>Ajouter le script</guilabel>.</para>
+              <para>Faites un clic droit sur un numéro libre au bas de la fenêtre et choisissez <guilabel>Ajouter le script</guilabel>.</para>
 			</listitem>
           </orderedlist>
 		</note>

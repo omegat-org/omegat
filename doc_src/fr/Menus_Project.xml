@@ -26,21 +26,21 @@
     </varlistentry>
 
     <varlistentry id="menus.project.download.team.project">
-      <term id="menus.project.download.team.project.title"><guimenuitem>Télécharger projet en équipe...</guimenuitem></term>
+      <term id="menus.project.download.team.project.title"><guimenuitem>Télécharger projet en équipe…</guimenuitem></term>
       <listitem>
         <para>Crée une copie locale d’un projet distant OmegaT. Voir le guide pratique <link linkend="how.to.use.team.project" endterm="how.to.use.team.project.title"/> pour en savoir plus.</para>
       </listitem>
     </varlistentry>
 
     <varlistentry id="menus.project.open">
-      <term id="menus.project.open.title"><guimenuitem>Ouvrir...</guimenuitem> <keycombo><keycap>C</keycap><keycap>O</keycap></keycombo></term>
+      <term id="menus.project.open.title"><guimenuitem>Ouvrir…</guimenuitem> <keycombo><keycap>C</keycap><keycap>O</keycap></keycombo></term>
       <listitem>
-        <para>Ouvre un projet pré-existant.</para>
+        <para>Ouvre un projet préexistant.</para>
       </listitem>
     </varlistentry>
 
     <varlistentry id="menus.project.open.recent">
-      <term id="menus.project.open.recent.title"><guimenuitem>Ouvert récemment...</guimenuitem></term>
+      <term id="menus.project.open.recent.title"><guimenuitem>Ouvert récemment…</guimenuitem></term>
       <listitem>
         <para>Donne accès aux dix derniers projets modifiés. Cliquer sur l’un d’entre eux enregistrera votre projet actuel, le fermera et ouvrira le projet sélectionné.</para>
         <para>Utiliser la fonction <guimenuitem>Effacer le menu</guimenuitem> pour supprimer la liste des projets récents.</para>
@@ -74,16 +74,16 @@
     </varlistentry>
 
     <varlistentry id="menus.project.copy.files.to.source.folder">
-      <term id="menus.project.copy.files.to.source.folder.title"><guimenuitem>Ajouter des fichiers...</guimenuitem></term>
+      <term id="menus.project.copy.files.to.source.folder.title"><guimenuitem>Ajouter des fichiers…</guimenuitem></term>
       <listitem>
         <para>Copie les fichiers sélectionnés au dossier <link linkend="project.folder.source" endterm="project.folder.source.title"/> et recharge le projet pour prendre en compte les nouveaux fichiers.</para>
       </listitem>
     </varlistentry>
 
     <varlistentry id="menus.project.download.mediawiki.page">
-      <term id="menus.project.download.mediawiki.page.title"><guimenuitem>Ajouter une page MediaWiki...</guimenuitem></term>
+      <term id="menus.project.download.mediawiki.page.title"><guimenuitem>Ajouter une page MediaWiki…</guimenuitem></term>
       <listitem>
-		<para>Ouvre une boîte de dialogue où vous pouvez coller l’URL de la page MediaWiki que vous souhaitez traduire. Les données source de la page seront copiées dans le dossier <link linkend="project.folder.source" endterm="project.folder.source.title"/>, en tant que fichier texte, avec l’extension <filename>.utf8</filename>.</para>
+		<para>Ouvre une boite de dialogue où vous pouvez coller l’URL de la page MediaWiki que vous souhaitez traduire. Les données source de la page seront copiées dans le dossier <link linkend="project.folder.source" endterm="project.folder.source.title"/>, en tant que fichier texte, avec l’extension <filename>.utf8</filename>.</para>
       </listitem>
     </varlistentry>
 
@@ -121,15 +121,15 @@
     </varlistentry>
 
     <varlistentry id="menus.project.open.med.project">
-      <term id="menus.project.open.med.project.title"><guimenuitem>Ouvrir un projet MED...</guimenuitem></term>
+      <term id="menus.project.open.med.project.title"><guimenuitem>Ouvrir un projet MED…</guimenuitem></term>
 	  <!-- TODO add link to a format description -->
       <listitem>
-        <para>Ouvre un projet empaqueté au format MED définit par la direction générale de la traduction de l’Union européenne.</para>
+        <para>Ouvre un projet empaqueté au format MED défini par la direction générale de la traduction de l’Union européenne.</para>
       </listitem>
     </varlistentry>
 
     <varlistentry id="menus.project.create.med.project">
-      <term id="menus.project.create.med.project.title"><guimenuitem>Créer projet MED...</guimenuitem></term>
+      <term id="menus.project.create.med.project.title"><guimenuitem>Créer projet MED…</guimenuitem></term>
 	  <!-- TODO add link to a format description -->
       <listitem>
         <para>Permet de transformer le projet en paquet MED.</para>
@@ -137,16 +137,16 @@
     </varlistentry>
 
     <varlistentry id="menus.project.properties">
-      <term id="menus.project.properties.title"><guimenuitem>Propriétés...</guimenuitem> <keycombo><keycap>C</keycap><keycap>E</keycap></keycombo></term>
+      <term id="menus.project.properties.title"><guimenuitem>Propriétés…</guimenuitem> <keycombo><keycap>C</keycap><keycap>E</keycap></keycombo></term>
       <listitem>
-        <para>Affiche la boîte de dialogue <link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/> pour modifier les langues du projet les emplacements des dossiers.</para>
+        <para>Affiche la boite de dialogue <link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/> pour modifier les langues du projet les emplacements des dossiers.</para>
 		<para>
 		</para>		
       </listitem>
     </varlistentry>
 
     <varlistentry id="menus.project.source.files.list">
-      <term id="menus.project.source.files.list.title"><guimenuitem>Fichiers du projet...</guimenuitem> <keycombo><keycap>C</keycap><keycap>L</keycap></keycombo></term>
+      <term id="menus.project.source.files.list.title"><guimenuitem>Fichiers du projet…</guimenuitem> <keycombo><keycap>C</keycap><keycap>L</keycap></keycombo></term>
       <listitem>
         <para>Ouvre la fenêtre <link linkend="windows.source.files.list" endterm="windows.source.files.list.title"/>.</para>
 		<para>
@@ -157,7 +157,7 @@
     <varlistentry id="menus.project.access.project.contents">
       <term id="menus.project.access.project.contents.title"><guisubmenu>Accéder au contenu du projet</guisubmenu></term>
       <listitem>
-        <para>Donne accès aux différents dossiers du projet. Voir la chapitre <link linkend="chapter.project.folder" endterm="chapter.project.folder.title"/> pour en savoir plus.</para>
+        <para>Donne accès aux différents dossiers du projet. Voir le chapitre <link linkend="chapter.project.folder" endterm="chapter.project.folder.title"/> pour en savoir plus.</para>
         <para>De plus, il y a trois entrées de menu qui ouvrent directement les fichiers source ou cible actuels, ou le glossaire modifiable. Les fichiers sont ouverts dans l’application par défaut définie par le système d’exploitation. Les options sont grisées si les fichiers n’existent pas.</para>
 
 		<variablelist>

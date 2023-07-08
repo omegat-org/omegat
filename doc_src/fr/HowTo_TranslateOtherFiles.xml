@@ -28,7 +28,7 @@
 
 	  <para>Les filtres de fichiers sont associés à une liste d’extensions de fichiers. Si le format que vous souhaitez traduire est structurellement proche d’un format déjà pris en charge, il suffit d’ajouter son extension de fichier à la liste des extensions de format prises en charge ou de modifier l’extension de fichier pour qu’elle soit acceptée par le filtre de fichiers que vous souhaitez utiliser. Voir le chapitre <link linkend="file.filters" endterm="file.filters.title"/> pour en savoir plus.</para>
 		
-	  <para>Vous pouvez également utiliser la fonction de balise personnalisée d’OmegaT pour enregistrer des chaînes de caractères spécifiques à un format et faire en sorte qu’OmegaT les traite comme s’il s’agissait de balises normales. Voir le paramètre <link linkend="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags" endterm="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags.title"/> pour en savoir plus.</para>
+	  <para>Vous pouvez également utiliser la fonction de balise personnalisée d’OmegaT pour enregistrer des chaines de caractères spécifiques à un format et faire en sorte qu’OmegaT les traite comme s’il s’agissait de balises normales. Voir le paramètre <link linkend="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags" endterm="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags.title"/> pour en savoir plus.</para>
 	</section>
 	
 	<section id="how.to.translate.other.files.convert">
@@ -76,10 +76,6 @@
 		</listitem>
 	  </itemizedlist>
 	  
-	  <warning>
-		<para>OmegaT prend en charge la plupart des fichiers po, mais le filtre XLIFF par défaut d’OmegaT n’est pas suffisant pour prendre en charge les fichiers XLIFF créés par Rainbow, OpenXLIFF ou d’autres outils de TAO. La prise en charge adéquate de XLIFF dans OmegaT ne peut être obtenue que par des extensions tierces. Voir <link linkend="how.to.translate.other.files.third.party.plugins">ci-dessous</link>.</para>
-	  </warning>
-
 		<para>Certains formats, comme le PDF, ne peuvent pas être correctement traités par des conversions « aller-retour ». Il faut alors effectuer une conversion intermédiaire vers un format pris en charge, qui servira de base pour créer manuellement un document adéquat dans la langue cible.</para>
 		
 		<para>Il existe plusieurs solutions en ligne ou hors ligne permettant de convertir des fichiers PDF en formats de bureautique courants. Toutefois, la conversion nécessitera toujours d’importants ajustements manuels du document cible avant de pouvoir produire un document PDF convenable. Assurez-vous d’avoir une bonne connaissance des exigences en matière de format lorsque vous commencez à travailler sur un fichier PDF ou sur un fichier similaire.</para>

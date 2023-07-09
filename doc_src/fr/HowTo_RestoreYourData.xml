@@ -59,7 +59,7 @@
   <section id="how.to.restore.your.data.lost.in.translation">
 	<title id="how.to.restore.your.data.lost.in.translation.title">Vous avez perdu votre traduction</title>
 
-	<para>Même si vous craignez d’avoir perdu des données de traduction, elles sont sûrement stockées en toute sécurité dans la mémoire de sauvegarde la plus récente, qui n’a généralement pas plus de quelques minutes.</para>
+	<para>Même si vous craignez d’avoir perdu des données de traduction, elles sont surement stockées en toute sécurité dans la mémoire de sauvegarde la plus récente, qui n’a généralement pas plus de quelques minutes.</para>
 
 	<para>Procédez comme suit :</para>
 	
@@ -85,10 +85,10 @@
       </listitem>
 	</orderedlist>
 
-	<para>Cette procédure permet de restaurer la traduction dans l’état dans lequel elle se trouvait au moment où la sauvegarde choisie a été créée. Vous pouvez répéter cette opération autant de fois que nécessaire pour trouver des sauvegardes plus anciennes. Pensez à conserver en lieu sûr tous les différents fichiers que vous renommez pour éventuellement les réutiliser. N’oubliez pas qu’il ne faut pas modifier la configuration du projet ou ajouter des fichiers TMX entre-temps, car ces actions peuvent créer des obstacles à l’aboutissement de la procédure.</para>
+	<para>Cette procédure permet de restaurer la traduction dans l’état dans lequel elle se trouvait au moment où la sauvegarde choisie a été créée. Vous pouvez répéter cette opération autant de fois que nécessaire pour trouver des sauvegardes plus anciennes. Pensez à conserver en lieu sûr tous les différents fichiers que vous renommez pour éventuellement les réutiliser. N’oubliez pas qu’il ne faut pas modifier la configuration du projet ou ajouter des fichiers TMX entretemps, car ces actions peuvent créer des obstacles à l’aboutissement de la procédure.</para>
 
 	<note>
-	  <para>La prudence est de mise si vous voulez modifier les fichiers du dossier source, les règles de segmentation ou les filtres de fichiers au cours d’un projet. Modifier l’un de ces éléments après avoir commencé votre traduction peut provoquer la disparition ou l’apparition inopinées de certains segments.</para>
+	  <para>La prudence est de mise si vous voulez modifier les fichiers du dossier source, les règles de segmentation ou les filtres de fichiers au cours d’un projet. Modifier l’un de ces éléments après avoir commencé votre traduction peut provoquer la disparition ou l’apparition inopinée de certains segments.</para>
 	</note>
   </section>
 
@@ -204,7 +204,7 @@
 		<para>Utilisez <link linkend="menus.options" endterm="menus.options.title"/><link linkend="menus.options.access.configuration.folder" endterm="menus.options.access.configuration.folder.title"/> pour accéder au dossier de configuration.</para>
 		
 		<note>
-		  <para>Si vous ne pouvez pas entrer dans les menus d’OmegaT, consultez le chapitre <link linkend="configuration.folder" endterm="configuration.folder.title"/> pour connaître l’emplacement du dossier de configuration.</para>
+		  <para>Si vous ne pouvez pas entrer dans les menus d’OmegaT, consultez le chapitre <link linkend="configuration.folder" endterm="configuration.folder.title"/> pour connaitre l’emplacement du dossier de configuration.</para>
 		</note>
       </listitem>
 
@@ -255,7 +255,7 @@
       </listitem>
 
       <listitem>
-		<para>Entraînez-vous régulièrement à appliquer des « mesures d’urgence  » telles que la récupération de traductions d’un projet, de manière à éviter de perdre trop de temps le jour où vous aurez besoin de ces compétences.</para>
+		<para>Entrainez-vous régulièrement à appliquer des « mesures d’urgence  » telles que la récupération de traductions d’un projet, de manière à éviter de perdre trop de temps le jour où vous aurez besoin de ces compétences.</para>
       </listitem>
 	</itemizedlist>
   </section>

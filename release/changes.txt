@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 6.1.0
 ----------------------------------------------------------------------
-  13 Enhancement
+  14 Enhancement
   21 Bug fixes
 ----------------------------------------------------------------------
 6.1.0 vs 6.0.0
@@ -10,6 +10,9 @@
 
   - Team: SVN support svn+ssh protocol with key authentication
   https://sourceforge.net/p/omegat/feature-requests/1700/
+
+  - SVN/Team project should respect access URL specified
+  https://sourceforge.net/p/omegat/feature-requests/1707/
 
   - Team: SVN: Replacing trilead-ssh2 with Apache sshd
   https://sourceforge.net/p/omegat/feature-requests/1699/

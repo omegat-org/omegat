@@ -1,0 +1,4 @@
+# Code owners for the OmegaT project
+
+/src/org/omegat/Bundle.properties    @kazephil
+/src/org/omegat/Bundle_*.properties  @kosivantsov

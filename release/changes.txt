@@ -1,8 +1,8 @@
 ----------------------------------------------------------------------
  OmegaT 6.1.0
 ----------------------------------------------------------------------
-  12 Enhancement
-  20 Bug fixes
+  13 Enhancement
+  21 Bug fixes
 ----------------------------------------------------------------------
 6.1.0 vs 6.0.0
 
@@ -16,6 +16,9 @@
 
   - Better error message for omegat.project failure
   https://sourceforge.net/p/omegat/feature-requests/1696/
+
+  - Generate JSON format stastics file when save
+  https://sourceforge.net/p/omegat/feature-requests/1695/
 
   - Build System: update gradle verison to 7.5.1
   https://sourceforge.net/p/omegat/feature-requests/1691/
@@ -48,6 +51,12 @@
   https://sourceforge.net/p/omegat/feature-requests/1519/
 
   Bug fixes:
+
+  - Content of notes elements are not displayed correctly with Xliff filter
+  https://sourceforge.net/p/omegat/bugs/1192/
+
+  - ProjectFile has unwanted XML element otherAttributes
+  https://sourceforge.net/p/omegat/bugs/1191/
 
   - Languagetool crashes when reloading the project
   https://sourceforge.net/p/omegat/bugs/1182/
@@ -108,9 +117,6 @@
 
   - Lucene 5.2 does not work under WebStart
   https://sourceforge.net/p/omegat/bugs/813/
-
-  - Content of notes elements are not displayed correctly with Xliff filter
-  https://sourceforge.net/p/omegat/bugs/1192/
 
 ----------------------------------------------------------------------
  OmegaT 6.0.0 (2023-06-19)

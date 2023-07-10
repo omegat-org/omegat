@@ -46,6 +46,8 @@ public class ImportFromAutoTMX {
     final RealProject project;
     /** Map of all segments in project by source text. Just for optimize some processes. */
     Map<String, List<SourceTextEntry>> existEntries = new HashMap<String, List<SourceTextEntry>>();
+    // initially false, this variable becomes true if process() did almost one change
+    boolean didAnyChange = false;
 
     public ImportFromAutoTMX(RealProject project, List<SourceTextEntry> allProjectEntries) {
         this.project = project;
@@ -194,5 +196,6 @@ public class ImportFromAutoTMX {
             newTrEntry = new TMXEntry(trans, defaultTranslation, externalLinked);
         }
         project.projectTMX.setTranslation(entry, newTrEntry, defaultTranslation);
+        didAnyChange = true;
     }
 }

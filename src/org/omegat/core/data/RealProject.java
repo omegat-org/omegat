@@ -416,7 +416,7 @@ public class RealProject implements IProject {
             // Project Loaded...
             Core.getMainWindow().showStatusMessageRB(null);
 
-            setProjectModified(false);
+            setProjectModified(importHandler.didAnyChange);
         } catch (OutOfMemoryError oome) {
             // Fix for bug 1571944 @author Henry Pijffers
             // (henry.pijffers@saxnot.com)

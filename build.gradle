@@ -23,6 +23,8 @@ apply from: 'gradle/utils.gradle'
 applicationName = 'OmegaT'
 mainClassName = 'org.omegat.Main'
 
+def javaVersion = 11;
+
 ext {
     omtVersion = loadProperties(file('src/org/omegat/Version.properties'))
     omtFlavor = omtVersion.beta.empty ? 'standard' : 'latest'
@@ -45,7 +47,6 @@ java {
 }
 
 allprojects {
-    def javaVersion = 11;
     def envIsCi = project.hasProperty('envIsCi') as Boolean
 
     apply plugin: 'checkstyle'
@@ -148,6 +149,7 @@ configurations {
     [testRuntime, testCompile]*.exclude group: 'org.languagetool', module: 'language-all'
     testIntegrationImplementation.extendsFrom implementation
     jaxb
+    genMac
 }
 
 ext {
@@ -310,6 +312,9 @@ dependencies {
 
     // JAXB codegen only
     jaxb 'com.sun.xml.bind:jaxb-xjc:2.3.4'
+
+    // genMac only
+    genMac 'com.evolvedbinary.appbundler:appbundler:1.2.0'
 
     testIntegrationImplementation sourceSets.main.output, sourceSets.test.output
     testIntegrationImplementation(testFixtures(project.rootProject))
@@ -556,11 +561,11 @@ distributions {
             from(genMac.outputs) {
                 exclude '**/MacOS/OmegaT', '**/Info.plist', '**/java.entitlements'
             }
-            from('release/mac-specific') {
+            from(genMac.outputs) {
                 include '**/MacOS/OmegaT'
                 fileMode 0755
             }
-            from('release/mac-specific') {
+            from(genMac.outputs) {
                 include '**/Info.plist'
                 expand(version: project.version,
                         // $APP_ROOT is expanded at runtime by the launcher binary
@@ -593,14 +598,14 @@ distributions {
 
     armMac {
         contents {
-            from('release/mac-specific') {
+            from(genMac.outputs) {
                 exclude '**/MacOS/OmegaT', '**/Info.plist', '**/java.entitlements'
             }
-            from('release/mac-specific') {
+            from(genMac.outputs) {
                 include '**/MacOS/OmegaT'
                 fileMode 0755
             }
-            from('release/mac-specific') {
+            from(genMac.outputs) {
                 include '**/Info.plist'
                 expand(version: project.version,
                         // $APP_ROOT is expanded at runtime by the launcher binary
@@ -1033,42 +1038,6 @@ makeJaxbTask(name: 'project', outdir: 'src/gen/core/project',
              args: ['-no-header', '-d', 'src', '-p', 'gen.core.project', 'src/schemas/project_properties.xsd'])
 makeJaxbTask(name: 'tmx14', outdir: 'src/gen/core/tmx14',
              args: ['-no-header', '-d', 'src', '-p', 'gen.core.tmx14', '-b', 'src/schemas/tmx14.xjb', 'src/schemas/tmx14.xsd'])
-
-task genMac {
-    description = 'Generate the Mac .app skeleton. Requires AppBundler (https://github.com/TheInfiniteKind/appbundler) ' +
-        'to be available in ~/.ant/lib'
-    outputs.dir file('release/mac-specific')
-    def appbundlerJar = file("${System.getProperty('user.home')}/.ant/lib/appbundler-1.0ea.jar")
-    onlyIf {
-        condition(appbundlerJar.file, 'AppBundler not found')
-    }
-    doLast {
-        ant.taskdef(name: 'appbundler',
-                    classname: 'com.oracle.appbundler.AppBundlerTask',
-                    classpath: appbundlerJar)
-        ant.appbundler(outputdirectory: 'release/mac-specific',
-                       name: applicationName,
-                       displayname: applicationName,
-                       executablename: applicationName,
-                       identifier: 'org.omegat.OmegaT',
-                       icon: 'images/OmegaT.icns',
-                       version: '${version}',
-                       jvmrequired: '${javaVersion}',
-                       shortversion: '${version}',
-                       mainclassname: mainClassName) {
-            option(value: "-Xdock:name=${applicationName}")
-            argument(value: '--config-file=${configfile}')
-            bundledocument(extensions: 'project',
-                           name: "${applicationName} Project",
-                           role: 'editor',
-                           icon: 'images/OmegaT.icns')
-            bundledocument(extensions: '*',
-                           name: 'All Files',
-                           role: 'none')
-            plistentry(key: 'JVMRuntime', value: 'jre.bundle')
-        }
-    }
-}
 
 task changedOnBranch {
     description = 'List files that have been modified on this git branch.'

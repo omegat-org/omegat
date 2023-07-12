@@ -85,8 +85,8 @@
         fetch translations</option></term>
 
 				<listitem>
-					<para>Enable this option to fetch machine translations from the providers
-						you have enabled and configured automatically. If you leave this option
+					<para>Enable this option to automatically fetch machine translations from
+						the providers you have enabled and configured. If you leave this option
 						disabled, machine translations are only fetched when you use <link
 						linkend="menus.edit" endterm="menus.edit.title"/>
 						<link linkend="menus.edit.replace.with.mt"

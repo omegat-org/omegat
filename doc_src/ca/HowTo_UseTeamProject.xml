@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="how.to.use.team.project">
-  <title id="how.to.use.team.project.title">Use a team project</title>
+  <title id="how.to.use.team.project.title">Ús d'un projecte en equip</title>
 
   <para>Els projectes en equip utilitzen mecanismes de sincronització entre els membres del projecte.</para>
 
@@ -13,7 +13,7 @@
 
   <para>Com que, per defecte, el projecte se sincronitza cada 3 minuts, de vegades els membres del projecte traduiran o modificaran un segment traduït per un altre membre, però que encara no s'havia sincronitzat. Quan això succeeix, els membres han de seleccionar la traducció adequada.</para>
 
-  <para>Els membres poden traduir i revisar els fitxers per torns. The Search function allows them to filter the Editor pane on contents translated by a given person, or on contents translated after or before a given time, for example.</para>
+  <para>Els membres poden traduir i revisar els fitxers per torns. La funció de cerca els permet filtrar la subfinestra «Editor» segons el contingut traduït per una persona determinada o segons el contingut traduït després o abans d'un moment determinat, per exemple.</para>
   
   <variablelist>
     <varlistentry>
@@ -42,8 +42,7 @@
 
 		  <para>Si el servidor utilitza l'autenticació SSH, assegureu-vos d'actualitzar la configuració de l'SSH per a incloure aquest servidor abans d'intentar baixar el projecte; en cas contrari, obtindreu un error d'autenticació i el projecte no es carregarà.</para>
 
-		  <para>If you use multiple projects on the same server, credentials
-		  will only be asked once for that server.</para>
+		  <para>Si utilitzeu diversos projectes en el mateix servidor, només es demanaran les credencials del servidor una vegada.</para>
 		</note>
 	  </listitem>
 	</varlistentry>
@@ -110,7 +109,7 @@
               </listitem>
 
               <listitem>
-                <para>Si hi ha un conflicte entre les versions remotes i locals del fitxer <filename>omegat.project</filename> i se sobreescriu la versió local, l'OmegaT crea un fitxer de còpia de seguretat anomenat <filename>omegat.project.AAAAMMDDhhmm.bak</filename>. Els fitxers de còpia de seguretat es conserven durant un mínim de deu dies i les còpies de seguretat més antigues se suprimeixen automàticament.</para>
+                <para>Si hi ha un conflicte entre les versions remotes i locals del fitxer <filename>omegat.project</filename> i se sobreescriu la versió local, l'OmegaT crea un fitxer de còpia de seguretat anomenat <filename>omegat.project.AAAAMMDDhhmm.bak</filename>. L'OmegaT crea un màxim de deu fitxers de còpia de seguretat i les còpies més antigues se suprimeixen en ordre.</para>
               </listitem>
             </itemizedlist>
 		  </listitem>

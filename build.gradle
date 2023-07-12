@@ -422,7 +422,7 @@ distributions {
             }
             into('OmegaT.app/Contents/Java') {
                 with main.contents
-                exclude '*.sh', '*.kaptn', 'OmegaT', 'OmegaT.bat'
+                exclude '*.sh', '*.kaptn', 'OmegaT', 'OmegaT.bat', 'omegat.desktop'
             }
             if (!macJRE.empty) {
                 from(tarTree(macJRE.singleFile)) {
@@ -819,6 +819,8 @@ task genMac {
 allprojects {
     javadoc {
         failOnError = false
+        (options as StandardJavadocDocletOptions).addBooleanOption("Xdoclint:none", true)
+        (options as StandardJavadocDocletOptions).addStringOption("Xmaxwarns", "1")
     }
     tasks.withType(JavaCompile) {
        options.compilerArgs.addAll '-Xlint', '-Werror'

@@ -32,7 +32,7 @@
 
 	<para>Sie können OmegaT über die Befehlszeile mit einem Skript starten, das Startoptionen enthält. Einzelheiten finden Sie im Abschnitt <link endterm="launch.with.command.line.title" linkend="launch.with.command.line"/>.</para>
 
-	<para>Sie können auch auf <filename>OmegaT.jar</filename> klicken, um es direkt zu starten, sofern die <filename>.jar</filename>-Erweiterung mit dem Java-Launcher des Systems verknüpft ist.</para>
+	<para>Sie können auch auf <filename>OmegaT.jar</filename> doppelklicken, um es direkt zu starten, sofern die <filename>.jar</filename>-Erweiterung mit dem Java-Launcher des Systems verknüpft ist.</para>
 
 	<para>Das Paket enthält auch ein <filename>omegat.kaptn</filename>-Kaptain-Skript, das für KDE-Nutzer nützlich sein könnte, sowie ein <filename>OmegaT</filename>-Bash-Skript, das automatisch den entsprechenden <application>java</application>-Befehl zur Ausführung von OmegaT startet.</para>
   </section>
@@ -92,7 +92,7 @@
 
 	<para>Die Methoden variieren je nach System, aber in der Regel können Sie OmegaT, sobald es installiert ist, direkt über die Befehlszeile starten. Einzelheiten finden Sie im Abschnitt <link endterm="launch.with.command.line.title" linkend="launch.with.command.line"/>.</para>
 
-	<para>Sie können ein Skript erstellen, das die gewünschten Startparameter für die Befehlszeile enthält. Wenn <filename>.jar</filename>-Dateien ordnungsgemäß mit der Java 8 Runtime Environment verknüpft sind und Ihre PATH-Einstellungen korrekt sind, können Sie auch einfach auf <filename>OmegaT.jar</filename> klicken (oder doppelklicken), um es direkt zu starten.</para>
+	<para>Sie können ein Skript erstellen, das die gewünschten Startparameter für die Befehlszeile enthält. Wenn <filename>.jar</filename>-Dateien ordnungsgemäß mit der Java 11 Runtime Environment verknüpft sind und Ihre PATH-Einstellungen korrekt sind, können Sie auch einfach auf <filename>OmegaT.jar</filename> klicken (oder doppelklicken), um es direkt zu starten.</para>
 
 	<para>Weitere Informationen finden Sie in der Dokumentation zu Ihrem System.</para>
   </section>
@@ -272,7 +272,7 @@
 				</listitem>
 			  </varlistentry>
 			  <varlistentry id="launch.with.command.line.remote.project.">
-				<term id="launch.with.command.line.remote.project.title"><option>--remote-project</option> <emphasis>&lt;Pfad-zur-OmegaT-Projektdatei&gt;</emphasis></term>
+				<term id="launch.with.command.line.remote.project.title"><option>--remote-project</option> <userinput>&lt;Pfad-zur-OmegaT-Projektdatei&gt;</userinput></term>
 				<listitem>
 				  <para>Das OmegaT-Projekt von der in <emphasis>&lt;Pfad-zur-OmegaT-Projektdatei&gt;</emphasis> angegebenen URL herunterladen und laden.</para>
 				</listitem>
@@ -284,7 +284,7 @@
 				</listitem>
 			  </varlistentry>
 			  <varlistentry id="launch.with.command.line.team.init">
-				<term id="launch.with.command.line.team.init.title"><option>team init <emphasis>QS</emphasis> <emphasis>ZS</emphasis></option></term>
+				<term id="launch.with.command.line.team.init.title"><option>team init</option> <userinput>QS</userinput> <userinput>ZS</userinput></term>
 				<listitem>
 				  <para>Initialisieren Sie ein Teamprojekt, indem Sie <emphasis>QS</emphasis> und <emphasis>ZS</emphasis> als zweibuchstabigen Sprachcode für die Quell- bzw. Zielsprache verwenden.</para>
 				</listitem>
@@ -304,20 +304,20 @@
 				</listitem>
 			  </varlistentry>
 			  <varlistentry id="launch.with.command.line.itokenizer.lt.classname.gt.">
-				<term id="launch.with.command.line.itokenizer.lt.classname.gt.title"><option>--ITokenizer=&lt;Klassenname&gt;</option></term>
-				<term><option>--ITokenizerTarget=&lt;Klassenname&gt;</option></term>
+				<term id="launch.with.command.line.itokenizer.lt.classname.gt.title"><option>--ITokenizer=</option><userinput>&lt;Klassenname&gt;</userinput></term>
+				<term><option>--ITokenizerTarget=</option><userinput>&lt;Klassenname&gt;</userinput></term>
 				<listitem>
 				  <para>Einen Quell- oder Zielsprachen-Tokenizer angeben (die Nutzung dieser Option überschreibt die Projekteinstellungen).   Siehe OmegaT.jar/META-INF/MANIFEST.MF für gültige Werte.</para>
 				</listitem>
 			  </varlistentry>
 			  <varlistentry id="launch.with.command.line.config.dir.">
-				<term id="launch.with.command.line.config.dir.title"><option>--config-dir=<emphasis>&lt;Pfad&gt;</emphasis></option></term>
+				<term id="launch.with.command.line.config.dir.title"><option>--config-dir=</option><userinput>&lt;Pfad&gt;</userinput></term>
 				<listitem>
 				  <para>Der Ordner, welcher zum Lesen oder Schreiben von OmegaT-Konfigurationsdateien verwendet wird. Einzelheiten finden Sie unter <link endterm="configuration.folder.title" linkend="configuration.folder"/>.</para>
 				</listitem>
 			  </varlistentry>
 			  <varlistentry id="launch.with.command.line.config.file.">
-				<term id="launch.with.command.line.config.file.title"><option>--config-file=<emphasis>&lt;Pfad&gt;</emphasis></option></term>
+				<term id="launch.with.command.line.config.file.title"><option>--config-file=</option><userinput>&lt;Pfad&gt;</userinput></term>
 				<listitem>
 				  <para>Eine Datei im Java .properties-Format, die zur Angabe mehrerer Befehlszeilenoptionen verwendet wird.</para>
 
@@ -336,20 +336,20 @@ config-dir=&quot;Pfad/zum/neuen/Konfigordner&quot;</programlisting>
 			  </varlistentry>
 
 			  <varlistentry id="launch.with.command.line.resource.bundle.">
-				<term id="launch.with.command.line.resource.bundle.title"><option>--resource-bundle=<emphasis>&lt;Pfad&gt;</emphasis></option></term>
+				<term id="launch.with.command.line.resource.bundle.title"><option>--resource-bundle=</option><userinput>&lt;Pfad&gt;</userinput></term>
 				<listitem>
 				  <para>Eine Java-.properties-Datei, die für die Texte der Benutzeroberfläche verwendet wird.</para>
 				</listitem>
 			  </varlistentry>
 
 			  <varlistentry id="launch.with.command.line.mode.console.translate.console.pseudotranslatetmx.console.align.">
-				<term id="launch.with.command.line.mode.console.translate.console.pseudotranslatetmx.console.align.title"><option>--mode=[Konsolenmodusname]</option></term>
+				<term id="launch.with.command.line.mode.console.translate.console.pseudotranslatetmx.console.align.title"><option>--mode=[Konsolenmodusname]</option> <userinput>&lt;Projektpfad&gt;</userinput> <userinput>&lt;Modusoption&gt;</userinput></term>
 				<listitem>
 				  <para>Einen anderen Modus als den GUI-Standardmodus angeben. Folgende Optionen stehen zur Verfügung:</para>
 
 				  <variablelist>
 					<varlistentry id="launch.with.command.line.mode.console.translate">
-					  <term id="launch.with.command.line.mode.console.translate.title"><option>--mode=console-translate</option></term>
+					  <term id="launch.with.command.line.mode.console.translate.title"><option>--mode=console-translate</option> <userinput>&lt;Projektpfad&gt;</userinput></term>
 					  <listitem>
 						<para>In diesem Modus versucht OmegaT, die Dateien im Quellordner mit den verfügbaren Translation Memories zu übersetzen.</para>
 
@@ -357,7 +357,7 @@ config-dir=&quot;Pfad/zum/neuen/Konfigordner&quot;</programlisting>
 						  
 						<variablelist>
 						  <varlistentry id="launch.with.command.line.source.pattern.lt.pattern.gt.">
-							<term id="launch.with.command.line.source.pattern.lt.pattern.gt.title"><option>--source-pattern=&lt;Muster&gt;</option></term>
+							<term id="launch.with.command.line.source.pattern.lt.pattern.gt.title"><option>--source-pattern=</option><userinput>&lt;Muster&gt;</userinput></term>
 							<listitem>
 							  <para>Eine Whitelist mit regulären Ausdrücken, die die zu verarbeitenden Quelldateien definiert. Denken Sie daran, dass in regulären Ausdrücken der Punkt und der umgekehrte Schrägstrich mit einem Escapezeichen versehen werden müssen: <code>\.</code> und <code>\\</code>.</para>
 
@@ -393,7 +393,7 @@ config-dir=&quot;Pfad/zum/neuen/Konfigordner&quot;</programlisting>
 					</varlistentry>
 
 					<varlistentry id="launch.with.command.line.mode.console.pseudotranslatetmx">
-					  <term id="launch.with.command.line.mode.console.pseudotranslatetmx.title"><option>--mode=console-createpseudotranslatetmx</option></term>
+					  <term id="launch.with.command.line.mode.console.pseudotranslatetmx.title"><option>--mode=console-createpseudotranslatetmx</option> <userinput>&lt;Projektpfad&gt;</userinput></term>
 					  <listitem>
 						<para>In diesem Modus erstellt OmegaT eine TMX-Datei für das gesamte Projekt, wobei nur die Quelldateien verwendet werden.</para>
 						
@@ -401,7 +401,7 @@ config-dir=&quot;Pfad/zum/neuen/Konfigordner&quot;</programlisting>
 						
 						<variablelist>
 						  <varlistentry id="launch.with.command.line.pseudotranslatetmx.">
-							<term id="launch.with.command.line.pseudotranslatetmx.title"><option>--pseudotranslatetmx=<emphasis>&lt;Pfad&gt;</emphasis></option></term>
+							<term id="launch.with.command.line.pseudotranslatetmx.title"><option>--pseudotranslatetmx=</option><userinput>&lt;Pfad&gt;</userinput></term>
 							<listitem>
 							  <para>Speicherort der pseudoübersetzten TMX-Datei.</para>
 							</listitem>
@@ -418,24 +418,31 @@ config-dir=&quot;Pfad/zum/neuen/Konfigordner&quot;</programlisting>
 					</varlistentry>
 					
 					<varlistentry id="launch.with.command.line.mode.console.align">
-					  <term id="launch.with.command.line.mode.console.align.title"><option>--mode=console-align <emphasis>--alignDir=&lt;Pfad&gt;</emphasis></option></term>
-					  <listitem>
-						<para>In diesem Modus wird OmegaT die Dateien im Quellordner des Projekts an denen im via <emphasis>--alignDir</emphasis> angegebenen Speicherort ausrichten.</para>
+					  <term id="launch.with.command.line.mode.console.align.title"><option>--mode=console-align</option> <userinput>&lt;Projektpfad&gt;</userinput></term>
+						<listitem>
+						<para>In diesem Modus wird OmegaT die Dateien im /source-Ordner des Projekts an die Dateien im Speicherort, angegeben durch den Parameter <emphasis>--alignDir</emphasis> unten, ausrichten.</para>
+						
+						<variablelist>
+							<varlistentry>
+								<term><option>--alignDir=</option><userinput>&lt;Projektpfad&gt;</userinput></term>
+								<listitem>
+									<para>Der Pfad mit den Dateien, die in die Zielsprache übersetzt wurden.</para>
 
-						<para>Die daraus resultierende TMX-Datei wird im OmegaT-Ordner als align.tmx gespeichert. Welche Dateitypen ausgerichtet werden können, hängt davon ab, ob die Ausrichtung vom Dateifilter unterstützt wird. Zu den unterstützten Filtern gehören: ILIAS Language File, Java(TM) Resource Bundles, Schlüssel=Wert-Text, Magento CE Locale CSV, MoodlePHP, Mozilla DTD, Mozilla FTL, PO, RC, SubRip Subtitles und Windows Resources.</para>
+									<para>Der Ordner muss eine Übersetzung in der Zielsprache des Projekts enthalten. Wenn es sich beispielsweise um ein EN-nach-FR-Projekt handelt, muss der angegebene Ordner ein Bundle enthalten, das mit <filename>_fr</filename> endet.</para>
+								</listitem>
+							</varlistentry>							
+						</variablelist>
 
-						<para>Der <emphasis>--alignDir</emphasis>-Parameter wird verwendet, um den Speicherort der Daten in der Zielsprache anzugeben, also einen Ordner, der die übersetzten Dateien enthält.</para>
-
-						<para>Der Ordner muss eine Übersetzung in der Zielsprache des Projekts enthalten. Wenn es sich beispielsweise um ein EN-nach-FR-Projekt handelt, muss der Ordner ein Bundle enthalten, das mit _fr endet. Die daraus resultierende TMX-Datei wird im OmegaT-Ordner als align.tmx gespeichert.</para>
+						<para>Die resultierende TMX-Datei wird im <filename role="directory">omegat/</filename>-Ordner unter <filename>align.tmx</filename> gespeichert. Welche Dateitypen ausgerichtet werden können, hängt davon ab, ob die Ausrichtung vom Dateifilter unterstützt wird. Zu den unterstützten Filtern gehören: ILIAS Language File, Java(TM) Resource Bundles, Schlüssel=Wert-Text, Magento CE Locale CSV, MoodlePHP, Mozilla DTD, Mozilla FTL, PO, RC, SubRip Subtitles und Windows Resources.</para>
 					  </listitem>
 					</varlistentry>
 
 					<varlistentry id="launch.with.command.line.mode.console.stats">
-					  <term id="launch.with.command.line.mode.console.stats.title"><option>--mode=console-stats <emphasis>&lt;Pfad&gt;</emphasis></option></term>
+					  <term id="launch.with.command.line.mode.console.stats.title"><option>--mode=console-stats</option> <userinput>&lt;Projektpfad&gt;</userinput></term>
 					  <listitem>
 						<variablelist>
 						  <varlistentry id="launch.with.command.line.console.stats.output.file">
-							<term id="launch.with.command.line.console.stats.output.file.title"><option>--output-file=[Stats-Ausgabedatei]</option></term>
+							<term id="launch.with.command.line.console.stats.output.file.title"><option>--output-file=</option><userinput>[Stats-Ausgabedatei]</userinput></term>
 							<listitem>
 							  <para>Schreibt in die angegebene Datei, oder in die Standardausgabe, wenn keine Datei angegeben ist. Wenn <emphasis>--stats-type</emphasis> nicht angegeben ist, wird das Format via Dateiendung ermittelt. Für die Ausgabe wird standardmäßig xml verwendet.</para>
 							</listitem>
@@ -471,7 +478,7 @@ config-dir=&quot;Pfad/zum/neuen/Konfigordner&quot;</programlisting>
 			  </varlistentry>
 				
 			  <varlistentry id="launch.with.command.line.script.">
-				<term id="launch.with.command.line.script.title"><option>--script=<emphasis>&lt;Pfad&gt;</emphasis></option></term>
+				<term id="launch.with.command.line.script.title"><option>--script=</option><userinput>&lt;Pfad&gt;</userinput></term>
 				<listitem>
 				  <para>Eine Skriptdatei, die ausgeführt werden soll, wenn ein Projektereignis ausgelöst wird.</para>
 				</listitem>

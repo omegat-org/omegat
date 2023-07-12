@@ -76,8 +76,9 @@ public class SegmentBuilder {
     public static final String SEGMENT_SPELL_CHECK = "SEGMENT_SPELL_CHECK";
     private static final DecimalFormat NUMBER_FORMAT = new DecimalFormat("0000");
 
-    // false: insert source text / true: leave the segment empty
-    public static final boolean DONT_INSERT_SOURCE_TEXT_DEFAULT = false;
+    // synonym used until OmegaT 5.7 = leave segment empty
+    // true = do NOT insert (take care of double negation!)
+    public static final boolean DONT_INSERT_SOURCE_TEXT_DEFAULT = true;
 
     private static final String BIDI_LRE = "\u202a";
     private static final String BIDI_RLE = "\u202b";
@@ -293,7 +294,8 @@ public class SegmentBuilder {
                 //translation exist
                 translationText = trans.translation;
             } else {
-                boolean insertSource = Preferences.isPreferenceDefault(Preferences.DONT_INSERT_SOURCE_TEXT,
+                // Double negation - insertSource = true if Preferences.DONT_INSERT_SOURCE_TEXT = false
+                boolean insertSource = !Preferences.isPreferenceDefault(Preferences.DONT_INSERT_SOURCE_TEXT,
                         DONT_INSERT_SOURCE_TEXT_DEFAULT);
                 if (controller.entriesFilter != null && controller.entriesFilter.isSourceAsEmptyTranslation()) {
                     insertSource = true;

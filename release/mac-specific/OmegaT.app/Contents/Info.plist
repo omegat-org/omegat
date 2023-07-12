@@ -32,6 +32,8 @@
         <true/>
         <key>NSSupportsAutomaticGraphicsSwitching</key>
         <true/>
+        <key>NSRequiresAquaSystemAppearance</key>
+        <false/>
         <key>JVMVersion</key>
         <string>1.8</string>
         <key>JVMMainClassName</key>
@@ -72,6 +74,8 @@
         <key>JVMOptions</key>
         <array>
             <string>-Xdock:name=OmegaT</string>
+            <string>-Dapple.awt.application.appearance=system</string>
+            <string>-Dapple.awt.application.name=OmegaT</string>
             <!-- <string>-Xmx6g</string> -->
         </array>
         <key>JVMDefaultOptions</key>

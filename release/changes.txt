@@ -1,10 +1,10 @@
-----------------------------------------------------------------------
- OmegaT 5.8.0 (2023-04-01)
+---------------------------------------------------------------------
+ OmegaT 5.8.0 (2023-06-19)
 ----------------------------------------------------------------------
    4 Removed features
-  40 Enhancements
-  46 Bug fixes
-  9 Localization updates
+  41 Enhancements
+  49 Bug fixes
+  12 Localization updates
 ----------------------------------------------------------------------
 5.8.0 vs 5.7.1
 
@@ -28,6 +28,9 @@
   See Azure Translate V2/V3 Plugin project: https://github.com/omegat-org/azure-translate-plugin
 
   Implemented requests:
+
+  - Improve macOS integration
+  https://sourceforge.net/p/omegat/feature-requests/1702/
 
   - Help user to copy error message to clipboard
   https://sourceforge.net/p/omegat/feature-requests/1683/
@@ -155,6 +158,13 @@
   https://github.com/omegat-org/omegat/pull/122
 
   Bug fixes:
+
+  - Fixed "null" file names in search results when "Display: file names" checkbox was unchecked
+  https://sourceforge.net/p/omegat/bugs/1154/
+
+  - OmegaT does not create a backup of the project file for standalone projects.
+
+  -Javadoc build failure. Suppress doclint errors for Maven publishing.
 
   - Change key to explicit offline mode cause
   https://sourceforge.net/p/omegat/bugs/1153
@@ -297,12 +307,15 @@
 
   Localization Updates:
 
-  - Belarusian localization updated to 5.8 (UI, readme)
-  - Brazilian Portuguese localization updated to 5.8 (UI)
+  - Belarusian localization updated to 5.8 (UI, readme, Instant Start)
+  - Brazilian Portuguese localization updated to 5.8 (UI, readme)
   - Catalan localization updated to 5.8 (UI, readme, documentation)
   - Corsican localization updated to 5.8 (UI, readme)
-  - Dutch localization updated to 5.8 (UI)
-  - German localization updated to 5.8 (UI, readme)
+  - Dutch localization updated to 5.8 (UI, readme)
+  - Finnish localization updated to 5.8 (UI, readme)
+  - French localization updated to 5.8 (UI, readme, documentation)
+  - German localization updated to 5.8 (UI, readme, documentation)
+  - Italian localization updated to 5.8 (UI, readme)
   - Japanese localization updated to 5.8 (UI, readme, documentation)
   - Simplified Chinese localization updated to 5.8 (UI, readme)
   - Ukrainian localization updated to 5.8 (UI, readme)

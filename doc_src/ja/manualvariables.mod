@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!ENTITY vernb "5.8.0">
+<!ENTITY vernb "5.8.1">
 <!ENTITY javaversionshort "Java 8">
 <!ENTITY javaversionlong "Java 8 Runtime Environment">
 <!ENTITY javaregex "https://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html">

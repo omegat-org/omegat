@@ -54,7 +54,7 @@
 	</varlistentry>
 	
 	<varlistentry id="windows.source.files.list.download.page">
-	  <term id="windows.source.files.list.download.page.title"><guibutton>Online-MediaWiki-Seite hinzufügen...</guibutton></term>
+	  <term id="windows.source.files.list.download.page.title"><guibutton>MediaWiki-Seite hinzufügen...</guibutton></term>
 	  <listitem>
 		<para>Fragt nach der URL der Seite und lädt sie in den <link linkend="project.folder.source" endterm="project.folder.source.title"/>-Ordner herunter.</para>
 	  </listitem>

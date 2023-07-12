@@ -160,6 +160,7 @@ Equip actual:
 - Concepción Martin (coordinadora de la comunitat de Facebook)
 - Hiroshi Miura (desenvolupador principal)
 - Briac Pilpré (administrador de la web)
+- Philippe Tourigny (coordinador de la documentació)
 - Lucie Vecerova (coordinadora de la comunitat de Facebook)
 
 Les contribucions al codi estan documentades a /docs/contributors.txt.

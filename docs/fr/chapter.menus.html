@@ -1,0 +1,2249 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head><meta charset="UTF-8" />
+      <title>Menus</title>
+      <link href="OmegaT.css" rel="stylesheet" type="text/css" />
+      <meta content="DocBook XSL Stylesheets V1.79.1" name="generator" />
+      <link href="chapter.panes.html" rel="prev" title="Volets" />
+      <link href="chapter.windows.and.dialogs.html" rel="next" title="Fenêtres et dialogues" />
+   <meta content="width=device-width, initial-scale=1" name="viewport" /><link href="_wh/wh.css" rel="stylesheet" type="text/css" /><script src="_wh/jquery/jquery.min.js" type="text/javascript"></script><script charset="UTF-8" src="_wh/wh.js" type="text/javascript"></script><script charset="UTF-8" defer="defer" src="_wh/search.js" type="text/javascript"></script></head>
+   
+<body>
+    <div id="wh-header">
+    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 5.8 - Manuel d’utilisation</a></div></div>
+
+    <div id="wh-body">
+      <div class="wh-icon-menu" id="wh-menu"></div>
+      <div id="wh-navigation">
+        <div id="wh-navigation-form"><span id="wh-search-group"><span class="wh-icon-search" id="wh-do-search"></span><input id="wh-search-field" type="text" /><span class="wh-icon-cancel" id="wh-cancel-search"></span></span></div>
+        <div id="wh-toc-pane">
+        </div>
+        <div id="wh-search-pane">
+          <div id="wh-search-results">
+          </div>
+        </div>
+      </div>
+      <div id="wh-separator"></div>
+      <div id="wh-content">
+      
+      <header>
+         <div class="navheader">
+            <table style="width: 100%; ">
+               <tr>
+                  <th colspan="3" style="text-align: center; ">Menus</th>
+               </tr>
+               <tr>
+                  <td style="width: 20%; text-align: left; ">
+                     <a accesskey="p" href="chapter.panes.html">Précédent</a> </td>
+                  <th style="width: 60%; text-align: center; "> </th>
+                  <td style="width: 20%; text-align: right; "> <a accesskey="n" href="chapter.windows.and.dialogs.html">Suivant</a>
+                  </td>
+               </tr>
+            </table>
+            <hr />
+         </div>
+      </header>
+      <section class="chapter" id="chapter.menus">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title">Menus</h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <ul class="toc">
+               <li>
+                  <span class="section">
+                     <a href="chapter.menus.html#menus.project">
+                        <span class="guimenu">Projet</span>
+                     </a>
+                  </span>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="chapter.menus.html#menus.edit">
+                        <span class="guimenu">Édition</span>
+                     </a>
+                  </span>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="chapter.menus.html#menus.goto">
+                        <span class="guimenu">Atteindre</span>
+                     </a>
+                  </span>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="chapter.menus.html#menus.view">
+                        <span class="guimenu">Affichage</span>
+                     </a>
+                  </span>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="chapter.menus.html#menus.tools">
+                        <span class="guimenu">Outils</span>
+                     </a>
+                  </span>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="chapter.menus.html#menus.options">
+                        <span class="guimenu">Options</span>
+                     </a>
+                  </span>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="chapter.menus.html#menus.help">
+                        <span class="guimenu">Aide</span>
+                     </a>
+                  </span>
+               </li>
+            </ul>
+         </div>
+         <p>OmegaT a très peu de boutons et paraît un peu austère, voire hostile aux personnes habituées aux interfaces basées sur des boutons. L’interface d’OmegaT est principalement basée sur des raccourcis clavier associés aux éléments du menu.</p>
+         <p>Les raccourcis sont omniprésents dans ce manuel et vous devriez être en mesure de vous souvenir très rapidement des quelques raccourcis utiles au cours d’une journée de traduction classique.</p>
+         <p>Les menus permettent d’accéder à la plupart des fonctions d’OmegaT. La plupart des éléments de menu sont associés à un raccourci clavier.</p>
+         <p>Les éléments de menu qui ne mentionnent pas de raccourci n’en ont pas par défaut. Voir l’annexe <a class="link" href="chapter.appendices.html#app.shortcuts.customization" title="Personnalisation">Personnalisation</a> si vous souhaitez modifier ou ajouter des raccourcis.</p>
+         <div class="note">
+            <h3 class="title">Note</h3>
+            <p>Rappel de la description des raccourcis clavier :</p>
+            <div class="table" id="menus.shortcut.description">
+               <div class="table-title">Tableau 2. Identifiants des touches de modification</div>
+               <div class="table-contents">
+                  <table style="border-collapse: collapse; border-top: 1px solid ; border-bottom: 1px solid ; border-left: 1px solid ; border-right: 1px solid ; ">
+                     <colgroup>
+                        <col />
+                        <col />
+                        <col />
+                     </colgroup>
+                     <thead>
+                        <tr>
+                           <th style="border-right: 1px solid ; border-bottom: 1px solid ; ">Linux/Windows</th>
+                           <th style="border-right: 1px solid ; border-bottom: 1px solid ; ">Identifiant de la touche</th>
+                           <th style="border-bottom: 1px solid ; ">macOS</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                           <td style="border-right: 1px solid ; border-bottom: 1px solid ; ">
+                              <span class="keycap">
+                                 <strong>Maj</strong>
+                              </span>
+                           </td>
+                           <td style="border-right: 1px solid ; border-bottom: 1px solid ; ">
+                              <span class="keycap">
+                                 <strong>S</strong>
+                              </span>
+                           </td>
+                           <td style="border-bottom: 1px solid ; ">
+                              <span class="keycap">
+                                 <strong>Maj</strong>
+                              </span> ou <span class="keycap">
+                                 <strong>⇧</strong>
+                              </span>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td style="border-right: 1px solid ; border-bottom: 1px solid ; ">
+                              <span class="keycap">
+                                 <strong>Ctrl</strong>
+                              </span> ou <span class="keycap">
+                                 <strong>Contrôle</strong>
+                              </span>
+                           </td>
+                           <td style="border-right: 1px solid ; border-bottom: 1px solid ; ">
+                              <span class="keycap">
+                                 <strong>C</strong>
+                              </span>
+                           </td>
+                           <td style="border-bottom: 1px solid ; ">
+                              <span class="keycap">
+                                 <strong>commande</strong>
+                              </span> ou <span class="keycap">
+                                 <strong>⌘</strong>
+                              </span>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td style="border-right: 1px solid ; border-bottom: 1px solid ; ">
+                              <span class="keycap">
+                                 <strong>Alt</strong>
+                              </span>
+                           </td>
+                           <td style="border-right: 1px solid ; border-bottom: 1px solid ; ">
+                              <span class="keycap">
+                                 <strong>A</strong>
+                              </span>
+                           </td>
+                           <td style="border-bottom: 1px solid ; ">
+                              <span class="keycap">
+                                 <strong>alt / option</strong>
+                              </span> ou <span class="keycap">
+                                 <strong>⌥</strong>
+                              </span>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td style="border-right: 1px solid ; "> </td>
+                           <td style="border-right: 1px solid ; ">
+                              <span class="keycap">
+                                 <strong>Ctrl</strong>
+                              </span>
+                           </td>
+                           <td>
+                              <span class="keycap">
+                                 <strong>contrôle</strong>
+                              </span> ou <span class="keycap">
+                                 <strong>⌃</strong>
+                              </span>
+                           </td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div>
+            <p>
+               <br class="table-break" />
+            </p>
+         </div>
+         <section class="section" id="menus.project">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">
+                        <span class="guimenu">Projet</span>
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Ce menu vous permet d’accéder aux commandes de gestion de projet.</p>
+            <div class="example" id="example.new.project.shortcut">
+               <div class="example-title">Exemple 13. Exemple de description de raccourci</div>
+               <div class="example-contents">
+                  <p>Sur Windows et Linux : <span class="keycap">
+                        <strong>Ctrl</strong>
+                     </span>+<span class="keycap">
+                        <strong>Maj</strong>
+                     </span>+<span class="keycap">
+                        <strong>N</strong>
+                     </span>
+	
+                  </p>
+                  <p>Sous macOS : <span class="keycap">
+                        <strong>Maj</strong>
+                     </span>+<span class="keycap">
+                        <strong>commande</strong>
+                     </span>+<span class="keycap">
+                        <strong>N</strong>
+                     </span>
+	
+                  </p>
+                  <p>
+                     <span class="bold">
+                        <strong>Dans ce manuel :</strong>
+                     </span> 
+                     <span class="keycap">
+                        <strong>C</strong>
+                     </span>+<span class="keycap">
+                        <strong>Maj</strong>
+                     </span>+<span class="keycap">
+                        <strong>N</strong>
+                     </span>
+	
+                  </p>
+               </div>
+            </div>
+            <br class="example-break" />
+            <div class="variablelist">
+               <dl class="variablelist">
+                  <dt id="menus.project.new">
+                     <span class="term" id="menus.project.new.title">
+                        <span class="guimenuitem">Nouveau</span> 
+                        <span class="keycap">
+                           <strong>C</strong>
+                        </span>+<span class="keycap">
+                           <strong>Maj</strong>
+                        </span>+<span class="keycap">
+                           <strong>N</strong>
+                        </span>
+	  
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Crée et ouvre un nouveau projet. Voir la section <a class="link" href="chapter.instant.start.guide.html#introduction.create.and.open.new.project" title="Créer un nouveau projet">Créer un nouveau projet</a> pour en savoir plus.</p>
+                  </dd>
+                  <dt id="menus.project.download.team.project">
+                     <span class="term" id="menus.project.download.team.project.title">
+                        <span class="guimenuitem">Télécharger projet en équipe...</span>
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Crée une copie locale d’un projet distant OmegaT. Voir le guide pratique <a class="link" href="chapter.how.to.html#how.to.use.team.project" title="Utiliser un projet en équipe">Utiliser un projet en équipe</a> pour en savoir plus.</p>
+                  </dd>
+                  <dt id="menus.project.open">
+                     <span class="term" id="menus.project.open.title">
+                        <span class="guimenuitem">Ouvrir...</span> 
+                        <span class="keycap">
+                           <strong>C</strong>
+                        </span>+<span class="keycap">
+                           <strong>O</strong>
+                        </span>
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Ouvre un projet pré-existant.</p>
+                  </dd>
+                  <dt id="menus.project.open.recent">
+                     <span class="term" id="menus.project.open.recent.title">
+                        <span class="guimenuitem">Ouvert récemment...</span>
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Donne accès aux dix derniers projets modifiés. Cliquer sur l’un d’entre eux enregistrera votre projet actuel, le fermera et ouvrira le projet sélectionné.</p>
+                     <p>Utiliser la fonction <span class="guimenuitem">Effacer le menu</span> pour supprimer la liste des projets récents.</p>
+                  </dd>
+                  <dt id="menus.project.reload">
+                     <span class="term" id="menus.project.reload.title">
+                        <span class="guimenuitem">Recharger</span> 
+                        <span class="keycap">
+                           <strong>F5</strong>
+                        </span>
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Recharge le projet pour prendre en compte les changements extérieurs affectant les fichiers sources et les paramètres du projet.</p>
+                     <div class="note">
+                        <h3 class="title">Note</h3>
+                        <p>Les nouvelles mémoires de traduction placées dans le dossier <a class="link" href="chapter.project.folder.html#project.folder.tm" title="tm">tm</a> pendant la traduction sont automatiquement prises en compte dès que le curseur bouge d’un segment à un autre. De la même manière, le contenu du dossier <a class="link" href="chapter.project.folder.html#project.folder.glossary" title="glossary">glossary</a> est automatiquement reconnu et ne nécessite pas de recharger le projet.</p>
+                     </div>
+                     <p>Lorsqu’un projet en équipe est rechargé, OmegaT recharge les propriétés distantes, plutôt que locales.</p>
+                  </dd>
+                  <dt id="menus.project.close">
+                     <span class="term" id="menus.project.close.title">
+                        <span class="guimenuitem">Fermer</span> 
+                        <span class="keycap">
+                           <strong>C</strong>
+                        </span>+<span class="keycap">
+                           <strong>Maj</strong>
+                        </span>+<span class="keycap">
+                           <strong>W</strong>
+                        </span>
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Enregistre la mémoire de traduction du projet (<a class="link" href="chapter.project.folder.html#project.folder.project.save.tmx">project_save.tmx</a>) et ferme le projet.</p>
+                  </dd>
+                  <dt id="menus.project.save">
+                     <span class="term" id="menus.project.save.title">
+                        <span class="guimenuitem">Enregistrer</span> 
+                        <span class="keycap">
+                           <strong>C</strong>
+                        </span>+<span class="keycap">
+                           <strong>S</strong>
+                        </span>
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Enregistre la mémoire de traduction du projet (<a class="link" href="chapter.project.folder.html#project.folder.project.save.tmx">project_save.tmx</a>) et synchronise les projets en équipe.</p>
+                     <p>OmegaT enregistre automatiquement les traductions toutes les trois minutes, ainsi que lorsque vous fermez le projet ou quittez le logiciel. Voir le paramètre <a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.saving.and.output.interval">
+                           <code class="option">Intervalle d’enregistrement des données du projet</code>
+                        </a> pour en savoir plus.</p>
+                  </dd>
+                  <dt id="menus.project.copy.files.to.source.folder">
+                     <span class="term" id="menus.project.copy.files.to.source.folder.title">
+                        <span class="guimenuitem">Ajouter des fichiers...</span>
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Copie les fichiers sélectionnés au dossier <a class="link" href="chapter.project.folder.html#project.folder.source" title="source">source</a> et recharge le projet pour prendre en compte les nouveaux fichiers.</p>
+                  </dd>
+                  <dt id="menus.project.download.mediawiki.page">
+                     <span class="term" id="menus.project.download.mediawiki.page.title">
+                        <span class="guimenuitem">Ajouter une page MediaWiki...</span>
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Ouvre une boîte de dialogue où vous pouvez coller l’URL de la page MediaWiki que vous souhaitez traduire. Les données source de la page seront copiées dans le dossier <a class="link" href="chapter.project.folder.html#project.folder.source" title="source">source</a>, en tant que fichier texte, avec l’extension <code class="filename">.utf8</code>.</p>
+                  </dd>
+                  <dt id="menus.project.commit.source.files">
+                     <span class="term" id="menus.project.commit.source.files.title">
+                        <span class="guimenuitem">Envoyer les fichiers source</span>
+                     </span>
+                  </dt>
+                  <dd>
+                     <div class="warning">
+                        <h3 class="title">Avertissement</h3>
+                        <p>Cette fonction est spécifique aux projets en équipe. <span class="emphasis">
+                              <em>Seul le responsable du projet en équipe devrait utiliser cette fonction</em>
+                           </span>. Voir le guide pratique <a class="link" href="chapter.how.to.html#how.to.use.team.project" title="Utiliser un projet en équipe">Utiliser un projet en équipe</a> pour en savoir plus.</p>
+                     </div>
+                     <p>Envoie les fichiers ajoutés ou modifiés localement à partir du dossier <code class="filename">source</code> au dépôt du projet en équipe.</p>
+                  </dd>
+                  <dt id="menus.project.commit.target.files">
+                     <span class="term" id="menus.project.commit.target.files.title">
+                        <span class="guimenuitem">Envoyer les fichiers cible</span>
+                     </span>
+                  </dt>
+                  <dd>
+                     <div class="warning">
+                        <h3 class="title">Avertissement</h3>
+                        <p>Cette fonction est spécifique aux projets en équipe. <span class="emphasis">
+                              <em>N’utilisez cette fonction que si le responsable du projet en équipe vous l’a demandé</em>
+                           </span>. Voir le guide pratique <a class="link" href="chapter.how.to.html#how.to.use.team.project" title="Utiliser un projet en équipe">Utiliser un projet en équipe</a> pour en savoir plus.</p>
+                     </div>
+                     <p>Envoie les fichiers traduits créés localement à partir du dossier <a class="link" href="chapter.project.folder.html#project.folder.target" title="target">target</a> au dépôt du projet en équipe.</p>
+                  </dd>
+                  <dt id="menus.project.create.translated.documents">
+                     <span class="term" id="menus.project.create.translated.documents.title">
+                        <span class="guimenuitem">Créer les documents traduits</span> 
+                        <span class="keycap">
+                           <strong>C</strong>
+                        </span>+<span class="keycap">
+                           <strong>D</strong>
+                        </span>
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Crée les fichiers cible sur la base de votre traduction. Les fichiers cible créés sont situés dans le dossier <a class="link" href="chapter.project.folder.html#project.folder.target" title="target">target</a>.</p>
+                     <div class="note">
+                        <h3 class="title">Note</h3>
+                        <p>Vous pouvez empêcher la création de fichiers cibles s’il y a des problèmes de balises. Voir le paramètre <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.tag.processing.do.not.allow.creating.translated.documents.with.tag.issues">
+                              <code class="option">Bloquer la création de fichiers traduits avec des problèmes de balises</code>
+                           </a> pour en savoir plus.</p>
+                     </div>
+                     <p>Chaque fois que vous créez des fichiers traduits, OmegaT enregistre le projet (voir l’élément de menu <a class="link" href="chapter.menus.html#menus.project.save">
+                           <span class="guimenuitem">Enregistrer</span> 
+                           <span class="keycap">
+                              <strong>C</strong>
+                           </span>+<span class="keycap">
+                              <strong>S</strong>
+                           </span>
+                        </a> plus haut) et crée des mémoires de traduction de référence qui contiennent les segments traduits de l’ensemble de fichiers source actuel.</p>
+                  </dd>
+                  <dt id="menus.project.create.current.translated.document">
+                     <span class="term" id="menus.project.create.current.translated.document.title">
+                        <span class="guimenuitem">Créer le document actuel traduit</span> 
+                        <span class="keycap">
+                           <strong>C</strong>
+                        </span>+<span class="keycap">
+                           <strong>Maj</strong>
+                        </span>+<span class="keycap">
+                           <strong>D</strong>
+                        </span>
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Crée le fichier cible qui correspond au fichier source actuellement en traduction. Le fichier créé se trouve dans le dossier <a class="link" href="chapter.project.folder.html#project.folder.target" title="target">target</a>.</p>
+                     <p>Chaque fois que vous créez le fichier actuel traduit, OmegaT enregistre le projet (voir l’élément de menu <a class="link" href="chapter.menus.html#menus.project.save">
+                           <span class="guimenuitem">Enregistrer</span> 
+                           <span class="keycap">
+                              <strong>C</strong>
+                           </span>+<span class="keycap">
+                              <strong>S</strong>
+                           </span>
+                        </a> plus haut) et crée des mémoires de traduction de référence qui contiennent les segments traduits de l’ensemble de fichiers source actuel.</p>
+                  </dd>
+                  <dt id="menus.project.open.med.project">
+                     <span class="term" id="menus.project.open.med.project.title">
+                        <span class="guimenuitem">Ouvrir un projet MED...</span>
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Ouvre un projet empaqueté au format MED définit par la direction générale de la traduction de l’Union européenne.</p>
+                  </dd>
+                  <dt id="menus.project.create.med.project">
+                     <span class="term" id="menus.project.create.med.project.title">
+                        <span class="guimenuitem">Créer projet MED...</span>
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Permet de transformer le projet en paquet MED.</p>
+                  </dd>
+                  <dt id="menus.project.properties">
+                     <span class="term" id="menus.project.properties.title">
+                        <span class="guimenuitem">Propriétés...</span> 
+                        <span class="keycap">
+                           <strong>C</strong>
+                        </span>+<span class="keycap">
+                           <strong>E</strong>
+                        </span>
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Affiche la boîte de dialogue <a class="link" href="chapter.windows.and.dialogs.html#dialogs.project.properties" title="Propriétés du projet">
+                           <span class="guilabel">Propriétés du projet</span>
+                        </a> pour modifier les langues du projet les emplacements des dossiers.</p>
+                     <p>
+		
+                     </p>
+                  </dd>
+                  <dt id="menus.project.source.files.list">
+                     <span class="term" id="menus.project.source.files.list.title">
+                        <span class="guimenuitem">Fichiers du projet...</span> 
+                        <span class="keycap">
+                           <strong>C</strong>
+                        </span>+<span class="keycap">
+                           <strong>L</strong>
+                        </span>
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Ouvre la fenêtre <a class="link" href="chapter.windows.and.dialogs.html#windows.source.files.list" title="Fichiers source">
+                           <span class="guilabel">Fichiers source</span>
+                        </a>.</p>
+                     <p>
+		
+                     </p>
+                  </dd>
+                  <dt id="menus.project.access.project.contents">
+                     <span class="term" id="menus.project.access.project.contents.title">
+                        <span class="guisubmenu">Accéder au contenu du projet</span>
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Donne accès aux différents dossiers du projet. Voir la chapitre <a class="link" href="chapter.project.folder.html" title="Racine du projet">Racine du projet</a> pour en savoir plus.</p>
+                     <p>De plus, il y a trois entrées de menu qui ouvrent directement les fichiers source ou cible actuels, ou le glossaire modifiable. Les fichiers sont ouverts dans l’application par défaut définie par le système d’exploitation. Les options sont grisées si les fichiers n’existent pas.</p>
+                     <div class="variablelist">
+                        <dl class="variablelist">
+                           <dt>
+                              <span class="term">
+                                 <a class="link" href="chapter.project.folder.html" title="Racine du projet">
+                                    <span class="guimenuitem">Racine du projet</span>
+                                 </a>
+                              </span>
+                           </dt>
+                           <dd>
+                              <p>Ouvre le dossier dans votre gestionnaire de fichiers par défaut.</p>
+                           </dd>
+                           <dt>
+                              <span class="term">
+                                 <a class="link" href="chapter.project.folder.html#project.folder.dictionary" title="dictionary">
+                                    <span class="guimenuitem">Dictionnaires</span>
+                                 </a>
+                              </span>
+                           </dt>
+                           <dd>
+                              <p>Ouvre le dossier dans votre gestionnaire de fichiers par défaut.</p>
+                           </dd>
+                           <dt>
+                              <span class="term">
+                                 <a class="link" href="chapter.project.folder.html#project.folder.glossary" title="glossary">
+                                    <span class="guimenuitem">Glossaires</span>
+                                 </a>
+                              </span>
+                           </dt>
+                           <dd>
+                              <p>Ouvre le dossier dans votre gestionnaire de fichiers par défaut.</p>
+                           </dd>
+                           <dt>
+                              <span class="term">
+                                 <a class="link" href="chapter.project.folder.html#project.folder.source" title="source">
+                                    <span class="guimenuitem">Fichiers source</span>
+                                 </a>
+                              </span>
+                           </dt>
+                           <dd>
+                              <p>Ouvre le dossier dans votre gestionnaire de fichiers par défaut.</p>
+                           </dd>
+                           <dt>
+                              <span class="term">
+                                 <a class="link" href="chapter.project.folder.html#project.folder.target" title="target">
+                                    <span class="guimenuitem">Fichiers cible</span>
+                                 </a>
+                              </span>
+                           </dt>
+                           <dd>
+                              <p>Ouvre le dossier dans votre gestionnaire de fichiers par défaut.</p>
+                           </dd>
+                           <dt>
+                              <span class="term">
+                                 <a class="link" href="chapter.project.folder.html#project.folder.tm" title="tm">
+                                    <span class="guimenuitem">Mémoires de traduction</span>
+                                 </a>
+                              </span>
+                           </dt>
+                           <dd>
+                              <p>Ouvre le dossier dans votre gestionnaire de fichiers par défaut.</p>
+                           </dd>
+                           <dt>
+                              <span class="term">
+                                 <a class="link" href="chapter.project.folder.html#project.folder.exported.tm" title="dossier des mémoires de traduction exportées">
+                                    <span class="guimenuitem">Mémoires exportées</span>
+                                 </a>
+                              </span>
+                           </dt>
+                           <dd>
+                              <p>Ouvre le dossier dans votre gestionnaire de fichiers par défaut.</p>
+                           </dd>
+                           <dt>
+                              <span class="term">
+                                 <span class="guimenuitem">Fichier source actuel</span>
+                              </span>
+                           </dt>
+                           <dd>
+                              <p>Le fichier source actuel est situé dans le dossier <a class="link" href="chapter.project.folder.html#project.folder.source" title="source">source</a>.</p>
+                              <p>Ouvre le fichier dans l’application associée.</p>
+                           </dd>
+                           <dt>
+                              <span class="term">
+                                 <span class="guimenuitem">Fichier cible actuel</span>
+                              </span>
+                           </dt>
+                           <dd>
+                              <p>Le fichier cible actuel est situé dans le dossier <a class="link" href="chapter.project.folder.html#project.folder.target" title="target">target</a>.</p>
+                              <p>Ouvre le fichier, s’il existe, dans l’application associée.</p>
+                           </dd>
+                           <dt>
+                              <span class="term">
+                                 <span class="guimenuitem">Glossaire modifiable</span>
+                              </span>
+                           </dt>
+                           <dd>
+                              <p>Le glossaire modifiable est situé dans le dossier <a class="link" href="chapter.project.folder.html#project.folder.glossary" title="glossary">glossary</a>.</p>
+                              <p>Ouvre le fichier, s’il existe, dans l’application associée.</p>
+                           </dd>
+                        </dl>
+                     </div>
+                  </dd>
+                  <dt id="menus.project.restart">
+                     <span class="term" id="menus.project.restart.title">
+                        <span class="guimenuitem">Redémarrer</span>
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Enregistre le projet et redémarre OmegaT. Il vous est demandé de confirmer si vous souhaitez réellement quitter si vous n’avez pas encore enregistré votre projet.</p>
+                  </dd>
+                  <dt id="menus.project.quit">
+                     <span class="term" id="menus.project.quit.title">
+                        <span class="guimenuitem">Quitter</span> 
+                        <span class="keycap">
+                           <strong>C</strong>
+                        </span>+<span class="keycap">
+                           <strong>Q</strong>
+                        </span>
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Enregistre le projet et ferme OmegaT. Il vous est demandé de confirmer si vous souhaitez réellement quitter si vous n’avez pas encore enregistré votre projet.</p>
+                     <div class="note">
+                        <h3 class="title">Note</h3>
+                        <p>Sur macOS, cet élément de menu se trouve dans le menu <span class="guimenu">OmegaT</span>.</p>
+                     </div>
+                  </dd>
+               </dl>
+            </div>
+         </section>
+         <section class="section" id="menus.edit">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">
+                        <span class="guimenu">Édition</span>
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Ce menu vous permet d’accéder aux commandes d’édition de segments.</p>
+            <div class="example" id="example.undo.last.action">
+               <div class="example-title">Exemple 14. Exemple de description de raccourci</div>
+               <div class="example-contents">
+                  <p>Sur Windows et Linux : <span class="keycap">
+                        <strong>Ctrl</strong>
+                     </span>+<span class="keycap">
+                        <strong>Z</strong>
+                     </span>
+                  </p>
+                  <p>Sur macOS : <span class="keycap">
+                        <strong>commande</strong>
+                     </span>+<span class="keycap">
+                        <strong>Z</strong>
+                     </span>
+                  </p>
+                  <p>
+                     <span class="bold">
+                        <strong>Dans ce manuel :</strong>
+                     </span> 
+                     <span class="keycap">
+                        <strong>C</strong>
+                     </span>+<span class="keycap">
+                        <strong>Z</strong>
+                     </span>
+                  </p>
+               </div>
+            </div>
+            <br class="example-break" />
+            <div class="variablelist">
+               <dl class="variablelist">
+                  <dt id="menus.edit.undo.last.action">
+                     <span class="term" id="menus.edit.undo.last.action.title">
+                        <span class="guimenuitem">Annuler</span> 
+                        <span class="keycap">
+                           <strong>C</strong>
+                        </span>+<span class="keycap">
+                           <strong>Z</strong>
+                        </span>
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Annule une modification apportée au segment actuel. L’historique des modifications est perdu lorsque l’on quitte le segment.</p>
+                  </dd>
+                  <dt id="menus.edit.redo.last.action">
+                     <span class="term" id="menus.edit.redo.last.action.title">
+                        <span class="guimenuitem">Rétablir</span> 
+                        <span class="keycap">
+                           <strong>C</strong>
+                        </span>+<span class="keycap">
+                           <strong>Y</strong>
+                        </span>
+	  
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Rétablit une modification du segment actuel qui a été annulée. L’historique des modifications est perdu lorsque l’on quitte le segment.</p>
+                  </dd>
+                  <dt id="menus.edit.replace.with.match.or.selection">
+                     <span class="term" id="menus.edit.replace.with.match.or.selection.title">
+                        <span class="guimenuitem">Remplacer par la correspondance ou la sélection</span> 
+                        <span class="keycap">
+                           <strong>C</strong>
+                        </span>+<span class="keycap">
+                           <strong>R</strong>
+                        </span>
+	  
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Remplace le segment cible par la correspondance partielle sélectionnée (la première correspondance par défaut) ou par le texte sélectionné dans le volet <a class="link" href="chapter.panes.html#panes.fuzzy.matches" title="Correspondances">
+                           <span class="guilabel">Correspondances</span>
+                        </a>.</p>
+                     <p>Le texte sélectionné a la priorité sur la correspondance sélectionnée.</p>
+                     <p>Voir la description du volet <a class="link" href="chapter.panes.html#panes.fuzzy.matches" title="Correspondances">
+                           <span class="guilabel">Correspondances</span>
+                        </a> pour en savoir plus.</p>
+                  </dd>
+                  <dt id="menus.edit.insert.match.or.selection">
+                     <span class="term" id="menus.edit.insert.match.or.selection.title">
+                        <span class="guimenuitem">Insérer la correspondance ou la sélection</span>
+                        <span class="keycap">
+                           <strong>C</strong>
+                        </span>+<span class="keycap">
+                           <strong>I</strong>
+                        </span>
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Insère la correspondance partielle sélectionnée ou le texte sélectionné dans le volet <a class="link" href="chapter.panes.html#panes.fuzzy.matches" title="Correspondances">
+                           <span class="guilabel">Correspondances</span>
+                        </a> à l’emplacement où se trouve le curseur. Si une partie du segment cible est sélectionnée, cette partie sera remplacée.</p>
+                     <p>Le texte sélectionné à la priorité sur la correspondance sélectionnée.</p>
+                     <p>Voir la description du volet <a class="link" href="chapter.panes.html#panes.fuzzy.matches" title="Correspondances">
+                           <span class="guilabel">Correspondances</span>
+                        </a> pour en savoir plus.</p>
+                  </dd>
+                  <dt id="menus.edit.replace.with.source">
+                     <span class="term" id="menus.edit.replace.with.source.title">
+                        <span class="guimenuitem">Remplacer par la source</span> 
+                        <span class="keycap">
+                           <strong>C</strong>
+                        </span>+<span class="keycap">
+                           <strong>Maj</strong>
+                        </span>+<span class="keycap">
+                           <strong>R</strong>
+                        </span>
+	  
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Remplace l’ensemble du segment cible par le segment source.</p>
+                  </dd>
+                  <dt id="menus.edit.insert.source">
+                     <span class="term" id="menus.edit.insert.source.title">
+                        <span class="guimenuitem">Insérer le texte source</span> 
+                        <span class="keycap">
+                           <strong>C</strong>
+                        </span>+<span class="keycap">
+                           <strong>Maj</strong>
+                        </span>+<span class="keycap">
+                           <strong>I</strong>
+                        </span>
+	  
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Insère le segment source à l’emplacement où se trouve le curseur. Si une partie du segment cible est sélectionnée, cette partie sera remplacée.</p>
+                  </dd>
+                  <dt id="menus.edit.select.source.text">
+                     <span class="term" id="menus.edit.select.source.text.title">
+                        <span class="guimenuitem">Sélectionner le texte source</span> 
+                        <span class="keycap">
+                           <strong>C</strong>
+                        </span>+<span class="keycap">
+                           <strong>Maj</strong>
+                        </span>+<span class="keycap">
+                           <strong>A</strong>
+                        </span>
+	  
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Sélectionne le texte source.</p>
+                     <p>La sélection peut être utilisée directement dans OmegaT pour des <a class="link" href="chapter.windows.and.dialogs.html#windows.text.search" title="Recherche textuelle">recherches internes</a>, pour effectuer des <a class="link" href="chapter.windows.and.dialogs.html#windows.text.replace" title="Remplacement de texte">remplacements</a>, pour <a class="link" href="chapter.menus.html#menus.edit.create.glossary.entry">entrer des termes de glossaires</a>, pour des <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.external.searches" title="Recherches externes globales">recherches externes</a>, etc. Une fois la sélection copiée dans le presse-papier de votre système d’exploitation, elle peut aussi être utilisée dans des recherches internet ou ailleurs.</p>
+                  </dd>
+                  <dt id="menus.edit.replace.with.mt">
+                     <span class="term" id="menus.edit.replace.with.mt.title">
+                        <span class="guimenuitem">Remplacer par une traduction automatique</span> 
+                        <span class="keycap">
+                           <strong>C</strong>
+                        </span>+<span class="keycap">
+                           <strong>M</strong>
+                        </span>
+	  
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Remplace le segment cible par une traduction automatique fournie par le service de traduction automatique que vous avez choisi.</p>
+                     <p>Si la préférence <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.mt.automatically.fetch.translations">
+                           <code class="option">Récupérer automatiquement les traductions</code>
+                        </a> est désactivée, utilisez cette option une fois pour récupérer la traduction, et une seconde fois pour l’insérer.</p>
+                     <p>Rien ne se passe si aucun service de traduction automatique n’a été activé dans le menu <a class="link" href="chapter.menus.html#menus.options" title="Options">
+                           <span class="guimenu">Options</span>
+                        </a>
+                        <a class="link" href="chapter.menus.html#menus.options.mt">
+                           <span class="guisubmenu">Traduction automatique</span>
+                        </a>. Voir les préférences <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.mt" title="Traduction automatique">
+                           <span class="guilabel">Traduction automatique</span>
+                        </a> pour en savoir plus.</p>
+                  </dd>
+                  <dt id="menus.edit.insert.missing.source.tag">
+                     <span class="term" id="menus.edit.insert.missing.source.tag.title">
+                        <span class="guimenuitem">Insérer les balises manquantes</span> 
+                        <span class="keycap">
+                           <strong>C</strong>
+                        </span>+<span class="keycap">
+                           <strong>Maj</strong>
+                        </span>+<span class="keycap">
+                           <strong>T</strong>
+                        </span>
+	  
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Insère les balises sources manquantes à l’emplacement où se trouve le curseur.</p>
+                  </dd>
+                  <dt id="menus.edit.insert.next.missing.tag">
+                     <span class="term" id="menus.edit.insert.next.missing.tag.title">
+                        <span class="guimenuitem">Insérer la prochaine balise manquante</span> 
+                        <span class="keycap">
+                           <strong>C</strong>
+                        </span>+<span class="keycap">
+                           <strong>T</strong>
+                        </span>
+	  
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Insère la prochaine balise manquante à l’emplacement où se trouve le curseur.</p>
+                  </dd>
+                  <dt id="menus.edit.export.selection">
+                     <span class="term" id="menus.edit.export.selection.title">
+                        <span class="guimenuitem">Exporter la sélection</span> 
+                        <span class="keycap">
+                           <strong>C</strong>
+                        </span>+<span class="keycap">
+                           <strong>Maj</strong>
+                        </span>+<span class="keycap">
+                           <strong>C</strong>
+                        </span>
+	  
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Exporte la sélection en cours vers un fichier texte pour la traiter. Si aucun texte n’a été sélectionné, c’est le segment source en cours qui sera envoyé vers ce fichier. Pour rester cohérent avec le comportement habituel du presse-papier, ce fichier n’est pas vidé lorsque vous quittez OmegaT. Le contenu exporté est copié dans le fichier <a class="link" href="chapter.appendices.html#configuration.folder.default.contents.script.selection.title">selection.txt</a> situé dans le dossier <a class="link" href="chapter.appendices.html#configuration.folder" title="Dossier de configuration">configuration</a>.</p>
+                  </dd>
+                  <dt id="menus.edit.create.glossary.entry">
+                     <span class="term" id="menus.edit.create.glossary.entry.title">
+                        <span class="guimenuitem">Créer une entrée de glossaire...</span> 
+                        <span class="keycap">
+                           <strong>C</strong>
+                        </span>+<span class="keycap">
+                           <strong>Maj</strong>
+                        </span>+<span class="keycap">
+                           <strong>G</strong>
+                        </span>
+	  
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Permet de créer une entrée dans le glossaire modifiable du projet (le fichier <a class="link" href="chapter.project.folder.html#project.folder.glossary.txt">glossary.txt</a>).</p>
+                     <p>Il existe deux manières d’utiliser cette fonction.</p>
+                     <div class="itemizedlist">
+                        <ul class="itemizedlist" style="list-style-type: disc; ">
+                           <li class="listitem">
+                              <p>La première consiste à ouvrir la boîte de dialogue et ensuite manuellement remplir les différents champs.</p>
+                           </li>
+                           <li class="listitem">
+                              <p>La seconde consiste à sélectionner les termes dans un des volets d’OmegaT et ensuite lancer la boîte de dialogue après chaque sélection pour qu’OmegaT les entre automatiquement dans les différents champs :</p>
+                              <div class="orderedlist">
+                                 <ol class="orderedlist" type="1">
+                                    <li class="listitem">
+                                       <p>Sélectionnez une chaîne de texte dans n’importe quel volet</p>
+                                    </li>
+                                    <li class="listitem">
+                                       <p>Appuyez sur <span class="keycap">
+                                             <strong>C</strong>
+                                          </span>+<span class="keycap">
+                                             <strong>Maj</strong>
+                                          </span>+<span class="keycap">
+                                             <strong>G</strong>
+                                          </span>
+                                       </p>
+                                       <p>La sélection est insérée dans le champ <span class="guilabel">Terme source</span>.</p>
+                                    </li>
+                                    <li class="listitem">
+                                       <p>Sélectionnez une chaîne de texte dans n’importe quel volet</p>
+                                    </li>
+                                    <li class="listitem">
+                                       <p>Appuyez sur <span class="keycap">
+                                             <strong>C</strong>
+                                          </span>+<span class="keycap">
+                                             <strong>Maj</strong>
+                                          </span>+<span class="keycap">
+                                             <strong>G</strong>
+                                          </span>
+                                       </p>
+                                       <p>La sélection est insérée dans le champ <span class="guilabel">Terme cible</span>.</p>
+                                    </li>
+                                    <li class="listitem">
+                                       <p>[Facultatif] Sélectionnez une chaîne de texte dans n’importe quel volet</p>
+                                    </li>
+                                    <li class="listitem">
+                                       <p>[Facultatif] Appuyez sur <span class="keycap">
+                                             <strong>C</strong>
+                                          </span>+<span class="keycap">
+                                             <strong>Maj</strong>
+                                          </span>+<span class="keycap">
+                                             <strong>G</strong>
+                                          </span>
+                                       </p>
+                                       <p>La sélection est insérée dans le champ <span class="guilabel">Commentaire</span>.</p>
+                                    </li>
+                                    <li class="listitem">
+                                       <p>Appuyez sur la touche <span class="keycap">
+                                             <strong>Entrée</strong>
+                                          </span> ou cliquez sur <span class="guibutton">OK</span>
+                                       </p>
+                                    </li>
+                                 </ol>
+                              </div>
+                           </li>
+                        </ul>
+                     </div>
+                  </dd>
+                  <dt id="menus.edit.search.project">
+                     <span class="term" id="menus.edit.search.project.title">
+                        <span class="guimenuitem">Rechercher...</span> 
+                        <span class="keycap">
+                           <strong>C</strong>
+                        </span>+<span class="keycap">
+                           <strong>F</strong>
+                        </span>
+	  
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Ouvre une nouvelle fenêtre de <a class="link" href="chapter.windows.and.dialogs.html#windows.text.search" title="Recherche textuelle">
+                           <span class="guilabel">Recherche textuelle</span>
+                        </a>.</p>
+                     <p>Si vous sélectionnez une chaîne de texte (dans n’importe quel volet) avant d’ouvrir la fenêtre, le texte sera inséré par défaut dans le champ <span class="guilabel">Rechercher :</span>.</p>
+                     <p>La combinaison de touches <span class="keycap">
+                           <strong>C</strong>
+                        </span>+<span class="keycap">
+                           <strong>Maj</strong>
+                        </span>+<span class="keycap">
+                           <strong>F</strong>
+                        </span> réutilise la fenêtre de recherche la plus récente encore ouverte au lieu d’en ouvrir une nouvelle.</p>
+                  </dd>
+                  <dt id="menus.edit.search.and.replace">
+                     <span class="term" id="menus.edit.search.and.replace.title">
+                        <span class="guimenuitem">Remplacer...</span> 
+                        <span class="keycap">
+                           <strong>C</strong>
+                        </span>+<span class="keycap">
+                           <strong>K</strong>
+                        </span>
+	  
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Ouvre une nouvelle fenêtre de <a class="link" href="chapter.windows.and.dialogs.html#windows.text.replace" title="Remplacement de texte">
+                           <span class="guilabel">Remplacement de texte</span>
+                        </a>.</p>
+                     <p>Si vous sélectionnez une chaîne de texte (dans n’importe quel volet) avant d’ouvrir la fenêtre, le texte sera inséré par défaut dans le champ <span class="guilabel">Rechercher :</span>.</p>
+                  </dd>
+                  <dt id="menus.edit.search.dictionaries">
+                     <span class="term" id="menus.edit.search.dictionaries.title">
+                        <span class="guimenuitem">Rechercher dans les dictionnaires</span> 
+                        <span class="keycap">
+                           <strong>A</strong>
+                        </span>+<span class="keycap">
+                           <strong>Maj</strong>
+                        </span>+<span class="keycap">
+                           <strong>D</strong>
+                        </span>
+	  
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Si la préférence <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.dictionary.automatically.search.segment">
+                           <code class="option">Recherche automatique</code>
+                        </a> est désactivée, cette fonction vous permet de rechercher le mot sélectionné ou l’ensemble des termes du segment dans les dictionnaires.</p>
+                  </dd>
+                  <dt id="menus.edit.switch.case">
+                     <span class="term" id="menus.edit.switch.case.title">
+                        <span class="guisubmenu">Basculer la casse en</span>
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Change la casse du texte sélectionné dans le segment cible en fonction de l’option sélectionnée, ou fait défiler les options. Si aucun texte n’est sélectionné, OmegaT sélectionne le mot qui commence par le caractère se trouvant immédiatement à la droite du curseur.</p>
+                     <div class="itemizedlist">
+                        <ul class="itemizedlist" style="list-style-type: disc; ">
+                           <li class="listitem">
+                              <p>
+                                 <span class="guimenuitem">minuscules</span>
+                              </p>
+                              <p>toutes les lettres en minuscules</p>
+                           </li>
+                           <li class="listitem">
+                              <p>
+                                 <span class="guimenuitem">MAJUSCULES</span>
+                              </p>
+                              <p>TOUTES LES LETTRES EN MAJUSCULES</p>
+                           </li>
+                           <li class="listitem">
+                              <p>
+                                 <span class="guimenuitem">Casse de Titre</span>
+                              </p>
+                              <p>Presque toutes les Lettres en Minuscules</p>
+                           </li>
+                           <li class="listitem">
+                              <p>
+                                 <span class="guimenuitem">Casse de phrase</span>
+                              </p>
+                              <p>Uniquement la première lettre en majuscule.</p>
+                           </li>
+                           <li class="listitem">
+                              <p>
+                                 <span class="guimenuitem">Parcourir</span> 
+                                 <span class="keycap">
+                                    <strong>Maj</strong>
+                                 </span>+<span class="keycap">
+                                    <strong>F3</strong>
+                                 </span>
+                              </p>
+                              <div class="warning">
+                                 <h3 class="title">Avertissement</h3>
+                                 <p>Sur macOS, la touche <span class="keycap">
+                                       <strong>F3</strong>
+                                    </span> active le mode <span class="bold">
+                                       <strong>remplacement</strong>
+                                    </span> dans l’éditeur. Voir <a class="link" href="chapter.panes.html#panes.editor.overwriting">Remplacement</a> pour en savoir plus.</p>
+                              </div>
+                           </li>
+                        </ul>
+                     </div>
+                  </dd>
+                  <dt id="menus.edit.select.match">
+                     <span class="term" id="menus.edit.select.match.title">
+                        <span class="guisubmenu">Choisir une correspondance</span>
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Sélectionne la correspondance partielle précédente, suivante, ou <code class="varname">n</code>ième affichée dans la fenêtre des correspondances pour vous permettre d’effectuer un remplacement ou une insertion dans le segment.</p>
+                     <div class="itemizedlist">
+                        <ul class="itemizedlist" style="list-style-type: disc; ">
+                           <li class="listitem">
+                              <p>
+                                 <span class="guimenuitem">Choisir la correspondance précédente</span> 
+                                 <span class="keycap">
+                                    <strong>A</strong>
+                                 </span>+<span class="keycap">
+                                    <strong>↑</strong>
+                                 </span>
+                              </p>
+                           </li>
+                           <li class="listitem">
+                              <p>
+                                 <span class="guimenuitem">Choisir la correspondance suivante</span> 
+                                 <span class="keycap">
+                                    <strong>A</strong>
+                                 </span>+<span class="keycap">
+                                    <strong>↓</strong>
+                                 </span>
+                              </p>
+                           </li>
+                           <li class="listitem">
+                              <p>
+                                 <span class="guimenuitem">Choisir la correspondance #1</span> 
+                                 <span class="keycap">
+                                    <strong>C</strong>
+                                 </span>+<span class="keycap">
+                                    <strong>1</strong>
+                                 </span>
+                              </p>
+                           </li>
+                           <li class="listitem">
+                              <p>
+                                 <span class="guimenuitem">Choisir la correspondance #2</span> 
+                                 <span class="keycap">
+                                    <strong>C</strong>
+                                 </span>+<span class="keycap">
+                                    <strong>2</strong>
+                                 </span>
+                              </p>
+                           </li>
+                           <li class="listitem">
+                              <p>
+                                 <span class="guimenuitem">Choisir la correspondance #3</span> 
+                                 <span class="keycap">
+                                    <strong>C</strong>
+                                 </span>+<span class="keycap">
+                                    <strong>3</strong>
+                                 </span>
+                              </p>
+                           </li>
+                           <li class="listitem">
+                              <p>
+                                 <span class="guimenuitem">Choisir la correspondance #4</span> 
+                                 <span class="keycap">
+                                    <strong>C</strong>
+                                 </span>+<span class="keycap">
+                                    <strong>4</strong>
+                                 </span>
+                              </p>
+                           </li>
+                           <li class="listitem">
+                              <p>
+                                 <span class="guimenuitem">Choisir la correspondance #5</span> 
+                                 <span class="keycap">
+                                    <strong>C</strong>
+                                 </span>+<span class="keycap">
+                                    <strong>5</strong>
+                                 </span>
+                              </p>
+                           </li>
+                        </ul>
+                     </div>
+                  </dd>
+                  <dt id="menus.edit.insert.unicode.control.character">
+                     <span class="term" id="menus.edit.insert.unicode.control.character.title">
+                        <span class="guisubmenu">Insérer un caractère de contrôle Unicode</span>
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Insère le caractère de contrôle directionnel Unicode sélectionné. Voir <a class="ulink" href="https://www.unicode.org/reports/tr9/#Directional_Formatting_Characters" target="_top">Algorithme bidirectionnel Unicode</a> pour en savoir plus.</p>
+                     <div class="itemizedlist">
+                        <ul class="itemizedlist" style="list-style-type: disc; ">
+                           <li class="listitem">
+                              <p>
+                                 <span class="guimenuitem">Marque de gauche à droite (LRM U+200E)</span>
+                              </p>
+                           </li>
+                           <li class="listitem">
+                              <p>
+                                 <span class="guimenuitem">Marque de droite à gauche (RLM U+200F)</span>
+                              </p>
+                           </li>
+                           <li class="listitem">
+                              <p>
+                                 <span class="guimenuitem">Début de l’imbrication de gauche à droite (LRE U+202A)</span>
+                              </p>
+                           </li>
+                           <li class="listitem">
+                              <p>
+                                 <span class="guimenuitem">Début de l’imbrication de droite à gauche (RLE U+202B)</span>
+                              </p>
+                           </li>
+                           <li class="listitem">
+                              <p>
+                                 <span class="guimenuitem">Fin de formatage directionnel (PDF U+202C)</span>
+                              </p>
+                           </li>
+                        </ul>
+                     </div>
+                     <p>Utilisez <a class="link" href="chapter.menus.html#menus.view" title="Affichage">
+                           <span class="guimenu">Affichage</span>
+                        </a>
+                        <a class="link" href="chapter.menus.html#menus.view.mark.bidirectional.algorithm.control.character">
+                           <span class="guimenuitem">Afficher les caractères de contrôle Bidi</span>
+                        </a> pour afficher les caractères afin de faciliter la manipulation. Voir <a class="link" href="chapter.appendices.html#app.bidi" title="Caractères de formatage directionnel">Caractères de formatage directionnel</a> pour en savoir plus.</p>
+                  </dd>
+                  <dt id="menus.edit.use.as.default.translation">
+                     <span class="term" id="menus.edit.use.as.default.translation.title">
+                        <span class="guimenuitem">Utiliser comme traduction par défaut</span>
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>S’il existe plusieurs traductions possibles pour le segment actuel, vous pouvez définir la traduction choisie comme étant la traduction par défaut. S’il n’y a qu’une traduction possible, l’entrée sera grisée.</p>
+                  </dd>
+                  <dt id="menus.edit.create.alternative.translation">
+                     <span class="term" id="menus.edit.create.alternative.translation.title">
+                        <span class="guimenuitem">Créer une traduction alternative</span>
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Deux segments parfaitement identiques peuvent, en fonction du contexte, avoir deux traductions différentes. Si la traduction actuelle ne convient pas, sélectionnez cet élément de menu et entrez la traduction alternative.</p>
+                  </dd>
+                  <dt id="menus.edit.remove.translation">
+                     <span class="term" id="menus.edit.remove.translation.title">
+                        <span class="guimenuitem">Supprimer la traduction</span> 
+                        <span class="keycap">
+                           <strong>C</strong>
+                        </span>+<span class="keycap">
+                           <strong>Maj</strong>
+                        </span>+<span class="keycap">
+                           <strong>X</strong>
+                        </span>
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Supprime la traduction actuelle et définit le segment comme non traduit.</p>
+                  </dd>
+                  <dt id="menus.edit.set.empty.translation">
+                     <span class="term" id="menus.edit.set.empty.translation.title">
+                        <span class="guimenuitem">Enregistrer une traduction vide</span>
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Définit la traduction comme vide. Le document cible ne contiendra rien pour ce segment, tandis que l’Éditeur le marquera avec l’identifiant <code class="literal">&lt;VIDE&gt;</code>.</p>
+                  </dd>
+                  <dt id="menus.edit.register.identical.translation">
+                     <span class="term" id="menus.edit.register.identical.translation.title">
+                        <span class="guimenuitem">Enregistrer une traduction identique à la source</span> 
+                        <span class="keycap">
+                           <strong>C</strong>
+                        </span>+<span class="keycap">
+                           <strong>Maj</strong>
+                        </span>+<span class="keycap">
+                           <strong>S</strong>
+                        </span>
+	  
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Utilisez cette option pour enregistrer une traduction identique à la source, même si la préférence <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.editor.allow.translation.to.be.equal.to.source">
+                           <code class="option">Autoriser une traduction identique à la source</code>
+                        </a> n’est pas activée.</p>
+                  </dd>
+               </dl>
+            </div>
+         </section>
+         <section class="section" id="menus.goto">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">
+                        <span class="guimenu">Atteindre</span>
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Ce menu vous permet d’accéder aux commandes de navigation des segments et des volets.</p>
+            <div class="example" id="example.next.untranslated.segment">
+               <div class="example-title">Exemple 15. Exemple de description de raccourci</div>
+               <div class="example-contents">
+                  <p>Sur Windows et Linux : <span class="keycap">
+                        <strong>Ctrl</strong>
+                     </span>+<span class="keycap">
+                        <strong>U</strong>
+                     </span>
+                  </p>
+                  <p>Sur macOS : <span class="keycap">
+                        <strong>commande</strong>
+                     </span>+<span class="keycap">
+                        <strong>U</strong>
+                     </span>
+                  </p>
+                  <p>
+                     <span class="bold">
+                        <strong>Dans ce manuel : </strong>
+                     </span>
+                     <span class="keycap">
+                        <strong>C</strong>
+                     </span>+<span class="keycap">
+                        <strong>U</strong>
+                     </span>
+                  </p>
+               </div>
+            </div>
+            <br class="example-break" />
+            <div class="variablelist">
+               <dl class="variablelist">
+                  <dt id="menus.goto.next.untranslated.segment">
+                     <span class="term" id="menus.goto.next.untranslated.segment.title">
+                        <span class="guimenuitem">Segment non traduit suivant</span> 
+                        <span class="keycap">
+                           <strong>C</strong>
+                        </span>+<span class="keycap">
+                           <strong>U</strong>
+                        </span>
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Passe au segment suivant qui n’a pas d’entrée pour la langue cible dans la mémoire de traduction.</p>
+                  </dd>
+                  <dt id="menus.goto.next.translated.segment">
+                     <span class="term" id="menus.goto.next.translated.segment.title">
+                        <span class="guimenuitem">Segment traduit suivant</span> 
+                        <span class="keycap">
+                           <strong>C</strong>
+                        </span>+<span class="keycap">
+                           <strong>Maj</strong>
+                        </span>+<span class="keycap">
+                           <strong>U</strong>
+                        </span>
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Se déplace au prochain segment déjà traduit, ignorant les segments non traduits.</p>
+                  </dd>
+                  <dt id="menus.goto.next.segment">
+                     <span class="term" id="menus.goto.next.segment.title">
+                        <span class="guimenuitem">Segment suivant</span> 
+                        <span class="keycap">
+                           <strong>C</strong>
+                        </span>+<span class="keycap">
+                           <strong>N</strong>
+                        </span>
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Ou : <span class="keycap">
+                           <strong>Entrée</strong>
+                        </span>
+                     </p>
+                     <p>Passe au segment suivant, ou au premier segment du fichier suivant si le segment actuel est le dernier du fichier.</p>
+                     <div class="note">
+                        <h3 class="title">Note</h3>
+                        <p>Vous pouvez utiliser la touche <span class="keycap">
+                              <strong>TAB</strong>
+                           </span> en tant que raccourci alternatif en activant la préférence <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.general.use.tab.to.advance">
+                              <code class="option">Utiliser TAB pour valider</code>
+                           </a>.</p>
+                        <p>Cette option peut être utile avec des systèmes de saisie de caractères qui utilisent la touche <span class="keycap">
+                              <strong>Entrée</strong>
+                           </span> pour valider la saisie.</p>
+                     </div>
+                  </dd>
+                  <dt id="menus.goto.previous.segment">
+                     <span class="term" id="menus.goto.previous.segment.title">
+                        <span class="guimenuitem">Segment précédent</span> 
+                        <span class="keycap">
+                           <strong>C</strong>
+                        </span>+<span class="keycap">
+                           <strong>P</strong>
+                        </span>
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Ou : <span class="keycap">
+                           <strong>C</strong>
+                        </span>+<span class="keycap">
+                           <strong>Entrée</strong>
+                        </span>
+                     </p>
+                     <p>Retourne au segment précédent, ou au dernier segment de fichier précédent si le segment actuel est le premier du fichier.</p>
+                     <div class="note">
+                        <h3 class="title">Note</h3>
+                        <p>Vous pouvez utiliser <span class="keycap">
+                              <strong>C</strong>
+                           </span>+<span class="keycap">
+                              <strong>TAB</strong>
+                           </span> en tant que raccourci alternatif en activant la préférence <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.general.use.tab.to.advance">
+                              <code class="option">Utiliser TAB pour valider</code>
+                           </a>.</p>
+                        <p>Cette option peut être utile avec des systèmes de saisie de caractères qui utilisent la touche <span class="keycap">
+                              <strong>Entrée</strong>
+                           </span> pour valider la saisie.</p>
+                     </div>
+                  </dd>
+                  <dt id="menus.goto.segment.number">
+                     <span class="term" id="menus.goto.segment.number.title">
+                        <span class="guimenuitem">Segment numéro...</span> 
+                        <span class="keycap">
+                           <strong>C</strong>
+                        </span>+<span class="keycap">
+                           <strong>J</strong>
+                        </span>
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Se rend au segment dont le numéro ou le raccourci est entré.</p>
+                  </dd>
+                  <dt id="menus.goto.next.note">
+                     <span class="term" id="menus.goto.next.note.title">
+                        <span class="guimenuitem">Note suivante</span> 
+                        <span class="keycap">
+                           <strong>C</strong>
+                        </span>+<span class="keycap">
+                           <strong>A</strong>
+                        </span>+<span class="keycap">
+                           <strong>N</strong>
+                        </span>
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Passe au segment suivant avec une note.</p>
+                  </dd>
+                  <dt id="menus.goto.previous.note">
+                     <span class="term" id="menus.goto.previous.note.title">
+                        <span class="guimenuitem">Note précédente</span> 
+                        <span class="keycap">
+                           <strong>C</strong>
+                        </span>+<span class="keycap">
+                           <strong>A</strong>
+                        </span>+<span class="keycap">
+                           <strong>P</strong>
+                        </span>
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Retourne au segment précédent avec une note.</p>
+                  </dd>
+                  <dt id="menus.goto.next.unique.segment">
+                     <span class="term" id="menus.goto.next.unique.segment.title">
+                        <span class="guimenuitem">Segment unique suivant</span> 
+                        <span class="keycap">
+                           <strong>C</strong>
+                        </span>+<span class="keycap">
+                           <strong>Maj</strong>
+                        </span>+<span class="keycap">
+                           <strong>K</strong>
+                        </span>
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Passe au prochain segment unique.</p>
+                  </dd>
+                  <dt id="menus.goto.source.of.selected.match">
+                     <span class="term" id="menus.goto.source.of.selected.match.title">
+                        <span class="guimenuitem">Source de la correspondance sélectionnée</span> 
+                        <span class="keycap">
+                           <strong>C</strong>
+                        </span>+<span class="keycap">
+                           <strong>Maj</strong>
+                        </span>+<span class="keycap">
+                           <strong>M</strong>
+                        </span>
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Passe au segment qui correspond a la correspondance sélectionnée dans le volet <span class="guilabel">Correspondances</span>.</p>
+                  </dd>
+                  <dt id="menus.goto.auto.populated.segments">
+                     <span class="term" id="menus.goto.auto.populated.segments.title">
+                        <span class="guisubmenu">Segments auto-traduits</span>
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Navigue entre les segments automatiquement remplis par des correspondances exactes provenant des sous-dossiers <a class="link" href="chapter.project.folder.html#project.folder.tm.auto">tm/auto</a> et <a class="link" href="chapter.project.folder.html#project.folder.tm.enforce.title">tm/enforce</a>.</p>
+                     <p>Voir le guide pratique <a class="link" href="chapter.how.to.html#how.to.use.tm.reuse.tm" title="Réutiliser les MT">Réutiliser les MT</a> pour en savoir plus.</p>
+                     <div class="itemizedlist">
+                        <ul class="itemizedlist" style="list-style-type: disc; ">
+                           <li class="listitem" id="menus.goto.auto.populated.segments.next.auto">
+                              <p id="menus.goto.auto.populated.segments.next.auto.title">
+                                 <span class="guimenuitem">Segment suivant venant de tm/auto/</span> 
+                                 <span class="keycap">
+                                    <strong>C</strong>
+                                 </span>+<span class="keycap">
+                                    <strong>A</strong>
+                                 </span>+<span class="keycap">
+                                    <strong>,</strong>
+                                 </span>
+                              </p>
+                              <p>Passe au segment suivant inséré à partir de <code class="filename">tm/auto/</code>.</p>
+                           </li>
+                           <li class="listitem" id="menus.goto.auto.populated.segments.prev.auto">
+                              <p id="menus.goto.auto.populated.segments.prev.auto.title">
+                                 <span class="guimenuitem">Segment précédent venant de tm/auto/</span> 
+                                 <span class="keycap">
+                                    <strong>Maj</strong>
+                                 </span>+<span class="keycap">
+                                    <strong>C</strong>
+                                 </span>+<span class="keycap">
+                                    <strong>A</strong>
+                                 </span>+<span class="keycap">
+                                    <strong>,</strong>
+                                 </span>
+                              </p>
+                              <p>Retourne au segment précédent inséré à partir de <code class="filename">tm/auto/</code>.</p>
+                           </li>
+                           <li class="listitem" id="menus.goto.auto.populated.segments.next.enforce">
+                              <p id="menus.goto.auto.populated.segments.next.enforce.title">
+                                 <span class="guimenuitem">Segment suivant venant de tm/enforce/</span> 
+                                 <span class="keycap">
+                                    <strong>C</strong>
+                                 </span>+<span class="keycap">
+                                    <strong>A</strong>
+                                 </span>+<span class="keycap">
+                                    <strong>.</strong>
+                                 </span>
+                              </p>
+                              <p>Passe au segment suivant inséré à partir de <code class="filename">tm/enforce/</code>.</p>
+                           </li>
+                           <li class="listitem" id="menus.goto.auto.populated.segments.prev.enforce">
+                              <p id="menus.goto.auto.populated.segments.prev.enforce.title">
+                                 <span class="guimenuitem">Segment précédent venant de tm/enforce/</span> 
+                                 <span class="keycap">
+                                    <strong>Maj</strong>
+                                 </span>+<span class="keycap">
+                                    <strong>C</strong>
+                                 </span>+<span class="keycap">
+                                    <strong>A</strong>
+                                 </span>+<span class="keycap">
+                                    <strong>,</strong>
+                                 </span>
+                              </p>
+                              <p>Retourne au segment précédent inséré à partir de <code class="filename">tm/enforce/</code>.</p>
+                           </li>
+                        </ul>
+                     </div>
+                  </dd>
+                  <dt id="menus.goto.back.in.history">
+                     <span class="term" id="menus.goto.back.in.history.title">
+                        <span class="guimenuitem">Segment précédent dans l’historique</span> 
+                        <span class="keycap">
+                           <strong>C</strong>
+                        </span>+<span class="keycap">
+                           <strong>Maj</strong>
+                        </span>+<span class="keycap">
+                           <strong>P</strong>
+                        </span>
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>OmegaT garde en mémoire votre historique de navigation de segments.</p>
+                     <p>Cette commande vous permet de revenir à des segments que vous avez déjà parcourus, un segment à la fois.</p>
+                  </dd>
+                  <dt id="menus.goto.forward.in.history">
+                     <span class="term" id="menus.goto.forward.in.history.title">
+                        <span class="guimenuitem">Segment suivant dans l’historique</span> 
+                        <span class="keycap">
+                           <strong>C</strong>
+                        </span>+<span class="keycap">
+                           <strong>Maj</strong>
+                        </span>+<span class="keycap">
+                           <strong>N</strong>
+                        </span>
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>OmegaT garde en mémoire votre historique de navigation de segments.</p>
+                     <p>Cette commande vous permet d’avancer d’un segment à la fois à des segments que vous avez déjà parcourus avec la commande <a class="link" href="chapter.menus.html#menus.goto" title="Atteindre">
+                           <span class="guimenu">Atteindre</span>
+                        </a>
+                        <a class="link" href="chapter.menus.html#menus.goto.back.in.history">
+                           <span class="guimenuitem">Segment précédent dans l’historique</span> 
+                           <span class="keycap">
+                              <strong>C</strong>
+                           </span>+<span class="keycap">
+                              <strong>Maj</strong>
+                           </span>+<span class="keycap">
+                              <strong>P</strong>
+                           </span>
+                        </a> ci-dessus.</p>
+                  </dd>
+                  <dt id="menus.goto.notes.pane">
+                     <span class="term" id="menus.goto.notes.pane.title">
+                        <span class="guimenuitem">Bloc-note</span> 
+                        <span class="keycap">
+                           <strong>C</strong>
+                        </span>+<span class="keycap">
+                           <strong>A</strong>
+                        </span>+<span class="keycap">
+                           <strong>N</strong>
+                        </span>
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Utilisez la fenêtre <a class="link" href="chapter.panes.html#panes.notes" title="Bloc-note">
+                           <span class="guilabel">Bloc-note</span>
+                        </a> pour écrire ou modifier une note associée au segment actuel.</p>
+                  </dd>
+                  <dt id="menus.goto.editor.pane">
+                     <span class="term" id="menus.goto.editor.pane.title">
+                        <span class="guimenuitem">Éditeur</span> 
+                        <span class="keycap">
+                           <strong>C</strong>
+                        </span>+<span class="keycap">
+                           <strong>A</strong>
+                        </span>+<span class="keycap">
+                           <strong>E</strong>
+                        </span>
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Utilisez la fenêtre <a class="link" href="chapter.panes.html#panes.editor" title="Éditeur">
+                           <span class="guilabel">Éditeur</span>
+                        </a> pour poursuivre votre traduction.</p>
+                  </dd>
+               </dl>
+            </div>
+         </section>
+         <section class="section" id="menus.view">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">
+                        <span class="guimenu">Affichage</span>
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Ce menu vous permet de sélectionner les informations affichées par OmegaT.</p>
+            <p>Toutes les couleurs indiquées dans les descriptions peuvent être modifiées dans les préférences de <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.colours" title="Couleurs">
+                  <span class="guilabel">Couleurs</span>
+               </a>.</p>
+            <div class="variablelist">
+               <dl class="variablelist">
+                  <dt id="menus.view.mark.translated.segments">
+                     <span class="term" id="menus.view.mark.translated.segments.title">
+                        <span class="guimenuitem">Surligner les segments traduits</span>
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Surligne les segments déjà traduits en jaune.</p>
+                  </dd>
+                  <dt id="menus.view.mark.untranslated.segments">
+                     <span class="term" id="menus.view.mark.untranslated.segments.title">
+                        <span class="guimenuitem">Surligner les segments non traduits</span>
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Surligne les segments non traduits en violet.</p>
+                  </dd>
+                  <dt id="menus.view.mark.paragraph.delimitations">
+                     <span class="term" id="menus.view.mark.paragraph.delimitations.title">
+                        <span class="guimenuitem">Afficher les délimitations de paragraphes</span>
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Les différents paragraphes du document source sont séparés visuellement. Vous pouvez modifier la forme de la délimitation de paragraphe dans le paramètre <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.editor.paragraph.delimitation.format">
+                           <code class="option">Format de la délimitation des paragraphes </code>
+                        </a>.</p>
+                  </dd>
+                  <dt id="menus.view.display.source.segments">
+                     <span class="term" id="menus.view.display.source.segments.title">
+                        <span class="guimenuitem">Afficher les segments sources</span>
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Affiche tous les segments source et les surligne en vert. Par défaut, seul le segment source du segment actuel est affiché.</p>
+                  </dd>
+                  <dt id="menus.view.mark.non.unique.segments">
+                     <span class="term" id="menus.view.mark.non.unique.segments.title">
+                        <span class="guimenuitem">Colorer les segments répétés</span>
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Colore les segments répétés en gris pâle.</p>
+                  </dd>
+                  <dt id="menus.view.mark.segments.with.notes">
+                     <span class="term" id="menus.view.mark.segments.with.notes.title">
+                        <span class="guimenuitem">Surligner les segments avec notes</span>
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Surligne les segments qui contiennent une note en cyan. Cette fonction à la priorité sur les fonctions <span class="guimenuitem">Surligner les segments traduits</span> et <span class="guimenuitem">Surligner les segments non traduits</span>.</p>
+                  </dd>
+                  <dt id="menus.view.mark.non.breakable.space">
+                     <span class="term" id="menus.view.mark.non.breakable.space.title">
+                        <span class="guimenuitem">Afficher les espaces insécables</span>
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Affiche les espaces insécables avec un fond gris.</p>
+                  </dd>
+                  <dt id="menus.view.mark.white.space">
+                     <span class="term" id="menus.view.mark.white.space.title">
+                        <span class="guimenuitem">Afficher les caractères d’espacement</span>
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Affiche les caractères d’espacement avec un petit point.</p>
+                  </dd>
+                  <dt id="menus.view.mark.bidirectional.algorithm.control.character">
+                     <span class="term" id="menus.view.mark.bidirectional.algorithm.control.character.title">
+                        <span class="guimenuitem">Afficher les caractères de contrôle Bidi</span>
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Affiche les caractères de formatage directionnel Unicode. Voir <a class="ulink" href="https://www.unicode.org/reports/tr9/" target="_top">Algorithme bidirectionnel Unicode</a> pour en savoir plus.</p>
+                     <p>Utilisez la fonction <a class="link" href="chapter.menus.html#menus.edit" title="Édition">
+                           <span class="guimenu">Édition</span>
+                        </a>
+                        <a class="link" href="chapter.menus.html#menus.edit.insert.unicode.control.character">
+                           <span class="guisubmenu">Insérer un caractère de contrôle Unicode</span>
+                        </a> pour insérer une sélection de caractères directement depuis l’interface d’OmegaT. Voir <a class="link" href="chapter.appendices.html#app.bidi" title="Caractères de formatage directionnel">Caractères de formatage directionnel</a> pour en savoir plus.</p>
+                  </dd>
+                  <dt id="menus.view.mark.auto.populated.segments">
+                     <span class="term" id="menus.view.mark.auto.populated.segments.title">
+                        <span class="guimenuitem">Surligner les segments auto-traduits</span>
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Surligne les segments traduits automatiquement en différentes couleurs.</p>
+                     <p>Voir le paramètre <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.editor.save.auto-populated.status">
+                           <code class="option">Enregistrer l’état auto-traduit</code>
+                        </a> pour en savoir plus.</p>
+                  </dd>
+                  <dt id="menus.view.mark.glossary.matches">
+                     <span class="term" id="menus.view.mark.glossary.matches.title">
+                        <span class="guimenuitem">Souligner les correspondances de glossaire</span>
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Souligne les termes source qui ont une correspondance dans les glossaires. Passer le curseur de la souris sur un terme souligné permet d’afficher le terme cible correspondant. Faire un clic-droit sur un terme souligné affiche le terme cible correspondant, qui peut être sélectionné et inséré a la position du curseur dans le texte cible.</p>
+                  </dd>
+                  <dt id="menus.view.mark.language.checker">
+                     <span class="term" id="menus.view.mark.language.checker.title">
+                        <span class="guimenuitem">Souligner les problèmes du vérificateur linguistique</span>
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Souligne les erreurs trouvées par LanguageTool dans les segments cibles. Voir le paramètre <a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.languagetool.plugin" title="LanguageTool">
+                           <span class="guilabel">LanguageTool</span>
+                        </a> pour en savoir plus.</p>
+                  </dd>
+                  <dt id="menus.view.aggressive.font.fallback">
+                     <span class="term" id="menus.view.aggressive.font.fallback.title">
+                        <span class="guimenuitem">Utilisation intensive des polices de repli</span>
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Utilisez cette fonction si OmegaT n’affiche pas correctement certains glyphes (même si les polices contenant les glyphes en question sont installées dans votre machine).</p>
+                     <div class="note">
+                        <h3 class="title">Note</h3>
+                        <p>Sur Windows, ce mécanisme manuel de polices de repli peut interférer avec la police de repli standard, provoquant ainsi une substitution de polices non souhaitée. Pour cette raison, il est désactivé par défaut.</p>
+                     </div>
+                  </dd>
+                  <dt id="menus.view.modification.info">
+                     <span class="term" id="menus.view.modification.info.title">
+                        <span class="guisubmenu">Afficher les informations de modification</span>
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Affiche l’heure et l’auteur de la dernière modification apportée à un segment.</p>
+                     <p>Par défaut, la fonction est réglée sur <span class="guimenuitem">Segment actuel</span> mais elle peut aussi être réglée sur <span class="guimenuitem">Tous les segments</span> ou <span class="guimenuitem">Aucun</span>.</p>
+                     <p>Vous pouvez modifier les informations affichées. Voir le paramètre <a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.view.use.custom.templates.for.modification.info">
+                           <code class="option">Personnaliser les informations de modification du segment</code>
+                        </a> pour en savoir plus.</p>
+                  </dd>
+                  <dt id="menus.view.restore.main.window">
+                     <span class="term" id="menus.view.restore.main.window.title">
+                        <span class="guimenuitem">Réinitialiser la fenêtre d’OmegaT</span>
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Rétablit la disposition par défaut des fenêtres d’OmegaT.</p>
+                     <div class="note">
+                        <h3 class="title">Note</h3>
+                        <p>Utilisez cette fonction si vous rencontrez des problèmes lors de la réorganisation de la disposition des fenêtres.</p>
+                     </div>
+                  </dd>
+               </dl>
+            </div>
+         </section>
+         <section class="section" id="menus.tools">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">
+                        <span class="guimenu">Outils</span>
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Ce menu vous permet d’accéder à certains outils comme la validation d’assurance qualité, les statistiques de correspondances, l’aligneur, et les scripts.</p>
+            <div class="example" id="example.check.issues">
+               <div class="example-title">Exemple 16. Exemple de description de raccourci</div>
+               <div class="example-contents">
+                  <p>Sur Windows et Linux : <span class="keycap">
+                        <strong>Ctrl</strong>
+                     </span>+<span class="keycap">
+                        <strong>Maj</strong>
+                     </span>+<span class="keycap">
+                        <strong>V</strong>
+                     </span>
+                  </p>
+                  <p>Sur macOS : <span class="keycap">
+                        <strong>Maj</strong>
+                     </span>+<span class="keycap">
+                        <strong>commande</strong>
+                     </span>+<span class="keycap">
+                        <strong>V</strong>
+                     </span>
+                  </p>
+                  <p>
+                     <span class="bold">
+                        <strong>Dans ce manuel :</strong>
+                     </span> 
+                     <span class="keycap">
+                        <strong>C</strong>
+                     </span>+<span class="keycap">
+                        <strong>Maj</strong>
+                     </span>+<span class="keycap">
+                        <strong>V</strong>
+                     </span>
+                  </p>
+               </div>
+            </div>
+            <br class="example-break" />
+            <div class="variablelist">
+               <dl class="variablelist">
+                  <dt id="menus.tools.check.issues">
+                     <span class="term" id="menus.tools.check.issues.title">
+                        <span class="guimenuitem">Afficher les erreurs...</span> 
+                        <span class="keycap">
+                           <strong>C</strong>
+                        </span>+<span class="keycap">
+                           <strong>Maj</strong>
+                        </span>+<span class="keycap">
+                           <strong>V</strong>
+                        </span>
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>L’outil d’assurance de qualité effectue toutes les vérifications automatiques en une fois et affiche les résultats dans une fenêtre.</p>
+                     <p>Quatre types de problèmes peuvent être détectés :</p>
+                     <div class="itemizedlist">
+                        <ul class="itemizedlist" style="list-style-type: disc; ">
+                           <li class="listitem">
+                              <p>
+                                 <span class="guilabel">Problèmes de balises</span> (toujours activée) : détecte les balises manquantes ou mal placées, y compris les balises personnalisées et les textes signalés. Voir les préférences <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.tag.processing" title="Traitement des balises">
+                                    <span class="guilabel">Traitement des balises</span>
+                                 </a> pour en savoir plus.</p>
+                              <div class="note">
+                                 <h3 class="title">Note</h3>
+                                 <p>Cette option est toujours activée.</p>
+                              </div>
+                           </li>
+                           <li class="listitem">
+                              <p>
+                                 <span class="guilabel">Erreurs d’orthographe</span> (optionnelle) : détecte les fautes d’orthographe. Fonctionne seulement si un dictionnaire orthographique est installé. Voir les préférences <a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.spellchecker" title="Vérificateur orthographique">
+                                    <span class="guilabel">Vérificateur orthographique</span>
+                                 </a> pour en savoir plus.</p>
+                           </li>
+                           <li class="listitem">
+                              <p>
+                                 <span class="guilabel">Problèmes de terminologie</span> (optionnelle) : détecte tous les éléments de glossaires qui ne sont pas traduits correctement. Voir les préférences <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.glossary" title="Glossaires">
+                                    <span class="guilabel">Glossaires</span>
+                                 </a> pour en savoir plus.</p>
+                           </li>
+                           <li class="listitem">
+                              <p>
+                                 <span class="guilabel">Erreurs LanguageTool</span> (optionnelle) : détecte les problèmes grammaticaux ou typographiques Voir les préférences <a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.languagetool.plugin" title="LanguageTool">
+                                    <span class="guilabel">LanguageTool</span>
+                                 </a> pour en savoir plus.</p>
+                           </li>
+                        </ul>
+                     </div>
+                     <p>Les résultats sont disposés sous la forme d’un tableau dans lequel :</p>
+                     <div class="itemizedlist">
+                        <ul class="itemizedlist" style="list-style-type: disc; ">
+                           <li class="listitem">
+                              <p>Double-cliquer sur une ligne active le segment correspondant dans le volet Éditeur.</p>
+                           </li>
+                           <li class="listitem">
+                              <p>Cliquer sur un en-tête de colonne modifie l’ordre de tri de la colonne.</p>
+                           </li>
+                           <li class="listitem">
+                              <p>Sélectionner ou déplacer la souris sur une ligne va afficher une icône de menu contextuel à l’extrémité droite de la ligne. Cliquer sur cette icône va vous présenter les actions disponibles pour corriger ou ignorer l’erreur.</p>
+                              <div class="note">
+                                 <h3 class="title">Note</h3>
+                                 <p>Pour forcer la vérification orthographique à chaque fois que vous quittez un segment, activez la préférence <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.editor.validate.tags.when.leaving.a.segment">
+                                       <code class="option">Vérifier les problèmes en quittant un segment</code>
+                                    </a>.</p>
+                                 <p>Pour empêcher la création de fichiers traduits s’il y a des problèmes de balises, activez la préférence <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.tag.processing.do.not.allow.creating.translated.documents.with.tag.issues">
+                                       <code class="option">Bloquer la création de fichiers traduits avec des problèmes de balises</code>
+                                    </a>.</p>
+                              </div>
+                           </li>
+                        </ul>
+                     </div>
+                  </dd>
+                  <dt id="menus.tools.check.issues.for.current.document">
+                     <span class="term" id="menus.tools.check.issues.for.current.document.title">
+                        <span class="guimenuitem">Afficher les erreurs pour le document actuel</span>
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Comme ci-dessus, mais seulement pour le document actif dans le volet Éditeur.</p>
+                  </dd>
+                  <dt id="menus.tools.statistics">
+                     <span class="term" id="menus.tools.statistics.title">
+                        <span class="guimenuitem">Statistiques</span>
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Ouvre une nouvelle fenêtre et affiche les statistiques du projet telles que le nombre de mots ou les totaux des segments, ainsi que les totaux de chaque fichier du projet.</p>
+                     <p>Les données sont enregistrées dans le fichier <a class="link" href="chapter.project.folder.html#project.folder.project.stats">project_stats.txt</a> qui est situé dans le dossier <a class="link" href="chapter.project.folder.html#project.folder.omegat.folder" title="omegat">omegat</a> du projet.</p>
+                     <div class="note">
+                        <h3 class="title">Note</h3>
+                        <p>Le nombre de mots, le total des segments, et d’autres éléments peuvent être influencés par les facteurs suivants :</p>
+                        <div class="itemizedlist">
+                           <ul class="itemizedlist" style="list-style-type: disc; ">
+                              <li class="listitem">
+                                 <p>Les paramètres de filtres de fichiers : certains filtres permettent à des parties supplémentaires d’être prises en compte pour la traduction. Voir les <a class="link" href="chapter.appendices.html#filters.options" title="Options">options</a> de filtre de fichier pour en savoir plus.</p>
+                              </li>
+                              <li class="listitem">
+                                 <p>Règles de segmentation : différentes règles vont générer un différent nombre de segments. Voir l’annexe <a class="link" href="chapter.appendices.html#app.segmentation" title="Segmentation">Segmentation</a> pour en savoir plus.</p>
+                              </li>
+                              <li class="listitem">
+                                 <p>Balises : Les balises OmegaT ne sont jamais comptées dans les statistiques, mais dans certains elles peuvent diviser des termes et créer des divergences dans la façon dont OmegaT les comptabilise. Voir le paramètre <a class="link" href="chapter.windows.and.dialogs.html#dialogs.project.properties.hide.tags">
+                                       <code class="option">Dissimuler les balises</code>
+                                    </a> dans la boîte de dialogue <a class="link" href="chapter.windows.and.dialogs.html#dialogs.project.properties" title="Propriétés du projet">
+                                       <span class="guilabel">Propriétés du projet</span>
+                                    </a> pour en savoir plus.</p>
+                              </li>
+                              <li class="listitem">
+                                 <p>Balises personnalisées et textes signalés : comme les balises OmegaT, ils ne sont pas comptés par défaut dans les statistiques, mais vous pouvez demander a OmegaT de les compter comme des mots. Voir le paramètre <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.tag.processing.count.protected.text.and.custom.tags.in.statistics">
+                                       <code class="option">Compter les textes signalés et les balises personnalisées dans les statistiques</code>
+                                    </a> pour en savoir plus.</p>
+                              </li>
+                           </ul>
+                        </div>
+                     </div>
+                  </dd>
+                  <dt id="menus.tools.match.statistics">
+                     <span class="term" id="menus.tools.match.statistics.title">
+                        <span class="guimenuitem">Statistiques des correspondances</span>
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Montre les statistiques des correspondances du projet, c’est-à-dire le nombre de répétitions, de correspondances exactes, de correspondances partielles, et d’absences de correspondances pour les segments, les mots, et les caractères.</p>
+                     <p>Les données sont enregistrées dans le fichier <a class="link" href="chapter.project.folder.html#project.folder.omegat.project.stats.match">Le fichier project_stats_match.txt</a> qui est situé dans le dossier <a class="link" href="chapter.project.folder.html#project.folder.omegat.folder" title="omegat">omegat</a> du projet.</p>
+                  </dd>
+                  <dt id="menus.tools.match.statistics.per.file">
+                     <span class="term" id="menus.tools.match.statistics.per.file.title">
+                        <span class="guimenuitem">Statistiques des correspondances par fichier</span>
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Montre les statistiques des correspondances du projet individuelles pour chaque fichier du projet, c’est-à-dire le nombre de répétitions, de correspondances exactes, de correspondances partielles, et d’absences de correspondances pour les segments, les mots, et les caractères.</p>
+                     <p>Les données sont enregistrées dans le fichier <a class="link" href="chapter.project.folder.html#project.folder.omegat.project.stats.match.per.file">project_stats_match_per_file.txt</a> qui est situé dans le dossier <a class="link" href="chapter.project.folder.html#project.folder.omegat.folder" title="omegat">omegat</a> du projet.</p>
+                  </dd>
+                  <dt id="menus.tools.align.files">
+                     <span class="term" id="menus.tools.align.files.title">
+                        <span class="guimenuitem">Aligner les fichiers…</span>
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Sélectionner les deux fichiers à aligner (le fichier source et sa traduction) et cliquer sur <span class="guibutton">OK</span> pour ouvrir la fenêtre <a class="link" href="chapter.windows.and.dialogs.html#windows.aligner" title="Aligner des fichiers">
+                           <span class="guilabel">Aligner des fichiers</span>
+                        </a>.</p>
+                     <p>Les formats de fichiers pris en charge dépendent des paramètres de votre projet. Voir l’annexe <a class="link" href="chapter.appendices.html#file.filters" title="Filtres de fichiers">Filtres de fichiers</a> pour en savoir plus.</p>
+                     <p>Les fichiers source et cible peuvent être dans des formats différents, (par exemple, un fichier <code class="filename">.docx</code> peut être aligné avec un fichier <code class="filename">.pdf</code>).</p>
+                  </dd>
+                  <dt id="menus.tools.scripting">
+                     <span class="term" id="menus.tools.scripting.title">
+                        <span class="guimenuitem">Scripts...</span>
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Ouvre la fenêtre <a class="link" href="chapter.windows.and.dialogs.html#windows.scripts" title="Scripts">
+                           <span class="guilabel">Scripts</span>
+                        </a>, qui vous permet de définir l’emplacement où les scripts se trouvent, ainsi que d’écrire et d’exécuter des scripts, et leur assigner un raccourci.</p>
+                     <p>La liste sous cet élément affiche 12 emplacements potentiels pour des scripts. Cliquer sur un emplacement assigné permet de lancer le script assigné à cet emplacement.</p>
+                     <div class="note">
+                        <h3 class="title">Note</h3>
+                        <p>Pour assigner un numéro à un script :</p>
+                        <div class="orderedlist">
+                           <ol class="orderedlist" type="1">
+                              <li class="listitem">
+                                 <p>Ouvrez la fenêtre des scripts</p>
+                              </li>
+                              <li class="listitem">
+                                 <p>Sélectionnez le script à associer dans la liste à gauche</p>
+                              </li>
+                              <li class="listitem">
+                                 <p>Faites un clic-droit sur un numéro libre au bas de la fenêtre et choisissez <span class="guilabel">Ajouter le script</span>.</p>
+                              </li>
+                           </ol>
+                        </div>
+                     </div>
+                  </dd>
+                  <dt id="menus.tools.external.search.commands">
+                     <span class="term" id="menus.tools.external.search.commands.title">Commandes de recherches externes</span>
+                  </dt>
+                  <dd>
+                     <p>Si vous avez défini des recherches externes dans les paramètres <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.external.searches" title="Recherches externes globales">
+                           <span class="guilabel">Recherches externes globales</span>
+                        </a>, ils sont listés et accessibles ici.</p>
+                  </dd>
+               </dl>
+            </div>
+         </section>
+         <section class="section" id="menus.options">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">
+                        <span class="guimenu">Options</span>
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Ce menu vous permet d’accéder rapidement à quelques paramètres fréquemment utilisés.</p>
+            <div class="variablelist">
+               <dl class="variablelist">
+                  <dt id="menus.options.preferences">
+                     <span class="term" id="menus.options.preferences.title">
+                        <span class="guimenuitem">Préférences...</span>
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Ouvre la boîte de dialogue <a class="link" href="chapter.dialogs.preferences.html" title="Préférences">
+                           <span class="guilabel">Préférences</span>
+                        </a>.</p>
+                     <div class="note">
+                        <h3 class="title">Note</h3>
+                        <p>Sur macOS, cet élément de menu se trouve dans le menu <span class="guimenu">OmegaT</span>.</p>
+                     </div>
+                  </dd>
+                  <dt id="menus.options.mt">
+                     <span class="term" id="menus.options.mt.title">
+                        <span class="guisubmenu">Traduction automatique</span>
+                     </span>
+                  </dt>
+                  <dd>
+                     <div class="itemizedlist">
+                        <ul class="itemizedlist" style="list-style-type: disc; ">
+                           <li class="listitem">
+                              <p>
+                                 <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.mt.automatically.fetch.translations">
+                                    <code class="option">Récupérer automatiquement les traductions</code>
+                                 </a>
+                              </p>
+                           </li>
+                        </ul>
+                     </div>
+                     <p>Permet d’activer ou de désactiver les moteurs de traduction automatique disponibles.</p>
+                     <p>Si plusieurs moteurs de traductions sont sélectionnés, vous pouvez aussi utiliser <span class="keycap">
+                           <strong>C</strong>
+                        </span>+<span class="keycap">
+                           <strong>M</strong>
+                        </span> pour passer de l’un à l’autre et insérer le dernier moteur sélectionné. Voir les préférences <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.mt" title="Traduction automatique">
+                           <span class="guilabel">Traduction automatique</span>
+                        </a> pour en savoir plus.</p>
+                  </dd>
+                  <dt id="menus.options.glossary">
+                     <span class="term" id="menus.options.glossary.title">
+                        <span class="guisubmenu">Glossaires</span>
+                     </span>
+                  </dt>
+                  <dd>
+                     <div class="itemizedlist">
+                        <ul class="itemizedlist" style="list-style-type: disc; ">
+                           <li class="listitem">
+                              <p>
+                                 <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries">
+                                    <code class="option">Utiliser la lemmatisation</code>
+                                 </a>
+                              </p>
+                           </li>
+                        </ul>
+                     </div>
+                     <p>Permet d’activer ou de désactiver les correspondances partielles pour les entrées de glossaire.</p>
+                     <p>Voir le paramètre <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.glossary" title="Glossaires">
+                           <span class="guilabel">Glossaires</span>
+                        </a> pour en savoir plus.</p>
+                  </dd>
+                  <dt id="menus.options.dictionary">
+                     <span class="term" id="menus.options.dictionary.title">
+                        <span class="guisubmenu">Dictionnaires</span>
+                     </span>
+                  </dt>
+                  <dd>
+                     <div class="itemizedlist">
+                        <ul class="itemizedlist" style="list-style-type: disc; ">
+                           <li class="listitem">
+                              <p>
+                                 <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries">
+                                    <code class="option">Utiliser la lemmatisation</code>
+                                 </a>
+                              </p>
+                           </li>
+                        </ul>
+                     </div>
+                     <p>Permet d’activer ou de désactiver les correspondances partielles pour les entrées de dictionnaire.</p>
+                     <p>Voir le paramètre <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.dictionary" title="Dictionnaires">
+                           <span class="guilabel">Dictionnaires</span>
+                        </a> pour en savoir plus.</p>
+                  </dd>
+                  <dt id="menus.options.autocompletion">
+                     <span class="term" id="menus.options.autocompletion.title">
+                        <span class="guisubmenu">Saisie automatique</span>
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Sélectionner les différentes options pour les activer ou les désactiver Voir le paramètre <a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.auto.completion" title="Saisie automatique">
+                           <span class="guilabel">Saisie automatique</span>
+                        </a> pour en savoir plus.</p>
+                  </dd>
+                  <dt id="menus.options.file.filters">
+                     <span class="term" id="menus.options.file.filters.title">
+                        <span class="guimenuitem">Filtres de fichiers généraux...</span>
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Ouvre les préférences de <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.file.filters" title="Filtres de fichiers généraux">
+                           <span class="guilabel">Filtres de fichiers généraux</span>
+                        </a>.</p>
+                     <p>Utiliser <a class="link" href="chapter.menus.html#menus.project" title="Projet">
+                           <span class="guimenu">Projet</span>
+                        </a>
+                        <a class="link" href="chapter.menus.html#menus.project.properties">
+                           <span class="guimenuitem">Propriétés...</span> 
+                           <span class="keycap">
+                              <strong>C</strong>
+                           </span>+<span class="keycap">
+                              <strong>E</strong>
+                           </span>
+                        </a> pour accéder aux préférences de filtres de fichiers locales.</p>
+                  </dd>
+                  <dt id="menus.options.segmentation">
+                     <span class="term" id="menus.options.segmentation.title">
+                        <span class="guimenuitem">Règles de segmentation générales...</span>
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Ouvre les préférences de <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.segmentation.setup" title="Règles globales de segmentation">
+                           <span class="guilabel">Règles globales de segmentation</span>
+                        </a>.</p>
+                     <p>Utiliser <a class="link" href="chapter.menus.html#menus.project" title="Projet">
+                           <span class="guimenu">Projet</span>
+                        </a>
+                        <a class="link" href="chapter.menus.html#menus.project.properties">
+                           <span class="guimenuitem">Propriétés...</span> 
+                           <span class="keycap">
+                              <strong>C</strong>
+                           </span>+<span class="keycap">
+                              <strong>E</strong>
+                           </span>
+                        </a> pour accéder aux préférences de règles de segmentation locales.</p>
+                  </dd>
+                  <dt id="menus.options.editor">
+                     <span class="term" id="menus.options.editor.title">
+                        <span class="guimenuitem">Éditeur...</span>
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Ouvre les préférences de <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.editor" title="Éditeur">
+                           <span class="guilabel">Éditeur</span>
+                        </a>.</p>
+                  </dd>
+                  <dt id="menus.options.access.configuration.folder">
+                     <span class="term" id="menus.options.access.configuration.folder.title">
+                        <span class="guimenuitem">Accéder au dossier de configuration</span>
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Ouvrir le dossier local où sont stockés les fichiers de configuration d’OmegaT.</p>
+                     <div class="note">
+                        <h3 class="title">Note</h3>
+                        <p>L’emplacement dépend du système d’exploitation et des options de lancement. Voir l’annexe <a class="link" href="chapter.appendices.html#configuration.folder" title="Dossier de configuration">Dossier de configuration</a> pour en savoir plus.</p>
+                     </div>
+                  </dd>
+               </dl>
+            </div>
+         </section>
+         <section class="section" id="menus.help">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">
+                        <span class="guimenu">Aide</span>
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Ce menu vous permet d’accéder aux informations qui vous aideront à tirer le meilleur parti d’OmegaT.</p>
+            <div class="variablelist">
+               <dl class="variablelist">
+                  <dt id="menus.help.user.manual">
+                     <span class="term" id="menus.help.user.manual.title">
+                        <span class="guimenuitem">Manuel d’utilisation...</span> 
+                        <span class="keycap">
+                           <strong>F1</strong>
+                        </span>
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Ouvre ce manuel dans le navigateur par défaut.</p>
+                  </dd>
+                  <dt id="menus.help.about">
+                     <span class="term" id="menus.help.about.title">
+                        <span class="guimenuitem">À propos...</span>
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Affiche le copyright, les crédits et les informations sur la licence.</p>
+                  </dd>
+                  <dt id="menus.help.last.changes">
+                     <span class="term" id="menus.help.last.changes.title">
+                        <span class="guimenuitem">Dernières modifications...</span>
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Affiche la liste des nouvelles fonctionnalités, des améliorations et des corrections de bogues pour chaque version.</p>
+                  </dd>
+                  <dt id="menus.help.log">
+                     <span class="term" id="menus.help.log.title">
+                        <span class="guimenuitem">Journal...</span>
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Affiche le fichier journal actuel. Le titre de la boîte de dialogue reflète le fichier actuellement utilisé (ce qui dépend du nombre d’instances d’OmegaT en cours d’exécution simultanée).</p>
+                  </dd>
+                  <dt id="menus.help.check.for.updates">
+                     <span class="term" id="menus.help.check.for.updates.title">
+                        <span class="guimenuitem">Rechercher des mises à jour...</span>
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Vérifie si une version plus récente d’OmegaT est disponible.</p>
+                  </dd>
+               </dl>
+            </div>
+         </section>
+      </section>
+      <footer>
+         <div class="navfooter">
+            <hr />
+            <table style="width: 100%; ">
+               <tr>
+                  <td style="width: 40%; text-align: left; ">
+                     <a accesskey="p" href="chapter.panes.html">Précédent</a> </td>
+                  <td style="width: 20%; text-align: center; "> </td>
+                  <td style="width: 40%; text-align: right; "> <a accesskey="n" href="chapter.windows.and.dialogs.html">Suivant</a>
+                  </td>
+               </tr>
+               <tr>
+                  <td style="width: 40%; text-align: left; vertical-align: top; ">Volets </td>
+                  <td style="width: 20%; text-align: center; ">
+                     <a accesskey="h" href="index_.html">Sommaire</a>
+                  </td>
+                  <td style="width: 40%; text-align: right; vertical-align: top; "> Fenêtres et dialogues</td>
+               </tr>
+            </table>
+         </div>
+      </footer>
+   </div>
+    </div>
+
+    
+  </body></html>

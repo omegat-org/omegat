@@ -16,14 +16,14 @@
 
   <variablelist>
     <varlistentry id="menus.edit.undo.last.action">
-      <term id="menus.edit.undo.last.action.title"><guimenuitem>Letzte Aktion rückgängig machen</guimenuitem> <keycombo><keycap>C</keycap><keycap>Z</keycap></keycombo></term>
+      <term id="menus.edit.undo.last.action.title"><guimenuitem>Rückgängig machen</guimenuitem> <keycombo><keycap>C</keycap><keycap>Z</keycap></keycombo></term>
       <listitem>
         <para>Macht die Änderungen rückgängig, die am aktiven Segment vorgenommen wurden. Beim Verlassen des Segments geht der Änderungsverlauf verloren.</para>
       </listitem>
     </varlistentry>
 
     <varlistentry id="menus.edit.redo.last.action">
-      <term id="menus.edit.redo.last.action.title"><guimenuitem>Letzte Aktion wiederholen</guimenuitem> <keycombo><keycap>C</keycap><keycap>Y</keycap></keycombo>
+      <term id="menus.edit.redo.last.action.title"><guimenuitem>Wiederholen</guimenuitem> <keycombo><keycap>C</keycap><keycap>Y</keycap></keycombo>
 	  </term>
       <listitem>
         <para>Wendet die Änderungen erneut an, die beim aktiven Segment rückgängig gemacht wurden. Beim Verlassen des Segments geht der Änderungsverlauf verloren.</para>
@@ -91,7 +91,7 @@
     </varlistentry>
 
     <varlistentry id="menus.edit.insert.missing.source.tag">
-      <term id="menus.edit.insert.missing.source.tag.title"><guimenuitem>Fehlende Tags aus Quelle einfügen</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>T</keycap></keycombo>
+      <term id="menus.edit.insert.missing.source.tag.title"><guimenuitem>Fehlende Tags einfügen</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>T</keycap></keycombo>
 	  </term>
       <listitem>
         <para>Fügt die restlichen fehlenden Tags aus dem Quelltext an der Position des Textcursors ein.</para>
@@ -107,7 +107,7 @@
     </varlistentry>
 
     <varlistentry id="menus.edit.export.selection">
-      <term id="menus.edit.export.selection.title"><guimenuitem>Auswahl exportieren</guimenuitem> <keycombo><keycap>C</keycap><keycap>C</keycap><keycap>S</keycap></keycombo>
+      <term id="menus.edit.export.selection.title"><guimenuitem>Auswahl exportieren</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>C</keycap></keycombo>
 	  </term>
       <listitem>
         <para>Exportiert die aktuelle Auswahl in eine Textdatei, damit sie extern verarbeitet werden kann. Wenn kein Text markiert wurde, wird der aktuelle Quelltext in diese Datei geschrieben. Um mit dem üblichen Verhalten einer Zwischenablage konsistent zu bleiben, wird diese Datei nicht geleert, wenn der Nutzer OmegaT beendet. Die exportierten Inhalte werden in die <link linkend="configuration.folder.default.contents.script.selection.title" endterm="configuration.folder.default.contents.script.selection.title"/>-Datei im <link linkend="configuration.folder">Konfigurationsordner</link> kopiert.</para>

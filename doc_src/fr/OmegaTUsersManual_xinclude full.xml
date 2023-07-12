@@ -1,42 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<book lang="fr">
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd"
+[
+<!ENTITY % manualvariables SYSTEM "manualvariables.mod">
+%manualvariables;
+]>
+<book lang="fr" id="book.user.manual">
   <bookinfo>
-    <title>OmegaT 4.2 – Guide de l'utilisateur</title>
+    <title id="book.user.manual.title">OmegaT 5.8 - Manuel d’utilisation</title>
 
-    <author>
-      <firstname>Équipe OmegaT</firstname>
-    </author>
+	<!-- Copyright 2002-2023
+		 - Vincent Bidaux
+		 - Didier Briel
+		 - Jean-Christophe Helary
+		 - Aaron Madlon-Kay
+		 - Maxym Mychalchuk
+		 - Marc Prior
+		 - Vito Smolej
+		 - Kerry Swatridge
+		 - Philippe Tourigny
+	-->
 
-    <pubdate/>
-
+    <!-- <pubdate>@timestamp@</pubdate> -->
+	<!-- TODO automate date insertion -->
     <abstract>
-      <para>Ce document constitue le guide de l'utilisateur officiel d'OmegaT, l'outil libre de traduction assistée par ordinateur. Il contient également les instructions relatives à l'installation.</para>
+      <para>Ce document constitue le manuel d’utilisation officiel d’OmegaT, l’outil libre de traduction assistée par ordinateur.</para>
+
+	  <para>L’objectif principal d’OmegaT est de vous aider à créer une bonne traduction le plus rapidement possible en vous donnant accès à vos ressources de traduction de la manière la plus fiable possible.</para>
+
+	  <para>OmegaT est distribué selon les termes de la <emphasis>version 3.0 de la Licence Publique Générale GNU</emphasis>. La licence vous accorde les libertés suivantes :<itemizedlist id="freedoms.list">
+		<listitem>
+		  <para>La liberté d’exploiter OmegaT comme vous le souhaitez et dans n’importe quel but.</para>
+		</listitem>
+
+		<listitem>
+		  <para>La liberté d’étudier le fonctionnement d’OmegaT et de le modifier comme vous le souhaitez.</para>
+		</listitem>
+
+		<listitem>
+		  <para>La liberté de redistribuer des copies pour aider les autres.</para>
+		</listitem>
+
+		<listitem>
+		  <para>La liberté de distribuer des copies de vos versions modifiées aux autres.</para>
+		</listitem>
+	  </itemizedlist>
+	  </para>
     </abstract>
   </bookinfo>
 
-  <xi:include href="InstallingAndRunning.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+  
+  <xi:include href="Introduction.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
-  <xi:include href="OmegaT4_Menus.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+  <xi:include href="OmegaT_HowTo.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
-  <xi:include href="OmegaT4_WindowsAndDialogs.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+  <xi:include href="OmegaT_EditorsPanes.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
-  <xi:include href="OmegaT4_EditorsPanes.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+  <xi:include href="OmegaT_Menus.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
-  <xi:include href="OmegaT4_ProjectFolder.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+  <xi:include href="OmegaT_WindowsAndDialogs.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
-  <xi:include href="OmegaT4_HowTo.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+  <xi:include href="OmegaT_Preferences.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
-<!--   <xi:include href="OmegaT4_Troubleshooting.xml"
-              xmlns:xi="http://www.w3.org/2001/XInclude"/> -->
+  <xi:include href="OmegaT_ProjectFolder.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
-  <xi:include href="App_Dictionaries.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-
-  <xi:include href="App_Glossaries.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-
-   <xi:include href="App_Spellchecker.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-
-  <xi:include href="App_Regexp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-
-  <xi:include href="App_ShortCutCustomization.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+  <xi:include href="OmegaT_Appendices.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+	           
 </book>

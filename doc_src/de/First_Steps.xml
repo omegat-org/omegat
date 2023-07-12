@@ -5,7 +5,7 @@
 %manualvariables;
 ]>
 <article lang="de" id="first.steps">
-  <title>OmegaT &vernb;</title>
+  <title>OmegaT</title>
   <section>
 	<title id="first-steps">Erste Schritte</title>
 	<para>Drücken Sie <keycap>F1</keycap> oder rufen Sie das Menü <guimenu>&gt; Hilfe</guimenu> auf, um die Bedienungsanleitung zu öffnen. Sie enthält eine ausführliche Einführung in OmegaT. Um OmegaT mit wenigen Einstellungen zu verwenden, gehen Sie wie folgt vor:<orderedlist id="first-step-list">

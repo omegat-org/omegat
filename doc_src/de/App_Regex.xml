@@ -41,7 +41,7 @@
     <varlistentry>
       <term>Suche</term>
       <listitem>
-        <para>Die Suche in OmegaT bietet die Option <link linkend="windows.text.search.methods.regex" endterm="windows.text.search.methods.regex.title"/>, mit der Sie Ihre Dateien mit hoher Effizienz durchsuchen können.</para>
+        <para>Die Suche bietet die Option <link linkend="windows.text.search.methods.regex" endterm="windows.text.search.methods.regex.title"/>, mit der Sie Ihre Dateien mit hoher Effizienz durchsuchen können.</para>
 
         <para>Das Dialogfenster <link linkend="windows.text.replace" endterm="windows.text.replace.title"/> besitzt dieselbe Option, mit der Sie reguläre Ausdrücke sowohl auf den gesuchten als auch auf den ersetzten Text anwenden können.</para>
       </listitem>
@@ -111,7 +111,7 @@
       </varlistentry>
 
       <varlistentry>
-        <term>Buchstaben mit einem umgekehrten Schrägstrich (<literal>\</literal>) davor haben eine besondere Bedeutung</term>
+        <term>Ziffern und Buchstaben mit einem umgekehrten Schrägstrich (<literal>\</literal>) davor haben eine besondere Bedeutung</term>
         <listitem>
           <para>Im Gegensatz zu einem einzelnen Buchstaben, der wie oben erwähnt einfach nur sich selbst repräsentiert, hat ein Buchstabe, dem ein <literal>\</literal> vorangestellt ist, eine spezielle Funktion in einem regulären Ausdruck.</para>
 
@@ -1093,7 +1093,7 @@
 
     <para>Die technische Java-Referenz ist nützlich als kanonische Referenz.<variablelist>
         <varlistentry id="app.regex.java">
-          <term id="app.regex.java.title"><ulink url="https://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html">Java-Regex-Dokumentation</ulink></term>
+          <term id="app.regex.java.title"><ulink url="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/regex/Pattern.html">Java-Regex-Dokumentation</ulink></term>
           <listitem>
             <para>Die offizielle Referenz für in Java verwendete reguläre Ausdrücke.</para>
           </listitem>

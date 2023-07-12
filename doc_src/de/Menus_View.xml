@@ -118,9 +118,9 @@
     </varlistentry>
 	
 	<varlistentry id="menus.view.restore.main.window">
-      <term id="menus.view.restore.main.window.title"><guimenuitem>Hauptfenster wiederherstellen</guimenuitem></term>
+      <term id="menus.view.restore.main.window.title"><guimenuitem>OmegaT-Fenster wiederherstellen</guimenuitem></term>
       <listitem>
-        <para>Setzt das Layout des OmegaT-Hauptfensters auf seine Standardwerte zurück.</para>
+        <para>Setzt das Layout des OmegaT-Fensters auf seine Standardwerte zurück.</para>
 
 		<note>
 		  <para>Verwenden Sie diese Funktion, wenn Sie bei der Neuanordnung des Fensterlayouts auf Probleme stoßen.</para>

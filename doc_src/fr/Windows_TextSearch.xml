@@ -65,21 +65,21 @@
       <varlistentry id="windows.text.search.methods.exact">
         <term id="windows.text.search.methods.exact.title">Recherche exacte</term>
         <listitem>
-          <para>Recherche la chaîne de caractères telle qu’elle a été saisie dans le champ de recherche.</para>
+          <para>Recherche la chaine de caractères telle qu’elle a été saisie dans le champ de recherche.</para>
 
 		  <para>Il s’agit de l’équivalent d’une recherche web entre guillemets.</para>
         </listitem>
       </varlistentry>
 
       <varlistentry id="windows.text.search.methods.keyword">
-        <term id="windows.text.search.methods.keyword.title">Recherche par mot clé</term>
+        <term id="windows.text.search.methods.keyword.title">Recherche par mot-clé</term>
         <listitem>
           <para>Recherche des segments contenant chacun des termes de recherche séparés par une espace.</para>
 
 		  <para>Il s’agit de l’équivalent d’une recherche web sans guillemets.</para>
 
 		  <note>
-			<para>Les caractères <code>*</code> et <code>?</code> peuvent être utilisés dans les recherches exactes et par mots clés.</para>
+			<para>Les caractères <code>*</code> et <code>?</code> peuvent être utilisés dans les recherches exactes et par mots-clés.</para>
 
 			<itemizedlist>
 			  <listitem>
@@ -105,11 +105,11 @@
       <varlistentry id="windows.text.search.methods.regex">
         <term id="windows.text.search.methods.regex.title">Expressions régulières</term>
         <listitem>
-          <para>Considérez la chaîne de caractères recherchée comme une expression régulière.</para>
-		  <para>Les expressions régulières sont un moyen très efficace de rechercher des motifs généraux ou complexes plutôt que des chaînes de caractères exactes. Voir l’annexe <link linkend="app.regex" endterm="app.regex.title"/> pour en savoir plus.</para>
+          <para>Considérez la chaine de caractères recherchée comme une expression régulière.</para>
+		  <para>Les expressions régulières sont un moyen très efficace de rechercher des motifs généraux ou complexes plutôt que des chaines de caractères exactes. Voir l’annexe <link linkend="app.regex" endterm="app.regex.title"/> pour en savoir plus.</para>
 
 		  <warning>
-			<para>Les caractères <code>*</code> et <code>?</code> ont une signification particulière dans les expressions régulières. Par conséquent, les recherches avec les caractères génériques décrits ci-dessus ne s’appliquent qu’aux recherches exactes et par mots clés.</para>
+			<para>Les caractères <code>*</code> et <code>?</code> ont une signification particulière dans les expressions régulières. Par conséquent, les recherches avec les caractères génériques décrits ci-dessus ne s’appliquent qu’aux recherches exactes et par mots-clés.</para>
 		  </warning>
         </listitem>
       </varlistentry>
@@ -236,7 +236,7 @@
 
 		  <para>OmegaT peut mener des recherches dans n’importe quel fichier qu’il peut lire en tant que fichier source. Voir le chapitre <link linkend="file.filters" endterm="file.filters.title"/> pour en savoir plus.</para>
 
-		  <para>Les fichiers TMX sont exclus des recherches de fichiers car OmegaT ne les reconnait pas en tant que format de ficher source malgré le fait qu’ils soient pris en charge en tant que mémoires de traduction.</para>
+		  <para>Les fichiers TMX sont exclus des recherches de fichiers, car OmegaT ne les reconnait pas en tant que format de fichier source malgré le fait qu’ils soient pris en charge en tant que mémoires de traduction.</para>
 		</listitem>
 	  </varlistentry>
 

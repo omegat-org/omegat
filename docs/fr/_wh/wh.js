@@ -572,7 +572,7 @@ var toc_entries = [
 ["\n                              Correspondances\n                           ","chapter.panes.html#panes.fuzzy.matches",null],
 ["\n                              Glossaires\n                           ","chapter.panes.html#panes.glossary",null],
 ["\n                              Dictionnaires\n                           ","chapter.panes.html#panes.dictionary",null],
-["\n                              Traduction automatique\n                           ","chapter.panes.html#panes.machinetranslation",null],
+["\n                              Traductions automatiques\n                           ","chapter.panes.html#panes.machinetranslation",null],
 ["\n                              Traductions multiples\n                           ","chapter.panes.html#panes.multipletranslations",null],
 ["\n                              Bloc-note\n                           ","chapter.panes.html#panes.notes",null],
 ["\n                              Commentaires\n                           ","chapter.panes.html#panes.comments",null],
@@ -620,14 +620,14 @@ var toc_entries = [
 ["\n                              Mises à jour\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.updates",null]
 ]],
 ["Racine du projet","chapter.project.folder.html",[
-["Structure par défaut","chapter.project.folder.html#d0e10488",null],
-["Contenu minimal","chapter.project.folder.html#d0e10566",null],
+["Structure par défaut","chapter.project.folder.html#d0e10487",null],
+["Contenu minimal","chapter.project.folder.html#d0e10565",null],
 ["source","chapter.project.folder.html#project.folder.source",null],
 ["target","chapter.project.folder.html#project.folder.target",null],
 ["tm","chapter.project.folder.html#project.folder.tm",null],
 ["dossier des mémoires de traduction exportées","chapter.project.folder.html#project.folder.exported.tm",null],
-["Dictionnaire","chapter.project.folder.html#project.folder.dictionary",null],
-["Glossaire","chapter.project.folder.html#project.folder.glossary",null],
+["dictionary","chapter.project.folder.html#project.folder.dictionary",null],
+["glossary","chapter.project.folder.html#project.folder.glossary",null],
 ["omegat","chapter.project.folder.html#project.folder.omegat.folder",null],
 [".repositories","chapter.project.folder.html#project.folder.repositories",null]
 ]],
@@ -915,7 +915,7 @@ message = translation[index];
 }
 return message;
 }
-var storageId = "-wgcwqflufe30-12nrekk00svjq";
+var storageId = "-1puwxomtumbfk-1c12mlty3zy7f";
 function storageSet(key, value) {
 window.sessionStorage.setItem(key + storageId, String(value));
 }

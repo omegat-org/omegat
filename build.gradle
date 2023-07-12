@@ -15,7 +15,7 @@ plugins {
     id 'com.diffplug.spotless' version '6.0.0'
     id 'com.github.ben-manes.versions' version '0.39.0'
     id 'ru.vyarus.mkdocs' version '3.0.0'
-    id 'org.kordamp.gradle.jdeprscan' version '0.11.0'
+    id 'edu.sc.seis.launch4j' version '3.0.3'
 }
 
 apply from: 'gradle/utils.gradle'
@@ -154,6 +154,7 @@ ext {
     providedLibsDir = file('lib/provided')
     languageToolVersion = '6.1'
     luceneVersion = '5.5.5'
+    jgitVersion = '6.6.0.202305301015-r'
 }
 
 dependencies {
@@ -224,16 +225,17 @@ dependencies {
         implementation "org.apache.lucene:lucene-analyzers-stempel:${luceneVersion}"
 
         // Team project server support
-        implementation 'org.eclipse.jgit:org.eclipse.jgit:6.5.0.202303070854-r'
-        implementation 'org.eclipse.jgit:org.eclipse.jgit.ssh.apache:6.5.0.202303070854-r'
-        implementation 'org.eclipse.jgit:org.eclipse.jgit.ssh.apache.agent:6.5.0.202303070854-r'
+        implementation "org.eclipse.jgit:org.eclipse.jgit:${jgitVersion}"
+        implementation "org.eclipse.jgit:org.eclipse.jgit.ssh.apache:${jgitVersion}"
+        implementation "org.eclipse.jgit:org.eclipse.jgit.ssh.apache.agent:${jgitVersion}"
+        implementation "org.eclipse.jgit:org.eclipse.jgit.http.apache:${jgitVersion}"
         // For ed25519 and ecdsa support of ssh, java16+ or BC
         implementation 'org.bouncycastle:bcprov-jdk18on:1.72'
         implementation 'org.bouncycastle:bcpg-jdk18on:1.72'
         implementation 'org.bouncycastle:bcpkix-jdk18on:1.72'
         implementation 'net.i2p.crypto:eddsa:0.3.0'
         // For gpg signing
-        implementation 'org.eclipse.jgit:org.eclipse.jgit.gpg.bc:6.5.0.202303070854-r'
+        implementation "org.eclipse.jgit:org.eclipse.jgit.gpg.bc:${jgitVersion}"
 
         // For subversion
         implementation 'org.tmatesoft.svnkit:svnkit:1.10.11'
@@ -366,6 +368,11 @@ ext {
 
     windowsJRE32 = fileTree(dir: assetDir, include: 'OpenJDK11U-jre_x86-32_windows_*.zip')
     windowsJRE = fileTree(dir: assetDir, include: 'OpenJDK11U-jre_x64_windows_*.zip')
+}
+
+launch4j {
+    xmlFileName = "${projectDir}/release/win32-specific/L4j_OMT.xml"
+    icon = "${projectDir}/images/OmegaT.ico"
 }
 
 task genDocIndex(type: Copy) {
@@ -538,6 +545,15 @@ distributions {
                         replaceRelativePathSegment(it, /jdk.*-jre/, 'jre.bundle')
                     }
                 }
+            }
+        }
+    }
+
+    win {
+        contents {
+            with main.contents
+            from('build/launch4j') {
+                include '*.exe'
             }
         }
     }
@@ -744,9 +760,10 @@ ext.makeWinTask = { args ->
     task(type: Sync, args.name) {
         description = "Create a Windows installer for ${args.name} distro. " +
             'Requires Inno Setup (http://www.jrsoftware.org/isinfo.php).'
-        with distributions.main.contents
+        with distributions.win.contents
+        dependsOn createAllExecutables
         from ('release/win32-specific') {
-            include 'OmegaT.exe', 'OmegaT.l4J.ini'
+            include 'OmegaT.l4J.ini'
         }
         if (args.jrePath && !args.jrePath.empty) {
             from (zipTree(args.jrePath.singleFile)) {
@@ -766,9 +783,12 @@ ext.makeWinTask = { args ->
         doFirst {
             delete "$destinationDir/jre"
             delete installerExe
-            exec {
-                commandLine 'chmod', '-R', 'a+w', 'build'
-                ignoreExitValue true
+            project.copy {
+                from 'build'
+                into 'build'
+                include 'innosetup/**/*'
+                dirMode 0777
+                fileMode 0666
             }
         }
         doLast {

@@ -43,7 +43,7 @@
       <listitem>
         <para>Les recherches incluent une option <link linkend="windows.text.search.methods.regex" endterm="windows.text.search.methods.regex.title"/> qui vous permet d’effectuer des recherches extrêmement puissantes dans vos fichiers.</para>
 
-        <para>La même option dans la boîte de dialogue <link linkend="windows.text.replace" endterm="windows.text.replace.title"/> vous permet d’appliquer des expressions régulières à la fois au texte recherché et au texte remplacé.</para>
+        <para>La même option dans la boite de dialogue <link linkend="windows.text.replace" endterm="windows.text.replace.title"/> vous permet d’appliquer des expressions régulières à la fois au texte recherché et au texte remplacé.</para>
       </listitem>
     </varlistentry>
 
@@ -59,7 +59,7 @@
     <varlistentry>
       <term>Texte signalé</term>
       <listitem>
-        <para>Le paramètre <link linkend="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation" endterm="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation.title"/> vous permet de définir une chaîne de caractères qu’OmegaT colorera en rouge par défaut et traitera comme une balise superflue.</para>
+        <para>Le paramètre <link linkend="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation" endterm="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation.title"/> vous permet de définir une chaine de caractères qu’OmegaT colorera en rouge par défaut et traitera comme une balise superflue.</para>
 
 		<para>Utilisez le caractère <code>|</code> (OU) pour séparer les définitions de fragments individuels.</para>
       </listitem>
@@ -68,7 +68,7 @@
     <varlistentry>
       <term>Surlignage du texte dans les alignements</term>
       <listitem>
-        <para>Des repères visuels peuvent aider à vérifier que votre alignement est correct. Le paramètre <link linkend="windows.aligner.adjust.highlight" endterm="windows.aligner.adjust.highlight.title"/> permet de définir les chaînes de caractères qu’OmegaT surlignera dans les documents alignés.</para>
+        <para>Des repères visuels peuvent aider à vérifier que votre alignement est correct. Le paramètre <link linkend="windows.aligner.adjust.highlight" endterm="windows.aligner.adjust.highlight.title"/> permet de définir les chaines de caractères qu’OmegaT surlignera dans les documents alignés.</para>
 
 		<para>Utilisez le caractère <code>|</code> (OU) pour séparer les expressions individuelles.</para>
       </listitem>
@@ -352,8 +352,8 @@
                     <entry>Correspond à</entry>
                     <entry>
                       <para>Le premier mot « Une » ou « La » dans des phrases telles que : <simplelist>
-                          <member>« Une pomme par jour... »</member>
-                          <member>« La prunelle de mes yeux... »</member>
+                          <member>« Une pomme par jour… »</member>
+                          <member>« La prunelle de mes yeux… »</member>
                         </simplelist>
                       </para>
                     </entry>
@@ -575,7 +575,7 @@
                       <para>Procédez comme suit :</para>
                       <simplelist>
                         <member>Étape 1) Préparation</member>
-                        <member>Étape 2) ...</member>
+                        <member>Étape 2) …</member>
                       </simplelist>
                     </entry>
                   </row>
@@ -1036,7 +1036,7 @@
           <row>
             <entry><literal>\d{4}([/\.-]\d{1,2}){2}</literal></entry>
             <entry>
-              <para>Trouver des dates en chaîne numérique dans un format année, mois et jour. Le mois et le jour sont séparés par une barre oblique, un point ou un trait d’union, par exemple :</para>
+              <para>Trouver des dates en chaine numérique dans un format année, mois et jour. Le mois et le jour sont séparés par une barre oblique, un point ou un trait d’union, par exemple :</para>
 			  
                 <itemizedlist>
                   <listitem>
@@ -1084,7 +1084,7 @@
   <section id="app.regex.tools">
     <title id="app.regex.tools.title">Références</title>
 
-    <para>Bien qu’OmegaT n’offre pas de couleurs extravagantes pour vos expressions régulières, vous pouvez vous exercer en utilisant la fenêtre <link linkend="windows.text.search" endterm="windows.text.search.title"/> car OmegaT colore les résultats de la recherche.</para>
+    <para>Bien qu’OmegaT n’offre pas de couleurs extravagantes pour vos expressions régulières, vous pouvez vous exercer en utilisant la fenêtre <link linkend="windows.text.search" endterm="windows.text.search.title"/>, car OmegaT colore les résultats de la recherche.</para>
     
     <para>Quelques ressources supplémentaires sont présentées ci-dessous.</para>
 

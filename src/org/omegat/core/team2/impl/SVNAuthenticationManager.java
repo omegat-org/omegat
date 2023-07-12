@@ -31,6 +31,7 @@ import java.util.logging.Logger;
 
 import javax.net.ssl.TrustManager;
 
+import org.checkerframework.checker.units.qual.C;
 import org.tmatesoft.svn.core.SVNErrorCode;
 import org.tmatesoft.svn.core.SVNErrorMessage;
 import org.tmatesoft.svn.core.SVNException;
@@ -48,6 +49,7 @@ import org.omegat.core.Core;
 import org.omegat.core.KnownException;
 import org.omegat.core.team2.ProjectTeamSettings;
 import org.omegat.core.team2.TeamSettings;
+import org.omegat.core.team2.gui.UserPassDialog;
 import org.omegat.gui.main.ConsoleWindow;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
@@ -120,18 +122,18 @@ public class SVNAuthenticationManager implements ISVNAuthenticationManager {
     }
 
     protected SVNAuthentication ask(String kind, SVNURL url, String message) throws SVNException {
-        SVNUserPassDialog userPassDialog = new SVNUserPassDialog(Core.getMainWindow().getApplicationFrame());
+        UserPassDialog userPassDialog = new UserPassDialog(Core.getMainWindow().getApplicationFrame());
         userPassDialog.setLocationRelativeTo(Core.getMainWindow().getApplicationFrame());
         userPassDialog.descriptionTextArea.setText(message);
         userPassDialog.setVisible(true);
-        if (userPassDialog.getReturnStatus() != SVNUserPassDialog.RET_OK) {
+        if (userPassDialog.getReturnStatus() != UserPassDialog.RET_OK) {
             return null;
         }
-
-        String user = userPassDialog.userText.getText();
-        char[] pass = userPassDialog.passwordField.getPassword();
-        saveCredentials(url, user, Arrays.toString(pass));
-        return getAuthenticatorInstance(kind, url, user, pass);
+        Credentials credentials = new Credentials();
+        credentials.username = userPassDialog.getUsername();
+        credentials.password = userPassDialog.getPassword();
+        saveCredentials(url, credentials);
+        return getAuthenticatorInstance(kind, url, credentials);
     }
 
     protected SVNAuthentication askCUI(String kind, SVNURL url, String message) throws SVNException {
@@ -144,15 +146,15 @@ public class SVNAuthenticationManager implements ISVNAuthenticationManager {
             }
             return null;
         }
-        String user;
+        Credentials credentials = new Credentials();
         if (predefinedUser != null) {
-            user = predefinedUser;
+            credentials.username = predefinedUser;
         } else {
-            user = console.readLine(message);
+            credentials.username = console.readLine(message);
         }
-        char[] pass = console.readPassword(message);
-        saveCredentials(url, user, Arrays.toString(pass));
-        return getAuthenticatorInstance(kind, url, user, pass);
+        credentials.password = new String(console.readPassword(message));
+        saveCredentials(url, credentials);
+        return getAuthenticatorInstance(kind, url, credentials);
     }
 
     @Override
@@ -188,7 +190,7 @@ public class SVNAuthenticationManager implements ISVNAuthenticationManager {
 
         Credentials credentials = loadCredentials(url);
         if (credentials.username != null) {
-            return getAuthenticatorInstance(kind, url, credentials.username, credentials.password.toCharArray());
+            return getAuthenticatorInstance(kind, url, credentials);
         }
 
         if (Core.getMainWindow() == null || Core.getMainWindow() instanceof ConsoleWindow) {
@@ -253,14 +255,14 @@ public class SVNAuthenticationManager implements ISVNAuthenticationManager {
         }
     };
 
-    private SVNAuthentication getAuthenticatorInstance(String kind, SVNURL url, String user, char[] pass)
+    private SVNAuthentication getAuthenticatorInstance(String kind, SVNURL url, Credentials credentials)
             throws SVNException {
         if (ISVNAuthenticationManager.PASSWORD.equals(kind)) {
-            return SVNPasswordAuthentication.newInstance(user, pass, false, url, false);
+            return SVNPasswordAuthentication.newInstance(credentials.username, credentials.password.toCharArray(), false, url, false);
         } else if (ISVNAuthenticationManager.SSH.equals(kind)) {
-            return SVNSSHAuthentication.newInstance(user, pass, -1, false, url, false);
+            return SVNSSHAuthentication.newInstance(credentials.username, credentials.password.toCharArray(), -1, false, url, false);
         } else if (ISVNAuthenticationManager.USERNAME.equals(kind)) {
-            return SVNUserNameAuthentication.newInstance(user, false, url, false);
+            return SVNUserNameAuthentication.newInstance(credentials.username, false, url, false);
         } else {
             throw new SVNException(SVNErrorMessage.create(SVNErrorCode.RA_UNKNOWN_AUTH));
         }
@@ -283,10 +285,10 @@ public class SVNAuthenticationManager implements ISVNAuthenticationManager {
         return credentials;
     }
 
-    private void saveCredentials(SVNURL url, String user, String password) {
+    private void saveCredentials(SVNURL url, Credentials credentials) {
         String saveUri = url.getProtocol() + "://" + url.getHost() + ":" + url.getPort();
-        TeamSettings.set(saveUri + "!" + KEY_USERNAME_SUFFIX, user);
-        TeamSettings.set(saveUri + "!" + KEY_PASSWORD_SUFFIX, TeamUtils.encodePassword(password));
+        TeamSettings.set(saveUri + "!" + KEY_USERNAME_SUFFIX, credentials.username);
+        TeamSettings.set(saveUri + "!" + KEY_PASSWORD_SUFFIX, TeamUtils.encodePassword(credentials.password));
     }
 
     /**

@@ -1,8 +1,8 @@
 ----------------------------------------------------------------------
  OmegaT 6.1.0
 ----------------------------------------------------------------------
-  13 Enhancement
-  18 Bug fixes
+  15 Enhancement
+  21 Bug fixes
 ----------------------------------------------------------------------
 6.1.0 vs 6.0.0
 
@@ -11,11 +11,17 @@
   - Team: SVN support svn+ssh protocol with key authentication
   https://sourceforge.net/p/omegat/feature-requests/1700/
 
+  - SVN/Team project should respect access URL specified
+  https://sourceforge.net/p/omegat/feature-requests/1707/
+
   - Team: SVN: Replacing trilead-ssh2 with Apache sshd
   https://sourceforge.net/p/omegat/feature-requests/1699/
 
   - Better error message for omegat.project failure
   https://sourceforge.net/p/omegat/feature-requests/1696/
+
+  - Generate JSON format stastics file when save
+  https://sourceforge.net/p/omegat/feature-requests/1695/
 
   - Build System: update gradle verison to 7.5.1
   https://sourceforge.net/p/omegat/feature-requests/1691/
@@ -52,6 +58,12 @@
 
   Bug fixes:
 
+  - Content of notes elements are not displayed correctly with Xliff filter
+  https://sourceforge.net/p/omegat/bugs/1192/
+
+  - ProjectFile has unwanted XML element otherAttributes
+  https://sourceforge.net/p/omegat/bugs/1191/
+
   - Languagetool crashes when reloading the project
   https://sourceforge.net/p/omegat/bugs/1182/
 
@@ -64,14 +76,20 @@
   - build/release: Windows binary signature with PKCS#11 HSM
   https://sourceforge.net/p/omegat/bugs/1179/
 
-  - Team project failed to merge changes with TMXMerge
-  https://sourceforge.net/p/omegat/bugs/1170/
-
   - Team(git): when connecting new server, connection failed
   https://sourceforge.net/p/omegat/bugs/1177/
 
   - The COMPILE event is fired after the target commit
   https://sourceforge.net/p/omegat/bugs/1176/
+
+  - Passphrase for SSH key is stored with key= null://null:-1
+  https://sourceforge.net/p/omegat/bugs/1174/
+
+  - OmegaT ask passphrase to connect git+ssh server but dialog label is user/pass
+  https://sourceforge.net/p/omegat/bugs/1173/
+
+  - Team project failed to merge changes with TMXMerge
+  https://sourceforge.net/p/omegat/bugs/1170/
 
   - Useless warning log from CSS parser library
   https://sourceforge.net/p/omegat/bugs/1169/
@@ -105,9 +123,6 @@
 
   - Lucene 5.2 does not work under WebStart
   https://sourceforge.net/p/omegat/bugs/813/
-
-  - Content of notes elements are not displayed correctly with Xliff filter
-  https://sourceforge.net/p/omegat/bugs/1192/
 
 ----------------------------------------------------------------------
  OmegaT 6.0.0 (2023-06-19)

@@ -31,8 +31,8 @@
 		  </listitem>
 		</itemizedlist>
 
-		<para>Allows you to activate or deactivate the available machine
-		translation engines.</para>
+        <para>Allows you to activate or deactivate enabled and properly configured
+          machine translation engines.</para>
 
         <para>If several translation engines are selected, you can also use
         <keycombo><keycap>C</keycap><keycap>M</keycap></keycombo> to switch

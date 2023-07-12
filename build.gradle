@@ -152,7 +152,7 @@ configurations {
 
 ext {
     providedLibsDir = file('lib/provided')
-    languageToolVersion = '5.7'
+    languageToolVersion = '6.1'
     luceneVersion = '5.5.5'
     jgitVersion = '6.6.0.202305301015-r'
 }
@@ -583,9 +583,6 @@ installMacDist {
 def hunspellJar = configurations.runtimeClasspath.files.find {
     it.name.startsWith('hunspell')
 }
-def bridjJar = configurations.runtimeClasspath.files.find {
-    it.name.startsWith('bridj')
-}
 
 task hunspellJarSignedContents(type: Sync) {
     onlyIf {
@@ -606,33 +603,10 @@ task hunspellJarSignedContents(type: Sync) {
         }
     }
 }
-task bridjJarSignedContents(type: Sync) {
-    onlyIf {
-        // Set this in e.g. local.properties
-        condition(project.hasProperty('macCodesignIdentity'), 'Code signing property not set')
-    }
-    from zipTree(bridjJar)
-    destinationDir = file("$buildDir/bridj")
-    doLast {
-        def dylibs = fileTree(dir: destinationDir, include: '**/*.dylib').files
-        exec {
-            commandLine('codesign', '--deep', '--force',
-                        '--sign', project.property('macCodesignIdentity'),
-                        '--timestamp',
-                        '--options', 'runtime',
-                        '--entitlements', file('release/mac-specific/java.entitlements'),
-                        *dylibs.toList())
-        }
-    }
-}
 
 task hunspellSignedJar(type: Jar) {
     from hunspellJarSignedContents.outputs
     archiveFileName.set(hunspellJar.name)
-}
-task bridjSignedJar(type: Jar) {
-    from bridjJarSignedContents.outputs
-    archiveFileName.set(bridjJar.name)
 }
 
 task installMacSignedDist(type: Sync) {
@@ -644,9 +618,6 @@ task installMacSignedDist(type: Sync) {
     with distributions.mac.contents
     duplicatesStrategy = DuplicatesStrategy.INCLUDE
     from(hunspellSignedJar.outputs) {
-        into 'OmegaT.app/Contents/Java/lib'
-    }
-    from(bridjSignedJar.outputs) {
         into 'OmegaT.app/Contents/Java/lib'
     }
     destinationDir = file("${buildDir}/install/${applicationName}-macSigned")

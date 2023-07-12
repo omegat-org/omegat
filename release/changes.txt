@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 6.1.0
 ----------------------------------------------------------------------
-  14 Enhancement
+  15 Enhancement
   21 Bug fixes
 ----------------------------------------------------------------------
 6.1.0 vs 6.0.0
@@ -25,6 +25,9 @@
 
   - Build System: update gradle verison to 7.5.1
   https://sourceforge.net/p/omegat/feature-requests/1691/
+
+  - Update LanguageTool to latest version (6.1)
+  https://sourceforge.net/p/omegat/feature-requests/1637/
 
   - Team feature: SSH support id_ecdsa and id_ed25519 for default key
   https://sourceforge.net/p/omegat/feature-requests/1598/

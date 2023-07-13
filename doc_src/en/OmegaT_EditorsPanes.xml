@@ -913,9 +913,10 @@ Folder = <token>Dossier</token></programlisting>
     <title id="panes.machinetranslation.title"><guilabel>Machine
     Translations</guilabel></title>
 
-    <para>This pane, when opened, shows the suggestions
-    for the current segment produced by each enabled translation
-    engine . When suggestions from more than one engine are available,</para>
+    <para>If you have enabled and configured at least one machine translation
+      engine this pane shows the suggestions for the current segment produced
+      by the available engines. When suggestions from more than one translation
+      engine are available,</para>
 	
     <itemizedlist>
       <listitem>

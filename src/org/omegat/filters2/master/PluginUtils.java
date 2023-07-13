@@ -42,6 +42,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
@@ -50,6 +51,7 @@ import java.util.Map.Entry;
 import java.util.Properties;
 import java.util.Set;
 import java.util.jar.Attributes;
+import java.util.jar.JarInputStream;
 import java.util.jar.Manifest;
 import java.util.stream.Collectors;
 
@@ -65,6 +67,7 @@ import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
+import org.omegat.util.VersionChecker;
 
 /**
  * Static utilities for OmegaT filter plugins.
@@ -82,19 +85,30 @@ public final class PluginUtils {
     public enum PluginType {
         /** File filters that provide IFilter API. */
         FILTER("filter"),
-        /** Tokenizers, currently bundled and it is for backward compatibility.  */
+        /**
+         * Tokenizers, currently bundled and it is for backward compatibility.
+         */
         TOKENIZER("tokenizer"),
         /** Markers, that provide IMaker, mostly bundled. */
         MARKER("marker"),
-        /** Machine Translator service connectors, that provide IMachineTranslation API. */
+        /**
+         * Machine Translator service connectors, that provide
+         * IMachineTranslation API.
+         */
         MACHINETRANSLATOR("machinetranslator"),
         /** A plugin that change base of OmegaT system, not recommended. */
         BASE("base"),
         /** Glosary, that provide IGlossary API. */
         GLOSSARY("glossary"),
-        /** Dictionary files/services connectors, that provide IDictionary and/or IDictionaryFactory API. */
+        /**
+         * Dictionary files/services connectors, that provide IDictionary and/or
+         * IDictionaryFactory API.
+         */
         DICTIONARY("dictionary"),
-        /** theme, that register Swing Look-and-Feel with OmegaT properties into UIManager. */
+        /**
+         * theme, that register Swing Look-and-Feel with OmegaT properties into
+         * UIManager.
+         */
         THEME("theme"),
         /** Misc plugins, such as GUI extension like web browser spport. */
         MISCELLANEOUS("miscellaneous"),
@@ -134,14 +148,13 @@ public final class PluginUtils {
     /**
      * Loads all plugins from main classloader and from /plugins/ dir.
      * <p>
-     * We should load all jars from /plugins/ dir first,
-     * because some plugin can use more than one jar.
-     * There are three different "plugins" directory, and
+     * We should load all jars from /plugins/ dir first, because some plugin can
+     * use more than one jar. There are three different "plugins" directory, and
      * one development treatment.
      * <ul>
-     *     <li>(installdir)/core-plugins/  OmegaT genuine sub-component</li>
-     *     <li>(installdir/plugins/  System level 3rd party plugins</li>
-     *     <li>(configdir)/plugins/  User level 3rd party plugins</li>
+     * <li>(installdir)/core-plugins/ OmegaT genuine sub-component</li>
+     * <li>(installdir/plugins/ System level 3rd party plugins</li>
+     * <li>(configdir)/plugins/ User level 3rd party plugins</li>
      * </ul>
      */
     public static void loadPlugins(final Map<String, String> params) {
@@ -153,20 +166,9 @@ public final class PluginUtils {
             // when developers run on source code tree, add system plugins
             pluginsDirs.add(Paths.get(StaticUtils.installDir(), "build", "modules").toFile());
         }
-        // list all jars in /plugins/
-        FileFilter jarFilter = pathname -> pathname.getName().endsWith(".jar");
-        List<File> fs = pluginsDirs.stream().flatMap(dir -> FileUtil.findFiles(dir, jarFilter).stream())
-                .collect(Collectors.toList());
-        List<URL> urlList = new ArrayList<>();
-        for (File f : fs) {
-            try {
-                URL url = f.toURI().toURL();
-                urlList.add(url);
-                Log.logInfoRB("PLUGIN_LOAD_JAR", url.toString());
-            } catch (IOException ex) {
-                Log.log(ex);
-            }
-        }
+
+        List<URL> urlList = populatePluginUrlList(pluginsDirs);
+
         boolean foundMain = false;
         // look on all manifests
         URLClassLoader pluginsClassLoader = new URLClassLoader(urlList.toArray(new URL[0]),
@@ -234,6 +236,99 @@ public final class PluginUtils {
                 Log.log(ex);
             }
         }
+    }
+
+    /**
+     * This method create a list of plugins to load. It tries to onky take the
+     * most recent version of plugins. To differenciate between different
+     * versions, the plugins must have the same name, have the same number of
+     * version components (we can't compare <code>x.y.z</code> with
+     * <code>y.z</code>). Also the qualifier (ie. anything after the "-" in the
+     * version number) is discarded for the comparison.
+     *
+     * @param pluginsDirs
+     *            List of directories where plugins can be loaded
+     */
+    protected static List<URL> populatePluginUrlList(List<File> pluginsDirs) {
+        // list all jars in /plugins/
+        FileFilter jarFilter = pathname -> pathname.getName().endsWith(".jar");
+        List<File> fs = pluginsDirs.stream().flatMap(dir -> FileUtil.findFiles(dir, jarFilter).stream())
+                .collect(Collectors.toList());
+        List<URL> urlList = new ArrayList<>();
+        for (File f : fs) {
+            try {
+                URL url = f.toURI().toURL();
+                urlList.add(url);
+                Log.logInfoRB("PLUGIN_LOAD_JAR", url.toString());
+            } catch (IOException ex) {
+                Log.log(ex);
+            }
+        }
+
+        List<URL> jarToRemove = new ArrayList<>();
+
+        Map<String, PluginInformation> pluginVersions = new HashMap<>();
+
+        // look on all manifests
+        for (URL url : urlList) {
+            try (JarInputStream jarStream = new JarInputStream(url.openStream())) {
+                Manifest mf = jarStream.getManifest();
+                String pluginClass = mf.getMainAttributes().getValue("OmegaT-Plugins");
+                String oldPluginClass = mf.getMainAttributes().getValue("OmegaT-Plugin");
+
+                // if the jar doesn't look like an OmegaT plugin (it doesn't
+                // contain any "Omegat-Plugins?" attribute, we don't need to
+                // compare
+                // versions.
+                if ((oldPluginClass == null && pluginClass == null)
+                        || (pluginClass != null && pluginClass.indexOf('.') < 0)) {
+                    continue;
+                }
+
+                // Fetch all the information from the manifest
+                PluginInformation pluginInfo = PluginInformation.Builder.fromManifest(null, mf, url, null);
+
+                String pluginName = pluginInfo.getName();
+                if (pluginVersions.containsKey(pluginName)) {
+                    PluginInformation previousPlugin = pluginVersions.get(pluginName);
+                    // We get rid of versions qualifiers (x.y.z-beta) and we
+                    // assume dots are used to
+                    // separate version components
+                    String previousVersion = previousPlugin.getVersion().replaceAll("-.*", "");
+                    String pluginVersion = pluginInfo.getVersion().replaceAll("-.*", "");
+
+                    int isOlder = VersionChecker.compareVersions(previousVersion, "0", pluginVersion, "0");
+                    if (isOlder < 0) {
+                        Log.logWarningRB("PLUGIN_EXCLUDE_OLD_VERSION", pluginName,
+                                previousPlugin.getVersion(), pluginInfo.getVersion());
+                        jarToRemove.add(previousPlugin.getUrl());
+                        pluginVersions.put(pluginName, pluginInfo);
+                    } else if (isOlder == 0) {
+                        Log.logWarningRB("PLUGIN_EXCLUDE_SIMILAR_VERSION", pluginName,
+                                previousPlugin.getVersion(), pluginInfo.getVersion());
+                        jarToRemove.add(previousPlugin.getUrl());
+                        pluginVersions.put(pluginName, pluginInfo);
+                    } else {
+                        Log.logWarningRB("PLUGIN_EXCLUDE_OLD_VERSION", pluginName, pluginInfo.getVersion(),
+                                previousPlugin.getVersion());
+                        jarToRemove.add(pluginInfo.getUrl());
+                        pluginVersions.put(pluginName, previousPlugin);
+                    }
+                } else {
+                    pluginVersions.put(pluginName, pluginInfo);
+                }
+
+            } catch (IOException ex) {
+                Log.log(ex);
+            }
+        }
+
+        if (!jarToRemove.isEmpty()) {
+            Log.logWarningRB("PLUGIN_EXCLUSION_MESSAGE", jarToRemove);
+            urlList.removeAll(jarToRemove);
+        }
+
+        return urlList;
     }
 
     public static List<Class<?>> getFilterClasses() {
@@ -365,13 +460,13 @@ public final class PluginUtils {
                 }
                 if (loadClass(clazz, classLoader)) {
                     if (mu == null) {
-                        PLUGIN_INFORMATIONS.add(PluginInformation.Builder
-                                .fromManifest(clazz, m, null, PluginInformation.Status.BUNDLED));
+                        PLUGIN_INFORMATIONS.add(PluginInformation.Builder.fromManifest(clazz, m, null,
+                                PluginInformation.Status.BUNDLED));
                     } else {
-                        PLUGIN_INFORMATIONS.add(PluginInformation.Builder
-                                .fromManifest(clazz, m, mu, PluginInformation.Status.INSTALLED));
+                        PLUGIN_INFORMATIONS.add(PluginInformation.Builder.fromManifest(clazz, m, mu,
+                                PluginInformation.Status.INSTALLED));
                     }
-               }
+                }
             }
         }
         loadFromManifestOld(m, classLoader);
@@ -388,15 +483,15 @@ public final class PluginUtils {
             if (key.equals("plugin")) {
                 for (String clazz : classes) {
                     if (loadClass(clazz, classLoader)) {
-                        PLUGIN_INFORMATIONS.add(PluginInformation.Builder
-                                .fromProperties(clazz, props, key, null, PluginInformation.Status.BUNDLED));
+                        PLUGIN_INFORMATIONS.add(PluginInformation.Builder.fromProperties(clazz, props, key,
+                                null, PluginInformation.Status.BUNDLED));
                     }
                 }
             } else {
                 for (String clazz : classes) {
                     if (loadClassOld(key, clazz, classLoader)) {
-                        PLUGIN_INFORMATIONS.add(PluginInformation.Builder
-                                .fromProperties(clazz, props, key, null, PluginInformation.Status.BUNDLED));
+                        PLUGIN_INFORMATIONS.add(PluginInformation.Builder.fromProperties(clazz, props, key,
+                                null, PluginInformation.Status.BUNDLED));
                     }
                 }
             }
@@ -453,8 +548,8 @@ public final class PluginUtils {
                 continue;
             }
             if (loadClassOld(sType, key, classLoader)) {
-                PLUGIN_INFORMATIONS.add(PluginInformation.Builder
-                        .fromManifest(key, m, null, PluginInformation.Status.BUNDLED));
+                PLUGIN_INFORMATIONS.add(PluginInformation.Builder.fromManifest(key, m, null,
+                        PluginInformation.Status.BUNDLED));
             }
         }
     }

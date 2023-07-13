@@ -48,9 +48,12 @@ import org.eclipse.jgit.transport.URIish;
 import org.omegat.core.Core;
 import org.omegat.core.KnownException;
 import org.omegat.core.team2.TeamSettings;
+import org.omegat.core.team2.gui.PassphraseDialog;
+import org.omegat.core.team2.gui.UserPassDialog;
 import org.omegat.gui.main.IMainWindow;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
+import org.omegat.util.StringUtil;
 
 /**
  * Git repository credentials provider. One credential provider created for all
@@ -96,6 +99,13 @@ public class GITCredentialsProvider extends CredentialsProvider {
                     + "The EC key's fingerprints are:\\n"
                     + "MD5:([0-9a-f]{2}:){15}[0-9a-f]{2}\\nSHA256:(?<fingerprint>[0-9a-zA-Z/+]+)\\n"
                     + "Accept and store this key, and continue connecting\\?") };
+
+    private static final Pattern[] PASSPHRASE_REGEX = new Pattern[] {
+            Pattern.compile("Key '" + /* key file path */ ".*" + "'"
+                    + " is encrypted\\. Enter the passphrase to decrypt it\\.\\n?"),
+            Pattern.compile("Encrypted key " + /* key file path */ "'.*'"
+                    + " could not be decrypted\\. Enter the passphrase again\\.\\n?") };
+
     private static final String PASSWORD_PROMPT = "Password: ";
     private static final int MAX_RETRY = 5;
 
@@ -134,13 +144,19 @@ public class GITCredentialsProvider extends CredentialsProvider {
     }
 
     private Credentials loadCredentials(URIish uri) {
-        String url = uri.toString(); // now we use schema://server:port but we
-                                     // keep this for backward compatibility
         Credentials credentials = new Credentials();
+        // we use "schema://server:port" or "/path/to/.ssh/id_rsa"
+        // and backward compatible "schema://server:port/path"
+        // check following order
+        String url = uri.toString();
         credentials.username = TeamSettings.get(url + "!" + KEY_USERNAME_SUFFIX);
         credentials.password = TeamUtils.decodePassword(TeamSettings.get(url + "!" + KEY_PASSWORD_SUFFIX));
-        if (credentials.username == null) {
-            url = "" + uri.getScheme() + "://" + uri.getHost() + ":" + uri.getPort();
+        if (credentials.password == null) {
+            if (uri.getScheme() == null) {
+                url = uri.getPath();
+            } else {
+                url = uri.getScheme() + "://" + uri.getHost() + ":" + uri.getPort();
+            }
             credentials.username = TeamSettings.get(url + "!" + KEY_USERNAME_SUFFIX);
             credentials.password = TeamUtils
                     .decodePassword(TeamSettings.get(url + "!" + KEY_PASSWORD_SUFFIX));
@@ -149,14 +165,21 @@ public class GITCredentialsProvider extends CredentialsProvider {
     }
 
     private void saveCredentials(URIish uri, Credentials credentials) {
-        String url = "" + uri.getScheme() + "://" + uri.getHost() + ":" + uri.getPort();
+        String url;
+        if (uri.getScheme() == null) {
+            url = uri.getPath();
+        } else if (uri.getScheme() != null && uri.getHost() != null) {
+            url = uri.getScheme() + "://" + uri.getHost() + ":" + uri.getPort();
+        } else {
+            url = uri.getRawPath();
+        }
         try {
-            if (!credentials.username.isEmpty()) {
+            if (!StringUtil.isEmpty(credentials.username)) {
                 TeamSettings.set(url + "!" + KEY_USERNAME_SUFFIX, credentials.username);
             }
             TeamSettings.set(url + "!" + KEY_PASSWORD_SUFFIX, TeamUtils.encodePassword(credentials.password));
         } catch (Exception e) {
-            Core.getMainWindow().displayErrorRB(e, "TEAM_ERROR_SAVE_CREDENTIALS", null, "TF_ERROR");
+            Log.logErrorRB(e, "TEAM_ERROR_SAVE_CREDENTIALS");
         }
     }
 
@@ -198,7 +221,7 @@ public class GITCredentialsProvider extends CredentialsProvider {
         // get saved
         Credentials credentials = loadCredentials(uri);
         StringBuilder sb = new StringBuilder();
-        boolean ok = false;
+        boolean askKeyPassphrase = (uri.getScheme() == null);
         // theoretically, username can be unknown, but in practice it is always
         // set, so not requested.
         for (CredentialItem item : items) {
@@ -208,8 +231,7 @@ public class GITCredentialsProvider extends CredentialsProvider {
                     continue;
                 }
                 if (credentials.username == null) {
-                    credentials = askCredentials(uri, credentials, false);
-                    ok = true;
+                    credentials = askCredentials(uri, credentials, false, null);
                 }
                 ((CredentialItem.Username) item).setValue(credentials.username);
                 continue;
@@ -219,13 +241,13 @@ public class GITCredentialsProvider extends CredentialsProvider {
                     continue;
                 }
                 if (credentials.password == null) {
-                    credentials = askCredentials(uri, credentials, true);
-                    ok = true;
+                    credentials = askCredentials(uri, credentials, askKeyPassphrase, sb.toString());
+                    sb = new StringBuilder();
                 }
                 ((CredentialItem.Password) item).setValue(credentials.password.toCharArray());
                 continue;
             } else if (item instanceof CredentialItem.StringType) {
-                if (!item.getPromptText().equals(PASSWORD_PROMPT)) {
+                if (!item.getPromptText().equals(PASSWORD_PROMPT) || !isPassphraseQuery(item.getPromptText())) {
                     Log.log("Git: Ignore credentials query: " + item.getPromptText());
                     continue;
                 }
@@ -233,8 +255,8 @@ public class GITCredentialsProvider extends CredentialsProvider {
                     ((CredentialItem.StringType) item).setValue(predefinedPass);
                     continue;
                 }
-                if (credentials.password == null && !ok) {
-                    credentials = askCredentials(uri, credentials, true);
+                if (credentials.password == null) {
+                    credentials = askCredentials(uri, credentials, askKeyPassphrase, null);
                 }
                 ((CredentialItem.StringType) item).setValue(credentials.password);
                 continue;
@@ -273,7 +295,7 @@ public class GITCredentialsProvider extends CredentialsProvider {
             throw new UnsupportedCredentialItem(uri, item.getClass().getName() + ":" + item.getPromptText());
         }
         if (sb.length() > 0) {
-            Log.log(sb.toString());
+            Log.logInfoRB("GIT_CREDENTIAL_MESSAGE", sb.toString());
         }
         return true;
     }
@@ -365,49 +387,70 @@ public class GITCredentialsProvider extends CredentialsProvider {
     /**
      * GUI component to ask credentials.
      * <p>
-     * If username is already available in uri, then we will not be asked
-     * for a username, and keep it.
-     * @param uri the repository URI
-     * @param credentials credentials holder
-     * @param passwordOnly true when want to ask only password, otherwise false.
+     * If username is already available in uri, then we will not be asked for a
+     * username, and keep it.
+     *
+     * @param uri
+     *            the repository URI
+     * @param credentials
+     *            credentials holder
+     * @param passwordOnly
+     *            true when want to ask only password, otherwise false.
      * @return result as a credential object.
      */
-    private Credentials askCredentialsGUI(URIish uri, Credentials credentials, boolean passwordOnly) {
+    private Credentials askCredentialsGUI(URIish uri, Credentials credentials, boolean passwordOnly,
+            String msg) {
         IMainWindow mw = Core.getMainWindow();
-        GITUserPassDialog userPassDialog = new GITUserPassDialog(mw.getApplicationFrame());
-        userPassDialog.setLocationRelativeTo(Core.getMainWindow().getApplicationFrame());
         if (passwordOnly) {
-            userPassDialog.descriptionTextArea.setText(
-                    OStrings.getString(credentials.username == null ? "TEAM_PASS_FIRST" : "TEAM_PASS_WRONG",
-                            uri.getHumanishName()));
+            PassphraseDialog passphraseDialog = new PassphraseDialog(mw.getApplicationFrame());
+            passphraseDialog.setLocationRelativeTo(Core.getMainWindow().getApplicationFrame());
+            if (uri.getScheme() == null) {
+                // asked passphrase
+                passphraseDialog.setTitleDesc(OStrings.getString(
+                        credentials.password == null ? "TEAM_PASSPHRASE_FIRST" : "TEAM_PASSPHRASE_WRONG",
+                        uri.toString()));
+            } else {
+                // asked password
+                passphraseDialog.setTitleDesc(OStrings.getString(
+                        credentials.password == null ? "TEAM_PASS_FIRST" : "TEAM_PASS_WRONG",
+                        uri.toString()));
+            }
+            passphraseDialog.setDescription(msg);
+            passphraseDialog.setVisible(true);
+            if (passphraseDialog.getReturnStatus()) {
+                credentials.password = passphraseDialog.getPassword();
+                return credentials;
+            }
         } else {
+            UserPassDialog userPassDialog = new UserPassDialog(mw.getApplicationFrame());
+            userPassDialog.setLocationRelativeTo(Core.getMainWindow().getApplicationFrame());
             userPassDialog.descriptionTextArea.setText(OStrings.getString(
                     credentials.username == null ? "TEAM_USERPASS_FIRST" : "TEAM_USERPASS_WRONG",
                     uri.getHumanishName()));
-        }
-        if (uri.getUser() != null && !"".equals(uri.getUser())) {
-            userPassDialog.userText.setText(uri.getUser());
-            userPassDialog.userText.setEditable(false);
-            userPassDialog.userText.setEnabled(false);
-        }
-        if (credentials.username != null) {
-            userPassDialog.userText.setText(credentials.username);
-        }
-        if (passwordOnly) {
-            userPassDialog.userText.setEditable(false);
-        }
-        userPassDialog.setVisible(true);
-        if (userPassDialog.getReturnStatus() == GITUserPassDialog.RET_OK) {
-            credentials.username = userPassDialog.userText.getText();
-            credentials.password = new String(userPassDialog.passwordField.getPassword());
-            return credentials;
+            if (uri.getUser() != null && !"".equals(uri.getUser())) {
+                userPassDialog.setUsername(uri.getUser());
+                userPassDialog.enableUsernameField(false);
+            }
+            if (credentials.username != null) {
+                userPassDialog.setUsername(credentials.username);
+            }
+            userPassDialog.setVisible(true);
+            if (userPassDialog.getReturnStatus() == UserPassDialog.RET_OK) {
+                credentials.username = userPassDialog.getUsername();
+                credentials.password = userPassDialog.getPassword();
+                return credentials;
+            }
         }
         return null;
     }
 
-    private Credentials askCredentialsCUI(URIish uri, Credentials credentials, boolean passwordOnly) {
+    private Credentials askCredentialsCUI(URIish uri, Credentials credentials, boolean passwordOnly,
+            String msg) {
         Console console = System.console();
         if (console != null) {
+            if (msg != null) {
+                console.printf(msg);
+            }
             if (uri.getUser() != null && !"".equals(uri.getUser())) {
                 credentials.username = uri.getUser();
             } else {
@@ -424,12 +467,13 @@ public class GITCredentialsProvider extends CredentialsProvider {
         return null;
     }
 
-    private Credentials askCredentials(URIish uri, Credentials credentials, boolean passwordOnly) {
+    private Credentials askCredentials(URIish uri, Credentials credentials, boolean passwordOnly,
+            String msg) {
         Credentials result;
         if (isGUI()) {
-            result = askCredentialsGUI(uri, credentials, passwordOnly);
+            result = askCredentialsGUI(uri, credentials, passwordOnly, msg);
         } else {
-            result = askCredentialsCUI(uri, credentials, passwordOnly);
+            result = askCredentialsCUI(uri, credentials, passwordOnly, msg);
         }
         if (result == null) {
             throw new UnsupportedCredentialItem(uri, OStrings.getString("TEAM_CREDENTIALS_DENIED"));
@@ -441,8 +485,8 @@ public class GITCredentialsProvider extends CredentialsProvider {
     /**
      * Reset connection.
      * <p>
-     * It is called after 5 authorization failures.
-     * The transport gives up after 3 resets.
+     * It is called after 5 authorization failures. The transport gives up after
+     * 3 resets.
      *
      * @param uri
      *            target URI.
@@ -480,6 +524,17 @@ public class GITCredentialsProvider extends CredentialsProvider {
             }
         }
         return null;
+    }
+
+    private boolean isPassphraseQuery(String promptText) {
+        Matcher passphraseMatcher;
+        for (Pattern p : PASSPHRASE_REGEX) {
+            passphraseMatcher = p.matcher(promptText);
+            if (passphraseMatcher.find()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**

@@ -31,25 +31,35 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.io.File;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
+import org.custommonkey.xmlunit.XMLAssert;
+import org.custommonkey.xmlunit.XMLUnit;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.xml.sax.InputSource;
+
 import org.omegat.core.data.ProjectException;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.tokenizer.LuceneEnglishTokenizer;
 import org.omegat.tokenizer.LuceneFrenchTokenizer;
 
 import gen.core.project.Omegat;
+import gen.core.project.RepositoryDefinition;
+import gen.core.project.RepositoryMapping;
 
 public class ProjectFileStorageTest {
 
     private static final File PROJECT_DIR = new File("test/data/project");
+    private static final File SCHEMA_FILE = new File("src/schemas/project_properties.xsd");
 
     private File tempDir;
 
@@ -58,6 +68,10 @@ public class ProjectFileStorageTest {
         tempDir = Files.createTempDirectory("omegat").toFile().getAbsoluteFile();
         assertTrue(tempDir.isDirectory());
         TestPreferencesInitializer.init(tempDir.getPath());
+        XMLUnit.setIgnoreWhitespace(true);
+        XMLUnit.setIgnoreAttributeOrder(true);
+        XMLUnit.setIgnoreComments(true);
+
     }
 
     @After
@@ -98,6 +112,95 @@ public class ProjectFileStorageTest {
         List<String> excludes = props.getSourceRootExcludes();
         assertEquals(6, excludes.size());
         assertEquals("**/.svn/**", excludes.get(0));
+    }
+
+    @Test
+    public void testSaveTeamProject() throws Exception {
+        // create & write a project
+        ProjectProperties p = new ProjectProperties(tempDir);
+        p.setSourceLanguage("en-US");
+        p.setTargetLanguage("fr-FR");
+        p.setSourceTokenizer(LuceneEnglishTokenizer.class);
+        p.setTargetTokenizer(LuceneFrenchTokenizer.class);
+        p.setSentenceSegmentingEnabled(true);
+        RepositoryDefinition repositoryDefinition = new RepositoryDefinition();
+        RepositoryMapping repositoryMapping = new RepositoryMapping();
+        repositoryMapping.setRepository("");
+        repositoryMapping.setLocal("");
+        repositoryDefinition.getMapping().add(repositoryMapping);
+        repositoryDefinition.setType("git");
+        repositoryDefinition.setBranch("main");
+        repositoryDefinition.setUrl("https://example.com/example.git");
+        p.setRepositories(Collections.singletonList(repositoryDefinition));
+        ProjectFileStorage.writeProjectFile(p);
+        // check file
+        compareXML(new File(PROJECT_DIR, "team.project"), new File(tempDir, "omegat.project"));
+    }
+
+    @Test
+    public void testSaveTeamProjectWithExclude() throws Exception {
+        // create & write a project
+        ProjectProperties p = new ProjectProperties(tempDir);
+        p.setSourceLanguage("en-US");
+        p.setTargetLanguage("fr-FR");
+        p.setSourceTokenizer(LuceneEnglishTokenizer.class);
+        p.setTargetTokenizer(LuceneFrenchTokenizer.class);
+        p.setSentenceSegmentingEnabled(true);
+        RepositoryDefinition repositoryDefinition = new RepositoryDefinition();
+        RepositoryMapping repositoryMapping = new RepositoryMapping();
+        repositoryMapping.setRepository("");
+        repositoryMapping.setLocal("");
+        repositoryMapping.getExcludes().add("exclude1");
+        repositoryMapping.getExcludes().add("exclude2");
+        repositoryDefinition.getMapping().add(repositoryMapping);
+        repositoryDefinition.setType("git");
+        repositoryDefinition.setBranch("main");
+        repositoryDefinition.setUrl("https://example.com/example.git");
+        p.setRepositories(Collections.singletonList(repositoryDefinition));
+        ProjectFileStorage.writeProjectFile(p);
+        // check file
+        compareXML(new File(PROJECT_DIR, "teamMapWithExclude.project"), new File(tempDir, "omegat.project"));
+    }
+
+    @Test
+    public void testSaveTeamProjectWithMapping() throws Exception {
+        // create & write a project
+        ProjectProperties p = new ProjectProperties(tempDir);
+        p.setSourceLanguage("en-US");
+        p.setTargetLanguage("fr-FR");
+        p.setSourceTokenizer(LuceneEnglishTokenizer.class);
+        p.setTargetTokenizer(LuceneFrenchTokenizer.class);
+        p.setSentenceSegmentingEnabled(true);
+        //
+        List<RepositoryDefinition> repositories = new ArrayList<>();
+        RepositoryDefinition repositoryDefinition = new RepositoryDefinition();
+        RepositoryMapping repositoryMapping = new RepositoryMapping();
+        repositoryMapping.setRepository("");
+        repositoryMapping.setLocal("");
+        repositoryDefinition.getMapping().add(repositoryMapping);
+        repositoryDefinition.setType("git");
+        repositoryDefinition.setBranch("main");
+        repositoryDefinition.setUrl("https://example.com/example.git");
+        repositories.add(repositoryDefinition);
+        //
+        RepositoryDefinition repositoryDefinition1 = new RepositoryDefinition();
+        repositoryDefinition1.setType("git");
+        repositoryDefinition1.setBranch("main");
+        repositoryDefinition1.setUrl("git@example.com:example.git");
+        RepositoryMapping repositoryMapping1 = new RepositoryMapping();
+        repositoryMapping1.setRepository("/docs");
+        repositoryMapping1.setLocal("source");
+        repositoryDefinition1.getMapping().add(repositoryMapping1);
+        RepositoryMapping repositoryMapping2 = new RepositoryMapping();
+        repositoryMapping2.setRepository("/manual");
+        repositoryMapping2.setLocal("source/manual");
+        repositoryDefinition1.getMapping().add(repositoryMapping2);
+        repositories.add(repositoryDefinition1);
+        //
+        p.setRepositories(repositories);
+        ProjectFileStorage.writeProjectFile(p);
+        // check file
+        compareXML(new File(PROJECT_DIR, "teamWithMap.project"), new File(tempDir, "omegat.project"));
     }
 
     @Test
@@ -391,5 +494,13 @@ public class ProjectFileStorageTest {
             sb.append(s);
         }
         return sb.toString();
+    }
+
+    protected void compareXML(File f1, File f2) throws Exception {
+        compareXML(f1.toURI().toURL(), f2.toURI().toURL());
+    }
+
+    protected void compareXML(URL f1, URL f2) throws Exception {
+        XMLAssert.assertXMLEqual(new InputSource(f1.toExternalForm()), new InputSource(f2.toExternalForm()));
     }
 }

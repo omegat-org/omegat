@@ -84,6 +84,8 @@ public class FiltersCustomizerController extends BasePreferencesController {
     /** Project-specific filters */
     private final Filters projectFilters;
 
+    private FiltersTableModel model;
+
     /** Filters which editable now. */
     private Filters editableFilters;
 
@@ -192,12 +194,14 @@ public class FiltersCustomizerController extends BasePreferencesController {
         if (!isEditable()) {
             return;
         }
+        List<Filter> filters = editableFilters.getFilters();
         Filter filter = getFilterAtRow(row);
         FilterEditor editor = new FilterEditor(SwingUtilities.windowForComponent(panel), filter);
         editor.setVisible(true);
         if (editor.result != null) {
-            List<Filter> filters = editableFilters.getFilters();
-            filters.set(filters.indexOf(filter), editor.result);
+            Filter f = editor.result;
+            filters.set(filters.indexOf(filter), f);
+            model.setFilter(f);
         }
     }
 
@@ -211,7 +215,8 @@ public class FiltersCustomizerController extends BasePreferencesController {
         editableFilters = isProjectSpecific && projectFilters != null
                 ? FilterMaster.cloneConfig(projectFilters)
                 : FilterMaster.cloneConfig(userFilters);
-        panel.filtersTable.setModel(new FiltersTableModel(editableFilters));
+        model = new FiltersTableModel(editableFilters);
+        panel.filtersTable.setModel(model);
         TableRowSorter<TableModel> sorter = new TableRowSorter<>(panel.filtersTable.getModel());
         panel.filtersTable.setRowSorter(sorter);
         List<RowSorter.SortKey> sortkeys = new ArrayList<>();
@@ -240,7 +245,8 @@ public class FiltersCustomizerController extends BasePreferencesController {
     public void restoreDefaults() {
         if (isEditable()) {
             editableFilters = FilterMaster.cloneConfig(defaultFilters);
-            panel.filtersTable.setModel(new FiltersTableModel(editableFilters));
+            model = new FiltersTableModel(editableFilters);
+            panel.filtersTable.setModel(model);
             panel.cbRemoveTags.setSelected(editableFilters.isRemoveTags());
             panel.cbRemoveSpacesNonseg.setSelected(editableFilters.isRemoveSpacesNonseg());
             panel.cbPreserveSpaces.setSelected(editableFilters.isPreserveSpaces());

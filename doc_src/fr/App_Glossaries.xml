@@ -7,7 +7,7 @@
 
   <para>Tous les termes d’un segment qui trouvent une correspondance dans l’<emphasis>un</emphasis> des glossaires seront affichés dans le volet <link linkend="panes.glossary" endterm="panes.glossary.title"/>.</para>
 
-  <para>Les termes source peuvent être des expressions multi-mots.</para>
+  <para>Les termes source peuvent être des expressions multimots.</para>
 
   <para>Il y a 2 types de fichiers de glossaires :</para>
 
@@ -34,7 +34,7 @@
             </member>
           </simplelist>
 		  
-          <para>dans lequel <parameter>&lt;charset&gt;</parameter> est généralement l’une des chaînes de caractères répertoriées dans le <ulink url="http://www.iana.org/assignments/character-sets/character-sets.xhtml">registre IANA</ulink>.</para>
+          <para>dans lequel <parameter>&lt;charset&gt;</parameter> est généralement l’une des chaines de caractères répertoriées dans le <ulink url="http://www.iana.org/assignments/character-sets/character-sets.xhtml">registre IANA</ulink>.</para>
 		</note>
 	  </listitem>
 	</varlistentry>

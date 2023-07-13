@@ -314,7 +314,7 @@ dependencies {
     jaxb 'com.sun.xml.bind:jaxb-xjc:2.3.4'
 
     // genMac only
-    genMac 'com.evolvedbinary.appbundler:appbundler:1.2.0'
+    genMac 'org.omegat:appbundler:1.2.1'
 
     testIntegrationImplementation sourceSets.main.output, sourceSets.test.output
     testIntegrationImplementation(testFixtures(project.rootProject))

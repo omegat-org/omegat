@@ -250,6 +250,8 @@ dependencies {
         // Ivy is needed to handle Grape/@Grab dependencies
         runtimeOnly('org.apache.groovy:groovy-all:4.0.11@pom') {
             transitive = true
+            exclude module: 'groovy-test-junit5'
+            exclude module: 'groovy-test'
         }
         runtimeOnly 'org.apache.groovy:groovy-dateutil:4.0.11'
         runtimeOnly 'org.apache.ivy:ivy:2.5.1'

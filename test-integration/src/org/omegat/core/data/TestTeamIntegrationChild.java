@@ -65,6 +65,7 @@ import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.ProjectFileStorage;
 import org.omegat.util.TestPreferencesInitializer;
+import org.omegat.util.gui.MenuExtender.MenuKey;
 
 import com.vlsolutions.swing.docking.Dockable;
 import com.vlsolutions.swing.docking.DockingDesktop;
@@ -550,6 +551,11 @@ public final class TestTeamIntegrationChild {
 
             @Override
             public JMenu getHelpMenu() {
+                return null;
+            }
+
+            @Override
+            public JMenu getMenu(MenuKey marker) {
                 return null;
             }
 

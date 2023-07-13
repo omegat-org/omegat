@@ -31,7 +31,6 @@ import java.util.ResourceBundle;
 
 import javax.swing.JDialog;
 import javax.swing.JFrame;
-import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
@@ -42,6 +41,8 @@ import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.util.Preferences;
+import org.omegat.util.gui.MenuExtender;
+import org.omegat.util.gui.MenuExtender.MenuKey;
 
 public final class TipOfTheDayController {
 
@@ -49,6 +50,7 @@ public final class TipOfTheDayController {
     private static final String TIPOFTHEDAY_SHOW_ON_STARTUP = "tipoftheday_show_on_start";
     private static final String TIPOFTHEDAY_CURRENT_TIP = "tipoftheday_current_tip";
 
+    @SuppressWarnings("unused")
     public static void loadPlugins() {
         CoreEvents.registerApplicationEventListener(new IApplicationEventListener() {
             @Override
@@ -77,8 +79,7 @@ public final class TipOfTheDayController {
                 totdMenu.setToolTipText(UIManager.getDefaults().getString("TipOfTheDay.menuToolTipText"));
                 // force to show Tip of the Day dialog.
                 totdMenu.addActionListener(actionEvent -> TipOfTheDayController.start(true));
-                JMenu helpMenu = Core.getMainWindow().getMainMenu().getHelpMenu();
-                helpMenu.insert(totdMenu, 3);
+                MenuExtender.addMenuItem(MenuKey.HELP, totdMenu);
             }
 
             @Override

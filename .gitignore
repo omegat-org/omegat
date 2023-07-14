@@ -13,6 +13,7 @@ local.properties
 
 # Docs
 .fop
+docs
 
 # emacs backup files
 *~

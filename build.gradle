@@ -15,6 +15,7 @@ plugins {
     id 'com.diffplug.spotless' version '6.0.0'
     id 'com.github.ben-manes.versions' version '0.39.0'
     id 'edu.sc.seis.launch4j' version '3.0.3'
+    id 'com.dorongold.task-tree' version '2.1.1'
 }
 
 apply from: 'gradle/utils.gradle'
@@ -374,29 +375,16 @@ launch4j {
 
 task genDocIndex(type: Copy) {
     description = 'Generate the docs index file'
-    def docPropsFiles = fileTree(dir: 'docs', include: '*/version*.properties').findAll {
-        file("${it.parent}/index.html").file
-    }
-    def isgFiles = fileTree(dir: 'docs', include: '*/instantStartGuideNoTOC.html').findAll {
-        file("${it.parent}/instantStartGuideNoTOC.html").file
+    def manualIndex = 'OmegaTUsersManual_xinclude full.xml'
+    def docPropsFiles = fileTree(dir: 'doc_src', include: '*/version*.properties').findAll {
+        file("${it.parent}/${manualIndex}").file
     }
     inputs.files docPropsFiles
-    from('doc_src') {
-        include 'index_template.html'
-    }
-    into 'docs'
+    from('doc_src/index_template.html')
+    into "${buildDir}/docs/manual"
     rename('index_template.html', 'index.html')
     doFirst {
         def langNameExceptions = loadProperties(file('doc_src/lang_exceptions.properties'))
-        def isgInfos = isgFiles.collect { isg ->
-            def code = isg.parentFile.name
-            def locale = Locale.forLanguageTag(code.replace('_', '-'))
-            def name = langNameExceptions[code] ?: locale.getDisplayName(locale)
-            def docVersion = 0
-            def noManual = true
-            def status = 'out-of-date'
-            ['code': code, 'name': name, 'version': docVersion, 'status': status, 'nomanual': noManual]
-        }
         def langInfos = docPropsFiles.collect { props ->
             def code = props.parentFile.name
             def locale = Locale.forLanguageTag(code.replace('_', '-'))
@@ -407,54 +395,163 @@ task genDocIndex(type: Copy) {
             ['code': code, 'name': name, 'version': docVersion, 'status': status, 'nomanual': noManual]
         }
         def filterSet = langInfos.collect {entry -> entry.code}
-        def filteredIsgInfos = isgInfos.findAll{entry -> !filterSet.contains(entry.code)}
-        langInfos.addAll(filteredIsgInfos)
         langInfos.sort { entry -> entry.code }
         expand('languages': langInfos)
         filteringCharset = 'UTF-8'
     }
 }
 
+task manualPdfs {
+    description = 'Build PDF manuals for all languages. Requires Docker.'
+}
+
+task manualHtmls {
+    description = 'Build HTML manuals and zip for all languages. Requires Docker.'
+}
+
 task webManual(type: Sync) {
     group = 'documentation'
-    description = 'Generate the HTML manual'
+    description = 'Sync the HTML manual files'
+    dependsOn manualHtmls
     dependsOn genDocIndex
-    destinationDir = file("${buildDir}/docs/manual")
-    from 'docs'
+    destinationDir = file("${buildDir}/docs/htdocs")
+    from("${buildDir}/docs/manual")
     from('release') {
         include 'doc-license.txt'
     }
 }
 
+ext.manualIndexXmls = fileTree(dir: 'doc_src', include: '**/OmegaTUsersManual_xinclude full.xml')
+manualIndexXmls.each { xml ->
+    def lang = xml.parentFile.name
+    def pdfTaskName = "manualPdf${lang.capitalize()}"
+    task(type: Exec, pdfTaskName) {
+        inputs.files fileTree(dir: "doc_src/${lang}", include: '**/*.xml')
+        outputs.file "${distsDir}/OmegaT_documentation_${lang}.PDF"
+        workingDir = 'doc_src'
+        commandLine './docgen', "-Dlanguage=${lang}", "-Dtarget=../build/docs/${lang}", 'pdf'
+        doLast {
+            copy {
+                from fileTree(dir: "doc_src/${lang}/pdf", include: '*.PDF')
+                into distsDir
+            }
+            delete fileTree(dir: "doc_src/${lang}", includes: ['pdf/*', 'index.xml'])
+        }
+    }
+    manualPdfs.dependsOn pdfTaskName
+
+    def htmlTaskName = "manualHtml${lang.capitalize()}"
+    task(type: Exec, htmlTaskName) {
+        inputs.files fileTree(dir: "doc_src/${lang}", includes: ['**/*.xml', 'images/*.png'],
+                excludes: ['xhtml5/*', 'index.xml'])
+        outputs.files fileTree(dir: "${buildDir}/docs/manual/${lang}/", includes: ['*.html', 'OmegaT.css',
+                'images/*.png', '_wh/**/*.js', '_wh/wh.css'])
+        workingDir = 'doc_src'
+        commandLine './docgen', "-Dlanguage=${lang}", "-Dtarget=../build/docs/manual/${lang}", 'html5'
+        doFirst {
+            file("${buildDir}/docs/manual/${lang}/images").mkdir()
+        }
+        doLast {
+            delete fileTree(dir: "doc_src/${lang}", includes: ['xhtml5/**/*', 'index.xml'])
+            delete file("doc_src/${lang}/xhtml5")
+        }
+    }
+
+    def propTaskName = "manualProp${lang.capitalize()}"
+    task(type: Sync, propTaskName) {
+        from fileTree(dir: "doc_src/${lang}", include: "**/version*.properties")
+        into file("docs/${lang}/")
+    }
+    manualHtmls.dependsOn propTaskName
+
+    def zipTaskName="manualZip${lang.capitalize()}"
+    task(type:Zip, zipTaskName) {
+        from file("${buildDir}/docs/manual/${lang}")
+        archiveFileName="${lang}.zip"
+        destinationDir file('docs') 
+    }
+    manualHtmls.dependsOn zipTaskName
+    tasks.getByName(zipTaskName).dependsOn htmlTaskName
+}
+
+task instantStartGuides {
+    description = 'Build Instant Start guides for all languages. Requires Docker.'
+}
+
+task firstSteps {
+    description = 'Build First Step pages for all languages. Requires Docker.'
+}
+
+task updateManuals {
+    group = 'omegat release'
+    description = 'Update Instant Start guides and HTML manuals.'
+    dependsOn manualHtmls, firstSteps, instantStartGuides
+    finalizedBy genDocIndex
+}
+
+ext.firstStepsXmls = fileTree(dir: 'doc_src', include: '**/First_Steps.xml')
+firstStepsXmls.each { xml ->
+    def lang = xml.parentFile.name
+    def taskName = "firstSteps${lang.capitalize()}"
+    task(type: Exec, taskName) {
+        inputs.files fileTree(dir: "doc_src/${lang}", include: 'First_Steps.xml')
+        outputs.files fileTree(dir: 'docs', includes: ["${lang}/first_steps.html", "${lang}/OmegaT.css"])
+        workingDir = 'doc_src'
+        commandLine './docgen', "-Dlanguage=${lang}", "-Dtarget=../docs/${lang}", 'first-steps'
+        doLast {
+            delete file("docs/${lang}/xhtml5")
+            delete file("docs/${lang}/images")
+        }
+    }
+    firstSteps.dependsOn taskName
+}
+
+ext.instantStartXmls = fileTree(dir: 'doc_src', include: '**/InstantStartGuide.xml')
+instantStartXmls.each { xml ->
+    def lang = xml.parentFile.name
+    def taskName = "instantStartGuide${lang.capitalize()}"
+    task(type: Exec, taskName) {
+        inputs.files fileTree(dir: "doc_src/${lang}", include: '**/*.xml')
+        outputs.files fileTree(dir: "docs",
+                includes: ["${lang}/first_steps.html", "${lang}/images/InstantGuide*png", "${lang}/OmegaT.css"])
+        workingDir = 'doc_src'
+        commandLine './docgen', "-Dlanguage=${lang}", "-Dtarget=../docs/${lang}", 'instant-start'
+        doLast {
+            delete file("docs/${lang}/xhtml5")
+        }
+    }
+    instantStartGuides.dependsOn taskName
+}
+
 distributions {
     main {
         contents {
-            from('docs') {
-                into 'docs'
-                exclude 'index.html'
-            }
-            from(genDocIndex.outputs) {
-                into 'docs'
-                include 'index.html'
-            }
             from('release') {
                 into 'docs'
                 include 'changes.txt', 'doc-license.txt', 'OmegaT-license.txt', 'contributors.txt', 'libraries.txt'
                 filter(FixCrLfFilter, eol: FixCrLfFilter.CrLf.newInstance('crlf'))
+            }
+            from('release') {
+                into 'docs'
+                exclude 'contributors.txt', 'libraries.txt', 'changes.txt', 'doc-license.txt', 'OmegaT-license.txt'
+                include '*.txt', '*.html'
+                filter(ReplaceTokens, tokens: [
+                        TRANSLATION_NOTICE: ''
+                ])
+                filter(FixCrLfFilter, eol: FixCrLfFilter.CrLf.newInstance('crlf'))
+            }
+            project.tasks.matching {it.name.startsWith('manualZip') || it.name.startsWith('firstSteps') || it.name.startsWith('instantStart')}.forEach {
+                from(it.outputs) { into 'docs' }
+            }
+            from('docs') {
+                into 'docs'
+                include '**/*.properties'
             }
             from('scripts') {
                 into 'scripts'
             }
             from('images') {
                 into 'images'
-            }
-            from('release') {
-                exclude 'contributors.txt', 'libraries.txt'
-                include '*.txt', '*.html'
-                filter(ReplaceTokens, tokens: [
-                        TRANSLATION_NOTICE: ''
-                ])
-                filter(FixCrLfFilter, eol: FixCrLfFilter.CrLf.newInstance('crlf'))
             }
             from('release/plugins-specific') {
                 into 'plugins'
@@ -499,7 +596,7 @@ distributions {
     source {
         contents {
             from(rootDir) {
-                include 'config/**', 'docs/**', 'images/**', 'lib/**', 'release/**',
+                include 'config/**', 'images/**', 'lib/**', 'release/**',
                     'src/**', 'test/**', 'doc_src/**', 'docs_devel/**', 'scripts/**',
                     'gradle/**', 'gradlew*', '*.gradle', 'README.md', '*.properties',
                     'tipoftheday/**'
@@ -689,12 +786,18 @@ task linux(dependsOn: [linux64DistTar]) {
     group = 'omegat distribution'
 }
 
+installLinux64Dist {
+    doFirst {
+        delete "${destinationDir}/jre"
+    }
+}
+
 linux64DistTar {
     onlyIf {
         condition(!linux64JRE.empty, 'JRE not found')
     }
     doFirst {
-        delete "$destinationDirectory/jre"
+        delete "${destinationDir}/jre"
     }
     archiveFileName.set("${applicationName}_${project.version}${omtVersion.beta}_Linux_64.tar.bz2")
     compression = Compression.BZIP2
@@ -1017,96 +1120,6 @@ tasks.jacocoTestCoverageVerification {
     }
 }
 
-task manualPdfs {
-    description = 'Build PDF manuals for all languages. Requires Docker.'
-}
-
-task manualHtmls {
-    description = 'Build HTML manuals for all languages. Requires Docker.'
-}
-
-ext.manualIndexXmls = fileTree(dir: 'doc_src', include: '**/OmegaTUsersManual_xinclude full.xml')
-manualIndexXmls.each { xml ->
-    def lang = xml.parentFile.name
-    def pdfTaskName = "manualPdf${lang.capitalize()}"
-    task(pdfTaskName) {
-        inputs.files fileTree(dir: "doc_src/${lang}", include: '**/*.xml')
-        outputs.file "${distsDir}/OmegaT_documentation_${lang}.PDF"
-        doLast {
-            exec {
-                workingDir = 'doc_src'
-                commandLine './docgen', "-Dlanguage=${lang}", 'pdf'
-            }
-            copy {
-                from fileTree(dir: "doc_src/${lang}/pdf", include: '*.PDF')
-                into distsDir
-            }
-            delete fileTree(dir: "doc_src/${lang}", includes: ['pdf/*', 'index.xml'])
-        }
-    }
-    manualPdfs.dependsOn pdfTaskName
-
-    def htmlTaskName = "manualHtml${lang.capitalize()}"
-    task(htmlTaskName) {
-        inputs.files fileTree(dir: "doc_src/${lang}", include: '**/*.xml')
-        doLast {
-            exec {
-                workingDir = 'doc_src'
-                commandLine './docgen', "-Dlanguage=${lang}", 'html5'
-            }
-            delete fileTree(dir: "doc_src/${lang}", includes: ['xhtml5/**/*', 'index.xml'])
-        }
-    }
-    manualHtmls.dependsOn htmlTaskName
-}
-
-task instantStartGuides {
-    description = 'Build Instant Start guides for all languages. Requires Docker.'
-}
-
-task firstSteps {
-    description = 'Build First Step pages for all languages. Requires Docker.'
-}
-
-task updateManuals {
-    group = 'omegat release'
-    description = 'Update Instant Start guides and HTML manuals.'
-    dependsOn manualHtmls, firstSteps, instantStartGuides
-    finalizedBy genDocIndex
-}
-
-ext.firstStepsXmls = fileTree(dir: 'doc_src', include: '**/First_Steps.xml')
-firstStepsXmls.each { xml ->
-    def lang = xml.parentFile.name
-    def taskName = "firstSteps${lang.capitalize()}"
-    task(taskName) {
-        inputs.files fileTree(dir: "doc_src/${lang}", include: '**/*.xml')
-        doLast {
-            exec {
-                workingDir = 'doc_src'
-                commandLine './docgen', "-Dlanguage=${lang}", 'first-steps'
-            }
-        }
-    }
-    firstSteps.dependsOn taskName
-}
-
-ext.instantStartXmls = fileTree(dir: 'doc_src', include: '**/InstantStartGuide.xml')
-instantStartXmls.each { xml ->
-    def lang = xml.parentFile.name
-    def taskName = "instantStartGuide${lang.capitalize()}"
-    task(taskName) {
-        inputs.files fileTree(dir: "doc_src/${lang}", include: '**/*.xml')
-        doLast {
-            exec {
-                workingDir = 'doc_src'
-                commandLine './docgen', "-Dlanguage=${lang}", 'instant-start'
-            }
-        }
-    }
-    instantStartGuides.dependsOn taskName
-}
-
 tasks.getByName("run") {
     jvmArgs(["--add-opens", "java.desktop/sun.awt.X11=ALL-UNNAMED"])
 }
@@ -1288,5 +1301,9 @@ tasks.withType(Sync).configureEach {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
 tasks.withType(Zip).configureEach {
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+}
+
+tasks.withType(Copy).configureEach {
     duplicatesStrategy = DuplicatesStrategy.INCLUDE
 }

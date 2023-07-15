@@ -40,14 +40,35 @@ variables:
 
 stages:
 - stage: Check
-  condition: not(or(eq(variables['Build.Reason'], 'Schedule'), eq(variables['Build.Reason'], 'Manual')))
+  pool:
+    vmImage: 'ubuntu-22.04'
   jobs:
-  - job: GitHubCI
+  - job: CI
+    condition: not(or(eq(variables['Build.Reason'], 'Schedule'), eq(variables['Build.Reason'], 'Manual')))
     displayName: CI Check for master, releases/* and Pull-Requests
     pool:
       vmImage: 'ubuntu-22.04'
     steps:
       - template: ci/azure-pipelines/check_steps.yml
+  - job: preCheck
+    steps:
+    - bash: |
+        files=$(git diff-tree --no-commit-id --name-only -r HEAD)
+        for file in $files; do
+          if [[ $file =~ ^doc_src.* ]]; then
+            echo "##vso[task.setvariable variable=changeDoc;isoutput=true]True"
+          fi
+        done
+      name: checkChangeDoc
+  - job: DocCI
+    dependsOn: preCheck
+    condition: and(eq(dependencies.preCheck.outputs['checkChangeDoc.changeDoc'], 'True'), ne(variables.isRelease, true))
+    displayName: build and publish manual snapshot version
+    pool:
+      vmImage: 'ubuntu-22.04'
+    steps:
+      - template: ci/azure-pipelines/build_doc_steps.yml
+      - template: ci/azure-pipelines/publish_manual_snapshot.yml
 
   # Weekly release steps will be triggerred after integration-test succeeded.
 - stage: Weekly

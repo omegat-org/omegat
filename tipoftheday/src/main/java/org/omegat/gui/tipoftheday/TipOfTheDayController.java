@@ -27,6 +27,7 @@ package org.omegat.gui.tipoftheday;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.util.Collections;
 import java.util.Enumeration;
 import java.util.ResourceBundle;
 
@@ -53,6 +54,8 @@ public final class TipOfTheDayController {
     private static final String TIPOFTHEDAY_SHOW_ON_STARTUP = "tipoftheday_show_on_start";
     private static final String TIPOFTHEDAY_CURRENT_TIP = "tipoftheday_current_tip";
 
+    private static JMenuItem totdMenu = new JMenuItem();
+
     @SuppressWarnings("unused")
     public static void loadPlugins() {
         CoreEvents.registerApplicationEventListener(new IApplicationEventListener() {
@@ -77,16 +80,16 @@ public final class TipOfTheDayController {
             }
 
             private void initMenu() {
-                JMenuItem totdMenu = new JMenuItem();
                 totdMenu.setText(UIManager.getDefaults().getString("TipOfTheDay.menuItemText"));
                 totdMenu.setToolTipText(UIManager.getDefaults().getString("TipOfTheDay.menuToolTipText"));
-                // force to show Tip of the Day dialog.
+                // show Tip of the Day dialog on startup.
                 totdMenu.addActionListener(actionEvent -> TipOfTheDayController.start(true));
                 MenuExtender.addMenuItem(MenuKey.HELP, totdMenu);
             }
 
             @Override
             public void onApplicationShutdown() {
+                MenuExtender.removeMenuItems(MenuKey.HELP, Collections.singletonList(totdMenu));
             }
         });
     }

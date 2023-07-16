@@ -127,6 +127,9 @@
   - Lucene 5.2 does not work under WebStart
   https://sourceforge.net/p/omegat/bugs/813/
 
+  - Incorrect display of RTL segments in the Fuzzy Matches pane
+  https://sourceforge.net/p/omegat/bugs/558/
+
 ----------------------------------------------------------------------
  OmegaT 6.0.0 (2023-06-19)
 ----------------------------------------------------------------------

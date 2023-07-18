@@ -153,8 +153,17 @@ public final class VersionChecker {
         return compare(getVersionNumbers(version1, update1), getVersionNumbers(version2, update2));
     }
 
+    public static int compareMinorVersions(String version1, String version2) {
+        List<Integer> l1 = getVersionNumbers(version1, "0");
+        List<Integer> l2 = getVersionNumbers(version2, "0");
+        return compare(l1.subList(0, Math.min(l1.size(), 2)), l2.subList(0, Math.min(l2.size(), 2)));
+    }
+
     private static List<Integer> getVersionNumbers(String version, String update) {
         List<Integer> result = new ArrayList<>();
+        if (version == null) {
+            return result;
+        }
         for (String n : version.split("\\.")) {
             result.add(Integer.parseInt(n));
         }

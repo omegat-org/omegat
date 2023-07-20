@@ -173,6 +173,9 @@ dependencies {
         // Credentials encryption
         implementation 'org.jasypt:jasypt:1.9.3'
 
+        // Capstan 5.7.2
+        implementation 'org.json:json:20230618'
+
         // Groovy used for scripts - needed at implementation for GroovyClassLoader modifications
         // Ivy is needed to handle Grape/@Grab dependencies
         runtimeOnly('org.codehaus.groovy:groovy-all:3.0.7@pom') {

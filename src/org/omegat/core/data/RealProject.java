@@ -45,8 +45,10 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -379,9 +381,9 @@ public class RealProject implements IProject {
             // build word count
             StatsResult stat = CalcStandardStatistics.buildProjectStats(this);
             stat.updateStatisticsInfo(hotStat);
-            String fn = config.getProjectInternal() + OConsts.STATS_FILENAME;
-            Statistics.writeStat(fn, stat.getTextData(config));
-
+            String timestamp = DateFormat.getInstance().format(new Date());
+            Statistics.writeStat(config.getProjectInternal() + OConsts.STATS_FILENAME, timestamp + "\n" + stat.getTextData(config));
+            Statistics.writeStat(config.getProjectInternal() + OConsts.STATS_FILENAME_JSON, stat.getJsonData(config));
             loaded = true;
 
             // Project Loaded...
@@ -798,8 +800,9 @@ public class RealProject implements IProject {
                 // update statistics
                 StatsResult stat = CalcStandardStatistics.buildProjectStats(this);
                 stat.updateStatisticsInfo(hotStat);
-                String fn = config.getProjectInternal() + OConsts.STATS_FILENAME;
-                Statistics.writeStat(fn, stat.getTextData(config));
+                String timestamp = DateFormat.getInstance().format(new Date());
+                Statistics.writeStat(config.getProjectInternal() + OConsts.STATS_FILENAME, timestamp + "\n" + stat.getTextData(config));
+                Statistics.writeStat(config.getProjectInternal() + OConsts.STATS_FILENAME_JSON, stat.getJsonData(config));
             } finally {
                 Core.getMainWindow().getMainMenu().getProjectMenu().setEnabled(true);
             }

@@ -128,7 +128,6 @@ public final class Statistics {
     public static void writeStat(String filename, String text) {
         try (OutputStreamWriter out = new OutputStreamWriter(new FileOutputStream(filename),
                 StandardCharsets.UTF_8)) {
-            out.write(DateFormat.getInstance().format(new Date()) + "\n");
             out.write(text);
         } catch (Exception ex) {
             Log.log(ex);

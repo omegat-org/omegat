@@ -211,13 +211,9 @@ dependencies {
         }
         // Explicitly specify guava dependency for `jre` version rather than `-android`
         implementation 'com.google.guava:guava:31.0.1-jre'
-        runtimeOnly("org.languagetool:language-all:${languageToolVersion}") {
-            // Temporary exclusion; see https://sourceforge.net/p/omegat/bugs/814/
-            exclude module: 'lucene-gosen'
-        }
-        // alternative use of v5.0.0
-        runtimeOnly 'org.omegat.lucene:lucene-gosen:5.0.0'
-        runtimeOnly 'org.omegat.lucene:lucene-gosen:5.0.0:ipadic'
+        runtimeOnly("org.languagetool:language-all:${languageToolVersion}")
+        // see discussion on https://sourceforge.net/p/omegat/bugs/814/
+        // about a dependency issue on language-ja
 
         // Lucene for tokenizers
         implementation "org.apache.lucene:lucene-core:${luceneVersion}"

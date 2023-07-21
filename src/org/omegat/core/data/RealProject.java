@@ -382,8 +382,9 @@ public class RealProject implements IProject {
             StatsResult stat = CalcStandardStatistics.buildProjectStats(this);
             stat.updateStatisticsInfo(hotStat);
             String timestamp = DateFormat.getInstance().format(new Date());
-            Statistics.writeStat(config.getProjectInternal() + OConsts.STATS_FILENAME, timestamp + "\n" + stat.getTextData(config));
-            Statistics.writeStat(config.getProjectInternal() + OConsts.STATS_FILENAME_JSON, stat.getJsonData(config));
+            String statsTextFilename = config.getProjectInternal() + OConsts.STATS_FILENAME;
+            Statistics.writeStat(statsTextFilename, timestamp + "\n" + stat.getTextData(config));
+            Statistics.writeStat(statsTextFilename.replace(".txt", ".json"), stat.getJsonData(config));
             loaded = true;
 
             // Project Loaded...
@@ -661,12 +662,28 @@ public class RealProject implements IProject {
         if (remoteRepositoryProvider != null && config.getTargetDir().isUnderRoot() && commitTargetFiles && isOnlineMode) {
             tmxPrepared = null;
             glossaryPrepared = null;
-            // commit translations
+
+            // Ticket 1690 - build project statistics files
+            // so that contents of these files is up to date with target files sent at same moment
+            StatsResult stat = CalcStandardStatistics.buildProjectStats(this);
+            stat.updateStatisticsInfo(hotStat);
+            String statsTextFilename = config.getProjectInternal() + OConsts.STATS_FILENAME;
+            Statistics.writeStat(statsTextFilename, stat.getTextData(config));
+            Statistics.writeStat(statsTextFilename.replace(".txt",".json"), stat.getJsonData(config));
+
             try {
                 Core.getMainWindow().showStatusMessageRB("TF_COMMIT_TARGET_START");
                 remoteRepositoryProvider.switchAllToLatest();
                 remoteRepositoryProvider.copyFilesFromProjectToRepos(config.getTargetDir().getUnderRoot(), null);
                 remoteRepositoryProvider.commitFiles(config.getTargetDir().getUnderRoot(), "Project translation");
+
+                // Convert stats file name to relative
+                ProjectProperties.ProjectPath path = config.new ProjectPath(true);
+                path.setRelativeOrAbsolute(statsTextFilename);
+                statsTextFilename = path.getUnderRoot();
+                remoteRepositoryProvider.copyFilesFromProjectToRepos(statsTextFilename, null);
+                remoteRepositoryProvider.copyFilesFromProjectToRepos(statsTextFilename.replace(".txt",".json"), null);
+
                 Core.getMainWindow().showStatusMessageRB("TF_COMMIT_TARGET_DONE");
             } catch (Exception e) {
                 Log.logErrorRB("TF_COMMIT_TARGET_ERROR");
@@ -801,8 +818,9 @@ public class RealProject implements IProject {
                 StatsResult stat = CalcStandardStatistics.buildProjectStats(this);
                 stat.updateStatisticsInfo(hotStat);
                 String timestamp = DateFormat.getInstance().format(new Date());
-                Statistics.writeStat(config.getProjectInternal() + OConsts.STATS_FILENAME, timestamp + "\n" + stat.getTextData(config));
-                Statistics.writeStat(config.getProjectInternal() + OConsts.STATS_FILENAME_JSON, stat.getJsonData(config));
+                String statsTextFilename = config.getProjectInternal() + OConsts.STATS_FILENAME;
+                Statistics.writeStat(statsTextFilename, timestamp + "\n" + stat.getTextData(config));
+                Statistics.writeStat(statsTextFilename.replace(".txt", ".json"), stat.getJsonData(config));
             } finally {
                 Core.getMainWindow().getMainMenu().getProjectMenu().setEnabled(true);
             }

@@ -123,7 +123,6 @@ public final class OConsts {
      * count.
      */
     public static final String STATS_FILENAME = "project_stats.txt";
-    public static final String STATS_FILENAME_JSON = "project_stats.json";
 
     /** The name of the file with project match statistics. */
     public static final String STATS_MATCH_FILENAME = "project_stats_match.txt";

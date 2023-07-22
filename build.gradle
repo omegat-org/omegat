@@ -141,7 +141,8 @@ sourceSets {
 
 repositories {
     mavenCentral()
-    maven { url "https://s01.oss.sonatype.org/content/repositories/snapshots" }
+    mavenLocal()
+    // maven { url "https://s01.oss.sonatype.org/content/repositories/snapshots" }
 }
 
 configurations {
@@ -155,6 +156,7 @@ ext {
     providedLibsDir = file('lib/provided')
     languageToolVersion = '6.1'
     luceneVersion = '5.5.5'
+    luceneGosenVersion = '5.5.5-SNAPSHOT'
     jgitVersion = '6.6.0.202305301015-r'
 }
 
@@ -216,7 +218,7 @@ dependencies {
             // Temporary exclusion; see https://sourceforge.net/p/omegat/bugs/814/
             exclude module: 'lucene-gosen-ipadic'
         }
-        runtimeOnly "org.omegat.lucene:lucene-gosen-ipadic:${luceneVersion}-SNAPSHOT"
+        runtimeOnly "org.omegat.lucene:lucene-gosen-ipadic:${luceneGosenVersion}"
 
         // Lucene for tokenizers
         implementation "org.apache.lucene:lucene-core:${luceneVersion}"
@@ -306,6 +308,11 @@ dependencies {
     ['be', 'en', 'fr'].each {
         testImplementation "org.languagetool:language-${it}:${languageToolVersion}"
     }
+    testImplementation("org.languagetool:language-ja:${languageToolVersion}") {
+        // Temporary exclusion; see https://sourceforge.net/p/omegat/bugs/814/
+        exclude module: 'lucene-gosen-ipadic'
+    }
+    testRuntimeOnly "org.omegat.lucene:lucene-gosen-ipadic:${luceneGosenVersion}"
     testRuntimeOnly "org.languagetool:language-pl:${languageToolVersion}"
     testRuntimeOnly "org.slf4j:slf4j-jdk14:1.7.32"
 

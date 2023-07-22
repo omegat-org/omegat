@@ -656,6 +656,12 @@ public class RealProject implements IProject {
                 numberOfCompiled++;
             }
         }
+
+        // COMPILE event is fired before committing translated files to remote
+        // repository to be able to modify the resulting files before sending them to
+        // the repository (BUGS#1176)
+        CoreEvents.fireProjectChange(IProjectEventListener.PROJECT_CHANGE_TYPE.COMPILE);
+
         if (remoteRepositoryProvider != null && config.getTargetDir().isUnderRoot() && commitTargetFiles && isOnlineMode) {
             tmxPrepared = null;
             glossaryPrepared = null;
@@ -679,8 +685,6 @@ public class RealProject implements IProject {
         } else {
             Core.getMainWindow().showStatusMessageRB("CT_COMPILE_DONE_MX");
         }
-
-        CoreEvents.fireProjectChange(IProjectEventListener.PROJECT_CHANGE_TYPE.COMPILE);
 
         if (doPostProcessing) {
 

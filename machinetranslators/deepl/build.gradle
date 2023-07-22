@@ -8,10 +8,10 @@ plugins {
 
 repositories {
     mavenCentral()
+    maven { url "https://s01.oss.sonatype.org/content/repositories/snapshots" }
 }
 
 dependencies {
-    compileOnly(project.rootProject)
     // Libs are provided in the "source" distribution only
     if (providedLibsDir.directory) {
         compileOnly fileTree(dir: providedLibsDir, include: '**/*.jar')

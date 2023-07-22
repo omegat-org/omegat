@@ -141,6 +141,7 @@ sourceSets {
 
 repositories {
     mavenCentral()
+    maven { url "https://s01.oss.sonatype.org/content/repositories/snapshots" }
 }
 
 configurations {
@@ -215,7 +216,7 @@ dependencies {
             // Temporary exclusion; see https://sourceforge.net/p/omegat/bugs/814/
             exclude module: 'lucene-gosen-ipadic'
         }
-        runtimeOnly 'org.omegat.lucene:lucene-gosen:5.0.0:ipadic'
+        runtimeOnly "org.omegat.lucene:lucene-gosen-ipadic:${luceneVersion}-SNAPSHOT"
 
         // Lucene for tokenizers
         implementation "org.apache.lucene:lucene-core:${luceneVersion}"

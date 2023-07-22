@@ -14,7 +14,6 @@ plugins {
     id 'org.hidetake.ssh' version '2.10.1'
     id 'com.diffplug.spotless' version '6.0.0'
     id 'com.github.ben-manes.versions' version '0.39.0'
-    id 'ru.vyarus.mkdocs' version '3.0.0'
     id 'edu.sc.seis.launch4j' version '3.0.3'
 }
 
@@ -1279,11 +1278,6 @@ task publishVersion {
     }
 }
 
-python.docker.use = true
-mkdocs {
-    sourcesDir = 'docs_devel'
-}
-
 tasks.withType(JavaExec).configureEach {
     // Allow setting the max heap size for the run task from the command line, e.g.
     // `gradle -PrunMaxHeapSize=1024M run`
@@ -1296,6 +1290,12 @@ task printVersion {
     println project.version
 }
 
+tasks.withType(Copy).configureEach {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+tasks.withType(Sync).configureEach {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
 tasks.withType(Zip).configureEach {
     duplicatesStrategy = DuplicatesStrategy.INCLUDE
 }

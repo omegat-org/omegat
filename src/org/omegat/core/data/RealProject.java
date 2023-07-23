@@ -45,8 +45,10 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -379,9 +381,10 @@ public class RealProject implements IProject {
             // build word count
             StatsResult stat = CalcStandardStatistics.buildProjectStats(this);
             stat.updateStatisticsInfo(hotStat);
-            String fn = config.getProjectInternal() + OConsts.STATS_FILENAME;
-            Statistics.writeStat(fn, stat.getTextData(config));
-
+            String timestamp = DateFormat.getInstance().format(new Date());
+            String statsTextFilename = config.getProjectInternal() + OConsts.STATS_FILENAME;
+            Statistics.writeStat(statsTextFilename, timestamp + "\n" + stat.getTextData(config));
+            Statistics.writeStat(statsTextFilename.replace(".txt", ".json"), stat.getJsonData(config));
             loaded = true;
 
             // Project Loaded...
@@ -659,12 +662,28 @@ public class RealProject implements IProject {
         if (remoteRepositoryProvider != null && config.getTargetDir().isUnderRoot() && commitTargetFiles && isOnlineMode) {
             tmxPrepared = null;
             glossaryPrepared = null;
-            // commit translations
+
+            // Ticket 1690 - build project statistics files
+            // so that contents of these files is up to date with target files sent at same moment
+            StatsResult stat = CalcStandardStatistics.buildProjectStats(this);
+            stat.updateStatisticsInfo(hotStat);
+            String statsTextFilename = config.getProjectInternal() + OConsts.STATS_FILENAME;
+            Statistics.writeStat(statsTextFilename, stat.getTextData(config));
+            Statistics.writeStat(statsTextFilename.replace(".txt",".json"), stat.getJsonData(config));
+
             try {
                 Core.getMainWindow().showStatusMessageRB("TF_COMMIT_TARGET_START");
                 remoteRepositoryProvider.switchAllToLatest();
                 remoteRepositoryProvider.copyFilesFromProjectToRepos(config.getTargetDir().getUnderRoot(), null);
                 remoteRepositoryProvider.commitFiles(config.getTargetDir().getUnderRoot(), "Project translation");
+
+                // Convert stats file name to relative
+                ProjectProperties.ProjectPath path = config.new ProjectPath(true);
+                path.setRelativeOrAbsolute(statsTextFilename);
+                statsTextFilename = path.getUnderRoot();
+                remoteRepositoryProvider.copyFilesFromProjectToRepos(statsTextFilename, null);
+                remoteRepositoryProvider.copyFilesFromProjectToRepos(statsTextFilename.replace(".txt",".json"), null);
+
                 Core.getMainWindow().showStatusMessageRB("TF_COMMIT_TARGET_DONE");
             } catch (Exception e) {
                 Log.logErrorRB("TF_COMMIT_TARGET_ERROR");
@@ -798,8 +817,10 @@ public class RealProject implements IProject {
                 // update statistics
                 StatsResult stat = CalcStandardStatistics.buildProjectStats(this);
                 stat.updateStatisticsInfo(hotStat);
-                String fn = config.getProjectInternal() + OConsts.STATS_FILENAME;
-                Statistics.writeStat(fn, stat.getTextData(config));
+                String timestamp = DateFormat.getInstance().format(new Date());
+                String statsTextFilename = config.getProjectInternal() + OConsts.STATS_FILENAME;
+                Statistics.writeStat(statsTextFilename, timestamp + "\n" + stat.getTextData(config));
+                Statistics.writeStat(statsTextFilename.replace(".txt", ".json"), stat.getJsonData(config));
             } finally {
                 Core.getMainWindow().getMainMenu().getProjectMenu().setEnabled(true);
             }
@@ -963,6 +984,11 @@ public class RealProject implements IProject {
                         public void rebaseAndSave(File out) throws Exception {
                             mergeTMX(baseTMX, headTMX, commitDetails);
                             projectTMX.exportTMX(config, out, false, false, true);
+                            
+                            ProjectTMX newTMX = new ProjectTMX(config.getSourceLanguage(),
+                                    config.getTargetLanguage(), config.isSentenceSegmentingEnabled(), new File(
+                                            config.getProjectInternalDir(), OConsts.STATUS_EXTENSION), null);
+                            projectTMX.replaceContent(newTMX);
                         }
 
                         @Override
@@ -975,13 +1001,6 @@ public class RealProject implements IProject {
                             return TMXReader2.detectCharset(file);
                         }
                     });
-            if (projectTMX != null) {
-                // it can be not loaded yet
-                ProjectTMX newTMX = new ProjectTMX(config.getSourceLanguage(),
-                        config.getTargetLanguage(), config.isSentenceSegmentingEnabled(), new File(
-                                config.getProjectInternalDir(), OConsts.STATUS_EXTENSION), null);
-                projectTMX.replaceContent(newTMX);
-            }
         }
 
         if (processGlossary) {

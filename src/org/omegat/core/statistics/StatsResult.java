@@ -29,8 +29,13 @@
 
 package org.omegat.core.statistics;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.util.OStrings;
@@ -188,4 +193,48 @@ public class StatsResult {
         }
         return table;
     }
+    
+
+    /** Since we don't have a Jackson mapper in 5.7.2, we do the JSON conversion manually */
+    public String getJsonData(final ProjectProperties config) {
+        JSONObject jso = new JSONObject();
+        jso.put("total", statCountToJson(total));
+        jso.put("remaining", statCountToJson(remaining));
+        jso.put("unique", statCountToJson(unique));
+        jso.put("unique-remaining", statCountToJson(remainingUnique));
+
+        JSONObject jsoProject = new JSONObject();
+        jsoProject.put("name", config.getProjectName());
+        jsoProject.put("root", config.getProjectRoot());
+        jsoProject.put("source-language", config.getSourceLanguage());
+        jsoProject.put("target-language", config.getTargetLanguage());
+        jso.put("project", jsoProject);
+
+        jso.put("date", new SimpleDateFormat("yyyyMMdd'T'HHmmss'Z'").format(new Date()));
+
+        JSONArray jsaFiles = new JSONArray();
+
+        for (FileData fileStat : counts) {
+            JSONObject jsoFile = new JSONObject();
+            jsoFile.put("filename", StaticUtils.makeFilenameRelative(fileStat.filename, config.getSourceRoot()));
+            jsoFile.put("total", statCountToJson(fileStat.total));
+            jsoFile.put("remaining", statCountToJson(fileStat.remaining));
+            jsoFile.put("unique", statCountToJson(fileStat.unique));
+            jsoFile.put("unique-remaining", statCountToJson(fileStat.remainingUnique));
+            jsaFiles.put(jsoFile);
+        }
+        jso.put("files", jsaFiles);
+        return jso.toString(2);
+    }
+
+    private JSONObject statCountToJson(StatCount statCount) {
+        JSONObject jso = new JSONObject();
+        jso.put("segments", statCount.segments);
+        jso.put("words", statCount.words);
+        jso.put("characters-without-spaces", statCount.charsWithoutSpaces);
+        jso.put("characters", statCount.charsWithSpaces);
+        jso.put("files", statCount.files);
+        return jso;
+    }
+
 }

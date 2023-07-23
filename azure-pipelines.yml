@@ -46,7 +46,6 @@ stages:
     displayName: CI Check for master, releases/* and Pull-Requests
     pool:
       vmImage: 'ubuntu-22.04'
-    condition:
     steps:
       - template: ci/azure-pipelines/check_steps.yml
 

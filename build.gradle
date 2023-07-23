@@ -107,6 +107,20 @@ allprojects {
             removeUnusedImports()
         }
     }
+
+    repositories {
+        mavenCentral()
+        mavenLocal()
+        maven { url "https://s01.oss.sonatype.org/content/repositories/snapshots" }
+    }
+}
+
+subprojects {
+    // All subproject dpenends on main project.
+    dependencies {
+        compileOnly(project.rootProject)
+        testImplementation(testFixtures(project.rootProject))
+    }
 }
 
 sourceSets {
@@ -137,12 +151,6 @@ sourceSets {
             srcDir 'test-integration/src'
         }
     }
-}
-
-repositories {
-    mavenCentral()
-    mavenLocal()
-    maven { url "https://s01.oss.sonatype.org/content/repositories/snapshots" }
 }
 
 configurations {

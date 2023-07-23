@@ -457,18 +457,12 @@ manualIndexXmls.each { xml ->
         }
     }
 
-    def propTaskName = "manualProp${lang.capitalize()}"
-    task(type: Sync, propTaskName) {
-        from fileTree(dir: "doc_src/${lang}", include: "**/version*.properties")
-        into file("docs/${lang}/")
-    }
-    manualHtmls.dependsOn propTaskName
-
     def zipTaskName="manualZip${lang.capitalize()}"
     task(type:Zip, zipTaskName) {
         from file("${buildDir}/docs/manual/${lang}")
+        from fileTree(dir: "doc_src/${lang}", include: "**/version*.properties")
         archiveFileName="${lang}.zip"
-        destinationDir file('docs') 
+        destinationDir file('docs/manuals')
     }
     manualHtmls.dependsOn zipTaskName
     tasks.getByName(zipTaskName).dependsOn htmlTaskName
@@ -495,9 +489,9 @@ firstStepsXmls.each { xml ->
     def taskName = "firstSteps${lang.capitalize()}"
     task(type: Exec, taskName) {
         inputs.files fileTree(dir: "doc_src/${lang}", include: 'First_Steps.xml')
-        outputs.files fileTree(dir: 'docs', includes: ["${lang}/first_steps.html", "${lang}/OmegaT.css"])
+        outputs.files fileTree(dir: 'docs', includes: ["greetings/${lang}/first_steps.html", "greetings/${lang}/OmegaT.css"])
         workingDir = 'doc_src'
-        commandLine './docgen', "-Dlanguage=${lang}", "-Dtarget=../docs/${lang}", 'first-steps'
+        commandLine './docgen', "-Dlanguage=${lang}", "-Dtarget=../docs/greetings/${lang}", 'first-steps'
         doLast {
             delete file("docs/${lang}/xhtml5")
             delete file("docs/${lang}/images")
@@ -513,9 +507,10 @@ instantStartXmls.each { xml ->
     task(type: Exec, taskName) {
         inputs.files fileTree(dir: "doc_src/${lang}", include: '**/*.xml')
         outputs.files fileTree(dir: "docs",
-                includes: ["${lang}/first_steps.html", "${lang}/images/InstantGuide*png", "${lang}/OmegaT.css"])
+                includes: ["greetings/${lang}/first_steps.html", "greetings/${lang}/images/InstantGuide*png",
+                           "greetings/${lang}/OmegaT.css"])
         workingDir = 'doc_src'
-        commandLine './docgen', "-Dlanguage=${lang}", "-Dtarget=../docs/${lang}", 'instant-start'
+        commandLine './docgen', "-Dlanguage=${lang}", "-Dtarget=../docs/greetings/${lang}", 'instant-start'
         doLast {
             delete file("docs/${lang}/xhtml5")
         }
@@ -526,22 +521,28 @@ instantStartXmls.each { xml ->
 distributions {
     main {
         contents {
+            // docs targets
+            // /docs
+            // ...../greetings/<lang>/first_steps.html
+            // ...../manuals/<lang>.zip
             from('release') {
                 into 'docs'
-                include 'changes.txt', 'doc-license.txt', 'OmegaT-license.txt', 'contributors.txt', 'libraries.txt'
+                include 'changes.txt', 'contributors.txt', 'libraries.txt', 'readme*.txt'
                 filter(FixCrLfFilter, eol: FixCrLfFilter.CrLf.newInstance('crlf'))
             }
             from('release') {
-                into 'docs'
-                exclude 'contributors.txt', 'libraries.txt', 'changes.txt', 'doc-license.txt', 'OmegaT-license.txt'
+                exclude 'changes.txt', 'contributors.txt', 'libraries.txt', 'readme*.txt'
                 include '*.txt', '*.html'
                 filter(ReplaceTokens, tokens: [
                         TRANSLATION_NOTICE: ''
                 ])
                 filter(FixCrLfFilter, eol: FixCrLfFilter.CrLf.newInstance('crlf'))
             }
-            project.tasks.matching {it.name.startsWith('manualZip') || it.name.startsWith('firstSteps') || it.name.startsWith('instantStart')}.forEach {
+            project.tasks.matching {it.name.startsWith('firstSteps') || it.name.startsWith('instantStart')}.forEach {
                 from(it.outputs) { into 'docs' }
+            }
+            project.tasks.matching {it.name.startsWith('manualZip')}.forEach {
+                from(it.outputs) { into 'docs/manuals' }
             }
             from('docs') {
                 into 'docs'

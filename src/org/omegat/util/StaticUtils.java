@@ -151,9 +151,9 @@ public final class StaticUtils {
                     File uriFile = Paths.get(sourceUri).toFile();
                     // If running from a JAR, get the enclosing folder
                     // (the JAR is assumed to be at the installation root,
-                    //  and there is also "readme.txt" file).
+                    //  and there is also "join.html" file).
                     if (uriFile.getName().endsWith(".jar") && new File(uriFile.getParentFile(),
-                            "readme.txt").exists()) {
+                            "join.html").exists()) {
                         file = uriFile.getParentFile();
                     } else {
                         // Running from an IDE or build tool; use CWD.

@@ -105,7 +105,7 @@ public final class Help {
         if (lang == null) {
             return null;
         }
-        File zipFile = Paths.get(StaticUtils.installDir(), OConsts.HELP_DIR, lang + ".zip").toFile();
+        File zipFile = Paths.get(StaticUtils.installDir(), OConsts.HELP_DIR, OConsts.HELP_MANUALS,  lang + ".zip").toFile();
         if (!zipFile.isFile()) {
             return null;
         }
@@ -158,15 +158,29 @@ public final class Help {
     }
 
     public static URI getHelpFileURI(String lang, String filename) {
+        return getHelpFileURI(null, lang, filename);
+    }
+
+    public static URI getHelpFileURI(String prefix, String lang, String filename) {
         // find in install dir
         String path = lang == null ? filename : lang + File.separator + filename;
-        File file = Paths.get(StaticUtils.installDir(), OConsts.HELP_DIR, path).toFile();
+        File file;
+        if (prefix != null) {
+            file = Paths.get(StaticUtils.installDir(), OConsts.HELP_DIR, prefix,  path).toFile();
+        } else {
+            file = Paths.get(StaticUtils.installDir(), OConsts.HELP_DIR, path).toFile();
+        }
         if (file.isFile()) {
             return file.toURI();
         }
         // find in classpath
         path = lang == null ? filename : lang + '/' + filename;
-        URL url = Help.class.getResource('/' + OConsts.HELP_DIR + '/' + path);
+        URL url;
+        if (prefix != null) {
+            url = Help.class.getResource('/' + OConsts.HELP_DIR + '/' + prefix + '/' + path);
+        } else {
+            url = Help.class.getResource('/' + OConsts.HELP_DIR + '/' + path);
+        }
         if (url != null) {
             try {
                 return url.toURI();

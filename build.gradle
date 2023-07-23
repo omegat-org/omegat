@@ -777,7 +777,7 @@ ext.makeWinTask = { args ->
             project.copy {
                 from 'build'
                 into 'build'
-                include 'innosetup/**/*'
+                include "innosetup/${args.name}/**/*"
                 dirMode 0777
                 fileMode 0666
             }

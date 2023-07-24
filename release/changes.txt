@@ -61,6 +61,9 @@
 
   Bug fixes:
 
+  - Integration test(docker) failure with 503
+  https://sourceforge.net/p/omegat/bugs/1199/
+
   - Content of notes elements are not displayed correctly with Xliff filter
   https://sourceforge.net/p/omegat/bugs/1192/
 

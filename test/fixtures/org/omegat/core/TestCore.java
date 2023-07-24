@@ -34,6 +34,7 @@ import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
 import com.github.tomakehurst.wiremock.junit.WireMockRule;
@@ -53,7 +54,9 @@ import org.omegat.gui.editor.autocompleter.IAutoCompleter;
 import org.omegat.gui.editor.mark.Mark;
 import org.omegat.gui.main.IMainMenu;
 import org.omegat.gui.main.IMainWindow;
+import org.omegat.util.Platform;
 import org.omegat.util.TestPreferencesInitializer;
+import org.omegat.util.gui.MenuExtender;
 
 import com.vlsolutions.swing.docking.Dockable;
 import com.vlsolutions.swing.docking.DockingDesktop;
@@ -72,33 +75,151 @@ public abstract class TestCore {
         TestPreferencesInitializer.init(configDir.getAbsolutePath());
 
         final IMainMenu mainMenu = new IMainMenu() {
+            private final JMenu projectMenu = new JMenu("Project");
+            private final JMenu toolsMenu = new JMenu("Tools");
+            private final JMenu gotoMenu = new JMenu("Goto");
+            private final JMenu optionsMenu = new JMenu("Options");
+            private final JMenu helpMenu = new JMenu("Help");
+            private final JMenu machineTranslationMenu = new JMenu("MachineTranslate");
+            private final JMenu glossaryMenu = new JMenu("Glossary");
+            private final JMenu autoCompleteMenu = new JMenu("AutoComplete");
+
             public JMenu getToolsMenu() {
-                return new JMenu();
+                if (toolsMenu.getItemCount() == 0) {
+                    toolsMenu.add(new JMenuItem("toolsCheckIssuesMenuItem"));
+                    toolsMenu.add(new JMenuItem("toolsCheckIssuesCurrentFileMenuItem"));
+                    toolsMenu.add(new JMenuItem("toolsShowStatisticsStandardMenuItem"));
+                    toolsMenu.add(new JMenuItem("toolsShowStatisticsMatchesMenuItem"));
+                    toolsMenu.add(new JMenuItem("toolsShowStatisticsMatchesPerFileMenuItem"));
+                    toolsMenu.addSeparator();
+                    toolsMenu.add(new JMenuItem("toolsAlignFilesMenuItem"));
+                }
+                return toolsMenu;
             }
 
             public JMenu getProjectMenu() {
-                return new JMenu();
+                if (projectMenu.getItemCount() == 0) {
+                    projectMenu.add(new JMenuItem("New"));
+                    projectMenu.add(new JMenuItem("TeamNew"));
+                    projectMenu.add(new JMenuItem("Open"));
+                    projectMenu.add(new JMenuItem("OpenRecent"));
+                    projectMenu.add(new JMenuItem("Reload"));
+                    projectMenu.add(new JMenuItem("Close"));
+                    projectMenu.addSeparator();
+                    projectMenu.add(new JMenuItem("Save"));
+                    projectMenu.addSeparator();
+                    projectMenu.add(new JMenuItem("Import"));
+                    projectMenu.add(new JMenuItem("WikiImport"));
+                    projectMenu.addSeparator();
+                    projectMenu.add(new JMenuItem("CommitSource"));
+                    projectMenu.add(new JMenuItem("CommitTarget"));
+                    projectMenu.addSeparator();
+                    projectMenu.add(new JMenuItem("Compile"));
+                    projectMenu.add(new JMenuItem("SingleCompile"));
+                    projectMenu.addSeparator();
+                    projectMenu.add(new JMenuItem("MedOpen"));
+                    projectMenu.add(new JMenuItem("MedCreate"));
+                    projectMenu.addSeparator();
+                    projectMenu.add(new JMenuItem("ProjectEdit"));
+                    projectMenu.add(new JMenuItem("ViewFIleList"));
+                    projectMenu.add(new JMenuItem("AccessProjectFiles"));
+                    projectMenu.addSeparator();
+                    projectMenu.add(new JMenuItem("Restart"));
+                    // all except MacOSX
+                    if (!Platform.isMacOSX()) {
+                        projectMenu.add(new JMenuItem("Exit"));
+                    }
+                }
+                return projectMenu;
             }
 
             public JMenu getOptionsMenu() {
-                return new JMenu();
+                if (optionsMenu.getItemCount() == 0) {
+                    if (!Platform.isMacOSX()) {
+                        optionsMenu.add("Preference");
+                        optionsMenu.addSeparator();
+                    }
+                    optionsMenu.add(machineTranslationMenu);
+                    optionsMenu.add(glossaryMenu);
+                    optionsMenu.add(new JMenuItem("Dictionary"));
+                    optionsMenu.add(autoCompleteMenu);
+                    optionsMenu.addSeparator();
+                    optionsMenu.add(new JMenuItem("SetupFileFilters"));
+                    optionsMenu.add(new JMenuItem("Sentseg"));
+                    optionsMenu.add(new JMenuItem("Workflow"));
+                    optionsMenu.addSeparator();
+                    optionsMenu.add(new JMenuItem("AccessConfigDir"));
+                    optionsMenu.addSeparator();
+                }
+                return optionsMenu;
             }
 
             public JMenu getMachineTranslationMenu() {
-                return new JMenu();
+                return machineTranslationMenu;
             }
 
             public JMenu getGlossaryMenu() {
-                return new JMenu();
+                return glossaryMenu;
             }
 
             public JMenu getAutoCompletionMenu() {
-                return new JMenu();
+                return autoCompleteMenu;
             }
 
             @Override
             public JMenu getHelpMenu() {
-                return new JMenu();
+                if (helpMenu.getItemCount() == 0) {
+                    helpMenu.add(new JMenuItem("User manual"));
+                    helpMenu.add(new JMenuItem("About"));
+                    helpMenu.addSeparator();
+                    helpMenu.add(new JMenuItem("item 3"));
+                }
+                return helpMenu;
+            }
+
+            @Override
+            public JMenu getMenu(final MenuExtender.MenuKey marker) {
+                switch (marker) {
+                case PROJECT:
+                    return getProjectMenu();
+                case HELP:
+                    return getHelpMenu();
+                case OPTIONS:
+                    return getOptionsMenu();
+                case GOTO:
+                    return getGotoMenu();
+                case TOOLS:
+                    return getToolsMenu();
+                case EDIT:
+                    return new JMenu();
+                case VIEW:
+                    return new JMenu();
+                default:
+                    return new JMenu();
+                }
+            }
+
+            private JMenu getGotoMenu() {
+                if (gotoMenu.getItemCount() == 0) {
+                    gotoMenu.add(new JMenuItem("gotoNextUntranslatedMenuItem"));
+                    gotoMenu.add(new JMenuItem("gotoNextTranslatedMenuItem"));
+                    gotoMenu.add(new JMenuItem("gotoNextSegmentMenuItem"));
+                    gotoMenu.add(new JMenuItem("gotoPreviousSegmentMenuItem"));
+                    gotoMenu.add(new JMenuItem("gotoSegmentMenuItem"));
+                    gotoMenu.add(new JMenuItem("gotoNextNoteMenuItem"));
+                    gotoMenu.add(new JMenuItem("gotoPreviousNoteMenuItem"));
+                    gotoMenu.add(new JMenuItem("gotoNextUniqueMenuItem"));
+                    gotoMenu.add(new JMenuItem("gotoMatchSourceSegment"));
+                    gotoMenu.addSeparator();
+                    gotoMenu.add(new JMenu("gotoXEntrySubmenu"));
+                    gotoMenu.addSeparator();
+                    gotoMenu.add(new JMenuItem("gotoHistoryBackMenuItem"));
+                    gotoMenu.add(new JMenuItem("gotoHistoryForwardMenuItem"));
+                    gotoMenu.addSeparator();
+                    gotoMenu.add(new JMenuItem("gotoNotesPanelMenuItem"));
+                    gotoMenu.add(new JMenuItem("gotoEditorPanelMenuItem"));
+                }
+                return gotoMenu;
             }
 
             public void invokeAction(String action, int modifiers) {
@@ -560,9 +681,10 @@ public abstract class TestCore {
             }
         });
     }
+
     @Rule
-    public WireMockRule wireMockRule =
-            new WireMockRule(WireMockConfiguration.wireMockConfig().dynamicPort().dynamicHttpsPort());
+    public WireMockRule wireMockRule = new WireMockRule(
+            WireMockConfiguration.wireMockConfig().dynamicPort().dynamicHttpsPort());
 
     @After
     public final void tearDownCore() throws Exception {

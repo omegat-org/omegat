@@ -84,14 +84,16 @@
 			id="dialogs.preferences.mt.automatically.fetch.translations.title"><option>Automatically
         fetch translations</option></term>
 
-        <listitem>
-          <para>If you disable this option, machine translations will only be
-          fetched when you use <link linkend="menus.edit"
-          endterm="menus.edit.title"/><link linkend="menus.edit.replace.with.mt"
-          endterm="menus.edit.replace.with.mt.title"/> in the current
-          segment. You will then have to press that combination again to insert
-          the suggestion.</para>
-        </listitem>
+				<listitem>
+					<para>Enable this option to automatically fetch machine translations from
+						the providers you have enabled and configured. If you leave this option
+						disabled, machine translations are only fetched when you use <link
+						linkend="menus.edit" endterm="menus.edit.title"/>
+						<link linkend="menus.edit.replace.with.mt"
+						endterm="menus.edit.replace.with.mt.title"/> in the current
+						segment. You then have to press that combination again to insert
+						the suggestion.</para>
+				</listitem>
       </varlistentry>
 
       <varlistentry id="dialogs.preferences.mt.untranslated.segments.only">

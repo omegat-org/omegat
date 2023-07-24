@@ -44,7 +44,9 @@ import java.io.File;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -76,6 +78,7 @@ import org.omegat.util.Preferences;
 import org.omegat.util.RecentProjects;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
+import org.omegat.util.gui.MenuExtender;
 import org.omegat.util.gui.OSXIntegration;
 import org.omegat.util.gui.Styles;
 
@@ -115,6 +118,8 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
 
     /** MainWindow menu handler instance. */
     protected final MainWindowMenuHandler mainWindowMenuHandler;
+
+    private final Map<MenuExtender.MenuKey, JMenu> menus = new EnumMap<>(MenuExtender.MenuKey.class);
 
     public BaseMainWindowMenu(final MainWindow mainWindow,
             final MainWindowMenuHandler mainWindowMenuHandler) {
@@ -192,13 +197,13 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
     abstract void createMenuBar();
 
     protected void createComponents() {
-        projectMenu = createMenu("TF_MENU_FILE");
-        editMenu = createMenu("TF_MENU_EDIT");
-        gotoMenu = createMenu("MW_GOTOMENU");
-        viewMenu = createMenu("MW_VIEW_MENU");
-        toolsMenu = createMenu("TF_MENU_TOOLS");
-        optionsMenu = createMenu("MW_OPTIONSMENU");
-        helpMenu = createMenu("TF_MENU_HELP");
+        projectMenu = createMenu("TF_MENU_FILE", MenuExtender.MenuKey.PROJECT);
+        editMenu = createMenu("TF_MENU_EDIT", MenuExtender.MenuKey.EDIT);
+        gotoMenu = createMenu("MW_GOTOMENU", MenuExtender.MenuKey.GOTO);
+        viewMenu = createMenu("MW_VIEW_MENU", MenuExtender.MenuKey.VIEW);
+        toolsMenu = createMenu("TF_MENU_TOOLS", MenuExtender.MenuKey.TOOLS);
+        optionsMenu = createMenu("MW_OPTIONSMENU", MenuExtender.MenuKey.OPTIONS);
+        helpMenu = createMenu("TF_MENU_HELP", MenuExtender.MenuKey.HELP);
 
         projectNewMenuItem = createMenuItem("TF_MENU_FILE_CREATE");
         projectTeamNewMenuItem = createMenuItem("TF_MENU_FILE_TEAM_CREATE");
@@ -730,10 +735,17 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
      *            title name key in resource bundle
      * @return menu instance
      */
-    protected JMenu createMenu(final String titleKey) {
+    protected JMenu createMenu(String titleKey) {
+        return createMenu(titleKey, null);
+    }
+
+    protected JMenu createMenu(String titleKey, MenuExtender.MenuKey menuKey) {
         JMenu result = new JMenu();
         Mnemonics.setLocalizedText(result, OStrings.getString(titleKey));
         result.addMenuListener(this);
+        if (menuKey != null) {
+            menus.put(menuKey, result);
+        }
         return result;
     }
 
@@ -839,18 +851,10 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         if (Core.getParams().containsKey(CLIParameters.NO_TEAM)) {
             projectTeamNewMenuItem.setEnabled(false);
         }
-        if (isProjectOpened && Core.getProject().isRemoteProject()
-                && Core.getProject().getProjectProperties().getSourceDir().isUnderRoot()) {
-            projectCommitSourceFiles.setEnabled(true);
-        } else {
-            projectCommitSourceFiles.setEnabled(false);
-        }
-        if (isProjectOpened && Core.getProject().isRemoteProject()
-                && Core.getProject().getProjectProperties().getTargetDir().isUnderRoot()) {
-            projectCommitTargetFiles.setEnabled(true);
-        } else {
-            projectCommitTargetFiles.setEnabled(false);
-        }
+        projectCommitSourceFiles.setEnabled(isProjectOpened && Core.getProject().isRemoteProject()
+                && Core.getProject().getProjectProperties().getSourceDir().isUnderRoot());
+        projectCommitTargetFiles.setEnabled(isProjectOpened && Core.getProject().isRemoteProject()
+                && Core.getProject().getProjectProperties().getTargetDir().isUnderRoot());
     }
 
     protected JMenuItem getItemForPreference(String preference) {
@@ -978,6 +982,10 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
 
     public JMenu getHelpMenu() {
         return helpMenu;
+    }
+
+    public JMenu getMenu(MenuExtender.MenuKey marker) {
+        return menus.get(marker);
     }
 
     JMenuItem cycleSwitchCaseMenuItem;

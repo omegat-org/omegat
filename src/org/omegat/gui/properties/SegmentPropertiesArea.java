@@ -63,6 +63,7 @@ import org.omegat.core.events.IEntryEventListener;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.gui.main.DockableScrollPane;
 import org.omegat.gui.main.IMainWindow;
+import org.omegat.util.BiDiUtils;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
@@ -99,6 +100,7 @@ public class SegmentPropertiesArea implements IPaneMenu {
     final DockableScrollPane scrollPane;
 
     private ISegmentPropertiesView viewImpl;
+    private boolean isTargetRtl;
 
     public SegmentPropertiesArea(IMainWindow mw) {
         scrollPane = new DockableScrollPane("SEGMENTPROPERTIES", OStrings.getString("SEGPROP_PANE_TITLE"),
@@ -115,6 +117,7 @@ public class SegmentPropertiesArea implements IPaneMenu {
             @Override
             public void onEntryActivated(SourceTextEntry newEntry) {
                 scrollPane.stopNotifying();
+                isTargetRtl = BiDiUtils.isTargetLangRtl();
                 setProperties(newEntry);
                 doNotify(getKeysToNotify());
             }
@@ -326,7 +329,11 @@ public class SegmentPropertiesArea implements IPaneMenu {
                 setProperty(KEY_ISDUP, ste.getDuplicate());
             }
             if (ste.getSourceTranslation() != null) {
-                setProperty(KEY_TRANSLATION, ste.getSourceTranslation());
+                if (isTargetRtl) {
+                    setProperty(KEY_TRANSLATION, BiDiUtils.addRtlBidiAround(ste.getSourceTranslation()));
+                } else {
+                    setProperty(KEY_TRANSLATION, ste.getSourceTranslation());
+                }
                 if (ste.isSourceTranslationFuzzy()) {
                     setProperty(KEY_TRANSLATIONISFUZZY, true);
                 }

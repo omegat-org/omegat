@@ -35,7 +35,6 @@ variables:
   isMain: $[eq(variables['Build.SourceBranch'], 'refs/heads/master')]
   isReleasesBranch: $[contains(variables['Build.SourceBranch'], 'refs/heads/releases/')]
   isRelease: $[contains(variables['Build.SourceBranch'], 'refs/tags/v')]
-  isJRE11: $[contains(variables['Build.SourceBranch'], 'refs/tags/v6')]
   isSchedule: $[eq(variables['Build.Reason'], 'Schedule')]
   GRADLE_USER_HOME: '$(Pipeline.Workspace)/.gradle'
 
@@ -47,7 +46,6 @@ stages:
     displayName: CI Check for master, releases/* and Pull-Requests
     pool:
       vmImage: 'ubuntu-22.04'
-    condition:
     steps:
       - template: ci/azure-pipelines/check_steps.yml
 

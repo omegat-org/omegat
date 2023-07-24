@@ -681,7 +681,6 @@ public class RealProject implements IProject {
                 Core.getMainWindow().showStatusMessageRB("TF_COMMIT_TARGET_START");
                 remoteRepositoryProvider.switchAllToLatest();
                 remoteRepositoryProvider.copyFilesFromProjectToRepos(config.getTargetDir().getUnderRoot(), null);
-                remoteRepositoryProvider.commitFiles(config.getTargetDir().getUnderRoot(), "Project translation");
 
                 // Convert stats file name to relative
                 ProjectProperties.ProjectPath path = config.new ProjectPath(true);
@@ -690,6 +689,7 @@ public class RealProject implements IProject {
                 remoteRepositoryProvider.copyFilesFromProjectToRepos(statsTextFilename, null);
                 remoteRepositoryProvider.copyFilesFromProjectToRepos(statsTextFilename.replace(".txt",".json"), null);
 
+                remoteRepositoryProvider.commitFiles(config.getTargetDir().getUnderRoot(), "Project translation");
                 Core.getMainWindow().showStatusMessageRB("TF_COMMIT_TARGET_DONE");
             } catch (Exception e) {
                 Log.logErrorRB("TF_COMMIT_TARGET_ERROR");

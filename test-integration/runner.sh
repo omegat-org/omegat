@@ -4,7 +4,7 @@
 #           with fuzzy matching, translation memory, keyword search,
 #           glossaries, and translation leveraging into updated projects.
 #
-#  Copyright (C) 2023 Hiroshi Miura.
+#  Copyright (C) 2023 Hiroshi Miura
 #                Home page: https://www.omegat.org/
 #                Support center: https://omegat.org/support
 #
@@ -24,9 +24,17 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-ssh-keygen -q -t rsa -m PEM -b 4096 -N '' -f /tmp/id_rsa && ssh-keygen -A
-install -m 666 /tmp/id_rsa /tmp/id_rsa.pub /keys/
-cat /keys/id_rsa.pub >> /home/git/.ssh/authorized_keys
-rm -rf /var/run/apache2/* || true
-echo "start servers"
-exec /usr/bin/supervisord -c /root/supervisord.conf
+if [ "$#" -ne 2 ]; then
+  echo "Illegal number of arguments. Please run with arguments" >&2
+  echo "$0 (GIT|SVN) DURATION " >&2
+  exit 2
+fi
+
+# should run on the project root directory
+SHELL_PATH=`dirname "$0"`
+cd $SHELL_PATH && cd ..
+
+EXIT_CODE=0
+env DURATION=$2 TYPE=$1 docker-compose -f docker-compose.yml up --abort-on-container-exit --exit-code-from client || EXIT_CODE=$?
+docker-compose -f docker-compose.yml down
+exit ${EXIT_CODE}

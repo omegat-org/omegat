@@ -1,12 +1,15 @@
 ----------------------------------------------------------------------
  OmegaT 6.1.0
 ----------------------------------------------------------------------
-  15 Enhancement
+  16 Enhancement
   21 Bug fixes
 ----------------------------------------------------------------------
 6.1.0 vs 6.0.0
 
   Implemented requests:
+
+  - Request to add new API to allow plugins/modules to add menu item in requested place
+  https://sourceforge.net/p/omegat/feature-requests/1703
 
   - Team: SVN support svn+ssh protocol with key authentication
   https://sourceforge.net/p/omegat/feature-requests/1700/
@@ -57,6 +60,9 @@
   https://sourceforge.net/p/omegat/feature-requests/1519/
 
   Bug fixes:
+
+  - Integration test(docker) failure with 503
+  https://sourceforge.net/p/omegat/bugs/1199/
 
   - Content of notes elements are not displayed correctly with Xliff filter
   https://sourceforge.net/p/omegat/bugs/1192/
@@ -123,6 +129,9 @@
 
   - Lucene 5.2 does not work under WebStart
   https://sourceforge.net/p/omegat/bugs/813/
+
+  - Incorrect display of RTL segments in the Fuzzy Matches pane
+  https://sourceforge.net/p/omegat/bugs/558/
 
 ----------------------------------------------------------------------
  OmegaT 6.0.0 (2023-06-19)

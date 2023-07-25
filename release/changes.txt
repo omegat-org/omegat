@@ -2,13 +2,16 @@
  OmegaT 6.0.1
 ----------------------------------------------------------------------
   0 Enhancement
-  1 Bug fixes
+  3 Bug fixes
 ----------------------------------------------------------------------
 
   Bug fixes:
 
-  - Dictionary displays apostrophe as html entitty code
-  https://sourceforge.net/p/omegat/bugs/1181
+  - Google2 MT connector failed to parse response
+  https://sourceforge.net/p/omegat/bugs/1206/
+
+  - Dictionary displays apostrophe as html entity code
+  https://sourceforge.net/p/omegat/bugs/1181/
 
   - Content of notes elements are not displayed correctly with Xliff filter
   https://sourceforge.net/p/omegat/bugs/1192/

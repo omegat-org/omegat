@@ -18,11 +18,10 @@
 	  </listitem>
 	</varlistentry>
 	<varlistentry>
-	  <term>Developer: OmegaT Nightly</term>
+	  <term>Developer: OmegaT Weekly</term>
 	  <listitem>
-		<para>This edition is automatically generated every time new
-	  code is added to OmegaT. It is used for testing
-		purposes.</para>
+		<para>This is the edition of OmegaT in active development. It is automatically generated every week,
+			and serves as a beta version for testing purposes.</para>
 	  </listitem>
 	</varlistentry>
   </variablelist>
@@ -37,11 +36,12 @@
 	versions without it. Packages without Java rely on a &javaversionlong;
 	installed systemwide.</para>
 
-	<para>OmegaT 5.8.0 and later can also run with Java 11 Runtime Environment
+	<para>OmegaT 6.1.0 and later can also run with a Java 17 Runtime Environment
 	on any platform.</para>
 
 	<para>Due to licensing considerations, the OmegaT team recommends the Eclipse
-	Temurin Java runtime provided by the &preferedopenjdk;, but any Java 8 compatible runtime environment should work. See <ulink
+	Temurin Java runtime provided by the &preferedopenjdk;, but any Java 11 compatible runtime environment should work.
+		See <ulink
 	url="https://projects.eclipse.org/projects/adoptium.temurin">The Eclipse
 	Temurin™ project</ulink>.</para>
 

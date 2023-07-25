@@ -363,7 +363,7 @@ ext {
     macJRE = fileTree(dir: assetDir, include: 'OpenJDK11U-jre_x64_mac_*.tar.gz')
     armMacJRE = fileTree(dir: assetDir, include: 'OpenJDK11U-jre_aarch64_mac_*.tar.gz')
     linux64JRE = fileTree(dir: assetDir, include: 'OpenJDK11U-jre_x64_linux_*.tar.gz')
-    linuxArmJRE = fileTree(dir: assetDir, include: 'OpenJDK11U-jre_aarch64_linux_*.tar.gz')
+    linuxArm64JRE = fileTree(dir: assetDir, include: 'OpenJDK11U-jre_aarch64_linux_*.tar.gz')
     windowsJRE = fileTree(dir: assetDir, include: 'OpenJDK11U-jre_x64_windows_*.zip')
 }
 
@@ -563,6 +563,21 @@ distributions {
             }
         }
     }
+
+    linuxArm64 {
+        contents {
+            with main.contents
+            exclude 'OmegaT.bat'
+            if (!linuxArm64JRE.empty) {
+                from(tarTree(linuxArm64JRE.singleFile)) {
+                    includeEmptyDirs = false
+                    eachFile {
+                        replaceRelativePathSegment(it, /jdk.*-jre/, 'jre')
+                    }
+                }
+            }
+        }
+    }
 }
 
 installMacDist {
@@ -684,11 +699,6 @@ task mac(dependsOn: [macDistZip, macNotarize]) {
     group = 'omegat distribution'
 }
 
-task linux(dependsOn: [linux64DistTar]) {
-    description = 'Build the Linux distributions.'
-    group = 'omegat distribution'
-}
-
 linux64DistTar {
     onlyIf {
         condition(!linux64JRE.empty, 'JRE not found')
@@ -699,6 +709,25 @@ linux64DistTar {
     archiveFileName.set("${applicationName}_${project.version}${omtVersion.beta}_Linux_64.tar.bz2")
     compression = Compression.BZIP2
     archiveExtension = 'tar.bz2'
+    group = 'omegat distribution'
+}
+
+linuxArm64DistTar {
+    onlyIf {
+        condition(!linuxArm64JRE.empty, 'ARM64 JRE not found')
+    }
+    doFirst {
+        delete "$destinationDirectory/jre"
+    }
+    archiveFileName.set("${applicationName}_${project.version}${omtVersion.beta}_Linux_ARM64.tar.bz2")
+    compression = Compression.BZIP2
+    archiveExtension = 'tar.bz2'
+    group = 'omegat distribution'
+}
+
+task linux(dependsOn: [linux64DistTar, linuxArm64DistTar]) {
+    description = 'Build the Linux distributions.'
+    group = 'omegat distribution'
 }
 
 // We bundle our startup scripts separately, so disable startScripts.

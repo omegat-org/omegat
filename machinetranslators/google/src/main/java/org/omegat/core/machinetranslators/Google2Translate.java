@@ -36,7 +36,6 @@ import java.util.TreeMap;
 
 import javax.swing.JCheckBox;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.omegat.core.Core;
@@ -310,10 +309,10 @@ public class Google2Translate extends BaseCachedTranslate {
     /**
      * Data schema class.
      */
-    @JsonIgnoreProperties({"model"})
     public static final class Translation {
         private String translatedText;
         private String detectedSourceLanguage;
+        private String model;
 
         public String getTranslatedText() {
             return translatedText;
@@ -331,10 +330,21 @@ public class Google2Translate extends BaseCachedTranslate {
             this.detectedSourceLanguage = detectedSourceLanguage;
         }
 
+        public String getModel() {
+            return model;
+        }
+
+        public void setModel(final String model) {
+            this.model = model;
+        }
+
         @Override
         public String toString() {
-            return "Translation{translatedText='" + translatedText + "', detectedSourceLanguage='"
-                    + detectedSourceLanguage + "'}";
+            return "Translation{" +
+                    "translatedText='" + translatedText + '\'' +
+                    ", detectedSourceLanguage='" + detectedSourceLanguage + '\'' +
+                    ", model='" + model + '\'' +
+                    '}';
         }
     }
 }

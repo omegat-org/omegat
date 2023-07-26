@@ -61,6 +61,9 @@
 
   Bug fixes:
 
+  - Google2 Translate MT connector failed to parse response
+  https://sourceforge.net/p/omegat/bugs/1206/
+
   - Integration test(docker) failure with 503
   https://sourceforge.net/p/omegat/bugs/1199/
 

@@ -67,6 +67,9 @@
   - Google2 Translate MT connector failed to parse response
   https://sourceforge.net/p/omegat/bugs/1206/
 
+  - Incompatible among LanguageTool@6 and lucene-gosen@5 from omegat-org
+  https://sourceforge.net/p/omegat/bugs/1204/
+
   - Integration test(docker) failure with 503
   https://sourceforge.net/p/omegat/bugs/1199/
 

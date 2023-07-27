@@ -6,13 +6,7 @@ plugins {
     id 'java-library'
 }
 
-repositories {
-    mavenCentral()
-}
-
 dependencies {
-    compileOnly(project.rootProject)
-    // Libs are provided in the "source" distribution only
     if (providedLibsDir.directory) {
         compileOnly fileTree(dir: providedLibsDir, include: '**/*.jar')
     } else {
@@ -21,11 +15,9 @@ dependencies {
         // JSON parser
         compileOnly "com.fasterxml.jackson.core:jackson-core:2.13.4"
         compileOnly "com.fasterxml.jackson.core:jackson-databind:2.13.4.2"
+        testImplementation "com.fasterxml.jackson.core:jackson-core:2.13.4"
+        testImplementation "com.fasterxml.jackson.core:jackson-databind:2.13.4.2"
     }
-    // Test dependencies
-    testImplementation(testFixtures(project.rootProject))
-    testImplementation "com.fasterxml.jackson.core:jackson-core:2.13.4"
-    testImplementation "com.fasterxml.jackson.core:jackson-databind:2.13.4.2"
 }
 
 jar {

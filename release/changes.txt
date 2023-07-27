@@ -61,6 +61,9 @@
 
   Bug fixes:
 
+  - Incompatible among LanguageTool@6 and lucene-gosen@5 from omegat-org
+  https://sourceforge.net/p/omegat/bugs/1204/
+
   - Content of notes elements are not displayed correctly with Xliff filter
   https://sourceforge.net/p/omegat/bugs/1192/
 

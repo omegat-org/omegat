@@ -26,6 +26,9 @@
   - Generate JSON format stastics file when save
   https://sourceforge.net/p/omegat/feature-requests/1695/
 
+  - Generate and compile TXT and JSON file when committing target files
+  https://sourceforge.net/p/omegat/feature-requests/1690/
+
   - Build System: update gradle verison to 7.5.1
   https://sourceforge.net/p/omegat/feature-requests/1691/
 
@@ -61,8 +64,14 @@
 
   Bug fixes:
 
+  - Google2 Translate MT connector failed to parse response
+  https://sourceforge.net/p/omegat/bugs/1206/
+
   - Incompatible among LanguageTool@6 and lucene-gosen@5 from omegat-org
   https://sourceforge.net/p/omegat/bugs/1204/
+
+  - Integration test(docker) failure with 503
+  https://sourceforge.net/p/omegat/bugs/1199/
 
   - Content of notes elements are not displayed correctly with Xliff filter
   https://sourceforge.net/p/omegat/bugs/1192/

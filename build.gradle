@@ -14,7 +14,6 @@ plugins {
     id 'org.hidetake.ssh' version '2.10.1'
     id 'com.diffplug.spotless' version '6.0.0'
     id 'com.github.ben-manes.versions' version '0.39.0'
-    id 'ru.vyarus.mkdocs' version '3.0.0'
     id 'edu.sc.seis.launch4j' version '3.0.3'
 }
 
@@ -167,6 +166,7 @@ ext {
     luceneVersion = '5.5.5'
     luceneGosenVersion = '5.5.1'
     jgitVersion = '6.6.0.202305301015-r'
+    slf4jVersion = '2.0.7'
 }
 
 dependencies {
@@ -176,7 +176,7 @@ dependencies {
     } else {
         implementation 'commons-io:commons-io:2.11.0'
         implementation 'org.apache.commons:commons-lang3:3.11'
-        runtimeOnly 'org.slf4j:slf4j-jdk14:1.7.32'
+        runtimeOnly "org.slf4j:slf4j-jdk14:${slf4jVersion}"
 
         // macOS integration
         implementation 'org.madlonkay:desktopsupport:0.6.0'
@@ -209,7 +209,6 @@ dependencies {
 
         // Legacy projects re-hosted on Maven Central
         api 'org.omegat:vldocking:3.0.5'
-        runtimeOnly 'org.slf4j:slf4j-jdk14:1.7.32' // needed by vldocking
         implementation 'org.omegat:htmlparser:1.6-20230203'
         implementation 'org.omegat:gnudiff4j:1.15'
         implementation 'org.omegat:lib-mnemonics:1.1'
@@ -323,14 +322,14 @@ dependencies {
     }
     testRuntimeOnly "org.omegat.lucene:lucene-gosen:${luceneGosenVersion}:ipadic"
     testRuntimeOnly "org.languagetool:language-pl:${languageToolVersion}"
-    testRuntimeOnly "org.slf4j:slf4j-jdk14:1.7.32"
+    testRuntimeOnly "org.slf4j:slf4j-jdk14:${slf4jVersion}"
 
     // JAXB codegen only
     jaxb 'com.sun.xml.bind:jaxb-xjc:2.3.4'
 
     testIntegrationImplementation sourceSets.main.output, sourceSets.test.output
     testIntegrationImplementation(testFixtures(project.rootProject))
-    testIntegrationRuntimeOnly "org.slf4j:slf4j-jdk14:1.7.32"
+    testIntegrationRuntimeOnly "org.slf4j:slf4j-jdk14:${slf4jVersion}"
 }
 
 jar {
@@ -380,10 +379,8 @@ ext {
 
     macJRE = fileTree(dir: assetDir, include: 'OpenJDK11U-jre_x64_mac_*.tar.gz')
     armMacJRE = fileTree(dir: assetDir, include: 'OpenJDK11U-jre_aarch64_mac_*.tar.gz')
-
     linux64JRE = fileTree(dir: assetDir, include: 'OpenJDK11U-jre_x64_linux_*.tar.gz')
-
-    windowsJRE32 = fileTree(dir: assetDir, include: 'OpenJDK11U-jre_x86-32_windows_*.zip')
+    linuxArm64JRE = fileTree(dir: assetDir, include: 'OpenJDK11U-jre_aarch64_linux_*.tar.gz')
     windowsJRE = fileTree(dir: assetDir, include: 'OpenJDK11U-jre_x64_windows_*.zip')
 }
 
@@ -492,6 +489,9 @@ distributions {
                         JAR_SUBST           : jar.archiveFileName.get()
                 ])
             }
+            from('build/launch4j') {
+                include '*.exe'
+            }
             from('lib/licenses') {
                 into 'lib'
             }
@@ -552,7 +552,7 @@ distributions {
             }
             into('OmegaT.app/Contents/Java') {
                 with main.contents
-                exclude '*.sh', '*.kaptn', 'OmegaT', 'OmegaT.bat', 'omegat.desktop'
+                exclude '*.sh', '*.kaptn', 'OmegaT', 'OmegaT.bat', 'omegat.desktop', '*.exe'
             }
             if (!macJRE.empty) {
                 from(tarTree(macJRE.singleFile)) {
@@ -566,21 +566,27 @@ distributions {
         }
     }
 
-    win {
+    linux64 {
         contents {
             with main.contents
-            from('build/launch4j') {
-                include '*.exe'
+            exclude 'OmegaT.bat', '*.exe'
+            if (!linux64JRE.empty) {
+                from(tarTree(linux64JRE.singleFile)) {
+                    includeEmptyDirs = false
+                    eachFile {
+                        replaceRelativePathSegment(it, /jdk.*-jre/, 'jre')
+                    }
+                }
             }
         }
     }
 
-    linux64 {
+    linuxArm64 {
         contents {
             with main.contents
             exclude 'OmegaT.bat'
-            if (!linux64JRE.empty) {
-                from(tarTree(linux64JRE.singleFile)) {
+            if (!linuxArm64JRE.empty) {
+                from(tarTree(linuxArm64JRE.singleFile)) {
                     includeEmptyDirs = false
                     eachFile {
                         replaceRelativePathSegment(it, /jdk.*-jre/, 'jre')
@@ -710,11 +716,6 @@ task mac(dependsOn: [macDistZip, macNotarize]) {
     group = 'omegat distribution'
 }
 
-task linux(dependsOn: [linux64DistTar]) {
-    description = 'Build the Linux distributions.'
-    group = 'omegat distribution'
-}
-
 linux64DistTar {
     onlyIf {
         condition(!linux64JRE.empty, 'JRE not found')
@@ -725,6 +726,25 @@ linux64DistTar {
     archiveFileName.set("${applicationName}_${project.version}${omtVersion.beta}_Linux_64.tar.bz2")
     compression = Compression.BZIP2
     archiveExtension = 'tar.bz2'
+    group = 'omegat distribution'
+}
+
+linuxArm64DistTar {
+    onlyIf {
+        condition(!linuxArm64JRE.empty, 'ARM64 JRE not found')
+    }
+    doFirst {
+        delete "$destinationDirectory/jre"
+    }
+    archiveFileName.set("${applicationName}_${project.version}${omtVersion.beta}_Linux_ARM64.tar.bz2")
+    compression = Compression.BZIP2
+    archiveExtension = 'tar.bz2'
+    group = 'omegat distribution'
+}
+
+task linux(dependsOn: [linux64DistTar, linuxArm64DistTar]) {
+    description = 'Build the Linux distributions.'
+    group = 'omegat distribution'
 }
 
 // We bundle our startup scripts separately, so disable startScripts.
@@ -777,7 +797,7 @@ ext.makeWinTask = { args ->
     task(type: Sync, args.name) {
         description = "Create a Windows installer for ${args.name} distro. " +
             'Requires Inno Setup (http://www.jrsoftware.org/isinfo.php).'
-        with distributions.win.contents
+        with distributions.main.contents
         dependsOn createAllExecutables
         from ('release/win32-specific') {
             include 'OmegaT.l4J.ini'
@@ -803,7 +823,7 @@ ext.makeWinTask = { args ->
             project.copy {
                 from 'build'
                 into 'build'
-                include 'innosetup/**/*'
+                include "innosetup/${args.name}/**/*"
                 dirMode 0777
                 fileMode 0666
             }
@@ -883,7 +903,6 @@ ext.makeWinTask = { args ->
 }
 makeWinTask(name: 'winNoJRE', suffix: 'Windows_without_JRE')
 makeWinTask(name: 'winJRE64', suffix: 'Windows_64', jrePath: windowsJRE, arch: 'x64')
-makeWinTask(name: 'winJRE', suffix: 'Windows', jrePath: windowsJRE32)
 
 // Disable .tar distributions for everyone but Linux
 tasks.findAll { it.name =~ /[dD]istTar$/ && !it.name.contains('linux') }.each { it.enabled = false }
@@ -1296,11 +1315,6 @@ task publishVersion {
     }
 }
 
-python.docker.use = true
-mkdocs {
-    sourcesDir = 'docs_devel'
-}
-
 tasks.withType(JavaExec).configureEach {
     // Allow setting the max heap size for the run task from the command line, e.g.
     // `gradle -PrunMaxHeapSize=1024M run`
@@ -1313,6 +1327,12 @@ task printVersion {
     println project.version
 }
 
+tasks.withType(Copy).configureEach {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+tasks.withType(Sync).configureEach {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
 tasks.withType(Zip).configureEach {
     duplicatesStrategy = DuplicatesStrategy.INCLUDE
 }

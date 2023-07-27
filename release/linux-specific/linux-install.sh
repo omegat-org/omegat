@@ -13,6 +13,8 @@ if  [ -d /opt/omegat/$OMTVERSION ] ; then
 
 else
 
+   SOURCE=$(dirname -- "${BASH_SOURCE[0]}")
+
    # create /opt/omegat and
    # /opt/omegat/<OmegaT version>
 
@@ -21,7 +23,7 @@ else
    # copy OmegaT files and folders
    # to /opt/omegat/<OmegaT version>
 
-   sudo cp -r ./* /opt/omegat/$OMTVERSION
+   (cd "${SOURCE}" && sudo cp -r ./* /opt/omegat/$OMTVERSION)
 
    cd /opt/omegat/$OMTVERSION
 

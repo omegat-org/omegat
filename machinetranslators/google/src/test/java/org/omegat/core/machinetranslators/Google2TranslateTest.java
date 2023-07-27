@@ -52,11 +52,29 @@ public class Google2TranslateTest extends TestCore {
             + "  }\n"
             + "}";
 
+    private static final String JSON2 = "{\n"
+            + "  \"data\": {\n"
+            + "     \"translations\": [{\n"
+            + "        \"translatedText\": \"Hallo Welt\",\n"
+            + "        \"detectedSourceLanguage\": \"en\",\n"
+            + "        \"model\": \"projects/PROJECT_NUMBER/locations/LOCATION/models/123\"\n"
+            + "     }]\n"
+            + "   }\n"
+            + "}";
+
     @Test
     public void testGetJsonResults() throws MachineTranslateError {
         Preferences.setPreference(Preferences.ALLOW_GOOGLE2_TRANSLATE, true);
         Google2Translate google2Translate = new Google2Translate();
         String translation = google2Translate.getJsonResults(json);
+        assertEquals("Hallo Welt", translation);
+    }
+
+    @Test
+    public void testGetJson2Results() throws MachineTranslateError {
+        Preferences.setPreference(Preferences.ALLOW_GOOGLE2_TRANSLATE, true);
+        Google2Translate google2Translate = new Google2Translate();
+        String translation = google2Translate.getJsonResults(JSON2);
         assertEquals("Hallo Welt", translation);
     }
 

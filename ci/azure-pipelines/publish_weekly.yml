@@ -4,6 +4,7 @@ parameters:
 
 steps:
   - task: Bash@3
+    condition: or(eq(variables.isMain, true), eq(variables.isReleasesBranch, true))
     displayName: 📂 SCP upload to sourceforge file management
     inputs:
       targetType: 'inline'

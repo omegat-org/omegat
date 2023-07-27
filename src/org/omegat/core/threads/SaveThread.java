@@ -31,12 +31,13 @@ package org.omegat.core.threads;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.concurrent.TimeoutException;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.omegat.core.Core;
 import org.omegat.core.KnownException;
 import org.omegat.core.data.IProject;
+import org.omegat.core.team2.IRemoteRepository2;
+import org.omegat.util.Log;
 import org.omegat.util.Preferences;
 
 /**
@@ -58,8 +59,8 @@ public class SaveThread extends Thread implements IAutoSave {
 
     public SaveThread() {
         setName("Save thread");
-        setWaitDuration(
-                Preferences.getPreferenceDefault(Preferences.AUTO_SAVE_INTERVAL, Preferences.AUTO_SAVE_DEFAULT));
+        setWaitDuration(Preferences.getPreferenceDefault(Preferences.AUTO_SAVE_INTERVAL,
+                Preferences.AUTO_SAVE_DEFAULT));
         Preferences.addPropertyChangeListener(Preferences.AUTO_SAVE_INTERVAL, evt -> {
             setWaitDuration((Integer) evt.getNewValue());
             synchronized (this) {
@@ -73,12 +74,12 @@ public class SaveThread extends Thread implements IAutoSave {
     }
 
     public synchronized void disable() {
-        LOGGER.fine("Disable autosave");
+        Log.logDebug(LOGGER, "Disable autosave"); // NOI18N
         enabled = false;
     }
 
     public synchronized void enable() {
-        LOGGER.fine("Enable autosave");
+        Log.logDebug(LOGGER, "Enable autosave"); // NOI18N
         enabled = true;
         needToSaveNow = false;
         notify();
@@ -89,8 +90,8 @@ public class SaveThread extends Thread implements IAutoSave {
         try {
             while (true) {
                 synchronized (this) {
-                    // Set flag for saving. If somebody will reset time, he will
-                    // clear this flag also.
+                    // Set the flag for saving. If somebody resets the timer,
+                    // one should clear the flag.
                     needToSaveNow = true;
                     // sleep
                     wait(waitDuration);
@@ -98,7 +99,7 @@ public class SaveThread extends Thread implements IAutoSave {
                 if (needToSaveNow && enabled) {
                     // Wait finished by time and autosaving enabled.
                     IProject dataEngine = Core.getProject();
-                    LOGGER.fine("Start project save from SaveThread");
+                    Log.logDebug(LOGGER, "Start project save from SaveThread"); // NOI18N
                     try {
                         Core.executeExclusively(false, () -> {
                             dataEngine.saveProject(false);
@@ -107,18 +108,27 @@ public class SaveThread extends Thread implements IAutoSave {
                         Core.getMainWindow().showStatusMessageRB("ST_PROJECT_AUTOSAVED",
                                 DateFormat.getTimeInstance(DateFormat.SHORT).format(new Date()));
                     } catch (TimeoutException ex) {
-                        LOGGER.warning("Lock trying timeout during autosave");
+                        Log.logWarningRB(LOGGER, "AUTOSAVE_TIMEOUT_TAKING_LOCK");
                     } catch (KnownException ex) {
                         Core.getMainWindow().showStatusMessageRB(ex.getMessage(), ex.getParams());
+                    } catch (IRemoteRepository2.NetworkException ex) {
+                        Log.logWarningRB(LOGGER, "TEAM_NETWORK_ERROR", ex.getMessage());
+                    } catch (OutOfMemoryError oome) {
+                        // inform the user
+                        long memory = Runtime.getRuntime().maxMemory() / 1024 / 1024;
+                        Log.logErrorRB(LOGGER, "OUT_OF_MEMORY", memory);
+                        Log.log(oome);
+                        Core.getMainWindow().showErrorDialogRB("TF_ERROR", "OUT_OF_MEMORY", memory);
+                        // Just quit, we can't help it anyway
+                        System.exit(1);
                     } catch (Exception ex) {
-                        LOGGER.log(Level.WARNING, "Error save", ex);
+                        Log.logWarningRB(LOGGER, "AUTOSAVE_GENERIC_ERROR", ex.getMessage());
                     }
-                    LOGGER.fine("Finish project save from SaveThread");
+                    Log.logDebug(LOGGER, "Finish project save from SaveThread"); // NOI18N
                 }
             }
         } catch (InterruptedException ex) {
-            LOGGER.log(Level.WARNING, "Save thread interrupted", ex);
-            return;
+            Log.logWarningRB(LOGGER, "AUTOSAVE_INTERRUPTED", ex.getMessage());
         }
     }
 }

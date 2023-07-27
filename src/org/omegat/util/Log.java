@@ -136,6 +136,7 @@ public final class Log {
 
     /**
      * Compute the filename of the log file
+     * 
      * @return the filename of the log, or an empty string
      */
     public static String getLogFileName() {
@@ -151,6 +152,7 @@ public final class Log {
 
     /**
      * Compute the full path of the log file
+     * 
      * @return the full path of the log file
      */
     public static String getLogFilePath() {
@@ -210,7 +212,7 @@ public final class Log {
 
     /**
      * Writes a warning message to the log (to be retrieved from the resource
-     * bundle)
+     * bundle).
      * <p>
      * While the warning message can be localized, the warning key is also
      * logged, so developers can determine what warning was given by looking at
@@ -219,8 +221,7 @@ public final class Log {
      * @param key
      *            The key of the error message in the resource bundle
      * @param parameters
-     *            Parameters for the error message. These are inserted by using
-     *            StaticUtils.format.
+     *            Parameters for the error message.
      */
     public static void logWarningRB(String key, Object... parameters) {
         if (LOGGER.isLoggable(Level.WARNING)) {
@@ -234,7 +235,7 @@ public final class Log {
 
     /**
      * Writes an info message to the log (to be retrieved from the resource
-     * bundle)
+     * bundle).
      * <p>
      * While the info message can be localized, the info key is also logged, so
      * developers can determine what info was given by looking at the error key,
@@ -243,8 +244,7 @@ public final class Log {
      * @param key
      *            The key of the error message in the resource bundle
      * @param parameters
-     *            Parameters for the error message. These are inserted by using
-     *            StaticUtils.format.
+     *            Parameters for the error message.
      */
     public static void logInfoRB(String key, Object... parameters) {
         if (LOGGER.isLoggable(Level.INFO)) {
@@ -253,12 +253,12 @@ public final class Log {
             rec.setParameters(parameters);
             rec.setLoggerName(LOGGER.getName());
             LOGGER.log(rec);
-            }
         }
+    }
 
     /**
      * Writes an error message to the log (to be retrieved from the resource
-     * bundle)
+     * bundle).
      * <p>
      * While the error message can be localized, the error key is also logged,
      * so developers can determine what error was given by looking at the error
@@ -267,8 +267,7 @@ public final class Log {
      * @param key
      *            The key of the error message in the resource bundle
      * @param parameters
-     *            Parameters for the error message. These are inserted by using
-     *            StaticUtils.format.
+     *            Parameters for the error message.
      */
     public static void logErrorRB(String key, Object... parameters) {
         if (LOGGER.isLoggable(Level.SEVERE)) {
@@ -282,7 +281,7 @@ public final class Log {
 
     /**
      * Writes an error message to the log (to be retrieved from the resource
-     * bundle)
+     * bundle).
      * <p>
      * While the error message can be localized, the error key is also logged,
      * so developers can determine what error was given by looking at the error
@@ -293,8 +292,7 @@ public final class Log {
      * @param key
      *            The key of the error message in the resource bundle
      * @param parameters
-     *            Parameters for the error message. These are inserted by using
-     *            StaticUtils.format.
+     *            Parameters for the error message.
      */
     public static void logErrorRB(Throwable ex, String key, Object... parameters) {
         if (LOGGER.isLoggable(Level.SEVERE)) {
@@ -308,19 +306,81 @@ public final class Log {
     }
 
     /**
-     * Writes debug message to log (without localization)
+     * Writes a debug message through a specified logger (without localization).
      *
+     * @param logger
+     *            logger object
      * @param message
      *            message text
      * @param parameters
-     *            Parameters for the error message. These are inserted by using
-     *            StaticUtils.format.
+     *            Parameters for the error message.
      */
     public static void logDebug(Logger logger, String message, Object... parameters) {
         if (logger.isLoggable(Level.FINE)) {
             LogRecord rec = new LogRecord(Level.FINE, message);
             rec.setParameters(parameters);
             rec.setLoggerName(logger.getName());
+            logger.log(rec);
+        }
+    }
+
+    /**
+     * Writes a warning message through a specified logger.
+     * 
+     * @param logger
+     *            logger object
+     * @param key
+     *            The key of the error message in the resource bundle
+     * @param parameters
+     *            Parameters for the error message.
+     */
+    public static void logWarningRB(Logger logger, String key, Object... parameters) {
+        if (LOGGER.isLoggable(Level.WARNING)) {
+            LogRecord rec = new LogRecord(Level.WARNING, key);
+            rec.setResourceBundle(OStrings.getResourceBundle());
+            rec.setParameters(parameters);
+            rec.setLoggerName(logger.getName());
+            logger.log(rec);
+        }
+    }
+
+    /**
+     * Writes an error message through a specified logger.
+     * 
+     * @param logger
+     *            logger object
+     * @param key
+     *            The key of the error message in the resource bundle
+     * @param parameters
+     *            Parameters for the error message.
+     */
+    public static void logErrorRB(Logger logger, String key, Object... parameters) {
+        if (LOGGER.isLoggable(Level.SEVERE)) {
+            LogRecord rec = new LogRecord(Level.SEVERE, key);
+            rec.setResourceBundle(OStrings.getResourceBundle());
+            rec.setParameters(parameters);
+            rec.setLoggerName(logger.getName());
+            logger.log(rec);
+        }
+    }
+
+    /**
+     * Writes an error message through a specified logger.
+     * 
+     * @param logger
+     *            logger object
+     * @param key
+     *            The key of the error message in the resource bundle
+     * @param parameters
+     *            Parameters for the error message.
+     */
+    public static void logErrorRB(Logger logger, Throwable ex, String key, Object... parameters) {
+        if (LOGGER.isLoggable(Level.SEVERE)) {
+            LogRecord rec = new LogRecord(Level.SEVERE, key);
+            rec.setResourceBundle(OStrings.getResourceBundle());
+            rec.setParameters(parameters);
+            rec.setLoggerName(logger.getName());
+            rec.setThrown(ex);
             logger.log(rec);
         }
     }

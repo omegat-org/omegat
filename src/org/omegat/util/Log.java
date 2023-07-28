@@ -201,6 +201,7 @@ public final class Log {
      *            Parameters for the error message. These are inserted by using
      *            StaticUtils.format.
      */
+    @Deprecated
     public static void logDebug(Logger logger, String message, Object... parameters) {
         if (logger.isLoggable(Level.FINE)) {
             LogRecord rec = new LogRecord(Level.FINE, message);

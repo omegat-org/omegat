@@ -34,7 +34,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -95,7 +94,8 @@ import gen.core.project.RepositoryDefinition;
  * @author Aaron Madlon-Kay
  */
 public class GITRemoteRepository2 implements IRemoteRepository2 {
-    private static final Logger LOGGER = Logger.getLogger(GITRemoteRepository2.class.getName());
+    private static final org.omegat.util.logging.Logger LOGGER = org.omegat.util.logging.Logger
+            .getLogger(GITRemoteRepository2.class.getName());
 
     // allow override default remote name and branch name.
     protected static final String DEFAULT_LOCAL_BRANCH = "master";
@@ -296,7 +296,7 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
                 // TODO fetch
                 git.fetch().setRemote(REMOTE).setTimeout(TIMEOUT).call();
             }
-            Log.logDebug(LOGGER, "GIT switchToVersion {0} ", version);
+            LOGGER.logDebug("GIT switchToVersion {0} ", version);
             git.reset().setMode(ResetType.HARD).call();
             git.checkout().setName(version).call();
             git.branchDelete().setForce(true).setBranchNames(defaultBranch).call();
@@ -317,12 +317,12 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
      */
     @Override
     public void addForCommit(String path) throws Exception {
-        Log.logInfoRB("GIT_START", "addForCommit");
+        LOGGER.logInfoRB("GIT_START", "addForCommit");
         try (Git git = new Git(repository)) {
             git.add().addFilepattern(path).call();
-            Log.logInfoRB("GIT_FINISH", "addForCommit");
+            LOGGER.logInfoRB("GIT_FINISH", "addForCommit");
         } catch (Exception ex) {
-            Log.logErrorRB("GIT_ERROR", "addForCommit", ex.getMessage());
+            LOGGER.logErrorRB("GIT_ERROR", "addForCommit", ex.getMessage());
             throw ex;
         }
     }
@@ -338,12 +338,12 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
      */
     @Override
     public void addForDeletion(String path) throws Exception {
-        Log.logInfoRB("GIT_START", "addForDelete");
+        LOGGER.logInfoRB("GIT_START", "addForDelete");
         try (Git git = new Git(repository)) {
             git.rm().addFilepattern(path).call();
-            Log.logInfoRB("GIT_FINISH", "addForDelete");
+            LOGGER.logInfoRB("GIT_FINISH", "addForDelete");
         } catch (Exception ex) {
-            Log.logErrorRB("GIT_ERROR", "addForDelete", ex.getMessage());
+            LOGGER.logErrorRB("GIT_ERROR", "addForDelete", ex.getMessage());
             throw ex;
         }
     }
@@ -455,10 +455,10 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
         }
         if (indexIsEmpty(DirCache.read(repository))) {
             // Nothing was actually added to the index so we can just return.
-            Log.logInfoRB("GIT_NO_CHANGES", "upload");
+            LOGGER.logInfoRB("GIT_NO_CHANGES", "upload");
             return null;
         }
-        Log.logInfoRB("GIT_START", "upload");
+        LOGGER.logInfoRB("GIT_START", "upload");
         try (Git git = new Git(repository)) {
             CommitCommand commitCommand = git.commit();
             commitCommand.setMessage(comment);
@@ -471,16 +471,16 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
                     .collect(Collectors.toList());
             String result;
             if (statuses.isEmpty() || statuses.stream().anyMatch(s -> s != RemoteRefUpdate.Status.OK)) {
-                Log.logWarningRB("GIT_CONFLICT");
+                LOGGER.logWarningRB("GIT_CONFLICT");
                 result = null;
             } else {
                 result = commit.getName();
             }
-            Log.logDebug(LOGGER, "GIT committed into new version {0} ", result);
-            Log.logInfoRB("GIT_FINISH", "upload");
+            LOGGER.logDebug("GIT committed into new version {0} ", result);
+            LOGGER.logInfoRB("GIT_FINISH", "upload");
             return result;
         } catch (Exception ex) {
-            Log.logErrorRB("GIT_ERROR", "upload", ex.getMessage());
+            LOGGER.logErrorRB("GIT_ERROR", "upload", ex.getMessage());
             if (ex instanceof TransportException) {
                 throw new NetworkException(ex);
             } else {

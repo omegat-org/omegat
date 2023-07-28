@@ -47,7 +47,8 @@ import org.omegat.util.Preferences;
  * @author Aaron Madlon-Kay
  */
 public class SaveThread extends Thread implements IAutoSave {
-    private static final org.omegat.util.logging.Logger LOGGER = org.omegat.util.logging.Logger.getLogger(SaveThread.class.getName());
+    private static final org.omegat.util.logging.Logger LOGGER = org.omegat.util.logging.Logger
+            .getLogger(SaveThread.class.getName());
 
     /** The length the thread should wait in milliseconds */
     private int waitDuration;

@@ -56,7 +56,6 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.Stack;
 import java.util.TreeMap;
-import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -133,7 +132,8 @@ import gen.core.filters.Filters;
  * @author Aaron Madlon-Kay
  */
 public class RealProject implements IProject {
-    private static final Logger LOGGER = Logger.getLogger(RealProject.class.getName());
+    private static final org.omegat.util.logging.Logger LOGGER = org.omegat.util.logging.Logger
+            .getLogger(RealProject.class.getName());
 
     protected final ProjectProperties config;
     protected final RemoteRepositoryProvider remoteRepositoryProvider;
@@ -894,7 +894,7 @@ public class RealProject implements IProject {
         if (remoteRepositoryProvider == null || preparedStatus != PreparedStatus.NONE || !isOnlineMode) {
             return;
         }
-        LOGGER.fine("Prepare team sync");
+        LOGGER.logDebug("Prepare team sync");
         tmxPrepared = null;
         glossaryPrepared = null;
         remoteRepositoryProvider.cleanPrepared();
@@ -928,7 +928,7 @@ public class RealProject implements IProject {
         if (remoteRepositoryProvider == null || preparedStatus != PreparedStatus.PREPARED) {
             return;
         }
-        LOGGER.fine("Rebase team sync");
+        LOGGER.logDebug("Rebase team sync");
         try {
             preparedStatus = PreparedStatus.PREPARED2;
             synchronized (RealProject.this) {
@@ -944,7 +944,7 @@ public class RealProject implements IProject {
                         if (preparedStatus != PreparedStatus.REBASED) {
                             return;
                         }
-                        LOGGER.fine("Commit team sync");
+                        LOGGER.logDebug("Commit team sync");
                         try {
                             String newVersion = RebaseAndCommit.commitPrepared(tmxPrepared,
                                     remoteRepositoryProvider, null);
@@ -1151,7 +1151,7 @@ public class RealProject implements IProject {
                 new SyncTMX(projectTMX, OStrings.getString("TMX_MERGE_MINE"), srcLang, trgLang),
                 new SyncTMX(headTMX, OStrings.getString("TMX_MERGE_THEIRS"), srcLang, trgLang), props);
         projectTMX.replaceContent(mergedTMX);
-        Log.logDebug(LOGGER, "Merge report: {0}", props.getReport());
+        LOGGER.logDebug("Merge report: {0}", props.getReport());
         commitDetails.append('\n');
         commitDetails.append(props.getReport().toString());
     }
@@ -1196,7 +1196,7 @@ public class RealProject implements IProject {
             Log.logErrorRB(ex, "TMXR_FATAL_ERROR_WHILE_PARSING", ex.getLineNumber(), ex.getColumnNumber());
             throw ex;
         } catch (Exception ex) {
-            Log.logErrorRB(ex, "TMXR_EXCEPTION_WHILE_PARSING", file.getAbsolutePath(), Log.getLogLocation());
+            Log.logErrorRB(ex, "TMXR_EXCEPTION_WHILE_PARSING");
             throw ex;
         }
         if (file.exists()) {

@@ -31,7 +31,6 @@ import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Map;
-import java.util.logging.Logger;
 
 import javax.xml.namespace.QName;
 
@@ -69,7 +68,8 @@ import gen.core.project.RepositoryDefinition;
  * @author Martin Fleurke
  */
 public class SVNRemoteRepository2 implements IRemoteRepository2 {
-    private static final Logger LOGGER = Logger.getLogger(SVNRemoteRepository2.class.getName());
+    private static final org.omegat.util.logging.Logger LOGGER = org.omegat.util.logging.Logger
+            .getLogger(SVNRemoteRepository2.class.getName());
 
     // System property to indicate backend.
     // {@see https://support.tmatesoft.com/t/replacing-trilead-ssh2-with-apache-sshd/2778/3}
@@ -123,7 +123,7 @@ public class SVNRemoteRepository2 implements IRemoteRepository2 {
             return null;
         }
         SVNInfo info = ourClientManager.getWCClient().doInfo(f, SVNRevision.BASE);
-        Log.logDebug(LOGGER, "SVN committed revision for file {0} is {1}", file,
+        LOGGER.logDebug("SVN committed revision for file {0} is {1}", file,
                 info.getCommittedRevision().getNumber());
 
         return Long.toString(info.getCommittedRevision().getNumber());
@@ -242,7 +242,7 @@ public class SVNRemoteRepository2 implements IRemoteRepository2 {
         try {
             SVNCommitInfo info = ourClientManager.getCommitClient().doCommit(forCommit, false, comment, null,
                     null, false, false, SVNDepth.INFINITY);
-            Log.logDebug(LOGGER, "SVN committed into new revision {0}", info.getNewRevision());
+            LOGGER.logDebug("SVN committed into new revision {0}", info.getNewRevision());
             if (info.getNewRevision() < 0) {
                 // empty commit - file was not changed
                 info = new SVNCommitInfo(Long.parseLong(getFileVersion("")), null, null, null);

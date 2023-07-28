@@ -26,11 +26,9 @@
 package org.omegat.core.team2;
 
 import java.io.File;
-import java.util.logging.Logger;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.omegat.util.Log;
 
 /**
  * Core for rebase and commit files.
@@ -43,7 +41,9 @@ public final class RebaseAndCommit {
 
     private RebaseAndCommit() {
     }
-    private static final Logger LOGGER = Logger.getLogger(RebaseAndCommit.class.getName());
+
+    private static final org.omegat.util.logging.Logger LOGGER = org.omegat.util.logging.Logger
+            .getLogger(RebaseAndCommit.class.getName());
 
     public static final String VERSION_PREFIX = "version-based-on.";
 
@@ -64,14 +64,14 @@ public final class RebaseAndCommit {
         Prepared r = new Prepared();
         r.path = path;
         currentBaseVersion = savedVersion;
-        Log.logDebug(LOGGER, "Retrieve BASE(" + currentBaseVersion + ") version of '" + path + "'");
+        LOGGER.logDebug("Retrieve BASE(" + currentBaseVersion + ") version of '" + path + "'");
         // retrieve BASE version
         File baseFile = provider.switchToVersion(path, currentBaseVersion);
         // save it to prepared dir
         r.versionBase = currentBaseVersion;
         r.fileBase = provider.toPrepared(baseFile);
 
-        Log.logDebug(LOGGER, "Retrieve HEAD version of '" + path + "'");
+        LOGGER.logDebug("Retrieve HEAD version of '" + path + "'");
         // retrieve HEAD version
         File headFile = provider.switchToVersion(path, null);
         // get version id
@@ -88,7 +88,7 @@ public final class RebaseAndCommit {
             throw new RuntimeException("Path is not under mapping: " + path);
         }
 
-        Log.logDebug(LOGGER, "Rebase and commit '" + path + "'");
+        LOGGER.logDebug("Rebase and commit '" + path + "'");
 
         final String currentBaseVersion;
         String savedVersion = provider.getTeamSettings().get(VERSION_PREFIX + path);
@@ -111,14 +111,14 @@ public final class RebaseAndCommit {
             }
             if (!localFile.exists()) {
                 // there is no local file - just use remote
-                Log.logDebug(LOGGER, "local file '" + path + "' doesn't exist");
+                LOGGER.logDebug("local file '" + path + "' doesn't exist");
                 fileChangedLocally = false;
             } else if (FileUtils.contentEquals(baseRepoFile, localFile)) {
                 // versioned file was not changed - no need to commit
-                Log.logDebug(LOGGER, "local file '" + path + "' wasn't changed");
+                LOGGER.logDebug("local file '" + path + "' wasn't changed");
                 fileChangedLocally = false;
             } else {
-                Log.logDebug(LOGGER, "local file '" + path + "' was changed");
+                LOGGER.logDebug("local file '" + path + "' was changed");
                 fileChangedLocally = true;
                 rebaser.parseBaseFile(baseRepoFile);
             }
@@ -147,11 +147,11 @@ public final class RebaseAndCommit {
                     fileChangedRemotely = false;
                 }
             } else if (StringUtils.equals(currentBaseVersion, headVersion)) {
-                Log.logDebug(LOGGER, "remote file '" + path + "' wasn't changed");
+                LOGGER.logDebug("remote file '" + path + "' wasn't changed");
                 fileChangedRemotely = false;
             } else {
                 // base and head versions are differ - somebody else committed changes
-                Log.logDebug(LOGGER, "remote file '" + path + "' was changed");
+                LOGGER.logDebug("remote file '" + path + "' was changed");
                 fileChangedRemotely = true;
                 rebaser.parseHeadFile(headRepoFile);
             }
@@ -164,21 +164,21 @@ public final class RebaseAndCommit {
         boolean needBackup = false;
         if (fileChangedLocally && fileChangedRemotely) {
             // rebase need only in case file was changed locally AND remotely
-            Log.logDebug(LOGGER, "rebase and save '" + path + "'");
+            LOGGER.logDebug("rebase and save '" + path + "'");
             needBackup = true;
             rebaser.rebaseAndSave(tempOut);
         } else if (fileChangedLocally && !fileChangedRemotely) {
             // only local changes - just use local file
-            Log.logDebug(LOGGER, "only local changes - just use local file '" + path + "'");
+            LOGGER.logDebug("only local changes - just use local file '" + path + "'");
         } else if (!fileChangedLocally && fileChangedRemotely) {
             // only remote changes - get remote
-            Log.logDebug(LOGGER, "only remote changes - get remote '" + path + "'");
+            LOGGER.logDebug("only remote changes - get remote '" + path + "'");
             needBackup = true;
             if (headRepoFile.exists()) { // otherwise file was removed remotely
                 FileUtils.copyFile(headRepoFile, tempOut);
             }
         } else {
-            Log.logDebug(LOGGER, "there are no changes '" + path + "'");
+            LOGGER.logDebug("there are no changes '" + path + "'");
             // there are no changes
         }
 

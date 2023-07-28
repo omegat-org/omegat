@@ -34,7 +34,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -80,6 +79,8 @@ import org.eclipse.jgit.treewalk.AbstractTreeIterator;
 import org.eclipse.jgit.treewalk.CanonicalTreeParser;
 import org.eclipse.jgit.treewalk.FileTreeIterator;
 import org.eclipse.jgit.util.FS;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import org.omegat.core.team2.IRemoteRepository2;
 import org.omegat.core.team2.ProjectTeamSettings;
@@ -95,7 +96,7 @@ import gen.core.project.RepositoryDefinition;
  * @author Aaron Madlon-Kay
  */
 public class GITRemoteRepository2 implements IRemoteRepository2 {
-    private static final Logger LOGGER = Logger.getLogger(GITRemoteRepository2.class.getName());
+    private static final Logger LOGGER = LoggerFactory.getLogger(GITRemoteRepository2.class);
 
     // allow override default remote name and branch name.
     protected static final String DEFAULT_LOCAL_BRANCH = "master";
@@ -296,7 +297,7 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
                 // TODO fetch
                 git.fetch().setRemote(REMOTE).setTimeout(TIMEOUT).call();
             }
-            Log.logDebug(LOGGER, "GIT switchToVersion {0} ", version);
+            LOGGER.atDebug().log("GIT switchToVersion {} ", version);
             git.reset().setMode(ResetType.HARD).call();
             git.checkout().setName(version).call();
             git.branchDelete().setForce(true).setBranchNames(defaultBranch).call();
@@ -317,12 +318,12 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
      */
     @Override
     public void addForCommit(String path) throws Exception {
-        Log.logInfoRB("GIT_START", "addForCommit");
+        LOGGER.atInfo().log(Log.getMessage("GIT_START", "addForCommit"));
         try (Git git = new Git(repository)) {
             git.add().addFilepattern(path).call();
-            Log.logInfoRB("GIT_FINISH", "addForCommit");
+            LOGGER.atInfo().log(Log.getMessage("GIT_FINISH", "addForCommit"));
         } catch (Exception ex) {
-            Log.logErrorRB("GIT_ERROR", "addForCommit", ex.getMessage());
+            LOGGER.atError().log(Log.getMessage("GIT_ERROR", "addForCommit", ex.getMessage()));
             throw ex;
         }
     }
@@ -338,12 +339,12 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
      */
     @Override
     public void addForDeletion(String path) throws Exception {
-        Log.logInfoRB("GIT_START", "addForDelete");
+        LOGGER.atInfo().log(Log.getMessage("GIT_START", "addForDelete"));
         try (Git git = new Git(repository)) {
             git.rm().addFilepattern(path).call();
-            Log.logInfoRB("GIT_FINISH", "addForDelete");
+            LOGGER.atInfo().log(Log.getMessage("GIT_FINISH", "addForDelete"));
         } catch (Exception ex) {
-            Log.logErrorRB("GIT_ERROR", "addForDelete", ex.getMessage());
+            LOGGER.atError().log(Log.getMessage("GIT_ERROR", "addForDelete", ex.getMessage()));
             throw ex;
         }
     }
@@ -455,10 +456,10 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
         }
         if (indexIsEmpty(DirCache.read(repository))) {
             // Nothing was actually added to the index so we can just return.
-            Log.logInfoRB("GIT_NO_CHANGES", "upload");
+            LOGGER.atInfo().log(Log.getMessage("GIT_NO_CHANGES", "upload"));
             return null;
         }
-        Log.logInfoRB("GIT_START", "upload");
+        LOGGER.atInfo().log(Log.getMessage("GIT_START", "upload"));
         try (Git git = new Git(repository)) {
             CommitCommand commitCommand = git.commit();
             commitCommand.setMessage(comment);
@@ -471,16 +472,16 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
                     .collect(Collectors.toList());
             String result;
             if (statuses.isEmpty() || statuses.stream().anyMatch(s -> s != RemoteRefUpdate.Status.OK)) {
-                Log.logWarningRB("GIT_CONFLICT");
+                LOGGER.atWarn().log(Log.getMessage("GIT_CONFLICT"));
                 result = null;
             } else {
                 result = commit.getName();
             }
-            Log.logDebug(LOGGER, "GIT committed into new version {0} ", result);
-            Log.logInfoRB("GIT_FINISH", "upload");
+            LOGGER.atDebug().log("GIT committed into new version {} ", result);
+            LOGGER.atInfo().log(Log.getMessage("GIT_FINISH", "upload"));
             return result;
         } catch (Exception ex) {
-            Log.logErrorRB("GIT_ERROR", "upload", ex.getMessage());
+            LOGGER.atError().log(Log.getMessage("GIT_ERROR", "upload", ex.getMessage()));
             if (ex instanceof TransportException) {
                 throw new NetworkException(ex);
             } else {

@@ -31,12 +31,14 @@ package org.omegat.core.threads;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.concurrent.TimeoutException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import org.omegat.core.Core;
 import org.omegat.core.KnownException;
 import org.omegat.core.data.IProject;
+import org.omegat.util.Log;
 import org.omegat.util.Preferences;
 
 /**
@@ -49,7 +51,7 @@ import org.omegat.util.Preferences;
  * @author Aaron Madlon-Kay
  */
 public class SaveThread extends Thread implements IAutoSave {
-    private static final Logger LOGGER = Logger.getLogger(SaveThread.class.getName());
+    private static final Logger LOGGER = LoggerFactory.getLogger(SaveThread.class);
 
     /** The length the thread should wait in milliseconds */
     private int waitDuration;
@@ -73,12 +75,12 @@ public class SaveThread extends Thread implements IAutoSave {
     }
 
     public synchronized void disable() {
-        LOGGER.fine("Disable autosave");
+        LOGGER.atDebug().log("Disable autosave"); // NOI18N
         enabled = false;
     }
 
     public synchronized void enable() {
-        LOGGER.fine("Enable autosave");
+        LOGGER.atDebug().log("Enable autosave"); // NOI18N
         enabled = true;
         needToSaveNow = false;
         notify();
@@ -98,7 +100,7 @@ public class SaveThread extends Thread implements IAutoSave {
                 if (needToSaveNow && enabled) {
                     // Wait finished by time and autosaving enabled.
                     IProject dataEngine = Core.getProject();
-                    LOGGER.fine("Start project save from SaveThread");
+                    LOGGER.atDebug().log("Start project save from SaveThread"); // NOI18N
                     try {
                         Core.executeExclusively(false, () -> {
                             dataEngine.saveProject(false);
@@ -107,18 +109,17 @@ public class SaveThread extends Thread implements IAutoSave {
                         Core.getMainWindow().showStatusMessageRB("ST_PROJECT_AUTOSAVED",
                                 DateFormat.getTimeInstance(DateFormat.SHORT).format(new Date()));
                     } catch (TimeoutException ex) {
-                        LOGGER.warning("Lock trying timeout during autosave");
+                        LOGGER.atWarn().log(Log.getMessage("AUTOSAVE_TIMEOUT_TAKING_LOCK"));
                     } catch (KnownException ex) {
                         Core.getMainWindow().showStatusMessageRB(ex.getMessage(), ex.getParams());
                     } catch (Exception ex) {
-                        LOGGER.log(Level.WARNING, "Error save", ex);
+                        LOGGER.atWarn().log(Log.getMessage("AUTOSAVE_GENERIC_ERROR", ex.getMessage()));
                     }
-                    LOGGER.fine("Finish project save from SaveThread");
+                    LOGGER.atDebug().log("Finish project save from SaveThread"); // NOI18N
                 }
             }
         } catch (InterruptedException ex) {
-            LOGGER.log(Level.WARNING, "Save thread interrupted", ex);
-            return;
+            LOGGER.atWarn().log(Log.getMessage("AUTOSAVE_INTERRUPTED", ex.getMessage()));
         }
     }
 }

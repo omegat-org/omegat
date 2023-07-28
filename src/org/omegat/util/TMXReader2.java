@@ -42,7 +42,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
-import java.util.logging.Logger;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.ZipInputStream;
 
@@ -60,6 +59,8 @@ import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 
 import org.apache.commons.io.input.XmlStreamReader;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.xml.sax.EntityResolver;
 import org.xml.sax.InputSource;
 
@@ -101,6 +102,8 @@ public class TMXReader2 {
     StringBuilder segInlineTag = new StringBuilder();
     InlineTagHandler inlineTagHandler = new InlineTagHandler();
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(TMXReader2.class);
+
     /**
      * Detects charset of XML file.
      */
@@ -116,9 +119,10 @@ public class TMXReader2 {
         factory.setXMLReporter(new XMLReporter() {
             public void report(String message, String errorType, Object info, Location location)
                     throws XMLStreamException {
-                Log.logWarningRB("TMXR_WARNING_WHILE_PARSING", location.getLineNumber(),
-                        location.getColumnNumber());
-                Log.log(message + ": " + info);
+                LOGGER.atWarn().log(Log.getMessage("TMXR_WARNING_WHILE_PARSING",
+                        location.getLineNumber(),
+                        location.getColumnNumber()));
+                LOGGER.atInfo().log(message + ": " + info);
                 warningsCount++;
             }
         });
@@ -146,7 +150,7 @@ public class TMXReader2 {
         this.isSegmentingEnabled = isSegmentingEnabled;
 
         // log the parsing attempt
-        Log.logRB("TMXR_INFO_READING_FILE", file.getAbsolutePath());
+        LOGGER.atInfo().log(Log.getMessage("TMXR_INFO_READING_FILE", file.getAbsolutePath()));
 
         boolean allFound = true;
 
@@ -170,7 +174,7 @@ public class TMXReader2 {
                 }
             }
         } catch (XMLStreamException ex) {
-            Log.logErrorRB(ex, "TMXR_ERROR_XML_STREAM_ERROR", file.getAbsolutePath());
+            LOGGER.atError().log(Log.getMessage("TMXR_ERROR_XML_STREAM_ERROR", file.getAbsolutePath()), ex);
             throw ex;
         } catch (IOException e) {
         } finally {
@@ -180,14 +184,12 @@ public class TMXReader2 {
         }
 
         if (!allFound) {
-            Log.logWarningRB("TMXR_WARNING_SOURCE_NOT_FOUND");
+            LOGGER.atWarn().log(Log.getMessage("TMXR_WARNING_SOURCE_NOT_FOUND"));
             warningsCount++;
         }
-        Log.logRB("TMXR_INFO_READING_COMPLETE");
-        Log.log("");
+        LOGGER.atInfo().log(Log.getMessage("TMXR_INFO_READING_COMPLETE"));
         if (errorsCount > 0 || warningsCount > 0) {
-            Log.logDebug(Logger.getLogger(getClass().getName()), "Errors: {0}, Warnings: {1}", errorsCount,
-                    warningsCount);
+            LOGGER.atDebug().log("Errors: {}, Warnings: {}", errorsCount, warningsCount);
         }
     }
 
@@ -212,22 +214,23 @@ public class TMXReader2 {
         isOmegaT = CT_OMEGAT.equals(getAttributeValue(element, "creationtool"));
 
         // log some details
-        Log.logRB("TMXR_INFO_CREATION_TOOL", getAttributeValue(element, "creationtool"));
-        Log.logRB("TMXR_INFO_CREATION_TOOL_VERSION", getAttributeValue(element, "creationtoolversion"));
-        Log.logRB("TMXR_INFO_SEG_TYPE", getAttributeValue(element, "segtype"));
-        Log.logRB("TMXR_INFO_SOURCE_LANG", getAttributeValue(element, "srclang"));
+        LOGGER.atInfo().log(Log.getMessage("TMXR_INFO_CREATION_TOOL", getAttributeValue(element, "creationtool")));
+        LOGGER.atInfo().log(Log.getMessage("TMXR_INFO_CREATION_TOOL_VERSION", getAttributeValue(element, "creationtoolversion")));
+        LOGGER.atInfo().log(Log.getMessage("TMXR_INFO_SEG_TYPE", getAttributeValue(element, "segtype")));
+        LOGGER.atInfo().log(Log.getMessage("TMXR_INFO_SOURCE_LANG", getAttributeValue(element, "srclang")));
 
         // give a warning if the TMX source language is
         // different from the project source language
         String tmxSourceLanguage = getAttributeValue(element, "srclang");
         if (!sourceLanguage.getLanguage().equalsIgnoreCase(tmxSourceLanguage)) {
-            Log.logWarningRB("TMXR_WARNING_INCORRECT_SOURCE_LANG", tmxSourceLanguage, sourceLanguage);
+            LOGGER.atWarn().log(Log.getMessage("TMXR_WARNING_INCORRECT_SOURCE_LANG", tmxSourceLanguage,
+                    sourceLanguage));
         }
 
         // give a warning that TMX file will be upgraded to sentence
         // segmentation
         if (isSegmentingEnabled && isParagraphSegtype) {
-            Log.logWarningRB("TMXR_WARNING_UPGRADE_SENTSEG");
+            LOGGER.atWarn().log(Log.getMessage("TMXR_WARNING_UPGRADE_SENTSEG"));
         }
     }
 
@@ -546,8 +549,8 @@ public class TMXReader2 {
                 }
                 if (tagN == null) {
                     // check error of TMX reading
-                    Log.logErrorRB("TMX_ERROR_READING_LEVEL2", e.getLocation().getLineNumber(),
-                            e.getLocation().getColumnNumber());
+                    LOGGER.atError().log(Log.getMessage("TMX_ERROR_READING_LEVEL2", e.getLocation().getLineNumber(),
+                            e.getLocation().getColumnNumber()));
                     errorsCount++;
                     segContent.setLength(0);
                     return;

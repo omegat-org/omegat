@@ -178,6 +178,7 @@ dependencies {
     } else {
         implementation 'commons-io:commons-io:2.11.0'
         implementation 'org.apache.commons:commons-lang3:3.11'
+        api "org.slf4j:slf4j-api:${slf4jVersion}"
         runtimeOnly "org.slf4j:slf4j-jdk14:${slf4jVersion}"
 
         // macOS integration

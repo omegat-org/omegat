@@ -348,6 +348,13 @@ public final class StaticUtils {
     }
 
     /**
+     * Returns the path to the log file.
+     */
+    public static String getLogLocation() {
+        return StaticUtils.getConfigDir() + "/logs";
+    }
+
+    /**
      * Encodes the array of bytes to store them in a plain text file.
      */
     public static String uuencode(byte[] buf) {

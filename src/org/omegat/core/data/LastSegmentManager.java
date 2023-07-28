@@ -31,7 +31,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 import java.util.Properties;
-import java.util.logging.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import org.omegat.core.Core;
 import org.omegat.core.data.IProject.FileInfo;
@@ -48,7 +50,7 @@ public final class LastSegmentManager {
     private LastSegmentManager() {
     }
 
-    private static final Logger LOGGER = Logger.getLogger(LastSegmentManager.class.getName());
+    private static final Logger LOGGER = LoggerFactory.getLogger(LastSegmentManager.class);
 
     private static final String LAST_ENTRY_SRC = "LAST_ENTRY_SRC";
     private static final String LAST_ENTRY_FILE = "LAST_ENTRY_FILE";
@@ -88,7 +90,8 @@ public final class LastSegmentManager {
             fos = new FileOutputStream(getLastEntryFile());
             prop.store(fos, null);
         } catch (Exception e) {
-            Log.logDebug(LOGGER, "Could not write the last entry number: {0}", e.getMessage());
+            LOGGER.atDebug().log(Log.replacePlaceholders("Could not write the last entry number: {0}",
+                    e.getMessage()));
         } finally {
             if (fos != null) {
                 try {
@@ -117,7 +120,7 @@ public final class LastSegmentManager {
         try (FileInputStream fis = new FileInputStream(lastEntryFile)) {
             prop.load(fis);
         } catch (IOException e) {
-            Log.logDebug(LOGGER, "Could not load last segment info", e.getMessage());
+            LOGGER.atDebug().log(Log.replacePlaceholders("Could not load last segment info", e.getMessage()));
             return 1;
         }
 
@@ -127,14 +130,14 @@ public final class LastSegmentManager {
             String lastEntry = prop.getProperty(LAST_ENTRY_NUMBER, "1");
             lastEntryNumber = Integer.parseInt(lastEntry, 10);
         } catch (Exception e) {
-            Log.logDebug(LOGGER, "Cannot jump to last entry #" + lastEntryNumber + ":" + e.getMessage());
+            LOGGER.atDebug().log("Cannot jump to last entry #" + lastEntryNumber + ":" + e.getMessage());
         }
-        Log.logDebug(LOGGER, "Jumping to last entry #" + lastEntryNumber + ".");
+        LOGGER.atDebug().log("Jumping to last entry #" + lastEntryNumber + ".");
 
         List<SourceTextEntry> allEntries = Core.getProject().getAllEntries();
 
         if (allEntries.size() < lastEntryNumber) {
-            Log.logDebug(LOGGER, "Not enough segments to jump to " + lastEntryNumber);
+            LOGGER.atDebug().log("Not enough segments to jump to " + lastEntryNumber);
             Core.getMainWindow().showStatusMessageRB(null);
             return 1;
         }
@@ -153,13 +156,14 @@ public final class LastSegmentManager {
         }
 
         // Check to see if the source and file match
-        Log.logDebug(LOGGER,
-                "Last entry #" + lastEntryNumber + " mismatch (file \"" + lastFile + "\", src \"" + lastSrc + "\")");
+        LOGGER.atDebug().log("Last entry #" + lastEntryNumber + " mismatch (file \"" + lastFile + "\", "
+                + "src \""
+                + lastSrc + "\")");
 
         int fileIndex = fileIndex(lastFile);
 
         if (fileIndex == -1) {
-            Log.logDebug(LOGGER, "File \"" + lastFile + "\" is not in the project anymore.");
+            LOGGER.atDebug().log("File \"" + lastFile + "\" is not in the project anymore.");
             Core.getMainWindow().showStatusMessageRB(null);
             return 1;
         }
@@ -168,7 +172,7 @@ public final class LastSegmentManager {
         List<SourceTextEntry> fileEntries = Core.getProject().getProjectFiles().get(fileIndex).entries;
         for (SourceTextEntry entry : fileEntries) {
             if (entry.getSrcText().equals(lastSrc)) {
-                Log.logDebug(LOGGER, "Found a matching entry in the right file.");
+                LOGGER.atDebug().log("Found a matching entry in the right file.");
                 return entry.entryNum();
             }
         }
@@ -177,7 +181,7 @@ public final class LastSegmentManager {
         // project or quit ?
         for (SourceTextEntry entry : allEntries) {
             if (entry.getSrcText().equals(lastSrc)) {
-                Log.logDebug(LOGGER, "Found a matching entry in the wrong file.");
+                LOGGER.atDebug().log("Found a matching entry in the wrong file.");
                 return entry.entryNum();
             }
         }

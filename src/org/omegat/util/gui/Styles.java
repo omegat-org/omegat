@@ -30,7 +30,6 @@ package org.omegat.util.gui;
 
 import java.awt.Color;
 import java.util.MissingResourceException;
-import java.util.logging.Logger;
 
 import javax.swing.UIManager;
 import javax.swing.text.AttributeSet;
@@ -38,7 +37,9 @@ import javax.swing.text.MutableAttributeSet;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 
-import org.omegat.util.Log;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 
@@ -50,7 +51,7 @@ import org.omegat.util.Preferences;
  * @author Briac Pilpre
  */
 public final class Styles {
-    private static final Logger LOGGER = Logger.getLogger(EditorColor.class.getName());
+    private static final Logger LOGGER = LoggerFactory.getLogger(EditorColor.class);
 
     private Styles() {
     }
@@ -126,8 +127,7 @@ public final class Styles {
                 try {
                     this.color = Color.decode(prefColor);
                 } catch (NumberFormatException e) {
-                    Log.logDebug(LOGGER, "Cannot set custom color for {0}, default to {1}.", name(),
-                            prefColor);
+                    LOGGER.atDebug().log("Cannot set custom color for {}, default to {}.", name(), prefColor);
                 }
             }
         }
@@ -152,7 +152,7 @@ public final class Styles {
             try {
                 return OStrings.getString(name());
             } catch (MissingResourceException ex) {
-                Log.log(ex);
+                LOGGER.atInfo().log("", ex);
                 return name();
             }
         }

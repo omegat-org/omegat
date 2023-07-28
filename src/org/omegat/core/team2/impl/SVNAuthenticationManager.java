@@ -26,12 +26,11 @@
 package org.omegat.core.team2.impl;
 
 import java.io.Console;
-import java.util.Arrays;
-import java.util.logging.Logger;
 
 import javax.net.ssl.TrustManager;
 
-import org.checkerframework.checker.units.qual.C;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.tmatesoft.svn.core.SVNErrorCode;
 import org.tmatesoft.svn.core.SVNErrorMessage;
 import org.tmatesoft.svn.core.SVNException;
@@ -72,7 +71,7 @@ public class SVNAuthenticationManager implements ISVNAuthenticationManager {
     static final String KEY_USERNAME_SUFFIX = "username";
     static final String KEY_PASSWORD_SUFFIX = "password";
 
-    private static final Logger LOGGER = Logger.getLogger(SVNAuthenticationManager.class.getName());
+    private static final Logger LOGGER = LoggerFactory.getLogger(SVNAuthenticationManager.class);
 
     private final RepositoryDefinition repoDef;
     private final String predefinedUser;
@@ -102,7 +101,7 @@ public class SVNAuthenticationManager implements ISVNAuthenticationManager {
     public void acknowledgeAuthentication(boolean accepted, String kind, String realm,
             SVNErrorMessage errorMessage, SVNAuthentication authentication) throws SVNException {
         if (!accepted) {
-            Log.logDebug(LOGGER, "SVN authentication error: {0}", errorMessage);
+            LOGGER.atDebug().log("SVN authentication error: {}", errorMessage);
         }
     }
 

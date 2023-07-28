@@ -34,8 +34,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
-import java.util.logging.Formatter;
-import java.util.logging.Handler;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.LogRecord;
@@ -54,19 +52,18 @@ public final class Log {
     private Log() {
     }
 
-    private static final Logger LOGGER;
+    private static final org.slf4j.Logger LOGGER;
 
     static {
-        LOGGER = Logger.getLogger("global");
-
         boolean loaded = false;
         File usersLogSettings = new File(StaticUtils.getConfigDir(), "logger.properties");
+
         if (usersLogSettings.isFile() && usersLogSettings.canRead()) {
             // try to load logger settings from user home dir
             try (InputStream in = new FileInputStream(usersLogSettings)) {
                 init(in);
                 loaded = true;
-            } catch (Exception e) {
+            } catch (Exception ignored) {
             }
         }
         if (!loaded) {
@@ -74,9 +71,10 @@ public final class Log {
             try (InputStream in = Log.class.getResourceAsStream("/org/omegat/logger.properties")) {
                 init(in);
             } catch (IOException ex) {
-                LOGGER.log(Level.SEVERE, "Can't open file for logging", ex);
+                System.out.println("Can't open file for logging");
             }
         }
+        LOGGER = org.slf4j.LoggerFactory.getLogger("global");
     }
 
     /**
@@ -85,7 +83,7 @@ public final class Log {
      * @param in
      *            settings
      */
-    protected static void init(InputStream in) throws IOException {
+    private static void init(InputStream in) throws IOException {
         Properties props = new Properties();
         props.load(in);
         String handlers = props.getProperty("handlers");
@@ -94,12 +92,11 @@ public final class Log {
 
             ByteArrayOutputStream b = new ByteArrayOutputStream();
             props.store(b, null);
-            LogManager.getLogManager().readConfiguration(new ByteArrayInputStream(b.toByteArray()));
-
-            Logger rootLogger = LogManager.getLogManager().getLogger("");
+            java.util.logging.LogManager.getLogManager().readConfiguration(new ByteArrayInputStream(b.toByteArray()));
+            java.util.logging.Logger rootLogger = java.util.logging.LogManager.getLogManager().getLogger("");
 
             // remove initialized handlers
-            for (Handler h : rootLogger.getHandlers()) {
+            for (java.util.logging.Handler h : rootLogger.getHandlers()) {
                 rootLogger.removeHandler(h);
             }
 
@@ -108,15 +105,16 @@ public final class Log {
                 String word = hn.trim();
                 try {
                     Class<?> clz = Log.class.getClassLoader().loadClass(word);
-                    Handler h = (Handler) clz.getDeclaredConstructor().newInstance();
+                    java.util.logging.Handler h = (java.util.logging.Handler) clz.getDeclaredConstructor()
+                            .newInstance();
                     String fname = props.getProperty(word + ".formatter");
                     if (fname != null) {
                         Class<?> clzF = Log.class.getClassLoader().loadClass(fname.trim());
-                        h.setFormatter((Formatter) clzF.getDeclaredConstructor().newInstance());
+                        h.setFormatter((java.util.logging.Formatter) clzF.getDeclaredConstructor().newInstance());
                     }
                     String level = props.getProperty(word + ".level");
                     if (level != null) {
-                        h.setLevel(Level.parse(level));
+                        h.setLevel(java.util.logging.Level.parse(level));
                     }
                     rootLogger.addHandler(h);
                 } catch (Exception ex) {
@@ -135,22 +133,33 @@ public final class Log {
     }
 
     /**
-     * Compute the filename of the log file
+     * Compute the filename of the log file.
+     *
      * @return the filename of the log, or an empty string
      */
     public static String getLogFileName() {
-        Handler[] hand = LOGGER.getParent().getHandlers();
-        if (hand[1] instanceof OmegaTFileHandler) {
-            OmegaTFileHandler omegatLog = (OmegaTFileHandler) hand[1];
-            return omegatLog.getOmegaTLogFileName() + ".log";
-        } else {
-            return "";
-        }
-
+        return getJULFileName();
     }
 
     /**
-     * Compute the full path of the log file
+     * Compute the filename of the log file from JUL Log manager.
+     *
+     * @return the filename of the log, or an empty string
+     */
+    private static String getJULFileName() {
+        java.util.logging.Logger rootLogger = java.util.logging.LogManager.getLogManager().getLogger("");
+        for (java.util.logging.Handler handler : rootLogger.getHandlers()) {
+            if (handler instanceof OmegaTFileHandler) {
+                OmegaTFileHandler omegatLog = (OmegaTFileHandler) handler;
+                return omegatLog.getLogFileName();
+            }
+        }
+        return "";
+    }
+
+    /**
+     * Compute the full path of the log file.
+     *
      * @return the full path of the log file
      */
     public static String getLogFilePath() {
@@ -166,14 +175,23 @@ public final class Log {
      *            The new level
      */
     public static void setLevel(Level level) {
-        LOGGER.setLevel(level);
+        org.slf4j.ILoggerFactory loggerFactory = org.slf4j.LoggerFactory.getILoggerFactory();
+        Class<? extends org.slf4j.ILoggerFactory> loggerFactoryClass = loggerFactory.getClass();
+        String loggerName = loggerFactoryClass.getName();
+        if (loggerName.equals("org.slf4j.jul.JDK14LoggerFactory")) {
+            // when slf4j-jdk14
+            java.util.logging.Logger rootLogger = LogManager.getLogManager().getLogger("");
+            rootLogger.setLevel(level);
+            // } else if (loggerName.equals("org.slf4j.simple.SimpleLoggerFactory")) {
+            // } else if (loggerName.equals("ch.qos.logback.classic.LoggerContext")) {
+        }
     }
 
     /**
      * Logs what otherwise would go to System.out
      */
     public static void log(String s) {
-        LOGGER.info(s);
+        LOGGER.atInfo().log(s);
     }
 
     /**
@@ -186,13 +204,7 @@ public final class Log {
      *            StaticUtils.format.
      */
     public static void logRB(String key, Object... parameters) {
-        if (LOGGER.isLoggable(Level.INFO)) {
-            LogRecord rec = new LogRecord(Level.INFO, key);
-            rec.setResourceBundle(OStrings.getResourceBundle());
-            rec.setParameters(parameters);
-            rec.setLoggerName(LOGGER.getName());
-            LOGGER.log(rec);
-        }
+        LOGGER.atInfo().log(getMessage(key, parameters));
     }
 
     /**
@@ -205,7 +217,7 @@ public final class Log {
      *            The exception or error to log
      */
     public static void log(Throwable throwable) {
-        LOGGER.log(Level.SEVERE, "", throwable);
+        LOGGER.atError().log("", throwable);
     }
 
     /**
@@ -223,13 +235,7 @@ public final class Log {
      *            StaticUtils.format.
      */
     public static void logWarningRB(String key, Object... parameters) {
-        if (LOGGER.isLoggable(Level.WARNING)) {
-            LogRecord rec = new LogRecord(Level.WARNING, key);
-            rec.setResourceBundle(OStrings.getResourceBundle());
-            rec.setParameters(parameters);
-            rec.setLoggerName(LOGGER.getName());
-            LOGGER.log(rec);
-        }
+        LOGGER.atWarn().log(getMessage(key, parameters));
     }
 
     /**
@@ -247,14 +253,8 @@ public final class Log {
      *            StaticUtils.format.
      */
     public static void logInfoRB(String key, Object... parameters) {
-        if (LOGGER.isLoggable(Level.INFO)) {
-            LogRecord rec = new LogRecord(Level.INFO, key);
-            rec.setResourceBundle(OStrings.getResourceBundle());
-            rec.setParameters(parameters);
-            rec.setLoggerName(LOGGER.getName());
-            LOGGER.log(rec);
-            }
-        }
+        LOGGER.atInfo().log(getMessage(key, parameters));
+    }
 
     /**
      * Writes an error message to the log (to be retrieved from the resource
@@ -271,13 +271,7 @@ public final class Log {
      *            StaticUtils.format.
      */
     public static void logErrorRB(String key, Object... parameters) {
-        if (LOGGER.isLoggable(Level.SEVERE)) {
-            LogRecord rec = new LogRecord(Level.SEVERE, key);
-            rec.setResourceBundle(OStrings.getResourceBundle());
-            rec.setParameters(parameters);
-            rec.setLoggerName(LOGGER.getName());
-            LOGGER.log(rec);
-        }
+        LOGGER.atError().log(getMessage(key, parameters));
     }
 
     /**
@@ -297,14 +291,7 @@ public final class Log {
      *            StaticUtils.format.
      */
     public static void logErrorRB(Throwable ex, String key, Object... parameters) {
-        if (LOGGER.isLoggable(Level.SEVERE)) {
-            LogRecord rec = new LogRecord(Level.SEVERE, key);
-            rec.setResourceBundle(OStrings.getResourceBundle());
-            rec.setParameters(parameters);
-            rec.setLoggerName(LOGGER.getName());
-            rec.setThrown(ex);
-            LOGGER.log(rec);
-        }
+        LOGGER.atError().log(getMessage(key, parameters), ex);
     }
 
     /**
@@ -316,6 +303,7 @@ public final class Log {
      *            Parameters for the error message. These are inserted by using
      *            StaticUtils.format.
      */
+    @Deprecated
     public static void logDebug(Logger logger, String message, Object... parameters) {
         if (logger.isLoggable(Level.FINE)) {
             LogRecord rec = new LogRecord(Level.FINE, message);
@@ -324,4 +312,18 @@ public final class Log {
             logger.log(rec);
         }
     }
+
+    public static String getMessage(String key, Object... args) {
+        String message = OStrings.getString(key);
+        return replacePlaceholders(message, args) + "(" + key + ")";
+    }
+
+    public static String replacePlaceholders(String message, Object... args) {
+        for (int i = 0; i < args.length; i++) {
+            String placeholder = "{" + i + "}";
+            message = message.replace(placeholder, String.valueOf(args[i]));
+        }
+        return message;
+    }
+
 }

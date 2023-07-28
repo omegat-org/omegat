@@ -31,10 +31,11 @@ import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Map;
-import java.util.logging.Logger;
 
 import javax.xml.namespace.QName;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.tmatesoft.svn.core.ISVNLogEntryHandler;
 import org.tmatesoft.svn.core.SVNAuthenticationException;
 import org.tmatesoft.svn.core.SVNCommitInfo;
@@ -69,7 +70,7 @@ import gen.core.project.RepositoryDefinition;
  * @author Martin Fleurke
  */
 public class SVNRemoteRepository2 implements IRemoteRepository2 {
-    private static final Logger LOGGER = Logger.getLogger(SVNRemoteRepository2.class.getName());
+    private static final Logger LOGGER = LoggerFactory.getLogger(SVNRemoteRepository2.class);
 
     // System property to indicate backend.
     // {@see https://support.tmatesoft.com/t/replacing-trilead-ssh2-with-apache-sshd/2778/3}
@@ -123,7 +124,7 @@ public class SVNRemoteRepository2 implements IRemoteRepository2 {
             return null;
         }
         SVNInfo info = ourClientManager.getWCClient().doInfo(f, SVNRevision.BASE);
-        Log.logDebug(LOGGER, "SVN committed revision for file {0} is {1}", file,
+        LOGGER.atDebug().log("SVN committed revision for file {} is {}", file,
                 info.getCommittedRevision().getNumber());
 
         return Long.toString(info.getCommittedRevision().getNumber());
@@ -242,7 +243,7 @@ public class SVNRemoteRepository2 implements IRemoteRepository2 {
         try {
             SVNCommitInfo info = ourClientManager.getCommitClient().doCommit(forCommit, false, comment, null,
                     null, false, false, SVNDepth.INFINITY);
-            Log.logDebug(LOGGER, "SVN committed into new revision {0}", info.getNewRevision());
+            LOGGER.atDebug().log("SVN committed into new revision {}", info.getNewRevision());
             if (info.getNewRevision() < 0) {
                 // empty commit - file was not changed
                 info = new SVNCommitInfo(Long.parseLong(getFileVersion("")), null, null, null);

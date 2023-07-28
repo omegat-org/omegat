@@ -56,7 +56,6 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.Stack;
 import java.util.TreeMap;
-import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -133,7 +132,7 @@ import gen.core.filters.Filters;
  * @author Aaron Madlon-Kay
  */
 public class RealProject implements IProject {
-    private static final Logger LOGGER = Logger.getLogger(RealProject.class.getName());
+    private static final System.Logger LOGGER = System.getLogger(RealProject.class.getName());
 
     protected final ProjectProperties config;
     protected final RemoteRepositoryProvider remoteRepositoryProvider;
@@ -247,10 +246,10 @@ public class RealProject implements IProject {
 
         sourceTokenizer = createTokenizer(Core.getParams().get(CLIParameters.TOKENIZER_SOURCE),
                 props.getSourceTokenizer());
-        Log.log("Source tokenizer: " + sourceTokenizer.getClass().getName());
+        Log.logInfoRB("SOURCE_TOKENIZER", sourceTokenizer.getClass().getName());
         targetTokenizer = createTokenizer(Core.getParams().get(CLIParameters.TOKENIZER_TARGET),
                 props.getTargetTokenizer());
-        Log.log("Target tokenizer: " + targetTokenizer.getClass().getName());
+        Log.logInfoRB("TARGET_TOKENIZER", targetTokenizer.getClass().getName());
     }
 
     public void saveProjectProperties() throws Exception {
@@ -717,12 +716,13 @@ public class RealProject implements IProject {
             tmxPrepared = null;
             glossaryPrepared = null;
             // Ticket 1690 - build project statistics files
-            // so that contents of these files is up to date with target files sent at same moment
+            // so that contents of these files is up to date with target files
+            // sent at same moment
             StatsResult stat = CalcStandardStatistics.buildProjectStats(this);
             stat.updateStatisticsInfo(hotStat);
             String fn = config.getProjectInternal() + OConsts.STATS_FILENAME;
             Statistics.writeStat(fn, stat.getTextData());
-            Statistics.writeStat(fn.replace(".txt",".json"), stat.getJsonData());
+            Statistics.writeStat(fn.replace(".txt", ".json"), stat.getJsonData());
             // commit translations and statistics
             try {
                 Core.getMainWindow().showStatusMessageRB("TF_COMMIT_TARGET_START");
@@ -735,8 +735,8 @@ public class RealProject implements IProject {
                 ProjectProperties.ProjectPath path = config.new ProjectPath(true);
                 path.setRelativeOrAbsolute(fn);
                 fn = path.getUnderRoot();
-                remoteRepositoryProvider.copyFilesFromProjectToRepos(fn,null);
-                remoteRepositoryProvider.copyFilesFromProjectToRepos(fn.replace(".txt",".json"),null);
+                remoteRepositoryProvider.copyFilesFromProjectToRepos(fn, null);
+                remoteRepositoryProvider.copyFilesFromProjectToRepos(fn.replace(".txt", ".json"), null);
                 remoteRepositoryProvider.commitFiles(fn, "Statistics");
                 Core.getMainWindow().showStatusMessageRB("TF_COMMIT_TARGET_DONE");
             } catch (Exception e) {
@@ -781,7 +781,7 @@ public class RealProject implements IProject {
 
         CommandVarExpansion expander = new CommandVarExpansion(command);
         command = expander.expandVariables(config);
-        Log.log("Executing command: " + command);
+        Log.logInfoRB("EXECUTING_COMMAND", command);
         try {
             Process p = Runtime.getRuntime().exec(StaticUtils.parseCLICommand(command));
             processCache.push(p);
@@ -894,7 +894,7 @@ public class RealProject implements IProject {
         if (remoteRepositoryProvider == null || preparedStatus != PreparedStatus.NONE || !isOnlineMode) {
             return;
         }
-        LOGGER.fine("Prepare team sync");
+        LOGGER.log(System.Logger.Level.DEBUG, "Prepare team sync");
         tmxPrepared = null;
         glossaryPrepared = null;
         remoteRepositoryProvider.cleanPrepared();
@@ -928,7 +928,7 @@ public class RealProject implements IProject {
         if (remoteRepositoryProvider == null || preparedStatus != PreparedStatus.PREPARED) {
             return;
         }
-        LOGGER.fine("Rebase team sync");
+        LOGGER.log(System.Logger.Level.DEBUG, "Rebase team sync");
         try {
             preparedStatus = PreparedStatus.PREPARED2;
             synchronized (RealProject.this) {
@@ -944,7 +944,7 @@ public class RealProject implements IProject {
                         if (preparedStatus != PreparedStatus.REBASED) {
                             return;
                         }
-                        LOGGER.fine("Commit team sync");
+                        LOGGER.log(System.Logger.Level.DEBUG, "Commit team sync");
                         try {
                             String newVersion = RebaseAndCommit.commitPrepared(tmxPrepared,
                                     remoteRepositoryProvider, null);
@@ -1139,7 +1139,7 @@ public class RealProject implements IProject {
      * File 2: headTMX (theirs)
      */
     protected void mergeTMX(ProjectTMX baseTMX, ProjectTMX headTMX, StringBuilder commitDetails) {
-        StmProperties props = new StmProperties().setLanguageResource(OStrings.getResourceBundle())
+        final StmProperties props = new StmProperties().setLanguageResource(OStrings.getResourceBundle())
                 .setParentWindow(Core.getMainWindow().getApplicationFrame())
                 // More than this number of conflicts will trigger List View by
                 // default.
@@ -1151,7 +1151,7 @@ public class RealProject implements IProject {
                 new SyncTMX(projectTMX, OStrings.getString("TMX_MERGE_MINE"), srcLang, trgLang),
                 new SyncTMX(headTMX, OStrings.getString("TMX_MERGE_THEIRS"), srcLang, trgLang), props);
         projectTMX.replaceContent(mergedTMX);
-        Log.logDebug(LOGGER, "Merge report: {0}", props.getReport());
+        LOGGER.atDebug().setMessage("Merge report: {}").addArgument(props::getReport).log();
         commitDetails.append('\n');
         commitDetails.append(props.getReport().toString());
     }
@@ -1196,7 +1196,7 @@ public class RealProject implements IProject {
             Log.logErrorRB(ex, "TMXR_FATAL_ERROR_WHILE_PARSING", ex.getLineNumber(), ex.getColumnNumber());
             throw ex;
         } catch (Exception ex) {
-            Log.logErrorRB(ex, "TMXR_EXCEPTION_WHILE_PARSING", file.getAbsolutePath(), Log.getLogLocation());
+            Log.logErrorRB(ex, "TMXR_EXCEPTION_WHILE_PARSING");
             throw ex;
         }
         if (file.exists()) {
@@ -1276,7 +1276,7 @@ public class RealProject implements IProject {
             Core.getMainWindow().showStatusMessageRB("CT_LOAD_SRC_COMPLETE");
         }
         long en = System.currentTimeMillis();
-        Log.log("Load project source files: " + (en - st) + "ms");
+        Log.logInfoRB("CT_LOAD_SRC_FILES", en - st);
     }
 
     protected void findNonUniqueSegments() {

@@ -31,13 +31,12 @@ package org.omegat.core.threads;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.concurrent.TimeoutException;
-import java.util.logging.Logger;
 
 import org.omegat.core.Core;
 import org.omegat.core.KnownException;
 import org.omegat.core.data.IProject;
 import org.omegat.core.team2.IRemoteRepository2;
-import org.omegat.util.Log;
+import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 
 /**
@@ -50,7 +49,7 @@ import org.omegat.util.Preferences;
  * @author Aaron Madlon-Kay
  */
 public class SaveThread extends Thread implements IAutoSave {
-    private static final Logger LOGGER = Logger.getLogger(SaveThread.class.getName());
+    private static final System.Logger LOGGER = System.getLogger(SaveThread.class.getName());
 
     /** The length the thread should wait in milliseconds */
     private int waitDuration;
@@ -74,12 +73,12 @@ public class SaveThread extends Thread implements IAutoSave {
     }
 
     public synchronized void disable() {
-        LOGGER.fine("Disable autosave");
+        LOGGER.log(System.Logger.Level.DEBUG, "Disable autosave");
         enabled = false;
     }
 
     public synchronized void enable() {
-        LOGGER.fine("Enable autosave");
+        LOGGER.log(System.Logger.Level.DEBUG, "Enable autosave");
         enabled = true;
         needToSaveNow = false;
         notify();
@@ -99,7 +98,7 @@ public class SaveThread extends Thread implements IAutoSave {
                 if (needToSaveNow && enabled) {
                     // Wait finished by time and autosaving enabled.
                     IProject dataEngine = Core.getProject();
-                    LOGGER.fine("Start project save from SaveThread");
+                    LOGGER.log(System.Logger.Level.DEBUG, "Start project save from SaveThread");
                     try {
                         Core.executeExclusively(false, () -> {
                             dataEngine.saveProject(false);
@@ -108,27 +107,30 @@ public class SaveThread extends Thread implements IAutoSave {
                         Core.getMainWindow().showStatusMessageRB("ST_PROJECT_AUTOSAVED",
                                 DateFormat.getTimeInstance(DateFormat.SHORT).format(new Date()));
                     } catch (TimeoutException ex) {
-                        Log.logWarningRB("AUTOSAVE_LOCK_ACQUISITION_TIMEOUT");
+                        LOGGER.log(System.Logger.Level.WARNING, OStrings.getResourceBundle(),
+                                "AUTOSAVE_LOCK_ACQUISITION_TIMEOUT");
                     } catch (KnownException ex) {
                         Core.getMainWindow().showStatusMessageRB(ex.getMessage(), ex.getParams());
                     } catch (IRemoteRepository2.NetworkException ex) {
-                        Log.logWarningRB("TEAM_NETWORK_ERROR", ex.getMessage());
+                        LOGGER.log(System.Logger.Level.WARNING, OStrings.getResourceBundle(), "TEAM_NETWORK_ERROR",
+                                ex.getMessage());
                     } catch (OutOfMemoryError oome) {
                         // inform the user
                         long memory = Runtime.getRuntime().maxMemory() / 1024 / 1024;
-                        Log.logErrorRB("OUT_OF_MEMORY", memory);
-                        Log.log(oome);
+                        LOGGER.log(System.Logger.Level.WARNING, OStrings.getResourceBundle(),
+                                "OUT_OF_MEMORY", memory, oome);
                         Core.getMainWindow().showErrorDialogRB("TF_ERROR", "OUT_OF_MEMORY", memory);
                         // Just quit, we can't help it anyway
                         System.exit(1);
                     } catch (Exception ex) {
-                        Log.logWarningRB("AUTOSAVE_GENERIC_ERROR", ex.getMessage());
+                        LOGGER.log(System.Logger.Level.WARNING, OStrings.getResourceBundle(),
+                                        "AUTOSAVE_GENERIC_ERROR", ex.getMessage());
                     }
-                    LOGGER.fine("Finish project save from SaveThread");
+                    LOGGER.log(System.Logger.Level.DEBUG, "Finish project save from SaveThread");
                 }
             }
         } catch (InterruptedException ex) {
-            Log.logDebug(LOGGER, "Save thread interrupted: {0}", ex.getMessage());
+            LOGGER.log(System.Logger.Level.DEBUG, "Save thread interrupted:", ex);
         }
     }
 }

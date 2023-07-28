@@ -36,7 +36,6 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.logging.Logger;
 import java.util.stream.Stream;
 
 public final class FontFallbackManager {
@@ -48,16 +47,16 @@ public final class FontFallbackManager {
      * rendering techniques that Swing does not support.
      * <p>
      * Known working emoji fonts:
-     * <ul><li>Segoe UI Emoji (bundled with Windows 7 and later)
+     * <ul>
+     * <li>Segoe UI Emoji (bundled with Windows 7 and later)
      * <li><a href="https://github.com/googlei18n/noto-emoji">Noto Emoji</a>
      * </ul>
      */
     private static final Set<String> FONT_BLACKLIST = new HashSet<>(
-            Arrays.asList("Apple Color Emoji", "Noto Color Emoji")
-    );
+            Arrays.asList("Apple Color Emoji", "Noto Color Emoji"));
     private static final Font FONT_UNAVAILABLE = new Font("", Font.PLAIN, 0);
 
-    private static final Logger LOGGER = Logger.getLogger(FontFallbackManager.class.getName());
+    private static final System.Logger LOGGER = System.getLogger(FontFallbackManager.class.getName());
 
     private static final Font[] RECENT_FONTS = new Font[8];
     private static int lastFontIndex = 0;
@@ -90,8 +89,8 @@ public final class FontFallbackManager {
     }
 
     /**
-     * Detect specified codePoints can display with specified font.
-     * Wrapper of Font class methods.
+     * Detect specified codePoints can display with specified font. Wrapper of
+     * Font class methods.
      */
     public static int canDisplayUpTo(Font font, String str) {
         if (!CAN_DISPLAY_IS_BROKEN) {
@@ -163,8 +162,11 @@ public final class FontFallbackManager {
 
     /**
      * Check a character displayable with font.
-     * @param font target font
-     * @param codePoint character to check
+     * 
+     * @param font
+     *            target font
+     * @param codePoint
+     *            character to check
      * @return true when codePoint can be displayed, otherwise false.
      */
     public static boolean canDisplay(Font font, final int codePoint) {
@@ -197,7 +199,8 @@ public final class FontFallbackManager {
     private static Font getCapableFontInternal(int cp) {
         // Iterate backwards through recent fonts.
         // Presumably, most fallback chars in a given document will be the same
-        // language/script/etc. so they are likely to be included in the same font.
+        // language/script/etc. so they are likely to be included in the same
+        // font.
         for (int testIndex, i = 0; i < RECENT_FONTS.length; i++) {
             testIndex = (lastFontIndex - i + RECENT_FONTS.length) % RECENT_FONTS.length;
             Font font = RECENT_FONTS[testIndex];
@@ -219,18 +222,21 @@ public final class FontFallbackManager {
         // All we can do now is do a brute-force full search of available fonts.
         GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
         Font[] allFonts = ge.getAllFonts();
-        LOGGER.fine(() -> String.format("Searching %d fonts for one supporting U+%h %s", allFonts.length, cp,
-                String.valueOf(Character.toChars(cp))));
+        LOGGER.log(System.Logger.Level.DEBUG, "Searching {0} fonts for one supporting U+{1} {2}",
+                allFonts.length, Integer.toHexString(cp), String.valueOf(Character.toChars(cp)));
         long start = System.currentTimeMillis();
-        Optional<Font> font = Stream.of(allFonts).parallel().filter(f ->
-                canDisplay(f, cp) && !FONT_BLACKLIST.contains(f.getFamily())).findFirst();
+        Optional<Font> font = Stream.of(allFonts).parallel()
+                .filter(f -> canDisplay(f, cp) && !FONT_BLACKLIST.contains(f.getFamily())).findFirst();
         CACHE.put(cp, font.orElse(FONT_UNAVAILABLE));
         font.ifPresent(FontFallbackManager::addRecentFont);
-        LOGGER.fine(() -> font.isPresent()
-                ? String.format("Search found %s in %d ms", font.get().getFamily(),
-                        System.currentTimeMillis() - start)
-                : String.format("Search failed to find a font; time: %d ms",
-                        System.currentTimeMillis() - start));
+        if (font.isPresent()) {
+            LOGGER.log(System.Logger.Level.DEBUG, "Search found {0} in {1} ms",  font.get().getFamily(),
+                    System.currentTimeMillis() - start);
+        } else {
+            LOGGER.log(System.Logger.Level.DEBUG, "Search failed to find a font; time: {0} ms",
+                    System.currentTimeMillis() - start);
+        }
+
         return font.orElse(null);
     }
 

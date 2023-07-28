@@ -30,8 +30,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * A class for checking for updated versions of OmegaT.
@@ -40,7 +38,7 @@ import java.util.logging.Logger;
  */
 public final class VersionChecker {
 
-    private static final Logger LOGGER = Logger.getLogger(VersionChecker.class.getName());
+    private static final System.Logger LOGGER = System.getLogger(VersionChecker.class.getName());
 
     // When HTTPS is enabled SourceForge at one point used strong encryption
     // that can't be used with standard JRE restrictions:
@@ -88,7 +86,7 @@ public final class VersionChecker {
         if (!force && !shouldFetch()) {
             return;
         }
-        LOGGER.fine("Fetching latest version info");
+        LOGGER.log(System.Logger.Level.DEBUG, "Fetching latest version info");
         Properties props = new Properties();
         try (InputStream in = new URL(VERSION_FILE).openStream()) {
             props.load(in);
@@ -100,7 +98,7 @@ public final class VersionChecker {
         }
         mProps = props;
         lastFetched = System.currentTimeMillis();
-        LOGGER.log(Level.FINE, "Fetched latest version info: {0}", props);
+        LOGGER.log(System.Logger.Level.DEBUG, "Fetched latest version info: {0}", props);
     }
 
     private int compareVersions(boolean force) throws Exception {
@@ -122,15 +120,18 @@ public final class VersionChecker {
     public boolean isUpToDate(boolean force) throws Exception {
         boolean result = compareVersions(force) >= 0;
         if (result) {
-            LOGGER.fine("OmegaT is up to date");
+            LOGGER.log(System.Logger.Level.DEBUG, "OmegaT is up to date");
         } else {
-            LOGGER.log(Level.FINE, "A newer version of OmegaT is available: {0}", getRemoteVersion());
+            LOGGER.log(System.Logger.Level.DEBUG, "A newer version of OmegaT is available: {0}", getRemoteVersion());
         }
         return result;
     }
 
-    public String getRemoteVersion() throws Exception {
-        fetch(false);
+    public String getRemoteVersion() {
+        try {
+            fetch(false);
+        } catch (Exception ignored) {
+        }
         return OStrings.getSimpleVersion(mProps.getProperty("version"), mProps.getProperty("update"));
     }
 

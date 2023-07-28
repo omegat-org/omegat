@@ -42,7 +42,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
-import java.util.logging.Logger;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.ZipInputStream;
 
@@ -101,6 +100,8 @@ public class TMXReader2 {
     StringBuilder segInlineTag = new StringBuilder();
     InlineTagHandler inlineTagHandler = new InlineTagHandler();
 
+    private static final System.Logger LOGGER = System.getLogger(TMXReader2.class.getName());
+
     /**
      * Detects charset of XML file.
      */
@@ -118,7 +119,7 @@ public class TMXReader2 {
                     throws XMLStreamException {
                 Log.logWarningRB("TMXR_WARNING_WHILE_PARSING", location.getLineNumber(),
                         location.getColumnNumber());
-                Log.log(message + ": " + info);
+                Log.log(StringUtil.format("{0}: {1}", message, info));
                 warningsCount++;
             }
         });
@@ -146,7 +147,7 @@ public class TMXReader2 {
         this.isSegmentingEnabled = isSegmentingEnabled;
 
         // log the parsing attempt
-        Log.logRB("TMXR_INFO_READING_FILE", file.getAbsolutePath());
+        Log.logInfoRB("TMXR_INFO_READING_FILE", file.getAbsolutePath());
 
         boolean allFound = true;
 
@@ -172,7 +173,7 @@ public class TMXReader2 {
         } catch (XMLStreamException ex) {
             Log.logErrorRB(ex, "TMXR_ERROR_XML_STREAM_ERROR", file.getAbsolutePath());
             throw ex;
-        } catch (IOException e) {
+        } catch (IOException ignored) {
         } finally {
             if (xml != null) {
                 xml.close();
@@ -183,11 +184,9 @@ public class TMXReader2 {
             Log.logWarningRB("TMXR_WARNING_SOURCE_NOT_FOUND");
             warningsCount++;
         }
-        Log.logRB("TMXR_INFO_READING_COMPLETE");
-        Log.log("");
+        Log.logInfoRB("TMXR_INFO_READING_COMPLETE");
         if (errorsCount > 0 || warningsCount > 0) {
-            Log.logDebug(Logger.getLogger(getClass().getName()), "Errors: {0}, Warnings: {1}", errorsCount,
-                    warningsCount);
+            LOGGER.log(System.Logger.Level.DEBUG, "Errors: {0}, Warnings: {1}", errorsCount, warningsCount);
         }
     }
 
@@ -212,10 +211,10 @@ public class TMXReader2 {
         isOmegaT = CT_OMEGAT.equals(getAttributeValue(element, "creationtool"));
 
         // log some details
-        Log.logRB("TMXR_INFO_CREATION_TOOL", getAttributeValue(element, "creationtool"));
-        Log.logRB("TMXR_INFO_CREATION_TOOL_VERSION", getAttributeValue(element, "creationtoolversion"));
-        Log.logRB("TMXR_INFO_SEG_TYPE", getAttributeValue(element, "segtype"));
-        Log.logRB("TMXR_INFO_SOURCE_LANG", getAttributeValue(element, "srclang"));
+        Log.logInfoRB("TMXR_INFO_CREATION_TOOL", getAttributeValue(element, "creationtool"));
+        Log.logInfoRB("TMXR_INFO_CREATION_TOOL_VERSION", getAttributeValue(element, "creationtoolversion"));
+        Log.logInfoRB("TMXR_INFO_SEG_TYPE", getAttributeValue(element, "segtype"));
+        Log.logInfoRB("TMXR_INFO_SOURCE_LANG", getAttributeValue(element, "srclang"));
 
         // give a warning if the TMX source language is
         // different from the project source language

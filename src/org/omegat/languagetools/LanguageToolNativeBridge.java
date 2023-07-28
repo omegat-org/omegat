@@ -49,17 +49,16 @@ public class LanguageToolNativeBridge extends BaseLanguageToolBridge {
     private ThreadLocal<JLanguageTool> targetLt;
     private List<BitextRule> bRules;
 
-    public LanguageToolNativeBridge(org.omegat.util.Language sourceLang, org.omegat.util.Language targetLang) {
+    public LanguageToolNativeBridge(org.omegat.util.Language sourceLang,
+            org.omegat.util.Language targetLang) {
         sourceLtLang = getLTLanguage(sourceLang);
         targetLtLang = getLTLanguage(targetLang);
-        Log.log("Selected LanguageTool source language: "
-                + (sourceLtLang == null ? null : sourceLtLang.getShortCodeWithCountryAndVariant()));
-        Log.log("Selected LanguageTool target language: "
-                + (targetLtLang == null ? null : targetLtLang.getShortCodeWithCountryAndVariant()));
-        sourceLt = ThreadLocal.withInitial(
-                () -> sourceLtLang == null ? null : new JLanguageTool(sourceLtLang));
-        targetLt = ThreadLocal.withInitial(
-                () -> targetLtLang == null ? null : new JLanguageTool(targetLtLang));
+        Log.logInfoRB("LANGUAGE_TOOL_SOURCE", getLanguageToolCode(sourceLtLang));
+        Log.logInfoRB("LANGUAGE_TOOL_TARGET", getLanguageToolCode(targetLtLang));
+        sourceLt = ThreadLocal
+                .withInitial(() -> sourceLtLang == null ? null : new JLanguageTool(sourceLtLang));
+        targetLt = ThreadLocal
+                .withInitial(() -> targetLtLang == null ? null : new JLanguageTool(targetLtLang));
         if (sourceLtLang != null && targetLtLang != null) {
             try {
                 bRules = Tools.getBitextRules(sourceLtLang, targetLtLang);
@@ -69,20 +68,25 @@ public class LanguageToolNativeBridge extends BaseLanguageToolBridge {
         }
     }
 
+    private String getLanguageToolCode(Language language) {
+        return language == null ? "" : language.getShortCodeWithCountryAndVariant();
+    }
+
     @Override
     public void stop() {
         // Nothing to do here
     }
 
     @Override
-    public void applyRuleFilters(Set<String> disabledCategories,
-            Set<String> disabledRules, Set<String> enabledRules) {
+    public void applyRuleFilters(Set<String> disabledCategories, Set<String> disabledRules,
+            Set<String> enabledRules) {
         if (targetLtLang != null) {
             Set<CategoryId> dc = disabledCategories.stream().map(CategoryId::new).collect(Collectors.toSet());
             targetLt = reinitWithRules(targetLtLang, dc, disabledRules, enabledRules);
         }
         if (bRules != null) {
-            bRules = bRules.stream().filter(rule -> !disabledRules.contains(rule.getId())).collect(Collectors.toList());
+            bRules = bRules.stream().filter(rule -> !disabledRules.contains(rule.getId()))
+                    .collect(Collectors.toList());
         }
     }
 
@@ -97,9 +101,11 @@ public class LanguageToolNativeBridge extends BaseLanguageToolBridge {
     }
 
     @Override
-    protected List<LanguageToolResult> getCheckResultsImpl(String sourceText, String translationText) throws Exception {
-        return getRuleMatches(sourceText, translationText).stream().map(m -> new LanguageToolResult(m.getMessage(),
-                m.getFromPos(), m.getToPos(), m.getRule().getId(), m.getRule().getDescription()))
+    protected List<LanguageToolResult> getCheckResultsImpl(String sourceText, String translationText)
+            throws Exception {
+        return getRuleMatches(sourceText, translationText).stream()
+                .map(m -> new LanguageToolResult(m.getMessage(), m.getFromPos(), m.getToPos(),
+                        m.getRule().getId(), m.getRule().getDescription()))
                 .collect(Collectors.toList());
     }
 
@@ -122,10 +128,11 @@ public class LanguageToolNativeBridge extends BaseLanguageToolBridge {
     }
 
     /**
-     * Get the closest LanguageTool language to the supplied OmegaT language, or null if none can be found.
+     * Get the closest LanguageTool language to the supplied OmegaT language, or
+     * null if none can be found.
      *
-     * @see <code>getLanguageForLanguageNameAndCountry</code> and <code>getLanguageForLanguageNameOnly</code>
-     *      in {@link Languages}.
+     * @see <code>getLanguageForLanguageNameAndCountry</code> and
+     *      <code>getLanguageForLanguageNameOnly</code> in {@link Languages}.
      */
     public static Language getLTLanguage(org.omegat.util.Language lang) {
         List<Language> ltLangs = Languages.get();

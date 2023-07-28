@@ -26,11 +26,9 @@
 package org.omegat.core.team2;
 
 import java.io.File;
-import java.util.logging.Logger;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.omegat.util.Log;
 
 /**
  * Core for rebase and commit files.
@@ -43,14 +41,17 @@ public final class RebaseAndCommit {
 
     private RebaseAndCommit() {
     }
-    private static final Logger LOGGER = Logger.getLogger(RebaseAndCommit.class.getName());
+
+    private static final System.Logger LOGGER = System.getLogger(RebaseAndCommit.class.getName());
 
     public static final String VERSION_PREFIX = "version-based-on.";
 
     /**
-     * Load BASE and HEAD from remote repository into temp storage for future rebase.
+     * Load BASE and HEAD from remote repository into temp storage for future
+     * rebase.
      */
-    public static Prepared prepare(RemoteRepositoryProvider provider, File projectDir, String path) throws Exception {
+    public static Prepared prepare(RemoteRepositoryProvider provider, File projectDir, String path)
+            throws Exception {
         if (!provider.isUnderMapping(path)) {
             throw new RuntimeException("Path is not under mapping: " + path);
         }
@@ -64,14 +65,15 @@ public final class RebaseAndCommit {
         Prepared r = new Prepared();
         r.path = path;
         currentBaseVersion = savedVersion;
-        Log.logDebug(LOGGER, "Retrieve BASE(" + currentBaseVersion + ") version of '" + path + "'");
+        LOGGER.log(System.Logger.Level.DEBUG, "Retrieve BASE({0}) version of '{1}'", currentBaseVersion,
+                path);
         // retrieve BASE version
         File baseFile = provider.switchToVersion(path, currentBaseVersion);
         // save it to prepared dir
         r.versionBase = currentBaseVersion;
         r.fileBase = provider.toPrepared(baseFile);
 
-        Log.logDebug(LOGGER, "Retrieve HEAD version of '" + path + "'");
+        LOGGER.log(System.Logger.Level.DEBUG, "Retrieve HEAD version of '{0}'", path);
         // retrieve HEAD version
         File headFile = provider.switchToVersion(path, null);
         // get version id
@@ -81,21 +83,22 @@ public final class RebaseAndCommit {
         return r;
     }
 
-    public static void rebaseAndCommit(Prepared prep, RemoteRepositoryProvider provider, File projectDir, String path,
-            IRebase rebaser) throws Exception {
+    public static void rebaseAndCommit(Prepared prep, RemoteRepositoryProvider provider, File projectDir,
+            String path, IRebase rebaser) throws Exception {
 
         if (!provider.isUnderMapping(path)) {
             throw new RuntimeException("Path is not under mapping: " + path);
         }
 
-        Log.logDebug(LOGGER, "Rebase and commit '" + path + "'");
+        LOGGER.log(System.Logger.Level.DEBUG, "Rebase and commit '{0}'", path);
 
         final String currentBaseVersion;
         String savedVersion = provider.getTeamSettings().get(VERSION_PREFIX + path);
         if (savedVersion != null) {
             currentBaseVersion = savedVersion;
         } else {
-            // version wasn't stored - assume latest. TODO Probably need to ask ?
+            // version wasn't stored - assume latest. TODO Probably need to ask
+            // ?
             provider.switchToVersion(path, null);
             currentBaseVersion = provider.getVersion(path);
         }
@@ -111,18 +114,19 @@ public final class RebaseAndCommit {
             }
             if (!localFile.exists()) {
                 // there is no local file - just use remote
-                Log.logDebug(LOGGER, "local file '" + path + "' doesn't exist");
+                LOGGER.log(System.Logger.Level.DEBUG, "local file '{0}' doesn't exist", path);
                 fileChangedLocally = false;
             } else if (FileUtils.contentEquals(baseRepoFile, localFile)) {
                 // versioned file was not changed - no need to commit
-                Log.logDebug(LOGGER, "local file '" + path + "' wasn't changed");
+                LOGGER.log(System.Logger.Level.DEBUG, "local file '{0}' wasn't changed", path);
                 fileChangedLocally = false;
             } else {
-                Log.logDebug(LOGGER, "local file '" + path + "' was changed");
+                LOGGER.log(System.Logger.Level.DEBUG, "local file '{0}' was changed", path);
                 fileChangedLocally = true;
                 rebaser.parseBaseFile(baseRepoFile);
             }
-            // baseRepoFile is not valid anymore because we will switch to other version
+            // baseRepoFile is not valid anymore because we will switch to other
+            // version
         }
 
         File headRepoFile = null;
@@ -147,11 +151,12 @@ public final class RebaseAndCommit {
                     fileChangedRemotely = false;
                 }
             } else if (StringUtils.equals(currentBaseVersion, headVersion)) {
-                Log.logDebug(LOGGER, "remote file '" + path + "' wasn't changed");
+                LOGGER.log(System.Logger.Level.DEBUG, "remote file '{0}' wasn't changed", path);
                 fileChangedRemotely = false;
             } else {
-                // base and head versions are differ - somebody else committed changes
-                Log.logDebug(LOGGER, "remote file '" + path + "' was changed");
+                // base and head versions are differ - somebody else committed
+                // changes
+                LOGGER.log(System.Logger.Level.DEBUG, "remote file '{0}' was changed", path);
                 fileChangedRemotely = true;
                 rebaser.parseHeadFile(headRepoFile);
             }
@@ -164,27 +169,28 @@ public final class RebaseAndCommit {
         boolean needBackup = false;
         if (fileChangedLocally && fileChangedRemotely) {
             // rebase need only in case file was changed locally AND remotely
-            Log.logDebug(LOGGER, "rebase and save '" + path + "'");
+            LOGGER.log(System.Logger.Level.DEBUG, "rebase and save '{0}'", path);
             needBackup = true;
             rebaser.rebaseAndSave(tempOut);
         } else if (fileChangedLocally && !fileChangedRemotely) {
             // only local changes - just use local file
-            Log.logDebug(LOGGER, "only local changes - just use local file '" + path + "'");
+            LOGGER.log(System.Logger.Level.DEBUG, "only local changes - just use local file '{0}'", path);
         } else if (!fileChangedLocally && fileChangedRemotely) {
             // only remote changes - get remote
-            Log.logDebug(LOGGER, "only remote changes - get remote '" + path + "'");
+            LOGGER.log(System.Logger.Level.DEBUG, "only remote changes - get remote '{0}'", path);
             needBackup = true;
             if (headRepoFile.exists()) { // otherwise file was removed remotely
                 FileUtils.copyFile(headRepoFile, tempOut);
             }
         } else {
-            Log.logDebug(LOGGER, "there are no changes '" + path + "'");
+            LOGGER.log(System.Logger.Level.DEBUG, "there are no changes '{0}'", path);
             // there are no changes
         }
 
         if (needBackup) {
             // new file was saved, need to update version
-            // code below tries to update file "in transaction" with update version
+            // code below tries to update file "in transaction" with update
+            // version
             if (localFile.exists()) {
                 final File bakTemp = new File(projectDir, path + "#oldbased_on_" + currentBaseVersion);
                 boolean ignored = bakTemp.delete();
@@ -220,8 +226,8 @@ public final class RebaseAndCommit {
     /**
      * Commit later.
      */
-    public static String commitPrepared(Prepared prep, RemoteRepositoryProvider provider, String possibleHeadVersion)
-            throws Exception {
+    public static String commitPrepared(Prepared prep, RemoteRepositoryProvider provider,
+            String possibleHeadVersion) throws Exception {
         if (!prep.needToCommit) {
             // there was no changes
             return null;
@@ -238,29 +244,33 @@ public final class RebaseAndCommit {
 
     public interface IRebase {
         /**
-         * Rebaser should read and parse BASE version of file. It can't just remember file path because file
-         * will be removed after switch into other version. Rebase can be called after that or can not be
-         * called.
+         * Rebaser should read and parse BASE version of file. It can't just
+         * remember file path because file will be removed after switch into
+         * other version. Rebase can be called after that or can not be called.
          * <p>
-         * Case for non-exist file: it's correct call. That means file is just created in local box. But after
-         * that, remote repository can also contain file, i.e. two users created file independently, then
-         * rebase will be called. Implementation should interpret non-exist file as empty data.
+         * Case for non-exist file: it's correct call. That means file is just
+         * created in local box. But after that, remote repository can also
+         * contain file, i.e. two users created file independently, then rebase
+         * will be called. Implementation should interpret non-exist file as
+         * empty data.
          */
         void parseBaseFile(File file) throws Exception;
 
         /**
-         * Rebaser should read and parse HEAD version of file. It can't just remember file path because file
-         * will be removed after switch into other version. Rebase can be called after that or can not be
-         * called.
+         * Rebaser should read and parse HEAD version of file. It can't just
+         * remember file path because file will be removed after switch into
+         * other version. Rebase can be called after that or can not be called.
          * <p>
-         * Case for non-exist file: it's correct call. That means file was removed from repository.
-         * Implementation should interpret non-exist file as empty data.
+         * Case for non-exist file: it's correct call. That means file was
+         * removed from repository. Implementation should interpret non-exist
+         * file as empty data.
          */
         void parseHeadFile(File file) throws Exception;
 
         /**
-         * Rebase using BASE, HEAD and non-committed version should be processed. At this time parseBaseFile
-         * and parseHeadFile was already called. Keep in mind that this method can display some dialogs to
+         * Rebase using BASE, HEAD and non-committed version should be
+         * processed. At this time parseBaseFile and parseHeadFile was already
+         * called. Keep in mind that this method can display some dialogs to
          * user, i.e. can work up to some minutes.
          */
         void rebaseAndSave(File out) throws Exception;
@@ -271,8 +281,8 @@ public final class RebaseAndCommit {
         String getCommentForCommit();
 
         /**
-         * Get charset of file for convert EOL to repository. Implementation can return null if conversion not
-         * required.
+         * Get charset of file for convert EOL to repository. Implementation can
+         * return null if conversion not required.
          */
         String getFileCharset(File file) throws Exception;
     }

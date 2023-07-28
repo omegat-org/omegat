@@ -6,6 +6,7 @@
  Copyright (C) 2000-2006 Keith Godfrey, Maxym Mykhalchuk, and Henry Pijffers
                2008 Alex Buloichik
                2013 Didier Briel
+               2023 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -39,7 +40,6 @@ import java.util.logging.Handler;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.LogRecord;
-import java.util.logging.Logger;
 
 import org.omegat.util.logging.OmegaTFileHandler;
 
@@ -48,17 +48,16 @@ import org.omegat.util.logging.OmegaTFileHandler;
  *
  * @author Henry Pijffers (henry.pijffers@saxnot.com)
  * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Hiroshi Miura
  */
 public final class Log {
+
+    private static final System.Logger LOGGER = System.getLogger("global");
 
     private Log() {
     }
 
-    private static final Logger LOGGER;
-
     static {
-        LOGGER = Logger.getLogger("global");
-
         boolean loaded = false;
 
         String customLogConfig = System.getProperty("java.util.logging.config.file");
@@ -89,7 +88,7 @@ public final class Log {
             try (InputStream in = Log.class.getResourceAsStream("/org/omegat/logger.properties")) {
                 init(in);
             } catch (IOException ex) {
-                LOGGER.log(Level.SEVERE, "Can't open file for logging", ex);
+                LOGGER.log(System.Logger.Level.ERROR, "Can't open file for logging", ex);
             }
         }
     }
@@ -100,7 +99,7 @@ public final class Log {
      * @param in
      *            settings
      */
-    protected static void init(InputStream in) throws IOException {
+    private static void init(InputStream in) throws IOException {
         Properties props = new Properties();
         props.load(in);
         String handlers = props.getProperty("handlers");
@@ -110,8 +109,7 @@ public final class Log {
             ByteArrayOutputStream b = new ByteArrayOutputStream();
             props.store(b, null);
             LogManager.getLogManager().readConfiguration(new ByteArrayInputStream(b.toByteArray()));
-
-            Logger rootLogger = LogManager.getLogManager().getLogger("");
+            java.util.logging.Logger rootLogger = LogManager.getLogManager().getLogger("");
 
             // remove initialized handlers
             for (Handler h : rootLogger.getHandlers()) {
@@ -150,22 +148,24 @@ public final class Log {
     }
 
     /**
-     * Compute the filename of the log file
+     * Compute the filename of the log file.
+     *
      * @return the filename of the log, or an empty string
      */
     public static String getLogFileName() {
-        Handler[] hand = LOGGER.getParent().getHandlers();
-        if (hand[1] instanceof OmegaTFileHandler) {
-            OmegaTFileHandler omegatLog = (OmegaTFileHandler) hand[1];
-            return omegatLog.getOmegaTLogFileName() + ".log";
-        } else {
-            return "";
+        java.util.logging.Logger rootLogger = LogManager.getLogManager().getLogger("");
+        for (Handler handler : rootLogger.getHandlers()) {
+            if (handler instanceof OmegaTFileHandler) {
+                OmegaTFileHandler omegatLog = (OmegaTFileHandler) handler;
+                return omegatLog.getLogFileName();
+            }
         }
-
+        return "";
     }
 
     /**
-     * Compute the full path of the log file
+     * Compute the full path of the log file.
+     *
      * @return the full path of the log file
      */
     public static String getLogFilePath() {
@@ -181,14 +181,15 @@ public final class Log {
      *            The new level
      */
     public static void setLevel(Level level) {
-        LOGGER.setLevel(level);
+        java.util.logging.Logger rootLogger = LogManager.getLogManager().getLogger("");
+        rootLogger.setLevel(level);
     }
 
     /**
      * Logs what otherwise would go to System.out
      */
     public static void log(String s) {
-        LOGGER.info(s);
+        LOGGER.log(System.Logger.Level.INFO, s);
     }
 
     /**
@@ -201,26 +202,18 @@ public final class Log {
      *            StaticUtils.format.
      */
     public static void logRB(String key, Object... parameters) {
-        if (LOGGER.isLoggable(Level.INFO)) {
-            LogRecord rec = new LogRecord(Level.INFO, key);
-            rec.setResourceBundle(OStrings.getResourceBundle());
-            rec.setParameters(parameters);
-            rec.setLoggerName(LOGGER.getName());
-            LOGGER.log(rec);
-        }
+        LOGGER.log(System.Logger.Level.INFO, OStrings.getResourceBundle(), key, parameters);
     }
 
     /**
-     * Logs an Exception or Error.
-     *
-     * To the log are written: - The class name of the Exception or Error - The
-     * message, if any - The stack trace
+     * Logs an Exception or Error. To the log are written: - The class name of
+     * the Exception or Error - The message, if any - The stack trace
      *
      * @param throwable
      *            The exception or error to log
      */
     public static void log(Throwable throwable) {
-        LOGGER.log(Level.SEVERE, "", throwable);
+        LOGGER.log(System.Logger.Level.ERROR, "", throwable);
     }
 
     /**
@@ -238,13 +231,7 @@ public final class Log {
      *            StaticUtils.format.
      */
     public static void logWarningRB(String key, Object... parameters) {
-        if (LOGGER.isLoggable(Level.WARNING)) {
-            LogRecord rec = new LogRecord(Level.WARNING, key);
-            rec.setResourceBundle(OStrings.getResourceBundle());
-            rec.setParameters(parameters);
-            rec.setLoggerName(LOGGER.getName());
-            LOGGER.log(rec);
-        }
+        LOGGER.log(System.Logger.Level.WARNING, OStrings.getResourceBundle(), key, parameters);
     }
 
     /**
@@ -262,14 +249,8 @@ public final class Log {
      *            StaticUtils.format.
      */
     public static void logInfoRB(String key, Object... parameters) {
-        if (LOGGER.isLoggable(Level.INFO)) {
-            LogRecord rec = new LogRecord(Level.INFO, key);
-            rec.setResourceBundle(OStrings.getResourceBundle());
-            rec.setParameters(parameters);
-            rec.setLoggerName(LOGGER.getName());
-            LOGGER.log(rec);
-            }
-        }
+        LOGGER.log(System.Logger.Level.INFO, OStrings.getResourceBundle(), key, parameters);
+    }
 
     /**
      * Writes an error message to the log (to be retrieved from the resource
@@ -286,13 +267,7 @@ public final class Log {
      *            StaticUtils.format.
      */
     public static void logErrorRB(String key, Object... parameters) {
-        if (LOGGER.isLoggable(Level.SEVERE)) {
-            LogRecord rec = new LogRecord(Level.SEVERE, key);
-            rec.setResourceBundle(OStrings.getResourceBundle());
-            rec.setParameters(parameters);
-            rec.setLoggerName(LOGGER.getName());
-            LOGGER.log(rec);
-        }
+        LOGGER.log(System.Logger.Level.ERROR, OStrings.getResourceBundle(), key, parameters);
     }
 
     /**
@@ -312,18 +287,11 @@ public final class Log {
      *            StaticUtils.format.
      */
     public static void logErrorRB(Throwable ex, String key, Object... parameters) {
-        if (LOGGER.isLoggable(Level.SEVERE)) {
-            LogRecord rec = new LogRecord(Level.SEVERE, key);
-            rec.setResourceBundle(OStrings.getResourceBundle());
-            rec.setParameters(parameters);
-            rec.setLoggerName(LOGGER.getName());
-            rec.setThrown(ex);
-            LOGGER.log(rec);
-        }
+        LOGGER.log(System.Logger.Level.ERROR, OStrings.getResourceBundle(), key, parameters, ex);
     }
 
     /**
-     * Writes debug message to log (without localization)
+     * Writes a debug message to log (without localization).
      *
      * @param message
      *            message text
@@ -331,12 +299,58 @@ public final class Log {
      *            Parameters for the error message. These are inserted by using
      *            StaticUtils.format.
      */
-    public static void logDebug(Logger logger, String message, Object... parameters) {
+    @Deprecated
+    public static void logDebug(java.util.logging.Logger logger, String message, Object... parameters) {
         if (logger.isLoggable(Level.FINE)) {
             LogRecord rec = new LogRecord(Level.FINE, message);
             rec.setParameters(parameters);
             rec.setLoggerName(logger.getName());
             logger.log(rec);
         }
+    }
+
+    /**
+     * Writes an info message to the log (to be retrieved from the resource
+     * bundle).
+     *
+     * @param key
+     *            The key of the error message in the resource bundle
+     * @param parameter
+     *            Parameter for the error message.
+     */
+    public static void logInfoRB(String key, Object parameter) {
+        LOGGER.log(System.Logger.Level.INFO, OStrings.getResourceBundle(), key, parameter);
+    }
+
+    /**
+     * Writes an info message to the log (to be retrieved from the resource
+     * bundle).
+     *
+     * @param key
+     *            The key of the error message in the resource bundle
+     */
+    public static void logInfoRB(String key) {
+        LOGGER.log(System.Logger.Level.INFO, OStrings.getResourceBundle(), key);
+    }
+
+    /**
+     * Writes a warning message to the log (to be retrieved from the resource
+     * bundle).
+     *
+     * @param key
+     *            The key of the error message in the resource bundle
+     * @param parameter
+     *            Parameter for the error message.
+     */
+    public static void logWarningRB(String key, Object parameter) {
+        LOGGER.log(System.Logger.Level.WARNING, OStrings.getResourceBundle(), key, parameter);
+    }
+
+    /**
+     * Writes an error message to the log (to be retrieved from the resource
+     * bundle).
+     */
+    public static void logErrorRB(String key, Object parameter) {
+        LOGGER.log(System.Logger.Level.ERROR, OStrings.getResourceBundle(), key, parameter);
     }
 }

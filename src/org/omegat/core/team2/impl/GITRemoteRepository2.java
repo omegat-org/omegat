@@ -29,12 +29,12 @@ package org.omegat.core.team2.impl;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.System.Logger.Level;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -84,6 +84,7 @@ import org.eclipse.jgit.util.FS;
 import org.omegat.core.team2.IRemoteRepository2;
 import org.omegat.core.team2.ProjectTeamSettings;
 import org.omegat.util.Log;
+import org.omegat.util.OStrings;
 import org.omegat.util.StringUtil;
 
 import gen.core.project.RepositoryDefinition;
@@ -95,7 +96,10 @@ import gen.core.project.RepositoryDefinition;
  * @author Aaron Madlon-Kay
  */
 public class GITRemoteRepository2 implements IRemoteRepository2 {
-    private static final Logger LOGGER = Logger.getLogger(GITRemoteRepository2.class.getName());
+    private static final System.Logger LOGGER = System.getLogger(GITRemoteRepository2.class.getName(),
+            OStrings.getResourceBundle());
+    private static final String GIT_START_MSG = "Git '{}' execution start";
+    private static final String GIT_NO_CHANGES_MSG = "Git '{}' did nothing because there were no changes";
 
     // allow override default remote name and branch name.
     protected static final String DEFAULT_LOCAL_BRANCH = "master";
@@ -171,7 +175,7 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
                     git.submoduleUpdate().setTimeout(TIMEOUT).call();
                 }
             } else {
-                Log.logInfoRB("GIT_START", "clone");
+                LOGGER.log(Level.DEBUG, GIT_START_MSG, "clone");
                 CloneCommand c = Git.cloneRepository();
                 c.setURI(repositoryURL);
                 c.setDirectory(localDirectory);
@@ -196,7 +200,7 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
                     git.submoduleUpdate().setTimeout(TIMEOUT).call();
                 }
                 configRepo();
-                Log.logInfoRB("GIT_FINISH", "clone");
+                LOGGER.log(Level.INFO, OStrings.getResourceBundle(), "GIT_FINISH", "clone");
             }
 
             // cleanup repository
@@ -204,7 +208,7 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
                 git.reset().setMode(ResetType.HARD).call();
             }
             configRepo();
-            Log.logInfoRB("GIT_FINISH", "clone");
+            LOGGER.log(Level.INFO, OStrings.getResourceBundle(), "GIT_FINISH", "clone");
         } finally {
             client.stop();
         }
@@ -296,7 +300,7 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
                 // TODO fetch
                 git.fetch().setRemote(REMOTE).setTimeout(TIMEOUT).call();
             }
-            Log.logDebug(LOGGER, "GIT switchToVersion {0} ", version);
+            LOGGER.log(Level.TRACE, "GIT switchToVersion {0} ", version);
             git.reset().setMode(ResetType.HARD).call();
             git.checkout().setName(version).call();
             git.branchDelete().setForce(true).setBranchNames(defaultBranch).call();
@@ -317,10 +321,10 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
      */
     @Override
     public void addForCommit(String path) throws Exception {
-        Log.logInfoRB("GIT_START", "addForCommit");
+        LOGGER.log(Level.DEBUG, GIT_START_MSG, "addForCommit");
         try (Git git = new Git(repository)) {
             git.add().addFilepattern(path).call();
-            Log.logInfoRB("GIT_FINISH", "addForCommit");
+            LOGGER.log(Level.INFO, OStrings.getResourceBundle(), "GIT_FINISH", "addForCommit");
         } catch (Exception ex) {
             Log.logErrorRB("GIT_ERROR", "addForCommit", ex.getMessage());
             throw ex;
@@ -338,10 +342,10 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
      */
     @Override
     public void addForDeletion(String path) throws Exception {
-        Log.logInfoRB("GIT_START", "addForDelete");
+        LOGGER.log(Level.DEBUG, GIT_START_MSG, "addForDelete");
         try (Git git = new Git(repository)) {
             git.rm().addFilepattern(path).call();
-            Log.logInfoRB("GIT_FINISH", "addForDelete");
+            LOGGER.log(Level.INFO, OStrings.getResourceBundle(), "GIT_FINISH", "addForDelete");
         } catch (Exception ex) {
             Log.logErrorRB("GIT_ERROR", "addForDelete", ex.getMessage());
             throw ex;
@@ -455,10 +459,10 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
         }
         if (indexIsEmpty(DirCache.read(repository))) {
             // Nothing was actually added to the index so we can just return.
-            Log.logInfoRB("GIT_NO_CHANGES", "upload");
+            LOGGER.log(Level.DEBUG, GIT_NO_CHANGES_MSG, "upload");
             return null;
         }
-        Log.logInfoRB("GIT_START", "upload");
+        LOGGER.log(Level.DEBUG, GIT_START_MSG, "upload");
         try (Git git = new Git(repository)) {
             CommitCommand commitCommand = git.commit();
             commitCommand.setMessage(comment);
@@ -471,16 +475,16 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
                     .collect(Collectors.toList());
             String result;
             if (statuses.isEmpty() || statuses.stream().anyMatch(s -> s != RemoteRefUpdate.Status.OK)) {
-                Log.logWarningRB("GIT_CONFLICT");
+                LOGGER.log(Level.WARNING, OStrings.getResourceBundle(), "GIT_CONFLICT");
                 result = null;
             } else {
                 result = commit.getName();
             }
-            Log.logDebug(LOGGER, "GIT committed into new version {0} ", result);
-            Log.logInfoRB("GIT_FINISH", "upload");
+            LOGGER.log(Level.TRACE, "GIT committed into new version {0} ", result);
+            LOGGER.log(Level.INFO, OStrings.getResourceBundle(), "GIT_FINISH", "upload");
             return result;
         } catch (Exception ex) {
-            Log.logErrorRB("GIT_ERROR", "upload", ex.getMessage());
+            LOGGER.log(Level.ERROR, OStrings.getResourceBundle(), "GIT_ERROR", "upload", ex.getMessage());
             if (ex instanceof TransportException) {
                 throw new NetworkException(ex);
             } else {

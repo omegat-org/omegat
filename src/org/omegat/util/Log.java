@@ -27,21 +27,9 @@
 
 package org.omegat.util;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
-import java.util.logging.Formatter;
-import java.util.logging.Handler;
 import java.util.logging.Level;
-import java.util.logging.LogManager;
 import java.util.logging.LogRecord;
 import java.util.logging.Logger;
-
-import org.omegat.util.logging.OmegaTFileHandler;
 
 /**
  * A collection of methods to make logging things easier.
@@ -54,77 +42,10 @@ public final class Log {
     private Log() {
     }
 
-    private static final Logger LOGGER;
+    private static final org.omegat.util.logging.Logger LOGGER;
 
     static {
-        LOGGER = Logger.getLogger("global");
-
-        boolean loaded = false;
-        File usersLogSettings = new File(StaticUtils.getConfigDir(), "logger.properties");
-        if (usersLogSettings.isFile() && usersLogSettings.canRead()) {
-            // try to load logger settings from user home dir
-            try (InputStream in = new FileInputStream(usersLogSettings)) {
-                init(in);
-                loaded = true;
-            } catch (Exception e) {
-            }
-        }
-        if (!loaded) {
-            // load built-in logger settings
-            try (InputStream in = Log.class.getResourceAsStream("/org/omegat/logger.properties")) {
-                init(in);
-            } catch (IOException ex) {
-                LOGGER.log(Level.SEVERE, "Can't open file for logging", ex);
-            }
-        }
-    }
-
-    /**
-     * Initialize handlers manually. Required for WebStart.
-     *
-     * @param in
-     *            settings
-     */
-    protected static void init(InputStream in) throws IOException {
-        Properties props = new Properties();
-        props.load(in);
-        String handlers = props.getProperty("handlers");
-        if (handlers != null) {
-            props.remove("handlers");
-
-            ByteArrayOutputStream b = new ByteArrayOutputStream();
-            props.store(b, null);
-            LogManager.getLogManager().readConfiguration(new ByteArrayInputStream(b.toByteArray()));
-
-            Logger rootLogger = LogManager.getLogManager().getLogger("");
-
-            // remove initialized handlers
-            for (Handler h : rootLogger.getHandlers()) {
-                rootLogger.removeHandler(h);
-            }
-
-            String[] hs = handlers.split(",");
-            for (String hn : hs) {
-                String word = hn.trim();
-                try {
-                    Class<?> clz = Log.class.getClassLoader().loadClass(word);
-                    Handler h = (Handler) clz.getDeclaredConstructor().newInstance();
-                    String fname = props.getProperty(word + ".formatter");
-                    if (fname != null) {
-                        Class<?> clzF = Log.class.getClassLoader().loadClass(fname.trim());
-                        h.setFormatter((Formatter) clzF.getDeclaredConstructor().newInstance());
-                    }
-                    String level = props.getProperty(word + ".level");
-                    if (level != null) {
-                        h.setLevel(Level.parse(level));
-                    }
-                    rootLogger.addHandler(h);
-                } catch (Exception ex) {
-                    System.err.println("Error in logger init: " + ex);
-                    ex.printStackTrace();
-                }
-            }
-        }
+        LOGGER = org.omegat.util.logging.Logger.getLogger("global");
     }
 
     /**
@@ -135,22 +56,17 @@ public final class Log {
     }
 
     /**
-     * Compute the filename of the log file
+     * Compute the filename of the log file.
+     *
      * @return the filename of the log, or an empty string
      */
     public static String getLogFileName() {
-        Handler[] hand = LOGGER.getParent().getHandlers();
-        if (hand[1] instanceof OmegaTFileHandler) {
-            OmegaTFileHandler omegatLog = (OmegaTFileHandler) hand[1];
-            return omegatLog.getOmegaTLogFileName() + ".log";
-        } else {
-            return "";
-        }
-
+        return LOGGER.getLogFileName();
     }
 
     /**
-     * Compute the full path of the log file
+     * Compute the full path of the log file.
+     *
      * @return the full path of the log file
      */
     public static String getLogFilePath() {
@@ -186,13 +102,7 @@ public final class Log {
      *            StaticUtils.format.
      */
     public static void logRB(String key, Object... parameters) {
-        if (LOGGER.isLoggable(Level.INFO)) {
-            LogRecord rec = new LogRecord(Level.INFO, key);
-            rec.setResourceBundle(OStrings.getResourceBundle());
-            rec.setParameters(parameters);
-            rec.setLoggerName(LOGGER.getName());
-            LOGGER.log(rec);
-        }
+        LOGGER.logRB(key, parameters);
     }
 
     /**
@@ -223,13 +133,7 @@ public final class Log {
      *            StaticUtils.format.
      */
     public static void logWarningRB(String key, Object... parameters) {
-        if (LOGGER.isLoggable(Level.WARNING)) {
-            LogRecord rec = new LogRecord(Level.WARNING, key);
-            rec.setResourceBundle(OStrings.getResourceBundle());
-            rec.setParameters(parameters);
-            rec.setLoggerName(LOGGER.getName());
-            LOGGER.log(rec);
-        }
+        LOGGER.logWarningRB(key, parameters);
     }
 
     /**
@@ -247,14 +151,8 @@ public final class Log {
      *            StaticUtils.format.
      */
     public static void logInfoRB(String key, Object... parameters) {
-        if (LOGGER.isLoggable(Level.INFO)) {
-            LogRecord rec = new LogRecord(Level.INFO, key);
-            rec.setResourceBundle(OStrings.getResourceBundle());
-            rec.setParameters(parameters);
-            rec.setLoggerName(LOGGER.getName());
-            LOGGER.log(rec);
-            }
-        }
+        LOGGER.logInfoRB(key, parameters);
+    }
 
     /**
      * Writes an error message to the log (to be retrieved from the resource
@@ -271,13 +169,7 @@ public final class Log {
      *            StaticUtils.format.
      */
     public static void logErrorRB(String key, Object... parameters) {
-        if (LOGGER.isLoggable(Level.SEVERE)) {
-            LogRecord rec = new LogRecord(Level.SEVERE, key);
-            rec.setResourceBundle(OStrings.getResourceBundle());
-            rec.setParameters(parameters);
-            rec.setLoggerName(LOGGER.getName());
-            LOGGER.log(rec);
-        }
+        LOGGER.logErrorRB(key, parameters);
     }
 
     /**
@@ -297,14 +189,7 @@ public final class Log {
      *            StaticUtils.format.
      */
     public static void logErrorRB(Throwable ex, String key, Object... parameters) {
-        if (LOGGER.isLoggable(Level.SEVERE)) {
-            LogRecord rec = new LogRecord(Level.SEVERE, key);
-            rec.setResourceBundle(OStrings.getResourceBundle());
-            rec.setParameters(parameters);
-            rec.setLoggerName(LOGGER.getName());
-            rec.setThrown(ex);
-            LOGGER.log(rec);
-        }
+        LOGGER.logErrorRB(ex, key, parameters);
     }
 
     /**

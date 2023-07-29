@@ -108,7 +108,7 @@ public class SaveThread extends Thread implements IAutoSave {
                         Core.getMainWindow().showStatusMessageRB("ST_PROJECT_AUTOSAVED",
                                 DateFormat.getTimeInstance(DateFormat.SHORT).format(new Date()));
                     } catch (TimeoutException ex) {
-                        Log.logWarningRB("AUTOSAVE_TIMEOUT_TAKING_LOCK");
+                        Log.logWarningRB("AUTOSAVE_LOCK_ACQUISITION_TIMEOUT");
                     } catch (KnownException ex) {
                         Core.getMainWindow().showStatusMessageRB(ex.getMessage(), ex.getParams());
                     } catch (IRemoteRepository2.NetworkException ex) {

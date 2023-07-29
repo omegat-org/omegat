@@ -90,8 +90,8 @@ public class SaveThread extends Thread implements IAutoSave {
         try {
             while (true) {
                 synchronized (this) {
-                    // Set the flag for saving. If somebody resets the timer,
-                    // one should clear the flag.
+                    // Set the flag for saving. Clear the flag if the timer is
+                    // reset.
                     needToSaveNow = true;
                     // sleep
                     wait(waitDuration);

@@ -107,6 +107,21 @@ allprojects {
             removeUnusedImports()
         }
     }
+
+    repositories {
+        mavenCentral()
+        mavenLocal()
+        // Sonatype OSSRH snapshots
+        maven { url "https://s01.oss.sonatype.org/content/repositories/snapshots" }
+    }
+}
+
+subprojects {
+    // All subproject dpenends on main project.
+    dependencies {
+        compileOnly(project.rootProject)
+        testImplementation(testFixtures(project.rootProject))
+    }
 }
 
 sourceSets {
@@ -139,10 +154,6 @@ sourceSets {
     }
 }
 
-repositories {
-    mavenCentral()
-}
-
 configurations {
     all
     [testRuntime, testCompile]*.exclude group: 'org.languagetool', module: 'language-all'
@@ -154,6 +165,7 @@ ext {
     providedLibsDir = file('lib/provided')
     languageToolVersion = '6.1'
     luceneVersion = '5.5.5'
+    luceneGosenVersion = '5.5.1'
     jgitVersion = '6.6.0.202305301015-r'
     slf4jVersion = '2.0.7'
 }
@@ -213,9 +225,9 @@ dependencies {
         implementation 'com.google.guava:guava:31.0.1-jre'
         runtimeOnly("org.languagetool:language-all:${languageToolVersion}") {
             // Temporary exclusion; see https://sourceforge.net/p/omegat/bugs/814/
-            exclude module: 'lucene-gosen-ipadic'
+            exclude module: 'lucene-gosen'
         }
-        runtimeOnly 'org.omegat.lucene:lucene-gosen:5.0.0:ipadic'
+        runtimeOnly 'org.omegat.lucene:lucene-gosen:5.5.1:ipadic'
 
         // Lucene for tokenizers
         implementation "org.apache.lucene:lucene-core:${luceneVersion}"
@@ -305,6 +317,11 @@ dependencies {
     ['be', 'en', 'fr'].each {
         testImplementation "org.languagetool:language-${it}:${languageToolVersion}"
     }
+    testImplementation("org.languagetool:language-ja:${languageToolVersion}") {
+        // Temporary exclusion; see https://sourceforge.net/p/omegat/bugs/814/
+        exclude module: 'lucene-gosen'
+    }
+    testRuntimeOnly "org.omegat.lucene:lucene-gosen:${luceneGosenVersion}:ipadic"
     testRuntimeOnly "org.languagetool:language-pl:${languageToolVersion}"
     testRuntimeOnly "org.slf4j:slf4j-jdk14:${slf4jVersion}"
 
@@ -364,7 +381,7 @@ ext {
     macJRE = fileTree(dir: assetDir, include: 'OpenJDK11U-jre_x64_mac_*.tar.gz')
     armMacJRE = fileTree(dir: assetDir, include: 'OpenJDK11U-jre_aarch64_mac_*.tar.gz')
     linux64JRE = fileTree(dir: assetDir, include: 'OpenJDK11U-jre_x64_linux_*.tar.gz')
-    linuxArmJRE = fileTree(dir: assetDir, include: 'OpenJDK11U-jre_aarch64_linux_*.tar.gz')
+    linuxArm64JRE = fileTree(dir: assetDir, include: 'OpenJDK11U-jre_aarch64_linux_*.tar.gz')
     windowsJRE = fileTree(dir: assetDir, include: 'OpenJDK11U-jre_x64_windows_*.zip')
 }
 
@@ -661,6 +678,21 @@ distributions {
             }
         }
     }
+
+    linuxArm64 {
+        contents {
+            with main.contents
+            exclude 'OmegaT.bat'
+            if (!linuxArm64JRE.empty) {
+                from(tarTree(linuxArm64JRE.singleFile)) {
+                    includeEmptyDirs = false
+                    eachFile {
+                        replaceRelativePathSegment(it, /jdk.*-jre/, 'jre')
+                    }
+                }
+            }
+        }
+    }
 }
 
 installMacDist {
@@ -782,11 +814,6 @@ task mac(dependsOn: [macDistZip, macNotarize]) {
     group = 'omegat distribution'
 }
 
-task linux(dependsOn: [linux64DistTar]) {
-    description = 'Build the Linux distributions.'
-    group = 'omegat distribution'
-}
-
 installLinux64Dist {
     doFirst {
         delete "${destinationDir}/jre"
@@ -803,6 +830,25 @@ linux64DistTar {
     archiveFileName.set("${applicationName}_${project.version}${omtVersion.beta}_Linux_64.tar.bz2")
     compression = Compression.BZIP2
     archiveExtension = 'tar.bz2'
+    group = 'omegat distribution'
+}
+
+linuxArm64DistTar {
+    onlyIf {
+        condition(!linuxArm64JRE.empty, 'ARM64 JRE not found')
+    }
+    doFirst {
+        delete "$destinationDirectory/jre"
+    }
+    archiveFileName.set("${applicationName}_${project.version}${omtVersion.beta}_Linux_ARM64.tar.bz2")
+    compression = Compression.BZIP2
+    archiveExtension = 'tar.bz2'
+    group = 'omegat distribution'
+}
+
+task linux(dependsOn: [linux64DistTar, linuxArm64DistTar]) {
+    description = 'Build the Linux distributions.'
+    group = 'omegat distribution'
 }
 
 // We bundle our startup scripts separately, so disable startScripts.

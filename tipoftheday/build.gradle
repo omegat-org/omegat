@@ -16,15 +16,9 @@ sourceSets {
     }
 }
 
-repositories {
-    mavenCentral()
-}
-
 dependencies {
-    compileOnly(project.rootProject)
-    // Libs are provided in the "source" distribution only
     if (providedLibsDir.directory) {
-        compileOnly fileTree(dir: providedLibsDir, include: '**/*.jar')
+        compileOnly fileTree(dir: providedLibsDir, includes: ['**/tipoftheday-*.jar', '**/jackson*.jar'])
     } else {
         // runtime dependencies should be in main project
         compileOnly "tokyo.northside:tipoftheday:0.4.1"

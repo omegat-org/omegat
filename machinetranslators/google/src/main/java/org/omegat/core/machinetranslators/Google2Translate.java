@@ -312,6 +312,7 @@ public class Google2Translate extends BaseCachedTranslate {
     public static final class Translation {
         private String translatedText;
         private String detectedSourceLanguage;
+        private String model;
 
         public String getTranslatedText() {
             return translatedText;
@@ -329,10 +330,21 @@ public class Google2Translate extends BaseCachedTranslate {
             this.detectedSourceLanguage = detectedSourceLanguage;
         }
 
+        public String getModel() {
+            return model;
+        }
+
+        public void setModel(final String model) {
+            this.model = model;
+        }
+
         @Override
         public String toString() {
-            return "Translation{translatedText='" + translatedText + "', detectedSourceLanguage='"
-                    + detectedSourceLanguage + "'}";
+            return "Translation{" +
+                    "translatedText='" + translatedText + '\'' +
+                    ", detectedSourceLanguage='" + detectedSourceLanguage + '\'' +
+                    ", model='" + model + '\'' +
+                    '}';
         }
     }
 }

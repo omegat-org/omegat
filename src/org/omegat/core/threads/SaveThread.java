@@ -108,27 +108,27 @@ public class SaveThread extends Thread implements IAutoSave {
                         Core.getMainWindow().showStatusMessageRB("ST_PROJECT_AUTOSAVED",
                                 DateFormat.getTimeInstance(DateFormat.SHORT).format(new Date()));
                     } catch (TimeoutException ex) {
-                        Log.logWarningRB(LOGGER, "AUTOSAVE_TIMEOUT_TAKING_LOCK");
+                        Log.logWarningRB("AUTOSAVE_TIMEOUT_TAKING_LOCK");
                     } catch (KnownException ex) {
                         Core.getMainWindow().showStatusMessageRB(ex.getMessage(), ex.getParams());
                     } catch (IRemoteRepository2.NetworkException ex) {
-                        Log.logWarningRB(LOGGER, "TEAM_NETWORK_ERROR", ex.getMessage());
+                        Log.logWarningRB("TEAM_NETWORK_ERROR", ex.getMessage());
                     } catch (OutOfMemoryError oome) {
                         // inform the user
                         long memory = Runtime.getRuntime().maxMemory() / 1024 / 1024;
-                        Log.logErrorRB(LOGGER, "OUT_OF_MEMORY", memory);
+                        Log.logErrorRB("OUT_OF_MEMORY", memory);
                         Log.log(oome);
                         Core.getMainWindow().showErrorDialogRB("TF_ERROR", "OUT_OF_MEMORY", memory);
                         // Just quit, we can't help it anyway
                         System.exit(1);
                     } catch (Exception ex) {
-                        Log.logWarningRB(LOGGER, "AUTOSAVE_GENERIC_ERROR", ex.getMessage());
+                        Log.logWarningRB("AUTOSAVE_GENERIC_ERROR", ex.getMessage());
                     }
                     Log.logDebug(LOGGER, "Finish project save from SaveThread"); // NOI18N
                 }
             }
         } catch (InterruptedException ex) {
-            Log.logWarningRB(LOGGER, "AUTOSAVE_INTERRUPTED", ex.getMessage());
+            Log.logWarningRB("AUTOSAVE_INTERRUPTED", ex.getMessage());
         }
     }
 }

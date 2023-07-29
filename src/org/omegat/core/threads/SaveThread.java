@@ -128,7 +128,7 @@ public class SaveThread extends Thread implements IAutoSave {
                 }
             }
         } catch (InterruptedException ex) {
-            Log.logWarningRB("AUTOSAVE_INTERRUPTED", ex.getMessage());
+            Log.logDebug(LOGGER, "Save thread interrupted: {0}", ex.getMessage());
         }
     }
 }

@@ -46,9 +46,7 @@ public final class Logger {
 
     private final java.util.logging.Logger logger;
 
-    private Logger(String name) {
-        logger = java.util.logging.Logger.getLogger(name);
-
+    static {
         boolean loaded = false;
         File usersLogSettings = new File(StaticUtils.getConfigDir(), "logger.properties");
 
@@ -65,7 +63,8 @@ public final class Logger {
             try (InputStream in = Log.class.getResourceAsStream("/org/omegat/logger.properties")) {
                 init(in);
             } catch (IOException ex) {
-                logger.log(Level.SEVERE, "Can't open file for logging", ex);
+                System.out.println(OStrings.getString("LOG_FAILED_LOADING_CONFIGURATION"));
+                System.out.println(ex.getMessage());
             }
         }
     }
@@ -76,7 +75,7 @@ public final class Logger {
      * @param in
      *            settings
      */
-    protected void init(InputStream in) throws IOException {
+    private static void init(InputStream in) throws IOException {
         Properties props = new Properties();
         props.load(in);
         String handlers = props.getProperty("handlers");
@@ -116,6 +115,10 @@ public final class Logger {
                 }
             }
         }
+    }
+
+    private Logger(String name) {
+        logger = java.util.logging.Logger.getLogger(name);
     }
 
     /**

@@ -166,17 +166,6 @@ public final class Logger {
         logger.setLevel(level);
     }
 
-    /**
-     * Check log level (backward compatible).
-     */
-    public boolean isLoggable(java.util.logging.Level level) {
-        return logger.isLoggable(level);
-    }
-
-    public void log(LogRecord rec) {
-        logger.log(rec);
-    }
-
     public void log(java.util.logging.Level level, String message, Throwable throwable) {
         logger.log(level, message, throwable);
     }

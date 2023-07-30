@@ -120,7 +120,7 @@ public class TMXReader2 {
                     throws XMLStreamException {
                 LOGGER.logWarningRB("TMXR_WARNING_WHILE_PARSING", location.getLineNumber(),
                         location.getColumnNumber());
-                LOGGER.log(message + ": " + info);
+                LOGGER.info(message + ": " + info);
                 warningsCount++;
             }
         });
@@ -186,7 +186,7 @@ public class TMXReader2 {
             warningsCount++;
         }
         LOGGER.logRB("TMXR_INFO_READING_COMPLETE");
-        LOGGER.log("");
+        LOGGER.info("");
         if (errorsCount > 0 || warningsCount > 0) {
             LOGGER.logDebug("Errors: {0}, Warnings: {1}", errorsCount, warningsCount);
         }

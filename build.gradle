@@ -424,6 +424,7 @@ task manualPdfs {
 
 task manualHtmls {
     description = 'Build HTML manuals and zip for all languages. Requires Docker.'
+    finalizedBy genDocIndex
 }
 
 task webManual(type: Sync) {
@@ -485,6 +486,8 @@ manualIndexXmls.each { xml ->
         }
         manualHtmls.dependsOn zipTaskName
         tasks.getByName(zipTaskName).dependsOn htmlTaskName
+    } else {
+        manualHtmls.dependsOn htmlTaskName
     }
 }
 
@@ -494,13 +497,6 @@ task instantStartGuides {
 
 task firstSteps {
     description = 'Build First Step pages for all languages. Requires Docker.'
-}
-
-task updateManuals {
-    group = 'omegat release'
-    description = 'Update Instant Start guides and HTML manuals.'
-    dependsOn manualHtmls, firstSteps, instantStartGuides
-    finalizedBy genDocIndex
 }
 
 ext.firstStepsXmls = fileTree(dir: 'doc_src', include: '**/First_Steps.xml')

@@ -234,23 +234,6 @@ public final class Logger {
         }
     }
 
-    /**
-     * Writes an informational message.
-     *
-     * @param key
-     *            The key of the error message in the resource bundle
-     * @param parameters
-     *            Parameters for the error message.
-     */
-    public void log(String key, Object... parameters) {
-        if (logger.isLoggable(Level.INFO)) {
-            LogRecord rec = new LogRecord(Level.INFO, key);
-            rec.setResourceBundle(OStrings.getResourceBundle());
-            rec.setParameters(parameters);
-            rec.setLoggerName(logger.getName());
-            logger.log(rec);
-        }
-    }
 
     /**
      * Writes a throwable message.

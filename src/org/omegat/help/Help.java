@@ -96,12 +96,13 @@ public final class Help {
             uri = getHelpFileURI(lang, OConsts.HELP_HOME);
             if (uri != null) {
                 String version = getDocVersion(lang);
-                if (version == null ||
-                    VersionChecker.compareMinorVersions(OStrings.VERSION, version) < 0) {
-                    // no manual contents in local or manual version is older.
+                if (version == null || VersionChecker.compareMinorVersions(OStrings.VERSION, version) < 0) {
                     uri = URI.create(ONLINE_HELP_URL);
                 }
             }
+        }
+        if (uri == null) {
+            uri = URI.create(ONLINE_HELP_URL);
         }
         DesktopWrapper.browse(uri);
     }

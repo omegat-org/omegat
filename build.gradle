@@ -475,14 +475,17 @@ manualIndexXmls.each { xml ->
     }
 
     def zipTaskName="manualZip${lang.capitalize()}"
-    task(type:Zip, zipTaskName) {
-        from file("${buildDir}/docs/manual/${lang}")
-        from fileTree(dir: "doc_src/${lang}", include: "**/version*.properties")
-        archiveFileName="${lang}.zip"
-        destinationDir file('docs/manuals')
+    def versionProperties = loadProperties(file("doc_src/${lang}/version_${lang}.properties"))
+    if (lang.equals("en") || versionProperties.version.equals(omtVersion.version)) {
+        task(type:Zip, zipTaskName) {
+            from file("${buildDir}/docs/manual/${lang}")
+            from fileTree(dir: "doc_src/${lang}", include: "**/version*.properties")
+            archiveFileName="${lang}.zip"
+            destinationDir file('docs/manuals')
+        }
+        manualHtmls.dependsOn zipTaskName
+        tasks.getByName(zipTaskName).dependsOn htmlTaskName
     }
-    manualHtmls.dependsOn zipTaskName
-    tasks.getByName(zipTaskName).dependsOn htmlTaskName
 }
 
 task instantStartGuides {

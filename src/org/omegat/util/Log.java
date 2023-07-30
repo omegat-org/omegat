@@ -115,7 +115,7 @@ public final class Log {
      *            The exception or error to log
      */
     public static void log(Throwable throwable) {
-        LOGGER.log(Level.SEVERE, "", throwable);
+        LOGGER.log(throwable);
     }
 
     /**

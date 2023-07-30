@@ -91,12 +91,17 @@ public final class Help {
      */
     public static void showHelp() throws IOException {
         String lang = detectHelpLanguage();
-        URI uri = getHelpFileURI(lang, OConsts.HELP_HOME);
+        URI uri = getHelpZipFileURI(lang);
         if (uri == null) {
-            uri = getHelpZipFileURI(lang);
-        }
-        if (uri == null) {
-            uri = URI.create(ONLINE_HELP_URL);
+            uri = getHelpFileURI(lang, OConsts.HELP_HOME);
+            if (uri != null) {
+                String version = getDocVersion(lang);
+                if (version == null ||
+                    VersionChecker.compareMinorVersions(OStrings.VERSION, version) < 0) {
+                    // no manual contents in local or manual version is older.
+                    uri = URI.create(ONLINE_HELP_URL);
+                }
+            }
         }
         DesktopWrapper.browse(uri);
     }
@@ -210,23 +215,10 @@ public final class Help {
 
         // Check if there's a translation for the full locale (lang + country)
         String locale = language + "_" + country;
-        String version = getDocVersion(locale);
-        if (OStrings.VERSION.equals(version)) {
+        if (locale.equals("pt_BR") || locale.startsWith("zh_")) {
             return locale;
         }
-
-        // Check if there's a translation for the language only
-        version = getDocVersion(language);
-        if (version == null) {
-            return null;
-        }
-
-        if (VersionChecker.compareMinorVersions(OStrings.VERSION, version) >= 0) {
-            return language;
-        }
-
-        // No suitable translation found
-        return null;
+        return language;
     }
 
     /**

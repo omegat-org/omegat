@@ -71,6 +71,10 @@ public interface IEditorSettings {
     
     public boolean isMarkParagraphDelimitations();
 
+    void setHideTagonlySegments(boolean hideTos);
+
+    boolean isHideTagonlySegments();    
+
     boolean isMarkBidi();
 
     void setMarkBidi(boolean markBidi);

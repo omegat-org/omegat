@@ -681,15 +681,19 @@ public class RealProject implements IProject {
                 Core.getMainWindow().showStatusMessageRB("TF_COMMIT_TARGET_START");
                 remoteRepositoryProvider.switchAllToLatest();
                 remoteRepositoryProvider.copyFilesFromProjectToRepos(config.getTargetDir().getUnderRoot(), null);
+                remoteRepositoryProvider.commitFiles(config.getTargetDir().getUnderRoot(), "Project translation");
 
                 // Convert stats file name to relative
-                ProjectProperties.ProjectPath path = config.new ProjectPath(true);
+                ProjectProperties.ProjectPath path = config.new ProjectPath(false);
                 path.setRelativeOrAbsolute(statsTextFilename);
-                statsTextFilename = path.getUnderRoot();
-                remoteRepositoryProvider.copyFilesFromProjectToRepos(statsTextFilename, null);
-                remoteRepositoryProvider.copyFilesFromProjectToRepos(statsTextFilename.replace(".txt",".json"), null);
+                remoteRepositoryProvider.copyFilesFromProjectToRepos(path.getUnderRoot(), null);
+                remoteRepositoryProvider.commitFiles(path.getUnderRoot(), "Statistics");
 
-                remoteRepositoryProvider.commitFiles(config.getTargetDir().getUnderRoot(), "Project translation");
+                path = config.new ProjectPath(false);
+                path.setRelativeOrAbsolute(statsTextFilename.replace(".txt",".json"));
+                remoteRepositoryProvider.copyFilesFromProjectToRepos(path.getUnderRoot(), null);
+                remoteRepositoryProvider.commitFiles(path.getUnderRoot(), "Statistics");
+
                 Core.getMainWindow().showStatusMessageRB("TF_COMMIT_TARGET_DONE");
             } catch (Exception e) {
                 Log.logErrorRB("TF_COMMIT_TARGET_ERROR");

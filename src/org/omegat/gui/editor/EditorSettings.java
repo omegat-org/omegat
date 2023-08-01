@@ -30,10 +30,12 @@ package org.omegat.gui.editor;
 
 import java.awt.Color;
 import java.awt.event.KeyEvent;
+import java.util.function.Predicate;
 
 import javax.swing.text.AttributeSet;
 
 import org.omegat.core.Core;
+import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.SourceTextEntry.DUPLICATE;
 import org.omegat.core.spellchecker.SpellCheckerMarker;
 import org.omegat.util.Preferences;
@@ -62,6 +64,7 @@ public class EditorSettings implements IEditorSettings {
     private boolean markWhitespace;
     private boolean markParagraphDelimitations;
     private boolean markBidi;
+    private boolean hideTagonlySegments;
     private String displayModificationInfo;
     private boolean autoSpellChecking;
     private boolean viewSourceBold;
@@ -93,7 +96,7 @@ public class EditorSettings implements IEditorSettings {
                 DISPLAY_MODIFICATION_INFO_NONE);
         autoSpellChecking = Preferences.isPreference(Preferences.ALLOW_AUTO_SPELLCHECKING);
         markAutoPopulated = Preferences.isPreference(Preferences.MARK_AUTOPOPULATED);
-
+        hideTagonlySegments = Preferences.isPreferenceDefault(Preferences.HIDE_TAGONLY_SEGMENTS, false);
         // options from preferences 'view' pane
         viewSourceBold = Preferences.isPreferenceDefault(Preferences.VIEW_OPTION_SOURCE_ALL_BOLD,
                 Preferences.VIEW_OPTION_SOURCE_ALL_BOLD_DEFAULT);
@@ -319,6 +322,59 @@ public class EditorSettings implements IEditorSettings {
         if (Core.getProject().isProjectLoaded()) {
             parent.loadDocument();
             parent.activateEntry();
+        }
+    }
+
+    public boolean isHideTagonlySegments() {
+        return hideTagonlySegments;
+    }
+
+    public void setHideTagonlySegments(boolean hideTos) {
+        UIThreadsUtil.mustBeSwingThread();
+
+        Core.getEditor().commitAndDeactivate();
+
+        this.hideTagonlySegments = hideTos;
+        Preferences.setPreference(Preferences.HIDE_TAGONLY_SEGMENTS, hideTos);
+
+        Core.getEditor().removeAttachedFilter(); // restore options-based filter
+    }
+
+    /**
+     * Get the filter based on selected checkbox menu items
+     * Actually only option hideTagonlySegments is concerned but there may be others later
+     **/
+    public IEditorFilter getMenusFilter() {
+        Predicate<SourceTextEntry> p = null;
+        if (this.hideTagonlySegments) {
+            final java.util.regex.Pattern ptn = java.util.regex.Pattern.compile(Preferences.getPreferenceDefault(
+                Preferences.EXPR_TAGONLY_SEGMENTS, Preferences.EXPR_TAGONLY_SEGMENTS_DEFAULT));
+            Predicate<SourceTextEntry> p1 = ste -> {
+                    String txt = ste.getSrcText();
+                    return ! (ptn.matcher(txt).matches());
+                };
+            // Cascade method to enable, in the future, to add more filters
+            if (p == null) {
+                p = p1;
+            } else {
+                p = p.and(p1);
+            }
+        }
+        if (p != null) {
+            final Predicate<SourceTextEntry> p1 = p;
+            return new IEditorFilter() {
+                public boolean isSourceAsEmptyTranslation() {
+                    return false; // we don't need to override option
+                }
+                public java.awt.Component getControlComponent() {
+                    return null;
+                }
+                public boolean allowed(SourceTextEntry ste) {
+                    return p1.test(ste);
+                }
+            };
+        } else {
+            return null;
         }
     }
 

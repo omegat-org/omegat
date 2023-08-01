@@ -254,7 +254,7 @@ public class ConsoleBindings implements IGlossaries, IEditor, IScriptLogger {
     }
 
     @Override
-    public void removeFilter() {
+    public void removeAttachedFilter() {
 
     }
 

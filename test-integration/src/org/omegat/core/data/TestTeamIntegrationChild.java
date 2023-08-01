@@ -289,7 +289,7 @@ public final class TestTeamIntegrationChild {
         public void replaceEditText(String text) {
         }
 
-        public void removeFilter() {
+        public void removeAttachedFilter() {
         }
 
         public void remarkOneMarker(String markerClassName) {

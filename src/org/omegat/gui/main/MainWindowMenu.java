@@ -382,6 +382,8 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         viewMenu.add(viewMarkLanguageCheckerCheckBoxMenuItem = createCheckboxMenuItem("LT_OPTIONS_MENU_ENABLED"));
         viewMenu.add(viewMarkFontFallbackCheckBoxMenuItem = createCheckboxMenuItem("MW_VIEW_MENU_MARK_FONT_FALLBACK"));
         viewMenu.add(viewModificationInfoMenu = createMenu("MW_VIEW_MENU_MODIFICATION_INFO"));
+        viewMenu.add(viewHideTagonlyCheckBoxMenuItem = createCheckboxMenuItem("MV_VIEW_MENU_HIDE_ONLYTAGS"));
+
         ButtonGroup viewModificationInfoMenuBG = new ButtonGroup();
         viewModificationInfoMenu.add(viewDisplayModificationInfoNoneRadioButtonMenuItem = createRadioButtonMenuItem(
                         "MW_VIEW_MENU_MODIFICATION_INFO_NONE", viewModificationInfoMenuBG));
@@ -541,6 +543,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         viewMarkLanguageCheckerCheckBoxMenuItem.setSelected(Core.getEditor().getSettings().isMarkLanguageChecker());
         viewMarkFontFallbackCheckBoxMenuItem.setSelected(Core.getEditor().getSettings()
                 .isDoFontFallback());
+        viewHideTagonlyCheckBoxMenuItem.setSelected(Core.getEditor().getSettings().isHideTagonlySegments());
 
         viewDisplayModificationInfoNoneRadioButtonMenuItem
                 .setSelected(EditorSettings.DISPLAY_MODIFICATION_INFO_NONE.equals(Core.getEditor()
@@ -866,6 +869,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
     JCheckBoxMenuItem viewMarkLanguageCheckerCheckBoxMenuItem;
     JCheckBoxMenuItem viewMarkFontFallbackCheckBoxMenuItem;
     JMenu viewModificationInfoMenu;
+    JCheckBoxMenuItem viewHideTagonlyCheckBoxMenuItem;
     JRadioButtonMenuItem viewDisplayModificationInfoNoneRadioButtonMenuItem;
     JRadioButtonMenuItem viewDisplayModificationInfoSelectedRadioButtonMenuItem;
     JRadioButtonMenuItem viewDisplayModificationInfoAllRadioButtonMenuItem;

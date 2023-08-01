@@ -408,9 +408,10 @@ public interface IEditor {
     void setFilter(IEditorFilter filter);
 
     /**
-     * Removes the current filter.
+     * Removes the filter which has been set by another window, such as search window
+     * but the filter associated to menus will be restored.
      */
-    void removeFilter();
+    void removeAttachedFilter();
 
     /**
      * Returns current translation or null.

@@ -312,7 +312,7 @@ public class GlossaryAutoCompleterViewTest extends TestCore {
             }
 
             @Override
-            public void removeFilter() {
+            public void removeAttachedFilter() {
             }
 
             @Override

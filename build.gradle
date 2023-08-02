@@ -22,6 +22,8 @@ apply from: 'gradle/utils.gradle'
 applicationName = 'OmegaT'
 mainClassName = 'org.omegat.Main'
 
+def javaVersion = 11;
+
 ext {
     omtVersion = loadProperties(file('src/org/omegat/Version.properties'))
     omtFlavor = omtVersion.beta.empty ? 'standard' : 'latest'
@@ -44,7 +46,6 @@ java {
 }
 
 allprojects {
-    def javaVersion = 11;
     def envIsCi = project.hasProperty('envIsCi') as Boolean
 
     apply plugin: 'checkstyle'
@@ -158,6 +159,7 @@ configurations {
     [testRuntime, testCompile]*.exclude group: 'org.languagetool', module: 'language-all'
     testIntegrationImplementation.extendsFrom implementation
     jaxb
+    genMac
 }
 
 ext {
@@ -327,6 +329,9 @@ dependencies {
     // JAXB codegen only
     jaxb 'com.sun.xml.bind:jaxb-xjc:2.3.4'
 
+    // genMac only
+    genMac 'org.omegat:appbundler:1.2.1'
+
     testIntegrationImplementation sourceSets.main.output, sourceSets.test.output
     testIntegrationImplementation(testFixtures(project.rootProject))
     testIntegrationRuntimeOnly "org.slf4j:slf4j-jdk14:${slf4jVersion}"
@@ -443,6 +448,39 @@ task webManual(type: Sync) {
     }
 }
 
+task genMac {
+    description = 'Generate the Mac .app skeleton. Depends AppBundler (https://github.com/TheInfiniteKind/appbundler)'
+    outputs.dir file("${buildDir}/appbundler")
+    doLast {
+        ant.taskdef(name: 'appbundler',
+                classname: 'com.oracle.appbundler.AppBundlerTask',
+                classpath: configurations.genMac.asPath)
+        ant.appbundler(outputdirectory: "${buildDir}/appbundler",
+                name: applicationName,
+                displayname: applicationName,
+                executablename: applicationName,
+                identifier: 'org.omegat.OmegaT',
+                icon: 'images/OmegaT.icns',
+                version: '${version}',
+                jvmrequired: javaVersion,
+                shortversion: '${version}',
+                mainclassname: mainClassName) {
+            option(value: "-Xdock:name=${applicationName}")
+            option(value: "-Dapple.awt.application.name=${applicationName}")
+            option(value: "-Dapple.awt.application.appearance=system")
+            argument(value: '--config-file=${configfile}')
+            bundledocument(extensions: 'project',
+                    name: "${applicationName} Project",
+                    role: 'editor',
+                    icon: 'images/OmegaT.icns')
+            bundledocument(extensions: '*',
+                    name: 'All Files',
+                    role: 'none')
+            plistentry(key: 'JVMRuntime', value: 'jre.bundle')
+        }
+    }
+}
+
 distributions {
     main {
         contents {
@@ -537,18 +575,18 @@ distributions {
 
     mac {
         contents {
-            from('release/mac-specific') {
+            from(genMac.outputs) {
                 exclude '**/MacOS/OmegaT', '**/Info.plist', '**/java.entitlements'
             }
-            from('release/mac-specific') {
+            from(genMac.outputs) {
                 include '**/MacOS/OmegaT'
                 fileMode 0755
             }
-            from('release/mac-specific') {
+            from(genMac.outputs) {
                 include '**/Info.plist'
                 expand(version: project.version,
-                       // $APP_ROOT is expanded at runtime by the launcher binary
-                       configfile: '$APP_ROOT/Contents/Resources/Configuration.properties')
+                        // $APP_ROOT is expanded at runtime by the launcher binary
+                        configfile: '$APP_ROOT/Contents/Resources/Configuration.properties')
             }
             into('OmegaT.app/Contents/Java') {
                 with main.contents
@@ -556,6 +594,37 @@ distributions {
             }
             if (!macJRE.empty) {
                 from(tarTree(macJRE.singleFile)) {
+                    into 'OmegaT.app/Contents/PlugIns'
+                    includeEmptyDirs = false
+                    eachFile {
+                        replaceRelativePathSegment(it, /jdk.*-jre/, 'jre.bundle')
+                    }
+                }
+            }
+        }
+    }
+
+    armMac {
+        contents {
+            from(genMac.outputs) {
+                exclude '**/MacOS/OmegaT', '**/Info.plist', '**/java.entitlements'
+            }
+            from(genMac.outputs) {
+                include '**/MacOS/OmegaT'
+                fileMode 0755
+            }
+            from(genMac.outputs) {
+                include '**/Info.plist'
+                expand(version: project.version,
+                        // $APP_ROOT is expanded at runtime by the launcher binary
+                        configfile: '$APP_ROOT/Contents/Resources/Configuration.properties')
+            }
+            into('OmegaT.app/Contents/Java') {
+                with main.contents
+                exclude '*.sh', '*.kaptn', 'OmegaT', 'OmegaT.bat', 'omegat.desktop'
+            }
+            if (!armMacJRE.empty) {
+                from(tarTree(armMacJRE.singleFile)) {
                     into 'OmegaT.app/Contents/PlugIns'
                     includeEmptyDirs = false
                     eachFile {
@@ -632,86 +701,127 @@ task hunspellSignedJar(type: Jar) {
     archiveFileName.set(hunspellJar.name)
 }
 
-task installMacSignedDist(type: Sync) {
-    description = 'Build the signed Mac distribution. Requires an Apple Developer Account.'
-    onlyIf {
-        // Set this in e.g. local.properties
-        condition(project.hasProperty('macCodesignIdentity'), 'Code signing property not set')
-    }
-    with distributions.mac.contents
-    duplicatesStrategy = DuplicatesStrategy.INCLUDE
-    from(hunspellSignedJar.outputs) {
-        into 'OmegaT.app/Contents/Java/lib'
-    }
-    destinationDir = file("${buildDir}/install/${applicationName}-macSigned")
-    doFirst {
-        delete "$destinationDir/OmegaT.app/Contents/PlugIns/jre.bundle"
-    }
-    doLast {
-        exec {
-            commandLine 'codesign', '--deep', '--force',
-                '--sign', project.property('macCodesignIdentity'),
-                '--timestamp',
-                '--options', 'runtime',
-                '--entitlements', file('release/mac-specific/java.entitlements'),
-                file("${destinationDir}/OmegaT.app")
-        }
-    }
-}
-
 macDistZip {
     onlyIf {
         condition(!macJRE.empty, 'JRE not found')
     }
-    archiveFileName.set("${applicationName}_${project.version}${omtVersion.beta}_Mac.zip")
+    archiveFileName.set("${applicationName}_${project.version}${omtVersion.beta}_Mac_x64.zip")
     group = 'omegat distribution'
 }
 
-task macSignedDistZip(type: Zip) {
-    def zipRoot = "${applicationName}_${project.version}${omtVersion.beta}_Mac_Signed"
-    from(installMacSignedDist.outputs) {
-        into zipRoot
-    }
-    archiveFileName.set("${zipRoot}.zip")
-    group = 'omegat distribution'
-}
-
-task macNotarize {
+armMacDistZip {
     onlyIf {
-        condition(project.hasProperty('macNotarizationUsername'),
-                  'Username for notarization not set')
+        condition(!armMacJRE.empty, 'JRE not found')
     }
-    inputs.files macSignedDistZip.outputs.files
-    doLast {
-        exec {
-            // Assuming setup per instructions at
-            // https://developer.apple.com/documentation/security/notarizing_your_app_before_distribution/customizing_the_notarization_workflow#3087734
-            commandLine 'xcrun', 'altool', '--notarize-app',
-                '--primary-bundle-id', "org.omegat.$version",
-                '--username', project.property('macNotarizationUsername'),
-                '--password', '@keychain:AC_PASSWORD',
-                '--file', inputs.files.singleFile
-        }
-    }
+    archiveFileName.set("${applicationName}_${project.version}${omtVersion.beta}_Mac_arm.zip")
     group = 'omegat distribution'
 }
 
-task macStapledNotarizedDistZip(type: Zip) {
-    def zipRoot = "${applicationName}_${project.version}${omtVersion.beta}_Mac_Notarized"
-    from(installMacSignedDist.outputs) {
-        into zipRoot
-    }
-    doFirst {
-        def app = "${installMacSignedDist.destinationDir}/OmegaT.app"
-        exec {
-            commandLine 'xcrun', 'stapler', 'staple', app
+ext.makeMacTask = { args ->
+    def signedInstallTaskName = args.name + "InstallSignedDist"
+    def signedZipTaskName = args.name + "SignedDistZip"
+    def notarizeTaskName = args.name + "Notarize"
+    def stapledNotarizedDistZipTaskName = args.name + "StapledNotarizedDistZip"
+    task(type: Sync, signedInstallTaskName) {
+        description = 'Build the signed Mac distribution. Requires an Apple Developer Account.'
+        onlyIf {
+            // Set this in e.g. local.properties
+            condition(project.hasProperty('macCodesignIdentity'), 'Code signing property not set')
+        }
+        if (args.name.equals('mac')) {
+            with distributions.mac.contents
+        } else {
+            with distributions.armMac.contents
+        }
+        duplicatesStrategy = DuplicatesStrategy.INCLUDE
+        from(hunspellSignedJar.outputs) {
+            into 'OmegaT.app/Contents/Java/lib'
+        }
+        destinationDir = file("${buildDir}/install/${applicationName}-${args.suffix}_Signed")
+        doFirst {
+            delete "$destinationDir/OmegaT.app/Contents/PlugIns/jre.bundle"
+        }
+        doLast {
+            exec {
+                commandLine 'codesign', '--deep', '--force',
+                        '--sign', project.property('macCodesignIdentity'),
+                        '--timestamp',
+                        '--options', 'runtime',
+                        '--entitlements', file('release/mac-specific/java.entitlements'),
+                        file("${destinationDir}/OmegaT.app")
+            }
         }
     }
-    archiveFileName.set("${zipRoot}.zip")
-    group = 'omegat distribution'
-}
 
-task mac(dependsOn: [macDistZip, macNotarize]) {
+    task(type: Zip, signedZipTaskName) {
+        def zipRoot = "${applicationName}_${project.version}${omtVersion.beta}_${args.suffix}_Signed"
+        if (args.name.equals("mac")) {
+            from(macInstallSignedDist.outputs) {
+                into zipRoot
+            }
+        } else {
+            from(armMacInstallSignedDist.outputs) {
+                into zipRoot
+            }
+        }
+        archiveFileName.set("${zipRoot}.zip")
+        group = 'omegat distribution'
+    }
+
+    task(type: Exec, notarizeTaskName)  {
+        onlyIf {
+            condition(project.hasProperty('macNotarizationUsername'),
+                    'Username for notarization not set')
+        }
+        if (args.name.equals("mac")) {
+            inputs.files macSignedDistZip.outputs.files
+        } else {
+            inputs.files armMacSignedDistZip.outputs.files
+        }
+        doLast {
+            exec {
+                // Assuming setup per instructions at
+                // https://developer.apple.com/documentation/security/notarizing_your_app_before_distribution/customizing_the_notarization_workflow#3087734
+                commandLine 'xcrun', 'altool', '--notarize-app',
+                        '--primary-bundle-id', "org.omegat.$version",
+                        '--username', project.property('macNotarizationUsername'),
+                        '--password', '@keychain:AC_PASSWORD',
+                        '--file', inputs.files.singleFile
+            }
+        }
+        group = 'omegat distribution'
+    }
+
+    task(type: Zip, stapledNotarizedDistZipTaskName) {
+        def zipRoot = "${applicationName}_${project.version}${omtVersion.beta}_${args.suffix}_Notarized"
+        if (args.name.equals("mac")) {
+            from(macInstallSignedDist.outputs) {
+                into zipRoot
+            }
+        } else {
+            from(armMacInstallSignedDist.outputs) {
+                into zipRoot
+            }
+        }
+        doFirst {
+            if (args.name.equals("mac")) {
+                exec {
+                    commandLine 'xcrun', 'stapler', 'staple', "${macInstallSignedDist.destinationDir}/OmegaT.app"
+                }
+            } else {
+                exec {
+                    commandLine 'xcrun', 'stapler', 'staple', "${armMacInstallSignedDist.destinationDir}/OmegaT.app"
+                }
+            }
+        }
+        archiveFileName.set("${zipRoot}.zip")
+        group = 'omegat distribution'
+    }
+}
+makeMacTask(name: 'mac', suffix: 'Mac_x86')
+makeMacTask(name: 'armMac', suffix: 'Mac_arm')
+
+task mac(dependsOn: [macDistZip, macNotarize, armMacDistZip, armMacNotarize]) {
     description = 'Build the Mac distributions.'
     group = 'omegat distribution'
 }
@@ -964,42 +1074,6 @@ makeJaxbTask(name: 'project', outdir: 'src/gen/core/project',
              args: ['-no-header', '-d', 'src', '-p', 'gen.core.project', 'src/schemas/project_properties.xsd'])
 makeJaxbTask(name: 'tmx14', outdir: 'src/gen/core/tmx14',
              args: ['-no-header', '-d', 'src', '-p', 'gen.core.tmx14', '-b', 'src/schemas/tmx14.xjb', 'src/schemas/tmx14.xsd'])
-
-task genMac {
-    description = 'Generate the Mac .app skeleton. Requires AppBundler (https://bitbucket.org/infinitekind/appbundler) ' +
-        'to be available in ~/.ant/lib'
-    outputs.dir file('release/mac-specific')
-    def appbundlerJar = file("${System.getProperty('user.home')}/.ant/lib/appbundler-1.0ea.jar")
-    onlyIf {
-        condition(appbundlerJar.file, 'AppBundler not found')
-    }
-    doLast {
-        ant.taskdef(name: 'appbundler',
-                    classname: 'com.oracle.appbundler.AppBundlerTask',
-                    classpath: appbundlerJar)
-        ant.appbundler(outputdirectory: 'release/mac-specific',
-                       name: applicationName,
-                       displayname: applicationName,
-                       executablename: applicationName,
-                       identifier: 'org.omegat.OmegaT',
-                       icon: 'images/OmegaT.icns',
-                       version: '${version}',
-                       jvmrequired: javaVersion,
-                       shortversion: '${version}',
-                       mainclassname: mainClassName) {
-            option(value: "-Xdock:name=${applicationName}")
-            argument(value: '--config-file=${configfile}')
-            bundledocument(extensions: 'project',
-                           name: "${applicationName} Project",
-                           role: 'editor',
-                           icon: 'images/OmegaT.icns')
-            bundledocument(extensions: '*',
-                           name: 'All Files',
-                           role: 'none')
-            plistentry(key: 'JVMRuntime', value: 'jre.bundle')
-        }
-    }
-}
 
 task changedOnBranch {
     description = 'List files that have been modified on this git branch.'

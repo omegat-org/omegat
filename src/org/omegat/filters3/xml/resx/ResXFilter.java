@@ -29,12 +29,13 @@ package org.omegat.filters3.xml.resx;
 
 import java.util.List;
 
+import org.xml.sax.Attributes;
+
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.filters2.Instance;
 import org.omegat.filters3.xml.XMLFilter;
 import org.omegat.util.OStrings;
 import org.omegat.util.StringUtil;
-import org.xml.sax.Attributes;
 
 /**
  * Filter for ResX files.
@@ -120,7 +121,7 @@ public class ResXFilter extends XMLFilter {
         if ("/root/data/comment".equals(path)) {
             comment = text;
         } else if ("/root/data".equals(path)) {
-            if (entryParseCallback != null) {
+            if (entryParseCallback != null && entryText !=null) {
                 entryParseCallback.addEntry(id, entryText, null, false, comment, null, this, null);
             }
             id = null;

@@ -34,10 +34,14 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
+import java.util.logging.Formatter;
+import java.util.logging.Handler;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.LogRecord;
-import java.util.logging.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import org.omegat.util.logging.OmegaTFileHandler;
 
@@ -52,9 +56,11 @@ public final class Log {
     private Log() {
     }
 
-    private static final org.slf4j.Logger LOGGER;
+    private static final Logger LOGGER;
 
     static {
+        LOGGER = LoggerFactory.getLogger("global");
+
         boolean loaded = false;
         File usersLogSettings = new File(StaticUtils.getConfigDir(), "logger.properties");
 
@@ -71,10 +77,9 @@ public final class Log {
             try (InputStream in = Log.class.getResourceAsStream("/org/omegat/logger.properties")) {
                 init(in);
             } catch (IOException ex) {
-                System.out.println("Can't open file for logging");
+                LOGGER.atError().log("Can't open file for logging", ex);
             }
         }
-        LOGGER = org.slf4j.LoggerFactory.getLogger("global");
     }
 
     /**
@@ -92,11 +97,11 @@ public final class Log {
 
             ByteArrayOutputStream b = new ByteArrayOutputStream();
             props.store(b, null);
-            java.util.logging.LogManager.getLogManager().readConfiguration(new ByteArrayInputStream(b.toByteArray()));
-            java.util.logging.Logger rootLogger = java.util.logging.LogManager.getLogManager().getLogger("");
+            LogManager.getLogManager().readConfiguration(new ByteArrayInputStream(b.toByteArray()));
+            java.util.logging.Logger rootLogger = LogManager.getLogManager().getLogger("");
 
             // remove initialized handlers
-            for (java.util.logging.Handler h : rootLogger.getHandlers()) {
+            for (Handler h : rootLogger.getHandlers()) {
                 rootLogger.removeHandler(h);
             }
 
@@ -105,16 +110,16 @@ public final class Log {
                 String word = hn.trim();
                 try {
                     Class<?> clz = Log.class.getClassLoader().loadClass(word);
-                    java.util.logging.Handler h = (java.util.logging.Handler) clz.getDeclaredConstructor()
+                    Handler h = (Handler) clz.getDeclaredConstructor()
                             .newInstance();
                     String fname = props.getProperty(word + ".formatter");
                     if (fname != null) {
                         Class<?> clzF = Log.class.getClassLoader().loadClass(fname.trim());
-                        h.setFormatter((java.util.logging.Formatter) clzF.getDeclaredConstructor().newInstance());
+                        h.setFormatter((Formatter) clzF.getDeclaredConstructor().newInstance());
                     }
                     String level = props.getProperty(word + ".level");
                     if (level != null) {
-                        h.setLevel(java.util.logging.Level.parse(level));
+                        h.setLevel(Level.parse(level));
                     }
                     rootLogger.addHandler(h);
                 } catch (Exception ex) {
@@ -147,8 +152,8 @@ public final class Log {
      * @return the filename of the log, or an empty string
      */
     private static String getJULFileName() {
-        java.util.logging.Logger rootLogger = java.util.logging.LogManager.getLogManager().getLogger("");
-        for (java.util.logging.Handler handler : rootLogger.getHandlers()) {
+        java.util.logging.Logger rootLogger = LogManager.getLogManager().getLogger("");
+        for (Handler handler : rootLogger.getHandlers()) {
             if (handler instanceof OmegaTFileHandler) {
                 OmegaTFileHandler omegatLog = (OmegaTFileHandler) handler;
                 return omegatLog.getLogFileName();
@@ -175,7 +180,7 @@ public final class Log {
      *            The new level
      */
     public static void setLevel(Level level) {
-        org.slf4j.ILoggerFactory loggerFactory = org.slf4j.LoggerFactory.getILoggerFactory();
+        org.slf4j.ILoggerFactory loggerFactory = LoggerFactory.getILoggerFactory();
         Class<? extends org.slf4j.ILoggerFactory> loggerFactoryClass = loggerFactory.getClass();
         String loggerName = loggerFactoryClass.getName();
         if (loggerName.equals("org.slf4j.jul.JDK14LoggerFactory")) {
@@ -304,7 +309,7 @@ public final class Log {
      *            StaticUtils.format.
      */
     @Deprecated
-    public static void logDebug(Logger logger, String message, Object... parameters) {
+    public static void logDebug(java.util.logging.Logger logger, String message, Object... parameters) {
         if (logger.isLoggable(Level.FINE)) {
             LogRecord rec = new LogRecord(Level.FINE, message);
             rec.setParameters(parameters);

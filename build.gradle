@@ -308,6 +308,7 @@ dependencies {
     // for http connection test
     testFixturesApi 'com.github.tomakehurst:wiremock-jre8:2.35.0'
     testFixturesImplementation 'commons-io:commons-io:2.11.0'
+    testFixturesApi "org.slf4j:slf4j-api:${slf4jVersion}"
 
     testImplementation 'org.xmlunit:xmlunit-legacy:2.8.3'
     testImplementation("org.languagetool:languagetool-server:${languageToolVersion}") {

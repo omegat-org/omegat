@@ -35,11 +35,11 @@ import com.github.tomakehurst.wiremock.client.WireMock;
 import com.github.tomakehurst.wiremock.matching.StringValuePattern;
 import org.junit.Test;
 
-import org.omegat.core.TestCore;
+import org.omegat.core.TestCoreWireMock;
 import org.omegat.util.Language;
 import org.omegat.util.Preferences;
 
-public class ApertiumTranslateTest extends TestCore {
+public class ApertiumTranslateTest extends TestCoreWireMock {
 
     private static final String JSON = "{\"responseData\": "
             + "{\"translatedText\": \"Abc\"}, "

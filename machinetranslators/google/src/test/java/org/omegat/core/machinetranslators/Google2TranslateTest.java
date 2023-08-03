@@ -31,11 +31,11 @@ import static org.junit.Assert.assertEquals;
 import com.github.tomakehurst.wiremock.client.WireMock;
 import org.junit.Test;
 
-import org.omegat.core.TestCore;
+import org.omegat.core.TestCoreWireMock;
 import org.omegat.util.Language;
 import org.omegat.util.Preferences;
 
-public class Google2TranslateTest extends TestCore {
+public class Google2TranslateTest extends TestCoreWireMock {
 
     private static final String json = "{\n"
             + "  \"data\": {\n"

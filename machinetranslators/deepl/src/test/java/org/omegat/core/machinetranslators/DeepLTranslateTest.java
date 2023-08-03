@@ -35,11 +35,11 @@ import com.github.tomakehurst.wiremock.client.WireMock;
 import com.github.tomakehurst.wiremock.matching.StringValuePattern;
 import org.junit.Test;
 
-import org.omegat.core.TestCore;
+import org.omegat.core.TestCoreWireMock;
 import org.omegat.util.Language;
 import org.omegat.util.Preferences;
 
-public class DeepLTranslateTest extends TestCore {
+public class DeepLTranslateTest extends TestCoreWireMock {
 
     @Test
     public void testGetJsonResults() throws Exception {

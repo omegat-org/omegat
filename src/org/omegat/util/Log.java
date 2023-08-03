@@ -110,8 +110,7 @@ public final class Log {
                 String word = hn.trim();
                 try {
                     Class<?> clz = Log.class.getClassLoader().loadClass(word);
-                    Handler h = (Handler) clz.getDeclaredConstructor()
-                            .newInstance();
+                    Handler h = (Handler) clz.getDeclaredConstructor().newInstance();
                     String fname = props.getProperty(word + ".formatter");
                     if (fname != null) {
                         Class<?> clzF = Log.class.getClassLoader().loadClass(fname.trim());
@@ -187,8 +186,10 @@ public final class Log {
             // when slf4j-jdk14
             java.util.logging.Logger rootLogger = LogManager.getLogManager().getLogger("");
             rootLogger.setLevel(level);
-            // } else if (loggerName.equals("org.slf4j.simple.SimpleLoggerFactory")) {
-            // } else if (loggerName.equals("ch.qos.logback.classic.LoggerContext")) {
+            // } else if
+            // (loggerName.equals("org.slf4j.simple.SimpleLoggerFactory")) {
+            // } else if
+            // (loggerName.equals("ch.qos.logback.classic.LoggerContext")) {
         }
     }
 

@@ -91,7 +91,7 @@ public class SVNAuthenticationManager implements ISVNAuthenticationManager {
         this.teamSettings = teamSettings;
     }
 
-    private static RepositoryDefinition getDef(String repoUrl){
+    private static RepositoryDefinition getDef(String repoUrl) {
         RepositoryDefinition def = new RepositoryDefinition();
         def.setUrl(repoUrl);
         return def;

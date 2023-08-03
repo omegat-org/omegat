@@ -119,8 +119,7 @@ public class TMXReader2 {
         factory.setXMLReporter(new XMLReporter() {
             public void report(String message, String errorType, Object info, Location location)
                     throws XMLStreamException {
-                LOGGER.atWarn().log(Log.getMessage("TMXR_WARNING_WHILE_PARSING",
-                        location.getLineNumber(),
+                LOGGER.atWarn().log(Log.getMessage("TMXR_WARNING_WHILE_PARSING", location.getLineNumber(),
                         location.getColumnNumber()));
                 LOGGER.atInfo().log(message + ": " + info);
                 warningsCount++;
@@ -214,8 +213,10 @@ public class TMXReader2 {
         isOmegaT = CT_OMEGAT.equals(getAttributeValue(element, "creationtool"));
 
         // log some details
-        LOGGER.atInfo().log(Log.getMessage("TMXR_INFO_CREATION_TOOL", getAttributeValue(element, "creationtool")));
-        LOGGER.atInfo().log(Log.getMessage("TMXR_INFO_CREATION_TOOL_VERSION", getAttributeValue(element, "creationtoolversion")));
+        LOGGER.atInfo()
+                .log(Log.getMessage("TMXR_INFO_CREATION_TOOL", getAttributeValue(element, "creationtool")));
+        LOGGER.atInfo().log(Log.getMessage("TMXR_INFO_CREATION_TOOL_VERSION",
+                getAttributeValue(element, "creationtoolversion")));
         LOGGER.atInfo().log(Log.getMessage("TMXR_INFO_SEG_TYPE", getAttributeValue(element, "segtype")));
         LOGGER.atInfo().log(Log.getMessage("TMXR_INFO_SOURCE_LANG", getAttributeValue(element, "srclang")));
 
@@ -223,8 +224,8 @@ public class TMXReader2 {
         // different from the project source language
         String tmxSourceLanguage = getAttributeValue(element, "srclang");
         if (!sourceLanguage.getLanguage().equalsIgnoreCase(tmxSourceLanguage)) {
-            LOGGER.atWarn().log(Log.getMessage("TMXR_WARNING_INCORRECT_SOURCE_LANG", tmxSourceLanguage,
-                    sourceLanguage));
+            LOGGER.atWarn().log(
+                    Log.getMessage("TMXR_WARNING_INCORRECT_SOURCE_LANG", tmxSourceLanguage, sourceLanguage));
         }
 
         // give a warning that TMX file will be upgraded to sentence
@@ -549,8 +550,8 @@ public class TMXReader2 {
                 }
                 if (tagN == null) {
                     // check error of TMX reading
-                    LOGGER.atError().log(Log.getMessage("TMX_ERROR_READING_LEVEL2", e.getLocation().getLineNumber(),
-                            e.getLocation().getColumnNumber()));
+                    LOGGER.atError().log(Log.getMessage("TMX_ERROR_READING_LEVEL2",
+                            e.getLocation().getLineNumber(), e.getLocation().getColumnNumber()));
                     errorsCount++;
                     segContent.setLength(0);
                     return;

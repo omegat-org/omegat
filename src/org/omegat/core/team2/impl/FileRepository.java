@@ -82,7 +82,8 @@ public class FileRepository implements IRemoteRepository2 {
         for (RepositoryMapping m : config.getMapping()) {
             File src = new File(baseSource, m.getRepository());
             File dst = new File(baseDirectory, m.getRepository());
-            LOGGER.atDebug().log("Copy \"" + src.getAbsolutePath() + "\" to \"" + dst.getAbsolutePath() + "\".");
+            LOGGER.atDebug()
+                    .log("Copy \"" + src.getAbsolutePath() + "\" to \"" + dst.getAbsolutePath() + "\".");
             copyFiles(src, dst);
         }
     }

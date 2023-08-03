@@ -57,7 +57,8 @@ public final class LastSegmentManager {
     private static final String LAST_ENTRY_NUMBER = "LAST_ENTRY_NUMBER";
 
     private static File getLastEntryFile() {
-        return new File(Core.getProject().getProjectProperties().getProjectInternal(), OConsts.LAST_ENTRY_NUMBER);
+        return new File(Core.getProject().getProjectProperties().getProjectInternal(),
+                OConsts.LAST_ENTRY_NUMBER);
     }
 
     /**
@@ -90,8 +91,8 @@ public final class LastSegmentManager {
             fos = new FileOutputStream(getLastEntryFile());
             prop.store(fos, null);
         } catch (Exception e) {
-            LOGGER.atDebug().log(Log.replacePlaceholders("Could not write the last entry number: {0}",
-                    e.getMessage()));
+            LOGGER.atDebug().log(
+                    Log.replacePlaceholders("Could not write the last entry number: {0}", e.getMessage()));
         } finally {
             if (fos != null) {
                 try {
@@ -157,8 +158,7 @@ public final class LastSegmentManager {
 
         // Check to see if the source and file match
         LOGGER.atDebug().log("Last entry #" + lastEntryNumber + " mismatch (file \"" + lastFile + "\", "
-                + "src \""
-                + lastSrc + "\")");
+                + "src \"" + lastSrc + "\")");
 
         int fileIndex = fileIndex(lastFile);
 

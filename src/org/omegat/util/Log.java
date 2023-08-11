@@ -59,7 +59,7 @@ public final class Log {
     private static final Logger LOGGER;
 
     static {
-        LOGGER = LoggerFactory.getLogger("global");
+        LOGGER = LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
 
         boolean loaded = false;
         File usersLogSettings = new File(StaticUtils.getConfigDir(), "logger.properties");
@@ -186,10 +186,6 @@ public final class Log {
             // when slf4j-jdk14
             java.util.logging.Logger rootLogger = LogManager.getLogManager().getLogger("");
             rootLogger.setLevel(level);
-            // } else if
-            // (loggerName.equals("org.slf4j.simple.SimpleLoggerFactory")) {
-            // } else if
-            // (loggerName.equals("ch.qos.logback.classic.LoggerContext")) {
         }
     }
 

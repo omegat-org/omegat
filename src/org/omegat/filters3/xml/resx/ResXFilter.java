@@ -29,12 +29,13 @@ package org.omegat.filters3.xml.resx;
 
 import java.util.List;
 
+import org.xml.sax.Attributes;
+
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.filters2.Instance;
 import org.omegat.filters3.xml.XMLFilter;
 import org.omegat.util.OStrings;
 import org.omegat.util.StringUtil;
-import org.xml.sax.Attributes;
 
 /**
  * Filter for ResX files.
@@ -66,25 +67,26 @@ public class ResXFilter extends XMLFilter {
     }
 
     /**
-     * The default list of filter instances that this filter class has. One filter class may have different
-     * filter instances, different by source file mask, encoding of the source file etc.
+     * The default list of filter instances that this filter class has. One
+     * filter class may have different filter instances, different by source
+     * file mask, encoding of the source file etc.
      * <p>
-     * There is one pattern for when no source language or source culture are present in the filename, one
-     * for when only a source language is present and one for when both source language and source culture
-     * are present.
-     * In all three cases, the source language and/or source culture are eaten from the filename, assuming
-     * the source language/culture use '.' (dot) as the separator.
+     * There is one pattern for when no source language or source culture are
+     * present in the filename, one for when only a source language is present
+     * and one for when both source language and source culture are present. In
+     * all three cases, the source language and/or source culture are eaten from
+     * the filename, assuming the source language/culture use '.' (dot) as the
+     * separator.
      * <p>
      * Note that the user may change the instances freely.
      *
      * @return Default filter instances
      */
     public Instance[] getDefaultInstances() {
-        return new Instance[]{
-            new Instance("*.??-??.resx", null, null, "${nameOnly}.${targetLocaleLCID}.resx"),
-            new Instance("*.??.resx", null, null, "${nameOnly}.${targetLocaleLCID}.resx"),
-            new Instance("*.resx", null, null, "${nameOnly}.${targetLocaleLCID}.resx")
-        };
+        return new Instance[] {
+                new Instance("*.??-??.resx", null, null, "${nameOnly}.${targetLocaleLCID}.resx"),
+                new Instance("*.??.resx", null, null, "${nameOnly}.${targetLocaleLCID}.resx"),
+                new Instance("*.resx", null, null, "${nameOnly}.${targetLocaleLCID}.resx") };
     }
 
     /**
@@ -120,7 +122,7 @@ public class ResXFilter extends XMLFilter {
         if ("/root/data/comment".equals(path)) {
             comment = text;
         } else if ("/root/data".equals(path)) {
-            if (entryParseCallback != null) {
+            if (entryParseCallback != null && entryText != null) {
                 entryParseCallback.addEntry(id, entryText, null, false, comment, null, this, null);
             }
             id = null;

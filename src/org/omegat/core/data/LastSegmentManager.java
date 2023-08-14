@@ -38,7 +38,6 @@ import org.slf4j.LoggerFactory;
 import org.omegat.core.Core;
 import org.omegat.core.data.IProject.FileInfo;
 import org.omegat.gui.editor.IEditor;
-import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 
 /**
@@ -91,14 +90,13 @@ public final class LastSegmentManager {
             fos = new FileOutputStream(getLastEntryFile());
             prop.store(fos, null);
         } catch (Exception e) {
-            LOGGER.atDebug().log(
-                    Log.replacePlaceholders("Could not write the last entry number: {0}", e.getMessage()));
+            LOGGER.atDebug().log("Could not write the last entry number: ", e);
         } finally {
             if (fos != null) {
                 try {
                     fos.close();
                 } catch (IOException ex) {
-                    Log.log(ex);
+                    LOGGER.atWarn().log("", ex);
                 }
             }
         }
@@ -121,7 +119,7 @@ public final class LastSegmentManager {
         try (FileInputStream fis = new FileInputStream(lastEntryFile)) {
             prop.load(fis);
         } catch (IOException e) {
-            LOGGER.atDebug().log(Log.replacePlaceholders("Could not load last segment info", e.getMessage()));
+            LOGGER.atDebug().log("Could not load last segment info", e);
             return 1;
         }
 
@@ -131,14 +129,14 @@ public final class LastSegmentManager {
             String lastEntry = prop.getProperty(LAST_ENTRY_NUMBER, "1");
             lastEntryNumber = Integer.parseInt(lastEntry, 10);
         } catch (Exception e) {
-            LOGGER.atDebug().log("Cannot jump to last entry #" + lastEntryNumber + ":" + e.getMessage());
+            LOGGER.atDebug().log("Cannot jump to last entry #{}:{}", lastEntryNumber, e.getMessage());
         }
-        LOGGER.atDebug().log("Jumping to last entry #" + lastEntryNumber + ".");
+        LOGGER.atDebug().log("Jumping to last entry #{}.", lastEntryNumber);
 
         List<SourceTextEntry> allEntries = Core.getProject().getAllEntries();
 
         if (allEntries.size() < lastEntryNumber) {
-            LOGGER.atDebug().log("Not enough segments to jump to " + lastEntryNumber);
+            LOGGER.atDebug().log("Not enough segments to jump to {}", lastEntryNumber);
             Core.getMainWindow().showStatusMessageRB(null);
             return 1;
         }
@@ -157,13 +155,13 @@ public final class LastSegmentManager {
         }
 
         // Check to see if the source and file match
-        LOGGER.atDebug().log("Last entry #" + lastEntryNumber + " mismatch (file \"" + lastFile + "\", "
-                + "src \"" + lastSrc + "\")");
+        LOGGER.atDebug().log("Last entry #{} mismatch (file \"{}\", src \"{}\")", lastEntryNumber, lastFile,
+                lastSrc);
 
         int fileIndex = fileIndex(lastFile);
 
         if (fileIndex == -1) {
-            LOGGER.atDebug().log("File \"" + lastFile + "\" is not in the project anymore.");
+            LOGGER.atDebug().log("File \"{}\" is not in the project anymore.", lastFile);
             Core.getMainWindow().showStatusMessageRB(null);
             return 1;
         }

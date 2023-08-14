@@ -66,14 +66,14 @@ public final class RebaseAndCommit {
         Prepared r = new Prepared();
         r.path = path;
         currentBaseVersion = savedVersion;
-        LOGGER.atDebug().log("Retrieve BASE(" + currentBaseVersion + ") version of '" + path + "'");
+        LOGGER.atDebug().log("Retrieve BASE({}) version of '{}'", currentBaseVersion, path);
         // retrieve BASE version
         File baseFile = provider.switchToVersion(path, currentBaseVersion);
         // save it to prepared dir
         r.versionBase = currentBaseVersion;
         r.fileBase = provider.toPrepared(baseFile);
 
-        LOGGER.atDebug().log("Retrieve HEAD version of '" + path + "'");
+        LOGGER.atDebug().log("Retrieve HEAD version of '{}'", path);
         // retrieve HEAD version
         File headFile = provider.switchToVersion(path, null);
         // get version id
@@ -90,7 +90,7 @@ public final class RebaseAndCommit {
             throw new RuntimeException("Path is not under mapping: " + path);
         }
 
-        LOGGER.atDebug().log("Rebase and commit '" + path + "'");
+        LOGGER.atDebug().log("Rebase and commit '{}'", path);
 
         final String currentBaseVersion;
         String savedVersion = provider.getTeamSettings().get(VERSION_PREFIX + path);
@@ -113,14 +113,14 @@ public final class RebaseAndCommit {
             }
             if (!localFile.exists()) {
                 // there is no local file - just use remote
-                LOGGER.atDebug().log("local file '" + path + "' doesn't exist");
+                LOGGER.atDebug().log("local file '{}' doesn't exist", path);
                 fileChangedLocally = false;
             } else if (FileUtils.contentEquals(baseRepoFile, localFile)) {
                 // versioned file was not changed - no need to commit
-                LOGGER.atDebug().log("local file '" + path + "' wasn't changed");
+                LOGGER.atDebug().log("local file '{}' wasn't changed", path);
                 fileChangedLocally = false;
             } else {
-                LOGGER.atDebug().log("local file '" + path + "' was changed");
+                LOGGER.atDebug().log("local file '{}' was changed", path);
                 fileChangedLocally = true;
                 rebaser.parseBaseFile(baseRepoFile);
             }
@@ -149,11 +149,11 @@ public final class RebaseAndCommit {
                     fileChangedRemotely = false;
                 }
             } else if (StringUtils.equals(currentBaseVersion, headVersion)) {
-                LOGGER.atDebug().log("remote file '" + path + "' wasn't changed");
+                LOGGER.atDebug().log("remote file '{}' wasn't changed", path);
                 fileChangedRemotely = false;
             } else {
                 // base and head versions are differ - somebody else committed changes
-                LOGGER.atDebug().log("remote file '" + path + "' was changed");
+                LOGGER.atDebug().log("remote file '{}' was changed", path);
                 fileChangedRemotely = true;
                 rebaser.parseHeadFile(headRepoFile);
             }
@@ -171,16 +171,16 @@ public final class RebaseAndCommit {
             rebaser.rebaseAndSave(tempOut);
         } else if (fileChangedLocally && !fileChangedRemotely) {
             // only local changes - just use local file
-            LOGGER.atDebug().log("only local changes - just use local file '" + path + "'");
+            LOGGER.atDebug().log("only local changes - just use local file '{}'", path);
         } else if (!fileChangedLocally && fileChangedRemotely) {
             // only remote changes - get remote
-            LOGGER.atDebug().log("only remote changes - get remote '" + path + "'");
+            LOGGER.atDebug().log("only remote changes - get remote '{}'", path);
             needBackup = true;
             if (headRepoFile.exists()) { // otherwise file was removed remotely
                 FileUtils.copyFile(headRepoFile, tempOut);
             }
         } else {
-            LOGGER.atDebug().log("there are no changes '" + path + "'");
+            LOGGER.atDebug().log("there are no changes '{}'", path);
             // there are no changes
         }
 

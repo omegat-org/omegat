@@ -54,6 +54,7 @@ public class ResXFilterTest extends TestFilterBase {
         checkMulti("One more text", "InfoExperimentStoppingMessage2", null, null, null, "Second comment");
         checkMultiEnd();
     }
+
     @Test
     public void testParse() throws Exception {
         List<String> lines = parse(new ResXFilter(), "test/data/filters/ResX/Resources.resx");

@@ -730,10 +730,12 @@ When enabled, all formatting in the source segments are hidden.</programlisting>
     <para>When you enter a segment, the first fuzzy match (the one with the
     highest match percentage) is automatically selected. You can press
     <keycombo><keycap>C</keycap><keycap>2, 3, 4, or 5</keycap>
-    </keycombo>, or use <link linkend="menus.edit"
-    endterm="menus.edit.title"/><link linkend="menus.edit.select.match"
-    endterm="menus.edit.select.match.title"/>, to select
-    a different match .</para>
+    </keycombo> to select a specific match, or cycle through the available matches with
+    <keycombo><keycap>C</keycap><keycap>↑ or ↓</keycap></keycombo>
+    (<keycombo><keycap>A</keycap><keycap>↑ or ↓</keycap></keycombo> on macOS).
+    Alternatively, you can use <link linkend="menus.edit" endterm="menus.edit.title"/>
+    <link linkend="menus.edit.select.match" endterm="menus.edit.select.match.title"/>
+    to select a different match.</para>
 
 	<example id="the.first.match">
 	  <title id="the.first.match.title">An empty segment and its first two matches</title>

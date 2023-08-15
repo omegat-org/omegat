@@ -153,12 +153,12 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
                 List<GlossaryEntry> entries = loadGlossaryFile(file);
                 if (entries != null) {
                     synchronized (this) {
-                        Log.logRB("CT_LOADING_GLOSSARY_DETAILS", entries.size(), file.getName());
+                        Log.logInfoRB("CT_LOADING_GLOSSARY_DETAILS", entries.size(), file.getName());
                         glossaries.put(file.getPath(), entries);
                     }
                 }
             } catch (Exception ex) {
-                Log.logRB("CT_ERROR_ACCESS_GLOSSARY_DIR");
+                Log.logInfoRB("CT_ERROR_ACCESS_GLOSSARY_DIR");
                 Log.log(ex);
             }
         }

@@ -36,8 +36,10 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.logging.Logger;
 import java.util.stream.Stream;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public final class FontFallbackManager {
 
@@ -57,7 +59,7 @@ public final class FontFallbackManager {
     );
     private static final Font FONT_UNAVAILABLE = new Font("", Font.PLAIN, 0);
 
-    private static final Logger LOGGER = Logger.getLogger(FontFallbackManager.class.getName());
+    private static final Logger LOGGER = LoggerFactory.getLogger(FontFallbackManager.class);
 
     private static final Font[] RECENT_FONTS = new Font[8];
     private static int lastFontIndex = 0;
@@ -219,18 +221,23 @@ public final class FontFallbackManager {
         // All we can do now is do a brute-force full search of available fonts.
         GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
         Font[] allFonts = ge.getAllFonts();
-        LOGGER.fine(() -> String.format("Searching %d fonts for one supporting U+%h %s", allFonts.length, cp,
-                String.valueOf(Character.toChars(cp))));
+        LOGGER.atDebug().setMessage("Searching {} fonts for one supporting U+{} {}")
+                .addArgument(allFonts.length).addArgument(Integer.toHexString(cp))
+                .addArgument(String.valueOf(Character.toChars(cp))).log();
         long start = System.currentTimeMillis();
         Optional<Font> font = Stream.of(allFonts).parallel().filter(f ->
                 canDisplay(f, cp) && !FONT_BLACKLIST.contains(f.getFamily())).findFirst();
         CACHE.put(cp, font.orElse(FONT_UNAVAILABLE));
         font.ifPresent(FontFallbackManager::addRecentFont);
-        LOGGER.fine(() -> font.isPresent()
-                ? String.format("Search found %s in %d ms", font.get().getFamily(),
-                        System.currentTimeMillis() - start)
-                : String.format("Search failed to find a font; time: %d ms",
-                        System.currentTimeMillis() - start));
+        if (LOGGER.isDebugEnabled()) {
+            if (font.isPresent()) {
+                LOGGER.atDebug().setMessage("Search found {} in {} ms").addArgument(() -> font.get().getFamily())
+                        .addArgument(System.currentTimeMillis() - start).log();
+            } else {
+                LOGGER.atDebug().setMessage("Search failed to find a font; time: {} ms")
+                        .addArgument(System.currentTimeMillis() - start).log();
+            }
+        }
         return font.orElse(null);
     }
 

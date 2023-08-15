@@ -165,10 +165,10 @@ public class DictionariesManager implements DirectoryMonitor.Callback {
                 loadIgnoreWords(file);
             } else if (loadDictionary(file)) {
                 long en = System.currentTimeMillis();
-                Log.log("Loaded dictionary from '" + file.getPath() + "': " + (en - st) + "ms");
+                Log.logInfoRB("DICTIONARY_LOAD_FILE", file.getPath(), en - st);
             }
         } catch (Exception ex) {
-            Log.log("Error load dictionary from '" + file.getPath() + "': " + ex.getMessage());
+            Log.logWarningRB("DICTIONARY_LOAD_ERROR", file.getPath(), ex.getMessage());
         }
         pane.refresh();
     }
@@ -237,8 +237,7 @@ public class DictionariesManager implements DirectoryMonitor.Callback {
             outFile.delete();
             FileUtil.rename(outFileTmp, outFile);
         } catch (IOException ex) {
-            Log.log("Error saving ignore words");
-            Log.log(ex);
+            Log.logErrorRB(ex, "DICTIONARY_MANAGER_ERROR_SAVE_IGNORE");
         }
     }
 

@@ -248,10 +248,10 @@ public class RealProject implements IProject {
 
         sourceTokenizer = createTokenizer(Core.getParams().get(CLIParameters.TOKENIZER_SOURCE),
                 props.getSourceTokenizer());
-        Log.log("Source tokenizer: " + sourceTokenizer.getClass().getName());
+        Log.logInfoRB("SOURCE_TOKENIZER", sourceTokenizer.getClass().getName());
         targetTokenizer = createTokenizer(Core.getParams().get(CLIParameters.TOKENIZER_TARGET),
                 props.getTargetTokenizer());
-        Log.log("Target tokenizer: " + targetTokenizer.getClass().getName());
+        Log.logInfoRB("TARGET_TOKENIZER", targetTokenizer.getClass().getName());
     }
 
     public void saveProjectProperties() throws Exception {
@@ -783,7 +783,7 @@ public class RealProject implements IProject {
 
         CommandVarExpansion expander = new CommandVarExpansion(command);
         command = expander.expandVariables(config);
-        Log.log("Executing command: " + command);
+        Log.logInfoRB("EXECUTING_COMMAND", command);
         try {
             Process p = Runtime.getRuntime().exec(StaticUtils.parseCLICommand(command));
             processCache.push(p);
@@ -1278,7 +1278,7 @@ public class RealProject implements IProject {
             Core.getMainWindow().showStatusMessageRB("CT_LOAD_SRC_COMPLETE");
         }
         long en = System.currentTimeMillis();
-        Log.log("Load project source files: " + (en - st) + "ms");
+        Log.logInfoRB("CT_LOAD_SRC_FILES", en - st);
     }
 
     protected void findNonUniqueSegments() {

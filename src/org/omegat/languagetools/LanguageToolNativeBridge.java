@@ -52,10 +52,8 @@ public class LanguageToolNativeBridge extends BaseLanguageToolBridge {
     public LanguageToolNativeBridge(org.omegat.util.Language sourceLang, org.omegat.util.Language targetLang) {
         sourceLtLang = getLTLanguage(sourceLang);
         targetLtLang = getLTLanguage(targetLang);
-        Log.log("Selected LanguageTool source language: "
-                + (sourceLtLang == null ? null : sourceLtLang.getShortCodeWithCountryAndVariant()));
-        Log.log("Selected LanguageTool target language: "
-                + (targetLtLang == null ? null : targetLtLang.getShortCodeWithCountryAndVariant()));
+        Log.logInfoRB("LANGUAGE_TOOL_SOURCE", getLanguageToolCode(sourceLtLang));
+        Log.logInfoRB("LANGUAGE_TOOL_TARGET", getLanguageToolCode(targetLtLang));
         sourceLt = ThreadLocal.withInitial(
                 () -> sourceLtLang == null ? null : new JLanguageTool(sourceLtLang));
         targetLt = ThreadLocal.withInitial(
@@ -67,6 +65,10 @@ public class LanguageToolNativeBridge extends BaseLanguageToolBridge {
                 Log.log(e);
             }
         }
+    }
+
+    private String getLanguageToolCode(Language language) {
+        return language == null ? "" : language.getShortCodeWithCountryAndVariant();
     }
 
     @Override

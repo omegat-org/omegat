@@ -248,7 +248,7 @@ public class GITCredentialsProvider extends CredentialsProvider {
                 continue;
             } else if (item instanceof CredentialItem.StringType) {
                 if (!item.getPromptText().equals(PASSWORD_PROMPT) || !isPassphraseQuery(item.getPromptText())) {
-                    Log.log("Git: Ignore credentials query: " + item.getPromptText());
+                    Log.logInfoRB("TEAM_GIT_IGNORE_CREDENTIAL_QUERY", item.getPromptText());
                     continue;
                 }
                 if (predefinedUser != null && predefinedPass != null) {

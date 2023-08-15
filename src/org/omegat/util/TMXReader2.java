@@ -121,7 +121,7 @@ public class TMXReader2 {
                     throws XMLStreamException {
                 LOGGER.atWarn().log(Log.getMessage("TMXR_WARNING_WHILE_PARSING", location.getLineNumber(),
                         location.getColumnNumber()));
-                LOGGER.atInfo().log(message + ": " + info);
+                LOGGER.atInfo().log("{}: {}", message, info);
                 warningsCount++;
             }
         });
@@ -175,7 +175,7 @@ public class TMXReader2 {
         } catch (XMLStreamException ex) {
             LOGGER.atError().log(Log.getMessage("TMXR_ERROR_XML_STREAM_ERROR", file.getAbsolutePath()), ex);
             throw ex;
-        } catch (IOException e) {
+        } catch (IOException ignored) {
         } finally {
             if (xml != null) {
                 xml.close();

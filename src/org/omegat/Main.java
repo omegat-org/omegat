@@ -180,7 +180,8 @@ public final class Main {
         Log.log("\n" + "===================================================================" + "\n"
                 + OStrings.getNameAndVersion() + " (" + new Date() + ") " + " Locale " + Locale.getDefault());
 
-        Log.logRB("LOG_STARTUP_INFO", System.getProperty("java.vendor"), System.getProperty("java.version"),
+        Log.logInfoRB("LOG_STARTUP_INFO", System.getProperty("java.vendor"), System.getProperty("java"
+                        + ".version"),
                 System.getProperty("java.home"));
 
         System.setProperty("http.agent", OStrings.getDisplayNameAndVersion());
@@ -312,8 +313,7 @@ public final class Main {
             OSXIntegration.init();
         }
 
-        Log.log("Docking Framework version: " + DockingDesktop.getDockingFrameworkVersion());
-        Log.log("");
+        Log.logInfoRB("STARTUP_GUI_DOCKING_FRAMEWORK", DockingDesktop.getDockingFrameworkVersion());
 
         // Set X11 application class name to make some desktop user interfaces
         // (like Gnome Shell) recognize OmegaT
@@ -364,8 +364,7 @@ public final class Main {
      * Execute in console mode for translate.
      */
     protected static int runConsoleTranslate() throws Exception {
-        Log.log("Console translation mode");
-        Log.log("");
+        Log.logInfoRB("STARTUP_CONSOLE_TRANSLATION_MODE");
 
         System.out.println(OStrings.getString("CONSOLE_INITIALIZING"));
         Core.initializeConsole(PARAMS);
@@ -404,8 +403,7 @@ public final class Main {
      * return 1.
      */
     private static int runConsoleStats() throws Exception {
-        Log.log("Console project stats mode");
-        Log.log("");
+        Log.logInfoRB("STARTUP_CONSOLE_STATS_MODE");
 
         Core.initializeConsole(PARAMS);
 
@@ -451,11 +449,11 @@ public final class Main {
                 writer.write(projectStats.getXmlData());
                 break;
             default:
-                Log.log("Specified UNKNOWN file type for statistics. aborted.");
+                Log.logWarningRB("CONSOLE_STATS_WARNING_TYPE");
                 break;
             }
         } catch (NoSuchFileException nsfe) {
-            Log.log("Got directory/file open error. Does specified directory exist?");
+            Log.logErrorRB("CONSOLE_STATS_FILE_OPEN_ERROR");
             return 1;
         } finally {
             p.closeProject();
@@ -504,8 +502,7 @@ public final class Main {
      * Execute in console mode for translate.
      */
     protected static int runCreatePseudoTranslateTMX() throws Exception {
-        Log.log("Console pseudo-translate mode");
-        Log.log("");
+        Log.logInfoRB("CONSOLE_PSEUDO_TRANSLATION_MODE");
 
         System.out.println(OStrings.getString("CONSOLE_INITIALIZING"));
         Core.initializeConsole(PARAMS);
@@ -557,8 +554,7 @@ public final class Main {
     }
 
     public static int runConsoleAlign() throws Exception {
-        Log.log("Console alignment mode");
-        Log.log("");
+        Log.logInfoRB("CONSOLE_ALIGNMENT_MODE");
 
         if (projectLocation == null) {
             System.out.println(OStrings.getString("PP_ERROR_UNABLE_TO_READ_PROJECT_FILE"));
@@ -629,14 +625,14 @@ public final class Main {
     }
 
     /**
-     * Execute script as PROJECT_CHANGE events. We can't use the regular project
+     * Execute a script as PROJECT_CHANGE events. We can't use the regular project
      * listener because the SwingUtilities.invokeLater method used in CoreEvents
      * doesn't stop the project processing in console mode.
      */
     private static void executeConsoleScript(IProjectEventListener.PROJECT_CHANGE_TYPE eventType) {
         if (PARAMS.containsKey(CLIParameters.SCRIPT)) {
-            File script = new File(PARAMS.get("script").toString());
-            Log.log(OStrings.getString("CONSOLE_EXECUTE_SCRIPT", script, eventType));
+            File script = new File(PARAMS.get("script"));
+            Log.logInfoRB("CONSOLE_EXECUTE_SCRIPT", script, eventType);
             if (script.isFile()) {
                 HashMap<String, Object> binding = new HashMap<>();
                 binding.put("eventType", eventType);
@@ -653,7 +649,7 @@ public final class Main {
                     Log.log(ex);
                 }
             } else {
-                Log.log(OStrings.getString("SCW_SCRIPT_LOAD_ERROR", "the script is not a file"));
+                Log.logInfoRB("SCW_SCRIPT_LOAD_ERROR", "the script is not a file");
             }
         }
     }

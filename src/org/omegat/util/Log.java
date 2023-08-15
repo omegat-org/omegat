@@ -297,7 +297,7 @@ public final class Log {
     }
 
     /**
-     * Writes debug message to log (without localization)
+     * Writes a debug message to log (without localization).
      *
      * @param message
      *            message text
@@ -315,17 +315,119 @@ public final class Log {
         }
     }
 
+    public static String getMessage(String key) {
+        return OStrings.getString(key) + " (" + key + ")";
+    }
+
+    public static String getMessage(String key, Object arg) {
+        String message = OStrings.getString(key);
+        return message.replace("{0}", String.valueOf(arg)) + " (" + key + ")";
+    }
+
     public static String getMessage(String key, Object... args) {
         String message = OStrings.getString(key);
-        return replacePlaceholders(message, args) + " (" + key + ")";
+        return StringUtil.format(message, args) + " (" + key + ")";
     }
 
-    public static String replacePlaceholders(String message, Object... args) {
-        for (int i = 0; i < args.length; i++) {
-            String placeholder = "{" + i + "}";
-            message = message.replace(placeholder, String.valueOf(args[i]));
+    /**
+     * Writes an info message to the log (to be retrieved from the resource
+     * bundle).
+     *
+     * @param key
+     *            The key of the error message in the resource bundle
+     * @param parameter
+     *            Parameter for the error message.
+     */
+    public static void logInfoRB(String key, String parameter)  {
+        Log.atInfo().setLocMessage(key).addArgument(parameter).log();
+    }
+
+    /**
+     * Writes an info message to the log (to be retrieved from the resource
+     * bundle).
+     *
+     * @param key
+     *            The key of the error message in the resource bundle
+     */
+    public static void logInfoRB(String key)  {
+        Log.atInfo().setLocMessage(key).log();
+    }
+
+    /**
+     * Writes a warning message to the log (to be retrieved from the
+     * resource bundle).
+     *
+     * @param key
+     *            The key of the error message in the resource bundle
+     * @param parameter
+     *            Parameter for the error message.
+     */
+    public static void logWarningRB(String key, String parameter) {
+        Log.atWarn().setLocMessage(key).addArgument(parameter).log();
+    }
+
+    /**
+     * Writes an error message to the log (to be retrieved from the resource
+     * bundle).
+     */
+    public static void logErrorRB(String key, String parameter) {
+        Log.atError().setLocMessage(key).addArgument(parameter).log();
+    }
+
+    private static LogMessageBuilder atInfo() {
+        return new LogMessageBuilder(org.slf4j.event.Level.INFO);
+    }
+
+    private static LogMessageBuilder atWarn() {
+        return new LogMessageBuilder(org.slf4j.event.Level.WARN);
+    }
+
+    private static LogMessageBuilder atError() {
+        return new LogMessageBuilder(org.slf4j.event.Level.ERROR);
+    }
+
+    public static class LogMessageBuilder {
+        private String message;
+        private String key;
+        private final org.slf4j.event.Level level;
+        private final boolean enabled;
+        private int counter = 0;
+
+        public LogMessageBuilder(org.slf4j.event.Level level) {
+            enabled = LOGGER.isEnabledForLevel(level);
+            this.level = level;
         }
-        return message;
-    }
 
+        public LogMessageBuilder setMessage(String message) {
+            this.message = message;
+            return this;
+        }
+
+        public LogMessageBuilder setLocMessage(String key) {
+            this.key = key;
+            if (enabled) {
+                message = OStrings.getString(key);
+            }
+            return this;
+        }
+
+        public LogMessageBuilder addArgument(String arg) {
+            if (enabled) {
+                String placeholder = "{" + counter + "}";
+                message = message.replace(placeholder, String.valueOf(arg));
+                counter++;
+            }
+            return this;
+        }
+
+        public void log() {
+            if (enabled) {
+                if (key != null) {
+                    LOGGER.atLevel(level).log(message + " (" + key + ")");
+                } else {
+                    LOGGER.atLevel(level).log(message);
+                }
+            }
+        }
+    }
 }

@@ -245,7 +245,7 @@ public class SRX implements Serializable {
                 // and merging them into loaded rules
                 res = merge(res, defaults);
             }
-            Log.log("using segmentation rules from " + configFile);
+            Log.logInfoRB("SRX_RULE_FROM", configFile);
         } catch (Exception e) {
             // silently ignoring FNF
             if (!(e instanceof FileNotFoundException)) {

@@ -321,7 +321,9 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
         LOGGER.atInfo().log(Log.getMessage("GIT_START", "addForCommit"));
         try (Git git = new Git(repository)) {
             git.add().addFilepattern(path).call();
-            LOGGER.atInfo().log(Log.getMessage("GIT_FINISH", "addForCommit"));
+            if (LOGGER.isInfoEnabled()) {
+                LOGGER.atInfo().log(Log.getMessage("GIT_FINISH", "addForCommit"));
+            }
         } catch (Exception ex) {
             LOGGER.atError().log(Log.getMessage("GIT_ERROR", "addForCommit", ex.getMessage()));
             throw ex;
@@ -339,10 +341,14 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
      */
     @Override
     public void addForDeletion(String path) throws Exception {
-        LOGGER.atInfo().log(Log.getMessage("GIT_START", "addForDelete"));
+        if (LOGGER.isInfoEnabled()) {
+            LOGGER.atInfo().log(Log.getMessage("GIT_START", "addForDelete"));
+        }
         try (Git git = new Git(repository)) {
             git.rm().addFilepattern(path).call();
-            LOGGER.atInfo().log(Log.getMessage("GIT_FINISH", "addForDelete"));
+            if (LOGGER.isInfoEnabled()) {
+                LOGGER.atInfo().log(Log.getMessage("GIT_FINISH", "addForDelete"));
+            }
         } catch (Exception ex) {
             LOGGER.atError().log(Log.getMessage("GIT_ERROR", "addForDelete", ex.getMessage()));
             throw ex;

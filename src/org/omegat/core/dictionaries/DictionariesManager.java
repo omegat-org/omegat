@@ -82,7 +82,9 @@ public class DictionariesManager implements DirectoryMonitor.Callback {
 
     /**
      * Add dictionary factory.
-     * @param dict factory to register.
+     * 
+     * @param dict
+     *            factory to register.
      */
     public void addDictionaryFactory(IDictionaryFactory dict) {
         synchronized (factories) {
@@ -96,7 +98,9 @@ public class DictionariesManager implements DirectoryMonitor.Callback {
 
     /**
      * Remove dictionary Factory.
-     * @param factory factory to unregister.
+     * 
+     * @param factory
+     *            factory to unregister.
      */
     public void removeDictionaryFactory(IDictionaryFactory factory) {
         synchronized (factories) {
@@ -106,7 +110,9 @@ public class DictionariesManager implements DirectoryMonitor.Callback {
 
     /**
      * Add online dictionary(dictionary without local data).
-     * @param dict dictionary lookup driver.
+     * 
+     * @param dict
+     *            dictionary lookup driver.
      */
     public void addOnlineDictionary(IDictionary dict) {
         synchronized (onlineDictionaries) {
@@ -116,7 +122,9 @@ public class DictionariesManager implements DirectoryMonitor.Callback {
 
     /**
      * Remove online dictionary.
-     * @param dict dictionary lookup driver to remove from registration.
+     * 
+     * @param dict
+     *            dictionary lookup driver to remove from registration.
      */
     public void removeOnlineDictionary(IDictionary dict) {
         synchronized (onlineDictionaries) {
@@ -261,11 +269,8 @@ public class DictionariesManager implements DirectoryMonitor.Callback {
             dicts.addAll(onlineDictionaries);
         }
         Collection<String> queryWords = words.stream()
-                .filter(word -> !isIgnoreWord(word) && !isStopWord(word))
-                .collect(Collectors.toList());
-        return dicts.parallelStream()
-                .map(dict -> doLookUp(dict, queryWords))
-                .flatMap(Collection::stream)
+                .filter(word -> !isIgnoreWord(word) && !isStopWord(word)).collect(Collectors.toList());
+        return dicts.parallelStream().map(dict -> doLookUp(dict, queryWords)).flatMap(Collection::stream)
                 .collect(Collectors.toList());
     }
 

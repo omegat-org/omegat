@@ -126,14 +126,14 @@ public class SpellChecker implements ISpellChecker {
     }
 
     /**
-     * Initialize the library for the given project. Loads the lists of ignored and learned words for the
-     * project
+     * Initialize the library for the given project. Loads the lists of ignored
+     * and learned words for the project
      */
     public void initialize() {
         Language targetLanguage = Core.getProject().getProjectProperties().getTargetLanguage();
 
-        Stream<String> toCheck = Stream.of(
-                targetLanguage.getLocaleCode(), // Full xx_YY
+        Stream<String> toCheck = Stream.of(targetLanguage.getLocaleCode(), // Full
+                                                                           // xx_YY
                 targetLanguage.getLocaleCode().replace('_', '-'), // Full xx-YY
                 targetLanguage.getLanguageCode()); // xx only
 
@@ -203,7 +203,8 @@ public class SpellChecker implements ISpellChecker {
                 return false;
             }
             if (file.length() == 0L) {
-                // On OS X, attempting to load Hunspell with a zero-length .dic file causes
+                // On OS X, attempting to load Hunspell with a zero-length .dic
+                // file causes
                 // a native exception that crashes the whole program.
                 Log.logWarningRB("SPELLCHECKER_DICTIONARY_EMPTY", file.getPath());
                 return false;
@@ -325,7 +326,8 @@ public class SpellChecker implements ISpellChecker {
     }
 
     /**
-     * Check the word. If it is ignored or learned (valid), returns true. Otherwise false.
+     * Check the word. If it is ignored or learned (valid), returns true.
+     * Otherwise false.
      */
     public boolean isCorrect(String word) {
         // check if spellchecker is already initialized. If not, skip checking
@@ -416,7 +418,8 @@ public class SpellChecker implements ISpellChecker {
     }
 
     /**
-     * Normalize the orthography of the word by replacing alternative characters with "canonical" ones.
+     * Normalize the orthography of the word by replacing alternative characters
+     * with "canonical" ones.
      */
     private static String normalize(String word) {
         // U+2019 RIGHT SINGLE QUOTATION MARK to U+0027 APOSTROPHE

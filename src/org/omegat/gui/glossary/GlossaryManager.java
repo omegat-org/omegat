@@ -54,9 +54,11 @@ import org.omegat.util.Preferences;
 import org.omegat.util.Token;
 
 /**
- * Class that loads glossary files and adds glossary entries to strings of the source files.
+ * Class that loads glossary files and adds glossary entries to strings of the
+ * source files.
  *
- * This class don't need any threads synchronization code, since it only set and clear 'glossaryEntries' var.
+ * This class don't need any threads synchronization code, since it only set and
+ * clear 'glossaryEntries' var.
  *
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
@@ -67,9 +69,12 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
 
     /**
      * Create new default writable glossary file.
-     * @param file a file to be created.
+     * 
+     * @param file
+     *            a file to be created.
      * @return true if the file was successfully created
-     * @throws IOException when there is a problem to create file.
+     * @throws IOException
+     *             when there is a problem to create file.
      */
     public static boolean createNewWritableGlossaryFile(File file) throws IOException {
         if (file.exists()) {
@@ -187,9 +192,8 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
         if (fnameLower.endsWith(OConsts.EXT_TSV_DEF)) {
             Log.logRB("CT_LOADING_GLOSSARY", file.getName());
             return GlossaryReaderTSV.read(file, isPriority);
-        } else if (fnameLower.endsWith(OConsts.EXT_TSV_UTF8) ||
-                   fnameLower.endsWith(OConsts.EXT_TSV_TXT) ||
-                   fnameLower.endsWith(OConsts.EXT_TSV_TSV)) {
+        } else if (fnameLower.endsWith(OConsts.EXT_TSV_UTF8) || fnameLower.endsWith(OConsts.EXT_TSV_TXT)
+                || fnameLower.endsWith(OConsts.EXT_TSV_TSV)) {
             Log.logRB("CT_LOADING_GLOSSARY", file.getName());
             return GlossaryReaderTSV.read(file, isPriority);
         } else if (fnameLower.endsWith(OConsts.EXT_CSV_UTF8)) {
@@ -223,9 +227,10 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
     }
 
     /**
-     * Get glossary entries for search operation. Almost the same as getGlossaryEntries(), except search
-     * usually executed for every segment in project, i.e. should work enough fast. Then, search should be
-     * produced by local files only.
+     * Get glossary entries for search operation. Almost the same as
+     * getGlossaryEntries(), except search usually executed for every segment in
+     * project, i.e. should work enough fast. Then, search should be produced by
+     * local files only.
      *
      * @return all entries
      */
@@ -270,7 +275,8 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
             return Collections.emptyList();
         }
 
-        GlossarySearcher searcher = buildSearcher(tok, Core.getProject().getProjectProperties().getSourceLanguage());
+        GlossarySearcher searcher = buildSearcher(tok,
+                Core.getProject().getProjectProperties().getSourceLanguage());
 
         return searcher.searchSourceMatches(ste, entries);
     }
@@ -287,18 +293,21 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
         if (tok == null) {
             return Collections.emptyList();
         }
-        GlossarySearcher searcher = buildSearcher(tok, Core.getProject().getProjectProperties().getSourceLanguage());
+        GlossarySearcher searcher = buildSearcher(tok,
+                Core.getProject().getProjectProperties().getSourceLanguage());
 
         return searcher.searchSourceMatchTokens(ste, entry);
     }
 
     /**
-     * Get all target terms for the provided glossary entry that can be found in the provided string.
+     * Get all target terms for the provided glossary entry that can be found in
+     * the provided string.
      *
      * @param trg
      *            The text to search
      * @param protectedParts
-     *            A list of protected parts from which matches should be disregarded (can be null)
+     *            A list of protected parts from which matches should be
+     *            disregarded (can be null)
      * @param entry
      *            The glossary entry whose target terms should be searched
      * @return A list of matching target terms
@@ -308,7 +317,8 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
         if (tok == null) {
             return Collections.emptyList();
         }
-        GlossarySearcher searcher = buildSearcher(tok, Core.getProject().getProjectProperties().getTargetLanguage());
+        GlossarySearcher searcher = buildSearcher(tok,
+                Core.getProject().getProjectProperties().getTargetLanguage());
 
         return searcher.searchTargetMatches(trg, protectedParts, entry);
     }

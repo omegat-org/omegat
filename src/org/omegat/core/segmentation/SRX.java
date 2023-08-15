@@ -122,11 +122,11 @@ public class SRX implements Serializable {
      * Saves segmentation rules into specified directory.
      *
      * @param srx
-     *         OmegaT object to be written; if null, means that we want to
-     *         delete the file
+     *            OmegaT object to be written; if null, means that we want to
+     *            delete the file
      * @param outDir
-     *         where to put the file. The file name is forced to
-     *         {@link #SRX_SENTSEG} and will be in standard SRX format.
+     *            where to put the file. The file name is forced to
+     *            {@link #SRX_SENTSEG} and will be in standard SRX format.
      */
     public static void saveToSrx(SRX srx, File outDir) throws IOException {
         File outFile = new File(outDir, SRX_SENTSEG);
@@ -179,8 +179,8 @@ public class SRX implements Serializable {
 
     /**
      * Loads the local segmentation file. Accepts SRX (default) or old CONF
-     * format. In case you use a conf format, rules about an old version
-     * remain valid.
+     * format. In case you use a conf format, rules about an old version remain
+     * valid.
      **/
     public static SRX loadFromDir(File configDir) {
         File inFile;
@@ -269,7 +269,7 @@ public class SRX implements Serializable {
         Srx srx = mapper.readValue(io, Srx.class);
         HashMap<String, List<Rule>> mapping = new HashMap<>();
         List<Languagerule> languageRuleList = srx.getBody().getLanguagerules().getLanguagerule();
-        for (Languagerule languagerule: languageRuleList) {
+        for (Languagerule languagerule : languageRuleList) {
             mapping.put(languagerule.getLanguagerulename(),
                     languagerule.getRule().stream().map(Rule::new).collect(Collectors.toList()));
         }

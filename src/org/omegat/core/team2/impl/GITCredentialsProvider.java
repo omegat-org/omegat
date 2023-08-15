@@ -247,7 +247,8 @@ public class GITCredentialsProvider extends CredentialsProvider {
                 ((CredentialItem.Password) item).setValue(credentials.password.toCharArray());
                 continue;
             } else if (item instanceof CredentialItem.StringType) {
-                if (!item.getPromptText().equals(PASSWORD_PROMPT) || !isPassphraseQuery(item.getPromptText())) {
+                if (!item.getPromptText().equals(PASSWORD_PROMPT)
+                        || !isPassphraseQuery(item.getPromptText())) {
                     Log.logInfoRB("TEAM_GIT_IGNORE_CREDENTIAL_QUERY", item.getPromptText());
                     continue;
                 }
@@ -274,8 +275,9 @@ public class GITCredentialsProvider extends CredentialsProvider {
                 String promptedFingerprint = extractFingerprint(promptText);
                 if (promptedFingerprint == null) {
                     throw new UnsupportedCredentialItem(uri,
-                            String.format("Unknown pattern to ask acceptance of host key fingerprint "
-                                    + "\n%s", promptText));
+                            String.format(
+                                    "Unknown pattern to ask acceptance of host key fingerprint " + "\n%s",
+                                    promptText));
                 }
                 if (predefinedFingerprint != null) {
                     ((CredentialItem.YesNoType) item)

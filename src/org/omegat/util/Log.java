@@ -338,7 +338,7 @@ public final class Log {
      * @param parameter
      *            Parameter for the error message.
      */
-    public static void logInfoRB(String key, String parameter)  {
+    public static void logInfoRB(String key, String parameter) {
         Log.atInfo().setLocMessage(key).addArgument(parameter).log();
     }
 
@@ -349,13 +349,13 @@ public final class Log {
      * @param key
      *            The key of the error message in the resource bundle
      */
-    public static void logInfoRB(String key)  {
+    public static void logInfoRB(String key) {
         Log.atInfo().setLocMessage(key).log();
     }
 
     /**
-     * Writes a warning message to the log (to be retrieved from the
-     * resource bundle).
+     * Writes a warning message to the log (to be retrieved from the resource
+     * bundle).
      *
      * @param key
      *            The key of the error message in the resource bundle

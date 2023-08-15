@@ -50,13 +50,13 @@ public final class FontFallbackManager {
      * rendering techniques that Swing does not support.
      * <p>
      * Known working emoji fonts:
-     * <ul><li>Segoe UI Emoji (bundled with Windows 7 and later)
+     * <ul>
+     * <li>Segoe UI Emoji (bundled with Windows 7 and later)
      * <li><a href="https://github.com/googlei18n/noto-emoji">Noto Emoji</a>
      * </ul>
      */
     private static final Set<String> FONT_BLACKLIST = new HashSet<>(
-            Arrays.asList("Apple Color Emoji", "Noto Color Emoji")
-    );
+            Arrays.asList("Apple Color Emoji", "Noto Color Emoji"));
     private static final Font FONT_UNAVAILABLE = new Font("", Font.PLAIN, 0);
 
     private static final Logger LOGGER = LoggerFactory.getLogger(FontFallbackManager.class);
@@ -92,8 +92,8 @@ public final class FontFallbackManager {
     }
 
     /**
-     * Detect specified codePoints can display with specified font.
-     * Wrapper of Font class methods.
+     * Detect specified codePoints can display with specified font. Wrapper of
+     * Font class methods.
      */
     public static int canDisplayUpTo(Font font, String str) {
         if (!CAN_DISPLAY_IS_BROKEN) {
@@ -165,8 +165,11 @@ public final class FontFallbackManager {
 
     /**
      * Check a character displayable with font.
-     * @param font target font
-     * @param codePoint character to check
+     * 
+     * @param font
+     *            target font
+     * @param codePoint
+     *            character to check
      * @return true when codePoint can be displayed, otherwise false.
      */
     public static boolean canDisplay(Font font, final int codePoint) {
@@ -199,7 +202,8 @@ public final class FontFallbackManager {
     private static Font getCapableFontInternal(int cp) {
         // Iterate backwards through recent fonts.
         // Presumably, most fallback chars in a given document will be the same
-        // language/script/etc. so they are likely to be included in the same font.
+        // language/script/etc. so they are likely to be included in the same
+        // font.
         for (int testIndex, i = 0; i < RECENT_FONTS.length; i++) {
             testIndex = (lastFontIndex - i + RECENT_FONTS.length) % RECENT_FONTS.length;
             Font font = RECENT_FONTS[testIndex];
@@ -225,13 +229,14 @@ public final class FontFallbackManager {
                 .addArgument(allFonts.length).addArgument(Integer.toHexString(cp))
                 .addArgument(String.valueOf(Character.toChars(cp))).log();
         long start = System.currentTimeMillis();
-        Optional<Font> font = Stream.of(allFonts).parallel().filter(f ->
-                canDisplay(f, cp) && !FONT_BLACKLIST.contains(f.getFamily())).findFirst();
+        Optional<Font> font = Stream.of(allFonts).parallel()
+                .filter(f -> canDisplay(f, cp) && !FONT_BLACKLIST.contains(f.getFamily())).findFirst();
         CACHE.put(cp, font.orElse(FONT_UNAVAILABLE));
         font.ifPresent(FontFallbackManager::addRecentFont);
         if (LOGGER.isDebugEnabled()) {
             if (font.isPresent()) {
-                LOGGER.atDebug().setMessage("Search found {} in {} ms").addArgument(() -> font.get().getFamily())
+                LOGGER.atDebug().setMessage("Search found {} in {} ms")
+                        .addArgument(() -> font.get().getFamily())
                         .addArgument(System.currentTimeMillis() - start).log();
             } else {
                 LOGGER.atDebug().setMessage("Search failed to find a font; time: {} ms")

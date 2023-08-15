@@ -180,9 +180,8 @@ public final class Main {
         Log.log("\n" + "===================================================================" + "\n"
                 + OStrings.getNameAndVersion() + " (" + new Date() + ") " + " Locale " + Locale.getDefault());
 
-        Log.logInfoRB("LOG_STARTUP_INFO", System.getProperty("java.vendor"), System.getProperty("java"
-                        + ".version"),
-                System.getProperty("java.home"));
+        Log.logInfoRB("LOG_STARTUP_INFO", System.getProperty("java.vendor"),
+                System.getProperty("java" + ".version"), System.getProperty("java.home"));
 
         System.setProperty("http.agent", OStrings.getDisplayNameAndVersion());
 
@@ -625,9 +624,9 @@ public final class Main {
     }
 
     /**
-     * Execute a script as PROJECT_CHANGE events. We can't use the regular project
-     * listener because the SwingUtilities.invokeLater method used in CoreEvents
-     * doesn't stop the project processing in console mode.
+     * Execute a script as PROJECT_CHANGE events. We can't use the regular
+     * project listener because the SwingUtilities.invokeLater method used in
+     * CoreEvents doesn't stop the project processing in console mode.
      */
     private static void executeConsoleScript(IProjectEventListener.PROJECT_CHANGE_TYPE eventType) {
         if (PARAMS.containsKey(CLIParameters.SCRIPT)) {

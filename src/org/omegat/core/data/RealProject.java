@@ -718,12 +718,13 @@ public class RealProject implements IProject {
             tmxPrepared = null;
             glossaryPrepared = null;
             // Ticket 1690 - build project statistics files
-            // so that contents of these files is up to date with target files sent at same moment
+            // so that contents of these files is up to date with target files
+            // sent at same moment
             StatsResult stat = CalcStandardStatistics.buildProjectStats(this);
             stat.updateStatisticsInfo(hotStat);
             String fn = config.getProjectInternal() + OConsts.STATS_FILENAME;
             Statistics.writeStat(fn, stat.getTextData());
-            Statistics.writeStat(fn.replace(".txt",".json"), stat.getJsonData());
+            Statistics.writeStat(fn.replace(".txt", ".json"), stat.getJsonData());
             // commit translations and statistics
             try {
                 Core.getMainWindow().showStatusMessageRB("TF_COMMIT_TARGET_START");
@@ -736,8 +737,8 @@ public class RealProject implements IProject {
                 ProjectProperties.ProjectPath path = config.new ProjectPath(true);
                 path.setRelativeOrAbsolute(fn);
                 fn = path.getUnderRoot();
-                remoteRepositoryProvider.copyFilesFromProjectToRepos(fn,null);
-                remoteRepositoryProvider.copyFilesFromProjectToRepos(fn.replace(".txt",".json"),null);
+                remoteRepositoryProvider.copyFilesFromProjectToRepos(fn, null);
+                remoteRepositoryProvider.copyFilesFromProjectToRepos(fn.replace(".txt", ".json"), null);
                 remoteRepositoryProvider.commitFiles(fn, "Statistics");
                 Core.getMainWindow().showStatusMessageRB("TF_COMMIT_TARGET_DONE");
             } catch (Exception e) {
@@ -1140,7 +1141,7 @@ public class RealProject implements IProject {
      * File 2: headTMX (theirs)
      */
     protected void mergeTMX(ProjectTMX baseTMX, ProjectTMX headTMX, StringBuilder commitDetails) {
-        StmProperties props = new StmProperties().setLanguageResource(OStrings.getResourceBundle())
+        final StmProperties props = new StmProperties().setLanguageResource(OStrings.getResourceBundle())
                 .setParentWindow(Core.getMainWindow().getApplicationFrame())
                 // More than this number of conflicts will trigger List View by
                 // default.
@@ -1152,7 +1153,7 @@ public class RealProject implements IProject {
                 new SyncTMX(projectTMX, OStrings.getString("TMX_MERGE_MINE"), srcLang, trgLang),
                 new SyncTMX(headTMX, OStrings.getString("TMX_MERGE_THEIRS"), srcLang, trgLang), props);
         projectTMX.replaceContent(mergedTMX);
-        LOGGER.atDebug().log("Merge report: {}", props.getReport());
+        LOGGER.atDebug().setMessage("Merge report: {}").addArgument(props::getReport).log();
         commitDetails.append('\n');
         commitDetails.append(props.getReport().toString());
     }

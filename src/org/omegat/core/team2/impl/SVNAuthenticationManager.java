@@ -257,9 +257,11 @@ public class SVNAuthenticationManager implements ISVNAuthenticationManager {
     private SVNAuthentication getAuthenticatorInstance(String kind, SVNURL url, Credentials credentials)
             throws SVNException {
         if (ISVNAuthenticationManager.PASSWORD.equals(kind)) {
-            return SVNPasswordAuthentication.newInstance(credentials.username, credentials.password.toCharArray(), false, url, false);
+            return SVNPasswordAuthentication.newInstance(credentials.username,
+                    credentials.password.toCharArray(), false, url, false);
         } else if (ISVNAuthenticationManager.SSH.equals(kind)) {
-            return SVNSSHAuthentication.newInstance(credentials.username, credentials.password.toCharArray(), -1, false, url, false);
+            return SVNSSHAuthentication.newInstance(credentials.username, credentials.password.toCharArray(),
+                    -1, false, url, false);
         } else if (ISVNAuthenticationManager.USERNAME.equals(kind)) {
             return SVNUserNameAuthentication.newInstance(credentials.username, false, url, false);
         } else {

@@ -90,7 +90,8 @@ public final class LastSegmentManager {
             fos = new FileOutputStream(getLastEntryFile());
             prop.store(fos, null);
         } catch (Exception e) {
-            LOGGER.atDebug().log("Could not write the last entry number: ", e);
+            LOGGER.atDebug().setMessage("Could not write the last entry number: {}")
+                    .addArgument(e::getMessage).log();
         } finally {
             if (fos != null) {
                 try {
@@ -119,7 +120,8 @@ public final class LastSegmentManager {
         try (FileInputStream fis = new FileInputStream(lastEntryFile)) {
             prop.load(fis);
         } catch (IOException e) {
-            LOGGER.atDebug().log("Could not load last segment info", e);
+            LOGGER.atDebug().setMessage("Could not load last segment info {}").addArgument(e::getMessage)
+                    .log();
             return 1;
         }
 
@@ -129,7 +131,8 @@ public final class LastSegmentManager {
             String lastEntry = prop.getProperty(LAST_ENTRY_NUMBER, "1");
             lastEntryNumber = Integer.parseInt(lastEntry, 10);
         } catch (Exception e) {
-            LOGGER.atDebug().log("Cannot jump to last entry #{}:{}", lastEntryNumber, e.getMessage());
+            LOGGER.atDebug().setMessage("Cannot jump to last entry #{}: {}").addArgument(lastEntryNumber)
+                    .addArgument(e::getMessage).log();
         }
         LOGGER.atDebug().log("Jumping to last entry #{}.", lastEntryNumber);
 
@@ -155,8 +158,8 @@ public final class LastSegmentManager {
         }
 
         // Check to see if the source and file match
-        LOGGER.atDebug().log("Last entry #{} mismatch (file \"{}\", src \"{}\")", lastEntryNumber, lastFile,
-                lastSrc);
+        LOGGER.atDebug().setMessage("Last entry #{} mismatch").addArgument(lastEntryNumber)
+                .addKeyValue("file", lastFile).addKeyValue("src", lastSrc).log();
 
         int fileIndex = fileIndex(lastFile);
 

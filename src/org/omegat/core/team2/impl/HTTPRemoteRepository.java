@@ -52,9 +52,9 @@ import gen.core.project.RepositoryMapping;
 /**
  * HTTP/HTTPS repository connection implementation.
  *
- * It can be used as read-only repository for retrieve sources, external TMX, glossaries, etc. Since HTTP
- * protocol doesn't support multiple files, each URL should be mapped to separate file, i.e. directory mapping
- * is not supported.
+ * It can be used as read-only repository for retrieve sources, external TMX,
+ * glossaries, etc. Since HTTP protocol doesn't support multiple files, each URL
+ * should be mapped to separate file, i.e. directory mapping is not supported.
  *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
@@ -180,12 +180,13 @@ public class HTTPRemoteRepository implements IRemoteRepository2 {
     }
 
     /**
-     * Retrieve remote URL with non-modified checking by ETag. If server doesn't support ETag, file will be
-     * always retrieved.
+     * Retrieve remote URL with non-modified checking by ETag. If server doesn't
+     * support ETag, file will be always retrieved.
      */
-    protected void retrieve(Properties etags, String file, String url, File out) throws Exception {
+    protected void retrieve(Properties etags, String file, String url, final File out) throws Exception {
         String etag = etags.getProperty(file);
-        LOGGER.atDebug().log("Retrieve " + url + " into " + out.getAbsolutePath() + " with ETag=" + etag);
+        LOGGER.atDebug().setMessage("Retrieve {} into {} with ETag={}").addArgument(url)
+                .addArgument(out::getAbsolutePath).addArgument(etag).log();
 
         out.getParentFile().mkdirs();
         HttpURLConnection conn = (HttpURLConnection) new URL(url).openConnection();
@@ -197,11 +198,11 @@ public class HTTPRemoteRepository implements IRemoteRepository2 {
             switch (conn.getResponseCode()) {
             case HttpURLConnection.HTTP_OK:
                 etag = conn.getHeaderField("ETag");
-                LOGGER.atDebug().log("Retrieve " + url + ": 200 with ETag=" + etag);
+                LOGGER.atDebug().log("Retrieve {}: 200 with ETag={}", url, etag);
                 break;
             case HttpURLConnection.HTTP_NOT_MODIFIED:
                 // not modified - just return
-                LOGGER.atDebug().log("Retrieve " + url + ": not modified");
+                LOGGER.atDebug().log("Retrieve {}: not modified", url);
                 return;
             default:
                 throw new RuntimeException("HTTP response code: " + conn.getResponseCode());
@@ -236,6 +237,6 @@ public class HTTPRemoteRepository implements IRemoteRepository2 {
             conn.disconnect();
         }
 
-        LOGGER.atDebug().log("Retrieve " + url + " finished");
+        LOGGER.atDebug().log("Retrieve {} finished", url);
     }
 }

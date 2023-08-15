@@ -75,15 +75,15 @@ public class FileRepository implements IRemoteRepository2 {
         if (!baseSource.isAbsolute()) {
             baseSource = new File(Core.getProject().getProjectProperties().getProjectRootDir(),
                     config.getUrl());
-            LOGGER.atDebug().log("Using base directory \"" + baseSource.getCanonicalPath() + "\"");
+            LOGGER.atDebug().setMessage("Using base directory \"{}\"").addArgument(baseSource).log();
         }
 
         // retrieve all mapped files
         for (RepositoryMapping m : config.getMapping()) {
-            File src = new File(baseSource, m.getRepository());
-            File dst = new File(baseDirectory, m.getRepository());
-            LOGGER.atDebug()
-                    .log("Copy \"" + src.getAbsolutePath() + "\" to \"" + dst.getAbsolutePath() + "\".");
+            final File src = new File(baseSource, m.getRepository());
+            final File dst = new File(baseDirectory, m.getRepository());
+            LOGGER.atDebug().setMessage("Copy \"{}\" to \"{}\".").addArgument(src::getAbsolutePath)
+                    .addArgument(dst::getAbsolutePath).log();
             copyFiles(src, dst);
         }
     }
@@ -93,7 +93,8 @@ public class FileRepository implements IRemoteRepository2 {
         String repoDir = new File(RemoteRepositoryProvider.REPO_SUBDIR).getName();
         if (src.exists() && src.isDirectory()) {
             for (File f : src.listFiles()) {
-                // Skip the ".repositories" directory to avoid recursion problems
+                // Skip the ".repositories" directory to avoid recursion
+                // problems
                 if (f.getName().equals(repoDir)) {
                     continue;
                 }
@@ -106,14 +107,12 @@ public class FileRepository implements IRemoteRepository2 {
 
     @Override
     public void addForCommit(String path) throws Exception {
-        LOGGER.atDebug().log(
-                String.format("Cannot add files for commit for File repositories. Skipping \"%s\".", path));
+        LOGGER.atDebug().log("Cannot add files for commit for File repositories. Skipping \"{}\".", path);
     }
 
     @Override
     public void addForDeletion(String path) throws Exception {
-        LOGGER.atDebug().log(
-                String.format("Cannot add files for deletion for File repositories. Skipping \"%s\".", path));
+        LOGGER.atDebug().log("Cannot add files for deletion for File repositories. Skipping \"{}\".", path);
     }
 
     @Override

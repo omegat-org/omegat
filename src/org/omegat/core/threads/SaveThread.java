@@ -60,8 +60,8 @@ public class SaveThread extends Thread implements IAutoSave {
 
     public SaveThread() {
         setName("Save thread");
-        setWaitDuration(
-                Preferences.getPreferenceDefault(Preferences.AUTO_SAVE_INTERVAL, Preferences.AUTO_SAVE_DEFAULT));
+        setWaitDuration(Preferences.getPreferenceDefault(Preferences.AUTO_SAVE_INTERVAL,
+                Preferences.AUTO_SAVE_DEFAULT));
         Preferences.addPropertyChangeListener(Preferences.AUTO_SAVE_INTERVAL, evt -> {
             setWaitDuration((Integer) evt.getNewValue());
             synchronized (this) {
@@ -75,12 +75,12 @@ public class SaveThread extends Thread implements IAutoSave {
     }
 
     public synchronized void disable() {
-        LOGGER.atDebug().log("Disable autosave"); // NOI18N
+        LOGGER.atDebug().log("Disable autosave");
         enabled = false;
     }
 
     public synchronized void enable() {
-        LOGGER.atDebug().log("Enable autosave"); // NOI18N
+        LOGGER.atDebug().log("Enable autosave");
         enabled = true;
         needToSaveNow = false;
         notify();
@@ -100,7 +100,7 @@ public class SaveThread extends Thread implements IAutoSave {
                 if (needToSaveNow && enabled) {
                     // Wait finished by time and autosaving enabled.
                     IProject dataEngine = Core.getProject();
-                    LOGGER.atDebug().log("Start project save from SaveThread"); // NOI18N
+                    LOGGER.atDebug().log("Start project save from SaveThread");
                     try {
                         Core.executeExclusively(false, () -> {
                             dataEngine.saveProject(false);
@@ -115,7 +115,7 @@ public class SaveThread extends Thread implements IAutoSave {
                     } catch (Exception ex) {
                         LOGGER.atWarn().log(Log.getMessage("AUTOSAVE_GENERIC_ERROR", ex.getMessage()));
                     }
-                    LOGGER.atDebug().log("Finish project save from SaveThread"); // NOI18N
+                    LOGGER.atDebug().log("Finish project save from SaveThread");
                 }
             }
         } catch (InterruptedException ex) {

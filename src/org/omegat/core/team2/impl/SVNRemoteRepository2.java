@@ -73,7 +73,8 @@ public class SVNRemoteRepository2 implements IRemoteRepository2 {
     private static final Logger LOGGER = LoggerFactory.getLogger(SVNRemoteRepository2.class);
 
     // System property to indicate backend.
-    // {@see https://support.tmatesoft.com/t/replacing-trilead-ssh2-with-apache-sshd/2778/3}
+    // {@see
+    // https://support.tmatesoft.com/t/replacing-trilead-ssh2-with-apache-sshd/2778/3}
     private static final String SVNKIT_SSH_CLIENT = "svnkit.ssh.client";
     private static final String APACHE = "apache";
 
@@ -123,9 +124,9 @@ public class SVNRemoteRepository2 implements IRemoteRepository2 {
         if (!f.exists()) {
             return null;
         }
-        SVNInfo info = ourClientManager.getWCClient().doInfo(f, SVNRevision.BASE);
-        LOGGER.atDebug().log("SVN committed revision for file {} is {}", file,
-                info.getCommittedRevision().getNumber());
+        final SVNInfo info = ourClientManager.getWCClient().doInfo(f, SVNRevision.BASE);
+        LOGGER.atDebug().setMessage("SVN committed revision for file {} is {}").addArgument(file)
+                .addArgument(() -> info.getCommittedRevision().getNumber()).log();
 
         return Long.toString(info.getCommittedRevision().getNumber());
     }

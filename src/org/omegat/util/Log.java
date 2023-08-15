@@ -317,7 +317,7 @@ public final class Log {
 
     public static String getMessage(String key, Object... args) {
         String message = OStrings.getString(key);
-        return replacePlaceholders(message, args) + "(" + key + ")";
+        return replacePlaceholders(message, args) + " (" + key + ")";
     }
 
     public static String replacePlaceholders(String message, Object... args) {

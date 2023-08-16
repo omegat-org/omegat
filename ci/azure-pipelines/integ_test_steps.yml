@@ -12,11 +12,12 @@ steps:
       path: '$(GRADLE_USER_HOME)'
   - script: |
       echo "Run ${{ parameters.testType }} integration test"
-      umask a+w
-      mkdir -p .gradle build tipoftheday/build
-      chmod -R a+w .
-      docker-compose up --abort-on-container-exit --exit-code-from client
+      docker compose -f compose.yml up -d server || true
+      docker compose -f compose.yml up --abort-on-container-exit --exit-code-from client
     env:
       DURATION: ${{ parameters.duration }}
       TYPE: ${{ parameters.testType }}
     displayName: 'Run Integration-Test(GIT)'
+  - script: |
+      echo "Clean up"
+      docker compose -f compose.yml down || true

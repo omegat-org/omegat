@@ -39,9 +39,12 @@ fi
 
 ssh-keyscan -H server > /home/omegat/.ssh/known_hosts
 
-rsync -av --exclude=.git --exclude=build --exclude=docs --exclude=doc_src --exclude=docs_devel /code /home/omegat
-cd /home/omegat/code
+rsync -rlD --exclude=.git --exclude=build --exclude=docs --exclude=doc_src --exclude=docs_devel /code/ /workdir
+cd /workdir
 /opt/gradle-7.5.1/bin/gradle testIntegration \
-   -Djava.util.logging.config.file=test-integration/logger.properties \
+   -Djava.util.logging.config.file=/workdir/test-integration/logger.properties \
    -Domegat.test.duration=${DURATION} -Domegat.test.repo=${REPO} \
    -Domegat.test.repo.alt=${REPO2} -Domegat.test.map.repo=http://server/ -Domegat.test.map.file=README
+EXIT_CODE=$?
+rsync -r /workdir/build/reports/test-integration /code/build/reports
+exit $EXIT_CODE

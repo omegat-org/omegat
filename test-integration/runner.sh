@@ -35,6 +35,18 @@ SHELL_PATH=`dirname "$0"`
 cd $SHELL_PATH && cd ..
 
 EXIT_CODE=0
-env DURATION=$2 TYPE=$1 docker-compose -f docker-compose.yml up --abort-on-container-exit --exit-code-from client || EXIT_CODE=$?
-docker-compose -f docker-compose.yml down
+if type docker &> /dev/null ; then
+  env DURATION=$2 TYPE=$1 docker-compose -f docker-compose.yml up --abort-on-container-exit --exit-code-from client || EXIT_CODE=$?
+  docker-compose -f docker-compose.yml down
+elif type nerdctl &> /dev/null ; then
+  env DURATION=$2 TYPE=$1 nerdctl compose -f docker-compose.yml up
+  EXIT_CODE=$?
+  nerdctl compose -f docker-compose.yml down
+elif type podman &> /dev/null ; then
+  echo You need to install podman-compose or docker-compose
+  EXIT_CODE=2
+else
+  echo Please install docker-compose or nerdctl!
+  EXIT_CODE=2
+fi
 exit ${EXIT_CODE}

@@ -321,9 +321,7 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
         LOGGER.atInfo().log(Log.getMessage("GIT_START", "addForCommit"));
         try (Git git = new Git(repository)) {
             git.add().addFilepattern(path).call();
-            if (LOGGER.isInfoEnabled()) {
-                LOGGER.atInfo().log(Log.getMessage("GIT_FINISH", "addForCommit"));
-            }
+            LOGGER.atInfo().log(Log.getMessage("GIT_FINISH", "addForCommit"));
         } catch (Exception ex) {
             LOGGER.atError().log(Log.getMessage("GIT_ERROR", "addForCommit", ex.getMessage()));
             throw ex;

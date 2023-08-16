@@ -132,10 +132,10 @@ public class SpellChecker implements ISpellChecker {
     public void initialize() {
         Language targetLanguage = Core.getProject().getProjectProperties().getTargetLanguage();
 
-        Stream<String> toCheck = Stream.of(targetLanguage.getLocaleCode(), // Full
-                                                                           // xx_YY
-                targetLanguage.getLocaleCode().replace('_', '-'), // Full xx-YY
-                targetLanguage.getLanguageCode()); // xx only
+        // check targets "xx_YY", "xx-YY" and "xx" only
+        Stream<String> toCheck = Stream.of(targetLanguage.getLocaleCode(),
+                targetLanguage.getLocaleCode().replace('_', '-'),
+                targetLanguage.getLanguageCode());
 
         checker = toCheck.map(SpellChecker::initializeWithLanguage).filter(Optional::isPresent).findFirst()
                 .orElseGet(() -> Optional.of(new SpellCheckerDummy())).get();

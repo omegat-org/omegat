@@ -320,14 +320,8 @@ public final class Log {
         return OStrings.getString(key) + " (" + key + ")";
     }
 
-    public static String getMessage(String key, Object arg) {
-        String message = OStrings.getString(key);
-        return message.replace("{0}", String.valueOf(arg)) + " (" + key + ")";
-    }
-
     public static String getMessage(String key, Object... args) {
-        String message = OStrings.getString(key);
-        return StringUtil.format(message, args) + " (" + key + ")";
+        return OStrings.getString(key, args) + " (" + key + ")";
     }
 
     /**
@@ -390,6 +384,7 @@ public final class Log {
     public static class LogMessageBuilder {
         private String message;
         private String key;
+        private Throwable exception;
         private final org.slf4j.event.Level level;
         private final boolean enabled;
         private int counter = 0;
@@ -413,7 +408,9 @@ public final class Log {
         }
 
         public LogMessageBuilder addArgument(Object arg) {
-            if (enabled) {
+            if (arg instanceof Throwable) {
+                exception = (Throwable) arg;
+            } else if (enabled) {
                 String placeholder = "{" + counter + "}";
                 message = message.replace(placeholder, String.valueOf(arg));
                 counter++;
@@ -431,9 +428,17 @@ public final class Log {
         public void log() {
             if (enabled) {
                 if (key != null) {
-                    LOGGER.atLevel(level).log(message + " (" + key + ")");
+                    if (exception == null) {
+                        LOGGER.atLevel(level).log(message + " (" + key + ")");
+                    } else {
+                        LOGGER.atLevel(level).log(message + " (" + key + ")", exception);
+                    }
                 } else {
-                    LOGGER.atLevel(level).log(message);
+                    if (exception == null) {
+                        LOGGER.atLevel(level).log(message);
+                    } else {
+                        LOGGER.atLevel(level).log(message, exception);
+                    }
                 }
             }
         }

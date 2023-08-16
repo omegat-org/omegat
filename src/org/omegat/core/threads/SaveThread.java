@@ -31,12 +31,13 @@ package org.omegat.core.threads;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.concurrent.TimeoutException;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.omegat.core.Core;
 import org.omegat.core.KnownException;
 import org.omegat.core.data.IProject;
+import org.omegat.core.team2.IRemoteRepository2;
+import org.omegat.util.Log;
 import org.omegat.util.Preferences;
 
 /**
@@ -58,8 +59,8 @@ public class SaveThread extends Thread implements IAutoSave {
 
     public SaveThread() {
         setName("Save thread");
-        setWaitDuration(
-                Preferences.getPreferenceDefault(Preferences.AUTO_SAVE_INTERVAL, Preferences.AUTO_SAVE_DEFAULT));
+        setWaitDuration(Preferences.getPreferenceDefault(Preferences.AUTO_SAVE_INTERVAL,
+                Preferences.AUTO_SAVE_DEFAULT));
         Preferences.addPropertyChangeListener(Preferences.AUTO_SAVE_INTERVAL, evt -> {
             setWaitDuration((Integer) evt.getNewValue());
             synchronized (this) {
@@ -89,8 +90,8 @@ public class SaveThread extends Thread implements IAutoSave {
         try {
             while (true) {
                 synchronized (this) {
-                    // Set flag for saving. If somebody will reset time, he will
-                    // clear this flag also.
+                    // Set the flag for saving. Clear the flag if the timer is
+                    // reset.
                     needToSaveNow = true;
                     // sleep
                     wait(waitDuration);
@@ -107,18 +108,27 @@ public class SaveThread extends Thread implements IAutoSave {
                         Core.getMainWindow().showStatusMessageRB("ST_PROJECT_AUTOSAVED",
                                 DateFormat.getTimeInstance(DateFormat.SHORT).format(new Date()));
                     } catch (TimeoutException ex) {
-                        LOGGER.warning("Lock trying timeout during autosave");
+                        Log.logWarningRB("AUTOSAVE_LOCK_ACQUISITION_TIMEOUT");
                     } catch (KnownException ex) {
                         Core.getMainWindow().showStatusMessageRB(ex.getMessage(), ex.getParams());
+                    } catch (IRemoteRepository2.NetworkException ex) {
+                        Log.logWarningRB("TEAM_NETWORK_ERROR", ex.getMessage());
+                    } catch (OutOfMemoryError oome) {
+                        // inform the user
+                        long memory = Runtime.getRuntime().maxMemory() / 1024 / 1024;
+                        Log.logErrorRB("OUT_OF_MEMORY", memory);
+                        Log.log(oome);
+                        Core.getMainWindow().showErrorDialogRB("TF_ERROR", "OUT_OF_MEMORY", memory);
+                        // Just quit, we can't help it anyway
+                        System.exit(1);
                     } catch (Exception ex) {
-                        LOGGER.log(Level.WARNING, "Error save", ex);
+                        Log.logWarningRB("AUTOSAVE_GENERIC_ERROR", ex.getMessage());
                     }
                     LOGGER.fine("Finish project save from SaveThread");
                 }
             }
         } catch (InterruptedException ex) {
-            LOGGER.log(Level.WARNING, "Save thread interrupted", ex);
-            return;
+            Log.logDebug(LOGGER, "Save thread interrupted: {0}", ex.getMessage());
         }
     }
 }

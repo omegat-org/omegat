@@ -34,6 +34,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
+import java.util.function.Supplier;
 import java.util.logging.Formatter;
 import java.util.logging.Handler;
 import java.util.logging.Level;
@@ -338,7 +339,7 @@ public final class Log {
      * @param parameter
      *            Parameter for the error message.
      */
-    public static void logInfoRB(String key, String parameter) {
+    public static void logInfoRB(String key, Object parameter) {
         Log.atInfo().setLocMessage(key).addArgument(parameter).log();
     }
 
@@ -362,7 +363,7 @@ public final class Log {
      * @param parameter
      *            Parameter for the error message.
      */
-    public static void logWarningRB(String key, String parameter) {
+    public static void logWarningRB(String key, Object parameter) {
         Log.atWarn().setLocMessage(key).addArgument(parameter).log();
     }
 
@@ -370,7 +371,7 @@ public final class Log {
      * Writes an error message to the log (to be retrieved from the resource
      * bundle).
      */
-    public static void logErrorRB(String key, String parameter) {
+    public static void logErrorRB(String key, Object parameter) {
         Log.atError().setLocMessage(key).addArgument(parameter).log();
     }
 
@@ -411,11 +412,18 @@ public final class Log {
             return this;
         }
 
-        public LogMessageBuilder addArgument(String arg) {
+        public LogMessageBuilder addArgument(Object arg) {
             if (enabled) {
                 String placeholder = "{" + counter + "}";
                 message = message.replace(placeholder, String.valueOf(arg));
                 counter++;
+            }
+            return this;
+        }
+
+        public LogMessageBuilder addArgument(Supplier<?> supplier) {
+            if (enabled) {
+                addArgument(String.valueOf(supplier.get()));
             }
             return this;
         }

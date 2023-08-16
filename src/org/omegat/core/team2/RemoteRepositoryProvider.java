@@ -556,7 +556,7 @@ public class RemoteRepositoryProvider {
                     FileUtils.deleteDirectory(f);
                 }
             } catch (Exception e) {
-                Log.logInfoRB("LOG_ERROR_DELETE_FILE", f.toString());
+                Log.logWarningRB("LOG_ERROR_DELETE_FILE", f);
             }
         }
     }

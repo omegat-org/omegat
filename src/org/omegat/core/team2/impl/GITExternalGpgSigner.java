@@ -143,8 +143,8 @@ public class GITExternalGpgSigner extends GpgSigner {
             try {
                 return new String(b.toByteArray(4000),
                         Charset.defaultCharset());
-            } catch (IOException e) {
-                Log.logWarningRB(ExternalGpgSigner_bufferError, e);
+            } catch (IOException ex) {
+                Log.logErrorRB(ex, ExternalGpgSigner_bufferError);
             }
         }
         return "";
@@ -273,7 +273,7 @@ public class GITExternalGpgSigner extends GpgSigner {
             }
             return result[0];
         } catch (IOException e) {
-            Log.logErrorRB(e.getLocalizedMessage(), e);
+            Log.log(e);
             return false;
         }
     }
@@ -408,8 +408,8 @@ public class GITExternalGpgSigner extends GpgSigner {
                 childEnv.remove(PINENTRY_USER_DATA);
             }
         } catch (SecurityException | UnsupportedOperationException
-                | IllegalArgumentException e) {
-            Log.logWarningRB(ExternalGpgSigner_environmentError, e);
+                | IllegalArgumentException ex) {
+            Log.logErrorRB(ex, ExternalGpgSigner_environmentError);
         }
     }
 
@@ -446,8 +446,8 @@ public class GITExternalGpgSigner extends GpgSigner {
                                 result[0] = r.readLine();
                             }
                         }, null);
-                    } catch (IOException | CanceledException e) {
-                        Log.logWarningRB(ExternalGpgSigner_cannotSearch, e);
+                    } catch (IOException | CanceledException ex) {
+                        Log.logErrorRB(ex, ExternalGpgSigner_cannotSearch);
                     }
                     exe = result[0];
                 }
@@ -469,7 +469,7 @@ public class GITExternalGpgSigner extends GpgSigner {
                         return exe.getAbsolutePath();
                     }
                 } catch (SecurityException e) {
-                    Log.logWarningRB(ExternalGpgSigner_skipNotAccessiblePath, exe.getPath(), e);
+                    Log.logErrorRB(e, ExternalGpgSigner_skipNotAccessiblePath, exe.getPath());
                 }
             }
             return null;

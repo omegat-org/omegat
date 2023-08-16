@@ -176,7 +176,7 @@ public class SpellChecker implements ISpellChecker {
             Log.logInfoRB("SPELLCHECKER_HUNSPELL_INITIALIZED", language, dictionaryName);
             return Optional.of(result);
         } catch (Throwable ex) {
-            Log.logInfoRB("SPELLCHECKER_HUNSPELL_EXCEPTION", ex.getMessage());
+            Log.logWarningRB("SPELLCHECKER_HUNSPELL_EXCEPTION", ex.getMessage());
         }
         try {
             ISpellCheckerProvider result = new SpellCheckerJMySpell(dictionaryName.getPath(),

@@ -74,12 +74,12 @@ public class SaveThread extends Thread implements IAutoSave {
     }
 
     public synchronized void disable() {
-        Log.logDebug(LOGGER, "Disable autosave"); // NOI18N
+        LOGGER.fine("Disable autosave");
         enabled = false;
     }
 
     public synchronized void enable() {
-        Log.logDebug(LOGGER, "Enable autosave"); // NOI18N
+        LOGGER.fine("Enable autosave");
         enabled = true;
         needToSaveNow = false;
         notify();
@@ -99,7 +99,7 @@ public class SaveThread extends Thread implements IAutoSave {
                 if (needToSaveNow && enabled) {
                     // Wait finished by time and autosaving enabled.
                     IProject dataEngine = Core.getProject();
-                    Log.logDebug(LOGGER, "Start project save from SaveThread"); // NOI18N
+                    LOGGER.fine("Start project save from SaveThread");
                     try {
                         Core.executeExclusively(false, () -> {
                             dataEngine.saveProject(false);
@@ -124,7 +124,7 @@ public class SaveThread extends Thread implements IAutoSave {
                     } catch (Exception ex) {
                         Log.logWarningRB("AUTOSAVE_GENERIC_ERROR", ex.getMessage());
                     }
-                    Log.logDebug(LOGGER, "Finish project save from SaveThread"); // NOI18N
+                    LOGGER.fine("Finish project save from SaveThread");
                 }
             }
         } catch (InterruptedException ex) {

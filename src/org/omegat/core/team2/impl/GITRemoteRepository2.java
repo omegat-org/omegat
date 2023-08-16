@@ -318,12 +318,12 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
      */
     @Override
     public void addForCommit(String path) throws Exception {
-        LOGGER.atInfo().log(Log.getMessage("GIT_START", "addForCommit"));
+        Log.logInfoRB("GIT_START", "addForCommit");
         try (Git git = new Git(repository)) {
             git.add().addFilepattern(path).call();
-            LOGGER.atInfo().log(Log.getMessage("GIT_FINISH", "addForCommit"));
+            Log.logInfoRB("GIT_FINISH", "addForCommit");
         } catch (Exception ex) {
-            LOGGER.atError().log(Log.getMessage("GIT_ERROR", "addForCommit", ex.getMessage()));
+            Log.logErrorRB("GIT_ERROR", "addForCommit", ex.getMessage());
             throw ex;
         }
     }
@@ -339,16 +339,12 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
      */
     @Override
     public void addForDeletion(String path) throws Exception {
-        if (LOGGER.isInfoEnabled()) {
-            LOGGER.atInfo().log(Log.getMessage("GIT_START", "addForDelete"));
-        }
+        Log.logInfoRB("GIT_START", "addForDelete");
         try (Git git = new Git(repository)) {
             git.rm().addFilepattern(path).call();
-            if (LOGGER.isInfoEnabled()) {
-                LOGGER.atInfo().log(Log.getMessage("GIT_FINISH", "addForDelete"));
-            }
+            Log.logInfoRB("GIT_FINISH", "addForDelete");
         } catch (Exception ex) {
-            LOGGER.atError().log(Log.getMessage("GIT_ERROR", "addForDelete", ex.getMessage()));
+            Log.logErrorRB("GIT_ERROR", "addForDelete", ex.getMessage());
             throw ex;
         }
     }
@@ -460,10 +456,10 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
         }
         if (indexIsEmpty(DirCache.read(repository))) {
             // Nothing was actually added to the index so we can just return.
-            LOGGER.atInfo().log(Log.getMessage("GIT_NO_CHANGES", "upload"));
+            Log.logInfoRB("GIT_NO_CHANGES", "upload");
             return null;
         }
-        LOGGER.atInfo().log(Log.getMessage("GIT_START", "upload"));
+        Log.logInfoRB("GIT_START", "upload");
         try (Git git = new Git(repository)) {
             CommitCommand commitCommand = git.commit();
             commitCommand.setMessage(comment);
@@ -476,16 +472,16 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
                     .collect(Collectors.toList());
             String result;
             if (statuses.isEmpty() || statuses.stream().anyMatch(s -> s != RemoteRefUpdate.Status.OK)) {
-                LOGGER.atWarn().log(Log.getMessage("GIT_CONFLICT"));
+                Log.logWarningRB("GIT_CONFLICT");
                 result = null;
             } else {
                 result = commit.getName();
             }
             LOGGER.atDebug().log("GIT committed into new version {} ", result);
-            LOGGER.atInfo().log(Log.getMessage("GIT_FINISH", "upload"));
+            Log.logInfoRB("GIT_FINISH", "upload");
             return result;
         } catch (Exception ex) {
-            LOGGER.atError().log(Log.getMessage("GIT_ERROR", "upload", ex.getMessage()));
+            Log.logErrorRB("GIT_ERROR", "upload", ex.getMessage());
             if (ex instanceof TransportException) {
                 throw new NetworkException(ex);
             } else {

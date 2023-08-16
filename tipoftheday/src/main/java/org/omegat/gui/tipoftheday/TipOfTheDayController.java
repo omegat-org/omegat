@@ -53,7 +53,7 @@ public final class TipOfTheDayController {
     static final String INDEX_YAML = "tips.yaml";
     private static final String TIPOFTHEDAY_SHOW_ON_STARTUP = "tipoftheday_show_on_start";
     private static final String TIPOFTHEDAY_CURRENT_TIP = "tipoftheday_current_tip";
-
+    private static boolean menuAdded = false;
     private static JMenuItem totdMenu = new JMenuItem();
 
     @SuppressWarnings("unused")
@@ -85,11 +85,15 @@ public final class TipOfTheDayController {
                 // show Tip of the Day dialog on startup.
                 totdMenu.addActionListener(actionEvent -> TipOfTheDayController.start(true));
                 MenuExtender.addMenuItem(MenuKey.HELP, totdMenu);
+                menuAdded = true;
             }
 
             @Override
             public void onApplicationShutdown() {
-                MenuExtender.removeMenuItems(MenuKey.HELP, Collections.singletonList(totdMenu));
+                if (menuAdded) {
+                    MenuExtender.removeMenuItems(MenuKey.HELP, Collections.singletonList(totdMenu));
+                    menuAdded = false;
+                }
             }
         });
     }

@@ -388,6 +388,7 @@ ext {
     armMacJRE = fileTree(dir: assetDir, include: 'OpenJDK11U-jre_aarch64_mac_*.tar.gz')
     linux64JRE = fileTree(dir: assetDir, include: 'OpenJDK11U-jre_x64_linux_*.tar.gz')
     linuxArm64JRE = fileTree(dir: assetDir, include: 'OpenJDK11U-jre_aarch64_linux_*.tar.gz')
+    windowsJRE32 = fileTree(dir: assetDir, include: 'OpenJDK11U-jre_x86-32_windows_*.zip')
     windowsJRE = fileTree(dir: assetDir, include: 'OpenJDK11U-jre_x64_windows_*.zip')
 }
 
@@ -1015,6 +1016,7 @@ ext.makeWinTask = { args ->
 }
 makeWinTask(name: 'winNoJRE', suffix: 'Windows_without_JRE')
 makeWinTask(name: 'winJRE64', suffix: 'Windows_64', jrePath: windowsJRE, arch: 'x64')
+makeWinTask(name: 'winJRE', suffix: 'Windows', jrePath: windowsJRE32)
 
 // Disable .tar distributions for everyone but Linux
 tasks.findAll { it.name =~ /[dD]istTar$/ && !it.name.contains('linux') }.each { it.enabled = false }

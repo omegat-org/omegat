@@ -63,14 +63,28 @@ public final class Log {
         LOGGER = LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
 
         boolean loaded = false;
-        File usersLogSettings = new File(StaticUtils.getConfigDir(), "logger.properties");
 
-        if (usersLogSettings.isFile() && usersLogSettings.canRead()) {
+        String customLogConfig = System.getProperty("java.util.logging.config.file");
+        if (customLogConfig != null) {
+            File customLogSettings = new File(customLogConfig);
+            if (customLogSettings.isFile() && customLogSettings.canRead()) {
+                // try to load logger settings from custom file
+                try (InputStream in = new FileInputStream(customLogSettings)) {
+                    init(in);
+                    loaded = true;
+                } catch (Exception ignored) {
+                }
+            }
+        }
+        if (!loaded) {
             // try to load logger settings from user home dir
-            try (InputStream in = new FileInputStream(usersLogSettings)) {
-                init(in);
-                loaded = true;
-            } catch (Exception ignored) {
+            File usersLogSettings = new File(StaticUtils.getConfigDir(), "logger.properties");
+            if (usersLogSettings.isFile() && usersLogSettings.canRead()) {
+                try (InputStream in = new FileInputStream(usersLogSettings)) {
+                    init(in);
+                    loaded = true;
+                } catch (Exception ignored) {
+                }
             }
         }
         if (!loaded) {

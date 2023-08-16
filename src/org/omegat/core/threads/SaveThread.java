@@ -35,9 +35,11 @@ import java.util.concurrent.TimeoutException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+
 import org.omegat.core.Core;
 import org.omegat.core.KnownException;
 import org.omegat.core.data.IProject;
+import org.omegat.core.team2.IRemoteRepository2;
 import org.omegat.util.Log;
 import org.omegat.util.Preferences;
 
@@ -91,8 +93,8 @@ public class SaveThread extends Thread implements IAutoSave {
         try {
             while (true) {
                 synchronized (this) {
-                    // Set flag for saving. If somebody will reset time, he will
-                    // clear this flag also.
+                    // Set the flag for saving. Clear the flag if the timer is
+                    // reset.
                     needToSaveNow = true;
                     // sleep
                     wait(waitDuration);
@@ -109,17 +111,27 @@ public class SaveThread extends Thread implements IAutoSave {
                         Core.getMainWindow().showStatusMessageRB("ST_PROJECT_AUTOSAVED",
                                 DateFormat.getTimeInstance(DateFormat.SHORT).format(new Date()));
                     } catch (TimeoutException ex) {
-                        LOGGER.atWarn().log(Log.getMessage("AUTOSAVE_TIMEOUT_TAKING_LOCK"));
+                        Log.logWarningRB("AUTOSAVE_LOCK_ACQUISITION_TIMEOUT");
                     } catch (KnownException ex) {
                         Core.getMainWindow().showStatusMessageRB(ex.getMessage(), ex.getParams());
+                    } catch (IRemoteRepository2.NetworkException ex) {
+                        Log.logWarningRB("TEAM_NETWORK_ERROR", ex.getMessage());
+                    } catch (OutOfMemoryError oome) {
+                        // inform the user
+                        long memory = Runtime.getRuntime().maxMemory() / 1024 / 1024;
+                        Log.logErrorRB("OUT_OF_MEMORY", memory);
+                        Log.log(oome);
+                        Core.getMainWindow().showErrorDialogRB("TF_ERROR", "OUT_OF_MEMORY", memory);
+                        // Just quit, we can't help it anyway
+                        System.exit(1);
                     } catch (Exception ex) {
-                        LOGGER.atWarn().log(Log.getMessage("AUTOSAVE_GENERIC_ERROR", ex.getMessage()));
+                        Log.logWarningRB("AUTOSAVE_GENERIC_ERROR", ex.getMessage());
                     }
                     LOGGER.atDebug().log("Finish project save from SaveThread");
                 }
             }
         } catch (InterruptedException ex) {
-            LOGGER.atWarn().log(Log.getMessage("AUTOSAVE_INTERRUPTED", ex.getMessage()));
+            LOGGER.atDebug().log("Save thread interrupted:", ex);
         }
     }
 }

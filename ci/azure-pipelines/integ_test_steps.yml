@@ -12,12 +12,40 @@ steps:
       path: '$(GRADLE_USER_HOME)'
   - script: |
       echo "Run ${{ parameters.testType }} integration test"
-      docker compose -f compose.yml up -d server || true
-      docker compose -f compose.yml up --abort-on-container-exit --exit-code-from client
+  - task: DockerCompose@0
+    inputs:
+      action: Build services
+      containerregistrytype: Container Registry
+      dockerComposeFile: compose.yml
+    displayName: 'build container image'
+  - task: DockerCompose@0
+    inputs:
+      action: Run a specific service
+      containerregistrytype: Container Registry
+      dockerComposeFile: compose.yml
+      buildImages: true
+      serviceName: server
+      detached: true
+    displayName: 'Run team server'
+  - task: DockerCompose@0
+    inputs:
+      action: Run a specific service
+      containerregistrytype: Container Registry
+      dockerComposeFile: compose.yml
+      buildImages: true
+      serviceName: client
+      abortOnContainerExit: true
+      detached: false
     env:
       DURATION: ${{ parameters.duration }}
       TYPE: ${{ parameters.testType }}
-    displayName: 'Run Integration-Test(GIT)'
-  - script: |
-      echo "Clean up"
-      docker compose -f compose.yml down || true
+    displayName: 'Execute Integration-Test'
+  - task: DockerCompose@0
+    inputs:
+      action: Run a Docker Compose command
+      containerregistrytype: Container Registry
+      dockerComposeFile: compose.yml
+      dockerComposeCommand: down
+      buildImages: true
+      serviceName: client
+      abortOnContainerExit: true

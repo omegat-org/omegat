@@ -46,6 +46,3 @@ steps:
       containerregistrytype: Container Registry
       dockerComposeFile: compose.yml
       dockerComposeCommand: down
-      buildImages: true
-      serviceName: client
-      abortOnContainerExit: true

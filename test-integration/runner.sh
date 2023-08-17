@@ -35,18 +35,24 @@ SHELL_PATH=`dirname "$0"`
 cd $SHELL_PATH && cd ..
 
 EXIT_CODE=0
-if type docker &> /dev/null ; then
-  env DURATION=$2 TYPE=$1 docker-compose -f docker-compose.yml up --abort-on-container-exit --exit-code-from client || EXIT_CODE=$?
-  docker-compose -f docker-compose.yml down
+export DURATION=$2
+export TYPE=$1
+
+# check compose V1 then V2, or containerd/nerdctl
+if type docker-compose &> /dev/null ; then
+  docker-compose -f compose.yml up -d server
+  docker-compose -f compose.yml up client || EXIT_CODE=$?
+  docker-compose -f compose.yml down
+elif type docker &> /dev/null ; then
+  docker compose -f compose.yml up -d server
+  docker compose -f compose.yml up client || EXIT_CODE=$?
+  docker compose -f compose.yml down
 elif type nerdctl &> /dev/null ; then
-  sudo DURATION=$2 TYPE=$1 nerdctl compose -f docker-compose.yml up
-  EXIT_CODE=$?
-  sudo nerdctl compose -f docker-compose.yml down
-elif type podman &> /dev/null ; then
-  echo You need to install podman-compose or docker-compose
-  EXIT_CODE=2
+  nerdctl compose -f compose.yml up -d server
+  nerdctl compose -f compose.yml up client || EXIT_CODE=$?
+  nerdctl compose -f compose.yml down
 else
-  echo Please install docker-compose or nerdctl!
+  echo Please install docker or nerdctl!
   EXIT_CODE=2
 fi
-exit ${EXIT_CODE}
+exit $EXIT_CODE

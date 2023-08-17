@@ -140,6 +140,7 @@ public final class TestTeamIntegration {
     static Team repo;
 
     public static void main(String[] args) throws Exception {
+        String logConfig = System.getProperty("java.util.logging.config.file", null);
         String repository = System.getProperty("omegat.test.repo", null);
         if (repository == null) {
             System.err.println("Property omegat.test.repo is mandatory.");
@@ -155,7 +156,7 @@ public final class TestTeamIntegration {
         Run[] runs = new Run[THREADS.length];
         for (int i = 0; i < THREADS.length; i++) {
             runs[i] = new Run(THREADS[i], new File(DIR, THREADS[i]), MAX_DELAY_SECONDS,
-                    REPO.get(i % REPO.size()));
+                    REPO.get(i % REPO.size()), logConfig);
         }
         for (int i = 0; i < THREADS.length; i++) {
             runs[i].start();
@@ -384,7 +385,7 @@ public final class TestTeamIntegration {
         volatile boolean finished;
         String source;
 
-        Run(String source, File dir, int delay, final String repo) throws Exception {
+        Run(String source, File dir, int delay, final String repo, final String logConfig) throws Exception {
             this.source = source;
             String cp = ManagementFactory.getRuntimeMXBean().getClassPath();
             FileUtils.copyFile(new File(DIR + "/repo/omegat.project"),
@@ -392,12 +393,25 @@ public final class TestTeamIntegration {
             if (!new File(DIR + "/" + source + "/omegat/").mkdirs()) {
                 throw new Exception("Impossible to create test dir");
             }
+            List<String> cmd = new ArrayList<>();
+            cmd.add("java");
+            cmd.add("-Duser.name=" + source);
+            if (logConfig != null) {
+                cmd.add("-Djava.util.logging.config.file=" + logConfig);
+            }
+            cmd.add("-cp");
+            cmd.add(cp);
+            cmd.add(TestTeamIntegrationChild.class.getName());
+            cmd.add(source);
+            cmd.add(Long.toString(PROCESS_SECONDS * 1000L));
+            cmd.add(dir.getAbsolutePath());
+            cmd.add(repo);
+            cmd.add(Integer.toString(delay));
+            cmd.add(Integer.toString(SEG_COUNT));
 
             System.err.println("Execute: " + source + " " + (PROCESS_SECONDS * 1000) + " "
                     + dir.getAbsolutePath() + " " + repo + " " + delay + " " + SEG_COUNT);
-            ProcessBuilder pb = new ProcessBuilder("java", "-Duser.name=" + source, "-cp", cp,
-                    TestTeamIntegrationChild.class.getName(), source, Long.toString(PROCESS_SECONDS * 1000L),
-                    dir.getAbsolutePath(), repo, Integer.toString(delay), Integer.toString(SEG_COUNT));
+            ProcessBuilder pb = new ProcessBuilder(cmd);
             pb.inheritIO();
             p = pb.start();
         }

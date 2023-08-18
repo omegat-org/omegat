@@ -35,7 +35,6 @@ import java.util.concurrent.TimeoutException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
 import org.omegat.core.Core;
 import org.omegat.core.KnownException;
 import org.omegat.core.data.IProject;

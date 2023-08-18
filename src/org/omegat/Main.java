@@ -177,8 +177,10 @@ public final class Main {
             RuntimePreferences.setLocationSaveEnabled(false);
         }
 
-        Log.log(StringUtil.format("\n===================================================================\n"
-                + "{0} ({1}) Locale {2}", OStrings.getNameAndVersion(), new Date(), Locale.getDefault()));
+        Log.log(StringUtil.format(
+                "\n===================================================================\n"
+                        + "{0} ({1}) Locale {2}",
+                OStrings.getNameAndVersion(), new Date(), Locale.getDefault()));
         Log.logInfoRB("LOG_STARTUP_INFO", System.getProperty("java.vendor"),
                 System.getProperty("java.version"), System.getProperty("java.home"));
 

@@ -214,8 +214,7 @@ public class TMXReader2 {
 
         // log some details
         Log.logInfoRB("TMXR_INFO_CREATION_TOOL", getAttributeValue(element, "creationtool"));
-        Log.logInfoRB("TMXR_INFO_CREATION_TOOL_VERSION",
-                getAttributeValue(element, "creationtoolversion"));
+        Log.logInfoRB("TMXR_INFO_CREATION_TOOL_VERSION", getAttributeValue(element, "creationtoolversion"));
         Log.logInfoRB("TMXR_INFO_SEG_TYPE", getAttributeValue(element, "segtype"));
         Log.logInfoRB("TMXR_INFO_SOURCE_LANG", getAttributeValue(element, "srclang"));
 

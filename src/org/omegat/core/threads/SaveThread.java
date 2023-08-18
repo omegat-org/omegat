@@ -110,21 +110,24 @@ public class SaveThread extends Thread implements IAutoSave {
                         Core.getMainWindow().showStatusMessageRB("ST_PROJECT_AUTOSAVED",
                                 DateFormat.getTimeInstance(DateFormat.SHORT).format(new Date()));
                     } catch (TimeoutException ex) {
-                        Log.logWarningRB("AUTOSAVE_LOCK_ACQUISITION_TIMEOUT");
+                        Log.getLogEventBuilder(LOGGER.atWarn())
+                                .setLocMessage("AUTOSAVE_LOCK_ACQUISITION_TIMEOUT").log();
                     } catch (KnownException ex) {
                         Core.getMainWindow().showStatusMessageRB(ex.getMessage(), ex.getParams());
                     } catch (IRemoteRepository2.NetworkException ex) {
-                        Log.logWarningRB("TEAM_NETWORK_ERROR", ex.getMessage());
+                        Log.getLogEventBuilder(LOGGER.atWarn()).setLocMessage("TEAM_NETWORK_ERROR")
+                                .addArgument(ex.getMessage()).log();
                     } catch (OutOfMemoryError oome) {
                         // inform the user
                         long memory = Runtime.getRuntime().maxMemory() / 1024 / 1024;
-                        Log.logErrorRB("OUT_OF_MEMORY", memory);
-                        Log.log(oome);
+                        Log.getLogEventBuilder(LOGGER.atError()).setLocMessage("OUT_OF_MEMORY")
+                                .addArgument(memory).setCause(oome).log();
                         Core.getMainWindow().showErrorDialogRB("TF_ERROR", "OUT_OF_MEMORY", memory);
                         // Just quit, we can't help it anyway
                         System.exit(1);
                     } catch (Exception ex) {
-                        Log.logWarningRB("AUTOSAVE_GENERIC_ERROR", ex.getMessage());
+                        Log.getLogEventBuilder(LOGGER.atWarn()).setLocMessage("AUTOSAVE_GENERIC_ERROR")
+                                .addArgument(ex.getMessage()).log();
                     }
                     LOGGER.atDebug().log("Finish project save from SaveThread");
                 }

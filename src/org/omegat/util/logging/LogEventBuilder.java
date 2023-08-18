@@ -25,174 +25,22 @@
 
 package org.omegat.util.logging;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.function.Supplier;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import org.omegat.util.OStrings;
-import org.omegat.util.StringUtil;
-
 /**
- * Stream style root logger, which accepts JUL style format based on SLF4J.
+ * Decorator for SLF4J LoggingEventBulder.
+ *
  * @author Hiroshi Miura
  */
-public final class LogEventBuilder {
-    private static final Logger LOGGER = LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
-    private String message;
-    private String key;
-    private Throwable exception;
-    private List<Object> arguments;
-    private final org.slf4j.event.Level level;
-    private final boolean enabled;
+public interface LogEventBuilder {
 
-    private LogEventBuilder(org.slf4j.event.Level level) {
-        enabled = LOGGER.isEnabledForLevel(level);
-        this.level = level;
-    }
+    LogEventBuilder setMessage(String s);
 
-    /**
-     * convenience method to return LogMessageBuilder at info level.
-     *
-     * @return instance.
-     */
-    public static LogEventBuilder atInfo() {
-        return atLevel(org.slf4j.event.Level.INFO);
-    }
+    LogEventBuilder setLocMessage(String key);
 
-    /**
-     * convenience method to return LogMessageBuilder at warn level.
-     *
-     * @return instance.
-     */
-    public static LogEventBuilder atWarn() {
-        return atLevel(org.slf4j.event.Level.WARN);
-    }
+    LogEventBuilder addArguments(Object[] parameters);
 
-    /**
-     * convenience method to return LogMessageBuilder at error level.
-     *
-     * @return instance.
-     */
-    public static LogEventBuilder atError() {
-        return atLevel(org.slf4j.event.Level.ERROR);
-    }
+    LogEventBuilder setCause(Throwable ex);
 
-    /**
-     * return LogMessageBuilder with a specified log level.
-     *
-     * @param level SLF4J log level.
-     * @return instance.
-     */
-    public static LogEventBuilder atLevel(org.slf4j.event.Level level) {
-        return new LogEventBuilder(level);
-    }
+    LogEventBuilder addArgument(Object parameter);
 
-    /**
-     * accept raw message.
-     *
-     * @param message text.
-     * @return this
-     */
-    public LogEventBuilder setMessage(String message) {
-        this.message = message;
-        this.key = null;
-        return this;
-    }
-
-    /**
-     * accept localize message key.
-     *
-     * @param key key in bundle.
-     * @return this
-     */
-    public LogEventBuilder setLocMessage(String key) {
-        this.key = key;
-        return this;
-    }
-
-    /**
-     * accept throwable.
-     *
-     * @param cause throwable object.
-     * @return this
-     */
-    public LogEventBuilder setCause(Throwable cause) {
-        exception = cause;
-        return this;
-    }
-
-    private List<Object> getNonNullArguments() {
-        if (arguments == null) {
-            arguments = new ArrayList<>(3);
-        }
-        return arguments;
-    }
-
-    private Object[] getArgumentArray() {
-        if (arguments == null) {
-            return null;
-        }
-        return arguments.toArray();
-    }
-
-    /**
-     * Accept single argument.
-     *
-     * @param arg argument object.
-     * @return this
-     */
-    public LogEventBuilder addArgument(Object arg) {
-        getNonNullArguments().add(arg);
-        return this;
-    }
-
-    /**
-     * accept supplier.
-     *
-     * @param objectSupplier supplier of paramter.
-     * @return this
-     */
-    public LogEventBuilder addArgument(Supplier<Object> objectSupplier) {
-        if (enabled) {
-            addArgument(objectSupplier.get());
-        }
-        return this;
-    }
-
-    /**
-     * accept varargs.
-     *
-     * @param parameters parameters as var args.
-     * @return this
-     */
-    public LogEventBuilder addArguments(Object[] parameters) {
-        if (enabled) {
-            getNonNullArguments().addAll(Arrays.asList(parameters));
-        }
-        return this;
-    }
-
-    /**
-     * publish log message.
-     */
-    public void log() {
-        if (enabled) {
-            if (key != null) {
-                message = StringUtil.format(OStrings.getString(key), getArgumentArray()) + " (" + key + ")";
-            } else if (message != null) {
-                message = StringUtil.format(message, getArgumentArray());
-            } else {
-                return;
-            }
-            if (exception == null) {
-                LOGGER.atLevel(level).log(message);
-            } else {
-                LOGGER.atLevel(level).log(message, exception);
-            }
-        }
-    }
+    void log();
 }

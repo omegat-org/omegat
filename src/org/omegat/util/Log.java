@@ -41,9 +41,12 @@ import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.LogRecord;
 
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.slf4j.spi.LoggingEventBuilder;
 
 import org.omegat.util.logging.LogEventBuilder;
+import org.omegat.util.logging.LogEventBuilderImpl;
 import org.omegat.util.logging.OmegaTFileHandler;
 
 /**
@@ -54,6 +57,8 @@ import org.omegat.util.logging.OmegaTFileHandler;
  * @author Hiroshi Miura
  */
 public final class Log {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
 
     private Log() {
     }
@@ -89,7 +94,7 @@ public final class Log {
             try (InputStream in = Log.class.getResourceAsStream("/org/omegat/logger.properties")) {
                 init(in);
             } catch (IOException ex) {
-                LogEventBuilder.atError().setMessage("Can't open file for logging").addArgument(ex).log();
+                LOGGER.atError().setMessage("Can't open file for logging").setCause(ex).log();
             }
         }
     }
@@ -192,11 +197,15 @@ public final class Log {
         }
     }
 
+    public static LogEventBuilder getLogEventBuilder(final LoggingEventBuilder builder) {
+        return new LogEventBuilderImpl(builder);
+    }
+
     /**
      * Logs what otherwise would go to System.out
      */
     public static void log(String s) {
-        LogEventBuilder.atInfo().setMessage(s).log();
+        getLogEventBuilder(LOGGER.atInfo()).setMessage(s).log();
     }
 
     /**
@@ -209,20 +218,18 @@ public final class Log {
      *            StaticUtils.format.
      */
     public static void logRB(String key, Object... parameters) {
-        LogEventBuilder.atInfo().setLocMessage(key).addArguments(parameters).log();
+        getLogEventBuilder(LOGGER.atInfo()).setLocMessage(key).addArguments(parameters).log();
     }
 
     /**
-     * Logs an Exception or Error.
-     *
-     * To the log are written: - The class name of the Exception or Error - The
-     * message, if any - The stack trace
+     * Logs an Exception or Error. To the log are written: - The class name of
+     * the Exception or Error - The message, if any - The stack trace
      *
      * @param throwable
      *            The exception or error to log
      */
     public static void log(Throwable throwable) {
-        LogEventBuilder.atError().setMessage("").setCause(throwable).log();
+        LOGGER.atError().setMessage("").setCause(throwable).log();
     }
 
     /**
@@ -240,7 +247,7 @@ public final class Log {
      *            StaticUtils.format.
      */
     public static void logWarningRB(String key, Object... parameters) {
-        LogEventBuilder.atWarn().setLocMessage(key).addArguments(parameters).log();
+        getLogEventBuilder(LOGGER.atWarn()).setLocMessage(key).addArguments(parameters).log();
     }
 
     /**
@@ -258,7 +265,7 @@ public final class Log {
      *            StaticUtils.format.
      */
     public static void logInfoRB(String key, Object... parameters) {
-        LogEventBuilder.atInfo().setLocMessage(key).addArguments(parameters).log();
+        getLogEventBuilder(LOGGER.atInfo()).setLocMessage(key).addArguments(parameters).log();
     }
 
     /**
@@ -276,7 +283,7 @@ public final class Log {
      *            StaticUtils.format.
      */
     public static void logErrorRB(String key, Object... parameters) {
-        LogEventBuilder.atError().setLocMessage(key).addArguments(parameters).log();
+        getLogEventBuilder(LOGGER.atError()).setLocMessage(key).addArguments(parameters).log();
     }
 
     /**
@@ -296,7 +303,7 @@ public final class Log {
      *            StaticUtils.format.
      */
     public static void logErrorRB(Throwable ex, String key, Object... parameters) {
-        LogEventBuilder.atError().setLocMessage(key).addArguments(parameters).setCause(ex).log();
+        getLogEventBuilder(LOGGER.atError()).setLocMessage(key).addArguments(parameters).setCause(ex).log();
     }
 
     /**
@@ -328,7 +335,7 @@ public final class Log {
      *            Parameter for the error message.
      */
     public static void logInfoRB(String key, Object parameter) {
-        LogEventBuilder.atInfo().setLocMessage(key).addArgument(parameter).log();
+        getLogEventBuilder(LOGGER.atInfo()).setLocMessage(key).addArgument(parameter).log();
     }
 
     /**
@@ -339,7 +346,7 @@ public final class Log {
      *            The key of the error message in the resource bundle
      */
     public static void logInfoRB(String key) {
-        LogEventBuilder.atInfo().setLocMessage(key).log();
+        getLogEventBuilder(LOGGER.atInfo()).setLocMessage(key).log();
     }
 
     /**
@@ -352,7 +359,7 @@ public final class Log {
      *            Parameter for the error message.
      */
     public static void logWarningRB(String key, Object parameter) {
-        LogEventBuilder.atWarn().setLocMessage(key).addArgument(parameter).log();
+        getLogEventBuilder(LOGGER.atWarn()).setLocMessage(key).addArgument(parameter).log();
     }
 
     /**
@@ -360,6 +367,6 @@ public final class Log {
      * bundle).
      */
     public static void logErrorRB(String key, Object parameter) {
-        LogEventBuilder.atError().setLocMessage(key).addArgument(parameter).log();
+        getLogEventBuilder(LOGGER.atError()).setLocMessage(key).addArgument(parameter).log();
     }
 }

@@ -97,6 +97,9 @@ import gen.core.project.RepositoryDefinition;
  */
 public class GITRemoteRepository2 implements IRemoteRepository2 {
     private static final Logger LOGGER = LoggerFactory.getLogger(GITRemoteRepository2.class);
+    private static final String GIT_START_MSG = "Git '{}' execution start";
+    private static final String GIT_FINISH_MSG = "Git '{}' execution finished successfully";
+    private static final String GIT_NO_CHANGES_MSG = "Git '{}' did nothing because there were no changes";
 
     // allow override default remote name and branch name.
     protected static final String DEFAULT_LOCAL_BRANCH = "master";
@@ -172,7 +175,7 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
                     git.submoduleUpdate().setTimeout(TIMEOUT).call();
                 }
             } else {
-                Log.logInfoRB("GIT_START", "clone");
+                LOGGER.atDebug().setMessage(GIT_START_MSG).addArgument("clone").log();
                 CloneCommand c = Git.cloneRepository();
                 c.setURI(repositoryURL);
                 c.setDirectory(localDirectory);
@@ -197,7 +200,7 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
                     git.submoduleUpdate().setTimeout(TIMEOUT).call();
                 }
                 configRepo();
-                Log.logInfoRB("GIT_FINISH", "clone");
+                LOGGER.atDebug().setMessage(GIT_FINISH_MSG).addArgument("clone").log();
             }
 
             // cleanup repository
@@ -205,7 +208,7 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
                 git.reset().setMode(ResetType.HARD).call();
             }
             configRepo();
-            Log.logInfoRB("GIT_FINISH", "clone");
+            LOGGER.atDebug().setMessage(GIT_FINISH_MSG).addArgument("clone").log();
         } finally {
             client.stop();
         }
@@ -297,7 +300,7 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
                 // TODO fetch
                 git.fetch().setRemote(REMOTE).setTimeout(TIMEOUT).call();
             }
-            LOGGER.atDebug().log("GIT switchToVersion {} ", version);
+            LOGGER.atTrace().log("GIT switchToVersion {} ", version);
             git.reset().setMode(ResetType.HARD).call();
             git.checkout().setName(version).call();
             git.branchDelete().setForce(true).setBranchNames(defaultBranch).call();
@@ -318,10 +321,10 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
      */
     @Override
     public void addForCommit(String path) throws Exception {
-        Log.logInfoRB("GIT_START", "addForCommit");
+        LOGGER.atDebug().setMessage(GIT_START_MSG).addArgument("addForCommit").log();
         try (Git git = new Git(repository)) {
             git.add().addFilepattern(path).call();
-            Log.logInfoRB("GIT_FINISH", "addForCommit");
+            LOGGER.atDebug().setMessage(GIT_FINISH_MSG).addArgument("addForCommit").log();
         } catch (Exception ex) {
             Log.logErrorRB("GIT_ERROR", "addForCommit", ex.getMessage());
             throw ex;
@@ -339,10 +342,10 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
      */
     @Override
     public void addForDeletion(String path) throws Exception {
-        Log.logInfoRB("GIT_START", "addForDelete");
+        LOGGER.atDebug().setMessage(GIT_START_MSG).addArgument("addForDelete").log();
         try (Git git = new Git(repository)) {
             git.rm().addFilepattern(path).call();
-            Log.logInfoRB("GIT_FINISH", "addForDelete");
+            LOGGER.atDebug().setMessage(GIT_FINISH_MSG).addArgument("addForDelete").log();
         } catch (Exception ex) {
             Log.logErrorRB("GIT_ERROR", "addForDelete", ex.getMessage());
             throw ex;
@@ -456,10 +459,10 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
         }
         if (indexIsEmpty(DirCache.read(repository))) {
             // Nothing was actually added to the index so we can just return.
-            Log.logInfoRB("GIT_NO_CHANGES", "upload");
+            LOGGER.atDebug().setMessage(GIT_NO_CHANGES_MSG).addArgument("upload").log();
             return null;
         }
-        Log.logInfoRB("GIT_START", "upload");
+        LOGGER.atDebug().setMessage(GIT_START_MSG).addArgument("upload").log();
         try (Git git = new Git(repository)) {
             CommitCommand commitCommand = git.commit();
             commitCommand.setMessage(comment);
@@ -477,8 +480,8 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
             } else {
                 result = commit.getName();
             }
-            LOGGER.atDebug().log("GIT committed into new version {} ", result);
-            Log.logInfoRB("GIT_FINISH", "upload");
+            LOGGER.atTrace().log("GIT committed into new version {} ", result);
+            LOGGER.atDebug().setMessage(GIT_FINISH_MSG).addArgument("upload").log();
             return result;
         } catch (Exception ex) {
             Log.logErrorRB("GIT_ERROR", "upload", ex.getMessage());

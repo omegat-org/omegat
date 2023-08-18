@@ -34,20 +34,16 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Properties;
-import java.util.function.Supplier;
 import java.util.logging.Formatter;
 import java.util.logging.Handler;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.LogRecord;
 
-import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import org.omegat.util.logging.LogEventBuilder;
 import org.omegat.util.logging.OmegaTFileHandler;
 
 /**
@@ -93,7 +89,7 @@ public final class Log {
             try (InputStream in = Log.class.getResourceAsStream("/org/omegat/logger.properties")) {
                 init(in);
             } catch (IOException ex) {
-                LogMessageBuilder.atError().setMessage("Can't open file for logging").addArgument(ex).log();
+                LogEventBuilder.atError().setMessage("Can't open file for logging").addArgument(ex).log();
             }
         }
     }
@@ -200,7 +196,7 @@ public final class Log {
      * Logs what otherwise would go to System.out
      */
     public static void log(String s) {
-        LogMessageBuilder.atInfo().setMessage(s).log();
+        LogEventBuilder.atInfo().setMessage(s).log();
     }
 
     /**
@@ -213,7 +209,7 @@ public final class Log {
      *            StaticUtils.format.
      */
     public static void logRB(String key, Object... parameters) {
-        LogMessageBuilder.atInfo().setLocMessage(key).addArguments(parameters).log();
+        LogEventBuilder.atInfo().setLocMessage(key).addArguments(parameters).log();
     }
 
     /**
@@ -226,7 +222,7 @@ public final class Log {
      *            The exception or error to log
      */
     public static void log(Throwable throwable) {
-        LogMessageBuilder.atError().setMessage("").setThrowable(throwable).log();
+        LogEventBuilder.atError().setMessage("").setThrowable(throwable).log();
     }
 
     /**
@@ -244,7 +240,7 @@ public final class Log {
      *            StaticUtils.format.
      */
     public static void logWarningRB(String key, Object... parameters) {
-        LogMessageBuilder.atWarn().setLocMessage(key).addArguments(parameters).log();
+        LogEventBuilder.atWarn().setLocMessage(key).addArguments(parameters).log();
     }
 
     /**
@@ -262,7 +258,7 @@ public final class Log {
      *            StaticUtils.format.
      */
     public static void logInfoRB(String key, Object... parameters) {
-        LogMessageBuilder.atInfo().setLocMessage(key).addArguments(parameters).log();
+        LogEventBuilder.atInfo().setLocMessage(key).addArguments(parameters).log();
     }
 
     /**
@@ -280,7 +276,7 @@ public final class Log {
      *            StaticUtils.format.
      */
     public static void logErrorRB(String key, Object... parameters) {
-        LogMessageBuilder.atError().setLocMessage(key).addArguments(parameters).log();
+        LogEventBuilder.atError().setLocMessage(key).addArguments(parameters).log();
     }
 
     /**
@@ -300,7 +296,7 @@ public final class Log {
      *            StaticUtils.format.
      */
     public static void logErrorRB(Throwable ex, String key, Object... parameters) {
-        LogMessageBuilder.atError().setLocMessage(key).addArguments(parameters).setThrowable(ex).log();
+        LogEventBuilder.atError().setLocMessage(key).addArguments(parameters).setThrowable(ex).log();
     }
 
     /**
@@ -332,7 +328,7 @@ public final class Log {
      *            Parameter for the error message.
      */
     public static void logInfoRB(String key, Object parameter) {
-        LogMessageBuilder.atInfo().setLocMessage(key).addArgument(parameter).log();
+        LogEventBuilder.atInfo().setLocMessage(key).addArgument(parameter).log();
     }
 
     /**
@@ -343,7 +339,7 @@ public final class Log {
      *            The key of the error message in the resource bundle
      */
     public static void logInfoRB(String key) {
-        LogMessageBuilder.atInfo().setLocMessage(key).log();
+        LogEventBuilder.atInfo().setLocMessage(key).log();
     }
 
     /**
@@ -356,7 +352,7 @@ public final class Log {
      *            Parameter for the error message.
      */
     public static void logWarningRB(String key, Object parameter) {
-        LogMessageBuilder.atWarn().setLocMessage(key).addArgument(parameter).log();
+        LogEventBuilder.atWarn().setLocMessage(key).addArgument(parameter).log();
     }
 
     /**
@@ -364,181 +360,6 @@ public final class Log {
      * bundle).
      */
     public static void logErrorRB(String key, Object parameter) {
-        LogMessageBuilder.atError().setLocMessage(key).addArgument(parameter).log();
-    }
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
-
-    /**
-     * Stream style root logger, which accepts JUL style format based on SLF4J.
-     */
-    public static final class LogMessageBuilder {
-        private String message;
-        private String key;
-        private Throwable exception;
-        private List<Object> arguments;
-        private final org.slf4j.event.Level level;
-        private final boolean enabled;
-
-        private LogMessageBuilder(org.slf4j.event.Level level) {
-            enabled = LOGGER.isEnabledForLevel(level);
-            this.level = level;
-        }
-
-        /**
-         * convenience method to return LogMessageBuilder at info level.
-         * 
-         * @return instance.
-         */
-        public static LogMessageBuilder atInfo() {
-            return atLevel(org.slf4j.event.Level.INFO);
-        }
-
-        /**
-         * convenience method to return LogMessageBuilder at warn level.
-         * 
-         * @return instance.
-         */
-        public static LogMessageBuilder atWarn() {
-            return atLevel(org.slf4j.event.Level.WARN);
-        }
-
-        /**
-         * convenience method to return LogMessageBuilder at error level.
-         * 
-         * @return instance.
-         */
-        public static LogMessageBuilder atError() {
-            return atLevel(org.slf4j.event.Level.ERROR);
-        }
-
-        /**
-         * return LogMessageBuilder with a specified log level.
-         * 
-         * @param level
-         *            SLF4J log level.
-         * @return instance.
-         */
-        public static LogMessageBuilder atLevel(org.slf4j.event.Level level) {
-            return new LogMessageBuilder(level);
-        }
-
-        /**
-         * accept raw message.
-         * 
-         * @param message
-         *            text.
-         * @return this
-         */
-        public LogMessageBuilder setMessage(String message) {
-            this.message = message;
-            this.key = null;
-            return this;
-        }
-
-        /**
-         * accept localize message key.
-         * 
-         * @param key
-         *            key in bundle.
-         * @return this
-         */
-        public LogMessageBuilder setLocMessage(String key) {
-            this.key = key;
-            return this;
-        }
-
-        /**
-         * accept throwable.
-         * 
-         * @param t
-         *            throwable object.
-         * @return this
-         */
-        public LogMessageBuilder setThrowable(Throwable t) {
-            exception = t;
-            return this;
-        }
-
-        private List<Object> getNonNullArguments() {
-            if (arguments == null) {
-                arguments = new ArrayList<>(3);
-            }
-            return arguments;
-        }
-
-        private Object[] getArgumentArray() {
-            if (arguments == null) {
-                return null;
-            }
-            return arguments.toArray();
-        }
-
-        /**
-         * Accept single argument.
-         * 
-         * @param arg
-         *            argument object.
-         * @return this
-         */
-        public LogMessageBuilder addArgument(Object arg) {
-            getNonNullArguments().add(arg);
-            return this;
-        }
-
-        /**
-         * accept supplier.
-         * 
-         * @param supplier
-         *            supplier of paramter.
-         * @return this
-         */
-        public LogMessageBuilder addArgument(Supplier<?> supplier) {
-            if (enabled) {
-                addArgument(supplier.get());
-            }
-            return this;
-        }
-
-        /**
-         * accept varargs.
-         * 
-         * @param parameters
-         *            parameters as var args.
-         * @return this
-         */
-        public LogMessageBuilder addArguments(Object[] parameters) {
-            if (enabled) {
-                getNonNullArguments().addAll(Arrays.asList(parameters));
-            }
-            return this;
-        }
-
-        /**
-         * publish log message.
-         */
-        public void log() {
-            if (enabled) {
-                if (key != null) {
-                    message = OStrings.getString(key);
-                }
-                if (arguments != null) {
-                    message = StringUtil.format(message, getArgumentArray());
-                }
-                if (key != null) {
-                    if (exception == null) {
-                        LOGGER.atLevel(level).log(message + " (" + key + ")");
-                    } else {
-                        LOGGER.atLevel(level).log(message + " (" + key + ")", exception);
-                    }
-                } else {
-                    if (exception == null) {
-                        LOGGER.atLevel(level).log(message);
-                    } else {
-                        LOGGER.atLevel(level).log(message, exception);
-                    }
-                }
-            }
-        }
+        LogEventBuilder.atError().setLocMessage(key).addArgument(parameter).log();
     }
 }

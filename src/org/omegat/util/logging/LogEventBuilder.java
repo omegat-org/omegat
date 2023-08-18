@@ -117,11 +117,11 @@ public final class LogEventBuilder {
     /**
      * accept throwable.
      *
-     * @param t throwable object.
+     * @param cause throwable object.
      * @return this
      */
-    public LogEventBuilder setThrowable(Throwable t) {
-        exception = t;
+    public LogEventBuilder setCause(Throwable cause) {
+        exception = cause;
         return this;
     }
 
@@ -153,12 +153,12 @@ public final class LogEventBuilder {
     /**
      * accept supplier.
      *
-     * @param supplier supplier of paramter.
+     * @param objectSupplier supplier of paramter.
      * @return this
      */
-    public LogEventBuilder addArgument(Supplier<?> supplier) {
+    public LogEventBuilder addArgument(Supplier<Object> objectSupplier) {
         if (enabled) {
-            addArgument(supplier.get());
+            addArgument(objectSupplier.get());
         }
         return this;
     }

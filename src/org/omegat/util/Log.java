@@ -222,7 +222,7 @@ public final class Log {
      *            The exception or error to log
      */
     public static void log(Throwable throwable) {
-        LogEventBuilder.atError().setMessage("").setThrowable(throwable).log();
+        LogEventBuilder.atError().setMessage("").setCause(throwable).log();
     }
 
     /**
@@ -296,7 +296,7 @@ public final class Log {
      *            StaticUtils.format.
      */
     public static void logErrorRB(Throwable ex, String key, Object... parameters) {
-        LogEventBuilder.atError().setLocMessage(key).addArguments(parameters).setThrowable(ex).log();
+        LogEventBuilder.atError().setLocMessage(key).addArguments(parameters).setCause(ex).log();
     }
 
     /**

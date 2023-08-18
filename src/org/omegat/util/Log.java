@@ -6,6 +6,7 @@
  Copyright (C) 2000-2006 Keith Godfrey, Maxym Mykhalchuk, and Henry Pijffers
                2008 Alex Buloichik
                2013 Didier Briel
+               2023 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -33,6 +34,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Properties;
 import java.util.function.Supplier;
 import java.util.logging.Formatter;
@@ -51,17 +55,14 @@ import org.omegat.util.logging.OmegaTFileHandler;
  *
  * @author Henry Pijffers (henry.pijffers@saxnot.com)
  * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Hiroshi Miura
  */
 public final class Log {
 
     private Log() {
     }
 
-    private static final Logger LOGGER;
-
     static {
-        LOGGER = LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
-
         boolean loaded = false;
 
         String customLogConfig = System.getProperty("java.util.logging.config.file");
@@ -92,7 +93,7 @@ public final class Log {
             try (InputStream in = Log.class.getResourceAsStream("/org/omegat/logger.properties")) {
                 init(in);
             } catch (IOException ex) {
-                LOGGER.atError().log("Can't open file for logging", ex);
+                LogMessageBuilder.atError().setMessage("Can't open file for logging").addArgument(ex).log();
             }
         }
     }
@@ -157,15 +158,6 @@ public final class Log {
      * @return the filename of the log, or an empty string
      */
     public static String getLogFileName() {
-        return getJULFileName();
-    }
-
-    /**
-     * Compute the filename of the log file from JUL Log manager.
-     *
-     * @return the filename of the log, or an empty string
-     */
-    private static String getJULFileName() {
         java.util.logging.Logger rootLogger = LogManager.getLogManager().getLogger("");
         for (Handler handler : rootLogger.getHandlers()) {
             if (handler instanceof OmegaTFileHandler) {
@@ -208,7 +200,7 @@ public final class Log {
      * Logs what otherwise would go to System.out
      */
     public static void log(String s) {
-        LOGGER.atInfo().log(s);
+        LogMessageBuilder.atInfo().setMessage(s).log();
     }
 
     /**
@@ -221,7 +213,7 @@ public final class Log {
      *            StaticUtils.format.
      */
     public static void logRB(String key, Object... parameters) {
-        LOGGER.atInfo().log(getMessage(key, parameters));
+        LogMessageBuilder.atInfo().setLocMessage(key).addArguments(parameters).log();
     }
 
     /**
@@ -234,7 +226,7 @@ public final class Log {
      *            The exception or error to log
      */
     public static void log(Throwable throwable) {
-        LOGGER.atError().log("", throwable);
+        LogMessageBuilder.atError().setMessage("").setThrowable(throwable).log();
     }
 
     /**
@@ -252,7 +244,7 @@ public final class Log {
      *            StaticUtils.format.
      */
     public static void logWarningRB(String key, Object... parameters) {
-        LOGGER.atWarn().log(getMessage(key, parameters));
+        LogMessageBuilder.atWarn().setLocMessage(key).addArguments(parameters).log();
     }
 
     /**
@@ -270,7 +262,7 @@ public final class Log {
      *            StaticUtils.format.
      */
     public static void logInfoRB(String key, Object... parameters) {
-        LOGGER.atInfo().log(getMessage(key, parameters));
+        LogMessageBuilder.atInfo().setLocMessage(key).addArguments(parameters).log();
     }
 
     /**
@@ -288,7 +280,7 @@ public final class Log {
      *            StaticUtils.format.
      */
     public static void logErrorRB(String key, Object... parameters) {
-        LOGGER.atError().log(getMessage(key, parameters));
+        LogMessageBuilder.atError().setLocMessage(key).addArguments(parameters).log();
     }
 
     /**
@@ -308,7 +300,7 @@ public final class Log {
      *            StaticUtils.format.
      */
     public static void logErrorRB(Throwable ex, String key, Object... parameters) {
-        LOGGER.atError().log(getMessage(key, parameters), ex);
+        LogMessageBuilder.atError().setLocMessage(key).addArguments(parameters).setThrowable(ex).log();
     }
 
     /**
@@ -330,14 +322,6 @@ public final class Log {
         }
     }
 
-    public static String getMessage(String key) {
-        return OStrings.getString(key) + " (" + key + ")";
-    }
-
-    public static String getMessage(String key, Object... args) {
-        return OStrings.getString(key, args) + " (" + key + ")";
-    }
-
     /**
      * Writes an info message to the log (to be retrieved from the resource
      * bundle).
@@ -348,7 +332,7 @@ public final class Log {
      *            Parameter for the error message.
      */
     public static void logInfoRB(String key, Object parameter) {
-        Log.atInfo().setLocMessage(key).addArgument(parameter).log();
+        LogMessageBuilder.atInfo().setLocMessage(key).addArgument(parameter).log();
     }
 
     /**
@@ -359,7 +343,7 @@ public final class Log {
      *            The key of the error message in the resource bundle
      */
     public static void logInfoRB(String key) {
-        Log.atInfo().setLocMessage(key).log();
+        LogMessageBuilder.atInfo().setLocMessage(key).log();
     }
 
     /**
@@ -372,7 +356,7 @@ public final class Log {
      *            Parameter for the error message.
      */
     public static void logWarningRB(String key, Object parameter) {
-        Log.atWarn().setLocMessage(key).addArgument(parameter).log();
+        LogMessageBuilder.atWarn().setLocMessage(key).addArgument(parameter).log();
     }
 
     /**
@@ -380,67 +364,167 @@ public final class Log {
      * bundle).
      */
     public static void logErrorRB(String key, Object parameter) {
-        Log.atError().setLocMessage(key).addArgument(parameter).log();
+        LogMessageBuilder.atError().setLocMessage(key).addArgument(parameter).log();
     }
 
-    private static LogMessageBuilder atInfo() {
-        return new LogMessageBuilder(org.slf4j.event.Level.INFO);
-    }
+    private static final Logger LOGGER = LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
 
-    private static LogMessageBuilder atWarn() {
-        return new LogMessageBuilder(org.slf4j.event.Level.WARN);
-    }
-
-    private static LogMessageBuilder atError() {
-        return new LogMessageBuilder(org.slf4j.event.Level.ERROR);
-    }
-
-    public static class LogMessageBuilder {
+    /**
+     * Stream style root logger, which accepts JUL style format based on SLF4J.
+     */
+    public static final class LogMessageBuilder {
         private String message;
         private String key;
         private Throwable exception;
+        private List<Object> arguments;
         private final org.slf4j.event.Level level;
         private final boolean enabled;
-        private int counter = 0;
 
-        public LogMessageBuilder(org.slf4j.event.Level level) {
+        private LogMessageBuilder(org.slf4j.event.Level level) {
             enabled = LOGGER.isEnabledForLevel(level);
             this.level = level;
         }
 
+        /**
+         * convenience method to return LogMessageBuilder at info level.
+         * 
+         * @return instance.
+         */
+        public static LogMessageBuilder atInfo() {
+            return atLevel(org.slf4j.event.Level.INFO);
+        }
+
+        /**
+         * convenience method to return LogMessageBuilder at warn level.
+         * 
+         * @return instance.
+         */
+        public static LogMessageBuilder atWarn() {
+            return atLevel(org.slf4j.event.Level.WARN);
+        }
+
+        /**
+         * convenience method to return LogMessageBuilder at error level.
+         * 
+         * @return instance.
+         */
+        public static LogMessageBuilder atError() {
+            return atLevel(org.slf4j.event.Level.ERROR);
+        }
+
+        /**
+         * return LogMessageBuilder with a specified log level.
+         * 
+         * @param level
+         *            SLF4J log level.
+         * @return instance.
+         */
+        public static LogMessageBuilder atLevel(org.slf4j.event.Level level) {
+            return new LogMessageBuilder(level);
+        }
+
+        /**
+         * accept raw message.
+         * 
+         * @param message
+         *            text.
+         * @return this
+         */
         public LogMessageBuilder setMessage(String message) {
             this.message = message;
+            this.key = null;
             return this;
         }
 
+        /**
+         * accept localize message key.
+         * 
+         * @param key
+         *            key in bundle.
+         * @return this
+         */
         public LogMessageBuilder setLocMessage(String key) {
             this.key = key;
-            if (enabled) {
-                message = OStrings.getString(key);
-            }
             return this;
         }
 
+        /**
+         * accept throwable.
+         * 
+         * @param t
+         *            throwable object.
+         * @return this
+         */
+        public LogMessageBuilder setThrowable(Throwable t) {
+            exception = t;
+            return this;
+        }
+
+        private List<Object> getNonNullArguments() {
+            if (arguments == null) {
+                arguments = new ArrayList<>(3);
+            }
+            return arguments;
+        }
+
+        private Object[] getArgumentArray() {
+            if (arguments == null) {
+                return null;
+            }
+            return arguments.toArray();
+        }
+
+        /**
+         * Accept single argument.
+         * 
+         * @param arg
+         *            argument object.
+         * @return this
+         */
         public LogMessageBuilder addArgument(Object arg) {
-            if (arg instanceof Throwable) {
-                exception = (Throwable) arg;
-            } else if (enabled) {
-                String placeholder = "{" + counter + "}";
-                message = message.replace(placeholder, String.valueOf(arg));
-                counter++;
-            }
+            getNonNullArguments().add(arg);
             return this;
         }
 
+        /**
+         * accept supplier.
+         * 
+         * @param supplier
+         *            supplier of paramter.
+         * @return this
+         */
         public LogMessageBuilder addArgument(Supplier<?> supplier) {
             if (enabled) {
-                addArgument(String.valueOf(supplier.get()));
+                addArgument(supplier.get());
             }
             return this;
         }
 
+        /**
+         * accept varargs.
+         * 
+         * @param parameters
+         *            parameters as var args.
+         * @return this
+         */
+        public LogMessageBuilder addArguments(Object[] parameters) {
+            if (enabled) {
+                getNonNullArguments().addAll(Arrays.asList(parameters));
+            }
+            return this;
+        }
+
+        /**
+         * publish log message.
+         */
         public void log() {
             if (enabled) {
+                if (key != null) {
+                    message = OStrings.getString(key);
+                }
+                if (arguments != null) {
+                    message = StringUtil.format(message, getArgumentArray());
+                }
                 if (key != null) {
                     if (exception == null) {
                         LOGGER.atLevel(level).log(message + " (" + key + ")");

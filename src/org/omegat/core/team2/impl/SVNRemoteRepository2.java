@@ -71,6 +71,8 @@ import gen.core.project.RepositoryDefinition;
  */
 public class SVNRemoteRepository2 implements IRemoteRepository2 {
     private static final Logger LOGGER = LoggerFactory.getLogger(SVNRemoteRepository2.class);
+    private static final String SVN_START_MSG = "SVN '{}' execution start";
+    private static final String SVN_FINISH_MSG = "SVN '{}' execution finished successfully";
 
     // System property to indicate backend.
     // {@see
@@ -125,7 +127,7 @@ public class SVNRemoteRepository2 implements IRemoteRepository2 {
             return null;
         }
         final SVNInfo info = ourClientManager.getWCClient().doInfo(f, SVNRevision.BASE);
-        LOGGER.atDebug().setMessage("SVN committed revision for file {} is {}").addArgument(file)
+        LOGGER.atTrace().setMessage("SVN committed revision for file {} is {}").addArgument(file)
                 .addArgument(() -> info.getCommittedRevision().getNumber()).log();
 
         return Long.toString(info.getCommittedRevision().getNumber());
@@ -133,7 +135,8 @@ public class SVNRemoteRepository2 implements IRemoteRepository2 {
 
     @Override
     public void switchToVersion(String version) throws Exception {
-        Log.logInfoRB("SVN_START", "checkout to " + version);
+        LOGGER.atDebug().log(SVN_START_MSG, "switchToVersion");
+        LOGGER.atTrace().log("checkout {}", version);
 
         SVNURL url = SVNURL.parseURIEncoded(SVNEncodingUtil.autoURIEncode(config.getUrl()));
         SVNRevision toRev;
@@ -146,7 +149,7 @@ public class SVNRemoteRepository2 implements IRemoteRepository2 {
         try {
             ourClientManager.getUpdateClient().doCheckout(url, baseDirectory, SVNRevision.HEAD, toRev,
                     SVNDepth.INFINITY, false);
-            Log.logInfoRB("SVN_FINISH", "checkout");
+            LOGGER.atDebug().log(SVN_FINISH_MSG, "checkout");
         } catch (Exception ex) {
             Log.logErrorRB("SVN_ERROR", "checkout", ex.getMessage());
             checkNetworkException(ex);
@@ -238,18 +241,18 @@ public class SVNRemoteRepository2 implements IRemoteRepository2 {
 
     @Override
     public String commit(String[] onVersions, String comment) throws Exception {
-        Log.logInfoRB("SVN_START", "commit");
+        LOGGER.atDebug().log(SVN_START_MSG, "commit");
         File[] forCommit = new File[] { baseDirectory };
 
         try {
             SVNCommitInfo info = ourClientManager.getCommitClient().doCommit(forCommit, false, comment, null,
                     null, false, false, SVNDepth.INFINITY);
-            LOGGER.atDebug().log("SVN committed into new revision {}", info.getNewRevision());
+            LOGGER.atTrace().log("SVN committed into new revision {}", info.getNewRevision());
             if (info.getNewRevision() < 0) {
                 // empty commit - file was not changed
                 info = new SVNCommitInfo(Long.parseLong(getFileVersion("")), null, null, null);
             }
-            Log.logInfoRB("SVN_FINISH", "commit");
+            LOGGER.atDebug().log(SVN_FINISH_MSG, "commit");
             return Long.toString(info.getNewRevision());
         } catch (SVNException ex) {
             if (Arrays.asList(SVNErrorCode.FS_TXN_OUT_OF_DATE, SVNErrorCode.WC_NOT_UP_TO_DATE,

@@ -25,6 +25,8 @@
 
 package org.omegat.util.logging;
 
+import java.util.function.Supplier;
+
 /**
  * Decorator for SLF4J LoggingEventBulder.
  *
@@ -32,15 +34,63 @@ package org.omegat.util.logging;
  */
 public interface LogEventBuilder {
 
-    LogEventBuilder setMessage(String s);
+    /**
+     * Sets the message of the logging event.
+     *
+     * @param message
+     *            text.
+     * @return this
+     */
+    LogEventBuilder setMessage(String message);
 
+    /**
+     * accept a localize message key.
+     *
+     * @param key
+     *            key in a bundle.
+     * @return this
+     */
     LogEventBuilder setLocMessage(String key);
 
+    /**
+     * accept varargs.
+     *
+     * @param parameters
+     *            parameters as var args.
+     * @return this
+     */
     LogEventBuilder addArguments(Object[] parameters);
 
-    LogEventBuilder setCause(Throwable ex);
+    /**
+     * Set the cause for the logging event being built.
+     * 
+     * @param cause
+     *            a throwable
+     * @return a LogEventBuilder, usually <b>this</b>.
+     */
+    LogEventBuilder setCause(Throwable cause);
 
-    LogEventBuilder addArgument(Object parameter);
+    /**
+     * Add an argument to the event being built.
+     *
+     * @param p
+     *            an Object to add.
+     * @return a LogEventBuilder, usually <b>this</b>.
+     */
+    LogEventBuilder addArgument(Object p);
 
+    /**
+     * Add an argument supplier to the event being built.
+     *
+     * @param objectSupplier
+     *            an Object supplier to add.
+     * @return a LogEventBuilder, usually <b>this</b>.
+     */
+    LogEventBuilder addArgument(Supplier<?> objectSupplier);
+
+    /**
+     * After the logging event is built, performs actual logging.
+     * This method must be called for logging to occur.
+     */
     void log();
 }

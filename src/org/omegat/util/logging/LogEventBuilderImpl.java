@@ -36,11 +36,9 @@ import org.omegat.util.OStrings;
 import org.omegat.util.StringUtil;
 
 /**
- * Stream style logger decorator implementation, which accepts JUL
- * style format based on SLF4J.
  * @author Hiroshi Miura
  */
-public final class LogEventBuilderImpl implements LogEventBuilder{
+public final class LogEventBuilderImpl implements LogEventBuilder {
     private String message;
     private String key;
     private Throwable exception;
@@ -48,15 +46,20 @@ public final class LogEventBuilderImpl implements LogEventBuilder{
 
     private final LoggingEventBuilder loggingEventBuilder;
 
+    /**
+     * Stream style logger decorator implementation, which accepts JUL style
+     * format based on SLF4J.
+     * 
+     * @param builder
+     *            SLF4J LoggingEventBuilder which return by atLevel(level) or
+     *            its variants.
+     */
     public LogEventBuilderImpl(final LoggingEventBuilder builder) {
         loggingEventBuilder = builder;
     }
 
     /**
-     * accept a raw message.
-     *
-     * @param message text.
-     * @return this
+     * {@inheritDoc}
      */
     public LogEventBuilderImpl setMessage(String message) {
         this.message = message;
@@ -65,10 +68,7 @@ public final class LogEventBuilderImpl implements LogEventBuilder{
     }
 
     /**
-     * accept localize message key.
-     *
-     * @param key key in bundle.
-     * @return this
+     * {@inheritDoc}
      */
     public LogEventBuilderImpl setLocMessage(String key) {
         this.key = key;
@@ -76,14 +76,51 @@ public final class LogEventBuilderImpl implements LogEventBuilder{
     }
 
     /**
-     * accept throwable.
-     *
-     * @param cause throwable object.
-     * @return this
+     * {@inheritDoc}
      */
+    @Override
     public LogEventBuilderImpl setCause(Throwable cause) {
         exception = cause;
         return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public LogEventBuilderImpl addArgument(Object p) {
+        getNonNullArguments().add(p);
+        return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public LogEventBuilderImpl addArgument(Supplier<?> objectSupplier) {
+        addArgument(objectSupplier.get());
+        return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public LogEventBuilderImpl addArguments(Object[] parameters) {
+        getNonNullArguments().addAll(Arrays.asList(parameters));
+        return this;
+    }
+
+    /**
+     * publish log message.
+     */
+    @Override
+    public void log() {
+        if (exception == null) {
+            loggingEventBuilder.log(this::getMessage);
+        } else {
+            loggingEventBuilder.setMessage(this::getMessage).setCause(exception).log();
+        }
     }
 
     private List<Object> getNonNullArguments() {
@@ -100,54 +137,15 @@ public final class LogEventBuilderImpl implements LogEventBuilder{
         return arguments.toArray();
     }
 
-    /**
-     * Accept single argument.
-     *
-     * @param arg argument object.
-     * @return this
-     */
-    public LogEventBuilderImpl addArgument(Object arg) {
-        getNonNullArguments().add(arg);
-        return this;
-    }
-
-    /**
-     * accept supplier.
-     *
-     * @param objectSupplier supplier of paramter.
-     * @return this
-     */
-    public LogEventBuilderImpl addArgument(Supplier<Object> objectSupplier) {
-        addArgument(objectSupplier.get());
-        return this;
-    }
-
-    /**
-     * accept varargs.
-     *
-     * @param parameters parameters as var args.
-     * @return this
-     */
-    public LogEventBuilderImpl addArguments(Object[] parameters) {
-        getNonNullArguments().addAll(Arrays.asList(parameters));
-        return this;
-    }
-
-    /**
-     * publish log message.
-     */
-    public void log() {
+    private String getMessage() {
+        String result;
         if (key != null) {
-            message = StringUtil.format(OStrings.getString(key), getArgumentArray()) + " (" + key + ")";
+            result = StringUtil.format(OStrings.getString(key), getArgumentArray()) + " (" + key + ")";
         } else if (message != null) {
-            message = StringUtil.format(message, getArgumentArray());
+            result = StringUtil.format(message, getArgumentArray());
         } else {
-            message = "";
+            result = "";
         }
-        if (exception == null) {
-            loggingEventBuilder.log(message);
-        } else {
-            loggingEventBuilder.log(message, exception);
-        }
+        return result;
     }
 }

@@ -182,23 +182,16 @@ public final class LogEventBuilder {
     public void log() {
         if (enabled) {
             if (key != null) {
-                message = OStrings.getString(key);
-            }
-            if (arguments != null) {
+                message = StringUtil.format(OStrings.getString(key), getArgumentArray()) + " (" + key + ")";
+            } else if (message != null) {
                 message = StringUtil.format(message, getArgumentArray());
-            }
-            if (key != null) {
-                if (exception == null) {
-                    LOGGER.atLevel(level).log(message + " (" + key + ")");
-                } else {
-                    LOGGER.atLevel(level).log(message + " (" + key + ")", exception);
-                }
             } else {
-                if (exception == null) {
-                    LOGGER.atLevel(level).log(message);
-                } else {
-                    LOGGER.atLevel(level).log(message, exception);
-                }
+                return;
+            }
+            if (exception == null) {
+                LOGGER.atLevel(level).log(message);
+            } else {
+                LOGGER.atLevel(level).log(message, exception);
             }
         }
     }

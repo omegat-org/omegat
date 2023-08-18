@@ -119,9 +119,9 @@ public class TMXReader2 {
         factory.setXMLReporter(new XMLReporter() {
             public void report(String message, String errorType, Object info, Location location)
                     throws XMLStreamException {
-                LOGGER.atWarn().log(Log.getMessage("TMXR_WARNING_WHILE_PARSING", location.getLineNumber(),
-                        location.getColumnNumber()));
-                LOGGER.atInfo().log("{}: {}", message, info);
+                Log.logWarningRB("TMXR_WARNING_WHILE_PARSING", location.getLineNumber(),
+                        location.getColumnNumber());
+                Log.log(StringUtil.format("{0}: {1}", message, info));
                 warningsCount++;
             }
         });
@@ -149,7 +149,7 @@ public class TMXReader2 {
         this.isSegmentingEnabled = isSegmentingEnabled;
 
         // log the parsing attempt
-        LOGGER.atInfo().log(Log.getMessage("TMXR_INFO_READING_FILE", file.getAbsolutePath()));
+        Log.logInfoRB("TMXR_INFO_READING_FILE", file.getAbsolutePath());
 
         boolean allFound = true;
 
@@ -173,7 +173,7 @@ public class TMXReader2 {
                 }
             }
         } catch (XMLStreamException ex) {
-            LOGGER.atError().log(Log.getMessage("TMXR_ERROR_XML_STREAM_ERROR", file.getAbsolutePath()), ex);
+            Log.logErrorRB(ex, "TMXR_ERROR_XML_STREAM_ERROR", file.getAbsolutePath());
             throw ex;
         } catch (IOException ignored) {
         } finally {
@@ -183,10 +183,10 @@ public class TMXReader2 {
         }
 
         if (!allFound) {
-            LOGGER.atWarn().log(Log.getMessage("TMXR_WARNING_SOURCE_NOT_FOUND"));
+            Log.logWarningRB("TMXR_WARNING_SOURCE_NOT_FOUND");
             warningsCount++;
         }
-        LOGGER.atInfo().log(Log.getMessage("TMXR_INFO_READING_COMPLETE"));
+        Log.logInfoRB("TMXR_INFO_READING_COMPLETE");
         if (errorsCount > 0 || warningsCount > 0) {
             LOGGER.atDebug().log("Errors: {}, Warnings: {}", errorsCount, warningsCount);
         }
@@ -213,25 +213,23 @@ public class TMXReader2 {
         isOmegaT = CT_OMEGAT.equals(getAttributeValue(element, "creationtool"));
 
         // log some details
-        LOGGER.atInfo()
-                .log(Log.getMessage("TMXR_INFO_CREATION_TOOL", getAttributeValue(element, "creationtool")));
-        LOGGER.atInfo().log(Log.getMessage("TMXR_INFO_CREATION_TOOL_VERSION",
-                getAttributeValue(element, "creationtoolversion")));
-        LOGGER.atInfo().log(Log.getMessage("TMXR_INFO_SEG_TYPE", getAttributeValue(element, "segtype")));
-        LOGGER.atInfo().log(Log.getMessage("TMXR_INFO_SOURCE_LANG", getAttributeValue(element, "srclang")));
+        Log.logInfoRB("TMXR_INFO_CREATION_TOOL", getAttributeValue(element, "creationtool"));
+        Log.logInfoRB("TMXR_INFO_CREATION_TOOL_VERSION",
+                getAttributeValue(element, "creationtoolversion"));
+        Log.logInfoRB("TMXR_INFO_SEG_TYPE", getAttributeValue(element, "segtype"));
+        Log.logInfoRB("TMXR_INFO_SOURCE_LANG", getAttributeValue(element, "srclang"));
 
         // give a warning if the TMX source language is
         // different from the project source language
         String tmxSourceLanguage = getAttributeValue(element, "srclang");
         if (!sourceLanguage.getLanguage().equalsIgnoreCase(tmxSourceLanguage)) {
-            LOGGER.atWarn().log(
-                    Log.getMessage("TMXR_WARNING_INCORRECT_SOURCE_LANG", tmxSourceLanguage, sourceLanguage));
+            Log.logWarningRB("TMXR_WARNING_INCORRECT_SOURCE_LANG", tmxSourceLanguage, sourceLanguage);
         }
 
         // give a warning that TMX file will be upgraded to sentence
         // segmentation
         if (isSegmentingEnabled && isParagraphSegtype) {
-            LOGGER.atWarn().log(Log.getMessage("TMXR_WARNING_UPGRADE_SENTSEG"));
+            Log.logWarningRB("TMXR_WARNING_UPGRADE_SENTSEG");
         }
     }
 
@@ -550,8 +548,8 @@ public class TMXReader2 {
                 }
                 if (tagN == null) {
                     // check error of TMX reading
-                    LOGGER.atError().log(Log.getMessage("TMX_ERROR_READING_LEVEL2",
-                            e.getLocation().getLineNumber(), e.getLocation().getColumnNumber()));
+                    Log.logErrorRB("TMX_ERROR_READING_LEVEL2", e.getLocation().getLineNumber(),
+                            e.getLocation().getColumnNumber());
                     errorsCount++;
                     segContent.setLength(0);
                     return;

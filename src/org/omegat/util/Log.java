@@ -44,9 +44,8 @@ import java.util.logging.LogRecord;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.spi.LoggingEventBuilder;
+import tokyo.northside.logging.LoggerDecorator;
 
-import org.omegat.util.logging.LogEventBuilder;
-import org.omegat.util.logging.LogEventBuilderImpl;
 import org.omegat.util.logging.OmegaTFileHandler;
 
 /**
@@ -197,15 +196,15 @@ public final class Log {
         }
     }
 
-    public static LogEventBuilder getLogEventBuilder(final LoggingEventBuilder builder) {
-        return new LogEventBuilderImpl(builder);
+    public static LoggerDecorator deco(final LoggingEventBuilder builder) {
+        return LoggerDecorator.deco(builder, OStrings.getResourceBundle());
     }
 
     /**
      * Logs what otherwise would go to System.out
      */
     public static void log(String s) {
-        getLogEventBuilder(LOGGER.atInfo()).setMessage(s).log();
+        deco(LOGGER.atInfo()).setMessage(s).log();
     }
 
     /**
@@ -218,7 +217,7 @@ public final class Log {
      *            StaticUtils.format.
      */
     public static void logRB(String key, Object... parameters) {
-        getLogEventBuilder(LOGGER.atInfo()).setLocMessage(key).addArguments(parameters).log();
+        deco(LOGGER.atInfo()).logRB(key, parameters);
     }
 
     /**
@@ -247,7 +246,7 @@ public final class Log {
      *            StaticUtils.format.
      */
     public static void logWarningRB(String key, Object... parameters) {
-        getLogEventBuilder(LOGGER.atWarn()).setLocMessage(key).addArguments(parameters).log();
+        deco(LOGGER.atWarn()).logRB(key, parameters);
     }
 
     /**
@@ -265,7 +264,7 @@ public final class Log {
      *            StaticUtils.format.
      */
     public static void logInfoRB(String key, Object... parameters) {
-        getLogEventBuilder(LOGGER.atInfo()).setLocMessage(key).addArguments(parameters).log();
+        deco(LOGGER.atInfo()).log(key, parameters);
     }
 
     /**
@@ -283,7 +282,7 @@ public final class Log {
      *            StaticUtils.format.
      */
     public static void logErrorRB(String key, Object... parameters) {
-        getLogEventBuilder(LOGGER.atError()).setLocMessage(key).addArguments(parameters).log();
+        deco(LOGGER.atError()).logRB(key, parameters);
     }
 
     /**
@@ -303,7 +302,7 @@ public final class Log {
      *            StaticUtils.format.
      */
     public static void logErrorRB(Throwable ex, String key, Object... parameters) {
-        getLogEventBuilder(LOGGER.atError()).setLocMessage(key).addArguments(parameters).setCause(ex).log();
+        deco(LOGGER.atError()).logRB(key, parameters, ex);
     }
 
     /**
@@ -335,7 +334,7 @@ public final class Log {
      *            Parameter for the error message.
      */
     public static void logInfoRB(String key, Object parameter) {
-        getLogEventBuilder(LOGGER.atInfo()).setLocMessage(key).addArgument(parameter).log();
+        deco(LOGGER.atInfo()).setMessageRB(key).addArgument(parameter).log();
     }
 
     /**
@@ -346,7 +345,7 @@ public final class Log {
      *            The key of the error message in the resource bundle
      */
     public static void logInfoRB(String key) {
-        getLogEventBuilder(LOGGER.atInfo()).setLocMessage(key).log();
+        deco(LOGGER.atInfo()).setMessageRB(key).log();
     }
 
     /**
@@ -359,7 +358,7 @@ public final class Log {
      *            Parameter for the error message.
      */
     public static void logWarningRB(String key, Object parameter) {
-        getLogEventBuilder(LOGGER.atWarn()).setLocMessage(key).addArgument(parameter).log();
+        deco(LOGGER.atWarn()).setMessageRB(key).addArgument(parameter).log();
     }
 
     /**
@@ -367,6 +366,6 @@ public final class Log {
      * bundle).
      */
     public static void logErrorRB(String key, Object parameter) {
-        getLogEventBuilder(LOGGER.atError()).setLocMessage(key).addArgument(parameter).log();
+        deco(LOGGER.atError()).setMessageRB(key).addArgument(parameter).log();
     }
 }

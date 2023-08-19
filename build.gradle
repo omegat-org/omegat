@@ -113,6 +113,7 @@ allprojects {
         mavenLocal()
         // Sonatype OSSRH snapshots
         maven { url "https://s01.oss.sonatype.org/content/repositories/snapshots" }
+        maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
     }
 }
 
@@ -179,6 +180,7 @@ dependencies {
         implementation 'commons-io:commons-io:2.11.0'
         implementation 'org.apache.commons:commons-lang3:3.11'
         api "org.slf4j:slf4j-api:${slf4jVersion}"
+        implementation 'tokyo.northside:slf4j-format-jdk14:0.3.1-2-6a98ab415e-SNAPSHOT'
         runtimeOnly "org.slf4j:slf4j-jdk14:${slf4jVersion}"
 
         // macOS integration

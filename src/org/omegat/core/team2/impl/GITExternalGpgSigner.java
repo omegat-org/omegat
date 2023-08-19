@@ -148,7 +148,7 @@ public class GITExternalGpgSigner extends GpgSigner {
                 return new String(b.toByteArray(4000),
                         Charset.defaultCharset());
             } catch (IOException ex) {
-                Log.getLogEventBuilder(LOGGER.atError()).setCause(ex).setLocMessage(ExternalGpgSigner_bufferError).log();
+                Log.deco(LOGGER.atError()).setCause(ex).setMessageRB(ExternalGpgSigner_bufferError).log();
             }
         }
         return "";
@@ -272,7 +272,7 @@ public class GITExternalGpgSigner extends GpgSigner {
             }, null);
             if (!result[0]) {
                 if (!StringUtils.isEmptyOrNull(gpgSigningKey)) {
-                    Log.getLogEventBuilder(LOGGER.atWarn()).setLocMessage(ExternalGpgSigner_noKeyFound)
+                    Log.deco(LOGGER.atWarn()).setMessageRB(ExternalGpgSigner_noKeyFound)
                             .addArgument(gpgSigningKey).log();
                 }
             }
@@ -414,7 +414,7 @@ public class GITExternalGpgSigner extends GpgSigner {
             }
         } catch (SecurityException | UnsupportedOperationException
                 | IllegalArgumentException ex) {
-            Log.getLogEventBuilder(LOGGER.atError()).setCause(ex).setLocMessage(ExternalGpgSigner_environmentError)
+            Log.deco(LOGGER.atError()).setCause(ex).setMessageRB(ExternalGpgSigner_environmentError)
                     .log();
         }
     }
@@ -453,7 +453,7 @@ public class GITExternalGpgSigner extends GpgSigner {
                             }
                         }, null);
                     } catch (IOException | CanceledException ex) {
-                        Log.getLogEventBuilder(LOGGER.atError()).setLocMessage(ExternalGpgSigner_cannotSearch)
+                        Log.deco(LOGGER.atError()).setMessageRB(ExternalGpgSigner_cannotSearch)
                                 .setCause(ex).log();
                     }
                     exe = result[0];
@@ -476,7 +476,7 @@ public class GITExternalGpgSigner extends GpgSigner {
                         return exe.getAbsolutePath();
                     }
                 } catch (SecurityException e) {
-                    Log.getLogEventBuilder(LOGGER.atError()).setCause(e).setLocMessage(ExternalGpgSigner_skipNotAccessiblePath)
+                    Log.deco(LOGGER.atError()).setCause(e).setMessageRB(ExternalGpgSigner_skipNotAccessiblePath)
                             .addArgument(exe.getPath()).log();
                 }
             }

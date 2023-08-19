@@ -213,7 +213,7 @@ public class RemoteRepositoryProvider {
                 throw e;
             } catch (Exception e) {
                 errors.add(e);
-                Log.getLogEventBuilder(LOGGER.atError()).setLocMessage("TEAM_UPDATE_REPO_ERROR")
+                Log.deco(LOGGER.atError()).setMessageRB("TEAM_UPDATE_REPO_ERROR")
                         .addArgument(e.getMessage()).log();
             }
         }
@@ -584,7 +584,7 @@ public class RemoteRepositoryProvider {
                     }
                 }
             } catch (Exception e) {
-                Log.getLogEventBuilder(LOGGER.atWarn()).setMessage("").setCause(e).log();
+                Log.deco(LOGGER.atWarn()).setMessage("").setCause(e).log();
             }
         }
 
@@ -599,7 +599,7 @@ public class RemoteRepositoryProvider {
                     FileUtils.deleteDirectory(f);
                 }
             } catch (Exception e) {
-                Log.getLogEventBuilder(LOGGER.atWarn()).setLocMessage("LOG_ERROR_DELETE_FILE").addArgument(f)
+                Log.deco(LOGGER.atWarn()).setMessageRB("LOG_ERROR_DELETE_FILE").addArgument(f)
                         .log();
             }
         }

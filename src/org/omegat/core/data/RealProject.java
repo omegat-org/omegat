@@ -1151,7 +1151,7 @@ public class RealProject implements IProject {
                 new SyncTMX(projectTMX, OStrings.getString("TMX_MERGE_MINE"), srcLang, trgLang),
                 new SyncTMX(headTMX, OStrings.getString("TMX_MERGE_THEIRS"), srcLang, trgLang), props);
         projectTMX.replaceContent(mergedTMX);
-        LOGGER.atDebug().setMessage("Merge report: {}").addArgument(props::getReport).log();
+        LOGGER.log(System.Logger.Level.DEBUG, "Merge report: {0}", props.getReport());
         commitDetails.append('\n');
         commitDetails.append(props.getReport().toString());
     }

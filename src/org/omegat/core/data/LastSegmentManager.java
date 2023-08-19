@@ -117,8 +117,7 @@ public final class LastSegmentManager {
         try (FileInputStream fis = new FileInputStream(lastEntryFile)) {
             prop.load(fis);
         } catch (IOException e) {
-            LOGGER.atDebug().setMessage("Could not load last segment info {}").addArgument(e::getMessage)
-                    .log();
+            LOGGER.log(System.Logger.Level.DEBUG, "Could not load last segment info {0}", e.getMessage());
             return 1;
         }
 
@@ -128,15 +127,15 @@ public final class LastSegmentManager {
             String lastEntry = prop.getProperty(LAST_ENTRY_NUMBER, "1");
             lastEntryNumber = Integer.parseInt(lastEntry, 10);
         } catch (Exception e) {
-            LOGGER.atDebug().setMessage("Cannot jump to last entry #{}: {}").addArgument(lastEntryNumber)
-                    .addArgument(e::getMessage).log();
+            LOGGER.log(System.Logger.Level.DEBUG, "Cannot jump to last entry #{}: {0}", lastEntryNumber,
+                    e.getMessage());
         }
-        LOGGER.atDebug().log("Jumping to last entry #{}.", lastEntryNumber);
+        LOGGER.log(System.Logger.Level.DEBUG, "Jumping to last entry #{0}.", lastEntryNumber);
 
         List<SourceTextEntry> allEntries = Core.getProject().getAllEntries();
 
         if (allEntries.size() < lastEntryNumber) {
-            LOGGER.atDebug().log("Not enough segments to jump to {}", lastEntryNumber);
+            LOGGER.log(System.Logger.Level.DEBUG, "Not enough segments to jump to {0}", lastEntryNumber);
             Core.getMainWindow().showStatusMessageRB(null);
             return 1;
         }
@@ -155,13 +154,13 @@ public final class LastSegmentManager {
         }
 
         // Check to see if the source and file match
-        LOGGER.atDebug().setMessage("Last entry #{} mismatch").addArgument(lastEntryNumber)
-                .addKeyValue("file", lastFile).addKeyValue("src", lastSrc).log();
+        LOGGER.log(System.Logger.Level.DEBUG, "Last entry #{0} mismatch. file: {1} src: {2}", lastEntryNumber
+                ,  lastFile, lastSrc);
 
         int fileIndex = fileIndex(lastFile);
 
         if (fileIndex == -1) {
-            LOGGER.atDebug().log("File \"{}\" is not in the project anymore.", lastFile);
+            LOGGER.log(System.Logger.Level.DEBUG, "File \"{0}\" is not in the project anymore.", lastFile);
             Core.getMainWindow().showStatusMessageRB(null);
             return 1;
         }
@@ -170,7 +169,7 @@ public final class LastSegmentManager {
         List<SourceTextEntry> fileEntries = Core.getProject().getProjectFiles().get(fileIndex).entries;
         for (SourceTextEntry entry : fileEntries) {
             if (entry.getSrcText().equals(lastSrc)) {
-                LOGGER.atDebug().log("Found a matching entry in the right file.");
+                LOGGER.log(System.Logger.Level.DEBUG, "Found a matching entry in the right file.");
                 return entry.entryNum();
             }
         }
@@ -179,7 +178,7 @@ public final class LastSegmentManager {
         // project or quit ?
         for (SourceTextEntry entry : allEntries) {
             if (entry.getSrcText().equals(lastSrc)) {
-                LOGGER.atDebug().log("Found a matching entry in the wrong file.");
+                LOGGER.log(System.Logger.Level.DEBUG, "Found a matching entry in the wrong file.");
                 return entry.entryNum();
             }
         }

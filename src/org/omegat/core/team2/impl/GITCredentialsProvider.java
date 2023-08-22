@@ -134,20 +134,15 @@ public class GITCredentialsProvider extends CredentialsProvider {
     }
 
     private Credentials loadCredentials(URIish uri) {
-        String url = uri.toString(); // now we use schema://server:port but we keep this for backward compatibility
+        String url = uri.toString();
         Credentials credentials = new Credentials();
         credentials.username = TeamSettings.get(url + "!" + KEY_USERNAME_SUFFIX);
         credentials.password = TeamUtils.decodePassword(TeamSettings.get(url + "!" + KEY_PASSWORD_SUFFIX));
-        if (credentials.username == null) {
-            url = "" + uri.getScheme() + "://" + uri.getHost() + ":" + uri.getPort();
-            credentials.username = TeamSettings.get(url + "!" + KEY_USERNAME_SUFFIX);
-            credentials.password = TeamUtils.decodePassword(TeamSettings.get(url + "!" + KEY_PASSWORD_SUFFIX));
-        }
         return credentials;
     }
 
     private void saveCredentials(URIish uri, Credentials credentials) {
-        String url = "" + uri.getScheme() + "://" + uri.getHost() + ":" + uri.getPort();
+        String url = uri.toString();
         try {
             TeamSettings.set(url + "!" + KEY_USERNAME_SUFFIX, credentials.username);
             TeamSettings.set(url + "!" + KEY_PASSWORD_SUFFIX, TeamUtils.encodePassword(credentials.password));

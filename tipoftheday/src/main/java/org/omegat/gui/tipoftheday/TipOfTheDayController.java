@@ -49,22 +49,21 @@ import org.omegat.util.gui.MenuExtender;
 import org.omegat.util.gui.MenuExtender.MenuKey;
 
 public final class TipOfTheDayController {
-
-    static final String INDEX_YAML = "tips.yaml";
+    // FIXME: disabled for 6.1 release
+    private static final boolean ENABLED = false;
     private static final String TIPOFTHEDAY_SHOW_ON_STARTUP = "tipoftheday_show_on_start";
     private static final String TIPOFTHEDAY_CURRENT_TIP = "tipoftheday_current_tip";
-    private static boolean menuAdded = false;
-    private static JMenuItem totdMenu = new JMenuItem();
+    private static final JMenuItem totdMenu = new JMenuItem();
+    static final String INDEX_YAML = "tips.yaml";
 
     @SuppressWarnings("unused")
     public static void loadPlugins() {
         CoreEvents.registerApplicationEventListener(new IApplicationEventListener() {
             @Override
             public void onApplicationStartup() {
-                if (TipOfTheDayUtils.hasIndex()) {
+                if (ENABLED && TipOfTheDayUtils.hasIndex()) {
                     initUI();
-                    // FIXME: disable temporary for 6.1 release
-                    // initMenu();
+                    initMenu();
                     SwingUtilities.invokeLater(() -> {
                         TipOfTheDayController.start(false);
                     });
@@ -85,14 +84,12 @@ public final class TipOfTheDayController {
                 // show Tip of the Day dialog on startup.
                 totdMenu.addActionListener(actionEvent -> TipOfTheDayController.start(true));
                 MenuExtender.addMenuItem(MenuKey.HELP, totdMenu);
-                menuAdded = true;
             }
 
             @Override
             public void onApplicationShutdown() {
-                if (menuAdded) {
+                if (ENABLED) {
                     MenuExtender.removeMenuItems(MenuKey.HELP, Collections.singletonList(totdMenu));
-                    menuAdded = false;
                 }
             }
         });
@@ -108,8 +105,7 @@ public final class TipOfTheDayController {
         if (force) {
             showComponent();
         }
-        // FIXME: temporary default to be false in 6.1 development.
-        if (Preferences.isPreferenceDefault(TIPOFTHEDAY_SHOW_ON_STARTUP, false)) {
+        if (Preferences.isPreferenceDefault(TIPOFTHEDAY_SHOW_ON_STARTUP, ENABLED)) {
             showComponent();
         }
     }

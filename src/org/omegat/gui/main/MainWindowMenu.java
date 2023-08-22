@@ -51,6 +51,7 @@ public final class MainWindowMenu extends BaseMainWindowMenu
 
     public MainWindowMenu(final MainWindow mainWindow, final MainWindowMenuHandler mainWindowMenuHandler) {
         super(mainWindow, mainWindowMenuHandler);
+        initComponents();
     }
 
     @Override

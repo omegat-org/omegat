@@ -133,7 +133,7 @@ public final class MainMenuIcons {
     /**
      * Create icon with an image fit with menu items.
      */
-    static Icon newImageIcon(final Image image) {
+    public static Icon newImageIcon(final Image image) {
         return new ImageIcon() {
             @Override
             public synchronized void paintIcon(Component c, Graphics g, int x, int y) {
@@ -157,7 +157,7 @@ public final class MainMenuIcons {
      * Convenience method for {@link #newTextIcon(Color, Font, char)}
      * that uses the default font.
      * @param color color of font
-     * @param text char to draw
+     * @param c char to draw
      */
     static Icon newTextIcon(final Color color, final char c) {
         return newTextIcon(color, null, c);

@@ -26,7 +26,9 @@
 
 package org.omegat.gui.preferences.view;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComponent;
@@ -37,9 +39,12 @@ import org.omegat.core.Core;
 import org.omegat.gui.main.MainWindow;
 import org.omegat.gui.main.MainWindowUI;
 import org.omegat.gui.preferences.BasePreferencesController;
+import org.omegat.gui.preferences.IMenuPreferece;
+import org.omegat.gui.preferences.MainMenuUI;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.gui.DelegatingComboBoxRenderer;
+import org.omegat.util.gui.UIDesignManager;
 
 /**
  * @author Aaron Madlon-Kay
@@ -79,41 +84,53 @@ public class AppearanceController extends BasePreferencesController {
                 return value;
             }
         });
+
+        List<IMenuPreferece> menuStylePrefs = new ArrayList<>();
+        menuStylePrefs.add(new MainMenuUI());
+        menuStylePrefs.addAll(UIDesignManager.getMenuUIPreferences());
+        String[] menuStyles = menuStylePrefs.stream()
+                .map(clazz -> clazz.getClass().getName())
+                .toArray(String[]::new);
+        panel.cbMenustyleSelect.setModel(new DefaultComboBoxModel<>(menuStyles));
+        panel.cbMenustyleSelect.setRenderer(new DelegatingComboBoxRenderer<String, String>() {
+            @Override
+            protected String getDisplayText(final String value) {
+                return menuStylePrefs.stream()
+                        .filter(p -> p.getClass().getName().equals(value))
+                        .map(IMenuPreferece::getMenuUIName)
+                        .findFirst().orElse("");
+            }
+        });
+
         panel.cbThemeSelect.addActionListener(e -> {
+            setRestartRequired(isModified());
+        });
+        panel.cbMenustyleSelect.addActionListener(e -> {
             setRestartRequired(isModified());
         });
         // TODO: Properly abstract the restore function
         panel.restoreWindowButton
                 .addActionListener(e -> MainWindowUI.resetDesktopLayout((MainWindow) Core.getMainWindow()));
-        /*panel.newUICheckBox.addActionListener(actionEvent -> {
-            setRestartRequired(isModified());
-        });*/
     }
 
     private boolean isModified() {
+        boolean modified = false;
         Object selected = panel.cbThemeSelect.getSelectedItem();
         if (selected != null) {
-            return !UIManager.getLookAndFeel().getClass().getName().equals(selected.toString());
+            modified |= !UIManager.getLookAndFeel().getClass().getName().equals(selected.toString());
         }
-        return false;
-    }
-
-/*
-    private boolean isModified() {
-        boolean changeNewUI = panel.newUICheckBox.isSelected()
-                ^ Preferences.isPreference(Preferences.APPLY_BURGER_SELECTOR_UI);
-        Object selected = panel.cbThemeSelect.getSelectedItem();
-        if (selected == null) {
-            return changeNewUI;
+        selected = panel.cbMenustyleSelect.getSelectedItem();
+        if (selected != null) {
+            modified |= !selected.toString().equals(Preferences.getPreference(Preferences.MENUUI_CLASS_NAME));
         }
-        return !UIManager.getLookAndFeel().getClass().getName().equals(selected.toString()) || changeNewUI;
+        return modified;
     }
-*/
 
     @Override
     protected void initFromPrefs() {
         panel.cbThemeSelect.setSelectedItem(UIManager.getLookAndFeel().getClass().getName());
-        // panel.newUICheckBox.setSelected(Preferences.isPreference(Preferences.APPLY_BURGER_SELECTOR_UI));
+        panel.cbMenustyleSelect.setSelectedItem(Preferences.getPreferenceDefault(Preferences.MENUUI_CLASS_NAME,
+                MainMenuUI.class.getName()));
         previousFileListDialog = Preferences.isPreferenceDefault(Preferences.PROJECT_FILES_SHOW_ON_LOAD,
                 true);
     }
@@ -121,19 +138,14 @@ public class AppearanceController extends BasePreferencesController {
     @Override
     public void restoreDefaults() {
         panel.cbThemeSelect.setSelectedItem(Preferences.THEME_CLASS_NAME_DEFAULT);
-        // panel.newUICheckBox.setSelected(false);
+        panel.cbMenustyleSelect.setSelectedItem(MainMenuUI.class.getName());
         Preferences.setPreference(Preferences.PROJECT_FILES_SHOW_ON_LOAD, previousFileListDialog);
     }
 
     @Override
     public void persist() {
         Preferences.setPreference(Preferences.THEME_CLASS_NAME, panel.cbThemeSelect.getSelectedItem().toString());
-/*
-        Preferences.setPreference(Preferences.APPLY_BURGER_SELECTOR_UI, panel.newUICheckBox.isSelected());
-        if (panel.newUICheckBox.isSelected()) {
-            Preferences.setPreference(Preferences.PROJECT_FILES_SHOW_ON_LOAD, false);
-        } else {
-            Preferences.setPreference(Preferences.PROJECT_FILES_SHOW_ON_LOAD, previousFileListDialog);
-        }*/
+        Preferences.setPreference(Preferences.MENUUI_CLASS_NAME,
+                panel.cbMenustyleSelect.getSelectedItem().toString());
     }
 }

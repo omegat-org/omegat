@@ -32,11 +32,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.tomakehurst.wiremock.client.WireMock;
 import org.junit.Test;
 
-import org.omegat.core.TestCore;
+import org.omegat.core.TestCoreWireMock;
 import org.omegat.util.Language;
 import org.omegat.util.Preferences;
 
-public class IBMWatsonTranslateTest extends TestCore {
+public class IBMWatsonTranslateTest extends TestCoreWireMock {
 
     @Test
     public void getJsonResults() throws Exception {

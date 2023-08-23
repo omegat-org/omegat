@@ -40,7 +40,7 @@ import tokyo.northside.swing.tips.TipOfTheDayModel;
 
 import org.omegat.util.Log;
 
-public class OmegaTTipOfTheDayModel implements TipOfTheDayModel {
+public final class OmegaTTipOfTheDayModel implements TipOfTheDayModel {
 
     private final List<Tip> tips;
     private final ObjectMapper mapper;
@@ -94,10 +94,18 @@ public class OmegaTTipOfTheDayModel implements TipOfTheDayModel {
     public static class Records {
         private List<TipRecord> tips;
 
+        /**
+         * Return list of TipRecord object.
+         * @return list of TipRecord object.
+         */
         public List<TipRecord> getTips() {
             return tips;
         }
 
+        /**
+         * Set list of TipRecord object.
+         * @param tips list of TipRecord object to set.
+         */
         public void setTips(final List<TipRecord> tips) {
             this.tips = tips;
         }
@@ -107,18 +115,34 @@ public class OmegaTTipOfTheDayModel implements TipOfTheDayModel {
         private String name;
         private String file;
 
+        /**
+         * Get a name of Tip record.
+         * @return name.
+         */
         public String getName() {
             return name;
         }
 
+        /**
+         * Set a name of Tip record.
+         * @param name to set.
+         */
         public void setName(final String name) {
             this.name = name;
         }
 
+        /**
+         * Get a HTML file.
+         * @return a HTML file.
+         */
         public String getFile() {
             return file;
         }
 
+        /**
+         * set a HTML file.
+         * @param file to set.
+         */
         public void setFile(final String file) {
             this.file = file;
         }

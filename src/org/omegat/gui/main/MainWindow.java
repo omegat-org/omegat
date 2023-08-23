@@ -45,6 +45,7 @@ import java.awt.datatransfer.StringSelection;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -63,6 +64,7 @@ import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
+import javax.swing.UIManager;
 import javax.swing.WindowConstants;
 import javax.swing.plaf.FontUIResource;
 import javax.swing.text.JTextComponent;
@@ -77,7 +79,6 @@ import org.omegat.gui.filelist.ProjectFilesListController;
 import org.omegat.gui.matches.IMatcher;
 import org.omegat.gui.search.SearchWindowController;
 import org.omegat.util.OStrings;
-import org.omegat.util.Platform;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
@@ -111,6 +112,7 @@ import com.vlsolutions.swing.docking.FloatingDialog;
  */
 @SuppressWarnings("serial")
 public class MainWindow extends JFrame implements IMainWindow {
+
     public final BaseMainWindowMenu menu;
 
     protected ProjectFilesListController projWin;
@@ -129,28 +131,33 @@ public class MainWindow extends JFrame implements IMainWindow {
     protected JLabel statusLabel;
     protected JLabel lockInsertLabel;
 
-    MainWindowAccessTools mainWindowAccessTools;
-
     protected DockingDesktop desktop;
 
     /** Creates new form MainWindow */
+    @SuppressWarnings("unchecked")
     public MainWindow() throws IOException {
         MainWindowMenuHandler mainWindowMenuHandler = new MainWindowMenuHandler(this);
-        if (Preferences.isPreference(Preferences.APPLY_BURGER_SELECTOR_UI) && !Platform.isMacOSX()) {
-            menu = new MainWindowBurgerMenu(this, mainWindowMenuHandler);
-            menu.initComponents();
-            mainWindowAccessTools = MainWindowAccessTools.of(menu.mainMenu, mainWindowMenuHandler);
-        } else {
-            menu = new MainWindowMenu(this, mainWindowMenuHandler);
-            menu.initComponents();
-            if (Preferences.isPreference(Preferences.APPLY_BURGER_SELECTOR_UI) && Platform.isMacOSX()) {
-                JPanel toolsPanel = new JPanel();
-                mainWindowAccessTools = MainWindowAccessTools.of(toolsPanel, mainWindowMenuHandler);
-                getContentPane().add(toolsPanel, BorderLayout.NORTH);
+
+        // Load Menu extension
+        Class<? extends BaseMainWindowMenu> menuClass;
+        menuClass = (Class<? extends BaseMainWindowMenu>) UIManager.get(UIDesignManager.menuClassID);
+        if (menuClass != null) {
+            BaseMainWindowMenu menu1;
+            try {
+                menu1 = menuClass.getDeclaredConstructor(MainWindow.class, MainWindowMenuHandler.class)
+                                .newInstance(this, mainWindowMenuHandler);
+            } catch (Exception e) {
+                // fall back to default when loading failed.
+                menu1 = new MainWindowMenu(this, mainWindowMenuHandler);
             }
+            menu = menu1;
+        } else {
+            // Default menu.
+            menu = new MainWindowMenu(this, mainWindowMenuHandler);
         }
         setJMenuBar(menu.mainMenu);
         setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
                 menu.mainWindowMenuHandler.projectExitMenuItemActionPerformed();
@@ -162,6 +169,19 @@ public class MainWindow extends JFrame implements IMainWindow {
             }
         });
 
+        // Load toolbar extension
+        Class<? extends JPanel> toolbarClass = (Class<? extends JPanel>) UIManager.get(UIDesignManager.toolbarClassID);
+        if (toolbarClass != null) {
+            try {
+                getContentPane().add(toolbarClass.getDeclaredConstructor(MainWindow.class,
+                        MainWindowMenuHandler.class)
+                        .newInstance(this, mainWindowMenuHandler), BorderLayout.NORTH);
+            } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
+                NoSuchMethodException ignored) {
+            }
+        }
+
+        // load default font from preferences
         font = FontUtil.getScaledFont();
 
         MainWindowUI.createMainComponents(this, font);

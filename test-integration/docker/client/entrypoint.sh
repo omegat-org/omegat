@@ -27,7 +27,6 @@
 [ -f /keys/id_rsa ] || inotifywait -e attrib /keys
 
 cp /keys/id_rsa /home/omegat/.ssh/id_rsa
-chown omegat.omegat /home/omegat/.ssh/id_rsa
 chmod 600 /home/omegat/.ssh/id_rsa
 
 if [[ "${TYPE}" == "SVN" ]]; then
@@ -36,18 +35,16 @@ if [[ "${TYPE}" == "SVN" ]]; then
 elif [[ "${TYPE}" == "GIT" ]]; then
   export REPO=git@server:omegat-test.git
   export REPO2=https://git:gitpass@server/omegat-test.git
-  git config --global user.name example
-  git config --global user.email git@example.com
-  git config --global http.sslVerify false
 fi
 
 ssh-keyscan -H server > /home/omegat/.ssh/known_hosts
 
-cd /code
-umask a+w
-/opt/gradle-7.5.1/bin/gradle testIntegration -Domegat.test.duration=${DURATION} -Domegat.test.repo=${REPO} \
-       -Domegat.test.repo.alt=${REPO2} -Domegat.test.map.repo=http://server/ -Domegat.test.map.file=README
-result=$?
-chmod -R a+w .gradle || true
-find * -name build -type d -exec chmod -R a+w {} \; || true
-exit $result
+rsync -rlD --exclude=.git --exclude=build --exclude=docs --exclude=doc_src --exclude=docs_devel /code/ /workdir
+cd /workdir
+/opt/gradle-7.5.1/bin/gradle testIntegration \
+   -Djava.util.logging.config.file=/workdir/test-integration/logger.properties \
+   -Domegat.test.duration=${DURATION} -Domegat.test.repo=${REPO} \
+   -Domegat.test.repo.alt=${REPO2} -Domegat.test.map.repo=http://server/ -Domegat.test.map.file=README
+EXIT_CODE=$?
+rsync -r /workdir/build/reports/test-integration /code/build/reports
+exit $EXIT_CODE

@@ -1,7 +1,0 @@
-"JRELoadError" = "Pa kapav sarz lanvironnman exekision Java (Java Runtime Environment).";
-"JRExLoadError" = "Pa kapav sarz enn Java %d Runtime Environment.";
-"JRExLoadFullError" = "Sa program-la nesesit instalasion omwin Java %d lor ou lordinater. 'Download' ek instal dernie version Java depi www.java.com ek sey ankor.";
-"JDKxLoadFullError" = "Sa program-la nesesit instalasion omwin Java %d JDK lor ou lordinater. 'Download' et instal dernie version Java JDK depi oracle.com ek sey ankor.";
-"MainClassNameRequired" = "Bizin nom klas prinsipal.";
-"JavaDirectoryNotFound" = "Inposib fer lalis konteni repertwar Java.";
-"BundlePathContainsColon" = "Pa kapav lanse depi enn dosie ki ena "/" dan so nom.";

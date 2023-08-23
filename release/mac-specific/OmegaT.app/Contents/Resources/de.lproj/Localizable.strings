@@ -1,7 +1,0 @@
-"JRELoadError" = "Java Runtime Environment kann nicht geladen werden.";
-"JRExLoadError" = "Eine Java %d Runtime Environment kann nicht geladen werden.";
-"JRExLoadFullError" = "Diese Anwendung erfordert, dass Java %d oder höher auf Ihrem Computer installiert ist. Bitte laden Sie die neueste Java-Version von www.java.com herunter, installieren Sie sie und versuchen Sie es erneut.";
-"JDKxLoadFullError" = "Diese Anwendung erfordert, dass ein Java %d Development Kit oder höher auf Ihrem Computer installiert ist. Bitte laden Sie das neueste Java Development Kit von Oracle.com herunter und versuchen Sie es erneut.";
-"MainClassNameRequired" = "Hauptklassenname wird benötigt.";
-"JavaDirectoryNotFound" = "Die Inhalte des Java-Verzeichnisses können nicht enumeriert werden.";
-"BundlePathContainsColon" = "Kann nicht von einem Ordner starten, der einen \"/\" im Namen hat.";

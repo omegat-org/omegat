@@ -64,6 +64,9 @@
 
   Bug fixes:
 
+  - Critical errors are logged, but no longer shown to the user
+  https://sourceforge.net/p/omegat/bugs/1207/
+
   - Google2 Translate MT connector failed to parse response
   https://sourceforge.net/p/omegat/bugs/1206/
 

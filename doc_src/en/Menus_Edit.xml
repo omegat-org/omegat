@@ -340,12 +340,14 @@
 		<itemizedlist>
 		  <listitem>
 			<para><guimenuitem>Select Previous Match</guimenuitem>
-			<keycombo><keycap>A</keycap><keycap>↑</keycap></keycombo></para>
+			<keycombo><keycap>C</keycap><keycap>↑</keycap></keycombo>
+			(<keycombo><keycap>A</keycap><keycap>↑</keycap></keycombo> on mac OS)</para>
 		  </listitem>
 
 		  <listitem>
 			<para><guimenuitem>Select Next Match</guimenuitem>
-			<keycombo><keycap>A</keycap><keycap>↓</keycap></keycombo></para>
+			<keycombo><keycap>C</keycap><keycap>↓</keycap></keycombo>
+			(<keycombo><keycap>A</keycap><keycap>↓</keycap></keycombo> on macOS)</para>
 		  </listitem>
 
 		  <listitem>

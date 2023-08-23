@@ -50,9 +50,11 @@ import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Paths;
 import java.text.MessageFormat;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -63,6 +65,9 @@ import java.util.TreeMap;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import org.omegat.CLIParameters.PSEUDO_TRANSLATE_TYPE;
 import org.omegat.CLIParameters.TAG_VALIDATION_MODE;
@@ -111,6 +116,7 @@ import com.vlsolutions.swing.docking.DockingDesktop;
  * @author Hiroshi Miura
  */
 public final class Main {
+    private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
 
     private Main() {
     }
@@ -176,12 +182,13 @@ public final class Main {
         if (PARAMS.containsKey(CLIParameters.DISABLE_LOCATION_SAVE)) {
             RuntimePreferences.setLocationSaveEnabled(false);
         }
-
-        Log.log(StringUtil.format(
+        Log.deco(LOGGER.atInfo()).log(
                 "\n===================================================================\n"
                         + "{0} ({1}) Locale {2}",
-                OStrings.getNameAndVersion(), new Date(), Locale.getDefault()));
-        Log.logInfoRB("LOG_STARTUP_INFO", System.getProperty("java.vendor"),
+                OStrings.getNameAndVersion(), DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT)
+                        .withLocale(Locale.getDefault()).format(ZonedDateTime.now()),
+                Locale.getDefault().getDisplayName());
+        Log.deco(LOGGER.atInfo()).logRB("LOG_STARTUP_INFO", System.getProperty("java.vendor"),
                 System.getProperty("java.version"), System.getProperty("java.home"));
 
         System.setProperty("http.agent", OStrings.getDisplayNameAndVersion());

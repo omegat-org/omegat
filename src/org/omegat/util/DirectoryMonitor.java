@@ -143,10 +143,8 @@ public class DirectoryMonitor extends Thread {
         }
 
         // find new files
-        List<File> foundFiles = FileUtil.findFiles(dir, pathname -> true);
-        
-        // ensure file order consistency between platforms
-        foundFiles.sort((f1, f2) -> f1.toString().toLowerCase().compareTo(f2.toString().toLowerCase()));
+        List<File> foundFiles = FileUtil.findFiles(dir, pathname -> true, 
+                (f1, f2) -> f1.toString().toLowerCase().compareTo(f2.toString().toLowerCase()));
 
         for (File f : foundFiles) {
             if (stopped) {

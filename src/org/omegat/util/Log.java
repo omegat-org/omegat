@@ -251,7 +251,7 @@ public final class Log {
 
     /**
      * Writes an info message to the log (to be retrieved from the resource
-     * bundle)
+     * bundle).
      * <p>
      * While the info message can be localized, the info key is also logged, so
      * developers can determine what info was given by looking at the error key,
@@ -264,7 +264,7 @@ public final class Log {
      *            StaticUtils.format.
      */
     public static void logInfoRB(String key, Object... parameters) {
-        deco(LOGGER.atInfo()).log(key, parameters);
+        deco(LOGGER.atInfo()).logRB(key, parameters);
     }
 
     /**
@@ -287,7 +287,7 @@ public final class Log {
 
     /**
      * Writes an error message to the log (to be retrieved from the resource
-     * bundle)
+     * bundle).
      * <p>
      * While the error message can be localized, the error key is also logged,
      * so developers can determine what error was given by looking at the error
@@ -302,7 +302,7 @@ public final class Log {
      *            StaticUtils.format.
      */
     public static void logErrorRB(Throwable ex, String key, Object... parameters) {
-        deco(LOGGER.atError()).logRB(key, parameters, ex);
+        deco(LOGGER.atError()).setCause(ex).logRB(key, parameters);
     }
 
     /**

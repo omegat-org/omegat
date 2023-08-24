@@ -138,7 +138,7 @@ public class SVNAuthenticationManager implements ISVNAuthenticationManager {
     protected SVNAuthentication askCUI(String kind, SVNURL url, String message) throws SVNException {
         Console console = System.console();
         if (console == null) {
-            Log.log("No console found.");
+            Log.logInfoRB("SVN_NO_CONSOLE");
             if (ISVNAuthenticationManager.USERNAME.equals(kind)) {
                 // user auth shouldn't be null.
                 return SVNUserNameAuthentication.newInstance("", false, url, false);
@@ -211,7 +211,7 @@ public class SVNAuthenticationManager implements ISVNAuthenticationManager {
         } else {
             return ask(kind, url, OStrings.getString("TEAM_USERPASS_WRONG", url.getPath()));
         }
-    };
+    }
 
     @Override
     public ISVNProxyManager getProxyManager(SVNURL url) throws SVNException {

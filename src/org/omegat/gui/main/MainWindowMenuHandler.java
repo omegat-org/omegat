@@ -941,31 +941,6 @@ public final class MainWindowMenuHandler {
                 .setVisible(true);
     }
 
-    public void toolsAlignFilesMenuItemActionPerformed() {
-        AlignFilePickerController picker = new AlignFilePickerController();
-        if (Core.getProject().isProjectLoaded()) {
-            String srcRoot = Core.getProject().getProjectProperties().getSourceRoot();
-            String curFile = Core.getEditor().getCurrentFile();
-            if (curFile != null) {
-                picker.setSourceFile(srcRoot + curFile);
-            }
-            picker.setSourceDefaultDir(srcRoot);
-            picker.setDefaultSaveDir(Core.getProject().getProjectProperties().getTMRoot());
-            picker.setSourceLanguage(Core.getProject().getProjectProperties().getSourceLanguage());
-            picker.setTargetLanguage(Core.getProject().getProjectProperties().getTargetLanguage());
-        } else {
-            String srcLang = Preferences.getPreference(Preferences.SOURCE_LOCALE);
-            if (!StringUtil.isEmpty(srcLang)) {
-                picker.setSourceLanguage(new Language(srcLang));
-            }
-            String trgLang = Preferences.getPreference(Preferences.TARGET_LOCALE);
-            if (!StringUtil.isEmpty(trgLang)) {
-                picker.setTargetLanguage(new Language(trgLang));
-            }
-        }
-        picker.show(mainWindow);
-    }
-
     public void optionsAutoCompleteShowAutomaticallyItemActionPerformed() {
         Preferences.setPreference(Preferences.AC_SHOW_SUGGESTIONS_AUTOMATICALLY,
                 mainWindow.menu.optionsAutoCompleteShowAutomaticallyItem.isSelected());

@@ -79,30 +79,58 @@ public class AlignFilePickerController {
     Language sourceLanguage = allLangs.get(0);
     Language targetLanguage = allLangs.get(allLangs.size() - 1);
 
+    /**
+     * Set source file for alignment.
+     * @param sourceFile source file path.
+     */
     public void setSourceFile(String sourceFile) {
         this.sourceFile = sourceFile;
     }
 
+    /**
+     * Set target file for alignment.
+     * @param targetFile target file path.
+     */
     public void setTargetFile(String targetFile) {
         this.targetFile = targetFile;
     }
 
+    /**
+     * Set source language.
+     * @param sourceLanguage source language.
+     */
     public void setSourceLanguage(Language sourceLanguage) {
         this.sourceLanguage = sourceLanguage;
     }
 
+    /**
+     * Target source language.
+     * @param targetLanguage target langauge.
+     */
     public void setTargetLanguage(Language targetLanguage) {
         this.targetLanguage = targetLanguage;
     }
 
+    /**
+     * Set source defualt directory.
+     * @param sourceDefaultDir source default directory.
+     */
     public void setSourceDefaultDir(String sourceDefaultDir) {
         this.sourceDefaultDir = sourceDefaultDir;
     }
 
+    /**
+     * Set target default directory.
+     * @param targetDefaultDir target default directory.
+     */
     public void setTargetDefaultDir(String targetDefaultDir) {
         this.targetDefaultDir = targetDefaultDir;
     }
 
+    /**
+     * Set default save directory.
+     * @param defaultSaveDir default save directory to set.
+     */
     public void setDefaultSaveDir(String defaultSaveDir) {
         this.defaultSaveDir = defaultSaveDir;
     }

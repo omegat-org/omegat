@@ -83,7 +83,8 @@ public class SplittingPanelController {
      * @return The result array
      */
     public String[] show(Window parent) {
-        final JDialog dialog = new JDialog(parent, OStrings.getString("ALIGNER_DIALOG_SPLITTER"), ModalityType.DOCUMENT_MODAL);
+        JDialog dialog = new JDialog(parent, OStrings.getString("ALIGNER_DIALOG_SPLITTER"),
+                ModalityType.DOCUMENT_MODAL);
         dialog.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         dialog.addWindowListener(new WindowAdapter() {
             @Override

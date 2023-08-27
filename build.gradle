@@ -183,9 +183,6 @@ dependencies {
         // PDF Filter
         implementation(libs.apache.pdfbox)
 
-        // Aligner
-        implementation(libs.loomchild.maligna)
-
         // Dictionary
         implementation(libs.bundles.dictionary)
 

@@ -39,19 +39,6 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-import org.omegat.core.Core;
-import org.omegat.core.data.ParseEntry;
-import org.omegat.core.data.ParseEntry.ParseEntryResult;
-import org.omegat.core.data.ProtectedPart;
-import org.omegat.filters2.FilterContext;
-import org.omegat.filters2.IFilter;
-import org.omegat.filters2.IParseCallback;
-import org.omegat.util.Language;
-import org.omegat.util.Log;
-import org.omegat.util.OStrings;
-import org.omegat.util.StringUtil;
-import org.omegat.util.TMXWriter2;
-
 import net.loomchild.maligna.calculator.Calculator;
 import net.loomchild.maligna.calculator.length.NormalDistributionCalculator;
 import net.loomchild.maligna.calculator.length.PoissonDistributionCalculator;
@@ -67,6 +54,20 @@ import net.loomchild.maligna.filter.aligner.align.hmm.fb.ForwardBackwardAlgorith
 import net.loomchild.maligna.filter.aligner.align.hmm.viterbi.ViterbiAlgorithm;
 import net.loomchild.maligna.matrix.FullMatrixFactory;
 import net.loomchild.maligna.matrix.MatrixFactory;
+import tokyo.northside.logging.ILogger;
+import tokyo.northside.logging.LoggerFactory;
+
+import org.omegat.core.Core;
+import org.omegat.core.data.ParseEntry;
+import org.omegat.core.data.ParseEntry.ParseEntryResult;
+import org.omegat.core.data.ProtectedPart;
+import org.omegat.filters2.FilterContext;
+import org.omegat.filters2.IFilter;
+import org.omegat.filters2.IParseCallback;
+import org.omegat.util.Language;
+import org.omegat.util.OStrings;
+import org.omegat.util.StringUtil;
+import org.omegat.util.TMXWriter2;
 
 /**
  * Class to drive alignment of input files. Responsible for filtering and performing automatic alignment with
@@ -78,6 +79,7 @@ import net.loomchild.maligna.matrix.MatrixFactory;
  */
 public class Aligner {
 
+    private static final ILogger LOGGER = LoggerFactory.getLogger(Aligner.class);
     final String srcFile;
     final Language srcLang;
     final String trgFile;
@@ -215,6 +217,9 @@ public class Aligner {
         idPairs = null;
     }
 
+    /**
+     * Restore configuration to be default.
+     */
     void restoreDefaults() {
         comparisonMode = ComparisonMode.HEAPWISE;
         algorithmClass = AlgorithmClass.VITERBI;
@@ -379,6 +384,12 @@ public class Aligner {
         return doAlign(algorithmClass, calculatorType, counterType, srcSegs, trgSegs).stream();
     }
 
+    /**
+     * Write string pair entries as TMX file.
+     * @param outFile target output.
+     * @param pairs List of map.entry with String.
+     * @throws Exception when got I/O error.
+     */
     public void writePairsToTMX(File outFile, List<Entry<String, String>> pairs) throws Exception {
         TMXWriter2 writer = null;
         String creator = OStrings.getApplicationName() + " Aligner";
@@ -393,7 +404,7 @@ public class Aligner {
                 try {
                     writer.close();
                 } catch (Exception ex) {
-                    Log.log(ex);
+                    LOGGER.atInfo().setCause(ex).log();
                 }
             }
         }

@@ -4,7 +4,7 @@
  *           with fuzzy matching, translation memory, keyword search,
  *           glossaries, and translation leveraging into updated projects.
  *
- * Copyright (c) 2023
+ * Copyright (C) 2023 Hiroshi Miura
  *                Home page: https://www.omegat.org/
  *                Support center: https://omegat.org/support
  *
@@ -26,6 +26,13 @@
 
 package org.omegat.gui.align;
 
+import java.awt.Component;
+import java.util.Collections;
+
+import javax.swing.JMenuItem;
+
+import org.openide.awt.Mnemonics;
+
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.events.IApplicationEventListener;
@@ -34,11 +41,6 @@ import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.MenuExtender;
-import org.openide.awt.Mnemonics;
-
-import javax.swing.JMenuItem;
-import java.awt.Component;
-import java.util.Collections;
 
 public final class AlignerModule {
 

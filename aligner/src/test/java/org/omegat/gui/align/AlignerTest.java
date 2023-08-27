@@ -14,7 +14,7 @@
  the Free Software Foundation, either version 3 of the License, or
  (at your option) any later version.
 
- OmegaT is distributed in the hope that it will be useful,
+￼OmegaT is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU General Public License for more details.
@@ -59,9 +59,9 @@ public class AlignerTest {
 
     @Test
     public void testAlignerHeapMode() throws Exception {
-        String srcFile = "test/data/align/heapSource.txt";
+        String srcFile = AlignerTest.class.getResource("/data/align/heapSource.txt").getFile();
         Language srcLang = new Language(Locale.ENGLISH);
-        String trgFile = "test/data/align/heapTarget.txt";
+        String trgFile = AlignerTest.class.getResource("/data/align/heapTarget.txt").getFile();
         Language trgLang = new Language(Locale.JAPANESE);
         Aligner aligner = new Aligner(srcFile, srcLang, trgFile, trgLang);
 
@@ -85,9 +85,9 @@ public class AlignerTest {
 
     @Test
     public void testAlignerParseMode() throws Exception {
-        String srcFile = "test/data/align/parseSource.txt";
+        String srcFile = AlignerTest.class.getResource("/data/align/parseSource.txt").getFile();
         Language srcLang = new Language(Locale.ENGLISH);
-        String trgFile = "test/data/align/parseTarget.txt";
+        String trgFile = AlignerTest.class.getResource("/data/align/parseTarget.txt").getFile();
         Language trgLang = new Language(Locale.JAPANESE);
         Aligner aligner = new Aligner(srcFile, srcLang, trgFile, trgLang);
 
@@ -118,9 +118,9 @@ public class AlignerTest {
 
     @Test
     public void testAlignerIDMode() throws Exception {
-        String srcFile = "test/data/align/idSource.properties";
+        String srcFile = AlignerTest.class.getResource("/data/align/idSource.properties").getFile();
         Language srcLang = new Language(Locale.ENGLISH);
-        String trgFile = "test/data/align/idTarget.properties";
+        String trgFile = AlignerTest.class.getResource("/data/align/idTarget.properties").getFile();
         Language trgLang = new Language(Locale.JAPANESE);
         Aligner aligner = new Aligner(srcFile, srcLang, trgFile, trgLang);
 

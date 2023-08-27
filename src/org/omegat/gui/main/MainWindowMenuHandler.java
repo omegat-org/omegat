@@ -60,7 +60,6 @@ import org.omegat.core.search.SearchMode;
 import org.omegat.core.spellchecker.ISpellChecker;
 import org.omegat.core.tagvalidation.ErrorReport;
 import org.omegat.filters2.master.PluginUtils;
-import org.omegat.gui.align.AlignFilePickerController;
 import org.omegat.gui.dialogs.AboutDialog;
 import org.omegat.gui.dialogs.GoToSegmentDialog;
 import org.omegat.gui.dialogs.LastChangesDialog;

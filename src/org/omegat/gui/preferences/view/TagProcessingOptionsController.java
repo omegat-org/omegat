@@ -113,8 +113,14 @@ public class TagProcessingOptionsController extends BasePreferencesController {
         panel.javaPatternCheckBox.setSelected(Preferences.isPreference(Preferences.CHECK_JAVA_PATTERN_TAGS));
         panel.cbCountingProtectedText.setSelected(
                 StatisticsSettings.isCountingProtectedText() || StatisticsSettings.isCountingCustomTags());
-        panel.customPatternRegExpTF.setText(Preferences.getPreferenceDefault(Preferences.CHECK_CUSTOM_PATTERN, 
-                PatternConsts.CHECK_CUSTOM_PATTERN_DEFAULT));
+        String customTag = Preferences.getPreference(Preferences.CHECK_CUSTOM_PATTERN);
+        if (PatternConsts.EMPTY_MARK.equals(customTag)) {
+            panel.customPatternRegExpTF.setText("");
+        } else if (customTag.isEmpty()) {
+            panel.customPatternRegExpTF.setText(PatternConsts.CHECK_CUSTOM_PATTERN_DEFAULT);
+        } else {
+            panel.customPatternRegExpTF.setText(customTag);
+        }
         panel.removePatternRegExpTF.setText(Preferences.getPreference(Preferences.CHECK_REMOVE_PATTERN));
         panel.looseTagOrderCheckBox.setSelected(Preferences.isPreference(Preferences.LOOSE_TAG_ORDERING));
         panel.cbTagsValidRequired.setSelected(Preferences.isPreference(Preferences.TAGS_VALID_REQUIRED));
@@ -164,7 +170,12 @@ public class TagProcessingOptionsController extends BasePreferencesController {
         Preferences.setPreference(Preferences.CHECK_SIMPLE_PRINTF_TAGS, panel.simpleCheckRadio.isSelected());
         Preferences.setPreference(Preferences.CHECK_ALL_PRINTF_TAGS, panel.fullCheckRadio.isSelected());
         Preferences.setPreference(Preferences.CHECK_JAVA_PATTERN_TAGS, panel.javaPatternCheckBox.isSelected());
-        Preferences.setPreference(Preferences.CHECK_CUSTOM_PATTERN, panel.customPatternRegExpTF.getText());
+        String customTagRegEx = panel.customPatternRegExpTF.getText();
+        if ("".equals(customTagRegEx)) {
+            Preferences.setPreference(Preferences.CHECK_CUSTOM_PATTERN, PatternConsts.EMPTY_MARK);
+        } else {
+            Preferences.setPreference(Preferences.CHECK_CUSTOM_PATTERN, customTagRegEx);
+        }
         Preferences.setPreference(Preferences.CHECK_REMOVE_PATTERN, panel.removePatternRegExpTF.getText());
         Preferences.setPreference(Preferences.LOOSE_TAG_ORDERING, panel.looseTagOrderCheckBox.isSelected());
         Preferences.setPreference(Preferences.TAGS_VALID_REQUIRED, panel.cbTagsValidRequired.isSelected());

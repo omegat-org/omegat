@@ -1039,16 +1039,18 @@ public class RealProject implements IProject {
                         }
 
                         @Override
-                        public void rebaseAndSave(File out) throws Exception {
+                        public void rebaseAndSave(File tempOut) throws Exception {
+                            // rebase-merge and immediately save to
+                            // the temporary TMX
                             mergeTMX(baseTMX, headTMX, commitDetails);
+                            projectTMX.exportTMX(config, tempOut, false, false, true);
+                        }
 
+                        @Override
+                        public void reload(File file) throws Exception {
                             ProjectTMX newTMX = new ProjectTMX(config.getSourceLanguage(), config.getTargetLanguage(),
-                                    config.isSentenceSegmentingEnabled(),
-                                    new File(config.getProjectInternalDir(), OConsts.STATUS_EXTENSION), null);
+                                    config.isSentenceSegmentingEnabled(), file, null);
                             projectTMX.replaceContent(newTMX);
-
-                            projectTMX.exportTMX(config, out, false, false, true);
-
                         }
 
                         @Override
@@ -1109,6 +1111,10 @@ public class RealProject implements IProject {
                                 for (GlossaryEntry ge : headGlossaryEntries) {
                                     GlossaryReaderTSV.append(out, ge);
                                 }
+                            }
+
+                            @Override
+                            public void reload(final File file) {
                             }
 
                             @Override

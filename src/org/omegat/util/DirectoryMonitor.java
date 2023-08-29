@@ -27,6 +27,7 @@ package org.omegat.util;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -144,6 +145,10 @@ public class DirectoryMonitor extends Thread {
 
         // find new files
         List<File> foundFiles = FileUtil.findFiles(dir, pathname -> true);
+
+        // Make sure files are in the same order regardless of the platform
+        foundFiles.sort((f1, f2) -> f1.toString().toLowerCase().compareTo(f2.toString().toLowerCase()));
+
         for (File f : foundFiles) {
             if (stopped) {
                 return;

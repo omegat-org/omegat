@@ -1039,10 +1039,18 @@ public class RealProject implements IProject {
                         }
 
                         @Override
-                        public void rebaseAndSave(File out) throws Exception {
+                        public void rebaseAndSave(File tempOut) throws Exception {
+                            // rebase-merge and immediately save to
+                            // the temporary TMX
                             mergeTMX(baseTMX, headTMX, commitDetails);
+                            projectTMX.exportTMX(config, tempOut, false, false, true);
+                        }
 
-                            projectTMX.exportTMX(config, out, false, false, true);
+                        @Override
+                        public void reload(File file) throws Exception {
+                            ProjectTMX newTMX = new ProjectTMX(config.getSourceLanguage(), config.getTargetLanguage(),
+                                    config.isSentenceSegmentingEnabled(), file, null);
+                            projectTMX.replaceContent(newTMX);
                         }
 
                         @Override
@@ -1055,13 +1063,6 @@ public class RealProject implements IProject {
                             return TMXReader2.detectCharset(file);
                         }
                     });
-            if (projectTMX != null) {
-                // it can be not loaded yet
-                ProjectTMX newTMX = new ProjectTMX(config.getSourceLanguage(), config.getTargetLanguage(),
-                        config.isSentenceSegmentingEnabled(),
-                        new File(config.getProjectInternalDir(), OConsts.STATUS_EXTENSION), null);
-                projectTMX.replaceContent(newTMX);
-            }
         }
 
         if (processGlossary) {
@@ -1110,6 +1111,10 @@ public class RealProject implements IProject {
                                 for (GlossaryEntry ge : headGlossaryEntries) {
                                     GlossaryReaderTSV.append(out, ge);
                                 }
+                            }
+
+                            @Override
+                            public void reload(final File file) {
                             }
 
                             @Override

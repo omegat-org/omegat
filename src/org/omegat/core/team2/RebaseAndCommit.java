@@ -214,6 +214,7 @@ public final class RebaseAndCommit {
                 // file was committed good
                 provider.getTeamSettings().set(VERSION_PREFIX + path, newVersion);
             }
+            rebaser.reload(headRepoFile);
         }
     }
 
@@ -264,6 +265,11 @@ public final class RebaseAndCommit {
          * user, i.e. can work up to some minutes.
          */
         void rebaseAndSave(File out) throws Exception;
+
+        /**
+         * Reload projectTMX from resulted TMX.
+         */
+        void reload(File file) throws Exception;
 
         /**
          * Construct commit message.

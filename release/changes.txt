@@ -2,7 +2,7 @@
  OmegaT 6.0.1
 ----------------------------------------------------------------------
   0 Enhancement
- 14 Bug fixes
+ 15 Bug fixes
   1 Localisation updates
 ----------------------------------------------------------------------
 
@@ -46,6 +46,9 @@
 
   - Error when trying to backup the project file on Windows
   https://sourceforge.net/p/omegat/bugs/1166/
+
+  - Translation memories are not correctly reloaded after team synchronization
+  https://sourceforge.net/p/omegat/bugs/1164/
 
   - Backup file does not created in no-team project
   https://sourceforge.net/p/omegat/bugs/1159/

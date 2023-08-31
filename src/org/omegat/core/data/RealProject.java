@@ -1040,10 +1040,11 @@ public class RealProject implements IProject {
 
                         @Override
                         public void rebaseAndSave(File tempOut) throws Exception {
-                            // rebase-merge and immediately save to
-                            // the temporary TMX
-                            mergeTMX(baseTMX, headTMX, commitDetails);
-                            projectTMX.exportTMX(config, tempOut, false, false, true);
+                            // Rebase-merge and immediately save mergedTMX
+                            // to tempOut.
+                            // It shall not save it as the projectTMX here.
+                            ProjectTMX mergedTMX = mergeTMX(baseTMX, headTMX, commitDetails);
+                            mergedTMX.exportTMX(config, tempOut, false, false, true);
                         }
 
                         @Override
@@ -1143,7 +1144,8 @@ public class RealProject implements IProject {
      *
      * File 2: headTMX (theirs)
      */
-    protected void mergeTMX(ProjectTMX baseTMX, ProjectTMX headTMX, StringBuilder commitDetails) {
+    protected ProjectTMX mergeTMX(ProjectTMX baseTMX, ProjectTMX headTMX, StringBuilder commitDetails) {
+        ProjectTMX mergedTMX;
         StmProperties props = new StmProperties().setLanguageResource(OStrings.getResourceBundle())
                 .setParentWindow(Core.getMainWindow().getApplicationFrame())
                 // More than this number of conflicts will trigger List View by
@@ -1151,14 +1153,14 @@ public class RealProject implements IProject {
                 .setListViewThreshold(5);
         String srcLang = config.getSourceLanguage().getLanguage();
         String trgLang = config.getTargetLanguage().getLanguage();
-        ProjectTMX mergedTMX = SuperTmxMerge.merge(
+        mergedTMX = SuperTmxMerge.merge(
                 new SyncTMX(baseTMX, OStrings.getString("TMX_MERGE_BASE"), srcLang, trgLang),
                 new SyncTMX(projectTMX, OStrings.getString("TMX_MERGE_MINE"), srcLang, trgLang),
                 new SyncTMX(headTMX, OStrings.getString("TMX_MERGE_THEIRS"), srcLang, trgLang), props);
-        projectTMX.replaceContent(mergedTMX);
         Log.logDebug(LOGGER, "Merge report: {0}", props.getReport());
         commitDetails.append('\n');
         commitDetails.append(props.getReport().toString());
+        return mergedTMX;
     }
 
     /**

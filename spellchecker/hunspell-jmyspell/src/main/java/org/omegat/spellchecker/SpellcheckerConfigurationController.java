@@ -1,33 +1,33 @@
-/**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool
-          with fuzzy matching, translation memory, keyword search,
-          glossaries, and translation leveraging into updated projects.
+/*
+ *  OmegaT - Computer Assisted Translation (CAT) tool
+ *           with fuzzy matching, translation memory, keyword search,
+ *           glossaries, and translation leveraging into updated projects.
+ *
+ *  Copyright (C) 2007 Zoltan Bartko
+ *                2008-2011 Didier Briel
+ *                2012 Martin Fleurke, Didier Briel
+ *                2015 Aaron Madlon-Kay
+ *                2016 Aaron Madlon-Kay
+ *                Home page: https://www.omegat.org/
+ *                Support center: https://omegat.org/support
+ *
+ *  This file is part of OmegaT.
+ *
+ *  OmegaT is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  OmegaT is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
 
- Copyright (C) 2007 Zoltan Bartko
-               2008-2011 Didier Briel
-               2012 Martin Fleurke, Didier Briel
-               2015 Aaron Madlon-Kay
-               2016 Aaron Madlon-Kay
-               Home page: https://www.omegat.org/
-               Support center: https://omegat.org/support
-
- This file is part of OmegaT.
-
- OmegaT is free software: you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation, either version 3 of the License, or
- (at your option) any later version.
-
- OmegaT is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with this program.  If not, see <https://www.gnu.org/licenses/>.
- **************************************************************************/
-
-package org.omegat.gui.preferences.view;
+package org.omegat.spellchecker;
 
 import java.io.File;
 import java.util.Arrays;
@@ -46,7 +46,7 @@ import javax.swing.event.DocumentListener;
 import org.omegat.core.Core;
 import org.omegat.core.spellchecker.DictionaryManager;
 import org.omegat.core.spellchecker.ISpellChecker;
-import org.omegat.core.spellchecker.SpellChecker;
+import org.omegat.core.spellchecker.SpellCheckerManager;
 import org.omegat.gui.dialogs.DictionaryInstallerDialog;
 import org.omegat.gui.preferences.BasePreferencesController;
 import org.omegat.util.Language;
@@ -291,7 +291,7 @@ public class SpellcheckerConfigurationController extends BasePreferencesControll
         listSelectionChanged();
 
         String dictDirPath = Preferences.getPreferenceDefault(Preferences.SPELLCHECKER_DICTIONARY_DIRECTORY,
-                SpellChecker.DEFAULT_DICTIONARY_DIR.getPath());
+                SpellCheckerManager.DEFAULT_DICTIONARY_DIR.getPath());
         panel.directoryTextField.setText(dictDirPath);
 
         // Create dict dir if it doesn't exist, so user can install immediately
@@ -307,7 +307,7 @@ public class SpellcheckerConfigurationController extends BasePreferencesControll
         panel.dictionaryUrlTextField.setText(DICT_URL);
         directoryChanged();
         listSelectionChanged();
-        File dictDir = SpellChecker.DEFAULT_DICTIONARY_DIR;
+        File dictDir = SpellCheckerManager.DEFAULT_DICTIONARY_DIR;
         panel.directoryTextField.setText(dictDir.getPath());
         // Create dict dir if it doesn't exist, so user can install immediately
         if (!dictDir.exists()) {

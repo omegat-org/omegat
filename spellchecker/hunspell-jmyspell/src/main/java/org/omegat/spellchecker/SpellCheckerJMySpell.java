@@ -3,8 +3,7 @@
  *           with fuzzy matching, translation memory, keyword search,
  *           glossaries, and translation leveraging into updated projects.
  *
- *  Copyright (C) 2010 Alex Buloichik
- *                2023 Hiroshi Miura
+ *  Copyright (C) 2023 miurahr
  *                Home page: https://www.omegat.org/
  *                Support center: https://omegat.org/support
  *
@@ -24,64 +23,47 @@
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package org.omegat.core.spellchecker;
+package org.omegat.spellchecker;
 
-import java.util.Collections;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
-import org.omegat.util.Token;
+import org.dts.spell.dictionary.OpenOfficeSpellDictionary;
+import org.dts.spell.dictionary.SpellDictionary;
+
+import org.omegat.core.spellchecker.ISpellCheckerProvider;
 
 /**
- * Stub spellchecker which used when other spellcheckers can't be loaded, or
- * dictionary not exists.
+ * JMySpell spell checker implementation.
  *
  * @author Alex Buloichik (alex73mail@gmail.com)
- * @author Briac Pilpre
  */
-public class SpellCheckerDummy implements ISpellCheckerProvider, ISpellChecker {
+public class SpellCheckerJMySpell implements ISpellCheckerProvider {
+    private org.dts.spell.SpellChecker jmyspell;
 
-    @Override
-    public void initialize() {
+    public SpellCheckerJMySpell(File dictionaryName, File affixName) throws IOException {
+        SpellDictionary dict = new OpenOfficeSpellDictionary(dictionaryName, affixName, false);
+        jmyspell = new org.dts.spell.SpellChecker(dict);
+        jmyspell.setCaseSensitive(false);
     }
 
     @Override
     public void destroy() {
-    }
-
-    @Override
-    public void saveWordLists() {
+        jmyspell = null;
     }
 
     @Override
     public boolean isCorrect(String word) {
-        return true;
+        return jmyspell.isCorrect(word);
     }
 
     @Override
     public List<String> suggest(String word) {
-        return Collections.emptyList();
+        return jmyspell.getDictionary().getSuggestions(word, 20);
     }
 
     @Override
     public void learnWord(String word) {
-    }
-
-    @Override
-    public void ignoreWord(final String word) {
-    }
-
-    @Override
-    public List<Token> getMisspelledTokens(final String text) {
-        return Collections.emptyList();
-    }
-
-    @Override
-    public boolean isIgnoredWord(final String word) {
-        return false;
-    }
-
-    @Override
-    public boolean isLearnedWord(final String word) {
-        return false;
     }
 }

@@ -1,32 +1,32 @@
-/**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool
-          with fuzzy matching, translation memory, keyword search,
-          glossaries, and translation leveraging into updated projects.
+/*
+ *  OmegaT - Computer Assisted Translation (CAT) tool
+ *           with fuzzy matching, translation memory, keyword search,
+ *           glossaries, and translation leveraging into updated projects.
+ *
+ *  Copyright (C) 2007 Zoltan Bartko, Alex Buloichik
+ *                2009 Didier Briel
+ *                2015 Aaron Madlon-Kay
+ *                2020 Briac Pilpre
+ *                Home page: https://www.omegat.org/
+ *                Support center: https://omegat.org/support
+ *
+ *  This file is part of OmegaT.
+ *
+ *  OmegaT is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  OmegaT is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
 
- Copyright (C) 2007 Zoltan Bartko, Alex Buloichik
-               2009 Didier Briel
-               2015 Aaron Madlon-Kay
-               2020 Briac Pilpre
-               Home page: https://www.omegat.org/
-               Support center: https://omegat.org/support
-
- This file is part of OmegaT.
-
- OmegaT is free software: you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation, either version 3 of the License, or
- (at your option) any later version.
-
- OmegaT is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with this program.  If not, see <https://www.gnu.org/licenses/>.
- **************************************************************************/
-
-package org.omegat.core.spellchecker;
+package org.omegat.spellchecker;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -52,11 +52,13 @@ import org.languagetool.JLanguageTool;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.SourceTextEntry;
-import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.core.events.IEntryEventListener;
-import org.omegat.core.events.IProjectEventListener;
-import org.omegat.filters2.master.PluginUtils;
-import org.omegat.tokenizer.ITokenizer.StemmingMode;
+import org.omegat.core.spellchecker.ISpellChecker;
+import org.omegat.core.spellchecker.ISpellCheckerProvider;
+import org.omegat.core.spellchecker.SpellCheckerDummy;
+import org.omegat.core.spellchecker.SpellCheckerManager;
+import org.omegat.gui.preferences.PreferencesControllers;
+import org.omegat.tokenizer.ITokenizer;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
@@ -65,7 +67,7 @@ import org.omegat.util.StaticUtils;
 import org.omegat.util.Token;
 
 /**
- * Common spell checker interface for use any spellchecker providers.
+ * Default spell checker.
  *
  * @author Zoltan Bartko (bartkozoltan at bartkozoltan dot com)
  * @author Alex Buloichik (alex73mail@gmail.com)
@@ -73,24 +75,21 @@ import org.omegat.util.Token;
  * @author Aaron Madlon-Kay
  * @author Briac Pilpre
  */
-public class SpellChecker implements ISpellChecker {
-
-    public static final File DEFAULT_DICTIONARY_DIR = new File(StaticUtils.getConfigDir(),
-            OConsts.SPELLING_DICT_DIR);
+public class DefaultSpellChecker implements ISpellChecker {
 
     /** The spell checking provider. */
     private ISpellCheckerProvider checker;
 
     /** the list of ignored words */
-    private List<String> ignoreList = new ArrayList<String>();
+    private final List<String> ignoreList = new ArrayList<>();
 
     /** the list of learned (valid) words */
-    private List<String> learnedList = new ArrayList<String>();
+    private final List<String> learnedList = new ArrayList<>();
 
     /** Cache of correct words. */
-    private final Set<String> correctWordsCache = new HashSet<String>();
+    private final Set<String> correctWordsCache = new HashSet<>();
     /** Cache of incorrect words. */
-    private final Set<String> incorrectWordsCache = new HashSet<String>();
+    private final Set<String> incorrectWordsCache = new HashSet<>();
 
     /**
      * the file name with the ignored words
@@ -102,23 +101,20 @@ public class SpellChecker implements ISpellChecker {
      */
     private Path learnedFilePath;
 
-    /** Creates a new instance of SpellChecker */
-    public SpellChecker() {
-        CoreEvents.registerApplicationEventListener(new IApplicationEventListener() {
+    /**
+     * Register plugins into OmegaT.
+     */
+    public static void loadPlugins() {
+        Core.registerSpellCheckClass(DefaultSpellChecker.class);
+        PreferencesControllers.addSupplier(SpellcheckerConfigurationController::new);
+    }
 
-            @Override
-            public void onApplicationStartup() {
-                Core.registerSpellCheckClass(SpellCheckerLangToolHunspell.class);
-                Core.registerSpellCheckClass(SpellCheckerJMySpell.class);
-            }
+    public static void unloadPlugins() {
+    }
 
-            @Override
-            public void onApplicationShutdown() {
-            }
-        });
-        CoreEvents.registerProjectChangeListener(new IProjectEventListener() {
-            public void onProjectChanged(PROJECT_CHANGE_TYPE eventType) {
-                switch (eventType) {
+    public DefaultSpellChecker() {
+        CoreEvents.registerProjectChangeListener(eventType -> {
+            switch (eventType) {
                 case LOAD:
                 case CREATE:
                     initialize();
@@ -128,9 +124,8 @@ public class SpellChecker implements ISpellChecker {
                     break;
                 default:
                     // Nothing
-                }
-                resetCache();
             }
+            resetCache();
         });
         CoreEvents.registerEntryEventListener(new IEntryEventListener() {
             public void onNewFile(String activeFileName) {
@@ -154,25 +149,20 @@ public class SpellChecker implements ISpellChecker {
                 targetLanguage.getLocaleCode().replace('_', '-'), // Full xx-YY
                 targetLanguage.getLanguageCode()); // xx only
 
-        checker = toCheck.map(SpellChecker::initializeWithLanguage).filter(Optional::isPresent).findFirst()
-                .orElseGet(() -> Optional.of(new SpellCheckerDummy())).get();
-
-        if (checker instanceof SpellCheckerDummy) {
-            Log.log("No spell checker found for language " + targetLanguage);
-        }
-
+        checker = toCheck.map(DefaultSpellChecker::initializeWithLanguage) .filter(Optional::isPresent).findFirst()
+                .orElseGet(Optional::empty).orElseGet(SpellCheckerDummy::new);
         loadWordLists();
     }
 
     private static Optional<ISpellCheckerProvider> initializeWithLanguage(String language) {
-        // initialize the spell checker - get the data from the preferences
+        // check that the dict exists
         String dictionaryDir = Preferences.getPreferenceDefault(Preferences.SPELLCHECKER_DICTIONARY_DIRECTORY,
-                DEFAULT_DICTIONARY_DIR.getPath());
+                SpellCheckerManager.DEFAULT_DICTIONARY_DIR.getPath());
 
-        File dictBasename = new File(dictionaryDir, language);
         File affixName = new File(dictionaryDir, language + OConsts.SC_AFFIX_EXTENSION);
         File dictionaryName = new File(dictionaryDir, language + OConsts.SC_DICTIONARY_EXTENSION);
 
+        // get the data from the preferences
         if (!dictionaryName.exists()) {
             // Try installing from bundled resources
             installBundledDictionary(dictionaryDir, language);
@@ -182,50 +172,53 @@ public class SpellChecker implements ISpellChecker {
             installLTBundledDictionary(dictionaryDir, language);
         }
 
-        if (!isValidFile(affixName) || !isValidFile(dictionaryName)) {
-            // If we still don't have a dictionary then return
+        if (isInvalidFile(affixName) || isInvalidFile(dictionaryName)) {
+            // If we still don't have a dictionary, then return
             return Optional.empty();
         }
-
-        // Try to use a custom spell checker if one is available.
-        for (Class<?> customSpellChecker : PluginUtils.getSpellCheckClasses()) {
-            try {
-                ISpellCheckerProvider spellChecker = (ISpellCheckerProvider) customSpellChecker.getDeclaredConstructor().newInstance();
-                spellChecker.init(language);
-                return Optional.of(spellChecker);
-            } catch (SpellCheckerException e) {
-                Log.log("Spell checker " + customSpellChecker + " doesn't support language " + language + ": " + e.getMessage());
-            } catch (Exception e) {
-                Log.log("Error when trying to load the custom spell checker '" + customSpellChecker + "' for language '"
-                        + language + "'.");
-            }
+        try {
+            ISpellCheckerProvider result = new SpellCheckerLangToolHunspell(dictionaryName, affixName);
+            Log.log("Initialized LanguageTool Hunspell spell checker for language '" + language
+                    + "' dictionary " + dictionaryName);
+            return Optional.of(result);
+        } catch (Throwable ex) {
+            Log.log("Error loading hunspell: " + ex.getMessage());
         }
-        return Optional.empty();
+        try {
+            ISpellCheckerProvider result = new SpellCheckerJMySpell(dictionaryName, affixName);
+            Log.log("Initialized JMySpell spell checker for language '" + language + "' dictionary "
+                    + dictionaryName);
+            return Optional.of(result);
+        } catch (Exception ex) {
+            Log.log("Error loading jmyspell: " + ex.getMessage());
+        }
+        // Try to use a custom spell checker if one is available.
+       return Optional.empty();
     }
 
-    protected static boolean isValidFile(File file) {
+    private static boolean isInvalidFile(File file) {
         try {
             if (!file.exists()) {
-                return false;
+                return true;
             }
             if (!file.isFile()) {
                 Log.log("Spelling dictionary exists but is not a file: " + file.getPath());
-                return false;
+                return true;
             }
             if (!file.canRead()) {
                 Log.log("Can't read spelling dictionary: " + file.getPath());
-                return false;
+                return true;
             }
             if (file.length() == 0L) {
                 // On OS X, attempting to load Hunspell with a zero-length .dic file causes
                 // a native exception that crashes the whole program.
                 Log.log("Spelling dictionary appears to be empty: " + file.getPath());
-                return false;
+                return true;
             }
-            return true;
+            return false;
         } catch (Throwable ex) {
             Log.log(ex);
-            return false;
+            return true;
         }
     }
 
@@ -234,9 +227,9 @@ public class SpellChecker implements ISpellChecker {
      * inside this OmegaT distribution, install it.
      */
     private static void installBundledDictionary(String dictionaryDir, String language) {
-        try (InputStream bundledDict = SpellChecker.class.getResourceAsStream(language + ".zip")) {
+        try (InputStream bundledDict = SpellCheckerManager.class.getResourceAsStream(language + ".zip")) {
             if (bundledDict == null) {
-                // Relevant dictionary not present.
+                // Relevant dictionary is not present.
                 return;
             }
             StaticUtils.extractFromZip(bundledDict, new File(dictionaryDir),
@@ -260,12 +253,12 @@ public class SpellChecker implements ISpellChecker {
         }
         try {
             try (InputStream dicStream = JLanguageTool.getDataBroker().getFromResourceDirAsStream(resPath);
-                    FileOutputStream fos = new FileOutputStream(new File(dictionaryDir, language + ".dic"))) {
+                 FileOutputStream fos = new FileOutputStream(new File(dictionaryDir, language + ".dic"))) {
                 IOUtils.copy(dicStream, fos);
             }
             try (InputStream affStream = JLanguageTool.getDataBroker()
                     .getFromResourceDirAsStream(resPath.replaceFirst(".dic$", ".aff"));
-                    FileOutputStream fos = new FileOutputStream(new File(dictionaryDir, language + ".aff"))) {
+                 FileOutputStream fos = new FileOutputStream(new File(dictionaryDir, language + ".aff"))) {
                 IOUtils.copy(affStream, fos);
             }
         } catch (Exception ex) {
@@ -277,7 +270,7 @@ public class SpellChecker implements ISpellChecker {
         // find out the internal project directory
         String projectDir = Core.getProject().getProjectProperties().getProjectInternal();
 
-        // load the ignore list
+        // load the ignored word list
         ignoreFilePath = Paths.get(projectDir, OConsts.IGNORED_WORD_LIST_FILE_NAME);
 
         ignoreList.clear();
@@ -296,7 +289,7 @@ public class SpellChecker implements ISpellChecker {
         if (learnedFilePath.toFile().isFile()) {
             try {
                 learnedList.addAll(Files.readAllLines(learnedFilePath, StandardCharsets.UTF_8));
-                learnedList.stream().forEach(word -> checker.learnWord(word));
+                learnedList.forEach(word -> checker.learnWord(word));
             } catch (Exception ex) {
                 Log.log(ex);
             }
@@ -339,11 +332,12 @@ public class SpellChecker implements ISpellChecker {
     }
 
     /**
-     * Check the word. If it is ignored or learned (valid), returns true. Otherwise false.
+     * Check the word. If it is ignored or learned (valid), returns true.
+     * Otherwise, false.
      */
     public boolean isCorrect(String word) {
-        // check if spellchecker is already initialized. If not, skip checking
-        // to prevent nullPointerErrors.
+        // Check if a spellchecker is already initialized. If not, skip
+        // checking to prevent nullPointerErrors.
         if (checker == null) {
             return true;
         }
@@ -440,7 +434,7 @@ public class SpellChecker implements ISpellChecker {
 
     @Override
     public List<Token> getMisspelledTokens(String text) {
-        return Stream.of(Core.getProject().getTargetTokenizer().tokenizeWords(text, StemmingMode.NONE))
+        return Stream.of(Core.getProject().getTargetTokenizer().tokenizeWords(text, ITokenizer.StemmingMode.NONE))
                 .filter(tok -> !isCorrect(tok.getTextFromString(text))).collect(Collectors.toList());
     }
 }

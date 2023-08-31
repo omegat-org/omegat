@@ -6,4 +6,5 @@ include("machinetranslators:apertium",
         "machinetranslators:ibmwatson",
         "machinetranslators:mymemory",
         "machinetranslators:yandex",
+        "spellchecker:hunspell-jmyspell",
         "tipoftheday")

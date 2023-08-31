@@ -27,7 +27,7 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
-package org.omegat.gui.preferences.view;
+package org.omegat.spellchecker;
 
 import org.omegat.util.OStrings;
 

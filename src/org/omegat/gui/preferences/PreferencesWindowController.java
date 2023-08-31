@@ -119,7 +119,6 @@ import org.omegat.gui.preferences.view.MachineTranslationPreferencesController;
 import org.omegat.gui.preferences.view.PluginsPreferencesController;
 import org.omegat.gui.preferences.view.SaveOptionsController;
 import org.omegat.gui.preferences.view.SecureStoreController;
-import org.omegat.gui.preferences.view.SpellcheckerConfigurationController;
 import org.omegat.gui.preferences.view.TMMatchesPreferencesController;
 import org.omegat.gui.preferences.view.TagProcessingOptionsController;
 import org.omegat.gui.preferences.view.TeamOptionsController;
@@ -373,7 +372,6 @@ public class PreferencesWindowController implements FurtherActionListener {
         acNode.add(new HideableNode(new CharTableAutoCompleterOptionsController()));
         acNode.add(new HideableNode(new HistoryAutoCompleterOptionsController()));
         root.add(acNode);
-        root.add(new HideableNode(new SpellcheckerConfigurationController()));
         root.add(new HideableNode(new LanguageToolConfigurationController()));
         root.add(new HideableNode(new ExternalFinderPreferencesController()));
         root.add(new HideableNode(new EditingBehaviorController()));
@@ -388,12 +386,14 @@ public class PreferencesWindowController implements FurtherActionListener {
         root.add(new HideableNode(new SecureStoreController()));
         HideableNode pluginsNode = new HideableNode(new PluginsPreferencesController());
         root.add(pluginsNode);
-        root.add(new HideableNode(new VersionCheckPreferencesController()));
         PreferencesControllers.getSuppliers().forEach(s -> placePluginView(root, s.get()));
+        root.add(new HideableNode(new VersionCheckPreferencesController()));
         return root;
     }
 
     private static void placePluginView(HideableNode root, IPreferencesController view) {
+        root.add(new HideableNode(view));
+        /*
         Class<? extends IPreferencesController> parentClass = view.getParentViewClass();
         Class<? extends IPreferencesController> effectiveParentClass = parentClass == null
                 ? PluginsPreferencesController.class : parentClass;
@@ -403,6 +403,7 @@ public class PreferencesWindowController implements FurtherActionListener {
                 node.add(new HideableNode(view));
             }
         });
+        */
     }
 
     @Override

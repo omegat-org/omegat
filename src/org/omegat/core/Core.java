@@ -321,6 +321,10 @@ public final class Core {
         PluginUtils.getTokenizerClasses().add(clazz);
     }
 
+    /**
+     * Register spellchecker plugin.
+     * @param clazz spellchecker class.
+     */
     public static void registerSpellCheckClass(Class<? extends ISpellChecker> clazz) {
         PluginUtils.getSpellCheckClasses().add(clazz);
     }

@@ -39,7 +39,7 @@ import org.omegat.core.spellchecker.ISpellCheckerProvider;
  *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public class SpellCheckerJMySpell implements ISpellCheckerProvider {
+public final class SpellCheckerJMySpell implements ISpellCheckerProvider {
     private org.dts.spell.SpellChecker jmyspell;
 
     public SpellCheckerJMySpell(File dictionaryName, File affixName) throws IOException {

@@ -41,7 +41,7 @@ import org.omegat.core.spellchecker.ISpellCheckerProvider;
  * @author Aaron Madlon-Kay
  * @author Briac Pilpre
  */
-public class SpellCheckerLangToolHunspell implements ISpellCheckerProvider {
+public final class SpellCheckerLangToolHunspell implements ISpellCheckerProvider {
     private final HunspellDictionary dict;
 
     public SpellCheckerLangToolHunspell(final File dictName, final File affixName) {

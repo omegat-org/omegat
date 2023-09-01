@@ -89,6 +89,22 @@ public class SpellcheckerConfigurationController extends BasePreferencesControll
     private void initGui() {
         panel = new SpellcheckerConfigurationPanel();
 
+        // localize GUI parts.
+        org.openide.awt.Mnemonics.setLocalizedText(panel.autoSpellcheckCheckBox,
+                DefaultSpellChecker.BUNDLE.getString("GUI_SPELLCHECKER_AUTOSPELLCHECKCHECKBOX"));
+        org.openide.awt.Mnemonics.setLocalizedText(panel.directoryLabel, DefaultSpellChecker.BUNDLE.getString(
+                "GUI_SPELLCHECKER_DICTIONARYLABEL"));
+        org.openide.awt.Mnemonics.setLocalizedText(panel.directoryChooserButton, DefaultSpellChecker.BUNDLE.getString(
+                "GUI_SPELLCHECKER_DIRECTORYCHOOSERBUTTON"));
+        org.openide.awt.Mnemonics.setLocalizedText(panel.contentLabel, DefaultSpellChecker.BUNDLE.getString(
+                "GUI_SPELLCHECKER_AVAILABLE_LABEL"));
+        org.openide.awt.Mnemonics.setLocalizedText(panel.uninstallButton, DefaultSpellChecker.BUNDLE.getString(
+                "GUI_SPELLCHECKER_UNINSTALLBUTTON"));
+        org.openide.awt.Mnemonics.setLocalizedText(panel.dictionaryUrlLabel, DefaultSpellChecker.BUNDLE.getString(
+                "GUI_SPELLCHECKER_URL_LABEL"));
+        org.openide.awt.Mnemonics.setLocalizedText(panel.installButton, DefaultSpellChecker.BUNDLE.getString(
+                "GUI_SPELLCHECKER_INSTALLBUTTON"));
+
         panel.autoSpellcheckCheckBox.addActionListener(e -> updateDetailPanel());
 
         panel.directoryTextField.getDocument().addDocumentListener(new DocumentListener() {

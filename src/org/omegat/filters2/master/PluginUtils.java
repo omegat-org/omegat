@@ -113,6 +113,7 @@ public final class PluginUtils {
         /** Misc plugins, such as GUI extension like web browser spport. */
         MISCELLANEOUS("miscellaneous"),
 
+        /** Spellchecker plugins. */
         SPELLCHECK("spellcheck"),
 
         /** When plugin does not defined any of above. */
@@ -342,6 +343,10 @@ public final class PluginUtils {
         return TOKENIZER_CLASSES;
     }
 
+    /**
+     * Reterun registered plugin classes for spellchecker category.
+     * @return list of classes.
+     */
     public static List<Class<?>> getSpellCheckClasses() {
         return SPELLCHECK_CLASSES;
     }

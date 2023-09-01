@@ -50,7 +50,6 @@ import org.omegat.core.spellchecker.SpellCheckerManager;
 import org.omegat.gui.dialogs.DictionaryInstallerDialog;
 import org.omegat.gui.preferences.BasePreferencesController;
 import org.omegat.util.Language;
-import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.StaticUIUtils;
@@ -83,7 +82,7 @@ public class SpellcheckerConfigurationController extends BasePreferencesControll
 
     @Override
     public String toString() {
-        return OStrings.getString("PREFS_TITLE_SPELLCHECKER");
+        return DefaultSpellChecker.BUNDLE.getString("PREFS_TITLE_SPELLCHECKER");
     }
 
     private void initGui() {
@@ -156,21 +155,22 @@ public class SpellcheckerConfigurationController extends BasePreferencesControll
     private void doInstall() {
         File dicDir = getDictDir();
         if (dicDir == null) {
-            JOptionPane.showMessageDialog(panel, OStrings.getString("GUI_SPELLCHECKER_INSTALL_UNABLE"),
-                    OStrings.getString("GUI_SPELLCHECKER_INSTALL_UNABLE_TITLE"), JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(panel, DefaultSpellChecker.BUNDLE.getString("GUI_SPELLCHECKER_INSTALL_UNABLE"),
+                    DefaultSpellChecker.BUNDLE.getString("GUI_SPELLCHECKER_INSTALL_UNABLE_TITLE"), JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         if (!dicDir.exists()) {
             int doCreateDir = JOptionPane.showConfirmDialog(panel,
-                    OStrings.getString("GUI_SPELLCHECKER_DIR_NOT_PRESENT"),
-                    OStrings.getString("GUI_SPELLCHECKER_DIR_NOT_PRESENT_TITLE"), JOptionPane.OK_CANCEL_OPTION);
+                    DefaultSpellChecker.BUNDLE.getString("GUI_SPELLCHECKER_DIR_NOT_PRESENT"),
+                    DefaultSpellChecker.BUNDLE.getString("GUI_SPELLCHECKER_DIR_NOT_PRESENT_TITLE"), JOptionPane.OK_CANCEL_OPTION);
             if (doCreateDir != JOptionPane.OK_OPTION) {
                 return;
             }
             if (!dicDir.mkdirs()) {
-                JOptionPane.showMessageDialog(panel, OStrings.getString("GUI_SPELLCHECKER_COULD_NOT_CREATE_DIR"),
-                        OStrings.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(panel, DefaultSpellChecker.BUNDLE.getString(
+                        "GUI_SPELLCHECKER_COULD_NOT_CREATE_DIR"),
+                        DefaultSpellChecker.BUNDLE.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
                 return;
             }
         }
@@ -184,7 +184,7 @@ public class SpellcheckerConfigurationController extends BasePreferencesControll
             installerDialog.setVisible(true);
             updateLanguageList();
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(panel, ex.getLocalizedMessage(), OStrings.getString("ERROR_TITLE"),
+            JOptionPane.showMessageDialog(panel, ex.getLocalizedMessage(), DefaultSpellChecker.BUNDLE.getString("ERROR_TITLE"),
                     JOptionPane.ERROR_MESSAGE);
         }
     }
@@ -199,15 +199,15 @@ public class SpellcheckerConfigurationController extends BasePreferencesControll
             String selectedLocaleName = selectedItem.substring(0, selectedItem.indexOf(" "));
 
             if (selectedLocaleName.equals(getCurrentLanguage().getLocaleCode())) {
-                if (JOptionPane.showConfirmDialog(panel, OStrings.getString("GUI_SPELLCHECKER_UNINSTALL_CURRENT"),
-                        OStrings.getString("GUI_SPELLCHECKER_UNINSTALL_CURRENT_TITLE"),
+                if (JOptionPane.showConfirmDialog(panel, DefaultSpellChecker.BUNDLE.getString("GUI_SPELLCHECKER_UNINSTALL_CURRENT"),
+                        DefaultSpellChecker.BUNDLE.getString("GUI_SPELLCHECKER_UNINSTALL_CURRENT_TITLE"),
                         JOptionPane.YES_NO_OPTION) == JOptionPane.NO_OPTION) {
                     return;
                 }
             }
             if (!dicMan.uninstallDictionary(selectedLocaleName)) {
-                JOptionPane.showMessageDialog(panel, OStrings.getString("GUI_SPELLCHECKER_UNINSTALL_UNABLE"),
-                        OStrings.getString("GUI_SPELLCHECKER_UNINSTALL_UNABLE_TITLE"), JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(panel, DefaultSpellChecker.BUNDLE.getString("GUI_SPELLCHECKER_UNINSTALL_UNABLE"),
+                        DefaultSpellChecker.BUNDLE.getString("GUI_SPELLCHECKER_UNINSTALL_UNABLE_TITLE"), JOptionPane.ERROR_MESSAGE);
             }
             ((DefaultListModel<?>) panel.languageList.getModel()).remove(panel.languageList.getSelectedIndex());
         }
@@ -217,7 +217,7 @@ public class SpellcheckerConfigurationController extends BasePreferencesControll
         // open a dialog box to choose the directory
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-        fileChooser.setDialogTitle(OStrings.getString("GUI_SPELLCHECKER_FILE_CHOOSER_TITLE"));
+        fileChooser.setDialogTitle(DefaultSpellChecker.BUNDLE.getString("GUI_SPELLCHECKER_FILE_CHOOSER_TITLE"));
         if (fileChooser.showOpenDialog(panel) == JFileChooser.APPROVE_OPTION) {
             // we should write the result into the directory text field
             File file = fileChooser.getSelectedFile();

@@ -53,16 +53,15 @@ import org.eclipse.jgit.util.FS;
 import org.eclipse.jgit.util.StringUtils;
 import org.eclipse.jgit.util.SystemReader;
 import org.eclipse.jgit.util.TemporaryBuffer;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Platform;
+import tokyo.northside.logging.ILogger;
 
 public class GITExternalGpgSigner extends GpgSigner {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(GITExternalGpgSigner.class);
+    private static final ILogger LOGGER = Log.getLogger(GITExternalGpgSigner.class);
 
     // A GPG environment variable name. We remove this environment variable when calling gpg.
     private static final String PINENTRY_USER_DATA = "PINENTRY_USER_DATA";
@@ -148,7 +147,7 @@ public class GITExternalGpgSigner extends GpgSigner {
                 return new String(b.toByteArray(4000),
                         Charset.defaultCharset());
             } catch (IOException ex) {
-                Log.deco(LOGGER.atError()).setCause(ex).setMessageRB(ExternalGpgSigner_bufferError).log();
+                LOGGER.atError().setCause(ex).setMessageRB(ExternalGpgSigner_bufferError).log();
             }
         }
         return "";
@@ -272,7 +271,7 @@ public class GITExternalGpgSigner extends GpgSigner {
             }, null);
             if (!result[0]) {
                 if (!StringUtils.isEmptyOrNull(gpgSigningKey)) {
-                    Log.deco(LOGGER.atWarn()).setMessageRB(ExternalGpgSigner_noKeyFound)
+                    LOGGER.atWarn().setMessageRB(ExternalGpgSigner_noKeyFound)
                             .addArgument(gpgSigningKey).log();
                 }
             }
@@ -414,7 +413,7 @@ public class GITExternalGpgSigner extends GpgSigner {
             }
         } catch (SecurityException | UnsupportedOperationException
                 | IllegalArgumentException ex) {
-            Log.deco(LOGGER.atError()).setCause(ex).setMessageRB(ExternalGpgSigner_environmentError)
+            LOGGER.atError().setCause(ex).setMessageRB(ExternalGpgSigner_environmentError)
                     .log();
         }
     }
@@ -453,7 +452,7 @@ public class GITExternalGpgSigner extends GpgSigner {
                             }
                         }, null);
                     } catch (IOException | CanceledException ex) {
-                        Log.deco(LOGGER.atError()).setMessageRB(ExternalGpgSigner_cannotSearch)
+                        LOGGER.atError().setMessageRB(ExternalGpgSigner_cannotSearch)
                                 .setCause(ex).log();
                     }
                     exe = result[0];
@@ -476,7 +475,7 @@ public class GITExternalGpgSigner extends GpgSigner {
                         return exe.getAbsolutePath();
                     }
                 } catch (SecurityException e) {
-                    Log.deco(LOGGER.atError()).setCause(e).setMessageRB(ExternalGpgSigner_skipNotAccessiblePath)
+                    LOGGER.atError().setCause(e).setMessageRB(ExternalGpgSigner_skipNotAccessiblePath)
                             .addArgument(exe.getPath()).log();
                 }
             }

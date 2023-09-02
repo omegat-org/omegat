@@ -66,9 +66,6 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import org.omegat.CLIParameters.PSEUDO_TRANSLATE_TYPE;
 import org.omegat.CLIParameters.TAG_VALIDATION_MODE;
 import org.omegat.convert.ConvertConfigs;
@@ -103,6 +100,8 @@ import org.omegat.util.TMXWriter2;
 import org.omegat.util.gui.OSXIntegration;
 
 import com.vlsolutions.swing.docking.DockingDesktop;
+import tokyo.northside.logging.ILogger;
+import tokyo.northside.logging.LoggerFactory;
 
 /**
  * The main OmegaT class, used to launch the program.
@@ -116,7 +115,7 @@ import com.vlsolutions.swing.docking.DockingDesktop;
  * @author Hiroshi Miura
  */
 public final class Main {
-    private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
+    private static final ILogger LOGGER = LoggerFactory.getLogger(Main.class, OStrings.getResourceBundle());
 
     private Main() {
     }
@@ -182,13 +181,13 @@ public final class Main {
         if (PARAMS.containsKey(CLIParameters.DISABLE_LOCATION_SAVE)) {
             RuntimePreferences.setLocationSaveEnabled(false);
         }
-        Log.deco(LOGGER.atInfo()).log(
+        LOGGER.atInfo().log(
                 "\n===================================================================\n"
                         + "{0} ({1}) Locale {2}",
                 OStrings.getNameAndVersion(), DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT)
                         .withLocale(Locale.getDefault()).format(ZonedDateTime.now()),
                 Locale.getDefault().getDisplayName());
-        Log.deco(LOGGER.atInfo()).logRB("LOG_STARTUP_INFO", System.getProperty("java.vendor"),
+        LOGGER.atInfo().logRB("LOG_STARTUP_INFO", System.getProperty("java.vendor"),
                 System.getProperty("java.version"), System.getProperty("java.home"));
 
         System.setProperty("http.agent", OStrings.getDisplayNameAndVersion());

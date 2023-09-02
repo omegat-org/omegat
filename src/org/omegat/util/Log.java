@@ -41,10 +41,9 @@ import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.LogRecord;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.slf4j.spi.LoggingEventBuilder;
+import tokyo.northside.logging.ILogger;
 import tokyo.northside.logging.LoggerDecorator;
+import tokyo.northside.logging.LoggerFactory;
 
 import org.omegat.util.logging.OmegaTFileHandler;
 
@@ -57,13 +56,20 @@ import org.omegat.util.logging.OmegaTFileHandler;
  */
 public final class Log {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
+    private static final ILogger LOGGER = LoggerFactory.getLogger(ILogger.ROOT_LOGGER_NAME,
+            OStrings.getResourceBundle());
 
     private Log() {
     }
 
     static {
         boolean loaded = false;
+
+        // Ask slf4j-format-jdk14 to append (KEY) to log message.
+        // When you switch to backend other than slf4j-jdk14(aka. JUL),
+        // you should set to false. Otherwise, you may get duplicated key
+        // in message.
+        System.setProperty(LoggerDecorator.LOCALISATION_KEY_APPENDER, "true");
 
         String customLogConfig = System.getProperty("java.util.logging.config.file");
         if (customLogConfig != null) {
@@ -186,7 +192,7 @@ public final class Log {
      *            The new level
      */
     public static void setLevel(Level level) {
-        org.slf4j.ILoggerFactory loggerFactory = LoggerFactory.getILoggerFactory();
+        org.slf4j.ILoggerFactory loggerFactory = org.slf4j.LoggerFactory.getILoggerFactory();
         Class<? extends org.slf4j.ILoggerFactory> loggerFactoryClass = loggerFactory.getClass();
         String loggerName = loggerFactoryClass.getName();
         if (loggerName.equals("org.slf4j.jul.JDK14LoggerFactory")) {
@@ -196,15 +202,15 @@ public final class Log {
         }
     }
 
-    public static LoggerDecorator deco(final LoggingEventBuilder builder) {
-        return LoggerDecorator.deco(builder, OStrings.getResourceBundle());
+    public static ILogger getLogger(final Class<?> clazz) {
+        return LoggerDecorator.deco(org.slf4j.LoggerFactory.getLogger(clazz), OStrings.getResourceBundle());
     }
 
     /**
      * Logs what otherwise would go to System.out
      */
     public static void log(String s) {
-        deco(LOGGER.atInfo()).setMessage(s).log();
+        LOGGER.atInfo().setMessage(s).log();
     }
 
     /**
@@ -217,7 +223,7 @@ public final class Log {
      *            StaticUtils.format.
      */
     public static void logRB(String key, Object... parameters) {
-        deco(LOGGER.atInfo()).logRB(key, parameters);
+        LOGGER.atInfo().logRB(key, parameters);
     }
 
     /**
@@ -246,7 +252,7 @@ public final class Log {
      *            StaticUtils.format.
      */
     public static void logWarningRB(String key, Object... parameters) {
-        deco(LOGGER.atWarn()).logRB(key, parameters);
+        LOGGER.atWarn().logRB(key, parameters);
     }
 
     /**
@@ -264,7 +270,7 @@ public final class Log {
      *            StaticUtils.format.
      */
     public static void logInfoRB(String key, Object... parameters) {
-        deco(LOGGER.atInfo()).logRB(key, parameters);
+        LOGGER.atInfo().logRB(key, parameters);
     }
 
     /**
@@ -282,7 +288,7 @@ public final class Log {
      *            StaticUtils.format.
      */
     public static void logErrorRB(String key, Object... parameters) {
-        deco(LOGGER.atError()).logRB(key, parameters);
+        LOGGER.atError().logRB(key, parameters);
     }
 
     /**
@@ -302,7 +308,7 @@ public final class Log {
      *            StaticUtils.format.
      */
     public static void logErrorRB(Throwable ex, String key, Object... parameters) {
-        deco(LOGGER.atError()).setCause(ex).logRB(key, parameters);
+        LOGGER.atError().setCause(ex).logRB(key, parameters);
     }
 
     /**
@@ -334,7 +340,7 @@ public final class Log {
      *            Parameter for the error message.
      */
     public static void logInfoRB(String key, Object parameter) {
-        deco(LOGGER.atInfo()).setMessageRB(key).addArgument(parameter).log();
+        LOGGER.atInfo().setMessageRB(key).addArgument(parameter).log();
     }
 
     /**
@@ -345,7 +351,7 @@ public final class Log {
      *            The key of the error message in the resource bundle
      */
     public static void logInfoRB(String key) {
-        deco(LOGGER.atInfo()).setMessageRB(key).log();
+        LOGGER.atInfo().setMessageRB(key).log();
     }
 
     /**
@@ -358,7 +364,7 @@ public final class Log {
      *            Parameter for the error message.
      */
     public static void logWarningRB(String key, Object parameter) {
-        deco(LOGGER.atWarn()).setMessageRB(key).addArgument(parameter).log();
+        LOGGER.atWarn().setMessageRB(key).addArgument(parameter).log();
     }
 
     /**
@@ -366,6 +372,6 @@ public final class Log {
      * bundle).
      */
     public static void logErrorRB(String key, Object parameter) {
-        deco(LOGGER.atError()).setMessageRB(key).addArgument(parameter).log();
+        LOGGER.atError().setMessageRB(key).addArgument(parameter).log();
     }
 }

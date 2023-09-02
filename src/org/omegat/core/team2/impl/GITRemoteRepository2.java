@@ -79,8 +79,6 @@ import org.eclipse.jgit.treewalk.AbstractTreeIterator;
 import org.eclipse.jgit.treewalk.CanonicalTreeParser;
 import org.eclipse.jgit.treewalk.FileTreeIterator;
 import org.eclipse.jgit.util.FS;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import org.omegat.core.team2.IRemoteRepository2;
 import org.omegat.core.team2.ProjectTeamSettings;
@@ -88,6 +86,7 @@ import org.omegat.util.Log;
 import org.omegat.util.StringUtil;
 
 import gen.core.project.RepositoryDefinition;
+import tokyo.northside.logging.ILogger;
 
 /**
  * GIT repository connection implementation.
@@ -96,7 +95,7 @@ import gen.core.project.RepositoryDefinition;
  * @author Aaron Madlon-Kay
  */
 public class GITRemoteRepository2 implements IRemoteRepository2 {
-    private static final Logger LOGGER = LoggerFactory.getLogger(GITRemoteRepository2.class);
+    private static final ILogger LOGGER = Log.getLogger(GITRemoteRepository2.class);
     private static final String GIT_START_MSG = "Git '{}' execution start";
     private static final String GIT_NO_CHANGES_MSG = "Git '{}' did nothing because there were no changes";
 
@@ -174,7 +173,7 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
                     git.submoduleUpdate().setTimeout(TIMEOUT).call();
                 }
             } else {
-                Log.deco(LOGGER.atDebug()).setMessage(GIT_START_MSG).addArgument("clone").log();
+                LOGGER.atDebug().setMessage(GIT_START_MSG).addArgument("clone").log();
                 CloneCommand c = Git.cloneRepository();
                 c.setURI(repositoryURL);
                 c.setDirectory(localDirectory);
@@ -199,7 +198,7 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
                     git.submoduleUpdate().setTimeout(TIMEOUT).call();
                 }
                 configRepo();
-                Log.deco(LOGGER.atInfo()).setMessageRB("GIT_FINISH").addArgument("clone")
+                LOGGER.atInfo().setMessageRB("GIT_FINISH").addArgument("clone")
                         .log();
             }
 
@@ -208,7 +207,7 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
                 git.reset().setMode(ResetType.HARD).call();
             }
             configRepo();
-            Log.deco(LOGGER.atInfo()).setMessageRB("GIT_FINISH").addArgument("clone").log();
+            LOGGER.atInfo().setMessageRB("GIT_FINISH").addArgument("clone").log();
         } finally {
             client.stop();
         }
@@ -324,8 +323,7 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
         LOGGER.atDebug().setMessage(GIT_START_MSG).addArgument("addForCommit").log();
         try (Git git = new Git(repository)) {
             git.add().addFilepattern(path).call();
-            Log.deco(LOGGER.atInfo()).setMessageRB("GIT_FINISH").addArgument("addForCommit")
-                    .log();
+            LOGGER.atInfo().setMessageRB("GIT_FINISH").addArgument("addForCommit").log();
         } catch (Exception ex) {
             Log.logErrorRB("GIT_ERROR", "addForCommit", ex.getMessage());
             throw ex;
@@ -346,7 +344,7 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
         LOGGER.atDebug().setMessage(GIT_START_MSG).addArgument("addForDelete").log();
         try (Git git = new Git(repository)) {
             git.rm().addFilepattern(path).call();
-            Log.deco(LOGGER.atInfo()).setMessageRB("GIT_FINISH").addArgument("addForDelete")
+            LOGGER.atInfo().setMessageRB("GIT_FINISH").addArgument("addForDelete")
                     .log();
         } catch (Exception ex) {
             Log.logErrorRB("GIT_ERROR", "addForDelete", ex.getMessage());
@@ -477,16 +475,16 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
                     .collect(Collectors.toList());
             String result;
             if (statuses.isEmpty() || statuses.stream().anyMatch(s -> s != RemoteRefUpdate.Status.OK)) {
-                Log.deco(LOGGER.atWarn()).setMessageRB("GIT_CONFLICT").log();
+                LOGGER.atWarn().setMessageRB("GIT_CONFLICT").log();
                 result = null;
             } else {
                 result = commit.getName();
             }
             LOGGER.atTrace().log("GIT committed into new version {} ", result);
-            Log.deco(LOGGER.atInfo()).setMessageRB("GIT_FINISH").addArgument("upload").log();
+            LOGGER.atInfo().setMessageRB("GIT_FINISH").addArgument("upload").log();
             return result;
         } catch (Exception ex) {
-            Log.deco(LOGGER.atError()).setMessageRB("GIT_ERROR").addArgument("upload")
+            LOGGER.atError().setMessageRB("GIT_ERROR").addArgument("upload")
                     .addArgument(ex.getMessage()).log();
             if (ex instanceof TransportException) {
                 throw new NetworkException(ex);

@@ -180,7 +180,7 @@ dependencies {
         implementation 'commons-io:commons-io:2.11.0'
         implementation 'org.apache.commons:commons-lang3:3.11'
         api "org.slf4j:slf4j-api:${slf4jVersion}"
-        implementation 'tokyo.northside:slf4j-format-jdk14:0.4.0-1-a762645d04-SNAPSHOT'
+        implementation 'tokyo.northside:slf4j-format-jdk14:0.5.0'
         runtimeOnly "org.slf4j:slf4j-jdk14:${slf4jVersion}"
 
         // macOS integration

@@ -52,6 +52,7 @@ import org.omegat.util.StringUtil;
 
 import gen.core.project.RepositoryDefinition;
 import gen.core.project.RepositoryMapping;
+import tokyo.northside.logging.ILogger;
 
 /**
  * Class for process some repository commands.
@@ -63,7 +64,7 @@ import gen.core.project.RepositoryMapping;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class RemoteRepositoryProvider {
-    private static final Logger LOGGER = LoggerFactory.getLogger(RemoteRepositoryProvider.class);
+    private static final ILogger LOGGER = Log.getLogger(RemoteRepositoryProvider.class);
 
     public static final String REPO_SUBDIR = ".repositories/";
     public static final String REPO_PREPARE_SUBDIR = ".repositories/prep/";
@@ -213,7 +214,7 @@ public class RemoteRepositoryProvider {
                 throw e;
             } catch (Exception e) {
                 errors.add(e);
-                Log.deco(LOGGER.atError()).setMessageRB("TEAM_UPDATE_REPO_ERROR")
+                LOGGER.atError().setMessageRB("TEAM_UPDATE_REPO_ERROR")
                         .addArgument(e.getMessage()).log();
             }
         }
@@ -584,7 +585,7 @@ public class RemoteRepositoryProvider {
                     }
                 }
             } catch (Exception e) {
-                Log.deco(LOGGER.atWarn()).setMessage("").setCause(e).log();
+                LOGGER.atWarn().setMessage("").setCause(e).log();
             }
         }
 
@@ -599,8 +600,7 @@ public class RemoteRepositoryProvider {
                     FileUtils.deleteDirectory(f);
                 }
             } catch (Exception e) {
-                Log.deco(LOGGER.atWarn()).setMessageRB("LOG_ERROR_DELETE_FILE").addArgument(f)
-                        .log();
+                LOGGER.atWarn().setMessageRB("LOG_ERROR_DELETE_FILE").addArgument(f).log();
             }
         }
     }

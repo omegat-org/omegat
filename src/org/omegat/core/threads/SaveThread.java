@@ -32,15 +32,13 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.concurrent.TimeoutException;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import org.omegat.core.Core;
 import org.omegat.core.KnownException;
 import org.omegat.core.data.IProject;
 import org.omegat.core.team2.IRemoteRepository2;
 import org.omegat.util.Log;
 import org.omegat.util.Preferences;
+import tokyo.northside.logging.ILogger;
 
 /**
  * An independent stream to save project, created in order not to freese UI
@@ -52,7 +50,7 @@ import org.omegat.util.Preferences;
  * @author Aaron Madlon-Kay
  */
 public class SaveThread extends Thread implements IAutoSave {
-    private static final Logger LOGGER = LoggerFactory.getLogger(SaveThread.class);
+    private static final ILogger LOGGER = Log.getLogger(SaveThread.class);
 
     /** The length the thread should wait in milliseconds */
     private int waitDuration;
@@ -110,22 +108,22 @@ public class SaveThread extends Thread implements IAutoSave {
                         Core.getMainWindow().showStatusMessageRB("ST_PROJECT_AUTOSAVED",
                                 DateFormat.getTimeInstance(DateFormat.SHORT).format(new Date()));
                     } catch (TimeoutException ex) {
-                        Log.deco(LOGGER.atWarn())
+                        LOGGER.atWarn()
                                 .logRB("AUTOSAVE_LOCK_ACQUISITION_TIMEOUT");
                     } catch (KnownException ex) {
                         Core.getMainWindow().showStatusMessageRB(ex.getMessage(), ex.getParams());
                     } catch (IRemoteRepository2.NetworkException ex) {
-                        Log.deco(LOGGER.atWarn()).logRB("TEAM_NETWORK_ERROR", ex.getMessage());
+                        LOGGER.atWarn().logRB("TEAM_NETWORK_ERROR", ex.getMessage());
                     } catch (OutOfMemoryError oome) {
                         // inform the user
                         long memory = Runtime.getRuntime().maxMemory() / 1024 / 1024;
-                        Log.deco(LOGGER.atError()).setMessageRB("OUT_OF_MEMORY")
+                        LOGGER.atError().setMessageRB("OUT_OF_MEMORY")
                                 .addArgument(memory).setCause(oome).log();
                         Core.getMainWindow().showErrorDialogRB("TF_ERROR", "OUT_OF_MEMORY", memory);
                         // Just quit, we can't help it anyway
                         System.exit(1);
                     } catch (Exception ex) {
-                        Log.deco(LOGGER.atWarn()).logRB("AUTOSAVE_GENERIC_ERROR", ex.getMessage());
+                        LOGGER.atWarn().logRB("AUTOSAVE_GENERIC_ERROR", ex.getMessage());
                     }
                     LOGGER.atDebug().log("Finish project save from SaveThread");
                 }

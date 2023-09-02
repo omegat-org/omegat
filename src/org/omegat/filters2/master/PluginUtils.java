@@ -41,6 +41,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -112,7 +113,7 @@ public final class PluginUtils {
         THEME("theme"),
         /** Misc plugins, such as GUI extension like web browser spport. */
         MISCELLANEOUS("miscellaneous"),
-        /** When plugin does not defined any of above. */
+        /** When plugin does not define any of above. */
         UNKNOWN("Undefined");
 
         private final String typeValue;
@@ -136,6 +137,39 @@ public final class PluginUtils {
             }
             return UNKNOWN;
         }
+
+        @Override
+        public String toString() {
+            return getTypeValue();
+        }
+
+        public String getLocalizedValue() {
+            switch(this) {
+                case BASE:
+                    return OStrings.getString("PLUGIN_TYPE_BASE");
+                case THEME:
+                    return OStrings.getString("PLUGIN_TYPE_THEME");
+                case FILTER:
+                    return OStrings.getString("PLUGIN_TYPE_FILTER");
+                case MISCELLANEOUS:
+                    return OStrings.getString("PLUGIN_TYPE_MISC");
+                case MARKER:
+                    return OStrings.getString("PLUGIN_TYPE_MARKER");
+                case GLOSSARY:
+                    return OStrings.getString("PLUGIN_TYPE_GLOSSARY");
+                case TOKENIZER:
+                    return OStrings.getString("PLUGIN_TYPE_TOKENIZER");
+                case DICTIONARY:
+                    return OStrings.getString("PLUGIN_TYPE_DICTIONARY");
+                case MACHINETRANSLATOR:
+                    return OStrings.getString("PLUGIN_TYPE_MACHINETRANSLATOR");
+                case UNKNOWN:
+                default:
+                    return OStrings.getString("PLUGIN_TYPE_UNKNOWN");
+            }
+        }
+
+        public static Comparator<PluginType> ascComparator = (t1, t2) -> t1.typeValue.compareTo(t2.typeValue);
     }
 
     private static final List<Class<?>> LOADED_PLUGINS = new ArrayList<>();
@@ -216,7 +250,7 @@ public final class PluginUtils {
                         }
                     }
                 } else {
-                    // load from plugins property list
+                    // load from "Plugins.properties"
                     Properties props = new Properties();
                     try (FileInputStream fis = new FileInputStream(PLUGINS_LIST_FILE)) {
                         props.load(fis);

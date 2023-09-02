@@ -82,7 +82,9 @@ public class DictionariesManager implements DirectoryMonitor.Callback {
 
     /**
      * Add dictionary factory.
-     * @param dict factory to register.
+     * 
+     * @param dict
+     *            factory to register.
      */
     public void addDictionaryFactory(IDictionaryFactory dict) {
         synchronized (factories) {
@@ -96,7 +98,9 @@ public class DictionariesManager implements DirectoryMonitor.Callback {
 
     /**
      * Remove dictionary Factory.
-     * @param factory factory to unregister.
+     * 
+     * @param factory
+     *            factory to unregister.
      */
     public void removeDictionaryFactory(IDictionaryFactory factory) {
         synchronized (factories) {
@@ -106,7 +110,9 @@ public class DictionariesManager implements DirectoryMonitor.Callback {
 
     /**
      * Add online dictionary(dictionary without local data).
-     * @param dict dictionary lookup driver.
+     * 
+     * @param dict
+     *            dictionary lookup driver.
      */
     public void addOnlineDictionary(IDictionary dict) {
         synchronized (onlineDictionaries) {
@@ -116,7 +122,9 @@ public class DictionariesManager implements DirectoryMonitor.Callback {
 
     /**
      * Remove online dictionary.
-     * @param dict dictionary lookup driver to remove from registration.
+     * 
+     * @param dict
+     *            dictionary lookup driver to remove from registration.
      */
     public void removeOnlineDictionary(IDictionary dict) {
         synchronized (onlineDictionaries) {
@@ -165,10 +173,10 @@ public class DictionariesManager implements DirectoryMonitor.Callback {
                 loadIgnoreWords(file);
             } else if (loadDictionary(file)) {
                 long en = System.currentTimeMillis();
-                Log.log("Loaded dictionary from '" + file.getPath() + "': " + (en - st) + "ms");
+                Log.logInfoRB("DICTIONARY_LOAD_FILE", file.getPath(), en - st);
             }
         } catch (Exception ex) {
-            Log.log("Error load dictionary from '" + file.getPath() + "': " + ex.getMessage());
+            Log.logWarningRB("DICTIONARY_LOAD_ERROR", file.getPath(), ex.getMessage());
         }
         pane.refresh();
     }
@@ -237,8 +245,7 @@ public class DictionariesManager implements DirectoryMonitor.Callback {
             outFile.delete();
             FileUtil.rename(outFileTmp, outFile);
         } catch (IOException ex) {
-            Log.log("Error saving ignore words");
-            Log.log(ex);
+            Log.logErrorRB(ex, "DICTIONARY_MANAGER_ERROR_SAVE_IGNORE");
         }
     }
 
@@ -262,11 +269,8 @@ public class DictionariesManager implements DirectoryMonitor.Callback {
             dicts.addAll(onlineDictionaries);
         }
         Collection<String> queryWords = words.stream()
-                .filter(word -> !isIgnoreWord(word) && !isStopWord(word))
-                .collect(Collectors.toList());
-        return dicts.parallelStream()
-                .map(dict -> doLookUp(dict, queryWords))
-                .flatMap(Collection::stream)
+                .filter(word -> !isIgnoreWord(word) && !isStopWord(word)).collect(Collectors.toList());
+        return dicts.parallelStream().map(dict -> doLookUp(dict, queryWords)).flatMap(Collection::stream)
                 .collect(Collectors.toList());
     }
 

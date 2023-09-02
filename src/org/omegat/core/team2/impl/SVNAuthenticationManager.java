@@ -26,12 +26,11 @@
 package org.omegat.core.team2.impl;
 
 import java.io.Console;
-import java.util.Arrays;
-import java.util.logging.Logger;
 
 import javax.net.ssl.TrustManager;
 
-import org.checkerframework.checker.units.qual.C;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.tmatesoft.svn.core.SVNErrorCode;
 import org.tmatesoft.svn.core.SVNErrorMessage;
 import org.tmatesoft.svn.core.SVNException;
@@ -72,7 +71,7 @@ public class SVNAuthenticationManager implements ISVNAuthenticationManager {
     static final String KEY_USERNAME_SUFFIX = "username";
     static final String KEY_PASSWORD_SUFFIX = "password";
 
-    private static final Logger LOGGER = Logger.getLogger(SVNAuthenticationManager.class.getName());
+    private static final Logger LOGGER = LoggerFactory.getLogger(SVNAuthenticationManager.class);
 
     private final RepositoryDefinition repoDef;
     private final String predefinedUser;
@@ -92,7 +91,7 @@ public class SVNAuthenticationManager implements ISVNAuthenticationManager {
         this.teamSettings = teamSettings;
     }
 
-    private static RepositoryDefinition getDef(String repoUrl){
+    private static RepositoryDefinition getDef(String repoUrl) {
         RepositoryDefinition def = new RepositoryDefinition();
         def.setUrl(repoUrl);
         return def;
@@ -102,7 +101,7 @@ public class SVNAuthenticationManager implements ISVNAuthenticationManager {
     public void acknowledgeAuthentication(boolean accepted, String kind, String realm,
             SVNErrorMessage errorMessage, SVNAuthentication authentication) throws SVNException {
         if (!accepted) {
-            Log.logDebug(LOGGER, "SVN authentication error: {0}", errorMessage);
+            LOGGER.atDebug().log("SVN authentication error: {}", errorMessage);
         }
     }
 
@@ -139,7 +138,7 @@ public class SVNAuthenticationManager implements ISVNAuthenticationManager {
     protected SVNAuthentication askCUI(String kind, SVNURL url, String message) throws SVNException {
         Console console = System.console();
         if (console == null) {
-            Log.log("No console found.");
+            Log.logInfoRB("SVN_NO_CONSOLE");
             if (ISVNAuthenticationManager.USERNAME.equals(kind)) {
                 // user auth shouldn't be null.
                 return SVNUserNameAuthentication.newInstance("", false, url, false);
@@ -212,7 +211,7 @@ public class SVNAuthenticationManager implements ISVNAuthenticationManager {
         } else {
             return ask(kind, url, OStrings.getString("TEAM_USERPASS_WRONG", url.getPath()));
         }
-    };
+    }
 
     @Override
     public ISVNProxyManager getProxyManager(SVNURL url) throws SVNException {
@@ -258,9 +257,11 @@ public class SVNAuthenticationManager implements ISVNAuthenticationManager {
     private SVNAuthentication getAuthenticatorInstance(String kind, SVNURL url, Credentials credentials)
             throws SVNException {
         if (ISVNAuthenticationManager.PASSWORD.equals(kind)) {
-            return SVNPasswordAuthentication.newInstance(credentials.username, credentials.password.toCharArray(), false, url, false);
+            return SVNPasswordAuthentication.newInstance(credentials.username,
+                    credentials.password.toCharArray(), false, url, false);
         } else if (ISVNAuthenticationManager.SSH.equals(kind)) {
-            return SVNSSHAuthentication.newInstance(credentials.username, credentials.password.toCharArray(), -1, false, url, false);
+            return SVNSSHAuthentication.newInstance(credentials.username, credentials.password.toCharArray(),
+                    -1, false, url, false);
         } else if (ISVNAuthenticationManager.USERNAME.equals(kind)) {
             return SVNUserNameAuthentication.newInstance(credentials.username, false, url, false);
         } else {

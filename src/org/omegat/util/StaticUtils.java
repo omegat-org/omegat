@@ -151,9 +151,9 @@ public final class StaticUtils {
                     File uriFile = Paths.get(sourceUri).toFile();
                     // If running from a JAR, get the enclosing folder
                     // (the JAR is assumed to be at the installation root,
-                    //  and there is also "readme.txt" file).
-                    if (uriFile.getName().endsWith(".jar") && new File(uriFile.getParentFile(),
-                            "readme.txt").exists()) {
+                    // and there is also "readme.txt" file).
+                    if (uriFile.getName().endsWith(".jar")
+                            && new File(uriFile.getParentFile(), "readme.txt").exists()) {
                         file = uriFile.getParentFile();
                     } else {
                         // Running from an IDE or build tool; use CWD.
@@ -345,6 +345,13 @@ public final class StaticUtils {
             Log.log(e.toString());
         }
         return scriptDir;
+    }
+
+    /**
+     * Returns the path to the log file.
+     */
+    public static String getLogLocation() {
+        return StaticUtils.getConfigDir() + "/logs";
     }
 
     /**

@@ -1656,8 +1656,7 @@ public class EditorController implements IEditor {
             editor.setSelectionEnd(end);
         } catch (BadLocationException ble) {
             // highly improbable
-            Log.log("bad location exception when changing case");
-            Log.log(ble);
+            Log.logErrorRB(ble, "EDITOR_CONTROLLER_EXCEPTION");
         }
     }
 

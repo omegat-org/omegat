@@ -27,14 +27,15 @@ package org.omegat.core.team2.impl;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.logging.Logger;
 
 import org.apache.commons.io.FileUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import org.omegat.core.Core;
 import org.omegat.core.team2.IRemoteRepository2;
 import org.omegat.core.team2.ProjectTeamSettings;
 import org.omegat.core.team2.RemoteRepositoryProvider;
-import org.omegat.util.Log;
 
 import gen.core.project.RepositoryDefinition;
 import gen.core.project.RepositoryMapping;
@@ -44,14 +45,14 @@ import gen.core.project.RepositoryMapping;
  * there is no "commit" to avoid clobbering remote files.
  */
 public class FileRepository implements IRemoteRepository2 {
-    private static final Logger LOGGER = Logger.getLogger(FileRepository.class.getName());
+    private static final Logger LOGGER = LoggerFactory.getLogger(FileRepository.class);
 
     private RepositoryDefinition config;
     private File baseDirectory;
 
     @Override
     public void init(RepositoryDefinition repo, File dir, ProjectTeamSettings teamSettings) throws Exception {
-        Log.logDebug(LOGGER, "Initialize file repository");
+        LOGGER.atDebug().log("Initialize file repository");
         config = repo;
         baseDirectory = dir;
     }
@@ -67,20 +68,22 @@ public class FileRepository implements IRemoteRepository2 {
             throw new RuntimeException("Not supported");
         }
 
-        Log.logDebug(LOGGER, "Update to latest");
+        LOGGER.atDebug().log("Update to latest");
         File baseSource = new File(config.getUrl());
-        
+
         // If the path is relative, it's relative to the projectDir
         if (!baseSource.isAbsolute()) {
-            baseSource = new File(Core.getProject().getProjectProperties().getProjectRootDir(), config.getUrl());
-            Log.logDebug(LOGGER, "Using base directory \"" + baseSource.getCanonicalPath() + "\"");
+            baseSource = new File(Core.getProject().getProjectProperties().getProjectRootDir(),
+                    config.getUrl());
+            LOGGER.atDebug().setMessage("Using base directory \"{}\"").addArgument(baseSource).log();
         }
 
         // retrieve all mapped files
         for (RepositoryMapping m : config.getMapping()) {
-            File src = new File(baseSource, m.getRepository());
-            File dst = new File(baseDirectory, m.getRepository());
-            Log.logDebug(LOGGER, "Copy \"" + src.getAbsolutePath() + "\" to \"" + dst.getAbsolutePath() + "\".");
+            final File src = new File(baseSource, m.getRepository());
+            final File dst = new File(baseDirectory, m.getRepository());
+            LOGGER.atDebug().setMessage("Copy \"{}\" to \"{}\".").addArgument(src::getAbsolutePath)
+                    .addArgument(dst::getAbsolutePath).log();
             copyFiles(src, dst);
         }
     }
@@ -90,7 +93,8 @@ public class FileRepository implements IRemoteRepository2 {
         String repoDir = new File(RemoteRepositoryProvider.REPO_SUBDIR).getName();
         if (src.exists() && src.isDirectory()) {
             for (File f : src.listFiles()) {
-                // Skip the ".repositories" directory to avoid recursion problems
+                // Skip the ".repositories" directory to avoid recursion
+                // problems
                 if (f.getName().equals(repoDir)) {
                     continue;
                 }
@@ -103,14 +107,12 @@ public class FileRepository implements IRemoteRepository2 {
 
     @Override
     public void addForCommit(String path) throws Exception {
-        Log.logDebug(LOGGER,
-                String.format("Cannot add files for commit for File repositories. Skipping \"%s\".", path));
+        LOGGER.atDebug().log("Cannot add files for commit for File repositories. Skipping \"{}\".", path);
     }
 
     @Override
     public void addForDeletion(String path) throws Exception {
-        Log.logDebug(LOGGER,
-                String.format("Cannot add files for deletion for File repositories. Skipping \"%s\".", path));
+        LOGGER.atDebug().log("Cannot add files for deletion for File repositories. Skipping \"{}\".", path);
     }
 
     @Override
@@ -125,7 +127,7 @@ public class FileRepository implements IRemoteRepository2 {
 
     @Override
     public String commit(String[] onVersions, String comment) throws Exception {
-        Log.logDebug(LOGGER, "Commit not supported for File repositories.");
+        LOGGER.atDebug().log("Commit not supported for File repositories.");
 
         return null;
     }

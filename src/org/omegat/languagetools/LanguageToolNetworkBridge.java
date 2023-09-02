@@ -153,7 +153,7 @@ public class LanguageToolNetworkBridge extends BaseLanguageToolBridge {
         }
 
         serverUrl = "http://localhost:" + port + CHECK_PATH;
-        Log.log(OStrings.getString("LT_SERVER_STARTED"));
+        Log.logInfoRB("LT_SERVER_STARTED");
         try {
             init(sourceLang, targetLang);
         } catch (Exception ex) {
@@ -172,8 +172,8 @@ public class LanguageToolNetworkBridge extends BaseLanguageToolBridge {
         JsonNode serverLanguages = getSupportedLanguages();
         this.sourceLang = negotiateLanguage(serverLanguages, sourceLang);
         this.targetLang = negotiateLanguage(serverLanguages, targetLang);
-        Log.log("Negotiated LanguageTool source language: " + this.sourceLang);
-        Log.log("Negotiated LanguageTool target language: " + this.targetLang);
+        Log.logInfoRB("LANGUAGE_TOOL_SOURCE_NEGOTIATED", this.sourceLang);
+        Log.logInfoRB("LANGUAGE_TOOL_TARGET_NEGOTIATED", this.targetLang);
     }
 
     @Override
@@ -189,7 +189,7 @@ public class LanguageToolNetworkBridge extends BaseLanguageToolBridge {
                         break;
                     }
                 }
-                Log.log(OStrings.getString("LT_SERVER_TERMINATED"));
+                Log.logInfoRB("LT_SERVER_TERMINATED");
                 server = null;
             } catch (Exception ex) {
                 Log.log(ex);

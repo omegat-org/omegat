@@ -126,22 +126,21 @@ public class SpellChecker implements ISpellChecker {
     }
 
     /**
-     * Initialize the library for the given project. Loads the lists of ignored and learned words for the
-     * project
+     * Initialize the library for the given project. Loads the lists of ignored
+     * and learned words for the project
      */
     public void initialize() {
         Language targetLanguage = Core.getProject().getProjectProperties().getTargetLanguage();
 
-        Stream<String> toCheck = Stream.of(
-                targetLanguage.getLocaleCode(), // Full xx_YY
-                targetLanguage.getLocaleCode().replace('_', '-'), // Full xx-YY
-                targetLanguage.getLanguageCode()); // xx only
+        // check targets "xx_YY", "xx-YY" and "xx" only
+        Stream<String> toCheck = Stream.of(targetLanguage.getLocaleCode(),
+                targetLanguage.getLocaleCode().replace('_', '-'), targetLanguage.getLanguageCode());
 
         checker = toCheck.map(SpellChecker::initializeWithLanguage).filter(Optional::isPresent).findFirst()
                 .orElseGet(() -> Optional.of(new SpellCheckerDummy())).get();
 
         if (checker instanceof SpellCheckerDummy) {
-            Log.log("No spell checker found for language " + targetLanguage);
+            Log.logInfoRB("SPELLCHECKER_LANGUAGE_NOT_FOUND", targetLanguage);
         }
 
         loadWordLists();
@@ -167,26 +166,24 @@ public class SpellChecker implements ISpellChecker {
         }
 
         if (!isValidFile(affixName) || !isValidFile(dictionaryName)) {
-            // If we still don't have a dictionary then return
+            // If we still don't have a dictionary, then return
             return Optional.empty();
         }
 
         try {
             ISpellCheckerProvider result = new SpellCheckerLangToolHunspell(dictionaryName, affixName);
-            Log.log("Initialized LanguageTool Hunspell spell checker for language '" + language
-                    + "' dictionary " + dictionaryName);
+            Log.logInfoRB("SPELLCHECKER_HUNSPELL_INITIALIZED", language, dictionaryName);
             return Optional.of(result);
         } catch (Throwable ex) {
-            Log.log("Error loading hunspell: " + ex.getMessage());
+            Log.logWarningRB("SPELLCHECKER_HUNSPELL_EXCEPTION", ex.getMessage());
         }
         try {
             ISpellCheckerProvider result = new SpellCheckerJMySpell(dictionaryName.getPath(),
                     affixName.getPath());
-            Log.log("Initialized JMySpell spell checker for language '" + language + "' dictionary "
-                    + dictionaryName);
+            Log.logInfoRB("SPELLCHECKER_JMYSQLL_INITIALIZED", language, dictionaryName);
             return Optional.of(result);
         } catch (Exception ex) {
-            Log.log("Error loading jmyspell: " + ex.getMessage());
+            Log.logErrorRB("SPELLCHECKER_JMYSPELL_EXCEPTION", ex.getMessage());
         }
         return Optional.empty();
     }
@@ -197,17 +194,18 @@ public class SpellChecker implements ISpellChecker {
                 return false;
             }
             if (!file.isFile()) {
-                Log.log("Spelling dictionary exists but is not a file: " + file.getPath());
+                Log.logWarningRB("SPELLCHECKER_DICTIONARY_NOT_FILE", file.getPath());
                 return false;
             }
             if (!file.canRead()) {
-                Log.log("Can't read spelling dictionary: " + file.getPath());
+                Log.logWarningRB("SPELLCHECKER_DICTIONARY_NOT_READ", file.getPath());
                 return false;
             }
             if (file.length() == 0L) {
-                // On OS X, attempting to load Hunspell with a zero-length .dic file causes
+                // On OS X, attempting to load Hunspell with a zero-length .dic
+                // file causes
                 // a native exception that crashes the whole program.
-                Log.log("Spelling dictionary appears to be empty: " + file.getPath());
+                Log.logWarningRB("SPELLCHECKER_DICTIONARY_EMPTY", file.getPath());
                 return false;
             }
             return true;
@@ -327,7 +325,8 @@ public class SpellChecker implements ISpellChecker {
     }
 
     /**
-     * Check the word. If it is ignored or learned (valid), returns true. Otherwise false.
+     * Check the word. If it is ignored or learned (valid), returns true.
+     * Otherwise false.
      */
     public boolean isCorrect(String word) {
         // check if spellchecker is already initialized. If not, skip checking
@@ -418,7 +417,8 @@ public class SpellChecker implements ISpellChecker {
     }
 
     /**
-     * Normalize the orthography of the word by replacing alternative characters with "canonical" ones.
+     * Normalize the orthography of the word by replacing alternative characters
+     * with "canonical" ones.
      */
     private static String normalize(String word) {
         // U+2019 RIGHT SINGLE QUOTATION MARK to U+0027 APOSTROPHE

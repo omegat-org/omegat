@@ -40,6 +40,9 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.apache.commons.io.FileUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.team2.IRemoteRepository2.NetworkException;
 import org.omegat.util.FileUtil;
@@ -49,16 +52,20 @@ import org.omegat.util.StringUtil;
 
 import gen.core.project.RepositoryDefinition;
 import gen.core.project.RepositoryMapping;
+import tokyo.northside.logging.ILogger;
 
 /**
  * Class for process some repository commands.
  *
- * Path, local path, repository path can be directory or one file only. Directory should be declared like
- * 'source/', file should be declared like 'source/text.po'.
+ * Path, local path, repository path can be directory or one file only.
+ * Directory should be declared like 'source/', file should be declared like
+ * 'source/text.po'.
  *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class RemoteRepositoryProvider {
+    private static final ILogger LOGGER = Log.getLogger(RemoteRepositoryProvider.class);
+
     public static final String REPO_SUBDIR = ".repositories/";
     public static final String REPO_PREPARE_SUBDIR = ".repositories/prep/";
     public static final String REPO_GIT_SUBDIR = ".git/";
@@ -69,18 +76,21 @@ public class RemoteRepositoryProvider {
     final List<RepositoryDefinition> repositoriesDefinitions;
     final List<IRemoteRepository2> repositories = new ArrayList<>();
     /**
-     * exclude some path like .git, .svn, project_save.tmx and glossary.txt when copying files from repo to project.
+     * exclude some path like .git, .svn, project_save.tmx and glossary.txt when
+     * copying files from repo to project.
      */
     private String[] forceExcludes = {};
     private List<Mapping> mappingsWithFileListSnapshot;
 
-    public RemoteRepositoryProvider(File projectRoot, List<RepositoryDefinition> repositoriesDefinitions, ProjectProperties props)
-            throws Exception {
+    public RemoteRepositoryProvider(File projectRoot, List<RepositoryDefinition> repositoriesDefinitions,
+            ProjectProperties props) throws Exception {
         this(projectRoot, repositoriesDefinitions);
         setForceExcludesFromProjectProperties(props);
 
     }
-    public RemoteRepositoryProvider(File projectRoot, List<RepositoryDefinition> repositoriesDefinitions) throws Exception {
+
+    public RemoteRepositoryProvider(File projectRoot, List<RepositoryDefinition> repositoriesDefinitions)
+            throws Exception {
         this.projectRoot = projectRoot;
         teamSettings = new ProjectTeamSettings(new File(projectRoot, REPO_SUBDIR));
         this.repositoriesDefinitions = repositoriesDefinitions;
@@ -90,13 +100,12 @@ public class RemoteRepositoryProvider {
     }
 
     public void setForceExcludesFromProjectProperties(ProjectProperties props) {
-        this.forceExcludes = new String[]{
-                '/' + RemoteRepositoryProvider.REPO_SUBDIR,
-                '/' + RemoteRepositoryProvider.REPO_GIT_SUBDIR, '/' + RemoteRepositoryProvider.REPO_SVN_SUBDIR,
-                '/' + OConsts.FILE_PROJECT,
+        this.forceExcludes = new String[] { '/' + RemoteRepositoryProvider.REPO_SUBDIR,
+                '/' + RemoteRepositoryProvider.REPO_GIT_SUBDIR,
+                '/' + RemoteRepositoryProvider.REPO_SVN_SUBDIR, '/' + OConsts.FILE_PROJECT,
                 '/' + props.getProjectInternalRelative() + OConsts.STATUS_EXTENSION,
                 '/' + props.getWritableGlossaryFile().getUnderRoot(),
-                '/' + props.getTargetDir().getUnderRoot()};
+                '/' + props.getTargetDir().getUnderRoot() };
     }
 
     public ProjectTeamSettings getTeamSettings() {
@@ -104,7 +113,8 @@ public class RemoteRepositoryProvider {
     }
 
     /**
-     * Check repository definitions in the project. TODO: define messages for user
+     * Check repository definitions in the project. TODO: define messages for
+     * user
      */
     protected void checkDefinitions() {
         Set<String> dirs = new TreeSet<>();
@@ -188,9 +198,11 @@ public class RemoteRepositoryProvider {
     }
 
     /**
-     * Switch all repositories into latest version. Will continue in the event of an error, unless that error is a
-     * {@link NetworkException} in which case it will throw immediately. If any other exceptions occur while updating
-     * the repos, the first will be thrown after all repos have been processed.
+     * Switch all repositories into latest version. Will continue in the event
+     * of an error, unless that error is a {@link NetworkException} in which
+     * case it will throw immediately. If any other exceptions occur while
+     * updating the repos, the first will be thrown after all repos have been
+     * processed.
      */
     public void switchAllToLatest() throws Exception {
         List<Exception> errors = new ArrayList<>();
@@ -202,32 +214,37 @@ public class RemoteRepositoryProvider {
                 throw e;
             } catch (Exception e) {
                 errors.add(e);
-                Log.logErrorRB("TEAM_UPDATE_REPO_ERROR", e.getMessage());
+                LOGGER.atError().setMessageRB("TEAM_UPDATE_REPO_ERROR")
+                        .addArgument(e.getMessage()).log();
             }
         }
 
         if (!errors.isEmpty()) {
-           throw errors.get(0);
+            throw errors.get(0);
         }
     }
 
     /**
-     * Switch repository that contains path to specified version. If version is null, need to switch to latest
-     * version. Returns the path in the remote repository ( /path/to/omegatproject/.repositories/url/filepath
+     * Switch repository that contains path to specified version. If version is
+     * null, need to switch to latest version. Returns the path in the remote
+     * repository ( /path/to/omegatproject/.repositories/url/filepath
      */
     public File switchToVersion(String filePath, String version) throws Exception {
         return oneMapping(filePath).switchToVersion(version);
     }
 
     /**
-     * Commit specific file after rebase. Used for omegat/project_save.tmx, glossaries, etc.
+     * Commit specific file after rebase. Used for omegat/project_save.tmx,
+     * glossaries, etc.
      */
-    public String commitFileAfterVersion(String path, String commentText, String... onVersions) throws Exception {
+    public String commitFileAfterVersion(String path, String commentText, String... onVersions)
+            throws Exception {
         return oneMapping(path).repo.commit(onVersions, commentText);
     }
 
     /**
-     * Commit set of files without rebase - just local version. Used for target/*, etc.
+     * Commit set of files without rebase - just local version. Used for
+     * target/*, etc.
      */
     public void commitFiles(String path, String commentText) throws Exception {
         Map<String, IRemoteRepository2> repos = new TreeMap<>();
@@ -243,8 +260,9 @@ public class RemoteRepositoryProvider {
 
     /**
      * Copies all files under specified path that are mapped to local directory.
-     * If path is empty (i.e. full project), also file deletions since last copy are propagated, i.e. if remote repo has
-     * file deletions, those files are deleted locally as well.
+     * If path is empty (i.e. full project), also file deletions since last copy
+     * are propagated, i.e. if remote repo has file deletions, those files are
+     * deleted locally as well.
      *
      * @param localPath
      *            directory name or file name
@@ -256,16 +274,16 @@ public class RemoteRepositoryProvider {
     /**
      * Copies all files under specified path that are mapped to local directory.
      * <p>
-     * If propagateDelete flag is set true and path is empty (i.e. full project),
-     * also file deletions since last copy are propagated, i.e. if remote repo has
-     * file deletions, those files are deleted locally as well.
+     * If propagateDelete flag is set true and path is empty (i.e. full
+     * project), also file deletions since last copy are propagated, i.e. if
+     * remote repo has file deletions, those files are deleted locally as well.
      *
      * @param localPath
      *            directory name or file name
      */
     public void copyFilesFromReposToProject(final String localPath, final String postfix,
-                                            final boolean propagateDelete) throws IOException {
-        String[] myForceExcludes = "".equals(localPath) ? forceExcludes : new String[]{};
+            final boolean propagateDelete) throws IOException {
+        String[] myForceExcludes = "".equals(localPath) ? forceExcludes : new String[] {};
         for (Mapping m : getMappings(localPath, myForceExcludes)) {
             m.copyFromRepoToProject(postfix);
             if (propagateDelete && "".equals(localPath)) {
@@ -275,13 +293,15 @@ public class RemoteRepositoryProvider {
     }
 
     /**
-     * Copy all mappings that under specified directory path into repository directory.
+     * Copy all mappings that under specified directory path into repository
+     * directory.
      *
      * @param localPath
      *            directory name or file name
      * @param eolConversionCharset
-     *            not null if EOL conversion required. EOL will be converted to repository-specific for
-     *            existing files, and to platform-specific for new files
+     *            not null if EOL conversion required. EOL will be converted to
+     *            repository-specific for existing files, and to
+     *            platform-specific for new files
      */
     public void copyFilesFromProjectToRepos(String localPath, String eolConversionCharset) throws Exception {
         for (Mapping m : getMappings(localPath)) {
@@ -340,15 +360,23 @@ public class RemoteRepositoryProvider {
     }
 
     /**
-     * Heper function for file deletions. Gives the absolute local path to a file that is to be deleted, based on a
-     * relative file, the project root and the mapping.
-     * @param relativeFile a file relative to repository root, as returned by the IRemoterepository.getRecentlyDeletedFiles
-     * @param projectRoot local project root
-     * @param repoPath mapped path in repo
-     * @param localPath mapped path in local project
+     * Heper function for file deletions. Gives the absolute local path to a
+     * file that is to be deleted, based on a relative file, the project root
+     * and the mapping.
+     * 
+     * @param relativeFile
+     *            a file relative to repository root, as returned by the
+     *            IRemoterepository.getRecentlyDeletedFiles
+     * @param projectRoot
+     *            local project root
+     * @param repoPath
+     *            mapped path in repo
+     * @param localPath
+     *            mapped path in local project
      * @return the file to be deleted locally
      */
-    static File relativeRemoteToAbsoluteLocal(String relativeFile, File projectRoot, String repoPath, String localPath) {
+    static File relativeRemoteToAbsoluteLocal(String relativeFile, File projectRoot, String repoPath,
+            String localPath) {
         repoPath = withSlashes(repoPath);
         localPath = withSlashes(localPath);
 
@@ -360,7 +388,6 @@ public class RemoteRepositoryProvider {
         File root = new File(projectRoot, withoutLeadingSlash(localPath));
         return new File(root, withoutLeadingSlash(newRelativeFile.toString()));
     }
-
 
     /**
      * Class for mapping by specified local path.
@@ -379,9 +406,11 @@ public class RemoteRepositoryProvider {
             this.repoMapping = repoMapping;
             this.forceExcludes = new ArrayList<>();
             /*
-             * Find common part - it should be one of path or local. If path and local have only common begin,
-             * they will not be mapped. I.e. path=source/ and local=source/one - it's okay, path=source/one/
-             * and local=source/ - also okay, but path=source/one/ and local=source/two - wrong.
+             * Find common part - it should be one of path or local. If path and
+             * local have only common begin, they will not be mapped. I.e.
+             * path=source/ and local=source/one - it's okay, path=source/one/
+             * and local=source/ - also okay, but path=source/one/ and
+             * local=source/two - wrong.
              */
             path = withSlashes(path);
             String local = withSlashes(repoMapping.getLocal());
@@ -394,11 +423,13 @@ public class RemoteRepositoryProvider {
                 filterPrefix = "/";
                 this.forceExcludes.addAll(getTruncatedExclusions(local, forceExcludes));
             } else if (local.startsWith(path)) {
-                // path shorter than local and is directory (path="source/" for "source/first/..."=>"...")
+                // path shorter than local and is directory (path="source/" for
+                // "source/first/..."=>"...")
                 filterPrefix = "/";
                 this.forceExcludes.addAll(getTruncatedExclusions(local, forceExcludes));
             } else if (path.startsWith(local)) {
-                // local is shorter than path and is directory (path="omegat/project_save" for
+                // local is shorter than path and is directory
+                // (path="omegat/project_save" for
                 // "omegat/"=>"...")
                 filterPrefix = withSlashes(path.substring(local.length()));
                 this.forceExcludes.addAll(Arrays.asList(forceExcludes));
@@ -434,7 +465,8 @@ public class RemoteRepositoryProvider {
             // Remove leading slashes on child args to avoid doing `new
             // File("foo", "/")` which treats the "/" as an actual child element
             // name and prevents proper slash normalization later on.
-            File from = new File(getRepositoryDir(repoDefinition), withoutLeadingSlash(repoMapping.getRepository()));
+            File from = new File(getRepositoryDir(repoDefinition),
+                    withoutLeadingSlash(repoMapping.getRepository()));
             File to = new File(projectRoot, withoutLeadingSlash(repoMapping.getLocal()));
             if (from.isDirectory()) {
                 // directory mapping
@@ -442,8 +474,11 @@ public class RemoteRepositoryProvider {
                 excludes.addAll(forceExcludes);
                 copy(from, to, filterPrefix, postfix, repoMapping.getIncludes(), excludes, null);
             } else if (!from.exists()) {
-                //e.g. you opened an omegat.properties to download a team project, but it refers to a remote repo location that doesn't exist.
-                throw new RuntimeException("Location '" + withoutLeadingSlash(repoMapping.getRepository()) + "' does not exist in repository " + repoDefinition.getUrl());
+                // e.g. you opened an omegat.properties to download a team
+                // project, but it refers to a remote repo location that doesn't
+                // exist.
+                throw new RuntimeException("Location '" + withoutLeadingSlash(repoMapping.getRepository())
+                        + "' does not exist in repository " + repoDefinition.getUrl());
             } else {
                 // file mapping
                 if (!filterPrefix.equals("/")) {
@@ -462,11 +497,12 @@ public class RemoteRepositoryProvider {
             // File("foo", "/")` which treats the "/" as an actual child element
             // name and prevents proper slash normalization later on.
             File from = new File(projectRoot, withoutLeadingSlash(repoMapping.getLocal()));
-            File to = new File(getRepositoryDir(repoDefinition), withoutLeadingSlash(repoMapping.getRepository()));
+            File to = new File(getRepositoryDir(repoDefinition),
+                    withoutLeadingSlash(repoMapping.getRepository()));
             if (from.isDirectory()) {
                 // directory mapping or full mapping
-                List<String> files = copy(from, to, filterPrefix, repoMapping.getIncludes(), repoMapping.getExcludes(),
-                        eolConversionCharset);
+                List<String> files = copy(from, to, filterPrefix, repoMapping.getIncludes(),
+                        repoMapping.getExcludes(), eolConversionCharset);
                 String repoSubdir = withoutLeadingSlash(repoMapping.getRepository());
                 if (!"".equals(repoSubdir)) {
                     repoSubdir = withTrailingSlash(repoSubdir);
@@ -478,7 +514,8 @@ public class RemoteRepositoryProvider {
                 // file mapping
                 if (!filterPrefix.equals("/")) {
                     throw new RuntimeException(
-                            "Filter prefix should have been '/' for file mapping, but was '" + filterPrefix + "'");
+                            "Filter prefix should have been '/' for file mapping, but was '" + filterPrefix
+                                    + "'");
                 }
                 copyFile(from, to, eolConversionCharset);
                 addForCommit(repo, withoutSlashes(repoMapping.getRepository()));
@@ -496,8 +533,8 @@ public class RemoteRepositoryProvider {
         }
 
         protected List<String> copy(File from, File to, String prefix, List<String> includes,
-                                    List<String> excludes, String eolConversionCharset) throws IOException {
-             return copy(from, to, prefix, "", includes, excludes, eolConversionCharset);
+                List<String> excludes, String eolConversionCharset) throws IOException {
+            return copy(from, to, prefix, "", includes, excludes, eolConversionCharset);
         }
 
         /**
@@ -512,7 +549,8 @@ public class RemoteRepositoryProvider {
             for (String rf : relativeFiles) {
                 String srf = withSlashes(rf);
                 if (srf.startsWith("/.repositories/")) {
-                    continue; // list from root - shouldn't travel to .repositories/
+                    continue; // list from root - shouldn't travel to
+                              // .repositories/
                 }
                 if (prefix.equals("/") || srf.startsWith(prefix)) {
                     if (postfix.isEmpty()) {
@@ -527,21 +565,27 @@ public class RemoteRepositoryProvider {
         }
 
         /**
-         * Delete files locally that have been deleted in the remote repository since the last call to this function.
-         * Local checkout must be a full checkout. Don't call this method when doing checkouts of individual files.
+         * Delete files locally that have been deleted in the remote repository
+         * since the last call to this function. Local checkout must be a full
+         * checkout. Don't call this method when doing checkouts of individual
+         * files.
          */
         public void propagateDeletes() {
             try {
                 String[] toDeleteFiles = repo.getRecentlyDeletedFiles();
 
                 for (String relativeFile : toDeleteFiles) {
-                    if (FileUtil.checkFileInclude(relativeFile, FileUtil.compileFileMasks(repoMapping.getIncludes()), FileUtil.compileFileMasks(repoMapping.getExcludes()))) {
-                        File fileToDelete = RemoteRepositoryProvider.relativeRemoteToAbsoluteLocal(relativeFile, projectRoot, repoMapping.getRepository(), repoMapping.getLocal());
+                    if (FileUtil.checkFileInclude(relativeFile,
+                            FileUtil.compileFileMasks(repoMapping.getIncludes()),
+                            FileUtil.compileFileMasks(repoMapping.getExcludes()))) {
+                        File fileToDelete = RemoteRepositoryProvider.relativeRemoteToAbsoluteLocal(
+                                relativeFile, projectRoot, repoMapping.getRepository(),
+                                repoMapping.getLocal());
                         deleteFile(fileToDelete);
                     }
                 }
             } catch (Exception e) {
-                Log.log(e);
+                LOGGER.atWarn().setMessage("").setCause(e).log();
             }
         }
 
@@ -556,7 +600,7 @@ public class RemoteRepositoryProvider {
                     FileUtils.deleteDirectory(f);
                 }
             } catch (Exception e) {
-                Log.logInfoRB("LOG_ERROR_DELETE_FILE", f.toString());
+                LOGGER.atWarn().setMessageRB("LOG_ERROR_DELETE_FILE").addArgument(f).log();
             }
         }
     }

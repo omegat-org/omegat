@@ -57,7 +57,7 @@ public class ResourceBundleOptionsDialog extends javax.swing.JDialog {
     public ResourceBundleOptionsDialog(Window parent, Map<String, String> options) {
         super(parent);
         setModal(true);
-        this.options = new TreeMap<String, String>(options);
+        this.options = new TreeMap<>(options);
         initComponents();
 
         String removeStringsUntranslated = options.get(ResourceBundleFilter.OPTION_REMOVE_STRINGS_UNTRANSLATED);
@@ -68,6 +68,9 @@ public class ResourceBundleOptionsDialog extends javax.swing.JDialog {
 
         String supportJava8Encoding = options.get(ResourceBundleFilter.OPTION_FORCE_JAVA8_LITERALS_ESCAPE);
         supportJava8EncodingCB.setSelected(!"false".equals(supportJava8Encoding));
+
+        String supportNOI18NComment = options.get(ResourceBundleFilter.OPTION_DONT_TRANSLATE_COMMENT);
+        supportNOI18NCommentCB.setSelected(!"false".equals(supportNOI18NComment));
 
         StaticUIUtils.setEscapeAction(this, new AbstractAction() {
             @Override
@@ -101,6 +104,7 @@ public class ResourceBundleOptionsDialog extends javax.swing.JDialog {
         removeStringsUntranslatedCB = new javax.swing.JCheckBox();
         dontUnescapeULiteralsCB = new javax.swing.JCheckBox();
         supportJava8EncodingCB = new javax.swing.JCheckBox();
+        supportNOI18NCommentCB = new javax.swing.JCheckBox();
         buttonPanel = new javax.swing.JPanel();
         okButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
@@ -139,7 +143,19 @@ public class ResourceBundleOptionsDialog extends javax.swing.JDialog {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         jPanel1.add(supportJava8EncodingCB, gridBagConstraints);
+
+        org.openide.awt.Mnemonics.setLocalizedText(supportNOI18NCommentCB, OStrings.getString("RB_FILTER_SUPPORT_NOI18N_COMMENT")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        jPanel1.add(supportNOI18NCommentCB, gridBagConstraints);
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
@@ -174,6 +190,7 @@ private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         options.put(ResourceBundleFilter.OPTION_REMOVE_STRINGS_UNTRANSLATED, Boolean.toString(removeStringsUntranslatedCB.isSelected()));
         options.put(ResourceBundleFilter.OPTION_DONT_UNESCAPE_U_LITERALS, Boolean.toString(dontUnescapeULiteralsCB.isSelected()));
         options.put(ResourceBundleFilter.OPTION_FORCE_JAVA8_LITERALS_ESCAPE, Boolean.toString(supportJava8EncodingCB.isSelected()));
+        options.put(ResourceBundleFilter.OPTION_DONT_TRANSLATE_COMMENT, Boolean.toString(supportNOI18NCommentCB.isSelected()));
         doClose(RET_OK);
 }//GEN-LAST:event_okButtonActionPerformed
 
@@ -190,11 +207,12 @@ private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel buttonPanel;
     private javax.swing.JButton cancelButton;
-    private javax.swing.JCheckBox dontUnescapeULiteralsCB;
+    javax.swing.JCheckBox dontUnescapeULiteralsCB;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton okButton;
-    private javax.swing.JCheckBox removeStringsUntranslatedCB;
-    private javax.swing.JCheckBox supportJava8EncodingCB;
+    javax.swing.JCheckBox removeStringsUntranslatedCB;
+    javax.swing.JCheckBox supportJava8EncodingCB;
+    javax.swing.JCheckBox supportNOI18NCommentCB;
     // End of variables declaration//GEN-END:variables
 
     private int returnStatus = RET_CANCEL;

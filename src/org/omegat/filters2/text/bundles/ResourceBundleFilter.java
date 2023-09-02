@@ -206,7 +206,7 @@ public class ResourceBundleFilter extends AbstractFilter {
      * or non-key-value-breaking equals).
      * <ul>
      */
-    protected String normalizeInputLine(String line) throws IOException, TranslationException {
+    protected String normalizeInputLine(String line) throws TranslationException {
 
         // Whitespace at the beginning of lines is ignored
         boolean strippingWhitespace = true;
@@ -303,18 +303,15 @@ public class ResourceBundleFilter extends AbstractFilter {
                     && charsetEncoder.canEncode(text.substring(i, i + Character.charCount(cp)))) {
                 result.appendCodePoint(cp);
             } else {
-                for (char c : Character.toChars(cp)) {
-                    String code = Integer.toString(c, 16);
-                    while (code.codePointCount(0, code.length()) < 4) {
-                        code = '0' + code;
-                    }
-                    result.append("\\u").append(code);
+                char[] chars = Character.toChars(cp); // optimized for speed
+                for (int j = 0, charsLength = chars.length; j < charsLength; j++) {
+                    String code = Integer.toString(chars[j], 16).toUpperCase();
+                    result.append("\\u").append("0".repeat(Math.max(0, 4 - code.codePointCount(0, code.length()))))
+                            .append(code);
                 }
             }
         }
-
         return result.toString();
-
     }
 
     private static boolean containsUEscapeAt(String text, int offset) {

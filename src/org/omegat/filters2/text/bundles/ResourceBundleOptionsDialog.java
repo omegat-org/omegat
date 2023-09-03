@@ -67,7 +67,7 @@ public class ResourceBundleOptionsDialog extends javax.swing.JDialog {
         dontUnescapeULiteralsCB.setSelected("true".equalsIgnoreCase(notConvertCharacters));
 
         String supportJava8Encoding = options.get(ResourceBundleFilter.OPTION_FORCE_JAVA8_LITERALS_ESCAPE);
-        supportJava8EncodingCB.setSelected(!"false".equals(supportJava8Encoding));
+        supportJava8EncodingCB.setSelected("true".equals(supportJava8Encoding));
 
         StaticUIUtils.setEscapeAction(this, new AbstractAction() {
             @Override

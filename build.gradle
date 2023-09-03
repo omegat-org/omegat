@@ -1102,7 +1102,7 @@ task spotlessChangedApply {
 }
 
 jacoco {
-    toolVersion="0.8.6"
+    toolVersion="0.8.10"
 }
 
 tasks.jacocoTestReport {
@@ -1250,6 +1250,7 @@ task runOnJava17(type: JavaExec) {
     description = 'Launch app on Java 17'
     javaLauncher = javaToolchains.launcherFor {
         languageVersion = JavaLanguageVersion.of(17)
+        vendor = JvmVendorSpec.ADOPTIUM
     }
     mainClass = application.mainClass
     classpath = sourceSets.main.runtimeClasspath
@@ -1279,6 +1280,7 @@ task testOnJava17(type: Test) {
     description = 'Run test cases on Java 17'
     javaLauncher = javaToolchains.launcherFor {
         languageVersion = JavaLanguageVersion.of(17)
+        vendor = JvmVendorSpec.ADOPTIUM
     }
     if (project.hasProperty('headless')) {
         systemProperty 'java.awt.headless', 'true'

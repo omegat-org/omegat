@@ -227,13 +227,8 @@ dependencies {
         }
         // Explicitly specify guava dependency for `jre` version rather than `-android`
         implementation 'com.google.guava:guava:31.0.1-jre'
-        runtimeOnly("org.languagetool:language-all:${languageToolVersion}") {
-            // Temporary exclusion; see https://sourceforge.net/p/omegat/bugs/814/
-            exclude module: 'lucene-gosen'
-        }
-        runtimeOnly 'org.omegat.lucene:lucene-gosen:5.5.1:ipadic'
 
-        // Lucene for tokenizers
+            // Lucene for tokenizers
         implementation "org.apache.lucene:lucene-core:${luceneVersion}"
         implementation "org.apache.lucene:lucene-analyzers-common:${luceneVersion}"
         implementation "org.apache.lucene:lucene-analyzers-kuromoji:${luceneVersion}"
@@ -539,11 +534,9 @@ distributions {
                 into 'lib'
             }
             // system core plugins into modules
-            from('releases/modules-specific') {
-                into 'modules'
-            }
-            from(subprojects.collect {it.tasks.withType(Jar)}) {
-                into 'modules'
+            into('modules') {
+                from(subprojects.collect {it.tasks.withType(Jar)})
+                from('releases/modules-specific')
             }
             eachFile {
                 // Move main JAR up one level from lib.

@@ -1,0 +1,53 @@
+plugins {
+    id 'java'
+}
+repositories {
+    mavenCentral()
+}
+
+def  languageToolVersion = '6.1'
+
+def languages = ["ar", "ast", "be", "br", "ca", "da", "de", "el", "en", "eo", "es", "fa", "fr", "ga",
+                 "gl", "it", "ja", "km", "nl", "pl", "pt", "ro", "ru", "sk", "sl", "sv", "ta", "tl", "uk", "zh"]
+def pluginPackage = 'org.omegat.languagetool.language'
+
+languages.forEach { name ->
+    def pluginClass = "${pluginPackage}.${name}Plugin"
+    sourceSets.create(name)
+    if (name.equals("ja")) {
+        dependencies.add("jaImplementation", "org.languagetool:language-ja:${languageToolVersion}") {
+            // Temporary exclusion; see https://sourceforge.net/p/omegat/bugs/814/
+            exclude module: 'lucene-gosen'
+            exclude module: 'languagetool-core'
+        }
+        dependencies.add("jaImplementation", 'org.omegat.lucene:lucene-gosen:5.5.1:ipadic')
+    } else {
+        dependencies.add("${name}Implementation", "org.languagetool:language-${name}:${languageToolVersion}") {
+            exclude module: 'languagetool-core'
+        }
+    }
+    configurations.getByName("${name}RuntimeClasspath").exclude(group: 'org.languagetool', module: 'language-core')
+    tasks.getByName("${name}Classes") {
+        group = 'languagetool'
+    }
+    tasks.register("${name}Jar", Jar) {
+        archiveFileName.set("omegat-language-${name}.${archiveExtension.get()}")
+        destinationDirectory.set(new File(rootProject.buildDir, "modules"))
+        duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+        from configurations.getByName("${name}RuntimeClasspath").collect {
+            it.isDirectory() ? it : zipTree(it)
+        }
+        from sourceSets.getByName("${name}").output
+        manifest {
+            attributes(
+                    'Plugin-Name': "LanguageTool ${name} plugin",
+                    'Plugin-License': 'GNU Public License version 3 or later',
+                    'OmegaT-Plugins': pluginClass,
+                    'Plugin-Author': 'OmegaT team',
+                    'Plugin-Link': 'https://omegat.org',
+                    'Plugin-Version': "${languageToolVersion}")
+        }
+        group = 'languagetool'
+    }
+    jar.dependsOn "${name}Jar"
+}

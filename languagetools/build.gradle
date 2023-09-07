@@ -6,13 +6,45 @@ repositories {
 }
 
 def  languageToolVersion = '6.1'
+def plugins = [
+        [ lang: 'Arabic', code: 'ar', className: 'arPlugin'],
+        [ lang: 'Asturian', code: 'ast', className: 'astPlugin'],
+        [ lang: 'Belarusian', code: 'be', className: 'bePlugin'],
+        [ lang: 'Breton', code: 'br', className: 'brPlugin'],
+        [ lang: 'Catalan', code: 'ca', className: 'caPlugin'],
+        [ lang: 'Danish', code: 'da', className: 'daPlugin'],
+        [ lang: 'German', code: 'de', className: 'dePlugin'],
+        [ lang: 'Greek', code: 'el', className: 'elPlugin'],
+        [ lang: 'English', code: 'en', className: 'enPlugin'],
+        [ lang: 'Esperanto', code: 'eo', className: 'eoPlugin'],
+        [ lang: 'Spanish', code: 'es', className: 'esPlugin'],
+        [ lang: 'Percian', code: 'fa', className: 'faPlugin'],
+        [ lang: 'French', code: 'fr', className: 'frPlugin'],
+        [ lang: 'Irish', code: 'ga', className: 'gaPlugin'],
+        [ lang: 'Galcian', code: 'gl', className: 'glPlugin'],
+        [ lang: 'Italian', code: 'it', className: 'itPlugin'],
+        [ lang: 'Japanese', code: 'ja', className: 'jaPlugin'],
+        [ lang: 'Central Khmer', code: 'km', className: 'kmPlugin'],
+        [ lang: 'Dutch', code: 'nl', className: 'nlPlugin'],
+        [ lang: 'Polish', code: 'pl', className: 'plPlugin'],
+        [ lang: 'Portuguese', code: 'pt', className: 'ptPlugin'],
+        [ lang: 'Romanian', code: 'ro', className: 'roPlugin'],
+        [ lang: 'Rusian', code: 'ru', className: 'ruPlugin'],
+        [ lang: 'Slovak', code: 'sk', className: 'skPlugin'],
+        [ lang: 'Slovenian', code: 'sl', className: 'slPlugin'],
+        [ lang: 'Swedish', code: 'sv', className: 'svPlugin'],
+        [ lang: 'Tamil', code: 'ta', className: 'taPlugin'],
+        [ lang: 'Tagalog', code: 'tl', className: 'tlPlugin'],
+        [ lang: 'Ukrainian', code: 'uk', className: 'ukPlugin'],
+        [ lang: 'Chinese', code: 'zh', className: 'zhPlugin']
+]
 
-def languages = ["ar", "ast", "be", "br", "ca", "da", "de", "el", "en", "eo", "es", "fa", "fr", "ga",
-                 "gl", "it", "ja", "km", "nl", "pl", "pt", "ro", "ru", "sk", "sl", "sv", "ta", "tl", "uk", "zh"]
 def pluginPackage = 'org.omegat.languagetool.language'
 
-languages.forEach { name ->
-    def pluginClass = "${pluginPackage}.${name}Plugin"
+plugins.forEach { args ->
+    def name = args.get('code')
+    def pluginClass = "${pluginPackage}." + args.get('className')
+    def lang = args.get('lang')
     sourceSets.create(name)
     if (name.equals("ja")) {
         dependencies.add("jaImplementation", "org.languagetool:language-ja:${languageToolVersion}") {
@@ -40,11 +72,12 @@ languages.forEach { name ->
         from sourceSets.getByName("${name}").output
         manifest {
             attributes(
-                    'Plugin-Name': "LanguageTool ${name} plugin",
+                    'Plugin-Name': "${lang} LanguageTool",
                     'Plugin-License': 'GNU Public License version 3 or later',
                     'OmegaT-Plugins': pluginClass,
                     'Plugin-Author': 'OmegaT team',
                     'Plugin-Link': 'https://omegat.org',
+                    'Plugin-Description': "Provide ${lang} Languagetool library",
                     'Plugin-Version': "${languageToolVersion}")
         }
         group = 'languagetool'

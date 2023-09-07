@@ -25,7 +25,7 @@
 
 package org.omegat.languagetool.language;
 
-public class esPlugin {
+public class DanishPlugin {
 
     public static void loadPlugins() {
     }

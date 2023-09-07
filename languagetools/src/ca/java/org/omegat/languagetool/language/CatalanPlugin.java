@@ -25,7 +25,7 @@
 
 package org.omegat.languagetool.language;
 
-public class glPlugin {
+public class CatalanPlugin {
 
     public static void loadPlugins() {
     }

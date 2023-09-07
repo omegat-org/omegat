@@ -25,7 +25,7 @@
 
 package org.omegat.languagetool.language;
 
-public class faPlugin {
+public class RussianPlugin {
 
     public static void loadPlugins() {
     }

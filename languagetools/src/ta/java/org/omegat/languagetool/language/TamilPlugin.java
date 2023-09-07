@@ -25,7 +25,7 @@
 
 package org.omegat.languagetool.language;
 
-public class jaPlugin {
+public class TamilPlugin {
 
     public static void loadPlugins() {
     }

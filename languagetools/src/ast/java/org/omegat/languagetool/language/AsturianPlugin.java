@@ -25,7 +25,7 @@
 
 package org.omegat.languagetool.language;
 
-public class caPlugin {
+public class AsturianPlugin {
 
     public static void loadPlugins() {
     }

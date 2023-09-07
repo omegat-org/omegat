@@ -25,7 +25,7 @@
 
 package org.omegat.languagetool.language;
 
-public class brPlugin {
+public class TagalogPlugin {
 
     public static void loadPlugins() {
     }

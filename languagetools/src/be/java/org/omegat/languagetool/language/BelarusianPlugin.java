@@ -25,7 +25,7 @@
 
 package org.omegat.languagetool.language;
 
-public class daPlugin {
+public class BelarusianPlugin {
 
     public static void loadPlugins() {
     }

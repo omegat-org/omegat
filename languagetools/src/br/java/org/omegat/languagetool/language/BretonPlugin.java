@@ -25,7 +25,7 @@
 
 package org.omegat.languagetool.language;
 
-public class plPlugin {
+public class BretonPlugin {
 
     public static void loadPlugins() {
     }

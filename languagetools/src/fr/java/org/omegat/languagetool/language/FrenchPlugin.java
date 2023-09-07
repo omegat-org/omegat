@@ -25,7 +25,7 @@
 
 package org.omegat.languagetool.language;
 
-public class svPlugin {
+public class FrenchPlugin {
 
     public static void loadPlugins() {
     }

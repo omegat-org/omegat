@@ -25,7 +25,7 @@
 
 package org.omegat.languagetool.language;
 
-public class astPlugin {
+public class ChinesePlugin {
 
     public static void loadPlugins() {
     }

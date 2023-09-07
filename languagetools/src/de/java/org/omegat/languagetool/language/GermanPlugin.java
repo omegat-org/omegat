@@ -25,7 +25,7 @@
 
 package org.omegat.languagetool.language;
 
-public class frPlugin {
+public class GermanPlugin {
 
     public static void loadPlugins() {
     }

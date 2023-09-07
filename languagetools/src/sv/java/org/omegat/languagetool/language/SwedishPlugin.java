@@ -25,7 +25,7 @@
 
 package org.omegat.languagetool.language;
 
-public class zhPlugin {
+public class SwedishPlugin {
 
     public static void loadPlugins() {
     }

@@ -25,7 +25,7 @@
 
 package org.omegat.languagetool.language;
 
-public class slPlugin {
+public class PolishPlugin {
 
     public static void loadPlugins() {
     }

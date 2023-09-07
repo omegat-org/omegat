@@ -25,7 +25,7 @@
 
 package org.omegat.languagetool.language;
 
-public class kmPlugin {
+public class ItalianPlugin {
 
     public static void loadPlugins() {
     }

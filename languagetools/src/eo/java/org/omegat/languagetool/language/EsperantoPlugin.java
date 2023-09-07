@@ -25,7 +25,7 @@
 
 package org.omegat.languagetool.language;
 
-public class enPlugin {
+public class EsperantoPlugin {
 
     public static void loadPlugins() {
     }

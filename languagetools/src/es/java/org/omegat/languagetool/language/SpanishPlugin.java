@@ -25,7 +25,7 @@
 
 package org.omegat.languagetool.language;
 
-public class bePlugin {
+public class SpanishPlugin {
 
     public static void loadPlugins() {
     }

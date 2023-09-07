@@ -25,7 +25,7 @@
 
 package org.omegat.languagetool.language;
 
-public class taPlugin {
+public class IrishPlugin {
 
     public static void loadPlugins() {
     }

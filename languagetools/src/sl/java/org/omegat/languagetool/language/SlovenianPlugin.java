@@ -25,7 +25,7 @@
 
 package org.omegat.languagetool.language;
 
-public class ukPlugin {
+public class SlovenianPlugin {
 
     public static void loadPlugins() {
     }

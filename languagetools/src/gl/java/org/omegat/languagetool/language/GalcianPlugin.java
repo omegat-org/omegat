@@ -25,7 +25,7 @@
 
 package org.omegat.languagetool.language;
 
-public class roPlugin {
+public class GalcianPlugin {
 
     public static void loadPlugins() {
     }

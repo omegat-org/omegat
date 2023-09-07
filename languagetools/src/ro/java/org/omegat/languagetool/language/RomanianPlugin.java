@@ -25,7 +25,7 @@
 
 package org.omegat.languagetool.language;
 
-public class eoPlugin {
+public class RomanianPlugin {
 
     public static void loadPlugins() {
     }

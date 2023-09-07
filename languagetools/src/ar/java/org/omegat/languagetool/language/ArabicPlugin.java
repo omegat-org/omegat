@@ -25,7 +25,7 @@
 
 package org.omegat.languagetool.language;
 
-public class skPlugin {
+public class ArabicPlugin {
 
     public static void loadPlugins() {
     }

@@ -25,7 +25,7 @@
 
 package org.omegat.languagetool.language;
 
-public class gaPlugin {
+public class PercianPlugin {
 
     public static void loadPlugins() {
     }

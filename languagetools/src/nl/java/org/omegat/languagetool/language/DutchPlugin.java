@@ -3,7 +3,7 @@
  *           with fuzzy matching, translation memory, keyword search,
  *           glossaries, and translation leveraging into updated projects.
  *
- *  Copyright (C) 2023 Hiroshi Miura
+ *  Copyright (C) 2023 miurahr
  *                Home page: https://www.omegat.org/
  *                Support center: https://omegat.org/support
  *
@@ -25,7 +25,7 @@
 
 package org.omegat.languagetool.language;
 
-public class tlPlugin {
+public class DutchPlugin {
 
     public static void loadPlugins() {
     }

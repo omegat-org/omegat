@@ -25,7 +25,7 @@
 
 package org.omegat.languagetool.language;
 
-public class dePlugin {
+public class PortuguesePlugin {
 
     public static void loadPlugins() {
     }

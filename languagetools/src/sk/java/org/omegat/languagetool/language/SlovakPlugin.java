@@ -25,7 +25,7 @@
 
 package org.omegat.languagetool.language;
 
-public class ruPlugin {
+public class SlovakPlugin {
 
     public static void loadPlugins() {
     }

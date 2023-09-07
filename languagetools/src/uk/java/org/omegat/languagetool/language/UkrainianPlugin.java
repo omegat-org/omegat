@@ -25,7 +25,7 @@
 
 package org.omegat.languagetool.language;
 
-public class arPlugin {
+public class UkrainianPlugin {
 
     public static void loadPlugins() {
     }

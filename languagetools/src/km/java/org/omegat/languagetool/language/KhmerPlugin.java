@@ -25,7 +25,7 @@
 
 package org.omegat.languagetool.language;
 
-public class ptPlugin {
+public class KhmerPlugin {
 
     public static void loadPlugins() {
     }

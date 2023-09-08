@@ -17,12 +17,15 @@ sourceSets {
 }
 
 dependencies {
+    compileOnly(project.rootProject)
     if (providedLibsDir.directory) {
         compileOnly fileTree(dir: providedLibsDir, includes: ['**/jackson*.jar'])
         implementation fileTree(dir: providedLibsDir, includes: ['**/tipoftheday-*.jar'])
     } else {
         // runtime dependencies should be in main project
-        implementation "tokyo.northside:tipoftheday:0.4.1"
+        implementation("tokyo.northside:tipoftheday:0.4.1") {
+            exclude module:"icu4j"
+        }
         implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.14.2"
     }
 }

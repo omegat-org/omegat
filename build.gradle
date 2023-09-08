@@ -566,12 +566,12 @@ distributions {
                 exclude '**/build/**', 'doc_src/**/pdf/**', 'local.properties'
             }
             into('lib/provided') {
-                from configurations.runtimeClasspath
-            }
-            into('lib/provided') {
-                // collect subproject runtime dependencies
-                from  {subprojects.findAll { it.getSubprojects().isEmpty()}.
-                        collect { it.configurations.runtimeClasspath }
+                // collect project runtime dependencies in all subprojects and sourceSets
+                // Because subproject has dependency for root project, so we don't add
+                // rootProject's dependencies to avoid duplicate.
+                // from configurations.runtimeClasspath
+                from {subprojects.findAll { it.getSubprojects().isEmpty()}
+                        .collect { it.configurations.matching { it.name.endsWith('untimeClasspath') } }
                 }
             }
         }

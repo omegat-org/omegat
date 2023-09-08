@@ -299,10 +299,6 @@ dependencies {
                 attribute(Bundling.BUNDLING_ATTRIBUTE, project.objects.named(Bundling.class, Bundling.EXTERNAL))
             }
         }
-
-        // dependencies in submodules, you should put it as compileOnly in subprojects
-        runtimeOnly "tokyo.northside:tipoftheday:0.4.1"
-        runtimeOnly "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.14.2"
     }
 
     // Test dependencies
@@ -566,12 +562,12 @@ distributions {
                 exclude '**/build/**', 'doc_src/**/pdf/**', 'local.properties'
             }
             into('lib/provided') {
-                from configurations.runtimeClasspath
-            }
-            into('lib/provided') {
-                // collect subproject runtime dependencies
-                from  {subprojects.findAll { it.getSubprojects().isEmpty()}.
-                        collect { it.configurations.runtimeClasspath }
+                // collect project runtime dependencies in all subprojects and sourceSets
+                // Because subproject has dependency for root project, so we don't add
+                // rootProject's dependencies to avoid duplicate.
+                // from configurations.runtimeClasspath
+                from {subprojects.findAll { it.getSubprojects().isEmpty()}
+                        .collect { it.configurations.matching { it.name.endsWith('untimeClasspath') } }
                 }
             }
         }

@@ -560,11 +560,13 @@ distributions {
             }
             into('lib/provided') {
                 // collect project runtime dependencies in all subprojects and sourceSets
-                // Because subproject has dependency for root project, so we don't add
-                // rootProject's dependencies to avoid duplicate.
-                // from configurations.runtimeClasspath
-                from {subprojects.findAll { it.getSubprojects().isEmpty()}
-                        .collect { it.configurations.matching { it.name.endsWith('untimeClasspath') } }
+                from configurations.runtimeClasspath
+                from {subprojects.findAll { it.getSubprojects().isEmpty()}.collect {
+                            // catch languatools.*RuntimeClasspath, which * is language code,
+                            // and normal runtimeClasspath but no testRuntimeClasspath and jaxbRuntimeClasspath
+                            it.configurations.matching { it.name.endsWith('untimeClasspath')
+                                    && !it.name.startsWith('test') && !it.name.startsWith('jaxb')
+                        }}
                 }
             }
         }

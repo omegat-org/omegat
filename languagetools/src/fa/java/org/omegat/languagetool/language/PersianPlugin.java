@@ -25,7 +25,7 @@
 
 package org.omegat.languagetool.language;
 
-public class PercianPlugin {
+public class PersianPlugin {
 
     public static void loadPlugins() {
     }

@@ -1,8 +1,8 @@
 ----------------------------------------------------------------------
  OmegaT 6.1.0
 ----------------------------------------------------------------------
-  16 Enhancement
-  21 Bug fixes
+  18 Enhancement
+  29 Bug fixes
 ----------------------------------------------------------------------
 6.1.0 vs 6.0.0
 
@@ -64,11 +64,17 @@
 
   Bug fixes:
 
+  - Selection of match for pre-translation varies through different OS's
+  https://sourceforge.net/p/omegat/bugs/1213/
+
   - Critical errors are logged, but no longer shown to the user
   https://sourceforge.net/p/omegat/bugs/1207/
 
   - Google2 Translate MT connector failed to parse response
   https://sourceforge.net/p/omegat/bugs/1206/
+
+  - linux-install.sh script not aware of its location
+  https://sourceforge.net/p/omegat/bugs/1205/
 
   - Incompatible among LanguageTool@6 and lucene-gosen@5 from omegat-org
   https://sourceforge.net/p/omegat/bugs/1204/
@@ -88,7 +94,7 @@
   - Stardict dictionary displays apostrophe as html entity code
   https://sourceforge.net/p/omegat/bugs/1181/
 
-  - #1180 Font does not scale on HiDPI display on Linux
+  - Font does not scale on HiDPI display on Linux
   https://sourceforge.net/p/omegat/bugs/1180/
 
   - build/release: Windows binary signature with PKCS#11 HSM

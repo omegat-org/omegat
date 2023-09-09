@@ -248,9 +248,16 @@ public final class FileUtil {
      * @return list of filtered found files
      */
     public static List<File> findFiles(final File dir, final FileFilter filter) {
-        final List<File> result = new ArrayList<File>();
-        Set<String> knownDirs = new HashSet<String>();
+        return findFiles(dir, filter, null);
+    }
+
+    public static List<File> findFiles(final File dir, final FileFilter filter, final Comparator<File> comp) {
+        final List<File> result = new ArrayList<>();
+        Set<String> knownDirs = new HashSet<>();
         findFiles(dir, filter, result, knownDirs);
+        if (comp != null) {
+            result.sort(comp);
+        }
         return result;
     }
 
@@ -686,4 +693,5 @@ public final class FileUtil {
             return c;
         }
     }
+
 }

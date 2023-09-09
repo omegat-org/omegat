@@ -17,18 +17,24 @@ sourceSets {
 }
 
 dependencies {
+    compileOnly(project.rootProject)
     if (providedLibsDir.directory) {
-        compileOnly fileTree(dir: providedLibsDir, includes: ['**/tipoftheday-*.jar', '**/jackson*.jar'])
+        compileOnly fileTree(dir: providedLibsDir, includes: ['**/jackson*.jar'])
+        implementation fileTree(dir: providedLibsDir, includes: ['**/tipoftheday-*.jar'])
     } else {
         // runtime dependencies should be in main project
-        compileOnly "tokyo.northside:tipoftheday:0.4.1"
-        compileOnly "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.14.2"
+        implementation("tokyo.northside:tipoftheday:0.4.1") {
+            exclude module:"icu4j"
+        }
+        implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.14.2"
     }
 }
 
 jar {
     archiveAppendix.set("omegat")
     destinationDirectory.set(new File(rootProject.buildDir, "modules"))
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    from configurations.runtimeClasspath.collect {it.isDirectory() ? it : zipTree(it)}
     def pluginProp = loadProperties(file('plugin.properties'))
     manifest {
         attributes('License': 'GNU Public License version 3 or later',

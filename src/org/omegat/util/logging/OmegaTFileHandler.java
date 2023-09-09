@@ -92,12 +92,13 @@ public class OmegaTFileHandler extends StreamHandler {
         openFiles(new File(StaticUtils.getConfigDir(), "logs"));
     }
 
-   /**
-    * @return the name of the current log file
-    */
-    public String getOmegaTLogFileName(){
-       return logFileName;
-   }
+    /**
+     * @return the name of the current log file
+     */
+    public String getLogFileName() {
+        return logFileName + ".log";
+    }
+
     /**
      * Open log file and lock.
      */

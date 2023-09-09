@@ -24,10 +24,9 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-[ -f /keys/id_rsa ] || inotifywait -e attrib /keys
+rsync -rlD --exclude=.git --exclude=build --exclude=docs --exclude=doc_src --exclude=docs_devel /code/ /workdir
 
-cp /keys/id_rsa /home/omegat/.ssh/id_rsa
-chmod 600 /home/omegat/.ssh/id_rsa
+[ -f /keys/id_rsa ] || inotifywait -e attrib /keys
 
 if [[ "${TYPE}" == "SVN" ]]; then
   export REPO=http://svn:svnpass@server/svn/omegat-test.svn
@@ -37,9 +36,13 @@ elif [[ "${TYPE}" == "GIT" ]]; then
   export REPO2=https://git:gitpass@server/omegat-test.git
 fi
 
+sleep 1
+cat /dev/null > /home/omegat/.ssh/id_rsa
+cat /keys/id_rsa > /home/omegat/.ssh/id_rsa
+chmod 600 /home/omegat/.ssh/id_rsa
+
 ssh-keyscan -H server > /home/omegat/.ssh/known_hosts
 
-rsync -rlD --exclude=.git --exclude=build --exclude=docs --exclude=doc_src --exclude=docs_devel /code/ /workdir
 cd /workdir
 /opt/gradle-7.5.1/bin/gradle testIntegration \
    -Djava.util.logging.config.file=/workdir/test-integration/logger.properties \

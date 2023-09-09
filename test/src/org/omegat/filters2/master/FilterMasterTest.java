@@ -61,19 +61,14 @@ import gen.core.filters.Filters;
 
 public class FilterMasterTest {
     private File tempFilter;
-    private static final JAXBContext CONFIG_CTX;
-
-    static {
-        try {
-            CONFIG_CTX = JAXBContext.newInstance(Filters.class);
-        } catch (Exception ex) {
-            throw new ExceptionInInitializerError(ex);
-        }
-    }
 
     @Before
     public final void setUpCore() throws Exception {
         tempFilter = Files.createTempFile(FilterMaster.FILE_FILTERS, null).toFile();
+
+        // Workaround for Java 17 or later support of JAXB.
+        // See https://sourceforge.net/p/omegat/feature-requests/1682/#12c5
+        System.setProperty("com.sun.xml.bind.v2.bytecode.ClassTailor.noOptimize", "true");
 
         FilterMaster.setFilterClasses(
                 Arrays.asList(new Class<?>[] { org.omegat.filters3.xml.xhtml.XHTMLFilter.class }));
@@ -98,7 +93,17 @@ public class FilterMasterTest {
                 "</filters>";
 
         // Check equality between jaxb unmarshaller and xml mapper
-        Unmarshaller unm = CONFIG_CTX.createUnmarshaller();
+        Unmarshaller unm;
+        Thread thread = Thread.currentThread();
+        ClassLoader classLoader = thread.getContextClassLoader();
+        try {
+            thread.setContextClassLoader(Filters.class.getClassLoader());
+            JAXBContext configCtx = JAXBContext.newInstance(Filters.class);
+            unm = configCtx.createUnmarshaller();
+            thread.setContextClassLoader(classLoader);
+        } catch (Exception ex) {
+            throw new ExceptionInInitializerError(ex);
+        }
         Filters filtersConfig = (Filters) unm.unmarshal(new StringReader(filters));
         List<Option> option = filtersConfig.getFilters().get(0).getOption();
         assertFalse("Desierialized <option/> is empty", option.isEmpty());

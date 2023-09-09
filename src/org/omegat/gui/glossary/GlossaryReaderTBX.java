@@ -35,18 +35,19 @@ import java.util.Collections;
 import java.util.List;
 
 import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import javax.xml.transform.sax.SAXSource;
 
-import org.omegat.core.Core;
-import org.omegat.util.Language;
-import org.omegat.util.OStrings;
-import org.omegat.util.Preferences;
 import org.xml.sax.InputSource;
 import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.XMLFilterImpl;
+
+import org.omegat.core.Core;
+import org.omegat.util.Language;
+import org.omegat.util.Preferences;
 
 import gen.core.tbx.Descrip;
 import gen.core.tbx.DescripGrp;
@@ -71,14 +72,6 @@ public final class GlossaryReaderTBX {
     private GlossaryReaderTBX() {
     }
 
-    protected static final JAXBContext TBX_CONTEXT;
-    static {
-        try {
-            TBX_CONTEXT = JAXBContext.newInstance(Martif.class);
-        } catch (Exception ex) {
-            throw new ExceptionInInitializerError(OStrings.getString("STARTUP_JAXB_LINKAGE_ERROR"));
-        }
-    }
 
     static final SAXParserFactory SAX_FACTORY = SAXParserFactory.newInstance();
     static {
@@ -228,11 +221,21 @@ public final class GlossaryReaderTBX {
         return res.toString();
     }
 
+    private static Unmarshaller createUnmarshaller() throws JAXBException {
+        final JAXBContext tbx_context;
+        Thread thread = Thread.currentThread();
+        ClassLoader originalClassLoader = thread.getContextClassLoader();
+        thread.setContextClassLoader(Martif.class.getClassLoader());
+        tbx_context = JAXBContext.newInstance(Martif.class);
+        thread.setContextClassLoader(originalClassLoader);
+        return tbx_context.createUnmarshaller();
+    }
+
     /**
      * Load tbx file, but skip DTD resolving.
      */
     static Martif load(File f) throws Exception {
-        Unmarshaller unm = TBX_CONTEXT.createUnmarshaller();
+        Unmarshaller unm = createUnmarshaller();
 
         SAXParser parser = SAX_FACTORY.newSAXParser();
 
@@ -246,7 +249,7 @@ public final class GlossaryReaderTBX {
     }
 
     static Martif loadFromString(String data) throws Exception {
-        Unmarshaller unm = TBX_CONTEXT.createUnmarshaller();
+        Unmarshaller unm = createUnmarshaller();
 
         SAXParser parser = SAX_FACTORY.newSAXParser();
 

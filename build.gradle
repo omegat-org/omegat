@@ -162,7 +162,7 @@ ext {
 dependencies {
     // Libs are provided in the "source" distribution only
     if (providedLibsDir.directory) {
-        implementation fileTree(dir: providedLibsDir, include: '**/*.jar')
+        implementation fileTree(dir: providedLibsDir, include: '**/*.jar', excludes: ['**/slf4j-api-1.*.jar'])
     } else {
         implementation(libs.commons.io)
         implementation(libs.commons.lang3)
@@ -223,6 +223,7 @@ dependencies {
         implementation(libs.jgit.ssh)
         implementation(libs.jgit.agent)
         implementation(libs.jgit.http)
+
         // For ed25519 and ecdsa support of ssh, java16+ or BC
         implementation(libs.bc.prov)
         implementation(libs.bc.pg)
@@ -261,16 +262,15 @@ dependencies {
         }
         implementation 'com.fifesoft:autocomplete:3.2.0'
 
-        constraints {
-            implementation(libs.guava)
-            implementation(libs.jetbrains.annotations)
-            // JSON parser
-            implementation(libs.jackson.core)
-            implementation(libs.jackson.databind)
-            implementation(libs.jackson.xml)
-            implementation(libs.jackson.jaxb)
-            implementation(libs.jetbrains.annotations)
-        }
+        implementation(libs.guava)
+        implementation(libs.jetbrains.annotations)
+
+        // JSON parser
+        implementation(libs.jackson.core)
+        implementation(libs.jackson.databind)
+        implementation(libs.jackson.xml)
+        implementation(libs.jackson.jaxb)
+        implementation(libs.jetbrains.annotations)
 
         implementation("com.github.ben-manes.caffeine:caffeine:2.9.3") {
             attributes {
@@ -314,7 +314,7 @@ dependencies {
     testRuntimeOnly(libs.slf4j.jdk14)
 
     // JAXB codegen only
-    jaxb 'com.sun.xml.bind:jaxb-xjc:2.3.4'
+    jaxb 'org.grassfish.jaxb:jaxb-xjc:2.3.4'
 
     // genMac only
     genMac 'org.omegat:appbundler:1.2.1'
@@ -540,7 +540,7 @@ distributions {
     source {
         contents {
             from(rootDir) {
-                include 'config/**', 'ci/iscc', 'ci/osslsigncode', 'images/**', 'lib/**', 'release/**',
+                include 'config/**', 'ci/iscc', 'ci/osslsigncode', 'docs/**', 'images/**', 'lib/**', 'release/**',
                     'src/**', 'test/**', 'test-integration/**', 'doc_src/**', 'docs_devel/**', 'scripts/**',
                     'gradle/**', 'gradlew*', 'build.gradle', 'settings.gradle', 'README.md', '*.properties',
                     'tipoftheday/**', 'machinetranslators/**', 'scriptengine/**'

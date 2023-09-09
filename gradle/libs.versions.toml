@@ -1,0 +1,165 @@
+[versions]
+slf4j = { strictly = "[2.0.7, 2.1[", prefer = "2.0.7" }
+slf4j-format = "0.5.1"
+groovy = "4.0.11"
+junit = "4.13.1"
+junit5 = "5.8.2"
+logback = "1.4.11"
+antlr = "4.13.1"
+hamcrest = "2.2"
+nekohtml = "1.9.22"
+htmlunit = "3.4.0"
+lang3 = "3.11"
+io = "2.11.0"
+codec = "1.13"
+unbescape = "1.1.6.RELEASE"
+xerces = "2.12.2"
+jstyleparser = "4.1.3"
+cssbox4 = "4.23"
+swingbox = "1.2.5"
+jsoup = "1.15.3"
+httpclient = "4.5.14"
+icu4j = { require = "[70,73.2[", prefer = "72.1" }
+stax2api = "4.2.1"
+woodstox = "6.5.0"
+languagetool = "6.1"
+lucene = "5.5.5"
+checkstyle = "8.45.1"
+guava = "31.0.1-jre"
+annotations = "23.0.0"
+jgit = "6.6.0.202305301015-r"
+svnkit = "1.10.11"
+ivy = "2.5.1"
+jackson = "2.14.2"
+bc = "1.72"
+nashorn = "15.4"
+fifesoft = "3.2.0"
+caffeine = "2.9.3"
+wiremock = "2.35.0"
+vldocking = "3.0.5"
+xmlunit = "2.8.3"
+appbundler = "1.2.1"
+supertmxmerge = "2.0.3"
+jasypt = "1.9.3"
+crypto = "0.3.0"
+htmlparser = "1.6-20230203"
+gnudiff = "1.15"
+desktopsupport = "0.6.0"
+protocolhandler = "0.1.4"
+pdfbox = "2.0.27"
+maligna = "3.0.1"
+trie4j = "0.9.8"
+dsl4j = "0.5.3"
+stardict4j = "0.5.0"
+juniversalchardet = "2.4.0"
+mnemonics = "1.1"
+jmyspell = "1.0.0-beta-2"
+xjc = "2.3.4"
+
+[libraries]
+slf4j-api = {group = "org.slf4j", name = "slf4j-api",  version.ref = "slf4j"}
+slf4j-simple = {group = "org.slf4j", name = "slf4j-simple",  version.ref = "slf4j"}
+slf4j-jdk14 =  {group = "org.slf4j", name = "slf4j-jdk14",  version.ref = "slf4j"}
+slf4j-format-jdk14 ={group = "tokyo.northside", name = "slf4j-format-jdk14",  version.ref = "slf4j-format"}
+groovy-core = {group = "org.apache.groovy", name = 'groovy', version.ref = "groovy"}
+junit4 = {group = "junit", name = "junit", version.ref = "junit"}
+junit-jupiter = {group = "org.junit.jupiter", name = "junit-jupiter-engine", version.ref = "junit5"}
+logback-classic = {group = "ch.qos.logback", name = "logback-classic", version.ref = "logback"}
+antlr4 = {group = "org.antlr", name = "antlr4", version.ref = "antlr"}
+hamcrest = {group = "org.hamcrest", name = "hamcrest", version.ref = "hamcrest"}
+nekohtml = {group = "net.sourceforge.nekohtml", name = "nekohtml", version.ref = "nekohtml"}
+neko-htmlunit = {group = "org.htmlunit", name = "neko-htmlunit", version.ref = "htmlunit"}
+commons-io = {group = "commons-io", name = "commons-io", version.ref = "io"}
+commons-lang3 = {group = "org.apache.commons", name = "commons-lang3", version.ref = "lang3"}
+commons-codec = {group = "commons-codec", name = "commons-codec", version.ref = "codec"}
+unbescape = {group = "org.unbescape", name = "unbescape", version.ref = "unbescape"}
+xerces-impl = {group = "xerces", name = "xercesImpl", version.ref = "xerces"}
+jstyleparser = {group = "tokyo.northside", name = "jstyleparser", version.ref = "jstyleparser"}
+cssbox4 = {group = "tokyo.northside", name = "cssbox4", version.ref = "cssbox4"}
+swingbox = {group = "tokyo.northside", name = "swingbox", version.ref = "swingbox"}
+jsoup = {group = "org.jsoup", name = "jsoup", version.ref = "jsoup"}
+apache-httpclient = {group = "org.apache.httpcomponents", name = "httpclient", version.ref = "httpclient"}
+apache-httpclient-cache = {group = "org.apache.httpcomponents", name = "httpclient-cache", version.ref = "httpclient"}
+icj4j = {group = "com.ibm.icu", name = "icu4j", version.ref = "icu4j"}
+stax2-api = {group = "org.codehaus.woodstox", name = "stax2-api", version.ref = "stax2api"}
+woodstox-core = {group = "com.fasterxml.woodstox", name = "woodstox-core", version.ref = "woodstox"}
+languagetool-all = {group = "org.languagetool", name = "language-all", version.ref = "languagetool"}
+languagetool-core = {group = "org.languagetool", name = "languagetool-core", version.ref = "languagetool"}
+languagetool-server = {group = "org.languagetool", name = "languagetool-server", version.ref = "languagetool"}
+languagetool-be = {group = "org.languagetool", name = "language-be", version.ref = "languagetool"}
+languagetool-en = {group = "org.languagetool", name = "language-en", version.ref = "languagetool"}
+languagetool-fr = {group = "org.languagetool", name = "language-fr", version.ref = "languagetool"}
+languagetool-ja = {group = "org.languagetool", name = "language-ja", version.ref = "languagetool"}
+languagetool-pl = {group = "org.languagetool", name = "language-pl", version.ref = "languagetool"}
+lucene-core = {group = "org.apache.lucene", name = "lucene-core", version.ref = "lucene"}
+lucene-analyzers-common = {group = "org.apache.lucene", name = "lucene-analyzers-common", version.ref = "lucene"}
+lucene-analyzers-kuromoji = {group = "org.apache.lucene", name = "lucene-analyzers-kuromoji", version.ref = "lucene"}
+lucene-analyzers-smartcn = {group = "org.apache.lucene", name = "lucene-analyzers-smartcn", version.ref = "lucene"}
+lucene-analyzers-stempel = {group = "org.apache.lucene", name = "lucene-analyzers-stempel", version.ref = "lucene"}
+guava = {group = "com.google.guava", name = "guava", version.ref = "guava"}
+jetbrains-annotations = {group = "org.jetbrains", name = "annotations", version.ref = "annotations"}
+groovy-jsr223 = {group = "org.apache.groovy", name = "groovy-jsr223", version.ref = "groovy"}
+groovy-dateutil = {group = "org.apache.groovy", name = "groovy-dateutil", version.ref = "groovy"}
+groovy-json = {group = "org.apache.groovy", name = "groovy-json", version.ref = "groovy"}
+groovy-xml = {group = "org.apache.groovy", name = "groovy-xml", version.ref = "groovy"}
+groovy-swing = {group = "org.apache.groovy", name = "groovy-swing", version.ref = "groovy"}
+groovy-templates = {group = "org.apache.groovy", name = "groovy-templates", version.ref = "groovy"}
+ivy = {group = "org.apache.ivy", name = "ivy", version.ref = "ivy"}
+jackson-core = {group = "com.fasterxml.jackson.core", name = "jackson-core", version.ref = "jackson"}
+jackson-databind = {group = "com.fasterxml.jackson.core", name = "jackson-databind", version.ref = "jackson"}
+jackson-xml = {group = "com.fasterxml.jackson.dataformat", name = "jackson-dataformat-xml", version.ref = "jackson"}
+jackson-jaxb = {group = "com.fasterxml.jackson.module", name = "jackson-module-jaxb-annotations", version.ref = "jackson"}
+jackson-yaml = {group = "com.fasterxml.jackson.dataformat", name = "jackson-dataformat-yaml", version.ref = "jackson"}
+jgit = {group = "org.eclipse.jgit", name = "org.eclipse.jgit", version.ref = "jgit"}
+jgit-ssh = {group = "org.eclipse.jgit", name = "org.eclipse.jgit.ssh.apache", version.ref = "jgit"}
+jgit-agent = {group = "org.eclipse.jgit", name = "org.eclipse.jgit.ssh.apache.agent", version.ref = "jgit"}
+jgit-http = {group = "org.eclipse.jgit", name = "org.eclipse.jgit.http.apache", version.ref = "jgit"}
+jgit-bc = {group = "org.eclipse.jgit", name = "org.eclipse.jgit.gpg.bc", version.ref = "jgit"}
+bc-prov = {group = "org.bouncycastle", name = "bcprov-jdk18on", version.ref = "bc"}
+bc-pg = {group = "org.bouncycastle", name = "bcpg-jdk18on", version.ref = "bc"}
+bc-pkix = {group = "org.bouncycastle", name = "bcpkix-jdk18on", version.ref = "bc"}
+svnkit = {group = "org.tmatesoft.svnkit", name = "svnkit", version.ref = "svnkit"}
+nashorn-core = {group = "org.openjdk.nashorn", name = "nashorn-core", version.ref = "nashorn"}
+fifesoft-rsyntaxtextarea =  {group = "com.fifesoft", name = "rsyntaxtextarea", version.ref = "fifesoft"}
+fifesoft-rstaui = {group = "com.fifesoft", name = "rstaui", version.ref = "fifesoft"}
+fifesoft-languagesupport = {group = "com.fifesoft", name = "languagesupport", version = "3.1.4"}
+fifesoft-autocomplete = {group = "com.fifesoft", name = "autocomplete", version.ref = "fifesoft"}
+caffeine = {group = "com.github.ben-manes.caffeine", name ="caffeine", version.ref = "caffeine"}
+caffeine-jcache =  {group = "com.github.ben-manes.caffeine", name = "jcache", version.ref = "caffeine"}
+wiremock-jre8 = {group = "com.github.tomakehurst", name = "wiremock-jre8", version.ref = "wiremock"}
+omegat-vldocking = {group = "org.omegat", name = "vldocking", version.ref = "vldocking"}
+xmlunit-legacy = {group = "org.xmlunit", name = "xmlunit-legacy", version.ref = "xmlunit"}
+omegat-appbundler = {group = "org.omegat", name = "appbundler", version.ref = "appbundler"}
+supertmxmerge = {group = "org.madlonkay", name = "supertmxmerge", version.ref = "supertmxmerge"}
+jasypt = {group = "org.jasypt", name = "jasypt", version.ref = "jasypt"}
+eddsa = {group = "net.i2p.crypto", name = "eddsa", version.ref = "crypto"}
+omegat-htmlparser = {group = "org.omegat", name = "htmlparser", version.ref = "htmlparser"}
+omegat-gnudiff4j = {group = "org.omegat", name = "gnudiff4j", version.ref = "gnudiff"}
+madlonkay-desktopsupport = {group = "org.madlonkay", name = "desktopsupport", version.ref = "desktopsupport"}
+url-protocol-handler = {group = "tokyo.northside", name = "url-protocol-handler", version.ref = "protocolhandler"}
+pdfbox = {group = "org.apache.pdfbox", name = "pdfbox", version.ref = "pdfbox"}
+loomchild-maligna = {group = "net.loomchild", name = "maligna", version.ref = "maligna"}
+trie4j = {group = "com.github.takawitter", name = "trie4j", version.ref = "trie4j"}
+dsl4j = {group = "io.github.eb4j", name = "dsl4j", version.ref = "dsl4j"}
+stardict4j = {group = "tokyo.northside", name = "stardict4j", version.ref = "stardict4j"}
+juniversalchardet = {group = "com.github.albfernandez", name = "juniversalchardet", version.ref = "juniversalchardet"}
+omegat-mnemonics = {group = "org.omegat", name = "lib-mnemonics", version.ref = "mnemonics"}
+omegat-jmyspell-core = {group = "org.omegat", name = "jmyspell-core", version.ref = "jmyspell"}
+jaxb-xjc = {group = "org.grassfish.jaxb", name = "jaxb-xjc", version.ref = "xjc"}
+
+[bundles]
+groovy = ["groovy-jsr223", "groovy-dateutil", "groovy-json", "groovy-xml", "groovy-swing", "groovy-templates", "ivy"]
+ecdsa = ["bc-prov", "bc-pg", "bc-pkix", "eddsa"]
+fifesoft = ["fifesoft-rsyntaxtextarea", "fifesoft-autocomplete", "fifesoft-languagesupport", "fifesoft-rstaui"]
+caffeine = ["caffeine", "caffeine-jcache"]
+languagetool-tests = ["languagetool-be", "languagetool-fr", "languagetool-en", "languagetool-ja"]
+lucene = ["lucene-core", "lucene-analyzers-common", "lucene-analyzers-kuromoji", "lucene-analyzers-smartcn", "lucene-analyzers-stempel"]
+jgit = ["jgit", "jgit-agent", "jgit-http", "jgit-ssh"]
+
+[plugins]
+spotbugs = {id = "com.github.spotbugs", version = "5.1.3"}
+spotless = {id = "com.diffplug.spotless", version = "6.19.0"}
+git-version = {id = "com.palantir.git-version", version = "0.13.0"}
+nexus-publish = {id = "io.github.gradle-nexus.publish-plugin", version = "2.0.0-rc-1"}
+launch4j = {id = "edu.sc.seis.launch4j", version = "3.0.3"}
+versions = {id = "com.github.ben-manes.versions", version = "0.39.0"}

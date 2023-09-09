@@ -5,7 +5,7 @@ repositories {
     mavenCentral()
 }
 
-def  languageToolVersion = '6.1'
+def  languageToolVersion = libs.versions.languagetool.get()
 def plugins = [
         [ lang: 'Arabic', code: 'ar', className: 'ArabicPlugin'],
         [ lang: 'Asturian', code: 'ast', className: 'AsturianPlugin'],

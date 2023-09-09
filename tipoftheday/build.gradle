@@ -23,10 +23,11 @@ dependencies {
         implementation fileTree(dir: providedLibsDir, includes: ['**/tipoftheday-*.jar'])
     } else {
         // runtime dependencies should be in main project
-        implementation("tokyo.northside:tipoftheday:0.4.1") {
-            exclude module:"icu4j"
+        implementation("tokyo.northside:tipoftheday:0.4.1")
+        constraints {
+            implementation(libs.icj4j)
         }
-        implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.14.2"
+        implementation(libs.jackson.yaml)
     }
     testImplementation(testFixtures(project.rootProject))
     testImplementation 'commons-io:commons-io:2.11.0'

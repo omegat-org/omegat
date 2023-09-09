@@ -113,14 +113,7 @@ allprojects {
         mavenLocal()
         // Sonatype OSSRH snapshots
         maven { url "https://s01.oss.sonatype.org/content/repositories/snapshots" }
-    }
-}
-
-subprojects {
-    // All subproject dpenends on main project.
-    dependencies {
-        compileOnly(project.rootProject)
-        testImplementation(testFixtures(project.rootProject))
+        maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
     }
 }
 
@@ -178,6 +171,8 @@ dependencies {
     } else {
         implementation 'commons-io:commons-io:2.11.0'
         implementation 'org.apache.commons:commons-lang3:3.11'
+        api "org.slf4j:slf4j-api:${slf4jVersion}"
+        implementation 'tokyo.northside:slf4j-format-jdk14:0.5.0'
         runtimeOnly "org.slf4j:slf4j-jdk14:${slf4jVersion}"
 
         // macOS integration
@@ -261,10 +256,12 @@ dependencies {
 
         // Groovy used for scripts - needed at implementation for GroovyClassLoader modifications
         // Ivy is needed to handle Grape/@Grab dependencies
-        runtimeOnly('org.apache.groovy:groovy-all:4.0.11@pom') {
-            transitive = true
-        }
+        runtimeOnly 'org.apache.groovy:groovy-jsr223:4.0.11'
         runtimeOnly 'org.apache.groovy:groovy-dateutil:4.0.11'
+        runtimeOnly 'org.apache.groovy:groovy-json:4.0.11'
+        runtimeOnly 'org.apache.groovy:groovy-swing:4.0.11'
+        runtimeOnly 'org.apache.groovy:groovy-templates:4.0.11'
+        runtimeOnly 'org.apache.groovy:groovy-xml:4.0.11'
         runtimeOnly 'org.apache.ivy:ivy:2.5.1'
 
         // Javascript used for scripts
@@ -296,10 +293,6 @@ dependencies {
                 attribute(Bundling.BUNDLING_ATTRIBUTE, project.objects.named(Bundling.class, Bundling.EXTERNAL))
             }
         }
-
-        // dependencies in submodules, you should put it as compileOnly in subprojects
-        runtimeOnly "tokyo.northside:tipoftheday:0.4.1"
-        runtimeOnly "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.14.2"
     }
 
     // Test dependencies
@@ -308,6 +301,7 @@ dependencies {
     // for http connection test
     testFixturesApi 'com.github.tomakehurst:wiremock-jre8:2.35.0'
     testFixturesImplementation 'commons-io:commons-io:2.11.0'
+    testFixturesImplementation 'org.omegat:vldocking:3.0.5'
     testFixturesApi "org.slf4j:slf4j-api:${slf4jVersion}"
 
     testImplementation 'org.xmlunit:xmlunit-legacy:2.8.3'
@@ -496,7 +490,7 @@ distributions {
             }
             from('release') {
                 into 'docs'
-                include 'changes.txt', 'doc-license.txt', 'OmegaT-license.txt', 'contributors.txt', 'libraries.txt'
+                include 'changes.txt', 'doc-license.txt', 'contributors.txt', 'libraries.txt'
                 filter(FixCrLfFilter, eol: FixCrLfFilter.CrLf.newInstance('crlf'))
             }
             from('scripts') {
@@ -506,7 +500,7 @@ distributions {
                 into 'images'
             }
             from('release') {
-                exclude 'contributors.txt', 'libraries.txt'
+                exclude 'changes.txt', 'doc-license.txt', 'contributors.txt', 'libraries.txt'
                 include '*.txt', '*.html'
                 filter(ReplaceTokens, tokens: [
                         TRANSLATION_NOTICE: ''
@@ -556,19 +550,19 @@ distributions {
     source {
         contents {
             from(rootDir) {
-                include 'config/**', 'docs/**', 'images/**', 'lib/**', 'release/**',
-                    'src/**', 'test/**', 'doc_src/**', 'docs_devel/**', 'scripts/**',
-                    'gradle/**', 'gradlew*', '*.gradle', 'README.md', '*.properties',
-                    'tipoftheday/**'
-                exclude '**/build/**', 'doc_src/**/pdf/**', 'local.properties'
+                include 'config/**', 'ci/iscc', 'ci/osslsigncode', 'images/**', 'lib/**', 'release/**',
+                    'src/**', 'test/**', 'test-integration/**', 'doc_src/**', 'docs_devel/**', 'scripts/**',
+                    'gradle/**', 'gradlew*', 'build.gradle', 'settings.gradle', 'README.md', '*.properties',
+                    'tipoftheday/**', 'machinetranslators/**', 'scriptengine/**'
+                exclude '**/build/**', 'doc_src/**/pdf/**', 'local.properties', '**/out/**'
             }
             into('lib/provided') {
+                // collect project runtime dependencies in all subprojects and sourceSets
                 from configurations.runtimeClasspath
-            }
-            into('lib/provided') {
-                // collect subproject runtime dependencies
-                from  {subprojects.findAll { it.getSubprojects().isEmpty()}.
-                        collect { it.configurations.runtimeClasspath }
+                from {subprojects.findAll { it.getSubprojects().isEmpty()}
+                        .collect { it.configurations.matching { it.name.endsWith('untimeClasspath')
+                                    && !it.name.startsWith('test') && !it.name.startsWith('jaxb')
+                        } }
                 }
             }
         }
@@ -1099,7 +1093,7 @@ task spotlessChangedApply {
 }
 
 jacoco {
-    toolVersion="0.8.6"
+    toolVersion="0.8.10"
 }
 
 tasks.jacocoTestReport {
@@ -1247,6 +1241,7 @@ task runOnJava17(type: JavaExec) {
     description = 'Launch app on Java 17'
     javaLauncher = javaToolchains.launcherFor {
         languageVersion = JavaLanguageVersion.of(17)
+        vendor = JvmVendorSpec.ADOPTIUM
     }
     mainClass = application.mainClass
     classpath = sourceSets.main.runtimeClasspath
@@ -1276,6 +1271,7 @@ task testOnJava17(type: Test) {
     description = 'Run test cases on Java 17'
     javaLauncher = javaToolchains.launcherFor {
         languageVersion = JavaLanguageVersion.of(17)
+        vendor = JvmVendorSpec.ADOPTIUM
     }
     if (project.hasProperty('headless')) {
         systemProperty 'java.awt.headless', 'true'

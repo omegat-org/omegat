@@ -144,19 +144,23 @@ public class DefaultSpellChecker implements ISpellChecker {
     }
 
     /**
-     * Initialize the library for the given project. Loads the lists of ignored and learned words for the
-     * project
+     * Initialize the library for the given project. Loads the lists of ignored
+     * and learned words for the project
      */
     public void initialize() {
         Language targetLanguage = Core.getProject().getProjectProperties().getTargetLanguage();
 
-        Stream<String> toCheck = Stream.of(
-                targetLanguage.getLocaleCode(), // Full xx_YY
-                targetLanguage.getLocaleCode().replace('_', '-'), // Full xx-YY
-                targetLanguage.getLanguageCode()); // xx only
+        // check targets "xx_YY", "xx-YY" and "xx" only
+        Stream<String> toCheck = Stream.of(targetLanguage.getLocaleCode(),
+                targetLanguage.getLocaleCode().replace('_', '-'), targetLanguage.getLanguageCode());
 
         checker = toCheck.map(this::initializeWithLanguage) .filter(Optional::isPresent).findFirst()
                 .orElseGet(Optional::empty).orElseGet(SpellCheckerDummy::new);
+
+        if (checker instanceof SpellCheckerDummy) {
+            Log.logInfoRB("SPELLCHECKER_LANGUAGE_NOT_FOUND", targetLanguage);
+        }
+
         loadWordLists();
     }
 
@@ -192,7 +196,8 @@ public class DefaultSpellChecker implements ISpellChecker {
             LOGGER.warn(MessageFormat.format(BUNDLE.getString("SPELLCHECKER_HUNSPELL_EXCEPTION"), ex.getMessage()));
         }
         try {
-            ISpellCheckerProvider result = new SpellCheckerJMySpell(dictionaryName, affixName);
+            ISpellCheckerProvider result = new SpellCheckerJMySpell(dictionaryName.getPath(),
+                    affixName.getPath());
             LOGGER.info(MessageFormat.format(BUNDLE.getString("SPELLCHECKER_JMYSPELL_INITIALIZED"), language
                     , dictionaryName));
             return Optional.of(result);
@@ -220,7 +225,8 @@ public class DefaultSpellChecker implements ISpellChecker {
                 return true;
             }
             if (file.length() == 0L) {
-                // On OS X, attempting to load Hunspell with a zero-length .dic file causes
+                // On OS X, attempting to load Hunspell with a zero-length .dic
+                // file causes
                 // a native exception that crashes the whole program.
                 LOGGER.warn(MessageFormat.format(BUNDLE.getString("SPELLCHECKER_DICTIONARY_EMPTY"),
                         file.getPath()));

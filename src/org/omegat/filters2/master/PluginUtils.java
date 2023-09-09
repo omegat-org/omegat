@@ -263,7 +263,7 @@ public final class PluginUtils {
             try {
                 URL url = f.toURI().toURL();
                 urlList.add(url);
-                Log.logInfoRB("PLUGIN_LOAD_JAR", url.toString());
+                Log.logInfoRB("PLUGIN_LOAD_JAR", url);
             } catch (IOException ex) {
                 Log.log(ex);
             }

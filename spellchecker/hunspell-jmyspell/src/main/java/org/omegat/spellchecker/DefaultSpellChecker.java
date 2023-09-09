@@ -79,7 +79,7 @@ import org.omegat.util.Token;
  */
 public class DefaultSpellChecker implements ISpellChecker {
 
-    static final ResourceBundle BUNDLE = ResourceBundle.getBundle("DefaultSpellChecker");
+    static final ResourceBundle BUNDLE = ResourceBundle.getBundle("Bundle");
     private static final ILogger LOGGER = LoggerFactory.getLogger(DefaultSpellChecker.class, BUNDLE);
 
     /** The spell checking provider. */

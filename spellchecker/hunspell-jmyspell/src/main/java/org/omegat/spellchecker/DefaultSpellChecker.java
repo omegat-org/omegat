@@ -36,7 +36,6 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -50,8 +49,8 @@ import java.util.stream.Stream;
 
 import org.apache.commons.io.IOUtils;
 import org.languagetool.JLanguageTool;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import tokyo.northside.logging.ILogger;
+import tokyo.northside.logging.LoggerFactory;
 
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
@@ -81,7 +80,7 @@ import org.omegat.util.Token;
 public class DefaultSpellChecker implements ISpellChecker {
 
     static final ResourceBundle BUNDLE = ResourceBundle.getBundle("DefaultSpellChecker");
-    private static final Logger LOGGER = LoggerFactory.getLogger(DefaultSpellChecker.class);
+    private static final ILogger LOGGER = LoggerFactory.getLogger(DefaultSpellChecker.class, BUNDLE);
 
     /** The spell checking provider. */
     private ISpellCheckerProvider checker;
@@ -158,7 +157,7 @@ public class DefaultSpellChecker implements ISpellChecker {
                 .orElseGet(Optional::empty).orElseGet(SpellCheckerDummy::new);
 
         if (checker instanceof SpellCheckerDummy) {
-            Log.logInfoRB("SPELLCHECKER_LANGUAGE_NOT_FOUND", targetLanguage);
+            LOGGER.atInfo().logRB("SPELLCHECKER_LANGUAGE_NOT_FOUND", targetLanguage);
         }
 
         loadWordLists();
@@ -184,26 +183,22 @@ public class DefaultSpellChecker implements ISpellChecker {
 
         if (isInvalidFile(affixName) || isInvalidFile(dictionaryName)) {
             // If we still don't have a dictionary, then return
-            LOGGER.info(BUNDLE.getString("SPELLCHECKER_LANGUAGE_NOT_FOUND"));
+            LOGGER.atInfo().logRB("SPELLCHECKER_LANGUAGE_NOT_FOUND");
             return Optional.empty();
         }
         try {
             ISpellCheckerProvider result = new SpellCheckerLangToolHunspell(dictionaryName, affixName);
-            LOGGER.info(MessageFormat.format(BUNDLE.getString("SPELLCHECKER_HUNSPELL_INITIALIZED"),
-                    language, dictionaryName));
+            LOGGER.atInfo().logRB("SPELLCHECKER_HUNSPELL_INITIALIZED", language, dictionaryName);
             return Optional.of(result);
         } catch (Throwable ex) {
-            LOGGER.warn(MessageFormat.format(BUNDLE.getString("SPELLCHECKER_HUNSPELL_EXCEPTION"), ex.getMessage()));
+            LOGGER.atWarn().logRB("SPELLCHECKER_HUNSPELL_EXCEPTION", ex.getMessage());
         }
         try {
-            ISpellCheckerProvider result = new SpellCheckerJMySpell(dictionaryName.getPath(),
-                    affixName.getPath());
-            LOGGER.info(MessageFormat.format(BUNDLE.getString("SPELLCHECKER_JMYSPELL_INITIALIZED"), language
-                    , dictionaryName));
+            ISpellCheckerProvider result = new SpellCheckerJMySpell(dictionaryName, affixName);
+            LOGGER.atInfo().logRB("SPELLCHECKER_JMYSPELL_INITIALIZED", language, dictionaryName);
             return Optional.of(result);
         } catch (Exception ex) {
-            LOGGER.error(MessageFormat.format(BUNDLE.getString("SPELLCHECKER_JMYSPELL_EXCEPTION"),
-                    ex.getMessage()));
+            LOGGER.atError().logRB("SPELLCHECKER_JMYSPELL_EXCEPTION", ex.getMessage());
         }
         // Try to use a custom spell checker if one is available.
        return Optional.empty();
@@ -215,26 +210,23 @@ public class DefaultSpellChecker implements ISpellChecker {
                 return true;
             }
             if (!file.isFile()) {
-                LOGGER.warn(MessageFormat.format(BUNDLE.getString("SPELLCHECKER_DICTIONARY_NOT_FILE"),
-                        file.getPath()));
+                LOGGER.atWarn().logRB("SPELLCHECKER_DICTIONARY_NOT_FILE", file.getPath());
                 return true;
             }
             if (!file.canRead()) {
-               LOGGER.warn(MessageFormat.format(BUNDLE.getString("SPELLCHECKER_DICTIONARY_NOT_READ"),
-                       file.getPath()));
+               LOGGER.atWarn().logRB("SPELLCHECKER_DICTIONARY_NOT_READ", file.getPath());
                 return true;
             }
             if (file.length() == 0L) {
                 // On OS X, attempting to load Hunspell with a zero-length .dic
                 // file causes
                 // a native exception that crashes the whole program.
-                LOGGER.warn(MessageFormat.format(BUNDLE.getString("SPELLCHECKER_DICTIONARY_EMPTY"),
-                        file.getPath()));
+                LOGGER.atWarn().logRB("SPELLCHECKER_DICTIONARY_EMPTY", file.getPath());
                 return true;
             }
             return false;
         } catch (Throwable ex) {
-            LOGGER.warn("", ex);
+            LOGGER.atWarn().setCause(ex).log();
             return true;
         }
     }
@@ -253,7 +245,7 @@ public class DefaultSpellChecker implements ISpellChecker {
                     Arrays.asList(language + OConsts.SC_AFFIX_EXTENSION,
                             language + OConsts.SC_DICTIONARY_EXTENSION)::contains);
         } catch (IOException e) {
-            LOGGER.warn("", e);
+            LOGGER.atWarn().setCause(e).log();
         }
     }
 
@@ -279,7 +271,7 @@ public class DefaultSpellChecker implements ISpellChecker {
                 IOUtils.copy(affStream, fos);
             }
         } catch (Exception ex) {
-            LOGGER.warn("", ex);
+            LOGGER.atWarn().setCause(ex).log();
         }
     }
 
@@ -295,7 +287,7 @@ public class DefaultSpellChecker implements ISpellChecker {
             try {
                 ignoreList.addAll(Files.readAllLines(ignoreFilePath, StandardCharsets.UTF_8));
             } catch (Exception ex) {
-                LOGGER.warn("", ex);
+                LOGGER.atWarn().setCause(ex).log();
             }
         }
 
@@ -308,7 +300,7 @@ public class DefaultSpellChecker implements ISpellChecker {
                 learnedList.addAll(Files.readAllLines(learnedFilePath, StandardCharsets.UTF_8));
                 learnedList.forEach(word -> checker.learnWord(word));
             } catch (Exception ex) {
-                LOGGER.warn("", ex);
+                LOGGER.atWarn().setCause(ex).log();
             }
         }
     }
@@ -339,12 +331,12 @@ public class DefaultSpellChecker implements ISpellChecker {
         try {
             Files.write(ignoreFilePath, ignoreList);
         } catch (IOException ex) {
-            LOGGER.warn("", ex);
+            LOGGER.atWarn().setCause(ex).log();
         }
         try {
             Files.write(learnedFilePath, learnedList);
         } catch (IOException ex) {
-            LOGGER.warn("", ex);
+            LOGGER.atWarn().setCause(ex).log();
         }
     }
 

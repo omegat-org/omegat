@@ -70,7 +70,7 @@ public class SpellCheckerManager {
             }
         } else {
             spellChecker = new SpellCheckerDummy();
-            Log.log("No active spell checker engine found");
+            Log.logRB("CORE_SPELLCHECKER_NO_ENGINE");
         }
         return spellChecker;
     }

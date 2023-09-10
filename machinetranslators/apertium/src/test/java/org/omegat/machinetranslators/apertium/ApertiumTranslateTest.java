@@ -3,7 +3,7 @@
  *           with fuzzy matching, translation memory, keyword search,
  *           glossaries, and translation leveraging into updated projects.
  *
- *  Copyright (C) 2021 Hiroshi Miura
+ *  Copyright (C) 2023 Hiroshi Miura
  *                Home page: https://www.omegat.org/
  *                Support center: https://omegat.org/support
  *
@@ -23,7 +23,7 @@
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package org.omegat.core.machinetranslators;
+package org.omegat.machinetranslators.apertium;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThrows;
@@ -36,6 +36,7 @@ import com.github.tomakehurst.wiremock.matching.StringValuePattern;
 import org.junit.Test;
 
 import org.omegat.core.TestCoreWireMock;
+import org.omegat.core.machinetranslators.MachineTranslateError;
 import org.omegat.util.Language;
 import org.omegat.util.Preferences;
 

@@ -251,7 +251,7 @@ OmegaT-Plugin: filter
 Name: org.omegat.filters3.xml.svg.SvgFilter
 OmegaT-Plugin: filter
 
-Name: org.omegat.core.machinetranslators.ApertiumTranslate
+Name: org.omegat.machinetranslators.apertium.ApertiumTranslate
 OmegaT-Plugin: machinetranslator
 
 Name: org.omegat.filters2.mozlang.MozillaLangFilter

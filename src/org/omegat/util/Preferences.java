@@ -173,23 +173,6 @@ public final class Preferences {
     /** Always confirm Quit, even if the project is saved */
     public static final String ALWAYS_CONFIRM_QUIT = "always_confirm_quit";
 
-    public static final String ALLOW_GOOGLE2_TRANSLATE = "allow_google2_translate";
-
-    public static final String ALLOW_BELAZAR_TRANSLATE = "allow_belazar_translate";
-
-    public static final String ALLOW_DEEPL_TRANSLATE = "allow_deepl_translate";
-
-    public static final String ALLOW_IBMWATSON_TRANSLATE = "allow_ibmwatson_translate";
-
-    public static final String ALLOW_APERTIUM_TRANSLATE = "allow_apertium_translate";
-
-    public static final String ALLOW_MICROSOFT_TRANSLATOR_AZURE = "allow_microsoft_translator_azure";
-
-    public static final String ALLOW_MYMEMORY_HUMAN_TRANSLATE = "allow_mymemory_human_translate";
-    public static final String ALLOW_MYMEMORY_MACHINE_TRANSLATE = "allow_mymemory_machine_translate";
-
-    public static final String ALLOW_YANDEX_CLOUD_TRANSLATE = "allow_yandex_cloud_translate";
-
     /**
      * Mark glossary matches. This feature used to be called "TransTips", and
      * the prefs key remains unchanged for backwards-compatibility.

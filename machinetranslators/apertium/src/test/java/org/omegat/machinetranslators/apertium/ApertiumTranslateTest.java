@@ -3,7 +3,7 @@
  *           with fuzzy matching, translation memory, keyword search,
  *           glossaries, and translation leveraging into updated projects.
  *
- *  Copyright (C) 2023 Hiroshi Miura
+ *  Copyright (C) 2021,2023 Hiroshi Miura
  *                Home page: https://www.omegat.org/
  *                Support center: https://omegat.org/support
  *
@@ -50,7 +50,7 @@ public class ApertiumTranslateTest extends TestCoreWireMock {
 
     @Test
     public void testGetJsonResults() throws Exception {
-        Preferences.setPreference(Preferences.ALLOW_APERTIUM_TRANSLATE, true);
+        Preferences.setPreference(ApertiumTranslate.ALLOW_APERTIUM_TRANSLATE, true);
         ApertiumTranslate apertiumTranslate = new ApertiumTranslate();
         String result = apertiumTranslate.getJsonResults(JSON);
         assertEquals("Abc", result);
@@ -58,7 +58,7 @@ public class ApertiumTranslateTest extends TestCoreWireMock {
 
     @Test
     public void testResponse() throws Exception {
-        Preferences.setPreference(Preferences.ALLOW_APERTIUM_TRANSLATE, true);
+        Preferences.setPreference(ApertiumTranslate.ALLOW_APERTIUM_TRANSLATE, true);
         int port = wireMockRule.port();
         String url = String.format("http://localhost:%d", port);
         System.setProperty(ApertiumTranslate.PROPERTY_APERTIUM_SERVER_CUSTOM, "true");
@@ -85,7 +85,7 @@ public class ApertiumTranslateTest extends TestCoreWireMock {
 
     @Test
     public void testErrorResponse() throws Exception {
-        Preferences.setPreference(Preferences.ALLOW_APERTIUM_TRANSLATE, true);
+        Preferences.setPreference(ApertiumTranslate.ALLOW_APERTIUM_TRANSLATE, true);
         int port = wireMockRule.port();
         String url = String.format("http://localhost:%d", port);
         System.setProperty(ApertiumTranslate.PROPERTY_APERTIUM_SERVER_CUSTOM, "true");

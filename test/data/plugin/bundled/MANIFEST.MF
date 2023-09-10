@@ -104,7 +104,7 @@ OmegaT-Plugin: filter
 Name: org.omegat.tokenizer.LuceneRussianTokenizer
 OmegaT-Plugin: tokenizer
 
-Name: org.omegat.core.machinetranslators.DeepLTranslate
+Name: org.omegat.machinetranslators.deepl.DeepLTranslate
 OmegaT-Plugin: machinetranslator
 
 Name: org.omegat.tokenizer.LuceneSmartChineseTokenizer
@@ -158,7 +158,7 @@ OmegaT-Plugin: filter
 Name: org.omegat.filters3.xml.properties.PropertiesFilter
 OmegaT-Plugin: filter
 
-Name: org.omegat.core.machinetranslators.MyMemoryMachineTranslate
+Name: org.omegat.machinetranslators.mymemory.MyMemoryMachineTranslate
 OmegaT-Plugin: machinetranslator
 
 Name: org.omegat.tokenizer.LuceneCJKTokenizer
@@ -257,7 +257,7 @@ OmegaT-Plugin: machinetranslator
 Name: org.omegat.filters2.mozlang.MozillaLangFilter
 OmegaT-Plugin: filter
 
-Name: org.omegat.core.machinetranslators.MyMemoryHumanTranslate
+Name: org.omegat.machinetranslators.mymemory.MyMemoryHumanTranslate
 OmegaT-Plugin: machinetranslator
 
 Name: org.omegat.tokenizer.LuceneSpanishTokenizer
@@ -286,7 +286,7 @@ Plugin-Description: Bundled filters for various file types
 Name: org.omegat.filters3.xml.wix.WiXFilter
 OmegaT-Plugin: filter
 
-Name: org.omegat.core.machinetranslators.IBMWatsonTranslate
+Name: org.omegat.machinetranslators.ibmwatson.IBMWatsonTranslate
 OmegaT-Plugin: machinetranslator
 
 Name: org.omegat.tokenizer.DefaultTokenizer
@@ -304,7 +304,7 @@ OmegaT-Plugin: filter
 Name: org.omegat.filters2.po.PoFilter
 OmegaT-Plugin: filter
 
-Name: org.omegat.core.machinetranslators.Google2Translate
+Name: org.omegat.machinetranslators.google.Google2Translate
 OmegaT-Plugin: machinetranslator
 
 Name: org.omegat.tokenizer.LuceneItalianTokenizer
@@ -351,7 +351,7 @@ OmegaT-Plugin: filter
 Name: org.omegat.filters2.text.dokuwiki.DokuWikiFilter
 OmegaT-Plugin: filter
 
-Name: org.omegat.core.machinetranslators.YandexCloudTranslate
+Name: org.omegat.machinetranslators.yandex.YandexCloudTranslate
 OmegaT-Plugin: machinetranslator
 
 Name: org/omegat/tokenizer/

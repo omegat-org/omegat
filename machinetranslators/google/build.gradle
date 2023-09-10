@@ -13,6 +13,7 @@ dependencies {
     } else {
         compileOnly(libs.commons.io)
         compileOnly(libs.commons.text)
+        compileOnly(libs.slf4j.format.jdk14)
         // JSON parser
         compileOnly(libs.jackson.core)
         compileOnly(libs.jackson.databind)

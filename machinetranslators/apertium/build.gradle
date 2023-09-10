@@ -35,7 +35,8 @@ jar {
                 'Plugin-Version': pluginProp.Version,
                 'Plugin-Name': pluginProp.Name,
                 'Plugin-Category': pluginProp.Category,
-                'Plugin-Description': pluginProp.Description
+                'Plugin-Description': pluginProp.Description,
+                'Automatic-Module-Name': pluginProp.ModuleName
         )
     }
     duplicatesStrategy = DuplicatesStrategy.INCLUDE

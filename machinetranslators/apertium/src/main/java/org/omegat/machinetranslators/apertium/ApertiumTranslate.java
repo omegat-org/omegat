@@ -34,6 +34,7 @@ import java.awt.event.ItemListener;
 import java.io.IOException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -53,7 +54,6 @@ import org.omegat.core.machinetranslators.MachineTranslateError;
 import org.omegat.gui.exttrans.MTConfigDialog;
 import org.omegat.util.HttpConnectionUtils;
 import org.omegat.util.Language;
-import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
 
@@ -62,6 +62,8 @@ import org.omegat.util.StringUtil;
  * @author Didier Briel
  */
 public class ApertiumTranslate extends BaseCachedTranslate {
+
+    public static final String ALLOW_APERTIUM_TRANSLATE = "allow_apertium_translate";
 
     private static final int HTTP_OK = 200;
     protected static final String PROPERTY_APERTIUM_MARKUNKNOWN = "apertium.server.markunknown";
@@ -73,8 +75,9 @@ public class ApertiumTranslate extends BaseCachedTranslate {
     // Specific OmegaT key
     protected static final String APERTIUM_SERVER_KEY_DEFAULT = "bwuxb5jS+VwSJ8mLz1qMfmMrDGA";
     private final ObjectMapper mapper = new ObjectMapper();
-    private final ResourceBundle bundle;
-    private final ILogger logger;
+    private static final String BUNDLE_BASENAME = "org.omegat.machinetranslators.apertium.Bundle";
+    private static final ResourceBundle BUNDLE = ResourceBundle.getBundle(BUNDLE_BASENAME);
+    private static final ILogger LOGGER = LoggerFactory.getLogger(ApertiumTranslate.class, BUNDLE);
 
     /**
      * Register plugins into OmegaT.
@@ -87,13 +90,12 @@ public class ApertiumTranslate extends BaseCachedTranslate {
     }
 
     public ApertiumTranslate() {
-        bundle = ResourceBundle.getBundle("Bundle");
-        logger = LoggerFactory.getLogger(ApertiumTranslate.class);
+        super();
     }
 
     @Override
     protected String getPreferenceName() {
-        return Preferences.ALLOW_APERTIUM_TRANSLATE;
+        return ALLOW_APERTIUM_TRANSLATE;
     }
 
     /**
@@ -102,7 +104,7 @@ public class ApertiumTranslate extends BaseCachedTranslate {
      * @return engine name.
      */
     public String getName() {
-        return bundle.getString("MT_ENGINE_APERTIUM");
+        return BUNDLE.getString("MT_ENGINE_APERTIUM");
     }
 
     /**
@@ -143,14 +145,14 @@ public class ApertiumTranslate extends BaseCachedTranslate {
             apiKey = APERTIUM_SERVER_KEY_DEFAULT;
         }
         String markUnknownVal = useMarkUnknown() ? "yes" : "no";
-        String url = String.format(APERTIUM_SERVER_URL_FORMAT, server, URLEncoder.encode(text, "UTF-8"),
+        String url = String.format(APERTIUM_SERVER_URL_FORMAT, server, URLEncoder.encode(text, StandardCharsets.UTF_8),
                 markUnknownVal, sourceLang, targetLang, apiKey);
         String v;
         try {
             v = HttpConnectionUtils.getURL(new URL(url));
         } catch (IOException e) {
-            logger.atError().setCause(e).setMessageRB("APERTIUM_CUSTOM_SERVER_NOTFOUND").log();
-            throw new Exception(bundle.getString("APERTIUM_CUSTOM_SERVER_NOTFOUND"));
+            LOGGER.atError().setCause(e).setMessageRB("APERTIUM_CUSTOM_SERVER_NOTFOUND").log();
+            throw new MachineTranslateError(BUNDLE.getString("APERTIUM_CUSTOM_SERVER_NOTFOUND"));
         }
 
         return getJsonResults(v);
@@ -169,7 +171,7 @@ public class ApertiumTranslate extends BaseCachedTranslate {
         try {
             JsonNode rootNode = mapper.readTree(json);
             if (!rootNode.has("responseStatus")) {
-                throw new MachineTranslateError(OStrings.getString("APERTIUM_CUSTOM_SERVER_INVALID"));
+                throw new MachineTranslateError(BUNDLE.getString("APERTIUM_CUSTOM_SERVER_INVALID"));
             }
             int code = rootNode.get("responseStatus").asInt();
             if (code == HTTP_OK) {
@@ -181,10 +183,10 @@ public class ApertiumTranslate extends BaseCachedTranslate {
             // throw exception if there's no translatedText or if there was
             // a problem
             String details = rootNode.get("responseDetails").asText();
-            throw new MachineTranslateError(StringUtil.format(OStrings.getString("APERTIUM_ERROR"), code, details));
+            throw new MachineTranslateError(StringUtil.format(BUNDLE.getString("APERTIUM_ERROR"), code, details));
         } catch (JsonParseException e) {
-            logger.atError().setCause(e).setMessageRB("MT_JSON_ERROR");
-            throw new MachineTranslateError(bundle.getString("MT_JSON_ERROR"));
+            LOGGER.atError().setCause(e).setMessageRB("MT_JSON_ERROR");
+            throw new MachineTranslateError(BUNDLE.getString("MT_JSON_ERROR"));
         }
     }
 
@@ -235,9 +237,9 @@ public class ApertiumTranslate extends BaseCachedTranslate {
     @Override
     public void showConfigurationUI(Window parent) {
 
-        JCheckBox unkCheckBox = new JCheckBox(OStrings.getString("APERTIUM_MARKUNKNOWN_LABEL"));
+        JCheckBox unkCheckBox = new JCheckBox(BUNDLE.getString("APERTIUM_MARKUNKNOWN_LABEL"));
         unkCheckBox.setSelected(useMarkUnknown());
-        JCheckBox apiCheckBox = new JCheckBox(OStrings.getString("APERTIUM_CUSTOM_SERVER_LABEL"));
+        JCheckBox apiCheckBox = new JCheckBox(BUNDLE.getString("APERTIUM_CUSTOM_SERVER_LABEL"));
         apiCheckBox.setSelected(useCustomServer());
 
         MTConfigDialog dialog = new MTConfigDialog(parent, getName()) {
@@ -301,10 +303,10 @@ public class ApertiumTranslate extends BaseCachedTranslate {
 
         dialog.panel.itemsPanel.add(unkCheckBox);
         dialog.panel.itemsPanel.add(apiCheckBox, 1);
-        dialog.panel.valueLabel1.setText(OStrings.getString("APERTIUM_CUSTOM_SERVER_URL_LABEL"));
+        dialog.panel.valueLabel1.setText(BUNDLE.getString("APERTIUM_CUSTOM_SERVER_URL_LABEL"));
         dialog.panel.valueField1.setText(getCustomServerUrl());
         dialog.panel.valueField1.setColumns(CONFIG_URL_COLUMN_WIDTH);
-        dialog.panel.valueLabel2.setText(OStrings.getString("APERTIUM_CUSTOM_SERVER_KEY_LABEL"));
+        dialog.panel.valueLabel2.setText(BUNDLE.getString("APERTIUM_CUSTOM_SERVER_KEY_LABEL"));
         dialog.panel.valueField2.setText(getCredential(PROPERTY_APERTIUM_SERVER_KEY));
         dialog.panel.temporaryCheckBox
                 .setSelected(isCredentialStoredTemporarily(PROPERTY_APERTIUM_SERVER_KEY));

@@ -14,12 +14,12 @@ dependencies {
         compileOnly 'commons-io:commons-io:2.11.0'
         compileOnly 'org.apache.commons:commons-text:1.9'
         // JSON parser
-        compileOnly "com.fasterxml.jackson.core:jackson-core:2.13.4"
-        compileOnly "com.fasterxml.jackson.core:jackson-databind:2.13.4.2"
+        compileOnly "com.fasterxml.jackson.core:jackson-core:2.15.2"
+        compileOnly "com.fasterxml.jackson.core:jackson-databind:2.15.2"
     }
     testImplementation(testFixtures(project.rootProject))
-    testImplementation "com.fasterxml.jackson.core:jackson-core:2.13.4"
-    testImplementation "com.fasterxml.jackson.core:jackson-databind:2.13.4.2"
+    testImplementation "com.fasterxml.jackson.core:jackson-core:2.15.2"
+    testImplementation "com.fasterxml.jackson.core:jackson-databind:2.15.2"
 }
 
 jar {
@@ -34,7 +34,8 @@ jar {
                 'Plugin-Version': pluginProp.Version,
                 'Plugin-Name': pluginProp.Name,
                 'Plugin-Category': pluginProp.Category,
-                'Plugin-Description': pluginProp.Description
+                'Plugin-Description': pluginProp.Description,
+                'Automatic-Module-Name': pluginProp.Module,
         )
     }
     duplicatesStrategy = DuplicatesStrategy.INCLUDE

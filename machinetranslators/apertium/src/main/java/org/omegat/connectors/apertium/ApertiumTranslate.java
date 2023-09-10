@@ -1,4 +1,5 @@
 /*
+ *
  *  OmegaT - Computer Assisted Translation (CAT) tool
  *           with fuzzy matching, translation memory, keyword search,
  *           glossaries, and translation leveraging into updated projects.
@@ -26,7 +27,7 @@
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package org.omegat.core.machinetranslators;
+package org.omegat.connectors.apertium;
 
 import java.awt.Window;
 import java.awt.event.ItemEvent;
@@ -45,6 +46,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.omegat.core.Core;
+import org.omegat.core.machinetranslators.BaseCachedTranslate;
+import org.omegat.core.machinetranslators.MachineTranslateError;
 import org.omegat.gui.exttrans.MTConfigDialog;
 import org.omegat.util.HttpConnectionUtils;
 import org.omegat.util.Language;

@@ -1,4 +1,5 @@
 /*
+ *
  *  OmegaT - Computer Assisted Translation (CAT) tool
  *           with fuzzy matching, translation memory, keyword search,
  *           glossaries, and translation leveraging into updated projects.
@@ -23,7 +24,7 @@
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package org.omegat.core.machinetranslators;
+package org.omegat.connectors.apertium;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThrows;
@@ -36,6 +37,7 @@ import com.github.tomakehurst.wiremock.matching.StringValuePattern;
 import org.junit.Test;
 
 import org.omegat.core.TestCoreWireMock;
+import org.omegat.core.machinetranslators.MachineTranslateError;
 import org.omegat.util.Language;
 import org.omegat.util.Preferences;
 

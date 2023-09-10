@@ -142,7 +142,7 @@ public final class UIDesignManager {
         setTheme(theme, mainClassLoader);
 
         String menuUI = Preferences.getPreference(Preferences.MENUUI_CLASS_NAME);
-        if (menuUI != null) {
+        if (menuUI != null && !menuUI.isEmpty()) {
             setMenuUI(menuUI, mainClassLoader);
         }
 

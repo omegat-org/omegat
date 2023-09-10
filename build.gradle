@@ -15,12 +15,14 @@ plugins {
     id 'com.diffplug.spotless' version '6.0.0'
     id 'com.github.ben-manes.versions' version '0.39.0'
     id 'edu.sc.seis.launch4j' version '3.0.3'
+    id "org.javamodularity.moduleplugin" version "1.8.12"
 }
 
 apply from: 'gradle/utils.gradle'
 
 applicationName = 'OmegaT'
 mainClassName = 'org.omegat.Main'
+ext.mainModuleName = 'org.omegat.OmegaT'
 
 def javaVersion = 11;
 
@@ -53,6 +55,7 @@ allprojects {
     apply plugin: 'eclipse'
     apply plugin: 'com.github.spotbugs'
     apply plugin: 'com.diffplug.spotless'
+    apply plugin: 'org.javamodularity.moduleplugin'
 
     java {
         toolchain {
@@ -276,10 +279,10 @@ dependencies {
         implementation 'com.fifesoft:autocomplete:3.2.0'
 
         // JSON parser
-        implementation "com.fasterxml.jackson.core:jackson-core:2.14.2"
-        implementation "com.fasterxml.jackson.core:jackson-databind:2.14.2"
-        implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.14.2"
-        implementation 'com.fasterxml.jackson.module:jackson-module-jaxb-annotations:2.14.2'
+        implementation "com.fasterxml.jackson.core:jackson-core:2.15.2"
+        implementation "com.fasterxml.jackson.core:jackson-databind:2.15.2"
+        implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.15.2"
+        implementation 'com.fasterxml.jackson.module:jackson-module-jaxb-annotations:2.15.2'
 
         implementation("com.github.ben-manes.caffeine:caffeine:2.9.3") {
             attributes {
@@ -337,6 +340,7 @@ jar {
     manifest {
         attributes('License': 'GNU Public License version 3 or later',
                    'Implementation-Version': project.version,
+                   'Automatic-Module-Name': mainModuleName,
                    'Permissions': 'all-permissions',
                    'OmegaT-Plugin': 'true',
                    'OmegaT-Plugins': omtPlugins.plugin,
@@ -513,14 +517,16 @@ distributions {
             from('release/linux-specific') {
                 filter ReplaceTokens, tokens: [
                         VERSION_NUMBER_SUBST: project.version,
-                        JAR_SUBST           : jar.archiveFileName.get()
+                        JAR_SUBST           : jar.archiveFileName.get(),
+                        APPLICATION_SUBST   : jar.archiveBaseName.get()
                 ]
                 fileMode 0755
             }
             from('release/win32-specific') {
                 include 'OmegaT.bat'
                 filter(ReplaceTokens, tokens: [
-                        JAR_SUBST           : jar.archiveFileName.get()
+                        JAR_SUBST           : jar.archiveFileName.get(),
+                        APPLICATION_SUBST   : jar.archiveBaseName.get()
                 ])
             }
             from('build/launch4j') {

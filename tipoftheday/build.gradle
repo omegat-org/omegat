@@ -26,7 +26,8 @@ dependencies {
         implementation("tokyo.northside:tipoftheday:0.4.1") {
             exclude module:"icu4j"
         }
-        implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.14.2"
+        implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.15.2"
+        runtimeOnly "org.yaml:snakeyaml:2.0"
     }
 }
 
@@ -45,7 +46,8 @@ jar {
                 'Plugin-Version': project.version,
                 'Plugin-Name': pluginProp.Name,
                 'Plugin-Category': pluginProp.Category,
-                'Plugin-Description': pluginProp.Description
+                'Plugin-Description': pluginProp.Description,
+                'Automatic-Module-Name': pluginProp.Module,
         )
     }
     duplicatesStrategy = DuplicatesStrategy.INCLUDE

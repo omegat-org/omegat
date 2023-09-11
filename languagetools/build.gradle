@@ -1,0 +1,86 @@
+plugins {
+    id 'java'
+}
+repositories {
+    mavenCentral()
+}
+
+def  languageToolVersion = '6.1'
+def plugins = [
+        [ lang: 'Arabic', code: 'ar', className: 'ArabicPlugin'],
+        [ lang: 'Asturian', code: 'ast', className: 'AsturianPlugin'],
+        [ lang: 'Belarusian', code: 'be', className: 'BelarusianPlugin'],
+        [ lang: 'Breton', code: 'br', className: 'BretonPlugin'],
+        [ lang: 'Catalan', code: 'ca', className: 'CatalanPlugin'],
+        [ lang: 'Danish', code: 'da', className: 'DanishPlugin'],
+        [ lang: 'German', code: 'de', className: 'GermanPlugin'],
+        [ lang: 'Greek', code: 'el', className: 'GreekPlugin'],
+        [ lang: 'English', code: 'en', className: 'EnglishPlugin'],
+        [ lang: 'Esperanto', code: 'eo', className: 'EsperantoPlugin'],
+        [ lang: 'Spanish', code: 'es', className: 'SpanishPlugin'],
+        [ lang: 'Persian', code: 'fa', className: 'PersianPlugin'],
+        [ lang: 'French', code: 'fr', className: 'FrenchPlugin'],
+        [ lang: 'Irish', code: 'ga', className: 'IrishPlugin'],
+        [ lang: 'Galician', code: 'gl', className: 'GalicianPlugin'],
+        [ lang: 'Italian', code: 'it', className: 'ItalianPlugin'],
+        [ lang: 'Japanese', code: 'ja', className: 'JapanesePlugin'],
+        [ lang: 'Central Khmer', code: 'km', className: 'KhmerPlugin'],
+        [ lang: 'Dutch', code: 'nl', className: 'DutchPlugin'],
+        [ lang: 'Polish', code: 'pl', className: 'PolishPlugin'],
+        [ lang: 'Portuguese', code: 'pt', className: 'PortuguesePlugin'],
+        [ lang: 'Romanian', code: 'ro', className: 'RomanianPlugin'],
+        [ lang: 'Russian', code: 'ru', className: 'RussianPlugin'],
+        [ lang: 'Slovak', code: 'sk', className: 'SlovakPlugin'],
+        [ lang: 'Slovenian', code: 'sl', className: 'SlovenianPlugin'],
+        [ lang: 'Swedish', code: 'sv', className: 'SwedishPlugin'],
+        [ lang: 'Tamil', code: 'ta', className: 'TamilPlugin'],
+        [ lang: 'Tagalog', code: 'tl', className: 'TagalogPlugin'],
+        [ lang: 'Ukrainian', code: 'uk', className: 'UkrainianPlugin'],
+        [ lang: 'Chinese', code: 'zh', className: 'ChinesePlugin']
+]
+
+def pluginPackage = 'org.omegat.languagetool.language'
+
+plugins.forEach { args ->
+    def name = args.get('code')
+    def pluginClass = "${pluginPackage}." + args.get('className')
+    def lang = args.get('lang')
+    sourceSets.create(name)
+    if (name.equals("ja")) {
+        dependencies.add("jaImplementation", "org.languagetool:language-ja:${languageToolVersion}") {
+            // Temporary exclusion; see https://sourceforge.net/p/omegat/bugs/814/
+            exclude module: 'lucene-gosen'
+            exclude module: 'languagetool-core'
+        }
+        dependencies.add("jaImplementation", 'org.omegat.lucene:lucene-gosen:5.5.1:ipadic')
+    } else {
+        dependencies.add("${name}Implementation", "org.languagetool:language-${name}:${languageToolVersion}") {
+            exclude module: 'languagetool-core'
+        }
+    }
+    configurations.getByName("${name}RuntimeClasspath").exclude(group: 'org.languagetool', module: 'language-core')
+    tasks.getByName("${name}Classes") {
+        group = 'languagetool'
+    }
+    tasks.register("${name}Jar", Jar) {
+        archiveFileName.set("omegat-language-${name}.${archiveExtension.get()}")
+        destinationDirectory.set(new File(rootProject.buildDir, "modules"))
+        duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+        from configurations.getByName("${name}RuntimeClasspath").collect {
+            it.isDirectory() ? it : zipTree(it)
+        }
+        from sourceSets.getByName("${name}").output
+        manifest {
+            attributes(
+                    'Plugin-Name': "${lang} LanguageTool",
+                    'Plugin-License': 'GNU Public License version 3 or later',
+                    'OmegaT-Plugins': pluginClass,
+                    'Plugin-Author': 'OmegaT team',
+                    'Plugin-Link': 'https://omegat.org',
+                    'Plugin-Description': "Provide ${lang} Languagetool library",
+                    'Plugin-Version': "${languageToolVersion}")
+        }
+        group = 'languagetool'
+    }
+    jar.dependsOn "${name}Jar"
+}

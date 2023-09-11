@@ -260,7 +260,7 @@ dependencies {
         runtimeOnly 'org.apache.ivy:ivy:2.5.1'
 
         // Javascript used for scripts
-        implementation 'org.openjdk.nashorn:nashorn-core:15.4'
+        runtimeOnly 'org.openjdk.nashorn:nashorn-core:15.4'
 
         // Script editor
         implementation 'com.fifesoft:rsyntaxtextarea:3.2.0'

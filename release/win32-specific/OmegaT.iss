@@ -30,7 +30,6 @@ Source: "OmegaT.exe"; DestDir: "{app}"
 Source: "OmegaT.l4J.ini"; DestDir: "{app}"; AfterInstall: SetUserLanguage; Flags: onlyifdoesntexist
 Source: "OmegaT.jar"; DestDir: "{app}"
 Source: "OmegaT-license.txt"; DestDir: "{app}"
-Source: "doc-license.txt"; DestDir: "{app}"
 Source: "readme.txt"; DestDir: "{app}"; Flags: isreadme;
 Source: "readme_ar.txt"; DestDir: "{app}"; Flags: isreadme; Languages: ar
 Source: "readme_ca.txt"; DestDir: "{app}"; Flags: isreadme; Languages: ca

@@ -5,13 +5,21 @@ plugins {
 dependencies {
     compileOnly(project.rootProject)
     if (providedLibsDir.directory) {
-        compileOnly fileTree(dir: providedLibsDir, includes: ['**/*commons-*.jar', '**/jackson*.jar'])
+        compileOnly fileTree(dir: providedLibsDir, includes: ['**/commons-io-*.jar',
+                                                              '**/lib-mnemonics-*.jar',
+                                                              '**/slf4j-format-jdk14-*.jar',
+                                                              '**/languagetool-core-*.jar'])
+        implementation fileTree(dir: providedLibsDir, includes: ['**/jmyspell-core-*.jar', '**/hunspell-*.jar'])
     } else {
         compileOnly 'commons-io:commons-io:2.11.0'
         compileOnly 'org.omegat:lib-mnemonics:1.1'
         compileOnly 'tokyo.northside:slf4j-format-jdk14:0.5.0'
+        compileOnly('org.languagetool:languagetool-core:6.1') {
+            exclude module: 'guava'
+            exclude module: 'jackson-databind'
+            exclude group: 'org.jetbrains'
+        }
         implementation 'org.omegat:jmyspell-core:1.0.0-beta-2'
-        implementation 'org.languagetool:languagetool-core:6.1'
         implementation 'com.gitlab.dumonts:hunspell:2.1.1'
     }
 }

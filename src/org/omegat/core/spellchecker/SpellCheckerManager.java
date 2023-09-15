@@ -33,12 +33,15 @@ import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.StaticUtils;
 
-public class SpellCheckerManager {
+public final class SpellCheckerManager {
 
     private static ISpellChecker spellChecker;
 
     public static final File DEFAULT_DICTIONARY_DIR = new File(StaticUtils.getConfigDir(),
             OConsts.SPELLING_DICT_DIR);
+
+    private SpellCheckerManager() {
+    }
 
     public static ISpellChecker getCurrentSpellChecker() {
         if (spellChecker != null) {

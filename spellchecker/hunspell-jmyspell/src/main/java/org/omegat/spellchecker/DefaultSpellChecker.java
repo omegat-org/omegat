@@ -79,7 +79,7 @@ import org.omegat.util.Token;
  */
 public class DefaultSpellChecker implements ISpellChecker {
 
-    static final ResourceBundle BUNDLE = ResourceBundle.getBundle("Bundle");
+    static final ResourceBundle BUNDLE = ResourceBundle.getBundle("org.omegat.spellchecker.Bundle");
     private static final ILogger LOGGER = LoggerFactory.getLogger(DefaultSpellChecker.class, BUNDLE);
 
     /** The spell checking provider. */
@@ -118,6 +118,7 @@ public class DefaultSpellChecker implements ISpellChecker {
     }
 
     public DefaultSpellChecker() {
+        initialize();
         CoreEvents.registerProjectChangeListener(eventType -> {
             switch (eventType) {
                 case LOAD:
@@ -329,7 +330,7 @@ public class DefaultSpellChecker implements ISpellChecker {
     public void saveWordLists() {
         // Write the ignored and learned words to the disk
         try {
-            Files.write(ignoreFilePath, ignoreList);
+             Files.write(ignoreFilePath, ignoreList);
         } catch (IOException ex) {
             LOGGER.atWarn().setCause(ex).log();
         }

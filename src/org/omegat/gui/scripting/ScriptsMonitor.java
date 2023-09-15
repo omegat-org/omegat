@@ -31,10 +31,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
 
 import org.apache.commons.io.FilenameUtils;
+
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.events.IApplicationEventListener;
@@ -55,8 +55,8 @@ public class ScriptsMonitor implements DirectoryMonitor.DirectoryCallback, Direc
     private static final FilenameFilter FILTER;
 
     static {
-        List<String> extensions = ScriptRunner.getAvailableScriptExtensions();
-        FILTER = (dir, name) -> extensions.contains(FilenameUtils.getExtension(name).toLowerCase(Locale.ENGLISH));
+        FILTER = (dir, name) -> ScriptRunner.getAvailableScriptExtensions().contains(FilenameUtils.getExtension(name)
+                .toLowerCase(Locale.ENGLISH));
     }
 
     public ScriptsMonitor(final ScriptingWindow scriptingWindow) {
@@ -65,7 +65,7 @@ public class ScriptsMonitor implements DirectoryMonitor.DirectoryCallback, Direc
         if (SCRIPTING_EVENTS) {
             // Initialize the events script list for all the events
             for (EventType t : EventType.values()) {
-                m_eventsScript.put(t, new ArrayList<ScriptItem>());
+                m_eventsScript.put(t, new ArrayList<>());
             }
         }
 
@@ -110,10 +110,13 @@ public class ScriptsMonitor implements DirectoryMonitor.DirectoryCallback, Direc
         // Plain Scripts
         // Only display files with an extension supported by the engines
         // currently installed.
-        ArrayList<ScriptItem> scriptsList = new ArrayList<ScriptItem>();
+        ArrayList<ScriptItem> scriptsList = new ArrayList<>();
         // Replace the script filename by its description, if available
-        for (File script : m_scriptDir.listFiles(FILTER)) {
-            scriptsList.add(new ScriptItem(script));
+        File[] aFile = m_scriptDir.listFiles(FILTER);
+        if (aFile != null) {
+            for (File script : aFile) {
+                scriptsList.add(new ScriptItem(script));
+            }
         }
 
         Collections.sort(scriptsList);

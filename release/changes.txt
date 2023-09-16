@@ -1,15 +1,21 @@
 ----------------------------------------------------------------------
  OmegaT 6.1.0
 ----------------------------------------------------------------------
-  18 Enhancement
-  29 Bug fixes
+  20 Enhancement
+  30 Bug fixes
 ----------------------------------------------------------------------
 6.1.0 vs 6.0.0
 
   Implemented requests:
 
+  - Make language libraries in LanguageTools as module
+  https://sourceforge.net/p/omegat/feature-requests/1714/
+
+  - Use SLF4J as logging facade framework
+  https://sourceforge.net/p/omegat/feature-requests/1710/
+
   - Request to add new API to allow plugins/modules to add menu item in requested place
-  https://sourceforge.net/p/omegat/feature-requests/1703
+  https://sourceforge.net/p/omegat/feature-requests/1703/
 
   - Team: SVN support svn+ssh protocol with key authentication
   https://sourceforge.net/p/omegat/feature-requests/1700/
@@ -150,6 +156,9 @@
 
   - Incorrect display of RTL segments in the Fuzzy Matches pane
   https://sourceforge.net/p/omegat/bugs/558/
+
+  - First session message in log not localised
+  https://sourceforge.net/p/omegat/bugs/272/
 
 ----------------------------------------------------------------------
  OmegaT 6.0.0 (2023-06-19)

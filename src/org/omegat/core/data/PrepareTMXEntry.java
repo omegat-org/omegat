@@ -58,14 +58,14 @@ public class PrepareTMXEntry implements ITMXEntry {
     public PrepareTMXEntry() {
     }
 
-    public PrepareTMXEntry(TMXEntry e) {
-        source = e.source;
-        translation = e.translation;
-        changer = e.changer;
-        changeDate = e.changeDate;
-        creator = e.creator;
-        creationDate = e.creationDate;
-        note = e.note;
+    public PrepareTMXEntry(ITMXEntry e) {
+        source = e.getSourceText();
+        translation = e.getTranslationText();
+        changer = e.getChanger();
+        changeDate = e.getChangeDate();
+        creator = e.getCreator();
+        creationDate = e.getCreationDate();
+        note = e.getNote();
     }
 
     public String getSourceText() {

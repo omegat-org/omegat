@@ -1,12 +1,15 @@
 ----------------------------------------------------------------------
  OmegaT 6.1.0
 ----------------------------------------------------------------------
-  21 Enhancement
+  22 Enhancement
   30 Bug fixes
 ----------------------------------------------------------------------
 6.1.0 vs 6.0.0
 
   Implemented requests:
+
+  - ResourceBundle Filter: default not to escape Unicode character
+  https://sourceforge.net/p/omegat/feature-requests/1716/
 
   - Make language libraries in LanguageTools as module
   https://sourceforge.net/p/omegat/feature-requests/1714/

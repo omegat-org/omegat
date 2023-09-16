@@ -384,7 +384,7 @@ public class ResourceBundleFilter extends AbstractFilter {
                 && "true".equalsIgnoreCase(processOptions.get(OPTION_DONT_UNESCAPE_U_LITERALS));
 
         if (processOptions != null) {
-            forceTargetEscape = !"false"
+            forceTargetEscape = "true"
                     .equalsIgnoreCase(processOptions.get(OPTION_FORCE_JAVA8_LITERALS_ESCAPE));
         }
 

@@ -28,6 +28,8 @@ dependencies {
         }
         implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.14.2"
     }
+    testImplementation(testFixtures(project.rootProject))
+    testImplementation 'commons-io:commons-io:2.11.0'
 }
 
 jar {

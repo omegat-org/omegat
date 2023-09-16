@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 6.1.0
 ----------------------------------------------------------------------
-  20 Enhancement
+  21 Enhancement
   30 Bug fixes
 ----------------------------------------------------------------------
 6.1.0 vs 6.0.0
@@ -13,6 +13,9 @@
 
   - Use SLF4J as logging facade framework
   https://sourceforge.net/p/omegat/feature-requests/1710/
+
+  - team: apache HttpClient for git connection
+  https://sourceforge.net/p/omegat/feature-requests/1706/
 
   - Request to add new API to allow plugins/modules to add menu item in requested place
   https://sourceforge.net/p/omegat/feature-requests/1703/

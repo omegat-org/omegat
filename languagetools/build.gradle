@@ -5,7 +5,6 @@ repositories {
     mavenCentral()
 }
 
-def  languageToolVersion = libs.versions.languagetool.get()
 def plugins = [
         [ lang: 'Arabic', code: 'ar', className: 'ArabicPlugin'],
         [ lang: 'Asturian', code: 'ast', className: 'AsturianPlugin'],
@@ -40,7 +39,7 @@ def plugins = [
 ]
 
 def pluginPackage = 'org.omegat.languagetool.language'
-
+def languageToolVersion = libs.versions.languagetool.get()
 plugins.forEach { args ->
     def name = args.get('code')
     def pluginClass = "${pluginPackage}." + args.get('className')

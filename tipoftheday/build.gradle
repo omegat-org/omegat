@@ -23,14 +23,14 @@ dependencies {
         implementation fileTree(dir: providedLibsDir, includes: ['**/tipoftheday-*.jar'])
     } else {
         // runtime dependencies should be in main project
-        implementation("tokyo.northside:tipoftheday:0.4.1")
+        implementation(libs.tipoftheday)
         constraints {
             implementation(libs.icj4j)
         }
         implementation(libs.jackson.yaml)
     }
     testImplementation(testFixtures(project.rootProject))
-    testImplementation 'commons-io:commons-io:2.11.0'
+    testImplementation(libs.commons.io)
 }
 
 jar {

@@ -25,7 +25,6 @@
 
 package org.omegat.core.machinetranslators;
 
-
 import static org.junit.Assert.assertEquals;
 
 import com.github.tomakehurst.wiremock.client.WireMock;
@@ -37,30 +36,16 @@ import org.omegat.util.Preferences;
 
 public class Google2TranslateTest extends TestCoreWireMock {
 
-    private static final String json = "{\n"
-            + "  \"data\": {\n"
-            + "    \"translations\": [\n"
-            + "      {\n"
-            + "        \"translatedText\": \"Hallo Welt\",\n"
-            + "        \"detectedSourceLanguage\": \"en\"\n"
-            + "      },\n"
-            + "      {\n"
-            + "        \"translatedText\": \"Mein Name ist Jeff\",\n"
-            + "        \"detectedSourceLanguage\": \"en\"\n"
-            + "      }\n"
-            + "    ]\n"
-            + "  }\n"
-            + "}";
+    private static final String json = "{\n" + "  \"data\": {\n" + "    \"translations\": [\n" + "      {\n"
+            + "        \"translatedText\": \"Hallo Welt\",\n" + "        \"detectedSourceLanguage\": \"en\"\n"
+            + "      },\n" + "      {\n" + "        \"translatedText\": \"Mein Name ist Jeff\",\n"
+            + "        \"detectedSourceLanguage\": \"en\"\n" + "      }\n" + "    ]\n" + "  }\n" + "}";
 
-    private static final String JSON2 = "{\n"
-            + "  \"data\": {\n"
-            + "     \"translations\": [{\n"
+    private static final String JSON2 = "{\n" + "  \"data\": {\n" + "     \"translations\": [{\n"
             + "        \"translatedText\": \"Hallo Welt\",\n"
             + "        \"detectedSourceLanguage\": \"en\",\n"
-            + "        \"model\": \"projects/PROJECT_NUMBER/locations/LOCATION/models/123\"\n"
-            + "     }]\n"
-            + "   }\n"
-            + "}";
+            + "        \"model\": \"projects/PROJECT_NUMBER/locations/LOCATION/models/123\"\n" + "     }]\n"
+            + "   }\n" + "}";
 
     @Test
     public void testGetJsonResults() throws MachineTranslateError {
@@ -87,18 +72,11 @@ public class Google2TranslateTest extends TestCoreWireMock {
         String url = String.format("http://localhost:%d", port);
 
         WireMock.stubFor(WireMock.post(WireMock.urlPathEqualTo("/language/translate/v2"))
-                        .withHeader("Content-Type", WireMock.equalTo("application/x-www-form-urlencoded"))
-                        .withRequestBody(WireMock.and(
-                                WireMock.containing("q=source+text"),
-                                WireMock.containing("source=en"),
-                                WireMock.containing("target=de")
-                        ))
-                        .willReturn(WireMock.aResponse()
-                                .withStatus(200)
-                                .withHeader("Content-Type", "application/json")
-                                .withBody(json)
-                )
-        );
+                .withHeader("Content-Type", WireMock.equalTo("application/x-www-form-urlencoded"))
+                .withRequestBody(WireMock.and(WireMock.containing("q=source+text"),
+                        WireMock.containing("source=en"), WireMock.containing("target=de")))
+                .willReturn(WireMock.aResponse().withStatus(200)
+                        .withHeader("Content-Type", "application/json").withBody(json)));
         Google2Translate google2Translate = new Google2Translate(url, key);
         String result = google2Translate.translate(new Language("EN"), new Language("DE"), sourceText);
         assertEquals("Hallo Welt", result);

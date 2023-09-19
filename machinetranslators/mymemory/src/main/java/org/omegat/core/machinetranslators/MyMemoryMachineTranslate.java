@@ -76,7 +76,8 @@ public final class MyMemoryMachineTranslate extends AbstractMyMemoryTranslate {
             // Get MyMemory response in JSON format
             JsonNode jsonResponse = getMyMemoryResponse(sLang, tLang, text);
 
-            // Find the best Human translation if no MT translation is provided for
+            // Find the best Human translation if no MT translation is provided
+            // for
             // this text. If there is a MT translation, it will always take
             // precedence.
             double bestScore = 0d;

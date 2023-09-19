@@ -70,7 +70,8 @@ public final class MyMemoryHumanTranslate extends AbstractMyMemoryTranslate {
 
     @SuppressWarnings("unchecked")
     @Override
-    protected String translate(final Language sLang, final Language tLang, final String text) throws Exception {
+    protected String translate(final Language sLang, final Language tLang, final String text)
+            throws Exception {
         try {
             // Get MyMemory response in JSON format
             JsonNode jsonResponse = getMyMemoryResponse(sLang, tLang, text);

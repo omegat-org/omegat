@@ -73,12 +73,12 @@ public class DeepLTranslate extends BaseCachedTranslate {
     protected static final String DEEPL_PATH = "/v1/translate";
     protected final String deepLUrl;
 
-    private final static int MAX_TEXT_BYTES = 128 * 1024; // Max limit is 128KiB
-    protected static final String DEEPL_URL = "https://api.deepl.com/v1/translate";
-    // See https://support.deepl.com/hc/en-us/articles/4405712799250-Character-count-for-translation-within
+    private static final int MAX_TEXT_BYTES = 128 * 1024; // Max limit is 128KiB
+    // See
+    // https://support.deepl.com/hc/en-us/articles/4405712799250-Character-count-for-translation-within
     // -applications
     // max application limit is 5000 characters.
-    private final static int MAX_TEXT_LENGTH = 5000;
+    private static final int MAX_TEXT_LENGTH = 5000;
 
     /**
      * Register plugins into OmegaT.
@@ -96,8 +96,11 @@ public class DeepLTranslate extends BaseCachedTranslate {
 
     /**
      * Constructor for tests.
-     * @param baseUrl custom base url
-     * @param key temporary api key
+     *
+     * @param baseUrl
+     *            custom base url
+     * @param key
+     *            temporary api key
      */
     public DeepLTranslate(String baseUrl, String key) {
         deepLUrl = baseUrl + DEEPL_PATH;
@@ -169,6 +172,7 @@ public class DeepLTranslate extends BaseCachedTranslate {
 
     /**
      * Parse API response and return translated text.
+     *
      * @param json
      *            API response json string.
      * @return translation, or null when API returns empty result, or error
@@ -197,7 +201,7 @@ public class DeepLTranslate extends BaseCachedTranslate {
             Log.logErrorRB(e, "MT_JSON_ERROR");
             throw new MachineTranslateError(OStrings.getString("MT_JSON_ERROR"));
         }
-        Log.logErrorRB( "MT_JSON_ERROR");
+        Log.logErrorRB("MT_JSON_ERROR");
         throw new MachineTranslateError(OStrings.getString("MT_JSON_ERROR"));
     }
 

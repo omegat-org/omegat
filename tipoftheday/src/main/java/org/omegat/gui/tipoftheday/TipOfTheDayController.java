@@ -53,12 +53,14 @@ public final class TipOfTheDayController {
     private static final boolean ENABLED = false;
     private static final String TIPOFTHEDAY_SHOW_ON_STARTUP = "tipoftheday_show_on_start";
     private static final String TIPOFTHEDAY_CURRENT_TIP = "tipoftheday_current_tip";
-    private static final JMenuItem totdMenu = new JMenuItem();
     static final String INDEX_YAML = "tips.yaml";
 
     @SuppressWarnings("unused")
     public static void loadPlugins() {
         CoreEvents.registerApplicationEventListener(new IApplicationEventListener() {
+
+            private final JMenuItem totdMenu = new JMenuItem();
+
             @Override
             public void onApplicationStartup() {
                 if (ENABLED && TipOfTheDayUtils.hasIndex()) {

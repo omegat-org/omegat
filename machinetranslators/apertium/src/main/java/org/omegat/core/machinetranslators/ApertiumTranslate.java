@@ -76,15 +76,15 @@ public class ApertiumTranslate extends BaseCachedTranslate {
      */
     public static void loadPlugins() {
         Core.registerMachineTranslationClass(ApertiumTranslate.class);
-/*
-        Core.registerMachineTranslationClass(BelazarTranslate.class);
-        Core.registerMachineTranslationClass(DeepLTranslate.class);
-        Core.registerMachineTranslationClass(Google2Translate.class);
-        Core.registerMachineTranslationClass(IBMWatsonTranslate.class);
-        Core.registerMachineTranslationClass(MyMemoryHumanTranslate.class);
-        Core.registerMachineTranslationClass(MyMemoryMachineTranslate.class);
-        Core.registerMachineTranslationClass(YandexCloudTranslate.class);
- */
+        /*
+         * Core.registerMachineTranslationClass(BelazarTranslate.class);
+         * Core.registerMachineTranslationClass(DeepLTranslate.class);
+         * Core.registerMachineTranslationClass(Google2Translate.class);
+         * Core.registerMachineTranslationClass(IBMWatsonTranslate.class);
+         * Core.registerMachineTranslationClass(MyMemoryHumanTranslate.class);
+         * Core.registerMachineTranslationClass(MyMemoryMachineTranslate.class);
+         * Core.registerMachineTranslationClass(YandexCloudTranslate.class);
+         */
     }
 
     public static void unloadPlugins() {
@@ -180,7 +180,8 @@ public class ApertiumTranslate extends BaseCachedTranslate {
             // throw exception if there's no translatedText or if there was
             // a problem
             String details = rootNode.get("responseDetails").asText();
-            throw new MachineTranslateError(StringUtil.format(OStrings.getString("APERTIUM_ERROR"), code, details));
+            throw new MachineTranslateError(
+                    StringUtil.format(OStrings.getString("APERTIUM_ERROR"), code, details));
         } catch (JsonParseException e) {
             Log.logErrorRB(e, "MT_JSON_ERROR");
             throw new MachineTranslateError(OStrings.getString("MT_JSON_ERROR"));

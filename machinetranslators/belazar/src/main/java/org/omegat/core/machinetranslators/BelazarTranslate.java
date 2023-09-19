@@ -75,7 +75,7 @@ public class BelazarTranslate extends BaseCachedTranslate {
 
     /**
      * Query Belazar translation API and return translation.
-     * 
+     *
      * @param sLang
      *            source language.
      * @param tLang

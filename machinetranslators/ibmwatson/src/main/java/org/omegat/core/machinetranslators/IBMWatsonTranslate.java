@@ -71,7 +71,8 @@ public class IBMWatsonTranslate extends BaseCachedTranslate {
     protected static final String PROPERTY_MODEL = "ibmwatson.api.model";
     protected static final String PROPERTY_URL = "ibmwatson.api.url";
 
-    protected static final String WATSON_URL = "https://gateway.watsonplatform.net/language-translator/api/v3/translate";
+    protected static final String WATSON_URL =
+            "https://gateway.watsonplatform.net/language-translator/api/v3/translate";
     protected static final String WATSON_VERSION = "2018-05-01";
     // API limit: 50 KB (51,200 bytes) of text
     // See https://cloud.ibm.com/apidocs/language-translator#translate
@@ -200,7 +201,7 @@ public class IBMWatsonTranslate extends BaseCachedTranslate {
                 return translations.get(0).get("translation").asText();
             }
         }
-        Log.logErrorRB( "MT_JSON_ERROR");
+        Log.logErrorRB("MT_JSON_ERROR");
         throw new MachineTranslateError(OStrings.getString("MT_JSON_ERROR"));
     }
 

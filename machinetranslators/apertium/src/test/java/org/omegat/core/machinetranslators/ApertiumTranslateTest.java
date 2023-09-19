@@ -41,10 +41,8 @@ import org.omegat.util.Preferences;
 
 public class ApertiumTranslateTest extends TestCoreWireMock {
 
-    private static final String JSON = "{\"responseData\": "
-            + "{\"translatedText\": \"Abc\"}, "
-            + "\"responseDetails\": null, "
-            + "\"responseStatus\": 200}";
+    private static final String JSON = "{\"responseData\": " + "{\"translatedText\": \"Abc\"}, "
+            + "\"responseDetails\": null, " + "\"responseStatus\": 200}";
     private static final int HTTP_OK = 200;
 
     @Test
@@ -69,14 +67,9 @@ public class ApertiumTranslateTest extends TestCoreWireMock {
         params.put("langpair", WireMock.equalTo("en|de"));
         params.put("key", WireMock.matching("\\w+"));
         params.put("markUnknown", WireMock.equalTo("no"));
-        WireMock.stubFor(WireMock.get(WireMock.urlPathEqualTo("/translate"))
-                .withQueryParams(params)
-                .willReturn(WireMock.aResponse()
-                        .withStatus(HTTP_OK)
-                        .withHeader("Content-Type", "application/json")
-                        .withBody(JSON)
-                )
-        );
+        WireMock.stubFor(WireMock.get(WireMock.urlPathEqualTo("/translate")).withQueryParams(params)
+                .willReturn(WireMock.aResponse().withStatus(HTTP_OK)
+                        .withHeader("Content-Type", "application/json").withBody(JSON)));
         ApertiumTranslate apertiumTranslate = new ApertiumTranslate();
         String result = apertiumTranslate.translate(new Language("EN"), new Language("DE"), "source text");
         assertEquals("Abc", result);
@@ -99,14 +92,9 @@ public class ApertiumTranslateTest extends TestCoreWireMock {
         params.put("langpair", WireMock.equalTo("en|es"));
         params.put("key", WireMock.matching("\\w+"));
         params.put("markUnknown", WireMock.equalTo("no"));
-        WireMock.stubFor(WireMock.get(WireMock.urlPathEqualTo("/translate"))
-                .withQueryParams(params)
-                .willReturn(WireMock.aResponse()
-                        .withStatus(HTTP_OK)
-                        .withHeader("Content-Type", "application/json")
-                        .withBody(errorResponse)
-                )
-        );
+        WireMock.stubFor(WireMock.get(WireMock.urlPathEqualTo("/translate")).withQueryParams(params)
+                .willReturn(WireMock.aResponse().withStatus(HTTP_OK)
+                        .withHeader("Content-Type", "application/json").withBody(errorResponse)));
         ApertiumTranslate apertiumTranslate = new ApertiumTranslate();
         assertThrows(MachineTranslateError.class, () -> {
             apertiumTranslate.translate(new Language("EN"), new Language("ES"), "This    works well?");

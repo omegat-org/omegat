@@ -103,7 +103,7 @@ allprojects {
         enforceCheck false
         java {
             targetExclude 'src/gen/**'
-            eclipse().configFile 'docs_devel/docs/assets/eclipse-formatting.xml'
+            eclipse().configFile "${rootDir}/docs_devel/docs/assets/eclipse-formatting.xml"
             removeUnusedImports()
         }
     }

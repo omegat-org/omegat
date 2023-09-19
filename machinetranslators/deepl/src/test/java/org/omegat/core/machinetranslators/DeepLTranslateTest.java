@@ -55,7 +55,9 @@ public class DeepLTranslateTest extends TestCoreWireMock {
         Preferences.setPreference(Preferences.ALLOW_DEEPL_TRANSLATE, true);
         DeepLTranslate deepLTranslate = new DeepLTranslate();
         String json = "{ \"response\": \"failed\" }";
-        assertThrows(Exception.class, () -> { deepLTranslate.getJsonResults(json); });
+        assertThrows(Exception.class, () -> {
+            deepLTranslate.getJsonResults(json);
+        });
     }
 
     @Test
@@ -69,10 +71,8 @@ public class DeepLTranslateTest extends TestCoreWireMock {
         params.put("target_lang", WireMock.equalTo("EN"));
         params.put("tag_handling", WireMock.equalTo("xml"));
         params.put("auth_key", WireMock.matching("\\w+"));
-        WireMock.stubFor(WireMock.get(WireMock.urlPathEqualTo("/v1/translate"))
-                .withQueryParams(params)
-                .willReturn(WireMock.aResponse()
-                        .withStatus(200)
+        WireMock.stubFor(WireMock.get(WireMock.urlPathEqualTo("/v1/translate")).withQueryParams(params)
+                .willReturn(WireMock.aResponse().withStatus(200)
                         .withHeader("Content-Type", "application/json")
                         .withBody("{ \"translations\":[ "
                                 + "{ \"detected_source_language\": \"DE\", \"text\": \"Hello World!\" }"

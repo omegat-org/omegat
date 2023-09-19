@@ -59,32 +59,21 @@ public class MyMemoryTranslationTest extends TestCoreWireMock {
         params.put("mt", WireMock.equalTo("1"));
         params.put("key", WireMock.equalTo("apikey"));
 
-        WireMock.stubFor(WireMock.get(WireMock.urlPathEqualTo("/get"))
-                .withQueryParams(params)
-                .willReturn(WireMock.aResponse()
-                        .withStatus(HTTP_OK)
+        WireMock.stubFor(WireMock.get(WireMock.urlPathEqualTo("/get")).withQueryParams(params)
+                .willReturn(WireMock.aResponse().withStatus(HTTP_OK)
                         .withHeader("Content-Type", "application/json")
-                        .withBody("{\"responseData\":"
-                                + "{\"translatedText\":\"Ciao Mondo!\",\"match\":1},"
-                                + "\"quotaFinished\":false,"
-                                + "\"mtLangSupported\":null,"
-                                + "\"responseDetails\":\"\","
-                                + "\"responseStatus\":200,"
-                                + "\"responderId\":null,"
-                                + "\"exception_code\":null,"
-                                + "\"matches\":"
-                                + "["
+                        .withBody("{\"responseData\":" + "{\"translatedText\":\"Ciao Mondo!\",\"match\":1},"
+                                + "\"quotaFinished\":false," + "\"mtLangSupported\":null,"
+                                + "\"responseDetails\":\"\"," + "\"responseStatus\":200,"
+                                + "\"responderId\":null," + "\"exception_code\":null," + "\"matches\":" + "["
                                 + "{\"id\":\"708671558\",\"segment\":\"Hello World!\","
                                 + "\"translation\":\"Ciao Mondo!\",\"source\":\"en-GB\",\"target\":\"it-IT\","
                                 + "\"quality\":\"74\",\"reference\":null,\"usage-count\":95,"
                                 + "\"subject\":\"All\",\"created-by\":\"MateCat\","
                                 + "\"last-updated-by\":\"MateCat\","
                                 + "\"create-date\":\"2023-02-04 09:39:47\","
-                                + "\"last-update-date\":\"2023-02-04 09:39:47\","
-                                + "\"match\":1"
-                                + "}]"
-                                + "}")
-                ));
+                                + "\"last-update-date\":\"2023-02-04 09:39:47\"," + "\"match\":1" + "}]"
+                                + "}")));
 
         MyMemoryMachineTranslate myMemoryMachineTranslate = new MyMemoryMachineTranslate(url);
         String result = myMemoryMachineTranslate.translate(new Language("EN"), new Language("IT"),
@@ -109,32 +98,21 @@ public class MyMemoryTranslationTest extends TestCoreWireMock {
         params.put("mt", WireMock.equalTo("0"));
         params.put("key", WireMock.equalTo("apikey"));
 
-        WireMock.stubFor(WireMock.get(WireMock.urlPathEqualTo("/get"))
-                .withQueryParams(params)
-                .willReturn(WireMock.aResponse()
-                        .withStatus(HTTP_OK)
+        WireMock.stubFor(WireMock.get(WireMock.urlPathEqualTo("/get")).withQueryParams(params)
+                .willReturn(WireMock.aResponse().withStatus(HTTP_OK)
                         .withHeader("Content-Type", "application/json")
-                        .withBody("{\"responseData\":"
-                                + "{\"translatedText\":\"Ciao Mondo!\",\"match\":1},"
-                                + "\"quotaFinished\":false,"
-                                + "\"mtLangSupported\":null,"
-                                + "\"responseDetails\":\"\","
-                                + "\"responseStatus\":200,"
-                                + "\"responderId\":null,"
-                                + "\"exception_code\":null,"
-                                + "\"matches\":"
-                                + "["
+                        .withBody("{\"responseData\":" + "{\"translatedText\":\"Ciao Mondo!\",\"match\":1},"
+                                + "\"quotaFinished\":false," + "\"mtLangSupported\":null,"
+                                + "\"responseDetails\":\"\"," + "\"responseStatus\":200,"
+                                + "\"responderId\":null," + "\"exception_code\":null," + "\"matches\":" + "["
                                 + "{\"id\":\"708671558\",\"segment\":\"Hello World!\","
                                 + "\"translation\":\"Ciao Mondo!\",\"source\":\"en-GB\",\"target\":\"it-IT\","
                                 + "\"quality\":\"74\",\"reference\":null,\"usage-count\":95,"
                                 + "\"subject\":\"All\",\"created-by\":\"MateCat\","
                                 + "\"last-updated-by\":\"MateCat\","
                                 + "\"create-date\":\"2023-02-04 09:39:47\","
-                                + "\"last-update-date\":\"2023-02-04 09:39:47\","
-                                + "\"match\":1"
-                                + "}]"
-                                + "}")
-                ));
+                                + "\"last-update-date\":\"2023-02-04 09:39:47\"," + "\"match\":1" + "}]"
+                                + "}")));
 
         MyMemoryHumanTranslate myMemoryMachineTranslate = new MyMemoryHumanTranslate(url);
         String result = myMemoryMachineTranslate.translate(new Language("EN"), new Language("IT"),

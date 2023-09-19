@@ -127,15 +127,15 @@ public class YandexCloudTranslate extends BaseCachedTranslate {
             throw new Exception(OStrings.getString("MT_ENGINE_YANDEX_CLOUD_FOLDER_ID_NOT_FOUND"));
         }
 
-        String IAMToken = getIAMToken(oAuthToken);
-        if (IAMToken == null) {
+        String iamToken = getIAMToken(oAuthToken);
+        if (iamToken == null) {
             throw new Exception(IAMErrorMessage);
         }
 
         String request = createJsonRequest(sLang, tLang, text, folderId);
 
         Map<String, String> headers = new TreeMap<>();
-        headers.put("Authorization", "Bearer " + IAMToken);
+        headers.put("Authorization", "Bearer " + iamToken);
 
         String response;
         try {
@@ -250,8 +250,8 @@ public class YandexCloudTranslate extends BaseCachedTranslate {
             return rootNode.get("translations").get(0).get("text").asText();
         } catch (Exception e) {
             Log.logErrorRB(e, "MT_JSON_ERROR");
-            throw new MachineTranslateError(OStrings.getString(
-                    "MT_ENGINE_YANDEX_CLOUD_BAD_TRANSLATE_RESPONSE"));
+            throw new MachineTranslateError(
+                    OStrings.getString("MT_ENGINE_YANDEX_CLOUD_BAD_TRANSLATE_RESPONSE"));
         }
     }
 
@@ -294,7 +294,7 @@ public class YandexCloudTranslate extends BaseCachedTranslate {
     /**
      * create glossary config part of request json. we make visibility to
      * protected for test purpose.
-     * 
+     *
      * @param glossaryTerms
      *            glossary map.
      */

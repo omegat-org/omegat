@@ -74,12 +74,9 @@ public class YandexCloudTranslateTest extends TestCore {
         params.put("glossaryConfig", yandexCloudTranslate.createGlossaryConfigPart(glossaryTerms));
         ObjectMapper mapper = new ObjectMapper();
         String json = mapper.writeValueAsString(params);
-        String expected = "{\"glossaryConfig\":{\"glossaryData\":{\"glossaryPairs\":"
-                + "["
+        String expected = "{\"glossaryConfig\":{\"glossaryData\":{\"glossaryPairs\":" + "["
                 + "{\"sourceText\":\"source1\",\"translatedText\":\"translation1\"},"
-                + "{\"sourceText\":\"source2\",\"translatedText\":\"translation2\"}"
-                + "]"
-                + "}}}";
+                + "{\"sourceText\":\"source2\",\"translatedText\":\"translation2\"}" + "]" + "}}}";
         assertEquals(mapper.readTree(expected), mapper.readTree(json));
     }
 }

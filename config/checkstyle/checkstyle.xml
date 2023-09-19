@@ -43,6 +43,10 @@
     
     <property name="severity" value="warning"/>
 
+    <module name="SuppressionFilter">
+        <property name="file" value="${config_loc}/suppressions.xml"/>
+    </module>
+
     <module name="SuppressWithPlainTextCommentFilter">
         <property name="offCommentFormat" value="&lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents"/>
         <property name="onCommentFormat" value="&lt;/editor-fold&gt;//GEN-END:initComponents"/>

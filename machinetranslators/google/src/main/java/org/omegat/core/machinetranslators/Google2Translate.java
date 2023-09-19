@@ -88,8 +88,11 @@ public class Google2Translate extends BaseCachedTranslate {
 
     /**
      * Constructor for test.
-     * @param baseUrl custom url.
-     * @param key temprary key.
+     * 
+     * @param baseUrl
+     *            custom url.
+     * @param key
+     *            temprary key.
      */
     public Google2Translate(String baseUrl, String key) {
         googleTranslateUrl = baseUrl + GT_PATH;
@@ -203,7 +206,7 @@ public class Google2Translate extends BaseCachedTranslate {
             Log.logErrorRB(e, "MT_JSON_ERROR");
             throw new MachineTranslateError(OStrings.getString("MT_JSON_ERROR"));
         }
-        Log.logErrorRB( "MT_JSON_ERROR");
+        Log.logErrorRB("MT_JSON_ERROR");
         throw new MachineTranslateError(OStrings.getString("MT_JSON_ERROR"));
     }
 
@@ -340,11 +343,8 @@ public class Google2Translate extends BaseCachedTranslate {
 
         @Override
         public String toString() {
-            return "Translation{" +
-                    "translatedText='" + translatedText + '\'' +
-                    ", detectedSourceLanguage='" + detectedSourceLanguage + '\'' +
-                    ", model='" + model + '\'' +
-                    '}';
+            return "Translation{" + "translatedText='" + translatedText + '\'' + ", detectedSourceLanguage='"
+                    + detectedSourceLanguage + '\'' + ", model='" + model + '\'' + '}';
         }
     }
 }

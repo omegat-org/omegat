@@ -2,7 +2,7 @@
  OmegaT 6.1.0
 ----------------------------------------------------------------------
   22 Enhancement
-  30 Bug fixes
+  31 Bug fixes
 ----------------------------------------------------------------------
 6.1.0 vs 6.0.0
 
@@ -93,6 +93,9 @@
 
   - Integration test(docker) failure with 503
   https://sourceforge.net/p/omegat/bugs/1199/
+
+  - Option-arrow not working in arm macOS
+  https://sourceforge.net/p/omegat/bugs/1197/
 
   - Content of notes elements are not displayed correctly with Xliff filter
   https://sourceforge.net/p/omegat/bugs/1192/

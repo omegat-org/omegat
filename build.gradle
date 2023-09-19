@@ -171,64 +171,46 @@ dependencies {
         runtimeOnly(libs.slf4j.jdk14)
 
         // macOS integration
-        implementation 'org.madlonkay:desktopsupport:0.6.0'
+        implementation(libs.madlonkay.desktopsupport)
 
         // stax
         implementation(libs.stax2.api)
         runtimeOnly(libs.woodstox.core)
 
         // Data: inline data URL handler
-        implementation 'tokyo.northside:url-protocol-handler:0.1.4'
+        implementation(libs.url.protocol.handler)
 
         // PDF Filter
-        implementation 'org.apache.pdfbox:pdfbox:2.0.27'
+        implementation(libs.apache.pdfbox)
 
         // Aligner
-        implementation 'net.loomchild:maligna:3.0.1'
+        implementation(libs.loomchild.maligna)
 
         // Dictionary
-        implementation 'com.github.takawitter:trie4j:0.9.8'
-        implementation('io.github.eb4j:dsl4j:0.5.3')
-        implementation(libs.jsoup)
-        implementation 'tokyo.northside:stardict4j:0.5.0'
+        implementation(libs.bundles.dictionary)
 
         // Encoding detections
-        implementation 'com.github.albfernandez:juniversalchardet:2.4.0'
+        implementation(libs.juniversal.chardet)
 
         // Legacy projects re-hosted on Maven Central
-        api 'org.omegat:vldocking:3.0.5'
-        implementation 'org.omegat:htmlparser:1.6-20230203'
-        implementation 'org.omegat:gnudiff4j:1.15'
-        implementation 'org.omegat:lib-mnemonics:1.1'
-        implementation 'org.omegat:jmyspell-core:1.0.0-beta-2'
+        api(libs.omegat.vldocking)
+        implementation(libs.omegat.htmlparser)
+        implementation(libs.omegat.gnudiff4j)
+        implementation(libs.omegat.mnemonics)
+        implementation(libs.omegat.jmyspell.core)
 
         // LanguageTool
         implementation(libs.languagetool.core)
-        // Explicitly specify guava dependency for `jre` version rather than `-android`
-        runtimeOnly(libs.languagetool.all) {
-            // Temporary exclusion; see https://sourceforge.net/p/omegat/bugs/814/
-            exclude module: 'lucene-gosen'
-        }
-        runtimeOnly 'org.omegat.lucene:lucene-gosen:5.5.1:ipadic'
 
         // Lucene for tokenizers
-        implementation(libs.lucene.core)
-        implementation(libs.lucene.analyzers.common)
-        implementation(libs.lucene.analyzers.kuromoji)
-        implementation(libs.lucene.analyzers.smartcn)
-        implementation(libs.lucene.analyzers.stempel)
+        implementation(libs.bundles.lucene)
 
         // Team project server support
-        implementation(libs.jgit)
-        implementation(libs.jgit.ssh)
-        implementation(libs.jgit.agent)
-        implementation(libs.jgit.http)
+        implementation(libs.bundles.jgit)
 
         // For ed25519 and ecdsa support of ssh, java16+ or BC
-        implementation(libs.bc.prov)
-        implementation(libs.bc.pg)
-        implementation(libs.bc.pkix)
-        implementation 'net.i2p.crypto:eddsa:0.3.0'
+        implementation(libs.bundles.ecdsa)
+
         // For gpg signing
         implementation(libs.jgit.bc)
 
@@ -236,50 +218,32 @@ dependencies {
         implementation(libs.svnkit)
 
         // Team project conflict resolution
-        implementation 'org.madlonkay:supertmxmerge:2.0.3'
+        implementation(libs.madlonkay.supertmxmerge)
 
         // Credentials encryption
-        implementation 'org.jasypt:jasypt:1.9.3'
+        implementation(libs.jasypt)
 
         // Groovy used for scripts - needed at implementation for GroovyClassLoader modifications
         // Ivy is needed to handle Grape/@Grab dependencies
-        runtimeOnly(libs.groovy.jsr223)
-        runtimeOnly(libs.groovy.dateutil)
-        runtimeOnly(libs.groovy.json)
-        runtimeOnly(libs.groovy.swing)
-        runtimeOnly(libs.groovy.templates)
-        runtimeOnly(libs.groovy.xml)
-        runtimeOnly(libs.ivy)
+        runtimeOnly(libs.bundles.groovy)
 
         // Javascript used for scripts
         implementation(libs.nashorn.core)
 
         // Script editor
-        implementation 'com.fifesoft:rsyntaxtextarea:3.2.0'
-        implementation 'com.fifesoft:rstaui:3.2.0'
-        implementation ('com.fifesoft:languagesupport:3.1.4') {
+        implementation(libs.bundles.fifesoft) {
             exclude module: 'rhino'
         }
-        implementation 'com.fifesoft:autocomplete:3.2.0'
 
         implementation(libs.guava)
         implementation(libs.jetbrains.annotations)
 
         // JSON parser
-        implementation(libs.jackson.core)
-        implementation(libs.jackson.databind)
-        implementation(libs.jackson.xml)
-        implementation(libs.jackson.jaxb)
+        implementation(libs.bundles.jackson)
+
         implementation(libs.jetbrains.annotations)
 
-        implementation("com.github.ben-manes.caffeine:caffeine:2.9.3") {
-            attributes {
-                attribute(Bundling.BUNDLING_ATTRIBUTE, project.objects.named(Bundling.class, Bundling.EXTERNAL))
-            }
-        }
-
-        implementation("com.github.ben-manes.caffeine:jcache:2.9.3") {
-            exclude module: 'caffeine'
+        implementation(libs.bundles.caffeine) {
             attributes {
                 attribute(Bundling.BUNDLING_ATTRIBUTE, project.objects.named(Bundling.class, Bundling.EXTERNAL))
             }
@@ -290,34 +254,29 @@ dependencies {
 
     testFixturesApi(libs.junit4)
     // for http connection test
-    testFixturesApi 'com.github.tomakehurst:wiremock-jre8:2.35.0'
+    testFixturesApi(libs.wiremock.jre8)
     testFixturesApi(libs.slf4j.api)
     testFixturesImplementation(libs.commons.io)
-    testFixturesImplementation 'org.omegat:vldocking:3.0.5'
+    testFixturesImplementation(libs.omegat.vldocking)
 
-    testImplementation 'org.xmlunit:xmlunit-legacy:2.8.3'
+    testImplementation(libs.xmlunit.legacy)
     testImplementation(libs.languagetool.server) {
         exclude group: 'org.slf4j'
         exclude group: 'ch.qos.logback'
     }
     // LanguageTool unit tests exercise these languages
-    def languageToolVersion = libs.versions.languagetool.get()
-    ['be', 'en', 'fr'].each {
-        testImplementation "org.languagetool:language-${it}:${languageToolVersion}"
-    }
-    testImplementation(libs.languagetool.ja) {
+    testImplementation(libs.bundles.languagetool.tests) {
         // Temporary exclusion; see https://sourceforge.net/p/omegat/bugs/814/
         exclude module: 'lucene-gosen'
     }
     testRuntimeOnly "org.omegat.lucene:lucene-gosen:5.5.1:ipadic"
-    testRuntimeOnly(libs.languagetool.pl)
     testRuntimeOnly(libs.slf4j.jdk14)
 
     // JAXB codegen only
-    jaxb 'org.grassfish.jaxb:jaxb-xjc:2.3.4'
+    jaxb(libs.jaxb.xjc)
 
     // genMac only
-    genMac 'org.omegat:appbundler:1.2.1'
+    genMac(libs.omegat.appbundler)
 
     testIntegrationImplementation sourceSets.main.output, sourceSets.test.output
     testIntegrationImplementation(testFixtures(project.rootProject))
@@ -364,18 +323,17 @@ jar {
     archiveFileName.set("${archiveBaseName.get()}.${archiveExtension.get()}")
 }
 
-ext {
-    distsDir = file("${buildDir}/${distsDirName}")
+project(":languagetools") {jar.enabled = false}
+project(":machinetranslators") {jar.enabled = false}
 
-    assetDir = findProperty('assetDir') ?: '../'
-
-    macJRE = fileTree(dir: assetDir, include: 'OpenJDK11U-jre_x64_mac_*.tar.gz')
-    armMacJRE = fileTree(dir: assetDir, include: 'OpenJDK11U-jre_aarch64_mac_*.tar.gz')
-    linux64JRE = fileTree(dir: assetDir, include: 'OpenJDK11U-jre_x64_linux_*.tar.gz')
-    linuxArm64JRE = fileTree(dir: assetDir, include: 'OpenJDK11U-jre_aarch64_linux_*.tar.gz')
-    windowsJRE32 = fileTree(dir: assetDir, include: 'OpenJDK11U-jre_x86-32_windows_*.zip')
-    windowsJRE = fileTree(dir: assetDir, include: 'OpenJDK11U-jre_x64_windows_*.zip')
-}
+def distsDir = file("${buildDir}/${distsDirName}")
+def assetDir = findProperty('assetDir') ?: '../'
+def macJRE = fileTree(dir: assetDir, include: 'OpenJDK11U-jre_x64_mac_*.tar.gz')
+def armMacJRE = fileTree(dir: assetDir, include: 'OpenJDK11U-jre_aarch64_mac_*.tar.gz')
+def linux64JRE = fileTree(dir: assetDir, include: 'OpenJDK11U-jre_x64_linux_*.tar.gz')
+def linuxArm64JRE = fileTree(dir: assetDir, include: 'OpenJDK11U-jre_aarch64_linux_*.tar.gz')
+def windowsJRE32 = fileTree(dir: assetDir, include: 'OpenJDK11U-jre_x86-32_windows_*.zip')
+def windowsJRE = fileTree(dir: assetDir, include: 'OpenJDK11U-jre_x64_windows_*.zip')
 
 launch4j {
     xmlFileName = "${projectDir}/release/win32-specific/L4j_OMT.xml"

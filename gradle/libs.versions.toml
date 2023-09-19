@@ -74,7 +74,7 @@ neko-htmlunit = {group = "org.htmlunit", name = "neko-htmlunit", version.ref = "
 commons-io = {group = "commons-io", name = "commons-io", version.ref = "io"}
 commons-lang3 = {group = "org.apache.commons", name = "commons-lang3", version.ref = "lang3"}
 commons-codec = {group = "commons-codec", name = "commons-codec", version.ref = "codec"}
-commons-text = {group = "commons-text", name = "commons-text", version.ref = "text"}
+commons-text = {group = "org.apache.commons", name = "commons-text", version.ref = "text"}
 unbescape = {group = "org.unbescape", name = "unbescape", version.ref = "unbescape"}
 xerces-impl = {group = "xerces", name = "xercesImpl", version.ref = "xerces"}
 jstyleparser = {group = "tokyo.northside", name = "jstyleparser", version.ref = "jstyleparser"}
@@ -133,19 +133,19 @@ wiremock-jre8 = {group = "com.github.tomakehurst", name = "wiremock-jre8", versi
 omegat-vldocking = {group = "org.omegat", name = "vldocking", version.ref = "vldocking"}
 xmlunit-legacy = {group = "org.xmlunit", name = "xmlunit-legacy", version.ref = "xmlunit"}
 omegat-appbundler = {group = "org.omegat", name = "appbundler", version.ref = "appbundler"}
-supertmxmerge = {group = "org.madlonkay", name = "supertmxmerge", version.ref = "supertmxmerge"}
+madlonkay-supertmxmerge = {group = "org.madlonkay", name = "supertmxmerge", version.ref = "supertmxmerge"}
 jasypt = {group = "org.jasypt", name = "jasypt", version.ref = "jasypt"}
 eddsa = {group = "net.i2p.crypto", name = "eddsa", version.ref = "crypto"}
 omegat-htmlparser = {group = "org.omegat", name = "htmlparser", version.ref = "htmlparser"}
 omegat-gnudiff4j = {group = "org.omegat", name = "gnudiff4j", version.ref = "gnudiff"}
 madlonkay-desktopsupport = {group = "org.madlonkay", name = "desktopsupport", version.ref = "desktopsupport"}
 url-protocol-handler = {group = "tokyo.northside", name = "url-protocol-handler", version.ref = "protocolhandler"}
-pdfbox = {group = "org.apache.pdfbox", name = "pdfbox", version.ref = "pdfbox"}
+apache-pdfbox = {group = "org.apache.pdfbox", name = "pdfbox", version.ref = "pdfbox"}
 loomchild-maligna = {group = "net.loomchild", name = "maligna", version.ref = "maligna"}
 trie4j = {group = "com.github.takawitter", name = "trie4j", version.ref = "trie4j"}
 dsl4j = {group = "io.github.eb4j", name = "dsl4j", version.ref = "dsl4j"}
 stardict4j = {group = "tokyo.northside", name = "stardict4j", version.ref = "stardict4j"}
-juniversalchardet = {group = "com.github.albfernandez", name = "juniversalchardet", version.ref = "juniversalchardet"}
+juniversal-chardet = {group = "com.github.albfernandez", name = "juniversalchardet", version.ref = "juniversalchardet"}
 omegat-mnemonics = {group = "org.omegat", name = "lib-mnemonics", version.ref = "mnemonics"}
 omegat-jmyspell-core = {group = "org.omegat", name = "jmyspell-core", version.ref = "jmyspell"}
 jaxb-xjc = {group = "org.grassfish.jaxb", name = "jaxb-xjc", version.ref = "xjc"}
@@ -153,12 +153,14 @@ tipoftheday = {group = "tokyo.northside", name = "tipoftheday", version.ref = "t
 
 [bundles]
 groovy = ["groovy-jsr223", "groovy-dateutil", "groovy-json", "groovy-xml", "groovy-swing", "groovy-templates", "ivy"]
+jackson = ["jackson-core", "jackson-databind", "jackson-jaxb", "jackson-xml", "jackson-yaml"]
 ecdsa = ["bc-prov", "bc-pg", "bc-pkix", "eddsa"]
 fifesoft = ["fifesoft-rsyntaxtextarea", "fifesoft-autocomplete", "fifesoft-languagesupport", "fifesoft-rstaui"]
 caffeine = ["caffeine", "caffeine-jcache"]
-languagetool-tests = ["languagetool-be", "languagetool-fr", "languagetool-en", "languagetool-ja"]
+languagetool-tests = ["languagetool-be", "languagetool-fr", "languagetool-en", "languagetool-ja", "languagetool-pl"]
 lucene = ["lucene-core", "lucene-analyzers-common", "lucene-analyzers-kuromoji", "lucene-analyzers-smartcn", "lucene-analyzers-stempel"]
 jgit = ["jgit", "jgit-agent", "jgit-http", "jgit-ssh"]
+dictionary = ["trie4j", "dsl4j", "stardict4j", "jsoup"]
 
 [plugins]
 spotbugs = {id = "com.github.spotbugs", version = "5.1.3"}

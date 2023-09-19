@@ -46,7 +46,7 @@ plugins.forEach { args ->
     def lang = args.get('lang')
     sourceSets.create(name)
     if (name.equals("ja")) {
-        dependencies.add("jaImplementation", "org.languagetool:language-ja:${languageToolVersion}") {
+        dependencies.add("jaImplementation", libs.languagetool.ja.get()) {
             // Temporary exclusion; see https://sourceforge.net/p/omegat/bugs/814/
             exclude module: 'lucene-gosen'
             exclude module: 'languagetool-core'
@@ -57,7 +57,7 @@ plugins.forEach { args ->
             exclude module: 'languagetool-core'
         }
     }
-    configurations.getByName("${name}RuntimeClasspath").exclude(group: 'org.languagetool', module: 'language-core')
+    configurations.getByName("${name}RuntimeClasspath").exclude(group: 'org.languagetool', module: 'languagetool-core')
     tasks.getByName("${name}Classes") {
         group = 'languagetool'
     }

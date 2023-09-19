@@ -187,6 +187,24 @@ public class ImportFromAutoTMX {
 
         trans.source = entry.getSrcText();
 
+        if (!didAnyChange) { // check if this call really changes anything
+            TMXEntry oldEntry = defaultTranslation ? project.projectTMX.defaults.get(entry.getSrcText())
+                : project.projectTMX.alternatives.get(entry.getKey());
+            if (oldEntry == null) {
+                if (trans.translation != null) {
+                    didAnyChange = true;
+                }                
+            } else if (oldEntry.isTranslated()) {
+                if (! oldEntry.translation.equals(trans.translation)) {
+                    didAnyChange = true;
+                }
+            } else {
+                if (trans.translation != null) {
+                    didAnyChange = true;
+                }
+            }
+        }
+        
         TMXEntry newTrEntry;
 
         if (trans.translation == null && trans.note == null) {
@@ -196,6 +214,5 @@ public class ImportFromAutoTMX {
             newTrEntry = new TMXEntry(trans, defaultTranslation, externalLinked);
         }
         project.projectTMX.setTranslation(entry, newTrEntry, defaultTranslation);
-        didAnyChange = true;
     }
 }

@@ -187,8 +187,8 @@ public class MsOfficeFileFilter extends AbstractZipFilter {
             String s1 = z1.getName(), s2 = z2.getName();
             String[] words1 = s1.split("\\d+\\."), words2 = s2.split("\\d+\\.");
             // Digits at the end and same text
-            if ((words1.length > 1 && words2.length > 1) && // Digits
-            (words1[0].equals(words2[0]))) { // Same text
+            if ((words1.length > 1 && words2.length > 1) // Digits
+               && (words1[0].equals(words2[0]))) { // Same text
                 int number1 = 0, number2 = 0;
                 Matcher getDigits = DIGITS.matcher(s1);
                 if (getDigits.find()) {

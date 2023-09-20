@@ -52,7 +52,8 @@ public class TmxSegmentationTest {
         props.setSourceLanguage(new Language("en"));
         props.setTargetLanguage(new Language("fr"));
         props.setSentenceSegmentingEnabled(true);
-        ProjectTMX tmx = new ProjectTMX(props.getSourceLanguage(), props.getTargetLanguage(), props.isSentenceSegmentingEnabled(), new File("test/data/tmx/resegmenting.tmx"),
+        ProjectTMX tmx = new ProjectTMX(props.getSourceLanguage(), props.getTargetLanguage(),
+                props.isSentenceSegmentingEnabled(), new File("test/data/tmx/resegmenting.tmx"),
                 new ProjectTMX.CheckOrphanedCallback() {
                     public boolean existSourceInProject(String src) {
                         return true;

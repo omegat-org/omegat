@@ -106,7 +106,6 @@ public class SdlXliff extends Xliff1Filter {
     private boolean midHasModifier = false;
     private boolean midHasModifDate = false;
 
-
     /**
      * Also starts on cmt-defs or tag-defs, else like in standard XLIFF.
      */
@@ -387,8 +386,8 @@ public class SdlXliff extends Xliff1Filter {
             attr.add(EVENT_FACTORY.createAttribute("sdl", "http://sdl.com/FileTypes/SdlXliff/1.0", "cid",
                     addNote.toString()));
             attr.add(EVENT_FACTORY.createAttribute(new QName("mtype"), "x-sdl-comment"));
-            res.add(0, EVENT_FACTORY.createStartElement(new QName("urn:oasis:names:tc:xliff:document:1.2", "mrk"),
-                    attr.iterator(), null));
+            res.add(0, EVENT_FACTORY.createStartElement(
+                    new QName("urn:oasis:names:tc:xliff:document:1.2", "mrk"), attr.iterator(), null));
             res.add(EVENT_FACTORY.createEndElement(new QName("urn:oasis:names:tc:xliff:document:1.2", "mrk"),
                     null));
         }

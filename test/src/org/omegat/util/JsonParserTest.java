@@ -39,19 +39,15 @@ public class JsonParserTest {
     @Deprecated
     @Test
     public void testParse() throws Exception {
-        {
-            Object result = JsonParser.parse("{}");
-            assertTrue(result instanceof Map);
-        }
-        {
-            Object result = JsonParser.parse("{\"item\": []}");
-            assertTrue(result instanceof Map);
-            Map<?, ?> map = (Map<?, ?>) result;
-            Object item = map.get("item");
-            assertTrue(item instanceof List);
-            List<?> list = (List<?>) item;
-            assertTrue(list.isEmpty());
-        }
+        Object result = JsonParser.parse("{}");
+        assertTrue(result instanceof Map);
+        result = JsonParser.parse("{\"item\": []}");
+        assertTrue(result instanceof Map);
+        Map<?, ?> map = (Map<?, ?>) result;
+        Object item = map.get("item");
+        assertTrue(item instanceof List);
+        List<?> list = (List<?>) item;
+        assertTrue(list.isEmpty());
     }
 
     @Deprecated

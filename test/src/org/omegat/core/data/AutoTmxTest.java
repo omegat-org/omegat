@@ -68,9 +68,12 @@ public class AutoTmxTest {
         Core.initializeConsole(new HashMap<String, String>());
 
         SourceTextEntry ste10, ste11, ste12;
-        p.allProjectEntries.add(ste10 = createSTE("10", "Edit"));
-        p.allProjectEntries.add(ste11 = createSTE("11", "Edit"));
-        p.allProjectEntries.add(ste12 = createSTE("12", "Edit"));
+        ste10 = createSTE("10", "Edit");
+        p.allProjectEntries.add(ste10);
+        ste11 = createSTE("11", "Edit");
+        p.allProjectEntries.add(ste11);
+        ste12 = createSTE("12", "Edit");
+        p.allProjectEntries.add(ste12);
         p.importHandler = new ImportFromAutoTMX(p, p.allProjectEntries);
         p.appendFromAutoTMX(autoTMX, false);
         checkTranslation(ste10, "Modifier", TMXEntry.ExternalLinked.x100PC);
@@ -84,7 +87,8 @@ public class AutoTmxTest {
                 new File("test/data/enforcetmx/enforce1.tmx"));
 
         SourceTextEntry ste;
-        p.allProjectEntries.add(ste = createSTE(null, "Edit"));
+        ste = createSTE(null, "Edit");
+        p.allProjectEntries.add(ste);
         checkTranslation(ste, "foobar", null);
         p.importHandler = new ImportFromAutoTMX(p, p.allProjectEntries);
         p.appendFromAutoTMX(enforceTMX, true);

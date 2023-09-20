@@ -55,10 +55,13 @@ public class HTMLUtilsTest {
         //\u0301 is an accent, in a multi-code point character.
         assertEquals("one space is one space", " ", HTMLUtils.getSpacePrefix(" \u0301a", true));
         assertEquals("multiple spaces is compressed to one", " ", HTMLUtils.getSpacePrefix("  \u0301a", true));
-        assertEquals("multiple spaces stay multiple spaces uncompressed", "    ", HTMLUtils.getSpacePrefix("    \u0301ap", false));
+        assertEquals("multiple spaces stay multiple spaces uncompressed", "    ",
+                HTMLUtils.getSpacePrefix("    \u0301ap", false));
         String allWhite = "\n\r\u2028\u2029\t\n\u000B\f\n\u001C\u001D\u001E\u001F ";
-        assertEquals("multiple different space types compress to the first whitespace character", "\n", HTMLUtils.getSpacePrefix(allWhite + "a", true));
-        assertEquals("multiple different whtiespace characters stay that uncompressed", allWhite, HTMLUtils.getSpacePrefix(allWhite + "a", false));
+        assertEquals("multiple different space types compress to the first whitespace character", "\n",
+                HTMLUtils.getSpacePrefix(allWhite + "a", true));
+        assertEquals("multiple different whtiespace characters stay that uncompressed", allWhite,
+                HTMLUtils.getSpacePrefix(allWhite + "a", false));
     }
 
     @Test
@@ -85,11 +88,15 @@ public class HTMLUtilsTest {
 
         //\u0301 is an accent, in a multi-code point character.
         assertEquals("one space is one space", " ", HTMLUtils.getSpacePostfix("a\u0065\u0301 ", true));
-        assertEquals("multiple spaces is compressed to one", " ", HTMLUtils.getSpacePostfix("a\u0065\u0301  ", true));
-        assertEquals("multiple spaces stay multiple spaces uncompressed", "    ", HTMLUtils.getSpacePostfix("a\u0065\u0301    ", false));
+        assertEquals("multiple spaces is compressed to one", " ",
+                HTMLUtils.getSpacePostfix("a\u0065\u0301  ", true));
+        assertEquals("multiple spaces stay multiple spaces uncompressed", "    ",
+                HTMLUtils.getSpacePostfix("a\u0065\u0301    ", false));
         String allWhite = "\n\r\u2028\u2029\t\n\u000B\f\n\u001C\u001D\u001E\u001F ";
-        assertEquals("multiple different space types compress to the first whitespace character", "\n", HTMLUtils.getSpacePostfix("a\u0065\u0301" + allWhite, true));
-        assertEquals("multiple different whtiespace characters stay that uncompressed", allWhite, HTMLUtils.getSpacePostfix("a\u0065\u0301" + allWhite, false));
+        assertEquals("multiple different space types compress to the first whitespace character", "\n",
+                HTMLUtils.getSpacePostfix("a\u0065\u0301" + allWhite, true));
+        assertEquals("multiple different whtiespace characters stay that uncompressed", allWhite,
+                HTMLUtils.getSpacePostfix("a\u0065\u0301" + allWhite, false));
 
     }
 

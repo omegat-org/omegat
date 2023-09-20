@@ -79,8 +79,7 @@ public class AccessTools extends JPanel {
     private static final int MAX_PATH_LENGTH_SHOWN = 25;
     private static final float CHECKBOX_HEIGHT_RATIO = 1.8f;
 
-    public AccessTools(final MainWindow mainWindow,
-                       final MainWindowMenuHandler mainWindowMenuHandler) {
+    public AccessTools(final MainWindow mainWindow, final MainWindowMenuHandler mainWindowMenuHandler) {
         this.mainWindowMenuHandler = mainWindowMenuHandler;
         initComponents();
     }
@@ -101,11 +100,8 @@ public class AccessTools extends JPanel {
             projectList.add(new URI("omegat", "team", null));
         } catch (URISyntaxException ignored) {
         }
-        RecentProjects.getRecentProjects().stream()
-                .map(f -> Paths.get(f).toAbsolutePath().toUri())
-                .filter(AccessTools::checkProjectFolder)
-                .distinct()
-                .forEach(projectList::add);
+        RecentProjects.getRecentProjects().stream().map(f -> Paths.get(f).toAbsolutePath().toUri())
+                .filter(AccessTools::checkProjectFolder).distinct().forEach(projectList::add);
         projectComboBoxModel = new ProjectComboBoxModel(projectList);
         recentProjectCB.setModel(projectComboBoxModel);
         recentProjectCB.setEnabled(true);
@@ -129,10 +125,10 @@ public class AccessTools extends JPanel {
 
         searchButton = new JButton("",
                 Objects.requireNonNullElseGet(UIManager.getIcon("OmegaT.newUI.search.icon"),
-                () -> MainMenuIcons.newImageIcon(ResourcesUtil.getBundledImage("newUI.search.png"))));
+                        () -> MainMenuIcons.newImageIcon(ResourcesUtil.getBundledImage("newUI.search.png"))));
         searchButton.setBorderPainted(false);
-        settingsButton = new JButton("",
-                Objects.requireNonNullElseGet(UIManager.getIcon("OmegaT.newUI.settings.icon"),
+        settingsButton = new JButton("", Objects.requireNonNullElseGet(
+                UIManager.getIcon("OmegaT.newUI.settings.icon"),
                 () -> MainMenuIcons.newImageIcon(ResourcesUtil.getBundledImage("newUI.settings.png"))));
         settingsButton.setBorderPainted(false);
 
@@ -157,24 +153,22 @@ public class AccessTools extends JPanel {
                 URI projectUri = (URI) item;
                 if (projectUri.getScheme().equals("omegat")) {
                     switch (projectUri.getSchemeSpecificPart()) {
-                        case "new":
-                            mainWindowMenuHandler.projectNewMenuItemActionPerformed();
-                            break;
-                        case "open":
-                            mainWindowMenuHandler.projectOpenMenuItemActionPerformed();
-                            break;
-                        case "team":
-                            mainWindowMenuHandler.projectTeamNewMenuItemActionPerformed();
-                            break;
-                        default:
-                            break;
+                    case "new":
+                        mainWindowMenuHandler.projectNewMenuItemActionPerformed();
+                        break;
+                    case "open":
+                        mainWindowMenuHandler.projectOpenMenuItemActionPerformed();
+                        break;
+                    case "team":
+                        mainWindowMenuHandler.projectTeamNewMenuItemActionPerformed();
+                        break;
+                    default:
+                        break;
                     }
                 } else {
                     selectedProject = RecentProjects.getRecentProjects().stream()
                             .map(f -> Paths.get(f).toAbsolutePath().toUri())
-                            .filter(uri -> uri.equals(projectUri))
-                            .findFirst()
-                            .orElse(null);
+                            .filter(uri -> uri.equals(projectUri)).findFirst().orElse(null);
                 }
             }
         });
@@ -231,13 +225,10 @@ public class AccessTools extends JPanel {
         final List<ProjectFileInformation> files;
         if (activeFileName != null) {
             sourceComboBoxModel.addElement(new ProjectFileInformation(activeFileName));
-            Core.getProject().getProjectFiles().stream()
-                    .filter(f -> !f.filePath.equals(activeFileName))
-                    .map(ProjectFileInformation::new)
-                    .forEach(it -> sourceComboBoxModel.addElement(it));
+            Core.getProject().getProjectFiles().stream().filter(f -> !f.filePath.equals(activeFileName))
+                    .map(ProjectFileInformation::new).forEach(it -> sourceComboBoxModel.addElement(it));
         } else {
-            files = Core.getProject().getProjectFiles().stream()
-                    .map(ProjectFileInformation::new)
+            files = Core.getProject().getProjectFiles().stream().map(ProjectFileInformation::new)
                     .collect(Collectors.toList());
             sourceComboBoxModel.addAll(files);
         }
@@ -266,11 +257,10 @@ public class AccessTools extends JPanel {
             final List<String> recentProjects = RecentProjects.getRecentProjects();
             if (recentProjects.size() > getSize()) {
                 // when a new project is added to the list
-                recentProjects.stream()
-                        .map(f -> Paths.get(f).toAbsolutePath().toUri())
-                        .filter(AccessTools::checkProjectFolder)
-                        .distinct()
-                        .filter(p -> getIndexOf(p) < 0)  // when new project
+                recentProjects.stream().map(f -> Paths.get(f).toAbsolutePath().toUri())
+                        .filter(AccessTools::checkProjectFolder).distinct().filter(p -> getIndexOf(p) < 0) // when
+                                                                                                           // new
+                                                                                                           // project
                         .forEach(this::addElement);
             }
         }
@@ -284,7 +274,9 @@ public class AccessTools extends JPanel {
 
         /**
          * Constructor.
-         * @param items default lists of SourceFileInfo.
+         * 
+         * @param items
+         *            default lists of SourceFileInfo.
          */
         SourceComboBoxModel(final List<ProjectFileInformation> items) {
             super(items.toArray(new ProjectFileInformation[0]));

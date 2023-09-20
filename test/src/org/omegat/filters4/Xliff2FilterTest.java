@@ -49,13 +49,13 @@ public class Xliff2FilterTest extends org.omegat.filters.TestFilterBase {
 
     @Test
     public void testBilingual() throws Exception {
-        Map<String,String> result = new HashMap<String,String>();
-        Map<String,String> legacy = new HashMap<String,String>();
+        Map<String, String> result = new HashMap<>();
+        Map<String, String> legacy = new HashMap<>();
 
         parse2(new Xliff2Filter(), "test/data/filters/xliff/filters4-xliff2/ex.9.5.xlf", result, legacy);
         assertEquals("<t0>Oiseaux de haute altitude", result.get("<t0>High Altitude Birds"));
     }
-    
+
     @Test
     public void testKey() throws Exception {
         List<ParsedEntry> entries = parse3(new Xliff2Filter(), "test/data/filters/xliff/filters4-xliff2/ex.9.5.xlf",
@@ -65,13 +65,13 @@ public class Xliff2FilterTest extends org.omegat.filters.TestFilterBase {
         assertEquals("//groups/N65541xdocument/N65541bxmarksection-1/title-2", firstEntry.path);
         ParsedEntry secondEntry = entries.get(2);
         assertEquals("<t0>High Altitude Birds", secondEntry.source);
-        assertEquals("<t0>Oiseaux de haute altitude", secondEntry.translation);            
+        assertEquals("<t0>Oiseaux de haute altitude", secondEntry.translation);
     }
 
     @Test
     public void testTranslation() throws Exception {
         Xliff2Filter filter = new Xliff2Filter();
-        filter.translateFile(new File("test/data/filters/xliff/filters4-xliff2/ex.9.5.xlf"), 
+        filter.translateFile(new File("test/data/filters/xliff/filters4-xliff2/ex.9.5.xlf"),
             outFile, java.util.Collections.emptyMap(), context,
                 new ITranslateCallback() {
                     public String getTranslation(String id, String source, String path) {
@@ -82,7 +82,7 @@ public class Xliff2FilterTest extends org.omegat.filters.TestFilterBase {
                     }
 
                     public String getTranslation(String id, String source) {
-                        return getTranslation(id,source,"");
+                        return getTranslation(id, source, "");
                     }
 
                     public void linkPrevNextSegments() {
@@ -97,7 +97,7 @@ public class Xliff2FilterTest extends org.omegat.filters.TestFilterBase {
         // entry translated in the source file, not in the Callback
         assertEquals("<t0>Oiseaux de haute altitude", entries.get(2).translation);
         // entry translated in the callback, not in the source file
-        assertEquals("Oiseaux en Oregon", entries.get(0).translation); 
+        assertEquals("Oiseaux en Oregon", entries.get(0).translation);
     }
-    
+
 }

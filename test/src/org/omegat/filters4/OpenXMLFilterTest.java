@@ -40,8 +40,8 @@ import org.omegat.util.Language;
 
 public class OpenXMLFilterTest extends org.omegat.filters.TestFilterBase {
 
-    private final static String TEST_DATA1 = "test/data/filters/openXML/file-OpenXMLFilter.docx";
-    private final static String TEST_DATA2 = "test/data/filters/openXML/file-OpenXMLFilter-tables.docx";
+    private static final String TEST_DATA1 = "test/data/filters/openXML/file-OpenXMLFilter.docx";
+    private static final String TEST_DATA2 = "test/data/filters/openXML/file-OpenXMLFilter-tables.docx";
 
     @Test
     public void testParse() throws Exception {
@@ -73,13 +73,13 @@ public class OpenXMLFilterTest extends org.omegat.filters.TestFilterBase {
         File in = new File("test/data/filters/openXML/file-OpenXMLFilter.docx");
         translate(new MsOfficeFileFilter(), in.getPath());
 
-        // XML comparison should not work, 
+        // XML comparison should not work,
         // because StaX filter for OpenXML also removes useless repetitions in the Word document!
         /*for (String f : new String[] { "word/document.xml" }) {
             compareXML(new URL("jar:file:" + in.getAbsolutePath() + "!/" + f),
                     new URL("jar:file:" + outFile.getAbsolutePath() + "!/" + f));
         }*/
-        
+
         // So, instead we almost check that the contents matches correctly
         List<String> entries = parse(new MsOfficeFileFilter(), outFile.toString());
         assertEquals(2, entries.size());

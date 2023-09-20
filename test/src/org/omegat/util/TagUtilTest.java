@@ -57,9 +57,11 @@ public class TagUtilTest {
 
         String str = "Tag <test> case <b0>one</b0>.<b1>";
         List<ProtectedPart> pps = TagUtil.applyCustomProtectedParts(str, PatternConsts.OMEGAT_TAG, null);
-        List<Tag> tagList = TagUtil.buildTagList(str, new SourceTextEntry(null, 0, null, null, pps).getProtectedParts());
+        List<Tag> tagList = TagUtil.buildTagList(str, new SourceTextEntry(null, 0, null, null, pps)
+                .getProtectedParts());
 
-        assertEquals("Wrong tags found in '" + str + "'", Arrays.asList(new Tag(16, "<b0>"), new Tag(23, "</b0>"), new Tag(29, "<b1>")), tagList);
+        assertEquals("Wrong tags found in '" + str + "'", Arrays.asList(new Tag(16, "<b0>"), new Tag(23, "</b0>"),
+                new Tag(29, "<b1>")), tagList);
 
         tagList.clear();
         ProtectedPart p;
@@ -71,7 +73,8 @@ public class TagUtilTest {
         p.setTextInSourceSegment("</b0>");
         pp.add(p);
         tagList = TagUtil.buildTagList(str, new SourceTextEntry(null, 0, null, null, pp).getProtectedParts());
-        assertEquals("Wrong tags found in '" + str + "'", Arrays.asList(new Tag(16, "<b0>"), new Tag(23, "</b0>")), tagList);
+        assertEquals("Wrong tags found in '" + str + "'", Arrays.asList(new Tag(16, "<b0>"), new Tag(23, "</b0>")),
+                tagList);
 
         str = "Tag <test>case</test>.";
         tagList.clear();

@@ -61,6 +61,21 @@
     <!-- SearchResultEntry.java -->
     <suppress checks="(MemberName|MissingSwitchDefault|ParameterNumber)" files="SearchResultEntry\.java"/>
 
+    <!-- tests -->
+    <suppress checks="(MethodName|MemberName|OperatorWrap)" files=".*Test\.java"/>
+    <suppress files="(TestFilterBase|TmxComplianceBase|FilterMasterTest)\.java" checks="ParameterNumber"/>
+    <!-- expectation string lengthy -->
+    <suppress files="ResourceBundleFilterTest\.java" checks="LineLength" lines="221"/>
+    <suppress files="GlossarySearcherTest\.java" checks="LineLength" lines="118"/>
+    <suppress files="MatchesVarExpansionTest\.java" checks="LineLength" lines="163"/>
+    <suppress files="MoodlePHPFilterTest\.java" checks="LineLength" lines="55"/>
+    <suppress files="MozillaDTDFilterTest\.java" checks="LineLength" lines="66"/>
+    <suppress files="MozillaFTLFilterTest\.java" checks="LineLength" lines="63"/>
+    <!-- avoid deprecated API imports in deprecated test -->
+    <suppress files="XMLStreamReaderTest\.java" checks="(AvoidStarImport|InnerAssignment)"/>
+
+    <suppress files="(LanguageTool|WordPredictor)Test\.java" checks="AvoidNestedBlocks"/>
+
     <!-- missing javadoc: temporary global suppression  -->
     <suppress checks="(DesignForExtension|MagicNumber)"
               files=".*"/>

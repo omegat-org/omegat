@@ -124,7 +124,6 @@ public final class TipOfTheDayController {
         }
         totd.setCurrentTip(currentTip);
 
-
         JFrame mainFrame = Core.getMainWindow().getApplicationFrame();
         TipOfTheDayDialog dialog = new TipOfTheDayDialog(mainFrame,
                 UIManager.getString("TipOfTheDay.dialogTitle"), totd);

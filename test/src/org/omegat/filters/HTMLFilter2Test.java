@@ -58,7 +58,8 @@ public class HTMLFilter2Test extends TestFilterBase {
     public void testIgnoreCommentParse() throws Exception {
         Map<String, String> options = new HashMap<>();
         options.put(HTMLOptions.OPTION_REMOVE_COMMENTS, "true");
-        List<String> entries = parse(new HTMLFilter2(), "test/data/filters/html/file-HTMLFilter2-ignored-comments-no-break-SF610.html", options);
+        List<String> entries = parse(new HTMLFilter2(),
+                "test/data/filters/html/file-HTMLFilter2-ignored-comments-no-break-SF610.html", options);
         assertEquals(3, entries.size());
         assertEquals("en", entries.get(0));
         assertEquals("This is the first line.", entries.get(1));
@@ -71,7 +72,7 @@ public class HTMLFilter2Test extends TestFilterBase {
                 "test/data/filters/html/file-HTMLFilter2-all-block-elements.html");
         assertEquals(49, entries.size());
     }
-    
+
     @Test
     public void testParseRegression() throws Exception {
         List<String> entries = parse(new HTMLFilter2(),
@@ -123,8 +124,10 @@ public class HTMLFilter2Test extends TestFilterBase {
         fi = loadSourceFiles(filter, f);
 
         checkMultiStart(fi, f);
-        checkMulti("\uD835\uDC00\uD835\uDC01\uD835\uDC02", null, null, "", "\uD835\uDC03\uD835\uDC04\uD835\uDC05", null);
-        checkMulti("\uD835\uDC03\uD835\uDC04\uD835\uDC05", null, null, "\uD835\uDC00\uD835\uDC01\uD835\uDC02", "", null);
+        checkMulti("\uD835\uDC00\uD835\uDC01\uD835\uDC02", null, null, "",
+                "\uD835\uDC03\uD835\uDC04\uD835\uDC05", null);
+        checkMulti("\uD835\uDC03\uD835\uDC04\uD835\uDC05", null, null,
+                "\uD835\uDC00\uD835\uDC01\uD835\uDC02", "", null);
         checkMultiEnd();
     }
 

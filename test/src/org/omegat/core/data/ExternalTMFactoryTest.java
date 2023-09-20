@@ -129,7 +129,8 @@ public class ExternalTMFactoryTest extends TestCore {
 
         assertEquals(33, tmx.getEntries().size());
         assertEquals("Download %s for Android in your language", tmx.getEntries().get(0).getSourceText());
-        assertEquals("Laden Sie %s f\u00FCr Android in Ihrer Sprache herunter", tmx.getEntries().get(0).getTranslationText());
+        assertEquals("Laden Sie %s f\u00FCr Android in Ihrer Sprache herunter",
+                tmx.getEntries().get(0).getTranslationText());
         assertEquals("Download %s in your language", tmx.getEntries().get(1).getSourceText());
         assertEquals("Laden Sie %s in Ihrer Sprache herunter", tmx.getEntries().get(1).getTranslationText());
     }
@@ -156,10 +157,10 @@ public class ExternalTMFactoryTest extends TestCore {
         // Only 5 FR translations
         assertEquals(5, tmx.getEntries().size());
 
-        List<ITMXEntry> matchingEntries = tmx.getEntries().stream().filter(t -> t.getSourceText().equals("Hello World!"))
-                .collect(Collectors.toList());
+        List<ITMXEntry> matchingEntries = tmx.getEntries().stream().filter(t -> t.getSourceText()
+                        .equals("Hello World!")).collect(Collectors.toList());
         assertEquals(3, matchingEntries.size());
-        
+
         // Set the EXT_TMX_KEEP_FOREIGN_MATCH prop
         Preferences.setPreference(Preferences.EXT_TMX_KEEP_FOREIGN_MATCH, true);
         tmx = ExternalTMFactory.load(tmxFile);
@@ -171,8 +172,8 @@ public class ExternalTMFactoryTest extends TestCore {
                 .collect(Collectors.toList());
         assertEquals(7, matchingEntries.size());
 
-        matchingEntries = tmx.getEntries().stream().filter(t -> t.getSourceText().equals("This is an english sentence."))
-                .collect(Collectors.toList());
+        matchingEntries = tmx.getEntries().stream().filter(t -> t.getSourceText()
+                        .equals("This is an english sentence.")).collect(Collectors.toList());
         assertEquals(2, matchingEntries.size());
 
         ITMXEntry entry = matchingEntries.get(0);

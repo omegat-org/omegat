@@ -133,16 +133,15 @@ class OpenXmlFilter extends AbstractXmlFilter {
             }
             if ((writer != null)
                     && ("lang".equals(name.getLocalPart()) || "themeFontLang".equals(name.getLocalPart()))) {
-                fromEventToWriterOrBuffer(eFactory.createStartElement(startElement.getName(), null,
+                fromEventToWriterOrBuffer(XML_EVENT_FACTORY.createStartElement(startElement.getName(), null,
                         startElement.getNamespaces()), writer);
                 for (Iterator<Attribute> iter = startElement.getAttributes(); iter.hasNext();) {
                     Attribute attr = iter.next();
                     ProjectProperties prop = Core.getProject().getProjectProperties();
                     String aval = attr.getValue(), pval = prop.getSourceLanguage().toString();
                     if (aval.equalsIgnoreCase(pval)) {
-                        fromEventToWriterOrBuffer(
-                                eFactory.createAttribute(attr.getName(), prop.getTargetLanguage().toString()),
-                                writer);
+                        fromEventToWriterOrBuffer(XML_EVENT_FACTORY.createAttribute(attr.getName(),
+                                prop.getTargetLanguage().toString()), writer);
                     } else {
                         if ((aval.length() > 2) && (aval.charAt(2) == '-')) {
                             aval = aval.substring(0, 2);
@@ -151,7 +150,7 @@ class OpenXmlFilter extends AbstractXmlFilter {
                             pval = pval.substring(0, 2);
                         }
                         if (aval.equalsIgnoreCase(pval)) {
-                            fromEventToWriterOrBuffer(eFactory.createAttribute(attr.getName(),
+                            fromEventToWriterOrBuffer(XML_EVENT_FACTORY.createAttribute(attr.getName(),
                                     prop.getTargetLanguage().toString()), writer);
                         } else {
                             // if not in source language, should not have been
@@ -395,7 +394,7 @@ class OpenXmlFilter extends AbstractXmlFilter {
                                         ev2 = ir.previous();
                                     }
                                     ir.remove();
-                                    ev = eFactory.createStartElement(ev.asStartElement().getName(),
+                                    ev = XML_EVENT_FACTORY.createStartElement(ev.asStartElement().getName(),
                                             la.iterator(), ev.asStartElement().getNamespaces());
                                     ir.add(ev);
                                     // Test again with eventually collapsed
@@ -506,8 +505,8 @@ class OpenXmlFilter extends AbstractXmlFilter {
                 nList.addAll(run.subList(idx, runIter.nextIndex()));
                 QName qR = new QName(ooxmlMainParaElement.getNamespaceURI(), "r",
                         ooxmlMainParaElement.getPrefix());
-                nList.add(0, eFactory.createStartElement(qR, null, null));
-                nList.add(eFactory.createEndElement(qR, null));
+                nList.add(0, XML_EVENT_FACTORY.createStartElement(qR, null, null));
+                nList.add(XML_EVENT_FACTORY.createEndElement(qR, null));
                 res.append("<" + prefixInt + tcInt + "/>");
                 tagsMap.put("" + prefixInt + tcInt, nList);
             } else if (next.isCharacters()) {
@@ -727,11 +726,9 @@ class OpenXmlFilter extends AbstractXmlFilter {
     }
 
     private void addSimpleRun(LinkedList<XMLEvent> res, String text) {
-        QName qR = new QName(ooxmlMainParaElement.getNamespaceURI(), "r",
-                ooxmlMainParaElement.getPrefix());
-        QName qT = new QName(ooxmlMainParaElement.getNamespaceURI(), "t",
-                ooxmlMainParaElement.getPrefix());
-        res.add(eFactory.createStartElement(qR, null, null));
+        QName qR = new QName(ooxmlMainParaElement.getNamespaceURI(), "r", ooxmlMainParaElement.getPrefix());
+        QName qT = new QName(ooxmlMainParaElement.getNamespaceURI(), "t", ooxmlMainParaElement.getPrefix());
+        res.add(XML_EVENT_FACTORY.createStartElement(qR, null, null));
         if (defaultsForParagraph != null) {
             // these are not really defaults, we must repeat it when generating
             // the target file
@@ -748,17 +745,17 @@ class OpenXmlFilter extends AbstractXmlFilter {
                 }
             }
         }
-        res.add(eFactory.createStartElement(qT, null, null));
+        res.add(XML_EVENT_FACTORY.createStartElement(qT, null, null));
         this.addCharacters(res, text);
-        res.add(eFactory.createEndElement(qT, null));
-        res.add(eFactory.createEndElement(qR, null));
+        res.add(XML_EVENT_FACTORY.createEndElement(qT, null));
+        res.add(XML_EVENT_FACTORY.createEndElement(qR, null));
     }
 
     // Add characters with eventually xml:space=preserve
     @SuppressWarnings("unchecked")
     private void addCharacters(LinkedList<XMLEvent> res, String text) {
         if (text.trim().equals(text)) {
-            res.add(eFactory.createCharacters(text));
+            res.add(XML_EVENT_FACTORY.createCharacters(text));
             return;
         }
         XMLEvent lastEv = res.getLast();
@@ -772,11 +769,11 @@ class OpenXmlFilter extends AbstractXmlFilter {
                 }
             }
             if (!hasPreserve) {
-                res.add(eFactory.createAttribute("xml", "http://www.w3.org/XML/1998/namespace", "space",
-                        "preserve"));
+                res.add(XML_EVENT_FACTORY.createAttribute("xml", "http://www.w3.org/XML/1998/namespace",
+                        "space", "preserve"));
             }
         }
-        res.add(eFactory.createCharacters(text));
+        res.add(XML_EVENT_FACTORY.createCharacters(text));
     }
 
 }

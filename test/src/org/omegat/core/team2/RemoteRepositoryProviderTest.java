@@ -309,13 +309,13 @@ public final class RemoteRepositoryProviderTest {
         files = new ArrayList<>();
     }
 
-    void addRepo(String localPath, String repoUrlDir, String repoPath, String... excludes) {
+    void addRepo(String localPath, String repositoryUrlDir, String repoPath, String... excludes) {
         RepositoryMapping m = new RepositoryMapping();
         m.setLocal(localPath);
         m.setRepository(repoPath);
         m.getExcludes().addAll(Arrays.asList(excludes));
         RepositoryDefinition def = new RepositoryDefinition();
-        def.setUrl(repoUrlDir);
+        def.setUrl(repositoryUrlDir);
         def.getMapping().add(m);
         repos.add(def);
         provider.repositories.add(new FileRepository());

@@ -33,7 +33,6 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.io.File;
-import java.io.IOException;
 import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.List;
@@ -408,7 +407,7 @@ public class XLIFFFilterTest extends TestFilterBase {
      *            filter context
      * @param outFile
      *            translated output from the filter.
-     * @throws IOException
+     * @throws Exception
      *             when failed to read target file.
      */
     public static void checkXLiffTranslationRFE1506(IFilter filter, FilterContext context, File outFile,
@@ -527,6 +526,7 @@ public class XLIFFFilterTest extends TestFilterBase {
                 }
                 assertEquals("\u7D75\u6587\u5B57", transUnit.get("target").get("").asText());
                 break;
+            default:
             }
         }
     }

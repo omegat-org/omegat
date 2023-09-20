@@ -210,7 +210,7 @@ public class EditorUtilsTest {
         assertNull(EditorUtils.replaceGlossaryEntries(null, entries, locale, tokenizer));
         assertEquals("", EditorUtils.replaceGlossaryEntries("", entries, locale, tokenizer));
         assertSame(srcText, EditorUtils.replaceGlossaryEntries(srcText, null, locale, tokenizer));
-        assertSame(srcText, EditorUtils.replaceGlossaryEntries(srcText, new ArrayList<GlossaryEntry>(), locale, tokenizer));
+        assertSame(srcText, EditorUtils.replaceGlossaryEntries(srcText, new ArrayList<>(), locale, tokenizer));
         try {
             EditorUtils.replaceGlossaryEntries(srcText, entries, null, tokenizer);
             fail("Should give NPE when given null locale");

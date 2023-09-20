@@ -142,7 +142,8 @@ public class TmxComplianceTests extends TmxComplianceBase {
     @Test
     public void testImport1J() throws Exception {
         ProjectProperties props = new TestProjectProperties("EN-US", "EN-GB");
-        final ProjectTMX tmx = new ProjectTMX(props.getSourceLanguage(), props.getTargetLanguage(), props.isSentenceSegmentingEnabled(), new File("test/data/tmx/TMXComplianceKit/ImportTest1J_many.tmx"),
+        final ProjectTMX tmx = new ProjectTMX(props.getSourceLanguage(), props.getTargetLanguage(),
+                props.isSentenceSegmentingEnabled(), new File("test/data/tmx/TMXComplianceKit/ImportTest1J_many.tmx"),
                 orphanedCallback);
         tmx.exportTMX(props, outFile, false, false, false);
         // TODO validate via TMXCheck
@@ -155,7 +156,8 @@ public class TmxComplianceTests extends TmxComplianceBase {
     @Test
     public void testImport1K() throws Exception {
         ProjectProperties props = new TestProjectProperties("EN-US", "EN-GB");
-        final ProjectTMX tmx = new ProjectTMX(props.getSourceLanguage(), props.getTargetLanguage(), props.isSentenceSegmentingEnabled(), new File("test/data/tmx/TMXComplianceKit/ImportTest1K.tmx"),
+        final ProjectTMX tmx = new ProjectTMX(props.getSourceLanguage(), props.getTargetLanguage(),
+                props.isSentenceSegmentingEnabled(), new File("test/data/tmx/TMXComplianceKit/ImportTest1K.tmx"),
                 orphanedCallback);
         assertEquals(0, tmx.defaults.size());
     }
@@ -208,7 +210,8 @@ public class TmxComplianceTests extends TmxComplianceBase {
 
         assertEquals(sources.size(), translations.size());
 
-        ProjectTMX tmx = new ProjectTMX(props.getSourceLanguage(), props.getTargetLanguage(), props.isSentenceSegmentingEnabled(), outFile, orphanedCallback);
+        ProjectTMX tmx = new ProjectTMX(props.getSourceLanguage(), props.getTargetLanguage(),
+                props.isSentenceSegmentingEnabled(), outFile, orphanedCallback);
 
         for (int i = 0; i < sources.size(); i++) {
             tmx.defaults.put(sources.get(i), createTMXEntry(sources.get(i), translations.get(i), true));
@@ -288,7 +291,8 @@ public class TmxComplianceTests extends TmxComplianceBase {
         translateUsingTmx(new HTMLFilter2(), config, "ImportTest2A.htm", "UTF-8", "ImportTest2A.tmx",
                 "windows-1252", props, fix);
 
-        List<String> lines1 = readTextFile(new File("test/data/tmx/TMXComplianceKit/ImportTest2A_fr-ca.htm"), "windows-1252");
+        List<String> lines1 = readTextFile(new File("test/data/tmx/TMXComplianceKit/ImportTest2A_fr-ca.htm"),
+                "windows-1252");
         List<String> lines2 = readTextFile(outFile, "windows-1252");
 
         // fix meta line, since OmegaT writes own meta line for encoding
@@ -377,7 +381,8 @@ public class TmxComplianceTests extends TmxComplianceBase {
 
         assertEquals(sources.size(), translations.size());
 
-        ProjectTMX tmx = new ProjectTMX(props.getSourceLanguage(), props.getTargetLanguage(), props.isSentenceSegmentingEnabled(), outFile, orphanedCallback);
+        ProjectTMX tmx = new ProjectTMX(props.getSourceLanguage(), props.getTargetLanguage(),
+                props.isSentenceSegmentingEnabled(), outFile, orphanedCallback);
 
         for (int i = 0; i < sources.size(); i++) {
             tmx.defaults.put(sources.get(i), createTMXEntry(sources.get(i), translations.get(i), true));

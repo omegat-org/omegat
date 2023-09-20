@@ -392,7 +392,8 @@ public class StringUtilTest {
         tests.add("\\foo\\$bar"); // simple backslash, then backslash + dollar
 
         for (String s : tests) {
-            assertEquals(s.replace("\\\\","\\").replace("\\$","$"), StringUtil.replaceCase(s, Locale.ENGLISH));
+            assertEquals(s.replace("\\\\", "\\").replace("\\$", "$"), StringUtil.replaceCase(s,
+                    Locale.ENGLISH));
         }
 
         // Test normal behaviour of replace case sequences
@@ -413,6 +414,7 @@ public class StringUtilTest {
         assertEquals(Arrays.asList("omegat", "level1", "level2"), StringUtil.convertToList("omegat level1 level2"));
         assertEquals(Arrays.asList("omegat", "level1", "level2"), StringUtil.convertToList("omegat  level1  level2"));
         assertEquals(Arrays.asList("omegat", "level1", "level2"), StringUtil.convertToList("  omegat level1 level2  "));
-        assertEquals(Arrays.asList("omegat", "level1", "level2"), StringUtil.convertToList("  omegat   level1  level2  "));
+        assertEquals(Arrays.asList("omegat", "level1", "level2"), StringUtil.convertToList(
+                "  omegat   level1  level2  "));
     }
 }

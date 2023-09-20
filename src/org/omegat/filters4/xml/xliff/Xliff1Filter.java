@@ -98,7 +98,8 @@ public class Xliff1Filter extends AbstractXliffFilter {
                 }
                 try {
                     processStartElement(
-                            EVENT_FACTORY.createStartElement(reader.getName(), attributes.iterator(), null), null);
+                            EVENT_FACTORY.createStartElement(reader.getName(), attributes.iterator(), null),
+                            null);
                 } catch (Exception ex) {
                 }
             }

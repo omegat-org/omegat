@@ -57,7 +57,8 @@ public class GlossarySearcherTest extends TestCore {
         ITokenizer tok = new LuceneEnglishTokenizer();
         Language language = new Language("en");
         setupProject(language);
-        List<GlossaryEntry> entries = Arrays.asList(new GlossaryEntry(sourceText, translationText, commentText, true, "origin"));
+        List<GlossaryEntry> entries = Arrays.asList(new GlossaryEntry(sourceText, translationText, commentText, true,
+                "origin"));
         List<GlossaryEntry> result = glossarySearcherCommon(sourceText, tok, language, entries);
         assertEquals(1, result.size());
         assertEquals(sourceText, result.get(0).getSrcText());
@@ -83,7 +84,8 @@ public class GlossarySearcherTest extends TestCore {
         ITokenizer tok = new LuceneJapaneseTokenizer();
         Language language = new Language("ja");
         setupProject(language);
-        List<GlossaryEntry> entries = Arrays.asList(new GlossaryEntry(sourceText, translationText, commentText, true, "origin"));
+        List<GlossaryEntry> entries = Arrays.asList(new GlossaryEntry(sourceText, translationText, commentText, true,
+                "origin"));
         List<GlossaryEntry> result = glossarySearcherCommon(sourceText, tok, language, entries);
         assertEquals(1, result.size());
         assertEquals(sourceText, result.get(0).getSrcText());
@@ -97,7 +99,7 @@ public class GlossarySearcherTest extends TestCore {
         Language language = new Language("ja");
         setupProject(language);
         ITokenizer tok = new LuceneJapaneseTokenizer();
-        List<GlossaryEntry> entries = Arrays.asList( new GlossaryEntry("\u5857\u5E03", "wrong", "", true, "origin"));
+        List<GlossaryEntry> entries = Arrays.asList(new GlossaryEntry("\u5857\u5E03", "wrong", "", true, "origin"));
         List<GlossaryEntry> result = glossarySearcherCommon(sourceText, tok, language, entries);
         assertEquals(0, result.size());
     }

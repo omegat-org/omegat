@@ -463,7 +463,7 @@ public abstract class AbstractXmlFilter extends AbstractFilter {
     protected Map<String, List<XMLEvent>> tagsMap = new TreeMap<>();
 
     protected static final Pattern OMEGAT_TAG = Pattern.compile("<(\\/?)([a-z]\\d+)\\/?>");
-    protected static final XMLEventFactory eFactory = XMLEventFactory.newInstance();
+    protected static final XMLEventFactory XML_EVENT_FACTORY = XMLEventFactory.newInstance();
 
     /**
      * Produces xliff content for the translated text. Note: must be called
@@ -474,14 +474,14 @@ public abstract class AbstractXmlFilter extends AbstractFilter {
         while (tra.length() > 0) {
             Matcher m = OMEGAT_TAG.matcher(tra);
             if (m.find()) {
-                res.add(eFactory.createCharacters(tra.substring(0, m.start())));
+                res.add(XML_EVENT_FACTORY.createCharacters(tra.substring(0, m.start())));
                 List<XMLEvent> saved = tagsMap.get(m.group(1) + m.group(2));
                 if (saved != null) {
                     res.addAll(saved);
                 }
                 tra = tra.substring(m.end());
             } else {
-                res.add(eFactory.createCharacters(tra));
+                res.add(XML_EVENT_FACTORY.createCharacters(tra));
                 return res;
             }
         }
@@ -540,7 +540,7 @@ public abstract class AbstractXmlFilter extends AbstractFilter {
     protected static List<XMLEvent> toPair(StartElement ev) {
         List<XMLEvent> l = new LinkedList<XMLEvent>();
         l.add(ev);
-        l.add(eFactory.createEndElement(ev.getName(), null));
+        l.add(XML_EVENT_FACTORY.createEndElement(ev.getName(), null));
         return l;
     }
 

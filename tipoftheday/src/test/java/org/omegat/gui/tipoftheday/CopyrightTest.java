@@ -41,11 +41,13 @@ import org.junit.Test;
  * @author Alex Buloichik
  */
 public class CopyrightTest {
-    protected static final String[] MUST_EXIST = new String[] { "OmegaT - Computer Assisted Translation (CAT) tool",
-            "Copyright (C)", "Home page: https://www.omegat.org/", "This file is part of OmegaT",
+    protected static final String[] MUST_EXIST = new String[] {
+            "OmegaT - Computer Assisted Translation (CAT) tool", "Copyright (C)",
+            "Home page: https://www.omegat.org/", "This file is part of OmegaT",
             "OmegaT is free software: you can redistribute it and/or modify",
             "it under the terms of the GNU General Public License as published by",
-            "the Free Software Foundation, either version 3 of the License, or", "(at your option) any later version.",
+            "the Free Software Foundation, either version 3 of the License, or",
+            "(at your option) any later version.",
             "OmegaT is distributed in the hope that it will be useful,",
             "but WITHOUT ANY WARRANTY; without even the implied warranty of",
             "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the",
@@ -77,7 +79,8 @@ public class CopyrightTest {
             data = data.substring(0, pos);
         }
         for (String con : MUST_EXIST) {
-            assertTrue("There is no copyright note in '" + f.getAbsolutePath() + "' : " + con, data.contains(con));
+            assertTrue("There is no copyright note in '" + f.getAbsolutePath() + "' : " + con,
+                    data.contains(con));
         }
     }
 

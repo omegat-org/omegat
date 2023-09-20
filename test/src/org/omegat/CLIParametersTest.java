@@ -60,34 +60,31 @@ public class CLIParametersTest {
 
     @Test
     public void testCLIParameters() throws Exception {
-        {
-            Map<String, String> params = CLIParameters.parseArgs("--foo=bar", "--baz",
-                    "--" + CLIParameters.CONFIG_FILE + "=bazinga", tmpDir.toString());
-            // Key, value present.
-            assertEquals("bar", params.get("foo"));
-            assertEquals("bazinga", params.get(CLIParameters.CONFIG_FILE));
-            // Naked keys have null values, but are present in map.
-            assertNull(params.get("baz"));
-            assertTrue(params.containsKey("baz"));
-            // Not included at all.
-            assertNull(params.get(CLIParameters.DISABLE_PROJECT_LOCKING));
-            assertFalse(params.containsKey(CLIParameters.DISABLE_PROJECT_LOCKING));
-            // Project dir not a valid project, so is not accepted.
-            assertNull(params.get(CLIParameters.PROJECT_DIR));
-            assertFalse(params.containsKey(CLIParameters.PROJECT_DIR));
-        }
-        {
-            // Create minimum project to fool check into accepting project dir.
-            assertTrue(new File(tmpDir.toFile(), OConsts.FILE_PROJECT).createNewFile());
-            assertTrue(StaticUtils.isProjectDir(tmpDir.toFile()));
-            Map<String, String> params = CLIParameters.parseArgs(tmpDir.toString());
-            // This time the project dir is valid, so it is accepted.
-            assertEquals(tmpDir.toString(), params.get(CLIParameters.PROJECT_DIR));
-        }
-        {
-            // Test old way of specifying resource-bundle (no leading "--")
-            Map<String, String> params = CLIParameters.parseArgs(CLIParameters.RESOURCE_BUNDLE + "=blah");
-            assertEquals("blah", params.get(CLIParameters.RESOURCE_BUNDLE));
-        }
+        Map<String, String> params = CLIParameters.parseArgs("--foo=bar", "--baz",
+                "--" + CLIParameters.CONFIG_FILE + "=bazinga", tmpDir.toString());
+        // Key, value present.
+        assertEquals("bar", params.get("foo"));
+        assertEquals("bazinga", params.get(CLIParameters.CONFIG_FILE));
+        // Naked keys have null values, but are present in map.
+        assertNull(params.get("baz"));
+        assertTrue(params.containsKey("baz"));
+        // Not included at all.
+        assertNull(params.get(CLIParameters.DISABLE_PROJECT_LOCKING));
+        assertFalse(params.containsKey(CLIParameters.DISABLE_PROJECT_LOCKING));
+        // Project dir not a valid project, so is not accepted.
+        assertNull(params.get(CLIParameters.PROJECT_DIR));
+        assertFalse(params.containsKey(CLIParameters.PROJECT_DIR));
+
+        // Create minimum project to fool check into accepting project dir.
+        assertTrue(new File(tmpDir.toFile(), OConsts.FILE_PROJECT).createNewFile());
+        assertTrue(StaticUtils.isProjectDir(tmpDir.toFile()));
+        params = CLIParameters.parseArgs(tmpDir.toString());
+        // This time the project dir is valid, so it is accepted.
+        assertEquals(tmpDir.toString(), params.get(CLIParameters.PROJECT_DIR));
+
+        // Test old way of specifying resource-bundle (no leading "--")
+        params = CLIParameters.parseArgs(CLIParameters.RESOURCE_BUNDLE + "=blah");
+        assertEquals("blah", params.get(CLIParameters.RESOURCE_BUNDLE));
+
     }
 }

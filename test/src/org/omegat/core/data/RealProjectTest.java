@@ -169,13 +169,13 @@ public class RealProjectTest {
         tmx = project.getTMX();
     }
 
-    private void addSTE(IProject.FileInfo fi, String id, String source, String translation,
+    private void addSTE(IProject.FileInfo fileInfo, String id, String source, String translation,
             boolean translationFuzzy) {
         EntryKey key = new EntryKey("test", source, id, null, null, null);
-        SourceTextEntry ste = new SourceTextEntry(key, fi.entries.size() + 1, null, translation,
+        SourceTextEntry ste = new SourceTextEntry(key, fileInfo.entries.size() + 1, null, translation,
                 new ArrayList<ProtectedPart>());
         ste.setSourceTranslationFuzzy(translationFuzzy);
-        fi.entries.add(ste);
+        fileInfo.entries.add(ste);
     }
 
     private void setDefault(String source, String translation) {

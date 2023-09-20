@@ -36,7 +36,7 @@ import org.omegat.util.Preferences;
 
 public class Google2TranslateTest extends TestCoreWireMock {
 
-    private static final String json = "{\n" + "  \"data\": {\n" + "    \"translations\": [\n" + "      {\n"
+    private static final String JSON = "{\n" + "  \"data\": {\n" + "    \"translations\": [\n" + "      {\n"
             + "        \"translatedText\": \"Hallo Welt\",\n" + "        \"detectedSourceLanguage\": \"en\"\n"
             + "      },\n" + "      {\n" + "        \"translatedText\": \"Mein Name ist Jeff\",\n"
             + "        \"detectedSourceLanguage\": \"en\"\n" + "      }\n" + "    ]\n" + "  }\n" + "}";
@@ -51,7 +51,7 @@ public class Google2TranslateTest extends TestCoreWireMock {
     public void testGetJsonResults() throws MachineTranslateError {
         Preferences.setPreference(Preferences.ALLOW_GOOGLE2_TRANSLATE, true);
         Google2Translate google2Translate = new Google2Translate();
-        String translation = google2Translate.getJsonResults(json);
+        String translation = google2Translate.getJsonResults(JSON);
         assertEquals("Hallo Welt", translation);
     }
 
@@ -76,7 +76,7 @@ public class Google2TranslateTest extends TestCoreWireMock {
                 .withRequestBody(WireMock.and(WireMock.containing("q=source+text"),
                         WireMock.containing("source=en"), WireMock.containing("target=de")))
                 .willReturn(WireMock.aResponse().withStatus(200)
-                        .withHeader("Content-Type", "application/json").withBody(json)));
+                        .withHeader("Content-Type", "application/json").withBody(JSON)));
         Google2Translate google2Translate = new Google2Translate(url, key);
         String result = google2Translate.translate(new Language("EN"), new Language("DE"), sourceText);
         assertEquals("Hallo Welt", result);

@@ -171,8 +171,8 @@ abstract class AbstractXliffFilter extends AbstractXmlFilter {
                 }
                 noteStr = subNoteBuf;
             }
-            entryParseCallback.addEntry(entryId, src, tra, false,
-                    noteStr == null ? null : noteStr.toString(), path, this, buildProtectedParts(src));
+            entryParseCallback.addEntry(entryId, src, tra, false, noteStr == null ? null : noteStr.toString(),
+                    path, this, buildProtectedParts(src));
         }
         if (entryAlignCallback != null) {
             entryAlignCallback.addTranslation(entryId, src, tra, false, path, this);

@@ -30,19 +30,15 @@ import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
-import java.net.URL;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.HashMap;
 
 import org.junit.Test;
 
-import org.omegat.core.Core;
-import org.omegat.core.data.IProject;
-import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.ITranslateCallback;
+import org.omegat.filters2.TranslationException;
 import org.omegat.filters4.xml.xliff.Xliff1Filter;
-import org.omegat.util.Language;
 
 public class Xliff1FilterTest extends org.omegat.filters.TestFilterBase {
     @Test
@@ -52,12 +48,12 @@ public class Xliff1FilterTest extends org.omegat.filters.TestFilterBase {
         assertEquals("This is the source text.", entries.get(0));
         assertEquals("foo", entries.get(1));
     }
-    
+
     @Test // checks that file wihout ID will fail (REQUIRED in the specification)
     public void testParseMissingId() throws Exception {
         Exception exception = assertThrows(TranslationException.class, () -> {
             // Try with a file from filters3 : they are not conform to specification so it should fail
-            parse(new Xliff1Filter(), "test/data/filters/xliff/filters3/file-XLIFFFilter.xlf");        
+            parse(new Xliff1Filter(), "test/data/filters/xliff/filters3/file-XLIFFFilter.xlf");
         });
         System.err.println("Parsing file where trans-unit/@id is missing returns: "
             + exception.getClass() + ": " + exception.getMessage());
@@ -70,8 +66,8 @@ public class Xliff1FilterTest extends org.omegat.filters.TestFilterBase {
 
     @Test
     public void testBilingual() throws Exception {
-        Map<String,String> result = new HashMap<>();
-        Map<String,String> legacy = new HashMap<>();
+        Map<String, String> result = new HashMap<>();
+        Map<String, String> legacy = new HashMap<>();
 
         // Test that we correctly read translation
         parse2(new Xliff1Filter(), "test/data/filters/xliff/filters4-xliff1/en-xx.xlf", result, legacy);
@@ -90,13 +86,13 @@ public class Xliff1FilterTest extends org.omegat.filters.TestFilterBase {
         assertEquals("bar", secondEntry.translation);
         ParsedEntry lastEntry = entries.get(entries.size() - 1);
         assertEquals("Added_1", lastEntry.id);  // next entry Added_2 is ignored as translate=no
-        assertEquals("//interface.po/Group 3", lastEntry.path);  // path is built with file name and groups              
+        assertEquals("//interface.po/Group 3", lastEntry.path);  // path is built with file name and groups
     }
 
     @Test
     public void testTranslation() throws Exception {
         Xliff1Filter filter = new Xliff1Filter();
-        filter.translateFile(new File("test/data/filters/xliff/filters4-xliff1/en-xx.xlf"), 
+        filter.translateFile(new File("test/data/filters/xliff/filters4-xliff1/en-xx.xlf"),
             outFile, java.util.Collections.emptyMap(), context,
                 new ITranslateCallback() {
                     public String getTranslation(String id, String source, String path) {
@@ -107,7 +103,7 @@ public class Xliff1FilterTest extends org.omegat.filters.TestFilterBase {
                     }
 
                     public String getTranslation(String id, String source) {
-                        return getTranslation(id,source,"");
+                        return getTranslation(id, source,  "");
                     }
 
                     public void linkPrevNextSegments() {
@@ -122,9 +118,9 @@ public class Xliff1FilterTest extends org.omegat.filters.TestFilterBase {
         // entry translated in the source file, not in the Callback
         assertEquals("bar", entries.get(1).translation);
         // entry translated in the callback, not in the source file
-        assertEquals("Devrait traduire dans le r\u00E9sultat.", entries.get(2).translation); 
+        assertEquals("Devrait traduire dans le r\u00E9sultat.", entries.get(2).translation);
     }
-    
+
     /**
      * Test with live example of XLIFF version 1.2, as similar with exported
      * file from Crowdin service.
@@ -135,5 +131,5 @@ public class Xliff1FilterTest extends org.omegat.filters.TestFilterBase {
         org.omegat.filters.XLIFFFilterTest.checkXLiffTranslationRFE1506(filter, context, outFile, false);
         // Actually option "NeedsTranslate" is not yet implemented
         //org.omegat.filters.XLIFFFilterTest.checkXLiffTranslationRFE1506(filter, context, outFile, true);
-    }    
+    }
 }

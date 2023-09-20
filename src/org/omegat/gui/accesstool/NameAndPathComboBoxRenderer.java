@@ -57,8 +57,8 @@ public class NameAndPathComboBoxRenderer implements ListCellRenderer<URI> {
     }
 
     @Override
-    public Component getListCellRendererComponent(JList<? extends URI> list, URI uri, int index, boolean isSelected,
-                                                  boolean cellHasFocus) {
+    public Component getListCellRendererComponent(JList<? extends URI> list, URI uri, int index,
+            boolean isSelected, boolean cellHasFocus) {
         JPanel panel = new JPanel();
         if (index < 0) {
             if (!uri.getScheme().equals("omegat")) {
@@ -72,20 +72,23 @@ public class NameAndPathComboBoxRenderer implements ListCellRenderer<URI> {
             if (uri != null) {
                 if (uri.getScheme().equals("omegat")) {
                     switch (uri.getSchemeSpecificPart()) {
-                        case "new":
-                            setComponent(panel, Mnemonics.removeMnemonics(OStrings.getString(
-                                    "TF_MENU_FILE_CREATE")), isSelected);
-                            break;
-                        case "open":
-                            setComponent(panel, Mnemonics.removeMnemonics(OStrings.getString(
-                                    "TF_MENU_FILE_OPEN")), isSelected);
-                            break;
-                        case "team":
-                            setComponent(panel, Mnemonics.removeMnemonics(OStrings.getString(
-                                    "TF_MENU_FILE_TEAM_CREATE")), isSelected);
-                            break;
-                        default:
-                            panel.add(new JLabel(""));
+                    case "new":
+                        setComponent(panel,
+                                Mnemonics.removeMnemonics(OStrings.getString("TF_MENU_FILE_CREATE")),
+                                isSelected);
+                        break;
+                    case "open":
+                        setComponent(panel,
+                                Mnemonics.removeMnemonics(OStrings.getString("TF_MENU_FILE_OPEN")),
+                                isSelected);
+                        break;
+                    case "team":
+                        setComponent(panel,
+                                Mnemonics.removeMnemonics(OStrings.getString("TF_MENU_FILE_TEAM_CREATE")),
+                                isSelected);
+                        break;
+                    default:
+                        panel.add(new JLabel(""));
                     }
                 } else {
                     setComponent(panel, Path.of(uri), isSelected);

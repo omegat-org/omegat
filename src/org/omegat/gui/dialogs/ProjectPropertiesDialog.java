@@ -122,8 +122,8 @@ public class ProjectPropertiesDialog extends JDialog {
         /** This dialog is used to create a new project. */
         NEW_PROJECT,
         /**
-         * This dialog is used to resolve missing directories of existing project
-         * (upon opening the project).
+         * This dialog is used to resolve missing directories of existing
+         * project (upon opening the project).
          */
         RESOLVE_DIRS,
         /**
@@ -163,11 +163,12 @@ public class ProjectPropertiesDialog extends JDialog {
      * @param projFileName
      *            project file name
      * @param dialogTypeValue
-     *            type of the dialog ({@link Mode#NEW_PROJECT}, {@link Mode#RESOLVE_DIRS} or {@link Mode#EDIT_PROJECT}).
+     *            type of the dialog ({@link Mode#NEW_PROJECT},
+     *            {@link Mode#RESOLVE_DIRS} or {@link Mode#EDIT_PROJECT}).
      */
     // CHECKSTYLE:OFF
-    public ProjectPropertiesDialog(Frame parent, final ProjectProperties projectProperties, String projFileName,
-            Mode dialogTypeValue) {
+    public ProjectPropertiesDialog(Frame parent, final ProjectProperties projectProperties,
+            String projFileName, Mode dialogTypeValue) {
         super(parent, true);
         this.projectProperties = projectProperties;
         this.srx = projectProperties.getProjectSRX();
@@ -178,7 +179,8 @@ public class ProjectPropertiesDialog extends JDialog {
 
         Border emptyBorder = new EmptyBorder(2, 0, 2, 0);
         Box centerBox = new ScrollableBox(BoxLayout.Y_AXIS);
-        // Have to set background and opacity on OS X or else entire dialog is white.
+        // Have to set background and opacity on OS X or else entire dialog is
+        // white.
         centerBox.setBackground(getBackground());
         centerBox.setOpaque(true);
         centerBox.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -233,8 +235,8 @@ public class ProjectPropertiesDialog extends JDialog {
         // Tokenizers box
         Box bT = Box.createVerticalBox();
         localesBox.add(bT);
-        Class<?>[] tokenizers = PluginUtils.getTokenizerClasses().stream().sorted(Comparator.comparing(Class::getName))
-                .toArray(Class[]::new);
+        Class<?>[] tokenizers = PluginUtils.getTokenizerClasses().stream()
+                .sorted(Comparator.comparing(Class::getName)).toArray(Class[]::new);
 
         // Source tokenizer label
         JLabel sourceTokenizerLabel = new JLabel();
@@ -344,15 +346,15 @@ public class ProjectPropertiesDialog extends JDialog {
 
         // sentence-segmenting
         final JCheckBox sentenceSegmentingCheckBox = new JCheckBox();
-        Mnemonics
-                .setLocalizedText(sentenceSegmentingCheckBox, OStrings.getString("PP_SENTENCE_SEGMENTING"));
+        Mnemonics.setLocalizedText(sentenceSegmentingCheckBox, OStrings.getString("PP_SENTENCE_SEGMENTING"));
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.anchor = GridBagConstraints.WEST;
         optionsBox.add(sentenceSegmentingCheckBox, gbc);
 
         JButton sentenceSegmentingButton = new JButton();
-        Mnemonics.setLocalizedText(sentenceSegmentingButton, OStrings.getString("MW_OPTIONSMENU_LOCAL_SENTSEG"));
+        Mnemonics.setLocalizedText(sentenceSegmentingButton,
+                OStrings.getString("MW_OPTIONSMENU_LOCAL_SENTSEG"));
         gbc.gridx = 1;
         gbc.gridy = 0;
         gbc.anchor = GridBagConstraints.EAST;
@@ -430,7 +432,8 @@ public class ProjectPropertiesDialog extends JDialog {
         final JComboBox<String> variablesList = new JComboBox<>(
                 new Vector<>(CommandVarExpansion.getCommandVariables()));
         final JButton insertButton = new javax.swing.JButton();
-        // Add variable insertion controls only if project external commands are enabled.
+        // Add variable insertion controls only if project external commands are
+        // enabled.
         if (Preferences.isPreference(Preferences.ALLOW_PROJECT_EXTERN_CMD)) {
             Box bIC = Box.createHorizontalBox();
             bIC.setBorder(emptyBorder);
@@ -572,8 +575,6 @@ public class ProjectPropertiesDialog extends JDialog {
         exportTMPanel.add(exportTMLevel2CheckBox);
         dirsBox.add(exportTMPanel);
 
-
-
         centerBox.add(dirsBox);
 
         JScrollPane scrollPane = new JScrollPane(centerBox);
@@ -643,7 +644,8 @@ public class ProjectPropertiesDialog extends JDialog {
         glosBrowse.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Test now, because result may change after doBrowseDirectory().
+                // Test now, because result may change after
+                // doBrowseDirectory().
                 boolean isDefaultGlossaryFile = projectProperties.isDefaultWriteableGlossaryFile();
                 doBrowseDirectoy(3, glosRootField);
                 // If file started as default, automatically use new default.
@@ -697,8 +699,8 @@ public class ProjectPropertiesDialog extends JDialog {
         fileFiltersButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                FiltersCustomizer dlg = new FiltersCustomizer(true,
-                        FilterMaster.createDefaultFiltersConfig(), Preferences.getFilters(), filters);
+                FiltersCustomizer dlg = new FiltersCustomizer(true, FilterMaster.createDefaultFiltersConfig(),
+                        Preferences.getFilters(), filters);
                 if (dlg.show(ProjectPropertiesDialog.this)) {
                     // saving config
                     filters = dlg.getResult();
@@ -962,7 +964,8 @@ public class ProjectPropertiesDialog extends JDialog {
             str += File.separator; // Add file separator for directories
         }
 
-        // The writeable glossary file must end with .txt or utf8. Not .tab, because it not necessarily is .utf8
+        // The writeable glossary file must end with .txt or utf8. Not .tab,
+        // because it not necessarily is .utf8
         if (glossaryFile && !str.endsWith(OConsts.EXT_TSV_TXT) && !str.endsWith(OConsts.EXT_TSV_UTF8)) {
             str += OConsts.EXT_TSV_TXT; // Defaults to .txt
         }
@@ -1026,7 +1029,8 @@ public class ProjectPropertiesDialog extends JDialog {
             // The writable glosssary file must be inside the glossary dir
             if (new File(projectProperties.getWriteableGlossaryDir()).exists()
                     && new File(projectProperties.getWriteableGlossaryDir()).isDirectory()
-                    && projectProperties.getWriteableGlossaryDir().contains(projectProperties.getGlossaryRoot())) {
+                    && projectProperties.getWriteableGlossaryDir()
+                            .contains(projectProperties.getGlossaryRoot())) {
                 field.setForeground(java.awt.SystemColor.textText);
             }
             break;
@@ -1051,22 +1055,20 @@ public class ProjectPropertiesDialog extends JDialog {
             JCheckBox exportTMLevel2CheckBox, JTextField dictRootField, JCheckBox allowDefaultsCheckBox,
             JCheckBox removeTagsCheckBox, JTextArea customCommandTextArea) {
         if (!Language.verifySingleLangCode(sourceLocaleField.getSelectedItem().toString())) {
-            JOptionPane.showMessageDialog(
-                    this,
+            JOptionPane.showMessageDialog(this,
                     OStrings.getString("NP_INVALID_SOURCE_LOCALE")
-                            + OStrings.getString("NP_LOCALE_SUGGESTION"), OStrings.getString("TF_ERROR"),
-                    JOptionPane.ERROR_MESSAGE);
+                            + OStrings.getString("NP_LOCALE_SUGGESTION"),
+                    OStrings.getString("TF_ERROR"), JOptionPane.ERROR_MESSAGE);
             sourceLocaleField.requestFocusInWindow();
             return;
         }
         projectProperties.setSourceLanguage(sourceLocaleField.getSelectedItem().toString());
 
         if (!Language.verifySingleLangCode(targetLocaleField.getSelectedItem().toString())) {
-            JOptionPane.showMessageDialog(
-                    this,
+            JOptionPane.showMessageDialog(this,
                     OStrings.getString("NP_INVALID_TARGET_LOCALE")
-                            + OStrings.getString("NP_LOCALE_SUGGESTION"), OStrings.getString("TF_ERROR"),
-                    JOptionPane.ERROR_MESSAGE);
+                            + OStrings.getString("NP_LOCALE_SUGGESTION"),
+                    OStrings.getString("TF_ERROR"), JOptionPane.ERROR_MESSAGE);
             targetLocaleField.requestFocusInWindow();
             return;
         }
@@ -1087,8 +1089,7 @@ public class ProjectPropertiesDialog extends JDialog {
         projectProperties.setRemoveTags(removeTagsCheckBox.isSelected());
 
         projectProperties.setExportTmLevels(exportTMOmegaTCheckBox.isSelected(),
-                                            exportTMLevel1CheckBox.isSelected(),
-                                            exportTMLevel2CheckBox.isSelected());
+                exportTMLevel1CheckBox.isSelected(), exportTMLevel2CheckBox.isSelected());
 
         projectProperties.setExternalCommand(customCommandTextArea.getText());
 
@@ -1127,7 +1128,8 @@ public class ProjectPropertiesDialog extends JDialog {
         }
 
         projectProperties.setWriteableGlossary(writeableGlosField.getText());
-        if (dialogType != Mode.NEW_PROJECT && !new File(projectProperties.getWriteableGlossaryDir()).exists()) {
+        if (dialogType != Mode.NEW_PROJECT
+                && !new File(projectProperties.getWriteableGlossaryDir()).exists()) {
             JOptionPane.showMessageDialog(this, OStrings.getString("NP_W_GLOSSDIR_DOESNT_EXIST"),
                     OStrings.getString("TF_ERROR"), JOptionPane.ERROR_MESSAGE);
             writeableGlosField.requestFocusInWindow();
@@ -1178,8 +1180,8 @@ public class ProjectPropertiesDialog extends JDialog {
             return;
         }
 
-        projectProperties.setExportTmLevels(exportTMOmegaTCheckBox.isSelected(), exportTMLevel1CheckBox.isSelected(),
-                                       exportTMLevel2CheckBox.isSelected());
+        projectProperties.setExportTmLevels(exportTMOmegaTCheckBox.isSelected(),
+                exportTMLevel1CheckBox.isSelected(), exportTMLevel2CheckBox.isSelected());
 
         projectProperties.setProjectSRX(srx);
         projectProperties.setProjectFilters(filters);

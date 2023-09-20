@@ -91,4 +91,5 @@ public class MagicCommentTest {
     public void testParseFileUTF16() throws IOException {
         Map<String, String> result = MagicComment.parse(new File("test/data/glossaries/testUTF16LE.txt"));
         assertEquals(Collections.emptyMap(), result);
-    }}
+    }
+}

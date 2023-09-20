@@ -65,7 +65,8 @@ public class RelaxNGFilterTest extends TestFilterBase {
         IProject.FileInfo fi = loadSourceFiles(new RelaxNGFilter(), f);
 
         checkMultiStart(fi, f);
-        checkMulti("RELAX NG is a schema language for XML.", null, null, "", "RELAX NG is simple and easy to learn.", null);
+        checkMulti("RELAX NG is a schema language for XML.", null, null, "",
+                "RELAX NG is simple and easy to learn.", null);
     }
 
     @Test

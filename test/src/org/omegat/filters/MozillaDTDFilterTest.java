@@ -63,8 +63,10 @@ public class MozillaDTDFilterTest extends TestFilterBase {
                 "MozillaDTD/file-be.dtd",
                 new IAlignCallback() {
                     @Override
-                    public void addTranslation(final String id, final String source, final String translation, final boolean isFuzzy, final String path, final IFilter filter) {
-                        ar.found |= id.equals("mainWindow.title") && source.equals("Title") && translation.equals("Title-be");
+                    public void addTranslation(final String id, final String source, final String translation,
+                                               final boolean isFuzzy, final String path, final IFilter filter) {
+                        ar.found |= id.equals("mainWindow.title") && source.equals("Title")
+                                && translation.equals("Title-be");
                     }
                 });
         assertTrue(ar.found);

@@ -32,10 +32,6 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertTrue;
 
-import org.junit.AfterClass;
-import org.junit.Test;
-import org.omegat.util.OStrings;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -44,13 +40,18 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.Locale;
 
+import org.junit.AfterClass;
+import org.junit.Test;
+
+import org.omegat.util.OStrings;
+
 /**
  * @author Aaron Madlon-Kay
  */
 public class SRXTest {
 
-    private static final File segmentDefault = new File("test/data/segmentation/default/");
-    private static final String segmentConfBase = "test/data/segmentation/migrate/";
+    private static final File SEGMENT_DEFAULT = new File("test/data/segmentation/default/");
+    private static final String SEGMENT_CONF_BASE = "test/data/segmentation/migrate/";
 
     @Test
     public void testSRXComparison() {
@@ -82,8 +83,8 @@ public class SRXTest {
      */
     @Test
     public void testSrxReaderDefault() {
-        assertTrue(segmentDefault.exists());
-        SRX srx = SRX.loadFromDir(segmentDefault);
+        assertTrue(SEGMENT_DEFAULT.exists());
+        SRX srx = SRX.loadFromDir(SEGMENT_DEFAULT);
         assertNotNull(srx);
         assertTrue(srx.isCascade());
         List<MapRule> mapRuleList = srx.getMappingRules();
@@ -116,11 +117,11 @@ public class SRXTest {
         File segmentConf;
         Path segmentSrxPath;
         if (Locale.getDefault().getLanguage().equalsIgnoreCase("ja")) {
-            segmentConf = Paths.get(segmentConfBase, "locale_ja").toFile();
-            segmentSrxPath = Paths.get(segmentConfBase, "locale_ja", "segmentation.srx");
+            segmentConf = Paths.get(SEGMENT_CONF_BASE, "locale_ja").toFile();
+            segmentSrxPath = Paths.get(SEGMENT_CONF_BASE, "locale_ja", "segmentation.srx");
         } else {
-            segmentConf = Paths.get(segmentConfBase, "locale_en").toFile();
-            segmentSrxPath = Paths.get(segmentConfBase, "locale_en", "segmentation.srx");
+            segmentConf = Paths.get(SEGMENT_CONF_BASE, "locale_en").toFile();
+            segmentSrxPath = Paths.get(SEGMENT_CONF_BASE, "locale_en", "segmentation.srx");
         }
         Files.deleteIfExists(segmentSrxPath);
         //
@@ -154,9 +155,9 @@ public class SRXTest {
     public static void tearDownClass() throws IOException {
         Path segmentSrxPath;
         if (Locale.getDefault().getLanguage().equalsIgnoreCase("ja")) {
-            segmentSrxPath = Paths.get(segmentConfBase, "locale_ja", "segmentation.srx");
+            segmentSrxPath = Paths.get(SEGMENT_CONF_BASE, "locale_ja", "segmentation.srx");
         } else {
-            segmentSrxPath = Paths.get(segmentConfBase, "locale_en", "segmentation.srx");
+            segmentSrxPath = Paths.get(SEGMENT_CONF_BASE, "locale_en", "segmentation.srx");
         }
         Files.deleteIfExists(segmentSrxPath);
     }

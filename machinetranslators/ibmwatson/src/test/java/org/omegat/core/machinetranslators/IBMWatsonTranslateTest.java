@@ -42,7 +42,7 @@ public class IBMWatsonTranslateTest extends TestCoreWireMock {
     public void getJsonResults() throws Exception {
         Preferences.setPreference(Preferences.ALLOW_IBMWATSON_TRANSLATE, true);
         IBMWatsonTranslate ibmWatsonTranslate = new IBMWatsonTranslate();
-        String json = "{\"translations\": [" + "  {\"translation\": \"translated text goes here.\" }" + "],"
+        String json = "{\"translations\": [  {\"translation\": \"translated text goes here.\" }],"
                 + " \"word_count\": 4, \"character_count\": 53 }";
         String translation = ibmWatsonTranslate.getJsonResults(json);
         assertEquals("translated text goes here.", translation);
@@ -57,8 +57,8 @@ public class IBMWatsonTranslateTest extends TestCoreWireMock {
         String trText = "Translation text.";
         String json = ibmWatsonTranslate.createJsonRequest(sLang, tLang, trText);
         ObjectMapper mapper = new ObjectMapper();
-        String expected = "{\"model_id\":\"MODEL\",\"source\":\"EN\","
-                + "\"target\":\"FR\",\"text\":[\"Translation text.\"]}";
+        String expected =
+                "{\"model_id\":\"MODEL\",\"source\":\"EN\",\"target\":\"FR\",\"text\":[\"Translation text.\"]}";
         assertEquals(mapper.readTree(expected), mapper.readTree(json));
     }
 
@@ -82,10 +82,9 @@ public class IBMWatsonTranslateTest extends TestCoreWireMock {
                 .withHeader("Authorization", WireMock.containing("Basic "))
                 .withHeader("X-Watson-Learning-Opt-Out", WireMock.equalTo("true")).willReturn(
                         WireMock.aResponse().withStatus(200).withHeader("Content-Type", "application/json")
-                                .withBody("{\n" + "  \"translations\": [\n" + "    {\n"
-                                        + "      \"translation\": \"Hola, \u00BFc\u00F3mo est\u00E1s hoy?\"\n"
-                                        + "    }\n" + "  ],\n" + "  \"word_count\": 7,\n"
-                                        + "  \"character_count\": 25\n" + "}")));
+                                .withBody("{\"translations\": [{"
+                                        + "\"translation\": \"Hola, \u00BFc\u00F3mo est\u00E1s hoy?\""
+                                        + "}], \"word_count\": 7, \"character_count\": 25}")));
 
         IBMWatsonTranslate ibmWatsonTranslate = new IBMWatsonTranslate();
         String result = ibmWatsonTranslate.translate(new Language("EN"), new Language("ES"), sourceText);

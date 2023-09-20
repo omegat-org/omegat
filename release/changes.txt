@@ -169,6 +169,10 @@
   - First session message in log not localised
   https://sourceforge.net/p/omegat/bugs/272/
 
+  - If project memory is updated during load via tm/auto or tm/enforce, set project as modified
+    so that save also updates project_save.tmx
+  https://sourceforge.net/p/omegat/bugs/1185/
+
 ----------------------------------------------------------------------
  OmegaT 6.0.0 (2023-06-19)
 ----------------------------------------------------------------------

@@ -48,6 +48,8 @@ public class ImportFromAutoTMX {
      * processes.
      */
     Map<String, List<SourceTextEntry>> existEntries = new HashMap<String, List<SourceTextEntry>>();
+    // initially false, this variable becomes true if process() did almost one change
+    boolean didAnyChange = false;
 
     public ImportFromAutoTMX(RealProject project, List<SourceTextEntry> allProjectEntries) {
         this.project = project;
@@ -188,6 +190,24 @@ public class ImportFromAutoTMX {
 
     private void setTranslation(SourceTextEntry entry, ITMXEntry trans, boolean defaultTranslation,
             TMXEntry.ExternalLinked externalLinked) {
+        if (!didAnyChange) { // check if this call really changes anything
+            TMXEntry oldEntry = defaultTranslation ? project.projectTMX.defaults.get(entry.getSrcText())
+                : project.projectTMX.alternatives.get(entry.getKey());
+            if (oldEntry == null) {
+                if (trans.isTranslated()) {
+                    didAnyChange = true;
+                }                
+            } else if (oldEntry.isTranslated()) {
+                if (! oldEntry.getTranslationText().equals(trans.getTranslationText())) {
+                    didAnyChange = true;
+                }
+            } else {
+                if (trans.isTranslated()) {
+                    didAnyChange = true;
+                }
+            }
+        }
+        
         TMXEntry newTrEntry;
 
         if ((!trans.isTranslated()) && (!trans.hasNote())) {

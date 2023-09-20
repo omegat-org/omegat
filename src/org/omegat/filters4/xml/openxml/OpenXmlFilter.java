@@ -89,10 +89,9 @@ class OpenXmlFilter extends AbstractXmlFilter {
         return inFile.getName().toLowerCase().endsWith(".xml");
     }
 
-    // ----------------------------- AbstractXmlFilter part
-    // ----------------------
+    // ------------ AbstractXmlFilter part ------------
 
-    private QName OOXML_MAIN_PARA_ELEMENT = null;
+    private QName ooxmlMainParaElement = null;
 
     private LinkedList<List<XMLEvent>> currentPara = null;
     private List<XMLEvent> currentBuffer = null;
@@ -106,15 +105,15 @@ class OpenXmlFilter extends AbstractXmlFilter {
     @SuppressWarnings("unchecked")
     protected boolean processStartElement(StartElement startElement, XMLStreamWriter writer)
             throws XMLStreamException {
-        if (OOXML_MAIN_PARA_ELEMENT == null) {
-            OOXML_MAIN_PARA_ELEMENT = startElement.getName();
+        if (ooxmlMainParaElement == null) {
+            ooxmlMainParaElement = startElement.getName();
         }
-        if (OOXML_MAIN_PARA_ELEMENT.getNamespaceURI().contains("presentation")) { // powerpoint
-            OOXML_MAIN_PARA_ELEMENT = new QName(startElement.getNamespaceContext().getNamespaceURI("a"),
-                    OOXML_MAIN_PARA_ELEMENT.getLocalPart(), "a");
+        if (ooxmlMainParaElement.getNamespaceURI().contains("presentation")) { // powerpoint
+            ooxmlMainParaElement = new QName(startElement.getNamespaceContext().getNamespaceURI("a"),
+                    ooxmlMainParaElement.getLocalPart(), "a");
         }
         QName name = startElement.getName();
-        if (OOXML_MAIN_PARA_ELEMENT.getNamespaceURI().equals(name.getNamespaceURI())) {
+        if (ooxmlMainParaElement.getNamespaceURI().equals(name.getNamespaceURI())) {
             if ("p".equals(name.getLocalPart()) // word
                     || "si".equals(name.getLocalPart()) || "comment".equals(name.getLocalPart()) // excel
             ) {
@@ -204,7 +203,7 @@ class OpenXmlFilter extends AbstractXmlFilter {
     protected boolean processEndElement(EndElement endElement, XMLStreamWriter writer)
             throws XMLStreamException {
         QName name = endElement.getName();
-        if (OOXML_MAIN_PARA_ELEMENT.getNamespaceURI().equals(name.getNamespaceURI())) {
+        if (ooxmlMainParaElement.getNamespaceURI().equals(name.getNamespaceURI())) {
             if ("p".equals(name.getLocalPart()) // word
                     || "si".equals(name.getLocalPart()) || "comment".equals(name.getLocalPart()) // excel
             ) {
@@ -289,7 +288,7 @@ class OpenXmlFilter extends AbstractXmlFilter {
     protected Map<Character, Integer> tagsCount = new TreeMap<>();
     private List<XMLEvent> defaultsForParagraph = new LinkedList<>();
 
-    private QName TEXT_ELEMENT;
+    private QName textElement;
     private static final Pattern PTN_EMPTY_AND_START = Pattern
             .compile("((?:<[a-zA-Z]+[0-9]+/>)*)<([a-zA-Z]+[0-9]+)>((?:<[a-zA-Z]+[0-9]+/>)*)"),
             PTN_EMPTY_AND_END = Pattern
@@ -300,8 +299,8 @@ class OpenXmlFilter extends AbstractXmlFilter {
      * Also build maps to be reused later
      **/
     protected String buildTags() {
-        if (TEXT_ELEMENT == null) {
-            TEXT_ELEMENT = new QName(OOXML_MAIN_PARA_ELEMENT.getNamespaceURI(), "t");
+        if (textElement == null) {
+            textElement = new QName(ooxmlMainParaElement.getNamespaceURI(), "t");
         }
         tagsMap.clear();
         for (Character c : tagsCount.keySet()) {
@@ -453,8 +452,8 @@ class OpenXmlFilter extends AbstractXmlFilter {
                         tagsMap.put("/" + key + (j - 1), tagsMap.get("/" + key + j));
                         tagsMap.put("" + key + (j - 1), tagsMap.get("" + key + j));
                         // res.replaceAll("(</?)$key$j(/?>)", "$1$key${j-1}$2")
-                        Pattern PTN_THIS_TAG = Pattern.compile("(</?)" + key + j + "(/?>)");
-                        Matcher mThisTag = PTN_THIS_TAG.matcher(res);
+                        Pattern ptnThisTag = Pattern.compile("(</?)" + key + j + "(/?>)");
+                        Matcher mThisTag = ptnThisTag.matcher(res);
                         while (mThisTag.find()) {
                             res.replace(mThisTag.start(), mThisTag.end(),
                                     mThisTag.group(1) + key + (j - 1) + mThisTag.group(2));
@@ -505,8 +504,8 @@ class OpenXmlFilter extends AbstractXmlFilter {
                 }
                 LinkedList<XMLEvent> nList = new LinkedList<>();
                 nList.addAll(run.subList(idx, runIter.nextIndex()));
-                QName qR = new QName(OOXML_MAIN_PARA_ELEMENT.getNamespaceURI(), "r",
-                        OOXML_MAIN_PARA_ELEMENT.getPrefix());
+                QName qR = new QName(ooxmlMainParaElement.getNamespaceURI(), "r",
+                        ooxmlMainParaElement.getPrefix());
                 nList.add(0, eFactory.createStartElement(qR, null, null));
                 nList.add(eFactory.createEndElement(qR, null));
                 res.append("<" + prefixInt + tcInt + "/>");
@@ -517,8 +516,8 @@ class OpenXmlFilter extends AbstractXmlFilter {
         }
     }
 
-    private void compactBuiltTags(StringBuffer res, Pattern PTN) {
-        Matcher mFull = PTN.matcher(res), mUniq;
+    private void compactBuiltTags(StringBuffer res, Pattern ptn) {
+        Matcher mFull = ptn.matcher(res), mUniq;
         while (mFull.find()) {
             if (!mFull.group().contains("/>")) {
                 continue;
@@ -573,11 +572,12 @@ class OpenXmlFilter extends AbstractXmlFilter {
                 }
                 attrs.add(name);
             }
-            while (wr.hasNext()) { // now, search for cases of empty runs with
-                                   // special markup
-                if ((next = wr.next()).isStartElement()) {
+            while (wr.hasNext()) {
+                // now, search for cases of empty runs with special markup
+                next = wr.next();
+                if (next.isStartElement()) {
                     QName name = next.asStartElement().getName();
-                    if (name.equals(TEXT_ELEMENT)) {
+                    if (name.equals(textElement)) {
                         break;
                     }
                     if (name.getLocalPart().startsWith("footnoteRef")) {
@@ -639,7 +639,7 @@ class OpenXmlFilter extends AbstractXmlFilter {
             next = wr.next();
             if (next.isStartElement()) {
                 QName name = next.asStartElement().getName();
-                if (name.equals(TEXT_ELEMENT)) {
+                if (name.equals(textElement)) {
                     break;
                 }
                 if (name.getLocalPart().startsWith("footnoteRef")) {
@@ -727,10 +727,10 @@ class OpenXmlFilter extends AbstractXmlFilter {
     }
 
     private void addSimpleRun(LinkedList<XMLEvent> res, String text) {
-        QName qR = new QName(OOXML_MAIN_PARA_ELEMENT.getNamespaceURI(), "r",
-                OOXML_MAIN_PARA_ELEMENT.getPrefix());
-        QName qT = new QName(OOXML_MAIN_PARA_ELEMENT.getNamespaceURI(), "t",
-                OOXML_MAIN_PARA_ELEMENT.getPrefix());
+        QName qR = new QName(ooxmlMainParaElement.getNamespaceURI(), "r",
+                ooxmlMainParaElement.getPrefix());
+        QName qT = new QName(ooxmlMainParaElement.getNamespaceURI(), "t",
+                ooxmlMainParaElement.getPrefix());
         res.add(eFactory.createStartElement(qR, null, null));
         if (defaultsForParagraph != null) {
             // these are not really defaults, we must repeat it when generating

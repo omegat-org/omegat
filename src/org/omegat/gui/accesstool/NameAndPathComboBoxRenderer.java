@@ -57,7 +57,8 @@ public class NameAndPathComboBoxRenderer implements ListCellRenderer<URI> {
     }
 
     @Override
-    public Component getListCellRendererComponent(JList<? extends URI> list, URI uri, int index, boolean isSelected, boolean cellHasFocus) {
+    public Component getListCellRendererComponent(JList<? extends URI> list, URI uri, int index, boolean isSelected,
+                                                  boolean cellHasFocus) {
         JPanel panel = new JPanel();
         if (index < 0) {
             if (!uri.getScheme().equals("omegat")) {

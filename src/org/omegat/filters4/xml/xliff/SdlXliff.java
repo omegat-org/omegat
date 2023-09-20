@@ -59,7 +59,7 @@ import org.omegat.util.Preferences;
  */
 public class SdlXliff extends Xliff1Filter {
 
-    private final SimpleDateFormat TRADOS_DATE_FORMAT = new SimpleDateFormat("M/d/y H:m:s");
+    private static final SimpleDateFormat TRADOS_DATE_FORMAT = new SimpleDateFormat("M/d/y H:m:s");
 
     // ---------------------------- IFilter API ----------------------------
 
@@ -102,9 +102,9 @@ public class SdlXliff extends Xliff1Filter {
     private Map<String, List<XMLEvent>> tagDefs = new TreeMap<>();
     private String currentProp = null;
     private Set<String> midSet = new java.util.HashSet<>();
-    private boolean has_seg_defs = false;
-    private boolean mid_has_modifier = false;
-    private boolean mid_has_modif_date = false;
+    private boolean hasSegDefs = false;
+    private boolean midHasModifier = false;
+    private boolean midHasModifDate = false;
 
 
     /**
@@ -151,11 +151,11 @@ public class SdlXliff extends Xliff1Filter {
         }
         if (writer != null) {
             if (startElement.getName().equals(new QName("http://sdl.com/FileTypes/SdlXliff/1.0", "seg"))) {
-                mid_has_modifier = false;
-                mid_has_modif_date = false;
+                midHasModifier = false;
+                midHasModifDate = false;
                 currentProp = null;
-                has_seg_defs = true; // start a new set of properties
-                fromEventToWriter(eFactory.createStartElement(startElement.getName(), null,
+                hasSegDefs = true; // start a new set of properties
+                fromEventToWriter(EVENT_FACTORY.createStartElement(startElement.getName(), null,
                         startElement.getNamespaces()), writer);
                 String id = null;
                 for (java.util.Iterator<Attribute> iter = startElement.getAttributes(); iter.hasNext();) {
@@ -175,7 +175,7 @@ public class SdlXliff extends Xliff1Filter {
             }
         }
         if (startElement.getName().getLocalPart().equals("trans-unit")) {
-            has_seg_defs = false;
+            hasSegDefs = false;
         }
         if (startElement.getName().equals(new QName("http://sdl.com/FileTypes/SdlXliff/1.0", "value"))) {
             currentProp = startElement.getAttributeByName(new QName("key")).getValue();
@@ -188,14 +188,14 @@ public class SdlXliff extends Xliff1Filter {
             throws XMLStreamException {
         if (endElement.getName().getLocalPart().equals("seg")) {
             if ((writer != null) && isCurrentSegmentTranslated(currentMid)) {
-                if (!mid_has_modifier) { // no such value in the file
+                if (!midHasModifier) { // no such value in the file
                     writer.writeStartElement("http://sdl.com/FileTypes/SdlXliff/1.0", "value");
                     writer.writeAttribute("key", "last_modified_by");
                     writer.writeCharacters(Preferences.getPreferenceDefault(Preferences.TEAM_AUTHOR,
                             System.getProperty("user.name")));
                     writer.writeEndElement(/* "sdl:value */);
                 }
-                if (!mid_has_modif_date) { // no such value in the file
+                if (!midHasModifDate) { // no such value in the file
                     writer.writeStartElement("http://sdl.com/FileTypes/SdlXliff/1.0", "value");
                     writer.writeAttribute("key", "modified_on");
                     writer.writeCharacters(TRADOS_DATE_FORMAT.format(new java.util.Date()));
@@ -207,7 +207,7 @@ public class SdlXliff extends Xliff1Filter {
         }
         if (endElement.getName().getLocalPart().equals("trans-unit")) {
             if (writer != null) {
-                if ((midSet.size() > 0) && (!has_seg_defs)) {
+                if ((midSet.size() > 0) && (!hasSegDefs)) {
                     writer.writeStartElement("http://sdl.com/FileTypes/SdlXliff/1.0", "seg-defs");
                 }
                 for (String mid0 : midSet) { // those which were not generated
@@ -229,7 +229,7 @@ public class SdlXliff extends Xliff1Filter {
                     }
                     writer.writeEndElement(/* "sdl:seg */);
                 }
-                if ((midSet.size() > 0) && (!has_seg_defs)) {
+                if ((midSet.size() > 0) && (!hasSegDefs)) {
                     writer.writeEndElement(/* "sdl:seg-defs */);
                 }
             }
@@ -357,12 +357,12 @@ public class SdlXliff extends Xliff1Filter {
                 if ("last_modified_by".equals(currentProp)) {
                     writer.writeCharacters(Preferences.getPreferenceDefault(Preferences.TEAM_AUTHOR,
                             System.getProperty("user.name")));
-                    mid_has_modifier = true;
+                    midHasModifier = true;
                     return false;
                 }
                 if ("modified_on".equals(currentProp)) {
                     writer.writeCharacters(TRADOS_DATE_FORMAT.format(new java.util.Date()));
-                    mid_has_modif_date = true;
+                    midHasModifDate = true;
                     return false;
                 }
             }
@@ -384,12 +384,12 @@ public class SdlXliff extends Xliff1Filter {
         }
         if ((addNote != null) && (omegatNotes.get(addNote) != null)) {
             List<Attribute> attr = new java.util.LinkedList<Attribute>();
-            attr.add(eFactory.createAttribute("sdl", "http://sdl.com/FileTypes/SdlXliff/1.0", "cid",
+            attr.add(EVENT_FACTORY.createAttribute("sdl", "http://sdl.com/FileTypes/SdlXliff/1.0", "cid",
                     addNote.toString()));
-            attr.add(eFactory.createAttribute(new QName("mtype"), "x-sdl-comment"));
-            res.add(0, eFactory.createStartElement(new QName("urn:oasis:names:tc:xliff:document:1.2", "mrk"),
+            attr.add(EVENT_FACTORY.createAttribute(new QName("mtype"), "x-sdl-comment"));
+            res.add(0, EVENT_FACTORY.createStartElement(new QName("urn:oasis:names:tc:xliff:document:1.2", "mrk"),
                     attr.iterator(), null));
-            res.add(eFactory.createEndElement(new QName("urn:oasis:names:tc:xliff:document:1.2", "mrk"),
+            res.add(EVENT_FACTORY.createEndElement(new QName("urn:oasis:names:tc:xliff:document:1.2", "mrk"),
                     null));
         }
         return res;
@@ -425,13 +425,14 @@ public class SdlXliff extends Xliff1Filter {
                     }
                 } catch (XMLStreamException xe) {
                     try {
-                        for (XMLEvent ev : saved)
+                        for (XMLEvent ev : saved) {
                             if (ev.isEndElement()) {
                                 writer.write("</" + ev.asEndElement().getName().getPrefix() + ":"
                                         + ev.asEndElement().getName().getLocalPart() + ">");
                             } else {
                                 writer.write(ev.toString());
                             }
+                        }
                     } catch (Exception ignored) {
                     }
                 }

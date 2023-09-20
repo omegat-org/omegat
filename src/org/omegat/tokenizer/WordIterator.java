@@ -174,12 +174,10 @@ public class WordIterator extends BreakIterator {
             } else if (str3.equals(">")) {
                 return next3; // yes, it's an OmegaT tag
             }
-            {
-                // rewind back two times
-                breaker.previous();
-                breaker.previous();
-                return next;
-            }
+            // rewind back two times
+            breaker.previous();
+            breaker.previous();
+            return next;
         } else if (str.equals("&")) {
             // trying to see the mnemonic
             int next2 = breaker.next();

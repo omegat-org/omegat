@@ -297,7 +297,7 @@ public abstract class AbstractXmlFilter extends AbstractFilter {
     /**
      * Called for each start element (including empty ones) when we are in event
      * mode.
-     * 
+     *
      * @return true if the element must be kept in translation, false otherwise
      **/
     protected abstract boolean processStartElement(StartElement el, XMLStreamWriter evWriter)
@@ -306,7 +306,7 @@ public abstract class AbstractXmlFilter extends AbstractFilter {
     /**
      * Called for each end element (including empty ones) when we are in event
      * mode.
-     * 
+     *
      * @return true if the element must be kept in translation, false otherwise
      **/
     protected abstract boolean processEndElement(EndElement el, XMLStreamWriter evWriter)
@@ -314,7 +314,7 @@ public abstract class AbstractXmlFilter extends AbstractFilter {
 
     /**
      * Called for each sequence of characters when we are in event mode.
-     * 
+     *
      * @return true if the element must be kept in translation, false otherwise
      **/
     protected abstract boolean processCharacters(Characters el, XMLStreamWriter evWriter)
@@ -372,6 +372,7 @@ public abstract class AbstractXmlFilter extends AbstractFilter {
         case XMLEvent.END_DOCUMENT:
             writer.writeEndDocument();
             break;
+        default:
         }
     }
 
@@ -421,6 +422,7 @@ public abstract class AbstractXmlFilter extends AbstractFilter {
         case XMLEvent.END_DOCUMENT:
             writer.writeEndDocument();
             break;
+        default:
         }
     }
 

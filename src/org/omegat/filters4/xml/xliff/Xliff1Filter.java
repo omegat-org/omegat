@@ -93,18 +93,18 @@ public class Xliff1Filter extends AbstractXliffFilter {
                     || reader.getLocalName().equals("unit")) {
                 final List<Attribute> attributes = new LinkedList<>();
                 for (int i = 0, len = reader.getAttributeCount(); i < len; i++) {
-                    attributes.add(eFactory.createAttribute(reader.getAttributeName(i),
+                    attributes.add(EVENT_FACTORY.createAttribute(reader.getAttributeName(i),
                             reader.getAttributeValue(i)));
                 }
                 try {
                     processStartElement(
-                            eFactory.createStartElement(reader.getName(), attributes.iterator(), null), null);
+                            EVENT_FACTORY.createStartElement(reader.getName(), attributes.iterator(), null), null);
                 } catch (Exception ex) {
                 }
             }
         }
     }
-    
+
     @Override
     @SuppressWarnings("fallthrough")
     protected boolean processStartElement(StartElement startElement, XMLStreamWriter writer)
@@ -259,8 +259,9 @@ public class Xliff1Filter extends AbstractXliffFilter {
                 inSubSeg = 0;
                 break;
             } else {
-                if (inSubSeg > 0)
+                if (inSubSeg > 0) {
                     inSubSeg--;
+                }
             } // avoids to crash on <mrk> inside segment.
               // Do not break because inside segment we want </m0>
         default:
@@ -273,7 +274,7 @@ public class Xliff1Filter extends AbstractXliffFilter {
 
     // Used by formats where note is in another location
     protected void addNoteFromSource(String tag, String noteText) {
-        note.add(eFactory.createCharacters("[" + tag + "]" + noteText + "[/" + tag + "]"));
+        note.add(EVENT_FACTORY.createCharacters("[" + tag + "]" + noteText + "[/" + tag + "]"));
     }
 
     @Override
@@ -408,7 +409,7 @@ public class Xliff1Filter extends AbstractXliffFilter {
                     res.setLength(0);
                     res = saveBuf.pop();
                     break;
-                default: {
+                default:
                     String pop = tagStack.pop();
                     if (pop.equals("mark-protected")) { // isProtectedTag(start
                                                         // element) was true
@@ -426,7 +427,6 @@ public class Xliff1Filter extends AbstractXliffFilter {
                         tagsMap.put("/" + pop, Collections.singletonList(ev));
                         res.append("</").append(pop).append(">");
                     }
-                }
                 }
             }
         }
@@ -627,7 +627,7 @@ public class Xliff1Filter extends AbstractXliffFilter {
      * Builds target from OmegaT to XLIFF format. May be overridden in
      * subclasses
      **/
-    protected List<XMLEvent> restoreTags(String unitId, String path, String src, String tra) {
+    protected List<XMLEvent> restoreTags(String aUnitId, String path, String src, String tra) {
         return restoreTags(tra);
     }
 

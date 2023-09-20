@@ -243,6 +243,6 @@ abstract class AbstractXliffFilter extends AbstractXmlFilter {
         }
     }
 
-    protected static final javax.xml.stream.XMLEventFactory eFactory = javax.xml.stream.XMLEventFactory
+    protected static final javax.xml.stream.XMLEventFactory EVENT_FACTORY = javax.xml.stream.XMLEventFactory
             .newInstance();
 }

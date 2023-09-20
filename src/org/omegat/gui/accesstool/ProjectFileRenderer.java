@@ -41,8 +41,9 @@ public class ProjectFileRenderer implements ListCellRenderer<ProjectFileInformat
     }
 
     @Override
-    public Component getListCellRendererComponent(JList<? extends ProjectFileInformation> list, ProjectFileInformation value,
-                                                  int index, boolean isSelected, boolean cellHasFocus) {
+    public Component getListCellRendererComponent(JList<? extends ProjectFileInformation> list,
+                                                  ProjectFileInformation value, int index, boolean isSelected,
+                                                  boolean cellHasFocus) {
         JPanel panel = new JPanel();
         if (value != null) {
             panel.setBorder(BorderFactory.createEmptyBorder(5, 1, 5, 1));

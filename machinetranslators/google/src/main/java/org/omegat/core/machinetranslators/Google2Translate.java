@@ -88,7 +88,7 @@ public class Google2Translate extends BaseCachedTranslate {
 
     /**
      * Constructor for test.
-     * 
+     *
      * @param baseUrl
      *            custom url.
      * @param key

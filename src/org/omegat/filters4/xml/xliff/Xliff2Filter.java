@@ -133,19 +133,18 @@ public class Xliff2Filter extends AbstractXliffFilter {
             break;
         case "note":
             if (startElement.getAttributeByName(new QName("id")) != null) {
-                note.add(eFactory.createCharacters(
+                note.add(EVENT_FACTORY.createCharacters(
                         "\n\n[" + startElement.getAttributeByName(new QName("id")).getValue() + "] "));
             } else if (!note.isEmpty()) {
-                note.add(eFactory.createCharacters("\n\n"));
+                note.add(EVENT_FACTORY.createCharacters("\n\n"));
             }
             currentBuffer = note;
             break;
         default:
             if (currentBuffer != null) {
                 currentBuffer.add(startElement);
-            }
-            // <target> must be before any other-namespace markup
-            else if (((ignoreScope == null || ignoreScope.startsWith("!")) && (segId != null))
+            } else if (((ignoreScope == null || ignoreScope.startsWith("!")) && (segId != null))
+                    // <target> must be before any other-namespace markup
                     && (!startElement.getName().getNamespaceURI().equals(namespace))) {
                 flushTranslations(writer);
             }

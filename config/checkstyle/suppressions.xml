@@ -44,5 +44,26 @@
     <!-- machinetranslators -->
     <suppress checks="(DesignForExtension|MagicNumber|MemberName|HideUtilityClassConstructor)"
               files="(Apertium|DeepL|YandexCloud|Google2|IBMWatson|MyMemory)Translate\.java"/>
+
+    <!-- Auto generated source files -->
+    <suppress checks="WhitespaceAround"
+            files="(StatisticsWindow|AlignPanel|EditingPanel|AlignMenuFrame|FilterBarSearch|EditingBehaviorPanel)\.java"/>
+
+    <!-- filters and Dialog forms -->
+    <suppress files=".*Dialog\.java"
+              checks="(DesignForExtension|MagicNumber|MemberName|WhitespaceAround)"/>
+    <suppress files=".*Filter\.java"
+              checks="(DesignForExtension|MagicNumber)"/>
+
+    <!-- PluginInformation.java -->
+    <suppress files="PluginInformation\.java" checks="NeedBraces" lines="167-192"/>
+
+    <!-- SearchResultEntry.java -->
+    <suppress checks="(MemberName|MissingSwitchDefault|ParameterNumber)" files="SearchResultEntry\.java"/>
+
+    <!-- missing javadoc: temporary global suppression  -->
+    <suppress checks="(DesignForExtension|MagicNumber)"
+              files=".*"/>
+
 </suppressions>
 

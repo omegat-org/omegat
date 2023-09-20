@@ -76,8 +76,8 @@ public class AccessTools extends JPanel {
 
     private URI selectedProject = null;
 
-    private final static int MAX_PATH_LENGTH_SHOWN = 25;
-    private final static float CHECKBOX_HEIGHT_RATIO = 1.8f;
+    private static final int MAX_PATH_LENGTH_SHOWN = 25;
+    private static final float CHECKBOX_HEIGHT_RATIO = 1.8f;
 
     public AccessTools(final MainWindow mainWindow,
                        final MainWindowMenuHandler mainWindowMenuHandler) {
@@ -89,7 +89,7 @@ public class AccessTools extends JPanel {
         setLayout(new FlowLayout(FlowLayout.LEFT));
         recentProjectCB = new JComboBox<>();
         int fontHeight = recentProjectCB.getFont().getSize();
-        int cbHeight = (int)(CHECKBOX_HEIGHT_RATIO * fontHeight);
+        int cbHeight = (int) (CHECKBOX_HEIGHT_RATIO * fontHeight);
         int cbWidth = fontHeight * MAX_PATH_LENGTH_SHOWN;
         final NameAndPathComboBoxRenderer recentProjectRenderer = new NameAndPathComboBoxRenderer();
         recentProjectCB.setRenderer(recentProjectRenderer);
@@ -154,7 +154,7 @@ public class AccessTools extends JPanel {
                 return;
             }
             if (item instanceof URI) {
-                URI projectUri = (URI)item;
+                URI projectUri = (URI) item;
                 if (projectUri.getScheme().equals("omegat")) {
                     switch (projectUri.getSchemeSpecificPart()) {
                         case "new":
@@ -258,7 +258,7 @@ public class AccessTools extends JPanel {
     @SuppressWarnings("serial")
     static class ProjectComboBoxModel extends DefaultComboBoxModel<URI> {
 
-        public ProjectComboBoxModel(List<URI> list) {
+        ProjectComboBoxModel(List<URI> list) {
             super(list.toArray(URI[]::new));
         }
 
@@ -286,13 +286,13 @@ public class AccessTools extends JPanel {
          * Constructor.
          * @param items default lists of SourceFileInfo.
          */
-        public SourceComboBoxModel(final List<ProjectFileInformation> items) {
+        SourceComboBoxModel(final List<ProjectFileInformation> items) {
             super(items.toArray(new ProjectFileInformation[0]));
         }
 
         public void clear() {
             int sizeOfElements = getSize();
-            for (int i = 0 ; i < sizeOfElements ; i++) {
+            for (int i = 0; i < sizeOfElements; i++) {
                 removeElementAt(0);
             }
         }

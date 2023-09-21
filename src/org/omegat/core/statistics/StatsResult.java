@@ -115,7 +115,7 @@ public class StatsResult {
 
     /**
      * Constructor.
-     * 
+     *
      * @param total
      * @param remaining
      * @param unique
@@ -137,7 +137,7 @@ public class StatsResult {
 
     /**
      * Update given hosStat with current stats data.
-     * 
+     *
      * @param hotStat
      *            StatisticsInfo data object.
      */
@@ -163,7 +163,7 @@ public class StatsResult {
 
     /**
      * Return total number of segments.
-     * 
+     *
      * @return
      */
     @XmlElement(name = "total")
@@ -173,7 +173,7 @@ public class StatsResult {
 
     /**
      * Return remaining number of segments that needs translation.
-     * 
+     *
      * @return
      */
     @XmlElement(name = "remaining")
@@ -183,7 +183,7 @@ public class StatsResult {
 
     /**
      * Return a number of unique segments.
-     * 
+     *
      * @return
      */
     @XmlElement(name = "unique")

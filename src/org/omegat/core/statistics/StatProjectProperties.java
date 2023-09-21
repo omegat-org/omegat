@@ -25,12 +25,13 @@
 
 package org.omegat.core.statistics;
 
+import javax.xml.bind.annotation.XmlAttribute;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import org.omegat.core.Core;
 import org.omegat.core.data.ProjectProperties;
-
-import javax.xml.bind.annotation.XmlAttribute;
 
 /**
  * Data class for statistics XML and JSON.
@@ -60,22 +61,22 @@ public final class StatProjectProperties {
 
     }
 
-    @XmlAttribute(name="name")
+    @XmlAttribute(name = "name")
     public String getProjectName() {
         return projectName;
     }
 
-    @XmlAttribute(name="root")
+    @XmlAttribute(name = "root")
     public String getProjectRoot() {
         return projectRoot;
     }
 
-    @XmlAttribute(name="source-language")
+    @XmlAttribute(name = "source-language")
     public String getSourceLanguage() {
         return sourceLanguage;
     }
 
-    @XmlAttribute(name="target-language")
+    @XmlAttribute(name = "target-language")
     public String getTargetLanguage() {
         return targetLanguage;
     }

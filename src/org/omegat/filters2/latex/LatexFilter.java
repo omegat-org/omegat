@@ -82,7 +82,8 @@ public class LatexFilter extends AbstractFilter {
     }
 
     @Override
-    public void processFile(BufferedReader in, BufferedWriter out, org.omegat.filters2.FilterContext fc) throws IOException {
+    public void processFile(BufferedReader in, BufferedWriter out, org.omegat.filters2.FilterContext fc)
+            throws IOException {
         // BOM (byte order mark) bugfix
         in.mark(1);
         int ch = in.read();
@@ -326,11 +327,11 @@ public class LatexFilter extends AbstractFilter {
             StringBuffer sb = new StringBuffer();
 
             if (oneArgNoText.contains(command)) {
-                String find = ("\\" + command + "\\*?" + "(" + "\\[" + "[^\\]]*" + "\\]" + // opt
-                                                                                           // []
-                                                                                           // arg
-                        "|" + "\\(" + "[^\\)]*" + "\\)" + // opt () arg
-                        ")?\\s*" + "\\{" + "[^\\}]*+" + "\\}");
+                String find = ("\\" + command + "\\*?" + "(" + "\\[" + "[^\\]]*" + "\\]"
+                        // opt []  arg
+                        + "|" + "\\(" + "[^\\)]*" + "\\)"
+                        // opt () arg
+                        + ")?\\s*" + "\\{" + "[^\\}]*+" + "\\}");
 
                 Pattern p = Pattern.compile(find);
                 Matcher m = p.matcher(par);

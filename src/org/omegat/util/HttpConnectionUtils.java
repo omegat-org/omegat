@@ -73,7 +73,7 @@ public final class HttpConnectionUtils {
     /**
      * Don't instantiate util class.
      */
-    private HttpConnectionUtils() {}
+    private HttpConnectionUtils() { }
 
     /**
      * Get resource from URL with default timeout.

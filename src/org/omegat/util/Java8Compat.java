@@ -29,7 +29,10 @@ import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 
 @SuppressWarnings("deprecation")
-public class Java8Compat {
+public final class Java8Compat {
+
+    private Java8Compat() {
+    }
 
     public static int getMenuShortcutKeyMaskEx() {
         int mask = Toolkit.getDefaultToolkit().getMenuShortcutKeyMask();

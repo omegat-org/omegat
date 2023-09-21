@@ -150,10 +150,10 @@ public class HTMLWriter extends Writer {
             String contents = buffer.toString();
 
             if (options.getRewriteEncoding() != HTMLOptions.REWRITE_MODE.NEVER) {
-                String EOL = "";
+                String eol = "";
                 Matcher matcherLineending = PatternConsts.LINE_ENDING.matcher(contents);
                 if (matcherLineending.find()) {
-                    EOL = matcherLineending.group();
+                    eol = matcherLineending.group();
                 }
 
                 Matcher matcherHeader = PatternConsts.XML_HEADER.matcher(contents);
@@ -176,18 +176,20 @@ public class HTMLWriter extends Writer {
                 if (matcherEnc.find()) {
                     contents = matcherEnc.replaceFirst(htmlMeta);
                 } else if (matcherEncHtml5.find()) {
-                    contents = matcherEncHtml5.replaceFirst("<meta charset=\""+encoding+"\">");
+                    contents = matcherEncHtml5.replaceFirst("<meta charset=\"" + encoding + "\">");
                 } else if (options.getRewriteEncoding() != HTMLOptions.REWRITE_MODE.IFMETA) {
                     Matcher matcherHead = PatternConsts.HTML_HEAD.matcher(contents);
                     if (matcherHead.find()) {
-                        contents = matcherHead.replaceFirst("$0"+EOL+"    " + htmlMeta);
+                        contents = matcherHead.replaceFirst("$0" + eol + "    " + htmlMeta);
                     } else if (options.getRewriteEncoding() != HTMLOptions.REWRITE_MODE.IFHEADER) {
                         Matcher matcherHtml = PatternConsts.HTML_HTML.matcher(contents);
                         if (matcherHtml.find()) {
                             contents = matcherHtml
-                                    .replaceFirst("$0"+EOL+"<head>"+EOL+"    " + htmlMeta + ""+EOL+"</head>");
+                                    .replaceFirst("$0" + eol + "<head>" + eol + "    " + htmlMeta
+                                            + eol + "</head>");
                         } else {
-                            contents = "<html>"+EOL+"<head>"+EOL+"    " + htmlMeta + EOL+"</head>"+EOL+ contents;
+                            contents = "<html>" + eol + "<head>" + eol + "    " + htmlMeta + eol + "</head>" + eol
+                                    + contents;
                         }
                     }
                 }

@@ -40,7 +40,7 @@ public final class QuickAccess implements IMenuPreferece {
         UIDesignManager.addMenuUIPreference(new QuickAccess());
     }
 
-    public static void unloadPlugins(){
+    public static void unloadPlugins() {
     }
 
     @Override

@@ -747,7 +747,7 @@ public class Language implements Comparable<Object> {
     /**
      * Returns true if two languages have the same language and country (eg.
      * fr-FR / fr-FR).
-     * 
+     *
      * Note that it is slightly different than <code>Language.equals()</code>
      * because of the possible use of BCP47 tags (eg. en-GB-x-ulster /
      * en-GB-x-scotland)

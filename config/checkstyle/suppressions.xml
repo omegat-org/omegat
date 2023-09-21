@@ -49,17 +49,26 @@
     <suppress checks="WhitespaceAround"
             files="(StatisticsWindow|AlignPanel|EditingPanel|AlignMenuFrame|FilterBarSearch|EditingBehaviorPanel)\.java"/>
 
+    <!-- interfaces -->
+    <suppress files="IParseCallback\.java" checks="ParameterNumber"/>
+
     <!-- filters and Dialog forms -->
-    <suppress files=".*Dialog\.java"
+    <suppress files=".*(Dialog|Panel)\.java"
               checks="(DesignForExtension|MagicNumber|MemberName|WhitespaceAround)"/>
     <suppress files=".*Filter\.java"
               checks="(DesignForExtension|MagicNumber)"/>
+    <suppress checks="WhitespaceAround"
+            files="(AlignFilePicker|InstanceEditor|CreateGlossaryEntry|NewTeamProject|FilenamePatternsEditor|FilterEditor|SegmentPropertiesListCell|FilterBarReplace|ProjectFilesList|SearchWindowForm)\.java"
+    />
 
     <!-- PluginInformation.java -->
     <suppress files="PluginInformation\.java" checks="NeedBraces" lines="167-192"/>
 
     <!-- SearchResultEntry.java -->
     <suppress checks="(MemberName|MissingSwitchDefault|ParameterNumber)" files="SearchResultEntry\.java"/>
+
+    <suppress files="StaticUtils\.java" checks="EmptyStatement" lines="158,162,549"/>
+    <suppress files="PatternConsts\.java" checks="LineLength" lines="50,259,294"/>
 
     <!-- tests -->
     <suppress checks="(MethodName|MemberName|OperatorWrap)" files=".*Test\.java"/>

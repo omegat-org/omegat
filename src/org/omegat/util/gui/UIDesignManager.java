@@ -101,7 +101,7 @@ public final class UIDesignManager {
                 if (o instanceof IMenuPreferece) {
                     IMenuPreferece pref = (IMenuPreferece) o;
                     String menuUIClassName = pref.getMenuUIClassName();
-                    Class<?> clazz =classLoader.loadClass(menuUIClassName);
+                    Class<?> clazz = classLoader.loadClass(menuUIClassName);
                     if (BaseMainWindowMenu.class.isAssignableFrom(clazz)) {
                         UIManager.put(menuClassID, clazz);
                     }

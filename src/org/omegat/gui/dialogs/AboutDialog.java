@@ -120,7 +120,8 @@ public class AboutDialog extends JDialog {
     private String getVersionString() {
         if (!StringUtil.isEmpty(OStrings.UPDATE) && !OStrings.UPDATE.equals("0")) {
             return StringUtil.format(OStrings.getString("ABOUTDIALOG_BRAND_VERSION_UPDATE_REVISION"),
-                    OStrings.getApplicationDisplayName(),OStrings.VERSION, OStrings.UPDATE, OStrings.REVISION);
+                    OStrings.getApplicationDisplayName(), OStrings.VERSION, OStrings.UPDATE,
+                    OStrings.REVISION);
         } else {
             return StringUtil.format(OStrings.getString("ABOUTDIALOG_BRAND_VERSION_REVISION"),
                     OStrings.getApplicationDisplayName(), OStrings.VERSION, OStrings.REVISION);

@@ -248,10 +248,10 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
             Language source = null;
             Language target = null;
             ProjectProperties pp = Core.getProject().getProjectProperties();
-            if (pp != null){
+            if (pp != null) {
                  source = pp.getSourceLanguage();
                  target = pp.getTargetLanguage();
-             }
+            }
             if (source == null || target == null) {
                 return null;
             }

@@ -87,14 +87,16 @@ public final class UIScale {
     private static PropertyChangeSupport changeSupport;
 
     public static void addPropertyChangeListener(PropertyChangeListener listener) {
-        if (changeSupport == null)
+        if (changeSupport == null) {
             changeSupport = new PropertyChangeSupport(UIScale.class);
+        }
         changeSupport.addPropertyChangeListener(listener);
     }
 
     public static void removePropertyChangeListener(PropertyChangeListener listener) {
-        if (changeSupport == null)
+        if (changeSupport == null) {
             return;
+        }
         changeSupport.removePropertyChangeListener(listener);
     }
 
@@ -134,8 +136,9 @@ public final class UIScale {
                 case "lookAndFeel":
                     // it is not necessary (and possible) to remove listener of
                     // old LaF defaults
-                    if (e.getNewValue() instanceof LookAndFeel)
+                    if (e.getNewValue() instanceof LookAndFeel) {
                         UIManager.getLookAndFeelDefaults().addPropertyChangeListener(this);
+                    }
                     updateScaleFactor();
                     break;
 
@@ -159,8 +162,9 @@ public final class UIScale {
         // that a larger font size is set by the current LaF
         // (e.g., can avoid large icons with small text)
         Font font = UIManager.getFont("defaultFont");
-        if (font == null)
+        if (font == null) {
             font = UIManager.getFont("Label.font");
+        }
 
         setUserScaleFactor(computeFontScaleFactor(font));
     }

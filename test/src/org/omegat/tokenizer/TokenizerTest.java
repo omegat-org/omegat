@@ -38,22 +38,22 @@ public class TokenizerTest {
     public void testEnglish() {
         ITokenizer tok = new LuceneEnglishTokenizer();
         String orig = "The quick, brown <x0/> jumped over 1 \"lazy\" dog.";
-        assertVerbatim(new String[] { "The", " ", "quick", ",", " ", "brown", " ", "<x0/>", " ",
-                "jumped", " ", "over", " ", "1", " ", "\"", "lazy", "\"", " ", "dog", "." },
-                tok.tokenizeVerbatimToStrings(orig),
-                tok.tokenizeVerbatim(orig),
-                orig);
+        assertVerbatim(
+                new String[] { "The", " ", "quick", ",", " ", "brown", " ", "<x0/>", " ", "jumped", " ",
+                        "over", " ", "1", " ", "\"", "lazy", "\"", " ", "dog", "." },
+                tok.tokenizeVerbatimToStrings(orig), tok.tokenizeVerbatim(orig), orig);
         assertResult(new String[] { "The", "quick", "brown", "jumped", "over", "lazy", "dog" },
                 tok.tokenizeWordsToStrings(orig, StemmingMode.NONE));
-        assertResult(new String[] { "the", "quick", "brown", "x0", "jump", "jumped", "over", "1", "lazi", "lazy",
-                        "dog" }, tok.tokenizeWordsToStrings(orig, StemmingMode.GLOSSARY));
+        assertResult(new String[] { "the", "quick", "brown", "x0", "jump", "jumped", "over", "1", "lazi",
+                "lazy", "dog" }, tok.tokenizeWordsToStrings(orig, StemmingMode.GLOSSARY));
         assertResult(new String[] { "quick", "brown", "jump", "jumped", "over", "lazi", "lazy", "dog" },
                 tok.tokenizeWordsToStrings(orig, StemmingMode.MATCHING));
     }
 
     /**
      * LuceneJapaneseTokenizer includes two customizations that warrant testing:
-     * <ol><li>Special removal of tags (e.g. &lt;x0/>) when stemming
+     * <ol>
+     * <li>Special removal of tags (e.g. &lt;x0/>) when stemming
      * <li>Re-joining of tags when doing verbatim or non-stemming tokenizing
      * </ol>
      */
@@ -64,48 +64,49 @@ public class TokenizerTest {
                 + "\u661F\uFF08\u82F1\uFF1A\u300Ca planet\u300D\uFF09\u306B\u4F4F\u307F\u3001\u6211"
                 + "\u3005\u306E\u3059\u3079\u3066\u306F\u305D\u306E\u751F\u7269\u570F\u306E1.5\u90E8"
                 + "\u3067\u3042\u308B<x0/>\u3002";
-        assertVerbatim(new String[] { "\u6211\u3005", "\u306E", "\u3059\u3079\u3066", "\u306F", "\u540C\u3058",
-                "\uFF11", "\u500B", "\u306E", "\u60D1\u661F", "\uFF08", "\u82F1", "\uFF1A", "\u300C", "a",
-                " ", "planet", "\u300D", "\uFF09", "\u306B", "\u4F4F\u307F", "\u3001", "\u6211\u3005", "\u306E",
-                "\u3059\u3079\u3066", "\u306F", "\u305D\u306E", "\u751F\u7269", "\u570F", "\u306E", "1", ".", "5",
-                "\u90E8", "\u3067", "\u3042\u308B", "<x0/>", "\u3002" },
-                tok.tokenizeVerbatimToStrings(orig),
-                tok.tokenizeVerbatim(orig),
-                orig);
-        assertResult(new String[] { "\u6211\u3005", "\u306E", "\u3059\u3079\u3066", "\u306F", "\u540C\u3058",
-                "\u500B", "\u306E", "\u60D1\u661F", "\uFF08", "\u82F1", "\uFF1A", "\u300C", "a", "planet",
-                "\u300D", "\uFF09", "\u306B", "\u4F4F\u307F", "\u3001", "\u6211\u3005", "\u306E",
-                "\u3059\u3079\u3066", "\u306F", "\u305D\u306E", "\u751F\u7269", "\u570F", "\u306E", ".",
-                "\u90E8", "\u3067", "\u3042\u308B", "\u3002" },
+        assertVerbatim(new String[] { "\u6211\u3005", "\u306E", "\u3059\u3079\u3066", "\u306F",
+                "\u540C\u3058", "\uFF11", "\u500B", "\u306E", "\u60D1\u661F", "\uFF08", "\u82F1", "\uFF1A",
+                "\u300C", "a", " ", "planet", "\u300D", "\uFF09", "\u306B", "\u4F4F\u307F", "\u3001",
+                "\u6211\u3005", "\u306E", "\u3059\u3079\u3066", "\u306F", "\u305D\u306E", "\u751F\u7269",
+                "\u570F", "\u306E", "1", ".", "5", "\u90E8", "\u3067", "\u3042\u308B", "<x0/>", "\u3002" },
+                tok.tokenizeVerbatimToStrings(orig), tok.tokenizeVerbatim(orig), orig);
+        assertResult(
+                new String[] { "\u6211\u3005", "\u306E", "\u3059\u3079\u3066", "\u306F", "\u540C\u3058",
+                        "\u500B", "\u306E", "\u60D1\u661F", "\uFF08", "\u82F1", "\uFF1A", "\u300C", "a",
+                        "planet", "\u300D", "\uFF09", "\u306B", "\u4F4F\u307F", "\u3001", "\u6211\u3005",
+                        "\u306E", "\u3059\u3079\u3066", "\u306F", "\u305D\u306E", "\u751F\u7269", "\u570F",
+                        "\u306E", ".", "\u90E8", "\u3067", "\u3042\u308B", "\u3002" },
                 tok.tokenizeWordsToStrings(orig, StemmingMode.NONE));
-        assertResult(new String[] { "\u6211\u3005", "\u306E", "\u3059\u3079\u3066", "\u306F", "\u540C\u3058",
-                "1", "\uFF11", "\u500B", "\u306E", "\u60D1\u661F", "\u82F1", "a", "planet", "\u306B", "\u4F4F\u3080",
-                "\u4F4F\u307F", "\u6211\u3005", "\u306E", "\u3059\u3079\u3066", "\u306F", "\u305D\u306E",
-                "\u751F\u7269", "\u570F", "\u306E", "1", "5", "\u90E8", "\u3060", "\u3067", "\u3042\u308B" },
+        assertResult(
+                new String[] { "\u6211\u3005", "\u306E", "\u3059\u3079\u3066", "\u306F", "\u540C\u3058", "1",
+                        "\uFF11", "\u500B", "\u306E", "\u60D1\u661F", "\u82F1", "a", "planet", "\u306B",
+                        "\u4F4F\u3080", "\u4F4F\u307F", "\u6211\u3005", "\u306E", "\u3059\u3079\u3066",
+                        "\u306F", "\u305D\u306E", "\u751F\u7269", "\u570F", "\u306E", "1", "5", "\u90E8",
+                        "\u3060", "\u3067", "\u3042\u308B" },
                 tok.tokenizeWordsToStrings(orig, StemmingMode.GLOSSARY));
-        assertResult(new String[] { "\u6211\u3005", "\u3059\u3079\u3066", "\u540C\u3058", "\u500B",
-                "\u60D1\u661F", "\u82F1", "a", "planet", "\u4F4F\u3080", "\u4F4F\u307F", "\u6211\u3005",
-                "\u3059\u3079\u3066", "\u751F\u7269", "\u570F", "\u90E8" },
+        assertResult(
+                new String[] { "\u6211\u3005", "\u3059\u3079\u3066", "\u540C\u3058", "\u500B", "\u60D1\u661F",
+                        "\u82F1", "a", "planet", "\u4F4F\u3080", "\u4F4F\u307F", "\u6211\u3005",
+                        "\u3059\u3079\u3066", "\u751F\u7269", "\u570F", "\u90E8" },
                 tok.tokenizeWordsToStrings(orig, StemmingMode.MATCHING));
 
         // Check for TagJoiningFilter
         orig = "<x0/>\u3042</x0>\u300C<x1/>\u300D<x2/>\u3002<foo bar 123";
-        assertVerbatim(new String[] { "<x0/>", "\u3042", "</x0>", "\u300C", "<x1/>", "\u300D", "<x2/>", "\u3002",
-                "<", "foo", " ", "bar", " ", "123" },
-                tok.tokenizeVerbatimToStrings(orig),
-                tok.tokenizeVerbatim(orig),
-                orig);
+        assertVerbatim(
+                new String[] { "<x0/>", "\u3042", "</x0>", "\u300C", "<x1/>", "\u300D", "<x2/>", "\u3002",
+                        "<", "foo", " ", "bar", " ", "123" },
+                tok.tokenizeVerbatimToStrings(orig), tok.tokenizeVerbatim(orig), orig);
         // Check for tag removal
         assertResult(new String[] { "\u3042", "foo", "bar" },
                 tok.tokenizeWordsToStrings(orig, StemmingMode.MATCHING));
     }
 
     /**
-     * Turkish warrants special testing because it has the letter \u0130
-     * (LATIN CAPITAL LETTER I WITH DOT ABOVE); the result (both content
-     * and length) of performing <code>"\u0130".toLowerCase()</code> depends
-     * on the default Locale, and in the past there were issues with improper
-     * lowercasing during tokenization leading to OOB exceptions.
+     * Turkish warrants special testing because it has the letter \u0130 (LATIN
+     * CAPITAL LETTER I WITH DOT ABOVE); the result (both content and length) of
+     * performing <code>"\u0130".toLowerCase()</code> depends on the default
+     * Locale, and in the past there were issues with improper lowercasing
+     * during tokenization leading to OOB exceptions.
      * <p>
      * Text from https://tr.wikipedia.org/wiki/T%C3%BCrk%C3%A7e
      */
@@ -115,35 +116,32 @@ public class TokenizerTest {
         String orig = "\u201C\u0130stanbul a\u011Fz\u0131\u201D, T\u00FCrkiye T\u00FCrk\u00E7esi"
                 + "yaz\u0131 dilinin kayna\u011F\u0131 olarak kabul edilir; yaz\u0131 dili bu"
                 + "a\u011F\u0131z temelinde olu\u015Fmu\u015Ftur.";
-        assertVerbatim(new String[] { "\u201C", "\u0130stanbul", " ", "a\u011Fz\u0131", "\u201D",
-                ",", " ", "T\u00FCrkiye", " ", "T\u00FCrk\u00E7esiyaz\u0131", " ", "dilinin", " ",
-                "kayna\u011F\u0131", " ", "olarak", " ", "kabul", " ", "edilir", ";", " ", "yaz\u0131",
-                " ", "dili", " ", "bua\u011F\u0131z", " ", "temelinde", " ", "olu\u015Fmu\u015Ftur", "." },
-                tok.tokenizeVerbatimToStrings(orig),
-                tok.tokenizeVerbatim(orig),
-                orig);
+        assertVerbatim(new String[] { "\u201C", "\u0130stanbul", " ", "a\u011Fz\u0131", "\u201D", ",", " ",
+                "T\u00FCrkiye", " ", "T\u00FCrk\u00E7esiyaz\u0131", " ", "dilinin", " ", "kayna\u011F\u0131",
+                " ", "olarak", " ", "kabul", " ", "edilir", ";", " ", "yaz\u0131", " ", "dili", " ",
+                "bua\u011F\u0131z", " ", "temelinde", " ", "olu\u015Fmu\u015Ftur", "." },
+                tok.tokenizeVerbatimToStrings(orig), tok.tokenizeVerbatim(orig), orig);
         assertResult(new String[] { "\u0130stanbul", "a\u011Fz\u0131", "T\u00FCrkiye",
-                "T\u00FCrk\u00E7esiyaz\u0131", "dilinin", "kayna\u011F\u0131", "olarak",
-                "kabul", "edilir", "yaz\u0131", "dili", "bua\u011F\u0131z", "temelinde",
-                "olu\u015Fmu\u015Ftur" },
+                "T\u00FCrk\u00E7esiyaz\u0131", "dilinin", "kayna\u011F\u0131", "olarak", "kabul", "edilir",
+                "yaz\u0131", "dili", "bua\u011F\u0131z", "temelinde", "olu\u015Fmu\u015Ftur" },
                 tok.tokenizeWordsToStrings(orig, StemmingMode.NONE));
         assertResult(new String[] { "istanbul", "a\u011Fz\u0131", "t\u00FCrki", "T\u00FCrkiye",
-                "t\u00FCrk\u00E7esiyaz", "T\u00FCrk\u00E7esiyaz\u0131", "dil", "dilinin",
-                "kaynak", "kayna\u011F\u0131", "olarak", "kabul", "edilir", "yaz", "yaz\u0131",
-                "dil", "dili", "buak", "bua\u011F\u0131z", "temel", "temelinde", "olu\u015F",
-                "olu\u015Fmu\u015Ftur" },
+                "t\u00FCrk\u00E7esiyaz", "T\u00FCrk\u00E7esiyaz\u0131", "dil", "dilinin", "kaynak",
+                "kayna\u011F\u0131", "olarak", "kabul", "edilir", "yaz", "yaz\u0131", "dil", "dili", "buak",
+                "bua\u011F\u0131z", "temel", "temelinde", "olu\u015F", "olu\u015Fmu\u015Ftur" },
                 tok.tokenizeWordsToStrings(orig, StemmingMode.GLOSSARY));
-        assertResult(new String[] { "istanbul", "a\u011Fz\u0131", "t\u00FCrki", "T\u00FCrkiye",
-                "t\u00FCrk\u00E7esiyaz", "T\u00FCrk\u00E7esiyaz\u0131", "dil", "dilinin",
-                "kaynak", "kayna\u011F\u0131", "kabul", "edilir", "yaz", "yaz\u0131",
-                "dil", "dili", "buak", "bua\u011F\u0131z", "temel", "temelinde", "olu\u015F",
-                "olu\u015Fmu\u015Ftur" },
+        assertResult(
+                new String[] { "istanbul", "a\u011Fz\u0131", "t\u00FCrki", "T\u00FCrkiye",
+                        "t\u00FCrk\u00E7esiyaz", "T\u00FCrk\u00E7esiyaz\u0131", "dil", "dilinin", "kaynak",
+                        "kayna\u011F\u0131", "kabul", "edilir", "yaz", "yaz\u0131", "dil", "dili", "buak",
+                        "bua\u011F\u0131z", "temel", "temelinde", "olu\u015F", "olu\u015Fmu\u015Ftur" },
                 tok.tokenizeWordsToStrings(orig, StemmingMode.MATCHING));
     }
 
     /**
-     * Chinese tends to have very few character boundaries breakable by BreakIterator,
-     * so LuceneSmartChineseTokenizer tokenizes by code point for verbatim tokenizing.
+     * Chinese tends to have very few character boundaries breakable by
+     * BreakIterator, so LuceneSmartChineseTokenizer tokenizes by code point for
+     * verbatim tokenizing.
      * <p>
      * Text from https://zh.wikipedia.org/wiki/%E6%B1%89%E8%AF%AD
      */
@@ -153,30 +151,27 @@ public class TokenizerTest {
         String orig = "\u6F22\u8A9E\u7684\u6587\u5B57\u7CFB\u7D71\u2014\u2014\u6F22\u5B57\u662F"
                 + "\u4E00\u7A2E\u610F\u97F3\u8A9E\u8A00\uFF0C\u8868\u610F\u7684\u540C\u6642\u4E5F"
                 + "\u5177\u4E00\u5B9A\u7684\u8868\u97F3\u529F\u80FD\u3002";
-        assertVerbatim(new String[] { "\u6F22", "\u8A9E", "\u7684", "\u6587", "\u5B57", "\u7CFB",
-                "\u7D71", "\u2014", "\u2014", "\u6F22", "\u5B57", "\u662F", "\u4E00", "\u7A2E",
-                "\u610F", "\u97F3", "\u8A9E", "\u8A00", "\uFF0C", "\u8868", "\u610F", "\u7684",
-                "\u540C", "\u6642", "\u4E5F", "\u5177", "\u4E00", "\u5B9A", "\u7684", "\u8868",
-                "\u97F3", "\u529F", "\u80FD", "\u3002" },
-                tok.tokenizeVerbatimToStrings(orig),
-                tok.tokenizeVerbatim(orig),
-                orig);
-        assertResult(new String[] { "\u6F22", "\u8A9E", "\u7684", "\u6587\u5B57", "\u7CFB",
-                "\u7D71", ",", ",", "\u6F22", "\u5B57", "\u662F", "\u4E00", "\u7A2E",
-                "\u610F", "\u97F3", "\u8A9E", "\u8A00", ",", "\u8868\u610F", "\u7684",
-                "\u540C", "\u6642", "\u4E5F", "\u5177", "\u4E00\u5B9A", "\u7684", "\u8868\u97F3",
-                "\u529F\u80FD", "," },
+        assertVerbatim(new String[] { "\u6F22", "\u8A9E", "\u7684", "\u6587", "\u5B57", "\u7CFB", "\u7D71",
+                "\u2014", "\u2014", "\u6F22", "\u5B57", "\u662F", "\u4E00", "\u7A2E", "\u610F", "\u97F3",
+                "\u8A9E", "\u8A00", "\uFF0C", "\u8868", "\u610F", "\u7684", "\u540C", "\u6642", "\u4E5F",
+                "\u5177", "\u4E00", "\u5B9A", "\u7684", "\u8868", "\u97F3", "\u529F", "\u80FD", "\u3002" },
+                tok.tokenizeVerbatimToStrings(orig), tok.tokenizeVerbatim(orig), orig);
+        assertResult(
+                new String[] { "\u6F22", "\u8A9E", "\u7684", "\u6587\u5B57", "\u7CFB", "\u7D71", ",", ",",
+                        "\u6F22", "\u5B57", "\u662F", "\u4E00", "\u7A2E", "\u610F", "\u97F3", "\u8A9E",
+                        "\u8A00", ",", "\u8868\u610F", "\u7684", "\u540C", "\u6642", "\u4E5F", "\u5177",
+                        "\u4E00\u5B9A", "\u7684", "\u8868\u97F3", "\u529F\u80FD", "," },
                 tok.tokenizeWordsToStrings(orig, StemmingMode.NONE));
-        assertResult(new String[] { "\u6F22", "\u8A9E", "\u7684", "\u6587\u5B57", "\u7CFB",
-                "\u7D71", ",", "\u2014", ",", "\u2014", "\u6F22", "\u5B57", "\u662F", "\u4E00",
-                "\u7A2E", "\u610F", "\u97F3", "\u8A9E", "\u8A00", ",", "\uFF0C", "\u8868\u610F",
-                "\u7684", "\u540C", "\u6642", "\u4E5F", "\u5177", "\u4E00\u5B9A", "\u7684",
-                "\u8868\u97F3", "\u529F\u80FD", ",", "\u3002" },
+        assertResult(new String[] { "\u6F22", "\u8A9E", "\u7684", "\u6587\u5B57", "\u7CFB", "\u7D71", ",",
+                "\u2014", ",", "\u2014", "\u6F22", "\u5B57", "\u662F", "\u4E00", "\u7A2E", "\u610F", "\u97F3",
+                "\u8A9E", "\u8A00", ",", "\uFF0C", "\u8868\u610F", "\u7684", "\u540C", "\u6642", "\u4E5F",
+                "\u5177", "\u4E00\u5B9A", "\u7684", "\u8868\u97F3", "\u529F\u80FD", ",", "\u3002" },
                 tok.tokenizeWordsToStrings(orig, StemmingMode.GLOSSARY));
-        assertResult(new String[] { "\u6F22", "\u8A9E", "\u7684", "\u6587\u5B57", "\u7CFB",
-                "\u7D71", "\u6F22", "\u5B57", "\u662F", "\u4E00", "\u7A2E", "\u610F", "\u97F3",
-                "\u8A9E", "\u8A00", "\u8868\u610F", "\u7684", "\u540C", "\u6642", "\u4E5F",
-                "\u5177", "\u4E00\u5B9A", "\u7684", "\u8868\u97F3", "\u529F\u80FD" },
+        assertResult(
+                new String[] { "\u6F22", "\u8A9E", "\u7684", "\u6587\u5B57", "\u7CFB", "\u7D71", "\u6F22",
+                        "\u5B57", "\u662F", "\u4E00", "\u7A2E", "\u610F", "\u97F3", "\u8A9E", "\u8A00",
+                        "\u8868\u610F", "\u7684", "\u540C", "\u6642", "\u4E5F", "\u5177", "\u4E00\u5B9A",
+                        "\u7684", "\u8868\u97F3", "\u529F\u80FD" },
                 tok.tokenizeWordsToStrings(orig, StemmingMode.MATCHING));
     }
 
@@ -188,7 +183,9 @@ public class TokenizerTest {
      * @see <a href=
      *      "https://groups.yahoo.com/neo/groups/OmegaT/conversations/messages/28395">
      *      User group discussion</a>
-     * @see <a href="https://sourceforge.net/p/omegat/mailman/message/36839317/">Sourceforge archive</a>
+     * @see <a href=
+     *      "https://sourceforge.net/p/omegat/mailman/message/36839317/">Sourceforge
+     *      archive</a>
      */
     @Test
     public void testGerman() {
@@ -211,20 +208,22 @@ public class TokenizerTest {
         ITokenizer tok = new DefaultTokenizer();
         String orig = "The quick, brown <x0/> jumped over 1 \"lazy\" \u0130stanbul. "
                 + "\u65E5\u672C\u8A9E\u3042\u3044\u3046\u3048\u304A\u3002";
-        assertVerbatim(new String[] { "The", " ", "quick", ",", " ", "brown", " ", "<x0/>", " ",
-                "jumped", " ", "over", " ", "1", " ", "\"", "lazy", "\"", " ", "\u0130stanbul", ".",
-                " ", "\u65E5\u672C\u8A9E", "\u3042\u3044\u3046\u3048\u304A", "\u3002" },
-                tok.tokenizeVerbatimToStrings(orig),
-                tok.tokenizeVerbatim(orig),
-                orig);
-        assertResult(new String[] { "The", "quick", "brown", "jumped", "over", "lazy", "\u0130stanbul",
-                "\u65E5\u672C\u8A9E", "\u3042\u3044\u3046\u3048\u304A" },
+        assertVerbatim(
+                new String[] { "The", " ", "quick", ",", " ", "brown", " ", "<x0/>", " ", "jumped", " ",
+                        "over", " ", "1", " ", "\"", "lazy", "\"", " ", "\u0130stanbul", ".", " ",
+                        "\u65E5\u672C\u8A9E", "\u3042\u3044\u3046\u3048\u304A", "\u3002" },
+                tok.tokenizeVerbatimToStrings(orig), tok.tokenizeVerbatim(orig), orig);
+        assertResult(
+                new String[] { "The", "quick", "brown", "jumped", "over", "lazy", "\u0130stanbul",
+                        "\u65E5\u672C\u8A9E", "\u3042\u3044\u3046\u3048\u304A" },
                 tok.tokenizeWordsToStrings(orig, StemmingMode.NONE));
-        assertResult(new String[] { "The", "quick", "brown", "jumped", "over", "lazy", "\u0130stanbul",
-                "\u65E5\u672C\u8A9E", "\u3042\u3044\u3046\u3048\u304A" },
+        assertResult(
+                new String[] { "The", "quick", "brown", "jumped", "over", "lazy", "\u0130stanbul",
+                        "\u65E5\u672C\u8A9E", "\u3042\u3044\u3046\u3048\u304A" },
                 tok.tokenizeWordsToStrings(orig, StemmingMode.GLOSSARY));
-        assertResult(new String[] { "The", "quick", "brown", "jumped", "over", "lazy", "\u0130stanbul",
-                "\u65E5\u672C\u8A9E", "\u3042\u3044\u3046\u3048\u304A" },
+        assertResult(
+                new String[] { "The", "quick", "brown", "jumped", "over", "lazy", "\u0130stanbul",
+                        "\u65E5\u672C\u8A9E", "\u3042\u3044\u3046\u3048\u304A" },
                 tok.tokenizeWordsToStrings(orig, StemmingMode.MATCHING));
     }
 
@@ -238,12 +237,12 @@ public class TokenizerTest {
     }
 
     private void assertResult(String[] expected, String[] test) {
-//        for (String s : test) {
-//            System.out.print('"');
-//            System.out.print(s.replace("\"", "\\\""));
-//            System.out.print("\", ");
-//        }
-//        System.out.print('\n');
+        // for (String s : test) {
+        // System.out.print('"');
+        // System.out.print(s.replace("\"", "\\\""));
+        // System.out.print("\", ");
+        // }
+        // System.out.print('\n');
         assertEquals(expected.length, test.length);
         for (int i = 0; i < expected.length; i++) {
             assertEquals(expected[i], test[i]);

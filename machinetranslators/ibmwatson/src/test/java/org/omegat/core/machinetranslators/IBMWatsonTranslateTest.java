@@ -57,8 +57,7 @@ public class IBMWatsonTranslateTest extends TestCoreWireMock {
         String trText = "Translation text.";
         String json = ibmWatsonTranslate.createJsonRequest(sLang, tLang, trText);
         ObjectMapper mapper = new ObjectMapper();
-        String expected =
-                "{\"model_id\":\"MODEL\",\"source\":\"EN\",\"target\":\"FR\",\"text\":[\"Translation text.\"]}";
+        String expected = "{\"model_id\":\"MODEL\",\"source\":\"EN\",\"target\":\"FR\",\"text\":[\"Translation text.\"]}";
         assertEquals(mapper.readTree(expected), mapper.readTree(json));
     }
 

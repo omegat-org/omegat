@@ -47,10 +47,11 @@ import org.omegat.util.PatternConsts;
  * XML header). Next it writes out to the file.
  * <p>
  * Note that if <code>encoding</code> parameter of the
- * {@link #HTMLWriter(String, String, HTMLOptions) constructor} is null, no encoding
- * declaration is added, and the file is written in OS-default encoding. This is
- * done to fix a bug <a href="https://sourceforge.net/p/omegat/bugs/101/">[1.6
- * RC2] Bug with Target Encoding set to &lt;auto&gt; for (x)HTML</a>.
+ * {@link #HTMLWriter(String, String, HTMLOptions) constructor} is null, no
+ * encoding declaration is added, and the file is written in OS-default
+ * encoding. This is done to fix a bug
+ * <a href="https://sourceforge.net/p/omegat/bugs/101/">[1.6 RC2] Bug with
+ * Target Encoding set to &lt;auto&gt; for (x)HTML</a>.
  *
  * @author Maxym Mykhalchuk
  */
@@ -83,8 +84,8 @@ public class HTMLWriter extends Writer {
      *            - the encoding to write HTML file in (null means OS-default
      *            encoding)
      */
-    public HTMLWriter(String fileName, String encoding, HTMLOptions options) throws FileNotFoundException,
-            UnsupportedEncodingException {
+    public HTMLWriter(String fileName, String encoding, HTMLOptions options)
+            throws FileNotFoundException, UnsupportedEncodingException {
         this.encoding = encoding;
 
         this.options = options;
@@ -101,7 +102,9 @@ public class HTMLWriter extends Writer {
         realWriter = new BufferedWriter(osw);
     }
 
-    /** The minimal size of already written HTML that will be appended headers */
+    /**
+     * The minimal size of already written HTML that will be appended headers
+     */
     private static final int MIN_HEADERED_BUFFER_SIZE = 4096;
 
     /** The maximal size of a buffer before flush */
@@ -184,12 +187,11 @@ public class HTMLWriter extends Writer {
                     } else if (options.getRewriteEncoding() != HTMLOptions.REWRITE_MODE.IFHEADER) {
                         Matcher matcherHtml = PatternConsts.HTML_HTML.matcher(contents);
                         if (matcherHtml.find()) {
-                            contents = matcherHtml
-                                    .replaceFirst("$0" + eol + "<head>" + eol + "    " + htmlMeta
-                                            + eol + "</head>");
+                            contents = matcherHtml.replaceFirst(
+                                    "$0" + eol + "<head>" + eol + "    " + htmlMeta + eol + "</head>");
                         } else {
-                            contents = "<html>" + eol + "<head>" + eol + "    " + htmlMeta + eol + "</head>" + eol
-                                    + contents;
+                            contents = "<html>" + eol + "<head>" + eol + "    " + htmlMeta + eol + "</head>"
+                                    + eol + contents;
                         }
                     }
                 }

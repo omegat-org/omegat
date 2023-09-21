@@ -107,10 +107,12 @@ public class NewTeamProjectController {
             public void insertUpdate(DocumentEvent e) {
                 clearRepo();
             }
+
             @Override
             public void removeUpdate(DocumentEvent e) {
                 clearRepo();
             }
+
             @Override
             public void changedUpdate(DocumentEvent e) {
                 clearRepo();
@@ -135,10 +137,12 @@ public class NewTeamProjectController {
             public void removeUpdate(DocumentEvent e) {
                 updateDialog();
             }
+
             @Override
             public void insertUpdate(DocumentEvent e) {
                 updateDialog();
             }
+
             @Override
             public void changedUpdate(DocumentEvent e) {
                 updateDialog();
@@ -192,7 +196,8 @@ public class NewTeamProjectController {
             repoType = "svn";
             suggestLocalFolder();
         } else {
-            dialog.detectedRepoOrProjectFileLabel.setText(OStrings.getString("TEAM_DETECTING_REPO_OR_PROJECT_FILE"));
+            dialog.detectedRepoOrProjectFileLabel
+                    .setText(OStrings.getString("TEAM_DETECTING_REPO_OR_PROJECT_FILE"));
             repoTypeWorker = new RepoTypeWorker(url);
             repoTypeWorker.execute();
         }
@@ -220,7 +225,8 @@ public class NewTeamProjectController {
         }
         String url = dialog.txtRepositoryOrProjectFileURL.getText().trim();
         String strippedUrl = StringUtil.stripFromEnd(url, ".git", "/", "trunk", "/", "svn");
-        String dir = Preferences.getPreferenceDefault(Preferences.CURRENT_FOLDER, System.getProperty("user.home"));
+        String dir = Preferences.getPreferenceDefault(Preferences.CURRENT_FOLDER,
+                System.getProperty("user.home"));
         File suggestion = new File(dir, new File(strippedUrl).getName()).getAbsoluteFile();
         dialog.txtDirectory.setText(ensureUniquePath(suggestion).getPath());
     }
@@ -258,7 +264,8 @@ public class NewTeamProjectController {
 
         @Override
         protected String doInBackground() throws Exception {
-            if ((url.startsWith("http://") || url.startsWith("https://")) && url.endsWith("/omegat.project")) {
+            if ((url.startsWith("http://") || url.startsWith("https://"))
+                    && url.endsWith("/omegat.project")) {
                 return detectProjectFile();
             }
             return RemoteRepositoryFactory.detectRepositoryType(url);

@@ -59,16 +59,14 @@ public class MozillaDTDFilterTest extends TestFilterBase {
     @Test
     public void testAlign() throws Exception {
         final AlignResult ar = new AlignResult();
-        align(new MozillaDTDFilter(), "MozillaDTD/file.dtd",
-                "MozillaDTD/file-be.dtd",
-                new IAlignCallback() {
-                    @Override
-                    public void addTranslation(final String id, final String source, final String translation,
-                                               final boolean isFuzzy, final String path, final IFilter filter) {
-                        ar.found |= id.equals("mainWindow.title") && source.equals("Title")
-                                && translation.equals("Title-be");
-                    }
-                });
+        align(new MozillaDTDFilter(), "MozillaDTD/file.dtd", "MozillaDTD/file-be.dtd", new IAlignCallback() {
+            @Override
+            public void addTranslation(final String id, final String source, final String translation,
+                    final boolean isFuzzy, final String path, final IFilter filter) {
+                ar.found |= id.equals("mainWindow.title") && source.equals("Title")
+                        && translation.equals("Title-be");
+            }
+        });
         assertTrue(ar.found);
     }
 }

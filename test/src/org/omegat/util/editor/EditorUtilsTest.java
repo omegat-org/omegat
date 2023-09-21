@@ -76,38 +76,59 @@ public class EditorUtilsTest {
 
         input = "lower case only";
         assertEquals(input, EditorUtils.doChangeCase(input, CHANGE_CASE_TO.LOWER, locale, tokenizer));
-        assertEquals("LOWER CASE ONLY", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.UPPER, locale, tokenizer));
-        assertEquals("Lower case only", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.SENTENCE, locale, tokenizer));
-        assertEquals("Lower Case Only", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.TITLE, locale, tokenizer));
-        assertEquals("Lower case only", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.CYCLE, locale, tokenizer));
+        assertEquals("LOWER CASE ONLY",
+                EditorUtils.doChangeCase(input, CHANGE_CASE_TO.UPPER, locale, tokenizer));
+        assertEquals("Lower case only",
+                EditorUtils.doChangeCase(input, CHANGE_CASE_TO.SENTENCE, locale, tokenizer));
+        assertEquals("Lower Case Only",
+                EditorUtils.doChangeCase(input, CHANGE_CASE_TO.TITLE, locale, tokenizer));
+        assertEquals("Lower case only",
+                EditorUtils.doChangeCase(input, CHANGE_CASE_TO.CYCLE, locale, tokenizer));
 
         input = "UPPER CASE ONLY";
-        assertEquals("upper case only", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.LOWER, locale, tokenizer));
+        assertEquals("upper case only",
+                EditorUtils.doChangeCase(input, CHANGE_CASE_TO.LOWER, locale, tokenizer));
         assertEquals(input, EditorUtils.doChangeCase(input, CHANGE_CASE_TO.UPPER, locale, tokenizer));
-        assertEquals("Upper case only", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.SENTENCE, locale, tokenizer));
-        assertEquals("Upper Case Only", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.TITLE, locale, tokenizer));
-        assertEquals("upper case only", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.CYCLE, locale, tokenizer));
+        assertEquals("Upper case only",
+                EditorUtils.doChangeCase(input, CHANGE_CASE_TO.SENTENCE, locale, tokenizer));
+        assertEquals("Upper Case Only",
+                EditorUtils.doChangeCase(input, CHANGE_CASE_TO.TITLE, locale, tokenizer));
+        assertEquals("upper case only",
+                EditorUtils.doChangeCase(input, CHANGE_CASE_TO.CYCLE, locale, tokenizer));
 
         input = "Title Case Only";
-        assertEquals("title case only", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.LOWER, locale, tokenizer));
-        assertEquals("TITLE CASE ONLY", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.UPPER, locale, tokenizer));
-        assertEquals("Title case only", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.SENTENCE, locale, tokenizer));
+        assertEquals("title case only",
+                EditorUtils.doChangeCase(input, CHANGE_CASE_TO.LOWER, locale, tokenizer));
+        assertEquals("TITLE CASE ONLY",
+                EditorUtils.doChangeCase(input, CHANGE_CASE_TO.UPPER, locale, tokenizer));
+        assertEquals("Title case only",
+                EditorUtils.doChangeCase(input, CHANGE_CASE_TO.SENTENCE, locale, tokenizer));
         assertEquals(input, EditorUtils.doChangeCase(input, CHANGE_CASE_TO.TITLE, locale, tokenizer));
-        assertEquals("TITLE CASE ONLY", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.CYCLE, locale, tokenizer));
+        assertEquals("TITLE CASE ONLY",
+                EditorUtils.doChangeCase(input, CHANGE_CASE_TO.CYCLE, locale, tokenizer));
 
         input = "Sentence case string";
-        assertEquals("sentence case string", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.LOWER, locale, tokenizer));
-        assertEquals("SENTENCE CASE STRING", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.UPPER, locale, tokenizer));
+        assertEquals("sentence case string",
+                EditorUtils.doChangeCase(input, CHANGE_CASE_TO.LOWER, locale, tokenizer));
+        assertEquals("SENTENCE CASE STRING",
+                EditorUtils.doChangeCase(input, CHANGE_CASE_TO.UPPER, locale, tokenizer));
         assertEquals(input, EditorUtils.doChangeCase(input, CHANGE_CASE_TO.SENTENCE, locale, tokenizer));
-        assertEquals("Sentence Case String", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.TITLE, locale, tokenizer));
-        assertEquals("Sentence Case String", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.CYCLE, locale, tokenizer));
+        assertEquals("Sentence Case String",
+                EditorUtils.doChangeCase(input, CHANGE_CASE_TO.TITLE, locale, tokenizer));
+        assertEquals("Sentence Case String",
+                EditorUtils.doChangeCase(input, CHANGE_CASE_TO.CYCLE, locale, tokenizer));
 
         input = "mIxed CaSe oNly";
-        assertEquals("mixed case only", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.LOWER, locale, tokenizer));
-        assertEquals("MIXED CASE ONLY", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.UPPER, locale, tokenizer));
-        assertEquals("Mixed case only", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.SENTENCE, locale, tokenizer));
-        assertEquals("Mixed Case Only", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.TITLE, locale, tokenizer));
-        assertEquals("MIXED CASE ONLY", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.CYCLE, locale, tokenizer));
+        assertEquals("mixed case only",
+                EditorUtils.doChangeCase(input, CHANGE_CASE_TO.LOWER, locale, tokenizer));
+        assertEquals("MIXED CASE ONLY",
+                EditorUtils.doChangeCase(input, CHANGE_CASE_TO.UPPER, locale, tokenizer));
+        assertEquals("Mixed case only",
+                EditorUtils.doChangeCase(input, CHANGE_CASE_TO.SENTENCE, locale, tokenizer));
+        assertEquals("Mixed Case Only",
+                EditorUtils.doChangeCase(input, CHANGE_CASE_TO.TITLE, locale, tokenizer));
+        assertEquals("MIXED CASE ONLY",
+                EditorUtils.doChangeCase(input, CHANGE_CASE_TO.CYCLE, locale, tokenizer));
 
         // Ambiguous only
         input = "A B C";
@@ -178,19 +199,26 @@ public class EditorUtilsTest {
 
         // Includes OmegaT tag
         input = "<g0>Foo</g0>";
-        assertEquals("<g0>foo</g0>", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.LOWER, locale, tokenizer));
-        assertEquals("<g0>FOO</g0>", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.UPPER, locale, tokenizer));
+        assertEquals("<g0>foo</g0>",
+                EditorUtils.doChangeCase(input, CHANGE_CASE_TO.LOWER, locale, tokenizer));
+        assertEquals("<g0>FOO</g0>",
+                EditorUtils.doChangeCase(input, CHANGE_CASE_TO.UPPER, locale, tokenizer));
         assertEquals(input, EditorUtils.doChangeCase(input, CHANGE_CASE_TO.SENTENCE, locale, tokenizer));
         assertEquals(input, EditorUtils.doChangeCase(input, CHANGE_CASE_TO.TITLE, locale, tokenizer));
-        assertEquals("<g0>FOO</g0>", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.CYCLE, locale, tokenizer));
+        assertEquals("<g0>FOO</g0>",
+                EditorUtils.doChangeCase(input, CHANGE_CASE_TO.CYCLE, locale, tokenizer));
 
         // Includes surrounding punctuation
         input = "\"Foo, Bar\"";
-        assertEquals("\"foo, bar\"", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.LOWER, locale, tokenizer));
-        assertEquals("\"FOO, BAR\"", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.UPPER, locale, tokenizer));
-        assertEquals("\"Foo, bar\"", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.SENTENCE, locale, tokenizer));
+        assertEquals("\"foo, bar\"",
+                EditorUtils.doChangeCase(input, CHANGE_CASE_TO.LOWER, locale, tokenizer));
+        assertEquals("\"FOO, BAR\"",
+                EditorUtils.doChangeCase(input, CHANGE_CASE_TO.UPPER, locale, tokenizer));
+        assertEquals("\"Foo, bar\"",
+                EditorUtils.doChangeCase(input, CHANGE_CASE_TO.SENTENCE, locale, tokenizer));
         assertEquals(input, EditorUtils.doChangeCase(input, CHANGE_CASE_TO.TITLE, locale, tokenizer));
-        assertEquals("\"FOO, BAR\"", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.CYCLE, locale, tokenizer));
+        assertEquals("\"FOO, BAR\"",
+                EditorUtils.doChangeCase(input, CHANGE_CASE_TO.CYCLE, locale, tokenizer));
     }
 
     @Test
@@ -210,7 +238,8 @@ public class EditorUtilsTest {
         assertNull(EditorUtils.replaceGlossaryEntries(null, entries, locale, tokenizer));
         assertEquals("", EditorUtils.replaceGlossaryEntries("", entries, locale, tokenizer));
         assertSame(srcText, EditorUtils.replaceGlossaryEntries(srcText, null, locale, tokenizer));
-        assertSame(srcText, EditorUtils.replaceGlossaryEntries(srcText, new ArrayList<>(), locale, tokenizer));
+        assertSame(srcText,
+                EditorUtils.replaceGlossaryEntries(srcText, new ArrayList<>(), locale, tokenizer));
         try {
             EditorUtils.replaceGlossaryEntries(srcText, entries, null, tokenizer);
             fail("Should give NPE when given null locale");

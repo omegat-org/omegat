@@ -63,6 +63,7 @@ import com.vlsolutions.swing.docking.ui.DockingUISettings;
 
 /**
  * UI Design Manager.
+ * 
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
  * @author Henry Pijffers
@@ -138,7 +139,8 @@ public final class UIDesignManager {
         DockableContainerFactory.setFactory(new CustomContainerFactory());
 
         // Set Look And Feel
-        String theme = Preferences.getPreferenceDefault(Preferences.THEME_CLASS_NAME, Preferences.THEME_CLASS_NAME_DEFAULT);
+        String theme = Preferences.getPreferenceDefault(Preferences.THEME_CLASS_NAME,
+                Preferences.THEME_CLASS_NAME_DEFAULT);
         setTheme(theme, mainClassLoader);
 
         String menuUI = Preferences.getPreference(Preferences.MENUUI_CLASS_NAME);
@@ -189,7 +191,8 @@ public final class UIDesignManager {
 
         // Panel notification (blinking tabs/headers) settings
         UIManager.put("DockingDesktop.notificationBlinkCount", 2);
-        UIManager.put("DockingDesktop.notificationColor", Styles.EditorColor.COLOR_NOTIFICATION_MAX.getColor());
+        UIManager.put("DockingDesktop.notificationColor",
+                Styles.EditorColor.COLOR_NOTIFICATION_MAX.getColor());
 
         ensureTitlebarReadability();
     }
@@ -198,10 +201,11 @@ public final class UIDesignManager {
         // to ensure DockViewTitleBar title readability
         Color textColor = UIManager.getColor("InternalFrame.inactiveTitleForeground");
         Color backColor = UIManager.getColor("Panel.background");
-        if (textColor != null && backColor != null) { // One of these could be null
+        if (textColor != null && backColor != null) { // One of these could be
+                                                      // null
             if (textColor.equals(backColor)) {
-                float[] hsb = Color.RGBtoHSB(textColor.getRed(),
-                        textColor.getGreen(), textColor.getBlue(), null);
+                float[] hsb = Color.RGBtoHSB(textColor.getRed(), textColor.getGreen(), textColor.getBlue(),
+                        null);
                 float brightness = hsb[2]; // darkest 0.0f <--> 1.0f brightest
                 if (brightness >= 0.5f) {
                     brightness -= 0.5f; // to darker
@@ -215,7 +219,8 @@ public final class UIDesignManager {
         }
 
         UIManager.put("DockingDesktop.notificationBlinkCount", 2);
-        UIManager.put("DockingDesktop.notificationColor", Styles.EditorColor.COLOR_NOTIFICATION_MAX.getColor());
+        UIManager.put("DockingDesktop.notificationColor",
+                Styles.EditorColor.COLOR_NOTIFICATION_MAX.getColor());
     }
 
     /**
@@ -244,7 +249,8 @@ public final class UIDesignManager {
             menu.remove(menu.getComponentCount() - 1);
         }
         for (int i = 0; i < menu.getComponentCount() - 1; i++) {
-            if (menu.getComponent(i) instanceof JSeparator && menu.getComponent(i + 1) instanceof JSeparator) {
+            if (menu.getComponent(i) instanceof JSeparator
+                    && menu.getComponent(i + 1) instanceof JSeparator) {
                 // remove duplicate separators
                 menu.remove(i);
             }
@@ -282,7 +288,8 @@ public final class UIDesignManager {
     /**
      * Heuristic detection of dark theme.
      * <p>
-     *     isDarkTheme method derived from NetBeans licensed by Apache-2.0
+     * isDarkTheme method derived from NetBeans licensed by Apache-2.0
+     * 
      * @return true when dark theme, otherwise false.
      */
     private static boolean isDarkTheme(UIDefaults uiDefaults) {
@@ -308,16 +315,10 @@ public final class UIDesignManager {
         // Windows HighContrast Black (dark) / 1.0 / 0
         Color foreground = uiDefaults.getColor("Table.foreground");
         Color background = uiDefaults.getColor("Table.background");
-        float foreground_brightness = Color.RGBtoHSB(
-                foreground.getRed(),
-                foreground.getGreen(),
-                foreground.getBlue(),
-                null)[2];
-        float background_brightness = Color.RGBtoHSB(
-                background.getRed(),
-                background.getGreen(),
-                background.getBlue(),
-                null)[2];
+        float foreground_brightness = Color.RGBtoHSB(foreground.getRed(), foreground.getGreen(),
+                foreground.getBlue(), null)[2];
+        float background_brightness = Color.RGBtoHSB(background.getRed(), background.getGreen(),
+                background.getBlue(), null)[2];
         return background_brightness < foreground_brightness;
     }
 
@@ -353,9 +354,10 @@ public final class UIDesignManager {
         Color hilite;
         if (isDarkTheme(uiDefaults)) {
             loadColors(uiDefaults, "dark");
-            hilite = uiDefaults.getColor("TextArea.background").brighter();  // NOI18N
+            hilite = uiDefaults.getColor("TextArea.background").brighter(); // NOI18N
             // Hack for JDK GTKLookAndFeel bug.
-            // TextPane.background is always white but should be a text_background of GTK.
+            // TextPane.background is always white but should be a
+            // text_background of GTK.
             // List.background is as same color as text_background.
             if (Platform.isLinux() && Color.WHITE.equals(uiDefaults.getColor("TextPane.background"))) {
                 uiDefaults.put("TextPane.background", uiDefaults.getColor("List.background"));
@@ -363,7 +365,7 @@ public final class UIDesignManager {
             uiDefaults.put("OmegaT.theme.dark", true);
         } else {
             loadColors(uiDefaults, "light");
-            Color bg = uiDefaults.getColor("TextArea.background").darker();  // NOI18N
+            Color bg = uiDefaults.getColor("TextArea.background").darker(); // NOI18N
             hilite = new Color(bg.getRed(), bg.getBlue(), bg.getGreen(), 32);
             uiDefaults.put("OmegaT.theme.dark", false);
         }

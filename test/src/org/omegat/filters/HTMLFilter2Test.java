@@ -87,8 +87,7 @@ public class HTMLFilter2Test extends TestFilterBase {
         entries = parse(new HTMLFilter2(),
                 "test/data/filters/html/file-HTMLFilter2-tag-dropping-bugfix-SF873.html");
         assertEquals(3, entries.size());
-        entries = parse(new HTMLFilter2(),
-                "test/data/filters/html/file-HTMLFilter2-OmegaT.html");
+        entries = parse(new HTMLFilter2(), "test/data/filters/html/file-HTMLFilter2-OmegaT.html");
         assertEquals(165, entries.size());
     }
 
@@ -112,10 +111,8 @@ public class HTMLFilter2Test extends TestFilterBase {
         IProject.FileInfo fi = loadSourceFiles(filter, f);
 
         checkMultiStart(fi, f);
-        checkMulti("en", null, null, "", "This is first line.",
-                   String.format("%s HTML %s lang",
-                                 OStrings.getString("HTMLFILTER_TAG"),
-                                 OStrings.getString("HTMLFILTER_ATTRIBUTE")));
+        checkMulti("en", null, null, "", "This is first line.", String.format("%s HTML %s lang",
+                OStrings.getString("HTMLFILTER_TAG"), OStrings.getString("HTMLFILTER_ATTRIBUTE")));
         checkMulti("This is first line.", null, null, "en", "This is second line.", null);
         checkMulti("This is second line.", null, null, "This is first line.", "", null);
         checkMultiEnd();
@@ -126,8 +123,8 @@ public class HTMLFilter2Test extends TestFilterBase {
         checkMultiStart(fi, f);
         checkMulti("\uD835\uDC00\uD835\uDC01\uD835\uDC02", null, null, "",
                 "\uD835\uDC03\uD835\uDC04\uD835\uDC05", null);
-        checkMulti("\uD835\uDC03\uD835\uDC04\uD835\uDC05", null, null,
-                "\uD835\uDC00\uD835\uDC01\uD835\uDC02", "", null);
+        checkMulti("\uD835\uDC03\uD835\uDC04\uD835\uDC05", null, null, "\uD835\uDC00\uD835\uDC01\uD835\uDC02",
+                "", null);
         checkMultiEnd();
     }
 
@@ -137,8 +134,8 @@ public class HTMLFilter2Test extends TestFilterBase {
         HTMLFilter2 filter = new HTMLFilter2();
 
         Core.getFilterMaster().getConfig().setRemoveTags(false);
-        filter.isFileSupported(new File(f), Collections.emptyMap(), new FilterContext(new Language("en"),
-                new Language("be"), false));
+        filter.isFileSupported(new File(f), Collections.emptyMap(),
+                new FilterContext(new Language("en"), new Language("be"), false));
         IProject.FileInfo fi = loadSourceFiles(filter, f);
 
         checkMultiStart(fi, f);
@@ -146,8 +143,8 @@ public class HTMLFilter2Test extends TestFilterBase {
         translateXML(filter, f);
 
         Core.getFilterMaster().getConfig().setRemoveTags(true);
-        filter.isFileSupported(new File(f), Collections.emptyMap(), new FilterContext(new Language("en"),
-                new Language("be"), false));
+        filter.isFileSupported(new File(f), Collections.emptyMap(),
+                new FilterContext(new Language("en"), new Language("be"), false));
         fi = loadSourceFiles(filter, f);
 
         checkMultiStart(fi, f);
@@ -188,7 +185,8 @@ public class HTMLFilter2Test extends TestFilterBase {
         boolean preserveSpacesOrig = Core.getFilterMaster().getConfig().isPreserveSpaces();
         Core.getFilterMaster().getConfig().setPreserveSpaces(true);
 
-        //preserving whitespace is the default, so nothing changes when enabling this, compared to testLayout() test.
+        // preserving whitespace is the default, so nothing changes when
+        // enabling this, compared to testLayout() test.
         testLayout();
 
         Core.getFilterMaster().getConfig().setPreserveSpaces(preserveSpacesOrig);

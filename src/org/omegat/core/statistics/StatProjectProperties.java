@@ -35,6 +35,7 @@ import org.omegat.core.data.ProjectProperties;
 
 /**
  * Data class for statistics XML and JSON.
+ * 
  * @author Hiroshi Miura
  */
 public final class StatProjectProperties {

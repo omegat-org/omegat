@@ -33,7 +33,6 @@ import org.junit.Test;
 
 public class RemoteRepositoryProviderTest2 {
 
-
     @Test
     public void testRelativeRemoteToAbsoluteLocal() {
         String base = System.getProperty("java.io.tmpdir") + File.separator;
@@ -46,22 +45,17 @@ public class RemoteRepositoryProviderTest2 {
         assertEquals(new File(base + "file.txt"),
                 RemoteRepositoryProvider.relativeRemoteToAbsoluteLocal("file.txt", new File(base), "/", ""));
 
-        assertEquals(new File(base + "source/file.txt"),
-                RemoteRepositoryProvider.relativeRemoteToAbsoluteLocal("somedir/file.txt", new File(base), "somedir",
-                        "source"));
-        assertEquals(new File(base + "source/file.txt"),
-                RemoteRepositoryProvider.relativeRemoteToAbsoluteLocal("somedir/file.txt", new File(base), "somedir",
-                        "source/"));
-        assertEquals(new File(base + "source/file.txt"),
-                RemoteRepositoryProvider.relativeRemoteToAbsoluteLocal("somedir/file.txt", new File(base), "somedir/",
-                        "source"));
-        assertEquals(new File(base + "source/file.txt"),
-                RemoteRepositoryProvider.relativeRemoteToAbsoluteLocal("somedir/file.txt", new File(base), "/somedir/",
-                        "source"));
+        assertEquals(new File(base + "source/file.txt"), RemoteRepositoryProvider
+                .relativeRemoteToAbsoluteLocal("somedir/file.txt", new File(base), "somedir", "source"));
+        assertEquals(new File(base + "source/file.txt"), RemoteRepositoryProvider
+                .relativeRemoteToAbsoluteLocal("somedir/file.txt", new File(base), "somedir", "source/"));
+        assertEquals(new File(base + "source/file.txt"), RemoteRepositoryProvider
+                .relativeRemoteToAbsoluteLocal("somedir/file.txt", new File(base), "somedir/", "source"));
+        assertEquals(new File(base + "source/file.txt"), RemoteRepositoryProvider
+                .relativeRemoteToAbsoluteLocal("somedir/file.txt", new File(base), "/somedir/", "source"));
 
-        assertEquals(new File(base + "source/somedir/file.txt"),
-                RemoteRepositoryProvider.relativeRemoteToAbsoluteLocal("somedir/file.txt", new File(base), "/",
-                        "/source"));
+        assertEquals(new File(base + "source/somedir/file.txt"), RemoteRepositoryProvider
+                .relativeRemoteToAbsoluteLocal("somedir/file.txt", new File(base), "/", "/source"));
 
     }
 

@@ -40,11 +40,13 @@ import org.omegat.filters4.xml.xliff.Xliff2Filter;
 public class Xliff2FilterTest extends org.omegat.filters.TestFilterBase {
     @Test
     public void testParse() throws Exception {
-        List<String> entries = parse(new Xliff2Filter(), "test/data/filters/xliff/filters4-xliff2/ex.9.5.xlf");
-        assertEquals(7, entries.size()); // the file contains 8 entries but the one with "translate=no" is ignored
+        List<String> entries = parse(new Xliff2Filter(),
+                "test/data/filters/xliff/filters4-xliff2/ex.9.5.xlf");
+        assertEquals(7, entries.size()); // the file contains 8 entries but the
+                                         // one with "translate=no" is ignored
         assertEquals("Birds in Oregon", entries.get(0));
         assertEquals("Oregon is a mostly temperate state. There are\n"
-            + "            many different kinds of birds that thrive", entries.get(1));
+                + "            many different kinds of birds that thrive", entries.get(1));
     }
 
     @Test
@@ -58,8 +60,8 @@ public class Xliff2FilterTest extends org.omegat.filters.TestFilterBase {
 
     @Test
     public void testKey() throws Exception {
-        List<ParsedEntry> entries = parse3(new Xliff2Filter(), "test/data/filters/xliff/filters4-xliff2/ex.9.5.xlf",
-            java.util.Collections.emptyMap());
+        List<ParsedEntry> entries = parse3(new Xliff2Filter(),
+                "test/data/filters/xliff/filters4-xliff2/ex.9.5.xlf", java.util.Collections.emptyMap());
         ParsedEntry firstEntry = entries.get(0);
         assertEquals("1", firstEntry.id); // <segment> has no id, not mandatory
         assertEquals("//groups/N65541xdocument/N65541bxmarksection-1/title-2", firstEntry.path);
@@ -71,9 +73,8 @@ public class Xliff2FilterTest extends org.omegat.filters.TestFilterBase {
     @Test
     public void testTranslation() throws Exception {
         Xliff2Filter filter = new Xliff2Filter();
-        filter.translateFile(new File("test/data/filters/xliff/filters4-xliff2/ex.9.5.xlf"),
-            outFile, java.util.Collections.emptyMap(), context,
-                new ITranslateCallback() {
+        filter.translateFile(new File("test/data/filters/xliff/filters4-xliff2/ex.9.5.xlf"), outFile,
+                java.util.Collections.emptyMap(), context, new ITranslateCallback() {
                     public String getTranslation(String id, String source, String path) {
                         if ("Birds in Oregon".equals(source)) {
                             return "Oiseaux en Oregon";
@@ -93,7 +94,7 @@ public class Xliff2FilterTest extends org.omegat.filters.TestFilterBase {
                 });
         // Check that it correctly translates
         List<ParsedEntry> entries = parse3(filter, outFile.getCanonicalPath(),
-            java.util.Collections.emptyMap());
+                java.util.Collections.emptyMap());
         // entry translated in the source file, not in the Callback
         assertEquals("<t0>Oiseaux de haute altitude", entries.get(2).translation);
         // entry translated in the callback, not in the source file

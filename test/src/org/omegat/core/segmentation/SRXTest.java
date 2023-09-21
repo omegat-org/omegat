@@ -75,11 +75,9 @@ public class SRXTest {
     /**
      * Test SRX#loadFromDir produce SRX object properly.
      * <p>
-     * MapRule#getLanguageCode should return Language Code
-     * defined in LanguageCode class.
-     * MapRule#getLanguage should return a localized name of language.
-     * The test here check both values.
-     * OmegaT 6.0 and before,
+     * MapRule#getLanguageCode should return Language Code defined in
+     * LanguageCode class. MapRule#getLanguage should return a localized name of
+     * language. The test here check both values. OmegaT 6.0 and before,
      */
     @Test
     public void testSrxReaderDefault() {
@@ -103,14 +101,12 @@ public class SRXTest {
     /**
      * Test SRX writer/reader.
      * <p>
-     * Previous versions has a bug when saving segmentation.conf file.
-     * It is better to save language property using language code
-     * defined in LanguageCode class.
-     * Unfortunately OmegaT 6.0 and before produce a localized
-     * language name for the property.
-     * The test case here trys reading a segmentation.conf file
-     * that is produced by OmegaT in English environment
-     * and Japanese environment.
+     * Previous versions has a bug when saving segmentation.conf file. It is
+     * better to save language property using language code defined in
+     * LanguageCode class. Unfortunately OmegaT 6.0 and before produce a
+     * localized language name for the property. The test case here trys reading
+     * a segmentation.conf file that is produced by OmegaT in English
+     * environment and Japanese environment.
      */
     @Test
     public void testSrxMigration() throws IOException {
@@ -140,7 +136,7 @@ public class SRXTest {
         mapRuleList = srx1.getMappingRules();
         assertNotNull(mapRuleList);
         assertEquals(18, mapRuleList.size());
-        for (MapRule mapRule: mapRuleList) {
+        for (MapRule mapRule : mapRuleList) {
             if (mapRule.getPattern().equals("JA.*")) {
                 assertEquals(LanguageCodes.JAPANESE_CODE, mapRule.getLanguage());
                 assertEquals(OStrings.getString(LanguageCodes.JAPANESE_KEY), mapRule.getLanguageName());

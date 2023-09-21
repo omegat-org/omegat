@@ -45,8 +45,8 @@ import org.omegat.filters2.text.bundles.ResourceBundleFilter;
  * https://web.archive.org/web/20071011191836/http://www.lisa.org/standards/tmx/specification.html
  *
  * The Level 1 Compliance verifies mostly TMX structure, white spaces handling
- * and how the application deals with non-ASCII characters and special characters
- * in XML such as '<', or '&', XML syntax, encodings, and so forth.
+ * and how the application deals with non-ASCII characters and special
+ * characters in XML such as '<', or '&', XML syntax, encodings, and so forth.
  *
  * The Level 2 compliance verifies mostly how the application deals with content
  * markup. To qualify for Level 2 compliance, the application must also qualify
@@ -143,8 +143,8 @@ public class TmxComplianceTests extends TmxComplianceBase {
     public void testImport1J() throws Exception {
         ProjectProperties props = new TestProjectProperties("EN-US", "EN-GB");
         final ProjectTMX tmx = new ProjectTMX(props.getSourceLanguage(), props.getTargetLanguage(),
-                props.isSentenceSegmentingEnabled(), new File("test/data/tmx/TMXComplianceKit/ImportTest1J_many.tmx"),
-                orphanedCallback);
+                props.isSentenceSegmentingEnabled(),
+                new File("test/data/tmx/TMXComplianceKit/ImportTest1J_many.tmx"), orphanedCallback);
         tmx.exportTMX(props, outFile, false, false, false);
         // TODO validate via TMXCheck
     }
@@ -157,8 +157,8 @@ public class TmxComplianceTests extends TmxComplianceBase {
     public void testImport1K() throws Exception {
         ProjectProperties props = new TestProjectProperties("EN-US", "EN-GB");
         final ProjectTMX tmx = new ProjectTMX(props.getSourceLanguage(), props.getTargetLanguage(),
-                props.isSentenceSegmentingEnabled(), new File("test/data/tmx/TMXComplianceKit/ImportTest1K.tmx"),
-                orphanedCallback);
+                props.isSentenceSegmentingEnabled(),
+                new File("test/data/tmx/TMXComplianceKit/ImportTest1K.tmx"), orphanedCallback);
         assertEquals(0, tmx.defaults.size());
     }
 
@@ -245,22 +245,26 @@ public class TmxComplianceTests extends TmxComplianceBase {
     public void testExport1D() throws Exception {
         /*
          * Test data contains .po files, which doesn't compliance with PO
-         * specification
-         * (https://www.gnu.org/savannah-checkouts/gnu/gettext/
-         * manual/html_node/PO-Files.html). By the specification, msgid
-         * should contain "untranslated-string", but in the ExportTest1D.po
-         * file it contains ID.
+         * specification (https://www.gnu.org/savannah-checkouts/gnu/gettext/
+         * manual/html_node/PO-Files.html). By the specification, msgid should
+         * contain "untranslated-string", but in the ExportTest1D.po file it
+         * contains ID.
          */
 
-//        File tmxFile = new File("test/data/tmx/TMXComplianceKit/ExportTest1D.tmx");
-//        File sourceFile = new File("test/data/tmx/TMXComplianceKit/ExportTest1D.po");
-//        File translatedFile = new File("test/data/tmx/TMXComplianceKit/ExportTest1D_fr.po");
-//
-//        ProjectProperties props = new TestProjectProperties("EN-US", "FR-CA");
-//
-//        align(new PoFilter(), sourceFile, "iso-8859-1", translatedFile, "iso-8859-1", props);
-//
-//        compareTMX(tmxFile, outFile, 8);
+        // File tmxFile = new
+        // File("test/data/tmx/TMXComplianceKit/ExportTest1D.tmx");
+        // File sourceFile = new
+        // File("test/data/tmx/TMXComplianceKit/ExportTest1D.po");
+        // File translatedFile = new
+        // File("test/data/tmx/TMXComplianceKit/ExportTest1D_fr.po");
+        //
+        // ProjectProperties props = new TestProjectProperties("EN-US",
+        // "FR-CA");
+        //
+        // align(new PoFilter(), sourceFile, "iso-8859-1", translatedFile,
+        // "iso-8859-1", props);
+        //
+        // compareTMX(tmxFile, outFile, 8);
     }
 
     /**
@@ -274,9 +278,11 @@ public class TmxComplianceTests extends TmxComplianceBase {
     /**
      * Test Import2A - Content Markup Syntax in HTML.
      *
-     * TEST CHANGED FROM TMX COMPLIANCE PACK BECAUSE WE HAVE OTHER SEGMENTATION SETTINGS, i.e. "Picture: <img
-     * src="img.png"/>" should be processed as one segment by TMX compliance tests, but it's not a one segment
-     * by OmegaT segmentation. Since it out of scope of testing, we patch tmx for runtime-only.
+     * TEST CHANGED FROM TMX COMPLIANCE PACK BECAUSE WE HAVE OTHER SEGMENTATION
+     * SETTINGS, i.e. "Picture: <img src="img.png"/>" should be processed as one
+     * segment by TMX compliance tests, but it's not a one segment by OmegaT
+     * segmentation. Since it out of scope of testing, we patch tmx for
+     * runtime-only.
      */
     @Test
     public void testImport2A() throws Exception {
@@ -300,8 +306,10 @@ public class TmxComplianceTests extends TmxComplianceBase {
 
         assertEquals(lines1.size(), lines2.size());
         for (int i = 0; i < lines1.size(); i++) {
-            // HTML spec allows unescaped U+0022 QUOTE MARK (outside of attribute values);
-            // we produce unescaped but the test assumes escaped, so we normalize for comparison purposes.
+            // HTML spec allows unescaped U+0022 QUOTE MARK (outside of
+            // attribute values);
+            // we produce unescaped but the test assumes escaped, so we
+            // normalize for comparison purposes.
             String line1 = normalize(lines1.get(i));
             String line2 = normalize(lines2.get(i));
             assertEquals(line1, line2);
@@ -330,8 +338,10 @@ public class TmxComplianceTests extends TmxComplianceBase {
 
         assertEquals(lines1.size(), lines2.size());
         for (int i = 0; i < lines1.size(); i++) {
-            // HTML spec allows unescaped U+0022 QUOTE MARK (outside of attribute values);
-            // we produce unescaped but the test assumes escaped, so we normalize for comparison purposes.
+            // HTML spec allows unescaped U+0022 QUOTE MARK (outside of
+            // attribute values);
+            // we produce unescaped but the test assumes escaped, so we
+            // normalize for comparison purposes.
             String line1 = normalize(lines1.get(i));
             String line2 = normalize(lines2.get(i));
             assertEquals(line1, line2);

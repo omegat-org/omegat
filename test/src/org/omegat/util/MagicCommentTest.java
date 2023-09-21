@@ -39,10 +39,16 @@ public class MagicCommentTest {
     @SuppressWarnings("serial")
     @Test
     public void testParseString() {
-        assertEquals(new HashMap<String, String>() {{ put("coding", "UTF-8"); }},
-                MagicComment.parse("# -*- coding: UTF-8 -*-"));
-        assertEquals(new HashMap<String, String>() {{ put("coding", "UTF-8"); }},
-                MagicComment.parse("# comment -*- coding: UTF-8 -*-"));
+        assertEquals(new HashMap<String, String>() {
+            {
+                put("coding", "UTF-8");
+            }
+        }, MagicComment.parse("# -*- coding: UTF-8 -*-"));
+        assertEquals(new HashMap<String, String>() {
+            {
+                put("coding", "UTF-8");
+            }
+        }, MagicComment.parse("# comment -*- coding: UTF-8 -*-"));
         assertEquals(new HashMap<String, String>() {
             {
                 put("coding", "UTF-8");
@@ -55,8 +61,11 @@ public class MagicCommentTest {
                 put("foo", "bar");
             }
         }, MagicComment.parse("# comment -*- foo: bar; coding: UTF-8; -*-"));
-        assertEquals(new HashMap<String, String>() {{ put("foo", "bar"); }},
-                MagicComment.parse("# comment -*- foo: bar; -*- coding: UTF-8"));
+        assertEquals(new HashMap<String, String>() {
+            {
+                put("foo", "bar");
+            }
+        }, MagicComment.parse("# comment -*- foo: bar; -*- coding: UTF-8"));
         assertEquals(Collections.emptyMap(), MagicComment.parse("# comment -*- foo: bar; coding: UTF-8"));
         assertEquals(Collections.emptyMap(), MagicComment.parse("# comment foo: bar; coding: UTF-8 -*-"));
         assertEquals(Collections.emptyMap(), MagicComment.parse((String) null));
@@ -64,13 +73,15 @@ public class MagicCommentTest {
 
     @Test
     public void testParseFile() throws IOException {
-        Map<String, String> result = MagicComment.parse(new File("test/data/glossaries/test-magiccomment.tab"));
+        Map<String, String> result = MagicComment
+                .parse(new File("test/data/glossaries/test-magiccomment.tab"));
         assertEquals(Collections.singletonMap("coding", "utf-8"), result);
     }
 
     @Test
     public void testParseFileBom() throws IOException {
-        Map<String, String> result = MagicComment.parse(new File("test/data/glossaries/test-magiccomment-bom.tab"));
+        Map<String, String> result = MagicComment
+                .parse(new File("test/data/glossaries/test-magiccomment-bom.tab"));
         assertEquals(Collections.singletonMap("coding", "utf-8"), result);
     }
 

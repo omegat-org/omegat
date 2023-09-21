@@ -82,7 +82,7 @@ public class DictionariesManager implements DirectoryMonitor.Callback {
 
     /**
      * Add dictionary factory.
-     * 
+     *
      * @param dict
      *            factory to register.
      */
@@ -98,7 +98,7 @@ public class DictionariesManager implements DirectoryMonitor.Callback {
 
     /**
      * Remove dictionary Factory.
-     * 
+     *
      * @param factory
      *            factory to unregister.
      */
@@ -110,7 +110,7 @@ public class DictionariesManager implements DirectoryMonitor.Callback {
 
     /**
      * Add online dictionary(dictionary without local data).
-     * 
+     *
      * @param dict
      *            dictionary lookup driver.
      */
@@ -122,7 +122,7 @@ public class DictionariesManager implements DirectoryMonitor.Callback {
 
     /**
      * Remove online dictionary.
-     * 
+     *
      * @param dict
      *            dictionary lookup driver to remove from registration.
      */

@@ -66,7 +66,6 @@ import org.omegat.util.OConsts;
 import org.omegat.util.Preferences;
 import org.omegat.util.TestPreferencesInitializer;
 
-
 public class FindMatchesTest {
 
     private static final File TMX_EN_US_SR = new File("test/data/tmx/en-US_sr.tmx");
@@ -76,18 +75,13 @@ public class FindMatchesTest {
     /**
      * Reproduce and test for RFE#1578.
      * <p>
-     * When external TM has different target language, and
-     * source has country code such as "en-US", and
-     * project source is only language code such as "en",
-     * and set preference to use other target language,
-     * OmegaT show the source of "en-US" as reference.
+     * When external TM has different target language, and source has country
+     * code such as "en-US", and project source is only language code such as
+     * "en", and set preference to use other target language, OmegaT show the
+     * source of "en-US" as reference.
      *
-     * test conditions:
-     *   header adminlang=en
-     *   header srclang=en-US
-     *   header segtype=sentence
-     *   1st tuv: en-US  value: XXX
-     *   2nd tuv: sr     value: YYY
+     * test conditions: header adminlang=en header srclang=en-US header
+     * segtype=sentence 1st tuv: en-US value: XXX 2nd tuv: sr value: YYY
      */
     @Test
     public void testSearchRFE1578() throws Exception {
@@ -111,17 +105,10 @@ public class FindMatchesTest {
     /**
      * Test with tmx file with en-US, en-GB, fr and sr.
      * <p>
-     * test conditions:
-     *   header adminlang=en
-     *   header srclang=en-US
-     *   header segtype=sentence
-     *   1st tuv: en-US  value: XXx
-     *   2nd tuv: en-GB  value: XXX
-     *   3rd tuv: fr     value: YYY
-     *   4th tuv: sr     value: ZZZ
-     * project properties:
-     *   source: en
-     *   target: cnr
+     * test conditions: header adminlang=en header srclang=en-US header
+     * segtype=sentence 1st tuv: en-US value: XXx 2nd tuv: en-GB value: XXX 3rd
+     * tuv: fr value: YYY 4th tuv: sr value: ZZZ project properties: source: en
+     * target: cnr
      *
      */
     @Test
@@ -139,7 +126,7 @@ public class FindMatchesTest {
         // Search source "XXx" in en-US
         List<NearString> result = finder.search("XXX", true, true, iStopped);
         // There should be three entries.
-        assertEquals("XXx", result.get(0).source);  // should be en-US.
+        assertEquals("XXx", result.get(0).source); // should be en-US.
         assertEquals("XXX", result.get(0).translation); // should be en-GB
         assertEquals("YYY", result.get(1).translation); // fr
         assertEquals("ZZZ", result.get(2).translation); // sr
@@ -180,8 +167,8 @@ public class FindMatchesTest {
         @Override
         public List<SourceTextEntry> getAllEntries() {
             List<SourceTextEntry> ste = new ArrayList<>();
-            ste.add(new SourceTextEntry(new EntryKey("source.txt", "XXX", null, "", "", null),
-                    1, null, null, new ArrayList<>()));
+            ste.add(new SourceTextEntry(new EntryKey("source.txt", "XXX", null, "", "", null), 1, null, null,
+                    new ArrayList<>()));
             return ste;
         }
 

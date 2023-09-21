@@ -47,7 +47,6 @@ import java.util.Set;
 
 import org.apache.commons.io.IOUtils;
 
-
 /**
  * Utility collection for http connections.
  *
@@ -73,13 +72,17 @@ public final class HttpConnectionUtils {
     /**
      * Don't instantiate util class.
      */
-    private HttpConnectionUtils() { }
+    private HttpConnectionUtils() {
+    }
 
     /**
      * Get resource from URL with default timeout.
-     * @param url resource URL.
+     * 
+     * @param url
+     *            resource URL.
      * @return string returned from server.
-     * @throws IOException raises when connection is failed.
+     * @throws IOException
+     *             raises when connection is failed.
      */
     public static String getURL(URL url) throws IOException {
         return getURL(url, TIMEOUT_MS);
@@ -88,10 +91,13 @@ public final class HttpConnectionUtils {
     /**
      * Download a file to memory.
      *
-     * @param url resource URL to download
-     * @param timeout timeout to connect and read.
+     * @param url
+     *            resource URL to download
+     * @param timeout
+     *            timeout to connect and read.
      * @return returned string
-     * @throws IOException when connection and read method error.
+     * @throws IOException
+     *             when connection and read method error.
      */
     public static String getURL(URL url, int timeout) throws IOException {
         URLConnection urlConn = url.openConnection();
@@ -105,12 +111,18 @@ public final class HttpConnectionUtils {
     /**
      * Download Zip file from remote site and extract it to specified directory.
      *
-     * @param url URL of zip file resource to download.
-     * @param dir target directory to extract
-     * @param expectedFiles filter extract file names
-     * @throws IOException raises when extraction is failed, maybe flaky download happened.
+     * @param url
+     *            URL of zip file resource to download.
+     * @param dir
+     *            target directory to extract
+     * @param expectedFiles
+     *            filter extract file names
+     * @throws IOException
+     *             raises when extraction is failed, maybe flaky download
+     *             happened.
      */
-    public static void downloadZipFileAndExtract(URL url, File dir, List<String> expectedFiles) throws IOException {
+    public static void downloadZipFileAndExtract(URL url, File dir, List<String> expectedFiles)
+            throws IOException {
         URLConnection conn = url.openConnection();
         conn.setConnectTimeout(TIMEOUT_MS);
         conn.setReadTimeout(TIMEOUT_MS);
@@ -127,17 +139,26 @@ public final class HttpConnectionUtils {
 
     /**
      * Downloads a binary file from a URL.
-     * @param fileURL HTTP URL of the file to be downloaded
-     * @param headers Additional HTTP headers
-     * @param expectedMime Mime type expected and check against such as ["application/octet-stream",
-     *                    "application/jar-archive"]. If getting type is differed, return false.
-     * @param saveFilePath path of the file
+     * 
+     * @param fileURL
+     *            HTTP URL of the file to be downloaded
+     * @param headers
+     *            Additional HTTP headers
+     * @param expectedMime
+     *            Mime type expected and check against such as
+     *            ["application/octet-stream", "application/jar-archive"]. If
+     *            getting type is differed, return false.
+     * @param saveFilePath
+     *            path of the file
      * @return true when succeeded, otherwise false.
-     * @throws IOException raise when connection and file write failed.
-     * @throws FlakyDownloadException raise when downloaded file length differs from expected content length.
+     * @throws IOException
+     *             raise when connection and file write failed.
+     * @throws FlakyDownloadException
+     *             raise when downloaded file length differs from expected
+     *             content length.
      */
     public static boolean downloadBinaryFile(final URL fileURL, final Map<String, String> headers,
-                                             final Set<String> expectedMime, final File saveFilePath)
+            final Set<String> expectedMime, final File saveFilePath)
             throws IOException, FlakyDownloadException {
         HttpURLConnection httpURLConnection = (HttpURLConnection) fileURL.openConnection();
         headers.forEach(httpURLConnection::setRequestProperty);
@@ -178,7 +199,8 @@ public final class HttpConnectionUtils {
      * @param target
      *            String representation of well-formed URL.
      * @return byte array or null if status is not 200 OK
-     * @throws IOException raise when connection failed.
+     * @throws IOException
+     *             raise when connection failed.
      */
     public static byte[] getURLasByteArray(String target) throws IOException {
         URL url = new URL(target);
@@ -196,10 +218,13 @@ public final class HttpConnectionUtils {
     /**
      * Method call without additional headers for possible calls from plugins.
      *
-     * @param address URL to post
-     * @param params post parameters in Map
+     * @param address
+     *            URL to post
+     * @param params
+     *            post parameters in Map
      * @return result string returned from server.
-     * @throws IOException raises when connection failed.
+     * @throws IOException
+     *             raises when connection failed.
      */
     public static String post(String address, Map<String, String> params) throws IOException {
         return post(address, params, null);
@@ -338,8 +363,8 @@ public final class HttpConnectionUtils {
      *            additional headers for request, can be null
      * @return Server output
      */
-    public static String postJSON(String address, String json,
-            Map<String, String> additionalHeaders) throws IOException {
+    public static String postJSON(String address, String json, Map<String, String> additionalHeaders)
+            throws IOException {
         URL url = new URL(address);
 
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();

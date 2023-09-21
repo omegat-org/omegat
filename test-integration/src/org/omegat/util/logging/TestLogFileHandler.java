@@ -61,12 +61,12 @@ public class TestLogFileHandler extends StreamHandler {
         openFiles(Paths.get(".", "build", "reports", "test-integration").toFile());
     }
 
-   /**
-    * @return the name of the current log file
-    */
+    /**
+     * @return the name of the current log file
+     */
     public String getOmegaTLogFileName() {
-       return logFileName;
-   }
+        return logFileName;
+    }
 
     /**
      * Open log file and lock.

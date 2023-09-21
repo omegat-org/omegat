@@ -65,8 +65,10 @@ public class OpenXMLFilterTest extends org.omegat.filters.TestFilterBase {
 
     @Test
     public void testTranslate() throws Exception {
-        // This filter has capability to change target language inside the translated file
-        // But to do so, it takes info from project properties, so they must exist
+        // This filter has capability to change target language inside the
+        // translated file
+        // But to do so, it takes info from project properties, so they must
+        // exist
         Core.getProject().getProjectProperties().setSourceLanguage(new Language("en-US"));
         Core.getProject().getProjectProperties().setTargetLanguage(new Language("fr-FR"));
 
@@ -74,11 +76,13 @@ public class OpenXMLFilterTest extends org.omegat.filters.TestFilterBase {
         translate(new MsOfficeFileFilter(), in.getPath());
 
         // XML comparison should not work,
-        // because StaX filter for OpenXML also removes useless repetitions in the Word document!
-        /*for (String f : new String[] { "word/document.xml" }) {
-            compareXML(new URL("jar:file:" + in.getAbsolutePath() + "!/" + f),
-                    new URL("jar:file:" + outFile.getAbsolutePath() + "!/" + f));
-        }*/
+        // because StaX filter for OpenXML also removes useless repetitions in
+        // the Word document!
+        /*
+         * for (String f : new String[] { "word/document.xml" }) {
+         * compareXML(new URL("jar:file:" + in.getAbsolutePath() + "!/" + f),
+         * new URL("jar:file:" + outFile.getAbsolutePath() + "!/" + f)); }
+         */
 
         // So, instead we almost check that the contents matches correctly
         List<String> entries = parse(new MsOfficeFileFilter(), outFile.toString());

@@ -45,8 +45,8 @@ public final class QuickAccess implements IMenuPreferece {
 
     @Override
     public String getMenuUIName() {
-                                return "Quick Access UI";
-                                                         }
+        return "Quick Access UI";
+    }
 
     @Override
     public String getMenuUIClassName() {

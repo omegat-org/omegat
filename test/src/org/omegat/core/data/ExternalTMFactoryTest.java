@@ -138,7 +138,8 @@ public class ExternalTMFactoryTest extends TestCore {
     /**
      * Test for RFE #1452
      *
-     * @see <a href="https://sourceforge.net/p/omegat/feature-requests/1452/">RFE
+     * @see <a href=
+     *      "https://sourceforge.net/p/omegat/feature-requests/1452/">RFE
      *      #1452</a>
      */
     @Test
@@ -157,8 +158,8 @@ public class ExternalTMFactoryTest extends TestCore {
         // Only 5 FR translations
         assertEquals(5, tmx.getEntries().size());
 
-        List<ITMXEntry> matchingEntries = tmx.getEntries().stream().filter(t -> t.getSourceText()
-                        .equals("Hello World!")).collect(Collectors.toList());
+        List<ITMXEntry> matchingEntries = tmx.getEntries().stream()
+                .filter(t -> t.getSourceText().equals("Hello World!")).collect(Collectors.toList());
         assertEquals(3, matchingEntries.size());
 
         // Set the EXT_TMX_KEEP_FOREIGN_MATCH prop
@@ -172,8 +173,9 @@ public class ExternalTMFactoryTest extends TestCore {
                 .collect(Collectors.toList());
         assertEquals(7, matchingEntries.size());
 
-        matchingEntries = tmx.getEntries().stream().filter(t -> t.getSourceText()
-                        .equals("This is an english sentence.")).collect(Collectors.toList());
+        matchingEntries = tmx.getEntries().stream()
+                .filter(t -> t.getSourceText().equals("This is an english sentence."))
+                .collect(Collectors.toList());
         assertEquals(2, matchingEntries.size());
 
         ITMXEntry entry = matchingEntries.get(0);

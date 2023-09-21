@@ -32,29 +32,38 @@ import org.junit.Test;
 public class HTMLUtilsTest {
     @Test
     public void getSpacePrefix() {
-        //no blank prefix
+        // no blank prefix
         assertEquals("", HTMLUtils.getSpacePrefix("a", true));
         assertEquals("", HTMLUtils.getSpacePrefix("\u0301a", true));
         assertEquals("", HTMLUtils.getSpacePrefix("\u00A0a", true));
         assertEquals("", HTMLUtils.getSpacePrefix("\u2007a", true));
         assertEquals("", HTMLUtils.getSpacePrefix("\u202Fa", true));
 
-        //all sorts of space characters
+        // all sorts of space characters
         assertEquals("\n", HTMLUtils.getSpacePrefix("\na", true));
         assertEquals("\r", HTMLUtils.getSpacePrefix("\ra", true));
-        assertEquals("\u2028", HTMLUtils.getSpacePrefix("\u2028a", true)); //line separator
-        assertEquals("\u2029", HTMLUtils.getSpacePrefix("\u2029a", true)); //paragraph separator
-        assertEquals("\u0009", HTMLUtils.getSpacePrefix("\u0009a", true)); //h tab
-        assertEquals("\u000B", HTMLUtils.getSpacePrefix("\u000Ba", true)); //v tab
-        assertEquals("\f", HTMLUtils.getSpacePrefix("\fa", true)); //form feed
-        assertEquals("\u001C", HTMLUtils.getSpacePrefix("\u001Ca", true)); //file separator
-        assertEquals("\u001D", HTMLUtils.getSpacePrefix("\u001Da", true)); //group separator
-        assertEquals("\u001E", HTMLUtils.getSpacePrefix("\u001Ea", true)); //record separator
-        assertEquals("\u001F", HTMLUtils.getSpacePrefix("\u001Fa", true)); //unit separator
+        assertEquals("\u2028", HTMLUtils.getSpacePrefix("\u2028a", true)); // line
+                                                                           // separator
+        assertEquals("\u2029", HTMLUtils.getSpacePrefix("\u2029a", true)); // paragraph
+                                                                           // separator
+        assertEquals("\u0009", HTMLUtils.getSpacePrefix("\u0009a", true)); // h
+                                                                           // tab
+        assertEquals("\u000B", HTMLUtils.getSpacePrefix("\u000Ba", true)); // v
+                                                                           // tab
+        assertEquals("\f", HTMLUtils.getSpacePrefix("\fa", true)); // form feed
+        assertEquals("\u001C", HTMLUtils.getSpacePrefix("\u001Ca", true)); // file
+                                                                           // separator
+        assertEquals("\u001D", HTMLUtils.getSpacePrefix("\u001Da", true)); // group
+                                                                           // separator
+        assertEquals("\u001E", HTMLUtils.getSpacePrefix("\u001Ea", true)); // record
+                                                                           // separator
+        assertEquals("\u001F", HTMLUtils.getSpacePrefix("\u001Fa", true)); // unit
+                                                                           // separator
 
-        //\u0301 is an accent, in a multi-code point character.
+        // \u0301 is an accent, in a multi-code point character.
         assertEquals("one space is one space", " ", HTMLUtils.getSpacePrefix(" \u0301a", true));
-        assertEquals("multiple spaces is compressed to one", " ", HTMLUtils.getSpacePrefix("  \u0301a", true));
+        assertEquals("multiple spaces is compressed to one", " ",
+                HTMLUtils.getSpacePrefix("  \u0301a", true));
         assertEquals("multiple spaces stay multiple spaces uncompressed", "    ",
                 HTMLUtils.getSpacePrefix("    \u0301ap", false));
         String allWhite = "\n\r\u2028\u2029\t\n\u000B\f\n\u001C\u001D\u001E\u001F ";
@@ -66,27 +75,35 @@ public class HTMLUtilsTest {
 
     @Test
     public void getSpacePostfix() {
-//no whitespace prefix
+        // no whitespace prefix
         assertEquals("", HTMLUtils.getSpacePostfix("a", true));
         assertEquals("", HTMLUtils.getSpacePostfix("a\u0301", true));
         assertEquals("", HTMLUtils.getSpacePostfix("a\u00A0", true));
         assertEquals("", HTMLUtils.getSpacePostfix("a\u2007", true));
         assertEquals("", HTMLUtils.getSpacePostfix("a\u202F", true));
 
-//all sorts of whitespace characters
+        // all sorts of whitespace characters
         assertEquals("\n", HTMLUtils.getSpacePostfix("a\n", true));
         assertEquals("\r", HTMLUtils.getSpacePostfix("a\r", true));
-        assertEquals("\u2028", HTMLUtils.getSpacePostfix("a\u2028", true)); //line separator
-        assertEquals("\u2029", HTMLUtils.getSpacePostfix("a\u2029", true)); //paragraph separator
-        assertEquals("\u0009", HTMLUtils.getSpacePostfix("a\u0009", true)); //h tab
-        assertEquals("\u000B", HTMLUtils.getSpacePostfix("a\u000B", true)); //v tab
-        assertEquals("\f", HTMLUtils.getSpacePostfix("a\f", true)); //form feed
-        assertEquals("\u001C", HTMLUtils.getSpacePostfix("a\u001C", true)); //file separator
-        assertEquals("\u001D", HTMLUtils.getSpacePostfix("a\u001D", true)); //group separator
-        assertEquals("\u001E", HTMLUtils.getSpacePostfix("a\u001E", true)); //record separator
-        assertEquals("\u001F", HTMLUtils.getSpacePostfix("a\u001F", true)); //unit separator
+        assertEquals("\u2028", HTMLUtils.getSpacePostfix("a\u2028", true)); // line
+                                                                            // separator
+        assertEquals("\u2029", HTMLUtils.getSpacePostfix("a\u2029", true)); // paragraph
+                                                                            // separator
+        assertEquals("\u0009", HTMLUtils.getSpacePostfix("a\u0009", true)); // h
+                                                                            // tab
+        assertEquals("\u000B", HTMLUtils.getSpacePostfix("a\u000B", true)); // v
+                                                                            // tab
+        assertEquals("\f", HTMLUtils.getSpacePostfix("a\f", true)); // form feed
+        assertEquals("\u001C", HTMLUtils.getSpacePostfix("a\u001C", true)); // file
+                                                                            // separator
+        assertEquals("\u001D", HTMLUtils.getSpacePostfix("a\u001D", true)); // group
+                                                                            // separator
+        assertEquals("\u001E", HTMLUtils.getSpacePostfix("a\u001E", true)); // record
+                                                                            // separator
+        assertEquals("\u001F", HTMLUtils.getSpacePostfix("a\u001F", true)); // unit
+                                                                            // separator
 
-        //\u0301 is an accent, in a multi-code point character.
+        // \u0301 is an accent, in a multi-code point character.
         assertEquals("one space is one space", " ", HTMLUtils.getSpacePostfix("a\u0065\u0301 ", true));
         assertEquals("multiple spaces is compressed to one", " ",
                 HTMLUtils.getSpacePostfix("a\u0065\u0301  ", true));

@@ -257,6 +257,7 @@ public final class UIScale {
 
     /**
      * Get scale factor.
+     * 
      * @return float number.
      */
     public static float getScaleFactor() {

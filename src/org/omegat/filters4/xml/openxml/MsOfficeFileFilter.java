@@ -55,14 +55,14 @@ public class MsOfficeFileFilter extends AbstractZipFilter {
      */
     private void defineDOCUMENTSOptions(Map<String, String> config) {
         /*
-         * Complete string when all options are enabled.
-         * Word: "(document\\.xml)|(comments\\.xml)|(footnotes\\.xml)|(endnotes\\.xml)
-         * |(header\\d+\\.xml)| (footer\\d+\\.xml)"
-         * Excel: "|(sharedStrings\\.xml)|(comments\\d+\\.xml)"
-         * PowerPoint: "|(slide\\d+\\.xml)|(slideMaster\\d+\\.xml)| (slideLayout\\d+\\.xml)|
-         * (notesSlide\\d+\\.xml)"
-         * Global: "|(data\\d+\\.xml)|(chart\\d+\\.xml)|(drawing\\d+\\.xml)"
-         * Excel: "|(workbook\\.xml)" Visio: "|(page\\d+\\.xml)
+         * Complete string when all options are enabled. Word:
+         * "(document\\.xml)|(comments\\.xml)|(footnotes\\.xml)|(endnotes\\.xml)
+         * |(header\\d+\\.xml)| (footer\\d+\\.xml)" Excel:
+         * "|(sharedStrings\\.xml)|(comments\\d+\\.xml)" PowerPoint:
+         * "|(slide\\d+\\.xml)|(slideMaster\\d+\\.xml)| (slideLayout\\d+\\.xml)|
+         * (notesSlide\\d+\\.xml)" Global:
+         * "|(data\\d+\\.xml)|(chart\\d+\\.xml)|(drawing\\d+\\.xml)" Excel:
+         * "|(workbook\\.xml)" Visio: "|(page\\d+\\.xml)
          */
 
         DOCUMENTS = "(document\\d?\\.xml)";
@@ -188,7 +188,7 @@ public class MsOfficeFileFilter extends AbstractZipFilter {
             String[] words1 = s1.split("\\d+\\."), words2 = s2.split("\\d+\\.");
             // Digits at the end and same text
             if ((words1.length > 1 && words2.length > 1) // Digits
-               && (words1[0].equals(words2[0]))) { // Same text
+                    && (words1[0].equals(words2[0]))) { // Same text
                 int number1 = 0, number2 = 0;
                 Matcher getDigits = DIGITS.matcher(s1);
                 if (getDigits.find()) {

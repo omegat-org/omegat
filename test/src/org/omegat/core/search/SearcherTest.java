@@ -102,7 +102,7 @@ public class SearcherTest {
     }
 
     private void addSTE(IProject.FileInfo fileInfo, String id, String source, String translation,
-                          boolean translationFuzzy) {
+            boolean translationFuzzy) {
         EntryKey key = new EntryKey("test", source, id, null, null, null);
         SourceTextEntry ste = new SourceTextEntry(key, fileInfo.entries.size() + 1, null, translation,
                 new ArrayList<>());

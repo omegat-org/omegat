@@ -96,8 +96,8 @@ public class AutoTmxTest {
     }
 
     /**
-     * Test that an alternate translation matching an id is correctly applied when
-     * the memory is in tm/enforce.
+     * Test that an alternate translation matching an id is correctly applied
+     * when the memory is in tm/enforce.
      */
     @Test
     public void enforcedAlternativeMatches() throws Exception {
@@ -113,8 +113,8 @@ public class AutoTmxTest {
     }
 
     /**
-     * Test that an alternate translation matching an id is correctly applied when
-     * the memory is in tm/auto.
+     * Test that an alternate translation matching an id is correctly applied
+     * when the memory is in tm/auto.
      */
     @Test
     public void autoAlternativeMatches() throws Exception {
@@ -138,8 +138,8 @@ public class AutoTmxTest {
         Core.initializeConsole(new HashMap<String, String>());
 
         p = new RealProject(props);
-        p.projectTMX = new ProjectTMX(props.getSourceLanguage(), props.getTargetLanguage(), false, projectFile,
-                new ProjectTMX.CheckOrphanedCallback() {
+        p.projectTMX = new ProjectTMX(props.getSourceLanguage(), props.getTargetLanguage(), false,
+                projectFile, new ProjectTMX.CheckOrphanedCallback() {
                     @Override
                     public boolean existSourceInProject(String src) {
                         return true;

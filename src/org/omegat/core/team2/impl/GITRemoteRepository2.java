@@ -79,6 +79,7 @@ import org.eclipse.jgit.treewalk.AbstractTreeIterator;
 import org.eclipse.jgit.treewalk.CanonicalTreeParser;
 import org.eclipse.jgit.treewalk.FileTreeIterator;
 import org.eclipse.jgit.util.FS;
+import tokyo.northside.logging.ILogger;
 
 import org.omegat.core.team2.IRemoteRepository2;
 import org.omegat.core.team2.ProjectTeamSettings;
@@ -86,7 +87,6 @@ import org.omegat.util.Log;
 import org.omegat.util.StringUtil;
 
 import gen.core.project.RepositoryDefinition;
-import tokyo.northside.logging.ILogger;
 
 /**
  * GIT repository connection implementation.
@@ -138,7 +138,7 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
 
     /**
      * Initialize remote repository access credentials.
-     * 
+     *
      * @param repo
      *            repository description instance
      * @param dir
@@ -252,7 +252,7 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
 
     /**
      * Get version string.
-     * 
+     *
      * @param file
      *            target file to check.
      * @return version string when file exists, otherwise null.
@@ -270,7 +270,7 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
 
     /**
      * Get current version of repository.
-     * 
+     *
      * @return version string.
      * @throws IOException
      *             when error occurred.
@@ -284,7 +284,7 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
 
     /**
      * Switch to git version specified.
-     * 
+     *
      * @param version
      *            version string to switch.
      * @throws Exception
@@ -311,7 +311,7 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
 
     /**
      * Add directory/file to commit.
-     * 
+     *
      * @param path
      *            The relative path of the item from the root of the repo
      *            (should not start with a <code>/</code>)
@@ -332,7 +332,7 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
 
     /**
      * Add path to be deleted.
-     * 
+     *
      * @param path
      *            The relative path of the item from the root of the repo
      *            (should not start with a <code>/</code>)
@@ -354,7 +354,7 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
 
     /**
      * Getter for local directory.
-     * 
+     *
      * @return local directory file object.
      */
     @Override
@@ -414,7 +414,7 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
 
     /**
      * Commit files in the current stack.
-     * 
+     *
      * @param onVersions
      *            if a version defined, then commit must be just after this
      *            version. Otherwise, (if a remote repository was updated after
@@ -519,7 +519,7 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
 
     /**
      * Delete target directory.
-     * 
+     *
      * @param path
      *            to be deleted.
      * @return true when succeeded, otherwise false.
@@ -540,7 +540,7 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
 
     /**
      * Retrieve default branch name from repository.
-     * 
+     *
      * @param repository
      *            target repository.
      * @return default branch name, ordinary "main" (recent popular) or "master"

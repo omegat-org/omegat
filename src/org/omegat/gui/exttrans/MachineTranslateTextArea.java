@@ -87,8 +87,9 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
     private static final String EXPLANATION = OStrings.getString("GUI_MACHINETRANSLATESWINDOW_explanation");
 
     /**
-     *  List displayed hold entries. An index shall be as same as ID attribute value of HTML.
-     *  Actual displayed entries are sorted, and the order is different from the List.
+     * List displayed hold entries. An index shall be as same as ID attribute
+     * value of HTML. Actual displayed entries are sorted, and the order is
+     * different from the List.
      */
     protected List<MachineTranslationInfo> displayed = new CopyOnWriteArrayList<>();
 
@@ -128,16 +129,17 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
     private void initDocument() {
         StyleSheet baseStyleSheet = new StyleSheet();
         HTMLEditorKit htmlEditorKit = new HTMLEditorKit();
-        baseStyleSheet.addStyleSheet(htmlEditorKit.getStyleSheet()); // Add default styles
+        baseStyleSheet.addStyleSheet(htmlEditorKit.getStyleSheet()); // Add
+                                                                     // default
+                                                                     // styles
         Font font = getFont();
-        baseStyleSheet.addRule("body { font-family: " + font.getName() + "; "
-                + " font-size: " + font.getSize() + "; "
-                + " font-style: " + (font.getStyle() == Font.ITALIC ? "italic" : "normal") + "; "
-                + " font-weight: " + (font.getStyle() == Font.BOLD ? "bold" : "normal") + "; "
-                + " color: " + Styles.EditorColor.COLOR_FOREGROUND.toHex() + "; "
-                + " background: " + Styles.EditorColor.COLOR_BACKGROUND.toHex() + ";} "
-                + ".engine {font-style: italic; text-align: right;}"
-                );
+        baseStyleSheet
+                .addRule("body { font-family: " + font.getName() + "; " + " font-size: " + font.getSize()
+                        + "; " + " font-style: " + (font.getStyle() == Font.ITALIC ? "italic" : "normal")
+                        + "; " + " font-weight: " + (font.getStyle() == Font.BOLD ? "bold" : "normal") + "; "
+                        + " color: " + Styles.EditorColor.COLOR_FOREGROUND.toHex() + "; " + " background: "
+                        + Styles.EditorColor.COLOR_BACKGROUND.toHex() + ";} "
+                        + ".engine {font-style: italic; text-align: right;}");
         htmlEditorKit.setStyleSheet(baseStyleSheet);
         setEditorKit(htmlEditorKit);
     }
@@ -162,7 +164,7 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
         if (rootElement == null) {
             return;
         }
-        Element el = doc.getElement(rootElement, HTML.Attribute.ID,  String.valueOf(selectedIndex));
+        Element el = doc.getElement(rootElement, HTML.Attribute.ID, String.valueOf(selectedIndex));
         if (el == null) {
             return;
         }
@@ -236,7 +238,8 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
         private final String src;
         private final boolean force;
 
-        public FindThread(final IMachineTranslation translator, final SourceTextEntry newEntry, boolean force) {
+        public FindThread(final IMachineTranslation translator, final SourceTextEntry newEntry,
+                boolean force) {
             super(MachineTranslateTextArea.this, newEntry);
             this.translator = translator;
             src = newEntry.getSrcText();
@@ -249,8 +252,8 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
             Language target = null;
             ProjectProperties pp = Core.getProject().getProjectProperties();
             if (pp != null) {
-                 source = pp.getSourceLanguage();
-                 target = pp.getTargetLanguage();
+                source = pp.getSourceLanguage();
+                target = pp.getTargetLanguage();
             }
             if (source == null || target == null) {
                 return null;
@@ -276,8 +279,8 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
                 return translator.getTranslation(source, target, src);
             } catch (MachineTranslateError e) {
                 Log.log(e);
-                Core.getMainWindow()
-                        .showTimedStatusMessageRB("MT_ENGINE_ERROR", translator.getName(), e.getLocalizedMessage());
+                Core.getMainWindow().showTimedStatusMessageRB("MT_ENGINE_ERROR", translator.getName(),
+                        e.getLocalizedMessage());
                 return null;
             } catch (Exception e) {
                 Log.logErrorRB(e, "MT_ENGINE_EXCEPTION");

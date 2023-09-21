@@ -25,7 +25,6 @@
 
 package org.omegat.util.gui;
 
-
 import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;

@@ -50,8 +50,8 @@ public final class FilenamePatternsEditorController {
     public static List<String> show(List<String> excludes) {
         result = null;
         data = new ArrayList<String>(excludes);
-        final FilenamePatternsEditor dialog = new FilenamePatternsEditor(Core.getMainWindow()
-                .getApplicationFrame(), true);
+        final FilenamePatternsEditor dialog = new FilenamePatternsEditor(
+                Core.getMainWindow().getApplicationFrame(), true);
 
         @SuppressWarnings("serial")
         final AbstractTableModel model = new AbstractTableModel() {
@@ -114,7 +114,8 @@ public final class FilenamePatternsEditorController {
             }
         });
 
-        ListSelectionListener listener = e -> dialog.btnRemove.setEnabled(dialog.table.getSelectedRow() != -1);
+        ListSelectionListener listener = e -> dialog.btnRemove
+                .setEnabled(dialog.table.getSelectedRow() != -1);
         dialog.table.getSelectionModel().addListSelectionListener(listener);
         listener.valueChanged(null);
 

@@ -63,8 +63,9 @@ public class POFilterTest extends TestFilterBase {
         TestFileInfo fi = loadSourceFiles(new PoFilter(), f, options);
 
         String comment = OStrings.getString("POFILTER_TRANSLATOR_COMMENTS") + "\n"
-                + "A valid comment\nAnother valid comment\n\n" + OStrings.getString("POFILTER_EXTRACTED_COMMENTS")
-                + "\n" + "Some extracted comments\nMore extracted comments\n\n"
+                + "A valid comment\nAnother valid comment\n\n"
+                + OStrings.getString("POFILTER_EXTRACTED_COMMENTS") + "\n"
+                + "Some extracted comments\nMore extracted comments\n\n"
                 + OStrings.getString("POFILTER_REFERENCES") + "\n" + "/my/source/file\n/my/source/file2\n\n";
 
         checkMultiStart(fi, f);

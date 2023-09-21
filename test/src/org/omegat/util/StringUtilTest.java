@@ -194,7 +194,8 @@ public class StringUtilTest {
         // SPACE (U+0020) + IDEOGRAPHIC SPACE (U+3000)
         assertTrue(StringUtil.isWhiteSpace(" \u3000"));
         // We consider whitespace but Character.isWhiteSpace(int) doesn't:
-        // NO-BREAK SPACE (U+00A0) + FIGURE SPACE (U+2007) + NARROW NO-BREAK SPACE (U+202F)
+        // NO-BREAK SPACE (U+00A0) + FIGURE SPACE (U+2007) + NARROW NO-BREAK
+        // SPACE (U+202F)
         assertTrue(StringUtil.isWhiteSpace("\u00a0\u2007\u202f"));
     }
 
@@ -226,9 +227,11 @@ public class StringUtilTest {
         assertEquals("Abc", StringUtil.toTitleCase("abc", locale));
         assertEquals("Abc", StringUtil.toTitleCase("aBC", locale));
         assertEquals("A", StringUtil.toTitleCase("a", locale));
-        // LATIN SMALL LETTER NJ (U+01CC) -> LATIN CAPITAL LETTER N WITH SMALL LETTER J (U+01CB)
+        // LATIN SMALL LETTER NJ (U+01CC) -> LATIN CAPITAL LETTER N WITH SMALL
+        // LETTER J (U+01CB)
         assertEquals("\u01CB", StringUtil.toTitleCase("\u01CC", locale));
-        // LATIN SMALL LETTER I (U+0069) -> LATIN CAPITAL LETTER I WITH DOT ABOVE (U+0130) in Turkish
+        // LATIN SMALL LETTER I (U+0069) -> LATIN CAPITAL LETTER I WITH DOT
+        // ABOVE (U+0130) in Turkish
         assertEquals("\u0130jk", StringUtil.toTitleCase("ijk", new Locale("tr")));
         // Non-letters in front
         assertEquals("'Good day, sir.'", StringUtil.toTitleCase("'GOOD DAY, SIR.'", locale));
@@ -269,9 +272,11 @@ public class StringUtilTest {
         assertEquals("Abc", StringUtil.capitalizeFirst("abc", locale));
         assertEquals("AbC", StringUtil.capitalizeFirst("abC", locale));
         assertEquals("A", StringUtil.capitalizeFirst("a", locale));
-        // LATIN SMALL LETTER NJ (U+01CC) -> LATIN CAPITAL LETTER N WITH SMALL LETTER J (U+01CB)
+        // LATIN SMALL LETTER NJ (U+01CC) -> LATIN CAPITAL LETTER N WITH SMALL
+        // LETTER J (U+01CB)
         assertEquals("\u01CB", StringUtil.capitalizeFirst("\u01CC", locale));
-        // LATIN SMALL LETTER I (U+0069) -> LATIN CAPITAL LETTER I WITH DOT ABOVE (U+0130) in Turkish
+        // LATIN SMALL LETTER I (U+0069) -> LATIN CAPITAL LETTER I WITH DOT
+        // ABOVE (U+0130) in Turkish
         assertEquals("\u0130jk", StringUtil.capitalizeFirst("ijk", new Locale("tr")));
         // Empty string -> empty string (like toLowerCase, toUpperCase)
         assertEquals("", StringUtil.capitalizeFirst("", locale));
@@ -297,7 +302,10 @@ public class StringUtilTest {
         // matchTo is upper case
         assertEquals("FOO", StringUtil.matchCapitalization(text, "UPPER", locale));
         assertEquals("FOO", StringUtil.matchCapitalization("fOo", "UP", locale));
-        assertEquals("FOo", StringUtil.matchCapitalization("fOo", "U", locale)); // Interpreted as title case
+        assertEquals("FOo", StringUtil.matchCapitalization("fOo", "U", locale)); // Interpreted
+                                                                                 // as
+                                                                                 // title
+                                                                                 // case
         // matchTo is mixed or not cased
         assertEquals(text, StringUtil.matchCapitalization(text, "bAzZ", locale));
         assertEquals(text, StringUtil.matchCapitalization(text, ".", locale));
@@ -332,7 +340,8 @@ public class StringUtilTest {
     @Test
     public void testNormalizeWidth() {
         String test = "Foo 123 " // ASCII
-                + "\uFF26\uFF4F\uFF4F\u3000\uFF11\uFF12\uFF13 " // Full-width alphanumerics
+                + "\uFF26\uFF4F\uFF4F\u3000\uFF11\uFF12\uFF13 " // Full-width
+                                                                // alphanumerics
                 + "\uFF01\uFF1F\uFF08\uFF09 " // Full-width punctuation
                 + "\u3371 " // Squared Latin Abbreviations
                 + "\u2100 " // Letter-Like Symbols
@@ -341,7 +350,8 @@ public class StringUtilTest {
                 + "\u314E\u314F\u3134"; // Full-width Jamo
         assertEquals("Foo 123 Foo 123 !?() hPa a/c \u30AC\u30D1\u30AA \uD55C\uAD6D\uC5B4 \u314E\u314F\u3134",
                 StringUtil.normalizeWidth(test));
-        test = "\uFF26\uFF4F\uFF4F\u3000\uFF11\uFF12\uFF13 " // Full-width alphanumerics
+        test = "\uFF26\uFF4F\uFF4F\u3000\uFF11\uFF12\uFF13 " // Full-width
+                                                             // alphanumerics
                 + "Foo 123 !?() " // ASCII
                 + "\uFF76\uFF9E\uFF8A\uFF9F\uFF75 " // Half-width Katakana
                 + "\uFFBE\uFFC2\uFFA4"; // Half-width Jamo
@@ -361,7 +371,9 @@ public class StringUtilTest {
         assertEquals("ABC", StringUtil.rstrip("ABC "));
         assertEquals(" ABC", StringUtil.rstrip(" ABC "));
         assertEquals("ABC", StringUtil.rstrip("ABC       "));
-        assertEquals("ABC\u00a0", StringUtil.rstrip("ABC\u00a0")); // U+00A0 NO-BREAK SPACE
+        assertEquals("ABC\u00a0", StringUtil.rstrip("ABC\u00a0")); // U+00A0
+                                                                   // NO-BREAK
+                                                                   // SPACE
         try {
             StringUtil.rstrip(null);
             fail();
@@ -392,29 +404,44 @@ public class StringUtilTest {
         tests.add("\\foo\\$bar"); // simple backslash, then backslash + dollar
 
         for (String s : tests) {
-            assertEquals(s.replace("\\\\", "\\").replace("\\$", "$"), StringUtil.replaceCase(s,
-                    Locale.ENGLISH));
+            assertEquals(s.replace("\\\\", "\\").replace("\\$", "$"),
+                    StringUtil.replaceCase(s, Locale.ENGLISH));
         }
 
         // Test normal behaviour of replace case sequences
-        assertEquals("\\hello This is a test", StringUtil.replaceCase("\\hello \\uthis is a test", Locale.ENGLISH));
+        assertEquals("\\hello This is a test",
+                StringUtil.replaceCase("\\hello \\uthis is a test", Locale.ENGLISH));
         assertEquals("This is a test", StringUtil.replaceCase("\\uthis is a test", Locale.ENGLISH));
-        assertEquals("tHIS IS A TEST", StringUtil.replaceCase("\\lTHIS IS A TEST", Locale.ENGLISH)); // lc first
-        assertEquals("tHIS IS A TEST", StringUtil.replaceCase("\\l\\Uthis is a test", Locale.ENGLISH)); // lc first + uc
-        assertEquals("THIS IS A TEST", StringUtil.replaceCase("\\Uthis is a test", Locale.ENGLISH)); // uc all
-        assertEquals("THIS IS a test", StringUtil.replaceCase("\\Uthis is\\E a test", Locale.ENGLISH)); // uc until E
-        assertEquals("THIS is A TEST", StringUtil.replaceCase("\\Uthis\\E is \\Ua test", Locale.ENGLISH)); // uc until E
+        assertEquals("tHIS IS A TEST", StringUtil.replaceCase("\\lTHIS IS A TEST", Locale.ENGLISH)); // lc
+                                                                                                     // first
+        assertEquals("tHIS IS A TEST", StringUtil.replaceCase("\\l\\Uthis is a test", Locale.ENGLISH)); // lc
+                                                                                                        // first
+                                                                                                        // +
+                                                                                                        // uc
+        assertEquals("THIS IS A TEST", StringUtil.replaceCase("\\Uthis is a test", Locale.ENGLISH)); // uc
+                                                                                                     // all
+        assertEquals("THIS IS a test", StringUtil.replaceCase("\\Uthis is\\E a test", Locale.ENGLISH)); // uc
+                                                                                                        // until
+                                                                                                        // E
+        assertEquals("THIS is A TEST", StringUtil.replaceCase("\\Uthis\\E is \\Ua test", Locale.ENGLISH)); // uc
+                                                                                                           // until
+                                                                                                           // E
         // Test that behavior changes for Turkish
-        assertEquals("Istanbul", StringUtil.replaceCase("\\uistanbul", Locale.ENGLISH)); // English version
-        assertEquals("\u0130stanbul", StringUtil.replaceCase("\\uistanbul", new Locale("tr"))); // Turkish version
+        assertEquals("Istanbul", StringUtil.replaceCase("\\uistanbul", Locale.ENGLISH)); // English
+                                                                                         // version
+        assertEquals("\u0130stanbul", StringUtil.replaceCase("\\uistanbul", new Locale("tr"))); // Turkish
+                                                                                                // version
     }
 
     @Test
     public void testConvertToList() {
-        assertEquals(Arrays.asList("omegat", "level1", "level2"), StringUtil.convertToList("omegat level1 level2"));
-        assertEquals(Arrays.asList("omegat", "level1", "level2"), StringUtil.convertToList("omegat  level1  level2"));
-        assertEquals(Arrays.asList("omegat", "level1", "level2"), StringUtil.convertToList("  omegat level1 level2  "));
-        assertEquals(Arrays.asList("omegat", "level1", "level2"), StringUtil.convertToList(
-                "  omegat   level1  level2  "));
+        assertEquals(Arrays.asList("omegat", "level1", "level2"),
+                StringUtil.convertToList("omegat level1 level2"));
+        assertEquals(Arrays.asList("omegat", "level1", "level2"),
+                StringUtil.convertToList("omegat  level1  level2"));
+        assertEquals(Arrays.asList("omegat", "level1", "level2"),
+                StringUtil.convertToList("  omegat level1 level2  "));
+        assertEquals(Arrays.asList("omegat", "level1", "level2"),
+                StringUtil.convertToList("  omegat   level1  level2  "));
     }
 }

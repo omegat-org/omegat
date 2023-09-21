@@ -328,7 +328,7 @@ public class LatexFilter extends AbstractFilter {
 
             if (oneArgNoText.contains(command)) {
                 String find = ("\\" + command + "\\*?" + "(" + "\\[" + "[^\\]]*" + "\\]"
-                        // opt []  arg
+                // opt [] arg
                         + "|" + "\\(" + "[^\\)]*" + "\\)"
                         // opt () arg
                         + ")?\\s*" + "\\{" + "[^\\}]*+" + "\\}");
@@ -396,7 +396,8 @@ public class LatexFilter extends AbstractFilter {
             StringBuffer sb = new StringBuffer();
 
             if (oneArgParText.contains(command)) {
-                String find = ("(" + "\\" + command + "\\*?\\s*" + ")" + "\\{" + "(" + "[^\\}]*+" + ")" + "\\}");
+                String find = ("(" + "\\" + command + "\\*?\\s*" + ")" + "\\{" + "(" + "[^\\}]*+" + ")"
+                        + "\\}");
 
                 Pattern p = Pattern.compile(find);
                 Matcher m = p.matcher(par);
@@ -427,7 +428,8 @@ public class LatexFilter extends AbstractFilter {
         for (Iterator<String> it = commands.iterator(); it.hasNext();) {
             String command = it.next();
 
-            if (command.equals("\\\\") || command.equals("\\{") || command.equals("\\[") || command.equals("\\|")) {
+            if (command.equals("\\\\") || command.equals("\\{") || command.equals("\\[")
+                    || command.equals("\\|")) {
                 // continue;
                 command = "\\" + command;
             }
@@ -448,10 +450,10 @@ public class LatexFilter extends AbstractFilter {
                 m.appendTail(sb);
 
                 par = sb.toString();
-             } catch (java.util.regex.PatternSyntaxException e) {
-               //TODO: understand the exceptions
-               Log.log("LaTeX PatternSyntaxException: " + e.getMessage());
-               Log.log(command);
+            } catch (java.util.regex.PatternSyntaxException e) {
+                // TODO: understand the exceptions
+                Log.log("LaTeX PatternSyntaxException: " + e.getMessage());
+                Log.log(command);
             }
 
         }

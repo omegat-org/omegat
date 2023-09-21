@@ -216,8 +216,9 @@ public final class UIScale {
             // and its size is always ca. 10% smaller than the actual system
             // font size.
             // Tahoma 11 is used at 100%
-            if ("Tahoma".equals(font.getFamily()))
+            if ("Tahoma".equals(font.getFamily())) {
                 fontSizeDivider = 11f;
+            }
         } else if (Platform.isMacOS) {
             // the default font size on macOS is 13
             fontSizeDivider = 13f;
@@ -252,6 +253,7 @@ public final class UIScale {
 
     /**
      * Get scale factor.
+     * 
      * @return float number.
      */
     public static float getScaleFactor() {
@@ -323,8 +325,9 @@ public final class UIScale {
      */
     public static void scaleGraphics(Graphics2D g) {
         initialize();
-        if (scaleFactor != 1f)
+        if (scaleFactor != 1f) {
             g.scale(scaleFactor, scaleFactor);
+        }
     }
 
     /**
@@ -372,8 +375,9 @@ public final class UIScale {
      * JetBrains Runtime 11 or later, and scaling is enabled in system Settings
      */
     public static boolean isSystemScaling() {
-        if (GraphicsEnvironment.isHeadless())
+        if (GraphicsEnvironment.isHeadless()) {
             return true;
+        }
 
         GraphicsConfiguration gc = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice()
                 .getDefaultConfiguration();

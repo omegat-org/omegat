@@ -106,7 +106,6 @@ public class SdlXliff extends Xliff1Filter {
     private boolean mid_has_modifier = false;
     private boolean mid_has_modif_date = false;
 
-
     /**
      * Also starts on cmt-defs or tag-defs, else like in standard XLIFF.
      */
@@ -425,13 +424,14 @@ public class SdlXliff extends Xliff1Filter {
                     }
                 } catch (XMLStreamException xe) {
                     try {
-                        for (XMLEvent ev : saved)
+                        for (XMLEvent ev : saved) {
                             if (ev.isEndElement()) {
                                 writer.write("</" + ev.asEndElement().getName().getPrefix() + ":"
                                         + ev.asEndElement().getName().getLocalPart() + ">");
                             } else {
                                 writer.write(ev.toString());
                             }
+                        }
                     } catch (Exception ignored) {
                     }
                 }

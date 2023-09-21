@@ -39,7 +39,6 @@ public class MagicCommentTest {
     @SuppressWarnings("serial")
     @Test
     public void testParseString() {
-        // TODO: junit5 parameterized test.
         assertEquals(new HashMap<String, String>() {{ put("coding", "UTF-8"); }},
                 MagicComment.parse("# -*- coding: UTF-8 -*-"));
         assertEquals(new HashMap<String, String>() {{ put("coding", "UTF-8"); }},

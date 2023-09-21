@@ -84,16 +84,14 @@ public class POFilterTest extends TestFilterBase {
 
         ExternalTMX tmEntries = fi.referenceEntries;
         assertEquals(2, tmEntries.getEntries().size());
-        {
-            ITMXEntry entry = tmEntries.getEntries().get(0);
-            assertEquals("True fuzzy!", entry.getSourceText());
-            assertEquals("trans5", entry.getTranslationText());
-        }
-        {
-            ITMXEntry entry = tmEntries.getEntries().get(1);
-            assertEquals("True fuzzy 2!", entry.getSourceText());
-            assertEquals("trans6", entry.getTranslationText());
-        }
+
+        ITMXEntry entry = tmEntries.getEntries().get(0);
+        assertEquals("True fuzzy!", entry.getSourceText());
+        assertEquals("trans5", entry.getTranslationText());
+
+        entry = tmEntries.getEntries().get(1);
+        assertEquals("True fuzzy 2!", entry.getSourceText());
+        assertEquals("trans6", entry.getTranslationText());
     }
 
     @Test

@@ -63,7 +63,7 @@
 
     <!-- tests -->
     <suppress checks="(MethodName|MemberName|OperatorWrap)" files=".*Test\.java"/>
-    <suppress files="(TestFilterBase|TmxComplianceBase|FilterMasterTest)\.java" checks="ParameterNumber"/>
+    <suppress files="(TestFilterBase|TmxComplianceBase|FilterMasterTest)\.java" checks="(HiddenField|ParameterNumber)"/>
     <!-- expectation string lengthy -->
     <suppress files="ResourceBundleFilterTest\.java" checks="LineLength" lines="221"/>
     <suppress files="GlossarySearcherTest\.java" checks="LineLength" lines="118"/>

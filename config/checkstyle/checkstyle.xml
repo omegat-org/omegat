@@ -43,6 +43,10 @@
     
     <property name="severity" value="warning"/>
 
+    <module name="SuppressionFilter">
+        <property name="file" value="${config_loc}/suppressions.xml"/>
+    </module>
+
     <module name="SuppressWithPlainTextCommentFilter">
         <property name="offCommentFormat" value="&lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents"/>
         <property name="onCommentFormat" value="&lt;/editor-fold&gt;//GEN-END:initComponents"/>
@@ -165,11 +169,17 @@
         <module name="ParenPad"/>
         <module name="TypecastParenPad"/>
         <module name="WhitespaceAfter"/>
-        <module name="WhitespaceAround"/>
+        <module name="WhitespaceAround">
+            <property name="allowEmptyConstructors" value="true"/>
+            <property name="allowEmptyMethods" value="true"/>
+            <property name="severity" value="error"/>
+        </module>
 
         <!-- Modifier Checks                                    -->
         <!-- See http://checkstyle.sf.net/config_modifiers.html -->
-        <module name="ModifierOrder"/>
+        <module name="ModifierOrder">
+            <property name="severity" value="error"/>
+        </module>
         <module name="RedundantModifier"/>
 
         <!-- Checks for blocks. You know, those {}'s         -->
@@ -177,7 +187,9 @@
         <module name="AvoidNestedBlocks"/>
         <module name="EmptyBlock"/>
         <module name="LeftCurly"/>
-        <module name="NeedBraces"/>
+        <module name="NeedBraces">
+            <property name="severity" value="error"/>
+        </module>
         <module name="RightCurly"/>
 
         <!-- Checks for common coding problems               -->

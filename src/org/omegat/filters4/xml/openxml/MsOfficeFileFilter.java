@@ -211,9 +211,9 @@ public class MsOfficeFileFilter extends AbstractZipFilter {
                 // Specific case for Excel
                 // because "comments" is present twice in DOCUMENTS
                 if (shortname1.indexOf("sharedStrings") >= 0 || shortname2.indexOf("sharedStrings") >= 0) {
-                    if (shortname2.indexOf("sharedStrings") >= 0)
+                    if (shortname2.indexOf("sharedStrings") >= 0) {
                         return 1; // sharedStrings must be first
-                    else {
+                    } else {
                         return -1;
                     }
                 }

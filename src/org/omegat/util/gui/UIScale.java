@@ -87,14 +87,16 @@ public final class UIScale {
     private static PropertyChangeSupport changeSupport;
 
     public static void addPropertyChangeListener(PropertyChangeListener listener) {
-        if (changeSupport == null)
+        if (changeSupport == null) {
             changeSupport = new PropertyChangeSupport(UIScale.class);
+        }
         changeSupport.addPropertyChangeListener(listener);
     }
 
     public static void removePropertyChangeListener(PropertyChangeListener listener) {
-        if (changeSupport == null)
+        if (changeSupport == null) {
             return;
+        }
         changeSupport.removePropertyChangeListener(listener);
     }
 
@@ -134,8 +136,9 @@ public final class UIScale {
                 case "lookAndFeel":
                     // it is not necessary (and possible) to remove listener of
                     // old LaF defaults
-                    if (e.getNewValue() instanceof LookAndFeel)
+                    if (e.getNewValue() instanceof LookAndFeel) {
                         UIManager.getLookAndFeelDefaults().addPropertyChangeListener(this);
+                    }
                     updateScaleFactor();
                     break;
 
@@ -159,8 +162,9 @@ public final class UIScale {
         // that a larger font size is set by the current LaF
         // (e.g., can avoid large icons with small text)
         Font font = UIManager.getFont("defaultFont");
-        if (font == null)
+        if (font == null) {
             font = UIManager.getFont("Label.font");
+        }
 
         setUserScaleFactor(computeFontScaleFactor(font));
     }
@@ -216,8 +220,9 @@ public final class UIScale {
             // and its size is always ca. 10% smaller than the actual system
             // font size.
             // Tahoma 11 is used at 100%
-            if ("Tahoma".equals(font.getFamily()))
+            if ("Tahoma".equals(font.getFamily())) {
                 fontSizeDivider = 11f;
+            }
         } else if (Platform.isMacOS) {
             // the default font size on macOS is 13
             fontSizeDivider = 13f;
@@ -323,8 +328,9 @@ public final class UIScale {
      */
     public static void scaleGraphics(Graphics2D g) {
         initialize();
-        if (scaleFactor != 1f)
+        if (scaleFactor != 1f) {
             g.scale(scaleFactor, scaleFactor);
+        }
     }
 
     /**
@@ -372,8 +378,9 @@ public final class UIScale {
      * JetBrains Runtime 11 or later, and scaling is enabled in system Settings
      */
     public static boolean isSystemScaling() {
-        if (GraphicsEnvironment.isHeadless())
+        if (GraphicsEnvironment.isHeadless()) {
             return true;
+        }
 
         GraphicsConfiguration gc = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice()
                 .getDefaultConfiguration();

@@ -48,7 +48,6 @@ import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
-import org.omegat.util.Platform;
 import org.omegat.util.StringUtil;
 
 import gen.core.filters.Filters;
@@ -406,9 +405,15 @@ public class ProjectProperties {
      */
     public void setExportTmLevels(boolean omT, boolean level1, boolean level2) {
         List<String> exportTmLevels = new ArrayList<>();
-        if (omT) exportTmLevels.add("omegat");
-        if (level1) exportTmLevels.add("level1");
-        if (level2) exportTmLevels.add("level2");
+        if (omT) {
+            exportTmLevels.add("omegat");
+        }
+        if (level1) {
+            exportTmLevels.add("level1");
+        }
+        if (level2) {
+            exportTmLevels.add("level2");
+        }
         this.exportTmLevels = exportTmLevels;
     }
 

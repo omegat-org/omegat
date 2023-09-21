@@ -54,7 +54,7 @@ import org.omegat.util.TestPreferencesInitializer;
  */
 public class LingvoDSLTest {
 
-    private final static String LINE_SEPARATOR = System.lineSeparator();
+    private static final String LINE_SEPARATOR = System.lineSeparator();
 
     private static final File TEST_DICT = new File("test/data/dicts-lingvo/test.dsl");
     private static final File TEST_DICT_DZ = new File("test/data/dicts-lingvo-dz/test.dsl.dz");
@@ -139,7 +139,7 @@ public class LingvoDSLTest {
         String word = "\u4e00\u4e2a\u6837";
         List<DictionaryEntry> result = dict.readArticles(word);
         assertFalse(result.isEmpty());
-        assertEquals("\u4E00\u500B\u6A23"+ LINE_SEPARATOR + "\u4E00\u4E2A\u6837",
+        assertEquals("\u4E00\u500B\u6A23" + LINE_SEPARATOR + "\u4E00\u4E2A\u6837",
                 result.get(0).getWord());
         assertEquals("[y\u012B ge y\u00E0ng]&nbsp;\nsame as \u4E00\u6A23|\u4E00\u6837 y\u012B " +
                 "y\u00E0ng&nbsp;, the same", result.get(0).getArticle());

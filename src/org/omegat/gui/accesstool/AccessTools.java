@@ -256,11 +256,10 @@ public class AccessTools extends JPanel {
         public void update() {
             final List<String> recentProjects = RecentProjects.getRecentProjects();
             if (recentProjects.size() > getSize()) {
-                // when a new project is added to the list
+                // when a new project is added to the list,
+                // filter new project and add it.
                 recentProjects.stream().map(f -> Paths.get(f).toAbsolutePath().toUri())
-                        .filter(AccessTools::checkProjectFolder).distinct().filter(p -> getIndexOf(p) < 0) // when
-                                                                                                           // new
-                                                                                                           // project
+                        .filter(AccessTools::checkProjectFolder).distinct().filter(p -> getIndexOf(p) < 0)
                         .forEach(this::addElement);
             }
         }

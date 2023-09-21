@@ -33,15 +33,13 @@ import org.omegat.util.gui.UIDesignManager;
 
 public final class QuickAccess implements IMenuPreferece {
 
-    public QuickAccess() {
-    }
+    public QuickAccess() {}
 
     public static void loadPlugins() {
         UIDesignManager.addMenuUIPreference(new QuickAccess());
     }
 
-    public static void unloadPlugins() {
-    }
+    public static void unloadPlugins() {}
 
     @Override
     public String getMenuUIName() {

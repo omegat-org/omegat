@@ -59,8 +59,7 @@ public final class Log {
     private static final ILogger LOGGER = LoggerFactory.getLogger(ILogger.ROOT_LOGGER_NAME,
             OStrings.getResourceBundle());
 
-    private Log() {
-    }
+    private Log() {}
 
     static {
         boolean loaded = false;

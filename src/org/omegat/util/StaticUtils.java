@@ -67,8 +67,7 @@ import org.apache.commons.io.FileUtils;
  */
 public final class StaticUtils {
 
-    private StaticUtils() {
-    }
+    private StaticUtils() {}
 
     /**
      * Configuration directory on Windows platforms

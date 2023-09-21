@@ -44,8 +44,7 @@ import java.util.function.Function;
  */
 public final class OStrings {
 
-    private OStrings() {
-    }
+    private OStrings() {}
 
     /** For custom deployments of OmegaT that need to be distinguishable from "stock" OmegaT */
     public static final String BRANDING = "";

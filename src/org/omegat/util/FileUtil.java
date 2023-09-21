@@ -79,8 +79,7 @@ import org.omegat.core.Core;
 public final class FileUtil {
     public static final long RENAME_RETRY_TIMEOUT = 3000;
 
-    private FileUtil() {
-    }
+    private FileUtil() {}
 
     /**
      * Get most recent backup file path.

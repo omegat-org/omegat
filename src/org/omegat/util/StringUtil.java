@@ -57,8 +57,7 @@ import javax.xml.bind.DatatypeConverter;
  */
 public final class StringUtil {
 
-    private StringUtil() {
-    }
+    private StringUtil() {}
 
     public static final char TRUNCATE_CHAR = '\u2026';
 

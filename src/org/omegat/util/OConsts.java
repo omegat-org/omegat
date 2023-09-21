@@ -43,8 +43,7 @@ package org.omegat.util;
  */
 public final class OConsts {
 
-    private OConsts() {
-    }
+    private OConsts() {}
 
     // project file consts
     /** Project Filename */

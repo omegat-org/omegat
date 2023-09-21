@@ -31,8 +31,7 @@ import java.awt.event.KeyEvent;
 @SuppressWarnings("deprecation")
 public final class Java8Compat {
 
-    private Java8Compat() {
-    }
+    private Java8Compat() {}
 
     public static int getMenuShortcutKeyMaskEx() {
         int mask = Toolkit.getDefaultToolkit().getMenuShortcutKeyMask();

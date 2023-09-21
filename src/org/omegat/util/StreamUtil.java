@@ -34,8 +34,7 @@ import java.util.regex.Pattern;
 
 public final class StreamUtil {
 
-    private StreamUtil() {
-    }
+    private StreamUtil() {}
 
     /**
      * Get a comparator that compares based on PRIMARY differences with the

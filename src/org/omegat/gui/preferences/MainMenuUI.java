@@ -29,7 +29,7 @@ import org.omegat.util.OStrings;
 
 public class MainMenuUI implements IMenuPreferece {
 
-    public final static String DEFAULT_MENUBAR = "org.omegat.gui.main.MainWindowMenu";
+    public static final String DEFAULT_MENUBAR = "org.omegat.gui.main.MainWindowMenu";
 
     @Override
     public String getMenuUIName() {

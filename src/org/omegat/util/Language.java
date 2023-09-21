@@ -111,10 +111,10 @@ public class Language implements Comparable<Object> {
         }
     }
 
-    private final static String ZA_IN_ZH = "\u58EE\u8BED";
-    private final static String SD_IN_ZH = "\u4FE1\u5FB7\u6587";
-    private final static String SD_IN_IN_ZH = "\u4FE1\u5FB7\u6587(\u5370\u5EA6)";
-    private final static String SD_PK_IN_ZH = "\u4FE1\u5FB7\u6587(\u5DF4\u57FA\u65AF\u5766)";
+    private static final String ZA_IN_ZH = "\u58EE\u8BED";
+    private static final String SD_IN_ZH = "\u4FE1\u5FB7\u6587";
+    private static final String SD_IN_IN_ZH = "\u4FE1\u5FB7\u6587(\u5370\u5EA6)";
+    private static final String SD_PK_IN_ZH = "\u4FE1\u5FB7\u6587(\u5DF4\u57FA\u65AF\u5766)";
 
     /**
      * Returns a name for the language that is appropriate for display to the

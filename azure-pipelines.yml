@@ -57,10 +57,9 @@ stages:
 
   # Weekly release steps will be triggerred after integration-test succeeded.
 - stage: Weekly
-  dependsOn: Check
   condition: or(eq(variables['Build.Reason'], 'Schedule'), eq(variables['Build.Reason'], 'Manual'))
   jobs:
-  - job: Check
+  - job: Check for weekly
     displayName: Test and Check
     pool:
       vmImage: 'ubuntu-22.04'
@@ -87,7 +86,7 @@ stages:
 - stage: Release
   condition: and(succeeded(), eq(variables.isRelease, true))
   jobs:
-  - job: Check
+  - job: Check for release
     displayName: Test and Check
     pool:
       vmImage: 'ubuntu-22.04'

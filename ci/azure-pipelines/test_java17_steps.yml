@@ -1,0 +1,16 @@
+steps:
+  - task: Cache@2
+    displayName: 'Cache Gradle'
+    inputs:
+      key: 'gradle | $(Agent.OS) | $(Build.SourcesDirectory)/build.gradle'
+      path: '$(GRADLE_USER_HOME)'
+  - script: |
+      umask a+w
+      mkdir -p build
+      chmod -R a+w doc_src
+      $(Build.SourcesDirectory)/gradlew --build-cache -PenvIsCi clean testOnJava17
+    displayName: 'Run Gradle test on Java17'
+  - task: PublishTestResults@2
+    displayName: 'Publish Test Results build/reports/**/*.xml'
+    inputs:
+      testResultsFiles: 'build/reports/**/*.xml'

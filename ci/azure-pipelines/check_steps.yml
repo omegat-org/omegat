@@ -9,8 +9,4 @@ steps:
       mkdir -p build
       chmod -R a+w doc_src
       $(Build.SourcesDirectory)/gradlew --build-cache -PenvIsCi clean check
-    displayName: 'Run Gradle clean and Gradle check'
-  - task: PublishTestResults@2
-    displayName: 'Publish Test Results build/reports/**/*.xml'
-    inputs:
-      testResultsFiles: 'build/reports/**/*.xml'
+    displayName: 'Run Gradle check'

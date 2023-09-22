@@ -53,11 +53,11 @@ import org.omegat.util.StaticUtils;
 public class ScriptingTest extends TestCore {
 
     /**
-     * Test for bug #775: Unresolvable scripting folder setting can cause an empty
-     * Scripting window
+     * Test for bug #775: Unresolvable scripting folder setting can cause an
+     * empty Scripting window
      * <p>
-     * NPE while initializing quick script menu entries when the script folder path
-     * member is null (failed to be set because it was invalid).
+     * NPE while initializing quick script menu entries when the script folder
+     * path member is null (failed to be set because it was invalid).
      *
      * @see <a href="https://sourceforge.net/p/omegat/bugs/775/">Bug #775</a>
      */
@@ -87,7 +87,7 @@ public class ScriptingTest extends TestCore {
                 continue;
             }
             String ext = FilenameUtils.getExtension(f.getName());
-            ScriptEngine engine = ScriptRunner.MANAGER.getEngineByExtension(ext);
+            ScriptEngine engine = ScriptRunner.getManager().getEngineByExtension(ext);
             if (engine instanceof Compilable) {
                 Compilable cEngine = (Compilable) engine;
                 try (BufferedReader br = Files.newBufferedReader(f.toPath())) {
@@ -107,7 +107,8 @@ public class ScriptingTest extends TestCore {
         List<String> scripts = Collections.emptyList();
         try (Stream<Path> stream = Files.list(scriptDir.toPath())) {
             scripts = stream.map(Path::toFile).filter(File::isFile).map(File::getName)
-                    .map(FilenameUtils::removeExtension).filter(n -> !n.isEmpty()).collect(Collectors.toList());
+                    .map(FilenameUtils::removeExtension).filter(n -> !n.isEmpty())
+                    .collect(Collectors.toList());
         }
         assertFalse(scripts.isEmpty());
 
@@ -135,7 +136,7 @@ public class ScriptingTest extends TestCore {
      */
     @Test
     public void testAvailableEngines() {
-        List<String> extensions = ScriptRunner.MANAGER.getEngineFactories().stream()
+        List<String> extensions = ScriptRunner.getManager().getEngineFactories().stream()
                 .map(ScriptEngineFactory::getExtensions).flatMap(List::stream).collect(Collectors.toList());
         assertTrue(extensions.contains("js"));
         assertTrue(extensions.contains("groovy"));

@@ -148,6 +148,10 @@ public final class Main {
         // https://sourceforge.net/p/omegat/bugs/812/
         System.setProperty("jna.encoding", Charset.defaultCharset().name());
 
+        // Workaround for Java 17 or later support of JAXB.
+        // See https://sourceforge.net/p/omegat/feature-requests/1682/#12c5
+        System.setProperty("com.sun.xml.bind.v2.bytecode.ClassTailor.noOptimize", "true");
+
         PARAMS.putAll(CLIParameters.parseArgs(args));
 
         String projectDir = PARAMS.get(CLIParameters.PROJECT_DIR);

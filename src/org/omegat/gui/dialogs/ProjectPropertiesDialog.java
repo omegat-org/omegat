@@ -871,8 +871,6 @@ public class ProjectPropertiesDialog extends JDialog {
         }
 
         OmegaTFileChooser browser = new OmegaTFileChooser();
-        // String str = OStrings.getString("BUTTON_SELECT_NO_MNEMONIC");
-        // browser.setApproveButtonText(str);
         browser.setDialogTitle(title);
         if (fileMode) {
             browser.setFileSelectionMode(OmegaTFileChooser.FILES_ONLY);

@@ -9,4 +9,4 @@ steps:
       mkdir -p build
       chmod -R a+w doc_src
       $(Build.SourcesDirectory)/gradlew --build-cache -PenvIsCi clean check
-    displayName: 'Run Gradle clean and check'
+    displayName: 'Run Gradle check'

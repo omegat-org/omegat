@@ -8,8 +8,8 @@ steps:
       umask a+w
       mkdir -p build
       chmod -R a+w doc_src
-      $(Build.SourcesDirectory)/gradlew --build-cache -PenvIsCi clean test
-    displayName: 'Run Gradle clean, test and test on Java17'
+      $(Build.SourcesDirectory)/gradlew --build-cache -PenvIsCi clean testOnJava17
+    displayName: 'Run Gradle test on Java17'
   - task: PublishTestResults@2
     displayName: 'Publish Test Results build/reports/**/*.xml'
     inputs:

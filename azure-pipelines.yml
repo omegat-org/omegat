@@ -43,17 +43,27 @@ stages:
   condition: not(or(eq(variables['Build.Reason'], 'Schedule'), eq(variables['Build.Reason'], 'Manual'), eq(variables.isRelease, true)))
   jobs:
   - job: GitHubCI
-    displayName: CI Test
+    displayName: Test on Java 11
     pool:
       vmImage: 'ubuntu-22.04'
     steps:
       - template: ci/azure-pipelines/test_steps.yml
 
+- stage: TestOnJava17
+  condition: not(or(eq(variables['Build.Reason'], 'Schedule'), eq(variables['Build.Reason'], 'Manual'), eq(variables.isRelease, true)))
+  jobs:
+    - job: GitHubCI
+      displayName: Test on Java 17
+      pool:
+        vmImage: 'ubuntu-22.04'
+      steps:
+        - template: ci/azure-pipelines/test_java17_steps.yml
+
 - stage: Check
   condition: or(eq(variables['Build.Reason'], 'Schedule'), eq(variables['Build.Reason'], 'Manual'), eq(variables.isRelease, true))
   jobs:
     - job: GitHubCI
-      displayName: CI Check
+      displayName: Test and Check
       pool:
         vmImage: 'ubuntu-22.04'
       steps:

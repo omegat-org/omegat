@@ -9,6 +9,7 @@
                2013-2014 Enrique Estevez, Didier Briel
                2015 Aaron Madlon-Kay, Enrique Estevez
                2016 Aaron Madlon-Kay
+               2023 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -69,6 +70,7 @@ import org.omegat.util.TagUtil;
  * @author Enrique Estevez (keko.gl@gmail.com)
  * @author Didier Briel
  * @author Aaron Madlon-Kay
+ * @author Hiroshi Miura
  *
  *         Option to remove untranslated segments in the target files Code
  *         adapted from the file: MozillaDTDFilter.java Support for encoding
@@ -89,14 +91,13 @@ public class ResourceBundleFilter extends AbstractFilter {
     /**
      * Key=value pairs with a preceding comment containing this string are not
      * translated, and are output verbatim.
-     * <p>
-     * TODO: Make this optional
      */
     public static final String DO_NOT_TRANSLATE_COMMENT = "NOI18N";
 
     public static final String OPTION_REMOVE_STRINGS_UNTRANSLATED = "unremoveStringsUntranslated";
     public static final String OPTION_DONT_UNESCAPE_U_LITERALS = "dontUnescapeULiterals";
     public static final String OPTION_FORCE_JAVA8_LITERALS_ESCAPE = "forceJava8LiteralsEscape";
+    public static final String OPTION_DONT_TRANSLATE_COMMENT = "dontTargetCommentValue";
     public static final String DEFAULT_SOURCE_ENCODING = StandardCharsets.UTF_8.name();
     public static final String DEFAULT_TARGET_ENCODING = StandardCharsets.UTF_8.name();
 
@@ -104,11 +105,6 @@ public class ResourceBundleFilter extends AbstractFilter {
 
     private String targetEncoding = DEFAULT_TARGET_ENCODING;
     private Boolean forceTargetEscape = true;
-
-    /**
-     * If true, will remove non-translated segments in the target files
-     */
-    private boolean removeStringsUntranslated = false;
 
     /**
      * If true, will not convert characters into \\uXXXX notation
@@ -210,7 +206,7 @@ public class ResourceBundleFilter extends AbstractFilter {
      * or non-key-value-breaking equals).
      * <ul>
      */
-    protected String normalizeInputLine(String line) throws IOException, TranslationException {
+    protected String normalizeInputLine(String line) throws TranslationException {
 
         // Whitespace at the beginning of lines is ignored
         boolean strippingWhitespace = true;
@@ -307,18 +303,15 @@ public class ResourceBundleFilter extends AbstractFilter {
                     && charsetEncoder.canEncode(text.substring(i, i + Character.charCount(cp)))) {
                 result.appendCodePoint(cp);
             } else {
-                for (char c : Character.toChars(cp)) {
-                    String code = Integer.toString(c, 16);
-                    while (code.codePointCount(0, code.length()) < 4) {
-                        code = '0' + code;
-                    }
-                    result.append("\\u").append(code);
+                char[] chars = Character.toChars(cp); // optimized for speed
+                for (int j = 0, charsLength = chars.length; j < charsLength; j++) {
+                    String code = Integer.toString(chars[j], 16).toUpperCase();
+                    result.append("\\u").append("0".repeat(Math.max(0, 4 - code.codePointCount(0, code.length()))))
+                            .append(code);
                 }
             }
         }
-
         return result.toString();
-
     }
 
     private static boolean containsUEscapeAt(String text, int offset) {
@@ -374,12 +367,14 @@ public class ResourceBundleFilter extends AbstractFilter {
     @Override
     public void processFile(BufferedReader reader, BufferedWriter outfile, FilterContext fc)
             throws IOException, TranslationException {
-        // Parameter in the options of filter to customize the target file
-        removeStringsUntranslated = processOptions != null
+        // Parameter in the options of filter to customize the target file.
+
+        // If true, will remove non-translated segments in the target files.
+        boolean removeStringsUntranslated = processOptions != null
                 && "true".equalsIgnoreCase(processOptions.get(OPTION_REMOVE_STRINGS_UNTRANSLATED));
 
         // Parameter in the options of filter to customize the behavior of the
-        // filter
+        // filter.
         dontUnescapeULiterals = processOptions != null
                 && "true".equalsIgnoreCase(processOptions.get(OPTION_DONT_UNESCAPE_U_LITERALS));
 
@@ -387,6 +382,9 @@ public class ResourceBundleFilter extends AbstractFilter {
             forceTargetEscape = "true"
                     .equalsIgnoreCase(processOptions.get(OPTION_FORCE_JAVA8_LITERALS_ESCAPE));
         }
+
+        boolean dontTranslateComment = processOptions != null
+                && !"false".equalsIgnoreCase(processOptions.get(OPTION_DONT_TRANSLATE_COMMENT));
 
         String raw;
         boolean noi18n = false;
@@ -475,7 +473,7 @@ public class ResourceBundleFilter extends AbstractFilter {
                         value = "";
                     }
 
-                    if (noi18n) {
+                    if (noi18n && dontTranslateComment) {
                         // if we don't need to internationalize
                         outfile.write(toAscii(key, EscapeMode.KEY));
                         outfile.write(equals);

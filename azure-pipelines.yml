@@ -59,7 +59,7 @@ stages:
 - stage: Weekly
   condition: or(eq(variables['Build.Reason'], 'Schedule'), eq(variables['Build.Reason'], 'Manual'))
   jobs:
-  - job: Check for weekly
+  - job: CheckForWeekly
     displayName: Test and Check
     pool:
       vmImage: 'ubuntu-22.04'
@@ -86,7 +86,7 @@ stages:
 - stage: Release
   condition: and(succeeded(), eq(variables.isRelease, true))
   jobs:
-  - job: Check for release
+  - job: CheckForRelease
     displayName: Test and Check
     pool:
       vmImage: 'ubuntu-22.04'

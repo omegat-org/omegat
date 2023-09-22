@@ -1,6 +1,6 @@
 name: Run checkstyle
 
-on: pull_request
+on: [push, pull_request]
 
 jobs:
   checkstyle:
@@ -15,4 +15,4 @@ jobs:
     - name: run checkstyle
       uses: gradle/gradle-build-action@v2
       with:
-        arguments: checkstyleMain checkstyleTest
+        arguments: -PenvIsCi checkstyleMain checkstyleTest

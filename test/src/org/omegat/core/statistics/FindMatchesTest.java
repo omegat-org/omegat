@@ -167,7 +167,7 @@ public class FindMatchesTest {
         private ProjectProperties prop;
         private File testTmx;
 
-        public TestProject(final ProjectProperties prop, final File testTmx) {
+        TestProject(final ProjectProperties prop, final File testTmx) {
             this.prop = prop;
             this.testTmx = testTmx;
         }

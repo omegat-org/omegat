@@ -249,7 +249,7 @@ public class AccessTools extends JPanel {
     @SuppressWarnings("serial")
     static class ProjectComboBoxModel extends DefaultComboBoxModel<URI> {
 
-        public ProjectComboBoxModel(List<URI> list) {
+        ProjectComboBoxModel(List<URI> list) {
             super(list.toArray(URI[]::new));
         }
 
@@ -278,7 +278,7 @@ public class AccessTools extends JPanel {
          * @param items
          *            default lists of SourceFileInfo.
          */
-        public SourceComboBoxModel(final List<ProjectFileInformation> items) {
+        SourceComboBoxModel(final List<ProjectFileInformation> items) {
             super(items.toArray(new ProjectFileInformation[0]));
         }
 

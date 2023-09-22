@@ -138,7 +138,7 @@ public class MainWindowMenuTest extends TestCore {
 
     static class TestMainMenu extends BaseMainWindowMenu {
 
-        public TestMainMenu() {
+        TestMainMenu() {
             super(null, null);
         }
 

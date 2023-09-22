@@ -86,7 +86,9 @@
 
     <!-- Checks for whitespace                               -->
     <!-- See http://checkstyle.sf.net/config_whitespace.html -->
-    <module name="FileTabCharacter"/>
+    <module name="FileTabCharacter">
+        <property name="severity" value="error"/>
+    </module>
 
     <!-- Miscellaneous other checks.                   -->
     <!-- See http://checkstyle.sf.net/config_misc.html -->
@@ -128,7 +130,9 @@
         <module name="LocalVariableName"/>
         <module name="MemberName"/>
         <module name="MethodName"/>
-        <module name="PackageName"/>
+        <module name="PackageName">
+            <property name="severity" value="error"/>
+        </module>
         <module name="ParameterName"/>
         <module name="StaticVariableName"/>
         <module name="TypeName"/>
@@ -139,7 +143,8 @@
         <module name="IllegalImport"/> <!-- defaults to sun.* packages -->
         <module name="RedundantImport"/>
         <module name="UnusedImports">
-            <property name="processJavadoc" value="false"/>
+            <property name="processJavadoc" value="true"/>
+            <property name="severity" value="error"/>
         </module>
 
         <!-- Checks for Size Violations.                    -->
@@ -180,7 +185,9 @@
         <module name="ModifierOrder">
             <property name="severity" value="error"/>
         </module>
-        <module name="RedundantModifier"/>
+        <module name="RedundantModifier">
+            <property name="severity" value="error"/>
+        </module>
 
         <!-- Checks for blocks. You know, those {}'s         -->
         <!-- See http://checkstyle.sf.net/config_blocks.html -->

@@ -19,4 +19,4 @@ jobs:
       name: annotate spotbugs warnings/errors
       if: ${{ failure() || success() }}
       with:
-        path: '**/build/spotbugs/*.xml'
+        path: '**/build/reports/spotbugs/*.xml'

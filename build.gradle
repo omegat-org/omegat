@@ -10,11 +10,11 @@ plugins {
     id 'eclipse'
     id 'checkstyle'
     id 'jacoco'
-    id 'com.github.spotbugs' version '4.7.10'
+    alias(libs.plugins.spotbugs)
+    alias(libs.plugins.spotless)
+    alias(libs.plugins.versions)
+    alias(libs.plugins.launch4j)
     id 'org.hidetake.ssh' version '2.10.1'
-    id 'com.diffplug.spotless' version '6.0.0'
-    id 'com.github.ben-manes.versions' version '0.39.0'
-    id 'edu.sc.seis.launch4j' version '3.0.3'
 }
 
 apply from: 'gradle/utils.gradle'
@@ -23,12 +23,9 @@ applicationName = 'OmegaT'
 mainClassName = 'org.omegat.Main'
 
 def javaVersion = 11;
-
+def localPropsFile = file('local.properties')
 ext {
     omtVersion = loadProperties(file('src/org/omegat/Version.properties'))
-    omtFlavor = omtVersion.beta.empty ? 'standard' : 'latest'
-    omtWebsite = 'https://omegat.org'
-    localPropsFile = file('local.properties')
     if (localPropsFile.file) {
         loadProperties(localPropsFile).each { k, v ->
             if (!findProperty(k)) {
@@ -36,7 +33,10 @@ ext {
             }
         }
     }
+    providedLibsDir = file('lib/provided')
 }
+def omtFlavor = omtVersion.beta.empty ? 'standard' : 'latest'
+def omtWebsite = 'https://omegat.org'
 
 version = omtVersion.version + getUpdateSuffix(omtVersion.update)
 
@@ -95,7 +95,7 @@ allprojects {
     }
 
     checkstyle {
-        toolVersion = '8.45.1'
+        toolVersion = libs.versions.checkstyle.get()
     }
     checkstyleMain.exclude '**/gen/**'
 
@@ -103,7 +103,7 @@ allprojects {
         enforceCheck false
         java {
             targetExclude 'src/gen/**'
-            eclipse().configFile 'docs_devel/docs/assets/eclipse-formatting.xml'
+            eclipse().configFile "${rootProject.projectDir}/docs_devel/docs/assets/eclipse-formatting.xml"
             removeUnusedImports()
         }
     }
@@ -157,133 +157,93 @@ configurations {
 
 ext {
     providedLibsDir = file('lib/provided')
-    languageToolVersion = '6.1'
-    luceneVersion = '5.5.5'
-    luceneGosenVersion = '5.5.1'
-    jgitVersion = '6.6.0.202305301015-r'
-    slf4jVersion = '2.0.7'
 }
 
 dependencies {
     // Libs are provided in the "source" distribution only
     if (providedLibsDir.directory) {
-        implementation fileTree(dir: providedLibsDir, include: '**/*.jar')
+        implementation fileTree(dir: providedLibsDir, include: '**/*.jar', excludes: ['**/slf4j-api-1.*.jar'])
     } else {
-        implementation 'commons-io:commons-io:2.11.0'
-        implementation 'org.apache.commons:commons-lang3:3.11'
-        api "org.slf4j:slf4j-api:${slf4jVersion}"
-        implementation 'tokyo.northside:slf4j-format-jdk14:0.5.0'
-        runtimeOnly "org.slf4j:slf4j-jdk14:${slf4jVersion}"
+        implementation(libs.commons.io)
+        implementation(libs.commons.lang3)
+        api(libs.slf4j.api)
+        implementation(libs.slf4j.format.jdk14)
+        runtimeOnly(libs.slf4j.jdk14)
 
         // macOS integration
-        implementation 'org.madlonkay:desktopsupport:0.6.0'
+        implementation(libs.madlonkay.desktopsupport)
 
         // stax
-        implementation 'org.codehaus.woodstox:stax2-api:4.2.1'
-        runtimeOnly 'com.fasterxml.woodstox:woodstox-core:6.5.0'
+        implementation(libs.stax2.api)
+        runtimeOnly(libs.woodstox.core)
 
         // Data: inline data URL handler
-        implementation 'tokyo.northside:url-protocol-handler:0.1.4'
+        implementation(libs.url.protocol.handler)
 
         // PDF Filter
-        implementation 'org.apache.pdfbox:pdfbox:2.0.27'
+        implementation(libs.apache.pdfbox)
 
         // Aligner
-        implementation 'net.loomchild:maligna:3.0.1'
+        implementation(libs.loomchild.maligna)
 
         // Dictionary
-        implementation 'com.github.takawitter:trie4j:0.9.8'
-        implementation('io.github.eb4j:dsl4j:0.5.3') {
-            exclude module: 'annotations'
-        }
-        // Explicit specification of annotations version
-        implementation 'org.jetbrains:annotations:23.0.0'
-        implementation 'tokyo.northside:stardict4j:0.5.0'
-        implementation 'org.jsoup:jsoup:1.15.3'
+        implementation(libs.bundles.dictionary)
 
         // Encoding detections
-        implementation 'com.github.albfernandez:juniversalchardet:2.4.0'
+        implementation(libs.juniversal.chardet)
 
         // Legacy projects re-hosted on Maven Central
-        api 'org.omegat:vldocking:3.0.5'
-        implementation 'org.omegat:htmlparser:1.6-20230203'
-        implementation 'org.omegat:gnudiff4j:1.15'
-        implementation 'org.omegat:lib-mnemonics:1.1'
-        implementation 'org.omegat:jmyspell-core:1.0.0-beta-2'
+        api(libs.omegat.vldocking)
+        implementation(libs.omegat.htmlparser)
+        implementation(libs.omegat.gnudiff4j)
+        implementation(libs.omegat.mnemonics)
+        implementation(libs.omegat.jmyspell.core)
 
         // LanguageTool
-        implementation("org.languagetool:languagetool-core:${languageToolVersion}") {
-            exclude module: 'guava'
-            exclude module: 'jackson-databind'
-            exclude group: 'org.jetbrains'
-        }
-        // Explicitly specify guava dependency for `jre` version rather than `-android`
-        implementation 'com.google.guava:guava:31.0.1-jre'
+        implementation(libs.languagetool.core)
 
-            // Lucene for tokenizers
-        implementation "org.apache.lucene:lucene-core:${luceneVersion}"
-        implementation "org.apache.lucene:lucene-analyzers-common:${luceneVersion}"
-        implementation "org.apache.lucene:lucene-analyzers-kuromoji:${luceneVersion}"
-        implementation "org.apache.lucene:lucene-analyzers-smartcn:${luceneVersion}"
-        implementation "org.apache.lucene:lucene-analyzers-stempel:${luceneVersion}"
+        // Lucene for tokenizers
+        implementation(libs.bundles.lucene)
 
         // Team project server support
-        implementation "org.eclipse.jgit:org.eclipse.jgit:${jgitVersion}"
-        implementation "org.eclipse.jgit:org.eclipse.jgit.ssh.apache:${jgitVersion}"
-        implementation "org.eclipse.jgit:org.eclipse.jgit.ssh.apache.agent:${jgitVersion}"
-        implementation "org.eclipse.jgit:org.eclipse.jgit.http.apache:${jgitVersion}"
+        implementation(libs.bundles.jgit)
+
         // For ed25519 and ecdsa support of ssh, java16+ or BC
-        implementation 'org.bouncycastle:bcprov-jdk18on:1.72'
-        implementation 'org.bouncycastle:bcpg-jdk18on:1.72'
-        implementation 'org.bouncycastle:bcpkix-jdk18on:1.72'
-        implementation 'net.i2p.crypto:eddsa:0.3.0'
+        implementation(libs.bundles.ecdsa)
+
         // For gpg signing
-        implementation "org.eclipse.jgit:org.eclipse.jgit.gpg.bc:${jgitVersion}"
+        implementation(libs.jgit.bc)
 
         // For subversion
-        implementation 'org.tmatesoft.svnkit:svnkit:1.10.11'
+        implementation(libs.svnkit)
 
         // Team project conflict resolution
-        implementation 'org.madlonkay:supertmxmerge:2.0.3'
+        implementation(libs.madlonkay.supertmxmerge)
 
         // Credentials encryption
-        implementation 'org.jasypt:jasypt:1.9.3'
+        implementation(libs.jasypt)
 
         // Groovy used for scripts - needed at implementation for GroovyClassLoader modifications
         // Ivy is needed to handle Grape/@Grab dependencies
-        runtimeOnly 'org.apache.groovy:groovy-jsr223:4.0.11'
-        runtimeOnly 'org.apache.groovy:groovy-dateutil:4.0.11'
-        runtimeOnly 'org.apache.groovy:groovy-json:4.0.11'
-        runtimeOnly 'org.apache.groovy:groovy-swing:4.0.11'
-        runtimeOnly 'org.apache.groovy:groovy-templates:4.0.11'
-        runtimeOnly 'org.apache.groovy:groovy-xml:4.0.11'
-        runtimeOnly 'org.apache.ivy:ivy:2.5.1'
+        runtimeOnly(libs.bundles.groovy)
 
         // Javascript used for scripts
-        runtimeOnly 'org.openjdk.nashorn:nashorn-core:15.4'
+        implementation(libs.nashorn.core)
 
         // Script editor
-        implementation 'com.fifesoft:rsyntaxtextarea:3.2.0'
-        implementation 'com.fifesoft:rstaui:3.2.0'
-        implementation ('com.fifesoft:languagesupport:3.1.4') {
+        implementation(libs.bundles.fifesoft) {
             exclude module: 'rhino'
         }
-        implementation 'com.fifesoft:autocomplete:3.2.0'
+
+        implementation(libs.guava)
+        implementation(libs.jetbrains.annotations)
 
         // JSON parser
-        implementation "com.fasterxml.jackson.core:jackson-core:2.14.2"
-        implementation "com.fasterxml.jackson.core:jackson-databind:2.14.2"
-        implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.14.2"
-        implementation 'com.fasterxml.jackson.module:jackson-module-jaxb-annotations:2.14.2'
+        implementation(libs.bundles.jackson)
 
-        implementation("com.github.ben-manes.caffeine:caffeine:2.9.3") {
-            attributes {
-                attribute(Bundling.BUNDLING_ATTRIBUTE, project.objects.named(Bundling.class, Bundling.EXTERNAL))
-            }
-        }
+        implementation(libs.jetbrains.annotations)
 
-        implementation("com.github.ben-manes.caffeine:jcache:2.9.3") {
-            exclude module: 'caffeine'
+        implementation(libs.bundles.caffeine) {
             attributes {
                 attribute(Bundling.BUNDLING_ATTRIBUTE, project.objects.named(Bundling.class, Bundling.EXTERNAL))
             }
@@ -292,39 +252,35 @@ dependencies {
 
     // Test dependencies
 
-    testFixturesApi 'junit:junit:4.13.2'
+    testFixturesApi(libs.junit4)
     // for http connection test
-    testFixturesApi 'com.github.tomakehurst:wiremock-jre8:2.35.0'
-    testFixturesImplementation 'commons-io:commons-io:2.11.0'
-    testFixturesImplementation 'org.omegat:vldocking:3.0.5'
-    testFixturesApi "org.slf4j:slf4j-api:${slf4jVersion}"
+    testFixturesApi(libs.wiremock.jre8)
+    testFixturesApi(libs.slf4j.api)
+    testFixturesImplementation(libs.commons.io)
+    testFixturesImplementation(libs.omegat.vldocking)
 
-    testImplementation 'org.xmlunit:xmlunit-legacy:2.8.3'
-    testImplementation("org.languagetool:languagetool-server:${languageToolVersion}") {
+    testImplementation(libs.xmlunit.legacy)
+    testImplementation(libs.languagetool.server) {
         exclude group: 'org.slf4j'
         exclude group: 'ch.qos.logback'
     }
     // LanguageTool unit tests exercise these languages
-    ['be', 'en', 'fr'].each {
-        testImplementation "org.languagetool:language-${it}:${languageToolVersion}"
-    }
-    testImplementation("org.languagetool:language-ja:${languageToolVersion}") {
+    testImplementation(libs.bundles.languagetool.tests) {
         // Temporary exclusion; see https://sourceforge.net/p/omegat/bugs/814/
         exclude module: 'lucene-gosen'
     }
-    testRuntimeOnly "org.omegat.lucene:lucene-gosen:${luceneGosenVersion}:ipadic"
-    testRuntimeOnly "org.languagetool:language-pl:${languageToolVersion}"
-    testRuntimeOnly "org.slf4j:slf4j-jdk14:${slf4jVersion}"
+    testRuntimeOnly "org.omegat.lucene:lucene-gosen:5.5.1:ipadic"
+    testRuntimeOnly(libs.slf4j.jdk14)
 
     // JAXB codegen only
-    jaxb 'com.sun.xml.bind:jaxb-xjc:2.3.4'
+    jaxb(libs.jaxb.xjc)
 
     // genMac only
-    genMac 'org.omegat:appbundler:1.2.1'
+    genMac(libs.omegat.appbundler)
 
     testIntegrationImplementation sourceSets.main.output, sourceSets.test.output
     testIntegrationImplementation(testFixtures(project.rootProject))
-    testIntegrationRuntimeOnly "org.slf4j:slf4j-jdk14:${slf4jVersion}"
+    testIntegrationRuntimeOnly(libs.slf4j.jdk14)
 }
 
 jar {
@@ -367,18 +323,17 @@ jar {
     archiveFileName.set("${archiveBaseName.get()}.${archiveExtension.get()}")
 }
 
-ext {
-    distsDir = file("${buildDir}/${distsDirName}")
+project(":languagetools") {jar.enabled = false}
+project(":machinetranslators") {jar.enabled = false}
 
-    assetDir = findProperty('assetDir') ?: '../'
-
-    macJRE = fileTree(dir: assetDir, include: 'OpenJDK11U-jre_x64_mac_*.tar.gz')
-    armMacJRE = fileTree(dir: assetDir, include: 'OpenJDK11U-jre_aarch64_mac_*.tar.gz')
-    linux64JRE = fileTree(dir: assetDir, include: 'OpenJDK11U-jre_x64_linux_*.tar.gz')
-    linuxArm64JRE = fileTree(dir: assetDir, include: 'OpenJDK11U-jre_aarch64_linux_*.tar.gz')
-    windowsJRE32 = fileTree(dir: assetDir, include: 'OpenJDK11U-jre_x86-32_windows_*.zip')
-    windowsJRE = fileTree(dir: assetDir, include: 'OpenJDK11U-jre_x64_windows_*.zip')
-}
+def distsDir = file("${buildDir}/${distsDirName}")
+def assetDir = findProperty('assetDir') ?: '../'
+def macJRE = fileTree(dir: assetDir, include: 'OpenJDK11U-jre_x64_mac_*.tar.gz')
+def armMacJRE = fileTree(dir: assetDir, include: 'OpenJDK11U-jre_aarch64_mac_*.tar.gz')
+def linux64JRE = fileTree(dir: assetDir, include: 'OpenJDK11U-jre_x64_linux_*.tar.gz')
+def linuxArm64JRE = fileTree(dir: assetDir, include: 'OpenJDK11U-jre_aarch64_linux_*.tar.gz')
+def windowsJRE32 = fileTree(dir: assetDir, include: 'OpenJDK11U-jre_x86-32_windows_*.zip')
+def windowsJRE = fileTree(dir: assetDir, include: 'OpenJDK11U-jre_x64_windows_*.zip')
 
 launch4j {
     xmlFileName = "${projectDir}/release/win32-specific/L4j_OMT.xml"
@@ -543,7 +498,7 @@ distributions {
     source {
         contents {
             from(rootDir) {
-                include 'config/**', 'ci/iscc', 'ci/osslsigncode', 'images/**', 'lib/**', 'release/**',
+                include 'config/**', 'ci/iscc', 'ci/osslsigncode', 'docs/**', 'images/**', 'lib/**', 'release/**',
                     'src/**', 'test/**', 'test-integration/**', 'doc_src/**', 'docs_devel/**', 'scripts/**',
                     'gradle/**', 'gradlew*', 'build.gradle', 'settings.gradle', 'README.md', '*.properties',
                     'tipoftheday/**', 'machinetranslators/**', 'scriptengine/**'

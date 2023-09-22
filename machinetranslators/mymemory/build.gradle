@@ -6,21 +6,20 @@ plugins {
     id 'java-library'
 }
 
-
 dependencies {
     compileOnly(project.rootProject)
     if (providedLibsDir.directory) {
         compileOnly fileTree(dir: providedLibsDir, includes: ['**/*commons-*.jar', '**/jackson*.jar'])
     } else {
-        compileOnly 'commons-io:commons-io:2.11.0'
-        compileOnly 'org.apache.commons:commons-text:1.9'
+        compileOnly(libs.commons.io)
+        compileOnly(libs.commons.text)
         // JSON parser
-        compileOnly "com.fasterxml.jackson.core:jackson-core:2.13.4"
-        compileOnly "com.fasterxml.jackson.core:jackson-databind:2.13.4.2"
+        compileOnly(libs.jackson.core)
+        compileOnly(libs.jackson.databind)
     }
     testImplementation(testFixtures(project.rootProject))
-    testImplementation "com.fasterxml.jackson.core:jackson-core:2.13.4"
-    testImplementation "com.fasterxml.jackson.core:jackson-databind:2.13.4.2"
+    testImplementation(libs.jackson.core)
+    testImplementation(libs.jackson.databind)
 }
 
 jar {

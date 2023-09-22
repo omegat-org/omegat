@@ -39,18 +39,29 @@ variables:
   GRADLE_USER_HOME: '$(Pipeline.Workspace)/.gradle'
 
 stages:
-- stage: Check
-  condition: not(or(eq(variables['Build.Reason'], 'Schedule'), eq(variables['Build.Reason'], 'Manual')))
+- stage: Test
+  condition: not(or(eq(variables['Build.Reason'], 'Schedule'), eq(variables['Build.Reason'], 'Manual'), eq(variables.isRelease, true)))
   jobs:
   - job: GitHubCI
-    displayName: CI Check for master, releases/* and Pull-Requests
+    displayName: CI Test
     pool:
       vmImage: 'ubuntu-22.04'
     steps:
-      - template: ci/azure-pipelines/check_steps.yml
+      - template: ci/azure-pipelines/test_steps.yml
+
+- stage: Check
+  condition: or(eq(variables['Build.Reason'], 'Schedule'), eq(variables['Build.Reason'], 'Manual'), eq(variables.isRelease, true))
+  jobs:
+    - job: GitHubCI
+      displayName: CI Check
+      pool:
+        vmImage: 'ubuntu-22.04'
+      steps:
+        - template: ci/azure-pipelines/check_steps.yml
 
   # Weekly release steps will be triggerred after integration-test succeeded.
 - stage: Weekly
+  dependsOn: Check
   condition: or(eq(variables['Build.Reason'], 'Schedule'), eq(variables['Build.Reason'], 'Manual'))
   jobs:
   - job: WeeklyBuild

@@ -222,13 +222,13 @@ public final class GlossaryReaderTBX {
     }
 
     private static Unmarshaller createUnmarshaller() throws JAXBException {
-        final JAXBContext tbx_context;
+        final JAXBContext tbxContext;
         Thread thread = Thread.currentThread();
         ClassLoader originalClassLoader = thread.getContextClassLoader();
         thread.setContextClassLoader(Martif.class.getClassLoader());
-        tbx_context = JAXBContext.newInstance(Martif.class);
+        tbxContext = JAXBContext.newInstance(Martif.class);
         thread.setContextClassLoader(originalClassLoader);
-        return tbx_context.createUnmarshaller();
+        return tbxContext.createUnmarshaller();
     }
 
     /**

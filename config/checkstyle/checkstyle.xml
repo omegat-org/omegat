@@ -126,10 +126,14 @@
         <!-- Checks for Naming Conventions.                  -->
         <!-- See http://checkstyle.sf.net/config_naming.html -->
         <module name="ConstantName"/>
-        <module name="LocalFinalVariableName"/>
+        <module name="LocalFinalVariableName">
+            <property name="severity" value="error"/>
+        </module>
         <module name="LocalVariableName"/>
         <module name="MemberName"/>
-        <module name="MethodName"/>
+        <module name="MethodName">
+            <property name="severity" value="error"/>
+        </module>
         <module name="PackageName">
             <property name="severity" value="error"/>
         </module>
@@ -172,7 +176,9 @@
         <module name="NoWhitespaceBefore"/>
         <module name="OperatorWrap"/>
         <module name="ParenPad"/>
-        <module name="TypecastParenPad"/>
+        <module name="TypecastParenPad">
+            <property name="severity" value="error"/>
+        </module>
         <module name="WhitespaceAfter"/>
         <module name="WhitespaceAround">
             <property name="allowEmptyConstructors" value="true"/>

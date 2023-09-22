@@ -15,4 +15,4 @@ jobs:
     - name: run checkstyle
       uses: gradle/gradle-build-action@v2
       with:
-        arguments: checkstyleMain checkstyleTest
+        arguments: -PenvIsCi checkstyleMain checkstyleTest

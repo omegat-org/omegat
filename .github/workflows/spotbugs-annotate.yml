@@ -14,7 +14,7 @@ jobs:
     - name: run spotbugs
       uses: gradle/gradle-build-action@v2
       with:
-        arguments: spotbugsMain spotbugsTest
+        arguments: -PenvIsCi spotbugsMain spotbugsTest
     - uses: jwgmeligmeyling/spotbugs-github-action@master
       name: annotate spotbugs warnings/errors
       if: ${{ failure() || success() }}

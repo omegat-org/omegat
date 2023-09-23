@@ -291,6 +291,12 @@ dependencies {
                 attribute(Bundling.BUNDLING_ATTRIBUTE, project.objects.named(Bundling.class, Bundling.EXTERNAL))
             }
         }
+
+        // Platform integration with Windows and macOS
+        implementation "net.java.dev.jna:jna-platform:5.13.0"
+        implementation('de.jangassen:jfa:1.2.0') {
+            exclude module: 'jna'
+        }
     }
 
     // Test dependencies

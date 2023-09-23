@@ -7,4 +7,5 @@ include("machinetranslators:apertium",
         "machinetranslators:mymemory",
         "machinetranslators:yandex",
         "languagetools",
+        "theme",
         "tipoftheday")

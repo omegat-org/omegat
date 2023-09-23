@@ -514,7 +514,8 @@ public final class Preferences {
     public static final boolean VERSION_CHECK_AUTOMATIC_DEFAULT = true;
 
     public static final String THEME_CLASS_NAME = "theme_class_name";
-    public static final String THEME_CLASS_NAME_DEFAULT = "org.omegat.gui.theme.DefaultFlatTheme";
+    public static final String THEME_DARK_CLASS_NAME = "theme_dark_class_name";
+    public static final String THEME_COLOR_MODE = "theme_color_mode";
     public static final String GLOSSARY_SORT_BY_LENGTH = "glossary_sort_by_length";
     public static final String MENUUI_CLASS_NAME = "menuui_class_name";
 

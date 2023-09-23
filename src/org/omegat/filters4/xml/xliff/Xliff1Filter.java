@@ -104,7 +104,7 @@ public class Xliff1Filter extends AbstractXliffFilter {
             }
         }
     }
-    
+
     @Override
     @SuppressWarnings("fallthrough")
     protected boolean processStartElement(StartElement startElement, XMLStreamWriter writer)
@@ -259,8 +259,9 @@ public class Xliff1Filter extends AbstractXliffFilter {
                 inSubSeg = 0;
                 break;
             } else {
-                if (inSubSeg > 0)
+                if (inSubSeg > 0) {
                     inSubSeg--;
+                }
             } // avoids to crash on <mrk> inside segment.
               // Do not break because inside segment we want </m0>
         default:

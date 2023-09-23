@@ -64,7 +64,7 @@ public class TestLogFileHandler extends StreamHandler {
    /**
     * @return the name of the current log file
     */
-    public String getOmegaTLogFileName(){
+    public String getOmegaTLogFileName() {
        return logFileName;
    }
 

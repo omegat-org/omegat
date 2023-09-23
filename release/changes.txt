@@ -1,15 +1,27 @@
 ----------------------------------------------------------------------
  OmegaT 6.1.0
 ----------------------------------------------------------------------
-  18 Enhancement
-  29 Bug fixes
+  22 Enhancement
+  31 Bug fixes
 ----------------------------------------------------------------------
 6.1.0 vs 6.0.0
 
   Implemented requests:
 
+  - ResourceBundle Filter: default not to escape Unicode character
+  https://sourceforge.net/p/omegat/feature-requests/1716/
+
+  - Make language libraries in LanguageTools as module
+  https://sourceforge.net/p/omegat/feature-requests/1714/
+
+  - Use SLF4J as logging facade framework
+  https://sourceforge.net/p/omegat/feature-requests/1710/
+
+  - team: apache HttpClient for git connection
+  https://sourceforge.net/p/omegat/feature-requests/1706/
+
   - Request to add new API to allow plugins/modules to add menu item in requested place
-  https://sourceforge.net/p/omegat/feature-requests/1703
+  https://sourceforge.net/p/omegat/feature-requests/1703/
 
   - Team: SVN support svn+ssh protocol with key authentication
   https://sourceforge.net/p/omegat/feature-requests/1700/
@@ -82,6 +94,9 @@
   - Integration test(docker) failure with 503
   https://sourceforge.net/p/omegat/bugs/1199/
 
+  - Option-arrow not working in arm macOS
+  https://sourceforge.net/p/omegat/bugs/1197/
+
   - Content of notes elements are not displayed correctly with Xliff filter
   https://sourceforge.net/p/omegat/bugs/1192/
 
@@ -150,6 +165,13 @@
 
   - Incorrect display of RTL segments in the Fuzzy Matches pane
   https://sourceforge.net/p/omegat/bugs/558/
+
+  - First session message in log not localised
+  https://sourceforge.net/p/omegat/bugs/272/
+
+  - If project memory is updated during load via tm/auto or tm/enforce, set project as modified
+    so that save also updates project_save.tmx
+  https://sourceforge.net/p/omegat/bugs/1185/
 
 ----------------------------------------------------------------------
  OmegaT 6.0.0 (2023-06-19)

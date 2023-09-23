@@ -55,14 +55,14 @@ public class MsOfficeFileFilter extends AbstractZipFilter {
      */
     private void defineDOCUMENTSOptions(Map<String, String> config) {
         /*
-         * Complete string when all options are enabled.
-         * Word: "(document\\.xml)|(comments\\.xml)|(footnotes\\.xml)|(endnotes\\.xml)
-         * |(header\\d+\\.xml)| (footer\\d+\\.xml)"
-         * Excel: "|(sharedStrings\\.xml)|(comments\\d+\\.xml)"
-         * PowerPoint: "|(slide\\d+\\.xml)|(slideMaster\\d+\\.xml)| (slideLayout\\d+\\.xml)|
-         * (notesSlide\\d+\\.xml)"
-         * Global: "|(data\\d+\\.xml)|(chart\\d+\\.xml)|(drawing\\d+\\.xml)"
-         * Excel: "|(workbook\\.xml)" Visio: "|(page\\d+\\.xml)
+         * Complete string when all options are enabled. Word:
+         * "(document\\.xml)|(comments\\.xml)|(footnotes\\.xml)|(endnotes\\.xml)
+         * |(header\\d+\\.xml)| (footer\\d+\\.xml)" Excel:
+         * "|(sharedStrings\\.xml)|(comments\\d+\\.xml)" PowerPoint:
+         * "|(slide\\d+\\.xml)|(slideMaster\\d+\\.xml)| (slideLayout\\d+\\.xml)|
+         * (notesSlide\\d+\\.xml)" Global:
+         * "|(data\\d+\\.xml)|(chart\\d+\\.xml)|(drawing\\d+\\.xml)" Excel:
+         * "|(workbook\\.xml)" Visio: "|(page\\d+\\.xml)
          */
 
         DOCUMENTS = "(document\\d?\\.xml)";
@@ -211,9 +211,9 @@ public class MsOfficeFileFilter extends AbstractZipFilter {
                 // Specific case for Excel
                 // because "comments" is present twice in DOCUMENTS
                 if (shortname1.indexOf("sharedStrings") >= 0 || shortname2.indexOf("sharedStrings") >= 0) {
-                    if (shortname2.indexOf("sharedStrings") >= 0)
+                    if (shortname2.indexOf("sharedStrings") >= 0) {
                         return 1; // sharedStrings must be first
-                    else {
+                    } else {
                         return -1;
                     }
                 }

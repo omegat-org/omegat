@@ -39,17 +39,10 @@ variables:
   GRADLE_USER_HOME: '$(Pipeline.Workspace)/.gradle'
 
 stages:
-- stage: Check
+- stage: DocCI
   pool:
     vmImage: 'ubuntu-22.04'
   jobs:
-  - job: CI
-    condition: not(or(eq(variables['Build.Reason'], 'Schedule'), eq(variables['Build.Reason'], 'Manual')))
-    displayName: CI Check for master, releases/* and Pull-Requests
-    pool:
-      vmImage: 'ubuntu-22.04'
-    steps:
-      - template: ci/azure-pipelines/check_steps.yml
   - job: preCheck
     steps:
     - bash: |
@@ -70,10 +63,32 @@ stages:
       - template: ci/azure-pipelines/build_doc_steps.yml
       - template: ci/azure-pipelines/publish_manual_snapshot.yml
 
+- stage: Test
+  condition: not(or(eq(variables['Build.Reason'], 'Schedule'), eq(variables['Build.Reason'], 'Manual'), eq(variables.isRelease, true)))
+  jobs:
+  - job: TestOnJava11
+    displayName: on Java 11
+    pool:
+      vmImage: 'ubuntu-22.04'
+    steps:
+      - template: ci/azure-pipelines/test_steps.yml
+  - job: TestOnJava17
+    displayName: on Java 17
+    pool:
+      vmImage: 'ubuntu-22.04'
+    steps:
+      - template: ci/azure-pipelines/test_java17_steps.yml
+
   # Weekly release steps will be triggerred after integration-test succeeded.
 - stage: Weekly
   condition: or(eq(variables['Build.Reason'], 'Schedule'), eq(variables['Build.Reason'], 'Manual'))
   jobs:
+  - job: CheckForWeekly
+    displayName: Test and Check
+    pool:
+      vmImage: 'ubuntu-22.04'
+    steps:
+      - template: ci/azure-pipelines/check_steps.yml
   - job: WeeklyBuild
     displayName: Build for master weekly
     pool:
@@ -93,9 +108,14 @@ stages:
 
   # Release steps will run on the main and/or release branch with tags.
 - stage: Release
-  dependsOn: Check
   condition: and(succeeded(), eq(variables.isRelease, true))
   jobs:
+  - job: CheckForRelease
+    displayName: Test and Check
+    pool:
+      vmImage: 'ubuntu-22.04'
+    steps:
+      - template: ci/azure-pipelines/check_steps.yml
   - job: ReleaseBuild
     pool:
       vmImage: 'ubuntu-22.04'

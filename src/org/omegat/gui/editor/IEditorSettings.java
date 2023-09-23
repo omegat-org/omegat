@@ -69,7 +69,7 @@ public interface IEditorSettings {
     
     void setMarkParagraphDelimitations(boolean mark);
     
-    public boolean isMarkParagraphDelimitations();
+    boolean isMarkParagraphDelimitations();
 
     boolean isMarkBidi();
 

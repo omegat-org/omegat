@@ -31,6 +31,7 @@ import static org.junit.Assert.fail;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 import org.junit.Test;
 
@@ -50,8 +51,10 @@ public class ResourceBundleFilterTest extends TestFilterBase {
 
     @Test
     public void testTranslate() throws Exception {
+        Map<String, String> options = new TreeMap<>();
+        options.put(ResourceBundleFilter.OPTION_FORCE_JAVA8_LITERALS_ESCAPE, "true");
         translateText(new ResourceBundleFilter(),
-                "test/data/filters/resourceBundle/file-ResourceBundleFilter.properties");
+                "test/data/filters/resourceBundle/file-ResourceBundleFilter.properties", options);
     }
 
     @Test

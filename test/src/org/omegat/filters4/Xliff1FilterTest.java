@@ -30,19 +30,15 @@ import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
-import java.net.URL;
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 
 import org.junit.Test;
 
-import org.omegat.core.Core;
-import org.omegat.core.data.IProject;
 import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.ITranslateCallback;
 import org.omegat.filters4.xml.xliff.Xliff1Filter;
-import org.omegat.util.Language;
 
 public class Xliff1FilterTest extends org.omegat.filters.TestFilterBase {
     @Test

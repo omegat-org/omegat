@@ -68,13 +68,14 @@ public class AboutDialog extends JDialog {
         initComponents();
 
         StaticUIUtils.setCaretUpdateEnabled(abouttext, false);
-        abouttext.setText(StringUtil.format(OStrings.getString("ABOUTDIALOG_CONTRIBUTORS"),
-                getContributors(), getLibraries()));
+        abouttext.setText(StringUtil.format(OStrings.getString("ABOUTDIALOG_CONTRIBUTORS"), getContributors(),
+                getLibraries()));
 
         versionLabel.setText(getVersionString());
 
         String memoryUsage = StringUtil.format(OStrings.getString("MEMORY_USAGE"),
-                MemoryUtils.getMemoryAllocatedMB(), MemoryUtils.getMemoryFreeMB(), MemoryUtils.getMemoryLimitMB());
+                MemoryUtils.getMemoryAllocatedMB(), MemoryUtils.getMemoryFreeMB(),
+                MemoryUtils.getMemoryLimitMB());
         memoryusage.setText(memoryUsage);
 
         String javaVersion = StringUtil.format(OStrings.getString("JAVA_VERSION"),
@@ -116,11 +117,11 @@ public class AboutDialog extends JDialog {
         return result;
     }
 
-
     private String getVersionString() {
         if (!StringUtil.isEmpty(OStrings.UPDATE) && !OStrings.UPDATE.equals("0")) {
             return StringUtil.format(OStrings.getString("ABOUTDIALOG_BRAND_VERSION_UPDATE_REVISION"),
-                    OStrings.getApplicationDisplayName(),OStrings.VERSION, OStrings.UPDATE, OStrings.REVISION);
+                    OStrings.getApplicationDisplayName(), OStrings.VERSION, OStrings.UPDATE,
+                    OStrings.REVISION);
         } else {
             return StringUtil.format(OStrings.getString("ABOUTDIALOG_BRAND_VERSION_REVISION"),
                     OStrings.getApplicationDisplayName(), OStrings.VERSION, OStrings.REVISION);
@@ -128,10 +129,13 @@ public class AboutDialog extends JDialog {
     }
 
     private void copySupportInfo() {
-        Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(StaticUtils.getSupportInfo()), null);
+        Toolkit.getDefaultToolkit().getSystemClipboard()
+                .setContents(new StringSelection(StaticUtils.getSupportInfo()), null);
     }
 
-    /** @return the return status of this dialog - one of RET_OK or RET_CANCEL */
+    /**
+     * @return the return status of this dialog - one of RET_OK or RET_CANCEL
+     */
     public int getReturnStatus() {
         return returnStatus;
     }

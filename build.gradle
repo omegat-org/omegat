@@ -89,14 +89,12 @@ allprojects {
 
     tasks.register('spotbugsMainReport') {
         doLast {
-            def reportFile = file("${projectDir}/build/reports/spotbugs/main.text")
+            def reportFile = file("build/reports/spotbugs/main.txt")
             if (reportFile.exists()) {
                 println()
                 reportFile.readLines().forEach {
                     println(it)
                 }
-            } else {
-                didWork = false
             }
         }
         group = 'verification'
@@ -104,14 +102,12 @@ allprojects {
 
     tasks.register('spotbugsTestReport') {
         doLast {
-            def reportFile = file("${projectDir}/build/reports/spotbugs/test.text")
+            def reportFile = file("build/reports/spotbugs/test.txt")
             if (reportFile.exists()) {
                 println()
                 reportFile.readLines().forEach {
                     println(it)
                 }
-            } else {
-                didWork = false
             }
         }
         group = 'verification'

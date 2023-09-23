@@ -16,6 +16,8 @@ jobs:
       with:
         distribution: 'temurin'
         java-version: '11'
+    - name: create annotation
+      run: echo "::add-matcher::${{ github.workspace }}/ci/github/problem-matcher.json"
     - name: run spotbugs
       uses: gradle/gradle-build-action@v2
       with:

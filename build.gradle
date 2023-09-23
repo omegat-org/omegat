@@ -87,11 +87,54 @@ allprojects {
         reportLevel = 'high'
     }
 
-    tasks.findAll { it.name =~ /^spotbugs.*/ }.each {
-        it.reports {
-            xml.required = envIsCi
+    tasks.register('spotbugsMainReport') {
+        doLast {
+            def reportFile = file("build/reports/spotbugs/main.txt")
+            if (reportFile.exists()) {
+                println()
+                reportFile.readLines().forEach {
+                    println(it)
+                }
+            }
+        }
+        group = 'verification'
+    }
+
+    tasks.register('spotbugsTestReport') {
+        doLast {
+            def reportFile = file("build/reports/spotbugs/test.txt")
+            if (reportFile.exists()) {
+                println()
+                reportFile.readLines().forEach {
+                    println(it)
+                }
+            }
+        }
+        group = 'verification'
+    }
+
+    spotbugsMain {
+        if (envIsCi) {
+            extraArgs = ['-longBugCodes']
+            jvmArgs = ['-Duser.language=en']
+        }
+        reports {
+            text.required = envIsCi
             html.required = !envIsCi
         }
+        finalizedBy(spotbugsMainReport)
+    }
+
+    spotbugsTest {
+        if (envIsCi) {
+            extraArgs = ['-longBugCodes']
+            jvmArgs = ['-Duser.language=en']
+        }
+        reports {
+            text.required = envIsCi
+            html.required = !envIsCi
+        }
+        finalizedBy(spotbugsTestReport)
     }
 
     checkstyle {

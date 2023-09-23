@@ -82,4 +82,8 @@ plugins.forEach { args ->
         group = 'languagetool'
     }
     jar.dependsOn "${name}Jar"
+    def capitalName = name.capitalize()
+    tasks.getByName("spotbugs${capitalName}") {
+        group = 'other'
+    }
 }

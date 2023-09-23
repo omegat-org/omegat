@@ -4,7 +4,7 @@
            with fuzzy matching, translation memory, keyword search,
            glossaries, and translation leveraging into updated projects.
 
-￼ Copyright (C) 2010 Alex Buloichik, Didier Briel
+  Copyright (C) 2010 Alex Buloichik, Didier Briel
                 2011 Briac Pilpre, Alex Buloichik
                 2013 Didier Briel
                 2016 Aaron Madlon-Kay

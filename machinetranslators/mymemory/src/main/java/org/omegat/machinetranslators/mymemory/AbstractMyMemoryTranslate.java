@@ -5,11 +5,11 @@
            glossaries, and translation leveraging into updated projects.
 
   Copyright (c) 2010 Alex Buloichik, Ibai Lakunza Velasco, Didier Briel
-￼               2013 Martin Wunderlich
-￼               2014 Manfred Martin
-￼               2015 Didier Briel
-￼               2017 Briac Pilpre
-￼               2023 Hiroshi Miura
+                2013 Martin Wunderlich
+                2014 Manfred Martin
+                2015 Didier Briel
+                2017 Briac Pilpre
+                2023 Hiroshi Miura
                 Home page: https://www.omegat.org/
                 Support center: https://omegat.org/support
 

@@ -108,7 +108,6 @@ import org.omegat.gui.main.ProjectUICommands;
 import org.omegat.gui.segmentation.SegmentationCustomizer;
 import org.omegat.util.Java8Compat;
 import org.omegat.util.Language;
-import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.DelegatingComboBoxRenderer;
@@ -124,6 +123,7 @@ import gen.core.filters.Filters;
  */
 public class AlignPanelController {
     private static final ILogger LOGGER = LoggerFactory.getLogger(AlignPanelController.class);
+    private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("org.omegat.gui.align.Bundle");
     private final Aligner aligner;
     private final String defaultSaveDir;
     private boolean modified = false;
@@ -176,7 +176,7 @@ public class AlignPanelController {
      */
     public void show(Component parent) {
         frame = new AlignMenuFrame();
-        frame.setTitle(OStrings.getString("ALIGNER_PANEL"));
+        frame.setTitle(BUNDLE.getString("ALIGNER_PANEL"));
         frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 
         frame.addWindowListener(new WindowAdapter() {
@@ -394,14 +394,14 @@ public class AlignPanelController {
                 while (true) {
                     JFileChooser chooser = new JFileChooser();
                     chooser.setSelectedFile(new File(defaultSaveDir, getOutFileName()));
-                    chooser.setDialogTitle(OStrings.getString("ALIGNER_PANEL_DIALOG_SAVE"));
+                    chooser.setDialogTitle(BUNDLE.getString("ALIGNER_PANEL_DIALOG_SAVE"));
                     if (JFileChooser.APPROVE_OPTION == chooser.showSaveDialog(frame)) {
                         File file = chooser.getSelectedFile();
                         if (file.isFile()) {
                             if (JOptionPane.OK_OPTION != JOptionPane.showConfirmDialog(frame,
-                                    StringUtil.format(OStrings.getString("ALIGNER_PANEL_DIALOG_OVERWRITE"),
+                                    StringUtil.format(BUNDLE.getString("ALIGNER_PANEL_DIALOG_OVERWRITE"),
                                             file.getName()),
-                                    OStrings.getString("ALIGNER_DIALOG_WARNING_TITLE"),
+                                    BUNDLE.getString("ALIGNER_DIALOG_WARNING_TITLE"),
                                     JOptionPane.WARNING_MESSAGE)) {
                                 continue;
                             }
@@ -414,8 +414,8 @@ public class AlignPanelController {
                         } catch (Exception ex) {
                             LOGGER.atInfo().setCause(ex).log();
                             JOptionPane.showMessageDialog(frame,
-                                    OStrings.getString("ALIGNER_PANEL_SAVE_ERROR"),
-                                    OStrings.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
+                                    BUNDLE.getString("ALIGNER_PANEL_SAVE_ERROR"),
+                                    BUNDLE.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
                         }
                     }
                     break;
@@ -839,8 +839,8 @@ public class AlignPanelController {
             return true;
         }
         return JOptionPane.OK_OPTION == JOptionPane.showConfirmDialog(comp,
-                OStrings.getString("ALIGNER_PANEL_RESET_WARNING_MESSAGE"),
-                OStrings.getString("ALIGNER_DIALOG_WARNING_TITLE"), JOptionPane.OK_CANCEL_OPTION);
+                BUNDLE.getString("ALIGNER_PANEL_RESET_WARNING_MESSAGE"),
+                BUNDLE.getString("ALIGNER_DIALOG_WARNING_TITLE"), JOptionPane.OK_CANCEL_OPTION);
     }
 
     /**
@@ -871,8 +871,8 @@ public class AlignPanelController {
                     // Ignore
                 } catch (Exception e) {
                     LOGGER.atInfo().setCause(e).log();
-                    JOptionPane.showMessageDialog(panel, OStrings.getString("ALIGNER_ERROR_LOADING"),
-                            OStrings.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(panel, BUNDLE.getString("ALIGNER_ERROR_LOADING"),
+                            BUNDLE.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
                 }
                 panel.continueButton.setEnabled(true);
                 panel.progressBar.setVisible(false);
@@ -882,7 +882,7 @@ public class AlignPanelController {
                 String distanceValue = null;
                 if (beads != null) {
                     double avgDist = MutableBead.calculateAvgDist(beads);
-                    distanceValue = StringUtil.format(OStrings.getString("ALIGNER_PANEL_LABEL_AVGSCORE"),
+                    distanceValue = StringUtil.format(BUNDLE.getString("ALIGNER_PANEL_LABEL_AVGSCORE"),
                             avgDist == Long.MAX_VALUE ? "-" : String.format("%.3f", avgDist));
                     panel.table.setModel(new BeadTableModel(beads));
                     for (int i = 0; i < BeadTableModel.COL_SRC; i++) {
@@ -923,7 +923,7 @@ public class AlignPanelController {
         panel.controlsPanel.setEnabled(phase == Phase.EDIT);
         panel.saveButton.setVisible(phase != Phase.ALIGN);
         panel.saveButton.setEnabled(phase == Phase.EDIT);
-        String instructions = OStrings.getString("ALIGNER_PANEL_" + phase.key + "_PHASE_HELP");
+        String instructions = BUNDLE.getString("ALIGNER_PANEL_" + phase.key + "_PHASE_HELP");
         panel.instructionsLabel.setText(instructions);
         frame.editMenu.setEnabled(phase != Phase.ALIGN);
         for (Component c : frame.editMenu.getComponents()) {
@@ -1032,8 +1032,8 @@ public class AlignPanelController {
             return;
         }
         if (JOptionPane.OK_OPTION == JOptionPane.showConfirmDialog(comp,
-                OStrings.getString("ALIGNER_DIALOG_SEGMENTATION_CONFIRM_MESSAGE"),
-                OStrings.getString("ALIGNER_DIALOG_CONFIRM_TITLE"), JOptionPane.OK_CANCEL_OPTION)) {
+                BUNDLE.getString("ALIGNER_DIALOG_SEGMENTATION_CONFIRM_MESSAGE"),
+                BUNDLE.getString("ALIGNER_DIALOG_CONFIRM_TITLE"), JOptionPane.OK_CANCEL_OPTION)) {
             if (Core.getProject().isProjectLoaded()
                     && Core.getProject().getProjectProperties().getProjectSRX() != null) {
                 Core.getProject().getProjectProperties().setProjectSRX(customizedSRX);
@@ -1041,8 +1041,8 @@ public class AlignPanelController {
                     Core.getProject().saveProjectProperties();
                 } catch (Exception ex) {
                     LOGGER.atInfo().setCause(ex).log();
-                    JOptionPane.showMessageDialog(comp, OStrings.getString("CT_ERROR_SAVING_PROJ"),
-                            OStrings.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(comp, BUNDLE.getString("CT_ERROR_SAVING_PROJ"),
+                            BUNDLE.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
                 }
                 ProjectUICommands.promptReload();
             } else {
@@ -1065,8 +1065,8 @@ public class AlignPanelController {
             return;
         }
         if (JOptionPane.OK_OPTION == JOptionPane.showConfirmDialog(comp,
-                OStrings.getString("ALIGNER_DIALOG_FILTERS_CONFIRM_MESSAGE"),
-                OStrings.getString("ALIGNER_DIALOG_CONFIRM_TITLE"), JOptionPane.OK_CANCEL_OPTION)) {
+                BUNDLE.getString("ALIGNER_DIALOG_FILTERS_CONFIRM_MESSAGE"),
+                BUNDLE.getString("ALIGNER_DIALOG_CONFIRM_TITLE"), JOptionPane.OK_CANCEL_OPTION)) {
             if (Core.getProject().isProjectLoaded()
                     && Core.getProject().getProjectProperties().getProjectFilters() != null) {
                 Core.getProject().getProjectProperties().setProjectFilters(customizedFilters);
@@ -1074,8 +1074,8 @@ public class AlignPanelController {
                     Core.getProject().saveProjectProperties();
                 } catch (Exception ex) {
                     LOGGER.atInfo().setCause(ex).log();
-                    JOptionPane.showMessageDialog(comp, OStrings.getString("CT_ERROR_SAVING_PROJ"),
-                            OStrings.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(comp, BUNDLE.getString("CT_ERROR_SAVING_PROJ"),
+                            BUNDLE.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
                 }
                 ProjectUICommands.promptReload();
             } else {
@@ -1095,8 +1095,8 @@ public class AlignPanelController {
         }
         if (needsReview) {
             return JOptionPane.OK_OPTION == JOptionPane.showConfirmDialog(panel,
-                    OStrings.getString("ALIGNER_DIALOG_NEEDSREVIEW_CONFIRM_MESSAGE"),
-                    OStrings.getString("ALIGNER_DIALOG_CONFIRM_TITLE"), JOptionPane.OK_CANCEL_OPTION);
+                    BUNDLE.getString("ALIGNER_DIALOG_NEEDSREVIEW_CONFIRM_MESSAGE"),
+                    BUNDLE.getString("ALIGNER_DIALOG_CONFIRM_TITLE"), JOptionPane.OK_CANCEL_OPTION);
         } else {
             return true;
         }
@@ -1293,18 +1293,18 @@ public class AlignPanelController {
         public String getColumnName(int column) {
             switch (column) {
             case COL_CHECKBOX - 3:
-                return OStrings.getString("ALIGNER_PANEL_TABLE_COL_ROW");
+                return BUNDLE.getString("ALIGNER_PANEL_TABLE_COL_ROW");
             case COL_CHECKBOX - 2:
-                return OStrings.getString("ALIGNER_PANEL_TABLE_COL_DISTANCE");
+                return BUNDLE.getString("ALIGNER_PANEL_TABLE_COL_DISTANCE");
             case COL_CHECKBOX - 1:
                 // Bead number
                 return "";
             case COL_CHECKBOX:
-                return OStrings.getString("ALIGNER_PANEL_TABLE_COL_KEEP");
+                return BUNDLE.getString("ALIGNER_PANEL_TABLE_COL_KEEP");
             case COL_SRC:
-                return OStrings.getString("ALIGNER_PANEL_TABLE_COL_SOURCE");
+                return BUNDLE.getString("ALIGNER_PANEL_TABLE_COL_SOURCE");
             case COL_TRG:
-                return OStrings.getString("ALIGNER_PANEL_TABLE_COL_TARGET");
+                return BUNDLE.getString("ALIGNER_PANEL_TABLE_COL_TARGET");
             }
             throw new IllegalArgumentException();
         }
@@ -2127,7 +2127,7 @@ public class AlignPanelController {
                 return null;
             }
             try {
-                return OStrings.getString(keyPrefix + value.name());
+                return BUNDLE.getString(keyPrefix + value.name());
             } catch (MissingResourceException ex) {
                 return value.name();
             }

@@ -35,6 +35,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
@@ -44,7 +45,6 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
 import org.omegat.util.Java8Compat;
-import org.omegat.util.OStrings;
 import org.omegat.util.gui.StaticUIUtils;
 
 /**
@@ -53,7 +53,7 @@ import org.omegat.util.gui.StaticUIUtils;
  * @author Aaron Madlon-Kay
  */
 public class PatternPanelController {
-
+    private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("org.omegat.gui.align.Bundle");
     private final Pattern initialPattern;
     private Pattern result;
 
@@ -75,7 +75,7 @@ public class PatternPanelController {
      * @return The result of editing
      */
     public Pattern show(Window parent) {
-        final JDialog dialog = new JDialog(parent, OStrings.getString("ALIGNER_DIALOG_PATTERN"),
+        final JDialog dialog = new JDialog(parent, BUNDLE.getString("ALIGNER_DIALOG_PATTERN"),
                 ModalityType.DOCUMENT_MODAL);
         dialog.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         dialog.addWindowListener(new WindowAdapter() {

@@ -34,12 +34,12 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ResourceBundle;
 
 import javax.swing.JDialog;
 import javax.swing.WindowConstants;
 
 import org.omegat.util.Java8Compat;
-import org.omegat.util.OStrings;
 import org.omegat.util.gui.StaticUIUtils;
 
 /**
@@ -48,7 +48,7 @@ import org.omegat.util.gui.StaticUIUtils;
  * @author Aaron Madlon-Kay
  */
 public class EditingPanelController {
-
+    private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("org.omegat.gui.align.Bundle");
     private final String text;
     private String result;
 
@@ -70,7 +70,7 @@ public class EditingPanelController {
      * @return The result of editing
      */
     public String show(Window parent) {
-        final JDialog dialog = new JDialog(parent, OStrings.getString("ALIGNER_DIALOG_EDITOR"),
+        final JDialog dialog = new JDialog(parent, BUNDLE.getString("ALIGNER_DIALOG_EDITOR"),
                 ModalityType.DOCUMENT_MODAL);
         dialog.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         dialog.addWindowListener(new WindowAdapter() {

@@ -25,18 +25,17 @@
 
 package org.omegat.gui.dictionaries;
 
-import org.omegat.core.Core;
-import org.omegat.core.data.SourceTextEntry;
-import org.omegat.gui.editor.EditorPopups;
-import org.omegat.gui.editor.IPopupMenuConstructor;
-import org.omegat.gui.editor.SegmentBuilder;
-import org.omegat.util.OStrings;
-
-import org.openide.awt.Mnemonics;
-
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.text.JTextComponent;
+
+import org.openide.awt.Mnemonics;
+
+import org.omegat.core.Core;
+import org.omegat.core.data.SourceTextEntry;
+import org.omegat.gui.editor.IPopupMenuConstructor;
+import org.omegat.gui.editor.SegmentBuilder;
+import org.omegat.util.OStrings;
 
 public class DictionaryPopup implements IPopupMenuConstructor {
 

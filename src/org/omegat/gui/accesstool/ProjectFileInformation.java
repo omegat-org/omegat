@@ -38,7 +38,7 @@ class ProjectFileInformation {
     private final String filePath;
     private final int segments;
 
-    public ProjectFileInformation(final String activeFileName) {
+    ProjectFileInformation(final String activeFileName) {
         filePath = Paths.get(activeFileName).getFileName().toString();
         segments =
                 Core.getProject().getProjectFiles().stream()
@@ -48,7 +48,7 @@ class ProjectFileInformation {
                         .orElse(0);
     }
 
-    public ProjectFileInformation(final IProject.FileInfo f) {
+    ProjectFileInformation(final IProject.FileInfo f) {
         filePath = Paths.get(f.filePath).getFileName().toString();
         segments = f.entries.size();
     }

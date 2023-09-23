@@ -380,8 +380,9 @@ public final class ProjectUICommands {
                 } catch (Exception ex) {
                     Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_DOWNLOAD_TEAM_PROJECT");
                     Core.getMainWindow().displayErrorRB(ex, "PP_ERROR_UNABLE_TO_DOWNLOAD_TEAM_PROJECT");
-                    if (oldCursor != null)
+                    if (oldCursor != null) {
                         mainWindow.setCursor(oldCursor);
+                    }
                 }
             }
         }.execute();

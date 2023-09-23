@@ -52,7 +52,7 @@ import gen.core.project.RepositoryDefinition;
 
 public class NewTeamProjectController {
 
-    final private IMainWindow mw;
+    private final IMainWindow mw;
     private NewTeamProject dialog;
     private RepoTypeWorker repoTypeWorker = null;
     private String repoType;

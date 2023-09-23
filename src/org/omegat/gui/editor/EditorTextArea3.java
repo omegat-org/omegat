@@ -30,7 +30,6 @@
 
 package org.omegat.gui.editor;
 
-import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
@@ -69,7 +68,6 @@ import org.omegat.gui.editor.autocompleter.AutoCompleter;
 import org.omegat.gui.shortcuts.PropertiesShortcuts;
 import org.omegat.util.OStrings;
 import org.omegat.util.StringUtil;
-import org.omegat.util.gui.StaticUIUtils;
 import org.omegat.util.gui.Styles;
 import org.omegat.util.gui.UIDesignManager;
 

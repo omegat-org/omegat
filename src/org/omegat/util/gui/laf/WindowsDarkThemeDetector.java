@@ -37,9 +37,9 @@ import org.omegat.util.JnaLoader;
  * the Apache 2.0 license.
  */
 public class WindowsDarkThemeDetector extends SystemDarkThemeDetector {
-    private final static String REGISTRY_PATH = "Software\\Microsoft\\Windows\\CurrentVersion\\Themes"
+    private static final String REGISTRY_PATH = "Software\\Microsoft\\Windows\\CurrentVersion\\Themes"
             + "\\Personalize";
-    private final static String REGISTRY_VALUE = "AppsUseLightTheme";
+    private static final String REGISTRY_VALUE = "AppsUseLightTheme";
 
     public WindowsDarkThemeDetector() {
     }

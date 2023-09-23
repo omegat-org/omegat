@@ -24,8 +24,9 @@ mainClassName = 'org.omegat.Main'
 
 def javaVersion = 11;
 def localPropsFile = file('local.properties')
+def versionFile = file("${rootProject.projectDir}/src/org/omegat/Version.properties")
 ext {
-    omtVersion = loadProperties(file('src/org/omegat/Version.properties'))
+    omtVersion = loadProperties(versionFile)
     if (localPropsFile.file) {
         loadProperties(localPropsFile).each { k, v ->
             if (!findProperty(k)) {
@@ -88,8 +89,8 @@ allprojects {
     }
 
     tasks.register('spotbugsMainReport') {
+        def reportFile = file("build/reports/spotbugs/main.txt")
         doLast {
-            def reportFile = file("build/reports/spotbugs/main.txt")
             if (reportFile.exists()) {
                 println()
                 reportFile.readLines().forEach {
@@ -101,8 +102,8 @@ allprojects {
     }
 
     tasks.register('spotbugsTestReport') {
+        def reportFile = file("build/reports/spotbugs/test.txt")
         doLast {
-            def reportFile = file("build/reports/spotbugs/test.txt")
             if (reportFile.exists()) {
                 println()
                 reportFile.readLines().forEach {
@@ -474,8 +475,8 @@ manualIndexXmls.each { xml ->
         task(type:Zip, zipTaskName) {
             from file("${buildDir}/docs/manual/${lang}")
             from fileTree(dir: "doc_src/${lang}", include: "**/version*.properties")
-            archiveFileName="${lang}.zip"
-            destinationDir file('docs/manuals')
+            archiveFileName = "${lang}.zip"
+            destinationDirectory = file('docs/manuals')
         }
         manualHtmls.dependsOn zipTaskName
         tasks.getByName(zipTaskName).dependsOn htmlTaskName
@@ -1111,12 +1112,11 @@ tasks.findAll { it.name =~ /[dD]istTar$/ && !it.name.contains('linux') }.each { 
 // Disable .zip distributions for Linux
 tasks.findAll { it.name =~ /[dD]istZip$/ && it.name.contains('linux') }.each { it.enabled = false }
 
+def revision = detectRevision()
 processResources {
-    def revision = detectRevision()
     inputs.property 'revision', revision
     doLast {
         logger.lifecycle("Detected revision ${revision}")
-        def versionFile = file("${sourceSets.main.output.resourcesDir}/org/omegat/Version.properties")
         ant.propertyfile(file: versionFile) {
             entry(key: 'revision', value: revision)
         }
@@ -1387,7 +1387,7 @@ task publishVersion {
         ssh.run {
             session(remotes.sourceforgeWeb) {
                 def target = "${htdocs}/Version-${omtFlavor}.properties"
-                put from: file('src/org/omegat/Version.properties'), into: target
+                put from: versionFile, into: target
             }
         }
     }

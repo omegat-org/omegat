@@ -50,6 +50,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.MissingResourceException;
+import java.util.ResourceBundle;
 import java.util.concurrent.CancellationException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -122,7 +123,7 @@ import gen.core.filters.Filters;
  * @author Aaron Madlon-Kay
  */
 public class AlignPanelController {
-    private final static ILogger LOGGER = LoggerFactory.getLogger(AlignPanelController.class);
+    private static final ILogger LOGGER = LoggerFactory.getLogger(AlignPanelController.class);
     private final Aligner aligner;
     private final String defaultSaveDir;
     private boolean modified = false;
@@ -150,7 +151,13 @@ public class AlignPanelController {
      * </ol>
      */
     private enum Phase {
-        ALIGN, EDIT, PINPOINT
+        ALIGN("ALIGN"),
+        EDIT("EDIT"),
+        PINPOINT("PINPOINT");
+        final String key;
+        Phase(String key) {
+            this.key = key;
+        }
     }
 
     private Phase phase = Phase.ALIGN;
@@ -916,17 +923,7 @@ public class AlignPanelController {
         panel.controlsPanel.setEnabled(phase == Phase.EDIT);
         panel.saveButton.setVisible(phase != Phase.ALIGN);
         panel.saveButton.setEnabled(phase == Phase.EDIT);
-        String instructions = null;
-        switch (phase) {
-        case ALIGN:
-            instructions = OStrings.getString("ALIGNER_PANEL_ALIGN_PHASE_HELP");
-            break;
-        case EDIT:
-            instructions = OStrings.getString("ALIGNER_PANEL_EDIT_PHASE_HELP");
-            break;
-        case PINPOINT:
-            instructions = OStrings.getString("ALIGNER_PANEL_PINPOINT_PHASE_HELP");
-        }
+        String instructions = OStrings.getString("ALIGNER_PANEL_" + phase.key + "_PHASE_HELP");
         panel.instructionsLabel.setText(instructions);
         frame.editMenu.setEnabled(phase != Phase.ALIGN);
         for (Component c : frame.editMenu.getComponents()) {
@@ -1287,8 +1284,9 @@ public class AlignPanelController {
                 return String.class;
             case COL_TRG:
                 return String.class;
+            default:
+                throw new IllegalArgumentException();
             }
-            throw new IllegalArgumentException();
         }
 
         @Override

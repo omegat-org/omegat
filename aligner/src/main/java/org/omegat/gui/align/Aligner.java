@@ -429,12 +429,14 @@ public class Aligner {
             return alignHeapwise(segment);
         case ID:
             return segment ? alignByIdSegmented() : alignByIdNotSegmented();
+        default:
+            throw new UnsupportedOperationException("Unknown comparison mode: " + comparisonMode);
         }
-        throw new UnsupportedOperationException("Unknown comparison mode: " + comparisonMode);
     }
 
     /**
-     * Align the input files according to the current settings to a list of pairs where
+     * Align the input files according to the current settings to a list
+     * of pairs where
      * <ol>
      * <li>key = source text
      * <li>value = target text
@@ -469,15 +471,17 @@ public class Aligner {
             return new NormalDistributionCalculator(counter);
         case POISSON:
             return new PoissonDistributionCalculator(counter, aligns);
+        default:
+            throw new UnsupportedOperationException("Unsupported calculator type: " + calculatorType);
         }
-        throw new UnsupportedOperationException("Unsupported calculator type: " + calculatorType);
     }
 
     /**
-     * Obtain appropriate counter according to the specified {@link CounterType}.
+     * Obtain appropriate counter according to the specified
+     * {@link CounterType}.
      *
-     * @param counterType
-     * @return
+     * @param counterType counter type.
+     * @return counter object.
      */
     private static Counter getCounter(CounterType counterType) {
         switch (counterType) {
@@ -485,16 +489,18 @@ public class Aligner {
             return new CharCounter();
         case WORD:
             return new SplitCounter();
+        default:
+            throw new UnsupportedOperationException("Unsupported counter type: " + counterType);
         }
-        throw new UnsupportedOperationException("Unsupported counter type: " + counterType);
     }
 
     /**
-     * Obtain appropriate align algorithm object according to the specified {@link AlgorithmClass}.
+     * Obtain an appropriate aligned algorithm object according
+     * to the specified {@link AlgorithmClass}.
      *
-     * @param algorithmClass
-     * @param calculator
-     * @return
+     * @param algorithmClass algorithm requested.
+     * @param calculator calculator object.
+     * @return algorithm object.
      */
     private static AlignAlgorithm getAlgorithm(AlgorithmClass algorithmClass, Calculator calculator) {
         MatrixFactory matrixFactory = new FullMatrixFactory();
@@ -504,8 +510,9 @@ public class Aligner {
             return new ViterbiAlgorithm(calculator, map, matrixFactory);
         case FB:
             return new ForwardBackwardAlgorithm(calculator, map, matrixFactory);
+        default:
+            throw new UnsupportedOperationException("Unsupported algorithm class: " + algorithmClass);
         }
-        throw new UnsupportedOperationException("Unsupported algorithm class: " + algorithmClass);
     }
 
     /**

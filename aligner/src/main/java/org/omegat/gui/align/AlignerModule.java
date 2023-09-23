@@ -45,6 +45,10 @@ import org.omegat.util.gui.MenuExtender;
 public final class AlignerModule {
 
     private static IApplicationEventListener alignerListener;
+
+    private AlignerModule() {
+    }
+
     /**
      * Register plugins into OmegaT.
      */

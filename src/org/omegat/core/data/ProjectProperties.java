@@ -69,8 +69,8 @@ import gen.core.project.RepositoryMapping;
 public class ProjectProperties {
 
     private static final String[] DEFAULT_EXCLUDES = { "**/.svn/**", "**/CVS/**", "**/.cvs/**", "**/.git/**",
-            "**/.hg/**", "**/.repositories/**", "**/desktop.ini", "**/Thumbs.db", "**/.DS_Store", "**/~$*"
-            // MS Office owner file; "~$*" see https://superuser.com/a/405258/93651
+            "**/.hg/**", "**/.repositories/**", "**/desktop.ini", "**/Thumbs.db", "**/.DS_Store",
+            "**/~$*" // MS Office owner file; see https://superuser.com/a/405258/93651
     };
 
     public static List<String> getDefaultExcludes() {

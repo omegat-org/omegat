@@ -44,7 +44,7 @@ chmod 600 /home/omegat/.ssh/id_rsa
 ssh-keyscan -H server > /home/omegat/.ssh/known_hosts
 
 cd /workdir
-/opt/gradle-7.5.1/bin/gradle testIntegration \
+/opt/gradle-8.3/bin/gradle testIntegration \
    -Djava.util.logging.config.file=/workdir/test-integration/logger.properties \
    -Domegat.test.duration=${DURATION} -Domegat.test.repo=${REPO} \
    -Domegat.test.repo.alt=${REPO2} -Domegat.test.map.repo=http://server/ -Domegat.test.map.file=README

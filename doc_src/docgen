@@ -5,16 +5,22 @@ SHELL_PATH=`dirname "$0"`
 cd $SHELL_PATH
 
 TARGET=$SHELL_PATH/../build/docs/
+LANGUAGE=en
 
 for arg in "$@"; do
-  if [[ "$arg" == ^-Dtarget=.* ]]; then
+  if [[ "$arg" =~ "-Dtarget" ]]; then
     TARGET=${arg:9}
+  fi
+  if [[ "$arg" =~ "-Dlanguage" ]]; then
+    LANGUAGE=${arg:11}
   fi
 done
 
 umask a+w
+echo create target folder $TARGET
 mkdir -p $TARGET
-chmod -R a+rw $TARGET 2&> /dev/null | true
+chmod -R a+rw $SHELL_PATH 2&> /dev/null
+chmod -R a+rw $TARGET 2&> /dev/null
 
 EXIT_CODE=0
 
@@ -29,5 +35,13 @@ else
   echo Please install docker or nerdctl!
   EXIT_CODE=2
 fi
-chmod -R go-w $SHELL_PATH
+sleep 5
+if [[ -e $SHELL_PATH/$LANGUAGE/xhtml5 ]]; then
+  rm -r $SHELL_PATH/$LANGUAGE/xhtml5/
+fi
+if [[ -e $SHELL_PATH/$LANGUAGE/index.xml ]]; then
+  rm $SHELL_PATH/$LANGUAGE/index.xml
+fi
+chmod -R go-w $TARGET 2&> /dev/null
+chmod -R go-w $SHELL_PATH 2&> /dev/null
 exit $EXIT_CODE

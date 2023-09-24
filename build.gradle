@@ -394,31 +394,33 @@ task genDocIndex(type: Copy) {
     from('doc_src/index_template.html')
     into "${buildDir}/docs/manual"
     rename('index_template.html', 'index.html')
+    def langNameExceptions = loadProperties(file('doc_src/lang_exceptions.properties'))
+    def langInfos = docPropsFiles.collect { props ->
+        def code = props.parentFile.name
+        def locale = Locale.forLanguageTag(code.replace('_', '-'))
+        def name = langNameExceptions[code] ?: locale.getDisplayName(locale)
+        def docVersion = loadProperties(props).version
+        def noManual = false
+        def status = docVersion == omtVersion.version ? 'up-to-date' : 'out-of-date'
+        ['code': code, 'name': name, 'version': docVersion, 'status': status, 'nomanual': noManual]
+    }
     doFirst {
-        def langNameExceptions = loadProperties(file('doc_src/lang_exceptions.properties'))
-        def langInfos = docPropsFiles.collect { props ->
-            def code = props.parentFile.name
-            def locale = Locale.forLanguageTag(code.replace('_', '-'))
-            def name = langNameExceptions[code] ?: locale.getDisplayName(locale)
-            def docVersion = loadProperties(props).version
-            def noManual = false
-            def status = docVersion == omtVersion.version ? 'up-to-date' : 'out-of-date'
-            ['code': code, 'name': name, 'version': docVersion, 'status': status, 'nomanual': noManual]
-        }
-        def filterSet = langInfos.collect {entry -> entry.code}
         langInfos.sort { entry -> entry.code }
         expand('languages': langInfos)
         filteringCharset = 'UTF-8'
     }
+    group = 'documentation'
 }
 
 task manualPdfs {
     description = 'Build PDF manuals for all languages. Requires Docker.'
+    group = 'documentation'
 }
 
 task manualHtmls {
     description = 'Build HTML manuals and zip for all languages. Requires Docker.'
     finalizedBy genDocIndex
+    group = 'documentation'
 }
 
 task webManual(type: Sync) {
@@ -460,13 +462,6 @@ manualIndexXmls.each { xml ->
                 'images/*.png', '_wh/**/*.js', '_wh/wh.css'])
         workingDir = 'doc_src'
         commandLine './docgen', "-Dlanguage=${lang}", "-Dtarget=../build/docs/manual/${lang}", 'html5'
-        doFirst {
-            file("${buildDir}/docs/manual/${lang}/images").mkdir()
-        }
-        doLast {
-            delete fileTree(dir: "doc_src/${lang}", includes: ['xhtml5/**/*', 'index.xml'])
-            delete file("doc_src/${lang}/xhtml5")
-        }
     }
 
     def zipTaskName="manualZip${lang.capitalize()}"
@@ -487,10 +482,12 @@ manualIndexXmls.each { xml ->
 
 task instantStartGuides {
     description = 'Build Instant Start guides for all languages. Requires Docker.'
+    group = 'documentation'
 }
 
 task firstSteps {
     description = 'Build First Step pages for all languages. Requires Docker.'
+    group = 'documentation'
 }
 
 ext.firstStepsXmls = fileTree(dir: 'doc_src', include: '**/First_Steps.xml')
@@ -502,10 +499,6 @@ firstStepsXmls.each { xml ->
         outputs.files fileTree(dir: 'docs', includes: ["greetings/${lang}/first_steps.html", "greetings/${lang}/OmegaT.css"])
         workingDir = 'doc_src'
         commandLine './docgen', "-Dlanguage=${lang}", "-Dtarget=../docs/greetings/${lang}", 'first-steps'
-        doLast {
-            delete file("docs/${lang}/xhtml5")
-            delete file("docs/${lang}/images")
-        }
     }
     firstSteps.dependsOn taskName
 }
@@ -521,9 +514,6 @@ instantStartXmls.each { xml ->
                            "greetings/${lang}/OmegaT.css"])
         workingDir = 'doc_src'
         commandLine './docgen', "-Dlanguage=${lang}", "-Dtarget=../docs/greetings/${lang}", 'instant-start'
-        doLast {
-            delete file("docs/${lang}/xhtml5")
-        }
     }
     instantStartGuides.dependsOn taskName
 }

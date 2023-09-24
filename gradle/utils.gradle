@@ -35,8 +35,8 @@ ext {
          4. If none of the above, the value "unknown"
          */
         def provided = findProperty('repoRevision') ?: ''
-        def git = file('.git').directory ? execGetOutput('git rev-parse --short HEAD') : ''
-        def svn = file('.svn').directory ? execGetOutput('svnversion') : ''
+        def git = file('.git').directory ? providers.exec {commandLine("git", "rev-parse", "--short", "HEAD")}.standardOutput.asText.get() : ''
+        def svn = file('.svn').directory ? providers.exec {commandLine("svnversion")}.standardOutput.asText.get() : ''
         [provided, omtVersion.revision, git, svn, 'unknown'].find {
             it != 'dev' && !it.empty
         }
@@ -53,7 +53,7 @@ ext {
     }
 
     gitBranch = {
-        execGetOutput('git name-rev --name-only HEAD')
+        providers.exec {commandLine("git", "name-rev", "--name-only", "HEAD")}.standardOutput.asText.get()
     }
 
     gitRemote = {

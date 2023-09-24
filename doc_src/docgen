@@ -1,3 +1,33 @@
-#!/bin/sh
+#!/bin/bash
 
-exec docker run -i --rm -u  `id -u`:`id -g` -v "$(dirname "$PWD")":/work/root omegatorg/docgen "$@"
+# should run on `doc_src` directory
+SHELL_PATH=`dirname "$0"`
+cd $SHELL_PATH
+
+TARGET=$SHELL_PATH/../build/docs/
+
+for arg in "$@"; do
+  if [[ "$arg" == ^-Dtarget=.* ]]; then
+    TARGET=${arg:9}
+  fi
+done
+
+umask a+w
+mkdir -p $TARGET
+chmod -R a+rw $TARGET 2&> /dev/null | true
+
+EXIT_CODE=0
+
+# check docker or containerd/nerdctl
+if type nerdctl &> /dev/null ; then
+  nerdctl run -i --rm -u  `id -u`:`id -g` -v "$(dirname "$PWD")":/work/root omegatorg/docgen "$@"
+  EXIT_CODE=$?
+elif type docker &> /dev/null ; then
+  docker run -i --rm -u  `id -u`:`id -g` -v "$(dirname "$PWD")":/work/root omegatorg/docgen "$@"
+  EXIT_CODE=$?
+else
+  echo Please install docker or nerdctl!
+  EXIT_CODE=2
+fi
+chmod -R go-w $SHELL_PATH
+exit $EXIT_CODE

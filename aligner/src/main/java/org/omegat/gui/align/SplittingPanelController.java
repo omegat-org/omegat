@@ -35,6 +35,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ResourceBundle;
 
 import javax.swing.JDialog;
 import javax.swing.JPanel;
@@ -44,7 +45,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
 
-import org.omegat.util.OStrings;
 import org.omegat.util.gui.StaticUIUtils;
 
 /**
@@ -54,6 +54,7 @@ import org.omegat.util.gui.StaticUIUtils;
  */
 public class SplittingPanelController {
 
+    private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("org.omegat.gui.align.Bundle");
     private final String text;
     private final String reference;
     private int splitOffset = -1;
@@ -83,7 +84,8 @@ public class SplittingPanelController {
      * @return The result array
      */
     public String[] show(Window parent) {
-        final JDialog dialog = new JDialog(parent, OStrings.getString("ALIGNER_DIALOG_SPLITTER"), ModalityType.DOCUMENT_MODAL);
+        JDialog dialog = new JDialog(parent, BUNDLE.getString("ALIGNER_DIALOG_SPLITTER"),
+                ModalityType.DOCUMENT_MODAL);
         dialog.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         dialog.addWindowListener(new WindowAdapter() {
             @Override
@@ -144,7 +146,7 @@ public class SplittingPanelController {
             panel.add(referencePanel, BorderLayout.NORTH);
         }
 
-        panel.helpText.setText(OStrings.getString("ALIGNER_DIALOG_SPLITTER_HELP"));
+        panel.helpText.setText(BUNDLE.getString("ALIGNER_DIALOG_SPLITTER_HELP"));
 
         dialog.add(panel);
         dialog.getRootPane().setDefaultButton(panel.okButton);

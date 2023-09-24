@@ -34,6 +34,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.ResourceBundle;
 import java.util.Vector;
 import java.util.concurrent.CancellationException;
 
@@ -49,14 +50,15 @@ import javax.swing.event.DocumentListener;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.text.JTextComponent;
 
+import tokyo.northside.logging.ILogger;
+import tokyo.northside.logging.LoggerFactory;
+
 import org.omegat.core.Core;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.master.PluginUtils;
 import org.omegat.util.Language;
-import org.omegat.util.Log;
-import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.LanguageComboBoxRenderer;
@@ -79,30 +81,61 @@ public class AlignFilePickerController {
     Language sourceLanguage = allLangs.get(0);
     Language targetLanguage = allLangs.get(allLangs.size() - 1);
 
+    private static final ILogger LOGGER = LoggerFactory.getLogger(AlignFilePickerController.class);
+    private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("org.omegat.gui.align.Bundle");
+
+    /**
+     * Set source file for alignment.
+     * @param sourceFile source file path.
+     */
     public void setSourceFile(String sourceFile) {
         this.sourceFile = sourceFile;
     }
 
+    /**
+     * Set target file for alignment.
+     * @param targetFile target file path.
+     */
     public void setTargetFile(String targetFile) {
         this.targetFile = targetFile;
     }
 
+    /**
+     * Set source language.
+     * @param sourceLanguage source language.
+     */
     public void setSourceLanguage(Language sourceLanguage) {
         this.sourceLanguage = sourceLanguage;
     }
 
+    /**
+     * Target source language.
+     * @param targetLanguage target langauge.
+     */
     public void setTargetLanguage(Language targetLanguage) {
         this.targetLanguage = targetLanguage;
     }
 
+    /**
+     * Set source defualt directory.
+     * @param sourceDefaultDir source default directory.
+     */
     public void setSourceDefaultDir(String sourceDefaultDir) {
         this.sourceDefaultDir = sourceDefaultDir;
     }
 
+    /**
+     * Set target default directory.
+     * @param targetDefaultDir target default directory.
+     */
     public void setTargetDefaultDir(String targetDefaultDir) {
         this.targetDefaultDir = targetDefaultDir;
     }
 
+    /**
+     * Set default save directory.
+     * @param defaultSaveDir default save directory to set.
+     */
     public void setDefaultSaveDir(String defaultSaveDir) {
         this.defaultSaveDir = defaultSaveDir;
     }
@@ -115,7 +148,7 @@ public class AlignFilePickerController {
      */
     @SuppressWarnings("serial")
     public void show(final Component parent) {
-        final JFrame frame = new JFrame(OStrings.getString("ALIGNER_FILEPICKER"));
+        final JFrame frame = new JFrame(BUNDLE.getString("ALIGNER_FILEPICKER"));
         frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         StaticUIUtils.setEscapeClosable(frame);
 
@@ -136,9 +169,9 @@ public class AlignFilePickerController {
                     } else {
                         sourceLanguage = null;
                         JOptionPane.showMessageDialog(frame,
-                                OStrings.getString("NP_INVALID_SOURCE_LOCALE")
-                                        + OStrings.getString("NP_LOCALE_SUGGESTION"),
-                                OStrings.getString("TF_ERROR"), JOptionPane.ERROR_MESSAGE);
+                                BUNDLE.getString("NP_INVALID_SOURCE_LOCALE")
+                                        + BUNDLE.getString("NP_LOCALE_SUGGESTION"),
+                                BUNDLE.getString("TF_ERROR"), JOptionPane.ERROR_MESSAGE);
                         picker.sourceLanguagePicker.requestFocusInWindow();
                     }
                 } else if (e.getItem() instanceof Language) {
@@ -163,9 +196,9 @@ public class AlignFilePickerController {
                 } else {
                     targetLanguage = null;
                     JOptionPane.showMessageDialog(frame,
-                            OStrings.getString("NP_INVALID_TARGET_LOCALE")
-                                    + OStrings.getString("NP_LOCALE_SUGGESTION"),
-                            OStrings.getString("TF_ERROR"), JOptionPane.ERROR_MESSAGE);
+                            BUNDLE.getString("NP_INVALID_TARGET_LOCALE")
+                                    + BUNDLE.getString("NP_LOCALE_SUGGESTION"),
+                            BUNDLE.getString("TF_ERROR"), JOptionPane.ERROR_MESSAGE);
                     picker.targetLanguagePicker.requestFocusInWindow();
                 }
             } else if (e.getItem() instanceof Language) {
@@ -176,7 +209,7 @@ public class AlignFilePickerController {
             updatePicker(picker);
         });
         picker.sourceChooseFileButton.addActionListener(e -> {
-            File file = chooseFile(frame, OStrings.getString("ALIGNER_FILEPICKER_CHOOSE_SOURCE"),
+            File file = chooseFile(frame, BUNDLE.getString("ALIGNER_FILEPICKER_CHOOSE_SOURCE"),
                     StringUtil.isEmpty(sourceFile) ? sourceDefaultDir : sourceFile);
             if (file != null) {
                 sourceDefaultDir = file.getParent();
@@ -186,7 +219,7 @@ public class AlignFilePickerController {
             }
         });
         picker.targetChooseFileButton.addActionListener(e -> {
-            File file = chooseFile(frame, OStrings.getString("ALIGNER_FILEPICKER_CHOOSE_TARGET"),
+            File file = chooseFile(frame, BUNDLE.getString("ALIGNER_FILEPICKER_CHOOSE_TARGET"),
                     StringUtil.isEmpty(targetFile) ? targetDefaultDir : targetFile);
             if (file != null) {
                 targetDefaultDir = file.getParent();
@@ -254,7 +287,7 @@ public class AlignFilePickerController {
                     field.setText(files.get(0).getAbsolutePath());
                     return true;
                 } catch (Exception e) {
-                    Log.log(e);
+                    LOGGER.atInfo().setCause(e).log();
                     return false;
                 }
             }
@@ -290,7 +323,7 @@ public class AlignFilePickerController {
                     }
                     return true;
                 } catch (Exception e) {
-                    Log.log(e);
+                    LOGGER.atInfo().setCause(e).log();
                     return false;
                 }
             }
@@ -316,9 +349,9 @@ public class AlignFilePickerController {
                     } catch (CancellationException e) {
                         // Ignore
                     } catch (Exception e) {
-                        Log.log(e);
-                        JOptionPane.showMessageDialog(frame, OStrings.getString("ALIGNER_ERROR_LOADING"),
-                                OStrings.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
+                        LOGGER.atInfo().setCause(e).log();
+                        JOptionPane.showMessageDialog(frame, BUNDLE.getString("ALIGNER_ERROR_LOADING"),
+                                BUNDLE.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
                     }
                     frame.dispose();
                 }
@@ -364,16 +397,16 @@ public class AlignFilePickerController {
                     boolean[] results = get();
                     enabled = results[0] && results[1];
                     if (!results[0] && results[1]) {
-                        message = OStrings.getString("ALIGNER_FILEPICKER_ERROR_ONE_FILE", srcFile.getName());
+                        message = StringUtil.format(BUNDLE.getString("ALIGNER_FILEPICKER_ERROR_ONE_FILE"), srcFile.getName());
                     } else if (results[0] && !results[1]) {
-                        message = OStrings.getString("ALIGNER_FILEPICKER_ERROR_ONE_FILE", trgFile.getName());
+                        message = StringUtil.format(BUNDLE.getString("ALIGNER_FILEPICKER_ERROR_ONE_FILE"), trgFile.getName());
                     } else if (!results[0] && !results[1]) {
-                        message = OStrings.getString("ALIGNER_FILEPICKER_ERROR_BOTH_FILES");
+                        message = BUNDLE.getString("ALIGNER_FILEPICKER_ERROR_BOTH_FILES");
                     }
                 } catch (CancellationException e) {
                     // Ignore
                 } catch (Exception e) {
-                    Log.log(e);
+                    LOGGER.atInfo().setCause(e).log();
                     message = e.getLocalizedMessage();
                 }
                 picker.okButton.setEnabled(enabled);
@@ -400,7 +433,7 @@ public class AlignFilePickerController {
         chooser.setFileFilter(new FileFilter() {
             @Override
             public String getDescription() {
-                return OStrings.getString("ALIGNER_FILEPICKER_SUPPORTEDFILES");
+                return BUNDLE.getString("ALIGNER_FILEPICKER_SUPPORTEDFILES");
             }
             @Override
             public boolean accept(File f) {

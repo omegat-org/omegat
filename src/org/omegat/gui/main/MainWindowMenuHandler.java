@@ -79,7 +79,6 @@ import org.omegat.gui.segmentation.SegmentationCustomizerController;
 import org.omegat.gui.stat.StatisticsWindow;
 import org.omegat.help.Help;
 import org.omegat.util.Java8Compat;
-import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;

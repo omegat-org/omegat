@@ -146,7 +146,7 @@ allprojects {
         enforceCheck false
         java {
             targetExclude 'src/gen/**'
-            eclipse().configFile "${rootProject.projectDir}/docs_devel/docs/assets/eclipse-formatting.xml"
+            eclipse().configFile file("config/spotless/eclipse-formatting.xml")
             removeUnusedImports()
         }
     }
@@ -240,7 +240,9 @@ dependencies {
         implementation(libs.omegat.jmyspell.core)
 
         // LanguageTool
-        implementation(libs.languagetool.core)
+        implementation(libs.languagetool.core) {
+            exclude module: 'guava'
+        }
 
         // Lucene for tokenizers
         implementation(libs.bundles.lucene)
@@ -255,7 +257,10 @@ dependencies {
         implementation(libs.jgit.bc)
 
         // For subversion
-        implementation(libs.svnkit)
+        implementation(libs.svnkit) {
+            exclude module: 'sshd-core'
+            exclude module: 'sshd-common'
+        }
 
         // Team project conflict resolution
         implementation(libs.madlonkay.supertmxmerge)
@@ -302,6 +307,7 @@ dependencies {
     testImplementation(libs.xmlunit.legacy)
     testImplementation(libs.languagetool.server) {
         exclude group: 'org.slf4j'
+        exclude module: 'guava'
         exclude group: 'ch.qos.logback'
     }
     // LanguageTool unit tests exercise these languages
@@ -539,10 +545,14 @@ distributions {
         contents {
             from(rootDir) {
                 include 'config/**', 'ci/iscc', 'ci/osslsigncode', 'docs/**', 'images/**', 'lib/**', 'release/**',
-                    'src/**', 'test/**', 'test-integration/**', 'doc_src/**', 'docs_devel/**', 'scripts/**',
-                    'gradle/**', 'gradlew*', 'build.gradle', 'settings.gradle', 'README.md', '*.properties',
-                    'tipoftheday/**', 'machinetranslators/**', 'scriptengine/**'
-                exclude '**/build/**', 'doc_src/**/pdf/**', 'local.properties', '**/out/**'
+                    'src/**/*.java', 'test/**', 'test-integration/**', 'doc_src/**', 'docs_devel/**', 'scripts/**',
+                    'gradle/**', 'gradle*', 'build.gradle', 'settings.gradle', 'README.md', '*.properties',
+                    'tipoftheday/**', 'machinetranslators/**', 'languagetools/**', 'scriptengine/**',
+                    'LICENSE', 'compose.yml', '.checkstyle'
+                exclude '**/build/**', 'doc_src/**/pdf/**', 'doc_src/**/xhtml5/**', 'local.properties', '**/out/**'
+            }
+            from(processResources) {
+                into('src')
             }
             into('lib/provided') {
                 // collect project runtime dependencies in all subprojects and sourceSets
@@ -1007,7 +1017,20 @@ tasks.findAll { it.name =~ /[dD]istTar$/ && !it.name.contains('linux') }.each { 
 tasks.findAll { it.name =~ /[dD]istZip$/ && it.name.contains('linux') }.each { it.enabled = false }
 
 processResources {
-    def revision = detectRevision()
+    /*
+     Set the revision number included in version strings. The value is
+     chosen from the first valid value in:
+     0. Provided as the Gradle property 'repo.revision'
+     1. src/org/omegat/Version.properties (only if not "dev", i.e. this is a
+        source package not under VCS)
+     2. This svn checkout's revision
+     3. This git clone's SHA-1
+     4. If none of the above, the value "unknown"
+     */
+    def provided = findProperty('repoRevision') ?: ''
+    def git = file('.git').directory ? providers.exec {commandLine("git", "rev-parse", "--short", "HEAD")}.standardOutput.asText.get().trim() : ''
+    def svn = file('.svn').directory ? providers.exec {commandLine("svnversion")}.standardOutput.asText.get().trim() : ''
+    def revision = [provided, omtVersion.revision, git, svn, 'unknown'].find { it != 'dev' && !it.empty }
     inputs.property 'revision', revision
     doLast {
         logger.lifecycle("Detected revision ${revision}")

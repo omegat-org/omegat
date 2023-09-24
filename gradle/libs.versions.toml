@@ -30,6 +30,7 @@ guava = "31.0.1-jre"
 annotations = "23.0.0"
 jgit = "6.6.0.202305301015-r"
 svnkit = "1.10.11"
+sshd = "2.10.0"
 ivy = "2.5.1"
 jackson = "2.15.2"
 bc = "1.72"
@@ -51,12 +52,14 @@ pdfbox = "2.0.27"
 maligna = "3.0.1"
 trie4j = "0.9.8"
 dsl4j = "0.5.3"
-stardict4j = "0.5.0"
+stardict4j = "0.5.1"
 juniversalchardet = "2.4.0"
 mnemonics = "1.1"
 jmyspell = "1.0.0-beta-2"
 xjc = "2.3.4"
-tipoftheday = "0.4.1"
+tipoftheday = "0.4.2"
+sphinx = "1.0.4"
+launch4j = "3.0.3"
 
 [libraries]
 slf4j-api = {group = "org.slf4j", name = "slf4j-api",  version.ref = "slf4j"}
@@ -167,5 +170,6 @@ spotbugs = {id = "com.github.spotbugs", version = "5.1.3"}
 spotless = {id = "com.diffplug.spotless", version = "6.19.0"}
 git-version = {id = "com.palantir.git-version", version = "0.13.0"}
 nexus-publish = {id = "io.github.gradle-nexus.publish-plugin", version = "2.0.0-rc-1"}
-launch4j = {id = "edu.sc.seis.launch4j", version = "3.0.3"}
+launch4j = {id = "edu.sc.seis.launch4j", version.ref = "launch4j"}
 versions = {id = "com.github.ben-manes.versions", version = "0.39.0"}
+sphinx = {id = "tokyo.northside.sphinx", version.ref = "sphinx"}

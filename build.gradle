@@ -37,6 +37,7 @@ ext {
 }
 def omtFlavor = omtVersion.beta.empty ? 'standard' : 'latest'
 def omtWebsite = 'https://omegat.org'
+def envIsCi = project.hasProperty('envIsCi') as Boolean
 
 version = omtVersion.version + getUpdateSuffix(omtVersion.update)
 
@@ -46,7 +47,6 @@ java {
 }
 
 allprojects {
-    def envIsCi = project.hasProperty('envIsCi') as Boolean
 
     apply plugin: 'checkstyle'
     apply plugin: 'java-library'

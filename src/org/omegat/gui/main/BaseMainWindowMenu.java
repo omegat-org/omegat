@@ -382,8 +382,6 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         toolsShowStatisticsMatchesMenuItem = createMenuItem("TF_MENU_TOOLS_STATISTICS_MATCHES");
         toolsShowStatisticsMatchesPerFileMenuItem = createMenuItem(
                 "TF_MENU_TOOLS_STATISTICS_MATCHES_PER_FILE");
-        toolsAlignFilesMenuItem = createMenuItem("TF_MENU_TOOLS_ALIGN_FILES");
-
         optionsPreferencesMenuItem = createMenuItem("MW_OPTIONSMENU_PREFERENCES");
 
         optionsMachineTranslateMenu = createMenu("TF_OPTIONSMENU_MACHINETRANSLATE");
@@ -570,7 +568,6 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         toolsMenu.add(toolsShowStatisticsMatchesMenuItem);
         toolsMenu.add(toolsShowStatisticsMatchesPerFileMenuItem);
         toolsMenu.addSeparator();
-        toolsMenu.add(toolsAlignFilesMenuItem);
 
         if (!Platform.isMacOSX()) {
             optionsMenu.add(optionsPreferencesMenuItem);
@@ -1107,7 +1104,6 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
     JMenuItem toolsShowStatisticsStandardMenuItem;
     JMenuItem toolsShowStatisticsMatchesMenuItem;
     JMenuItem toolsShowStatisticsMatchesPerFileMenuItem;
-    JMenuItem toolsAlignFilesMenuItem;
     JMenuItem upperCaseMenuItem;
     JCheckBoxMenuItem viewDisplaySegmentSourceCheckBoxMenuItem;
     JCheckBoxMenuItem viewMarkNonUniqueSegmentsCheckBoxMenuItem;

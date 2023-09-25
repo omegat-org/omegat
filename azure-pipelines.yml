@@ -89,18 +89,26 @@ stages:
       vmImage: 'ubuntu-22.04'
     steps:
       - template: ci/azure-pipelines/check_steps.yml
+  - job: IntegrationTestForWeekly
+    displayName: Integration Test
+    pool:
+      vmImage: 'ubuntu-22.04'
+    steps:
+      - template: ci/azure-pipelines/integ_test_steps.yml
+        parameters:
+          testType: 'GIT'
+          duration: 600
   - job: WeeklyBuild
     displayName: Build for master weekly
+    dependsOn:
+      - CheckForWeekly
+      - IntegrationTestForWeekly
     pool:
       vmImage: 'ubuntu-22.04'
     steps:
       - script: |
           version=$(./gradlew -qq printVersion | head -n -1 )
           echo "##vso[task.setvariable variable=version]$version"
-      - template: ci/azure-pipelines/integ_test_steps.yml
-        parameters:
-          testType: 'GIT'
-          duration: 600
       - template: ci/azure-pipelines/build_steps.yml
       - template: ci/azure-pipelines/publish_weekly.yml
         parameters:

@@ -25,7 +25,6 @@
 
 package org.omegat.gui.align;
 
-import java.awt.Color;
 import java.awt.Dialog.ModalityType;
 import java.awt.Dimension;
 import java.awt.Window;
@@ -35,36 +34,32 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.regex.Pattern;
-import java.util.regex.PatternSyntaxException;
+import java.util.ResourceBundle;
 
 import javax.swing.JDialog;
 import javax.swing.WindowConstants;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 
 import org.omegat.util.Java8Compat;
-import org.omegat.util.OStrings;
 import org.omegat.util.gui.StaticUIUtils;
 
 /**
- * Controller for a simple regex editing dialog.
+ * Controller for a simple text editing dialog.
  *
  * @author Aaron Madlon-Kay
  */
-public class PatternPanelController {
-
-    private final Pattern initialPattern;
-    private Pattern result;
+public class EditingPanelController {
+    private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("org.omegat.gui.align.Bundle");
+    private final String text;
+    private String result;
 
     /**
-     * Create the controller with the initial pattern.
+     * Create the controller with the default text.
      *
-     * @param pattern
-     *            The pattern to be shown in the editing area
+     * @param text
+     *            The text to be shown in the editing area
      */
-    public PatternPanelController(Pattern pattern) {
-        this.initialPattern = pattern;
+    public EditingPanelController(String text) {
+        this.text = text;
     }
 
     /**
@@ -74,8 +69,8 @@ public class PatternPanelController {
      *            The parent window of the dialog
      * @return The result of editing
      */
-    public Pattern show(Window parent) {
-        final JDialog dialog = new JDialog(parent, OStrings.getString("ALIGNER_DIALOG_PATTERN"),
+    public String show(Window parent) {
+        final JDialog dialog = new JDialog(parent, BUNDLE.getString("ALIGNER_DIALOG_EDITOR"),
                 ModalityType.DOCUMENT_MODAL);
         dialog.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         dialog.addWindowListener(new WindowAdapter() {
@@ -87,13 +82,14 @@ public class PatternPanelController {
         StaticUIUtils.setEscapeClosable(dialog);
 
         final EditingPanel panel = new EditingPanel();
-        panel.editorPane.setText(initialPattern == null ? null : initialPattern.pattern());
+        panel.editorPane.setText(text);
 
         StaticUIUtils.makeCaretAlwaysVisible(panel.editorPane);
 
         panel.okButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                result = panel.editorPane.getText();
                 dialog.dispose();
             }
         });
@@ -114,25 +110,6 @@ public class PatternPanelController {
             }
         });
 
-        panel.editorPane.getDocument().addDocumentListener(new DocumentListener() {
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-                updatePattern(panel);
-            }
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-                updatePattern(panel);
-            }
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-                updatePattern(panel);
-            }
-        });
-
-        panel.helpText.setForeground(Color.RED);
-
-        updatePattern(panel);
-
         dialog.add(panel);
         dialog.getRootPane().setDefaultButton(panel.okButton);
         dialog.setMinimumSize(new Dimension(450, 200));
@@ -142,21 +119,8 @@ public class PatternPanelController {
         return result;
     }
 
-    private void updatePattern(EditingPanel panel) {
-        try {
-            result = Pattern.compile(panel.editorPane.getText());
-            panel.helpText.setText(null);
-            panel.helpText.setToolTipText(null);
-            panel.okButton.setEnabled(true);
-        } catch (PatternSyntaxException ex) {
-            panel.helpText.setText(ex.getLocalizedMessage());
-            panel.helpText.setToolTipText(ex.getLocalizedMessage());
-            panel.okButton.setEnabled(false);
-        }
-    }
-
     private void doCancel(JDialog dialog) {
-        result = initialPattern;
+        result = text;
         dialog.dispose();
     }
 }

@@ -24,9 +24,8 @@ mainClassName = 'org.omegat.Main'
 
 def javaVersion = 11;
 def localPropsFile = file('local.properties')
-def versionFile = file("${rootProject.projectDir}/src/org/omegat/Version.properties")
 ext {
-    omtVersion = loadProperties(versionFile)
+    omtVersion = loadProperties(file('src/org/omegat/Version.properties'))
     if (localPropsFile.file) {
         loadProperties(localPropsFile).each { k, v ->
             if (!findProperty(k)) {
@@ -48,7 +47,6 @@ java {
 }
 
 allprojects {
-
     apply plugin: 'checkstyle'
     apply plugin: 'java-library'
     apply plugin: 'eclipse'
@@ -227,9 +225,6 @@ dependencies {
         // PDF Filter
         implementation(libs.apache.pdfbox)
 
-        // Aligner
-        implementation(libs.loomchild.maligna)
-
         // Dictionary
         implementation(libs.bundles.dictionary)
 
@@ -244,7 +239,9 @@ dependencies {
         implementation(libs.omegat.jmyspell.core)
 
         // LanguageTool
-        implementation(libs.languagetool.core)
+        implementation(libs.languagetool.core) {
+            exclude module: 'guava'
+        }
 
         // Lucene for tokenizers
         implementation(libs.bundles.lucene)
@@ -259,7 +256,10 @@ dependencies {
         implementation(libs.jgit.bc)
 
         // For subversion
-        implementation(libs.svnkit)
+        implementation(libs.svnkit) {
+            exclude module: 'sshd-core'
+            exclude module: 'sshd-common'
+        }
 
         // Team project conflict resolution
         implementation(libs.madlonkay.supertmxmerge)
@@ -306,6 +306,7 @@ dependencies {
     testImplementation(libs.xmlunit.legacy)
     testImplementation(libs.languagetool.server) {
         exclude group: 'org.slf4j'
+        exclude module: 'guava'
         exclude group: 'ch.qos.logback'
     }
     // LanguageTool unit tests exercise these languages
@@ -629,10 +630,14 @@ distributions {
         contents {
             from(rootDir) {
                 include 'config/**', 'ci/iscc', 'ci/osslsigncode', 'docs/**', 'images/**', 'lib/**', 'release/**',
-                    'src/**', 'test/**', 'test-integration/**', 'doc_src/**', 'docs_devel/**', 'scripts/**',
-                    'gradle/**', 'gradlew*', 'build.gradle', 'settings.gradle', 'README.md', '*.properties',
-                    'tipoftheday/**', 'machinetranslators/**', 'scriptengine/**'
-                exclude '**/build/**', 'doc_src/**/pdf/**', 'local.properties', '**/out/**'
+                    'src/**/*.java', 'test/**', 'test-integration/**', 'doc_src/**', 'docs_devel/**', 'scripts/**',
+                    'gradle/**', 'gradle*', 'build.gradle', 'settings.gradle', 'README.md', '*.properties',
+                    'tipoftheday/**', 'machinetranslators/**', 'languagetools/**', 'scriptengine/**',
+                    'LICENSE', 'compose.yml', '.checkstyle'
+                exclude '**/build/**', 'doc_src/**/pdf/**', 'doc_src/**/xhtml5/**', 'local.properties', '**/out/**'
+            }
+            from(processResources) {
+                into('src')
             }
             into('lib/provided') {
                 // collect project runtime dependencies in all subprojects and sourceSets
@@ -902,12 +907,6 @@ task mac(dependsOn: [macDistZip, macNotarize, armMacDistZip, armMacNotarize]) {
     group = 'omegat distribution'
 }
 
-installLinux64Dist {
-    doFirst {
-        delete "${destinationDir}/jre"
-    }
-}
-
 linux64DistTar {
     onlyIf {
         condition(!linux64JRE.empty, 'JRE not found')
@@ -1120,6 +1119,7 @@ processResources {
     inputs.property 'revision', revision
     doLast {
         logger.lifecycle("Detected revision ${revision}")
+        def versionFile = file("${sourceSets.main.output.resourcesDir}/org/omegat/Version.properties")
         ant.propertyfile(file: versionFile) {
             entry(key: 'revision', value: revision)
         }
@@ -1390,7 +1390,7 @@ task publishVersion {
         ssh.run {
             session(remotes.sourceforgeWeb) {
                 def target = "${htdocs}/Version-${omtFlavor}.properties"
-                put from: versionFile, into: target
+                put from: file('src/org/omegat/Version.properties'), into: target
             }
         }
     }

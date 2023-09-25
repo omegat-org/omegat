@@ -24,7 +24,7 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-rsync -rlD --exclude={'.git', '.gradle', 'build', 'docs', 'doc_src'} /code/ /workdir
+rsync -rlD --exclude='.git' --exclude='.gradle' --exclude='build' --exclude='docs' --exclude='doc_src' /code/ /workdir
 
 [ -f /keys/id_rsa ] || inotifywait -e attrib /keys
 

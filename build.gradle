@@ -146,7 +146,7 @@ allprojects {
         enforceCheck false
         java {
             targetExclude 'src/gen/**'
-            eclipse().configFile file("config/spotless/eclipse-formatting.xml")
+            eclipse().configFile file("${rootProject.projectDir}/config/spotless/eclipse-formatting.xml")
             removeUnusedImports()
         }
     }
@@ -1016,6 +1016,9 @@ tasks.findAll { it.name =~ /[dD]istTar$/ && !it.name.contains('linux') }.each { 
 // Disable .zip distributions for Linux
 tasks.findAll { it.name =~ /[dD]istZip$/ && it.name.contains('linux') }.each { it.enabled = false }
 
+def provided = findProperty('repoRevision') ?: ''
+def git = file('.git').directory ? providers.exec {commandLine("git", "rev-parse", "--short", "HEAD")}.standardOutput.asText.get().trim() : ''
+def revision = [provided, omtVersion.revision, git, 'unknown'].find { it != '@dev@' && !it.empty }
 processResources {
     /*
      Set the revision number included in version strings. The value is
@@ -1023,21 +1026,13 @@ processResources {
      0. Provided as the Gradle property 'repo.revision'
      1. src/org/omegat/Version.properties (only if not "dev", i.e. this is a
         source package not under VCS)
-     2. This svn checkout's revision
-     3. This git clone's SHA-1
-     4. If none of the above, the value "unknown"
+     2. This git clone's SHA-1
+     3. If none of the above, the value "unknown"
      */
-    def provided = findProperty('repoRevision') ?: ''
-    def git = file('.git').directory ? providers.exec {commandLine("git", "rev-parse", "--short", "HEAD")}.standardOutput.asText.get().trim() : ''
-    def svn = file('.svn').directory ? providers.exec {commandLine("svnversion")}.standardOutput.asText.get().trim() : ''
-    def revision = [provided, omtVersion.revision, git, svn, 'unknown'].find { it != 'dev' && !it.empty }
     inputs.property 'revision', revision
-    doLast {
-        logger.lifecycle("Detected revision ${revision}")
-        def versionFile = file("${sourceSets.main.output.resourcesDir}/org/omegat/Version.properties")
-        ant.propertyfile(file: versionFile) {
-            entry(key: 'revision', value: revision)
-        }
+    logger.lifecycle("Detected revision " + revision)
+    filesMatching('**/Version.properties') {
+        filter org.apache.tools.ant.filters.ReplaceTokens, tokens:["dev": revision]
     }
 }
 

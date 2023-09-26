@@ -56,6 +56,7 @@ stardict4j = "0.5.1"
 juniversalchardet = "2.4.0"
 mnemonics = "1.1"
 jmyspell = "1.0.0-beta-2"
+hunspell = "2.1.1"
 xjc = "2.3.4"
 tipoftheday = "0.4.2"
 sphinx = "1.0.4"
@@ -151,6 +152,7 @@ stardict4j = {group = "tokyo.northside", name = "stardict4j", version.ref = "sta
 juniversal-chardet = {group = "com.github.albfernandez", name = "juniversalchardet", version.ref = "juniversalchardet"}
 omegat-mnemonics = {group = "org.omegat", name = "lib-mnemonics", version.ref = "mnemonics"}
 omegat-jmyspell-core = {group = "org.omegat", name = "jmyspell-core", version.ref = "jmyspell"}
+dumont-hunspell = {group = "com.gitlab.dumonts", name = "hunspell", version.ref = "hunspell"}
 jaxb-xjc = {group = "org.grassfish.jaxb", name = "jaxb-xjc", version.ref = "xjc"}
 tipoftheday = {group = "tokyo.northside", name = "tipoftheday", version.ref = "tipoftheday"}
 

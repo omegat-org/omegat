@@ -11,22 +11,22 @@ dependencies {
                                                               '**/languagetool-core-*.jar'])
         implementation fileTree(dir: providedLibsDir, includes: ['**/jmyspell-core-*.jar', '**/hunspell-*.jar'])
     } else {
-        compileOnly 'commons-io:commons-io:2.11.0'
-        compileOnly 'org.omegat:lib-mnemonics:1.1'
-        compileOnly 'tokyo.northside:slf4j-format-jdk14:0.5.0'
-        compileOnly('org.languagetool:languagetool-core:6.1') {
+        compileOnly(libs.commons.io)
+        compileOnly(libs.omegat.mnemonics)
+        compileOnly(libs.slf4j.format.jdk14)
+        compileOnly(libs.languagetool.core) {
             exclude module: 'guava'
             exclude module: 'jackson-databind'
             exclude group: 'org.jetbrains'
         }
-        implementation 'org.omegat:jmyspell-core:1.0.0-beta-2'
-        implementation 'com.gitlab.dumonts:hunspell:2.1.1'
+        implementation(libs.omegat.jmyspell.core)
+        implementation(libs.dumont.hunspell)
     }
 }
 
 jar {
     archiveAppendix.set("spellchecker")
-    destinationDirectory.set(new File(rootProject.buildDir, "modules"))
+    destinationDirectory.set(rootProject.layout.buildDirectory.dir("modules").get())
     def pluginProp = loadProperties(file('plugin.properties'))
     manifest {
         attributes('License': 'GNU Public License version 3 or later',

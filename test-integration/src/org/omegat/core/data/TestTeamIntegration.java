@@ -119,7 +119,7 @@ public final class TestTeamIntegration {
     private TestTeamIntegration() {
     }
 
-    private final static Pattern URL_PATTERN = Pattern
+    private static final Pattern URL_PATTERN = Pattern
             .compile("(http(s)?|svn(\\+ssh)?)" + "://(?<username>.+?)(:(?<password>.+?))?@.+");
 
     static final String DIR = "/tmp/teamtest";

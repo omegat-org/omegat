@@ -71,7 +71,7 @@ public final class TipOfTheDayController {
             }
 
             private void initUI() {
-                ResourceBundle bundle = ResourceBundle.getBundle("org.omegat.gui.resources.TipOfTheDay");
+                ResourceBundle bundle = ResourceBundle.getBundle("org.omegat.gui.tipoftheday.Bundle");
                 for (Enumeration<String> keys = bundle.getKeys(); keys.hasMoreElements();) {
                     String key = keys.nextElement();
                     UIManager.getDefaults().put(key, bundle.getObject(key));

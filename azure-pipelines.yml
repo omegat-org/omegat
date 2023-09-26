@@ -39,32 +39,52 @@ variables:
   GRADLE_USER_HOME: '$(Pipeline.Workspace)/.gradle'
 
 stages:
-- stage: Check
-  condition: not(or(eq(variables['Build.Reason'], 'Schedule'), eq(variables['Build.Reason'], 'Manual')))
+- stage: Test
+  condition: not(or(eq(variables['Build.Reason'], 'Schedule'), eq(variables['Build.Reason'], 'Manual'), eq(variables.isRelease, true)))
   jobs:
-  - job: GitHubCI
-    displayName: CI Check for master, releases/* and Pull-Requests
+  - job: TestOnJava11
+    displayName: on Java 11
     pool:
       vmImage: 'ubuntu-22.04'
     steps:
-      - template: ci/azure-pipelines/check_steps.yml
+      - template: ci/azure-pipelines/test_steps.yml
+  - job: TestOnJava17
+    displayName: on Java 17
+    pool:
+      vmImage: 'ubuntu-22.04'
+    steps:
+      - template: ci/azure-pipelines/test_java17_steps.yml
 
   # Weekly release steps will be triggerred after integration-test succeeded.
 - stage: Weekly
   condition: or(eq(variables['Build.Reason'], 'Schedule'), eq(variables['Build.Reason'], 'Manual'))
   jobs:
+  - job: CheckForWeekly
+    displayName: Test and Check
+    pool:
+      vmImage: 'ubuntu-22.04'
+    steps:
+      - template: ci/azure-pipelines/check_steps.yml
+  - job: IntegrationTestForWeekly
+    displayName: Integration Test
+    pool:
+      vmImage: 'ubuntu-22.04'
+    steps:
+      - template: ci/azure-pipelines/integ_test_steps.yml
+        parameters:
+          testType: 'GIT'
+          duration: 600
   - job: WeeklyBuild
     displayName: Build for master weekly
+    dependsOn:
+      - CheckForWeekly
+      - IntegrationTestForWeekly
     pool:
       vmImage: 'ubuntu-22.04'
     steps:
       - script: |
           version=$(./gradlew -qq printVersion | head -n -1 )
           echo "##vso[task.setvariable variable=version]$version"
-      - template: ci/azure-pipelines/integ_test_steps.yml
-        parameters:
-          testType: 'GIT'
-          duration: 600
       - template: ci/azure-pipelines/build_steps.yml
       - template: ci/azure-pipelines/publish_weekly.yml
         parameters:
@@ -72,9 +92,14 @@ stages:
 
   # Release steps will run on the main and/or release branch with tags.
 - stage: Release
-  dependsOn: Check
   condition: and(succeeded(), eq(variables.isRelease, true))
   jobs:
+  - job: CheckForRelease
+    displayName: Test and Check
+    pool:
+      vmImage: 'ubuntu-22.04'
+    steps:
+      - template: ci/azure-pipelines/check_steps.yml
   - job: ReleaseBuild
     pool:
       vmImage: 'ubuntu-22.04'

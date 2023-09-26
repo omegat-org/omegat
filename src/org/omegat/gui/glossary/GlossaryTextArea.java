@@ -297,12 +297,7 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
         });
         item = popup.add(OStrings.getString("GUI_GLOSSARYWINDOW_addentry"));
         item.setEnabled(projectLoaded);
-        item.addActionListener(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                showCreateGlossaryEntryDialog(Core.getMainWindow().getApplicationFrame());
-            }
-        });
+        item.addActionListener(e -> showCreateGlossaryEntryDialog(Core.getMainWindow().getApplicationFrame()));
     }
 
     @Override

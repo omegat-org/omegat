@@ -26,19 +26,19 @@
 package org.omegat.util.gui;
 
 
-import org.omegat.util.Platform;
-
 import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
+
+import org.omegat.util.Platform;
 
 /**
  * Wrapper class for java.awt.Desktop with `xdg-open` path on Linux platform.
  */
 public final class DesktopWrapper {
 
-    private final static boolean useXDGOpen;
+    private static final boolean USE_XDG_OPEN;
 
     static {
         boolean hasXDGOpen = false;
@@ -49,11 +49,11 @@ public final class DesktopWrapper {
                 // Do nothing
             }
         }
-        useXDGOpen = hasXDGOpen;
+        USE_XDG_OPEN = hasXDGOpen;
     }
 
     public static void browse(URI uri) throws IOException {
-        if (useXDGOpen) {
+        if (USE_XDG_OPEN) {
             xdgOpen(uri.toString(), false);
         } else {
             Desktop.getDesktop().browse(uri);
@@ -61,7 +61,7 @@ public final class DesktopWrapper {
     }
 
     public static void open(File file) throws IOException {
-        if (useXDGOpen) {
+        if (USE_XDG_OPEN) {
             xdgOpen(file.getPath(), false);
         } else {
             Desktop.getDesktop().open(file);

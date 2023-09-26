@@ -731,8 +731,6 @@ public class SearchWindowController {
 
     private void doBrowseDirectory() {
         OmegaTFileChooser browser = new OmegaTFileChooser();
-        // String str = OStrings.getString("BUTTON_SELECT");
-        // browser.setApproveButtonText(str);
         browser.setDialogTitle(OStrings.getString("SW_TITLE"));
         browser.setFileSelectionMode(OmegaTFileChooser.DIRECTORIES_ONLY);
         String curDir = form.m_dirField.getText();

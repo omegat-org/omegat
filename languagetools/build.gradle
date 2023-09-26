@@ -5,7 +5,6 @@ repositories {
     mavenCentral()
 }
 
-def  languageToolVersion = '6.1'
 def plugins = [
         [ lang: 'Arabic', code: 'ar', className: 'ArabicPlugin'],
         [ lang: 'Asturian', code: 'ast', className: 'AsturianPlugin'],
@@ -40,14 +39,14 @@ def plugins = [
 ]
 
 def pluginPackage = 'org.omegat.languagetool.language'
-
+def languageToolVersion = libs.versions.languagetool.get()
 plugins.forEach { args ->
     def name = args.get('code')
     def pluginClass = "${pluginPackage}." + args.get('className')
     def lang = args.get('lang')
     sourceSets.create(name)
     if (name.equals("ja")) {
-        dependencies.add("jaImplementation", "org.languagetool:language-ja:${languageToolVersion}") {
+        dependencies.add("jaImplementation", libs.languagetool.ja.get()) {
             // Temporary exclusion; see https://sourceforge.net/p/omegat/bugs/814/
             exclude module: 'lucene-gosen'
             exclude module: 'languagetool-core'
@@ -58,7 +57,7 @@ plugins.forEach { args ->
             exclude module: 'languagetool-core'
         }
     }
-    configurations.getByName("${name}RuntimeClasspath").exclude(group: 'org.languagetool', module: 'language-core')
+    configurations.getByName("${name}RuntimeClasspath").exclude(group: 'org.languagetool', module: 'languagetool-core')
     tasks.getByName("${name}Classes") {
         group = 'languagetool'
     }
@@ -83,4 +82,8 @@ plugins.forEach { args ->
         group = 'languagetool'
     }
     jar.dependsOn "${name}Jar"
+    def capitalName = name.capitalize()
+    tasks.getByName("spotbugs${capitalName}") {
+        group = 'other'
+    }
 }

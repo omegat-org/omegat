@@ -1,0 +1,24 @@
+name: Run SpotBugs
+
+on:
+  push:
+    branches:
+      - master
+      - releases/*
+  pull_request:
+
+jobs:
+  spotbugs:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-java@v3
+      with:
+        distribution: 'temurin'
+        java-version: '11'
+    - name: create annotation
+      run: echo "::add-matcher::${{ github.workspace }}/ci/github/problem-matcher.json"
+    - name: run spotbugs
+      uses: gradle/gradle-build-action@v2
+      with:
+        arguments: --continue -PenvIsCi spotbugsMain spotbugsTest

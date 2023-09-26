@@ -28,8 +28,6 @@ package org.omegat.gui.align;
 
 import java.util.ResourceBundle;
 
-import org.omegat.util.OStrings;
-
 /**
  * Frame with menu for AlignPanel.
  * <p>

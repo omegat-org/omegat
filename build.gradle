@@ -146,7 +146,7 @@ allprojects {
         enforceCheck false
         java {
             targetExclude 'src/gen/**'
-            eclipse().configFile file("config/spotless/eclipse-formatting.xml")
+            eclipse().configFile file("${rootDir}/config/spotless/eclipse-formatting.xml")
             removeUnusedImports()
         }
     }

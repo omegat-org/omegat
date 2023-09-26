@@ -32,7 +32,7 @@ import org.junit.Test;
 import org.omegat.util.CommonVerifications;
 
 public class BundleTest extends CommonVerifications {
-    private static final String BUNDLE_BASENAME = "org.omegat.machinetranslators.apertium.Bundle";
+    private static final String BUNDLE_BASENAME = "org.omegat.gui.align.Bundle";
     @Test
     public void testBundleEncodings() throws Exception {
         assertBundle(BUNDLE_BASENAME);

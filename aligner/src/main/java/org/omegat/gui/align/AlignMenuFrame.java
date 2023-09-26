@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2016 Aaron Madlon-Kay
+               2023 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -25,7 +26,7 @@
 
 package org.omegat.gui.align;
 
-import org.omegat.util.OStrings;
+import java.util.ResourceBundle;
 
 /**
  * Frame with menu for AlignPanel.
@@ -33,9 +34,12 @@ import org.omegat.util.OStrings;
  * THIS MUST BE EDITED IN NETBEANS GUI BUILDER.
  *
  * @author Aaron Madlon-Kay
+ * @author Hiroshi Miura
  */
 @SuppressWarnings("serial")
 public class AlignMenuFrame extends javax.swing.JFrame {
+
+    private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("org.omegat.gui.align.Bundle");
 
     /**
      * Creates new form AlignMenuFrame
@@ -87,112 +91,113 @@ public class AlignMenuFrame extends javax.swing.JFrame {
         fileFilterSettingsItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        getContentPane().setLayout(new java.awt.BorderLayout());
 
-        org.openide.awt.Mnemonics.setLocalizedText(fileMenu, OStrings.getString("ALIGNER_MENU_FILE")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(fileMenu, BUNDLE.getString("ALIGNER_MENU_FILE")); // NOI18N
 
-        org.openide.awt.Mnemonics.setLocalizedText(saveItem, OStrings.getString("ALIGNER_MENU_FILE_SAVE")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(saveItem, BUNDLE.getString("ALIGNER_MENU_FILE_SAVE")); // NOI18N
         fileMenu.add(saveItem);
 
-        org.openide.awt.Mnemonics.setLocalizedText(resetItem, OStrings.getString("ALIGNER_MENU_FILE_RESET")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(resetItem, BUNDLE.getString("ALIGNER_MENU_FILE_RESET")); // NOI18N
         fileMenu.add(resetItem);
 
-        org.openide.awt.Mnemonics.setLocalizedText(reloadItem, OStrings.getString("ALIGNER_MENU_FILE_RELOAD")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(reloadItem, BUNDLE.getString("ALIGNER_MENU_FILE_RELOAD")); // NOI18N
         fileMenu.add(reloadItem);
 
-        org.openide.awt.Mnemonics.setLocalizedText(closeItem, OStrings.getString("ALIGNER_MENU_FILE_CLOSE")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(closeItem, BUNDLE.getString("ALIGNER_MENU_FILE_CLOSE")); // NOI18N
         fileMenu.add(closeItem);
 
         menuBar.add(fileMenu);
 
-        org.openide.awt.Mnemonics.setLocalizedText(editMenu, OStrings.getString("ALIGNER_MENU_EDIT")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(editMenu, BUNDLE.getString("ALIGNER_MENU_EDIT")); // NOI18N
 
         moveUpItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, 0));
-        org.openide.awt.Mnemonics.setLocalizedText(moveUpItem, OStrings.getString("ALIGNER_MENU_EDIT_MOVEUP")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(moveUpItem, BUNDLE.getString("ALIGNER_MENU_EDIT_MOVEUP")); // NOI18N
         editMenu.add(moveUpItem);
 
         moveDownItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_D, 0));
-        org.openide.awt.Mnemonics.setLocalizedText(moveDownItem, OStrings.getString("ALIGNER_MENU_EDIT_MOVEDOWN")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(moveDownItem, BUNDLE.getString("ALIGNER_MENU_EDIT_MOVEDOWN")); // NOI18N
         editMenu.add(moveDownItem);
 
         splitItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, 0));
-        org.openide.awt.Mnemonics.setLocalizedText(splitItem, OStrings.getString("ALIGNER_MENU_EDIT_SPLIT")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(splitItem, BUNDLE.getString("ALIGNER_MENU_EDIT_SPLIT")); // NOI18N
         editMenu.add(splitItem);
 
         mergeItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, 0));
-        org.openide.awt.Mnemonics.setLocalizedText(mergeItem, OStrings.getString("ALIGNER_MENU_EDIT_MERGE")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(mergeItem, BUNDLE.getString("ALIGNER_MENU_EDIT_MERGE")); // NOI18N
         editMenu.add(mergeItem);
 
         editItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, 0));
-        org.openide.awt.Mnemonics.setLocalizedText(editItem, OStrings.getString("ALIGNER_MENU_EDIT_EDIT")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(editItem, BUNDLE.getString("ALIGNER_MENU_EDIT_EDIT")); // NOI18N
         editMenu.add(editItem);
         editMenu.add(jSeparator1);
 
         markAcceptedItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, 0));
-        org.openide.awt.Mnemonics.setLocalizedText(markAcceptedItem, OStrings.getString("ALIGNER_MENU_EDIT_MARKACCEPTED")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(markAcceptedItem, BUNDLE.getString("ALIGNER_MENU_EDIT_MARKACCEPTED")); // NOI18N
         editMenu.add(markAcceptedItem);
 
         markNeedsReviewItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, 0));
-        org.openide.awt.Mnemonics.setLocalizedText(markNeedsReviewItem, OStrings.getString("ALIGNER_MENU_EDIT_MARKNEEDSREVIEW")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(markNeedsReviewItem, BUNDLE.getString("ALIGNER_MENU_EDIT_MARKNEEDSREVIEW")); // NOI18N
         editMenu.add(markNeedsReviewItem);
 
         clearMarkItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, 0));
-        org.openide.awt.Mnemonics.setLocalizedText(clearMarkItem, OStrings.getString("ALIGNER_MENU_EDIT_CLEARMARK")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(clearMarkItem, BUNDLE.getString("ALIGNER_MENU_EDIT_CLEARMARK")); // NOI18N
         editMenu.add(clearMarkItem);
 
-        org.openide.awt.Mnemonics.setLocalizedText(realignPendingItem, OStrings.getString("ALIGNER_MENU_EDIT_REALIGN")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(realignPendingItem, BUNDLE.getString("ALIGNER_MENU_EDIT_REALIGN")); // NOI18N
         editMenu.add(realignPendingItem);
         editMenu.add(jSeparator2);
 
-        org.openide.awt.Mnemonics.setLocalizedText(keepAllItem, OStrings.getString("ALIGNER_MENU_EDIT_KEEPALL")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(keepAllItem, BUNDLE.getString("ALIGNER_MENU_EDIT_KEEPALL")); // NOI18N
         editMenu.add(keepAllItem);
 
-        org.openide.awt.Mnemonics.setLocalizedText(keepNoneItem, OStrings.getString("ALIGNER_MENU_EDIT_KEEPNONE")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(keepNoneItem, BUNDLE.getString("ALIGNER_MENU_EDIT_KEEPNONE")); // NOI18N
         editMenu.add(keepNoneItem);
 
         toggleSelectedItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_K, 0));
-        org.openide.awt.Mnemonics.setLocalizedText(toggleSelectedItem, OStrings.getString("ALIGNER_MENU_EDIT_TOGGLESELECTED")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(toggleSelectedItem, BUNDLE.getString("ALIGNER_MENU_EDIT_TOGGLESELECTED")); // NOI18N
         editMenu.add(toggleSelectedItem);
         editMenu.add(jSeparator3);
 
         pinpointAlignStartItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_SPACE, 0));
-        org.openide.awt.Mnemonics.setLocalizedText(pinpointAlignStartItem, OStrings.getString("ALIGNER_MENU_EDIT_PINPOINTALIGNSTART")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(pinpointAlignStartItem, BUNDLE.getString("ALIGNER_MENU_EDIT_PINPOINTALIGNSTART")); // NOI18N
         editMenu.add(pinpointAlignStartItem);
 
         pinpointAlignEndItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_SPACE, 0));
-        org.openide.awt.Mnemonics.setLocalizedText(pinpointAlignEndItem, OStrings.getString("ALIGNER_MENU_EDIT_PINPOINTALIGNEND")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(pinpointAlignEndItem, BUNDLE.getString("ALIGNER_MENU_EDIT_PINPOINTALIGNEND")); // NOI18N
         editMenu.add(pinpointAlignEndItem);
 
         pinpointAlignCancelItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_ESCAPE, 0));
-        org.openide.awt.Mnemonics.setLocalizedText(pinpointAlignCancelItem, OStrings.getString("ALIGNER_MENU_EDIT_PINPOINTALIGNCANCEL")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(pinpointAlignCancelItem, BUNDLE.getString("ALIGNER_MENU_EDIT_PINPOINTALIGNCANCEL")); // NOI18N
         editMenu.add(pinpointAlignCancelItem);
 
         menuBar.add(editMenu);
 
-        org.openide.awt.Mnemonics.setLocalizedText(viewMenu, OStrings.getString("ALIGNER_MENU_VIEW")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(viewMenu, BUNDLE.getString("ALIGNER_MENU_VIEW")); // NOI18N
 
         highlightItem.setSelected(true);
-        org.openide.awt.Mnemonics.setLocalizedText(highlightItem, OStrings.getString("ALIGNER_MENU_VIEW_HIGHLIGHT")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(highlightItem, BUNDLE.getString("ALIGNER_MENU_VIEW_HIGHLIGHT")); // NOI18N
         viewMenu.add(highlightItem);
 
-        org.openide.awt.Mnemonics.setLocalizedText(highlightPatternItem, OStrings.getString("ALIGNER_MENU_VIEW_HIGHLIGHTPATTERN")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(highlightPatternItem, BUNDLE.getString("ALIGNER_MENU_VIEW_HIGHLIGHTPATTERN")); // NOI18N
         viewMenu.add(highlightPatternItem);
 
         menuBar.add(viewMenu);
 
-        org.openide.awt.Mnemonics.setLocalizedText(optionsMenu, OStrings.getString("ALIGNER_MENU_OPTIONS")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(optionsMenu, BUNDLE.getString("ALIGNER_MENU_OPTIONS")); // NOI18N
 
         removeTagsItem.setSelected(true);
-        org.openide.awt.Mnemonics.setLocalizedText(removeTagsItem, OStrings.getString("ALIGNER_MENU_OPTIONS_REMOVETAGS")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(removeTagsItem, BUNDLE.getString("ALIGNER_MENU_OPTIONS_REMOVETAGS")); // NOI18N
         optionsMenu.add(removeTagsItem);
 
         segmentingItem.setSelected(true);
-        org.openide.awt.Mnemonics.setLocalizedText(segmentingItem, OStrings.getString("ALIGNER_MENU_OPTIONS_SEGMENT")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(segmentingItem, BUNDLE.getString("ALIGNER_MENU_OPTIONS_SEGMENT")); // NOI18N
         optionsMenu.add(segmentingItem);
 
-        org.openide.awt.Mnemonics.setLocalizedText(segmentingRulesItem, OStrings.getString("ALIGNER_MENU_OPTIONS_SEGMENTATIONRULES")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(segmentingRulesItem, BUNDLE.getString("ALIGNER_MENU_OPTIONS_SEGMENTATIONRULES")); // NOI18N
         optionsMenu.add(segmentingRulesItem);
 
-        org.openide.awt.Mnemonics.setLocalizedText(fileFilterSettingsItem, OStrings.getString("ALIGNER_MENU_OPTIONS_FILEFILTERS")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(fileFilterSettingsItem, BUNDLE.getString("ALIGNER_MENU_OPTIONS_FILEFILTERS")); // NOI18N
         optionsMenu.add(fileFilterSettingsItem);
 
         menuBar.add(optionsMenu);

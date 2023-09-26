@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2016 Aaron Madlon-Kay
+               2023 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -25,8 +26,9 @@
 
 package org.omegat.gui.align;
 
+import java.util.ResourceBundle;
+
 import org.madlonkay.supertmxmerge.gui.ReasonablySizedPanel;
-import org.omegat.util.OStrings;
 
 /**
  * A simple UI component for implementing text editing dialogs.
@@ -34,9 +36,12 @@ import org.omegat.util.OStrings;
  * THIS MUST BE EDITED IN NETBEANS GUI BUILDER.
  *
  * @author Aaron Madlon-Kay
+ * @author Hiroshi Miura
  */
 @SuppressWarnings("serial")
 public class EditingPanel extends javax.swing.JPanel {
+
+    private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("org.omegat.gui.align.Bundle");
 
     /**
      * Creates new form EditingPanel
@@ -77,10 +82,10 @@ public class EditingPanel extends javax.swing.JPanel {
 
         jPanel2.setLayout(new javax.swing.BoxLayout(jPanel2, javax.swing.BoxLayout.LINE_AXIS));
 
-        org.openide.awt.Mnemonics.setLocalizedText(cancelButton, OStrings.getString("BUTTON_CANCEL")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(cancelButton, BUNDLE.getString("BUTTON_CANCEL")); // NOI18N
         jPanel2.add(cancelButton);
 
-        org.openide.awt.Mnemonics.setLocalizedText(okButton, OStrings.getString("BUTTON_OK")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(okButton, BUNDLE.getString("BUTTON_OK")); // NOI18N
         jPanel2.add(okButton);
 
         jPanel1.add(jPanel2, java.awt.BorderLayout.EAST);

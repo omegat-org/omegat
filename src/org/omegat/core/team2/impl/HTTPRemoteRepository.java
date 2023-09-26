@@ -40,11 +40,12 @@ import java.util.Formatter;
 import java.util.Properties;
 
 import org.apache.commons.io.FileUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import tokyo.northside.logging.ILogger;
+import tokyo.northside.logging.LoggerFactory;
 
 import org.omegat.core.team2.IRemoteRepository2;
 import org.omegat.core.team2.ProjectTeamSettings;
+import org.omegat.core.team2.RemoteRepositoryFactory;
 
 import gen.core.project.RepositoryDefinition;
 import gen.core.project.RepositoryMapping;
@@ -59,10 +60,23 @@ import gen.core.project.RepositoryMapping;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class HTTPRemoteRepository implements IRemoteRepository2 {
-    private static final Logger LOGGER = LoggerFactory.getLogger(HTTPRemoteRepository.class);
+    private static final ILogger LOGGER = LoggerFactory.getLogger(HTTPRemoteRepository.class);
 
     private RepositoryDefinition config;
     private File baseDirectory;
+
+    /**
+     * Plugin loader.
+     */
+    public static void loadPlugins() {
+        RemoteRepositoryFactory.addRepositoryConnector("http", HTTPRemoteRepository.class);
+    }
+
+    /**
+     * Plugin unloader.
+     */
+    public static void unloadPlugins() {
+    }
 
     @Override
     public void init(RepositoryDefinition repo, File dir, ProjectTeamSettings teamSettings) throws Exception {

@@ -93,6 +93,7 @@ public class AlignMenuFrame extends javax.swing.JFrame {
         fileFilterSettingsItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        getContentPane().setLayout(new java.awt.BorderLayout());
 
         org.openide.awt.Mnemonics.setLocalizedText(fileMenu, BUNDLE.getString("ALIGNER_MENU_FILE")); // NOI18N
 

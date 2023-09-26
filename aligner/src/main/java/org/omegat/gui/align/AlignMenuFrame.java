@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2016 Aaron Madlon-Kay
+               2023 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -35,11 +36,13 @@ import org.omegat.util.OStrings;
  * THIS MUST BE EDITED IN NETBEANS GUI BUILDER.
  *
  * @author Aaron Madlon-Kay
+ * @author Hiroshi Miura
  */
 @SuppressWarnings("serial")
 public class AlignMenuFrame extends javax.swing.JFrame {
 
     private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("org.omegat.gui.align.Bundle");
+
     /**
      * Creates new form AlignMenuFrame
      */

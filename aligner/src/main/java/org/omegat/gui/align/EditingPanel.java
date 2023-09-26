@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2016 Aaron Madlon-Kay
+               2023 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -35,11 +36,13 @@ import org.madlonkay.supertmxmerge.gui.ReasonablySizedPanel;
  * THIS MUST BE EDITED IN NETBEANS GUI BUILDER.
  *
  * @author Aaron Madlon-Kay
+ * @author Hiroshi Miura
  */
 @SuppressWarnings("serial")
 public class EditingPanel extends javax.swing.JPanel {
 
     private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("org.omegat.gui.align.Bundle");
+
     /**
      * Creates new form EditingPanel
      */

@@ -19,8 +19,10 @@ plugins {
 
 apply from: 'gradle/utils.gradle'
 
-applicationName = 'OmegaT'
-mainClassName = 'org.omegat.Main'
+application {
+    applicationName = 'OmegaT'
+    mainClass = 'org.omegat.Main'
+}
 
 def javaVersion = 11;
 def localPropsFile = file('local.properties')
@@ -145,7 +147,7 @@ allprojects {
         enforceCheck false
         java {
             targetExclude 'src/gen/**'
-            eclipse().configFile file("${rootProject.projectDir}/config/spotless/eclipse-formatting.xml")
+            eclipse().configFile file("${rootDir}/config/spotless/eclipse-formatting.xml")
             removeUnusedImports()
         }
     }
@@ -339,7 +341,7 @@ jar {
                    'Plugin-Author': 'OmegaT team',
                    'Plugin-Link': 'https://omegat.org',
                    'Plugin-Version': project.version,
-                   'Main-Class': mainClassName,
+                   'Main-Class': application.mainClass,
                    'Class-Path': configurations.runtimeClasspath.collect { "lib/${it.name}" }.join(' '))
         ext.pluginAttr = { name, path, category, description ->
             attributes('Plugin-Name': name, 'Plugin-Category': category, 'Plugin-Description': description, path)
@@ -371,7 +373,7 @@ jar {
 project(":languagetools") {jar.enabled = false}
 project(":machinetranslators") {jar.enabled = false}
 
-def distsDir = file("${buildDir}/${distsDirName}")
+def distsDir = layout.buildDirectory.file("${distsDirName}").get().asFile
 def assetDir = findProperty('assetDir') ?: '../'
 def macJRE = fileTree(dir: assetDir, include: 'OpenJDK17U-jre_x64_mac_*.tar.gz')
 def armMacJRE = fileTree(dir: assetDir, include: 'OpenJDK17U-jre_aarch64_mac_*.tar.gz')
@@ -535,7 +537,7 @@ task genMac {
                 version: '${version}',
                 jvmrequired: javaVersion,
                 shortversion: '${version}',
-                mainclassname: mainClassName) {
+                mainclassname: application.mainClass) {
             option(value: "-Xdock:name=${applicationName}")
             option(value: "-Dapple.awt.application.name=${applicationName}")
             option(value: "-Dapple.awt.application.appearance=system")
@@ -623,7 +625,7 @@ distributions {
                 }
             }
         }
-        distZip.archiveFileName.set("${applicationName}_${version}${omtVersion.beta}_Without_JRE.zip")
+        distZip.archiveFileName.set("${application.applicationName}_${version}${omtVersion.beta}_Without_JRE.zip")
     }
 
     source {
@@ -651,7 +653,8 @@ distributions {
                 }
             }
         }
-        sourceDistZip.archiveFileName.set("${applicationName}_${version}${omtVersion.beta}_Source.zip")
+        sourceDistZip.archiveFileName.set(
+                "${application.applicationName}_${project.version}${omtVersion.beta}_Source.zip")
     }
 
     mac {
@@ -786,7 +789,7 @@ macDistZip {
     onlyIf {
         condition(!macJRE.empty, 'JRE not found')
     }
-    archiveFileName.set("${applicationName}_${project.version}${omtVersion.beta}_Mac_x64.zip")
+    archiveFileName.set("${application.applicationName}_${project.version}${omtVersion.beta}_Mac_x64.zip")
     group = 'omegat distribution'
 }
 
@@ -794,7 +797,7 @@ armMacDistZip {
     onlyIf {
         condition(!armMacJRE.empty, 'JRE not found')
     }
-    archiveFileName.set("${applicationName}_${project.version}${omtVersion.beta}_Mac_arm.zip")
+    archiveFileName.set("${application.applicationName}_${project.version}${omtVersion.beta}_Mac_arm.zip")
     group = 'omegat distribution'
 }
 
@@ -818,7 +821,7 @@ ext.makeMacTask = { args ->
         from(hunspellSignedJar.outputs) {
             into 'OmegaT.app/Contents/Java/lib'
         }
-        destinationDir = file("${buildDir}/install/${applicationName}-${args.suffix}_Signed")
+        destinationDir = file("${buildDir}/install/${application.applicationName}-${args.suffix}_Signed")
         doFirst {
             delete "$destinationDir/OmegaT.app/Contents/PlugIns/jre.bundle"
         }
@@ -835,7 +838,7 @@ ext.makeMacTask = { args ->
     }
 
     task(type: Zip, signedZipTaskName) {
-        def zipRoot = "${applicationName}_${project.version}${omtVersion.beta}_${args.suffix}_Signed"
+        def zipRoot = "${application.applicationName}_${project.version}${omtVersion.beta}_${args.suffix}_Signed"
         if (args.name.equals("mac")) {
             from(macInstallSignedDist.outputs) {
                 into zipRoot
@@ -874,7 +877,7 @@ ext.makeMacTask = { args ->
     }
 
     task(type: Zip, stapledNotarizedDistZipTaskName) {
-        def zipRoot = "${applicationName}_${project.version}${omtVersion.beta}_${args.suffix}_Notarized"
+        def zipRoot = "${application.applicationName}_${project.version}${omtVersion.beta}_${args.suffix}_Notarized"
         if (args.name.equals("mac")) {
             from(macInstallSignedDist.outputs) {
                 into zipRoot
@@ -914,7 +917,9 @@ linux64DistTar {
     doFirst {
         delete "${destinationDir}/jre"
     }
-    archiveFileName.set("${applicationName}_${project.version}${omtVersion.beta}_Linux_64.tar.bz2")
+    application {
+        archiveFileName.set("${applicationName}_${project.version}${omtVersion.beta}_Linux_64.tar.bz2")
+    }
     compression = Compression.BZIP2
     archiveExtension = 'tar.bz2'
     group = 'omegat distribution'
@@ -927,7 +932,9 @@ linuxArm64DistTar {
     doFirst {
         delete "$destinationDirectory/jre"
     }
-    archiveFileName.set("${applicationName}_${project.version}${omtVersion.beta}_Linux_ARM64.tar.bz2")
+    application {
+        archiveFileName.set("${applicationName}_${project.version}${omtVersion.beta}_Linux_ARM64.tar.bz2")
+    }
     compression = Compression.BZIP2
     archiveExtension = 'tar.bz2'
     group = 'omegat distribution'
@@ -984,7 +991,7 @@ task win {
 ext.makeWinTask = { args ->
     def fullVersion = project.version + omtVersion.beta
     def installerBasename = "OmegaT_${fullVersion}_${args.suffix}"
-    def installerExe = "${distsDir}/${installerBasename}.exe"
+    def installerExe = layout.buildDirectory.file("${distsDirName}/${installerBasename}.exe").get().asFile
     task(type: Sync, args.name) {
         description = "Create a Windows installer for ${args.name} distro. " +
             'Requires Inno Setup (http://www.jrsoftware.org/isinfo.php).'
@@ -1001,7 +1008,7 @@ ext.makeWinTask = { args ->
                 }
             }
         }
-        destinationDir = file("${buildDir}/innosetup/${args.name}")
+        destinationDir layout.buildDirectory.file("innosetup/${args.name}").get().asFile
         outputs.file installerExe
         onlyIf {
             conditions([!args.jrePath || !args.jrePath.empty, 'JRE not found'],
@@ -1042,12 +1049,12 @@ ext.makeWinTask = { args ->
             }
             project.copy {
                 from("${destinationDir}/${installerBasename}.exe")
-                into(distsDir)
+                into(layout.buildDirectory.file("${distsDirName}"))
             }
         }
     }
     def signedTaskName = "${args.name}Signed"
-    def signedExe = "${distsDir}/${installerBasename}_Signed.exe"
+    def signedExe = layout.buildDirectory.file("${distsDirName}/${installerBasename}_Signed.exe").get().asFile
     task(type: Exec, signedTaskName) {
         group = 'omegat distribution'
         // You'd think we could just set the PATH, but there be dragons here
@@ -1083,7 +1090,7 @@ ext.makeWinTask = { args ->
         commandArgs.addAll(
                 '-t', project.hasProperty('winCodesignTimestampUrl')? project.property('winCodesignTimestampUrl') :
                         'http://time.certum.pl/',
-                '-n', applicationName, '-i', omtWebsite, '-h', 'sha256',
+                '-n', application.applicationName, '-i', omtWebsite, '-h', 'sha256',
                 '-in', installerExe.toString(),
                 '-out', signedExe.toString())
         commandLine(commandArgs)
@@ -1103,8 +1110,7 @@ tasks.findAll { it.name =~ /[dD]istZip$/ && it.name.contains('linux') }.each { i
 
 def provided = findProperty('repoRevision') ?: ''
 def git = file('.git').directory ? providers.exec {commandLine("git", "rev-parse", "--short", "HEAD")}.standardOutput.asText.get().trim() : ''
-def svn = file('.svn').directory ? providers.exec {commandLine("svnversion")}.standardOutput.asText.get().trim() : ''
-def revision = [provided, omtVersion.revision, git, svn, 'unknown'].find { it != 'dev' && !it.empty }
+def revision = [provided, omtVersion.revision, git, 'unknown'].find { it != '@dev@' && !it.empty }
 processResources {
     /*
      Set the revision number included in version strings. The value is
@@ -1112,17 +1118,13 @@ processResources {
      0. Provided as the Gradle property 'repo.revision'
      1. src/org/omegat/Version.properties (only if not "dev", i.e. this is a
         source package not under VCS)
-     2. This svn checkout's revision
-     3. This git clone's SHA-1
-     4. If none of the above, the value "unknown"
+     2. This git clone's SHA-1
+     3. If none of the above, the value "unknown"
      */
     inputs.property 'revision', revision
-    doLast {
-        logger.lifecycle("Detected revision ${revision}")
-        def versionFile = file("${sourceSets.main.output.resourcesDir}/org/omegat/Version.properties")
-        ant.propertyfile(file: versionFile) {
-            entry(key: 'revision', value: revision)
-        }
+    logger.lifecycle("Detected revision " + revision)
+    filesMatching('**/Version.properties') {
+        filter org.apache.tools.ant.filters.ReplaceTokens, tokens:["dev": revision]
     }
 }
 
@@ -1239,7 +1241,7 @@ tasks.getByName("run") {
 task debug(type: JavaExec) {
     description = 'Launch app for debugging.' // Special debug task for NetBeans
     group = 'application'
-    mainClass = mainClassName
+    mainClass = application.mainClass
     classpath = sourceSets.main.runtimeClasspath
     jvmArgs(["--illegal-access=warn"])
     debug true
@@ -1251,7 +1253,7 @@ task runOnJava17(type: JavaExec) {
         languageVersion = JavaLanguageVersion.of(17)
         vendor = JvmVendorSpec.ADOPTIUM
     }
-    mainClass = application.mainClass
+    mainClass.set application.mainClass
     classpath = sourceSets.main.runtimeClasspath
     jvmArgs(["--add-opens", "java.desktop/sun.awt.X11=ALL-UNNAMED"])
     group = 'application'

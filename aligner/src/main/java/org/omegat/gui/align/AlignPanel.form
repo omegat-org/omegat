@@ -151,7 +151,7 @@
                 <Component class="javax.swing.JButton" name="moveUpButton">
                   <Properties>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="org/omegat/Bundle.properties" key="ALIGNER_PANEL_BUTTON_MOVEUP" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+                      <ResourceString bundle="org/omegat/gui/align/Bundle.properties" key="ALIGNER_PANEL_BUTTON_MOVEUP" replaceFormat="BUNDLE.getString(&quot;{key}&quot;)"/>
                     </Property>
                     <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
@@ -168,7 +168,7 @@
                 <Component class="javax.swing.JButton" name="moveDownButton">
                   <Properties>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="org/omegat/Bundle.properties" key="ALIGNER_PANEL_BUTTON_MOVEDOWN" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+                      <ResourceString bundle="org/omegat/gui/align/Bundle.properties" key="ALIGNER_PANEL_BUTTON_MOVEDOWN" replaceFormat="BUNDLE.getString(&quot;{key}&quot;)"/>
                     </Property>
                     <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
@@ -206,7 +206,7 @@
                 <Component class="javax.swing.JButton" name="splitButton">
                   <Properties>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="org/omegat/Bundle.properties" key="ALIGNER_PANEL_BUTTON_SPLIT" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+                      <ResourceString bundle="org/omegat/gui/align/Bundle.properties" key="ALIGNER_PANEL_BUTTON_SPLIT" replaceFormat="BUNDLE.getString(&quot;{key}&quot;)"/>
                     </Property>
                     <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
@@ -223,7 +223,7 @@
                 <Component class="javax.swing.JButton" name="mergeButton">
                   <Properties>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="org/omegat/Bundle.properties" key="ALIGNER_PANEL_BUTTON_MERGE" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+                      <ResourceString bundle="org/omegat/gui/align/Bundle.properties" key="ALIGNER_PANEL_BUTTON_MERGE" replaceFormat="BUNDLE.getString(&quot;{key}&quot;)"/>
                     </Property>
                     <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
@@ -240,7 +240,7 @@
                 <Component class="javax.swing.JButton" name="editButton">
                   <Properties>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="org/omegat/Bundle.properties" key="ALIGNER_PANEL_BUTTON_EDIT" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+                      <ResourceString bundle="org/omegat/gui/align/Bundle.properties" key="ALIGNER_PANEL_BUTTON_EDIT" replaceFormat="BUNDLE.getString(&quot;{key}&quot;)"/>
                     </Property>
                     <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
@@ -314,7 +314,7 @@
                 <Component class="javax.swing.JLabel" name="jLabel4">
                   <Properties>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="org/omegat/Bundle.properties" key="ALIGNER_PANEL_LABEL_COMPARISON" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+                      <ResourceString bundle="org/omegat/gui/align/Bundle.properties" key="ALIGNER_PANEL_LABEL_COMPARISON" replaceFormat="BUNDLE.getString(&quot;{key}&quot;)"/>
                     </Property>
                   </Properties>
                 </Component>
@@ -343,7 +343,7 @@
                 <Component class="javax.swing.JLabel" name="averageDistanceLabel">
                   <Properties>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="org/omegat/Bundle.properties" key="ALIGNER_PANEL_LABEL_AVGSCORE" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+                      <ResourceString bundle="org/omegat/gui/align/Bundle.properties" key="ALIGNER_PANEL_LABEL_AVGSCORE" replaceFormat="BUNDLE.getString(&quot;{key}&quot;)"/>
                     </Property>
                   </Properties>
                   <AuxValues>
@@ -369,7 +369,7 @@
                 <Component class="javax.swing.JLabel" name="jLabel2">
                   <Properties>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="org/omegat/Bundle.properties" key="ALIGNER_PANEL_LABEL_ALGORITHM" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+                      <ResourceString bundle="org/omegat/gui/align/Bundle.properties" key="ALIGNER_PANEL_LABEL_ALGORITHM" replaceFormat="BUNDLE.getString(&quot;{key}&quot;)"/>
                     </Property>
                   </Properties>
                 </Component>
@@ -403,7 +403,7 @@
                 <Component class="javax.swing.JLabel" name="jLabel3">
                   <Properties>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="org/omegat/Bundle.properties" key="ALIGNER_PANEL_LABEL_CALCULATOR" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+                      <ResourceString bundle="org/omegat/gui/align/Bundle.properties" key="ALIGNER_PANEL_LABEL_CALCULATOR" replaceFormat="BUNDLE.getString(&quot;{key}&quot;)"/>
                     </Property>
                   </Properties>
                 </Component>
@@ -437,7 +437,7 @@
                 <Component class="javax.swing.JLabel" name="jLabel5">
                   <Properties>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="org/omegat/Bundle.properties" key="ALIGNER_PANEL_LABEL_COUNTER" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+                      <ResourceString bundle="org/omegat/gui/align/Bundle.properties" key="ALIGNER_PANEL_LABEL_COUNTER" replaceFormat="BUNDLE.getString(&quot;{key}&quot;)"/>
                     </Property>
                   </Properties>
                 </Component>
@@ -478,7 +478,7 @@
                 <Component class="javax.swing.JCheckBox" name="segmentingCheckBox">
                   <Properties>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="org/omegat/Bundle.properties" key="ALIGNER_PANEL_BUTTON_SEGMENT" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+                      <ResourceString bundle="org/omegat/gui/align/Bundle.properties" key="ALIGNER_PANEL_BUTTON_SEGMENT" replaceFormat="BUNDLE.getString(&quot;{key}&quot;)"/>
                     </Property>
                   </Properties>
                   <AuxValues>
@@ -489,7 +489,7 @@
                 <Component class="javax.swing.JButton" name="segmentingRulesButton">
                   <Properties>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="org/omegat/Bundle.properties" key="ALIGNER_PANEL_BUTTON_SEGMENTATIONRULES" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+                      <ResourceString bundle="org/omegat/gui/align/Bundle.properties" key="ALIGNER_PANEL_BUTTON_SEGMENTATIONRULES" replaceFormat="BUNDLE.getString(&quot;{key}&quot;)"/>
                     </Property>
                     <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
@@ -513,7 +513,7 @@
                 <Component class="javax.swing.JCheckBox" name="removeTagsCheckBox">
                   <Properties>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="org/omegat/Bundle.properties" key="ALIGNER_PANEL_BUTTON_REMOVETAGS" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+                      <ResourceString bundle="org/omegat/gui/align/Bundle.properties" key="ALIGNER_PANEL_BUTTON_REMOVETAGS" replaceFormat="BUNDLE.getString(&quot;{key}&quot;)"/>
                     </Property>
                   </Properties>
                   <AuxValues>
@@ -524,7 +524,7 @@
                 <Component class="javax.swing.JButton" name="fileFilterSettingsButton">
                   <Properties>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="org/omegat/Bundle.properties" key="ALIGNER_PANEL_BUTTON_FILTERSETTINGS" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+                      <ResourceString bundle="org/omegat/gui/align/Bundle.properties" key="ALIGNER_PANEL_BUTTON_FILTERSETTINGS" replaceFormat="BUNDLE.getString(&quot;{key}&quot;)"/>
                     </Property>
                   </Properties>
                   <AuxValues>
@@ -544,7 +544,7 @@
                 <Component class="javax.swing.JCheckBox" name="highlightCheckBox">
                   <Properties>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="org/omegat/Bundle.properties" key="ALIGNER_PANEL_BUTTON_HIGHLIGHT" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+                      <ResourceString bundle="org/omegat/gui/align/Bundle.properties" key="ALIGNER_PANEL_BUTTON_HIGHLIGHT" replaceFormat="BUNDLE.getString(&quot;{key}&quot;)"/>
                     </Property>
                   </Properties>
                   <AuxValues>
@@ -555,7 +555,7 @@
                 <Component class="javax.swing.JButton" name="highlightPatternButton">
                   <Properties>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="org/omegat/Bundle.properties" key="ALIGNER_PANEL_BUTTON_HIGHLIGHTPATTERN" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+                      <ResourceString bundle="org/omegat/gui/align/Bundle.properties" key="ALIGNER_PANEL_BUTTON_HIGHLIGHTPATTERN" replaceFormat="BUNDLE.getString(&quot;{key}&quot;)"/>
                     </Property>
                     <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
@@ -580,7 +580,7 @@
                     <Component class="javax.swing.JButton" name="continueButton">
                       <Properties>
                         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                          <ResourceString bundle="org/omegat/Bundle.properties" key="ALIGNER_PANEL_BUTTON_CONTINUE" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+                          <ResourceString bundle="org/omegat/gui/align/Bundle.properties" key="ALIGNER_PANEL_BUTTON_CONTINUE" replaceFormat="BUNDLE.getString(&quot;{key}&quot;)"/>
                         </Property>
                       </Properties>
                       <AuxValues>
@@ -590,7 +590,7 @@
                     <Component class="javax.swing.JButton" name="saveButton">
                       <Properties>
                         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                          <ResourceString bundle="org/omegat/Bundle.properties" key="ALIGNER_PANEL_BUTTON_SAVE" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+                          <ResourceString bundle="org/omegat/gui/align/Bundle.properties" key="ALIGNER_PANEL_BUTTON_SAVE" replaceFormat="BUNDLE.getString(&quot;{key}&quot;)"/>
                         </Property>
                       </Properties>
                       <AuxValues>
@@ -603,7 +603,7 @@
                 <Component class="javax.swing.JButton" name="resetButton">
                   <Properties>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="org/omegat/Bundle.properties" key="ALIGNER_PANEL_BUTTON_RESET" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+                      <ResourceString bundle="org/omegat/gui/align/Bundle.properties" key="ALIGNER_PANEL_BUTTON_RESET" replaceFormat="BUNDLE.getString(&quot;{key}&quot;)"/>
                     </Property>
                   </Properties>
                   <AuxValues>

@@ -88,7 +88,7 @@
             <Component class="javax.swing.JButton" name="cancelButton">
               <Properties>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="org/omegat/Bundle.properties" key="BUTTON_CANCEL" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+                  <ResourceString bundle="org/omegat/gui/align/Bundle.properties" key="BUTTON_CANCEL" replaceFormat="BUNDLE.getString(&quot;{key}&quot;)"/>
                 </Property>
               </Properties>
               <AuxValues>
@@ -99,7 +99,7 @@
             <Component class="javax.swing.JButton" name="okButton">
               <Properties>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="org/omegat/Bundle.properties" key="BUTTON_OK" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+                  <ResourceString bundle="org/omegat/gui/align/Bundle.properties" key="BUTTON_OK" replaceFormat="BUNDLE.getString(&quot;{key}&quot;)"/>
                 </Property>
               </Properties>
               <AuxValues>

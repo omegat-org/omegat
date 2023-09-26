@@ -25,8 +25,9 @@
 
 package org.omegat.gui.align;
 
+import java.util.ResourceBundle;
+
 import org.omegat.util.Language;
-import org.omegat.util.OStrings;
 
 /**
  * UI component for picking source and target languages and files.
@@ -38,6 +39,7 @@ import org.omegat.util.OStrings;
 @SuppressWarnings("serial")
 public class AlignFilePicker extends javax.swing.JPanel {
 
+    private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("org.omegat.gui.align.Bundle");
     /**
      * Creates new form AlignFilePicker
      */
@@ -83,7 +85,7 @@ public class AlignFilePicker extends javax.swing.JPanel {
         jPanel6.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 10, 0));
         jPanel6.setLayout(new java.awt.BorderLayout());
 
-        jLabel1.setText(OStrings.getString("ALIGNER_FILEPICKER_SOURCE")); // NOI18N
+        jLabel1.setText(BUNDLE.getString("ALIGNER_FILEPICKER_SOURCE")); // NOI18N
         jPanel6.add(jLabel1, java.awt.BorderLayout.NORTH);
 
         jPanel1.setLayout(new java.awt.BorderLayout());
@@ -94,7 +96,7 @@ public class AlignFilePicker extends javax.swing.JPanel {
         sourceLanguageFileField.setColumns(25);
         jPanel1.add(sourceLanguageFileField, java.awt.BorderLayout.CENTER);
 
-        org.openide.awt.Mnemonics.setLocalizedText(sourceChooseFileButton, OStrings.getString("ALIGNER_FILEPICKER_CHOOSE")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(sourceChooseFileButton, BUNDLE.getString("ALIGNER_FILEPICKER_CHOOSE")); // NOI18N
         jPanel1.add(sourceChooseFileButton, java.awt.BorderLayout.EAST);
 
         jPanel6.add(jPanel1, java.awt.BorderLayout.CENTER);
@@ -103,7 +105,7 @@ public class AlignFilePicker extends javax.swing.JPanel {
 
         jPanel7.setLayout(new java.awt.BorderLayout());
 
-        jLabel2.setText(OStrings.getString("ALIGNER_FILEPICKER_TARGET")); // NOI18N
+        jLabel2.setText(BUNDLE.getString("ALIGNER_FILEPICKER_TARGET")); // NOI18N
         jPanel7.add(jLabel2, java.awt.BorderLayout.NORTH);
 
         jPanel2.setLayout(new java.awt.BorderLayout());
@@ -114,7 +116,7 @@ public class AlignFilePicker extends javax.swing.JPanel {
         targetLanguageFileField.setColumns(25);
         jPanel2.add(targetLanguageFileField, java.awt.BorderLayout.CENTER);
 
-        org.openide.awt.Mnemonics.setLocalizedText(targetChooseFileButton, OStrings.getString("ALIGNER_FILEPICKER_CHOOSE")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(targetChooseFileButton, BUNDLE.getString("ALIGNER_FILEPICKER_CHOOSE")); // NOI18N
         jPanel2.add(targetChooseFileButton, java.awt.BorderLayout.EAST);
 
         jPanel7.add(jPanel2, java.awt.BorderLayout.CENTER);
@@ -135,10 +137,10 @@ public class AlignFilePicker extends javax.swing.JPanel {
         jPanel5.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 10, 0, 0));
         jPanel5.setLayout(new javax.swing.BoxLayout(jPanel5, javax.swing.BoxLayout.LINE_AXIS));
 
-        org.openide.awt.Mnemonics.setLocalizedText(okButton, OStrings.getString("BUTTON_OK")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(okButton, BUNDLE.getString("BUTTON_OK")); // NOI18N
         jPanel5.add(okButton);
 
-        org.openide.awt.Mnemonics.setLocalizedText(cancelButton, OStrings.getString("BUTTON_CANCEL")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(cancelButton, BUNDLE.getString("BUTTON_CANCEL")); // NOI18N
         jPanel5.add(cancelButton);
 
         bottomPanel.add(jPanel5, java.awt.BorderLayout.EAST);

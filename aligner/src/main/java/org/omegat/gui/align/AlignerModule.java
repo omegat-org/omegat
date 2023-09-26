@@ -28,6 +28,7 @@ package org.omegat.gui.align;
 
 import java.awt.Component;
 import java.util.Collections;
+import java.util.ResourceBundle;
 
 import javax.swing.JMenuItem;
 
@@ -44,6 +45,7 @@ import org.omegat.util.gui.MenuExtender;
 
 public final class AlignerModule {
 
+    private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("org.omegat.gui.align.Bundle");
     private static IApplicationEventListener alignerListener;
 
     private AlignerModule() {
@@ -70,7 +72,7 @@ public final class AlignerModule {
             }
 
             private void registerMenu() {
-                Mnemonics.setLocalizedText(alignerMenu, OStrings.getString("TF_MENU_TOOLS_ALIGN_FILES"));
+                Mnemonics.setLocalizedText(alignerMenu, BUNDLE.getString("TF_MENU_TOOLS_ALIGN_FILES"));
                 alignerMenu.addActionListener(actionEvent -> alignerShow());
                 MenuExtender.addMenuItem(MenuExtender.MenuKey.TOOLS, alignerMenu);
             }

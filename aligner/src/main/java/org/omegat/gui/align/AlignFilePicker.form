@@ -58,7 +58,7 @@
             <Component class="javax.swing.JLabel" name="jLabel1">
               <Properties>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="org/omegat/Bundle.properties" key="ALIGNER_FILEPICKER_SOURCE" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+                  <ResourceString bundle="org/omegat/gui/align/Bundle.properties" key="ALIGNER_FILEPICKER_SOURCE" replaceFormat="BUNDLE.getString(&quot;{key}&quot;)"/>
                 </Property>
               </Properties>
               <Constraints>
@@ -106,7 +106,7 @@
                 <Component class="javax.swing.JButton" name="sourceChooseFileButton">
                   <Properties>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="org/omegat/Bundle.properties" key="ALIGNER_FILEPICKER_CHOOSE" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+                      <ResourceString bundle="org/omegat/gui/align/Bundle.properties" key="ALIGNER_FILEPICKER_CHOOSE" replaceFormat="BUNDLE.getString(&quot;{key}&quot;)"/>
                     </Property>
                   </Properties>
                   <AuxValues>
@@ -130,7 +130,7 @@
             <Component class="javax.swing.JLabel" name="jLabel2">
               <Properties>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="org/omegat/Bundle.properties" key="ALIGNER_FILEPICKER_TARGET" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+                  <ResourceString bundle="org/omegat/gui/align/Bundle.properties" key="ALIGNER_FILEPICKER_TARGET" replaceFormat="BUNDLE.getString(&quot;{key}&quot;)"/>
                 </Property>
               </Properties>
               <Constraints>
@@ -178,7 +178,7 @@
                 <Component class="javax.swing.JButton" name="targetChooseFileButton">
                   <Properties>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="org/omegat/Bundle.properties" key="ALIGNER_FILEPICKER_CHOOSE" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+                      <ResourceString bundle="org/omegat/gui/align/Bundle.properties" key="ALIGNER_FILEPICKER_CHOOSE" replaceFormat="BUNDLE.getString(&quot;{key}&quot;)"/>
                     </Property>
                   </Properties>
                   <AuxValues>
@@ -251,7 +251,7 @@
             <Component class="javax.swing.JButton" name="okButton">
               <Properties>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="org/omegat/Bundle.properties" key="BUTTON_OK" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+                  <ResourceString bundle="org/omegat/gui/align/Bundle.properties" key="BUTTON_OK" replaceFormat="BUNDLE.getString(&quot;{key}&quot;)"/>
                 </Property>
               </Properties>
               <AuxValues>
@@ -262,7 +262,7 @@
             <Component class="javax.swing.JButton" name="cancelButton">
               <Properties>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="org/omegat/Bundle.properties" key="BUTTON_CANCEL" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+                  <ResourceString bundle="org/omegat/gui/align/Bundle.properties" key="BUTTON_CANCEL" replaceFormat="BUNDLE.getString(&quot;{key}&quot;)"/>
                 </Property>
               </Properties>
               <AuxValues>

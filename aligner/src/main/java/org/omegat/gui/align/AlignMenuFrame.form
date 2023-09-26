@@ -7,7 +7,7 @@
         <Menu class="javax.swing.JMenu" name="fileMenu">
           <Properties>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="org/omegat/Bundle.properties" key="ALIGNER_MENU_FILE" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+              <ResourceString bundle="org/omegat/gui/align/Bundle.properties" key="ALIGNER_MENU_FILE" replaceFormat="BUNDLE.getString(&quot;{key}&quot;)"/>
             </Property>
           </Properties>
           <AuxValues>
@@ -18,7 +18,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="saveItem">
               <Properties>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="org/omegat/Bundle.properties" key="ALIGNER_MENU_FILE_SAVE" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+                  <ResourceString bundle="org/omegat/gui/align/Bundle.properties" key="ALIGNER_MENU_FILE_SAVE" replaceFormat="BUNDLE.getString(&quot;{key}&quot;)"/>
                 </Property>
               </Properties>
               <AuxValues>
@@ -29,7 +29,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="resetItem">
               <Properties>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="org/omegat/Bundle.properties" key="ALIGNER_MENU_FILE_RESET" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+                  <ResourceString bundle="org/omegat/gui/align/Bundle.properties" key="ALIGNER_MENU_FILE_RESET" replaceFormat="BUNDLE.getString(&quot;{key}&quot;)"/>
                 </Property>
               </Properties>
               <AuxValues>
@@ -40,7 +40,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="reloadItem">
               <Properties>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="org/omegat/Bundle.properties" key="ALIGNER_MENU_FILE_RELOAD" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+                  <ResourceString bundle="org/omegat/gui/align/Bundle.properties" key="ALIGNER_MENU_FILE_RELOAD" replaceFormat="BUNDLE.getString(&quot;{key}&quot;)"/>
                 </Property>
               </Properties>
               <AuxValues>
@@ -51,7 +51,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="closeItem">
               <Properties>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="org/omegat/Bundle.properties" key="ALIGNER_MENU_FILE_CLOSE" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+                  <ResourceString bundle="org/omegat/gui/align/Bundle.properties" key="ALIGNER_MENU_FILE_CLOSE" replaceFormat="BUNDLE.getString(&quot;{key}&quot;)"/>
                 </Property>
               </Properties>
               <AuxValues>
@@ -64,7 +64,7 @@
         <Menu class="javax.swing.JMenu" name="editMenu">
           <Properties>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="org/omegat/Bundle.properties" key="ALIGNER_MENU_EDIT" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+              <ResourceString bundle="org/omegat/gui/align/Bundle.properties" key="ALIGNER_MENU_EDIT" replaceFormat="BUNDLE.getString(&quot;{key}&quot;)"/>
             </Property>
           </Properties>
           <AuxValues>
@@ -78,7 +78,7 @@
                   <KeyStroke key="U"/>
                 </Property>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="org/omegat/Bundle.properties" key="ALIGNER_MENU_EDIT_MOVEUP" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+                  <ResourceString bundle="org/omegat/gui/align/Bundle.properties" key="ALIGNER_MENU_EDIT_MOVEUP" replaceFormat="BUNDLE.getString(&quot;{key}&quot;)"/>
                 </Property>
               </Properties>
               <AuxValues>
@@ -92,7 +92,7 @@
                   <KeyStroke key="D"/>
                 </Property>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="org/omegat/Bundle.properties" key="ALIGNER_MENU_EDIT_MOVEDOWN" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+                  <ResourceString bundle="org/omegat/gui/align/Bundle.properties" key="ALIGNER_MENU_EDIT_MOVEDOWN" replaceFormat="BUNDLE.getString(&quot;{key}&quot;)"/>
                 </Property>
               </Properties>
               <AuxValues>
@@ -106,7 +106,7 @@
                   <KeyStroke key="S"/>
                 </Property>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="org/omegat/Bundle.properties" key="ALIGNER_MENU_EDIT_SPLIT" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+                  <ResourceString bundle="org/omegat/gui/align/Bundle.properties" key="ALIGNER_MENU_EDIT_SPLIT" replaceFormat="BUNDLE.getString(&quot;{key}&quot;)"/>
                 </Property>
               </Properties>
               <AuxValues>
@@ -120,7 +120,7 @@
                   <KeyStroke key="M"/>
                 </Property>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="org/omegat/Bundle.properties" key="ALIGNER_MENU_EDIT_MERGE" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+                  <ResourceString bundle="org/omegat/gui/align/Bundle.properties" key="ALIGNER_MENU_EDIT_MERGE" replaceFormat="BUNDLE.getString(&quot;{key}&quot;)"/>
                 </Property>
               </Properties>
               <AuxValues>
@@ -134,7 +134,7 @@
                   <KeyStroke key="E"/>
                 </Property>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="org/omegat/Bundle.properties" key="ALIGNER_MENU_EDIT_EDIT" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+                  <ResourceString bundle="org/omegat/gui/align/Bundle.properties" key="ALIGNER_MENU_EDIT_EDIT" replaceFormat="BUNDLE.getString(&quot;{key}&quot;)"/>
                 </Property>
               </Properties>
               <AuxValues>
@@ -150,7 +150,7 @@
                   <KeyStroke key="A"/>
                 </Property>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="org/omegat/Bundle.properties" key="ALIGNER_MENU_EDIT_MARKACCEPTED" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+                  <ResourceString bundle="org/omegat/gui/align/Bundle.properties" key="ALIGNER_MENU_EDIT_MARKACCEPTED" replaceFormat="BUNDLE.getString(&quot;{key}&quot;)"/>
                 </Property>
               </Properties>
               <AuxValues>
@@ -164,7 +164,7 @@
                   <KeyStroke key="R"/>
                 </Property>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="org/omegat/Bundle.properties" key="ALIGNER_MENU_EDIT_MARKNEEDSREVIEW" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+                  <ResourceString bundle="org/omegat/gui/align/Bundle.properties" key="ALIGNER_MENU_EDIT_MARKNEEDSREVIEW" replaceFormat="BUNDLE.getString(&quot;{key}&quot;)"/>
                 </Property>
               </Properties>
               <AuxValues>
@@ -178,7 +178,7 @@
                   <KeyStroke key="C"/>
                 </Property>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="org/omegat/Bundle.properties" key="ALIGNER_MENU_EDIT_CLEARMARK" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+                  <ResourceString bundle="org/omegat/gui/align/Bundle.properties" key="ALIGNER_MENU_EDIT_CLEARMARK" replaceFormat="BUNDLE.getString(&quot;{key}&quot;)"/>
                 </Property>
               </Properties>
               <AuxValues>
@@ -189,7 +189,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="realignPendingItem">
               <Properties>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="org/omegat/Bundle.properties" key="ALIGNER_MENU_EDIT_REALIGN" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+                  <ResourceString bundle="org/omegat/gui/align/Bundle.properties" key="ALIGNER_MENU_EDIT_REALIGN" replaceFormat="BUNDLE.getString(&quot;{key}&quot;)"/>
                 </Property>
               </Properties>
               <AuxValues>
@@ -202,7 +202,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="keepAllItem">
               <Properties>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="org/omegat/Bundle.properties" key="ALIGNER_MENU_EDIT_KEEPALL" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+                  <ResourceString bundle="org/omegat/gui/align/Bundle.properties" key="ALIGNER_MENU_EDIT_KEEPALL" replaceFormat="BUNDLE.getString(&quot;{key}&quot;)"/>
                 </Property>
               </Properties>
               <AuxValues>
@@ -213,7 +213,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="keepNoneItem">
               <Properties>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="org/omegat/Bundle.properties" key="ALIGNER_MENU_EDIT_KEEPNONE" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+                  <ResourceString bundle="org/omegat/gui/align/Bundle.properties" key="ALIGNER_MENU_EDIT_KEEPNONE" replaceFormat="BUNDLE.getString(&quot;{key}&quot;)"/>
                 </Property>
               </Properties>
               <AuxValues>
@@ -227,7 +227,7 @@
                   <KeyStroke key="K"/>
                 </Property>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="org/omegat/Bundle.properties" key="ALIGNER_MENU_EDIT_TOGGLESELECTED" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+                  <ResourceString bundle="org/omegat/gui/align/Bundle.properties" key="ALIGNER_MENU_EDIT_TOGGLESELECTED" replaceFormat="BUNDLE.getString(&quot;{key}&quot;)"/>
                 </Property>
               </Properties>
               <AuxValues>
@@ -243,7 +243,7 @@
                   <KeyStroke key="SPACE"/>
                 </Property>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="org/omegat/Bundle.properties" key="ALIGNER_MENU_EDIT_PINPOINTALIGNSTART" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+                  <ResourceString bundle="org/omegat/gui/align/Bundle.properties" key="ALIGNER_MENU_EDIT_PINPOINTALIGNSTART" replaceFormat="BUNDLE.getString(&quot;{key}&quot;)"/>
                 </Property>
               </Properties>
               <AuxValues>
@@ -257,7 +257,7 @@
                   <KeyStroke key="SPACE"/>
                 </Property>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="org/omegat/Bundle.properties" key="ALIGNER_MENU_EDIT_PINPOINTALIGNEND" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+                  <ResourceString bundle="org/omegat/gui/align/Bundle.properties" key="ALIGNER_MENU_EDIT_PINPOINTALIGNEND" replaceFormat="BUNDLE.getString(&quot;{key}&quot;)"/>
                 </Property>
               </Properties>
               <AuxValues>
@@ -271,7 +271,7 @@
                   <KeyStroke key="ESCAPE"/>
                 </Property>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="org/omegat/Bundle.properties" key="ALIGNER_MENU_EDIT_PINPOINTALIGNCANCEL" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+                  <ResourceString bundle="org/omegat/gui/align/Bundle.properties" key="ALIGNER_MENU_EDIT_PINPOINTALIGNCANCEL" replaceFormat="BUNDLE.getString(&quot;{key}&quot;)"/>
                 </Property>
               </Properties>
               <AuxValues>
@@ -284,7 +284,7 @@
         <Menu class="javax.swing.JMenu" name="viewMenu">
           <Properties>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="org/omegat/Bundle.properties" key="ALIGNER_MENU_VIEW" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+              <ResourceString bundle="org/omegat/gui/align/Bundle.properties" key="ALIGNER_MENU_VIEW" replaceFormat="BUNDLE.getString(&quot;{key}&quot;)"/>
             </Property>
           </Properties>
           <AuxValues>
@@ -296,7 +296,7 @@
               <Properties>
                 <Property name="selected" type="boolean" value="true"/>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="org/omegat/Bundle.properties" key="ALIGNER_MENU_VIEW_HIGHLIGHT" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+                  <ResourceString bundle="org/omegat/gui/align/Bundle.properties" key="ALIGNER_MENU_VIEW_HIGHLIGHT" replaceFormat="BUNDLE.getString(&quot;{key}&quot;)"/>
                 </Property>
               </Properties>
               <AuxValues>
@@ -307,7 +307,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="highlightPatternItem">
               <Properties>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="org/omegat/Bundle.properties" key="ALIGNER_MENU_VIEW_HIGHLIGHTPATTERN" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+                  <ResourceString bundle="org/omegat/gui/align/Bundle.properties" key="ALIGNER_MENU_VIEW_HIGHLIGHTPATTERN" replaceFormat="BUNDLE.getString(&quot;{key}&quot;)"/>
                 </Property>
               </Properties>
               <AuxValues>
@@ -320,7 +320,7 @@
         <Menu class="javax.swing.JMenu" name="optionsMenu">
           <Properties>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="org/omegat/Bundle.properties" key="ALIGNER_MENU_OPTIONS" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+              <ResourceString bundle="org/omegat/gui/align/Bundle.properties" key="ALIGNER_MENU_OPTIONS" replaceFormat="BUNDLE.getString(&quot;{key}&quot;)"/>
             </Property>
           </Properties>
           <AuxValues>
@@ -332,7 +332,7 @@
               <Properties>
                 <Property name="selected" type="boolean" value="true"/>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="org/omegat/Bundle.properties" key="ALIGNER_MENU_OPTIONS_REMOVETAGS" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+                  <ResourceString bundle="org/omegat/gui/align/Bundle.properties" key="ALIGNER_MENU_OPTIONS_REMOVETAGS" replaceFormat="BUNDLE.getString(&quot;{key}&quot;)"/>
                 </Property>
               </Properties>
               <AuxValues>
@@ -344,7 +344,7 @@
               <Properties>
                 <Property name="selected" type="boolean" value="true"/>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="org/omegat/Bundle.properties" key="ALIGNER_MENU_OPTIONS_SEGMENT" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+                  <ResourceString bundle="org/omegat/gui/align/Bundle.properties" key="ALIGNER_MENU_OPTIONS_SEGMENT" replaceFormat="BUNDLE.getString(&quot;{key}&quot;)"/>
                 </Property>
               </Properties>
               <AuxValues>
@@ -355,7 +355,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="segmentingRulesItem">
               <Properties>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="org/omegat/Bundle.properties" key="ALIGNER_MENU_OPTIONS_SEGMENTATIONRULES" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+                  <ResourceString bundle="org/omegat/gui/align/Bundle.properties" key="ALIGNER_MENU_OPTIONS_SEGMENTATIONRULES" replaceFormat="BUNDLE.getString(&quot;{key}&quot;)"/>
                 </Property>
               </Properties>
               <AuxValues>
@@ -366,7 +366,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="fileFilterSettingsItem">
               <Properties>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="org/omegat/Bundle.properties" key="ALIGNER_MENU_OPTIONS_FILEFILTERS" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+                  <ResourceString bundle="org/omegat/gui/align/Bundle.properties" key="ALIGNER_MENU_OPTIONS_FILEFILTERS" replaceFormat="BUNDLE.getString(&quot;{key}&quot;)"/>
                 </Property>
               </Properties>
               <AuxValues>

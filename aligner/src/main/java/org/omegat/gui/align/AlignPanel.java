@@ -25,6 +25,8 @@
 
 package org.omegat.gui.align;
 
+import java.util.ResourceBundle;
+
 import javax.swing.DefaultComboBoxModel;
 
 import org.omegat.gui.align.Aligner.AlgorithmClass;
@@ -43,6 +45,7 @@ import org.omegat.util.OStrings;
 @SuppressWarnings("serial")
 public class AlignPanel extends javax.swing.JPanel {
 
+    private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("org.omegat.gui.align.Bundle");
     /**
      * Creates new form AlignPanel
      */
@@ -142,13 +145,13 @@ public class AlignPanel extends javax.swing.JPanel {
 
         jPanel8.setLayout(new java.awt.GridBagLayout());
 
-        org.openide.awt.Mnemonics.setLocalizedText(moveUpButton, OStrings.getString("ALIGNER_PANEL_BUTTON_MOVEUP")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(moveUpButton, BUNDLE.getString("ALIGNER_PANEL_BUTTON_MOVEUP")); // NOI18N
         moveUpButton.setEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         jPanel8.add(moveUpButton, gridBagConstraints);
 
-        org.openide.awt.Mnemonics.setLocalizedText(moveDownButton, OStrings.getString("ALIGNER_PANEL_BUTTON_MOVEDOWN")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(moveDownButton, BUNDLE.getString("ALIGNER_PANEL_BUTTON_MOVEDOWN")); // NOI18N
         moveDownButton.setEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridy = 1;
@@ -158,21 +161,21 @@ public class AlignPanel extends javax.swing.JPanel {
         gridBagConstraints.gridy = 2;
         jPanel8.add(filler7, gridBagConstraints);
 
-        org.openide.awt.Mnemonics.setLocalizedText(splitButton, OStrings.getString("ALIGNER_PANEL_BUTTON_SPLIT")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(splitButton, BUNDLE.getString("ALIGNER_PANEL_BUTTON_SPLIT")); // NOI18N
         splitButton.setEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         jPanel8.add(splitButton, gridBagConstraints);
 
-        org.openide.awt.Mnemonics.setLocalizedText(mergeButton, OStrings.getString("ALIGNER_PANEL_BUTTON_MERGE")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(mergeButton, BUNDLE.getString("ALIGNER_PANEL_BUTTON_MERGE")); // NOI18N
         mergeButton.setEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridy = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         jPanel8.add(mergeButton, gridBagConstraints);
 
-        org.openide.awt.Mnemonics.setLocalizedText(editButton, OStrings.getString("ALIGNER_PANEL_BUTTON_EDIT")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(editButton, BUNDLE.getString("ALIGNER_PANEL_BUTTON_EDIT")); // NOI18N
         editButton.setEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridy = 5;
@@ -194,12 +197,12 @@ public class AlignPanel extends javax.swing.JPanel {
 
         jPanel7.setLayout(new javax.swing.BoxLayout(jPanel7, javax.swing.BoxLayout.LINE_AXIS));
 
-        jLabel4.setText(OStrings.getString("ALIGNER_PANEL_LABEL_COMPARISON")); // NOI18N
+        jLabel4.setText(BUNDLE.getString("ALIGNER_PANEL_LABEL_COMPARISON")); // NOI18N
         jPanel7.add(jLabel4);
         jPanel7.add(comparisonComboBox);
         jPanel7.add(filler5);
 
-        averageDistanceLabel.setText(OStrings.getString("ALIGNER_PANEL_LABEL_AVGSCORE")); // NOI18N
+        averageDistanceLabel.setText(BUNDLE.getString("ALIGNER_PANEL_LABEL_AVGSCORE")); // NOI18N
         jPanel7.add(averageDistanceLabel);
         jPanel7.add(filler6);
 
@@ -207,7 +210,7 @@ public class AlignPanel extends javax.swing.JPanel {
 
         jPanel6.setLayout(new javax.swing.BoxLayout(jPanel6, javax.swing.BoxLayout.LINE_AXIS));
 
-        jLabel2.setText(OStrings.getString("ALIGNER_PANEL_LABEL_ALGORITHM")); // NOI18N
+        jLabel2.setText(BUNDLE.getString("ALIGNER_PANEL_LABEL_ALGORITHM")); // NOI18N
         jPanel6.add(jLabel2);
 
         algorithmComboBox.setModel(new DefaultComboBoxModel<>(AlgorithmClass.values())
@@ -215,7 +218,7 @@ public class AlignPanel extends javax.swing.JPanel {
         jPanel6.add(algorithmComboBox);
         jPanel6.add(filler4);
 
-        jLabel3.setText(OStrings.getString("ALIGNER_PANEL_LABEL_CALCULATOR")); // NOI18N
+        jLabel3.setText(BUNDLE.getString("ALIGNER_PANEL_LABEL_CALCULATOR")); // NOI18N
         jPanel6.add(jLabel3);
 
         calculatorComboBox.setModel(new DefaultComboBoxModel<>(CalculatorType.values())
@@ -223,7 +226,7 @@ public class AlignPanel extends javax.swing.JPanel {
         jPanel6.add(calculatorComboBox);
         jPanel6.add(filler3);
 
-        jLabel5.setText(OStrings.getString("ALIGNER_PANEL_LABEL_COUNTER")); // NOI18N
+        jLabel5.setText(BUNDLE.getString("ALIGNER_PANEL_LABEL_COUNTER")); // NOI18N
         jPanel6.add(jLabel5);
 
         counterComboBox.setModel(new DefaultComboBoxModel<>(CounterType.values())
@@ -238,10 +241,10 @@ public class AlignPanel extends javax.swing.JPanel {
 
         segmentationControlsPanel.setLayout(new java.awt.GridLayout(0, 1));
 
-        org.openide.awt.Mnemonics.setLocalizedText(segmentingCheckBox, OStrings.getString("ALIGNER_PANEL_BUTTON_SEGMENT")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(segmentingCheckBox, BUNDLE.getString("ALIGNER_PANEL_BUTTON_SEGMENT")); // NOI18N
         segmentationControlsPanel.add(segmentingCheckBox);
 
-        org.openide.awt.Mnemonics.setLocalizedText(segmentingRulesButton, OStrings.getString("ALIGNER_PANEL_BUTTON_SEGMENTATIONRULES")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(segmentingRulesButton, BUNDLE.getString("ALIGNER_PANEL_BUTTON_SEGMENTATIONRULES")); // NOI18N
         segmentingRulesButton.setEnabled(false);
         segmentationControlsPanel.add(segmentingRulesButton);
 
@@ -249,20 +252,20 @@ public class AlignPanel extends javax.swing.JPanel {
 
         filteringControlsPanel.setLayout(new java.awt.GridLayout(0, 1));
 
-        org.openide.awt.Mnemonics.setLocalizedText(removeTagsCheckBox, OStrings.getString("ALIGNER_PANEL_BUTTON_REMOVETAGS")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(removeTagsCheckBox, BUNDLE.getString("ALIGNER_PANEL_BUTTON_REMOVETAGS")); // NOI18N
         filteringControlsPanel.add(removeTagsCheckBox);
 
-        org.openide.awt.Mnemonics.setLocalizedText(fileFilterSettingsButton, OStrings.getString("ALIGNER_PANEL_BUTTON_FILTERSETTINGS")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(fileFilterSettingsButton, BUNDLE.getString("ALIGNER_PANEL_BUTTON_FILTERSETTINGS")); // NOI18N
         filteringControlsPanel.add(fileFilterSettingsButton);
 
         jPanel5.add(filteringControlsPanel);
 
         jPanel11.setLayout(new java.awt.GridLayout(0, 1));
 
-        org.openide.awt.Mnemonics.setLocalizedText(highlightCheckBox, OStrings.getString("ALIGNER_PANEL_BUTTON_HIGHLIGHT")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(highlightCheckBox, BUNDLE.getString("ALIGNER_PANEL_BUTTON_HIGHLIGHT")); // NOI18N
         jPanel11.add(highlightCheckBox);
 
-        org.openide.awt.Mnemonics.setLocalizedText(highlightPatternButton, OStrings.getString("ALIGNER_PANEL_BUTTON_HIGHLIGHTPATTERN")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(highlightPatternButton, BUNDLE.getString("ALIGNER_PANEL_BUTTON_HIGHLIGHTPATTERN")); // NOI18N
         highlightPatternButton.setEnabled(false);
         jPanel11.add(highlightPatternButton);
 
@@ -272,15 +275,15 @@ public class AlignPanel extends javax.swing.JPanel {
 
         jPanel12.setLayout(new javax.swing.BoxLayout(jPanel12, javax.swing.BoxLayout.LINE_AXIS));
 
-        continueButton.setText(OStrings.getString("ALIGNER_PANEL_BUTTON_CONTINUE")); // NOI18N
+        continueButton.setText(BUNDLE.getString("ALIGNER_PANEL_BUTTON_CONTINUE")); // NOI18N
         jPanel12.add(continueButton);
 
-        org.openide.awt.Mnemonics.setLocalizedText(saveButton, OStrings.getString("ALIGNER_PANEL_BUTTON_SAVE")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(saveButton, BUNDLE.getString("ALIGNER_PANEL_BUTTON_SAVE")); // NOI18N
         jPanel12.add(saveButton);
 
         jPanel10.add(jPanel12);
 
-        org.openide.awt.Mnemonics.setLocalizedText(resetButton, OStrings.getString("ALIGNER_PANEL_BUTTON_RESET")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(resetButton, BUNDLE.getString("ALIGNER_PANEL_BUTTON_RESET")); // NOI18N
         jPanel10.add(resetButton);
 
         jPanel5.add(jPanel10);

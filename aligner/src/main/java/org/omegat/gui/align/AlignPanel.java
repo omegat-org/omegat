@@ -33,7 +33,6 @@ import org.omegat.gui.align.Aligner.AlgorithmClass;
 import org.omegat.gui.align.Aligner.CalculatorType;
 import org.omegat.gui.align.Aligner.ComparisonMode;
 import org.omegat.gui.align.Aligner.CounterType;
-import org.omegat.util.OStrings;
 
 /**
  * UI component for displaying and editing the results of algorithmic alignment.

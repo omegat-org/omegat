@@ -210,7 +210,7 @@
 ----------------------------------------------------------------------
    4 Removed features
   41 Enhancements
-  49 Bug fixes
+  44 Bug fixes
   12 Localization updates
 ----------------------------------------------------------------------
 5.8.0 vs 5.7.1
@@ -223,11 +223,11 @@
 
   - Removal of TaaS access
   The TaaS service does not exist anymore.
-  https://github.com/omegat-org/omegat/pull/302
+  https://github.com/omegat-org/omegat/pull/302/
 
   - Removal of the Moses MT connector
   The connector uses a library that shows critical vulnerabilities
-  https://github.com/omegat-org/omegat/pull/321
+  https://github.com/omegat-org/omegat/pull/321/
   See Moses Plugin project: https://github.com/omegat-org/moses-plugin
 
   - Removal of the Microsoft Azure Translator MT connector
@@ -246,7 +246,7 @@
   https://sourceforge.net/p/omegat/feature-requests/1680/
 
   - Share authentication between Git or SVN repositories on the same server
-  https://sourceforge.net/p/omegat/feature-requests/1670
+  https://sourceforge.net/p/omegat/feature-requests/1670/
 
   - Add filter filtres list sorting
   https://sourceforge.net/p/omegat/feature-requests/1667/
@@ -344,7 +344,7 @@
   https://sourceforge.net/p/omegat/feature-requests/1408/
 
   - Font settings in Aligner
-  https://sourceforge.net/p/omegat/feature-requests/1360
+  https://sourceforge.net/p/omegat/feature-requests/1360/
 
   - Sorting terms alphabetically in glossary pane
   https://sourceforge.net/p/omegat/feature-requests/1241/
@@ -366,14 +366,17 @@
 
   Bug fixes:
 
+  - Searches on "reference TMs" are not properly labeled in the search results
+  https://sourceforge.net/p/omegat/bugs/1154/
+
   - Change key to explicit offline mode cause
-  https://sourceforge.net/p/omegat/bugs/1153
+  https://sourceforge.net/p/omegat/bugs/1153/
 
   - Wrap long lines in error messages
-  https://sourceforge.net/p/omegat/bugs/1145
+  https://sourceforge.net/p/omegat/bugs/1145/
 
   - Color the fuzzy matches from /tm/mt
-  https://sourceforge.net/p/omegat/bugs/1144
+  https://sourceforge.net/p/omegat/bugs/1144/
 
   - BidiMarker does not respect disable menu action
   https://sourceforge.net/p/omegat/bugs/1143/
@@ -390,6 +393,9 @@
   - Error displayed when opening a project on Windows 10
   https://sourceforge.net/p/omegat/bugs/1136/
 
+  - Ampersands in the context menu
+  https://sourceforge.net/p/omegat/bugs/1135/
+
   - Font Rendering issue in OmegaT (Santali)
   https://sourceforge.net/p/omegat/bugs/1133/
 
@@ -401,24 +407,6 @@
 
   - MainMenuShortcuts.properties not up to date
   https://sourceforge.net/p/omegat/bugs/1121/
-
-  - When converting git local-managed project, OmegaT raise NPE
-  https://sourceforge.net/p/omegat/bugs/1118/
-
-  - URL linkifier raise exception when opening resource property file
-  https://sourceforge.net/p/omegat/bugs/1117/
-
-  - BundleProperties filter should accept UTF-8 properties file
-  https://sourceforge.net/p/omegat/bugs/1116/
-
-  - doc_src/docgen docker container should handle UID/GID properly
-  https://sourceforge.net/p/omegat/bugs/1112/
-
-  - Unable to check-out or open/save team projects
-  https://sourceforge.net/p/omegat/bugs/1075/
-
-  - OmegaT --no-team does not complete 3.6 team project conversion
-  https://sourceforge.net/p/omegat/bugs/1063/
 
   - GUI: Comment is shown on both Comment and Segment Properties pane
   https://sourceforge.net/p/omegat/bugs/1119/
@@ -484,6 +472,9 @@
   - OmegaT --no-team does not complete 3.6 team project conversion
   https://sourceforge.net/p/omegat/bugs/1063/
 
+  - Duplicated mnemonics for Project->Restart and Reload
+  https://sourceforge.net/p/omegat/bugs/1054/
+
   - HTML segmentation dropping whole tags
   https://sourceforge.net/p/omegat/bugs/873/
 
@@ -503,7 +494,7 @@
   https://sourceforge.net/p/omegat/bugs/205/
 
   - Highlight found text even if normalized text differs from original
-  https://github.com/omegat-org/omegat/pull/234
+  https://github.com/omegat-org/omegat/pull/234/
 
   Localization Updates:
 

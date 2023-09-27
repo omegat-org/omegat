@@ -66,8 +66,8 @@ public class Xliff1FilterTest extends org.omegat.filters.TestFilterBase {
 
     @Test
     public void testBilingual() throws Exception {
-        Map<String,String> result = new HashMap<>();
-        Map<String,String> legacy = new HashMap<>();
+        Map<String, String> result = new HashMap<>();
+        Map<String, String> legacy = new HashMap<>();
 
         // Test that we correctly read translation
         parse2(new Xliff1Filter(), "test/data/filters/xliff/filters4-xliff1/en-xx.xlf", result, legacy);
@@ -86,7 +86,7 @@ public class Xliff1FilterTest extends org.omegat.filters.TestFilterBase {
         assertEquals("bar", secondEntry.translation);
         ParsedEntry lastEntry = entries.get(entries.size() - 1);
         assertEquals("Added_1", lastEntry.id);  // next entry Added_2 is ignored as translate=no
-        assertEquals("//interface.po/Group 3", lastEntry.path);  // path is built with file name and groups              
+        assertEquals("//interface.po/Group 3", lastEntry.path);  // path is built with file name and groups
     }
 
     @Test
@@ -103,7 +103,7 @@ public class Xliff1FilterTest extends org.omegat.filters.TestFilterBase {
                     }
 
                     public String getTranslation(String id, String source) {
-                        return getTranslation(id,source,"");
+                        return getTranslation(id, source, "");
                     }
 
                     public void linkPrevNextSegments() {

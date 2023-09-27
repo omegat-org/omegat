@@ -210,7 +210,7 @@
 ----------------------------------------------------------------------
    4 Removed features
   41 Enhancements
-  44 Bug fixes
+  45 Bug fixes
   12 Localization updates
 ----------------------------------------------------------------------
 5.8.0 vs 5.7.1
@@ -365,6 +365,9 @@
   https://github.com/omegat-org/omegat/pull/122
 
   Bug fixes:
+
+  - Option "Insert the source text" enabled on its own
+  https://sourceforge.net/p/omegat/bugs/1155/
 
   - Searches on "reference TMs" are not properly labeled in the search results
   https://sourceforge.net/p/omegat/bugs/1154/

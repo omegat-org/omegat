@@ -98,7 +98,9 @@ public final class PluginUtils {
         MACHINETRANSLATOR("machinetranslator"),
         /** A plugin that change base of OmegaT system, not recommended. */
         BASE("base"),
-        /** Glosary, that provide IGlossary API. */
+        /**
+         * Glosary, that provide IGlossary API.
+         */
         GLOSSARY("glossary"),
         /**
          * Dictionary files/services connectors, that provide IDictionary and/or
@@ -106,17 +108,25 @@ public final class PluginUtils {
          */
         DICTIONARY("dictionary"),
         /**
-         * theme, that register Swing Look-and-Feel with OmegaT properties into
+         * theme, that register Swing-Look-and-Feel with OmegaT properties into
          * UIManager.
          */
         THEME("theme"),
-        /** Misc plugins, such as GUI extension like web browser spport. */
+        /**
+         * team repository version control system connector plugins.
+         */
+        REPOSITORY("repository"),
+        /**
+         * Misc plugins, such as a GUI extension like web browser support.
+         */
         MISCELLANEOUS("miscellaneous"),
-
-        /** Spellchecker plugins. */
+        /**
+         * Spellchecker plugins.
+         */
         SPELLCHECK("spellcheck"),
-
-        /** When plugin does not defined any of above. */
+        /**
+         * When plugin does not define any of the above.
+         */
         UNKNOWN("Undefined");
 
         private final String typeValue;
@@ -390,7 +400,7 @@ public final class PluginUtils {
 
         lang = lang.toLowerCase(Locale.ENGLISH);
 
-        // Choose first relevant tokenizer as fallback if no
+        // Choose the first relevant tokenizer as fallback if no
         // "default" tokenizer is found.
         Class<?> fallback = null;
 
@@ -462,7 +472,7 @@ public final class PluginUtils {
      * @param classLoader
      *            classloader
      * @throws ClassNotFoundException
-     *             when plugin class not found.
+     *             when plugin class is not found.
      */
     private static void loadFromManifest(Manifest m, ClassLoader classLoader, URL mu)
             throws ClassNotFoundException {

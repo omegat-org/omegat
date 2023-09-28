@@ -14,28 +14,12 @@ steps:
       echo "Run ${{ parameters.testType }} integration test"
   - task: DockerCompose@0
     inputs:
-      action: Build services
+      action: Run a Docker Compose command
       containerregistrytype: Container Registry
       dockerComposeFile: compose.yml
-    displayName: 'build container image'
-  - task: DockerCompose@0
-    inputs:
-      action: Run a specific service
-      containerregistrytype: Container Registry
-      dockerComposeFile: compose.yml
+      dockerComposeCommand: up
       buildImages: true
-      serviceName: server
-      detached: true
-    displayName: 'Run team server'
-  - task: DockerCompose@0
-    inputs:
-      action: Run a specific service
-      containerregistrytype: Container Registry
-      dockerComposeFile: compose.yml
-      buildImages: true
-      serviceName: client
       abortOnContainerExit: true
-      detached: false
     env:
       DURATION: ${{ parameters.duration }}
       TYPE: ${{ parameters.testType }}

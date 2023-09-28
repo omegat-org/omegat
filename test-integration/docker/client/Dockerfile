@@ -36,8 +36,8 @@ RUN chown -R omegat.omegat /home/omegat
 COPY --chown=omegat ssh_config /home/omegat/.ssh/config
 COPY --chown=omegat gitconfig /home/omegat/.gitconfig
 COPY entrypoint.sh /usr/local/bin/
-RUN (cd /opt && curl -LO https://services.gradle.org/distributions/gradle-7.5.1-bin.zip  \
-    && unzip -q gradle-7.5.1-bin.zip && rm -f gradle-7.5.1-bin.zip)
+RUN (cd /opt && curl -LO https://services.gradle.org/distributions/gradle-8.3-bin.zip  \
+    && unzip -q gradle-8.3-bin.zip && rm -f gradle-8.3-bin.zip)
 RUN chmod 755 /usr/local/bin/entrypoint.sh && chmod 700 /home/omegat/.ssh && chmod 600 /home/omegat/.ssh/config
 
 USER omegat

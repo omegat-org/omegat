@@ -39,7 +39,7 @@ import org.omegat.core.data.IProject;
 import org.omegat.core.data.NotLoadedProject;
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.core.spellchecker.ISpellChecker;
-import org.omegat.core.spellchecker.SpellChecker;
+import org.omegat.core.spellchecker.SpellCheckerManager;
 import org.omegat.core.tagvalidation.ITagValidation;
 import org.omegat.core.tagvalidation.TagValidationTool;
 import org.omegat.core.threads.IAutoSave;
@@ -102,7 +102,6 @@ public final class Core {
     private static ITagValidation tagValidation;
     private static IIssues issuesWindow;
     private static IMatcher matcher;
-    private static ISpellChecker spellChecker;
     private static FilterMaster filterMaster;
 
     protected static IAutoSave saveThread;
@@ -161,7 +160,7 @@ public final class Core {
 
     /** Get spell checker instance. */
     public static ISpellChecker getSpellChecker() {
-        return spellChecker;
+        return SpellCheckerManager.getCurrentSpellChecker();
     }
 
     public static FilterMaster getFilterMaster() {
@@ -250,7 +249,6 @@ public final class Core {
         comments = new CommentsTextArea(me);
         machineTranslatePane = new MachineTranslateTextArea(me);
         dictionaries = new DictionariesTextArea(me);
-        spellChecker = new SpellChecker();
         multiple = new MultipleTransPane(me);
         new SegmentPropertiesArea(me);
 
@@ -321,6 +319,14 @@ public final class Core {
 
     public static void registerTokenizerClass(Class<? extends ITokenizer> clazz) {
         PluginUtils.getTokenizerClasses().add(clazz);
+    }
+
+    /**
+     * Register spellchecker plugin.
+     * @param clazz spellchecker class.
+     */
+    public static void registerSpellCheckClass(Class<? extends ISpellChecker> clazz) {
+        PluginUtils.getSpellCheckClasses().add(clazz);
     }
 
     /**

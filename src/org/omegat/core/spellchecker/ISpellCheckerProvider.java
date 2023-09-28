@@ -29,10 +29,11 @@ import java.util.List;
 
 /**
  * Interface for spell checker implementation.
- *
+ * <p>
  * Instance loaded on each new project open.
  *
  * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Briac Pilpre
  */
 public interface ISpellCheckerProvider {
     /**
@@ -41,12 +42,12 @@ public interface ISpellCheckerProvider {
     boolean isCorrect(String word);
 
     /**
-     * return a list of strings as suggestions
+     * return a list of strings as suggestions.
      */
     List<String> suggest(String word);
 
     /**
-     * Add a word to the list of correct words
+     * Add a word to the list of correct words.
      */
     void learnWord(String word);
 

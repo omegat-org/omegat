@@ -55,7 +55,7 @@ public class DeepLTranslateTest extends TestCoreWireMock {
         Preferences.setPreference(Preferences.ALLOW_DEEPL_TRANSLATE, true);
         DeepLTranslate deepLTranslate = new DeepLTranslate();
         String json = "{ \"response\": \"failed\" }";
-        assertThrows(Exception.class, () -> { deepLTranslate.getJsonResults(json); });
+        assertThrows(Exception.class, () -> deepLTranslate.getJsonResults(json));
     }
 
     @Test

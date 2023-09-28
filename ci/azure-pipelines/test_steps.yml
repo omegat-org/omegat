@@ -11,6 +11,6 @@ steps:
       $(Build.SourcesDirectory)/gradlew --build-cache -PenvIsCi clean test
     displayName: 'Run Gradle clean, test and test on Java17'
   - task: PublishTestResults@2
-    displayName: 'Publish Test Results build/reports/**/*.xml'
+    displayName: 'Publish Test Results build/test-results/**/TEST-*.xml'
     inputs:
-      testResultsFiles: 'build/reports/**/*.xml'
+      testResultsFiles: 'build/test-results/**/TEST-*.xml'

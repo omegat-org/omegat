@@ -17,6 +17,9 @@
   - Use SLF4J as logging facade framework
   https://sourceforge.net/p/omegat/feature-requests/1710/
 
+  - SVN/Team project should respect access URL specified
+  https://sourceforge.net/p/omegat/feature-requests/1707/
+
   - team: apache HttpClient for git connection
   https://sourceforge.net/p/omegat/feature-requests/1706/
 
@@ -25,9 +28,6 @@
 
   - Team: SVN support svn+ssh protocol with key authentication
   https://sourceforge.net/p/omegat/feature-requests/1700/
-
-  - SVN/Team project should respect access URL specified
-  https://sourceforge.net/p/omegat/feature-requests/1707/
 
   - Team: SVN: Replacing trilead-ssh2 with Apache sshd
   https://sourceforge.net/p/omegat/feature-requests/1699/
@@ -56,6 +56,12 @@
   - Add nashorn javascript engine[Java 17 compatibility]
   https://sourceforge.net/p/omegat/feature-requests/1525/
 
+  - If multiple versions of the same plugin are present, only the latest is loaded
+  https://sourceforge.net/p/omegat/feature-requests/1519/
+
+  - Add Spell checker as a type of plugin
+  https://sourceforge.net/p/omegat/feature-requests/1490/
+
   - Use repository mappings in a local project
   https://sourceforge.net/p/omegat/feature-requests/1448/
 
@@ -70,9 +76,6 @@
 
   - Support SRX format
 
-
-  - If multiple versions of the same plugin are present, only the latest is loaded
-  https://sourceforge.net/p/omegat/feature-requests/1519/
 
   Bug fixes:
 

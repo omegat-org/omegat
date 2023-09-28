@@ -1265,6 +1265,18 @@ task runOnJava17(type: JavaExec) {
     group = 'application'
 }
 
+task runOnJava21(type: JavaExec) {
+    description = 'Launch app on Java 21'
+    javaLauncher = javaToolchains.launcherFor {
+        languageVersion = JavaLanguageVersion.of(21)
+        vendor = JvmVendorSpec.ADOPTIUM
+    }
+    mainClass.set application.mainClass
+    classpath = sourceSets.main.runtimeClasspath
+    jvmArgs(["--add-opens", "java.desktop/sun.awt.X11=ALL-UNNAMED"])
+    group = 'application'
+}
+
 // E.g. when doing `build`, run checks before making distfiles
 assemble.mustRunAfter check
 
@@ -1287,6 +1299,18 @@ task testOnJava17(type: Test) {
     description = 'Run test cases on Java 17'
     javaLauncher = javaToolchains.launcherFor {
         languageVersion = JavaLanguageVersion.of(17)
+        vendor = JvmVendorSpec.ADOPTIUM
+    }
+    if (project.hasProperty('headless')) {
+        systemProperty 'java.awt.headless', 'true'
+    }
+    group = 'verification'
+}
+
+task testOnJava21(type: Test) {
+    description = 'Run test cases on Java 21'
+    javaLauncher = javaToolchains.launcherFor {
+        languageVersion = JavaLanguageVersion.of(21)
         vendor = JvmVendorSpec.ADOPTIUM
     }
     if (project.hasProperty('headless')) {

@@ -98,7 +98,9 @@ public final class PluginUtils {
         MACHINETRANSLATOR("machinetranslator"),
         /** A plugin that change base of OmegaT system, not recommended. */
         BASE("base"),
-        /** Glosary, that provide IGlossary API. */
+        /**
+         * Glosary, that provide IGlossary API.
+         */
         GLOSSARY("glossary"),
         /**
          * Dictionary files/services connectors, that provide IDictionary and/or
@@ -110,11 +112,21 @@ public final class PluginUtils {
          * UIManager.
          */
         THEME("theme"),
-        /** team repository version control system connector plugins. */
+        /**
+         * team repository version control system connector plugins.
+         */
         REPOSITORY("repository"),
-        /** Misc plugins, such as a GUI extension like web browser support. */
+        /**
+         * Misc plugins, such as a GUI extension like web browser support.
+         */
         MISCELLANEOUS("miscellaneous"),
-        /** When plugin does not define any of the above. */
+        /**
+         * Spellchecker plugins.
+         */
+        SPELLCHECK("spellcheck"),
+        /**
+         * When plugin does not define any of the above.
+         */
         UNKNOWN("Undefined");
 
         private final String typeValue;
@@ -341,6 +353,14 @@ public final class PluginUtils {
         return TOKENIZER_CLASSES;
     }
 
+    /**
+     * Reterun registered plugin classes for spellchecker category.
+     * @return list of classes.
+     */
+    public static List<Class<?>> getSpellCheckClasses() {
+        return SPELLCHECK_CLASSES;
+    }
+
     public static Class<?> getTokenizerClassForLanguage(Language lang) {
         if (lang == null) {
             return DefaultTokenizer.class;
@@ -433,6 +453,8 @@ public final class PluginUtils {
     private static final List<Class<?>> TOKENIZER_CLASSES = new ArrayList<>();
 
     private static final List<Class<?>> MARKER_CLASSES = new ArrayList<>();
+
+    private static final List<Class<?>> SPELLCHECK_CLASSES = new ArrayList<>();
 
     private static final List<Class<?>> MACHINE_TRANSLATION_CLASSES = new ArrayList<>();
 

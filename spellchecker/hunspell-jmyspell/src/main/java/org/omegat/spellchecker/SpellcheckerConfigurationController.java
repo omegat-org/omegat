@@ -1,33 +1,33 @@
-/**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool
-          with fuzzy matching, translation memory, keyword search,
-          glossaries, and translation leveraging into updated projects.
+/*
+ *  OmegaT - Computer Assisted Translation (CAT) tool
+ *           with fuzzy matching, translation memory, keyword search,
+ *           glossaries, and translation leveraging into updated projects.
+ *
+ *  Copyright (C) 2007 Zoltan Bartko
+ *                2008-2011 Didier Briel
+ *                2012 Martin Fleurke, Didier Briel
+ *                2015 Aaron Madlon-Kay
+ *                2016 Aaron Madlon-Kay
+ *                Home page: https://www.omegat.org/
+ *                Support center: https://omegat.org/support
+ *
+ *  This file is part of OmegaT.
+ *
+ *  OmegaT is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  OmegaT is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
 
- Copyright (C) 2007 Zoltan Bartko
-               2008-2011 Didier Briel
-               2012 Martin Fleurke, Didier Briel
-               2015 Aaron Madlon-Kay
-               2016 Aaron Madlon-Kay
-               Home page: https://www.omegat.org/
-               Support center: https://omegat.org/support
-
- This file is part of OmegaT.
-
- OmegaT is free software: you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation, either version 3 of the License, or
- (at your option) any later version.
-
- OmegaT is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with this program.  If not, see <https://www.gnu.org/licenses/>.
- **************************************************************************/
-
-package org.omegat.gui.preferences.view;
+package org.omegat.spellchecker;
 
 import java.io.File;
 import java.util.Arrays;
@@ -46,11 +46,10 @@ import javax.swing.event.DocumentListener;
 import org.omegat.core.Core;
 import org.omegat.core.spellchecker.DictionaryManager;
 import org.omegat.core.spellchecker.ISpellChecker;
-import org.omegat.core.spellchecker.SpellChecker;
+import org.omegat.core.spellchecker.SpellCheckerManager;
 import org.omegat.gui.dialogs.DictionaryInstallerDialog;
 import org.omegat.gui.preferences.BasePreferencesController;
 import org.omegat.util.Language;
-import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.StaticUIUtils;
@@ -83,11 +82,27 @@ public class SpellcheckerConfigurationController extends BasePreferencesControll
 
     @Override
     public String toString() {
-        return OStrings.getString("PREFS_TITLE_SPELLCHECKER");
+        return DefaultSpellChecker.BUNDLE.getString("PREFS_TITLE_SPELLCHECKER");
     }
 
     private void initGui() {
         panel = new SpellcheckerConfigurationPanel();
+
+        // localize GUI parts.
+        org.openide.awt.Mnemonics.setLocalizedText(panel.autoSpellcheckCheckBox,
+                DefaultSpellChecker.BUNDLE.getString("GUI_SPELLCHECKER_AUTOSPELLCHECKCHECKBOX"));
+        org.openide.awt.Mnemonics.setLocalizedText(panel.directoryLabel, DefaultSpellChecker.BUNDLE.getString(
+                "GUI_SPELLCHECKER_DICTIONARYLABEL"));
+        org.openide.awt.Mnemonics.setLocalizedText(panel.directoryChooserButton, DefaultSpellChecker.BUNDLE.getString(
+                "GUI_SPELLCHECKER_DIRECTORYCHOOSERBUTTON"));
+        org.openide.awt.Mnemonics.setLocalizedText(panel.contentLabel, DefaultSpellChecker.BUNDLE.getString(
+                "GUI_SPELLCHECKER_AVAILABLE_LABEL"));
+        org.openide.awt.Mnemonics.setLocalizedText(panel.uninstallButton, DefaultSpellChecker.BUNDLE.getString(
+                "GUI_SPELLCHECKER_UNINSTALLBUTTON"));
+        org.openide.awt.Mnemonics.setLocalizedText(panel.dictionaryUrlLabel, DefaultSpellChecker.BUNDLE.getString(
+                "GUI_SPELLCHECKER_URL_LABEL"));
+        org.openide.awt.Mnemonics.setLocalizedText(panel.installButton, DefaultSpellChecker.BUNDLE.getString(
+                "GUI_SPELLCHECKER_INSTALLBUTTON"));
 
         panel.autoSpellcheckCheckBox.addActionListener(e -> updateDetailPanel());
 
@@ -140,21 +155,22 @@ public class SpellcheckerConfigurationController extends BasePreferencesControll
     private void doInstall() {
         File dicDir = getDictDir();
         if (dicDir == null) {
-            JOptionPane.showMessageDialog(panel, OStrings.getString("GUI_SPELLCHECKER_INSTALL_UNABLE"),
-                    OStrings.getString("GUI_SPELLCHECKER_INSTALL_UNABLE_TITLE"), JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(panel, DefaultSpellChecker.BUNDLE.getString("GUI_SPELLCHECKER_INSTALL_UNABLE"),
+                    DefaultSpellChecker.BUNDLE.getString("GUI_SPELLCHECKER_INSTALL_UNABLE_TITLE"), JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         if (!dicDir.exists()) {
             int doCreateDir = JOptionPane.showConfirmDialog(panel,
-                    OStrings.getString("GUI_SPELLCHECKER_DIR_NOT_PRESENT"),
-                    OStrings.getString("GUI_SPELLCHECKER_DIR_NOT_PRESENT_TITLE"), JOptionPane.OK_CANCEL_OPTION);
+                    DefaultSpellChecker.BUNDLE.getString("GUI_SPELLCHECKER_DIR_NOT_PRESENT"),
+                    DefaultSpellChecker.BUNDLE.getString("GUI_SPELLCHECKER_DIR_NOT_PRESENT_TITLE"), JOptionPane.OK_CANCEL_OPTION);
             if (doCreateDir != JOptionPane.OK_OPTION) {
                 return;
             }
             if (!dicDir.mkdirs()) {
-                JOptionPane.showMessageDialog(panel, OStrings.getString("GUI_SPELLCHECKER_COULD_NOT_CREATE_DIR"),
-                        OStrings.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(panel, DefaultSpellChecker.BUNDLE.getString(
+                        "GUI_SPELLCHECKER_COULD_NOT_CREATE_DIR"),
+                        DefaultSpellChecker.BUNDLE.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
                 return;
             }
         }
@@ -168,7 +184,7 @@ public class SpellcheckerConfigurationController extends BasePreferencesControll
             installerDialog.setVisible(true);
             updateLanguageList();
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(panel, ex.getLocalizedMessage(), OStrings.getString("ERROR_TITLE"),
+            JOptionPane.showMessageDialog(panel, ex.getLocalizedMessage(), DefaultSpellChecker.BUNDLE.getString("ERROR_TITLE"),
                     JOptionPane.ERROR_MESSAGE);
         }
     }
@@ -183,15 +199,15 @@ public class SpellcheckerConfigurationController extends BasePreferencesControll
             String selectedLocaleName = selectedItem.substring(0, selectedItem.indexOf(" "));
 
             if (selectedLocaleName.equals(getCurrentLanguage().getLocaleCode())) {
-                if (JOptionPane.showConfirmDialog(panel, OStrings.getString("GUI_SPELLCHECKER_UNINSTALL_CURRENT"),
-                        OStrings.getString("GUI_SPELLCHECKER_UNINSTALL_CURRENT_TITLE"),
+                if (JOptionPane.showConfirmDialog(panel, DefaultSpellChecker.BUNDLE.getString("GUI_SPELLCHECKER_UNINSTALL_CURRENT"),
+                        DefaultSpellChecker.BUNDLE.getString("GUI_SPELLCHECKER_UNINSTALL_CURRENT_TITLE"),
                         JOptionPane.YES_NO_OPTION) == JOptionPane.NO_OPTION) {
                     return;
                 }
             }
             if (!dicMan.uninstallDictionary(selectedLocaleName)) {
-                JOptionPane.showMessageDialog(panel, OStrings.getString("GUI_SPELLCHECKER_UNINSTALL_UNABLE"),
-                        OStrings.getString("GUI_SPELLCHECKER_UNINSTALL_UNABLE_TITLE"), JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(panel, DefaultSpellChecker.BUNDLE.getString("GUI_SPELLCHECKER_UNINSTALL_UNABLE"),
+                        DefaultSpellChecker.BUNDLE.getString("GUI_SPELLCHECKER_UNINSTALL_UNABLE_TITLE"), JOptionPane.ERROR_MESSAGE);
             }
             ((DefaultListModel<?>) panel.languageList.getModel()).remove(panel.languageList.getSelectedIndex());
         }
@@ -201,7 +217,7 @@ public class SpellcheckerConfigurationController extends BasePreferencesControll
         // open a dialog box to choose the directory
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-        fileChooser.setDialogTitle(OStrings.getString("GUI_SPELLCHECKER_FILE_CHOOSER_TITLE"));
+        fileChooser.setDialogTitle(DefaultSpellChecker.BUNDLE.getString("GUI_SPELLCHECKER_FILE_CHOOSER_TITLE"));
         if (fileChooser.showOpenDialog(panel) == JFileChooser.APPROVE_OPTION) {
             // we should write the result into the directory text field
             File file = fileChooser.getSelectedFile();
@@ -291,7 +307,7 @@ public class SpellcheckerConfigurationController extends BasePreferencesControll
         listSelectionChanged();
 
         String dictDirPath = Preferences.getPreferenceDefault(Preferences.SPELLCHECKER_DICTIONARY_DIRECTORY,
-                SpellChecker.DEFAULT_DICTIONARY_DIR.getPath());
+                SpellCheckerManager.DEFAULT_DICTIONARY_DIR.getPath());
         panel.directoryTextField.setText(dictDirPath);
 
         // Create dict dir if it doesn't exist, so user can install immediately
@@ -307,7 +323,7 @@ public class SpellcheckerConfigurationController extends BasePreferencesControll
         panel.dictionaryUrlTextField.setText(DICT_URL);
         directoryChanged();
         listSelectionChanged();
-        File dictDir = SpellChecker.DEFAULT_DICTIONARY_DIR;
+        File dictDir = SpellCheckerManager.DEFAULT_DICTIONARY_DIR;
         panel.directoryTextField.setText(dictDir.getPath());
         // Create dict dir if it doesn't exist, so user can install immediately
         if (!dictDir.exists()) {

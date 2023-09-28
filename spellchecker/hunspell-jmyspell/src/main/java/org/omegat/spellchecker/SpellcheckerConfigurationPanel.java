@@ -27,7 +27,7 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
-package org.omegat.gui.preferences.view;
+package org.omegat.spellchecker;
 
 import org.omegat.util.OStrings;
 
@@ -146,12 +146,12 @@ public class SpellcheckerConfigurationPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     javax.swing.JCheckBox autoSpellcheckCheckBox;
-    private javax.swing.JLabel contentLabel;
+    javax.swing.JLabel contentLabel;
     javax.swing.JPanel detailPanel;
-    private javax.swing.JLabel dictionaryUrlLabel;
+    javax.swing.JLabel dictionaryUrlLabel;
     javax.swing.JTextField dictionaryUrlTextField;
     javax.swing.JButton directoryChooserButton;
-    private javax.swing.JLabel directoryLabel;
+    javax.swing.JLabel directoryLabel;
     javax.swing.JTextField directoryTextField;
     javax.swing.JButton installButton;
     private javax.swing.JPanel jPanel1;

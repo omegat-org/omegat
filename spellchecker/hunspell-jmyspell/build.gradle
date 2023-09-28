@@ -22,6 +22,8 @@ dependencies {
         implementation(libs.omegat.jmyspell.core)
         implementation(libs.dumont.hunspell)
     }
+    testImplementation(testFixtures(project.rootProject))
+    testImplementation(libs.commons.io)
 }
 
 jar {

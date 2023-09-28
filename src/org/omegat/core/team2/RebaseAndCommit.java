@@ -222,6 +222,9 @@ public final class RebaseAndCommit {
                 provider.getTeamSettings().set(VERSION_PREFIX + path, newVersion);
             }
             rebaser.reload(headRepoFile);
+        } else {
+            // no changes so just load.
+            rebaser.reload(headRepoFile);
         }
     }
 

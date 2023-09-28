@@ -543,10 +543,10 @@ public class FileUtilTest {
 
         File original = new File(tempDir, "backup.test");
         original.createNewFile();
-        original.setLastModified(1684085727566l);
+        original.setLastModified(1684085727566L);
 
         assertTrue(original.exists());
-        assertEquals(1684085727566l, original.lastModified());
+        assertEquals(1684085727566L, original.lastModified());
         assertEquals("backup.test.202305141735.bak", FileUtil.getBackupFilename(original));
 
         safeDeleteDirectory(tempDir);

@@ -159,7 +159,7 @@ public class ExternalTMFactoryTest extends TestCore {
         List<ITMXEntry> matchingEntries = tmx.getEntries().stream().filter(t -> t.getSourceText().equals("Hello World!"))
                 .collect(Collectors.toList());
         assertEquals(3, matchingEntries.size());
-        
+
         // Set the EXT_TMX_KEEP_FOREIGN_MATCH prop
         Preferences.setPreference(Preferences.EXT_TMX_KEEP_FOREIGN_MATCH, true);
         tmx = ExternalTMFactory.load(tmxFile);

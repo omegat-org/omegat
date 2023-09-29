@@ -18,6 +18,7 @@ OutputDir=.
 OutputBaseFilename=@OUTPUT_BASENAME_SUBST@
 ArchitecturesAllowed=@ARCHITECTURE_SUBST@
 ArchitecturesInstallIn64BitMode=@ARCHITECTURE_SUBST@
+PrivilegesRequired=lowest
 
 [Files]
 Source: "docs\*"; DestDir: "{app}\docs"; Flags: recursesubdirs

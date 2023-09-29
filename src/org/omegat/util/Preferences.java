@@ -509,7 +509,7 @@ public final class Preferences {
 
     /** Version Checker */
     public static final String VERSION_CHECK_AUTOMATIC = "automatically_check_version";
-    public static final boolean VERSION_CHECK_AUTOMATIC_DEFAULT = true;
+    public static final boolean VERSION_CHECK_AUTOMATIC_DEFAULT = false;    // for the fork
 
     public static final String THEME_CLASS_NAME = "theme_class_name";
     public static final String THEME_CLASS_NAME_DEFAULT = "org.omegat.gui.theme.DefaultFlatTheme";

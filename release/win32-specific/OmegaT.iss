@@ -82,7 +82,7 @@ Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescrip
 
 [Icons]
 Name: "{group}\OmegaT"; Filename: "{app}\OmegaT.exe"; WorkingDir: "{app}"
-Name: "{commondesktop}\OmegaT"; Filename: "{app}\OmegaT.exe"; Tasks: desktopicon
+Name: "{userdesktop}\OmegaT"; Filename: "{app}\OmegaT.exe"; Tasks: desktopicon
 Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\OmegaT"; Filename: "{app}\OmegaT.exe"; Tasks: quicklaunchicon
 Name: "{group}\OmegaT Readme"; Filename: "{app}\readme.txt"
 Name: "{group}\OmegaT User Manual"; Filename: "{app}\docs\index.html"

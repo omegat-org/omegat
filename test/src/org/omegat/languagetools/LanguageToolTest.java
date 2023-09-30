@@ -38,10 +38,7 @@ import java.util.Locale;
 import org.junit.Before;
 import org.junit.Test;
 import org.languagetool.JLanguageTool;
-import org.languagetool.language.AmericanEnglish;
-import org.languagetool.language.CanadianEnglish;
-import org.languagetool.language.English;
-import org.languagetool.language.French;
+import org.languagetool.Languages;
 import org.languagetool.rules.RuleMatch;
 import org.languagetool.rules.patterns.PatternRule;
 import org.languagetool.server.HTTPServer;
@@ -65,7 +62,7 @@ public class LanguageToolTest {
     @Test
     @SuppressWarnings("deprecation")
     public void testExecuteLanguageToolCheck() throws Exception {
-        JLanguageTool lt = new JLanguageTool(new org.languagetool.language.Belarusian());
+        JLanguageTool lt = new JLanguageTool(Languages.getLanguageForShortCode("be"));
 
         // The test string is Belarusian; originally it was actual UTF-8,
         // but that causes the test to fail when environment encodings aren't set
@@ -77,7 +74,7 @@ public class LanguageToolTest {
 
     @Test
     public void testFrench() throws Exception {
-        JLanguageTool lt = new JLanguageTool(new French());
+        JLanguageTool lt = new JLanguageTool(Languages.getLanguageForShortCode("fr"));
 
         // example from https://github.com/languagetool-org/languagetool/issues/2852
         List<RuleMatch> matches = lt.check("Il est par cons\u00E9quent perdue.");
@@ -87,7 +84,7 @@ public class LanguageToolTest {
 
     @Test
     public void testEnglish() throws Exception {
-        JLanguageTool lt = new JLanguageTool(new AmericanEnglish());
+        JLanguageTool lt = new JLanguageTool(Languages.getLanguageForLocale(new Locale("en", "US")));
 
         List<RuleMatch> matches = lt.check("Check test");
         assertEquals(0, matches.size());
@@ -152,29 +149,29 @@ public class LanguageToolTest {
     public void testLanguageMapping() {
         {
             org.languagetool.Language lang = LanguageToolNativeBridge.getLTLanguage(new Language("en-US"));
-            assertEquals(AmericanEnglish.class, lang.getClass());
+            assertEquals(Languages.getLanguageForLocale(new Locale("en", "US")).getClass(), lang.getClass());
         }
         {
             org.languagetool.Language lang = LanguageToolNativeBridge.getLTLanguage(new Language("en-CA"));
-            assertEquals(CanadianEnglish.class, lang.getClass());
+            assertEquals(Languages.getLanguageForLocale(new Locale("en", "CA")).getClass(), lang.getClass());
         }
         {
             org.languagetool.Language lang = LanguageToolNativeBridge.getLTLanguage(new Language("en"));
-            assertEquals(English.class, lang.getClass());
+            assertEquals(Languages.getLanguageForShortCode("en").getClass(), lang.getClass());
         }
         {
             // Unknown region--fall back to generic class
             org.languagetool.Language lang = LanguageToolNativeBridge.getLTLanguage(new Language("en-JA"));
-            assertEquals(English.class, lang.getClass());
+            assertEquals(Languages.getLanguageForShortCode("en").getClass(), lang.getClass());
         }
         {
             org.languagetool.Language lang = LanguageToolNativeBridge.getLTLanguage(new Language("be-BY"));
-            assertEquals(org.languagetool.language.Belarusian.class, lang.getClass());
+            assertEquals(Languages.getLanguageForShortCode("be").getClass(), lang.getClass());
         }
         {
             // Belarusian is offered in be-BY only; ensure hit with just "be"
             org.languagetool.Language lang = LanguageToolNativeBridge.getLTLanguage(new Language("be"));
-            assertEquals(org.languagetool.language.Belarusian.class, lang.getClass());
+            assertEquals(Languages.getLanguageForShortCode("be").getClass(), lang.getClass());
         }
         {
             org.languagetool.Language lang = LanguageToolNativeBridge.getLTLanguage(new Language("xyz"));

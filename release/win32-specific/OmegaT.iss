@@ -27,7 +27,7 @@ Source: "lib\*"; DestDir: "{app}\lib"; Flags: recursesubdirs
 Source: "plugins\*"; DestDir: "{app}\plugins"; Flags: recursesubdirs
 Source: "scripts\*"; DestDir: "{app}\scripts"; Flags: recursesubdirs
 Source: "OmegaT.exe"; DestDir: "{app}"
-Source: "OmegaT.l4J.ini"; DestDir: "{app}"; AfterInstall: SetUserLanguage; Flags: onlyifdoesntexist
+Source: "OmegaT.l4J.ini"; DestDir: "{app}"; AfterInstall: SetEnglish; Flags: onlyifdoesntexist
 Source: "OmegaT.jar"; DestDir: "{app}"
 Source: "OmegaT-license.txt"; DestDir: "{app}"
 Source: "doc-license.txt"; DestDir: "{app}"
@@ -77,7 +77,7 @@ Source: "omegat.prefs"; DestDir: "{app}"; Flags: skipifsourcedoesntexist;
 Type: filesandordirs; Name: "{app}\plugins\"
 
 [Tasks]
-Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
+Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"
 Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Icons]
@@ -153,41 +153,20 @@ Name: "uk"; MessagesFile: "compiler:Languages\Ukrainian.isl"
 @CUSTOM_MESSAGES_SUBST@
 
 [Code]
-var
-  Page: TInputOptionWizardPage;
-
-procedure InitializeWizard;
-begin
-  Page := CreateInputOptionPage(wpWelcome,
-    CustomMessage('OmTUseInstallLanguageTitle'), CustomMessage('OmTUseInstallLanguageSubTitle'),
-    CustomMessage('OmTUseInstallLanguageText'), False, False);
-  Page.Add(CustomMessage('OmTUseInstallLanguageOption'));
-  Page.Values[0] := true;
-end;
-
-procedure SetUserLanguage;
+procedure SetEnglish;
 var
   InstallLanguage: String;
   InstallCountry: String;
   IniFileAnsi: AnsiString;
   IniFileUnicode: String;
 begin
-  if Page.Values[0] then
-  begin
-    InstallCountry := Copy(ActiveLanguage(), 4, 2);
-    InstallLanguage := Copy(ActiveLanguage(), 0, 2);
-
-    LoadStringFromFile(ExpandConstant('{app}\OmegaT.l4J.ini'), IniFileAnsi);
-    IniFileUnicode := String(IniFileAnsi)
-    StringChangeEx(IniFileUnicode, '-Duser.language=', '#-Duser.language=', True);
-    StringChangeEx(IniFileUnicode, '-Duser.country=', '#-Duser.country=', True);
-    IniFileUnicode := IniFileUnicode + #13#10 + '-Duser.language=' + InstallLanguage;
-    if Length(InstallCountry) > 0 then
-      IniFileUnicode := IniFileUnicode + #13#10 + '-Duser.country=' + InstallCountry;
-
-    IniFileAnsi := AnsiString(IniFileUnicode)
-    SaveStringToFile(ExpandConstant('{app}\OmegaT.l4J.ini'), IniFileAnsi, false);
-  end
+  LoadStringFromFile(ExpandConstant('{app}\OmegaT.l4J.ini'), IniFileAnsi);
+  IniFileUnicode := String(IniFileAnsi)
+  StringChangeEx(IniFileUnicode, '-Duser.language=', '#-Duser.language=', True);
+  StringChangeEx(IniFileUnicode, '-Duser.country=', '#-Duser.country=', True);
+  IniFileUnicode := IniFileUnicode + #13#10 + '-Duser.language=en';
+  IniFileAnsi := AnsiString(IniFileUnicode)
+  SaveStringToFile(ExpandConstant('{app}\OmegaT.l4J.ini'), IniFileAnsi, false);
 end;
 
 function DelTreeIfPresent(const FileName: String): Boolean;

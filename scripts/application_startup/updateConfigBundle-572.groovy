@@ -26,7 +26,7 @@
  */
 
 def customUrl = "https://cat.capstan.be/OmegaT/v572/index.php" //insert URL between quotes or set to "" (empty) to ask the user on the 1st run, don't comment out
-autoLaunch = false // true for <application_startup> folder, false for the regular scripts folder
+autoLaunch = true // true for <application_startup> folder, false for the regular scripts folder
 removeExtraPlugins = true // true if the script should try to remove jar files in <install_folder>/plugins
 deletePlugVerbose = true // true to list the plugins in the read-only folder which the script couldn't remove
 

@@ -97,8 +97,8 @@ import gen.core.project.RepositoryDefinition;
  */
 public class GITRemoteRepository2 implements IRemoteRepository2 {
     private static final ILogger LOGGER = LoggerFactory.getLogger(GITRemoteRepository2.class);
-    private static final String GIT_START_MSG = "Git '{}' execution start";
-    private static final String GIT_NO_CHANGES_MSG = "Git '{}' did nothing because there were no changes";
+    private static final String GIT_START_MSG = "Git '{0}' execution start";
+    private static final String GIT_NO_CHANGES_MSG = "Git '{0}' did nothing because there were no changes";
 
     // allow override default remote name and branch name.
     protected static final String DEFAULT_LOCAL_BRANCH = "master";

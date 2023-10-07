@@ -384,7 +384,6 @@ jar {
     archiveFileName.set("${archiveBaseName.get()}.${archiveExtension.get()}")
 }
 
-project(":languagetools") {jar.enabled = false}
 project(":machinetranslators") {jar.enabled = false}
 
 def distsDir = layout.buildDirectory.file("${distsDirName}").get().asFile

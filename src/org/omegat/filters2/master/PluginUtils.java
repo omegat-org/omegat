@@ -253,6 +253,15 @@ public final class PluginUtils {
     }
 
     /**
+     * Load plugin for test.
+     * WARN: don't use for general purpose.
+     */
+    public static void loadPluginFromProperties(Properties props) throws ClassNotFoundException {
+        ClassLoader pluginsClassLoader = PluginUtils.class.getClassLoader();
+        loadFromProperties(props, pluginsClassLoader);
+    }
+
+    /**
      * This method create a list of plugins to load. It tries to onky take the
      * most recent version of plugins. To differenciate between different
      * versions, the plugins must have the same name, have the same number of

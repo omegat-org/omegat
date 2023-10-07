@@ -31,6 +31,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComponent;
 import javax.swing.UIManager;
@@ -148,14 +149,14 @@ public class AppearanceController extends BasePreferencesController {
         String[] darkLafs = darkThemeList.stream().map(LookAndFeelInfo::getClassName).toArray(String[]::new);
         panel.cbDarkThemeSelect.setModel(new DefaultComboBoxModel<>(darkLafs));
         panel.cbDarkThemeSelect.setRenderer(renderer);
-        Mnemonics.setLocalizedText(panel.lightDefaultThemeSelectionLabel,
-                OStrings.getString("MW_OPTIONMENU_APPEARANCE_THEME_LABEL"));
-        Mnemonics.setLocalizedText(panel.darkThemeSelectionLabel,
-                OStrings.getString("MW_OPTIONMENU_APPEARANCE_DARK_THEME_LABEL"));
+        panel.themePanel.setBorder(BorderFactory.createTitledBorder(
+                OStrings.getString("MW_OPTIONMENU_APPEARANCE_THEME_LABEL")));
+        panel.menustylePanel.setBorder(BorderFactory.createTitledBorder(
+                OStrings.getString("MW_OPTIONMENU_APPEARANCE_MENUSTYLE_LABEL")));
         Mnemonics.setLocalizedText(panel.useLightDefaultThemeRB,
-                OStrings.getString("MW_OPTIONMENU_APPEARANCE_DEFAULT_THEME"));
+                OStrings.getString("MW_OPTIONMENU_APPEARANCE_LIGHT_THEME_LABEL"));
         Mnemonics.setLocalizedText(panel.useDarkThemeRB,
-                OStrings.getString("MW_OPTIONMENU_APPEARANCE_USE_DARK_THEME"));
+                OStrings.getString("MW_OPTIONMENU_APPEARANCE_DARK_THEME_LABEL"));
         Mnemonics.setLocalizedText(panel.syncWithOSColorRB,
                 OStrings.getString("MW_OPTIONMENU_APPEARANCE_SYNC_WITH_OS_COLOR"));
         if (Platform.isLinux()) {

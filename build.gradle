@@ -246,6 +246,12 @@ dependencies {
             exclude module: 'guava'
         }
 
+        runtimeOnly(libs.languagetool.all) {
+            // Temporary exclusion; see https://sourceforge.net/p/omegat/bugs/814/
+            exclude module: 'lucene-gosen'
+        }
+        runtimeOnly 'org.omegat.lucene:lucene-gosen:5.5.1:ipadic'
+
         // Lucene for tokenizers
         implementation(libs.bundles.lucene)
 
@@ -535,9 +541,11 @@ distributions {
                 into 'lib'
             }
             // system core plugins into modules
-            into('modules') {
-                from(subprojects.collect {it.tasks.withType(Jar)})
-                from('releases/modules-specific')
+            from('releases/modules-specific') {
+                into 'modules'
+            }
+            from(subprojects.collect {it.tasks.withType(Jar)}) {
+                into 'modules'
             }
             eachFile {
                 // Move main JAR up one level from lib.
@@ -566,12 +574,10 @@ distributions {
             into('lib/provided') {
                 // collect project runtime dependencies in all subprojects and sourceSets
                 from configurations.runtimeClasspath
-                from {subprojects.findAll { it.getSubprojects().isEmpty()}.collect {
-                            // catch languatools.*RuntimeClasspath, which * is language code,
-                            // and normal runtimeClasspath but no testRuntimeClasspath and jaxbRuntimeClasspath
-                            it.configurations.matching { it.name.endsWith('untimeClasspath')
+                from {subprojects.findAll { it.getSubprojects().isEmpty()}
+                        .collect { it.configurations.matching { it.name.endsWith('untimeClasspath')
                                     && !it.name.startsWith('test') && !it.name.startsWith('jaxb')
-                        }}
+                        } }
                 }
             }
         }

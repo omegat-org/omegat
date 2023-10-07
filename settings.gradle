@@ -7,7 +7,6 @@ include("machinetranslators:apertium",
         "machinetranslators:mymemory",
         "machinetranslators:yandex",
         "aligner",
-        "languagetools",
         "theme",
         "spellchecker:hunspell-jmyspell",
         "tipoftheday")

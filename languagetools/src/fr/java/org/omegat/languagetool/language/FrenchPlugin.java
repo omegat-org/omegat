@@ -25,6 +25,8 @@
 
 package org.omegat.languagetool.language;
 
+import org.languagetool.JLanguageTool;
+import org.languagetool.broker.ClassBroker;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.events.IApplicationEventListener;
 
@@ -34,6 +36,7 @@ public class FrenchPlugin {
         CoreEvents.registerApplicationEventListener(new IApplicationEventListener() {
             @Override
             public void onApplicationStartup() {
+                JLanguageTool.setClassBrokerBroker(new ClassBrokerBroker());
                 org.languagetool.Languages.getOrAddLanguageByClassName("org.languagetool.language.French");
             }
 
@@ -41,9 +44,17 @@ public class FrenchPlugin {
             public void onApplicationShutdown() {
             }
         });
+
     }
 
     public static void unloadPlugins() {
     }
 
+    public static class ClassBrokerBroker implements ClassBroker {
+        @Override
+        public Class<?> forName(String qualifiedName) throws ClassNotFoundException {
+            ClassLoader classLoader = FrenchPlugin.class.getClassLoader();
+            return classLoader.loadClass(qualifiedName);
+        }
+    }
 }

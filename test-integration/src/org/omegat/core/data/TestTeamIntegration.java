@@ -26,7 +26,10 @@
 package org.omegat.core.data;
 
 import java.io.File;
+import java.io.InputStream;
 import java.lang.management.ManagementFactory;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -34,6 +37,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Properties;
 import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -64,6 +68,7 @@ import org.omegat.core.segmentation.Segmenter;
 import org.omegat.core.team2.RemoteRepositoryProvider;
 import org.omegat.core.team2.impl.GITRemoteRepository2;
 import org.omegat.core.team2.impl.SVNAuthenticationManager;
+import org.omegat.filters2.master.PluginUtils;
 import org.omegat.util.Language;
 import org.omegat.util.ProjectFileStorage;
 import org.omegat.util.TMXWriter2;
@@ -119,6 +124,7 @@ public final class TestTeamIntegration {
     private TestTeamIntegration() {
     }
 
+    public static final String PLUGINS_LIST_FILE = "test-integration/plugins.properties";
     private static final Pattern URL_PATTERN = Pattern
             .compile("(http(s)?|svn(\\+ssh)?)" + "://(?<username>.+?)(:(?<password>.+?))?@.+");
 
@@ -145,6 +151,11 @@ public final class TestTeamIntegration {
         if (repository == null) {
             System.err.println("Property omegat.test.repo is mandatory.");
             System.exit(1);
+        }
+        Properties props = new Properties();
+        try (InputStream fis = Files.newInputStream(Paths.get(PLUGINS_LIST_FILE))) {
+            props.load(fis);
+            PluginUtils.loadPluginFromProperties(props);
         }
         REPO.add(repository);
         String altRepo = System.getProperty("omegat.test.repo.alt", null);

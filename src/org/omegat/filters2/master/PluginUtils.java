@@ -131,6 +131,11 @@ public final class PluginUtils {
          */
         SPELLCHECK("spellcheck"),
         /**
+         * language plugin that bundles LanguageTool-language module and
+         * spell-check dictionaries.
+         */
+        LANGUAGE("language"),
+        /**
          * When plugin does not define any of the above.
          */
         UNKNOWN("Undefined");
@@ -162,9 +167,12 @@ public final class PluginUtils {
     private static final Set<PluginInformation> PLUGIN_INFORMATIONS = new HashSet<>();
 
     private static final MainClassLoader THEME_CLASSLOADER;
+    private static final MainClassLoader LANGUAGE_CLASSLOADER;
 
     static {
-        THEME_CLASSLOADER = new MainClassLoader(PluginUtils.class.getClassLoader());
+        ClassLoader cl = PluginUtils.class.getClassLoader();
+        THEME_CLASSLOADER = new MainClassLoader(cl);
+        LANGUAGE_CLASSLOADER = new MainClassLoader(cl);
     }
 
     /** Private constructor to disallow creation */
@@ -215,6 +223,14 @@ public final class PluginUtils {
                             if (target.contains(url.toString())) {
                                 THEME_CLASSLOADER.addJarToClasspath(url);
                                 loadFromManifest(m, THEME_CLASSLOADER, mu);
+                            }
+                        }
+                    } else if ("language".equals(m.getMainAttributes().getValue(PLUGIN_CATEGORY))) {
+                        String target = mu.toString();
+                        for (URL url : urlList) {
+                            if (target.contains(url.toString())) {
+                                LANGUAGE_CLASSLOADER.addJarToClasspath(url);
+                                loadFromManifest(m, LANGUAGE_CLASSLOADER, mu);
                             }
                         }
                     } else {
@@ -472,6 +488,10 @@ public final class PluginUtils {
 
     public static ClassLoader getThemeClassLoader() {
         return THEME_CLASSLOADER;
+    }
+
+    public static ClassLoader getLanguageClassLoader() {
+        return LANGUAGE_CLASSLOADER;
     }
 
     private static final List<Class<?>> FILTER_CLASSES = new ArrayList<>();

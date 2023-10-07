@@ -69,6 +69,9 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
 import org.apache.commons.lang3.StringUtils;
+import org.languagetool.JLanguageTool;
+import org.omegat.languagetools.LanguageToolClassBroker;
+import org.omegat.languagetools.LanguageToolDataBroker;
 import tokyo.northside.logging.ILogger;
 
 import org.omegat.CLIParameters.PSEUDO_TRANSLATE_TYPE;
@@ -205,6 +208,9 @@ public final class Main {
         // Do migration and load various settings. The order is important!
         ConvertConfigs.convert();
         Preferences.init();
+        // broker should be loaded before module loading
+        JLanguageTool.setClassBrokerBroker(new LanguageToolClassBroker());
+        JLanguageTool.setDataBroker(new LanguageToolDataBroker());
         PluginUtils.loadPlugins(PARAMS);
         FilterMaster.setFilterClasses(PluginUtils.getFilterClasses());
         Preferences.initFilters();
@@ -332,15 +338,7 @@ public final class Main {
      * Execute standard GUI.
      */
     protected static int runGUI() {
-        ClassLoader cl = ClassLoader.getSystemClassLoader();
-        MainClassLoader mainClassLoader;
-        if (cl instanceof MainClassLoader) {
-            mainClassLoader = (MainClassLoader) cl;
-        } else {
-            mainClassLoader = new MainClassLoader(cl);
-        }
-        PluginUtils.getThemePluginJars().forEach(mainClassLoader::addJarToClasspath);
-        UIManager.put("ClassLoader", mainClassLoader);
+        UIManager.put("ClassLoader", PluginUtils.getThemeClassLoader());
 
         // macOS-specific - they must be set BEFORE any GUI calls
         if (Platform.isMacOSX()) {

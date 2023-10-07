@@ -36,9 +36,16 @@ import java.util.List;
 import java.util.Locale;
 
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.languagetool.JLanguageTool;
 import org.languagetool.Languages;
+import org.languagetool.language.AmericanEnglish;
+import org.languagetool.language.Belarusian;
+import org.languagetool.language.CanadianEnglish;
+import org.languagetool.language.English;
+import org.languagetool.language.French;
+import org.languagetool.language.Japanese;
 import org.languagetool.rules.RuleMatch;
 import org.languagetool.rules.patterns.PatternRule;
 import org.languagetool.server.HTTPServer;
@@ -53,6 +60,19 @@ import org.omegat.util.TestPreferencesInitializer;
 public class LanguageToolTest {
     private static final Language SOURCE_LANG = new Language(Locale.FRENCH);
     private static final Language TARGET_LANG = new Language(Locale.ENGLISH);
+
+    @BeforeClass
+    @SuppressWarnings("deprecation")
+    public static void setUpClass() {
+        JLanguageTool.setClassBrokerBroker(new LanguageToolClassBroker());
+        JLanguageTool.setDataBroker(new LanguageToolDataBroker());
+        LanguageToolLanguageManager.registerLTLanguage(new English());
+        LanguageToolLanguageManager.registerLTLanguage(new AmericanEnglish());
+        LanguageToolLanguageManager.registerLTLanguage(new CanadianEnglish());
+        LanguageToolLanguageManager.registerLTLanguage(new Belarusian());
+        LanguageToolLanguageManager.registerLTLanguage(new French());
+        LanguageToolLanguageManager.registerLTLanguage(new Japanese());
+    }
 
     @Before
     public final void setUp() throws Exception {

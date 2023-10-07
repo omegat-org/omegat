@@ -2,6 +2,7 @@ plugins {
     id 'java'
 }
 repositories {
+    mavenLocal()
     mavenCentral()
 }
 
@@ -40,11 +41,14 @@ def plugins = [
 
 def pluginPackage = 'org.omegat.languagetool.language'
 def languageToolVersion = libs.versions.languagetool.get()
+def languageToolGroup = libs.languagetool.core.get().group
 plugins.forEach { args ->
     def name = args.get('code')
     def pluginClass = "${pluginPackage}." + args.get('className')
     def lang = args.get('lang')
     sourceSets.create(name)
+    dependencies.add("${name}CompileOnly", project.rootProject)
+    dependencies.add("${name}CompileOnly", libs.languagetool.core)
     if (name.equals("ja")) {
         dependencies.add("jaImplementation", libs.languagetool.ja.get()) {
             // Temporary exclusion; see https://sourceforge.net/p/omegat/bugs/814/
@@ -53,11 +57,11 @@ plugins.forEach { args ->
         }
         dependencies.add("jaImplementation", 'org.omegat.lucene:lucene-gosen:5.5.1:ipadic')
     } else {
-        dependencies.add("${name}Implementation", "org.languagetool:language-${name}:${languageToolVersion}") {
+         dependencies.add("${name}Implementation", "${languageToolGroup}:language-${name}:${languageToolVersion}") {
             exclude module: 'languagetool-core'
         }
     }
-    configurations.getByName("${name}RuntimeClasspath").exclude(group: 'org.languagetool', module: 'languagetool-core')
+    configurations.getByName("${name}RuntimeClasspath").exclude(group: languageToolGroup, module: 'languagetool-core')
     tasks.getByName("${name}Classes") {
         group = 'languagetool'
     }
@@ -77,7 +81,9 @@ plugins.forEach { args ->
                     'Plugin-Author': 'OmegaT team',
                     'Plugin-Link': 'https://omegat.org',
                     'Plugin-Description': "Provide ${lang} Languagetool library",
-                    'Plugin-Version': "${languageToolVersion}")
+                    'Plugin-Category': 'language',
+                    'Plugin-Version': "${languageToolVersion}"
+            )
         }
         group = 'languagetool'
     }

@@ -230,7 +230,7 @@ public final class PluginUtils {
                         }
                     }
                 } else {
-                    // load from plugins property list
+                    // load from `Plugins.properties` file
                     Properties props = new Properties();
                     try (FileInputStream fis = new FileInputStream(PLUGINS_LIST_FILE)) {
                         props.load(fis);
@@ -254,7 +254,13 @@ public final class PluginUtils {
 
     /**
      * Load plugin for test.
-     * WARN: don't use for general purpose.
+     * <p>
+     * WARN: don't use it for general purpose.
+     * 
+     * @param props
+     *            properties that have "plugin=(classes...)"
+     * @throws ClassNotFoundException
+     *             when specified plugin is not found.
      */
     public static void loadPluginFromProperties(Properties props) throws ClassNotFoundException {
         ClassLoader pluginsClassLoader = PluginUtils.class.getClassLoader();
@@ -262,12 +268,12 @@ public final class PluginUtils {
     }
 
     /**
-     * This method create a list of plugins to load. It tries to onky take the
-     * most recent version of plugins. To differenciate between different
+     * This method creates a list of plugins to load. It tries to only take the
+     * most recent version of plugins. To differentiate between different
      * versions, the plugins must have the same name, have the same number of
      * version components (we can't compare <code>x.y.z</code> with
-     * <code>y.z</code>). Also the qualifier (ie. anything after the "-" in the
-     * version number) is discarded for the comparison.
+     * <code>y.z</code>). Also, the qualifier (i.e., anything after the "-" in
+     * the version number) is discarded for the comparison.
      *
      * @param pluginsDirs
      *            List of directories where plugins can be loaded
@@ -364,6 +370,7 @@ public final class PluginUtils {
 
     /**
      * Reterun registered plugin classes for spellchecker category.
+     * 
      * @return list of classes.
      */
     public static List<Class<?>> getSpellCheckClasses() {

@@ -276,7 +276,7 @@ public class DefaultFlatTheme extends DelegatingLookAndFeel {
      * Adjust a color by adding some constant to its RGB values, clamping to the
      * range 0-255.
      */
-    private static Color adjustRGB(Color color, int adjustment) {
+    public static Color adjustRGB(Color color, int adjustment) {
         Color result = new Color(Math.max(0, Math.min(255, color.getRed() + adjustment)),
                 Math.max(0, Math.min(255, color.getGreen() + adjustment)),
                 Math.max(0, Math.min(255, color.getBlue() + adjustment)));

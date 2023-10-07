@@ -8,5 +8,6 @@ include("machinetranslators:apertium",
         "machinetranslators:yandex",
         "aligner",
         "languagetools",
+        "theme",
         "spellchecker:hunspell-jmyspell",
         "tipoftheday")

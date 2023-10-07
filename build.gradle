@@ -563,8 +563,8 @@ distributions {
                 include 'config/**', 'ci/iscc', 'ci/osslsigncode', 'docs/**', 'images/**', 'lib/**', 'release/**',
                     'src/**/*.java', 'test/**', 'test-integration/**', 'doc_src/**', 'docs_devel/**', 'scripts/**',
                     'gradle/**', 'gradle*', 'build.gradle', 'settings.gradle', 'README.md', '*.properties',
-                    'tipoftheday/**', 'machinetranslators/**', 'languagetools/**', 'scriptengine/**',
-                    'LICENSE', 'compose.yml', '.checkstyle'
+                    'tipoftheday/**', 'machinetranslators/**', 'scriptengine/**', 'LICENSE', 'compose.yml',
+                    '.checkstyle'
                 exclude '**/build/**', 'doc_src/**/pdf/**', 'doc_src/**/xhtml5/**', 'local.properties', '**/out/**'
             }
             from(processResources) {

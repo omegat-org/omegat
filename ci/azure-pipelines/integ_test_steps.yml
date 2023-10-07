@@ -13,18 +13,19 @@ steps:
   - script: |
       echo "Run ${{ parameters.testType }} integration test"
   - task: DockerCompose@0
+    displayName: 'Execute Integration-Test'
     inputs:
-      action: Run a Docker Compose command
+      action: Run services
       containerregistrytype: Container Registry
       dockerComposeFile: compose.yml
-      dockerComposeCommand: up
+      detached: false
       buildImages: true
       abortOnContainerExit: true
     env:
       DURATION: ${{ parameters.duration }}
       TYPE: ${{ parameters.testType }}
-    displayName: 'Execute Integration-Test'
   - task: DockerCompose@0
+    displayName: 'Clean up Integration-Test'
     inputs:
       action: Run a Docker Compose command
       containerregistrytype: Container Registry

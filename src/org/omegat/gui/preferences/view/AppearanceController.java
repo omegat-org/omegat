@@ -148,12 +148,12 @@ public class AppearanceController extends BasePreferencesController {
         String[] darkLafs = darkThemeList.stream().map(LookAndFeelInfo::getClassName).toArray(String[]::new);
         panel.cbDarkThemeSelect.setModel(new DefaultComboBoxModel<>(darkLafs));
         panel.cbDarkThemeSelect.setRenderer(renderer);
-        Mnemonics.setLocalizedText(panel.LightDefaultThemeSelectionLabel,
+        Mnemonics.setLocalizedText(panel.lightDefaultThemeSelectionLabel,
                 OStrings.getString("MW_OPTIONMENU_APPEARANCE_THEME_LABEL"));
-        Mnemonics.setLocalizedText(panel.DarkThemeSelectionLabel,
+        Mnemonics.setLocalizedText(panel.darkThemeSelectionLabel,
                 OStrings.getString("MW_OPTIONMENU_APPEARANCE_DARK_THEME_LABEL"));
         Mnemonics.setLocalizedText(panel.useLightDefaultThemeRB,
-                OStrings.getString("MW_OPTIONMENU_APPEARANCE_USE_DEFAULT_THEME"));
+                OStrings.getString("MW_OPTIONMENU_APPEARANCE_DEFAULT_THEME"));
         Mnemonics.setLocalizedText(panel.useDarkThemeRB,
                 OStrings.getString("MW_OPTIONMENU_APPEARANCE_USE_DARK_THEME"));
         Mnemonics.setLocalizedText(panel.syncWithOSColorRB,
@@ -210,9 +210,17 @@ public class AppearanceController extends BasePreferencesController {
     }
 
     private boolean isModified() {
-        boolean selectionChanged = !preferredLightThemeClass.equals(panel.cbLightThemeSelect.getSelectedItem()) ||
-                !preferredDarkThemeClass.equals(panel.cbDarkThemeSelect.getSelectedItem());
-        if (selectionChanged) {
+        boolean modified = false;
+        if (preferredLightThemeClass != null) {
+            modified = !preferredLightThemeClass.equals(panel.cbLightThemeSelect.getSelectedItem());
+        }
+        if (modified) {
+            return true;
+        }
+        if (preferredDarkThemeClass != null) {
+            modified = !preferredDarkThemeClass.equals(panel.cbDarkThemeSelect.getSelectedItem());
+        }
+        if (modified) {
             return true;
         }
         Object selected = panel.cbMenustyleSelect.getSelectedItem();

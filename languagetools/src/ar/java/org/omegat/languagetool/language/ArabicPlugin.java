@@ -25,9 +25,22 @@
 
 package org.omegat.languagetool.language;
 
+import org.omegat.core.CoreEvents;
+import org.omegat.core.events.IApplicationEventListener;
+
 public class ArabicPlugin {
 
     public static void loadPlugins() {
+        CoreEvents.registerApplicationEventListener(new IApplicationEventListener() {
+            @Override
+            public void onApplicationStartup() {
+                org.languagetool.Languages.getOrAddLanguageByClassName("org.languagetool.language.Arabic");
+            }
+
+            @Override
+            public void onApplicationShutdown() {
+            }
+        });
     }
 
     public static void unloadPlugins() {

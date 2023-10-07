@@ -46,6 +46,8 @@ plugins.forEach { args ->
     def lang = args.get('lang')
     sourceSets.create(name)
     if (name.equals("ja")) {
+        dependencies.add("jaCompileOnly", project.rootProject)
+        dependencies.add("jaCompileOnly", libs.languagetool.core)
         dependencies.add("jaImplementation", libs.languagetool.ja.get()) {
             // Temporary exclusion; see https://sourceforge.net/p/omegat/bugs/814/
             exclude module: 'lucene-gosen'
@@ -53,6 +55,8 @@ plugins.forEach { args ->
         }
         dependencies.add("jaImplementation", 'org.omegat.lucene:lucene-gosen:5.5.1:ipadic')
     } else {
+        dependencies.add("${name}CompileOnly", project.rootProject)
+        dependencies.add("${name}CompileOnly", libs.languagetool.core)
         dependencies.add("${name}Implementation", "org.languagetool:language-${name}:${languageToolVersion}") {
             exclude module: 'languagetool-core'
         }
@@ -64,7 +68,7 @@ plugins.forEach { args ->
     tasks.register("${name}Jar", Jar) {
         archiveFileName.set("omegat-language-${name}.${archiveExtension.get()}")
         destinationDirectory.set(new File(rootProject.buildDir, "modules"))
-        duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+        duplicatesStrategy = DuplicatesStrategy.INCLUDE
         from configurations.getByName("${name}RuntimeClasspath").collect {
             it.isDirectory() ? it : zipTree(it)
         }

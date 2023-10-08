@@ -27,7 +27,7 @@
 FROM debian:bullseye-slim
 ARG CAVER=1.0.2-1
 ARG JAVA=11
-ARG JDKVER=jre_11.0.20.1.0+1
+ARG JDKVER=jdk_11.0.20.1.0+1
 ARG GRADLE=8.3
 RUN apt-get -y update && apt-get upgrade -y && apt-get install -y openssh-client git inotify-tools curl subversion unzip rsync  \
  java-common libasound2 libfontconfig1 libfreetype6 libxi6 libxrender1 libxtst6 p11-kit

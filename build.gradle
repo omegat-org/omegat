@@ -400,7 +400,7 @@ launch4j {
     icon = "${projectDir}/images/OmegaT.ico"
 }
 
-task genDocIndex(type: Copy) {
+tasks.register('genDocIndex', Copy) {
     description = 'Generate the docs index file'
     def docPropsFiles = fileTree(dir: 'docs', include: '*/version*.properties').findAll {
         file("${it.parent}/index.html").file
@@ -434,8 +434,8 @@ task genDocIndex(type: Copy) {
             def status = docVersion == omtVersion.version ? 'up-to-date' : 'out-of-date'
             ['code': code, 'name': name, 'version': docVersion, 'status': status, 'nomanual': noManual]
         }
-        def filterSet = langInfos.collect {entry -> entry.code}
-        def filteredIsgInfos = isgInfos.findAll{entry -> !filterSet.contains(entry.code)}
+        def filterSet = langInfos.collect { entry -> entry.code }
+        def filteredIsgInfos = isgInfos.findAll { entry -> !filterSet.contains(entry.code) }
         langInfos.addAll(filteredIsgInfos)
         langInfos.sort { entry -> entry.code }
         expand('languages': langInfos)
@@ -443,7 +443,7 @@ task genDocIndex(type: Copy) {
     }
 }
 
-task webManual(type: Sync) {
+tasks.register('webManual', Sync) {
     group = 'documentation'
     description = 'Generate the HTML manual'
     dependsOn genDocIndex
@@ -454,7 +454,7 @@ task webManual(type: Sync) {
     }
 }
 
-task genMac {
+tasks.register('genMac') {
     description = 'Generate the Mac .app skeleton. Depends AppBundler (https://github.com/TheInfiniteKind/appbundler)'
     outputs.dir file("${buildDir}/appbundler")
     doLast {
@@ -532,9 +532,6 @@ distributions {
                 filter(ReplaceTokens, tokens: [
                         JAR_SUBST           : jar.archiveFileName.get()
                 ])
-            }
-            from('build/launch4j') {
-                include '*.exe'
             }
             from('lib/licenses') {
                 into 'lib'
@@ -689,7 +686,7 @@ def hunspellJar = configurations.runtimeClasspath.files.find {
     it.name.startsWith('hunspell')
 }
 
-task hunspellJarSignedContents(type: Sync) {
+tasks.register('hunspellJarSignedContents', Sync) {
     onlyIf {
         // Set this in e.g. local.properties
         condition(project.hasProperty('macCodesignIdentity'), 'Code signing property not set')
@@ -700,16 +697,16 @@ task hunspellJarSignedContents(type: Sync) {
         def dylibs = fileTree(dir: destinationDir, include: '**/*.dylib').files
         exec {
             commandLine('codesign', '--deep', '--force',
-                        '--sign', project.property('macCodesignIdentity'),
-                        '--timestamp',
-                        '--options', 'runtime',
-                        '--entitlements', file('release/mac-specific/java.entitlements'),
-                        *dylibs.toList())
+                    '--sign', project.property('macCodesignIdentity'),
+                    '--timestamp',
+                    '--options', 'runtime',
+                    '--entitlements', file('release/mac-specific/java.entitlements'),
+                    *dylibs.toList())
         }
     }
 }
 
-task hunspellSignedJar(type: Jar) {
+tasks.register('hunspellSignedJar', Jar) {
     from hunspellJarSignedContents.outputs
     archiveFileName.set(hunspellJar.name)
 }
@@ -735,7 +732,7 @@ ext.makeMacTask = { args ->
     def signedZipTaskName = args.name + "SignedDistZip"
     def notarizeTaskName = args.name + "Notarize"
     def stapledNotarizedDistZipTaskName = args.name + "StapledNotarizedDistZip"
-    task(type: Sync, signedInstallTaskName) {
+    tasks.register(signedInstallTaskName, Sync) {
         description = 'Build the signed Mac distribution. Requires an Apple Developer Account.'
         onlyIf {
             // Set this in e.g. local.properties
@@ -766,7 +763,7 @@ ext.makeMacTask = { args ->
         }
     }
 
-    task(type: Zip, signedZipTaskName) {
+    tasks.register(signedZipTaskName, Zip) {
         def zipRoot = "${application.applicationName}_${project.version}${omtVersion.beta}_${args.suffix}_Signed"
         if (args.name.equals("mac")) {
             from(macInstallSignedDist.outputs) {
@@ -781,7 +778,7 @@ ext.makeMacTask = { args ->
         group = 'omegat distribution'
     }
 
-    task(type: Exec, notarizeTaskName)  {
+    tasks.register(notarizeTaskName, Exec) {
         onlyIf {
             condition(project.hasProperty('macNotarizationUsername'),
                     'Username for notarization not set')
@@ -805,7 +802,7 @@ ext.makeMacTask = { args ->
         group = 'omegat distribution'
     }
 
-    task(type: Zip, stapledNotarizedDistZipTaskName) {
+    tasks.register(stapledNotarizedDistZipTaskName, Zip) {
         def zipRoot = "${application.applicationName}_${project.version}${omtVersion.beta}_${args.suffix}_Notarized"
         if (args.name.equals("mac")) {
             from(macInstallSignedDist.outputs) {
@@ -834,7 +831,11 @@ ext.makeMacTask = { args ->
 makeMacTask(name: 'mac', suffix: 'Mac_x86')
 makeMacTask(name: 'armMac', suffix: 'Mac_arm')
 
-task mac(dependsOn: [macDistZip, macNotarize, armMacDistZip, armMacNotarize]) {
+tasks.register('mac') {
+    dependsOn macDistZip
+    dependsOn macNotarize
+    dependsOn armMacDistZip
+    dependsOn armMacNotarize
     description = 'Build the Mac distributions.'
     group = 'omegat distribution'
 }
@@ -869,7 +870,9 @@ linuxArm64DistTar {
     group = 'omegat distribution'
 }
 
-task linux(dependsOn: [linux64DistTar, linuxArm64DistTar]) {
+tasks.register('linux') {
+    dependsOn linux64DistTar
+    dependsOn linuxArm64DistTar
     description = 'Build the Linux distributions.'
     group = 'omegat distribution'
 }
@@ -877,19 +880,23 @@ task linux(dependsOn: [linux64DistTar, linuxArm64DistTar]) {
 // We bundle our startup scripts separately, so disable startScripts.
 startScripts.enabled = false
 
-// installDist insists on installing a script. Trick it with a dummy script.
-installDist.doFirst {
-    startScripts.outputDir.mkdirs()
-    file("${startScripts.outputDir}/${applicationName}").createNewFile()
-    if (destinationDir.directory) {
-        // As of Gradle 4.4(?) the application plugin expects `lib` as well
-        ['lib', 'bin'].each { file("${destinationDir}/${it}").mkdirs() }
-    }
-}
-// Delete dummy afterwards.
-installDist.doLast {
-    delete "${destinationDir}/bin"
-    delete startScripts.outputDir
+installDist {
+   // installDist insists on installing a script. Trick it with a dummy script.
+   /*
+    doFirst {
+        startScripts.outputDir.mkdirs()
+        file("${startScripts.outputDir}/${applicationName}").createNewFile()
+        if (destinationDir.directory) {
+            // As of Gradle 4.4(?) the application plugin expects `lib` as well
+            ['lib', 'bin'].each { file("${destinationDir}/${it}").mkdirs() }
+        }
+    }*/
+
+    // Delete dummy afterwards.
+   /* doLast {
+        delete "${destinationDir}/bin"
+        delete startScripts.outputDir
+    }*/
 }
 
 // Read in all our custom messages and massage them for inclusion in the .iss
@@ -912,7 +919,7 @@ ext.getInnoSetupCustomMessages = {
         .join(System.lineSeparator())
 }
 
-task win {
+tasks.register('win') {
     description = 'Build the Windows distributions.'
     group = 'omegat distribution'
 }
@@ -921,16 +928,19 @@ ext.makeWinTask = { args ->
     def fullVersion = project.version + omtVersion.beta
     def installerBasename = "OmegaT_${fullVersion}_${args.suffix}"
     def installerExe = layout.buildDirectory.file("${distsDirName}/${installerBasename}.exe").get().asFile
-    task(type: Sync, args.name) {
+    tasks.register(args.name, Sync) {
         description = "Create a Windows installer for ${args.name} distro. " +
-            'Requires Inno Setup (http://www.jrsoftware.org/isinfo.php).'
+                'Requires Inno Setup (http://www.jrsoftware.org/isinfo.php).'
         with distributions.main.contents
         dependsOn createAllExecutables
-        from ('release/win32-specific') {
+        from('release/win32-specific') {
             include 'OmegaT.l4J.ini'
         }
+        from('build/launch4j') {
+            include '*.exe'
+        }
         if (args.jrePath && !args.jrePath.empty) {
-            from (zipTree(args.jrePath.singleFile)) {
+            from(zipTree(args.jrePath.singleFile)) {
                 includeEmptyDirs = false
                 eachFile {
                     replaceRelativePathSegment(it, /jdk.*-jre/, 'jre')
@@ -941,8 +951,8 @@ ext.makeWinTask = { args ->
         outputs.file installerExe
         onlyIf {
             conditions([!args.jrePath || !args.jrePath.empty, 'JRE not found'],
-                       [exePresent('iscc') || exePresent('docker'),
-                        'InnoSetup or Docker not installed'])
+                    [exePresent('iscc') || exePresent('docker'),
+                     'InnoSetup or Docker not installed'])
         }
         doFirst {
             delete "$destinationDir/jre"
@@ -962,18 +972,18 @@ ext.makeWinTask = { args ->
                 }
                 into(destinationDir)
                 filter(ReplaceTokens, tokens: [
-                    VERSION_NUMBER_SUBST: fullVersion,
-                    OUTPUT_BASENAME_SUBST: installerBasename.toString(),
-                    CUSTOM_MESSAGES_SUBST: getInnoSetupCustomMessages(),
-                    ARCHITECTURE_SUBST: args.arch ?: ''
+                        VERSION_NUMBER_SUBST : fullVersion,
+                        OUTPUT_BASENAME_SUBST: installerBasename.toString(),
+                        CUSTOM_MESSAGES_SUBST: getInnoSetupCustomMessages(),
+                        ARCHITECTURE_SUBST   : args.arch ?: ''
                 ])
-                filter(FixCrLfFilter,  eol: FixCrLfFilter.CrLf.newInstance('crlf'))
+                filter(FixCrLfFilter, eol: FixCrLfFilter.CrLf.newInstance('crlf'))
                 filteringCharset = 'UTF-8'
             }
             exec {
                 // You'd think we could just set the PATH, but there be dragons here
                 // https://github.com/palantir/gradle-docker/issues/162
-                def exe = exePresent('iscc') ?  'iscc' : file('ci/iscc')
+                def exe = exePresent('iscc') ? 'iscc' : file('ci/iscc')
                 commandLine exe, "${destinationDir}/OmegaT.iss"
             }
             project.copy {
@@ -984,7 +994,7 @@ ext.makeWinTask = { args ->
     }
     def signedTaskName = "${args.name}Signed"
     def signedExe = layout.buildDirectory.file("${distsDirName}/${installerBasename}_Signed.exe").get().asFile
-    task(type: Exec, signedTaskName) {
+    tasks.register(signedTaskName, Exec) {
         group = 'omegat distribution'
         // You'd think we could just set the PATH, but there be dragons here
         // https://github.com/palantir/gradle-docker/issues/162
@@ -1000,12 +1010,12 @@ ext.makeWinTask = { args ->
             // Set these in e.g. local.properties
             def props = ['pkcs11module', 'winCodesignPassword']
             conditions([props.every { project.hasProperty(it) }, 'Code signing properties not set'],
-                       [file(installerExe).file, 'Unsigned installer not built'],
-                       [exePresent('osslsigncode'), 'osslsigncode not installed'])
+                    [file(installerExe).file, 'Unsigned installer not built'],
+                    [exePresent('osslsigncode'), 'osslsigncode not installed'])
         }
         inputs.file installerExe
         outputs.file signedExe
-        def commandArgs = ['osslsigncode', 'sign', '-pkcs11module', project.hasProperty('pkcs11module')?
+        def commandArgs = ['osslsigncode', 'sign', '-pkcs11module', project.hasProperty('pkcs11module') ?
                 project.property('pkcs11module') : 'dummy(it should specified)']
         if (project.hasProperty('winCodesignCert')) {
             commandArgs.addAll('-certs', project.property('winCodesignCert'))
@@ -1017,8 +1027,8 @@ ext.makeWinTask = { args ->
             commandArgs.addAll('-pass', project.property('winCodesignPassword'))
         }
         commandArgs.addAll(
-                '-t', project.hasProperty('winCodesignTimestampUrl')? project.property('winCodesignTimestampUrl') :
-                        'http://time.certum.pl/',
+                '-t', project.hasProperty('winCodesignTimestampUrl') ? project.property('winCodesignTimestampUrl') :
+                'http://time.certum.pl/',
                 '-n', application.applicationName, '-i', omtWebsite, '-h', 'sha256',
                 '-in', installerExe.toString(),
                 '-out', signedExe.toString())
@@ -1053,11 +1063,11 @@ processResources {
     inputs.property 'revision', revision
     logger.lifecycle("Detected revision " + revision)
     filesMatching('**/Version.properties') {
-        filter org.apache.tools.ant.filters.ReplaceTokens, tokens:["dev": revision]
+        filter ReplaceTokens, tokens:["dev": revision]
     }
 }
 
-task checksums {
+tasks.register('checksums') {
     def algos = ['SHA-512', 'MD5']
     description = "Generate ${algos.join(', ')} checksums for distribution files"
     inputs.files fileTree(dir: distsDir, exclude: 'checksums')
@@ -1081,7 +1091,7 @@ task genJAXB {
 
 ext.makeJaxbTask = { args ->
     def taskName = "gen${args.name.capitalize()}"
-    task(type: JavaExec, taskName) {
+    tasks.register(taskName, JavaExec) {
         classpath = configurations.jaxb
         mainClass = 'com.sun.tools.xjc.XJCFacade'
         delegate.args args.args
@@ -1101,7 +1111,7 @@ makeJaxbTask(name: 'project', outdir: 'src/gen/core/project',
 makeJaxbTask(name: 'tmx14', outdir: 'src/gen/core/tmx14',
              args: ['-no-header', '-d', 'src', '-p', 'gen.core.tmx14', '-b', 'src/schemas/tmx14.xjb', 'src/schemas/tmx14.xsd'])
 
-task changedOnBranch {
+tasks.register('changedOnBranch') {
     description = 'List files that have been modified on this git branch.'
     doLast {
         ext.files = project.files(gitModifiedFiles())
@@ -1109,7 +1119,7 @@ task changedOnBranch {
     }
 }
 
-task spotlessChangedApply {
+tasks.register('spotlessChangedApply') {
     description = 'Apply code formatting to files that have been changed on the current branch.'
     group = 'omegat workflow'
     finalizedBy 'spotlessApply'
@@ -1163,11 +1173,11 @@ tasks.jacocoTestCoverageVerification {
     }
 }
 
-task manualPdfs {
+tasks.register('manualPdfs') {
     description = 'Build PDF manuals for all languages. Requires Docker.'
 }
 
-task manualHtmls {
+tasks.register('manualHtmls') {
     description = 'Build HTML manuals for all languages. Requires Docker.'
 }
 
@@ -1175,7 +1185,7 @@ ext.manualIndexXmls = fileTree(dir: 'doc_src', include: '**/OmegaTUsersManual_xi
 manualIndexXmls.each { xml ->
     def lang = xml.parentFile.name
     def pdfTaskName = "manualPdf${lang.capitalize()}"
-    task(pdfTaskName) {
+    tasks.register(pdfTaskName) {
         inputs.files fileTree(dir: "doc_src/${lang}", include: '**/*.xml')
         outputs.file "${distsDir}/OmegaT_documentation_${lang}.PDF"
         doLast {
@@ -1193,7 +1203,7 @@ manualIndexXmls.each { xml ->
     manualPdfs.dependsOn pdfTaskName
 
     def htmlTaskName = "manualHtml${lang.capitalize()}"
-    task(htmlTaskName) {
+    tasks.register(htmlTaskName) {
         inputs.files fileTree(dir: "doc_src/${lang}", include: '**/*.xml')
         doLast {
             exec {
@@ -1206,15 +1216,15 @@ manualIndexXmls.each { xml ->
     manualHtmls.dependsOn htmlTaskName
 }
 
-task instantStartGuides {
+tasks.register('instantStartGuides') {
     description = 'Build Instant Start guides for all languages. Requires Docker.'
 }
 
-task firstSteps {
+tasks.register('firstSteps') {
     description = 'Build First Step pages for all languages. Requires Docker.'
 }
 
-task updateManuals {
+tasks.register('updateManuals') {
     group = 'omegat release'
     description = 'Update Instant Start guides and HTML manuals.'
     dependsOn manualHtmls, firstSteps, instantStartGuides
@@ -1241,7 +1251,7 @@ ext.instantStartXmls = fileTree(dir: 'doc_src', include: '**/InstantStartGuide.x
 instantStartXmls.each { xml ->
     def lang = xml.parentFile.name
     def taskName = "instantStartGuide${lang.capitalize()}"
-    task(taskName) {
+    tasks.register(taskName) {
         inputs.files fileTree(dir: "doc_src/${lang}", include: '**/*.xml')
         doLast {
             exec {
@@ -1257,7 +1267,7 @@ tasks.getByName("run") {
     jvmArgs(["--add-opens", "java.desktop/sun.awt.X11=ALL-UNNAMED"])
 }
 
-task debug(type: JavaExec) {
+tasks.register('debug', JavaExec) {
     description = 'Launch app for debugging.' // Special debug task for NetBeans
     group = 'application'
     mainClass = application.mainClass
@@ -1266,7 +1276,7 @@ task debug(type: JavaExec) {
     debug true
 }
 
-task runOnJava17(type: JavaExec) {
+tasks.register('runOnJava17', JavaExec) {
     description = 'Launch app on Java 17'
     javaLauncher = javaToolchains.launcherFor {
         languageVersion = JavaLanguageVersion.of(17)
@@ -1288,7 +1298,7 @@ test {
     }
 }
 
-task testIntegration(type: JavaExec) {
+tasks.register('testIntegration', JavaExec) {
     description = 'Run integration tests. Pass repo URL as -Domegat.test.repo=<repo>'
     group = 'omegat workflow'
     mainClass = 'org.omegat.core.data.TestTeamIntegration'
@@ -1296,7 +1306,7 @@ task testIntegration(type: JavaExec) {
     systemProperties = System.properties
 }
 
-task testOnJava17(type: Test) {
+tasks.register('testOnJava17', Test) {
     description = 'Run test cases on Java 17'
     javaLauncher = javaToolchains.launcherFor {
         languageVersion = JavaLanguageVersion.of(17)
@@ -1404,7 +1414,7 @@ ext.publishAtomically = { args ->
 publishAtomically(name: 'manual', sourceTask: webManual)
 publishAtomically(name: 'javadoc', sourceTask: javadoc)
 
-task publishVersion {
+tasks.register('publishVersion') {
     description = 'Update the version considered current by the version check.'
     group = 'omegat release'
     doLast {
@@ -1425,7 +1435,7 @@ tasks.withType(JavaExec).configureEach {
     dependsOn subprojects.tasks.jar
 }
 
-task printVersion {
+tasks.register('printVersion') {
     println project.version
 }
 

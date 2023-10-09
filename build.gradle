@@ -500,7 +500,7 @@ distributions {
             }
             from('release') {
                 into 'docs'
-                include 'changes.txt', 'doc-license.txt', 'contributors.txt', 'libraries.txt'
+                include 'doc-license.txt'
                 filter(FixCrLfFilter, eol: FixCrLfFilter.CrLf.newInstance('crlf'))
             }
             from('scripts') {
@@ -510,7 +510,13 @@ distributions {
                 into 'images'
             }
             from('release') {
-                exclude 'changes.txt', 'doc-license.txt', 'contributors.txt', 'libraries.txt'
+                // ** Caution!! **
+                // 'readme*.txt' and 'changes.txt' are expected
+                // in releases/win32-specific/OmegaT.iss
+                // 'contributors.txt' and 'libraries.txt' are expected
+                // in org.omegat.gui.dialogs.AboutDialog#getContributors
+                // and org.omegat.gui.dialogs.AboutDialog#getLibraries
+                exclude 'doc-license.txt'
                 include '*.txt', '*.html'
                 filter(ReplaceTokens, tokens: [
                         TRANSLATION_NOTICE: ''

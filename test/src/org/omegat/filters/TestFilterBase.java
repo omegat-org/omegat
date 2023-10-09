@@ -25,6 +25,10 @@
 
 package org.omegat.filters;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.fail;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.net.URL;
@@ -48,6 +52,10 @@ import org.custommonkey.xmlunit.XMLAssert;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.rules.TestName;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.xml.sax.InputSource;
+
 import org.omegat.core.Core;
 import org.omegat.core.TestCore;
 import org.omegat.core.data.EntryKey;
@@ -69,11 +77,6 @@ import org.omegat.filters2.master.FilterMaster;
 import org.omegat.tokenizer.DefaultTokenizer;
 import org.omegat.util.Language;
 import org.omegat.util.TMXReader2;
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-import org.xml.sax.InputSource;
-
-import static org.junit.Assert.*;
 
 /**
  * Base class for testing filter parsing.

@@ -38,7 +38,7 @@ import org.omegat.util.Preferences;
 
 public class Google2TranslateTest extends TestCoreWireMock {
 
-    private static final String json = "{\n"
+    private static final String JSON = "{\n"
             + "  \"data\": {\n"
             + "    \"translations\": [\n"
             + "      {\n"
@@ -67,7 +67,7 @@ public class Google2TranslateTest extends TestCoreWireMock {
     public void testGetJsonResults() throws MachineTranslateError {
         Preferences.setPreference(Google2Translate.ALLOW_GOOGLE2_TRANSLATE, true);
         Google2Translate google2Translate = new Google2Translate();
-        String translation = google2Translate.getJsonResults(json);
+        String translation = google2Translate.getJsonResults(JSON);
         assertEquals("Hallo Welt", translation);
     }
 
@@ -97,7 +97,7 @@ public class Google2TranslateTest extends TestCoreWireMock {
                         .willReturn(WireMock.aResponse()
                                 .withStatus(200)
                                 .withHeader("Content-Type", "application/json")
-                                .withBody(json)
+                                .withBody(JSON)
                 )
         );
         Google2Translate google2Translate = new Google2Translate(url, key);

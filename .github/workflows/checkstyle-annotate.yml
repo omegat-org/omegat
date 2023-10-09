@@ -1,6 +1,11 @@
 name: Run checkstyle
 
-on: pull_request
+on:
+  push:
+    branches:
+      - master
+      - releases/*
+  pull_request:
 
 jobs:
   checkstyle:

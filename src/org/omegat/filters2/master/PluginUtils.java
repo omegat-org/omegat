@@ -98,7 +98,9 @@ public final class PluginUtils {
         MACHINETRANSLATOR("machinetranslator"),
         /** A plugin that change base of OmegaT system, not recommended. */
         BASE("base"),
-        /** Glosary, that provide IGlossary API. */
+        /**
+         * Glosary, that provide IGlossary API.
+         */
         GLOSSARY("glossary"),
         /**
          * Dictionary files/services connectors, that provide IDictionary and/or
@@ -106,13 +108,25 @@ public final class PluginUtils {
          */
         DICTIONARY("dictionary"),
         /**
-         * theme, that register Swing Look-and-Feel with OmegaT properties into
+         * theme, that register Swing-Look-and-Feel with OmegaT properties into
          * UIManager.
          */
         THEME("theme"),
-        /** Misc plugins, such as GUI extension like web browser spport. */
+        /**
+         * team repository version control system connector plugins.
+         */
+        REPOSITORY("repository"),
+        /**
+         * Misc plugins, such as a GUI extension like web browser support.
+         */
         MISCELLANEOUS("miscellaneous"),
-        /** When plugin does not defined any of above. */
+        /**
+         * Spellchecker plugins.
+         */
+        SPELLCHECK("spellcheck"),
+        /**
+         * When plugin does not define any of the above.
+         */
         UNKNOWN("Undefined");
 
         private final String typeValue;
@@ -216,7 +230,7 @@ public final class PluginUtils {
                         }
                     }
                 } else {
-                    // load from plugins property list
+                    // load from `Plugins.properties` file
                     Properties props = new Properties();
                     try (FileInputStream fis = new FileInputStream(PLUGINS_LIST_FILE)) {
                         props.load(fis);
@@ -239,12 +253,27 @@ public final class PluginUtils {
     }
 
     /**
-     * This method create a list of plugins to load. It tries to onky take the
-     * most recent version of plugins. To differenciate between different
+     * Load plugin for test.
+     * <p>
+     * WARN: don't use it for general purpose.
+     * 
+     * @param props
+     *            properties that have "plugin=(classes...)"
+     * @throws ClassNotFoundException
+     *             when specified plugin is not found.
+     */
+    public static void loadPluginFromProperties(Properties props) throws ClassNotFoundException {
+        ClassLoader pluginsClassLoader = PluginUtils.class.getClassLoader();
+        loadFromProperties(props, pluginsClassLoader);
+    }
+
+    /**
+     * This method creates a list of plugins to load. It tries to only take the
+     * most recent version of plugins. To differentiate between different
      * versions, the plugins must have the same name, have the same number of
      * version components (we can't compare <code>x.y.z</code> with
-     * <code>y.z</code>). Also the qualifier (ie. anything after the "-" in the
-     * version number) is discarded for the comparison.
+     * <code>y.z</code>). Also, the qualifier (i.e., anything after the "-" in
+     * the version number) is discarded for the comparison.
      *
      * @param pluginsDirs
      *            List of directories where plugins can be loaded
@@ -339,6 +368,15 @@ public final class PluginUtils {
         return TOKENIZER_CLASSES;
     }
 
+    /**
+     * Reterun registered plugin classes for spellchecker category.
+     * 
+     * @return list of classes.
+     */
+    public static List<Class<?>> getSpellCheckClasses() {
+        return SPELLCHECK_CLASSES;
+    }
+
     public static Class<?> getTokenizerClassForLanguage(Language lang) {
         if (lang == null) {
             return DefaultTokenizer.class;
@@ -378,7 +416,7 @@ public final class PluginUtils {
 
         lang = lang.toLowerCase(Locale.ENGLISH);
 
-        // Choose first relevant tokenizer as fallback if no
+        // Choose the first relevant tokenizer as fallback if no
         // "default" tokenizer is found.
         Class<?> fallback = null;
 
@@ -432,6 +470,8 @@ public final class PluginUtils {
 
     private static final List<Class<?>> MARKER_CLASSES = new ArrayList<>();
 
+    private static final List<Class<?>> SPELLCHECK_CLASSES = new ArrayList<>();
+
     private static final List<Class<?>> MACHINE_TRANSLATION_CLASSES = new ArrayList<>();
 
     private static final List<Class<?>> GLOSSARY_CLASSES = new ArrayList<>();
@@ -448,7 +488,7 @@ public final class PluginUtils {
      * @param classLoader
      *            classloader
      * @throws ClassNotFoundException
-     *             when plugin class not found.
+     *             when plugin class is not found.
      */
     private static void loadFromManifest(Manifest m, ClassLoader classLoader, URL mu)
             throws ClassNotFoundException {

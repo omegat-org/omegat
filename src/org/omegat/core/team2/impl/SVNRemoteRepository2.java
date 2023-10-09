@@ -34,8 +34,6 @@ import java.util.Map;
 
 import javax.xml.namespace.QName;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.tmatesoft.svn.core.ISVNLogEntryHandler;
 import org.tmatesoft.svn.core.SVNAuthenticationException;
 import org.tmatesoft.svn.core.SVNCommitInfo;
@@ -55,9 +53,12 @@ import org.tmatesoft.svn.core.wc.SVNInfo;
 import org.tmatesoft.svn.core.wc.SVNRevision;
 import org.tmatesoft.svn.core.wc.SVNWCUtil;
 import org.tmatesoft.svn.core.wc2.SvnOperationFactory;
+import tokyo.northside.logging.ILogger;
+import tokyo.northside.logging.LoggerFactory;
 
 import org.omegat.core.team2.IRemoteRepository2;
 import org.omegat.core.team2.ProjectTeamSettings;
+import org.omegat.core.team2.RemoteRepositoryFactory;
 import org.omegat.util.Log;
 
 import gen.core.project.RepositoryDefinition;
@@ -70,7 +71,7 @@ import gen.core.project.RepositoryDefinition;
  * @author Martin Fleurke
  */
 public class SVNRemoteRepository2 implements IRemoteRepository2 {
-    private static final Logger LOGGER = LoggerFactory.getLogger(SVNRemoteRepository2.class);
+    private static final ILogger LOGGER = LoggerFactory.getLogger(SVNRemoteRepository2.class);
     private static final String SVN_START_MSG = "SVN '{}' execution start";
     private static final String SVN_FINISH_MSG = "SVN '{}' execution finished successfully";
 
@@ -89,8 +90,21 @@ public class SVNRemoteRepository2 implements IRemoteRepository2 {
      * Constructor of SVN remote repository.
      */
     public SVNRemoteRepository2() {
+    }
+
+    /*
+     * Plugin loader.
+     */
+    public static void loadPlugins() {
         // Specify MINA-SSHD for transport.
         System.setProperty(SVNKIT_SSH_CLIENT, APACHE);
+        RemoteRepositoryFactory.addRepositoryConnector("svn", SVNRemoteRepository2.class);
+    }
+
+    /**
+     * Plugin unloader.
+     */
+    public static void unloadPlugins() {
     }
 
     @Override
@@ -259,17 +273,17 @@ public class SVNRemoteRepository2 implements IRemoteRepository2 {
                     SVNErrorCode.FS_CONFLICT).contains(ex.getErrorMessage().getErrorCode())) {
                 // Somebody else committed changes - it's normal. Will upload on
                 // next save.
-                Log.logWarningRB("SVN_CONFLICT");
+                LOGGER.atWarn().setMessageRB("SVN_CONFLICT").log();
                 ourClientManager.getWCClient().doRevert(new File[] { baseDirectory },
                         SVNDepth.fromRecurse(true), null);
                 return null;
             } else {
-                Log.logErrorRB("SVN_ERROR", "commit", ex.getMessage());
+                LOGGER.atError().logRB("SVN_ERROR", "commit", ex.getMessage());
                 checkNetworkException(ex);
             }
             throw ex;
         } catch (Exception ex) {
-            Log.logErrorRB("SVN_ERROR", "commit", ex.getMessage());
+            LOGGER.atError().logRB("SVN_ERROR", "commit", ex.getMessage());
             throw ex;
         }
     }

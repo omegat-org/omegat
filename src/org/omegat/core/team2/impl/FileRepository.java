@@ -29,12 +29,13 @@ import java.io.File;
 import java.io.IOException;
 
 import org.apache.commons.io.FileUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import tokyo.northside.logging.ILogger;
+import tokyo.northside.logging.LoggerFactory;
 
 import org.omegat.core.Core;
 import org.omegat.core.team2.IRemoteRepository2;
 import org.omegat.core.team2.ProjectTeamSettings;
+import org.omegat.core.team2.RemoteRepositoryFactory;
 import org.omegat.core.team2.RemoteRepositoryProvider;
 
 import gen.core.project.RepositoryDefinition;
@@ -45,10 +46,24 @@ import gen.core.project.RepositoryMapping;
  * there is no "commit" to avoid clobbering remote files.
  */
 public class FileRepository implements IRemoteRepository2 {
-    private static final Logger LOGGER = LoggerFactory.getLogger(FileRepository.class);
+    private static ILogger LOGGER;
 
     private RepositoryDefinition config;
     private File baseDirectory;
+
+    /**
+     * Plugin loader.
+     */
+    public static void loadPlugins() {
+        LOGGER = LoggerFactory.getLogger(FileRepository.class);
+        RemoteRepositoryFactory.addRepositoryConnector("file", FileRepository.class);
+    }
+
+    /**
+     * Plugin unloader.
+     */
+    public static void unloadPlugins() {
+    }
 
     @Override
     public void init(RepositoryDefinition repo, File dir, ProjectTeamSettings teamSettings) throws Exception {

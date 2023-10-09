@@ -7,10 +7,12 @@ ext {
         config
     }
 
-    execGetOutput = { cmd ->
-        StringBuilder output = new StringBuilder()
-        cmd.execute().waitForProcessOutput(output, null)
-        output.toString().trim()
+    getExecOutput = { ... args = [] ->
+        def exe = providers.exec {
+            ignoreExitValue = true
+            commandLine args
+        }
+        exe.result.get() == 0 ? exe.standardOutput.asText.get().trim() : ''
     }
 
     getUpdateSuffix = { update ->
@@ -23,46 +25,23 @@ ext {
         "_${update}"
     }
 
-    detectRevision = { ->
-        /*
-         Set the revision number included in version strings. The value is
-         chosen from the first valid value in:
-         0. Provided as the Gradle property 'repo.revision'
-         1. src/org/omegat/Version.properties (only if not "dev", i.e. this is a
-            source package not under VCS)
-         2. This svn checkout's revision
-         3. This git clone's SHA-1
-         4. If none of the above, the value "unknown"
-         */
-        def provided = findProperty('repoRevision') ?: ''
-        def git = file('.git').directory ? execGetOutput('git rev-parse --short HEAD') : ''
-        def svn = file('.svn').directory ? execGetOutput('svnversion') : ''
-        [provided, omtVersion.revision, git, svn, 'unknown'].find {
-            it != 'dev' && !it.empty
-        }
-    }
-
-    repoHasChanges = {
-        if (file('.git').directory) {
-            !execGetOutput('git status -s').empty
-        } else if (file('.svn').directory) {
-            !execGetOutput('svn status -q').empty
-        } else {
-            false
-        }
-    }
-
     gitBranch = {
-        execGetOutput('git name-rev --name-only HEAD')
+        providers.exec {commandLine("git", "name-rev", "--name-only", "HEAD")}.standardOutput.asText.get().trim()
     }
 
     gitRemote = {
         def branch = gitBranch()
-        def remote = execGetOutput("git config branch.${branch}.pushRemote")
-        if (!remote.empty) {
-            remote
-        } else {
-            remote = execGetOutput("git config branch.${branch}.remote")
+        def exe = providers.exec {
+            ignoreExitValue = true
+            commandLine("git", "config", "branch.${branch}.pushRemote")
+        }
+        def remote = exe.result.get() == 0 ? exe.standardOutput.asText.get().trim() : ''
+        if (remote.empty) {
+            exe = providers.exec {
+                ignoreExitValue = true
+                commandLine("git", "config", "branch.${branch}.remote")
+            }
+            remote = exe.result.get() == 0 ? exe.standardOutput.asText.get().trim() : ''
         }
         if (!remote.empty) {
             remote
@@ -75,7 +54,9 @@ ext {
     gitBranchSplitPoint = {
         def remote = gitRemote()
         if (!remote.empty) {
-            execGetOutput("git merge-base HEAD $remote/master")
+            providers.exec {
+                commandLine("git", "merge-base", "HEAD", "$remote/master")
+            }.standardOutput.asText.get().trim()
         } else {
             ''
         }
@@ -84,7 +65,9 @@ ext {
     gitModifiedFiles = {
         def splitPoint = gitBranchSplitPoint()
         if (!splitPoint.empty) {
-            execGetOutput("git diff --name-only HEAD $splitPoint").tokenize()
+            providers.exec {
+                commandLine("git", "diff", "--name-only", "HEAD", "$splitPoint")
+            }.standardOutput.asText.get().trim().tokenize()
         } else {
             []
         }

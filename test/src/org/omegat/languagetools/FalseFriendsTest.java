@@ -186,9 +186,9 @@ public class FalseFriendsTest extends TestCore {
             @Override
             public void commitSourceFiles() throws Exception {
             }
-            
+
             @Override
-            public void compileProjectAndCommit(String sourcePattern, boolean doPostProcessing, boolean commitTargetFiles) 
+            public void compileProjectAndCommit(String sourcePattern, boolean doPostProcessing, boolean commitTargetFiles)
             throws Exception {
             }
         });

@@ -1,0 +1,45 @@
+plugins {
+    id 'java-library'
+}
+
+dependencies {
+    compileOnly(project.rootProject)
+    if (providedLibsDir.directory) {
+        compileOnly fileTree(dir: providedLibsDir, includes: ['**/commons-io-*.jar',
+                                                              '**/lib-mnemonics-*.jar',
+                                                              '**/slf4j-format-jdk14-*.jar',
+                                                              '**/languagetool-core-*.jar'])
+        implementation fileTree(dir: providedLibsDir, includes: ['**/jmyspell-core-*.jar', '**/hunspell-*.jar'])
+    } else {
+        compileOnly(libs.commons.io)
+        compileOnly(libs.omegat.mnemonics)
+        compileOnly(libs.slf4j.format.jdk14)
+        compileOnly(libs.languagetool.core) {
+            exclude module: 'guava'
+            exclude module: 'jackson-databind'
+            exclude group: 'org.jetbrains'
+        }
+        implementation(libs.omegat.jmyspell.core)
+        implementation(libs.dumont.hunspell)
+    }
+    testImplementation(testFixtures(project.rootProject))
+    testImplementation(libs.commons.io)
+}
+
+jar {
+    archiveAppendix.set("spellchecker")
+    destinationDirectory.set(rootProject.layout.buildDirectory.dir("modules").get())
+    def pluginProp = loadProperties(file('plugin.properties'))
+    manifest {
+        attributes('License': 'GNU Public License version 3 or later',
+                'Implementation-Version': pluginProp.Version,
+                'OmegaT-Plugins': pluginProp.Class,
+                'Plugin-Author': pluginProp.Author,
+                'Plugin-Version': pluginProp.Version,
+                'Plugin-Name': pluginProp.Name,
+                'Plugin-Category': pluginProp.Category,
+                'Plugin-Description': pluginProp.Description
+        )
+    }
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+}

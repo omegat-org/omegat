@@ -61,7 +61,6 @@ import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
-import org.omegat.util.gui.StaticUIUtils;
 import org.omegat.util.gui.UIDesignManager;
 import org.openide.awt.Mnemonics;
 

@@ -92,12 +92,15 @@ public class AppearancePreferencesPanel extends JPanel {
         themePanel.add(useDarkThemeRB, gridBagConstraints);
 
         cbLightThemeSelect.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbLightThemeSelect.setMinimumSize(new java.awt.Dimension(280, 80));
+        cbLightThemeSelect.setPreferredSize(new java.awt.Dimension(280, 30));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
         themePanel.add(cbLightThemeSelect, gridBagConstraints);
 
         cbDarkThemeSelect.setMinimumSize(new java.awt.Dimension(280, 80));
+        cbDarkThemeSelect.setPreferredSize(new java.awt.Dimension(280, 30));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
@@ -122,10 +125,12 @@ public class AppearancePreferencesPanel extends JPanel {
         menustylePanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Menu Style\n"));
         menustylePanel.setAlignmentX(0.0F);
         menustylePanel.setAlignmentY(0.0F);
+        menustylePanel.setLayout(new java.awt.BorderLayout());
 
         cbMenustyleSelect.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cbMenustyleSelect.setMinimumSize(new java.awt.Dimension(280, 80));
-        menustylePanel.add(cbMenustyleSelect);
+        cbMenustyleSelect.setMinimumSize(new java.awt.Dimension(280, 30));
+        cbMenustyleSelect.setPreferredSize(new java.awt.Dimension(280, 30));
+        menustylePanel.add(cbMenustyleSelect, java.awt.BorderLayout.EAST);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;

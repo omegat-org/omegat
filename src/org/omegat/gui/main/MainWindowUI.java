@@ -295,8 +295,6 @@ public final class MainWindowUI {
         Rectangle defaultWindowSize = new Rectangle(omegatLeftPosition, 0, omegatWidth, omegatHeight);
 
         mainWindow.setBounds(defaultWindowSize);
-        StaticUIUtils.persistGeometry(mainWindow, Preferences.MAINWINDOW_GEOMETRY_PREFIX);
-
         loadScreenLayoutFromPreferences(mainWindow);
 
         // Ensure any "closed" Dockables are visible. These can be newly added

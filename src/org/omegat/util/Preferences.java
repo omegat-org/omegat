@@ -115,7 +115,6 @@ public final class Preferences {
     public static final String DICTIONARY_USE_FONT = "dictionary_use_font";
     public static final String TF_DICTIONARY_FONT_SIZE = "dictionary_font_size";
 
-    public static final String MAINWINDOW_GEOMETRY_PREFIX = "screen";
     public static final String MAINWINDOW_LAYOUT = "docking_layout";
 
     // Project files window size and position

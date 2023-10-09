@@ -74,13 +74,15 @@ public class TagProcessingOptionsPanel extends JPanel {
         filler9 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 10), new java.awt.Dimension(0, 10), new java.awt.Dimension(32767, 10));
         jPanel2 = new javax.swing.JPanel();
         jLabelCustomPattern = new javax.swing.JLabel();
-        customPatternRegExpTF = new javax.swing.JTextField();
         customPatternWarningTextArea = new javax.swing.JTextArea();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        customPatternRegExpTF = new javax.swing.JTextArea();
         filler8 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 10), new java.awt.Dimension(0, 10), new java.awt.Dimension(32767, 10));
         jPanel1 = new javax.swing.JPanel();
         jLabelRemovePattern = new javax.swing.JLabel();
-        removePatternRegExpTF = new javax.swing.JTextField();
         removePatternWarningTextArea = new javax.swing.JTextArea();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        removePatternRegExpTF = new javax.swing.JTextArea();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.PAGE_AXIS));
@@ -91,7 +93,6 @@ public class TagProcessingOptionsPanel extends JPanel {
         descriptionTextArea.setText(OStrings.getString("GUI_TAGVALIDATION_DESCRIPTION")); // NOI18N
         descriptionTextArea.setWrapStyleWord(true);
         descriptionTextArea.setAlignmentX(0.0F);
-        descriptionTextArea.setDragEnabled(false);
         descriptionTextArea.setFocusable(false);
         descriptionTextArea.setOpaque(false);
         add(descriptionTextArea);
@@ -152,9 +153,6 @@ public class TagProcessingOptionsPanel extends JPanel {
         org.openide.awt.Mnemonics.setLocalizedText(jLabelCustomPattern, OStrings.getString("TV_OPTION_CUSTOMPATTERN")); // NOI18N
         jPanel2.add(jLabelCustomPattern, java.awt.BorderLayout.NORTH);
 
-        customPatternRegExpTF.setAlignmentX(0.0F);
-        jPanel2.add(customPatternRegExpTF, java.awt.BorderLayout.CENTER);
-
         customPatternWarningTextArea.setEditable(false);
         customPatternWarningTextArea.setFont(jLabelCustomPattern.getFont());
         customPatternWarningTextArea.setForeground(java.awt.Color.red);
@@ -163,6 +161,12 @@ public class TagProcessingOptionsPanel extends JPanel {
         customPatternWarningTextArea.setAlignmentX(0.0F);
         customPatternWarningTextArea.setOpaque(false);
         jPanel2.add(customPatternWarningTextArea, java.awt.BorderLayout.SOUTH);
+
+        customPatternRegExpTF.setColumns(20);
+        customPatternRegExpTF.setRows(5);
+        jScrollPane1.setViewportView(customPatternRegExpTF);
+
+        jPanel2.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
         add(jPanel2);
         add(filler8);
@@ -173,9 +177,6 @@ public class TagProcessingOptionsPanel extends JPanel {
         org.openide.awt.Mnemonics.setLocalizedText(jLabelRemovePattern, OStrings.getString("TV_OPTION_REMOVEPATTERN")); // NOI18N
         jPanel1.add(jLabelRemovePattern, java.awt.BorderLayout.NORTH);
 
-        removePatternRegExpTF.setAlignmentX(0.0F);
-        jPanel1.add(removePatternRegExpTF, java.awt.BorderLayout.CENTER);
-
         removePatternWarningTextArea.setEditable(false);
         removePatternWarningTextArea.setFont(jLabelCustomPattern.getFont());
         removePatternWarningTextArea.setForeground(java.awt.Color.red);
@@ -185,13 +186,19 @@ public class TagProcessingOptionsPanel extends JPanel {
         removePatternWarningTextArea.setOpaque(false);
         jPanel1.add(removePatternWarningTextArea, java.awt.BorderLayout.SOUTH);
 
+        removePatternRegExpTF.setColumns(20);
+        removePatternRegExpTF.setRows(5);
+        jScrollPane2.setViewportView(removePatternRegExpTF);
+
+        jPanel1.add(jScrollPane2, java.awt.BorderLayout.CENTER);
+
         add(jPanel1);
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     javax.swing.JCheckBox cbCountingProtectedText;
     javax.swing.JCheckBox cbTagsValidRequired;
-    javax.swing.JTextField customPatternRegExpTF;
+    javax.swing.JTextArea customPatternRegExpTF;
     javax.swing.JTextArea customPatternWarningTextArea;
     private javax.swing.JTextArea descriptionTextArea;
     private javax.swing.Box.Filler filler1;
@@ -209,12 +216,14 @@ public class TagProcessingOptionsPanel extends JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     javax.swing.JCheckBox javaPatternCheckBox;
     javax.swing.JCheckBox looseTagOrderCheckBox;
     private javax.swing.JTextArea looseTagOrderWarningTextArea;
     javax.swing.JRadioButton noCheckRadio;
     javax.swing.ButtonGroup ourButtonGroup;
-    javax.swing.JTextField removePatternRegExpTF;
+    javax.swing.JTextArea removePatternRegExpTF;
     javax.swing.JTextArea removePatternWarningTextArea;
     javax.swing.JRadioButton simpleCheckRadio;
     // End of variables declaration//GEN-END:variables

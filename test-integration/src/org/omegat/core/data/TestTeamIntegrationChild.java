@@ -629,7 +629,7 @@ public final class TestTeamIntegrationChild {
         ProjectTMX headTMX;
 
         @Override
-        protected void mergeTMX(ProjectTMX baseTMX, ProjectTMX headTMX, StringBuilder commitDetails) {
+        protected ProjectTMX mergeTMX(ProjectTMX baseTMX, ProjectTMX headTMX, StringBuilder commitDetails) {
             Log.log("Base:   " + baseTMX);
             Log.log("Mine:   " + projectTMX);
             Log.log("Theirs: " + headTMX);
@@ -678,20 +678,18 @@ public final class TestTeamIntegrationChild {
                     });
             String srcLang = config.getSourceLanguage().getLanguage();
             String trgLang = config.getTargetLanguage().getLanguage();
-            synchronized (projectTMX) {
-                ProjectTMX mergedTMX = SuperTmxMerge.merge(
-                        new SyncTMX(baseTMX, OStrings.getString("TMX_MERGE_BASE"), srcLang, trgLang),
-                        new SyncTMX(projectTMX, OStrings.getString("TMX_MERGE_MINE"), srcLang, trgLang),
-                        new SyncTMX(headTMX, OStrings.getString("TMX_MERGE_THEIRS"), srcLang, trgLang), props);
-                Log.log("Merged: " + mergedTMX);
-                if (!checkMergeInput(baseTMX, mergedTMX)) {
-                    Log.log("'Merged' TM is not a valid derivative of 'Base' TM");
-                    System.exit(1);
-                }
-                projectTMX.replaceContent(mergedTMX);
+            ProjectTMX mergedTMX = SuperTmxMerge.merge(
+                    new SyncTMX(baseTMX, OStrings.getString("TMX_MERGE_BASE"), srcLang, trgLang),
+                    new SyncTMX(projectTMX, OStrings.getString("TMX_MERGE_MINE"), srcLang, trgLang),
+                    new SyncTMX(headTMX, OStrings.getString("TMX_MERGE_THEIRS"), srcLang, trgLang), props);
+            Log.log("Merged: " + mergedTMX);
+            if (!checkMergeInput(baseTMX, mergedTMX)) {
+                Log.log("'Merged' TM is not a valid derivative of 'Base' TM");
+                System.exit(1);
             }
             commitDetails.append('\n');
             commitDetails.append(props.getReport().toString());
+            return mergedTMX;
         }
 
         /**

@@ -12,7 +12,16 @@ bindpaths() {
     done
 }
 
-exec docker run --rm -i \
+if type nerdctl &> /dev/null ; then
+    CMD=nerdctl
+elif type docker &> /dev/null ; then
+    CMD=docker
+else
+  echo Please install docker or nerdctl!
+  exit 2
+fi
+
+exec $CMD run --rm -i \
     -v "$PWD":/work $(bindpaths "$@") \
     --entrypoint osslsigncode \
     amake/innosetup:innosetup6 \

@@ -957,7 +957,7 @@ ext.makeWinTask = { args ->
         outputs.file installerExe
         onlyIf {
             conditions([!args.jrePath || !args.jrePath.empty, 'JRE not found'],
-                    [exePresent('iscc') || exePresent('docker'),
+                    [exePresent('iscc') || exePresent('docker') || exePresent('nerdctl'),
                      'InnoSetup or Docker not installed'])
         }
         doFirst {

@@ -29,11 +29,15 @@ import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.HeadlessException;
 import java.io.File;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.concurrent.ThreadLocalRandom;
 
 import javax.swing.JFrame;
@@ -52,6 +56,7 @@ import org.omegat.core.data.IProject.DefaultTranslationsIterator;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.team2.RemoteRepositoryProvider;
 import org.omegat.core.threads.IAutoSave;
+import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.editor.EditorSettings;
 import org.omegat.gui.editor.IEditor;
 import org.omegat.gui.editor.IEditorFilter;
@@ -80,6 +85,8 @@ public final class TestTeamIntegrationChild {
 
     private TestTeamIntegrationChild() {
     }
+
+    public static final String PLUGINS_LIST_FILE = "test-integration/plugins.properties";
 
     static final String CONCURRENT_NAME = "concurrent";
 
@@ -112,6 +119,11 @@ public final class TestTeamIntegrationChild {
 
             finishTime = System.currentTimeMillis() + time;
 
+            Properties props = new Properties();
+            try (InputStream fis = Files.newInputStream(Paths.get(PLUGINS_LIST_FILE))) {
+                props.load(fis);
+                PluginUtils.loadPluginFromProperties(props);
+            }
             TestPreferencesInitializer.init();
             Preferences.setPreference(Preferences.TEAM_AUTHOR, source);
 
@@ -617,7 +629,7 @@ public final class TestTeamIntegrationChild {
         ProjectTMX headTMX;
 
         @Override
-        protected void mergeTMX(ProjectTMX baseTMX, ProjectTMX headTMX, StringBuilder commitDetails) {
+        protected ProjectTMX mergeTMX(ProjectTMX baseTMX, ProjectTMX headTMX, StringBuilder commitDetails) {
             Log.log("Base:   " + baseTMX);
             Log.log("Mine:   " + projectTMX);
             Log.log("Theirs: " + headTMX);
@@ -666,20 +678,18 @@ public final class TestTeamIntegrationChild {
                     });
             String srcLang = config.getSourceLanguage().getLanguage();
             String trgLang = config.getTargetLanguage().getLanguage();
-            synchronized (projectTMX) {
-                ProjectTMX mergedTMX = SuperTmxMerge.merge(
-                        new SyncTMX(baseTMX, OStrings.getString("TMX_MERGE_BASE"), srcLang, trgLang),
-                        new SyncTMX(projectTMX, OStrings.getString("TMX_MERGE_MINE"), srcLang, trgLang),
-                        new SyncTMX(headTMX, OStrings.getString("TMX_MERGE_THEIRS"), srcLang, trgLang), props);
-                Log.log("Merged: " + mergedTMX);
-                if (!checkMergeInput(baseTMX, mergedTMX)) {
-                    Log.log("'Merged' TM is not a valid derivative of 'Base' TM");
-                    System.exit(1);
-                }
-                projectTMX.replaceContent(mergedTMX);
+            ProjectTMX mergedTMX = SuperTmxMerge.merge(
+                    new SyncTMX(baseTMX, OStrings.getString("TMX_MERGE_BASE"), srcLang, trgLang),
+                    new SyncTMX(projectTMX, OStrings.getString("TMX_MERGE_MINE"), srcLang, trgLang),
+                    new SyncTMX(headTMX, OStrings.getString("TMX_MERGE_THEIRS"), srcLang, trgLang), props);
+            Log.log("Merged: " + mergedTMX);
+            if (!checkMergeInput(baseTMX, mergedTMX)) {
+                Log.log("'Merged' TM is not a valid derivative of 'Base' TM");
+                System.exit(1);
             }
             commitDetails.append('\n');
             commitDetails.append(props.getReport().toString());
+            return mergedTMX;
         }
 
         /**

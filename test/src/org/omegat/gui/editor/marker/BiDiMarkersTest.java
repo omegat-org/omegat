@@ -351,7 +351,7 @@ public class BiDiMarkersTest extends TestCore {
         }
 
         @Override
-        public void markActiveEntrySource(SourceTextEntry requiredActiveEntry, List< Mark > marks,
+        public void markActiveEntrySource(SourceTextEntry requiredActiveEntry, List<Mark> marks,
                 String markerClassName) {
         }
 

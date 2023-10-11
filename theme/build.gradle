@@ -1,0 +1,37 @@
+plugins {
+    id 'java-library'
+}
+
+dependencies {
+    compileOnly(project.rootProject)
+    if (providedLibsDir.directory) {
+        compileOnly fileTree(dir: providedLibsDir, include: '**/flatlaf*.jar')
+    } else {
+        // platform independent dark theme
+        implementation 'com.formdev:flatlaf:2.6'
+    }
+    testImplementation(testFixtures(project.rootProject))
+    testImplementation(libs.commons.io)
+}
+
+jar {
+    archiveAppendix.set("omegat")
+    destinationDirectory.set(new File(rootProject.buildDir, "modules"))
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    from configurations.runtimeClasspath.collect {
+        it.isDirectory() ? it : zipTree(it)
+    }
+    def pluginProp = loadProperties(file('plugin.properties'))
+    manifest {
+        attributes('License': 'GNU Public License version 3 or later',
+                'Implementation-Version': pluginProp.Version,
+                'OmegaT-Plugins': pluginProp.Class,
+                'Plugin-Author': pluginProp.Author,
+                'Plugin-Version': pluginProp.Version,
+                'Plugin-Name': pluginProp.Name,
+                'Plugin-Category': pluginProp.Category,
+                'Plugin-Description': pluginProp.Description
+        )
+    }
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+}

@@ -147,7 +147,7 @@ public class DictionaryManager {
      *
      * @param lang
      *            : the language code (xx_YY) of the dictionary to be deleted
-     * @returns true upon success, otherwise false
+     * @return true upon success, otherwise false
      */
     public boolean uninstallDictionary(String lang) {
         if (lang == null || lang.isEmpty()) {

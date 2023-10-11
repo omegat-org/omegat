@@ -1,0 +1,136 @@
+# Guideline for Welcoming Beginners
+
+## For Project Managers:
+
+1. **Create Beginner-Friendly Documentation:**
+   - Ensure that there is clear and comprehensive documentation available for beginners. This should include
+    installation instructions, setup guides, and an overview of the project structure.
+
+2. **Label Issues Appropriately:**
+   - Use labels "good first issue" to identify tasks suitable for beginners. This makes it easier for them
+    to find a starting point.
+
+3. **Provide Code Review and Feedback:**
+   - Encourage experienced contributors to review and provide constructive feedback on code submitted by beginners.
+    This helps them learn and improve their skills.
+
+4. **Maintain a Helpful and Inclusive Environment:**
+   - Foster a culture of kindness, patience, and inclusivity within the community. Encourage respectful communication
+    and be mindful of diverse perspectives.
+
+## For Contributors:
+
+1. **Be Patient and Supportive:**
+   - When interacting with beginners, be patient and understanding. Remember that everyone starts somewhere,
+    and your help can make a significant impact on their learning journey.
+
+2. **Provide Clear Instructions:**
+   - When explaining tasks or issues, provide step-by-step instructions and, if applicable, share relevant code
+    snippets or examples.
+
+3. **Encourage Exploration:**
+   - Encourage beginners to explore the project's codebase and ask questions. This helps them gain a deeper
+   understanding of the project's architecture.
+
+4. **Review Pull Requests Thoroughly:**
+   - When reviewing contributions from beginners, focus on providing constructive feedback rather than simply
+    pointing out mistakes.
+
+5. **Offer to Pair Program:**
+   - If possible, offer to pair program with beginners on more complex tasks. This can be an excellent learning
+    experience for them.
+
+
+## Text Snippets for Common Questions:
+
+### For Questions Regarding Installation
+
+```
+Dear [Contributor's Name],
+
+Thank you for reaching out! To get started, please follow these installation instructions:
+
+[Include specific installation steps or provide a link to the documentation.]
+
+If you encounter any issues during the installation process, feel free to ask for help.
+
+Best regards,
+[Your Name]
+```
+
+## For Questions About a Specific Issue
+
+```
+Hi [Contributor's Name],
+
+Thank you for your interest in working on this issue! Here are the steps to get started:
+
+1. [Step 1]
+2. [Step 2]
+3. [Step 3]
+...
+
+If you have any questions or need further assistance, please don't hesitate to ask.
+
+Happy coding!
+
+Best regards,
+[Your Name]
+```
+
+
+## For First contribution or bug ticket
+
+```text
+Subject: Welcome to OmegaT and Thank You for Your Report!
+
+Dear [Beginner's Name],
+
+I hope this message finds you well. My name is [Your Name], and I am  [select one from following]
+ the OmegaT Project Manager
+ the OmegaT documentation manager
+ the OmegaT Localization manager
+ a OmegaT developer
+ a OmegaT user helping development
+
+First and foremost, I want to express my gratitude for
+taking
+the time to report the issue you encountered. Your feedback is invaluable to us, and we appreciate your contribution to the project.
+
+I understand that you're facing some difficulties, and I'm here to help guide you through the process. To ensure we address the issue effectively, I would like to request some additional information from you. This will help us understand the problem better and work towards a resolution.
+
+Please provide the following details:
+
+## Detailed Description of the Issue:
+
+Please describe the problem you're experiencing in as much detail as possible.
+Include any error messages or unexpected behavior you've observed.
+
+## Steps to Reproduce:
+
+  List the steps you followed when you encountered the issue. This will help us recreate the problem on our end.
+
+  (For exmaple, 1. access "project" menu and click "Project Properties" menu item, then ...)
+
+## Operating System and Environment:
+
+  Specify the operating system you're using (e.g., Windows, macOS, Linux) and any relevant environment details.
+
+## Version of OmegaT:
+
+  Let us know which version of our project you are using. If you're not sure, you can find this information in [relevant
+   location].
+
+## Screenshots or Code Snippets:
+
+  If applicable, please attach screenshots or relevant code snippets that illustrate the issue.
+  Once we receive this information, we will investigate the matter further and work towards a resolution. In the
+  meantime, if you have any questions or need assistance with any other aspect of the project, please don't hesitate to
+  reach out.
+
+Thank you once again for your contribution to OmegaT. We greatly appreciate your involvement and look forward to working
+ together to make this project even better.
+
+Best regards,
+
+```

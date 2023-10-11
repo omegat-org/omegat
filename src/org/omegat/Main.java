@@ -44,7 +44,6 @@ import java.io.OutputStreamWriter;
 import java.lang.management.ManagementFactory;
 import java.lang.management.RuntimeMXBean;
 import java.lang.reflect.Field;
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
@@ -65,6 +64,9 @@ import java.util.TreeMap;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
+
+import tokyo.northside.logging.ILogger;
+import tokyo.northside.logging.LoggerFactory;
 
 import org.omegat.CLIParameters.PSEUDO_TRANSLATE_TYPE;
 import org.omegat.CLIParameters.TAG_VALIDATION_MODE;
@@ -100,8 +102,6 @@ import org.omegat.util.TMXWriter2;
 import org.omegat.util.gui.OSXIntegration;
 
 import com.vlsolutions.swing.docking.DockingDesktop;
-import tokyo.northside.logging.ILogger;
-import tokyo.northside.logging.LoggerFactory;
 
 /**
  * The main OmegaT class, used to launch the program.
@@ -143,10 +143,6 @@ public final class Main {
         if (args.length > 0 && CLIParameters.TEAM_TOOL.equals(args[0])) {
             TeamTool.main(Arrays.copyOfRange(args, 1, args.length));
         }
-
-        // Workaround for bug #812. Remove this when appropriate; see
-        // https://sourceforge.net/p/omegat/bugs/812/
-        System.setProperty("jna.encoding", Charset.defaultCharset().name());
 
         // Workaround for Java 17 or later support of JAXB.
         // See https://sourceforge.net/p/omegat/feature-requests/1682/#12c5

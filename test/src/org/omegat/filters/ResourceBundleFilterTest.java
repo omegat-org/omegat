@@ -223,7 +223,7 @@ public class ResourceBundleFilterTest extends TestFilterBase {
         checkMulti("Pack and delete project...", "omt.menu.export.delete", null, null, null, null);
         checkMulti("The project already has an ongoing translation.\nDo you want to overwrite it with the translation from the package ?",
                 "omt.dialog.overwrite_project_save", null, null, null, null);
-        checkMulti("Deleting project..." ,"omt.status.delete_project", null, null, null, null);
+        checkMulti("Deleting project...", "omt.status.delete_project", null, null, null, null);
         checkMultiEnd();
 
         translateText(filter, f, config);

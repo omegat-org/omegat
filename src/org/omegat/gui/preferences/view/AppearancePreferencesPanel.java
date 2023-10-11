@@ -49,10 +49,15 @@ public class AppearancePreferencesPanel extends JPanel {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
+        buttonGroupColorSync = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        cbThemeSelect = new javax.swing.JComboBox<>();
-        jLabel2 = new javax.swing.JLabel();
+        themePanel = new javax.swing.JPanel();
+        syncWithOSColorRB = new javax.swing.JRadioButton();
+        useDarkThemeRB = new javax.swing.JRadioButton();
+        cbLightThemeSelect = new javax.swing.JComboBox<>();
+        cbDarkThemeSelect = new javax.swing.JComboBox<>();
+        useLightDefaultThemeRB = new javax.swing.JRadioButton();
+        menustylePanel = new javax.swing.JPanel();
         cbMenustyleSelect = new javax.swing.JComboBox<>();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 8), new java.awt.Dimension(0, 8), new java.awt.Dimension(32767, 8));
         restoreWindowButton = new javax.swing.JButton();
@@ -64,35 +69,75 @@ public class AppearancePreferencesPanel extends JPanel {
         jPanel1.setAlignmentX(0.0F);
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("org/omegat/Bundle"); // NOI18N
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel1, bundle.getString("MW_OPTIONMENU_APPEARANCE_THEME_LABEL")); // NOI18N
+        themePanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Theme"));
+        themePanel.setAlignmentX(0.0F);
+        themePanel.setAlignmentY(0.0F);
+        themePanel.setLayout(new java.awt.GridBagLayout());
+
+        buttonGroupColorSync.add(syncWithOSColorRB);
+        org.openide.awt.Mnemonics.setLocalizedText(syncWithOSColorRB, "Sync with OS color preference");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        jPanel1.add(jLabel1, gridBagConstraints);
-
-        cbThemeSelect.setMinimumSize(new java.awt.Dimension(280, 80));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        jPanel1.add(cbThemeSelect, gridBagConstraints);
+        themePanel.add(syncWithOSColorRB, gridBagConstraints);
 
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel2, OStrings.getString("MW_OPTIONMENU_APPEARANCE_MENUSTYLE_LABEL")); // NOI18N
+        buttonGroupColorSync.add(useDarkThemeRB);
+        org.openide.awt.Mnemonics.setLocalizedText(useDarkThemeRB, "Dark Theme");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
-        jPanel1.add(jLabel2, gridBagConstraints);
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        themePanel.add(useDarkThemeRB, gridBagConstraints);
+
+        cbLightThemeSelect.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbLightThemeSelect.setMinimumSize(new java.awt.Dimension(280, 80));
+        cbLightThemeSelect.setPreferredSize(new java.awt.Dimension(280, 30));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        themePanel.add(cbLightThemeSelect, gridBagConstraints);
+
+        cbDarkThemeSelect.setMinimumSize(new java.awt.Dimension(280, 80));
+        cbDarkThemeSelect.setPreferredSize(new java.awt.Dimension(280, 30));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        themePanel.add(cbDarkThemeSelect, gridBagConstraints);
+
+        buttonGroupColorSync.add(useLightDefaultThemeRB);
+        org.openide.awt.Mnemonics.setLocalizedText(useLightDefaultThemeRB, "Light/Default Theme");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        themePanel.add(useLightDefaultThemeRB, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        jPanel1.add(themePanel, gridBagConstraints);
+
+        menustylePanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Menu Style\n"));
+        menustylePanel.setAlignmentX(0.0F);
+        menustylePanel.setAlignmentY(0.0F);
+        menustylePanel.setLayout(new java.awt.BorderLayout());
 
         cbMenustyleSelect.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cbMenustyleSelect.setMinimumSize(new java.awt.Dimension(280, 80));
+        cbMenustyleSelect.setMinimumSize(new java.awt.Dimension(280, 30));
+        cbMenustyleSelect.setPreferredSize(new java.awt.Dimension(280, 30));
+        menustylePanel.add(cbMenustyleSelect, java.awt.BorderLayout.EAST);
+
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        jPanel1.add(cbMenustyleSelect, gridBagConstraints);
+        jPanel1.add(menustylePanel, gridBagConstraints);
 
         add(jPanel1);
         add(filler1);
@@ -102,12 +147,17 @@ public class AppearancePreferencesPanel extends JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroupColorSync;
+    javax.swing.JComboBox<String> cbDarkThemeSelect;
+    javax.swing.JComboBox<String> cbLightThemeSelect;
     javax.swing.JComboBox<String> cbMenustyleSelect;
-    javax.swing.JComboBox<String> cbThemeSelect;
     private javax.swing.Box.Filler filler1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    javax.swing.JPanel menustylePanel;
     javax.swing.JButton restoreWindowButton;
+    javax.swing.JRadioButton syncWithOSColorRB;
+    javax.swing.JPanel themePanel;
+    javax.swing.JRadioButton useDarkThemeRB;
+    javax.swing.JRadioButton useLightDefaultThemeRB;
     // End of variables declaration//GEN-END:variables
 }

@@ -3,6 +3,7 @@
 # Table of contents
 
 * [Variety of Contribution](00.ContributingEcoSystem.md)
+* [Guideline for welcoming beginners](06.GuidelineForWelcomingBeginners.md)
  
 ## How to build and contribute OmegaT
 

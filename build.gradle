@@ -520,7 +520,7 @@ ext.instantStartXmls = fileTree(dir: 'doc_src', include: '**/InstantStartGuide.x
 instantStartXmls.each { xml ->
     def lang = xml.parentFile.name
     def taskName = "instantStartGuide${lang.capitalize()}"
-    task(type: Exec, taskName) {
+    tasks.register(taskName, Exec) {
         inputs.files fileTree(dir: "doc_src/${lang}", include: '**/*.xml')
         outputs.files fileTree(dir: "docs",
                 includes: ["greetings/${lang}/first_steps.html", "greetings/${lang}/images/InstantGuide*png",
@@ -1174,7 +1174,7 @@ tasks.register('checksums') {
     }
 }
 
-task genJAXB {
+tasks.register('genJAXB') {
     description = 'Generate classes for loading and manipulating XML formats'
 }
 
@@ -1287,7 +1287,7 @@ tasks.register('runOnJava17', JavaExec) {
     group = 'application'
 }
 
-task runOnJava21(type: JavaExec) {
+tasks.register('runOnJava21', JavaExec) {
     description = 'Launch app on Java 21'
     javaLauncher = javaToolchains.launcherFor {
         languageVersion = JavaLanguageVersion.of(21)
@@ -1329,7 +1329,7 @@ tasks.register('testOnJava17', Test) {
     group = 'verification'
 }
 
-task testOnJava21(type: Test) {
+tasks.register('testOnJava21', Test) {
     description = 'Run test cases on Java 21'
     javaLauncher = javaToolchains.launcherFor {
         languageVersion = JavaLanguageVersion.of(21)

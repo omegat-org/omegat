@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# This accept environment variable USBDEV which is smartcard device
+# USBDEV="--device /dev/bus/usb/004/004"
+
 relpaths() {
     for arg in "$@"; do printf -- "%s\n" "${arg#$PWD/}"; done
 }
@@ -12,8 +15,27 @@ bindpaths() {
     done
 }
 
-exec docker run --rm -i \
-    -v "$PWD":/work $(bindpaths "$@") \
-    --entrypoint osslsigncode \
-    amake/innosetup:innosetup6 \
-    $(relpaths "$@")
+if type nerdctl &> /dev/null ; then
+    CMD=nerdctl
+elif type docker &> /dev/null ; then
+    CMD=docker
+else
+  echo Please install docker or nerdctl!
+  exit 2
+fi
+
+if [[ -z "${USBDEV}" ]]; then
+  exec $CMD run --rm -i \
+      -v "$PWD":/work $(bindpaths "$@") \
+      --entrypoint osslsigncode \
+      --privileged --device $USBDEV \
+      amake/innosetup:innosetup6 \
+      $(relpaths "$@")
+else
+  exec $CMD run --rm -i \
+      -v "$PWD":/work $(bindpaths "$@") \
+      --entrypoint osslsigncode \
+      amake/innosetup:innosetup6 \
+      $(relpaths "$@")
+fi
+

@@ -1016,7 +1016,10 @@ ext.makeWinTask = { args ->
         }
         def exe = exePresent('osslsigncode') ? 'osslsigncode' : file('ci/osslsigncode')
         def envVars = [:]
-        def commandArgs = [exe, 'sign', '-pkcs11module', project.property('pkcs11module')]
+        def commandArgs = [exe, 'sign']
+        if (project.hasProperty('pkcs11module')) {
+            commandArgs.addAll('-pkcs11module', project.property('pkcs11module'))
+        }
         if (project.hasProperty('winCodesignCert')) {
             commandArgs.addAll('-certs', project.property('winCodesignCert'))
         }
@@ -1033,8 +1036,9 @@ ext.makeWinTask = { args ->
                 '-t', project.hasProperty('winCodesignTimestampUrl') ? project.property('winCodesignTimestampUrl') :
                 'http://time.certum.pl/',
                 '-n', application.applicationName, '-i', omtWebsite, '-h', 'sha256',
-                '-in', installerExe.get().toString(),
-                '-out', signedExe.get().toString())
+                '-in', installerExe.get().asFile.toString(),
+                '-out', signedExe.get().asFile.toString()
+        )
         commandLine(commandArgs)
         environment(envVars)
         dependsOn args.name

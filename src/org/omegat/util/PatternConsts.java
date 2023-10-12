@@ -53,6 +53,7 @@ public final class PatternConsts {
 
     /** Tag Validation Option: check user defined tags according to regexp.*/
     public static final String CHECK_CUSTOM_PATTERN_DEFAULT = "\\d+";
+    public static final String EMPTY_MARK = "__EMPTY__";
 
     /**
      * Compiled pattern to extract the encoding from XML file, if any. Found
@@ -256,9 +257,13 @@ public final class PatternConsts {
                 regexp += "|" + RE_SIMPLE_JAVA_MESSAGEFORMAT_PATTERN_VARS;
             }
             // assume: customRegExp has already been validated.
-            String customRegExp = Preferences.getPreferenceDefault(Preferences.CHECK_CUSTOM_PATTERN, CHECK_CUSTOM_PATTERN_DEFAULT);
-            if (!"".equalsIgnoreCase(customRegExp)) {
-                regexp += "|" + customRegExp;
+            String customRegExp = Preferences.getPreference(Preferences.CHECK_CUSTOM_PATTERN);
+            if (!"__EMPTY__".equals(customRegExp)) {
+                if (customRegExp.isEmpty()) {
+                    regexp += "|" + CHECK_CUSTOM_PATTERN_DEFAULT;
+                } else {
+                    regexp += "|" + customRegExp;
+                }
             }
             placeholders = Pattern.compile(regexp);
         }

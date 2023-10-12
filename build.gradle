@@ -1011,8 +1011,10 @@ ext.makeWinTask = { args ->
             // Set these in e.g. local.properties
             def props = ['pkcs11module', 'winCodesignPassword']
             conditions([props.every { project.hasProperty(it) }, 'Code signing properties not set'],
-                    [exePresent('osslsigncode') || exePresent('docker') || exePresent('nerdctl'),
-                     'neither osslsigncode or docker/nerdctl is not installed'])
+                    [exePresent('osslsigncode'), 'osslsigncode is not installed'])
+                    // note: container image amake/innosetup has osslsigntool 1.7 which don't work.
+                    // [exePresent('osslsigncode') || exePresent('docker') || exePresent('nerdctl'),
+                    // 'neither osslsigncode or docker/nerdctl is not installed'])
         }
         def exe = exePresent('osslsigncode') ? 'osslsigncode' : file('ci/osslsigncode')
         def envVars = [:]

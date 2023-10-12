@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# This accept environment variable USBDEV which is smartcard device
+# USBDEV="--device /dev/bus/usb/004/004"
+
 relpaths() {
     for arg in "$@"; do printf -- "%s\n" "${arg#$PWD/}"; done
 }
@@ -21,8 +24,18 @@ else
   exit 2
 fi
 
-exec $CMD run --rm -i \
-    -v "$PWD":/work $(bindpaths "$@") \
-    --entrypoint osslsigncode \
-    amake/innosetup:innosetup6 \
-    $(relpaths "$@")
+if [[ -z "${USBDEV}" ]]; then
+  exec $CMD run --rm -i \
+      -v "$PWD":/work $(bindpaths "$@") \
+      --entrypoint osslsigncode \
+      --privileged --device $USBDEV \
+      amake/innosetup:innosetup6 \
+      $(relpaths "$@")
+else
+  exec $CMD run --rm -i \
+      -v "$PWD":/work $(bindpaths "$@") \
+      --entrypoint osslsigncode \
+      amake/innosetup:innosetup6 \
+      $(relpaths "$@")
+fi
+

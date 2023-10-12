@@ -15,9 +15,9 @@
   <manifest></manifest>
   <icon>../../images/OmegaT.ico</icon>
   <jre>
-    <path>jre</path>
+    <path>jre;%JAVA_HOME%;%PATH%</path>
     <minVersion>11</minVersion>
-    <maxVersion></maxVersion>
+    <maxVersion>21</maxVersion>
     <jdkPreference>jreOnly</jdkPreference>
     <requires64Bit>false</requires64Bit>
   </jre>

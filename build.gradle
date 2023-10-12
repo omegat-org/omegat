@@ -887,24 +887,7 @@ tasks.register('linux') {
 
 // We bundle our startup scripts separately, so disable startScripts.
 startScripts.enabled = false
-
 installDist {
-   // installDist insists on installing a script. Trick it with a dummy script.
-   /*
-    doFirst {
-        startScripts.outputDir.mkdirs()
-        file("${startScripts.outputDir}/${applicationName}").createNewFile()
-        if (destinationDir.directory) {
-            // As of Gradle 4.4(?) the application plugin expects `lib` as well
-            ['lib', 'bin'].each { file("${destinationDir}/${it}").mkdirs() }
-        }
-    }*/
-
-    // Delete dummy afterwards.
-   /* doLast {
-        delete "${destinationDir}/bin"
-        delete startScripts.outputDir
-    }*/
 }
 
 // Read in all our custom messages and massage them for inclusion in the .iss
@@ -933,10 +916,10 @@ tasks.register('win') {
 }
 
 createExe {
-  doLast {
-    // https://github.com/TheBoegl/gradle-launch4j/issues/68
-    delete layout.buildDirectory.file("${launch4j.outputDir}/${launch4j.libraryDir}")
-  }
+    doLast {
+        // https://github.com/TheBoegl/gradle-launch4j/issues/68
+        delete layout.buildDirectory.file("${launch4j.outputDir}/${launch4j.libraryDir}")
+    }
 }
 
 ext.makeWinTask = { args ->

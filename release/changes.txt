@@ -2,7 +2,7 @@
  OmegaT 6.1.0
 ----------------------------------------------------------------------
   22 Enhancement
-  31 Bug fixes
+  32 Bug fixes
 ----------------------------------------------------------------------
 6.1.0 vs 6.0.0
 
@@ -81,6 +81,9 @@
 
 
   Bug fixes:
+
+  - OmegaT 6.1 with JRE does not work out of the box on Windows
+  https://sourceforge.net/p/omegat/bugs/1218/
 
   - Selection of match for pre-translation varies through different OS's
   https://sourceforge.net/p/omegat/bugs/1213/

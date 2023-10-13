@@ -395,9 +395,26 @@ def linuxArm64JRE = fileTree(dir: assetDir, include: 'OpenJDK17U-jre_aarch64_lin
 def windowsJRE32 = fileTree(dir: assetDir, include: 'OpenJDK17U-jre_x86-32_windows_*.zip')
 def windowsJRE = fileTree(dir: assetDir, include: 'OpenJDK17U-jre_x64_windows_*.zip')
 
+/*
+ * Configuration of launch4j java launcher.
+ * OmegaT uses it as launcher for windows.
+ */
 launch4j {
-    xmlFileName = "${projectDir}/release/win32-specific/L4j_OMT.xml"
+    libraryDir = "." // assume OmegaT.jar is located as same folder as OmegaT.exe
+    dontWrapJar = true
+    downloadUrl = 'https://adoptium.net/'
+    supportUrl = 'https://omegat.org/support'
     icon = "${projectDir}/images/OmegaT.ico"
+    errTitle = 'OmegaT'
+    headerType = 'gui'
+    jreMinVersion = '11'
+    jreMaxVersion = '21'
+    copyConfigurable = [] // hack: don't copy dependencies to $libraryDir
+    bundledJrePath = 'jre' // assume bundled JRE is located in jre/
+    requires64Bit = false  // support 32bit distribution
+    restartOnCrash = false
+    stayAlive = false
+    priority = 'normal'
 }
 
 tasks.register('genDocIndex', Copy) {
@@ -913,13 +930,6 @@ ext.getInnoSetupCustomMessages = {
 tasks.register('win') {
     description = 'Build the Windows distributions.'
     group = 'omegat distribution'
-}
-
-createExe {
-    doLast {
-        // https://github.com/TheBoegl/gradle-launch4j/issues/68
-        delete layout.buildDirectory.file("${launch4j.outputDir}/${launch4j.libraryDir}")
-    }
 }
 
 ext.makeWinTask = { args ->

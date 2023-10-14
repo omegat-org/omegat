@@ -60,8 +60,9 @@ public class SegmentationRulesModel extends AbstractTableModel {
             return rule.getBeforebreak();
         case 2:
             return rule.getAfterbreak();
+        default:
+            return null;
         }
-        return null;
     }
 
     public int getRowCount() {
@@ -110,6 +111,8 @@ public class SegmentationRulesModel extends AbstractTableModel {
                 fireException(pse);
             }
             break;
+        default:
+            throw new IllegalArgumentException();
         }
     }
 

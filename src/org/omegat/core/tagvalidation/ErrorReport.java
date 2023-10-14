@@ -176,7 +176,8 @@ public class ErrorReport {
             return OStrings.getString("TAG_ERROR_ORPHANED");
         case UNSPECIFIED:
             return OStrings.getString("TAG_ERROR_UNSPECIFIED");
+        default:
+            return null;
         }
-        return null;
     }
 }

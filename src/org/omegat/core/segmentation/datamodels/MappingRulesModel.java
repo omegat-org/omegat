@@ -61,8 +61,9 @@ public class MappingRulesModel extends AbstractTableModel {
             return maprule.getLanguageName();
         case 1:
             return maprule.getPattern();
+        default:
+            return null;
         }
-        return null;
     }
 
     public int getRowCount() {
@@ -105,6 +106,8 @@ public class MappingRulesModel extends AbstractTableModel {
                 fireException(pse);
             }
             break;
+        default:
+            // we have only two columns
         }
     }
 

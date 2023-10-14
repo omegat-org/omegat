@@ -25,6 +25,8 @@
 
 package org.omegat.core.team2.impl;
 
+import static org.omegat.core.team2.impl.TeamUtils.*;
+
 import java.io.Console;
 
 import javax.net.ssl.TrustManager;
@@ -47,7 +49,6 @@ import org.tmatesoft.svn.core.io.SVNRepository;
 import org.omegat.core.Core;
 import org.omegat.core.KnownException;
 import org.omegat.core.team2.ProjectTeamSettings;
-import org.omegat.core.team2.TeamSettings;
 import org.omegat.core.team2.gui.UserPassDialog;
 import org.omegat.gui.main.ConsoleWindow;
 import org.omegat.util.Log;
@@ -68,8 +69,6 @@ import gen.core.project.RepositoryDefinition;
 public class SVNAuthenticationManager implements ISVNAuthenticationManager {
     static final int CONNECT_TIMEOUT = 30 * 1000; // 30 seconds
     static final int READ_TIMEOUT = 60 * 1000; // 60 seconds
-    static final String KEY_USERNAME_SUFFIX = "username";
-    static final String KEY_PASSWORD_SUFFIX = "password";
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SVNAuthenticationManager.class);
 
@@ -123,7 +122,7 @@ public class SVNAuthenticationManager implements ISVNAuthenticationManager {
     protected SVNAuthentication ask(String kind, SVNURL url, String message) throws SVNException {
         UserPassDialog userPassDialog = new UserPassDialog(Core.getMainWindow().getApplicationFrame());
         userPassDialog.setLocationRelativeTo(Core.getMainWindow().getApplicationFrame());
-        userPassDialog.descriptionTextArea.setText(message);
+        userPassDialog.setDescription(message);
         userPassDialog.setVisible(true);
         if (userPassDialog.getReturnStatus() != UserPassDialog.RET_OK) {
             return null;
@@ -270,33 +269,12 @@ public class SVNAuthenticationManager implements ISVNAuthenticationManager {
     }
 
     private Credentials loadCredentials(SVNURL url) {
-        Credentials credentials = new Credentials();
-        // check stored credential with a backward compatible key.
-        credentials.username = TeamSettings.get(repoDef.getUrl() + "!" + KEY_USERNAME_SUFFIX);
-        credentials.password = TeamUtils
-                .decodePassword(TeamSettings.get(repoDef.getUrl() + "!" + KEY_PASSWORD_SUFFIX));
-        if (credentials.username != null) {
-            return credentials;
-        }
-
-        String saveUri = url.getProtocol() + "://" + url.getHost() + ":" + url.getPort();
-        credentials.username = TeamSettings.get(saveUri + "!" + KEY_USERNAME_SUFFIX);
-        credentials.password = TeamUtils
-                .decodePassword(TeamSettings.get(saveUri + "!" + KEY_PASSWORD_SUFFIX));
-        return credentials;
+        return TeamUtils.loadCredentials(url.toString(), url.getProtocol(), url.getHost(), url.getPath(),
+                url.getPort());
     }
 
     private void saveCredentials(SVNURL url, Credentials credentials) {
-        String saveUri = url.getProtocol() + "://" + url.getHost() + ":" + url.getPort();
-        TeamSettings.set(saveUri + "!" + KEY_USERNAME_SUFFIX, credentials.username);
-        TeamSettings.set(saveUri + "!" + KEY_PASSWORD_SUFFIX, TeamUtils.encodePassword(credentials.password));
+        TeamUtils.saveCredentials(url.toString(), url.getProtocol(), url.getHost(), url.getPath(), url.getPort(), credentials);
     }
 
-    /**
-     * POJO to hold credentials.
-     */
-    public static class Credentials {
-        public String username = null;
-        public String password = null;
-    }
 }

@@ -28,6 +28,11 @@ package org.omegat.core.team2.impl;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
+import org.omegat.core.Core;
+import org.omegat.core.team2.TeamSettings;
+import org.omegat.util.Log;
+import org.omegat.util.StringUtil;
+
 /**
  * Some utility methods for team code.
  *
@@ -35,7 +40,83 @@ import java.util.Base64;
  */
 public final class TeamUtils {
 
+    /**
+     * POJO to hold credentials.
+     */
+    public static class Credentials {
+        public String username = null;
+        public String password = null;
+        public boolean perHost = true;
+    }
+
     private TeamUtils() {
+    }
+
+    static final String KEY_USERNAME_SUFFIX = "username";
+    static final String KEY_PASSWORD_SUFFIX = "password";
+
+    static final String KEY_FINGERPRINT_SUFFIX = "fingerprint";
+
+    public static Credentials loadCredentials(String url, String scheme, String host, String path, int port) {
+        Credentials credentials = new Credentials();
+        // we use
+        // 1. "schema://server:port/path"
+        // 2. "/path/to/.ssh/id_rsa"
+        // 3. "schema://server"
+        // 4. "schema://server:port",
+        // check following order
+        credentials.username = TeamSettings.get(url + "!" + KEY_USERNAME_SUFFIX);
+        credentials.password = decodePassword(TeamSettings.get(url + "!" + KEY_PASSWORD_SUFFIX));
+        if (credentials.password != null) {
+            credentials.perHost = false;
+            return credentials;
+        }
+
+        if (scheme == null) {
+            url = path;
+            credentials.perHost = false;
+        } else if (port != -1){
+            url = scheme + "://" + host + ":" + port;
+            credentials.perHost = true;
+        } else {
+            url = scheme + "://" + host;
+            credentials.perHost = true;
+        }
+        credentials.username = TeamSettings.get(url + "!" + KEY_USERNAME_SUFFIX);
+        credentials.password = decodePassword(TeamSettings.get(url + "!" + KEY_PASSWORD_SUFFIX));
+        return credentials;
+    }
+
+    public static void saveCredentials(String url, String scheme, String host, String path, int port,
+                                       Credentials credentials) {
+        String key;
+        if (scheme == null) {
+            key = path;
+        } else if (credentials.perHost && host != null) {
+            key = scheme + "://" + host + (port != -1 ? ":" + port : "");
+        } else {
+            key = url; // uri.getRawPath();
+        }
+        try {
+            if (!StringUtil.isEmpty(credentials.username)) {
+                TeamSettings.set(key + "!" + KEY_USERNAME_SUFFIX, credentials.username);
+            }
+            TeamSettings.set(key + "!" + KEY_PASSWORD_SUFFIX, TeamUtils.encodePassword(credentials.password));
+        } catch (Exception e) {
+            Log.logErrorRB(e, "TEAM_ERROR_SAVE_CREDENTIALS");
+        }
+    }
+
+    public static String loadFingerprint(String url) {
+        return TeamSettings.get(url + "!" + KEY_FINGERPRINT_SUFFIX);
+    }
+
+    public static void saveFingerprint(String url, String fingerprint) {
+        try {
+            TeamSettings.set(url + "!" + KEY_FINGERPRINT_SUFFIX, fingerprint);
+        } catch (Exception e) {
+            Core.getMainWindow().displayErrorRB(e, "TEAM_ERROR_SAVE_CREDENTIALS", null, "TF_ERROR");
+        }
     }
 
     public static String encodePassword(String pass) {

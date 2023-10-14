@@ -47,13 +47,12 @@ import org.eclipse.jgit.transport.URIish;
 
 import org.omegat.core.Core;
 import org.omegat.core.KnownException;
-import org.omegat.core.team2.TeamSettings;
 import org.omegat.core.team2.gui.PassphraseDialog;
 import org.omegat.core.team2.gui.UserPassDialog;
+import org.omegat.core.team2.impl.TeamUtils.Credentials;
 import org.omegat.gui.main.IMainWindow;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
-import org.omegat.util.StringUtil;
 
 /**
  * Git repository credentials provider. One credential provider created for all
@@ -83,9 +82,6 @@ import org.omegat.util.StringUtil;
 
 public class GITCredentialsProvider extends CredentialsProvider {
 
-    private static final String KEY_USERNAME_SUFFIX = "username";
-    private static final String KEY_PASSWORD_SUFFIX = "password";
-    private static final String KEY_FINGERPRINT_SUFFIX = "fingerprint";
     private static final Pattern[] fingerPrintRegex = new Pattern[] {
             Pattern.compile("The authenticity of host '" + /* host */ ".*" + "' can't be established\\.\\n" +
             /* key_type */ "(RSA|DSA|ECDSA|EDDSA)" + " key fingerprint is " +
@@ -144,57 +140,11 @@ public class GITCredentialsProvider extends CredentialsProvider {
     }
 
     private Credentials loadCredentials(URIish uri) {
-        Credentials credentials = new Credentials();
-        // we use "schema://server:port" or "/path/to/.ssh/id_rsa"
-        // and backward compatible "schema://server:port/path"
-        // check following order
-        String url = uri.toString();
-        credentials.username = TeamSettings.get(url + "!" + KEY_USERNAME_SUFFIX);
-        credentials.password = TeamUtils.decodePassword(TeamSettings.get(url + "!" + KEY_PASSWORD_SUFFIX));
-        if (credentials.password == null) {
-            if (uri.getScheme() == null) {
-                url = uri.getPath();
-            } else {
-                url = uri.getScheme() + "://" + uri.getHost() + ":" + uri.getPort();
-            }
-            credentials.username = TeamSettings.get(url + "!" + KEY_USERNAME_SUFFIX);
-            credentials.password = TeamUtils
-                    .decodePassword(TeamSettings.get(url + "!" + KEY_PASSWORD_SUFFIX));
-        }
-        return credentials;
+        return TeamUtils.loadCredentials(uri.toString(), uri.getScheme(), uri.getHost(), uri.getPath(), uri.getPort());
     }
 
     private void saveCredentials(URIish uri, Credentials credentials) {
-        String url;
-        if (uri.getScheme() == null) {
-            url = uri.getPath();
-        } else if (uri.getScheme() != null && uri.getHost() != null) {
-            url = uri.getScheme() + "://" + uri.getHost() + ":" + uri.getPort();
-        } else {
-            url = uri.getRawPath();
-        }
-        try {
-            if (!StringUtil.isEmpty(credentials.username)) {
-                TeamSettings.set(url + "!" + KEY_USERNAME_SUFFIX, credentials.username);
-            }
-            TeamSettings.set(url + "!" + KEY_PASSWORD_SUFFIX, TeamUtils.encodePassword(credentials.password));
-        } catch (Exception e) {
-            Log.logErrorRB(e, "TEAM_ERROR_SAVE_CREDENTIALS");
-        }
-    }
-
-    private String loadFingerprint(URIish uri) {
-        String url = uri.toString();
-        return TeamSettings.get(url + "!" + KEY_FINGERPRINT_SUFFIX);
-    }
-
-    private void saveFingerprint(URIish uri, String fingerprint) {
-        String url = uri.toString();
-        try {
-            TeamSettings.set(url + "!" + KEY_FINGERPRINT_SUFFIX, fingerprint);
-        } catch (Exception e) {
-            Core.getMainWindow().displayErrorRB(e, "TEAM_ERROR_SAVE_CREDENTIALS", null, "TF_ERROR");
-        }
+        TeamUtils.saveCredentials(uri.toString(), uri.getScheme(), uri.getHost(), uri.getPath(), uri.getPort(), credentials);
     }
 
     /**
@@ -268,7 +218,7 @@ public class GITCredentialsProvider extends CredentialsProvider {
                 // RSA key fingerprint is
                 // e2:d3:84:d5:86:e7:68:69:a0:aa:a6:ad:a3:a0:ab:a2.
                 // Are you sure you want to continue connecting?
-                String storedFingerprint = loadFingerprint(uri);
+                String storedFingerprint = TeamUtils.loadFingerprint(uri.toString());
                 // exhausted messages to promptText and reset sb
                 String promptText = sb.append(item.getPromptText()).toString();
                 sb = new StringBuilder();
@@ -340,7 +290,7 @@ public class GITCredentialsProvider extends CredentialsProvider {
                 JOptionPane.WARNING_MESSAGE);
         if (choice == JOptionPane.YES_OPTION) {
             ((CredentialItem.YesNoType) item).setValue(true);
-            saveFingerprint(uri, promptedFingerprint);
+            TeamUtils.saveFingerprint(uri.toString(), promptedFingerprint);
         } else {
             ((CredentialItem.YesNoType) item).setValue(false);
         }
@@ -356,7 +306,7 @@ public class GITCredentialsProvider extends CredentialsProvider {
                     String answer = console.readLine("([y]es or [n]o): ");
                     if (answer.equalsIgnoreCase("y") || answer.equalsIgnoreCase("yes")) {
                         ((CredentialItem.YesNoType) item).setValue(true);
-                        saveFingerprint(uri, promptedFingerprint);
+                        TeamUtils.saveFingerprint(uri.toString(), promptedFingerprint);
                         succeeded = true;
                         break;
                     } else if (answer.equalsIgnoreCase("n") || answer.equalsIgnoreCase("no")) {
@@ -425,7 +375,7 @@ public class GITCredentialsProvider extends CredentialsProvider {
         } else {
             UserPassDialog userPassDialog = new UserPassDialog(mw.getApplicationFrame());
             userPassDialog.setLocationRelativeTo(Core.getMainWindow().getApplicationFrame());
-            userPassDialog.descriptionTextArea.setText(OStrings.getString(
+            userPassDialog.setDescription(OStrings.getString(
                     credentials.username == null ? "TEAM_USERPASS_FIRST" : "TEAM_USERPASS_WRONG",
                     uri.getHumanishName()));
             if (uri.getUser() != null && !"".equals(uri.getUser())) {
@@ -469,7 +419,7 @@ public class GITCredentialsProvider extends CredentialsProvider {
     }
 
     private Credentials askCredentials(URIish uri, Credentials credentials, boolean passwordOnly,
-            String msg) {
+                                                 String msg) {
         Credentials result;
         if (isGUI()) {
             result = askCredentialsGUI(uri, credentials, passwordOnly, msg);
@@ -504,6 +454,7 @@ public class GITCredentialsProvider extends CredentialsProvider {
         Credentials credentials = loadCredentials(uri);
         credentials.username = null;
         credentials.password = null;
+        credentials.perHost = false;
         saveCredentials(uri, credentials);
     }
 
@@ -538,11 +489,4 @@ public class GITCredentialsProvider extends CredentialsProvider {
         return false;
     }
 
-    /**
-     * POJO to hold credentials.
-     */
-    public static class Credentials {
-        public String username = null;
-        public String password = null;
-    }
 }

@@ -40,7 +40,7 @@ import org.omegat.util.OStrings;
  * @author Briac Pilpre
  * @author Hiroshi Miura
  */
-public class PluginInformation {
+public final class PluginInformation {
 
     public enum Status {
         INSTALLED, BUNDLED, NEW,

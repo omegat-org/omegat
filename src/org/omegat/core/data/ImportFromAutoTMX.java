@@ -198,7 +198,7 @@ public class ImportFromAutoTMX {
                     didAnyChange = true;
                 }                
             } else if (oldEntry.isTranslated()) {
-                if (! oldEntry.getTranslationText().equals(trans.getTranslationText())) {
+                if (!oldEntry.getTranslationText().equals(trans.getTranslationText())) {
                     didAnyChange = true;
                 }
             } else {

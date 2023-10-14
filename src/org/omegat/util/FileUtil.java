@@ -497,7 +497,7 @@ public final class FileUtil {
                 if (ioe instanceof FileSystemLoopException) {
                     // source file folder has a looped symbolic links
                     String p = ((FileSystemLoopException) ioe).getFile();
-                    Core.getMainWindow().displayWarningRB("TF_LOAD_WARN_SOURCE_LOOP_EXCEPTION",null, p);
+                    Core.getMainWindow().displayWarningRB("TF_LOAD_WARN_SOURCE_LOOP_EXCEPTION", null, p);
                     Log.logWarningRB("TF_LOAD_WARN_SOURCE_LOOP_EXCEPTION", p);
                 } else if (ioe instanceof AccessDeniedException) {
                     String p = ((AccessDeniedException) ioe).getFile();

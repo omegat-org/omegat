@@ -190,7 +190,7 @@ public final class PluginInstaller {
         try (URLClassLoader pluginsClassLoader = new URLClassLoader(urls,
                 PluginsPreferencesController.class.getClassLoader())) {
             for (Enumeration<URL> mlist = pluginsClassLoader.getResources("META-INF/MANIFEST.MF"); mlist
-                    .hasMoreElements(); ) {
+                    .hasMoreElements();) {
                 URL mu = mlist.nextElement();
                 pluginInfo.addAll(parsePluginJarFileManifest(mu));
             }

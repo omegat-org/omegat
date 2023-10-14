@@ -762,7 +762,6 @@ ext.makeMacTask = { args ->
         from tasks.getByName(signedInstallTaskName).outputs
         into zipRoot
         archiveFileName.set("${zipRoot}.zip")
-        group = 'omegat distribution'
         dependsOn signedInstallTaskName
     }
 
@@ -783,7 +782,6 @@ ext.makeMacTask = { args ->
                         '--file', inputs.files.singleFile
             }
         }
-        group = 'omegat distribution'
         dependsOn signedZipTaskName
     }
 
@@ -803,7 +801,6 @@ ext.makeMacTask = { args ->
             }
         }
         archiveFileName.set("${zipRoot}.zip")
-        group = 'omegat distribution'
         dependsOn signedInstallTaskName
     }
 }

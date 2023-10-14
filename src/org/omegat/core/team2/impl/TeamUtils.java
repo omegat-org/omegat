@@ -75,7 +75,7 @@ public final class TeamUtils {
         if (scheme == null) {
             url = path;
             credentials.perHost = false;
-        } else if (port != -1){
+        } else if (port != -1) {
             url = scheme + "://" + host + ":" + port;
             credentials.perHost = true;
         } else {
@@ -95,7 +95,7 @@ public final class TeamUtils {
         } else if (credentials.perHost && host != null) {
             key = scheme + "://" + host + (port != -1 ? ":" + port : "");
         } else {
-            key = url; // uri.getRawPath();
+            key = url;
         }
         try {
             if (!StringUtil.isEmpty(credentials.username)) {

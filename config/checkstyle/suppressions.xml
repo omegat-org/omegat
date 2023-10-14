@@ -106,10 +106,14 @@
     <suppress files="(IssuesPanel|PreferencesWindow)Controller\.java" checks="MethodLength"/>
     <suppress files="MatchesVarExpansion\.java" checks="InnerAssignment"/>
     <suppress files="EditorTextArea3\.java" checks="MethodLength"/>
-    <suppress files="AutoCompleter\.java" checks="EmptyBlock"/>
+    <suppress files="AutoCompleter\.java" checks="EmptyStatement"/>
     <suppress files="RepositoriesMappingController\.java" checks="MethodLength"/>
     <suppress files="ProjectPropertiesDialog\.java" checks="(MethodLength|ParameterNumber)"/>
     <suppress files="InstanceEditor\.java" checks="ParameterNumber"/>
+    <suppress files="EditorController\.java" checks="(File|Method)Length"/>
+    <suppress files="ProjectUICommands\.java" checks="MethodLength"/>
+    <suppress files="ProjectFilesListController\.java" checks="MethodLength"/>
+    <suppress files="BaseMainWindowMenu\.java" checks="MethodLength"/>
 
     <!-- Temporary suppress errors -->
     <!-- These errors should be fixed in future changes -->

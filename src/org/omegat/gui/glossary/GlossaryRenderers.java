@@ -38,7 +38,7 @@ import org.omegat.util.Preferences;
  * @author Aaron Madlon-Kay
  *
  */
-public class GlossaryRenderers {
+public final class GlossaryRenderers {
     public static final IGlossaryRenderer DEFAULT_RENDERER = new DefaultGlossaryRenderer();
     private static final List<IGlossaryRenderer> GLOSSARY_RENDERERS = new ArrayList<>();
     static {

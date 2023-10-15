@@ -107,7 +107,7 @@ public class MappingRulesModel extends AbstractTableModel {
             }
             break;
         default:
-            // we have only two columns
+            throw new IllegalArgumentException();
         }
     }
 

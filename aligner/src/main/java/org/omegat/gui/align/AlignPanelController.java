@@ -1157,6 +1157,7 @@ public class AlignPanelController {
                         comp.setBackground(Styles.EditorColor.COLOR_ALIGNER_NEEDSREVIEW.getColor());
                         break;
                     case DEFAULT:
+                    default:
                         // Leave color as-is
                     }
                 } else if (row == ppRow && column == ppCol) {
@@ -1305,8 +1306,9 @@ public class AlignPanelController {
                 return BUNDLE.getString("ALIGNER_PANEL_TABLE_COL_SOURCE");
             case COL_TRG:
                 return BUNDLE.getString("ALIGNER_PANEL_TABLE_COL_TARGET");
+            default:
+                throw new IllegalArgumentException();
             }
-            throw new IllegalArgumentException();
         }
 
         @Override
@@ -1337,8 +1339,9 @@ public class AlignPanelController {
                 return rowToSourceLine.get(row);
             case COL_TRG:
                 return rowToTargetLine.get(row);
+            default:
+                throw new IllegalArgumentException();
             }
-            throw new IllegalArgumentException();
         }
 
         @Override

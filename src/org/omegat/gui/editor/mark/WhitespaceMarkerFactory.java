@@ -35,7 +35,10 @@ import org.omegat.util.gui.Styles;
  *
  * @author Martin Fleurke
  */
-public class WhitespaceMarkerFactory {
+public final class WhitespaceMarkerFactory {
+
+    private WhitespaceMarkerFactory() {
+    }
 
     public static void init() throws Exception {
         Core.registerMarker(new SpaceMarker());

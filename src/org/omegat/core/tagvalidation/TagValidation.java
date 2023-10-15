@@ -257,6 +257,7 @@ public final class TagValidation {
                 }
                 break;
             case SINGLE:
+                // Ignore
                 break;
             default:
                 throw new IllegalArgumentException();

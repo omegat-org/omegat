@@ -155,7 +155,7 @@ public class ErrorReport {
     /**
      * Obtain the appropriate user-facing string for an error.
      *
-     * @param error
+     * @param error type of TagError
      * @return The localized error name
      */
     public static String localizedTagError(TagError error) {
@@ -177,7 +177,7 @@ public class ErrorReport {
         case UNSPECIFIED:
             return OStrings.getString("TAG_ERROR_UNSPECIFIED");
         default:
-            return null;
+            throw new IllegalArgumentException();
         }
     }
 }

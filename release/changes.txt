@@ -8,6 +8,9 @@
 
   Implemented requests:
 
+  - Download team project with a shallow history
+  https://sourceforge.net/p/omegat/feature-requests/1720/
+
   - ResourceBundle Filter: default not to escape Unicode character
   https://sourceforge.net/p/omegat/feature-requests/1716/
 

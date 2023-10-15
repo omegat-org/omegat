@@ -605,28 +605,6 @@ distributions {
                 "${application.applicationName}_${project.version}${omtVersion.beta}_Source.zip")
     }
 
-    mac {
-        contents {
-            from(genMac.outputs) {
-                exclude '**/MacOS/OmegaT', '**/Info.plist', '**/java.entitlements'
-            }
-            from(genMac.outputs) {
-                include '**/MacOS/OmegaT'
-                fileMode 0755
-            }
-            from(genMac.outputs) {
-                include '**/Info.plist'
-                expand(version: project.version,
-                        // $APP_ROOT is expanded at runtime by the launcher binary
-                        configfile: '$APP_ROOT/Contents/Resources/Configuration.properties')
-            }
-            into('OmegaT.app/Contents/Java') {
-                with main.contents
-                exclude '*.sh', '*.kaptn', 'OmegaT', 'OmegaT.bat', 'omegat.desktop', '*.exe'
-            }
-        }
-    }
-
     linux64 {
         contents {
             with main.contents
@@ -659,12 +637,6 @@ distributions {
 }
 
 sourceDistZip.dependsOn genDocIndex
-
-installMacDist {
-    doFirst {
-        delete "$destinationDir/OmegaT.app/Contents/PlugIns/jre.bundle"
-    }
-}
 
 def hunspellJar = configurations.runtimeClasspath.files.find {
     it.name.startsWith('hunspell')
@@ -702,10 +674,33 @@ tasks.register('mac') {
 }
 
 ext.makeMacTask = { args ->
+    def installTaskName = args.name + "InstallDist"
+    def signedInstallTaskName = args.name + "InstallSignedDist"
     def distZipTaskName = args.name + "DistZip"
+    def signedZipTaskName = args.name + "SignedDistZip"
+    def notarizeTaskName = args.name + "Notarize"
+    def stapledNotarizedDistZipTaskName = args.name + "StapledNotarizedDistZip"
+
     tasks.register(distZipTaskName, Zip) {
         description = "Create Mac distribution for ${args.name}"
-        with distributions.mac.contents
+        // mac specific contents
+        from(genMac.outputs) {
+            exclude '**/MacOS/OmegaT', '**/Info.plist', '**/java.entitlements'
+        }
+        from(genMac.outputs) {
+            include '**/MacOS/OmegaT'
+            fileMode 0755
+        }
+        from(genMac.outputs) {
+            include '**/Info.plist'
+            expand(version: project.version,
+                    // $APP_ROOT is expanded at runtime by the launcher binary
+                    configfile: '$APP_ROOT/Contents/Resources/Configuration.properties')
+        }
+        into('OmegaT.app/Contents/Java') {
+            with distributions.main.contents
+            exclude '*.sh', '*.kaptn', 'OmegaT', 'OmegaT.bat', 'omegat.desktop', '*.exe'
+        }
         duplicatesStrategy = DuplicatesStrategy.INCLUDE
         archiveFileName.set("${application.applicationName}_${project.version}${omtVersion.beta}_${args.suffix}.zip")
         if (args.jrePath && !args.jrePath.empty) {
@@ -724,21 +719,59 @@ ext.makeMacTask = { args ->
     }
     mac.dependsOn distZipTaskName
 
-    def signedInstallTaskName = args.name + "InstallSignedDist"
-    def signedZipTaskName = args.name + "SignedDistZip"
-    def notarizeTaskName = args.name + "Notarize"
-    def stapledNotarizedDistZipTaskName = args.name + "StapledNotarizedDistZip"
+    tasks.register(installTaskName, Sync) {
+        description = 'Build a Mac distribution.'
+        onlyIf {
+            condition(!args.jrePath || !args.jrePath.empty, 'JRE not found')
+        }
+        // mac specific contents
+        from(genMac.outputs) {
+            exclude '**/MacOS/OmegaT', '**/Info.plist', '**/java.entitlements'
+        }
+        from(genMac.outputs) {
+            include '**/MacOS/OmegaT'
+            fileMode 0755
+        }
+        from(genMac.outputs) {
+            include '**/Info.plist'
+            expand(version: project.version,
+                    // $APP_ROOT is expanded at runtime by the launcher binary
+                    configfile: '$APP_ROOT/Contents/Resources/Configuration.properties')
+        }
+        into('OmegaT.app/Contents/Java') {
+            with distributions.main.contents
+            exclude '*.sh', '*.kaptn', 'OmegaT', 'OmegaT.bat', 'omegat.desktop', '*.exe'
+        }
+        if (args.jrePath && !args.jrePath.empty) {
+            from(zipTree(args.jrePath.singleFile)) {
+                into 'OmegaT.app/Contents/PlugIns'
+                includeEmptyDirs = false
+                eachFile {
+                    replaceRelativePathSegment(it, /jdk.*-jre/, 'jre.bundle')
+                }
+            }
+        }
+        duplicatesStrategy = DuplicatesStrategy.INCLUDE
+        destinationDir file(layout.buildDirectory.file("install/${application.applicationName}-${args.suffix}"))
+        doFirst {
+            delete "$destinationDir/OmegaT.app/Contents/PlugIns/jre.bundle"
+        }
+        group = 'distribution'
+        dependsOn hunspellSignedJar
+    }
+
     tasks.register(signedInstallTaskName, Sync) {
         description = 'Build a signed Mac distribution. Requires an Apple Developer Account.'
         onlyIf {
             // Set this in e.g. local.properties
-            condition(project.hasProperty('macCodesignIdentity'), 'Code signing property not set')
+            conditions([project.hasProperty('macCodesignIdentity'), 'Code signing property not set'],
+                       [args.jrePath && !args.jrePath.empty, 'JRE not found'])
         }
-        with distributions.mac.contents
-        duplicatesStrategy = DuplicatesStrategy.INCLUDE
+        from(tasks.getByName(installTaskName).outputs)
         from(hunspellSignedJar.outputs) {
             into 'OmegaT.app/Contents/Java/lib'
         }
+        duplicatesStrategy = DuplicatesStrategy.INCLUDE
         destinationDir file(layout.buildDirectory.file("install/${application.applicationName}-${args.suffix}_Signed"))
         doFirst {
             delete "$destinationDir/OmegaT.app/Contents/PlugIns/jre.bundle"
@@ -753,8 +786,8 @@ ext.makeMacTask = { args ->
                         file("${destinationDir}/OmegaT.app")
             }
         }
+        group = 'distribution'
         dependsOn hunspellSignedJar
-        dependsOn signedInstallTaskName
     }
 
     tasks.register(signedZipTaskName, Zip) {
@@ -762,6 +795,7 @@ ext.makeMacTask = { args ->
         from tasks.getByName(signedInstallTaskName).outputs
         into zipRoot
         archiveFileName.set("${zipRoot}.zip")
+        group = 'omegat distribution'
         dependsOn signedInstallTaskName
     }
 
@@ -804,9 +838,9 @@ ext.makeMacTask = { args ->
         dependsOn signedInstallTaskName
     }
 }
-makeMacTask(name: 'macNoJRE', suffix: 'Mac_without_JRE')
-makeMacTask(name: 'macX86JRE', suffix: 'Mac_x86', jrepath: macJRE)
-makeMacTask(name: 'macArmJRE', suffix: 'Mac_arm', jrepath: armMacJRE)
+makeMacTask(name: 'mac', suffix: 'Mac_without_JRE')
+makeMacTask(name: 'macX86', suffix: 'Mac_x86', jrePath: macJRE)
+makeMacTask(name: 'macArm', suffix: 'Mac_arm', jrePath: armMacJRE)
 
 linux64DistTar {
     onlyIf {

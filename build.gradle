@@ -843,17 +843,16 @@ tasks.register('linux') {
 ext.makeLinuxTask = { args ->
     def distTaskName = "install" + args.name.capitalize() + "Dist"
     def tarTaskName = args.name + "DistTarBz"
-    def distTaskDestination = file(layout.buildDirectory.file("install/${args.name}"))
     tasks.register(distTaskName, Sync) {
         group = 'distribution'
         description = "Create a linux installDist for ${args.name}. "
         with distributions.main.contents
-        into distTaskDestination
+        destinationDir file(layout.buildDirectory.file("install/${application.applicationName}-${args.suffix}"))
         onlyIf {
             condition(!args.jrePath.empty, 'ARM64 JRE not found')
         }
         doFirst {
-            delete "$distTaskDestination/jre"
+            delete "$destinationDir/jre"
         }
         if (args.jrePath && !args.jrePath.empty) {
             from(tarTree(args.jrePath.singleFile)) {

@@ -486,7 +486,7 @@ tasks.register('genMac') {
                 identifier: 'org.omegat.OmegaT',
                 icon: 'images/OmegaT.icns',
                 version: '${version}',
-                jvmrequired: javaVersion,
+                jvmrequired: '${jvmRequired}',
                 shortversion: '${version}',
                 mainclassname: application.mainClass) {
             option(value: "-Xdock:name=${applicationName}")
@@ -500,7 +500,7 @@ tasks.register('genMac') {
             bundledocument(extensions: '*',
                     name: 'All Files',
                     role: 'none')
-            plistentry(key: 'JVMRuntime', value: 'jre.bundle')
+            plistentry(key: 'JVMRuntime', value: '${jreRuntime}')
         }
     }
 }
@@ -694,6 +694,8 @@ ext.makeMacTask = { args ->
         from(genMac.outputs) {
             include '**/Info.plist'
             expand(version: project.version,
+                    jvmRequired: '11+',
+                    jreRuntime: !args.jrePath ? 'MinimumJava11' : 'jre.bundle',
                     // $APP_ROOT is expanded at runtime by the launcher binary
                     configfile: '$APP_ROOT/Contents/Resources/Configuration.properties')
         }
@@ -735,6 +737,8 @@ ext.makeMacTask = { args ->
         from(genMac.outputs) {
             include '**/Info.plist'
             expand(version: project.version,
+                    jvmRequired: '11+',
+                    jreRuntime: !args.jrePath ? 'MinimumJava11' : 'jre.bundle',
                     // $APP_ROOT is expanded at runtime by the launcher binary
                     configfile: '$APP_ROOT/Contents/Resources/Configuration.properties')
         }

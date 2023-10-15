@@ -1320,6 +1320,10 @@ test {
 
 tasks.register('testIntegration', JavaExec) {
     description = 'Run integration tests. Pass repo URL as -Domegat.test.repo=<repo>'
+    javaLauncher = javaToolchains.launcherFor {
+        languageVersion = JavaLanguageVersion.of(17)
+        vendor = JvmVendorSpec.ADOPTIUM
+    }
     group = 'omegat workflow'
     mainClass = 'org.omegat.core.data.TestTeamIntegration'
     classpath = sourceSets.testIntegration.runtimeClasspath

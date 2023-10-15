@@ -106,7 +106,7 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
 
     // allow override timeout.
     protected static final int TIMEOUT = 30; // seconds
-    protected static int CLONE_DEPTH = 1; // clone depth
+    protected static final int CLONE_DEPTH = 1; // clone depth
 
     String repositoryURL;
     String branch;

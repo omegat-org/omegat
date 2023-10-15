@@ -38,7 +38,7 @@ import org.omegat.util.Preferences;
 @SuppressWarnings("serial")
 public class ChoosePluginFile extends JFileChooser {
 
-    public ChoosePluginFile () {
+    public ChoosePluginFile() {
         super(Preferences.getPreference(Preferences.CURRENT_FOLDER));
 
         setMultiSelectionEnabled(false);

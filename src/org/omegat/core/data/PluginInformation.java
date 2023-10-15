@@ -40,7 +40,7 @@ import org.omegat.util.OStrings;
  * @author Briac Pilpre
  * @author Hiroshi Miura
  */
-public class PluginInformation {
+public final class PluginInformation {
 
     public enum Status {
         INSTALLED, BUNDLED, NEW,
@@ -108,14 +108,14 @@ public class PluginInformation {
     /**
      * @return category type of plugin as PluginType enum
      */
-    public final PluginUtils.PluginType getCategory() {
+    public PluginUtils.PluginType getCategory() {
         return category;
     }
 
     /**
      * @return link URL of plugin homepage
      */
-    public final String getLink() {
+    public String getLink() {
         return link;
     }
 
@@ -130,7 +130,7 @@ public class PluginInformation {
      * @return true if plugin is bundled with OmegaT distribution, otherwise
      *         false when 3rd party plugin
      */
-    public final boolean isBundled() {
+    public boolean isBundled() {
         return status == Status.BUNDLED;
     }
 

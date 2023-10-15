@@ -547,6 +547,9 @@ public final class Main {
                 case EMPTY:
                     wr.writeEntry(ste.getSrcText(), "", null, null, 0, null, 0, null);
                     break;
+                default:
+                    // should not come here
+                    throw new IllegalArgumentException();
                 }
             }
         } catch (IOException e) {

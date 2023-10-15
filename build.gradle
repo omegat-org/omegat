@@ -885,6 +885,7 @@ ext.makeLinuxTask = { args ->
         archiveExtension = 'tar.bz2'
         group = 'omegat distribution'
     }
+    assemble.dependsOn tarTaskName
     linux.dependsOn tarTaskName
 }
 makeLinuxTask(name: "linux64", suffix: "Linux_64", jrePath: linux64JRE)

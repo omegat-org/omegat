@@ -666,36 +666,6 @@ distributions {
             }
         }
     }
-
-    linux64 {
-        contents {
-            with main.contents
-            exclude 'OmegaT.bat', '*.exe'
-            if (!linux64JRE.empty) {
-                from(tarTree(linux64JRE.singleFile)) {
-                    includeEmptyDirs = false
-                    eachFile {
-                        replaceRelativePathSegment(it, /jdk.*-jre/, 'jre')
-                    }
-                }
-            }
-        }
-    }
-
-    linuxArm64 {
-        contents {
-            with main.contents
-            exclude 'OmegaT.bat'
-            if (!linuxArm64JRE.empty) {
-                from(tarTree(linuxArm64JRE.singleFile)) {
-                    includeEmptyDirs = false
-                    eachFile {
-                        replaceRelativePathSegment(it, /jdk.*-jre/, 'jre')
-                    }
-                }
-            }
-        }
-    }
 }
 
 sourceDistZip.dependsOn genDocIndex
@@ -865,42 +835,60 @@ tasks.register('mac') {
     group = 'omegat distribution'
 }
 
-linux64DistTar {
-    onlyIf {
-        condition(!linux64JRE.empty, 'JRE not found')
-    }
-    doFirst {
-        delete "$destinationDirectory/jre"
-    }
-    application {
-        archiveFileName.set("${applicationName}_${project.version}${omtVersion.beta}_Linux_64.tar.bz2")
-    }
-    compression = Compression.BZIP2
-    archiveExtension = 'tar.bz2'
-    group = 'omegat distribution'
-}
-
-linuxArm64DistTar {
-    onlyIf {
-        condition(!linuxArm64JRE.empty, 'ARM64 JRE not found')
-    }
-    doFirst {
-        delete "$destinationDirectory/jre"
-    }
-    application {
-        archiveFileName.set("${applicationName}_${project.version}${omtVersion.beta}_Linux_ARM64.tar.bz2")
-    }
-    compression = Compression.BZIP2
-    archiveExtension = 'tar.bz2'
-    group = 'omegat distribution'
-}
-
 tasks.register('linux') {
-    dependsOn linux64DistTar
-    dependsOn linuxArm64DistTar
     description = 'Build the Linux distributions.'
     group = 'omegat distribution'
 }
+
+ext.makeLinuxTask = { args ->
+    def distTaskName = "install" + args.name.capitalize() + "Dist"
+    def tarTaskName = args.name + "DistTarBz"
+    def distTaskDestination = file(layout.buildDirectory.file("install/${args.name}"))
+    tasks.register(distTaskName, Sync) {
+        group = 'distribution'
+        description = "Create a linux installDist for ${args.name}. "
+        with distributions.main.contents
+        into distTaskDestination
+        onlyIf {
+            condition(!args.jrePath.empty, 'ARM64 JRE not found')
+        }
+        doFirst {
+            delete "$distTaskDestination/jre"
+        }
+        if (args.jrePath && !args.jrePath.empty) {
+            from(tarTree(args.jrePath.singleFile)) {
+                includeEmptyDirs = false
+                eachFile {
+                    replaceRelativePathSegment(it, /jdk.*-jre/, 'jre')
+                }
+            }
+        }
+    }
+    tasks.register(tarTaskName, Tar) {
+        description = "Create a Linux distribution for ${args.name}. "
+        with distributions.main.contents
+        onlyIf {
+            condition(!args.jrePath.empty, 'ARM64 JRE not found')
+        }
+        if (args.jrePath && !args.jrePath.empty) {
+            from(tarTree(args.jrePath.singleFile)) {
+                includeEmptyDirs = false
+                eachFile {
+                    replaceRelativePathSegment(it, /jdk.*-jre/, 'jre')
+                }
+            }
+        }
+        application {
+            archiveFileName.set("${applicationName}_${project.version}${omtVersion.beta}_${args.suffix}.tar.bz2")
+        }
+        compression = Compression.BZIP2
+        archiveExtension = 'tar.bz2'
+        group = 'omegat distribution'
+    }
+    linux.dependsOn tarTaskName
+}
+makeLinuxTask(name: "linux64", suffix: "Linux_64", jrePath: linux64JRE)
+makeLinuxTask(name: "linuxArm64", suffix: "Linux_ARM64", jrePath: linuxArm64JRE)
 
 // We bundle our startup scripts separately, so disable startScripts.
 startScripts.enabled = false

@@ -25,8 +25,6 @@
 
 package org.omegat.core.team2.impl;
 
-import static org.omegat.core.team2.impl.TeamUtils.*;
-
 import java.io.Console;
 
 import javax.net.ssl.TrustManager;
@@ -50,6 +48,7 @@ import org.omegat.core.Core;
 import org.omegat.core.KnownException;
 import org.omegat.core.team2.ProjectTeamSettings;
 import org.omegat.core.team2.gui.UserPassDialog;
+import org.omegat.core.team2.impl.TeamUtils.Credentials;
 import org.omegat.gui.main.ConsoleWindow;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
@@ -277,7 +276,8 @@ public class SVNAuthenticationManager implements ISVNAuthenticationManager {
     }
 
     private void saveCredentials(SVNURL url, Credentials credentials) {
-        TeamUtils.saveCredentials(url.toString(), url.getProtocol(), url.getHost(), url.getPath(), url.getPort(), credentials);
+        TeamUtils.saveCredentials(url.toString(), url.getProtocol(), url.getHost(), url.getPath(),
+                url.getPort(), credentials);
     }
 
 }

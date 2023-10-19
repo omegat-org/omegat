@@ -88,7 +88,7 @@ public final class TeamUtils {
     }
 
     public static void saveCredentials(String url, String scheme, String host, String path, int port,
-                                       Credentials credentials) {
+            Credentials credentials) {
         String key;
         if (scheme == null) {
             key = path;

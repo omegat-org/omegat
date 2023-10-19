@@ -74,7 +74,9 @@ public class UserPassDialog extends javax.swing.JDialog {
         usernameField.requestFocusInWindow();
     }
 
-    /** @return the return status of this dialog - one of RET_OK or RET_CANCEL */
+    /**
+     * @return the return status of this dialog - one of RET_OK or RET_CANCEL
+     */
     public int getReturnStatus() {
         return returnStatus;
     }

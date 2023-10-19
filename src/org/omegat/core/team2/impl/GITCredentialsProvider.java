@@ -140,11 +140,13 @@ public class GITCredentialsProvider extends CredentialsProvider {
     }
 
     private Credentials loadCredentials(URIish uri) {
-        return TeamUtils.loadCredentials(uri.toString(), uri.getScheme(), uri.getHost(), uri.getPath(), uri.getPort());
+        return TeamUtils.loadCredentials(uri.toString(), uri.getScheme(), uri.getHost(), uri.getPath(),
+                uri.getPort());
     }
 
     private void saveCredentials(URIish uri, Credentials credentials) {
-        TeamUtils.saveCredentials(uri.toString(), uri.getScheme(), uri.getHost(), uri.getPath(), uri.getPort(), credentials);
+        TeamUtils.saveCredentials(uri.toString(), uri.getScheme(), uri.getHost(), uri.getPath(),
+                uri.getPort(), credentials);
     }
 
     /**
@@ -224,9 +226,8 @@ public class GITCredentialsProvider extends CredentialsProvider {
                 sb = new StringBuilder();
                 String promptedFingerprint = extractFingerprint(promptText);
                 if (promptedFingerprint == null) {
-                    throw new UnsupportedCredentialItem(uri,
-                            String.format("Unknown pattern to ask acceptance of host key fingerprint \n%s",
-                                    promptText));
+                    throw new UnsupportedCredentialItem(uri, String.format(
+                            "Unknown pattern to ask acceptance of host key fingerprint \n%s", promptText));
                 }
                 if (predefinedFingerprint != null) {
                     ((CredentialItem.YesNoType) item)
@@ -422,7 +423,7 @@ public class GITCredentialsProvider extends CredentialsProvider {
     }
 
     private Credentials askCredentials(URIish uri, Credentials credentials, boolean passwordOnly,
-                                                 String msg) {
+            String msg) {
         Credentials result;
         if (isGUI()) {
             result = askCredentialsGUI(uri, credentials, passwordOnly, msg);

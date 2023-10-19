@@ -126,6 +126,7 @@ public class SVNAuthenticationManager implements ISVNAuthenticationManager {
         if (userPassDialog.getReturnStatus() != UserPassDialog.RET_OK) {
             return null;
         }
+        userPassDialog.setPerHostCheckBoxText(OStrings.getString("TEAM_CREDENTIALS_PER_HOST", url.getHost()));
         Credentials credentials = new Credentials();
         credentials.username = userPassDialog.getUsername();
         credentials.password = userPassDialog.getPassword();
@@ -151,7 +152,8 @@ public class SVNAuthenticationManager implements ISVNAuthenticationManager {
             credentials.username = console.readLine(message);
         }
         credentials.password = new String(console.readPassword(message));
-        credentials.perHost = TeamUtils.askYesNoCui(OStrings.getString("TEAM_CREDENTIALS_PER_HOST"), false);
+        credentials.perHost = TeamUtils.askYesNoCui(OStrings.getString("TEAM_CREDENTIALS_PER_HOST", url.getHost()),
+                false);
         saveCredentials(url, credentials);
         return getAuthenticatorInstance(kind, url, credentials);
     }

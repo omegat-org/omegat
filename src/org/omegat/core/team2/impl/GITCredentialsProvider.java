@@ -355,6 +355,8 @@ public class GITCredentialsProvider extends CredentialsProvider {
             userPassDialog.setDescription(OStrings.getString(
                     credentials.username == null ? "TEAM_USERPASS_FIRST" : "TEAM_USERPASS_WRONG",
                     uri.getHumanishName()));
+            userPassDialog.setPerHostCheckBoxText(OStrings.getString("TEAM_CREDENTIALS_PER_HOST",
+                    uri.getHost()));
             if (uri.getUser() != null && !"".equals(uri.getUser())) {
                 userPassDialog.setUsername(uri.getUser());
                 userPassDialog.enableUsernameField(false);
@@ -390,7 +392,8 @@ public class GITCredentialsProvider extends CredentialsProvider {
             }
             char[] pass = console.readPassword(OStrings.getString("TEAM_PASS_FIRST", uri.getHumanishName()));
             credentials.password = Arrays.toString(pass);
-            credentials.perHost = TeamUtils.askYesNoCui(OStrings.getString("TEAM_CREDENTIALS_PER_HOST"), false);
+            credentials.perHost = TeamUtils.askYesNoCui(OStrings.getString("TEAM_CREDENTIALS_PER_HOST",
+                    uri.getHost()), false);
             return credentials;
         }
         Log.log("No console found.");

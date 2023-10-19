@@ -163,8 +163,6 @@ public class UserPassDialog extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         mainPanel.add(passwordField, gridBagConstraints);
 
-        org.openide.awt.Mnemonics.setLocalizedText(perHostCheckBox,
-                OStrings.getString("TEAM_CREDENTIALS_PER_HOST")); // NOI18N
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 7;
@@ -243,5 +241,9 @@ public class UserPassDialog extends javax.swing.JDialog {
 
     public void setDescription(String description) {
         descriptionTextArea.setText(description);
+    }
+
+    public void setPerHostCheckBoxText(String text) {
+        org.openide.awt.Mnemonics.setLocalizedText(perHostCheckBox, text);
     }
 }

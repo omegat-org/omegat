@@ -130,6 +130,7 @@ public class SVNAuthenticationManager implements ISVNAuthenticationManager {
         Credentials credentials = new Credentials();
         credentials.username = userPassDialog.getUsername();
         credentials.password = userPassDialog.getPassword();
+        credentials.perHost = userPassDialog.isPerHost();
         saveCredentials(url, credentials);
         return getAuthenticatorInstance(kind, url, credentials);
     }
@@ -151,6 +152,8 @@ public class SVNAuthenticationManager implements ISVNAuthenticationManager {
             credentials.username = console.readLine(message);
         }
         credentials.password = new String(console.readPassword(message));
+        String yesNo = console.readLine(OStrings.getString("TEAM_CREDENTIALS_PER_HOST_CUI"));
+        credentials.perHost = "yes".equalsIgnoreCase(yesNo) || "y".equalsIgnoreCase(yesNo);
         saveCredentials(url, credentials);
         return getAuthenticatorInstance(kind, url, credentials);
     }

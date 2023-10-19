@@ -389,6 +389,7 @@ public class GITCredentialsProvider extends CredentialsProvider {
             if (userPassDialog.getReturnStatus() == UserPassDialog.RET_OK) {
                 credentials.username = userPassDialog.getUsername();
                 credentials.password = userPassDialog.getPassword();
+                credentials.perHost = userPassDialog.isPerHost();
                 return credentials;
             }
         }
@@ -412,6 +413,8 @@ public class GITCredentialsProvider extends CredentialsProvider {
             }
             char[] pass = console.readPassword(OStrings.getString("TEAM_PASS_FIRST", uri.getHumanishName()));
             credentials.password = Arrays.toString(pass);
+            String yesNo = console.readLine(OStrings.getString("TEAM_CREDENTIALS_PER_HOST_CUI"));
+            credentials.perHost = "yes".equalsIgnoreCase(yesNo) || "y".equalsIgnoreCase(yesNo);
             return credentials;
         }
         Log.log("No console found.");

@@ -162,7 +162,7 @@ public class UserPassDialog extends javax.swing.JDialog {
         mainPanel.add(passwordField, gridBagConstraints);
 
         org.openide.awt.Mnemonics.setLocalizedText(perHostCheckBox,
-                OStrings.getString("CREDENTIALS_PER_HOST")); // NOI18N
+                OStrings.getString("TEAM_CREDENTIALS_PER_HOST")); // NOI18N
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 7;

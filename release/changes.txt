@@ -1,18 +1,18 @@
 ----------------------------------------------------------------------
  OmegaT 6.1.0
 ----------------------------------------------------------------------
-  22 Enhancement
-  31 Bug fixes
+  26 Enhancement
+  35 Bug fixes
 ----------------------------------------------------------------------
 6.1.0 vs 6.0.0
 
   Implemented requests:
 
+  - Download team project with a shallow history
+  https://sourceforge.net/p/omegat/feature-requests/1720/
+
   - ResourceBundle Filter: default not to escape Unicode character
   https://sourceforge.net/p/omegat/feature-requests/1716/
-
-  - Make language libraries in LanguageTools as module
-  https://sourceforge.net/p/omegat/feature-requests/1714/
 
   - Use SLF4J as logging facade framework
   https://sourceforge.net/p/omegat/feature-requests/1710/
@@ -31,6 +31,9 @@
 
   - Team: SVN: Replacing trilead-ssh2 with Apache sshd
   https://sourceforge.net/p/omegat/feature-requests/1699/
+
+  - Ensure that OmegaT functions properly under Java 21
+  https://sourceforge.net/p/omegat/feature-requests/1697/
 
   - Better error message for omegat.project failure
   https://sourceforge.net/p/omegat/feature-requests/1696/
@@ -79,8 +82,18 @@
 
   - Support SRX format
 
+  - Support M1/M2 Mac natively and distribute with Arm64 JRE.
+
+  - Distribution with Linux aarch64 JRE
+
 
   Bug fixes:
+
+  - OmegaT 6.1 with JRE does not work out of the box on Windows
+  https://sourceforge.net/p/omegat/bugs/1218/
+
+  - Broken gradle tasks on Debian
+  https://sourceforge.net/p/omegat/bugs/1217/
 
   - Selection of match for pre-translation varies through different OS's
   https://sourceforge.net/p/omegat/bugs/1213/
@@ -108,6 +121,10 @@
 
   - ProjectFile has unwanted XML element otherAttributes
   https://sourceforge.net/p/omegat/bugs/1191/
+
+  - If project memory is updated during load via tm/auto or tm/enforce, set project as modified
+    so that save also updates project_save.tmx
+  https://sourceforge.net/p/omegat/bugs/1185/
 
   - Languagetool crashes when reloading the project
   https://sourceforge.net/p/omegat/bugs/1182/
@@ -169,15 +186,14 @@
   - Lucene 5.2 does not work under WebStart
   https://sourceforge.net/p/omegat/bugs/813/
 
+  - JNA encoding issue on non-UTF-8 platforms
+  https://sourceforge.net/p/omegat/bugs/812/
+
   - Incorrect display of RTL segments in the Fuzzy Matches pane
   https://sourceforge.net/p/omegat/bugs/558/
 
   - First session message in log not localised
   https://sourceforge.net/p/omegat/bugs/272/
-
-  - If project memory is updated during load via tm/auto or tm/enforce, set project as modified
-    so that save also updates project_save.tmx
-  https://sourceforge.net/p/omegat/bugs/1185/
 
 ----------------------------------------------------------------------
  OmegaT 6.0.0 (2023-06-19)

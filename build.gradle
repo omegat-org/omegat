@@ -385,7 +385,7 @@ jar {
 
 project(":machinetranslators") {jar.enabled = false}
 
-def distsDir = layout.buildDirectory.file("${distsDirName}").get().asFile
+def distsDir = file(layout.buildDirectory.file("${distsDirName}"))
 def assetDir = findProperty('assetDir') ?: '../'
 def macJRE = fileTree(dir: assetDir, include: 'OpenJDK17U-jre_x64_mac_*.tar.gz')
 def armMacJRE = fileTree(dir: assetDir, include: 'OpenJDK17U-jre_aarch64_mac_*.tar.gz')
@@ -394,9 +394,26 @@ def linuxArm64JRE = fileTree(dir: assetDir, include: 'OpenJDK17U-jre_aarch64_lin
 def windowsJRE32 = fileTree(dir: assetDir, include: 'OpenJDK17U-jre_x86-32_windows_*.zip')
 def windowsJRE = fileTree(dir: assetDir, include: 'OpenJDK17U-jre_x64_windows_*.zip')
 
+/*
+ * Configuration of launch4j java launcher.
+ * OmegaT uses it as launcher for windows.
+ */
 launch4j {
-    xmlFileName = "${projectDir}/release/win32-specific/L4j_OMT.xml"
+    libraryDir = "." // assume OmegaT.jar is located as same folder as OmegaT.exe
+    dontWrapJar = true
+    downloadUrl = 'https://adoptium.net/'
+    supportUrl = 'https://omegat.org/support'
     icon = "${projectDir}/images/OmegaT.ico"
+    errTitle = 'OmegaT'
+    headerType = 'gui'
+    jreMinVersion = '11'
+    jreMaxVersion = '21'
+    copyConfigurable = [] // hack: don't copy dependencies to $libraryDir
+    bundledJrePath = 'jre' // assume bundled JRE is located in jre/
+    requires64Bit = false  // support 32bit distribution
+    restartOnCrash = false
+    stayAlive = false
+    priority = 'normal'
 }
 
 tasks.register('genDocIndex', Copy) {
@@ -441,8 +458,8 @@ tasks.register('webManual', Sync) {
     description = 'Sync the HTML manual files'
     dependsOn manualHtmls
     dependsOn genDocIndex
-    destinationDir = file("${buildDir}/docs/htdocs")
-    from("${buildDir}/docs/manual")
+    destinationDir file(layout.buildDirectory.file("docs/htdocs"))
+    from file(layout.buildDirectory.file("docs/manual"))
     from('release') {
         include 'doc-license.txt'
     }
@@ -532,13 +549,14 @@ instantStartXmls.each { xml ->
 }
 
 tasks.register('genMac') {
+    def outDir = layout.buildDirectory.file("appbundler")
     description = 'Generate the Mac .app skeleton. Depends AppBundler (https://github.com/TheInfiniteKind/appbundler)'
-    outputs.dir file("${buildDir}/appbundler")
+    outputs.dir outDir
     doLast {
         ant.taskdef(name: 'appbundler',
                 classname: 'com.oracle.appbundler.AppBundlerTask',
                 classpath: configurations.genMac.asPath)
-        ant.appbundler(outputdirectory: "${buildDir}/appbundler",
+        ant.appbundler(outputdirectory: outDir.get().toString(),
                 name: applicationName,
                 displayname: applicationName,
                 executablename: applicationName,
@@ -731,36 +749,6 @@ distributions {
             }
         }
     }
-
-    linux64 {
-        contents {
-            with main.contents
-            exclude 'OmegaT.bat', '*.exe'
-            if (!linux64JRE.empty) {
-                from(tarTree(linux64JRE.singleFile)) {
-                    includeEmptyDirs = false
-                    eachFile {
-                        replaceRelativePathSegment(it, /jdk.*-jre/, 'jre')
-                    }
-                }
-            }
-        }
-    }
-
-    linuxArm64 {
-        contents {
-            with main.contents
-            exclude 'OmegaT.bat'
-            if (!linuxArm64JRE.empty) {
-                from(tarTree(linuxArm64JRE.singleFile)) {
-                    includeEmptyDirs = false
-                    eachFile {
-                        replaceRelativePathSegment(it, /jdk.*-jre/, 'jre')
-                    }
-                }
-            }
-        }
-    }
 }
 
 sourceDistZip.dependsOn genDocIndex
@@ -781,7 +769,8 @@ tasks.register('hunspellJarSignedContents', Sync) {
         condition(project.hasProperty('macCodesignIdentity'), 'Code signing property not set')
     }
     from zipTree(hunspellJar)
-    destinationDir = file("$buildDir/hunspell")
+
+    destinationDir file(layout.buildDirectory.file("hunspell"))
     doLast {
         def dylibs = fileTree(dir: destinationDir, include: '**/*.dylib').files
         exec {
@@ -836,7 +825,7 @@ ext.makeMacTask = { args ->
         from(hunspellSignedJar.outputs) {
             into 'OmegaT.app/Contents/Java/lib'
         }
-        destinationDir = file("${buildDir}/install/${application.applicationName}-${args.suffix}_Signed")
+        destinationDir file(layout.buildDirectory.file("install/${application.applicationName}-${args.suffix}_Signed"))
         doFirst {
             delete "$destinationDir/OmegaT.app/Contents/PlugIns/jre.bundle"
         }
@@ -929,63 +918,64 @@ tasks.register('mac') {
     group = 'omegat distribution'
 }
 
-linux64DistTar {
-    onlyIf {
-        condition(!linux64JRE.empty, 'JRE not found')
-    }
-    doFirst {
-        delete "${destinationDir}/jre"
-    }
-    application {
-        archiveFileName.set("${applicationName}_${project.version}${omtVersion.beta}_Linux_64.tar.bz2")
-    }
-    compression = Compression.BZIP2
-    archiveExtension = 'tar.bz2'
-    group = 'omegat distribution'
-}
-
-linuxArm64DistTar {
-    onlyIf {
-        condition(!linuxArm64JRE.empty, 'ARM64 JRE not found')
-    }
-    doFirst {
-        delete "$destinationDirectory/jre"
-    }
-    application {
-        archiveFileName.set("${applicationName}_${project.version}${omtVersion.beta}_Linux_ARM64.tar.bz2")
-    }
-    compression = Compression.BZIP2
-    archiveExtension = 'tar.bz2'
-    group = 'omegat distribution'
-}
-
 tasks.register('linux') {
-    dependsOn linux64DistTar
-    dependsOn linuxArm64DistTar
     description = 'Build the Linux distributions.'
     group = 'omegat distribution'
 }
 
+ext.makeLinuxTask = { args ->
+    def distTaskName = "install" + args.name.capitalize() + "Dist"
+    def tarTaskName = args.name + "DistTarBz"
+    tasks.register(distTaskName, Sync) {
+        group = 'distribution'
+        description = "Create a linux installDist for ${args.name}. "
+        with distributions.main.contents
+        destinationDir file(layout.buildDirectory.file("install/${application.applicationName}-${args.suffix}"))
+        onlyIf {
+            condition(!args.jrePath.empty, 'ARM64 JRE not found')
+        }
+        doFirst {
+            delete "$destinationDir/jre"
+        }
+        if (args.jrePath && !args.jrePath.empty) {
+            from(tarTree(args.jrePath.singleFile)) {
+                includeEmptyDirs = false
+                eachFile {
+                    replaceRelativePathSegment(it, /jdk.*-jre/, 'jre')
+                }
+            }
+        }
+    }
+    tasks.register(tarTaskName, Tar) {
+        description = "Create a Linux distribution for ${args.name}. "
+        with distributions.main.contents
+        onlyIf {
+            condition(!args.jrePath.empty, 'ARM64 JRE not found')
+        }
+        if (args.jrePath && !args.jrePath.empty) {
+            from(tarTree(args.jrePath.singleFile)) {
+                includeEmptyDirs = false
+                eachFile {
+                    replaceRelativePathSegment(it, /jdk.*-jre/, 'jre')
+                }
+            }
+        }
+        application {
+            archiveFileName.set("${applicationName}_${project.version}${omtVersion.beta}_${args.suffix}.tar.bz2")
+        }
+        compression = Compression.BZIP2
+        archiveExtension = 'tar.bz2'
+        group = 'omegat distribution'
+    }
+    assemble.dependsOn tarTaskName
+    linux.dependsOn tarTaskName
+}
+makeLinuxTask(name: "linux64", suffix: "Linux_64", jrePath: linux64JRE)
+makeLinuxTask(name: "linuxArm64", suffix: "Linux_ARM64", jrePath: linuxArm64JRE)
+
 // We bundle our startup scripts separately, so disable startScripts.
 startScripts.enabled = false
-
 installDist {
-   // installDist insists on installing a script. Trick it with a dummy script.
-   /*
-    doFirst {
-        startScripts.outputDir.mkdirs()
-        file("${startScripts.outputDir}/${applicationName}").createNewFile()
-        if (destinationDir.directory) {
-            // As of Gradle 4.4(?) the application plugin expects `lib` as well
-            ['lib', 'bin'].each { file("${destinationDir}/${it}").mkdirs() }
-        }
-    }*/
-
-    // Delete dummy afterwards.
-   /* doLast {
-        delete "${destinationDir}/bin"
-        delete startScripts.outputDir
-    }*/
 }
 
 // Read in all our custom messages and massage them for inclusion in the .iss
@@ -1016,7 +1006,11 @@ tasks.register('win') {
 ext.makeWinTask = { args ->
     def fullVersion = project.version + omtVersion.beta
     def installerBasename = "OmegaT_${fullVersion}_${args.suffix}"
-    def installerExe = layout.buildDirectory.file("${distsDirName}/${installerBasename}.exe").get().asFile
+    def installerExe = layout.buildDirectory.file("${distsDirName}/${installerBasename}.exe")
+    def signedExe = layout.buildDirectory.file("${distsDirName}/${installerBasename}_Signed.exe")
+
+    def signedTaskName = "${args.name}Signed"
+
     tasks.register(args.name, Sync) {
         description = "Create a Windows installer for ${args.name} distro. " +
                 'Requires Inno Setup (http://www.jrsoftware.org/isinfo.php).'
@@ -1036,11 +1030,11 @@ ext.makeWinTask = { args ->
                 }
             }
         }
-        destinationDir layout.buildDirectory.file("innosetup/${args.name}").get().asFile
+        destinationDir file(layout.buildDirectory.file("innosetup/${args.name}"))
         outputs.file installerExe
         onlyIf {
             conditions([!args.jrePath || !args.jrePath.empty, 'JRE not found'],
-                    [exePresent('iscc') || exePresent('docker'),
+                    [exePresent('iscc') || exePresent('docker') || exePresent('nerdctl'),
                      'InnoSetup or Docker not installed'])
         }
         doFirst {
@@ -1079,14 +1073,13 @@ ext.makeWinTask = { args ->
                 from("${destinationDir}/${installerBasename}.exe")
                 into(layout.buildDirectory.file("${distsDirName}"))
             }
+            delete file("${destinationDir}/${installerBasename}.exe")
         }
     }
-    def signedTaskName = "${args.name}Signed"
-    def signedExe = layout.buildDirectory.file("${distsDirName}/${installerBasename}_Signed.exe").get().asFile
     tasks.register(signedTaskName, Exec) {
         group = 'omegat distribution'
-        // You'd think we could just set the PATH, but there be dragons here
-        // https://github.com/palantir/gradle-docker/issues/162
+        inputs.file installerExe
+        outputs.file signedExe
         // Starting from Nov 2022, certification provider force to use HSM to
         // store private keys. Starting on June 1, 2023, at 00:00 UTC, industry
         // standards will require private keys for standard code signing
@@ -1099,13 +1092,17 @@ ext.makeWinTask = { args ->
             // Set these in e.g. local.properties
             def props = ['pkcs11module', 'winCodesignPassword']
             conditions([props.every { project.hasProperty(it) }, 'Code signing properties not set'],
-                    [file(installerExe).file, 'Unsigned installer not built'],
-                    [exePresent('osslsigncode'), 'osslsigncode not installed'])
+                    [exePresent('osslsigncode'), 'osslsigncode is not installed'])
+                    // note: container image amake/innosetup has osslsigntool 1.7 which don't work.
+                    // [exePresent('osslsigncode') || exePresent('docker') || exePresent('nerdctl'),
+                    // 'neither osslsigncode or docker/nerdctl is not installed'])
         }
-        inputs.file installerExe
-        outputs.file signedExe
-        def commandArgs = ['osslsigncode', 'sign', '-pkcs11module', project.hasProperty('pkcs11module') ?
-                project.property('pkcs11module') : 'dummy(it should specified)']
+        def exe = exePresent('osslsigncode') ? 'osslsigncode' : file('ci/osslsigncode')
+        def envVars = [:]
+        def commandArgs = [exe, 'sign']
+        if (project.hasProperty('pkcs11module')) {
+            commandArgs.addAll('-pkcs11module', project.property('pkcs11module'))
+        }
         if (project.hasProperty('winCodesignCert')) {
             commandArgs.addAll('-certs', project.property('winCodesignCert'))
         }
@@ -1115,13 +1112,18 @@ ext.makeWinTask = { args ->
         if (project.hasProperty('winCodesignPassword')) {
             commandArgs.addAll('-pass', project.property('winCodesignPassword'))
         }
+        if (project.hasProperty('winCodesignDevice')) {
+            envVars['USBDEV'] = project.property('winCodesignDevice')
+        }
         commandArgs.addAll(
                 '-t', project.hasProperty('winCodesignTimestampUrl') ? project.property('winCodesignTimestampUrl') :
                 'http://time.certum.pl/',
                 '-n', application.applicationName, '-i', omtWebsite, '-h', 'sha256',
-                '-in', installerExe.toString(),
-                '-out', signedExe.toString())
+                '-in', installerExe.get().asFile.toString(),
+                '-out', signedExe.get().asFile.toString()
+        )
         commandLine(commandArgs)
+        environment(envVars)
         dependsOn args.name
     }
     assemble.dependsOn args.name, signedTaskName
@@ -1311,6 +1313,10 @@ test {
 
 tasks.register('testIntegration', JavaExec) {
     description = 'Run integration tests. Pass repo URL as -Domegat.test.repo=<repo>'
+    javaLauncher = javaToolchains.launcherFor {
+        languageVersion = JavaLanguageVersion.of(17)
+        vendor = JvmVendorSpec.ADOPTIUM
+    }
     group = 'omegat workflow'
     mainClass = 'org.omegat.core.data.TestTeamIntegration'
     classpath = sourceSets.testIntegration.runtimeClasspath

@@ -208,7 +208,7 @@ public class IBMWatsonTranslate extends BaseCachedTranslate {
                 return translations.get(0).get("translation").asText();
             }
         }
-        Log.logErrorRB( "MT_JSON_ERROR");
+        Log.logErrorRB("MT_JSON_ERROR");
         throw new MachineTranslateError(BUNDLE.getString("MT_JSON_ERROR"));
     }
 

@@ -28,7 +28,7 @@ FROM debian:bullseye-slim
 ARG CAVER=1.0.2-1
 ARG JAVA=11
 ARG JDKVER=jdk_11.0.20.1.0+1
-ARG GRADLE=8.3
+ARG GRADLE=8.4
 RUN apt-get -y update && apt-get upgrade -y && apt-get install -y openssh-client git inotify-tools curl subversion unzip rsync  \
  java-common libasound2 libfontconfig1 libfreetype6 libxi6 libxrender1 libxtst6 p11-kit
 RUN adduser --disabled-password --gecos "" --home /home/omegat --shell /bin/bash omegat && mkdir -p /home/omegat/.ssh
@@ -42,7 +42,7 @@ RUN curl -LO https://packages.adoptium.net/artifactory/deb/pool/main/a/adoptium-
     && dpkg -i adoptium-ca-certificates_${CAVER}_all.deb temurin-${JAVA}-${JDKVER}_amd64.deb \
     && rm -f adoptium-ca-certificates_${CAVER}_all.deb temurin-${JAVA}-${JDKVER}_amd64.deb
 RUN (cd /opt && curl -LO https://services.gradle.org/distributions/gradle-${GRADLE}-bin.zip \
-    && unzip -q gradle-${GRADLE}-bin.zip && rm -f gradle-${GRADLE}-bin.zip)
+    && unzip -q gradle-${GRADLE}-bin.zip && rm -f gradle-${GRADLE}-bin.zip) && mv /opt/gradle-${GRADLE} /opt/gradle
 
 USER omegat
 

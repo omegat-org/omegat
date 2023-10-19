@@ -40,7 +40,7 @@
       "severity": "warning",
       "pattern": [
         {
-          "regexp": "^.*\\[(?:(ERROR)|WARN)\\]\\s+(.*):(\\d+)(?::\\d+)?:\\s+(.*)\\s+\\[(.*)\\]$",
+          "regexp": "^.*\\[(?:(ERROR)|WARN)\\]\\s+(.*):(\\d+)(:\\d+)?:\\s+(.*)\\s+\\[(.*)\\]$",
           "severity": 1,
           "file": 2,
           "line": 3,

@@ -255,11 +255,18 @@ public final class PatternConsts {
             if ("true".equalsIgnoreCase(Preferences.getPreference(Preferences.CHECK_JAVA_PATTERN_TAGS))) {
                 regexp += "|" + RE_SIMPLE_JAVA_MESSAGEFORMAT_PATTERN_VARS;
             }
-            // assume: customRegExp has already been validated.
-            String customRegExp = Preferences.getPreferenceDefault(Preferences.CHECK_CUSTOM_PATTERN, CHECK_CUSTOM_PATTERN_DEFAULT);
+            String customRegExp;
+            if (Preferences.existsPreference(Preferences.CHECK_CUSTOM_PATTERN)) {
+                customRegExp = Preferences.getPreference(Preferences.CHECK_CUSTOM_PATTERN);
+            } else {
+                // assume default
+                customRegExp = CHECK_CUSTOM_PATTERN_DEFAULT;
+            }
             if (!"".equalsIgnoreCase(customRegExp)) {
+                // assume: customRegExp has already been validated.
                 regexp += "|" + customRegExp;
             }
+
             placeholders = Pattern.compile(regexp);
         }
         return placeholders;
@@ -291,7 +298,7 @@ public final class PatternConsts {
 
     public static Pattern getCustomTagPattern() {
         if (customTags == null) {
-            String customTagsRegex = Preferences.getPreferenceDefault(Preferences.CHECK_CUSTOM_PATTERN, CHECK_CUSTOM_PATTERN_DEFAULT);
+            String customTagsRegex = Preferences.getPreference(Preferences.CHECK_CUSTOM_PATTERN);
             if (!"".equalsIgnoreCase(customTagsRegex)) {
                 customTags = Pattern.compile(customTagsRegex);
             }

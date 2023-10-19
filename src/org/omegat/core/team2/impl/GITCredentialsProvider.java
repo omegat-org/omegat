@@ -30,7 +30,6 @@
 package org.omegat.core.team2.impl;
 
 import java.io.Console;
-import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
@@ -103,7 +102,6 @@ public class GITCredentialsProvider extends CredentialsProvider {
                     + " could not be decrypted\\. Enter the passphrase again\\.\\n?") };
 
     private static final String PASSWORD_PROMPT = "Password: ";
-    private static final int MAX_RETRY = 5;
 
     /** Predefined in the omegat.project file. */
     private final Map<String, String> predefined = Collections.synchronizedMap(new HashMap<>());
@@ -298,32 +296,10 @@ public class GITCredentialsProvider extends CredentialsProvider {
     }
 
     private void askYesNoCUI(CredentialItem item, String promptText, URIish uri, String promptedFingerprint) {
-        Console console = System.console();
-        if (console != null) {
-            try (PrintWriter printWriter = console.writer()) {
-                boolean succeeded = false;
-                for (int i = 0; i < MAX_RETRY; i++) {
-                    printWriter.print(promptText);
-                    String answer = console.readLine("([y]es or [n]o): ");
-                    if (answer.equalsIgnoreCase("y") || answer.equalsIgnoreCase("yes")) {
-                        ((CredentialItem.YesNoType) item).setValue(true);
-                        TeamUtils.saveFingerprint(uri.toString(), promptedFingerprint);
-                        succeeded = true;
-                        break;
-                    } else if (answer.equalsIgnoreCase("n") || answer.equalsIgnoreCase("no")) {
-                        ((CredentialItem.YesNoType) item).setValue(false);
-                        succeeded = true;
-                        break;
-                    }
-                    printWriter.println(OStrings.getString("TEAM_YESNO_AGAIN"));
-                }
-                if (!succeeded) {
-                    printWriter.println(OStrings.getString("TEAM_YESNO_ABORT"));
-                    ((CredentialItem.YesNoType) item).setValue(false);
-                }
-            }
+        if (TeamUtils.askYesNoCui(promptText, false)) {
+            ((CredentialItem.YesNoType) item).setValue(true);
+            TeamUtils.saveFingerprint(uri.toString(), promptedFingerprint);
         } else {
-            // When there is no console, aborting...
             ((CredentialItem.YesNoType) item).setValue(false);
         }
     }
@@ -414,8 +390,7 @@ public class GITCredentialsProvider extends CredentialsProvider {
             }
             char[] pass = console.readPassword(OStrings.getString("TEAM_PASS_FIRST", uri.getHumanishName()));
             credentials.password = Arrays.toString(pass);
-            String yesNo = console.readLine(OStrings.getString("TEAM_CREDENTIALS_PER_HOST_CUI"));
-            credentials.perHost = "yes".equalsIgnoreCase(yesNo) || "y".equalsIgnoreCase(yesNo);
+            credentials.perHost = TeamUtils.askYesNoCui(OStrings.getString("TEAM_CREDENTIALS_PER_HOST"), false);
             return credentials;
         }
         Log.log("No console found.");

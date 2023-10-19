@@ -25,12 +25,15 @@
 
 package org.omegat.core.team2.impl;
 
+import java.io.Console;
+import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
 import org.omegat.core.Core;
 import org.omegat.core.team2.TeamSettings;
 import org.omegat.util.Log;
+import org.omegat.util.OStrings;
 import org.omegat.util.StringUtil;
 
 /**
@@ -56,6 +59,36 @@ public final class TeamUtils {
     static final String KEY_PASSWORD_SUFFIX = "password";
 
     static final String KEY_FINGERPRINT_SUFFIX = "fingerprint";
+
+    private static final int MAX_RETRY = 5;
+
+    public static boolean askYesNoCui(String promptText, boolean def) {
+        boolean result = def;
+        Console console = System.console();
+        if (console != null) {
+            try (PrintWriter printWriter = console.writer()) {
+                boolean succeeded = false;
+                for (int i = 0; i < MAX_RETRY; i++) {
+                    printWriter.print(promptText);
+                    String answer = console.readLine("([y]es or [n]o): ");
+                    if (answer.equalsIgnoreCase("y") || answer.equalsIgnoreCase("yes")) {
+                        result = true;
+                        break;
+                    } else if (answer.equalsIgnoreCase("n") || answer.equalsIgnoreCase("no")) {
+                        result = false;
+                        succeeded = true;
+                        break;
+                    }
+                    printWriter.println(OStrings.getString("TEAM_YESNO_AGAIN"));
+                }
+                if (!succeeded) {
+                    // no answer is got
+                    printWriter.println(OStrings.getString("TEAM_YESNO_ABORT"));
+                }
+            }
+        }
+        return result;
+    }
 
     public static Credentials loadCredentials(String url, String scheme, String host, String path, int port) {
         Credentials credentials = new Credentials();

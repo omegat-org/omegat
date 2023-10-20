@@ -665,7 +665,8 @@ ext.makeMacTask = { args ->
             include '**/Info.plist'
             expand(version: project.version,
                     jvmRequired: '11+',
-                    jreRuntime: !args.jrePath ? 'MinimumJava11' : 'jre.bundle',
+                    // when bundled JRE, path 'jre.bundle', otherwise 'default'
+                    jreRuntime: args.jrePath ? 'jre.bundle' : 'default',
                     // $APP_ROOT is expanded at runtime by the launcher binary
                     configfile: '$APP_ROOT/Contents/Resources/Configuration.properties')
         }

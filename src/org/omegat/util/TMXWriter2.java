@@ -62,7 +62,7 @@ import org.omegat.core.data.ITMXEntry;
  * @author Aaron Madlon-Kay
  */
 public class TMXWriter2 implements AutoCloseable {
-    static String lineSeparator = System.lineSeparator();
+    static String lineSeparator = "\n";
 
     public static final String PROP_ID = "id";
 

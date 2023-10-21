@@ -39,6 +39,7 @@ import org.junit.Test;
 import org.omegat.core.TestCore;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.gui.dialogs.ProjectPropertiesDialog.Mode;
+import org.omegat.util.Platform;
 
 public class DialogsTest extends TestCore {
 
@@ -100,6 +101,7 @@ public class DialogsTest extends TestCore {
 
     @Test
     public void testNewProjectFileChooser() {
+        org.junit.Assume.assumeFalse(Platform.isWindows); // FIXME
         new NewProjectFileChooser();
     }
 

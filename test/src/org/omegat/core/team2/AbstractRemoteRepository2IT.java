@@ -84,8 +84,8 @@ public abstract class AbstractRemoteRepository2IT {
 
     @After
     public void tearDown() throws IOException {
-        FileUtils.deleteDirectory(tempDir.toFile());
-        FileUtils.deleteDirectory(tempRepoDir.toFile());
+        FileUtils.forceDeleteOnExit(tempDir.toFile());
+        FileUtils.forceDeleteOnExit(tempRepoDir.toFile());
     }
 
 

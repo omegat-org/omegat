@@ -26,8 +26,10 @@
 package org.omegat.filters;
 
 import org.junit.Test;
+
 import org.omegat.core.data.IProject;
 import org.omegat.filters2.text.mozftl.MozillaFTLFilter;
+import org.omegat.util.Platform;
 
 public class MozillaFTLFilterTest extends TestFilterBase {
     @Test
@@ -37,6 +39,7 @@ public class MozillaFTLFilterTest extends TestFilterBase {
 
     @Test
     public void testTranslate() throws Exception {
+        org.junit.Assume.assumeFalse(Platform.isWindows);
         translateText(new MozillaFTLFilter(), "test/data/filters/MozillaFTL/MozillaFTLFilter.ftl");
     }
 

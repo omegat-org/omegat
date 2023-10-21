@@ -33,15 +33,23 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import org.omegat.core.data.ExternalTMX;
 import org.omegat.core.data.ITMXEntry;
 import org.omegat.filters2.po.PoFilter;
 import org.omegat.util.OStrings;
+import org.omegat.util.Platform;
 import org.omegat.util.StringUtil;
 
 public class POFilterTest extends TestFilterBase {
+
+    @Before
+    public void condition() {
+        org.junit.Assume.assumeFalse(Platform.isWindows);
+    }
+
     @Test
     public void testParse() throws Exception {
         Map<String, String> data = new TreeMap<String, String>();

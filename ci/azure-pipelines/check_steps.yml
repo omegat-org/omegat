@@ -2,11 +2,18 @@ steps:
   - task: Cache@2
     displayName: 'Cache Gradle'
     inputs:
-      key: 'gradle | $(Agent.OS) | $(Build.SourcesDirectory)/build.gradle'
+      key: 'gradle | "$(Agent.OS)" | **/build.gradle'
+      restoreKeys: |
+        gradle | "$(Agent.OS)"
+        gradle
       path: '$(GRADLE_USER_HOME)'
+  - task: Gradle@3
+    displayName: Check
+    inputs:
+      tasks: check
+      options: '--build-cache -PenvIsCi'
+      jdkVersionOption: '1.11'
   - script: |
-      umask a+w
-      mkdir -p build
-      chmod -R a+w doc_src
-      $(Build.SourcesDirectory)/gradlew --build-cache -PenvIsCi clean check
-    displayName: 'Run Gradle check'
+      # stop the Gradle daemon to ensure no files are left open (impacting the save cache operation later)
+      ./gradlew --stop
+    displayName: Gradlew stop

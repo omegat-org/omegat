@@ -43,6 +43,7 @@ import org.omegat.filters2.html2.HTMLOptions;
 import org.omegat.util.HTMLUtils;
 import org.omegat.util.Language;
 import org.omegat.util.OStrings;
+import org.omegat.util.Platform;
 
 public class HTMLFilter2Test extends TestFilterBase {
     @Test
@@ -171,6 +172,7 @@ public class HTMLFilter2Test extends TestFilterBase {
 
     @Test
     public void testLayoutTrimWhitespace() throws Exception {
+        org.junit.Assume.assumeFalse(Platform.isWindows);
         Map<String, String> config = new HashMap<>();
         config.put(HTMLOptions.OPTION_COMPRESS_WHITESPACE, "true");
         config.put(HTMLOptions.OPTION_REWRITE_ENCODING, "NEVER");

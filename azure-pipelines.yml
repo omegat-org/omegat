@@ -54,6 +54,18 @@ stages:
       vmImage: 'ubuntu-22.04'
     steps:
       - template: ci/azure-pipelines/test_java17_steps.yml
+  - job: testOnWindows
+    displayName: on Java 17 on Windows
+    pool:
+      vmImage: 'windows-latest'
+    steps:
+      - template: ci/azure-pipelines/test_java17_steps.yml
+  - job: testOnMac
+    displayName: on Java 17 on mac
+    pool:
+      vmImage: 'macOS-latest'
+    steps:
+      - template: ci/azure-pipelines/test_java17_steps.yml
 
   # Weekly release steps will be triggerred after integration-test succeeded.
 - stage: Weekly

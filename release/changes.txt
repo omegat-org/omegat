@@ -89,6 +89,9 @@
 
   Bug fixes:
 
+  - OmegaT does not handle line breaks correctly on Windows
+  https://sourceforge.net/p/omegat/bugs/1219/
+
   - OmegaT 6.1 with JRE does not work out of the box on Windows
   https://sourceforge.net/p/omegat/bugs/1218/
 

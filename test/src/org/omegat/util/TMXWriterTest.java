@@ -160,7 +160,6 @@ public class TMXWriterTest extends TestFilterBase {
 
     @Test
     public void testEOLwrite() throws Exception {
-        org.junit.Assume.assumeFalse(Platform.isWindows); // FIXME
         String eol = TMXWriter2.lineSeparator;
         TMXWriter2 wr = new TMXWriter2(outFile, new Language("en-US"), new Language("be-BY"), false, true,
                 false);

@@ -83,7 +83,6 @@
     <!-- util/xml -->
     <suppress checks="(EmptyBlock|MethodLength)" files="XMLStreamReader\.java"/>
     <!-- util -->
-    <suppress files="StaticUtils\.java" checks="EmptyBlock" lines="158,162,549"/>
     <suppress files="StringUtil\.java" checks="EmptyBlock" lines="500,501,502"/>
     <suppress checks="InnerAssignment" files="TagUtil\.java"/>
     <suppress checks="InnerAssignment" files="VarExpansion\.java" lines="108"/>

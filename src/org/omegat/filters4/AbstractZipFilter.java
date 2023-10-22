@@ -31,7 +31,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.Enumeration;
 import java.util.List;
@@ -72,18 +71,15 @@ public abstract class AbstractZipFilter extends AbstractFilter {
 
     @Override
     public boolean isFileSupported(File inFile, Map<String, String> config, FilterContext context) {
-        try {
-            ZipFile file = new ZipFile(inFile);
+        try (ZipFile file = new ZipFile(inFile)) {
             Enumeration<? extends ZipEntry> entries = file.entries();
             while (entries.hasMoreElements()) {
                 ZipEntry entry = entries.nextElement();
                 if (acceptInternalFile(entry, context)) {
-                    file.close();
                     return true;
                 }
             }
-            file.close();
-        } catch (IOException e) {
+        } catch (IOException ignored) {
         }
         return false;
     }
@@ -116,45 +112,43 @@ public abstract class AbstractZipFilter extends AbstractFilter {
     @Override
     public void processFile(File inFile, File outFile, FilterContext fc)
             throws IOException, TranslationException {
-        ZipFile zf = new ZipFile(inFile);
-        ZipOutputStream zipout = null;
-        if (outFile != null) {
-            zipout = new ZipOutputStream(new FileOutputStream(outFile));
+        try (ZipFile zf = new ZipFile(inFile)) {
+            if (outFile != null) {
+                try (ZipOutputStream zipout = new ZipOutputStream(new FileOutputStream(outFile))) {
+                    processFileImpl(zf, zipout, fc);
+                }
+            } else {
+                processFileImpl(zf, null, fc);
+            }
         }
+    }
 
-        try {
-            Enumeration<? extends ZipEntry> zipcontents = zf.entries();
-            List<ZipEntry> toTranslate = new LinkedList<>();
-            Comparator<ZipEntry> cmp = getEntryComparator();
-            while (zipcontents.hasMoreElements()) {
-                ZipEntry ze = zipcontents.nextElement();
-                if (mustTranslateInternalFile(ze, outFile != null, fc)) {
-                    if ((cmp == null) || (outFile != null)) {
-                        translateEntry(zf, zipout, fc, ze);
-                    } else {
-                        toTranslate.add(ze); // need sort before treatment
-                    }
-                } else if (!mustDeleteInternalFile(ze, outFile != null, fc)) {
-                    if (zipout != null) {
-                        ZipEntry outEntry = new ZipEntry(ze.getName());
-                        zipout.putNextEntry(outEntry);
-
-                        org.apache.commons.io.IOUtils.copy(zf.getInputStream(ze), zipout);
-                        zipout.closeEntry();
-                    }
+    private void processFileImpl(ZipFile zf, ZipOutputStream zipout, FilterContext fc) throws IOException {
+        Enumeration<? extends ZipEntry> zipcontents = zf.entries();
+        List<ZipEntry> toTranslate = new LinkedList<>();
+        Comparator<ZipEntry> cmp = getEntryComparator();
+        while (zipcontents.hasMoreElements()) {
+            ZipEntry ze = zipcontents.nextElement();
+            if (mustTranslateInternalFile(ze, zipout != null, fc)) {
+                if ((cmp == null) || (zipout != null)) {
+                    translateEntry(zf, zipout, fc, ze);
+                } else {
+                    toTranslate.add(ze); // need sort before treatment
+                }
+            } else if (!mustDeleteInternalFile(ze, zipout != null, fc)) {
+                if (zipout != null) {
+                    ZipEntry outEntry = new ZipEntry(ze.getName());
+                    zipout.putNextEntry(outEntry);
+                    org.apache.commons.io.IOUtils.copy(zf.getInputStream(ze), zipout);
+                    zipout.closeEntry();
                 }
             }
-            if (cmp != null) {
-                Collections.sort(toTranslate, cmp);
-            }
-            for (ZipEntry ze : toTranslate) {
-                translateEntry(zf, zipout, fc, ze);
-            }
-        } finally {
-            if (zipout != null) {
-                zipout.close();
-            }
-            zf.close();
+        }
+        if (cmp != null) {
+            toTranslate.sort(cmp);
+        }
+        for (ZipEntry ze : toTranslate) {
+            translateEntry(zf, zipout, fc, ze);
         }
     }
 

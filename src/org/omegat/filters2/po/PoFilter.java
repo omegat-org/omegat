@@ -10,6 +10,7 @@
                2011 Didier Briel
                2013-1014 Alex Buloichik, Enrique Estevez
                2017 Didier Briel
+               2023 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -88,6 +89,8 @@ public class PoFilter extends AbstractFilter {
     public static final String OPTION_SKIP_HEADER = "skipHeader";
     public static final String OPTION_AUTO_FILL_IN_PLURAL_STATEMENT = "autoFillInPluralStatement";
     public static final String OPTION_FORMAT_MONOLINGUAL = "monolingualFormat";
+
+    private static final String BR = System.lineSeparator();
 
     private static class PluralInfo {
         public int plurals;
@@ -610,7 +613,7 @@ public class PoFilter extends AbstractFilter {
     protected void eol(String s) throws IOException {
         if (out != null) {
             out.write(s);
-            out.write('\n');
+            out.write(BR);
         }
     }
 
@@ -639,7 +642,7 @@ public class PoFilter extends AbstractFilter {
         if (references.length() > 0) {
             c += OStrings.getString("POFILTER_REFERENCES") + "\n" + unescape(references.toString() + "\n");
         }
-        if (c.length() == 0) {
+        if (c.isEmpty()) {
             c = null;
         }
         parseOrAlign(s, t, c, pathSuffix);
@@ -726,7 +729,7 @@ public class PoFilter extends AbstractFilter {
 
                 if (out != null) {
                     // Header is always written
-                    out.write("msgstr " + getTranslation(null, targets[0], false, true, fc, 0) + "\n");
+                    out.write("msgstr " + getTranslation(null, targets[0], false, true, fc, 0) + BR);
                 } else {
                     parseHeader(targets[0].toString(), fc);
                 }
@@ -740,10 +743,10 @@ public class PoFilter extends AbstractFilter {
                     if (formatMonolingual) {
                         out.write("msgstr "
                                 + getTranslation(sources[0].toString(), targets[0], allowBlank, false, fc, 0)
-                                + "\n");
+                                + BR);
                     } else {
                         out.write("msgstr " + getTranslation(null, sources[0], allowBlank, false, fc, 0)
-                                + "\n");
+                                + BR);
                     }
                 } else {
                     parseOrAlign(0);
@@ -751,10 +754,10 @@ public class PoFilter extends AbstractFilter {
             } else {
                 // plurals
                 if (out != null) {
-                    out.write("msgstr[0] " + getTranslation(null, sources[0], allowBlank, false, fc, 0) + "\n");
+                    out.write("msgstr[0] " + getTranslation(null, sources[0], allowBlank, false, fc, 0) + BR);
                     for (int i = 1; i < plurals; i++) {
                         out.write("msgstr[" + i + "] " + getTranslation(null, sources[1], allowBlank, false, fc, i)
-                                + "\n");
+                                + BR);
                     }
                 } else {
                     parseOrAlign(0);
@@ -820,7 +823,7 @@ public class PoFilter extends AbstractFilter {
         }
 
         // Do real translation
-        String translation = null;
+        String translation;
         if (isHeader) {
             entry = autoFillInPluralStatement(entry, fc);
         }
@@ -907,18 +910,23 @@ public class PoFilter extends AbstractFilter {
          * necessary for the translation of the po-header anyway) We can also honor the no-wrap instruction at
          * least by letting the first line of a multi-line translation not be on the same line as 'msgstr'.
          */
-        // Interprets newline chars. 'blah<br>blah' becomes
-        // 'blah\n"<br>"blah'
-        translation = translation.replace("\n", "\\n\"\n\"");
-        // don't make empty new line at the end (in case the last 'blah' is
-        // empty string)
-        if (translation.endsWith("\"\n\"")) {
-            translation = translation.substring(0, translation.length() - 3);
+
+        // Interprets newline chars.
+        if (translation.contains("\n")) {
+            final String newLine = "\"" + BR + "\"";
+            // 'blah<br>blah' becomes 'blah\n"<br>"blah'
+            translation = translation.replace("\n", "\\n" + newLine);
+            // don't make empty new line at the end (in case the last 'blah' is
+            // empty string)
+            if (translation.endsWith(newLine)) {
+                translation = translation.substring(0, translation.length() - newLine.length());
+            }
+            if (nowrap) {
+                // start with empty string, to align all lines of translation
+                translation = newLine + translation;
+            }
         }
-        if (nowrap && translation.contains("\n")) {
-            // start with empty string, to align all lines of translation
-            translation = "\"\n\"" + translation;
-        }
+
         // Interprets tab chars. 'blah<tab>blah' becomes 'blah\tblah'
         // (<tab> representing the tab character '\u0009')
         translation = translation.replace("\t", "\\t");

@@ -114,7 +114,7 @@ public class MozillaFTLFilter extends AbstractFilter {
         String comments = null;
         int identation = 1;
         String key = null;
-        String k = null;
+        StringBuilder k = null;
         String key_attr = "";
         String value = null;
         boolean multiline = false;
@@ -177,17 +177,17 @@ public class MozillaFTLFilter extends AbstractFilter {
                 if (identation == 1) {
                     identation = ide;
                 } else {
-                    identation = (identation < ide ? identation : ide);
+                    identation = Math.min(identation, ide);
                 }
                 // writing out everything before = (and = itself)
             } else {
                 // outfile.write(str.substring(0, afterEqualsPos));
                 if (k == null) {
-                    k = "";
+                    k = new StringBuilder();
                 } else {
-                    k += "\n";
+                    k.append(lbpr.getLinebreak());
                 }
-                k += str.substring(0, afterEqualsPos);
+                k.append(str, 0, afterEqualsPos);
                 v = str.substring(afterEqualsPos);
             }
             if (value == null) {
@@ -235,7 +235,7 @@ public class MozillaFTLFilter extends AbstractFilter {
                 // Non-translated segments are written based on the
                 // filter options
                 if (translatedSegment || !removeStringsUntranslated) {
-                    outfile.write(k);
+                    outfile.write(k.toString());
                     outfile.write(trans);
                     outfile.write(lbpr.getLinebreak());
                 }

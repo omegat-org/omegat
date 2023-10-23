@@ -228,6 +228,9 @@ public class MozillaFTLFilter extends AbstractFilter {
                 if (trans == null) {
                     trans = value;
                     translatedSegment = false;
+                } else {
+                    // align to original linebreak chars when it has
+                    trans = trans.replaceAll("\n", lbpr.getLinebreak());
                 }
                 // Non-translated segments are written based on the
                 // filter options

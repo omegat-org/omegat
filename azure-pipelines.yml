@@ -49,7 +49,7 @@ stages:
         files=$(git diff-tree --no-commit-id --name-only -r HEAD)
         for file in $files; do
           if [[ $file =~ ^doc_src.* ]]; then
-            echo "##vso[task.setvariable variable=changeDoc;isoutput=true]True"
+            echo "##vso[task.setvariable variable=changeDoc;isOutput=true]True"
           fi
         done
       name: checkChangeDoc

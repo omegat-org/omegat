@@ -102,10 +102,10 @@ public class PoFilter extends AbstractFilter {
         }
     }
 
-    // CHECKSTYLE:OFF
+    // CHECKSTYLE.OFF: LineLength
     private static final Map<String, PluralInfo> PLURAL_INFOS;
     static {
-        HashMap<String, PluralInfo> info = new HashMap<String, PluralInfo>();
+        HashMap<String, PluralInfo> info = new HashMap<>();
         // list taken from http://translate.sourceforge.net/wiki/l10n/pluralforms d.d. 14-09-2012
         // See also http://unicode.org/repos/cldr-tmp/trunk/diff/supplemental/language_plural_rules.html
         info.put("ach", new PluralInfo(2, "(n > 1)"));
@@ -247,7 +247,7 @@ public class PoFilter extends AbstractFilter {
         info.put("zh", new PluralInfo(1, "0 "));
         PLURAL_INFOS = Collections.unmodifiableMap(info);
     }
-    // CHECKSTYLE:ON
+    // CHECKSTYLE.ON: LineLength
 
     /**
      * If true, non-translated segments will contain the source text in ms
@@ -311,7 +311,7 @@ public class PoFilter extends AbstractFilter {
     public Instance[] getDefaultInstances() {
         return new Instance[]
         { new Instance("*.po", StandardCharsets.UTF_8.name(), StandardCharsets.UTF_8.name()),
-                new Instance("*.pot", StandardCharsets.UTF_8.name(), StandardCharsets.UTF_8.name()) };
+          new Instance("*.pot", StandardCharsets.UTF_8.name(), StandardCharsets.UTF_8.name()) };
     }
 
     /**
@@ -319,7 +319,7 @@ public class PoFilter extends AbstractFilter {
      * @param inFile
      *            The source file.
      * @param inEncoding
-     *            Encoding of the input file, if the filter supports it. Otherwise null.
+     *            Encoding of the input file, if the filter supports it. Otherwise, null.
      * @return
      * @throws IOException
      */
@@ -397,17 +397,19 @@ public class PoFilter extends AbstractFilter {
     }
 
     @Override
-    protected void alignFile(BufferedReader sourceFile, BufferedReader translatedFile, FilterContext fc) throws Exception {
-        this.out = null;
+    protected void alignFile(BufferedReader sourceFile, BufferedReader translatedFile, FilterContext fc)
+            throws Exception {
+        out = null;
         processPoFile(translatedFile, fc);
     }
 
     @Override
-    public void processFile(BufferedReader in, BufferedWriter out, FilterContext fc) throws IOException {
-        this.out = out;
+    public void processFile(BufferedReader in, BufferedWriter writer, FilterContext fc) throws IOException {
+        out = writer;
         processPoFile(in, fc);
     }
 
+    // CHECKSTYLE.OFF: MethodLength
     private void processPoFile(BufferedReader in, FilterContext fc) throws IOException {
         fuzzy = false;
         fuzzyTrue = false;
@@ -419,7 +421,8 @@ public class PoFilter extends AbstractFilter {
         sources = new StringBuilder[2];
         sources[0] = new StringBuilder();
         sources[1] = new StringBuilder();
-        // can be overridden when header has been read and the number of plurals is different.
+        // can be overridden when header has been read and the number of
+        // plurals is different.
         targets = new StringBuilder[2];
         targets[0] = new StringBuilder();
         targets[1] = new StringBuilder();
@@ -433,8 +436,8 @@ public class PoFilter extends AbstractFilter {
         String s;
         while ((s = in.readLine()) != null) {
 
-            // We trim trailing spaces, otherwise the regexps could fail, thus making some segments
-            // invisible to OmegaT
+            // We trim trailing spaces, otherwise the regexps could fail, thus
+            // making some segments invisible to OmegaT
             s = s.trim();
 
             // We have a real fuzzy
@@ -452,7 +455,8 @@ public class PoFilter extends AbstractFilter {
             }
 
             /*
-             * Removing the fuzzy markers, as it has no meanings after being processed by omegat
+             * Removing the fuzzy markers, as it has no meanings after being
+             * processed by omegat
              */
             if (COMMENT_FUZZY.matcher(s).matches()) {
                 currentPlural = 0;
@@ -506,9 +510,10 @@ public class PoFilter extends AbstractFilter {
             Matcher mStr = MSG_STR.matcher(s);
             if (mStr.matches()) {
 
-                // Hack to be able to translate empty segments
-                // If the source segment is empty and there is a reference then
-                // it copies the reference of the segment and the localization note into the source segment
+                // Hack to be able to translate empty segments.
+                // If the source segment is empty and there is a reference, then
+                // it copies the reference of the segment and the localization
+                // note into the source segment
                 if (allowEditingBlankSegment && sources[0].length() == 0 && references.length() > 0 && headerProcessed) {
                     String aux = references + extractedComments.toString();
                     sources[0].append(aux);
@@ -600,6 +605,8 @@ public class PoFilter extends AbstractFilter {
                 case MSGCTX:
                     eol(s);
                     break;
+                default:
+                    throw new IllegalArgumentException();
                 }
                 continue;
             }
@@ -609,6 +616,7 @@ public class PoFilter extends AbstractFilter {
         }
         flushTranslation(currentMode, fc);
     }
+    // CHECKSTYLE.ON: MethodLength
 
     protected void eol(String s) throws IOException {
         if (out != null) {
@@ -650,12 +658,12 @@ public class PoFilter extends AbstractFilter {
 
     /**
      *
-     * @param source
-     * @param translation
-     * @param comments
+     * @param source unescaped source string.
+     * @param translation unescaped translated string in po file.
+     * @param comments unescaped comment in po file.
      * @param pathSuffix
-     *            suffix for path to distinguish plural forms. It will be empty for first one, and [1],[2],...
-     *            for next
+     *            suffix for a path to distinguish plural forms. It will be empty for the first one,
+     *            and [1], [2], ... for next
      */
     protected void parseOrAlign(String source, String translation, String comments, String pathSuffix) {
         if (translation.isEmpty()) {
@@ -675,7 +683,8 @@ public class PoFilter extends AbstractFilter {
                     entryParseCallback.addEntryWithProperties(null, sourceFuzzyTrue.toString(), translation, false,
                             props, path + pathSuffix, this, null);
                     fuzzyTrue = false;
-                    fuzzy = false;    // Do not load false fuzzy when there is a real one
+                    // Do not load false fuzzy when there is a real one
+                    fuzzy = false;
                     translation = null;
                 }
                 entryParseCallback.addEntry(null, source, translation, fuzzy, comments, path + pathSuffix, this,
@@ -686,6 +695,11 @@ public class PoFilter extends AbstractFilter {
         }
     }
 
+    /**
+     * Parse PO file header.
+     * @param header header block in the file.
+     * @param fc filter context to process.
+     */
     protected void parseHeader(String header, FilterContext fc) {
         if (entryParseCallback != null && !skipHeader) {
             header = unescape(autoFillInPluralStatement(header, fc));
@@ -704,7 +718,8 @@ public class PoFilter extends AbstractFilter {
             } else {
                 // header
 
-                // check existing plural statement. If it contains the number of plurals, then use it!
+                // Check an existing plural statement. If it contains the
+                // number of plurals, then use it!
                 StringBuilder targets0 = targets[0];
                 String header = targets[0].toString();
                 Matcher pluralMatcher = PLURAL_FORMS.matcher(header);
@@ -712,7 +727,7 @@ public class PoFilter extends AbstractFilter {
                     String nrOfPluralsString = header.substring(pluralMatcher.start(1), pluralMatcher.end(1));
                     plurals = Integer.parseInt(nrOfPluralsString);
                 } else {
-                    //else use predefined number of plurals, if it exists
+                    // else use predefined number of plurals if it exists
                     Language targetLang = fc.getTargetLang();
                     String lang = targetLang.getLanguageCode().toLowerCase(Locale.ENGLISH);
                     PluralInfo pluralInfo = PLURAL_INFOS.get(lang);
@@ -790,17 +805,17 @@ public class PoFilter extends AbstractFilter {
      * The given entry is interpreted to a string (e.g. escaped quotes are unescaped, '\n' is translated into newline
      * character, '\t' into tab character.) then translated and then returned as a PO-string-notation (e.g. double
      * quotes escaped, newline characters represented as '\n' and surrounded by double quotes, possibly split up over
-     * multiple lines)<Br>
+     * multiple lines)<br>
      * Long translations are not split up over multiple lines as some PO editors do, but when there are newline
-     * characters in a translation, it is split up at the newline markers.<Br>
+     * characters in a translation, it is split up at the newline markers.<br>
      * If the nowrap parameter is true, a translation that exists of multiple lines starts with an empty string-line to
      * left-align all lines. [With nowrap set to true, long lines are also never wrapped (except for at newline
-     * characters), but that was already not done without nowrap.] [ 1869069 ] Escape support for PO
+     * characters), but that was yet not done without nowrap.] [ 1869069 ] Escape support for PO
      *
      * @param en
      *            The entire source text
      * @param allowNull
-     *            Allow to output a blank translation in msgstr
+     *            Allow outputting a blank translation in msgstr
      * @param isHeader
      *            is the given string the PO-header string?
      * @param fc
@@ -833,7 +848,8 @@ public class PoFilter extends AbstractFilter {
             translation = entryTranslateCallback.getTranslation(id, entry, path + pathSuffix);
         }
 
-        if (translation == null && !allowNull) { // We write the source in translation
+        if (translation == null && !allowNull) {
+            // We write the source in translation
             translation = entry;
         }
 
@@ -873,7 +889,7 @@ public class PoFilter extends AbstractFilter {
         // of backslashes before \". Replace only the \" with " and keep the
         // other escaped backslashes )
         entry = R1.matcher(entry).replaceAll("$1\"");
-        // Interprets newline sequence, except when preceded by \
+        // Interprets a newline sequence, except when preceded by \
         // \n becomes Linefeed, unless the \ was escaped itself.
         // The number of preceding slashes before \n should not be odd,
         // else the \ is escaped and not part of \n.
@@ -884,7 +900,7 @@ public class PoFilter extends AbstractFilter {
         entry = R2.matcher(entry).replaceAll("$1\n");
         // same for \t, the tab character
         entry = R3.matcher(entry).replaceAll("$1\t");
-        // Interprets newline sequence at the beginning of a line
+        // Interprets a newline sequence at the beginning of a line
         entry = R4.matcher(entry).replaceAll("\\\n");
         // Removes escape from backslash
         entry = entry.replace("\\\\", "\\");

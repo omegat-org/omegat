@@ -386,6 +386,7 @@ jar {
 
 def omegatJarFilename = jar.archiveFileName.get()
 project(":machinetranslators") {jar.enabled = false}
+project(":spellchecker") {jar.enabled = false}
 
 def distsDir = file(layout.buildDirectory.file("${distsDirName}"))
 def assetDir = findProperty('assetDir') ?: '../'
@@ -548,14 +549,14 @@ distributions {
             from('release/linux-specific') {
                 filter ReplaceTokens, tokens: [
                         VERSION_NUMBER_SUBST: project.version,
-                        JAR_SUBST           : jar.archiveFileName.get()
+                        JAR_SUBST           : omegatJarFilename
                 ]
                 fileMode 0755
             }
             from('release/win32-specific') {
                 include 'OmegaT.bat'
                 filter(ReplaceTokens, tokens: [
-                        JAR_SUBST           : jar.archiveFileName.get()
+                        JAR_SUBST           : omegatJarFilename
                 ])
             }
             from('lib/licenses') {
@@ -988,7 +989,7 @@ ext.makeWinTask = { args ->
             }
             project.copy {
                 from("${destinationDir}/${installerBasename}.exe")
-                into(layout.buildDirectory.file("${distsDirName}"))
+                into distsDir
             }
             delete file("${destinationDir}/${installerBasename}.exe")
         }

@@ -489,8 +489,8 @@ manualIndexXmls.each { xml ->
     tasks.register(htmlTaskName, Exec) {
         inputs.files fileTree(dir: "doc_src/${lang}", includes: ['**/*.xml', 'images/*.png'],
                 excludes: ['xhtml5/*', 'index.xml'])
-        outputs.files fileTree(dir: "${buildDir}/docs/manual/${lang}/", includes: ['*.html', 'OmegaT.css',
-                'images/*.png', '_wh/**/*.js', '_wh/wh.css'])
+        outputs.files fileTree(dir: layout.buildDirectory.file("docs/manual/${lang}/"),
+                includes: ['*.html', 'OmegaT.css', 'images/*.png', '_wh/**/*.js', '_wh/wh.css'])
         workingDir = 'doc_src'
         commandLine './docgen', "-Dlanguage=${lang}", "-Dtarget=../build/docs/manual/${lang}", 'html5'
     }
@@ -499,7 +499,7 @@ manualIndexXmls.each { xml ->
     def versionProperties = loadProperties(file("doc_src/${lang}/version_${lang}.properties"))
     if (lang.equals("en") || versionProperties.version.equals(omtVersion.version)) {
         tasks.register(zipTaskName, Zip) {
-            from file("${buildDir}/docs/manual/${lang}")
+            from file(layout.buildDirectory.file("docs/manual/${lang}"))
             from fileTree(dir: "doc_src/${lang}", include: "**/version*.properties")
             archiveFileName = "${lang}.zip"
             destinationDirectory = file('docs/manuals')
@@ -511,13 +511,10 @@ manualIndexXmls.each { xml ->
     }
 }
 
-tasks.register('instantStartGuides') {
-    description = 'Build Instant Start guides for all languages. Requires Docker.'
-    group = 'documentation'
-}
-
-tasks.register('firstSteps') {
-    description = 'Build First Step pages for all languages. Requires Docker.'
+tasks.register('firstSteps', Sync) {
+    description = 'Build First pages for all languages at docs/greetings/. Requires Docker.'
+    from layout.buildDirectory.file("docs/greetings")
+    into layout.projectDirectory.file("docs/greetings")
     group = 'documentation'
 }
 
@@ -525,12 +522,15 @@ ext.firstStepsXmls = fileTree(dir: 'doc_src', include: '**/First_Steps.xml')
 firstStepsXmls.each { xml ->
     def lang = xml.parentFile.name
     def taskName = "firstSteps${lang.capitalize()}"
+    def syncTaskName = "firstSteps${lang.capitalize()}Sync"
     tasks.register(taskName, Exec) {
         inputs.files fileTree(dir: "doc_src/${lang}", include: 'First_Steps.xml')
-        outputs.files fileTree(dir: 'docs', includes: ["greetings/${lang}/first_steps.html", "greetings/${lang}/OmegaT.css"])
+        outputs.files fileTree(dir: layout.buildDirectory.file('docs/greetings/'),
+                includes: ["${lang}/first_steps.html", "${lang}/OmegaT.css"])
         workingDir = 'doc_src'
-        commandLine './docgen', "-Dlanguage=${lang}", "-Dtarget=../docs/greetings/${lang}", 'first-steps'
+        commandLine './docgen', "-Dlanguage=${lang}", "-Dtarget=../build/docs/greetings/${lang}", 'first-steps'
     }
+
     firstSteps.dependsOn taskName
 }
 
@@ -538,15 +538,15 @@ ext.instantStartXmls = fileTree(dir: 'doc_src', include: '**/InstantStartGuide.x
 instantStartXmls.each { xml ->
     def lang = xml.parentFile.name
     def taskName = "instantStartGuide${lang.capitalize()}"
+    def syncTaskName = "instantStartGuide${lang.capitalize()}Sync"
     tasks.register(taskName, Exec) {
         inputs.files fileTree(dir: "doc_src/${lang}", include: '**/*.xml')
-        outputs.files fileTree(dir: "docs",
-                includes: ["greetings/${lang}/first_steps.html", "greetings/${lang}/images/InstantGuide*png",
-                           "greetings/${lang}/OmegaT.css"])
+        outputs.files fileTree(dir: layout.buildDirectory.file('docs/greetings/'),
+                includes: ["${lang}/first_steps.html", "${lang}/images/InstantGuide*png", "${lang}/OmegaT.css"])
         workingDir = 'doc_src'
-        commandLine './docgen', "-Dlanguage=${lang}", "-Dtarget=../docs/greetings/${lang}", 'instant-start'
+        commandLine './docgen', "-Dlanguage=${lang}", "-Dtarget=../build/docs/greetings/${lang}", 'instant-start'
     }
-    instantStartGuides.dependsOn taskName
+    firstSteps.dependsOn taskName
 }
 
 tasks.register('genMac') {
@@ -610,7 +610,7 @@ distributions {
                 filter(FixCrLfFilter, eol: FixCrLfFilter.CrLf.newInstance('crlf'))
             }
             project.tasks.matching {it.name.startsWith('firstSteps') || it.name.startsWith('instantStart')}.forEach {
-                from(it.outputs) { into 'docs' }
+                from(it.outputs) { into 'docs/greetings' }
             }
             project.tasks.matching {it.name.startsWith('manualZip')}.forEach {
                 from(it.outputs) { into 'docs/manuals' }
@@ -1462,6 +1462,7 @@ tasks.withType(JavaExec).configureEach {
     maxHeapSize = findProperty('runMaxHeapSize')
     // Ask modules to be up-to-date before run task executed
     dependsOn subprojects.tasks.jar
+    dependsOn firstSteps
 }
 
 tasks.register('printVersion') {

@@ -515,6 +515,8 @@ tasks.register('firstSteps', Sync) {
     description = 'Build First pages for all languages at docs/greetings/. Requires Docker.'
     from layout.buildDirectory.file("docs/greetings")
     into layout.projectDirectory.file("docs/greetings")
+    filePermissions { unix("rw-r--r--") }
+    dirPermissions { unix("rwxr-xr-x") }
     group = 'documentation'
 }
 
@@ -522,7 +524,6 @@ ext.firstStepsXmls = fileTree(dir: 'doc_src', include: '**/First_Steps.xml')
 firstStepsXmls.each { xml ->
     def lang = xml.parentFile.name
     def taskName = "firstSteps${lang.capitalize()}"
-    def syncTaskName = "firstSteps${lang.capitalize()}Sync"
     tasks.register(taskName, Exec) {
         inputs.files fileTree(dir: "doc_src/${lang}", include: 'First_Steps.xml')
         outputs.files fileTree(dir: layout.buildDirectory.file('docs/greetings/'),
@@ -538,7 +539,6 @@ ext.instantStartXmls = fileTree(dir: 'doc_src', include: '**/InstantStartGuide.x
 instantStartXmls.each { xml ->
     def lang = xml.parentFile.name
     def taskName = "instantStartGuide${lang.capitalize()}"
-    def syncTaskName = "instantStartGuide${lang.capitalize()}Sync"
     tasks.register(taskName, Exec) {
         inputs.files fileTree(dir: "doc_src/${lang}", include: '**/*.xml')
         outputs.files fileTree(dir: layout.buildDirectory.file('docs/greetings/'),

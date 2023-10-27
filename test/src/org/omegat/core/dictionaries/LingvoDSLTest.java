@@ -103,7 +103,8 @@ public class LingvoDSLTest {
         List<DictionaryEntry> result = dict.readArticles(word);
         assertFalse(result.isEmpty());
         assertEquals(word, result.get(0).getWord());
-        assertEquals("<div style=\"text-indent: 30px\">Translation line also can have a single TAB char</div>",
+        assertEquals(
+                "<div style=\"text-indent: 30px\">Translation line also can have a single TAB char</div>",
                 result.get(0).getArticle());
     }
 
@@ -112,11 +113,12 @@ public class LingvoDSLTest {
         LingvoDSLDict dict = (LingvoDSLDict) new LingvoDSL().loadDict(TEST_DICT);
         String word = "ta";
         List<DictionaryEntry> result = dict.readArticlesPredictive(word);
-        assertEquals(2, result.size());  // tag and tab
+        assertEquals(2, result.size()); // tag and tab
         assertTrue(result.get(0).getWord().startsWith(word));
-        for (DictionaryEntry entry: result) {
+        for (DictionaryEntry entry : result) {
             if (entry.getWord().equals("tab")) {
-                assertEquals("<div style=\"text-indent: 30px\">Translation line also can have a single TAB char</div>",
+                assertEquals(
+                        "<div style=\"text-indent: 30px\">Translation line also can have a single TAB char</div>",
                         entry.getArticle());
             }
         }
@@ -139,10 +141,9 @@ public class LingvoDSLTest {
         String word = "\u4e00\u4e2a\u6837";
         List<DictionaryEntry> result = dict.readArticles(word);
         assertFalse(result.isEmpty());
-        assertEquals("\u4E00\u500B\u6A23" + LINE_SEPARATOR + "\u4E00\u4E2A\u6837",
-                result.get(0).getWord());
-        assertEquals("[y\u012B ge y\u00E0ng]&nbsp;\nsame as \u4E00\u6A23|\u4E00\u6837 y\u012B " +
-                "y\u00E0ng&nbsp;, the same", result.get(0).getArticle());
+        assertEquals("\u4E00\u500B\u6A23" + LINE_SEPARATOR + "\u4E00\u4E2A\u6837", result.get(0).getWord());
+        assertEquals("[y\u012B ge y\u00E0ng]&nbsp;\nsame as \u4E00\u6A23|\u4E00\u6837 y\u012B "
+                + "y\u00E0ng&nbsp;, the same", result.get(0).getArticle());
     }
 
     @Test
@@ -154,7 +155,8 @@ public class LingvoDSLTest {
         List<DictionaryEntry> result = dict.readArticles(word);
         assertFalse(result.isEmpty());
         assertEquals(word, result.get(0).getWord());
-        assertEquals("<div>Here is an <span style='font-style: italic'>italic</span> <strong>word</strong>.</div>",
+        assertEquals(
+                "<div>Here is an <span style='font-style: italic'>italic</span> <strong>word</strong>.</div>",
                 result.get(0).getArticle());
     }
 
@@ -167,15 +169,15 @@ public class LingvoDSLTest {
         List<DictionaryEntry> result = dict.readArticles(word);
         assertFalse(result.isEmpty());
         assertEquals(word, result.get(0).getWord());
-        assertEquals("<div style=\"text-indent: 30px\"><strong>1.</strong>"
+        assertEquals(
+                "<div style=\"text-indent: 30px\"><strong>1.</strong>"
                         + " \u043E\u0442\u043A\u0430\u0437\u044B\u0432\u0430\u0442\u044C\u0441\u044F"
                         + " (<span style='font-style: italic'>"
                         + "\u043E\u0442 \u0447\u0435\u0433\u043E-\u043B.</span>),"
                         + " \u043F\u0440\u0435\u043A\u0440\u0430\u0449\u0430\u0442\u044C "
                         + "(<span style='font-style: italic'>"
                         + "\u043F\u043E\u043F\u044B\u0442\u043A\u0438 \u0438 \u0442."
-                        + " \u043F.</span>)</div>\n"
-                        + "<div style=\"text-indent: 30px\"><strong>2.</strong>"
+                        + " \u043F.</span>)</div>\n" + "<div style=\"text-indent: 30px\"><strong>2.</strong>"
                         + " \u043F\u043E\u043A\u0438\u0434\u0430\u0442\u044C,"
                         + " \u043E\u0441\u0442\u0430\u0432\u043B\u044F\u0442\u044C</div>\n"
                         + "<div style=\"text-indent: 60px\">to abandon attempts</div>\n"
@@ -196,7 +198,8 @@ public class LingvoDSLTest {
         List<DictionaryEntry> result = dict.readArticles(word);
         assertFalse(result.isEmpty());
         assertEquals(word, result.get(0).getWord());
-        assertEquals("<strong>1.</strong> [kl\u0131\u0259] <span style='font-style: italic'>"
+        assertEquals(
+                "<strong>1.</strong> [kl\u0131\u0259] <span style='font-style: italic'>"
                         + "<span style=\"color: green\">a</span></span>"
                         + " <div style=\"text-indent: 60px\">1. \u044F\u0441\u043D\u044B\u0439,"
                         + " \u0441\u0432\u0435\u0442\u043B\u044B\u0439 </div>\n"
@@ -214,8 +217,7 @@ public class LingvoDSLTest {
                         + "<span class=\"lang_en\">~ water of the lake</span>"
                         + " - \u0447\u0438\u0441\u0442\u0430\u044F /\u043F\u0440\u043E\u0437\u0440\u0430"
                         + "\u0447\u043D\u0430\u044F/ \u0432\u043E\u0434\u0430 \u043E\u0437\u0435\u0440\u0430"
-                        + " </span></div>\n"
-                        + "<div style=\"text-indent: 90px\"><span class=\"details\">"
+                        + " </span></div>\n" + "<div style=\"text-indent: 90px\"><span class=\"details\">"
                         + "<span class=\"lang_en\">~ glass</span> - \u043F\u0440\u043E\u0437\u0440\u0430"
                         + "\u0447\u043D\u043E\u0435 \u0441\u0442\u0435\u043A\u043B\u043E </span></div>\n"
                         + "<div style=\"text-indent: 60px\">"
@@ -228,8 +230,7 @@ public class LingvoDSLTest {
                         + "<span class=\"lang_en\">~ outline</span>"
                         + " - \u044F\u0441\u043D\u043E\u0435 /\u043E\u0442\u0447\u0451\u0442\u043B\u0438"
                         + "\u0432\u043E\u0435/ \u043E\u0447\u0435\u0440\u0442\u0430\u043D\u0438\u0435 </span>"
-                        + "</div>\n"
-                        + "<div style=\"text-indent: 90px\"><span class=\"details\">"
+                        + "</div>\n" + "<div style=\"text-indent: 90px\"><span class=\"details\">"
                         + "<span class=\"lang_en\">~ sight</span> - \u0445\u043E\u0440\u043E\u0448\u0435"
                         + "\u0435 \u0437\u0440\u0435\u043D\u0438\u0435 </span></div>\n"
                         + "<div style=\"text-indent: 90px\"><span class=\"details\">"

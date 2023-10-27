@@ -59,7 +59,8 @@ public class MagicComment {
      *  key and value: ? string w/ alphabet, number, underscore, hyphen ? ;
      * </pre>
      */
-    private static final Pattern MAGIC_COMMENT_PATTERN = Pattern.compile("(?<key>[\\w-]+)\\s*:\\s*(?<value>[\\w-]+)(?:\\s*;)?");
+    private static final Pattern MAGIC_COMMENT_PATTERN = Pattern
+            .compile("(?<key>[\\w-]+)\\s*:\\s*(?<value>[\\w-]+)(?:\\s*;)?");
 
     /**
      * Extract the first line of the file and parse with {@code #parse(String)}
@@ -68,10 +69,10 @@ public class MagicComment {
      * @return
      * @throws IOException
      */
-    public static Map<String, String> parse(File file) throws IOException  {
+    public static Map<String, String> parse(File file) throws IOException {
         String line;
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(BOMInputStream.builder()
-                             .setFile(file).setCharset(StandardCharsets.US_ASCII).get()))) {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(
+                BOMInputStream.builder().setFile(file).get(), StandardCharsets.US_ASCII))) {
             line = reader.readLine();
         }
         if (line != null && line.startsWith("#")) {
@@ -84,11 +85,13 @@ public class MagicComment {
     /**
      * Parse magic comment
      *
-     * @param str input string.
+     * @param str
+     *            input string.
      * @return Key-Value map of String.
      */
     public static Map<String, String> parse(final String str) {
-        if (str == null || str.length() < 11) {  // minimum = "-*- a:b -*-".length()
+        if (str == null || str.length() < 11) { // minimum = "-*- a:b
+                                                // -*-".length()
             return Collections.emptyMap();
         }
         int startMarker = str.indexOf("-*- ");

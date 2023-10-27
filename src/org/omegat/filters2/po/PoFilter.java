@@ -424,6 +424,7 @@ public class PoFilter extends AbstractFilter {
         processPoFile(in, fc);
     }
 
+    // CHECKSTYLE:OFF
     private void processPoFile(BufferedReader in, FilterContext fc) throws IOException {
         fuzzy = false;
         fuzzyTrue = false;
@@ -634,6 +635,7 @@ public class PoFilter extends AbstractFilter {
         }
         flushTranslation(currentMode, fc);
     }
+    // CHECKSTYLE:ON
 
     protected void eol(String s) throws IOException {
         if (out != null) {

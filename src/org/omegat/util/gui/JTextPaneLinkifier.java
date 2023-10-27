@@ -162,10 +162,10 @@ public final class JTextPaneLinkifier {
         AttributeInserterDocumentFilter(StyledDocument doc, boolean extended) {
             this.doc = doc;
             if (extended) {
-                urlPatterns = new Pattern[]{HttpConnectionUtils.URL_PATTERN,
-                        HttpConnectionUtils.FILE_URL_PATTERN};
+                urlPatterns = new Pattern[] { HttpConnectionUtils.URL_PATTERN,
+                        HttpConnectionUtils.FILE_URL_PATTERN };
             } else {
-                urlPatterns = new Pattern[]{HttpConnectionUtils.URL_PATTERN};
+                urlPatterns = new Pattern[] { HttpConnectionUtils.URL_PATTERN };
             }
             timer = new Timer(REFRESH_DELAY, e -> refreshPane());
             timer.setRepeats(false);
@@ -186,7 +186,8 @@ public final class JTextPaneLinkifier {
         @Override
         public void remove(FilterBypass fb, int offset, int length) throws BadLocationException {
             boolean refresh = true;
-            final AttributeSet attr = ((StyledDocument) fb.getDocument()).getCharacterElement(offset).getAttributes();
+            final AttributeSet attr = ((StyledDocument) fb.getDocument()).getCharacterElement(offset)
+                    .getAttributes();
             if (attr != null && attr.isDefined(StyleConstants.ComposedTextAttribute)) {
                 refresh = false;
             }

@@ -75,18 +75,17 @@ public final class HttpConnectionUtils {
     // From https://gist.github.com/dperini/729294
     // and https://github.com/JetBrains/intellij-community
     // See lib/licenses/Licenses.txt
-    private static final String REGEX_URL = "(?:https?|ftp)://"  // protocol
-            + "(?:\\S+(?::\\S*)?@)?(?:(?!"  // user:pass (optional)
+    private static final String REGEX_URL = "(?:https?|ftp)://" // protocol
+            + "(?:\\S+(?::\\S*)?@)?(?:(?!" // user:pass (optional)
             + "(?:10|127)(?:\\.\\d{1,3}){3})(?!(?:169\\.254|192\\.168)(?:\\.\\d{1,3}){2})(?!172\\."
             + "(?:1[6-9]|2\\d|3[0-1])(?:\\.\\d{1,3}){2})(?:[1-9]\\d?|1\\d\\d|2[01]\\d|22[0-3])(?:\\."
             + "(?:1?\\d{1,2}|2[0-4]\\d|25[0-5])){2}(?:\\.(?:[1-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-4]))"
             // IP addresses
-            + "|"
-            + "(?:[a-z\\u00a1-\\uffff0-9]-*)*[a-z\\u00a1-\\uffff0-9]+"
+            + "|" + "(?:[a-z\\u00a1-\\uffff0-9]-*)*[a-z\\u00a1-\\uffff0-9]+"
             + "(?:\\.(?:[a-z\\u00a1-\\uffff0-9]-*)*[a-z\\u00a1-\\uffff0-9]+)*"
-            + "\\.[a-z\\u00a1-\\uffff]{2,}\\.?)"  // domain host
-            + "(?::\\d{2,5})?"  // port (optional)
-            + "(?:[-A-Za-z0-9+$&@#/%?=~_|!:,.;]*[-A-Za-z0-9+$&@#/%=~_|])?";  // resources
+            + "\\.[a-z\\u00a1-\\uffff]{2,}\\.?)" // domain host
+            + "(?::\\d{2,5})?" // port (optional)
+            + "(?:[-A-Za-z0-9+$&@#/%?=~_|!:,.;]*[-A-Za-z0-9+$&@#/%=~_|])?"; // resources
 
     /**
      * Regular Expression for https and ftp URL validation.
@@ -96,8 +95,8 @@ public final class HttpConnectionUtils {
     /**
      * Regular Expression for file URL validation.
      */
-    public static final Pattern FILE_URL_PATTERN = Pattern.compile(
-            "\\bfile://[-A-Za-z0-9+$&@#/%?=~_|!:,.;]*[-A-Za-z0-9+$&@#/%=~_|]");
+    public static final Pattern FILE_URL_PATTERN = Pattern
+            .compile("\\bfile://[-A-Za-z0-9+$&@#/%?=~_|!:,.;]*[-A-Za-z0-9+$&@#/%=~_|]");
 
     /**
      * Don't instantiate util class.
@@ -461,7 +460,9 @@ public final class HttpConnectionUtils {
 
     /**
      * Validate URL string.
-     * @param remoteUrl URL candidate string.
+     * 
+     * @param remoteUrl
+     *            URL candidate string.
      * @return true when valid, otherwise false.
      */
     public static boolean checkUrl(String remoteUrl) {

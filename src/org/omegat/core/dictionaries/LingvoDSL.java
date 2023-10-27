@@ -35,13 +35,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import io.github.eb4j.dsl.DslArticle;
-import io.github.eb4j.dsl.DslDictionary;
-import io.github.eb4j.dsl.DslResult;
-import io.github.eb4j.dsl.data.LanguageCode;
-import io.github.eb4j.dsl.data.LanguageName;
-import io.github.eb4j.dsl.visitor.DslVisitor;
 import org.apache.commons.io.FilenameUtils;
+import tokyo.northside.dsl4j.DslArticle;
+import tokyo.northside.dsl4j.DslDictionary;
+import tokyo.northside.dsl4j.DslResult;
+import tokyo.northside.dsl4j.data.LanguageCode;
+import tokyo.northside.dsl4j.data.LanguageName;
+import tokyo.northside.dsl4j.visitor.DslVisitor;
 
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;

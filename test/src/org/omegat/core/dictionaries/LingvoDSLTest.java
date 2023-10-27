@@ -37,10 +37,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
-import io.github.eb4j.dsl.DslResult;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import tokyo.northside.dsl4j.DslResult;
 
 import org.omegat.core.dictionaries.LingvoDSL.LingvoDSLDict;
 import org.omegat.util.Preferences;

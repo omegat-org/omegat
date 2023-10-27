@@ -322,8 +322,7 @@ public class PoFilter extends AbstractFilter {
      */
     @Override
     protected BufferedReader createReader(File inFile, String inEncoding) throws IOException {
-        BOMInputStream bomInputStream = new BOMInputStream(Files.newInputStream(inFile.toPath()),
-                ByteOrderMark.UTF_8, ByteOrderMark.UTF_16LE);
+        BOMInputStream bomInputStream = BOMInputStream.builder().setFile(inFile).setByteOrderMarks(ByteOrderMark.UTF_8, ByteOrderMark.UTF_16LE).get();
         ByteOrderMark bom = bomInputStream.getBOM();
         String charset;
         if (bom != null) {

@@ -409,7 +409,7 @@ public class Xliff1Filter extends AbstractXliffFilter {
                     res.setLength(0);
                     res = saveBuf.pop();
                     break;
-                default: {
+                default:
                     String pop = tagStack.pop();
                     if (pop.equals("mark-protected")) { // isProtectedTag(start
                                                         // element) was true
@@ -427,7 +427,6 @@ public class Xliff1Filter extends AbstractXliffFilter {
                         tagsMap.put("/" + pop, Collections.singletonList(ev));
                         res.append("</").append(pop).append(">");
                     }
-                }
                 }
             }
         }
@@ -628,7 +627,7 @@ public class Xliff1Filter extends AbstractXliffFilter {
      * Builds target from OmegaT to XLIFF format. May be overridden in
      * subclasses
      **/
-    protected List<XMLEvent> restoreTags(String unitId, String path, String src, String tra) {
+    protected List<XMLEvent> restoreTags(String aUnitId, String path, String src, String tra) {
         return restoreTags(tra);
     }
 

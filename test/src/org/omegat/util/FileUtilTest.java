@@ -451,37 +451,39 @@ public class FileUtilTest {
         Collections.sort(list2);
         assertTrue(list2.get(0).getPath().endsWith("bar"));
 
-        try {
-            File lnk = new File(tempDir, "hoge");
-            Files.createSymbolicLink(lnk.toPath(), subDir.toPath());
-            List<File> list3 = FileUtil.buildFileList(lnk, true);
-            List<File> list4 = FileUtil.buildFileList(subDir, true);
-            assertEquals(list3.size(), list4.size());
-            assertTrue(IntStream.range(0, list3.size()).allMatch(i -> {
-                try {
-                    return list3.get(i).getCanonicalFile().equals(list4.get(i).getCanonicalFile());
-                } catch (IOException e) {
-                    throw new UncheckedIOException(e);
-                }
-            }));
-        } catch (UnsupportedOperationException | IOException ex) {
-            // Creating symbolic links appears to not be supported on this
-            // system
-        }
-
-        try {
-            Files.createSymbolicLink(new File(tempDir, "baz").toPath(), tempDir.toPath());
-            FileUtil.buildFileList(tempDir, true);
-            fail("Should die from file system loop");
-        } catch (UnsupportedOperationException | IOException ex) {
-            // Creating symbolic links appears to not be supported on this
-            // system
-        } catch (UncheckedIOException ex) {
-            if (!(ex.getCause() instanceof FileSystemLoopException)) {
-                throw ex;
+        if (!Platform.isWindows) {
+            try {
+                File lnk = new File(tempDir, "hoge");
+                Files.createSymbolicLink(lnk.toPath(), subDir.toPath());
+                List<File> list3 = FileUtil.buildFileList(lnk, true);
+                List<File> list4 = FileUtil.buildFileList(subDir, true);
+                assertEquals(list3.size(), list4.size());
+                assertTrue(IntStream.range(0, list3.size()).allMatch(i -> {
+                    try {
+                        return list3.get(i).getCanonicalFile().equals(list4.get(i).getCanonicalFile());
+                    } catch (IOException e) {
+                        throw new UncheckedIOException(e);
+                    }
+                }));
+            } catch (UnsupportedOperationException | IOException ex) {
+                // Creating symbolic links appears to not be supported on this
+                // system
             }
-            // Creating symbolic links appears to not be supported on this
-            // system
+
+            try {
+                Files.createSymbolicLink(new File(tempDir, "baz").toPath(), tempDir.toPath());
+                FileUtil.buildFileList(tempDir, true);
+                fail("Should die from file system loop");
+            } catch (UnsupportedOperationException | IOException ex) {
+                // Creating symbolic links appears to not be supported on this
+                // system
+            } catch (UncheckedIOException ex) {
+                if (!(ex.getCause() instanceof FileSystemLoopException)) {
+                    throw ex;
+                }
+                // Creating symbolic links appears to not be supported on this
+                // system
+            }
         }
 
         safeDeleteDirectory(tempDir);

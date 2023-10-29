@@ -27,7 +27,20 @@
 
 package org.omegat.core.team2.gui;
 
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.event.ActionEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 import org.omegat.util.OStrings;
 import org.omegat.util.gui.StaticUIUtils;
@@ -52,17 +65,18 @@ public class UserPassDialog extends javax.swing.JDialog {
         StaticUIUtils.setEscapeClosable(this);
 
         initComponents();
-
         getRootPane().setDefaultButton(okButton);
 
         invalidate();
         pack();
         setLocationRelativeTo(parent);
 
-        userText.requestFocusInWindow();
+        usernameField.requestFocusInWindow();
     }
 
-    /** @return the return status of this dialog - one of RET_OK or RET_CANCEL */
+    /**
+     * @return the return status of this dialog - one of RET_OK or RET_CANCEL
+     */
     public int getReturnStatus() {
         return returnStatus;
     }
@@ -71,110 +85,122 @@ public class UserPassDialog extends javax.swing.JDialog {
      * This method is called from within the constructor to initialize the form.
      */
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
+        GridBagConstraints gridBagConstraints;
 
-        jPanel3 = new javax.swing.JPanel();
-        descriptionTextArea = new javax.swing.JTextArea();
-        jPanel2 = new javax.swing.JPanel();
-        userLabel = new JLabel();
-        userText = new javax.swing.JTextField();
-        passwordLabel = new JLabel();
-        passwordField = new javax.swing.JPasswordField();
-        jPanel4 = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
-        okButton = new javax.swing.JButton();
-        cancelButton = new javax.swing.JButton();
+        JPanel northPanel = new JPanel();
+        JPanel mainPanel = new JPanel();
+        JPanel buttonPanel = new JPanel();
+        JPanel southPanel = new JPanel();
+        descriptionTextArea = new JTextArea();
+        JLabel usernameLabel = new JLabel();
+        usernameField = new JTextField();
+        JLabel passwordLabel = new JLabel();
+        passwordField = new JPasswordField();
+        perHostCheckBox = new JCheckBox();
+        okButton = new JButton();
+        JButton cancelButton = new JButton();
 
         setTitle(OStrings.getString("TEAM_USERPASS_TITLE")); // NOI18N
-        setMinimumSize(new java.awt.Dimension(450, 200));
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosing(java.awt.event.WindowEvent evt) {
+        setMinimumSize(new Dimension(450, 200));
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent evt) {
                 formWindowClosing(evt);
             }
         });
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        jPanel3.setLayout(new java.awt.BorderLayout());
+        northPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        northPanel.setLayout(new BorderLayout());
 
         descriptionTextArea.setEditable(false);
         descriptionTextArea.setFont(new JLabel().getFont());
         descriptionTextArea.setLineWrap(true);
         descriptionTextArea.setWrapStyleWord(true);
         descriptionTextArea.setOpaque(false);
-        jPanel3.add(descriptionTextArea, java.awt.BorderLayout.CENTER);
+        northPanel.add(descriptionTextArea, BorderLayout.CENTER);
 
-        getContentPane().add(jPanel3, java.awt.BorderLayout.NORTH);
+        getContentPane().add(northPanel, BorderLayout.NORTH);
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 10, 10, 10));
-        jPanel2.setLayout(new java.awt.GridBagLayout());
+        mainPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 10, 10, 10));
+        mainPanel.setLayout(new java.awt.GridBagLayout());
 
-        userLabel.setLabelFor(userText);
-        org.openide.awt.Mnemonics.setLocalizedText(userLabel, OStrings.getString("LOGIN_USER")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
+        usernameLabel.setLabelFor(usernameField);
+        org.openide.awt.Mnemonics.setLocalizedText(usernameLabel, OStrings.getString("LOGIN_USER")); // NOI18N
+        gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.fill = GridBagConstraints.NONE;
+        gridBagConstraints.anchor = GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(4, 16, 4, 4);
-        jPanel2.add(userLabel, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
+        mainPanel.add(usernameLabel, gridBagConstraints);
+
+        gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 5;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipadx = 50;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.anchor = GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        jPanel2.add(userText, gridBagConstraints);
+        mainPanel.add(usernameField, gridBagConstraints);
 
         passwordLabel.setLabelFor(passwordField);
         org.openide.awt.Mnemonics.setLocalizedText(passwordLabel, OStrings.getString("LOGIN_PASSWORD")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 6;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.fill = GridBagConstraints.NONE;
+        gridBagConstraints.anchor = GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(4, 16, 4, 4);
-        jPanel2.add(passwordLabel, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
+        mainPanel.add(passwordLabel, gridBagConstraints);
+
+        gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 6;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipadx = 50;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.anchor = GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        jPanel2.add(passwordField, gridBagConstraints);
+        mainPanel.add(passwordField, gridBagConstraints);
 
-        getContentPane().add(jPanel2, java.awt.BorderLayout.CENTER);
+        gridBagConstraints = new GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(4, 16, 4, 4);
+        mainPanel.add(perHostCheckBox, gridBagConstraints);
 
-        jPanel4.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        jPanel4.setLayout(new java.awt.BorderLayout());
+        getContentPane().add(mainPanel, BorderLayout.CENTER);
+
+        southPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        southPanel.setLayout(new BorderLayout());
 
         org.openide.awt.Mnemonics.setLocalizedText(okButton, OStrings.getString("BUTTON_OK")); // NOI18N
         okButton.addActionListener(this::okButtonActionPerformed);
-        jPanel1.add(okButton);
+        buttonPanel.add(okButton);
 
         org.openide.awt.Mnemonics.setLocalizedText(cancelButton, OStrings.getString("BUTTON_CANCEL")); // NOI18N
         cancelButton.addActionListener(this::cancelButtonActionPerformed);
-        jPanel1.add(cancelButton);
+        buttonPanel.add(cancelButton);
 
-        jPanel4.add(jPanel1, java.awt.BorderLayout.EAST);
+        southPanel.add(buttonPanel, BorderLayout.EAST);
 
-        getContentPane().add(jPanel4, java.awt.BorderLayout.SOUTH);
+        getContentPane().add(southPanel, BorderLayout.SOUTH);
 
         pack();
     }
 
-    private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {
+    private void okButtonActionPerformed(ActionEvent evt) {
         doClose(RET_OK);
     }
 
-    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {
+    private void cancelButtonActionPerformed(ActionEvent evt) {
         doClose(RET_CANCEL);
     }
 
-    private void formWindowClosing(java.awt.event.WindowEvent evt) {
+    private void formWindowClosing(WindowEvent evt) {
         doClose(RET_CANCEL);
     }
 
@@ -184,34 +210,40 @@ public class UserPassDialog extends javax.swing.JDialog {
         dispose();
     }
 
-    private javax.swing.JButton cancelButton;
-    public javax.swing.JTextArea descriptionTextArea;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JButton okButton;
-    private javax.swing.JPasswordField passwordField;
-    private JLabel passwordLabel;
-    private JLabel userLabel;
-    private javax.swing.JTextField userText;
+    private JButton okButton;
+    private JTextArea descriptionTextArea;
+    private JTextField usernameField;
+    private JPasswordField passwordField;
+    private javax.swing.JCheckBox perHostCheckBox;
 
     private int returnStatus = RET_CANCEL;
 
     public void setUsername(String txt) {
-        userText.setText(txt);
+        usernameField.setText(txt);
     }
 
     public void enableUsernameField(boolean enabled) {
-        userText.setEditable(enabled);
-        userText.setEnabled(enabled);
+        usernameField.setEditable(enabled);
+        usernameField.setEnabled(enabled);
     }
 
     public String getUsername() {
-        return userText.getText();
+        return usernameField.getText();
     }
 
     public String getPassword() {
         return new String(passwordField.getPassword());
+    }
+
+    public boolean isPerHost() {
+        return perHostCheckBox.isSelected();
+    }
+
+    public void setDescription(String description) {
+        descriptionTextArea.setText(description);
+    }
+
+    public void setPerHostCheckBoxText(String text) {
+        org.openide.awt.Mnemonics.setLocalizedText(perHostCheckBox, text);
     }
 }

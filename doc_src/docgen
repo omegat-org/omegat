@@ -22,19 +22,19 @@ mkdir -p $TARGET
 chmod -R a+rw $SHELL_PATH 2&> /dev/null
 chmod -R a+rw $TARGET 2&> /dev/null
 
-EXIT_CODE=0
-
 # check docker or containerd/nerdctl
 if type nerdctl &> /dev/null ; then
-  nerdctl run -i --rm -u  `id -u`:`id -g` -v "$(dirname "$PWD")":/work/root omegatorg/docgen "$@"
-  EXIT_CODE=$?
+    CMD=nerdctl
 elif type docker &> /dev/null ; then
-  docker run -i --rm -u  `id -u`:`id -g` -v "$(dirname "$PWD")":/work/root omegatorg/docgen "$@"
-  EXIT_CODE=$?
+    CMD=docker
 else
   echo Please install docker or nerdctl!
-  EXIT_CODE=2
+  exit 2
 fi
+
+EXIT_CODE=0
+$CMD run -i --rm -u  `id -u`:`id -g` -v "$(dirname "$PWD")":/work/root omegatorg/docgen "$@"
+EXIT_CODE=$?
 sleep 5
 if [[ -e $SHELL_PATH/$LANGUAGE/xhtml5 ]]; then
   rm -r $SHELL_PATH/$LANGUAGE/xhtml5/

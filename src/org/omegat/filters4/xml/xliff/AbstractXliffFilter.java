@@ -242,7 +242,4 @@ abstract class AbstractXliffFilter extends AbstractXmlFilter {
             tagStack.push("" + prefix + count);
         }
     }
-
-    protected static final javax.xml.stream.XMLEventFactory eFactory = javax.xml.stream.XMLEventFactory
-            .newInstance();
 }

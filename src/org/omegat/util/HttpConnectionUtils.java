@@ -44,6 +44,8 @@ import java.util.Base64;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.commons.io.IOUtils;
 
@@ -68,6 +70,33 @@ public final class HttpConnectionUtils {
      * default timeout
      */
     private static final int TIMEOUT_MS = 10_000;
+
+    // Regular Expression for URL validation
+    // From https://gist.github.com/dperini/729294
+    // and https://github.com/JetBrains/intellij-community
+    // See lib/licenses/Licenses.txt
+    private static final String REGEX_URL = "(?:https?|ftp)://" // protocol
+            + "(?:\\S+(?::\\S*)?@)?(?:(?!" // user:pass (optional)
+            + "(?:10|127)(?:\\.\\d{1,3}){3})(?!(?:169\\.254|192\\.168)(?:\\.\\d{1,3}){2})(?!172\\."
+            + "(?:1[6-9]|2\\d|3[0-1])(?:\\.\\d{1,3}){2})(?:[1-9]\\d?|1\\d\\d|2[01]\\d|22[0-3])(?:\\."
+            + "(?:1?\\d{1,2}|2[0-4]\\d|25[0-5])){2}(?:\\.(?:[1-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-4]))"
+            // IP addresses
+            + "|" + "(?:[a-z\\u00a1-\\uffff0-9]-*)*[a-z\\u00a1-\\uffff0-9]+"
+            + "(?:\\.(?:[a-z\\u00a1-\\uffff0-9]-*)*[a-z\\u00a1-\\uffff0-9]+)*"
+            + "\\.[a-z\\u00a1-\\uffff]{2,}\\.?)" // domain host
+            + "(?::\\d{2,5})?" // port (optional)
+            + "(?:[-A-Za-z0-9+$&@#/%?=~_|!:,.;]*[-A-Za-z0-9+$&@#/%=~_|])?"; // resources
+
+    /**
+     * Regular Expression for https and ftp URL validation.
+     */
+    public static final Pattern URL_PATTERN = Pattern.compile(REGEX_URL, Pattern.CASE_INSENSITIVE);
+
+    /**
+     * Regular Expression for file URL validation.
+     */
+    public static final Pattern FILE_URL_PATTERN = Pattern
+            .compile("\\bfile://[-A-Za-z0-9+$&@#/%?=~_|!:,.;]*[-A-Za-z0-9+$&@#/%=~_|]");
 
     /**
      * Don't instantiate util class.
@@ -427,6 +456,21 @@ public final class HttpConnectionUtils {
         try (InputStream in = conn.getInputStream()) {
             return IOUtils.toString(in, charset);
         }
+    }
+
+    /**
+     * Validate URL string.
+     * 
+     * @param remoteUrl
+     *            URL candidate string.
+     * @return true when valid, otherwise false.
+     */
+    public static boolean checkUrl(String remoteUrl) {
+        if (remoteUrl.isEmpty()) {
+            return false;
+        }
+        Matcher m = URL_PATTERN.matcher(remoteUrl);
+        return m.matches();
     }
 
     /**

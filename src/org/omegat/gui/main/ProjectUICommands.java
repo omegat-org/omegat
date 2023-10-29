@@ -1307,6 +1307,12 @@ public final class ProjectUICommands {
             return;
         }
         try {
+            if (!HttpConnectionUtils.checkUrl(remoteUrl)) {
+                JOptionPane.showMessageDialog(Core.getMainWindow().getApplicationFrame(),
+                        OStrings.getString("TF_WIKI_IMPORT_URL_ERROR"),
+                        OStrings.getString("TF_WIKI_IMPORT_URL_ERROR_TITLE"), JOptionPane.WARNING_MESSAGE);
+                return;
+            }
             WikiGet.doWikiGet(remoteUrl, projectsource);
             projectReload();
         } catch (Exception ex) {

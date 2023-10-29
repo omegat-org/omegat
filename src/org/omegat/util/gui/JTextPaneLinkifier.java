@@ -46,6 +46,7 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 
+import org.omegat.util.HttpConnectionUtils;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 
@@ -143,25 +144,6 @@ public final class JTextPaneLinkifier {
 
         private static final int REFRESH_DELAY = 200;
 
-        // Regular Expression for URL validation
-        // From https://gist.github.com/dperini/729294
-        // and https://github.com/JetBrains/intellij-community
-        // See lib/licenses/Licenses.txt
-        private static final String REGEX_URL = "(?:https?|ftp)://"  // protocol
-                + "(?:\\S+(?::\\S*)?@)?(?:(?!"  // user:pass (optional)
-                + "(?:10|127)(?:\\.\\d{1,3}){3})(?!(?:169\\.254|192\\.168)(?:\\.\\d{1,3}){2})(?!172\\."
-                + "(?:1[6-9]|2\\d|3[0-1])(?:\\.\\d{1,3}){2})(?:[1-9]\\d?|1\\d\\d|2[01]\\d|22[0-3])(?:\\."
-                + "(?:1?\\d{1,2}|2[0-4]\\d|25[0-5])){2}(?:\\.(?:[1-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-4]))"
-                // IP addresses
-                + "|"
-                + "(?:[a-z\\u00a1-\\uffff0-9]-*)*[a-z\\u00a1-\\uffff0-9]+"
-                + "(?:\\.(?:[a-z\\u00a1-\\uffff0-9]-*)*[a-z\\u00a1-\\uffff0-9]+)*"
-                + "\\.[a-z\\u00a1-\\uffff]{2,}\\.?)"  // domain host
-                + "(?::\\d{2,5})?"  // port (optional)
-                + "(?:[-A-Za-z0-9+$&@#/%?=~_|!:,.;]*[-A-Za-z0-9+$&@#/%=~_|])?";  // resources
-        private static final Pattern URL_PATTERN = Pattern.compile(REGEX_URL, Pattern.CASE_INSENSITIVE);
-        private static final Pattern FILE_URL_PATTERN = Pattern.compile(
-                "\\bfile://[-A-Za-z0-9+$&@#/%?=~_|!:,.;]*[-A-Za-z0-9+$&@#/%=~_|]");
         private static final AttributeSet DEFAULT_ATTRIBUTES = new SimpleAttributeSet();
         private static final AttributeSet LINK_ATTRIBUTES;
 
@@ -180,9 +162,10 @@ public final class JTextPaneLinkifier {
         AttributeInserterDocumentFilter(StyledDocument doc, boolean extended) {
             this.doc = doc;
             if (extended) {
-                urlPatterns = new Pattern[]{URL_PATTERN, FILE_URL_PATTERN};
+                urlPatterns = new Pattern[] { HttpConnectionUtils.URL_PATTERN,
+                        HttpConnectionUtils.FILE_URL_PATTERN };
             } else {
-                urlPatterns = new Pattern[]{URL_PATTERN};
+                urlPatterns = new Pattern[] { HttpConnectionUtils.URL_PATTERN };
             }
             timer = new Timer(REFRESH_DELAY, e -> refreshPane());
             timer.setRepeats(false);
@@ -203,7 +186,8 @@ public final class JTextPaneLinkifier {
         @Override
         public void remove(FilterBypass fb, int offset, int length) throws BadLocationException {
             boolean refresh = true;
-            final AttributeSet attr = ((StyledDocument) fb.getDocument()).getCharacterElement(offset).getAttributes();
+            final AttributeSet attr = ((StyledDocument) fb.getDocument()).getCharacterElement(offset)
+                    .getAttributes();
             if (attr != null && attr.isDefined(StyleConstants.ComposedTextAttribute)) {
                 refresh = false;
             }

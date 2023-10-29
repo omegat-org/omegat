@@ -26,5 +26,5 @@ exec $CMD run -i --rm  \
    -u `id -u`:`id -g` \
    -v "$PWD":/work \
    $(bindpaths "$@") \
-   amake/innosetup:buster \
+   amake/innosetup:innosetup6-buster \
    $(relpaths "$@")

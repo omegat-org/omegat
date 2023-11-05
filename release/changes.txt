@@ -8,6 +8,9 @@
 
   Implemented requests:
 
+  - Provide package "deb" and "rpm" as distribution format for linux
+  https://sourceforge.net/p/omegat/feature-requests/1721/
+
   - Download team project with a shallow history
   https://sourceforge.net/p/omegat/feature-requests/1720/
 

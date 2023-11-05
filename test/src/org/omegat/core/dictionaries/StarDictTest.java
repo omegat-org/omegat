@@ -52,6 +52,7 @@ import org.omegat.util.TestPreferencesInitializer;
 public class StarDictTest {
 
     private static final Language FRENCH = new Language(Locale.FRENCH);
+    private static final Language SLOVNIK = new Language(Locale.forLanguageTag("cz"));
 
     @BeforeClass
     public static void setUp() throws Exception {
@@ -119,5 +120,16 @@ public class StarDictTest {
         assertFalse(result.isEmpty());
         assertEquals(word, result.get(0).getWord());
         assertEquals("<div>dinis, f. : tortue</div>", result.get(0).getArticle());
+    }
+
+    @Test
+    public void testReadDictPangoMarkup() throws Exception {
+        StarDict.StarDictDict dict = new StarDict.StarDictDict(
+                new File("test/data/dicts-pango/english-czech.ifo"), SLOVNIK);
+        String word = "lookup";
+        List<DictionaryEntry> result = dict.readArticles(word);
+        assertEquals(1, result.size());
+        assertEquals("lookup", result.get(0).getWord());
+        assertEquals("<b>vyhledat</b> <small>[Zdeněk Brož]</small>", result.get(0).getArticle());
     }
 }

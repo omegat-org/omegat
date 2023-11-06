@@ -65,6 +65,7 @@ import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.data.SourceTextEntry;
+import org.omegat.core.data.TMXEntry;
 import org.omegat.gui.editor.autocompleter.AutoCompleter;
 import org.omegat.gui.shortcuts.PropertiesShortcuts;
 import org.omegat.util.OStrings;
@@ -336,6 +337,12 @@ public class EditorTextArea3 extends JEditorPane {
             return;
         } else if (keyEvent == KeyEvent.KEY_TYPED) {
             //key typed
+            // Treat the case of enforced translations which should be locked
+            SourceTextEntry entry = controller.getCurrentEntry();
+            TMXEntry tmx = Core.getProject().getTranslationInfo(entry);
+            if (tmx.linked == TMXEntry.ExternalLinked.xENFORCED) {
+                return;
+            }
             super.processKeyEvent(e);
             return;
         }

@@ -1,8 +1,8 @@
 ----------------------------------------------------------------------
  OmegaT 6.1.0
 ----------------------------------------------------------------------
-  26 Enhancement
-  35 Bug fixes
+  28 Enhancement
+  41 Bug fixes
 ----------------------------------------------------------------------
 6.1.0 vs 6.0.0
 
@@ -13,6 +13,9 @@
 
   - Download team project with a shallow history
   https://sourceforge.net/p/omegat/feature-requests/1720/
+
+  - Give a selection of perHost/PerRespo credentials treatment
+  https://sourceforge.net/p/omegat/feature-requests/1719/
 
   - ResourceBundle Filter: default not to escape Unicode character
   https://sourceforge.net/p/omegat/feature-requests/1716/
@@ -92,6 +95,16 @@
 
   Bug fixes:
 
+  - OmegaT failed to start in specific case
+  https://sourceforge.net/p/omegat/bugs/1224/
+
+  - Unit tests failed on Windows
+  https://sourceforge.net/p/omegat/bugs/1223/
+
+  - OmegaT creates xlf file that other CAT tools cannot read ("MESSAGE: There are multiple root elements. Line 375,
+ position 2.")
+  https://sourceforge.net/p/omegat/bugs/1221/
+
   - OmegaT does not handle line breaks correctly on Windows
   https://sourceforge.net/p/omegat/bugs/1219/
 
@@ -121,6 +134,9 @@
 
   - Option-arrow not working in arm macOS
   https://sourceforge.net/p/omegat/bugs/1197/
+
+  - Regular expression for custom tags
+  https://sourceforge.net/p/omegat/bugs/1193/
 
   - Content of notes elements are not displayed correctly with Xliff filter
   https://sourceforge.net/p/omegat/bugs/1192/
@@ -197,6 +213,9 @@
 
   - Incorrect display of RTL segments in the Fuzzy Matches pane
   https://sourceforge.net/p/omegat/bugs/558/
+
+  - Print Exception with Invalid URL in "Import From MediaWiki..
+  https://sourceforge.net/p/omegat/bugs/459/
 
   - First session message in log not localised
   https://sourceforge.net/p/omegat/bugs/272/

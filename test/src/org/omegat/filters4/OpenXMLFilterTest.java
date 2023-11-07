@@ -65,8 +65,9 @@ public class OpenXMLFilterTest extends org.omegat.filters.TestFilterBase {
 
     @Test
     public void testTranslate() throws Exception {
-        // This filter has capability to change target language inside the translated file
-        // But to do so, it takes info from project properties, so they must exist
+        // This filter has the capability to change target language inside the
+        // translated file. But to do so, it takes info from project
+        // properties, so they must exist
         Core.getProject().getProjectProperties().setSourceLanguage(new Language("en-US"));
         Core.getProject().getProjectProperties().setTargetLanguage(new Language("fr-FR"));
 
@@ -74,13 +75,14 @@ public class OpenXMLFilterTest extends org.omegat.filters.TestFilterBase {
         translate(new MsOfficeFileFilter(), in.getPath());
 
         // XML comparison should not work, 
-        // because StaX filter for OpenXML also removes useless repetitions in the Word document!
+        // because StaX filter for OpenXML also removes useless repetitions in
+        // the Word document!
         /*for (String f : new String[] { "word/document.xml" }) {
             compareXML(new URL("jar:file:" + in.getAbsolutePath() + "!/" + f),
                     new URL("jar:file:" + outFile.getAbsolutePath() + "!/" + f));
         }*/
         
-        // So, instead we almost check that the contents matches correctly
+        // So, instead we almost check that the contents match correctly
         List<String> entries = parse(new MsOfficeFileFilter(), outFile.toString());
         assertEquals(2, entries.size());
         assertEquals("This is first line.", entries.get(0));
@@ -96,5 +98,32 @@ public class OpenXMLFilterTest extends org.omegat.filters.TestFilterBase {
         checkMulti("This is first line.", null, null, "", "This is second line.", null);
         checkMulti("This is second line.", null, null, "This is first line.", "", null);
         checkMultiEnd();
+    }
+
+    @Test
+    public void testParseTags() throws Exception {
+        boolean removeSpacesOrig = Core.getFilterMaster().getConfig().isRemoveSpacesNonseg();
+        Core.getFilterMaster().getConfig().setRemoveSpacesNonseg(true);
+
+        String f = "test/data/filters/openXML/file-OpenXMLFilter-tags.docx";
+        MsOfficeFileFilter filter = new MsOfficeFileFilter();
+        IProject.FileInfo fi = loadSourceFiles(filter, f);
+
+        checkMultiStart(fi, f);
+        checkMulti("The black widow has a black cat.", null, null, "", "<e0/>", null);
+        checkMulti("<p0>The black widow</p0> has a <p1>black cat.</p1>", null, null,
+                "The black widow has a black cat.",
+                "<p0>The black widow</p0> has a black cat.", null);
+        checkMulti("<p0>The black widow</p0> has a black cat.", null, null,
+                "<p0>The black widow</p0> has a <p1>black cat.</p1>",
+                "The black widow has a <p0>black cat.</p0>", null);
+        checkMulti("The black widow has a <p0>black cat.</p0>", null, null,
+                "The black widow has a <p0>black cat.</p0>",
+                "The black widow has a <p0>black</p0> cat.", null);
+        checkMulti("The black widow has a <p0>black</p0> cat.", null, null,
+                "The black widow has a <p0>black cat.</p0>", "", null);
+        checkMultiEnd();
+
+        Core.getFilterMaster().getConfig().setRemoveSpacesNonseg(removeSpacesOrig);
     }
 }

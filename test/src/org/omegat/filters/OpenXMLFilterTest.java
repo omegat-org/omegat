@@ -32,6 +32,8 @@ import java.net.URL;
 import java.util.List;
 
 import org.junit.Test;
+
+import org.omegat.core.Core;
 import org.omegat.core.data.IProject;
 import org.omegat.filters3.xml.openxml.OpenXMLFilter;
 
@@ -64,5 +66,34 @@ public class OpenXMLFilterTest extends TestFilterBase {
         checkMulti("This is first line.", null, null, "", "This is second line.", null);
         checkMulti("This is second line.", null, null, "This is first line.", "", null);
         checkMultiEnd();
+    }
+
+
+    @Test
+    public void testParseTags() throws Exception {
+        boolean removeSpacesOrig = Core.getFilterMaster().getConfig().isRemoveSpacesNonseg();
+        Core.getFilterMaster().getConfig().setRemoveSpacesNonseg(true);
+
+        String f = "test/data/filters/openXML/file-OpenXMLFilter-tags.docx";
+        OpenXMLFilter filter = new OpenXMLFilter();
+        IProject.FileInfo fi = loadSourceFiles(filter, f);
+
+        checkMultiStart(fi, f);
+        checkMulti("The black widow has a black cat.", null, null, "",
+                "<t0>The black widow</t0> has a <t1>black cat.</t1>", null);
+        checkMulti("<t0>The black widow</t0> has a <t1>black cat.</t1>", null, null,
+                "The black widow has a black cat.",
+                "<t0>The black widow</t0> has a black cat.", null);
+        checkMulti("<t0>The black widow</t0> has a black cat.", null, null,
+                "<t0>The black widow</t0> has a <t1>black cat.</t1>",
+                "The black widow has a <t0>black cat.</t0>", null);
+        checkMulti("The black widow has a <t0>black cat.</t0>", null, null,
+                "<t0>The black widow</t0> has a black cat.",
+                "The black widow has a <t0>black</t0> cat.", null);
+        checkMulti("The black widow has a <t0>black</t0> cat.", null, null,
+                "The black widow has a <t0>black cat.</t0>", "", null);
+        checkMultiEnd();
+
+        Core.getFilterMaster().getConfig().setRemoveSpacesNonseg(removeSpacesOrig);
     }
 }

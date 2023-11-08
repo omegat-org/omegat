@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2011 Alex Buloichik
+               2023 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -40,5 +41,20 @@ public class LatexFilterTest extends TestFilterBase {
         checkMulti("[11pt]{article}", null, null, "", "LaTeX Typesetting By Example", null);
         checkMulti("LaTeX Typesetting By Example", null, null, "[11pt]{article}",
                 "Phil Farrell<br0> Stanford University School of Earth Sciences", null);
+    }
+
+    @Test
+    public void testLoadItemize() throws Exception {
+        String f = "test/data/filters/Latex/file-latex-items.tex";
+        IProject.FileInfo fi = loadSourceFiles(new LatexFilter(), f);
+
+        checkMultiStart(fi, f);
+        checkMulti("LaTeX Itemize example", null, null, "", "Itemize", null);
+        checkMulti("Itemize", null, null, "LaTeX Itemize example", "INTERRUTTORE GENERALE ON/OFF (I/0)", null);
+        checkMulti("INTERRUTTORE GENERALE ON/OFF (I/0)", null, null, "LaTeX Itemize example", "SPIA PRESENZA TENSIONE", null);
+        checkMulti("SPIA PRESENZA TENSIONE", null, null, "INTERRUTTORE GENERALE ON/OFF (I/0)", "", null);
+        checkMulti("SPIA PREALLARME", null, null, "SPIA PRESENZA TENSIONE", "PULPITO/PANNELLO DI COMANDO", null);
+        checkMulti("PULPITO/PANNELLO DI COMANDO", null, null, "SPIA PREALLARME", "", null);
+        checkMultiEnd();
     }
 }

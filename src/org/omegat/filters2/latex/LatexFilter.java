@@ -275,14 +275,11 @@ public class LatexFilter extends AbstractFilter {
         return par;
     }
 
-    private final List<String> parSeparator = new LinkedList<>();
     private final List<String> oneArgNoText = new LinkedList<>();
     private final List<String> oneArgInlineText = new LinkedList<>();
     private final List<String> oneArgParText = new LinkedList<>();
 
     private void init() {
-        parSeparator.add("\\item");
-
         oneArgNoText.add("\\begin");
         oneArgNoText.add("\\end");
         oneArgNoText.add("\\cite");
@@ -299,6 +296,7 @@ public class LatexFilter extends AbstractFilter {
         oneArgNoText.add("\\includegraphics");
         oneArgNoText.add("\\documentclass");
         oneArgNoText.add("\\usepackage");
+        oneArgNoText.add("\\documentstyle");
 
         oneArgInlineText.add("\\emph");
         oneArgInlineText.add("\\textbf");
@@ -383,7 +381,7 @@ public class LatexFilter extends AbstractFilter {
     }
 
     private String replaceOneArgParText(LinkedList<String[]> substituted, List<String> commands,
-            String par) {
+                                        String par) {
         int counter = 0;
 
         for (String command : commands) {

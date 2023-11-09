@@ -61,4 +61,17 @@ public class LatexFilterTest extends TestFilterBase {
         checkMulti("PULPITO/PANNELLO DI COMANDO", null, null, "SPIA PREALLARME", "", null);
         checkMultiEnd();
     }
+
+    @Test
+    public void testLoadComments() throws Exception {
+        String f = "test/data/filters/Latex/file-latex-comments.tex";
+        IProject.FileInfo fi = loadSourceFiles(new LatexFilter(), f);
+
+        checkMultiStart(fi, f);
+        checkMulti("LaTeX Comment example", null, null, "", "Comment", null);
+        checkMulti("Comment", null, null, "LaTeX Comment example",
+                "This is a text with inline comments.", null);
+        checkMulti("This is a text with inline comments.", null, null, "Comment", "", null);
+        checkMultiEnd();
+    }
 }

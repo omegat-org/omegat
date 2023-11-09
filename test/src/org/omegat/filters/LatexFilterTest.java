@@ -50,10 +50,14 @@ public class LatexFilterTest extends TestFilterBase {
 
         checkMultiStart(fi, f);
         checkMulti("LaTeX Itemize example", null, null, "", "Itemize", null);
-        checkMulti("Itemize", null, null, "LaTeX Itemize example", "INTERRUTTORE GENERALE ON/OFF (I/0)", null);
-        checkMulti("INTERRUTTORE GENERALE ON/OFF (I/0)", null, null, "LaTeX Itemize example", "SPIA PRESENZA TENSIONE", null);
-        checkMulti("SPIA PRESENZA TENSIONE", null, null, "INTERRUTTORE GENERALE ON/OFF (I/0)", "", null);
-        checkMulti("SPIA PREALLARME", null, null, "SPIA PRESENZA TENSIONE", "PULPITO/PANNELLO DI COMANDO", null);
+        checkMulti("Itemize", null, null, "LaTeX Itemize example",
+                "INTERRUTTORE GENERALE ON/OFF (I/0)", null);
+        checkMulti("INTERRUTTORE GENERALE ON/OFF (I/0)", null, null, "Itemize",
+                "SPIA PRESENZA TENSIONE", null);
+        checkMulti("SPIA PRESENZA TENSIONE", null, null, "INTERRUTTORE GENERALE ON/OFF (I/0)",
+                "SPIA PREALLARME", null);
+        checkMulti("SPIA PREALLARME", null, null, "SPIA PRESENZA TENSIONE",
+                "PULPITO/PANNELLO DI COMANDO", null);
         checkMulti("PULPITO/PANNELLO DI COMANDO", null, null, "SPIA PREALLARME", "", null);
         checkMultiEnd();
     }

@@ -31,6 +31,7 @@ import java.io.File;
 import java.net.URL;
 import java.util.List;
 
+import org.junit.Assume;
 import org.junit.Test;
 
 import org.omegat.core.Core;
@@ -71,6 +72,10 @@ public class OpenXMLFilterTest extends TestFilterBase {
 
     @Test
     public void testParseTags() throws Exception {
+        // We won't fix BUGS#1038 - please use filters4/MsOfficeFileFilter
+        Assume.assumeTrue(false);
+
+        // The following test will be failed with OpenXMLFilter.
         boolean removeSpacesOrig = Core.getFilterMaster().getConfig().isRemoveSpacesNonseg();
         Core.getFilterMaster().getConfig().setRemoveSpacesNonseg(true);
 

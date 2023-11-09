@@ -30,6 +30,8 @@ import org.junit.Test;
 import org.omegat.core.data.IProject;
 import org.omegat.filters2.latex.LatexFilter;
 
+import java.io.File;
+
 public class LatexFilterTest extends TestFilterBase {
 
     @Test
@@ -38,8 +40,7 @@ public class LatexFilterTest extends TestFilterBase {
         IProject.FileInfo fi = loadSourceFiles(new LatexFilter(), f);
 
         checkMultiStart(fi, f);
-        checkMulti("[11pt]{article}", null, null, "", "LaTeX Typesetting By Example", null);
-        checkMulti("LaTeX Typesetting By Example", null, null, "[11pt]{article}",
+        checkMulti("LaTeX Typesetting By Example", null, null, "",
                 "Phil Farrell<br0> Stanford University School of Earth Sciences", null);
     }
 
@@ -53,12 +54,33 @@ public class LatexFilterTest extends TestFilterBase {
         checkMulti("Itemize", null, null, "LaTeX Itemize example",
                 "INTERRUTTORE GENERALE ON/OFF (I/0)", null);
         checkMulti("INTERRUTTORE GENERALE ON/OFF (I/0)", null, null, "Itemize",
-                "SPIA PRESENZA TENSIONE", null);
-        checkMulti("SPIA PRESENZA TENSIONE", null, null, "INTERRUTTORE GENERALE ON/OFF (I/0)",
-                "SPIA PREALLARME", null);
-        checkMulti("SPIA PREALLARME", null, null, "SPIA PRESENZA TENSIONE",
-                "PULPITO/PANNELLO DI COMANDO", null);
-        checkMulti("PULPITO/PANNELLO DI COMANDO", null, null, "SPIA PREALLARME", "", null);
+                "<r0> SPIA PRESENZA TENSIONE", null);
+        checkMulti("<r0> SPIA PRESENZA TENSIONE", null, null, "INTERRUTTORE GENERALE ON/OFF (I/0)",
+                "<r0> SPIA PREALLARME", null);
+        checkMulti("<r0> SPIA PREALLARME", null, null, "<r0> SPIA PRESENZA TENSIONE",
+                "<r0> PULPITO/PANNELLO DI COMANDO", null);
+        checkMulti("<r0> PULPITO/PANNELLO DI COMANDO", null, null, "<r0> SPIA PREALLARME", "", null);
+        checkMultiEnd();
+    }
+
+
+    @Test
+    public void testParseItemize() throws Exception {
+        translate(new LatexFilter(), "test/data/filters/Latex/file-latex-items.tex");
+        compareBinary(new File("test/data/filters/Latex/file-latex-items-exp.tex"), outFile);
+    }
+
+
+    @Test
+    public void testLoadComments() throws Exception {
+        String f = "test/data/filters/Latex/file-latex-comments.tex";
+        IProject.FileInfo fi = loadSourceFiles(new LatexFilter(), f);
+
+        checkMultiStart(fi, f);
+        checkMulti("LaTeX Comment example", null, null, "", "Comment", null);
+        checkMulti("Comment", null, null, "LaTeX Comment example",
+                "This is a text with inline comments.", null);
+        checkMulti("This is a text with inline comments.", null, null, "Comment", "", null);
         checkMultiEnd();
     }
 }

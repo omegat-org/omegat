@@ -10,6 +10,7 @@
                2011 Didier Briel
                2014 Adiel Mittmann
                2017 Didier Briel
+               2023 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -56,6 +57,7 @@ import org.omegat.util.OStrings;
  * @author Arno Peters
  * @author Didier Briel
  * @author Adiel Mittmann
+ * @author Hiroshi Miura
  */
 public class LatexFilter extends AbstractFilter {
 
@@ -141,7 +143,7 @@ public class LatexFilter extends AbstractFilter {
             String s;
             StringBuilder comment = new StringBuilder();
 
-            LinkedList<String> commands = new LinkedList<>();
+            List<String> commands = new LinkedList<>();
 
             /*
               Possible states: N: beginning of a new line M: middle S: skipping
@@ -273,14 +275,12 @@ public class LatexFilter extends AbstractFilter {
         return par;
     }
 
-    private final List<String> parSeparator = new LinkedList<>();
     private final List<String> oneArgNoText = new LinkedList<>();
     private final List<String> oneArgInlineText = new LinkedList<>();
     private final List<String> oneArgParText = new LinkedList<>();
+    private final List<String> parBreakCommand = new LinkedList<>();
 
     private void init() {
-        parSeparator.add("\\item");
-
         oneArgNoText.add("\\begin");
         oneArgNoText.add("\\end");
         oneArgNoText.add("\\cite");
@@ -297,6 +297,7 @@ public class LatexFilter extends AbstractFilter {
         oneArgNoText.add("\\includegraphics");
         oneArgNoText.add("\\documentclass");
         oneArgNoText.add("\\usepackage");
+        oneArgNoText.add("\\documentstyle");
 
         oneArgInlineText.add("\\emph");
         oneArgInlineText.add("\\textbf");
@@ -315,9 +316,11 @@ public class LatexFilter extends AbstractFilter {
         oneArgParText.add("\\Chapter");
         oneArgParText.add("\\chapter");
         oneArgParText.add("\\section");
+
+        parBreakCommand.add("\\item");
     }
 
-    private String replaceOneArgNoText(LinkedList<String[]> substituted, LinkedList<String> commands,
+    private String replaceOneArgNoText(LinkedList<String[]> substituted, List<String> commands,
             String par) {
         int counter = 0;
 
@@ -332,7 +335,7 @@ public class LatexFilter extends AbstractFilter {
                 Pattern p = Pattern.compile(find);
                 Matcher m = p.matcher(par);
                 while (m.find()) {
-                    String replace = "<n" + String.valueOf(counter) + ">";
+                    String replace = "<n" + counter + ">";
                     String[] subst = {reHarden(m.group(0)), reHarden(replace)};
                     substituted.addFirst(subst);
                     m.appendReplacement(sb, replace);
@@ -346,7 +349,7 @@ public class LatexFilter extends AbstractFilter {
         return par;
     }
 
-    private String replaceOneArgInlineText(LinkedList<String[]> substituted, LinkedList<String> commands,
+    private String replaceOneArgInlineText(LinkedList<String[]> substituted, List<String> commands,
             String par) {
         int counter = 0;
 
@@ -380,8 +383,8 @@ public class LatexFilter extends AbstractFilter {
         return par;
     }
 
-    private String replaceOneArgParText(LinkedList<String[]> substituted, LinkedList<String> commands,
-            String par) {
+    private String replaceOneArgParText(LinkedList<String[]> substituted, List<String> commands,
+                                        String par) {
         int counter = 0;
 
         for (String command : commands) {
@@ -412,7 +415,7 @@ public class LatexFilter extends AbstractFilter {
         return par;
     }
 
-    private String replaceUnknownCommand(LinkedList<String[]> substituted, LinkedList<String> commands,
+    private String replaceUnknownCommand(LinkedList<String[]> substituted, List<String> commands,
             String par) {
         int counter = 0;
 
@@ -457,10 +460,11 @@ public class LatexFilter extends AbstractFilter {
         return re;
     }
 
-    private String processParagraph(LinkedList<String> commands, String par) {
+    private String processParagraph(List<String> commands, String par) {
         LinkedList<String[]> substituted = new LinkedList<>();
 
         par = substituteUnicode(par);
+        par = replaceParBreakCommand(substituted, commands, par);
 
         par = replaceOneArgNoText(substituted, commands, par);
         par = replaceOneArgInlineText(substituted, commands, par);
@@ -490,6 +494,34 @@ public class LatexFilter extends AbstractFilter {
         }
 
         return par;
+    }
+
+    private String replaceParBreakCommand(LinkedList<String[]> substituted, List<String> commands, String par) {
+        int counter = 0;
+        String tmp = par;
+
+        for (String command : commands) {
+            StringBuilder sb = new StringBuilder();
+
+            if (parBreakCommand.contains(command)) {
+                String find = String.format("(\\%s)\\s(.*)(\\s+)(\\%s)", command, command);
+
+                Pattern p = Pattern.compile(find);
+                Matcher m = p.matcher(tmp);
+                int lastStart = 0;
+                while (m.find()) {
+                    String replace = "<r" + counter + ">";
+                    String content = processParagraph(commands, tmp.substring(m.start(1), m.start(4) -1));
+                    String[] subst = {reHarden(content + "\n" + m.group(4)), reHarden(replace)};
+                    substituted.addFirst(subst);
+                    m.appendReplacement(sb, replace);
+                    counter++;
+                }
+                m.appendTail(sb);
+                tmp = sb.toString();
+            }
+        }
+        return tmp;
     }
 
 }

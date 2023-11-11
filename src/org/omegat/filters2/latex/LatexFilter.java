@@ -130,6 +130,8 @@ public class LatexFilter extends AbstractFilter {
         return 12;
     }
 
+    private String lineBreak;
+
     /**
      * Processes a LaTeX document.
      *
@@ -152,6 +154,7 @@ public class LatexFilter extends AbstractFilter {
              */
             String state;
             while ((s = lpin.readLine()) != null) {
+                lineBreak = lpin.getLinebreak();
                 // String[] c = s.split(""); In Java 8, that line gave a first
                 // empty element, so it was replaced with the
                 // following lines, and idx below was started at 0 instead of 1
@@ -225,7 +228,7 @@ public class LatexFilter extends AbstractFilter {
 
                 /* at the end of the line */
                 if (state.equals("N")) {
-                    String endOfLine = lpin.getLinebreak();
+                    String endOfLine = lineBreak;
                     /* \par */
                     if (par.length() > 0) {
                         out.write(processParagraph(commands, par.toString()));
@@ -514,7 +517,7 @@ public class LatexFilter extends AbstractFilter {
                 while (m.find()) {
                     String replace = "<r" + counter + ">";
                     String content = processParagraph(commands, tmp.substring(m.start(1), m.start(4) - 1));
-                    String[] subst = { reHarden(content + "\n" + m.group(4)), reHarden(replace) };
+                    String[] subst = { reHarden(content + lineBreak + m.group(4)), reHarden(replace) };
                     substituted.addFirst(subst);
                     m.appendReplacement(sb, replace);
                     counter++;

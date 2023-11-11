@@ -83,7 +83,8 @@ public class LatexFilter extends AbstractFilter {
     }
 
     @Override
-    public void processFile(BufferedReader in, BufferedWriter out, org.omegat.filters2.FilterContext fc) throws IOException {
+    public void processFile(BufferedReader in, BufferedWriter out, org.omegat.filters2.FilterContext fc)
+            throws IOException {
         // BOM (byte order mark) bugfix
         in.mark(1);
         int ch = in.read();
@@ -146,8 +147,8 @@ public class LatexFilter extends AbstractFilter {
             List<String> commands = new LinkedList<>();
 
             /*
-              Possible states: N: beginning of a new line M: middle S: skipping
-              blanks
+             * Possible states: N: beginning of a new line M: middle S: skipping
+             * blanks
              */
             String state;
             while ((s = lpin.readLine()) != null) {
@@ -320,8 +321,7 @@ public class LatexFilter extends AbstractFilter {
         parBreakCommand.add("\\item");
     }
 
-    private String replaceOneArgNoText(LinkedList<String[]> substituted, List<String> commands,
-            String par) {
+    private String replaceOneArgNoText(LinkedList<String[]> substituted, List<String> commands, String par) {
         int counter = 0;
 
         for (String command : commands) {
@@ -330,13 +330,14 @@ public class LatexFilter extends AbstractFilter {
             if (oneArgNoText.contains(command)) {
                 // opt [] arg
                 // opt () arg
-                String find = (String.format("\\%s\\*?(\\[[^\\]]*\\]|\\([^\\)]*\\))?\\s*\\{[^\\}]*+\\}", command));
+                String find = (String.format("\\%s\\*?(\\[[^\\]]*\\]|\\([^\\)]*\\))?\\s*\\{[^\\}]*+\\}",
+                        command));
 
                 Pattern p = Pattern.compile(find);
                 Matcher m = p.matcher(par);
                 while (m.find()) {
                     String replace = "<n" + counter + ">";
-                    String[] subst = {reHarden(m.group(0)), reHarden(replace)};
+                    String[] subst = { reHarden(m.group(0)), reHarden(replace) };
                     substituted.addFirst(subst);
                     m.appendReplacement(sb, replace);
                     counter++;
@@ -365,10 +366,10 @@ public class LatexFilter extends AbstractFilter {
                     String preReplace = "<i" + counter + ">";
                     String postReplace = "</i" + counter + ">";
 
-                    String[] s1 = {reHarden(m.group(1)), reHarden(preReplace)};
+                    String[] s1 = { reHarden(m.group(1)), reHarden(preReplace) };
                     substituted.addFirst(s1);
 
-                    String[] s2 = {reHarden("}"), reHarden(postReplace)};
+                    String[] s2 = { reHarden("}"), reHarden(postReplace) };
                     substituted.addFirst(s2);
 
                     String replace = (preReplace + "$2" + postReplace);
@@ -383,8 +384,7 @@ public class LatexFilter extends AbstractFilter {
         return par;
     }
 
-    private String replaceOneArgParText(LinkedList<String[]> substituted, List<String> commands,
-                                        String par) {
+    private String replaceOneArgParText(LinkedList<String[]> substituted, List<String> commands, String par) {
         int counter = 0;
 
         for (String command : commands) {
@@ -401,7 +401,7 @@ public class LatexFilter extends AbstractFilter {
                     if (m.group(2) != null) {
                         content = processParagraph(commands, m.group(2));
                     }
-                    String[] subst = {reHarden(m.group(1) + "{" + content + "}"), reHarden(replace)};
+                    String[] subst = { reHarden(m.group(1) + "{" + content + "}"), reHarden(replace) };
 
                     substituted.addFirst(subst);
                     m.appendReplacement(sb, replace);
@@ -420,7 +420,8 @@ public class LatexFilter extends AbstractFilter {
         int counter = 0;
 
         for (String command : commands) {
-            if (command.equals("\\\\") || command.equals("\\{") || command.equals("\\[") || command.equals("\\|")) {
+            if (command.equals("\\\\") || command.equals("\\{") || command.equals("\\[")
+                    || command.equals("\\|")) {
                 // continue;
                 command = String.format("\\%s", command);
             }
@@ -433,7 +434,7 @@ public class LatexFilter extends AbstractFilter {
                 Matcher m = p.matcher(par);
                 while (m.find()) {
                     String replace = "<u" + counter + ">";
-                    String[] subst = {reHarden(m.group(0)), reHarden(replace)};
+                    String[] subst = { reHarden(m.group(0)), reHarden(replace) };
                     substituted.addFirst(subst);
                     m.appendReplacement(sb, replace);
                     counter++;
@@ -442,7 +443,7 @@ public class LatexFilter extends AbstractFilter {
 
                 par = sb.toString();
             } catch (java.util.regex.PatternSyntaxException e) {
-                //TODO: understand the exceptions
+                // TODO: understand the exceptions
                 Log.log("LaTeX PatternSyntaxException: " + e.getMessage());
                 Log.log(command);
             }
@@ -496,7 +497,8 @@ public class LatexFilter extends AbstractFilter {
         return par;
     }
 
-    private String replaceParBreakCommand(LinkedList<String[]> substituted, List<String> commands, String par) {
+    private String replaceParBreakCommand(LinkedList<String[]> substituted, List<String> commands,
+            String par) {
         int counter = 0;
         String tmp = par;
 
@@ -511,8 +513,8 @@ public class LatexFilter extends AbstractFilter {
                 int lastStart = 0;
                 while (m.find()) {
                     String replace = "<r" + counter + ">";
-                    String content = processParagraph(commands, tmp.substring(m.start(1), m.start(4) -1));
-                    String[] subst = {reHarden(content + "\n" + m.group(4)), reHarden(replace)};
+                    String content = processParagraph(commands, tmp.substring(m.start(1), m.start(4) - 1));
+                    String[] subst = { reHarden(content + "\n" + m.group(4)), reHarden(replace) };
                     substituted.addFirst(subst);
                     m.appendReplacement(sb, replace);
                     counter++;

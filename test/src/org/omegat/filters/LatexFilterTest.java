@@ -51,10 +51,10 @@ public class LatexFilterTest extends TestFilterBase {
 
         checkMultiStart(fi, f);
         checkMulti("LaTeX Itemize example", null, null, "", "Itemize", null);
-        checkMulti("Itemize", null, null, "LaTeX Itemize example",
-                "INTERRUTTORE GENERALE ON/OFF (I/0)", null);
-        checkMulti("INTERRUTTORE GENERALE ON/OFF (I/0)", null, null, "Itemize",
-                "<r0> SPIA PRESENZA TENSIONE", null);
+        checkMulti("Itemize", null, null, "LaTeX Itemize example", "INTERRUTTORE GENERALE ON/OFF (I/0)",
+                null);
+        checkMulti("INTERRUTTORE GENERALE ON/OFF (I/0)", null, null, "Itemize", "<r0> SPIA PRESENZA TENSIONE",
+                null);
         checkMulti("<r0> SPIA PRESENZA TENSIONE", null, null, "INTERRUTTORE GENERALE ON/OFF (I/0)",
                 "<r0> SPIA PREALLARME", null);
         checkMulti("<r0> SPIA PREALLARME", null, null, "<r0> SPIA PRESENZA TENSIONE",
@@ -63,13 +63,11 @@ public class LatexFilterTest extends TestFilterBase {
         checkMultiEnd();
     }
 
-
     @Test
     public void testParseItemize() throws Exception {
         translate(new LatexFilter(), "test/data/filters/Latex/file-latex-items.tex");
         compareBinary(new File("test/data/filters/Latex/file-latex-items-exp.tex"), outFile);
     }
-
 
     @Test
     public void testLoadComments() throws Exception {
@@ -78,8 +76,8 @@ public class LatexFilterTest extends TestFilterBase {
 
         checkMultiStart(fi, f);
         checkMulti("LaTeX Comment example", null, null, "", "Comment", null);
-        checkMulti("Comment", null, null, "LaTeX Comment example",
-                "This is a text with inline comments.", null);
+        checkMulti("Comment", null, null, "LaTeX Comment example", "This is a text with inline comments.",
+                null);
         checkMulti("This is a text with inline comments.", null, null, "Comment", "", null);
         checkMultiEnd();
     }

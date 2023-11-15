@@ -195,7 +195,7 @@ public abstract class AbstractFilter implements IFilter {
      * True means that OmegaT should handle all the encoding mess.
      * <p>
      * Return false to state that your filter doesn't need encoding management
-     * provided by OmegaT, because it either autodetects the encoding based on
+     * provided by OmegaT, because it either autodetect the encoding based on
      * file contents (like HTML filter does) or the encoding is fixed (like in
      * OpenOffice files).
      *
@@ -224,9 +224,9 @@ public abstract class AbstractFilter implements IFilter {
      * file and encoding {@link #isFileSupported(File, Map, FilterContext))}.
      * You should override only one of the two.
      * <p>
-     * By default returns true, because this method should be overriden only by
-     * filters that differentiate input files not by extensions, but by file's
-     * content.
+     * By default, returns true, because this method should be overridden only
+     * by filters that differentiate input files not by extensions, but by
+     * file's content.
      * <p>
      * For example, DocBook files have .xml extension, as possibly many other
      * XML files, so the filter should check a DTD of the document.
@@ -288,7 +288,7 @@ public abstract class AbstractFilter implements IFilter {
     }
 
     /**
-     * OmegaT calls this to see whether the filter has any options. By default
+     * OmegaT calls this to see whether the filter has any options. By default,
      * returns false, so filter authors should override this to tell OmegaT core
      * that this filter has options.
      *
@@ -345,7 +345,7 @@ public abstract class AbstractFilter implements IFilter {
      *            The target file
      * @param outEncoding
      *            Encoding of the target file, if the filter supports it.
-     *            Otherwise null.
+     *            Otherwise, null.
      * @return The writer for the target file
      * @throws UnsupportedEncodingException
      *             Thrown if JVM doesn't support the specified outEncoding
@@ -458,10 +458,10 @@ public abstract class AbstractFilter implements IFilter {
      * ({@link #isSourceEncodingVariable()}), try to detect it. The result may
      * be null.
      * 
-     * @param fc
-     * @param inFile
-     * @return
-     * @throws IOException
+     * @param fc FilterContext to use.
+     * @param inFile target file to determine encoding.
+     * @return encoding name.
+     * @throws IOException when I/O error occurred.
      */
     protected String getInputEncoding(FilterContext fc, File inFile) throws IOException {
         String encoding = fc.getInEncoding();
@@ -481,8 +481,8 @@ public abstract class AbstractFilter implements IFilter {
      * </ul>
      * The result may be null.
      * 
-     * @param fc
-     * @return
+     * @param fc Filter Context to use.
+     * @return Encoding to write.
      */
     protected String getOutputEncoding(FilterContext fc) {
         String encoding = fc.getOutEncoding();
@@ -498,6 +498,9 @@ public abstract class AbstractFilter implements IFilter {
         return encoding;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public final void parseFile(File inFile, Map<String, String> config, FilterContext fc,
             IParseCallback callback) throws Exception {
@@ -518,6 +521,9 @@ public abstract class AbstractFilter implements IFilter {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public final void alignFile(File inFile, File outFile, Map<String, String> config, FilterContext fc,
             IAlignCallback callback) throws Exception {
@@ -533,9 +539,9 @@ public abstract class AbstractFilter implements IFilter {
 
     /**
      * Align source file against translated file. If this function is not
-     * overridden, then alignment in console mode will not be available for this
-     * filter.
-     *
+     * overridden, then alignment in console mode will not be available for
+     * this filter.
+     * <p>
      * Implementations should call entryAlignCallback.addTranslation with source
      * and target text, and with source file path.
      *
@@ -557,7 +563,7 @@ public abstract class AbstractFilter implements IFilter {
      * Align source file against translated file. If this function is not
      * overridden, then alignment in console mode will not be available for this
      * filter.
-     *
+     * <p>
      * Implementations should call entryAlignCallback.addTranslation
      *
      * @param sourceFile
@@ -582,6 +588,9 @@ public abstract class AbstractFilter implements IFilter {
         return false;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public final void translateFile(File inFile, File outFile, Map<String, String> config, FilterContext fc,
             ITranslateCallback callback) throws Exception {
@@ -659,6 +668,9 @@ public abstract class AbstractFilter implements IFilter {
         this.entryTranslateCallback = translateCallback;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getInEncodingLastParsedFile() {
         return inEncodingLastParsedFile;

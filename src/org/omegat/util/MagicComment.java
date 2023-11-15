@@ -65,14 +65,14 @@ public class MagicComment {
     /**
      * Extract the first line of the file and parse with {@code #parse(String)}
      *
-     * @param file
-     * @return
-     * @throws IOException
+     * @param file target file.
+     * @return Map with magic comment database.
+     * @throws IOException when I/O error happened.
      */
     public static Map<String, String> parse(File file) throws IOException {
         String line;
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(
-                BOMInputStream.builder().setFile(file).setCharset(StandardCharsets.US_ASCII).get()))) {
+                BOMInputStream.builder().setFile(file).get(), StandardCharsets.US_ASCII))) {
             line = reader.readLine();
         }
         if (line != null && line.startsWith("#")) {

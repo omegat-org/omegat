@@ -32,6 +32,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -98,7 +99,7 @@ public class HTMLFilter2 extends AbstractFilter {
     protected String getInputEncoding(FilterContext filterContext, File infile) throws IOException {
         String encoding = filterContext.getInEncoding();
         if (encoding == null && isSourceEncodingVariable()) {
-            try (HTMLReader hreader = new HTMLReader(infile.getAbsolutePath(), null)) {
+            try (HTMLReader hreader = new HTMLReader(infile.getAbsolutePath(), StandardCharsets.UTF_8.name())) {
                 encoding = hreader.getEncoding();
             }
         }

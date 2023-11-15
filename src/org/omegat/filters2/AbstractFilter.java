@@ -34,6 +34,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
@@ -42,19 +43,24 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
+
+import org.apache.commons.io.ByteOrderMark;
+import org.apache.commons.io.input.BOMInputStream;
 
 import org.omegat.util.EncodingDetector;
 import org.omegat.util.NullBufferedWriter;
 import org.omegat.util.OStrings;
 
 /**
- * The base class for all filters (aka file handlers). Each filter should extend this class or one of its
- * descendants.
+ * The base class for all filters (aka file handlers). Each filter should extend
+ * this class or one of its descendants.
  * <p>
  * The process how the filter works is the following:
  * <ol>
  * <li>Source text is extracted.
- * <li>Tags are converted into shortcuts and these shortcuts are temporarily stored
+ * <li>Tags are converted into shortcuts and these shortcuts are temporarily
+ * stored
  * <li>Source text with shortened tags is sent to OmegaT core
  * <li>Core returns a translation (or the same text if there's no translation)
  * <li>Tags shortcuts are expanded in translated text
@@ -71,8 +77,9 @@ import org.omegat.util.OStrings;
 public abstract class AbstractFilter implements IFilter {
 
     /**
-     * This value represents to the user that the encoding is determined by the filter itself. "In code" the
-     * <code>null</code> is used to represent automatic encoding selection.
+     * This value represents to the user that the encoding is determined by the
+     * filter itself. "In code" the <code>null</code> is used to represent
+     * automatic encoding selection.
      */
     public static final String ENCODING_AUTO_HUMAN = OStrings.getString("ENCODING_AUTO");
 
@@ -125,44 +132,18 @@ public abstract class AbstractFilter implements IFilter {
     public static final String TFP_TARGET_LOCALE_LCID = "${targetLocaleLCID}";
 
     protected String inEncodingLastParsedFile;
+    protected ByteOrderMark bomLastParsedFile;
 
     /** All target filename patterns. */
-    private static final String[] TARGET_FILENAME_PATTERNS = new String[] {
-                TFP_FILENAME,
-                TFP_NAMEONLY,
-                TFP_EXTENSION,
-                TFP_TARGET_LOCALE,
-                TFP_TARGET_LOCALE_LCID,
-                TFP_TARGET_LANGUAGE,
-                TFP_TARGET_LANG_CODE,
-                TFP_TARGET_COUNTRY_CODE,
-                TFP_TIMESTAMP_LA,
-                TFP_TIMESTAMP_LD,
-                TFP_TIMESTAMP_LDD,
-                TFP_TIMESTAMP_LH,
-                TFP_TIMESTAMP_LHH,
-                TFP_TIMESTAMP_LM,
-                TFP_TIMESTAMP_LMM,
-                TFP_TIMESTAMP_LS,
-                TFP_TIMESTAMP_LSS,
-                TFP_TIMESTAMP_LYYYY,
-                TFP_TIMESTAMP_UD,
-                TFP_TIMESTAMP_UEEE,
-                TFP_TIMESTAMP_UEEEE,
-                TFP_TIMESTAMP_UH,
-                TFP_TIMESTAMP_UHH,
-                TFP_TIMESTAMP_UM,
-                TFP_TIMESTAMP_UMM,
-                TFP_TIMESTAMP_UMMM,
-                TFP_SYSTEM_OS_NAME,
-                TFP_SYSTEM_OS_VERSION,
-                TFP_SYSTEM_OS_ARCH,
-                TFP_SYSTEM_USER_NAME,
-                TFP_SYSTEM_HOST_NAME,
-                TFP_FILE_SOURCE_ENCODING,
-                TFP_FILE_TARGET_ENCODING,
-                TFP_FILE_FILTER_NAME
-        };
+    private static final String[] TARGET_FILENAME_PATTERNS = new String[] { TFP_FILENAME, TFP_NAMEONLY,
+            TFP_EXTENSION, TFP_TARGET_LOCALE, TFP_TARGET_LOCALE_LCID, TFP_TARGET_LANGUAGE,
+            TFP_TARGET_LANG_CODE, TFP_TARGET_COUNTRY_CODE, TFP_TIMESTAMP_LA, TFP_TIMESTAMP_LD,
+            TFP_TIMESTAMP_LDD, TFP_TIMESTAMP_LH, TFP_TIMESTAMP_LHH, TFP_TIMESTAMP_LM, TFP_TIMESTAMP_LMM,
+            TFP_TIMESTAMP_LS, TFP_TIMESTAMP_LSS, TFP_TIMESTAMP_LYYYY, TFP_TIMESTAMP_UD, TFP_TIMESTAMP_UEEE,
+            TFP_TIMESTAMP_UEEEE, TFP_TIMESTAMP_UH, TFP_TIMESTAMP_UHH, TFP_TIMESTAMP_UM, TFP_TIMESTAMP_UMM,
+            TFP_TIMESTAMP_UMMM, TFP_SYSTEM_OS_NAME, TFP_SYSTEM_OS_VERSION, TFP_SYSTEM_OS_ARCH,
+            TFP_SYSTEM_USER_NAME, TFP_SYSTEM_HOST_NAME, TFP_FILE_SOURCE_ENCODING, TFP_FILE_TARGET_ENCODING,
+            TFP_FILE_FILTER_NAME };
 
     public static List<String> getTargetFilenamePatterns() {
         return Collections.unmodifiableList(Arrays.asList(TARGET_FILENAME_PATTERNS));
@@ -183,8 +164,8 @@ public abstract class AbstractFilter implements IFilter {
     /**
      * The default output filename pattern.
      * <p>
-     * It is equal to "${filename}", which means that the name of the translated file should be the same as
-     * the name of the input file.
+     * It is equal to "${filename}", which means that the name of the translated
+     * file should be the same as the name of the input file.
      */
     public static final String TARGET_DEFAULT = TFP_FILENAME;
 
@@ -197,8 +178,9 @@ public abstract class AbstractFilter implements IFilter {
     public abstract String getFileFormatName();
 
     /**
-     * The default list of filter instances that this filter class has. One filter class may have different
-     * filter instances, different by source file mask, encoding of the source file etc.
+     * The default list of filter instances that this filter class has. One
+     * filter class may have different filter instances, different by source
+     * file mask, encoding of the source file etc.
      * <p>
      * Note that the user may change the instances freely.
      *
@@ -212,9 +194,10 @@ public abstract class AbstractFilter implements IFilter {
      * <p>
      * True means that OmegaT should handle all the encoding mess.
      * <p>
-     * Return false to state that your filter doesn't need encoding management provided by OmegaT, because it
-     * either autodetects the encoding based on file contents (like HTML filter does) or the encoding is fixed
-     * (like in OpenOffice files).
+     * Return false to state that your filter doesn't need encoding management
+     * provided by OmegaT, because it either autodetects the encoding based on
+     * file contents (like HTML filter does) or the encoding is fixed (like in
+     * OpenOffice files).
      *
      * @return whether source encoding can be changed by the user
      */
@@ -226,8 +209,9 @@ public abstract class AbstractFilter implements IFilter {
      * <p>
      * True means that OmegaT should handle all the encoding mess.
      * <p>
-     * Return false to state that your filter doesn't need encoding management provided by OmegaT, because the
-     * encoding is fixed (like in OpenOffice files), or for some other reason.
+     * Return false to state that your filter doesn't need encoding management
+     * provided by OmegaT, because the encoding is fixed (like in OpenOffice
+     * files), or for some other reason.
      *
      * @return whether target encoding can be changed by the user
      */
@@ -235,15 +219,17 @@ public abstract class AbstractFilter implements IFilter {
     public abstract boolean isTargetEncodingVariable();
 
     /**
-     * Returns whether the file is supported by the filter, given the reader with file's contents. There
-     * exists a version of this method that takes file and encoding {@link #isFileSupported(File, Map, FilterContext))}. You
-     * should override only one of the two.
+     * Returns whether the file is supported by the filter, given the reader
+     * with file's contents. There exists a version of this method that takes
+     * file and encoding {@link #isFileSupported(File, Map, FilterContext))}.
+     * You should override only one of the two.
      * <p>
-     * By default returns true, because this method should be overriden only by filters that differentiate
-     * input files not by extensions, but by file's content.
+     * By default returns true, because this method should be overriden only by
+     * filters that differentiate input files not by extensions, but by file's
+     * content.
      * <p>
-     * For example, DocBook files have .xml extension, as possibly many other XML files, so the filter should
-     * check a DTD of the document.
+     * For example, DocBook files have .xml extension, as possibly many other
+     * XML files, so the filter should check a DTD of the document.
      *
      * @param reader
      *            The reader of the source file
@@ -254,12 +240,14 @@ public abstract class AbstractFilter implements IFilter {
     }
 
     /**
-     * Returns whether the file is supported by the filter, given the file and possible file's encoding (
-     * <code>null</code> encoding means autodetect). Default implementation creates a reader and calls
-     * {@link #isFileSupported(BufferedReader)}. You should override only one of the two.
+     * Returns whether the file is supported by the filter, given the file and
+     * possible file's encoding ( <code>null</code> encoding means autodetect).
+     * Default implementation creates a reader and calls
+     * {@link #isFileSupported(BufferedReader)}. You should override only one of
+     * the two.
      * <p>
-     * For example, DocBook files have .xml extension, as possibly many other XML files, so the filter should
-     * check a DTD of the document.
+     * For example, DocBook files have .xml extension, as possibly many other
+     * XML files, so the filter should check a DTD of the document.
      *
      * @param inFile
      *            Source file.
@@ -277,8 +265,8 @@ public abstract class AbstractFilter implements IFilter {
     }
 
     /**
-     * Define fuzzy mark prefix for source which will be stored in TM. It's 'fuzzy' by default, but each
-     * filter can redefine it.
+     * Define fuzzy mark prefix for source which will be stored in TM. It's
+     * 'fuzzy' by default, but each filter can redefine it.
      *
      * @return fuzzy mark prefix
      */
@@ -288,8 +276,9 @@ public abstract class AbstractFilter implements IFilter {
     }
 
     /**
-     * Returns the hint displayed while the user edits the filter, and when she adds/edits the instance of
-     * this filter. The hint may be any string, preferably in a non-geek language.
+     * Returns the hint displayed while the user edits the filter, and when she
+     * adds/edits the instance of this filter. The hint may be any string,
+     * preferably in a non-geek language.
      *
      * @return The hint for editing the filter in a non-geek language.
      */
@@ -299,8 +288,9 @@ public abstract class AbstractFilter implements IFilter {
     }
 
     /**
-     * OmegaT calls this to see whether the filter has any options. By default returns false, so filter
-     * authors should override this to tell OmegaT core that this filter has options.
+     * OmegaT calls this to see whether the filter has any options. By default
+     * returns false, so filter authors should override this to tell OmegaT core
+     * that this filter has options.
      *
      * @return True if the filter has any options, and false otherwise.
      */
@@ -319,12 +309,13 @@ public abstract class AbstractFilter implements IFilter {
     }
 
     /**
-     * Creates a reader of an input file.
+     * Creates a reader of an input file with BOM handling.
      *
      * @param inFile
      *            The source file.
      * @param inEncoding
-     *            Encoding of the input file, if the filter supports it. Otherwise null.
+     *            Encoding of the input file, if the filter supports it.
+     *            Otherwise null.
      * @return The reader for the source file
      * @throws UnsupportedEncodingException
      *             Thrown if JVM doesn't support the specified inEncoding
@@ -335,13 +326,16 @@ public abstract class AbstractFilter implements IFilter {
      */
     protected BufferedReader createReader(File inFile, String inEncoding)
             throws UnsupportedEncodingException, IOException, TranslationException {
-        Charset charset;
-        if (inEncoding != null) {
-            charset = Charset.forName(inEncoding);
+        BOMInputStream bomInputStream = BOMInputStream.builder().setFile(inFile)
+                .setByteOrderMarks(ByteOrderMark.UTF_8, ByteOrderMark.UTF_16BE, ByteOrderMark.UTF_16LE).get();
+        bomLastParsedFile = bomInputStream.getBOM();
+        String charset;
+        if (bomLastParsedFile != null) {
+            charset = bomLastParsedFile.getCharsetName();
         } else {
-            charset = Charset.defaultCharset();
+            charset = Objects.requireNonNullElseGet(inEncoding, () -> Charset.defaultCharset().name());
         }
-        return Files.newBufferedReader(inFile.toPath(), charset);
+        return new BufferedReader(new InputStreamReader(bomInputStream, charset));
     }
 
     /**
@@ -350,7 +344,8 @@ public abstract class AbstractFilter implements IFilter {
      * @param outFile
      *            The target file
      * @param outEncoding
-     *            Encoding of the target file, if the filter supports it. Otherwise null.
+     *            Encoding of the target file, if the filter supports it.
+     *            Otherwise null.
      * @return The writer for the target file
      * @throws UnsupportedEncodingException
      *             Thrown if JVM doesn't support the specified outEncoding
@@ -359,8 +354,13 @@ public abstract class AbstractFilter implements IFilter {
      */
     protected BufferedWriter createWriter(File outFile, String outEncoding)
             throws UnsupportedEncodingException, IOException {
+        if (outFile == null) {
+            return null;
+        }
         Charset charset;
-        if (outEncoding != null) {
+        if (bomLastParsedFile != null) {
+            charset = Charset.forName(bomLastParsedFile.getCharsetName());
+        } else if (outEncoding != null) {
             charset = Charset.forName(outEncoding);
         } else {
             charset = Charset.defaultCharset();
@@ -397,22 +397,28 @@ public abstract class AbstractFilter implements IFilter {
             throws IOException, TranslationException;
 
     /**
-     * Processes a single file given an input and output files (output file may be null while loading files).
-     * This method can be used to create a filter that works with the source/target files directly, rather
-     * than using BufferedReader/BufferedWriter.
+     * Processes a single file given an input and output files (output file may
+     * be null while loading files). This method can be used to create a filter
+     * that works with the source/target files directly, rather than using
+     * BufferedReader/BufferedWriter.
      * <p>
-     * Generally this method should read strings from the input reader and write them to the output reader. In
-     * order to let OmegaT know what strings are translatable and to get their translation, filter should call
+     * Generally this method should read strings from the input reader and write
+     * them to the output reader. In order to let OmegaT know what strings are
+     * translatable and to get their translation, filter should call
      * {@link #processEntry(String)} method.
      * <p>
-     * If you override this method and do all the processing here, you should simply implement
-     * {@link #processFile(BufferedReader, BufferedWriter, FilterContext)} with a stub.
+     * If you override this method and do all the processing here, you should
+     * simply implement
+     * {@link #processFile(BufferedReader, BufferedWriter, FilterContext)} with
+     * a stub.
      * <p>
-     * Default implementation calls {@link #createReader(File,String)} to create a reader,
-     * <code>new BufferedWriter(new StringWriter())</code> to create a writer for <code>null</code> output
-     * file, or {@link #createWriter(File,String)} to create a writer if output file is not <code>null</code>;
-     * then calls {@link #processFile(BufferedReader, BufferedWriter, FilterContext)} to process source file,
-     * and then closes reader and writer.
+     * Default implementation calls {@link #createReader(File,String)} to create
+     * a reader, <code>new BufferedWriter(new StringWriter())</code> to create a
+     * writer for <code>null</code> output file, or
+     * {@link #createWriter(File,String)} to create a writer if output file is
+     * not <code>null</code>; then calls
+     * {@link #processFile(BufferedReader, BufferedWriter, FilterContext)} to
+     * process source file, and then closes reader and writer.
      *
      * @param inFile
      *            The source file.
@@ -426,8 +432,8 @@ public abstract class AbstractFilter implements IFilter {
      * @throws TranslationException
      *             Should be thrown when processed file has any format defects.
      */
-    protected void processFile(File inFile, File outFile, FilterContext fc) throws IOException,
-            TranslationException {
+    protected void processFile(File inFile, File outFile, FilterContext fc)
+            throws IOException, TranslationException {
         String encoding = getInputEncoding(fc, inFile);
         try (BufferedReader reader = createReader(inFile, encoding)) {
             inEncodingLastParsedFile = encoding == null ? Charset.defaultCharset().name() : encoding;
@@ -447,8 +453,11 @@ public abstract class AbstractFilter implements IFilter {
     }
 
     /**
-     * Get the input encoding. If it's not set in the FilterContext (setting is "&lt;auto&gt;")
-     * and the filter allows ({@link #isSourceEncodingVariable()}), try to detect it. The result may be null.
+     * Get the input encoding. If it's not set in the FilterContext (setting is
+     * "&lt;auto&gt;") and the filter allows
+     * ({@link #isSourceEncodingVariable()}), try to detect it. The result may
+     * be null.
+     * 
      * @param fc
      * @param inFile
      * @return
@@ -463,12 +472,15 @@ public abstract class AbstractFilter implements IFilter {
     }
 
     /**
-     * Get the output encoding. If it's not set in the FilterContext (setting is "&lt;auto&gt;")
-     * and the filter allows ({@link #isTargetEncodingVariable()}):
-     * <ul><li>Reuse the input encoding if it's Unicode
+     * Get the output encoding. If it's not set in the FilterContext (setting is
+     * "&lt;auto&gt;") and the filter allows
+     * ({@link #isTargetEncodingVariable()}):
+     * <ul>
+     * <li>Reuse the input encoding if it's Unicode
      * <li>If the input was not Unicode, fall back to UTF-8.
      * </ul>
      * The result may be null.
+     * 
      * @param fc
      * @return
      */
@@ -514,33 +526,37 @@ public abstract class AbstractFilter implements IFilter {
         entryAlignCallback = callback;
         processOptions = config;
         try (BufferedReader readerIn = createReader(inFile, fc.getInEncoding());
-             BufferedReader readerOut = createReader(outFile, fc.getOutEncoding())) {
+                BufferedReader readerOut = createReader(outFile, fc.getOutEncoding())) {
             alignFile(readerIn, readerOut, fc, inFile.getName());
         }
     }
 
     /**
-     * Align source file against translated file. If this function is not overridden, then alignment in console mode
-     * will not be available for this filter.
+     * Align source file against translated file. If this function is not
+     * overridden, then alignment in console mode will not be available for this
+     * filter.
      *
-     * Implementations should call entryAlignCallback.addTranslation with source and target text, and with
-     * source file path.
+     * Implementations should call entryAlignCallback.addTranslation with source
+     * and target text, and with source file path.
      *
      * @param sourceFile
      *            source file
      * @param translatedFile
      *            translated file
-     * @param fc FilterContext
-     * @param sourcePath source file path
+     * @param fc
+     *            FilterContext
+     * @param sourcePath
+     *            source file path
      */
     protected void alignFile(BufferedReader sourceFile, BufferedReader translatedFile, FilterContext fc,
-                             String sourcePath) throws Exception {
+            String sourcePath) throws Exception {
         alignFile(sourceFile, translatedFile, fc);
     }
 
     /**
-     * Align source file against translated file. If this function is not overridden, then alignment in console mode
-     * will not be available for this filter.
+     * Align source file against translated file. If this function is not
+     * overridden, then alignment in console mode will not be available for this
+     * filter.
      *
      * Implementations should call entryAlignCallback.addTranslation
      *
@@ -549,15 +565,18 @@ public abstract class AbstractFilter implements IFilter {
      * @param translatedFile
      *            translated file
      */
-    protected void alignFile(BufferedReader sourceFile, BufferedReader translatedFile, FilterContext fc) throws Exception {
+    protected void alignFile(BufferedReader sourceFile, BufferedReader translatedFile, FilterContext fc)
+            throws Exception {
     }
 
     /**
-     * Method can be overridden to return true, in case you want previous and next segment to be included in the search
-     * for a translation, when alternative translations are provided by the user. (normally, only the filename is used)
+     * Method can be overridden to return true, in case you want previous and
+     * next segment to be included in the search for a translation, when
+     * alternative translations are provided by the user. (normally, only the
+     * filename is used)
      *
-     * Technically it means that parsing happens in two passes and prev/next segments will be linked, so it comes with
-     * a cost
+     * Technically it means that parsing happens in two passes and prev/next
+     * segments will be linked, so it comes with a cost
      **/
     protected boolean requirePrevNextFields() {
         return false;
@@ -565,7 +584,7 @@ public abstract class AbstractFilter implements IFilter {
 
     @Override
     public final void translateFile(File inFile, File outFile, Map<String, String> config, FilterContext fc,
-       ITranslateCallback callback) throws Exception {
+            ITranslateCallback callback) throws Exception {
         entryParseCallback = null;
         entryTranslateCallback = callback;
         entryAlignCallback = null;
@@ -594,25 +613,30 @@ public abstract class AbstractFilter implements IFilter {
      *
      * @param entry
      *            Translatable source string
-     * @return Translation of the source string. If there's no translation, returns the source string itself.
+     * @return Translation of the source string. If there's no translation,
+     *         returns the source string itself.
      */
     protected final String processEntry(String entry) {
         return processEntry(entry, null);
     }
+
     /**
      * Call this method to:
      * <ul>
      * <li>Instruct OmegaT what source strings are translatable.
      * <li>Get the translation of each source string.
      * </ul>
-     * NB: this method doesn't use ID's or path or protectedParts. If your file format has ID's, paths or
-     * protectedParts, then call {@link #entryParseCallback}.addEntry or
+     * NB: this method doesn't use ID's or path or protectedParts. If your file
+     * format has ID's, paths or protectedParts, then call
+     * {@link #entryParseCallback}.addEntry or
      * {@link #entryTranslateCallback}.getTranslation instead.
      *
      * @param entry
      *            Translatable source string
-     * @param comment comment on the source string in the source file (if available)
-     * @return Translation of the source string. If there's no translation, returns the source string itself.
+     * @param comment
+     *            comment on the source string in the source file (if available)
+     * @return Translation of the source string. If there's no translation,
+     *         returns the source string itself.
      */
     protected final String processEntry(String entry, String comment) {
         if (entryParseCallback != null) {

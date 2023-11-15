@@ -32,7 +32,6 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -41,7 +40,9 @@ import java.util.regex.PatternSyntaxException;
 
 import org.htmlparser.Parser;
 import org.htmlparser.util.ParserException;
+
 import org.omegat.filters2.AbstractFilter;
+import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.Instance;
 import org.omegat.filters2.TranslationException;
 import org.omegat.util.Log;
@@ -93,6 +94,17 @@ public class HTMLFilter2 extends AbstractFilter {
         return true;
     }
 
+    @Override
+    protected String getInputEncoding(FilterContext filterContext, File infile) throws IOException {
+        String encoding = filterContext.getInEncoding();
+        if (encoding == null && isSourceEncodingVariable()) {
+            try (HTMLReader hreader = new HTMLReader(infile.getAbsolutePath(), null)) {
+                encoding = hreader.getEncoding();
+            }
+        }
+        return encoding;
+    }
+
     /**
      * Customized version of creating input reader for HTML files, aware of
      * encoding by using <code>EncodingAwareReader</code> class.
@@ -100,8 +112,7 @@ public class HTMLFilter2 extends AbstractFilter {
      * @see HTMLReader
      */
     @Override
-    public BufferedReader createReader(File infile, String encoding)
-            throws UnsupportedEncodingException, IOException {
+    public BufferedReader createReader(File infile, String encoding) throws IOException {
         HTMLReader hreader = new HTMLReader(infile.getAbsolutePath(), encoding);
         sourceEncoding = hreader.getEncoding();
         return new BufferedReader(hreader);
@@ -114,8 +125,7 @@ public class HTMLFilter2 extends AbstractFilter {
      * @see HTMLWriter
      */
     @Override
-    public BufferedWriter createWriter(File outfile, String encoding)
-            throws UnsupportedEncodingException, IOException {
+    public BufferedWriter createWriter(File outfile, String encoding) throws IOException {
         HTMLWriter hwriter;
         HTMLOptions options = new HTMLOptions(processOptions);
         if (encoding == null) {

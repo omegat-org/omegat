@@ -108,7 +108,7 @@ public class TMXReader2 {
      * Detects charset of XML file.
      */
     public static String detectCharset(File file) throws IOException {
-        try (XmlStreamReader rd = new XmlStreamReader(file)) {
+        try (XmlStreamReader rd = XmlStreamReader.builder().setFile(file).get()) {
             return rd.getEncoding();
         }
     }

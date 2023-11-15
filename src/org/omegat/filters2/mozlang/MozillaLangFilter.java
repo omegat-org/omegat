@@ -131,15 +131,15 @@ public class MozillaLangFilter extends AbstractFilter {
         while ((s = inFile.readLine()) != null) {
 
             // We trim trailing spaces, otherwise the regexps could fail, thus
-            // making some segments
-            // invisible to OmegaT
+            // making some segments invisible to OmegaT
             s = s.trim();
 
             Matcher m;
 
             switch (state) {
             case WAIT_SOURCE:
-                if ((m = PATTERN_SOURCE.matcher(s)).matches()) {
+                m = PATTERN_SOURCE.matcher(s);
+                if (m.matches()) {
                     source.append(m.group(1));
                     state = READ_STATE.WAIT_TARGET;
                 }
@@ -172,7 +172,7 @@ public class MozillaLangFilter extends AbstractFilter {
         String s = source.toString();
         String c = "";
         String t;
-        if (s.equals(target.toString())) {
+        if (s.contentEquals(target)) {
             t = null;
         } else {
             t = target.toString();
@@ -181,7 +181,7 @@ public class MozillaLangFilter extends AbstractFilter {
             c += "\n" + OStrings.getString("LANGFILTER_LOCALIZATION_NOTE") + "\n"
                     + localizationNote.toString();
         }
-        if (c.length() == 0) {
+        if (c.isEmpty()) {
             c = null;
         }
         align(s, t, c);
@@ -210,7 +210,7 @@ public class MozillaLangFilter extends AbstractFilter {
             tr = entryTranslateCallback.getTranslation(null, source.toString(), null);
             if (tr == null) {
                 tr = source.toString();
-            } else if (tr.equals(source.toString())) {
+            } else if (tr.contentEquals(source)) {
                 tr += " {ok}";
             }
             eol(tr);

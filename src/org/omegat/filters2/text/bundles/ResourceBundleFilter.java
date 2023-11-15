@@ -211,6 +211,15 @@ public class ResourceBundleFilter extends AbstractFilter {
         return result.toString();
     }
 
+    private int skipWhiteSpace(String line) {
+        int index = 0;
+        int cp = line.codePointAt(index);
+        while (Character.isWhitespace(cp)) {
+            index += 1;
+        }
+        return index;
+    }
+
     private enum EscapeMode {
         KEY, VALUE, COMMENT
     }

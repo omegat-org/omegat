@@ -34,14 +34,10 @@ package org.omegat.filters2.text.bundles;
 import java.awt.Window;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetEncoder;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -144,50 +140,6 @@ public class ResourceBundleFilter extends AbstractFilter {
     public Instance[] getDefaultInstances() {
         return new Instance[] { new Instance("*.properties", DEFAULT_SOURCE_ENCODING, DEFAULT_TARGET_ENCODING,
                 TFP_NAMEONLY + "_" + TFP_TARGET_LOCALE + "." + TFP_EXTENSION) };
-    }
-
-    /**
-     * Creates a reader of an input file.
-     * <p>
-     * Override because of keep buggy behavior in OmegaT 5.7.1 or before. It set
-     * default encoding US-ASCII but Java standard InputStreamReader class
-     * wrongly accept non-ASCII characters as-is.
-     * </p>
-     *
-     * @param inFile
-     *            The source file.
-     * @param inEncoding
-     *            Encoding of the input file, if the filter supports it.
-     *            Otherwise null.
-     * @return The reader for the source file
-     * @throws IOException
-     *             If any I/O Error occurs upon reader creation
-     */
-    @Override
-    public BufferedReader createReader(File inFile, String inEncoding) throws IOException {
-        Charset charset;
-        if (inEncoding != null) {
-            charset = Charset.forName(inEncoding);
-        } else {
-            charset = Charset.defaultCharset();
-        }
-        return new BufferedReader(new InputStreamReader(Files.newInputStream(inFile.toPath()), charset));
-    }
-
-    /**
-     * Creating an output stream to save a localized resource bundle.
-     * <p>
-     * NOTE: the name of localized resource bundle is different from the name of
-     * original one. e.g. "Bundle.properties" -&gt; Russian =
-     * "Bundle_ru.properties"
-     */
-    @Override
-    public BufferedWriter createWriter(File outfile, String encoding) throws IOException {
-        if (encoding != null) {
-            targetEncoding = encoding;
-        }
-        Charset charset = Charset.forName(targetEncoding);
-        return new BufferedWriter(new OutputStreamWriter(Files.newOutputStream(outfile.toPath()), charset));
     }
 
     @Override

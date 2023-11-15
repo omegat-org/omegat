@@ -205,7 +205,7 @@ public class MozillaLangFilter extends AbstractFilter {
     }
 
     protected void flushTranslation(FilterContext fc) throws IOException {
-        if (out != null) {
+        if (entryTranslateCallback != null) {
             String tr;
             tr = entryTranslateCallback.getTranslation(null, source.toString(), null);
             if (tr == null) {

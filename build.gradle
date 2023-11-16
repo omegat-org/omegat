@@ -1,5 +1,6 @@
 import org.apache.tools.ant.filters.FixCrLfFilter
 import org.apache.tools.ant.filters.ReplaceTokens
+import org.panteleyev.jpackage.JPackageTask
 
 plugins {
     id 'application'
@@ -14,7 +15,8 @@ plugins {
     alias(libs.plugins.spotless)
     alias(libs.plugins.versions)
     alias(libs.plugins.launch4j)
-    id 'org.hidetake.ssh' version '2.10.1'
+    alias(libs.plugins.jpackage)
+    alias(libs.plugins.ssh)
 }
 
 apply from: 'gradle/utils.gradle'
@@ -23,6 +25,12 @@ application {
     applicationName = 'OmegaT'
     mainClass = 'org.omegat.Main'
 }
+
+def shortDescription = 'The free translation memory tool'
+def distDescription = 'OmegaT is a free and open source multiplatform Computer Assisted Translation tool with' +
+        ' fuzzy matching, translation memory, keyword search, glossaries, and translation leveraging into updated' +
+        ' projects.'
+def distAppVendor = 'The OmegaT project'
 
 def javaVersion = 11;
 def localPropsFile = file('local.properties')
@@ -384,7 +392,9 @@ jar {
     archiveFileName.set("${archiveBaseName.get()}.${archiveExtension.get()}")
 }
 
+def omegatJarFilename = jar.archiveFileName.get()
 project(":machinetranslators") {jar.enabled = false}
+project(":spellchecker") {jar.enabled = false}
 
 def distsDir = file(layout.buildDirectory.file("${distsDirName}"))
 def assetDir = findProperty('assetDir') ?: '../'
@@ -547,14 +557,14 @@ distributions {
             from('release/linux-specific') {
                 filter ReplaceTokens, tokens: [
                         VERSION_NUMBER_SUBST: project.version,
-                        JAR_SUBST           : jar.archiveFileName.get()
+                        JAR_SUBST           : omegatJarFilename
                 ]
                 fileMode 0755
             }
             from('release/win32-specific') {
                 include 'OmegaT.bat'
                 filter(ReplaceTokens, tokens: [
-                        JAR_SUBST           : jar.archiveFileName.get()
+                        JAR_SUBST           : omegatJarFilename
                 ])
             }
             from('lib/licenses') {
@@ -569,7 +579,6 @@ distributions {
             }
             eachFile {
                 // Move main JAR up one level from lib.
-                def omegatJarFilename = jar.archiveFileName.get()
                 if (it.name == omegatJarFilename) {
                     it.relativePath = it.relativePath.parent.parent.append(true, omegatJarFilename)
                 }
@@ -890,6 +899,166 @@ ext.makeLinuxTask = { args ->
 makeLinuxTask(name: "linux64", suffix: "Linux_64", jrePath: linux64JRE)
 makeLinuxTask(name: "linuxArm64", suffix: "Linux_ARM64", jrePath: linuxArm64JRE)
 
+// prepare jars
+tasks.register('gatherJpkgJars', Copy) {
+    def dest = layout.buildDirectory.file('jpackage/jars').get().asFile
+    doFirst {
+        delete dest
+    }
+    from configurations.runtimeClasspath, tasks.jar
+    into file(dest)
+    dependsOn subprojects.collect {it.tasks.withType(Jar)}
+}
+
+// prepare docs contents
+tasks.register('gatherJpkgReleaseDocs', Copy) {
+    def dest = layout.buildDirectory.file('jpackage/docs').get().asFile
+    doFirst {
+        delete dest
+    }
+    from("release") {
+        include 'doc-license.txt'
+        filter(FixCrLfFilter, eol: FixCrLfFilter.CrLf.newInstance('crlf'))
+    }
+    from("release") {
+        exclude 'doc-license.txt'
+        include '*.txt', '*.html'
+        filter(ReplaceTokens, tokens: [
+                TRANSLATION_NOTICE: ''
+        ])
+        filter(FixCrLfFilter, eol: FixCrLfFilter.CrLf.newInstance('crlf'))
+    }
+    from 'docs'
+    into file(dest)
+}
+
+// construct package contents in standard file tree
+tasks.jpackage {
+    dependsOn gatherJpkgJars
+    dependsOn gatherJpkgReleaseDocs
+
+    def dest = layout.buildDirectory.file("jpackage/app-image").get().asFile
+    doFirst {
+        delete dest
+    }
+
+    input = file(layout.buildDirectory.file('jpackage/jars'))
+    destination = file(dest)
+
+    appName = application.applicationName
+    vendor = distAppVendor
+    appDescription = shortDescription
+
+    // appContent requires jpackage command in JDK 18 or later
+    /*
+    appContent = [file(layout.buildDirectory.file('modules')),
+                  file(layout.buildDirectory.file('jpackage/docs')),'scripts', 'images']
+    */
+    // compat configuration on JDK17
+    doLast {
+        project.copy {
+            from file(layout.buildDirectory.file('modules'))
+            into file(layout.buildDirectory.file("jpackage/app-image/${appName}/lib/modules"))
+        }
+        project.copy {
+            from file(layout.buildDirectory.file('jpackage/docs'))
+            into file(layout.buildDirectory.file("jpackage/app-image/${appName}/lib/docs"))
+        }
+        project.copy {
+            from 'scripts'
+            into file(layout.buildDirectory.file("jpackage/app-image/${appName}/lib/scripts"))
+        }
+        project.copy {
+            from 'images'
+            into file(layout.buildDirectory.file("jpackage/app-image/${appName}/lib/images"))
+        }
+    }
+    // end of compat configuration
+
+
+    mainJar = omegatJarFilename
+    mainClass = "org.omegat.Main"
+
+    javaOptions = ["-Xmx1024M", "--add-opens", "java.desktop/sun.awt.X11=ALL-UNNAMED"]
+    linux {
+        icon = "images/OmegaT.png"
+    }
+    mac {
+        icon = "images/OmegaT.icns"
+    }
+    windows {
+        icon = "images/OmegaT.ico"
+    }
+
+    type = 'app-image'
+    group 'other'
+
+}
+
+// generate DEB package
+tasks.register("linuxDebDist", JPackageTask) {
+    dependsOn jpackage
+    group 'distribution'
+
+    appName = application.applicationName
+    vendor = distAppVendor
+    appDescription = shortDescription
+
+    appImage = file(layout.buildDirectory.file("jpackage/app-image/${appName}"))
+    destination = file(layout.buildDirectory.file('distributions'))
+
+    type = 'deb'
+    installDir = '/opt/omegat-org'
+
+    icon = file(layout.projectDirectory.file("images/OmegaT.png"))
+
+    aboutUrl = "https://omegat.org/"
+    licenseFile = file(layout.projectDirectory.file("LICENSE"))
+
+    linux {
+        linuxAppCategory("Education")
+        linuxAppRelease('1.0.0')
+        linuxDebMaintainer("Hiroshi Miura <miurahr@linux.com>")
+        linuxMenuGroup("Office")
+        linuxPackageName("omegat")
+        linuxPackageDeps(false)
+        linuxShortcut(true)
+    }
+    tasks.getByName('linux').dependsOn linuxDebDist
+}
+
+// generate RPM package
+tasks.register("linuxRpmDist", JPackageTask) {
+    dependsOn jpackage
+    group 'distribution'
+
+    appName = application.applicationName
+    vendor = distAppVendor
+    appDescription = shortDescription
+
+    appImage = file(layout.buildDirectory.file("jpackage/app-image/${appName}"))
+    destination = file(layout.buildDirectory.file('distributions'))
+
+    type = 'rpm'
+    installDir = '/opt/omegat-org'
+
+    icon = file(layout.projectDirectory.file("images/OmegaT.png"))
+
+    aboutUrl = "https://omegat.org/"
+    licenseFile = file(layout.projectDirectory.file("LICENSE"))
+
+    linux {
+        linuxAppCategory("Education")
+        linuxAppRelease('1.0.0')
+        linuxMenuGroup("Office")
+        linuxPackageName("omegat")
+        linuxPackageDeps(false)
+        linuxRpmLicenseType("GPLv3+")
+        linuxShortcut(true)
+    }
+    tasks.getByName('linux').dependsOn linuxRpmDist
+}
+
 // We bundle our startup scripts separately, so disable startScripts.
 startScripts.enabled = false
 installDist {
@@ -988,7 +1157,7 @@ ext.makeWinTask = { args ->
             }
             project.copy {
                 from("${destinationDir}/${installerBasename}.exe")
-                into(layout.buildDirectory.file("${distsDirName}"))
+                into distsDir
             }
             delete file("${destinationDir}/${installerBasename}.exe")
         }
@@ -1366,7 +1535,7 @@ publishing {
 
             pom {
                 name = 'OmegaT'
-                description = 'The free translation memory tool'
+                description = distDescription
                 url = 'https://omegat.org'
                 scm {
                     connection = "scm:git:https://git.code.sf.net/p/omegat/code"

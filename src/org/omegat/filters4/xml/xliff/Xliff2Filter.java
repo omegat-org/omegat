@@ -143,10 +143,9 @@ public class Xliff2Filter extends AbstractXliffFilter {
         default:
             if (currentBuffer != null) {
                 currentBuffer.add(startElement);
-            }
-            // <target> must be before any other-namespace markup
-            else if (((ignoreScope == null || ignoreScope.startsWith("!")) && (segId != null))
+            } else if (((ignoreScope == null || ignoreScope.startsWith("!")) && (segId != null))
                     && (!startElement.getName().getNamespaceURI().equals(namespace))) {
+                // <target> must be before any other-namespace markup
                 flushTranslations(writer);
             }
         }
@@ -263,12 +262,11 @@ public class Xliff2Filter extends AbstractXliffFilter {
                 case "ec":
                     break; // Should be empty!!!
                 case "pc":
-                default: {
+                default:
                     String pop = tagStack.pop();
                     tagsMap.put("/" + pop, Collections.singletonList(ev));
                     res.append("</").append(pop).append(">");
                     break;
-                }
                 }
             }
         }

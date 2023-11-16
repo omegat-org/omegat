@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?><xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:its="http://www.w3.org/2005/11/its" xmlns:itsxlf="http://www.w3.org/ns/its-xliff/" xmlns:okp="okapi-framework:xliff-extensions" its:version="2.0" version="1.2">
+<file datatype="x-undefined" okp:inputEncoding="UTF-8" original="word/styles.xml" source-language="de-DE" target-language="en-GB"><header><tool tool-company="24|technology GmbH" tool-id="24t_xliff" tool-name="24|xliff" tool-version="3.0.17"><t4xlf:parameters xmlns:t4xlf="t4xlf:xliff-parameter-extensions"><t4xlf:parameter key="bPreferenceTranslateWordHeadersFooters" value="true"></t4xlf:parameter><t4xlf:parameter key="bPreferenceTranslateWordHidden" value="false"></t4xlf:parameter><t4xlf:parameter key="ExtractOnlyPinkHighlightedText" value="false"></t4xlf:parameter><t4xlf:parameter key="ExtractOnlyYellowHighlightedText" value="false"></t4xlf:parameter><t4xlf:parameter key="unescapeXmlCharactersInContent" value="false"></t4xlf:parameter></t4xlf:parameters></tool></header>
+<body>
+</body>
+</file>
+<file original="word/document.xml" datatype="x-undefined" okp:inputEncoding="UTF-8" source-language="de-DE" target-language="en-GB"><header><tool tool-name="24|xliff" tool-company="24|technology GmbH" tool-id="24t_xliff" tool-version="3.0.17"><t4xlf:parameters xmlns:t4xlf="t4xlf:xliff-parameter-extensions"><t4xlf:parameter value="true" key="bPreferenceTranslateWordHeadersFooters"></t4xlf:parameter><t4xlf:parameter value="false" key="bPreferenceTranslateWordHidden"></t4xlf:parameter><t4xlf:parameter value="false" key="ExtractOnlyPinkHighlightedText"></t4xlf:parameter><t4xlf:parameter value="false" key="ExtractOnlyYellowHighlightedText"></t4xlf:parameter><t4xlf:parameter value="false" key="unescapeXmlCharactersInContent"></t4xlf:parameter></t4xlf:parameters></tool></header>
+<body>
+</body>
+</file>
+<file original="word/footnotes.xml" datatype="x-undefined" okp:inputEncoding="UTF-8" source-language="de-DE" target-language="en-GB"> <header> <tool tool-name="24|xliff" tool-company="24|technology GmbH" tool-id="24t_xliff" tool-version="3.0.17"> <t4xlf:parameters xmlns:t4xlf="t4xlf:xliff-parameter-extensions"> <t4xlf:parameter value="true" key="bPreferenceTranslateWordHeadersFooters"></t4xlf:parameter> <t4xlf:parameter value="false" key="bPreferenceTranslateWordHidden"></t4xlf:parameter> <t4xlf:parameter value="false" key="ExtractOnlyPinkHighlightedText"></t4xlf:parameter> <t4xlf:parameter value="false" key="ExtractOnlyYellowHighlightedText"></t4xlf:parameter> <t4xlf:parameter value="false" key="unescapeXmlCharactersInContent"></t4xlf:parameter> </t4xlf:parameters> </tool> </header> <body> </body>
+</file>
+<file original="word/endnotes.xml" datatype="x-undefined" okp:inputEncoding="UTF-8" source-language="de-DE" target-language="en-GB"> <header> <tool tool-name="24|xliff" tool-company="24|technology GmbH" tool-id="24t_xliff" tool-version="3.0.17"> <t4xlf:parameters xmlns:t4xlf="t4xlf:xliff-parameter-extensions"> <t4xlf:parameter value="true" key="bPreferenceTranslateWordHeadersFooters"></t4xlf:parameter> <t4xlf:parameter value="false" key="bPreferenceTranslateWordHidden"></t4xlf:parameter> <t4xlf:parameter value="false" key="ExtractOnlyPinkHighlightedText"></t4xlf:parameter> <t4xlf:parameter value="false" key="ExtractOnlyYellowHighlightedText"></t4xlf:parameter> <t4xlf:parameter value="false" key="unescapeXmlCharactersInContent"></t4xlf:parameter> </t4xlf:parameters> </tool> </header> <body> </body>
+</file>
+<file original="word/header1.xml" datatype="x-undefined" okp:inputEncoding="UTF-8" source-language="de-DE" target-language="en-GB">
+<header><tool tool-name="24|xliff" tool-company="24|technology GmbH" tool-id="24t_xliff" tool-version="3.0.17"><t4xlf:parameters xmlns:t4xlf="t4xlf:xliff-parameter-extensions"><t4xlf:parameter value="true" key="bPreferenceTranslateWordHeadersFooters"></t4xlf:parameter><t4xlf:parameter value="false" key="bPreferenceTranslateWordHidden"></t4xlf:parameter><t4xlf:parameter value="false" key="ExtractOnlyPinkHighlightedText"></t4xlf:parameter><t4xlf:parameter value="false" key="ExtractOnlyYellowHighlightedText"></t4xlf:parameter><t4xlf:parameter value="false" key="unescapeXmlCharactersInContent"></t4xlf:parameter></t4xlf:parameters>
+</tool></header>
+<body>
+<trans-unit xml:space="preserve" id="P33F30884-sub1">
+<source xml:lang="de-DE">ENTWURF</source>
+<seg-source><mrk mtype="seg" mid="0">ENTWURF</mrk></seg-source>
+<target state="translated" xml:lang="en-GB"><mrk mtype="seg" mid="0">DRAFT</mrk></target>
+</trans-unit>
+<trans-unit xml:space="preserve" id="P3E6DCAE8-tu1">
+<source xml:lang="de-DE"><x ctype="x-x" equiv-text="&lt;run1/&gt;" id="1"></x></source>
+<seg-source><x ctype="x-x" equiv-text="&lt;run1/&gt;" id="1"></x></seg-source>
+<target state="translated" xml:lang="en-GB"><x ctype="x-x" equiv-text="&lt;run1/&gt;" id="1"></x></target>
+</trans-unit>
+</body>
+</file>
+<file original="word/header2.xml" datatype="x-undefined" okp:inputEncoding="UTF-8" source-language="de-DE" target-language="en-GB"><header><tool tool-name="24|xliff" tool-company="24|technology GmbH" tool-id="24t_xliff" tool-version="3.0.17"><t4xlf:parameters xmlns:t4xlf="t4xlf:xliff-parameter-extensions"><t4xlf:parameter value="true" key="bPreferenceTranslateWordHeadersFooters"></t4xlf:parameter><t4xlf:parameter value="false" key="bPreferenceTranslateWordHidden"></t4xlf:parameter><t4xlf:parameter value="false" key="ExtractOnlyPinkHighlightedText"></t4xlf:parameter><t4xlf:parameter value="false" key="ExtractOnlyYellowHighlightedText"></t4xlf:parameter><t4xlf:parameter value="false" key="unescapeXmlCharactersInContent"></t4xlf:parameter></t4xlf:parameters></tool></header>
+<body>
+<trans-unit xml:space="preserve" id="N9C6DE2C0-sub1">
+<source xml:lang="de-DE">ENTWURF</source>
+<seg-source><mrk mtype="seg" mid="0">ENTWURF</mrk></seg-source>
+<target state="translated" xml:lang="en-GB"><mrk mtype="seg" mid="0">DRAFT</mrk></target>
+</trans-unit>
+<trans-unit xml:space="preserve" id="P3E7BE269-tu1">
+<source xml:lang="de-DE"><x ctype="x-x" equiv-text="&lt;run1/&gt;" id="1"></x></source>
+<seg-source><x ctype="x-x" equiv-text="&lt;run1/&gt;" id="1"></x></seg-source>
+<target state="translated" xml:lang="en-GB"><x ctype="x-x" equiv-text="&lt;run1/&gt;" id="1"></x></target>
+</trans-unit>
+</body>
+</file>
+<file original="word/footer1.xml" datatype="x-undefined" okp:inputEncoding="UTF-8" source-language="de-DE" target-language="en-GB"><header><tool tool-name="24|xliff" tool-company="24|technology GmbH" tool-id="24t_xliff" tool-version="3.0.17"><t4xlf:parameters xmlns:t4xlf="t4xlf:xliff-parameter-extensions"><t4xlf:parameter value="true" key="bPreferenceTranslateWordHeadersFooters"></t4xlf:parameter><t4xlf:parameter value="false" key="bPreferenceTranslateWordHidden"></t4xlf:parameter><t4xlf:parameter value="false" key="ExtractOnlyPinkHighlightedText"></t4xlf:parameter><t4xlf:parameter value="false" key="ExtractOnlyYellowHighlightedText"></t4xlf:parameter><t4xlf:parameter value="false" key="unescapeXmlCharactersInContent"></t4xlf:parameter></t4xlf:parameters></tool></header>
+<body>
+<trans-unit xml:space="preserve" id="P3953B09A-tu1">
+<source xml:lang="de-DE"><x ctype="x-x" equiv-text="&lt;run1/&gt;" id="1"></x><bx ctype="x-empty" equiv-text="&lt;run2&gt;" id="2"></bx> / <x ctype="x-x" equiv-text="&lt;run3/&gt;" id="3"></x><ex id="2"></ex></source>
+<seg-source><x ctype="x-x" equiv-text="&lt;run1/&gt;" id="1"></x><bx ctype="x-empty" equiv-text="&lt;run2&gt;" id="2"></bx> <mrk mtype="seg" mid="1">/</mrk> <x ctype="x-x" equiv-text="&lt;run3/&gt;" id="3"></x><ex id="2"></ex></seg-source>
+<target state="translated" xml:lang="en-GB"><x ctype="x-x" equiv-text="&lt;run1/&gt;" id="1"></x><bx ctype="x-empty" equiv-text="&lt;run2&gt;" id="2"></bx> <mrk mtype="seg" mid="1">/</mrk> <x ctype="x-x" equiv-text="&lt;run3/&gt;" id="3"></x><ex id="2"></ex></target>
+</trans-unit>
+</body>
+</file>
+<file original="word/header3.xml" datatype="x-undefined" okp:inputEncoding="UTF-8" source-language="de-DE" target-language="en-GB"><header><tool tool-name="24|xliff" tool-company="24|technology GmbH" tool-id="24t_xliff" tool-version="3.0.17"><t4xlf:parameters xmlns:t4xlf="t4xlf:xliff-parameter-extensions"><t4xlf:parameter value="true" key="bPreferenceTranslateWordHeadersFooters"></t4xlf:parameter><t4xlf:parameter value="false" key="bPreferenceTranslateWordHidden"></t4xlf:parameter><t4xlf:parameter value="false" key="ExtractOnlyPinkHighlightedText"></t4xlf:parameter><t4xlf:parameter value="false" key="ExtractOnlyYellowHighlightedText"></t4xlf:parameter><t4xlf:parameter value="false" key="unescapeXmlCharactersInContent"></t4xlf:parameter></t4xlf:parameters></tool></header>
+<body>
+<trans-unit xml:space="preserve" id="P4E85A5D5-sub1">
+<source xml:lang="de-DE">ENTWURF</source>
+<seg-source><mrk mtype="seg" mid="0">ENTWURF</mrk></seg-source>
+<target state="translated" xml:lang="en-GB"><mrk mtype="seg" mid="0">DRAFT</mrk></target>
+</trans-unit>
+<trans-unit xml:space="preserve" id="P3E89F9EA-tu1">
+<source xml:lang="de-DE"><x ctype="x-x" equiv-text="&lt;run1/&gt;" id="1"></x></source>
+<seg-source><x ctype="x-x" equiv-text="&lt;run1/&gt;" id="1"></x></seg-source>
+<target state="translated" xml:lang="en-GB"><x ctype="x-x" equiv-text="&lt;run1/&gt;" id="1"></x></target>
+</trans-unit>
+</body>
+</file>
+<file original="word/settings.xml" datatype="x-undefined" okp:inputEncoding="UTF-8" source-language="de-DE" target-language="en-GB"><header><tool tool-name="24|xliff" tool-company="24|technology GmbH" tool-id="24t_xliff" tool-version="3.0.17"><t4xlf:parameters xmlns:t4xlf="t4xlf:xliff-parameter-extensions"><t4xlf:parameter value="true" key="bPreferenceTranslateWordHeadersFooters"></t4xlf:parameter><t4xlf:parameter value="false" key="bPreferenceTranslateWordHidden"></t4xlf:parameter><t4xlf:parameter value="false" key="ExtractOnlyPinkHighlightedText"></t4xlf:parameter><t4xlf:parameter value="false" key="ExtractOnlyYellowHighlightedText"></t4xlf:parameter><t4xlf:parameter value="false" key="unescapeXmlCharactersInContent"></t4xlf:parameter></t4xlf:parameters></tool></header>
+<body>
+</body>
+</file>
+</xliff>

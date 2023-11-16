@@ -1,3 +1,12 @@
 #!/bin/sh
 
-exec docker run -i --rm -u  `id -u`:`id -g` -v "$(dirname "$PWD")":/work/root omegatorg/docgen "$@"
+if type nerdctl &> /dev/null ; then
+    CMD=nerdctl
+elif type docker &> /dev/null ; then
+    CMD=docker
+else
+  echo Please install docker or nerdctl!
+  exit 2
+fi
+
+exec $CMD run -i --rm -u `id -u`:`id -g` -v "$(dirname "$PWD")":/work/root omegatorg/docgen "$@"

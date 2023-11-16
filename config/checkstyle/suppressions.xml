@@ -83,7 +83,6 @@
     <!-- util/xml -->
     <suppress checks="(EmptyBlock|MethodLength)" files="XMLStreamReader\.java"/>
     <!-- util -->
-    <suppress files="StaticUtils\.java" checks="EmptyBlock" lines="158,162,549"/>
     <suppress files="StringUtil\.java" checks="EmptyBlock" lines="500,501,502"/>
     <suppress checks="InnerAssignment" files="TagUtil\.java"/>
     <suppress checks="InnerAssignment" files="VarExpansion\.java" lines="108"/>
@@ -177,14 +176,8 @@
               checks="(InnerAssignment|LocalVariableName|ParameterName|MemberName|MissingSwitchDefault|MethodLength)"
               lines="95,292,302,456,520,578,609,767"/>
     <suppress files="MsOfficeFileFilter\.java" checks="(MemberName|OperatorWrap)" lines="49,50,190"/>
-    <suppress files="Xliff1Filter\.java" checks="AvoidNestedBlocks" lines="412"/>
     <suppress files="SdlXliff\.java" checks="MemberName" lines="62,105,106,107"/>
-    <suppress files="AbstractXliffFilter\.java" checks="ConstantName" lines="246"/>
-    <suppress files="Xliff2Filter\.java" checks="RightCurly" lines="146"/>
-    <suppress files="Xliff2Filter\.java" checks="AvoidNestedBlocks" lines="266"/>
-    <suppress files="AbstractXmlFilter\.java" checks="(MissingSwitchDefault|ConstantName)" lines="325,380,464"/>
 
-   
     <!-- missing javadoc: temporary global suppression  -->
     <suppress checks="(DesignForExtension|MagicNumber)"
               files=".*"/>

@@ -91,6 +91,11 @@ abstract class AbstractXliffFilter extends AbstractXmlFilter {
 
     protected abstract String versionPrefix();
 
+    @Override
+    public boolean isBilingual() {
+        return true;
+    }
+
     // --------------------- AbstractXmlFilter part -----------------------
 
     /* -- Data about current unit */

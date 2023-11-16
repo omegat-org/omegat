@@ -2,7 +2,7 @@
  OmegaT 6.1.0
 ----------------------------------------------------------------------
   26 Enhancement
-  35 Bug fixes
+  36 Bug fixes
 ----------------------------------------------------------------------
 6.1.0 vs 6.0.0
 
@@ -88,6 +88,9 @@
 
 
   Bug fixes:
+
+  Unit tests failed on Windows
+  - https://sourceforge.net/p/omegat/bugs/1223/
 
   - OmegaT does not handle line breaks correctly on Windows
   https://sourceforge.net/p/omegat/bugs/1219/

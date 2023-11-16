@@ -32,6 +32,7 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.io.File;
 import java.util.concurrent.CancellationException;
+import java.util.concurrent.ExecutionException;
 
 import javax.swing.SwingWorker;
 import javax.swing.event.DocumentEvent;
@@ -276,10 +277,10 @@ public class NewTeamProjectController {
             try {
                 type = get();
                 resultText = getMessageForRepoType(type);
-            } catch (CancellationException ex) {
+            } catch (CancellationException | InterruptedException ex) {
                 type = null;
                 resultText = " ";
-            } catch (Throwable ex) {
+            } catch (ExecutionException ex) {
                 type = null;
                 // Error strings are project-file-specific because
                 // RemoteRepositoryFactory.detectRepositoryType() doesn't throw

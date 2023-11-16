@@ -332,7 +332,7 @@ public class PoFilter extends AbstractFilter {
         if (bom != null) {
             charset = bom.getCharsetName();
         } else if (inEncoding == null) {
-            charset = Charset.defaultCharset().name();
+            charset = StandardCharsets.UTF_8.name();
         } else {
             charset = inEncoding;
         }

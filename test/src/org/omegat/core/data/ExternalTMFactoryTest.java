@@ -137,7 +137,7 @@ public class ExternalTMFactoryTest extends TestCore {
 
     @Test
     public void testLoadXliff() throws Exception {
-        File tmxFile = new File("test/data/filters/xliff/en-ca.xlf");
+        File tmxFile = new File("test/data/filters/xliff/filters4-xliff1/en-ca.xlf");
 
         sourceLang = new Language("en");
         targetLang = new Language("ca");

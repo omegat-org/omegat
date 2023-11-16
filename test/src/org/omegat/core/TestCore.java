@@ -554,6 +554,6 @@ public abstract class TestCore {
 
     @After
     public final void tearDownCore() throws Exception {
-        FileUtils.deleteDirectory(configDir);
+        FileUtils.forceDeleteOnExit(configDir);
     }
 }

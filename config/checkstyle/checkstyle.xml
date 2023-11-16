@@ -98,14 +98,24 @@
 
         <!-- Support default CHECKSTYLE:ON/OFF comments -->
         <module name="SuppressionCommentFilter">
-            <property name="offCommentFormat" value="(CHECKSTYLE:OFF|GEN-FIRST:.*)"/>
-            <property name="onCommentFormat" value="(CHECKSTYLE:ON|GEN-LAST:.*)"/>
+            <property name="offCommentFormat" value="CHECKSTYLE:OFF"/>
+            <property name="onCommentFormat" value="CHECKSTYLE:ON"/>
+        </module>
+        <!-- Support CHECKSTYLE.ON/OFF: <RULE> comments -->
+        <module name="SuppressionCommentFilter">
+            <property name="offCommentFormat" value="CHECKSTYLE.OFF\: ([\w\|]+)"/>
+            <property name="onCommentFormat" value="CHECKSTYLE.ON\: ([\w\|]+)"/>
+            <property name="checkFormat" value="$1"/>
         </module>
 
+        <!-- Suppression on generated codes -->
         <module name="SuppressionCommentFilter">
-            <property name="offCommentFormat"
-               value="&lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents"/>
-            <property name="onCommentFormat" value="&lt;/editor-fold&gt;//GEN-END:initComponents"/>
+            <property name="offCommentFormat" value="GEN-FIRST:.*"/>
+            <property name="onCommentFormat" value="GEN-LAST:.*"/>
+        </module>
+        <module name="SuppressionCommentFilter">
+            <property name="offCommentFormat" value="^.*//GEN-BEGIN:.*"/>
+            <property name="onCommentFormat" value="^.*//GEN-END:.*"/>
         </module>
 
         <!-- Checks for Javadoc comments.                     -->

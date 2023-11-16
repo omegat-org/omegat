@@ -28,7 +28,7 @@ PGID=`id -g`
 IMAGE=omegatorg/innosetup:innosetup6
 CONTEXT=`mktemp -d`
 
-cat << __EOF__  > /$CONTEXT/Dockerfile
+cat << __EOF__  > $CONTEXT/Dockerfile
 FROM docker.io/amake/innosetup:innosetup6-buster
 USER root
 RUN usermod -u $PUID -o xclient && groupmod -g $PGID -o xusers

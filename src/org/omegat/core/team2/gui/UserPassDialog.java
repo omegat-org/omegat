@@ -42,6 +42,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.JToggleButton;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
@@ -111,6 +112,17 @@ public class UserPassDialog extends javax.swing.JDialog {
                 checkCredentials();
             }
         });
+
+        toggleButton.addActionListener(e -> {
+            // Toggle between showing/hiding the password
+            if (toggleButton.isSelected()) {
+                passwordField.setEchoChar((char) 0); // Show password in plaintext
+                org.openide.awt.Mnemonics.setLocalizedText(toggleButton, OStrings.getString("TEAM_USERPASS_HIDE_PASSWORD")); // NOI18N
+            } else {
+                passwordField.setEchoChar('●');
+                org.openide.awt.Mnemonics.setLocalizedText(toggleButton, OStrings.getString("TEAM_USERPASS_SHOW_PASSWORD")); // NOI18N
+            }
+        });
     }
 
     private void checkCredentials() {
@@ -154,6 +166,7 @@ public class UserPassDialog extends javax.swing.JDialog {
         usernameField = new JTextField();
         JLabel passwordLabel = new JLabel();
         passwordField = new JPasswordField();
+        toggleButton = new JToggleButton();
         perHostCheckBox = new JCheckBox();
         messageArea = new JTextArea();
         okButton = new JButton();
@@ -221,6 +234,12 @@ public class UserPassDialog extends javax.swing.JDialog {
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         mainPanel.add(passwordField, gridBagConstraints);
+        gridBagConstraints = new GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.anchor = GridBagConstraints.WEST;
+        org.openide.awt.Mnemonics.setLocalizedText(toggleButton, OStrings.getString("TEAM_USERPASS_SHOW_PASSWORD")); // NOI18N
+        mainPanel.add(toggleButton, gridBagConstraints);
 
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -286,6 +305,7 @@ public class UserPassDialog extends javax.swing.JDialog {
     private JPasswordField passwordField;
     private JCheckBox perHostCheckBox;
     private JTextArea messageArea;
+    private JToggleButton toggleButton;
 
     private int returnStatus = RET_CANCEL;
 

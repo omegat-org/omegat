@@ -37,6 +37,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.Collections;
@@ -315,7 +316,7 @@ public abstract class AbstractFilter implements IFilter {
      *            The source file.
      * @param inEncoding
      *            Encoding of the input file, if the filter supports it.
-     *            Otherwise null.
+     *            Otherwise, null.
      * @return The reader for the source file
      * @throws UnsupportedEncodingException
      *             Thrown if JVM doesn't support the specified inEncoding
@@ -333,7 +334,7 @@ public abstract class AbstractFilter implements IFilter {
         if (bomLastParsedFile != null) {
             charset = bomLastParsedFile.getCharsetName();
         } else {
-            charset = Objects.requireNonNullElseGet(inEncoding, () -> Charset.defaultCharset().name());
+            charset = Objects.requireNonNullElseGet(inEncoding, () -> StandardCharsets.UTF_8.name());
         }
         return new BufferedReader(new InputStreamReader(bomInputStream, charset));
     }
@@ -363,7 +364,7 @@ public abstract class AbstractFilter implements IFilter {
         } else if (outEncoding != null) {
             charset = Charset.forName(outEncoding);
         } else {
-            charset = Charset.defaultCharset();
+            charset = StandardCharsets.UTF_8;
         }
         return Files.newBufferedWriter(outFile.toPath(), charset);
     }

@@ -59,11 +59,6 @@ public class Xliff2Filter extends AbstractXliffFilter {
         return "2."; // can be 2.0, maybe more in the future
     }
 
-    @Override
-    public boolean isBilingual() {
-        return true;
-    }
-
     // ------------------- AbstractXmlFilter part -------------------------
 
     @Override

@@ -349,7 +349,7 @@ public class PoFilter extends AbstractFilter {
         if (outEncoding != null) {
             charset = Charset.forName(outEncoding);
         } else {
-            charset = Charset.defaultCharset();
+            charset = StandardCharsets.UTF_8;
         }
         return Files.newBufferedWriter(outFile.toPath(), charset);
     }

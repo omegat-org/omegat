@@ -60,6 +60,11 @@ public class Xliff1Filter extends AbstractXliffFilter {
         return "1."; // can be 1.0, 1.1 or 1.2
     }
 
+    @Override
+    public boolean isBilingual() {
+        return true;
+    }
+
     // ----------------------- AbstractXmlFilter part----------------------
 
     /** Current translation unit **/

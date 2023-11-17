@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en" original="/home/example/example_md/orig/sample_es.json" datatype="x-json" target-language="es" tool-id="OpenXLIFF">
+    <header>
+      <tool tool-version="3.6.0 20230413_0951" tool-id="OpenXLIFF" tool-name="OpenXLIFF Filters"/>
+    </header>
+    <?exportHTML yes?>
+    <?encoding UTF-8?>
+  <body>
+    <trans-unit id="3456611">
+      <source>foo</source>
+      <target>bar</target>
+    </trans-unit>
+    <trans-unit id="34566" translate="no">
+      <source>baz</source>
+      <target>qux</target>
+    </trans-unit>
+  </body>
+</file>
+</xliff>

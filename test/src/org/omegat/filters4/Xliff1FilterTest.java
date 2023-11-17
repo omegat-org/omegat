@@ -36,6 +36,7 @@ import java.util.HashMap;
 
 import org.junit.Test;
 
+import org.omegat.core.data.IProject;
 import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.ITranslateCallback;
 import org.omegat.filters4.xml.xliff.Xliff1Filter;
@@ -119,6 +120,16 @@ public class Xliff1FilterTest extends org.omegat.filters.TestFilterBase {
         assertEquals("bar", entries.get(1).translation);
         // entry translated in the callback, not in the source file
         assertEquals("Devrait traduire dans le r\u00E9sultat.", entries.get(2).translation); 
+    }
+
+    @Test
+    public void testEntriesTranslateNo() throws Exception {
+        Xliff1Filter filter = new Xliff1Filter();
+        String f = "test/data/filters/xliff/filters4-xliff1/en-es_translate-no.xlf";
+        IProject.FileInfo fi = loadSourceFiles(filter, f);
+        checkMultiStart(fi, f);
+        checkMulti("foo", "3456611", "///home/example/example_md/orig/sample_es.json", null, null, null);
+        checkMultiEnd();
     }
     
     /**

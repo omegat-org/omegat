@@ -15,6 +15,10 @@
       <source>baz</source>
       <target>qux</target>
     </trans-unit>
-  </body>
+    <trans-unit id="34567" state="final">
+      <source>hoge</source>
+      <target>fuga</target>
+    </trans-unit>
+   </body>
 </file>
 </xliff>

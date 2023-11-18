@@ -102,6 +102,8 @@ dependencies {
     } else {
         implementation 'commons-io:commons-io:2.11.0'
         implementation 'commons-lang:commons-lang:2.6'
+        implementation 'commons-validator:commons-validator:1.7'
+        implementation 'commons-codec:commons-codec:1.16.1'
 
         // macOS integration
         implementation 'org.madlonkay:desktopsupport:0.6.0'

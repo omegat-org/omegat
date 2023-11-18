@@ -70,7 +70,7 @@ public class DictionaryGlossaryRenderer implements IGlossaryRenderer {
                     trg.append(", ", null);
                 }
             }
-            if (!comments[i].equals("")) {
+            if (!comments[i].isEmpty()) {
                 trg.startIndent(NOTES_ATTRIBUTES);
                 trg.append("- " + comments[i], NOTES_ATTRIBUTES);
                 hasComments = true;

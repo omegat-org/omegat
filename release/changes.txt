@@ -2,7 +2,7 @@
  OmegaT 6.1.0
 ----------------------------------------------------------------------
   29 Enhancement
-  42 Bug fixes
+  51 Bug fixes
 ----------------------------------------------------------------------
 6.1.0 vs 6.0.0
 
@@ -98,6 +98,12 @@
 
   Bug fixes:
 
+  - distribution for macOS only run on Java runtime 11
+  https://sourceforge.net/p/omegat/bugs/1230/
+
+  - Links that contain non ascii characters are not properly handled in glossary dialog
+  https://sourceforge.net/p/omegat/bugs/1229/
+
   - CI: weekly release failed with permission error inside docker image
   https://sourceforge.net/p/omegat/bugs/1228/
 
@@ -110,6 +116,9 @@
   - OmegaT creates xlf file that other CAT tools cannot read ("MESSAGE: There are multiple root elements. Line 375,
  position 2.")
   https://sourceforge.net/p/omegat/bugs/1221/
+
+  - Unable to use XLIFF file as TM
+  https://sourceforge.net/p/omegat/bugs/1220/
 
   - OmegaT does not handle line breaks correctly on Windows
   https://sourceforge.net/p/omegat/bugs/1219/
@@ -134,6 +143,9 @@
 
   - Incompatible among LanguageTool@6 and lucene-gosen@5 from omegat-org
   https://sourceforge.net/p/omegat/bugs/1204/
+
+  - Error 403 when accessing different repo with different creds in same domain
+  https://sourceforge.net/p/omegat/bugs/1202/
 
   - Integration test(docker) failure with 503
   https://sourceforge.net/p/omegat/bugs/1199/
@@ -178,6 +190,9 @@
   - OmegaT ask passphrase to connect git+ssh server but dialog label is user/pass
   https://sourceforge.net/p/omegat/bugs/1173/
 
+  - TipOfTheDay dialog do not close with enter/escape
+  https://sourceforge.net/p/omegat/bugs/1172/
+
   - Team project failed to merge changes with TMXMerge
   https://sourceforge.net/p/omegat/bugs/1170/
 
@@ -187,11 +202,17 @@
   - OmegaT cannot load a project and error dialog with FileSystemLoopException
   https://sourceforge.net/p/omegat/bugs/1168/
 
+  - Default filters settings don't initialize options
+  https://sourceforge.net/p/omegat/bugs/1167/
+
   - Error when trying to backup the project file on Windows
   https://sourceforge.net/p/omegat/bugs/1166/
 
   - Docker setup of Integration test is not working for Subversion
   https://sourceforge.net/p/omegat/bugs/1165/
+
+  - Translation memories are not correctly reloaded after team synchronization
+  https://sourceforge.net/p/omegat/bugs/1164/
 
   - Project not loaded if it contains DTD internal entities
   https://sourceforge.net/p/omegat/bugs/1163/
@@ -208,8 +229,14 @@
   - MT engines show JSON parser error as translated text
   https://sourceforge.net/p/omegat/bugs/1141/
 
+  - Duplication of some files in the distributed packages
+  https://sourceforge.net/p/omegat/bugs/1123/
+
   - OpenSSH new key format and ECDSA/ED25519 keys
   https://sourceforge.net/p/omegat/bugs/1107/
+
+  - Fails to load TM using tags
+  https://sourceforge.net/p/omegat/bugs/1090
 
   - Lucene 5.2 does not work under WebStart
   https://sourceforge.net/p/omegat/bugs/813/

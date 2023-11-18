@@ -73,6 +73,7 @@ import org.omegat.gui.editor.EditorUtils;
 import org.omegat.gui.main.DockableScrollPane;
 import org.omegat.gui.main.IMainWindow;
 import org.omegat.gui.shortcuts.PropertiesShortcuts;
+import org.omegat.util.HttpConnectionUtils;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
@@ -378,7 +379,8 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
                 if (dialog.getReturnStatus() == CreateGlossaryEntry.RET_OK) {
                     String src = StringUtil.normalizeUnicode(dialog.getSourceText().getText()).trim();
                     String loc = StringUtil.normalizeUnicode(dialog.getTargetText().getText()).trim();
-                    String com = StringUtil.normalizeUnicode(dialog.getCommentText().getText()).trim();
+                    String com = HttpConnectionUtils.encodeHttpURLs(StringUtil.normalizeUnicode(
+                            dialog.getCommentText().getText()).trim());
                     if (!StringUtil.isEmpty(src) && !StringUtil.isEmpty(loc)) {
                         try {
                             GlossaryReaderTSV.append(out, new GlossaryEntry(src, loc, com, true, out.getPath()));

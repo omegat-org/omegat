@@ -51,4 +51,15 @@ public class HttpConnectionUtilsTest {
                 + "3. https://fr.wikipedia.org/wiki/Science_du_système_Terre", HttpConnectionUtils.decodeHttpURLs(str));
     }
 
+    @Test
+    public void testEncodeURLs() {
+        String base = "https://fr.wikipedia.org/";
+        String path = "wiki/Science_du_système_Terre";
+        String query = "?query=search&lang=en";
+        assertEquals( "https://fr.wikipedia.org/", HttpConnectionUtils.encodeHttpURLs(base));
+        assertEquals( "https://fr.wikipedia.org/wiki/Science_du_syst%C3%A8me_Terre",
+                HttpConnectionUtils.encodeHttpURLs(base + path));
+        assertEquals( "https://fr.wikipedia.org/wiki/Science_du_syst%C3%A8me_Terre?query=search&lang=en",
+                HttpConnectionUtils.encodeHttpURLs(base + path + query));
+    }
 }

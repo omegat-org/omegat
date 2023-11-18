@@ -36,6 +36,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
@@ -48,6 +50,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.codec.DecoderException;
+import org.apache.commons.codec.EncoderException;
 import org.apache.commons.codec.net.URLCodec;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.validator.routines.UrlValidator;
@@ -468,6 +471,78 @@ public final class HttpConnectionUtils {
         }
     }
 
+    public static String encodeHttpURLs(String text) {
+        UrlValidator urlValidator = new UrlValidator();
+        StringBuilder result = new StringBuilder();
+        Matcher m = HTTP_URL_PATTERN.matcher(text);
+        int lastIndex = 0;
+        while (m.find()) {
+            final String url = m.group();
+            if (!urlValidator.isValid(url)) {
+                try {
+                    URI uri = new URI(url);
+                    String encodedPath = encodePath(uri.getRawPath());
+                    String encodedQuery = encodeQuery(uri.getRawQuery());
+                    result.append(text, lastIndex, m.start());
+                    result.append(uri.getScheme()).append("://").append(uri.getAuthority());
+                    if (uri.getRawUserInfo() != null) {
+                        result.append(uri.getRawUserInfo()).append("@");
+                    }
+                    if (!StringUtil.isEmpty(encodedPath)) {
+                        result.append(encodedPath);
+                    }
+                    if (!StringUtil.isEmpty(encodedQuery)) {
+                        result.append("?").append(encodedQuery);
+                    }
+                    if (uri.getRawFragment() != null) {
+                        result.append("#").append(uri.getRawFragment());
+                    }
+                } catch (EncoderException | URISyntaxException ex) {
+                    result.append(url);
+                }
+                lastIndex = m.end();
+            }
+        }
+        result.append(text.substring(lastIndex));
+        return result.toString();
+    }
+
+    public static String encodeURIComponent(String component) throws EncoderException {
+        if (component == null) {
+            return null;
+        }
+        return codec.encode(component);
+    }
+
+    public static String encodePath(String path) throws EncoderException {
+        String[] pathSegments = path.split("/");
+        StringBuilder encodedPath = new StringBuilder();
+        for (String segment : pathSegments) {
+            if (!segment.isEmpty()) {
+                encodedPath.append("/").append(codec.encode(segment));
+            }
+        }
+        return encodedPath.toString();
+    }
+
+    public static String encodeQuery(String query) throws EncoderException {
+        if (query == null) {
+            return null;
+        }
+        String[] querySegments = query.split("&");
+        StringBuilder encodedQuery = new StringBuilder();
+        for (int i = 0; i < querySegments.length; i++) {
+            final String segment = querySegments[i];
+            if (!segment.isEmpty()) {
+                if (i != 0) {
+                    encodedQuery.append("&");
+                }
+                String[] exp = segment.split("=");
+                encodedQuery.append(codec.encode(exp[0])).append("=").append(codec.encode(exp[1]));
+            }
+        }
+        return encodedQuery.toString();
+    }
 
     public static String decodeHttpURLs(String text) {
         UrlValidator urlValidator = new UrlValidator();

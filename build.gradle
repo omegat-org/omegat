@@ -219,6 +219,7 @@ dependencies {
     } else {
         implementation(libs.commons.io)
         implementation(libs.commons.lang3)
+        implementation(libs.commons.validator)
         api(libs.slf4j.api)
         implementation(libs.slf4j.format.jdk14)
         runtimeOnly(libs.slf4j.jdk14)

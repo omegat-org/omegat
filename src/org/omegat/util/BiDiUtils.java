@@ -34,7 +34,7 @@ import org.omegat.core.Core;
 /**
  * @author Damien Rembert
  */
-public class BiDiUtils {
+public final class BiDiUtils {
 
     public enum ORIENTATION {
         /** All text is left-to-right oriented. */
@@ -55,6 +55,9 @@ public class BiDiUtils {
     public static final String BIDI_RLM = "\u200f";
     public static final char BIDI_LRM_CHAR = '\u200e';
     public static final char BIDI_RLM_CHAR = '\u200f';
+
+    private BiDiUtils() {
+    }
 
     public static ORIENTATION getOrientationType() {
         ORIENTATION orientation;
@@ -127,6 +130,9 @@ public class BiDiUtils {
             } else {
                 targetOrientation = ComponentOrientation.LEFT_TO_RIGHT;
             }
+            break;
+        default:
+            throw new IllegalArgumentException();
         }
         return targetOrientation;
     }

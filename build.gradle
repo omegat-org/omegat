@@ -1,5 +1,6 @@
 import org.apache.tools.ant.filters.FixCrLfFilter
 import org.apache.tools.ant.filters.ReplaceTokens
+import org.panteleyev.jpackage.JPackageTask
 
 plugins {
     id 'application'
@@ -14,7 +15,8 @@ plugins {
     alias(libs.plugins.spotless)
     alias(libs.plugins.versions)
     alias(libs.plugins.launch4j)
-    id 'org.hidetake.ssh' version '2.10.1'
+    alias(libs.plugins.jpackage)
+    alias(libs.plugins.ssh)
 }
 
 apply from: 'gradle/utils.gradle'
@@ -23,6 +25,12 @@ application {
     applicationName = 'OmegaT'
     mainClass = 'org.omegat.Main'
 }
+
+def shortDescription = 'The free translation memory tool'
+def distDescription = 'OmegaT is a free and open source multiplatform Computer Assisted Translation tool with' +
+        ' fuzzy matching, translation memory, keyword search, glossaries, and translation leveraging into updated' +
+        ' projects.'
+def distAppVendor = 'The OmegaT project'
 
 def javaVersion = 11;
 def localPropsFile = file('local.properties')
@@ -211,6 +219,7 @@ dependencies {
     } else {
         implementation(libs.commons.io)
         implementation(libs.commons.lang3)
+        implementation(libs.commons.validator)
         api(libs.slf4j.api)
         implementation(libs.slf4j.format.jdk14)
         runtimeOnly(libs.slf4j.jdk14)
@@ -384,7 +393,9 @@ jar {
     archiveFileName.set("${archiveBaseName.get()}.${archiveExtension.get()}")
 }
 
+def omegatJarFilename = jar.archiveFileName.get()
 project(":machinetranslators") {jar.enabled = false}
+project(":spellchecker") {jar.enabled = false}
 
 def distsDir = file(layout.buildDirectory.file("${distsDirName}"))
 def assetDir = findProperty('assetDir') ?: '../'
@@ -486,7 +497,7 @@ tasks.register('genMac') {
                 identifier: 'org.omegat.OmegaT',
                 icon: 'images/OmegaT.icns',
                 version: '${version}',
-                jvmrequired: javaVersion,
+                jvmrequired: '${jvmRequired}',
                 shortversion: '${version}',
                 mainclassname: application.mainClass) {
             option(value: "-Xdock:name=${applicationName}")
@@ -547,14 +558,14 @@ distributions {
             from('release/linux-specific') {
                 filter ReplaceTokens, tokens: [
                         VERSION_NUMBER_SUBST: project.version,
-                        JAR_SUBST           : jar.archiveFileName.get()
+                        JAR_SUBST           : omegatJarFilename
                 ]
                 fileMode 0755
             }
             from('release/win32-specific') {
                 include 'OmegaT.bat'
                 filter(ReplaceTokens, tokens: [
-                        JAR_SUBST           : jar.archiveFileName.get()
+                        JAR_SUBST           : omegatJarFilename
                 ])
             }
             from('lib/licenses') {
@@ -569,7 +580,6 @@ distributions {
             }
             eachFile {
                 // Move main JAR up one level from lib.
-                def omegatJarFilename = jar.archiveFileName.get()
                 if (it.name == omegatJarFilename) {
                     it.relativePath = it.relativePath.parent.parent.append(true, omegatJarFilename)
                 }
@@ -624,87 +634,11 @@ distributions {
                 with main.contents
                 exclude '*.sh', '*.kaptn', 'OmegaT', 'OmegaT.bat', 'omegat.desktop', '*.exe'
             }
-            if (!macJRE.empty) {
-                from(tarTree(macJRE.singleFile)) {
-                    into 'OmegaT.app/Contents/PlugIns'
-                    includeEmptyDirs = false
-                    eachFile {
-                        replaceRelativePathSegment(it, /jdk.*-jre/, 'jre.bundle')
-                    }
-                }
-            }
-        }
-    }
-
-    armMac {
-        contents {
-            from(genMac.outputs) {
-                exclude '**/MacOS/OmegaT', '**/Info.plist', '**/java.entitlements'
-            }
-            from(genMac.outputs) {
-                include '**/MacOS/OmegaT'
-                fileMode 0755
-            }
-            from(genMac.outputs) {
-                include '**/Info.plist'
-                expand(version: project.version,
-                        // $APP_ROOT is expanded at runtime by the launcher binary
-                        configfile: '$APP_ROOT/Contents/Resources/Configuration.properties')
-            }
-            into('OmegaT.app/Contents/Java') {
-                with main.contents
-                exclude '*.sh', '*.kaptn', 'OmegaT', 'OmegaT.bat', 'omegat.desktop'
-            }
-            if (!armMacJRE.empty) {
-                from(tarTree(armMacJRE.singleFile)) {
-                    into 'OmegaT.app/Contents/PlugIns'
-                    includeEmptyDirs = false
-                    eachFile {
-                        replaceRelativePathSegment(it, /jdk.*-jre/, 'jre.bundle')
-                    }
-                }
-            }
-        }
-    }
-
-    linux64 {
-        contents {
-            with main.contents
-            exclude 'OmegaT.bat', '*.exe'
-            if (!linux64JRE.empty) {
-                from(tarTree(linux64JRE.singleFile)) {
-                    includeEmptyDirs = false
-                    eachFile {
-                        replaceRelativePathSegment(it, /jdk.*-jre/, 'jre')
-                    }
-                }
-            }
-        }
-    }
-
-    linuxArm64 {
-        contents {
-            with main.contents
-            exclude 'OmegaT.bat'
-            if (!linuxArm64JRE.empty) {
-                from(tarTree(linuxArm64JRE.singleFile)) {
-                    includeEmptyDirs = false
-                    eachFile {
-                        replaceRelativePathSegment(it, /jdk.*-jre/, 'jre')
-                    }
-                }
-            }
         }
     }
 }
 
 sourceDistZip.dependsOn genDocIndex
-
-installMacDist {
-    doFirst {
-        delete "$destinationDir/OmegaT.app/Contents/PlugIns/jre.bundle"
-    }
-}
 
 def hunspellJar = configurations.runtimeClasspath.files.find {
     it.name.startsWith('hunspell')
@@ -736,42 +670,114 @@ tasks.register('hunspellSignedJar', Jar) {
     archiveFileName.set(hunspellJar.name)
 }
 
-macDistZip {
-    onlyIf {
-        condition(!macJRE.empty, 'JRE not found')
-    }
-    archiveFileName.set("${application.applicationName}_${project.version}${omtVersion.beta}_Mac_x64.zip")
-    group = 'omegat distribution'
-}
-
-armMacDistZip {
-    onlyIf {
-        condition(!armMacJRE.empty, 'JRE not found')
-    }
-    archiveFileName.set("${application.applicationName}_${project.version}${omtVersion.beta}_Mac_arm.zip")
+tasks.register('mac') {
+    description = 'Build the Mac distributions.'
     group = 'omegat distribution'
 }
 
 ext.makeMacTask = { args ->
+    def installTaskName = args.name + "InstallDist"
     def signedInstallTaskName = args.name + "InstallSignedDist"
+    def distZipTaskName = args.name + "DistZip"
     def signedZipTaskName = args.name + "SignedDistZip"
     def notarizeTaskName = args.name + "Notarize"
     def stapledNotarizedDistZipTaskName = args.name + "StapledNotarizedDistZip"
-    tasks.register(signedInstallTaskName, Sync) {
-        description = 'Build the signed Mac distribution. Requires an Apple Developer Account.'
-        onlyIf {
-            // Set this in e.g. local.properties
-            condition(project.hasProperty('macCodesignIdentity'), 'Code signing property not set')
+
+    tasks.register(distZipTaskName, Zip) {
+        description = "Create Mac distribution for ${args.name}"
+        // mac specific contents
+        from(genMac.outputs) {
+            exclude '**/MacOS/OmegaT', '**/Info.plist', '**/java.entitlements'
         }
-        if (args.name.equals('mac')) {
-            with distributions.mac.contents
-        } else {
-            with distributions.armMac.contents
+        from(genMac.outputs) {
+            include '**/MacOS/OmegaT'
+            fileMode 0755
+        }
+        from(genMac.outputs) {
+            include '**/Info.plist'
+            expand(version: project.version,
+                    jvmRequired: '11+',
+                    // when bundled JRE, path 'jre.bundle', otherwise 'default'
+                    jreRuntime: args.jrePath ? 'jre.bundle' : 'default',
+                    // $APP_ROOT is expanded at runtime by the launcher binary
+                    configfile: '$APP_ROOT/Contents/Resources/Configuration.properties')
+        }
+        into('OmegaT.app/Contents/Java') {
+            with distributions.main.contents
+            exclude '*.sh', '*.kaptn', 'OmegaT', 'OmegaT.bat', 'omegat.desktop', '*.exe'
         }
         duplicatesStrategy = DuplicatesStrategy.INCLUDE
+        archiveFileName.set("${application.applicationName}_${project.version}${omtVersion.beta}_${args.suffix}.zip")
+        if (args.jrePath && !args.jrePath.empty) {
+            from(tarTree(args.jrePath.singleFile)) {
+                into 'OmegaT.app/Contents/PlugIns'
+                includeEmptyDirs = false
+                eachFile {
+                    replaceRelativePathSegment(it, /jdk.*-jre/, 'jre.bundle')
+                }
+            }
+        }
+        onlyIf {
+            condition(!args.jrePath || !args.jrePath.empty, 'JRE not found')
+        }
+        group = 'omegat distribution'
+    }
+    mac.dependsOn distZipTaskName
+
+    tasks.register(installTaskName, Sync) {
+        description = 'Build a Mac distribution.'
+        onlyIf {
+            condition(!args.jrePath || !args.jrePath.empty, 'JRE not found')
+        }
+        // mac specific contents
+        from(genMac.outputs) {
+            exclude '**/MacOS/OmegaT', '**/Info.plist', '**/java.entitlements'
+        }
+        from(genMac.outputs) {
+            include '**/MacOS/OmegaT'
+            fileMode 0755
+        }
+        from(genMac.outputs) {
+            include '**/Info.plist'
+            expand(version: project.version,
+                    jvmRequired: '11+',
+                    // $APP_ROOT is expanded at runtime by the launcher binary
+                    configfile: '$APP_ROOT/Contents/Resources/Configuration.properties')
+        }
+        into('OmegaT.app/Contents/Java') {
+            with distributions.main.contents
+            exclude '*.sh', '*.kaptn', 'OmegaT', 'OmegaT.bat', 'omegat.desktop', '*.exe'
+        }
+        if (args.jrePath && !args.jrePath.empty) {
+            from(tarTree(args.jrePath.singleFile)) {
+                into 'OmegaT.app/Contents/PlugIns'
+                includeEmptyDirs = false
+                eachFile {
+                    replaceRelativePathSegment(it, /jdk.*-jre/, 'jre.bundle')
+                }
+            }
+        }
+        duplicatesStrategy = DuplicatesStrategy.INCLUDE
+        destinationDir file(layout.buildDirectory.file("install/${application.applicationName}-${args.suffix}"))
+        doFirst {
+            delete "$destinationDir/OmegaT.app/Contents/PlugIns/jre.bundle"
+        }
+        group = 'distribution'
+        dependsOn hunspellSignedJar
+    }
+
+    tasks.register(signedInstallTaskName, Sync) {
+        description = 'Build a signed Mac distribution. Requires an Apple Developer Account.'
+        onlyIf {
+            // Set this in e.g. local.properties
+            conditions([project.hasProperty('macCodesignIdentity'), 'Code signing property not set'],
+                       [args.jrePath && !args.jrePath.empty, 'JRE not found'])
+        }
+        from(tasks.getByName(installTaskName).outputs)
         from(hunspellSignedJar.outputs) {
             into 'OmegaT.app/Contents/Java/lib'
         }
+        duplicatesStrategy = DuplicatesStrategy.INCLUDE
         destinationDir file(layout.buildDirectory.file("install/${application.applicationName}-${args.suffix}_Signed"))
         doFirst {
             delete "$destinationDir/OmegaT.app/Contents/PlugIns/jre.bundle"
@@ -786,21 +792,17 @@ ext.makeMacTask = { args ->
                         file("${destinationDir}/OmegaT.app")
             }
         }
+        group = 'distribution'
+        dependsOn hunspellSignedJar
     }
 
     tasks.register(signedZipTaskName, Zip) {
         def zipRoot = "${application.applicationName}_${project.version}${omtVersion.beta}_${args.suffix}_Signed"
-        if (args.name.equals("mac")) {
-            from(macInstallSignedDist.outputs) {
-                into zipRoot
-            }
-        } else {
-            from(armMacInstallSignedDist.outputs) {
-                into zipRoot
-            }
-        }
+        from tasks.getByName(signedInstallTaskName).outputs
+        into zipRoot
         archiveFileName.set("${zipRoot}.zip")
         group = 'omegat distribution'
+        dependsOn signedInstallTaskName
     }
 
     tasks.register(notarizeTaskName, Exec) {
@@ -808,11 +810,7 @@ ext.makeMacTask = { args ->
             condition(project.hasProperty('macNotarizationUsername'),
                     'Username for notarization not set')
         }
-        if (args.name.equals("mac")) {
-            inputs.files macSignedDistZip.outputs.files
-        } else {
-            inputs.files armMacSignedDistZip.outputs.files
-        }
+        inputs.files tasks.getByName(signedZipTaskName).outputs.files
         doLast {
             exec {
                 // Assuming setup per instructions at
@@ -824,20 +822,13 @@ ext.makeMacTask = { args ->
                         '--file', inputs.files.singleFile
             }
         }
-        group = 'omegat distribution'
+        dependsOn signedZipTaskName
     }
 
     tasks.register(stapledNotarizedDistZipTaskName, Zip) {
         def zipRoot = "${application.applicationName}_${project.version}${omtVersion.beta}_${args.suffix}_Notarized"
-        if (args.name.equals("mac")) {
-            from(macInstallSignedDist.outputs) {
-                into zipRoot
-            }
-        } else {
-            from(armMacInstallSignedDist.outputs) {
-                into zipRoot
-            }
-        }
+        from tasks.getByName(signedInstallTaskName).outputs
+        into zipRoot
         doFirst {
             if (args.name.equals("mac")) {
                 exec {
@@ -850,56 +841,225 @@ ext.makeMacTask = { args ->
             }
         }
         archiveFileName.set("${zipRoot}.zip")
-        group = 'omegat distribution'
+        dependsOn signedInstallTaskName
     }
 }
-makeMacTask(name: 'mac', suffix: 'Mac_x86')
-makeMacTask(name: 'armMac', suffix: 'Mac_arm')
-
-tasks.register('mac') {
-    dependsOn macDistZip
-    dependsOn macNotarize
-    dependsOn armMacDistZip
-    dependsOn armMacNotarize
-    description = 'Build the Mac distributions.'
-    group = 'omegat distribution'
-}
-
-linux64DistTar {
-    onlyIf {
-        condition(!linux64JRE.empty, 'JRE not found')
-    }
-    doFirst {
-        delete "$destinationDirectory/jre"
-    }
-    application {
-        archiveFileName.set("${applicationName}_${project.version}${omtVersion.beta}_Linux_64.tar.bz2")
-    }
-    compression = Compression.BZIP2
-    archiveExtension = 'tar.bz2'
-    group = 'omegat distribution'
-}
-
-linuxArm64DistTar {
-    onlyIf {
-        condition(!linuxArm64JRE.empty, 'ARM64 JRE not found')
-    }
-    doFirst {
-        delete "$destinationDirectory/jre"
-    }
-    application {
-        archiveFileName.set("${applicationName}_${project.version}${omtVersion.beta}_Linux_ARM64.tar.bz2")
-    }
-    compression = Compression.BZIP2
-    archiveExtension = 'tar.bz2'
-    group = 'omegat distribution'
-}
+makeMacTask(name: 'macX64', suffix: 'Mac_x64', jrePath: macJRE)
+makeMacTask(name: 'macArm', suffix: 'Mac_arm', jrePath: armMacJRE)
 
 tasks.register('linux') {
-    dependsOn linux64DistTar
-    dependsOn linuxArm64DistTar
     description = 'Build the Linux distributions.'
     group = 'omegat distribution'
+}
+
+ext.makeLinuxTask = { args ->
+    def distTaskName = "install" + args.name.capitalize() + "Dist"
+    def tarTaskName = args.name + "DistTarBz"
+    tasks.register(distTaskName, Sync) {
+        group = 'distribution'
+        description = "Create a linux installDist for ${args.name}. "
+        with distributions.main.contents
+        destinationDir file(layout.buildDirectory.file("install/${application.applicationName}-${args.suffix}"))
+        onlyIf {
+            condition(!args.jrePath.empty, 'ARM64 JRE not found')
+        }
+        doFirst {
+            delete "$destinationDir/jre"
+        }
+        if (args.jrePath && !args.jrePath.empty) {
+            from(tarTree(args.jrePath.singleFile)) {
+                includeEmptyDirs = false
+                eachFile {
+                    replaceRelativePathSegment(it, /jdk.*-jre/, 'jre')
+                }
+            }
+        }
+    }
+    tasks.register(tarTaskName, Tar) {
+        description = "Create a Linux distribution for ${args.name}. "
+        with distributions.main.contents
+        onlyIf {
+            condition(!args.jrePath.empty, 'ARM64 JRE not found')
+        }
+        if (args.jrePath && !args.jrePath.empty) {
+            from(tarTree(args.jrePath.singleFile)) {
+                includeEmptyDirs = false
+                eachFile {
+                    replaceRelativePathSegment(it, /jdk.*-jre/, 'jre')
+                }
+            }
+        }
+        application {
+            archiveFileName.set("${applicationName}_${project.version}${omtVersion.beta}_${args.suffix}.tar.bz2")
+        }
+        compression = Compression.BZIP2
+        archiveExtension = 'tar.bz2'
+        group = 'omegat distribution'
+    }
+    assemble.dependsOn tarTaskName
+    linux.dependsOn tarTaskName
+}
+makeLinuxTask(name: "linux64", suffix: "Linux_64", jrePath: linux64JRE)
+makeLinuxTask(name: "linuxArm64", suffix: "Linux_ARM64", jrePath: linuxArm64JRE)
+
+// prepare jars
+tasks.register('gatherJpkgJars', Copy) {
+    def dest = layout.buildDirectory.file('jpackage/jars').get().asFile
+    doFirst {
+        delete dest
+    }
+    from configurations.runtimeClasspath, tasks.jar
+    into file(dest)
+    dependsOn subprojects.collect {it.tasks.withType(Jar)}
+}
+
+// prepare docs contents
+tasks.register('gatherJpkgReleaseDocs', Copy) {
+    def dest = layout.buildDirectory.file('jpackage/docs').get().asFile
+    doFirst {
+        delete dest
+    }
+    from("release") {
+        include 'doc-license.txt'
+        filter(FixCrLfFilter, eol: FixCrLfFilter.CrLf.newInstance('crlf'))
+    }
+    from("release") {
+        exclude 'doc-license.txt'
+        include '*.txt', '*.html'
+        filter(ReplaceTokens, tokens: [
+                TRANSLATION_NOTICE: ''
+        ])
+        filter(FixCrLfFilter, eol: FixCrLfFilter.CrLf.newInstance('crlf'))
+    }
+    from 'docs'
+    into file(dest)
+}
+
+// construct package contents in standard file tree
+tasks.jpackage {
+    dependsOn gatherJpkgJars
+    dependsOn gatherJpkgReleaseDocs
+
+    def dest = layout.buildDirectory.file("jpackage/app-image").get().asFile
+    doFirst {
+        delete dest
+    }
+
+    input = file(layout.buildDirectory.file('jpackage/jars'))
+    destination = file(dest)
+
+    appName = application.applicationName
+    vendor = distAppVendor
+    appDescription = shortDescription
+
+    // appContent requires jpackage command in JDK 18 or later
+    /*
+    appContent = [file(layout.buildDirectory.file('modules')),
+                  file(layout.buildDirectory.file('jpackage/docs')),'scripts', 'images']
+    */
+    // compat configuration on JDK17
+    doLast {
+        project.copy {
+            from file(layout.buildDirectory.file('modules'))
+            into file(layout.buildDirectory.file("jpackage/app-image/${appName}/lib/modules"))
+        }
+        project.copy {
+            from file(layout.buildDirectory.file('jpackage/docs'))
+            into file(layout.buildDirectory.file("jpackage/app-image/${appName}/lib/docs"))
+        }
+        project.copy {
+            from 'scripts'
+            into file(layout.buildDirectory.file("jpackage/app-image/${appName}/lib/scripts"))
+        }
+        project.copy {
+            from 'images'
+            into file(layout.buildDirectory.file("jpackage/app-image/${appName}/lib/images"))
+        }
+    }
+    // end of compat configuration
+
+
+    mainJar = omegatJarFilename
+    mainClass = "org.omegat.Main"
+
+    javaOptions = ["-Xmx1024M", "--add-opens", "java.desktop/sun.awt.X11=ALL-UNNAMED"]
+    linux {
+        icon = "images/OmegaT.png"
+    }
+    mac {
+        icon = "images/OmegaT.icns"
+    }
+    windows {
+        icon = "images/OmegaT.ico"
+    }
+
+    type = 'app-image'
+    group 'other'
+
+}
+
+// generate DEB package
+tasks.register("linuxDebDist", JPackageTask) {
+    dependsOn jpackage
+    group 'distribution'
+
+    appName = application.applicationName
+    vendor = distAppVendor
+    appDescription = shortDescription
+
+    appImage = file(layout.buildDirectory.file("jpackage/app-image/${appName}"))
+    destination = file(layout.buildDirectory.file('distributions'))
+
+    type = 'deb'
+    installDir = '/opt/omegat-org'
+
+    icon = file(layout.projectDirectory.file("images/OmegaT.png"))
+
+    aboutUrl = "https://omegat.org/"
+    licenseFile = file(layout.projectDirectory.file("LICENSE"))
+
+    linux {
+        linuxAppCategory("Education")
+        linuxAppRelease('1.0.0')
+        linuxDebMaintainer("Hiroshi Miura <miurahr@linux.com>")
+        linuxMenuGroup("Office")
+        linuxPackageName("omegat")
+        linuxPackageDeps(false)
+        linuxShortcut(true)
+    }
+    tasks.getByName('linux').dependsOn linuxDebDist
+}
+
+// generate RPM package
+tasks.register("linuxRpmDist", JPackageTask) {
+    dependsOn jpackage
+    group 'distribution'
+
+    appName = application.applicationName
+    vendor = distAppVendor
+    appDescription = shortDescription
+
+    appImage = file(layout.buildDirectory.file("jpackage/app-image/${appName}"))
+    destination = file(layout.buildDirectory.file('distributions'))
+
+    type = 'rpm'
+    installDir = '/opt/omegat-org'
+
+    icon = file(layout.projectDirectory.file("images/OmegaT.png"))
+
+    aboutUrl = "https://omegat.org/"
+    licenseFile = file(layout.projectDirectory.file("LICENSE"))
+
+    linux {
+        linuxAppCategory("Education")
+        linuxAppRelease('1.0.0')
+        linuxMenuGroup("Office")
+        linuxPackageName("omegat")
+        linuxPackageDeps(false)
+        linuxRpmLicenseType("GPLv3+")
+        linuxShortcut(true)
+    }
+    tasks.getByName('linux').dependsOn linuxRpmDist
 }
 
 // We bundle our startup scripts separately, so disable startScripts.
@@ -1000,7 +1160,7 @@ ext.makeWinTask = { args ->
             }
             project.copy {
                 from("${destinationDir}/${installerBasename}.exe")
-                into(layout.buildDirectory.file("${distsDirName}"))
+                into distsDir
             }
             delete file("${destinationDir}/${installerBasename}.exe")
         }
@@ -1332,6 +1492,10 @@ test {
 
 tasks.register('testIntegration', JavaExec) {
     description = 'Run integration tests. Pass repo URL as -Domegat.test.repo=<repo>'
+    javaLauncher = javaToolchains.launcherFor {
+        languageVersion = JavaLanguageVersion.of(17)
+        vendor = JvmVendorSpec.ADOPTIUM
+    }
     group = 'omegat workflow'
     mainClass = 'org.omegat.core.data.TestTeamIntegration'
     classpath = sourceSets.testIntegration.runtimeClasspath
@@ -1374,7 +1538,7 @@ publishing {
 
             pom {
                 name = 'OmegaT'
-                description = 'The free translation memory tool'
+                description = distDescription
                 url = 'https://omegat.org'
                 scm {
                     connection = "scm:git:https://git.code.sf.net/p/omegat/code"

@@ -74,7 +74,8 @@ public class HunspellTokenizer extends BaseTokenizer {
             synchronized (this) {
                 result = dict;
                 if (result == null) {
-                    result = dict = initDict(getEffectiveLanguage());
+                    result = initDict(getEffectiveLanguage());
+                    dict = result;
                     if (result == null) {
                         failedToLoadDict = true;
                     }

@@ -45,7 +45,7 @@ jar {
                 'OmegaT-Plugins': pluginProp.Class,
                 'Plugin-Author': pluginProp.Author,
                 'Plugin-Link': pluginProp.Link,
-                'Plugin-Version': project.version,
+                'Plugin-Version': pluginProp.Version,
                 'Plugin-Name': pluginProp.Name,
                 'Plugin-Category': pluginProp.Category,
                 'Plugin-Description': pluginProp.Description

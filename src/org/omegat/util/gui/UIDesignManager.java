@@ -333,11 +333,11 @@ public final class UIDesignManager {
         // Windows HighContrast Black (dark) / 1.0 / 0
         Color foreground = uiDefaults.getColor("Table.foreground");
         Color background = uiDefaults.getColor("Table.background");
-        float foreground_brightness = Color.RGBtoHSB(foreground.getRed(), foreground.getGreen(),
+        float foregroundBrightness = Color.RGBtoHSB(foreground.getRed(), foreground.getGreen(),
                 foreground.getBlue(), null)[2];
-        float background_brightness = Color.RGBtoHSB(background.getRed(), background.getGreen(),
+        float backgroundBrightness = Color.RGBtoHSB(background.getRed(), background.getGreen(),
                 background.getBlue(), null)[2];
-        return background_brightness < foreground_brightness;
+        return backgroundBrightness < foregroundBrightness;
     }
 
     private static void loadColors(UIDefaults defaults, String k, String v) {

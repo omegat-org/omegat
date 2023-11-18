@@ -152,7 +152,8 @@ public class StarDict implements IDictionaryFactory {
         private static boolean useEntry(StarDictDictionary.Entry entry) {
             StarDictDictionary.EntryType type = entry.getType();
             return type == StarDictDictionary.EntryType.MEAN || type == StarDictDictionary.EntryType.PHONETIC
-                    || type == StarDictDictionary.EntryType.HTML || type == StarDictDictionary.EntryType.XDXF;
+                    || type == StarDictDictionary.EntryType.HTML || type == StarDictDictionary.EntryType.XDXF
+                    || type == StarDictDictionary.EntryType.PANGO;
         }
 
         private static final String CONDENSED_SPAN = "<span class=\"paragraph-start\">&nbsp;"
@@ -181,6 +182,13 @@ public class StarDict implements IDictionaryFactory {
                 sb.append("<span>(").append(entry.getArticle()).append(")</span>");
             } else if (entry.getType().equals(StarDictDictionary.EntryType.HTML)) {
                 sb.append(entry.getArticle());
+            } else if (entry.getType().equals(StarDictDictionary.EntryType.PANGO)) {
+                Document document = Jsoup.parse(entry.getArticle());
+                Safelist safelist = new Safelist()
+                        .addTags("sup", "sub", "i", "b", "u", "tt", "big", "small", "span");
+                 Cleaner cleaner = new Cleaner(safelist);
+                 document = cleaner.clean(document);
+                 sb.append(document.body().html());
             } else if (entry.getType().equals(StarDictDictionary.EntryType.XDXF)) {
                 Document document = Jsoup.parse(entry.getArticle());
                 // Process XDXF specific tags

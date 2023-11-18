@@ -584,7 +584,8 @@ public class IssuesPanelController implements IIssues {
         @Override
         protected void process(List<Integer> chunks) {
             if (!chunks.isEmpty()) {
-                panel.progressBar.setValue(progress += chunks.size());
+                progress += chunks.size();
+                panel.progressBar.setValue(progress);
             }
         }
 

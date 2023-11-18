@@ -347,7 +347,7 @@ public final class PluginUtils {
                     pluginVersions.put(pluginName, pluginInfo);
                 }
 
-            } catch (IOException ex) {
+            } catch (IOException | NumberFormatException ex) {
                 Log.log(ex);
             }
         }

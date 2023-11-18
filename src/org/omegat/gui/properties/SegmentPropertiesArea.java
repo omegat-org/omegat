@@ -295,7 +295,7 @@ public class SegmentPropertiesArea implements IPaneMenu {
     private void setProperty(String key, Object value) {
         if (value != null) {
             if (value instanceof Boolean) {
-                setProperty(key, getBooleanValueVerb(key, (boolean)value));
+                setProperty(key, getBooleanValueVerb(key, (boolean) value));
             } else {
                 setProperty(key, value.toString());
             }

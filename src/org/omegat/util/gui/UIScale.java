@@ -146,6 +146,8 @@ public final class UIScale {
                 case "Label.font":
                     updateScaleFactor();
                     break;
+                default:
+                    // ignore other events
                 }
             }
         };

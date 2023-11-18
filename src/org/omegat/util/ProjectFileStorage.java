@@ -400,7 +400,7 @@ public final class ProjectFileStorage {
         @Override
         public void serialize(final Map<QName, String> value, final JsonGenerator gen,
                 final SerializerProvider provider) throws IOException {
-            if (value.size() > 0) {
+            if (!value.isEmpty()) {
                 gen.writeStartObject();
                 for (Map.Entry<QName, String> item : value.entrySet()) {
                     if (item.getValue() == null) {

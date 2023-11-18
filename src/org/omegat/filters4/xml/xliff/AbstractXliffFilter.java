@@ -91,6 +91,11 @@ abstract class AbstractXliffFilter extends AbstractXmlFilter {
 
     protected abstract String versionPrefix();
 
+    @Override
+    public boolean isBilingual() {
+        return true;
+    }
+
     // --------------------- AbstractXmlFilter part -----------------------
 
     /* -- Data about current unit */
@@ -242,7 +247,4 @@ abstract class AbstractXliffFilter extends AbstractXmlFilter {
             tagStack.push("" + prefix + count);
         }
     }
-
-    protected static final javax.xml.stream.XMLEventFactory eFactory = javax.xml.stream.XMLEventFactory
-            .newInstance();
 }

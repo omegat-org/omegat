@@ -42,10 +42,11 @@ import org.omegat.util.OStrings;
 import org.omegat.util.StringUtil;
 
 public class POFilterTest extends TestFilterBase {
+
     @Test
     public void testParse() throws Exception {
-        Map<String, String> data = new TreeMap<String, String>();
-        Map<String, String> tmx = new TreeMap<String, String>();
+        Map<String, String> data = new TreeMap<>();
+        Map<String, String> tmx = new TreeMap<>();
 
         parse2(new PoFilter(), "test/data/filters/po/file-POFilter-be.po", data, tmx);
 

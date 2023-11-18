@@ -46,6 +46,10 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 
+import org.apache.commons.codec.DecoderException;
+import org.apache.commons.codec.net.URLCodec;
+import org.apache.commons.validator.routines.UrlValidator;
+
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 
@@ -143,32 +147,13 @@ public final class JTextPaneLinkifier {
 
         private static final int REFRESH_DELAY = 200;
 
-        // Regular Expression for URL validation
-        // From https://gist.github.com/dperini/729294
-        // and https://github.com/JetBrains/intellij-community
-        // See lib/licenses/Licenses.txt
-        private static final String REGEX_URL = "(?:https?|ftp)://"  // protocol
-                + "(?:\\S+(?::\\S*)?@)?(?:(?!"  // user:pass (optional)
-                + "(?:10|127)(?:\\.\\d{1,3}){3})(?!(?:169\\.254|192\\.168)(?:\\.\\d{1,3}){2})(?!172\\."
-                + "(?:1[6-9]|2\\d|3[0-1])(?:\\.\\d{1,3}){2})(?:[1-9]\\d?|1\\d\\d|2[01]\\d|22[0-3])(?:\\."
-                + "(?:1?\\d{1,2}|2[0-4]\\d|25[0-5])){2}(?:\\.(?:[1-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-4]))"
-                // IP addresses
-                + "|"
-                + "(?:[a-z\\u00a1-\\uffff0-9]-*)*[a-z\\u00a1-\\uffff0-9]+"
-                + "(?:\\.(?:[a-z\\u00a1-\\uffff0-9]-*)*[a-z\\u00a1-\\uffff0-9]+)*"
-                + "\\.[a-z\\u00a1-\\uffff]{2,}\\.?)"  // domain host
-                + "(?::\\d{2,5})?"  // port (optional)
-                + "(?:[-A-Za-z0-9+$&@#/%?=~_|!:,.;]*[-A-Za-z0-9+$&@#/%=~_|])?";  // resources
-        private static final Pattern URL_PATTERN = Pattern.compile(REGEX_URL, Pattern.CASE_INSENSITIVE);
-        private static final Pattern FILE_URL_PATTERN = Pattern.compile(
-                "\\bfile://[-A-Za-z0-9+$&@#/%?=~_|!:,.;]*[-A-Za-z0-9+$&@#/%=~_|]");
-        private static final AttributeSet DEFAULT_ATTRIBUTES = new SimpleAttributeSet();
         private static final AttributeSet LINK_ATTRIBUTES;
 
         static {
             MutableAttributeSet tmp = new SimpleAttributeSet();
             StyleConstants.setUnderline(tmp, true);
             StyleConstants.setForeground(tmp, Styles.EditorColor.COLOR_HYPERLINK.getColor());
+            StyleConstants.setBackground(tmp, Styles.EditorColor.COLOR_BACKGROUND.getColor());
             LINK_ATTRIBUTES = tmp;
         }
 
@@ -179,10 +164,14 @@ public final class JTextPaneLinkifier {
         // as default constructor
         AttributeInserterDocumentFilter(StyledDocument doc, boolean extended) {
             this.doc = doc;
+            Pattern urlPattern = Pattern.compile("\\bhttps?://\\S+\\b", Pattern.CASE_INSENSITIVE);
             if (extended) {
-                urlPatterns = new Pattern[]{URL_PATTERN, FILE_URL_PATTERN};
+                Pattern filePattern = Pattern.compile(
+                        "\\\\bfile://[-A-Za-z0-9+$&@#/%?=~_|!:,.;]*[-A-Za-z0-9+$&@#/%=~_|]\\b",
+                        Pattern.CASE_INSENSITIVE);
+                urlPatterns = new Pattern[] { urlPattern, filePattern };
             } else {
-                urlPatterns = new Pattern[]{URL_PATTERN};
+                urlPatterns = new Pattern[] { urlPattern };
             }
             timer = new Timer(REFRESH_DELAY, e -> refreshPane());
             timer.setRepeats(false);
@@ -203,7 +192,8 @@ public final class JTextPaneLinkifier {
         @Override
         public void remove(FilterBypass fb, int offset, int length) throws BadLocationException {
             boolean refresh = true;
-            final AttributeSet attr = ((StyledDocument) fb.getDocument()).getCharacterElement(offset).getAttributes();
+            final AttributeSet attr = ((StyledDocument) fb.getDocument()).getCharacterElement(offset)
+                    .getAttributes();
             if (attr != null && attr.isDefined(StyleConstants.ComposedTextAttribute)) {
                 refresh = false;
             }
@@ -226,32 +216,44 @@ public final class JTextPaneLinkifier {
         }
 
         private void refreshPane() {
-            final int docLength = doc.getLength();
-            if (docLength == 0) {
+            if (doc.getLength() == 0) {
                 return;
             }
             try {
-                // clear attributes
-                for (int i = 0; i < docLength; ++i) {
-                    if (doc.getCharacterElement(i).getAttributes().containsAttributes(LINK_ATTRIBUTES)) {
-                        doc.setCharacterAttributes(i, 1, DEFAULT_ATTRIBUTES, true);
-                    }
-                }
-
                 // URL detection
+                URLCodec codec = new URLCodec("UTF-8");
+                UrlValidator urlValidator = new UrlValidator();
                 for (Pattern pattern : urlPatterns) {
-                    final String text = doc.getText(0, docLength);
+                    int shift = 0;
+                    final String text = doc.getText(0, doc.getLength());
                     final Matcher matcher = pattern.matcher(text);
                     while (matcher.find()) {
-                        final int offset = matcher.start();
-                        final int targetLength = matcher.end() - offset;
-
-                        try {
-                            // Transform into clickable text
-                            AttributeSet atts = makeAttributes(offset, new URI(matcher.group()));
-                            doc.setCharacterAttributes(offset, targetLength, atts, true);
-                        } catch (URISyntaxException ex) {
-                            Log.logWarningRB("TPL_ERROR_URL", matcher.group());
+                        final int offset = matcher.start() + shift;
+                        if (doc.getCharacterElement(offset).getAttributes()
+                                .containsAttributes(LINK_ATTRIBUTES)) {
+                            continue;
+                        }
+                        final int targetLength = matcher.end() - matcher.start();
+                        final String uri = matcher.group();
+                        if (urlValidator.isValid(uri)) {
+                            try {
+                                // Transform into clickable and readable text
+                                String decoded = codec.decode(uri);
+                                if (decoded.length() == uri.length()) {
+                                    SimpleAttributeSet atts = new SimpleAttributeSet(
+                                            doc.getCharacterElement(offset).getAttributes());
+                                    setLinkAttribute(atts, new URI(uri));
+                                    doc.setCharacterAttributes(offset, targetLength, atts, true);
+                                } else {
+                                    shift += decoded.length() - targetLength;
+                                    doc.remove(offset, targetLength);
+                                    SimpleAttributeSet atts = new SimpleAttributeSet();
+                                    setLinkAttribute(atts, new URI(uri));
+                                    doc.insertString(offset, decoded, atts);
+                                }
+                            } catch (DecoderException | URISyntaxException ex) {
+                                Log.logWarningRB("TPL_ERROR_URL", matcher.group());
+                            }
                         }
                     }
                 }
@@ -261,22 +263,17 @@ public final class JTextPaneLinkifier {
             }
         }
 
-        private AttributeSet makeAttributes(final int offset, final URI target) {
-            SimpleAttributeSet atts = new SimpleAttributeSet(doc.getCharacterElement(offset).getAttributes());
+        private void setLinkAttribute(SimpleAttributeSet atts, URI target) {
             atts.addAttributes(LINK_ATTRIBUTES);
-            atts.addAttribute(ATTR_LINK, new IAttributeAction() {
-                @Override
-                public void execute() {
-                    try {
-                        DesktopWrapper.browse(target);
-                    } catch (Exception e) {
-                        JOptionPane.showConfirmDialog(null, e.getLocalizedMessage(),
-                                OStrings.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
-                        Log.log(e);
-                    }
+            atts.addAttribute(ATTR_LINK, (IAttributeAction) () -> {
+                try {
+                    DesktopWrapper.browse(target);
+                } catch (Exception e) {
+                    JOptionPane.showConfirmDialog(null, e.getLocalizedMessage(),
+                            OStrings.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
+                    Log.log(e);
                 }
             });
-            return atts;
         }
     }
 }

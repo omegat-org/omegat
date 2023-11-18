@@ -16,7 +16,8 @@ jobs:
       with:
         distribution: 'temurin'
         java-version: '11'
-    - uses: kiancross/checkstyle-annotations-action@v1
+    - name: create annotation
+      run: echo "::add-matcher::${{ github.workspace }}/ci/github/problem-matcher.json"
     - name: run checkstyle
       uses: gradle/gradle-build-action@v2
       with:

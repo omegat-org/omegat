@@ -12,7 +12,12 @@ services:
       - "10080:80"
       - "10443:443"
   client:
-    build: test-integration/docker/client
+    build:
+      context: test-integration/docker/client
+      args:
+        JAVA: 17
+        JDKVER: jdk_17.0.8.1.0+1
+        GRADLE: 8.4
     depends_on:
       - server
     volumes:

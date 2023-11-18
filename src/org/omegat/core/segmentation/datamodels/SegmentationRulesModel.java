@@ -42,7 +42,7 @@ import org.omegat.util.OStrings;
  */
 @SuppressWarnings("serial")
 public class SegmentationRulesModel extends AbstractTableModel {
-    private List<Rule> rules;
+    private final List<Rule> rules;
 
     /**
      * Creates a new instance of SegmentationRulesModel
@@ -60,8 +60,10 @@ public class SegmentationRulesModel extends AbstractTableModel {
             return rule.getBeforebreak();
         case 2:
             return rule.getAfterbreak();
+        default:
+            // return null if called before ready
+            return null;
         }
-        return null;
     }
 
     public int getRowCount() {
@@ -94,7 +96,7 @@ public class SegmentationRulesModel extends AbstractTableModel {
         Rule rule = rules.get(rowIndex);
         switch (columnIndex) {
         case 0:
-            rule.setBreakRule(((Boolean) aValue).booleanValue());
+            rule.setBreakRule((Boolean) aValue);
             break;
         case 1:
             try {
@@ -110,6 +112,8 @@ public class SegmentationRulesModel extends AbstractTableModel {
                 fireException(pse);
             }
             break;
+        default:
+            throw new IllegalArgumentException();
         }
     }
 

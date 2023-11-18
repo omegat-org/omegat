@@ -2,15 +2,17 @@ steps:
   - task: Cache@2
     displayName: 'Cache Gradle'
     inputs:
-      key: 'gradle | $(Agent.OS) | $(Build.SourcesDirectory)/build.gradle'
+      key: 'gradle | "$(Agent.OS)" | **/build.gradle'
+      restoreKeys: |
+        gradle | "$(Agent.OS)"
+        gradle
       path: '$(GRADLE_USER_HOME)'
-  - script: |
-      umask a+w
-      mkdir -p build
-      chmod -R a+w doc_src
-      $(Build.SourcesDirectory)/gradlew --build-cache -PenvIsCi clean testOnJava17
-    displayName: 'Run Gradle test on Java17'
-  - task: PublishTestResults@2
-    displayName: 'Publish Test Results build/test-results/**/TEST-*.xml'
+  - task: Gradle@3
     inputs:
-      testResultsFiles: 'build/test-results/**/TEST-*.xml'
+      tasks: 'testOnJava17'
+      options: '--build-cache -PenvIsCi'
+      jdkVersionOption: '1.11'
+  - script: |
+      # stop the Gradle daemon to ensure no files are left open (impacting the save cache operation later)
+      ./gradlew --stop
+    displayName: Gradlew stop

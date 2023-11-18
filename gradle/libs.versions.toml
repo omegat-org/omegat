@@ -13,6 +13,7 @@ lang3 = "3.11"
 commons_io = "2.13.0"
 codec = "1.13"
 text = "1.9"
+commons_validator = "1.7"
 unbescape = "1.1.6.RELEASE"
 xerces = "2.12.2"
 jstyleparser = "4.1.3"
@@ -80,6 +81,7 @@ commons-io = {group = "commons-io", name = "commons-io", version.ref = "commons_
 commons-lang3 = {group = "org.apache.commons", name = "commons-lang3", version.ref = "lang3"}
 commons-codec = {group = "commons-codec", name = "commons-codec", version.ref = "codec"}
 commons-text = {group = "org.apache.commons", name = "commons-text", version.ref = "text"}
+commons-validator = {group = "commons-validator", name = "commons-validator", version.ref = "commons_validator"}
 unbescape = {group = "org.unbescape", name = "unbescape", version.ref = "unbescape"}
 xerces-impl = {group = "xerces", name = "xercesImpl", version.ref = "xerces"}
 jstyleparser = {group = "tokyo.northside", name = "jstyleparser", version.ref = "jstyleparser"}
@@ -178,3 +180,5 @@ nexus-publish = {id = "io.github.gradle-nexus.publish-plugin", version = "2.0.0-
 launch4j = {id = "edu.sc.seis.launch4j", version = "3.0.3"}
 versions = {id = "com.github.ben-manes.versions", version = "0.39.0"}
 sphinx = {id = "tokyo.northside.sphinx", version.ref = "sphinx"}
+jpackage = {id = "org.panteleyev.jpackageplugin", version = "1.5.2"}
+ssh = {id = "org.hidetake.ssh", version = "2.10.1"}

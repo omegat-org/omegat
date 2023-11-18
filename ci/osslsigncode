@@ -24,18 +24,27 @@ else
   exit 2
 fi
 
+# build container image
+CTX=$(mktemp -d)
+cat <<__EOF__ > $CTX/Dockerfile
+FROM debian:bookworm-slim
+LABEL authors="miurahr"
+USER root
+RUN apt-get update && apt-get install -y --no-install-recommends osslsigncode && rm -rf /var/lib/apt/lists/*
+WORKDIR /work
+__EOF__
+$CMD build -t omegatorg/osslsigncode $CTX
+
 if [[ -z "${USBDEV}" ]]; then
   exec $CMD run --rm -i \
       -v "$PWD":/work $(bindpaths "$@") \
-      --entrypoint osslsigncode \
-      --privileged --device $USBDEV \
-      amake/innosetup:innosetup6 \
-      $(relpaths "$@")
+      --pull=never omegatorg/osslsigncode \
+      osslsigncode $@
 else
   exec $CMD run --rm -i \
       -v "$PWD":/work $(bindpaths "$@") \
-      --entrypoint osslsigncode \
-      amake/innosetup:innosetup6 \
-      $(relpaths "$@")
+      --privileged --device $USBDEV \
+      --pull=never omegatorg/osslsigncode \
+      osslsigncode $@
 fi
 

@@ -92,10 +92,9 @@ public final class StaticUtils {
 
     /**
      * Char which should be used instead protected parts. It should be
-     * non-letter char, to be able to have correct words counter.
-     *
-     * This char can be placed around protected text for separate words inside
-     * protected text and words outside if there are no spaces between they.
+     * non-letter char, to be able to have correct words counter. This char can
+     * be placed around protected text for separate words inside protected text
+     * and words outside if there are no spaces between they.
      */
     public static final char TAG_REPLACEMENT_CHAR = '\b';
     public static final String TAG_REPLACEMENT = "\b";
@@ -123,6 +122,7 @@ public final class StaticUtils {
      *            required modifiers
      * @return true if checked key pressed
      */
+    @SuppressWarnings("unused")
     public static boolean isKey(KeyEvent e, int code, int modifiers) {
         return e.getKeyCode() == code && e.getModifiersEx() == modifiers;
     }
@@ -140,7 +140,13 @@ public final class StaticUtils {
     private static String installDir = null;
 
     /**
-     * Returns OmegaT installation directory.
+     * Returns OmegaT installation directory. When running from an IDE or build
+     * tool; use CWD. Sometimes running from build/libs/OmegaT.jar on IDE.
+     * When running from Java WebStart; use CWD. If running from a JAR, get the
+     * enclosing folder (the JAR is assumed to be at the installation root, and
+     * there is also "modules" folder). When running from linux installation
+     * from package built with jpackage, the JAR is assumed to be at the
+     * "lib/app/", and "modules" and "scripts" are in "lib" folder.
      */
     public static String installDir() {
         if (installDir == null) {
@@ -149,20 +155,15 @@ public final class StaticUtils {
                 URI sourceUri = StaticUtils.class.getProtectionDomain().getCodeSource().getLocation().toURI();
                 if (sourceUri.getScheme().equals("file")) {
                     File uriFile = Paths.get(sourceUri).toFile();
-                    // If running from a JAR, get the enclosing folder
-                    // (the JAR is assumed to be at the installation root,
-                    // and there is also "readme.txt" file).
                     if (uriFile.getName().endsWith(".jar")
-                            && new File(uriFile.getParentFile(), "readme.txt").exists()) {
+                            && new File(uriFile.getParentFile(), "modules").exists()) {
                         file = uriFile.getParentFile();
-                    } else {
-                        // Running from an IDE or build tool; use CWD.
-                        // Sometimes running from build/libs/OmegaT.jar
+                    } else if (uriFile.getName().endsWith(".jar")
+                            && new File(uriFile.getParentFile().getParentFile(), "modules").exists()) {
+                        file = uriFile.getParentFile().getParentFile();
                     }
-                } else {
-                    // Running from Java WebStart; use CWD.
                 }
-            } catch (URISyntaxException e) {
+            } catch (URISyntaxException ignored) {
             }
             if (file == null) {
                 file = Paths.get(".").toFile();
@@ -350,6 +351,7 @@ public final class StaticUtils {
     /**
      * Returns the path to the log file.
      */
+    @SuppressWarnings("unused")
     public static String getLogLocation() {
         return StaticUtils.getConfigDir() + "/logs";
     }
@@ -357,8 +359,9 @@ public final class StaticUtils {
     /**
      * Encodes the array of bytes to store them in a plain text file.
      */
+    @SuppressWarnings("unused")
     public static String uuencode(byte[] buf) {
-        if (buf.length <= 0) {
+        if (buf.length == 0) {
             return "";
         }
         StringBuilder res = new StringBuilder();
@@ -455,10 +458,8 @@ public final class StaticUtils {
     }
 
     /**
-     * Download a file to memory.
-     * 
-     * @Deprecated This method is replaced to HttpConnectionUtils.getURL(url,
-     *             timeout)
+     * Download a file to memory. This method is replaced to
+     * HttpConnectionUtils.getURL(url, timeout)
      */
     @Deprecated
     public static String downloadFileToString(URL url, int timeout) throws IOException {
@@ -478,6 +479,7 @@ public final class StaticUtils {
      *            entry
      * @return List of extracted entry names
      * @throws IOException
+     *             when I/O error occurred.
      */
     public static List<String> extractFromZip(InputStream in, File destination,
             Predicate<String> filenameFilter) throws IOException {
@@ -520,7 +522,7 @@ public final class StaticUtils {
         }
 
         StringBuilder arg = new StringBuilder();
-        List<String> result = new ArrayList<String>();
+        List<String> result = new ArrayList<>();
 
         final char noQuote = '\0';
         char currentQuote = noQuote;
@@ -546,8 +548,6 @@ public final class StaticUtils {
                     if (arg.length() > 0) {
                         result.add(arg.toString());
                         arg = new StringBuilder();
-                    } else {
-                        // Discard
                     }
                 } else {
                     arg.appendCodePoint(cp);
@@ -558,7 +558,7 @@ public final class StaticUtils {
         if (arg.length() > 0) {
             result.add(arg.toString());
         }
-        return result.toArray(new String[result.size()]);
+        return result.toArray(new String[0]);
     }
 
     public static boolean isProjectDir(File f) {

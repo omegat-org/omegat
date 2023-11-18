@@ -614,28 +614,6 @@ distributions {
         sourceDistZip.archiveFileName.set(
                 "${application.applicationName}_${project.version}${omtVersion.beta}_Source.zip")
     }
-
-    mac {
-        contents {
-            from(genMac.outputs) {
-                exclude '**/MacOS/OmegaT', '**/Info.plist', '**/java.entitlements'
-            }
-            from(genMac.outputs) {
-                include '**/MacOS/OmegaT'
-                fileMode 0755
-            }
-            from(genMac.outputs) {
-                include '**/Info.plist'
-                expand(version: project.version,
-                        // $APP_ROOT is expanded at runtime by the launcher binary
-                        configfile: '$APP_ROOT/Contents/Resources/Configuration.properties')
-            }
-            into('OmegaT.app/Contents/Java') {
-                with main.contents
-                exclude '*.sh', '*.kaptn', 'OmegaT', 'OmegaT.bat', 'omegat.desktop', '*.exe'
-            }
-        }
-    }
 }
 
 sourceDistZip.dependsOn genDocIndex

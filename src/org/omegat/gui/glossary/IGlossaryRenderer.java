@@ -34,6 +34,7 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.StyledDocument;
 import javax.swing.text.StyleConstants;
 
+import org.omegat.util.HttpConnectionUtils;
 import org.omegat.util.gui.Styles;
 
 public interface IGlossaryRenderer {
@@ -112,10 +113,11 @@ public interface IGlossaryRenderer {
                 if (attrColor != Color.black) {
                     String colorString = String.format("%02x%02x%02x",
                             attrColor.getRed(), attrColor.getGreen(), attrColor.getBlue());
-                    buf.append("<font color=#" + colorString + ">");
+                    buf.append("<font color=#").append(colorString).append(">");
                 }
             }
-            buf.append(str);
+            String doc = HttpConnectionUtils.decodeHttpURLs(str);
+            buf.append(doc);
             if (attr != null) {
                 Color attrColor = StyleConstants.getForeground(attr);
                 if (attrColor != Color.black) {

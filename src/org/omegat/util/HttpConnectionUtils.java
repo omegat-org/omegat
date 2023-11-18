@@ -47,7 +47,10 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.codec.DecoderException;
+import org.apache.commons.codec.net.URLCodec;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.validator.routines.UrlValidator;
 
 /**
  * Utility collection for http connections.
@@ -89,14 +92,21 @@ public final class HttpConnectionUtils {
 
     /**
      * Regular Expression for https and ftp URL validation.
+     * <p>
+     * You are recommended to use commons-validator instead of hand-crafted here.
+     * We leave it as is for keeping compatibility.
      */
     public static final Pattern URL_PATTERN = Pattern.compile(REGEX_URL, Pattern.CASE_INSENSITIVE);
+
+    private static final Pattern HTTP_URL_PATTERN = Pattern.compile("\\bhttps?://\\S+\\b",
+            Pattern.CASE_INSENSITIVE);
 
     /**
      * Regular Expression for file URL validation.
      */
     public static final Pattern FILE_URL_PATTERN = Pattern
             .compile("\\bfile://[-A-Za-z0-9+$&@#/%?=~_|!:,.;]*[-A-Za-z0-9+$&@#/%=~_|]");
+    private static final URLCodec codec = new URLCodec(StandardCharsets.UTF_8.name());
 
     /**
      * Don't instantiate util class.
@@ -458,6 +468,28 @@ public final class HttpConnectionUtils {
         }
     }
 
+
+    public static String decodeHttpURLs(String text) {
+        UrlValidator urlValidator = new UrlValidator();
+        StringBuilder result = new StringBuilder();
+        Matcher m = HTTP_URL_PATTERN.matcher(text);
+        int lastIndex = 0;
+        while (m.find()) {
+            final String uri = m.group();
+            if (urlValidator.isValid(uri)) {
+                result.append(text, lastIndex, m.start());
+                try {
+                    result.append(codec.decode(uri));
+                } catch (DecoderException ex) {
+                    result.append(uri);
+                }
+                lastIndex = m.end();
+            }
+        }
+        result.append(text.substring(lastIndex));
+        return result.toString();
+    }
+
     /**
      * Validate URL string.
      * 
@@ -469,8 +501,8 @@ public final class HttpConnectionUtils {
         if (remoteUrl.isEmpty()) {
             return false;
         }
-        Matcher m = URL_PATTERN.matcher(remoteUrl);
-        return m.matches();
+        UrlValidator urlValidator = new UrlValidator();
+        return urlValidator.isValid(remoteUrl);
     }
 
     /**

@@ -229,7 +229,8 @@ public final class JTextPaneLinkifier {
                     final Matcher matcher = pattern.matcher(text);
                     while (matcher.find()) {
                         final int offset = matcher.start() + shift;
-                        if (doc.getCharacterElement(offset).getAttributes().containsAttributes(LINK_ATTRIBUTES)) {
+                        if (doc.getCharacterElement(offset).getAttributes()
+                                .containsAttributes(LINK_ATTRIBUTES)) {
                             continue;
                         }
                         final int targetLength = matcher.end() - matcher.start();
@@ -239,7 +240,8 @@ public final class JTextPaneLinkifier {
                                 // Transform into clickable and readable text
                                 String decoded = codec.decode(uri);
                                 if (decoded.length() == uri.length()) {
-                                    SimpleAttributeSet atts = new SimpleAttributeSet(doc.getCharacterElement(offset).getAttributes());
+                                    SimpleAttributeSet atts = new SimpleAttributeSet(
+                                            doc.getCharacterElement(offset).getAttributes());
                                     setLinkAttribute(atts, new URI(uri));
                                     doc.setCharacterAttributes(offset, targetLength, atts, true);
                                 } else {
@@ -249,7 +251,7 @@ public final class JTextPaneLinkifier {
                                     setLinkAttribute(atts, new URI(uri));
                                     doc.insertString(offset, decoded, atts);
                                 }
-                            } catch (DecoderException | URISyntaxException  ex) {
+                            } catch (DecoderException | URISyntaxException ex) {
                                 Log.logWarningRB("TPL_ERROR_URL", matcher.group());
                             }
                         }

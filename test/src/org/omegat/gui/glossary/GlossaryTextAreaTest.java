@@ -57,7 +57,8 @@ public class GlossaryTextAreaTest extends TestCore {
     @Before
     public final void setUp() {
         // TestCore#setUpCore initialize Preferences with temporary configDir
-        Preferences.setPreference(Preferences.GLOSSARY_LAYOUT, DefaultGlossaryRenderer.class.getCanonicalName());
+        Preferences.setPreference(Preferences.GLOSSARY_LAYOUT,
+                DefaultGlossaryRenderer.class.getCanonicalName());
         Preferences.setPreference(Preferences.MARK_GLOSSARY_MATCHES, false);
         UIManager.put("OmegaT.hyperlink", Color.BLUE);
     }

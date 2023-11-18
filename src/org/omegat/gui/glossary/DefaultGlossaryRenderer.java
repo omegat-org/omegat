@@ -84,9 +84,9 @@ public class DefaultGlossaryRenderer implements IGlossaryRenderer {
     }
 
     /**
-     * If a combined glossary entry contains ',', it needs to be bracketed by quotes, to prevent confusion
-     * when entries are combined. However, if the entry contains ';' or '"', it will automatically be
-     * bracketed by quotes.
+     * If a combined glossary entry contains ',', it needs to be bracketed by
+     * quotes, to prevent confusion when entries are combined. However, if the
+     * entry contains ';' or '"', it will automatically be bracketed by quotes.
      *
      * @param entry
      *            A glossary text entry

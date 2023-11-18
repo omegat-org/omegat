@@ -105,8 +105,8 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
     private static final String EXPLANATION = OStrings.getString("GUI_GLOSSARYWINDOW_explanation");
 
     /**
-     * Currently processed entry. Used to detect if user moved into new entry. In this case, new find should
-     * be started.
+     * Currently processed entry. Used to detect if user moved into new entry.
+     * In this case, new find should be started.
      */
     protected StringEntry processedEntry;
 
@@ -142,14 +142,17 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
                 public boolean canAcceptDrop() {
                     return Core.getProject().isProjectLoaded();
                 }
+
                 @Override
                 public String getOverlayMessage() {
                     return OStrings.getString("DND_ADD_GLOSSARY_FILE");
                 }
+
                 @Override
                 public String getImportDestination() {
                     return Core.getProject().getProjectProperties().getGlossaryRoot();
                 }
+
                 @Override
                 public boolean acceptFile(File pathname) {
                     String name = pathname.getName().toLowerCase(Locale.ENGLISH);
@@ -157,6 +160,7 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
                             || name.endsWith(OConsts.EXT_TSV_DEF) || name.endsWith(OConsts.EXT_TSV_TXT)
                             || name.endsWith(OConsts.EXT_TSV_TSV) || name.endsWith(OConsts.EXT_TSV_UTF8);
                 }
+
                 @Override
                 public Component getComponentToOverlay() {
                     return scrollPane;
@@ -204,8 +208,8 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
     }
 
     /**
-     * Sets the list of glossary entries to show in the pane. Each element of the list should be an instance
-     * of {@link GlossaryEntry}.
+     * Sets the list of glossary entries to show in the pane. Each element of
+     * the list should be an instance of {@link GlossaryEntry}.
      */
     @Override
     protected void setFoundResult(SourceTextEntry en, List<GlossaryEntry> entries) {
@@ -223,7 +227,8 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
 
         nowEntries = entries;
 
-        // If the TransTips is enabled then underline all the matched glossary entries
+        // If the TransTips is enabled then underline all the matched glossary
+        // entries
         if (Core.getEditor().getSettings().isMarkGlossaryMatches()) {
             Core.getEditor().remarkOneMarker(TransTipsMarker.class.getName());
         }
@@ -298,7 +303,8 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
         });
         item = popup.add(OStrings.getString("GUI_GLOSSARYWINDOW_addentry"));
         item.setEnabled(projectLoaded);
-        item.addActionListener(e -> showCreateGlossaryEntryDialog(Core.getMainWindow().getApplicationFrame()));
+        item.addActionListener(
+                e -> showCreateGlossaryEntryDialog(Core.getMainWindow().getApplicationFrame()));
     }
 
     @Override
@@ -379,11 +385,12 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
                 if (dialog.getReturnStatus() == CreateGlossaryEntry.RET_OK) {
                     String src = StringUtil.normalizeUnicode(dialog.getSourceText().getText()).trim();
                     String loc = StringUtil.normalizeUnicode(dialog.getTargetText().getText()).trim();
-                    String com = HttpConnectionUtils.encodeHttpURLs(StringUtil.normalizeUnicode(
-                            dialog.getCommentText().getText()).trim());
+                    String com = HttpConnectionUtils.encodeHttpURLs(
+                            StringUtil.normalizeUnicode(dialog.getCommentText().getText()).trim());
                     if (!StringUtil.isEmpty(src) && !StringUtil.isEmpty(loc)) {
                         try {
-                            GlossaryReaderTSV.append(out, new GlossaryEntry(src, loc, com, true, out.getPath()));
+                            GlossaryReaderTSV.append(out,
+                                    new GlossaryEntry(src, loc, com, true, out.getPath()));
                         } catch (Exception ex) {
                             Log.log(ex);
                         }
@@ -404,7 +411,8 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
         openFile.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Core.getMainWindow().getMainMenu().invokeAction("projectAccessWritableGlossaryMenuItem", e.getModifiers());
+                Core.getMainWindow().getMainMenu().invokeAction("projectAccessWritableGlossaryMenuItem",
+                        e.getModifiers());
             }
         });
         openFile.setEnabled(false);
@@ -414,7 +422,8 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
         }
         menu.add(openFile);
         menu.addSeparator();
-        final JMenuItem notify = new JCheckBoxMenuItem(OStrings.getString("GUI_GLOSSARYWINDOW_SETTINGS_NOTIFICATIONS"));
+        final JMenuItem notify = new JCheckBoxMenuItem(
+                OStrings.getString("GUI_GLOSSARYWINDOW_SETTINGS_NOTIFICATIONS"));
         notify.setSelected(Preferences.isPreference(Preferences.NOTIFY_GLOSSARY_HITS));
         notify.addActionListener(new ActionListener() {
             @Override
@@ -424,12 +433,12 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
         });
         menu.add(notify);
         menu.addSeparator();
-        final JMenuItem sortOrderLocLength = new JCheckBoxMenuItem(OStrings.getString(
-                "GUI_GLOSSARYWINDOW_SETTINGS_SORT_BY_LENGTH"));
-        sortOrderLocLength.setSelected(Preferences.isPreferenceDefault(
-                Preferences.GLOSSARY_SORT_BY_LENGTH, false));
-        sortOrderLocLength.addActionListener(actionEvent -> Preferences.setPreference(Preferences.GLOSSARY_SORT_BY_LENGTH,
-                sortOrderLocLength.isSelected()));
+        final JMenuItem sortOrderLocLength = new JCheckBoxMenuItem(
+                OStrings.getString("GUI_GLOSSARYWINDOW_SETTINGS_SORT_BY_LENGTH"));
+        sortOrderLocLength
+                .setSelected(Preferences.isPreferenceDefault(Preferences.GLOSSARY_SORT_BY_LENGTH, false));
+        sortOrderLocLength.addActionListener(actionEvent -> Preferences
+                .setPreference(Preferences.GLOSSARY_SORT_BY_LENGTH, sortOrderLocLength.isSelected()));
         menu.add(sortOrderLocLength);
     }
 }

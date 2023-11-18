@@ -96,8 +96,8 @@ public final class HttpConnectionUtils {
     /**
      * Regular Expression for https and ftp URL validation.
      * <p>
-     * You are recommended to use commons-validator instead of hand-crafted here.
-     * We leave it as is for keeping compatibility.
+     * You are recommended to use commons-validator instead of hand-crafted
+     * here. We leave it as is for keeping compatibility.
      */
     public static final Pattern URL_PATTERN = Pattern.compile(REGEX_URL, Pattern.CASE_INSENSITIVE);
 

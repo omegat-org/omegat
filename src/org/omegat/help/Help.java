@@ -113,6 +113,10 @@ public final class Help {
         }
         File zipFile = Paths.get(StaticUtils.installDir(), OConsts.HELP_DIR, OConsts.HELP_MANUALS,  lang + ".zip").toFile();
         if (!zipFile.isFile()) {
+            // Check manual when OmegaT launched in development environment using "gradle run"
+            zipFile = Paths.get(StaticUtils.installDir(), "build", OConsts.HELP_DIR, OConsts.HELP_MANUALS,  lang + ".zip").toFile();
+        }
+        if (!zipFile.isFile()) {
             return null;
         }
         try {

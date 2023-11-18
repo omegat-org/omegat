@@ -481,9 +481,9 @@ manualIndexXmls.each { xml ->
     def pdfTaskName = "manualPdf${lang.capitalize()}"
     tasks.register(pdfTaskName, Exec) {
         inputs.files fileTree(dir: "doc_src/${lang}", include: '**/*.xml')
-        outputs.file "${distsDir}/OmegaT_documentation_${lang}.PDF"
+        outputs.file "${buildDir}/build/docs/pdfs/OmegaT_documentation_${lang}.PDF"
         workingDir = 'doc_src'
-        commandLine './docgen', "-Dlanguage=${lang}", "-Dtarget=../build/docs/${lang}", 'pdf'
+        commandLine './docgen', "-Dlanguage=${lang}", "-Dtarget=../build/docs/pdfs", 'pdf'
         doLast {
             copy {
                 from fileTree(dir: "doc_src/${lang}/pdf", include: '*.PDF')
@@ -511,7 +511,7 @@ manualIndexXmls.each { xml ->
             from file(layout.buildDirectory.file("docs/manual/${lang}"))
             from fileTree(dir: "doc_src/${lang}", include: "**/version*.properties")
             archiveFileName = "${lang}.zip"
-            destinationDirectory = file('docs/manuals')
+            destinationDirectory = file("${buildDir}/docs/manuals/")
         }
         manualHtmls.dependsOn zipTaskName
         tasks.getByName(zipTaskName).dependsOn htmlTaskName
@@ -520,12 +520,8 @@ manualIndexXmls.each { xml ->
     }
 }
 
-tasks.register('firstSteps', Sync) {
+tasks.register('firstSteps') {
     description = 'Build First pages for all languages at docs/greetings/. Requires Docker.'
-    from layout.buildDirectory.file("docs/greetings")
-    into layout.projectDirectory.file("docs/greetings")
-    filePermissions { unix("rw-r--r--") }
-    dirPermissions { unix("rwxr-xr-x") }
     group = 'documentation'
 }
 

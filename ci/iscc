@@ -14,8 +14,28 @@ bindpaths() {
 
 if type nerdctl &> /dev/null ; then
     CMD=nerdctl
+    IMAGE=amake/innosetup:innosetup6-buster
 elif type docker &> /dev/null ; then
     CMD=docker
+
+    # workaround for build failure on CI env.
+    # see https://sourceforge.net/p/omegat/bugs/1228/
+    PUID=`id -u`
+    PGID=`id -g`
+    IMAGE=omegatorg/innosetup:innosetup6
+    cat << __EOF__ | docker build -t $IMAGE - || true
+FROM docker.io/amake/innosetup:innosetup6-buster
+USER root
+RUN usermod -u $PUID -o xclient && groupmod -g $PGID -o xusers
+RUN chown -R $PUID:$PGID /home/xclient /work
+USER xclient
+ENV HOME /home/xclient
+ENV WINEPREFIX /home/xclient/.wine
+ENV WINEARCH win32
+WORKDIR /work
+ENTRYPOINT ["iscc"]
+__EOF__
+
 else
   echo Please install docker or nerdctl!
   exit 2
@@ -26,5 +46,5 @@ exec $CMD run -i --rm  \
    -u `id -u`:`id -g` \
    -v "$PWD":/work \
    $(bindpaths "$@") \
-   amake/innosetup:innosetup6-buster \
+   $IMAGE \
    $(relpaths "$@")

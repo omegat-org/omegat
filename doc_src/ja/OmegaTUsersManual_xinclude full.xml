@@ -6,7 +6,7 @@
 ]>
 <book lang="ja" id="book.user.manual">
   <bookinfo>
-    <title id="book.user.manual.title">OmegaT 6.0.0-取扱説明書</title>
+    <title id="book.user.manual.title">OmegaT 6.1.0-取扱説明書</title>
     <!-- <pubdate>@timestamp@</pubdate> -->
 	<!-- TODO automate date insertion -->
     <abstract>

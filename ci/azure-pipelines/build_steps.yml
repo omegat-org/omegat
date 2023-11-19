@@ -7,10 +7,10 @@ steps:
         mkdir -p $(System.ArtifactsDirectory)/asset
         cd $(System.ArtifactsDirectory)/asset || exit 1
         jres=(
-          https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.9%2B9.1/OpenJDK17U-jre_aarch64_mac_hotspot_17.0.9_9.tar.gz
-          https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.9%2B9.1/OpenJDK17U-jre_aarch64_linux_hotspot_17.0.9_9.tar.gz 
-          https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.9%2B9.1/OpenJDK17U-jre_x64_linux_hotspot_17.0.9_9.tar.gz 
-          https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.9%2B9.1/OpenJDK17U-jre_x64_mac_hotspot_17.0.9_9.tar.gz 
+          https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.9%2B9/OpenJDK17U-jre_aarch64_mac_hotspot_17.0.9_9.tar.gz
+          https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.9%2B9/OpenJDK17U-jre_aarch64_linux_hotspot_17.0.9_9.tar.gz 
+          https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.9%2B9/OpenJDK17U-jre_x64_linux_hotspot_17.0.9_9.tar.gz 
+          https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.9%2B9/OpenJDK17U-jre_x64_mac_hotspot_17.0.9_9.tar.gz 
           https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.9%2B9.1/OpenJDK17U-jre_x64_windows_hotspot_17.0.9_9.zip
           https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.9%2B9.1/OpenJDK17U-jre_x86-32_windows_hotspot_17.0.9_9.zip
         )
@@ -32,7 +32,7 @@ steps:
     displayName: 'Preparation for build'
   - task: Gradle@3
     inputs:
-      tasks: 'updateManuals sourceDistZip distZip mac linux win'
+      tasks: build
       options: '--build-cache -PenvIsCi -PassetDir=$(System.ArtifactsDirectory)/asset'
       jdkVersionOption: '1.17'
     displayName: 'Build distribution packages and docs'

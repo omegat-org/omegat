@@ -893,6 +893,7 @@ tasks.register('gatherJpkgJars', Copy) {
 
 // prepare docs contents
 tasks.register('gatherJpkgReleaseDocs', Copy) {
+    dependsOn genDocIndex
     def dest = layout.buildDirectory.file('jpackage/docs').get().asFile
     doFirst {
         delete dest
@@ -909,7 +910,7 @@ tasks.register('gatherJpkgReleaseDocs', Copy) {
         ])
         filter(FixCrLfFilter, eol: FixCrLfFilter.CrLf.newInstance('crlf'))
     }
-    from 'docs'
+    from file('docs')
     into file(dest)
 }
 
@@ -980,6 +981,9 @@ tasks.jpackage {
 tasks.register("linuxDebDist", JPackageTask) {
     dependsOn jpackage
     group 'distribution'
+    onlyIf {
+        condition(exePresent('dpkg-deb'), 'dpkg-deb command is not installed')
+    }
 
     appName = application.applicationName
     vendor = distAppVendor
@@ -1012,6 +1016,9 @@ tasks.register("linuxDebDist", JPackageTask) {
 tasks.register("linuxRpmDist", JPackageTask) {
     dependsOn jpackage
     group 'distribution'
+    onlyIf {
+        condition(exePresent('rpm'), 'rpm command is not installed')
+    }
 
     appName = application.applicationName
     vendor = distAppVendor

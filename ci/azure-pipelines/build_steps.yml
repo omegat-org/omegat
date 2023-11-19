@@ -32,7 +32,7 @@ steps:
     displayName: 'Preparation for build'
   - task: Gradle@3
     inputs:
-      tasks: build
+      tasks: 'updateManuals sourceDistZip distZip mac linux win'
       options: '--build-cache -PenvIsCi -PassetDir=$(System.ArtifactsDirectory)/asset'
       jdkVersionOption: '1.17'
     displayName: 'Build distribution packages and docs'

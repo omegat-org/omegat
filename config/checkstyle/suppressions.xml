@@ -158,7 +158,7 @@
     <suppress checks="LocalVariableName" files="MozillaFTLFilter\.java" lines="118"/>
     <suppress checks="InnerAssignment" files="RcFilter\.java" lines="176,180,184"/>
     <suppress checks="MethodLength" files="FilterVisitor\.java" lines="450"/>
-    <suppress checks="MethodLength" files="PoFilter\.java" lines="380"/>
+    <suppress checks="MethodLength" files="PoFilter\.java" lines="381"/>
     <suppress checks="(TypeName|MissingSwitchDefault)" files="srtFilter\.java" lines="55,102"/>
     <suppress files="ResourceBundleFilter\.java" checks="(InnerAssignment|EmptyBlock)" lines="168,308"/>
     <suppress checks="TypeName" files="XLIFFOptions\.java" lines="67"/>

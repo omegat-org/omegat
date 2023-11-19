@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:okp="okapi-framework:xliff-extensions" xmlns:its="http://www.w3.org/2005/11/its" xmlns:itsxlf="http://www.w3.org/ns/its-xliff/" its:version="2.0">
+<file original="/home/marc/Escriptori/Test1.en" source-language="en" target-language="ca" datatype="x-text/plain" okp:inputEncoding="UTF-8">
+<body>
+<trans-unit id="1" xml:space="preserve">
+<source xml:lang="en">This is a test</source>
+<target xml:lang="ca">Això és una prova</target>
+</trans-unit>
+<trans-unit id="2" xml:space="preserve">
+<source xml:lang="en">This is another test</source>
+<target xml:lang="ca">Això és una altra prova</target>
+</trans-unit>
+<trans-unit id="3" xml:space="preserve">
+<source xml:lang="en">This is a house</source>
+<target xml:lang="ca">Això és una casa</target>
+</trans-unit>
+</body>
+</file>
+</xliff>

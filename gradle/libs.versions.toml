@@ -13,6 +13,7 @@ commons_lang3 = "3.11"
 commons_io = "2.15.0"
 commons_codec = "1.13"
 commons_text = "1.9"
+commons_validator = "1.7"
 unbescape = "1.1.6.RELEASE"
 xerces = "2.12.2"
 jstyleparser = "4.1.3"
@@ -80,6 +81,7 @@ commons-io = {group = "commons-io", name = "commons-io", version.ref = "commons_
 commons-lang3 = {group = "org.apache.commons", name = "commons-lang3", version.ref = "commons_lang3"}
 commons-codec = {group = "commons-codec", name = "commons-codec", version.ref = "commons_codec"}
 commons-text = {group = "org.apache.commons", name = "commons-text", version.ref = "commons_text"}
+commons-validator = {group = "commons-validator", name = "commons-validator", version.ref = "commons_validator"}
 unbescape = {group = "org.unbescape", name = "unbescape", version.ref = "unbescape"}
 xerces-impl = {group = "xerces", name = "xercesImpl", version.ref = "xerces"}
 jstyleparser = {group = "tokyo.northside", name = "jstyleparser", version.ref = "jstyleparser"}

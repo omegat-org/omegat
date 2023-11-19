@@ -91,3 +91,7 @@ License version 2.0 only with classpath link exception.
 newUI.burgerMenu image is distributed under CC-BY-SA 3.0 Unported
 Copyright 2015 Timothy Miller
 (https://www.iconfinder.com/icons/134216/hamburger_lines_menu_icon)
+
+eye.svg, eye-slash.svg is distributed under The MIT License
+Copyright (c) 2019-2023 The Bootstrap Authors
+(https://github.com/twbs/icons)

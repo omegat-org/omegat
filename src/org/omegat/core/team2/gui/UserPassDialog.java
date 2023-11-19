@@ -34,7 +34,10 @@ import java.awt.GridBagConstraints;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.Objects;
 
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
@@ -117,10 +120,12 @@ public class UserPassDialog extends javax.swing.JDialog {
             // Toggle between showing/hiding the password
             if (toggleButton.isSelected()) {
                 passwordField.setEchoChar((char) 0); // Show password in plaintext
-                org.openide.awt.Mnemonics.setLocalizedText(toggleButton, OStrings.getString("TEAM_USERPASS_HIDE_PASSWORD")); // NOI18N
+                toggleButton.setIcon(new ImageIcon(Objects.requireNonNull(getClass().getResource(
+                        "/org/omegat/gui/resources/eye.png")))); // NOI18N
             } else {
                 passwordField.setEchoChar('●');
-                org.openide.awt.Mnemonics.setLocalizedText(toggleButton, OStrings.getString("TEAM_USERPASS_SHOW_PASSWORD")); // NOI18N
+                toggleButton.setIcon(new ImageIcon(Objects.requireNonNull(getClass().getResource(
+                        "/org/omegat/gui/resources/eye-slash.png")))); // NOI18N
             }
         });
     }
@@ -171,6 +176,13 @@ public class UserPassDialog extends javax.swing.JDialog {
         messageArea = new JTextArea();
         okButton = new JButton();
         JButton cancelButton = new JButton();
+        Icon eyeSlash = new ImageIcon(Objects.requireNonNull(getClass().getResource(
+                "/org/omegat/gui/resources/eye-slash.png")));
+        toggleButton.setIcon(eyeSlash);
+        toggleButton.setDisabledIcon(eyeSlash);
+        toggleButton.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        toggleButton.setBorderPainted(false);
+        toggleButton.setBorder(null);
 
         setTitle(OStrings.getString("TEAM_USERPASS_TITLE")); // NOI18N
         setMinimumSize(new Dimension(450, 200));
@@ -238,7 +250,6 @@ public class UserPassDialog extends javax.swing.JDialog {
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 6;
         gridBagConstraints.anchor = GridBagConstraints.WEST;
-        org.openide.awt.Mnemonics.setLocalizedText(toggleButton, OStrings.getString("TEAM_USERPASS_SHOW_PASSWORD")); // NOI18N
         mainPanel.add(toggleButton, gridBagConstraints);
 
         gridBagConstraints = new GridBagConstraints();

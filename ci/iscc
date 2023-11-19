@@ -12,15 +12,6 @@ bindpaths() {
     done
 }
 
-if type nerdctl &> /dev/null ; then
-    CMD=nerdctl
-elif type docker &> /dev/null ; then
-    CMD=docker
-else
-  echo Please install docker or nerdctl!
-  exit 2
-fi
-
 # workaround for build failure on CI env.
 # see https://sourceforge.net/p/omegat/bugs/1228/
 PUID=`id -u`
@@ -41,7 +32,11 @@ WORKDIR /work
 ENTRYPOINT ["iscc"]
 __EOF__
 
-$CMD build -t $IMAGE $CONTEXT
+CMD="$(type -p docker)" || [[ -e $CMD ]] || CMD="$(type -p nerdctl)"
+if ! $CMD build -t $IMAGE $CONTEXT ; then
+  echo Container build error for ISCC, abort...
+  exit 1
+fi
 exec $CMD run -i --rm  \
    -u `id -u`:`id -g` \
    -v "$PWD":/work \

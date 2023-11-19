@@ -701,6 +701,7 @@ ext.makeMacTask = { args ->
         group = 'omegat distribution'
     }
     mac.dependsOn distZipTaskName
+    assemble.dependsOn distZipTaskName
 
     tasks.register(installTaskName, Sync) {
         description = 'Build a Mac distribution.'
@@ -1010,6 +1011,7 @@ tasks.register("linuxDebDist", JPackageTask) {
         linuxShortcut(true)
     }
     tasks.getByName('linux').dependsOn linuxDebDist
+    assemble.dependsOn linuxDebDist
 }
 
 // generate RPM package
@@ -1045,6 +1047,7 @@ tasks.register("linuxRpmDist", JPackageTask) {
         linuxShortcut(true)
     }
     tasks.getByName('linux').dependsOn linuxRpmDist
+    assemble.dependsOn linuxRpmDist
 }
 
 // We bundle our startup scripts separately, so disable startScripts.

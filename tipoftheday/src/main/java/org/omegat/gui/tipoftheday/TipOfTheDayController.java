@@ -50,7 +50,7 @@ import org.omegat.util.gui.MenuExtender.MenuKey;
 
 public final class TipOfTheDayController {
     // FIXME: disabled for 6.1 release
-    private static final boolean ENABLED = true;
+    private static final boolean ENABLED = false;
     private static final String TIPOFTHEDAY_SHOW_ON_STARTUP = "tipoftheday_show_on_start";
     private static final String TIPOFTHEDAY_CURRENT_TIP = "tipoftheday_current_tip";
     private static final JMenuItem totdMenu = new JMenuItem();

@@ -52,9 +52,9 @@ import org.omegat.util.PatternConsts;
  * @author Maxym Mykhalchuk
  * @author Didier Briel
  */
-public class HTMLReader extends Reader {
+public class HTMLReader extends Reader implements AutoCloseable {
     /** Inner reader */
-    private BufferedReader reader;
+    private final BufferedReader reader;
 
     /**
      * Creates a new instance of HTMLReader. If encoding cannot be detected,

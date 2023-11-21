@@ -155,13 +155,12 @@
     <suppress checks="MissingSwitchDefault" files="(OneFilter|Filters)TableModel\.java"/>
 
     <!-- filters -->
-    <suppress checks="(InnerAssignment|TypeName)" files="MozillaLangFilter\.java" lines="67,161"/>
     <suppress checks="LocalVariableName" files="MozillaFTLFilter\.java" lines="118"/>
     <suppress checks="InnerAssignment" files="RcFilter\.java" lines="176,180,184"/>
     <suppress checks="MethodLength" files="FilterVisitor\.java" lines="450"/>
-    <suppress checks="MethodLength" files="PoFilter\.java" lines="411"/>
+    <suppress checks="MethodLength" files="PoFilter\.java" lines="381"/>
     <suppress checks="(TypeName|MissingSwitchDefault)" files="srtFilter\.java" lines="55,102"/>
-    <suppress files="ResourceBundleFilter\.java" checks="(InnerAssignment|EmptyBlock)" lines="216,347"/>
+    <suppress files="ResourceBundleFilter\.java" checks="(InnerAssignment|EmptyBlock)" lines="168,308"/>
     <suppress checks="TypeName" files="XLIFFOptions\.java" lines="67"/>
     <suppress files="XHTMLDialect\.java" checks="InnerAssignment" lines="131,132"/>
     <suppress files="CamtasiaWindowsDialect\.java" checks="MethodLength" lines="45"/>

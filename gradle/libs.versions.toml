@@ -9,10 +9,10 @@ antlr = "4.13.1"
 hamcrest = "2.2"
 nekohtml = "1.9.22"
 htmlunit = "3.4.0"
-lang3 = "3.11"
-io = "2.11.0"
-codec = "1.13"
-text = "1.9"
+commons_lang3 = "3.11"
+commons_io = "2.15.0"
+commons_codec = "1.13"
+commons_text = "1.9"
 commons_validator = "1.7"
 unbescape = "1.1.6.RELEASE"
 xerces = "2.12.2"
@@ -77,10 +77,10 @@ antlr4 = {group = "org.antlr", name = "antlr4", version.ref = "antlr"}
 hamcrest = {group = "org.hamcrest", name = "hamcrest", version.ref = "hamcrest"}
 nekohtml = {group = "net.sourceforge.nekohtml", name = "nekohtml", version.ref = "nekohtml"}
 neko-htmlunit = {group = "org.htmlunit", name = "neko-htmlunit", version.ref = "htmlunit"}
-commons-io = {group = "commons-io", name = "commons-io", version.ref = "io"}
-commons-lang3 = {group = "org.apache.commons", name = "commons-lang3", version.ref = "lang3"}
-commons-codec = {group = "commons-codec", name = "commons-codec", version.ref = "codec"}
-commons-text = {group = "org.apache.commons", name = "commons-text", version.ref = "text"}
+commons-io = {group = "commons-io", name = "commons-io", version.ref = "commons_io"}
+commons-lang3 = {group = "org.apache.commons", name = "commons-lang3", version.ref = "commons_lang3"}
+commons-codec = {group = "commons-codec", name = "commons-codec", version.ref = "commons_codec"}
+commons-text = {group = "org.apache.commons", name = "commons-text", version.ref = "commons_text"}
 commons-validator = {group = "commons-validator", name = "commons-validator", version.ref = "commons_validator"}
 unbescape = {group = "org.unbescape", name = "unbescape", version.ref = "unbescape"}
 xerces-impl = {group = "xerces", name = "xercesImpl", version.ref = "xerces"}

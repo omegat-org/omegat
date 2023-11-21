@@ -65,9 +65,9 @@ public class MagicComment {
     /**
      * Extract the first line of the file and parse with {@code #parse(String)}
      *
-     * @param file
-     * @return
-     * @throws IOException
+     * @param file target file.
+     * @return Map with magic comment database.
+     * @throws IOException when I/O error happened.
      */
     public static Map<String, String> parse(File file) throws IOException {
         String line;
@@ -90,8 +90,8 @@ public class MagicComment {
      * @return Key-Value map of String.
      */
     public static Map<String, String> parse(final String str) {
-        if (str == null || str.length() < 11) { // minimum = "-*- a:b
-                                                // -*-".length()
+        // minimum = "-*- a:b -*-".length()
+        if (str == null || str.length() < 11) {
             return Collections.emptyMap();
         }
         int startMarker = str.indexOf("-*- ");

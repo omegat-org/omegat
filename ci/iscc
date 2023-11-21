@@ -12,18 +12,14 @@ bindpaths() {
     done
 }
 
-if type nerdctl &> /dev/null ; then
-    CMD=nerdctl
-    IMAGE=amake/innosetup:innosetup6-buster
-elif type docker &> /dev/null ; then
-    CMD=docker
+# workaround for build failure on CI env.
+# see https://sourceforge.net/p/omegat/bugs/1228/
+PUID=`id -u`
+PGID=`id -g`
+IMAGE=omegatorg/innosetup:innosetup6
+CONTEXT=`mktemp -d`
 
-    # workaround for build failure on CI env.
-    # see https://sourceforge.net/p/omegat/bugs/1228/
-    PUID=`id -u`
-    PGID=`id -g`
-    IMAGE=omegatorg/innosetup:innosetup6
-    cat << __EOF__ | docker build -t $IMAGE - || true
+cat << __EOF__  > $CONTEXT/Dockerfile
 FROM docker.io/amake/innosetup:innosetup6-buster
 USER root
 RUN usermod -u $PUID -o xclient && groupmod -g $PGID -o xusers
@@ -36,12 +32,11 @@ WORKDIR /work
 ENTRYPOINT ["iscc"]
 __EOF__
 
-else
-  echo Please install docker or nerdctl!
-  exit 2
+CMD="$(type -p docker)" || [[ -e $CMD ]] || CMD="$(type -p nerdctl)"
+if ! $CMD build -t $IMAGE $CONTEXT ; then
+  echo Container build error for ISCC, abort...
+  exit 1
 fi
-
-umask a+w
 exec $CMD run -i --rm  \
    -u `id -u`:`id -g` \
    -v "$PWD":/work \

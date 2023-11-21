@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 6.1.0
 ----------------------------------------------------------------------
-  29 Enhancement
+  31 Enhancement
   51 Bug fixes
 ----------------------------------------------------------------------
 6.1.0 vs 6.0.0
@@ -19,6 +19,12 @@
 
   - Give a selection of perHost/PerRespo credentials treatment
   https://sourceforge.net/p/omegat/feature-requests/1719/
+
+  - Enforce checkstyles and suppress it for auto-generated files
+  https://sourceforge.net/p/omegat/feature-requests/1717/
+
+  - ResourceBundle Filter: default not to escape Unicode character
+  https://sourceforge.net/p/omegat/feature-requests/1716/
 
   - ResourceBundle Filter: default not to escape Unicode character
   https://sourceforge.net/p/omegat/feature-requests/1716/

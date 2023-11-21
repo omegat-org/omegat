@@ -614,28 +614,6 @@ distributions {
         sourceDistZip.archiveFileName.set(
                 "${application.applicationName}_${project.version}${omtVersion.beta}_Source.zip")
     }
-
-    mac {
-        contents {
-            from(genMac.outputs) {
-                exclude '**/MacOS/OmegaT', '**/Info.plist', '**/java.entitlements'
-            }
-            from(genMac.outputs) {
-                include '**/MacOS/OmegaT'
-                fileMode 0755
-            }
-            from(genMac.outputs) {
-                include '**/Info.plist'
-                expand(version: project.version,
-                        // $APP_ROOT is expanded at runtime by the launcher binary
-                        configfile: '$APP_ROOT/Contents/Resources/Configuration.properties')
-            }
-            into('OmegaT.app/Contents/Java') {
-                with main.contents
-                exclude '*.sh', '*.kaptn', 'OmegaT', 'OmegaT.bat', 'omegat.desktop', '*.exe'
-            }
-        }
-    }
 }
 
 sourceDistZip.dependsOn genDocIndex
@@ -723,6 +701,7 @@ ext.makeMacTask = { args ->
         group = 'omegat distribution'
     }
     mac.dependsOn distZipTaskName
+    assemble.dependsOn distZipTaskName
 
     tasks.register(installTaskName, Sync) {
         description = 'Build a Mac distribution.'
@@ -915,6 +894,7 @@ tasks.register('gatherJpkgJars', Copy) {
 
 // prepare docs contents
 tasks.register('gatherJpkgReleaseDocs', Copy) {
+    dependsOn genDocIndex
     def dest = layout.buildDirectory.file('jpackage/docs').get().asFile
     doFirst {
         delete dest
@@ -931,7 +911,7 @@ tasks.register('gatherJpkgReleaseDocs', Copy) {
         ])
         filter(FixCrLfFilter, eol: FixCrLfFilter.CrLf.newInstance('crlf'))
     }
-    from 'docs'
+    from file('docs')
     into file(dest)
 }
 
@@ -1002,6 +982,9 @@ tasks.jpackage {
 tasks.register("linuxDebDist", JPackageTask) {
     dependsOn jpackage
     group 'distribution'
+    onlyIf {
+        condition(exePresent('dpkg-deb'), 'dpkg-deb command is not installed')
+    }
 
     appName = application.applicationName
     vendor = distAppVendor
@@ -1028,12 +1011,16 @@ tasks.register("linuxDebDist", JPackageTask) {
         linuxShortcut(true)
     }
     tasks.getByName('linux').dependsOn linuxDebDist
+    assemble.dependsOn linuxDebDist
 }
 
 // generate RPM package
 tasks.register("linuxRpmDist", JPackageTask) {
     dependsOn jpackage
     group 'distribution'
+    onlyIf {
+        condition(exePresent('rpm'), 'rpm command is not installed')
+    }
 
     appName = application.applicationName
     vendor = distAppVendor
@@ -1060,6 +1047,7 @@ tasks.register("linuxRpmDist", JPackageTask) {
         linuxShortcut(true)
     }
     tasks.getByName('linux').dependsOn linuxRpmDist
+    assemble.dependsOn linuxRpmDist
 }
 
 // We bundle our startup scripts separately, so disable startScripts.

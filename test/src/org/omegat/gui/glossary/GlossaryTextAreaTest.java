@@ -31,10 +31,12 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
 import javax.swing.text.DefaultStyledDocument;
 import javax.swing.text.StyledDocument;
 
@@ -55,8 +57,10 @@ public class GlossaryTextAreaTest extends TestCore {
     @Before
     public final void setUp() {
         // TestCore#setUpCore initialize Preferences with temporary configDir
-        Preferences.setPreference(Preferences.GLOSSARY_LAYOUT, DefaultGlossaryRenderer.class.getCanonicalName());
+        Preferences.setPreference(Preferences.GLOSSARY_LAYOUT,
+                DefaultGlossaryRenderer.class.getCanonicalName());
         Preferences.setPreference(Preferences.MARK_GLOSSARY_MATCHES, false);
+        UIManager.put("OmegaT.hyperlink", Color.BLUE);
     }
 
     /**
@@ -68,17 +72,33 @@ public class GlossaryTextAreaTest extends TestCore {
         entries.add(new GlossaryEntry("source1", "translation1", "", false, null));
         entries.add(new GlossaryEntry("source2", "translation2", "comment2", false, null));
         final GlossaryTextArea gta = new GlossaryTextArea(Core.getMainWindow());
-        SwingUtilities.invokeAndWait(new Runnable() {
-            public void run() {
-                gta.setFoundResult(null, entries);
-            }
-        });
+        SwingUtilities.invokeAndWait(() -> gta.setFoundResult(null, entries));
         // Make sure representations of both entries are rendered
         DefaultGlossaryRenderer renderer = new DefaultGlossaryRenderer();
         StyledDocument doc = new DefaultStyledDocument();
         renderer.render(entries.get(0), doc);
         renderer.render(entries.get(1), doc);
         String expected = doc.getText(0, doc.getLength());
+        assertEquals(expected, gta.getText());
+    }
+
+    @Test
+    public void testSetGlossaryEntriesWithLink() throws Exception {
+        final List<GlossaryEntry> entries = new ArrayList<>();
+        entries.add(new GlossaryEntry("source1", "translation1", "", false, null));
+        entries.add(new GlossaryEntry("source2", "translation2", "comment2", false, null));
+        entries.add(new GlossaryEntry("source3", "translation3",
+                "https://fr.wikipedia.org/wiki/Science_du_syst%C3%A8me_Terre", false, null));
+        final GlossaryTextArea gta = new GlossaryTextArea(Core.getMainWindow());
+        SwingUtilities.invokeAndWait(() -> gta.setFoundResult(null, entries));
+        // Make sure representations of both entries are rendered
+        DefaultGlossaryRenderer renderer = new DefaultGlossaryRenderer();
+        StyledDocument doc = new DefaultStyledDocument();
+        renderer.render(entries.get(0), doc);
+        renderer.render(entries.get(1), doc);
+        renderer.render(entries.get(2), doc);
+        Thread.sleep(300);
+        String expected = doc.getText(0, doc.getLength()).replaceAll("%C3%A8", "è");
         assertEquals(expected, gta.getText());
     }
 

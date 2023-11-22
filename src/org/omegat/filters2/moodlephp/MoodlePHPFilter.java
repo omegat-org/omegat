@@ -29,12 +29,7 @@ import java.awt.Window;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
@@ -92,24 +87,23 @@ public class MoodlePHPFilter extends AbstractFilter {
     }
 
     @Override
-    protected BufferedReader createReader(File inFile, String inEncoding)
-            throws UnsupportedEncodingException, IOException {
-        return new BufferedReader(new InputStreamReader(new FileInputStream(inFile), StandardCharsets.UTF_8));
+    protected String getInputEncoding(FilterContext fc, File infile) {
+        return StandardCharsets.UTF_8.name();
     }
 
     @Override
-    protected BufferedWriter createWriter(File outFile, String outEncoding)
-            throws UnsupportedEncodingException, IOException {
-        return new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outFile), StandardCharsets.UTF_8));
+    protected String getOutputEncoding(FilterContext fc) {
+        return StandardCharsets.UTF_8.name();
     }
 
     @Override
-    protected void processFile(BufferedReader inFile, BufferedWriter outFile, FilterContext fc) throws IOException,
-            TranslationException {
+    protected void processFile(BufferedReader inFile, BufferedWriter outFile, FilterContext fc)
+            throws IOException, TranslationException {
 
         String removeStringsUntranslatedStr = processOptions.get(OPTION_REMOVE_STRINGS_UNTRANSLATED);
         // If the value is null the default is false
-        if ((removeStringsUntranslatedStr != null) && (removeStringsUntranslatedStr.equalsIgnoreCase("true"))) {
+        if ((removeStringsUntranslatedStr != null)
+                && (removeStringsUntranslatedStr.equalsIgnoreCase("true"))) {
             removeStringsUntranslated = true;
         } else {
             removeStringsUntranslated = false;
@@ -168,7 +162,7 @@ public class MoodlePHPFilter extends AbstractFilter {
 
     @Override
     protected void alignFile(BufferedReader sourceFile, BufferedReader translatedFile, FilterContext fc,
-                             String sourceFilePath) throws Exception {
+            String sourceFilePath) throws Exception {
         Map<String, String> source = new HashMap<>();
         Map<String, String> translated = new HashMap<>();
 
@@ -179,7 +173,8 @@ public class MoodlePHPFilter extends AbstractFilter {
         for (Map.Entry<String, String> en : source.entrySet()) {
             String tr = translated.get(en.getKey());
             if (!StringUtil.isEmpty(tr)) {
-                entryAlignCallback.addTranslation(en.getKey(), en.getValue(), tr, false, sourceFilePath, this);
+                entryAlignCallback.addTranslation(en.getKey(), en.getValue(), tr, false, sourceFilePath,
+                        this);
             }
         }
     }

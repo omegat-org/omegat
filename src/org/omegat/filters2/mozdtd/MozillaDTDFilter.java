@@ -33,7 +33,6 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -51,13 +50,14 @@ import org.omegat.util.StringUtil;
 /**
  * Filter for support Mozilla DTD files.
  * <p>
- * Option to remove untranslated segments in the target files by Enrique Estevez (Code adapted from the file:
- * PoFilter.java)
+ * Option to remove untranslated segments in the target files by Enrique Estevez
+ * (Code adapted from the file: PoFilter.java)
  *
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Didier Briel
  * @author Enrique Estevez (keko.gl@gmail.com)
- * @see <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/aa380599(v=vs.85).aspx">Format
+ * @see <a href=
+ *      "https://msdn.microsoft.com/en-us/library/windows/desktop/aa380599(v=vs.85).aspx">Format
  *      description</a>
  */
 public class MozillaDTDFilter extends AbstractFilter {
@@ -95,18 +95,18 @@ public class MozillaDTDFilter extends AbstractFilter {
     }
 
     @Override
-    protected BufferedReader createReader(File inFile, String inEncoding) throws IOException {
-        return Files.newBufferedReader(inFile.toPath(), StandardCharsets.UTF_8);
+    protected String getInputEncoding(FilterContext fc, File infile) {
+        return StandardCharsets.UTF_8.name();
     }
 
     @Override
-    protected BufferedWriter createWriter(File outFile, String outEncoding) throws IOException {
-        return Files.newBufferedWriter(outFile.toPath(), StandardCharsets.UTF_8);
+    protected String getOutputEncoding(FilterContext fc) {
+        return StandardCharsets.UTF_8.name();
     }
 
     @Override
-    protected void processFile(BufferedReader inFile, BufferedWriter outFile, FilterContext fc) throws IOException,
-            TranslationException {
+    protected void processFile(BufferedReader inFile, BufferedWriter outFile, FilterContext fc)
+            throws IOException, TranslationException {
 
         String removeStringsUntranslatedStr = processOptions.get(OPTION_REMOVE_STRINGS_UNTRANSLATED);
         // If the value is null the default is false
@@ -137,13 +137,15 @@ public class MozillaDTDFilter extends AbstractFilter {
                 foundQuotes = false;
                 processBlock(block.toString(), outFile);
                 block.setLength(0);
-            } else if ((c == '>' && isInBlock && previousChar == '-')) { // This was a comment
+            } else if ((c == '>' && isInBlock && previousChar == '-')) {
+                // This was a comment
                 isInBlock = false;
                 foundQuotes = false;
                 outFile.write(block.toString());
                 block.setLength(0);
             }
-            if (!Character.isWhitespace(c)) { // In the regexp, there could be whitespace between " and >
+            // In the regexp, there could be whitespace between " and >
+            if (!Character.isWhitespace(c)) {
                 previousChar = c;
             }
         }

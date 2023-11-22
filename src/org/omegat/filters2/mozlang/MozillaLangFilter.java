@@ -28,12 +28,8 @@ package org.omegat.filters2.mozlang;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -79,35 +75,30 @@ public class MozillaLangFilter extends AbstractFilter {
 
     @Override
     public Instance[] getDefaultInstances() {
-        return new Instance[]
-            { new Instance("*.lang") };
+        return new Instance[] { new Instance("*.lang") };
     }
 
     /**
-     * Creating an input stream to read the source .lang file.
+     * Return input encoding.
      * <p>
-     * NOTE: Mozilla lang files use always UTF-8 encoding without BOM.
+     * NOTE: Mozilla lang files use always UTF-8 encoding.
      */
     @Override
-    public BufferedReader createReader(File infile, String encoding) throws UnsupportedEncodingException,
-            IOException {
-        return new BufferedReader(new InputStreamReader(new FileInputStream(infile), StandardCharsets.UTF_8));
+    protected String getInputEncoding(FilterContext fc, File inFile) {
+        return StandardCharsets.UTF_8.name();
     }
 
     /**
-     * Creating an output stream to save a localized .lang file.
-     * <p>
-     * NOTE: Mozilla lang files use always UTF-8 encoding without BOM.
-     * <p>
+     * Return output encoding.
+     * 
+     * @param fc
+     *            Filter context. NOTE: Mozilla lang files use always UTF-8
+     *            encoding.
+     * @return "UTF-8"
      */
     @Override
-    public BufferedWriter createWriter(File outfile, String encoding) throws UnsupportedEncodingException,
-            IOException {
-        if (outfile == null) {
-            return null;
-        }
-        // lang file use UTF8 encoding
-        return Files.newBufferedWriter(outfile.toPath(), StandardCharsets.UTF_8);
+    protected String getOutputEncoding(FilterContext fc) {
+        return StandardCharsets.UTF_8.name();
     }
 
     @Override
@@ -126,17 +117,6 @@ public class MozillaLangFilter extends AbstractFilter {
     }
 
     @Override
-    public void processFile(File inFile, File outFile, FilterContext fc) throws IOException,
-            TranslationException {
-
-        inEncodingLastParsedFile = fc.getInEncoding();
-        try (BufferedReader reader = createReader(inFile, inEncodingLastParsedFile);
-             BufferedWriter writer = createWriter(outFile, fc.getOutEncoding())) {
-            processFile(reader, writer, fc);
-        }
-    }
-
-    @Override
     protected void processFile(BufferedReader inFile, BufferedWriter outFile, FilterContext fc)
             throws IOException, TranslationException {
         source = new StringBuilder();
@@ -150,15 +130,16 @@ public class MozillaLangFilter extends AbstractFilter {
         String s;
         while ((s = inFile.readLine()) != null) {
 
-            // We trim trailing spaces, otherwise the regexps could fail, thus making some segments
-            // invisible to OmegaT
+            // We trim trailing spaces, otherwise the regexps could fail, thus
+            // making some segments invisible to OmegaT
             s = s.trim();
 
             Matcher m;
 
             switch (state) {
             case WAIT_SOURCE:
-                if ((m = PATTERN_SOURCE.matcher(s)).matches()) {
+                m = PATTERN_SOURCE.matcher(s);
+                if (m.matches()) {
                     source.append(m.group(1));
                     state = READ_STATE.WAIT_TARGET;
                 }
@@ -191,15 +172,16 @@ public class MozillaLangFilter extends AbstractFilter {
         String s = source.toString();
         String c = "";
         String t;
-        if (s.equals(target.toString())) {
+        if (s.contentEquals(target)) {
             t = null;
         } else {
             t = target.toString();
         }
         if (localizationNote.length() > 0) {
-            c += "\n" + OStrings.getString("LANGFILTER_LOCALIZATION_NOTE") + "\n" + localizationNote.toString();
+            c += "\n" + OStrings.getString("LANGFILTER_LOCALIZATION_NOTE") + "\n"
+                    + localizationNote.toString();
         }
-        if (c.length() == 0) {
+        if (c.isEmpty()) {
             c = null;
         }
         align(s, t, c);
@@ -213,21 +195,22 @@ public class MozillaLangFilter extends AbstractFilter {
      */
     protected void align(String source, String translation, String comments) {
         if (entryParseCallback != null) {
-            List<ProtectedPart> protectedParts = TagUtil.applyCustomProtectedParts(source, PatternConsts.PRINTF_VARS,
-                    null);
-            entryParseCallback.addEntry(null, source, translation, false, comments, null, this, protectedParts);
+            List<ProtectedPart> protectedParts = TagUtil.applyCustomProtectedParts(source,
+                    PatternConsts.PRINTF_VARS, null);
+            entryParseCallback.addEntry(null, source, translation, false, comments, null, this,
+                    protectedParts);
         } else if (entryAlignCallback != null) {
             entryAlignCallback.addTranslation(null, source, translation, false, null, this);
         }
     }
 
     protected void flushTranslation(FilterContext fc) throws IOException {
-        if (out != null) {
+        if (entryTranslateCallback != null) {
             String tr;
             tr = entryTranslateCallback.getTranslation(null, source.toString(), null);
             if (tr == null) {
                 tr = source.toString();
-            } else if (tr.equals(source.toString())) {
+            } else if (tr.contentEquals(source)) {
                 tr += " {ok}";
             }
             eol(tr);

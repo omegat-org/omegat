@@ -19,19 +19,10 @@ done
 umask a+w
 echo create target folder $TARGET
 mkdir -p $TARGET
-chmod -R a+rw $SHELL_PATH 2&> /dev/null
+chmod -R a+rw $SHELL_PATH/$LANGUAGE 2&> /dev/null
 chmod -R a+rw $TARGET 2&> /dev/null
 
-# check docker or containerd/nerdctl
-if type nerdctl &> /dev/null ; then
-    CMD=nerdctl
-elif type docker &> /dev/null ; then
-    CMD=docker
-else
-  echo Please install docker or nerdctl!
-  exit 2
-fi
-
+CMD="$(type -p docker)" || [[ -e $CMD ]] || CMD="$(type -p nerdctl)"
 EXIT_CODE=0
 $CMD run -i --rm -u  `id -u`:`id -g` -v "$(dirname "$PWD")":/work/root omegatorg/docgen "$@"
 EXIT_CODE=$?
@@ -43,5 +34,5 @@ if [[ -e $SHELL_PATH/$LANGUAGE/index.xml ]]; then
   rm $SHELL_PATH/$LANGUAGE/index.xml
 fi
 chmod -R go-w $TARGET 2&> /dev/null
-chmod -R go-w $SHELL_PATH 2&> /dev/null
+chmod -R go-w $SHELL_PATH/$LANGUAGE 2&> /dev/null
 exit $EXIT_CODE

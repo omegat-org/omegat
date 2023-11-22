@@ -1216,8 +1216,11 @@ tasks.findAll { it.name =~ /[dD]istTar$/ && !it.name.contains('linux') }.each { 
 tasks.findAll { it.name =~ /[dD]istZip$/ && it.name.contains('linux') }.each { it.enabled = false }
 
 def provided = findProperty('repoRevision') ?: ''
+def gitArchival = loadProperties(file('.git-archival.properties')).getProperty('node')
 def git = file('.git').directory ? providers.exec {commandLine("git", "rev-parse", "--short", "HEAD")}.standardOutput.asText.get().trim() : ''
-def revision = [provided, omtVersion.revision, git, 'unknown'].find { it != '@dev@' && !it.empty }
+def revision = [provided, gitArchival, omtVersion.revision, git, 'unknown'].find {
+    !it.empty && it != '@dev@' && it != '$Format:%H$'
+}
 processResources {
     /*
      Set the revision number included in version strings. The value is

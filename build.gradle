@@ -481,31 +481,33 @@ tasks.register('webManual', Sync) {
         include 'doc-license.txt'
     }
 }
-
 tasks.register('genMac') {
-    def outDir = layout.buildDirectory.file("appbundler")
+    def appbundlerClasspath = configurations.genMac.asPath
+    def outDir = layout.buildDirectory.file("appbundler").get().toString()
+    def appName = application.applicationName
+    def appClass = application.mainClass
     description = 'Generate the Mac .app skeleton. Depends AppBundler (https://github.com/TheInfiniteKind/appbundler)'
-    outputs.dir outDir
+    outputs.dir layout.buildDirectory.file("appbundler")
     doLast {
         ant.taskdef(name: 'appbundler',
                 classname: 'com.oracle.appbundler.AppBundlerTask',
-                classpath: configurations.genMac.asPath)
-        ant.appbundler(outputdirectory: outDir.get().toString(),
-                name: applicationName,
-                displayname: applicationName,
-                executablename: applicationName,
+                classpath: appbundlerClasspath)
+        ant.appbundler(outputdirectory: outDir,
+                name: appName,
+                displayname: appName,
+                executablename: appName,
                 identifier: 'org.omegat.OmegaT',
                 icon: 'images/OmegaT.icns',
                 version: '${version}',
                 jvmrequired: '${jvmRequired}',
                 shortversion: '${version}',
-                mainclassname: application.mainClass) {
-            option(value: "-Xdock:name=${applicationName}")
-            option(value: "-Dapple.awt.application.name=${applicationName}")
+                mainclassname: appClass) {
+            option(value: "-Xdock:name=${appName}")
+            option(value: "-Dapple.awt.application.name=${appName}")
             option(value: "-Dapple.awt.application.appearance=system")
             argument(value: '--config-file=${configfile}')
             bundledocument(extensions: 'project',
-                    name: "${applicationName} Project",
+                    name: "${appName} Project",
                     role: 'editor',
                     icon: 'images/OmegaT.icns')
             bundledocument(extensions: '*',

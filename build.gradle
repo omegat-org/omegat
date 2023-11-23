@@ -546,7 +546,7 @@ instantStartXmls.each { xml ->
     def lang = xml.parentFile.name
     def taskName = "instantStartGuide${lang.capitalize()}"
     tasks.register(taskName, Exec) {
-        inputs.files fileTree(dir: "doc_src/${lang}", include: '**/*.xml')
+        inputs.files fileTree(dir: "doc_src/${lang}", includes: ['InstantStartGuide.xml', '**/InstantGuide*png'])
         outputs.files fileTree(dir: layout.buildDirectory.file('docs/greetings/'),
                 includes: ["${lang}/first_steps.html", "${lang}/images/InstantGuide*png", "${lang}/OmegaT.css"])
         workingDir = 'doc_src'
@@ -688,10 +688,10 @@ distributions {
                 from configurations.runtimeClasspath
                 from {subprojects.findAll { it.getSubprojects().isEmpty()}
                         .collect { it.configurations.matching { it.name.endsWith('untimeClasspath')
-                                    && !it.name.startsWith('test') && !it.name.startsWith('jaxb')
+                                && !it.name.startsWith('test') && !it.name.startsWith('jaxb')
                         } }
                 }
-            }
+           }
         }
         sourceDistZip.archiveFileName.set(
                 "${application.applicationName}_${project.version}${omtVersion.beta}_Source.zip")

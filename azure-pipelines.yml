@@ -32,36 +32,46 @@ schedules:
     always: true
 
 variables:
-  isMain: $[eq(variables['Build.SourceBranch'], 'refs/heads/master')]
-  isReleasesBranch: $[contains(variables['Build.SourceBranch'], 'refs/heads/releases/')]
-  isRelease: $[contains(variables['Build.SourceBranch'], 'refs/tags/v')]
-  isSchedule: $[eq(variables['Build.Reason'], 'Schedule')]
   GRADLE_USER_HOME: '$(Pipeline.Workspace)/.gradle'
+  isRelease: $[contains(variables['Build.SourceBranch'], 'refs/tags/v')]
+  isReleasesBranch: $[contains(variables['Build.SourceBranch'], 'refs/heads/releases/')]
+  isSchedule: $[eq(variables['Build.Reason'], 'Schedule')]
+  isMain: $[eq(variables['Build.SourceBranch'], 'refs/heads/master')]
 
 stages:
 - stage: DocCI
+  condition: ne(variables.isRelease, true)
   pool:
     vmImage: 'ubuntu-22.04'
   jobs:
-  - job: preCheck
+  - job: docCheck
     steps:
     - bash: |
-        files=$(git diff-tree --no-commit-id --name-only -r HEAD)
+        if [[ "${{ variables.isMain }}" == "true" ]]; then
+          files=$(git diff-tree --no-commit-id --name-only -r HEAD)
+        else
+          files=$(git diff-tree --no-commit-id --name-only -r master HEAD)
+        fi
         for file in $files; do
-          if [[ $file =~ ^doc_src.* ]]; then
-            echo "##vso[task.setvariable variable=changeDoc;isOutput=true]True"
+          if [[ $file =~ ^doc_src ]]; then
+            changeDoc=true
           fi
         done
+        if [[ "$changeDoc" == "true" ]]; then
+           if [[ "true" == $(isMain) ]]; then
+             echo "##vso[task.setvariable variable=checkDoc]True"
+             echo "##vso[task.setvariable variable=publishDoc]True"
+           else
+             echo "##vso[task.setvariable variable=checkDoc]True"
+           fi
+        fi
       name: checkChangeDoc
-  - job: DocCIJob
-    dependsOn: preCheck
-    condition: and(eq(dependencies.preCheck.outputs['checkChangeDoc.changeDoc'], 'True'), ne(variables.isRelease, true))
-    displayName: build and publish manual snapshot version
-    pool:
-      vmImage: 'ubuntu-22.04'
-    steps:
-      - template: ci/azure-pipelines/build_doc_steps.yml
-      - template: ci/azure-pipelines/publish_manual_snapshot.yml
+    - template: ci/azure-pipelines/build_doc_steps.yml
+      parameters:
+        condition: eq(variables['checkDoc'], 'True')
+    - template: ci/azure-pipelines/publish_manual_snapshot.yml
+      parameters:
+        condition: eq(variables['publishDoc'], 'True')
 
 - stage: Test
   condition: not(or(eq(variables['Build.Reason'], 'Schedule'), eq(variables['Build.Reason'], 'Manual'), eq(variables.isRelease, true)))

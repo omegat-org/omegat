@@ -1,6 +1,10 @@
+parameters:
+  condition: false
+
 steps:
   - task: Cache@2
     displayName: 'Cache Gradle'
+    condition: ${{ parameters.condition }}
     inputs:
       key: 'gradle | $(Agent.OS) | $(Build.SourcesDirectory)/build.gradle'
       path: '$(GRADLE_USER_HOME)'
@@ -10,3 +14,4 @@ steps:
       chmod -R a+w doc_src
       $(Build.SourcesDirectory)/gradlew --build-cache -PenvIsCi clean webManual
     displayName: 'Run Gradle clean and Gradle webManual'
+    condition: ${{ parameters.condition }}

@@ -515,7 +515,7 @@ manualIndexXmls.each { xml ->
             destinationDirectory = file("${buildDir}/docs/manuals/")
         }
         manualHtmls.dependsOn zipTaskName
-        tasks.getByName(zipTaskName).dependsOn htmlTaskName
+        tasks.getByName(zipTaskName).dependsOn htmlTaskName, genDocIndex
     } else {
         manualHtmls.dependsOn htmlTaskName
     }

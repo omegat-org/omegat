@@ -39,7 +39,7 @@ import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
-import tokyo.northside.swing.TipOfTheDay;
+import tokyo.northside.tipoftheday.TipOfTheDay;
 
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;

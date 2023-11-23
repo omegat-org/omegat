@@ -37,7 +37,8 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 
-import tokyo.northside.swing.TipOfTheDay;
+import tokyo.northside.tipoftheday.TipOfTheDay;
+
 
 @SuppressWarnings("serial")
 public class TipOfTheDayDialog extends JDialog {

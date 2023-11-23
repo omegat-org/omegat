@@ -883,24 +883,26 @@ ext.makeLinuxTask = { args ->
 makeLinuxTask(name: "linux64", suffix: "Linux_64", jrePath: linux64JRE)
 makeLinuxTask(name: "linuxArm64", suffix: "Linux_ARM64", jrePath: linuxArm64JRE)
 
-// prepare jars
-tasks.register('gatherJpkgJars', Copy) {
-    def dest = layout.buildDirectory.file('jpackage/jars').get().asFile
-    doFirst {
-        delete dest
-    }
-    from configurations.runtimeClasspath, tasks.jar
-    into file(dest)
-    dependsOn subprojects.collect {it.tasks.withType(Jar)}
+// clean work folder for jpackage
+def jpackageWorkdir = layout.buildDirectory.file('jpackage')
+tasks.register('cleanJpkgWorkdir', Delete) {
+    delete jpackageWorkdir
 }
 
-// prepare docs contents
-tasks.register('gatherJpkgReleaseDocs', Copy) {
+tasks.register('jars', Copy) {
+    from configurations.runtimeClasspath, tasks.jar
+    into file(layout.buildDirectory.file('jars'))
+    dependsOn tasks.jar
+}
+
+// prepare japckage contents
+// appContent requires jpackage command in JDK 18 or later
+// this is compat task to work as same as appContent command of jpackage
+tasks.register('jpackageAppContentDocs', Copy) {
     dependsOn genDocIndex
-    def dest = layout.buildDirectory.file('jpackage/docs').get().asFile
-    doFirst {
-        delete dest
-    }
+    dependsOn jpackage
+
+    into layout.buildDirectory.file('jpackage/docs')
     from("release") {
         include 'doc-license.txt'
         filter(FixCrLfFilter, eol: FixCrLfFilter.CrLf.newInstance('crlf'))
@@ -913,56 +915,49 @@ tasks.register('gatherJpkgReleaseDocs', Copy) {
         ])
         filter(FixCrLfFilter, eol: FixCrLfFilter.CrLf.newInstance('crlf'))
     }
-    from file('docs')
-    into file(dest)
+}
+tasks.register('jpackageAppContentScripts', Sync) {
+    from 'scripts'
+    into layout.buildDirectory.file("jpackage/app-image/${application.applicationName}/lib/scripts")
+    dependsOn jpackage
+}
+tasks.register('jpackageAppContentImages', Sync) {
+    from 'images'
+    into layout.buildDirectory.file("jpackage/app-image/${application.applicationName}/lib/images")
+    dependsOn jpackage
+}
+tasks.register('jpackageAppContentModules', Sync) {
+    from layout.buildDirectory.file('modules')
+    into layout.buildDirectory.file("jpackage/app-image/${application.applicationName}/lib/modules")
+    dependsOn subprojects.collect {it.tasks.withType(Jar)}
+    dependsOn jpackage
+}
+tasks.register('jpackageAppContent') {
+    dependsOn jpackageAppContentDocs
+    dependsOn jpackageAppContentImages
+    dependsOn jpackageAppContentModules
+    dependsOn jpackageAppContentScripts
 }
 
 // construct package contents in standard file tree
 tasks.jpackage {
-    dependsOn gatherJpkgJars
-    dependsOn gatherJpkgReleaseDocs
+    dependsOn cleanJpkgWorkdir
+    dependsOn jars
 
-    def dest = layout.buildDirectory.file("jpackage/app-image").get().asFile
-    doFirst {
-        delete dest
-    }
-
-    input = file(layout.buildDirectory.file('jpackage/jars'))
-    destination = file(dest)
-
+    input = file(layout.buildDirectory.file('jars'))
+    destination = file(layout.buildDirectory.file("jpackage/app-image"))
     appName = application.applicationName
     vendor = distAppVendor
     appDescription = shortDescription
-
+    mainJar = omegatJarFilename
+    mainClass = "org.omegat.Main"
     // appContent requires jpackage command in JDK 18 or later
     /*
     appContent = [file(layout.buildDirectory.file('modules')),
                   file(layout.buildDirectory.file('jpackage/docs')),'scripts', 'images']
     */
-    // compat configuration on JDK17
-    doLast {
-        project.copy {
-            from file(layout.buildDirectory.file('modules'))
-            into file(layout.buildDirectory.file("jpackage/app-image/${appName}/lib/modules"))
-        }
-        project.copy {
-            from file(layout.buildDirectory.file('jpackage/docs'))
-            into file(layout.buildDirectory.file("jpackage/app-image/${appName}/lib/docs"))
-        }
-        project.copy {
-            from 'scripts'
-            into file(layout.buildDirectory.file("jpackage/app-image/${appName}/lib/scripts"))
-        }
-        project.copy {
-            from 'images'
-            into file(layout.buildDirectory.file("jpackage/app-image/${appName}/lib/images"))
-        }
-    }
-    // end of compat configuration
-
-
-    mainJar = omegatJarFilename
-    mainClass = "org.omegat.Main"
+    // We use jpackageAppContent task for alternative
+    finalizedBy jpackageAppContent
 
     javaOptions = ["-Xmx1024M", "--add-opens", "java.desktop/sun.awt.X11=ALL-UNNAMED"]
     linux {
@@ -977,12 +972,13 @@ tasks.jpackage {
 
     type = 'app-image'
     group 'other'
-
 }
 
 // generate DEB package
 tasks.register("linuxDebDist", JPackageTask) {
     dependsOn jpackage
+    dependsOn jpackageAppContent
+
     group 'distribution'
     onlyIf {
         condition(exePresent('dpkg-deb'), 'dpkg-deb command is not installed')
@@ -1019,6 +1015,8 @@ tasks.register("linuxDebDist", JPackageTask) {
 // generate RPM package
 tasks.register("linuxRpmDist", JPackageTask) {
     dependsOn jpackage
+    dependsOn jpackageAppContent
+
     group 'distribution'
     onlyIf {
         condition(exePresent('rpm'), 'rpm command is not installed')

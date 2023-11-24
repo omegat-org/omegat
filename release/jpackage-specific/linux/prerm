@@ -1,0 +1,65 @@
+#!/bin/sh
+#
+#  OmegaT - Computer Assisted Translation (CAT) tool
+#           with fuzzy matching, translation memory, keyword search,
+#           glossaries, and translation leveraging into updated projects.
+#
+#  Copyright (C) 2023 Hiroshi Miura
+#                Home page: https://www.omegat.org/
+#                Support center: https://omegat.org/support
+#
+#  This file is part of OmegaT.
+#
+#  OmegaT is free software: you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation, either version 3 of the License, or
+#  (at your option) any later version.
+#
+#  OmegaT is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+#
+
+# prerm script for APPLICATION_PACKAGE
+#
+# see: dh_installdeb(1)
+
+set -e
+
+# summary of how this script can be called:
+#        * <prerm> `remove'
+#        * <old-prerm> `upgrade' <new-version>
+#        * <new-prerm> `failed-upgrade' <old-version>
+#        * <conflictor's-prerm> `remove' `in-favour' <package> <new-version>
+#        * <deconfigured's-prerm> `deconfigure' `in-favour'
+#          <package-being-installed> <version> `removing'
+#          <conflicting-package> <version>
+# for details, see https://www.debian.org/doc/debian-policy/ or
+# the debian-policy package
+
+
+package_type=deb
+DESKTOP_SCRIPTS
+
+case "$1" in
+    remove|upgrade|deconfigure)
+    if [ -e /usr/bin/omegat ]; then
+      rm -f /usr/bin/omegat
+    fi
+DESKTOP_COMMANDS_UNINSTALL
+    ;;
+
+    failed-upgrade)
+    ;;
+
+    *)
+        echo "prerm called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+exit 0

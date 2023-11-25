@@ -404,8 +404,8 @@ public class PoFilter extends AbstractFilter {
         String s;
         while ((s = in.readLine()) != null) {
 
-            // We trim trailing spaces, otherwise the regexps could fail, thus
-            // making some segments invisible to OmegaT
+            // We trim trailing spaces, otherwise the regexps could fail,
+            // thus making some segments invisible to OmegaT
             s = s.trim();
 
             // We have a real fuzzy
@@ -481,11 +481,12 @@ public class PoFilter extends AbstractFilter {
             Matcher mStr = MSG_STR.matcher(s);
             if (mStr.matches()) {
 
-                // Hack to be able to translate empty segments.
-                // If the source segment is empty and there is a reference, then
+                // Hack to be able to translate empty segments
+                // If the source segment is empty and there is a reference then
                 // it copies the reference of the segment and the localization
                 // note into the source segment
-                if (allowEditingBlankSegment && sources[0].length() == 0 && references.length() > 0 && headerProcessed) {
+                if (allowEditingBlankSegment && sources[0].length() == 0 && references.length() > 0
+                        && headerProcessed) {
                     String aux = references + extractedComments.toString();
                     sources[0].append(aux);
                 }
@@ -633,8 +634,8 @@ public class PoFilter extends AbstractFilter {
      * @param translation unescaped translated string in po file.
      * @param comments unescaped comment in po file.
      * @param pathSuffix
-     *            suffix for a path to distinguish plural forms. It will be empty for the first one,
-     *            and [1], [2], ... for next
+     *            suffix for path to distinguish plural forms. It will be empty
+     *            for first one, and [1],[2],... for next
      */
     protected void parseOrAlign(String source, String translation, String comments, String pathSuffix) {
         if (translation.isEmpty()) {

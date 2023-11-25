@@ -52,7 +52,7 @@ protocolhandler = "0.1.4"
 pdfbox = "2.0.27"
 maligna = "3.0.1"
 trie4j = "0.9.8"
-dsl4j = "0.5.3"
+dsl4j = "0.7.1"
 stardict4j = "0.5.1"
 juniversalchardet = "2.4.0"
 mnemonics = "1.1"
@@ -61,7 +61,7 @@ hunspell = "2.1.1"
 xjc = "2.3.4"
 jna = "5.13.0"
 jfa = "1.2.0"
-tipoftheday = "0.4.2"
+tipoftheday = "0.4.3"
 sphinx = "1.0.4"
 
 [libraries]
@@ -150,7 +150,7 @@ url-protocol-handler = {group = "tokyo.northside", name = "url-protocol-handler"
 apache-pdfbox = {group = "org.apache.pdfbox", name = "pdfbox", version.ref = "pdfbox"}
 loomchild-maligna = {group = "net.loomchild", name = "maligna", version.ref = "maligna"}
 trie4j = {group = "com.github.takawitter", name = "trie4j", version.ref = "trie4j"}
-dsl4j = {group = "io.github.eb4j", name = "dsl4j", version.ref = "dsl4j"}
+dsl4j = {group = "tokyo.northside", name = "dsl4j", version.ref = "dsl4j"}
 stardict4j = {group = "tokyo.northside", name = "stardict4j", version.ref = "stardict4j"}
 juniversal-chardet = {group = "com.github.albfernandez", name = "juniversalchardet", version.ref = "juniversalchardet"}
 omegat-mnemonics = {group = "org.omegat", name = "lib-mnemonics", version.ref = "mnemonics"}

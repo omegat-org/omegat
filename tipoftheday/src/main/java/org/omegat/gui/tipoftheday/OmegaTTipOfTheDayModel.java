@@ -33,10 +33,10 @@ import java.util.List;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
-import tokyo.northside.swing.data.HtmlTipData;
-import tokyo.northside.swing.tips.DefaultTip;
-import tokyo.northside.swing.tips.Tip;
-import tokyo.northside.swing.tips.TipOfTheDayModel;
+import tokyo.northside.tipoftheday.data.HtmlTipData;
+import tokyo.northside.tipoftheday.tips.DefaultTip;
+import tokyo.northside.tipoftheday.tips.Tip;
+import tokyo.northside.tipoftheday.tips.TipOfTheDayModel;
 
 import org.omegat.util.Log;
 

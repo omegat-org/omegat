@@ -13,5 +13,5 @@ steps:
       mkdir -p build
       chmod -R a+w doc_src
       $(Build.SourcesDirectory)/gradlew --build-cache -PenvIsCi clean webManual
-    displayName: 'Run Gradle clean and Gradle webManual'
+    displayName: 'Run Gradle webManual'
     condition: ${{ parameters.condition }}

@@ -151,8 +151,6 @@
                 <pathelement path="${saxon}" />
             </classpath>
         </java>
-        <copy file="${language}/${version.properties.filename}"
-              tofile="../docs/${language}/${version.properties.filename}" />
     </target>
 
     <target name="check-first-steps">
@@ -171,35 +169,29 @@
 
     <target name="old-css" depends="check-first-steps" unless="${FirstSteps.exists}">
         <copy file="OmegaT_old.css"
-              tofile="../docs/${language}/OmegaT.css"
+              tofile="${target}/OmegaT.css"
               force="true"/>
     </target>
 
     <target name="new-css" depends="check-first-steps" if="${FirstSteps.exists}">
         <copy file="OmegaT_new.css"
-              tofile="../docs/${language}/OmegaT.css"
+              tofile="${target}/OmegaT.css"
               force="true"/>
     </target>
 
     <target name="css" depends="old-css,new-css"/>
 
-    <target name="copy-index-from-first-step" depends="check-manual-exist,generate-instant-start"
-            unless="${ManualContents.exists}">
-        <copy file="../docs/${language}/first_steps.html"
-              tofile="../docs/${language}/index.html" />
-    </target>
-
-    <target name="generate-instant-start" depends="check-first-steps, old-css, pictures" unless="${FirstSteps.exists}">
+    <target name="generate-instant-start" depends="check-first-steps, old-css, instant-start-pictures" unless="${FirstSteps.exists}">
         <java dir="."
               fork="true"
               failonerror="true"
               maxmemory="128m"
               classname="com.icl.saxon.StyleSheet" >
             <arg value="-o" />
-            <arg value="../docs/${language}/first_steps.html" />
+            <arg value="${target}/first_steps.html" />
             <arg value="${language}/InstantStartGuide.xml" />
             <arg value="../../docbook-utf8.xsl" />
-            <arg value="base.dir=../docs/${language}/" />
+            <arg value="base.dir=${target}/" />
             <arg value="chunk.section.depth=0" />
             <arg value="chunk.first.sections=0" />
             <arg value="use.extensions=1" />
@@ -215,11 +207,9 @@
                 <pathelement path="${saxon}" />
             </classpath>
         </java>
-        <copy file="${language}/${version.properties.filename}"
-              tofile="../docs/${language}/${version.properties.filename}" />
     </target>
 
-    <target name="instant-start" depends="generate-instant-start, copy-index-from-first-step"/>
+    <target name="instant-start" depends="generate-instant-start"/>
 
     <target name="first-steps" depends="check-first-steps, new-css" if="${FirstSteps.exists}">
         <java dir="."
@@ -228,10 +218,10 @@
               maxmemory="128m"
               classname="com.icl.saxon.StyleSheet" >
             <arg value="-o" />
-            <arg value="../docs/${language}/first_steps.html" />
+            <arg value="${target}/first_steps.html" />
             <arg value="${language}/First_Steps.xml" />
             <arg value="../../docbook-utf8.xsl" />
-            <arg value="base.dir=../docs/${language}/" />
+            <arg value="base.dir=${target}/" />
             <arg value="chunk.section.depth=0" />
             <arg value="chunk.first.sections=0" />
             <arg value="use.extensions=1" />
@@ -250,8 +240,16 @@
     </target>
 
     <target name="pictures">
-        <copy todir="../docs/${language}/images">
+        <copy todir="${target}/images">
             <fileset dir="${language}/images" />
+        </copy>
+    </target>
+
+    <target name="instant-start-pictures">
+        <copy todir="${target}/images">
+            <fileset dir="${language}/images">
+                <include name="InstantGuide*.png"/>
+            </fileset>
         </copy>
     </target>
 
@@ -308,7 +306,7 @@
                 <pathelement path="${saxon}" />
             </classpath>
         </java>
-        <copy file="../images/OmegaT.svg" tofile="../docs/${language}/images/omegat.svg"/>
+        <copy file="../images/OmegaT.svg" tofile="${target}/images/omegat.svg"/>
     </target>
 
     <target name="whc" depends="whc-toc,whc-header,whc-index">
@@ -330,7 +328,7 @@
             <arg value="${language}/xhtml5/toc.xml"/>
             <arg value="-index"/>
             <arg value="${language}/xhtml5/index.html"/>
-            <arg value="../docs/${language}"/>
+            <arg value="${target}"/>
             <arg line="${prop.dist.contents}"/>
         </java>
         <delete file="${language}/xhtml5/index_.html"/>

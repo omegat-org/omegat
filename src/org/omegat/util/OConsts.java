@@ -63,7 +63,8 @@ public final class OConsts {
     public static final String HELP_HOME = "index.html";
     public static final String HELP_FIRST_STEPS = "first_steps.html";
     public static final String HELP_DIR = "docs";
-    public static final String HELP_LANG_INDEX = "languageIndex.html";
+    public static final String HELP_FIRST_STEPS_PREFIX = "greetings";
+    public static final String HELP_MANUALS = "manuals";
 
     // licenses
     public static final String LICENSE_FILE = "OmegaT-license.txt";

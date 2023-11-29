@@ -35,14 +35,22 @@ import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.util.Comparator;
 import java.util.Properties;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.stream.Stream;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 
 import org.omegat.util.Language;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;
+import org.omegat.util.VersionChecker;
 import org.omegat.util.gui.DesktopWrapper;
 
 /**
@@ -83,11 +91,76 @@ public final class Help {
      */
     public static void showHelp() throws IOException {
         String lang = detectHelpLanguage();
-        URI uri = getHelpFileURI(lang, OConsts.HELP_HOME);
+        URI uri = getHelpZipFileURI(lang);
+        if (uri == null) {
+            uri = getHelpFileURI(lang, OConsts.HELP_HOME);
+            if (uri != null) {
+                String version = getDocVersion(lang);
+                if (version == null || VersionChecker.compareMinorVersions(OStrings.VERSION, version) < 0) {
+                    uri = URI.create(ONLINE_HELP_URL);
+                }
+            }
+        }
         if (uri == null) {
             uri = URI.create(ONLINE_HELP_URL);
         }
         DesktopWrapper.browse(uri);
+    }
+
+    private static URI getHelpZipFileURI(String lang) {
+        if (lang == null) {
+            return null;
+        }
+        File zipFile = Paths.get(StaticUtils.installDir(), OConsts.HELP_DIR, OConsts.HELP_MANUALS,  lang + ".zip").toFile();
+        if (!zipFile.isFile()) {
+            // Check manual when OmegaT launched in development environment using "gradle run"
+            zipFile = Paths.get(StaticUtils.installDir(), "build", OConsts.HELP_DIR, OConsts.HELP_MANUALS,  lang + ".zip").toFile();
+        }
+        if (!zipFile.isFile()) {
+            return null;
+        }
+        try {
+            Path destinationDir = Files.createTempDirectory("omegat-" + OStrings.VERSION +  "-help-" + lang);
+            return extractZip(zipFile, destinationDir).toURI();
+        } catch (IOException ignored) {
+        }
+        return null;
+    }
+
+    private static File extractZip(File file, Path destinationDir) throws IOException {
+        try (ZipInputStream zipInputStream = new ZipInputStream(Files.newInputStream(file.toPath()))) {
+            ZipEntry entry;
+            while ((entry = zipInputStream.getNextEntry()) != null) {
+                Path entryDestination = destinationDir.resolve(entry.getName());
+                Files.createDirectories(entryDestination.getParent());
+                if (!entry.isDirectory()) {
+                    Files.copy(zipInputStream, entryDestination, StandardCopyOption.REPLACE_EXISTING);
+                }
+                zipInputStream.closeEntry();
+            }
+        }
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            try {
+                cleanUp(destinationDir);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        ));
+        return destinationDir.resolve(OConsts.HELP_HOME).toFile();
+    }
+
+    private static void cleanUp(Path destinationDir) throws IOException {
+        if (Files.exists(destinationDir)) {
+            try (Stream<Path> walk = Files.walk(destinationDir)) {
+                walk.sorted(Comparator.reverseOrder()).forEachOrdered(file -> {
+                    try {
+                        Files.delete(file);
+                    } catch (IOException ignored) {
+                    }
+                });
+            }
+        }
     }
 
     public static URI getHelpFileURI(String filename) {
@@ -95,15 +168,29 @@ public final class Help {
     }
 
     public static URI getHelpFileURI(String lang, String filename) {
+        return getHelpFileURI(null, lang, filename);
+    }
+
+    public static URI getHelpFileURI(String prefix, String lang, String filename) {
         // find in install dir
         String path = lang == null ? filename : lang + File.separator + filename;
-        File file = Paths.get(StaticUtils.installDir(), OConsts.HELP_DIR, path).toFile();
+        File file;
+        if (prefix != null) {
+            file = Paths.get(StaticUtils.installDir(), OConsts.HELP_DIR, prefix,  path).toFile();
+        } else {
+            file = Paths.get(StaticUtils.installDir(), OConsts.HELP_DIR, path).toFile();
+        }
         if (file.isFile()) {
             return file.toURI();
         }
         // find in classpath
         path = lang == null ? filename : lang + '/' + filename;
-        URL url = Help.class.getResource('/' + OConsts.HELP_DIR + '/' + path);
+        URL url;
+        if (prefix != null) {
+            url = Help.class.getResource('/' + OConsts.HELP_DIR + '/' + prefix + '/' + path);
+        } else {
+            url = Help.class.getResource('/' + OConsts.HELP_DIR + '/' + path);
+        }
         if (url != null) {
             try {
                 return url.toURI();
@@ -133,19 +220,10 @@ public final class Help {
 
         // Check if there's a translation for the full locale (lang + country)
         String locale = language + "_" + country;
-        String version = getDocVersion(locale);
-        if (OStrings.VERSION.equals(version)) {
+        if (locale.equals("pt_BR") || locale.startsWith("zh_")) {
             return locale;
         }
-
-        // Check if there's a translation for the language only
-        version = getDocVersion(language);
-        if (OStrings.VERSION.equals(version)) {
-            return language;
-        }
-
-        // No suitable translation found
-        return null;
+        return language;
     }
 
     /**
@@ -153,18 +231,14 @@ public final class Help {
      * translation for the specified locale, null is returned.
      */
     private static String getDocVersion(String locale) {
-        // Check if there's a manual for the specified locale
-        // (Assume yes if the index file is there)
-
-        if (getHelpFileURI(locale, OConsts.HELP_HOME) == null) {
-            return null;
-        }
-
         // Load the property file containing the doc version
         Properties prop = new Properties();
         URI u = getHelpFileURI(locale, "version_" + locale + ".properties");
         if (u == null) {
             u = getHelpFileURI(locale, "version.properties");
+        }
+        if (u == null) {
+            return null;
         }
         try (InputStream in = u.toURL().openStream()) {
             prop.load(in);

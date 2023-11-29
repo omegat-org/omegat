@@ -155,6 +155,9 @@ public final class StaticUtils {
                 URI sourceUri = StaticUtils.class.getProtectionDomain().getCodeSource().getLocation().toURI();
                 if (sourceUri.getScheme().equals("file")) {
                     File uriFile = Paths.get(sourceUri).toFile();
+                    // If running from a JAR, get the enclosing folder
+                    // (the JAR is assumed to be at the installation root,
+                    //  and there is also "modules" directory).
                     if (uriFile.getName().endsWith(".jar")
                             && new File(uriFile.getParentFile(), "modules").exists()) {
                         file = uriFile.getParentFile();

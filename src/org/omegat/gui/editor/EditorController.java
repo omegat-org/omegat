@@ -1933,7 +1933,7 @@ public class EditorController implements IEditor {
                             : ComponentOrientation.LEFT_TO_RIGHT);
             introPane.setEditable(false);
             DragTargetOverlay.apply(introPane, dropInfo);
-            URI uri = Help.getHelpFileURI(language, OConsts.HELP_FIRST_STEPS);
+            URI uri = Help.getHelpFileURI(OConsts.HELP_FIRST_STEPS_PREFIX, language, OConsts.HELP_FIRST_STEPS);
             if (uri != null) {
                 introPane.setPage(uri.toURL());
             }
@@ -1960,12 +1960,12 @@ public class EditorController implements IEditor {
         String country = Language.getUpperCaseCountryFromLocale();
 
         // Check if there's a translation for the full locale (lang + country)
-        if (Help.getHelpFileURI(language + "_" + country, OConsts.HELP_FIRST_STEPS) != null) {
+        if (Help.getHelpFileURI(OConsts.HELP_FIRST_STEPS_PREFIX, language + "_" + country, OConsts.HELP_FIRST_STEPS) != null) {
             return language + "_" + country;
         }
 
         // Check if there's a translation for the language only
-        if (Help.getHelpFileURI(language, OConsts.HELP_FIRST_STEPS) != null) {
+        if (Help.getHelpFileURI(OConsts.HELP_FIRST_STEPS_PREFIX, language, OConsts.HELP_FIRST_STEPS) != null) {
             return language;
         }
         // Default to English, if no translation exists

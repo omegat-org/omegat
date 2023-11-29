@@ -1,0 +1,25 @@
+[Desktop Entry]
+Name=APPLICATION_NAME
+Exec=APPLICATION_LAUNCHER
+Icon=APPLICATION_ICON
+Terminal=false
+Type=Application
+Categories=DEPLOY_BUNDLE_CATEGORY
+Comment=the free translation memory tool
+Comment[ru]=свободная программа для автоматизации перевода
+Comment[mfe]=Enn Zouti Lib Memwar Tradiksion
+Comment[nl]=het gratis programma met vertaalgeheugen
+Comment[pt]=A ferramenta memória de tradução gratuita
+Comment[co]=L’attrezzu liberu di memoria di traduzzione
+Comment[pt_BR]=A ferramenta de memória de tradução livre
+Comment[it]=lo strumento gratuito per memorie di traduzione
+Comment[es]=La herramienta TAO gratuita
+Comment[zh_CN]=免费的翻译记忆工具
+Comment[ja]=自由に使える翻訳メモリツール
+Comment[uk]=безкоштовна програма для перекладу
+Comment[fr]=l'outil libre de TAO
+Comment[ia]=Le application gratuite pro memorias de traduction
+Comment[de]=Das kostenlose Translation-Memory-Tool
+Comment[fi]=vapaa käännöstyökalu
+Comment[ca]=l'eina lliure de memòria de traducció
+DESKTOP_MIMES

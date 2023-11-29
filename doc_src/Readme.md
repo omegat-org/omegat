@@ -21,21 +21,32 @@ Get Docker without needing to make an account:
 
 See also:
 
-- [docgen-docker](https://github.com/omegat-org/docgen-docker): source for the
-  docgen container
+- [docgen-docker](https://github.com/omegat-org/docgen-docker): source for the docgen container
 
-### Note: Container execution
+### Note: Container runtimes
 
-Linux container image and its execution feature have been standardized 
-by OCI: Open Container Initiative.
+Commercial use of Docker Desktop in larger enterprises requires a paid subscription.
+
+OCI, Open Container Initiative, standardized Linux container image and its runtime.
 Thanks to the standard and FLOSS community, there are several alternatives
 than Docker Desktop product.
 
-- Execution environment: containerd, kubernetes
-- Toolset: nerdctl, podman, Rancher Desktop
+- Runtime environment: containerd, kubernetes
+- Toolset: nerdctl, podman
+- Integrated environment: Rancher Desktop
 
-The `docgen` script supports containerd/nerdctl combination in addition to
-docker-desktop product.
+The `docgen` script supports both `nerdctl` and `docker` command.
+
+You are recommended to check Rancher Desktop when you want to use on Windows and macOS.
+It uses `containerd` on WSL2 and `nerdctl` on Windows, and provides custom Lima machines
+with `nerdctl` on macOS.
+
+Lima project provides Linux virtual machines for macOS, with built-in integration for nerdctl.
+There is an alternative project colima, that means "container on Linux on Mac" that provides
+container runtimes on macOS with minimal setup.
+
+- [Rancher Desktop](https://rancherdesktop.io/)
+- [colima](https://github.com/abiosoft/colima)
 
 ## The hard way
 
@@ -223,3 +234,7 @@ Note: Replace `ant` with `docgen` if you are using the `docgen` script.
 - `build.xml`: Main script
 - `doc_src_paths.xml`: Set the paths for utilities
 - `docbook-utf8.xsl`: Allows to issue the First Steps in UTF-8
+
+# Files
+
+- `index_template.html`: used to generate `index.html` for all languages

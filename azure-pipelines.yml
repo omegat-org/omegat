@@ -52,7 +52,7 @@ stages:
     - bash: |
         if [[ "${{ variables['Build.SourceBranch'] }}" == "refs/heads/master" ]]; then
           # check latest commit
-          files=$(git diff-tree --no-commit-id --name-only -r HEAD~)
+          files=$(git diff-tree --no-commit-id --name-only -r HEAD)
         else
           # pull-request changes
           git fetch origin master

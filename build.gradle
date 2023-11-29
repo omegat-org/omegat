@@ -978,11 +978,20 @@ tasks.register('jars', Copy) {
 // prepare japckage contents
 // appContent requires jpackage command in JDK 18 or later
 // this is compat task to work as same as appContent command of jpackage
+tasks.register('jpackageAppContentManuals', Copy) {
+    dependsOn jpackage
+    // Enable when manual generation is in a build dependency.
+    // dependsOn updateManuals
+
+    into layout.buildDirectory.file("jpackage/app-image/${application.applicationName}/lib/docs")
+    from 'docs'
+    exclude 'index.html'
+}
+
 tasks.register('jpackageAppContentDocs', Copy) {
-    dependsOn genDocIndex
     dependsOn jpackage
 
-    into layout.buildDirectory.file('jpackage/docs')
+    into layout.buildDirectory.file("jpackage/app-image/${application.applicationName}/lib/docs")
     from("release") {
         include 'doc-license.txt'
         filter(FixCrLfFilter, eol: FixCrLfFilter.CrLf.newInstance('crlf'))
@@ -1013,6 +1022,7 @@ tasks.register('jpackageAppContentModules', Sync) {
     dependsOn jpackage
 }
 tasks.register('jpackageAppContent') {
+    dependsOn jpackageAppContentManuals
     dependsOn jpackageAppContentDocs
     dependsOn jpackageAppContentImages
     dependsOn jpackageAppContentModules
@@ -1028,9 +1038,10 @@ tasks.jpackage {
     destination = file(layout.buildDirectory.file("jpackage/app-image"))
     appName = application.applicationName
     vendor = distAppVendor
-    appDescription = shortDescription
+    appDescription = distDescription
     mainJar = omegatJarFilename
     mainClass = "org.omegat.Main"
+
     // appContent requires jpackage command in JDK 18 or later
     /*
     appContent = [file(layout.buildDirectory.file('modules')),
@@ -1042,6 +1053,8 @@ tasks.jpackage {
     javaOptions = ["-Xmx1024M", "--add-opens", "java.desktop/sun.awt.X11=ALL-UNNAMED"]
     linux {
         icon = "images/OmegaT.png"
+        resourceDir = "release/jpackage-specific/linux/"
+        verbose = true
     }
     mac {
         icon = "images/OmegaT.icns"
@@ -1073,6 +1086,8 @@ tasks.register("linuxDebDist", JPackageTask) {
 
     type = 'deb'
     installDir = '/opt/omegat-org'
+    resourceDir = "release/jpackage-specific/linux/"
+    verbose = true
 
     icon = file(layout.projectDirectory.file("images/OmegaT.png"))
 
@@ -1080,9 +1095,9 @@ tasks.register("linuxDebDist", JPackageTask) {
     licenseFile = file(layout.projectDirectory.file("LICENSE"))
 
     linux {
-        linuxAppCategory("Education")
-        linuxAppRelease('1.0.0')
-        linuxDebMaintainer("Hiroshi Miura <miurahr@linux.com>")
+        linuxAppCategory("editors")
+        linuxAppRelease('2')
+        linuxDebMaintainer("info@omegat.org")
         linuxMenuGroup("Office")
         linuxPackageName("omegat")
         linuxPackageDeps(false)
@@ -1118,8 +1133,8 @@ tasks.register("linuxRpmDist", JPackageTask) {
     licenseFile = file(layout.projectDirectory.file("LICENSE"))
 
     linux {
-        linuxAppCategory("Education")
-        linuxAppRelease('1.0.0')
+        linuxAppCategory("Application/Editors")
+        linuxAppRelease('2')
         linuxMenuGroup("Office")
         linuxPackageName("omegat")
         linuxPackageDeps(false)

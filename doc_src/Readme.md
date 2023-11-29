@@ -4,9 +4,11 @@ All the files in this directory and below are under the terms of the GNU General
 Public License as published by the Free Software Foundation; either version 3 of
 the License, or (at your option) any later version.
 
-# Installation
+# Preparation
 
-The easy way is to install
+## An easy way
+
+An easy way is to install
 [Docker](https://www.docker.com/products/docker-desktop) and run the `docgen`
 script provided in `doc_src`. Arguments to `docgen` are the same as the
 arguments to `ant` described below in the Usage section.
@@ -21,6 +23,19 @@ See also:
 
 - [docgen-docker](https://github.com/omegat-org/docgen-docker): source for the
   docgen container
+
+### Note: Container execution
+
+Linux container image and its execution feature have been standardized 
+by OCI: Open Container Initiative.
+Thanks to the standard and FLOSS community, there are several alternatives
+than Docker Desktop product.
+
+- Execution environment: containerd, kubernetes
+- Toolset: nerdctl, podman, Rancher Desktop
+
+The `docgen` script supports containerd/nerdctl combination in addition to
+docker-desktop product.
 
 ## The hard way
 

@@ -120,14 +120,19 @@ abstract class AbstractXliffFilter extends AbstractXmlFilter {
     }
 
     protected void updateIgnoreScope(StartElement startElement) {
-        if (startElement.getAttributeByName(new QName("translate")) != null) {
-            if ("no".equals(startElement.getAttributeByName(new QName("translate")).getValue())) {
+        Attribute attr = startElement.getAttributeByName(new QName("translate"));
+        if (attr != null) {
+            if ("no".equals(attr.getValue())) {
                 ignoreScope = startElement.getName().getLocalPart();
-            } else if ("yes".equals(startElement.getAttributeByName(new QName("translate")).getValue())) {
+            } else if ("yes".equals(attr.getValue())) {
                 if (ignoreScope != null) {
                     ignoreScope = "!" + startElement.getName().getLocalPart() + " " + ignoreScope;
                 }
             }
+        }
+        attr = startElement.getAttributeByName(new QName("state"));
+        if ((attr != null) && ("final".equals(attr.getValue()))) {
+            ignoreScope = startElement.getName().getLocalPart();
         }
     }
 

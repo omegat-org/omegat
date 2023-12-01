@@ -448,13 +448,18 @@ tasks.register('genDocIndex', Copy) {
     group = 'documentation'
 }
 
+tasks.register('manualZips') {
+    description = 'Build ZIP manuals to bundle into application. Requires container runtime.'
+    group = 'documentation'
+}
+
 tasks.register('manualPdfs') {
-    description = 'Build PDF manuals for all languages. Requires Docker.'
+    description = 'Build PDF manuals for all languages. Requires container runtime.'
     group = 'documentation'
 }
 
 tasks.register('manualHtmls') {
-    description = 'Build HTML manuals and zip for all languages. Requires Docker.'
+    description = 'Build HTML manuals and zip for all languages. Requires container runtime.'
     finalizedBy genDocIndex
     group = 'documentation'
 }
@@ -509,6 +514,7 @@ manualIndexXmls.each { xml ->
             destinationDirectory = file("${buildDir}/docs/manuals/")
         }
         manualHtmls.dependsOn zipTaskName
+        manualZips.dependsOn zipTaskName
         tasks.getByName(zipTaskName).dependsOn htmlTaskName
     } else {
         manualHtmls.dependsOn htmlTaskName

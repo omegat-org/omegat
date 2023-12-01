@@ -43,7 +43,6 @@ set -e
 
 
 package_type=deb
-DESKTOP_SCRIPTS
 
 case "$1" in
     remove|upgrade|deconfigure)

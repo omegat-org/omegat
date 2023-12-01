@@ -427,13 +427,18 @@ launch4j {
     priority = 'normal'
 }
 
+tasks.register('manualZips') {
+    description = 'Build ZIP manuals to bundle into application. Requires container runtime.'
+    group = 'documentation'
+}
+
 tasks.register('manualPdfs') {
-    description = 'Build PDF manuals for all languages. Requires Docker.'
+    description = 'Build PDF manuals for all languages. Requires container runtime.'
     group = 'documentation'
 }
 
 tasks.register('manualHtmls') {
-    description = 'Build HTML manuals and zip for all languages. Requires Docker.'
+    description = 'Build HTML manuals and zip for all languages. Requires container runtime.'
     group = 'documentation'
 }
 
@@ -455,7 +460,6 @@ tasks.register('genDocIndex', Copy) {
     rename('index_template.html', 'index.html')
     expand('languages': langInfos)
     filteringCharset = 'UTF-8'
-    dependsOn manualHtmls
     group = 'documentation'
 }
 
@@ -509,6 +513,7 @@ manualIndexXmls.each { xml ->
             archiveFileName = "${lang}.zip"
             destinationDirectory = file("${buildDir}/docs/manuals/")
         }
+        manualZips.dependsOn zipTaskName
         tasks.getByName(zipTaskName).dependsOn htmlTaskName
     }
 }

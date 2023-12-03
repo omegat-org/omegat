@@ -148,6 +148,10 @@ public class ExternalTMFactoryTest extends TestCore {
         assertEquals(3, tmx.getEntries().size());
         assertEquals("This is a test", tmx.getEntries().get(0).getSourceText());
         assertEquals("Això és una prova", tmx.getEntries().get(0).getTranslationText());
+        assertEquals("This is another test", tmx.getEntries().get(1).getSourceText());
+        assertEquals("Això és una altra prova", tmx.getEntries().get(1).getTranslationText());
+        assertEquals("This is a house", tmx.getEntries().get(2).getSourceText());
+        assertEquals("Això és una casa", tmx.getEntries().get(2).getTranslationText());
     }
 
     /**

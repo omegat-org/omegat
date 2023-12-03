@@ -467,8 +467,7 @@ tasks.register('manualHtmls') {
 tasks.register('webManual', Sync) {
     group = 'documentation'
     description = 'Sync the HTML manual files'
-    dependsOn manualHtmls
-    dependsOn genDocIndex
+    dependsOn manualHtmls, genDocIndex
     destinationDir file(layout.buildDirectory.file("docs/htdocs"))
     from file(layout.buildDirectory.file("docs/manual"))
     from('release') {
@@ -524,6 +523,12 @@ manualIndexXmls.each { xml ->
 tasks.register('firstSteps') {
     description = 'Build First pages for all languages at docs/greetings/. Requires Docker.'
     group = 'documentation'
+}
+
+tasks.register('updateManuals') {
+    group = 'documentation'
+    description = 'Update Instant Start guides and HTML manuals.'
+    dependsOn manualHtmls, firstSteps, genDocIndex
 }
 
 ext.firstStepsXmls = fileTree(dir: 'doc_src', include: '**/First_Steps.xml')

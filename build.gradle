@@ -427,6 +427,16 @@ launch4j {
     priority = 'normal'
 }
 
+tasks.register('manualPdfs') {
+    description = 'Build PDF manuals for all languages. Requires Docker.'
+    group = 'documentation'
+}
+
+tasks.register('manualHtmls') {
+    description = 'Build HTML manuals and zip for all languages. Requires Docker.'
+    group = 'documentation'
+}
+
 tasks.register('genDocIndex', Copy) {
     def docPropsFiles = fileTree(dir: 'doc_src', include: '*/version*.properties').findAll {
         file("${it.parent}/OmegaTUsersManual_xinclude full.xml").file }
@@ -441,21 +451,11 @@ tasks.register('genDocIndex', Copy) {
     inputs.files docPropsFiles
     outputs.files layout.buildDirectory.file("docs/manual/index.html")
     from('doc_src/index_template.html')
-    into "${buildDir}/docs/manual"
+    into layout.buildDirectory.file("docs/manual")
     rename('index_template.html', 'index.html')
     expand('languages': langInfos)
     filteringCharset = 'UTF-8'
-    group = 'documentation'
-}
-
-tasks.register('manualPdfs') {
-    description = 'Build PDF manuals for all languages. Requires Docker.'
-    group = 'documentation'
-}
-
-tasks.register('manualHtmls') {
-    description = 'Build HTML manuals and zip for all languages. Requires Docker.'
-    finalizedBy genDocIndex
+    dependsOn manualHtmls
     group = 'documentation'
 }
 
@@ -498,6 +498,7 @@ manualIndexXmls.each { xml ->
         workingDir = 'doc_src'
         commandLine './docgen', "-Dlanguage=${lang}", "-Dtarget=../build/docs/manual/${lang}", 'html5'
     }
+    manualHtmls.dependsOn htmlTaskName
 
     def zipTaskName="manualZip${lang.capitalize()}"
     def versionProperties = loadProperties(file("doc_src/${lang}/version_${lang}.properties"))
@@ -508,10 +509,7 @@ manualIndexXmls.each { xml ->
             archiveFileName = "${lang}.zip"
             destinationDirectory = file("${buildDir}/docs/manuals/")
         }
-        manualHtmls.dependsOn zipTaskName
         tasks.getByName(zipTaskName).dependsOn htmlTaskName
-    } else {
-        manualHtmls.dependsOn htmlTaskName
     }
 }
 

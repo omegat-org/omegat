@@ -10,8 +10,11 @@ steps:
       path: '$(GRADLE_USER_HOME)'
   - script: |
       umask a+w
-      mkdir -p build
       chmod -R a+w doc_src
-      $(Build.SourcesDirectory)/gradlew --build-cache -PenvIsCi clean webManual
+      $(Build.SourcesDirectory)/gradlew --build-cache -PenvIsCi clean webManual manualZips
     displayName: 'Run Gradle webManual'
     condition: ${{ parameters.condition }}
+  - script: |
+      # stop the Gradle daemon to ensure no files are left open (impacting the save cache operation later)
+      ./gradlew --stop
+    displayName: Gradlew stop

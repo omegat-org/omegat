@@ -428,27 +428,23 @@ launch4j {
 }
 
 tasks.register('genDocIndex', Copy) {
-    description = 'Generate the docs index file'
-    def manualIndex = 'OmegaTUsersManual_xinclude full.xml'
     def docPropsFiles = fileTree(dir: 'doc_src', include: '*/version*.properties').findAll {
-        file("${it.parent}/${manualIndex}").file
-    }
+        file("${it.parent}/OmegaTUsersManual_xinclude full.xml").file }
+    description = 'Generate the docs index file'
     inputs.files docPropsFiles
+    outputs.files layout.buildDirectory.file("docs/manual/index.html")
     from('doc_src/index_template.html')
     into "${buildDir}/docs/manual"
     rename('index_template.html', 'index.html')
-    def langNameExceptions = loadProperties(file('doc_src/lang_exceptions.properties'))
-    def langInfos = docPropsFiles.collect { props ->
-        def code = props.parentFile.name
-        def locale = Locale.forLanguageTag(code.replace('_', '-'))
-        def name = langNameExceptions[code] ?: locale.getDisplayName(locale)
-        def docVersion = loadProperties(props).version
-        def noManual = false
-        def status = docVersion == omtVersion.version ? 'up-to-date' : 'out-of-date'
-        ['code': code, 'name': name, 'version': docVersion, 'status': status, 'nomanual': noManual]
-    }
-    langInfos.sort { entry -> entry.code }
-    expand('languages': langInfos)
+    expand('languages': {
+                def langNameExceptions = loadProperties(file('doc_src/lang_exceptions.properties'))
+                docPropsFiles.toSorted { it.parentFile.name }.collect { props ->
+                    def docVersion = loadProperties(props).version
+                    ['code'  : props.parentFile.name, 'nomanual': false, 'version': docVersion,
+                     'name'  : langNameExceptions[props.parentFile.name] ?:
+                             Locale.forLanguageTag(props.parentFile.name.replace('_', '-')).getDisplayName(),
+                     'status': docVersion == omtVersion.version ? 'up-to-date' : 'out-of-date']
+                }})
     filteringCharset = 'UTF-8'
     group = 'documentation'
 }
@@ -508,7 +504,7 @@ manualIndexXmls.each { xml ->
     def versionProperties = loadProperties(file("doc_src/${lang}/version_${lang}.properties"))
     if (lang.equals("en") || versionProperties.version.equals(omtVersion.version)) {
         tasks.register(zipTaskName, Zip) {
-            from file(layout.buildDirectory.file("docs/manual/${lang}"))
+            from fileTree(dir: layout.buildDirectory.file("docs/manual/${lang}"))
             from fileTree(dir: "doc_src/${lang}", include: "**/version*.properties")
             archiveFileName = "${lang}.zip"
             destinationDirectory = file("${buildDir}/docs/manuals/")

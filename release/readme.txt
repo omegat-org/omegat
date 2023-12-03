@@ -198,3 +198,7 @@ Requests for Enhancements (in English), at the SourceForge site:
 Bug reports (in English), at the SourceForge site:
 
   https://sourceforge.net/p/omegat/bugs/
+
+OmegaT Contribution Guide
+
+  https://omegat.readthedocs.io/en/latest/

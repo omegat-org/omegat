@@ -430,21 +430,20 @@ launch4j {
 tasks.register('genDocIndex', Copy) {
     def docPropsFiles = fileTree(dir: 'doc_src', include: '*/version*.properties').findAll {
         file("${it.parent}/OmegaTUsersManual_xinclude full.xml").file }
+    def langNameExceptions = loadProperties(file('doc_src/lang_exceptions.properties'))
+    def langInfos = docPropsFiles.toSorted{ it.parentFile.name }.collect { props ->
+        def docVersion = loadProperties(props).version
+        ['code': props.parentFile.name, 'nomanual': false, 'version': docVersion,
+         'name': langNameExceptions[props.parentFile.name] ?:
+                 Locale.forLanguageTag(props.parentFile.name.replace('_', '-')).getDisplayName(),
+         'status': docVersion == omtVersion.version ? 'up-to-date' : 'out-of-date'] }
     description = 'Generate the docs index file'
     inputs.files docPropsFiles
     outputs.files layout.buildDirectory.file("docs/manual/index.html")
     from('doc_src/index_template.html')
     into "${buildDir}/docs/manual"
     rename('index_template.html', 'index.html')
-    expand('languages': {
-                def langNameExceptions = loadProperties(file('doc_src/lang_exceptions.properties'))
-                docPropsFiles.toSorted { it.parentFile.name }.collect { props ->
-                    def docVersion = loadProperties(props).version
-                    ['code'  : props.parentFile.name, 'nomanual': false, 'version': docVersion,
-                     'name'  : langNameExceptions[props.parentFile.name] ?:
-                             Locale.forLanguageTag(props.parentFile.name.replace('_', '-')).getDisplayName(),
-                     'status': docVersion == omtVersion.version ? 'up-to-date' : 'out-of-date']
-                }})
+    expand('languages': langInfos)
     filteringCharset = 'UTF-8'
     group = 'documentation'
 }

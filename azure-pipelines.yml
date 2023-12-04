@@ -131,8 +131,7 @@ stages:
       - script: |
           version=$(./gradlew -qq printVersion | head -n -1 )
           echo "##vso[task.setvariable variable=version]$version"
-      - ${{ if and(in(variables['Agent.JobStatus'], 'Succeeded', 'SucceededWithIssues'), or(eq(variables.isMain, true), eq(variables.isReleasesBranch, true))) }}:
-        - template: ci/azure-pipelines/build_steps.yml
+      - template: ci/azure-pipelines/build_steps.yml
       - ${{ if and(in(variables['Agent.JobStatus'], 'Succeeded', 'SucceededWithIssues'), or(eq(variables.isMain, true), eq(variables.isReleasesBranch, true))) }}:
         - template: ci/azure-pipelines/publish_weekly.yml
           parameters:

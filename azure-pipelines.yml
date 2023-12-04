@@ -131,10 +131,12 @@ stages:
       - script: |
           version=$(./gradlew -qq printVersion | head -n -1 )
           echo "##vso[task.setvariable variable=version]$version"
-      - template: ci/azure-pipelines/build_steps.yml
-      - template: ci/azure-pipelines/publish_weekly.yml
-        parameters:
-          omegatVersion: $(version)
+      - ${{ if and(succeeded(), or(eq(variables.isMain, true), eq(variables.isReleasesBranch, true))) }}:
+        - template: ci/azure-pipelines/build_steps.yml
+      - ${{ if and(succeeded(), or(eq(variables.isMain, true), eq(variables.isReleasesBranch, true))) }}:
+        - template: ci/azure-pipelines/publish_weekly.yml
+          parameters:
+            omegatVersion: $(version)
 
   # Release steps will run on the main and/or release branch with tags.
 - stage: Release

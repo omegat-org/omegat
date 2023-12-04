@@ -1,10 +1,6 @@
-parameters:
-  condition: false
-
 steps:
   - task: Bash@3
     displayName: 📂 SCP upload to sourceforge file management
-    condition: ${{ parameters.condition }}
     inputs:
       targetType: 'inline'
       script: |

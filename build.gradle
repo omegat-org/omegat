@@ -460,6 +460,7 @@ tasks.register('genDocIndex', Copy) {
     rename('index_template.html', 'index.html')
     expand('languages': langInfos)
     filteringCharset = 'UTF-8'
+    dependsOn manualHtmls
     group = 'documentation'
 }
 

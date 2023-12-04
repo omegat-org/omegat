@@ -452,11 +452,13 @@ tasks.register('genDocIndex', Copy) {
          'name': langNameExceptions[props.parentFile.name] ?:
                  Locale.forLanguageTag(props.parentFile.name.replace('_', '-')).getDisplayName(),
          'status': docVersion == omtVersion.version ? 'up-to-date' : 'out-of-date'] }
+    def inputTemplate = file('doc_src/index_template.html')
+    def outputIndex = layout.buildDirectory.file("docs/manual/index.html").get().asFile
     description = 'Generate the docs index file'
-    inputs.files docPropsFiles
-    outputs.files layout.buildDirectory.file("docs/manual/index.html")
-    from('doc_src/index_template.html')
-    into layout.buildDirectory.file("docs/manual")
+    inputs.files docPropsFiles, inputTemplate
+    outputs.files file(outputIndex)
+    from inputTemplate
+    into outputIndex.parent
     rename('index_template.html', 'index.html')
     expand('languages': langInfos)
     filteringCharset = 'UTF-8'
@@ -510,7 +512,8 @@ manualIndexXmls.each { xml ->
     if (lang.equals("en") || versionProperties.version.equals(omtVersion.version)) {
         tasks.register(zipTaskName, Zip) {
             from fileTree(dir: layout.buildDirectory.file("docs/manual/${lang}"))
-            from fileTree(dir: "doc_src/${lang}", include: "**/version*.properties")
+            exclude 'docs/manual/index.html'
+            from fileTree(dir: "doc_src/${lang}", include: '**/version*.properties')
             archiveFileName = "${lang}.zip"
             destinationDirectory = file("${buildDir}/docs/manuals/")
         }

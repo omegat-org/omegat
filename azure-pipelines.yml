@@ -153,7 +153,7 @@ stages:
           version=$(./gradlew -qq printVersion | head -n -1 )
           echo "##vso[task.setvariable variable=version]$version"
       - template: ci/azure-pipelines/build_steps.yml
-      - ${{ if and(in(variables['Agent.JobStatus'], 'Succeeded') }}:
+      - ${{ if in(variables['Agent.JobStatus'], 'Succeeded') }}:
         - template: ci/azure-pipelines/publish_release.yml
           parameters:
             omegatVersion: $(version)

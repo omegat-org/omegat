@@ -38,45 +38,39 @@ variables:
   isMain: $[eq(variables['Build.SourceBranch'], 'refs/heads/master')]
 
 stages:
-- stage: DocCI
-  condition: ne(variables.isRelease, true)
-  pool:
-    vmImage: 'ubuntu-22.04'
+- stage: TestAndDocCI
+  condition: and(ne(variables['Build.Reason'], 'Schedule'), ne(variables['Build.Reason'], 'Manual'), ne(variables .isRelease, true))
   jobs:
   - job: docCheckAndSnapshotRelease
     steps:
-    - checkout: self
-      clean: true
-      fetchDepth: 10
-      fetchTags: true
-      lfs: false
-    - bash: |
-        if [[ "${{ variables['Build.SourceBranch'] }}" == "refs/heads/master" ]]; then
-          # check latest commit
-          files=$(git diff-tree --no-commit-id --name-only -r HEAD)
-        else
-          # pull-request changes
-          git fetch origin master
-          files=$(git diff-tree --no-commit-id --name-only -r origin/master..HEAD)
-        fi
-        for file in $files; do
-          if [[ $file =~ ^doc_src ]]; then
-            echo "##vso[task.setvariable variable=changeDoc;]True"
-            exit 0
+      - checkout: self
+        clean: true
+        fetchDepth: 10
+        fetchTags: true
+        lfs: false
+      - bash: |
+          if [[ "${{ variables['Build.SourceBranch'] }}" == "refs/heads/master" ]]; then
+            # check latest commit
+            files=$(git diff-tree --no-commit-id --name-only -r HEAD)
+          else
+            # pull-request changes
+            git fetch origin master
+            files=$(git diff-tree --no-commit-id --name-only -r origin/master..HEAD)
           fi
-        done
-        echo "##vso[task.setvariable variable=changeDoc;]False"
-      name: checkChangeDoc
-    - template: ci/azure-pipelines/build_doc_steps.yml
-      parameters:
-        condition: eq(variables.changeDoc, 'True')
-    - template: ci/azure-pipelines/publish_manual_snapshot.yml
-      parameters:
-        condition: and(eq(variables.changeDoc, 'True'), in(variables['Agent.JobStatus'], 'Succeeded', 'SucceededWithIssues'), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
-
-- stage: Test
-  condition: not(or(eq(variables['Build.Reason'], 'Schedule'), eq(variables['Build.Reason'], 'Manual'), eq(variables.isRelease, true)))
-  jobs:
+          for file in $files; do
+            if [[ $file =~ ^doc_src ]]; then
+              echo "##vso[task.setvariable variable=changeDoc;]True"
+              exit 0
+            fi
+          done
+          echo "##vso[task.setvariable variable=changeDoc;]False"
+        name: checkChangeDoc
+      - template: ci/azure-pipelines/build_doc_steps.yml
+        parameters:
+          condition: eq(variables.changeDoc, 'True')
+      - template: ci/azure-pipelines/publish_manual_snapshot.yml
+        parameters:
+          condition: and(eq(variables.changeDoc, 'True'), in(variables['Agent.JobStatus'], 'Succeeded', 'SucceededWithIssues'), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
   - job: TestOnJava11
     displayName: on Java 11
     pool:

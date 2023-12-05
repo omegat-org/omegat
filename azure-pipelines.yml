@@ -67,12 +67,12 @@ stages:
         done
         echo "##vso[task.setvariable variable=changeDoc;]False"
       name: checkChangeDoc
-    - ${{ if eq(variables.changeDoc, 'True') }}:
-      - template: ci/azure-pipelines/build_doc_steps.yml
-    - ${{ if and(eq(variables.changeDoc, 'True'), eq(variables['Build.SourceBranch'], 'refs/heads/master')) }}:
-      - template: ci/azure-pipelines/publish_manual_snapshot.yml
-        parameters:
-          condition: in(variables['Agent.JobStatus'], 'Succeeded', 'SucceededWithIssues')
+    - template: ci/azure-pipelines/build_doc_steps.yml
+      parameters:
+        condition: eq(variables.changeDoc, 'True')
+    - template: ci/azure-pipelines/publish_manual_snapshot.yml
+      parameters:
+        condition: and(eq(variables.changeDoc, 'True'), in(variables['Agent.JobStatus'], 'Succeeded', 'SucceededWithIssues'), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
 
 - stage: Test
   condition: not(or(eq(variables['Build.Reason'], 'Schedule'), eq(variables['Build.Reason'], 'Manual'), eq(variables.isRelease, true)))
@@ -150,11 +150,10 @@ stages:
           version=$(./gradlew -qq printVersion | head -n -1 )
           echo "##vso[task.setvariable variable=version]$version"
       - template: ci/azure-pipelines/build_steps.yml
-      - ${{ if or(eq(variables.isMain, true), eq(variables.isReleasesBranch, true)) }}:
-        - template: ci/azure-pipelines/publish_weekly.yml
-          parameters:
-            omegatVersion: $(version)
-            condition: $(Agent.JobStatus)
+      - template: ci/azure-pipelines/publish_weekly.yml
+        parameters:
+          omegatVersion: $(version)
+          condition: and(eq(variables['Build.SourceBranch'], 'refs/heads/master'), eq(variable['Agent.JobStatus'), 'Succeeded'))
 
   # Release steps will run on the main and/or release branch with tags.
 - stage: Release

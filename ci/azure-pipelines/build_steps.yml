@@ -27,12 +27,11 @@ steps:
       path: '$(GRADLE_USER_HOME)'
   - script: |
       umask a+w
-      mkdir -p build
       chmod -R a+w doc_src
     displayName: 'Preparation for build'
   - task: Gradle@3
     inputs:
-      tasks: 'sourceDistZip distZip mac linux win'
+      tasks: 'clean sourceDistZip distZip mac linux win'
       options: '--build-cache -PenvIsCi -PassetDir=$(System.ArtifactsDirectory)/asset'
       jdkVersionOption: '1.17'
     displayName: 'Build distribution packages and docs'

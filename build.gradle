@@ -427,13 +427,18 @@ launch4j {
     priority = 'normal'
 }
 
+tasks.register('manualZips') {
+    description = 'Build ZIP manuals to bundle into application. Requires container runtime.'
+    group = 'documentation'
+}
+
 tasks.register('manualPdfs') {
-    description = 'Build PDF manuals for all languages. Requires Docker.'
+    description = 'Build PDF manuals for all languages. Requires container runtime.'
     group = 'documentation'
 }
 
 tasks.register('manualHtmls') {
-    description = 'Build HTML manuals and zip for all languages. Requires Docker.'
+    description = 'Build HTML manuals and zip for all languages. Requires container runtime.'
     group = 'documentation'
 }
 
@@ -447,11 +452,13 @@ tasks.register('genDocIndex', Copy) {
          'name': langNameExceptions[props.parentFile.name] ?:
                  Locale.forLanguageTag(props.parentFile.name.replace('_', '-')).getDisplayName(),
          'status': docVersion == omtVersion.version ? 'up-to-date' : 'out-of-date'] }
+    def inputTemplate = file('doc_src/index_template.html')
+    def outputIndex = layout.buildDirectory.file("docs/manual/index.html").get().asFile
     description = 'Generate the docs index file'
-    inputs.files docPropsFiles
-    outputs.files layout.buildDirectory.file("docs/manual/index.html")
-    from('doc_src/index_template.html')
-    into layout.buildDirectory.file("docs/manual")
+    inputs.files docPropsFiles, inputTemplate
+    outputs.files file(outputIndex)
+    from inputTemplate
+    into outputIndex.parent
     rename('index_template.html', 'index.html')
     expand('languages': langInfos)
     filteringCharset = 'UTF-8'
@@ -505,10 +512,12 @@ manualIndexXmls.each { xml ->
     if (lang.equals("en") || versionProperties.version.equals(omtVersion.version)) {
         tasks.register(zipTaskName, Zip) {
             from fileTree(dir: layout.buildDirectory.file("docs/manual/${lang}"))
-            from fileTree(dir: "doc_src/${lang}", include: "**/version*.properties")
+            exclude 'docs/manual/index.html'
+            from fileTree(dir: "doc_src/${lang}", include: '**/version*.properties')
             archiveFileName = "${lang}.zip"
             destinationDirectory = file("${buildDir}/docs/manuals/")
         }
+        manualZips.dependsOn zipTaskName
         tasks.getByName(zipTaskName).dependsOn htmlTaskName
     }
 }
@@ -622,10 +631,6 @@ distributions {
             project.tasks.matching {it.name.startsWith('manualZip')}.forEach {
                 from(it.outputs) { into 'docs/manuals' }
             }
-            from('docs') {
-                into 'docs'
-                include '**/*.properties'
-            }
             from('scripts') {
                 into 'scripts'
             }
@@ -671,7 +676,7 @@ distributions {
     source {
         contents {
             from(rootDir) {
-                include 'config/**', 'ci/iscc', 'ci/osslsigncode', 'docs/**', 'images/**', 'lib/**', 'release/**',
+                include 'config/**', 'ci/iscc', 'ci/osslsigncode', 'images/**', 'lib/**', 'release/**',
                     'src/**/*.java', 'test/**', 'test-integration/**', 'doc_src/**', 'docs_devel/**', 'scripts/**',
                     'gradle/**', 'gradle*', 'build.gradle', 'settings.gradle', 'README.md', '*.properties',
                     'tipoftheday/**', 'machinetranslators/**', 'scriptengine/**', 'LICENSE', 'compose.yml',
@@ -695,8 +700,6 @@ distributions {
                 "${application.applicationName}_${project.version}${omtVersion.beta}_Source.zip")
     }
 }
-
-sourceDistZip.dependsOn genDocIndex
 
 def hunspellJar = configurations.runtimeClasspath.files.find {
     it.name.startsWith('hunspell')
@@ -977,13 +980,11 @@ tasks.register('jars', Copy) {
 // appContent requires jpackage command in JDK 18 or later
 // this is compat task to work as same as appContent command of jpackage
 tasks.register('jpackageAppContentManuals', Copy) {
-    dependsOn jpackage
-    // Enable when manual generation is in a build dependency.
-    // dependsOn updateManuals
+    dependsOn jpackage, manualZips
 
+    from layout.buildDirectory.file('docs/manuals')
+    include '*.zip'
     into layout.buildDirectory.file("jpackage/app-image/${application.applicationName}/lib/docs")
-    from 'docs'
-    exclude 'index.html'
 }
 
 tasks.register('jpackageAppContentDocs', Copy) {

@@ -1,6 +1,10 @@
+parameters:
+  condition: false
+
 steps:
   - task: Cache@2
     displayName: 'Cache Gradle'
+    condition: ${{ parameters.condition }}
     inputs:
       key: 'gradle | $(Agent.OS) | $(Build.SourcesDirectory)/build.gradle'
       path: '$(GRADLE_USER_HOME)'
@@ -8,6 +12,7 @@ steps:
       umask a+w
       chmod -R a+w doc_src
       $(Build.SourcesDirectory)/gradlew --build-cache -PenvIsCi clean webManual manualZips
+    condition: ${{ parameters.condition }}
     displayName: 'Run Gradle webManual'
   - script: echo "##vso[task.setvariable variable=result;]false"
     condition: failed()
@@ -18,5 +23,5 @@ steps:
       if [[ "$(result)" == "false" ]]; then
         exit 1
       fi
-    condition: always()
+    condition: ${{ parameters.condition }}
     displayName: Gradlew stop

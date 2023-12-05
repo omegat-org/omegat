@@ -47,7 +47,8 @@ stages:
     steps:
     - checkout: self
       clean: true
-      fetchDepth: 20
+      fetchDepth: 10
+      fetchTags: true
       lfs: false
     - bash: |
         if [[ "${{ variables['Build.SourceBranch'] }}" == "refs/heads/master" ]]; then
@@ -82,7 +83,8 @@ stages:
       vmImage: 'ubuntu-22.04'
     steps:
       - checkout: self
-        fetchDepth: 2
+        fetchDepth: 1
+        fetchTags: false
       - template: ci/azure-pipelines/test_steps.yml
   - job: TestOnJava17
     displayName: on Java 17
@@ -90,7 +92,8 @@ stages:
       vmImage: 'ubuntu-22.04'
     steps:
       - checkout: self
-        fetchDepth: 2
+        fetchDepth: 1
+        fetchTags: false
       - template: ci/azure-pipelines/test_java17_steps.yml
   - job: testOnWindows
     displayName: on Java 17 on Windows
@@ -106,7 +109,8 @@ stages:
       vmImage: 'macOS-latest'
     steps:
       - checkout: self
-        fetchDepth: 2
+        fetchDepth: 1
+        fetchTags: false
       - template: ci/azure-pipelines/test_java17_steps.yml
 
   # Weekly release steps will be triggerred after integration-test succeeded.
@@ -125,7 +129,8 @@ stages:
       vmImage: 'ubuntu-22.04'
     steps:
       - checkout: self
-        fetchDepth: 2
+        fetchDepth: 1
+        fetchTags: false
       - template: ci/azure-pipelines/integ_test_steps.yml
         parameters:
           testType: 'GIT'
@@ -139,7 +144,8 @@ stages:
       vmImage: 'ubuntu-22.04'
     steps:
       - checkout: self
-        fetchDepth: 2
+        fetchDepth: 1
+        fetchTags: false
       - script: |
           version=$(./gradlew -qq printVersion | head -n -1 )
           echo "##vso[task.setvariable variable=version]$version"
@@ -165,6 +171,8 @@ stages:
       vmImage: 'ubuntu-22.04'
     steps:
       - checkout: self
+        fetchDepth: 0
+        fetchTags: true
       - script: |
           version=$(./gradlew -qq printVersion | head -n -1 )
           echo "##vso[task.setvariable variable=version]$version"

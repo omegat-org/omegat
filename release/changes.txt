@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 6.1.0
 ----------------------------------------------------------------------
-  31 Enhancement
+  35 Enhancement
   51 Bug fixes
 ----------------------------------------------------------------------
 6.1.0 vs 6.0.0
@@ -10,6 +10,12 @@
 
   - Support for Stardict's Pango content type
   https://sourceforge.net/p/omegat/feature-requests/1727/
+
+  - AbstractFilter should handle BOM when create reader
+  https://sourceforge.net/p/omegat/feature-requests/1726/
+
+  -Trim authentication details in team projects
+  https://sourceforge.net/p/omegat/feature-requests/1725/
 
   - Provide package "deb" and "rpm" as distribution format for linux
   https://sourceforge.net/p/omegat/feature-requests/1721/
@@ -28,6 +34,9 @@
 
   - ResourceBundle Filter: default not to escape Unicode character
   https://sourceforge.net/p/omegat/feature-requests/1716/
+
+  - ResourceBundle filter: "Don't translate NOI18N comment" feature optional
+  https://sourceforge.net/p/omegat/feature-requests/1713/
 
   - Use SLF4J as logging facade framework
   https://sourceforge.net/p/omegat/feature-requests/1710/
@@ -59,8 +68,11 @@
   - Generate and compile TXT and JSON file when committing target files
   https://sourceforge.net/p/omegat/feature-requests/1690/
 
-  - Build System: update gradle verison to 7.5.1
+  - Build System: update gradle version to 7.5.1
   https://sourceforge.net/p/omegat/feature-requests/1691/
+
+  - MT: IBM watson accept 50KB text
+  https://sourceforge.net/p/omegat/feature-requests/1676/
 
   - GUI: automatically adapt colour scheme to OS colour preference on Windows and macOS
   https://sourceforge.net/p/omegat/feature-requests/1675/

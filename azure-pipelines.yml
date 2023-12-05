@@ -153,7 +153,7 @@ stages:
       - template: ci/azure-pipelines/publish_weekly.yml
         parameters:
           omegatVersion: $(version)
-          condition: and(eq(variables['Build.SourceBranch'], 'refs/heads/master'), eq(variable['Agent.JobStatus'), 'Succeeded'))
+          condition: and(eq(variables['Build.SourceBranch'], 'refs/heads/master'), eq(variable['Agent.JobStatus'], 'Succeeded'))
 
   # Release steps will run on the main and/or release branch with tags.
 - stage: Release

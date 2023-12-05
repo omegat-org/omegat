@@ -2,12 +2,12 @@ parameters:
   - name: omegatVersion
     default: ''
   - name: condition
-    default: false
+    default: ''
 
 steps:
   - task: Bash@3
     displayName: 📂 SCP upload to sourceforge file management
-    condition: ${{ parameters.condition }}
+    condition: in('${{ parameters.condition }}', 'Succeeded', 'SucceededWithIssues')
     inputs:
       targetType: 'inline'
       script: |

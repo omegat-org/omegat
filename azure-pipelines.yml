@@ -38,45 +38,39 @@ variables:
   isMain: $[eq(variables['Build.SourceBranch'], 'refs/heads/master')]
 
 stages:
-- stage: DocCI
-  condition: ne(variables.isRelease, true)
-  pool:
-    vmImage: 'ubuntu-22.04'
+- stage: TestAndDocCI
+  condition: and(ne(variables['Build.Reason'], 'Schedule'), ne(variables['Build.Reason'], 'Manual'), ne(variables .isRelease, true))
   jobs:
   - job: docCheckAndSnapshotRelease
     steps:
-    - checkout: self
-      clean: true
-      fetchDepth: 10
-      fetchTags: true
-      lfs: false
-    - bash: |
-        if [[ "${{ variables['Build.SourceBranch'] }}" == "refs/heads/master" ]]; then
-          # check latest commit
-          files=$(git diff-tree --no-commit-id --name-only -r HEAD)
-        else
-          # pull-request changes
-          git fetch origin master
-          files=$(git diff-tree --no-commit-id --name-only -r origin/master..HEAD)
-        fi
-        for file in $files; do
-          if [[ $file =~ ^doc_src ]]; then
-            echo "##vso[task.setvariable variable=changeDoc;]True"
-            exit 0
+      - checkout: self
+        clean: true
+        fetchDepth: 10
+        fetchTags: true
+        lfs: false
+      - bash: |
+          if [[ "${{ variables['Build.SourceBranch'] }}" == "refs/heads/master" ]]; then
+            # check latest commit
+            files=$(git diff-tree --no-commit-id --name-only -r HEAD)
+          else
+            # pull-request changes
+            git fetch origin master
+            files=$(git diff-tree --no-commit-id --name-only -r origin/master..HEAD)
           fi
-        done
-        echo "##vso[task.setvariable variable=changeDoc;]False"
-      name: checkChangeDoc
-    - ${{ if eq(variables.changeDoc, 'True') }}:
+          for file in $files; do
+            if [[ $file =~ ^doc_src ]]; then
+              echo "##vso[task.setvariable variable=changeDoc;]True"
+              exit 0
+            fi
+          done
+          echo "##vso[task.setvariable variable=changeDoc;]False"
+        name: checkChangeDoc
       - template: ci/azure-pipelines/build_doc_steps.yml
-    - ${{ if and(eq(variables.changeDoc, 'True'), eq(variables['Build.SourceBranch'], 'refs/heads/master')) }}:
+        parameters:
+          condition: eq(variables.changeDoc, 'True')
       - template: ci/azure-pipelines/publish_manual_snapshot.yml
         parameters:
-          condition: in(variables['Agent.JobStatus'], 'Succeeded', 'SucceededWithIssues')
-
-- stage: Test
-  condition: not(or(eq(variables['Build.Reason'], 'Schedule'), eq(variables['Build.Reason'], 'Manual'), eq(variables.isRelease, true)))
-  jobs:
+          condition: and(eq(variables.changeDoc, 'True'), in(variables['Agent.JobStatus'], 'Succeeded', 'SucceededWithIssues'), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
   - job: TestOnJava11
     displayName: on Java 11
     pool:
@@ -150,11 +144,10 @@ stages:
           version=$(./gradlew -qq printVersion | head -n -1 )
           echo "##vso[task.setvariable variable=version]$version"
       - template: ci/azure-pipelines/build_steps.yml
-      - ${{ if or(eq(variables.isMain, true), eq(variables.isReleasesBranch, true)) }}:
-        - template: ci/azure-pipelines/publish_weekly.yml
-          parameters:
-            omegatVersion: $(version)
-            condition: $(Agent.JobStatus)
+      - template: ci/azure-pipelines/publish_weekly.yml
+        parameters:
+          omegatVersion: $(version)
+          condition: and(eq(variables['Build.SourceBranch'], 'refs/heads/master'), eq(variable['Agent.JobStatus'], 'Succeeded'))
 
   # Release steps will run on the main and/or release branch with tags.
 - stage: Release

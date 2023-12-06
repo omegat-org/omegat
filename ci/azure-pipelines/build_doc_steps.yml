@@ -1,22 +1,22 @@
+parameters:
+  condition: false
+
 steps:
   - task: Cache@2
     displayName: 'Cache Gradle'
+    condition: ${{ parameters.condition }}
     inputs:
       key: 'gradle | $(Agent.OS) | $(Build.SourcesDirectory)/build.gradle'
       path: '$(GRADLE_USER_HOME)'
   - script: |
       umask a+w
       chmod -R a+w doc_src
-      $(Build.SourcesDirectory)/gradlew --build-cache -PenvIsCi clean webManual manualZips
-    displayName: 'Run Gradle webManual'
-  - script: echo "##vso[task.setvariable variable=result;]false"
-    condition: failed()
-  - script: |
-      # stop the Gradle daemon to ensure no files are left open (impacting the save cache operation later)
-      ./gradlew --stop
-      # Check task result
-      if [[ "$(result)" == "false" ]]; then
-        exit 1
-      fi
-    condition: always()
-    displayName: Gradlew stop
+    condition: ${{ parameters.condition }}
+    displayName: 'Prepare'
+  - task: Gradle@3
+    condition: ${{ parameters.condition }}
+    inputs:
+      tasks: 'clean webManual'
+      options: '-PenvIsCi --no-daemon'
+      jdkVersionOption: '1.17'
+    displayName: 'Run Gradle clean&webManual'

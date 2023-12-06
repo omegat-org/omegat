@@ -486,6 +486,9 @@ manualIndexXmls.each { xml ->
         outputs.file "${buildDir}/build/docs/pdfs/OmegaT_documentation_${lang}.PDF"
         workingDir = 'doc_src'
         commandLine './docgen', "-Dlanguage=${lang}", "-Dtarget=../build/docs/pdfs", 'pdf'
+        onlyIf {
+            conditions([exePresent('docker') || exePresent('nerdctl'), 'Docker or nerdctl is not installed'])
+        }
         doLast {
             copy {
                 from fileTree(dir: "doc_src/${lang}/pdf", include: '*.PDF')
@@ -502,6 +505,9 @@ manualIndexXmls.each { xml ->
                 excludes: ['xhtml5/*', 'index.xml'])
         outputs.files fileTree(dir: layout.buildDirectory.file("docs/manual/${lang}/"),
                 includes: ['*.html', 'OmegaT.css', 'images/*.png', '_wh/**/*.js', '_wh/wh.css'])
+        onlyIf {
+            conditions([exePresent('docker') || exePresent('nerdctl'), 'Docker or nerdctl is not installed'])
+        }
         workingDir = 'doc_src'
         commandLine './docgen', "-Dlanguage=${lang}", "-Dtarget=../build/docs/manual/${lang}", 'html5'
     }
@@ -541,6 +547,9 @@ firstStepsXmls.each { xml ->
         inputs.files fileTree(dir: "doc_src/${lang}", include: 'First_Steps.xml')
         outputs.files fileTree(dir: layout.buildDirectory.file('docs/greetings/'),
                 includes: ["${lang}/first_steps.html", "${lang}/OmegaT.css"])
+        onlyIf {
+            conditions([exePresent('docker') || exePresent('nerdctl'), 'Docker or nerdctl is not installed'])
+        }
         workingDir = 'doc_src'
         commandLine './docgen', "-Dlanguage=${lang}", "-Dtarget=../build/docs/greetings/${lang}", 'first-steps'
     }
@@ -556,6 +565,9 @@ instantStartXmls.each { xml ->
         inputs.files fileTree(dir: "doc_src/${lang}", includes: ['InstantStartGuide.xml', '**/InstantGuide*png'])
         outputs.files fileTree(dir: layout.buildDirectory.file('docs/greetings/'),
                 includes: ["${lang}/first_steps.html", "${lang}/images/InstantGuide*png", "${lang}/OmegaT.css"])
+        onlyIf {
+            conditions([exePresent('docker') || exePresent('nerdctl'), 'Docker or nerdctl is not installed'])
+        }
         workingDir = 'doc_src'
         commandLine './docgen', "-Dlanguage=${lang}", "-Dtarget=../build/docs/greetings/${lang}", 'instant-start'
     }
@@ -708,7 +720,8 @@ def hunspellJar = configurations.runtimeClasspath.files.find {
 tasks.register('hunspellJarSignedContents', Sync) {
     onlyIf {
         // Set this in e.g. local.properties
-        condition(project.hasProperty('macCodesignIdentity'), 'Code signing property not set')
+        conditions([project.hasProperty('macCodesignIdentity'), 'Code signing property not set'],
+                [exePresent('codesign'), 'codesign command is not present in system.'])
     }
     from zipTree(hunspellJar)
 
@@ -833,7 +846,8 @@ ext.makeMacTask = { args ->
         onlyIf {
             // Set this in e.g. local.properties
             conditions([project.hasProperty('macCodesignIdentity'), 'Code signing property not set'],
-                       [args.jrePath && !args.jrePath.empty, 'JRE not found'])
+                       [args.jrePath && !args.jrePath.empty, 'JRE not found'],
+                       [exePresent('codesign'), 'codesign command is not present in system.'])
         }
         from(tasks.getByName(installTaskName).outputs)
         from(hunspellSignedJar.outputs) {
@@ -869,8 +883,8 @@ ext.makeMacTask = { args ->
 
     tasks.register(notarizeTaskName, Exec) {
         onlyIf {
-            condition(project.hasProperty('macNotarizationUsername'),
-                    'Username for notarization not set')
+            conditions([project.hasProperty('macNotarizationUsername'), 'Username for notarization not set'],
+                    [exePresent('xcrun'), 'XCode is not present in system.'])
         }
         inputs.files tasks.getByName(signedZipTaskName).outputs.files
         doLast {
@@ -891,6 +905,9 @@ ext.makeMacTask = { args ->
         def zipRoot = "${application.applicationName}_${project.version}${omtVersion.beta}_${args.suffix}_Notarized"
         from tasks.getByName(signedInstallTaskName).outputs
         into zipRoot
+        onlyIf {
+            condition(exePresent('xcrun'), 'XCode is not present in system.')
+        }
         doFirst {
             if (args.name.equals("mac")) {
                 exec {
@@ -1033,6 +1050,10 @@ tasks.jpackage {
     dependsOn cleanJpkgWorkdir
     dependsOn jars
 
+    onlyIf {
+        condition(JavaVersion.current() == JavaVersion.VERSION_17, 'Require java17 or later to run gradle.')
+    }
+
     input = file(layout.buildDirectory.file('jars'))
     destination = file(layout.buildDirectory.file("jpackage/app-image"))
     appName = application.applicationName
@@ -1073,7 +1094,8 @@ tasks.register("linuxDebDist", JPackageTask) {
 
     group 'distribution'
     onlyIf {
-        condition(exePresent('dpkg-deb'), 'dpkg-deb command is not installed')
+        conditions([exePresent('dpkg-deb'), 'dpkg-deb command is not installed'],
+                [JavaVersion.current() == JavaVersion.VERSION_17, 'Require java17 or later to run gradle.'])
     }
 
     appName = application.applicationName
@@ -1113,7 +1135,8 @@ tasks.register("linuxRpmDist", JPackageTask) {
 
     group 'distribution'
     onlyIf {
-        condition(exePresent('rpm'), 'rpm command is not installed')
+        conditions([exePresent('rpm'), 'rpm command is not installed'],
+                [JavaVersion.current() == JavaVersion.VERSION_17, 'Require java17 or later to run gradle.'])
     }
 
     appName = application.applicationName

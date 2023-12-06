@@ -11,9 +11,5 @@ steps:
     displayName: Check
     inputs:
       tasks: check
-      options: '--build-cache -PenvIsCi'
-      jdkVersionOption: '1.11'
-  - script: |
-      # stop the Gradle daemon to ensure no files are left open (impacting the save cache operation later)
-      ./gradlew --stop
-    displayName: Gradlew stop
+      options: '-PenvIsCi --no-daemon'
+      jdkVersionOption: '1.17'

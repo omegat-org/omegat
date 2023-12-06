@@ -29,6 +29,7 @@ dependencies {
 jar {
     archiveAppendix.set("spellchecker")
     destinationDirectory.set(rootProject.layout.buildDirectory.dir("modules").get())
+    from configurations.runtimeClasspath.collect {it.isDirectory() ? it : zipTree(it)}
     def pluginProp = loadProperties(file('plugin.properties'))
     manifest {
         attributes('License': 'GNU Public License version 3 or later',

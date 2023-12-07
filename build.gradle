@@ -988,7 +988,8 @@ tasks.register('cleanJpkgWorkdir', Delete) {
 }
 
 tasks.register('jars', Copy) {
-    from configurations.runtimeClasspath, tasks.jar
+    from configurations.runtimeClasspath
+    from(tasks.jar) { include omegatJarFilename }
     into file(layout.buildDirectory.file('jars'))
     dependsOn tasks.jar
 }

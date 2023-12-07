@@ -578,7 +578,7 @@ tasks.register('genMac') {
     def appbundlerClasspath = configurations.genMac.asPath
     def outDir = layout.buildDirectory.file("appbundler").get().toString()
     def appName = application.applicationName
-    def appClass = application.mainClass
+    def appClass = application.mainClass.get()
     description = 'Generate the Mac .app skeleton. Depends AppBundler (https://github.com/TheInfiniteKind/appbundler)'
     outputs.dir layout.buildDirectory.file("appbundler")
     doLast {
@@ -1069,7 +1069,7 @@ tasks.jpackage {
     vendor = distAppVendor
     appDescription = distDescription
     mainJar = omegatJarFilename
-    mainClass = "org.omegat.Main"
+    mainClass = application.mainClass.get()
 
     // appContent requires jpackage command in JDK 18 or later
     /*

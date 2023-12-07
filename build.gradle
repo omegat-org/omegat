@@ -996,12 +996,19 @@ tasks.register('jars', Copy) {
 // prepare japckage contents
 // appContent requires jpackage command in JDK 18 or later
 // this is compat task to work as same as appContent command of jpackage
+tasks.register('jpackageAppContentGreetings', Copy) {
+    dependsOn jpackage, firstSteps
+
+    from layout.buildDirectory.file('docs/greetings')
+    into layout.buildDirectory.file("jpackage/app-image/${application.applicationName}/lib/docs/greetings")
+}
+
 tasks.register('jpackageAppContentManuals', Copy) {
     dependsOn jpackage, manualZips
 
     from layout.buildDirectory.file('docs/manuals')
     include '*.zip'
-    into layout.buildDirectory.file("jpackage/app-image/${application.applicationName}/lib/docs")
+    into layout.buildDirectory.file("jpackage/app-image/${application.applicationName}/lib/docs/manuals")
 }
 
 tasks.register('jpackageAppContentDocs', Copy) {
@@ -1038,6 +1045,7 @@ tasks.register('jpackageAppContentModules', Sync) {
     dependsOn jpackage
 }
 tasks.register('jpackageAppContent') {
+    dependsOn jpackageAppContentGreetings
     dependsOn jpackageAppContentManuals
     dependsOn jpackageAppContentDocs
     dependsOn jpackageAppContentImages
@@ -1117,7 +1125,7 @@ tasks.register("linuxDebDist", JPackageTask) {
 
     linux {
         linuxAppCategory("editors")
-        linuxAppRelease('2')
+        linuxAppRelease('3')
         linuxDebMaintainer("info@omegat.org")
         linuxMenuGroup("Office")
         linuxPackageName("omegat")
@@ -1156,7 +1164,7 @@ tasks.register("linuxRpmDist", JPackageTask) {
 
     linux {
         linuxAppCategory("Application/Editors")
-        linuxAppRelease('2')
+        linuxAppRelease('3')
         linuxMenuGroup("Office")
         linuxPackageName("omegat")
         linuxPackageDeps(false)

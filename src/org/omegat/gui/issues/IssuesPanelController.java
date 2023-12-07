@@ -515,6 +515,7 @@ public class IssuesPanelController implements IIssues {
 
     synchronized void refreshData(int jumpToEntry, List<String> jumpToTypes) {
         reset();
+        frame.toFront();
         if (!frame.isVisible()) {
             // Don't call setVisible if already visible, because the window will
             // steal focus

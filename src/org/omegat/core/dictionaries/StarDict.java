@@ -34,13 +34,13 @@ import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
 
-import io.github.eb4j.stardict.StarDictDictionary;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.safety.Cleaner;
 import org.jsoup.safety.Safelist;
 import org.jsoup.select.Elements;
+import tokyo.northside.stardict.StarDictDictionary;
 
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;

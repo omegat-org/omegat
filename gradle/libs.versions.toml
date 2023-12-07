@@ -51,9 +51,9 @@ desktopsupport = "0.6.0"
 protocolhandler = "0.1.4"
 pdfbox = "2.0.27"
 maligna = "3.0.1"
-trie4j = "0.9.8"
+trie4j = "0.9.10_1"
 dsl4j = "0.7.1"
-stardict4j = "0.5.1"
+stardict4j = "0.6.1"
 juniversalchardet = "2.4.0"
 mnemonics = "1.1"
 jmyspell = "1.0.0-beta-2"
@@ -149,7 +149,7 @@ madlonkay-desktopsupport = {group = "org.madlonkay", name = "desktopsupport", ve
 url-protocol-handler = {group = "tokyo.northside", name = "url-protocol-handler", version.ref = "protocolhandler"}
 apache-pdfbox = {group = "org.apache.pdfbox", name = "pdfbox", version.ref = "pdfbox"}
 loomchild-maligna = {group = "net.loomchild", name = "maligna", version.ref = "maligna"}
-trie4j = {group = "com.github.takawitter", name = "trie4j", version.ref = "trie4j"}
+trie4j = {group = "tokyo.northside", name = "trie4j", version.ref = "trie4j"}
 dsl4j = {group = "tokyo.northside", name = "dsl4j", version.ref = "dsl4j"}
 stardict4j = {group = "tokyo.northside", name = "stardict4j", version.ref = "stardict4j"}
 juniversal-chardet = {group = "com.github.albfernandez", name = "juniversalchardet", version.ref = "juniversalchardet"}

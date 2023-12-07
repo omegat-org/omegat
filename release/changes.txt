@@ -2,7 +2,7 @@
  OmegaT 6.1.0
 ----------------------------------------------------------------------
   35 Enhancement
-  51 Bug fixes
+  52 Bug fixes
 ----------------------------------------------------------------------
 6.1.0 vs 6.0.0
 
@@ -115,6 +115,9 @@
 
 
   Bug fixes:
+
+  - OmegaT 6.1 macos-arm version does not launch on macOS arm machine
+  https://sourceforge.net/p/omegat/bugs/1231/
 
   - distribution for macOS only run on Java runtime 11
   https://sourceforge.net/p/omegat/bugs/1230/

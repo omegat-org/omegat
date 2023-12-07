@@ -65,7 +65,6 @@ import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.data.SourceTextEntry;
-import org.omegat.core.data.TMXEntry;
 import org.omegat.gui.editor.autocompleter.AutoCompleter;
 import org.omegat.gui.shortcuts.PropertiesShortcuts;
 import org.omegat.util.OStrings;
@@ -323,6 +322,16 @@ public class EditorTextArea3 extends JEditorPane {
             Collections.sort(popupConstructors, (o1, o2) -> o1.priority - o2.priority);
         }
     }
+    
+    private boolean isLocked = false;
+    
+    /**
+     * Set editor locked - used for segments which you should not edit
+     * To be called each time you change segment
+     **/
+    public void setLocked(boolean locked) {
+        isLocked = locked;
+    }
 
     /**
      * Redefine some keys behavior. We can't use key listeners, because we have
@@ -337,10 +346,8 @@ public class EditorTextArea3 extends JEditorPane {
             return;
         } else if (keyEvent == KeyEvent.KEY_TYPED) {
             //key typed
-            // Treat the case of enforced translations which should be locked
-            SourceTextEntry entry = controller.getCurrentEntry();
-            TMXEntry tmx = Core.getProject().getTranslationInfo(entry);
-            if (tmx.linked == TMXEntry.ExternalLinked.xENFORCED) {
+            // Treat the case of enforced translations which should be locked            
+            if (isLocked) {
                 return;
             }
             super.processKeyEvent(e);
@@ -370,6 +377,9 @@ public class EditorTextArea3 extends JEditorPane {
             // Advance when 'Use TAB to advance'
             if (controller.settings.isUseTabForAdvance()) {
                 controller.nextEntry();
+                processed = true;
+            } else if (isLocked) {
+                // We should not accept any character, including TAB
                 processed = true;
             }
         } else if (s.equals(KEYSTROKE_PREV)) {

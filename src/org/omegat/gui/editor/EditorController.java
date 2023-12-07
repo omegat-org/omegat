@@ -812,8 +812,6 @@ public class EditorController implements IEditor {
             ((NotesTextArea) notes).clearHistory();
         }
         
-        editor.setLocked(currentTranslation.linked == TMXEntry.ExternalLinked.xENFORCED);
-
         // then add new marks
         markerController.reprocessImmediately(builder);
 

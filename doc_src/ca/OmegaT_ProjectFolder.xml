@@ -240,11 +240,9 @@
       <varlistentry id="project.folder.tm.mt">
 		<term id="project.folder.tm.mt.title">tm/mt</term>
 		<listitem>
-		  <para>When a match is inserted from a TMX contained in this folder, the
-		  background colour of the active segment changes to red.</para>
+		  <para>Quan s'insereix una coincidència d'un fitxer TMX d'aquesta carpeta, el color de fons del segment actiu canvia a vermell.</para>
 
-		  <para>The background colour is restored to normal when you leave the
-		  segment or when you modify the segment.</para>
+		  <para>El color de fons es reinicialitza al normal quan sortiu del segment o quan el modifiqueu.</para>
 		</listitem>
 	  </varlistentry>
 	  

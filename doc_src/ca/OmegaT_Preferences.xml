@@ -144,8 +144,7 @@
 
     <variablelist>
       <varlistentry id="dialogs.preferences.glossary.display.context.description.for.tbx.glossaries">
-        <term id="dialogs.preferences.glossary.display.context.description.for.tbx.glossaries.title"><option>Display
-        TBX glossaries context description (TBX 2)</option></term>
+        <term id="dialogs.preferences.glossary.display.context.description.for.tbx.glossaries.title"><option>Mostra la descripció de context dels glossaris (TBX 2)</option></term>
 
         <listitem>
           <para>Desmarqueu aquesta opció si la descripció del context que es mostra per a cada entrada del glossari és innecessària o massa llarga.</para>
@@ -203,7 +202,7 @@
         <term id="dialogs.preferences.glossary.glossary.layout.title"><option>Disposició</option></term>
 
         <listitem>
-          <para>Select a layout for the glossaries pane contents. Es poden afegir disposicions addicionals com a connectors.</para>
+          <para>Seleccioneu una disposició per al contingut de la subfinestra «Glossari». Es poden afegir disposicions addicionals com a connectors.</para>
         </listitem>
       </varlistentry>
 
@@ -227,11 +226,8 @@
         <term id="dialogs.preferences.dictionary.automatically.search.segment.title"><option>Cerca automàticament</option></term>
 
         <listitem>
-          <para>While the option is disabled, use <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.search.dictionaries" endterm="menus.edit.search.dictionaries.title"/> to search for matches
-          of the selection or of all the terms in the segment source.</para>
-		  <para>When the option is enabled, OmegaT automatically searches in all
-		  the dictionaries for matches of the terms it identified in the
-		  segment, as it enters the segment.</para>
+          <para>Amb l'opció inhabilitada, utilitzeu <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.search.dictionaries" endterm="menus.edit.search.dictionaries.title"/> per a cercar coincidències de la selecció o de tots els termes del segment d'origen.</para>
+		  <para>Quan l'opció està habilitada, l'OmegaT cerca automàticament coincidències dels termes identificats en el segment en tots els diccionaris quan s'accedeix al segment.</para>
         </listitem>
       </varlistentry>
 
@@ -263,7 +259,7 @@
         <listitem>
           <para>Seleccioneu un tema per a la interfície d'usuari de l'OmegaT.</para>
 
-          <para>Es poden afegir temes addicionals com a connectors. The themes also provide predefined set of default colours.</para>
+          <para>Es poden afegir temes addicionals com a connectors. Els temes també proporcionen un conjunt predefinit de colors per defecte.</para>
 
 		  <para>No tots els temes del Java proporcionats de manera nativa són compatibles amb el funcionament de l'OmegaT.</para>
         </listitem>
@@ -298,10 +294,9 @@
 		</varlistentry>
 
 		<varlistentry>
-		  <term><option>Apply a different font size to the dictionaries pane</option></term>
+		  <term><option>Aplica una mida de lletra diferent a la subfinestra «Diccionari»</option></term>
 		  <listitem>
-			<para>By default, the dictionaries pane uses the same font size as
-			the main window panes.</para>
+			<para>Per defecte, la subfinestra «Diccionari» utilitza la mateixa mida de lletra que les subfinestres de la finestra principal.</para>
 		  </listitem>
 		</varlistentry>
 	  </variablelist>
@@ -310,16 +305,12 @@
 	<section id="dialogs.preferences.colours">
       <title id="dialogs.preferences.colours.title"><guilabel>Colors</guilabel></title>
 
-      <para>You can assign different colours for the various parts of the user
-      interface.</para>
+      <para>Podeu assignar colors diferents a les diverses parts de la interfície d'usuari.</para>
 
       <para>Es poden utilitzar scripts per a establir temes predefinits. L'OmegaT inclou un script anomenat <link linkend="windows.scripts.distribution.switch.colour.theme" endterm="windows.scripts.distribution.switch.colour.theme.title"/> que proporciona un tema fosc per defecte. Consulteu la finestra <link linkend="windows.scripts" endterm="windows.scripts.title"/> per a conèixer més detalls.</para>
 
 	  <note>
-		<para>Automatic dark theme detection is available on Linux systems
-		with the Gnome/GTK look and feel for users who run OmegaT on OpenJDK.
-		This feature depends on Java functionality that is not yet available
-		on other platforms.</para>
+		<para>La detecció automàtica de tema fosc està disponible en sistemes Linux amb l'aparença del GNOME/GTK per als usuaris que executen l'OmegaT amb l'OpenJDK. Aquesta característica depèn d'una funcionalitat del Java que encarà no està disponible en altres plataformes.</para>
 	  </note>
 	</section>
   </section>
@@ -578,7 +569,7 @@
 
 			<para>Això obre una cerca del terme {target} a DuckDuckGo amb una sèrie de paràmetres de cerca.</para></example>
 
-			<para>Les ordres s'obren en la línia d'ordres. El <guilabel>delimitador</guilabel>defineix el delimitador entre els paràmetres de l'ordre. El delimitador per defecte és <code>|</code>.</para>
+			<para>Les ordres s'obren en la línia d'ordres. El <guilabel>delimitador</guilabel> defineix el delimitador entre els paràmetres de l'ordre. El delimitador per defecte és <code>|</code>.</para>
 
 		  <example id="dialogs.preferences.external.search.items.command.example">
 			<title id="dialogs.preferences.external.search.items.command.example.title">Exemple d'ordre</title>
@@ -868,13 +859,9 @@
 	  <varlistentry id="dialog.preferences.tm.matches.minimum.threshold">
 		<term id="dialog.preferences.tm.matches.minimum.threshold.title"><option>Llindar mínim per a mostrar una coincidència parcial</option></term>
 		<listitem>
-		  <para>OmegaT displays the five best fuzzy matches above 30% by
-		  default. You can change that threshold here.</para>
+		  <para>Per defecte, l'OmegaT mostra les cinc millors coincidències parcials per sobre del 30 %. Aquí podeu canviar el llindar.</para>
 			<note>
-				<para>Each of the three types of matching percentages presented in the <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/> pane are taken into
-				account to determine whether a match is displayed. Potential
-				matches are rejected if all three percentages are below
-				the threshold.</para>
+				<para>Cadascun dels tres tipus de percentatges de coincidència indicats en la subfinestra <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/> es tenen en compte per a determinar si una coincidència es mostra o no. Es rebutgen les possibles coincidències si els tres percentatges són inferiors al llindar.</para>
 			</note>
 		</listitem>
 	  </varlistentry>
@@ -1204,8 +1191,7 @@ ${filePath}&gt;</programlisting></para>
 
 	<para>Mostra la llista de tots els connectors instal·lats.</para>
 
-	<para>Plugins are by default installed in the <link linkend="configuration.folder">configuration folder</link>, but can also be
-	installed in the <link linkend="application.folder.plugins" endterm="application.folder.plugins.title"/> folder under the <link linkend="application.folder">application</link> folder.</para>
+	<para>Per defecte, els connectors s'instal·len en la <link linkend="configuration.folder">carpeta de configuració</link>, però també es poden instal·lar en la carpeta <link linkend="application.folder.plugins" endterm="application.folder.plugins.title"/> de la carpeta de l'<link linkend="application.folder">aplicació</link>.</para>
 
 	<para>Podeu trobar connectors addicionals en el <ulink url="https://sourceforge.net/p/omegat/wiki/Plugins/">lloc de desenvolupament de l'OmegaT</ulink>.</para>
   </section>

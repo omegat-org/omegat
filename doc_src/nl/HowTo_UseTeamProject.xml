@@ -1,71 +1,170 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="howto.useteamproject">
-  <title>Een Teamproject gebruiken</title>
+<section id="how.to.use.team.project">
+  <title id="how.to.use.team.project.title">Een Teamproject gebruiken</title>
 
-  <para>Teamprojecten voor OmegaT moeten eerst zijn <link linkend="howto.setupteamproject">ingesteld</link> op een server.</para>
+  <para>Teamprojecten gebruiken mechanismen voor synchronisatie tussen projectleden.</para>
 
-  <para>Volg de door de projectbeheerder verschafte procedure om een teamproject voor de eerste keer te gebruiken.</para>
+  <para>Als een teamproject van OmegaT eenmaal is geïnstalleerd op een server, stuurt de beheerder de informatie, die zij nodig hebben om toegang te verkrijgen, naar de leden: een URL die de locatie van het project aangeeft, of een bestand <filename>omegat.project</filename>.</para>
 
-  <para>Als het project eenmaal is geopend, gaat het vertalen op dezelfde manier als voor een niet-teamproject, behalve de volgende punten.</para>
+  <para>Nadat het project is gedownload, het lokaal is geïnstalleerd en hoeft alleen lokaal te worden geopend om te synchroniseren met de server.</para>
 
-  <para><emphasis role="bold">Automatisch opslaan</emphasis></para>
+  <para>Logingegevens voor de opslagplaats worden opgeslagen in het bestand <link linkend="configuration.folder.extra.contents.repositories" endterm="configuration.folder.extra.contents.repositories.title"/> en kunnen worden verwijderd vanuit de voorkeuren <link linkend="dialog.preferences.team.title.repository.credentials" endterm="dialog.preferences.team.title.repository.credentials.title"/>.</para>
 
-  <para>Elke 3 minuten (standaard) wordt het lokale project gesynchroniseerd met de opslagplaats op afstand, zodat de projectbeheerder of andere vertalers de gedurende die periode toegevoegde vertalingen kunnen zien en gebruiken.</para>
+  <para>Synchronisatie gebeurt standaard elke drie minuten en dus zullen projectleden soms een segment vertalen of aanpassen dat als eerder werd vertaald door een ander lid, maar nog niet is gesynchroniseerd. Als dat gebeurt moeten leden de toepasselijke vertaling selecteren.</para>
 
-  <para>De interval van 3 minuten kan worden gewijzigd in <link linkend="dialogs.preferences.savingandoutput"><menuchoice> <guimenuitem>Opties</guimenuitem> <guimenuitem>Voorkeuren</guimenuitem> <guimenuitem>Opslaan en uitvoer</guimenuitem> </menuchoice></link>.</para>
-
-  <para><emphasis role="bold">Gesynchroniseerde bestanden</emphasis></para>
-
-  <para>Wanneer het project automatisch wordt opgeslagen, maar ook als het wordt geopend, gesloten, en opnieuw wordt geladen worden in feite maar twee bestanden gesynchroniseerd:</para>
-
-  <itemizedlist>
-    <listitem>
-      <para><filename>omegat/project_save.tmx</filename></para>
-    </listitem>
-
-    <listitem>
-      <para><filename>glossary/glossary.txt</filename></para>
-    </listitem>
-  </itemizedlist>
-
-  <para>Alle ander bestanden zullen worden vervangen door de bestanden in de opslagplaats op afstand.</para>
-
-  <para><emphasis role="bold">Nieuwe bronbestanden toevoegen</emphasis></para>
-
-  <para>Een nieuw bronbestand toevoegen:</para>
-
-  <para><orderedlist>
+  <para>Leden kunnen beurtelings de bestanden vertalen en nakijken. De functie Zoeken stelt hen in staat het venster Bewerken te filteren op inhoud die is vertaald door een bepaald persoon, of bijvoorbeeld op inhoud die is vertaald vóór of na een bepaalde opgegeven tijd.</para>
+  
+  <variablelist>
+    <varlistentry>
+      <term>Het project downloaden</term>
       <listitem>
-        <para>kopieer de bestanden naar de map <filename>/source</filename></para>
-      </listitem>
+		<orderedlist>
+		  <listitem>
+			<para>Vanaf een URL</para>
+
+			<para>Gebruik <link endterm="menus.project.title" linkend="menus.project"/><link endterm="menus.project.download.team.project.title" linkend="menus.project.download.team.project"/> om het dialoogvenster <guilabel>Teamproject downloaden</guilabel> op te roepen.</para>
+
+			<para>Voer de URL in die is verschaft door de beheerder van het teamproject in het veld <guilabel>URL opslagplaats:</guilabel> aan de bovenzijde van het dialoogvenster, en specificeer een map voor het project in het veld <guilabel>Nieuwe lokale projectmap:</guilabel>. Laat de optie <guilabel>Standaard branch</guilabel> geselecteerd, tenzij de beheerder van het project instructies heeft gegeven om een aangepaste branch te gebruiken.</para>
+		  </listitem>
+
+		  <listitem>
+			<para>Vanuit een bestand <filename>omegat.project</filename></para>
+
+			<para>Plaats het bestand <filename>omegat.project</filename> in een lege map, en open het in OmegaT. Het project zal automatisch worden gedownload naar de map die dat bestand bevat.</para>
+		  </listitem>
+		</orderedlist>
+
+		<note>
+		  <para>Servers gebruiken over het algemeen twee typen authenticatie: invoeren van een <emphasis>gebruikersnaam/wachtwoord</emphasis>, of <emphasis>SSH</emphasis>.</para>
+
+		  <para>Als de server authenticatie met gebruikersnaam/wachtwoord gebruikt, zal OmegaT u een dialoogvenster <guilabel>Authenticatie</guilabel> laten zien om uw gebruikersnaam en wachtwoord in te voeren ofwel als u het project voor het eerst download the project of later in het proces. OmegaT zal dan uw inloggegevens onthouden voor dat specifieke project, tenzij u ze expliciet verwijdert. Bekijk de <link linkend="dialog.preferences.team.title.repository.credentials" endterm="dialog.preferences.team.title.repository.credentials.title"/> voorkeuren voor details.</para>
+
+		  <para>Als de server SSH-authenticatie gebruikt, zorg er dan voor dat uw uw configuratie van SSH bijwerkt om die server op te nemen, voordat u probeert het project te downloaden, anders zult u een fout in de authenticatie krijgen en het project zal niet laden.</para>
+
+		  <para>Wanneer u meerdere projecten op dezelfde server gebruikt, zullen inloggegevens slechts één keer worden gevraagd voor die server.</para>
+		</note>
+	  </listitem>
+	</varlistentry>
+
+    <varlistentry>
+      <term>Synchronisatie</term>
 
       <listitem>
-        <para>gebruik <menuchoice> <guimenuitem>Project</guimenuitem> <guimenuitem>Bronbestanden indienen</guimenuitem> </menuchoice></para>
+        <para>Synchroniseren van het project voegt vertalingen toe die zijn gemaakt door alle leden aan de lokale kopieën van het project. Alleen de inhoud van de volgende twee bestanden wordt gesynchroniseerd:</para>
+
+		<itemizedlist>
+          <listitem>
+			<para><filename>project.save</filename></para>
+          </listitem>
+
+          <listitem>
+			<para><filename>glossary.txt</filename></para>
+          </listitem>
+        </itemizedlist>
+
+        <para>Gedurende de synchronisatie zullen alle andere lokale bestanden worden overschreven door de versies op de server op afstand, behalve <filename>omegat.project</filename> (zie hieronder).</para>
+
+        <para>OmegaT synchroniseert een teamproject wanneer het wordt geopend, opnieuw geladen, gesloten of opgeslagen. Dit betekent dat de geautomatiseerde functie voor opslaan ook regelmatig lokale versies synchroniseert met de versie op de server met de interval die is gespecificeerd in de voorkeur <link endterm="dialog.preferences.saving.and.output.interval.title" linkend="dialog.preferences.saving.and.output.interval"/>.</para>
       </listitem>
-    </orderedlist>Bestaande bronbestanden kunnen worden aangepast, maar de bewerking voor indienen moet worden uitgevoerd voor het automatisch opslaan en voordat het project opnieuw wordt geladen of gesloten.</para>
+    </varlistentry>
 
-  <para><emphasis role="bold">Bronbestanden verwijderen</emphasis></para>
+    <varlistentry>
+      <term>Configuratie teamproject </term>
 
-  <para>Bestanden moeten worden verwijderd door de projectbeheerder.</para>
+      <listitem>
+        <para>Zoals ook in normale lokale projecten wordt de configuratie van het teamproject gedefinieerd door de inhoud van het bestand <filename>omegat.project</filename> en het optionele gebruik van speciale bestanden voor projectspecifieke filters of segmentatieregels.</para>
 
-  <para><emphasis role="bold">Segmentatieregels of bestandsfilters wijzigen</emphasis></para>
+        <para>De eerste keer dat het project wordt gedownload haalt, OmegaT het bestand <filename>omegat.project</filename> op van de server. Dit bestand definieert de volgende parameters:</para>
 
-  <para>Parameters voor het project moeten worden gewijzigd door de projectbeheerder.</para>
+        <itemizedlist>
+          <listitem>
+            <para><emphasis>Basisconfiguratie van het project:</emphasis> Bron en talen, tokenizers, en de hiërarchie van de projectmap.</para>
 
-  <para><emphasis role="bold">Offline werken</emphasis></para>
+			<para>In een team project worden parameters van de basisconfiguratie van het lokale project altijd overschreven door de configuratie op de server, origineel ingesteld door de beheerder.</para>
+          </listitem>
 
-  <para>Een teamproject kan offline worden geopend en vertaald. Alle wijzigingen zullen de volgende keer als een verbinding beschikbaar is worden gesynchroniseerd.</para>
+          <listitem>
+            <para><emphasis>Routes in opslagplaats</emphasis></para>
 
-  <para>Offline werken:</para>
+            <para>Bekijk de <link linkend="how.to.setup.team.project.mapping.parameters" endterm="how.to.setup.team.project.mapping.parameters.title"/> how-to voor details.</para>
 
-  <itemizedlist>
-    <listitem>
-      <para>Verbreek de verbinding met het netwerk vóór het project te openen,</para>
-    </listitem>
+            <itemizedlist>
+              <listitem>
+                <para>Als er geen aangepaste routes zijn gedefinieerd voor het project op afstand, maar lokale routes zijn aangepast, worden de lokale instellingen behouden, zonder de instellingen op de server te beïnvloeden.</para>
+              </listitem>
 
-    <listitem>
-      <para>of open het project met de opdrachtregel met de optie <command>--no-team</command>.</para>
-    </listitem>
-  </itemizedlist>
+              <listitem>
+                <para>Als het project op afstand aangepaste routes bevat, maar het lokale project niet, worden de routes van de server toegepast op het lokale project.</para>
+              </listitem>
+
+              <listitem>
+                <para>Als het project op afstand een URL-protocol specificeert en u download het met een ander protocol, zal uw lokale configuratie worden behouden.</para>
+
+                <para>Veel hostservices ondersteunen, bijvoorbeeld, toegang tot dezelfde opslagplaats met ofwel het SSH +Git of HTTPS-protocol. OmegaT zal de selectie van het lokale protocol respecteren.</para>
+              </listitem>
+
+              <listitem>
+                <para>Wanneer u eerst het project op afstand download met een bestand <filename>omegat.project</filename> dat is verschaft door de projectbeheerder, zal OmegaT de routes in dat bestand gebruiken, indien aanwezig.</para>
+              </listitem>
+
+              <listitem>
+                <para>Als er een conflict is tussen het project op afstand en de lokale versies van het bestand <filename>omegat.project</filename> en de lokale versie wordt overschreven, maakt OmegaT een back-upbestand, genaamd <filename>omegat.project.JJJJMMDDhhmm.bak</filename>. OmegaT maakt maximaal tien back-upbestanden, en oudere back-ups worden op hun beurt automatisch verwijderd.</para>
+              </listitem>
+            </itemizedlist>
+		  </listitem>
+		</itemizedlist>
+
+        <warning>
+          <para>Onthoud dat alle aanpassingen aan de configuratiebestanden van het lokale project zullen worden overschreven door de versies op de server als het project wordt gesynchroniseerd.</para>
+        </warning>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Bronbestanden</term>
+
+      <listitem>
+        <warning>
+		  <para>Alleen de projectbeheerder zou <link endterm="menus.project.title" linkend="menus.project"/><link endterm="menus.project.commit.source.files.title" linkend="menus.project.commit.source.files"/> moeten gebruiken.</para>
+		</warning>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Doelbestanden</term>
+
+      <listitem>
+        <para>Nadat u de doelbestanden hebt gemaakt, gebruik dan <link endterm="menus.project.title" linkend="menus.project"/><link endterm="menus.project.commit.target.files.title" linkend="menus.project.commit.target.files"/> om ze aan de server toe te voegen, als de projectbeheerder u heeft gevraagd om dat te doen.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Bestanden verwijderen</term>
+
+      <listitem>
+        <para>Bestanden in een teamproject kunnen niet worden verwijderd uit OmegaT of het lokale bestandssysteem. De volgende keer dat het project wordt gesynchroniseerd zullen zij worden hersteld. Deze taak wordt normaal gesproken uitgevoerd door de projectbeheerder.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Offline werken</term>
+
+      <listitem>
+        <para>U kunt een teamproject openen en er offline aan werken. Alle wijzigingen zullen de volgende keer als een verbinding beschikbaar worden gesynchroniseerd.</para>
+
+        <para>Er zijn twee manieren om offline te werken:</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>Verbreek de verbinding met het netwerk vóór het project te openen.</para>
+          </listitem>
+
+          <listitem>
+            <para>Open het project vanaf de opdrachtregel met de optie <parameter>--no-team</parameter>. Bekijk het gedeelte <link linkend="launch.with.command.line" endterm="launch.with.command.line.title"/> voor details.</para>
+          </listitem>
+        </itemizedlist>
+      </listitem>
+    </varlistentry>
+  </variablelist>
 </section>

@@ -1,190 +1,261 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="menus.project">
-  <title>Project</title>
+  <title id="menus.project.title"><guimenu>Project</guimenu></title>
+  <para>Dit menu geeft u toegang tot de opdrachten voor het beheren van het project.</para>
 
+  <example id="example.new.project.shortcut">
+	<title id="example.new.project.shortcut.title">Voorbeeld omschrijving sneltoets</title>
+	<para>Op Windows and Linux: <keycombo><keycap>Control</keycap><keycap>Shift</keycap><keycap>N</keycap></keycombo>
+	</para>
+
+	<para>Op macOS: <keycombo><keycap>Shift</keycap><keycap>Command</keycap><keycap>N</keycap></keycombo>
+	</para>
+
+	<para><emphasis role="bold">In deze handleiding:</emphasis> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>N</keycap></keycombo>
+	</para>
+  </example>
+  
   <variablelist>
-    <varlistentry>
-      <term><guimenuitem>Nieuw…</guimenuitem></term>
-
+    <varlistentry id="menus.project.new">
+      <term id="menus.project.new.title"><guimenuitem>Nieuw…</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>N</keycap></keycombo>
+	  </term>
       <listitem>
-        <para>Maakt en opent een nieuw project.</para>
+        <para>Maakt en opent een nieuw project. Bekijk het gedeelte <link linkend="introduction.create.and.open.new.project" endterm="introduction.create.and.open.new.project.title"/> voor details.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term><guimenuitem>Teamproject downloaden…</guimenuitem></term>
-
+    <varlistentry id="menus.project.download.team.project">
+      <term id="menus.project.download.team.project.title"><guimenuitem>Teamproject downloaden…</guimenuitem></term>
       <listitem>
-        <para>Maakt een a lokale kopie van een OmegaT-project op afstand. Bekijk <link linkend="howto.useteamproject">Hoe een teamproject te gebruiken</link> voor de details.</para>
+        <para>Maakt een a lokale kopie van een OmegaT-project op afstand. Bekijk de <link linkend="how.to.use.team.project" endterm="how.to.use.team.project.title"/> how-to voor details.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Openen…</term>
-
+    <varlistentry id="menus.project.open">
+      <term id="menus.project.open.title"><guimenuitem>Open…</guimenuitem> <keycombo><keycap>C</keycap><keycap>O</keycap></keycombo></term>
       <listitem>
         <para>Opent een eerder gemaakt project.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Recent project openen</term>
-
+    <varlistentry id="menus.project.open.recent">
+      <term id="menus.project.open.recent.title"><guimenuitem>Recent project openen…</guimenuitem></term>
       <listitem>
-        <para>Geeft toegang tot de tien laatst bewerkte projecten. Klikken op één ervan zal het huidige project opslaan, het sluiten en het andere project openen.</para>
+        <para>Geeft toegang tot de tien laatst bewerkte projecten. Klikken op één ervan zal het huidige project opslaan, het sluiten en het geselecteerde project openen.</para>
+        <para>Gebruik de functie <guimenuitem>Menu opschonen</guimenuitem> om de lijst met recente projecten te verwijderen.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Bestanden naar map Bronbestanden kopiëren…</term>
-
-      <listitem>
-        <para>Kopieert de geselecteerde bestanden naar de map <filename>/source</filename> en herlaadt het project om de nieuwe bestanden te laden.</para>
-      </listitem>
-    </varlistentry>
-
-    <varlistentry>
-      <term>Pagina van MediaWiki downloaden…</term>
-
-      <listitem>
-        <para>Om de inhoud van een pagina van Wikipedia te vertalen (bijvoorbeeld):</para>
-
-        <orderedlist>
-          <listitem>
-            <para>Klik op de tab <guilabel>Bewerken</guilabel> op de pagina van Wikipedia.</para>
-          </listitem>
-
-          <listitem>
-            <para>Kopieer de URL van de pagina (eindigende op <guilabel>action=edit</guilabel>) en plak die in <application>OmegaT</application>.</para>
-          </listitem>
-        </orderedlist>
-
-        <para>Wanneer u uw vertaling hebt voltooid, om die te importeren in Wikipedia:</para>
-
-        <orderedlist>
-          <listitem>
-            <para>Open het bestand <filename>.UTF8</filename> gemaakt in de map <filename>/target</filename>.</para>
-          </listitem>
-
-          <listitem>
-            <para>Kopieer de tekst en plak die in de vertaalde versie van de pagina van Wikipedia.</para>
-          </listitem>
-        </orderedlist>
-      </listitem>
-    </varlistentry>
-
-    <varlistentry>
-      <term>Herladen</term>
-
+    <varlistentry id="menus.project.reload">
+      <term id="menus.project.reload.title"><guimenuitem>Herladen</guimenuitem> <keycombo><keycap>F5</keycap></keycombo></term>
       <listitem>
         <para>Herlaadt het project om externe wijzigingen in bronbestanden en instellingen voor het project te verwerken.</para>
-
-        <para>Nieuwe vertaalgeheugens, geplaatst in de map <filename>/tm</filename> tijdens het vertalen, worden automatisch geladen zodra de cursor van een segment naar een ander verplaatst.</para>
+        <note>
+		  <para>Met nieuwe vertaalgeheugens, geplaatst in de map <link linkend="project.folder.tm" endterm="project.folder.tm.title"/> tijdens het vertalen, wordt automatisch rekening gehouden zodra de cursor van een segment naar een ander verplaatst. Soortgelijk wordt de inhoud van de map <link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/> automatisch herkent en vereist niet dat het project opnieuw moet worden geladen.</para>
+		</note>
+		<para>Bij het herladen van een teamproject, herlaadt OmegaT de eigenschappen op afstand, in plaats van de lokale.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Sluiten</term>
-
+    <varlistentry id="menus.project.close">
+      <term id="menus.project.close.title"><guimenuitem>Sluiten</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>W</keycap></keycombo></term>
       <listitem>
-        <para>Slaat de vertaling op en sluit het project.</para>
+        <para>Slaat het vertaalgeheugen van het project (<link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/>) op en sluit het project.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Opslaan</term>
-
+    <varlistentry id="menus.project.save">
+      <term id="menus.project.save.title"><guimenuitem>Opslaan</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap></keycombo></term>
       <listitem>
-        <para>Slaat het interne vertaalgeheugen op de harde schijf op. OmegaT slaat automatisch elke 3 minuten vertalingen op en ook als u het project sluit of OmegaT afsluit.</para>
-
-        <para>De interval van 3 minuten kan worden gewijzigd in <link linkend="dialogs.preferences.savingandoutput"><menuchoice> <guimenuitem>Opties</guimenuitem> <guimenuitem>Voorkeuren</guimenuitem> <guimenuitem>Opslaan en uitvoer</guimenuitem> </menuchoice></link>.</para>
+        <para>Slaat het vertaalgeheugen van het project (<link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/>) op en synchroniseert teamprojecten.</para>
+		<para>OmegaT slaat automatisch elke drie minuten vertalingen op en ook als u het project sluit of OmegaT afsluit. Bekijk de <link linkend="dialog.preferences.saving.and.output.interval" endterm="dialog.preferences.saving.and.output.interval.title"/> voorkeur voor details.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Bronbestanden indienen</term>
-
+    <varlistentry id="menus.project.copy.files.to.source.folder">
+      <term id="menus.project.copy.files.to.source.folder.title"><guimenuitem>Bestanden toevoegen…</guimenuitem></term>
       <listitem>
-        <para>Uploadt de bestanden die lokaal zijn toegevoegd of aangepast in de map <filename>source</filename> naar de opslagplaats.</para>
-
-        <para>Deze functie is specifiek voor teamprojecten.</para>
+        <para>Kopieert de geselecteerde bestanden naar de map <link linkend="project.folder.source" endterm="project.folder.source.title"/> en herlaadt het project om rekening te houden met de nieuwe bestanden.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Doelbestanden indienen</term>
-
+    <varlistentry id="menus.project.download.mediawiki.page">
+      <term id="menus.project.download.mediawiki.page.title"><guimenuitem>Pagina van MediaWiki downloaden…</guimenuitem></term>
       <listitem>
-        <para>Uploadt de bestanden die lokaal zijn gemaakt in de map <filename>target</filename> naar de opslagplaats.</para>
-
-        <para>Deze functie is specifiek voor teamprojecten.</para>
+		<para>Opent een dialoogvenster waar u de URL van de te vertalen pagina van Mediawiki
+kunt plakken. De brongegevens van de pagina zullen worden gekopieerd naar de map <link linkend="project.folder.source" endterm="project.folder.source.title"/>, als een tekstbestand met de extensie <filename>.utf8</filename>.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Vertaalde documenten maken</term>
-
+    <varlistentry id="menus.project.commit.source.files">
+      <term id="menus.project.commit.source.files.title"><guimenuitem>Bronbestanden indienen</guimenuitem></term>
       <listitem>
-        <para>Maakt de doeldocumenten op basis van uw vertaling. De gemaakte doeldocumenten zijn geplaatst in de map <filename>/target</filename>.</para>
+        <warning><para>Deze functie is specifiek voor teamprojecten. <emphasis>Alleen de beheerder van het teamproject zou deze functie moeten gebruiken</emphasis>. Bekijk de <link linkend="how.to.use.team.project" endterm="how.to.use.team.project.title"/> how-to voor details.</para></warning>
+        <para>Upload lokaal toegevoegde of aangepaste bestanden vanuit de map <filename class="directory">source</filename> naar de opslagplaats van het teamproject.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Vertaald huidig document maken</term>
-
+    <varlistentry id="menus.project.commit.target.files">
+      <term id="menus.project.commit.target.files.title"><guimenuitem>Doelbestanden indienen</guimenuitem></term>
       <listitem>
-        <para>Maakt het doeldocument overeenkomstig het huidige document, in vertaling.</para>
+        <warning><para>Deze functie is specifiek voor teamprojecten. <emphasis>Gebruik deze functie alleen als de beheerder van het teamproject u heeft gevraagd om dat te doen</emphasis>. Bekijk de <link linkend="how.to.use.team.project" endterm="how.to.use.team.project.title"/> how-to voor details.</para></warning>
+        <para>Upload lokaal gemaakte vertaalde bestanden vanuit de map <link linkend="project.folder.target" endterm="project.folder.target.title"/> naar de opslagplaats van het teamproject.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>MED-project openen…</term>
+    <varlistentry id="menus.project.create.translated.documents">
+      <term id="menus.project.create.translated.documents.title"><guimenuitem>Vertaalde documenten maken</guimenuitem> <keycombo><keycap>C</keycap><keycap>D</keycap></keycombo></term>
+      <listitem>
+        <para>Maakt de doelbestanden op basis van uw vertaling. De gemaakte doelbestanden zijn geplaatst in de map <link linkend="project.folder.target" endterm="project.folder.target.title"/>.</para>
+		<note><para>U kunt het maken van doelbestanden voorkomen als er problemen met tags worden gevonden. Bekijk de <link linkend="dialogs.preferences.tag.processing.do.not.allow.creating.translated.documents.with.tag.issues" endterm="dialogs.preferences.tag.processing.do.not.allow.creating.translated.documents.with.tag.issues.title"/> voorkeur voor details.</para></note>
+		<para>Elke keer als u de vertaalde bestanden maakt, slaat OmegaT het project op (bekijk het menu-item <link linkend="menus.project.save" endterm="menus.project.save.title"/> hierboven), en maakt vertaalgeheugens voor verwijzing die de vertaalde segmenten van de huidige set bronbestanden bevat.</para>
+      </listitem>
+    </varlistentry>
 
+    <varlistentry id="menus.project.create.current.translated.document">
+      <term id="menus.project.create.current.translated.document.title"><guimenuitem>Vertaald huidig document maken</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>D</keycap></keycombo></term>
+      <listitem>
+        <para>Maakt het doeldocument dat correspondeert met het bronbestand dat momenteel wordt vertaald. Het resulterende bestand wordt geplaatst in de map <link linkend="project.folder.target" endterm="project.folder.target.title"/>.</para>
+		<para>Elke keer als u de vertaalde bestanden maakt, slaat OmegaT het project op (bekijk het menu-item <link linkend="menus.project.save" endterm="menus.project.save.title"/> hierboven), en maakt vertaalgeheugens voor verwijzing die de vertaalde segmenten van de huidige set bronbestanden bevat.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry id="menus.project.open.med.project">
+      <term id="menus.project.open.med.project.title"><guimenuitem>MED-project openen…</guimenuitem></term>
+	  <!-- TODO add link to a format description -->
       <listitem>
         <para>Opent een projectpakket in de indeling MED, gedefinieerd door het EU Directorate-General for Translation.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>MED-projecten maken…</term>
-
+    <varlistentry id="menus.project.create.med.project">
+      <term id="menus.project.create.med.project.title"><guimenuitem>MED-projecten maken…</guimenuitem></term>
+	  <!-- TODO add link to a format description -->
       <listitem>
         <para>Converteert het huidige project naar een MED-pakket.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Eigenschappen…</term>
-
+    <varlistentry id="menus.project.properties">
+      <term id="menus.project.properties.title"><guimenuitem>Eigenschappen…</guimenuitem> <keycombo><keycap>C</keycap><keycap>E</keycap></keycombo></term>
       <listitem>
-        <para>Geeft het dialoogvenster <link linkend="dialogs.projectproperties">Projecteigenschappen</link> weer om de projecttalen en maplocaties te kunnen bewerken.</para>
+        <para>Geeft het dialoogvenster <link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/> weer om de talen van het project en locaties van mappen te kunnen bewerken.</para>
+		<para>
+		</para>		
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Projectbestanden…</term>
-
+    <varlistentry id="menus.project.source.files.list">
+      <term id="menus.project.source.files.list.title"><guimenuitem>Bronbestanden…</guimenuitem> <keycombo><keycap>C</keycap><keycap>L</keycap></keycombo></term>
       <listitem>
-        <para>Opent het <link linkend="windows.projectfiles">venster Projectbestanden</link>.</para>
+        <para>Opent het venster <link linkend="windows.source.files.list" endterm="windows.source.files.list.title"/>.</para>
+		<para>
+		</para>				
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Ga naar inhoud van project</term>
-
+    <varlistentry id="menus.project.access.project.contents">
+      <term id="menus.project.access.project.contents.title"><guisubmenu>Ga naar inhoud van project</guisubmenu></term>
       <listitem>
-        <para>Geeft toegang tot de mappen van het project.</para>
+        <para>Geeft toegang tot de verschillende mappen van het project. Bekijk het hoofdstuk <link linkend="chapter.project.folder" endterm="chapter.project.folder.title"/> voor meer details.</para>
+        <para>In aanvulling daarop zijn er drie menu-items die direct de huidige bron- of doeldocumenten of de te beschrijven woordenlijst openen. De bestanden worden geopend door de standaard toepassing die door het systeem is ingesteld. De opties zijn uitgegrijsd als de bestanden niet bestaan.</para>
 
-        <para>In aanvulling daarop maken twee menu-items het mogelijk direct de huidige bron- en doeldocumenten en de te beschrijven woordenlijst te openen. De documenten worden geopend door de toepassing die door het systeem wordt gekozen. Als de documenten niet beschikbaar zijn, is het item grijs gemaakt.</para>
+		<variablelist>
+		  <varlistentry>
+			<term><link linkend="chapter.project.folder"><guimenuitem>Projectmap</guimenuitem></link></term>
+			<listitem>
+			  <para>Opent de map in uw standaard bestandsbeheerder.</para>
+			</listitem>
+		  </varlistentry>
+
+		  <varlistentry>
+			<term><link linkend="project.folder.dictionary"><guimenuitem>Woordenboeken</guimenuitem></link></term>
+			<listitem>
+			  <para>Opent de map in uw standaard bestandsbeheerder.</para>
+			</listitem>
+		  </varlistentry>
+
+		  <varlistentry>
+			<term><link linkend="project.folder.glossary"><guimenuitem>Woordenlijsten</guimenuitem></link></term>
+			<listitem>
+			  <para>Opent de map in uw standaard bestandsbeheerder.</para>
+			</listitem>
+		  </varlistentry>
+
+		  <varlistentry>
+			<term><link linkend="project.folder.source"><guimenuitem>Bronbestanden</guimenuitem></link></term>
+			<listitem>
+			  <para>Opent de map in uw standaard bestandsbeheerder.</para>
+			</listitem>
+		  </varlistentry>
+
+		  <varlistentry>
+			<term><link linkend="project.folder.target"><guimenuitem>Doelbestanden</guimenuitem></link></term>
+			<listitem>
+			  <para>Opent de map in uw standaard bestandsbeheerder.</para>
+			</listitem>
+		  </varlistentry>
+
+		  <varlistentry>
+			<term><link linkend="project.folder.tm"><guimenuitem>TM's</guimenuitem></link></term>
+			<listitem>
+			  <para>Opent de map in uw standaard bestandsbeheerder.</para>
+			</listitem>
+		  </varlistentry>
+		  
+		  <varlistentry>
+			<term><link linkend="project.folder.exported.tm"><guimenuitem>Geëxporteerde TM's</guimenuitem></link></term>
+			<listitem>
+			  <para>Opent de map in uw standaard bestandsbeheerder.</para>
+			</listitem>
+		  </varlistentry>
+
+		  <varlistentry>
+			<term><guimenuitem>Huidig bronbestand</guimenuitem></term>
+			<listitem>
+			  <para>Het huidige bronbestand is geplaatst in de map <link linkend="project.folder.source" endterm="project.folder.source.title"/>.</para>
+
+			  <para>Opent het bestand in de geassocieerde toepassing.</para>
+			</listitem>
+		  </varlistentry>
+
+		  <varlistentry>
+			<term><guimenuitem>Huidig doelbestand</guimenuitem></term>
+			<listitem>
+			  <para>Het huidige doelbestand is geplaatst in de map <link linkend="project.folder.target" endterm="project.folder.target.title"/>.</para>
+
+			  <para>Opent het bestand in de geassocieerde toepassing, als het bestand bestaat.</para>
+			</listitem>
+		  </varlistentry>
+
+		  <varlistentry>
+			<term><guimenuitem>Beschrijfbare woordenlijst</guimenuitem></term>
+			<listitem>
+			  <para>De beschrijfbare woordenlijst is geplaatst in de map <link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/>.</para>
+
+			  <para>Opent het bestand in de geassocieerde toepassing, als het bestand bestaat.</para>
+			</listitem>
+		  </varlistentry>
+		</variablelist>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Afsluiten</term>
-
+    <varlistentry id="menus.project.restart">
+      <term id="menus.project.restart.title"><guimenuitem>Opnieuw starten</guimenuitem></term>
       <listitem>
-        <para>Slaat het project op en sluit <application>OmegaT</application> af. Als u het project nog niet hebt opgeslagen wordt hier handmatig bevestiging gevraagd of u werkelijk af wilt sluiten.</para>
+        <para>Slaat het project op en sluit OmegaT af. U zal worden gevraagd te bevestigen dat u echt wilt afsluiten als u het project nog niet hebt opgeslagen.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry id="menus.project.quit">
+      <term id="menus.project.quit.title"><guimenuitem>Afsluiten</guimenuitem> <keycombo><keycap>C</keycap><keycap>Q</keycap></keycombo></term>
+      <listitem>
+        <para>Slaat het project op en sluit OmegaT af. U zal worden gevraagd te bevestigen dat u echt wilt afsluiten als u het project nog niet hebt opgeslagen.</para>
+
+		<note>
+		  <para>Op macOS is dit menu te vinden onder het menu <guimenu>OmegaT</guimenu>.</para>
+		</note>
       </listitem>
     </varlistentry>
   </variablelist>

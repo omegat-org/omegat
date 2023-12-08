@@ -1,0 +1,882 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.panes">
+  <title id="chapter.panes.title">Vensters</title>
+
+  <section id="panes.default.layout">
+	<title id="panes.default.layout.title">Standaard lay-out</title>
+
+	<para>De eerste keer dat u OmegaT start, geeft het hoofdvenster de volgende standaard lay-out weer:</para>
+
+		<figure id="default.omegat.layout">
+      <title id="default.omegat.layout.title">Standaard lay-out OmegaT op macOS</title>
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/defaultOmegaTLayout.png"/>
+        </imageobject>
+        <imageobject role="fo">
+          <imagedata fileref="images/defaultOmegaTLayout.png" width="60%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+	<orderedlist>
+	  <listitem>
+		<para>Het venster <link linkend="panes.editor" endterm="panes.editor.title"/>.</para>
+	  </listitem>
+	  <listitem>
+		<para>Het venster <link linkend="panes.notes" endterm="panes.notes.title"/>.</para>
+	  </listitem>
+	  <listitem>
+		<para>Het venster <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/>.</para>
+	  </listitem>
+	  <listitem>
+		<para>Het venster <link linkend="panes.glossary" endterm="panes.glossary.title"/>.</para>
+	  </listitem>
+	  <listitem>
+		<para>Het venster <link linkend="panes.segment.properties" endterm="panes.segment.properties.title"/>.</para>
+	  </listitem>
+	  <listitem>
+		<para>Het venster <link linkend="panes.comments" endterm="panes.comments.title"/>.</para>
+	  </listitem>
+	  <listitem>
+		<para>Het venster <link linkend="panes.multipletranslations" endterm="panes.multipletranslations.title"/>.</para>
+	  </listitem>
+	  <listitem>
+		<para>De vensters <link linkend="panes.dictionary" endterm="panes.dictionary.title"/> en <link linkend="panes.machinetranslation" endterm="panes.machinetranslation.title"/> zijn vastgezet</para>
+	  </listitem>
+	  <listitem>
+		<para><link linkend="panes.statusbar" endterm="panes.statusbar.title"/> (aan de rechterkant), dat projectinformatie bevat</para>
+	  </listitem>
+	</orderedlist>
+	
+	<para>Gebruik de verschillende opties in het menu <link linkend="menus.view" endterm="menus.view.title"/> en verplaats de verschillende  <link linkend="chapter.panes">vensters</link> om de lay-out te krijgen die het beste bij uw werkstroom past.</para>
+
+	<warning>
+	  <para>Gebruik <link linkend="menus.view" endterm="menus.view.title"/><link linkend="menus.view.restore.main.window" endterm="menus.view.restore.main.window.title"/> als u in problemen komt bij het opnieuw schikken van de lay-out van het hoofdvenster.</para>
+	</warning>
+  </section>
+
+  <section id="panes.principles">
+    <title id="panes.principles.title">Principes</title>
+
+    <variablelist>
+      <varlistentry id="panes.manipulation">
+        <term id="panes.manipulation.title">Manipuleren</term>
+
+        <listitem>
+          <para>Het hoofdvenster bestaat uit verschillende vensters, hier beschreven, menu's, beschreven in het hoofdstuk <link linkend="chapter.menus" endterm="chapter.menus.title"/> en een statusbalk, <link linkend="panes.statusbar">hieronder</link> beschreven. U kunt door te klikken en vast te houden aan de naam van een venster het slepen naar een nieuwe positie of zelfs het als een zelfstandig venster losmaken.</para>
+
+          <para>De rechterbovenhoek van elk venster geeft verschillende pictogrammen weer, afhankelijk van het type venster en zijn huidige status:</para>
+
+          <table id="table.pane.widgets">
+            <title id="table.pane.widgets.title">Pictogrammen voor vensters</title>
+
+            <tgroup cols="2">
+              <tbody>
+                <row>
+                  <entry><inlinemediaobject>
+                      <imageobject role="html">
+                        <imagedata fileref="images/Settings.png" width="60%"/>
+                      </imageobject>
+
+                      <imageobject role="fo">
+                        <imagedata fileref="images/Settings.png" width="40%"/>
+                      </imageobject>
+                    </inlinemediaobject></entry>
+
+                  <entry>Vermeld de verschillende extra <emphasis role="bold">acties</emphasis> die beschikbaar zijn in het venster.</entry>
+                </row>
+
+                <row>
+                  <entry><inlinemediaobject>
+                      <imageobject role="html">
+                        <imagedata fileref="images/Minimize.png" width="60%"/>
+                      </imageobject>
+
+                      <imageobject role="fo">
+                        <imagedata fileref="images/Minimize.png" width="40%"/>
+                      </imageobject>
+                    </inlinemediaobject></entry>
+
+                  <entry><emphasis role="bold">Minimaliseert</emphasis> het venster tot een tab aan de onderzijde van het venster.</entry>
+                </row>
+
+                <row>
+                  <entry><inlinemediaobject>
+                      <imageobject role="html">
+                        <imagedata fileref="images/Maximize.png" width="60%"/>
+                      </imageobject>
+
+                      <imageobject role="fo">
+                        <imagedata fileref="images/Maximize.png" width="40%"/>
+                      </imageobject>
+                    </inlinemediaobject></entry>
+
+                  <entry><emphasis role="bold">Maximaliseert</emphasis> het venster</entry>
+                </row>
+
+                <row>
+                  <entry><inlinemediaobject>
+                      <imageobject role="html">
+                        <imagedata fileref="images/Restore.png" width="60%"/>
+                      </imageobject>
+
+                      <imageobject role="fo">
+                        <imagedata fileref="images/Restore.png" width="40%"/>
+                      </imageobject>
+                    </inlinemediaobject></entry>
+
+                  <entry><emphasis role="bold">Herstelt</emphasis> een gemaximaliseerd venster naar zijn zijn vorige lay-out.</entry>
+                </row>
+
+                <row>
+                  <entry><inlinemediaobject>
+                      <imageobject role="html">
+                        <imagedata fileref="images/Undock.png" width="60%"/>
+                      </imageobject>
+
+                      <imageobject role="fo">
+                        <imagedata fileref="images/Undock.png" width="40%"/>
+                      </imageobject>
+                    </inlinemediaobject></entry>
+
+                  <entry><emphasis role="bold">Maakt het venster los</emphasis> van het hoofdvenster.</entry>
+                </row>
+
+                <row>
+                  <entry><inlinemediaobject>
+                      <imageobject role="html">
+                        <imagedata fileref="images/Dock.png" width="60%"/>
+                      </imageobject>
+
+                      <imageobject role="fo">
+                        <imagedata fileref="images/Dock.png" width="40%"/>
+                      </imageobject>
+                    </inlinemediaobject></entry>
+
+                  <entry><emphasis role="bold">Brengt</emphasis> het venster terug in het hoofdvenster.</entry>
+                </row>
+              </tbody>
+            </tgroup>
+          </table>
+
+          <para>U kunt vensters groeperen in hetzelfde gebied van het hoofdvenster. Door dat te doen wordt een tab met de naam van het venster aan de bovenzijde van de groep weergegeven. Vensters kunnen op grootte worden gebracht door te slepen aan de scheidingen tussen hen.</para>
+
+          <note>
+            <para>Gebruik <link endterm="menus.view.title" linkend="menus.view"/><link endterm="menus.view.restore.main.window.title" linkend="menus.view.restore.main.window"/> om terug te gaan naar de standaard lay-out als u de wijzigingen in de gebruikersinterface niet meer weet en bepaalde vensters niet langer ziet.</para>
+          </note>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="panes.context.menus">
+        <term id="panes.context.menus.title">Contextmenu's</term>
+
+        <listitem>
+          <para>Sommige vensters hebben een contextmenu. U kunt dat menu oproepen met de standaardmethode voor uw besturingssysteem, of met de voor OmegaT gedefinieerde sneltoetsen:<itemizedlist>
+              <listitem>
+                <para>Op Windows en Linux: <keycap>Menu</keycap></para>
+              </listitem>
+
+              <listitem>
+                <para>Op macOS: <keycombo> <keycap>S</keycap> <keycap>Esc</keycap> </keycombo></para>
+              </listitem>
+            </itemizedlist></para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="panes.drag.and.drop">
+        <term id="panes.drag.and.drop.title">Slepen en neerzetten</term>
+
+        <listitem>
+          <para>Bestanden kunnen op bepaalde vensters worden gesleept en neergezet, met de volgende resultaten:</para>
+
+          <variablelist>
+            <varlistentry>
+              <term>venster Bewerken</term>
+
+              <listitem>
+                <para>Hier neerzetten van een projectbestand van OmegaT (<filename>omegat.project</filename>) of een volledig project zal het corresponderende project openen nadat, indien aanwezig, het huidige geopende project is gesloten.</para>
+
+                <para>Andere neergezette bestanden zullen worden gekopieerd naar de map <filename class="directory">source</filename>. Dit is ook van toepassing op het venster <link endterm="windows.source.files.list.title" linkend="windows.source.files.list"/>.</para>
+              </listitem>
+            </varlistentry>
+
+            <varlistentry>
+              <term>venster Overeenkomsten</term>
+
+              <listitem>
+                <para>Hier neergezette <filename>.tmx</filename>-bestanden zullen worden gekopieerd naar de map <filename class="directory">tm</filename>.</para>
+              </listitem>
+            </varlistentry>
+
+            <varlistentry>
+              <term>venster Woordenlijst</term>
+
+              <listitem>
+                <para>Hier neergezette bestanden met een herkende extensie voor woordenlijsten (<filename>.txt</filename>, <filename>.tab</filename>, etc.) zullen worden gekopieerd naar de map <filename class="directory">glossary</filename>.</para>
+              </listitem>
+            </varlistentry>
+          </variablelist>
+        </listitem>
+      </varlistentry>
+
+	  <varlistentry id="panes.notifications">
+        <term id="panes.notifications.title">Notificaties</term>
+		
+        <listitem>
+          <para>Als een venster is gesloten, maar wel inhoud om weer te geven heeft, kan OmegaT tijdelijk de tab van het venster accentueren in oranje wanneer u het segment in gaat.</para>
+		  
+		  <para>Standaard hebben de vensters <guilabel>Opmerkingen</guilabel> en <guilabel>Notepad</guilabel> notificaties ingeschakeld.</para>
+		  
+		  <para>Notificaties in- of uitschakelen:</para>
+		  
+		  <itemizedlist>
+			<listitem>
+			  <para>Ga in het venster.</para>
+			</listitem>
+
+			<listitem>
+			  <para>Klik op het widget <guilabel>Actie</guilabel> rechtsboven.</para>
+			</listitem>
+			
+			<listitem>
+			  <para>Selecteer <guilabel>Laat het me weten als een segment overeenkomsten met … heeft</guilabel> (waar … varieert, afhankelijk van het venster waarvoor u de notificaties inschakelt.</para>
+			</listitem>
+		  </itemizedlist>
+
+		  <para>De volgende vensters kunnen notificaties geven:</para>
+
+		  <itemizedlist>
+			<listitem>
+			  <para>Opmerkingen</para>
+			</listitem>
+
+			<listitem>
+			  <para>Woordenboeken</para>
+			</listitem>
+
+			<listitem>
+			  <para>Fuzzy overeenkomsten</para>
+			</listitem>
+
+			<listitem>
+			  <para>Woordenlijsten</para>
+			</listitem>
+
+			<listitem>
+			  <para>Meerdere vertalingen</para>
+			</listitem>
+
+			<listitem>
+			  <para>Notepad</para>
+			</listitem>
+
+			<listitem>
+			  <para>Segmenteigenschappen</para>
+
+			  <para>Het venster <guilabel>Segmenteigenschappen</guilabel> staat instellingen voor notificatie toe voor elk van zijn items.</para>
+
+			  <para>In <guilabel>Tabelweergave</guilabel>, klik met rechts op het item en selecteer <guilabel>Laat het me weten als een segment overeenkomsten met … heeft</guilabel> (waar … varieert, afhankelijk van de gewenste notificatie).</para>
+
+			  <para>In <guilabel>Lijstweergave</guilabel>, klik met rechts op het widget <guilabel>Actie</guilabel> aan het rechter uiteinde van de regel van de geselecteerde eigenschap en selecteer <guilabel>Laat het me weten als een segment overeenkomsten met … heeft</guilabel> (waar … varieert, afhankelijk van de gewenste notificatie).</para>
+			</listitem>
+		  </itemizedlist>
+		</listitem>
+	  </varlistentry>
+    </variablelist>
+  </section>
+
+  <section id="panes.editor">
+    <title id="panes.editor.title"><guilabel>venster Bewerken</guilabel></title>
+
+    <para>Hier typt en bewerkt u uw vertaling.</para>
+
+    <para>De tekst is gesplitst in genummerde segmenten. U kunt door het gehele document scrollen en dubbelklikken op enig segment om het te openen en te bewerken.</para>
+
+	<example id="panes.editor.default.editor.writing.space">
+	  <title id="panes.editor.default.editor.writing.space.title">Standaard schrijfruimte venster Bewerken</title>
+	  <para>
+		<programlisting>— ¶ —————————————————————
+
+<token>Hide Tags</token>
+|Dissimuler les balises<token>&lt;segment 2148 ¶&gt;</token>
+
+— ¶ —————————————————————
+
+Indien ingeschakeld wordt alle opmaak in de bronsegmenten verborgen.</programlisting></para>
+	</example>
+
+    <itemizedlist>
+      <listitem>
+        <para>De eerste regel, in vette tekens tegen een groene achtergrond, is de te vertalen brontekst.</para>
+      </listitem>
+
+      <listitem>
+        <para>Het <emphasis role="bold">veld voor vertaling</emphasis> is de tweede regel, tussen de linkermarge en de markering van het segment aan de rechterkant. Het <emphasis role="bold">veld voor vertaling</emphasis> is waar u uw vertaling invoert.</para>
+      </listitem>
+
+      <listitem>
+        <para>De markering voor het segment is hier <literal>&lt;segment 2148 ¶&gt;</literal>.</para>
+
+        <para><literal>2148</literal> is het nummer van het segment in het project en het symbool <literal>¶</literal> geeft aan dat het segment het eerste segment in een alinea is.</para>
+      </listitem>
+
+      <listitem>
+        <para>De cursor is standaard vergrendeld in het veld vertaling.</para>
+
+        <para>Gebruik <keycap>F2</keycap> om die te ontgrendelen en vrij te verplaatsen tussen het veld voor vertaling en andere delen van het venster.</para>
+      </listitem>
+
+      <listitem>
+        <para>De regel onder het veld voor vertaling is een ander segment.</para>
+      </listitem>
+
+      <listitem>
+        <para>Gebruik <link linkend="menus.goto" endterm="menus.goto.title"/><link endterm="menus.goto.next.untranslated.segment.title" linkend="menus.goto.next.untranslated.segment"/> of andere opdrachten voor navigatie om:</para>
+
+		<itemizedlist>
+          <listitem>
+            <para>de inhoud van het veld voor vertaling te registreren in het vertaalgeheugen van het project en</para>
+          </listitem>
+
+          <listitem>
+            <para>naar het volgende te vertalen segment te gaan.</para>
+          </listitem>
+        </itemizedlist>
+
+		<para>Bekijk het menu <link endterm="menus.goto.title" linkend="menus.goto"/> voor details.</para>
+      </listitem>
+    </itemizedlist>
+
+    <note>
+      <para>Pas de weergave van het venster Bewerken aan zodat het past bij uw werkstroom.</para>
+
+	  <!--   <example id="panes.editor.modified.editor.target.field"> -->
+	  <!-- 	<title id="panes.editor.modified.editor.target.field.title">Example of modified -->
+	  <!--         editor writing space</title> -->
+	  <!-- 	<para> -->
+	  <!-- 	  <programlisting>— ¶ ————————————————————— -->
+
+	  <!-- Translation last modified by Didier on Sep 4, 2012 at 9:16:52 PM -->
+	  <!-- <token>Hide Ta&amp;gs</token> -->
+	  <!-- <token>Dissi&amp;muler les balises</token> -->
+
+	  <!-- — ¶ ————————————————————— -->
+
+	  <!-- <token>External Post-processing Command:</token> -->
+	  <!-- <token>[fuzzy]</token>Commande de post-traitement externe<token>&lt;segment 3644 ¶></token> -->
+
+	  <!-- — ¶ —————————————————————</programlisting></para> -->
+	  <!--   </example> -->
+
+	  <para>Aanpassingen zouden kunnen zijn:</para>
+	  
+	  <itemizedlist>
+		<listitem>
+		  <para>Wijzigen van het lettertype zoals beschreven in de voorkeur <link endterm="dialogs.preferences.fonts.title" linkend="dialogs.preferences.fonts"/>.</para>
+		</listitem>
+
+		<listitem>
+		  <para>Weergeven of verbergen van alineascheidingen met <link endterm="menus.view.title" linkend="menus.view"/><link endterm="menus.view.mark.paragraph.delimitations.title" linkend="menus.view.mark.paragraph.delimitations"/>.</para>
+		</listitem>
+
+		<listitem>
+		  <para>Wijzigen van de indeling van de alineascheiding, gedefinieerd in de voorkeur <link endterm="dialogs.preferences.editor.paragraph.delimitation.format.title" linkend="dialogs.preferences.editor.paragraph.delimitation.format"/>.</para>
+		</listitem>
+
+		<listitem>
+		  <para>Weergeven van informatie over aanpassing van het segment met <link endterm="menus.view.title" linkend="menus.view"/><link endterm="menus.view.modification.info.title" linkend="menus.view.modification.info"/>.</para>
+		</listitem>
+
+		<listitem>
+		  <para>Weergeven of verbergen van bronsegmenten met <link endterm="menus.view.title" linkend="menus.view"/><link endterm="menus.view.display.source.segments.title" linkend="menus.view.display.source.segments"/>.</para>
+		</listitem>
+
+		<listitem>
+		  <para>Accentueren van vertaalde segmenten met <link endterm="menus.view.title" linkend="menus.view"/><link endterm="menus.view.mark.translated.segments.title" linkend="menus.view.mark.translated.segments"/>.</para>
+		</listitem>
+
+		<listitem>
+		  <para>Automatisch invoegen van de brontekst in het veld voor vertaling door de voorkeur <link endterm="dialogs.preferences.editor.leave.the.segment.empty.title" linkend="dialogs.preferences.editor.leave.the.segment.empty"/> uit te schakelen.</para>
+		</listitem>
+
+		<listitem>
+		  <para>Invoegen van de beste fuzzy overeenkomst die boven de drempel ligt die is gedefinieerd in voorkeur <link endterm="dialogs.preferences.editor.insert.the.best.fuzzy.match.title" linkend="dialogs.preferences.editor.insert.the.best.fuzzy.match"/>.</para>
+		</listitem>
+
+		<listitem>
+		  <para>Definiëren van tekst die u buiten de vertaling wilt laten, ingeschakeld met de voorkeur <link endterm="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation.title" linkend="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation"/>.</para>
+		</listitem>
+	  </itemizedlist>
+
+	  <para>Bekijk de voorkeuren <link linkend="dialogs.preferences.editor" endterm="dialogs.preferences.editor.title"/> en het <link endterm="menus.view.title" linkend="menus.view"/> menu voor details.</para>
+    </note>
+
+    <variablelist>
+      <varlistentry>
+        <term>Lege vertalingen</term>
+
+        <listitem>
+          <para>Als u het veld voor vertaling leeg laat, zal OmegaT het segment behandelen als niet vertaald en het in de originele taal behouden als het de vertaalde documenten maakt.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Vertalingen gelijk aan brontekst</term>
+
+        <listitem>
+          <para>OmegaT kan vertalingen opslaan die identiek zijn aan de brontekst. Het kan handig zijn voor documenten die handelsmerken, namen of andere woorden met hoofdletters bevatten of delen in een derde taal die niet vertaald behoeven te worden.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Tekst slepen</term>
+
+        <listitem>
+          <para>Het is mogelijk om tekst te slepen, vanaf elke plek vanuit het hoofdvenster en het neer te zetten in het veld voor vertaling. Gesleepte tekst van buiten het veld voor vertaling wordt gekopieerd, terwijl tekst vanuit het veld voor vertaling wordt verplaatst.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="panes.editor.overwriting">
+        <term id="panes.editor.overwriting.title">Overschrijven</term>
+
+        <listitem>
+          <para>Standaard voegt het typen van tekst de nieuwe tekst in na de cursor in de richting van het typen. Gebruik de volgende toetsen om de bestaande tekst te overschrijven:</para>
+
+		  <itemizedlist>
+            <listitem>
+              <para>Op Windows en Linux: <keycombo> <keycap>INSERT</keycap> </keycombo></para>
+            </listitem>
+
+            <listitem>
+              <para>Op macOS: <keycap>F3</keycap></para>
+            </listitem>
+          </itemizedlist>
+
+          <para>De modus voor het schrijven (overschrijven - <guilabel>OVR</guilabel> of invoegen - <guilabel>INS</guilabel>) wordt weergegeven aan de rechterkant van de <link linkend="panes.statusbar">statusbalk</link>. Dezelfde toets schakelt tussen de modi.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="panes.editor.cursor.lock">
+        <term id="panes.editor.cursor.lock.title">Cursor vastgezet</term>
+
+        <listitem>
+          <para>Standaard is de cursor vergrendeld in het veld voor vertaling, en de pijltjestoetsen kunnen niet worden gebruikt om door de brontekst te verplaatsen.</para>
+
+          <para>Drukken op <keycap>F2</keycap> ontgrendelt de cursor en maakt het mogelijk om de pijltjestoetsen te gebruiken om door de brontekst te verplaatsen (of waar dan ook anders in het venster Bewerken). Dit stelt u in staat tekst te selecteren met het toetsenbord.</para>
+
+          <para>De status van de cursor (vergrendeld - <guilabel>LCK</guilabel> of niet vergrendeld - <guilabel>UNL</guilabel>) wordt weergegeven aan de rechterkant van de <link linkend="panes.statusbar">statusbalk</link>. Dezelfde toets schakelt tussen vergrendelen en ontgrendelen van de cursor.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="panes.editor.context.menu">
+        <term id="panes.editor.context.menu.title">Contextmenu</term>
+
+        <listitem>
+          <para>Standaard sneltoets:</para>
+
+		  <itemizedlist>
+			<listitem>
+              <para>Op Windows en Linux: <keycap>Menu</keycap></para>
+			</listitem>
+
+			<listitem>
+              <para>Op macOS: <keycombo><keycap>S</keycap><keycap>Esc</keycap></keycombo></para>
+			</listitem>
+          </itemizedlist>
+
+		  <para>U kunt het menu ook oproepen door met rechts te klikken met de muis (<keycap>C</keycap> + <keycap>klik</keycap> op macOS).</para>
+
+          <para>Het venster Bewerken biedt verschillende beschikbare functies vanuit het menu <link endterm="menus.edit.title" linkend="menus.edit"/>, met name:</para>
+
+		  <itemizedlist>
+			<listitem>
+			  <para>Overeenkomende items uit de woordenlijst, met opmerkingen, indien aanwezig weergegeven als een helptip. Gebruik <link endterm="menus.view.title" linkend="menus.view"/><link endterm="menus.view.mark.glossary.matches.title" linkend="menus.view.mark.glossary.matches"/> om deze mogelijkheid in te schakelen.</para>
+			</listitem>
+
+			<listitem>
+        <para>Functies <guilabel>Knippen</guilabel>, <guilabel>Kopiëren</guilabel>, <guilabel>Plakken</guilabel>,</para>
+      </listitem>
+
+      <listitem>
+        <para><guilabel>Ga naar segment</guilabel> (om naar het segment onder de aanwijzer te springen).</para>
+      </listitem>
+
+      <listitem>
+        <para><guilabel>Zoeken in woordenboeken</guilabel> (om naar de geselecteerde term te zoeken in een geïnstalleerd woordenboek).</para>
+      </listitem>
+
+      <listitem>
+        <para><guilabel>Item voor woordenlijst toevoegen</guilabel> (equivalent voor het gebruiken van <link endterm="menus.edit.title" linkend="menus.edit"/><link endterm="menus.edit.create.glossary.entry.title" linkend="menus.edit.create.glossary.entry"/>).</para>
+      </listitem>
+
+      </itemizedlist>
+
+          <para>Als u tekst hebt geselecteerd en items gedefinieerd in de voorkeuren <link endterm="dialogs.preferences.external.searches.title" linkend="dialogs.preferences.external.searches"/> zullen zij ook worden weergegeven in dit menu (net als lokale zoekacties).</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="panes.editor.auto.completion.menu">
+        <term id="panes.editor.auto.completion.menu.title">Menu Auto-aanvullen</term>
+
+        <listitem>
+          <para>Standaard sneltoets:</para>
+		  
+		  <itemizedlist>
+			<listitem>
+              <para>Op Windows en Linux: <keycombo><keycap>C</keycap><keycap>Spatie</keycap></keycombo></para>
+			</listitem>
+
+			<listitem>
+              <para>Op macOS: <keycap>Esc</keycap></para>
+			</listitem>
+          </itemizedlist>
+		  			
+          <para>Dit menu biedt de opties voor automatisch aanvullen aan die zijn ingesteld in de voorkeuren <link endterm="dialog.preferences.auto.completion.title" linkend="dialog.preferences.auto.completion"/>.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="panes.editor.navigation">
+        <term id="panes.editor.navigation.title">Navigatie</term>
+        <listitem>
+		  <para>Gebruik <link linkend="menus.goto" endterm="menus.goto.title"/><link linkend="menus.goto.notes.pane" endterm="menus.goto.notes.pane.title"/> om in het venster te gaan en een opmerking toe te voegen of aan te passen.</para>
+
+		  <para>Gebruik <link linkend="menus.goto" endterm="menus.goto.title"/><link linkend="menus.goto.editor.pane" endterm="menus.goto.editor.pane.title"/> om terug te gaan naar het venster Bewerken.</para>
+        </listitem>
+	  </varlistentry>
+    </variablelist>
+  </section>
+
+  <section id="panes.fuzzy.matches">
+    <title id="panes.fuzzy.matches.title"><guilabel>Fuzzy overeenkomsten</guilabel></title>
+
+    <para>Het venster Fuzzy overeenkomsten geeft de segmenten weer uit uw vertaalgeheugens die het meest soortgelijk zijn aan het segment dat u momenteel vertaalt.</para>
+
+    <para>Overeenkomsten komen zowel uit het interne vertaalgeheugen voor het project, in real time gemaakt terwijl u het project vertaalt, en externe geheugens die u hebt geïmporteerd uit eerdere projecten of hebt ontvangen van derde partijen. Bekijk de <link endterm="how.to.use.tm.title" linkend="how.to.use.tm"/> how-to voor details.</para>
+
+    <para>Als u naar een segment gaat, wordt de eerste overeenkomst (die met het hoogste percentage van overeenkomst) automatisch geselecteerd. U kunt drukken op <keycombo><keycap>C</keycap><keycap>2, 3, 4, of 5</keycap> </keycombo>, of <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.select.match" endterm="menus.edit.select.match.title"/> gebruiken om een andere overeenkomst te selecteren .</para>
+
+	<example id="the.first.match">
+	  <title id="the.first.match.title">Een leeg segment en zijn eerste twee overeenkomsten</title>
+      <para>
+		<informaltable id="table.pane.matches">
+          <tgroup cols="2">
+            <tbody>
+              <row>
+                <entry><para>
+				  <informaltable>
+					<tgroup cols="1">
+					  <tbody>
+						<row>
+						  <entry>
+							<programlisting>— ¶ —————————————————————
+
+<token>Application Folder</token>
+|<token>&lt;segment 1879 ¶&gt;</token>
+
+— ¶ —————————————————————
+</programlisting></entry>
+						</row>
+					  </tbody>
+					</tgroup>
+				  </informaltable>
+				</para>
+				</entry>
+                <entry><para>
+				  <informaltable>
+					<tgroup cols="1">
+					  <tbody>
+						<row>
+						  <entry>
+							<programlisting>1. <token>Top</token> Folder
+Dossier racine
+&lt;50/50/66% Wezen-segmenten (+1 meer)&gt;</programlisting>
+<programlisting>2. Configuration Folder
+Dossier de configuration
+&lt;50/50/66% &gt;</programlisting></entry>
+						</row>
+					  </tbody>
+					</tgroup>
+				  </informaltable>
+				</para>
+				</entry>
+			  </row>
+			</tbody>
+		  </tgroup>
+		</informaltable>
+	  </para>
+	</example>
+
+    <para>De geselecteerde fuzzy overeenkomst is <emphasis role="bold">vet</emphasis> geaccentueerd. Ontbrekende woorden in het segment dat u aan het vertalen bent worden weergegeven in <emphasis role="bold">blauw</emphasis>, en aanliggende delen in <emphasis role="bold">groen</emphasis> (als het aanliggende deel een spatie is, zoals hierboven, wordt dat deel niet gekleurd).</para>
+
+    <para>De overeenkomst geeft ook drie percentages weer voor de overeenkomst.</para>
+
+    <para>Deze percentages hebben de volgende betekenis, in volgorde:</para>
+
+	<itemizedlist>
+      <listitem>
+        <para>Berekend percentage <emphasis role="bold">met stemming</emphasis>, gebaseerd op de tokenizer van de brontaal, en <emphasis role="bold">negeren van tags en getallen</emphasis> (over het algemeen het hoogste).</para>
+      </listitem>
+
+      <listitem>
+        <para>Berekend percentage <emphasis role="bold">zonder stemming</emphasis>, terwijl het nog steeds <emphasis role="bold">tags en getallen negeert</emphasis> (in het algemeen iets lager)</para>
+      </listitem>
+
+      <listitem>
+        <para>Berekend percentage over <emphasis role="bold">de volledige tekst, inclusief tags en getallen</emphasis> (in het algemeen het laagste)</para>
+		<note>
+		  <para>Als het segment alleen getallen of symbolen bevat, zal dit percentage het hoogste zijn.</para>
+		</note>
+      </listitem>
+    </itemizedlist>
+  
+    <para>U kunt wijzigen hoe de overeenkomsten worden weergegeven of gesorteerd. Bekijk de voorkeuren <link endterm="dialog.preferences.tm.matches.title" linkend="dialog.preferences.tm.matches"/> voor details.</para>
+
+    <para>Gebruik <link linkend="menus.edit" endterm="menus.edit.title"/><link endterm="menus.edit.replace.with.match.or.selection.title" linkend="menus.edit.replace.with.match.or.selection"/> om het veld voor vertaling te vervagen door de overeenkomst, of <link linkend="menus.edit" endterm="menus.edit.title"/><link endterm="menus.edit.insert.match.or.selection.title" linkend="menus.edit.insert.match.or.selection"/> om het op de positie van de cursor in te voegen.</para>
+  </section>
+
+  <section id="panes.glossary">
+    <title id="panes.glossary.title"><guilabel>Woordenlijsten</guilabel></title>
+
+    <para>Dit venster geeft termen weer uit uw woordenlijsten die corresponderen met termen in het huidige segment. De woordenlijsten zijn geplaatst in de map <link endterm="project.folder.glossary.title" linkend="project.folder.glossary"/> van het project.</para>
+
+    <para>De bronterm wordt weergegeven voor het teken “=” en de doeltermen erachter. Als het item opmerkingen bevat zijn zij genummerd en worden weergegeven op afzonderlijke regels onder de termen. Termen die zijn gevonden in de beschrijfbare woordenlijst worden vet weergegeven, terwijl die uit andere woordenlijsten worden gepresenteerd als gewone tekst.</para>
+
+	<example id="glossary.matches">
+	  <title id="glossary.matches.title">Overeenkomsten woordenlijst</title>
+	  <para>
+		<programlisting>Project = <token>Projet</token>
+1. Projet de traduction
+
+Folder = <token>Dossier</token></programlisting>
+	  </para>
+	</example>
+
+    <para>De bestandsnaam van de woordenlijst wordt als een helptip weergegeven bij het over de termen gaan met de muis.</para>
+
+    <para>Het veld voor opmerkingen van een item mag hyperlinks bevatten, waarop kan worden geklikt voor nadere verwijzing.</para>
+
+	<para>Links naar lokale bestanden (<filename>file:///PAD/bestandsnaam</filename>) openen in het geassocieerde programma. Webadressen (<filename>https://…</filename>) openen in de standaard browser.</para>
+
+    <para>U kunt een term in het venster van de woordenlijst selecteren en er met rechts op klikken om het in de vertaling in te voegen.</para>
+
+    <para>Gebruik <link endterm="menus.view.title" linkend="menus.view"/><link endterm="menus.view.mark.glossary.matches.title" linkend="menus.view.mark.glossary.matches"/> om overeenkomsten van woordenlijsten te onderstrepen.</para>
+
+	<para>U kunt dan met rechts klikken op het onderstreepte woord in het bronsegment om een pop-upmenu te openen dat de beschikbare vertalingen in uw woordenlijsten vermeld. Selecteer er een om in te voegen op de huidige plaats van de cursor in het segment.</para>
+
+    <para>U kunt de voorkeuren voor de woordenlijsten gebruiken om fijn af te stemmen hoe de woordenlijsten worden weergegeven. Bekijk de voorkeuren <link endterm="dialogs.preferences.glossary.title" linkend="dialogs.preferences.glossary"/> voor details.</para>
+
+    <para>Aanpassingen aan een bestand voor een woordenlijst in de map glossary worden onmiddellijk herkend door OmegaT en weergegeven in het venster Woordenlijst.</para>
+
+    <para>OmegaT bevat één bestand voor de beschrijfbare woordenlijst per project. Gebruik <link endterm="menus.edit.title" linkend="menus.edit"/><link endterm="menus.edit.create.glossary.entry.title" linkend="menus.edit.create.glossary.entry"/> om termen aan dat bestand toe te voegen.</para>
+
+	<para>Bekijk de appendix <link linkend="app.glossaries" endterm="app.glossaries.title"/> voor details.</para>
+  </section>
+
+  <section id="panes.dictionary">
+    <title id="panes.dictionary.title"><guilabel>Woordenboeken</guilabel></title>
+
+	<para>Dit venster geeft termen weer uit uw woordenboeken die corresponderen met termen in het huidige segment. De woordenboeken zijn geplaatst in de map <link linkend="project.folder.dictionary" endterm="project.folder.dictionary.title"/> van het project. Bekijk de <link endterm="dialogs.preferences.dictionary.title" linkend="dialogs.preferences.dictionary"/> voorkeuren voor details.</para>
+  </section>
+  
+  <section id="panes.machinetranslation">
+    <title id="panes.machinetranslation.title"><guilabel>Machinevertaling</guilabel></title>
+
+    <para>Dit venster, indien geopend, geeft de suggesties voor het huidige segment weer, geproduceerd door elke ingeschakeld programma voor machinevertaling. Als er suggesties van meer dan één programma beschikbaar zijn,</para>
+	
+    <itemizedlist>
+      <listitem>
+        <para>verschijnt de naam van het programma achter de vertaalde tekst,</para>
+      </listitem>
+
+      <listitem>
+        <para>worden de resultaten alfabetisch gesorteerd op de naam van het programma, and</para>
+      </listitem>
+
+      <listitem>
+        <para>wordt de momenteel geselecteerde vertaling geaccentueerd.</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Gebruik <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.replace.with.mt.title" endterm="menus.edit.replace.with.mt.title"/> om de vertaling van het huidige segment te vervangen door die van het geselecteerde vertaalprogramma.</para>
+
+    <para>De geselecteerde naam van het programma wordt toegewezen aan de eigenschap <parameter>Origin</parameter> van het huidige segment.</para>
+
+	<para>Als er een verbindings- of authenticatie optreedt met een programma voor machinevertaling, zal de statusbalk aan de onderzijde van het venster kort een statusbericht weergeven.</para>
+
+    <para>Zorg er voor dat de service is ingeschakeld en dat uw inloggegevens correct zijn ingevoerd. Als dat zo is zou u misschien contact met de serviceprovider moeten opnemen voor hulp. Soortgelijk kan een fout, zoals <literal>Kan antwoord van vertaalservice niet parsen</literal>, suggereren dat er een communicatieprobleem bestaat tussen uw systeem en de server van de provider.</para>
+
+	<para>Bekijk de voorkeuren <link linkend="dialogs.preferences.mt" endterm="dialogs.preferences.mt.title"/> voor details.</para>
+  </section>
+
+  <section id="panes.multipletranslations">
+    <title id="panes.multipletranslations.title"><guilabel>Meerdere vertalingen</guilabel></title>
+
+    <para>Een bronsegment, dat op meerdere plaatsen in het project verschijnt, zou verschillende vertalingen kunnen hebben, afhankelijk van de context.</para>
+
+	<para>Gebruik <link endterm="menus.edit.title" linkend="menus.edit"/><link endterm="menus.edit.create.alternative.translation.title" linkend="menus.edit.create.alternative.translation"/> om een alternatieve vertaling te registreren als de huidige vertaling van het segment niet geschikt is. De ingevoerde vertaling zal dan worden behandeld als een alternatieve vertaling van het bronsegment.</para>
+
+    <para>Gebruik <link endterm="menus.edit.title" linkend="menus.edit"/><link endterm="menus.edit.use.as.default.translation.title" linkend="menus.edit.use.as.default.translation"/> om een van de alternatieven te definiëren—waarschijnlijk de meest voorkomende bijvoorbeeld—als de standaard vertaling.</para>
+  </section>
+
+  <section id="panes.notes">
+    <title id="panes.notes.title"><guilabel>Notepad</guilabel></title>
+
+    <para>Dit venster is een <emphasis>bewerkbare</emphasis> ruimte waar u opmerkingen kunt toevoegen aan het huidige actieve segment.</para>
+
+	<para>Het stelt u in staat later terug te kunnen keren naar het segment en, bijvoorbeeld, de vertaling na te kijken, te controleren dat alternatieve vertalingen juist zijn, of in gedeelde projecten, om collega's om hun mening te vragen.</para>
+
+	<para>Gebruik <link endterm="menus.goto.title" linkend="menus.goto"/><link endterm="menus.goto.next.note.title" linkend="menus.goto.next.note"/> en <link endterm="menus.goto.title" linkend="menus.goto"/><link endterm="menus.goto.previous.note.title" linkend="menus.goto.previous.note"/> om door de opmerkingen te bladeren.</para>
+
+	<para>Gebruik <link linkend="menus.goto" endterm="menus.goto.title"/><link linkend="menus.goto.notes.pane" endterm="menus.goto.notes.pane.title"/> om in het venster te gaan en een opmerking toe te voegen of aan te passen.</para>
+	<para>Gebruik <link linkend="menus.goto" endterm="menus.goto.title"/><link linkend="menus.goto.editor.pane" endterm="menus.goto.editor.pane.title"/> om terug te gaan naar het venster Bewerken.</para>
+
+	<note>
+	  <para>De opmerkingen worden opgeslagen in het vertaalgeheugen van het project. Zij worden <emphasis>niet</emphasis> opgeslagen in de vertaalde documenten.</para>
+	</note>
+  </section>
+
+  <section id="panes.comments">
+    <title id="panes.comments.title"><guilabel>Opmerkingen</guilabel></title>
+
+    <para>Sommige bestandsindelingen, zoals de indeling PO, kunnen opmerkingen voor de vertaler bevatten om context aan de vertaling te geven. Zulke opmerkingen worden hier weergegeven.</para>
+
+    <note>
+      <para>Het venster <guilabel>Notities</guilabel> is <emphasis>niet</emphasis> te bewerken. Het geeft alleen de informatie weer die is opgenomen in het bestand.</para>
+
+	  <para>Gebruik het venster <link endterm="panes.notes.title" linkend="panes.notes"/> om uw eigen opmerkingen overeen vertaling in te voeren.</para>
+    </note>
+  </section>
+
+  <section id="panes.segment.properties">
+    <title id="panes.segment.properties.title"><guilabel>Segmenteigenschappen</guilabel></title>
+
+    <para>Alle segmenten hebben eigenschappen. De eigenschappen worden in dit venster weergegeven.</para>
+	<para>Algemene eigenschappen omvatten:</para>
+	
+	<variablelist>
+	  <varlistentry>
+		<term>Is herhaling</term>
+		<listitem>
+		  <para>Geeft aan dat een segment een herhaling is en specificeert of het de EERSTE keer is dat het voorkomt.</para>
+		</listitem>
+	  </varlistentry>
+	  <varlistentry>
+		<term>Bestand</term>
+		<listitem>
+		  <para>Geeft aan welk bestanden het segment bevat.</para>
+		</listitem>
+	  </varlistentry>
+	</variablelist>
+
+    <note>
+      <para>Het venster Segmenteigenschappen is <emphasis>niet</emphasis> te bewerken. Het geeft alleen informatie weer die is gerelateerd aan het segment.</para>
+    </note>
+  </section>
+
+  <section id="panes.statusbar">
+    <title id="panes.statusbar.title"><guilabel>Statusbalk</guilabel></title>
+
+    <para>De onderzijde van het hoofdvenster is de statusbalk.</para>
+
+	<para>De linkerkant van de statusbalk geeft informatie weer over acties van het project of foutberichten.</para>
+
+	<example id="panes.statusbar.messages">
+      <title id="panes.statusbar.messages.title">Voorbeelden van berichten op de statusbalk</title>
+	  <para><literal>Synchronisatie van opslagplaatsen</literal></para>
+
+	  <para>→ OmegaT is een teamproject aan het openen en synchroniseert met de opslagplaats op afstand.</para>
+
+	  <para><literal>Naar laatste bewerkte segment springen…</literal></para>
+
+	  <para>→ OmegaT opent het laatste bewerkte segment uit de laatste sessie.</para>
+
+	  <para><literal>Project automatisch opgeslagen om 10:48</literal></para>
+
+	  <para>→ OmegaT heeft het project recent opgeslagen.</para>
+
+	  <para><literal>Vertaalde documenten gemaakt</literal></para>
+
+	  <para>→ Bestanden werden door de gebruiker gemaakt.</para>
+	</example>
+
+    <para>De rechterkant van de statusbalk geeft aan of de cursor is vergrendeld in het segment (bekijk de instelling <link endterm="panes.editor.cursor.lock.title" linkend="panes.editor.cursor.lock"/>) en of de cursor de bestaande tekst overschrijft (bekijk de instelling <link linkend="panes.editor.overwriting" endterm="panes.editor.overwriting.title"/>). Het geeft ook informatie over de voortgang.</para>
+
+    <para>Klik op de getallen om te wissel tussen het weergeven van de voortgang als getallen of als percentages.</para>
+
+	<example id="panes.statusbar.widgets">
+      <title id="panes.statusbar.widgets.title">Informatie op de statusbalk </title>
+	  <para><literal>LCK | OVR <token>257/271 (12292/154896,
+	  177692)</token><token> 35/0 </token></literal></para>
+
+	  <variablelist>
+		<varlistentry>
+		  <term>Status cursor </term>
+		  <listitem>
+			<para><literal>LCK</literal> geeft aan dat de cursor is vergrendeld in het segment.</para>
+
+			<para><literal>OVR</literal> geeft aan dat de cursor de bestaande tekst overschrijft.</para>
+		  </listitem>
+		</varlistentry>
+		
+		<varlistentry>
+		  <term>In het bestand</term>
+		  <listitem>
+			<para><emphasis role="bold">257</emphasis> = aantal vertaalde segmenten / <emphasis role="bold">271</emphasis> = totaal aantal segmenten</para>
+		  </listitem>
+		</varlistentry>
+
+		<varlistentry>
+		  <term>In het project</term>
+		  <listitem>
+			<para><emphasis role="bold">12292</emphasis> = aantal unieke vertaalde segmenten / <emphasis role="bold">154896</emphasis> = totaal aantal unieke segmenten, <emphasis role="bold">(177692)</emphasis> = totaal aantal segmenten</para>
+		  </listitem>
+		</varlistentry>
+
+		<varlistentry>
+		  <term>In het segment</term>
+		  <listitem>
+			<para><emphasis role="bold">35</emphasis> = aantal tekens in de bron / <emphasis role="bold">0</emphasis> = aantal tekens in het doelgebied, tot nu</para>
+		  </listitem>
+		</varlistentry>
+	  </variablelist>
+	</example>
+	
+	<example id="panes.statusbar.widgets.percentage">
+      <title id="panes.statusbar.widgets.percentage.title">Informatie op de statusbalk, modus Percentage</title>
+	  <para><literal>UNL | INS <token>94.8% (14 resterend) / 7.9% (142,604 resterend), 177,692</token> <token>35/0</token></literal></para>
+	  <variablelist>
+		<varlistentry>
+		  <term>Status cursor </term>
+		  <listitem>
+			<para><literal>UNL</literal> geeft aan dat de cursor niet is vergrendeld in het segment en door het venster Bewerken kan navigeren met de standaard opdrachten voor navigatie.</para>
+
+			<para><literal>INS</literal> geeft aan dat de cursor tekst invoegt.</para>
+		  </listitem>
+		</varlistentry>
+
+		<varlistentry>
+		  <term>In het bestand</term>
+		  <listitem>
+			<para><emphasis role="bold">94.8%</emphasis> = % of vertaalde segmenten / <emphasis role="bold">14</emphasis> = aantal niet-vertaalde segmenten</para>
+		  </listitem>
+		</varlistentry>
+
+		<varlistentry>
+		  <term>In het project</term>
+		  <listitem>
+			<para><emphasis role="bold">7.9%</emphasis> = % vertaalde segmenten / <emphasis role="bold">142,604</emphasis> = aantal niet-vertaalde segmenten, <emphasis role="bold">(177,692)</emphasis> = totaal aantal segmenten</para>
+		  </listitem>
+		</varlistentry>
+
+		<varlistentry>
+		  <term>In het segment</term>
+		  <listitem>
+			<para><emphasis role="bold">35</emphasis> = aantal tekens in de bron / <emphasis role="bold">0</emphasis> = aantal tekens in het doelgebied, tot nu</para>
+		  </listitem>
+		</varlistentry>
+	  </variablelist>
+	</example>
+  </section>
+</chapter>

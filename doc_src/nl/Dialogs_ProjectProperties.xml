@@ -1,117 +1,415 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="dialogs.projectproperties">
-  <title>Projecteigenschappen</title>
+<section id="dialogs.project.properties">
+  <title id="dialogs.project.properties.title"><guilabel>Projecteigenschappen</guilabel></title>
 
-  <para>Dit dialoogvenster is toegankelijk door te selecteren <menuchoice> <guimenuitem>Project</guimenuitem> <guimenuitem>eigenschappen…</guimenuitem> </menuchoice></para>
+  <para>Gebruik <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.properties" endterm="menus.project.properties.title"/> om het dialoogvenster te openen.</para>
+  
+  <para>Dit dialoogvenster wordt gebruikt om de initiële projecteigenschappen in te stellen als een nieuw project wordt gemaakt of om ze later aan te passen, nadat het project is gemaakt.</para>
 
-  <section>
-    <title>Talen</title>
+  <para>Bekijk het hoofdstuk <link linkend="introduction.create.and.open.new.project" endterm="introduction.create.and.open.new.project.title"/> voor details.</para>
+  
 
-    <para>U kunt de bron- en doeltalen handmatig instellen of het menu met de keuzelijsten gebruiken. Onthoud goed dat het wijzigen van de talen er voor kan zorgen dat het de huidige gebruikte vertaalgeheugens onbruikbaar kan maken omdat hun taal niet meer overeenkomt met de nieuwe talen.</para>
+  <section id="dialogs.project.properties.languages">
+    <title id="dialogs.project.properties.languages.title"><guilabel>Talen</guilabel></title>
 
-    <para>Tokenizers, corresponderend met de geselecteerde talen, worden weergegeven.</para>
+    <para>Selecteer de bron- en doeltalen  uit de keuzelijst, of voer ze handmatig in.</para>
+
+	<para>OmegaT verschaft een handige lijst met verkorte twee-letter taalcodes, maar u mag elke code, die zich conformeert aan <ulink url="https://www.rfc-editor.org/rfc/bcp/bcp47.txt">BCP-47</ulink> (inclusief de drie-letter taalcodes), in het toepasselijk veld invoeren.</para>
+	
+	<para>Taalcodes worden ook op verschillende plaatsen binnen OmegaT gebruikt om:</para>
+	
+	<itemizedlist>
+	  <listitem>
+		<para>resultaten in het venster <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/> te verkrijgen,</para>
+	  </listitem>
+
+	  <listitem>
+		<para>de gedefinieerde segmentatieregels toe te passen die zijn gedefinieerd in de voorkeuren <link linkend="dialogs.preferences.segmentation.setup" endterm="dialogs.preferences.segmentation.setup.title"/>,</para>
+	  </listitem>
+
+	  <listitem>
+		<para>spelfouten te zoeken in de woordenlijsten die zijn geïnstalleerd in de voorkeuren <link linkend="dialog.preferences.spellchecker" endterm="dialog.preferences.spellchecker.title"/>,</para>
+	  </listitem>
+
+	  <listitem>
+		<para>grammaticale en typografische fouten te zoeken voor de regels die zijn ingesteld in de voorkeuren <link linkend="dialog.preferences.languagetool.plugin" endterm="dialog.preferences.languagetool.plugin.title"/>,</para>
+	  </listitem>
+	</itemizedlist>
+
+	  <para>enzovoort.</para>
+
+	<warning>
+	  <para>Zorg ervoor dat u de juiste taalcodes invoert en dat alle andere locaties die een dergelijke code vereisen, exact overeenkomen met die welke u hier toewijst. Functies die afhankelijk zijn van een taal ofwel falen of produceren incorrecte resultaten als de twee taalcodes niet overeenkomen.</para>
+	</warning>
+
+	  
+      <para>OmegaT selecteert automatisch de tokenizers die corresponderen met de bron- en de doeltaal, maar u kunt deze instellingen handmatig aanpassen. Tokenizers stellen OmegaT in staat om betere overeenkomsten te verschaffen.</para>
   </section>
 
-  <section>
-    <title>Opties</title>
+  <section id="dialogs.project.properties.options">
+    <title id="dialogs.project.properties.options.title"><guilabel>Opties</guilabel></title>
 
     <variablelist>
-      <varlistentry>
-        <term>Segmentering op zin-niveau inschakelen</term>
+      <varlistentry id="dialogs.project.properties.options.segmentation">
+        <term id="dialogs.project.properties.options.segmentation.title"><option>Segmentatie op niveau van de zin</option></term>
 
-        <listitem>
-          <para>De instellingen voor segmentatie hebben alleen betrekking op de manier waarop de bronbestanden door <application>OmegaT</application> worden afgehandeld. De vooraf ingestelde manier van het segmenteren van de bronnen is de segmentering op zin-niveau, dus dit keuzevak zou in normale gevallen geselecteerd moeten worden gelaten.</para>
+		<listitem>		  
+          <para>Segmentatie op niveau van de zin splitst alinea's of andere tekstblokken in het bronbestand in segmenten, gebaseerd op segmentatieregels.</para>
 
-          <para>In sommige uitzonderlijke gevallen kan het alternatief, d.i. segmenteren op alinea's, de voorkeur genieten. Wijzigen van deze vlag past niet de segmentatie van de reeds bestaande vertaalgeheugens aan. Indien u gedurende de vertaling besluit om te schakelen van zin- naar alinea-vertaling, zal het interne vertaalgeheugen van het project niet worden gewijzigd (OmegaT kan oude vertaalgeheugens bijwerken die geen gebruik maakten van zin-segmentatie, maar niet andersom), maar OmegaT zal proberen fuzzy overeenkomsten voor alinea's te maken door bestaande vertalingen van zinnen samen te voegen.</para>
+		  <para>Schakel deze optie uit als u niet wilt dat de alinea's nog worden gesegmenteerd.</para>
 
-          <para>Wijzigen van de instellingen voor segmentatie kunnen er voor zorgen dat sommige reeds vertaalde segmenten opgedeeld of samengevoegd worden. Zij zullen dan effectief terugkeren naar de status &quot;niet vertaald&quot; omdat zij niet overeenkomen met de opgenomen segmenten in het projectgeheugen, zelfs als de originele vertaling daar nog steeds in staat.</para>
+		  <para>Standaard zijn de segmentatieregels globaal en van toepassing op alle projecten.</para>
+
+		  <para>Gebruik <link linkend="menus.options" endterm="menus.options.title"/><link linkend="menus.options.segmentation" endterm="menus.options.segmentation.title"/> om toegang te verkrijgen tot de globale segmentatieregels.</para>
+		  
+		  <para>Klik op <link linkend="dialogs.project.properties.local.segmentation" endterm="dialogs.project.properties.local.segmentation.title"/> om projectspecifieke (lokale) segmentatieregels te gebruiken in plaats van de globale regels. U kunt ook OmegaT starten vanaf de opdrachtregel met een instelling voor projectspecifieke configuratie om hetzelfde resultaat te bereiken.</para>
+
+		  <para>Bekijk het gedeelte <link linkend="launch.with.command.line" endterm="launch.with.command.line.title"/> voor details.</para>
+
+		  <note>
+			<para>Als u lokale regels gebruikt, heeft u nog steeds toegang tot de globale regels, maar het aanpassen daarvan zal geen effect hebben op uw project.</para>
+		  </note>
+		  
+		  <para>Wijzigen van de instellingen voor de segmentatieregels gedurende een vertaling past niet de segmentatie aan van de in het vertaalgeheugen van het project geregistreerde segmenten.</para>
+		  
+		  <para>Schakelen van <emphasis role="bold">zin-</emphasis> naar <emphasis role="bold">alinea-</emphasis>segmentatie tijdens de vertaling zou OmegaT kunnen forceren om oude vertaalgeheugens, die geen zin-segmentatie gebruikten, te upgraden, maar niet vice versa. OmegaT zal echter proberen ook fuzzy overeenkomsten te maken voor alinea's door bestaande vertalingen van zinnen te combineren.</para>
+
+		  <para>Als u de segmentatie wijzigt tijdens het vertalen, moet u het project herladen vóórdat de nieuwe segmentatie effect heeft. Dit zal sommige eerder vertaalde segmenten splitsen of samenvoegen, en die daarom niet langer vertaald zullen zijn. Hun originele vertaling zal echter nog steeds in het projectgeheugen staan.</para>
+
+		  <para>Bekijk de appendix <link linkend="app.segmentation" endterm="app.segmentation.title"/> voor algemene uitleg over segmentatie (globaal of lokaal, alinea of zin, instellingen, enzovoort).</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry>
-        <term>Automatisch vergroten van vertalingen</term>
+      <varlistentry id="dialogs.project.properties.local.segmentation">
+        <term id="dialogs.project.properties.local.segmentation.title"><guibutton>Lokale segmentatieregels…</guibutton></term>
 
-        <listitem>
-          <para>In het geval dat er niet-unieke segmenten in brondocumenten staan biedt het keuzevak Automatisch vergroten van vertaling de gebruiker de volgende twee mogelijkheden met betrekking tot automatische vertaling: indien geselecteerd zal het eerste vertaalde segment worden beschouwd als de standaard vertaling en de tekst van het doel zal automatisch worden gebruikt voor latere hits gedurende het vertaalproces. Foutief vertaalde segmenten kunnen natuurlijk later handmatig worden gecorrigeerd met behulp van<guimenuitem>Alternatieve vertaling maken</guimenuitem>. Als het keuzevak Automatisch vergroten van vertaling niet is geselecteerd zullen de segmenten met alternatieve vertalingen niet vertaald worden totdat de gebruiker heeft bepaald welke vertaling moet worden gebruikt.</para>
+		<listitem>
+		  <para>Standaard zijn de segmentatieregels globaal en van toepassing op alle projecten.</para>
+		  
+			<para>De segmentatieregels die worden weergegeven als u de voorkeuren <link linkend="dialogs.preferences.segmentation.setup" endterm="dialogs.preferences.segmentation.setup.title"/> opent (met <link linkend="menus.options" endterm="menus.options.title"/><link linkend="menus.options.segmentation" endterm="menus.options.segmentation.title"/>) zijn de globale regels.</para>
+
+		  <para>Gebruik deze knop om lokale regels te maken, specifiek voor uw project. Selecteer het vak <option>Segmentatieregels projectspecifiek maken</option>, en pas de segmentatieregels aan zoals u wilt.</para>
+		  
+		  <para>Het project zal de nieuwe set regels opslaan in het bestand <link linkend="project.folder.omegat.segmentation" endterm="project.folder.omegat.segmentation.title"/>, geplaatst in zijn map <link linkend="project.folder.omegat.folder" endterm="project.folder.omegat.folder.title"/>. Deze regels hebben voorrang boven de globale segmentatieregels.</para>
+		  
+		  <para>Schakel deze optie uit of verwijder het bestand om lokale segmentatieregels uit te schakelen.</para>
+
+		  <warning>
+			<para>Als u lokale regels gebruikt, heeft u nog steeds toegang tot de globale regels, maar het aanpassen daarvan zal geen effect hebben op uw project.</para>
+		  </warning>
+
+		  <para>Bekijk de appendix <link linkend="app.segmentation" endterm="app.segmentation.title"/> voor algemene uitleg over segmentatie (globaal of lokaal, alinea of zin, instellingen, enzovoort).</para>
+        </listitem>
+      </varlistentry>
+	  
+	  
+      <varlistentry id="dialogs.project.properties.auto.propagation">
+        <term id="dialogs.project.properties.auto.propagation.title"><option>Automatisch vergroten van vertalingen</option></term>
+
+		<listitem>
+          <para>Als er herhaalde segmenten in de brondocumenten staan zal het selecteren van deze optie het eerste vertaalde segment als de standaard vertaling en automatisch dezelfde doeltekst gebruiken in de resterende herhaalde segmenten.</para>
+		  
+		  <para>Gebruik <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.create.alternative.translation" endterm="menus.edit.create.alternative.translation.title"/> om een alternatieve vertaling toe te wijzen aan segmenten die een andere vertaling vereisen.</para>
+		  
+		  <para>Wanneer u deze optie niet activeert kan aan alle segmenten een verschillende vertaling worden toegewezen, zelfs als zij in het project zijn gedupliceerd.</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry>
-        <term>Tags verwijderen</term>
+      <varlistentry id="dialogs.project.properties.hide.tags">
+        <term id="dialogs.project.properties.hide.tags.title"><option>Tags verbergen</option></term>
 
-        <listitem>
-          <para>Indien ingeschakeld worden alle tags voor opmaak verwijderd uit de bronsegmenten. Dit is in het bijzonder handig als teksten worden afgehandeld waarin in-regelige opmaak geen echt nut heeft (bijv. ge-OCRde pdf, slecht geconverteerde .odt of .docx, etc.) In een normaal geval zou het altijd mogelijk moeten zijn om de doeldocumenten te kunnen openen, omdat alleen de in-regelige tags worden verwijderd. Niet-zichtbare opmaak (d.i. die niet als tags verschijnen in de bewerker van OmegaT) wordt in de doeldocumenten behouden.</para>
+		<listitem>
+          <para>Tags zijn over het algemeen nuttig om specifieke lay-outs of karakteristieken van de brontekst te reproduceren in de vertaalde tekst.</para>
+
+		  <para>Activeren van deze functie verbergt de tags in de bronsegmenten, wat u bevrijdt van de noodzaak om ze handmatig af te handelen.</para>
+		  
+		  <para>Dit is in het bijzonder handig als teksten worden afgehandeld waarin in-regelige opmaak geen echt nut heeft (bijv. ge-OCRde pdf, slecht geconverteerde bestanden van .odt of .docx.)</para>
+
+		  <note>
+			<para>Verborgen tags worden eenvoudigweg opgestapeld aan het einde van het segment. Hoewel dit normaal gesproken voorkomt dat het vertaalde bestand wordt geopend, zouden de volgende punten moeten worden onthouden bij het gebruiken van deze functie:</para>
+			<itemizedlist>
+				<listitem>
+					<para>U zult handmatig vet, cursief, of andere tekstdecoraties moeten toepassen in het vertaalde bestand.</para>
+				</listitem>
+				<listitem>
+					<para>Wanneer u eenvoudigweg het aantal tags in een document van <application>Microsoft Word</application> (2007 en later) wilt beperken, kunt u het script <link linkend="windows.scripts.distribution.tagwipe" endterm="windows.scripts.distribution.tagwipe.title"/>.</para>
+					<para>Bekijk het gedeelte <link linkend="windows.scripts" endterm="windows.scripts.title"/> voor details.</para>
+				</listitem>
+			</itemizedlist>
+			</note>
+      </listitem>
+      </varlistentry>
+
+      <varlistentry id="dialogs.project.properties.external.processing.command">
+        <term id="dialogs.project.properties.external.processing.command.title"><option>Lokale opdrachten voor nabewerken</option></term>
+
+		<listitem>
+		  <warning>
+			<para>Opdrachten voor lokale nabewerking zijn om veiligheidsredenen standaard uitgeschakeld.</para>
+
+			<para>Bekijk de voorkeuren <link linkend="dialogs.preferences.saving.and.output.also.allow.per.project.external.commands" endterm="dialogs.preferences.saving.and.output.also.allow.per.project.external.commands.title"/> voor details.</para>
+		  </warning>
+
+		  <para>OmegaT kan automatisch opdrachten uitvoeren als de doelbestanden zijn gemaakt.</para>
+
+		  <para>Voer in dit veld de opdrachten in die u wilt uitvoeren.</para>
+
+		  <para>Gebruik <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.create.translated.documents" endterm="menus.project.create.translated.documents.title"/> of <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.create.current.translated.document" endterm="menus.project.create.current.translated.document.title"/> om de doelbestanden te maken en activeer de opdracht.</para>
+
+		  <para>Hier gespecificeerde opdrachten zijn alleen beschikbaar in dit project. Zij worden opgeslagen in het bestand <link linkend="project.folder.omegat.project.file" endterm="project.folder.omegat.project.file.title"/>. Schakel lokale opdrachten voor nabewerking alleen in als u de bron van dat bestand vertrouwt.</para>
+		
+		  <para>De lijst van variabelen voor sjablonen geeft u toegang tot de verschillende projectgegevens en systeemvariabelen.</para>
+
+		  <para>Bekijk de appendix <link linkend="post.processing.commands" endterm="post.processing.commands.title"/> voor details.</para>
+
+		  <para>U kunt ook globale opdrachten voor nabewerking definiëren die beschikbaar zijn voor alle projecten die dezelfde map voor configuratie gebruiken. Dergelijke opdrachten worden gedefinieerd in de voorkeur <link linkend="dialogs.preferences.saving.and.output.external.post-processing.command" endterm="dialogs.preferences.saving.and.output.external.post-processing.command.title"/>.</para>
+
+		  <note>
+			<para>Lokale opdrachten worden uitgevoerd vóór globale opdrachten.</para>
+		  </note>
         </listitem>
       </varlistentry>
 
-      <varlistentry>
-        <term>Externe opdracht nabewerken</term>
+      <varlistentry id="dialogs.project.properties.filters">
+        <term id="dialogs.project.properties.filters.title"><guibutton>Lokale bestandsfilters…</guibutton></term>
 
         <listitem>
-          <para>Dit gebied maakt het mogelijk een externe opdracht voor na-verwerking in te voeren (bijvoorbeeld een script om bestanden te hernoemen) die, elke keer als Vertaalde documenten maken wordt gebruikt, zal worden toegepast. Deze externe opdracht mag geen &quot;pipes&quot;, etc. bevatten, waarom het aanroepen van een script wordt aanbevolen.</para>
+          <para>Standaard zijn de instellingen voor bestandsfilters globaal en worden gedeeld door alle projecten. Zij zijn te vinden in de voorkeuren <link linkend="dialogs.preferences.file.filters" endterm="dialogs.preferences.file.filters.title"/>.</para>
+
+		  <para>Gebruik deze knop om lokale bestandsfilters te maken, specifiek voor uw project. Selecteer het vak <option>Filterinstellingen projectspecifiek maken</option>, en pas de instellingen aan zoals u wilt.</para>
+
+		  <para>Het project zal de nieuwe set bestandsfilters opslaan in het bestand <link linkend="project.folder.omegat.filters" endterm="project.folder.omegat.filters.title"/>, geplaatst in zijn map <link linkend="project.folder.omegat.folder" endterm="project.folder.omegat.folder.title"/>. Deze instellingen hebben voorrang boven de globale instellingen voor bestandsfilters.</para>
+
+		  <note>
+			<para>Deselecteer het vak om projectspecifieke bestandsfilters uit te schakelen of dat bestand te verwijderen.</para>
+		  </note>
+		  
+		  <para>Bekijk de appendix <link linkend="file.filters" endterm="file.filters.title"/> voor details.</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry>
-        <term><guibutton>Segmentatie…</guibutton></term>
+      <varlistentry id="dialogs.project.properties.repository.mapping">
+        <term id="dialogs.project.properties.repository.mapping.title"><guibutton>Mappen in opslagplaats…</guibutton></term>
 
         <listitem>
-          <para>De segmentatieregels zijn in het algemeen geldig voor alle projecten. De gebruiker echter wil misschien een set regels genereren, specifiek voor het betreffende project. Gebruik deze knop om een dialoogvenster te openen, activeer het keuzevak <guimenuitem>Projectspecifieke segmentatieregels</guimenuitem>, en ga dan door met het aanpassen van de segmentatieregels, zoals gewenst. De nieuwe set regels zal worden opgeslagen tezamen met het project en zal niet botsen met de algemene set segmentatieregels. Deselecteer het keuzevak om projectspecifieke segmentatieregels te verwijderen. Bekijk <link linkend="dialogs.preferences.segmentationsetup">Instellen voorkeuren segmentatie</link> voor meer informatie over segmentatieregels.</para>
+          <para>Dit venster stelt u in staat, bij het werken aan een teamproject, de routes te definiëren tussen de mappen op afstand en lokale mappen.</para>
 
-          <para><emphasis>Hint:</emphasis> de set segmentatieregels voor een bepaald project wordt opgeslagen als <filename>project/omegat/segmentation.conf.</filename></para>
+		  <para>Bekijk het gedeelte <link linkend="how.to.setup.team.project.mapping.parameters" endterm="how.to.setup.team.project.mapping.parameters.title"/> van de <link linkend="how.to.setup.team.project" endterm="how.to.setup.team.project.title"/> how-to voor details.</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry>
-        <term><guibutton>Bestandsfilters…</guibutton></term>
+      <varlistentry id="dialogs.project.properties.external.searches">
+        <term id="dialogs.project.properties.external.searches.title"><guibutton>Lokaal extern zoeken</guibutton></term>
 
         <listitem>
-          <para>Op eenzelfde manier als hierboven kan de gebruiker project-specifieke bestandsfilters maken, die tezamen met het project zullen worden opgeslagen en alleen geldig zullen zijn voor het huidige project. Klik op de knop <guibutton>Bestandsfilters ... </guibutton>, en activeer dan het keuzevak <guimenuitem>Projectspecifieke filters inschakelen</guimenuitem> in het venster dat opent om een set projectspecifieke bestandsfilters te maken. Een kopie van de gewijzigde configuratie van de filters zal met het project worden opgeslagen. Deselecteer het keuzevak om projectspecifieke bestandsfilters te verwijderen. Onthoud dat in het menu <guimenuitem>Opties-&gt;Bestandsfilters</guimenuitem>, de globale filters voor de gebruikers worden gewijzigd, niet de filters voor het project. Bekijk <link linkend="dialogs.preferences.filefilters">Voorkeuren bestandsfilters</link> voor meer over dit onderwerp.</para>
+          <para>Standaard zijn externe zoekacties globaal en worden gedeeld door alle projecten. Dergelijke opdrachten worden gedefinieerd in de voorkeur <link linkend="dialogs.preferences.external.searches" endterm="dialogs.preferences.external.searches.title"/>.</para>
 
-          <para><emphasis>Hint:</emphasis> de set bestandsfilters voor een bepaald project wordt opgeslagen als <filename>project/omegat/filters.xml.</filename></para>
+		  <para>Gebruik deze knop om lokale externe zoekacties te maken, specifiek voor uw project, en pas de instellingen aan zoals u wilt.</para>
+
+		  <para>Het project zal de nieuwe set externe zoekacties opslaan in het bestand <link linkend="project.folder.omegat.finder" endterm="project.folder.omegat.finder.title"/>, geplaatst in zijn map <link linkend="project.folder.omegat.folder" endterm="project.folder.omegat.folder.title"/>. Deze instellingen hebben voorrang boven de globale instellingen voor externe zoekacties.</para>
+
+		  <para>Klik op de knop <guibutton>Verwijderen</guibutton> of verwijder dat bestand om projectspecifieke externe zoekacties te verwijderen.</para>
+		  
+		  <para>Bekijk de voorkeuren <link linkend="dialogs.preferences.external.searches" endterm="dialogs.preferences.external.searches.title"/> voor details.</para>
+
+		  <note>
+			<para>Lokale, op het project gebaseerde, externe zoekacties zijn om veiligheidsredenen standaard uitgeschakeld. Selecteer <link linkend="dialogs.preferences.external.search.enable.project.specific.commands" endterm="dialogs.preferences.external.search.enable.project.specific.commands.title"/> in de voorkeur <link linkend="dialogs.preferences.external.searches" endterm="dialogs.preferences.external.searches.title"/> om ze in te schakelen.</para>
+		  </note>
         </listitem>
       </varlistentry>
-
-      <varlistentry>
-        <term>Mappen in opslagplaats…</term>
-
-        <listitem>
-          <para>Dit venster stelt u in staat, bij het werken aan een teamproject, de routes te definiëren tussen de mappen op afstand en lokale mappen (bekijk <link linkend="howto.setupteamproject.mappingparameters">hier</link> voorbeelden).</para>
-        </listitem>
-      </varlistentry>
-
-      <varlistentry>
-        <term>Extern zoeken…</term>
-
-        <listitem>
-          <para>Definieert de project-specifieke externe bronnen voor zoeken.</para>
-        </listitem>
-      </varlistentry>
-    </variablelist>
+	</variablelist>
   </section>
 
-  <section>
-    <title>Bestandslocaties</title>
+  <section id="dialogs.project.properties.file.locations">
+    <title id="dialogs.project.properties.file.locations.title"><guilabel>Bestandslocaties</guilabel></title>
 
-    <para>Hier kunt u verschillende submappen selecteren, bijvoorbeeld de submap met bronbestanden, submap voor doelbestanden etc. Indien u namen voor mappen invoert die nog niet bestaan, zal <application>OmegaT</application> die voor u maken. Voor het geval u van plan bent de projectmappen aan te passen, onthoudt dan dat daarmee niet de bestanden uit oude mappen naar de nieuwe locatie worden verplaatst.</para>
+	<para>Een vertaalproject van OmegaT bestaat uit een aantal bronnen in afzonderlijke mappen.</para>
 
-    <para>Klik op <guibutton>Uitgesloten...</guibutton> om de bestanden of mappen te definiëren  die zullen worden genegeerd door <application>OmegaT</application>. Een genegeerd bestand of map:</para>
+	<para>Wanneer een nieuw project wordt gemaakt, stelt OmegaT een standaard structuur voor de projectmappen voor die alle bronnen bevat die worden gebruikt voor de vertaling, maar die structuur is niet verplicht.</para>
 
-    <itemizedlist>
-      <listitem>
-        <para>wordt niet weergegeven in het venster Bewerken,</para>
-      </listitem>
+	<para>Mappen voor bronnen mogen overal op uw systeem zijn geplaatst, inclusief gedeelde schijven.</para>
 
-      <listitem>
-        <para>wordt niet betrokken in de statistieken,</para>
-      </listitem>
+	<para>Bekijk het hoofdstuk <link linkend="chapter.project.folder" endterm="chapter.project.folder.title"/> voor details.</para>
 
-      <listitem>
-        <para>wordt niet gekopieerd naar de map /target gedurende het proces van het maken van vertaalde bestanden.</para>
-      </listitem>
-    </itemizedlist>
+	<para>U kunt op elk moment de structuur van uw project aanpassen door bestanden toe te voegen of te verwijderen uit de mappen, of zelfs door de mappen, die worden gebruikt door het project, te wijzigen, zelfs gedurende de vertaling.</para>
 
-    <para>In het dialoogvenster Patronen voor uitsluiting is het mogelijk een patroon toe te voegen of te verwijderen, of er een te bewerken door een regel te selecteren en op F2 te drukken. Het is mogelijk jokertekens te gebruiken, met behulp van de <ulink url="https://ant.apache.org/manual/dirtasks.html#patterns">syntaxis ant</ulink>.</para>
+	<para>Gebruik <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.access.project.contents" endterm="menus.project.access.project.contents.title"/> en en zijn submenu's om toegang te verkrijgen tot de locaties van de bronnen van het project.</para>
+
+	<variablelist>
+	  <varlistentry id="dialogs.project.properties.file.locations.browse">
+		<term id="dialogs.project.properties.file.locations.browse.title"><guibutton>Bladeren</guibutton></term>
+
+		<listitem>
+		  <para>De knop <guibutton>Bladeren</guibutton> is beschikbaar voor alle door de gebruiker te definiëren bronnen voor het project.</para>
+
+		  <note>
+			<para>Bronnen hoeven niet te zijn opgeslagen in de standaard projectmap die OmegaT maakt. U mag voor uw bronnen elke map selecteren die u wilt, inclusief mappen op gedeelde schijven.</para>
+		  </note>
+
+		  <para>Klik op de knop om de map te selecteren die u wilt gebruiken in plaats van de standaard map voor de bronnen.</para>
+		</listitem>
+	  </varlistentry>
+	  
+	  <varlistentry id="dialogs.project.properties.file.locations.source.files">
+		<term id="dialogs.project.properties.file.locations.source.files.title"><option>map Bronbestanden</option></term>
+
+		<listitem>
+		  <para>Deze map bevat de bestanden die u wilt vertalen. OmegaT probeert in één keer alle bestanden te lezen, en geeft de vertaalbare inhoud die het vind weer in het venster Bewerken.</para>
+
+		  <para>Bekijk het gedeelte <link linkend="project.folder.source" endterm="project.folder.source.title"/> voor details.</para>
+
+		  <para>Als de map leeg is, geen van de bestanden bevat vertaalbare inhoud, of er zijn geen bestanden die worden ondersteund door de beschikbare bestandsfilters, zal OmegaT u meedelen dat de map leeg is.</para>
+
+		  <variablelist>
+			<varlistentry id="dialogs.project.properties.file.locations.exclusions">
+			  <term id="dialogs.project.properties.file.locations.exclusions.title"><guibutton>Uitgesloten…</guibutton></term>
+
+			  <listitem>
+				<para>Klik op de knop <guibutton>Uitgesloten…</guibutton> om de bestanden of mappen te specificeren die door OmegaT zouden moeten worden genegeerd. Een genegeerd bestand of map wordt:</para>
+		  
+				<itemizedlist>
+				  <listitem>
+					<para>niet weergegeven in het venster <link linkend="panes.editor" endterm="panes.editor.title"/>,</para>
+				  </listitem>
+
+				  <listitem>
+					<para>niet opgenomen in de verschillende statistische rapporten (zoals de opdracht <link linkend="menus.tools" endterm="menus.tools.title"/><link linkend="menus.tools.statistics" endterm="menus.tools.statistics.title"/>), en</para>
+				  </listitem>
+
+				  <listitem>
+					<para>niet gekopieerd naar de map <link linkend="project.folder.target" endterm="project.folder.target.title"/> als de vertaalde bestanden worden gemaakt.</para>
+				  </listitem>
+				</itemizedlist>
+
+				<para>Het dialoogvenster Patronen voor uitsluiting maakt het voor u mogelijk een patroon toe te voegen of te verwijderen, of er een te bewerken door erop te dubbelklikken en op <keycap>F2</keycap> te drukken. Gebruik de <ulink url="https://ant.apache.org/manual/dirtasks.html#patterns">syntaxis van Apache ant</ulink> om uitsluitingen te definiëren.</para>
+			  </listitem>
+			</varlistentry>
+		  </variablelist>
+		</listitem>
+	  </varlistentry>
+	  
+	  <varlistentry id="dialogs.project.properties.file.locations.translation.memories">
+		<term id="dialogs.project.properties.file.locations.translation.memories.title"><option>map Vertaalgeheugen</option></term>
+		<listitem>
+		  <para>Deze map bevat de bestanden die u wilt gebruiken als verwijzing naar vertaalgeheugens. OmegaT probeert in één keer alle bestanden te lezen en vergelijkt hun inhoud met het segment dat u aan het vertalen bent.</para>
+
+		  <para>Bekijk het gedeelte <link linkend="project.folder.tm" endterm="project.folder.tm.title"/> voor details.</para>
+
+		  <para>Indien er overeenkomsten worden gevonden, worden zij weergegeven in het venster <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/>.</para>
+		</listitem>
+	  </varlistentry>
+	  
+	  <varlistentry id="dialogs.project.properties.file.locations.glossaries">
+		<term id="dialogs.project.properties.file.locations.glossaries.title"><option>map Woordenlijst</option></term>
+
+		<listitem>
+		  <para>Deze map bevat de bestanden die u wilt gebruiken als verwijzing naar woordenlijsten. OmegaT probeert in één keer alle bestanden te lezen en vergelijkt hun inhoud met het segment dat u aan het vertalen bent.</para>
+
+		  <para>Bekijk het gedeelte <link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/> voor details.</para>
+		  
+		  <para>Indien er overeenkomsten worden gevonden, worden zij weergegeven in het venster <link linkend="panes.glossary" endterm="panes.glossary.title"/>.</para>
+
+		  <para>Bekijk de appendix <link linkend="app.glossaries" endterm="app.glossaries.title"/> voor details.</para>
+		</listitem>
+	  </varlistentry>
+	  
+	  <varlistentry id="dialogs.project.properties.file.locations.writable.glossary">
+		<term id="dialogs.project.properties.file.locations.writable.glossary.title"><option>Beschrijfbaar woordenlijstbestand</option></term>
+
+		<listitem>
+		  <para>Het beschrijfbaar woordenlijstbestand is het bestand dat OmegaT gebruikt wanneer u vertaalde termen aan de woordenlijst toevoegt aan uw project met de opdracht <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.create.glossary.entry" endterm="menus.edit.create.glossary.entry.title"/>.</para>
+
+		  <para>Het zal automatisch worden gemaakt als u voor de eerste keer een item aan de woordenlijst toevoegt.</para>
+
+		  <para>Nieuw toegevoegde items worden automatisch herkend en weergegeven als zij overeenkomen met termen in het huidige segment.</para>
+
+		  <para>Dit bestand is <emphasis>altijd</emphasis> geplaatst in de map <link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/>.</para>
+		</listitem>
+	  </varlistentry>
+	  
+	  <varlistentry id="dialogs.project.properties.file.locations.dictionaries">
+		<term id="dialogs.project.properties.file.locations.dictionaries.title"><option>map Woordenboek</option></term>
+
+		<listitem>
+		  <para>Deze map bevat de bestanden die u wilt gebruiken als verwijzing naar een woordenboek. OmegaT probeert in één keer alle bestanden te lezen en vergelijkt hun inhoud met het segment dat u aan het vertalen bent.</para>
+
+		  <para>Bekijk het gedeelte <link linkend="project.folder.dictionary" endterm="project.folder.dictionary.title"/> voor details.</para>
+
+		  <para>Indien er overeenkomsten worden gevonden, worden zij weergegeven in het venster <link linkend="panes.dictionary" endterm="panes.dictionary.title"/>.</para>
+		</listitem>
+	  </varlistentry>
+	  
+	  <varlistentry id="dialogs.project.properties.file.locations.translated.files">
+		<term id="dialogs.project.properties.file.locations.translated.files.title"><option>map Vertaalde documenten</option></term>
+
+		<listitem>
+		  <para>Dit is de map waarin OmegaT de vertaalde bestanden maakt.</para>
+
+		  <para>De vertaalde bestanden zijn de vertaalde versies van de bestanden die zijn geplaatst in de map <link linkend="project.folder.source" endterm="project.folder.source.title"/>.</para>
+
+		  <para>Segmenten die zijn vertaald worden vervangen door hun vertaling en niet vertaalde segmenten worden behouden in de brontaal.</para>
+		
+		  <para>De mappenstructuur komt overeen met die van de map <link linkend="project.folder.source" endterm="project.folder.source.title"/>. Bestanden die niet worden ondersteund door de bestandsfilters van Omega worden zonder aanpassingen gekopieerd.</para>
+
+		  <para>Gebruik <link linkend="menus.project.create.translated.documents" endterm="menus.project.create.translated.documents.title"/> of <link linkend="menus.project.create.current.translated.document" endterm="menus.project.create.current.translated.document.title"/> om de vertaalde bestanden te maken.</para>
+
+		  <para>Bekijk het gedeelte <link linkend="project.folder.target" endterm="project.folder.target.title"/> voor details.</para></listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialogs.project.properties.file.locations.exported.tms">
+		<term id="dialogs.project.properties.file.locations.exported.tms.title"><option>Map voor exporteren van vertaalgeheugens</option></term>
+
+		<listitem>
+		  <para>Dit is de map waar OmegaT de huidige status van de vertaling kopieert, in de vorm van TMX-bestanden als u de vertaalde bestanden maakt.</para>
+
+		  <note>
+			<para>Standaard is die map de projectmap zelf, maar u kunt de locatie ervan wijzigen om het praktischer te maken om geëxporteerde TMX-bestanden te delen.</para>
+
+			<para>Bekijk de <link linkend="how.to.tm.share.translation.memories" endterm="how.to.tm.share.translation.memories.title"/> how-to voor details.</para>
+		  </note>
+		
+		  <para>De TMX-bestanden bevatten alleen de segmenten uit de bestanden die momenteel zijn opgeslagen in de map <link linkend="project.folder.source" endterm="project.folder.source.title"/>.</para>
+
+		  <para>Gebruik <link linkend="menus.project.create.translated.documents" endterm="menus.project.create.translated.documents.title"/> of <link linkend="menus.project.create.current.translated.document" endterm="menus.project.create.current.translated.document.title"/> om de vertaalde bestanden en de geëxporteerde TMX-bestanden te maken.</para>
+
+		  <variablelist>
+			<varlistentry id="dialogs.project.properties.file.locations.tms.to.export">
+			  <term id="dialogs.project.properties.file.locations.tms.to.export.title"><option>Te exporteren vertaalgeheugens</option></term>
+			  <listitem>
+				<para>Dit keuzevak laat u de indelingen kiezen waarin u wilt dat OmegaT de hierboven vermelde TMX-bestanden maakt.</para>
+
+				<para>Bekijk de <link linkend="how.to.use.tm" endterm="how.to.use.tm.title"/> how-to voor details.</para>
+		
+				<variablelist>
+				  <varlistentry>
+					<term><option>OmegaT</option></term>
+					<listitem>
+					  <para>Een TMX van “OmegaT” bevat de tags die zijn gemaakt door OmegaT in een vorm die alleen op de juiste wijze kan worden door een project van OmegaT.</para>
+					</listitem>
+				  </varlistentry>
+		  
+				  <varlistentry>
+					<term><option>TMX Niveau 1</option></term>
+					<listitem>
+					  <para>Een TMX “niveau 1” verwijdert alle informatie over tags en bevat alleen tekstuele informatie.</para>
+					</listitem>
+				  </varlistentry>
+				
+				  <varlistentry>
+					<term><option>TMX Niveau 2</option></term>
+					<listitem>
+					  <para>Een TMX “level 2” bevat tekstuele gegevens met tags die zijn ingekapseld in een vorm die compatibel is met andere programma's voor CAT.</para>
+					</listitem>
+				  </varlistentry>
+				</variablelist>
+			  </listitem>
+			</varlistentry>
+		  </variablelist>
+		  
+		  <para>Bekijk de <ulink url="https://www.gala-global.org/tmx-14b#SectionIntroduction">TMX 1.4b Specification</ulink> voor details.</para>
+		</listitem>
+	  </varlistentry>
+	</variablelist>
   </section>
 </section>

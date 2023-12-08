@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="windows.source.files.list">
+  <title id="windows.source.files.list.title"><guilabel>Bronbestanden</guilabel></title>
+
+  <para>Dit venster wordt automatisch weergegeven als OmegaT een project laadt en kan op elk moment worden opgeroepen met <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.source.files.list" endterm="menus.project.source.files.list.title"/>.</para>
+
+  <para>Het venster geeft de volgende informatie weer:</para>
+
+  <itemizedlist>
+    <listitem>
+      <para>In de titel van het venster: het totale aantal te vertalen bestanden in het project.</para>
+
+	  <para>Dit zijn de bestanden die aanwezig zijn in de map <link linkend="project.folder.source" endterm="project.folder.source.title"/> in een indeling die OmegaT kan herkennen.</para>
+    </listitem>
+
+    <listitem>
+      <para>Als een lijst: alle vertaalbare bestanden in het project.</para>
+
+	  <para>Klikken op een bestand zal het openen in het venster <link linkend="panes.editor" endterm="panes.editor.title"/> om te vertalen.</para>
+    </listitem>
+
+    <listitem>
+      <para>Items van bestanden vermeldt hun naam, type bestandsfilter, codering en het aantal segmenten dat het bevat</para>
+    </listitem>
+
+    <listitem>
+      <para>Het totale aantal segmenten, het aantal unieke segmenten in het gehele project en het aantal reeds vertaalde unieke segmenten worden weergegeven aan de onderzijde.</para>
+    </listitem>
+  </itemizedlist>
+
+  <para>Typen van enige tekst opent een veld <guilabel>Filter</guilabel> aan de onderzijde van het venster, waar delen van bestandsnamen kunnen worden ingevoerd. U kunt de pijltjestoetsen gebruiken om een bestand te selecteren, en drukken op <keycap>Enter</keycap> om het te openen om te vertalen.</para>
+
+  <note>
+	<para>Bestandsnamen (de eerste kolom) kunnen alfabetisch worden gesorteerd door te klikken in de kop. Het is ook mogelijk om de positie van een bestand te wijzigen door het te selecteren en te klikken op een van de knoppen <guibutton>Naar …</guibutton> aan de rechterkant.</para>
+  </note>
+
+  <para>Met rechts klikken op een bestandsnaam opent een pop-upmenu dat het mogelijk maakt het bronbestand te openen of het doelbestand (als het bestaat).</para>
+
+  <para>Het aantal <emphasis role="bold">Unieke</emphasis> segmenten wordt berekend door het aantal herhaalde segmenten te verwijderen uit het totale aantal segmenten.</para>
+
+  <para>Het verschil tussen &quot;Aantal segmenten&quot; en &quot;Aantal unieke segmenten&quot; geeft een ruwe benadering van het aantal herhalingen in een tekst. Gebruik <link linkend="menus.tools" endterm="menus.tools.title"/><link linkend="menus.tools.statistics" endterm="menus.tools.statistics.title"/> om meer informatie te krijgen.</para>
+
+  <para>Aanpassen van de segmentatieregels kan het aantal segmenten/unieke segmenten wijzigen. Zoiets zou echter in het algemeen moeten worden vermeden nadat u met de vertaling van het project bent begonnen. Bekijk de appendix <link linkend="app.segmentation" endterm="app.segmentation.title"/> voor details.</para>
+
+  <para>De knoppen aan de onderzijde van het venster kunnen worden gebruikt om bestanden aan uw project toe te voegen:</para>
+  
+  <variablelist>
+	<varlistentry id="windows.source.files.list.copy.files">
+	  <term id="windows.source.files.list.copy.files.title"><guibutton>Bestanden toevoegen…</guibutton></term>
+	<listitem>
+	  <para>Kopieert de geselecteerde bestanden naar de map <link linkend="project.folder.source" endterm="project.folder.source.title"/> en herlaadt het project om rekening te houden met de nieuwe bestanden.</para>
+	</listitem>
+	</varlistentry>
+	
+	<varlistentry id="windows.source.files.list.download.page">
+	  <term id="windows.source.files.list.download.page.title"><guibutton>Pagina van MediaWiki downloaden…</guibutton></term>
+	  <listitem>
+		<para>Vraagt naar de URL van de pagina en download die naar de map <link linkend="project.folder.source" endterm="project.folder.source.title"/>.</para>
+	  </listitem>
+	</varlistentry>
+  </variablelist>
+  
+  <para>De twee acties zijn equivalent aan het gebruiken van de menu-items  <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.copy.files.to.source.folder" endterm="menus.project.copy.files.to.source.folder.title"/> en <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.download.mediawiki.page" endterm="menus.project.download.mediawiki.page.title"/>.</para>
+  
+  <note>
+	<para>U kunt handmatig het configuratiebestand <link linkend="configuration.folder.default.contents.omegat.prefs" endterm="configuration.folder.default.contents.omegat.prefs.title"/> bewerken om te voorkomen dat de lijst Bronbestanden automatisch opent als een project wordt geladen.</para>
+  </note>
+</section>

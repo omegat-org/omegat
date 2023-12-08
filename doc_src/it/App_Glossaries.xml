@@ -1,129 +1,161 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<appendix id="appendix.glossaries">
-  <title>Glossari</title>
+<section id="app.glossaries">
+  <title id="app.glossaries.title">Glossari</title>
 
-  <para>I glossari sono file terminologici. Essi possono essere creati e aggiornati manualmente, oppure importati da altri progetti.</para>
+  <para>I glossari sono file terminologici memorizzati nella cartella <link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/>.</para>
 
-  <para>Uno specifico progetto può contenere qualsiasi numero di glossari di riferimento, ma solo il glossario predefinito proprio del progetto sarà modificabile direttamente dall'interfaccia utente di OmegaT.</para>
+  <para>Tutti i termini, all'interno di un segmento, che hanno una corrispondenza in <emphasis>uno qualsiasi</emphasis>dei glossari verranno visualizzati nel pannello <link linkend="panes.glossary" endterm="panes.glossary.title"/>.</para>
 
-  <para>A prescindere dal numero di glossari contenuti in un progetto, qualsiasi termine di un segmento che abbia un riscontro all'interno di un glossario verrà visualizzato nel pannello Glossario.</para>
+  <para>I termini di partenza possono essere formati da espressioni di più parole.</para>
 
-  <section>
-    <title>Glossario predefinito</title>
+  <para>Esistono due tipi di file di glossario:</para>
 
-    <para>Il glossario predefinito modificabile si trova nella cartella del progetto <filename>/glossary</filename> ed è chiamato <filename>glossary.txt</filename>.</para>
+  <variablelist>
+	<varlistentry>
+	  <term>Il glossario del progetto</term>
+	  <listitem>
+		<para>Usare <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.create.glossary.entry" endterm="menus.edit.create.glossary.entry.title"/> per inserire nuovi termini all'interno di questo glossario. Viene chiamato glossario <emphasis>modificabile</emphasis> per tale motivo.</para>
+		
+		<para>Usare <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.access.project.contents.title" endterm="menus.project.access.project.contents.title"/> per accedervi in modo diretto. È poi possibile aprirlo in un editor di testo e modificarlo.</para>
 
-    <para>È possibile modificare il nome e la posizione del glossario all'interno della finestra di dialogo delle proprietà del progetto, ma deve possedere l'estensione <filename>.txt</filename> o <filename>.utf8</filename> e la sua posizione deve essere all'interno della cartella del progetto <filename>/glossary</filename>.</para>
+		<para>Non è necessario preparare in precedenza il file.</para>
 
-    <para>Non è obbligatorio che il file esista, esso verrà creato quando si aggiunge la prima voce di glossario. Se il file esiste già, non sarà fatta alcuna verifica sul formato o sul gruppo di caratteri del file: le nuove voci saranno sempre aggiunte in formato con spazi separati da tabulazione e il file verrà salvato con codifica UTF-8.</para>
+		<para>Esso verrà creato la prima volta che si aggiunge una voce al glossario.</para>
+
+		<note>
+          <para>Se si decide di utilizzare come glossario predefinito un file esistente, tutte le nuove voci andranno registrate in formato separato da tabulazione e salvato in formato UTF-8.</para>
+
+		  <para>È possibile specificare una codifica diversa, se si desidera, aggiungendo un commento “magico” dalla forma seguente:</para>
+
+		  <simplelist>
+            <member>
+              <code># -*- coding: &lt;charset&gt; -*-</code>,
+            </member>
+          </simplelist>
+		  
+          <para>dove <parameter>&lt;charset&gt;</parameter> è tipicamente uno dei set elencati nello <ulink url="http://www.iana.org/assignments/character-sets/character-sets.xhtml">IANA Charset Registry</ulink>.</para>
+		</note>
+	  </listitem>
+	</varlistentry>
+	
+	<varlistentry>
+	  <term>Glossari di riferimento</term>
+	  <listitem>
+		<para>Sono file terminologici in un formato riconosciuto da OmegaT. Non è possibile modificarli dall'interno di OmegaT come il glossario del progetto, ma è possibile farlo con un editor di testo.</para>
+	  </listitem>
+	</varlistentry>
+  </variablelist>
+
+  <note>
+	<para>Le modifiche apportate a qualsiasi glossario sono immediatamente riconosciute da OmegaT e visualizzate nel pannello <link linkend="panes.glossary" endterm="panes.glossary.title"/>.</para>
+  </note>
+
+  <section id="glossaries.glossary.folder">
+    <title id="glossaries.glossary.folder.title">La cartella dei glossari</title>
+
+    <para>Per impostazione predefinita, ogni progetto contiene una cartella <link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/> in cui memorizzare il glossario modificabile e qualsiasi glossario di riferimento che si desidera aggiungere al progetto. Vedere le proprietà del progetto <link linkend="dialogs.project.properties.file.locations.glossaries" endterm="dialogs.project.properties.file.locations.glossaries.title"/> per i dettagli.</para>
+
+    <para>Tutti i glossari si devono trovare nella cartella <link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/>. Vengono riconosciuti anche i glossari contenuti nelle cartelle nidificate.</para>
+
+    <para>All'interno della cartella dei glossari di riferimento è possibile creare più sottocartelle terminologiche organizzate per argomento, cliente o qualsiasi altra categoria utile al proprio metodo di lavoro.</para>
+    <para>Usare le proprietà del progetto <link linkend="dialogs.project.properties.file.locations.glossaries" endterm="dialogs.project.properties.file.locations.glossaries.title"/> per impostare la posizione della cartella dei glossari di riferimento. Questa cartella può essere configurata al di fuori del progetto, ed essa, o una delle sue particolari sottocartelle può essere usata anche in altri progetti.</para>
   </section>
 
-  <section>
-    <title>Uso</title>
+  <section id="glossaries.default.glossary">
+    <title id="glossaries.default.glossary.title">Glossario del progetto</title>
 
-    <para>Per utilizzare un glossario esistente, sarà sufficiente inserirlo nella cartella <filename>/glossary</filename> dopo aver creato il progetto. <application>OmegaT</application> OmegaT, quando apre un progetto, rileva automaticamente i file di glossario presenti in questa cartella.</para>
+    <para>Il glossario modificabile del progetto si trova, per impostazione predefinita, nella cartella <link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/> ed è chiamato <link linkend="project.folder.glossary.txt" endterm="project.folder.glossary.txt.title"/>.</para>
 
-    <para>Per aggiungere un nuovo termine al glossario modificabile, utilizzare il comando <guimenuitem>Modifica</guimenuitem> &gt; <guimenuitem>Crea voce di glossario</guimenuitem> (<keycap>Ctrl+Maiusc+G</keycap>). Le nuove voci di glossario saranno disponibili immediatamente. Per aggiungere nuovi termini ai glossari di riferimento, modificateli con un editor di testo esterno. Le nuove voci di glossario saranno disponibili al salvataggio delle modifiche.</para>
-
-    <para>Il termine di partenza può essere formato da più parole.</para>
-
-    <para>La funzione di glossario usa il riconoscimento della radice per individuare le voci. Per individuare solo le concordanze esatte di un termine, disattivare l'opzione <guimenuitem>Usa il riconoscimento della radice per le voci di glossario</guimenuitem> nelle preferenze globali di OmegaT.</para>
-
-    <para>Il termine di partenza viene visualizzato prima del segno &quot; = &quot;, mentre quello di arrivo dopo. I commenti vengono visualizzati dopo un numero e ognuno su una riga separata. Le voci di glossario del glossario modificabile del progetto sono visualizzati in grassetto. Le voci di glossario dei glossari di riferimento sono visualizzati in carattere normale.</para>
-
-    <para>Per richiamare il menu contestuale <guimenuitem>Completamento automatico</guimenuitem> per le voci di glossario, premere il tasto dipendente dal sistema operativo (<keycap>Escape</keycap> per macOS, <keycap>Ctrl+Spazio</keycap> per gli altri sistemi).</para>
-
-    <para>Utilizzare <guimenuitem>Vista</guimenuitem> &gt; <guimenuitem>Evidenzia le concordanze di glossario</guimenuitem> per sottolineare le voci con concordanza nel segmento di partenza. Fare clic col pulsante destro del mouse sul termine sottolineato e selezionare il termine di arrivo per inserirlo nella posizione del cursore all'interno del segmento di arrivo.</para>
+    <para>Nella finestra di dialogo <link linkend="dialogs.project.properties.file.locations.writable.glossary" endterm="dialogs.project.properties.file.locations.writable.glossary.title"/> è possibile cambiarne il nome e la posizione, ma è necessario attribuirgli un'estensione <filename>.txt</filename> o <filename>.utf8</filename> e memorizzarlo all'interno della cartella <link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/> o in una delle sue cartelle secondarie.</para>
   </section>
 
-  <section>
-    <title>Formato dei file</title>
+  <section id="glossaries.fileformat">
+    <title id="glossaries.fileformat.title">Formato dei file</title>
 
     <para>I file di glossario OmegaT sono dei semplici file di solo testo composti da elenchi su tre colonne, col termine di partenza nella prima colonna, un termine di arrivo opzionale nella seconda colonna e un commento, sempre opzionale, nella terza.</para>
 
-    <para>I glossari di solo testo possono essere file con &quot;valori separati da virgole&quot; (TSV, tab separated values) o con &quot;valori separati da virgole&quot; (CSV, comma separated values). È possibile un terzo formato ISO standard &quot;TBX&quot; (TermBase eXchange).</para>
+    <para>I glossari possono essere file con “valori separati da tabulazioni&quot; (TSV, tab-separated values) o “valori separati da virgole” (CSV, comma-separated values) oppure possono anche utilizzare il formato TermBase eXchange (TBX 2).</para>
 
-    <para>Il glossario modificabile predefinito del progetto è sempre un file TSV salvato con codifica UTF-8.</para>
+    <para>Un glossario modificabile creato per il progetto da OmegaT risulterà un file TSV salvato in formato UTF-8. I file creati dall'utente che utilizzano solo i caratteri latini potrebbero essere riconosciuti e trattati come ISO-8859-1, se non contengono caratteri non-ASCII o altri caratteri interpretati come UTF-8.</para>
 
-    <para>I glossari vengono letti in una codifica che dipende dall'estensione del file:</para>
+    <para>La codifica utilizzata per leggere i glossari di riferimento dipende dalla loro estensione del file:</para>
 
-    <table xml:id="glossary.extensions">
-      <caption>Formato, estensioni e codifica attesa</caption>
-
+    <table id="glossary.extensions">
+      <title>Formato, estensioni e codifica attesa</title>
+	  <tgroup cols="3">
       <thead>
-        <tr>
-          <td>Formato</td> <td>Estensione</td> <td>Codifica</td>
-        </tr>
+        <row>
+          <entry>Formato</entry>
+
+          <entry>Estensione</entry>
+
+          <entry>Codifica</entry>
+        </row>
       </thead>
 
       <tbody>
-        <tr> <td>TSV</td> <td> <filename>.txt</filename> </td> <td>UTF-8</td> </tr> <tr> <td>TSV</td> <td> <filename>.utf8</filename> </td> <td>UTF-8</td> </tr> <tr> <td>TSV</td> <td> <filename>.tab</filename> </td> <td>Codifica predefinita del sistema operativo</td> </tr> <tr> <td>TSV</td> <td> <filename>.tsv</filename> </td> <td>Codifica predefinita del sistema operativo</td> </tr> <tr> <td>CSV</td> <td> <filename>.csv</filename> </td> <td>UTF-8</td> </tr> <tr> <td>TBX</td> <td> <filename>.tbx</filename> </td> <td>UTF-8</td> </tr>
+        <row>
+          <entry>TSV</entry>
+
+          <entry>
+            <filename>.txt</filename>
+          </entry>
+
+          <entry>UTF-8</entry>
+        </row>
+
+        <row>
+          <entry>TSV</entry>
+
+          <entry>
+            <filename>.utf8</filename>
+          </entry>
+
+          <entry>UTF-8</entry>
+        </row>
+
+        <row>
+          <entry>TSV</entry>
+
+          <entry>
+            <filename>.tab</filename>
+          </entry>
+
+          <entry>Codifica predefinita del sistema operativo</entry>
+        </row>
+
+        <row>
+          <entry>TSV</entry>
+
+          <entry>
+            <filename>.tsv</filename>
+          </entry>
+
+          <entry>Codifica predefinita del sistema operativo</entry>
+        </row>
+
+        <row>
+          <entry>CSV</entry>
+
+          <entry>
+            <filename>.csv</filename>
+          </entry>
+
+          <entry>UTF-8</entry>
+        </row>
+
+        <row>
+          <entry>TBX</entry>
+
+          <entry>
+            <filename>.tbx</filename>
+          </entry>
+
+          <entry>UTF-8</entry>
+        </row>
       </tbody>
+      </tgroup>
     </table>
-
-    <para>I glossari devono risiedere all'interno della cartella del progetto <filename>/glossary</filename>. Vengono riconosciuti anche i glossari contenuti nelle cartelle nidificate.</para>
   </section>
-
-  <section>
-    <title>Problemi comuni dei glossari</title>
-
-    <para><emphasis role="bold">Problema: non è visualizzato alcun termine di glossario - cause possibili:</emphasis></para>
-
-    <itemizedlist>
-      <listitem>
-        <para>Non sono presenti file di glossario nella cartella &quot;glossary&quot;.</para>
-      </listitem>
-    </itemizedlist>
-
-    <itemizedlist>
-      <listitem>
-        <para>Il file di glossario è vuoto.</para>
-      </listitem>
-    </itemizedlist>
-
-    <itemizedlist>
-      <listitem>
-        <para>Gli elementi non sono separati da un carattere TAB.</para>
-      </listitem>
-    </itemizedlist>
-
-    <itemizedlist>
-      <listitem>
-        <para>Il file di glossario non possiede l'estensione corretta (.tab, .utf8 o .txt).</para>
-      </listitem>
-    </itemizedlist>
-
-    <itemizedlist>
-      <listitem>
-        <para>Non esiste una PRECISA corrispondenza tra la voce di glossario e il testo di partenza nel documento - ad esempio, i plurali.</para>
-      </listitem>
-    </itemizedlist>
-
-    <itemizedlist>
-      <listitem>
-        <para>Il file di glossario non possiede la corretta codifica.</para>
-      </listitem>
-    </itemizedlist>
-
-    <itemizedlist>
-      <listitem>
-        <para>Non esistono termini nel segmento attivo che corrispondono ai termini presenti nel glossario.</para>
-      </listitem>
-    </itemizedlist>
-
-    <itemizedlist>
-      <listitem>
-        <para>Uno o più problemi citati sopra sono stati risolti ma il progetto non è stato ricaricato.</para>
-      </listitem>
-    </itemizedlist>
-
-    <para><emphasis role="bold">Problema: nel pannello del glossario alcuni caratteri non vengono visualizzati correttamente</emphasis></para>
-
-    <itemizedlist>
-      <listitem>
-        <para>...ma gli stessi caratteri sono visualizzati correttamente nel pannello di modifica: l'estensione e il file di codifica non coincidono.</para>
-      </listitem>
-    </itemizedlist>
-  </section>
-</appendix>
+</section>

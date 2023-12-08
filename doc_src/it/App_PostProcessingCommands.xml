@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="post.processing.commands">
+  <title id="post.processing.commands.title">Comandi di post-elaborazione</title>
+
+  <para>Vedere le proprietà del progetto <link linkend="dialogs.project.properties.external.processing.command" endterm="dialogs.project.properties.external.processing.command.title"/> per i comandi specifici del progetto.</para>
+
+  <para>Vedere le preferenze <link linkend="dialogs.preferences.saving.and.output.external.post-processing.command" endterm="dialogs.preferences.saving.and.output.external.post-processing.command.title"/> per i comandi globali.</para>
+	
+
+  <section id="post.processing.commands.template.variables">
+    <title id="post.processing.commands.template.variables.title">Variabili del modello</title>
+    <para>Il comando viene passato al &quot;Java runtime exec&quot; come stringa con i valori del modello estesi. Tutti gli argomenti devono essere racchiusi tra virgolette, per es. <literal>&quot;${fileName}&quot;</literal>.</para>
+
+    <para>Le variabili del modello seguenti sono sempre disponibili. Le altre voci nell'elenco dei modelli sono variabili d'ambiente per il proprio sistema.</para>
+	
+    <table id="post.processing.commands.template.variables.table">
+      <title id="post.processing.commands.template.variables.table.title">Variabili del modello</title>
+      <tgroup cols="2" colsep="1">
+        <colspec align="left" colname="1" colnum="1"/>
+        <colspec align="left" colname="2" colnum="2"/>
+        <thead>
+          <row>
+            <entry>Nome variabile</entry>
+            <entry>Valore</entry>
+          </row>
+        </thead>
+
+        <tbody>
+		  <row>
+			<entry>${projectName}</entry>
+			<entry>Nome della cartella del progetto</entry>
+		  </row>
+		  <row>
+			<entry>${projectRoot}</entry>
+			<entry>Percorso completo alla cartella del progetto</entry>
+		  </row>
+		  <row>
+			<entry>${sourceRoot}</entry>
+			<entry>Percorso completo alla cartella dei file di partenza</entry>
+		  </row>
+		  <row>
+			<entry>${targetRoot}</entry>
+			<entry>Percorso completo alla cartella dei file di arrivo</entry>
+		  </row>
+		  <row>
+			<entry>${glossaryRoot}</entry>
+			<entry>Percorso completo alla cartella del glossario</entry>
+		  </row>
+		  <row>
+			<entry>${tmRoot}</entry>
+			<entry>Percorso completo alla cartella radice della memoria di traduzione</entry>
+		  </row>
+		  <row>
+			<entry>${tmAutoRoot}</entry>
+			<entry>Percorso completo alla cartella radice della memoria di traduzione automatica</entry>
+		  </row>
+		  <row>
+			<entry>${dictRoot}</entry>
+			<entry>Percorso completo alla cartella del dizionario</entry>
+		  </row>
+		  <row>
+			<entry>${tmOtherLangRoot}</entry>
+			<entry>Radice memoria di traduzione + tmx2source (vedere la guida all'uso <link linkend="how.to.tm.bridge.two.languages" endterm="how.to.tm.bridge.two.languages.title"/> per i dettagli)</entry>
+		  </row>
+		  <row>
+			<entry>${sourceLang}</entry>
+			<entry>Lingua di partenza</entry>
+		  </row>
+		  <row>
+			<entry>${targetLang}</entry>
+			<entry>Lingua di arrivo</entry>
+		  </row>
+		  <row>
+			<entry>${filePath}</entry>
+			<entry>Percorso completo al file di partenza</entry>
+		  </row>
+		  <row>
+			<entry>${fileShortPath}</entry>
+			<entry>Nome file di partenza relativo alla radice specificata</entry>
+		  </row>
+		  <row>
+			<entry>${fileName}</entry>
+			<entry>Nome completo del file di partenza</entry>
+		  </row>
+		  <row>
+			<entry>${fileNameOnly}</entry>
+			<entry>Nome del file di partenza senza estensione</entry>
+		  </row>
+		  <row>
+			<entry>${fileExtension}</entry>
+			<entry>Estensione del file di partenza senza un punto</entry>
+		  </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+  
+  <section id="post.processing.commands.user.defined.scripts">
+    <title id="post.processing.commands.user.defined.scripts.title">Script locali</title>
+    <para>In aggiunta ai normali comandi, è possibile richiamare uno script. Non avviare mai script di post-elaborazione da fonti non verificate. Per ragioni di sicurezza i comandi di post-elaborazione locali sono disabilitati per impostazione predefinita.</para>
+    <para>Le variabili del modello sono utilizzabili sia con i comandi normali sia con gli script personalizzati. Per lo script potrebbe essere necessario dover utilizzare un percorso assoluto. Il PATH che OmegaT usa potrebbe non essere lo stesso del PATH dell'utente attivo.</para>
+    <para>STDOUT e STDERR sono scritti nel file <link linkend="configuration.folder.default.contents.logs.title">omegat.log</link>. Il codice di uscita e STDERR o l'ultimo STDOUT comparirà nella barra di stato.</para>
+  </section>
+
+  <section id="post.processing.commands.linux.and.macos">
+    <title id="post.processing.commands.linux.and.macos.title">Linux e macOS</title>
+    <para>Si deve usare uno shebang, per es. <literal>#! /bin/bash</literal> o <literal>#! /usr/bin/env python3</literal>. E lo script deve essere eseguibile. I comandi di concatenazione con <literal>&amp;&amp;</literal> o <literal>||</literal> o i pipe <literal>|</literal> qui non funzionano.</para>
+  </section>
+  
+  <example id="post.processing.commands.example">
+	  <title id="post.processing.commands.example.title">Semplice esempio di comandi di post-elaborazione:</title>
+	  <variablelist>
+		<varlistentry>
+		  <term>Aprire la cartella di destinazione in Linux</term>
+		  <listitem>
+			<programlisting>xdg-open ${targetRoot}</programlisting>
+		  </listitem>
+		</varlistentry>
+		<varlistentry>
+		  <term>Aprire la cartella di destinazione in macOS</term>
+		  <listitem>
+			<programlisting>open ${targetRoot}</programlisting>
+		  </listitem>
+		</varlistentry>
+
+		<varlistentry>
+		  <term>Aprire la cartella di destinazione nella Powershell di Windows</term>
+		  <listitem>
+			<programlisting>Invoke-Item ${targetRoot}</programlisting>
+		  </listitem>
+		</varlistentry>
+	  </variablelist>
+	</example>
+  </section>

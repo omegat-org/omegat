@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="app.bidi">
+  <title id="app.bidi.title">Caratteri di formattazione direzionale</title>
+
+  <para>I caratteri di controllo Bidi (bidirezionali) sono disponibili da <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.insert.unicode.control.character" endterm="menus.edit.insert.unicode.control.character.title"/>. Possono essere utilizzati per:</para>
+
+  <itemizedlist>
+	<listitem>
+	  <para>Inserire un carattere invisibile con direzionalità forte per forzare a una specifica posizione un carattere con direzionalità debole o neutra.</para>
+	</listitem>
+	<listitem>
+	  <para>Creare una sezione di testo che scorre nella direzione opposta rispetto a quella del segmento.</para>
+	</listitem>
+  </itemizedlist>
+  
+  <para>Questi caratteri di controllo cambiano la direzionalità ma sono invisibili. Usare <link linkend="menus.view" endterm="menus.view.title"/><link linkend="menus.view.mark.bidirectional.algorithm.control.character" endterm="menus.view.mark.bidirectional.algorithm.control.character.title"/> per attivare un'indicazione visiva della loro posizione.</para>
+
+  <section id="app.bidi.marks">
+	<title id="app.bidi.marks.title">Marcatori</title>
+
+	<para>Per cambiare la posizione di un carattere avente direzionalità debole o neutrale (come i simboli di punteggiatura), inserire un carattere LRM (da sinistra a destra) o RLM (da destra a sinistra) dopo il carattere, in base alla direzionalità del segmento:</para>
+
+	<itemizedlist>
+	  <listitem>
+		<para>Inserire un carattere LRM dopo un carattere con direzionalità debole che deve scorrere da sinistra a destra in un segmento che scorre da destra a sinistra (per es. un passo in italiano all'interno di un testo in arabo).</para>
+	  </listitem>
+	  <listitem>
+		<para>Inserire un carattere RLM dopo un carattere con direzionalità debole che deve scorrere da destra a sinistra in un segmento che scorre da sinistra a destra (per es. un passo in arabo all'interno di un testo in italiano).</para>
+	  </listitem>
+	</itemizedlist>
+  </section>
+
+  <section id="app.bidi.embeddings">
+	<title id="app.bidi.embeddings.title">Inclusioni</title>
+
+	<para>Le inclusioni possono essere utilizzate per creare una sezione di testo più lunga (contenente diverse parole e spazi) che deve scorrere nella direzione opposta a quella del segmento. Sono possibili due tipi di inclusioni, a seconda della direzionalità del segmento:</para>
+
+	<itemizedlist>
+	  <listitem>
+		<para>Per creare un'inclusione da sinistra a destra in un segmento da destra a sinistra, inserire un carattere di inclusione da sinistra a destra (LRE), scrivere o inserire il testo da sinistra a destra, quindi inserire il carattere PDF (pop directional formatting, 'formattazione direzionale pop').</para>
+	  </listitem>
+	  <listitem>
+		<para>Per creare un'inclusione da destra a sinistra in un segmento da sinistra a destra, inserire un carattere di inclusione da destra a sinistra (RLE), scrivere o inserire il testo da destra a sinistra, quindi inserire il carattere PDF.</para>
+	  </listitem>
+	</itemizedlist>
+  </section>
+</section>

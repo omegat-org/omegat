@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="how.to.restore.your.data">
+  <title id="how.to.restore.your.data.title">Risoluzione dei problemi</title>
+
+  <warning>
+	<para>OmegaT è un'applicazione affidabile e robusta. Detto questo, è bene prendere delle precauzioni al fine di prevenire la perdita di dati durante il suo utilizzo, proprio come si farebbe con qualsiasi altra applicazione.</para>
+  </warning>
+
+  <section id="how.to.restore.your.data.automatic.backup">
+	<title id="how.to.restore.your.data.automatic.backup.title">Copie di sicurezza automatiche</title>
+
+	<para>OmegaT crea copie di sicurezza delle impostazioni del progetto in modo da garantire il loro recupero in caso di problemi. Vedere la sezione <link linkend="project.folder.omegat.project.file" endterm="project.folder.omegat.project.file.title"/> per i dettagli.</para>
+	  
+	<para>OmegaT memorizza in modo regolare e automatico tutti i progressi all'interno del file <link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/> situato nella cartella <link linkend="project.folder.omegat" endterm="project.folder.omegat.title"/> del progetto. OmegaT crea anche copie di sicurezza regolari di quel file.</para>
+
+	<orderedlist>
+	  <listitem>
+		<para>Quando si apre un progetto, OmegaT esegue una copia di sicurezza del file <filename>project_save.tmx</filename> in una copia con data e ora.</para>
+
+		<para>OmegaT conserva fino a dieci di tali file.</para>
+
+		<note>
+		  <para>Il nome file della copia di sicurezza segue lo schema <filename>project_save.tmx.AAAAMMGGhhmm.bak</filename> dove <code>AAAA</code> rappresenta l'anno in quattro cifre, <code>MM</code> il mese, <code>GG</code> il giorno, <code>hh</code> l'ora e <code>mm</code> i minuti.</para>
+		</note>
+	  </listitem>
+	  
+	  <listitem>
+		<para>Ogni volta che il file <filename>project_save.tmx</filename> viene modificato:</para>
+		
+		<itemizedlist>
+		  <listitem>
+			<para>o dopo aver salvato i dati del progetto (usare <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.save" endterm="menus.project.save.title"/>),</para>
+		  </listitem>
+
+		  <listitem>
+			<para>o quando si crea una copia di sicurezza regolare (ogni 3 minuti, per impostazione predefinita),</para>
+		  </listitem>
+		</itemizedlist>
+
+		<para>OmegaT crea una copia di sicurezza chiamato <filename>project_save.tmx.bak</filename>.</para>
+
+		<para>Questo è una copia del file <filename>project_save.tmx</filename> <emphasis>prima</emphasis> della modifica.</para>
+	  </listitem>
+
+	  <listitem>
+		<para>Ogni volta che si salvano i dati del progetto (usare <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.save" endterm="menus.project.save.title"/>), o si crea una copia di sicurezza regolare, OmegaT salva lo stato attuale della traduzione all'interno del file <filename>project_save.tmx</filename>.</para>
+	  </listitem>
+	</orderedlist>
+
+	<para>Il file <filename>project_save.tmx</filename> contiene sempre i dati più recenti.</para>
+
+	<note>
+	  <para>È possibile impostare la frequenza delle copie di sicurezza regolari nelle preferenze <link linkend="dialogs.preferences.saving.and.output" endterm="dialogs.preferences.saving.and.output.title"/>.</para>
+	</note>
+
+  </section>
+
+  <section id="how.to.restore.your.data.lost.in.translation">
+	<title id="how.to.restore.your.data.lost.in.translation.title">La propria traduzione è andata perduta?</title>
+
+	<para>Anche se si teme di aver perso i propri dati di traduzione, questi sono probabilmente conservati al sicuro nella copia di memoria più recente, che in genere non è più vecchia di qualche minuto.</para>
+
+	<para>Procedere come segue:</para>
+	
+	<orderedlist>
+      <listitem>
+		<para>Chiudere il progetto per impedire che sia eseguita qualsiasi modifica allo stato attuale delle copie di sicurezza.</para>
+      </listitem>
+
+      <listitem>
+		<para>Rinominare il file <filename>project_save.tmx</filename> attuale (in <filename>project_save.tmx.tmp</filename>, per esempio).</para>
+      </listitem>
+
+      <listitem>
+		<para>Selezionare la copia della memoria di traduzione che più probabilmente contiene i dati che si stanno cercando.</para>
+      </listitem>
+
+      <listitem>
+		<para>Rinominarla in <filename>project_save.tmx</filename>.</para>
+      </listitem>
+
+      <listitem>
+		<para>Riaprire il progetto.</para>
+      </listitem>
+	</orderedlist>
+
+	<para>Questa azione ripristinerà la propria traduzione al suo stato nel punto in cui la copia di sicurezza selezionata è stata creata. È possibile ripetere questa operazione al fine di rintracciare stati più vecchi. Per un eventuale riutilizzo, considerare di salvare in modo sicuro tutti i vari file che si stanno rinominando. Ricordare anche, nel frattempo, di non modificare la configurazione del progetto o di aggiungere file TMX, dato che queste operazioni potrebbero alterare i risultati.</para>
+
+	<note>
+	  <para>Prestare attenzione alle modifiche apportate ai file nella cartella dei file di partenza, alle regole di segmentazione o ai filtri dei file che fanno parte di un progetto. La modifica di uno di questi elementi, dopo aver iniziato una traduzione, potrebbe far scomparire qualche segmento o farne apparire di nuovi, in modo inatteso.</para>
+	</note>
+  </section>
+
+  <section id="how.to.restore.your.data.project.locked">
+	<title id="how.to.restore.your.data.project.locked.title">Il progetto è bloccato?</title>
+
+	<para>Nel raro caso in cui il computer si blocca e a OmegaT non è concesso il tempo di chiudersi correttamente, il file <filename>omegat.project</filename> potrebbe venir bloccato dal sistema operativo e non venire riaperto dopo aver riavviato il sistema.</para>
+
+	<para>Procedere come segue:</para>
+
+	<orderedlist>
+      <listitem>
+		<para>Identificare la cartella del progetto che OmegaT si rifiuta di aprire e aprirla nel proprio gestore di file. Il contenuto della cartella dovrebbe essere simile a una cartella standard di un <link linkend="chapter.project.folder">progetto</link>.</para>
+      </listitem>
+
+	  <listitem>
+		<para>Nella cartella sarà presente un file <filename>omegat.project</filename> e un file <filename>omegat.project.bak</filename>. Accertarsi che i file siano identici.</para>
+      </listitem>
+
+      <listitem>
+		<para>Rinominare il file <filename>omegat.project</filename> (in <filename>omegat.project.locked</filename>, per esempio).</para>
+      </listitem>
+
+      <listitem>
+		<para>Rinominare il file <filename>omegat.project.bak</filename> in <filename>omegat.project</filename>.</para>
+      </listitem>
+
+      <listitem>
+		<para>Aprire il progetto.</para>
+      </listitem>
+	</orderedlist>
+
+	<para>Questa operazione aprirà il progetto con la copia di sicurezza <filename>omegat.project</filename> creata in automatico.</para>
+  </section>
+  
+  <section id="how.to.restore.your.data.project.wont.open">
+	<title id="how.to.restore.your.data.project.wont.open.title">Il progetto non vuole aprirsi?</title>
+
+	<para>Nel raro caso in cui il computer si blocca e a OmegaT non è concesso il tempo di chiudersi correttamente, alcuni file importanti potrebbero essersi danneggiati e impedire la riapertura del progetto dopo aver riavviato il sistema.</para>
+
+	<para>Procedere come segue:</para>
+
+	<orderedlist>
+      <listitem>
+		<para>Creare un nuovo progetto con le stesse impostazioni.</para>
+      </listitem>
+
+	  <listitem>
+		<para>Copiare il contenuto delle varie cartelle utente nelle corrispondenti posizioni all'interno del nuovo progetto (file di partenza, file della memoria di traduzione di riferimento, file del glossario).</para>
+      </listitem>
+
+      <listitem>
+		<para>Nel vecchio progetto, selezionare il file della memoria di traduzione (principale o di sicurezza) che più probabilmente contiene i dati che si stanno cercando.</para>
+      </listitem>
+
+      <listitem>
+		<para>Rinominarlo in <filename>project_save.tmx</filename>, se necessario.</para>
+      </listitem>
+
+      <listitem>
+		<para>Copiarlo nella cartella <filename>omegat/</filename> del nuovo progetto.</para>
+      </listitem>
+
+      <listitem>
+		<para>Aprire il nuovo progetto.</para>
+      </listitem>
+	</orderedlist>
+
+	<para>Questa azione imposterà il nuovo progetto allo stato della traduzione nel punto in cui la memoria di traduzione del progetto selezionata è stata creata in quello vecchio.</para>
+  </section>
+
+  <section id="how.to.restore.your.data.translated.file.broken">
+	<title id="how.to.restore.your.data.translated.file.broken.title">Il file tradotto non vuole aprirsi?</title>
+
+	<para>Molto spesso, i file delle suite per ufficio contengono tag che devono essere copiati all'interno della traduzione, in modo da garantire che il file tradotto possa essere aperto nell'applicazione originale. In alcuni casi, i tag mancanti impediranno l'apertura del file.</para>
+	
+	<para>Procedere come segue:</para>
+
+	<orderedlist>
+      <listitem>
+		<para>Aprire il progetto in OmegaT.</para>
+      </listitem>
+
+	  <listitem>
+		<para>Usare <link linkend="menus.tools" endterm="menus.tools.title"/><link linkend="menus.tools.check.issues" endterm="menus.tools.check.issues.title"/> e concentrarsi su <guilabel>Problemi con tag</guilabel>.</para>
+      </listitem>
+
+      <listitem>
+		<para>Correggere tutti i problemi con i tag individuati nei documenti.</para>
+      </listitem>
+
+      <listitem>
+		<para>Usare <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.create.translated.documents" endterm="menus.project.create.translated.documents.title"/> per ricreare i documenti.</para>
+      </listitem>
+
+      <listitem>
+		<para>Riaprire i documenti nell'applicazione originale.</para>
+      </listitem>
+	</orderedlist>
+
+	<para>Questa operazione correggerà qualsiasi problema di coerenza dei tag interni dovuto allo scorretto inserimento dei tag durante il processo di traduzione in OmegaT.</para>
+  </section>
+
+  <section id="how.to.restore.your.data.omegat.wont.behave">
+	<title id="how.to.restore.your.data.omegat.wont.behave.title">OmegaT non si comporta correttamente?</title>
+
+	<para>È successo qualcosa è OmegaT non si comporta più correttamente. Qualsiasi cosa si provi, sembra che non sia possibile correggerla. Si può fare un ultimo tentativo prima di chiedere aiuto: riavviare OmegaT con le sue impostazioni predefinite.</para>
+
+	<para>Procedere come segue:</para>
+	
+	<orderedlist>
+	  <listitem>
+		<para>Usare <link linkend="menus.options" endterm="menus.options.title"/><link linkend="menus.options.access.configuration.folder" endterm="menus.options.access.configuration.folder.title"/> per accedere alla cartella di configurazione.</para>
+		
+		<note>
+		  <para>Se non è possibile utilizzare i menu di OmegaT, consultare il capitolo <link linkend="configuration.folder" endterm="configuration.folder.title"/> per trovare la posizione della cartella di configurazione.</para>
+		</note>
+      </listitem>
+
+      <listitem>
+		<para>Chiudere OmegaT.</para>
+      </listitem>
+
+      <listitem>
+		<para>Creare una copia di sicurezza del contenuto ed eliminare la cartella originale.</para>
+      </listitem>
+
+      <listitem>
+		<para>Riavviare OmegaT.</para>
+
+		<note>
+		  <para>Se a questo punto OmegaT non funziona come ci si attende, chiedere tranquillamente aiuto.</para>
+		</note>
+      </listitem>
+
+      <listitem>
+		<para>Chiudere OmegaT.</para>
+      </listitem>
+
+      <listitem>
+		<para>Copiare <emphasis>uno</emphasis> dei file vecchi all'interno della nuova cartella di configurazione.</para>
+      </listitem>
+	  
+	  <listitem>
+		<para>Riavviare OmegaT.</para>
+
+		<note>
+		  <para>Se a questo punto OmegaT non funziona come ci si attende, è stato identificato il file difettoso. Rimuoverlo dalla cartella di configurazione e riavviare OmegaT, quindi riprendere il proprio lavoro.</para>
+		</note>
+      </listitem>
+
+	  <listitem>
+		<para>Tornare al passaggio 5. sopra e continuare fino a che non si è soddisfatti.</para>
+      </listitem>
+	</orderedlist>
+  </section>
+
+  <section id="how.to.restore.your.data.summary">
+	<title id="how.to.restore.your.data.summary.title">Riepilogo</title>
+
+	<itemizedlist>
+      <listitem>
+		<para>Per evitare la perdita di dati importanti, eseguire copie regolari del file <filename>/omegat/project_save.tmx</filename> in un supporto di memorizzazione, tipo una chiavetta USB, un disco rigido esterno o un servizio in rete.</para>
+      </listitem>
+
+      <listitem>
+		<para>Allenarsi regolarmente a tali “misure di emergenza”, come il ripristino delle traduzioni da un progetto, in modo da essere certi che, il giorno in cui queste abilità dovranno essere messe in pratica, non si perda troppo tempo nell'eseguirle.</para>
+      </listitem>
+	</itemizedlist>
+  </section>
+</section>

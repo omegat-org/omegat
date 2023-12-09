@@ -2,7 +2,7 @@
  OmegaT 6.1.0
 ----------------------------------------------------------------------
   35 Enhancement
-  52 Bug fixes
+  55 Bug fixes
 ----------------------------------------------------------------------
 6.1.0 vs 6.0.0
 
@@ -115,6 +115,15 @@
 
 
   Bug fixes:
+
+  - Issue window cause exception
+  https://sourceforge.net/p/omegat/bugs/1234/
+
+  - Repository mapping with SVN cause error
+  https://sourceforge.net/p/omegat/bugs/1232/
+
+  -OmegaT 6.1 macos-arm version does not launch on macOS arm machine
+  https://sourceforge.net/p/omegat/bugs/1231/
 
   - OmegaT 6.1 macos-arm version does not launch on macOS arm machine
   https://sourceforge.net/p/omegat/bugs/1231/

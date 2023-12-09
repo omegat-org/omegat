@@ -206,28 +206,45 @@ public class SVNRemoteRepository2 implements IRemoteRepository2 {
 
         final String repoPath = info.getPath();
         try {
+            // When user specified a URL such as
+            // `https://server/user/repo/trunk/_i18n/en/`
+            // then repoPath is `trunk/_i18n/en/`.
+            // `changedPath` contains a `filePath` that is
+            // out of a `repoPath`, eg. `trunk/_i18n/ca`
+            // see https://sourceforge.net/p/omegat/bugs/1232/
+
             ourClientManager.getLogClient().doLog(new File[] { baseDirectory }, sinceRevision,
                     currentRevision, false, true,
                     // to get the list of files changed/deleted
                     1000000, new ISVNLogEntryHandler() {
-                        public void handleLogEntry(SVNLogEntry en) throws SVNException {
+                        @Override
+                        public void handleLogEntry(final SVNLogEntry en) throws SVNException {
                             if (en.getRevision() == sinceRevision.getNumber()) {
                                 return;
                             }
                             Map<String, SVNLogEntryPath> changedPaths = en.getChangedPaths();
+
+                            // eg /remotedir/my/file;
+                            // repoPath = remotedir. To strip /remotedir/,
+                            // add 2 for the slashes.
+                            // But if remoteDir is empty, then only
+                            // 1 slash to be removed.
+                            //
+                            // eg /rmeotedir/other/file;
+                            // and repoPath = remotedir/my/
+                            // then skip
+                            String prefix = '/' + repoPath + '/';
+                            int prefixSize = prefix.length();
                             for (Map.Entry<String, SVNLogEntryPath> entry : changedPaths.entrySet()) {
                                 SVNLogEntryPath path = entry.getValue();
-
                                 String filePath = path.getPath();
-                                // eg /remotedir/my/file;
-                                // repoPath = remotedir. To strip /remotedir/,
-                                // add 2 for the slashes.
-                                // But if remoteDir is empty, then only
-                                // 1 slash to be removed.
+
                                 if ("".equals(repoPath)) {
                                     filePath = filePath.substring(1);
+                                } else if (!filePath.startsWith(prefix)) {
+                                    continue;
                                 } else {
-                                    filePath = filePath.substring(repoPath.length() + 2);
+                                    filePath = filePath.substring(prefixSize);
                                 }
                                 filePath = filePath.replace('/', File.separatorChar);
                                 // filepath is always using '/', but on windows

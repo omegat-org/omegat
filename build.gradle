@@ -578,7 +578,7 @@ tasks.register('genMac') {
     def appbundlerClasspath = configurations.genMac.asPath
     def outDir = layout.buildDirectory.file("appbundler").get().toString()
     def appName = application.applicationName
-    def appClass = application.mainClass
+    def appClass = application.mainClass.get()
     description = 'Generate the Mac .app skeleton. Depends AppBundler (https://github.com/TheInfiniteKind/appbundler)'
     outputs.dir layout.buildDirectory.file("appbundler")
     doLast {
@@ -988,7 +988,8 @@ tasks.register('cleanJpkgWorkdir', Delete) {
 }
 
 tasks.register('jars', Copy) {
-    from configurations.runtimeClasspath, tasks.jar
+    from configurations.runtimeClasspath
+    from(tasks.jar) { include omegatJarFilename }
     into file(layout.buildDirectory.file('jars'))
     dependsOn tasks.jar
 }
@@ -996,12 +997,19 @@ tasks.register('jars', Copy) {
 // prepare japckage contents
 // appContent requires jpackage command in JDK 18 or later
 // this is compat task to work as same as appContent command of jpackage
+tasks.register('jpackageAppContentGreetings', Copy) {
+    dependsOn jpackage, firstSteps
+
+    from layout.buildDirectory.file('docs/greetings')
+    into layout.buildDirectory.file("jpackage/app-image/${application.applicationName}/lib/docs/greetings")
+}
+
 tasks.register('jpackageAppContentManuals', Copy) {
     dependsOn jpackage, manualZips
 
     from layout.buildDirectory.file('docs/manuals')
     include '*.zip'
-    into layout.buildDirectory.file("jpackage/app-image/${application.applicationName}/lib/docs")
+    into layout.buildDirectory.file("jpackage/app-image/${application.applicationName}/lib/docs/manuals")
 }
 
 tasks.register('jpackageAppContentDocs', Copy) {
@@ -1038,6 +1046,7 @@ tasks.register('jpackageAppContentModules', Sync) {
     dependsOn jpackage
 }
 tasks.register('jpackageAppContent') {
+    dependsOn jpackageAppContentGreetings
     dependsOn jpackageAppContentManuals
     dependsOn jpackageAppContentDocs
     dependsOn jpackageAppContentImages
@@ -1060,7 +1069,7 @@ tasks.jpackage {
     vendor = distAppVendor
     appDescription = distDescription
     mainJar = omegatJarFilename
-    mainClass = "org.omegat.Main"
+    mainClass = application.mainClass.get()
 
     // appContent requires jpackage command in JDK 18 or later
     /*
@@ -1117,7 +1126,7 @@ tasks.register("linuxDebDist", JPackageTask) {
 
     linux {
         linuxAppCategory("editors")
-        linuxAppRelease('2')
+        linuxAppRelease('3')
         linuxDebMaintainer("info@omegat.org")
         linuxMenuGroup("Office")
         linuxPackageName("omegat")
@@ -1156,7 +1165,7 @@ tasks.register("linuxRpmDist", JPackageTask) {
 
     linux {
         linuxAppCategory("Application/Editors")
-        linuxAppRelease('2')
+        linuxAppRelease('3')
         linuxMenuGroup("Office")
         linuxPackageName("omegat")
         linuxPackageDeps(false)

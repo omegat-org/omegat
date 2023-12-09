@@ -150,7 +150,8 @@ public class GlossarySearcher {
 
     private static boolean rawMatch(Token[] tokens, String srcTxt, String term) {
         for (Token token : tokens) {
-            if (token.getTextFromString(srcTxt).equals(term.substring(token.getLength()))) {
+            if (term.length() > token.getLength()
+                    && token.getTextFromString(srcTxt).equals(term.substring(token.getLength()))) {
                 return true;
             }
         }

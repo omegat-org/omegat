@@ -33,6 +33,7 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Comparator;
 import java.util.Enumeration;
 import java.util.HashSet;
@@ -52,7 +53,6 @@ import org.omegat.core.Core;
 import org.omegat.core.data.PluginInformation;
 import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.preferences.view.PluginsPreferencesController;
-
 
 /**
  * Plugin installer utility class.
@@ -107,17 +107,17 @@ public final class PluginInstaller {
         }
 
         // confirm installation
-        if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(Core.getMainWindow().getApplicationFrame(),
-                    message,
-                    OStrings.getString("PREFS_PLUGINS_TITLE_CONFIRM_INSTALLATION"),
-                    JOptionPane.OK_CANCEL_OPTION, JOptionPane.ERROR_MESSAGE)) {
+        if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(
+                Core.getMainWindow().getApplicationFrame(), message,
+                OStrings.getString("PREFS_PLUGINS_TITLE_CONFIRM_INSTALLATION"), JOptionPane.OK_CANCEL_OPTION,
+                JOptionPane.ERROR_MESSAGE)) {
             if (doInstall(currentInfo, pluginJarFile.toFile())) {
                 return true;
             }
             JOptionPane.showConfirmDialog(Core.getMainWindow().getApplicationFrame(),
                     OStrings.getString("PREFS_PLUGINS_INSTALLATION_FAILED"),
-                    OStrings.getString("PREFS_PLUGINS_TITLE_CONFIRM_INSTALLATION"),
-                    JOptionPane.YES_OPTION, JOptionPane.ERROR_MESSAGE);
+                    OStrings.getString("PREFS_PLUGINS_TITLE_CONFIRM_INSTALLATION"), JOptionPane.YES_OPTION,
+                    JOptionPane.ERROR_MESSAGE);
         }
         return false;
     }
@@ -153,21 +153,28 @@ public final class PluginInstaller {
 
     /**
      * Check if jarFile is placed in OmegaT installed system directory.
-     * @param jarFile a file determine.
-     * @return true when a file is under installed directory, otherwise return false.
+     * 
+     * @param jarFile
+     *            a file determine.
+     * @return true when a file is under installed directory, otherwise return
+     *         false.
      */
     private static boolean jarFileInInstallDir(File jarFile) {
-        String installDir = StaticUtils.installDir();
-        return jarFile.getAbsolutePath().contains(installDir);
+        Path installDir = Paths.get(StaticUtils.installDir()).normalize();
+        Path jarPath = jarFile.toPath().normalize();
+        return jarPath.startsWith(installDir);
     }
 
     /**
      * Unpack a plugin file when necessary and copy it.
      *
-     * @param sourceFile plugin source file to be installed (jar or zip)
-     * @param targetPath target path to be installed.
+     * @param sourceFile
+     *            plugin source file to be installed (jar or zip)
+     * @param targetPath
+     *            target path to be installed.
      * @return jar file path of installed plugin.
-     * @throws IOException when source file is corrupted.
+     * @throws IOException
+     *             when source file is corrupted.
      */
     static Path unpackPlugin(File sourceFile, Path targetPath) throws IOException {
         Path target;
@@ -177,7 +184,8 @@ public final class PluginInstaller {
         } else if (sourceFile.getName().endsWith(".zip")) {
             try (InputStream inputStream = Files.newInputStream(sourceFile.toPath())) {
                 Predicate<String> expected = f -> f.endsWith(OConsts.JAR_EXTENSION);
-                List<String> extracted = StaticUtils.extractFromZip(inputStream, targetPath.toFile(), expected);
+                List<String> extracted = StaticUtils.extractFromZip(inputStream, targetPath.toFile(),
+                        expected);
                 if (extracted.isEmpty()) {
                     throw new FileNotFoundException("Could not extract a jar file from zip");
                 }
@@ -193,7 +201,9 @@ public final class PluginInstaller {
 
     /**
      * Parse Manifest from plugin jar file.
-     * @param pluginJarFile plugin jar file
+     * 
+     * @param pluginJarFile
+     *            plugin jar file
      * @return PluginInformation
      */
     static Set<PluginInformation> parsePluginJarFileManifest(File pluginJarFile) throws IOException {
@@ -213,7 +223,8 @@ public final class PluginInstaller {
 
     /**
      *
-     * @param manifestUrl URL of MANIFEST.MF file
+     * @param manifestUrl
+     *            URL of MANIFEST.MF file
      * @return plugin information
      */
     static Set<PluginInformation> parsePluginJarFileManifest(URL manifestUrl) throws IOException {
@@ -250,6 +261,7 @@ public final class PluginInstaller {
 
     /**
      * Return installed plugins.
+     * 
      * @return Map of PluginInformation
      */
     private static Map<String, PluginInformation> getInstalledPlugins() {

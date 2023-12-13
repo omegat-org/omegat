@@ -640,7 +640,7 @@ distributions {
                         TRANSLATION_NOTICE: ''
                 ])
                 filter(FixCrLfFilter, eol: FixCrLfFilter.CrLf.newInstance('crlf'))
-            project.hasProperty('macCodesignIdentity'), 'Code signing property not set']}
+            }
             project.tasks.matching {it.name.startsWith('firstSteps') || it.name.startsWith('instantStart')}.forEach {
                 from(it.outputs) { into 'docs/greetings' }
             }

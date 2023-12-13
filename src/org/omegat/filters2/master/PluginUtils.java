@@ -194,12 +194,10 @@ public final class PluginUtils {
                 try (InputStream in = mu.openStream()) {
                     Manifest m = new Manifest(in);
                     if ("org.omegat.Main".equals(m.getMainAttributes().getValue("Main-Class"))) {
-                        // found main manifest - not in development mode
+                        // found a main manifest - not in development mode
                         foundMain = true;
-                        loadFromManifest(m, pluginsClassLoader, null);
-                    } else {
-                        loadFromManifest(m, pluginsClassLoader, mu);
                     }
+                    loadFromManifest(m, pluginsClassLoader, mu);
                     if ("theme".equals(m.getMainAttributes().getValue("Plugin-Category"))) {
                         String target = mu.toString();
                         for (URL url : urlList) {

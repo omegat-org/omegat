@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2021-2022 Hiroshi Miura
+ Copyright (C) 2021-2023 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -61,8 +61,6 @@ import org.omegat.gui.preferences.view.PluginsPreferencesController;
  */
 public final class PluginInstaller {
 
-    private static final String PLUGIN_NAME = "Plugin-Name";
-    private static final String PLUGIN_VERSION = "Plugin-Version";
     private static final String PLUGIN_TYPE = "OmegaT-Plugin";
 
     private PluginInstaller() {
@@ -94,7 +92,7 @@ public final class PluginInstaller {
                     e.getLocalizedMessage());
             return false;
         }
-        // Get plugin name and version to be installed.
+        // Get a plugin name and version to be installed.
         String pluginName = info.getName();
         String version = info.getVersion();
         // detect current installation
@@ -128,14 +126,19 @@ public final class PluginInstaller {
         try {
             if (currentInfo != null) {
                 URL url = currentInfo.getUrl();
-                File jarFile = new File(url.getPath().substring(5, url.getPath().indexOf("!")));
-                if (jarFile.getName().equals(file.getName())) {
-                    // try to override?
-                    File bakFile = new File(jarFile.getPath() + ".bak");
-                    FileUtils.moveFile(jarFile, bakFile);
-                    FileUtils.forceDeleteOnExit(bakFile);
-                } else {
-                    FileUtils.forceDeleteOnExit(jarFile);
+                if (url != null) {
+                    File jarFile = new File(url.getPath().substring(5, url.getPath().indexOf("!")));
+                    if (!jarFileInInstallDir(jarFile)) {
+                        // plugin file may be in ~/.omegat/plugins/
+                        if (jarFile.getName().equals(file.getName())) {
+                            // try to override?
+                            File bakFile = new File(jarFile.getPath() + ".bak");
+                            FileUtils.moveFile(jarFile, bakFile);
+                            FileUtils.forceDeleteOnExit(bakFile);
+                        } else {
+                            FileUtils.forceDeleteOnExit(jarFile);
+                        }
+                    }
                 }
             }
             File homePluginsDir = new File(StaticUtils.getConfigDir(), "plugins");
@@ -149,11 +152,21 @@ public final class PluginInstaller {
     }
 
     /**
-     * Unpack plugin file when necessary and copy it.
+     * Check if jarFile is placed in OmegaT installed system directory.
+     * @param jarFile a file determine.
+     * @return true when a file is under installed directory, otherwise return false.
+     */
+    private static boolean jarFileInInstallDir(File jarFile) {
+        String installDir = StaticUtils.installDir();
+        return jarFile.getAbsolutePath().contains(installDir);
+    }
+
+    /**
+     * Unpack a plugin file when necessary and copy it.
      *
-     * @param sourceFile plugin soure file to be installed (jar or zip)
+     * @param sourceFile plugin source file to be installed (jar or zip)
      * @param targetPath target path to be installed.
-     * @return installed plugin jar file path.
+     * @return jar file path of installed plugin.
      * @throws IOException when source file is corrupted.
      */
     static Path unpackPlugin(File sourceFile, Path targetPath) throws IOException {
@@ -165,7 +178,7 @@ public final class PluginInstaller {
             try (InputStream inputStream = Files.newInputStream(sourceFile.toPath())) {
                 Predicate<String> expected = f -> f.endsWith(OConsts.JAR_EXTENSION);
                 List<String> extracted = StaticUtils.extractFromZip(inputStream, targetPath.toFile(), expected);
-                if (extracted.size() == 0) {
+                if (extracted.isEmpty()) {
                     throw new FileNotFoundException("Could not extract a jar file from zip");
                 }
                 target = targetPath.resolve(extracted.get(0));
@@ -207,7 +220,6 @@ public final class PluginInstaller {
         Set<PluginInformation> pluginInfo = new HashSet<>();
         try (InputStream in = manifestUrl.openStream()) {
             Manifest m = new Manifest(in);
-            Attributes mainAttrs = m.getMainAttributes();
             String pluginClasses = m.getMainAttributes().getValue("OmegaT-Plugins");
             if (pluginClasses != null) {
                 for (String clazz : pluginClasses.split("\\s+")) {
@@ -238,7 +250,7 @@ public final class PluginInstaller {
 
     /**
      * Return installed plugins.
-     * @return Set of PluginInformation
+     * @return Map of PluginInformation
      */
     private static Map<String, PluginInformation> getInstalledPlugins() {
         Map<String, PluginInformation> installedPlugins = new TreeMap<>();

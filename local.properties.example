@@ -51,3 +51,8 @@ signing.secretKeyRingFile=
 sourceforgeWebUser=
 # Not required when using SSH auth
 sourceforgeWebPassword=
+
+## Uncomment when force skipping build of documentation
+## equivalent with command line option -PforceSkipDocumentBuild=1 or
+## an environment variable ORG_GRADLE_PROJECT_forceSkipDocumentBuild=1
+# forceSkipDocumentBuild=1

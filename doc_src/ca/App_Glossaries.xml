@@ -74,9 +74,7 @@
 
     <para>Els fitxers de glossari de l'OmegaT són fitxers de text sense format que contenen llistes de tres columnes; el terme d'origen en la primera columna, un terme de destinació opcional en la segona columna i un comentari opcional en la tercera columna.</para>
 
-    <para>Glossaries can be “tab-separated values” (TSV) or “comma-separated
-    values” (CSV) files or can also use the TermBase eXchange (TBX 2)
-    format.</para>
+    <para>Els glossaris poden ser fitxers de «valors separats per tabulacions» (TSV) o «valors separats per comes» (CSV), o bé poden utilitzar el format TermBase eXchange (TBX 2).</para>
 
     <para>El glossari modificable creat per al projecte per l'OmegaT serà un fitxer TSV desat en UTF-8. Els fitxers creats per l'usuari que només utilitzen caràcters llatins es poden reconèixer i tractar com a ISO-8859-1 si no contenen caràcters no ASCII ni altres caràcters interpretats com a UTF-8.</para>
 

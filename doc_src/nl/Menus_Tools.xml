@@ -1,134 +1,168 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="menus.tools">
-  <title>Extra</title>
+  <title id="menus.tools.title"><guimenu>Extra</guimenu></title>
+
+  <para>Dit menu geeft u toegang tot een aantal gereedschappen, inclusief validatie voor QA, rapporten voor overeenkomsten, een uitlijner en scripten.</para>
+
+  <example id="example.check.issues">
+	<title id="example.check.issues.title">Voorbeeld omschrijving sneltoets</title>
+	<para>Op Windows en Linux: <keycombo><keycap>Control</keycap><keycap>Shift</keycap><keycap>V</keycap></keycombo></para>
+
+	<para>Op macOS: <keycombo><keycap>Shift</keycap><keycap>Command</keycap><keycap>V</keycap></keycombo></para>
+
+	<para><emphasis role="bold">In deze handleiding:</emphasis> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>V</keycap></keycombo></para>
+  </example>
 
   <variablelist>
-    <varlistentry>
-      <term>Controleren op problemen…</term>
-
+    <varlistentry id="menus.tools.check.issues">
+      <term id="menus.tools.check.issues.title"><guimenuitem>Controleren op problemen…</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>V</keycap></keycombo></term>
       <listitem>
-        <para>Gereedschap voor kwaliteitsbeheer dat alle automatische controles in één gang uitvoert en de resultaten in een venster weergeeft.</para>
+        <para>Dit gereedschap voor kwaliteitsbeheer voert alle automatische controles in één gang uit en geeft de resultaten weer in een venster.</para>
 
-        <para>Vier typen problemen worden gedetecteerd:</para>
+        <para>Vier typen problemen kunnen worden gedetecteerd:</para>
 
         <itemizedlist>
           <listitem>
-            <para>ontbrekende of misplaatste tags, inclusief <link linkend="dialogs.preferences.tagprocessing">aangepaste tags</link>. De optie <guilabel>Problemen met tags</guilabel> is altijd geselecteerd.</para>
+            <para><guilabel>Problemen met tags</guilabel> (altijd geselecteerd): detecteert ontbrekend of misplaatste tags, inclusief aangepaste tags en gevlagde tekst. Bekijk de <link linkend="dialogs.preferences.tag.processing" endterm="dialogs.preferences.tag.processing.title"/> voorkeuren voor details.</para>
+
+			<note>
+			  <para>Deze optie is altijd geselecteerd.</para>
+			</note>
           </listitem>
 
           <listitem>
-            <para><guilabel>Spellingsproblemen</guilabel> (optioneel). Werkt alleen als een woordenboek voor spelling is geïnstalleerd.</para>
+            <para><guilabel>Spellingproblemen</guilabel> (optioneel): detecteert spelfouten. Werkt alleen als een woordenboek voor spelling is geïnstalleerd. Bekijk de <link linkend="dialog.preferences.spellchecker" endterm="dialog.preferences.spellchecker.title"/> voorkeuren voor details.</para>
           </listitem>
 
           <listitem>
-            <para><guilabel>Problemen met  terminologie</guilabel> (optioneel).</para>
+            <para><guilabel>Problemen met terminologie</guilabel> (optioneel): detecteert alle items uit de woordenlijsten die niet juist zijn vertaald. Bekijk de <link linkend="dialogs.preferences.glossary" endterm="dialogs.preferences.glossary.title"/> voorkeuren voor details.</para>
           </listitem>
 
-          <listitem>
-            <para><guilabel>Problemen voor LanguageTool</guilabel> (optioneel).</para>
+		  <listitem>
+            <para><guilabel>Problemen voor LanguageTool</guilabel> (optioneel): detecteert grammaticale of typografische problemen. Bekijk de <link linkend="dialog.preferences.languagetool.plugin" endterm="dialog.preferences.languagetool.plugin.title"/> voorkeuren voor details.</para>
           </listitem>
         </itemizedlist>
 
-        <para>Het venster met de resultaten is opgemaakt in de vorm van een tabel waarin:</para>
-
+        <para>De resultaten worden weergegeven als een tabel waarin:</para>
         <itemizedlist>
           <listitem>
-            <para>dubbelklikken op een rij het overeenkomende segment in het venster Bewerken activeert.</para>
+            <para>Dubbelklikken op een rij het overeenkomende segment in het venster Bewerken activeert.</para>
           </listitem>
 
           <listitem>
-            <para>klikken op een kolomkop de sorteervolgorde voor de kolom wijzigt,</para>
+            <para>Klikken op een kolomkop de sorteervolgorde voor de kolom wijzigt.</para>
           </listitem>
 
           <listitem>
-            <para>selecteren of de muis over een rij verplaatsen geeft een pictogram voor een pop-up menu weer in de laatste kolom die acties bevat voor corrigeren of negeren van de fout.</para>
+            <para>Selecteren of de muis over een rij verplaatsen geeft een contextmenu weer in de laatste kolom. Klikken op dat pictogram geeft acties weer die beschikbaar zijn om de fout te corrigeren of te negeren.</para>
+
+			<note>
+			  <para>Schakel de voorkeur <link linkend="dialogs.preferences.editor.validate.tags.when.leaving.a.segment" endterm="dialogs.preferences.editor.validate.tags.when.leaving.a.segment.title"/> in om het controleren van problemen te forceren, elke keer als u een segment verlaat.</para>
+
+			  <para>Schakel de voorkeur <link linkend="dialogs.preferences.tag.processing.do.not.allow.creating.translated.documents.with.tag.issues" endterm="dialogs.preferences.tag.processing.do.not.allow.creating.translated.documents.with.tag.issues.title"/> in om het maken van vertaalde bestanden te voorkomen als er problemen met tags worden gevonden.</para>
+			</note>
           </listitem>
         </itemizedlist>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Huidige document controleren op problemen</term>
-
+    <varlistentry id="menus.tools.check.issues.for.current.document">
+      <term id="menus.tools.check.issues.for.current.document.title"><guimenuitem>Huidige document controleren op problemen</guimenuitem></term>
       <listitem>
         <para>Als boven, maar alleen voor het document dat momenteel wordt weergegeven in het venster Bewerken.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Statistieken</term>
-
+    <varlistentry id="menus.tools.statistics">
+      <term id="menus.tools.statistics.title"><guimenuitem>Statistieken</guimenuitem></term>
       <listitem>
-        <para>Opent een nieuw venster en geeft de statistieken voor het project weer, d.i. de totalen voor het project en de totalen voor elk bestand in het project.</para>
+        <para>Opent een nieuw venster en geeft de statistieken voor het project weer, zoals de totalen van het aantal woorden voor het project of segmenten en de totalen voor elk bestand in het project.</para>
+
+		<para>De gegevens worden opgeslagen in het bestand <link linkend="project.folder.project.stats" endterm="project.folder.project.stats.title"/>, geplaatst in de map <link linkend="project.folder.omegat.folder" endterm="project.folder.omegat.folder.title"/> van het project.</para>
+
+		<note>
+		  <para>Tellen van woorden, totalen van segmenten en andere items kunnen worden beïnvloed door de volgende factoren:</para>
+		  
+		  <itemizedlist>
+			<listitem>
+			  <para>Instellingen voor bestandsfilters: sommige filters staan extra delen toe om te worden overwogen als vertaling. Bekijk de <link linkend="filters.options">opties</link> voor bestandsfilters voor details.</para>
+			</listitem>
+
+			<listitem>
+			  <para>Segmentatieregels: verschillende regels zullen een ander nummer voor het segment geven. Bekijk de appendix <link linkend="app.segmentation" endterm="app.segmentation.title"/> voor details.</para>
+			</listitem>
+
+			<listitem>
+			  <para>Tags: Tags van OmegaT worden nooit meegeteld in de statistieken, maar in sommige gevallen kunnen termen splitsen en afwijkingen maken op de manier waarop OmegaT ze telt. Bekijk de voorkeur <link linkend="dialogs.project.properties.hide.tags" endterm="dialogs.project.properties.hide.tags.title"/> in het dialoogvenster <link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/> voor details.</para>
+			</listitem>
+
+			<listitem>
+			  <para>Aangepaste tags en gevlagde tekst: net als met tags van OmegaT, zij worden niet standaard geteld in de statistieken, maar u kunt OmegaT ze laten tellen als woorden. Bekijk de <link linkend="dialogs.preferences.tag.processing.count.protected.text.and.custom.tags.in.statistics" endterm="dialogs.preferences.tag.processing.count.protected.text.and.custom.tags.in.statistics.title"/> voorkeur voor details.</para>
+			</listitem>
+		  </itemizedlist>
+		</note>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Statistieken voor overeenkomsten</term>
-
+    <varlistentry id="menus.tools.match.statistics">
+      <term id="menus.tools.match.statistics.title"><guimenuitem>Statistieken voor overeenkomsten</guimenuitem></term>
       <listitem>
-        <para>Geeft de Statistieken voor overeenkomsten weer voor het project: het aantal herhalingen, exacte overeenkomsten, overeenkomsten en geen overeenkomsten, voor segmenten, woorden en tekens.</para>
+        <para>Geeft de Statistieken voor overeenkomsten weer voor het project die bestaan uit het aantal herhalingen, exacte overeenkomsten, fuzzy overeenkomsten en geen overeenkomsten, voor segmenten, woorden en tekens.</para>
+
+		<para>De gegevens worden opgeslagen in het bestand <link linkend="project.folder.omegat.project.stats.match" endterm="project.folder.omegat.project.stats.match.title"/>, geplaatst in de map <link linkend="project.folder.omegat.folder" endterm="project.folder.omegat.folder.title"/> van het project.</para>
+      </listitem>
+    </varlistentry>
+	
+    <varlistentry id="menus.tools.match.statistics.per.file">
+      <term id="menus.tools.match.statistics.per.file.title"><guimenuitem>Statistieken voor overeenkomsten per bestand</guimenuitem></term>
+      <listitem>
+        <para>Geeft de Statistieken voor overeenkomsten weer voor het project die bestaan uit het aantal herhalingen, exacte overeenkomsten, fuzzy overeenkomsten en geen overeenkomsten, voor segmenten, woorden en tekens, voor elk bestand in het project.</para>
+
+		<para>De gegevens worden opgeslagen in het bestand <link linkend="project.folder.omegat.project.stats.match.per.file" endterm="project.folder.omegat.project.stats.match.per.file.title"/>, geplaatst in de map <link linkend="project.folder.omegat.folder" endterm="project.folder.omegat.folder.title"/> van het project.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Statistieken voor overeenkomsten per bestand</term>
-
+    <varlistentry id="menus.tools.align.files">
+      <term id="menus.tools.align.files.title"><guimenuitem>Bestanden uitlijnen…</guimenuitem></term>
       <listitem>
-        <para>Geeft de Statistieken voor overeenkomsten weer voor elk bestand van het project: het aantal herhalingen, exacte overeenkomsten, overeenkomsten en geen overeenkomsten, voor segmenten, woorden en tekens.</para>
-      </listitem>
-    </varlistentry>
+        <para>Selecteer de twee bestanden die moeten worden uitgelijnd (het bronbestand en de vertaling ervan) en klik op <guibutton>OK</guibutton> om het venster <link linkend="windows.aligner" endterm="windows.aligner.title"/> te openen.</para>
 
-    <varlistentry>
-      <term>Bestanden uitlijnen…</term>
-
-      <listitem>
-        <para>Selecteer de twee bestanden die moeten worden uitgelijnd (het bronbestand en de vertaling ervan) en klik op OK om het <link linkend="windows.aligner">venster <guilabel>Uitlijnen</guilabel></link> te openen.</para>
-
-        <para>De ondersteunde bestandsindelingen zijn die welke zijn vermeld in <menuchoice> <guimenuitem>Project</guimenuitem><guimenuitem>eigenschappen</guimenuitem> <guimenuitem>Bestandsfilters</guimenuitem> </menuchoice>.</para>
-
+        <para>De ondersteunde bestandsindelingen zijn afhankelijk van uw projectinstellingen. Bekijk de appendix <link linkend="file.filters" endterm="file.filters.title"/> voor details.</para>
         <para>De bron- en doelbestanden mogen verschillende indelingen hebben (bijvoorbeeld: een bestand <filename>.docx</filename> kan worden uitgelijnd met een bestand <filename>.pdf</filename>).</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Scripten…</term>
-
+    <varlistentry id="menus.tools.scripting">
+      <term id="menus.tools.scripting.title"><guimenuitem>Scripten…</guimenuitem></term>
       <listitem>
-        <para>Opent het  <link linkend="windows.scripts"> venster <guilabel>Scripten</guilabel></link>, waar de locatie van scripts kan worden ingesteld, en waar scripts kunnen worden geschreven, uitgevoerd en worden geassocieerd met een sneltoets.</para>
+        <para>Opent het venster <link linkend="windows.scripts" endterm="windows.scripts.title"/> dat u in staat stelt de locatie in te stellen waar scripts zijn opgeslagen, als ook om scripts te schrijven en uit te voeren, en ze toe te wijzen aan een sneltoets.</para>
+		<para>De lijst onder dit item geeft 12 potentiële plaatsen voor scripts weer. Klikken op een toegewezen plaats start het script dat is toegewezen aan die plaats.</para>
+
+		<note>
+		  <para>Een nummer aan een script toewijzen:</para>
+
+          <orderedlist>
+			<listitem>
+              <para>Open het venster Scripten</para>
+			</listitem>
+
+			<listitem>
+              <para>Selecteer het script dat u wilt uit de lijst aan de linkerkant</para>
+			</listitem>
+
+			<listitem>
+              <para>Klik met rechts, aan de onderzijde van het venster, op een vrij nummer en selecteer <guilabel>Script toevoegen</guilabel>.</para>
+			</listitem>
+          </orderedlist>
+		</note>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>n - (scriptnaam)</term>
-
+    <varlistentry id="menus.tools.external.search.commands">
+      <term id="menus.tools.external.search.commands.title">Externe opdrachten voor zoeken</term>
       <listitem>
-        <para>Start scripts die zijn geassocieerd met een nummer.</para>
-
-        <para>Een script associëren met een nummer:</para>
-
-        <orderedlist>
-          <listitem>
-            <para>Open het venster Scripten</para>
-          </listitem>
-
-          <listitem>
-            <para>Selecteer het script dat u wilt uit de lijst aan de linkerkant</para>
-          </listitem>
-
-          <listitem>
-            <para>Klik met rechts, aan de onderzijde van het venster, op een vrij nummer en selecteer <guilabel>Script toevoegen</guilabel>.</para>
-          </listitem>
-        </orderedlist>
-      </listitem>
-    </varlistentry>
-
-    <varlistentry>
-      <term>(externe opdrachten voor zoeken)</term>
-
-      <listitem>
-        <para>Als er in de <link linkend="dialogs.preferences.externalsearch">Voorkeuren</link> opdrachten zijn gedefinieerd om externe zoekacties uit te voeren, dan zijn zij hier vermeld en zijn ze hier toegankelijk.</para>
+        <para>Als u in de voorkeuren <link linkend="dialogs.preferences.external.searches" endterm="dialogs.preferences.external.searches.title"/> opdrachten zijn gedefinieerd om externe zoekacties uit te voeren, dan zijn zij hier vermeld en toegankelijk.</para>
       </listitem>
     </varlistentry>
   </variablelist>

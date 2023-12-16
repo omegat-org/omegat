@@ -1,92 +1,107 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="menus.options">
-  <title>Opties</title>
+  <title id="menus.options.title"><guimenu>Opties</guimenu></title>
 
+  <para>Dit menu geeft snel toegang tot een aantal frequent gebruikte voorkeuren.</para>
+  
   <variablelist>
-    <varlistentry>
-      <term>Voorkeuren…</term>
-
+    <varlistentry id="menus.options.preferences">
+      <term id="menus.options.preferences.title"><guimenuitem>Voorkeuren…</guimenuitem></term>
       <listitem>
-        <para>Open het dialoogvenster <link linkend="dialogs.preferences">Voorkeuren</link>.</para>
+        <para>Open het dialoogvenster <link linkend="chapter.dialogs.preferences" endterm="chapter.dialogs.preferences.title"/>.</para>
+
+		<note>
+		  <para>Op macOS is dit menu te vinden onder het menu <guimenu>OmegaT</guimenu>.</para>
+		</note>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Machinevertaling</term>
-
+    <varlistentry id="menus.options.mt">
+      <term id="menus.options.mt.title"><guisubmenu>Machinevertaling</guisubmenu></term>
       <listitem>
-        <para>Stelt u in staat om de aangeboden programma's voor machinevertaling te activeren/deactiveren.</para>
+		<itemizedlist>
+		  <listitem>
+			<para><link linkend="dialogs.preferences.mt.automatically.fetch.translations" endterm="dialogs.preferences.mt.automatically.fetch.translations.title"/></para>
+		  </listitem>
+		</itemizedlist>
 
-        <para>Als verscheidene programma's voor vertaling zijn geselecteerd, dan wordt <keycombo> <keycap>Ctrl</keycap> <keycap>M</keycap> </keycombo> ook gebruikt om daar tussen te schakelen en voegt de laatst geselecteerde in.</para>
+		<para>Stelt u in staat om de aangeboden programma's voor machinevertaling te activeren of te deactiveren.</para>
+
+        <para>Als verscheidene programma's voor vertaling zijn geselecteerd, kunt u ook <keycombo><keycap>C</keycap><keycap>M</keycap></keycombo> gebruiken om tussen hen te schakelen en de laatst geselecteerde in te voegen. Bekijk de voorkeuren <link linkend="dialogs.preferences.mt" endterm="dialogs.preferences.mt.title"/> voor details.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Woordenlijst</term>
-
+    <varlistentry id="menus.options.glossary">
+      <term id="menus.options.glossary.title"><guisubmenu>Woordenlijst</guisubmenu></term>
       <listitem>
-        <para>Selecteer <guimenuitem>Taas Terminology Lookup</guimenuitem> om dit opzoeken te activeren.</para>
+		<itemizedlist>
+		  <listitem>
+			<para><link linkend="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries" endterm="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries.title"/></para>
+		  </listitem>
+		</itemizedlist>
+
+        <para>Stelt u in staat om de fuzzy overeenkomsten voor overeenkomsten in woordenlijsten te activeren of te deactiveren.</para>
+
+		<para>Bekijk de voorkeuren <link linkend="dialogs.preferences.glossary" endterm="dialogs.preferences.glossary.title"/> voor details.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Woordenboek</term>
-
+    <varlistentry id="menus.options.dictionary">
+      <term id="menus.options.dictionary.title"><guisubmenu>Woordenboek</guisubmenu></term>
       <listitem>
-        <para>Selecteer de optie <guimenuitem>Fuzzy overeenkomsten voor items woordenboek gebruiken</guimenuitem> als u wilt dat woordenboeken woorden weergeven die dezelfde bron hebben.</para>
+		<itemizedlist>
+		  <listitem>
+			<para><link linkend="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries" endterm="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries.title"/></para>
+		  </listitem>
+		</itemizedlist>
+
+        <para>Stelt u in staat om de fuzzy overeenkomsten voor overeenkomsten in woordenboeken te activeren of te deactiveren.</para>
+
+		<para>Bekijk de voorkeuren <link linkend="dialogs.preferences.dictionary" endterm="dialogs.preferences.dictionary.title"/> voor details.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Auto-aanvullen</term>
-
+    <varlistentry id="menus.options.autocompletion">
+      <term id="menus.options.autocompletion.title"><guisubmenu>Auto-aanvullen</guisubmenu></term>
       <listitem>
-        <para>Als de optie <guimenuitem>Relevante suggesties automatisch weergeven</guimenuitem> is geselecteerd, wordt Auto-aanvullen automatisch gestart door de eerste letter te typen van een vertaald item voor de woordenlijst, of door &quot;&lt;&quot; te typen in het geval van tags.</para>
+		<para>Selecteer de verschillende opties om ze te activeren of te deactiveren. Bekijk de voorkeuren <link linkend="dialog.preferences.auto.completion" endterm="dialog.preferences.auto.completion.title"/> voor details.</para>
+	  </listitem>
+    </varlistentry>
 
-        <para>Selecteer <guimenuitem>Geschiedenis aanvullen inschakelen</guimenuitem> om voorgestelde woorden weer te geven zodra hun eerste letters worden getypt.</para>
+    <varlistentry id="menus.options.file.filters">
+      <term id="menus.options.file.filters.title"><guimenuitem>Globale bestandsfilters…</guimenuitem></term>
+      <listitem>
+        <para>Opent de voorkeuren <link linkend="dialogs.preferences.file.filters" endterm="dialogs.preferences.file.filters.title"/>.</para>
 
-        <para>Selecteer <guimenuitem>Geschiedenis voorspellen inschakelen</guimenuitem> om voorgestelde woorden weer te geven die gewoonlijk het woord volgen dat zojuist werd ingevoerd.</para>
+        <para>Gebruik <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.properties" endterm="menus.project.properties.title"/> om toegang te krijgen tot de lokale voorkeuren voor bestandsfilters.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Bestandsfilters…</term>
-
+    <varlistentry id="menus.options.segmentation">
+      <term id="menus.options.segmentation.title"><guimenuitem>Globale segmentatieregels…</guimenuitem></term>
       <listitem>
-        <para>Opent de opties voor <link linkend="dialogs.preferences.filefilters">Bestandsfilters</link> in het dialoogvenster Voorkeuren.</para>
+        <para>Opent de voorkeuren <link linkend="dialogs.preferences.segmentation.setup" endterm="dialogs.preferences.segmentation.setup.title"/>.</para>
 
-        <para>Deze instellingen zijn van toepassing op het niveau van OmegaT, voor alle projecten.</para>
+        <para>Gebruik <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.properties" endterm="menus.project.properties.title"/> om toegang te verkrijgen tot de globale segmentatieregels.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Segmentatie…</term>
-
+    <varlistentry id="menus.options.editor">
+      <term id="menus.options.editor.title"><guimenuitem>venster Bewerken</guimenuitem></term>
       <listitem>
-        <para>Opent de opties voor <link linkend="dialogs.preferences.segmentationsetup">Segmentatie-instellingen</link> in het dialoogvenster Voorkeuren.</para>
-
-        <para>Deze instellingen zijn van toepassing op het niveau van OmegaT, voor alle projecten.</para>
-
+        <para>Opent de voorkeuren <link linkend="dialogs.preferences.editor" endterm="dialogs.preferences.editor.title"/>.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>venster Bewerken</term>
-
+    <varlistentry id="menus.options.access.configuration.folder">
+      <term id="menus.options.access.configuration.folder.title"><guimenuitem>Ga naar map voor configuratie</guimenuitem></term>
       <listitem>
-        <para>Opent de opties voor <link linkend="dialogs.preferences.editor">venster Bewerken</link> in het dialoogvenster Voorkeuren.</para>
+        <para>Opent de lokale map waar de configuratiebestanden voor OmegaT zijn opgeslagen.</para>
 
-        <para>Deze instellingen zijn van toepassing op het niveau van OmegaT, voor alle projecten.</para>
-
-      </listitem>
-    </varlistentry>
-
-    <varlistentry>
-      <term>Ga naar map voor configuratie</term>
-
-      <listitem>
-        <para>Opent de lokale map waar de configuratiebestanden voor OmegaT zijn opgeslagen (afhankelijk van het besturingssysteem).</para>
+		<note>
+		  <para>De locatie is afhankelijk van het besturingssysteem en de opties voor het opstarten. Bekijk de appendix <link linkend="configuration.folder" endterm="configuration.folder.title"/> voor details.</para>
+		</note>
       </listitem>
     </varlistentry>
   </variablelist>

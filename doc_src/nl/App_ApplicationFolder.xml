@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="application.folder">
+  <title id="application.folder.title">Toepassingsmap</title>
+
+  <para>De toepassingsmap bevat de toepassing <filename>OmegaT.jar</filename> en een aantal andere belangrijke bestanden.</para>
+
+  <note>
+	<para>De locatie van de toepassingsmap is afhankelijk van uw  platform en de manier waarop OmegaT hebt geïnstalleerd. De aanbevolen of standaard locaties zijn de volgende:</para>
+
+	<variablelist>
+	  <varlistentry>
+		<term>Windows</term>
+		<listitem>
+		  <para><filename>C:\Program Files\OmegaT\</filename></para>
+		</listitem>
+	  </varlistentry>
+	  
+	  <varlistentry>
+		<term>Linux</term>
+		<listitem>
+		  <para><filename>/opt/omegat/</filename></para>
+		</listitem>
+	  </varlistentry>
+	  
+	  <varlistentry>
+		<term>macOS</term>
+		<listitem>
+		  <para><filename>/Applications/OmegaT.app/Contents/Java/</filename></para>
+		</listitem>
+	  </varlistentry>
+	  
+	  <varlistentry>
+		<term>andere platforms</term>
+		<listitem>
+		  <para><filename>/opt/omegat/</filename></para>
+		</listitem>
+	  </varlistentry>
+	</variablelist>
+  </note>
+  
+  <variablelist>
+	<varlistentry id="application.folder.omegat.license">
+	  <term id="application.folder.omegat.license.title">OmegaT-license.txt</term>
+	  <listitem>
+		<para>OmegaT's distributielicentie. De GPL versie 3.</para>
+	  </listitem>
+	</varlistentry>
+
+	<varlistentry id="application.folder.omegat.jar">
+	  <term id="application.folder.omegat.jar.title">OmegaT.jar</term>
+	  <listitem>
+		<para>OmegaT's uitvoerbare bestand. Gebruikt bij het opstarten van OmegaT vanaf de opdrachtregel. Bekijk het hoofdstuk <link linkend="launch.with.command.line" endterm="launch.with.command.line.title"/> voor details.</para>
+	  </listitem>
+	</varlistentry>
+
+	<varlistentry id="application.folder.changes">
+	  <term id="application.folder.changes.title">changes.txt</term>
+	  <listitem>
+		<para>De lijst met verbeteringen en opgeloste problemen. Controleer het om te zien of u informatie nodig hebt over de evolutie van OmegaT.</para>
+	  </listitem>
+	</varlistentry>
+
+	<varlistentry id="application.folder.doc.license">
+	  <term id="application.folder.doc.license.title">doc-license.txt</term>
+	  <listitem>
+		<para>De documentatie distributielicentie. De GPL versie 3.</para>
+	  </listitem>
+	</varlistentry>
+
+	<varlistentry id="application.folder.index.html">
+	  <term id="application.folder.index.html.title">index.html</term>
+	  <listitem>
+		<para>De index voor de meertalige gebruikershandleiding.</para>
+	  </listitem>
+	</varlistentry>
+
+	<varlistentry id="application.folder.join.html">
+	  <term id="application.folder.join.html.title">join.html</term>
+	  <listitem>
+		<para>Een koppeling naar de pagina voor ondersteuning.</para>
+	  </listitem>
+	</varlistentry>
+
+	<varlistentry id="application.folder.readme.txt">
+	  <term id="application.folder.readme.txt.title">readme.txt</term>
+	  <listitem>
+		<para>Simpele instructies voor installatie en het uitvoeren.</para>
+	  </listitem>
+	</varlistentry>
+
+
+	<varlistentry id="application.folder.docs">
+	  <term id="application.folder.docs.title">/docs/</term>
+	  <listitem>
+		<para>De map voor de documentatie.<variablelist>
+		  <varlistentry id="application.folder.docs.contributors">
+			<term id="application.folder.docs.contributors.title">contributors.txt</term>
+			<listitem>
+			  <para>De lijst met individuele deelnemers.</para>
+			</listitem>
+		  </varlistentry>
+
+		  <varlistentry id="application.folder.docs.en">
+			<term id="application.folder.docs.en.title">nl/</term>
+			<listitem>
+			  <para>Elke vertaalde gebruikershandleiding staat in een afzonderlijk map voor de taal.</para>
+			</listitem>
+		  </varlistentry>
+
+		  <varlistentry id="application.folder.docs.index.html">
+			<term id="application.folder.docs.index.html.title">index.html</term>
+			<listitem>
+			  <para>De index voor de meertalige gebruikershandleiding.</para>
+			</listitem>
+		  </varlistentry>
+
+		  <varlistentry id="application.folder.docs.librairies.txt">
+			<term id="application.folder.docs.librairies.txt.title">libraries.txt</term>
+			<listitem>
+			  <para>De lijst van door OmegaT gebruikte bibliotheken.</para>
+			</listitem>
+		  </varlistentry>
+		</variablelist>
+		</para>
+	  </listitem>
+	</varlistentry>
+
+	<varlistentry id="application.folder.images">
+	  <term id="application.folder.images.title">/images/</term>
+	  <listitem>
+		<para>De map waarin afbeeldingen, die worden gebruikt voor OmegaT, zijn opgeslagen.</para>
+	  </listitem>
+	</varlistentry>
+
+	<varlistentry id="application.folder.lib">
+	  <term id="application.folder.lib.title">/lib/</term>
+	  <listitem>
+		<para>De map waar de bibliotheken die worden gebruikt door OmegaT zijn opgeslagen.</para>
+	  </listitem>
+	</varlistentry>
+
+	<varlistentry id="application.folder.plugins">
+	  <term id="application.folder.plugins.title">plug-ins/</term>
+	  <listitem>
+		<para>De map waar u externe plug-ins kunt installeren. De voorkeurslocatie voor plug-in handmatige installatie is de map <link linkend="configuration.folder.extra.contents.plugin" endterm="configuration.folder.extra.contents.plugin.title"/>, geplaatst in de map <link linkend="configuration.folder">configuration</link>. Bekijk de <link linkend="dialogs.preferences.plugins" endterm="dialogs.preferences.plugins.title"/> voorkeuren voor details.</para>
+	  </listitem>
+	</varlistentry>
+
+	<varlistentry id="application.folder.scripts">
+	  <term id="application.folder.scripts.title">scripts</term>
+	  <listitem>
+		<para>De map waar gedistribueerde scripts zijn geplaatst. Bekijk het venster <link linkend="windows.scripts" endterm="windows.scripts.title"/> voor details.</para>
+	  </listitem>
+	</varlistentry>
+  </variablelist>
+</section>

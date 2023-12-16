@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="how.to.translate.other.files">
+  <title id="how.to.translate.other.files.title">Ondersteuning voor andere indelingen</title>
+
+  <para>OmegaT's bestandsfilters verschaffen een breed scala aan ondersteuning voor veel voorkomende en minder voorkomende bestandsindelingen. Als u indelingen moet ondersteunen die niet worden gedekt door OmegaT, zijn er vier manieren om dat te doen:</para>
+
+  <itemizedlist>
+	<listitem>
+	  <para><link linkend="how.to.translate.other.files.associate">Associeer</link> de indeling met een reeds bestaande ondersteunde indeling.</para>
+	</listitem>
+	
+	<listitem>
+	  <para><link linkend="how.to.translate.other.files.convert">Converteer</link> de indeling naar een reeds ondersteunde indeling.</para>
+	</listitem>
+
+	<listitem>
+	  <para><link linkend="how.to.translate.other.files.third.party.plugins">Breid</link> OmegaT uit met plug-ins van derde partijen die de indeling ondersteunen.</para>
+	</listitem>
+
+	<listitem>
+	  <para><link linkend="how.to.translate.other.files.develop">Ontwikkel</link> een filter voor die indeling.</para>
+	</listitem>
+  </itemizedlist>
+  
+	<section id="how.to.translate.other.files.associate">
+	  <title id="how.to.translate.other.files.associate.title">Associatie</title>
+
+	  <para>Bestandsfilters hebben een lijst met bestandsextensies die ermee zijn geassocieerd. Als de indeling die u wilt vertalen structureel dicht bij een reeds ondersteunde indeling ligt, voeg dan eenvoudigweg de bestandsextensie toe aan de lijst met ondersteunde extensies voor die indeling, of  wijzig de bestandsextensie naar een die wordt geaccepteerd door het bestandsfilter dat u wilt gebruiken. Bekijk het hoofdstuk <link linkend="file.filters" endterm="file.filters.title"/> voor details.</para>
+		
+	  <para>U kunt ook de functie voor aangepaste tags van OmegaT gebruiken om specifieke tekenreeksen voor de indeling te registreren en OmegaT ze laten afhandelen alsof het normale tags waren. Bekijk de voorkeuren <link linkend="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags" endterm="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags.title"/> voor details.</para>
+	</section>
+	
+	<section id="how.to.translate.other.files.convert">
+	  <title id="how.to.translate.other.files.convert.title">Conversie</title>
+
+	  <para>Het heeft soms de voorkeur om het bestand te converteren naar een ondersteunde indeling en dan het vertaalde document terug te converteren naar de originele indeling om er voor te zorgen dat met alle eigenschappen van een indeling op de juiste wijze rekening wordt gehouden.</para>
+
+	  <para>Een aantal gratis softwareprogramma's van derde partijen verschaffen een dergelijk “rondgang”-conversie, inclusief:</para>
+	  
+	  <itemizedlist id="how.to.translate.other.files.third.party.utilities">
+		<listitem id="how.to.translate.other.files.third.party.utilities.rainbow">
+		  <para>Rainbow, van het <ulink url="https://okapiframework.org">Okapi Framework</ulink></para>
+
+		  <para>Licentie: Apache License Version 2.0</para>
+
+		  <para>Het Okapi Framework bevat een aantal bestandsfilters, inclusief enkele niet door OmegaT zelf ondersteunde. Bekijk <ulink url="https://okapiframework.org/wiki/index.php?title=Filters">Lijst van bestandsfilters</ulink> voor details.</para>
+
+		  <para>Rainbow kan bestanden maken die voldoen aan XLIFF 1.2 of projecten voor OmegaT vanuit alle bestanden die zijn ingesteld als “invoer”-bestanden. Rainbow-ondersteunde bestanden worden geconverteerd naar XLIFF en ingevoegd als bronbestanden in een volledig project voor OmegaT dat u direct kunt openen met OmegaT. Bekijk <ulink url="https://okapiframework.org/wiki/index.php/Rainbow_TKit_-_OmegaT_Project">Rainbow TKit - OmegaT Project</ulink> voor details.</para>
+		</listitem>
+
+		<listitem id="how.to.translate.other.files.third.party.utilities.po4a">
+		  <para><ulink url="https://po4a.org">po4a</ulink></para>
+
+		  <para>Licentie: GNU General Public License v2</para>
+
+		  <para>po4a ondersteunt een aantal indelingen voor vrije software-documentatie, vermeld op de voorpagina van de site, en biedt gereedschappen voor conversie naar en vanuit de indeling po. Bekijk het gedeelte <link linkend="file.filters.po" endterm="file.filters.po.title"/> voor details.</para>
+		</listitem>
+
+		<listitem>
+		  <para>De converters van de <ulink url="http://docs.translatehouse.org/projects/translate-toolkit/en/latest/index.html">Translate Toolkit</ulink></para>
+
+		  <para>Licentie: GNU General Public License v2</para>
+
+		  <para>De Translate Toolkit biedt een aantal gereedschappen voor conversie naar en vanuit de indeling po. Bekijk <ulink url="http://docs.translatehouse.org/projects/translate-toolkit/en/latest/commands/index.html">Converters</ulink> voor details.</para>
+		</listitem>
+
+		<listitem id="how.to.translate.other.files.third.party.utilities.openxliff">
+		  <para>OpenXLIFF van <ulink url="https://maxprograms.com/">Maxprograms</ulink></para>
+
+		  <para>Licentie: Eclipse Public License v1.0</para>
+
+		  <para>OpenXLIFF ondersteunt een aantal bestandsfilters, inclusief enkele die niet door OmegaT zelf worden ondersteund. Bekijk <ulink url="https://maxprograms.com/products/openxliff.html">OpenXLIFF Filters</ulink> voor details. Maxprograms distribueert ook <ulink url="https://maxprograms.com/products/openxliff.html">XLIFF Manager</ulink>, een grafische gebruikersinterface voor de OpenXLIFF Filters.</para>
+
+		  <para>OpenXLIFF produceert XLIFF 1.2 conforme bestanden.</para>
+		</listitem>
+	  </itemizedlist>
+	  
+		<para>Sommige indelingen, zoals PDF, kunnen niet correct worden afgehandeld door “rondgang”-conversies. Zij vereisen een tussenliggende conversie naar een ondersteunde indeling die dient als een basis om handmatig een correct document in de doeltaal te maken.</para>
+		
+		<para>U kunt een aantal mogelijkheden van online- of offline-programma's die PDF converteren naar veel voorkomende indelingen van kantoorpaketten, maar de conversie zal altijd uitgebreide handmatige aanpassingen vereisen aan het doeldocument, vóórdat een correct PDF-document kan worden geproduceerd. Zorg er voor dat u de vereisten voor de indeling begrijpt wanneer u begint te werken aan een PDF of soortgelijk bestand.</para>
+	  </section>
+
+	  <section id="how.to.translate.other.files.third.party.plugins">
+		<title id="how.to.translate.other.files.third.party.plugins.title">Plug-ins van derde partijen</title>
+
+		<itemizedlist>
+		  <listitem>
+			<para>De Okapi Filters Plugin voor OmegaT, van het <ulink url="https://okapiframework.org">Okapi Framework</ulink></para>
+
+			<para>Licentie: Apache License Version 2.0</para>
+
+			<para>Niet alle bestandsfilters van  het Okapi Framework zijn opgenomen in de plug-in met de bestandsfilters. Bekijk <ulink url="https://okapiframework.org/wiki/index.php/Okapi_Filters_Plugin_for_OmegaT#Filters_Included">Opgenomen filters</ulink> voor details.</para>
+
+			<para>Wanneer geïnstalleerd biedt de plug-in direct toegang tot de toegevoegde indelingen en stelt u ook in staat een bestand met parameters voor een aangepast bestandsfilter, gemaakt in Rainbow, te associëren. Zie <link linkend="how.to.translate.other.files.third.party.utilities.rainbow">boven</link>.</para>
+		  </listitem>
+		</itemizedlist>
+
+		<para>Andere plug-ins voor minder voorkomende indelingen zijn vermeld op de wiki van OmegaT. Bekijk <ulink url="https://sourceforge.net/p/omegat/wiki/Plugins/">Plug-ins</ulink>.</para>
+	</section>
+
+	<section id="how.to.translate.other.files.develop">
+	  <title id="how.to.translate.other.files.develop.title">Ontwikkeling</title>
+
+	  <para>OmegaT verschaft ontwikkelaars uitgebreide documentatie voor het maken van plug-ins voor bestandsfilters. Bekijk <ulink url="https://omegat.readthedocs.io/en/latest/11.HowToCreateFilterPlugin/">Hoe een plug-in voor bestandsfilters te maken voor OmegaT</ulink> voor details.</para>
+	</section>
+  </section>

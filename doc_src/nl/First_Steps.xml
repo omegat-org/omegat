@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd"
+[
+<!ENTITY % manualvariables SYSTEM "manualvariables.mod">
+%manualvariables;
+]>
+<article lang="nl" id="first.steps">
+  <title>OmegaT</title>
+  <section>
+	<title id="first-steps">Eerste stappen</title>
+	<para>Druk op <keycap>F1</keycap> of open het menu <guimenu>&gt; Help</guimenu> om de gebruikershandleiding te openen. Die bevat een uitgebreide introductie voor OmegaT. Doe dit om te beginnen met OmegaT met minimale instellingen:<orderedlist id="first-step-list">
+	  <listitem>
+		<para>Gebruik <guimenu>&gt; Project</guimenu> <guimenuitem>&gt; Nieuw…</guimenuitem> om een nieuw project te maken.</para>
+	  </listitem>
+	  <listitem>
+		<para>Wijzig de taal codes om uw eigen bron- en doeltalen weer te geven. Klik op <guibutton>OK</guibutton>.</para>
+
+		<para>→ OmegaT zal een set mappen maken die uw bestanden bevatten. Het zal ook een leeg vertaalgeheugen maken dat het op de achtergrond zal vullen, één segment per keer als u uw vertaling invoert. Overeenkomsten voor dat geheugen zullen eventueel worden weergegeven in het venster <guilabel>Fuzzy overeenkomsten</guilabel>.</para>
+	  </listitem>
+	  <listitem>
+		<para>Klik op <guibutton>Bestanden toevoegen…</guibutton> en voeg de bestanden toe die u wilt vertalen. Sluit het venster.</para>
+
+		<para>→ OmegaT zal de geselecteerde bestanden kopiëren naar het project dat u in de vorige stap maakte. Het zal nu één segment per keer weergeven om door u te worden vertaald.</para>
+	  </listitem>
+	  <listitem>
+		<para>Typ de vertaling van het eerste segment. Druk op <keycap>Enter</keycap>.</para>
+
+		<para>→ OmegaT zal dat segment registreren in het vertaalgeheugen van het project en zal de cursor naar het volgende segment verplaatsen.</para>
+	  </listitem>
+
+	  <listitem>
+		<para>Gebruik <guimenu>&gt; Project</guimenu><guimenuitem>&gt; Vertaalde documenten maken</guimenuitem> om op elk moment het vertaalde document te maken.</para>
+
+		<para>→ OmegaT zal de vertaalde bestanden opslaan in de map <guilabel>target</guilabel> van het project dat in de eerste stap werd gemaakt. Gebruik <guimenu>&gt; Project</guimenu> <guisubmenu>&gt; Ga naar inhoud van project</guisubmenu> voor toegang tot de bestanden.</para>
+	  </listitem>
+
+	  <listitem>
+		<para>Als u meer wilt weten, lees dan de gebruikershandleiding.</para>
+	  </listitem>
+	</orderedlist>
+	</para>
+  </section>
+
+  <section>
+	<title id="freedoms">Vrijheden</title>
+	<para>OmegaT is een gratis en vrije computer-assisted translation (CAT) oplossing voor professionele vertalers. Het wordt gedistribueerd onder de termen van de <emphasis>GNU General Public License, versie 3.0</emphasis>. Bekijk <guimenu>&gt; Help</guimenu> <guimenu>&gt; Over</guimenu>. De licentie geeft u de volgende vrijheden:<itemizedlist id="freedoms.list">
+	  <listitem>
+		<para>De vrijheid om OmegaT uit te voeren zoals u dat wilt, voor elk doel.</para>
+	  </listitem>
+
+	  <listitem>
+		<para>De vrijheid om te bestuderen hoe OmegaT werkt, en het te wijzigen zodat het uw computerwerk uitvoert zoals u dat wilt.</para>
+	  </listitem>
+
+	  <listitem>
+		<para>De vrijheid om kopieën opnieuw te distribueren, zodat u anderen kunt helpen.</para>
+	  </listitem>
+
+	  <listitem>
+		<para>De vrijheid om kopieën van uw aangepaste versies te distribueren aan anderen.</para>
+	  </listitem>
+	</itemizedlist>
+	</para>
+  </section>
+</article>

@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="how.to.restore.your.data">
+  <title id="how.to.restore.your.data.title">Problemen oplossen</title>
+
+  <warning>
+	<para>OmegaT is een robuuste en betrouwbare toepassing, maar zelfs dan zou u echter toch voorzorgen moeten nemen tegen gegevensverlies als u OmegaT gebruikt, net als met elke andere toepassing.</para>
+  </warning>
+
+  <section id="how.to.restore.your.data.automatic.backup">
+	<title id="how.to.restore.your.data.automatic.backup.title">Automatische back-ups</title>
+
+	<para>OmegaT maakt back-ups van uw projectinstellingen om er voor te zorgen dat het ze bij problemen weer kan terughalen. Bekijk het gedeelte <link linkend="project.folder.omegat.project.file" endterm="project.folder.omegat.project.file.title"/> voor details.</para>
+	  
+	<para>OmegaT slaat regelmatig en automatisch al uw voortgang op in het bestand <link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/> dat is geplaats in de map <link linkend="project.folder.omegat" endterm="project.folder.omegat.title"/> van het project. OmegaT maakt ook regelmatig back-ups van dat bestand.</para>
+
+	<orderedlist>
+	  <listitem>
+		<para>Wanneer u een project opent, maakt OmegaT een back-up van het bestand <filename>project_save.tmx</filename> naar een back-up met een tijdstempel.</para>
+
+		<para>OmegaT behoudt tien van dergelijke bestanden.</para>
+
+		<note>
+		  <para>De bestandsnaam van de back-up volgt het patroon <filename>project_save.tmx.JJJJMMDDuumm.bak</filename> waar <code>JJJJ</code> het 4-cijferige jaar weergeeft, <code>MM</code> de maand, <code>DD</code> de dag van de maand, en <code>uu</code> en <code>mm</code> de uren en minuten aangeven.</para>
+		</note>
+	  </listitem>
+	  
+	  <listitem>
+		<para>Elke keer als het bestand <filename>project_save.tmx</filename> wordt aangepast:</para>
+		
+		<itemizedlist>
+		  <listitem>
+			<para>ofwel na het opslaan van de projectgegevens (met <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.save" endterm="menus.project.save.title"/>),</para>
+		  </listitem>
+
+		  <listitem>
+			<para>of bij het maken van een regelmatige back-up (standaard elke 3 minuten),</para>
+		  </listitem>
+		</itemizedlist>
+
+		<para>maakt OmegaT een back-upbestand, genaamd <filename>project_save.tmx.bak</filename>.</para>
+
+		<para>Dat bestand is een kopie van <filename>project_save.tmx</filename> <emphasis>vóórdat</emphasis> het werd aangepast.</para>
+	  </listitem>
+
+	  <listitem>
+		<para>Elke keer als u de projectgegevens opslaat (met <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.save" endterm="menus.project.save.title"/>), of bij het maken van een regelmatige back-up, slaat OmegaT de huidige status van de vertaling op in <filename>project_save.tmx</filename>.</para>
+	  </listitem>
+	</orderedlist>
+
+	<para>Het bestand <filename>project_save.tmx</filename> bevat altijd de meest recente gegevens.</para>
+
+	<note>
+	  <para>U kunt de frequentie voor de regelmatige back-ups instellen in de voorkeur <link linkend="dialogs.preferences.saving.and.output" endterm="dialogs.preferences.saving.and.output.title"/>.</para>
+	</note>
+
+  </section>
+
+  <section id="how.to.restore.your.data.lost.in.translation">
+	<title id="how.to.restore.your.data.lost.in.translation.title">Verloor u uw vertaling?</title>
+
+	<para>Zelfs als u bang bent dat u gegevens van de vertaling kwijt bent, zijn ze waarschijnlijk veilig opgeslagen in uw meest recente geheugen van de back-up, dat gewoonlijk niet ouder is dan enkele minuten.</para>
+
+	<para>Ga als volgt door:</para>
+	
+	<orderedlist>
+      <listitem>
+		<para>Sluit het project om verdere wijzigingen aan de huidige status van de back-upbestanden te voorkomen.</para>
+      </listitem>
+
+      <listitem>
+		<para>Hernoem het huidige bestand <filename>project_save.tmx</filename> (bijvoorbeeld naar <filename>project_save.tmx.tmp</filename>).</para>
+      </listitem>
+
+      <listitem>
+		<para>Selecteer de back-up van het vertaalgeheugen dat meest waarschijnlijk de gegevens bevat die u nodig hebt</para>
+      </listitem>
+
+      <listitem>
+		<para>Hernoem dat naar <filename>project_save.tmx</filename></para>
+      </listitem>
+
+      <listitem>
+		<para>Heropen het project.</para>
+      </listitem>
+	</orderedlist>
+
+	<para>Deze actie zal uw vertaling herstellen naar zijn status op het punt dat de geselecteerde back-up werd gemaakt. U zou, indien nodig, deze bewerking kunnen herhalen om eerdere statussen terug te vinden. Overweeg het veilig opslaan van alle verschillende bestanden die u hernoemt, om ze eventueel later opnieuw te kunnen gebruiken. Onthoud ook om in de tussentijd niet de configuratie van het project aan te passen of TMX-bestanden toe te voegen, omdat dat de resultaten zou kunnen beïnvloeden.</para>
+
+	<note>
+	  <para>Wees voorzichtig met wijzigingen die gedurende het project worden gemaakt in de bestanden in de bronmap, de segmentatieregels, of de bestandsfilters. Aanpassen van één hiervan nadat u bent begonnen met uw vertaling zou er toe kunnen leiden dat sommige segmenten verdwijnen of dat er onverwacht nieuwe segmenten verschijnen.</para>
+	</note>
+  </section>
+
+  <section id="how.to.restore.your.data.project.locked">
+	<title id="how.to.restore.your.data.project.locked.title">Uw project is vergrendeld?</title>
+
+	<para>In het uitzonderlijke geval dat uw computer vastloopt en OmegaT geen tijd heeft om netjes af te sluiten kan het bestand <filename>omegat.project</filename> door het besturingssysteem worden vergrendeld en beletten om het te openen nadat u uw systeem opnieuw hebt opgestart.</para>
+
+	<para>Ga als volgt door:</para>
+
+	<orderedlist>
+      <listitem>
+		<para>Identificeer de projectmap die OmegaT weigert te openen en open het in uw bestandsbeheerder. De inhoud van de map zou hetzelfde moeten zijn als in een standaard map <link linkend="chapter.project.folder">project</link>.</para>
+      </listitem>
+
+	  <listitem>
+		<para>In de map zou u een bestand <filename>omegat.project</filename>, als ook een bestand <filename>omegat.project.bak</filename>. Zorg ervoor dat de bestanden identiek zijn.</para>
+      </listitem>
+
+      <listitem>
+		<para>Hernoem het bestand <filename>omegat.project</filename> (bijvoorbeeld naar <filename>omegat.project.vergrendeld</filename>).</para>
+      </listitem>
+
+      <listitem>
+		<para>Hernoem het bestand <filename>omegat.project.bak</filename> naar <filename>omegat.project</filename>.</para>
+      </listitem>
+
+      <listitem>
+		<para>Open het project.</para>
+      </listitem>
+	</orderedlist>
+
+	<para>Deze actie zal het project openen met het automatisch gemaakte back-upbestand <filename>omegat.project</filename>.</para>
+  </section>
+  
+  <section id="how.to.restore.your.data.project.wont.open">
+	<title id="how.to.restore.your.data.project.wont.open.title">Uw project wil niet openen?</title>
+
+	<para>In het uitzonderlijke geval dat uw computer vastloopt en OmegaT geen tijd heeft om netjes af te sluiten, kunnen sommige belangrijke bestanden worden gecorrumpeerd en voorkomen dat uw project opnieuw wordt geopend nadat u uw systeem opnieuw hebt opgestart.</para>
+
+	<para>Ga als volgt door:</para>
+
+	<orderedlist>
+      <listitem>
+		<para>Maak een nieuw project met dezelfde instellingen.</para>
+      </listitem>
+
+	  <listitem>
+		<para>Kopieer de inhoud van de verschillende mappen van de gebruiker naar de equivalente locatie in het nieuwe project (bronbestanden, bestanden voor vertaalgeheugens voor verwijzing, woordenlijstbestanden).</para>
+      </listitem>
+
+      <listitem>
+		<para>In het oude project, selecteer het bestand voor het vertaalgeheugen (hoofdproject of back-up) dat het meest waarschijnlijk de gegevens bevat die u nodig hebt.</para>
+      </listitem>
+
+      <listitem>
+		<para>Hernoem het, indien nodig, naar <filename>project_save.tmx</filename>.</para>
+      </listitem>
+
+      <listitem>
+		<para>Kopieer het naar de map <filename>omegat/</filename> van uw nieuwe project.</para>
+      </listitem>
+
+      <listitem>
+		<para>Open het nieuwe project.</para>
+      </listitem>
+	</orderedlist>
+
+	<para>Deze actie zal uw vertaling herstellen naar de status van de vertaling op het punt dat het geselecteerde vertaalgeheugen voor het project werd gemaakt in het oude project.</para>
+  </section>
+
+  <section id="how.to.restore.your.data.translated.file.broken">
+	<title id="how.to.restore.your.data.translated.file.broken.title">Uw vertaalde bestand wil niet openen?</title>
+
+	<para>Heel vaak bevatten bestanden uit kantoorpakketten tags die naar de vertaling moeten worden gekopieerd om er voor te zorgen dat het vertaalde bestand kan worden geopend in de originele toepassing. In sommige gevallen zullen ontbrekende tags voorkomen dat het bestand kan worden geopend.</para>
+	
+	<para>Ga als volgt door:</para>
+
+	<orderedlist>
+      <listitem>
+		<para>Open het project in OmegaT.</para>
+      </listitem>
+
+	  <listitem>
+		<para>Gebruik <link linkend="menus.tools" endterm="menus.tools.title"/><link linkend="menus.tools.check.issues" endterm="menus.tools.check.issues.title"/> en focus op <guilabel>Problemen met tags</guilabel>.</para>
+      </listitem>
+
+      <listitem>
+		<para>Repareer alle problemen met tags die in uw documenten worden gevonden.</para>
+      </listitem>
+
+      <listitem>
+		<para>Gebruik <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.create.translated.documents" endterm="menus.project.create.translated.documents.title"/> om de documenten opnieuw te maken.</para>
+      </listitem>
+
+      <listitem>
+		<para>Open de documenten opnieuw in de originele toepassing.</para>
+      </listitem>
+	</orderedlist>
+
+	<para>Deze actie zal problemen met inconsistente interne tags oplossen die niet correct werden ingevoerd bij het maken van de vertaling in OmegaT.</para>
+  </section>
+
+  <section id="how.to.restore.your.data.omegat.wont.behave">
+	<title id="how.to.restore.your.data.omegat.wont.behave.title">OmegaT gedraagt zich niet?</title>
+
+	<para>Er gebeurde iets en OmegaT gedraagt zich niet meer. Wat u ook probeert, u lijkt niet in staat te zijn het op te lossen. U zou nog één laatste ding kunnen proberen voordat u hulp inroept: start OmegaT opnieuw met zijn standaard instellingen.</para>
+
+	<para>Ga als volgt door:</para>
+	
+	<orderedlist>
+	  <listitem>
+		<para>Gebruik <link linkend="menus.options" endterm="menus.options.title"/><link linkend="menus.options.access.configuration.folder" endterm="menus.options.access.configuration.folder.title"/> voor toegang tot de configuratiemap.</para>
+		
+		<note>
+		  <para>Wanneer u de menu's van OmegaT niet kunt gebruiken, bekijk dan het hoofdstuk <link linkend="configuration.folder" endterm="configuration.folder.title"/> om de locatie van de configuratiemap te zoeken.</para>
+		</note>
+      </listitem>
+
+      <listitem>
+		<para>Sluit OmegaT.</para>
+      </listitem>
+
+      <listitem>
+		<para>Maak een back-up van de inhoud en verwijder de originele map.</para>
+      </listitem>
+
+      <listitem>
+		<para>Start OmegaT opnieuw.</para>
+
+		<note>
+		  <para>Als OmegaT op dit punt niet werkt zoals verwacht, schroom niet om ondersteuning te vragen.</para>
+		</note>
+      </listitem>
+
+      <listitem>
+		<para>Sluit OmegaT.</para>
+      </listitem>
+
+      <listitem>
+		<para>Kopieer <emphasis>één</emphasis> van de oude bestanden naar de nieuwe configuratiemap.</para>
+      </listitem>
+	  
+	  <listitem>
+		<para>Start OmegaT opnieuw.</para>
+
+		<note>
+		  <para>Als OmegaT op dit punt niet werkt zoals verwacht, heeft u het defecte bestand geïdentificeerd. Verwijder het uit de configuratiemap en start OmegaT opnieuw, en ga door met uw werk.</para>
+		</note>
+      </listitem>
+
+	  <listitem>
+		<para>Ga terug naar Stap 5. hierboven en ga door totdat u tevreden bent.</para>
+      </listitem>
+	</orderedlist>
+  </section>
+
+  <section id="how.to.restore.your.data.summary">
+	<title id="how.to.restore.your.data.summary.title">Overzicht</title>
+
+	<itemizedlist>
+      <listitem>
+		<para>Maak, om het verlies van belangrijke gegevens te voorkomen, regelmatig kopieën van het bestand <filename>/omegat/project_save.tmx</filename> naar een medium voor back-ups, zoals een USB-schrijf, een externe harde schijf, of een cloud-service.</para>
+      </listitem>
+
+      <listitem>
+		<para>Oefen regelmatig “noodmaatregelen” zoals het herstellen van vertalingen uit een project om er voor te zorgen dat u niet teveel tijd verliest op de dag dat u deze vaardigheden nodig hebt.</para>
+      </listitem>
+	</itemizedlist>
+  </section>
+</section>

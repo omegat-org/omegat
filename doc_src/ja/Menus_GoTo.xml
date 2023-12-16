@@ -123,7 +123,7 @@
 		  </listitem>
 
 		  <listitem id="menus.goto.auto.populated.segments.prev.enforce">
-			<para id="menus.goto.auto.populated.segments.prev.enforce.title"><guimenuitem>次のtm/auto/からの分節</guimenuitem><keycombo><keycap>S</keycap><keycap>C</keycap><keycap>A</keycap><keycap>.</keycap></keycombo></para>
+			<para id="menus.goto.auto.populated.segments.prev.enforce.title"><guimenuitem> tm/enforce/からの前の分節</guimenuitem> <keycombo><keycap>S</keycap><keycap>C</keycap><keycap>A</keycap><keycap>.</keycap></keycombo></para>
 
 			<para><filename>tm/enforce/</filename>から挿入された前の分節に移動します。</para>
 		  </listitem>

@@ -41,7 +41,7 @@
     <varlistentry>
       <term>検索</term>
       <listitem>
-        <para>OmegaT検索には<link linkend="windows.text.search.methods.regex" endterm="windows.text.search.methods.regex.title"/>オプションがあり、ファイルを横断して非常に強力な検索を行うことができます。</para>
+        <para>検索には<link linkend="windows.text.search.methods.regex" endterm="windows.text.search.methods.regex.title"/>オプションがあり、ファイルを横断して非常に強力な検索を行うことができます。</para>
 
         <para><link linkend="windows.text.replace" endterm="windows.text.replace.title"/>ダイアログの同じオプションを使用すると、検索テキストと置換テキストの両方に正規表現を適用できます。</para>
       </listitem>
@@ -111,7 +111,7 @@
       </varlistentry>
 
       <varlistentry>
-        <term>バックスラッシュ(<literal>\</literal>)がついたアルファベットは、特別な意味を持ちます。</term>
+        <term>バックスラッシュ(<literal>\</literal>)がついたアルファベットや数字は、特別な意味を持ちます。</term>
         <listitem>
           <para>上記のように単純にそれ自体を表す文字とは異なり、<literal>\</literal>が前にある文字は、正規表現では特別な機能を持ちます。</para>
 

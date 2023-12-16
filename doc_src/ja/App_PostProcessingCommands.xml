@@ -97,7 +97,7 @@
   </section>
   
   <section id="post.processing.commands.user.defined.scripts">
-    <title id="post.processing.commands.user.defined.scripts.title">ユーザー定義スクリプト</title>
+    <title id="post.processing.commands.user.defined.scripts.title">プロジェクト専用のスクリプト</title>
     <para>通常のコマンドに加えて、スクリプトを呼び出すことができます。信頼されていない情報源からの後処理スクリプトは、決して実行しないでください。セキュリティ上の理由から、プロジェクト専用の後処理用コマンドはデフォルトで無効になっています。</para>
     <para>テンプレート変数は、通常のコマンドとユーザ定義スクリプトの両方で使用できます。スクリプトには絶対パスを使用する必要があります。OmegaTが使用するPATHは、現在のユーザーのPATHと同じでない場合があります。</para>
     <para>STDOUT および STDERR は、 <link linkend="configuration.folder.default.contents.logs.title">omegat.log</link> ファイルに書き込まれます。終了コードと STDERR 、または最後の STDOUT がステータス・バーに表示されます。</para>

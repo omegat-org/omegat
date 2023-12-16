@@ -263,28 +263,28 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
         }
 
         private String getTranslation(Language source, Language target) {
-            if (!force) {
-                if (!Preferences.isPreferenceDefault(Preferences.MT_AUTO_FETCH, true)) {
-                    return translator.getCachedTranslation(source, target, src);
+            try {
+                if (force) {
+                    return translator.getTranslation(source, target, src);
                 }
-                if (Preferences.isPreference(Preferences.MT_ONLY_UNTRANSLATED)) {
+                if (Preferences.isPreferenceDefault(Preferences.MT_AUTO_FETCH, false)) {
+                    if (!Preferences.isPreference(Preferences.MT_ONLY_UNTRANSLATED)) {
+                        return translator.getCachedTranslation(source, target, src);
+                    }
+                    // call translator only when visiting untranslated segment.
                     TMXEntry entry = Core.getProject().getTranslationInfo(currentlyProcessedEntry);
-                    if (entry.isTranslated()) {
+                    if (!entry.isTranslated()) {
                         return translator.getCachedTranslation(source, target, src);
                     }
                 }
-            }
-            try {
-                return translator.getTranslation(source, target, src);
             } catch (MachineTranslateError e) {
                 Log.log(e);
                 Core.getMainWindow().showTimedStatusMessageRB("MT_ENGINE_ERROR", translator.getName(),
                         e.getLocalizedMessage());
-                return null;
             } catch (Exception e) {
                 Log.logErrorRB(e, "MT_ENGINE_EXCEPTION");
-                return null;
             }
+            return null;
         }
     }
 

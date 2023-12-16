@@ -1,103 +1,131 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="menus.view">
-  <title>Vista</title>
+  <title id="menus.view.title"><guimenu>Vista</guimenu></title>
+
+  <para>Questo menu permette l'accesso alle informazioni da visualizzare in OmegaT.</para>
+
+  <para>Tutti i colori indicati nelle descrizioni possono essere modificati nella preferenza <link linkend="dialogs.preferences.colours" endterm="dialogs.preferences.colours.title"/>.</para>
 
   <variablelist>
-    <varlistentry>
-      <term>Evidenzia i segmenti tradotti</term>
-
+    <varlistentry id="menus.view.mark.translated.segments">
+      <term id="menus.view.mark.translated.segments.title"><guimenuitem>Evidenzia i segmenti tradotti</guimenuitem></term>
       <listitem>
         <para>Se si seleziona l'opzione, i segmenti tradotti saranno evidenziati in giallo.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Evidenzia i segmenti non tradotti</term>
-
+    <varlistentry id="menus.view.mark.untranslated.segments">
+      <term id="menus.view.mark.untranslated.segments.title"><guimenuitem>Evidenzia i segmenti non tradotti</guimenuitem></term>
       <listitem>
         <para>Se si seleziona l'opzione, i segmenti non tradotti saranno evidenziati in lilla.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Evidenzia le delimitazioni dei paragrafi</term>
-
+    <varlistentry id="menus.view.mark.paragraph.delimitations">
+      <term id="menus.view.mark.paragraph.delimitations.title"><guimenuitem>Mostra le delimitazioni dei paragrafi</guimenuitem></term>
       <listitem>
-        <para>Se l'opzione è attivata, viene indicata visivamente la separazione tra i paragrafi nel documento di partenza.</para>
+        <para>Se si seleziona l'opzione, viene indicata visivamente la separazione tra i paragrafi nel documento di partenza. È possibile modificare la stringa di delimitazione del paragrafo nella preferenza <link linkend="dialogs.preferences.editor.paragraph.delimitation.format" endterm="dialogs.preferences.editor.paragraph.delimitation.format.title"/>.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Mostra i segmenti di origine</term>
-
+    <varlistentry id="menus.view.display.source.segments">
+      <term id="menus.view.display.source.segments.title"><guimenuitem>Mostra i segmenti di origine</guimenuitem></term>
       <listitem>
-        <para>Se si seleziona l'opzione, i segmenti di origine verrano mostrati e saranno evidenziati in verde. Se non si seleziona, i segmenti di origine non verranno mostrati.</para>
+        <para>Se si seleziona l'opzione, i segmenti di origine saranno mostrati ed evidenziati in verde. Se non si seleziona, saranno mostrati soltanto i segmenti di origine attuali.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Evidenzia i segmenti non univoci</term>
-
+    <varlistentry id="menus.view.mark.non.unique.segments">
+      <term id="menus.view.mark.non.unique.segments.title"><guimenuitem>Evidenzia i segmenti ripetuti</guimenuitem></term>
       <listitem>
-        <para>Se si seleziona l'opzione, i segmenti non univoci saranno evidenziati in grigio chiaro.</para>
+        <para>Se si seleziona l'opzione, i segmenti ripetuti saranno evidenziati in grigio chiaro.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Evidenzia i segmenti con note</term>
-
+    <varlistentry id="menus.view.mark.segments.with.notes">
+      <term id="menus.view.mark.segments.with.notes.title"><guimenuitem>Evidenzia i segmenti con note</guimenuitem></term>
       <listitem>
         <para>Se si seleziona l'opzione, i segmenti con note saranno evidenziati in ciano. Questo contrassegno ha la priorità sui contrassegni <guimenuitem>Evidenzia i segmenti tradotti</guimenuitem> ed <guimenuitem>Evidenzia i segmenti non tradotti</guimenuitem>.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Evidenzia gli spazi non divisibili</term>
-
+    <varlistentry id="menus.view.mark.non.breakable.space">
+      <term id="menus.view.mark.non.breakable.space.title"><guimenuitem>Mostra gli spazi non divisibili</guimenuitem></term>
       <listitem>
-        <para>Se si seleziona l'opzione, gli spazi non divisibili saranno evidenziati con uno sfondo grigio.</para>
+        <para>Se si seleziona l'opzione, gli spazi non divisibili sono evidenziati con uno sfondo grigio.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Evidenza gli spazi vuoti</term>
-
+    <varlistentry id="menus.view.mark.white.space">
+      <term id="menus.view.mark.white.space.title"><guimenuitem>Mostra spazio vuoto</guimenuitem></term>
       <listitem>
-        <para>Se si seleziona l'opzione, gli spazi vuoti saranno evidenziati con un punto.</para>
+        <para>Se si seleziona l'opzione, gli spazi vuoti saranno evidenziati come puntini.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Evidenzia caratteri di controllo algoritmo bidirezionale</term>
-
+    <varlistentry id="menus.view.mark.bidirectional.algorithm.control.character">
+      <term id="menus.view.mark.bidirectional.algorithm.control.character.title"><guimenuitem>Mostra i caratteri di controllo Bidi</guimenuitem></term>
       <listitem>
-        <para>Questa opzione mostra i <ulink url="http://www.w3.org/International/questions/qa-bidi-controls">caratteri di controllo bidirezionali</ulink></para>
+        <para>Questa opzione mostra i caratteri di formattazione direzionale Unicode. Vedere <ulink url="https://www.unicode.org/reports/tr9/">Unicode Bidirectional Algorithm</ulink> per i dettagli.</para>
+		<para>Usare <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.insert.unicode.control.character" endterm="menus.edit.insert.unicode.control.character.title"/> per inserire una selezione di caratteri direttamente dall'interfaccia di OmegaT. Vedere <link linkend="app.bidi" endterm="app.bidi.title"/> per i dettagli.</para>
+	  </listitem>
+    </varlistentry>
+
+    <varlistentry id="menus.view.mark.auto.populated.segments">
+      <term id="menus.view.mark.auto.populated.segments.title"><guimenuitem>Evidenzia i segmenti popolati automaticamente</guimenuitem></term>
+      <listitem>
+        <para>Se si seleziona l'opzione, i segmenti popolati automaticamente sono evidenziati in vari colori.</para>
+
+		<para>Vedere la preferenza <link linkend="dialogs.preferences.editor.save.auto-populated.status" endterm="dialogs.preferences.editor.save.auto-populated.status.title"/> per i dettagli.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Evidenzia i segmenti popolati automaticamente</term>
-
+    <varlistentry id="menus.view.mark.glossary.matches">
+      <term id="menus.view.mark.glossary.matches.title"><guimenuitem>Evidenzia le concordanze del glossario</guimenuitem></term>
       <listitem>
-        <para>Se si seleziona questa opzione, lo sfondo di tutti i segmenti popolati automaticamente (dalle memorie di traduzione presenti in <filename>/tm/auto</filename>, per esempio) viene colorato. I colori sono visualizzati se è attivata l'opzione <link linkend="dialogs.preferences.editor.saveautopopulatedstatus"><guimenuitem>Salva lo stato di popolazione automatica</guimenuitem></link>. Le solite traduzioni inserite dalla cartella &quot;auto&quot; vengono visualizzate in arancione. Le altre traduzioni, individuate in modo specifico nella TMX, possono essere visualizzate usando colori diversi. Per i dettagli tecnici, vedere il capitolo <ulink url="http://sourceforge.net/p/omegat/feature-requests/963/">Proposte di miglioramenti</ulink>.</para>
+        <para>Sottolinea i termini di origine con corrispondenze nei glossari. Passando il mouse sopra un termine sottolineato sarà mostrato il termine di arrivo corrispondente. Facendo clic col pulsante destro del mouse su un termine sottolineato sarà visualizzato il termine di arrivo corrispondente, che può essere selezionato e inserito alla posizione del cursore nel testo di destinazione.</para>
+	  </listitem>
+    </varlistentry>
+
+    <varlistentry id="menus.view.mark.language.checker">
+      <term id="menus.view.mark.language.checker.title"><guimenuitem>Evidenzia i problemi di verifica linguistica</guimenuitem></term>
+      <listitem>
+        <para>Sottolinea le parti del testo di arrivo in cui LanguageTool ha individuato degli errori. Vedere le preferenze <link linkend="dialog.preferences.languagetool.plugin" endterm="dialog.preferences.languagetool.plugin.title"/> per i dettagli.</para>
+	  </listitem>
+    </varlistentry>
+	
+    <varlistentry id="menus.view.aggressive.font.fallback">
+      <term id="menus.view.aggressive.font.fallback.title"><guimenuitem>Usa la sostituzione aggressiva del carattere</guimenuitem></term>
+      <listitem>
+        <para>Attivare questa opzione se OmegaT non visualizza correttamente determinati glifi (nonostante i tipi di carattere che contengono i glifi corrispondenti siano installati).</para>
+
+		<note>
+		  <para>In Windows questa procedura di sostituzione manuale di ripiego interferisce con la sostituzione di ripiego standard, e causa sostituzioni dei tipi di carattere non desiderate. Per tale motivo, la sua impostazione predefinita è DISATTIVO.</para>
+		</note>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Sostituzione aggressiva del carattere</term>
-
+    <varlistentry id="menus.view.modification.info">
+      <term id="menus.view.modification.info.title"><guisubmenu>Mostra informazioni sulla modifica</guisubmenu></term>
       <listitem>
-        <para>Attivare questa opzione nel caso in cui <application>OmegaT</application> non visualizzi correttamente determinati glifi (anche se i caratteri che li contengono sono installati nella propria macchina). Nota: in Windows sembra che questo meccanismo di sostituzione manuale dei caratteri possa interferire con la sostituzione standard, causando sostituzioni di carattere impreviste non volute. Per tale motivo, la sua impostazione predefinita è DISATTIVO.</para>
+        <para>Visualizza l'ora e l'autore dell'ultima modifica eseguita su un segmento.</para>
+		
+		<para>Il valore predefinito è <guimenuitem>Segmento attivo</guimenuitem> e può essere impostata a <guimenuitem>Tutti i segmenti</guimenuitem> o a <guimenuitem>Nessuna</guimenuitem>.</para>
+
+		<para>È possibile modificare le informazioni visualizzate. Vedere le preferenze <link linkend="dialog.preferences.view.use.custom.templates.for.modification.info" endterm="dialog.preferences.view.use.custom.templates.for.modification.info.title"/> per i dettagli.</para>
       </listitem>
     </varlistentry>
-
-    <varlistentry>
-      <term>Informazioni sulla modifica</term>
-
+	
+	<varlistentry id="menus.view.restore.main.window">
+      <term id="menus.view.restore.main.window.title"><guimenuitem>Ripristina la finestra di OmegaT</guimenuitem></term>
       <listitem>
-        <para>Se si imposta la visualizzazione della modifica su <guimenuitem>Segmento corrente</guimenuitem>, sarà visualizzata l'ora e l'autore dell'ultima modifica eseguita sul segmento attivo. Se si imposta su <guimenuitem>Per tutti i segmenti</guimenuitem>, l'informazione sarà visualizzata per tutti, mentre <guimenuitem>Nessuna</guimenuitem> la disattiverà.</para>
-      </listitem>
+        <para>Riporta la disposizione della finestra di OmegaT ai valori predefiniti.</para>
+
+		<note>
+		  <para>Usare questa funzione quando si riscontrano problemi durante la sistemazione della disposizione della finestra.</para>
+		</note>
+	  </listitem>
     </varlistentry>
   </variablelist>
 </section>

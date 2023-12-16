@@ -1,0 +1,515 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd"
+[
+<!ENTITY % manualvariables SYSTEM "manualvariables.mod">
+%manualvariables;
+]>
+<section id="how.to.running.omegat">
+  <title id="how.to.running.omegat.title">Eseguire OmegaT</title>
+
+  <section id="running.omegat.on.windows">
+	<title id="running.omegat.on.windows.title">In Windows</title>
+	
+	<para>Il metodo più semplice per avviare OmegaT è eseguire il programma <filename>OmegaT.exe</filename>. Le opzioni per l'avvio del programma saranno lette dal file <filename>OmegaT.l4J.ini</filename>, che si trova nella stessa cartella del file eseguibile e che può essere modificato affinché rispecchi le proprie impostazioni. L'esempio di file INI che segue riserva 1 GB di memoria, richiede il francese come lingua dell'utente e il Canada come nazione:</para>
+
+	<programlisting># OmegaT.exe runtime configuration
+	# To use a parameter, remove the '#' before the '-'
+	# Memory
+	-Xmx1024M
+	# Language
+	-Duser.language=FR
+	# Country
+	-Duser.country=CA</programlisting>
+
+
+	<para>Nota: se OmegaT risultasse lento durante le sessioni di desktop remoto in Windows, sarà possibile usare questa opzione:</para>
+
+	<programlisting>-Dsun.java2d.noddraw=false</programlisting>
+  </section>
+
+  <section id="running.omegat.on.linux">
+	<title id="running.omegat.on.linux.title">In Linux</title>
+
+	<para>È possibile avviare OmegaT dalla riga di comando con uno script che includa le opzioni di avvio. Vedere la sezione <link endterm="launch.with.command.line.title" linkend="launch.with.command.line"/> per i dettagli.</para>
+
+	<para>È possibile anche fare doppio clic su <filename>OmegaT.jar</filename> per avviarlo direttamente, se l'estensione <filename>.jar</filename> è associata all'avviatore Java del sistema.</para>
+
+	<para>Il pacchetto fornisce anche lo script Kaptain <filename>omegat.kaptn</filename>, che gli utenti di KDE potrebbero trovare utile, e anche uno script bash di <filename>OmegaT</filename> che avvia automaticamente il comando <application>java</application> corretto per l'esecuzione di OmegaT.</para>
+  </section>
+
+  <section id="running.omegat.on.macos">
+	<title id="running.omegat.on.macos.title">In macOS</title>
+
+	<para>Fare doppio clic su <filename>OmegaT.app</filename>  o sulla sua posizione nella Dock.</para>
+
+	<para><filename>OmegaT.app</filename> contiene un eseguibile <filename>OmegaT</filename>, situato in <filename>OmegaT.app/Contents/MacOS/</filename>, che è possibile utilizzare per avviare più istanze di <filename>OmegaT.app</filename>.</para>
+
+	<para>Contiene anche il file generico <filename>OmegaT.jar</filename>, situato in <filename>OmegaT.app/Contents/MacOS/Java/</filename>, che è possibile utilizzare per avviare OmegaT dalla riga di comando. Vedere la sezione <link endterm="launch.with.command.line.title" linkend="launch.with.command.line"/> per i dettagli.</para>
+
+	<para>È possibile cambiare il comportamento di OmegaT.app modificando sia il file <filename>Configuration.properties</filename> (la configurazione di OmegaT), sia il file <filename>Info.plist</filename> (configurazione di Java), situati all'interno del pacchetto OmegaT.app.</para>
+
+	<para>Il file <filename>Configuration.properties</filename> si trova nella cartella <filename>Contents/Resources/</filename>.</para>
+	<para>Il file <filename>Info.plist</filename> si trova nella cartella <filename>Contents/</filename>.</para>
+
+	<note>
+	  <para>Per raggiungere i file all'interno del pacchetto <filename>OmegaT.app</filename>, fare clic col pulsante destro su <filename>OmegaT.app</filename> e selezionare “Mostra contenuto del pacchetto”.</para>
+
+	  <para>È anche possibile utilizzare lo stesso pacchetto <filename>OmegaT.app</filename> per avviare OmegaT dal terminale. Vedere più avanti la sezione <link linkend="launch.with.command.line.omegat.terminal.command.syntax" endterm="launch.with.command.line.omegat.terminal.command.syntax.title"/> per i dettagli.</para>
+	</note>
+
+	<para>Usare il proprio editor di testo per modificare i file.</para>
+
+	<variablelist>
+	  <varlistentry>
+		<term>Configuration.properties</term>
+
+		<listitem>
+		  <para>Per attivare delle opzioni predefinite, rimuovere il simbolo <literal>#</literal> che precede per abilitare un parametro. Per esempio, <literal>user.language=it</literal> (senza il simbolo <literal>#</literal>) avvierà OmegaT con l'interfaccia utente in italiano.</para>
+		</listitem>
+	  </varlistentry>
+	  <varlistentry>
+		<term>Info.plist</term>
+
+		<listitem>
+		  <para>Per esempio, per cambiare la quantità di memoria disponibile, togliere il commento dalla riga</para>
+
+		  <para><literal>&lt;!-- &lt;string&gt;-Xmx6g&lt;/string&gt;
+		  --&gt;</literal></para>
+		  <para>rimuovendo i marcatori <literal>&lt;!--</literal> e <literal>--&gt;</literal>.</para>
+
+		  <para>OmegaT sarà avviato con 6 GB di memoria; cambiare <literal>6g</literal> con la quantità prescelta.</para>
+		</listitem>
+	  </varlistentry>
+	</variablelist>
+	
+	<note>
+	  <para><filename>OmegaT.app</filename> può utilizzare i servizi di macOS. È pure possibile usare AppleScript, Automator o Shortcuts per creare Servizi o script di automazione delle azioni frequenti.</para>
+	</note>
+  </section>
+
+  <section id="running.omegat.on.other.systems">
+	<title id="running.omegat.on.other.systems.title">In altre piattaforme</title>
+
+	<para>I metodi variano da un sistema all'altro ma, in generale, una volta installato OmegaT è possibile avviarlo direttamente dalla riga di comando. Vedere la sezione <link endterm="launch.with.command.line.title" linkend="launch.with.command.line"/> per i dettagli.</para>
+
+	<para>È possibile creare uno script che includa i parametri di avvio prescelti per la riga di comando. Se i file <filename>.jar</filename> sono associati correttamente con Java 11 Runtime Environment e le impostazioni del percorso (PATH) sono corrette, è possibile semplicemente fare clic (o doppio clic) su <filename>OmegaT.jar</filename> per avviarlo direttamente.</para>
+
+	<para>Per ulteriori informazioni, consultare la documentazione del proprio sistema operativo.</para>
+  </section>
+  
+  <section id="launch.with.command.line">
+	<title id="launch.with.command.line.title">Avvio da riga di comando</title>
+
+	<para>L'uso della riga di comando consente di impostare varie opzioni che controllano o modificano il comportamento dell'applicazione. È possibile anche definire e salvare gruppi di opzioni in script, da utilizzare poi per avviare OmegaT per uno scopo specifico.</para>
+
+	<para>L'avvio di OmegaT dalla riga di comando crea anche una nuova istanza di OmegaT per ciascun avvio. È quindi possibile utilizzare più progetti in contemporanea, ciascuno con i suoi parametri specifici.</para>
+
+	<section id="launch.with.command.line.tutorial">
+	  <title id="launch.with.command.line.tutorial.title">Informazioni generali semplificate</title>
+
+	  <para>Prima che le interfacce grafiche si diffondessero, gli utenti interagivano con i computer attraverso un'interfaccia a riga di comando (command-line interface, CLI), che richiede la digitazione di comandi per impartire istruzioni al computer. Nei sistemi moderni, alla CLI si accede tramite un'applicazione chiamata, di solito, &quot;terminale&quot; o &quot;console&quot;. Per ragioni di semplicità, in questo manuale ci si riferisce a essa col nome di terminale.</para>
+	  
+	  <para>In Windows, è possibile utilizzare come terminale o il <application>Prompt dei comandi</application> o la <application>Powershell</application>. Entrambi sono disponibili nella cartella <guilabel>Strumenti di sistema</guilabel> del <guilabel>Menu Start</guilabel>.</para>
+
+	  <para>L'equivalente macOS è l'applicazione <application>Terminale</application> situata nella cartella <filename>Accessori</filename> della cartella principale <filename>Applicazioni</filename>.</para>
+
+	  <para>In Linux, l'applicazione di terminale predefinita della propria distribuzione è in genere disponibile nel menu delle applicazioni o in uno dei suoi sottomenu.</para>
+
+	  <para>Nel terminale vengono digitati i comandi, e i loro parametri associati, per eseguire azioni/operazioni. Ciò semplifica l'esecuzione di determinate operazioni che sarebbero difficili da eseguire tramite l'uso di un'interfaccia grafica.</para>
+
+	  <note>
+		<para>La sintassi utilizzata per specificare la posizione di un'applicazione o una cartella cambia a seconda della piattaforma. In Windows, il carattere <code>\</code> viene utilizzato per separare nomi di file e cartelle, mentre per la stessa operazione in macOS e Linux si usa il carattere <code>/</code>.</para>
+
+		<para>Di seguito le posizioni predefinite di OmegaT.jar nelle piattaforme principali:</para>
+		
+		<variablelist>
+		  <varlistentry id="launch.with.command.line.windows">
+			<term id="launch.with.command.line.windows.title">Windows</term>
+			<listitem>
+			  <para><filename>C:\Program Files\OmegaT\OmegaT.jar</filename></para>
+			</listitem>
+		  </varlistentry>
+		  <varlistentry id="launch.with.command.line.macos">
+			<term id="launch.with.command.line.macos.title">macOS</term>
+			<listitem>
+			  <para><filename>/Applications/OmegaT.app/Contents/Java/OmegaT.jar</filename></para>
+			</listitem>
+		  </varlistentry>
+		  <varlistentry id="launch.with.command.line.linux">
+			<term id="launch.with.command.line.linux.title">Linux</term>
+			<listitem>
+			  <para><filename>/opt/omegat/OmegaT.jar</filename></para>
+
+			  <para>(può variare a seconda della distribuzione)</para>
+			</listitem>
+		  </varlistentry>
+		</variablelist>
+		
+		<para>Tale posizione viene presentata come <filename>percorso/a/OmegaT.jar</filename> in questo capitolo. Sostituirla con la posizione reale del file sul proprio sistema.</para>
+	  </note>	
+	</section>
+
+	<section id="launch.with.command.line.omegat.terminal.command.syntax">
+	  <title id="launch.with.command.line.omegat.terminal.command.syntax.title">Sintassi dei comandi</title>
+
+	  <para>La sintassi per avviare OmegaT dal terminale è:<programlisting>java -jar &lt;parametri java&gt; percorso/a/OmegaT.jar &lt;opzioni OmegaT&gt; </programlisting></para>
+
+	  <note>
+		<para>In macOS, è anche possibile usare direttamente <filename>OmegaT.app</filename> nel terminale, in tal caso i parametri Java non possono essere aggiunti:<programlisting>open percorso/a/OmegaT.app
+		-n --args &lt;opzioni OmegaT&gt;</programlisting>dove <userinput>-n</userinput> viene utilizzato per creare una nuova istanza di OmegaT.</para>
+	  </note>
+
+	  <variablelist>
+		<varlistentry id="launch.with.command.line.java.jar">
+		  <term id="launch.with.command.line.java.jar.title"><option>java -jar</option></term>
+		  <listitem>
+			<para>Questo comando indica alla Java Virtual Machine di eseguire un pacchetto Jar.</para>
+		  </listitem>
+		</varlistentry>
+
+		<varlistentry id="launch.with.command.line.intro.java.parameters">
+		  <term id="launch.with.command.line.intro.java.parameters.title"><option>&lt;parametri java&gt;</option></term>
+		  <listitem>
+			<para>Parametri opzionali accettati dal comando <command>java</command>. I parametri pertinenti per l'esecuzione di OmegaT sono descritti <link linkend="launch.with.command.line.java.parameters">sotto</link>.</para>
+		  </listitem>					
+		</varlistentry>
+
+		<varlistentry id="launch.with.command.line.intro.omegat.jar">
+		  <term id="launch.with.command.line.intro.omegat.jar.title"><option>percorso/a/OmegaT.jar</option></term>
+		  <listitem>
+			<para>La posizione dell'eseguibile java di OmegaT.</para>	  
+		  </listitem>
+		</varlistentry>
+
+		<varlistentry id="launch.with.command.line.intro.omegat.options">
+		  <term id="launch.with.command.line.intro.omegat.options.title"><emphasis><option>&lt;opzioni OmegaT&gt;</option></emphasis></term>
+		  <listitem>
+			<para>Le opzioni specifiche per OmegaT sono descritte <link linkend="launch.with.command.line.omegat.options">più avanti in questa sezione</link></para>
+		  </listitem>					
+		</varlistentry>
+	  </variablelist>
+	</section>
+
+	<section id="launch.with.command.line.java.parameters">
+	  <title id="launch.with.command.line.java.parameters.title">Parametri Java</title>
+
+	  <para>L'elenco sottostante riporta i parametri per il comando <command>java</command> utili quando si lavora con OmegaT.</para>
+	  
+	  <variablelist>
+		<varlistentry id="launch.with.command.line.user.interface.language">
+		  <term id="launch.with.command.line.user.interface.language.title">Lingua interfaccia utente</term>
+
+		  <listitem>
+			<para><option>-Duser.language=LL</option></para>
+
+			<para>Sostituire <code>LL</code> con il codice di lingua a due lettere prescelto dall'elenco <ulink url="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes">ISO 639.1</ulink>.</para>
+
+			<para>L'uso di questo parametro avvia OmegaT con l'interfaccia utente della lingua specificata, se disponibile (anche parzialmente). Se la lingua non è disponibile OmegaT si avvia nella lingua predefinita, anche se il sistema usa una lingua predefinita differente.</para>
+		  </listitem>
+		</varlistentry>
+
+		<varlistentry id="launch.with.command.line.user.country">
+		  <term id="launch.with.command.line.user.country.title">Nazione utente</term>
+		  <listitem>
+			<para><option>-Duser.country=CC</option></para>
+
+			<para>Sostituire <code>CC</code> col codice della nazione a due lettere prescelto dall'elenco <ulink url="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</ulink>.</para>
+
+			<para>Questo parametro si combina col precedente parametro della lingua dell'interfaccia al fine di specificare una variante regionale. Se tale variante non è disponibile, l'interfaccia utente segue la stessa priorità specificata sopra.</para>
+		  </listitem>
+		</varlistentry>
+
+		<varlistentry id="launch.with.command.line.maximum.memory.assignment">
+		  <term id="launch.with.command.line.maximum.memory.assignment.title">Attribuzione massima di memoria</term>
+		  <listitem>
+			<para><option>-XmxSIZE</option></para>
+
+			<para>Sostituire <code>SIZE</code> con un numero che sia multiplo di 1024 seguito da <code>k</code> per kilobyte, <code>m</code> per megabyte o <code>g</code> per gigabyte. Il numero deve corrispondere ad almeno 2 MB.</para>
+		  </listitem>
+		</varlistentry>
+
+		<varlistentry id="launch.with.command.line.proxy.host.ip.address">
+		  <term id="launch.with.command.line.proxy.host.ip.address.title">Indirizzo IP dell'host proxy</term>
+		  <listitem>
+			<para><option>-Dhttp.proxyHost=&lt;proxy IP&gt;</option></para>
+
+			<para>Sostituire <code>&lt;proxy IP&gt;</code> con l'indirizzo IP del proprio server proxy, se il sistema ne utilizza uno.</para>
+		  </listitem>
+		</varlistentry>
+
+		<varlistentry id="launch.with.command.line.proxy.host.port.number">
+		  <term id="launch.with.command.line.proxy.host.port.number.title">Numero di porta dell'host proxy</term>
+		  <listitem>
+			<para><option>-Dhttp.proxyPort=&lt;numero di porta&gt;</option></para>
+
+			<para>Sostituire <option>&lt;numero di porta&gt;</option> col numero di porta che il sistema utilizza per accedere al server proxy.</para>
+		  </listitem>
+		</varlistentry>
+	  </variablelist>
+	</section>
+
+	<section id="launch.with.command.line.omegat.options">
+	  <title id="launch.with.command.line.omegat.options.title">Opzioni OmegaT</title>
+
+	  <para>Col comando <command>java -jar OmegaT.jar --help</command> nel terminale è anche possibile ottenere un elenco di queste opzioni. Viene avviata l'interfaccia grafica di OmegaT senza alcuna opzione specificata.</para>
+
+	  <variablelist>
+		<varlistentry id="launch.with.command.line.general.options.">
+		  <term id="launch.with.command.line.general.options.title">Opzioni generali:</term>
+		  <listitem>
+			<variablelist>
+			  <varlistentry id="launch.with.command.line.h.help">
+				<term id="launch.with.command.line.h.help.title"><option>-h</option>,
+				<option>--help</option></term>
+				<listitem>
+				  <para>Mostra le informazioni sull'uso.</para>
+				</listitem>
+			  </varlistentry>
+			  <varlistentry id="launch.with.command.line.path.to.an.omegat.project">
+				<term id="launch.with.command.line.path.to.an.omegat.project.title"><emphasis>percorso a un progetto omegat</emphasis></term>
+				<listitem>
+				  <para>Avvia l'interfaccia grafica e carica il progetto specifico</para>
+				</listitem>
+			  </varlistentry>
+			  <varlistentry id="launch.with.command.line.remote.project.">
+				<term id="launch.with.command.line.remote.project.title"><option>--remote-project</option> <userinput>&lt;percorso-a-un-file-di-progetto-omegat&gt;</userinput></term>
+				<listitem>
+				  <para>Scarica il progetto OmegaT dall'URL specificato in <emphasis>&lt;percorso-a-un-file-di-progetto-omegat&gt;</emphasis> e lo carica.</para>
+				</listitem>
+			  </varlistentry>
+			  <varlistentry id="launch.with.command.line.no.team">
+				<term id="launch.with.command.line.no.team.title"><option>--no-team</option></term>
+				<listitem>
+				  <para>Disabilita la funzionalità di progetto in collaborazione. Usare questa opzione per impedire che OmegaT sincronizzi i contenuti del progetto.</para>
+				</listitem>
+			  </varlistentry>
+			  <varlistentry id="launch.with.command.line.team.init">
+				<term id="launch.with.command.line.team.init.title"><option>team
+				init</option> <userinput>SL</userinput>
+				<userinput>TL</userinput></term>
+				<listitem>
+				  <para>Initializza un progetto in collaborazione utilizzando <emphasis>SL</emphasis> e <emphasis>TL</emphasis> rispettivamente come codici di lingua a due lettere di partenza e di arrivo.</para>
+				</listitem>
+			  </varlistentry>
+			  <varlistentry id="launch.with.command.line.disable.project.locking">
+				<term id="launch.with.command.line.disable.project.locking.title"><option>--disable-project-locking</option></term>
+				<listitem>
+				  <para>Non blocca il file omegat.project.</para>
+
+				  <para>In alcune piattaforme, il file omegat.project viene bloccato per impostazione predefinita e il tentativo di aprire un progetto già aperto in un'altra istanza di OmegaT provoca un errore. Questa opzione impedisce tale errore.</para>
+				</listitem>
+			  </varlistentry>
+			  <varlistentry id="launch.with.command.line.disable.location.save">
+				<term id="launch.with.command.line.disable.location.save.title"><option>--disable-location-save</option></term>
+				<listitem>
+				  <para>Non memorizza l'ultima cartella aperta nel selettore dei file.</para>
+				</listitem>
+			  </varlistentry>
+			  <varlistentry id="launch.with.command.line.itokenizer.lt.classname.gt.">
+				<term id="launch.with.command.line.itokenizer.lt.classname.gt.title"><option>--ITokenizer=</option><userinput>&lt;classname&gt;</userinput></term>
+				<term><option>--ITokenizerTarget=</option><userinput>&lt;classname&gt;</userinput></term>
+				<listitem>
+				  <para>Specifica un tokenizer della lingua di partenza o di arrivo (utilizzando questa opzione non vengono considerate le impostazioni del progetto). Vedere OmegaT.jar/META-INF/MANIFEST.MF per i valori validi.</para>
+				</listitem>
+			  </varlistentry>
+			  <varlistentry id="launch.with.command.line.config.dir.">
+				<term id="launch.with.command.line.config.dir.title"><option>--config-dir=</option><userinput>&lt;percorso&gt;</userinput></term>
+				<listitem>
+				  <para>La cartella utilizzata per leggere o scrivere i file di configurazione di OmegaT. Vedere il capitolo <link endterm="configuration.folder.title" linkend="configuration.folder"/> per i dettagli.</para>
+				</listitem>
+			  </varlistentry>
+			  <varlistentry id="launch.with.command.line.config.file.">
+				<term id="launch.with.command.line.config.file.title"><option>--config-file=</option><userinput>&lt;percorso&gt;</userinput></term>
+				<listitem>
+				  <para>Un file scritto in formato .properties di Java utilizzato per specificare una serie di opzioni per la riga di comando.</para>
+
+				  <para>Le opzioni sono presentate come elenco di coppie <parameter>chiave=valore</parameter>. Possono essere utilizzati sia i parametri Java, sia le opzioni OmegaT.</para>
+				  <note>
+					<para>Per utilizzare i parametri Java rimuovere la <code>-D</code> o <code>-X</code> iniziale:</para>
+
+					<programlisting>user.language=fr
+config-dir=&quot;percorso/alla/nuova/cartella_config&quot;</programlisting>
+				  </note>
+
+				  <para>Quasi tutti i parametri presentati in questa sezione sono utilizzabili in un file di configurazione. L'eccezione di spicco è <code>remote-project</code>.</para>
+
+				  <para>È possibile combinare <code>--config-file</code> con altre opzioni della riga di comando compatibili con l'avvio dell'interfaccia grafica. In tali casi, le opzioni definite nel file di configurazione hanno la precedenza su qualsiasi altra opzione con funzionalità duplicata passata anche sulla riga di comando.</para>
+				</listitem>
+			  </varlistentry>
+
+			  <varlistentry id="launch.with.command.line.resource.bundle.">
+				<term id="launch.with.command.line.resource.bundle.title"><option>--resource-bundle=</option><userinput>&lt;percorso&gt;</userinput></term>
+				<listitem>
+				  <para>File .properties di Java da utilizzare per il testo dell'interfaccia.</para>
+				</listitem>
+			  </varlistentry>
+
+			  <varlistentry id="launch.with.command.line.mode.console.translate.console.pseudotranslatetmx.console.align.">
+				<term id="launch.with.command.line.mode.console.translate.console.pseudotranslatetmx.console.align.title"><option>--mode=[console mode name]</option> <userinput>&lt;percorso progetto&gt;</userinput> <userinput>&lt;opzioni modalità&gt;</userinput></term>
+				<listitem>
+				  <para>Specifica una modalità diversa dall'interfaccia grafica predefinita. Sono disponibili le seguenti opzioni:</para>
+
+				  <variablelist>
+					<varlistentry id="launch.with.command.line.mode.console.translate">
+					  <term id="launch.with.command.line.mode.console.translate.title"><option>--mode=console-translate</option> <userinput>&lt;percorso progetto&gt;</userinput></term>
+					  <listitem>
+						<para>In questa modalità OmegaT tenta di tradurre i file presenti nella cartella di partenza con le memorie di traduzione disponibili.</para>
+
+						<para>Ciò è utile se OmegaT viene eseguito su un server con file TMX forniti automaticamente a un progetto.</para>
+						  
+						<variablelist>
+						  <varlistentry id="launch.with.command.line.source.pattern.lt.pattern.gt.">
+							<term id="launch.with.command.line.source.pattern.lt.pattern.gt.title"><option>--source-pattern=</option><userinput>&lt;modello&gt;</userinput></term>
+							<listitem>
+							  <para>Lista di espressioni regolari che definisce i file di partenza da elaborare. Tenere presente che nelle espressioni regolari il punto e la barra inversa devono essere risolti: <code>\.</code> e <code>\\</code>.</para>
+
+							  <para>Di seguito alcuni esempi tipici:</para>
+							  
+							  <variablelist>
+								<varlistentry id="launch.with.command.line.html">
+								  <term id="launch.with.command.line.html.title"><option>.*\.html</option></term>
+								  <listitem>
+									<para>Traduce tutti i file HTML.</para>
+								  </listitem>
+								</varlistentry>
+								<varlistentry id="launch.with.command.line.test.html">
+								  <term id="launch.with.command.line.test.html.title"><option>test\.html</option></term>
+								  <listitem>
+									<para>Traduce solo il file <filename>test.html</filename> nella stessa cartella dei file di partenza. Qualsiasi altro file chiamato test.html presente nelle altre sottocartelle sarà ignorato.</para>
+								  </listitem>
+								</varlistentry>
+
+								<varlistentry id="launch.with.command.line.dir.test.html">
+								  <term id="launch.with.command.line.dir.test.html.title"><option>dir-10\\test\.html</option></term>
+								  <listitem>
+									<para>Traduce solo il file <filename>test.html</filename> presente nella cartella <filename class="directory">dir-10</filename>.</para>
+								  </listitem>
+								</varlistentry>
+							  </variablelist>
+
+							  <para>Vedere l'appendice <link linkend="app.regex" endterm="app.regex.title"/>per i dettagli.</para>
+							</listitem>
+						  </varlistentry>
+						</variablelist>
+					  </listitem>
+					</varlistentry>
+
+					<varlistentry id="launch.with.command.line.mode.console.pseudotranslatetmx">
+					  <term id="launch.with.command.line.mode.console.pseudotranslatetmx.title"><option>--mode=console-createpseudotranslatetmx</option> <userinput>&lt;percorso progetto&gt;</userinput></term>
+					  <listitem>
+						<para>In questa modalità, OmegaT creerà una TMX per l'intero progetto utilizzando solo i file di partenza.</para>
+						
+						<para>Specificare il file TMX da creare con:</para>
+						
+						<variablelist>
+						  <varlistentry id="launch.with.command.line.pseudotranslatetmx.">
+							<term id="launch.with.command.line.pseudotranslatetmx.title"><option>--pseudotranslatetmx=</option><userinput>&lt;percorso&gt;</userinput></term>
+							<listitem>
+							  <para>Il file TMX di uscita pseudotradotto.</para>
+							</listitem>
+						  </varlistentry>
+
+						  <varlistentry id="launch.with.command.line.pseudotranslatetype.equal.empty.">
+							<term id="launch.with.command.line.pseudotranslatetype.equal.empty.title"><option>--pseudotranslatetype=[equal|empty]</option></term>
+							<listitem>
+							  <para>Con cosa popolare la TMX pseudotradotta.</para>
+							</listitem>
+						  </varlistentry>
+						</variablelist>
+					  </listitem>
+					</varlistentry>
+					
+					<varlistentry id="launch.with.command.line.mode.console.align">
+					  <term id="launch.with.command.line.mode.console.align.title"><option>--mode=console-align</option> <userinput>&lt;percorso progetto&gt;</userinput></term>
+						<listitem>
+						<para>In questa modalità, OmegaT allineerà i file presenti nella cartella /source del progetto con quelli rinvenuti nella posizione specificata dal parametro <emphasis>--alignDir</emphasis> sotto riportato.</para>
+						
+						<variablelist>
+							<varlistentry>
+								<term><option>--alignDir=</option><userinput>&lt;percorso progetto&gt;</userinput></term>
+								<listitem>
+									<para>Il percorso che contiene i file tradotti nella lingua di arrivo.</para>
+
+									<para>Questa cartella deve contenere una traduzione nella lingua di arrivo del progetto. Per esempio, se il progetto è EN-&gt;IT, la cartella deve contenere il suffisso <filename>_it</filename> nella sua parte terminale.</para>
+								</listitem>
+							</varlistentry>							
+						</variablelist>
+
+						<para>Il file TMX risultante è salvato nella cartella <filename role="directory">omegat/</filename> con il nome di <filename>align.tmx</filename>. Il file TMX risultante è salvato nella cartella. I filtri supportati includono: File di lingua ILIAS, Java(TM) Resource Bundles, Key=Value Text, Magento CE Locale CSV, MoodlePHP, Mozilla DTD, Mozilla FTL, PO, RC, Sottotitoli SubRip e Windows Resources.</para>
+					  </listitem>
+					</varlistentry>
+
+					<varlistentry id="launch.with.command.line.mode.console.stats">
+					  <term id="launch.with.command.line.mode.console.stats.title"><option>--mode=console-stats</option> <userinput>&lt;percorso progetto&gt;</userinput></term>
+					  <listitem>
+						<variablelist>
+						  <varlistentry id="launch.with.command.line.console.stats.output.file">
+							<term id="launch.with.command.line.console.stats.output.file.title"><option>--output-file=</option><userinput>[file-risultato-statistiche]</userinput></term>
+							<listitem>
+							  <para>Stampa in quel file o nel risultato standard, se assente. Senza <emphasis>--stats-type</emphasis>, rileva il formato dall'estensione del file. Il risultato è predefinito in xml.</para>
+							</listitem>
+						  </varlistentry>
+							
+						  <varlistentry id="launch.with.command.line.console.stats.output.format">
+							<term id="launch.with.command.line.console.stats.output.format.title"><option>--stats-type=[xml|text][txt][json]]]</option></term>
+							<listitem>
+							  <para>Richiede <emphasis>--output-file</emphasis>. Specifica il formato del risultato.</para>
+							</listitem>
+						  </varlistentry>
+						</variablelist>
+						  
+						<para>I dati sono gli stessi di quando si utilizza <link linkend="menus.tools" endterm="menus.tools.title"/><link linkend="menus.tools.statistics" endterm="menus.tools.statistics.title"/>.</para>
+					  </listitem>
+					</varlistentry>
+				  </variablelist>												
+				</listitem>								
+			  </varlistentry>
+			</variablelist>
+		  </listitem>
+		</varlistentry>
+		  
+		<varlistentry id="launch.with.command.line.non.gui.mode.options.">
+		  <term id="launch.with.command.line.non.gui.mode.options.title">Opzioni modalità senza interfaccia grafica:</term>
+		  <listitem>
+			<variablelist>
+			  <varlistentry id="launch.with.command.line.quiet">
+				<term id="launch.with.command.line.quiet.title"><option>--quiet</option></term>
+				<listitem>
+				  <para>Minimizza il risultato mostrato sulla riga di comando.</para>
+				</listitem>
+			  </varlistentry>
+				
+			  <varlistentry id="launch.with.command.line.script.">
+				<term id="launch.with.command.line.script.title"><option>--script=</option><userinput>&lt;percorso&gt;</userinput></term>
+				<listitem>
+				  <para>Uno script da eseguire quando viene attivato un evento del progetto.</para>
+				</listitem>
+			  </varlistentry>
+
+			  <varlistentry id="launch.with.command.line.tag.validation.abort.warn.">
+				<term id="launch.with.command.line.tag.validation.abort.warn.title"><option>--tag-validation=[abort|warn]</option></term>
+				<listitem>
+				  <para>Verifica i problemi sui tag.</para>
+				  
+				  <itemizedlist>
+					<listitem>
+					  <para>Abort: esce con un errore, se sono presenti errori sui tag.</para>
+					</listitem>
+
+					<listitem>
+					  <para>Warn: mostra gli avvisi senza uscire, se sono presenti errori sui tag.</para>
+					</listitem>											
+				  </itemizedlist>
+
+				  <note>
+					<para>I rapporti degli errori sui tag vengono mostrati nella finestra del terminale.</para>
+				  </note>
+				</listitem>
+			  </varlistentry>
+			</variablelist>
+		  </listitem>
+		</varlistentry>
+	  </variablelist>
+	</section>
+  </section>
+</section>

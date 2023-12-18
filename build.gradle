@@ -30,7 +30,7 @@ def distDescription = 'OmegaT is a free and open source multiplatform Computer A
         ' fuzzy matching, translation memory, keyword search, glossaries, and translation leveraging into updated' +
         ' projects.'
 def distAppVendor = 'The OmegaT project'
-
+def gradleOnJava17OrLater = JavaVersion.current().isCompatibleWith(JavaVersion.VERSION_17)
 def javaVersion = 11;
 def localPropsFile = file('local.properties')
 ext {
@@ -990,7 +990,7 @@ tasks.register('cleanJpkgWorkdir', Delete) {
     delete jpackageWorkdir
 }
 
-tasks.register('jars', Copy) {
+tasks.register('jars', Sync) {
     from configurations.runtimeClasspath
     from(tasks.jar) { include omegatJarFilename }
     into file(layout.buildDirectory.file('jars'))
@@ -998,16 +998,14 @@ tasks.register('jars', Copy) {
 }
 
 // prepare japckage contents
-// appContent requires jpackage command in JDK 18 or later
-// this is compat task to work as same as appContent command of jpackage
-tasks.register('jpackageAppContentGreetings', Copy) {
+tasks.register('jpackageAppContentGreetings', Sync) {
     dependsOn jpackage, firstSteps
 
     from layout.buildDirectory.file('docs/greetings')
     into layout.buildDirectory.file("jpackage/app-image/${application.applicationName}/lib/docs/greetings")
 }
 
-tasks.register('jpackageAppContentManuals', Copy) {
+tasks.register('jpackageAppContentManuals', Sync) {
     dependsOn jpackage, manualZips
 
     from layout.buildDirectory.file('docs/manuals')
@@ -1065,14 +1063,8 @@ tasks.register('jpackage', Exec) {
 
     inputs.files file(layout.buildDirectory.file('jars'))
     outputs.files file(layout.buildDirectory.file("jpackage/app-image"))
+    onlyIf { gradleOnJava17OrLater }
 
-    def jpackageExe = file(Paths.get(System.getProperty('java.home')).resolve("bin/jpackage"))
-    onlyIf {
-        conditions([JavaVersion.current().isCompatibleWith(JavaVersion.VERSION_17),
-                'Require java17 or later to run gradle.'],
-                [exePresent(jpackageExe), 'jpackage command does not exist.']
-        )
-    }
     def osName = System.getProperty('os.name').toLowerCase()
     def icon = 'images/OmegaT.png'
     if (osName.contains('windows')) {
@@ -1080,7 +1072,7 @@ tasks.register('jpackage', Exec) {
     } else if (osName.contains('mac')) {
         icon = "images/OmegaT.icns"
     }
-    commandLine(jpackageExe,
+    commandLine(file(Paths.get(System.getProperty('java.home')).resolve("bin/jpackage")),
             '--type', 'app-image',
             '--app-version', version,
             '--description', distDescription,
@@ -1090,7 +1082,7 @@ tasks.register('jpackage', Exec) {
             '--vendor', distAppVendor,
             '--input', file(layout.buildDirectory.file('jars')),
             '--main-class', application.mainClass.get(),
-            '--main-jar',  omegatJarFilename,
+            '--main-jar', omegatJarFilename,
             '--java-options', "-Xmx1024M",
             '--java-options', "--add-opens",
             '--java-options', "java.desktop/sun.awt.X11=ALL-UNNAMED",
@@ -1106,16 +1098,9 @@ tasks.register("linuxDebDist", Exec) {
     inputs.files file(layout.buildDirectory.file("jpackage/app-image/${application.applicationName}"))
     outputs.files file(layout.buildDirectory
             .file("distributions/${application.applicationName}_${version}-${debVersion}_amd64.deb"))
+    onlyIf { gradleOnJava17OrLater && exePresent('dpkg-deb') }
 
-    def jpackageExe = file(Paths.get(System.getProperty('java.home')).resolve("bin/jpackage"))
-    onlyIf {
-        conditions([exePresent('dpkg-deb'), 'dpkg-deb command is not installed'],
-                [exePresent(jpackageExe), 'jpackage command does not exist.'],
-                [JavaVersion.current().isCompatibleWith(JavaVersion.VERSION_17),
-                 'Require java17 or later to run gradle.'])
-    }
-
-    commandLine(jpackageExe,
+    commandLine(file(Paths.get(System.getProperty('java.home')).resolve("bin/jpackage")),
             '--type', 'deb',
             '--app-version', version,
             '--description', distDescription,
@@ -1147,16 +1132,9 @@ tasks.register("linuxRpmDist", Exec) {
     inputs.files file(layout.buildDirectory.file("jpackage/app-image/${application.applicationName}"))
     outputs.files file(layout.buildDirectory
             .file("distributions/${application.applicationName}-${version}-${rpmVersion}.x86_64.rpm"))
+    onlyIf { gradleOnJava17OrLater && exePresent('rpm') }
 
-    def jpackageExe = file(Paths.get(System.getProperty('java.home')).resolve("bin/jpackage"))
-    onlyIf {
-        conditions([exePresent('rpm'), 'rpm command is not installed'],
-                [exePresent(jpackageExe), 'jpackage command does not exist.'],
-                [JavaVersion.current().isCompatibleWith(JavaVersion.VERSION_17),
-                 'Require java17 or later to run gradle.'])
-    }
-
-    commandLine(jpackageExe,
+    commandLine(file(Paths.get(System.getProperty('java.home')).resolve("bin/jpackage")),
             '--type', 'rpm',
             '--app-version', version,
             '--description', distDescription,

@@ -51,7 +51,7 @@
 
     <!-- interfaces -->
     <!-- Keep names for compatibility -->
-    <suppress files="IParseCallback\.java" checks="ParameterNumber"/>
+    <suppress files="(IParseCallback|CalcMatchStatisticsTest)\.java" checks="ParameterNumber"/>
     <suppress checks="TypeName" files="IProjectEventListener\.java" lines="35"/>
 
     <!-- ignore Auto generated source files -->

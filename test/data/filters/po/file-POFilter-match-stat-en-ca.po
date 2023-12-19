@@ -1,0 +1,382 @@
+#
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"X-Language: ca\n"
+
+msgid "Click here to activate your account"
+msgstr ""
+
+msgid "Sorry, this account has already been activated."
+msgstr ""
+
+msgid "Return to %{title}"
+msgstr ""
+
+msgid "<b>%{target_username}</b> is now an administrator."
+msgstr ""
+
+msgid ""
+"Are you sure you want <b>%{target_username} (%{target_email})</b> to be an "
+"administrator?"
+msgstr ""
+
+msgid "Grant Admin Access"
+msgstr ""
+
+msgid "Confirm Admin Account"
+msgstr ""
+
+msgid ""
+"Sorry, this account confirmation link is no longer valid. Perhaps your "
+"account is already active?"
+msgstr ""
+
+msgid ""
+"A moderator must manually approve your new account before you can access "
+"this forum. You'll get an email when your account is approved!"
+msgstr ""
+
+msgid "Continue to %{site_name}"
+msgstr ""
+
+msgid ""
+"We cannot detect if your account was created, please ensure you have cookies "
+"enabled."
+msgstr ""
+
+msgid "Your new account is confirmed; you will be redirected to the home page."
+msgstr ""
+
+msgid "Welcome to %{site_name}!"
+msgstr ""
+
+msgid "There was an error loading that post."
+msgstr ""
+
+msgid "%{attribute} %{message}"
+msgstr ""
+
+msgid "<b>%{attribute}</b>: %{message}"
+msgstr ""
+
+msgid "must be accepted"
+msgstr ""
+
+msgid "doesn't match %{attribute}"
+msgstr ""
+
+msgid "contains the following censored words: %{censored_words}"
+msgstr ""
+
+msgid "can't have emoji"
+msgstr ""
+
+msgid "can't be empty"
+msgstr ""
+
+msgid "must be equal to %{count}"
+msgstr ""
+
+msgid "must be even"
+msgstr ""
+
+msgid "is reserved"
+msgstr ""
+
+msgid "must be greater than %{count}"
+msgstr ""
+
+msgid "must be greater than or equal to %{count}"
+msgstr ""
+
+msgid "has already been used"
+msgstr ""
+
+msgid "is not included in the list"
+msgstr ""
+
+msgid "is invalid"
+msgstr ""
+
+msgid "Invalid boolean."
+msgstr ""
+
+msgid "'%{tz}' is not a valid timezone"
+msgstr ""
+
+msgid "is already included in an existing rule"
+msgstr ""
+
+msgid "seems unclear, is it a complete sentence?"
+msgstr ""
+
+msgid "must be less than %{count}"
+msgstr ""
+
+msgid "must be less than or equal to %{count}"
+msgstr ""
+
+msgid "can't have more than %{max_emojis_count} emoji"
+msgstr ""
+
+msgid "is not a number"
+msgstr ""
+
+msgid "must be an integer"
+msgstr ""
+
+msgid "must be odd"
+msgstr ""
+
+msgid "must be other than %{count}"
+msgstr ""
+
+msgid "must be blank"
+msgstr ""
+
+msgid "Validation failed: %{errors}"
+msgstr ""
+
+msgid "Cannot delete record because a dependent %{record} exists"
+msgstr ""
+
+msgid "Cannot delete record because dependent %{record} exist"
+msgstr ""
+
+msgid "has already been taken"
+msgstr ""
+
+msgid "is too long (maximum is %{count} character)"
+msgstr ""
+
+msgid "is too long (maximum is %{count} characters)"
+msgstr ""
+
+msgid "is limited to %{max} characters; you entered %{length}."
+msgstr ""
+
+msgid "is too short (minimum is %{count} character)"
+msgstr ""
+
+msgid "is too short (minimum is %{count} characters)"
+msgstr ""
+
+msgid "is the wrong length (should be %{count} character)"
+msgstr ""
+
+msgid "is the wrong length (should be %{count} characters)"
+msgstr ""
+
+msgid "You cannot select a category used in another list."
+msgstr ""
+
+msgid ""
+"You cannot enable usage of the S3 inventory unless you've enabled S3 uploads."
+msgstr ""
+
+msgid "You specified a category that does not exist"
+msgstr ""
+
+msgid ""
+"You cannot use S3 as backup location unless you've provided the "
+"'%{setting_name}'."
+msgstr ""
+
+msgid ""
+"You cannot use the same bucket for 's3_upload_bucket' and "
+"'s3_backup_bucket'. Choose a different bucket or use a different path for "
+"each bucket."
+msgstr ""
+
+msgid ""
+"You cannot enable uploads to S3 unless you've provided the "
+"'s3_upload_bucket'."
+msgstr ""
+
+msgid "There were problems with the following fields:"
+msgstr ""
+
+msgid "%{count} error prohibited this %{model} from being saved"
+msgstr ""
+
+msgid "%{count} errors prohibited this %{model} from being saved"
+msgstr ""
+
+msgid "Category Name"
+msgstr ""
+
+msgid "Body"
+msgstr ""
+
+msgid "Category"
+msgstr ""
+
+msgid "Featured Link"
+msgstr ""
+
+msgid "Title"
+msgstr ""
+
+msgid "About Me"
+msgstr ""
+
+msgid "There was an error loading that post."
+msgstr ""
+
+msgid "%{attribute} %{message}"
+msgstr ""
+
+msgid "<b>%{attribute}</b>: %{message}"
+msgstr ""
+
+msgid "must be accepted"
+msgstr ""
+
+msgid "can't be blank"
+msgstr ""
+
+msgid "doesn't match %{attribute}"
+msgstr ""
+
+msgid "You specified a category that does not exist"
+msgstr ""
+
+msgid ""
+"You cannot use S3 as backup location unless you've provided the "
+"'%{setting_name}'."
+msgstr ""
+
+msgid ""
+"You cannot use the same bucket for 's3_upload_bucket' and "
+"'s3_backup_bucket'. Choose a different bucket or use a different path for "
+"each bucket."
+msgstr ""
+
+msgid ""
+"You cannot enable uploads to S3 unless you've provided the "
+"'s3_upload_bucket'."
+msgstr ""
+
+msgid "There were problems with the following fields:"
+msgstr ""
+
+msgid "%{count} error prohibited this %{model} from being saved"
+msgstr ""
+
+msgid "Used an Emoji in a Post"
+msgstr ""
+
+msgid ""
+"This badge is granted the first time you add an Emoji to your post :"
+"thumbsup:. Emoji let you convey emotion in your posts, from happiness :"
+"smiley: to sadness :anguished: to anger :angry: and everything in between :"
+"sunglasses:. Just type a : (colon) or press the Emoji toolbar button in the "
+"editor to select from hundreds of choices :ok_hand:\n"
+msgstr ""
+
+msgid "First Emoji"
+msgstr ""
+
+msgid "Flagged a post"
+msgstr ""
+
+msgid ""
+"This badge is granted the first time you flag a post. Flagging is how we all "
+"help keep this a nice place for everyone. If you notice any posts that "
+"require moderator attention for any reason please don’t hesitate to flag. If "
+"you see a problem, :flag_black: flag it!\n"
+msgstr ""
+
+msgid "First Flag"
+msgstr ""
+
+msgid "Liked a post"
+msgstr ""
+
+msgid ""
+"This badge is granted the first time you like a post using the :heart: "
+"button. Liking posts is a great way to let your fellow community members "
+"know that what they posted was interesting, useful, cool, or fun. Share the "
+"love!\n"
+msgstr ""
+
+msgid "First Like"
+msgstr ""
+
+msgid "Added a link to another topic"
+msgstr ""
+
+msgid ""
+"This badge is granted the first time you add a link to another topic. "
+"Linking topics helps fellow readers find interesting related conversations, "
+"by showing the connections between topics in both directions. Link freely!\n"
+msgstr ""
+
+msgid "First Link"
+msgstr ""
+
+msgid "Mentioned a user in a post"
+msgstr ""
+
+msgid ""
+"This badge is granted the first time you mention someone’s @username in your "
+"post. Each mention generates a notification to that person, so they know "
+"about your post. Just begin typing @ (at symbol) to mention any user or, if "
+"allowed, group – it’s a convenient way to bring something to their "
+"attention.\n"
+msgstr ""
+
+msgid "First Mention"
+msgstr ""
+
+msgid "Posted a link that was oneboxed"
+msgstr ""
+
+msgid "Great Topic"
+msgstr ""
+
+msgid ""
+"This badge is granted when you use all %{max_likes_per_day} of your daily "
+"likes for 5 days. Thanks for taking the time actively encouraging the best "
+"conversations every day!\n"
+msgstr ""
+
+msgid "Higher Love"
+msgstr ""
+
+msgid "Posted an external link with 300 clicks"
+msgstr ""
+
+msgid ""
+"This badge is granted when a link you shared gets 300 clicks. Thanks for "
+"posting a fascinating link that drove the conversation forward and "
+"illuminated the discussion!\n"
+msgstr ""
+
+msgid "Hot Link"
+msgstr ""
+
+msgid ""
+"<a href=\"https://blog.discourse.org/2018/06/understanding-discourse-trust-"
+"levels/\">Granted</a> invitations, group messaging, more likes"
+msgstr ""
+
+msgid ""
+"This badge is granted when you reach trust level 2. Thanks for participating "
+"over a period of weeks to truly join our community. You can now send "
+"invitations from your user page or individual topics, create group personal "
+"messages, and have more likes per day.\n"
+msgstr ""
+
+msgid "New email: %{email}"
+msgstr ""
+
+msgid "Old email: %{email}"
+msgstr ""
+
+msgid "Change your email address"
+msgstr ""
+
+msgid "Ownership transferred"
+msgstr ""

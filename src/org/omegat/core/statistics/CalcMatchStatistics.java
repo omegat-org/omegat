@@ -91,7 +91,7 @@ public class CalcMatchStatistics extends LongProcessThread {
 
     private final IStatsConsumer callback;
     private final boolean perFile;
-    private int entriesToProcess;
+    protected int entriesToProcess;
 
     /** Already processed segments. Used for repetitions detect. */
     private final Set<String> alreadyProcessedInFile = new HashSet<String>();

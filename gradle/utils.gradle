@@ -74,17 +74,14 @@ ext {
     }
 
     exePresent = { exe ->
-        def osName = System.getProperty('os.name').toLowerCase()
-        if (osName.contains('windows')) {
-            providers.exec {
-                ignoreExitValue = true
-                commandLine('where', exe)
-            }.result.get() == 0
-        } else {
-            providers.exec {
-                ignoreExitValue = true
-                commandLine('which', exe)
-            }.result.get() == 0
+        ["where $exe", "which $exe"].any {
+            try {
+                def findExe = it.execute()
+                findExe.waitForProcessOutput()
+                return findExe.exitValue() == 0
+            } catch (any) {
+                return false
+            }
         }
     }
 

@@ -178,5 +178,5 @@ spotless = {id = "com.diffplug.spotless", version = "6.19.0"}
 git-version = {id = "com.palantir.git-version", version = "0.13.0"}
 nexus-publish = {id = "io.github.gradle-nexus.publish-plugin", version = "2.0.0-rc-1"}
 launch4j = {id = "edu.sc.seis.launch4j", version = "3.0.3"}
-versions = {id = "com.github.ben-manes.versions", version = "0.39.0"}
+versions = {id = "com.github.ben-manes.versions", version = "0.50.0"}
 ssh = {id = "org.hidetake.ssh", version = "2.10.1"}

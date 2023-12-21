@@ -91,7 +91,7 @@
     </varlistentry>
 
     <varlistentry id="menus.edit.insert.missing.source.tag">
-      <term id="menus.edit.insert.missing.source.tag.title"><guimenuitem>未使用の原文のタグを挿入</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>T</keycap></keycombo>
+      <term id="menus.edit.insert.missing.source.tag.title"><guimenuitem>未使用のタグを挿入</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>T</keycap></keycombo>
 	  </term>
       <listitem>
         <para>現在の訳文分節のカーソル位置に、まだ使用していない原文のタグを挿入します。</para>
@@ -107,7 +107,7 @@
     </varlistentry>
 
     <varlistentry id="menus.edit.export.selection">
-      <term id="menus.edit.export.selection.title"><guimenuitem>選択領域を出力</guimenuitem> <keycombo><keycap>C</keycap><keycap>C</keycap><keycap>S</keycap></keycombo>
+      <term id="menus.edit.export.selection.title"><guimenuitem>選択領域を出力</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>C</keycap></keycombo>
 	  </term>
       <listitem>
         <para>選択した領域を別のテキストファイルに出力します。選択領域がない場合、現在開いている原文がこのファイルに書き込まれます。OSの通常のクリップボードの動作との一貫性を保つために、ユーザーがOmegaTを出るときにこのファイルは空にされません。エクスポートされた内容は、<link linkend="configuration.folder">構成</link>フォルダーにある<link linkend="configuration.folder.default.contents.script.selection.title" endterm="configuration.folder.default.contents.script.selection.title"/>ファイルにコピーされます。</para>
@@ -317,6 +317,12 @@
       <term id="menus.edit.create.alternative.translation.title"><guimenuitem>例外訳文を登録</guimenuitem></term>
       <listitem>
 		<para>同じ内容の原文分節が複数存在し、それぞれの文脈に応じて異なる対訳が必要になることがあります。現在の翻訳が適用されない場合は、このメニュー項目を選択して例外訳文を入力します。</para>
+		<warning>
+		<para>OmegaT は、ファイルの種類によって提供される内部識別子に加え、前後の分節を参照することによって、同一の分節を区別します。このような場合、例外訳文は、前後の分節が異なる同一の分節に依存します。同一の分節の前後の分節も同一の場合、それらを別々の訳文に翻訳する OmegaT の例外訳文に登録することはできません。</para>
+		<para>You can work around this issue by introducing a small change to one
+		  of the preceding or following segments in the source file to distinguish
+		  between the various instances of the same preceding or following segment.</para>
+		</warning>
       </listitem>
 	</varlistentry>
 

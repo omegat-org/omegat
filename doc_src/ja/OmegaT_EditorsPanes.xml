@@ -631,7 +631,7 @@ Dossier de configuration
       </listitem>
     </itemizedlist>
   
-    <para>一致の表示または並べ替えの方法を変更できます。詳細については、設定-<link endterm="dialog.preferences.tm.matches.title" linkend="dialog.preferences.tm.matches"/>を参照してください。</para>
+    <para>一致の表示または並べ替えの方法を変更できます。詳細については、<link endterm="dialog.preferences.tm.matches.title" linkend="dialog.preferences.tm.matches"/>環境設定を参照してください。</para>
 
     <para><link linkend="menus.edit" endterm="menus.edit.title"/><link endterm="menus.edit.replace.with.match.or.selection.title" linkend="menus.edit.replace.with.match.or.selection"/>を使用して、訳文領域を参考訳文に置き換えます。または<link linkend="menus.edit" endterm="menus.edit.title"/><link endterm="menus.edit.insert.match.or.selection.title" linkend="menus.edit.insert.match.or.selection"/>を使用して、カーソル位置に挿入します。</para>
   </section>
@@ -665,7 +665,7 @@ Folder = <token>Dossier</token></programlisting>
 
 	<para>次に、原文分節の下線付きの単語を右クリックすると、用語集で使用可能な翻訳を一覧表示するポップアップメニューが開きます。いずれかを選択して、分節の現在のカーソル位置に挿入します。</para>
 
-    <para>用語集の環境設定を使用して、用語集の表示方法を微調整できます。詳細については、設定-<link endterm="dialogs.preferences.glossary.title" linkend="dialogs.preferences.glossary"/>を参照してください。</para>
+    <para>用語集の環境設定を使用して、用語集の表示方法を微調整できます。詳細については、<link endterm="dialogs.preferences.glossary.title" linkend="dialogs.preferences.glossary"/>環境設定を参照してください。</para>
 
     <para>用語集フォルダーの用語集ファイルに対する変更は、OmegaTによって即座に認識され、用語集ウィンドウに表示されます。</para>
 
@@ -707,7 +707,7 @@ Folder = <token>Dossier</token></programlisting>
 
     <para>サービスが有効になっていて、資格情報が正しく入力されていることを確認します。必要に応じて、サービスプロバイダに問い合わせてサポートを受ける必要があるかもしれません。。同様に、<literal>翻訳サービス応答を解析できません</literal>などのエラーは、システムとプロバイダのサーバとの間に通信の問題がある可能性を示唆しています。</para>
 
-	<para>詳細については、設定-<link linkend="dialogs.preferences.mt" endterm="dialogs.preferences.mt.title"/>を参照してください。</para>
+	<para>詳細については、<link linkend="dialogs.preferences.mt" endterm="dialogs.preferences.mt.title"/>環境設定を参照してください。</para>
   </section>
 
   <section id="panes.multipletranslations">

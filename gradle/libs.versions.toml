@@ -24,7 +24,7 @@ httpclient = "4.5.14"
 icu4j = { require = "[70,73.2[", prefer = "72.1" }
 stax2api = "4.2.1"
 woodstox = "6.5.0"
-languagetool = "6.1"
+languagetool = "6.3"
 lucene = "5.5.5"
 checkstyle = "8.45.1"
 guava = "31.0.1-jre"

@@ -132,7 +132,7 @@ svnkit = {group = "org.tmatesoft.svnkit", name = "svnkit", version.ref = "svnkit
 nashorn-core = {group = "org.openjdk.nashorn", name = "nashorn-core", version.ref = "nashorn"}
 fifesoft-rsyntaxtextarea =  {group = "com.fifesoft", name = "rsyntaxtextarea", version.ref = "fifesoft"}
 fifesoft-rstaui = {group = "com.fifesoft", name = "rstaui", version.ref = "fifesoft"}
-fifesoft-languagesupport = {group = "com.fifesoft", name = "languagesupport", version = "3.1.4"}
+fifesoft-languagesupport = {group = "com.fifesoft", name = "languagesupport", version = "3.3.0"}
 fifesoft-autocomplete = {group = "com.fifesoft", name = "autocomplete", version.ref = "fifesoft"}
 caffeine = {group = "com.github.ben-manes.caffeine", name ="caffeine", version.ref = "caffeine"}
 caffeine-jcache =  {group = "com.github.ben-manes.caffeine", name = "jcache", version.ref = "caffeine"}

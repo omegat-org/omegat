@@ -1,0 +1,39 @@
+name: Run Gradle test
+
+on:
+  push:
+    branches:
+      - master
+      - releases/*
+  pull_request:
+
+jobs:
+  gradle:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-java@v3
+      with:
+        java-version: 17
+        distribution: 'temurin'
+    - uses: gradle/wrapper-validation-action@v1
+      name: validate gradle wrapper
+    - name: Agree gradle-scan terms
+      run: cat ci/gradle/gradle-scan.init.gradle >> settings.gradle
+    - uses: gradle/gradle-build-action@v2
+      name: Setup Gradle
+      id: setup-gradle
+    - name: Run gradle build
+      run: ./gradlew -PenvIsCi --scan build
+    - name: "Add Build Scan URL as PR comment"
+      uses: actions/github-script@v5
+      if: github.event_name == 'pull_request' && failure()
+      with:
+        github-token: ${{secrets.GITHUB_TOKEN}}
+        script: |
+          github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: '❌ ${{ github.workflow }} failed: ${{ steps.gradle.outputs.build-scan-url }}'
+          })

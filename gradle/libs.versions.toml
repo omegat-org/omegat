@@ -1,7 +1,7 @@
 [versions]
 slf4j = { strictly = "[2.0.7, 2.1[", prefer = "2.0.7" }
 slf4j-format = "0.5.1"
-groovy = "4.0.11"
+groovy = "4.0.16"
 junit = "4.13.1"
 junit5 = "5.8.2"
 logback = "1.4.11"

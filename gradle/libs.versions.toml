@@ -23,7 +23,7 @@ jsoup = "1.15.3"
 httpclient = "4.5.14"
 icu4j = { require = "[70,73.2[", prefer = "72.1" }
 stax2api = "4.2.1"
-woodstox = "6.5.0"
+woodstox = "6.5.1"
 languagetool = "6.1"
 lucene = "5.5.5"
 checkstyle = "8.45.1"

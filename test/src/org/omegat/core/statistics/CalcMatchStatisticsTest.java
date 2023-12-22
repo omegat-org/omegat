@@ -65,7 +65,6 @@ import org.omegat.util.TestPreferencesInitializer;
 
 public class CalcMatchStatisticsTest {
 
-
     @Test
     public void testCalcMatchStatics() {
         int threshold = Preferences.getPreferenceDefault(Preferences.EXT_TMX_FUZZY_MATCH_THRESHOLD,
@@ -121,6 +120,70 @@ public class CalcMatchStatisticsTest {
         Assert.assertEquals("938", result[7][2]);
         Assert.assertEquals("4894", result[7][3]);
         Assert.assertEquals("5699", result[7][4]);
+        // double check condition
+        threshold = Preferences.getPreferenceDefault(Preferences.EXT_TMX_FUZZY_MATCH_THRESHOLD,
+                OConsts.FUZZY_MATCH_THRESHOLD);
+        Assert.assertEquals(30, threshold);
+
+        // change threshold
+        Preferences.setPreference(Preferences.EXT_TMX_FUZZY_MATCH_THRESHOLD, 70);
+        threshold = Preferences.getPreferenceDefault(Preferences.EXT_TMX_FUZZY_MATCH_THRESHOLD,
+                OConsts.FUZZY_MATCH_THRESHOLD);
+        Assert.assertEquals(70, threshold);
+        //
+        calcMatchStatistics = new CalcMatchStatisticsMock(callback);
+        calcMatchStatistics.start();
+        while (calcMatchStatistics.isAlive()) {
+            calcMatchStatistics.checkInterrupted();
+        }
+        result = calcMatchStatistics.getTable();
+        Assert.assertNotNull(result);
+
+        // assertions
+        // RowRepetitions  11 90 509 583
+        Assert.assertEquals("11", result[0][1]);
+        Assert.assertEquals("90", result[0][2]);
+        Assert.assertEquals("509", result[0][3]);
+        Assert.assertEquals("583", result[0][4]);
+        // RowExactMatch 0 0 0 0
+        Assert.assertEquals("0", result[1][1]);
+        Assert.assertEquals("0", result[1][2]);
+        Assert.assertEquals("0", result[1][3]);
+        Assert.assertEquals("0", result[1][4]);
+        // RowMatch95 84 712 3606 4225
+        Assert.assertEquals("84", result[2][1]);
+        Assert.assertEquals("712", result[2][2]);
+        Assert.assertEquals("3606", result[2][3]);
+        Assert.assertEquals("4225", result[2][4]);
+        // RowMatch85 0 0 0 0
+        Assert.assertEquals("0", result[3][1]);
+        Assert.assertEquals("0", result[3][2]);
+        Assert.assertEquals("0", result[3][3]);
+        Assert.assertEquals("0", result[3][4]);
+        // RowMatch75 3 32 234 256
+        Assert.assertEquals("3", result[4][1]);
+        Assert.assertEquals("32", result[4][2]);
+        Assert.assertEquals("234", result[4][3]);
+        Assert.assertEquals("256", result[4][4]);
+        // RowMatch50 4 61 304 361
+        Assert.assertEquals("4", result[5][1]);
+        Assert.assertEquals("61", result[5][2]);
+        Assert.assertEquals("304", result[5][3]);
+        Assert.assertEquals("361", result[5][4]);
+        // RowNoMatch 6 43 241 274
+        Assert.assertEquals("6", result[6][1]);
+        Assert.assertEquals("43", result[6][2]);
+        Assert.assertEquals("241", result[6][3]);
+        Assert.assertEquals("274", result[6][4]);
+        // Total 108 938 4894 5699
+        Assert.assertEquals("108", result[7][1]);
+        Assert.assertEquals("938", result[7][2]);
+        Assert.assertEquals("4894", result[7][3]);
+        Assert.assertEquals("5699", result[7][4]);
+        // double check condition
+        threshold = Preferences.getPreferenceDefault(Preferences.EXT_TMX_FUZZY_MATCH_THRESHOLD,
+                OConsts.FUZZY_MATCH_THRESHOLD);
+        Assert.assertEquals(70, threshold);
     }
 
     /*

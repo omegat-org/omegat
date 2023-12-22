@@ -608,10 +608,6 @@ public class IssuesPanelController implements IIssues {
                 return;
             }
 
-            if (allIssues.isEmpty()) {
-                panel.messageLabel.setText(OStrings.getString("ISSUES_NO_ISSUES_FOUND"));
-            }
-
             panel.progressBar.setVisible(false);
             StaticUIUtils.setHierarchyEnabled(panel, true);
             panel.typeList.setModel(new TypeListModel(allIssues));
@@ -633,6 +629,7 @@ public class IssuesPanelController implements IIssues {
             colSizer.reset();
             colSizer.adjustTableColumns();
             if (allIssues.isEmpty()) {
+                panel.messageLabel.setText(OStrings.getString("ISSUES_NO_ISSUES_FOUND"));
                 return;
             }
             if (!jumpToTypes.isEmpty()) {

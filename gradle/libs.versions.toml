@@ -16,9 +16,6 @@ commons_text = "1.9"
 commons_validator = "1.7"
 unbescape = "1.1.6.RELEASE"
 xerces = "2.12.2"
-jstyleparser = "4.1.3"
-cssbox4 = "4.23"
-swingbox = "1.2.5"
 jsoup = "1.15.3"
 httpclient = "4.5.14"
 icu4j = { require = "[70,73.2[", prefer = "72.1" }
@@ -75,8 +72,6 @@ junit-jupiter = {group = "org.junit.jupiter", name = "junit-jupiter-engine", ver
 logback-classic = {group = "ch.qos.logback", name = "logback-classic", version.ref = "logback"}
 antlr4 = {group = "org.antlr", name = "antlr4", version.ref = "antlr"}
 hamcrest = {group = "org.hamcrest", name = "hamcrest", version.ref = "hamcrest"}
-nekohtml = {group = "net.sourceforge.nekohtml", name = "nekohtml", version.ref = "nekohtml"}
-neko-htmlunit = {group = "org.htmlunit", name = "neko-htmlunit", version.ref = "htmlunit"}
 commons-io = {group = "commons-io", name = "commons-io", version.ref = "commons_io"}
 commons-lang3 = {group = "org.apache.commons", name = "commons-lang3", version.ref = "commons_lang3"}
 commons-codec = {group = "commons-codec", name = "commons-codec", version.ref = "commons_codec"}
@@ -84,9 +79,6 @@ commons-text = {group = "org.apache.commons", name = "commons-text", version.ref
 commons-validator = {group = "commons-validator", name = "commons-validator", version.ref = "commons_validator"}
 unbescape = {group = "org.unbescape", name = "unbescape", version.ref = "unbescape"}
 xerces-impl = {group = "xerces", name = "xercesImpl", version.ref = "xerces"}
-jstyleparser = {group = "tokyo.northside", name = "jstyleparser", version.ref = "jstyleparser"}
-cssbox4 = {group = "tokyo.northside", name = "cssbox4", version.ref = "cssbox4"}
-swingbox = {group = "tokyo.northside", name = "swingbox", version.ref = "swingbox"}
 jsoup = {group = "org.jsoup", name = "jsoup", version.ref = "jsoup"}
 apache-httpclient = {group = "org.apache.httpcomponents", name = "httpclient", version.ref = "httpclient"}
 apache-httpclient-cache = {group = "org.apache.httpcomponents", name = "httpclient-cache", version.ref = "httpclient"}

@@ -132,7 +132,7 @@ public class FindMatches {
 
     private final int fuzzyMatchThreshold;
 
-    private final boolean ignoreThreshold;
+    private final boolean applyThreshold;
 
     /**
      * @param searchExactlyTheSame
@@ -147,7 +147,7 @@ public class FindMatches {
     }
 
     public FindMatches(IProject project, int maxCount, boolean allowSeparateSegmentMatch,
-            boolean searchExactlyTheSame, boolean ignoreThreshold) {
+            boolean searchExactlyTheSame, boolean applyThreshold) {
         this.project = project;
         this.tok = project.getSourceTokenizer();
         this.srcLocale = project.getProjectProperties().getSourceLanguage().getLocale();
@@ -158,7 +158,7 @@ public class FindMatches {
         }
         this.fuzzyMatchThreshold = Preferences.getPreferenceDefault(Preferences.EXT_TMX_FUZZY_MATCH_THRESHOLD,
                 OConsts.FUZZY_MATCH_THRESHOLD);
-        this.ignoreThreshold = ignoreThreshold;
+        this.applyThreshold = applyThreshold;
     }
 
     public List<NearString> search(String searchText, boolean requiresTranslation, boolean fillSimilarityData,
@@ -203,7 +203,7 @@ public class FindMatches {
                     String fileName = project.isOrphaned(source) ? ORPHANED_FILE_NAME : null;
                     processEntry(null, source, trans.translation, NearString.MATCH_SOURCE.MEMORY, false, 0,
                             fileName, trans.creator, trans.creationDate, trans.changer, trans.changeDate,
-                            null, ignoreThreshold);
+                            null);
                 }
             });
         }
@@ -220,7 +220,7 @@ public class FindMatches {
                 String fileName = project.isOrphaned(source) ? ORPHANED_FILE_NAME : null;
                 processEntry(source, source.sourceText, trans.translation, NearString.MATCH_SOURCE.MEMORY,
                         false, 0, fileName, trans.creator, trans.creationDate, trans.changer,
-                        trans.changeDate, null, ignoreThreshold);
+                        trans.changeDate, null);
             }
         });
 
@@ -256,8 +256,7 @@ public class FindMatches {
 
                 processEntry(null, tmen.getSourceText(), tmen.getTranslationText(),
                         NearString.MATCH_SOURCE.TM, false, tmenPenalty, en.getKey(), tmen.getCreator(),
-                        tmen.getCreationDate(), tmen.getChanger(), tmen.getChangeDate(), tmen.getProperties(),
-                        ignoreThreshold);
+                        tmen.getCreationDate(), tmen.getChanger(), tmen.getChangeDate(), tmen.getProperties());
             }
         }
 
@@ -267,7 +266,7 @@ public class FindMatches {
             if (ste.getSourceTranslation() != null) {
                 processEntry(ste.getKey(), ste.getSrcText(), ste.getSourceTranslation(),
                         NearString.MATCH_SOURCE.MEMORY, ste.isSourceTranslationFuzzy(), 0, ste.getKey().file,
-                        "", 0, "", 0, null, ignoreThreshold);
+                        "", 0, "", 0, null);
             }
         }
 
@@ -303,7 +302,7 @@ public class FindMatches {
                 // glue found translations
                 String foundTrans = Core.getSegmenter().glue(sourceLang, targetLang, ftrans, spaces, brules);
                 processEntry(null, foundSrc, foundTrans, NearString.MATCH_SOURCE.TM, false, 0, "", "", 0, "",
-                        0, null, ignoreThreshold);
+                        0, null);
             }
         }
 
@@ -350,8 +349,7 @@ public class FindMatches {
      */
     protected void processEntry(EntryKey key, String source, String translation,
             NearString.MATCH_SOURCE comesFrom, boolean fuzzy, int penalty, String tmxName, String creator,
-            long creationDate, String changer, long changedDate, List<TMXProp> props,
-            boolean ignoreThreashold) {
+            long creationDate, String changer, long changedDate, List<TMXProp> props) {
         // remove part that is to be removed prior to tokenize
         String realSource = source;
         int realPenaltyForRemoved = 0;
@@ -417,8 +415,8 @@ public class FindMatches {
             return;
         }
 
-        // BUGS#1236
-        if (!ignoreThreashold && similarityStem < fuzzyMatchThreshold
+        // BUGS#1236 - stat display does not use threshold config check
+        if (applyThreshold && similarityStem < fuzzyMatchThreshold
                 && similarityNoStem < fuzzyMatchThreshold && simAdjusted < fuzzyMatchThreshold) {
             return;
         }

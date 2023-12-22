@@ -143,7 +143,7 @@ public class FindMatches {
      */
     public FindMatches(IProject project, int maxCount, boolean allowSeparateSegmentMatch,
             boolean searchExactlyTheSame) {
-        this(project, maxCount, allowSeparateSegmentMatch, searchExactlyTheSame, false);
+        this(project, maxCount, allowSeparateSegmentMatch, searchExactlyTheSame, true);
     }
 
     public FindMatches(IProject project, int maxCount, boolean allowSeparateSegmentMatch,

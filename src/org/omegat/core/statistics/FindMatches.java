@@ -128,7 +128,9 @@ public class FindMatches {
     // This finder used for search separate segment matches
     private FindMatches separateSegmentMatcher;
 
-    private int fuzzyMatchThreshold = OConsts.FUZZY_MATCH_THRESHOLD;
+    private final int fuzzyMatchThreshold;
+
+    private final boolean ignoreThreshold;
 
     /**
      * @param searchExactlyTheSame
@@ -138,6 +140,11 @@ public class FindMatches {
      */
     public FindMatches(IProject project, int maxCount, boolean allowSeparateSegmentMatch,
             boolean searchExactlyTheSame) {
+        this(project, maxCount, allowSeparateSegmentMatch, searchExactlyTheSame, false);
+    }
+
+    public FindMatches(IProject project, int maxCount, boolean allowSeparateSegmentMatch,
+                       boolean searchExactlyTheSame, boolean ignoreThreshold) {
         this.project = project;
         this.tok = project.getSourceTokenizer();
         this.srcLocale = project.getProjectProperties().getSourceLanguage().getLocale();
@@ -148,10 +155,11 @@ public class FindMatches {
         }
         this.fuzzyMatchThreshold = Preferences.getPreferenceDefault(Preferences.EXT_TMX_FUZZY_MATCH_THRESHOLD,
                 OConsts.FUZZY_MATCH_THRESHOLD);
+        this.ignoreThreshold = ignoreThreshold;
     }
 
-    public List<NearString> search(final String searchText, final boolean requiresTranslation,
-            final boolean fillSimilarityData, final IStopped stop) throws StoppedException {
+        public List<NearString> search(String searchText, boolean requiresTranslation, boolean fillSimilarityData,
+                                   IStopped stop) throws StoppedException {
         result = new ArrayList<>(OConsts.MAX_NEAR_STRINGS + 1);
 
         srcText = searchText;
@@ -191,7 +199,7 @@ public class FindMatches {
                     String fileName = project.isOrphaned(source) ? ORPHANED_FILE_NAME : null;
                     processEntry(null, source, trans.translation, NearString.MATCH_SOURCE.MEMORY, false, 0,
                             fileName, trans.creator, trans.creationDate, trans.changer, trans.changeDate,
-                            null);
+                            null, ignoreThreshold);
                 }
             });
         }
@@ -208,7 +216,7 @@ public class FindMatches {
                 String fileName = project.isOrphaned(source) ? ORPHANED_FILE_NAME : null;
                 processEntry(source, source.sourceText, trans.translation, NearString.MATCH_SOURCE.MEMORY,
                         false, 0, fileName, trans.creator, trans.creationDate, trans.changer,
-                        trans.changeDate, null);
+                        trans.changeDate, null, ignoreThreshold);
             }
         });
 
@@ -244,7 +252,7 @@ public class FindMatches {
 
                 processEntry(null, tmen.getSourceText(), tmen.getTranslationText(), NearString.MATCH_SOURCE.TM, false, tmenPenalty,
                         en.getKey(), tmen.getCreator(), tmen.getCreationDate(), tmen.getChanger(), tmen.getChangeDate(),
-                        tmen.getProperties());
+                        tmen.getProperties(), ignoreThreshold);
             }
         }
 
@@ -254,7 +262,7 @@ public class FindMatches {
             if (ste.getSourceTranslation() != null) {
                 processEntry(ste.getKey(), ste.getSrcText(), ste.getSourceTranslation(),
                         NearString.MATCH_SOURCE.MEMORY, ste.isSourceTranslationFuzzy(), 0, ste.getKey().file,
-                        "", 0, "", 0, null);
+                        "", 0, "", 0, null, ignoreThreshold);
             }
         }
 
@@ -289,7 +297,7 @@ public class FindMatches {
                 // glue found translations
                 String foundTrans = Core.getSegmenter().glue(sourceLang, targetLang, ftrans, spaces, brules);
                 processEntry(null, foundSrc, foundTrans, NearString.MATCH_SOURCE.TM, false, 0, "", "", 0, "",
-                        0, null);
+                        0, null, ignoreThreshold);
             }
         }
 
@@ -334,10 +342,9 @@ public class FindMatches {
      * @param props
      *            TMX properties
      */
-    protected void processEntry(final EntryKey key, final String source, final String translation,
-            NearString.MATCH_SOURCE comesFrom, final boolean fuzzy, final int penalty, final String tmxName,
-            final String creator, final long creationDate, final String changer, final long changedDate,
-            final List<TMXProp> props) {
+    protected void processEntry(EntryKey key, String source, String translation, NearString.MATCH_SOURCE comesFrom,
+                                boolean fuzzy, int penalty, String tmxName, String creator, long creationDate,
+                                String changer, long changedDate, List<TMXProp> props, boolean ignoreThreashold) {
         // remove part that is to be removed prior to tokenize
         String realSource = source;
         int realPenaltyForRemoved = 0;
@@ -402,7 +409,8 @@ public class FindMatches {
             return;
         }
 
-        if (similarityStem < fuzzyMatchThreshold && similarityNoStem < fuzzyMatchThreshold
+        // BUGS#1236
+        if (!ignoreThreashold && similarityStem < fuzzyMatchThreshold && similarityNoStem < fuzzyMatchThreshold
                 && simAdjusted < fuzzyMatchThreshold) {
             return;
         }

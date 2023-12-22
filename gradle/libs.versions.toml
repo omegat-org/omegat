@@ -3,12 +3,7 @@ slf4j = { strictly = "[2.0.7, 2.1[", prefer = "2.0.7" }
 slf4j-format = "0.5.1"
 groovy = "4.0.17"
 junit = "4.13.1"
-junit5 = "5.8.2"
-logback = "1.4.11"
-antlr = "4.13.1"
 hamcrest = "2.2"
-nekohtml = "1.9.22"
-htmlunit = "3.4.0"
 commons_lang3 = "3.11"
 commons_io = "2.15.0"
 commons_codec = "1.13"
@@ -17,7 +12,6 @@ commons_validator = "1.7"
 unbescape = "1.1.6.RELEASE"
 xerces = "2.12.2"
 jsoup = "1.15.3"
-httpclient = "4.5.14"
 icu4j = { require = "[70,73.2[", prefer = "72.1" }
 stax2api = "4.2.1"
 woodstox = "6.5.0"
@@ -28,7 +22,6 @@ guava = "31.0.1-jre"
 annotations = "23.0.0"
 jgit = "6.6.0.202305301015-r"
 svnkit = "1.10.11"
-sshd = "2.10.0"
 ivy = "2.5.1"
 jackson = "2.15.2"
 bc = "1.72"
@@ -59,7 +52,6 @@ xjc = "2.3.4"
 jna = "5.13.0"
 jfa = "1.2.0"
 tipoftheday = "0.4.3"
-sphinx = "1.0.4"
 
 [libraries]
 slf4j-api = {group = "org.slf4j", name = "slf4j-api",  version.ref = "slf4j"}
@@ -68,9 +60,6 @@ slf4j-jdk14 =  {group = "org.slf4j", name = "slf4j-jdk14",  version.ref = "slf4j
 slf4j-format-jdk14 ={group = "tokyo.northside", name = "slf4j-format-jdk14",  version.ref = "slf4j-format"}
 groovy-core = {group = "org.apache.groovy", name = 'groovy', version.ref = "groovy"}
 junit4 = {group = "junit", name = "junit", version.ref = "junit"}
-junit-jupiter = {group = "org.junit.jupiter", name = "junit-jupiter-engine", version.ref = "junit5"}
-logback-classic = {group = "ch.qos.logback", name = "logback-classic", version.ref = "logback"}
-antlr4 = {group = "org.antlr", name = "antlr4", version.ref = "antlr"}
 hamcrest = {group = "org.hamcrest", name = "hamcrest", version.ref = "hamcrest"}
 commons-io = {group = "commons-io", name = "commons-io", version.ref = "commons_io"}
 commons-lang3 = {group = "org.apache.commons", name = "commons-lang3", version.ref = "commons_lang3"}
@@ -80,8 +69,6 @@ commons-validator = {group = "commons-validator", name = "commons-validator", ve
 unbescape = {group = "org.unbescape", name = "unbescape", version.ref = "unbescape"}
 xerces-impl = {group = "xerces", name = "xercesImpl", version.ref = "xerces"}
 jsoup = {group = "org.jsoup", name = "jsoup", version.ref = "jsoup"}
-apache-httpclient = {group = "org.apache.httpcomponents", name = "httpclient", version.ref = "httpclient"}
-apache-httpclient-cache = {group = "org.apache.httpcomponents", name = "httpclient-cache", version.ref = "httpclient"}
 icj4j = {group = "com.ibm.icu", name = "icu4j", version.ref = "icu4j"}
 stax2-api = {group = "org.codehaus.woodstox", name = "stax2-api", version.ref = "stax2api"}
 woodstox-core = {group = "com.fasterxml.woodstox", name = "woodstox-core", version.ref = "woodstox"}
@@ -167,8 +154,6 @@ dictionary = ["trie4j", "dsl4j", "stardict4j", "jsoup"]
 [plugins]
 spotbugs = {id = "com.github.spotbugs", version = "6.0.4"}
 spotless = {id = "com.diffplug.spotless", version = "6.23.3"}
-git-version = {id = "com.palantir.git-version", version = "0.13.0"}
-nexus-publish = {id = "io.github.gradle-nexus.publish-plugin", version = "2.0.0-rc-1"}
 launch4j = {id = "edu.sc.seis.launch4j", version = "3.0.5"}
 versions = {id = "com.github.ben-manes.versions", version = "0.50.0"}
 ssh = {id = "org.hidetake.ssh", version = "2.10.1"}

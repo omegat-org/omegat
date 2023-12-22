@@ -2,7 +2,7 @@
 slf4j = { strictly = "[2.0.7, 2.1[", prefer = "2.0.7" }
 slf4j-format = "0.5.1"
 groovy = "4.0.17"
-junit = "4.13.1"
+junit = "4.13.2"
 commons_lang3 = "3.11"
 commons_io = "2.15.0"
 commons_text = "1.9"

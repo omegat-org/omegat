@@ -36,9 +36,12 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.pdfbox.Loader;
+import org.apache.pdfbox.io.RandomAccessReadBufferedFile;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.encryption.InvalidPasswordException;
 import org.apache.pdfbox.text.PDFTextStripper;
+
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.Instance;
@@ -82,7 +85,7 @@ public class PdfFilter  extends AbstractFilter {
         stripper.setLineSeparator("\n");
         stripper.setSortByPosition(true);
 
-        try (PDDocument document = PDDocument.load(infile)) {
+        try (PDDocument document = Loader.loadPDF(new RandomAccessReadBufferedFile(infile))) {
             String text = stripper.getText(document);
             return new BufferedReader(new StringReader(text));
         } catch (InvalidPasswordException ex) {

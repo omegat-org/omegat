@@ -65,15 +65,17 @@ import org.omegat.util.Token;
 /**
  * Class to find matches by specified criteria.
  *
- * Since we can use stemmers to prepare tokens, we should use 3-pass comparison of similarity. Similarity will
- * be calculated in 3 steps:
+ * Since we can use stemmers to prepare tokens, we should use 3-pass comparison
+ * of similarity. Similarity will be calculated in 3 steps:
  *
- * 1. Split original segment into word-only tokens using stemmer (with stop words list), then compare tokens.
+ * 1. Split original segment into word-only tokens using stemmer (with stop
+ * words list), then compare tokens.
  *
- * 2. Split original segment into word-only tokens without stemmer, then compare tokens.
+ * 2. Split original segment into word-only tokens without stemmer, then compare
+ * tokens.
  *
- * 3. Split original segment into not-only-words tokens (including numbers and tags) without stemmer, then
- * compare tokens.
+ * 3. Split original segment into not-only-words tokens (including numbers and
+ * tags) without stemmer, then compare tokens.
  *
  * This class is not thread safe ! Must be used in the one thread only.
  *
@@ -85,9 +87,9 @@ import org.omegat.util.Token;
 public class FindMatches {
 
     /**
-    * According to gettext source code, PO fuzzies are created above 60%
-    * https://sourceforge.net/p/omegat/feature-requests/1258/
-    */
+     * According to gettext source code, PO fuzzies are created above 60%
+     * https://sourceforge.net/p/omegat/feature-requests/1258/
+     */
     static final int PENALTY_FOR_FUZZY = 40;
     private static final int PENALTY_FOR_REMOVED = 5;
     private static final int SUBSEGMENT_MATCH_THRESHOLD = 85;
@@ -134,8 +136,9 @@ public class FindMatches {
 
     /**
      * @param searchExactlyTheSame
-     *            allows to search similarities with the same text as source segment. This mode used only for
-     *            separate sentence match in paragraph project, i.e. where source is just part of current
+     *            allows to search similarities with the same text as source
+     *            segment. This mode used only for separate sentence match in
+     *            paragraph project, i.e. where source is just part of current
      *            source.
      */
     public FindMatches(IProject project, int maxCount, boolean allowSeparateSegmentMatch,
@@ -144,7 +147,7 @@ public class FindMatches {
     }
 
     public FindMatches(IProject project, int maxCount, boolean allowSeparateSegmentMatch,
-                       boolean searchExactlyTheSame, boolean ignoreThreshold) {
+            boolean searchExactlyTheSame, boolean ignoreThreshold) {
         this.project = project;
         this.tok = project.getSourceTokenizer();
         this.srcLocale = project.getProjectProperties().getSourceLanguage().getLocale();
@@ -158,15 +161,16 @@ public class FindMatches {
         this.ignoreThreshold = ignoreThreshold;
     }
 
-        public List<NearString> search(String searchText, boolean requiresTranslation, boolean fillSimilarityData,
-                                   IStopped stop) throws StoppedException {
+    public List<NearString> search(String searchText, boolean requiresTranslation, boolean fillSimilarityData,
+            IStopped stop) throws StoppedException {
         result = new ArrayList<>(OConsts.MAX_NEAR_STRINGS + 1);
 
         srcText = searchText;
         removedText = "";
 
         // remove part that is to be removed according to user settings.
-        // Rationale: it might be a big string influencing the 'editing distance', while it is not really part
+        // Rationale: it might be a big string influencing the 'editing
+        // distance', while it is not really part
         // of the translatable text
         if (removePattern != null) {
             StringBuilder removedBuffer = new StringBuilder();
@@ -220,10 +224,9 @@ public class FindMatches {
             }
         });
 
-
         /*
-          Penalty applied for fuzzy matches in another language (if no match in the
-          target language was found).
+         * Penalty applied for fuzzy matches in another language (if no match in
+         * the target language was found).
          */
         int foreignPenalty = Preferences.getPreferenceDefault(Preferences.PENALTY_FOR_FOREIGN_MATCHES,
                 Preferences.PENALTY_FOR_FOREIGN_MATCHES_DEFAULT);
@@ -238,7 +241,8 @@ public class FindMatches {
             for (ITMXEntry tmen : en.getValue().getEntries()) {
                 checkStopped(stop);
                 if (tmen.getSourceText() == null) {
-                    // Not all TMX entries have a source; in that case there can be no meaningful match, so skip.
+                    // Not all TMX entries have a source; in that case there can
+                    // be no meaningful match, so skip.
                     continue;
                 }
                 if (requiresTranslation && tmen.getTranslationText() == null) {
@@ -250,9 +254,10 @@ public class FindMatches {
                     tmenPenalty += foreignPenalty;
                 }
 
-                processEntry(null, tmen.getSourceText(), tmen.getTranslationText(), NearString.MATCH_SOURCE.TM, false, tmenPenalty,
-                        en.getKey(), tmen.getCreator(), tmen.getCreationDate(), tmen.getChanger(), tmen.getChangeDate(),
-                        tmen.getProperties(), ignoreThreshold);
+                processEntry(null, tmen.getSourceText(), tmen.getTranslationText(),
+                        NearString.MATCH_SOURCE.TM, false, tmenPenalty, en.getKey(), tmen.getCreator(),
+                        tmen.getCreationDate(), tmen.getChanger(), tmen.getChangeDate(), tmen.getProperties(),
+                        ignoreThreshold);
             }
         }
 
@@ -267,7 +272,8 @@ public class FindMatches {
         }
 
         if (separateSegmentMatcher != null) {
-            // split paragraph even when segmentation disabled, then find matches for every segment
+            // split paragraph even when segmentation disabled, then find
+            // matches for every segment
             List<StringBuilder> spaces = new ArrayList<StringBuilder>();
             List<Rule> brules = new ArrayList<Rule>();
             Language sourceLang = project.getProjectProperties().getSourceLanguage();
@@ -281,8 +287,8 @@ public class FindMatches {
                     String onesrc = segments.get(i);
 
                     // find match for separate segment
-                    List<NearString> segmentMatch = separateSegmentMatcher.search(onesrc, requiresTranslation, false,
-                            stop);
+                    List<NearString> segmentMatch = separateSegmentMatcher.search(onesrc, requiresTranslation,
+                            false, stop);
                     if (!segmentMatch.isEmpty()
                             && segmentMatch.get(0).scores[0].score >= SUBSEGMENT_MATCH_THRESHOLD) {
                         fsrc.add(segmentMatch.get(0).source);
@@ -342,9 +348,10 @@ public class FindMatches {
      * @param props
      *            TMX properties
      */
-    protected void processEntry(EntryKey key, String source, String translation, NearString.MATCH_SOURCE comesFrom,
-                                boolean fuzzy, int penalty, String tmxName, String creator, long creationDate,
-                                String changer, long changedDate, List<TMXProp> props, boolean ignoreThreashold) {
+    protected void processEntry(EntryKey key, String source, String translation,
+            NearString.MATCH_SOURCE comesFrom, boolean fuzzy, int penalty, String tmxName, String creator,
+            long creationDate, String changer, long changedDate, List<TMXProp> props,
+            boolean ignoreThreashold) {
         // remove part that is to be removed prior to tokenize
         String realSource = source;
         int realPenaltyForRemoved = 0;
@@ -355,7 +362,8 @@ public class FindMatches {
                 entryRemovedText.append(removeMatcher.group());
             }
             realSource = removeMatcher.replaceAll("");
-            // calculate penalty if something has been removed, otherwise different strings get 100% match.
+            // calculate penalty if something has been removed, otherwise
+            // different strings get 100% match.
             if (!entryRemovedText.toString().equals(removedText)) {
                 // penalty for different 'removed'-part
                 realPenaltyForRemoved = PENALTY_FOR_REMOVED;
@@ -410,8 +418,8 @@ public class FindMatches {
         }
 
         // BUGS#1236
-        if (!ignoreThreashold && similarityStem < fuzzyMatchThreshold && similarityNoStem < fuzzyMatchThreshold
-                && simAdjusted < fuzzyMatchThreshold) {
+        if (!ignoreThreashold && similarityStem < fuzzyMatchThreshold
+                && similarityNoStem < fuzzyMatchThreshold && simAdjusted < fuzzyMatchThreshold) {
             return;
         }
 
@@ -420,8 +428,8 @@ public class FindMatches {
     }
 
     /**
-     * Check if entry have a chance to be added to result list. If no, there is no sense to calculate other
-     * parameters.
+     * Check if entry have a chance to be added to result list. If no, there is
+     * no sense to calculate other parameters.
      *
      * @param simStem
      *            similarity with stemming
@@ -447,7 +455,8 @@ public class FindMatches {
     }
 
     /**
-     * Add near string into result list. Near strings sorted by "similarity,simAdjusted"
+     * Add near string into result list. Near strings sorted by
+     * "similarity,simAdjusted"
      */
     protected void addNearString(final EntryKey key, final String source, final String translation,
             NearString.MATCH_SOURCE comesFrom, final boolean fuzzy, final int similarity,
@@ -459,11 +468,13 @@ public class FindMatches {
         for (int i = 0; i < result.size(); i++) {
             NearString st = result.get(i);
             if (source.equals(st.source) && Objects.equals(translation, st.translation)) {
-                // Consolidate identical matches from different sources into a single NearString with
+                // Consolidate identical matches from different sources into a
+                // single NearString with
                 // multiple project entries.
-                result.set(i, NearString.merge(st, key, source, translation, comesFrom, fuzzy, similarity,
-                        similarityNoStem, simAdjusted, similarityData, tmxName, creator, creationDate,
-                        changer, changedDate, tuProperties));
+                result.set(i,
+                        NearString.merge(st, key, source, translation, comesFrom, fuzzy, similarity,
+                                similarityNoStem, simAdjusted, similarityData, tmxName, creator, creationDate,
+                                changer, changedDate, tuProperties));
                 return;
             }
             if (st.scores[0].score < similarity) {
@@ -487,9 +498,10 @@ public class FindMatches {
             pos = i + 1;
         }
 
-        result.add(pos, new NearString(key, source, translation, comesFrom, fuzzy, similarity,
-                similarityNoStem, simAdjusted, similarityData, tmxName, creator, creationDate, changer,
-                changedDate, tuProperties));
+        result.add(pos,
+                new NearString(key, source, translation, comesFrom, fuzzy, similarity, similarityNoStem,
+                        simAdjusted, similarityData, tmxName, creator, creationDate, changer, changedDate,
+                        tuProperties));
         if (result.size() > maxCount) {
             result.remove(result.size() - 1);
         }
@@ -503,36 +515,36 @@ public class FindMatches {
     Map<String, Token[]> tokenizeAllCache = new HashMap<String, Token[]>();
 
     public Token[] tokenizeStem(String str) {
-        Token[] result = tokenizeStemCache.get(str);
-        if (result == null) {
-            result = tok.tokenizeWords(str, ITokenizer.StemmingMode.MATCHING);
-            tokenizeStemCache.put(str, result);
+        Token[] tokens = tokenizeStemCache.get(str);
+        if (tokens == null) {
+            tokens = tok.tokenizeWords(str, ITokenizer.StemmingMode.MATCHING);
+            tokenizeStemCache.put(str, tokens);
         }
-        return result;
+        return tokens;
     }
 
     public Token[] tokenizeNoStem(String str) {
         // No-stemming token comparisons are intentionally case-insensitive
         // for matching purposes.
         str = str.toLowerCase(srcLocale);
-        Token[] result = tokenizeNoStemCache.get(str);
-        if (result == null) {
-            result = tok.tokenizeWords(str, ITokenizer.StemmingMode.NONE);
-            tokenizeNoStemCache.put(str, result);
+        Token[] tokens = tokenizeNoStemCache.get(str);
+        if (tokens == null) {
+            tokens = tok.tokenizeWords(str, ITokenizer.StemmingMode.NONE);
+            tokenizeNoStemCache.put(str, tokens);
         }
-        return result;
+        return tokens;
     }
 
     public Token[] tokenizeAll(String str) {
         // Verbatim token comparisons are intentionally case-insensitive.
         // for matching purposes.
         str = str.toLowerCase(srcLocale);
-        Token[] result = tokenizeAllCache.get(str);
-        if (result == null) {
-            result = tok.tokenizeVerbatim(str);
-            tokenizeAllCache.put(str, result);
+        Token[] tokens = tokenizeAllCache.get(str);
+        if (tokens == null) {
+            tokens = tok.tokenizeVerbatim(str);
+            tokenizeAllCache.put(str, tokens);
         }
-        return result;
+        return tokens;
     }
 
     protected void checkStopped(IStopped stop) throws StoppedException {
@@ -542,7 +554,8 @@ public class FindMatches {
     }
 
     /**
-     * Process will throw this exception if it stopped.All callers must catch it and just skip.
+     * Process will throw this exception if it stopped.All callers must catch it
+     * and just skip.
      */
     @SuppressWarnings("serial")
     public static class StoppedException extends RuntimeException {

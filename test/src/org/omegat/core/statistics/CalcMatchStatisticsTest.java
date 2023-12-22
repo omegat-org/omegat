@@ -80,7 +80,7 @@ public class CalcMatchStatisticsTest {
         Assert.assertNotNull(result);
 
         // assertions
-        // RowRepetitions  11 90 509 583
+        // RowRepetitions 11 90 509 583
         Assert.assertEquals("11", result[0][1]);
         Assert.assertEquals("90", result[0][2]);
         Assert.assertEquals("509", result[0][3]);
@@ -140,7 +140,7 @@ public class CalcMatchStatisticsTest {
         Assert.assertNotNull(result);
 
         // assertions
-        // RowRepetitions  11 90 509 583
+        // RowRepetitions 11 90 509 583
         Assert.assertEquals("11", result[0][1]);
         Assert.assertEquals("90", result[0][2]);
         Assert.assertEquals("509", result[0][3]);
@@ -300,7 +300,7 @@ public class CalcMatchStatisticsTest {
         public Map<String, ExternalTMX> getTransMemories() {
             synchronized (projectTMX) {
                 if (transMemories == null) {
-                     transMemories = new TreeMap<>();
+                    transMemories = new TreeMap<>();
                     try {
                         ExternalTMX newTMX;
                         Path testTmx = Paths.get("test/data/tmx/test-match-stat-en-ca.tmx");
@@ -339,17 +339,16 @@ public class CalcMatchStatisticsTest {
 
         @Override
         public void addEntryWithProperties(String id, String source, String translation, boolean isFuzzy,
-                                           String[] props, String path, IFilter filter,
-                                           List<ProtectedPart> protectedParts) {
-            SourceTextEntry ste = new SourceTextEntry(new EntryKey("source.po", source, id, "", "", path),
-                    1, props, translation, protectedParts);
+                String[] props, String path, IFilter filter, List<ProtectedPart> protectedParts) {
+            SourceTextEntry ste = new SourceTextEntry(new EntryKey("source.po", source, id, "", "", path), 1,
+                    props, translation, protectedParts);
             ste.setSourceTranslationFuzzy(isFuzzy);
             steList.add(ste);
         }
 
         @Override
         public void addEntry(String id, String source, String translation, boolean isFuzzy, String comment,
-                             String path, IFilter filter, List<ProtectedPart> protectedParts) {
+                String path, IFilter filter, List<ProtectedPart> protectedParts) {
             List<String> propList = new ArrayList<>(2);
             if (comment != null) {
                 propList.add("comment");
@@ -361,7 +360,7 @@ public class CalcMatchStatisticsTest {
 
         @Override
         public void addEntry(String id, String source, String translation, boolean isFuzzy, String comment,
-                             IFilter filter) {
+                IFilter filter) {
             addEntry(id, source, translation, isFuzzy, comment, null, filter, Collections.emptyList());
         }
 
@@ -372,8 +371,8 @@ public class CalcMatchStatisticsTest {
 
     static class CalcMatchStatisticsMock extends CalcMatchStatistics {
 
-        private final String[] rowsTotal = new String[] { "RowRepetitions", "RowExactMatch", "RowMatch95", "RowMatch85",
-                "RowMatch75", "RowMatch50", "RowNoMatch", "Total" };
+        private final String[] rowsTotal = new String[] { "RowRepetitions", "RowExactMatch", "RowMatch95",
+                "RowMatch85", "RowMatch75", "RowMatch50", "RowNoMatch", "Total" };
 
         private MatchStatCounts result;
 

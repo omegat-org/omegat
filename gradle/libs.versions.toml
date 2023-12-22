@@ -18,7 +18,7 @@ unbescape = "1.1.6.RELEASE"
 xerces = "2.12.2"
 jstyleparser = "4.1.3"
 cssbox4 = "4.23"
-swingbox = "1.2.5"
+swingbox = "1.2.7"
 jsoup = "1.15.3"
 httpclient = "4.5.14"
 icu4j = { require = "[70,73.2[", prefer = "72.1" }

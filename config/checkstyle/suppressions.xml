@@ -79,7 +79,7 @@
     <!-- util/Preferences -->
     <suppress files="Preferences\.java" checks="LineLength" lines="197"/>
     <!-- core/stat -->
-    <suppress checks="(ParameterNumber|MethodLength)" files="FindMatches\.java" lines="164,351,461"/>
+    <suppress checks="(ParameterNumber|MethodLength)" files="FindMatches\.java" lines="164,350,459"/>
     <!-- util/xml -->
     <suppress checks="(EmptyBlock|MethodLength)" files="XMLStreamReader\.java"/>
     <!-- util -->

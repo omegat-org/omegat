@@ -1869,11 +1869,11 @@ public class RealProject implements IProject {
          * {@inheritDoc}
          */
         protected void addSegment(String id, short segmentIndex, String segmentSource,
-                                  List<ProtectedPart> protectedParts, String segmentTranslation,
-                                  boolean segmentTranslationFuzzy, String[] props, String prevSegment, String nextSegment,
-                                  String path) {
-            addSegment(id, segmentIndex, segmentSource, protectedParts, segmentTranslation, segmentTranslationFuzzy,
-                    props, prevSegment, nextSegment, path, false);
+                List<ProtectedPart> protectedParts, String segmentTranslation,
+                boolean segmentTranslationFuzzy, String[] props, String prevSegment, String nextSegment,
+                String path) {
+            addSegment(id, segmentIndex, segmentSource, protectedParts, segmentTranslation,
+                    segmentTranslationFuzzy, props, prevSegment, nextSegment, path, false);
         }
 
         /**

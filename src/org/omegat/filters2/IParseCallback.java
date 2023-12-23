@@ -59,9 +59,9 @@ public interface IParseCallback {
      * @param isFinal
      *            (since 6.1.0) true if translation state is final
      */
-    default void addEntryWithProperties(String id, String source, String translation, boolean isFuzzy, String[] props,
-                                        String path, IFilter filter, List<ProtectedPart> protectedParts,
-                                        boolean isFinal) {
+    default void addEntryWithProperties(String id, String source, String translation, boolean isFuzzy,
+            String[] props, String path, IFilter filter, List<ProtectedPart> protectedParts,
+            boolean isFinal) {
         addEntryWithProperties(id, source, translation, isFuzzy, props, path, filter, protectedParts);
     }
 

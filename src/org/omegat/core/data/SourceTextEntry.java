@@ -49,8 +49,8 @@ public class SourceTextEntry {
     private final EntryKey key;
 
     /**
-     * String properties from source file. Contents are alternating
-     * key (even index), value (odd index) strings. Should be of even length.
+     * String properties from source file. Contents are alternating key (even
+     * index), value (odd index) strings. Should be of even length.
      */
     private final String[] props;
 
@@ -60,7 +60,9 @@ public class SourceTextEntry {
     /** Translation from source files is fuzzy. */
     private boolean sourceTranslationFuzzy;
 
-    /** Flag indicating if the segment is located at the start of a paragraph. */
+    /**
+     * Flag indicating if the segment is located at the start of a paragraph.
+     */
     private final boolean paragraphStart;
 
     public enum DUPLICATE {
@@ -68,13 +70,16 @@ public class SourceTextEntry {
         NONE,
         /** There is entries with the same source, and this is first entry. */
         FIRST,
-        /** There is entries with the same source, and this is not first entry. */
+        /**
+         * There is entries with the same source, and this is not first entry.
+         */
         NEXT
     };
 
     /**
-     * A list of duplicates of this STE. Will be non-null for the FIRST duplicate,
-     * null for NONE and NEXT STEs. See {@link #getDuplicate()} for full logic.
+     * A list of duplicates of this STE. Will be non-null for the FIRST
+     * duplicate, null for NONE and NEXT STEs. See {@link #getDuplicate()} for
+     * full logic.
      */
     List<SourceTextEntry> duplicates;
 
@@ -107,14 +112,14 @@ public class SourceTextEntry {
      * @param sourceTranslation
      *            translation from source file
      * @param protectedParts
-     *             protected parts
+     *            protected parts
      * @param paragraphStart
-     *             indicate it is a start of paragraph.
+     *            indicate it is a start of paragraph.
      * @param finalState
-     *             indicate it is a final state (as in XLIFF).
+     *            indicate it is a final state (as in XLIFF).
      */
     public SourceTextEntry(EntryKey key, int entryNum, String[] props, String sourceTranslation,
-                           List<ProtectedPart> protectedParts, boolean paragraphStart, boolean finalState) {
+            List<ProtectedPart> protectedParts, boolean paragraphStart, boolean finalState) {
         this.key = key;
         m_entryNum = entryNum;
         this.props = props;
@@ -138,12 +143,13 @@ public class SourceTextEntry {
     }
 
     public SourceTextEntry(EntryKey key, int entryNum, String[] props, String sourceTranslation,
-                           List<ProtectedPart> protectedParts, boolean paragraphStart) {
-        this(key,  entryNum, props, sourceTranslation, protectedParts, paragraphStart, false);
+            List<ProtectedPart> protectedParts, boolean paragraphStart) {
+        this(key, entryNum, props, sourceTranslation, protectedParts, paragraphStart, false);
     }
 
-    public SourceTextEntry(EntryKey key, int entryNum, String[] props, String sourceTranslation, List<ProtectedPart> protectedParts) {
-        this(key,  entryNum, props, sourceTranslation, protectedParts, true);
+    public SourceTextEntry(EntryKey key, int entryNum, String[] props, String sourceTranslation,
+            List<ProtectedPart> protectedParts) {
+        this(key, entryNum, props, sourceTranslation, protectedParts, true);
     }
 
     public EntryKey getKey() {
@@ -187,6 +193,7 @@ public class SourceTextEntry {
 
     /**
      * Tell a number of duplications.
+     * 
      * @return a number of duplications.
      */
     public int getNumberOfDuplicates() {
@@ -198,6 +205,7 @@ public class SourceTextEntry {
 
     /**
      * Give STEs which are duplicated.
+     * 
      * @return list of STEs which are duplicated.
      */
     public List<SourceTextEntry> getDuplicates() {
@@ -216,6 +224,7 @@ public class SourceTextEntry {
 
     /**
      * Give source translation.
+     * 
      * @return source translation.
      */
     public String getSourceTranslation() {
@@ -224,6 +233,7 @@ public class SourceTextEntry {
 
     /**
      * Is source transaltion flagged fuzzy.
+     * 
      * @return true when fuzzy, otherwise, false.
      */
     public boolean isSourceTranslationFuzzy() {
@@ -232,7 +242,9 @@ public class SourceTextEntry {
 
     /**
      * Set translation as fuzzy.
-     * @param sourceTranslationFuzzy false when reset a status, true indicate fuzzy.
+     * 
+     * @param sourceTranslationFuzzy
+     *            false when reset a status, true indicate fuzzy.
      */
     public void setSourceTranslationFuzzy(boolean sourceTranslationFuzzy) {
         this.sourceTranslationFuzzy = sourceTranslationFuzzy;
@@ -240,6 +252,7 @@ public class SourceTextEntry {
 
     /**
      * Return protected parts.
+     * 
      * @return an array of protected parts.
      */
     public ProtectedPart[] getProtectedParts() {
@@ -248,6 +261,7 @@ public class SourceTextEntry {
 
     /**
      * Indicate the STE is the start of paragraph.
+     * 
      * @return true when start of paragraph, otherwise, false.
      */
     public boolean isParagraphStart() {
@@ -256,6 +270,7 @@ public class SourceTextEntry {
 
     /**
      * Indicate the STE is the final state.
+     * 
      * @return true when final, otherwise, false.
      */
     public boolean isFinalState() {

@@ -547,4 +547,3 @@ public class XLIFFFilterTest extends TestFilterBase {
         checkMultiEnd();
     }
 }
-

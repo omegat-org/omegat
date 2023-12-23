@@ -74,7 +74,8 @@ public abstract class ParseEntry implements IParseCallback {
          */
         for (ParseEntryQueueItem item : parseQueue) {
             addSegment(item.id, item.segmentIndex, item.segmentSource, item.protectedParts, item.segmentTranslation,
-                    item.segmentTranslationFuzzy, item.props, item.prevSegment, item.nextSegment, item.path);
+                    item.segmentTranslationFuzzy, item.props, item.prevSegment, item.nextSegment, item.path,
+                    item.isFinal);
         }
 
         /*

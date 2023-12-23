@@ -68,6 +68,7 @@ public class XLIFFFilter extends XMLFilter {
     private HashSet<String> altIDCache = new HashSet<String>();
 
     private String id;
+    private String state;
 
     /**
      * Sets whether alternative translations are identified by previous and next
@@ -209,6 +210,7 @@ public class XLIFFFilter extends XMLFilter {
             // resname may or may not be present.
             resname = atts.getValue("resname");
             id = atts.getValue("id");
+            state = atts.getValue("state");
         }
         // not all <group> tags have resname attribute
         if (path.endsWith("/group")) {
@@ -246,14 +248,16 @@ public class XLIFFFilter extends XMLFilter {
                     addProperty("resname", resname);
                 }
 
+                boolean isFinal = "final".equals(state);
                 for (int i = 0; i < entryText.size(); i++) {
                     entryParseCallback.addEntryWithProperties(getSegID(), entryText.get(i), null, false,
-                            finalizeProperties(), null, this, protectedParts.get(i), false);
+                            finalizeProperties(), null, this, protectedParts.get(i), isFinal);
                 }
             }
 
             id = null;
             resname = null;
+            state = null;
             props.clear();
             entryText.clear();
             protectedParts.clear();

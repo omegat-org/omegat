@@ -462,10 +462,19 @@ public abstract class TestFilterBase extends TestCore {
     }
 
     protected void checkMulti(String sourceText, String id, String path, String prev, String next,
-            String comment) {
+                              String comment) {
         assertEquals(new EntryKey(fi.filePath, sourceText, id, prev, next, path), fi.entries.get(fiCount)
                 .getKey());
         assertEquals(comment, fi.entries.get(fiCount).getComment());
+        fiCount++;
+    }
+
+    protected void checkMultiState(String sourceText, String id, String path, String prev, String next,
+            String comment, boolean isFinal) {
+        assertEquals(new EntryKey(fi.filePath, sourceText, id, prev, next, path), fi.entries.get(fiCount)
+                .getKey());
+        assertEquals(comment, fi.entries.get(fiCount).getComment());
+        assertEquals(isFinal, fi.entries.get(fiCount).isFinalState());
         fiCount++;
     }
 

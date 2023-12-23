@@ -535,4 +535,16 @@ public class XLIFFFilterTest extends TestFilterBase {
     public void testBugs1221() throws Exception {
         translateXML(filter, "test/data/filters/xliff/filters3/file-xliff-BUGS1221.xlf");
     }
+
+    @Test
+    public void testStateFinal() throws Exception {
+        String f = "test/data/filters/xliff/filters3/file-XLIFFFilter-state-final.xlf";
+        IProject.FileInfo fi = loadSourceFiles(filter, f);
+
+        checkMultiStart(fi, f);
+        checkMultiState("tr1=This is test", null, null, "", "tr2=test2", null, false);
+        checkMultiState("tr2=test2", null, null, "tr1=This is test", "", null, true);
+        checkMultiEnd();
+    }
 }
+

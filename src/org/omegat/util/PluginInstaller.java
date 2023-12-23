@@ -110,7 +110,7 @@ public final class PluginInstaller {
         if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(
                 Core.getMainWindow().getApplicationFrame(), message,
                 OStrings.getString("PREFS_PLUGINS_TITLE_CONFIRM_INSTALLATION"), JOptionPane.OK_CANCEL_OPTION,
-                JOptionPane.ERROR_MESSAGE)) {
+                JOptionPane.WARNING_MESSAGE)) {
             if (doInstall(currentInfo, pluginJarFile.toFile())) {
                 return true;
             }

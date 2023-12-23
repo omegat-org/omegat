@@ -37,6 +37,7 @@ import org.omegat.core.data.ProtectedPart;
  * @author Aaron Madlon-Kay
  */
 public interface IParseCallback {
+
     /**
      * Read entry from source file, with arbitrary (optional) properties
      *
@@ -55,7 +56,36 @@ public interface IParseCallback {
      * @param filter
      *            filter which produces entry
      * @param protectedParts
-     *            (since 3.0.6) protected parts
+     *            protected parts
+     * @param isFinal
+     *            true if translation state is final
+     * @since 6.1.0
+     */
+    default void addEntryWithProperties(String id, String source, String translation, boolean isFuzzy, String[] props,
+                                        String path, IFilter filter, List<ProtectedPart> protectedParts,
+                                        boolean isFinal) {
+        addEntryWithProperties(id, source, translation, isFuzzy, props, path, filter, protectedParts);
+    }
+
+    /**
+     * Read entry from source file, with arbitrary (optional) properties
+     *
+     * @param id
+     *            ID in source file, or null if ID not supported by format
+     * @param source
+     *            source entry text
+     * @param translation
+     *            exist translation text
+     * @param isFuzzy
+     *            true if translation is fuzzy
+     * @param props
+     *            an array of key=value metadata properties for the entry
+     * @param path
+     *            path of segment
+     * @param filter
+     *            filter which produces entry
+     * @param protectedParts
+     *            protected parts
      */
     void addEntryWithProperties(String id, String source, String translation, boolean isFuzzy, String[] props,
             String path, IFilter filter, List<ProtectedPart> protectedParts);

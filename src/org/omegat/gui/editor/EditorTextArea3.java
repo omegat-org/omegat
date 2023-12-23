@@ -334,9 +334,17 @@ public class EditorTextArea3 extends JEditorPane {
         private boolean isLocked = false;
         
         public void onEntryActivated(SourceTextEntry newEntry) {
+            isLocked = false;
             SourceTextEntry entry = controller.getCurrentEntry();
-            TMXEntry tmx = Core.getProject().getTranslationInfo(entry);
-            isLocked =  (tmx.linked == TMXEntry.ExternalLinked.xENFORCED);
+            for (String prop: entry.getRawProperties()) {
+                if (prop.equals("LOCKED")) {
+                    isLocked = true;
+                }
+            }
+            if (! isLocked) {
+                TMXEntry tmx = Core.getProject().getTranslationInfo(entry);
+                isLocked =  (tmx.linked == TMXEntry.ExternalLinked.xENFORCED);
+            }
         }
         
         public void onNewFile(String activeFileName) {

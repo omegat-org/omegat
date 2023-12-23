@@ -163,6 +163,11 @@ public class Xliff1Filter extends AbstractXliffFilter {
                 throw new XMLStreamException(
                         OStrings.getString("XLIFF_MANDATORY_ORIGINAL_MISSING", "id", "trans-unit"));
             }
+            try {
+                isFinalState = "final".equals(startElement.getAttributeByName(new QName("state")).getValue()); 
+            } catch (Exception e) {
+                // non mandatory (and indeed should only accidentally be at this level)
+            }
             flushedUnit = false;
             targetStartEvent = null;
             updateIgnoreScope(startElement);
@@ -176,6 +181,11 @@ public class Xliff1Filter extends AbstractXliffFilter {
             currentBuffer = target;
             inTarget = true;
             targetStartEvent = startElement;
+            try {
+                isFinalState = "final".equals(startElement.getAttributeByName(new QName("state")).getValue()); 
+            } catch (Exception e) {
+                // non mandatory, but in good place
+            }
             break;
         case "note":
             currentBuffer = note;
@@ -235,11 +245,11 @@ public class Xliff1Filter extends AbstractXliffFilter {
             }
             if (ignoreScope == null || ignoreScope.startsWith("!")) { // registerCurrentTransUnit(unitId);
                 if (subSegments.isEmpty()) {
-                    registerCurrentTransUnit(unitId, source, target, ".*");
+                    registerCurrentTransUnit(unitId, source, target, ".*", isFinalState);
                 } else {
                     for (Map.Entry<String, List<XMLEvent>> me : subSegments.entrySet()) {
                         registerCurrentTransUnit(unitId + "/" + me.getKey(), me.getValue(),
-                                findSubsegment(target, me.getKey()), "\\[(\\d+)\\](.*)\\[\\1\\]");
+                                findSubsegment(target, me.getKey()), "\\[(\\d+)\\](.*)\\[\\1\\]", isFinalState);
                     }
                 }
             }
